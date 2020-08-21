@@ -1,0 +1,18 @@
+SECTIONS
+{
+    .init BIND(0x80004000) : { *(.init) }
+    extab_ BIND(0x800064E0) : { *(extab_) }
+    extabindex_ BIND(0x80006C20) : { *(extabindex_) }
+    .text BIND(0x800076E0) : { *(.text) }
+    .ctors BIND(0x80355080) : { *(.ctors) }
+    .dtors BIND(0x80355260) : { *(.dtors) }
+    .rodata BIND(0x80355280) : { *(.rodata) }
+    .data BIND(0x80375780) : { *(.data) }
+    .data6 BIND(0x80393A80) : { *(.data6) }
+    
+    .bss BIND(0x803CAF00) : { *(.bss) }
+    .sdata BIND(0x804BD380) : { *(.sdata) }
+    .sbss BIND(0x804BE9E0) : { *(.sbss) }
+    .sdata2 BIND(0x804BFA20) : { *(.sdata2) }
+    .sbss2 BIND(0x804C69E0) : { *(.sbss2) }
+}
