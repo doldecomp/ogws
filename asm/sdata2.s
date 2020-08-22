@@ -2,7 +2,7 @@
 
 # .data8 = .sbss???
 
-.section .sdata2, "wa"  # 0x804BFA20 - 0x804C69E0
+.section .sdata2, "a"  # 0x804BFA20 - 0x804C69E0
 .global lbl_804BFA20
 lbl_804BFA20:
 	.incbin "baserom.dol", 0x3C8660, 0x8

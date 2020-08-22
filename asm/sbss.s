@@ -1,6 +1,6 @@
 .include "macros.inc"
 
-.section .sbss#, "wa" # 0x804BE9E0 - 0x804BFA20
+.section .sbss, "wa" # 0x804BE9E0 - 0x804BFA20
 
 .global lbl_804BE9E0
 lbl_804BE9E0:

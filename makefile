@@ -1,18 +1,29 @@
 #-------------------------------------------------------------------------------
 # Files
 #-------------------------------------------------------------------------------
+TARGET_COL := wii
+
+TARGET := ogws_us_r1
+
+BUILD_DIR := build
 
 # Inputs
 S_FILES := $(wildcard asm/*.s)
 #C_FILES := $(wildcard src/*.c)
-LDSCRIPT := ldscript.lcf
+LDSCRIPT := $(BUILD_DIR)/ldscript.lcf
 
 # Outputs
-DOL     := main.dol
+DOL     := $(BUILD_DIR)/main.dol
 ELF     := $(DOL:.dol=.elf)
-MAP     := ogws_us_r1.map
+MAP     := $(BUILD_DIR)/$(TARGET).map
 #O_FILES := $(S_FILES:.s=.o) $(C_FILES:.c=.o)
-O_FILES := $(S_FILES:.s=.o)
+
+include obj_files.mk
+
+O_FILES := $(INIT_O_FILES) $(EXTAB_O_FILES) $(EXTABINDEX_O_FILES) $(TEXT_O_FILES) \
+           $(CTORS_O_FILES) $(DTORS_O_FILES) $(RODATA_O_FILES) $(DATA_O_FILES)    \
+           $(DATA6_O_FILES) $(BSS_O_FILES) $(SDATA_O_FILES) $(SBSS_O_FILES) \
+		   $(SDATA2_O_FILES) $(SBSS2_O_FILES)
 
 #-------------------------------------------------------------------------------
 # Tools
@@ -21,6 +32,7 @@ O_FILES := $(S_FILES:.s=.o)
 # Programs
 AS      := tools/powerpc-eabi-as
 OBJCOPY := tools/powerpc-eabi-objcopy
+CPP     := cpp -P
 CC      := tools/mwcceppc
 LD      := tools/mwldeppc
 ELF2DOL := tools/elf2dol
@@ -28,21 +40,39 @@ SHA1SUM := sha1sum
 
 # Options
 ASFLAGS := -mgekko -I include
-LDFLAGS := -map $(MAP)
+LDFLAGS := -map $(MAP) -fp hard -nodefaults
 #CFLAGS  := -Cpp_exceptions off -proc gekko -fp hard -O2,p -i include
+
+# elf2dol needs to know these in order to calculate sbss correctly.
+SDATA_PDHR := 10
+SBSS_PDHR := 11
 
 #-------------------------------------------------------------------------------
 # Recipes
 #-------------------------------------------------------------------------------
 
+default: all
+
+all: $(DOL)
+
+ALL_DIRS := build $(BUILD_DIR) $(addprefix $(BUILD_DIR)/,$(SRC_DIRS) $(ASM_DIRS))
+
+# Make sure build directory exists before compiling anything
+DUMMY != mkdir -p $(ALL_DIRS)
+
+
 .PHONY: tools
 
+$(LDSCRIPT): ldscript.lcf
+	$(CPP) -MMD -MP -MT $@ -MF $@.d -I include/ -I . -DBUILD_DIR=$(BUILD_DIR) -o $@ $<
+#	cp ldscript.lcf $(LDSCRIPT)
+
 $(DOL): $(ELF) | tools
-	$(ELF2DOL) $< $@
-	$(SHA1SUM) -c ogws_us_r1.sha1
+	$(ELF2DOL) $< $@ $(SDATA_PDHR) $(SBSS_PDHR) $(TARGET_COL)
+	$(SHA1SUM) -c $(TARGET).sha1
 
 clean:
-	rm -f $(DOL) $(ELF) $(O_FILES) $(MAP)
+	rm -f $(DOL) $(ELF) $(O_FILES) $(MAP) $(LDSCRIPT)
 	$(MAKE) -C tools clean
 
 tools:
@@ -51,9 +81,9 @@ tools:
 $(ELF): $(O_FILES) $(LDSCRIPT)
 	$(LD) $(LDFLAGS) -o $@ -lcf $(LDSCRIPT) $(O_FILES)
 # The Metrowerks linker doesn't generate physical addresses in the ELF program headers. This fixes it somehow.
-	$(OBJCOPY) $@ $@
+#	$(OBJCOPY) $@ $@
 
-%.o: %.s
+$(BUILD_DIR)/%.o: %.s
 	$(AS) $(ASFLAGS) -o $@ $<
 
 #%.o: %.c

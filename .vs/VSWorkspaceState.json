@@ -1,6 +1,12 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\asm",
+    "\\include",
+    "\\src\\RevoSDK",
+    "\\src\\RevoSDK\\TRK",
+    "\\tools"
   ],
+  "SelectedNode": "\\asm",
   "PreviewInSolutionExplorer": false
 }
