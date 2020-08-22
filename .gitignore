@@ -2,5 +2,5 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-/.vs/Wii-Sports-decompilation/v16
-/.vs/
+.vs/Wii-Sports-decompilation/v16
+.vs/
