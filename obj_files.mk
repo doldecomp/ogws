@@ -18,6 +18,8 @@ TEXT_O_FILES := \
 	build/asm/nw4r/ut/ut_FileStream.o \
 	build/asm/nw4r/ut/ut_DvdFileStream.o \
 	build/asm/nw4r/ut/ut_DvdLockedFileStream.o \
+	build/asm/nw4r/ut/ut_NandFileStream.o \
+	build/asm/nw4r/ut/ut_LC.o \
 	build/asm/text.o
 
 CTORS_O_FILES := build/asm/ctors.o
