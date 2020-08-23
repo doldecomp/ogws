@@ -1,0 +1,116 @@
+.include "macros.inc"
+
+.section .text, "ax"  # 0x800076E0 - 0x80355080
+
+.global __dt__Q44nw4r2ut6detail12LinkListImplFv
+__dt__Q44nw4r2ut6detail12LinkListImplFv:
+/* 8000797C 0000287C  94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 80007980 00002880  7C 08 02 A6 */	mflr r0
+/* 80007984 00002884  2C 03 00 00 */	cmpwi r3, 0
+/* 80007988 00002888  90 01 00 14 */	stw r0, 0x14(r1)
+/* 8000798C 0000288C  93 E1 00 0C */	stw r31, 0xc(r1)
+/* 80007990 00002890  7C 7F 1B 78 */	mr r31, r3
+/* 80007994 00002894  41 82 00 54 */	beq lbl_800079E8
+/* 80007998 00002898  80 E3 00 04 */	lwz r7, 4(r3)
+/* 8000799C 0000289C  38 C3 00 04 */	addi r6, r3, 4
+/* 800079A0 000028A0  38 00 00 00 */	li r0, 0
+/* 800079A4 000028A4  48 00 00 2C */	b lbl_800079D0
+lbl_800079A8:
+/* 800079A8 000028A8  81 07 00 00 */	lwz r8, 0(r7)
+/* 800079AC 000028AC  80 A7 00 04 */	lwz r5, 4(r7)
+/* 800079B0 000028B0  90 A8 00 04 */	stw r5, 4(r8)
+/* 800079B4 000028B4  91 05 00 00 */	stw r8, 0(r5)
+/* 800079B8 000028B8  80 A3 00 00 */	lwz r5, 0(r3)
+/* 800079BC 000028BC  38 A5 FF FF */	addi r5, r5, -1
+/* 800079C0 000028C0  90 A3 00 00 */	stw r5, 0(r3)
+/* 800079C4 000028C4  90 07 00 00 */	stw r0, 0(r7)
+/* 800079C8 000028C8  90 07 00 04 */	stw r0, 4(r7)
+/* 800079CC 000028CC  7D 07 43 78 */	mr r7, r8
+lbl_800079D0:
+/* 800079D0 000028D0  7C 07 30 40 */	cmplw r7, r6
+/* 800079D4 000028D4  40 82 FF D4 */	bne lbl_800079A8
+/* 800079D8 000028D8  2C 04 00 00 */	cmpwi r4, 0
+/* 800079DC 000028DC  40 81 00 0C */	ble lbl_800079E8
+/* 800079E0 000028E0  7F E3 FB 78 */	mr r3, r31
+/* 800079E4 000028E4  48 09 B8 A1 */	bl func_800A3284
+lbl_800079E8:
+/* 800079E8 000028E8  7F E3 FB 78 */	mr r3, r31
+/* 800079EC 000028EC  83 E1 00 0C */	lwz r31, 0xc(r1)
+/* 800079F0 000028F0  80 01 00 14 */	lwz r0, 0x14(r1)
+/* 800079F4 000028F4  7C 08 03 A6 */	mtlr r0
+/* 800079F8 000028F8  38 21 00 10 */	addi r1, r1, 0x10
+/* 800079FC 000028FC  4E 80 00 20 */	blr 
+
+.global Erase__Q44nw4r2ut6detail12LinkListImplFQ54nw4r2ut6detail12LinkListImpl8Iterator
+Erase__Q44nw4r2ut6detail12LinkListImplFQ54nw4r2ut6detail12LinkListImpl8Iterator:
+/* 80007A00 00002900  80 C4 00 00 */	lwz r6, 0(r4)
+/* 80007A04 00002904  38 00 00 00 */	li r0, 0
+/* 80007A08 00002908  80 A6 00 00 */	lwz r5, 0(r6)
+/* 80007A0C 0000290C  48 00 00 2C */	b lbl_80007A38
+lbl_80007A10:
+/* 80007A10 00002910  80 E6 00 00 */	lwz r7, 0(r6)
+/* 80007A14 00002914  80 86 00 04 */	lwz r4, 4(r6)
+/* 80007A18 00002918  90 87 00 04 */	stw r4, 4(r7)
+/* 80007A1C 0000291C  90 E4 00 00 */	stw r7, 0(r4)
+/* 80007A20 00002920  80 83 00 00 */	lwz r4, 0(r3)
+/* 80007A24 00002924  38 84 FF FF */	addi r4, r4, -1
+/* 80007A28 00002928  90 83 00 00 */	stw r4, 0(r3)
+/* 80007A2C 0000292C  90 06 00 00 */	stw r0, 0(r6)
+/* 80007A30 00002930  90 06 00 04 */	stw r0, 4(r6)
+/* 80007A34 00002934  7C E6 3B 78 */	mr r6, r7
+lbl_80007A38:
+/* 80007A38 00002938  7C 06 28 40 */	cmplw r6, r5
+/* 80007A3C 0000293C  40 82 FF D4 */	bne lbl_80007A10
+/* 80007A40 00002940  7C A3 2B 78 */	mr r3, r5
+/* 80007A44 00002944  4E 80 00 20 */	blr 
+
+.global Clear__Q44nw4r2ut6detail12LinkListImplFv
+Clear__Q44nw4r2ut6detail12LinkListImplFv:
+/* 80007A48 00002948  80 C3 00 04 */	lwz r6, 4(r3)
+/* 80007A4C 0000294C  38 A3 00 04 */	addi r5, r3, 4
+/* 80007A50 00002950  38 00 00 00 */	li r0, 0
+/* 80007A54 00002954  48 00 00 2C */	b lbl_80007A80
+lbl_80007A58:
+/* 80007A58 00002958  80 E6 00 00 */	lwz r7, 0(r6)
+/* 80007A5C 0000295C  80 86 00 04 */	lwz r4, 4(r6)
+/* 80007A60 00002960  90 87 00 04 */	stw r4, 4(r7)
+/* 80007A64 00002964  90 E4 00 00 */	stw r7, 0(r4)
+/* 80007A68 00002968  80 83 00 00 */	lwz r4, 0(r3)
+/* 80007A6C 0000296C  38 84 FF FF */	addi r4, r4, -1
+/* 80007A70 00002970  90 83 00 00 */	stw r4, 0(r3)
+/* 80007A74 00002974  90 06 00 00 */	stw r0, 0(r6)
+/* 80007A78 00002978  90 06 00 04 */	stw r0, 4(r6)
+/* 80007A7C 0000297C  7C E6 3B 78 */	mr r6, r7
+lbl_80007A80:
+/* 80007A80 00002980  7C 06 28 40 */	cmplw r6, r5
+/* 80007A84 00002984  40 82 FF D4 */	bne lbl_80007A58
+/* 80007A88 00002988  4E 80 00 20 */	blr 
+
+.global Insert__Q44nw4r2ut6detail12LinkListImplFQ54nw4r2ut6detail12LinkListImpl8IteratorPQ34nw4r2ut12LinkListNode
+Insert__Q44nw4r2ut6detail12LinkListImplFQ54nw4r2ut6detail12LinkListImpl8IteratorPQ34nw4r2ut12LinkListNode:
+/* 80007A8C 0000298C  80 84 00 00 */	lwz r4, 0(r4)
+/* 80007A90 00002990  80 C4 00 04 */	lwz r6, 4(r4)
+/* 80007A94 00002994  90 85 00 00 */	stw r4, 0(r5)
+/* 80007A98 00002998  90 C5 00 04 */	stw r6, 4(r5)
+/* 80007A9C 0000299C  90 A4 00 04 */	stw r5, 4(r4)
+/* 80007AA0 000029A0  90 A6 00 00 */	stw r5, 0(r6)
+/* 80007AA4 000029A4  80 83 00 00 */	lwz r4, 0(r3)
+/* 80007AA8 000029A8  38 04 00 01 */	addi r0, r4, 1
+/* 80007AAC 000029AC  90 03 00 00 */	stw r0, 0(r3)
+/* 80007AB0 000029B0  7C A3 2B 78 */	mr r3, r5
+/* 80007AB4 000029B4  4E 80 00 20 */	blr 
+
+.global Erase__Q44nw4r2ut6detail12LinkListImplFPQ34nw4r2ut12LinkListNode
+Erase__Q44nw4r2ut6detail12LinkListImplFPQ34nw4r2ut12LinkListNode:
+/* 80007AB8 000029B8  80 C4 00 00 */	lwz r6, 0(r4)
+/* 80007ABC 000029BC  38 00 00 00 */	li r0, 0
+/* 80007AC0 000029C0  80 A4 00 04 */	lwz r5, 4(r4)
+/* 80007AC4 000029C4  90 A6 00 04 */	stw r5, 4(r6)
+/* 80007AC8 000029C8  90 C5 00 00 */	stw r6, 0(r5)
+/* 80007ACC 000029CC  80 A3 00 00 */	lwz r5, 0(r3)
+/* 80007AD0 000029D0  38 A5 FF FF */	addi r5, r5, -1
+/* 80007AD4 000029D4  90 A3 00 00 */	stw r5, 0(r3)
+/* 80007AD8 000029D8  7C C3 33 78 */	mr r3, r6
+/* 80007ADC 000029DC  90 04 00 00 */	stw r0, 0(r4)
+/* 80007AE0 000029E0  90 04 00 04 */	stw r0, 4(r4)
+/* 80007AE4 000029E4  4E 80 00 20 */	blr 

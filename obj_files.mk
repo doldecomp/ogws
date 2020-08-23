@@ -4,7 +4,13 @@ EXTAB_O_FILES := build/asm/extab.o
 
 EXTABINDEX_O_FILES := build/asm/extabindex.o
 
-TEXT_O_FILES := build/asm/text.o
+TEXT_O_FILES := \
+	build/asm/nw4r/ut/list.o \
+	build/asm/nw4r/ut/ut_LinkListImpl.o \
+	build/asm/nw4r/ut/binaryFile.o \
+	build/asm/nw4r/ut/ut_CharStrmReader.o \
+	build/asm/nw4r/ut/ut_TagProcessorBase.o \
+	build/asm/text.o
 
 CTORS_O_FILES := build/asm/ctors.o
 
