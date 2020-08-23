@@ -1,6 +1,5 @@
-﻿################################################################################
-# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
-################################################################################
-
-.vs/Wii-Sports-decompilation/v16
-.vs/
+﻿.vs/
+build/
+tools/*.exe
+tools/*.dll
+include/baserom.dol
