@@ -43,6 +43,9 @@ ASFLAGS := -mgekko -I include
 LDFLAGS := -map $(MAP) -fp hard -nodefaults
 #CFLAGS  := -Cpp_exceptions off -proc gekko -fp hard -O2,p -i include
 
+# Compiler flags for the Target Resident Kernel
+CFLAGS_TRK := -proc gekko -fp hard -O4,s -i include/RevoSDK/TRK -nodefaults
+
 # elf2dol needs to know these in order to calculate sbss correctly.
 SDATA_PDHR := 10
 SBSS_PDHR := 11
@@ -86,5 +89,5 @@ $(ELF): $(O_FILES) $(LDSCRIPT)
 $(BUILD_DIR)/%.o: %.s
 	$(AS) $(ASFLAGS) -o $@ $<
 
-#%.o: %.c
-#	$(CC) $(CFLAGS) -c -o $@ $<
+$(BUILD_DIR)/RevoSDK/TRK/%.o: src/RevoSDK/TRK/%.c
+	$(CC) $(CFLAGS_TRK) -c -o $@ $<
