@@ -4,8 +4,7 @@
 
 .section .text, "ax"  # 0x800076E0 - 0x80355080
 
-# nw4r::ut::DvdLockedFileStream::DvdLockedFileStream
-
+# __ct__Q34nw4r2ut19DvdLockedFileStreamFl
 .global func_80008B00
 func_80008B00:
 /* 80008B00 00003A00  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -39,8 +38,7 @@ lbl_80008B50:
 /* 80008B6C 00003A6C  38 21 00 10 */	addi r1, r1, 0x10
 /* 80008B70 00003A70  4E 80 00 20 */	blr 
 
-# nw4r::ut::DvdLockedFileStream::DvdLockedFileStream
-
+# __ct__Q34nw4r2ut19DvdLockedFileStreamFPC11DVDFileInfob
 .global func_80008B74
 func_80008B74:
 /* 80008B74 00003A74  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -74,8 +72,7 @@ lbl_80008BC4:
 /* 80008BE0 00003AE0  38 21 00 10 */	addi r1, r1, 0x10
 /* 80008BE4 00003AE4  4E 80 00 20 */	blr 
 
-# nw4r::ut::DvdLockedFileStream::~DvdLockedFileStream
-
+# __dt__Q34nw4r2ut19DvdLockedFileStreamFv
 .global func_80008BE8
 func_80008BE8:
 /* 80008BE8 00003AE8  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -102,8 +99,7 @@ lbl_80008C24:
 /* 80008C38 00003B38  38 21 00 10 */	addi r1, r1, 0x10
 /* 80008C3C 00003B3C  4E 80 00 20 */	blr 
 
-# nw4r::ut::DvdLockedFileStream::Read
-
+# Read__Q34nw4r2ut19DvdLockedFileStreamFPvUl
 .global lbl_80008C40
 lbl_80008C40:
 /* 80008C40 00003B40  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -136,8 +132,9 @@ lbl_80008C40:
 /* 80008CAC 00003BAC  38 21 00 20 */	addi r1, r1, 0x20
 /* 80008CB0 00003BB0  4E 80 00 20 */	blr 
 
-# nw4r::ut::DvdLockedFileStream::Peek
-
+# Peek__Q34nw4r2ut19DvdLockedFileStreamFPvUl
+.global func_80008CB4
+func_80008CB4:
 /* 80008CB4 00003BB4  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 80008CB8 00003BB8  7C 08 02 A6 */	mflr r0
 /* 80008CBC 00003BBC  90 01 00 24 */	stw r0, 0x24(r1)
@@ -168,28 +165,33 @@ lbl_80008C40:
 /* 80008D20 00003C20  38 21 00 20 */	addi r1, r1, 0x20
 /* 80008D24 00003C24  4E 80 00 20 */	blr 
 
-# nw4r::ut::DvdLockedFileStream::CanAsync
-
+# CanAsync__Q34nw4r2ut19DvdLockedFileStreamCFv
+.global func_80008D28
+func_80008D28:
 /* 80008D28 00003C28  38 60 00 00 */	li r3, 0
 /* 80008D2C 00003C2C  4E 80 00 20 */	blr 
 
-# nw4r::ut::DvdLockedFileStream::PeekAsync
-
+# PeekAsync__Q34nw4r2ut19DvdLockedFileStreamFPvUlPFlPQ34nw4r2ut8IOStreamPv_vPv
+.global func_80008D30
+func_80008D30:
 /* 80008D30 00003C30  38 60 00 00 */	li r3, 0
 /* 80008D34 00003C34  4E 80 00 20 */	blr 
 
-# nw4r::ut::DvdLockedFileStream::ReadAsync
-
+# ReadAsync__Q34nw4r2ut19DvdLockedFileStreamFPvUlPFlPQ34nw4r2ut8IOStreamPv_vPv
+.global func_80008D38
+func_80008D38:
 /* 80008D38 00003C38  38 60 00 00 */	li r3, 0
 /* 80008D3C 00003C3C  4E 80 00 20 */	blr 
 
-# nw4r::ut::DvdLockedFileStream::GetRuntimeTypeInfo
-
+# GetRuntimeTypeInfo__Q34nw4r2ut19DvdLockedFileStreamCFv
+.global func_80008D40
+func_80008D40:
 /* 80008D40 00003C40  38 6D 96 78 */	addi r3, r13, lbl_804BE9F8-_SDA_BASE_
 /* 80008D44 00003C44  4E 80 00 20 */	blr 
 
 # __sinit_\ut_DvdLockedFileStream_cpp
-
+.global func_80008D48
+func_80008D48:
 /* 80008D48 00003C48  38 0D 96 70 */	addi r0, r13, lbl_804BE9F0-_SDA_BASE_
 /* 80008D4C 00003C4C  90 0D 96 78 */	stw r0, lbl_804BE9F8-_SDA_BASE_(r13)
 /* 80008D50 00003C50  4E 80 00 20 */	blr 
