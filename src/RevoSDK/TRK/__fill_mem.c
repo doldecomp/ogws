@@ -1,5 +1,5 @@
 #include "__fill_mem.h"
-void (*a)();
+
 void __fill_mem(void * dest, int val, size_t count)
 {
 	char * cdest = (char *)dest;
