@@ -1,5 +1,7 @@
 INIT_O_FILES := \
 	build/RevoSDK/TRK/memcpy.o \
+	build/RevoSDK/TRK/__fill_mem.o \
+	build/RevoSDK/TRK/memset.o \
 	build/asm/init.o
 
 EXTAB_O_FILES := build/asm/extab.o

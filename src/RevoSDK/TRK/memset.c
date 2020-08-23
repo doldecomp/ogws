@@ -3,6 +3,6 @@
 
 void * memset(void * dest, int val, size_t count)
 {
-	__fill_mem(dest, val, num);
+	__fill_mem(dest, val, count);
 	return dest;
 }

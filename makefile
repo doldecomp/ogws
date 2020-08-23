@@ -44,7 +44,7 @@ LDFLAGS := -map $(MAP) -fp hard -nodefaults
 #CFLAGS  := -Cpp_exceptions off -proc gekko -fp hard -O2,p -i include
 
 # Compiler flags for the Target Resident Kernel
-CFLAGS_TRK := -proc gekko -fp hard -O4,s -i include/RevoSDK/TRK -nodefaults
+CFLAGS_TRK := -Cpp_exceptions off -proc gekko -fp hard -O4,s -i include/RevoSDK/TRK -nodefaults
 
 # elf2dol needs to know these in order to calculate sbss correctly.
 SDATA_PDHR := 10
