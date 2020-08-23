@@ -4,9 +4,9 @@
 
 .section .text, "ax"  # 0x800076E0 - 0x80355080
 
-# nw4r::ut::DvdFileStream::DvdAsyncCallback_
-
-lbl_800084E8:
+# DvdAsyncCallback___Q34nw4r2ut13DvdFileStreamFlP11DVDFileInfo
+.global func_800084E8
+func_800084E8:
 /* 800084E8 000033E8  80 84 00 3C */	lwz r4, 0x3c(r4)
 /* 800084EC 000033EC  38 00 00 00 */	li r0, 0
 /* 800084F0 000033F0  98 04 00 6C */	stb r0, 0x6c(r4)
@@ -19,9 +19,9 @@ lbl_800084E8:
 /* 8000850C 0000340C  4E 80 04 20 */	bctr 
 /* 80008510 00003410  4E 80 00 20 */	blr 
 
-# nw4r::ut::DvdFileStream::DvdCBAsyncCallback_
-
-lbl_80008514:
+# DvdCBAsyncCallback___Q34nw4r2ut13DvdFileStreamFlP15DVDCommandBlock
+.global func_80008514
+func_80008514:
 /* 80008514 00003414  80 84 00 3C */	lwz r4, 0x3c(r4)
 /* 80008518 00003418  38 00 00 00 */	li r0, 0
 /* 8000851C 0000341C  98 04 00 24 */	stb r0, 0x24(r4)
@@ -33,8 +33,7 @@ lbl_80008514:
 /* 80008534 00003434  4E 80 04 20 */	bctr 
 /* 80008538 00003438  4E 80 00 20 */	blr 
 
-# nw4r::ut::DvdFileStream::DvdFileStream
-
+# __ct__Q34nw4r2ut13DvdFileStreamFl
 .global func_8000853C
 func_8000853C:
 /* 8000853C 0000343C  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -87,8 +86,7 @@ lbl_800085E0:
 /* 800085F0 000034F0  38 21 00 10 */	addi r1, r1, 0x10
 /* 800085F4 000034F4  4E 80 00 20 */	blr 
 
-# nw4r::ut::DvdFileStream::DvdFileStream
-
+# __ct__Q34nw4r2ut13DvdFileStreamFPC11DVDFileInfob
 .global func_800085F8
 func_800085F8:
 /* 800085F8 000034F8  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -169,8 +167,7 @@ lbl_8000866C:
 /* 80008720 00003620  38 21 00 30 */	addi r1, r1, 0x30
 /* 80008724 00003624  4E 80 00 20 */	blr 
 
-# nw4r::ut::DvdFileStream::~DvdFileStream
-
+# __dt__Q34nw4r2ut13DvdFileStreamFv
 .global func_80008728
 func_80008728:
 /* 80008728 00003628  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -206,8 +203,9 @@ lbl_80008784:
 /* 80008798 00003698  38 21 00 10 */	addi r1, r1, 0x10
 /* 8000879C 0000369C  4E 80 00 20 */	blr 
 
-# nw4r::ut::DvdFileStream::Close
-
+# Close__Q34nw4r2ut13DvdFileStreamFv
+.global func_800087A0
+func_800087A0:
 /* 800087A0 000036A0  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 800087A4 000036A4  7C 08 02 A6 */	mflr r0
 /* 800087A8 000036A8  90 01 00 14 */	stw r0, 0x14(r1)
@@ -230,8 +228,7 @@ lbl_800087DC:
 /* 800087E8 000036E8  38 21 00 10 */	addi r1, r1, 0x10
 /* 800087EC 000036EC  4E 80 00 20 */	blr 
 
-# nw4r::ut::DvdFileStream::Read
-
+# Read__Q34nw4r2ut13DvdFileStreamFPvUl
 .global func_800087F0
 func_800087F0:
 /* 800087F0 000036F0  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -271,8 +268,9 @@ lbl_8000885C:
 /* 80008870 00003770  38 21 00 10 */	addi r1, r1, 0x10
 /* 80008874 00003774  4E 80 00 20 */	blr 
 
-# nw4r::ut::DvdFileStream::ReadAsync
-
+# ReadAsync__Q34nw4r2ut13DvdFileStreamFPvUlPFlPQ34nw4r2ut8IOStreamPv_vPv
+.global func_80008878
+func_80008878:
 /* 80008878 00003778  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8000887C 0000377C  7C 08 02 A6 */	mflr r0
 /* 80008880 00003780  90 01 00 24 */	stw r0, 0x24(r1)
@@ -313,10 +311,10 @@ lbl_800088C8:
 /* 80008908 00003808  54 05 00 34 */	rlwinm r5, r0, 0, 0, 0x1a
 lbl_8000890C:
 /* 8000890C 0000380C  81 03 00 68 */	lwz r8, 0x68(r3)
-/* 80008910 00003810  3C E0 80 01 */	lis r7, lbl_800084E8@ha
+/* 80008910 00003810  3C E0 80 01 */	lis r7, func_800084E8@ha
 /* 80008914 00003814  7D 66 5B 78 */	mr r6, r11
 /* 80008918 00003818  38 63 00 28 */	addi r3, r3, 0x28
-/* 8000891C 0000381C  38 E7 84 E8 */	addi r7, r7, lbl_800084E8@l
+/* 8000891C 0000381C  38 E7 84 E8 */	addi r7, r7, func_800084E8@l
 /* 80008920 00003820  48 13 15 31 */	bl func_80139E50
 /* 80008924 00003824  7C 03 00 D0 */	neg r0, r3
 /* 80008928 00003828  7C 00 1B 78 */	or r0, r0, r3
@@ -339,8 +337,7 @@ lbl_8000894C:
 /* 80008964 00003864  38 21 00 20 */	addi r1, r1, 0x20
 /* 80008968 00003868  4E 80 00 20 */	blr 
 
-# nw4r::ut::DvdFileStream::Peek
-
+# Peek__Q34nw4r2ut13DvdFileStreamFPvUl
 .global func_8000896C
 func_8000896C:
 /* 8000896C 0000386C  80 C3 00 18 */	lwz r6, 0x18(r3)
@@ -360,8 +357,9 @@ lbl_8000899C:
 /* 800089A0 000038A0  38 63 00 28 */	addi r3, r3, 0x28
 /* 800089A4 000038A4  48 13 15 94 */	b func_80139F38
 
-# nw4r::ut::DvdFileStream::PeekAsync
-
+# PeekAsync__Q34nw4r2ut13DvdFileStreamFPvUlPFlPQ34nw4r2ut8IOStreamPv_vPv
+.global func_800089A8
+func_800089A8:
 /* 800089A8 000038A8  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 800089AC 000038AC  7C 08 02 A6 */	mflr r0
 /* 800089B0 000038B0  39 20 00 01 */	li r9, 1
@@ -383,10 +381,10 @@ lbl_8000899C:
 /* 800089F0 000038F0  54 05 00 34 */	rlwinm r5, r0, 0, 0, 0x1a
 lbl_800089F4:
 /* 800089F4 000038F4  81 03 00 68 */	lwz r8, 0x68(r3)
-/* 800089F8 000038F8  3C E0 80 01 */	lis r7, lbl_800084E8@ha
+/* 800089F8 000038F8  3C E0 80 01 */	lis r7, func_800084E8@ha
 /* 800089FC 000038FC  7D 66 5B 78 */	mr r6, r11
 /* 80008A00 00003900  38 63 00 28 */	addi r3, r3, 0x28
-/* 80008A04 00003904  38 E7 84 E8 */	addi r7, r7, lbl_800084E8@l
+/* 80008A04 00003904  38 E7 84 E8 */	addi r7, r7, func_800084E8@l
 /* 80008A08 00003908  48 13 14 49 */	bl func_80139E50
 /* 80008A0C 0000390C  7C 03 00 D0 */	neg r0, r3
 /* 80008A10 00003910  7C 00 1B 78 */	or r0, r0, r3
@@ -396,28 +394,29 @@ lbl_800089F4:
 /* 80008A20 00003920  38 21 00 10 */	addi r1, r1, 0x10
 /* 80008A24 00003924  4E 80 00 20 */	blr 
 
-# nw4r::ut::DvdFileStream::Seek
-
+# Seek__Q34nw4r2ut13DvdFileStreamFlUl
 .global func_80008A28
 func_80008A28:
 /* 80008A28 00003928  38 63 00 14 */	addi r3, r3, 0x14
 /* 80008A2C 0000392C  4B FF FA 10 */	b func_8000843C
 
-# nw4r::ut::DvdFileStream::Cancel
-
+# Cancel__Q34nw4r2ut13DvdFileStreamFv
+.global func_80008A30
+func_80008A30:
 /* 80008A30 00003930  38 63 00 28 */	addi r3, r3, 0x28
 /* 80008A34 00003934  48 13 56 90 */	b func_8013E0C4
 
-# nw4r::ut::DvdFileStream::CancelAsync
-
+# CancelAsync__Q34nw4r2ut13DvdFileStreamFPFlPQ34nw4r2ut8IOStreamPv_vPv
+.global func_80008A38
+func_80008A38:
 /* 80008A38 00003938  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80008A3C 0000393C  7C 08 02 A6 */	mflr r0
 /* 80008A40 00003940  90 01 00 14 */	stw r0, 0x14(r1)
 /* 80008A44 00003944  93 E1 00 0C */	stw r31, 0xc(r1)
 /* 80008A48 00003948  7C 7F 1B 78 */	mr r31, r3
 /* 80008A4C 0000394C  90 83 00 1C */	stw r4, 0x1c(r3)
-/* 80008A50 00003950  3C 80 80 01 */	lis r4, lbl_80008514@ha
-/* 80008A54 00003954  38 84 85 14 */	addi r4, r4, lbl_80008514@l
+/* 80008A50 00003950  3C 80 80 01 */	lis r4, func_80008514@ha
+/* 80008A54 00003954  38 84 85 14 */	addi r4, r4, func_80008514@l
 /* 80008A58 00003958  90 A3 00 20 */	stw r5, 0x20(r3)
 /* 80008A5C 0000395C  38 63 00 28 */	addi r3, r3, 0x28
 /* 80008A60 00003960  48 13 53 11 */	bl func_8013DD70
@@ -435,68 +434,81 @@ lbl_80008A74:
 /* 80008A8C 0000398C  38 21 00 10 */	addi r1, r1, 0x10
 /* 80008A90 00003990  4E 80 00 20 */	blr 
 
-# nw4r::ut::DvdFileStream::GetBufferAlign
-
+# GetBufferAlign__Q34nw4r2ut13DvdFileStreamCFv
+.global func_80008A94
+func_80008A94:
 /* 80008A94 00003994  38 60 00 20 */	li r3, 0x20
 /* 80008A98 00003998  4E 80 00 20 */	blr 
 
-# nw4r::ut::DvdFileStream::GetSizeAlign
-
+# GetSizeAlign__Q34nw4r2ut13DvdFileStreamCFv
+.global func_80008A9C
+func_80008A9C:
 /* 80008A9C 0000399C  38 60 00 20 */	li r3, 0x20
 /* 80008AA0 000039A0  4E 80 00 20 */	blr 
 
-# nw4r::ut::DvdFileStream::GetOffsetAlign
-
+# GetOffsetAlign__Q34nw4r2ut13DvdFileStreamCFv
+.global func_80008AA4
+func_80008AA4:
 /* 80008AA4 000039A4  38 60 00 04 */	li r3, 4
 /* 80008AA8 000039A8  4E 80 00 20 */	blr 
 
-# nw4r::ut::DvdFileStream::CanCancel
-
+# CanCancel__Q34nw4r2ut13DvdFileStreamCFv
+.global func_80008AAC
+func_80008AAC:
 /* 80008AAC 000039AC  38 60 00 01 */	li r3, 1
 /* 80008AB0 000039B0  4E 80 00 20 */	blr 
 
-# nw4r::ut::DvdFileStream::CanWrite
-
+# CanWrite__Q34nw4r2ut13DvdFileStreamCFv
+.global func_80008AB4
+func_80008AB4:
 /* 80008AB4 000039B4  38 60 00 00 */	li r3, 0
 /* 80008AB8 000039B8  4E 80 00 20 */	blr 
 
-# nw4r::ut::DvdFileStream::CanRead
-
+# CanRead__Q34nw4r2ut13DvdFileStreamCFv
+.global func_80008ABC
+func_80008ABC:
 /* 80008ABC 000039BC  38 60 00 01 */	li r3, 1
 /* 80008AC0 000039C0  4E 80 00 20 */	blr 
 
-# nw4r::ut::DvdFileStream::CanSeek
-
+# CanSeek__Q34nw4r2ut13DvdFileStreamCFv
+.global func_80008AC4
+func_80008AC4:
 /* 80008AC4 000039C4  38 60 00 01 */	li r3, 1
 /* 80008AC8 000039C8  4E 80 00 20 */	blr 
 
-# nw4r::ut::DvdFileStream::CanAsync
-
+# CanAsync__Q34nw4r2ut13DvdFileStreamCFv
+.global func_80008ACC
+func_80008ACC:
 /* 80008ACC 000039CC  38 60 00 01 */	li r3, 1
 /* 80008AD0 000039D0  4E 80 00 20 */	blr 
 
-# nw4r::ut::DvdFileStream::GetSize
-
+# GetSize__Q34nw4r2ut13DvdFileStreamCFv
+.global func_80008AD4
+func_80008AD4:
 /* 80008AD4 000039D4  80 63 00 14 */	lwz r3, 0x14(r3)
 /* 80008AD8 000039D8  4E 80 00 20 */	blr 
 
-# nw4r::ut::DvdFileStream::Tell
-
+# Tell__Q34nw4r2ut13DvdFileStreamCFv
+.global func_80008ADC
+func_80008ADC:
 /* 80008ADC 000039DC  80 63 00 18 */	lwz r3, 0x18(r3)
 /* 80008AE0 000039E0  4E 80 00 20 */	blr 
 
-# nw4r::ut::DvdFileStream::IsBusy
-
+# IsBusy__Q34nw4r2ut13DvdFileStreamCFv
+.global func_80008AE4
+func_80008AE4:
 /* 80008AE4 000039E4  88 63 00 6C */	lbz r3, 0x6c(r3)
 /* 80008AE8 000039E8  4E 80 00 20 */	blr 
 
-# nw4r::ut::DvdFileStream::GetRuntimeTypeInfo
-
+# GetRuntimeTypeInfo__Q34nw4r2ut13DvdFileStreamCFv
+.global func_80008AEC
+func_80008AEC:
 /* 80008AEC 000039EC  38 6D 96 70 */	addi r3, r13, lbl_804BE9F0-_SDA_BASE_
 /* 80008AF0 000039F0  4E 80 00 20 */	blr 
 
-# nw4r::ut::DvdFileStream::__sinit_\ut_DvdFileStream_cpp
-
+# __sinit_\ut_DvdFileStream_cpp
+.global func_80008AF4
+func_80008AF4:
 /* 80008AF4 000039F4  38 0D 96 68 */	addi r0, r13, lbl_804BE9E8-_SDA_BASE_
 /* 80008AF8 000039F8  90 0D 96 70 */	stw r0, lbl_804BE9F0-_SDA_BASE_(r13)
 /* 80008AFC 000039FC  4E 80 00 20 */	blr 

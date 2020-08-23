@@ -2,6 +2,7 @@
 
 .section .text, "ax"  # 0x800076E0 - 0x80355080
 
+# __ct__Q34nw4r2ut19TagProcessorBase<c>Fv
 .global func_80007C6C
 func_80007C6C:
 /* 80007C6C 00002B6C  3C 80 80 39 */	lis r4, lbl_80393A94@ha
@@ -9,6 +10,7 @@ func_80007C6C:
 /* 80007C74 00002B74  90 83 00 00 */	stw r4, 0(r3)
 /* 80007C78 00002B78  4E 80 00 20 */	blr 
 
+# __dt__Q34nw4r2ut19TagProcessorBase<c>Fv
 .global func_80007C7C
 func_80007C7C:
 /* 80007C7C 00002B7C  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -28,6 +30,10 @@ lbl_80007CA4:
 /* 80007CB0 00002BB0  7C 08 03 A6 */	mtlr r0
 /* 80007CB4 00002BB4  38 21 00 10 */	addi r1, r1, 0x10
 /* 80007CB8 00002BB8  4E 80 00 20 */	blr 
+
+# Process__Q34nw4r2ut19TagProcessorBase<c>FUsPQ34nw4r2ut15PrintContext<c>
+.global func_80007CBC
+func_80007CBC:
 /* 80007CBC 00002BBC  94 21 FF B0 */	stwu r1, -0x50(r1)
 /* 80007CC0 00002BC0  7C 08 02 A6 */	mflr r0
 /* 80007CC4 00002BC4  90 01 00 54 */	stw r0, 0x54(r1)
@@ -111,6 +117,10 @@ lbl_80007DC0:
 /* 80007DE0 00002CE0  7C 08 03 A6 */	mtlr r0
 /* 80007DE4 00002CE4  38 21 00 50 */	addi r1, r1, 0x50
 /* 80007DE8 00002CE8  4E 80 00 20 */	blr 
+
+# CalcRect__Q34nw4r2ut19TagProcessorBase<c>FPQ34nw4r2ut4RectUsPQ34nw4r2ut15PrintContext<c>
+.global func_80007DEC
+func_80007DEC:
 /* 80007DEC 00002CEC  94 21 FF A0 */	stwu r1, -0x60(r1)
 /* 80007DF0 00002CF0  7C 08 02 A6 */	mflr r0
 /* 80007DF4 00002CF4  90 01 00 64 */	stw r0, 0x64(r1)
@@ -241,6 +251,7 @@ lbl_80007FAC:
 /* 80007FCC 00002ECC  38 21 00 60 */	addi r1, r1, 0x60
 /* 80007FD0 00002ED0  4E 80 00 20 */	blr 
 
+# __ct__Q34nw4r2ut19TagProcessorBase<w>Fv
 .global func_80007FD4
 func_80007FD4:
 /* 80007FD4 00002ED4  3C 80 80 39 */	lis r4, lbl_80393A80@ha
@@ -248,6 +259,7 @@ func_80007FD4:
 /* 80007FDC 00002EDC  90 83 00 00 */	stw r4, 0(r3)
 /* 80007FE0 00002EE0  4E 80 00 20 */	blr 
 
+# __dt__Q34nw4r2ut19TagProcessorBase<w>Fv
 .global func_80007FE4
 func_80007FE4:
 /* 80007FE4 00002EE4  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -268,6 +280,7 @@ lbl_8000800C:
 /* 8000801C 00002F1C  38 21 00 10 */	addi r1, r1, 0x10
 /* 80008020 00002F20  4E 80 00 20 */	blr 
 
+# Process__Q34nw4r2ut19TagProcessorBase<w>FUsPQ34nw4r2ut15PrintContext<w>
 .global func_80008024
 func_80008024:
 /* 80008024 00002F24  94 21 FF B0 */	stwu r1, -0x50(r1)
@@ -354,6 +367,7 @@ lbl_80008128:
 /* 8000814C 0000304C  38 21 00 50 */	addi r1, r1, 0x50
 /* 80008150 00003050  4E 80 00 20 */	blr 
 
+# CalcRect__Q34nw4r2ut19TagProcessorBase<w>FPQ34nw4r2ut4RectUsPQ34nw4r2ut15PrintContext<w>
 .global func_80008154
 func_80008154:
 /* 80008154 00003054  94 21 FF A0 */	stwu r1, -0x60(r1)
