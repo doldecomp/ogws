@@ -45,6 +45,8 @@ LDFLAGS := -map $(MAP) -fp hard -nodefaults
 
 # Compiler flags for the Target Resident Kernel
 CFLAGS_TRK := -Cpp_exceptions off -proc gekko -fp hard -O4,s -i include/RevoSDK/TRK -nodefaults
+# Compiler flags for NintendoWare for Revolution
+CFLAGS_NW4R := -Cpp_exceptions off -proc gekko -fp hard -O4,p -i include/nw4r/ut -nodefaults
 
 # elf2dol needs to know these in order to calculate sbss correctly.
 SDATA_PDHR := 10
@@ -91,3 +93,6 @@ $(BUILD_DIR)/%.o: %.s
 
 $(BUILD_DIR)/RevoSDK/TRK/%.o: src/RevoSDK/TRK/%.c
 	$(CC) $(CFLAGS_TRK) -c -o $@ $<
+
+$(BUILD_DIR)/nw4r/%.o: src/nw4r/%.cpp
+	$(CC) $(CFLAGS_NW4R) -c -o $@ $<

@@ -9,6 +9,7 @@ EXTAB_O_FILES := build/asm/extab.o
 EXTABINDEX_O_FILES := build/asm/extabindex.o
 
 TEXT_O_FILES := \
+	build/nw4r/ut/ut_List.o \
 	build/asm/nw4r/ut/list.o \
 	build/asm/nw4r/ut/ut_LinkListImpl.o \
 	build/asm/nw4r/ut/binaryFile.o \
