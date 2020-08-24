@@ -1,4 +1,33 @@
-#include "__fill_mem.h"
+#include "__mem.h"
+
+void * memcpy(void * dest, const void * src, size_t count)
+{
+	const char * csrc = (const char *)src;
+	char * cdest = (char *)dest;
+	
+	if (src >= dest)
+	{
+		csrc--;
+		cdest--;
+		count++;
+		
+		while (--count)
+		{
+			*++cdest = *++csrc;
+		}
+	}
+	else
+	{
+		csrc += count;
+		cdest += count;
+		count++;
+		
+		while (--count)
+		{
+			*--cdest = *--csrc;
+		}
+	}
+}
 
 void __fill_mem(void * dest, int val, size_t count)
 {
@@ -61,9 +90,15 @@ void __fill_mem(void * dest, int val, size_t count)
 	
 	if (count)
 	{
-	do
-	{
-		*++cdest = cval;
-	} while(--count);
+		do
+		{
+			*++cdest = cval;
+		} while(--count);
 	}
+}
+
+void * memset(void * dest, int val, size_t count)
+{
+	__fill_mem(dest, val, count);
+	return dest;
 }
