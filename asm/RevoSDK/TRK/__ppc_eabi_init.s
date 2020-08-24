@@ -105,18 +105,18 @@ sdata2_info:
 /* 800064A8 000025A8  00 00 00 00 */	.4byte 0x00000000
 /* 800064AC 000025AC  00 00 00 00 */	.4byte 0x00000000
 
-.global MAIN_uninitialized0_info
-MAIN_uninitialized0_info:
+.global bss_info
+bss_info:
 /* 800064B0 800025B0  80 3C AF 00 */	.4byte 0x803CAF00 # Section ptr
 /* 800064B4 000025B4  00 0F 24 6C */	.4byte 0x000F246C # Section size
 
-.global MAIN_uninitialized1_info
-MAIN_uninitialized1_info:
+.global sbss_info
+sbss_info:
 /* 800064B8 000025B8  80 4B E9 E0 */	.4byte 0x804BE9E0
 /* 800064BC 000025BC  00 00 10 30 */	.4byte 0x00001030
 
-.global MAIN_uninitialized2_info
-MAIN_uninitialized2_info:
+.global sbss2_info
+sbss2_info:
 /* 800064C0 000025C0  80 4C 69 E0 */	.4byte 0x804C69E0
 /* 800064C4 000025C4  00 00 00 3C */	.4byte 0x0000003C
 

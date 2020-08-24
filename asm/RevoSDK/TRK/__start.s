@@ -198,8 +198,8 @@ lbl_80006378:
 /* 80006378 00002478  3B BD 00 0C */	addi r29, r29, 0xc
 /* 8000637C 0000247C  4B FF FF C4 */	b lbl_80006340
 lbl_80006380:
-/* 80006380 00002480  3F A0 80 00 */	lis r29, MAIN_uninitialized0_info@ha
-/* 80006384 00002484  3B BD 64 B0 */	addi r29, r29, MAIN_uninitialized0_info@l
+/* 80006380 00002480  3F A0 80 00 */	lis r29, bss_info@ha
+/* 80006384 00002484  3B BD 64 B0 */	addi r29, r29, bss_info@l
 lbl_80006388:
 /* 80006388 00002488  80 BD 00 04 */	lwz r5, 4(r29)
 /* 8000638C 0000248C  2C 05 00 00 */	cmpwi r5, 0
