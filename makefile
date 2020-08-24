@@ -34,6 +34,7 @@ AS      := tools/powerpc-eabi-as
 OBJCOPY := tools/powerpc-eabi-objcopy
 CPP     := cpp -P
 CC      := tools/mwcceppc
+CC_OLD  := tools/old/mwcceppc
 LD      := tools/mwldeppc
 ELF2DOL := tools/elf2dol
 SHA1SUM := sha1sum
@@ -93,6 +94,9 @@ $(BUILD_DIR)/%.o: %.s
 
 $(BUILD_DIR)/RevoSDK/TRK/%.o: src/RevoSDK/TRK/%.c
 	$(CC) $(CFLAGS_TRK) -c -o $@ $<
+
+$(BUILD_DIR)/RevoSDK/TRK_old/%.o: src/RevoSDK/TRK_old/%.c
+	$(CC_OLD) $(CFLAGS_TRK) -c -o $@ $<
 
 $(BUILD_DIR)/nw4r/%.o: src/nw4r/%.cpp
 	$(CC) $(CFLAGS_NW4R) -c -o $@ $<

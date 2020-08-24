@@ -1,6 +1,6 @@
 INIT_O_FILES := \
 	build/RevoSDK/TRK/__mem.o \
-	build/asm/RevoSDK/TRK/mem_TRK.o \
+	build/RevoSDK/TRK_old/mem_TRK.o \
 	build/asm/RevoSDK/TRK/__exception.o \
 	build/asm/RevoSDK/TRK/dolphin_trk.o \
 	build/asm/RevoSDK/TRK/__start.o \
