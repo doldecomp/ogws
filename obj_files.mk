@@ -2,7 +2,11 @@ INIT_O_FILES := \
 	build/RevoSDK/TRK/memcpy.o \
 	build/RevoSDK/TRK/__fill_mem.o \
 	build/RevoSDK/TRK/memset.o \
-	build/asm/init.o
+	build/asm/RevoSDK/TRK/mem_TRK.o \
+	build/asm/RevoSDK/TRK/__exception.o \
+	build/asm/RevoSDK/TRK/dolphin_trk.o \
+	build/asm/RevoSDK/TRK/__start.o \
+	build/asm/RevoSDK/TRK/__ppc_eabi_init.o \
 
 EXTAB_O_FILES := build/asm/extab.o
 
