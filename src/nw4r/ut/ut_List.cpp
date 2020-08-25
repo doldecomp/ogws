@@ -96,22 +96,54 @@ namespace nw4r
 				list->size++;
 			}
 		}
+		
+		void List_Remove(List *list, void *node)
+        {
+            Node * pNode = List_GetNode(list, node);
+            if (!pNode->prev)
+            {
+                list->first = List_GetNode(list, node)->next;
+            }
+            else
+            {
+                List_GetNode(list, pNode->prev)->next = pNode->next;
+            }
+
+            if (!pNode->next)
+            {
+                list->last = pNode->prev;
+            }
+            else
+            {
+                List_GetNode(list, pNode->next)->prev = pNode->prev;
+            }
+
+            pNode->prev = 0;
+            pNode->next = 0;
+            list->size--;
+        }
+		
+        void* List_GetNext(const List *list, const void *node)
+		{
+			if (node == 0)
+            {
+                return list->first;
+            }
+
+            return List_GetConstNode(list, node)->next;
+		}
+
+        void* List_GetPrev(const List *list, const void *node)
+        {
+            if (node == 0)
+            {
+                return list->last;
+            }
+
+            return List_GetConstNode(list, node)->prev;
+        }
+		
 		/*
-		UNKTYPE List_Remove(List *, void *)
-		{
-			
-		}
-		
-		UNKTYPE List_GetNext(const List *, const void *)
-		{
-			
-		}
-		
-		UNKTYPE List_GetPrev(const List *, const void *)
-		{
-			
-		}
-		
 		UNKTYPE List_GetNth(const List *, unsigned short)
 		{
 			
