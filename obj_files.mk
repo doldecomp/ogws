@@ -24,6 +24,7 @@ TEXT_O_FILES := \
 	build/asm/nw4r/ut/ut_NandFileStream.o \
 	build/asm/nw4r/ut/ut_LC.o \
 	build/asm/nw4r/ut/ut_RomFont.o \
+	build/asm/nw4r/libnw4r_ut.o \
 	build/asm/text.o
 
 CTORS_O_FILES := build/asm/ctors.o
