@@ -23,7 +23,11 @@ TEXT_O_FILES := \
 	build/asm/nw4r/ut/ut_NandFileStream.o \
 	build/asm/nw4r/ut/ut_LC.o \
 	build/asm/nw4r/ut/ut_RomFont.o \
-	build/asm/nw4r/libnw4r_ut.o \
+	build/asm/nw4r/ut/ut_ResFontBase.o \
+	build/asm/nw4r/ut/ut_ResFont.o \
+	build/asm/nw4r/ut/ut_Color.o \
+	build/asm/nw4r/ut/ut_CharWriter.o \
+	build/asm/nw4r/ut/ut_TextWriterBase.o \
 	build/asm/text.o
 
 CTORS_O_FILES := build/asm/ctors.o
