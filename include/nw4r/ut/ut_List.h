@@ -1,6 +1,6 @@
 #ifndef NW4R_UT_LIST
 #define NW4R_UT_LIST
-//#include "types_nw4r.h"
+#include "types_nw4r.h"
 
 namespace nw4r
 {
@@ -27,7 +27,7 @@ namespace nw4r
 		void List_Remove(List *, void *);
 		void* List_GetNext(const List *, const void *);
 		void* List_GetPrev(const List *, const void *);
-		//UNKTYPE List_GetNth(const List *, unsigned short);
+		void * List_GetNth(const List *, unsigned short);
 	}
 }
 

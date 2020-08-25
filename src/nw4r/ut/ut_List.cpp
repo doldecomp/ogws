@@ -1,4 +1,4 @@
-#include "ut_List.h"
+#include "ut_list.h"
 
 namespace nw4r
 {
@@ -18,8 +18,8 @@ namespace nw4r
 		{
 			Node * pNode = List_GetNode(list, node);
 			
-			pNode->next = 0;
-			pNode->prev = 0;
+			pNode->next = NULL;
+			pNode->prev = NULL;
 			list->first = node;
 			list->last = node;
 			list->size++;
@@ -28,9 +28,9 @@ namespace nw4r
 		void List_Init(List * list, unsigned short offset)
 		{
 			list->offset = offset;
-			list->first = 0;
-			list->last = 0;
-			list->size = 0;
+			list->first = NULL;
+			list->last = NULL;
+			list->size = NULL;
 		}
 		
 		void List_Append(List * list, void * node)
@@ -45,7 +45,7 @@ namespace nw4r
 				Node * pNode = List_GetNode(list, node);
 				
 				pNode->prev = list->last;
-				pNode->next = 0;
+				pNode->next = NULL;
 				
 				List_GetNode(list, list->last)->next = node;
 				list->last = node;
@@ -63,7 +63,7 @@ namespace nw4r
 			{
 				Node * pNode = List_GetNode(list, node);
 				
-				pNode->prev = 0;
+				pNode->prev = NULL;
 				pNode->next = list->first;
 				
 				List_GetNode(list, list->first)->prev = node;
@@ -118,14 +118,14 @@ namespace nw4r
                 List_GetNode(list, pNode->next)->prev = pNode->prev;
             }
 
-            pNode->prev = 0;
-            pNode->next = 0;
+            pNode->prev = NULL;
+            pNode->next = NULL;
             list->size--;
         }
 		
         void* List_GetNext(const List *list, const void *node)
 		{
-			if (node == 0)
+			if (node == NULL)
             {
                 return list->first;
             }
@@ -135,7 +135,7 @@ namespace nw4r
 
         void* List_GetPrev(const List *list, const void *node)
         {
-            if (node == 0)
+            if (node == NULL)
             {
                 return list->last;
             }
@@ -143,10 +143,18 @@ namespace nw4r
             return List_GetConstNode(list, node)->prev;
         }
 		
-		/*
-		UNKTYPE List_GetNth(const List *, unsigned short)
+		
+		void * List_GetNth(const List * list, unsigned short n)
 		{
+			void * node;
+			int i;
 			
-		}*/
+			for (i = 0, node = NULL; node = List_GetNext(list, node); i++)
+			{
+				if (n == i) return node;
+			}
+			
+			return NULL;
+		}
 	}
 }
