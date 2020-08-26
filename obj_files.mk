@@ -12,8 +12,8 @@ EXTABINDEX_O_FILES := build/asm/extabindex.o
 
 TEXT_O_FILES := \
 	build/nw4r/ut/ut_list.o \
-	build/asm/nw4r/ut/ut_LinkListImpl.o \
-	build/asm/nw4r/ut/binaryFile.o \
+	build/asm/nw4r/ut/ut_LinkList.o \
+	build/asm/nw4r/ut/ut_binaryFileFormat.o \
 	build/asm/nw4r/ut/ut_CharStrmReader.o \
 	build/asm/nw4r/ut/ut_TagProcessorBase.o \
 	build/asm/nw4r/ut/ut_IOStream.o \
@@ -21,14 +21,17 @@ TEXT_O_FILES := \
 	build/asm/nw4r/ut/ut_DvdFileStream.o \
 	build/asm/nw4r/ut/ut_DvdLockedFileStream.o \
 	build/asm/nw4r/ut/ut_NandFileStream.o \
-	build/asm/nw4r/ut/ut_LC.o \
+	build/asm/nw4r/ut/ut_LockedCache.o \
 	build/asm/nw4r/ut/ut_RomFont.o \
 	build/asm/nw4r/ut/ut_ResFontBase.o \
 	build/asm/nw4r/ut/ut_ResFont.o \
 	build/asm/nw4r/ut/ut_Color.o \
 	build/asm/nw4r/ut/ut_CharWriter.o \
 	build/asm/nw4r/ut/ut_TextWriterBase.o \
-	build/asm/text.o
+	build/asm/nw4r/ef/ef_draworder.o \
+	build/asm/nw4r/ef/ef_effect.o \
+	build/asm/nw4r/ef/ef_effectsystem.o \
+	build/asm/text.o \
 
 CTORS_O_FILES := build/asm/ctors.o
 
