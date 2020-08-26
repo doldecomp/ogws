@@ -53,6 +53,15 @@ CFLAGS_NW4R := -inline auto -Cpp_exceptions off -proc gekko -fp hard -O4,p -i in
 SDATA_PDHR := 10
 SBSS_PDHR := 11
 
+ASM_DIRS := asm \
+	asm/nw4r asm/RevoSDK \
+	asm/nw4r/ut asm/nw4r/ef \
+	asm/RevoSDK/TRK
+
+SRC_DIRS := nw4r RevoSDK \
+	nw4r/ut \
+	RevoSDK/TRK RevoSDK/TRK_old
+
 #-------------------------------------------------------------------------------
 # Recipes
 #-------------------------------------------------------------------------------
@@ -78,7 +87,7 @@ $(DOL): $(ELF) | tools
 	$(SHA1SUM) -c $(TARGET).sha1
 
 clean:
-	rm -f $(DOL) $(ELF) $(O_FILES) $(MAP) $(LDSCRIPT)
+	rm -fdr build
 	$(MAKE) -C tools clean
 
 tools:
