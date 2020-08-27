@@ -38,6 +38,8 @@ CC_OLD  := tools/old/mwcceppc
 LD      := tools/mwldeppc
 ELF2DOL := tools/elf2dol
 SHA1SUM := sha1sum
+PYTHON  := python
+PPROC   := tools/postprocess.py
 
 # Options
 ASFLAGS := -mgekko -I include
@@ -61,6 +63,9 @@ ASM_DIRS := asm \
 SRC_DIRS := nw4r RevoSDK \
 	nw4r/ut \
 	RevoSDK/TRK RevoSDK/TRK_old
+
+# Flags for Riidefi's post-processing script
+PPROCFLAGS := -fsymbol-fixup
 
 #-------------------------------------------------------------------------------
 # Recipes
@@ -100,6 +105,7 @@ $(ELF): $(O_FILES) $(LDSCRIPT)
 
 $(BUILD_DIR)/%.o: %.s
 	$(AS) $(ASFLAGS) -o $@ $<
+	$(PPROC) $(PPROCFLAGS) $@
 
 $(BUILD_DIR)/RevoSDK/TRK/%.o: src/RevoSDK/TRK/%.c
 	$(CC) $(CFLAGS_TRK) -c -o $@ $<

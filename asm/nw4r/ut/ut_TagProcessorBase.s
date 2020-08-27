@@ -3,8 +3,8 @@
 .section .text, "ax"  # 0x800076E0 - 0x80355080
 
 # __ct__Q34nw4r2ut19TagProcessorBase<c>Fv
-.global func_80007C6C
-func_80007C6C:
+.global __ct__Q34nw4r2ut19TagProcessorBase$$0c$$1Fv
+__ct__Q34nw4r2ut19TagProcessorBase$$0c$$1Fv:
 /* 80007C6C 00002B6C  3C 80 80 39 */	lis r4, lbl_80393A94@ha
 /* 80007C70 00002B70  38 84 3A 94 */	addi r4, r4, lbl_80393A94@l
 /* 80007C74 00002B74  90 83 00 00 */	stw r4, 0(r3)
