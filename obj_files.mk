@@ -13,7 +13,7 @@ EXTABINDEX_O_FILES := build/asm/extabindex.o
 TEXT_O_FILES := \
 	build/nw4r/ut/ut_list.o \
 	build/asm/nw4r/ut/ut_LinkList.o \
-	build/asm/nw4r/ut/ut_binaryFileFormat.o \
+	build/nw4r/ut/ut_binaryFileFormat.o \
 	build/asm/nw4r/ut/ut_CharStrmReader.o \
 	build/asm/nw4r/ut/ut_TagProcessorBase.o \
 	build/asm/nw4r/ut/ut_IOStream.o \
