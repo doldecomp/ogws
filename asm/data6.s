@@ -2,7 +2,7 @@
 
 # .data6 = .bss???
 
-.section .data6, "wa"  # 0x80393A80 - 0x803CAF00
+.section .data, "wa"  # 0x80393A80 - 0x803CAF00
 .global lbl_80393A80
 lbl_80393A80:
 	.incbin "baserom.dol", 0x38FB80, 0x14

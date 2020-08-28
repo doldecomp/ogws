@@ -2,7 +2,7 @@
 
 # .data5 = .data???
 
-.section .data, "wa"  # 0x80375780 - 0x80393A80
+.section .rodata, "wa"  # 0x80375780 - 0x80393A80
 	.incbin "baserom.dol", 0x371880, 0xC0
 .global lbl_80375840
 lbl_80375840:
