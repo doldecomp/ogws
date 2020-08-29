@@ -31,6 +31,13 @@ TEXT_O_FILES := \
 	build/asm/nw4r/ef/ef_draworder.o \
 	build/asm/nw4r/ef/ef_effect.o \
 	build/asm/nw4r/ef/ef_effectsystem.o \
+	build/asm/nw4r/ef/ef_emitter.o \
+	build/asm/nw4r/ef/ef_animcurve.o \
+	build/asm/nw4r/ef/ef_particle.o \
+	build/asm/nw4r/ef/ef_particlemanager.o \
+	build/asm/nw4r/ef/ef_resource.o \
+	build/asm/nw4r/ef/ef_util.o \
+	build/asm/nw4r/ef/ef_handle.o \
 	build/asm/text.o \
 
 CTORS_O_FILES := build/asm/ctors.o
