@@ -57,7 +57,11 @@ TEXT_O_FILES := \
 	build/asm/nw4r/ef/ef_drawpointstrategy.o \
 	build/asm/nw4r/ef/ef_drawstripestrategy.o \
 	build/asm/nw4r/ef/ef_drawsmoothstripestrategy.o \
+	build/asm/text_8002F700.o \
 	build/asm/nw4r/math/math_arithmetic.o \
+	build/asm/nw4r/math/math_triangular.o \
+	build/asm/nw4r/math/math_types.o \
+	build/asm/nw4r/math/math_geometry.o \
 	build/asm/text.o \
 
 CTORS_O_FILES := build/asm/ctors.o
