@@ -22,6 +22,7 @@ TEXT_O_FILES := \
 	build/asm/nw4r/ut/ut_DvdLockedFileStream.o \
 	build/asm/nw4r/ut/ut_NandFileStream.o \
 	build/asm/nw4r/ut/ut_LockedCache.o \
+	build/asm/nw4r/ut/ut_Font.o \
 	build/asm/nw4r/ut/ut_RomFont.o \
 	build/asm/nw4r/ut/ut_ResFontBase.o \
 	build/asm/nw4r/ut/ut_ResFont.o \
@@ -31,6 +32,36 @@ TEXT_O_FILES := \
 	build/asm/nw4r/ef/ef_draworder.o \
 	build/asm/nw4r/ef/ef_effect.o \
 	build/asm/nw4r/ef/ef_effectsystem.o \
+	build/asm/nw4r/ef/ef_emitter.o \
+	build/asm/nw4r/ef/ef_animcurve.o \
+	build/asm/nw4r/ef/ef_particle.o \
+	build/asm/nw4r/ef/ef_particlemanager.o \
+	build/asm/nw4r/ef/ef_resource.o \
+	build/asm/nw4r/ef/ef_util.o \
+	build/asm/nw4r/ef/ef_handle.o \
+	build/asm/nw4r/ef/ef_emitterform.o \
+	build/asm/nw4r/ef/ef_creationqueue.o \
+	build/asm/nw4r/ef/ef_emform.o \
+	build/asm/nw4r/ef/ef_point.o \
+	build/asm/nw4r/ef/ef_line.o \
+	build/asm/nw4r/ef/ef_disc.o \
+	build/asm/nw4r/ef/ef_sphere.o \
+	build/asm/nw4r/ef/ef_cylinder.o \
+	build/asm/nw4r/ef/ef_torus.o \
+	build/asm/nw4r/ef/ef_cube.o \
+	build/asm/nw4r/ef/ef_drawstrategybuilder.o \
+	build/asm/nw4r/ef/ef_drawstrategyimpl.o \
+	build/asm/nw4r/ef/ef_drawbillboardstrategy.o \
+	build/asm/nw4r/ef/ef_drawfreestrategy.o \
+	build/asm/nw4r/ef/ef_drawlinestrategy.o \
+	build/asm/nw4r/ef/ef_drawpointstrategy.o \
+	build/asm/nw4r/ef/ef_drawstripestrategy.o \
+	build/asm/nw4r/ef/ef_drawsmoothstripestrategy.o \
+	build/asm/text_8002F700.o \
+	build/asm/nw4r/math/math_arithmetic.o \
+	build/asm/nw4r/math/math_triangular.o \
+	build/asm/nw4r/math/math_types.o \
+	build/asm/nw4r/math/math_geometry.o \
 	build/asm/text.o \
 
 CTORS_O_FILES := build/asm/ctors.o
