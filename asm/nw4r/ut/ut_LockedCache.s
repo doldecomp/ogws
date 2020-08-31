@@ -1,12 +1,9 @@
 .include "macros.inc"
 
-# .text1 = .text
-
 .section .text, "ax"  # 0x800076E0 - 0x80355080
 
-# Enable__Q34nw4r2ut2LCFv
-.global func_80009A2C
-func_80009A2C:
+.global Enable__Q34nw4r2ut2LCFv
+Enable__Q34nw4r2ut2LCFv:
 /* 80009A2C 0000492C  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80009A30 00004930  7C 08 02 A6 */	mflr r0
 /* 80009A34 00004934  90 01 00 14 */	stw r0, 0x14(r1)
@@ -33,9 +30,8 @@ lbl_80009A6C:
 /* 80009A84 00004984  38 21 00 10 */	addi r1, r1, 0x10
 /* 80009A88 00004988  4E 80 00 20 */	blr 
 
-# Disable__Q34nw4r2ut2LCFv
-.global func_80009A8C
-func_80009A8C:
+.global Disable__Q34nw4r2ut2LCFv
+Disable__Q34nw4r2ut2LCFv:
 /* 80009A8C 0000498C  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80009A90 00004990  7C 08 02 A6 */	mflr r0
 /* 80009A94 00004994  90 01 00 14 */	stw r0, 0x14(r1)
@@ -70,9 +66,8 @@ lbl_80009AE4:
 /* 80009AFC 000049FC  38 21 00 10 */	addi r1, r1, 0x10
 /* 80009B00 00004A00  4E 80 00 20 */	blr 
 
-# Lock__Q34nw4r2ut2LCFv
-.global func_80009B04
-func_80009B04:
+.global Lock__Q34nw4r2ut2LCFv
+Lock__Q34nw4r2ut2LCFv:
 /* 80009B04 00004A04  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80009B08 00004A08  7C 08 02 A6 */	mflr r0
 /* 80009B0C 00004A0C  90 01 00 14 */	stw r0, 0x14(r1)
@@ -106,9 +101,8 @@ lbl_80009B5C:
 /* 80009B6C 00004A6C  38 21 00 10 */	addi r1, r1, 0x10
 /* 80009B70 00004A70  4E 80 00 20 */	blr 
 
-# Unlock__Q34nw4r2ut2LCFv
-.global func_80009B74
-func_80009B74:
+.global Unlock__Q34nw4r2ut2LCFv
+Unlock__Q34nw4r2ut2LCFv:
 /* 80009B74 00004A74  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80009B78 00004A78  7C 08 02 A6 */	mflr r0
 /* 80009B7C 00004A7C  90 01 00 14 */	stw r0, 0x14(r1)
@@ -128,24 +122,21 @@ lbl_80009B88:
 /* 80009BAC 00004AAC  38 21 00 10 */	addi r1, r1, 0x10
 /* 80009BB0 00004AB0  4E 80 00 20 */	blr 
 
-# LoadBlocks__Q34nw4r2ut2LCFPvPvUl
-.global func_80009BB4
-func_80009BB4:
+.global LoadBlocks__Q34nw4r2ut2LCFPvPvUl
+LoadBlocks__Q34nw4r2ut2LCFPvPvUl:
 /* 80009BB4 00004AB4  48 0E 47 E4 */	b func_800EE398
 
-# StoreBlocks__Q34nw4r2ut2LCFPvPvUl
-.global func_80009BB8
-func_80009BB8:
+.global StoreBlocks__Q34nw4r2ut2LCFPvPvUl
+StoreBlocks__Q34nw4r2ut2LCFPvPvUl:
 /* 80009BB8 00004AB8  48 0E 48 04 */	b func_800EE3BC
 
-# StoreData__Q34nw4r2ut2LCFPvPvUl
-.global func_80009BBC
-func_80009BBC:
+.global StoreData__Q34nw4r2ut2LCFPvPvUl
+StoreData__Q34nw4r2ut2LCFPvPvUl:
 /* 80009BBC 00004ABC  48 0E 48 24 */	b func_800EE3E0
 
 # __sinit_\ut_LockedCache_cpp 
-.global func_80009BC0
-func_80009BC0:
+.global __sinit_$$3ut_LockedCache_cpp
+__sinit_$$3ut_LockedCache_cpp:
 /* 80009BC0 00004AC0  3C 80 80 3D */	lis r4, lbl_803CAF18@ha
 /* 80009BC4 00004AC4  38 00 00 00 */	li r0, 0
 /* 80009BC8 00004AC8  38 64 AF 18 */	addi r3, r4, lbl_803CAF18@l
