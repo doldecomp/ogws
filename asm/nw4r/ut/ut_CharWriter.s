@@ -2,8 +2,8 @@
 
 .section .text, "ax"  # 0x800076E0 - 0x80355080
 
-.global func_8000ACC8
-func_8000ACC8:
+.global __ct__Q34nw4r2ut10CharWriterFv
+__ct__Q34nw4r2ut10CharWriterFv:
 /* 8000ACC8 00005BC8  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8000ACCC 00005BCC  7C 08 02 A6 */	mflr r0
 /* 8000ACD0 00005BD0  3C E0 80 3D */	lis r7, lbl_803CAF48@ha
@@ -34,7 +34,7 @@ func_8000ACC8:
 /* 8000AD34 00005C34  93 C6 00 04 */	stw r30, 4(r6)
 /* 8000AD38 00005C38  93 C1 00 08 */	stw r30, 8(r1)
 /* 8000AD3C 00005C3C  91 01 00 0C */	stw r8, 0xc(r1)
-/* 8000AD40 00005C40  48 00 01 A9 */	bl func_8000AEE8
+/* 8000AD40 00005C40  48 00 01 A9 */	bl SetColorMapping__Q34nw4r2ut10CharWriterFQ34nw4r2ut5ColorQ34nw4r2ut5Color
 /* 8000AD44 00005C44  88 BF 00 18 */	lbz r5, 0x18(r31)
 /* 8000AD48 00005C48  2C 1E 00 01 */	cmpwi r30, 1
 /* 8000AD4C 00005C4C  88 9F 00 19 */	lbz r4, 0x19(r31)
@@ -128,7 +128,7 @@ lbl_8000ADEC:
 /* 8000AE94 00005D94  7C A5 32 14 */	add r5, r5, r6
 /* 8000AE98 00005D98  98 BF 00 17 */	stb r5, 0x17(r31)
 /* 8000AE9C 00005D9C  90 01 00 10 */	stw r0, 0x10(r1)
-/* 8000AEA0 00005DA0  48 00 00 8D */	bl func_8000AF2C
+/* 8000AEA0 00005DA0  48 00 00 8D */	bl SetTextColor__Q34nw4r2ut10CharWriterFQ34nw4r2ut5Color
 /* 8000AEA4 00005DA4  C0 02 80 08 */	lfs f0, lbl_804BFA28-_SDA2_BASE_(r2)
 /* 8000AEA8 00005DA8  38 00 00 01 */	li r0, 1
 /* 8000AEAC 00005DAC  C0 22 80 0C */	lfs f1, lbl_804BFA2C-_SDA2_BASE_(r2)
@@ -147,8 +147,8 @@ lbl_8000ADEC:
 /* 8000AEE0 00005DE0  38 21 00 20 */	addi r1, r1, 0x20
 /* 8000AEE4 00005DE4  4E 80 00 20 */	blr 
 
-.global func_8000AEE8
-func_8000AEE8:
+.global SetColorMapping__Q34nw4r2ut10CharWriterFQ34nw4r2ut5ColorQ34nw4r2ut5Color
+SetColorMapping__Q34nw4r2ut10CharWriterFQ34nw4r2ut5ColorQ34nw4r2ut5Color:
 /* 8000AEE8 00005DE8  89 64 00 00 */	lbz r11, 0(r4)
 /* 8000AEEC 00005DEC  89 44 00 01 */	lbz r10, 1(r4)
 /* 8000AEF0 00005DF0  89 24 00 02 */	lbz r9, 2(r4)
@@ -167,8 +167,8 @@ func_8000AEE8:
 /* 8000AF24 00005E24  98 03 00 07 */	stb r0, 7(r3)
 /* 8000AF28 00005E28  4E 80 00 20 */	blr 
 
-.global func_8000AF2C
-func_8000AF2C:
+.global SetTextColor__Q34nw4r2ut10CharWriterFQ34nw4r2ut5Color
+SetTextColor__Q34nw4r2ut10CharWriterFQ34nw4r2ut5Color:
 /* 8000AF2C 00005E2C  80 03 00 20 */	lwz r0, 0x20(r3)
 /* 8000AF30 00005E30  88 E4 00 00 */	lbz r7, 0(r4)
 /* 8000AF34 00005E34  88 C4 00 01 */	lbz r6, 1(r4)
@@ -264,8 +264,8 @@ lbl_8000AFE4:
 /* 8000B084 00005F84  98 03 00 17 */	stb r0, 0x17(r3)
 /* 8000B088 00005F88  4E 80 00 20 */	blr 
 
-.global func_8000B08C
-func_8000B08C:
+.global __dt__Q34nw4r2ut10CharWriterFv
+__dt__Q34nw4r2ut10CharWriterFv:
 /* 8000B08C 00005F8C  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8000B090 00005F90  7C 08 02 A6 */	mflr r0
 /* 8000B094 00005F94  2C 03 00 00 */	cmpwi r3, 0
@@ -284,8 +284,8 @@ lbl_8000B0B4:
 /* 8000B0C4 00005FC4  38 21 00 10 */	addi r1, r1, 0x10
 /* 8000B0C8 00005FC8  4E 80 00 20 */	blr 
 
-.global func_8000B0CC
-func_8000B0CC:
+.global SetupGX__Q34nw4r2ut10CharWriterFv
+SetupGX__Q34nw4r2ut10CharWriterFv:
 /* 8000B0CC 00005FCC  94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 8000B0D0 00005FD0  7C 08 02 A6 */	mflr r0
 /* 8000B0D4 00005FD4  3C A0 80 3D */	lis r5, lbl_803CAF48@ha
@@ -322,7 +322,7 @@ lbl_8000B110:
 /* 8000B14C 0000604C  88 03 00 07 */	lbz r0, 7(r3)
 /* 8000B150 00006050  38 61 00 20 */	addi r3, r1, 0x20
 /* 8000B154 00006054  98 01 00 1F */	stb r0, 0x1f(r1)
-/* 8000B158 00006058  48 00 11 31 */	bl func_8000C288
+/* 8000B158 00006058  48 00 11 31 */	bl SetupGXWithColorMapping__Q34nw4r2ut10CharWriterFQ34nw4r2ut5ColorQ34nw4r2ut5Color
 /* 8000B15C 0000605C  48 00 09 B4 */	b lbl_8000BB10
 lbl_8000B160:
 /* 8000B160 00006060  80 63 00 48 */	lwz r3, 0x48(r3)
@@ -963,8 +963,8 @@ lbl_8000BB10:
 /* 8000BB1C 00006A1C  38 21 00 30 */	addi r1, r1, 0x30
 /* 8000BB20 00006A20  4E 80 00 20 */	blr 
 
-.global func_8000BB24
-func_8000BB24:
+.global SetFontSize__Q34nw4r2ut10CharWriterFff
+SetFontSize__Q34nw4r2ut10CharWriterFff:
 /* 8000BB24 00006A24  94 21 FF C0 */	stwu r1, -0x40(r1)
 /* 8000BB28 00006A28  7C 08 02 A6 */	mflr r0
 /* 8000BB2C 00006A2C  90 01 00 44 */	stw r0, 0x44(r1)
@@ -1015,8 +1015,8 @@ func_8000BB24:
 /* 8000BBE0 00006AE0  38 21 00 40 */	addi r1, r1, 0x40
 /* 8000BBE4 00006AE4  4E 80 00 20 */	blr 
 
-.global func_8000BBE8
-func_8000BBE8:
+.global GetFontWidth__Q34nw4r2ut10CharWriterCFv
+GetFontWidth__Q34nw4r2ut10CharWriterCFv:
 /* 8000BBE8 00006AE8  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8000BBEC 00006AEC  7C 08 02 A6 */	mflr r0
 /* 8000BBF0 00006AF0  90 01 00 24 */	stw r0, 0x24(r1)
@@ -1042,8 +1042,8 @@ func_8000BBE8:
 /* 8000BC40 00006B40  38 21 00 20 */	addi r1, r1, 0x20
 /* 8000BC44 00006B44  4E 80 00 20 */	blr 
 
-.global func_8000BC48
-func_8000BC48:
+.global GetFontHeight__Q34nw4r2ut10CharWriterCFv
+GetFontHeight__Q34nw4r2ut10CharWriterCFv:
 /* 8000BC48 00006B48  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8000BC4C 00006B4C  7C 08 02 A6 */	mflr r0
 /* 8000BC50 00006B50  90 01 00 24 */	stw r0, 0x24(r1)
@@ -1069,8 +1069,8 @@ func_8000BC48:
 /* 8000BCA0 00006BA0  38 21 00 20 */	addi r1, r1, 0x20
 /* 8000BCA4 00006BA4  4E 80 00 20 */	blr 
 
-.global func_8000BCA8
-func_8000BCA8:
+.global GetFontAscent__Q34nw4r2ut10CharWriterCFv
+GetFontAscent__Q34nw4r2ut10CharWriterCFv:
 /* 8000BCA8 00006BA8  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8000BCAC 00006BAC  7C 08 02 A6 */	mflr r0
 /* 8000BCB0 00006BB0  90 01 00 24 */	stw r0, 0x24(r1)
@@ -1096,8 +1096,8 @@ func_8000BCA8:
 /* 8000BD00 00006C00  38 21 00 20 */	addi r1, r1, 0x20
 /* 8000BD04 00006C04  4E 80 00 20 */	blr 
 
-.global func_8000BD08
-func_8000BD08:
+.global GetFontDescent__Q34nw4r2ut10CharWriterCFv
+GetFontDescent__Q34nw4r2ut10CharWriterCFv:
 /* 8000BD08 00006C08  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8000BD0C 00006C0C  7C 08 02 A6 */	mflr r0
 /* 8000BD10 00006C10  90 01 00 24 */	stw r0, 0x24(r1)
@@ -1123,8 +1123,8 @@ func_8000BD08:
 /* 8000BD60 00006C60  38 21 00 20 */	addi r1, r1, 0x20
 /* 8000BD64 00006C64  4E 80 00 20 */	blr 
 
-.global func_8000BD68
-func_8000BD68:
+.global EnableLinearFilter__Q34nw4r2ut10CharWriterFbb
+EnableLinearFilter__Q34nw4r2ut10CharWriterFbb:
 /* 8000BD68 00006C68  7C C4 00 D0 */	neg r6, r4
 /* 8000BD6C 00006C6C  7C 05 00 D0 */	neg r0, r5
 /* 8000BD70 00006C70  7C C4 23 78 */	or r4, r6, r4
@@ -1135,8 +1135,8 @@ func_8000BD68:
 /* 8000BD84 00006C84  90 03 00 3C */	stw r0, 0x3c(r3)
 /* 8000BD88 00006C88  4E 80 00 20 */	blr 
 
-.global func_8000BD8C
-func_8000BD8C:
+.global Print__Q34nw4r2ut10CharWriterFUs
+Print__Q34nw4r2ut10CharWriterFUs:
 /* 8000BD8C 00006C8C  94 21 FF B0 */	stwu r1, -0x50(r1)
 /* 8000BD90 00006C90  7C 08 02 A6 */	mflr r0
 /* 8000BD94 00006C94  90 01 00 54 */	stw r0, 0x54(r1)
@@ -1203,7 +1203,7 @@ lbl_8000BE74:
 /* 8000BE80 00006D80  38 81 00 08 */	addi r4, r1, 8
 /* 8000BE84 00006D84  EC 20 08 2A */	fadds f1, f0, f1
 /* 8000BE88 00006D88  C0 7F 00 34 */	lfs f3, 0x34(r31)
-/* 8000BE8C 00006D8C  48 00 00 31 */	bl func_8000BEBC
+/* 8000BE8C 00006D8C  48 00 00 31 */	bl PrintGlyph__Q34nw4r2ut10CharWriterFfffRCQ34nw4r2ut5Glyph
 /* 8000BE90 00006D90  C0 1F 00 2C */	lfs f0, 0x2c(r31)
 /* 8000BE94 00006D94  FC 20 F8 90 */	fmr f1, f31
 /* 8000BE98 00006D98  EC 00 F8 2A */	fadds f0, f0, f31
@@ -1216,8 +1216,8 @@ lbl_8000BE74:
 /* 8000BEB4 00006DB4  38 21 00 50 */	addi r1, r1, 0x50
 /* 8000BEB8 00006DB8  4E 80 00 20 */	blr 
 
-.global func_8000BEBC
-func_8000BEBC:
+.global PrintGlyph__Q34nw4r2ut10CharWriterFfffRCQ34nw4r2ut5Glyph
+PrintGlyph__Q34nw4r2ut10CharWriterFfffRCQ34nw4r2ut5Glyph:
 /* 8000BEBC 00006DBC  94 21 FF 50 */	stwu r1, -0xb0(r1)
 /* 8000BEC0 00006DC0  7C 08 02 A6 */	mflr r0
 /* 8000BEC4 00006DC4  90 01 00 B4 */	stw r0, 0xb4(r1)
@@ -1381,8 +1381,8 @@ lbl_8000C074:
 /* 8000C130 00007030  38 21 00 B0 */	addi r1, r1, 0xb0
 /* 8000C134 00007034  4E 80 00 20 */	blr 
 
-.global func_8000C138
-func_8000C138:
+.global UpdateVertexColor__Q34nw4r2ut10CharWriterFv
+UpdateVertexColor__Q34nw4r2ut10CharWriterFv:
 /* 8000C138 00007038  80 03 00 20 */	lwz r0, 0x20(r3)
 /* 8000C13C 0000703C  88 C3 00 18 */	lbz r6, 0x18(r3)
 /* 8000C140 00007040  88 A3 00 19 */	lbz r5, 0x19(r3)
@@ -1474,8 +1474,8 @@ lbl_8000C1E0:
 /* 8000C280 00007180  98 03 00 17 */	stb r0, 0x17(r3)
 /* 8000C284 00007184  4E 80 00 20 */	blr 
 
-.global func_8000C288
-func_8000C288:
+.global SetupGXWithColorMapping__Q34nw4r2ut10CharWriterFQ34nw4r2ut5ColorQ34nw4r2ut5Color
+SetupGXWithColorMapping__Q34nw4r2ut10CharWriterFQ34nw4r2ut5ColorQ34nw4r2ut5Color:
 /* 8000C288 00007188  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8000C28C 0000718C  7C 08 02 A6 */	mflr r0
 /* 8000C290 00007190  90 01 00 24 */	stw r0, 0x24(r1)
