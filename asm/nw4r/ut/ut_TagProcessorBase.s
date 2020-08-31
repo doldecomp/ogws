@@ -5,8 +5,8 @@
 # __ct__Q34nw4r2ut19TagProcessorBase<c>Fv
 .global __ct__Q34nw4r2ut19TagProcessorBase$$0c$$1Fv
 __ct__Q34nw4r2ut19TagProcessorBase$$0c$$1Fv:
-/* 80007C6C 00002B6C  3C 80 80 39 */	lis r4, lbl_80393A94@ha
-/* 80007C70 00002B70  38 84 3A 94 */	addi r4, r4, lbl_80393A94@l
+/* 80007C6C 00002B6C  3C 80 80 39 */	lis r4, __vt__Q34nw4r2ut19TagProcessorBase$$0c$$1@ha
+/* 80007C70 00002B70  38 84 3A 94 */	addi r4, r4, __vt__Q34nw4r2ut19TagProcessorBase$$0c$$1@l
 /* 80007C74 00002B74  90 83 00 00 */	stw r4, 0(r3)
 /* 80007C78 00002B78  4E 80 00 20 */	blr 
 
@@ -254,8 +254,8 @@ lbl_80007FAC:
 # __ct__Q34nw4r2ut19TagProcessorBase<w>Fv
 .global __ct__Q34nw4r2ut19TagProcessorBase$$0w$$1Fv
 __ct__Q34nw4r2ut19TagProcessorBase$$0w$$1Fv:
-/* 80007FD4 00002ED4  3C 80 80 39 */	lis r4, lbl_80393A80@ha
-/* 80007FD8 00002ED8  38 84 3A 80 */	addi r4, r4, lbl_80393A80@l
+/* 80007FD4 00002ED4  3C 80 80 39 */	lis r4, __vt__Q34nw4r2ut19TagProcessorBase$$0w$$1@ha
+/* 80007FD8 00002ED8  38 84 3A 80 */	addi r4, r4, __vt__Q34nw4r2ut19TagProcessorBase$$0w$$1@l
 /* 80007FDC 00002EDC  90 83 00 00 */	stw r4, 0(r3)
 /* 80007FE0 00002EE0  4E 80 00 20 */	blr 
 
