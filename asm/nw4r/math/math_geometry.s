@@ -797,7 +797,7 @@ lbl_80030D74:
 /* 80030D74 0002BC74  38 21 00 20 */	addi r1, r1, 0x20
 /* 80030D78 0002BC78  4E 80 00 20 */	blr 
 
-# I wanna say this is the FRUSTUM destructor but I'm not 100% sure
+# Unknown
 .global func_80030D7C
 func_80030D7C:
 /* 80030D7C 0002BC7C  94 21 FF F0 */	stwu r1, -0x10(r1)

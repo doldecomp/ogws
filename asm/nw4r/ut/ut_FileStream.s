@@ -1,23 +1,18 @@
 .include "macros.inc"
 
-# .text1 = .text
-
 .section .text, "ax"  # 0x800076E0 - 0x80355080
 
-# Cancel__Q34nw4r2ut10FileStreamFv
-.global func_8000837C
-func_8000837C:
+.global Cancel__Q34nw4r2ut10FileStreamFv
+Cancel__Q34nw4r2ut10FileStreamFv:
 /* 8000837C 0000327C  4E 80 00 20 */	blr 
 
-# CancelAsync__Q34nw4r2ut10FileStreamFPFlPQ34nw4r2ut8IOStreamPv_vPv
-.global func_80008380
-func_80008380:
+.global CancelAsync__Q34nw4r2ut10FileStreamFPFlPQ34nw4r2ut8IOStreamPv_vPv
+CancelAsync__Q34nw4r2ut10FileStreamFPFlPQ34nw4r2ut8IOStreamPv_vPv:
 /* 80008380 00003280  38 60 00 01 */	li r3, 1
 /* 80008384 00003284  4E 80 00 20 */	blr 
 
-# Skip__Q44nw4r2ut10FileStream12FilePositionFl
-.global func_80008388
-func_80008388:
+.global Skip__Q44nw4r2ut10FileStream12FilePositionFl
+Skip__Q44nw4r2ut10FileStream12FilePositionFl:
 /* 80008388 00003288  2C 04 00 00 */	cmpwi r4, 0
 /* 8000838C 0000328C  41 82 00 58 */	beq lbl_800083E4
 /* 80008390 00003290  80 03 00 04 */	lwz r0, 4(r3)
@@ -48,9 +43,8 @@ lbl_800083E4:
 /* 800083E4 000032E4  80 63 00 04 */	lwz r3, 4(r3)
 /* 800083E8 000032E8  4E 80 00 20 */	blr 
 
-# Append__Q44nw4r2ut10FileStream12FilePositionFl
-.global func_800083EC
-func_800083EC:
+.global Append__Q44nw4r2ut10FileStream12FilePositionFl
+Append__Q44nw4r2ut10FileStream12FilePositionFl:
 /* 800083EC 000032EC  80 A3 00 04 */	lwz r5, 4(r3)
 /* 800083F0 000032F0  38 C0 00 00 */	li r6, 0
 /* 800083F4 000032F4  6C C0 80 00 */	xoris r0, r6, 0x8000
@@ -75,9 +69,8 @@ lbl_80008434:
 /* 80008434 00003334  80 63 00 04 */	lwz r3, 4(r3)
 /* 80008438 00003338  4E 80 00 20 */	blr 
 
-# Seek__Q44nw4r2ut10FileStream12FilePositionFlUl
-.global func_8000843C
-func_8000843C:
+.global Seek__Q44nw4r2ut10FileStream12FilePositionFlUl
+Seek__Q44nw4r2ut10FileStream12FilePositionFlUl:
 /* 8000843C 0000333C  2C 05 00 01 */	cmpwi r5, 1
 /* 80008440 00003340  41 82 00 34 */	beq lbl_80008474
 /* 80008444 00003344  40 80 00 10 */	bge lbl_80008454
@@ -124,15 +117,14 @@ lbl_800084CC:
 /* 800084CC 000033CC  90 C3 00 04 */	stw r6, 4(r3)
 /* 800084D0 000033D0  4E 80 00 20 */	blr 
 
-# GetRuntimeTypeInfo__Q34nw4r2ut10FileStreamCFv
-.global func_800084D4
-func_800084D4:
+.global GetRuntimeTypeInfo__Q34nw4r2ut10FileStreamCFv
+GetRuntimeTypeInfo__Q34nw4r2ut10FileStreamCFv:
 /* 800084D4 000033D4  38 6D 96 68 */	addi r3, r13, lbl_804BE9E8-_SDA_BASE_
 /* 800084D8 000033D8  4E 80 00 20 */	blr 
 
 # __sinit_\ut_FileStream_cpp
-.global func_800084DC
-func_800084DC:
+.global __sinit_$$3ut_FileStream_cpp
+__sinit_$$3ut_FileStream_cpp:
 /* 800084DC 000033DC  38 0D 96 60 */	addi r0, r13, lbl_804BE9E0-_SDA_BASE_
 /* 800084E0 000033E0  90 0D 96 68 */	stw r0, lbl_804BE9E8-_SDA_BASE_(r13)
 /* 800084E4 000033E4  4E 80 00 20 */	blr 

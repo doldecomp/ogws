@@ -1,12 +1,9 @@
 .include "macros.inc"
 
-# .text1 = .text
-
 .section .text, "ax"  # 0x800076E0 - 0x80355080
 
-# NandAsyncCallback___Q34nw4r2ut14NandFileStreamFlP16NANDCommandBlock
-.global func_80008D54
-func_80008D54:
+.global NandAsyncCallback___Q34nw4r2ut14NandFileStreamFlP16NANDCommandBlock
+NandAsyncCallback___Q34nw4r2ut14NandFileStreamFlP16NANDCommandBlock:
 /* 80008D54 00003C54  80 84 01 44 */	lwz r4, 0x144(r4)
 /* 80008D58 00003C58  38 00 00 00 */	li r0, 0
 /* 80008D5C 00003C5C  98 04 01 66 */	stb r0, 0x166(r4)
@@ -19,9 +16,8 @@ func_80008D54:
 /* 80008D78 00003C78  4E 80 04 20 */	bctr 
 /* 80008D7C 00003C7C  4E 80 00 20 */	blr 
 
-# __ct__Q34nw4r2ut14NandFileStreamFPCcUl
-.global func_80008D80
-func_80008D80:
+.global __ct__Q34nw4r2ut14NandFileStreamFPCcUl
+__ct__Q34nw4r2ut14NandFileStreamFPCcUl:
 /* 80008D80 00003C80  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80008D84 00003C84  7C 08 02 A6 */	mflr r0
 /* 80008D88 00003C88  3C C0 80 39 */	lis r6, lbl_80393B78@ha
@@ -43,7 +39,7 @@ func_80008D80:
 /* 80008DC8 00003CC8  90 03 00 10 */	stw r0, 0x10(r3)
 /* 80008DCC 00003CCC  90 03 00 08 */	stw r0, 8(r3)
 /* 80008DD0 00003CD0  90 63 01 60 */	stw r3, 0x160(r3)
-/* 80008DD4 00003CD4  48 00 01 05 */	bl func_80008ED8
+/* 80008DD4 00003CD4  48 00 01 05 */	bl Open__Q34nw4r2ut14NandFileStreamFPCcUl
 /* 80008DD8 00003CD8  7F E3 FB 78 */	mr r3, r31
 /* 80008DDC 00003CDC  83 E1 00 0C */	lwz r31, 0xc(r1)
 /* 80008DE0 00003CE0  80 01 00 14 */	lwz r0, 0x14(r1)
@@ -51,9 +47,8 @@ func_80008D80:
 /* 80008DE8 00003CE8  38 21 00 10 */	addi r1, r1, 0x10
 /* 80008DEC 00003CEC  4E 80 00 20 */	blr 
 
-# __ct__Q34nw4r2ut14NandFileStreamFPC12NANDFileInfoUlb
-.global func_80008DF0
-func_80008DF0:
+.global __ct__Q34nw4r2ut14NandFileStreamFPC12NANDFileInfoUlb
+__ct__Q34nw4r2ut14NandFileStreamFPC12NANDFileInfoUlb:
 /* 80008DF0 00003CF0  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80008DF4 00003CF4  7C 08 02 A6 */	mflr r0
 /* 80008DF8 00003CF8  3C E0 80 39 */	lis r7, lbl_80393B78@ha
@@ -75,7 +70,7 @@ func_80008DF0:
 /* 80008E38 00003D38  90 03 00 10 */	stw r0, 0x10(r3)
 /* 80008E3C 00003D3C  90 03 00 08 */	stw r0, 8(r3)
 /* 80008E40 00003D40  90 63 01 60 */	stw r3, 0x160(r3)
-/* 80008E44 00003D44  48 00 01 7D */	bl func_80008FC0
+/* 80008E44 00003D44  48 00 01 7D */	bl Open__Q34nw4r2ut14NandFileStreamFPC12NANDFileInfoUlb
 /* 80008E48 00003D48  7F E3 FB 78 */	mr r3, r31
 /* 80008E4C 00003D4C  83 E1 00 0C */	lwz r31, 0xc(r1)
 /* 80008E50 00003D50  80 01 00 14 */	lwz r0, 0x14(r1)
@@ -83,9 +78,8 @@ func_80008DF0:
 /* 80008E58 00003D58  38 21 00 10 */	addi r1, r1, 0x10
 /* 80008E5C 00003D5C  4E 80 00 20 */	blr 
 
-# __dt__Q34nw4r2ut14NandFileStreamFv
-.global func_80008E60
-func_80008E60:
+.global __dt__Q34nw4r2ut14NandFileStreamFv
+__dt__Q34nw4r2ut14NandFileStreamFv:
 /* 80008E60 00003D60  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80008E64 00003D64  7C 08 02 A6 */	mflr r0
 /* 80008E68 00003D68  2C 03 00 00 */	cmpwi r3, 0
@@ -119,9 +113,8 @@ lbl_80008EBC:
 /* 80008ED0 00003DD0  38 21 00 10 */	addi r1, r1, 0x10
 /* 80008ED4 00003DD4  4E 80 00 20 */	blr 
 
-# Open__Q34nw4r2ut14NandFileStreamFPCcUl
-.global func_80008ED8
-func_80008ED8:
+.global Open__Q34nw4r2ut14NandFileStreamFPCcUl
+Open__Q34nw4r2ut14NandFileStreamFPCcUl:
 /* 80008ED8 00003DD8  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 80008EDC 00003DDC  7C 08 02 A6 */	mflr r0
 /* 80008EE0 00003DE0  90 01 00 24 */	stw r0, 0x24(r1)
@@ -171,7 +164,7 @@ lbl_80008F80:
 /* 80008F80 00003E80  38 7D 00 14 */	addi r3, r29, 0x14
 /* 80008F84 00003E84  38 80 00 00 */	li r4, 0
 /* 80008F88 00003E88  38 A0 00 00 */	li r5, 0
-/* 80008F8C 00003E8C  4B FF F4 B1 */	bl func_8000843C
+/* 80008F8C 00003E8C  4B FF F4 B1 */	bl Seek__Q44nw4r2ut10FileStream12FilePositionFlUl
 /* 80008F90 00003E90  38 00 00 01 */	li r0, 1
 /* 80008F94 00003E94  38 60 00 01 */	li r3, 1
 /* 80008F98 00003E98  98 1D 01 67 */	stb r0, 0x167(r29)
@@ -186,9 +179,8 @@ lbl_80008FA4:
 /* 80008FB8 00003EB8  38 21 00 20 */	addi r1, r1, 0x20
 /* 80008FBC 00003EBC  4E 80 00 20 */	blr 
 
-# Open__Q34nw4r2ut14NandFileStreamFPC12NANDFileInfoUlb
-.global func_80008FC0
-func_80008FC0:
+.global Open__Q34nw4r2ut14NandFileStreamFPC12NANDFileInfoUlb
+Open__Q34nw4r2ut14NandFileStreamFPC12NANDFileInfoUlb:
 /* 80008FC0 00003EC0  94 21 FE 60 */	stwu r1, -0x1a0(r1)
 /* 80008FC4 00003EC4  7C 08 02 A6 */	mflr r0
 /* 80008FC8 00003EC8  90 01 01 A4 */	stw r0, 0x1a4(r1)
@@ -655,7 +647,7 @@ lbl_800096E8:
 /* 800096F0 000045F0  38 80 00 00 */	li r4, 0
 /* 800096F4 000045F4  38 A0 00 00 */	li r5, 0
 /* 800096F8 000045F8  90 1E 00 14 */	stw r0, 0x14(r30)
-/* 800096FC 000045FC  4B FF ED 41 */	bl func_8000843C
+/* 800096FC 000045FC  4B FF ED 41 */	bl Seek__Q44nw4r2ut10FileStream12FilePositionFlUl
 /* 80009700 00004600  38 00 00 00 */	li r0, 0
 /* 80009704 00004604  38 80 00 01 */	li r4, 1
 /* 80009708 00004608  98 1E 01 67 */	stb r0, 0x167(r30)
@@ -671,9 +663,8 @@ lbl_8000971C:
 /* 8000972C 0000462C  38 21 01 A0 */	addi r1, r1, 0x1a0
 /* 80009730 00004630  4E 80 00 20 */	blr 
 
-# Close__Q34nw4r2ut14NandFileStreamFv
-.global func_80009734
-func_80009734:
+.global Close__Q34nw4r2ut14NandFileStreamFv
+Close__Q34nw4r2ut14NandFileStreamFv:
 /* 80009734 00004634  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80009738 00004638  7C 08 02 A6 */	mflr r0
 /* 8000973C 0000463C  90 01 00 14 */	stw r0, 0x14(r1)
@@ -696,9 +687,8 @@ lbl_80009770:
 /* 8000977C 0000467C  38 21 00 10 */	addi r1, r1, 0x10
 /* 80009780 00004680  4E 80 00 20 */	blr 
 
-# Read__Q34nw4r2ut14NandFileStreamFPvUl
-.global func_80009784
-func_80009784:
+.global Read__Q34nw4r2ut14NandFileStreamFPvUl
+Read__Q34nw4r2ut14NandFileStreamFPvUl:
 /* 80009784 00004684  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 80009788 00004688  7C 08 02 A6 */	mflr r0
 /* 8000978C 0000468C  90 01 00 24 */	stw r0, 0x24(r1)
@@ -721,7 +711,7 @@ func_80009784:
 /* 800097D0 000046D0  40 81 00 10 */	ble lbl_800097E0
 /* 800097D4 000046D4  7F E4 FB 78 */	mr r4, r31
 /* 800097D8 000046D8  38 7D 00 14 */	addi r3, r29, 0x14
-/* 800097DC 000046DC  4B FF EB AD */	bl func_80008388
+/* 800097DC 000046DC  4B FF EB AD */	bl Skip__Q44nw4r2ut10FileStream12FilePositionFl
 lbl_800097E0:
 /* 800097E0 000046E0  7F E3 FB 78 */	mr r3, r31
 /* 800097E4 000046E4  83 E1 00 1C */	lwz r31, 0x1c(r1)
@@ -732,9 +722,8 @@ lbl_800097E0:
 /* 800097F8 000046F8  38 21 00 20 */	addi r1, r1, 0x20
 /* 800097FC 000046FC  4E 80 00 20 */	blr 
 
-# ReadAsync__Q34nw4r2ut14NandFileStreamFPvUlPFlPQ34nw4r2ut8IOStreamPv_vPv
-.global func_80009800
-func_80009800:
+.global ReadAsync__Q34nw4r2ut14NandFileStreamFPvUlPFlPQ34nw4r2ut8IOStreamPv_vPv
+ReadAsync__Q34nw4r2ut14NandFileStreamFPvUlPFlPQ34nw4r2ut8IOStreamPv_vPv:
 /* 80009800 00004700  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 80009804 00004704  7C 08 02 A6 */	mflr r0
 /* 80009808 00004708  90 01 00 24 */	stw r0, 0x24(r1)
@@ -752,11 +741,11 @@ func_80009800:
 /* 80009838 00004738  98 03 01 66 */	stb r0, 0x166(r3)
 /* 8000983C 0000473C  38 63 00 D4 */	addi r3, r3, 0xd4
 /* 80009840 00004740  48 0D F9 21 */	bl func_800E9160
-/* 80009844 00004744  3C C0 80 01 */	lis r6, func_80008D54@ha
+/* 80009844 00004744  3C C0 80 01 */	lis r6, NandAsyncCallback___Q34nw4r2ut14NandFileStreamFlP16NANDCommandBlock@ha
 /* 80009848 00004748  7F E4 FB 78 */	mr r4, r31
 /* 8000984C 0000474C  7F C5 F3 78 */	mr r5, r30
 /* 80009850 00004750  38 7D 00 D4 */	addi r3, r29, 0xd4
-/* 80009854 00004754  38 C6 8D 54 */	addi r6, r6, func_80008D54@l
+/* 80009854 00004754  38 C6 8D 54 */	addi r6, r6, NandAsyncCallback___Q34nw4r2ut14NandFileStreamFlP16NANDCommandBlock@l
 /* 80009858 00004758  38 FD 00 1C */	addi r7, r29, 0x1c
 /* 8000985C 0000475C  48 0D F7 AD */	bl func_800E9008
 /* 80009860 00004760  7C 60 00 34 */	cntlzw r0, r3
@@ -764,7 +753,7 @@ func_80009800:
 /* 80009868 00004768  41 82 00 14 */	beq lbl_8000987C
 /* 8000986C 0000476C  7F C4 F3 78 */	mr r4, r30
 /* 80009870 00004770  38 7D 00 14 */	addi r3, r29, 0x14
-/* 80009874 00004774  4B FF EB 15 */	bl func_80008388
+/* 80009874 00004774  4B FF EB 15 */	bl Skip__Q44nw4r2ut10FileStream12FilePositionFl
 /* 80009878 00004778  48 00 00 0C */	b lbl_80009884
 lbl_8000987C:
 /* 8000987C 0000477C  38 00 00 00 */	li r0, 0
@@ -779,9 +768,8 @@ lbl_80009884:
 /* 8000989C 0000479C  38 21 00 20 */	addi r1, r1, 0x20
 /* 800098A0 000047A0  4E 80 00 20 */	blr 
 
-# Write__Q34nw4r2ut14NandFileStreamFPCvUl
-.global func_800098A4
-func_800098A4:
+.global Write__Q34nw4r2ut14NandFileStreamFPCvUl
+Write__Q34nw4r2ut14NandFileStreamFPCvUl:
 /* 800098A4 000047A4  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 800098A8 000047A8  7C 08 02 A6 */	mflr r0
 /* 800098AC 000047AC  90 01 00 24 */	stw r0, 0x24(r1)
@@ -801,7 +789,7 @@ func_800098A4:
 /* 800098E4 000047E4  48 0D F7 9D */	bl func_800E9080
 /* 800098E8 000047E8  7C 64 1B 78 */	mr r4, r3
 /* 800098EC 000047EC  38 7D 00 14 */	addi r3, r29, 0x14
-/* 800098F0 000047F0  4B FF EA FD */	bl func_800083EC
+/* 800098F0 000047F0  4B FF EA FD */	bl Append__Q44nw4r2ut10FileStream12FilePositionFl
 /* 800098F4 000047F4  80 01 00 24 */	lwz r0, 0x24(r1)
 /* 800098F8 000047F8  83 E1 00 1C */	lwz r31, 0x1c(r1)
 /* 800098FC 000047FC  83 C1 00 18 */	lwz r30, 0x18(r1)
@@ -810,9 +798,8 @@ func_800098A4:
 /* 80009908 00004808  38 21 00 20 */	addi r1, r1, 0x20
 /* 8000990C 0000480C  4E 80 00 20 */	blr 
 
-# WriteAsync__Q34nw4r2ut14NandFileStreamFPCvUlPFlPQ34nw4r2ut8IOStreamPv_vPv
-.global func_80009910
-func_80009910:
+.global WriteAsync__Q34nw4r2ut14NandFileStreamFPCvUlPFlPQ34nw4r2ut8IOStreamPv_vPv
+WriteAsync__Q34nw4r2ut14NandFileStreamFPCvUlPFlPQ34nw4r2ut8IOStreamPv_vPv:
 /* 80009910 00004810  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 80009914 00004814  7C 08 02 A6 */	mflr r0
 /* 80009918 00004818  90 01 00 24 */	stw r0, 0x24(r1)
@@ -830,11 +817,11 @@ func_80009910:
 /* 80009948 00004848  98 03 01 66 */	stb r0, 0x166(r3)
 /* 8000994C 0000484C  38 63 00 D4 */	addi r3, r3, 0xd4
 /* 80009950 00004850  48 0D F8 11 */	bl func_800E9160
-/* 80009954 00004854  3C C0 80 01 */	lis r6, func_80008D54@ha
+/* 80009954 00004854  3C C0 80 01 */	lis r6, NandAsyncCallback___Q34nw4r2ut14NandFileStreamFlP16NANDCommandBlock@ha
 /* 80009958 00004858  7F E4 FB 78 */	mr r4, r31
 /* 8000995C 0000485C  7F C5 F3 78 */	mr r5, r30
 /* 80009960 00004860  38 7D 00 D4 */	addi r3, r29, 0xd4
-/* 80009964 00004864  38 C6 8D 54 */	addi r6, r6, func_80008D54@l
+/* 80009964 00004864  38 C6 8D 54 */	addi r6, r6, NandAsyncCallback___Q34nw4r2ut14NandFileStreamFlP16NANDCommandBlock@l
 /* 80009968 00004868  38 FD 00 1C */	addi r7, r29, 0x1c
 /* 8000996C 0000486C  48 0D F7 7D */	bl func_800E90E8
 /* 80009970 00004870  2C 03 00 00 */	cmpwi r3, 0
@@ -842,7 +829,7 @@ func_80009910:
 /* 80009978 00004878  40 82 00 14 */	bne lbl_8000998C
 /* 8000997C 0000487C  7F C4 F3 78 */	mr r4, r30
 /* 80009980 00004880  38 7D 00 14 */	addi r3, r29, 0x14
-/* 80009984 00004884  4B FF EA 69 */	bl func_800083EC
+/* 80009984 00004884  4B FF EA 69 */	bl Append__Q44nw4r2ut10FileStream12FilePositionFl
 /* 80009988 00004888  48 00 00 0C */	b lbl_80009994
 lbl_8000998C:
 /* 8000998C 0000488C  38 00 00 00 */	li r0, 0
@@ -858,87 +845,74 @@ lbl_80009994:
 /* 800099B0 000048B0  38 21 00 20 */	addi r1, r1, 0x20
 /* 800099B4 000048B4  4E 80 00 20 */	blr 
 
-# Seek__Q34nw4r2ut14NandFileStreamFlUl
-.global func_800099B8
-func_800099B8:
+.global Seek__Q34nw4r2ut14NandFileStreamFlUl
+Seek__Q34nw4r2ut14NandFileStreamFlUl:
 /* 800099B8 000048B8  38 63 00 14 */	addi r3, r3, 0x14
-/* 800099BC 000048BC  4B FF EA 80 */	b func_8000843C
+/* 800099BC 000048BC  4B FF EA 80 */	b Seek__Q44nw4r2ut10FileStream12FilePositionFlUl
 
-# GetBufferAlign__Q34nw4r2ut14NandFileStreamCFv
-.global func_800099C0
-func_800099C0:
+.global GetBufferAlign__Q34nw4r2ut14NandFileStreamCFv
+GetBufferAlign__Q34nw4r2ut14NandFileStreamCFv:
 /* 800099C0 000048C0  38 60 00 20 */	li r3, 0x20
 /* 800099C4 000048C4  4E 80 00 20 */	blr 
 
-# GetSizeAlign__Q34nw4r2ut14NandFileStreamCFv
-.global func_800099C8
-func_800099C8:
+.global GetSizeAlign__Q34nw4r2ut14NandFileStreamCFv
+GetSizeAlign__Q34nw4r2ut14NandFileStreamCFv:
 /* 800099C8 000048C8  38 60 00 20 */	li r3, 0x20
 /* 800099CC 000048CC  4E 80 00 20 */	blr 
 
-# GetOffsetAlign__Q34nw4r2ut14NandFileStreamCFv
-.global func_800099D0
-func_800099D0:
+.global GetOffsetAlign__Q34nw4r2ut14NandFileStreamCFv
+GetOffsetAlign__Q34nw4r2ut14NandFileStreamCFv:
 /* 800099D0 000048D0  38 60 00 01 */	li r3, 1
 /* 800099D4 000048D4  4E 80 00 20 */	blr 
 
-# CanCancel__Q34nw4r2ut14NandFileStreamCFv
-.global func_800099D8
-func_800099D8:
+.global CanCancel__Q34nw4r2ut14NandFileStreamCFv
+CanCancel__Q34nw4r2ut14NandFileStreamCFv:
 /* 800099D8 000048D8  38 60 00 00 */	li r3, 0
 /* 800099DC 000048DC  4E 80 00 20 */	blr 
 
-# CanWrite__Q34nw4r2ut14NandFileStreamCFv
-.global func_800099E0
-func_800099E0:
+.global CanWrite__Q34nw4r2ut14NandFileStreamCFv
+CanWrite__Q34nw4r2ut14NandFileStreamCFv:
 /* 800099E0 000048E0  88 63 01 65 */	lbz r3, 0x165(r3)
 /* 800099E4 000048E4  4E 80 00 20 */	blr 
 
-# CanRead__Q34nw4r2ut14NandFileStreamCFv
-.global func_800099E8
-func_800099E8:
+.global CanRead__Q34nw4r2ut14NandFileStreamCFv
+CanRead__Q34nw4r2ut14NandFileStreamCFv:
 /* 800099E8 000048E8  88 63 01 64 */	lbz r3, 0x164(r3)
 /* 800099EC 000048EC  4E 80 00 20 */	blr 
 
-# CanSeek__Q34nw4r2ut14NandFileStreamCFv
-.global func_800099F0
-func_800099F0:
+.global CanSeek__Q34nw4r2ut14NandFileStreamCFv
+CanSeek__Q34nw4r2ut14NandFileStreamCFv:
 /* 800099F0 000048F0  38 60 00 01 */	li r3, 1
 /* 800099F4 000048F4  4E 80 00 20 */	blr 
 
-# CanAsync__Q34nw4r2ut14NandFileStreamCFv
-.global func_800099F8
-func_800099F8:
+.global CanAsync__Q34nw4r2ut14NandFileStreamCFv
+CanAsync__Q34nw4r2ut14NandFileStreamCFv:
 /* 800099F8 000048F8  38 60 00 01 */	li r3, 1
 /* 800099FC 000048FC  4E 80 00 20 */	blr 
 
-# GetSize__Q34nw4r2ut14NandFileStreamCFv
-.global func_80009A00
-func_80009A00:
+.global GetSize__Q34nw4r2ut14NandFileStreamCFv
+GetSize__Q34nw4r2ut14NandFileStreamCFv:
 /* 80009A00 00004900  80 63 00 14 */	lwz r3, 0x14(r3)
 /* 80009A04 00004904  4E 80 00 20 */	blr 
 
-# Tell__Q34nw4r2ut14NandFileStreamCFv
-.global func_80009A08
-func_80009A08:
+.global Tell__Q34nw4r2ut14NandFileStreamCFv
+Tell__Q34nw4r2ut14NandFileStreamCFv:
 /* 80009A08 00004908  80 63 00 18 */	lwz r3, 0x18(r3)
 /* 80009A0C 0000490C  4E 80 00 20 */	blr 
 
-# IsBusy__Q34nw4r2ut14NandFileStreamCFv
-.global func_80009A10
-func_80009A10:
+.global IsBusy__Q34nw4r2ut14NandFileStreamCFv
+IsBusy__Q34nw4r2ut14NandFileStreamCFv:
 /* 80009A10 00004910  88 63 01 66 */	lbz r3, 0x166(r3)
 /* 80009A14 00004914  4E 80 00 20 */	blr 
 
-# GetRuntimeTypeInfo__Q34nw4r2ut14NandFileStreamCFv
-.global func_80009A18
-func_80009A18:
+.global GetRuntimeTypeInfo__Q34nw4r2ut14NandFileStreamCFv
+GetRuntimeTypeInfo__Q34nw4r2ut14NandFileStreamCFv:
 /* 80009A18 00004918  38 6D 96 80 */	addi r3, r13, lbl_804BEA00-_SDA_BASE_
 /* 80009A1C 0000491C  4E 80 00 20 */	blr 
 
 # __sinit_\ut_NandFileStream_cpp 
-.global func_80009A20
-func_80009A20:
+.global __sinit_$$3ut_NandFileStream_cpp
+__sinit_$$3ut_NandFileStream_cpp:
 /* 80009A20 00004920  38 0D 96 68 */	addi r0, r13, lbl_804BE9E8-_SDA_BASE_
 /* 80009A24 00004924  90 0D 96 80 */	stw r0, lbl_804BEA00-_SDA_BASE_(r13)
 /* 80009A28 00004928  4E 80 00 20 */	blr 
