@@ -1,12 +1,9 @@
 .include "macros.inc"
 
-# .text1 = .text
-
 .section .text, "ax"  # 0x800076E0 - 0x80355080 
 
-# Unknown
-.global func_8002FCDC
-func_8002FCDC:
+.global VEC3Maximize__Q24nw4r4mathFPQ34nw4r4math4VEC3PCQ34nw4r4math4VEC3PCQ34nw4r4math4VEC3
+VEC3Maximize__Q24nw4r4mathFPQ34nw4r4math4VEC3PCQ34nw4r4math4VEC3PCQ34nw4r4math4VEC3:
 /* 8002FCDC 0002ABDC  C0 04 00 00 */	lfs f0, 0(r4)
 /* 8002FCE0 0002ABE0  C0 25 00 00 */	lfs f1, 0(r5)
 /* 8002FCE4 0002ABE4  EC 40 08 28 */	fsubs f2, f0, f1
@@ -24,9 +21,8 @@ func_8002FCDC:
 /* 8002FD14 0002AC14  D0 63 00 08 */	stfs f3, 8(r3)
 /* 8002FD18 0002AC18  4E 80 00 20 */	blr 
 
-# Unknown
-.global func_8002FD1C
-func_8002FD1C:
+.global VEC3Minimize__Q24nw4r4mathFPQ34nw4r4math4VEC3PCQ34nw4r4math4VEC3PCQ34nw4r4math4VEC3
+VEC3Minimize__Q24nw4r4mathFPQ34nw4r4math4VEC3PCQ34nw4r4math4VEC3PCQ34nw4r4math4VEC3:
 /* 8002FD1C 0002AC1C  C0 04 00 00 */	lfs f0, 0(r4)
 /* 8002FD20 0002AC20  C0 25 00 00 */	lfs f1, 0(r5)
 /* 8002FD24 0002AC24  EC 41 00 28 */	fsubs f2, f1, f0
@@ -44,9 +40,8 @@ func_8002FD1C:
 /* 8002FD54 0002AC54  D0 63 00 08 */	stfs f3, 8(r3)
 /* 8002FD58 0002AC58  4E 80 00 20 */	blr 
 
-# Unknown
-.global func_8002FD5C
-func_8002FD5C:
+.global MTX33Identity__Q24nw4r4mathFPQ34nw4r4math5MTX33
+MTX33Identity__Q24nw4r4mathFPQ34nw4r4math5MTX33:
 /* 8002FD5C 0002AC5C  C0 02 84 D0 */	lfs f0, lbl_804BFEF0-_SDA2_BASE_(r2)
 /* 8002FD60 0002AC60  C0 22 84 D4 */	lfs f1, lbl_804BFEF4-_SDA2_BASE_(r2)
 /* 8002FD64 0002AC64  F0 03 00 08 */	psq_st f0, 8(r3), 0, qr0
