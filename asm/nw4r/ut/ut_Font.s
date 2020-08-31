@@ -2,8 +2,8 @@
 
 .section .text, "ax"  # 0x800076E0 - 0x80355080
 
-.global func_80009BD8
-func_80009BD8:
+.global InitReaderFunc__Q34nw4r2ut4FontFQ34nw4r2ut12FontEncoding
+InitReaderFunc__Q34nw4r2ut4FontFQ34nw4r2ut12FontEncoding:
 /* 80009BD8 00004AD8  2C 04 00 02 */	cmpwi r4, 2
 /* 80009BDC 00004ADC  3C A0 80 39 */	lis r5, lbl_80393BD8@ha
 /* 80009BE0 00004AE0  38 A5 3B D8 */	addi r5, r5, lbl_80393BD8@l
