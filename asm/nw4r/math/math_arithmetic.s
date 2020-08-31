@@ -4,8 +4,8 @@
 
 .section .text, "ax"  # 0x800076E0 - 0x80355080
 
-.global func_8002F75C
-func_8002F75C:
+.global FExp__Q34nw4r4math6detailFf
+FExp__Q34nw4r4math6detailFf:
 /* 8002F75C 0002A65C  C0 02 84 88 */	lfs f0, lbl_804BFEA8-_SDA2_BASE_(r2)
 /* 8002F760 0002A660  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8002F764 0002A664  EC 00 00 72 */	fmuls f0, f0, f1
@@ -42,8 +42,8 @@ func_8002F75C:
 /* 8002F7E0 0002A6E0  38 21 00 20 */	addi r1, r1, 0x20
 /* 8002F7E4 0002A6E4  4E 80 00 20 */	blr 
 
-.global func_8002F7E8
-func_8002F7E8:
+.global FLog__Q34nw4r4math6detailFf
+FLog__Q34nw4r4math6detailFf:
 /* 8002F7E8 0002A6E8  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8002F7EC 0002A6EC  D0 21 00 18 */	stfs f1, 0x18(r1)
 /* 8002F7F0 0002A6F0  D0 21 00 10 */	stfs f1, 0x10(r1)
@@ -80,8 +80,8 @@ func_8002F7E8:
 /* 8002F86C 0002A76C  38 21 00 20 */	addi r1, r1, 0x20
 /* 8002F870 0002A770  4E 80 00 20 */	blr 
 
-.global func_8002F874
-func_8002F874:
+.global FrSqrt__Q24nw4r4mathFf
+FrSqrt__Q24nw4r4mathFf:
 /* 8002F874 0002A774  FC 00 08 34 */	frsqrte f0, f1
 /* 8002F878 0002A778  C0 42 84 9C */	lfs f2, lbl_804BFEBC-_SDA2_BASE_(r2)
 /* 8002F87C 0002A77C  C0 62 84 A0 */	lfs f3, lbl_804BFEC0-_SDA2_BASE_(r2)
