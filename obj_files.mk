@@ -68,11 +68,11 @@ CTORS_O_FILES := build/asm/ctors.o
 
 DTORS_O_FILES := build/asm/dtors.o
 
-RODATA_O_FILES := build/asm/rodata.o
+RODATA_O_FILES := build/asm/file.o
 
-DATA_O_FILES := build/asm/data.o
+DATA_O_FILES := build/asm/rodata.o
 
-DATA6_O_FILES := build/asm/data6.o
+DATA6_O_FILES := build/asm/data.o
 
 BSS_O_FILES := build/asm/bss.o
 
