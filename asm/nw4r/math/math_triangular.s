@@ -4,8 +4,8 @@
 
 .section .text, "ax"  # 0x800076E0 - 0x80355080 
 
-.global func_8002F898
-func_8002F898:
+.global SinFIdx__Q24nw4r4mathFf
+SinFIdx__Q24nw4r4mathFf:
 /* 8002F898 0002A798  FC 60 0A 10 */	fabs f3, f1
 /* 8002F89C 0002A79C  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8002F8A0 0002A7A0  C0 02 84 A8 */	lfs f0, lbl_804BFEC8-_SDA2_BASE_(r2)
@@ -37,8 +37,8 @@ lbl_8002F8FC:
 /* 8002F8FC 0002A7FC  38 21 00 10 */	addi r1, r1, 0x10
 /* 8002F900 0002A800  4E 80 00 20 */	blr 
 
-.global func_8002F904
-func_8002F904:
+.global CosFIdx__Q24nw4r4mathFf
+CosFIdx__Q24nw4r4mathFf:
 /* 8002F904 0002A804  FC 20 0A 10 */	fabs f1, f1
 /* 8002F908 0002A808  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8002F90C 0002A80C  C0 02 84 A8 */	lfs f0, lbl_804BFEC8-_SDA2_BASE_(r2)
@@ -65,8 +65,8 @@ lbl_8002F918:
 /* 8002F958 0002A858  38 21 00 10 */	addi r1, r1, 0x10
 /* 8002F95C 0002A85C  4E 80 00 20 */	blr 
 
-.global func_8002F960
-func_8002F960:
+.global SinCosFIdx__Q24nw4r4mathFPfPff
+SinCosFIdx__Q24nw4r4mathFPfPff:
 /* 8002F960 0002A860  FC 60 0A 10 */	fabs f3, f1
 /* 8002F964 0002A864  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8002F968 0002A868  C0 02 84 A8 */	lfs f0, lbl_804BFEC8-_SDA2_BASE_(r2)
@@ -104,8 +104,8 @@ lbl_8002F9D4:
 /* 8002F9DC 0002A8DC  38 21 00 10 */	addi r1, r1, 0x10
 /* 8002F9E0 0002A8E0  4E 80 00 20 */	blr 
 
-.global func_8002F9E4
-func_8002F9E4:
+.global AtanFIdx__Q24nw4r4mathFf
+AtanFIdx__Q24nw4r4mathFf:
 /* 8002F9E4 0002A8E4  C0 02 84 AC */	lfs f0, lbl_804BFECC-_SDA2_BASE_(r2)
 /* 8002F9E8 0002A8E8  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8002F9EC 0002A8EC  FC 01 00 40 */	fcmpo cr0, f1, f0
@@ -195,8 +195,8 @@ lbl_8002FB2C:
 /* 8002FB2C 0002AA2C  38 21 00 20 */	addi r1, r1, 0x20
 /* 8002FB30 0002AA30  4E 80 00 20 */	blr 
 
-.global func_8002FB34
-func_8002FB34:
+.global Atan2FIdx__Q24nw4r4mathFff
+Atan2FIdx__Q24nw4r4mathFff:
 /* 8002FB34 0002AA34  C0 02 84 AC */	lfs f0, lbl_804BFECC-_SDA2_BASE_(r2)
 /* 8002FB38 0002AA38  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8002FB3C 0002AA3C  FC 00 10 00 */	fcmpu cr0, f0, f2
