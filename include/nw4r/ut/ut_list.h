@@ -27,7 +27,7 @@ namespace nw4r
 		void List_Remove(List *, void *);
 		void* List_GetNext(const List *, const void *);
 		void* List_GetPrev(const List *, const void *);
-		void * List_GetNth(const List *, unsigned short);
+		void* List_GetNth(const List *, unsigned short);
 	}
 }
 
