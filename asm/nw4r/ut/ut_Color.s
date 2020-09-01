@@ -3,8 +3,8 @@
 .section .text, "ax"  # 0x800076E0 - 0x80355080
 
 # Unknown
-.global func_8000AC88
-func_8000AC88:
+.global __dt__Q34nw4r2ut5ColorFv
+__dt__Q34nw4r2ut5ColorFv:
 /* 8000AC88 00005B88  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8000AC8C 00005B8C  7C 08 02 A6 */	mflr r0
 /* 8000AC90 00005B90  2C 03 00 00 */	cmpwi r3, 0

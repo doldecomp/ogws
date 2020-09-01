@@ -2,8 +2,8 @@
 
 .section .text, "ax"  # 0x800076E0 - 0x80355080
 
-.global func_80009C80
-func_80009C80:
+.global __ct__Q34nw4r2ut7RomFontFv
+__ct__Q34nw4r2ut7RomFontFv:
 /* 80009C80 00004B80  3C 80 80 39 */	lis r4, lbl_80393C70@ha
 /* 80009C84 00004B84  3C A0 80 39 */	lis r5, lbl_80393C18@ha
 /* 80009C88 00004B88  38 84 3C 70 */	addi r4, r4, lbl_80393C70@l
@@ -25,6 +25,9 @@ func_80009C80:
 /* 80009CC8 00004BC8  98 83 00 15 */	stb r4, 0x15(r3)
 /* 80009CCC 00004BCC  98 83 00 16 */	stb r4, 0x16(r3)
 /* 80009CD0 00004BD0  4E 80 00 20 */	blr 
+
+.global __dt__Q34nw4r2ut4FontFv
+__dt__Q34nw4r2ut4FontFv:
 /* 80009CD4 00004BD4  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80009CD8 00004BD8  7C 08 02 A6 */	mflr r0
 /* 80009CDC 00004BDC  2C 03 00 00 */	cmpwi r3, 0
@@ -42,6 +45,9 @@ lbl_80009CFC:
 /* 80009D08 00004C08  7C 08 03 A6 */	mtlr r0
 /* 80009D0C 00004C0C  38 21 00 10 */	addi r1, r1, 0x10
 /* 80009D10 00004C10  4E 80 00 20 */	blr 
+
+.global __dt__Q34nw4r2ut7RomFontFv
+__dt__Q34nw4r2ut7RomFontFv:
 /* 80009D14 00004C14  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80009D18 00004C18  7C 08 02 A6 */	mflr r0
 /* 80009D1C 00004C1C  2C 03 00 00 */	cmpwi r3, 0
@@ -60,8 +66,8 @@ lbl_80009D3C:
 /* 80009D4C 00004C4C  38 21 00 10 */	addi r1, r1, 0x10
 /* 80009D50 00004C50  4E 80 00 20 */	blr 
 
-.global func_80009D54
-func_80009D54:
+.global Load__Q34nw4r2ut7RomFontFPv
+Load__Q34nw4r2ut7RomFontFPv:
 /* 80009D54 00004C54  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 80009D58 00004C58  7C 08 02 A6 */	mflr r0
 /* 80009D5C 00004C5C  90 01 00 24 */	stw r0, 0x24(r1)
@@ -119,8 +125,8 @@ lbl_80009E0C:
 /* 80009E20 00004D20  38 21 00 20 */	addi r1, r1, 0x20
 /* 80009E24 00004D24  4E 80 00 20 */	blr 
 
-.global func_80009E28
-func_80009E28:
+.global GetRequireBufferSize__Q34nw4r2ut7RomFontFv
+GetRequireBufferSize__Q34nw4r2ut7RomFontFv:
 /* 80009E28 00004D28  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80009E2C 00004D2C  7C 08 02 A6 */	mflr r0
 /* 80009E30 00004D30  90 01 00 14 */	stw r0, 0x14(r1)
@@ -147,9 +153,15 @@ lbl_80009E70:
 /* 80009E74 00004D74  7C 08 03 A6 */	mtlr r0
 /* 80009E78 00004D78  38 21 00 10 */	addi r1, r1, 0x10
 /* 80009E7C 00004D7C  4E 80 00 20 */	blr 
+
+.global GetWidth__Q34nw4r2ut7RomFontCFv
+GetWidth__Q34nw4r2ut7RomFontCFv:
 /* 80009E80 00004D80  80 63 00 10 */	lwz r3, 0x10(r3)
 /* 80009E84 00004D84  A0 63 00 0C */	lhz r3, 0xc(r3)
 /* 80009E88 00004D88  4E 80 00 20 */	blr 
+
+.global GetHeight__Q34nw4r2ut7RomFontCFv
+GetHeight__Q34nw4r2ut7RomFontCFv:
 /* 80009E8C 00004D8C  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80009E90 00004D90  7C 08 02 A6 */	mflr r0
 /* 80009E94 00004D94  90 01 00 14 */	stw r0, 0x14(r1)
@@ -173,37 +185,70 @@ lbl_80009E70:
 /* 80009EDC 00004DDC  7C 08 03 A6 */	mtlr r0
 /* 80009EE0 00004DE0  38 21 00 10 */	addi r1, r1, 0x10
 /* 80009EE4 00004DE4  4E 80 00 20 */	blr 
+
+.global GetAscent__Q34nw4r2ut7RomFontCFv
+GetAscent__Q34nw4r2ut7RomFontCFv:
 /* 80009EE8 00004DE8  80 63 00 10 */	lwz r3, 0x10(r3)
 /* 80009EEC 00004DEC  A0 63 00 08 */	lhz r3, 8(r3)
 /* 80009EF0 00004DF0  4E 80 00 20 */	blr 
+
+.global GetDescent__Q34nw4r2ut7RomFontCFv
+GetDescent__Q34nw4r2ut7RomFontCFv:
 /* 80009EF4 00004DF4  80 63 00 10 */	lwz r3, 0x10(r3)
 /* 80009EF8 00004DF8  A0 63 00 0A */	lhz r3, 0xa(r3)
 /* 80009EFC 00004DFC  4E 80 00 20 */	blr 
+
+.global GetBaselinePos__Q34nw4r2ut7RomFontCFv
+GetBaselinePos__Q34nw4r2ut7RomFontCFv:
 /* 80009F00 00004E00  80 63 00 10 */	lwz r3, 0x10(r3)
 /* 80009F04 00004E04  A0 63 00 08 */	lhz r3, 8(r3)
 /* 80009F08 00004E08  4E 80 00 20 */	blr 
+
+.global GetCellHeight__Q34nw4r2ut7RomFontCFv
+GetCellHeight__Q34nw4r2ut7RomFontCFv:
 /* 80009F0C 00004E0C  80 63 00 10 */	lwz r3, 0x10(r3)
 /* 80009F10 00004E10  A0 63 00 12 */	lhz r3, 0x12(r3)
 /* 80009F14 00004E14  4E 80 00 20 */	blr 
+
+.global GetCellWidth__Q34nw4r2ut7RomFontCFv
+GetCellWidth__Q34nw4r2ut7RomFontCFv:
 /* 80009F18 00004E18  80 63 00 10 */	lwz r3, 0x10(r3)
 /* 80009F1C 00004E1C  A0 63 00 10 */	lhz r3, 0x10(r3)
 /* 80009F20 00004E20  4E 80 00 20 */	blr 
+
+.global GetMaxCharWidth__Q34nw4r2ut7RomFontCFv
+GetMaxCharWidth__Q34nw4r2ut7RomFontCFv:
 /* 80009F24 00004E24  80 63 00 10 */	lwz r3, 0x10(r3)
 /* 80009F28 00004E28  A0 63 00 0C */	lhz r3, 0xc(r3)
 /* 80009F2C 00004E2C  4E 80 00 20 */	blr 
+
+.global GetType__Q34nw4r2ut7RomFontCFv
+GetType__Q34nw4r2ut7RomFontCFv:
 /* 80009F30 00004E30  38 60 00 01 */	li r3, 1
 /* 80009F34 00004E34  4E 80 00 20 */	blr 
+
+.global GetTextureFormat__Q34nw4r2ut7RomFontCFv
+GetTextureFormat__Q34nw4r2ut7RomFontCFv:
 /* 80009F38 00004E38  38 60 00 00 */	li r3, 0
 /* 80009F3C 00004E3C  4E 80 00 20 */	blr 
+
+.global GetLineFeed__Q34nw4r2ut7RomFontCFv
+GetLineFeed__Q34nw4r2ut7RomFontCFv:
 /* 80009F40 00004E40  80 63 00 10 */	lwz r3, 0x10(r3)
 /* 80009F44 00004E44  A0 63 00 0E */	lhz r3, 0xe(r3)
 /* 80009F48 00004E48  4E 80 00 20 */	blr 
+
+.global GetDefaultCharWidths__Q34nw4r2ut7RomFontCFv
+GetDefaultCharWidths__Q34nw4r2ut7RomFontCFv:
 /* 80009F4C 00004E4C  A0 03 00 14 */	lhz r0, 0x14(r3)
 /* 80009F50 00004E50  7C 64 1B 78 */	mr r4, r3
 /* 80009F54 00004E54  54 03 80 1E */	slwi r3, r0, 0x10
 /* 80009F58 00004E58  88 04 00 16 */	lbz r0, 0x16(r4)
 /* 80009F5C 00004E5C  50 03 44 2E */	rlwimi r3, r0, 8, 0x10, 0x17
 /* 80009F60 00004E60  4E 80 00 20 */	blr 
+
+.global SetDefaultCharWidths__Q34nw4r2ut7RomFontFRCQ34nw4r2ut10CharWidths
+SetDefaultCharWidths__Q34nw4r2ut7RomFontFRCQ34nw4r2ut10CharWidths:
 /* 80009F64 00004E64  88 C4 00 00 */	lbz r6, 0(r4)
 /* 80009F68 00004E68  88 A4 00 01 */	lbz r5, 1(r4)
 /* 80009F6C 00004E6C  88 04 00 02 */	lbz r0, 2(r4)
@@ -211,6 +256,9 @@ lbl_80009E70:
 /* 80009F74 00004E74  98 A3 00 15 */	stb r5, 0x15(r3)
 /* 80009F78 00004E78  98 03 00 16 */	stb r0, 0x16(r3)
 /* 80009F7C 00004E7C  4E 80 00 20 */	blr 
+
+.global SetAlternateChar__Q34nw4r2ut7RomFontFUs
+SetAlternateChar__Q34nw4r2ut7RomFontFUs:
 /* 80009F80 00004E80  3C A0 00 01 */	lis r5, 0x0000FFFF@ha
 /* 80009F84 00004E84  A0 C3 00 18 */	lhz r6, 0x18(r3)
 /* 80009F88 00004E88  38 05 FF FF */	addi r0, r5, 0x0000FFFF@l
@@ -286,9 +334,15 @@ lbl_8000A074:
 /* 8000A074 00004F74  B0 C3 00 18 */	sth r6, 0x18(r3)
 /* 8000A078 00004F78  38 60 00 00 */	li r3, 0
 /* 8000A07C 00004F7C  4E 80 00 20 */	blr 
+
+.global SetLineFeed__Q34nw4r2ut7RomFontFi
+SetLineFeed__Q34nw4r2ut7RomFontFi:
 /* 8000A080 00004F80  80 63 00 10 */	lwz r3, 0x10(r3)
 /* 8000A084 00004F84  B0 83 00 0E */	sth r4, 0xe(r3)
 /* 8000A088 00004F88  4E 80 00 20 */	blr 
+
+.global GetCharWidth__Q34nw4r2ut7RomFontCFUs
+GetCharWidth__Q34nw4r2ut7RomFontCFUs:
 /* 8000A08C 00004F8C  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8000A090 00004F90  7C 08 02 A6 */	mflr r0
 /* 8000A094 00004F94  90 01 00 14 */	stw r0, 0x14(r1)
@@ -372,6 +426,9 @@ lbl_8000A188:
 /* 8000A19C 0000509C  7C 08 03 A6 */	mtlr r0
 /* 8000A1A0 000050A0  38 21 00 10 */	addi r1, r1, 0x10
 /* 8000A1A4 000050A4  4E 80 00 20 */	blr 
+
+.global GetCharWidths__Q34nw4r2ut7RomFontCFUs
+GetCharWidths__Q34nw4r2ut7RomFontCFUs:
 /* 8000A1A8 000050A8  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8000A1AC 000050AC  7C 08 02 A6 */	mflr r0
 /* 8000A1B0 000050B0  90 01 00 14 */	stw r0, 0x14(r1)
@@ -391,6 +448,9 @@ lbl_8000A188:
 /* 8000A1E8 000050E8  7C 08 03 A6 */	mtlr r0
 /* 8000A1EC 000050EC  38 21 00 10 */	addi r1, r1, 0x10
 /* 8000A1F0 000050F0  4E 80 00 20 */	blr 
+
+.global GetGlyph__Q34nw4r2ut7RomFontCFPQ34nw4r2ut5GlyphUs
+GetGlyph__Q34nw4r2ut7RomFontCFPQ34nw4r2ut5GlyphUs:
 /* 8000A1F4 000050F4  94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 8000A1F8 000050F8  7C 08 02 A6 */	mflr r0
 /* 8000A1FC 000050FC  90 01 00 34 */	stw r0, 0x34(r1)
@@ -502,6 +562,9 @@ lbl_8000A300:
 /* 8000A374 00005274  7C 08 03 A6 */	mtlr r0
 /* 8000A378 00005278  38 21 00 30 */	addi r1, r1, 0x30
 /* 8000A37C 0000527C  4E 80 00 20 */	blr 
+
+.global GetEncoding__Q34nw4r2ut7RomFontCFv
+GetEncoding__Q34nw4r2ut7RomFontCFv:
 /* 8000A380 00005280  A0 0D 80 00 */	lhz r0, lbl_804BD380-_SDA_BASE_(r13)
 /* 8000A384 00005284  2C 00 00 01 */	cmpwi r0, 1
 /* 8000A388 00005288  41 82 00 1C */	beq lbl_8000A3A4
