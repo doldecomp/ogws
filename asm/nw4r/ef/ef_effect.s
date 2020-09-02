@@ -2,8 +2,8 @@
 
 .section .text, "ax"  # 0x800076E0 - 0x80355080
 
-.global func_80010804
-func_80010804:
+.global __ct__Q34nw4r2ef6EffectFv
+__ct__Q34nw4r2ef6EffectFv:
 /* 80010804 0000B704  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80010808 0000B708  7C 08 02 A6 */	mflr r0
 /* 8001080C 0000B70C  3C A0 80 39 */	lis r5, lbl_80393DA0@ha
@@ -30,8 +30,8 @@ func_80010804:
 /* 80010860 0000B760  38 21 00 10 */	addi r1, r1, 0x10
 /* 80010864 0000B764  4E 80 00 20 */	blr 
 
-.global func_80010868
-func_80010868:
+.global __dt__Q34nw4r2ef6EffectFv
+__dt__Q34nw4r2ef6EffectFv:
 /* 80010868 0000B768  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8001086C 0000B76C  7C 08 02 A6 */	mflr r0
 /* 80010870 0000B770  2C 03 00 00 */	cmpwi r3, 0
@@ -44,7 +44,7 @@ func_80010868:
 /* 8001088C 0000B78C  3C 80 80 39 */	lis r4, lbl_80393DA0@ha
 /* 80010890 0000B790  38 84 3D A0 */	addi r4, r4, lbl_80393DA0@l
 /* 80010894 0000B794  90 83 00 1C */	stw r4, 0x1c(r3)
-/* 80010898 0000B798  48 00 03 E1 */	bl func_80010C78
+/* 80010898 0000B798  48 00 03 E1 */	bl RetireEmitterAll__Q34nw4r2ef6EffectFv
 /* 8001089C 0000B79C  2C 1F 00 00 */	cmpwi r31, 0
 /* 800108A0 0000B7A0  40 81 00 0C */	ble lbl_800108AC
 /* 800108A4 0000B7A4  7F C3 F3 78 */	mr r3, r30
@@ -57,6 +57,9 @@ lbl_800108AC:
 /* 800108BC 0000B7BC  7C 08 03 A6 */	mtlr r0
 /* 800108C0 0000B7C0  38 21 00 10 */	addi r1, r1, 0x10
 /* 800108C4 0000B7C4  4E 80 00 20 */	blr 
+
+.global Initialize__Q34nw4r2ef6EffectFPQ34nw4r2ef12EffectSystemPQ34nw4r2ef15EmitterResourceUs
+Initialize__Q34nw4r2ef6EffectFPQ34nw4r2ef12EffectSystemPQ34nw4r2ef15EmitterResourceUs:
 /* 800108C8 0000B7C8  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 800108CC 0000B7CC  7C 08 02 A6 */	mflr r0
 /* 800108D0 0000B7D0  90 01 00 24 */	stw r0, 0x24(r1)
@@ -137,13 +140,19 @@ lbl_800109E4:
 /* 800109F0 0000B8F0  7C 08 03 A6 */	mtlr r0
 /* 800109F4 0000B8F4  38 21 00 20 */	addi r1, r1, 0x20
 /* 800109F8 0000B8F8  4E 80 00 20 */	blr 
+
+.global SendClosing__Q34nw4r2ef6EffectFv
+SendClosing__Q34nw4r2ef6EffectFv:
 /* 800109FC 0000B8FC  7C 64 1B 78 */	mr r4, r3
 /* 80010A00 0000B900  80 63 00 20 */	lwz r3, 0x20(r3)
 /* 80010A04 0000B904  48 00 0C E4 */	b func_800116E8
-/* 80010A08 0000B908  48 00 02 70 */	b func_80010C78
 
-.global func_80010A0C
-func_80010A0C:
+.global DestroyFunc__Q34nw4r2ef6EffectFv
+DestroyFunc__Q34nw4r2ef6EffectFv:
+/* 80010A08 0000B908  48 00 02 70 */	b RetireEmitterAll__Q34nw4r2ef6EffectFv
+
+.global Closing__Q34nw4r2ef6EffectFPQ34nw4r2ef7Emitter
+Closing__Q34nw4r2ef6EffectFPQ34nw4r2ef7Emitter:
 /* 80010A0C 0000B90C  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80010A10 0000B910  7C 08 02 A6 */	mflr r0
 /* 80010A14 0000B914  90 01 00 14 */	stw r0, 0x14(r1)
@@ -214,8 +223,8 @@ lbl_80010AD4:
 /* 80010B08 0000BA08  38 21 00 10 */	addi r1, r1, 0x10
 /* 80010B0C 0000BA0C  4E 80 00 20 */	blr 
 
-.global func_80010B10
-func_80010B10:
+.global CreateEmitter__Q34nw4r2ef6EffectFPQ34nw4r2ef15EmitterResourceUcUs
+CreateEmitter__Q34nw4r2ef6EffectFPQ34nw4r2ef15EmitterResourceUcUs:
 /* 80010B10 0000BA10  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 80010B14 0000BA14  7C 08 02 A6 */	mflr r0
 /* 80010B18 0000BA18  90 01 00 24 */	stw r0, 0x24(r1)
@@ -276,8 +285,8 @@ lbl_80010BD8:
 /* 80010BE8 0000BAE8  38 21 00 20 */	addi r1, r1, 0x20
 /* 80010BEC 0000BAEC  4E 80 00 20 */	blr 
 
-.global func_80010BF0
-func_80010BF0:
+.global RetireEmitter__Q34nw4r2ef6EffectFPQ34nw4r2ef7Emitter
+RetireEmitter__Q34nw4r2ef6EffectFPQ34nw4r2ef7Emitter:
 /* 80010BF0 0000BAF0  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80010BF4 0000BAF4  7C 08 02 A6 */	mflr r0
 /* 80010BF8 0000BAF8  90 01 00 14 */	stw r0, 0x14(r1)
@@ -316,8 +325,8 @@ lbl_80010C64:
 /* 80010C70 0000BB70  38 21 00 10 */	addi r1, r1, 0x10
 /* 80010C74 0000BB74  4E 80 00 20 */	blr 
 
-.global func_80010C78
-func_80010C78:
+.global RetireEmitterAll__Q34nw4r2ef6EffectFv
+RetireEmitterAll__Q34nw4r2ef6EffectFv:
 /* 80010C78 0000BB78  94 21 EF D0 */	stwu r1, -0x1030(r1)
 /* 80010C7C 0000BB7C  7C 08 02 A6 */	mflr r0
 /* 80010C80 0000BB80  90 01 10 34 */	stw r0, 0x1034(r1)
@@ -379,8 +388,8 @@ lbl_80010D28:
 /* 80010D48 0000BC48  38 21 10 30 */	addi r1, r1, 0x1030
 /* 80010D4C 0000BC4C  4E 80 00 20 */	blr 
 
-.global func_80010D50
-func_80010D50:
+.global RetireParticleAll__Q34nw4r2ef6EffectFv
+RetireParticleAll__Q34nw4r2ef6EffectFv:
 /* 80010D50 0000BC50  94 21 EF E0 */	stwu r1, -0x1020(r1)
 /* 80010D54 0000BC54  7C 08 02 A6 */	mflr r0
 /* 80010D58 0000BC58  90 01 10 24 */	stw r0, 0x1024(r1)
@@ -416,6 +425,9 @@ lbl_80010DA4:
 /* 80010DC8 0000BCC8  7C 08 03 A6 */	mtlr r0
 /* 80010DCC 0000BCCC  38 21 10 20 */	addi r1, r1, 0x1020
 /* 80010DD0 0000BCD0  4E 80 00 20 */	blr 
+
+.global Calc__Q34nw4r2ef6EffectFb
+Calc__Q34nw4r2ef6EffectFb:
 /* 80010DD4 0000BCD4  94 21 EF E0 */	stwu r1, -0x1020(r1)
 /* 80010DD8 0000BCD8  7C 08 02 A6 */	mflr r0
 /* 80010DDC 0000BCDC  90 01 10 24 */	stw r0, 0x1024(r1)
@@ -705,6 +717,9 @@ lbl_800111A8:
 /* 800111B4 0000C0B4  7C 08 03 A6 */	mtlr r0
 /* 800111B8 0000C0B8  38 21 10 20 */	addi r1, r1, 0x1020
 /* 800111BC 0000C0BC  4E 80 00 20 */	blr 
+
+.global Draw__Q34nw4r2ef6EffectFRCQ34nw4r2ef8DrawInfo
+Draw__Q34nw4r2ef6EffectFRCQ34nw4r2ef8DrawInfo:
 /* 800111C0 0000C0C0  80 03 00 50 */	lwz r0, 0x50(r3)
 /* 800111C4 0000C0C4  7C 66 1B 78 */	mr r6, r3
 /* 800111C8 0000C0C8  7C 85 23 78 */	mr r5, r4
@@ -718,18 +733,18 @@ lbl_800111A8:
 /* 800111E8 0000C0E8  4E 80 04 20 */	bctr 
 /* 800111EC 0000C0EC  4E 80 00 20 */	blr 
 
-.global func_800111F0
-func_800111F0:
+.global GetNumEmitter__Q34nw4r2ef6EffectCFv
+GetNumEmitter__Q34nw4r2ef6EffectCFv:
 /* 800111F0 0000C0F0  A0 63 00 2C */	lhz r3, 0x2c(r3)
 /* 800111F4 0000C0F4  4E 80 00 20 */	blr 
 
-.global func_800111F8
-func_800111F8:
+.global GetEmitter__Q34nw4r2ef6EffectFUs
+GetEmitter__Q34nw4r2ef6EffectFUs:
 /* 800111F8 0000C0F8  38 63 00 24 */	addi r3, r3, 0x24
 /* 800111FC 0000C0FC  4B FF 67 34 */	b List_GetNth__Q24nw4r2utFPCQ34nw4r2ut4ListUs
 
-.global func_80011200
-func_80011200:
+.global ForeachParticleManager__Q34nw4r2ef6EffectFPFPvUl_vUlb
+ForeachParticleManager__Q34nw4r2ef6EffectFPFPvUl_vUlb:
 /* 80011200 0000C100  94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 80011204 0000C104  7C 08 02 A6 */	mflr r0
 /* 80011208 0000C108  90 01 00 34 */	stw r0, 0x34(r1)
@@ -769,8 +784,8 @@ lbl_8001126C:
 /* 80011288 0000C188  38 21 00 30 */	addi r1, r1, 0x30
 /* 8001128C 0000C18C  4E 80 00 20 */	blr 
 
-.global func_80011290
-func_80011290:
+.global ForeachEmitterFrom__Q34nw4r2ef6EffectFPFPvUl_vUlbPQ34nw4r2ef7Emitter
+ForeachEmitterFrom__Q34nw4r2ef6EffectFPFPvUl_vUlbPQ34nw4r2ef7Emitter:
 /* 80011290 0000C190  94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 80011294 0000C194  7C 08 02 A6 */	mflr r0
 /* 80011298 0000C198  90 01 00 34 */	stw r0, 0x34(r1)
@@ -833,8 +848,8 @@ lbl_80011344:
 /* 80011360 0000C260  38 21 00 30 */	addi r1, r1, 0x30
 /* 80011364 0000C264  4E 80 00 20 */	blr 
 
-.global func_80011368
-func_80011368:
+.global SetRootMtx__Q34nw4r2ef6EffectFRCQ34nw4r4math5MTX34
+SetRootMtx__Q34nw4r2ef6EffectFRCQ34nw4r4math5MTX34:
 /* 80011368 0000C268  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8001136C 0000C26C  7C 08 02 A6 */	mflr r0
 /* 80011370 0000C270  90 01 00 14 */	stw r0, 0x14(r1)
@@ -865,6 +880,9 @@ lbl_800113A8:
 /* 800113CC 0000C2CC  7C 08 03 A6 */	mtlr r0
 /* 800113D0 0000C2D0  38 21 00 10 */	addi r1, r1, 0x10
 /* 800113D4 0000C2D4  4E 80 00 20 */	blr 
+
+.global CreateEmitter__Q34nw4r2ef6EffectFQ34nw4r2ef10ResEmitterUcUs
+CreateEmitter__Q34nw4r2ef6EffectFQ34nw4r2ef10ResEmitterUcUs:
 /* 800113D8 0000C2D8  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 800113DC 0000C2DC  7C 08 02 A6 */	mflr r0
 /* 800113E0 0000C2E0  90 01 00 24 */	stw r0, 0x24(r1)
@@ -923,32 +941,4 @@ lbl_8001149C:
 /* 800114A8 0000C3A8  80 01 00 24 */	lwz r0, 0x24(r1)
 /* 800114AC 0000C3AC  7C 08 03 A6 */	mtlr r0
 /* 800114B0 0000C3B0  38 21 00 20 */	addi r1, r1, 0x20
-/* 800114B4 0000C3B4  4E 80 00 20 */	blr 
-
-.global func_800114B8
-func_800114B8:
-/* 800114B8 0000C3B8  94 21 FF F0 */	stwu r1, -0x10(r1)
-/* 800114BC 0000C3BC  7C 08 02 A6 */	mflr r0
-/* 800114C0 0000C3C0  90 01 00 14 */	stw r0, 0x14(r1)
-/* 800114C4 0000C3C4  93 E1 00 0C */	stw r31, 0xc(r1)
-/* 800114C8 0000C3C8  7C 7F 1B 78 */	mr r31, r3
-/* 800114CC 0000C3CC  38 63 00 10 */	addi r3, r3, 0x10
-/* 800114D0 0000C3D0  48 00 BC A5 */	bl func_8001D174
-/* 800114D4 0000C3D4  88 0D 80 14 */	lbz r0, lbl_804BD394-_SDA_BASE_(r13)
-/* 800114D8 0000C3D8  2C 00 00 00 */	cmpwi r0, 0
-/* 800114DC 0000C3DC  41 82 00 14 */	beq lbl_800114F0
-/* 800114E0 0000C3E0  38 00 00 00 */	li r0, 0
-/* 800114E4 0000C3E4  80 6D 80 10 */	lwz r3, lbl_804BD390-_SDA_BASE_(r13)
-/* 800114E8 0000C3E8  98 0D 80 14 */	stb r0, lbl_804BD394-_SDA_BASE_(r13)
-/* 800114EC 0000C3EC  48 0D BB 55 */	bl func_800ED040
-lbl_800114F0:
-/* 800114F0 0000C3F0  38 00 00 00 */	li r0, 0
-/* 800114F4 0000C3F4  7F E3 FB 78 */	mr r3, r31
-/* 800114F8 0000C3F8  90 1F 00 00 */	stw r0, 0(r31)
-/* 800114FC 0000C3FC  90 1F 50 14 */	stw r0, 0x5014(r31)
-/* 80011500 0000C400  98 1F 50 64 */	stb r0, 0x5064(r31)
-/* 80011504 0000C404  83 E1 00 0C */	lwz r31, 0xc(r1)
-/* 80011508 0000C408  80 01 00 14 */	lwz r0, 0x14(r1)
-/* 8001150C 0000C40C  7C 08 03 A6 */	mtlr r0
-/* 80011510 0000C410  38 21 00 10 */	addi r1, r1, 0x10
-/* 80011514 0000C414  4E 80 00 20 */	blr 
+/* 800114B4 0000C3B4  4E 80 00 20 */	blr  
