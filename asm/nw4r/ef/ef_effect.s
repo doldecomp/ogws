@@ -145,7 +145,7 @@ lbl_800109E4:
 SendClosing__Q34nw4r2ef6EffectFv:
 /* 800109FC 0000B8FC  7C 64 1B 78 */	mr r4, r3
 /* 80010A00 0000B900  80 63 00 20 */	lwz r3, 0x20(r3)
-/* 80010A04 0000B904  48 00 0C E4 */	b func_800116E8
+/* 80010A04 0000B904  48 00 0C E4 */	b Closing__Q34nw4r2ef12EffectSystemFPQ34nw4r2ef6Effect
 
 .global DestroyFunc__Q34nw4r2ef6EffectFv
 DestroyFunc__Q34nw4r2ef6EffectFv:
