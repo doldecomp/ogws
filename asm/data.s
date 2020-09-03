@@ -13,7 +13,28 @@ lbl_80393B78:
 	.incbin "baserom.dol", 0x38FC78, 0x60
 .global lbl_80393BD8
 lbl_80393BD8:
-	.incbin "baserom.dol", 0x38FCD8, 0x40
+#	.incbin "baserom.dol", 0x38FCD8, 0x40
+.long 0
+.long -1
+.long ReadNextCharUTF8__Q34nw4r2ut14CharStrmReaderFv
+
+.long 0
+.long -1
+.long ReadNextCharUTF16__Q34nw4r2ut14CharStrmReaderFv
+
+.long 0
+.long -1
+.long ReadNextCharSJIS__Q34nw4r2ut14CharStrmReaderFv
+
+.long 0
+.long -1
+.long ReadNextCharCP1252__Q34nw4r2ut14CharStrmReaderFv
+
+.long 0
+.long -1
+.long ReadNextCharCP1252__Q34nw4r2ut14CharStrmReaderFv
+
+.fill 4
 .global lbl_80393C18
 lbl_80393C18:
 	.incbin "baserom.dol", 0x38FD18, 0x58

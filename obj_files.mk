@@ -14,7 +14,7 @@ TEXT_O_FILES := \
 	build/nw4r/ut/ut_list.o \
 	build/nw4r/ut/ut_LinkList.o \
 	build/nw4r/ut/ut_binaryFileFormat.o \
-	build/asm/nw4r/ut/ut_CharStrmReader.o \
+	build/nw4r/ut/ut_CharStrmReader.o \
 	build/asm/nw4r/ut/ut_TagProcessorBase.o \
 	build/asm/nw4r/ut/ut_IOStream.o \
 	build/asm/nw4r/ut/ut_FileStream.o \
