@@ -2,9 +2,8 @@
 
 .section .text, "ax"  # 0x800076E0 - 0x80355080
 
-# Draw__Q34nw4r2ef9DrawOrderFPQ34nw4r2ef6EffectRCQ34nw4r2ef8DrawInfo
-.global func_800106F8
-func_800106F8:
+.global Draw__Q34nw4r2ef9DrawOrderFPQ34nw4r2ef6EffectRCQ34nw4r2ef8DrawInfo
+Draw__Q34nw4r2ef9DrawOrderFPQ34nw4r2ef6EffectRCQ34nw4r2ef8DrawInfo:
 /* 800106F8 0000B5F8  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 800106FC 0000B5FC  7C 08 02 A6 */	mflr r0
 /* 80010700 0000B600  90 01 00 24 */	stw r0, 0x24(r1)
@@ -41,9 +40,8 @@ lbl_80010748:
 /* 80010774 0000B674  38 21 00 20 */	addi r1, r1, 0x20
 /* 80010778 0000B678  4E 80 00 20 */	blr 
 
-# Add__Q34nw4r2ef9DrawOrderFPQ34nw4r2ef6EffectPQ34nw4r2ef15ParticleManager
-.global func_8001077C
-func_8001077C:
+.global Add__Q34nw4r2ef9DrawOrderFPQ34nw4r2ef6EffectPQ34nw4r2ef15ParticleManager
+Add__Q34nw4r2ef9DrawOrderFPQ34nw4r2ef6EffectPQ34nw4r2ef15ParticleManager:
 /* 8001077C 0000B67C  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80010780 0000B680  7C 08 02 A6 */	mflr r0
 /* 80010784 0000B684  90 01 00 14 */	stw r0, 0x14(r1)
@@ -78,9 +76,8 @@ lbl_800107C4:
 /* 800107EC 0000B6EC  38 21 00 10 */	addi r1, r1, 0x10
 /* 800107F0 0000B6F0  4E 80 00 20 */	blr 
 
-# Remove__Q34nw4r2ef9DrawOrderFPQ34nw4r2ef6EffectPQ34nw4r2ef15ParticleManager
-.global func_800107F4
-func_800107F4:
+.global Remove__Q34nw4r2ef9DrawOrderFPQ34nw4r2ef6EffectPQ34nw4r2ef15ParticleManager
+Remove__Q34nw4r2ef9DrawOrderFPQ34nw4r2ef6EffectPQ34nw4r2ef15ParticleManager:
 /* 800107F4 0000B6F4  7C 83 23 78 */	mr r3, r4
 /* 800107F8 0000B6F8  7C A4 2B 78 */	mr r4, r5
 /* 800107FC 0000B6FC  38 63 00 90 */	addi r3, r3, 0x90
