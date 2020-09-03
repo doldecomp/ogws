@@ -1,27 +1,6 @@
 .include "macros.inc"
 
-# .data6 = .bss???
-
 .section .data, "wa"  # 0x80393A80 - 0x803CAF00
-#.global lbl_80393A80
-#lbl_80393A80:
-#	.incbin "baserom.dol", 0x38FB80, 0x14
-.global __vt__Q34nw4r2ut19TagProcessorBase$$0w$$1
-__vt__Q34nw4r2ut19TagProcessorBase$$0w$$1:
-.fill 0x8
-.long __dt__Q34nw4r2ut19TagProcessorBase$$0w$$1Fv
-.long Process__Q34nw4r2ut19TagProcessorBase$$0w$$1FUsPQ34nw4r2ut15PrintContext$$0w$$1
-.long CalcRect__Q34nw4r2ut19TagProcessorBase$$0w$$1FPQ34nw4r2ut4RectUsPQ34nw4r2ut15PrintContext$$0w$$1
-
-#.global lbl_80393A94
-#lbl_80393A94:
-#	.incbin "baserom.dol", 0x38FB94, 0x14
-.global __vt__Q34nw4r2ut19TagProcessorBase$$0c$$1
-__vt__Q34nw4r2ut19TagProcessorBase$$0c$$1:
-.fill 0x8
-.long __dt__Q34nw4r2ut19TagProcessorBase$$0c$$1Fv
-.long Process__Q34nw4r2ut19TagProcessorBase$$0c$$1FUsPQ34nw4r2ut15PrintContext$$0c$$1
-.long CalcRect__Q34nw4r2ut19TagProcessorBase$$0c$$1FPQ34nw4r2ut4RectUsPQ34nw4r2ut15PrintContext$$0c$$1
 
 .global lbl_80393AA8
 lbl_80393AA8:
