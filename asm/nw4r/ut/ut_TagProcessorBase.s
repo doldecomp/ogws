@@ -1,5 +1,11 @@
 .include "macros.inc"
 
+.section .sdata2, "a"  # 0x804BFA20 - 0x804C69E0
+
+.global lbl_804BFA20
+lbl_804BFA20:
+	.double 0f4.503601774854144e15
+
 .section .data, "wa"  # 0x80393A80 - 0x803CAF00
 
 .global __vt__Q34nw4r2ut19TagProcessorBase$$0w$$1
