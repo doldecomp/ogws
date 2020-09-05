@@ -125,6 +125,6 @@ GetRuntimeTypeInfo__Q34nw4r2ut10FileStreamCFv:
 # __sinit_\ut_FileStream_cpp
 .global __sinit_$$3ut_FileStream_cpp
 __sinit_$$3ut_FileStream_cpp:
-/* 800084DC 000033DC  38 0D 96 60 */	addi r0, r13, lbl_804BE9E0-_SDA_BASE_
+/* 800084DC 000033DC  38 0D 96 60 */	addi r0, r13, typeInfo__Q34nw4r2ut8IOStream-_SDA_BASE_
 /* 800084E0 000033E0  90 0D 96 68 */	stw r0, lbl_804BE9E8-_SDA_BASE_(r13)
 /* 800084E4 000033E4  4E 80 00 20 */	blr 

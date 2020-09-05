@@ -1,5 +1,11 @@
 .include "macros.inc"
 
+.section .sbss, "wa" # 0x804BE9E0 - 0x804BFA20
+
+.global typeInfo__Q34nw4r2ut8IOStream
+typeInfo__Q34nw4r2ut8IOStream:
+	.skip 0x8
+
 .section .text, "ax"  # 0x800076E0 - 0x80355080
 
 .global ReadAsync__Q34nw4r2ut8IOStreamFPvUlPFlPQ34nw4r2ut8IOStreamPv_vPv
@@ -40,5 +46,5 @@ GetOffsetAlign__Q34nw4r2ut8IOStreamCFv:
 .global __sinit_$$3ut_IOStream_cpp
 __sinit_$$3ut_IOStream_cpp:
 /* 80008370 00003270  38 00 00 00 */	li r0, 0
-/* 80008374 00003274  90 0D 96 60 */	stw r0, lbl_804BE9E0-_SDA_BASE_(r13)
+/* 80008374 00003274  90 0D 96 60 */	stw r0, typeInfo__Q34nw4r2ut8IOStream-_SDA_BASE_(r13)
 /* 80008378 00003278  4E 80 00 20 */	blr 
