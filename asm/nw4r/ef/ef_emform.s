@@ -32,6 +32,7 @@ lbl_8001D484:
 /* 8001D484 00018384  38 60 00 00 */	li r3, 0
 /* 8001D488 00018388  4E 80 00 20 */	blr 
 
+# __sinit_\ef_emform_cpp
 .global __sinit_$$3ef_emform_cpp
 __sinit_$$3ef_emform_cpp:
 /* 8001D48C 0001838C  3D 20 80 39 */	lis r9, lbl_80393F60@ha
