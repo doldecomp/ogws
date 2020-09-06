@@ -4,8 +4,8 @@
 
 .section .text, "ax"  # 0x800076E0 - 0x80355080
 
-.global func_8001E9F0
-func_8001E9F0:
+.global EmissionSub__Q34nw4r2ef19EmitterFormCylinderFPQ34nw4r2ef7EmitterPQ34nw4r2ef15ParticleManageriUlPfUsfPCQ34nw4r4math5MTX34fffffff
+EmissionSub__Q34nw4r2ef19EmitterFormCylinderFPQ34nw4r2ef7EmitterPQ34nw4r2ef15ParticleManageriUlPfUsfPCQ34nw4r4math5MTX34fffffff:
 /* 8001E9F0 000198F0  94 21 FE 30 */	stwu r1, -0x1d0(r1)
 /* 8001E9F4 000198F4  7C 08 02 A6 */	mflr r0
 /* 8001E9F8 000198F8  90 01 01 D4 */	stw r0, 0x1d4(r1)
@@ -301,6 +301,9 @@ lbl_8001EDAC:
 /* 8001EE50 00019D50  7C 08 03 A6 */	mtlr r0
 /* 8001EE54 00019D54  38 21 01 D0 */	addi r1, r1, 0x1d0
 /* 8001EE58 00019D58  4E 80 00 20 */	blr 
+
+.global Emission__Q34nw4r2ef19EmitterFormCylinderFPQ34nw4r2ef7EmitterPQ34nw4r2ef15ParticleManageriUlPfUsfPCQ34nw4r4math5MTX34
+Emission__Q34nw4r2ef19EmitterFormCylinderFPQ34nw4r2ef7EmitterPQ34nw4r2ef15ParticleManageriUlPfUsfPCQ34nw4r4math5MTX34:
 /* 8001EE5C 00019D5C  94 21 FF 20 */	stwu r1, -0xe0(r1)
 /* 8001EE60 00019D60  7C 08 02 A6 */	mflr r0
 /* 8001EE64 00019D64  90 01 00 E4 */	stw r0, 0xe4(r1)
@@ -478,7 +481,7 @@ lbl_8001F0A8:
 /* 8001F0D8 00019FD8  FC E0 D8 90 */	fmr f7, f27
 /* 8001F0DC 00019FDC  7F C9 F3 78 */	mr r9, r30
 /* 8001F0E0 00019FE0  7F EA FB 78 */	mr r10, r31
-/* 8001F0E4 00019FE4  4B FF F9 0D */	bl func_8001E9F0
+/* 8001F0E4 00019FE4  4B FF F9 0D */	bl EmissionSub__Q34nw4r2ef19EmitterFormCylinderFPQ34nw4r2ef7EmitterPQ34nw4r2ef15ParticleManageriUlPfUsfPCQ34nw4r4math5MTX34fffffff
 /* 8001F0E8 00019FE8  3A F7 00 01 */	addi r23, r23, 1
 lbl_8001F0EC:
 /* 8001F0EC 00019FEC  7C 17 D8 00 */	cmpw r23, r27
@@ -501,7 +504,7 @@ lbl_8001F0F8:
 /* 8001F12C 0001A02C  7F A8 EB 78 */	mr r8, r29
 /* 8001F130 0001A030  7F C9 F3 78 */	mr r9, r30
 /* 8001F134 0001A034  7F EA FB 78 */	mr r10, r31
-/* 8001F138 0001A038  4B FF F8 B9 */	bl func_8001E9F0
+/* 8001F138 0001A038  4B FF F8 B9 */	bl EmissionSub__Q34nw4r2ef19EmitterFormCylinderFPQ34nw4r2ef7EmitterPQ34nw4r2ef15ParticleManageriUlPfUsfPCQ34nw4r4math5MTX34fffffff
 lbl_8001F13C:
 /* 8001F13C 0001A03C  E3 E1 00 D8 */	psq_l f31, 216(r1), 0, qr0
 /* 8001F140 0001A040  CB E1 00 D0 */	lfd f31, 0xd0(r1)
