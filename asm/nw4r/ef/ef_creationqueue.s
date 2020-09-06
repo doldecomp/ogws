@@ -143,7 +143,7 @@ lbl_8001D34C:
 /* 8001D358 00018258  80 66 00 C8 */	lwz r3, 0xc8(r6)
 /* 8001D35C 0001825C  A0 FF 00 02 */	lhz r7, 2(r31)
 /* 8001D360 00018260  80 63 00 20 */	lwz r3, 0x20(r3)
-/* 8001D364 00018264  4B FF 53 09 */	bl func_8001266C
+/* 8001D364 00018264  4B FF 53 09 */	bl CreateEmitterTmp__Q34nw4r2ef7EmitterFPQ34nw4r2ef15EmitterResourcePQ34nw4r2ef21EmitterInheritSettingPQ34nw4r2ef8ParticleUs
 /* 8001D368 00018268  80 7F 00 0C */	lwz r3, 0xc(r31)
 /* 8001D36C 0001826C  80 03 00 10 */	lwz r0, 0x10(r3)
 /* 8001D370 00018270  34 00 FF FF */	addic. r0, r0, -1
