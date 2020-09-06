@@ -1,11 +1,9 @@
 .include "macros.inc"
 
-# .text1 = .text
-
 .section .text, "ax"  # 0x800076E0 - 0x80355080
 
-.global func_8001E0FC
-func_8001E0FC:
+.global Emission__Q34nw4r2ef17EmitterFormSphereFPQ34nw4r2ef7EmitterPQ34nw4r2ef15ParticleManageriUlPfUsfPCQ34nw4r4math5MTX34
+Emission__Q34nw4r2ef17EmitterFormSphereFPQ34nw4r2ef7EmitterPQ34nw4r2ef15ParticleManageriUlPfUsfPCQ34nw4r4math5MTX34:
 /* 8001E0FC 00018FFC  94 21 FD F0 */	stwu r1, -0x210(r1)
 /* 8001E100 00019000  7C 08 02 A6 */	mflr r0
 /* 8001E104 00019004  90 01 02 14 */	stw r0, 0x214(r1)
