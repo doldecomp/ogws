@@ -4117,7 +4117,7 @@ lbl_80017774:
 /* 800177A8 000126A8  80 63 00 BC */	lwz r3, 0xbc(r3)
 /* 800177AC 000126AC  80 63 00 20 */	lwz r3, 0x20(r3)
 /* 800177B0 000126B0  38 63 00 10 */	addi r3, r3, 0x10
-/* 800177B4 000126B4  48 00 59 CD */	bl func_8001D180
+/* 800177B4 000126B4  48 00 59 CD */	bl AddParticleCreation__Q34nw4r2ef13CreationQueueFPCQ34nw4r2ef21EmitterInheritSettingPQ34nw4r2ef8ParticlePQ34nw4r2ef15EmitterResourceUs
 /* 800177B8 000126B8  48 00 00 24 */	b lbl_800177DC
 lbl_800177BC:
 /* 800177BC 000126BC  80 68 00 C8 */	lwz r3, 0xc8(r8)
@@ -4127,7 +4127,7 @@ lbl_800177BC:
 /* 800177CC 000126CC  80 63 00 BC */	lwz r3, 0xbc(r3)
 /* 800177D0 000126D0  80 63 00 20 */	lwz r3, 0x20(r3)
 /* 800177D4 000126D4  38 63 00 10 */	addi r3, r3, 0x10
-/* 800177D8 000126D8  48 00 5A 6D */	bl func_8001D244
+/* 800177D8 000126D8  48 00 5A 6D */	bl AddEmitterCreation__Q34nw4r2ef13CreationQueueFPCQ34nw4r2ef21EmitterInheritSettingPQ34nw4r2ef8ParticlePQ34nw4r2ef15EmitterResourceUs
 lbl_800177DC:
 /* 800177DC 000126DC  80 01 00 24 */	lwz r0, 0x24(r1)
 /* 800177E0 000126E0  83 E1 00 1C */	lwz r31, 0x1c(r1)
