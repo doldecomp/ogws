@@ -1,11 +1,9 @@
 .include "macros.inc"
 
-# .text1 = .text
-
 .section .text, "ax"  # 0x800076E0 - 0x80355080
 
-.global func_8001C0E8
-func_8001C0E8:
+.global UtlistToArray__Q24nw4r2efFPCQ34nw4r2ut4ListPPvi
+UtlistToArray__Q24nw4r2efFPCQ34nw4r2ut4ListPPvi:
 /* 8001C0E8 00016FE8  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8001C0EC 00016FEC  7C 08 02 A6 */	mflr r0
 /* 8001C0F0 00016FF0  90 01 00 24 */	stw r0, 0x24(r1)
@@ -43,8 +41,8 @@ lbl_8001C148:
 /* 8001C164 00017064  38 21 00 20 */	addi r1, r1, 0x20
 /* 8001C168 00017068  4E 80 00 20 */	blr 
 
-.global func_8001C16C
-func_8001C16C:
+.global Rotation2VecY__Q24nw4r2efFRCQ34nw4r4math4VEC3PQ34nw4r4math4VEC3
+Rotation2VecY__Q24nw4r2efFRCQ34nw4r4math4VEC3PQ34nw4r4math4VEC3:
 /* 8001C16C 0001706C  94 21 FF A0 */	stwu r1, -0x60(r1)
 /* 8001C170 00017070  7C 08 02 A6 */	mflr r0
 /* 8001C174 00017074  90 01 00 64 */	stw r0, 0x64(r1)
@@ -114,8 +112,8 @@ func_8001C16C:
 /* 8001C274 00017174  38 21 00 60 */	addi r1, r1, 0x60
 /* 8001C278 00017178  4E 80 00 20 */	blr 
 
-.global func_8001C27C
-func_8001C27C:
+.global GetDirMtxY__Q24nw4r2efFPQ34nw4r4math5MTX34RCQ34nw4r4math4VEC3
+GetDirMtxY__Q24nw4r2efFPQ34nw4r4math5MTX34RCQ34nw4r4math4VEC3:
 /* 8001C27C 0001717C  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8001C280 00017180  7C 08 02 A6 */	mflr r0
 /* 8001C284 00017184  90 01 00 24 */	stw r0, 0x24(r1)
@@ -182,8 +180,8 @@ lbl_8001C304:
 /* 8001C368 00017268  38 21 00 20 */	addi r1, r1, 0x20
 /* 8001C36C 0001726C  4E 80 00 20 */	blr 
 
-.global func_8001C370
-func_8001C370:
+.global MtxGetRotationMtx__Q24nw4r2efFRCQ34nw4r4math5MTX34PQ34nw4r4math5MTX34
+MtxGetRotationMtx__Q24nw4r2efFRCQ34nw4r4math5MTX34PQ34nw4r4math5MTX34:
 /* 8001C370 00017270  94 21 FF C0 */	stwu r1, -0x40(r1)
 /* 8001C374 00017274  7C 08 02 A6 */	mflr r0
 /* 8001C378 00017278  C0 63 00 00 */	lfs f3, 0(r3)
@@ -272,8 +270,8 @@ lbl_8001C424:
 /* 8001C4AC 000173AC  38 21 00 40 */	addi r1, r1, 0x40
 /* 8001C4B0 000173B0  4E 80 00 20 */	blr 
 
-.global func_8001C4B4
-func_8001C4B4:
+.global MtxGetRotation__Q24nw4r2efFRCQ34nw4r4math5MTX34PQ34nw4r4math4VEC3
+MtxGetRotation__Q24nw4r2efFRCQ34nw4r4math5MTX34PQ34nw4r4math4VEC3:
 /* 8001C4B4 000173B4  94 21 FF C0 */	stwu r1, -0x40(r1)
 /* 8001C4B8 000173B8  7C 08 02 A6 */	mflr r0
 /* 8001C4BC 000173BC  90 01 00 44 */	stw r0, 0x44(r1)
@@ -379,8 +377,8 @@ lbl_8001C618:
 /* 8001C640 00017540  38 21 00 40 */	addi r1, r1, 0x40
 /* 8001C644 00017544  4E 80 00 20 */	blr 
 
-.global func_8001C648
-func_8001C648:
+.global MtxGetTranslate__Q24nw4r2efFRCQ34nw4r4math5MTX34PQ34nw4r4math4VEC3
+MtxGetTranslate__Q24nw4r2efFRCQ34nw4r4math5MTX34PQ34nw4r4math4VEC3:
 /* 8001C648 00017548  C0 43 00 0C */	lfs f2, 0xc(r3)
 /* 8001C64C 0001754C  C0 23 00 1C */	lfs f1, 0x1c(r3)
 /* 8001C650 00017550  C0 03 00 2C */	lfs f0, 0x2c(r3)
@@ -389,8 +387,8 @@ func_8001C648:
 /* 8001C65C 0001755C  D0 04 00 08 */	stfs f0, 8(r4)
 /* 8001C660 00017560  4E 80 00 20 */	blr 
 
-.global func_8001C664
-func_8001C664:
+.global MtxGetScale__Q24nw4r2efFRCQ34nw4r4math5MTX34PQ34nw4r4math4VEC3
+MtxGetScale__Q24nw4r2efFRCQ34nw4r4math5MTX34PQ34nw4r4math4VEC3:
 /* 8001C664 00017564  94 21 FF A0 */	stwu r1, -0x60(r1)
 /* 8001C668 00017568  7C 08 02 A6 */	mflr r0
 /* 8001C66C 0001756C  90 01 00 64 */	stw r0, 0x64(r1)
