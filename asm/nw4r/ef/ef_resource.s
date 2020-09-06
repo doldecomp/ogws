@@ -1,17 +1,15 @@
 .include "macros.inc"
 
-# .text1 = .text
-
 .section .text, "ax"  # 0x800076E0 - 0x80355080
 
-.global func_8001B3FC
-func_8001B3FC:
+.global GetInstance__Q34nw4r2ef8ResourceFv
+GetInstance__Q34nw4r2ef8ResourceFv:
 /* 8001B3FC 000162FC  3C 60 80 3D */	lis r3, lbl_803D0018@ha
 /* 8001B400 00016300  38 63 00 18 */	addi r3, r3, lbl_803D0018@l
 /* 8001B404 00016304  4E 80 00 20 */	blr 
 
-.global func_8001B408
-func_8001B408:
+.global Initialize__Q34nw4r2ef8ResourceFv
+Initialize__Q34nw4r2ef8ResourceFv:
 /* 8001B408 00016308  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8001B40C 0001630C  7C 08 02 A6 */	mflr r0
 /* 8001B410 00016310  38 80 00 04 */	li r4, 4
@@ -31,8 +29,8 @@ func_8001B408:
 /* 8001B448 00016348  38 21 00 10 */	addi r1, r1, 0x10
 /* 8001B44C 0001634C  4E 80 00 20 */	blr 
 
-.global func_8001B450
-func_8001B450:
+.global breffRelocate__Q24nw4r2efFPQ34nw4r2ef13EffectProject
+breffRelocate__Q24nw4r2efFPQ34nw4r2ef13EffectProject:
 /* 8001B450 00016350  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8001B454 00016354  39 00 00 00 */	li r8, 0
 /* 8001B458 00016358  93 E1 00 0C */	stw r31, 0xc(r1)
@@ -129,8 +127,8 @@ lbl_8001B59C:
 /* 8001B5AC 000164AC  38 21 00 10 */	addi r1, r1, 0x10
 /* 8001B5B0 000164B0  4E 80 00 20 */	blr 
 
-.global func_8001B5B4
-func_8001B5B4:
+.global breffSearchName__Q24nw4r2efFPQ34nw4r2ef13EffectProjectPCc
+breffSearchName__Q24nw4r2efFPQ34nw4r2ef13EffectProjectPCc:
 /* 8001B5B4 000164B4  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8001B5B8 000164B8  7C 08 02 A6 */	mflr r0
 /* 8001B5BC 000164BC  90 01 00 24 */	stw r0, 0x24(r1)
@@ -182,8 +180,8 @@ lbl_8001B654:
 /* 8001B664 00016564  38 21 00 20 */	addi r1, r1, 0x20
 /* 8001B668 00016568  4E 80 00 20 */	blr 
 
-.global func_8001B66C
-func_8001B66C:
+.global breffIndexOf__Q24nw4r2efFPQ34nw4r2ef13EffectProjectUs
+breffIndexOf__Q24nw4r2efFPQ34nw4r2ef13EffectProjectUs:
 /* 8001B66C 0001656C  80 03 00 00 */	lwz r0, 0(r3)
 /* 8001B670 00016570  7D 03 02 14 */	add r8, r3, r0
 /* 8001B674 00016574  A0 08 00 04 */	lhz r0, 4(r8)
@@ -226,8 +224,8 @@ lbl_8001B6F8:
 /* 8001B6F8 000165F8  38 60 00 00 */	li r3, 0
 /* 8001B6FC 000165FC  4E 80 00 20 */	blr 
 
-.global func_8001B700
-func_8001B700:
+.global breftRelocate__Q24nw4r2efFPQ34nw4r2ef14TextureProject
+breftRelocate__Q24nw4r2efFPQ34nw4r2ef14TextureProject:
 /* 8001B700 00016600  80 03 00 00 */	lwz r0, 0(r3)
 /* 8001B704 00016604  39 20 00 00 */	li r9, 0
 /* 8001B708 00016608  7C E3 02 14 */	add r7, r3, r0
@@ -266,8 +264,8 @@ lbl_8001B77C:
 /* 8001B784 00016684  41 80 FF 90 */	blt lbl_8001B714
 /* 8001B788 00016688  4E 80 00 20 */	blr 
 
-.global func_8001B78C
-func_8001B78C:
+.global breftSearchName__Q24nw4r2efFPQ34nw4r2ef14TextureProjectPCc
+breftSearchName__Q24nw4r2efFPQ34nw4r2ef14TextureProjectPCc:
 /* 8001B78C 0001668C  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8001B790 00016690  7C 08 02 A6 */	mflr r0
 /* 8001B794 00016694  90 01 00 24 */	stw r0, 0x24(r1)
@@ -319,8 +317,8 @@ lbl_8001B82C:
 /* 8001B83C 0001673C  38 21 00 20 */	addi r1, r1, 0x20
 /* 8001B840 00016740  4E 80 00 20 */	blr 
 
-.global func_8001B844
-func_8001B844:
+.global Add__Q34nw4r2ef8ResourceFPUc
+Add__Q34nw4r2ef8ResourceFPUc:
 /* 8001B844 00016744  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8001B848 00016748  7C 08 02 A6 */	mflr r0
 /* 8001B84C 0001674C  38 A0 00 08 */	li r5, 8
@@ -344,7 +342,7 @@ func_8001B844:
 /* 8001B894 00016794  A0 05 00 04 */	lhz r0, 4(r5)
 /* 8001B898 00016798  7C 04 02 14 */	add r0, r4, r0
 /* 8001B89C 0001679C  90 1E 00 0C */	stw r0, 0xc(r30)
-/* 8001B8A0 000167A0  4B FF FB B1 */	bl func_8001B450
+/* 8001B8A0 000167A0  4B FF FB B1 */	bl breffRelocate__Q24nw4r2efFPQ34nw4r2ef13EffectProject
 /* 8001B8A4 000167A4  7F E3 FB 78 */	mr r3, r31
 /* 8001B8A8 000167A8  83 E1 00 0C */	lwz r31, 0xc(r1)
 /* 8001B8AC 000167AC  83 C1 00 08 */	lwz r30, 8(r1)
@@ -353,8 +351,8 @@ func_8001B844:
 /* 8001B8B8 000167B8  38 21 00 10 */	addi r1, r1, 0x10
 /* 8001B8BC 000167BC  4E 80 00 20 */	blr 
 
-.global func_8001B8C0
-func_8001B8C0:
+.global FindEmitter__Q34nw4r2ef8ResourceCFPCcPQ34nw4r2ef13EffectProject
+FindEmitter__Q34nw4r2ef8ResourceCFPCcPQ34nw4r2ef13EffectProject:
 /* 8001B8C0 000167C0  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8001B8C4 000167C4  7C 08 02 A6 */	mflr r0
 /* 8001B8C8 000167C8  2C 06 00 00 */	cmpwi r6, 0
@@ -369,7 +367,7 @@ func_8001B8C0:
 /* 8001B8EC 000167EC  41 82 00 1C */	beq lbl_8001B908
 /* 8001B8F0 000167F0  7C C3 33 78 */	mr r3, r6
 /* 8001B8F4 000167F4  7F C4 F3 78 */	mr r4, r30
-/* 8001B8F8 000167F8  4B FF FC BD */	bl func_8001B5B4
+/* 8001B8F8 000167F8  4B FF FC BD */	bl breffSearchName__Q24nw4r2efFPQ34nw4r2ef13EffectProjectPCc
 /* 8001B8FC 000167FC  2C 03 00 00 */	cmpwi r3, 0
 /* 8001B900 00016800  41 82 00 08 */	beq lbl_8001B908
 /* 8001B904 00016804  48 00 00 4C */	b lbl_8001B950
@@ -382,7 +380,7 @@ lbl_8001B908:
 lbl_8001B91C:
 /* 8001B91C 0001681C  7F E3 FB 78 */	mr r3, r31
 /* 8001B920 00016820  7F C4 F3 78 */	mr r4, r30
-/* 8001B924 00016824  4B FF FC 91 */	bl func_8001B5B4
+/* 8001B924 00016824  4B FF FC 91 */	bl breffSearchName__Q24nw4r2efFPQ34nw4r2ef13EffectProjectPCc
 /* 8001B928 00016828  2C 03 00 00 */	cmpwi r3, 0
 /* 8001B92C 0001682C  41 82 00 08 */	beq lbl_8001B934
 /* 8001B930 00016830  48 00 00 20 */	b lbl_8001B950
@@ -406,8 +404,8 @@ lbl_8001B950:
 /* 8001B96C 0001686C  38 21 00 20 */	addi r1, r1, 0x20
 /* 8001B970 00016870  4E 80 00 20 */	blr 
 
-.global func_8001B974
-func_8001B974:
+.global _FindEmitter__Q34nw4r2ef8ResourceCFPCcPQ34nw4r2ef13EffectProject
+_FindEmitter__Q34nw4r2ef8ResourceCFPCcPQ34nw4r2ef13EffectProject:
 /* 8001B974 00016874  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8001B978 00016878  7C 08 02 A6 */	mflr r0
 /* 8001B97C 0001687C  2C 05 00 00 */	cmpwi r5, 0
@@ -420,7 +418,7 @@ func_8001B974:
 /* 8001B998 00016898  7C 7D 1B 78 */	mr r29, r3
 /* 8001B99C 0001689C  41 82 00 18 */	beq lbl_8001B9B4
 /* 8001B9A0 000168A0  7F E3 FB 78 */	mr r3, r31
-/* 8001B9A4 000168A4  4B FF FC 11 */	bl func_8001B5B4
+/* 8001B9A4 000168A4  4B FF FC 11 */	bl breffSearchName__Q24nw4r2efFPQ34nw4r2ef13EffectProjectPCc
 /* 8001B9A8 000168A8  2C 03 00 00 */	cmpwi r3, 0
 /* 8001B9AC 000168AC  41 82 00 08 */	beq lbl_8001B9B4
 /* 8001B9B0 000168B0  48 00 00 4C */	b lbl_8001B9FC
@@ -433,7 +431,7 @@ lbl_8001B9B4:
 lbl_8001B9C8:
 /* 8001B9C8 000168C8  7F E3 FB 78 */	mr r3, r31
 /* 8001B9CC 000168CC  7F C4 F3 78 */	mr r4, r30
-/* 8001B9D0 000168D0  4B FF FB E5 */	bl func_8001B5B4
+/* 8001B9D0 000168D0  4B FF FB E5 */	bl breffSearchName__Q24nw4r2efFPQ34nw4r2ef13EffectProjectPCc
 /* 8001B9D4 000168D4  2C 03 00 00 */	cmpwi r3, 0
 /* 8001B9D8 000168D8  41 82 00 08 */	beq lbl_8001B9E0
 /* 8001B9DC 000168DC  48 00 00 20 */	b lbl_8001B9FC
@@ -455,8 +453,8 @@ lbl_8001B9FC:
 /* 8001BA10 00016910  38 21 00 20 */	addi r1, r1, 0x20
 /* 8001BA14 00016914  4E 80 00 20 */	blr 
 
-.global func_8001BA18
-func_8001BA18:
+.global _FindTexture__Q34nw4r2ef8ResourceCFPCcPQ34nw4r2ef14TextureProject
+_FindTexture__Q34nw4r2ef8ResourceCFPCcPQ34nw4r2ef14TextureProject:
 /* 8001BA18 00016918  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8001BA1C 0001691C  7C 08 02 A6 */	mflr r0
 /* 8001BA20 00016920  90 01 00 24 */	stw r0, 0x24(r1)
@@ -477,7 +475,7 @@ lbl_8001BA54:
 /* 8001BA58 00016958  41 82 00 1C */	beq lbl_8001BA74
 /* 8001BA5C 0001695C  7C C3 33 78 */	mr r3, r6
 /* 8001BA60 00016960  7F C4 F3 78 */	mr r4, r30
-/* 8001BA64 00016964  4B FF FD 29 */	bl func_8001B78C
+/* 8001BA64 00016964  4B FF FD 29 */	bl breftSearchName__Q24nw4r2efFPQ34nw4r2ef14TextureProjectPCc
 /* 8001BA68 00016968  2C 03 00 00 */	cmpwi r3, 0
 /* 8001BA6C 0001696C  41 82 00 08 */	beq lbl_8001BA74
 /* 8001BA70 00016970  48 00 00 4C */	b lbl_8001BABC
@@ -490,7 +488,7 @@ lbl_8001BA74:
 lbl_8001BA88:
 /* 8001BA88 00016988  7F E3 FB 78 */	mr r3, r31
 /* 8001BA8C 0001698C  7F C4 F3 78 */	mr r4, r30
-/* 8001BA90 00016990  4B FF FC FD */	bl func_8001B78C
+/* 8001BA90 00016990  4B FF FC FD */	bl breftSearchName__Q24nw4r2efFPQ34nw4r2ef14TextureProjectPCc
 /* 8001BA94 00016994  2C 03 00 00 */	cmpwi r3, 0
 /* 8001BA98 00016998  41 82 00 08 */	beq lbl_8001BAA0
 /* 8001BA9C 0001699C  48 00 00 20 */	b lbl_8001BABC
@@ -514,8 +512,8 @@ lbl_8001BABC:
 /* 8001BAD8 000169D8  38 21 00 20 */	addi r1, r1, 0x20
 /* 8001BADC 000169DC  4E 80 00 20 */	blr 
 
-.global func_8001BAE0
-func_8001BAE0:
+.global AddTexture__Q34nw4r2ef8ResourceFPUc
+AddTexture__Q34nw4r2ef8ResourceFPUc:
 /* 8001BAE0 000169E0  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8001BAE4 000169E4  7C 08 02 A6 */	mflr r0
 /* 8001BAE8 000169E8  38 A0 00 08 */	li r5, 8
@@ -539,7 +537,7 @@ func_8001BAE0:
 /* 8001BB30 00016A30  A0 05 00 04 */	lhz r0, 4(r5)
 /* 8001BB34 00016A34  7C 04 02 14 */	add r0, r4, r0
 /* 8001BB38 00016A38  90 1E 00 1C */	stw r0, 0x1c(r30)
-/* 8001BB3C 00016A3C  4B FF FB C5 */	bl func_8001B700
+/* 8001BB3C 00016A3C  4B FF FB C5 */	bl breftRelocate__Q24nw4r2efFPQ34nw4r2ef14TextureProject
 /* 8001BB40 00016A40  7F E3 FB 78 */	mr r3, r31
 /* 8001BB44 00016A44  83 E1 00 0C */	lwz r31, 0xc(r1)
 /* 8001BB48 00016A48  83 C1 00 08 */	lwz r30, 8(r1)
@@ -548,8 +546,8 @@ func_8001BAE0:
 /* 8001BB54 00016A54  38 21 00 10 */	addi r1, r1, 0x10
 /* 8001BB58 00016A58  4E 80 00 20 */	blr 
 
-.global func_8001BB5C
-func_8001BB5C:
+.global relocateCurveTexture__Q34nw4r2ef8ResourceFPUc
+relocateCurveTexture__Q34nw4r2ef8ResourceFPUc:
 /* 8001BB5C 00016A5C  94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 8001BB60 00016A60  7C 08 02 A6 */	mflr r0
 /* 8001BB64 00016A64  90 01 00 34 */	stw r0, 0x34(r1)
@@ -588,7 +586,7 @@ lbl_8001BBCC:
 lbl_8001BBE0:
 /* 8001BBE0 00016AE0  7F 83 E3 78 */	mr r3, r28
 /* 8001BBE4 00016AE4  7F 24 CB 78 */	mr r4, r25
-/* 8001BBE8 00016AE8  4B FF FB A5 */	bl func_8001B78C
+/* 8001BBE8 00016AE8  4B FF FB A5 */	bl breftSearchName__Q24nw4r2efFPQ34nw4r2ef14TextureProjectPCc
 /* 8001BBEC 00016AEC  2C 03 00 00 */	cmpwi r3, 0
 /* 8001BBF0 00016AF0  41 82 00 08 */	beq lbl_8001BBF8
 /* 8001BBF4 00016AF4  48 00 00 20 */	b lbl_8001BC14
@@ -626,8 +624,8 @@ lbl_8001BC40:
 /* 8001BC60 00016B60  38 21 00 30 */	addi r1, r1, 0x30
 /* 8001BC64 00016B64  4E 80 00 20 */	blr 
 
-.global func_8001BC68
-func_8001BC68:
+.global relocateCurveChild__Q34nw4r2ef8ResourceFPUc
+relocateCurveChild__Q34nw4r2ef8ResourceFPUc:
 /* 8001BC68 00016B68  94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 8001BC6C 00016B6C  7C 08 02 A6 */	mflr r0
 /* 8001BC70 00016B70  90 01 00 34 */	stw r0, 0x34(r1)
@@ -660,7 +658,7 @@ lbl_8001BCBC:
 lbl_8001BCD8:
 /* 8001BCD8 00016BD8  7F C3 F3 78 */	mr r3, r30
 /* 8001BCDC 00016BDC  7F 44 D3 78 */	mr r4, r26
-/* 8001BCE0 00016BE0  4B FF F8 D5 */	bl func_8001B5B4
+/* 8001BCE0 00016BE0  4B FF F8 D5 */	bl breffSearchName__Q24nw4r2efFPQ34nw4r2ef13EffectProjectPCc
 /* 8001BCE4 00016BE4  2C 03 00 00 */	cmpwi r3, 0
 /* 8001BCE8 00016BE8  41 82 00 08 */	beq lbl_8001BCF0
 /* 8001BCEC 00016BEC  48 00 00 20 */	b lbl_8001BD0C
@@ -694,8 +692,8 @@ lbl_8001BD28:
 /* 8001BD48 00016C48  38 21 00 30 */	addi r1, r1, 0x30
 /* 8001BD4C 00016C4C  4E 80 00 20 */	blr 
 
-.global func_8001BD50
-func_8001BD50:
+.global RelocateCommand__Q34nw4r2ef8ResourceFv
+RelocateCommand__Q34nw4r2ef8ResourceFv:
 /* 8001BD50 00016C50  94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 8001BD54 00016C54  7C 08 02 A6 */	mflr r0
 /* 8001BD58 00016C58  90 01 00 34 */	stw r0, 0x34(r1)
@@ -720,7 +718,7 @@ lbl_8001BD8C:
 /* 8001BD9C 00016C9C  40 80 00 18 */	bge lbl_8001BDB4
 /* 8001BDA0 00016CA0  7C 83 23 78 */	mr r3, r4
 /* 8001BDA4 00016CA4  57 84 04 3E */	clrlwi r4, r28, 0x10
-/* 8001BDA8 00016CA8  4B FF F8 C5 */	bl func_8001B66C
+/* 8001BDA8 00016CA8  4B FF F8 C5 */	bl breffIndexOf__Q24nw4r2efFPQ34nw4r2ef13EffectProjectUs
 /* 8001BDAC 00016CAC  7C 7F 1B 78 */	mr r31, r3
 /* 8001BDB0 00016CB0  48 00 00 20 */	b lbl_8001BDD0
 lbl_8001BDB4:
@@ -757,7 +755,7 @@ lbl_8001BE08:
 lbl_8001BE1C:
 /* 8001BE1C 00016D1C  7F 83 E3 78 */	mr r3, r28
 /* 8001BE20 00016D20  7F 24 CB 78 */	mr r4, r25
-/* 8001BE24 00016D24  4B FF F9 69 */	bl func_8001B78C
+/* 8001BE24 00016D24  4B FF F9 69 */	bl breftSearchName__Q24nw4r2efFPQ34nw4r2ef14TextureProjectPCc
 /* 8001BE28 00016D28  2C 03 00 00 */	cmpwi r3, 0
 /* 8001BE2C 00016D2C  41 82 00 08 */	beq lbl_8001BE34
 /* 8001BE30 00016D30  48 00 00 20 */	b lbl_8001BE50
@@ -814,12 +812,12 @@ lbl_8001BEDC:
 /* 8001BEE4 00016DE4  48 00 00 20 */	b lbl_8001BF04
 lbl_8001BEE8:
 /* 8001BEE8 00016DE8  7F 63 DB 78 */	mr r3, r27
-/* 8001BEEC 00016DEC  4B FF FC 71 */	bl func_8001BB5C
+/* 8001BEEC 00016DEC  4B FF FC 71 */	bl relocateCurveTexture__Q34nw4r2ef8ResourceFPUc
 /* 8001BEF0 00016DF0  7F DE 1A 14 */	add r30, r30, r3
 /* 8001BEF4 00016DF4  48 00 00 10 */	b lbl_8001BF04
 lbl_8001BEF8:
 /* 8001BEF8 00016DF8  7F 63 DB 78 */	mr r3, r27
-/* 8001BEFC 00016DFC  4B FF FD 6D */	bl func_8001BC68
+/* 8001BEFC 00016DFC  4B FF FD 6D */	bl relocateCurveChild__Q34nw4r2ef8ResourceFPUc
 /* 8001BF00 00016E00  7F DE 1A 14 */	add r30, r30, r3
 lbl_8001BF04:
 /* 8001BF04 00016E04  3B 9C 00 01 */	addi r28, r28, 1
@@ -847,8 +845,8 @@ lbl_8001BF30:
 /* 8001BF50 00016E50  38 21 00 30 */	addi r1, r1, 0x30
 /* 8001BF54 00016E54  4E 80 00 20 */	blr 
 
-.global func_8001BF58
-func_8001BF58:
+.global RemoveEffectProject__Q34nw4r2ef8ResourceFPQ34nw4r2ef13EffectProject
+RemoveEffectProject__Q34nw4r2ef8ResourceFPQ34nw4r2ef13EffectProject:
 /* 8001BF58 00016E58  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8001BF5C 00016E5C  7C 08 02 A6 */	mflr r0
 /* 8001BF60 00016E60  90 01 00 14 */	stw r0, 0x14(r1)
@@ -896,8 +894,8 @@ lbl_8001BFE0:
 /* 8001BFF0 00016EF0  38 21 00 10 */	addi r1, r1, 0x10
 /* 8001BFF4 00016EF4  4E 80 00 20 */	blr 
 
-.global func_8001BFF8
-func_8001BFF8:
+.global RemoveTextureProject__Q34nw4r2ef8ResourceFPQ34nw4r2ef14TextureProject
+RemoveTextureProject__Q34nw4r2ef8ResourceFPQ34nw4r2ef14TextureProject:
 /* 8001BFF8 00016EF8  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8001BFFC 00016EFC  7C 08 02 A6 */	mflr r0
 /* 8001C000 00016F00  90 01 00 14 */	stw r0, 0x14(r1)
@@ -944,6 +942,10 @@ lbl_8001C080:
 /* 8001C08C 00016F8C  7C 08 03 A6 */	mtlr r0
 /* 8001C090 00016F90  38 21 00 10 */	addi r1, r1, 0x10
 /* 8001C094 00016F94  4E 80 00 20 */	blr 
+
+# __sinit_\ef_resource_cpp
+.global __sinit_$$3ef_resource_cpp
+__sinit_$$3ef_resource_cpp:
 /* 8001C098 00016F98  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8001C09C 00016F9C  7C 08 02 A6 */	mflr r0
 /* 8001C0A0 00016FA0  38 80 00 04 */	li r4, 4

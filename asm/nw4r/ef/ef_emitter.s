@@ -396,7 +396,7 @@ InitializeDatas__Q34nw4r2ef7EmitterFPQ34nw4r2ef15EmitterResourcePQ34nw4r2ef6Effe
 /* 80012190 0000D090  D0 03 00 88 */	stfs f0, 0x88(r3)
 /* 80012194 0000D094  C0 1F 00 5C */	lfs f0, 0x5c(r31)
 /* 80012198 0000D098  D0 03 00 8C */	stfs f0, 0x8c(r3)
-/* 8001219C 0000D09C  48 00 92 61 */	bl func_8001B3FC
+/* 8001219C 0000D09C  48 00 92 61 */	bl GetInstance__Q34nw4r2ef8ResourceFv
 /* 800121A0 0000D0A0  80 7F 00 88 */	lwz r3, 0x88(r31)
 /* 800121A4 0000D0A4  54 60 04 3F */	clrlwi. r0, r3, 0x10
 /* 800121A8 0000D0A8  B0 7D 00 EA */	sth r3, 0xea(r29)
@@ -1360,7 +1360,7 @@ lbl_80012FB0:
 /* 80012FB8 0000DEB8  FC 01 00 40 */	fcmpo cr0, f1, f0
 /* 80012FBC 0000DEBC  4C 41 13 82 */	cror 2, 1, 2
 /* 80012FC0 0000DEC0  40 82 01 F4 */	bne lbl_800131B4
-/* 80012FC4 0000DEC4  48 00 84 39 */	bl func_8001B3FC
+/* 80012FC4 0000DEC4  48 00 84 39 */	bl GetInstance__Q34nw4r2ef8ResourceFv
 /* 80012FC8 0000DEC8  80 7D 00 F0 */	lwz r3, 0xf0(r29)
 /* 80012FCC 0000DECC  81 7D 00 B8 */	lwz r11, 0xb8(r29)
 /* 80012FD0 0000DED0  2C 03 00 00 */	cmpwi r3, 0
