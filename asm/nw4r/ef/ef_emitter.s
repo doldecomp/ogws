@@ -4,8 +4,8 @@
 
 .section .text, "ax"  # 0x800076E0 - 0x80355080
 
-.global func_80011C24
-func_80011C24:
+.global __ct__Q34nw4r2ef7EmitterFv
+__ct__Q34nw4r2ef7EmitterFv:
 /* 80011C24 0000CB24  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80011C28 0000CB28  7C 08 02 A6 */	mflr r0
 /* 80011C2C 0000CB2C  3C A0 80 39 */	lis r5, lbl_80393E08@ha
@@ -29,8 +29,8 @@ func_80011C24:
 /* 80011C74 0000CB74  38 21 00 10 */	addi r1, r1, 0x10
 /* 80011C78 0000CB78  4E 80 00 20 */	blr 
 
-.global func_80011C7C
-func_80011C7C:
+.global __dt__Q34nw4r2ef7EmitterFv
+__dt__Q34nw4r2ef7EmitterFv:
 /* 80011C7C 0000CB7C  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80011C80 0000CB80  7C 08 02 A6 */	mflr r0
 /* 80011C84 0000CB84  2C 03 00 00 */	cmpwi r3, 0
@@ -49,8 +49,8 @@ lbl_80011CA4:
 /* 80011CB4 0000CBB4  38 21 00 10 */	addi r1, r1, 0x10
 /* 80011CB8 0000CBB8  4E 80 00 20 */	blr 
 
-.global func_80011CBC
-func_80011CBC:
+.global RetireParticleAll__Q34nw4r2ef7EmitterFv
+RetireParticleAll__Q34nw4r2ef7EmitterFv:
 /* 80011CBC 0000CBBC  94 21 EF E0 */	stwu r1, -0x1020(r1)
 /* 80011CC0 0000CBC0  7C 08 02 A6 */	mflr r0
 /* 80011CC4 0000CBC4  90 01 10 24 */	stw r0, 0x1024(r1)
@@ -86,9 +86,15 @@ lbl_80011D10:
 /* 80011D34 0000CC34  7C 08 03 A6 */	mtlr r0
 /* 80011D38 0000CC38  38 21 10 20 */	addi r1, r1, 0x1020
 /* 80011D3C 0000CC3C  4E 80 00 20 */	blr 
+
+.global SendClosing__Q34nw4r2ef7EmitterFv
+SendClosing__Q34nw4r2ef7EmitterFv:
 /* 80011D40 0000CC40  7C 64 1B 78 */	mr r4, r3
 /* 80011D44 0000CC44  80 63 00 BC */	lwz r3, 0xbc(r3)
 /* 80011D48 0000CC48  4B FF EC C4 */	b Closing__Q34nw4r2ef6EffectFPQ34nw4r2ef7Emitter
+
+.global DestroyFunc__Q34nw4r2ef7EmitterFv
+DestroyFunc__Q34nw4r2ef7EmitterFv:
 /* 80011D4C 0000CC4C  94 21 EF E0 */	stwu r1, -0x1020(r1)
 /* 80011D50 0000CC50  7C 08 02 A6 */	mflr r0
 /* 80011D54 0000CC54  90 01 10 24 */	stw r0, 0x1024(r1)
@@ -105,10 +111,10 @@ lbl_80011D78:
 /* 80011D7C 0000CC7C  54 00 07 FF */	clrlwi. r0, r0, 0x1f
 /* 80011D80 0000CC80  41 82 00 0C */	beq lbl_80011D8C
 /* 80011D84 0000CC84  7F 63 DB 78 */	mr r3, r27
-/* 80011D88 0000CC88  4B FF FF 35 */	bl func_80011CBC
+/* 80011D88 0000CC88  4B FF FF 35 */	bl RetireParticleAll__Q34nw4r2ef7EmitterFv
 lbl_80011D8C:
 /* 80011D8C 0000CC8C  7F 63 DB 78 */	mr r3, r27
-/* 80011D90 0000CC90  48 00 01 4D */	bl func_80011EDC
+/* 80011D90 0000CC90  48 00 01 4D */	bl RetireParticleManagerAll__Q34nw4r2ef7EmitterFv
 /* 80011D94 0000CC94  80 1B 00 20 */	lwz r0, 0x20(r27)
 /* 80011D98 0000CC98  54 00 07 FF */	clrlwi. r0, r0, 0x1f
 /* 80011D9C 0000CC9C  41 82 00 80 */	beq lbl_80011E1C
@@ -130,7 +136,7 @@ lbl_80011DD4:
 /* 80011DD4 0000CCD4  7C 03 D8 40 */	cmplw r3, r27
 /* 80011DD8 0000CCD8  40 82 00 28 */	bne lbl_80011E00
 /* 80011DDC 0000CCDC  7F 83 E3 78 */	mr r3, r28
-/* 80011DE0 0000CCE0  4B FF FE DD */	bl func_80011CBC
+/* 80011DE0 0000CCE0  4B FF FE DD */	bl RetireParticleAll__Q34nw4r2ef7EmitterFv
 /* 80011DE4 0000CCE4  80 1C 00 0C */	lwz r0, 0xc(r28)
 /* 80011DE8 0000CCE8  2C 00 00 01 */	cmpwi r0, 1
 /* 80011DEC 0000CCEC  40 82 00 20 */	bne lbl_80011E0C
@@ -157,8 +163,8 @@ lbl_80011E1C:
 /* 80011E2C 0000CD2C  38 21 10 20 */	addi r1, r1, 0x1020
 /* 80011E30 0000CD30  4E 80 00 20 */	blr 
 
-.global func_80011E34
-func_80011E34:
+.global Closing__Q34nw4r2ef7EmitterFPQ34nw4r2ef15ParticleManager
+Closing__Q34nw4r2ef7EmitterFPQ34nw4r2ef15ParticleManager:
 /* 80011E34 0000CD34  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80011E38 0000CD38  7C 08 02 A6 */	mflr r0
 /* 80011E3C 0000CD3C  90 01 00 14 */	stw r0, 0x14(r1)
@@ -203,8 +209,8 @@ lbl_80011EA0:
 /* 80011ED4 0000CDD4  38 21 00 10 */	addi r1, r1, 0x10
 /* 80011ED8 0000CDD8  4E 80 00 20 */	blr 
 
-.global func_80011EDC
-func_80011EDC:
+.global RetireParticleManagerAll__Q34nw4r2ef7EmitterFv
+RetireParticleManagerAll__Q34nw4r2ef7EmitterFv:
 /* 80011EDC 0000CDDC  94 21 EF D0 */	stwu r1, -0x1030(r1)
 /* 80011EE0 0000CDE0  7C 08 02 A6 */	mflr r0
 /* 80011EE4 0000CDE4  90 01 10 34 */	stw r0, 0x1034(r1)
@@ -266,8 +272,8 @@ lbl_80011F8C:
 /* 80011FAC 0000CEAC  38 21 10 30 */	addi r1, r1, 0x1030
 /* 80011FB0 0000CEB0  4E 80 00 20 */	blr 
 
-.global func_80011FB4
-func_80011FB4:
+.global InitializeDatas__Q34nw4r2ef7EmitterFPQ34nw4r2ef15EmitterResourcePQ34nw4r2ef6Effect
+InitializeDatas__Q34nw4r2ef7EmitterFPQ34nw4r2ef15EmitterResourcePQ34nw4r2ef6Effect:
 /* 80011FB4 0000CEB4  94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 80011FB8 0000CEB8  7C 08 02 A6 */	mflr r0
 /* 80011FBC 0000CEBC  3D 00 43 30 */	lis r8, 0x4330
@@ -445,6 +451,9 @@ lbl_800121D8:
 /* 80012268 0000D168  7C 08 03 A6 */	mtlr r0
 /* 8001226C 0000D16C  38 21 00 30 */	addi r1, r1, 0x30
 /* 80012270 0000D170  4E 80 00 20 */	blr 
+
+.global Initialize__Q34nw4r2ef7EmitterFPQ34nw4r2ef6EffectPQ34nw4r2ef15EmitterResourceUc
+Initialize__Q34nw4r2ef7EmitterFPQ34nw4r2ef6EffectPQ34nw4r2ef15EmitterResourceUc:
 /* 80012274 0000D174  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 80012278 0000D178  7C 08 02 A6 */	mflr r0
 /* 8001227C 0000D17C  90 01 00 24 */	stw r0, 0x24(r1)
@@ -467,7 +476,7 @@ lbl_800121D8:
 /* 800122C0 0000D1C0  B3 43 00 D4 */	sth r26, 0xd4(r3)
 /* 800122C4 0000D1C4  93 43 00 D0 */	stw r26, 0xd0(r3)
 /* 800122C8 0000D1C8  B3 43 00 D8 */	sth r26, 0xd8(r3)
-/* 800122CC 0000D1CC  4B FF FC E9 */	bl func_80011FB4
+/* 800122CC 0000D1CC  4B FF FC E9 */	bl InitializeDatas__Q34nw4r2ef7EmitterFPQ34nw4r2ef15EmitterResourcePQ34nw4r2ef6Effect
 /* 800122D0 0000D1D0  93 FC 00 BC */	stw r31, 0xbc(r28)
 /* 800122D4 0000D1D4  80 7F 00 20 */	lwz r3, 0x20(r31)
 /* 800122D8 0000D1D8  80 63 00 00 */	lwz r3, 0(r3)
@@ -737,7 +746,7 @@ func_8001266C:
 /* 800126C0 0000D5C0  B0 01 02 28 */	sth r0, 0x228(r1)
 /* 800126C4 0000D5C4  38 61 01 50 */	addi r3, r1, 0x150
 /* 800126C8 0000D5C8  80 B8 00 BC */	lwz r5, 0xbc(r24)
-/* 800126CC 0000D5CC  4B FF F8 E9 */	bl func_80011FB4
+/* 800126CC 0000D5CC  4B FF F8 E9 */	bl InitializeDatas__Q34nw4r2ef7EmitterFPQ34nw4r2ef15EmitterResourcePQ34nw4r2ef6Effect
 /* 800126D0 0000D5D0  A0 01 02 38 */	lhz r0, 0x238(r1)
 /* 800126D4 0000D5D4  3A E1 01 50 */	addi r23, r1, 0x150
 /* 800126D8 0000D5D8  7C 00 E2 14 */	add r0, r0, r28

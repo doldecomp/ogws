@@ -409,7 +409,7 @@ RetireParticleAll__Q34nw4r2ef6EffectFv:
 lbl_80010D90:
 /* 80010D90 0000BC90  57 80 13 BA */	rlwinm r0, r28, 2, 0xe, 0x1d
 /* 80010D94 0000BC94  7C 7E 00 2E */	lwzx r3, r30, r0
-/* 80010D98 0000BC98  48 00 0F 25 */	bl func_80011CBC
+/* 80010D98 0000BC98  48 00 0F 25 */	bl RetireParticleAll__Q34nw4r2ef7EmitterFv
 /* 80010D9C 0000BC9C  7F BD 1A 14 */	add r29, r29, r3
 /* 80010DA0 0000BCA0  3B 9C 00 01 */	addi r28, r28, 1
 lbl_80010DA4:

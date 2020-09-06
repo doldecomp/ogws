@@ -4,8 +4,8 @@
 
 .section .text, "ax"  # 0x800076E0 - 0x80355080
 
-.global func_8001D42C
-func_8001D42C:
+.global Create__Q34nw4r2ef15EmitFormBuilderFQ34nw4r2ef12EmitFormType
+Create__Q34nw4r2ef15EmitFormBuilderFQ34nw4r2ef12EmitFormType:
 /* 8001D42C 0001832C  28 04 00 0A */	cmplwi r4, 0xa
 /* 8001D430 00018330  41 81 00 54 */	bgt lbl_8001D484
 /* 8001D434 00018334  3C 60 80 39 */	lis r3, lbl_80393F08@ha
@@ -31,6 +31,9 @@ func_8001D42C:
 lbl_8001D484:
 /* 8001D484 00018384  38 60 00 00 */	li r3, 0
 /* 8001D488 00018388  4E 80 00 20 */	blr 
+
+.global __sinit_$$3ef_emform_cpp
+__sinit_$$3ef_emform_cpp:
 /* 8001D48C 0001838C  3D 20 80 39 */	lis r9, lbl_80393F60@ha
 /* 8001D490 00018390  3D 00 80 39 */	lis r8, lbl_80393F50@ha
 /* 8001D494 00018394  3C E0 80 39 */	lis r7, lbl_80393F80@ha
