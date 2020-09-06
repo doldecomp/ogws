@@ -4,8 +4,8 @@
 
 .section .text, "ax"  # 0x800076E0 - 0x80355080
 
-.global func_80013E10
-func_80013E10:
+.global AnimCurveExecuteU8__Q24nw4r2efFPUcPUcUlUsUl
+AnimCurveExecuteU8__Q24nw4r2efFPUcPUcUlUsUl:
 /* 80013E10 0000ED10  94 21 FF 70 */	stwu r1, -0x90(r1)
 /* 80013E14 0000ED14  7C 08 02 A6 */	mflr r0
 /* 80013E18 0000ED18  90 01 00 94 */	stw r0, 0x94(r1)
@@ -1334,8 +1334,8 @@ lbl_80015088:
 /* 800150A0 0000FFA0  38 21 00 90 */	addi r1, r1, 0x90
 /* 800150A4 0000FFA4  4E 80 00 20 */	blr 
 
-.global func_800150A8
-func_800150A8:
+.global AnimCurveExecuteF32__Q24nw4r2efFPUcPfUlUsUl
+AnimCurveExecuteF32__Q24nw4r2efFPUcPfUlUsUl:
 /* 800150A8 0000FFA8  94 21 FF 90 */	stwu r1, -0x70(r1)
 /* 800150AC 0000FFAC  7C 08 02 A6 */	mflr r0
 /* 800150B0 0000FFB0  90 01 00 74 */	stw r0, 0x74(r1)
@@ -2451,8 +2451,8 @@ lbl_80016024:
 /* 8001603C 00010F3C  38 21 00 70 */	addi r1, r1, 0x70
 /* 80016040 00010F40  4E 80 00 20 */	blr 
 
-.global func_80016044
-func_80016044:
+.global AnimCurveExecuteRotate__Q24nw4r2efFPUcPfUlUsUl
+AnimCurveExecuteRotate__Q24nw4r2efFPUcPfUlUsUl:
 /* 80016044 00010F44  94 21 FF 90 */	stwu r1, -0x70(r1)
 /* 80016048 00010F48  7C 08 02 A6 */	mflr r0
 /* 8001604C 00010F4C  90 01 00 74 */	stw r0, 0x74(r1)
@@ -3628,8 +3628,8 @@ lbl_800170AC:
 /* 800170C4 00011FC4  38 21 00 70 */	addi r1, r1, 0x70
 /* 800170C8 00011FC8  4E 80 00 20 */	blr 
 
-.global func_800170CC
-func_800170CC:
+.global AnimCurveExecuteTexture__Q24nw4r2efFPUcPQ34nw4r2ef8ParticleUlUsUl
+AnimCurveExecuteTexture__Q24nw4r2efFPUcPQ34nw4r2ef8ParticleUlUsUl:
 /* 800170CC 00011FCC  94 21 FF A0 */	stwu r1, -0x60(r1)
 /* 800170D0 00011FD0  7C 08 02 A6 */	mflr r0
 /* 800170D4 00011FD4  90 01 00 64 */	stw r0, 0x64(r1)
@@ -4044,8 +4044,8 @@ lbl_80017680:
 /* 80017698 00012598  38 21 00 60 */	addi r1, r1, 0x60
 /* 8001769C 0001259C  4E 80 00 20 */	blr 
 
-.global func_800176A0
-func_800176A0:
+.global createChild__Q24nw4r2efFPUcUsPQ34nw4r2ef15AnimCurveHeaderPQ34nw4r2ef18AnimCurveNameTablePQ34nw4r2ef20AnimCurveRandomTablePQ34nw4r2ef8ParticleUl
+createChild__Q24nw4r2efFPUcUsPQ34nw4r2ef15AnimCurveHeaderPQ34nw4r2ef18AnimCurveNameTablePQ34nw4r2ef20AnimCurveRandomTablePQ34nw4r2ef8ParticleUl:
 /* 800176A0 000125A0  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 800176A4 000125A4  7C 08 02 A6 */	mflr r0
 /* 800176A8 000125A8  90 01 00 24 */	stw r0, 0x24(r1)
@@ -4136,8 +4136,8 @@ lbl_800177DC:
 /* 800177EC 000126EC  38 21 00 20 */	addi r1, r1, 0x20
 /* 800177F0 000126F0  4E 80 00 20 */	blr 
 
-.global func_800177F4
-func_800177F4:
+.global AnimCurveExecuteChild__Q24nw4r2efFPUcPQ34nw4r2ef8ParticleUlUsUl
+AnimCurveExecuteChild__Q24nw4r2efFPUcPQ34nw4r2ef8ParticleUlUsUl:
 /* 800177F4 000126F4  94 21 FF 90 */	stwu r1, -0x70(r1)
 /* 800177F8 000126F8  7C 08 02 A6 */	mflr r0
 /* 800177FC 000126FC  90 01 00 74 */	stw r0, 0x74(r1)
@@ -4656,7 +4656,7 @@ lbl_80017F08:
 /* 80017F2C 00012E2C  7F A7 EB 78 */	mr r7, r29
 /* 80017F30 00012E30  7E A8 AB 78 */	mr r8, r21
 /* 80017F34 00012E34  7F 49 D3 78 */	mr r9, r26
-/* 80017F38 00012E38  4B FF F7 69 */	bl func_800176A0
+/* 80017F38 00012E38  4B FF F7 69 */	bl createChild__Q24nw4r2efFPUcUsPQ34nw4r2ef15AnimCurveHeaderPQ34nw4r2ef18AnimCurveNameTablePQ34nw4r2ef20AnimCurveRandomTablePQ34nw4r2ef8ParticleUl
 lbl_80017F3C:
 /* 80017F3C 00012E3C  3A F7 00 16 */	addi r23, r23, 0x16
 /* 80017F40 00012E40  3A 73 00 01 */	addi r19, r19, 1
@@ -4734,7 +4734,7 @@ lbl_8001800C:
 /* 80018030 00012F30  7F A7 EB 78 */	mr r7, r29
 /* 80018034 00012F34  7E A8 AB 78 */	mr r8, r21
 /* 80018038 00012F38  7F 49 D3 78 */	mr r9, r26
-/* 8001803C 00012F3C  4B FF F6 65 */	bl func_800176A0
+/* 8001803C 00012F3C  4B FF F6 65 */	bl createChild__Q24nw4r2efFPUcUsPQ34nw4r2ef15AnimCurveHeaderPQ34nw4r2ef18AnimCurveNameTablePQ34nw4r2ef20AnimCurveRandomTablePQ34nw4r2ef8ParticleUl
 lbl_80018040:
 /* 80018040 00012F40  3A F7 FF EA */	addi r23, r23, -22
 /* 80018044 00012F44  3A 73 FF FF */	addi r19, r19, -1
@@ -4817,7 +4817,7 @@ lbl_8001811C:
 /* 80018148 00013048  7F A7 EB 78 */	mr r7, r29
 /* 8001814C 0001304C  7E A8 AB 78 */	mr r8, r21
 /* 80018150 00013050  7F 49 D3 78 */	mr r9, r26
-/* 80018154 00013054  4B FF F5 4D */	bl func_800176A0
+/* 80018154 00013054  4B FF F5 4D */	bl createChild__Q24nw4r2efFPUcUsPQ34nw4r2ef15AnimCurveHeaderPQ34nw4r2ef18AnimCurveNameTablePQ34nw4r2ef20AnimCurveRandomTablePQ34nw4r2ef8ParticleUl
 lbl_80018158:
 /* 80018158 00013058  3B 7B 00 16 */	addi r27, r27, 0x16
 /* 8001815C 0001305C  3A 73 00 01 */	addi r19, r19, 1
@@ -4895,7 +4895,7 @@ lbl_80018228:
 /* 8001824C 0001314C  7F A7 EB 78 */	mr r7, r29
 /* 80018250 00013150  7E A8 AB 78 */	mr r8, r21
 /* 80018254 00013154  7F 49 D3 78 */	mr r9, r26
-/* 80018258 00013158  4B FF F4 49 */	bl func_800176A0
+/* 80018258 00013158  4B FF F4 49 */	bl createChild__Q24nw4r2efFPUcUsPQ34nw4r2ef15AnimCurveHeaderPQ34nw4r2ef18AnimCurveNameTablePQ34nw4r2ef20AnimCurveRandomTablePQ34nw4r2ef8ParticleUl
 lbl_8001825C:
 /* 8001825C 0001315C  3B 7B FF EA */	addi r27, r27, -22
 /* 80018260 00013160  3A 73 FF FF */	addi r19, r19, -1
@@ -4924,7 +4924,7 @@ lbl_80018288:
 /* 800182AC 000131AC  7F A7 EB 78 */	mr r7, r29
 /* 800182B0 000131B0  7E A8 AB 78 */	mr r8, r21
 /* 800182B4 000131B4  7F 49 D3 78 */	mr r9, r26
-/* 800182B8 000131B8  4B FF F3 E9 */	bl func_800176A0
+/* 800182B8 000131B8  4B FF F3 E9 */	bl createChild__Q24nw4r2efFPUcUsPQ34nw4r2ef15AnimCurveHeaderPQ34nw4r2ef18AnimCurveNameTablePQ34nw4r2ef20AnimCurveRandomTablePQ34nw4r2ef8ParticleUl
 /* 800182BC 000131BC  3A 73 00 16 */	addi r19, r19, 0x16
 /* 800182C0 000131C0  3B 7B 00 01 */	addi r27, r27, 1
 lbl_800182C4:
@@ -4949,7 +4949,7 @@ lbl_800182E8:
 /* 80018304 00013204  7F A7 EB 78 */	mr r7, r29
 /* 80018308 00013208  7E A8 AB 78 */	mr r8, r21
 /* 8001830C 0001320C  7F 49 D3 78 */	mr r9, r26
-/* 80018310 00013210  4B FF F3 91 */	bl func_800176A0
+/* 80018310 00013210  4B FF F3 91 */	bl createChild__Q24nw4r2efFPUcUsPQ34nw4r2ef15AnimCurveHeaderPQ34nw4r2ef18AnimCurveNameTablePQ34nw4r2ef20AnimCurveRandomTablePQ34nw4r2ef8ParticleUl
 /* 80018314 00013214  3B 7B FF EA */	addi r27, r27, -22
 /* 80018318 00013218  3A 73 FF FF */	addi r19, r19, -1
 lbl_8001831C:
@@ -4976,7 +4976,7 @@ lbl_80018344:
 /* 80018360 00013260  7F A7 EB 78 */	mr r7, r29
 /* 80018364 00013264  7E A8 AB 78 */	mr r8, r21
 /* 80018368 00013268  7F 49 D3 78 */	mr r9, r26
-/* 8001836C 0001326C  4B FF F3 35 */	bl func_800176A0
+/* 8001836C 0001326C  4B FF F3 35 */	bl createChild__Q24nw4r2efFPUcUsPQ34nw4r2ef15AnimCurveHeaderPQ34nw4r2ef18AnimCurveNameTablePQ34nw4r2ef20AnimCurveRandomTablePQ34nw4r2ef8ParticleUl
 /* 80018370 00013270  3A F7 00 16 */	addi r23, r23, 0x16
 /* 80018374 00013274  3A 73 00 01 */	addi r19, r19, 1
 lbl_80018378:
@@ -5002,7 +5002,7 @@ lbl_800183A0:
 /* 800183BC 000132BC  7F A7 EB 78 */	mr r7, r29
 /* 800183C0 000132C0  7E A8 AB 78 */	mr r8, r21
 /* 800183C4 000132C4  7F 49 D3 78 */	mr r9, r26
-/* 800183C8 000132C8  4B FF F2 D9 */	bl func_800176A0
+/* 800183C8 000132C8  4B FF F2 D9 */	bl createChild__Q24nw4r2efFPUcUsPQ34nw4r2ef15AnimCurveHeaderPQ34nw4r2ef18AnimCurveNameTablePQ34nw4r2ef20AnimCurveRandomTablePQ34nw4r2ef8ParticleUl
 /* 800183CC 000132CC  3A 94 FF EA */	addi r20, r20, -22
 /* 800183D0 000132D0  3A 73 FF FF */	addi r19, r19, -1
 lbl_800183D4:
@@ -5075,7 +5075,7 @@ lbl_80018494:
 /* 800184B0 000133B0  7F A7 EB 78 */	mr r7, r29
 /* 800184B4 000133B4  7E A8 AB 78 */	mr r8, r21
 /* 800184B8 000133B8  7F 49 D3 78 */	mr r9, r26
-/* 800184BC 000133BC  4B FF F1 E5 */	bl func_800176A0
+/* 800184BC 000133BC  4B FF F1 E5 */	bl createChild__Q24nw4r2efFPUcUsPQ34nw4r2ef15AnimCurveHeaderPQ34nw4r2ef18AnimCurveNameTablePQ34nw4r2ef20AnimCurveRandomTablePQ34nw4r2ef8ParticleUl
 lbl_800184C0:
 /* 800184C0 000133C0  3A 73 00 16 */	addi r19, r19, 0x16
 /* 800184C4 000133C4  3A 94 00 01 */	addi r20, r20, 1
@@ -5097,7 +5097,7 @@ lbl_800184E8:
 /* 800184F8 000133F8  7F A7 EB 78 */	mr r7, r29
 /* 800184FC 000133FC  7E A8 AB 78 */	mr r8, r21
 /* 80018500 00013400  7F 49 D3 78 */	mr r9, r26
-/* 80018504 00013404  4B FF F1 9D */	bl func_800176A0
+/* 80018504 00013404  4B FF F1 9D */	bl createChild__Q24nw4r2efFPUcUsPQ34nw4r2ef15AnimCurveHeaderPQ34nw4r2ef18AnimCurveNameTablePQ34nw4r2ef20AnimCurveRandomTablePQ34nw4r2ef8ParticleUl
 /* 80018508 00013408  3A 73 00 16 */	addi r19, r19, 0x16
 /* 8001850C 0001340C  3A 52 00 01 */	addi r18, r18, 1
 lbl_80018510:
@@ -5122,7 +5122,7 @@ lbl_80018534:
 /* 80018550 00013450  7F A7 EB 78 */	mr r7, r29
 /* 80018554 00013454  7E A8 AB 78 */	mr r8, r21
 /* 80018558 00013458  7F 49 D3 78 */	mr r9, r26
-/* 8001855C 0001345C  4B FF F1 45 */	bl func_800176A0
+/* 8001855C 0001345C  4B FF F1 45 */	bl createChild__Q24nw4r2efFPUcUsPQ34nw4r2ef15AnimCurveHeaderPQ34nw4r2ef18AnimCurveNameTablePQ34nw4r2ef20AnimCurveRandomTablePQ34nw4r2ef8ParticleUl
 /* 80018560 00013460  3A F7 00 16 */	addi r23, r23, 0x16
 /* 80018564 00013464  3A 73 00 01 */	addi r19, r19, 1
 lbl_80018568:
