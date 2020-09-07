@@ -4,14 +4,14 @@
 
 .section .text, "ax"  # 0x800076E0 - 0x80355080
 
-.global func_8001D174
-func_8001D174:
+.global __ct__Q34nw4r2ef13CreationQueueFv
+__ct__Q34nw4r2ef13CreationQueueFv:
 /* 8001D174 00018074  38 00 00 00 */	li r0, 0
 /* 8001D178 00018078  90 03 00 00 */	stw r0, 0(r3)
 /* 8001D17C 0001807C  4E 80 00 20 */	blr 
 
-.global func_8001D180
-func_8001D180:
+.global AddParticleCreation__Q34nw4r2ef13CreationQueueFPCQ34nw4r2ef21EmitterInheritSettingPQ34nw4r2ef8ParticlePQ34nw4r2ef15EmitterResourceUs
+AddParticleCreation__Q34nw4r2ef13CreationQueueFPCQ34nw4r2ef21EmitterInheritSettingPQ34nw4r2ef8ParticlePQ34nw4r2ef15EmitterResourceUs:
 /* 8001D180 00018080  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8001D184 00018084  93 E1 00 0C */	stw r31, 0xc(r1)
 /* 8001D188 00018088  93 C1 00 08 */	stw r30, 8(r1)
@@ -63,8 +63,8 @@ lbl_8001D234:
 /* 8001D23C 0001813C  38 21 00 10 */	addi r1, r1, 0x10
 /* 8001D240 00018140  4E 80 00 20 */	blr 
 
-.global func_8001D244
-func_8001D244:
+.global AddEmitterCreation__Q34nw4r2ef13CreationQueueFPCQ34nw4r2ef21EmitterInheritSettingPQ34nw4r2ef8ParticlePQ34nw4r2ef15EmitterResourceUs
+AddEmitterCreation__Q34nw4r2ef13CreationQueueFPCQ34nw4r2ef21EmitterInheritSettingPQ34nw4r2ef8ParticlePQ34nw4r2ef15EmitterResourceUs:
 /* 8001D244 00018144  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8001D248 00018148  93 E1 00 0C */	stw r31, 0xc(r1)
 /* 8001D24C 0001814C  93 C1 00 08 */	stw r30, 8(r1)
@@ -116,8 +116,8 @@ lbl_8001D2F8:
 /* 8001D300 00018200  38 21 00 10 */	addi r1, r1, 0x10
 /* 8001D304 00018204  4E 80 00 20 */	blr 
 
-.global func_8001D308
-func_8001D308:
+.global Execute__Q34nw4r2ef13CreationQueueFv
+Execute__Q34nw4r2ef13CreationQueueFv:
 /* 8001D308 00018208  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8001D30C 0001820C  7C 08 02 A6 */	mflr r0
 /* 8001D310 00018210  90 01 00 24 */	stw r0, 0x24(r1)

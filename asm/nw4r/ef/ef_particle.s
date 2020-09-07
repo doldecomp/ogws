@@ -4,15 +4,15 @@
 
 .section .text, "ax"  # 0x800076E0 - 0x80355080
 
-.global func_80018594
-func_80018594:
+.global __ct__Q34nw4r2ef8ParticleFv
+__ct__Q34nw4r2ef8ParticleFv:
 /* 80018594 00013494  3C 80 80 39 */	lis r4, lbl_80393E30@ha
 /* 80018598 00013498  38 84 3E 30 */	addi r4, r4, lbl_80393E30@l
 /* 8001859C 0001349C  90 83 00 1C */	stw r4, 0x1c(r3)
 /* 800185A0 000134A0  4E 80 00 20 */	blr 
 
-.global func_800185A4
-func_800185A4:
+.global __dt__Q34nw4r2ef8ParticleFv
+__dt__Q34nw4r2ef8ParticleFv:
 /* 800185A4 000134A4  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 800185A8 000134A8  7C 08 02 A6 */	mflr r0
 /* 800185AC 000134AC  2C 03 00 00 */	cmpwi r3, 0
@@ -30,13 +30,19 @@ lbl_800185CC:
 /* 800185D8 000134D8  7C 08 03 A6 */	mtlr r0
 /* 800185DC 000134DC  38 21 00 10 */	addi r1, r1, 0x10
 /* 800185E0 000134E0  4E 80 00 20 */	blr 
+
+.global SendClosing__Q34nw4r2ef8ParticleFv
+SendClosing__Q34nw4r2ef8ParticleFv:
 /* 800185E4 000134E4  7C 64 1B 78 */	mr r4, r3
 /* 800185E8 000134E8  80 63 00 C8 */	lwz r3, 0xc8(r3)
-/* 800185EC 000134EC  48 00 0D A8 */	b func_80019394
+/* 800185EC 000134EC  48 00 0D A8 */	b Closing__Q34nw4r2ef15ParticleManagerFPQ34nw4r2ef8Particle
+
+.global DestroyFunc__Q34nw4r2ef8ParticleFv
+DestroyFunc__Q34nw4r2ef8ParticleFv:
 /* 800185F0 000134F0  4E 80 00 20 */	blr 
 
-.global func_800185F4
-func_800185F4:
+.global Initialize__Q34nw4r2ef17ParticleParameterFPQ34nw4r2ef21ParticleParameterDescPQ34nw4r2ef15ParticleManager
+Initialize__Q34nw4r2ef17ParticleParameterFPQ34nw4r2ef21ParticleParameterDescPQ34nw4r2ef15ParticleManager:
 /* 800185F4 000134F4  94 21 FF 40 */	stwu r1, -0xc0(r1)
 /* 800185F8 000134F8  7C 08 02 A6 */	mflr r0
 /* 800185FC 000134FC  90 01 00 C4 */	stw r0, 0xc4(r1)
@@ -235,6 +241,9 @@ lbl_800187B0:
 /* 800188F8 000137F8  7C 08 03 A6 */	mtlr r0
 /* 800188FC 000137FC  38 21 00 C0 */	addi r1, r1, 0xc0
 /* 80018900 00013800  4E 80 00 20 */	blr 
+
+.global Initialize__Q34nw4r2ef8ParticleFUsQ34nw4r4math4VEC3Q34nw4r4math4VEC3PQ34nw4r2ef15ParticleManagerPCQ34nw4r4math5MTX34fPCQ34nw4r2ef21EmitterInheritSettingPQ34nw4r2ef8Particle
+Initialize__Q34nw4r2ef8ParticleFUsQ34nw4r4math4VEC3Q34nw4r4math4VEC3PQ34nw4r2ef15ParticleManagerPCQ34nw4r4math5MTX34fPCQ34nw4r2ef21EmitterInheritSettingPQ34nw4r2ef8Particle:
 /* 80018904 00013804  94 21 FE E0 */	stwu r1, -0x120(r1)
 /* 80018908 00013808  7C 08 02 A6 */	mflr r0
 /* 8001890C 0001380C  90 01 01 24 */	stw r0, 0x124(r1)
@@ -269,14 +278,14 @@ lbl_8001896C:
 /* 8001897C 0001387C  90 07 00 10 */	stw r0, 0x10(r7)
 /* 80018980 00013880  92 E3 00 D8 */	stw r23, 0xd8(r3)
 /* 80018984 00013884  B2 E3 00 E2 */	sth r23, 0xe2(r3)
-/* 80018988 00013888  48 00 2A 75 */	bl func_8001B3FC
+/* 80018988 00013888  48 00 2A 75 */	bl GetInstance__Q34nw4r2ef8ResourceFv
 /* 8001898C 0001388C  80 9C 00 24 */	lwz r4, 0x24(r28)
 /* 80018990 00013890  7F 85 E3 78 */	mr r5, r28
 /* 80018994 00013894  38 78 00 20 */	addi r3, r24, 0x20
 /* 80018998 00013898  80 04 00 04 */	lwz r0, 4(r4)
 /* 8001899C 0001389C  7C 80 22 14 */	add r4, r0, r4
 /* 800189A0 000138A0  38 84 00 0C */	addi r4, r4, 0xc
-/* 800189A4 000138A4  4B FF FC 51 */	bl func_800185F4
+/* 800189A4 000138A4  4B FF FC 51 */	bl Initialize__Q34nw4r2ef17ParticleParameterFPQ34nw4r2ef21ParticleParameterDescPQ34nw4r2ef15ParticleManager
 /* 800189A8 000138A8  D3 F8 00 C4 */	stfs f31, 0xc4(r24)
 /* 800189AC 000138AC  3C 60 81 02 */	lis r3, 0x81020409@ha
 /* 800189B0 000138B0  3C 80 00 03 */	lis r4, 0x000343FD@ha
@@ -415,7 +424,7 @@ lbl_80018B80:
 /* 80018BB8 00013AB8  41 82 00 F4 */	beq lbl_80018CAC
 /* 80018BBC 00013ABC  80 7F 00 C8 */	lwz r3, 0xc8(r31)
 /* 80018BC0 00013AC0  38 81 00 30 */	addi r4, r1, 0x30
-/* 80018BC4 00013AC4  48 00 21 99 */	bl func_8001AD5C
+/* 80018BC4 00013AC4  48 00 21 99 */	bl CalcGlobalMtx__Q34nw4r2ef15ParticleManagerFPQ34nw4r4math5MTX34
 /* 80018BC8 00013AC8  C0 02 80 E0 */	lfs f0, lbl_804BFB00-_SDA2_BASE_(r2)
 /* 80018BCC 00013ACC  38 61 00 30 */	addi r3, r1, 0x30
 /* 80018BD0 00013AD0  38 9F 00 A0 */	addi r4, r31, 0xa0
@@ -426,7 +435,7 @@ lbl_80018B80:
 /* 80018BE4 00013AE4  48 0C F6 7D */	bl func_800E8260
 /* 80018BE8 00013AE8  80 78 00 C8 */	lwz r3, 0xc8(r24)
 /* 80018BEC 00013AEC  38 81 00 30 */	addi r4, r1, 0x30
-/* 80018BF0 00013AF0  48 00 21 6D */	bl func_8001AD5C
+/* 80018BF0 00013AF0  48 00 21 6D */	bl CalcGlobalMtx__Q34nw4r2ef15ParticleManagerFPQ34nw4r4math5MTX34
 /* 80018BF4 00013AF4  C0 02 80 E0 */	lfs f0, lbl_804BFB00-_SDA2_BASE_(r2)
 /* 80018BF8 00013AF8  38 61 00 30 */	addi r3, r1, 0x30
 /* 80018BFC 00013AFC  7C 64 1B 78 */	mr r4, r3
@@ -728,8 +737,8 @@ lbl_80019050:
 /* 8001906C 00013F6C  38 21 01 20 */	addi r1, r1, 0x120
 /* 80019070 00013F70  4E 80 00 20 */	blr 
 
-.global func_80019074
-func_80019074:
+.global Draw_GetColor__Q34nw4r2ef8ParticleFiP8_GXColorP8_GXColor
+Draw_GetColor__Q34nw4r2ef8ParticleFiP8_GXColorP8_GXColor:
 /* 80019074 00013F74  94 21 FF C0 */	stwu r1, -0x40(r1)
 /* 80019078 00013F78  7C 08 02 A6 */	mflr r0
 /* 8001907C 00013F7C  90 01 00 44 */	stw r0, 0x44(r1)
@@ -910,7 +919,7 @@ lbl_80019300:
 /* 80019304 00014204  7F 84 E3 78 */	mr r4, r28
 /* 80019308 00014208  7F A5 EB 78 */	mr r5, r29
 /* 8001930C 0001420C  7F C6 F3 78 */	mr r6, r30
-/* 80019310 00014210  48 00 1C C9 */	bl func_8001AFD8
+/* 80019310 00014210  48 00 1C C9 */	bl Draw_ModifyColor__Q34nw4r2ef15ParticleManagerFPQ34nw4r2ef8ParticleP8_GXColorP8_GXColor
 /* 80019314 00014214  39 61 00 40 */	addi r11, r1, 0x40
 /* 80019318 00014218  48 09 8A 79 */	bl func_800B1D90
 /* 8001931C 0001421C  80 01 00 44 */	lwz r0, 0x44(r1)

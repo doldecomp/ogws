@@ -1,11 +1,9 @@
 .include "macros.inc"
 
-# .text1 = .text
-
 .section .text, "ax"  # 0x800076E0 - 0x80355080
 
-.global func_80021384
-func_80021384:
+.global Create__Q34nw4r2ef19DrawStrategyBuilderFUl
+Create__Q34nw4r2ef19DrawStrategyBuilderFUl:
 /* 80021384 0001C284  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80021388 0001C288  7C 08 02 A6 */	mflr r0
 /* 8002138C 0001C28C  90 01 00 14 */	stw r0, 0x14(r1)
@@ -19,9 +17,9 @@ func_80021384:
 /* 800213AC 0001C2AC  40 82 00 28 */	bne lbl_800213D4
 /* 800213B0 0001C2B0  38 7F 00 0C */	addi r3, r31, 0xc
 /* 800213B4 0001C2B4  48 00 1F E1 */	bl func_80023394
-/* 800213B8 0001C2B8  3C 80 80 02 */	lis r4, lbl_80021568@ha
+/* 800213B8 0001C2B8  3C 80 80 02 */	lis r4, __dt__Q34nw4r2ef21DrawBillboardStrategyFv@ha
 /* 800213BC 0001C2BC  38 7F 00 0C */	addi r3, r31, 0xc
-/* 800213C0 0001C2C0  38 84 15 68 */	addi r4, r4, lbl_80021568@l
+/* 800213C0 0001C2C0  38 84 15 68 */	addi r4, r4, __dt__Q34nw4r2ef21DrawBillboardStrategyFv@l
 /* 800213C4 0001C2C4  38 BF 00 00 */	addi r5, r31, 0
 /* 800213C8 0001C2C8  48 09 04 6D */	bl func_800B1834
 /* 800213CC 0001C2CC  38 00 00 01 */	li r0, 1
@@ -32,9 +30,9 @@ lbl_800213D4:
 /* 800213DC 0001C2DC  40 82 00 28 */	bne lbl_80021404
 /* 800213E0 0001C2E0  38 7F 00 D4 */	addi r3, r31, 0xd4
 /* 800213E4 0001C2E4  48 00 3F 5D */	bl func_80025340
-/* 800213E8 0001C2E8  3C 80 80 02 */	lis r4, lbl_800215A8@ha
+/* 800213E8 0001C2E8  3C 80 80 02 */	lis r4, __dt__Q34nw4r2ef23DrawDirectionalStrategyFv@ha
 /* 800213EC 0001C2EC  38 7F 00 D4 */	addi r3, r31, 0xd4
-/* 800213F0 0001C2F0  38 84 15 A8 */	addi r4, r4, lbl_800215A8@l
+/* 800213F0 0001C2F0  38 84 15 A8 */	addi r4, r4, __dt__Q34nw4r2ef23DrawDirectionalStrategyFv@l
 /* 800213F4 0001C2F4  38 BF 00 C8 */	addi r5, r31, 0xc8
 /* 800213F8 0001C2F8  48 09 04 3D */	bl func_800B1834
 /* 800213FC 0001C2FC  38 00 00 01 */	li r0, 1
@@ -45,9 +43,9 @@ lbl_80021404:
 /* 8002140C 0001C30C  40 82 00 28 */	bne lbl_80021434
 /* 80021410 0001C310  38 7F 01 9C */	addi r3, r31, 0x19c
 /* 80021414 0001C314  48 00 60 31 */	bl func_80027444
-/* 80021418 0001C318  3C 80 80 02 */	lis r4, lbl_800215E8@ha
+/* 80021418 0001C318  3C 80 80 02 */	lis r4, __dt__Q34nw4r2ef16DrawFreeStrategyFv@ha
 /* 8002141C 0001C31C  38 7F 01 9C */	addi r3, r31, 0x19c
-/* 80021420 0001C320  38 84 15 E8 */	addi r4, r4, lbl_800215E8@l
+/* 80021420 0001C320  38 84 15 E8 */	addi r4, r4, __dt__Q34nw4r2ef16DrawFreeStrategyFv@l
 /* 80021424 0001C324  38 BF 01 90 */	addi r5, r31, 0x190
 /* 80021428 0001C328  48 09 04 0D */	bl func_800B1834
 /* 8002142C 0001C32C  38 00 00 01 */	li r0, 1
@@ -58,9 +56,9 @@ lbl_80021434:
 /* 8002143C 0001C33C  40 82 00 28 */	bne lbl_80021464
 /* 80021440 0001C340  38 7F 02 64 */	addi r3, r31, 0x264
 /* 80021444 0001C344  48 00 67 8D */	bl func_80027BD0
-/* 80021448 0001C348  3C 80 80 02 */	lis r4, lbl_80021628@ha
+/* 80021448 0001C348  3C 80 80 02 */	lis r4, __dt__Q34nw4r2ef16DrawLineStrategyFv@ha
 /* 8002144C 0001C34C  38 7F 02 64 */	addi r3, r31, 0x264
-/* 80021450 0001C350  38 84 16 28 */	addi r4, r4, lbl_80021628@l
+/* 80021450 0001C350  38 84 16 28 */	addi r4, r4, __dt__Q34nw4r2ef16DrawLineStrategyFv@l
 /* 80021454 0001C354  38 BF 02 58 */	addi r5, r31, 0x258
 /* 80021458 0001C358  48 09 03 DD */	bl func_800B1834
 /* 8002145C 0001C35C  38 00 00 01 */	li r0, 1
@@ -71,9 +69,9 @@ lbl_80021464:
 /* 8002146C 0001C36C  40 82 00 28 */	bne lbl_80021494
 /* 80021470 0001C370  38 7F 03 2C */	addi r3, r31, 0x32c
 /* 80021474 0001C374  48 00 6C 39 */	bl func_800280AC
-/* 80021478 0001C378  3C 80 80 02 */	lis r4, lbl_80021668@ha
+/* 80021478 0001C378  3C 80 80 02 */	lis r4, __dt__Q34nw4r2ef17DrawPointStrategyFv@ha
 /* 8002147C 0001C37C  38 7F 03 2C */	addi r3, r31, 0x32c
-/* 80021480 0001C380  38 84 16 68 */	addi r4, r4, lbl_80021668@l
+/* 80021480 0001C380  38 84 16 68 */	addi r4, r4, __dt__Q34nw4r2ef17DrawPointStrategyFv@l
 /* 80021484 0001C384  38 BF 03 20 */	addi r5, r31, 0x320
 /* 80021488 0001C388  48 09 03 AD */	bl func_800B1834
 /* 8002148C 0001C38C  38 00 00 01 */	li r0, 1
@@ -84,9 +82,9 @@ lbl_80021494:
 /* 8002149C 0001C39C  40 82 00 28 */	bne lbl_800214C4
 /* 800214A0 0001C3A0  38 7F 03 F4 */	addi r3, r31, 0x3f4
 /* 800214A4 0001C3A4  48 00 6E FD */	bl func_800283A0
-/* 800214A8 0001C3A8  3C 80 80 02 */	lis r4, lbl_800216A8@ha
+/* 800214A8 0001C3A8  3C 80 80 02 */	lis r4, __dt__Q34nw4r2ef18DrawStripeStrategyFv@ha
 /* 800214AC 0001C3AC  38 7F 03 F4 */	addi r3, r31, 0x3f4
-/* 800214B0 0001C3B0  38 84 16 A8 */	addi r4, r4, lbl_800216A8@l
+/* 800214B0 0001C3B0  38 84 16 A8 */	addi r4, r4, __dt__Q34nw4r2ef18DrawStripeStrategyFv@l
 /* 800214B4 0001C3B4  38 BF 03 E8 */	addi r5, r31, 0x3e8
 /* 800214B8 0001C3B8  48 09 03 7D */	bl func_800B1834
 /* 800214BC 0001C3BC  38 00 00 01 */	li r0, 1
@@ -97,9 +95,9 @@ lbl_800214C4:
 /* 800214CC 0001C3CC  40 82 00 28 */	bne lbl_800214F4
 /* 800214D0 0001C3D0  38 7F 04 BC */	addi r3, r31, 0x4bc
 /* 800214D4 0001C3D4  48 00 9D 19 */	bl func_8002B1EC
-/* 800214D8 0001C3D8  3C 80 80 02 */	lis r4, lbl_800216E8@ha
+/* 800214D8 0001C3D8  3C 80 80 02 */	lis r4, __dt__Q34nw4r2ef24DrawSmoothStripeStrategyFv@ha
 /* 800214DC 0001C3DC  38 7F 04 BC */	addi r3, r31, 0x4bc
-/* 800214E0 0001C3E0  38 84 16 E8 */	addi r4, r4, lbl_800216E8@l
+/* 800214E0 0001C3E0  38 84 16 E8 */	addi r4, r4, __dt__Q34nw4r2ef24DrawSmoothStripeStrategyFv@l
 /* 800214E4 0001C3E4  38 BF 04 B0 */	addi r5, r31, 0x4b0
 /* 800214E8 0001C3E8  48 09 03 4D */	bl func_800B1834
 /* 800214EC 0001C3EC  38 00 00 01 */	li r0, 1
@@ -136,7 +134,9 @@ lbl_80021550:
 /* 8002155C 0001C45C  7C 08 03 A6 */	mtlr r0
 /* 80021560 0001C460  38 21 00 10 */	addi r1, r1, 0x10
 /* 80021564 0001C464  4E 80 00 20 */	blr 
-lbl_80021568:
+
+.global __dt__Q34nw4r2ef21DrawBillboardStrategyFv
+__dt__Q34nw4r2ef21DrawBillboardStrategyFv:
 /* 80021568 0001C468  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8002156C 0001C46C  7C 08 02 A6 */	mflr r0
 /* 80021570 0001C470  2C 03 00 00 */	cmpwi r3, 0
@@ -154,7 +154,9 @@ lbl_80021590:
 /* 8002159C 0001C49C  7C 08 03 A6 */	mtlr r0
 /* 800215A0 0001C4A0  38 21 00 10 */	addi r1, r1, 0x10
 /* 800215A4 0001C4A4  4E 80 00 20 */	blr 
-lbl_800215A8:
+
+.global __dt__Q34nw4r2ef23DrawDirectionalStrategyFv
+__dt__Q34nw4r2ef23DrawDirectionalStrategyFv:
 /* 800215A8 0001C4A8  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 800215AC 0001C4AC  7C 08 02 A6 */	mflr r0
 /* 800215B0 0001C4B0  2C 03 00 00 */	cmpwi r3, 0
@@ -172,7 +174,9 @@ lbl_800215D0:
 /* 800215DC 0001C4DC  7C 08 03 A6 */	mtlr r0
 /* 800215E0 0001C4E0  38 21 00 10 */	addi r1, r1, 0x10
 /* 800215E4 0001C4E4  4E 80 00 20 */	blr 
-lbl_800215E8:
+
+.global __dt__Q34nw4r2ef16DrawFreeStrategyFv
+__dt__Q34nw4r2ef16DrawFreeStrategyFv:
 /* 800215E8 0001C4E8  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 800215EC 0001C4EC  7C 08 02 A6 */	mflr r0
 /* 800215F0 0001C4F0  2C 03 00 00 */	cmpwi r3, 0
@@ -190,7 +194,9 @@ lbl_80021610:
 /* 8002161C 0001C51C  7C 08 03 A6 */	mtlr r0
 /* 80021620 0001C520  38 21 00 10 */	addi r1, r1, 0x10
 /* 80021624 0001C524  4E 80 00 20 */	blr 
-lbl_80021628:
+
+.global __dt__Q34nw4r2ef16DrawLineStrategyFv
+__dt__Q34nw4r2ef16DrawLineStrategyFv:
 /* 80021628 0001C528  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8002162C 0001C52C  7C 08 02 A6 */	mflr r0
 /* 80021630 0001C530  2C 03 00 00 */	cmpwi r3, 0
@@ -208,7 +214,9 @@ lbl_80021650:
 /* 8002165C 0001C55C  7C 08 03 A6 */	mtlr r0
 /* 80021660 0001C560  38 21 00 10 */	addi r1, r1, 0x10
 /* 80021664 0001C564  4E 80 00 20 */	blr 
-lbl_80021668:
+
+.global __dt__Q34nw4r2ef17DrawPointStrategyFv
+__dt__Q34nw4r2ef17DrawPointStrategyFv:
 /* 80021668 0001C568  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8002166C 0001C56C  7C 08 02 A6 */	mflr r0
 /* 80021670 0001C570  2C 03 00 00 */	cmpwi r3, 0
@@ -226,7 +234,9 @@ lbl_80021690:
 /* 8002169C 0001C59C  7C 08 03 A6 */	mtlr r0
 /* 800216A0 0001C5A0  38 21 00 10 */	addi r1, r1, 0x10
 /* 800216A4 0001C5A4  4E 80 00 20 */	blr 
-lbl_800216A8:
+
+.global __dt__Q34nw4r2ef18DrawStripeStrategyFv
+__dt__Q34nw4r2ef18DrawStripeStrategyFv:
 /* 800216A8 0001C5A8  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 800216AC 0001C5AC  7C 08 02 A6 */	mflr r0
 /* 800216B0 0001C5B0  2C 03 00 00 */	cmpwi r3, 0
@@ -244,7 +254,9 @@ lbl_800216D0:
 /* 800216DC 0001C5DC  7C 08 03 A6 */	mtlr r0
 /* 800216E0 0001C5E0  38 21 00 10 */	addi r1, r1, 0x10
 /* 800216E4 0001C5E4  4E 80 00 20 */	blr 
-lbl_800216E8:
+
+.global __dt__Q34nw4r2ef24DrawSmoothStripeStrategyFv
+__dt__Q34nw4r2ef24DrawSmoothStripeStrategyFv:
 /* 800216E8 0001C5E8  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 800216EC 0001C5EC  7C 08 02 A6 */	mflr r0
 /* 800216F0 0001C5F0  2C 03 00 00 */	cmpwi r3, 0

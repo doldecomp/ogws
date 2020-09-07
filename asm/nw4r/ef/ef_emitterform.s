@@ -4,8 +4,8 @@
 
 .section .text, "ax"  # 0x800076E0 - 0x80355080
 
-.global func_8001CB84
-func_8001CB84:
+.global CalcVelocity__Q34nw4r2ef11EmitterFormCFPQ34nw4r4math4VEC3PQ34nw4r2ef7EmitterRCQ34nw4r4math4VEC3RCQ34nw4r4math4VEC3RCQ34nw4r4math4VEC3RCQ34nw4r4math4VEC3
+CalcVelocity__Q34nw4r2ef11EmitterFormCFPQ34nw4r4math4VEC3PQ34nw4r2ef7EmitterRCQ34nw4r4math4VEC3RCQ34nw4r4math4VEC3RCQ34nw4r4math4VEC3RCQ34nw4r4math4VEC3:
 /* 8001CB84 00017A84  94 21 FE D0 */	stwu r1, -0x130(r1)
 /* 8001CB88 00017A88  7C 08 02 A6 */	mflr r0
 /* 8001CB8C 00017A8C  90 01 01 34 */	stw r0, 0x134(r1)
@@ -342,8 +342,8 @@ lbl_8001D054:
 /* 8001D098 00017F98  38 21 01 30 */	addi r1, r1, 0x130
 /* 8001D09C 00017F9C  4E 80 00 20 */	blr 
 
-.global func_8001D0A0
-func_8001D0A0:
+.global CalcLife__Q34nw4r2ef11EmitterFormFUsfPQ34nw4r2ef7Emitter
+CalcLife__Q34nw4r2ef11EmitterFormFUsfPQ34nw4r2ef7Emitter:
 /* 8001D0A0 00017FA0  C0 02 81 50 */	lfs f0, lbl_804BFB70-_SDA2_BASE_(r2)
 /* 8001D0A4 00017FA4  3C 00 43 30 */	lis r0, 0x4330
 /* 8001D0A8 00017FA8  94 21 FF E0 */	stwu r1, -0x20(r1)

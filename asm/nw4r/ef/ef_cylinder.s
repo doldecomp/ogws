@@ -1,11 +1,9 @@
 .include "macros.inc"
 
-# .text1 = .text
-
 .section .text, "ax"  # 0x800076E0 - 0x80355080
 
-.global func_8001E9F0
-func_8001E9F0:
+.global EmissionSub__Q34nw4r2ef19EmitterFormCylinderFPQ34nw4r2ef7EmitterPQ34nw4r2ef15ParticleManageriUlPfUsfPCQ34nw4r4math5MTX34fffffff
+EmissionSub__Q34nw4r2ef19EmitterFormCylinderFPQ34nw4r2ef7EmitterPQ34nw4r2ef15ParticleManageriUlPfUsfPCQ34nw4r4math5MTX34fffffff:
 /* 8001E9F0 000198F0  94 21 FE 30 */	stwu r1, -0x1d0(r1)
 /* 8001E9F4 000198F4  7C 08 02 A6 */	mflr r0
 /* 8001E9F8 000198F8  90 01 01 D4 */	stw r0, 0x1d4(r1)
@@ -201,7 +199,7 @@ lbl_8001ECB8:
 /* 8001ECC8 00019BC8  38 E1 00 2C */	addi r7, r1, 0x2c
 /* 8001ECCC 00019BCC  39 01 00 20 */	addi r8, r1, 0x20
 /* 8001ECD0 00019BD0  39 21 00 38 */	addi r9, r1, 0x38
-/* 8001ECD4 00019BD4  4B FF DE B1 */	bl func_8001CB84
+/* 8001ECD4 00019BD4  4B FF DE B1 */	bl CalcVelocity__Q34nw4r2ef11EmitterFormCFPQ34nw4r4math4VEC3PQ34nw4r2ef7EmitterRCQ34nw4r4math4VEC3RCQ34nw4r4math4VEC3RCQ34nw4r4math4VEC3RCQ34nw4r4math4VEC3
 /* 8001ECD8 00019BD8  80 15 00 EC */	lwz r0, 0xec(r21)
 /* 8001ECDC 00019BDC  FC 20 C0 90 */	fmr f1, f24
 /* 8001ECE0 00019BE0  7E 83 A3 78 */	mr r3, r20
@@ -228,7 +226,7 @@ lbl_8001ECB8:
 /* 8001ED34 00019C34  90 E1 00 14 */	stw r7, 0x14(r1)
 /* 8001ED38 00019C38  90 C1 00 18 */	stw r6, 0x18(r1)
 /* 8001ED3C 00019C3C  90 01 00 1C */	stw r0, 0x1c(r1)
-/* 8001ED40 00019C40  4B FF E3 61 */	bl func_8001D0A0
+/* 8001ED40 00019C40  4B FF E3 61 */	bl CalcLife__Q34nw4r2ef11EmitterFormFUsfPQ34nw4r2ef7Emitter
 /* 8001ED44 00019C44  88 15 00 67 */	lbz r0, 0x67(r21)
 /* 8001ED48 00019C48  7C 64 1B 78 */	mr r4, r3
 /* 8001ED4C 00019C4C  81 96 00 1C */	lwz r12, 0x1c(r22)
@@ -301,6 +299,9 @@ lbl_8001EDAC:
 /* 8001EE50 00019D50  7C 08 03 A6 */	mtlr r0
 /* 8001EE54 00019D54  38 21 01 D0 */	addi r1, r1, 0x1d0
 /* 8001EE58 00019D58  4E 80 00 20 */	blr 
+
+.global Emission__Q34nw4r2ef19EmitterFormCylinderFPQ34nw4r2ef7EmitterPQ34nw4r2ef15ParticleManageriUlPfUsfPCQ34nw4r4math5MTX34
+Emission__Q34nw4r2ef19EmitterFormCylinderFPQ34nw4r2ef7EmitterPQ34nw4r2ef15ParticleManageriUlPfUsfPCQ34nw4r4math5MTX34:
 /* 8001EE5C 00019D5C  94 21 FF 20 */	stwu r1, -0xe0(r1)
 /* 8001EE60 00019D60  7C 08 02 A6 */	mflr r0
 /* 8001EE64 00019D64  90 01 00 E4 */	stw r0, 0xe4(r1)
@@ -478,7 +479,7 @@ lbl_8001F0A8:
 /* 8001F0D8 00019FD8  FC E0 D8 90 */	fmr f7, f27
 /* 8001F0DC 00019FDC  7F C9 F3 78 */	mr r9, r30
 /* 8001F0E0 00019FE0  7F EA FB 78 */	mr r10, r31
-/* 8001F0E4 00019FE4  4B FF F9 0D */	bl func_8001E9F0
+/* 8001F0E4 00019FE4  4B FF F9 0D */	bl EmissionSub__Q34nw4r2ef19EmitterFormCylinderFPQ34nw4r2ef7EmitterPQ34nw4r2ef15ParticleManageriUlPfUsfPCQ34nw4r4math5MTX34fffffff
 /* 8001F0E8 00019FE8  3A F7 00 01 */	addi r23, r23, 1
 lbl_8001F0EC:
 /* 8001F0EC 00019FEC  7C 17 D8 00 */	cmpw r23, r27
@@ -501,7 +502,7 @@ lbl_8001F0F8:
 /* 8001F12C 0001A02C  7F A8 EB 78 */	mr r8, r29
 /* 8001F130 0001A030  7F C9 F3 78 */	mr r9, r30
 /* 8001F134 0001A034  7F EA FB 78 */	mr r10, r31
-/* 8001F138 0001A038  4B FF F8 B9 */	bl func_8001E9F0
+/* 8001F138 0001A038  4B FF F8 B9 */	bl EmissionSub__Q34nw4r2ef19EmitterFormCylinderFPQ34nw4r2ef7EmitterPQ34nw4r2ef15ParticleManageriUlPfUsfPCQ34nw4r4math5MTX34fffffff
 lbl_8001F13C:
 /* 8001F13C 0001A03C  E3 E1 00 D8 */	psq_l f31, 216(r1), 0, qr0
 /* 8001F140 0001A040  CB E1 00 D0 */	lfd f31, 0xd0(r1)

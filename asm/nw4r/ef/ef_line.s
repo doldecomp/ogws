@@ -1,11 +1,9 @@
 .include "macros.inc"
 
-# .text1 = .text
-
 .section .text, "ax"  # 0x800076E0 - 0x80355080
 
-.global func_8001D838
-func_8001D838:
+.global Emission__Q34nw4r2ef15EmitterFormLineFPQ34nw4r2ef7EmitterPQ34nw4r2ef15ParticleManageriUlPfUsfPCQ34nw4r4math5MTX34
+Emission__Q34nw4r2ef15EmitterFormLineFPQ34nw4r2ef7EmitterPQ34nw4r2ef15ParticleManageriUlPfUsfPCQ34nw4r4math5MTX34:
 /* 8001D838 00018738  94 21 FE 90 */	stwu r1, -0x170(r1)
 /* 8001D83C 0001873C  7C 08 02 A6 */	mflr r0
 /* 8001D840 00018740  90 01 01 74 */	stw r0, 0x174(r1)
@@ -155,7 +153,7 @@ lbl_8001D9A0:
 /* 8001DA6C 0001896C  D0 21 00 48 */	stfs f1, 0x48(r1)
 /* 8001DA70 00018970  D0 41 00 44 */	stfs f2, 0x44(r1)
 /* 8001DA74 00018974  D0 41 00 2C */	stfs f2, 0x2c(r1)
-/* 8001DA78 00018978  4B FF F1 0D */	bl func_8001CB84
+/* 8001DA78 00018978  4B FF F1 0D */	bl CalcVelocity__Q34nw4r2ef11EmitterFormCFPQ34nw4r4math4VEC3PQ34nw4r2ef7EmitterRCQ34nw4r4math4VEC3RCQ34nw4r4math4VEC3RCQ34nw4r4math4VEC3RCQ34nw4r4math4VEC3
 /* 8001DA7C 0001897C  80 15 00 EC */	lwz r0, 0xec(r21)
 /* 8001DA80 00018980  FC 20 A0 90 */	fmr f1, f20
 /* 8001DA84 00018984  7E 83 A3 78 */	mr r3, r20
@@ -182,7 +180,7 @@ lbl_8001D9A0:
 /* 8001DAD8 000189D8  90 E1 00 14 */	stw r7, 0x14(r1)
 /* 8001DADC 000189DC  90 C1 00 18 */	stw r6, 0x18(r1)
 /* 8001DAE0 000189E0  90 01 00 1C */	stw r0, 0x1c(r1)
-/* 8001DAE4 000189E4  4B FF F5 BD */	bl func_8001D0A0
+/* 8001DAE4 000189E4  4B FF F5 BD */	bl CalcLife__Q34nw4r2ef11EmitterFormFUsfPQ34nw4r2ef7Emitter
 /* 8001DAE8 000189E8  88 15 00 67 */	lbz r0, 0x67(r21)
 /* 8001DAEC 000189EC  7C 64 1B 78 */	mr r4, r3
 /* 8001DAF0 000189F0  81 96 00 1C */	lwz r12, 0x1c(r22)
