@@ -16,7 +16,7 @@ Create__Q34nw4r2ef19DrawStrategyBuilderFUl:
 /* 800213A8 0001C2A8  7C 00 07 75 */	extsb. r0, r0
 /* 800213AC 0001C2AC  40 82 00 28 */	bne lbl_800213D4
 /* 800213B0 0001C2B0  38 7F 00 0C */	addi r3, r31, 0xc
-/* 800213B4 0001C2B4  48 00 1F E1 */	bl func_80023394
+/* 800213B4 0001C2B4  48 00 1F E1 */	bl __ct__Q34nw4r2ef21DrawBillboardStrategyFv
 /* 800213B8 0001C2B8  3C 80 80 02 */	lis r4, __dt__Q34nw4r2ef21DrawBillboardStrategyFv@ha
 /* 800213BC 0001C2BC  38 7F 00 0C */	addi r3, r31, 0xc
 /* 800213C0 0001C2C0  38 84 15 68 */	addi r4, r4, __dt__Q34nw4r2ef21DrawBillboardStrategyFv@l

@@ -2256,27 +2256,27 @@ lbl_80027340:
 /* 800273B4 000222B4  7C 63 00 2E */	lwzx r3, r3, r0
 /* 800273B8 000222B8  7C 69 03 A6 */	mtctr r3
 /* 800273BC 000222BC  4E 80 04 20 */	bctr 
-/* 800273C0 000222C0  3C 60 80 02 */	lis r3, func_80024D0C@ha
-/* 800273C4 000222C4  38 63 4D 0C */	addi r3, r3, func_80024D0C@l
+/* 800273C0 000222C0  3C 60 80 02 */	lis r3, CalcAhead_Speed__Q34nw4r2ef16DrawStrategyImplFPQ34nw4r4math4VEC3PQ44nw4r2ef16DrawStrategyImpl12AheadContextPQ34nw4r2ef8Particle@ha
+/* 800273C4 000222C4  38 63 4D 0C */	addi r3, r3, CalcAhead_Speed__Q34nw4r2ef16DrawStrategyImplFPQ34nw4r4math4VEC3PQ44nw4r2ef16DrawStrategyImpl12AheadContextPQ34nw4r2ef8Particle@l
 /* 800273C8 000222C8  4E 80 00 20 */	blr 
-/* 800273CC 000222CC  3C 60 80 02 */	lis r3, func_80024E14@ha
-/* 800273D0 000222D0  38 63 4E 14 */	addi r3, r3, func_80024E14@l
+/* 800273CC 000222CC  3C 60 80 02 */	lis r3, CalcAhead_EmitterCenter__Q34nw4r2ef16DrawStrategyImplFPQ34nw4r4math4VEC3PQ44nw4r2ef16DrawStrategyImpl12AheadContextPQ34nw4r2ef8Particle@ha
+/* 800273D0 000222D0  38 63 4E 14 */	addi r3, r3, CalcAhead_EmitterCenter__Q34nw4r2ef16DrawStrategyImplFPQ34nw4r4math4VEC3PQ44nw4r2ef16DrawStrategyImpl12AheadContextPQ34nw4r2ef8Particle@l
 /* 800273D4 000222D4  4E 80 00 20 */	blr 
-/* 800273D8 000222D8  3C 60 80 02 */	lis r3, func_80024F04@ha
-/* 800273DC 000222DC  38 63 4F 04 */	addi r3, r3, func_80024F04@l
+/* 800273D8 000222D8  3C 60 80 02 */	lis r3, CalcAhead_EmitterDesign__Q34nw4r2ef16DrawStrategyImplFPQ34nw4r4math4VEC3PQ44nw4r2ef16DrawStrategyImpl12AheadContextPQ34nw4r2ef8Particle@ha
+/* 800273DC 000222DC  38 63 4F 04 */	addi r3, r3, CalcAhead_EmitterDesign__Q34nw4r2ef16DrawStrategyImplFPQ34nw4r4math4VEC3PQ44nw4r2ef16DrawStrategyImpl12AheadContextPQ34nw4r2ef8Particle@l
 /* 800273E0 000222E0  4E 80 00 20 */	blr 
-/* 800273E4 000222E4  3C 60 80 02 */	lis r3, func_80024F20@ha
-/* 800273E8 000222E8  38 63 4F 20 */	addi r3, r3, func_80024F20@l
+/* 800273E4 000222E4  3C 60 80 02 */	lis r3, CalcAhead_Particle__Q34nw4r2ef16DrawStrategyImplFPQ34nw4r4math4VEC3PQ44nw4r2ef16DrawStrategyImpl12AheadContextPQ34nw4r2ef8Particle@ha
+/* 800273E8 000222E8  38 63 4F 20 */	addi r3, r3, CalcAhead_Particle__Q34nw4r2ef16DrawStrategyImplFPQ34nw4r4math4VEC3PQ44nw4r2ef16DrawStrategyImpl12AheadContextPQ34nw4r2ef8Particle@l
 /* 800273EC 000222EC  4E 80 00 20 */	blr 
 /* 800273F0 000222F0  3C 60 80 02 */	lis r3, func_80027414@ha
 /* 800273F4 000222F4  38 63 74 14 */	addi r3, r3, func_80027414@l
 /* 800273F8 000222F8  4E 80 00 20 */	blr 
-/* 800273FC 000222FC  3C 60 80 02 */	lis r3, func_80025064@ha
-/* 80027400 00022300  38 63 50 64 */	addi r3, r3, func_80025064@l
+/* 800273FC 000222FC  3C 60 80 02 */	lis r3, CalcAhead_ParticleBoth__Q34nw4r2ef16DrawStrategyImplFPQ34nw4r4math4VEC3PQ44nw4r2ef16DrawStrategyImpl12AheadContextPQ34nw4r2ef8Particle@ha
+/* 80027400 00022300  38 63 50 64 */	addi r3, r3, CalcAhead_ParticleBoth__Q34nw4r2ef16DrawStrategyImplFPQ34nw4r4math4VEC3PQ44nw4r2ef16DrawStrategyImpl12AheadContextPQ34nw4r2ef8Particle@l
 /* 80027404 00022304  4E 80 00 20 */	blr 
 lbl_80027408:
-/* 80027408 00022308  3C 60 80 02 */	lis r3, func_80024D0C@ha
-/* 8002740C 0002230C  38 63 4D 0C */	addi r3, r3, func_80024D0C@l
+/* 80027408 00022308  3C 60 80 02 */	lis r3, CalcAhead_Speed__Q34nw4r2ef16DrawStrategyImplFPQ34nw4r4math4VEC3PQ44nw4r2ef16DrawStrategyImpl12AheadContextPQ34nw4r2ef8Particle@ha
+/* 8002740C 0002230C  38 63 4D 0C */	addi r3, r3, CalcAhead_Speed__Q34nw4r2ef16DrawStrategyImplFPQ34nw4r4math4VEC3PQ44nw4r2ef16DrawStrategyImpl12AheadContextPQ34nw4r2ef8Particle@l
 /* 80027410 00022310  4E 80 00 20 */	blr 
 
 .global func_80027414
