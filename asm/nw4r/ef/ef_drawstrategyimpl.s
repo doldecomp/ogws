@@ -1,11 +1,9 @@
 .include "macros.inc"
 
-# .text1 = .text
-
 .section .text, "ax"  # 0x800076E0 - 0x80355080
 
-.global func_80021728
-func_80021728:
+.global __ct__Q34nw4r2ef16DrawStrategyImplFv
+__ct__Q34nw4r2ef16DrawStrategyImplFv:
 /* 80021728 0001C628  C0 22 83 38 */	lfs f1, lbl_804BFD58-_SDA2_BASE_(r2)
 /* 8002172C 0001C62C  3C 80 80 39 */	lis r4, lbl_80393FD8@ha
 /* 80021730 0001C630  C0 02 83 3C */	lfs f0, lbl_804BFD5C-_SDA2_BASE_(r2)
@@ -210,8 +208,8 @@ lbl_800219FC:
 /* 80021A30 0001C930  42 00 FF CC */	bdnz lbl_800219FC
 /* 80021A34 0001C934  4E 80 00 20 */	blr 
 
-.global func_80021A38
-func_80021A38:
+.global InitTexture__Q34nw4r2ef16DrawStrategyImplFRCQ34nw4r2ef18EmitterDrawSetting
+InitTexture__Q34nw4r2ef16DrawStrategyImplFRCQ34nw4r2ef18EmitterDrawSetting:
 /* 80021A38 0001C938  A0 04 00 00 */	lhz r0, 0(r4)
 /* 80021A3C 0001C93C  38 A0 FF FF */	li r5, -1
 /* 80021A40 0001C940  38 C0 00 00 */	li r6, 0
@@ -244,8 +242,8 @@ lbl_80021AA0:
 /* 80021AA0 0001C9A0  88 63 00 AE */	lbz r3, 0xae(r3)
 /* 80021AA4 0001C9A4  48 0B C4 E4 */	b func_800DDF88
 
-.global func_80021AA8
-func_80021AA8:
+.global InitTev__Q34nw4r2ef16DrawStrategyImplFRCQ34nw4r2ef18EmitterDrawSettingRCQ34nw4r2ef8DrawInfo
+InitTev__Q34nw4r2ef16DrawStrategyImplFRCQ34nw4r2ef18EmitterDrawSettingRCQ34nw4r2ef8DrawInfo:
 /* 80021AA8 0001C9A8  94 21 FF C0 */	stwu r1, -0x40(r1)
 /* 80021AAC 0001C9AC  7C 08 02 A6 */	mflr r0
 /* 80021AB0 0001C9B0  90 01 00 44 */	stw r0, 0x44(r1)
@@ -441,8 +439,8 @@ lbl_80021D70:
 /* 80021D80 0001CC80  38 21 00 40 */	addi r1, r1, 0x40
 /* 80021D84 0001CC84  4E 80 00 20 */	blr 
 
-.global func_80021D88
-func_80021D88:
+.global InitColor__Q34nw4r2ef16DrawStrategyImplFPQ34nw4r2ef15ParticleManagerRCQ34nw4r2ef18EmitterDrawSettingRCQ34nw4r2ef8DrawInfo
+InitColor__Q34nw4r2ef16DrawStrategyImplFPQ34nw4r2ef15ParticleManagerRCQ34nw4r2ef18EmitterDrawSettingRCQ34nw4r2ef8DrawInfo:
 /* 80021D88 0001CC88  94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 80021D8C 0001CC8C  7C 08 02 A6 */	mflr r0
 /* 80021D90 0001CC90  90 01 00 34 */	stw r0, 0x34(r1)
@@ -633,8 +631,8 @@ lbl_8002201C:
 /* 80022030 0001CF30  38 21 00 30 */	addi r1, r1, 0x30
 /* 80022034 0001CF34  4E 80 00 20 */	blr 
 
-.global func_80022038
-func_80022038:
+.global SetupGP__Q34nw4r2ef16DrawStrategyImplFPQ34nw4r2ef8ParticleRCQ34nw4r2ef18EmitterDrawSettingRCQ34nw4r2ef8DrawInfobb
+SetupGP__Q34nw4r2ef16DrawStrategyImplFPQ34nw4r2ef8ParticleRCQ34nw4r2ef18EmitterDrawSettingRCQ34nw4r2ef8DrawInfobb:
 /* 80022038 0001CF38  94 21 FF B0 */	stwu r1, -0x50(r1)
 /* 8002203C 0001CF3C  7C 08 02 A6 */	mflr r0
 /* 80022040 0001CF40  90 01 00 54 */	stw r0, 0x54(r1)
@@ -672,7 +670,7 @@ lbl_800220B0:
 /* 800220B4 0001CFB4  7F 64 DB 78 */	mr r4, r27
 /* 800220B8 0001CFB8  7F 85 E3 78 */	mr r5, r28
 /* 800220BC 0001CFBC  7F C6 F3 78 */	mr r6, r30
-/* 800220C0 0001CFC0  48 00 04 51 */	bl func_80022510
+/* 800220C0 0001CFC0  48 00 04 51 */	bl _SetupTevReg__Q34nw4r2ef16DrawStrategyImplFPQ34nw4r2ef8ParticleRCQ34nw4r2ef18EmitterDrawSettingb
 /* 800220C4 0001CFC4  2C 1F 00 00 */	cmpwi r31, 0
 /* 800220C8 0001CFC8  3B E0 00 00 */	li r31, 0
 /* 800220CC 0001CFCC  40 82 00 0C */	bne lbl_800220D8
@@ -686,7 +684,7 @@ lbl_800220DC:
 /* 800220E4 0001CFE4  7F 85 E3 78 */	mr r5, r28
 /* 800220E8 0001CFE8  7F A6 EB 78 */	mr r6, r29
 /* 800220EC 0001CFEC  7F C7 F3 78 */	mr r7, r30
-/* 800220F0 0001CFF0  48 00 07 8D */	bl func_8002287C
+/* 800220F0 0001CFF0  48 00 07 8D */	bl _SetupTexture__Q34nw4r2ef16DrawStrategyImplFPQ34nw4r2ef8ParticleRCQ34nw4r2ef18EmitterDrawSettingRCQ34nw4r2ef8DrawInfob
 /* 800220F4 0001CFF4  2C 1F 00 00 */	cmpwi r31, 0
 /* 800220F8 0001CFF8  3B E0 00 00 */	li r31, 0
 /* 800220FC 0001CFFC  41 82 00 10 */	beq lbl_8002210C
@@ -1003,8 +1001,8 @@ lbl_800224F8:
 /* 80022508 0001D408  38 21 00 50 */	addi r1, r1, 0x50
 /* 8002250C 0001D40C  4E 80 00 20 */	blr 
 
-.global func_80022510
-func_80022510:
+.global _SetupTevReg__Q34nw4r2ef16DrawStrategyImplFPQ34nw4r2ef8ParticleRCQ34nw4r2ef18EmitterDrawSettingb
+_SetupTevReg__Q34nw4r2ef16DrawStrategyImplFPQ34nw4r2ef8ParticleRCQ34nw4r2ef18EmitterDrawSettingb:
 /* 80022510 0001D410  94 21 FF B0 */	stwu r1, -0x50(r1)
 /* 80022514 0001D414  7C 08 02 A6 */	mflr r0
 /* 80022518 0001D418  90 01 00 54 */	stw r0, 0x54(r1)
@@ -1241,8 +1239,8 @@ lbl_80022860:
 /* 80022874 0001D774  38 21 00 50 */	addi r1, r1, 0x50
 /* 80022878 0001D778  4E 80 00 20 */	blr 
 
-.global func_8002287C
-func_8002287C:
+.global _SetupTexture__Q34nw4r2ef16DrawStrategyImplFPQ34nw4r2ef8ParticleRCQ34nw4r2ef18EmitterDrawSettingRCQ34nw4r2ef8DrawInfob
+_SetupTexture__Q34nw4r2ef16DrawStrategyImplFPQ34nw4r2ef8ParticleRCQ34nw4r2ef18EmitterDrawSettingRCQ34nw4r2ef8DrawInfob:
 /* 8002287C 0001D77C  94 21 FE 40 */	stwu r1, -0x1c0(r1)
 /* 80022880 0001D780  7C 08 02 A6 */	mflr r0
 /* 80022884 0001D784  90 01 01 C4 */	stw r0, 0x1c4(r1)
@@ -1706,29 +1704,37 @@ lbl_80022EBC:
 /* 80022F48 0001DE48  7C 08 03 A6 */	mtlr r0
 /* 80022F4C 0001DE4C  38 21 01 C0 */	addi r1, r1, 0x1c0
 /* 80022F50 0001DE50  4E 80 00 20 */	blr 
+
+.global GetGetFirstDrawParticleFunc__Q34nw4r2ef16DrawStrategyImplFi
+GetGetFirstDrawParticleFunc__Q34nw4r2ef16DrawStrategyImplFi:
 /* 80022F54 0001DE54  2C 04 00 00 */	cmpwi r4, 0
 /* 80022F58 0001DE58  41 82 00 08 */	beq lbl_80022F60
 /* 80022F5C 0001DE5C  48 00 00 10 */	b lbl_80022F6C
 lbl_80022F60:
-/* 80022F60 0001DE60  3C 60 80 02 */	lis r3, lbl_80022FCC@ha
-/* 80022F64 0001DE64  38 63 2F CC */	addi r3, r3, lbl_80022FCC@l
+/* 80022F60 0001DE60  3C 60 80 02 */	lis r3, GetFirstDrawParticle_YoungersFirst__Q34nw4r2ef16DrawStrategyImplFPQ34nw4r2ef15ParticleManager@ha
+/* 80022F64 0001DE64  38 63 2F CC */	addi r3, r3, GetFirstDrawParticle_YoungersFirst__Q34nw4r2ef16DrawStrategyImplFPQ34nw4r2ef15ParticleManager@l
 /* 80022F68 0001DE68  4E 80 00 20 */	blr 
 lbl_80022F6C:
-/* 80022F6C 0001DE6C  3C 60 80 02 */	lis r3, lbl_80022F9C@ha
-/* 80022F70 0001DE70  38 63 2F 9C */	addi r3, r3, lbl_80022F9C@l
+/* 80022F6C 0001DE6C  3C 60 80 02 */	lis r3, GetFirstDrawParticle_EldersFirst__Q34nw4r2ef16DrawStrategyImplFPQ34nw4r2ef15ParticleManager@ha
+/* 80022F70 0001DE70  38 63 2F 9C */	addi r3, r3, GetFirstDrawParticle_EldersFirst__Q34nw4r2ef16DrawStrategyImplFPQ34nw4r2ef15ParticleManager@l
 /* 80022F74 0001DE74  4E 80 00 20 */	blr 
+
+.global GetGetNextDrawParticleFunc__Q34nw4r2ef16DrawStrategyImplFi
+GetGetNextDrawParticleFunc__Q34nw4r2ef16DrawStrategyImplFi:
 /* 80022F78 0001DE78  2C 04 00 00 */	cmpwi r4, 0
 /* 80022F7C 0001DE7C  41 82 00 08 */	beq lbl_80022F84
 /* 80022F80 0001DE80  48 00 00 10 */	b lbl_80022F90
 lbl_80022F84:
-/* 80022F84 0001DE84  3C 60 80 02 */	lis r3, lbl_80023044@ha
-/* 80022F88 0001DE88  38 63 30 44 */	addi r3, r3, lbl_80023044@l
+/* 80022F84 0001DE84  3C 60 80 02 */	lis r3, GetNextDrawParticle_YoungersFirst__Q34nw4r2ef16DrawStrategyImplFPQ34nw4r2ef15ParticleManagerPQ34nw4r2ef8Particle@ha
+/* 80022F88 0001DE88  38 63 30 44 */	addi r3, r3, GetNextDrawParticle_YoungersFirst__Q34nw4r2ef16DrawStrategyImplFPQ34nw4r2ef15ParticleManagerPQ34nw4r2ef8Particle@l
 /* 80022F8C 0001DE8C  4E 80 00 20 */	blr 
 lbl_80022F90:
-/* 80022F90 0001DE90  3C 60 80 02 */	lis r3, lbl_80023014@ha
-/* 80022F94 0001DE94  38 63 30 14 */	addi r3, r3, lbl_80023014@l
+/* 80022F90 0001DE90  3C 60 80 02 */	lis r3, GetNextDrawParticle_EldersFirst__Q34nw4r2ef16DrawStrategyImplFPQ34nw4r2ef15ParticleManagerPQ34nw4r2ef8Particle@ha
+/* 80022F94 0001DE94  38 63 30 14 */	addi r3, r3, GetNextDrawParticle_EldersFirst__Q34nw4r2ef16DrawStrategyImplFPQ34nw4r2ef15ParticleManagerPQ34nw4r2ef8Particle@l
 /* 80022F98 0001DE98  4E 80 00 20 */	blr 
-lbl_80022F9C:
+
+.global GetFirstDrawParticle_EldersFirst__Q34nw4r2ef16DrawStrategyImplFPQ34nw4r2ef15ParticleManager
+GetFirstDrawParticle_EldersFirst__Q34nw4r2ef16DrawStrategyImplFPQ34nw4r2ef15ParticleManager:
 /* 80022F9C 0001DE9C  80 83 00 38 */	lwz r4, 0x38(r3)
 /* 80022FA0 0001DEA0  48 00 00 10 */	b lbl_80022FB0
 lbl_80022FA4:
@@ -1744,7 +1750,9 @@ lbl_80022FB0:
 lbl_80022FC4:
 /* 80022FC4 0001DEC4  7C 83 23 78 */	mr r3, r4
 /* 80022FC8 0001DEC8  4E 80 00 20 */	blr 
-lbl_80022FCC:
+
+.global GetFirstDrawParticle_YoungersFirst__Q34nw4r2ef16DrawStrategyImplFPQ34nw4r2ef15ParticleManager
+GetFirstDrawParticle_YoungersFirst__Q34nw4r2ef16DrawStrategyImplFPQ34nw4r2ef15ParticleManager:
 /* 80022FCC 0001DECC  80 83 00 3C */	lwz r4, 0x3c(r3)
 /* 80022FD0 0001DED0  48 00 00 28 */	b lbl_80022FF8
 lbl_80022FD4:
@@ -1768,7 +1776,9 @@ lbl_80022FF8:
 lbl_8002300C:
 /* 8002300C 0001DF0C  7C 83 23 78 */	mr r3, r4
 /* 80023010 0001DF10  4E 80 00 20 */	blr 
-lbl_80023014:
+
+.global GetNextDrawParticle_EldersFirst__Q34nw4r2ef16DrawStrategyImplFPQ34nw4r2ef15ParticleManagerPQ34nw4r2ef8Particle
+GetNextDrawParticle_EldersFirst__Q34nw4r2ef16DrawStrategyImplFPQ34nw4r2ef15ParticleManagerPQ34nw4r2ef8Particle:
 /* 80023014 0001DF14  A0 A3 00 42 */	lhz r5, 0x42(r3)
 /* 80023018 0001DF18  7C 64 2A 14 */	add r3, r4, r5
 /* 8002301C 0001DF1C  80 63 00 04 */	lwz r3, 4(r3)
@@ -1783,7 +1793,9 @@ lbl_8002302C:
 /* 80023038 0001DF38  2C 00 00 01 */	cmpwi r0, 1
 /* 8002303C 0001DF3C  40 82 FF E8 */	bne lbl_80023024
 /* 80023040 0001DF40  4E 80 00 20 */	blr 
-lbl_80023044:
+
+.global GetNextDrawParticle_YoungersFirst__Q34nw4r2ef16DrawStrategyImplFPQ34nw4r2ef15ParticleManagerPQ34nw4r2ef8Particle
+GetNextDrawParticle_YoungersFirst__Q34nw4r2ef16DrawStrategyImplFPQ34nw4r2ef15ParticleManagerPQ34nw4r2ef8Particle:
 /* 80023044 0001DF44  A0 A3 00 42 */	lhz r5, 0x42(r3)
 /* 80023048 0001DF48  7C 64 28 2E */	lwzx r3, r4, r5
 /* 8002304C 0001DF4C  48 00 00 08 */	b lbl_80023054
@@ -1797,8 +1809,8 @@ lbl_80023054:
 /* 80023064 0001DF64  40 82 FF EC */	bne lbl_80023050
 /* 80023068 0001DF68  4E 80 00 20 */	blr 
 
-.global func_8002306C
-func_8002306C:
+.global __ct__Q44nw4r2ef16DrawStrategyImpl12AheadContextFRCQ34nw4r4math5MTX34PQ34nw4r2ef15ParticleManager
+__ct__Q44nw4r2ef16DrawStrategyImpl12AheadContextFRCQ34nw4r4math5MTX34PQ34nw4r2ef15ParticleManager:
 /* 8002306C 0001DF6C  94 21 FF A0 */	stwu r1, -0x60(r1)
 /* 80023070 0001DF70  7C 08 02 A6 */	mflr r0
 /* 80023074 0001DF74  90 01 00 64 */	stw r0, 0x64(r1)
@@ -1963,6 +1975,9 @@ lbl_800232A8:
 /* 800232C0 0001E1C0  7C 08 03 A6 */	mtlr r0
 /* 800232C4 0001E1C4  38 21 00 60 */	addi r1, r1, 0x60
 /* 800232C8 0001E1C8  4E 80 00 20 */	blr 
+
+.global __dt__Q34nw4r2ef16DrawStrategyImplFv
+__dt__Q34nw4r2ef16DrawStrategyImplFv:
 /* 800232CC 0001E1CC  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 800232D0 0001E1D0  7C 08 02 A6 */	mflr r0
 /* 800232D4 0001E1D4  2C 03 00 00 */	cmpwi r3, 0
@@ -1980,6 +1995,10 @@ lbl_800232F4:
 /* 80023300 0001E200  7C 08 03 A6 */	mtlr r0
 /* 80023304 0001E204  38 21 00 10 */	addi r1, r1, 0x10
 /* 80023308 0001E208  4E 80 00 20 */	blr 
+
+# __sinit_\ef_drawstrategyimpl_cpp
+.global __sinit_$$3ef_drawstrategyimpl_cpp
+__sinit_$$3ef_drawstrategyimpl_cpp:
 /* 8002330C 0001E20C  3D 00 80 3D */	lis r8, lbl_803D05B0@ha
 /* 80023310 0001E210  C0 22 83 38 */	lfs f1, lbl_804BFD58-_SDA2_BASE_(r2)
 /* 80023314 0001E214  39 08 05 B0 */	addi r8, r8, lbl_803D05B0@l
