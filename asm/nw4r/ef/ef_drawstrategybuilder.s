@@ -16,7 +16,7 @@ Create__Q34nw4r2ef19DrawStrategyBuilderFUl:
 /* 800213A8 0001C2A8  7C 00 07 75 */	extsb. r0, r0
 /* 800213AC 0001C2AC  40 82 00 28 */	bne lbl_800213D4
 /* 800213B0 0001C2B0  38 7F 00 0C */	addi r3, r31, 0xc
-/* 800213B4 0001C2B4  48 00 1F E1 */	bl func_80023394
+/* 800213B4 0001C2B4  48 00 1F E1 */	bl __ct__Q34nw4r2ef21DrawBillboardStrategyFv
 /* 800213B8 0001C2B8  3C 80 80 02 */	lis r4, __dt__Q34nw4r2ef21DrawBillboardStrategyFv@ha
 /* 800213BC 0001C2BC  38 7F 00 0C */	addi r3, r31, 0xc
 /* 800213C0 0001C2C0  38 84 15 68 */	addi r4, r4, __dt__Q34nw4r2ef21DrawBillboardStrategyFv@l
@@ -29,7 +29,7 @@ lbl_800213D4:
 /* 800213D8 0001C2D8  7C 00 07 75 */	extsb. r0, r0
 /* 800213DC 0001C2DC  40 82 00 28 */	bne lbl_80021404
 /* 800213E0 0001C2E0  38 7F 00 D4 */	addi r3, r31, 0xd4
-/* 800213E4 0001C2E4  48 00 3F 5D */	bl func_80025340
+/* 800213E4 0001C2E4  48 00 3F 5D */	bl __ct__Q34nw4r2ef23DrawDirectionalStrategyFv
 /* 800213E8 0001C2E8  3C 80 80 02 */	lis r4, __dt__Q34nw4r2ef23DrawDirectionalStrategyFv@ha
 /* 800213EC 0001C2EC  38 7F 00 D4 */	addi r3, r31, 0xd4
 /* 800213F0 0001C2F0  38 84 15 A8 */	addi r4, r4, __dt__Q34nw4r2ef23DrawDirectionalStrategyFv@l
@@ -42,7 +42,7 @@ lbl_80021404:
 /* 80021408 0001C308  7C 00 07 75 */	extsb. r0, r0
 /* 8002140C 0001C30C  40 82 00 28 */	bne lbl_80021434
 /* 80021410 0001C310  38 7F 01 9C */	addi r3, r31, 0x19c
-/* 80021414 0001C314  48 00 60 31 */	bl func_80027444
+/* 80021414 0001C314  48 00 60 31 */	bl __ct__Q34nw4r2ef16DrawFreeStrategyFv
 /* 80021418 0001C318  3C 80 80 02 */	lis r4, __dt__Q34nw4r2ef16DrawFreeStrategyFv@ha
 /* 8002141C 0001C31C  38 7F 01 9C */	addi r3, r31, 0x19c
 /* 80021420 0001C320  38 84 15 E8 */	addi r4, r4, __dt__Q34nw4r2ef16DrawFreeStrategyFv@l
