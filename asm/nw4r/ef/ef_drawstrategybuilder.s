@@ -29,7 +29,7 @@ lbl_800213D4:
 /* 800213D8 0001C2D8  7C 00 07 75 */	extsb. r0, r0
 /* 800213DC 0001C2DC  40 82 00 28 */	bne lbl_80021404
 /* 800213E0 0001C2E0  38 7F 00 D4 */	addi r3, r31, 0xd4
-/* 800213E4 0001C2E4  48 00 3F 5D */	bl func_80025340
+/* 800213E4 0001C2E4  48 00 3F 5D */	bl __ct__Q34nw4r2ef23DrawDirectionalStrategyFv
 /* 800213E8 0001C2E8  3C 80 80 02 */	lis r4, __dt__Q34nw4r2ef23DrawDirectionalStrategyFv@ha
 /* 800213EC 0001C2EC  38 7F 00 D4 */	addi r3, r31, 0xd4
 /* 800213F0 0001C2F0  38 84 15 A8 */	addi r4, r4, __dt__Q34nw4r2ef23DrawDirectionalStrategyFv@l

@@ -52,6 +52,7 @@ TEXT_O_FILES := \
 	build/asm/nw4r/ef/ef_drawstrategybuilder.o \
 	build/asm/nw4r/ef/ef_drawstrategyimpl.o \
 	build/asm/nw4r/ef/ef_drawbillboardstrategy.o \
+	build/asm/nw4r/ef/ef_drawdirectionalstrategy.o \
 	build/asm/nw4r/ef/ef_drawfreestrategy.o \
 	build/asm/nw4r/ef/ef_drawlinestrategy.o \
 	build/asm/nw4r/ef/ef_drawpointstrategy.o \
