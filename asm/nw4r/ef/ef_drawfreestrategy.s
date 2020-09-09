@@ -107,6 +107,9 @@ lbl_8002759C:
 /* 800275AC 000224AC  7C 08 03 A6 */	mtlr r0
 /* 800275B0 000224B0  38 21 00 50 */	addi r1, r1, 0x50
 /* 800275B4 000224B4  4E 80 00 20 */	blr 
+
+.global Draw__Q34nw4r2ef16DrawFreeStrategyFRCQ34nw4r2ef8DrawInfoPQ34nw4r2ef15ParticleManager
+Draw__Q34nw4r2ef16DrawFreeStrategyFRCQ34nw4r2ef8DrawInfoPQ34nw4r2ef15ParticleManager:
 /* 800275B8 000224B8  94 21 FD F0 */	stwu r1, -0x210(r1)
 /* 800275BC 000224BC  7C 08 02 A6 */	mflr r0
 /* 800275C0 000224C0  90 01 02 14 */	stw r0, 0x214(r1)
