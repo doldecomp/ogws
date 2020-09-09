@@ -2,8 +2,8 @@
 
 .section .text, "ax"  # 0x800076E0 - 0x80355080 
 
-.global func_80027444
-func_80027444:
+.global __ct__Q34nw4r2ef16DrawFreeStrategyFv
+__ct__Q34nw4r2ef16DrawFreeStrategyFv:
 /* 80027444 00022344  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80027448 00022348  7C 08 02 A6 */	mflr r0
 /* 8002744C 0002234C  90 01 00 14 */	stw r0, 0x14(r1)
@@ -20,8 +20,8 @@ func_80027444:
 /* 80027478 00022378  38 21 00 10 */	addi r1, r1, 0x10
 /* 8002747C 0002237C  4E 80 00 20 */	blr 
 
-.global func_80027480
-func_80027480:
+.global DrawQuad__Q24nw4r2efFRCQ34nw4r4math5MTX34PCQ34nw4r4math5_VEC3b
+DrawQuad__Q24nw4r2efFRCQ34nw4r4math5MTX34PCQ34nw4r4math5_VEC3b:
 /* 80027480 00022380  94 21 FF B0 */	stwu r1, -0x50(r1)
 /* 80027484 00022384  7C 08 02 A6 */	mflr r0
 /* 80027488 00022388  90 01 00 54 */	stw r0, 0x54(r1)
@@ -104,6 +104,9 @@ lbl_8002759C:
 /* 800275AC 000224AC  7C 08 03 A6 */	mtlr r0
 /* 800275B0 000224B0  38 21 00 50 */	addi r1, r1, 0x50
 /* 800275B4 000224B4  4E 80 00 20 */	blr 
+
+.global Draw__Q34nw4r2ef16DrawFreeStrategyFRCQ34nw4r2ef8DrawInfoPQ34nw4r2ef15ParticleManager
+Draw__Q34nw4r2ef16DrawFreeStrategyFRCQ34nw4r2ef8DrawInfoPQ34nw4r2ef15ParticleManager:
 /* 800275B8 000224B8  94 21 FD F0 */	stwu r1, -0x210(r1)
 /* 800275BC 000224BC  7C 08 02 A6 */	mflr r0
 /* 800275C0 000224C0  90 01 02 14 */	stw r0, 0x214(r1)
@@ -451,7 +454,7 @@ lbl_80027928:
 /* 80027AF0 000229F0  7C 05 00 D0 */	neg r0, r5
 /* 80027AF4 000229F4  7C 00 2B 78 */	or r0, r0, r5
 /* 80027AF8 000229F8  54 05 0F FE */	srwi r5, r0, 0x1f
-/* 80027AFC 000229FC  4B FF F9 85 */	bl func_80027480
+/* 80027AFC 000229FC  4B FF F9 85 */	bl DrawQuad__Q24nw4r2efFRCQ34nw4r4math5MTX34PCQ34nw4r4math5_VEC3b
 /* 80027B00 00022A00  88 1F 00 A1 */	lbz r0, 0xa1(r31)
 /* 80027B04 00022A04  28 00 00 01 */	cmplwi r0, 1
 /* 80027B08 00022A08  40 82 00 20 */	bne lbl_80027B28
@@ -461,7 +464,7 @@ lbl_80027928:
 /* 80027B18 00022A18  7C 05 00 D0 */	neg r0, r5
 /* 80027B1C 00022A1C  7C 00 2B 78 */	or r0, r0, r5
 /* 80027B20 00022A20  54 05 0F FE */	srwi r5, r0, 0x1f
-/* 80027B24 00022A24  4B FF F9 5D */	bl func_80027480
+/* 80027B24 00022A24  4B FF F9 5D */	bl DrawQuad__Q24nw4r2efFRCQ34nw4r4math5MTX34PCQ34nw4r4math5_VEC3b
 lbl_80027B28:
 /* 80027B28 00022A28  7F CC F3 78 */	mr r12, r30
 /* 80027B2C 00022A2C  7F 63 DB 78 */	mr r3, r27

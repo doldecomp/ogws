@@ -42,7 +42,7 @@ lbl_80021404:
 /* 80021408 0001C308  7C 00 07 75 */	extsb. r0, r0
 /* 8002140C 0001C30C  40 82 00 28 */	bne lbl_80021434
 /* 80021410 0001C310  38 7F 01 9C */	addi r3, r31, 0x19c
-/* 80021414 0001C314  48 00 60 31 */	bl func_80027444
+/* 80021414 0001C314  48 00 60 31 */	bl __ct__Q34nw4r2ef16DrawFreeStrategyFv
 /* 80021418 0001C318  3C 80 80 02 */	lis r4, __dt__Q34nw4r2ef16DrawFreeStrategyFv@ha
 /* 8002141C 0001C31C  38 7F 01 9C */	addi r3, r31, 0x19c
 /* 80021420 0001C320  38 84 15 E8 */	addi r4, r4, __dt__Q34nw4r2ef16DrawFreeStrategyFv@l
