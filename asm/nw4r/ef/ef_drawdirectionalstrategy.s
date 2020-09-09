@@ -20,7 +20,10 @@ __ct__Q34nw4r2ef23DrawDirectionalStrategyFv:
 /* 80025374 00020274  38 21 00 10 */	addi r1, r1, 0x10
 /* 80025378 00020278  4E 80 00 20 */	blr 
 
-.global DrawQuad__Q24nw4r2efFRCQ34nw4r4math5MTX34PCQ34nw4r4math5_VEC3b
+# Conflicts with ef_drawfreestrategy, 80027480
+# DrawQuad(const MTX34& ,const _VEC3*, bool ) is defined in both files' headers
+# and the dupes are not merged by the linker
+# .global DrawQuad__Q24nw4r2efFRCQ34nw4r4math5MTX34PCQ34nw4r4math5_VEC3b
 DrawQuad__Q24nw4r2efFRCQ34nw4r4math5MTX34PCQ34nw4r4math5_VEC3b:
 /* 8002537C 0002027C  94 21 FF B0 */	stwu r1, -0x50(r1)
 /* 80025380 00020280  7C 08 02 A6 */	mflr r0

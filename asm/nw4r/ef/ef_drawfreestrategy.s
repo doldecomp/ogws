@@ -20,7 +20,10 @@ __ct__Q34nw4r2ef16DrawFreeStrategyFv:
 /* 80027478 00022378  38 21 00 10 */	addi r1, r1, 0x10
 /* 8002747C 0002237C  4E 80 00 20 */	blr 
 
-.global DrawQuad__Q24nw4r2efFRCQ34nw4r4math5MTX34PCQ34nw4r4math5_VEC3b
+# Conflicts with ef_drawdirectionalstrategy, 8002537C
+# DrawQuad(const MTX34& ,const _VEC3*, bool ) is defined in both files' headers
+# and the dupes are not merged by the linker
+# .global DrawQuad__Q24nw4r2efFRCQ34nw4r4math5MTX34PCQ34nw4r4math5_VEC3b
 DrawQuad__Q24nw4r2efFRCQ34nw4r4math5MTX34PCQ34nw4r4math5_VEC3b:
 /* 80027480 00022380  94 21 FF B0 */	stwu r1, -0x50(r1)
 /* 80027484 00022384  7C 08 02 A6 */	mflr r0
@@ -104,9 +107,6 @@ lbl_8002759C:
 /* 800275AC 000224AC  7C 08 03 A6 */	mtlr r0
 /* 800275B0 000224B0  38 21 00 50 */	addi r1, r1, 0x50
 /* 800275B4 000224B4  4E 80 00 20 */	blr 
-
-.global Draw__Q34nw4r2ef16DrawFreeStrategyFRCQ34nw4r2ef8DrawInfoPQ34nw4r2ef15ParticleManager
-Draw__Q34nw4r2ef16DrawFreeStrategyFRCQ34nw4r2ef8DrawInfoPQ34nw4r2ef15ParticleManager:
 /* 800275B8 000224B8  94 21 FD F0 */	stwu r1, -0x210(r1)
 /* 800275BC 000224BC  7C 08 02 A6 */	mflr r0
 /* 800275C0 000224C0  90 01 02 14 */	stw r0, 0x214(r1)
