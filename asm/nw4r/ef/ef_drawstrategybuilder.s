@@ -68,7 +68,7 @@ lbl_80021464:
 /* 80021468 0001C368  7C 00 07 75 */	extsb. r0, r0
 /* 8002146C 0001C36C  40 82 00 28 */	bne lbl_80021494
 /* 80021470 0001C370  38 7F 03 2C */	addi r3, r31, 0x32c
-/* 80021474 0001C374  48 00 6C 39 */	bl func_800280AC
+/* 80021474 0001C374  48 00 6C 39 */	bl __ct__Q34nw4r2ef17DrawPointStrategyFv
 /* 80021478 0001C378  3C 80 80 02 */	lis r4, __dt__Q34nw4r2ef17DrawPointStrategyFv@ha
 /* 8002147C 0001C37C  38 7F 03 2C */	addi r3, r31, 0x32c
 /* 80021480 0001C380  38 84 16 68 */	addi r4, r4, __dt__Q34nw4r2ef17DrawPointStrategyFv@l
