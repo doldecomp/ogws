@@ -55,7 +55,7 @@ lbl_80021434:
 /* 80021438 0001C338  7C 00 07 75 */	extsb. r0, r0
 /* 8002143C 0001C33C  40 82 00 28 */	bne lbl_80021464
 /* 80021440 0001C340  38 7F 02 64 */	addi r3, r31, 0x264
-/* 80021444 0001C344  48 00 67 8D */	bl func_80027BD0
+/* 80021444 0001C344  48 00 67 8D */	bl __ct__Q34nw4r2ef16DrawLineStrategyFv
 /* 80021448 0001C348  3C 80 80 02 */	lis r4, __dt__Q34nw4r2ef16DrawLineStrategyFv@ha
 /* 8002144C 0001C34C  38 7F 02 64 */	addi r3, r31, 0x264
 /* 80021450 0001C350  38 84 16 28 */	addi r4, r4, __dt__Q34nw4r2ef16DrawLineStrategyFv@l

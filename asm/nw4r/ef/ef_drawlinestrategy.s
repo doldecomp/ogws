@@ -4,8 +4,8 @@
 
 .section .text, "ax"  # 0x800076E0 - 0x80355080 
 
-.global func_80027BD0
-func_80027BD0:
+.global __ct__Q34nw4r2ef16DrawLineStrategyFv
+__ct__Q34nw4r2ef16DrawLineStrategyFv:
 /* 80027BD0 00022AD0  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80027BD4 00022AD4  7C 08 02 A6 */	mflr r0
 /* 80027BD8 00022AD8  90 01 00 14 */	stw r0, 0x14(r1)
@@ -21,6 +21,9 @@ func_80027BD0:
 /* 80027C00 00022B00  7C 08 03 A6 */	mtlr r0
 /* 80027C04 00022B04  38 21 00 10 */	addi r1, r1, 0x10
 /* 80027C08 00022B08  4E 80 00 20 */	blr 
+
+.global Draw__Q34nw4r2ef16DrawLineStrategyFRCQ34nw4r2ef8DrawInfoPQ34nw4r2ef15ParticleManager
+Draw__Q34nw4r2ef16DrawLineStrategyFRCQ34nw4r2ef8DrawInfoPQ34nw4r2ef15ParticleManager:
 /* 80027C0C 00022B0C  94 21 FE E0 */	stwu r1, -0x120(r1)
 /* 80027C10 00022B10  7C 08 02 A6 */	mflr r0
 /* 80027C14 00022B14  90 01 01 24 */	stw r0, 0x124(r1)
