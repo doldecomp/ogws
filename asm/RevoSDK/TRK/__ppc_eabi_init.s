@@ -34,8 +34,8 @@ lbl_80006400:
 .global rom_copy_info
 rom_copy_info:
 # init
-/* 80006420 00002520  80 00 40 00 */	.4byte _f_init # Section ptr
-/* 80006424 00002524  80 00 40 00 */	.4byte _f_init_rom # Section ptr (again?)
+/* 80006420 00002520  80 00 40 00 */	.4byte _f_init # Section location in RAM
+/* 80006424 00002524  80 00 40 00 */	.4byte _f_init_rom # Section location in ROM
 /* 80006428 00002528  00 00 24 D0 */	.4byte 0x000024D0 # Section size
 # extab
 /* 8000642C 0000252C  80 00 64 E0 */	.4byte _fextab_
@@ -85,7 +85,7 @@ rom_copy_info:
 .global bss_init_info
 bss_init_info:
 # bss
-/* 800064B0 800025B0  80 3C AF 00 */	.4byte 0x803CAF00 # Section ptr
+/* 800064B0 800025B0  80 3C AF 00 */	.4byte 0x803CAF00 # Section location in RAM
 /* 800064B4 000025B4  00 0F 24 6C */	.4byte 0x000F246C # Section size
 # sbss
 /* 800064B8 000025B8  80 4B E9 E0 */	.4byte 0x804BE9E0

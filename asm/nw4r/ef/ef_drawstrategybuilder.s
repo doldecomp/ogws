@@ -81,7 +81,7 @@ lbl_80021494:
 /* 80021498 0001C398  7C 00 07 75 */	extsb. r0, r0
 /* 8002149C 0001C39C  40 82 00 28 */	bne lbl_800214C4
 /* 800214A0 0001C3A0  38 7F 03 F4 */	addi r3, r31, 0x3f4
-/* 800214A4 0001C3A4  48 00 6E FD */	bl func_800283A0
+/* 800214A4 0001C3A4  48 00 6E FD */	bl __ct__Q34nw4r2ef18DrawStripeStrategyFv
 /* 800214A8 0001C3A8  3C 80 80 02 */	lis r4, __dt__Q34nw4r2ef18DrawStripeStrategyFv@ha
 /* 800214AC 0001C3AC  38 7F 03 F4 */	addi r3, r31, 0x3f4
 /* 800214B0 0001C3B0  38 84 16 A8 */	addi r4, r4, __dt__Q34nw4r2ef18DrawStripeStrategyFv@l
