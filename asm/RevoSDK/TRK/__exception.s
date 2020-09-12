@@ -2,14 +2,20 @@
 
 .section .init, "ax"  # 0x80004000 - 0x800064E0
 
-.global lbl_80004188
-lbl_80004188:
+.global gTRKInterruptVectorTable
+gTRKInterruptVectorTable:
 .string "Metrowerks Target Resident Kernel for PowerPC"
 .balign 4, 0
 lbl_800041B8:
 .fill 0xD0
+
+.global system_reset_exception_handler
+system_reset_exception_handler:
 /* 80004288 00000388  48 00 1E 34 */	b __TRK_reset
 .fill 0xFC
+
+.global machine_check_exception_handler
+machine_check_exception_handler:
 /* 80004388 00000488  7C 51 43 A6 */	mtspr 0x111, r2
 /* 8000438C 0000048C  7C 5A 02 A6 */	mfspr r2, 0x1a
 /* 80004390 00000490  7C 00 17 AC */	icbi 0, r2
@@ -30,6 +36,9 @@ lbl_800041B8:
 /* 800043CC 000004CC  38 60 02 00 */	li r3, 0x200
 /* 800043D0 000004D0  4C 00 00 64 */	rfi 
 .fill 0xB4
+
+.global dsi_exception_handler
+dsi_exception_handler:
 /* 80004488 00000588  7C 51 43 A6 */	mtspr 0x111, r2
 /* 8000448C 0000058C  7C 72 43 A6 */	mtspr 0x112, r3
 /* 80004490 00000590  7C 93 43 A6 */	mtspr 0x113, r4
@@ -44,6 +53,9 @@ lbl_800041B8:
 /* 800044B4 000005B4  38 60 03 00 */	li r3, 0x300
 /* 800044B8 000005B8  4C 00 00 64 */	rfi 
 .fill 0xCC
+
+.global isi_exception_handler
+isi_exception_handler:
 /* 80004588 00000688  7C 51 43 A6 */	mtspr 0x111, r2
 /* 8000458C 0000068C  7C 72 43 A6 */	mtspr 0x112, r3
 /* 80004590 00000690  7C 93 43 A6 */	mtspr 0x113, r4
@@ -58,6 +70,9 @@ lbl_800041B8:
 /* 800045B4 000006B4  38 60 04 00 */	li r3, 0x400
 /* 800045B8 000006B8  4C 00 00 64 */	rfi 
 .fill 0xCC
+
+.global external_interrupt_exception_handler
+external_interrupt_exception_handler:
 /* 80004688 00000788  7C 51 43 A6 */	mtspr 0x111, r2
 /* 8000468C 0000078C  7C 72 43 A6 */	mtspr 0x112, r3
 /* 80004690 00000790  7C 93 43 A6 */	mtspr 0x113, r4
@@ -72,6 +87,9 @@ lbl_800041B8:
 /* 800046B4 000007B4  38 60 05 00 */	li r3, 0x500
 /* 800046B8 000007B8  4C 00 00 64 */	rfi 
 .fill 0xCC
+
+.global alignment_exception_handler
+alignment_exception_handler:
 /* 80004788 00000888  7C 51 43 A6 */	mtspr 0x111, r2
 /* 8000478C 0000088C  7C 72 43 A6 */	mtspr 0x112, r3
 /* 80004790 00000890  7C 93 43 A6 */	mtspr 0x113, r4
@@ -86,6 +104,9 @@ lbl_800041B8:
 /* 800047B4 000008B4  38 60 06 00 */	li r3, 0x600
 /* 800047B8 000008B8  4C 00 00 64 */	rfi 
 .fill 0xCC
+
+.global program_exception_handler
+program_exception_handler:
 /* 80004888 00000988  7C 51 43 A6 */	mtspr 0x111, r2
 /* 8000488C 0000098C  7C 72 43 A6 */	mtspr 0x112, r3
 /* 80004890 00000990  7C 93 43 A6 */	mtspr 0x113, r4
@@ -100,6 +121,9 @@ lbl_800041B8:
 /* 800048B4 000009B4  38 60 07 00 */	li r3, 0x700
 /* 800048B8 000009B8  4C 00 00 64 */	rfi 
 .fill 0xCC
+
+.global floating_point_unavailable_exception_handler
+floating_point_unavailable_exception_handler:
 /* 80004988 00000A88  7C 51 43 A6 */	mtspr 0x111, r2
 /* 8000498C 00000A8C  7C 72 43 A6 */	mtspr 0x112, r3
 /* 80004990 00000A90  7C 93 43 A6 */	mtspr 0x113, r4
@@ -114,6 +138,9 @@ lbl_800041B8:
 /* 800049B4 00000AB4  38 60 08 00 */	li r3, 0x800
 /* 800049B8 00000AB8  4C 00 00 64 */	rfi 
 .fill 0xCC
+
+.global decrementer_exception_handler
+decrementer_exception_handler:
 /* 80004A88 00000B88  7C 51 43 A6 */	mtspr 0x111, r2
 /* 80004A8C 00000B8C  7C 72 43 A6 */	mtspr 0x112, r3
 /* 80004A90 00000B90  7C 93 43 A6 */	mtspr 0x113, r4
@@ -127,7 +154,16 @@ lbl_800041B8:
 /* 80004AB0 00000BB0  7C 7A 03 A6 */	mtspr 0x1a, r3
 /* 80004AB4 00000BB4  38 60 09 00 */	li r3, 0x900
 /* 80004AB8 00000BB8  4C 00 00 64 */	rfi 
-.fill 0x2CC
+.fill 0xCC
+
+######################################################
+# Interrupt vector slots 0x0A00 & 0x0B00 are reserved.
+.fill 0x100 
+.fill 0x100 
+######################################################
+
+.global system_call_exception_handler
+system_call_exception_handler:
 /* 80004D88 00000E88  7C 51 43 A6 */	mtspr 0x111, r2
 /* 80004D8C 00000E8C  7C 72 43 A6 */	mtspr 0x112, r3
 /* 80004D90 00000E90  7C 93 43 A6 */	mtspr 0x113, r4
@@ -142,6 +178,9 @@ lbl_800041B8:
 /* 80004DB4 00000EB4  38 60 0C 00 */	li r3, 0xc00
 /* 80004DB8 00000EB8  4C 00 00 64 */	rfi 
 .fill 0xCC
+
+.global trace_exception_handler
+trace_exception_handler:
 /* 80004E88 00000F88  7C 51 43 A6 */	mtspr 0x111, r2
 /* 80004E8C 00000F8C  7C 72 43 A6 */	mtspr 0x112, r3
 /* 80004E90 00000F90  7C 93 43 A6 */	mtspr 0x113, r4
@@ -156,6 +195,9 @@ lbl_800041B8:
 /* 80004EB4 00000FB4  38 60 0D 00 */	li r3, 0xd00
 /* 80004EB8 00000FB8  4C 00 00 64 */	rfi 
 .fill 0xCC
+
+.global floating_point_assist_exception_handler
+floating_point_assist_exception_handler:
 /* 80004F88 00001088  7C 51 43 A6 */	mtspr 0x111, r2
 /* 80004F8C 0000108C  7C 72 43 A6 */	mtspr 0x112, r3
 /* 80004F90 00001090  7C 93 43 A6 */	mtspr 0x113, r4
@@ -170,6 +212,13 @@ lbl_800041B8:
 /* 80004FB4 000010B4  38 60 0E 00 */	li r3, 0xe00
 /* 80004FB8 000010B8  4C 00 00 64 */	rfi 
 .fill 0xCC
+
+########################################################
+# The rest of the interrupt vector slots are reserved, #
+# and or implementation specific, and are currently    #
+# unidentified.                                        #
+########################################################
+
 /* 80005088 00001188  48 00 00 54 */	b lbl_800050DC
 .fill 0x1C
 /* 800050A8 000011A8  7C 51 43 A6 */	mtspr 0x111, r2

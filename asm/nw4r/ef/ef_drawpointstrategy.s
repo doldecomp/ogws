@@ -4,8 +4,8 @@
 
 .section .text, "ax"  # 0x800076E0 - 0x80355080 
 
-.global func_800280AC
-func_800280AC:
+.global __ct__Q34nw4r2ef17DrawPointStrategyFv
+__ct__Q34nw4r2ef17DrawPointStrategyFv:
 /* 800280AC 00022FAC  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 800280B0 00022FB0  7C 08 02 A6 */	mflr r0
 /* 800280B4 00022FB4  90 01 00 14 */	stw r0, 0x14(r1)
@@ -21,6 +21,9 @@ func_800280AC:
 /* 800280DC 00022FDC  7C 08 03 A6 */	mtlr r0
 /* 800280E0 00022FE0  38 21 00 10 */	addi r1, r1, 0x10
 /* 800280E4 00022FE4  4E 80 00 20 */	blr 
+
+.global Draw__Q34nw4r2ef17DrawPointStrategyFRCQ34nw4r2ef8DrawInfoPQ34nw4r2ef15ParticleManager
+Draw__Q34nw4r2ef17DrawPointStrategyFRCQ34nw4r2ef8DrawInfoPQ34nw4r2ef15ParticleManager:
 /* 800280E8 00022FE8  94 21 FF 40 */	stwu r1, -0xc0(r1)
 /* 800280EC 00022FEC  7C 08 02 A6 */	mflr r0
 /* 800280F0 00022FF0  90 01 00 C4 */	stw r0, 0xc4(r1)
