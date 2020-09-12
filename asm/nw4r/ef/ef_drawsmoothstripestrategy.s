@@ -4,8 +4,8 @@
 
 .section .text, "ax"  # 0x800076E0 - 0x80355080 
 
-.global func_8002B1EC
-func_8002B1EC:
+.global __ct__Q34nw4r2ef24DrawSmoothStripeStrategyFv
+__ct__Q34nw4r2ef24DrawSmoothStripeStrategyFv:
 /* 8002B1EC 000260EC  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8002B1F0 000260F0  7C 08 02 A6 */	mflr r0
 /* 8002B1F4 000260F4  90 01 00 14 */	stw r0, 0x14(r1)
@@ -22,8 +22,8 @@ func_8002B1EC:
 /* 8002B220 00026120  38 21 00 10 */	addi r1, r1, 0x10
 /* 8002B224 00026124  4E 80 00 20 */	blr 
 
-.global func_8002B228
-func_8002B228:
+.global CalcVertex__Q34nw4r2ef24DrawSmoothStripeStrategyFPQ44nw4r2ef24DrawSmoothStripeStrategy6VertexPQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripeiPQ34nw4r2ef8ParticlePFPQ34nw4r4math4VEC3PQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripePQ34nw4r2ef8Particle_vRCQ34nw4r4math4VEC3RCQ34nw4r4math4VEC3RCQ34nw4r4math4VEC3ff
+CalcVertex__Q34nw4r2ef24DrawSmoothStripeStrategyFPQ44nw4r2ef24DrawSmoothStripeStrategy6VertexPQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripeiPQ34nw4r2ef8ParticlePFPQ34nw4r4math4VEC3PQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripePQ34nw4r2ef8Particle_vRCQ34nw4r4math4VEC3RCQ34nw4r4math4VEC3RCQ34nw4r4math4VEC3ff:
 /* 8002B228 00026128  94 21 FE D0 */	stwu r1, -0x130(r1)
 /* 8002B22C 0002612C  7C 08 02 A6 */	mflr r0
 /* 8002B230 00026130  90 01 01 34 */	stw r0, 0x134(r1)
@@ -290,8 +290,8 @@ lbl_8002B4F8:
 /* 8002B610 00026510  38 21 01 30 */	addi r1, r1, 0x130
 /* 8002B614 00026514  4E 80 00 20 */	blr 
 
-.global func_8002B618
-func_8002B618:
+.global CalcVertexTube__Q34nw4r2ef24DrawSmoothStripeStrategyFPQ44nw4r2ef24DrawSmoothStripeStrategy10VertexTubePQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripeiPQ34nw4r2ef8ParticlePFPQ34nw4r4math4VEC3PQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripePQ34nw4r2ef8Particle_vfff
+CalcVertexTube__Q34nw4r2ef24DrawSmoothStripeStrategyFPQ44nw4r2ef24DrawSmoothStripeStrategy10VertexTubePQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripeiPQ34nw4r2ef8ParticlePFPQ34nw4r4math4VEC3PQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripePQ34nw4r2ef8Particle_vfff:
 /* 8002B618 00026518  94 21 FE B0 */	stwu r1, -0x150(r1)
 /* 8002B61C 0002651C  7C 08 02 A6 */	mflr r0
 /* 8002B620 00026520  90 01 01 54 */	stw r0, 0x154(r1)
@@ -613,8 +613,8 @@ lbl_8002B990:
 /* 8002BAC8 000269C8  38 21 01 50 */	addi r1, r1, 0x150
 /* 8002BACC 000269CC  4E 80 00 20 */	blr 
 
-.global func_8002BAD0
-func_8002BAD0:
+.global DrawSection_BSpline__Q34nw4r2ef24DrawSmoothStripeStrategyFiRCQ44nw4r2ef24DrawSmoothStripeStrategy6VertexRCQ44nw4r2ef24DrawSmoothStripeStrategy6VertexRCQ44nw4r2ef24DrawSmoothStripeStrategy6Vertexi
+DrawSection_BSpline__Q34nw4r2ef24DrawSmoothStripeStrategyFiRCQ44nw4r2ef24DrawSmoothStripeStrategy6VertexRCQ44nw4r2ef24DrawSmoothStripeStrategy6VertexRCQ44nw4r2ef24DrawSmoothStripeStrategy6Vertexi:
 /* 8002BAD0 000269D0  94 21 FE F0 */	stwu r1, -0x110(r1)
 /* 8002BAD4 000269D4  DB E1 01 00 */	stfd f31, 0x100(r1)
 /* 8002BAD8 000269D8  F3 E1 01 08 */	.4byte 0xF3E10108
@@ -782,8 +782,8 @@ lbl_8002BD20:
 /* 8002BD50 00026C50  38 21 01 10 */	addi r1, r1, 0x110
 /* 8002BD54 00026C54  4E 80 00 20 */	blr 
 
-.global func_8002BD58
-func_8002BD58:
+.global __pl__Q34nw4r4math4VEC3FQ34nw4r4math4VEC3
+__pl__Q34nw4r4math4VEC3FQ34nw4r4math4VEC3:
 /* 8002BD58 00026C58  E0 44 00 00 */	psq_l f2, 0(r4), 0, qr0
 /* 8002BD5C 00026C5C  E0 25 00 00 */	psq_l f1, 0(r5), 0, qr0
 /* 8002BD60 00026C60  10 02 08 2A */	ps_add f0, f2, f1
@@ -794,8 +794,8 @@ func_8002BD58:
 /* 8002BD74 00026C74  F0 03 80 08 */	psq_st f0, 8(r3), 1, qr0
 /* 8002BD78 00026C78  4E 80 00 20 */	blr 
 
-.global func_8002BD7C
-func_8002BD7C:
+.global DrawSectionEnd_BSpline__Q34nw4r2ef24DrawSmoothStripeStrategyFRCQ44nw4r2ef24DrawSmoothStripeStrategy6VertexRCQ44nw4r2ef24DrawSmoothStripeStrategy6VertexRCQ44nw4r2ef24DrawSmoothStripeStrategy6Vertexi
+DrawSectionEnd_BSpline__Q34nw4r2ef24DrawSmoothStripeStrategyFRCQ44nw4r2ef24DrawSmoothStripeStrategy6VertexRCQ44nw4r2ef24DrawSmoothStripeStrategy6VertexRCQ44nw4r2ef24DrawSmoothStripeStrategy6Vertexi:
 /* 8002BD7C 00026C7C  94 21 FF 40 */	stwu r1, -0xc0(r1)
 /* 8002BD80 00026C80  DB E1 00 B0 */	stfd f31, 0xb0(r1)
 /* 8002BD84 00026C84  F3 E1 00 B8 */	psq_st f31, 184(r1), 0, qr0
@@ -920,8 +920,8 @@ lbl_8002BF50:
 /* 8002BF58 00026E58  38 21 00 C0 */	addi r1, r1, 0xc0
 /* 8002BF5C 00026E5C  4E 80 00 20 */	blr 
 
-.global func_8002BF60
-func_8002BF60:
+.global DrawSectionTube_BSpline__Q34nw4r2ef24DrawSmoothStripeStrategyFiiRCQ44nw4r2ef24DrawSmoothStripeStrategy10VertexTubeRCQ44nw4r2ef24DrawSmoothStripeStrategy10VertexTubeRCQ44nw4r2ef24DrawSmoothStripeStrategy10VertexTubeiPCQ44nw4r2ef24DrawSmoothStripeStrategy13Trigonometric
+DrawSectionTube_BSpline__Q34nw4r2ef24DrawSmoothStripeStrategyFiiRCQ44nw4r2ef24DrawSmoothStripeStrategy10VertexTubeRCQ44nw4r2ef24DrawSmoothStripeStrategy10VertexTubeRCQ44nw4r2ef24DrawSmoothStripeStrategy10VertexTubeiPCQ44nw4r2ef24DrawSmoothStripeStrategy13Trigonometric:
 /* 8002BF60 00026E60  94 21 FC A0 */	stwu r1, -0x360(r1)
 /* 8002BF64 00026E64  7C 08 02 A6 */	mflr r0
 /* 8002BF68 00026E68  90 01 03 64 */	stw r0, 0x364(r1)
@@ -1499,12 +1499,14 @@ lbl_8002C7EC:
 /* 8002C82C 0002772C  38 21 03 60 */	addi r1, r1, 0x360
 /* 8002C830 00027730  4E 80 00 20 */	blr 
 
-.global func_8002C834
-func_8002C834:
+# Conflicts with ef_drawstripestrategy, 80028BD4
+# GXEnd is defined in both files' headers
+# and the dupes are not merged by the linker
+GXEnd:
 /* 8002C834 00027734  4E 80 00 20 */	blr 
 
-.global func_8002C838
-func_8002C838:
+.global DrawSmoothStripe_BSpline_ConnectNone__Q34nw4r2ef24DrawSmoothStripeStrategyFPQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripeiiRCQ34nw4r4math4VEC3RCQ34nw4r4math4VEC3
+DrawSmoothStripe_BSpline_ConnectNone__Q34nw4r2ef24DrawSmoothStripeStrategyFPQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripeiiRCQ34nw4r4math4VEC3RCQ34nw4r4math4VEC3:
 /* 8002C838 00027738  94 21 FF 10 */	stwu r1, -0xf0(r1)
 /* 8002C83C 0002773C  7C 08 02 A6 */	mflr r0
 /* 8002C840 00027740  90 01 00 F4 */	stw r0, 0xf4(r1)
@@ -1538,7 +1540,7 @@ func_8002C838:
 /* 8002C8B0 000277B0  7C 75 1B 78 */	mr r21, r3
 /* 8002C8B4 000277B4  7F 43 D3 78 */	mr r3, r26
 /* 8002C8B8 000277B8  7E E4 BB 78 */	mr r4, r23
-/* 8002C8BC 000277BC  48 00 02 C9 */	bl func_8002CB84
+/* 8002C8BC 000277BC  48 00 02 C9 */	bl GetDrawOrder__Q34nw4r2ef24DrawSmoothStripeStrategyCFRCQ34nw4r2ef18EmitterDrawSetting
 /* 8002C8C0 000277C0  81 9A 00 00 */	lwz r12, 0(r26)
 /* 8002C8C4 000277C4  7C 78 1B 78 */	mr r24, r3
 /* 8002C8C8 000277C8  7F 43 D3 78 */	mr r3, r26
@@ -1575,7 +1577,7 @@ func_8002C838:
 /* 8002C944 00027844  48 0B 21 91 */	bl func_800DEAD4
 /* 8002C948 00027848  7F 43 D3 78 */	mr r3, r26
 /* 8002C94C 0002784C  7E E4 BB 78 */	mr r4, r23
-/* 8002C950 00027850  48 00 02 41 */	bl func_8002CB90
+/* 8002C950 00027850  48 00 02 41 */	bl GetStripeTexmapType__Q34nw4r2ef24DrawSmoothStripeStrategyCFRCQ34nw4r2ef18EmitterDrawSetting
 /* 8002C954 00027854  2C 03 00 40 */	cmpwi r3, 0x40
 /* 8002C958 00027858  41 82 00 30 */	beq lbl_8002C988
 /* 8002C95C 0002785C  40 80 00 08 */	bge lbl_8002C964
@@ -1601,11 +1603,11 @@ lbl_8002C98C:
 /* 8002C9A0 000278A0  3A 20 FF FF */	li r17, -1
 lbl_8002C9A4:
 /* 8002C9A4 000278A4  38 61 00 10 */	addi r3, r1, 0x10
-/* 8002C9A8 000278A8  48 00 01 F5 */	bl func_8002CB9C
+/* 8002C9A8 000278A8  48 00 01 F5 */	bl __ct__Q44nw4r2ef24DrawSmoothStripeStrategy6VertexFv
 /* 8002C9AC 000278AC  38 61 00 2C */	addi r3, r1, 0x2c
-/* 8002C9B0 000278B0  48 00 01 ED */	bl func_8002CB9C
+/* 8002C9B0 000278B0  48 00 01 ED */	bl __ct__Q44nw4r2ef24DrawSmoothStripeStrategy6VertexFv
 /* 8002C9B4 000278B4  38 61 00 48 */	addi r3, r1, 0x48
-/* 8002C9B8 000278B8  48 00 01 E5 */	bl func_8002CB9C
+/* 8002C9B8 000278B8  48 00 01 E5 */	bl __ct__Q44nw4r2ef24DrawSmoothStripeStrategy6VertexFv
 /* 8002C9BC 000278BC  7E 8C A3 78 */	mr r12, r20
 /* 8002C9C0 000278C0  7E C3 B3 78 */	mr r3, r22
 /* 8002C9C4 000278C4  3A 00 00 00 */	li r16, 0
@@ -1629,7 +1631,7 @@ lbl_8002C9A4:
 /* 8002CA0C 0002790C  38 81 00 10 */	addi r4, r1, 0x10
 /* 8002CA10 00027910  EC 5D 00 32 */	fmuls f2, f29, f0
 /* 8002CA14 00027914  39 34 00 AC */	addi r9, r20, 0xac
-/* 8002CA18 00027918  4B FF E8 11 */	bl func_8002B228
+/* 8002CA18 00027918  4B FF E8 11 */	bl CalcVertex__Q34nw4r2ef24DrawSmoothStripeStrategyFPQ44nw4r2ef24DrawSmoothStripeStrategy6VertexPQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripeiPQ34nw4r2ef8ParticlePFPQ34nw4r4math4VEC3PQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripePQ34nw4r2ef8Particle_vRCQ34nw4r4math4VEC3RCQ34nw4r4math4VEC3RCQ34nw4r4math4VEC3ff
 /* 8002CA1C 0002791C  7E 6C 9B 78 */	mr r12, r19
 /* 8002CA20 00027920  7E C3 B3 78 */	mr r3, r22
 /* 8002CA24 00027924  7E 84 A3 78 */	mr r4, r20
@@ -1668,7 +1670,7 @@ lbl_8002CA48:
 /* 8002CAA4 000279A4  7F CA F3 78 */	mr r10, r30
 /* 8002CAA8 000279A8  7F 04 C3 78 */	mr r4, r24
 /* 8002CAAC 000279AC  39 37 00 AC */	addi r9, r23, 0xac
-/* 8002CAB0 000279B0  4B FF E7 79 */	bl func_8002B228
+/* 8002CAB0 000279B0  4B FF E7 79 */	bl CalcVertex__Q34nw4r2ef24DrawSmoothStripeStrategyFPQ44nw4r2ef24DrawSmoothStripeStrategy6VertexPQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripeiPQ34nw4r2ef8ParticlePFPQ34nw4r4math4VEC3PQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripePQ34nw4r2ef8Particle_vRCQ34nw4r4math4VEC3RCQ34nw4r4math4VEC3RCQ34nw4r4math4VEC3ff
 /* 8002CAB4 000279B4  1D 34 00 1C */	mulli r9, r20, 0x1c
 /* 8002CAB8 000279B8  38 A1 00 10 */	addi r5, r1, 0x10
 /* 8002CABC 000279BC  7F 43 D3 78 */	mr r3, r26
@@ -1679,7 +1681,7 @@ lbl_8002CA48:
 /* 8002CAD0 000279D0  7F A8 EB 78 */	mr r8, r29
 /* 8002CAD4 000279D4  7C A5 4A 14 */	add r5, r5, r9
 /* 8002CAD8 000279D8  7C C6 02 14 */	add r6, r6, r0
-/* 8002CADC 000279DC  4B FF EF F5 */	bl func_8002BAD0
+/* 8002CADC 000279DC  4B FF EF F5 */	bl DrawSection_BSpline__Q34nw4r2ef24DrawSmoothStripeStrategyFiRCQ44nw4r2ef24DrawSmoothStripeStrategy6VertexRCQ44nw4r2ef24DrawSmoothStripeStrategy6VertexRCQ44nw4r2ef24DrawSmoothStripeStrategy6Vertexi
 /* 8002CAE0 000279E0  7E 6C 9B 78 */	mr r12, r19
 /* 8002CAE4 000279E4  7E C3 B3 78 */	mr r3, r22
 /* 8002CAE8 000279E8  7E E4 BB 78 */	mr r4, r23
@@ -1702,14 +1704,14 @@ lbl_8002CAFC:
 /* 8002CB28 00027A28  7D E7 7B 78 */	mr r7, r15
 /* 8002CB2C 00027A2C  7E 31 02 14 */	add r17, r17, r0
 /* 8002CB30 00027A30  7E 25 8B 78 */	mr r5, r17
-/* 8002CB34 00027A34  4B FF EF 9D */	bl func_8002BAD0
+/* 8002CB34 00027A34  4B FF EF 9D */	bl DrawSection_BSpline__Q34nw4r2ef24DrawSmoothStripeStrategyFiRCQ44nw4r2ef24DrawSmoothStripeStrategy6VertexRCQ44nw4r2ef24DrawSmoothStripeStrategy6VertexRCQ44nw4r2ef24DrawSmoothStripeStrategy6Vertexi
 /* 8002CB38 00027A38  7F 43 D3 78 */	mr r3, r26
 /* 8002CB3C 00027A3C  7E 24 8B 78 */	mr r4, r17
 /* 8002CB40 00027A40  7D E5 7B 78 */	mr r5, r15
 /* 8002CB44 00027A44  7D E6 7B 78 */	mr r6, r15
 /* 8002CB48 00027A48  7F A7 EB 78 */	mr r7, r29
-/* 8002CB4C 00027A4C  4B FF F2 31 */	bl func_8002BD7C
-/* 8002CB50 00027A50  4B FF FC E5 */	bl func_8002C834
+/* 8002CB4C 00027A4C  4B FF F2 31 */	bl DrawSectionEnd_BSpline__Q34nw4r2ef24DrawSmoothStripeStrategyFRCQ44nw4r2ef24DrawSmoothStripeStrategy6VertexRCQ44nw4r2ef24DrawSmoothStripeStrategy6VertexRCQ44nw4r2ef24DrawSmoothStripeStrategy6Vertexi
+/* 8002CB50 00027A50  4B FF FC E5 */	bl GXEnd
 /* 8002CB54 00027A54  E3 E1 00 E8 */	psq_l f31, 232(r1), 0, qr0
 /* 8002CB58 00027A58  CB E1 00 E0 */	lfd f31, 0xe0(r1)
 /* 8002CB5C 00027A5C  E3 C1 00 D8 */	psq_l f30, 216(r1), 0, qr0
@@ -1723,24 +1725,24 @@ lbl_8002CAFC:
 /* 8002CB7C 00027A7C  38 21 00 F0 */	addi r1, r1, 0xf0
 /* 8002CB80 00027A80  4E 80 00 20 */	blr 
 
-.global func_8002CB84
-func_8002CB84:
+.global GetDrawOrder__Q34nw4r2ef24DrawSmoothStripeStrategyCFRCQ34nw4r2ef18EmitterDrawSetting
+GetDrawOrder__Q34nw4r2ef24DrawSmoothStripeStrategyCFRCQ34nw4r2ef18EmitterDrawSetting:
 /* 8002CB84 00027A84  A0 04 00 00 */	lhz r0, 0(r4)
 /* 8002CB88 00027A88  54 03 05 28 */	rlwinm r3, r0, 0, 0x14, 0x14
 /* 8002CB8C 00027A8C  4E 80 00 20 */	blr 
 
-.global func_8002CB90
-func_8002CB90:
+.global GetStripeTexmapType__Q34nw4r2ef24DrawSmoothStripeStrategyCFRCQ34nw4r2ef18EmitterDrawSetting
+GetStripeTexmapType__Q34nw4r2ef24DrawSmoothStripeStrategyCFRCQ34nw4r2ef18EmitterDrawSetting:
 /* 8002CB90 00027A90  88 04 00 A6 */	lbz r0, 0xa6(r4)
 /* 8002CB94 00027A94  54 03 06 32 */	rlwinm r3, r0, 0, 0x18, 0x19
 /* 8002CB98 00027A98  4E 80 00 20 */	blr 
 
-.global func_8002CB9C
-func_8002CB9C:
+.global __ct__Q44nw4r2ef24DrawSmoothStripeStrategy6VertexFv
+__ct__Q44nw4r2ef24DrawSmoothStripeStrategy6VertexFv:
 /* 8002CB9C 00027A9C  4E 80 00 20 */	blr 
 
-.global func_8002CBA0
-func_8002CBA0:
+.global DrawSmoothStripe_BSpline_ConnectRing__Q34nw4r2ef24DrawSmoothStripeStrategyFPQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripeiiRCQ34nw4r4math4VEC3RCQ34nw4r4math4VEC3
+DrawSmoothStripe_BSpline_ConnectRing__Q34nw4r2ef24DrawSmoothStripeStrategyFPQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripeiiRCQ34nw4r4math4VEC3RCQ34nw4r4math4VEC3:
 /* 8002CBA0 00027AA0  94 21 FE C0 */	stwu r1, -0x140(r1)
 /* 8002CBA4 00027AA4  7C 08 02 A6 */	mflr r0
 /* 8002CBA8 00027AA8  90 01 01 44 */	stw r0, 0x144(r1)
@@ -1774,7 +1776,7 @@ func_8002CBA0:
 /* 8002CC18 00027B18  7C 75 1B 78 */	mr r21, r3
 /* 8002CC1C 00027B1C  7F 43 D3 78 */	mr r3, r26
 /* 8002CC20 00027B20  7E E4 BB 78 */	mr r4, r23
-/* 8002CC24 00027B24  4B FF FF 61 */	bl func_8002CB84
+/* 8002CC24 00027B24  4B FF FF 61 */	bl GetDrawOrder__Q34nw4r2ef24DrawSmoothStripeStrategyCFRCQ34nw4r2ef18EmitterDrawSetting
 /* 8002CC28 00027B28  81 9A 00 00 */	lwz r12, 0(r26)
 /* 8002CC2C 00027B2C  7C 78 1B 78 */	mr r24, r3
 /* 8002CC30 00027B30  7F 43 D3 78 */	mr r3, r26
@@ -1811,7 +1813,7 @@ func_8002CBA0:
 /* 8002CCAC 00027BAC  48 0B 1E 29 */	bl func_800DEAD4
 /* 8002CCB0 00027BB0  7F 43 D3 78 */	mr r3, r26
 /* 8002CCB4 00027BB4  7E E4 BB 78 */	mr r4, r23
-/* 8002CCB8 00027BB8  4B FF FE D9 */	bl func_8002CB90
+/* 8002CCB8 00027BB8  4B FF FE D9 */	bl GetStripeTexmapType__Q34nw4r2ef24DrawSmoothStripeStrategyCFRCQ34nw4r2ef18EmitterDrawSetting
 /* 8002CCBC 00027BBC  2C 03 00 40 */	cmpwi r3, 0x40
 /* 8002CCC0 00027BC0  41 82 00 2C */	beq lbl_8002CCEC
 /* 8002CCC4 00027BC4  40 80 00 08 */	bge lbl_8002CCCC
@@ -1837,15 +1839,15 @@ lbl_8002CCF0:
 /* 8002CD08 00027C08  3A 43 00 01 */	addi r18, r3, 1
 lbl_8002CD0C:
 /* 8002CD0C 00027C0C  38 61 00 28 */	addi r3, r1, 0x28
-/* 8002CD10 00027C10  4B FF FE 8D */	bl func_8002CB9C
+/* 8002CD10 00027C10  4B FF FE 8D */	bl __ct__Q44nw4r2ef24DrawSmoothStripeStrategy6VertexFv
 /* 8002CD14 00027C14  38 61 00 44 */	addi r3, r1, 0x44
-/* 8002CD18 00027C18  4B FF FE 85 */	bl func_8002CB9C
+/* 8002CD18 00027C18  4B FF FE 85 */	bl __ct__Q44nw4r2ef24DrawSmoothStripeStrategy6VertexFv
 /* 8002CD1C 00027C1C  38 61 00 60 */	addi r3, r1, 0x60
-/* 8002CD20 00027C20  4B FF FE 7D */	bl func_8002CB9C
+/* 8002CD20 00027C20  4B FF FE 7D */	bl __ct__Q44nw4r2ef24DrawSmoothStripeStrategy6VertexFv
 /* 8002CD24 00027C24  38 61 00 7C */	addi r3, r1, 0x7c
-/* 8002CD28 00027C28  4B FF FE 75 */	bl func_8002CB9C
+/* 8002CD28 00027C28  4B FF FE 75 */	bl __ct__Q44nw4r2ef24DrawSmoothStripeStrategy6VertexFv
 /* 8002CD2C 00027C2C  38 61 00 98 */	addi r3, r1, 0x98
-/* 8002CD30 00027C30  4B FF FE 6D */	bl func_8002CB9C
+/* 8002CD30 00027C30  4B FF FE 6D */	bl __ct__Q44nw4r2ef24DrawSmoothStripeStrategy6VertexFv
 /* 8002CD34 00027C34  38 61 00 1C */	addi r3, r1, 0x1c
 /* 8002CD38 00027C38  4B FF 87 7D */	bl __ct__Q34nw4r4math4VEC3FQ34nw4r4math4VEC3
 /* 8002CD3C 00027C3C  38 61 00 10 */	addi r3, r1, 0x10
@@ -1871,7 +1873,7 @@ lbl_8002CD0C:
 /* 8002CD8C 00027C8C  38 81 00 7C */	addi r4, r1, 0x7c
 /* 8002CD90 00027C90  EC 5D 00 32 */	fmuls f2, f29, f0
 /* 8002CD94 00027C94  39 2F 00 AC */	addi r9, r15, 0xac
-/* 8002CD98 00027C98  4B FF E4 91 */	bl func_8002B228
+/* 8002CD98 00027C98  4B FF E4 91 */	bl CalcVertex__Q34nw4r2ef24DrawSmoothStripeStrategyFPQ44nw4r2ef24DrawSmoothStripeStrategy6VertexPQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripeiPQ34nw4r2ef8ParticlePFPQ34nw4r4math4VEC3PQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripePQ34nw4r2ef8Particle_vRCQ34nw4r4math4VEC3RCQ34nw4r4math4VEC3RCQ34nw4r4math4VEC3ff
 /* 8002CD9C 00027C9C  7E 6C 9B 78 */	mr r12, r19
 /* 8002CDA0 00027CA0  7E C3 B3 78 */	mr r3, r22
 /* 8002CDA4 00027CA4  7D E4 7B 78 */	mr r4, r15
@@ -1895,7 +1897,7 @@ lbl_8002CD0C:
 /* 8002CDEC 00027CEC  38 81 00 98 */	addi r4, r1, 0x98
 /* 8002CDF0 00027CF0  39 2F 00 AC */	addi r9, r15, 0xac
 /* 8002CDF4 00027CF4  EC 5D 00 32 */	fmuls f2, f29, f0
-/* 8002CDF8 00027CF8  4B FF E4 31 */	bl func_8002B228
+/* 8002CDF8 00027CF8  4B FF E4 31 */	bl CalcVertex__Q34nw4r2ef24DrawSmoothStripeStrategyFPQ44nw4r2ef24DrawSmoothStripeStrategy6VertexPQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripeiPQ34nw4r2ef8ParticlePFPQ34nw4r4math4VEC3PQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripePQ34nw4r2ef8Particle_vRCQ34nw4r4math4VEC3RCQ34nw4r4math4VEC3RCQ34nw4r4math4VEC3ff
 /* 8002CDFC 00027CFC  7E 6C 9B 78 */	mr r12, r19
 /* 8002CE00 00027D00  7E C3 B3 78 */	mr r3, r22
 /* 8002CE04 00027D04  7D E4 7B 78 */	mr r4, r15
@@ -1936,7 +1938,7 @@ lbl_8002CE30:
 /* 8002CE8C 00027D8C  7F CA F3 78 */	mr r10, r30
 /* 8002CE90 00027D90  7F 04 C3 78 */	mr r4, r24
 /* 8002CE94 00027D94  39 37 00 AC */	addi r9, r23, 0xac
-/* 8002CE98 00027D98  4B FF E3 91 */	bl func_8002B228
+/* 8002CE98 00027D98  4B FF E3 91 */	bl CalcVertex__Q34nw4r2ef24DrawSmoothStripeStrategyFPQ44nw4r2ef24DrawSmoothStripeStrategy6VertexPQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripeiPQ34nw4r2ef8ParticlePFPQ34nw4r4math4VEC3PQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripePQ34nw4r2ef8Particle_vRCQ34nw4r4math4VEC3RCQ34nw4r4math4VEC3RCQ34nw4r4math4VEC3ff
 /* 8002CE9C 00027D9C  1D 34 00 1C */	mulli r9, r20, 0x1c
 /* 8002CEA0 00027DA0  38 A1 00 28 */	addi r5, r1, 0x28
 /* 8002CEA4 00027DA4  7F 43 D3 78 */	mr r3, r26
@@ -1947,7 +1949,7 @@ lbl_8002CE30:
 /* 8002CEB8 00027DB8  7F A8 EB 78 */	mr r8, r29
 /* 8002CEBC 00027DBC  7C A5 4A 14 */	add r5, r5, r9
 /* 8002CEC0 00027DC0  7C C6 02 14 */	add r6, r6, r0
-/* 8002CEC4 00027DC4  4B FF EC 0D */	bl func_8002BAD0
+/* 8002CEC4 00027DC4  4B FF EC 0D */	bl DrawSection_BSpline__Q34nw4r2ef24DrawSmoothStripeStrategyFiRCQ44nw4r2ef24DrawSmoothStripeStrategy6VertexRCQ44nw4r2ef24DrawSmoothStripeStrategy6VertexRCQ44nw4r2ef24DrawSmoothStripeStrategy6Vertexi
 /* 8002CEC8 00027DC8  7E 6C 9B 78 */	mr r12, r19
 /* 8002CECC 00027DCC  7E C3 B3 78 */	mr r3, r22
 /* 8002CED0 00027DD0  7E E4 BB 78 */	mr r4, r23
@@ -1976,7 +1978,7 @@ lbl_8002CEE4:
 /* 8002CF28 00027E28  7C A5 02 14 */	add r5, r5, r0
 /* 8002CF2C 00027E2C  38 E1 00 7C */	addi r7, r1, 0x7c
 /* 8002CF30 00027E30  D0 01 00 94 */	stfs f0, 0x94(r1)
-/* 8002CF34 00027E34  4B FF EB 9D */	bl func_8002BAD0
+/* 8002CF34 00027E34  4B FF EB 9D */	bl DrawSection_BSpline__Q34nw4r2ef24DrawSmoothStripeStrategyFiRCQ44nw4r2ef24DrawSmoothStripeStrategy6VertexRCQ44nw4r2ef24DrawSmoothStripeStrategy6VertexRCQ44nw4r2ef24DrawSmoothStripeStrategy6Vertexi
 /* 8002CF38 00027E38  7E 52 8A 14 */	add r18, r18, r17
 /* 8002CF3C 00027E3C  C8 22 84 70 */	lfd f1, lbl_804BFE90-_SDA2_BASE_(r2)
 /* 8002CF40 00027E40  6E 40 80 00 */	xoris r0, r18, 0x8000
@@ -1991,14 +1993,14 @@ lbl_8002CEE4:
 /* 8002CF64 00027E64  EC 00 08 28 */	fsubs f0, f0, f1
 /* 8002CF68 00027E68  EC 1D 00 32 */	fmuls f0, f29, f0
 /* 8002CF6C 00027E6C  D0 01 00 B0 */	stfs f0, 0xb0(r1)
-/* 8002CF70 00027E70  4B FF EB 61 */	bl func_8002BAD0
+/* 8002CF70 00027E70  4B FF EB 61 */	bl DrawSection_BSpline__Q34nw4r2ef24DrawSmoothStripeStrategyFiRCQ44nw4r2ef24DrawSmoothStripeStrategy6VertexRCQ44nw4r2ef24DrawSmoothStripeStrategy6VertexRCQ44nw4r2ef24DrawSmoothStripeStrategy6Vertexi
 /* 8002CF74 00027E74  7F 43 D3 78 */	mr r3, r26
 /* 8002CF78 00027E78  7D E4 7B 78 */	mr r4, r15
 /* 8002CF7C 00027E7C  7F A7 EB 78 */	mr r7, r29
 /* 8002CF80 00027E80  38 A1 00 7C */	addi r5, r1, 0x7c
 /* 8002CF84 00027E84  38 C1 00 98 */	addi r6, r1, 0x98
-/* 8002CF88 00027E88  4B FF ED F5 */	bl func_8002BD7C
-/* 8002CF8C 00027E8C  4B FF F8 A9 */	bl func_8002C834
+/* 8002CF88 00027E88  4B FF ED F5 */	bl DrawSectionEnd_BSpline__Q34nw4r2ef24DrawSmoothStripeStrategyFRCQ44nw4r2ef24DrawSmoothStripeStrategy6VertexRCQ44nw4r2ef24DrawSmoothStripeStrategy6VertexRCQ44nw4r2ef24DrawSmoothStripeStrategy6Vertexi
+/* 8002CF8C 00027E8C  4B FF F8 A9 */	bl GXEnd
 /* 8002CF90 00027E90  E3 E1 01 38 */	psq_l f31, 312(r1), 0, qr0
 /* 8002CF94 00027E94  CB E1 01 30 */	lfd f31, 0x130(r1)
 /* 8002CF98 00027E98  E3 C1 01 28 */	psq_l f30, 296(r1), 0, qr0
@@ -2012,8 +2014,8 @@ lbl_8002CEE4:
 /* 8002CFB8 00027EB8  38 21 01 40 */	addi r1, r1, 0x140
 /* 8002CFBC 00027EBC  4E 80 00 20 */	blr 
 
-.global func_8002CFC0
-func_8002CFC0:
+.global DrawSmoothStripe_BSpline_ConnectEmitter__Q34nw4r2ef24DrawSmoothStripeStrategyFPQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripeiiRCQ34nw4r4math4VEC3RCQ34nw4r4math4VEC3
+DrawSmoothStripe_BSpline_ConnectEmitter__Q34nw4r2ef24DrawSmoothStripeStrategyFPQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripeiiRCQ34nw4r4math4VEC3RCQ34nw4r4math4VEC3:
 /* 8002CFC0 00027EC0  94 21 FE B0 */	stwu r1, -0x150(r1)
 /* 8002CFC4 00027EC4  7C 08 02 A6 */	mflr r0
 /* 8002CFC8 00027EC8  90 01 01 54 */	stw r0, 0x154(r1)
@@ -2047,7 +2049,7 @@ func_8002CFC0:
 /* 8002D038 00027F38  7C 7B 1B 78 */	mr r27, r3
 /* 8002D03C 00027F3C  7D E3 7B 78 */	mr r3, r15
 /* 8002D040 00027F40  7E A4 AB 78 */	mr r4, r21
-/* 8002D044 00027F44  4B FF FB 41 */	bl func_8002CB84
+/* 8002D044 00027F44  4B FF FB 41 */	bl GetDrawOrder__Q34nw4r2ef24DrawSmoothStripeStrategyCFRCQ34nw4r2ef18EmitterDrawSetting
 /* 8002D048 00027F48  81 8F 00 00 */	lwz r12, 0(r15)
 /* 8002D04C 00027F4C  7C 6E 1B 78 */	mr r14, r3
 /* 8002D050 00027F50  7D E3 7B 78 */	mr r3, r15
@@ -2073,12 +2075,12 @@ func_8002CFC0:
 /* 8002D0A0 00027FA0  C8 21 00 C0 */	lfd f1, 0xc0(r1)
 /* 8002D0A4 00027FA4  EC 21 10 28 */	fsubs f1, f1, f2
 /* 8002D0A8 00027FA8  EF C0 00 72 */	fmuls f30, f0, f1
-/* 8002D0AC 00027FAC  48 00 03 B9 */	bl func_8002D464
+/* 8002D0AC 00027FAC  48 00 03 B9 */	bl GetYoungestDrawParticle__Q34nw4r2ef16DrawStrategyImplFPQ34nw4r2ef15ParticleManager
 /* 8002D0B0 00027FB0  7C 65 1B 78 */	mr r5, r3
 /* 8002D0B4 00027FB4  38 61 00 40 */	addi r3, r1, 0x40
 /* 8002D0B8 00027FB8  38 90 00 A4 */	addi r4, r16, 0xa4
 /* 8002D0BC 00027FBC  38 A5 00 AC */	addi r5, r5, 0xac
-/* 8002D0C0 00027FC0  48 00 03 ED */	bl func_8002D4AC
+/* 8002D0C0 00027FC0  48 00 03 ED */	bl __mi__Q34nw4r4math4VEC3CFRCQ34nw4r4math4VEC3
 /* 8002D0C4 00027FC4  7D E3 7B 78 */	mr r3, r15
 /* 8002D0C8 00027FC8  7F 84 E3 78 */	mr r4, r28
 /* 8002D0CC 00027FCC  4B FF B6 61 */	bl GetNumDrawParticle__Q34nw4r2ef16DrawStrategyImplFPQ34nw4r2ef15ParticleManager
@@ -2092,7 +2094,7 @@ func_8002CFC0:
 /* 8002D0EC 00027FEC  48 0B 19 E9 */	bl func_800DEAD4
 /* 8002D0F0 00027FF0  7D E3 7B 78 */	mr r3, r15
 /* 8002D0F4 00027FF4  7E A4 AB 78 */	mr r4, r21
-/* 8002D0F8 00027FF8  4B FF FA 99 */	bl func_8002CB90
+/* 8002D0F8 00027FF8  4B FF FA 99 */	bl GetStripeTexmapType__Q34nw4r2ef24DrawSmoothStripeStrategyCFRCQ34nw4r2ef18EmitterDrawSetting
 /* 8002D0FC 00027FFC  2C 03 00 40 */	cmpwi r3, 0x40
 /* 8002D100 00028000  41 82 00 2C */	beq lbl_8002D12C
 /* 8002D104 00028004  40 80 00 08 */	bge lbl_8002D10C
@@ -2117,11 +2119,11 @@ lbl_8002D130:
 /* 8002D144 00028044  3B 00 FF FF */	li r24, -1
 lbl_8002D148:
 /* 8002D148 00028048  38 61 00 68 */	addi r3, r1, 0x68
-/* 8002D14C 0002804C  4B FF FA 51 */	bl func_8002CB9C
+/* 8002D14C 0002804C  4B FF FA 51 */	bl __ct__Q44nw4r2ef24DrawSmoothStripeStrategy6VertexFv
 /* 8002D150 00028050  38 61 00 84 */	addi r3, r1, 0x84
-/* 8002D154 00028054  4B FF FA 49 */	bl func_8002CB9C
+/* 8002D154 00028054  4B FF FA 49 */	bl __ct__Q44nw4r2ef24DrawSmoothStripeStrategy6VertexFv
 /* 8002D158 00028058  38 61 00 A0 */	addi r3, r1, 0xa0
-/* 8002D15C 0002805C  4B FF FA 41 */	bl func_8002CB9C
+/* 8002D15C 0002805C  4B FF FA 41 */	bl __ct__Q44nw4r2ef24DrawSmoothStripeStrategy6VertexFv
 /* 8002D160 00028060  38 61 00 34 */	addi r3, r1, 0x34
 /* 8002D164 00028064  3A C0 00 00 */	li r22, 0
 /* 8002D168 00028068  3A A0 00 00 */	li r21, 0
@@ -2149,14 +2151,14 @@ lbl_8002D148:
 /* 8002D1C0 000280C0  38 81 00 68 */	addi r4, r1, 0x68
 /* 8002D1C4 000280C4  EC 5D 00 32 */	fmuls f2, f29, f0
 /* 8002D1C8 000280C8  39 37 00 AC */	addi r9, r23, 0xac
-/* 8002D1CC 000280CC  4B FF E0 5D */	bl func_8002B228
+/* 8002D1CC 000280CC  4B FF E0 5D */	bl CalcVertex__Q34nw4r2ef24DrawSmoothStripeStrategyFPQ44nw4r2ef24DrawSmoothStripeStrategy6VertexPQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripeiPQ34nw4r2ef8ParticlePFPQ34nw4r4math4VEC3PQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripePQ34nw4r2ef8Particle_vRCQ34nw4r4math4VEC3RCQ34nw4r4math4VEC3RCQ34nw4r4math4VEC3ff
 /* 8002D1D0 000280D0  2C 0E 00 00 */	cmpwi r14, 0
 /* 8002D1D4 000280D4  7F 39 C2 14 */	add r25, r25, r24
 /* 8002D1D8 000280D8  40 82 00 68 */	bne lbl_8002D240
 /* 8002D1DC 000280DC  38 61 00 84 */	addi r3, r1, 0x84
 /* 8002D1E0 000280E0  38 81 00 68 */	addi r4, r1, 0x68
 /* 8002D1E4 000280E4  3A A0 00 01 */	li r21, 1
-/* 8002D1E8 000280E8  48 00 03 45 */	bl func_8002D52C
+/* 8002D1E8 000280E8  48 00 03 45 */	bl __as__Q44nw4r2ef24DrawSmoothStripeStrategy6VertexFRCQ44nw4r2ef24DrawSmoothStripeStrategy6Vertex
 /* 8002D1EC 000280EC  6F 20 80 00 */	xoris r0, r25, 0x8000
 /* 8002D1F0 000280F0  C8 22 84 70 */	lfd f1, lbl_804BFE90-_SDA2_BASE_(r2)
 /* 8002D1F4 000280F4  90 01 00 CC */	stw r0, 0xcc(r1)
@@ -2166,10 +2168,10 @@ lbl_8002D148:
 /* 8002D204 00028104  EC 00 08 28 */	fsubs f0, f0, f1
 /* 8002D208 00028108  EC 1D 00 32 */	fmuls f0, f29, f0
 /* 8002D20C 0002810C  D0 01 00 9C */	stfs f0, 0x9c(r1)
-/* 8002D210 00028110  48 00 02 C1 */	bl func_8002D4D0
+/* 8002D210 00028110  48 00 02 C1 */	bl __apl__Q34nw4r4math4VEC3FRCQ34nw4r4math4VEC3
 /* 8002D214 00028114  38 61 00 74 */	addi r3, r1, 0x74
 /* 8002D218 00028118  38 81 00 40 */	addi r4, r1, 0x40
-/* 8002D21C 0002811C  48 00 02 B5 */	bl func_8002D4D0
+/* 8002D21C 0002811C  48 00 02 B5 */	bl __apl__Q34nw4r4math4VEC3FRCQ34nw4r4math4VEC3
 /* 8002D220 00028120  38 A1 00 68 */	addi r5, r1, 0x68
 /* 8002D224 00028124  7D E3 7B 78 */	mr r3, r15
 /* 8002D228 00028128  7E 24 8B 78 */	mr r4, r17
@@ -2177,7 +2179,7 @@ lbl_8002D148:
 /* 8002D230 00028130  7C A6 2B 78 */	mr r6, r5
 /* 8002D234 00028134  7F 39 C2 14 */	add r25, r25, r24
 /* 8002D238 00028138  38 E1 00 84 */	addi r7, r1, 0x84
-/* 8002D23C 0002813C  4B FF E8 95 */	bl func_8002BAD0
+/* 8002D23C 0002813C  4B FF E8 95 */	bl DrawSection_BSpline__Q34nw4r2ef24DrawSmoothStripeStrategyFiRCQ44nw4r2ef24DrawSmoothStripeStrategy6VertexRCQ44nw4r2ef24DrawSmoothStripeStrategy6VertexRCQ44nw4r2ef24DrawSmoothStripeStrategy6Vertexi
 lbl_8002D240:
 /* 8002D240 00028140  7F 4C D3 78 */	mr r12, r26
 /* 8002D244 00028144  7F 83 E3 78 */	mr r3, r28
@@ -2216,7 +2218,7 @@ lbl_8002D268:
 /* 8002D2C4 000281C4  7E 6A 9B 78 */	mr r10, r19
 /* 8002D2C8 000281C8  7F C4 F3 78 */	mr r4, r30
 /* 8002D2CC 000281CC  39 3D 00 AC */	addi r9, r29, 0xac
-/* 8002D2D0 000281D0  4B FF DF 59 */	bl func_8002B228
+/* 8002D2D0 000281D0  4B FF DF 59 */	bl CalcVertex__Q34nw4r2ef24DrawSmoothStripeStrategyFPQ44nw4r2ef24DrawSmoothStripeStrategy6VertexPQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripeiPQ34nw4r2ef8ParticlePFPQ34nw4r4math4VEC3PQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripePQ34nw4r2ef8Particle_vRCQ34nw4r4math4VEC3RCQ34nw4r4math4VEC3RCQ34nw4r4math4VEC3ff
 /* 8002D2D4 000281D4  1D 37 00 1C */	mulli r9, r23, 0x1c
 /* 8002D2D8 000281D8  38 A1 00 68 */	addi r5, r1, 0x68
 /* 8002D2DC 000281DC  7D E3 7B 78 */	mr r3, r15
@@ -2227,7 +2229,7 @@ lbl_8002D268:
 /* 8002D2F0 000281F0  7E 48 93 78 */	mr r8, r18
 /* 8002D2F4 000281F4  7C A5 4A 14 */	add r5, r5, r9
 /* 8002D2F8 000281F8  7C C6 02 14 */	add r6, r6, r0
-/* 8002D2FC 000281FC  4B FF E7 D5 */	bl func_8002BAD0
+/* 8002D2FC 000281FC  4B FF E7 D5 */	bl DrawSection_BSpline__Q34nw4r2ef24DrawSmoothStripeStrategyFiRCQ44nw4r2ef24DrawSmoothStripeStrategy6VertexRCQ44nw4r2ef24DrawSmoothStripeStrategy6VertexRCQ44nw4r2ef24DrawSmoothStripeStrategy6Vertexi
 /* 8002D300 00028200  7F 4C D3 78 */	mr r12, r26
 /* 8002D304 00028204  7F 83 E3 78 */	mr r3, r28
 /* 8002D308 00028208  7F A4 EB 78 */	mr r4, r29
@@ -2259,11 +2261,11 @@ lbl_8002D31C:
 /* 8002D36C 0002826C  7D CE 22 14 */	add r14, r14, r4
 /* 8002D370 00028270  7E 10 02 14 */	add r16, r16, r0
 /* 8002D374 00028274  38 8E 00 0C */	addi r4, r14, 0xc
-/* 8002D378 00028278  4B FF E9 E1 */	bl func_8002BD58
+/* 8002D378 00028278  4B FF E9 E1 */	bl __pl__Q34nw4r4math4VEC3FQ34nw4r4math4VEC3
 /* 8002D37C 0002827C  7D C4 73 78 */	mr r4, r14
 /* 8002D380 00028280  38 61 00 1C */	addi r3, r1, 0x1c
 /* 8002D384 00028284  38 A1 00 40 */	addi r5, r1, 0x40
-/* 8002D388 00028288  4B FF E9 D1 */	bl func_8002BD58
+/* 8002D388 00028288  4B FF E9 D1 */	bl __pl__Q34nw4r4math4VEC3FQ34nw4r4math4VEC3
 /* 8002D38C 0002828C  6F 20 80 00 */	xoris r0, r25, 0x8000
 /* 8002D390 00028290  C8 22 84 70 */	lfd f1, lbl_804BFE90-_SDA2_BASE_(r2)
 /* 8002D394 00028294  90 01 00 CC */	stw r0, 0xcc(r1)
@@ -2273,10 +2275,10 @@ lbl_8002D31C:
 /* 8002D3A4 000282A4  C8 01 00 C8 */	lfd f0, 0xc8(r1)
 /* 8002D3A8 000282A8  EC 00 08 28 */	fsubs f0, f0, f1
 /* 8002D3AC 000282AC  EC 3D 00 32 */	fmuls f1, f29, f0
-/* 8002D3B0 000282B0  48 00 01 45 */	bl func_8002D4F4
+/* 8002D3B0 000282B0  48 00 01 45 */	bl __ct__Q44nw4r2ef24DrawSmoothStripeStrategy6VertexFRCQ34nw4r4math4VEC3RCQ34nw4r4math4VEC3f
 /* 8002D3B4 000282B4  7C 64 1B 78 */	mr r4, r3
 /* 8002D3B8 000282B8  7E 03 83 78 */	mr r3, r16
-/* 8002D3BC 000282BC  48 00 01 71 */	bl func_8002D52C
+/* 8002D3BC 000282BC  48 00 01 71 */	bl __as__Q44nw4r2ef24DrawSmoothStripeStrategy6VertexFRCQ44nw4r2ef24DrawSmoothStripeStrategy6Vertex
 /* 8002D3C0 000282C0  1C 13 00 1C */	mulli r0, r19, 0x1c
 /* 8002D3C4 000282C4  38 A1 00 68 */	addi r5, r1, 0x68
 /* 8002D3C8 000282C8  7D E3 7B 78 */	mr r3, r15
@@ -2285,7 +2287,7 @@ lbl_8002D31C:
 /* 8002D3D4 000282D4  7E 07 83 78 */	mr r7, r16
 /* 8002D3D8 000282D8  7E 48 93 78 */	mr r8, r18
 /* 8002D3DC 000282DC  7C A5 02 14 */	add r5, r5, r0
-/* 8002D3E0 000282E0  4B FF E6 F1 */	bl func_8002BAD0
+/* 8002D3E0 000282E0  4B FF E6 F1 */	bl DrawSection_BSpline__Q34nw4r2ef24DrawSmoothStripeStrategyFiRCQ44nw4r2ef24DrawSmoothStripeStrategy6VertexRCQ44nw4r2ef24DrawSmoothStripeStrategy6VertexRCQ44nw4r2ef24DrawSmoothStripeStrategy6Vertexi
 lbl_8002D3E4:
 /* 8002D3E4 000282E4  1C 15 00 1C */	mulli r0, r21, 0x1c
 /* 8002D3E8 000282E8  39 C1 00 68 */	addi r14, r1, 0x68
@@ -2299,14 +2301,14 @@ lbl_8002D3E4:
 /* 8002D408 00028308  7D C7 73 78 */	mr r7, r14
 /* 8002D40C 0002830C  7E 10 02 14 */	add r16, r16, r0
 /* 8002D410 00028310  7E 05 83 78 */	mr r5, r16
-/* 8002D414 00028314  4B FF E6 BD */	bl func_8002BAD0
+/* 8002D414 00028314  4B FF E6 BD */	bl DrawSection_BSpline__Q34nw4r2ef24DrawSmoothStripeStrategyFiRCQ44nw4r2ef24DrawSmoothStripeStrategy6VertexRCQ44nw4r2ef24DrawSmoothStripeStrategy6VertexRCQ44nw4r2ef24DrawSmoothStripeStrategy6Vertexi
 /* 8002D418 00028318  7D E3 7B 78 */	mr r3, r15
 /* 8002D41C 0002831C  7E 04 83 78 */	mr r4, r16
 /* 8002D420 00028320  7D C5 73 78 */	mr r5, r14
 /* 8002D424 00028324  7D C6 73 78 */	mr r6, r14
 /* 8002D428 00028328  7E 47 93 78 */	mr r7, r18
-/* 8002D42C 0002832C  4B FF E9 51 */	bl func_8002BD7C
-/* 8002D430 00028330  4B FF F4 05 */	bl func_8002C834
+/* 8002D42C 0002832C  4B FF E9 51 */	bl DrawSectionEnd_BSpline__Q34nw4r2ef24DrawSmoothStripeStrategyFRCQ44nw4r2ef24DrawSmoothStripeStrategy6VertexRCQ44nw4r2ef24DrawSmoothStripeStrategy6VertexRCQ44nw4r2ef24DrawSmoothStripeStrategy6Vertexi
+/* 8002D430 00028330  4B FF F4 05 */	bl GXEnd
 /* 8002D434 00028334  E3 E1 01 48 */	psq_l f31, 328(r1), 0, qr0
 /* 8002D438 00028338  CB E1 01 40 */	lfd f31, 0x140(r1)
 /* 8002D43C 0002833C  E3 C1 01 38 */	psq_l f30, 312(r1), 0, qr0
@@ -2320,8 +2322,8 @@ lbl_8002D3E4:
 /* 8002D45C 0002835C  38 21 01 50 */	addi r1, r1, 0x150
 /* 8002D460 00028360  4E 80 00 20 */	blr 
 
-.global func_8002D464
-func_8002D464:
+.global GetYoungestDrawParticle__Q34nw4r2ef16DrawStrategyImplFPQ34nw4r2ef15ParticleManager
+GetYoungestDrawParticle__Q34nw4r2ef16DrawStrategyImplFPQ34nw4r2ef15ParticleManager:
 /* 8002D464 00028364  80 A3 00 3C */	lwz r5, 0x3c(r3)
 /* 8002D468 00028368  48 00 00 28 */	b lbl_8002D490
 lbl_8002D46C:
@@ -2346,8 +2348,8 @@ lbl_8002D4A4:
 /* 8002D4A4 000283A4  7C A3 2B 78 */	mr r3, r5
 /* 8002D4A8 000283A8  4E 80 00 20 */	blr 
 
-.global func_8002D4AC
-func_8002D4AC:
+.global __mi__Q34nw4r4math4VEC3CFRCQ34nw4r4math4VEC3
+__mi__Q34nw4r4math4VEC3CFRCQ34nw4r4math4VEC3:
 /* 8002D4AC 000283AC  E0 44 00 00 */	psq_l f2, 0(r4), 0, qr0
 /* 8002D4B0 000283B0  E0 25 00 00 */	psq_l f1, 0(r5), 0, qr0
 /* 8002D4B4 000283B4  10 02 08 28 */	ps_sub f0, f2, f1
@@ -2358,8 +2360,8 @@ func_8002D4AC:
 /* 8002D4C8 000283C8  F0 03 80 08 */	psq_st f0, 8(r3), 1, qr0
 /* 8002D4CC 000283CC  4E 80 00 20 */	blr 
 
-.global func_8002D4D0
-func_8002D4D0:
+.global __apl__Q34nw4r4math4VEC3FRCQ34nw4r4math4VEC3
+__apl__Q34nw4r4math4VEC3FRCQ34nw4r4math4VEC3:
 /* 8002D4D0 000283D0  E0 43 00 00 */	psq_l f2, 0(r3), 0, qr0
 /* 8002D4D4 000283D4  E0 24 00 00 */	psq_l f1, 0(r4), 0, qr0
 /* 8002D4D8 000283D8  10 02 08 2A */	ps_add f0, f2, f1
@@ -2370,8 +2372,8 @@ func_8002D4D0:
 /* 8002D4EC 000283EC  F0 03 80 08 */	psq_st f0, 8(r3), 1, qr0
 /* 8002D4F0 000283F0  4E 80 00 20 */	blr 
 
-.global func_8002D4F4
-func_8002D4F4:
+.global __ct__Q44nw4r2ef24DrawSmoothStripeStrategy6VertexFRCQ34nw4r4math4VEC3RCQ34nw4r4math4VEC3f
+__ct__Q44nw4r2ef24DrawSmoothStripeStrategy6VertexFRCQ34nw4r4math4VEC3RCQ34nw4r4math4VEC3f:
 /* 8002D4F4 000283F4  81 24 00 00 */	lwz r9, 0(r4)
 /* 8002D4F8 000283F8  81 04 00 04 */	lwz r8, 4(r4)
 /* 8002D4FC 000283FC  80 E4 00 08 */	lwz r7, 8(r4)
@@ -2387,8 +2389,8 @@ func_8002D4F4:
 /* 8002D524 00028424  D0 23 00 18 */	stfs f1, 0x18(r3)
 /* 8002D528 00028428  4E 80 00 20 */	blr 
 
-.global func_8002D52C
-func_8002D52C:
+.global __as__Q44nw4r2ef24DrawSmoothStripeStrategy6VertexFRCQ44nw4r2ef24DrawSmoothStripeStrategy6Vertex
+__as__Q44nw4r2ef24DrawSmoothStripeStrategy6VertexFRCQ44nw4r2ef24DrawSmoothStripeStrategy6Vertex:
 /* 8002D52C 0002842C  81 24 00 00 */	lwz r9, 0(r4)
 /* 8002D530 00028430  81 04 00 04 */	lwz r8, 4(r4)
 /* 8002D534 00028434  80 E4 00 08 */	lwz r7, 8(r4)
@@ -2405,8 +2407,8 @@ func_8002D52C:
 /* 8002D560 00028460  D0 03 00 18 */	stfs f0, 0x18(r3)
 /* 8002D564 00028464  4E 80 00 20 */	blr 
 
-.global func_8002D568
-func_8002D568:
+.global DrawSmoothStripeTube_BSpline_ConnectNone__Q34nw4r2ef24DrawSmoothStripeStrategyFPQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripeii
+DrawSmoothStripeTube_BSpline_ConnectNone__Q34nw4r2ef24DrawSmoothStripeStrategyFPQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripeii:
 /* 8002D568 00028468  94 21 FE F0 */	stwu r1, -0x110(r1)
 /* 8002D56C 0002846C  7C 08 02 A6 */	mflr r0
 /* 8002D570 00028470  90 01 01 14 */	stw r0, 0x114(r1)
@@ -2515,7 +2517,7 @@ lbl_8002D6B4:
 /* 8002D6FC 000285FC  7E C8 B3 78 */	mr r8, r22
 /* 8002D700 00028600  38 81 00 08 */	addi r4, r1, 8
 /* 8002D704 00028604  EC 7C 00 32 */	fmuls f3, f28, f0
-/* 8002D708 00028608  4B FF DF 11 */	bl func_8002B618
+/* 8002D708 00028608  4B FF DF 11 */	bl CalcVertexTube__Q34nw4r2ef24DrawSmoothStripeStrategyFPQ44nw4r2ef24DrawSmoothStripeStrategy10VertexTubePQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripeiPQ34nw4r2ef8ParticlePFPQ34nw4r4math4VEC3PQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripePQ34nw4r2ef8Particle_vfff
 /* 8002D70C 0002860C  7E AC AB 78 */	mr r12, r21
 /* 8002D710 00028610  7E E3 BB 78 */	mr r3, r23
 /* 8002D714 00028614  7E 44 93 78 */	mr r4, r18
@@ -2552,7 +2554,7 @@ lbl_8002D738:
 /* 8002D78C 0002868C  7E C8 B3 78 */	mr r8, r22
 /* 8002D790 00028690  7F 39 02 14 */	add r25, r25, r0
 /* 8002D794 00028694  7F 24 CB 78 */	mr r4, r25
-/* 8002D798 00028698  4B FF DE 81 */	bl func_8002B618
+/* 8002D798 00028698  4B FF DE 81 */	bl CalcVertexTube__Q34nw4r2ef24DrawSmoothStripeStrategyFPQ44nw4r2ef24DrawSmoothStripeStrategy10VertexTubePQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripeiPQ34nw4r2ef8ParticlePFPQ34nw4r4math4VEC3PQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripePQ34nw4r2ef8Particle_vfff
 /* 8002D79C 0002869C  1D 72 00 28 */	mulli r11, r18, 0x28
 /* 8002D7A0 000286A0  38 C1 00 08 */	addi r6, r1, 8
 /* 8002D7A4 000286A4  88 BA 01 40 */	lbz r5, 0x140(r26)
@@ -2565,7 +2567,7 @@ lbl_8002D738:
 /* 8002D7C0 000286C0  7F E9 FB 78 */	mr r9, r31
 /* 8002D7C4 000286C4  7C C6 5A 14 */	add r6, r6, r11
 /* 8002D7C8 000286C8  7C E7 02 14 */	add r7, r7, r0
-/* 8002D7CC 000286CC  4B FF E7 95 */	bl func_8002BF60
+/* 8002D7CC 000286CC  4B FF E7 95 */	bl DrawSectionTube_BSpline__Q34nw4r2ef24DrawSmoothStripeStrategyFiiRCQ44nw4r2ef24DrawSmoothStripeStrategy10VertexTubeRCQ44nw4r2ef24DrawSmoothStripeStrategy10VertexTubeRCQ44nw4r2ef24DrawSmoothStripeStrategy10VertexTubeiPCQ44nw4r2ef24DrawSmoothStripeStrategy13Trigonometric
 /* 8002D7D0 000286D0  7E AC AB 78 */	mr r12, r21
 /* 8002D7D4 000286D4  7E E3 BB 78 */	mr r3, r23
 /* 8002D7D8 000286D8  7F 04 C3 78 */	mr r4, r24
@@ -2588,7 +2590,7 @@ lbl_8002D7EC:
 /* 8002D818 00028718  7F E9 FB 78 */	mr r9, r31
 /* 8002D81C 0002871C  7C E8 3B 78 */	mr r8, r7
 /* 8002D820 00028720  7C C6 02 14 */	add r6, r6, r0
-/* 8002D824 00028724  4B FF E7 3D */	bl func_8002BF60
+/* 8002D824 00028724  4B FF E7 3D */	bl DrawSectionTube_BSpline__Q34nw4r2ef24DrawSmoothStripeStrategyFiiRCQ44nw4r2ef24DrawSmoothStripeStrategy10VertexTubeRCQ44nw4r2ef24DrawSmoothStripeStrategy10VertexTubeRCQ44nw4r2ef24DrawSmoothStripeStrategy10VertexTubeiPCQ44nw4r2ef24DrawSmoothStripeStrategy13Trigonometric
 /* 8002D828 00028728  E3 E1 01 08 */	psq_l f31, 264(r1), 0, qr0
 /* 8002D82C 0002872C  CB E1 01 00 */	lfd f31, 0x100(r1)
 /* 8002D830 00028730  E3 C1 00 F8 */	psq_l f30, 248(r1), 0, qr0
@@ -2604,8 +2606,8 @@ lbl_8002D7EC:
 /* 8002D858 00028758  38 21 01 10 */	addi r1, r1, 0x110
 /* 8002D85C 0002875C  4E 80 00 20 */	blr 
 
-.global func_8002D860
-func_8002D860:
+.global DrawSmoothStripeTube_BSpline_ConnectRing__Q34nw4r2ef24DrawSmoothStripeStrategyFPQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripeii
+DrawSmoothStripeTube_BSpline_ConnectRing__Q34nw4r2ef24DrawSmoothStripeStrategyFPQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripeii:
 /* 8002D860 00028760  94 21 FE A0 */	stwu r1, -0x160(r1)
 /* 8002D864 00028764  7C 08 02 A6 */	mflr r0
 /* 8002D868 00028768  90 01 01 64 */	stw r0, 0x164(r1)
@@ -2712,7 +2714,7 @@ lbl_8002D9AC:
 /* 8002D9EC 000288EC  7E C8 B3 78 */	mr r8, r22
 /* 8002D9F0 000288F0  38 81 00 80 */	addi r4, r1, 0x80
 /* 8002D9F4 000288F4  EC 7F 00 32 */	fmuls f3, f31, f0
-/* 8002D9F8 000288F8  4B FF DC 21 */	bl func_8002B618
+/* 8002D9F8 000288F8  4B FF DC 21 */	bl CalcVertexTube__Q34nw4r2ef24DrawSmoothStripeStrategyFPQ44nw4r2ef24DrawSmoothStripeStrategy10VertexTubePQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripeiPQ34nw4r2ef8ParticlePFPQ34nw4r4math4VEC3PQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripePQ34nw4r2ef8Particle_vfff
 /* 8002D9FC 000288FC  7E AC AB 78 */	mr r12, r21
 /* 8002DA00 00028900  7E E3 BB 78 */	mr r3, r23
 /* 8002DA04 00028904  7E 04 83 78 */	mr r4, r16
@@ -2734,7 +2736,7 @@ lbl_8002D9AC:
 /* 8002DA44 00028944  7E C8 B3 78 */	mr r8, r22
 /* 8002DA48 00028948  38 81 00 A8 */	addi r4, r1, 0xa8
 /* 8002DA4C 0002894C  EC 7F 00 32 */	fmuls f3, f31, f0
-/* 8002DA50 00028950  4B FF DB C9 */	bl func_8002B618
+/* 8002DA50 00028950  4B FF DB C9 */	bl CalcVertexTube__Q34nw4r2ef24DrawSmoothStripeStrategyFPQ44nw4r2ef24DrawSmoothStripeStrategy10VertexTubePQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripeiPQ34nw4r2ef8ParticlePFPQ34nw4r4math4VEC3PQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripePQ34nw4r2ef8Particle_vfff
 /* 8002DA54 00028954  7E AC AB 78 */	mr r12, r21
 /* 8002DA58 00028958  7E E3 BB 78 */	mr r3, r23
 /* 8002DA5C 0002895C  7E 04 83 78 */	mr r4, r16
@@ -2773,7 +2775,7 @@ lbl_8002DA88:
 /* 8002DADC 000289DC  7E C8 B3 78 */	mr r8, r22
 /* 8002DAE0 000289E0  7F 39 02 14 */	add r25, r25, r0
 /* 8002DAE4 000289E4  7F 24 CB 78 */	mr r4, r25
-/* 8002DAE8 000289E8  4B FF DB 31 */	bl func_8002B618
+/* 8002DAE8 000289E8  4B FF DB 31 */	bl CalcVertexTube__Q34nw4r2ef24DrawSmoothStripeStrategyFPQ44nw4r2ef24DrawSmoothStripeStrategy10VertexTubePQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripeiPQ34nw4r2ef8ParticlePFPQ34nw4r4math4VEC3PQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripePQ34nw4r2ef8Particle_vfff
 /* 8002DAEC 000289EC  1D 72 00 28 */	mulli r11, r18, 0x28
 /* 8002DAF0 000289F0  38 C1 00 08 */	addi r6, r1, 8
 /* 8002DAF4 000289F4  88 BA 01 40 */	lbz r5, 0x140(r26)
@@ -2786,7 +2788,7 @@ lbl_8002DA88:
 /* 8002DB10 00028A10  7F E9 FB 78 */	mr r9, r31
 /* 8002DB14 00028A14  7C C6 5A 14 */	add r6, r6, r11
 /* 8002DB18 00028A18  7C E7 02 14 */	add r7, r7, r0
-/* 8002DB1C 00028A1C  4B FF E4 45 */	bl func_8002BF60
+/* 8002DB1C 00028A1C  4B FF E4 45 */	bl DrawSectionTube_BSpline__Q34nw4r2ef24DrawSmoothStripeStrategyFiiRCQ44nw4r2ef24DrawSmoothStripeStrategy10VertexTubeRCQ44nw4r2ef24DrawSmoothStripeStrategy10VertexTubeRCQ44nw4r2ef24DrawSmoothStripeStrategy10VertexTubeiPCQ44nw4r2ef24DrawSmoothStripeStrategy13Trigonometric
 /* 8002DB20 00028A20  7E AC AB 78 */	mr r12, r21
 /* 8002DB24 00028A24  7E E3 BB 78 */	mr r3, r23
 /* 8002DB28 00028A28  7F 04 C3 78 */	mr r4, r24
@@ -2817,7 +2819,7 @@ lbl_8002DB3C:
 /* 8002DB88 00028A88  D0 01 00 A4 */	stfs f0, 0xa4(r1)
 /* 8002DB8C 00028A8C  88 BA 01 40 */	lbz r5, 0x140(r26)
 /* 8002DB90 00028A90  81 5D 00 D4 */	lwz r10, 0xd4(r29)
-/* 8002DB94 00028A94  4B FF E3 CD */	bl func_8002BF60
+/* 8002DB94 00028A94  4B FF E3 CD */	bl DrawSectionTube_BSpline__Q34nw4r2ef24DrawSmoothStripeStrategyFiiRCQ44nw4r2ef24DrawSmoothStripeStrategy10VertexTubeRCQ44nw4r2ef24DrawSmoothStripeStrategy10VertexTubeRCQ44nw4r2ef24DrawSmoothStripeStrategy10VertexTubeiPCQ44nw4r2ef24DrawSmoothStripeStrategy13Trigonometric
 /* 8002DB98 00028A98  7E 94 9A 14 */	add r20, r20, r19
 /* 8002DB9C 00028A9C  C8 22 84 70 */	lfd f1, lbl_804BFE90-_SDA2_BASE_(r2)
 /* 8002DBA0 00028AA0  6E 80 80 00 */	xoris r0, r20, 0x8000
@@ -2834,7 +2836,7 @@ lbl_8002DB3C:
 /* 8002DBCC 00028ACC  D0 01 00 CC */	stfs f0, 0xcc(r1)
 /* 8002DBD0 00028AD0  88 BA 01 40 */	lbz r5, 0x140(r26)
 /* 8002DBD4 00028AD4  81 5D 00 D4 */	lwz r10, 0xd4(r29)
-/* 8002DBD8 00028AD8  4B FF E3 89 */	bl func_8002BF60
+/* 8002DBD8 00028AD8  4B FF E3 89 */	bl DrawSectionTube_BSpline__Q34nw4r2ef24DrawSmoothStripeStrategyFiiRCQ44nw4r2ef24DrawSmoothStripeStrategy10VertexTubeRCQ44nw4r2ef24DrawSmoothStripeStrategy10VertexTubeRCQ44nw4r2ef24DrawSmoothStripeStrategy10VertexTubeiPCQ44nw4r2ef24DrawSmoothStripeStrategy13Trigonometric
 /* 8002DBDC 00028ADC  E3 E1 01 58 */	psq_l f31, 344(r1), 0, qr0
 /* 8002DBE0 00028AE0  CB E1 01 50 */	lfd f31, 0x150(r1)
 /* 8002DBE4 00028AE4  E3 C1 01 48 */	psq_l f30, 328(r1), 0, qr0
@@ -2850,8 +2852,8 @@ lbl_8002DB3C:
 /* 8002DC0C 00028B0C  38 21 01 60 */	addi r1, r1, 0x160
 /* 8002DC10 00028B10  4E 80 00 20 */	blr 
 
-.global func_8002DC14
-func_8002DC14:
+.global DrawSmoothStripeTube_BSpline_ConnectEmitter__Q34nw4r2ef24DrawSmoothStripeStrategyFPQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripeii
+DrawSmoothStripeTube_BSpline_ConnectEmitter__Q34nw4r2ef24DrawSmoothStripeStrategyFPQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripeii:
 /* 8002DC14 00028B14  94 21 FE 80 */	stwu r1, -0x180(r1)
 /* 8002DC18 00028B18  7C 08 02 A6 */	mflr r0
 /* 8002DC1C 00028B1C  90 01 01 84 */	stw r0, 0x184(r1)
@@ -2989,7 +2991,7 @@ lbl_8002DDC0:
 /* 8002DE08 00028D08  7F 88 E3 78 */	mr r8, r28
 /* 8002DE0C 00028D0C  38 81 00 70 */	addi r4, r1, 0x70
 /* 8002DE10 00028D10  EC 7D 00 32 */	fmuls f3, f29, f0
-/* 8002DE14 00028D14  4B FF D8 05 */	bl func_8002B618
+/* 8002DE14 00028D14  4B FF D8 05 */	bl CalcVertexTube__Q34nw4r2ef24DrawSmoothStripeStrategyFPQ44nw4r2ef24DrawSmoothStripeStrategy10VertexTubePQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripeiPQ34nw4r2ef8ParticlePFPQ34nw4r4math4VEC3PQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripePQ34nw4r2ef8Particle_vfff
 /* 8002DE18 00028D18  2C 1E 00 00 */	cmpwi r30, 0
 /* 8002DE1C 00028D1C  7F 5A CA 14 */	add r26, r26, r25
 /* 8002DE20 00028D20  40 82 00 DC */	bne lbl_8002DEFC
@@ -3046,7 +3048,7 @@ lbl_8002DDC0:
 /* 8002DEEC 00028DEC  91 61 00 64 */	stw r11, 0x64(r1)
 /* 8002DEF0 00028DF0  90 01 00 68 */	stw r0, 0x68(r1)
 /* 8002DEF4 00028DF4  D0 01 00 6C */	stfs f0, 0x6c(r1)
-/* 8002DEF8 00028DF8  4B FF E0 69 */	bl func_8002BF60
+/* 8002DEF8 00028DF8  4B FF E0 69 */	bl DrawSectionTube_BSpline__Q34nw4r2ef24DrawSmoothStripeStrategyFiiRCQ44nw4r2ef24DrawSmoothStripeStrategy10VertexTubeRCQ44nw4r2ef24DrawSmoothStripeStrategy10VertexTubeRCQ44nw4r2ef24DrawSmoothStripeStrategy10VertexTubeiPCQ44nw4r2ef24DrawSmoothStripeStrategy13Trigonometric
 lbl_8002DEFC:
 /* 8002DEFC 00028DFC  7F 6C DB 78 */	mr r12, r27
 /* 8002DF00 00028E00  7F A3 EB 78 */	mr r3, r29
@@ -3083,7 +3085,7 @@ lbl_8002DF24:
 /* 8002DF78 00028E78  7F 88 E3 78 */	mr r8, r28
 /* 8002DF7C 00028E7C  7D EF 02 14 */	add r15, r15, r0
 /* 8002DF80 00028E80  7D E4 7B 78 */	mr r4, r15
-/* 8002DF84 00028E84  4B FF D6 95 */	bl func_8002B618
+/* 8002DF84 00028E84  4B FF D6 95 */	bl CalcVertexTube__Q34nw4r2ef24DrawSmoothStripeStrategyFPQ44nw4r2ef24DrawSmoothStripeStrategy10VertexTubePQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripeiPQ34nw4r2ef8ParticlePFPQ34nw4r4math4VEC3PQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripePQ34nw4r2ef8Particle_vfff
 /* 8002DF88 00028E88  1D 71 00 28 */	mulli r11, r17, 0x28
 /* 8002DF8C 00028E8C  38 C1 00 70 */	addi r6, r1, 0x70
 /* 8002DF90 00028E90  88 BF 01 40 */	lbz r5, 0x140(r31)
@@ -3096,7 +3098,7 @@ lbl_8002DF24:
 /* 8002DFAC 00028EAC  7E C9 B3 78 */	mr r9, r22
 /* 8002DFB0 00028EB0  7C C6 5A 14 */	add r6, r6, r11
 /* 8002DFB4 00028EB4  7C E7 02 14 */	add r7, r7, r0
-/* 8002DFB8 00028EB8  4B FF DF A9 */	bl func_8002BF60
+/* 8002DFB8 00028EB8  4B FF DF A9 */	bl DrawSectionTube_BSpline__Q34nw4r2ef24DrawSmoothStripeStrategyFiiRCQ44nw4r2ef24DrawSmoothStripeStrategy10VertexTubeRCQ44nw4r2ef24DrawSmoothStripeStrategy10VertexTubeRCQ44nw4r2ef24DrawSmoothStripeStrategy10VertexTubeiPCQ44nw4r2ef24DrawSmoothStripeStrategy13Trigonometric
 /* 8002DFBC 00028EBC  7F 6C DB 78 */	mr r12, r27
 /* 8002DFC0 00028EC0  7F A3 EB 78 */	mr r3, r29
 /* 8002DFC4 00028EC4  7E 04 83 78 */	mr r4, r16
@@ -3182,7 +3184,7 @@ lbl_8002DFD8:
 /* 8002E100 00029000  93 21 00 3C */	stw r25, 0x3c(r1)
 /* 8002E104 00029004  92 41 00 40 */	stw r18, 0x40(r1)
 /* 8002E108 00029008  D0 01 00 44 */	stfs f0, 0x44(r1)
-/* 8002E10C 0002900C  4B FF DE 55 */	bl func_8002BF60
+/* 8002E10C 0002900C  4B FF DE 55 */	bl DrawSectionTube_BSpline__Q34nw4r2ef24DrawSmoothStripeStrategyFiiRCQ44nw4r2ef24DrawSmoothStripeStrategy10VertexTubeRCQ44nw4r2ef24DrawSmoothStripeStrategy10VertexTubeRCQ44nw4r2ef24DrawSmoothStripeStrategy10VertexTubeiPCQ44nw4r2ef24DrawSmoothStripeStrategy13Trigonometric
 lbl_8002E110:
 /* 8002E110 00029010  1C 17 00 28 */	mulli r0, r23, 0x28
 /* 8002E114 00029014  38 E1 00 70 */	addi r7, r1, 0x70
@@ -3196,7 +3198,7 @@ lbl_8002E110:
 /* 8002E134 00029034  7E C9 B3 78 */	mr r9, r22
 /* 8002E138 00029038  7C E8 3B 78 */	mr r8, r7
 /* 8002E13C 0002903C  7C C6 02 14 */	add r6, r6, r0
-/* 8002E140 00029040  4B FF DE 21 */	bl func_8002BF60
+/* 8002E140 00029040  4B FF DE 21 */	bl DrawSectionTube_BSpline__Q34nw4r2ef24DrawSmoothStripeStrategyFiiRCQ44nw4r2ef24DrawSmoothStripeStrategy10VertexTubeRCQ44nw4r2ef24DrawSmoothStripeStrategy10VertexTubeRCQ44nw4r2ef24DrawSmoothStripeStrategy10VertexTubeiPCQ44nw4r2ef24DrawSmoothStripeStrategy13Trigonometric
 /* 8002E144 00029044  E3 E1 01 78 */	psq_l f31, 376(r1), 0, qr0
 /* 8002E148 00029048  CB E1 01 70 */	lfd f31, 0x170(r1)
 /* 8002E14C 0002904C  E3 C1 01 68 */	psq_l f30, 360(r1), 0, qr0
@@ -3212,8 +3214,8 @@ lbl_8002E110:
 /* 8002E174 00029074  38 21 01 80 */	addi r1, r1, 0x180
 /* 8002E178 00029078  4E 80 00 20 */	blr 
 
-.global func_8002E17C
-func_8002E17C:
+.global DrawSmoothStripeTube__Q34nw4r2ef24DrawSmoothStripeStrategyFPQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripeii
+DrawSmoothStripeTube__Q34nw4r2ef24DrawSmoothStripeStrategyFPQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripeii:
 /* 8002E17C 0002907C  94 21 FF 90 */	stwu r1, -0x70(r1)
 /* 8002E180 00029080  7C 08 02 A6 */	mflr r0
 /* 8002E184 00029084  90 01 00 74 */	stw r0, 0x74(r1)
@@ -3300,14 +3302,14 @@ lbl_8002E2AC:
 /* 8002E2B8 000291B8  7F 84 E3 78 */	mr r4, r28
 /* 8002E2BC 000291BC  7F A5 EB 78 */	mr r5, r29
 /* 8002E2C0 000291C0  7F C6 F3 78 */	mr r6, r30
-/* 8002E2C4 000291C4  4B FF F2 A5 */	bl func_8002D568
+/* 8002E2C4 000291C4  4B FF F2 A5 */	bl DrawSmoothStripeTube_BSpline_ConnectNone__Q34nw4r2ef24DrawSmoothStripeStrategyFPQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripeii
 /* 8002E2C8 000291C8  38 60 00 02 */	li r3, 2
 /* 8002E2CC 000291CC  48 0B 0A D1 */	bl func_800DED9C
 /* 8002E2D0 000291D0  7F 63 DB 78 */	mr r3, r27
 /* 8002E2D4 000291D4  7F 84 E3 78 */	mr r4, r28
 /* 8002E2D8 000291D8  7F A5 EB 78 */	mr r5, r29
 /* 8002E2DC 000291DC  7F C6 F3 78 */	mr r6, r30
-/* 8002E2E0 000291E0  4B FF F2 89 */	bl func_8002D568
+/* 8002E2E0 000291E0  4B FF F2 89 */	bl DrawSmoothStripeTube_BSpline_ConnectNone__Q34nw4r2ef24DrawSmoothStripeStrategyFPQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripeii
 /* 8002E2E4 000291E4  48 00 00 78 */	b lbl_8002E35C
 lbl_8002E2E8:
 /* 8002E2E8 000291E8  38 60 00 01 */	li r3, 1
@@ -3316,14 +3318,14 @@ lbl_8002E2E8:
 /* 8002E2F4 000291F4  7F 84 E3 78 */	mr r4, r28
 /* 8002E2F8 000291F8  7F A5 EB 78 */	mr r5, r29
 /* 8002E2FC 000291FC  7F C6 F3 78 */	mr r6, r30
-/* 8002E300 00029200  4B FF F5 61 */	bl func_8002D860
+/* 8002E300 00029200  4B FF F5 61 */	bl DrawSmoothStripeTube_BSpline_ConnectRing__Q34nw4r2ef24DrawSmoothStripeStrategyFPQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripeii
 /* 8002E304 00029204  38 60 00 02 */	li r3, 2
 /* 8002E308 00029208  48 0B 0A 95 */	bl func_800DED9C
 /* 8002E30C 0002920C  7F 63 DB 78 */	mr r3, r27
 /* 8002E310 00029210  7F 84 E3 78 */	mr r4, r28
 /* 8002E314 00029214  7F A5 EB 78 */	mr r5, r29
 /* 8002E318 00029218  7F C6 F3 78 */	mr r6, r30
-/* 8002E31C 0002921C  4B FF F5 45 */	bl func_8002D860
+/* 8002E31C 0002921C  4B FF F5 45 */	bl DrawSmoothStripeTube_BSpline_ConnectRing__Q34nw4r2ef24DrawSmoothStripeStrategyFPQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripeii
 /* 8002E320 00029220  48 00 00 3C */	b lbl_8002E35C
 lbl_8002E324:
 /* 8002E324 00029224  38 60 00 01 */	li r3, 1
@@ -3332,14 +3334,14 @@ lbl_8002E324:
 /* 8002E330 00029230  7F 84 E3 78 */	mr r4, r28
 /* 8002E334 00029234  7F A5 EB 78 */	mr r5, r29
 /* 8002E338 00029238  7F C6 F3 78 */	mr r6, r30
-/* 8002E33C 0002923C  4B FF F8 D9 */	bl func_8002DC14
+/* 8002E33C 0002923C  4B FF F8 D9 */	bl DrawSmoothStripeTube_BSpline_ConnectEmitter__Q34nw4r2ef24DrawSmoothStripeStrategyFPQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripeii
 /* 8002E340 00029240  38 60 00 02 */	li r3, 2
 /* 8002E344 00029244  48 0B 0A 59 */	bl func_800DED9C
 /* 8002E348 00029248  7F 63 DB 78 */	mr r3, r27
 /* 8002E34C 0002924C  7F 84 E3 78 */	mr r4, r28
 /* 8002E350 00029250  7F A5 EB 78 */	mr r5, r29
 /* 8002E354 00029254  7F C6 F3 78 */	mr r6, r30
-/* 8002E358 00029258  4B FF F8 BD */	bl func_8002DC14
+/* 8002E358 00029258  4B FF F8 BD */	bl DrawSmoothStripeTube_BSpline_ConnectEmitter__Q34nw4r2ef24DrawSmoothStripeStrategyFPQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripeii
 lbl_8002E35C:
 /* 8002E35C 0002925C  7F EA FB 78 */	mr r10, r31
 /* 8002E360 00029260  E3 EA 00 68 */	psq_l f31, 104(r10), 0, qr0
@@ -3355,6 +3357,9 @@ lbl_8002E35C:
 /* 8002E388 00029288  7D 41 53 78 */	mr r1, r10
 /* 8002E38C 0002928C  7C 08 03 A6 */	mtlr r0
 /* 8002E390 00029290  4E 80 00 20 */	blr 
+
+.global Draw__Q34nw4r2ef24DrawSmoothStripeStrategyFRCQ34nw4r2ef8DrawInfoPQ34nw4r2ef15ParticleManager
+Draw__Q34nw4r2ef24DrawSmoothStripeStrategyFRCQ34nw4r2ef8DrawInfoPQ34nw4r2ef15ParticleManager:
 /* 8002E394 00029294  94 21 FD D0 */	stwu r1, -0x230(r1)
 /* 8002E398 00029298  7C 08 02 A6 */	mflr r0
 /* 8002E39C 0002929C  90 01 02 34 */	stw r0, 0x234(r1)
@@ -3394,7 +3399,7 @@ lbl_8002E35C:
 /* 8002E424 00029324  7F C5 F3 78 */	mr r5, r30
 /* 8002E428 00029328  38 61 00 50 */	addi r3, r1, 0x50
 /* 8002E42C 0002932C  38 C1 00 F0 */	addi r6, r1, 0xf0
-/* 8002E430 00029330  48 00 06 AD */	bl func_8002EADC
+/* 8002E430 00029330  48 00 06 AD */	bl GetInitialPrevAxis__Q34nw4r2ef24DrawSmoothStripeStrategyFRCQ34nw4r2ef18EmitterDrawSettingRCQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripe
 /* 8002E434 00029334  80 7B 00 3C */	lwz r3, 0x3c(r27)
 /* 8002E438 00029338  C0 22 84 50 */	lfs f1, lbl_804BFE70-_SDA2_BASE_(r2)
 /* 8002E43C 0002933C  48 00 00 34 */	b lbl_8002E470
@@ -3775,7 +3780,7 @@ lbl_8002E99C:
 /* 8002E9A8 000298A8  38 81 00 F0 */	addi r4, r1, 0xf0
 /* 8002E9AC 000298AC  38 FF 00 00 */	addi r7, r31, 0
 /* 8002E9B0 000298B0  39 1F 00 0C */	addi r8, r31, 0xc
-/* 8002E9B4 000298B4  4B FF DE 85 */	bl func_8002C838
+/* 8002E9B4 000298B4  4B FF DE 85 */	bl DrawSmoothStripe_BSpline_ConnectNone__Q34nw4r2ef24DrawSmoothStripeStrategyFPQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripeiiRCQ34nw4r4math4VEC3RCQ34nw4r4math4VEC3
 /* 8002E9B8 000298B8  48 00 00 40 */	b lbl_8002E9F8
 lbl_8002E9BC:
 /* 8002E9BC 000298BC  7F 23 CB 78 */	mr r3, r25
@@ -3784,7 +3789,7 @@ lbl_8002E9BC:
 /* 8002E9C8 000298C8  38 81 00 F0 */	addi r4, r1, 0xf0
 /* 8002E9CC 000298CC  38 FF 00 00 */	addi r7, r31, 0
 /* 8002E9D0 000298D0  39 1F 00 0C */	addi r8, r31, 0xc
-/* 8002E9D4 000298D4  4B FF E1 CD */	bl func_8002CBA0
+/* 8002E9D4 000298D4  4B FF E1 CD */	bl DrawSmoothStripe_BSpline_ConnectRing__Q34nw4r2ef24DrawSmoothStripeStrategyFPQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripeiiRCQ34nw4r4math4VEC3RCQ34nw4r4math4VEC3
 /* 8002E9D8 000298D8  48 00 00 20 */	b lbl_8002E9F8
 lbl_8002E9DC:
 /* 8002E9DC 000298DC  7F 23 CB 78 */	mr r3, r25
@@ -3793,7 +3798,7 @@ lbl_8002E9DC:
 /* 8002E9E8 000298E8  38 81 00 F0 */	addi r4, r1, 0xf0
 /* 8002E9EC 000298EC  38 FF 00 00 */	addi r7, r31, 0
 /* 8002E9F0 000298F0  39 1F 00 0C */	addi r8, r31, 0xc
-/* 8002E9F4 000298F4  4B FF E5 CD */	bl func_8002CFC0
+/* 8002E9F4 000298F4  4B FF E5 CD */	bl DrawSmoothStripe_BSpline_ConnectEmitter__Q34nw4r2ef24DrawSmoothStripeStrategyFPQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripeiiRCQ34nw4r4math4VEC3RCQ34nw4r4math4VEC3
 lbl_8002E9F8:
 /* 8002E9F8 000298F8  88 1E 00 A1 */	lbz r0, 0xa1(r30)
 /* 8002E9FC 000298FC  28 00 00 01 */	cmplwi r0, 1
@@ -3817,7 +3822,7 @@ lbl_8002EA30:
 /* 8002EA3C 0002993C  38 81 00 F0 */	addi r4, r1, 0xf0
 /* 8002EA40 00029940  38 FF 00 18 */	addi r7, r31, 0x18
 /* 8002EA44 00029944  39 1F 00 24 */	addi r8, r31, 0x24
-/* 8002EA48 00029948  4B FF DD F1 */	bl func_8002C838
+/* 8002EA48 00029948  4B FF DD F1 */	bl DrawSmoothStripe_BSpline_ConnectNone__Q34nw4r2ef24DrawSmoothStripeStrategyFPQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripeiiRCQ34nw4r4math4VEC3RCQ34nw4r4math4VEC3
 /* 8002EA4C 0002994C  48 00 00 58 */	b lbl_8002EAA4
 lbl_8002EA50:
 /* 8002EA50 00029950  7F 23 CB 78 */	mr r3, r25
@@ -3826,7 +3831,7 @@ lbl_8002EA50:
 /* 8002EA5C 0002995C  38 81 00 F0 */	addi r4, r1, 0xf0
 /* 8002EA60 00029960  38 FF 00 18 */	addi r7, r31, 0x18
 /* 8002EA64 00029964  39 1F 00 24 */	addi r8, r31, 0x24
-/* 8002EA68 00029968  4B FF E1 39 */	bl func_8002CBA0
+/* 8002EA68 00029968  4B FF E1 39 */	bl DrawSmoothStripe_BSpline_ConnectRing__Q34nw4r2ef24DrawSmoothStripeStrategyFPQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripeiiRCQ34nw4r4math4VEC3RCQ34nw4r4math4VEC3
 /* 8002EA6C 0002996C  48 00 00 38 */	b lbl_8002EAA4
 lbl_8002EA70:
 /* 8002EA70 00029970  7F 23 CB 78 */	mr r3, r25
@@ -3835,14 +3840,14 @@ lbl_8002EA70:
 /* 8002EA7C 0002997C  38 81 00 F0 */	addi r4, r1, 0xf0
 /* 8002EA80 00029980  38 FF 00 18 */	addi r7, r31, 0x18
 /* 8002EA84 00029984  39 1F 00 24 */	addi r8, r31, 0x24
-/* 8002EA88 00029988  4B FF E5 39 */	bl func_8002CFC0
+/* 8002EA88 00029988  4B FF E5 39 */	bl DrawSmoothStripe_BSpline_ConnectEmitter__Q34nw4r2ef24DrawSmoothStripeStrategyFPQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripeiiRCQ34nw4r4math4VEC3RCQ34nw4r4math4VEC3
 /* 8002EA8C 0002998C  48 00 00 18 */	b lbl_8002EAA4
 lbl_8002EA90:
 /* 8002EA90 00029990  7F 23 CB 78 */	mr r3, r25
 /* 8002EA94 00029994  7F A5 EB 78 */	mr r5, r29
 /* 8002EA98 00029998  7F 86 E3 78 */	mr r6, r28
 /* 8002EA9C 0002999C  38 81 00 F0 */	addi r4, r1, 0xf0
-/* 8002EAA0 000299A0  4B FF F6 DD */	bl func_8002E17C
+/* 8002EAA0 000299A0  4B FF F6 DD */	bl DrawSmoothStripeTube__Q34nw4r2ef24DrawSmoothStripeStrategyFPQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripeii
 lbl_8002EAA4:
 /* 8002EAA4 000299A4  E3 E1 02 28 */	psq_l f31, 552(r1), 0, qr0
 /* 8002EAA8 000299A8  CB E1 02 20 */	lfd f31, 0x220(r1)
@@ -3859,8 +3864,8 @@ lbl_8002EAA4:
 /* 8002EAD4 000299D4  38 21 02 30 */	addi r1, r1, 0x230
 /* 8002EAD8 000299D8  4E 80 00 20 */	blr 
 
-.global func_8002EADC
-func_8002EADC:
+.global GetInitialPrevAxis__Q34nw4r2ef24DrawSmoothStripeStrategyFRCQ34nw4r2ef18EmitterDrawSettingRCQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripe
+GetInitialPrevAxis__Q34nw4r2ef24DrawSmoothStripeStrategyFRCQ34nw4r2ef18EmitterDrawSettingRCQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripe:
 /* 8002EADC 000299DC  94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 8002EAE0 000299E0  7C 08 02 A6 */	mflr r0
 /* 8002EAE4 000299E4  90 01 00 34 */	stw r0, 0x34(r1)
@@ -3966,6 +3971,9 @@ lbl_8002EC44:
 /* 8002EC58 00029B58  7C 08 03 A6 */	mtlr r0
 /* 8002EC5C 00029B5C  38 21 00 30 */	addi r1, r1, 0x30
 /* 8002EC60 00029B60  4E 80 00 20 */	blr 
+
+.global GetCalcAheadFunc__Q34nw4r2ef24DrawSmoothStripeStrategyFPQ34nw4r2ef15ParticleManager
+GetCalcAheadFunc__Q34nw4r2ef24DrawSmoothStripeStrategyFPQ34nw4r2ef15ParticleManager:
 /* 8002EC64 00029B64  80 84 00 24 */	lwz r4, 0x24(r4)
 /* 8002EC68 00029B68  88 04 01 3E */	lbz r0, 0x13e(r4)
 /* 8002EC6C 00029B6C  28 00 00 06 */	cmplwi r0, 6
@@ -3985,8 +3993,8 @@ lbl_8002EC44:
 /* 8002ECA4 00029BA4  3C 60 80 02 */	lis r3, CalcAhead_EmitterDesign__Q34nw4r2ef16DrawStrategyImplFPQ34nw4r4math4VEC3PQ44nw4r2ef16DrawStrategyImpl12AheadContextPQ34nw4r2ef8Particle@ha
 /* 8002ECA8 00029BA8  38 63 4F 04 */	addi r3, r3, CalcAhead_EmitterDesign__Q34nw4r2ef16DrawStrategyImplFPQ34nw4r4math4VEC3PQ44nw4r2ef16DrawStrategyImpl12AheadContextPQ34nw4r2ef8Particle@l
 /* 8002ECAC 00029BAC  4E 80 00 20 */	blr 
-/* 8002ECB0 00029BB0  3C 60 80 03 */	lis r3, lbl_8002ED18@ha
-/* 8002ECB4 00029BB4  38 63 ED 18 */	addi r3, r3, lbl_8002ED18@l
+/* 8002ECB0 00029BB0  3C 60 80 03 */	lis r3, CalcAhead_Particle_Stripe__Q34nw4r2ef24DrawSmoothStripeStrategyFPQ34nw4r4math4VEC3PQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripePQ34nw4r2ef8Particle@ha
+/* 8002ECB4 00029BB4  38 63 ED 18 */	addi r3, r3, CalcAhead_Particle_Stripe__Q34nw4r2ef24DrawSmoothStripeStrategyFPQ34nw4r4math4VEC3PQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripePQ34nw4r2ef8Particle@l
 /* 8002ECB8 00029BB8  4E 80 00 20 */	blr 
 /* 8002ECBC 00029BBC  3C 60 80 02 */	lis r3, CalcAhead_NoDesign__Q34nw4r2ef16DrawStrategyImplFPQ34nw4r4math4VEC3PQ44nw4r2ef16DrawStrategyImpl12AheadContextPQ34nw4r2ef8Particle@ha
 /* 8002ECC0 00029BC0  38 63 74 14 */	addi r3, r3, CalcAhead_NoDesign__Q34nw4r2ef16DrawStrategyImplFPQ34nw4r4math4VEC3PQ44nw4r2ef16DrawStrategyImpl12AheadContextPQ34nw4r2ef8Particle@l
@@ -4000,22 +4008,24 @@ lbl_8002EC44:
 /* 8002ECE0 00029BE0  40 80 00 08 */	bge lbl_8002ECE8
 /* 8002ECE4 00029BE4  48 00 00 1C */	b lbl_8002ED00
 lbl_8002ECE8:
-/* 8002ECE8 00029BE8  3C 60 80 03 */	lis r3, lbl_8002F140@ha
-/* 8002ECEC 00029BEC  38 63 F1 40 */	addi r3, r3, lbl_8002F140@l
+/* 8002ECE8 00029BE8  3C 60 80 03 */	lis r3, CalcAhead_ParticleBoth_Ring__Q34nw4r2ef24DrawSmoothStripeStrategyFPQ34nw4r4math4VEC3PQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripePQ34nw4r2ef8Particle@ha
+/* 8002ECEC 00029BEC  38 63 F1 40 */	addi r3, r3, CalcAhead_ParticleBoth_Ring__Q34nw4r2ef24DrawSmoothStripeStrategyFPQ34nw4r4math4VEC3PQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripePQ34nw4r2ef8Particle@l
 /* 8002ECF0 00029BF0  4E 80 00 20 */	blr 
 lbl_8002ECF4:
-/* 8002ECF4 00029BF4  3C 60 80 03 */	lis r3, lbl_8002F46C@ha
-/* 8002ECF8 00029BF8  38 63 F4 6C */	addi r3, r3, lbl_8002F46C@l
+/* 8002ECF4 00029BF4  3C 60 80 03 */	lis r3, CalcAhead_ParticleBoth_Origin__Q34nw4r2ef24DrawSmoothStripeStrategyFPQ34nw4r4math4VEC3PQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripePQ34nw4r2ef8Particle@ha
+/* 8002ECF8 00029BF8  38 63 F4 6C */	addi r3, r3, CalcAhead_ParticleBoth_Origin__Q34nw4r2ef24DrawSmoothStripeStrategyFPQ34nw4r4math4VEC3PQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripePQ34nw4r2ef8Particle@l
 /* 8002ECFC 00029BFC  4E 80 00 20 */	blr 
 lbl_8002ED00:
-/* 8002ED00 00029C00  3C 60 80 03 */	lis r3, lbl_8002EE64@ha
-/* 8002ED04 00029C04  38 63 EE 64 */	addi r3, r3, lbl_8002EE64@l
+/* 8002ED00 00029C00  3C 60 80 03 */	lis r3, CalcAhead_ParticleBoth_Stripe__Q34nw4r2ef24DrawSmoothStripeStrategyFPQ34nw4r4math4VEC3PQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripePQ34nw4r2ef8Particle@ha
+/* 8002ED04 00029C04  38 63 EE 64 */	addi r3, r3, CalcAhead_ParticleBoth_Stripe__Q34nw4r2ef24DrawSmoothStripeStrategyFPQ34nw4r4math4VEC3PQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripePQ34nw4r2ef8Particle@l
 /* 8002ED08 00029C08  4E 80 00 20 */	blr 
 lbl_8002ED0C:
 /* 8002ED0C 00029C0C  3C 60 80 02 */	lis r3, CalcAhead_Speed__Q34nw4r2ef16DrawStrategyImplFPQ34nw4r4math4VEC3PQ44nw4r2ef16DrawStrategyImpl12AheadContextPQ34nw4r2ef8Particle@ha
 /* 8002ED10 00029C10  38 63 4D 0C */	addi r3, r3, CalcAhead_Speed__Q34nw4r2ef16DrawStrategyImplFPQ34nw4r4math4VEC3PQ44nw4r2ef16DrawStrategyImpl12AheadContextPQ34nw4r2ef8Particle@l
 /* 8002ED14 00029C14  4E 80 00 20 */	blr 
-lbl_8002ED18:
+
+.global CalcAhead_Particle_Stripe__Q34nw4r2ef24DrawSmoothStripeStrategyFPQ34nw4r4math4VEC3PQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripePQ34nw4r2ef8Particle
+CalcAhead_Particle_Stripe__Q34nw4r2ef24DrawSmoothStripeStrategyFPQ34nw4r4math4VEC3PQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripePQ34nw4r2ef8Particle:
 /* 8002ED18 00029C18  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8002ED1C 00029C1C  7C 08 02 A6 */	mflr r0
 /* 8002ED20 00029C20  90 01 00 24 */	stw r0, 0x24(r1)
@@ -4109,7 +4119,9 @@ lbl_8002EE44:
 /* 8002EE58 00029D58  7C 08 03 A6 */	mtlr r0
 /* 8002EE5C 00029D5C  38 21 00 20 */	addi r1, r1, 0x20
 /* 8002EE60 00029D60  4E 80 00 20 */	blr 
-lbl_8002EE64:
+
+.global CalcAhead_ParticleBoth_Stripe__Q34nw4r2ef24DrawSmoothStripeStrategyFPQ34nw4r4math4VEC3PQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripePQ34nw4r2ef8Particle
+CalcAhead_ParticleBoth_Stripe__Q34nw4r2ef24DrawSmoothStripeStrategyFPQ34nw4r4math4VEC3PQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripePQ34nw4r2ef8Particle:
 /* 8002EE64 00029D64  94 21 FF A0 */	stwu r1, -0x60(r1)
 /* 8002EE68 00029D68  7C 08 02 A6 */	mflr r0
 /* 8002EE6C 00029D6C  90 01 00 64 */	stw r0, 0x64(r1)
@@ -4314,7 +4326,9 @@ lbl_8002F118:
 /* 8002F134 0002A034  7C 08 03 A6 */	mtlr r0
 /* 8002F138 0002A038  38 21 00 60 */	addi r1, r1, 0x60
 /* 8002F13C 0002A03C  4E 80 00 20 */	blr 
-lbl_8002F140:
+
+.global CalcAhead_ParticleBoth_Ring__Q34nw4r2ef24DrawSmoothStripeStrategyFPQ34nw4r4math4VEC3PQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripePQ34nw4r2ef8Particle
+CalcAhead_ParticleBoth_Ring__Q34nw4r2ef24DrawSmoothStripeStrategyFPQ34nw4r4math4VEC3PQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripePQ34nw4r2ef8Particle:
 /* 8002F140 0002A040  94 21 FF A0 */	stwu r1, -0x60(r1)
 /* 8002F144 0002A044  7C 08 02 A6 */	mflr r0
 /* 8002F148 0002A048  90 01 00 64 */	stw r0, 0x64(r1)
@@ -4547,7 +4561,9 @@ lbl_8002F444:
 /* 8002F460 0002A360  7C 08 03 A6 */	mtlr r0
 /* 8002F464 0002A364  38 21 00 60 */	addi r1, r1, 0x60
 /* 8002F468 0002A368  4E 80 00 20 */	blr 
-lbl_8002F46C:
+
+.global CalcAhead_ParticleBoth_Origin__Q34nw4r2ef24DrawSmoothStripeStrategyFPQ34nw4r4math4VEC3PQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripePQ34nw4r2ef8Particle
+CalcAhead_ParticleBoth_Origin__Q34nw4r2ef24DrawSmoothStripeStrategyFPQ34nw4r4math4VEC3PQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripePQ34nw4r2ef8Particle:
 /* 8002F46C 0002A36C  94 21 FF C0 */	stwu r1, -0x40(r1)
 /* 8002F470 0002A370  7C 08 02 A6 */	mflr r0
 /* 8002F474 0002A374  90 01 00 44 */	stw r0, 0x44(r1)
