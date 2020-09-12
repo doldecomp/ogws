@@ -12,4 +12,16 @@ typedef signed short s16;
 typedef unsigned char u8;
 typedef signed char s8;
 
+namespace nw4r
+{
+	namespace ut
+	{
+		template <typename T> struct TextWriterBase;
+		template <typename T> struct TagProcessorBase;
+	}
+}
+
+typedef int UNKWORD;
+typedef void UNKTYPE;
+
 #endif
