@@ -13,10 +13,10 @@ lbl_80355080:
 .4byte __sinit_$$3ut_LockedCache_cpp
 .4byte __sinit_$$3ut_TextWriterBase_cpp
 .4byte __sinit_$$3ef_effectsystem_cpp
-.4byte 0x8001B3F8
-.4byte 0x8001C098
-.4byte 0x8001D48C
-.4byte 0x8002330C
+.4byte __sinit_$$3ef_particlemanager_cpp
+.4byte __sinit_$$3ef_resource_cpp
+.4byte __sinit_$$3ef_emform_cpp
+.4byte __sinit_$$3ef_drawstrategyimpl_cpp
 .4byte 0x8003745C
 .4byte 0x8003FBA0
 .4byte 0x80047890
