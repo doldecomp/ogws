@@ -57,7 +57,7 @@ SBSS_PDHR := 11
 
 ASM_DIRS := asm \
 	asm/nw4r asm/RevoSDK \
-	asm/nw4r/ut asm/nw4r/ef  asm/nw4r/math\
+	asm/nw4r/ut asm/nw4r/ef asm/nw4r/math asm/nw4r/snd\
 	asm/RevoSDK/TRK
 
 SRC_DIRS := nw4r RevoSDK \
