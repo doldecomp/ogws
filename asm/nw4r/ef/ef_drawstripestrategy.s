@@ -1146,8 +1146,8 @@ lbl_8002940C:
 /* 80029424 00024324  38 21 01 00 */	addi r1, r1, 0x100
 /* 80029428 00024328  4E 80 00 20 */	blr 
 
-.global func_8002942C
-func_8002942C:
+.global DrawStripeTube_ConnectNone__Q34nw4r2ef18DrawStripeStrategyFPQ44nw4r2ef18DrawStripeStrategy18AheadContextStripei
+DrawStripeTube_ConnectNone__Q34nw4r2ef18DrawStripeStrategyFPQ44nw4r2ef18DrawStripeStrategy18AheadContextStripei:
 /* 8002942C 0002432C  94 21 FF 20 */	stwu r1, -0xe0(r1)
 /* 80029430 00024330  7C 08 02 A6 */	mflr r0
 /* 80029434 00024334  90 01 00 E4 */	stw r0, 0xe4(r1)
@@ -1330,8 +1330,8 @@ lbl_800296A8:
 /* 800296E0 000245E0  38 21 00 E0 */	addi r1, r1, 0xe0
 /* 800296E4 000245E4  4E 80 00 20 */	blr 
 
-.global func_800296E8
-func_800296E8:
+.global DrawStripeTube_ConnectRing__Q34nw4r2ef18DrawStripeStrategyFPQ44nw4r2ef18DrawStripeStrategy18AheadContextStripei
+DrawStripeTube_ConnectRing__Q34nw4r2ef18DrawStripeStrategyFPQ44nw4r2ef18DrawStripeStrategy18AheadContextStripei:
 /* 800296E8 000245E8  94 21 FE F0 */	stwu r1, -0x110(r1)
 /* 800296EC 000245EC  7C 08 02 A6 */	mflr r0
 /* 800296F0 000245F0  90 01 01 14 */	stw r0, 0x114(r1)
@@ -1547,8 +1547,8 @@ lbl_800299B0:
 /* 80029A20 00024920  38 21 01 10 */	addi r1, r1, 0x110
 /* 80029A24 00024924  4E 80 00 20 */	blr 
 
-.global func_80029A28
-func_80029A28:
+.global DrawStripeTube_ConnectEmitter__Q34nw4r2ef18DrawStripeStrategyFPQ44nw4r2ef18DrawStripeStrategy18AheadContextStripei
+DrawStripeTube_ConnectEmitter__Q34nw4r2ef18DrawStripeStrategyFPQ44nw4r2ef18DrawStripeStrategy18AheadContextStripei:
 /* 80029A28 00024928  94 21 FF 10 */	stwu r1, -0xf0(r1)
 /* 80029A2C 0002492C  7C 08 02 A6 */	mflr r0
 /* 80029A30 00024930  90 01 00 F4 */	stw r0, 0xf4(r1)
@@ -1799,8 +1799,8 @@ lbl_80029DA0:
 /* 80029DD8 00024CD8  38 21 00 F0 */	addi r1, r1, 0xf0
 /* 80029DDC 00024CDC  4E 80 00 20 */	blr 
 
-.global func_80029DE0
-func_80029DE0:
+.global DrawStripeTube__Q34nw4r2ef18DrawStripeStrategyFPQ44nw4r2ef18DrawStripeStrategy18AheadContextStripei
+DrawStripeTube__Q34nw4r2ef18DrawStripeStrategyFPQ44nw4r2ef18DrawStripeStrategy18AheadContextStripei:
 /* 80029DE0 00024CE0  94 21 FF 90 */	stwu r1, -0x70(r1)
 /* 80029DE4 00024CE4  7C 08 02 A6 */	mflr r0
 /* 80029DE8 00024CE8  90 01 00 74 */	stw r0, 0x74(r1)
@@ -1885,13 +1885,13 @@ lbl_80029F0C:
 /* 80029F14 00024E14  7F 83 E3 78 */	mr r3, r28
 /* 80029F18 00024E18  7F A4 EB 78 */	mr r4, r29
 /* 80029F1C 00024E1C  7F C5 F3 78 */	mr r5, r30
-/* 80029F20 00024E20  4B FF F5 0D */	bl func_8002942C
+/* 80029F20 00024E20  4B FF F5 0D */	bl DrawStripeTube_ConnectNone__Q34nw4r2ef18DrawStripeStrategyFPQ44nw4r2ef18DrawStripeStrategy18AheadContextStripei
 /* 80029F24 00024E24  38 60 00 02 */	li r3, 2
 /* 80029F28 00024E28  48 0B 4E 75 */	bl func_800DED9C
 /* 80029F2C 00024E2C  7F 83 E3 78 */	mr r3, r28
 /* 80029F30 00024E30  7F A4 EB 78 */	mr r4, r29
 /* 80029F34 00024E34  7F C5 F3 78 */	mr r5, r30
-/* 80029F38 00024E38  4B FF F4 F5 */	bl func_8002942C
+/* 80029F38 00024E38  4B FF F4 F5 */	bl DrawStripeTube_ConnectNone__Q34nw4r2ef18DrawStripeStrategyFPQ44nw4r2ef18DrawStripeStrategy18AheadContextStripei
 /* 80029F3C 00024E3C  48 00 00 68 */	b lbl_80029FA4
 lbl_80029F40:
 /* 80029F40 00024E40  38 60 00 01 */	li r3, 1
@@ -1899,13 +1899,13 @@ lbl_80029F40:
 /* 80029F48 00024E48  7F 83 E3 78 */	mr r3, r28
 /* 80029F4C 00024E4C  7F A4 EB 78 */	mr r4, r29
 /* 80029F50 00024E50  7F C5 F3 78 */	mr r5, r30
-/* 80029F54 00024E54  4B FF F7 95 */	bl func_800296E8
+/* 80029F54 00024E54  4B FF F7 95 */	bl DrawStripeTube_ConnectRing__Q34nw4r2ef18DrawStripeStrategyFPQ44nw4r2ef18DrawStripeStrategy18AheadContextStripei
 /* 80029F58 00024E58  38 60 00 02 */	li r3, 2
 /* 80029F5C 00024E5C  48 0B 4E 41 */	bl func_800DED9C
 /* 80029F60 00024E60  7F 83 E3 78 */	mr r3, r28
 /* 80029F64 00024E64  7F A4 EB 78 */	mr r4, r29
 /* 80029F68 00024E68  7F C5 F3 78 */	mr r5, r30
-/* 80029F6C 00024E6C  4B FF F7 7D */	bl func_800296E8
+/* 80029F6C 00024E6C  4B FF F7 7D */	bl DrawStripeTube_ConnectRing__Q34nw4r2ef18DrawStripeStrategyFPQ44nw4r2ef18DrawStripeStrategy18AheadContextStripei
 /* 80029F70 00024E70  48 00 00 34 */	b lbl_80029FA4
 lbl_80029F74:
 /* 80029F74 00024E74  38 60 00 01 */	li r3, 1
@@ -1913,13 +1913,13 @@ lbl_80029F74:
 /* 80029F7C 00024E7C  7F 83 E3 78 */	mr r3, r28
 /* 80029F80 00024E80  7F A4 EB 78 */	mr r4, r29
 /* 80029F84 00024E84  7F C5 F3 78 */	mr r5, r30
-/* 80029F88 00024E88  4B FF FA A1 */	bl func_80029A28
+/* 80029F88 00024E88  4B FF FA A1 */	bl DrawStripeTube_ConnectEmitter__Q34nw4r2ef18DrawStripeStrategyFPQ44nw4r2ef18DrawStripeStrategy18AheadContextStripei
 /* 80029F8C 00024E8C  38 60 00 02 */	li r3, 2
 /* 80029F90 00024E90  48 0B 4E 0D */	bl func_800DED9C
 /* 80029F94 00024E94  7F 83 E3 78 */	mr r3, r28
 /* 80029F98 00024E98  7F A4 EB 78 */	mr r4, r29
 /* 80029F9C 00024E9C  7F C5 F3 78 */	mr r5, r30
-/* 80029FA0 00024EA0  4B FF FA 89 */	bl func_80029A28
+/* 80029FA0 00024EA0  4B FF FA 89 */	bl DrawStripeTube_ConnectEmitter__Q34nw4r2ef18DrawStripeStrategyFPQ44nw4r2ef18DrawStripeStrategy18AheadContextStripei
 lbl_80029FA4:
 /* 80029FA4 00024EA4  7F EA FB 78 */	mr r10, r31
 /* 80029FA8 00024EA8  E3 EA 00 68 */	psq_l f31, 104(r10), 0, qr0
@@ -1935,6 +1935,9 @@ lbl_80029FA4:
 /* 80029FD0 00024ED0  7D 41 53 78 */	mr r1, r10
 /* 80029FD4 00024ED4  7C 08 03 A6 */	mtlr r0
 /* 80029FD8 00024ED8  4E 80 00 20 */	blr 
+
+.global Draw__Q34nw4r2ef18DrawStripeStrategyFRCQ34nw4r2ef8DrawInfoPQ34nw4r2ef15ParticleManager
+Draw__Q34nw4r2ef18DrawStripeStrategyFRCQ34nw4r2ef8DrawInfoPQ34nw4r2ef15ParticleManager:
 /* 80029FDC 00024EDC  94 21 FD A0 */	stwu r1, -0x260(r1)
 /* 80029FE0 00024EE0  7C 08 02 A6 */	mflr r0
 /* 80029FE4 00024EE4  90 01 02 64 */	stw r0, 0x264(r1)
@@ -1974,7 +1977,7 @@ lbl_80029FA4:
 /* 8002A06C 00024F6C  7F E5 FB 78 */	mr r5, r31
 /* 8002A070 00024F70  38 61 00 80 */	addi r3, r1, 0x80
 /* 8002A074 00024F74  38 C1 01 20 */	addi r6, r1, 0x120
-/* 8002A078 00024F78  48 00 05 51 */	bl func_8002A5C8
+/* 8002A078 00024F78  48 00 05 51 */	bl GetInitialPrevAxis__Q34nw4r2ef18DrawStripeStrategyFRCQ34nw4r2ef18EmitterDrawSettingRCQ44nw4r2ef18DrawStripeStrategy18AheadContextStripe
 /* 8002A07C 00024F7C  80 7C 00 3C */	lwz r3, 0x3c(r28)
 /* 8002A080 00024F80  C0 22 84 14 */	lfs f1, lbl_804BFE34-_SDA2_BASE_(r2)
 /* 8002A084 00024F84  48 00 00 34 */	b lbl_8002A0B8
@@ -2321,7 +2324,7 @@ lbl_8002A580:
 /* 8002A580 00025480  7F 43 D3 78 */	mr r3, r26
 /* 8002A584 00025484  7F A5 EB 78 */	mr r5, r29
 /* 8002A588 00025488  38 81 01 20 */	addi r4, r1, 0x120
-/* 8002A58C 0002548C  4B FF F8 55 */	bl func_80029DE0
+/* 8002A58C 0002548C  4B FF F8 55 */	bl DrawStripeTube__Q34nw4r2ef18DrawStripeStrategyFPQ44nw4r2ef18DrawStripeStrategy18AheadContextStripei
 lbl_8002A590:
 /* 8002A590 00025490  E3 E1 02 58 */	psq_l f31, 600(r1), 0, qr0
 /* 8002A594 00025494  CB E1 02 50 */	lfd f31, 0x250(r1)
@@ -2338,8 +2341,8 @@ lbl_8002A590:
 /* 8002A5C0 000254C0  38 21 02 60 */	addi r1, r1, 0x260
 /* 8002A5C4 000254C4  4E 80 00 20 */	blr 
 
-.global func_8002A5C8
-func_8002A5C8:
+.global GetInitialPrevAxis__Q34nw4r2ef18DrawStripeStrategyFRCQ34nw4r2ef18EmitterDrawSettingRCQ44nw4r2ef18DrawStripeStrategy18AheadContextStripe
+GetInitialPrevAxis__Q34nw4r2ef18DrawStripeStrategyFRCQ34nw4r2ef18EmitterDrawSettingRCQ44nw4r2ef18DrawStripeStrategy18AheadContextStripe:
 /* 8002A5C8 000254C8  94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 8002A5CC 000254CC  7C 08 02 A6 */	mflr r0
 /* 8002A5D0 000254D0  90 01 00 34 */	stw r0, 0x34(r1)
@@ -2445,6 +2448,9 @@ lbl_8002A730:
 /* 8002A744 00025644  7C 08 03 A6 */	mtlr r0
 /* 8002A748 00025648  38 21 00 30 */	addi r1, r1, 0x30
 /* 8002A74C 0002564C  4E 80 00 20 */	blr 
+
+.global GetCalcAheadFunc__Q34nw4r2ef18DrawStripeStrategyFPQ34nw4r2ef15ParticleManager
+GetCalcAheadFunc__Q34nw4r2ef18DrawStripeStrategyFPQ34nw4r2ef15ParticleManager:
 /* 8002A750 00025650  80 84 00 24 */	lwz r4, 0x24(r4)
 /* 8002A754 00025654  88 04 01 3E */	lbz r0, 0x13e(r4)
 /* 8002A758 00025658  28 00 00 06 */	cmplwi r0, 6
@@ -2464,8 +2470,8 @@ lbl_8002A730:
 /* 8002A790 00025690  3C 60 80 02 */	lis r3, CalcAhead_EmitterDesign__Q34nw4r2ef16DrawStrategyImplFPQ34nw4r4math4VEC3PQ44nw4r2ef16DrawStrategyImpl12AheadContextPQ34nw4r2ef8Particle@ha
 /* 8002A794 00025694  38 63 4F 04 */	addi r3, r3, CalcAhead_EmitterDesign__Q34nw4r2ef16DrawStrategyImplFPQ34nw4r4math4VEC3PQ44nw4r2ef16DrawStrategyImpl12AheadContextPQ34nw4r2ef8Particle@l
 /* 8002A798 00025698  4E 80 00 20 */	blr 
-/* 8002A79C 0002569C  3C 60 80 03 */	lis r3, lbl_8002A804@ha
-/* 8002A7A0 000256A0  38 63 A8 04 */	addi r3, r3, lbl_8002A804@l
+/* 8002A79C 0002569C  3C 60 80 03 */	lis r3, CalcAhead_Particle_Stripe__Q34nw4r2ef18DrawStripeStrategyFPQ34nw4r4math4VEC3PQ44nw4r2ef18DrawStripeStrategy18AheadContextStripePQ34nw4r2ef8Particle@ha
+/* 8002A7A0 000256A0  38 63 A8 04 */	addi r3, r3, CalcAhead_Particle_Stripe__Q34nw4r2ef18DrawStripeStrategyFPQ34nw4r4math4VEC3PQ44nw4r2ef18DrawStripeStrategy18AheadContextStripePQ34nw4r2ef8Particle@l
 /* 8002A7A4 000256A4  4E 80 00 20 */	blr 
 /* 8002A7A8 000256A8  3C 60 80 02 */	lis r3, CalcAhead_NoDesign__Q34nw4r2ef16DrawStrategyImplFPQ34nw4r4math4VEC3PQ44nw4r2ef16DrawStrategyImpl12AheadContextPQ34nw4r2ef8Particle@ha
 /* 8002A7AC 000256AC  38 63 74 14 */	addi r3, r3, CalcAhead_NoDesign__Q34nw4r2ef16DrawStrategyImplFPQ34nw4r4math4VEC3PQ44nw4r2ef16DrawStrategyImpl12AheadContextPQ34nw4r2ef8Particle@l
@@ -2479,22 +2485,24 @@ lbl_8002A730:
 /* 8002A7CC 000256CC  40 80 00 08 */	bge lbl_8002A7D4
 /* 8002A7D0 000256D0  48 00 00 1C */	b lbl_8002A7EC
 lbl_8002A7D4:
-/* 8002A7D4 000256D4  3C 60 80 03 */	lis r3, lbl_8002AC2C@ha
-/* 8002A7D8 000256D8  38 63 AC 2C */	addi r3, r3, lbl_8002AC2C@l
+/* 8002A7D4 000256D4  3C 60 80 03 */	lis r3, CalcAhead_ParticleBoth_Ring__Q34nw4r2ef18DrawStripeStrategyFPQ34nw4r4math4VEC3PQ44nw4r2ef18DrawStripeStrategy18AheadContextStripePQ34nw4r2ef8Particle@ha
+/* 8002A7D8 000256D8  38 63 AC 2C */	addi r3, r3, CalcAhead_ParticleBoth_Ring__Q34nw4r2ef18DrawStripeStrategyFPQ34nw4r4math4VEC3PQ44nw4r2ef18DrawStripeStrategy18AheadContextStripePQ34nw4r2ef8Particle@l
 /* 8002A7DC 000256DC  4E 80 00 20 */	blr 
 lbl_8002A7E0:
-/* 8002A7E0 000256E0  3C 60 80 03 */	lis r3, lbl_8002AF58@ha
-/* 8002A7E4 000256E4  38 63 AF 58 */	addi r3, r3, lbl_8002AF58@l
+/* 8002A7E0 000256E0  3C 60 80 03 */	lis r3, CalcAhead_ParticleBoth_Origin__Q34nw4r2ef18DrawStripeStrategyFPQ34nw4r4math4VEC3PQ44nw4r2ef18DrawStripeStrategy18AheadContextStripePQ34nw4r2ef8Particle@ha
+/* 8002A7E4 000256E4  38 63 AF 58 */	addi r3, r3, CalcAhead_ParticleBoth_Origin__Q34nw4r2ef18DrawStripeStrategyFPQ34nw4r4math4VEC3PQ44nw4r2ef18DrawStripeStrategy18AheadContextStripePQ34nw4r2ef8Particle@l
 /* 8002A7E8 000256E8  4E 80 00 20 */	blr 
 lbl_8002A7EC:
-/* 8002A7EC 000256EC  3C 60 80 03 */	lis r3, lbl_8002A950@ha
-/* 8002A7F0 000256F0  38 63 A9 50 */	addi r3, r3, lbl_8002A950@l
+/* 8002A7EC 000256EC  3C 60 80 03 */	lis r3, CalcAhead_ParticleBoth_Stripe__Q34nw4r2ef18DrawStripeStrategyFPQ34nw4r4math4VEC3PQ44nw4r2ef18DrawStripeStrategy18AheadContextStripePQ34nw4r2ef8Particle@ha
+/* 8002A7F0 000256F0  38 63 A9 50 */	addi r3, r3, CalcAhead_ParticleBoth_Stripe__Q34nw4r2ef18DrawStripeStrategyFPQ34nw4r4math4VEC3PQ44nw4r2ef18DrawStripeStrategy18AheadContextStripePQ34nw4r2ef8Particle@l
 /* 8002A7F4 000256F4  4E 80 00 20 */	blr 
 lbl_8002A7F8:
 /* 8002A7F8 000256F8  3C 60 80 02 */	lis r3, CalcAhead_Speed__Q34nw4r2ef16DrawStrategyImplFPQ34nw4r4math4VEC3PQ44nw4r2ef16DrawStrategyImpl12AheadContextPQ34nw4r2ef8Particle@ha
 /* 8002A7FC 000256FC  38 63 4D 0C */	addi r3, r3, CalcAhead_Speed__Q34nw4r2ef16DrawStrategyImplFPQ34nw4r4math4VEC3PQ44nw4r2ef16DrawStrategyImpl12AheadContextPQ34nw4r2ef8Particle@l
 /* 8002A800 00025700  4E 80 00 20 */	blr 
-lbl_8002A804:
+
+.global CalcAhead_Particle_Stripe__Q34nw4r2ef18DrawStripeStrategyFPQ34nw4r4math4VEC3PQ44nw4r2ef18DrawStripeStrategy18AheadContextStripePQ34nw4r2ef8Particle
+CalcAhead_Particle_Stripe__Q34nw4r2ef18DrawStripeStrategyFPQ34nw4r4math4VEC3PQ44nw4r2ef18DrawStripeStrategy18AheadContextStripePQ34nw4r2ef8Particle:
 /* 8002A804 00025704  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8002A808 00025708  7C 08 02 A6 */	mflr r0
 /* 8002A80C 0002570C  90 01 00 24 */	stw r0, 0x24(r1)
@@ -2588,7 +2596,9 @@ lbl_8002A930:
 /* 8002A944 00025844  7C 08 03 A6 */	mtlr r0
 /* 8002A948 00025848  38 21 00 20 */	addi r1, r1, 0x20
 /* 8002A94C 0002584C  4E 80 00 20 */	blr 
-lbl_8002A950:
+
+.global CalcAhead_ParticleBoth_Stripe__Q34nw4r2ef18DrawStripeStrategyFPQ34nw4r4math4VEC3PQ44nw4r2ef18DrawStripeStrategy18AheadContextStripePQ34nw4r2ef8Particle
+CalcAhead_ParticleBoth_Stripe__Q34nw4r2ef18DrawStripeStrategyFPQ34nw4r4math4VEC3PQ44nw4r2ef18DrawStripeStrategy18AheadContextStripePQ34nw4r2ef8Particle:
 /* 8002A950 00025850  94 21 FF A0 */	stwu r1, -0x60(r1)
 /* 8002A954 00025854  7C 08 02 A6 */	mflr r0
 /* 8002A958 00025858  90 01 00 64 */	stw r0, 0x64(r1)
@@ -2793,7 +2803,9 @@ lbl_8002AC04:
 /* 8002AC20 00025B20  7C 08 03 A6 */	mtlr r0
 /* 8002AC24 00025B24  38 21 00 60 */	addi r1, r1, 0x60
 /* 8002AC28 00025B28  4E 80 00 20 */	blr 
-lbl_8002AC2C:
+
+.global CalcAhead_ParticleBoth_Ring__Q34nw4r2ef18DrawStripeStrategyFPQ34nw4r4math4VEC3PQ44nw4r2ef18DrawStripeStrategy18AheadContextStripePQ34nw4r2ef8Particle
+CalcAhead_ParticleBoth_Ring__Q34nw4r2ef18DrawStripeStrategyFPQ34nw4r4math4VEC3PQ44nw4r2ef18DrawStripeStrategy18AheadContextStripePQ34nw4r2ef8Particle:
 /* 8002AC2C 00025B2C  94 21 FF A0 */	stwu r1, -0x60(r1)
 /* 8002AC30 00025B30  7C 08 02 A6 */	mflr r0
 /* 8002AC34 00025B34  90 01 00 64 */	stw r0, 0x64(r1)
@@ -3026,7 +3038,9 @@ lbl_8002AF30:
 /* 8002AF4C 00025E4C  7C 08 03 A6 */	mtlr r0
 /* 8002AF50 00025E50  38 21 00 60 */	addi r1, r1, 0x60
 /* 8002AF54 00025E54  4E 80 00 20 */	blr 
-lbl_8002AF58:
+
+.global CalcAhead_ParticleBoth_Origin__Q34nw4r2ef18DrawStripeStrategyFPQ34nw4r4math4VEC3PQ44nw4r2ef18DrawStripeStrategy18AheadContextStripePQ34nw4r2ef8Particle
+CalcAhead_ParticleBoth_Origin__Q34nw4r2ef18DrawStripeStrategyFPQ34nw4r4math4VEC3PQ44nw4r2ef18DrawStripeStrategy18AheadContextStripePQ34nw4r2ef8Particle:
 /* 8002AF58 00025E58  94 21 FF C0 */	stwu r1, -0x40(r1)
 /* 8002AF5C 00025E5C  7C 08 02 A6 */	mflr r0
 /* 8002AF60 00025E60  90 01 00 44 */	stw r0, 0x44(r1)
