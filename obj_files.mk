@@ -65,6 +65,7 @@ TEXT_O_FILES := \
 	build/asm/nw4r/math/math_geometry.o \
 	build/asm/nw4r/snd/snd_AxManager.o \
 	build/asm/nw4r/snd/snd_AxVoice.o \
+	build/asm/nw4r/snd/snd_AxVoiceManager.o \
 	build/asm/text.o \
 
 CTORS_O_FILES := build/asm/ctors.o
