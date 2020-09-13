@@ -2,10 +2,6 @@
 
 .section .ctors, "a"  # 0x80355080 - 0x80355260
 
-.global global_ctors
-global_ctors:
-.4byte func_800B2288
-.4byte __sinit_$$3ut_IOStream_cpp
 .4byte __sinit_$$3ut_FileStream_cpp
 .4byte __sinit_$$3ut_DvdFileStream_cpp
 .4byte __sinit_$$3ut_DvdLockedFileStream_cpp
@@ -123,4 +119,4 @@ global_ctors:
 .4byte 0x80346C18
 .4byte 0x80347574
 .4byte 0x8034DD08
-.fill 0x4
+#.fill 0x4
