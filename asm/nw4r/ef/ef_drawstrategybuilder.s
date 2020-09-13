@@ -94,7 +94,7 @@ lbl_800214C4:
 /* 800214C8 0001C3C8  7C 00 07 75 */	extsb. r0, r0
 /* 800214CC 0001C3CC  40 82 00 28 */	bne lbl_800214F4
 /* 800214D0 0001C3D0  38 7F 04 BC */	addi r3, r31, 0x4bc
-/* 800214D4 0001C3D4  48 00 9D 19 */	bl func_8002B1EC
+/* 800214D4 0001C3D4  48 00 9D 19 */	bl __ct__Q34nw4r2ef24DrawSmoothStripeStrategyFv
 /* 800214D8 0001C3D8  3C 80 80 02 */	lis r4, __dt__Q34nw4r2ef24DrawSmoothStripeStrategyFv@ha
 /* 800214DC 0001C3DC  38 7F 04 BC */	addi r3, r31, 0x4bc
 /* 800214E0 0001C3E0  38 84 16 E8 */	addi r4, r4, __dt__Q34nw4r2ef24DrawSmoothStripeStrategyFv@l

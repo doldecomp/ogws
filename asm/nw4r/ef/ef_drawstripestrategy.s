@@ -577,7 +577,9 @@ lbl_80028B9C:
 /* 80028BCC 00023ACC  38 21 01 50 */	addi r1, r1, 0x150
 /* 80028BD0 00023AD0  4E 80 00 20 */	blr 
 
-.global GXEnd
+# Conflicts with ef_drawsmoothstripestrategy, 8002C834
+# GXEnd is defined in both files' headers
+# and the dupes are not merged by the linker
 GXEnd:
 /* 80028BD4 00023AD4  4E 80 00 20 */	blr 
 
