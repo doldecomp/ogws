@@ -4,7 +4,32 @@
 
 .global lbl_80393AA8
 lbl_80393AA8:
-	.incbin "baserom.dol", 0x38FBA8, 0x68
+.fill 0x8
+.long GetRuntimeTypeInfo__Q34nw4r2ut13DvdFileStreamCFv
+.long __dt__Q34nw4r2ut13DvdFileStreamFv
+.long Close__Q34nw4r2ut13DvdFileStreamFv
+.long Read__Q34nw4r2ut13DvdFileStreamFPvUl
+.long ReadAsync__Q34nw4r2ut13DvdFileStreamFPvUlPFlPQ34nw4r2ut8IOStreamPv_vPv
+.long Write__Q34nw4r2ut8IOStreamFPCvUl
+.long WriteAsync__Q34nw4r2ut8IOStreamFPCvUlPFlPQ34nw4r2ut8IOStreamPv_vPv
+.long IsBusy__Q34nw4r2ut13DvdFileStreamCFv
+.long CanAsync__Q34nw4r2ut13DvdFileStreamCFv
+.long CanRead__Q34nw4r2ut13DvdFileStreamCFv
+.long CanWrite__Q34nw4r2ut13DvdFileStreamCFv
+.long GetOffsetAlign__Q34nw4r2ut13DvdFileStreamCFv
+.long GetSizeAlign__Q34nw4r2ut13DvdFileStreamCFv
+.long GetBufferAlign__Q34nw4r2ut13DvdFileStreamCFv
+.long GetSize__Q34nw4r2ut13DvdFileStreamCFv
+.long Seek__Q34nw4r2ut13DvdFileStreamFlUl
+.long Cancel__Q34nw4r2ut13DvdFileStreamFv
+.long CancelAsync__Q34nw4r2ut13DvdFileStreamFPFlPQ34nw4r2ut8IOStreamPv_vPv
+.long CanSeek__Q34nw4r2ut13DvdFileStreamCFv
+.long CanCancel__Q34nw4r2ut13DvdFileStreamCFv
+.long Tell__Q34nw4r2ut13DvdFileStreamCFv
+.long Peek__Q34nw4r2ut13DvdFileStreamFPvUl
+.long PeekAsync__Q34nw4r2ut13DvdFileStreamFPvUlPFlPQ34nw4r2ut8IOStreamPv_vPv
+.long 0
+
 .global lbl_80393B10
 lbl_80393B10:
 	.incbin "baserom.dol", 0x38FC10, 0x68
@@ -172,7 +197,31 @@ lbl_80395D78:
 	.incbin "baserom.dol", 0x391E78, 0x20
 .global lbl_80395D98
 lbl_80395D98:
-	.incbin "baserom.dol", 0x391E98, 0x60
+#	.incbin "baserom.dol", 0x391E98, 0x60
+.fill 0x8
+.long 0x800084d4
+.long 0x8003b824
+.long 0x8003b730
+.long 0x8003b744
+.long ReadAsync__Q34nw4r2ut8IOStreamFPvUlPFlPQ34nw4r2ut8IOStreamPv_vPv
+.long Write__Q34nw4r2ut8IOStreamFPCvUl
+.long WriteAsync__Q34nw4r2ut8IOStreamFPCvUlPFlPQ34nw4r2ut8IOStreamPv_vPv
+.long IsBusy__Q34nw4r2ut8IOStreamCFv
+.long 0x8003b80c
+.long 0x8003b804
+.long 0x8003b7fc
+.long GetOffsetAlign__Q34nw4r2ut8IOStreamCFv
+.long GetSizeAlign__Q34nw4r2ut8IOStreamCFv
+.long GetBufferAlign__Q34nw4r2ut8IOStreamCFv
+.long 0x8003b7ec
+.long 0x8003b79c
+.long 0x8000837c
+.long 0x80008380
+.long 0x8003b81c
+.long 0x8003b814
+.long 0x8003b7f4
+.long 0
+
 .global lbl_80395DF8
 lbl_80395DF8:
 	.incbin "baserom.dol", 0x391EF8, 0x20

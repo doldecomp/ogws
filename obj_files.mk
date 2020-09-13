@@ -16,7 +16,8 @@ TEXT_O_FILES := \
 	build/nw4r/ut/ut_binaryFileFormat.o \
 	build/nw4r/ut/ut_CharStrmReader.o \
 	build/nw4r/ut/ut_TagProcessorBase.o \
-	build/asm/nw4r/ut/ut_IOStream.o \
+	build/asm/ctors_1.o \
+	build/nw4r/ut/ut_IOStream.o \
 	build/asm/nw4r/ut/ut_FileStream.o \
 	build/asm/nw4r/ut/ut_DvdFileStream.o \
 	build/asm/nw4r/ut/ut_DvdLockedFileStream.o \
@@ -69,7 +70,7 @@ TEXT_O_FILES := \
 	build/asm/nw4r/snd/snd_AxfxImpl.o \
 	build/asm/text.o \
 
-CTORS_O_FILES := build/asm/ctors.o
+CTORS_O_FILES := build/asm/ctors_2.o
 
 DTORS_O_FILES := build/asm/dtors.o
 
