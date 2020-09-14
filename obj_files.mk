@@ -68,6 +68,8 @@ TEXT_O_FILES := \
 	build/asm/nw4r/snd/snd_AxVoice.o \
 	build/asm/nw4r/snd/snd_AxVoiceManager.o \
 	build/asm/nw4r/snd/snd_AxfxImpl.o \
+	build/asm/nw4r/snd/snd_Bank.o \
+	build/asm/nw4r/snd/snd_BankFile.o \
 	build/asm/text.o \
 
 CTORS_O_FILES := build/asm/ctors_2.o
