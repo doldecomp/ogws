@@ -745,9 +745,9 @@ VoiceCallback__Q44nw4r3snd6detail7AxVoiceFPv:
 /* 80032F7C 0002DE7C  7C 7F 1B 78 */	mr r31, r3
 /* 80032F80 0002DE80  90 1E 00 00 */	stw r0, 0(r30)
 /* 80032F84 0002DE84  90 1E 00 04 */	stw r0, 4(r30)
-/* 80032F88 0002DE88  48 00 1F C1 */	bl func_80034F48
+/* 80032F88 0002DE88  48 00 1F C1 */	bl GetInstance__Q44nw4r3snd6detail14AxVoiceManagerFv
 /* 80032F8C 0002DE8C  7F C4 F3 78 */	mr r4, r30
-/* 80032F90 0002DE90  48 00 27 DD */	bl func_8003576C
+/* 80032F90 0002DE90  48 00 27 DD */	bl ReserveForFreeAxVoice__Q44nw4r3snd6detail14AxVoiceManagerFPQ44nw4r3snd6detail7AxVoice
 /* 80032F94 0002DE94  7F E3 FB 78 */	mr r3, r31
 /* 80032F98 0002DE98  48 0B E9 51 */	bl func_800F18E8
 /* 80032F9C 0002DE9C  80 01 00 14 */	lwz r0, 0x14(r1)
