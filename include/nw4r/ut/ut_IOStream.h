@@ -11,8 +11,6 @@ namespace nw4r
 		{
 			typedef void (* AsyncFunctor)(s32, IOStream *, void *);
 			
-			const detail::RuntimeTypeInfo * GetRuntimeTypeInfo() const;
-			
 			virtual UNKTYPE Close() = 0;
 			inline virtual ~IOStream()
 			{
@@ -33,7 +31,7 @@ namespace nw4r
 			virtual bool GetSize() const = 0;
 			virtual UNKTYPE Seek(s32, u32) = 0;
 			virtual UNKTYPE Cancel() = 0;
-			virtual UNKTYPE CancelAsync(AsyncFunctor, void *) = 0;
+			virtual bool CancelAsync(AsyncFunctor, void *) = 0;
 			virtual bool CanSeek() const = 0;
 			virtual bool CanCancel() const = 0;
 			virtual UNKTYPE Tell() const = 0;

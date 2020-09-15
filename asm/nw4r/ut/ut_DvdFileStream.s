@@ -484,6 +484,6 @@ GetRuntimeTypeInfo__Q34nw4r2ut13DvdFileStreamCFv:
 # __sinit_\ut_DvdFileStream_cpp
 .global __sinit_$$3ut_DvdFileStream_cpp
 __sinit_$$3ut_DvdFileStream_cpp:
-/* 80008AF4 000039F4  38 0D 96 68 */	addi r0, r13, lbl_804BE9E8-_SDA_BASE_
+/* 80008AF4 000039F4  38 0D 96 68 */	addi r0, r13, typeInfo__Q34nw4r2ut10FileStream-_SDA_BASE_
 /* 80008AF8 000039F8  90 0D 96 70 */	stw r0, lbl_804BE9F0-_SDA_BASE_(r13)
 /* 80008AFC 000039FC  4E 80 00 20 */	blr 

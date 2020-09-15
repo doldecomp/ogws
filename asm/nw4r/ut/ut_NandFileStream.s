@@ -913,6 +913,6 @@ GetRuntimeTypeInfo__Q34nw4r2ut14NandFileStreamCFv:
 # __sinit_\ut_NandFileStream_cpp 
 .global __sinit_$$3ut_NandFileStream_cpp
 __sinit_$$3ut_NandFileStream_cpp:
-/* 80009A20 00004920  38 0D 96 68 */	addi r0, r13, lbl_804BE9E8-_SDA_BASE_
+/* 80009A20 00004920  38 0D 96 68 */	addi r0, r13, typeInfo__Q34nw4r2ut10FileStream-_SDA_BASE_
 /* 80009A24 00004924  90 0D 96 80 */	stw r0, lbl_804BEA00-_SDA_BASE_(r13)
 /* 80009A28 00004928  4E 80 00 20 */	blr 
