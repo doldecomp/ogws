@@ -199,7 +199,7 @@ lbl_80395D78:
 lbl_80395D98:
 #	.incbin "baserom.dol", 0x391E98, 0x60
 .fill 0x8
-.long 0x800084d4
+.long GetRuntimeTypeInfo__Q34nw4r2ut10FileStreamCFv
 .long 0x8003b824
 .long 0x8003b730
 .long 0x8003b744
@@ -215,8 +215,8 @@ lbl_80395D98:
 .long GetBufferAlign__Q34nw4r2ut8IOStreamCFv
 .long 0x8003b7ec
 .long 0x8003b79c
-.long 0x8000837c
-.long 0x80008380
+.long Cancel__Q34nw4r2ut10FileStreamFv
+.long CancelAsync__Q34nw4r2ut10FileStreamFPFlPQ34nw4r2ut8IOStreamPv_vPv
 .long 0x8003b81c
 .long 0x8003b814
 .long 0x8003b7f4
@@ -242,7 +242,31 @@ lbl_80396058:
 	.incbin "baserom.dol", 0x392158, 0x18
 .global lbl_80396070
 lbl_80396070:
-	.incbin "baserom.dol", 0x392170, 0x60
+#	.incbin "baserom.dol", 0x392170, 0x60
+.fill 8
+.long 0x80009a18
+.long 0x8003cdac
+.long 0x80009734
+.long 0x8003d028
+.long 0x80009800
+.long 0x800098a4
+.long 0x80009910
+.long 0x80009a10
+.long 0x800099f8
+.long 0x800099e8
+.long 0x800099e0
+.long 0x800099d0
+.long 0x800099c8
+.long 0x800099c0
+.long 0x8003d134
+.long 0x8003d0ac
+.long Cancel__Q34nw4r2ut10FileStreamFv
+.long CancelAsync__Q34nw4r2ut10FileStreamFPFlPQ34nw4r2ut8IOStreamPv_vPv
+.long 0x800099f0
+.long 0x800099d8
+.long 0x8003d13c
+.long 0
+
 .global lbl_803960D0
 lbl_803960D0:
 	.incbin "baserom.dol", 0x3921D0, 0x38

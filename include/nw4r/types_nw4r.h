@@ -3,6 +3,9 @@
 
 #define NULL 0
 
+typedef unsigned long long u64;
+typedef signed long long s64;
+
 typedef unsigned long u32;
 typedef signed long s32;
 

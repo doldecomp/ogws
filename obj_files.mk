@@ -18,7 +18,7 @@ TEXT_O_FILES := \
 	build/nw4r/ut/ut_TagProcessorBase.o \
 	build/asm/ctors_1.o \
 	build/nw4r/ut/ut_IOStream.o \
-	build/asm/nw4r/ut/ut_FileStream.o \
+	build/nw4r/ut/ut_FileStream.o \
 	build/asm/nw4r/ut/ut_DvdFileStream.o \
 	build/asm/nw4r/ut/ut_DvdLockedFileStream.o \
 	build/asm/nw4r/ut/ut_NandFileStream.o \
