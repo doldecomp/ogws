@@ -182,6 +182,6 @@ GetRuntimeTypeInfo__Q34nw4r2ut19DvdLockedFileStreamCFv:
 # __sinit_\ut_DvdLockedFileStream_cpp
 .global __sinit_$$3ut_DvdLockedFileStream_cpp
 __sinit_$$3ut_DvdLockedFileStream_cpp:
-/* 80008D48 00003C48  38 0D 96 70 */	addi r0, r13, lbl_804BE9F0-_SDA_BASE_
+/* 80008D48 00003C48  38 0D 96 70 */	addi r0, r13, typeInfo__Q34nw4r2ut13DvdFileStream-_SDA_BASE_
 /* 80008D4C 00003C4C  90 0D 96 78 */	stw r0, lbl_804BE9F8-_SDA_BASE_(r13)
 /* 80008D50 00003C50  4E 80 00 20 */	blr 

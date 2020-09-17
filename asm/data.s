@@ -2,34 +2,6 @@
 
 .section .data, "wa"  # 0x80393A80 - 0x803CAF00
 
-.global lbl_80393AA8
-lbl_80393AA8:
-.fill 0x8
-.long GetRuntimeTypeInfo__Q34nw4r2ut13DvdFileStreamCFv
-.long __dt__Q34nw4r2ut13DvdFileStreamFv
-.long Close__Q34nw4r2ut13DvdFileStreamFv
-.long Read__Q34nw4r2ut13DvdFileStreamFPvUl
-.long ReadAsync__Q34nw4r2ut13DvdFileStreamFPvUlPFlPQ34nw4r2ut8IOStreamPv_vPv
-.long Write__Q34nw4r2ut8IOStreamFPCvUl
-.long WriteAsync__Q34nw4r2ut8IOStreamFPCvUlPFlPQ34nw4r2ut8IOStreamPv_vPv
-.long IsBusy__Q34nw4r2ut13DvdFileStreamCFv
-.long CanAsync__Q34nw4r2ut13DvdFileStreamCFv
-.long CanRead__Q34nw4r2ut13DvdFileStreamCFv
-.long CanWrite__Q34nw4r2ut13DvdFileStreamCFv
-.long GetOffsetAlign__Q34nw4r2ut13DvdFileStreamCFv
-.long GetSizeAlign__Q34nw4r2ut13DvdFileStreamCFv
-.long GetBufferAlign__Q34nw4r2ut13DvdFileStreamCFv
-.long GetSize__Q34nw4r2ut13DvdFileStreamCFv
-.long Seek__Q34nw4r2ut13DvdFileStreamFlUl
-.long Cancel__Q34nw4r2ut13DvdFileStreamFv
-.long CancelAsync__Q34nw4r2ut13DvdFileStreamFPFlPQ34nw4r2ut8IOStreamPv_vPv
-.long CanSeek__Q34nw4r2ut13DvdFileStreamCFv
-.long CanCancel__Q34nw4r2ut13DvdFileStreamCFv
-.long Tell__Q34nw4r2ut13DvdFileStreamCFv
-.long Peek__Q34nw4r2ut13DvdFileStreamFPvUl
-.long PeekAsync__Q34nw4r2ut13DvdFileStreamFPvUlPFlPQ34nw4r2ut8IOStreamPv_vPv
-.long 0
-
 .global lbl_80393B10
 lbl_80393B10:
 	.incbin "baserom.dol", 0x38FC10, 0x68

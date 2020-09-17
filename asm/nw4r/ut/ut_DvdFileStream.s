@@ -1,6 +1,41 @@
 .include "macros.inc"
 
 # .text1 = .text
+.section .sbss, "wa" # 0x804BE9E0 - 0x804BFA20
+
+.global typeInfo__Q34nw4r2ut13DvdFileStream
+typeInfo__Q34nw4r2ut13DvdFileStream:
+	.skip 0x8
+
+.section .data, "wa"  # 0x80393A80 - 0x803CAF00
+
+.global __vt__Q34nw4r2ut13DvdFileStream
+__vt__Q34nw4r2ut13DvdFileStream:
+.fill 0x8
+.long GetRuntimeTypeInfo__Q34nw4r2ut13DvdFileStreamCFv
+.long __dt__Q34nw4r2ut13DvdFileStreamFv
+.long Close__Q34nw4r2ut13DvdFileStreamFv
+.long Read__Q34nw4r2ut13DvdFileStreamFPvUl
+.long ReadAsync__Q34nw4r2ut13DvdFileStreamFPvUlPFlPQ34nw4r2ut8IOStreamPv_vPv
+.long Write__Q34nw4r2ut8IOStreamFPCvUl
+.long WriteAsync__Q34nw4r2ut8IOStreamFPCvUlPFlPQ34nw4r2ut8IOStreamPv_vPv
+.long IsBusy__Q34nw4r2ut13DvdFileStreamCFv
+.long CanAsync__Q34nw4r2ut13DvdFileStreamCFv
+.long CanRead__Q34nw4r2ut13DvdFileStreamCFv
+.long CanWrite__Q34nw4r2ut13DvdFileStreamCFv
+.long GetOffsetAlign__Q34nw4r2ut13DvdFileStreamCFv
+.long GetSizeAlign__Q34nw4r2ut13DvdFileStreamCFv
+.long GetBufferAlign__Q34nw4r2ut13DvdFileStreamCFv
+.long GetSize__Q34nw4r2ut13DvdFileStreamCFv
+.long Seek__Q34nw4r2ut13DvdFileStreamFlUl
+.long Cancel__Q34nw4r2ut13DvdFileStreamFv
+.long CancelAsync__Q34nw4r2ut13DvdFileStreamFPFlPQ34nw4r2ut8IOStreamPv_vPv
+.long CanSeek__Q34nw4r2ut13DvdFileStreamCFv
+.long CanCancel__Q34nw4r2ut13DvdFileStreamCFv
+.long Tell__Q34nw4r2ut13DvdFileStreamCFv
+.long Peek__Q34nw4r2ut13DvdFileStreamFPvUl
+.long PeekAsync__Q34nw4r2ut13DvdFileStreamFPvUlPFlPQ34nw4r2ut8IOStreamPv_vPv
+.long 0
 
 .section .text, "ax"  # 0x800076E0 - 0x80355080
 
@@ -35,10 +70,10 @@ DvdCBAsyncCallback___Q34nw4r2ut13DvdFileStreamFlP15DVDCommandBlock:
 __ct__Q34nw4r2ut13DvdFileStreamFl:
 /* 8000853C 0000343C  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80008540 00003440  7C 08 02 A6 */	mflr r0
-/* 80008544 00003444  3C A0 80 39 */	lis r5, lbl_80393AA8@ha
+/* 80008544 00003444  3C A0 80 39 */	lis r5, __vt__Q34nw4r2ut13DvdFileStream@ha
 /* 80008548 00003448  38 C0 00 00 */	li r6, 0
 /* 8000854C 0000344C  90 01 00 14 */	stw r0, 0x14(r1)
-/* 80008550 00003450  38 A5 3A A8 */	addi r5, r5, lbl_80393AA8@l
+/* 80008550 00003450  38 A5 3A A8 */	addi r5, r5, __vt__Q34nw4r2ut13DvdFileStream@l
 /* 80008554 00003454  38 00 00 02 */	li r0, 2
 /* 80008558 00003458  93 E1 00 0C */	stw r31, 0xc(r1)
 /* 8000855C 0000345C  7C 7F 1B 78 */	mr r31, r3
@@ -90,9 +125,9 @@ __ct__Q34nw4r2ut13DvdFileStreamFPC11DVDFileInfob:
 /* 80008600 00003500  90 01 00 34 */	stw r0, 0x34(r1)
 /* 80008604 00003504  39 61 00 30 */	addi r11, r1, 0x30
 /* 80008608 00003508  48 0A 97 29 */	bl func_800B1D30
-/* 8000860C 0000350C  3C C0 80 39 */	lis r6, lbl_80393AA8@ha
+/* 8000860C 0000350C  3C C0 80 39 */	lis r6, __vt__Q34nw4r2ut13DvdFileStream@ha
 /* 80008610 00003510  38 E0 00 00 */	li r7, 0
-/* 80008614 00003514  38 C6 3A A8 */	addi r6, r6, lbl_80393AA8@l
+/* 80008614 00003514  38 C6 3A A8 */	addi r6, r6, __vt__Q34nw4r2ut13DvdFileStream@l
 /* 80008618 00003518  38 00 00 02 */	li r0, 2
 /* 8000861C 0000351C  98 E3 00 6C */	stb r7, 0x6c(r3)
 /* 80008620 00003520  7C 7E 1B 78 */	mr r30, r3
@@ -175,8 +210,8 @@ __dt__Q34nw4r2ut13DvdFileStreamFv:
 /* 80008744 00003644  7C 7E 1B 78 */	mr r30, r3
 /* 80008748 00003648  41 82 00 3C */	beq lbl_80008784
 /* 8000874C 0000364C  88 03 00 6D */	lbz r0, 0x6d(r3)
-/* 80008750 00003650  3C 80 80 39 */	lis r4, lbl_80393AA8@ha
-/* 80008754 00003654  38 84 3A A8 */	addi r4, r4, lbl_80393AA8@l
+/* 80008750 00003650  3C 80 80 39 */	lis r4, __vt__Q34nw4r2ut13DvdFileStream@ha
+/* 80008754 00003654  38 84 3A A8 */	addi r4, r4, __vt__Q34nw4r2ut13DvdFileStream@l
 /* 80008758 00003658  2C 00 00 00 */	cmpwi r0, 0
 /* 8000875C 0000365C  90 83 00 00 */	stw r4, 0(r3)
 /* 80008760 00003660  41 82 00 14 */	beq lbl_80008774
@@ -478,12 +513,12 @@ IsBusy__Q34nw4r2ut13DvdFileStreamCFv:
 
 .global GetRuntimeTypeInfo__Q34nw4r2ut13DvdFileStreamCFv
 GetRuntimeTypeInfo__Q34nw4r2ut13DvdFileStreamCFv:
-/* 80008AEC 000039EC  38 6D 96 70 */	addi r3, r13, lbl_804BE9F0-_SDA_BASE_
+/* 80008AEC 000039EC  38 6D 96 70 */	addi r3, r13, typeInfo__Q34nw4r2ut13DvdFileStream-_SDA_BASE_
 /* 80008AF0 000039F0  4E 80 00 20 */	blr 
 
 # __sinit_\ut_DvdFileStream_cpp
 .global __sinit_$$3ut_DvdFileStream_cpp
 __sinit_$$3ut_DvdFileStream_cpp:
 /* 80008AF4 000039F4  38 0D 96 68 */	addi r0, r13, typeInfo__Q34nw4r2ut10FileStream-_SDA_BASE_
-/* 80008AF8 000039F8  90 0D 96 70 */	stw r0, lbl_804BE9F0-_SDA_BASE_(r13)
+/* 80008AF8 000039F8  90 0D 96 70 */	stw r0, typeInfo__Q34nw4r2ut13DvdFileStream-_SDA_BASE_(r13)
 /* 80008AFC 000039FC  4E 80 00 20 */	blr 
