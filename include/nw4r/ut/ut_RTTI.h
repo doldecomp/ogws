@@ -11,9 +11,9 @@ namespace nw4r
 			struct RuntimeTypeInfo
 			{
 				const RuntimeTypeInfo * mBase;
-				UNKWORD WORD_0x4;
-				
+
 				inline RuntimeTypeInfo(const RuntimeTypeInfo * pBase) : mBase(pBase) {}
+				
 			};
 		}
 		

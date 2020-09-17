@@ -2,8 +2,6 @@
 
 .section .ctors, "a"  # 0x80355080 - 0x80355260
 
-.4byte __sinit_$$3ut_DvdFileStream_cpp
-.4byte __sinit_$$3ut_DvdLockedFileStream_cpp
 .4byte __sinit_$$3ut_NandFileStream_cpp
 .4byte __sinit_$$3ut_LockedCache_cpp
 .4byte __sinit_$$3ut_TextWriterBase_cpp

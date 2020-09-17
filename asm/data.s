@@ -2,9 +2,8 @@
 
 .section .data, "wa"  # 0x80393A80 - 0x803CAF00
 
-.global lbl_80393B10
-lbl_80393B10:
-	.incbin "baserom.dol", 0x38FC10, 0x68
+.balign 0x8
+
 .global lbl_80393B78
 lbl_80393B78:
 	.incbin "baserom.dol", 0x38FC78, 0x60
@@ -31,7 +30,8 @@ lbl_80393BD8:
 .long -1
 .long ReadNextCharCP1252__Q34nw4r2ut14CharStrmReaderFv
 
-.fill 4
+.balign 0x8
+
 .global lbl_80393C18
 lbl_80393C18:
 	.incbin "baserom.dol", 0x38FD18, 0x58

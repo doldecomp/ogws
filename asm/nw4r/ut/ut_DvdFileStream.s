@@ -1,8 +1,13 @@
 .include "macros.inc"
 
 # .text1 = .text
+.section .ctors, "a"  # 0x80355080 - 0x80355260
+
+.4byte __sinit_$$3ut_DvdFileStream_cpp
+
 .section .sbss, "wa" # 0x804BE9E0 - 0x804BFA20
 
+.balign 0x8
 .global typeInfo__Q34nw4r2ut13DvdFileStream
 typeInfo__Q34nw4r2ut13DvdFileStream:
 	.skip 0x8

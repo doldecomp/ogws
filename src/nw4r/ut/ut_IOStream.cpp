@@ -21,19 +21,19 @@ namespace nw4r
 			return false;
 		}
 		
-		bool IOStream::GetBufferAlign() const
+		u32 IOStream::GetBufferAlign() const
 		{
-			return true;
+			return 1;
 		}
 		
-		bool IOStream::GetSizeAlign() const
+		u32 IOStream::GetSizeAlign() const
 		{
-			return true;
+			return 1;
 		}
 		
-		bool IOStream::GetOffsetAlign() const
+		u32 IOStream::GetOffsetAlign() const
 		{
-			return true;
+			return 1;
 		}
 		
 		detail::RuntimeTypeInfo IOStream::typeInfo(NULL);
