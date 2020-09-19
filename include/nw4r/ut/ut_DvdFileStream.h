@@ -22,8 +22,8 @@ namespace nw4r
 			UNKTYPE Close();
 			UNKWORD Read(void *, u32);
 			bool ReadAsync(void *, u32, AsyncFunctor, void *);
-			UNKWORD Peek(void *, u32);
-			bool PeekAsync(void *, u32, AsyncFunctor, void *);
+			virtual UNKWORD Peek(void *, u32);
+			virtual bool PeekAsync(void *, u32, AsyncFunctor, void *);
 			UNKTYPE Seek(s32, u32);
 			UNKTYPE Cancel();
 			bool CancelAsync(AsyncFunctor, void *);
@@ -36,7 +36,7 @@ namespace nw4r
 			bool CanSeek() const;
 			bool CanAsync() const;
 			u32 GetSize() const;
-			UNKTYPE Tell() const;
+			u32 Tell() const;
 			bool IsBusy() const;
 			const detail::RuntimeTypeInfo * GetRuntimeTypeInfo() const;
 			

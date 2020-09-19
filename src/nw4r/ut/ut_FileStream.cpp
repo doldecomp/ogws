@@ -16,7 +16,7 @@ namespace nw4r
 		{
 			if (offset)
 			{
-				LONG_0x4 = Clamp<s64>(0, LONG_0x0, LONG_0x4 + offset);
+				LONG_0x4 = Clamp<s64>(0, mFileSize, LONG_0x4 + offset);
 			}
 			
 			return this->LONG_0x4;
@@ -33,7 +33,7 @@ namespace nw4r
 			else
 			{
 				LONG_0x4 = r5;
-				LONG_0x0 = Max<u32>(LONG_0x4, LONG_0x0);
+				mFileSize = Max<u32>(LONG_0x4, mFileSize);
 			}
 			
 			return this->LONG_0x4;
@@ -47,7 +47,7 @@ namespace nw4r
 					LONG_0x4 = 0;
 					break;
 				case 2:
-					LONG_0x4 = LONG_0x0;
+					LONG_0x4 = mFileSize;
 					break;
 				case 1:
 				default:

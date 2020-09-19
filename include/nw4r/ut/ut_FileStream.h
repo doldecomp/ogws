@@ -10,12 +10,19 @@ namespace nw4r
 		{
 			struct FilePosition
 			{
-				u32 LONG_0x0;
+				u32 mFileSize;
 				u32 LONG_0x4;
 				
 				u32 Skip(s32);
 				u32 Append(s32);
 				void Seek(s32, u32);
+				
+				inline FilePosition() : mFileSize(), LONG_0x4() {}
+				
+				inline void SetFileSize(u32 fileSize)
+				{
+					mFileSize = fileSize;
+				}
 			};
 			
 			const detail::RuntimeTypeInfo * GetRuntimeTypeInfo() const;

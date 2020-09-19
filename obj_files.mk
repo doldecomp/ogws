@@ -21,7 +21,7 @@ TEXT_O_FILES := \
 	build/nw4r/ut/ut_FileStream.o \
 	build/asm/nw4r/ut/ut_DvdFileStream.o \
 	build/nw4r/ut/ut_DvdLockedFileStream.o \
-	build/asm/nw4r/ut/ut_NandFileStream.o \
+	build/nw4r/ut/ut_NandFileStream.o \
 	build/asm/nw4r/ut/ut_LockedCache.o \
 	build/asm/nw4r/ut/ut_Font.o \
 	build/asm/nw4r/ut/ut_RomFont.o \

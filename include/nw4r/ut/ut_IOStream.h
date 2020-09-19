@@ -34,9 +34,9 @@ namespace nw4r
 			virtual bool CancelAsync(AsyncFunctor, void *) = 0;
 			virtual bool CanSeek() const = 0;
 			virtual bool CanCancel() const = 0;
-			virtual UNKTYPE Tell() const = 0;
-			virtual UNKWORD Peek(void *, u32) = 0;
-			virtual bool PeekAsync(void *, u32, AsyncFunctor, void *) = 0;
+			virtual u32 Tell() const = 0;
+			//virtual UNKWORD Peek(void *, u32) = 0;
+			//virtual bool PeekAsync(void *, u32, AsyncFunctor, void *) = 0;
 			
 			static detail::RuntimeTypeInfo typeInfo;
 		};
