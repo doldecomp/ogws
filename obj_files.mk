@@ -23,7 +23,7 @@ TEXT_O_FILES := \
 	build/nw4r/ut/ut_DvdLockedFileStream.o \
 	build/nw4r/ut/ut_NandFileStream.o \
 	build/nw4r/ut/ut_LockedCache.o \
-	build/asm/nw4r/ut/ut_Font.o \
+	build/nw4r/ut/ut_Font.o \
 	build/asm/nw4r/ut/ut_RomFont.o \
 	build/asm/nw4r/ut/ut_ResFontBase.o \
 	build/asm/nw4r/ut/ut_ResFont.o \
