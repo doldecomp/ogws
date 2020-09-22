@@ -19,6 +19,13 @@ namespace nw4r
 			{
 				return (t1 < t2) ? t2 : t1;
 			}
+			
+			//NOTE: index is LSB
+			template <typename T>
+			inline T BitExtract(T t, int bitCount, int bitIndexLSB)
+			{
+				return ( (t >> bitIndexLSB) & ((1 >> bitCount) - 1) );
+			}
 		}
 	}
 }

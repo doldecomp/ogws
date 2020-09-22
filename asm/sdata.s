@@ -3,9 +3,12 @@
 # .data7 = .sdata???
 
 .section .sdata, "wa"  # 0x804BD380 - 0x804BE9E0
-.global lbl_804BD380
-lbl_804BD380:
-	.incbin "baserom.dol", 0x3C7000, 0x8
+#.global lbl_804BD380
+#lbl_804BD380:
+#	.incbin "baserom.dol", 0x3C7000, 0x8
+
+.balign 0x8
+
 .global lbl_804BD388
 lbl_804BD388:
 	.incbin "baserom.dol", 0x3C7008, 0x8

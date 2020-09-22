@@ -4,9 +4,9 @@
 
 .global __ct__Q44nw4r2ut6detail11ResFontBaseFv
 __ct__Q44nw4r2ut6detail11ResFontBaseFv:
-/* 8000A3B4 000052B4  3C A0 80 39 */	lis r5, lbl_80393C70@ha
+/* 8000A3B4 000052B4  3C A0 80 39 */	lis r5, __vt__Q34nw4r2ut4Font@ha
 /* 8000A3B8 000052B8  3C 80 80 39 */	lis r4, lbl_80393CD8@ha
-/* 8000A3BC 000052BC  38 A5 3C 70 */	addi r5, r5, lbl_80393C70@l
+/* 8000A3BC 000052BC  38 A5 3C 70 */	addi r5, r5, __vt__Q34nw4r2ut4Font@l
 /* 8000A3C0 000052C0  3C E0 80 39 */	lis r7, lbl_80390004@ha
 /* 8000A3C4 000052C4  90 A3 00 00 */	stw r5, 0(r3)
 /* 8000A3C8 000052C8  38 84 3C D8 */	addi r4, r4, lbl_80393CD8@l
