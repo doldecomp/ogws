@@ -9,7 +9,7 @@
 .4byte __sinit_$$3ef_resource_cpp
 .4byte __sinit_$$3ef_emform_cpp
 .4byte __sinit_$$3ef_drawstrategyimpl_cpp
-.4byte 0x8003745C
+.4byte __sinit_$$3nd_BasicSound_cpp
 .4byte 0x8003FBA0
 .4byte 0x80047890
 .4byte 0x8004AF74
