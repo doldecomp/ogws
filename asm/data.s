@@ -4,18 +4,9 @@
 
 .balign 0x8
 
-#.long 0
-#.long -1
-#.long ReadNextCharCP1252__Q34nw4r2ut14CharStrmReaderFv
-
-.balign 0x8
-
-#.global lbl_80393CD8
-#lbl_80393CD8:
-#	.incbin "baserom.dol", 0x38FDD8, 0x58
-.global lbl_80393D30
-lbl_80393D30:
-	.incbin "baserom.dol", 0x38FE30, 0x58
+#.global lbl_80393D30
+#lbl_80393D30:
+#	.incbin "baserom.dol", 0x38FE30, 0x58
 .global lbl_80393D88
 lbl_80393D88:
 	.incbin "baserom.dol", 0x38FE88, 0x18

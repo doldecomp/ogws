@@ -48,7 +48,7 @@ namespace nw4r
 			u16 SHORT_0xE;
 			u16 SHORT_0x10;
 			u16 SHORT_0x12;
-			UNKWORD WORD_0x14;
+			u8 * PTR_0x14;
 		};
 		
 		struct FontInformation

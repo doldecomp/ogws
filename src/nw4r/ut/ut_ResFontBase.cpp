@@ -205,7 +205,7 @@ namespace nw4r
 				
 				u32 r8 =  j * (r3->mCellWidth + 1);
 				u32 r9 =  i * (r3->mCellHeight + 1);
-				pGlyph->WORD_0x0 = r3->WORD_0x14 + (r11 * r3->WORD_0x4);//stw r0,0(r4)
+				pGlyph->PTR_0x0 = r3->PTR_0x14 + (r11 * r3->WORD_0x4);//stw r0,0(r4)
 				
 				const CharWidths & r7_2 = GetCharWidthsFromIndex(glyphIndex);
 				

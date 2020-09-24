@@ -6,6 +6,11 @@ namespace nw4r
 {
 	namespace ut
 	{
+		struct BinaryBlockHeader
+		{
+			u32 magic; // File magic
+			u32 length; // Length of the block (including header)
+		};
 		
 		struct BinaryFileHeader
 		{
@@ -14,7 +19,7 @@ namespace nw4r
 			u16 version; // File version
 			u32 length; // Length of the file (including header)
 			u16 headerLen; // Length of the header
-			u16 sectionCount; // Number of sections
+			u16 blockCount; // Number of blocks
 		};
 		
 		bool IsValidBinaryFile(const BinaryFileHeader *, u32, u16, u16);

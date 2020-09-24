@@ -39,7 +39,7 @@ OSFontEncoding OSGetFontEncode(void);
 
 UNKTYPE OSGetFontWidth(UNKTYPE *, u32 *);
 
-UNKTYPE OSGetFontTexture(UNKTYPE *, UNKWORD *, UNKWORD *, UNKWORD *, UNKWORD *);
+UNKTYPE OSGetFontTexture(UNKTYPE *, u8 **, UNKWORD *, UNKWORD *, UNKWORD *);
 
 #ifdef __cplusplus
 }

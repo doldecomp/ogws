@@ -26,7 +26,7 @@ TEXT_O_FILES := \
 	build/nw4r/ut/ut_Font.o \
 	build/nw4r/ut/ut_RomFont.o \
 	build/nw4r/ut/ut_ResFontBase.o \
-	build/asm/nw4r/ut/ut_ResFont.o \
+	build/nw4r/ut/ut_ResFont.o \
 	build/asm/nw4r/ut/ut_Color.o \
 	build/asm/nw4r/ut/ut_CharWriter.o \
 	build/asm/nw4r/ut/ut_TextWriterBase.o \

@@ -262,7 +262,7 @@ namespace nw4r
 			
 			u8 nch;
 			
-			UNKWORD stack_0x18;
+			u8 * stack_0x18;
 			UNKWORD stack_0x14;
 			UNKWORD stack_0x10;
 			UNKWORD stack_0xc;
@@ -289,7 +289,7 @@ namespace nw4r
 			
 			OSGetFontTexture(str, &stack_0x18, &stack_0x14, &stack_0x10, &stack_0xc);
 			
-			pGlyph->WORD_0x0 = stack_0x18;
+			pGlyph->PTR_0x0 = stack_0x18;
 			
 			pGlyph->BYTE_0x4 = 0;
 			pGlyph->BYTE_0x5 = stack_0xc;
