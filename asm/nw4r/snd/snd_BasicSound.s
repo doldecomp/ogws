@@ -125,6 +125,9 @@ StartPrepared__Q44nw4r3snd6detail10BasicSoundFv:
 /* 80036438 00031338  38 00 00 01 */	li r0, 1
 /* 8003643C 0003133C  98 03 00 64 */	stb r0, 0x64(r3)
 /* 80036440 00031340  4E 80 00 20 */	blr 
+
+.global Stop__Q44nw4r3snd6detail10BasicSoundFi
+Stop__Q44nw4r3snd6detail10BasicSoundFi:
 /* 80036444 00031344  94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 80036448 00031348  7C 08 02 A6 */	mflr r0
 /* 8003644C 0003134C  90 01 00 34 */	stw r0, 0x34(r1)
@@ -248,6 +251,9 @@ lbl_800365F8:
 /* 80036608 00031508  7C 08 03 A6 */	mtlr r0
 /* 8003660C 0003150C  38 21 00 30 */	addi r1, r1, 0x30
 /* 80036610 00031510  4E 80 00 20 */	blr 
+
+.global Pause__Q44nw4r3snd6detail10BasicSoundFbi
+Pause__Q44nw4r3snd6detail10BasicSoundFbi:
 /* 80036614 00031514  94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 80036618 00031518  7C 08 02 A6 */	mflr r0
 /* 8003661C 0003151C  90 01 00 34 */	stw r0, 0x34(r1)
@@ -422,12 +428,18 @@ lbl_80036878:
 /* 8003688C 0003178C  7C 08 03 A6 */	mtlr r0
 /* 80036890 00031790  38 21 00 30 */	addi r1, r1, 0x30
 /* 80036894 00031794  4E 80 00 20 */	blr 
+
+.global SetAutoStopCounter__Q44nw4r3snd6detail10BasicSoundFi
+SetAutoStopCounter__Q44nw4r3snd6detail10BasicSoundFi:
 /* 80036898 00031798  7C 04 00 D0 */	neg r0, r4
 /* 8003689C 0003179C  90 83 00 6C */	stw r4, 0x6c(r3)
 /* 800368A0 000317A0  7C 00 20 78 */	andc r0, r0, r4
 /* 800368A4 000317A4  54 00 0F FE */	srwi r0, r0, 0x1f
 /* 800368A8 000317A8  98 03 00 66 */	stb r0, 0x66(r3)
 /* 800368AC 000317AC  4E 80 00 20 */	blr 
+
+.global FadeIn__Q44nw4r3snd6detail10BasicSoundFi
+FadeIn__Q44nw4r3snd6detail10BasicSoundFi:
 /* 800368B0 000317B0  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 800368B4 000317B4  3C A0 43 30 */	lis r5, 0x4330
 /* 800368B8 000317B8  88 03 00 69 */	lbz r0, 0x69(r3)
