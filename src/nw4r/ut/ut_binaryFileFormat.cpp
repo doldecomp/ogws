@@ -17,7 +17,7 @@ namespace nw4r
 			
 			if (header->length < sizeof(BinaryFileHeader) + (r6 << 3)) return false;
 			
-			return header->sectionCount >= r6;
+			return header->blockCount >= r6;
 		}
 	}
 }

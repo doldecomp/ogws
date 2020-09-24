@@ -18,7 +18,7 @@ namespace nw4r
 			{
 				u32 mCount;
 				
-				LinkListNode mNode;
+				LinkListNode mNodes[];
 				
 				struct Iterator
 				{
@@ -40,12 +40,12 @@ namespace nw4r
 				
 				inline Iterator GetEndIter()
 				{
-					return Iterator(&mNode);
+					return Iterator(mNodes);
 				}
 				
 				inline Iterator GetBeginIter()
 				{
-					return Iterator(mNode.mNext);
+					return Iterator(mNodes->mNext);
 				}
 				
 				~LinkListImpl();

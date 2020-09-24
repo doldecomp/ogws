@@ -8,7 +8,7 @@ namespace nw4r
 	{
 		struct Glyph
 		{
-			UNKWORD WORD_0x0;
+			u8 * PTR_0x0;
 			///*
 			char BYTE_0x4;
 			char BYTE_0x5;
