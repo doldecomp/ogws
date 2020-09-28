@@ -71,6 +71,7 @@ TEXT_O_FILES := \
 	build/asm/nw4r/snd/snd_Bank.o \
 	build/asm/nw4r/snd/snd_BankFile.o \
 	build/asm/nw4r/snd/snd_BasicPlayer.o \
+	build/asm/nw4r/snd/snd_BasicSound.o \
 	build/asm/text.o \
 
 CTORS_O_FILES := build/asm/ctors_2.o

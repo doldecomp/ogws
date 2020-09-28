@@ -4,4 +4,4 @@
 
 .global global_ctors
 global_ctors:
-.4byte func_800B2288
+.4byte func_800B2288 # __init_cpp_exceptions
