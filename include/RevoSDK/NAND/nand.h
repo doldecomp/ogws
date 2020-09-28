@@ -5,8 +5,6 @@
 extern "C" {
 #endif
 
-typedef enum { FALSE, TRUE } BOOL;
-
 struct NANDCommandBlock;
 struct NANDFileInfo;
 

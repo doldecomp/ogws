@@ -87,42 +87,42 @@ namespace nw4r
 			return 0;
 		}
 		
-		u32 RomFont::GetWidth() const
+		int RomFont::GetWidth() const
 		{
 			return static_cast<OSFontHeader *>(mBuffer)->charWidth;
 		}
 		
-		u32 RomFont::GetHeight() const
+		int RomFont::GetHeight() const
 		{
 			return GetAscent() + GetDescent();
 		}
 		
-		u32 RomFont::GetAscent() const
+		int RomFont::GetAscent() const
 		{
 			return static_cast<OSFontHeader *>(mBuffer)->ascent;
 		}
 		
-		u32 RomFont::GetDescent() const
+		int RomFont::GetDescent() const
 		{
 			return static_cast<OSFontHeader *>(mBuffer)->descent;
 		}
 		
-		u32 RomFont::GetBaselinePos() const
+		int RomFont::GetBaselinePos() const
 		{
 			return static_cast<OSFontHeader *>(mBuffer)->ascent;
 		}
 		
-		u32 RomFont::GetCellHeight() const
+		int RomFont::GetCellHeight() const
 		{
 			return static_cast<OSFontHeader *>(mBuffer)->cellHeight;
 		}
 		
-		u32 RomFont::GetCellWidth() const
+		int RomFont::GetCellWidth() const
 		{
 			return static_cast<OSFontHeader *>(mBuffer)->cellWidth;
 		}
 		
-		u32 RomFont::GetMaxCharWidth() const
+		int RomFont::GetMaxCharWidth() const
 		{
 			return static_cast<OSFontHeader *>(mBuffer)->charWidth;
 		}
@@ -207,7 +207,7 @@ namespace nw4r
 			static_cast<OSFontHeader *>(mBuffer)->linefeed = lf;
 		}
 		
-		u32 RomFont::GetCharWidth(u16 ch) const
+		int RomFont::GetCharWidth(u16 ch) const
 		{
 			bool cond;
 			
@@ -292,9 +292,9 @@ namespace nw4r
 			pGlyph->PTR_0x0 = stack_0x18;
 			
 			pGlyph->BYTE_0x4 = 0;
-			pGlyph->BYTE_0x5 = stack_0xc;
+			pGlyph->cellWidth = stack_0xc;
 			pGlyph->BYTE_0x6 = stack_0xc;
-			pGlyph->BYTE_0x7 = static_cast<OSFontHeader *>(mBuffer)->cellHeight;
+			pGlyph->cellHeight = static_cast<OSFontHeader *>(mBuffer)->cellHeight;
 			
 			pGlyph->WORD_0x8 = 0;
 			

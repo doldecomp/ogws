@@ -80,14 +80,14 @@ namespace nw4r
 				~ResFontBase();
 				
 				void SetResourceBuffer(void *, FontInformation *);
-				u32 GetWidth() const;
-				u32 GetHeight() const;
-				u32 GetAscent() const;
-				u32 GetDescent() const;
-				u32 GetBaselinePos() const;
-				u32 GetCellHeight() const;
-				u32 GetCellWidth() const;
-				u32 GetMaxCharWidth() const;
+				int GetWidth() const;
+				int GetHeight() const;
+				int GetAscent() const;
+				int GetDescent() const;
+				int GetBaselinePos() const;
+				int GetCellHeight() const;
+				int GetCellWidth() const;
+				int GetMaxCharWidth() const;
 				UNKWORD GetType() const;
 				UNKWORD GetTextureFormat() const;
 				int GetLineFeed() const;
@@ -95,7 +95,7 @@ namespace nw4r
 				void SetDefaultCharWidths(const CharWidths &);
 				bool SetAlternateChar(u16);
 				void SetLineFeed(int);
-				u32 GetCharWidth(u16) const;
+				int GetCharWidth(u16) const;
 				CharWidths GetCharWidths(u16) const;
 				void GetGlyph(Glyph *, u16) const;
 				FontEncoding GetEncoding() const;

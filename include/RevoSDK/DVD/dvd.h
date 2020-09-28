@@ -6,7 +6,6 @@ extern "C" {
 
 typedef void UNKTYPE;
 typedef int UNKWORD;
-typedef enum { FALSE, TRUE } BOOL;
 
 struct DVD_UNK;
 struct DVDCB_UNK;

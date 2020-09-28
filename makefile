@@ -43,7 +43,7 @@ PPROC   := tools/postprocess.py
 
 # Options
 ASFLAGS := -mgekko -I include
-LDFLAGS := -map $(MAP) -fp hard -nodefaults
+LDFLAGS := -map $(MAP) -proc gekko -fp hard -nodefaults -nofail
 #CFLAGS  := -Cpp_exceptions off -proc gekko -fp hard -O2,p -i include
 
 # Compiler flags for the Target Resident Kernel
@@ -115,3 +115,4 @@ $(BUILD_DIR)/RevoSDK/TRK_old/%.o: src/RevoSDK/TRK_old/%.c
 
 $(BUILD_DIR)/nw4r/%.o: src/nw4r/%.cpp
 	$(CC) $(CFLAGS_NW4R) -c -o $@ $<
+	$(PPROC) $(PPROCFLAGS) $@

@@ -26,14 +26,14 @@ namespace nw4r
 		{
 			inline virtual ~Font() {}
 			
-			virtual u32 GetWidth() const = 0;
-			virtual u32 GetHeight() const = 0;
-			virtual u32 GetAscent() const = 0;
-			virtual u32 GetDescent() const = 0;
-			virtual u32 GetBaselinePos() const = 0;
-			virtual u32 GetCellHeight() const = 0;
-			virtual u32 GetCellWidth() const = 0;
-			virtual u32 GetMaxCharWidth() const = 0;
+			virtual int GetWidth() const = 0;
+			virtual int GetHeight() const = 0;
+			virtual int GetAscent() const = 0;
+			virtual int GetDescent() const = 0;
+			virtual int GetBaselinePos() const = 0;
+			virtual int GetCellHeight() const = 0;
+			virtual int GetCellWidth() const = 0;
+			virtual int GetMaxCharWidth() const = 0;
 			virtual UNKWORD GetType() const = 0;
 			virtual UNKWORD GetTextureFormat() const = 0;
 			virtual int GetLineFeed() const = 0;
@@ -41,7 +41,7 @@ namespace nw4r
 			virtual void SetDefaultCharWidths(const CharWidths &) = 0;
 			virtual bool SetAlternateChar(u16) = 0;
 			virtual void SetLineFeed(int) = 0;
-			virtual u32 GetCharWidth(u16) const = 0;
+			virtual int GetCharWidth(u16) const = 0;
 			virtual CharWidths GetCharWidths(u16) const = 0;
 			virtual void GetGlyph(Glyph *, u16) const = 0;
 			virtual FontEncoding GetEncoding() const = 0;

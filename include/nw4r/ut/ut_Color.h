@@ -1,14 +1,20 @@
 #ifndef NW4R_UT_COLOR_H
 #define NW4R_UT_COLOR_H
 #include "types_nw4r.h"
-
+#include <RevoSDK/GX/GX.h>
+/*
+#define r channels[0]
+#define g channels[1]
+#define b channels[2]
+#define a channels[3]
+/**/
 namespace nw4r
 {
 	namespace ut
 	{
 		struct Color
 		{
-			u8 r, g, b, a;
+			_GXColor mChannels;
 			
 			inline u32 & ToU32ref()
 			{
@@ -26,11 +32,6 @@ namespace nw4r
 				return *this;
 			}
 			
-			inline operator unsigned long() const
-			{
-				return ToU32ref();
-			}
-			
 			inline Color()
 			{
 				*this = 0xFFFFFFFF;
@@ -38,21 +39,43 @@ namespace nw4r
 			
 			inline Color(const Color & other)
 			{
-				r = other.r;
-				g = other.g;
-				b = other.b;
-				a = other.a;
+				mChannels.r = other.mChannels.r;
+				mChannels.g = other.mChannels.g;
+				mChannels.b = other.mChannels.b;
+				mChannels.a = other.mChannels.a;
 			}
 			
 			inline Color & operator=(const Color & other)
 			{
-				r = other.r;
-				g = other.g;
-				b = other.b;
-				a = other.a;
+				mChannels = other.mChannels;
 				
 				return *this;
 			}
+			
+			inline Color(u32 rgba)
+			{
+				*this = rgba;
+			}
+			
+			inline Color(int red, int green, int blue, int alpha)
+			{
+				mChannels.r = red;
+				mChannels.g = green;
+				mChannels.b = blue;
+				mChannels.a = alpha;
+			}
+			
+			inline operator u32() const
+			{
+				return ToU32ref();
+			}
+			
+			inline operator _GXColor() const
+			{
+				return mChannels;
+			}
+			
+			inline ~Color() {}
 		};
 	}
 }

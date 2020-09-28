@@ -10,6 +10,11 @@ namespace nw4r
 		{
 			float x, y;
 		};
+		
+		struct VEC3
+		{
+			float x, y, z;
+		};
 	}
 }
 

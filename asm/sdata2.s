@@ -1,23 +1,9 @@
 .include "macros.inc"
 
-# .data8 = .sbss???
-
 .section .sdata2, "a"  # 0x804BFA20 - 0x804C69E0
-.global lbl_804BFA28
-lbl_804BFA28:
-	.incbin "baserom.dol", 0x3C8668, 0x4
-.global lbl_804BFA2C
-lbl_804BFA2C:
-	.incbin "baserom.dol", 0x3C866C, 0x4
-.global lbl_804BFA30
-lbl_804BFA30:
-	.incbin "baserom.dol", 0x3C8670, 0x8
-.global lbl_804BFA38
-lbl_804BFA38:
-	.incbin "baserom.dol", 0x3C8678, 0x8
-.global lbl_804BFA40
-lbl_804BFA40:
-	.incbin "baserom.dol", 0x3C8680, 0x8
+
+.balign 8
+
 .global lbl_804BFA48
 lbl_804BFA48:
 	.incbin "baserom.dol", 0x3C8688, 0x4

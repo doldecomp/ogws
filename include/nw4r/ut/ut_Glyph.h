@@ -9,11 +9,11 @@ namespace nw4r
 		struct Glyph
 		{
 			u8 * PTR_0x0;
-			///*
-			char BYTE_0x4;
-			char BYTE_0x5;
-			char BYTE_0x6;
-			char BYTE_0x7;
+			
+			s8 BYTE_0x4;
+			u8 cellWidth; // at 0x5
+			s8 BYTE_0x6;
+			u8 cellHeight; // at 0x7
 			
 			//char BYTES_0x4[4];
 			

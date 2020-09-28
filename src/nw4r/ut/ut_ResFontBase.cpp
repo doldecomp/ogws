@@ -47,42 +47,42 @@ namespace nw4r
 				mFontInfo = pFontInfo;
 			}
 			
-			u32 ResFontBase::GetWidth() const
+			int ResFontBase::GetWidth() const
 			{
 				return mFontInfo->mWidth;
 			}
 			
-			u32 ResFontBase::GetHeight() const
+			int ResFontBase::GetHeight() const
 			{
 				return mFontInfo->mHeight;
 			}
 			
-			u32 ResFontBase::GetAscent() const
+			int ResFontBase::GetAscent() const
 			{
 				return mFontInfo->mAscent;
 			}
 			
-			u32 ResFontBase::GetDescent() const
+			int ResFontBase::GetDescent() const
 			{
 				return mFontInfo->mHeight - mFontInfo->mAscent;
 			}
 			
-			u32 ResFontBase::GetBaselinePos() const
+			int ResFontBase::GetBaselinePos() const
 			{
 				return mFontInfo->mTextureGlyph->mBaselinePos;
 			}
 			
-			u32 ResFontBase::GetCellHeight() const
+			int ResFontBase::GetCellHeight() const
 			{
 				return mFontInfo->mTextureGlyph->mCellHeight;
 			}
 			
-			u32 ResFontBase::GetCellWidth() const
+			int ResFontBase::GetCellWidth() const
 			{
 				return mFontInfo->mTextureGlyph->mCellWidth;
 			}
 			
-			u32 ResFontBase::GetMaxCharWidth() const
+			int ResFontBase::GetMaxCharWidth() const
 			{
 				return mFontInfo->mTextureGlyph->mMaxCharWidth;
 			}
@@ -132,7 +132,7 @@ namespace nw4r
 				mFontInfo->mLineFeed = lf;
 			}
 			
-			u32 ResFontBase::GetCharWidth(u16 ch) const
+			int ResFontBase::GetCharWidth(u16 ch) const
 			{
 				return GetCharWidths(ch).BYTE_0x2;
 			}
@@ -210,10 +210,10 @@ namespace nw4r
 				const CharWidths & r7_2 = GetCharWidthsFromIndex(glyphIndex);
 				
 				pGlyph->BYTE_0x4=r7_2.BYTE_0x0;
-				pGlyph->BYTE_0x5=r7_2.BYTE_0x1;
+				pGlyph->cellWidth=r7_2.BYTE_0x1;
 				pGlyph->BYTE_0x6=r7_2.BYTE_0x2;
 				
-				pGlyph->BYTE_0x7=r3->mCellHeight;
+				pGlyph->cellHeight=r3->mCellHeight;
 				
 				pGlyph->WORD_0x8=r3->mFormat;
 				
