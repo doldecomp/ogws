@@ -6,8 +6,54 @@ namespace nw4r
 {
 	namespace ut
 	{
-		template <typename T> TagProcessorBase<T>::TagProcessorBase() {}
+		template <typename T>
+		void TagProcessorBase<T>::ProcessLinefeed(PrintContext<T> * pContext)
+		{
+			TextWriterBase<T> * r31;
+			
+			float f0;
+			float f31;
+			float f30;
+			
+			r31 = pContext->mTextWriter;
+			f31 = pContext->FLOAT_0x8;
+			f30 = r31->GetCursorY();
+			
+			f0 = f30 + r31->GetLineHeight();
+			
+			r31->SetCursorX(f31);
+			r31->SetCursorY(f0);
+		}
 		
+		template <typename T>
+		void TagProcessorBase<T>::ProcessTab(PrintContext<T> * pContext)
+		{
+			s32 r30;
+			TextWriterBase<T> * r31;
+			
+			float f0;
+			float f1;
+			float f4;
+			float f3;
+			
+			r31 = pContext->mTextWriter;
+			r30 = r31->GetTabWidth();
+			
+			if (r30 <= 0) return;
+			
+			f1 = r31->IsWidthFixed() ? r31->GetFixedWidth() : r31->GetFontWidth();
+			f4 = r31->GetCursorX();
+			f3 = pContext->FLOAT_0x8;
+			f1 = r30 * f1;
+			f4 -= f3;
+			f0 = (s32)(f4 / f1) + 1;
+			r31->SetCursorX(f3 + (f1 * f0));
+		}
+		
+		template struct TagProcessorBase<char>;
+		template struct TagProcessorBase<wchar_t>;
+		
+		template <typename T> TagProcessorBase<T>::TagProcessorBase() {}
 		template <typename T> TagProcessorBase<T>::~TagProcessorBase() {}
 		
 		template <typename T>
