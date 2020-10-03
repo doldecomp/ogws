@@ -72,6 +72,7 @@ TEXT_O_FILES := \
 	build/asm/nw4r/snd/snd_BasicPlayer.o \
 	build/asm/nw4r/snd/snd_BasicSound.o \
 	build/asm/nw4r/snd/snd_Channel.o \
+	build/asm/nw4r/snd/snd_DisposeCallbackManager.o \
 	build/asm/text.o \
 
 CTORS_O_FILES := build/asm/ctors_2.o
