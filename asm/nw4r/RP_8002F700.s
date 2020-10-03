@@ -1,8 +1,9 @@
-.include "macros.inc"
+####################################################
+# Seem to not be related to neighbouring functions #
+# Only present in OG Pack Project titles (not BBA) #
+####################################################
 
-# I'm not sure what these are for
-# They both don't seem related to the DrawSmoothStripeStrategy functions
-# They don't seem to be related to the math_arithmetic functions either
+.include "macros.inc"
 
 .section .text, "ax"  # 0x800076E0 - 0x80355080 
 
