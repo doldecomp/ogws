@@ -1,6 +1,7 @@
 ####################################################
 # Seem to not be related to neighbouring functions #
 # Only present in OG Pack Project titles (not BBA) #
+# Either is from Pack Project lib or NW4R          #
 ####################################################
 
 .include "macros.inc"
