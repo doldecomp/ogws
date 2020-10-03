@@ -1318,6 +1318,7 @@ GetRuntimeTypeInfo__Q44nw4r3snd6detail10BasicSoundCFv:
 /* 80037454 00032354  38 6D 96 F8 */	addi r3, r13, lbl_804BEA78-_SDA_BASE_
 /* 80037458 00032358  4E 80 00 20 */	blr 
 
+# __sinit_\snd_BasicSound_cpp
 .global __sinit_$$3snd_BasicSound_cpp
 __sinit_$$3snd_BasicSound_cpp:
 /* 8003745C 0003235C  38 00 00 00 */	li r0, 0
