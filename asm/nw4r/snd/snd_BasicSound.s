@@ -965,7 +965,7 @@ lbl_8003700C:
 /* 80037028 00031F28  2C 03 00 00 */	cmpwi r3, 0
 /* 8003702C 00031F2C  41 82 00 0C */	beq lbl_80037038
 /* 80037030 00031F30  7F C4 F3 78 */	mr r4, r30
-/* 80037034 00031F34  48 00 23 F1 */	bl func_80039424
+/* 80037034 00031F34  48 00 23 F1 */	bl RemoveSoundList__Q44nw4r3snd6detail19ExternalSoundPlayerFPQ44nw4r3snd6detail10BasicSound
 lbl_80037038:
 /* 80037038 00031F38  80 7E 00 20 */	lwz r3, 0x20(r30)
 /* 8003703C 00031F3C  2C 03 00 00 */	cmpwi r3, 0

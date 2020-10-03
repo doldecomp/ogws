@@ -2,8 +2,8 @@
 
 .section .text, "ax"  # 0x800076E0 - 0x80355080 
 
-.global func_800393D8
-func_800393D8:
+.global InsertSoundList__Q44nw4r3snd6detail19ExternalSoundPlayerFPQ44nw4r3snd6detail10BasicSound
+InsertSoundList__Q44nw4r3snd6detail19ExternalSoundPlayerFPQ44nw4r3snd6detail10BasicSound:
 /* 800393D8 000342D8  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 800393DC 000342DC  7C 08 02 A6 */	mflr r0
 /* 800393E0 000342E0  90 01 00 24 */	stw r0, 0x24(r1)
@@ -24,8 +24,8 @@ func_800393D8:
 /* 8003941C 0003431C  38 21 00 20 */	addi r1, r1, 0x20
 /* 80039420 00034320  4E 80 00 20 */	blr 
 
-.global func_80039424
-func_80039424:
+.global RemoveSoundList__Q44nw4r3snd6detail19ExternalSoundPlayerFPQ44nw4r3snd6detail10BasicSound
+RemoveSoundList__Q44nw4r3snd6detail19ExternalSoundPlayerFPQ44nw4r3snd6detail10BasicSound:
 /* 80039424 00034324  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80039428 00034328  7C 08 02 A6 */	mflr r0
 /* 8003942C 0003432C  90 01 00 14 */	stw r0, 0x14(r1)
@@ -41,8 +41,8 @@ func_80039424:
 /* 80039454 00034354  38 21 00 10 */	addi r1, r1, 0x10
 /* 80039458 00034358  4E 80 00 20 */	blr 
 
-.global func_8003945C
-func_8003945C:
+.global GetLowestPrioritySound__Q44nw4r3snd6detail19ExternalSoundPlayerFv
+GetLowestPrioritySound__Q44nw4r3snd6detail19ExternalSoundPlayerFv:
 /* 8003945C 0003435C  80 83 00 04 */	lwz r4, 4(r3)
 /* 80039460 00034360  38 03 00 04 */	addi r0, r3, 4
 /* 80039464 00034364  39 00 00 80 */	li r8, 0x80
