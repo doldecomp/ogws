@@ -97,4 +97,3 @@ SDATA_O_FILES := build/asm/sdata.o
 SBSS2_O_FILES := build/asm/sbss2.o
 
 SDATA2_O_FILES := build/asm/sdata2.o
-
