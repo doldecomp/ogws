@@ -71,6 +71,12 @@ TEXT_O_FILES := \
 	build/asm/nw4r/snd/snd_BankFile.o \
 	build/asm/nw4r/snd/snd_BasicPlayer.o \
 	build/asm/nw4r/snd/snd_BasicSound.o \
+	build/asm/nw4r/snd/snd_Channel.o \
+	build/asm/nw4r/snd/snd_DisposeCallbackManager.o \
+	build/asm/nw4r/snd/snd_DvdSoundArchive.o \
+	build/asm/nw4r/snd/snd_EnvGenerator.o \
+	build/asm/nw4r/nw4r_80039260.o \
+	build/asm/nw4r/snd/snd_ExternalSoundPlayer.o \
 	build/asm/text.o \
 
 CTORS_O_FILES := build/asm/ctors_2.o
@@ -94,4 +100,3 @@ SDATA_O_FILES := build/asm/sdata.o
 SBSS2_O_FILES := build/asm/sbss2.o
 
 SDATA2_O_FILES := build/asm/sdata2.o
-

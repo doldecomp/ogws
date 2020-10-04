@@ -510,8 +510,14 @@ lbl_80036994:
 lbl_800369AC:
 /* 800369AC 000318AC  38 21 00 20 */	addi r1, r1, 0x20
 /* 800369B0 000318B0  4E 80 00 20 */	blr 
+
+.global IsPause__Q44nw4r3snd6detail10BasicSoundCFv
+IsPause__Q44nw4r3snd6detail10BasicSoundCFv:
 /* 800369B4 000318B4  88 63 00 67 */	lbz r3, 0x67(r3)
 /* 800369B8 000318B8  4E 80 00 20 */	blr 
+
+.global Update__Q44nw4r3snd6detail10BasicSoundFv
+Update__Q44nw4r3snd6detail10BasicSoundFv:
 /* 800369BC 000318BC  94 21 FF 50 */	stwu r1, -0xb0(r1)
 /* 800369C0 000318C0  7C 08 02 A6 */	mflr r0
 /* 800369C4 000318C4  90 01 00 B4 */	stw r0, 0xb4(r1)
@@ -880,8 +886,8 @@ lbl_80036ED0:
 /* 80036F10 00031E10  38 21 00 B0 */	addi r1, r1, 0xb0
 /* 80036F14 00031E14  4E 80 00 20 */	blr 
 
-.global func_80036F18
-func_80036F18:
+.global Shutdown__Q44nw4r3snd6detail10BasicSoundFv
+Shutdown__Q44nw4r3snd6detail10BasicSoundFv:
 /* 80036F18 00031E18  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80036F1C 00031E1C  7C 08 02 A6 */	mflr r0
 /* 80036F20 00031E20  90 01 00 14 */	stw r0, 0x14(r1)
@@ -959,7 +965,7 @@ lbl_8003700C:
 /* 80037028 00031F28  2C 03 00 00 */	cmpwi r3, 0
 /* 8003702C 00031F2C  41 82 00 0C */	beq lbl_80037038
 /* 80037030 00031F30  7F C4 F3 78 */	mr r4, r30
-/* 80037034 00031F34  48 00 23 F1 */	bl func_80039424
+/* 80037034 00031F34  48 00 23 F1 */	bl RemoveSoundList__Q44nw4r3snd6detail19ExternalSoundPlayerFPQ44nw4r3snd6detail10BasicSound
 lbl_80037038:
 /* 80037038 00031F38  80 7E 00 20 */	lwz r3, 0x20(r30)
 /* 8003703C 00031F3C  2C 03 00 00 */	cmpwi r3, 0
@@ -983,8 +989,8 @@ lbl_80037064:
 /* 80037080 00031F80  38 21 00 10 */	addi r1, r1, 0x10
 /* 80037084 00031F84  4E 80 00 20 */	blr 
 
-.global func_80037088
-func_80037088:
+.global SetPlayerPriority__Q44nw4r3snd6detail10BasicSoundFi
+SetPlayerPriority__Q44nw4r3snd6detail10BasicSoundFi:
 /* 80037088 00031F88  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8003708C 00031F8C  7C 08 02 A6 */	mflr r0
 /* 80037090 00031F90  90 01 00 14 */	stw r0, 0x14(r1)
@@ -1006,6 +1012,9 @@ lbl_800370C4:
 /* 800370CC 00031FCC  7C 08 03 A6 */	mtlr r0
 /* 800370D0 00031FD0  38 21 00 10 */	addi r1, r1, 0x10
 /* 800370D4 00031FD4  4E 80 00 20 */	blr 
+
+.global SetInitialVolume__Q44nw4r3snd6detail10BasicSoundFf
+SetInitialVolume__Q44nw4r3snd6detail10BasicSoundFf:
 /* 800370D8 00031FD8  C0 02 85 5C */	lfs f0, lbl_804BFF7C-_SDA2_BASE_(r2)
 /* 800370DC 00031FDC  FC 01 00 40 */	fcmpo cr0, f1, f0
 /* 800370E0 00031FE0  40 81 00 08 */	ble lbl_800370E8
@@ -1020,6 +1029,9 @@ lbl_800370F8:
 lbl_800370FC:
 /* 800370FC 00031FFC  D0 03 00 8C */	stfs f0, 0x8c(r3)
 /* 80037100 00032000  4E 80 00 20 */	blr 
+
+.global SetVolume__Q44nw4r3snd6detail10BasicSoundFfi
+SetVolume__Q44nw4r3snd6detail10BasicSoundFfi:
 /* 80037104 00032004  C0 A2 85 5C */	lfs f5, lbl_804BFF7C-_SDA2_BASE_(r2)
 /* 80037108 00032008  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8003710C 0003200C  FC 01 28 40 */	fcmpo cr0, f1, f5
@@ -1066,12 +1078,24 @@ lbl_8003718C:
 /* 8003719C 0003209C  90 03 00 88 */	stw r0, 0x88(r3)
 /* 800371A0 000320A0  38 21 00 20 */	addi r1, r1, 0x20
 /* 800371A4 000320A4  4E 80 00 20 */	blr 
+
+.global SetPitch__Q44nw4r3snd6detail10BasicSoundFf
+SetPitch__Q44nw4r3snd6detail10BasicSoundFf:
 /* 800371A8 000320A8  D0 23 00 98 */	stfs f1, 0x98(r3)
 /* 800371AC 000320AC  4E 80 00 20 */	blr 
+
+.global SetPan__Q44nw4r3snd6detail10BasicSoundFf
+SetPan__Q44nw4r3snd6detail10BasicSoundFf:
 /* 800371B0 000320B0  D0 23 00 90 */	stfs f1, 0x90(r3)
 /* 800371B4 000320B4  4E 80 00 20 */	blr 
+
+.global SetSurroundPan__Q44nw4r3snd6detail10BasicSoundFf
+SetSurroundPan__Q44nw4r3snd6detail10BasicSoundFf:
 /* 800371B8 000320B8  D0 23 00 94 */	stfs f1, 0x94(r3)
 /* 800371BC 000320BC  4E 80 00 20 */	blr 
+
+.global SetLpfFreq__Q44nw4r3snd6detail10BasicSoundFf
+SetLpfFreq__Q44nw4r3snd6detail10BasicSoundFf:
 /* 800371C0 000320C0  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 800371C4 000320C4  7C 08 02 A6 */	mflr r0
 /* 800371C8 000320C8  90 01 00 14 */	stw r0, 0x14(r1)
@@ -1088,15 +1112,15 @@ lbl_8003718C:
 /* 800371F4 000320F4  38 21 00 10 */	addi r1, r1, 0x10
 /* 800371F8 000320F8  4E 80 00 20 */	blr 
 
-.global func_800371FC
-func_800371FC:
+.global SetOutputLine__Q44nw4r3snd6detail10BasicSoundFi
+SetOutputLine__Q44nw4r3snd6detail10BasicSoundFi:
 /* 800371FC 000320FC  38 00 00 01 */	li r0, 1
 /* 80037200 00032100  90 83 00 A0 */	stw r4, 0xa0(r3)
 /* 80037204 00032104  98 03 00 9C */	stb r0, 0x9c(r3)
 /* 80037208 00032108  4E 80 00 20 */	blr 
 
-.global func_8003720C
-func_8003720C:
+.global SetMainOutVolume__Q44nw4r3snd6detail10BasicSoundFf
+SetMainOutVolume__Q44nw4r3snd6detail10BasicSoundFf:
 /* 8003720C 0003210C  C0 02 85 5C */	lfs f0, lbl_804BFF7C-_SDA2_BASE_(r2)
 /* 80037210 00032110  FC 01 00 40 */	fcmpo cr0, f1, f0
 /* 80037214 00032114  40 81 00 08 */	ble lbl_8003721C
@@ -1112,8 +1136,8 @@ lbl_80037230:
 /* 80037230 00032130  D0 03 00 A4 */	stfs f0, 0xa4(r3)
 /* 80037234 00032134  4E 80 00 20 */	blr 
 
-.global func_80037238
-func_80037238:
+.global SetRemoteOutVolume__Q44nw4r3snd6detail10BasicSoundFif
+SetRemoteOutVolume__Q44nw4r3snd6detail10BasicSoundFif:
 /* 80037238 00032138  C0 02 85 5C */	lfs f0, lbl_804BFF7C-_SDA2_BASE_(r2)
 /* 8003723C 0003213C  FC 01 00 40 */	fcmpo cr0, f1, f0
 /* 80037240 00032140  40 81 00 08 */	ble lbl_80037248
@@ -1131,8 +1155,8 @@ lbl_8003725C:
 /* 80037264 00032164  D0 03 00 A8 */	stfs f0, 0xa8(r3)
 /* 80037268 00032168  4E 80 00 20 */	blr 
 
-.global func_8003726C
-func_8003726C:
+.global SetFxSend__Q44nw4r3snd6detail10BasicSoundFQ34nw4r3snd6AuxBusf
+SetFxSend__Q44nw4r3snd6detail10BasicSoundFQ34nw4r3snd6AuxBusf:
 /* 8003726C 0003216C  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 80037270 00032170  7C 08 02 A6 */	mflr r0
 /* 80037274 00032174  90 01 00 24 */	stw r0, 0x24(r1)
@@ -1153,6 +1177,9 @@ func_8003726C:
 /* 800372B0 000321B0  7C 08 03 A6 */	mtlr r0
 /* 800372B4 000321B4  38 21 00 20 */	addi r1, r1, 0x20
 /* 800372B8 000321B8  4E 80 00 20 */	blr 
+
+.global SetRemoteFilter__Q44nw4r3snd6detail10BasicSoundFi
+SetRemoteFilter__Q44nw4r3snd6detail10BasicSoundFi:
 /* 800372BC 000321BC  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 800372C0 000321C0  7C 08 02 A6 */	mflr r0
 /* 800372C4 000321C4  90 01 00 14 */	stw r0, 0x14(r1)
@@ -1176,6 +1203,9 @@ lbl_800372F8:
 /* 80037304 00032204  7C 08 03 A6 */	mtlr r0
 /* 80037308 00032208  38 21 00 10 */	addi r1, r1, 0x10
 /* 8003730C 0003220C  4E 80 00 20 */	blr 
+
+.global SetPanMode__Q44nw4r3snd6detail10BasicSoundFQ44nw4r3snd6detail7PanMode
+SetPanMode__Q44nw4r3snd6detail10BasicSoundFQ44nw4r3snd6detail7PanMode:
 /* 80037310 00032210  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80037314 00032214  7C 08 02 A6 */	mflr r0
 /* 80037318 00032218  90 01 00 14 */	stw r0, 0x14(r1)
@@ -1191,6 +1221,9 @@ lbl_800372F8:
 /* 80037340 00032240  7C 08 03 A6 */	mtlr r0
 /* 80037344 00032244  38 21 00 10 */	addi r1, r1, 0x10
 /* 80037348 00032248  4E 80 00 20 */	blr 
+
+.global SetPanCurve__Q44nw4r3snd6detail10BasicSoundFQ44nw4r3snd6detail8PanCurve
+SetPanCurve__Q44nw4r3snd6detail10BasicSoundFQ44nw4r3snd6detail8PanCurve:
 /* 8003734C 0003224C  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80037350 00032250  7C 08 02 A6 */	mflr r0
 /* 80037354 00032254  90 01 00 14 */	stw r0, 0x14(r1)
@@ -1207,42 +1240,42 @@ lbl_800372F8:
 /* 80037380 00032280  38 21 00 10 */	addi r1, r1, 0x10
 /* 80037384 00032284  4E 80 00 20 */	blr 
 
-.global func_80037388
-func_80037388:
+.global SetAmbientParamCallback__Q44nw4r3snd6detail10BasicSoundFPQ54nw4r3snd6detail10BasicSound26AmbientParamUpdateCallbackPQ54nw4r3snd6detail10BasicSound24AmbientArgUpdateCallbackPQ54nw4r3snd6detail10BasicSound27AmbientArgAllocaterCallbackPv
+SetAmbientParamCallback__Q44nw4r3snd6detail10BasicSoundFPQ54nw4r3snd6detail10BasicSound26AmbientParamUpdateCallbackPQ54nw4r3snd6detail10BasicSound24AmbientArgUpdateCallbackPQ54nw4r3snd6detail10BasicSound27AmbientArgAllocaterCallbackPv:
 /* 80037388 00032288  90 83 00 18 */	stw r4, 0x18(r3)
 /* 8003738C 0003228C  90 A3 00 1C */	stw r5, 0x1c(r3)
 /* 80037390 00032290  90 C3 00 20 */	stw r6, 0x20(r3)
 /* 80037394 00032294  90 E3 00 24 */	stw r7, 0x24(r3)
 /* 80037398 00032298  4E 80 00 20 */	blr 
 
-.global func_8003739C
-func_8003739C:
+.global IsAttachedGeneralHandle__Q44nw4r3snd6detail10BasicSoundFv
+IsAttachedGeneralHandle__Q44nw4r3snd6detail10BasicSoundFv:
 /* 8003739C 0003229C  80 63 00 08 */	lwz r3, 8(r3)
 /* 800373A0 000322A0  7C 03 00 D0 */	neg r0, r3
 /* 800373A4 000322A4  7C 00 1B 78 */	or r0, r0, r3
 /* 800373A8 000322A8  54 03 0F FE */	srwi r3, r0, 0x1f
 /* 800373AC 000322AC  4E 80 00 20 */	blr 
 
-.global func_800373B0
-func_800373B0:
+.global IsAttachedTempGeneralHandle__Q44nw4r3snd6detail10BasicSoundFv
+IsAttachedTempGeneralHandle__Q44nw4r3snd6detail10BasicSoundFv:
 /* 800373B0 000322B0  80 63 00 0C */	lwz r3, 0xc(r3)
 /* 800373B4 000322B4  7C 03 00 D0 */	neg r0, r3
 /* 800373B8 000322B8  7C 00 1B 78 */	or r0, r0, r3
 /* 800373BC 000322BC  54 03 0F FE */	srwi r3, r0, 0x1f
 /* 800373C0 000322C0  4E 80 00 20 */	blr 
 
-.global func_800373C4
-func_800373C4:
+.global DetachGeneralHandle__Q44nw4r3snd6detail10BasicSoundFv
+DetachGeneralHandle__Q44nw4r3snd6detail10BasicSoundFv:
 /* 800373C4 000322C4  80 63 00 08 */	lwz r3, 8(r3)
 /* 800373C8 000322C8  48 00 E7 94 */	b func_80045B5C
 
-.global func_800373CC
-func_800373CC:
+.global DetachTempGeneralHandle__Q44nw4r3snd6detail10BasicSoundFv
+DetachTempGeneralHandle__Q44nw4r3snd6detail10BasicSoundFv:
 /* 800373CC 000322CC  80 63 00 0C */	lwz r3, 0xc(r3)
 /* 800373D0 000322D0  48 00 E7 8C */	b func_80045B5C
 
-.global func_800373D4
-func_800373D4:
+.global SetId__Q44nw4r3snd6detail10BasicSoundFUl
+SetId__Q44nw4r3snd6detail10BasicSoundFUl:
 /* 800373D4 000322D4  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 800373D8 000322D8  7C 08 02 A6 */	mflr r0
 /* 800373DC 000322DC  90 01 00 14 */	stw r0, 0x14(r1)
@@ -1259,6 +1292,9 @@ func_800373D4:
 /* 80037408 00032308  7C 08 03 A6 */	mtlr r0
 /* 8003740C 0003230C  38 21 00 10 */	addi r1, r1, 0x10
 /* 80037410 00032310  4E 80 00 20 */	blr 
+
+.global __dt__Q44nw4r3snd6detail10BasicSoundFv
+__dt__Q44nw4r3snd6detail10BasicSoundFv:
 /* 80037414 00032314  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80037418 00032318  7C 08 02 A6 */	mflr r0
 /* 8003741C 0003231C  2C 03 00 00 */	cmpwi r3, 0
@@ -1276,9 +1312,13 @@ lbl_8003743C:
 /* 80037448 00032348  7C 08 03 A6 */	mtlr r0
 /* 8003744C 0003234C  38 21 00 10 */	addi r1, r1, 0x10
 /* 80037450 00032350  4E 80 00 20 */	blr 
+
+.global GetRuntimeTypeInfo__Q44nw4r3snd6detail10BasicSoundCFv
+GetRuntimeTypeInfo__Q44nw4r3snd6detail10BasicSoundCFv:
 /* 80037454 00032354  38 6D 96 F8 */	addi r3, r13, lbl_804BEA78-_SDA_BASE_
 /* 80037458 00032358  4E 80 00 20 */	blr 
 
+# __sinit_\snd_BasicSound_cpp
 .global __sinit_$$3snd_BasicSound_cpp
 __sinit_$$3snd_BasicSound_cpp:
 /* 8003745C 0003235C  38 00 00 00 */	li r0, 0

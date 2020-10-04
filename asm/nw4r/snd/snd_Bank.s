@@ -81,7 +81,7 @@ lbl_80035BEC:
 /* 80035BF0 00030AF0  80 BE 00 14 */	lwz r5, 0x14(r30)
 /* 80035BF4 00030AF4  80 DE 00 1C */	lwz r6, 0x1c(r30)
 /* 80035BF8 00030AF8  80 FE 00 20 */	lwz r7, 0x20(r30)
-/* 80035BFC 00030AFC  48 00 27 75 */	bl func_80038370
+/* 80035BFC 00030AFC  48 00 27 75 */	bl AllocChannel__Q44nw4r3snd6detail7ChannelFiiiPFPQ44nw4r3snd6detail7ChannelQ54nw4r3snd6detail7Channel21ChannelCallbackStatusUl_vUl
 /* 80035C00 00030B00  2C 03 00 00 */	cmpwi r3, 0
 /* 80035C04 00030B04  7C 7F 1B 78 */	mr r31, r3
 /* 80035C08 00030B08  40 82 00 0C */	bne lbl_80035C14
@@ -112,16 +112,16 @@ lbl_80035C14:
 /* 80035C68 00030B68  C0 01 00 14 */	lfs f0, 0x14(r1)
 /* 80035C6C 00030B6C  D0 03 00 B4 */	stfs f0, 0xb4(r3)
 /* 80035C70 00030B70  88 81 00 0C */	lbz r4, 0xc(r1)
-/* 80035C74 00030B74  48 00 34 8D */	bl func_80039100
+/* 80035C74 00030B74  48 00 34 8D */	bl SetAttack__Q44nw4r3snd6detail12EnvGeneratorFi
 /* 80035C78 00030B78  88 81 00 0D */	lbz r4, 0xd(r1)
 /* 80035C7C 00030B7C  7F E3 FB 78 */	mr r3, r31
-/* 80035C80 00030B80  48 00 34 99 */	bl func_80039118
+/* 80035C80 00030B80  48 00 34 99 */	bl SetDecay__Q44nw4r3snd6detail12EnvGeneratorFi
 /* 80035C84 00030B84  88 81 00 0E */	lbz r4, 0xe(r1)
 /* 80035C88 00030B88  7F E3 FB 78 */	mr r3, r31
-/* 80035C8C 00030B8C  48 00 35 2D */	bl func_800391B8
+/* 80035C8C 00030B8C  48 00 35 2D */	bl SetSustain__Q44nw4r3snd6detail12EnvGeneratorFi
 /* 80035C90 00030B90  88 81 00 0F */	lbz r4, 0xf(r1)
 /* 80035C94 00030B94  7F E3 FB 78 */	mr r3, r31
-/* 80035C98 00030B98  48 00 35 29 */	bl func_800391C0
+/* 80035C98 00030B98  48 00 35 29 */	bl SetRelease__Q44nw4r3snd6detail12EnvGeneratorFi
 /* 80035C9C 00030B9C  88 A1 00 11 */	lbz r5, 0x11(r1)
 /* 80035CA0 00030BA0  7F E3 FB 78 */	mr r3, r31
 /* 80035CA4 00030BA4  80 1E 00 10 */	lwz r0, 0x10(r30)
@@ -145,7 +145,7 @@ lbl_80035C14:
 /* 80035CEC 00030BEC  EC 63 08 2A */	fadds f3, f3, f1
 /* 80035CF0 00030BF0  D0 7F 00 AC */	stfs f3, 0xac(r31)
 /* 80035CF4 00030BF4  D0 1F 00 B0 */	stfs f0, 0xb0(r31)
-/* 80035CF8 00030BF8  48 00 23 25 */	bl func_8003801C
+/* 80035CF8 00030BF8  48 00 23 25 */	bl Start__Q44nw4r3snd6detail7ChannelFRCQ44nw4r3snd6detail8WaveDataiUl
 /* 80035CFC 00030BFC  7F E3 FB 78 */	mr r3, r31
 lbl_80035D00:
 /* 80035D00 00030C00  80 01 00 D4 */	lwz r0, 0xd4(r1)
