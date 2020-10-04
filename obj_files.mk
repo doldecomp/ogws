@@ -82,6 +82,7 @@ TEXT_O_FILES := \
 	build/asm/nw4r/snd/snd_FxReverbHi.o \
 	build/asm/nw4r/snd/snd_8003A668.o \
 	build/asm/nw4r/snd/snd_8003AAF8.o \
+	build/asm/nw4r/snd/snd_InstancePool.o \
 	build/asm/text.o \
 
 CTORS_O_FILES := build/asm/ctors_2.o
