@@ -77,6 +77,11 @@ TEXT_O_FILES := \
 	build/asm/nw4r/snd/snd_EnvGenerator.o \
 	build/asm/nw4r/nw4r_80039260.o \
 	build/asm/nw4r/snd/snd_ExternalSoundPlayer.o \
+	build/asm/nw4r/snd/snd_FrameHeap.o \
+	build/asm/nw4r/snd/snd_FxDelay.o \
+	build/asm/nw4r/snd/snd_FxReverbHi.o \
+	build/asm/nw4r/snd/snd_8003A668.o \
+	build/asm/nw4r/snd/snd_8003AAF8.o \
 	build/asm/text.o \
 
 CTORS_O_FILES := build/asm/ctors_2.o
