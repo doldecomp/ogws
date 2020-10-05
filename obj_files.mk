@@ -75,8 +75,16 @@ TEXT_O_FILES := \
 	build/asm/nw4r/snd/snd_DisposeCallbackManager.o \
 	build/asm/nw4r/snd/snd_DvdSoundArchive.o \
 	build/asm/nw4r/snd/snd_EnvGenerator.o \
-	build/asm/nw4r/nw4r_80039260.o \
+	build/asm/nw4r/snd/snd_80039260.o \
 	build/asm/nw4r/snd/snd_ExternalSoundPlayer.o \
+	build/asm/nw4r/snd/snd_FrameHeap.o \
+	build/asm/nw4r/snd/snd_FxDelay.o \
+	build/asm/nw4r/snd/snd_FxReverbHi.o \
+	build/asm/nw4r/snd/snd_8003A668.o \
+	build/asm/nw4r/snd/snd_8003AAF8.o \
+	build/asm/nw4r/snd/snd_InstancePool.o \
+	build/asm/nw4r/snd/snd_Lfo.o \
+	build/asm/nw4r/snd/snd_MemorySoundArchive.o \
 	build/asm/text.o \
 
 CTORS_O_FILES := build/asm/ctors_2.o
