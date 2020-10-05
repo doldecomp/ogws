@@ -1,5 +1,65 @@
 .include "macros.inc"
 
+.section .bss, "wa"  # 0x803CAF00 - 0x804BD380
+
+.balign 0x8
+
+.global lbl_803CAF58
+lbl_803CAF58:
+	.skip 0xC
+.global lbl_803CAF64
+lbl_803CAF64:
+	.skip 0xC
+
+.section .sdata, "wa"  # 0x804BD380 - 0x804BE9E0
+
+.balign 0x8
+
+# mFormatBufferSize__Q34nw4r2ut17TextWriterBase<c>
+.global mFormatBufferSize__Q34nw4r2ut17TextWriterBase$$0c$$1
+mFormatBufferSize__Q34nw4r2ut17TextWriterBase$$0c$$1:
+.long 0x100
+
+.section .sbss, "wa" # 0x804BE9E0 - 0x804BFA20
+
+.balign 0x8
+
+# mFormatBuffer__Q34nw4r2ut17TextWriterBase<c>
+.global mFormatBuffer__Q34nw4r2ut17TextWriterBase$$0c$$1
+mFormatBuffer__Q34nw4r2ut17TextWriterBase$$0c$$1:
+	.skip 0x4
+.global mDefaultTagProcessor__Q34nw4r2ut17TextWriterBase$$0c$$1
+mDefaultTagProcessor__Q34nw4r2ut17TextWriterBase$$0c$$1:
+	.skip 0x4
+# mDefaultTagProcessor__Q34nw4r2ut17TextWriterBase<w>
+.global mDefaultTagProcessor__Q34nw4r2ut17TextWriterBase$$0w$$1
+mDefaultTagProcessor__Q34nw4r2ut17TextWriterBase$$0w$$1:
+	.skip 0x4
+# @GUARD@mDefaultTagProcessor__Q34nw4r2ut17TextWriterBase<c>
+lbl_804BEA1C:
+	.skip 0x1
+# @GUARD@mDefaultTagProcessor__Q34nw4r2ut17TextWriterBase<w>
+lbl_804BEA1D:
+	.skip 0x1
+
+.section .sdata2, "a"  # 0x804BFA20 - 0x804C69E0
+
+.balign 8
+
+lbl_804BFA48:
+.long 0x7f7fffff # FLT_MAX
+lbl_804BFA4C:
+.single 0e0
+lbl_804BFA50:
+.long 0x43300000
+.long 0x80000000
+lbl_804BFA58:
+.single 0e0.5
+
+.section .ctors, "a"  # 0x80355080 - 0x80355260
+
+.long __sinit_$$3ut_TextWriterBase_cpp
+
 .section .text, "ax"  # 0x800076E0 - 0x80355080
 
 # __ct__Q34nw4r2ut17TextWriterBase<c>Fv
@@ -15,7 +75,7 @@ __ct__Q34nw4r2ut17TextWriterBase$$0c$$1Fv:
 /* 8000C5F0 000074F0  38 A0 00 04 */	li r5, 4
 /* 8000C5F4 000074F4  C0 22 80 28 */	lfs f1, lbl_804BFA48-_SDA2_BASE_(r2)
 /* 8000C5F8 000074F8  38 80 00 00 */	li r4, 0
-/* 8000C5FC 000074FC  38 0D 96 94 */	addi r0, r13, lbl_804BEA14-_SDA_BASE_
+/* 8000C5FC 000074FC  38 0D 96 94 */	addi r0, r13, mDefaultTagProcessor__Q34nw4r2ut17TextWriterBase$$0c$$1-_SDA_BASE_
 /* 8000C600 00007500  D0 1F 00 50 */	stfs f0, 0x50(r31)
 /* 8000C604 00007504  7F E3 FB 78 */	mr r3, r31
 /* 8000C608 00007508  D0 3F 00 4C */	stfs f1, 0x4c(r31)
@@ -108,19 +168,19 @@ Printf__Q34nw4r2ut17TextWriterBase$$0c$$1FPCce:
 /* 8000C728 00007628  93 C1 00 78 */	stw r30, 0x78(r1)
 /* 8000C72C 0000762C  93 A1 00 74 */	stw r29, 0x74(r1)
 /* 8000C730 00007630  7C 7D 1B 78 */	mr r29, r3
-/* 8000C734 00007634  83 CD 96 90 */	lwz r30, lbl_804BEA10-_SDA_BASE_(r13)
+/* 8000C734 00007634  83 CD 96 90 */	lwz r30, mFormatBuffer__Q34nw4r2ut17TextWriterBase$$0c$$1-_SDA_BASE_(r13)
 /* 8000C738 00007638  2C 1E 00 00 */	cmpwi r30, 0
 /* 8000C73C 0000763C  41 82 00 08 */	beq lbl_8000C744
 /* 8000C740 00007640  48 00 00 1C */	b lbl_8000C75C
 lbl_8000C744:
-/* 8000C744 00007644  80 6D 80 08 */	lwz r3, lbl_804BD388-_SDA_BASE_(r13)
+/* 8000C744 00007644  80 6D 80 08 */	lwz r3, mFormatBufferSize__Q34nw4r2ut17TextWriterBase$$0c$$1-_SDA_BASE_(r13)
 /* 8000C748 00007648  80 01 00 00 */	lwz r0, 0(r1)
 /* 8000C74C 0000764C  7F C3 00 D0 */	neg r30, r3
 /* 8000C750 00007650  57 DE 00 38 */	rlwinm r30, r30, 0, 0, 0x1c
 /* 8000C754 00007654  7C 01 F1 6E */	stwux r0, r1, r30
 /* 8000C758 00007658  3B C1 00 08 */	addi r30, r1, 8
 lbl_8000C75C:
-/* 8000C75C 0000765C  80 8D 80 08 */	lwz r4, lbl_804BD388-_SDA_BASE_(r13)
+/* 8000C75C 0000765C  80 8D 80 08 */	lwz r4, mFormatBufferSize__Q34nw4r2ut17TextWriterBase$$0c$$1-_SDA_BASE_(r13)
 /* 8000C760 00007660  7F C3 F3 78 */	mr r3, r30
 /* 8000C764 00007664  7C E5 3B 78 */	mr r5, r7
 /* 8000C768 00007668  48 0A AC 95 */	bl func_800B73FC
@@ -2121,7 +2181,7 @@ __ct__Q34nw4r2ut17TextWriterBase$$0w$$1Fv:
 /* 8000E4E0 000093E0  38 A0 00 04 */	li r5, 4
 /* 8000E4E4 000093E4  C0 22 80 28 */	lfs f1, lbl_804BFA48-_SDA2_BASE_(r2)
 /* 8000E4E8 000093E8  38 80 00 00 */	li r4, 0
-/* 8000E4EC 000093EC  38 0D 96 98 */	addi r0, r13, lbl_804BEA18-_SDA_BASE_
+/* 8000E4EC 000093EC  38 0D 96 98 */	addi r0, r13, mDefaultTagProcessor__Q34nw4r2ut17TextWriterBase$$0w$$1-_SDA_BASE_
 /* 8000E4F0 000093F0  D0 1F 00 50 */	stfs f0, 0x50(r31)
 /* 8000E4F4 000093F4  7F E3 FB 78 */	mr r3, r31
 /* 8000E4F8 000093F8  D0 3F 00 4C */	stfs f1, 0x4c(r31)
@@ -4398,12 +4458,12 @@ __sinit_$$3ut_TextWriterBase_cpp:
 /* 80010680 0000B580  88 0D 96 9C */	lbz r0, lbl_804BEA1C-_SDA_BASE_(r13)
 /* 80010684 0000B584  7C 00 07 75 */	extsb. r0, r0
 /* 80010688 0000B588  40 82 00 2C */	bne lbl_800106B4
-/* 8001068C 0000B58C  38 6D 96 94 */	addi r3, r13, lbl_804BEA14-_SDA_BASE_
+/* 8001068C 0000B58C  38 6D 96 94 */	addi r3, r13, mDefaultTagProcessor__Q34nw4r2ut17TextWriterBase$$0c$$1-_SDA_BASE_
 /* 80010690 0000B590  4B FF 75 DD */	bl __ct__Q34nw4r2ut19TagProcessorBase$$0c$$1Fv
 /* 80010694 0000B594  3C 80 80 00 */	lis r4, __dt__Q34nw4r2ut19TagProcessorBase$$0c$$1Fv@ha
 /* 80010698 0000B598  3C A0 80 3D */	lis r5, lbl_803CAF58@ha
 /* 8001069C 0000B59C  38 84 7C 7C */	addi r4, r4, __dt__Q34nw4r2ut19TagProcessorBase$$0c$$1Fv@l
-/* 800106A0 0000B5A0  38 6D 96 94 */	addi r3, r13, lbl_804BEA14-_SDA_BASE_
+/* 800106A0 0000B5A0  38 6D 96 94 */	addi r3, r13, mDefaultTagProcessor__Q34nw4r2ut17TextWriterBase$$0c$$1-_SDA_BASE_
 /* 800106A4 0000B5A4  38 A5 AF 58 */	addi r5, r5, lbl_803CAF58@l
 /* 800106A8 0000B5A8  48 0A 11 8D */	bl func_800B1834
 /* 800106AC 0000B5AC  38 00 00 01 */	li r0, 1
@@ -4412,12 +4472,12 @@ lbl_800106B4:
 /* 800106B4 0000B5B4  88 0D 96 9D */	lbz r0, lbl_804BEA1D-_SDA_BASE_(r13)
 /* 800106B8 0000B5B8  7C 00 07 75 */	extsb. r0, r0
 /* 800106BC 0000B5BC  40 82 00 2C */	bne lbl_800106E8
-/* 800106C0 0000B5C0  38 6D 96 98 */	addi r3, r13, lbl_804BEA18-_SDA_BASE_
+/* 800106C0 0000B5C0  38 6D 96 98 */	addi r3, r13, mDefaultTagProcessor__Q34nw4r2ut17TextWriterBase$$0w$$1-_SDA_BASE_
 /* 800106C4 0000B5C4  4B FF 79 11 */	bl __ct__Q34nw4r2ut19TagProcessorBase$$0w$$1Fv
 /* 800106C8 0000B5C8  3C 80 80 00 */	lis r4, __dt__Q34nw4r2ut19TagProcessorBase$$0w$$1Fv@ha
 /* 800106CC 0000B5CC  3C A0 80 3D */	lis r5, lbl_803CAF64@ha
 /* 800106D0 0000B5D0  38 84 7F E4 */	addi r4, r4, __dt__Q34nw4r2ut19TagProcessorBase$$0w$$1Fv@l
-/* 800106D4 0000B5D4  38 6D 96 98 */	addi r3, r13, lbl_804BEA18-_SDA_BASE_
+/* 800106D4 0000B5D4  38 6D 96 98 */	addi r3, r13, mDefaultTagProcessor__Q34nw4r2ut17TextWriterBase$$0w$$1-_SDA_BASE_
 /* 800106D8 0000B5D8  38 A5 AF 64 */	addi r5, r5, lbl_803CAF64@l
 /* 800106DC 0000B5DC  48 0A 11 59 */	bl func_800B1834
 /* 800106E0 0000B5E0  38 00 00 01 */	li r0, 1

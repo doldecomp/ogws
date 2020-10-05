@@ -4,18 +4,6 @@
 
 .balign 8
 
-.global lbl_804BFA48
-lbl_804BFA48:
-	.incbin "baserom.dol", 0x3C8688, 0x4
-.global lbl_804BFA4C
-lbl_804BFA4C:
-	.incbin "baserom.dol", 0x3C868C, 0x4
-.global lbl_804BFA50
-lbl_804BFA50:
-	.incbin "baserom.dol", 0x3C8690, 0x8
-.global lbl_804BFA58
-lbl_804BFA58:
-	.incbin "baserom.dol", 0x3C8698, 0x8
 .global lbl_804BFA60
 lbl_804BFA60:
 	.incbin "baserom.dol", 0x3C86A0, 0x8
