@@ -153,9 +153,9 @@ lbl_8000C6C4:
 /* 8000C6FC 000075FC  38 21 00 20 */	addi r1, r1, 0x20
 /* 8000C700 00007600  4E 80 00 20 */	blr 
 
-# Printf__Q34nw4r2ut17TextWriterBase<c>FPCce
-.global Printf__Q34nw4r2ut17TextWriterBase$$0c$$1FPCce
-Printf__Q34nw4r2ut17TextWriterBase$$0c$$1FPCce:
+# VPrintf__Q34nw4r2ut17TextWriterBase<c>FPCcP16__va_list_struct
+.global VPrintf__Q34nw4r2ut17TextWriterBase$$0c$$1FPCcP16__va_list_struct
+VPrintf__Q34nw4r2ut17TextWriterBase$$0c$$1FPCcP16__va_list_struct:
 /* 8000C704 00007604  94 21 FF 70 */	stwu r1, -0x90(r1)
 /* 8000C708 00007608  7C 08 02 A6 */	mflr r0
 /* 8000C70C 0000760C  90 01 00 94 */	stw r0, 0x94(r1)
@@ -183,7 +183,7 @@ lbl_8000C75C:
 /* 8000C75C 0000765C  80 8D 80 08 */	lwz r4, mFormatBufferSize__Q34nw4r2ut17TextWriterBase$$0c$$1-_SDA_BASE_(r13)
 /* 8000C760 00007660  7F C3 F3 78 */	mr r3, r30
 /* 8000C764 00007664  7C E5 3B 78 */	mr r5, r7
-/* 8000C768 00007668  48 0A AC 95 */	bl func_800B73FC
+/* 8000C768 00007668  48 0A AC 95 */	bl vsnprintf
 /* 8000C76C 0000766C  88 1D 00 00 */	lbz r0, 0(r29)
 /* 8000C770 00007670  98 1F 00 08 */	stb r0, 8(r31)
 /* 8000C774 00007674  88 1D 00 01 */	lbz r0, 1(r29)
@@ -463,7 +463,7 @@ CalcLineRectImpl__Q34nw4r2ut17TextWriterBase$$0c$$1FPQ34nw4r2ut4RectPPCci:
 /* 8000CB9C 00007A9C  DB 61 01 20 */	stfd f27, 0x120(r1)
 /* 8000CBA0 00007AA0  F3 61 01 28 */	psq_st f27, 296(r1), 0, qr0
 /* 8000CBA4 00007AA4  39 61 01 20 */	addi r11, r1, 0x120
-/* 8000CBA8 00007AA8  48 0A 51 81 */	bl func_800B1D28
+/* 8000CBA8 00007AA8  48 0A 51 81 */	bl _savegpr_20
 /* 8000CBAC 00007AAC  C0 23 00 4C */	lfs f1, 0x4c(r3)
 /* 8000CBB0 00007AB0  7C 76 1B 78 */	mr r22, r3
 /* 8000CBB4 00007AB4  C0 02 80 28 */	lfs f0, lbl_804BFA48-_SDA2_BASE_(r2)
@@ -896,7 +896,7 @@ lbl_8000D1B8:
 /* 8000D1D8 000080D8  E3 61 01 28 */	psq_l f27, 296(r1), 0, qr0
 /* 8000D1DC 000080DC  39 61 01 20 */	addi r11, r1, 0x120
 /* 8000D1E0 000080E0  CB 61 01 20 */	lfd f27, 0x120(r1)
-/* 8000D1E4 000080E4  48 0A 4B 91 */	bl func_800B1D74
+/* 8000D1E4 000080E4  48 0A 4B 91 */	bl _restgpr_20
 /* 8000D1E8 000080E8  80 01 01 74 */	lwz r0, 0x174(r1)
 /* 8000D1EC 000080EC  7C 08 03 A6 */	mtlr r0
 /* 8000D1F0 000080F0  38 21 01 70 */	addi r1, r1, 0x170
@@ -1027,7 +1027,7 @@ PrintImpl__Q34nw4r2ut17TextWriterBase$$0c$$1FPCci:
 /* 8000D394 00008294  DA C1 01 E0 */	stfd f22, 0x1e0(r1)
 /* 8000D398 00008298  F2 C1 01 E8 */	psq_st f22, 488(r1), 0, qr0
 /* 8000D39C 0000829C  39 61 01 E0 */	addi r11, r1, 0x1e0
-/* 8000D3A0 000082A0  48 0A 49 91 */	bl func_800B1D30
+/* 8000D3A0 000082A0  48 0A 49 91 */	bl _savegpr_22
 /* 8000D3A4 000082A4  C0 23 00 2C */	lfs f1, 0x2c(r3)
 /* 8000D3A8 000082A8  7C 98 23 78 */	mr r24, r4
 /* 8000D3AC 000082AC  C0 02 80 28 */	lfs f0, lbl_804BFA48-_SDA2_BASE_(r2)
@@ -1681,7 +1681,7 @@ lbl_8000DD10:
 /* 8000DD58 00008C58  E2 C1 01 E8 */	psq_l f22, 488(r1), 0, qr0
 /* 8000DD5C 00008C5C  39 61 01 E0 */	addi r11, r1, 0x1e0
 /* 8000DD60 00008C60  CA C1 01 E0 */	lfd f22, 0x1e0(r1)
-/* 8000DD64 00008C64  48 0A 40 19 */	bl func_800B1D7C
+/* 8000DD64 00008C64  48 0A 40 19 */	bl _restgpr_22
 /* 8000DD68 00008C68  80 01 02 84 */	lwz r0, 0x284(r1)
 /* 8000DD6C 00008C6C  7C 08 03 A6 */	mtlr r0
 /* 8000DD70 00008C70  38 21 02 80 */	addi r1, r1, 0x280
@@ -2748,7 +2748,7 @@ CalcLineRectImpl__Q34nw4r2ut17TextWriterBase$$0w$$1FPQ34nw4r2ut4RectPPCwi:
 /* 8000ED50 00009C50  DB 61 01 20 */	stfd f27, 0x120(r1)
 /* 8000ED54 00009C54  F3 61 01 28 */	psq_st f27, 296(r1), 0, qr0
 /* 8000ED58 00009C58  39 61 01 20 */	addi r11, r1, 0x120
-/* 8000ED5C 00009C5C  48 0A 2F CD */	bl func_800B1D28
+/* 8000ED5C 00009C5C  48 0A 2F CD */	bl _savegpr_20
 /* 8000ED60 00009C60  C0 23 00 4C */	lfs f1, 0x4c(r3)
 /* 8000ED64 00009C64  54 DF 08 3C */	slwi r31, r6, 1
 /* 8000ED68 00009C68  C0 02 80 28 */	lfs f0, lbl_804BFA48-_SDA2_BASE_(r2)
@@ -3181,7 +3181,7 @@ lbl_8000F36C:
 /* 8000F38C 0000A28C  E3 61 01 28 */	psq_l f27, 296(r1), 0, qr0
 /* 8000F390 0000A290  39 61 01 20 */	addi r11, r1, 0x120
 /* 8000F394 0000A294  CB 61 01 20 */	lfd f27, 0x120(r1)
-/* 8000F398 0000A298  48 0A 29 DD */	bl func_800B1D74
+/* 8000F398 0000A298  48 0A 29 DD */	bl _restgpr_20
 /* 8000F39C 0000A29C  80 01 01 74 */	lwz r0, 0x174(r1)
 /* 8000F3A0 0000A2A0  7C 08 03 A6 */	mtlr r0
 /* 8000F3A4 0000A2A4  38 21 01 70 */	addi r1, r1, 0x170
@@ -3299,7 +3299,7 @@ PrintImpl__Q34nw4r2ut17TextWriterBase$$0w$$1FPCwi:
 /* 8000F520 0000A420  DA C1 01 E0 */	stfd f22, 0x1e0(r1)
 /* 8000F524 0000A424  F2 C1 01 E8 */	psq_st f22, 488(r1), 0, qr0
 /* 8000F528 0000A428  39 61 01 E0 */	addi r11, r1, 0x1e0
-/* 8000F52C 0000A42C  48 0A 28 05 */	bl func_800B1D30
+/* 8000F52C 0000A42C  48 0A 28 05 */	bl _savegpr_22
 /* 8000F530 0000A430  C0 23 00 2C */	lfs f1, 0x2c(r3)
 /* 8000F534 0000A434  7C 97 23 78 */	mr r23, r4
 /* 8000F538 0000A438  C0 02 80 28 */	lfs f0, lbl_804BFA48-_SDA2_BASE_(r2)
@@ -3962,7 +3962,7 @@ lbl_8000FEC0:
 /* 8000FF08 0000AE08  E2 C1 01 E8 */	psq_l f22, 488(r1), 0, qr0
 /* 8000FF0C 0000AE0C  39 61 01 E0 */	addi r11, r1, 0x1e0
 /* 8000FF10 0000AE10  CA C1 01 E0 */	lfd f22, 0x1e0(r1)
-/* 8000FF14 0000AE14  48 0A 1E 69 */	bl func_800B1D7C
+/* 8000FF14 0000AE14  48 0A 1E 69 */	bl _restgpr_22
 /* 8000FF18 0000AE18  80 01 02 84 */	lwz r0, 0x284(r1)
 /* 8000FF1C 0000AE1C  7C 08 03 A6 */	mtlr r0
 /* 8000FF20 0000AE20  38 21 02 80 */	addi r1, r1, 0x280

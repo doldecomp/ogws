@@ -29,7 +29,7 @@ TEXT_O_FILES := \
 	build/nw4r/ut/ut_ResFont.o \
 	build/nw4r/ut/ut_CharWriter.o \
 	build/asm/nw4r/ut/ut_TextWriterBase.o \
-	build/asm/nw4r/ef/ef_draworder.o \
+	build/nw4r/ef/ef_draworder.o \
 	build/asm/nw4r/ef/ef_effect.o \
 	build/asm/nw4r/ef/ef_effectsystem.o \
 	build/asm/nw4r/ef/ef_emitter.o \

@@ -43,13 +43,13 @@ PPROC   := tools/postprocess.py
 
 # Options
 ASFLAGS := -mgekko -I include
-LDFLAGS := -map $(MAP) -proc gekko -fp hard -nodefaults -nofail
+LDFLAGS := -map $(MAP) -mapunused -proc gekko -fp hard -nodefaults -nofail
 #CFLAGS  := -Cpp_exceptions off -proc gekko -fp hard -O2,p -i include
 
 # Compiler flags for the Target Resident Kernel
-CFLAGS_TRK := -Cpp_exceptions off -proc gekko -fp hard -O4,s -i include/RevoSDK/TRK -nodefaults
+CFLAGS_TRK := -Cpp_exceptions off -proc gekko -fp hard -O4,s -i include/RevoSDK/TRK -I- -i include -nodefaults
 # Compiler flags for NintendoWare for Revolution
-CFLAGS_NW4R := -enum int -inline auto -Cpp_exceptions off -RTTI off -proc gekko -fp hard -O4,p -I- -Iinclude -ir include/nw4r -nodefaults
+CFLAGS_NW4R := -lang c99 -enum int -inline auto -Cpp_exceptions off -RTTI off -proc gekko -fp hard -O4,p  -ir include/nw4r -I- -Iinclude -Iinclude/STL -nodefaults
 
 # elf2dol needs to know these in order to calculate sbss correctly.
 SDATA_PDHR := 10
@@ -61,7 +61,7 @@ ASM_DIRS := asm \
 	asm/RevoSDK/TRK
 
 SRC_DIRS := nw4r RevoSDK \
-	nw4r/ut \
+	nw4r/ut nw4r/ef \
 	RevoSDK/TRK RevoSDK/TRK_old
 
 # Flags for Riidefi's post-processing script

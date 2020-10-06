@@ -9,8 +9,9 @@ namespace nw4r
 		struct CharStrmReader
 		{
 			const char * mStrm;
+			u16 (CharStrmReader::* mFunc)();
 			
-			inline CharStrmReader(u16 (CharStrmReader::*)())
+			inline CharStrmReader(u16 (CharStrmReader::* func)()) : mStrm(NULL), mFunc(func)
 			{
 				
 			}
@@ -31,6 +32,21 @@ namespace nw4r
 			inline void StepStrm(int offset) volatile
 			{
 				mStrm += sizeof(T) * offset;
+			}
+			
+			inline u16 Next()
+			{
+				return (this->*mFunc)();
+			}
+			
+			inline void Set(const char * pStrm)
+			{
+				mStrm = pStrm;
+			}
+			
+			inline void Set(const wchar_t * pStrm)
+			{
+				mStrm = reinterpret_cast<const char *>(pStrm);
 			}
 		};
 	}

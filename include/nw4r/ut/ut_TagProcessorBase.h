@@ -11,8 +11,12 @@ namespace nw4r
 		struct PrintContext
 		{
 			TextWriterBase<T> * mTextWriter;
-			float FLOAT_0x4;
+			
+			const T * PTR_0x4;
+			
 			float FLOAT_0x8;
+			float FLOAT_0xC;
+			int WORD_0x10;
 		};
 		
 		template<typename T>

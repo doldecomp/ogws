@@ -50,12 +50,12 @@ namespace nw4r
 			
 			void InitReaderFunc(FontEncoding);
 			
-			/*
-			CharStrmReader GetCharStrmReader() const
+			
+			inline CharStrmReader GetCharStrmReader() const __attribute__((never_inline))
 			{
-				return CharStrmReader(PTMF_0x4);
+				return CharStrmReader(mReaderFunc);
 			}
-			*/
+			
 			
 			inline Font() : mReaderFunc(&CharStrmReader::ReadNextCharCP1252) {}
 		};

@@ -504,12 +504,12 @@ lbl_80011B50:
 __sinit_$$3ef_effectsystem_cpp:
 /* 80011B8C 0000CA8C  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80011B90 0000CA90  7C 08 02 A6 */	mflr r0
-/* 80011B94 0000CA94  3C C0 80 39 */	lis r6, lbl_80393D88@ha
+/* 80011B94 0000CA94  3C C0 80 39 */	lis r6, __vt__Q34nw4r2ef9DrawOrder@ha
 /* 80011B98 0000CA98  3C A0 80 39 */	lis r5, lbl_80393FCC@ha
 /* 80011B9C 0000CA9C  3C 80 80 39 */	lis r4, lbl_80393F34@ha
 /* 80011BA0 0000CAA0  90 01 00 14 */	stw r0, 0x14(r1)
 /* 80011BA4 0000CAA4  3C 60 80 3D */	lis r3, lbl_803CAF80@ha
-/* 80011BA8 0000CAA8  38 C6 3D 88 */	addi r6, r6, lbl_80393D88@l
+/* 80011BA8 0000CAA8  38 C6 3D 88 */	addi r6, r6, __vt__Q34nw4r2ef9DrawOrder@l
 /* 80011BAC 0000CAAC  38 A5 3F CC */	addi r5, r5, lbl_80393FCC@l
 /* 80011BB0 0000CAB0  38 84 3F 34 */	addi r4, r4, lbl_80393F34@l
 /* 80011BB4 0000CAB4  38 63 AF 80 */	addi r3, r3, lbl_803CAF80@l

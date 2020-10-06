@@ -112,6 +112,8 @@ namespace nw4r
 			inline bool IsWidthFixed() const { return mWidthFixedFlag; }
 			inline void SetCursorX(float x) { mCursor.x = x; }
 			inline void SetCursorY(float y) { mCursor.y = y; }
+			inline void MoveCursorX(float x) { mCursor.x += x; }
+			inline void MoveCursorY(float y) { mCursor.y += y; }
 			inline float GetCursorX() const { return mCursor.x; }
 			inline float GetCursorY() const { return mCursor.y; }
 			
@@ -127,10 +129,15 @@ namespace nw4r
 				mScale.y = y;
 			}
 			
+			inline void SetCursor(float x, float y)
+			{
+				mCursor.x = x;
+				mCursor.y = y;
+			}
 			inline void SetCursor(float x, float y, float z)
 			{
-				SetCursorX(x);
-				SetCursorY(y);
+				mCursor.x = x;
+				mCursor.y = y;
 				mCursor.z = z;
 			}
 			
