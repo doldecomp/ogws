@@ -4,9 +4,11 @@
 
 .balign 0x8
 
-.global lbl_80393DA0
-lbl_80393DA0:
-	.incbin "baserom.dol", 0x38FEA0, 0x68
+.global lbl_80393dc0
+lbl_80393dc0:
+.string "<< NW4R    - EF \tfinal   build: Jun  8 2007 11:16:29 (0x4199_60831) >>"
+.byte 0
+
 .global lbl_80393E08
 lbl_80393E08:
 	.incbin "baserom.dol", 0x38FF08, 0x28

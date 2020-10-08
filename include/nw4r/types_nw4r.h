@@ -12,12 +12,16 @@ namespace nw4r
 	
 	namespace ef
 	{
+		struct DrawOrder;
 		struct DrawInfo;
 		struct Effect;
+		struct EffectSystem;
 		struct Emitter;
+		struct ResEmitter;
 		struct EmitterResource;
 		struct EmitterInheritSetting;
 		struct Particle;
+		struct MemoryManager;
 	}
 	
 	namespace math

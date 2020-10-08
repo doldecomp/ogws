@@ -13,6 +13,8 @@ namespace nw4r
 		{
 			UNKTYPE BeginDraw();
 			UNKTYPE EndDraw();
+			UNKTYPE BeginCalc(bool);
+			UNKTYPE EndCalc();
 			
 			UNKTYPE SendClosing();
 			UNKTYPE DestroyFunc();

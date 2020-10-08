@@ -130,22 +130,22 @@ namespace nw4r
 		
 		float CharWriter::GetFontWidth() const
 		{
-			return mScale.x * mFont->GetWidth();
+			return mScale.mCoords.x * mFont->GetWidth();
 		}
 		
 		float CharWriter::GetFontHeight() const
 		{
-			return mScale.y * mFont->GetHeight();
+			return mScale.mCoords.y * mFont->GetHeight();
 		}
 		
 		float CharWriter::GetFontAscent() const
 		{
-			return mScale.y * mFont->GetAscent();
+			return mScale.mCoords.y * mFont->GetAscent();
 		}
 		
 		float CharWriter::GetFontDescent() const
 		{
-			return mScale.y * mFont->GetDescent();
+			return mScale.mCoords.y * mFont->GetDescent();
 		}
 		
 		void CharWriter::EnableLinearFilter(bool b1, bool b2)
@@ -166,16 +166,16 @@ namespace nw4r
 			if (mWidthFixedFlag)
 			{
 				ret = mFixedWidth;
-				xOfs = (ret - glyph.BYTE_0x6 * mScale.x) / 2 + (glyph.BYTE_0x4 * mScale.x);
+				xOfs = (ret - glyph.BYTE_0x6 * mScale.mCoords.x) / 2 + (glyph.BYTE_0x4 * mScale.mCoords.x);
 			}
 			else
 			{
-				ret = glyph.BYTE_0x6 * mScale.x;
-				xOfs = glyph.BYTE_0x4 * mScale.x;
+				ret = glyph.BYTE_0x6 * mScale.mCoords.x;
+				xOfs = glyph.BYTE_0x4 * mScale.mCoords.x;
 			}
 			
-			PrintGlyph(mCursor.x + xOfs, mCursor.y, mCursor.z, glyph);
-			mCursor.x += ret;
+			PrintGlyph(mCursor.mCoords.x + xOfs, mCursor.mCoords.y, mCursor.mCoords.z, glyph);
+			mCursor.mCoords.x += ret;
 			
 			return ret;
 		}
@@ -215,8 +215,8 @@ namespace nw4r
 			float x2;
 			float y2;
 			
-			x2 = x + (glyph.cellWidth * mScale.x);
-			y2 = y + (glyph.cellHeight * mScale.y);
+			x2 = x + (glyph.cellWidth * mScale.mCoords.x);
+			y2 = y + (glyph.cellHeight * mScale.mCoords.y);
 			
 			left = glyph.SHORT_0x10;
 			normLeft = 0x8000 * left / glyph.SHORT_0xC;

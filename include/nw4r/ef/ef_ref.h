@@ -9,11 +9,34 @@ namespace nw4r
 	{
 		struct ReferencedObject
 		{
-			char UNK_0x0[0x1C];
+			char UNK_0x0[0xC];
+			UNKWORD WORD_0xC;
+			u32 mRefCount; // at 0x10
+			char UNK_0x14[0x8];
 			
 			virtual UNKTYPE SendClosing();
 			virtual UNKTYPE DestroyFunc();
+			
+			inline void Initialize()
+			{
+				mRefCount = 0;
+				WORD_0xC = 1;
+			}
+			
+			inline void UnRef()
+			{
+				if (--mRefCount == 0 && WORD_0xC == 2) SendClosing();
+			}
+			
+			inline void Destroy()
+			{
+				DestroyFunc();
+				WORD_0xC = 2;
+				if (mRefCount == 0) SendClosing();
+			}
 		};
+		
+		typedef ReferencedObject UNKREF;
 	}
 }
 
