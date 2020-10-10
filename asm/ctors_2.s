@@ -2,7 +2,6 @@
 
 .section .ctors, "a"  # 0x80355080 - 0x80355260
 
-.4byte __sinit_$$3ef_effectsystem_cpp
 .4byte __sinit_$$3ef_particlemanager_cpp
 .4byte __sinit_$$3ef_resource_cpp
 .4byte __sinit_$$3ef_emform_cpp

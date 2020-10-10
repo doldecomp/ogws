@@ -4,11 +4,6 @@
 
 .balign 0x8
 
-.global lbl_80393dc0
-lbl_80393dc0:
-.string "<< NW4R    - EF \tfinal   build: Jun  8 2007 11:16:29 (0x4199_60831) >>"
-.byte 0
-
 .global lbl_80393E08
 lbl_80393E08:
 	.incbin "baserom.dol", 0x38FF08, 0x28
@@ -21,8 +16,8 @@ lbl_80393EE8:
 .global lbl_80393F08
 lbl_80393F08:
 	.incbin "baserom.dol", 0x390008, 0x2C
-.global lbl_80393F34
-lbl_80393F34:
+.global __vt__Q34nw4r2ef15EmitFormBuilder
+__vt__Q34nw4r2ef15EmitFormBuilder:
 	.incbin "baserom.dol", 0x390034, 0xC
 .global lbl_80393F40
 lbl_80393F40:
@@ -48,8 +43,8 @@ lbl_80393FA0:
 .global lbl_80393FB0
 lbl_80393FB0:
 	.incbin "baserom.dol", 0x3900B0, 0x1C
-.global lbl_80393FCC
-lbl_80393FCC:
+.global __vt__Q34nw4r2ef19DrawStrategyBuilder
+__vt__Q34nw4r2ef19DrawStrategyBuilder:
 	.incbin "baserom.dol", 0x3900CC, 0xC
 .global lbl_80393FD8
 lbl_80393FD8:

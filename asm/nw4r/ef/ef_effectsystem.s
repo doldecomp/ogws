@@ -1,5 +1,32 @@
 .include "macros.inc"
 
+.section .sbss
+.balign 0x8
+
+gBasicDrawOrder__Q24nw4r2ef: .skip 4
+gBasicDrawStrategyBuilder__Q24nw4r2ef: .skip 4
+gBasicEmitFormBuilder__Q24nw4r2ef: .skip 4
+
+.section .bss
+.balign 0x8
+lbl_803CAF70:
+.skip 0x10
+instance__Q34nw4r2ef12EffectSystem:
+.skip 0x5068
+
+.section .data
+.balign 0x8
+$$296:
+.string "<< NW4R    - EF \tfinal   build: Jun  8 2007 11:16:29 (0x4199_60831) >>"
+
+.section .sdata
+.balign 0x8
+# NW4R_EF_Version__29@unnamed@ef_effectsystem_cpp@
+NW4R_EF_Version__29$$2unnamed$$2ef_effectsystem_cpp$$2:
+.long $$296
+mDisplayVersion__Q34nw4r2ef12EffectSystem:
+.byte 1
+
 .section .text, "ax"  # 0x800076E0 - 0x80355080
 
 .global __ct__Q34nw4r2ef12EffectSystemFv
@@ -11,13 +38,13 @@ __ct__Q34nw4r2ef12EffectSystemFv:
 /* 800114C8 0000C3C8  7C 7F 1B 78 */	mr r31, r3
 /* 800114CC 0000C3CC  38 63 00 10 */	addi r3, r3, 0x10
 /* 800114D0 0000C3D0  48 00 BC A5 */	bl __ct__Q34nw4r2ef13CreationQueueFv
-/* 800114D4 0000C3D4  88 0D 80 14 */	lbz r0, lbl_804BD394-_SDA_BASE_(r13)
+/* 800114D4 0000C3D4  88 0D 80 14 */	lbz r0, mDisplayVersion__Q34nw4r2ef12EffectSystem-_SDA_BASE_(r13)
 /* 800114D8 0000C3D8  2C 00 00 00 */	cmpwi r0, 0
 /* 800114DC 0000C3DC  41 82 00 14 */	beq lbl_800114F0
 /* 800114E0 0000C3E0  38 00 00 00 */	li r0, 0
-/* 800114E4 0000C3E4  80 6D 80 10 */	lwz r3, lbl_804BD390-_SDA_BASE_(r13)
-/* 800114E8 0000C3E8  98 0D 80 14 */	stb r0, lbl_804BD394-_SDA_BASE_(r13)
-/* 800114EC 0000C3EC  48 0D BB 55 */	bl func_800ED040
+/* 800114E4 0000C3E4  80 6D 80 10 */	lwz r3, NW4R_EF_Version__29$$2unnamed$$2ef_effectsystem_cpp$$2-_SDA_BASE_(r13)
+/* 800114E8 0000C3E8  98 0D 80 14 */	stb r0, mDisplayVersion__Q34nw4r2ef12EffectSystem-_SDA_BASE_(r13)
+/* 800114EC 0000C3EC  48 0D BB 55 */	bl OSRegisterVersion
 lbl_800114F0:
 /* 800114F0 0000C3F0  38 00 00 00 */	li r0, 0
 /* 800114F4 0000C3F4  7F E3 FB 78 */	mr r3, r31
@@ -69,8 +96,8 @@ lbl_80011574:
 
 .global GetInstance__Q34nw4r2ef12EffectSystemFv
 GetInstance__Q34nw4r2ef12EffectSystemFv:
-/* 80011594 0000C494  3C 60 80 3D */	lis r3, lbl_803CAF80@ha
-/* 80011598 0000C498  38 63 AF 80 */	addi r3, r3, lbl_803CAF80@l
+/* 80011594 0000C494  3C 60 80 3D */	lis r3, instance__Q34nw4r2ef12EffectSystem@ha
+/* 80011598 0000C498  38 63 AF 80 */	addi r3, r3, instance__Q34nw4r2ef12EffectSystem@l
 /* 8001159C 0000C49C  4E 80 00 20 */	blr 
 
 .global Initialize__Q34nw4r2ef12EffectSystemFUl
@@ -95,7 +122,7 @@ Initialize__Q34nw4r2ef12EffectSystemFUl:
 /* 800115E4 0000C4E4  38 84 16 A0 */	addi r4, r4, __ct__Q34nw4r2ef12ActivityListFv@l
 /* 800115E8 0000C4E8  38 A0 00 00 */	li r5, 0
 /* 800115EC 0000C4EC  38 C0 00 1C */	li r6, 0x1c
-/* 800115F0 0000C4F0  48 0A 02 A5 */	bl func_800B1894
+/* 800115F0 0000C4F0  48 0A 02 A5 */	bl __construct_new_array
 /* 800115F4 0000C4F4  90 7B 50 18 */	stw r3, 0x5018(r27)
 /* 800115F8 0000C4F8  3B 80 00 00 */	li r28, 0
 /* 800115FC 0000C4FC  3B A0 00 00 */	li r29, 0
@@ -127,9 +154,9 @@ lbl_80011658:
 /* 8001165C 0000C55C  7C 1C 00 40 */	cmplw r28, r0
 /* 80011660 0000C560  41 80 FF A8 */	blt lbl_80011608
 /* 80011664 0000C564  38 60 00 00 */	li r3, 0
-/* 80011668 0000C568  38 AD 96 A0 */	addi r5, r13, lbl_804BEA20-_SDA_BASE_
-/* 8001166C 0000C56C  38 8D 96 A4 */	addi r4, r13, lbl_804BEA24-_SDA_BASE_
-/* 80011670 0000C570  38 0D 96 A8 */	addi r0, r13, lbl_804BEA28-_SDA_BASE_
+/* 80011668 0000C568  38 AD 96 A0 */	addi r5, r13, gBasicDrawOrder__Q24nw4r2ef-_SDA_BASE_
+/* 8001166C 0000C56C  38 8D 96 A4 */	addi r4, r13, gBasicDrawStrategyBuilder__Q24nw4r2ef-_SDA_BASE_
+/* 80011670 0000C570  38 0D 96 A8 */	addi r0, r13, gBasicEmitFormBuilder__Q24nw4r2ef-_SDA_BASE_
 /* 80011674 0000C574  90 7B 50 1C */	stw r3, 0x501c(r27)
 /* 80011678 0000C578  39 61 00 20 */	addi r11, r1, 0x20
 /* 8001167C 0000C57C  38 60 00 01 */	li r3, 1
@@ -505,30 +532,30 @@ __sinit_$$3ef_effectsystem_cpp:
 /* 80011B8C 0000CA8C  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80011B90 0000CA90  7C 08 02 A6 */	mflr r0
 /* 80011B94 0000CA94  3C C0 80 39 */	lis r6, __vt__Q34nw4r2ef9DrawOrder@ha
-/* 80011B98 0000CA98  3C A0 80 39 */	lis r5, lbl_80393FCC@ha
-/* 80011B9C 0000CA9C  3C 80 80 39 */	lis r4, lbl_80393F34@ha
+/* 80011B98 0000CA98  3C A0 80 39 */	lis r5, __vt__Q34nw4r2ef19DrawStrategyBuilder@ha
+/* 80011B9C 0000CA9C  3C 80 80 39 */	lis r4, __vt__Q34nw4r2ef15EmitFormBuilder@ha
 /* 80011BA0 0000CAA0  90 01 00 14 */	stw r0, 0x14(r1)
-/* 80011BA4 0000CAA4  3C 60 80 3D */	lis r3, lbl_803CAF80@ha
+/* 80011BA4 0000CAA4  3C 60 80 3D */	lis r3, instance__Q34nw4r2ef12EffectSystem@ha
 /* 80011BA8 0000CAA8  38 C6 3D 88 */	addi r6, r6, __vt__Q34nw4r2ef9DrawOrder@l
-/* 80011BAC 0000CAAC  38 A5 3F CC */	addi r5, r5, lbl_80393FCC@l
-/* 80011BB0 0000CAB0  38 84 3F 34 */	addi r4, r4, lbl_80393F34@l
-/* 80011BB4 0000CAB4  38 63 AF 80 */	addi r3, r3, lbl_803CAF80@l
-/* 80011BB8 0000CAB8  90 CD 96 A0 */	stw r6, lbl_804BEA20-_SDA_BASE_(r13)
+/* 80011BAC 0000CAAC  38 A5 3F CC */	addi r5, r5, __vt__Q34nw4r2ef19DrawStrategyBuilder@l
+/* 80011BB0 0000CAB0  38 84 3F 34 */	addi r4, r4, __vt__Q34nw4r2ef15EmitFormBuilder@l
+/* 80011BB4 0000CAB4  38 63 AF 80 */	addi r3, r3, instance__Q34nw4r2ef12EffectSystem@l
+/* 80011BB8 0000CAB8  90 CD 96 A0 */	stw r6, gBasicDrawOrder__Q24nw4r2ef-_SDA_BASE_(r13)
 /* 80011BBC 0000CABC  38 63 00 10 */	addi r3, r3, 0x10
-/* 80011BC0 0000CAC0  90 AD 96 A4 */	stw r5, lbl_804BEA24-_SDA_BASE_(r13)
-/* 80011BC4 0000CAC4  90 8D 96 A8 */	stw r4, lbl_804BEA28-_SDA_BASE_(r13)
+/* 80011BC0 0000CAC0  90 AD 96 A4 */	stw r5, gBasicDrawStrategyBuilder__Q24nw4r2ef-_SDA_BASE_(r13)
+/* 80011BC4 0000CAC4  90 8D 96 A8 */	stw r4, gBasicEmitFormBuilder__Q24nw4r2ef-_SDA_BASE_(r13)
 /* 80011BC8 0000CAC8  48 00 B5 AD */	bl __ct__Q34nw4r2ef13CreationQueueFv
-/* 80011BCC 0000CACC  88 0D 80 14 */	lbz r0, lbl_804BD394-_SDA_BASE_(r13)
+/* 80011BCC 0000CACC  88 0D 80 14 */	lbz r0, mDisplayVersion__Q34nw4r2ef12EffectSystem-_SDA_BASE_(r13)
 /* 80011BD0 0000CAD0  2C 00 00 00 */	cmpwi r0, 0
 /* 80011BD4 0000CAD4  41 82 00 14 */	beq lbl_80011BE8
 /* 80011BD8 0000CAD8  38 00 00 00 */	li r0, 0
-/* 80011BDC 0000CADC  80 6D 80 10 */	lwz r3, lbl_804BD390-_SDA_BASE_(r13)
-/* 80011BE0 0000CAE0  98 0D 80 14 */	stb r0, lbl_804BD394-_SDA_BASE_(r13)
-/* 80011BE4 0000CAE4  48 0D B4 5D */	bl func_800ED040
+/* 80011BDC 0000CADC  80 6D 80 10 */	lwz r3, NW4R_EF_Version__29$$2unnamed$$2ef_effectsystem_cpp$$2-_SDA_BASE_(r13)
+/* 80011BE0 0000CAE0  98 0D 80 14 */	stb r0, mDisplayVersion__Q34nw4r2ef12EffectSystem-_SDA_BASE_(r13)
+/* 80011BE4 0000CAE4  48 0D B4 5D */	bl OSRegisterVersion
 lbl_80011BE8:
-/* 80011BE8 0000CAE8  3C C0 80 3D */	lis r6, lbl_803CAF80@ha
+/* 80011BE8 0000CAE8  3C C0 80 3D */	lis r6, instance__Q34nw4r2ef12EffectSystem@ha
 /* 80011BEC 0000CAEC  38 00 00 00 */	li r0, 0
-/* 80011BF0 0000CAF0  38 66 AF 80 */	addi r3, r6, lbl_803CAF80@l
+/* 80011BF0 0000CAF0  38 66 AF 80 */	addi r3, r6, instance__Q34nw4r2ef12EffectSystem@l
 /* 80011BF4 0000CAF4  3C 80 80 01 */	lis r4, __dt__Q34nw4r2ef12EffectSystemFv@ha
 /* 80011BF8 0000CAF8  3C A0 80 3D */	lis r5, lbl_803CAF70@ha
 /* 80011BFC 0000CAFC  90 06 AF 80 */	stw r0, -0x5080(r6)
@@ -541,3 +568,6 @@ lbl_80011BE8:
 /* 80011C18 0000CB18  7C 08 03 A6 */	mtlr r0
 /* 80011C1C 0000CB1C  38 21 00 10 */	addi r1, r1, 0x10
 /* 80011C20 0000CB20  4E 80 00 20 */	blr 
+
+.section .ctors
+.long __sinit_$$3ef_effectsystem_cpp

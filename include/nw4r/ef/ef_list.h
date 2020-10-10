@@ -7,17 +7,28 @@ namespace nw4r
 {
 	namespace ef
 	{
+		//sizeof(ActivityList) = 0x1C
 		struct ActivityList
 		{
 			ut::List mActive;
 			ut::List mClosing;
 			u16 SHORT_0x18;
 			
-			inline ActivityList(u16 offset)
+			inline void SetOffset(u16 offset)
 			{
 				ut::List_Init(&mActive, offset);
 				ut::List_Init(&mClosing, offset);
 				SHORT_0x18 = 0;
+			}
+			
+			inline ActivityList(u16 offset)
+			{
+				SetOffset(offset);
+			}
+			
+			inline ActivityList()
+			{
+				SetOffset(0);
 			}
 			
 			inline void Initialize()
@@ -37,26 +48,17 @@ namespace nw4r
 			{
 				ut::List_Append(&mActive, pNode);
 				SHORT_0x18++;
-				//static_cast<ReferencedObject *>(pNode)->WORD_0xC = 1;
 			}
 			
 			inline void ToClosing(void * pNode)
 			{
 				ut::List_Remove(&mActive, pNode);
 				ut::List_Append(&mClosing, pNode);
-				//static_cast<ReferencedObject *>(pNode)->WORD_0xC = 3;
 			}
 			
 			inline void ToWait(void * pNode)
 			{
 				SHORT_0x18--;
-				/*
-				ReferencedObject * pRef = static_cast<ReferencedObject *>(pNode);
-				
-				pRef->DestroyFunc();
-				pRef->WORD_0xC = 2;
-				if (pRef->mRefCount == 0) pRef->SendClosing();
-				*/
 			}
 		};
 	}

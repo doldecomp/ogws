@@ -15,7 +15,7 @@ namespace nw4r
 		{
 			EffectSystem * mSystem; // at 0x20
 			ActivityList mEmitters; // at 0x24
-			char UNK_0x40[0x4];
+			u32 INDEX_0x40;
 			UNKWORD WORD_0x44;
 			UNKWORD WORD_0x48;
 			UNKWORD WORD_0x4C;

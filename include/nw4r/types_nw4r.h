@@ -14,13 +14,17 @@ namespace nw4r
 	{
 		struct DrawOrder;
 		struct DrawInfo;
+		struct DrawStrategyBuilder;
 		struct Effect;
 		struct EffectSystem;
+		struct EffectProject;
 		struct Emitter;
+		struct EmitFormBuilder;
 		struct ResEmitter;
 		struct EmitterResource;
 		struct EmitterInheritSetting;
 		struct Particle;
+		struct ParticleManager;
 		struct MemoryManager;
 	}
 	

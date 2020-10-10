@@ -31,7 +31,7 @@ TEXT_O_FILES := \
 	build/asm/nw4r/ut/ut_TextWriterBase.o \
 	build/nw4r/ef/ef_draworder.o \
 	build/nw4r/ef/ef_effect.o \
-	build/asm/nw4r/ef/ef_effectsystem.o \
+	build/nw4r/ef/ef_effectsystem.o \
 	build/asm/nw4r/ef/ef_emitter.o \
 	build/asm/nw4r/ef/ef_animcurve.o \
 	build/asm/nw4r/ef/ef_particle.o \

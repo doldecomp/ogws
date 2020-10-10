@@ -3,13 +3,8 @@
 .section .sdata, "wa"  # 0x804BD380 - 0x804BE9E0
 
 .balign 0x8
+.balign 0x10
 
-.global lbl_804BD390
-lbl_804BD390:
-	.incbin "baserom.dol", 0x3C7010, 0x4
-.global lbl_804BD394
-lbl_804BD394:
-	.incbin "baserom.dol", 0x3C7014, 0xC
 .global lbl_804BD3A0
 lbl_804BD3A0:
 	.incbin "baserom.dol", 0x3C7020, 0x20

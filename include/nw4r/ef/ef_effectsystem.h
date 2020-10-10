@@ -2,6 +2,8 @@
 #define NW4R_EF_EFFECTSYSTEM
 #include "types_nw4r.h"
 #include "ef_creationqueue.h"
+#include "ef_ref.h"
+#include "ef_list.h"
 
 namespace nw4r
 {
@@ -9,17 +11,42 @@ namespace nw4r
 	{
 		struct EffectSystem
 		{
-			MemoryManager * mMemoryManager;
-			DrawOrder * mDrawOrder;
-			char UNK_0x8[0x8];
-			CreationQueue mCreationQueue;
+			static bool mDisplayVersion;
+			
+			static EffectSystem instance;
+			
+			MemoryManager * mMemoryManager; // at 0x0
+			DrawOrder * mDrawOrder; // at 0x4
+			DrawStrategyBuilder * mDrawStrategyBuilder; // at 0x8
+			EmitFormBuilder * mEmitFormBuilder; // at 0xc
+			CreationQueue mCreationQueue; // at 0x10
+			char UNK_0x14[0x5000];
+			u32 INT_0x5014;
+			ActivityList * ARR_0x5018;
+			UNKWORD WORD_0x501C;
+			char UNK_0x5020[0x44];
+			char BYTE_0x5064;
 			
 			inline MemoryManager * GetMemoryManager() const
 			{
 				return mMemoryManager;
 			}
 			
-			UNKTYPE Closing(Effect *);
+			EffectSystem();
+			~EffectSystem();
+			
+			static EffectSystem * GetInstance();
+			
+			bool Initialize(u32);
+			bool Closing(Effect *);
+			Effect * CreateEffect(const char *, u32, u16);
+			bool RetireEffect(Effect *);
+			u16 RetireEffectAll(u32);
+			u16 RetireEmitterAll(u32);
+			u16 RetireParticleAll(u32);
+			
+			void Calc(u32, bool);
+			void Draw(const DrawInfo &, u32);
 		};
 	}
 }

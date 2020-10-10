@@ -8,6 +8,8 @@ namespace nw4r
 	{
 		struct CreationQueue
 		{
+			CreationQueue();
+			
 			UNKWORD WORD_0x0;
 			
 			inline bool IsEmpty()
