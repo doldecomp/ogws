@@ -1,5 +1,5 @@
-#ifndef NW4R_EF_EMFORM
-#define NW4R_EF_EMFORM
+#ifndef NW4R_EF_EMFORM_H
+#define NW4R_EF_EMFORM_H
 #include "types_nw4r.h"
 
 namespace nw4r
@@ -13,7 +13,7 @@ namespace nw4r
 		
 		struct EmitFormBuilder
 		{
-			virtual UNKTYPE Create(EmitFormType);
+			virtual EmitterForm * Create(EmitFormType);
 		};
 	}
 }

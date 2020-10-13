@@ -3,6 +3,7 @@
 #include "types_nw4r.h"
 #include "ef_creationqueue.h"
 #include "ef_ref.h"
+#include "ef_rand.h"
 #include "ef_list.h"
 
 namespace nw4r
@@ -23,8 +24,11 @@ namespace nw4r
 			char UNK_0x14[0x5000];
 			u32 INT_0x5014;
 			ActivityList * ARR_0x5018;
-			UNKWORD WORD_0x501C;
-			char UNK_0x5020[0x44];
+			Random mRandom; // at 0x501C
+			math::VEC3 VEC_0x5020;
+			math::MTX34 MTX_0x502C;
+			float FLOAT_0x505C;
+			float FLOAT_0x5060;
 			char BYTE_0x5064;
 			
 			inline MemoryManager * GetMemoryManager() const

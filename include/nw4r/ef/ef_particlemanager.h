@@ -16,18 +16,29 @@ namespace nw4r
 			UNKTYPE BeginCalc(bool);
 			UNKTYPE EndCalc();
 			
-			UNKTYPE SendClosing();
+			bool SendClosing();
 			UNKTYPE DestroyFunc();
-			virtual UNKTYPE Initialize(Emitter *, EmitterResource *);
+			virtual bool Initialize(Emitter *, EmitterResource *);
 			virtual UNKTYPE CreateParticle(u16, math::VEC3, math::VEC3, const math::MTX34 *, float, const EmitterInheritSetting *, Particle *, u16);
 			virtual UNKTYPE Calc();
 			virtual UNKTYPE Draw(const DrawInfo &);
 			
-			char UNK_0x20[0x18];
+			UNKREF * REF_0x20;
+			EmitterResource * mResource; // at 0x24
+			UNKWORD FLAGS_0x28;
+			char UNK_0x2C[0xC];
 			ActivityList EFLIST_0x38;
-			char UNK_0x52[0x35];
+			char UNK_0x54[0x34];
 			
+			s8 BYTE_0x88;
 			u8 BYTE_0x89;
+			bool BOOL_0x8A;
+			
+			UNKWORD FLAGS_0xB4;
+			
+			u16 RetireParticleAll();
+			
+			UNKTYPE CalcGlobalMtx(math::MTX34 *);
 		};
 	}
 }

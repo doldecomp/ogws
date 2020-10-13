@@ -14,13 +14,18 @@ namespace nw4r
 			u32 mRefCount; // at 0x10
 			char UNK_0x14[0x8];
 			
-			virtual UNKTYPE SendClosing();
+			virtual bool SendClosing();
 			virtual UNKTYPE DestroyFunc();
 			
 			inline void Initialize()
 			{
 				mRefCount = 0;
 				WORD_0xC = 1;
+			}
+			
+			inline void Ref()
+			{
+				mRefCount++;
 			}
 			
 			inline void UnRef()

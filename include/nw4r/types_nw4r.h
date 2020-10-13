@@ -22,10 +22,12 @@ namespace nw4r
 		struct EmitFormBuilder;
 		struct ResEmitter;
 		struct EmitterResource;
+		struct EmitterForm;
 		struct EmitterInheritSetting;
 		struct Particle;
 		struct ParticleManager;
 		struct MemoryManager;
+		struct MemoryManagerBase;
 	}
 	
 	namespace math

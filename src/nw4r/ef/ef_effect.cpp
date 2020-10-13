@@ -3,8 +3,8 @@
 #include "ef_effectsystem.h"
 #include "ef_memorymanager.h"
 #include "ef_emitter.h"
-#include "ef_emitterresource.h"
 #include "ef_util.h"
+#include "ef_particle.h"
 #include "ef_draworder.h"
 
 namespace nw4r
@@ -33,7 +33,7 @@ namespace nw4r
 			MTX34Identity(&mRootMtx);
 			
 			mSystem = pSystem;
-			WORD_0x44 = 0;
+			mEmissionPrologue = NULL;
 			WORD_0x48 = 0;
 			WORD_0x4C = 0;
 			mFlags = 0;
@@ -60,9 +60,9 @@ namespace nw4r
 			return true;
 		}
 		
-		UNKTYPE Effect::SendClosing()
+		bool Effect::SendClosing()
 		{
-			mSystem->Closing(this);
+			return mSystem->Closing(this);
 		}
 		
 		UNKTYPE Effect::DestroyFunc()
@@ -72,7 +72,7 @@ namespace nw4r
 		
 		bool Effect::Closing(Emitter * pEmitter)
 		{
-			if (pEmitter->EMITTER_0xF4) pEmitter->EMITTER_0xF4->UnRef();
+			if (pEmitter->mParent) pEmitter->mParent->UnRef();
 			
 			if (pEmitter->REF_0xF8)
 			{
@@ -80,7 +80,7 @@ namespace nw4r
 				pEmitter->REF_0xF8 = NULL;
 			}
 			
-			pEmitter->REF_0xBC->UnRef();
+			pEmitter->mEffect->UnRef();
 			
 			mEmitters.ToClosing(pEmitter);
 			pEmitter->WORD_0xC = 3;
@@ -180,7 +180,7 @@ namespace nw4r
 					
 					ParticleManager * curManager = NULL;
 					
-					while (curManager = (ParticleManager *)List_GetNext(&curEmitter->EFLIST_0xC0.mActive, curManager)) //80010E9C
+					while (curManager = (ParticleManager *)List_GetNext(&curEmitter->mManagers.mActive, curManager)) //80010E9C
 					{
 						//80010E90
 						curManager->BeginCalc(false);
@@ -274,7 +274,7 @@ namespace nw4r
 							
 							ParticleManager * curManager = NULL;
 							
-							while (curManager = (ParticleManager *)List_GetNext(&pEmitter->EFLIST_0xC0.mActive, curManager))
+							while (curManager = (ParticleManager *)List_GetNext(&pEmitter->mManagers.mActive, curManager))
 							{
 								curManager->BeginCalc(true);
 							}
@@ -296,7 +296,7 @@ namespace nw4r
 					
 					ParticleManager * curManager = NULL;
 					
-					while (curManager = (ParticleManager *)List_GetNext(&pEmitter->EFLIST_0xC0.mActive, curManager)) //80011178
+					while (curManager = (ParticleManager *)List_GetNext(&pEmitter->mManagers.mActive, curManager)) //80011178
 					{
 						//80011170
 						curManager->EndCalc();
@@ -354,7 +354,7 @@ namespace nw4r
 					bool flag = false;
 					Emitter * otherEmitter = curEmitter;
 					
-					while (!flag && (otherEmitter = otherEmitter->EMITTER_0xF4)) //8001130C
+					while (!flag && (otherEmitter = otherEmitter->mParent)) //8001130C
 					{
 						if (otherEmitter == pEmitter) flag = true;
 					}
@@ -378,7 +378,7 @@ namespace nw4r
 			
 			while (curEmitter = (Emitter *)List_GetNext(&mEmitters.mActive, curEmitter))
 			{
-				if (!curEmitter->EMITTER_0xF4) curEmitter->SetMtxDirty();
+				if (!curEmitter->mParent) curEmitter->SetMtxDirty();
 			}
 		}
 		
