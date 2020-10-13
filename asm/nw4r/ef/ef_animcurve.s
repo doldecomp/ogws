@@ -2,6 +2,27 @@
 
 # .text1 = .text
 
+.section .sdata2
+
+.balign 8
+
+lbl_804BFAA0: .single 0e0
+.balign 8
+lbl_804BFAA8:
+	.long 0x43300000
+	.long 0x00000000
+lbl_804BFAB0:
+	.long 0x43300000
+	.long 0x80000000
+lbl_804BFAB8: .single 0e1
+lbl_804BFABC: .long 0x34000000
+lbl_804BFAC0: .single 0e65536
+lbl_804BFAC4: .single 0e3
+lbl_804BFAC8: .single 0e2
+lbl_804BFACC: .single 0e1.5
+lbl_804BFAD0: .single 0e-2
+lbl_804BFAD4: .single 0e255
+
 .section .text, "ax"  # 0x800076E0 - 0x80355080
 
 .global AnimCurveExecuteU8__Q24nw4r2efFPUcPUcUlUsUl
