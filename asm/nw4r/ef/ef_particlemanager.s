@@ -1,6 +1,8 @@
 .include "macros.inc"
 
 # .text1 = .text
+.section .ctors
+	.long __sinit_$$3ef_particlemanager_cpp
 
 .section .data
 .balign 0x8

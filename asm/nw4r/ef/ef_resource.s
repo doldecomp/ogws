@@ -1,11 +1,21 @@
 .include "macros.inc"
 
+.section .bss
+.balign 8
+
+.global mResource__Q34nw4r2ef8Resource
+mResource__Q34nw4r2ef8Resource:
+	.skip 0x20
+
+.section .ctors
+	.long __sinit_$$3ef_resource_cpp
+
 .section .text, "ax"  # 0x800076E0 - 0x80355080
 
 .global GetInstance__Q34nw4r2ef8ResourceFv
 GetInstance__Q34nw4r2ef8ResourceFv:
-/* 8001B3FC 000162FC  3C 60 80 3D */	lis r3, lbl_803D0018@ha
-/* 8001B400 00016300  38 63 00 18 */	addi r3, r3, lbl_803D0018@l
+/* 8001B3FC 000162FC  3C 60 80 3D */	lis r3, mResource__Q34nw4r2ef8Resource@ha
+/* 8001B400 00016300  38 63 00 18 */	addi r3, r3, mResource__Q34nw4r2ef8Resource@l
 /* 8001B404 00016304  4E 80 00 20 */	blr 
 
 .global Initialize__Q34nw4r2ef8ResourceFv
@@ -951,8 +961,8 @@ __sinit_$$3ef_resource_cpp:
 /* 8001C0A0 00016FA0  38 80 00 04 */	li r4, 4
 /* 8001C0A4 00016FA4  90 01 00 14 */	stw r0, 0x14(r1)
 /* 8001C0A8 00016FA8  93 E1 00 0C */	stw r31, 0xc(r1)
-/* 8001C0AC 00016FAC  3F E0 80 3D */	lis r31, lbl_803D0018@ha
-/* 8001C0B0 00016FB0  38 7F 00 18 */	addi r3, r31, lbl_803D0018@l
+/* 8001C0AC 00016FAC  3F E0 80 3D */	lis r31, mResource__Q34nw4r2ef8Resource@ha
+/* 8001C0B0 00016FB0  38 7F 00 18 */	addi r3, r31, mResource__Q34nw4r2ef8Resource@l
 /* 8001C0B4 00016FB4  4B FE B6 2D */	bl List_Init__Q24nw4r2utFPQ34nw4r2ut4ListUs
 /* 8001C0B8 00016FB8  3B FF 00 18 */	addi r31, r31, 0x18
 /* 8001C0BC 00016FBC  38 80 00 04 */	li r4, 4
