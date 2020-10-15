@@ -23,7 +23,7 @@ namespace nw4r
 			virtual UNKTYPE Calc();
 			virtual UNKTYPE Draw(const DrawInfo &);
 			
-			UNKREF * REF_0x20;
+			Emitter * mEmitter; // at 0x20
 			EmitterResource * mResource; // at 0x24
 			UNKWORD FLAGS_0x28;
 			char UNK_0x2C[0xC];

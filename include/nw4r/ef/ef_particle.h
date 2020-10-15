@@ -9,8 +9,13 @@ namespace nw4r
 	{
 		struct Particle : ReferencedObject
 		{
+			char UNK_0x20[0x8C];
+			
 			math::VEC3 VEC_0xAC;
 			math::VEC3 VEC_0xB8;
+			
+			char UNK_0xC4[0x4];
+			
 			ParticleManager * mManager; // at 0xc8
 		};
 	}

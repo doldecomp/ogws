@@ -40,7 +40,7 @@ TEXT_O_FILES := \
 	build/asm/nw4r/ef/ef_util.o \
 	build/nw4r/ef/ef_handle.o \
 	build/asm/nw4r/ef/ef_emitterform.o \
-	build/asm/nw4r/ef/ef_creationqueue.o \
+	build/nw4r/ef/ef_creationqueue.o \
 	build/asm/nw4r/ef/ef_emform.o \
 	build/asm/nw4r/ef/ef_point.o \
 	build/asm/nw4r/ef/ef_line.o \
