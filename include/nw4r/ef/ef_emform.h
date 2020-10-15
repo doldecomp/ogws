@@ -8,7 +8,13 @@ namespace nw4r
 	{
 		enum EmitFormType
 		{
-			UNKVALS // Empty enums are ill-formed
+			EmitForm_Disc,
+			EmitForm_Line,
+			EmitForm_Cube = 5,
+			EmitForm_Cylinder = 7,
+			EmitForm_Sphere,
+			EmitForm_Point,
+			EmitForm_Torus
 		};
 		
 		struct EmitFormBuilder

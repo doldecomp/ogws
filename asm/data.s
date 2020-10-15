@@ -4,32 +4,26 @@
 
 .balign 0x8
 
-.global lbl_80393F08
-lbl_80393F08:
-	.incbin "baserom.dol", 0x390008, 0x2C
-.global __vt__Q34nw4r2ef15EmitFormBuilder
-__vt__Q34nw4r2ef15EmitFormBuilder:
-	.incbin "baserom.dol", 0x390034, 0xC
-.global lbl_80393F40
-lbl_80393F40:
+.global __vt__Q34nw4r2ef16EmitterFormPoint
+__vt__Q34nw4r2ef16EmitterFormPoint:
 	.incbin "baserom.dol", 0x390040, 0x10
-.global lbl_80393F50
-lbl_80393F50:
+.global __vt__Q34nw4r2ef15EmitterFormLine
+__vt__Q34nw4r2ef15EmitterFormLine:
 	.incbin "baserom.dol", 0x390050, 0x10
-.global lbl_80393F60
-lbl_80393F60:
+.global __vt__Q34nw4r2ef15EmitterFormDisc
+__vt__Q34nw4r2ef15EmitterFormDisc:
 	.incbin "baserom.dol", 0x390060, 0x10
-.global lbl_80393F70
-lbl_80393F70:
+.global __vt__Q34nw4r2ef17EmitterFormSphere
+__vt__Q34nw4r2ef17EmitterFormSphere:
 	.incbin "baserom.dol", 0x390070, 0x10
-.global lbl_80393F80
-lbl_80393F80:
+.global __vt__Q34nw4r2ef19EmitterFormCylinder
+__vt__Q34nw4r2ef19EmitterFormCylinder:
 	.incbin "baserom.dol", 0x390080, 0x10
-.global lbl_80393F90
-lbl_80393F90:
+.global __vt__Q34nw4r2ef16EmitterFormTorus
+__vt__Q34nw4r2ef16EmitterFormTorus:
 	.incbin "baserom.dol", 0x390090, 0x10
-.global lbl_80393FA0
-lbl_80393FA0:
+.global __vt__Q34nw4r2ef15EmitterFormCube
+__vt__Q34nw4r2ef15EmitterFormCube:
 	.incbin "baserom.dol", 0x3900A0, 0x10
 .global lbl_80393FB0
 lbl_80393FB0:
