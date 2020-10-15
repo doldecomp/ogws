@@ -1,5 +1,15 @@
 .include "macros.inc"
 
+.section .sdata2, "a"  # 0x804BFA20 - 0x804C69E0
+
+.balign 8
+
+lbl_804BFB58: .single 0e0
+lbl_804BFB5C: .single 0e1
+lbl_804BFB60: .single 0e1.1920929E-7
+lbl_804BFB64: .single 0e1.17549435E-38
+lbl_804BFB68: .double 0e-1
+
 .section .text, "ax"  # 0x800076E0 - 0x80355080
 
 .global UtlistToArray__Q24nw4r2efFPCQ34nw4r2ut4ListPPvi

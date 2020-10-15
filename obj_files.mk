@@ -38,7 +38,7 @@ TEXT_O_FILES := \
 	build/asm/nw4r/ef/ef_particlemanager.o \
 	build/asm/nw4r/ef/ef_resource.o \
 	build/asm/nw4r/ef/ef_util.o \
-	build/asm/nw4r/ef/ef_handle.o \
+	build/nw4r/ef/ef_handle.o \
 	build/asm/nw4r/ef/ef_emitterform.o \
 	build/asm/nw4r/ef/ef_creationqueue.o \
 	build/asm/nw4r/ef/ef_emform.o \
