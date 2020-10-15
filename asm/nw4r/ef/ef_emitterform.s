@@ -2,6 +2,21 @@
 
 # .text1 = .text
 
+.section .sdata2
+.balign 8
+
+lbl_804BFB70: .single 0e0
+lbl_804BFB74: .single 0e65536
+lbl_804BFB78: .single 0e2
+lbl_804BFB7C: .single 0e3.1415927
+lbl_804BFB80: .single 0e40.743664
+lbl_804BFB84: .single 0e1
+lbl_804BFB88: .single 0e0.01
+.balign 8
+lbl_804BFB90: .double 0e4.503599627370496E15
+lbl_804BFB98: .double 0e4.503601774854144E15
+lbl_804BFBA0: .single 0e65535
+
 .section .text, "ax"  # 0x800076E0 - 0x80355080
 
 .global CalcVelocity__Q34nw4r2ef11EmitterFormCFPQ34nw4r4math4VEC3PQ34nw4r2ef7EmitterRCQ34nw4r4math4VEC3RCQ34nw4r4math4VEC3RCQ34nw4r4math4VEC3RCQ34nw4r4math4VEC3
