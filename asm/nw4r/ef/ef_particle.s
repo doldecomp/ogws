@@ -1,13 +1,44 @@
 .include "macros.inc"
 
 # .text1 = .text
+.section .sdata2, "a"  # 0x804BFA20 - 0x804C69E0
+.balign 8
+
+lbl_804BFAD8: .single 0e65536
+lbl_804BFADC: .single 0e2
+lbl_804BFAE0: .single 0e1
+lbl_804BFAE4: .single 0e100
+lbl_804BFAE8: .single 0e128
+lbl_804BFAEC: .single 0e3.1415927
+lbl_804BFAF0: .single 0e0.5
+.balign 8
+lbl_804BFAF8:
+	.long 0x43300000
+	.long 0x00000000
+lbl_804BFB00: .single 0e0
+lbl_804BFB04: .single 0e0.01
+lbl_804BFB08: .single 0e0.024543693
+.balign 8
+lbl_804BFB10:
+	.long 0x43300000
+	.long 0x80000000
+lbl_804BFB18: .single 0e6.2831855
+
+.section .data
+.balign 8
+__vt__Q34nw4r2ef8Particle:
+	.long 0
+	.long 0
+	.long SendClosing__Q34nw4r2ef8ParticleFv
+	.long DestroyFunc__Q34nw4r2ef8ParticleFv
+	.long Initialize__Q34nw4r2ef8ParticleFUsQ34nw4r4math4VEC3Q34nw4r4math4VEC3PQ34nw4r2ef15ParticleManagerPCQ34nw4r4math5MTX34fPCQ34nw4r2ef21EmitterInheritSettingPQ34nw4r2ef8Particle
 
 .section .text, "ax"  # 0x800076E0 - 0x80355080
 
 .global __ct__Q34nw4r2ef8ParticleFv
 __ct__Q34nw4r2ef8ParticleFv:
-/* 80018594 00013494  3C 80 80 39 */	lis r4, lbl_80393E30@ha
-/* 80018598 00013498  38 84 3E 30 */	addi r4, r4, lbl_80393E30@l
+/* 80018594 00013494  3C 80 80 39 */	lis r4, __vt__Q34nw4r2ef8Particle@ha
+/* 80018598 00013498  38 84 3E 30 */	addi r4, r4, __vt__Q34nw4r2ef8Particle@l
 /* 8001859C 0001349C  90 83 00 1C */	stw r4, 0x1c(r3)
 /* 800185A0 000134A0  4E 80 00 20 */	blr 
 

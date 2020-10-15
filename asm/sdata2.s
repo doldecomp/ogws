@@ -4,45 +4,6 @@
 
 .balign 8
 
-.global lbl_804BFAD8 # beginning of `ef_particle.o`
-lbl_804BFAD8:
-	.incbin "baserom.dol", 0x3C8718, 0x4
-.global lbl_804BFADC
-lbl_804BFADC:
-	.incbin "baserom.dol", 0x3C871C, 0x4
-.global lbl_804BFAE0
-lbl_804BFAE0:
-	.incbin "baserom.dol", 0x3C8720, 0x4
-.global lbl_804BFAE4
-lbl_804BFAE4:
-	.incbin "baserom.dol", 0x3C8724, 0x4
-.global lbl_804BFAE8
-lbl_804BFAE8:
-	.incbin "baserom.dol", 0x3C8728, 0x4
-.global lbl_804BFAEC
-lbl_804BFAEC:
-	.incbin "baserom.dol", 0x3C872C, 0x4
-.global lbl_804BFAF0
-lbl_804BFAF0:
-	.incbin "baserom.dol", 0x3C8730, 0x8
-.global lbl_804BFAF8
-lbl_804BFAF8:
-	.incbin "baserom.dol", 0x3C8738, 0x8
-.global lbl_804BFB00
-lbl_804BFB00:
-	.incbin "baserom.dol", 0x3C8740, 0x4
-.global lbl_804BFB04
-lbl_804BFB04:
-	.incbin "baserom.dol", 0x3C8744, 0x4
-.global lbl_804BFB08
-lbl_804BFB08:
-	.incbin "baserom.dol", 0x3C8748, 0x8
-.global lbl_804BFB10
-lbl_804BFB10:
-	.incbin "baserom.dol", 0x3C8750, 0x8
-.global lbl_804BFB18
-lbl_804BFB18:
-	.incbin "baserom.dol", 0x3C8758, 0x8
 .global lbl_804BFB20
 lbl_804BFB20:
 	.incbin "baserom.dol", 0x3C8760, 0x4
