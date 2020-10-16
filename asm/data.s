@@ -4,12 +4,6 @@
 
 .balign 0x8
 
-.global lbl_80393FB0
-lbl_80393FB0:
-	.incbin "baserom.dol", 0x3900B0, 0x1C
-.global __vt__Q34nw4r2ef19DrawStrategyBuilder
-__vt__Q34nw4r2ef19DrawStrategyBuilder:
-	.incbin "baserom.dol", 0x3900CC, 0xC
 .global lbl_80393FD8
 lbl_80393FD8:
 	.incbin "baserom.dol", 0x3900D8, 0x18

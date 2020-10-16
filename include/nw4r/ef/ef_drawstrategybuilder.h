@@ -1,13 +1,25 @@
-#ifndef NW4R_EF_DRAWSTRATEGYBUILDER
-#define NW4R_EF_DRAWSTRATEGYBUILDER
+#ifndef NW4R_EF_DRAWSTRATEGYBUILDER_H
+#define NW4R_EF_DRAWSTRATEGYBUILDER_H
+#include "types_nw4r.h"
 
 namespace nw4r
 {
 	namespace ef
 	{
+		enum DrawStrategyType
+		{
+			DrawStratType_Point,
+			DrawStratType_Line,
+			DrawStratType_Free,
+			DrawStratType_Billboard,
+			DrawStratType_Directional,
+			DrawStratType_Stripe,
+			DrawStratType_SmoothStripe
+		};
+		
 		struct DrawStrategyBuilder
 		{
-			virtual UNKTYPE Create(u32);
+			virtual DrawStrategy * Create(u32);
 		};
 	}
 }

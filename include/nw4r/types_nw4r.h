@@ -14,6 +14,8 @@ namespace nw4r
 	{
 		struct DrawOrder;
 		struct DrawInfo;
+		struct DrawStrategy;
+		struct DrawStrategyImpl;
 		struct DrawStrategyBuilder;
 		struct Effect;
 		struct EffectSystem;
