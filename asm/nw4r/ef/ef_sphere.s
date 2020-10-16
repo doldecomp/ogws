@@ -1,5 +1,35 @@
 .include "macros.inc"
 
+.section .data, "wa"  # 0x80393A80 - 0x803CAF00
+
+.balign 0x8
+
+.global __vt__Q34nw4r2ef17EmitterFormSphere
+__vt__Q34nw4r2ef17EmitterFormSphere:
+	.long 0
+	.long 0
+	.long Emission__Q34nw4r2ef17EmitterFormSphereFPQ34nw4r2ef7EmitterPQ34nw4r2ef15ParticleManageriUlPfUsfPCQ34nw4r4math5MTX34
+
+.section .sdata2, "a"  # 0x804BFA20 - 0x804C69E0
+
+.balign 0x8
+
+lbl_804BFC48: .single 0e100
+lbl_804BFC4C: .single 0e1.1920929E-7
+lbl_804BFC50: .single 0e65536
+lbl_804BFC54: .single 0e2
+lbl_804BFC58: .single 0e3.1415927
+.balign 8
+lbl_804BFC60: .double 0e6.2831854820251465
+lbl_804BFC68: .single 0e1.917476E-4
+lbl_804BFC6C: .single 0e6.282994
+lbl_804BFC70: .single 0e1.5707964
+lbl_804BFC74: .single 0e1
+lbl_804BFC78: .single 0e0
+lbl_804BFC7C: .single 0e0.01
+lbl_804BFC80: .double 0e4.503599627370496E15
+lbl_804BFC88: .double 0e4.503601774854144E15
+
 .section .text, "ax"  # 0x800076E0 - 0x80355080
 
 .global Emission__Q34nw4r2ef17EmitterFormSphereFPQ34nw4r2ef7EmitterPQ34nw4r2ef15ParticleManageriUlPfUsfPCQ34nw4r4math5MTX34
