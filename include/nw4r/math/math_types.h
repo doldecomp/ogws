@@ -5,6 +5,8 @@
 #include <RevoSDK/math/vec.h>
 #include <RevoSDK/math/mtxvec.h>
 
+#define NW4R_PI_F32 3.1415927f
+
 namespace nw4r
 {
 	// TODO: Implement objects accurately
@@ -24,6 +26,21 @@ namespace nw4r
 		{
 			float x, y, z;
 		};
+		
+		inline void VEC3Add(register VEC3 * destVec, register const VEC3 * srcVec1, register const VEC3 * srcVec2)
+		{
+			asm
+			{
+				psq_l f2, 0x0(srcVec1), 0, 0
+				psq_l f2, 0x0(srcVec2), 0, 0
+				ps_add f0, f2, f1
+				psq_l f2, 0x8(srcVec1), 1, 0
+				psq_l f2, 0x8(srcVec2), 1, 0
+				psq_st f0, 0x0(destVec), 0, 0
+				ps_add f0, f2, f1
+				psq_st f0, 0x8(destVec), 1, 0
+			}
+		}
 		
 		inline void VEC3Sub(register VEC3 * destVec, register const VEC3 * srcVec1, register const VEC3 * srcVec2)
 		{
@@ -144,6 +161,8 @@ namespace nw4r
 			PSMTXCopy(*in, *out);
 		}
 		
+		UNKTYPE GetDirMtxY(MTX34 *, const VEC3 &);
+		
 		UNKTYPE MTX34RotXYZFIdx(MTX34 *, float, float, float);
 		
 		UNKTYPE MTX34Scale(MTX34 *, const MTX34 *, const VEC3 *);
@@ -152,6 +171,8 @@ namespace nw4r
 		{
 			PSMTXScaleApply(*inMtx, *outMtx, vec->mCoords.x, vec->mCoords.y, vec->mCoords.z);
 		}
+		
+		UNKTYPE MtxGetRotation(const MTX34 &, VEC3 *);
 		
 		UNKTYPE MTX34Trans(MTX34 *, const MTX34 *, const VEC3 *);
 		

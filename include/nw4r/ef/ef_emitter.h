@@ -167,7 +167,7 @@ namespace nw4r
 			u8 BYTE_0x64;
 			s8 BYTE_0x65;
 			u8 BYTE_0x66;
-			u8 BYTE_0x67;
+			s8 BYTE_0x67;
 			
 			float FLOAT_0x68;
 			float FLOAT_0x6C;

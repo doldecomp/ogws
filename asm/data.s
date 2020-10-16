@@ -4,9 +4,6 @@
 
 .balign 0x8
 
-.global __vt__Q34nw4r2ef16EmitterFormPoint
-__vt__Q34nw4r2ef16EmitterFormPoint:
-	.incbin "baserom.dol", 0x390040, 0x10
 .global __vt__Q34nw4r2ef15EmitterFormLine
 __vt__Q34nw4r2ef15EmitterFormLine:
 	.incbin "baserom.dol", 0x390050, 0x10

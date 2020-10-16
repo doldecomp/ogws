@@ -1,5 +1,28 @@
 .include "macros.inc"
 
+.section .sdata2
+.balign 0x8
+
+lbl_804BFBA8: .single 0e0
+lbl_804BFBAC: .single 0e65536
+lbl_804BFBB0: .single 0e2
+lbl_804BFBB4: .single 0e1
+lbl_804BFBB8: .single 0e0.66
+lbl_804BFBBC: .single 0e0.34
+lbl_804BFBC0: .single 0e3.1415927
+lbl_804BFBC4: .single 0e0.01
+lbl_804BFBC8: .double 0e4.503599627370496E15
+lbl_804BFBD0: .double 0e4.503601774854144E15
+
+.section .data
+.balign 0x8
+
+.global __vt__Q34nw4r2ef16EmitterFormPoint
+__vt__Q34nw4r2ef16EmitterFormPoint:
+	.long 0
+	.long 0
+	.long Emission__Q34nw4r2ef16EmitterFormPointFPQ34nw4r2ef7EmitterPQ34nw4r2ef15ParticleManageriUlPfUsfPCQ34nw4r4math5MTX34
+
 .section .text, "ax"  # 0x800076E0 - 0x80355080
 
 .global Emission__Q34nw4r2ef16EmitterFormPointFPQ34nw4r2ef7EmitterPQ34nw4r2ef15ParticleManageriUlPfUsfPCQ34nw4r4math5MTX34
@@ -108,12 +131,12 @@ lbl_8001D62C:
 /* 8001D66C 0001856C  EC 1F 00 32 */	fmuls f0, f31, f0
 /* 8001D670 00018570  EE 7B 00 32 */	fmuls f19, f27, f0
 /* 8001D674 00018574  FC 20 98 90 */	fmr f1, f19
-/* 8001D678 00018578  48 0A 31 A1 */	bl func_800C0818
+/* 8001D678 00018578  48 0A 31 A1 */	bl cos
 /* 8001D67C 0001857C  FC 00 08 18 */	frsp f0, f1
 /* 8001D680 00018580  FC 20 98 90 */	fmr f1, f19
 /* 8001D684 00018584  EC 14 00 32 */	fmuls f0, f20, f0
 /* 8001D688 00018588  D0 01 00 3C */	stfs f0, 0x3c(r1)
-/* 8001D68C 0001858C  48 0A 36 95 */	bl func_800C0D20
+/* 8001D68C 0001858C  48 0A 36 95 */	bl sin
 /* 8001D690 00018590  FC 00 08 18 */	frsp f0, f1
 /* 8001D694 00018594  C0 21 00 38 */	lfs f1, 0x38(r1)
 /* 8001D698 00018598  D3 01 00 30 */	stfs f24, 0x30(r1)
