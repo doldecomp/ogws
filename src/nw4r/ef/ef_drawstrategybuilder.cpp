@@ -44,12 +44,12 @@ namespace nw4r
 			return &billboardStrategy;
 		}
 		
-		DrawBillboardStrategy::~DrawBillboardStrategy() {}
-		DrawDirectionalStrategy::~DrawDirectionalStrategy() {}
-		DrawFreeStrategy::~DrawFreeStrategy() {}
-		DrawLineStrategy::~DrawLineStrategy() {}
-		DrawPointStrategy::~DrawPointStrategy() {}
-		DrawStripeStrategy::~DrawStripeStrategy() {}
-		DrawSmoothStripeStrategy::~DrawSmoothStripeStrategy() {}
+		inline DrawBillboardStrategy::~DrawBillboardStrategy() {}
+		inline DrawDirectionalStrategy::~DrawDirectionalStrategy() {}
+		inline DrawFreeStrategy::~DrawFreeStrategy() {}
+		inline DrawLineStrategy::~DrawLineStrategy() {}
+		inline DrawPointStrategy::~DrawPointStrategy() {}
+		inline DrawStripeStrategy::~DrawStripeStrategy() {}
+		inline DrawSmoothStripeStrategy::~DrawSmoothStripeStrategy() {}
 	}
 }

@@ -4,18 +4,6 @@
 
 .balign 0x8
 
-.global lbl_804BEA58
-lbl_804BEA58:
-	.skip 0x1
-.global lbl_804BEA59
-lbl_804BEA59:
-	.skip 0x1
-.global lbl_804BEA5A
-lbl_804BEA5A:
-	.skip 0x1
-.global lbl_804BEA5B
-lbl_804BEA5B:
-	.skip 0x5
 .global lbl_804BEA60
 lbl_804BEA60:
 	.skip 0x1

@@ -1,6 +1,47 @@
 .include "macros.inc"
 
-# .text1 = .text
+.section .data, "wa"  # 0x80393A80 - 0x803CAF00
+
+.balign 0x8
+
+.global __vt__Q34nw4r2ef21DrawBillboardStrategy
+__vt__Q34nw4r2ef21DrawBillboardStrategy:
+	.long 0
+	.long 0
+	.long __dt__Q34nw4r2ef21DrawBillboardStrategyFv
+	.long Draw__Q34nw4r2ef21DrawBillboardStrategyFRCQ34nw4r2ef8DrawInfoPQ34nw4r2ef15ParticleManager
+	.long GetGetFirstDrawParticleFunc__Q34nw4r2ef16DrawStrategyImplFi
+	.long GetGetNextDrawParticleFunc__Q34nw4r2ef16DrawStrategyImplFi
+	.long GetCalcAheadFunc__Q34nw4r2ef21DrawBillboardStrategyFPQ34nw4r2ef15ParticleManager
+
+.section .sdata, "wa"  # 0x804BD380 - 0x804BE9E0
+
+.balign 0x20
+
+.global billboard_tex0_u8__Q24nw4r2ef
+billboard_tex0_u8__Q24nw4r2ef:
+	.byte 0
+	.byte 1
+	.byte 0
+	.byte 0
+	.byte 1
+	.byte 0
+	.byte 1
+	.byte 1
+
+.section .sdata2, "a"  # 0x804BFA20 - 0x804C69E0
+
+.balign 0x8
+
+lbl_804BFD88: .single 0e100
+lbl_804BFD8C: .single 0e0
+lbl_804BFD90: .single 0e1
+lbl_804BFD94: .single 0e1.1920929E-7
+lbl_804BFD98: .single 0e0.024543693
+lbl_804BFD9C: .single 0e40.743664
+lbl_804BFDA0: .double 0e4.503601774854144E15
+lbl_804BFDA8: .double 0e4.503599627370496E15
+lbl_804BFDB0: .single 0e0.5
 
 .section .text, "ax"  # 0x800076E0 - 0x80355080
 
@@ -12,9 +53,9 @@ __ct__Q34nw4r2ef21DrawBillboardStrategyFv:
 /* 800233A0 0001E2A0  93 E1 00 0C */	stw r31, 0xc(r1)
 /* 800233A4 0001E2A4  7C 7F 1B 78 */	mr r31, r3
 /* 800233A8 0001E2A8  4B FF E3 81 */	bl __ct__Q34nw4r2ef16DrawStrategyImplFv
-/* 800233AC 0001E2AC  3C 80 80 39 */	lis r4, lbl_80393FF0@ha
+/* 800233AC 0001E2AC  3C 80 80 39 */	lis r4, __vt__Q34nw4r2ef21DrawBillboardStrategy@ha
 /* 800233B0 0001E2B0  7F E3 FB 78 */	mr r3, r31
-/* 800233B4 0001E2B4  38 84 3F F0 */	addi r4, r4, lbl_80393FF0@l
+/* 800233B4 0001E2B4  38 84 3F F0 */	addi r4, r4, __vt__Q34nw4r2ef21DrawBillboardStrategy@l
 /* 800233B8 0001E2B8  90 9F 00 00 */	stw r4, 0(r31)
 /* 800233BC 0001E2BC  83 E1 00 0C */	lwz r31, 0xc(r1)
 /* 800233C0 0001E2C0  80 01 00 14 */	lwz r0, 0x14(r1)
@@ -1668,7 +1709,7 @@ InitGraphics__Q34nw4r2ef21DrawBillboardStrategyFRCQ34nw4r2ef8DrawInfoPQ34nw4r2ef
 /* 80024BE4 0001FAE4  38 A0 00 01 */	li r5, 1
 /* 80024BE8 0001FAE8  48 0B A1 79 */	bl func_800DED60
 /* 80024BEC 0001FAEC  38 60 00 0D */	li r3, 0xd
-/* 80024BF0 0001FAF0  38 8D 80 20 */	addi r4, r13, lbl_804BD3A0-_SDA_BASE_
+/* 80024BF0 0001FAF0  38 8D 80 20 */	addi r4, r13, billboard_tex0_u8__Q24nw4r2ef-_SDA_BASE_
 /* 80024BF4 0001FAF4  38 A0 00 02 */	li r5, 2
 /* 80024BF8 0001FAF8  48 0B 91 19 */	bl func_800DDD10
 /* 80024BFC 0001FAFC  48 0B 8A 1D */	bl GXClearVtxDesc

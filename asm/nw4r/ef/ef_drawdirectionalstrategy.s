@@ -1,5 +1,93 @@
 .include "macros.inc"
 
+.section .rodata, "a"  # 0x80375780 - 0x80393A80
+
+p$10945:
+	.single 0e-1
+	.single 0e-1
+	.single 0e+0
+	
+	.single 0e-1
+	.single 0e+1
+	.single 0e+0
+	
+	.single 0e+1
+	.single 0e+1
+	.single 0e+0
+	
+	.single 0e+1
+	.single 0e-1
+	.single 0e+0
+
+px$10948:
+	.single 0e+0
+	.single 0e-1
+	.single 0e+1
+	
+	.single 0e+0
+	.single 0e+1
+	.single 0e+1
+	
+	.single 0e+0
+	.single 0e+1
+	.single 0e-1
+	
+	.single 0e+0
+	.single 0e-1
+	.single 0e-1
+
+.section .data, "wa"  # 0x80393A80 - 0x803CAF00
+
+.balign 0x8
+
+lbl_80394010:
+	.long lbl_800273C0
+	.long lbl_800273CC
+	.long lbl_800273D8
+	.long lbl_800273E4
+	.long lbl_80027408
+	.long lbl_800273F0
+	.long lbl_800273FC
+
+.global __vt__Q34nw4r2ef23DrawDirectionalStrategy
+__vt__Q34nw4r2ef23DrawDirectionalStrategy:
+	.long 0
+	.long 0
+	.long __dt__Q34nw4r2ef23DrawDirectionalStrategyFv
+	.long Draw__Q34nw4r2ef23DrawDirectionalStrategyFRCQ34nw4r2ef8DrawInfoPQ34nw4r2ef15ParticleManager
+	.long GetGetFirstDrawParticleFunc__Q34nw4r2ef16DrawStrategyImplFi
+	.long GetGetNextDrawParticleFunc__Q34nw4r2ef16DrawStrategyImplFi
+	.long GetCalcAheadFunc__Q34nw4r2ef23DrawDirectionalStrategyFPQ34nw4r2ef15ParticleManager
+
+.section .sdata, "wa"  # 0x804BD380 - 0x804BE9E0
+
+.balign 0x20
+
+directional_tex0_u8__Q24nw4r2ef:
+	.byte 0
+	.byte 1
+	.byte 0
+	.byte 0
+	.byte 1
+	.byte 0
+	.byte 1
+	.byte 1
+
+.section .sdata2, "a"  # 0x804BFA20 - 0x804C69E0
+
+.balign 0x8
+
+lbl_804BFDB8: .single 0e1.1920929E-7
+lbl_804BFDBC: .single 0e0
+lbl_804BFDC0: .single 0e1
+lbl_804BFDC4: .single 0e100
+lbl_804BFDC8: .single 0e0.5
+lbl_804BFDCC: .single 0e0.024543693
+lbl_804BFDD0: .single 0e40.743664
+.balign 8
+lbl_804BFDD8: .double 0e4.503601774854144E15
+lbl_804BFDE0: .double 0e4.503599627370496E15
+
 .section .text, "ax"  # 0x800076E0 - 0x80355080 
 
 .global __ct__Q34nw4r2ef23DrawDirectionalStrategyFv
@@ -10,9 +98,9 @@ __ct__Q34nw4r2ef23DrawDirectionalStrategyFv:
 /* 8002534C 0002024C  93 E1 00 0C */	stw r31, 0xc(r1)
 /* 80025350 00020250  7C 7F 1B 78 */	mr r31, r3
 /* 80025354 00020254  4B FF C3 D5 */	bl __ct__Q34nw4r2ef16DrawStrategyImplFv
-/* 80025358 00020258  3C 80 80 39 */	lis r4, lbl_8039402C@ha
+/* 80025358 00020258  3C 80 80 39 */	lis r4, __vt__Q34nw4r2ef23DrawDirectionalStrategy@ha
 /* 8002535C 0002025C  7F E3 FB 78 */	mr r3, r31
-/* 80025360 00020260  38 84 40 2C */	addi r4, r4, lbl_8039402C@l
+/* 80025360 00020260  38 84 40 2C */	addi r4, r4, __vt__Q34nw4r2ef23DrawDirectionalStrategy@l
 /* 80025364 00020264  90 9F 00 00 */	stw r4, 0(r31)
 /* 80025368 00020268  83 E1 00 0C */	lwz r31, 0xc(r1)
 /* 8002536C 0002026C  80 01 00 14 */	lwz r0, 0x14(r1)
@@ -23,7 +111,6 @@ __ct__Q34nw4r2ef23DrawDirectionalStrategyFv:
 # Conflicts with ef_drawfreestrategy, 80027480
 # DrawQuad(const MTX34& ,const _VEC3*, bool ) is defined in both files' headers
 # and the dupes are not merged by the linker
-# .global DrawQuad__Q24nw4r2efFRCQ34nw4r4math5MTX34PCQ34nw4r4math5_VEC3b
 DrawQuad__Q24nw4r2efFRCQ34nw4r4math5MTX34PCQ34nw4r4math5_VEC3b:
 /* 8002537C 0002027C  94 21 FF B0 */	stwu r1, -0x50(r1)
 /* 80025380 00020280  7C 08 02 A6 */	mflr r0
@@ -271,7 +358,7 @@ Draw__Q34nw4r2ef23DrawDirectionalStrategyFRCQ34nw4r2ef8DrawInfoPQ34nw4r2ef15Part
 /* 800256E8 000205E8  38 A0 00 01 */	li r5, 1
 /* 800256EC 000205EC  48 0B 96 75 */	bl func_800DED60
 /* 800256F0 000205F0  38 60 00 0D */	li r3, 0xd
-/* 800256F4 000205F4  38 8D 80 40 */	addi r4, r13, lbl_804BD3C0-_SDA_BASE_
+/* 800256F4 000205F4  38 8D 80 40 */	addi r4, r13, directional_tex0_u8__Q24nw4r2ef-_SDA_BASE_
 /* 800256F8 000205F8  38 A0 00 02 */	li r5, 2
 /* 800256FC 000205FC  48 0B 86 15 */	bl func_800DDD10
 /* 80025700 00020600  48 0B 7F 19 */	bl GXClearVtxDesc
@@ -390,7 +477,7 @@ DrawDirectional__Q34nw4r2ef23DrawDirectionalStrategyFRCQ34nw4r2ef8DrawInfoPQ34nw
 /* 800258A0 000207A0  38 A0 00 01 */	li r5, 1
 /* 800258A4 000207A4  48 0B 94 BD */	bl func_800DED60
 /* 800258A8 000207A8  38 60 00 0D */	li r3, 0xd
-/* 800258AC 000207AC  38 8D 80 40 */	addi r4, r13, lbl_804BD3C0-_SDA_BASE_
+/* 800258AC 000207AC  38 8D 80 40 */	addi r4, r13, directional_tex0_u8__Q24nw4r2ef-_SDA_BASE_
 /* 800258B0 000207B0  38 A0 00 02 */	li r5, 2
 /* 800258B4 000207B4  48 0B 84 5D */	bl func_800DDD10
 /* 800258B8 000207B8  48 0B 7D 61 */	bl GXClearVtxDesc
@@ -557,9 +644,9 @@ lbl_80025A88:
 /* 80025B1C 00020A1C  C2 E2 83 9C */	lfs f23, lbl_804BFDBC-_SDA2_BASE_(r2)
 /* 80025B20 00020A20  7C 7B 1B 78 */	mr r27, r3
 /* 80025B24 00020A24  C3 82 83 B0 */	lfs f28, lbl_804BFDD0-_SDA2_BASE_(r2)
-/* 80025B28 00020A28  3E C0 80 37 */	lis r22, 0x8037
+/* 80025B28 00020A28  3E C0 80 37 */	lis r22, p$10945@ha
 /* 80025B2C 00020A2C  C3 02 83 A8 */	lfs f24, lbl_804BFDC8-_SDA2_BASE_(r2)
-/* 80025B30 00020A30  3E E0 80 37 */	lis r23, 0x8037
+/* 80025B30 00020A30  3E E0 80 37 */	lis r23, px$10948@ha
 /* 80025B34 00020A34  CB 22 83 C0 */	lfd f25, lbl_804BFDE0-_SDA2_BASE_(r2)
 /* 80025B38 00020A38  C3 42 83 AC */	lfs f26, lbl_804BFDCC-_SDA2_BASE_(r2)
 /* 80025B3C 00020A3C  C3 62 83 A0 */	lfs f27, lbl_804BFDC0-_SDA2_BASE_(r2)
@@ -1058,7 +1145,7 @@ lbl_800261C8:
 /* 80026274 00021174  48 0C 13 E5 */	bl PSMTXConcat
 /* 80026278 00021178  88 B8 00 AE */	lbz r5, 0xae(r24)
 /* 8002627C 0002117C  38 61 00 A8 */	addi r3, r1, 0xa8
-/* 80026280 00021180  38 96 57 80 */	addi r4, r22, 0x5780
+/* 80026280 00021180  38 96 57 80 */	addi r4, r22, p$10945@l
 /* 80026284 00021184  7C 05 00 D0 */	neg r0, r5
 /* 80026288 00021188  7C 00 2B 78 */	or r0, r0, r5
 /* 8002628C 0002118C  54 05 0F FE */	srwi r5, r0, 0x1f
@@ -1068,7 +1155,7 @@ lbl_800261C8:
 /* 8002629C 0002119C  40 82 00 20 */	bne lbl_800262BC
 /* 800262A0 000211A0  88 B8 00 AE */	lbz r5, 0xae(r24)
 /* 800262A4 000211A4  38 61 00 A8 */	addi r3, r1, 0xa8
-/* 800262A8 000211A8  38 97 57 B0 */	addi r4, r23, 0x57b0
+/* 800262A8 000211A8  38 97 57 B0 */	addi r4, r23, px$10948@l
 /* 800262AC 000211AC  7C 05 00 D0 */	neg r0, r5
 /* 800262B0 000211B0  7C 00 2B 78 */	or r0, r0, r5
 /* 800262B4 000211B4  54 05 0F FE */	srwi r5, r0, 0x1f
@@ -2215,7 +2302,7 @@ InitGraphics__Q34nw4r2ef23DrawDirectionalStrategyFRCQ34nw4r2ef8DrawInfoPQ34nw4r2
 /* 80027300 00022200  38 A0 00 01 */	li r5, 1
 /* 80027304 00022204  48 0B 7A 5D */	bl func_800DED60
 /* 80027308 00022208  38 60 00 0D */	li r3, 0xd
-/* 8002730C 0002220C  38 8D 80 40 */	addi r4, r13, lbl_804BD3C0-_SDA_BASE_
+/* 8002730C 0002220C  38 8D 80 40 */	addi r4, r13, directional_tex0_u8__Q24nw4r2ef-_SDA_BASE_
 /* 80027310 00022210  38 A0 00 02 */	li r5, 2
 /* 80027314 00022214  48 0B 69 FD */	bl func_800DDD10
 /* 80027318 00022218  48 0B 63 01 */	bl GXClearVtxDesc
@@ -2264,21 +2351,27 @@ GetCalcAheadFunc__Q34nw4r2ef23DrawDirectionalStrategyFPQ34nw4r2ef15ParticleManag
 /* 800273B4 000222B4  7C 63 00 2E */	lwzx r3, r3, r0
 /* 800273B8 000222B8  7C 69 03 A6 */	mtctr r3
 /* 800273BC 000222BC  4E 80 04 20 */	bctr 
+lbl_800273C0:
 /* 800273C0 000222C0  3C 60 80 02 */	lis r3, CalcAhead_Speed__Q34nw4r2ef16DrawStrategyImplFPQ34nw4r4math4VEC3PQ44nw4r2ef16DrawStrategyImpl12AheadContextPQ34nw4r2ef8Particle@ha
 /* 800273C4 000222C4  38 63 4D 0C */	addi r3, r3, CalcAhead_Speed__Q34nw4r2ef16DrawStrategyImplFPQ34nw4r4math4VEC3PQ44nw4r2ef16DrawStrategyImpl12AheadContextPQ34nw4r2ef8Particle@l
 /* 800273C8 000222C8  4E 80 00 20 */	blr 
+lbl_800273CC:
 /* 800273CC 000222CC  3C 60 80 02 */	lis r3, CalcAhead_EmitterCenter__Q34nw4r2ef16DrawStrategyImplFPQ34nw4r4math4VEC3PQ44nw4r2ef16DrawStrategyImpl12AheadContextPQ34nw4r2ef8Particle@ha
 /* 800273D0 000222D0  38 63 4E 14 */	addi r3, r3, CalcAhead_EmitterCenter__Q34nw4r2ef16DrawStrategyImplFPQ34nw4r4math4VEC3PQ44nw4r2ef16DrawStrategyImpl12AheadContextPQ34nw4r2ef8Particle@l
 /* 800273D4 000222D4  4E 80 00 20 */	blr 
+lbl_800273D8:
 /* 800273D8 000222D8  3C 60 80 02 */	lis r3, CalcAhead_EmitterDesign__Q34nw4r2ef16DrawStrategyImplFPQ34nw4r4math4VEC3PQ44nw4r2ef16DrawStrategyImpl12AheadContextPQ34nw4r2ef8Particle@ha
 /* 800273DC 000222DC  38 63 4F 04 */	addi r3, r3, CalcAhead_EmitterDesign__Q34nw4r2ef16DrawStrategyImplFPQ34nw4r4math4VEC3PQ44nw4r2ef16DrawStrategyImpl12AheadContextPQ34nw4r2ef8Particle@l
 /* 800273E0 000222E0  4E 80 00 20 */	blr 
+lbl_800273E4:
 /* 800273E4 000222E4  3C 60 80 02 */	lis r3, CalcAhead_Particle__Q34nw4r2ef16DrawStrategyImplFPQ34nw4r4math4VEC3PQ44nw4r2ef16DrawStrategyImpl12AheadContextPQ34nw4r2ef8Particle@ha
 /* 800273E8 000222E8  38 63 4F 20 */	addi r3, r3, CalcAhead_Particle__Q34nw4r2ef16DrawStrategyImplFPQ34nw4r4math4VEC3PQ44nw4r2ef16DrawStrategyImpl12AheadContextPQ34nw4r2ef8Particle@l
 /* 800273EC 000222EC  4E 80 00 20 */	blr 
+lbl_800273F0:
 /* 800273F0 000222F0  3C 60 80 02 */	lis r3, CalcAhead_NoDesign__Q34nw4r2ef16DrawStrategyImplFPQ34nw4r4math4VEC3PQ44nw4r2ef16DrawStrategyImpl12AheadContextPQ34nw4r2ef8Particle@ha
 /* 800273F4 000222F4  38 63 74 14 */	addi r3, r3, CalcAhead_NoDesign__Q34nw4r2ef16DrawStrategyImplFPQ34nw4r4math4VEC3PQ44nw4r2ef16DrawStrategyImpl12AheadContextPQ34nw4r2ef8Particle@l
 /* 800273F8 000222F8  4E 80 00 20 */	blr 
+lbl_800273FC:
 /* 800273FC 000222FC  3C 60 80 02 */	lis r3, CalcAhead_ParticleBoth__Q34nw4r2ef16DrawStrategyImplFPQ34nw4r4math4VEC3PQ44nw4r2ef16DrawStrategyImpl12AheadContextPQ34nw4r2ef8Particle@ha
 /* 80027400 00022300  38 63 50 64 */	addi r3, r3, CalcAhead_ParticleBoth__Q34nw4r2ef16DrawStrategyImplFPQ34nw4r4math4VEC3PQ44nw4r2ef16DrawStrategyImpl12AheadContextPQ34nw4r2ef8Particle@l
 /* 80027404 00022304  4E 80 00 20 */	blr 

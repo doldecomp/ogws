@@ -1,5 +1,81 @@
 .include "macros.inc"
 
+.section .rodata, "a"  # 0x80375780 - 0x80393A80
+
+p$7902:
+	.single 0e-1
+	.single 0e-1
+	.single 0e+0
+	
+	.single 0e-1
+	.single 0e+1
+	.single 0e+0
+	
+	.single 0e+1
+	.single 0e+1
+	.single 0e+0
+	
+	.single 0e+1
+	.single 0e-1
+	.single 0e+0
+
+px$7905:
+	.single 0e+0
+	.single 0e-1
+	.single 0e+1
+	
+	.single 0e+0
+	.single 0e+1
+	.single 0e+1
+	
+	.single 0e+0
+	.single 0e+1
+	.single 0e-1
+	
+	.single 0e+0
+	.single 0e-1
+	.single 0e-1
+
+.section .data, "wa"  # 0x80393A80 - 0x803CAF00
+
+.balign 0x8
+
+.global __vt__Q34nw4r2ef16DrawFreeStrategy
+__vt__Q34nw4r2ef16DrawFreeStrategy:
+	.long 0
+	.long 0
+	.long __dt__Q34nw4r2ef16DrawFreeStrategyFv
+	.long Draw__Q34nw4r2ef16DrawFreeStrategyFRCQ34nw4r2ef8DrawInfoPQ34nw4r2ef15ParticleManager
+	.long GetGetFirstDrawParticleFunc__Q34nw4r2ef16DrawStrategyImplFi
+	.long GetGetNextDrawParticleFunc__Q34nw4r2ef16DrawStrategyImplFi
+
+.section .sdata, "wa"  # 0x804BD380 - 0x804BE9E0
+
+.balign 0x20
+
+free_tex0_u8__Q24nw4r2ef:
+	.byte 0
+	.byte 1
+	.byte 0
+	.byte 0
+	.byte 1
+	.byte 0
+	.byte 1
+	.byte 1
+
+.section .sdata2, "a"  # 0x804BFA20 - 0x804C69E0
+
+.balign 0x8
+
+lbl_804BFDE8: .single 0e100
+lbl_804BFDEC: .single 0e1.1920929E-7
+lbl_804BFDF0: .single 0e0.024543693
+lbl_804BFDF4: .single 0e40.743664
+lbl_804BFDF8: .single 0e0
+.balign 8
+lbl_804BFE00: .double 0e4.503601774854144E15
+lbl_804BFE08: .double 0e4.503599627370496E15
+
 .section .text, "ax"  # 0x800076E0 - 0x80355080 
 
 .global __ct__Q34nw4r2ef16DrawFreeStrategyFv
@@ -10,9 +86,9 @@ __ct__Q34nw4r2ef16DrawFreeStrategyFv:
 /* 80027450 00022350  93 E1 00 0C */	stw r31, 0xc(r1)
 /* 80027454 00022354  7C 7F 1B 78 */	mr r31, r3
 /* 80027458 00022358  4B FF A2 D1 */	bl __ct__Q34nw4r2ef16DrawStrategyImplFv
-/* 8002745C 0002235C  3C 80 80 39 */	lis r4, lbl_80394048@ha
+/* 8002745C 0002235C  3C 80 80 39 */	lis r4, __vt__Q34nw4r2ef16DrawFreeStrategy@ha
 /* 80027460 00022360  7F E3 FB 78 */	mr r3, r31
-/* 80027464 00022364  38 84 40 48 */	addi r4, r4, lbl_80394048@l
+/* 80027464 00022364  38 84 40 48 */	addi r4, r4, __vt__Q34nw4r2ef16DrawFreeStrategy@l
 /* 80027468 00022368  90 9F 00 00 */	stw r4, 0(r31)
 /* 8002746C 0002236C  83 E1 00 0C */	lwz r31, 0xc(r1)
 /* 80027470 00022370  80 01 00 14 */	lwz r0, 0x14(r1)
@@ -167,7 +243,7 @@ Draw__Q34nw4r2ef16DrawFreeStrategyFRCQ34nw4r2ef8DrawInfoPQ34nw4r2ef15ParticleMan
 /* 80027690 00022590  38 A0 00 01 */	li r5, 1
 /* 80027694 00022594  48 0B 76 CD */	bl func_800DED60
 /* 80027698 00022598  38 60 00 0D */	li r3, 0xd
-/* 8002769C 0002259C  38 8D 80 60 */	addi r4, r13, lbl_804BD3E0-_SDA_BASE_
+/* 8002769C 0002259C  38 8D 80 60 */	addi r4, r13, free_tex0_u8__Q24nw4r2ef-_SDA_BASE_
 /* 800276A0 000225A0  38 A0 00 02 */	li r5, 2
 /* 800276A4 000225A4  48 0B 66 6D */	bl func_800DDD10
 /* 800276A8 000225A8  48 0B 5F 71 */	bl GXClearVtxDesc
@@ -247,9 +323,9 @@ lbl_800276D0:
 /* 800277CC 000226CC  CB 82 83 E8 */	lfd f28, lbl_804BFE08-_SDA2_BASE_(r2)
 /* 800277D0 000226D0  7C 7C 1B 78 */	mr r28, r3
 /* 800277D4 000226D4  C3 A2 83 D0 */	lfs f29, lbl_804BFDF0-_SDA2_BASE_(r2)
-/* 800277D8 000226D8  3E E0 80 37 */	lis r23, 0x8037
+/* 800277D8 000226D8  3E E0 80 37 */	lis r23, p$7902@ha
 /* 800277DC 000226DC  C3 C2 83 D4 */	lfs f30, lbl_804BFDF4-_SDA2_BASE_(r2)
-/* 800277E0 000226E0  3F 00 80 37 */	lis r24, 0x8037
+/* 800277E0 000226E0  3F 00 80 37 */	lis r24, px$7905@ha
 /* 800277E4 000226E4  C3 E2 83 D8 */	lfs f31, lbl_804BFDF8-_SDA2_BASE_(r2)
 /* 800277E8 000226E8  C3 62 83 CC */	lfs f27, lbl_804BFDEC-_SDA2_BASE_(r2)
 /* 800277EC 000226EC  48 00 03 54 */	b lbl_80027B40
@@ -389,7 +465,7 @@ lbl_80027928:
 /* 800279E0 000228E0  D2 61 00 58 */	stfs f19, 0x58(r1)
 /* 800279E4 000228E4  EE 6B 06 B2 */	fmuls f19, f11, f26
 /* 800279E8 000228E8  EE 95 00 32 */	fmuls f20, f21, f0
-/* 800279EC 000228EC  38 97 57 E0 */	addi r4, r23, 0x57e0
+/* 800279EC 000228EC  38 97 57 E0 */	addi r4, r23, p$7902@l
 /* 800279F0 000228F0  EC 36 00 32 */	fmuls f1, f22, f0
 /* 800279F4 000228F4  EC 02 05 72 */	fmuls f0, f2, f21
 /* 800279F8 000228F8  D1 21 00 88 */	stfs f9, 0x88(r1)
@@ -463,7 +539,7 @@ lbl_80027928:
 /* 80027B08 00022A08  40 82 00 20 */	bne lbl_80027B28
 /* 80027B0C 00022A0C  88 B9 00 AE */	lbz r5, 0xae(r25)
 /* 80027B10 00022A10  38 61 00 30 */	addi r3, r1, 0x30
-/* 80027B14 00022A14  38 98 58 10 */	addi r4, r24, 0x5810
+/* 80027B14 00022A14  38 98 58 10 */	addi r4, r24, px$7905@l
 /* 80027B18 00022A18  7C 05 00 D0 */	neg r0, r5
 /* 80027B1C 00022A1C  7C 00 2B 78 */	or r0, r0, r5
 /* 80027B20 00022A20  54 05 0F FE */	srwi r5, r0, 0x1f

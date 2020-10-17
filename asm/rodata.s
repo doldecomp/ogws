@@ -2,8 +2,8 @@
 
 # .data5 = .data???
 
-.section .rodata, "wa"  # 0x80375780 - 0x80393A80
-	.incbin "baserom.dol", 0x371880, 0xC0
+.section .rodata, "a"  # 0x80375780 - 0x80393A80
+
 .global lbl_80375840
 lbl_80375840:
 	.incbin "baserom.dol", 0x371940, 0x100

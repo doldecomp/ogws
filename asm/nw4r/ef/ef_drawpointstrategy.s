@@ -1,6 +1,31 @@
 .include "macros.inc"
 
-# .text1 = .text
+.section .data, "wa"  # 0x80393A80 - 0x803CAF00
+
+.balign 0x8
+
+.global __vt__Q34nw4r2ef17DrawPointStrategy
+__vt__Q34nw4r2ef17DrawPointStrategy:
+	.long 0
+	.long 0
+	.long __dt__Q34nw4r2ef17DrawPointStrategyFv
+	.long Draw__Q34nw4r2ef17DrawPointStrategyFRCQ34nw4r2ef8DrawInfoPQ34nw4r2ef15ParticleManager
+	.long GetGetFirstDrawParticleFunc__Q34nw4r2ef16DrawStrategyImplFi
+	.long GetGetNextDrawParticleFunc__Q34nw4r2ef16DrawStrategyImplFi
+
+.section .sdata, "wa"  # 0x804BD380 - 0x804BE9E0
+
+.balign 0x8
+
+lbl_804BD3F0: .single 0e42.5
+
+.section .sdata2, "a"  # 0x804BFA20 - 0x804C69E0
+
+.balign 0x8
+
+lbl_804BFE20: .single 0e1.1920929E-7
+lbl_804BFE24: .single 0e6
+lbl_804BFE28: .single 0e0
 
 .section .text, "ax"  # 0x800076E0 - 0x80355080 
 
@@ -12,9 +37,9 @@ __ct__Q34nw4r2ef17DrawPointStrategyFv:
 /* 800280B8 00022FB8  93 E1 00 0C */	stw r31, 0xc(r1)
 /* 800280BC 00022FBC  7C 7F 1B 78 */	mr r31, r3
 /* 800280C0 00022FC0  4B FF 96 69 */	bl __ct__Q34nw4r2ef16DrawStrategyImplFv
-/* 800280C4 00022FC4  3C 80 80 39 */	lis r4, lbl_80394078@ha
+/* 800280C4 00022FC4  3C 80 80 39 */	lis r4, __vt__Q34nw4r2ef17DrawPointStrategy@ha
 /* 800280C8 00022FC8  7F E3 FB 78 */	mr r3, r31
-/* 800280CC 00022FCC  38 84 40 78 */	addi r4, r4, lbl_80394078@l
+/* 800280CC 00022FCC  38 84 40 78 */	addi r4, r4, __vt__Q34nw4r2ef17DrawPointStrategy@l
 /* 800280D0 00022FD0  90 9F 00 00 */	stw r4, 0(r31)
 /* 800280D4 00022FD4  83 E1 00 0C */	lwz r31, 0xc(r1)
 /* 800280D8 00022FD8  80 01 00 14 */	lwz r0, 0x14(r1)
