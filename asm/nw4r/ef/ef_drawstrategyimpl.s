@@ -1,14 +1,66 @@
 .include "macros.inc"
 
+.section .data, "wa"  # 0x80393A80 - 0x803CAF00
+
+.balign 0x8
+
+.global __vt__Q34nw4r2ef16DrawStrategyImpl
+__vt__Q34nw4r2ef16DrawStrategyImpl:
+	.long 0
+	.long 0
+	.long __dt__Q34nw4r2ef16DrawStrategyImplFv
+	.long 0
+	.long GetGetFirstDrawParticleFunc__Q34nw4r2ef16DrawStrategyImplFi
+	.long GetGetNextDrawParticleFunc__Q34nw4r2ef16DrawStrategyImplFi
+
+.section .bss, "wa"  # 0x803CAF00 - 0x804BD380
+
+.balign 0x8
+...bss.0:
+
+.global mXUnitVec__Q34nw4r2ef16DrawStrategyImpl
+mXUnitVec__Q34nw4r2ef16DrawStrategyImpl:
+	.skip 0xc
+
+.global mYUnitVec__Q34nw4r2ef16DrawStrategyImpl
+mYUnitVec__Q34nw4r2ef16DrawStrategyImpl:
+	.skip 0xc
+
+.global mZUnitVec__Q34nw4r2ef16DrawStrategyImpl
+mZUnitVec__Q34nw4r2ef16DrawStrategyImpl:
+	.skip 0xc
+
+.global mZeroVec__Q34nw4r2ef16DrawStrategyImpl
+mZeroVec__Q34nw4r2ef16DrawStrategyImpl:
+	.skip 0xc
+
+.global mIdentityMtx__Q34nw4r2ef16DrawStrategyImpl
+mIdentityMtx__Q34nw4r2ef16DrawStrategyImpl:
+	.skip 0x30
+
+.section .sdata2, "a"  # 0x804BFA20 - 0x804C69E0
+
+.balign 0x8
+
+lbl_804BFD58: .single 0e1
+lbl_804BFD5C: .single 0e0
+lbl_804BFD60: .single 0e100
+lbl_804BFD64: .single 0e-1
+lbl_804BFD68: .single 0e-0.5
+lbl_804BFD6C: .single 0e0.5
+lbl_804BFD70: .double 0e4.503601774854144E15
+lbl_804BFD78: .double 0e4.503599627370496E15
+lbl_804BFD80: .single 0e1.1920929E-7
+
 .section .text, "ax"  # 0x800076E0 - 0x80355080
 
 .global __ct__Q34nw4r2ef16DrawStrategyImplFv
 __ct__Q34nw4r2ef16DrawStrategyImplFv:
 /* 80021728 0001C628  C0 22 83 38 */	lfs f1, lbl_804BFD58-_SDA2_BASE_(r2)
-/* 8002172C 0001C62C  3C 80 80 39 */	lis r4, lbl_80393FD8@ha
+/* 8002172C 0001C62C  3C 80 80 39 */	lis r4, __vt__Q34nw4r2ef16DrawStrategyImpl@ha
 /* 80021730 0001C630  C0 02 83 3C */	lfs f0, lbl_804BFD5C-_SDA2_BASE_(r2)
 /* 80021734 0001C634  38 00 00 00 */	li r0, 0
-/* 80021738 0001C638  38 84 3F D8 */	addi r4, r4, lbl_80393FD8@l
+/* 80021738 0001C638  38 84 3F D8 */	addi r4, r4, __vt__Q34nw4r2ef16DrawStrategyImpl@l
 /* 8002173C 0001C63C  38 C3 00 34 */	addi r6, r3, 0x34
 /* 80021740 0001C640  38 A3 00 94 */	addi r5, r3, 0x94
 /* 80021744 0001C644  90 83 00 00 */	stw r4, 0(r3)
@@ -1999,9 +2051,9 @@ lbl_800232F4:
 # __sinit_\ef_drawstrategyimpl_cpp
 .global __sinit_$$3ef_drawstrategyimpl_cpp
 __sinit_$$3ef_drawstrategyimpl_cpp:
-/* 8002330C 0001E20C  3D 00 80 3D */	lis r8, lbl_803D05B0@ha
+/* 8002330C 0001E20C  3D 00 80 3D */	lis r8, ...bss.0@ha
 /* 80023310 0001E210  C0 22 83 38 */	lfs f1, lbl_804BFD58-_SDA2_BASE_(r2)
-/* 80023314 0001E214  39 08 05 B0 */	addi r8, r8, lbl_803D05B0@l
+/* 80023314 0001E214  39 08 05 B0 */	addi r8, r8, ...bss.0@l
 /* 80023318 0001E218  C0 02 83 3C */	lfs f0, lbl_804BFD5C-_SDA2_BASE_(r2)
 /* 8002331C 0001E21C  38 68 00 30 */	addi r3, r8, 0x30
 /* 80023320 0001E220  D0 28 00 00 */	stfs f1, 0(r8)

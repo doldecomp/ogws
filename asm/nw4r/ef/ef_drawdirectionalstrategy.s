@@ -1816,8 +1816,8 @@ DrawDirectionalBillboard__Q34nw4r2ef23DrawDirectionalStrategyFRCQ34nw4r2ef8DrawI
 /* 80026CF8 00021BF8  38 61 01 A8 */	addi r3, r1, 0x1a8
 /* 80026CFC 00021BFC  38 A1 01 78 */	addi r5, r1, 0x178
 /* 80026D00 00021C00  4B FF F6 75 */	bl MTX34Mult__Q24nw4r4mathFPQ34nw4r4math5MTX34PCQ34nw4r4math5MTX34PCQ34nw4r4math5MTX34
-/* 80026D04 00021C04  3C 60 80 3D */	lis r3, lbl_803D05E0@ha
-/* 80026D08 00021C08  38 63 05 E0 */	addi r3, r3, lbl_803D05E0@l
+/* 80026D04 00021C04  3C 60 80 3D */	lis r3, mIdentityMtx__Q34nw4r2ef16DrawStrategyImpl@ha
+/* 80026D08 00021C08  38 63 05 E0 */	addi r3, r3, mIdentityMtx__Q34nw4r2ef16DrawStrategyImpl@l
 /* 80026D0C 00021C0C  4B FF E7 E9 */	bl __opPA4_Cf__Q34nw4r4math5MTX34CFv
 /* 80026D10 00021C10  38 80 00 00 */	li r4, 0
 /* 80026D14 00021C14  48 0B C5 69 */	bl func_800E327C
@@ -1855,11 +1855,11 @@ DrawDirectionalBillboard__Q34nw4r2ef23DrawDirectionalStrategyFRCQ34nw4r2ef8DrawI
 /* 80026D94 00021C94  4B FF F7 5D */	bl GetYoungestParticle__Q34nw4r2ef16DrawStrategyImplFPQ34nw4r2ef15ParticleManager
 /* 80026D98 00021C98  C3 22 83 A0 */	lfs f25, lbl_804BFDC0-_SDA2_BASE_(r2)
 /* 80026D9C 00021C9C  7C 79 1B 78 */	mr r25, r3
-/* 80026DA0 00021CA0  3F 40 80 3D */	lis r26, 0x803d
+/* 80026DA0 00021CA0  3F 40 80 3D */	lis r26, mZeroVec__Q34nw4r2ef16DrawStrategyImpl@ha
 /* 80026DA4 00021CA4  48 00 00 20 */	b lbl_80026DC4
 lbl_80026DA8:
 /* 80026DA8 00021CA8  38 79 00 CC */	addi r3, r25, 0xcc
-/* 80026DAC 00021CAC  38 9A 05 D4 */	addi r4, r26, 0x5d4
+/* 80026DAC 00021CAC  38 9A 05 D4 */	addi r4, r26, mZeroVec__Q34nw4r2ef16DrawStrategyImpl@l
 /* 80026DB0 00021CB0  4B FF F6 01 */	bl __as__Q34nw4r4math4VEC3FQ34nw4r4math4VEC3
 /* 80026DB4 00021CB4  7F A3 EB 78 */	mr r3, r29
 /* 80026DB8 00021CB8  7F 24 CB 78 */	mr r4, r25
@@ -1915,7 +1915,7 @@ lbl_80026DD8:
 /* 80026E78 00021D78  C3 E2 83 A8 */	lfs f31, lbl_804BFDC8-_SDA2_BASE_(r2)
 /* 80026E7C 00021D7C  7C 77 1B 78 */	mr r23, r3
 /* 80026E80 00021D80  C3 C2 83 98 */	lfs f30, lbl_804BFDB8-_SDA2_BASE_(r2)
-/* 80026E84 00021D84  3F 40 80 3D */	lis r26, 0x803d
+/* 80026E84 00021D84  3F 40 80 3D */	lis r26, mXUnitVec__Q34nw4r2ef16DrawStrategyImpl@ha
 /* 80026E88 00021D88  48 00 03 A4 */	b lbl_8002722C
 lbl_80026E8C:
 /* 80026E8C 00021D8C  7E E3 BB 78 */	mr r3, r23
@@ -2028,7 +2028,7 @@ lbl_80027018:
 /* 80027030 00021F30  2C 03 00 00 */	cmpwi r3, 0
 /* 80027034 00021F34  40 82 00 10 */	bne lbl_80027044
 /* 80027038 00021F38  38 61 00 9C */	addi r3, r1, 0x9c
-/* 8002703C 00021F3C  38 9A 05 B0 */	addi r4, r26, 0x5b0
+/* 8002703C 00021F3C  38 9A 05 B0 */	addi r4, r26, mXUnitVec__Q34nw4r2ef16DrawStrategyImpl@l
 /* 80027040 00021F40  4B FF F3 71 */	bl __as__Q34nw4r4math4VEC3FQ34nw4r4math4VEC3
 lbl_80027044:
 /* 80027044 00021F44  38 61 00 84 */	addi r3, r1, 0x84

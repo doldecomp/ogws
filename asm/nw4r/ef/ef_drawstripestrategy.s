@@ -868,23 +868,23 @@ lbl_80028F50:
 /* 80028FF0 00023EF0  D0 61 00 AC */	stfs f3, 0xac(r1)
 /* 80028FF4 00023EF4  48 0B E6 65 */	bl PSMTXConcat
 /* 80028FF8 00023EF8  C0 41 00 7C */	lfs f2, 0x7c(r1)
-/* 80028FFC 00023EFC  3C A0 80 3D */	lis r5, lbl_803D05B0@ha
+/* 80028FFC 00023EFC  3C A0 80 3D */	lis r5, mXUnitVec__Q34nw4r2ef16DrawStrategyImpl@ha
 /* 80029000 00023F00  C0 21 00 6C */	lfs f1, 0x6c(r1)
 /* 80029004 00023F04  38 7C 00 0C */	addi r3, r28, 0xc
 /* 80029008 00023F08  C0 01 00 5C */	lfs f0, 0x5c(r1)
 /* 8002900C 00023F0C  38 81 00 50 */	addi r4, r1, 0x50
 /* 80029010 00023F10  D0 21 00 2C */	stfs f1, 0x2c(r1)
-/* 80029014 00023F14  38 A5 05 B0 */	addi r5, r5, lbl_803D05B0@l
+/* 80029014 00023F14  38 A5 05 B0 */	addi r5, r5, mXUnitVec__Q34nw4r2ef16DrawStrategyImpl@l
 /* 80029018 00023F18  D0 01 00 28 */	stfs f0, 0x28(r1)
 /* 8002901C 00023F1C  D0 41 00 30 */	stfs f2, 0x30(r1)
 /* 80029020 00023F20  D0 1C 00 00 */	stfs f0, 0(r28)
 /* 80029024 00023F24  D0 3C 00 04 */	stfs f1, 4(r28)
 /* 80029028 00023F28  D0 5C 00 08 */	stfs f2, 8(r28)
 /* 8002902C 00023F2C  48 00 70 B5 */	bl VEC3TransformNormal__Q24nw4r4mathFPQ34nw4r4math4VEC3PCQ34nw4r4math5MTX34PCQ34nw4r4math4VEC3
-/* 80029030 00023F30  3C A0 80 3D */	lis r5, lbl_803D05C8@ha
+/* 80029030 00023F30  3C A0 80 3D */	lis r5, mZUnitVec__Q34nw4r2ef16DrawStrategyImpl@ha
 /* 80029034 00023F34  38 7C 00 18 */	addi r3, r28, 0x18
 /* 80029038 00023F38  38 81 00 50 */	addi r4, r1, 0x50
-/* 8002903C 00023F3C  38 A5 05 C8 */	addi r5, r5, lbl_803D05C8@l
+/* 8002903C 00023F3C  38 A5 05 C8 */	addi r5, r5, mZUnitVec__Q34nw4r2ef16DrawStrategyImpl@l
 /* 80029040 00023F40  48 00 70 A1 */	bl VEC3TransformNormal__Q24nw4r4mathFPQ34nw4r4math4VEC3PCQ34nw4r4math5MTX34PCQ34nw4r4math4VEC3
 /* 80029044 00023F44  D3 BC 00 24 */	stfs f29, 0x24(r28)
 /* 80029048 00023F48  E3 E1 01 48 */	psq_l f31, 328(r1), 0, qr0
@@ -2364,9 +2364,9 @@ GetInitialPrevAxis__Q34nw4r2ef18DrawStripeStrategyFRCQ34nw4r2ef18EmitterDrawSett
 /* 8002A608 00025508  7C 84 00 2E */	lwzx r4, r4, r0
 /* 8002A60C 0002550C  7C 89 03 A6 */	mtctr r4
 /* 8002A610 00025510  4E 80 04 20 */	bctr 
-/* 8002A614 00025514  3C A0 80 3D */	lis r5, lbl_803D05B0@ha
+/* 8002A614 00025514  3C A0 80 3D */	lis r5, mXUnitVec__Q34nw4r2ef16DrawStrategyImpl@ha
 /* 8002A618 00025518  38 86 00 08 */	addi r4, r6, 8
-/* 8002A61C 0002551C  38 A5 05 B0 */	addi r5, r5, lbl_803D05B0@l
+/* 8002A61C 0002551C  38 A5 05 B0 */	addi r5, r5, mXUnitVec__Q34nw4r2ef16DrawStrategyImpl@l
 /* 8002A620 00025520  48 00 5A C1 */	bl VEC3TransformNormal__Q24nw4r4mathFPQ34nw4r4math4VEC3PCQ34nw4r4math5MTX34PCQ34nw4r4math4VEC3
 /* 8002A624 00025524  7F C3 F3 78 */	mr r3, r30
 /* 8002A628 00025528  7F C5 F3 78 */	mr r5, r30
@@ -2381,9 +2381,9 @@ lbl_8002A638:
 /* 8002A648 00025548  D0 23 00 04 */	stfs f1, 4(r3)
 /* 8002A64C 0002554C  D0 03 00 08 */	stfs f0, 8(r3)
 /* 8002A650 00025550  48 00 00 E0 */	b lbl_8002A730
-/* 8002A654 00025554  3C A0 80 3D */	lis r5, lbl_803D05C8@ha
+/* 8002A654 00025554  3C A0 80 3D */	lis r5, mZUnitVec__Q34nw4r2ef16DrawStrategyImpl@ha
 /* 8002A658 00025558  38 86 00 08 */	addi r4, r6, 8
-/* 8002A65C 0002555C  38 A5 05 C8 */	addi r5, r5, lbl_803D05C8@l
+/* 8002A65C 0002555C  38 A5 05 C8 */	addi r5, r5, mZUnitVec__Q34nw4r2ef16DrawStrategyImpl@l
 /* 8002A660 00025560  48 00 5A 81 */	bl VEC3TransformNormal__Q24nw4r4mathFPQ34nw4r4math4VEC3PCQ34nw4r4math5MTX34PCQ34nw4r4math4VEC3
 /* 8002A664 00025564  7F C3 F3 78 */	mr r3, r30
 /* 8002A668 00025568  7F C5 F3 78 */	mr r5, r30
