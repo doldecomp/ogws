@@ -1,5 +1,13 @@
 .include "macros.inc"
 
+.section .sdata2, "a"  # 0x804BFA20 - 0x804C69E0
+
+.balign 0x8
+
+lbl_804BFEF0: .single 0e0
+lbl_804BFEF4: .single 0e1
+lbl_804BFEF8: .single 0e0.024543693
+
 .section .text, "ax"  # 0x800076E0 - 0x80355080 
 
 .global VEC3Maximize__Q24nw4r4mathFPQ34nw4r4math4VEC3PCQ34nw4r4math4VEC3PCQ34nw4r4math4VEC3

@@ -1,6 +1,28 @@
 .include "macros.inc"
 
-# .text1 = .text
+.section .data, "wa"  # 0x80393A80 - 0x803CAF00
+
+.balign 0x8
+
+# sExpTbl__Q34nw4r4math29@unnamed@math_arithmetic_cpp@
+sExpTbl__Q34nw4r4math29$$2unnamed$$2math_arithmetic_cpp$$2:
+	.incbin "baserom.dol", 0x3902D0, 0x108
+
+# sLogTbl__Q34nw4r4math29@unnamed@math_arithmetic_cpp@
+sLogTbl__Q34nw4r4math29$$2unnamed$$2math_arithmetic_cpp$$2:
+	.incbin "baserom.dol", 0x3903D8, 0x808
+
+.section .sdata2, "a"  # 0x804BFA20 - 0x804C69E0
+
+.balign 0x8
+
+lbl_804BFEA8: .single 0e1.442695
+lbl_804BFEAC: .single 0e0.6931472
+lbl_804BFEB0: .single 0e23.08312
+lbl_804BFEB4: .single 0e256
+lbl_804BFEB8: .single 0e1
+lbl_804BFEBC: .single 0e0.5
+lbl_804BFEC0: .single 0e3
 
 .section .text, "ax"  # 0x800076E0 - 0x80355080
 
@@ -23,10 +45,10 @@ FExp__Q34nw4r4math6detailFf:
 /* 8002F794 0002A694  A0 61 00 14 */	lhz r3, 0x14(r1)
 /* 8002F798 0002A698  B0 61 00 08 */	sth r3, 8(r1)
 /* 8002F79C 0002A69C  E0 01 B0 08 */	psq_l f0, 8(r1), 1, qr3
-/* 8002F7A0 0002A6A0  3C A0 80 39 */	lis r5, lbl_803941D0@ha
+/* 8002F7A0 0002A6A0  3C A0 80 39 */	lis r5, sExpTbl__Q34nw4r4math29$$2unnamed$$2math_arithmetic_cpp$$2@ha
 /* 8002F7A4 0002A6A4  54 66 18 38 */	slwi r6, r3, 3
 /* 8002F7A8 0002A6A8  54 03 B8 10 */	slwi r3, r0, 0x17
-/* 8002F7AC 0002A6AC  38 A5 41 D0 */	addi r5, r5, lbl_803941D0@l
+/* 8002F7AC 0002A6AC  38 A5 41 D0 */	addi r5, r5, sExpTbl__Q34nw4r4math29$$2unnamed$$2math_arithmetic_cpp$$2@l
 /* 8002F7B0 0002A6B0  EC 41 00 28 */	fsubs f2, f1, f0
 /* 8002F7B4 0002A6B4  7C 85 32 14 */	add r4, r5, r6
 /* 8002F7B8 0002A6B8  7C 05 34 2E */	lfsx f0, r5, r6
@@ -65,10 +87,10 @@ FLog__Q34nw4r4math6detailFf:
 /* 8002F830 0002A730  A0 01 00 0C */	lhz r0, 0xc(r1)
 /* 8002F834 0002A734  B0 01 00 08 */	sth r0, 8(r1)
 /* 8002F838 0002A738  E0 21 B0 08 */	psq_l f1, 8(r1), 1, qr3
-/* 8002F83C 0002A73C  3C 80 80 39 */	lis r4, lbl_803942D8@ha
+/* 8002F83C 0002A73C  3C 80 80 39 */	lis r4, sLogTbl__Q34nw4r4math29$$2unnamed$$2math_arithmetic_cpp$$2@ha
 /* 8002F840 0002A740  C0 02 84 8C */	lfs f0, lbl_804BFEAC-_SDA2_BASE_(r2)
 /* 8002F844 0002A744  54 00 18 38 */	slwi r0, r0, 3
-/* 8002F848 0002A748  38 84 42 D8 */	addi r4, r4, lbl_803942D8@l
+/* 8002F848 0002A748  38 84 42 D8 */	addi r4, r4, sLogTbl__Q34nw4r4math29$$2unnamed$$2math_arithmetic_cpp$$2@l
 /* 8002F84C 0002A74C  EC 82 08 28 */	fsubs f4, f2, f1
 /* 8002F850 0002A750  7C 64 02 14 */	add r3, r4, r0
 /* 8002F854 0002A754  7C 24 04 2E */	lfsx f1, r4, r0

@@ -1,6 +1,13 @@
 .include "macros.inc"
 
-# .text1 = .text
+.section .sdata2, "a"  # 0x804BFA20 - 0x804C69E0
+
+.balign 0x8
+
+lbl_804BFF00: .single 0e0.5
+lbl_804BFF04: .single 0e0
+lbl_804BFF08: .single 0e0.024543693
+lbl_804BFF0C: .single 0e0.7111111
 
 .section .text, "ax"  # 0x800076E0 - 0x80355080 
 
