@@ -1,4 +1,7 @@
 #ifndef MSL_STDDEF_H
 #define MSL_STDDEF_H
-#include <RevoSDK/TRK/typesTRK.h>
+#define NULL 0
+
+typedef unsigned long size_t;
+
 #endif

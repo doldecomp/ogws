@@ -1,7 +1,6 @@
 #ifndef TYPES_H
 #define TYPES_H
-
-#define NULL 0
+#include <stddef.h>
 
 typedef unsigned long long u64;
 typedef signed long long s64;

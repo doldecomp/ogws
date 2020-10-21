@@ -1133,7 +1133,7 @@ lbl_8003845C:
 lbl_80038488:
 /* 80038488 00033388  3B E0 00 01 */	li r31, 1
 /* 8003848C 0003338C  9B FE 00 33 */	stb r31, 0x33(r30)
-/* 80038490 00033390  48 01 5C 25 */	bl func_8004E0B4
+/* 80038490 00033390  48 01 5C 25 */	bl GetInstance__Q44nw4r3snd6detail12VoiceManagerFv
 /* 80038494 00033394  3C E0 80 04 */	lis r7, VoiceCallbackFunc__Q44nw4r3snd6detail7ChannelFPQ44nw4r3snd6detail5VoiceQ54nw4r3snd6detail5Voice19VoiceCallbackStatusPv@ha
 /* 80038498 00033398  7F 04 C3 78 */	mr r4, r24
 /* 8003849C 0003339C  7F 25 CB 78 */	mr r5, r25

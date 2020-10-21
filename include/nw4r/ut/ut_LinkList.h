@@ -10,6 +10,8 @@ namespace nw4r
 		{
 			LinkListNode * mNext;
 			LinkListNode * mPrev;
+			
+			inline LinkListNode() : mNext(NULL), mPrev(NULL) {}
 		};
 		
 		namespace detail
@@ -18,7 +20,7 @@ namespace nw4r
 			{
 				u32 mCount;
 				
-				LinkListNode mNodes[];
+				LinkListNode mEndNode;
 				
 				struct Iterator
 				{
@@ -40,12 +42,12 @@ namespace nw4r
 				
 				inline Iterator GetEndIter()
 				{
-					return Iterator(mNodes);
+					return Iterator(&mEndNode);
 				}
 				
 				inline Iterator GetBeginIter()
 				{
-					return Iterator(mNodes->mNext);
+					return Iterator(mEndNode.mNext);
 				}
 				
 				~LinkListImpl();
@@ -89,6 +91,17 @@ namespace nw4r
 				void Clear();
 				
 				LinkListNode * Insert(Iterator, LinkListNode *);
+				
+				inline void Initialize_()
+				{
+					mEndNode.mNext = &mEndNode;
+					mEndNode.mPrev = &mEndNode;
+				}
+				
+				inline LinkListImpl() : mCount(0), mEndNode()
+				{
+					Initialize_();
+				}
 			};
 			
 			inline bool operator ==(LinkListImpl::Iterator iter1, LinkListImpl::Iterator iter2)
@@ -96,6 +109,78 @@ namespace nw4r
 				return iter1.mNode == iter1.mNode;
 			}
 		}
+		
+		template <typename T, int I>
+		struct LinkList : detail::LinkListImpl
+		{
+			static inline LinkListNode * GetNodeFromPointer(T * ptr)
+			{
+				return (LinkListNode *)((char *)ptr + I);
+			}
+			
+			static inline T * GetPointerFromNode(LinkListNode * node)
+			{
+				return (T *)((char *)node - I);
+			}
+			
+			struct Iterator : detail::LinkListImpl::Iterator
+			{
+				inline Iterator(detail::LinkListImpl::Iterator iter) : detail::LinkListImpl::Iterator(iter) {}
+				
+				inline bool operator ==(Iterator other)
+				{
+					return detail::operator==(*this, other);
+				}
+				
+				inline bool operator !=(Iterator other)
+				{
+					return !(*this == other);
+				}
+				
+				inline Iterator & operator ++()
+				{
+					mNode = mNode->mNext;
+					return *this;
+				}
+				
+				inline Iterator operator ++(int)
+				{
+					Iterator ret = *this;
+					++*this;
+					return ret;
+				}
+				
+				inline T * operator->() const
+				{
+					return GetPointerFromNode(mNode);
+				}
+			};
+			
+			inline Iterator GetEndIter()
+			{
+				return Iterator(detail::LinkListImpl::GetEndIter());
+			}
+			
+			inline Iterator GetBeginIter()
+			{
+				return Iterator(detail::LinkListImpl::GetBeginIter());
+			}
+			
+			inline UNKTYPE Insert(Iterator iter, T * ptr)
+			{
+				detail::LinkListImpl::Insert(iter, GetNodeFromPointer(ptr));
+			}
+			
+			inline UNKTYPE PushBack(T * ptr)
+			{
+				Insert(GetEndIter(), ptr);
+			}
+			
+			inline UNKTYPE Erase(T * ptr)
+			{
+				detail::LinkListImpl::Erase(GetNodeFromPointer(ptr));
+			}
+		};
 	}
 }
 

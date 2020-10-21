@@ -38,6 +38,11 @@ namespace nw4r
 		struct VEC3;
 		struct MTX34;
 	}
+	
+	namespace snd
+	{
+		struct FxBase;
+	}
 }
 
 typedef int UNKWORD;

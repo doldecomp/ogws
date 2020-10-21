@@ -1,11 +1,9 @@
 #ifndef REVOSDK_DVD_H
 #define REVOSDK_DVD_H
+#include <types.h>
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-typedef void UNKTYPE;
-typedef int UNKWORD;
 
 struct DVD_UNK;
 struct DVDCB_UNK;
@@ -42,6 +40,8 @@ struct DVDCommandBlock
 	char UNK_0x0[0x3C];
 	struct DVDCB_UNK * PTR_0x3C;
 };
+
+UNKWORD DVDGetDriveStatus(void);
 
 #ifdef __cplusplus
 }
