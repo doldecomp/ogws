@@ -16,16 +16,18 @@
 namespace nw4r
 {
 	using namespace ut;
-	
 	namespace snd
 	{
 		namespace detail
 		{
+			u8 AxManager::sZeroBuffer[0x100];
+			
+			template struct LinkList<AxManager::CallbackListNode,0>;
+			
 			AxManager::AxManager() :
 				mOutputMode(OUTPUT_MODE_0),
 				mZeroBufferAddress(),
 				mCallbackList(),
-				mLastCallback(),
 				mPoweredFlag(false),
 				BYTE_0x19(true),
 				BYTE_0x1A(false),
@@ -45,6 +47,7 @@ namespace nw4r
 				}
 			}
 			
+			template struct LinkList<FxBase,4>;
 			
 			AxManager * AxManager::GetInstance()
 			{
@@ -83,6 +86,8 @@ namespace nw4r
 			{
 				if (mPoweredFlag)
 				{
+					AXRegisterCallback(mLastCallback);
+					
 					ShutdownEffect(AuxBus_A);
 					ShutdownEffect(AuxBus_B);
 					ShutdownEffect(AuxBus_C);
@@ -148,6 +153,7 @@ namespace nw4r
 					if (!ARR_0x54[i].IsFinished())
 					{
 						ARR_0x54[i].Update();
+						if (ARR_0x54[i].IsFinished()) ShutdownEffect((AuxBus)i);
 						r4 = true;
 					}
 					if (r4)
@@ -258,7 +264,7 @@ namespace nw4r
 				mOutputVolume.T2_0x8 = i / 3;
 				*/
 				
-				mOutputVolume.SetTarget(Clamp<float>(0.0f, 1.0f, f), i / 3);
+				mOutputVolume.SetTarget(Clamp<float>(0.0f, 1.0f, f), (i + 2) / 3);
 				
 				if (!i) VoiceManager::GetInstance()->UpdateAllVoicesSync(0x8);
 			}
@@ -323,7 +329,7 @@ namespace nw4r
 			void AxManager::ClearEffect(AuxBus bus, int time)
 			{
 				if (!time) ShutdownEffect(bus);
-				else ARR_0x54[bus].SetTarget(0.0f, time / 3);
+				else ARR_0x54[bus].SetTarget(0.0f, (time + 2) / 3);
 			}
 			
 			void AxManager::ShutdownEffect(AuxBus bus)
@@ -448,10 +454,9 @@ namespace nw4r
 					if (0.0f != pInstance->MV_0x3C.GetValue()) finishedFlag = true;
 				}
 				
-				if (pInstance->WORD_0x50 > 0) pInstance->WORD_0x50++; 
+				// if (pInstance->WORD_0x50 > 0) pInstance->WORD_0x50--; 
+				if (pInstance->WORD_0x50 > 0) const_cast<volatile AxManager *>(pInstance)->WORD_0x50--;
 			}
-			
-			u8 AxManager::sZeroBuffer[0x100];
 		}
 	}
 }

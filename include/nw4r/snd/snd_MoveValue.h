@@ -40,15 +40,15 @@ namespace nw4r
 				
 				inline void Update()
 				{
-					if (!IsFinished()) T2_0xC++;
+					if (T2_0xC < T2_0x8) T2_0xC++;
 				}
 				
 				inline void SetTarget(T1 t1, T2 t2)
 				{
 					T1_0x0 = GetValue();
 					T1_0x4 = t1;
-					T2_0xC = 0;
 					T2_0x8 = t2;
+					T2_0xC = 0;
 				}
 			};
 		}

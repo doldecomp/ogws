@@ -50,8 +50,6 @@ namespace nw4r
 					return Iterator(mEndNode.mNext);
 				}
 				
-				~LinkListImpl();
-				
 				LinkListNode * Erase(Iterator);
 				LinkListNode * Erase(LinkListNode *);
 				inline LinkListNode * Erase(Iterator iBegin, Iterator iEnd)
@@ -92,21 +90,27 @@ namespace nw4r
 				
 				LinkListNode * Insert(Iterator, LinkListNode *);
 				
-				inline void Initialize_()
+				inline void Initialize_() volatile
 				{
-					mEndNode.mNext = &mEndNode;
-					mEndNode.mPrev = &mEndNode;
+					mEndNode.mNext = NULL;
+					mEndNode.mPrev = NULL;
+					mCount = 0;
 				}
 				
-				inline LinkListImpl() : mCount(0), mEndNode()
+				LinkListImpl() : mCount(0), mEndNode()
 				{
+					LinkListNode *lp = &mEndNode;
 					Initialize_();
+					mEndNode.mNext = lp;
+					mEndNode.mPrev = lp;
 				}
+				
+				~LinkListImpl();
 			};
 			
 			inline bool operator ==(LinkListImpl::Iterator iter1, LinkListImpl::Iterator iter2)
 			{
-				return iter1.mNode == iter1.mNode;
+				return iter1.mNode == iter2.mNode;
 			}
 		}
 		
@@ -180,7 +184,13 @@ namespace nw4r
 			{
 				detail::LinkListImpl::Erase(GetNodeFromPointer(ptr));
 			}
+			
+			~LinkList();
+			inline LinkList() {}
 		};
+		
+		template <typename T, int I> LinkList<T,I>::~LinkList() {}
+		//template <typename T, int I> inline LinkList<T,I>::LinkList() {}
 	}
 }
 

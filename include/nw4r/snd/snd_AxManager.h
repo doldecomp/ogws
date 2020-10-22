@@ -72,7 +72,7 @@ namespace nw4r
 				AXCallback mLastCallback; // at 0x14
 				bool mPoweredFlag; // at 0x18
 				bool BYTE_0x19;
-				char BYTE_0x1A;
+				bool BYTE_0x1A;
 				
 				MoveValue<float, int> mOutputVolume; // at 0x1c
 				MoveValue<float, int> MV_0x2C;

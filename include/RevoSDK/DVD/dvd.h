@@ -41,7 +41,7 @@ struct DVDCommandBlock
 	struct DVDCB_UNK * PTR_0x3C;
 };
 
-UNKWORD DVDGetDriveStatus(void);
+u32 DVDGetDriveStatus(void);
 
 #ifdef __cplusplus
 }
