@@ -40,6 +40,12 @@ namespace nw4r
 			{
 				return ( (t >> bitIndexLSB) & ((1 >> bitCount) - 1) );
 			}
+			
+			template <typename T>
+			inline T RoundUp(T t, unsigned int alignment)
+			{
+				return (t + alignment - 1) & -alignment;
+			}
 		}
 	}
 }

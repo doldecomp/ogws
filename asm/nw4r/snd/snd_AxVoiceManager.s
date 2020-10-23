@@ -7,6 +7,13 @@
 lbl_803D0840: .skip 0xC
 instance$3086: .skip 0x2C
 
+.section .sbss, "wa" # 0x804BE9E0 - 0x804BFA20
+
+.balign 0x8
+
+# @GUARD@instance$3086
+$$2GUARD$$2instance$3086: .skip 0x1
+
 .section .text, "ax"  # 0x800076E0 - 0x80355080 
 
 .global GetInstance__Q44nw4r3snd6detail14AxVoiceManagerFv
@@ -14,7 +21,7 @@ GetInstance__Q44nw4r3snd6detail14AxVoiceManagerFv:
 /* 80034F48 0002FE48  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80034F4C 0002FE4C  7C 08 02 A6 */	mflr r0
 /* 80034F50 0002FE50  90 01 00 14 */	stw r0, 0x14(r1)
-/* 80034F54 0002FE54  88 0D 96 E8 */	lbz r0, lbl_804BEA68-_SDA_BASE_(r13)
+/* 80034F54 0002FE54  88 0D 96 E8 */	lbz r0, $$2GUARD$$2instance$3086-_SDA_BASE_(r13)
 /* 80034F58 0002FE58  7C 00 07 75 */	extsb. r0, r0
 /* 80034F5C 0002FE5C  40 82 00 78 */	bne lbl_80034FD4
 /* 80034F60 0002FE60  3C C0 80 3D */	lis r6, instance$3086@ha
@@ -45,7 +52,7 @@ GetInstance__Q44nw4r3snd6detail14AxVoiceManagerFv:
 /* 80034FC4 0002FEC4  98 03 00 24 */	stb r0, 0x24(r3)
 /* 80034FC8 0002FEC8  48 07 C8 6D */	bl func_800B1834
 /* 80034FCC 0002FECC  38 00 00 01 */	li r0, 1
-/* 80034FD0 0002FED0  98 0D 96 E8 */	stb r0, lbl_804BEA68-_SDA_BASE_(r13)
+/* 80034FD0 0002FED0  98 0D 96 E8 */	stb r0, $$2GUARD$$2instance$3086-_SDA_BASE_(r13)
 lbl_80034FD4:
 /* 80034FD4 0002FED4  80 01 00 14 */	lwz r0, 0x14(r1)
 /* 80034FD8 0002FED8  3C 60 80 3D */	lis r3, instance$3086@ha
@@ -380,7 +387,7 @@ lbl_80035430:
 /* 80035450 00030350  7D 89 03 A6 */	mtctr r12
 /* 80035454 00030354  4E 80 04 21 */	bctrl 
 lbl_80035458:
-/* 80035458 00030358  88 0D 96 E8 */	lbz r0, lbl_804BEA68-_SDA_BASE_(r13)
+/* 80035458 00030358  88 0D 96 E8 */	lbz r0, $$2GUARD$$2instance$3086-_SDA_BASE_(r13)
 /* 8003545C 0003035C  7C 00 07 75 */	extsb. r0, r0
 /* 80035460 00030360  40 82 00 64 */	bne lbl_800354C4
 /* 80035464 00030364  93 9A 00 04 */	stw r28, 4(r26)
@@ -406,7 +413,7 @@ lbl_80035458:
 /* 800354B4 000303B4  91 1A 00 20 */	stw r8, 0x20(r26)
 /* 800354B8 000303B8  9B 9A 00 24 */	stb r28, 0x24(r26)
 /* 800354BC 000303BC  48 07 C3 79 */	bl func_800B1834
-/* 800354C0 000303C0  9B ED 96 E8 */	stb r31, lbl_804BEA68-_SDA_BASE_(r13)
+/* 800354C0 000303C0  9B ED 96 E8 */	stb r31, $$2GUARD$$2instance$3086-_SDA_BASE_(r13)
 lbl_800354C4:
 /* 800354C4 000303C4  48 0B C3 FD */	bl OSDisableInterrupts
 /* 800354C8 000303C8  80 19 00 00 */	lwz r0, 0(r25)
@@ -669,7 +676,7 @@ lbl_80035844:
 /* 80035864 00030764  7D 89 03 A6 */	mtctr r12
 /* 80035868 00030768  4E 80 04 21 */	bctrl 
 lbl_8003586C:
-/* 8003586C 0003076C  88 0D 96 E8 */	lbz r0, lbl_804BEA68-_SDA_BASE_(r13)
+/* 8003586C 0003076C  88 0D 96 E8 */	lbz r0, $$2GUARD$$2instance$3086-_SDA_BASE_(r13)
 /* 80035870 00030770  7C 00 07 75 */	extsb. r0, r0
 /* 80035874 00030774  40 82 00 64 */	bne lbl_800358D8
 /* 80035878 00030778  93 16 00 04 */	stw r24, 4(r22)
@@ -695,7 +702,7 @@ lbl_8003586C:
 /* 800358C8 000307C8  91 16 00 20 */	stw r8, 0x20(r22)
 /* 800358CC 000307CC  9B 16 00 24 */	stb r24, 0x24(r22)
 /* 800358D0 000307D0  48 07 BF 65 */	bl func_800B1834
-/* 800358D4 000307D4  9B 6D 96 E8 */	stb r27, lbl_804BEA68-_SDA_BASE_(r13)
+/* 800358D4 000307D4  9B 6D 96 E8 */	stb r27, $$2GUARD$$2instance$3086-_SDA_BASE_(r13)
 lbl_800358D8:
 /* 800358D8 000307D8  48 0B BF E9 */	bl OSDisableInterrupts
 /* 800358DC 000307DC  80 15 00 00 */	lwz r0, 0(r21)
