@@ -1,5 +1,17 @@
 .include "macros.inc"
 
+.section .sdata2, "a"  # 0x804BFA20 - 0x804C69E0
+
+.balign 0x8
+
+lbl_804BFF28: .single 0e32000
+lbl_804BFF2C: .single 0e1.3333334
+lbl_804BFF30: .single 0e1
+.balign 8
+lbl_804BFF38: .double 0e4.503601774854144E15
+lbl_804BFF40: .single 0e65536
+lbl_804BFF44: .single 0e32767
+
 .section .text, "ax"  # 0x800076E0 - 0x80355080 
 
 .global __ct__Q44nw4r3snd6detail7AxVoiceFv
@@ -824,8 +836,8 @@ lbl_80033074:
 /* 80033074 0002DF74  7C A3 2B 78 */	mr r3, r5
 /* 80033078 0002DF78  4E 80 00 20 */	blr 
 
-.global AXSetVoicePriority
-AXSetVoicePriority:
+.global SetPriority__Q44nw4r3snd6detail7AxVoiceFUl
+SetPriority__Q44nw4r3snd6detail7AxVoiceFUl:
 /* 8003307C 0002DF7C  80 63 00 00 */	lwz r3, 0(r3)
 /* 80033080 0002DF80  2C 03 00 00 */	cmpwi r3, 0
 /* 80033084 0002DF84  4D 82 00 20 */	beqlr 
