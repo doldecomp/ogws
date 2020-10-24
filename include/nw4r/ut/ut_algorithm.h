@@ -46,6 +46,12 @@ namespace nw4r
 			{
 				return (t + alignment - 1) & -alignment;
 			}
+			
+			template <typename T>
+			inline const void * AddOffsetToPtr(const void * ptr, T offset)
+			{
+				return (const void *)(offset + (T)ptr);
+			}
 		}
 	}
 }

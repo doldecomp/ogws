@@ -67,8 +67,8 @@ TEXT_O_FILES := \
 	build/asm/nw4r/snd/snd_AxVoice.o \
 	build/asm/nw4r/snd/snd_AxVoiceManager.o \
 	build/nw4r/snd/snd_AxfxImpl.o \
-	build/asm/nw4r/snd/snd_Bank.o \
-	build/asm/nw4r/snd/snd_BankFile.o \
+	build/nw4r/snd/snd_Bank.o \
+	build/nw4r/snd/snd_BankFile.o \
 	build/asm/nw4r/snd/snd_BasicPlayer.o \
 	build/asm/nw4r/snd/snd_BasicSound.o \
 	build/asm/nw4r/snd/snd_Channel.o \
