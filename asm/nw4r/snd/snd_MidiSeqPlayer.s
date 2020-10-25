@@ -4,7 +4,7 @@
 
 .global ____OnUpdateFrameSoundThread__Q44nw4r3snd6detail9SeqPlayerFv
 ____OnUpdateFrameSoundThread__Q44nw4r3snd6detail9SeqPlayerFv:
-/* 8003B864 00036764  48 00 35 54 */	b func_8003EDB8
+/* 8003B864 00036764  48 00 35 54 */	b Update__Q44nw4r3snd6detail9SeqPlayerFv
 
 .global ____OnShutdownSoundThread__Q44nw4r3snd6detail9SeqPlayerFv
 ____OnShutdownSoundThread__Q44nw4r3snd6detail9SeqPlayerFv:
