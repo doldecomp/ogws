@@ -89,6 +89,7 @@ TEXT_O_FILES := \
 	build/asm/nw4r/snd/snd_MidiSeqPlayer.o \
 	build/asm/nw4r/snd/snd_MmlParser.o \
 	build/asm/nw4r/snd/snd_MmlSeqTrack.o \
+	build/asm/nw4r/snd/snd_MmlSeqTrackAllocator.o \
 	build/asm/text.o \
 
 CTORS_O_FILES := build/asm/ctors_2.o
