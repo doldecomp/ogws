@@ -85,6 +85,13 @@ TEXT_O_FILES := \
 	build/asm/nw4r/snd/snd_InstancePool.o \
 	build/asm/nw4r/snd/snd_Lfo.o \
 	build/asm/nw4r/snd/snd_MemorySoundArchive.o \
+	build/asm/nw4r/snd/snd_MidiSeqPlayer.o \
+	build/asm/nw4r/snd/snd_MmlParser.o \
+	build/asm/nw4r/snd/snd_MmlSeqTrack.o \
+	build/asm/nw4r/snd/snd_MmlSeqTrackAllocator.o \
+	build/asm/nw4r/snd/snd_NandSoundArchive.o \
+	build/asm/nw4r/snd/snd_RemoteSpeaker.o \
+	build/asm/nw4r/snd/snd_RemoteSpeakerManager.o \
 	build/asm/text.o \
 
 CTORS_O_FILES := build/asm/ctors_2.o
