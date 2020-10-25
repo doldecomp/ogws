@@ -92,6 +92,8 @@ TEXT_O_FILES := \
 	build/asm/nw4r/snd/snd_NandSoundArchive.o \
 	build/asm/nw4r/snd/snd_RemoteSpeaker.o \
 	build/asm/nw4r/snd/snd_RemoteSpeakerManager.o \
+	build/asm/nw4r/snd/snd_SeqFile.o \
+	build/asm/nw4r/snd/snd_SeqPlayer.o \
 	build/asm/text.o \
 
 CTORS_O_FILES := build/asm/ctors_2.o
