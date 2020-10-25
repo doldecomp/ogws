@@ -458,9 +458,9 @@ SpeakerOnCallback__Q34nw4r3snd13RemoteSpeakerFll:
 /* 8003D788 00038688  7C 9E 23 78 */	mr r30, r4
 /* 8003D78C 0003868C  93 A1 00 14 */	stw r29, 0x14(r1)
 /* 8003D790 00038690  7C 7D 1B 78 */	mr r29, r3
-/* 8003D794 00038694  48 00 03 89 */	bl func_8003DB1C
+/* 8003D794 00038694  48 00 03 89 */	bl GetInstance__Q44nw4r3snd6detail20RemoteSpeakerManagerFv
 /* 8003D798 00038698  7F A4 EB 78 */	mr r4, r29
-/* 8003D79C 0003869C  48 00 04 19 */	bl func_8003DBB4
+/* 8003D79C 0003869C  48 00 04 19 */	bl GetRemoteSpeaker__Q44nw4r3snd6detail20RemoteSpeakerManagerFi
 /* 8003D7A0 000386A0  2C 1E FF FF */	cmpwi r30, -1
 /* 8003D7A4 000386A4  7C 7F 1B 78 */	mr r31, r3
 /* 8003D7A8 000386A8  41 82 00 60 */	beq lbl_8003D808
@@ -535,9 +535,9 @@ SpeakerPlayCallback__Q34nw4r3snd13RemoteSpeakerFll:
 /* 8003D894 00038794  7C 9E 23 78 */	mr r30, r4
 /* 8003D898 00038798  93 A1 00 14 */	stw r29, 0x14(r1)
 /* 8003D89C 0003879C  7C 7D 1B 78 */	mr r29, r3
-/* 8003D8A0 000387A0  48 00 02 7D */	bl func_8003DB1C
+/* 8003D8A0 000387A0  48 00 02 7D */	bl GetInstance__Q44nw4r3snd6detail20RemoteSpeakerManagerFv
 /* 8003D8A4 000387A4  7F A4 EB 78 */	mr r4, r29
-/* 8003D8A8 000387A8  48 00 03 0D */	bl func_8003DBB4
+/* 8003D8A8 000387A8  48 00 03 0D */	bl GetRemoteSpeaker__Q44nw4r3snd6detail20RemoteSpeakerManagerFi
 /* 8003D8AC 000387AC  2C 1E FF FF */	cmpwi r30, -1
 /* 8003D8B0 000387B0  7C 7F 1B 78 */	mr r31, r3
 /* 8003D8B4 000387B4  41 82 00 44 */	beq lbl_8003D8F8
@@ -603,9 +603,9 @@ SpeakerOffCallback__Q34nw4r3snd13RemoteSpeakerFll:
 /* 8003D97C 0003887C  7C 9E 23 78 */	mr r30, r4
 /* 8003D980 00038880  93 A1 00 14 */	stw r29, 0x14(r1)
 /* 8003D984 00038884  7C 7D 1B 78 */	mr r29, r3
-/* 8003D988 00038888  48 00 01 95 */	bl func_8003DB1C
+/* 8003D988 00038888  48 00 01 95 */	bl GetInstance__Q44nw4r3snd6detail20RemoteSpeakerManagerFv
 /* 8003D98C 0003888C  7F A4 EB 78 */	mr r4, r29
-/* 8003D990 00038890  48 00 02 25 */	bl func_8003DBB4
+/* 8003D990 00038890  48 00 02 25 */	bl GetRemoteSpeaker__Q44nw4r3snd6detail20RemoteSpeakerManagerFi
 /* 8003D994 00038894  2C 1E FF FF */	cmpwi r30, -1
 /* 8003D998 00038898  7C 7F 1B 78 */	mr r31, r3
 /* 8003D99C 0003889C  41 82 00 44 */	beq lbl_8003D9E0
