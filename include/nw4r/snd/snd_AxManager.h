@@ -1,5 +1,6 @@
 #ifndef NW4R_SND_AXMANAGER_H
 #define NW4R_SND_AXMANAGER_H
+#include <ai.h>
 #include <AX.h>
 #include "types_nw4r.h"
 #include "ut_LinkList.h"

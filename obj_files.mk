@@ -69,7 +69,7 @@ TEXT_O_FILES := \
 	build/nw4r/snd/snd_AxfxImpl.o \
 	build/nw4r/snd/snd_Bank.o \
 	build/nw4r/snd/snd_BankFile.o \
-	build/asm/nw4r/snd/snd_BasicPlayer.o \
+	build/nw4r/snd/snd_BasicPlayer.o \
 	build/asm/nw4r/snd/snd_BasicSound.o \
 	build/asm/nw4r/snd/snd_Channel.o \
 	build/asm/nw4r/snd/snd_DisposeCallbackManager.o \
