@@ -2,6 +2,10 @@
 
 .section .text, "ax"  # 0x800076E0 - 0x80355080 
 
+.global OnUpdateFrameSoundThread__Q44nw4r3snd6detail9SeqPlayerFv
+OnUpdateFrameSoundThread__Q44nw4r3snd6detail9SeqPlayerFv:
+/* 8003B864 00036764  48 00 35 54 */	b func_8003EDB8
+
 .global OnShutdownSoundThread__Q44nw4r3snd6detail9SeqPlayerFv
 OnShutdownSoundThread__Q44nw4r3snd6detail9SeqPlayerFv:
 /* 8003B868 00036768  81 83 00 00 */	lwz r12, 0(r3)
@@ -30,21 +34,21 @@ IsActive__Q44nw4r3snd6detail9SeqPlayerCFv:
 /* 8003B894 00036794  4E 80 00 20 */	blr 
 
 .global $$2116$$2InvalidateWaveData__Q44nw4r3snd6detail9SeqPlayerFPCvPCv
-$$2116$$InvalidateWaveData__Q44nw4r3snd6detail9SeqPlayerFPCvPCv:
+$$2116$$2InvalidateWaveData__Q44nw4r3snd6detail9SeqPlayerFPCvPCv:
 /* 8003B898 00036798  38 63 FF 8C */	addi r3, r3, -116
 /* 8003B89C 0003679C  4B FF FF DC */	b InvalidateWaveData__Q44nw4r3snd6detail9SeqPlayerFPCvPCv
 
-.global InvalidateData__Q44nw4r3snd6detail9SeqPlayerFPCvPCv
-InvalidateData__Q44nw4r3snd6detail9SeqPlayerFPCvPCv:
+.global $$2116$$2InvalidateData__Q44nw4r3snd6detail9SeqPlayerFPCvPCv
+$$2116$$2InvalidateData__Q44nw4r3snd6detail9SeqPlayerFPCvPCv:
 /* 8003B8A0 000367A0  38 63 FF 8C */	addi r3, r3, -116
-/* 8003B8A4 000367A4  48 00 31 B4 */	b func_8003EA58
+/* 8003B8A4 000367A4  48 00 31 B4 */	b InvalidateData__Q44nw4r3snd6detail9SeqPlayerFPCvPCv
 
 .global $$2128$$2OnShutdownSoundThread__Q44nw4r3snd6detail9SeqPlayerFv
 $$2128$$2OnShutdownSoundThread__Q44nw4r3snd6detail9SeqPlayerFv:
 /* 8003B8A8 000367A8  38 63 FF 80 */	addi r3, r3, -128
 /* 8003B8AC 000367AC  4B FF FF BC */	b OnShutdownSoundThread__Q44nw4r3snd6detail9SeqPlayerFv
 
-.global OnUpdateFrameSoundThread__Q44nw4r3snd6detail9SeqPlayerFv
-OnUpdateFrameSoundThread__Q44nw4r3snd6detail9SeqPlayerFv:
+.global $$2128$$2OnUpdateFrameSoundThread__Q44nw4r3snd6detail9SeqPlayerFv
+$$2128$$2OnUpdateFrameSoundThread__Q44nw4r3snd6detail9SeqPlayerFv:
 /* 8003B8B0 000367B0  38 63 FF 80 */	addi r3, r3, -128
-/* 8003B8B4 000367B4  4B FF FF B0 */	b func_8003B864
+/* 8003B8B4 000367B4  4B FF FF B0 */	b OnUpdateFrameSoundThread__Q44nw4r3snd6detail9SeqPlayerFv
