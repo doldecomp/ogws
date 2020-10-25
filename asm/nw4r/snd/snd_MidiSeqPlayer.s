@@ -16,6 +16,9 @@ ____OnShutdownSoundThread__Q44nw4r3snd6detail9SeqPlayerFv:
 .global ____InvalidateWaveData__Q44nw4r3snd6detail9SeqPlayerFPCvPCv
 ____InvalidateWaveData__Q44nw4r3snd6detail9SeqPlayerFPCvPCv:
 /* 8003B878 00036778  4E 80 00 20 */	blr 
+
+.global OnUpdateVoiceSoundThread__Q54nw4r3snd6detail11SoundThread14PlayerCallbackFv
+OnUpdateVoiceSoundThread__Q54nw4r3snd6detail11SoundThread14PlayerCallbackFv:
 /* 8003B87C 0003677C  4E 80 00 20 */	blr 
 
 .global ____IsPause__Q44nw4r3snd6detail9SeqPlayerCFv
