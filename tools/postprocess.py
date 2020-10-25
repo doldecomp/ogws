@@ -42,7 +42,8 @@ substitutions = (
     ('\\', '$$3'),
     (',',  '$$4'),
     ('-',  '$$5'),
-    ('func_800B1834',  '__register_global_object')
+    ('func_800B1834',  '__register_global_object'),
+    ('',  '____')
 )
 
 def format(symbol):
