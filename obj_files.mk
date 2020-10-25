@@ -87,6 +87,8 @@ TEXT_O_FILES := \
 	build/asm/nw4r/snd/snd_MemorySoundArchive.o \
 	build/asm/nw4r/nw4r_8003B864.o \
 	build/asm/nw4r/snd/snd_MidiSeqPlayer.o \
+	build/asm/nw4r/snd/snd_MmlParser.o \
+	build/asm/nw4r/snd/snd_MmlSeqTrack.o \
 	build/asm/text.o \
 
 CTORS_O_FILES := build/asm/ctors_2.o
