@@ -21,18 +21,18 @@ ____InvalidateWaveData__Q44nw4r3snd6detail9SeqPlayerFPCvPCv:
 OnUpdateVoiceSoundThread__Q54nw4r3snd6detail11SoundThread14PlayerCallbackFv:
 /* 8003B87C 0003677C  4E 80 00 20 */	blr 
 
-.global ____IsPause__Q44nw4r3snd6detail9SeqPlayerCFv
-____IsPause__Q44nw4r3snd6detail9SeqPlayerCFv:
+.global IsPause__Q44nw4r3snd6detail9SeqPlayerCFv
+IsPause__Q44nw4r3snd6detail9SeqPlayerCFv:
 /* 8003B880 00036780  88 63 00 8E */	lbz r3, 0x8e(r3)
 /* 8003B884 00036784  4E 80 00 20 */	blr 
 
-.global ____IsStarted__Q44nw4r3snd6detail9SeqPlayerCFv
-____IsStarted__Q44nw4r3snd6detail9SeqPlayerCFv:
+.global IsStarted__Q44nw4r3snd6detail9SeqPlayerCFv
+IsStarted__Q44nw4r3snd6detail9SeqPlayerCFv:
 /* 8003B888 00036788  88 63 00 8D */	lbz r3, 0x8d(r3)
 /* 8003B88C 0003678C  4E 80 00 20 */	blr 
 
-.global ____IsActive__Q44nw4r3snd6detail9SeqPlayerCFv
-____IsActive__Q44nw4r3snd6detail9SeqPlayerCFv:
+.global IsActive__Q44nw4r3snd6detail9SeqPlayerCFv
+IsActive__Q44nw4r3snd6detail9SeqPlayerCFv:
 /* 8003B890 00036790  88 63 00 8C */	lbz r3, 0x8c(r3)
 /* 8003B894 00036794  4E 80 00 20 */	blr 
 
