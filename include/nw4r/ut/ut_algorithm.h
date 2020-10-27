@@ -1,5 +1,6 @@
 #ifndef NW4R_UT_ALGORITHM_H
 #define NW4R_UT_ALGORITHM_H
+#include "types_nw4r.h"
 
 namespace nw4r
 {
@@ -45,6 +46,12 @@ namespace nw4r
 			inline T RoundUp(T t, unsigned int alignment)
 			{
 				return (t + alignment - 1) & -alignment;
+			}
+			
+			template <>
+			inline void * RoundUp(void * ptr, unsigned int alignment)
+			{
+				return (void *)RoundUp<u32>((u32)ptr, alignment);
 			}
 			
 			template <typename T>
