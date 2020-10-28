@@ -1,5 +1,8 @@
 .include "macros.inc"
 
+.section .ctors
+	.long __sinit_$$3ef_drawstrategyimpl_cpp
+
 .section .data, "wa"  # 0x80393A80 - 0x803CAF00
 
 .balign 0x8

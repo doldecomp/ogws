@@ -1,14 +1,69 @@
 .include "macros.inc"
 
+.section .ctors
+	.long __sinit_$$3snd_BasicSound_cpp
+
+.section .data, "wa"  # 0x80393A80 - 0x803CAF00
+
+.balign 0x8
+
+.global __vt__Q44nw4r3snd6detail10BasicSound
+__vt__Q44nw4r3snd6detail10BasicSound:
+	.long 0
+	.long 0
+	.long GetRuntimeTypeInfo__Q44nw4r3snd6detail10BasicSoundCFv
+	.long __dt__Q44nw4r3snd6detail10BasicSoundFv
+	.long Update__Q44nw4r3snd6detail10BasicSoundFv
+	.long StartPrepared__Q44nw4r3snd6detail10BasicSoundFv
+	.long Stop__Q44nw4r3snd6detail10BasicSoundFi
+	.long Pause__Q44nw4r3snd6detail10BasicSoundFbi
+	.long SetAutoStopCounter__Q44nw4r3snd6detail10BasicSoundFi
+	.long FadeIn__Q44nw4r3snd6detail10BasicSoundFi
+	.long Shutdown__Q44nw4r3snd6detail10BasicSoundFv
+	.long 0
+	.long IsPause__Q44nw4r3snd6detail10BasicSoundCFv
+	.long SetInitialVolume__Q44nw4r3snd6detail10BasicSoundFf
+	.long SetVolume__Q44nw4r3snd6detail10BasicSoundFfi
+	.long SetPitch__Q44nw4r3snd6detail10BasicSoundFf
+	.long SetPan__Q44nw4r3snd6detail10BasicSoundFf
+	.long SetSurroundPan__Q44nw4r3snd6detail10BasicSoundFf
+	.long SetLpfFreq__Q44nw4r3snd6detail10BasicSoundFf
+	.long SetPlayerPriority__Q44nw4r3snd6detail10BasicSoundFi
+	.long SetRemoteFilter__Q44nw4r3snd6detail10BasicSoundFi
+	.long SetPanMode__Q44nw4r3snd6detail10BasicSoundFQ44nw4r3snd6detail7PanMode
+	.long SetPanCurve__Q44nw4r3snd6detail10BasicSoundFQ44nw4r3snd6detail8PanCurve
+	.long 0
+	.long 0
+	.long InitParam__Q44nw4r3snd6detail10BasicSoundFv
+	.long 0
+	.long 0
+
+.section .sbss, "wa" # 0x804BE9E0 - 0x804BFA20
+
+.balign 0x8
+
+# typeInfo__Q44nw4r3snd6detail10BasicSound
+.global lbl_804BEA78
+lbl_804BEA78:
+	.skip 0x4
+
+.section .sdata2, "a"  # 0x804BFA20 - 0x804C69E0
+
+.balign 0x8
+
+lbl_804BFF78: .single 0e0
+lbl_804BFF7C: .single 0e1
+lbl_804BFF80: .double 0e4.503601774854144E15
+
 .section .text, "ax"  # 0x800076E0 - 0x80355080 
 
 .global __ct__Q44nw4r3snd6detail10BasicSoundFv
 __ct__Q44nw4r3snd6detail10BasicSoundFv:
 /* 80036280 00031180  C0 02 85 58 */	lfs f0, lbl_804BFF78-_SDA2_BASE_(r2)
-/* 80036284 00031184  3C A0 80 39 */	lis r5, lbl_80395C20@ha
+/* 80036284 00031184  3C A0 80 39 */	lis r5, __vt__Q44nw4r3snd6detail10BasicSound@ha
 /* 80036288 00031188  38 80 00 00 */	li r4, 0
 /* 8003628C 0003118C  38 00 FF FF */	li r0, -1
-/* 80036290 00031190  38 A5 5C 20 */	addi r5, r5, lbl_80395C20@l
+/* 80036290 00031190  38 A5 5C 20 */	addi r5, r5, __vt__Q44nw4r3snd6detail10BasicSound@l
 /* 80036294 00031194  90 83 00 04 */	stw r4, 4(r3)
 /* 80036298 00031198  90 A3 00 00 */	stw r5, 0(r3)
 /* 8003629C 0003119C  90 83 00 08 */	stw r4, 8(r3)
