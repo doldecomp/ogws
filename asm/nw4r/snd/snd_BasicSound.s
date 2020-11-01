@@ -43,8 +43,8 @@ __vt__Q44nw4r3snd6detail10BasicSound:
 .balign 0x8
 
 # typeInfo__Q44nw4r3snd6detail10BasicSound
-.global lbl_804BEA78
-lbl_804BEA78:
+.global typeInfo__Q44nw4r3snd6detail10BasicSound
+typeInfo__Q44nw4r3snd6detail10BasicSound:
 	.skip 0x4
 
 .section .sdata2, "a"  # 0x804BFA20 - 0x804C69E0
@@ -826,11 +826,11 @@ lbl_80036D14:
 /* 80036D60 00031C60  C0 1D 00 98 */	lfs f0, 0x98(r29)
 /* 80036D64 00031C64  EF 5A 00 72 */	fmuls f26, f26, f1
 /* 80036D68 00031C68  EF 7B 00 32 */	fmuls f27, f27, f0
-/* 80036D6C 00031C6C  48 00 F5 39 */	bl func_800462A4
+/* 80036D6C 00031C6C  48 00 F5 39 */	bl detail_IsEnabledOutputLine__Q34nw4r3snd11SoundPlayerCFv
 /* 80036D70 00031C70  2C 03 00 00 */	cmpwi r3, 0
 /* 80036D74 00031C74  41 82 00 10 */	beq lbl_80036D84
 /* 80036D78 00031C78  80 7D 00 10 */	lwz r3, 0x10(r29)
-/* 80036D7C 00031C7C  48 00 F5 21 */	bl func_8004629C
+/* 80036D7C 00031C7C  48 00 F5 21 */	bl detail_GetOutputLine__Q34nw4r3snd11SoundPlayerCFv
 /* 80036D80 00031C80  7C 7A 1B 78 */	mr r26, r3
 lbl_80036D84:
 /* 80036D84 00031C84  88 1D 00 9C */	lbz r0, 0x9c(r29)
@@ -846,7 +846,7 @@ lbl_80036DA4:
 /* 80036DA4 00031CA4  D3 DC 00 00 */	stfs f30, 0(r28)
 /* 80036DA8 00031CA8  7F 24 CB 78 */	mr r4, r25
 /* 80036DAC 00031CAC  80 7D 00 10 */	lwz r3, 0x10(r29)
-/* 80036DB0 00031CB0  48 00 F4 FD */	bl func_800462AC
+/* 80036DB0 00031CB0  48 00 F4 FD */	bl detail_GetRemoteOutVolume__Q34nw4r3snd11SoundPlayerCFi
 /* 80036DB4 00031CB4  C0 1C 00 00 */	lfs f0, 0(r28)
 /* 80036DB8 00031CB8  3B 39 00 01 */	addi r25, r25, 1
 /* 80036DBC 00031CBC  C0 5B 00 A8 */	lfs f2, 0xa8(r27)
@@ -983,12 +983,12 @@ lbl_80036F84:
 /* 80036FA4 00031EA4  80 7E 00 08 */	lwz r3, 8(r30)
 /* 80036FA8 00031EA8  2C 03 00 00 */	cmpwi r3, 0
 /* 80036FAC 00031EAC  41 82 00 08 */	beq lbl_80036FB4
-/* 80036FB0 00031EB0  48 00 EB AD */	bl func_80045B5C
+/* 80036FB0 00031EB0  48 00 EB AD */	bl DetachSound__Q34nw4r3snd11SoundHandleFv
 lbl_80036FB4:
 /* 80036FB4 00031EB4  80 7E 00 0C */	lwz r3, 0xc(r30)
 /* 80036FB8 00031EB8  2C 03 00 00 */	cmpwi r3, 0
 /* 80036FBC 00031EBC  41 82 00 08 */	beq lbl_80036FC4
-/* 80036FC0 00031EC0  48 00 EB 9D */	bl func_80045B5C
+/* 80036FC0 00031EC0  48 00 EB 9D */	bl DetachSound__Q34nw4r3snd11SoundHandleFv
 lbl_80036FC4:
 /* 80036FC4 00031EC4  81 9E 00 00 */	lwz r12, 0(r30)
 /* 80036FC8 00031EC8  7F C3 F3 78 */	mr r3, r30
@@ -1008,14 +1008,14 @@ lbl_80036FF4:
 /* 80036FFC 00031EFC  41 82 00 10 */	beq lbl_8003700C
 /* 80037000 00031F00  80 7E 00 10 */	lwz r3, 0x10(r30)
 /* 80037004 00031F04  7F C4 F3 78 */	mr r4, r30
-/* 80037008 00031F08  48 01 03 65 */	bl func_8004736C
+/* 80037008 00031F08  48 01 03 65 */	bl detail_FreePlayerHeap__Q34nw4r3snd11SoundPlayerFPQ44nw4r3snd6detail10BasicSound
 lbl_8003700C:
 /* 8003700C 00031F0C  80 7E 00 10 */	lwz r3, 0x10(r30)
 /* 80037010 00031F10  7F C4 F3 78 */	mr r4, r30
-/* 80037014 00031F14  48 00 F3 D9 */	bl func_800463EC
+/* 80037014 00031F14  48 00 F3 D9 */	bl detail_RemovePriorityList__Q34nw4r3snd11SoundPlayerFPQ44nw4r3snd6detail10BasicSound
 /* 80037018 00031F18  80 7E 00 10 */	lwz r3, 0x10(r30)
 /* 8003701C 00031F1C  7F C4 F3 78 */	mr r4, r30
-/* 80037020 00031F20  48 00 F2 9D */	bl func_800462BC
+/* 80037020 00031F20  48 00 F2 9D */	bl detail_RemoveSoundList__Q34nw4r3snd11SoundPlayerFPQ44nw4r3snd6detail10BasicSound
 /* 80037024 00031F24  80 7E 00 14 */	lwz r3, 0x14(r30)
 /* 80037028 00031F28  2C 03 00 00 */	cmpwi r3, 0
 /* 8003702C 00031F2C  41 82 00 0C */	beq lbl_80037038
@@ -1057,10 +1057,10 @@ SetPlayerPriority__Q44nw4r3snd6detail10BasicSoundFi:
 /* 800370A8 00031FA8  41 82 00 1C */	beq lbl_800370C4
 /* 800370AC 00031FAC  7C 03 03 78 */	mr r3, r0
 /* 800370B0 00031FB0  7F E4 FB 78 */	mr r4, r31
-/* 800370B4 00031FB4  48 00 F3 39 */	bl func_800463EC
+/* 800370B4 00031FB4  48 00 F3 39 */	bl detail_RemovePriorityList__Q34nw4r3snd11SoundPlayerFPQ44nw4r3snd6detail10BasicSound
 /* 800370B8 00031FB8  80 7F 00 10 */	lwz r3, 0x10(r31)
 /* 800370BC 00031FBC  7F E4 FB 78 */	mr r4, r31
-/* 800370C0 00031FC0  48 00 F2 61 */	bl func_80046320
+/* 800370C0 00031FC0  48 00 F2 61 */	bl detail_InsertPriorityList__Q34nw4r3snd11SoundPlayerFPQ44nw4r3snd6detail10BasicSound
 lbl_800370C4:
 /* 800370C4 00031FC4  80 01 00 14 */	lwz r0, 0x14(r1)
 /* 800370C8 00031FC8  83 E1 00 0C */	lwz r31, 0xc(r1)
@@ -1322,12 +1322,12 @@ IsAttachedTempGeneralHandle__Q44nw4r3snd6detail10BasicSoundFv:
 .global DetachGeneralHandle__Q44nw4r3snd6detail10BasicSoundFv
 DetachGeneralHandle__Q44nw4r3snd6detail10BasicSoundFv:
 /* 800373C4 000322C4  80 63 00 08 */	lwz r3, 8(r3)
-/* 800373C8 000322C8  48 00 E7 94 */	b func_80045B5C
+/* 800373C8 000322C8  48 00 E7 94 */	b DetachSound__Q34nw4r3snd11SoundHandleFv
 
 .global DetachTempGeneralHandle__Q44nw4r3snd6detail10BasicSoundFv
 DetachTempGeneralHandle__Q44nw4r3snd6detail10BasicSoundFv:
 /* 800373CC 000322CC  80 63 00 0C */	lwz r3, 0xc(r3)
-/* 800373D0 000322D0  48 00 E7 8C */	b func_80045B5C
+/* 800373D0 000322D0  48 00 E7 8C */	b DetachSound__Q34nw4r3snd11SoundHandleFv
 
 .global SetId__Q44nw4r3snd6detail10BasicSoundFUl
 SetId__Q44nw4r3snd6detail10BasicSoundFUl:
@@ -1370,12 +1370,12 @@ lbl_8003743C:
 
 .global GetRuntimeTypeInfo__Q44nw4r3snd6detail10BasicSoundCFv
 GetRuntimeTypeInfo__Q44nw4r3snd6detail10BasicSoundCFv:
-/* 80037454 00032354  38 6D 96 F8 */	addi r3, r13, lbl_804BEA78-_SDA_BASE_
+/* 80037454 00032354  38 6D 96 F8 */	addi r3, r13, typeInfo__Q44nw4r3snd6detail10BasicSound-_SDA_BASE_
 /* 80037458 00032358  4E 80 00 20 */	blr 
 
 # __sinit_\snd_BasicSound_cpp
 .global __sinit_$$3snd_BasicSound_cpp
 __sinit_$$3snd_BasicSound_cpp:
 /* 8003745C 0003235C  38 00 00 00 */	li r0, 0
-/* 80037460 00032360  90 0D 96 F8 */	stw r0, lbl_804BEA78-_SDA_BASE_(r13)
+/* 80037460 00032360  90 0D 96 F8 */	stw r0, typeInfo__Q44nw4r3snd6detail10BasicSound-_SDA_BASE_(r13)
 /* 80037464 00032364  4E 80 00 20 */	blr 
