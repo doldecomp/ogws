@@ -7,6 +7,7 @@ extern "C" {
 #endif
 
 UNKTYPE AXSetMaxDspCycles(UNKWORD);
+UNKWORD AXGetMaxVoices(void);
 
 #ifdef __cplusplus
 }

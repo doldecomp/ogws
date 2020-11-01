@@ -1,5 +1,6 @@
 #ifndef NW4R_SND_INSTANCE_POOL_H
 #define NW4R_SND_INSTANCE_POOL_H
+#include <new>
 #include "types_nw4r.h"
 
 namespace nw4r
@@ -22,6 +23,36 @@ namespace nw4r
 				void FreeImpl(void *);
 				
 				Member mHead; // at 0x0
+				
+				inline PoolImpl()
+				{
+					mHead.mNext = NULL;
+				}
+			};
+			
+			template <typename T>
+			struct InstancePool : PoolImpl
+			{
+				inline u32 Create(void * ptr, u32 num)
+				{
+					return CreateImpl(ptr, num, sizeof(T));
+				}
+				
+				inline T * Alloc()
+				{
+					return new (AllocImpl()) T;
+				}
+				
+				inline void Free(T * ptr)
+				{
+					ptr->~T();
+					FreeImpl(ptr);
+				}
+				
+				inline void Destroy(void * ptr, u32 num)
+				{
+					DestroyImpl(ptr, num);
+				}
 			};
 		}
 	}

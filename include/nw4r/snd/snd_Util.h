@@ -48,6 +48,9 @@ namespace nw4r
 				{
 					return (const T3 *)GetDataRefAddressImpl((RefType)dataRef.mType, dataRef.INT_0x4, ptr);
 				}
+				
+				float CalcVolumeRatio(float);
+				float CalcPitchRatio(int);
 			}
 		}
 	}

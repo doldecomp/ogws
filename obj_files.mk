@@ -74,7 +74,7 @@ TEXT_O_FILES := \
 	build/asm/nw4r/snd/snd_Channel.o \
 	build/asm/nw4r/snd/snd_DisposeCallbackManager.o \
 	build/asm/nw4r/snd/snd_DvdSoundArchive.o \
-	build/asm/nw4r/snd/snd_EnvGenerator.o \
+	build/nw4r/snd/snd_EnvGenerator.o \
 	build/asm/nw4r/snd/snd_ExternalSoundPlayer.o \
 	build/asm/nw4r/snd/snd_FrameHeap.o \
 	build/asm/nw4r/snd/snd_FxDelay.o \
