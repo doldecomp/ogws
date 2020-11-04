@@ -1,3 +1,4 @@
+#ifdef __DECOMP_NON_MATCHING
 #include "snd_DisposeCallbackManager.h"
 #include "ut_interrupt.h"
 
@@ -58,3 +59,6 @@ namespace nw4r
 		}
 	}
 }
+#else
+#error This file has yet to be decompiled accurately. Use "snd_DisposeCallbackManager.s" instead.
+#endif
