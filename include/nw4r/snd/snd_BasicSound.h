@@ -5,6 +5,7 @@
 #include "snd_AxManager.h"
 #include "snd_BasicPlayer.h"
 #include "ut_RTTI.h"
+#include "ut_algorithm.h"
 
 namespace nw4r
 {
@@ -81,7 +82,7 @@ namespace nw4r
 				AmbientArgAllocaterCallback * mAmbientArgAllocaterCallback; // at 0x20
 				UNKTYPE * PTR_0x24; // at 0x24
 				
-				SoundParam mParam;
+				SoundParam mParam; // at 0x28
 				
 				MoveValue<float, int> MV_0x44;
 				MoveValue<float, int> MV_0x54;
@@ -125,6 +126,11 @@ namespace nw4r
 				bool IsAttachedTempGeneralHandle();
 				UNKTYPE DetachTempGeneralHandle();
 				UNKTYPE SetId(u32);
+				
+				inline int CalcCurrentPlayerPriority() const
+				{
+					return ut::Clamp<int>(0, 0x7F, mPlayerPriority + mParam.WORD_0x18);
+				}
 			};
 		}
 	}

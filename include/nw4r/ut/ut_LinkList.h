@@ -158,6 +158,11 @@ namespace nw4r
 				{
 					return GetPointerFromNode(mNode);
 				}
+				
+				inline T & operator*() const
+				{
+					return *GetPointerFromNode(mNode);
+				}
 			};
 			
 			inline Iterator GetEndIter()

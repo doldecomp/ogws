@@ -17,7 +17,10 @@ namespace nw4r
 				u16 mPlayableSoundCount; // at 0xc
 				float FLOAT_0x10;
 				
+				void SetPlayableSoundCount(int);
+				UNKTYPE InsertSoundList(BasicSound *);
 				UNKTYPE RemoveSoundList(BasicSound *);
+				BasicSound * GetLowestPrioritySound();
 			};
 		}
 	}
