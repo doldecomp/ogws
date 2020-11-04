@@ -1,5 +1,64 @@
 .include "macros.inc"
 
+.section .data, "wa"  # 0x80393A80 - 0x803CAF00
+
+.balign 0x8
+
+.global __vt__Q44nw4r3snd15DvdSoundArchive13DvdFileStream
+__vt__Q44nw4r3snd15DvdSoundArchive13DvdFileStream:
+	.long 0
+	.long 0
+	.long GetRuntimeTypeInfo__Q34nw4r2ut19DvdLockedFileStreamCFv
+	.long __dt__Q44nw4r3snd15DvdSoundArchive13DvdFileStreamFv
+	.long Close__Q34nw4r2ut13DvdFileStreamFv
+	.long Read__Q44nw4r3snd15DvdSoundArchive13DvdFileStreamFPvUl
+	.long ReadAsync__Q34nw4r2ut19DvdLockedFileStreamFPvUlPFlPQ34nw4r2ut8IOStreamPv_vPv
+	.long Write__Q34nw4r2ut8IOStreamFPCvUl
+	.long WriteAsync__Q34nw4r2ut8IOStreamFPCvUlPFlPQ34nw4r2ut8IOStreamPv_vPv
+	.long IsBusy__Q34nw4r2ut13DvdFileStreamCFv
+	.long CanAsync__Q34nw4r2ut19DvdLockedFileStreamCFv
+	.long CanRead__Q34nw4r2ut13DvdFileStreamCFv
+	.long CanWrite__Q34nw4r2ut13DvdFileStreamCFv
+	.long GetOffsetAlign__Q34nw4r2ut13DvdFileStreamCFv
+	.long GetSizeAlign__Q34nw4r2ut13DvdFileStreamCFv
+	.long GetBufferAlign__Q34nw4r2ut13DvdFileStreamCFv
+	.long GetSize__Q44nw4r3snd15DvdSoundArchive13DvdFileStreamCFv
+	.long Seek__Q44nw4r3snd15DvdSoundArchive13DvdFileStreamFlUl
+	.long Cancel__Q34nw4r2ut13DvdFileStreamFv
+	.long CancelAsync__Q34nw4r2ut13DvdFileStreamFPFlPQ34nw4r2ut8IOStreamPv_vPv
+	.long CanSeek__Q34nw4r2ut13DvdFileStreamCFv
+	.long CanCancel__Q34nw4r2ut13DvdFileStreamCFv
+	.long Tell__Q44nw4r3snd15DvdSoundArchive13DvdFileStreamCFv
+	.long Peek__Q34nw4r2ut19DvdLockedFileStreamFPvUl
+	.long PeekAsync__Q34nw4r2ut19DvdLockedFileStreamFPvUlPFlPQ34nw4r2ut8IOStreamPv_vPv
+
+.balign 0x8
+
+.global __vt__Q34nw4r3snd15DvdSoundArchive
+__vt__Q34nw4r3snd15DvdSoundArchive:
+	.long 0
+	.long 0
+	.long __dt__Q34nw4r3snd15DvdSoundArchiveFv
+	.long detail_GetFileAddress__Q34nw4r3snd15DvdSoundArchiveCFUl
+	.long detail_GetWaveDataFileAddress__Q34nw4r3snd15DvdSoundArchiveCFUl
+	.long detail_GetRequiredStreamBufferSize__Q34nw4r3snd15DvdSoundArchiveCFv
+	.long OpenStream__Q34nw4r3snd15DvdSoundArchiveCFPviUlUl
+	.long OpenExtStream__Q34nw4r3snd15DvdSoundArchiveCFPviPCcUlUl
+
+.section .sbss, "wa" # 0x804BE9E0 - 0x804BFA20
+
+.balign 0x8
+
+# @GUARD@headerAlignSize$7566
+$$2GUARD$$2headerAlignSize$7566: .skip 0x1
+
+.section .sbss2, "a" # 0x804C69E0 - 0x804C6A1C
+
+.balign 0x8
+
+.global headerAlignSize$7566
+headerAlignSize$7566: .skip 0x4
+
 .section .text, "ax"  # 0x800076E0 - 0x80355080 
 
 .global __ct__Q34nw4r3snd15DvdSoundArchiveFv
@@ -10,9 +69,9 @@ __ct__Q34nw4r3snd15DvdSoundArchiveFv:
 /* 800388F0 000337F0  93 E1 00 0C */	stw r31, 0xc(r1)
 /* 800388F4 000337F4  7C 7F 1B 78 */	mr r31, r3
 /* 800388F8 000337F8  48 00 94 19 */	bl func_80041D10
-/* 800388FC 000337FC  3C 80 80 39 */	lis r4, lbl_80395CF8@ha
+/* 800388FC 000337FC  3C 80 80 39 */	lis r4, __vt__Q34nw4r3snd15DvdSoundArchive@ha
 /* 80038900 00033800  38 7F 01 08 */	addi r3, r31, 0x108
-/* 80038904 00033804  38 84 5C F8 */	addi r4, r4, lbl_80395CF8@l
+/* 80038904 00033804  38 84 5C F8 */	addi r4, r4, __vt__Q34nw4r3snd15DvdSoundArchive@l
 /* 80038908 00033808  90 9F 00 00 */	stw r4, 0(r31)
 /* 8003890C 0003380C  48 00 9A 25 */	bl func_80042330
 /* 80038910 00033810  38 00 00 00 */	li r0, 0
@@ -35,8 +94,8 @@ __dt__Q34nw4r3snd15DvdSoundArchiveFv:
 /* 80038948 00033848  93 C1 00 08 */	stw r30, 8(r1)
 /* 8003894C 0003384C  7C 7E 1B 78 */	mr r30, r3
 /* 80038950 00033850  41 82 00 44 */	beq lbl_80038994
-/* 80038954 00033854  3C 80 80 39 */	lis r4, lbl_80395CF8@ha
-/* 80038958 00033858  38 84 5C F8 */	addi r4, r4, lbl_80395CF8@l
+/* 80038954 00033854  3C 80 80 39 */	lis r4, __vt__Q34nw4r3snd15DvdSoundArchive@ha
+/* 80038958 00033858  38 84 5C F8 */	addi r4, r4, __vt__Q34nw4r3snd15DvdSoundArchive@l
 /* 8003895C 0003385C  90 83 00 00 */	stw r4, 0(r3)
 /* 80038960 00033860  38 63 01 4C */	addi r3, r3, 0x14c
 /* 80038964 00033864  48 10 13 09 */	bl DVDClose
@@ -87,15 +146,15 @@ lbl_800389EC:
 lbl_80038A04:
 /* 80038A04 00033904  38 60 00 01 */	li r3, 1
 /* 80038A08 00033908  98 7C 01 88 */	stb r3, 0x188(r28)
-/* 80038A0C 0003390C  88 0D 97 10 */	lbz r0, lbl_804BEA90-_SDA_BASE_(r13)
+/* 80038A0C 0003390C  88 0D 97 10 */	lbz r0, $$2GUARD$$2headerAlignSize$7566-_SDA_BASE_(r13)
 /* 80038A10 00033910  7C 00 07 75 */	extsb. r0, r0
 /* 80038A14 00033914  40 82 00 10 */	bne lbl_80038A24
 /* 80038A18 00033918  38 00 00 40 */	li r0, 0x40
-/* 80038A1C 0003391C  98 6D 97 10 */	stb r3, lbl_804BEA90-_SDA_BASE_(r13)
-/* 80038A20 00033920  90 02 EF C0 */	stw r0, lbl_804C69E0-_SDA2_BASE_(r2)
+/* 80038A1C 0003391C  98 6D 97 10 */	stb r3, $$2GUARD$$2headerAlignSize$7566-_SDA_BASE_(r13)
+/* 80038A20 00033920  90 02 EF C0 */	stw r0, headerAlignSize$7566-_SDA2_BASE_(r2)
 lbl_80038A24:
 /* 80038A24 00033924  38 01 00 27 */	addi r0, r1, 0x27
-/* 80038A28 00033928  83 C2 EF C0 */	lwz r30, lbl_804C69E0-_SDA2_BASE_(r2)
+/* 80038A28 00033928  83 C2 EF C0 */	lwz r30, headerAlignSize$7566-_SDA2_BASE_(r2)
 /* 80038A2C 0003392C  54 1F 00 34 */	rlwinm r31, r0, 0, 0, 0x1a
 /* 80038A30 00033930  38 7C 01 4C */	addi r3, r28, 0x14c
 /* 80038A34 00033934  7F E4 FB 78 */	mr r4, r31
@@ -210,9 +269,9 @@ lbl_80038B9C:
 /* 80038BA8 00033AA8  38 88 01 4C */	addi r4, r8, 0x14c
 /* 80038BAC 00033AAC  38 A0 00 00 */	li r5, 0
 /* 80038BB0 00033AB0  4B FC FF C5 */	bl __ct__Q34nw4r2ut19DvdLockedFileStreamFPC11DVDFileInfob
-/* 80038BB4 00033AB4  3C 60 80 39 */	lis r3, lbl_80395C90@ha
+/* 80038BB4 00033AB4  3C 60 80 39 */	lis r3, __vt__Q44nw4r3snd15DvdSoundArchive13DvdFileStream@ha
 /* 80038BB8 00033AB8  2C 1F 00 00 */	cmpwi r31, 0
-/* 80038BBC 00033ABC  38 63 5C 90 */	addi r3, r3, lbl_80395C90@l
+/* 80038BBC 00033ABC  38 63 5C 90 */	addi r3, r3, __vt__Q44nw4r3snd15DvdSoundArchive13DvdFileStream@l
 /* 80038BC0 00033AC0  93 DD 00 70 */	stw r30, 0x70(r29)
 /* 80038BC4 00033AC4  90 7D 00 00 */	stw r3, 0(r29)
 /* 80038BC8 00033AC8  93 FD 00 74 */	stw r31, 0x74(r29)
@@ -269,9 +328,9 @@ lbl_80038C6C:
 /* 80038C70 00033B70  41 82 00 40 */	beq lbl_80038CB0
 /* 80038C74 00033B74  7F A3 EB 78 */	mr r3, r29
 /* 80038C78 00033B78  4B FC FE 89 */	bl __ct__Q34nw4r2ut19DvdLockedFileStreamFl
-/* 80038C7C 00033B7C  3C 60 80 39 */	lis r3, lbl_80395C90@ha
+/* 80038C7C 00033B7C  3C 60 80 39 */	lis r3, __vt__Q44nw4r3snd15DvdSoundArchive13DvdFileStream@ha
 /* 80038C80 00033B80  2C 1F 00 00 */	cmpwi r31, 0
-/* 80038C84 00033B84  38 63 5C 90 */	addi r3, r3, lbl_80395C90@l
+/* 80038C84 00033B84  38 63 5C 90 */	addi r3, r3, __vt__Q44nw4r3snd15DvdSoundArchive13DvdFileStream@l
 /* 80038C88 00033B88  93 DD 00 70 */	stw r30, 0x70(r29)
 /* 80038C8C 00033B8C  90 7D 00 00 */	stw r3, 0(r29)
 /* 80038C90 00033B90  93 FD 00 74 */	stw r31, 0x74(r29)
