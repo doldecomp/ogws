@@ -1,20 +1,12 @@
 .include "macros.inc"
 
-# .data5 = .data???
-
 .section .rodata, "a"  # 0x80375780 - 0x80393A80
 
 .balign 8
 
-#.global lbl_80375840
-#lbl_80375840:
-#	.incbin "baserom.dol", 0x371940, 0x100
-#.global lbl_80375940
-#lbl_80375940:
-#	.incbin "baserom.dol", 0x371A40, 0x250
-.global lbl_80375B40
+.global lbl_80375B50
 lbl_80375940:
-	.incbin "baserom.dol", 0x371C40, 0x50
+	.incbin "baserom.dol", 0x371C50, 0x40
 .global lbl_80375B90
 lbl_80375B90:
 	.incbin "baserom.dol", 0x371C90, 0x68
