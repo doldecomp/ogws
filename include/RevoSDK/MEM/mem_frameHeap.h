@@ -9,6 +9,10 @@ UNKTYPE * MEMCreateFrmHeapEx(void *, u32, UNKWORD);
 UNKTYPE MEMDestroyFrmHeap(UNKTYPE *);
 void * MEMAllocFromFrmHeapEx(UNKTYPE *, u32, UNKWORD);
 UNKTYPE MEMFreeToFrmHeap(UNKTYPE *, UNKWORD);
+u32 MEMGetAllocatableSizeForFrmHeapEx(UNKTYPE *, UNKWORD);
+
+UNKWORD MEMRecordStateForFrmHeap(UNKTYPE *, u32);
+UNKTYPE MEMFreeByStateToFrmHeap(UNKTYPE *, UNKWORD);
 
 #ifdef __cplusplus
 }
