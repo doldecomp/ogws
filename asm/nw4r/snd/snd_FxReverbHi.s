@@ -2,8 +2,8 @@
 
 .section .text, "ax"  # 0x800076E0 - 0x80355080 
 
-.global func_8003A668
-func_8003A668:
+.global __ct__Q34nw4r3snd10FxReverbHiFv
+__ct__Q34nw4r3snd10FxReverbHiFv:
 /* 8003A668 00035568  94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 8003A66C 0003556C  7C 08 02 A6 */	mflr r0
 /* 8003A670 00035570  3C A0 80 39 */	lis r5, lbl_80395D58@ha
@@ -32,7 +32,7 @@ func_8003A668:
 /* 8003A6CC 000355CC  90 C1 00 14 */	stw r6, 0x14(r1)
 /* 8003A6D0 000355D0  90 A1 00 18 */	stw r5, 0x18(r1)
 /* 8003A6D4 000355D4  90 01 00 1C */	stw r0, 0x1c(r1)
-/* 8003A6D8 000355D8  48 00 01 75 */	bl func_8003A84C
+/* 8003A6D8 000355D8  48 00 01 75 */	bl SetParam__Q34nw4r3snd10FxReverbHiFRCQ44nw4r3snd10FxReverbHi13ReverbHiParam
 /* 8003A6DC 000355DC  7F E3 FB 78 */	mr r3, r31
 /* 8003A6E0 000355E0  83 E1 00 2C */	lwz r31, 0x2c(r1)
 /* 8003A6E4 000355E4  80 01 00 34 */	lwz r0, 0x34(r1)
@@ -40,23 +40,32 @@ func_8003A668:
 /* 8003A6EC 000355EC  38 21 00 30 */	addi r1, r1, 0x30
 /* 8003A6F0 000355F0  4E 80 00 20 */	blr 
 
-.global func_8003A6F4
-func_8003A6F4:
+.global GetRequiredMemSize__Q34nw4r3snd10FxReverbHiFv
+GetRequiredMemSize__Q34nw4r3snd10FxReverbHiFv:
 /* 8003A6F4 000355F4  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8003A6F8 000355F8  7C 08 02 A6 */	mflr r0
 /* 8003A6FC 000355FC  38 63 00 30 */	addi r3, r3, 0x30
 /* 8003A700 00035600  90 01 00 14 */	stw r0, 0x14(r1)
-/* 8003A704 00035604  48 0C CE E5 */	bl func_801075E8
+/* 8003A704 00035604  48 0C CE E5 */	bl AXFXReverbHiGetMemSize
 /* 8003A708 00035608  38 03 00 87 */	addi r0, r3, 0x87
 /* 8003A70C 0003560C  54 03 00 34 */	rlwinm r3, r0, 0, 0, 0x1a
 /* 8003A710 00035610  80 01 00 14 */	lwz r0, 0x14(r1)
 /* 8003A714 00035614  7C 08 03 A6 */	mtlr r0
 /* 8003A718 00035618  38 21 00 10 */	addi r1, r1, 0x10
 /* 8003A71C 0003561C  4E 80 00 20 */	blr 
+
+.global AssignWorkBuffer__Q34nw4r3snd10FxReverbHiFPvUl
+AssignWorkBuffer__Q34nw4r3snd10FxReverbHiFPvUl:
 /* 8003A720 00035620  38 63 00 0C */	addi r3, r3, 0xc
 /* 8003A724 00035624  4B FF B2 5C */	b CreateHeap__Q44nw4r3snd6detail8AxfxImplFPvUl
+
+.global ReleaseWorkBuffer__Q34nw4r3snd10FxReverbHiFv
+ReleaseWorkBuffer__Q34nw4r3snd10FxReverbHiFv:
 /* 8003A728 00035628  38 63 00 0C */	addi r3, r3, 0xc
 /* 8003A72C 0003562C  4B FF B2 9C */	b DestroyHeap__Q44nw4r3snd6detail8AxfxImplFv
+
+.global StartUp__Q34nw4r3snd10FxReverbHiFv
+StartUp__Q34nw4r3snd10FxReverbHiFv:
 /* 8003A730 00035630  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8003A734 00035634  7C 08 02 A6 */	mflr r0
 /* 8003A738 00035638  90 01 00 24 */	stw r0, 0x24(r1)
@@ -64,7 +73,7 @@ func_8003A6F4:
 /* 8003A740 00035640  93 C1 00 18 */	stw r30, 0x18(r1)
 /* 8003A744 00035644  7C 7E 1B 78 */	mr r30, r3
 /* 8003A748 00035648  38 63 00 30 */	addi r3, r3, 0x30
-/* 8003A74C 0003564C  48 0C CE 9D */	bl func_801075E8
+/* 8003A74C 0003564C  48 0C CE 9D */	bl AXFXReverbHiGetMemSize
 /* 8003A750 00035650  80 9E 00 10 */	lwz r4, 0x10(r30)
 /* 8003A754 00035654  38 03 00 87 */	addi r0, r3, 0x87
 /* 8003A758 00035658  54 03 00 34 */	rlwinm r3, r0, 0, 0, 0x1a
@@ -88,14 +97,14 @@ lbl_8003A784:
 /* 8003A794 00035694  38 00 00 00 */	li r0, 0
 /* 8003A798 00035698  38 7E 00 30 */	addi r3, r30, 0x30
 /* 8003A79C 0003569C  90 0D 96 F4 */	stw r0, mAllocatedSize__Q44nw4r3snd6detail8AxfxImpl-_SDA_BASE_(r13)
-/* 8003A7A0 000356A0  48 0C CE 55 */	bl func_801075F4
+/* 8003A7A0 000356A0  48 0C CE 55 */	bl AXFXReverbHiInit
 /* 8003A7A4 000356A4  80 81 00 0C */	lwz r4, 0xc(r1)
 /* 8003A7A8 000356A8  7C 7F 1B 78 */	mr r31, r3
 /* 8003A7AC 000356AC  80 A1 00 08 */	lwz r5, 8(r1)
 /* 8003A7B0 000356B0  38 7E 00 0C */	addi r3, r30, 0xc
 /* 8003A7B4 000356B4  4B FF B2 75 */	bl RestoreAlloc__Q44nw4r3snd6detail8AxfxImplFPFUl_PvPFPv_v
 /* 8003A7B8 000356B8  38 7E 00 30 */	addi r3, r30, 0x30
-/* 8003A7BC 000356BC  48 0C CE 2D */	bl func_801075E8
+/* 8003A7BC 000356BC  48 0C CE 2D */	bl AXFXReverbHiGetMemSize
 /* 8003A7C0 000356C0  7C 1F 00 D0 */	neg r0, r31
 /* 8003A7C4 000356C4  38 60 00 01 */	li r3, 1
 /* 8003A7C8 000356C8  7C 00 FB 78 */	or r0, r0, r31
@@ -108,6 +117,9 @@ lbl_8003A7D4:
 /* 8003A7E0 000356E0  7C 08 03 A6 */	mtlr r0
 /* 8003A7E4 000356E4  38 21 00 20 */	addi r1, r1, 0x20
 /* 8003A7E8 000356E8  4E 80 00 20 */	blr 
+
+.global Shutdown__Q34nw4r3snd10FxReverbHiFv
+Shutdown__Q34nw4r3snd10FxReverbHiFv:
 /* 8003A7EC 000356EC  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8003A7F0 000356F0  7C 08 02 A6 */	mflr r0
 /* 8003A7F4 000356F4  90 01 00 24 */	stw r0, 0x24(r1)
@@ -122,7 +134,7 @@ lbl_8003A7D4:
 /* 8003A818 00035718  38 A1 00 08 */	addi r5, r1, 8
 /* 8003A81C 0003571C  4B FF B1 C1 */	bl HookAlloc__Q44nw4r3snd6detail8AxfxImplFPPFUl_PvPPFPv_v
 /* 8003A820 00035720  38 7F 00 30 */	addi r3, r31, 0x30
-/* 8003A824 00035724  48 0C CE 35 */	bl func_80107658
+/* 8003A824 00035724  48 0C CE 35 */	bl AXFXReverbHiShutdown
 /* 8003A828 00035728  80 81 00 0C */	lwz r4, 0xc(r1)
 /* 8003A82C 0003572C  38 7F 00 0C */	addi r3, r31, 0xc
 /* 8003A830 00035730  80 A1 00 08 */	lwz r5, 8(r1)
@@ -134,8 +146,8 @@ lbl_8003A838:
 /* 8003A844 00035744  38 21 00 20 */	addi r1, r1, 0x20
 /* 8003A848 00035748  4E 80 00 20 */	blr 
 
-.global func_8003A84C
-func_8003A84C:
+.global SetParam__Q34nw4r3snd10FxReverbHiFRCQ44nw4r3snd10FxReverbHi13ReverbHiParam
+SetParam__Q34nw4r3snd10FxReverbHiFRCQ44nw4r3snd10FxReverbHi13ReverbHiParam:
 /* 8003A84C 0003574C  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8003A850 00035750  7C 08 02 A6 */	mflr r0
 /* 8003A854 00035754  C0 A4 00 00 */	lfs f5, 0(r4)
@@ -244,7 +256,7 @@ lbl_8003A994:
 /* 8003A9A8 000358A8  48 00 00 78 */	b lbl_8003AA20
 lbl_8003A9AC:
 /* 8003A9AC 000358AC  38 63 00 30 */	addi r3, r3, 0x30
-/* 8003A9B0 000358B0  48 0C CC 39 */	bl func_801075E8
+/* 8003A9B0 000358B0  48 0C CC 39 */	bl AXFXReverbHiGetMemSize
 /* 8003A9B4 000358B4  80 9E 00 10 */	lwz r4, 0x10(r30)
 /* 8003A9B8 000358B8  38 03 00 87 */	addi r0, r3, 0x87
 /* 8003A9BC 000358BC  54 03 00 34 */	rlwinm r3, r0, 0, 0, 0x1a
@@ -266,7 +278,7 @@ lbl_8003A9E8:
 /* 8003A9F0 000358F0  38 A1 00 08 */	addi r5, r1, 8
 /* 8003A9F4 000358F4  4B FF AF E9 */	bl HookAlloc__Q44nw4r3snd6detail8AxfxImplFPPFUl_PvPPFPv_v
 /* 8003A9F8 000358F8  38 7E 00 30 */	addi r3, r30, 0x30
-/* 8003A9FC 000358FC  48 0C CC 81 */	bl func_8010767C
+/* 8003A9FC 000358FC  48 0C CC 81 */	bl AXFXReverbHiSettings
 /* 8003AA00 00035900  80 81 00 0C */	lwz r4, 0xc(r1)
 /* 8003AA04 00035904  7C 7F 1B 78 */	mr r31, r3
 /* 8003AA08 00035908  80 A1 00 08 */	lwz r5, 8(r1)
@@ -282,6 +294,9 @@ lbl_8003AA20:
 /* 8003AA2C 0003592C  7C 08 03 A6 */	mtlr r0
 /* 8003AA30 00035930  38 21 00 20 */	addi r1, r1, 0x20
 /* 8003AA34 00035934  4E 80 00 20 */	blr 
+
+.global UpdateBuffer__Q34nw4r3snd10FxReverbHiFiPPvUlQ34nw4r3snd12SampleFormatfQ34nw4r3snd10OutputMode
+UpdateBuffer__Q34nw4r3snd10FxReverbHiFiPPvUlQ34nw4r3snd12SampleFormatfQ34nw4r3snd10OutputMode:
 /* 8003AA38 00035938  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8003AA3C 0003593C  7C 08 02 A6 */	mflr r0
 /* 8003AA40 00035940  7C 64 1B 78 */	mr r4, r3
@@ -294,11 +309,14 @@ lbl_8003AA20:
 /* 8003AA5C 0003595C  90 01 00 0C */	stw r0, 0xc(r1)
 /* 8003AA60 00035960  80 05 00 08 */	lwz r0, 8(r5)
 /* 8003AA64 00035964  90 01 00 10 */	stw r0, 0x10(r1)
-/* 8003AA68 00035968  48 0C CC 79 */	bl func_801076E0
+/* 8003AA68 00035968  48 0C CC 79 */	bl AXFXReverbHiCallback
 /* 8003AA6C 0003596C  80 01 00 24 */	lwz r0, 0x24(r1)
 /* 8003AA70 00035970  7C 08 03 A6 */	mtlr r0
 /* 8003AA74 00035974  38 21 00 20 */	addi r1, r1, 0x20
 /* 8003AA78 00035978  4E 80 00 20 */	blr 
+
+.global __dt__Q34nw4r3snd10FxReverbHiFv
+__dt__Q34nw4r3snd10FxReverbHiFv:
 /* 8003AA7C 0003597C  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8003AA80 00035980  7C 08 02 A6 */	mflr r0
 /* 8003AA84 00035984  2C 03 00 00 */	cmpwi r3, 0
