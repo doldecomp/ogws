@@ -34,6 +34,7 @@ namespace nw4r
 				
 				inline Lfo() : mParam(), WORD_0x10(0), FLOAT_0x14(0.0f) {}
 				
+				static int GetSinIdx(int); // inlined
 				float GetValue() const;
 			};
 		}
