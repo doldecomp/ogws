@@ -7,9 +7,9 @@
 #.global lbl_80375B50
 #lbl_80375950:
 #	.incbin "baserom.dol", 0x371C50, 0x40
-.global lbl_80375B60
-lbl_80375960:
-	.incbin "baserom.dol", 0x371C60, 0x30
+.global lbl_80375B78
+lbl_80375978:
+	.incbin "baserom.dol", 0x371C78, 0x18
 .global lbl_80375B90
 lbl_80375B90:
 	.incbin "baserom.dol", 0x371C90, 0x68
