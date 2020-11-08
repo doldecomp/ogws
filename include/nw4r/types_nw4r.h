@@ -42,6 +42,13 @@ namespace nw4r
 	namespace snd
 	{
 		struct FxBase;
+		struct SoundPlayer;
+		struct SoundHandle;
+		
+		namespace detail
+		{
+			struct BasicSound;
+		}
 	}
 }
 

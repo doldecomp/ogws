@@ -1,5 +1,11 @@
 .include "macros.inc"
 
+.section .sdata2, "a"  # 0x804BFA20 - 0x804C69E0
+
+.balign 0x8
+
+lbl_804BFFE0: .float 0e1
+
 .section .text, "ax"  # 0x800076E0 - 0x80355080 
 
 .global __ct__Q44nw4r3snd6detail19ExternalSoundPlayerFv

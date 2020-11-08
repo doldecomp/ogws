@@ -147,6 +147,12 @@ namespace nw4r
 					return *this;
 				}
 				
+				inline Iterator & operator --()
+				{
+					mNode = mNode->mPrev;
+					return *this;
+				}
+				
 				inline Iterator operator ++(int)
 				{
 					Iterator ret = *this;
@@ -157,6 +163,11 @@ namespace nw4r
 				inline T * operator->() const
 				{
 					return GetPointerFromNode(mNode);
+				}
+				
+				inline T & operator*() const
+				{
+					return *GetPointerFromNode(mNode);
 				}
 			};
 			
@@ -183,6 +194,11 @@ namespace nw4r
 			inline UNKTYPE Erase(T * ptr)
 			{
 				detail::LinkListImpl::Erase(GetNodeFromPointer(ptr));
+			}
+			
+			inline T * GetBack()
+			{
+				return &*--GetEndIter();
 			}
 			
 			~LinkList();

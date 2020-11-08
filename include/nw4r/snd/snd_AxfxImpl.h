@@ -2,6 +2,7 @@
 #define NW4R_SND_AXFX_IMPL_H
 #include "types_nw4r.h"
 #include <AXFXHooks.h>
+#include <mem_heapCommon.h>
 
 namespace nw4r
 {
@@ -22,9 +23,16 @@ namespace nw4r
 				static void * Alloc(u32);
 				static void Free(void *);
 				
-				char UNK_0x0[0x4];
-				UNKTYPE * mHeap; // at 0x4
+				bool mPoweredFlag; // at 0x0
+				MEMHeap * mHeap; // at 0x4
 				u32 mAllocCount; // at 0x8
+				
+				inline AxfxImpl() : mPoweredFlag(false), mHeap(NULL), mAllocCount(0) {}
+				inline u32 GetHeapTotalSize() const
+				{
+					if (!mHeap) return 0;
+					return MEMGetHeapTotalSize(mHeap);
+				}
 			};
 		}
 	}

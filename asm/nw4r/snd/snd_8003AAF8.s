@@ -1,5 +1,41 @@
 .include "macros.inc"
 
+.section .rodata, "a"  # 0x80375780 - 0x80393A80
+
+.balign 0x8
+
+lbl_80375B78:
+	.single 0e0.02
+	.single 0e3
+	.single 0e0.6
+	.single 0e0.4
+	.single 0e0.1
+	.single 0e1
+
+.section .data, "wa"  # 0x80393A80 - 0x803CAF00
+
+.balign 0x8
+
+.global lbl_80395D78
+lbl_80395D78:
+	.long 0
+	.long 0
+	.long func_8003AF14
+	.long func_8003ABC0
+	.long func_8003AC7C
+	.long func_8003AEC8
+	.long func_8003ABB0
+	.long func_8003ABB8
+
+.section .sdata2, "a"  # 0x804BFA20 - 0x804C69E0
+
+.balign 0x8
+
+lbl_804C0008: .single 0e0.1
+lbl_804C000C: .single 0e0
+lbl_804C0010: .single 0e10
+lbl_804C0014: .single 0e1
+
 .section .text, "ax"  # 0x800076E0 - 0x80355080 
 
 .global func_8003AAF8
@@ -53,10 +89,19 @@ func_8003AB84:
 /* 8003ABA4 00035AA4  7C 08 03 A6 */	mtlr r0
 /* 8003ABA8 00035AA8  38 21 00 10 */	addi r1, r1, 0x10
 /* 8003ABAC 00035AAC  4E 80 00 20 */	blr 
+
+.global func_8003ABB0
+func_8003ABB0:
 /* 8003ABB0 00035AB0  38 63 00 0C */	addi r3, r3, 0xc
 /* 8003ABB4 00035AB4  4B FF AD CC */	b CreateHeap__Q44nw4r3snd6detail8AxfxImplFPvUl
+
+.global func_8003ABB8
+func_8003ABB8:
 /* 8003ABB8 00035AB8  38 63 00 0C */	addi r3, r3, 0xc
 /* 8003ABBC 00035ABC  4B FF AE 0C */	b DestroyHeap__Q44nw4r3snd6detail8AxfxImplFv
+
+.global func_8003ABC0
+func_8003ABC0:
 /* 8003ABC0 00035AC0  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8003ABC4 00035AC4  7C 08 02 A6 */	mflr r0
 /* 8003ABC8 00035AC8  90 01 00 24 */	stw r0, 0x24(r1)
@@ -108,6 +153,9 @@ lbl_8003AC64:
 /* 8003AC70 00035B70  7C 08 03 A6 */	mtlr r0
 /* 8003AC74 00035B74  38 21 00 20 */	addi r1, r1, 0x20
 /* 8003AC78 00035B78  4E 80 00 20 */	blr 
+
+.global func_8003AC7C
+func_8003AC7C:
 /* 8003AC7C 00035B7C  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8003AC80 00035B80  7C 08 02 A6 */	mflr r0
 /* 8003AC84 00035B84  90 01 00 24 */	stw r0, 0x24(r1)
@@ -282,6 +330,9 @@ lbl_8003AEB0:
 /* 8003AEBC 00035DBC  7C 08 03 A6 */	mtlr r0
 /* 8003AEC0 00035DC0  38 21 00 20 */	addi r1, r1, 0x20
 /* 8003AEC4 00035DC4  4E 80 00 20 */	blr 
+
+.global func_8003AEC8
+func_8003AEC8:
 /* 8003AEC8 00035DC8  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8003AECC 00035DCC  7C 08 02 A6 */	mflr r0
 /* 8003AED0 00035DD0  7C 64 1B 78 */	mr r4, r3

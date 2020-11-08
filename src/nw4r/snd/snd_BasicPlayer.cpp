@@ -6,7 +6,7 @@ namespace nw4r
 	{
 		namespace detail
 		{
-			BasicPlayer::BasicPlayer() : WORD_0x4(-1)
+			BasicPlayer::BasicPlayer() : mId(-1)
 			{
 				InitParam();
 			}
@@ -18,11 +18,11 @@ namespace nw4r
 				FLOAT_0x8 = 1.0f;
 				FLOAT_0xC = 1.0f;
 				FLOAT_0x14 = 0.0f;
-				FLOAT_0x18 = 0.0f;
+				mLpfFreq = 0.0f;
 				
-				BYTE_0x68 = 0;
-				WORD_0x6C = 0;
-				WORD_0x70 = 0;
+				mRemoteFilter = 0;
+				mPanMode = PAN_MODE_0;
+				mPanCurve = PAN_CURVE_0;
 				WORD_0x20 = 1;
 				
 				FLOAT_0x28 = 0.0f;

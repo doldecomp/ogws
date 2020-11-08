@@ -25,8 +25,8 @@ namespace nw4r
 				
 				if (!pChannel) return NULL;
 				
-				pChannel->WORD_0xC0 = noteOnInfo.INT_0x4;
-				pChannel->WORD_0xC4 = instInfo.BYTE_0x8;
+				pChannel->INT_0xC0 = noteOnInfo.INT_0x4;
+				pChannel->INT_0xC4 = instInfo.BYTE_0x8;
 				
 				//f3 = noteOnInfo.INT_0x8
 				//f3 = f3 / 127.0f

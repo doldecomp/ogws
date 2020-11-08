@@ -2,9 +2,8 @@
 
 .section .sbss2, "a" # 0x804C69E0 - 0x804C6A1C
 
-.global lbl_804C69E0
-lbl_804C69E0:
-	.skip 0x8
+.balign 0x8
+
 .global lbl_804C69E8
 lbl_804C69E8:
 	.skip 0x8

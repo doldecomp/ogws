@@ -19,8 +19,7 @@ namespace nw4r
 			inline float Clamp(float min, float max, float value)
 			{
 				if (value > max) return max;
-				if (value < min) return min;
-				return value;
+				return (value < min) ? min : value;
 			}
 			
 			template <typename T>

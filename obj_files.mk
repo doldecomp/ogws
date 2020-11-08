@@ -74,15 +74,15 @@ TEXT_O_FILES := \
 	build/asm/nw4r/snd/snd_Channel.o \
 	build/asm/nw4r/snd/snd_DisposeCallbackManager.o \
 	build/asm/nw4r/snd/snd_DvdSoundArchive.o \
-	build/asm/nw4r/snd/snd_EnvGenerator.o \
+	build/nw4r/snd/snd_EnvGenerator.o \
 	build/asm/nw4r/snd/snd_ExternalSoundPlayer.o \
 	build/asm/nw4r/snd/snd_FrameHeap.o \
-	build/asm/nw4r/snd/snd_FxDelay.o \
-	build/asm/nw4r/snd/snd_FxReverbHi.o \
-	build/asm/nw4r/snd/snd_8003A668.o \
+	build/nw4r/snd/snd_FxChorus.o \
+	build/nw4r/snd/snd_FxDelay.o \
+	build/nw4r/snd/snd_FxReverbHi.o \
 	build/asm/nw4r/snd/snd_8003AAF8.o \
 	build/nw4r/snd/snd_InstancePool.o \
-	build/asm/nw4r/snd/snd_Lfo.o \
+	build/nw4r/snd/snd_Lfo.o \
 	build/asm/nw4r/snd/snd_MemorySoundArchive.o \
 	build/asm/nw4r/snd/snd_MidiSeqPlayer.o \
 	build/asm/nw4r/snd/snd_MmlParser.o \

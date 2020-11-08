@@ -1,5 +1,38 @@
 .include "macros.inc"
 
+.section .bss, "wa"  # 0x803CAF00 - 0x804BD380
+
+.balign 0x8
+
+.global lbl_803D0878
+lbl_803D0878:
+	.skip 0x10
+.global instance$8268
+instance$8268:
+	.skip 0x20
+
+.section .sbss, "wa" # 0x804BE9E0 - 0x804BFA20
+
+.balign 0x8
+
+# @GUARD@instance$8268
+.global $$2GUARD$$2instance$8268
+$$2GUARD$$2instance$8268:
+	.skip 0x1
+
+.section .sdata2, "a"  # 0x804BFA20 - 0x804C69E0
+
+.balign 0x8
+
+lbl_804BFF88: .single 0e0
+lbl_804BFF8C: .single 0e1
+lbl_804BFF90: .single 0e255
+lbl_804BFF94: .single 0e6
+lbl_804BFF98: .single 0e256
+.balign 0x8
+lbl_804BFFA0: .double 0e4.503599627370496E15
+lbl_804BFFA8: .double 0e4.503601774854144E15
+
 .section .text, "ax"  # 0x800076E0 - 0x80355080 
 
 .global GetInstance__Q44nw4r3snd6detail14ChannelManagerFv
@@ -7,12 +40,12 @@ GetInstance__Q44nw4r3snd6detail14ChannelManagerFv:
 /* 80037468 00032368  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8003746C 0003236C  7C 08 02 A6 */	mflr r0
 /* 80037470 00032370  90 01 00 14 */	stw r0, 0x14(r1)
-/* 80037474 00032374  88 0D 97 00 */	lbz r0, lbl_804BEA80-_SDA_BASE_(r13)
+/* 80037474 00032374  88 0D 97 00 */	lbz r0, $$2GUARD$$2instance$8268-_SDA_BASE_(r13)
 /* 80037478 00032378  7C 00 07 75 */	extsb. r0, r0
 /* 8003747C 0003237C  40 82 00 50 */	bne lbl_800374CC
-/* 80037480 00032380  3C C0 80 3D */	lis r6, lbl_803D0888@ha
+/* 80037480 00032380  3C C0 80 3D */	lis r6, instance$8268@ha
 /* 80037484 00032384  38 00 00 00 */	li r0, 0
-/* 80037488 00032388  38 66 08 88 */	addi r3, r6, lbl_803D0888@l
+/* 80037488 00032388  38 66 08 88 */	addi r3, r6, instance$8268@l
 /* 8003748C 0003238C  3C 80 80 03 */	lis r4, __dt__Q44nw4r3snd6detail14ChannelManagerFv@ha
 /* 80037490 00032390  90 03 00 08 */	stw r0, 8(r3)
 /* 80037494 00032394  38 E3 00 08 */	addi r7, r3, 8
@@ -20,7 +53,7 @@ GetInstance__Q44nw4r3snd6detail14ChannelManagerFv:
 /* 8003749C 0003239C  38 84 74 E4 */	addi r4, r4, __dt__Q44nw4r3snd6detail14ChannelManagerFv@l
 /* 800374A0 000323A0  90 03 00 0C */	stw r0, 0xc(r3)
 /* 800374A4 000323A4  38 A5 08 78 */	addi r5, r5, lbl_803D0878@l
-/* 800374A8 000323A8  90 06 08 88 */	stw r0, 0x888(r6)
+/* 800374A8 000323A8  90 06 08 88 */	stw r0, instance$8268@l(r6)
 /* 800374AC 000323AC  90 03 00 04 */	stw r0, 4(r3)
 /* 800374B0 000323B0  90 E3 00 08 */	stw r7, 8(r3)
 /* 800374B4 000323B4  90 E3 00 0C */	stw r7, 0xc(r3)
@@ -28,11 +61,11 @@ GetInstance__Q44nw4r3snd6detail14ChannelManagerFv:
 /* 800374BC 000323BC  90 03 00 14 */	stw r0, 0x14(r3)
 /* 800374C0 000323C0  48 07 A3 75 */	bl __register_global_object
 /* 800374C4 000323C4  38 00 00 01 */	li r0, 1
-/* 800374C8 000323C8  98 0D 97 00 */	stb r0, lbl_804BEA80-_SDA_BASE_(r13)
+/* 800374C8 000323C8  98 0D 97 00 */	stb r0, $$2GUARD$$2instance$8268-_SDA_BASE_(r13)
 lbl_800374CC:
 /* 800374CC 000323CC  80 01 00 14 */	lwz r0, 0x14(r1)
-/* 800374D0 000323D0  3C 60 80 3D */	lis r3, lbl_803D0888@ha
-/* 800374D4 000323D4  38 63 08 88 */	addi r3, r3, lbl_803D0888@l
+/* 800374D0 000323D0  3C 60 80 3D */	lis r3, instance$8268@ha
+/* 800374D4 000323D4  38 63 08 88 */	addi r3, r3, instance$8268@l
 /* 800374D8 000323D8  7C 08 03 A6 */	mtlr r0
 /* 800374DC 000323DC  38 21 00 10 */	addi r1, r1, 0x10
 /* 800374E0 000323E0  4E 80 00 20 */	blr 
@@ -137,13 +170,13 @@ Shutdown__Q44nw4r3snd6detail14ChannelManagerFv:
 /* 8003762C 0003252C  48 0B A2 BD */	bl OSRestoreInterrupts
 /* 80037630 00032530  48 00 01 14 */	b lbl_80037744
 lbl_80037634:
-/* 80037634 00032534  3F 00 80 3D */	lis r24, lbl_803D0888@ha
+/* 80037634 00032534  3F 00 80 3D */	lis r24, instance$8268@ha
 /* 80037638 00032538  83 BF 00 08 */	lwz r29, 8(r31)
-/* 8003763C 0003253C  3A D8 08 88 */	addi r22, r24, lbl_803D0888@l
+/* 8003763C 0003253C  3A D8 08 88 */	addi r22, r24, instance$8268@l
 /* 80037640 00032540  3B 9F 00 08 */	addi r28, r31, 8
 /* 80037644 00032544  3A E0 00 00 */	li r23, 0
-/* 80037648 00032548  3F 20 80 03 */	lis r25, 0x8003
-/* 8003764C 0003254C  3F 40 80 3D */	lis r26, 0x803d
+/* 80037648 00032548  3F 20 80 03 */	lis r25, __dt__Q44nw4r3snd6detail14ChannelManagerFv@ha
+/* 8003764C 0003254C  3F 40 80 3D */	lis r26, lbl_803D0878@ha
 /* 80037650 00032550  3B 60 00 01 */	li r27, 1
 /* 80037654 00032554  48 00 00 C8 */	b lbl_8003771C
 lbl_80037658:
@@ -163,23 +196,23 @@ lbl_80037658:
 /* 8003768C 0003258C  2C 00 00 00 */	cmpwi r0, 0
 /* 80037690 00032590  41 82 00 6C */	beq lbl_800376FC
 /* 80037694 00032594  9A F5 00 33 */	stb r23, 0x33(r21)
-/* 80037698 00032598  88 0D 97 00 */	lbz r0, lbl_804BEA80-_SDA_BASE_(r13)
+/* 80037698 00032598  88 0D 97 00 */	lbz r0, $$2GUARD$$2instance$8268-_SDA_BASE_(r13)
 /* 8003769C 0003259C  7C 00 07 75 */	extsb. r0, r0
 /* 800376A0 000325A0  40 82 00 3C */	bne lbl_800376DC
 /* 800376A4 000325A4  92 F6 00 08 */	stw r23, 8(r22)
 /* 800376A8 000325A8  38 D6 00 08 */	addi r6, r22, 8
 /* 800376AC 000325AC  7E C3 B3 78 */	mr r3, r22
-/* 800376B0 000325B0  38 99 74 E4 */	addi r4, r25, 0x74e4
+/* 800376B0 000325B0  38 99 74 E4 */	addi r4, r25, __dt__Q44nw4r3snd6detail14ChannelManagerFv@l
 /* 800376B4 000325B4  92 F6 00 0C */	stw r23, 0xc(r22)
-/* 800376B8 000325B8  38 BA 08 78 */	addi r5, r26, 0x878
-/* 800376BC 000325BC  92 F8 08 88 */	stw r23, 0x888(r24)
+/* 800376B8 000325B8  38 BA 08 78 */	addi r5, r26, lbl_803D0878@l
+/* 800376BC 000325BC  92 F8 08 88 */	stw r23, instance$8268@l(r24)
 /* 800376C0 000325C0  92 F6 00 04 */	stw r23, 4(r22)
 /* 800376C4 000325C4  90 D6 00 08 */	stw r6, 8(r22)
 /* 800376C8 000325C8  90 D6 00 0C */	stw r6, 0xc(r22)
 /* 800376CC 000325CC  9A F6 00 10 */	stb r23, 0x10(r22)
 /* 800376D0 000325D0  92 F6 00 14 */	stw r23, 0x14(r22)
 /* 800376D4 000325D4  48 07 A1 61 */	bl __register_global_object
-/* 800376D8 000325D8  9B 6D 97 00 */	stb r27, lbl_804BEA80-_SDA_BASE_(r13)
+/* 800376D8 000325D8  9B 6D 97 00 */	stb r27, $$2GUARD$$2instance$8268-_SDA_BASE_(r13)
 lbl_800376DC:
 /* 800376DC 000325DC  38 76 00 04 */	addi r3, r22, 4
 /* 800376E0 000325E0  38 95 00 E4 */	addi r4, r21, 0xe4
@@ -255,7 +288,7 @@ InitParam__Q44nw4r3snd6detail7ChannelFPFPQ44nw4r3snd6detail7ChannelQ54nw4r3snd6d
 /* 800377CC 000326CC  38 00 00 FF */	li r0, 0xff
 /* 800377D0 000326D0  93 E1 00 0C */	stw r31, 0xc(r1)
 /* 800377D4 000326D4  3B E0 00 00 */	li r31, 0
-/* 800377D8 000326D8  C0 22 85 90 */	lfs f1, lbl_804BFFB0-_SDA2_BASE_(r2)
+/* 800377D8 000326D8  C0 22 85 90 */	lfs f1, VOLUME_INIT__Q44nw4r3snd6detail12EnvGenerator-_SDA2_BASE_(r2)
 /* 800377DC 000326DC  93 C1 00 08 */	stw r30, 8(r1)
 /* 800377E0 000326E0  7C 7E 1B 78 */	mr r30, r3
 /* 800377E4 000326E4  93 E3 00 E0 */	stw r31, 0xe0(r3)
@@ -435,19 +468,19 @@ lbl_80037A2C:
 /* 80037A7C 0003297C  98 FE 00 32 */	stb r7, 0x32(r30)
 /* 80037A80 00032980  41 82 00 84 */	beq lbl_80037B04
 /* 80037A84 00032984  98 FE 00 33 */	stb r7, 0x33(r30)
-/* 80037A88 00032988  88 0D 97 00 */	lbz r0, lbl_804BEA80-_SDA_BASE_(r13)
+/* 80037A88 00032988  88 0D 97 00 */	lbz r0, $$2GUARD$$2instance$8268-_SDA_BASE_(r13)
 /* 80037A8C 0003298C  7C 00 07 75 */	extsb. r0, r0
 /* 80037A90 00032990  40 82 00 4C */	bne lbl_80037ADC
-/* 80037A94 00032994  3C C0 80 3D */	lis r6, lbl_803D0888@ha
+/* 80037A94 00032994  3C C0 80 3D */	lis r6, instance$8268@ha
 /* 80037A98 00032998  3C 80 80 03 */	lis r4, __dt__Q44nw4r3snd6detail14ChannelManagerFv@ha
-/* 80037A9C 0003299C  38 66 08 88 */	addi r3, r6, lbl_803D0888@l
+/* 80037A9C 0003299C  38 66 08 88 */	addi r3, r6, instance$8268@l
 /* 80037AA0 000329A0  3C A0 80 3D */	lis r5, lbl_803D0878@ha
 /* 80037AA4 000329A4  90 E3 00 08 */	stw r7, 8(r3)
 /* 80037AA8 000329A8  39 03 00 08 */	addi r8, r3, 8
 /* 80037AAC 000329AC  38 84 74 E4 */	addi r4, r4, __dt__Q44nw4r3snd6detail14ChannelManagerFv@l
 /* 80037AB0 000329B0  38 A5 08 78 */	addi r5, r5, lbl_803D0878@l
 /* 80037AB4 000329B4  90 E3 00 0C */	stw r7, 0xc(r3)
-/* 80037AB8 000329B8  90 E6 08 88 */	stw r7, 0x888(r6)
+/* 80037AB8 000329B8  90 E6 08 88 */	stw r7, instance$8268@l(r6)
 /* 80037ABC 000329BC  90 E3 00 04 */	stw r7, 4(r3)
 /* 80037AC0 000329C0  91 03 00 08 */	stw r8, 8(r3)
 /* 80037AC4 000329C4  91 03 00 0C */	stw r8, 0xc(r3)
@@ -455,11 +488,11 @@ lbl_80037A2C:
 /* 80037ACC 000329CC  90 E3 00 14 */	stw r7, 0x14(r3)
 /* 80037AD0 000329D0  48 07 9D 65 */	bl __register_global_object
 /* 80037AD4 000329D4  38 00 00 01 */	li r0, 1
-/* 80037AD8 000329D8  98 0D 97 00 */	stb r0, lbl_804BEA80-_SDA_BASE_(r13)
+/* 80037AD8 000329D8  98 0D 97 00 */	stb r0, $$2GUARD$$2instance$8268-_SDA_BASE_(r13)
 lbl_80037ADC:
-/* 80037ADC 000329DC  3F E0 80 3D */	lis r31, lbl_803D0888@ha
+/* 80037ADC 000329DC  3F E0 80 3D */	lis r31, instance$8268@ha
 /* 80037AE0 000329E0  38 9E 00 E4 */	addi r4, r30, 0xe4
-/* 80037AE4 000329E4  3B FF 08 88 */	addi r31, r31, lbl_803D0888@l
+/* 80037AE4 000329E4  3B FF 08 88 */	addi r31, r31, instance$8268@l
 /* 80037AE8 000329E8  38 7F 00 04 */	addi r3, r31, 4
 /* 80037AEC 000329EC  4B FC FF CD */	bl Erase__Q44nw4r2ut6detail12LinkListImplFPQ34nw4r2ut12LinkListNode
 /* 80037AF0 000329F0  2C 1E 00 00 */	cmpwi r30, 0
@@ -496,19 +529,19 @@ lbl_80037B28:
 /* 80037B64 00032A64  98 FE 00 32 */	stb r7, 0x32(r30)
 /* 80037B68 00032A68  41 82 00 84 */	beq lbl_80037BEC
 /* 80037B6C 00032A6C  98 FE 00 33 */	stb r7, 0x33(r30)
-/* 80037B70 00032A70  88 0D 97 00 */	lbz r0, lbl_804BEA80-_SDA_BASE_(r13)
+/* 80037B70 00032A70  88 0D 97 00 */	lbz r0, $$2GUARD$$2instance$8268-_SDA_BASE_(r13)
 /* 80037B74 00032A74  7C 00 07 75 */	extsb. r0, r0
 /* 80037B78 00032A78  40 82 00 4C */	bne lbl_80037BC4
-/* 80037B7C 00032A7C  3C C0 80 3D */	lis r6, lbl_803D0888@ha
+/* 80037B7C 00032A7C  3C C0 80 3D */	lis r6, instance$8268@ha
 /* 80037B80 00032A80  3C 80 80 03 */	lis r4, __dt__Q44nw4r3snd6detail14ChannelManagerFv@ha
-/* 80037B84 00032A84  38 66 08 88 */	addi r3, r6, lbl_803D0888@l
+/* 80037B84 00032A84  38 66 08 88 */	addi r3, r6, instance$8268@l
 /* 80037B88 00032A88  3C A0 80 3D */	lis r5, lbl_803D0878@ha
 /* 80037B8C 00032A8C  90 E3 00 08 */	stw r7, 8(r3)
 /* 80037B90 00032A90  39 03 00 08 */	addi r8, r3, 8
 /* 80037B94 00032A94  38 84 74 E4 */	addi r4, r4, __dt__Q44nw4r3snd6detail14ChannelManagerFv@l
 /* 80037B98 00032A98  38 A5 08 78 */	addi r5, r5, lbl_803D0878@l
 /* 80037B9C 00032A9C  90 E3 00 0C */	stw r7, 0xc(r3)
-/* 80037BA0 00032AA0  90 E6 08 88 */	stw r7, 0x888(r6)
+/* 80037BA0 00032AA0  90 E6 08 88 */	stw r7, instance$8268@l(r6)
 /* 80037BA4 00032AA4  90 E3 00 04 */	stw r7, 4(r3)
 /* 80037BA8 00032AA8  91 03 00 08 */	stw r8, 8(r3)
 /* 80037BAC 00032AAC  91 03 00 0C */	stw r8, 0xc(r3)
@@ -516,11 +549,11 @@ lbl_80037B28:
 /* 80037BB4 00032AB4  90 E3 00 14 */	stw r7, 0x14(r3)
 /* 80037BB8 00032AB8  48 07 9C 7D */	bl __register_global_object
 /* 80037BBC 00032ABC  38 00 00 01 */	li r0, 1
-/* 80037BC0 00032AC0  98 0D 97 00 */	stb r0, lbl_804BEA80-_SDA_BASE_(r13)
+/* 80037BC0 00032AC0  98 0D 97 00 */	stb r0, $$2GUARD$$2instance$8268-_SDA_BASE_(r13)
 lbl_80037BC4:
-/* 80037BC4 00032AC4  3F E0 80 3D */	lis r31, lbl_803D0888@ha
+/* 80037BC4 00032AC4  3F E0 80 3D */	lis r31, instance$8268@ha
 /* 80037BC8 00032AC8  38 9E 00 E4 */	addi r4, r30, 0xe4
-/* 80037BCC 00032ACC  3B FF 08 88 */	addi r31, r31, lbl_803D0888@l
+/* 80037BCC 00032ACC  3B FF 08 88 */	addi r31, r31, instance$8268@l
 /* 80037BD0 00032AD0  38 7F 00 04 */	addi r3, r31, 4
 /* 80037BD4 00032AD4  4B FC FE E5 */	bl Erase__Q44nw4r2ut6detail12LinkListImplFPQ34nw4r2ut12LinkListNode
 /* 80037BD8 00032AD8  2C 1E 00 00 */	cmpwi r30, 0
@@ -824,7 +857,7 @@ Start__Q44nw4r3snd6detail7ChannelFRCQ44nw4r3snd6detail8WaveDataiUl:
 /* 80038040 00032F40  90 A3 00 C8 */	stw r5, 0xc8(r3)
 /* 80038044 00032F44  38 63 00 18 */	addi r3, r3, 0x18
 /* 80038048 00032F48  48 00 32 25 */	bl Reset__Q44nw4r3snd6detail3LfoFv
-/* 8003804C 00032F4C  C0 22 85 90 */	lfs f1, lbl_804BFFB0-_SDA2_BASE_(r2)
+/* 8003804C 00032F4C  C0 22 85 90 */	lfs f1, VOLUME_INIT__Q44nw4r3snd6detail12EnvGenerator-_SDA2_BASE_(r2)
 /* 80038050 00032F50  7F A3 EB 78 */	mr r3, r29
 /* 80038054 00032F54  48 00 0F 45 */	bl Reset__Q44nw4r3snd6detail12EnvGeneratorFf
 /* 80038058 00032F58  38 00 00 00 */	li r0, 0
@@ -899,19 +932,19 @@ Stop__Q44nw4r3snd6detail7ChannelFv:
 /* 8003814C 0003304C  98 FE 00 32 */	stb r7, 0x32(r30)
 /* 80038150 00033050  41 82 00 84 */	beq lbl_800381D4
 /* 80038154 00033054  98 FE 00 33 */	stb r7, 0x33(r30)
-/* 80038158 00033058  88 0D 97 00 */	lbz r0, lbl_804BEA80-_SDA_BASE_(r13)
+/* 80038158 00033058  88 0D 97 00 */	lbz r0, $$2GUARD$$2instance$8268-_SDA_BASE_(r13)
 /* 8003815C 0003305C  7C 00 07 75 */	extsb. r0, r0
 /* 80038160 00033060  40 82 00 4C */	bne lbl_800381AC
-/* 80038164 00033064  3C C0 80 3D */	lis r6, lbl_803D0888@ha
+/* 80038164 00033064  3C C0 80 3D */	lis r6, instance$8268@ha
 /* 80038168 00033068  3C 80 80 03 */	lis r4, __dt__Q44nw4r3snd6detail14ChannelManagerFv@ha
-/* 8003816C 0003306C  38 66 08 88 */	addi r3, r6, lbl_803D0888@l
+/* 8003816C 0003306C  38 66 08 88 */	addi r3, r6, instance$8268@l
 /* 80038170 00033070  3C A0 80 3D */	lis r5, lbl_803D0878@ha
 /* 80038174 00033074  90 E3 00 08 */	stw r7, 8(r3)
 /* 80038178 00033078  39 03 00 08 */	addi r8, r3, 8
 /* 8003817C 0003307C  38 84 74 E4 */	addi r4, r4, __dt__Q44nw4r3snd6detail14ChannelManagerFv@l
 /* 80038180 00033080  38 A5 08 78 */	addi r5, r5, lbl_803D0878@l
 /* 80038184 00033084  90 E3 00 0C */	stw r7, 0xc(r3)
-/* 80038188 00033088  90 E6 08 88 */	stw r7, 0x888(r6)
+/* 80038188 00033088  90 E6 08 88 */	stw r7, instance$8268@l(r6)
 /* 8003818C 0003308C  90 E3 00 04 */	stw r7, 4(r3)
 /* 80038190 00033090  91 03 00 08 */	stw r8, 8(r3)
 /* 80038194 00033094  91 03 00 0C */	stw r8, 0xc(r3)
@@ -919,11 +952,11 @@ Stop__Q44nw4r3snd6detail7ChannelFv:
 /* 8003819C 0003309C  90 E3 00 14 */	stw r7, 0x14(r3)
 /* 800381A0 000330A0  48 07 96 95 */	bl __register_global_object
 /* 800381A4 000330A4  38 00 00 01 */	li r0, 1
-/* 800381A8 000330A8  98 0D 97 00 */	stb r0, lbl_804BEA80-_SDA_BASE_(r13)
+/* 800381A8 000330A8  98 0D 97 00 */	stb r0, $$2GUARD$$2instance$8268-_SDA_BASE_(r13)
 lbl_800381AC:
-/* 800381AC 000330AC  3F E0 80 3D */	lis r31, lbl_803D0888@ha
+/* 800381AC 000330AC  3F E0 80 3D */	lis r31, instance$8268@ha
 /* 800381B0 000330B0  38 9E 00 E4 */	addi r4, r30, 0xe4
-/* 800381B4 000330B4  3B FF 08 88 */	addi r31, r31, lbl_803D0888@l
+/* 800381B4 000330B4  3B FF 08 88 */	addi r31, r31, instance$8268@l
 /* 800381B8 000330B8  38 7F 00 04 */	addi r3, r31, 4
 /* 800381BC 000330BC  4B FC F8 FD */	bl Erase__Q44nw4r2ut6detail12LinkListImplFPQ34nw4r2ut12LinkListNode
 /* 800381C0 000330C0  2C 1E 00 00 */	cmpwi r30, 0
@@ -1015,19 +1048,19 @@ lbl_800382C8:
 /* 800382D0 000331D0  98 FE 00 31 */	stb r7, 0x31(r30)
 /* 800382D4 000331D4  98 FE 00 32 */	stb r7, 0x32(r30)
 /* 800382D8 000331D8  98 FE 00 33 */	stb r7, 0x33(r30)
-/* 800382DC 000331DC  88 0D 97 00 */	lbz r0, lbl_804BEA80-_SDA_BASE_(r13)
+/* 800382DC 000331DC  88 0D 97 00 */	lbz r0, $$2GUARD$$2instance$8268-_SDA_BASE_(r13)
 /* 800382E0 000331E0  7C 00 07 75 */	extsb. r0, r0
 /* 800382E4 000331E4  40 82 00 4C */	bne lbl_80038330
-/* 800382E8 000331E8  3C C0 80 3D */	lis r6, lbl_803D0888@ha
+/* 800382E8 000331E8  3C C0 80 3D */	lis r6, instance$8268@ha
 /* 800382EC 000331EC  3C 80 80 03 */	lis r4, __dt__Q44nw4r3snd6detail14ChannelManagerFv@ha
-/* 800382F0 000331F0  38 66 08 88 */	addi r3, r6, lbl_803D0888@l
+/* 800382F0 000331F0  38 66 08 88 */	addi r3, r6, instance$8268@l
 /* 800382F4 000331F4  3C A0 80 3D */	lis r5, lbl_803D0878@ha
 /* 800382F8 000331F8  90 E3 00 08 */	stw r7, 8(r3)
 /* 800382FC 000331FC  39 03 00 08 */	addi r8, r3, 8
 /* 80038300 00033200  38 84 74 E4 */	addi r4, r4, __dt__Q44nw4r3snd6detail14ChannelManagerFv@l
 /* 80038304 00033204  38 A5 08 78 */	addi r5, r5, lbl_803D0878@l
 /* 80038308 00033208  90 E3 00 0C */	stw r7, 0xc(r3)
-/* 8003830C 0003320C  90 E6 08 88 */	stw r7, 0x888(r6)
+/* 8003830C 0003320C  90 E6 08 88 */	stw r7, instance$8268@l(r6)
 /* 80038310 00033210  90 E3 00 04 */	stw r7, 4(r3)
 /* 80038314 00033214  91 03 00 08 */	stw r8, 8(r3)
 /* 80038318 00033218  91 03 00 0C */	stw r8, 0xc(r3)
@@ -1035,11 +1068,11 @@ lbl_800382C8:
 /* 80038320 00033220  90 E3 00 14 */	stw r7, 0x14(r3)
 /* 80038324 00033224  48 07 95 11 */	bl __register_global_object
 /* 80038328 00033228  38 00 00 01 */	li r0, 1
-/* 8003832C 0003322C  98 0D 97 00 */	stb r0, lbl_804BEA80-_SDA_BASE_(r13)
+/* 8003832C 0003322C  98 0D 97 00 */	stb r0, $$2GUARD$$2instance$8268-_SDA_BASE_(r13)
 lbl_80038330:
-/* 80038330 00033230  3F E0 80 3D */	lis r31, lbl_803D0888@ha
+/* 80038330 00033230  3F E0 80 3D */	lis r31, instance$8268@ha
 /* 80038334 00033234  38 9E 00 E4 */	addi r4, r30, 0xe4
-/* 80038338 00033238  3B FF 08 88 */	addi r31, r31, lbl_803D0888@l
+/* 80038338 00033238  3B FF 08 88 */	addi r31, r31, instance$8268@l
 /* 8003833C 0003323C  38 7F 00 04 */	addi r3, r31, 4
 /* 80038340 00033240  4B FC F7 79 */	bl Erase__Q44nw4r2ut6detail12LinkListImplFPQ34nw4r2ut12LinkListNode
 /* 80038344 00033244  2C 1E 00 00 */	cmpwi r30, 0
@@ -1062,7 +1095,7 @@ AllocChannel__Q44nw4r3snd6detail7ChannelFiiiPFPQ44nw4r3snd6detail7ChannelQ54nw4r
 /* 80038378 00033278  90 01 00 34 */	stw r0, 0x34(r1)
 /* 8003837C 0003327C  39 61 00 30 */	addi r11, r1, 0x30
 /* 80038380 00033280  48 07 99 B9 */	bl _savegpr_24
-/* 80038384 00033284  88 0D 97 00 */	lbz r0, lbl_804BEA80-_SDA_BASE_(r13)
+/* 80038384 00033284  88 0D 97 00 */	lbz r0, $$2GUARD$$2instance$8268-_SDA_BASE_(r13)
 /* 80038388 00033288  7C 78 1B 78 */	mr r24, r3
 /* 8003838C 0003328C  7C 99 23 78 */	mr r25, r4
 /* 80038390 00033290  7C BA 2B 78 */	mr r26, r5
@@ -1070,9 +1103,9 @@ AllocChannel__Q44nw4r3snd6detail7ChannelFiiiPFPQ44nw4r3snd6detail7ChannelQ54nw4r
 /* 80038398 00033298  7C DB 33 78 */	mr r27, r6
 /* 8003839C 0003329C  7C FC 3B 78 */	mr r28, r7
 /* 800383A0 000332A0  40 82 00 50 */	bne lbl_800383F0
-/* 800383A4 000332A4  3C C0 80 3D */	lis r6, lbl_803D0888@ha
+/* 800383A4 000332A4  3C C0 80 3D */	lis r6, instance$8268@ha
 /* 800383A8 000332A8  38 00 00 00 */	li r0, 0
-/* 800383AC 000332AC  38 66 08 88 */	addi r3, r6, lbl_803D0888@l
+/* 800383AC 000332AC  38 66 08 88 */	addi r3, r6, instance$8268@l
 /* 800383B0 000332B0  3C 80 80 03 */	lis r4, __dt__Q44nw4r3snd6detail14ChannelManagerFv@ha
 /* 800383B4 000332B4  90 03 00 08 */	stw r0, 8(r3)
 /* 800383B8 000332B8  38 E3 00 08 */	addi r7, r3, 8
@@ -1080,7 +1113,7 @@ AllocChannel__Q44nw4r3snd6detail7ChannelFiiiPFPQ44nw4r3snd6detail7ChannelQ54nw4r
 /* 800383C0 000332C0  38 84 74 E4 */	addi r4, r4, __dt__Q44nw4r3snd6detail14ChannelManagerFv@l
 /* 800383C4 000332C4  90 03 00 0C */	stw r0, 0xc(r3)
 /* 800383C8 000332C8  38 A5 08 78 */	addi r5, r5, lbl_803D0878@l
-/* 800383CC 000332CC  90 06 08 88 */	stw r0, 0x888(r6)
+/* 800383CC 000332CC  90 06 08 88 */	stw r0, instance$8268@l(r6)
 /* 800383D0 000332D0  90 03 00 04 */	stw r0, 4(r3)
 /* 800383D4 000332D4  90 E3 00 08 */	stw r7, 8(r3)
 /* 800383D8 000332D8  90 E3 00 0C */	stw r7, 0xc(r3)
@@ -1088,10 +1121,10 @@ AllocChannel__Q44nw4r3snd6detail7ChannelFiiiPFPQ44nw4r3snd6detail7ChannelQ54nw4r
 /* 800383E0 000332E0  90 03 00 14 */	stw r0, 0x14(r3)
 /* 800383E4 000332E4  48 07 94 51 */	bl __register_global_object
 /* 800383E8 000332E8  38 00 00 01 */	li r0, 1
-/* 800383EC 000332EC  98 0D 97 00 */	stb r0, lbl_804BEA80-_SDA_BASE_(r13)
+/* 800383EC 000332EC  98 0D 97 00 */	stb r0, $$2GUARD$$2instance$8268-_SDA_BASE_(r13)
 lbl_800383F0:
-/* 800383F0 000332F0  3F E0 80 3D */	lis r31, lbl_803D0888@ha
-/* 800383F4 000332F4  3B FF 08 88 */	addi r31, r31, lbl_803D0888@l
+/* 800383F0 000332F0  3F E0 80 3D */	lis r31, instance$8268@ha
+/* 800383F4 000332F4  3B FF 08 88 */	addi r31, r31, instance$8268@l
 /* 800383F8 000332F8  7F E3 FB 78 */	mr r3, r31
 /* 800383FC 000332FC  48 00 2D A9 */	bl AllocImpl__Q44nw4r3snd6detail8PoolImplFv
 /* 80038400 00033300  2C 03 00 00 */	cmpwi r3, 0
@@ -1143,12 +1176,12 @@ lbl_80038488:
 /* 800384AC 000333AC  48 01 5E AD */	bl AllocVoice__Q44nw4r3snd6detail12VoiceManagerFiiiPFPQ44nw4r3snd6detail5VoiceQ54nw4r3snd6detail5Voice19VoiceCallbackStatusPv_vPv
 /* 800384B0 000333B0  2C 03 00 00 */	cmpwi r3, 0
 /* 800384B4 000333B4  40 82 00 88 */	bne lbl_8003853C
-/* 800384B8 000333B8  88 0D 97 00 */	lbz r0, lbl_804BEA80-_SDA_BASE_(r13)
+/* 800384B8 000333B8  88 0D 97 00 */	lbz r0, $$2GUARD$$2instance$8268-_SDA_BASE_(r13)
 /* 800384BC 000333BC  7C 00 07 75 */	extsb. r0, r0
 /* 800384C0 000333C0  40 82 00 4C */	bne lbl_8003850C
-/* 800384C4 000333C4  3C C0 80 3D */	lis r6, lbl_803D0888@ha
+/* 800384C4 000333C4  3C C0 80 3D */	lis r6, instance$8268@ha
 /* 800384C8 000333C8  38 00 00 00 */	li r0, 0
-/* 800384CC 000333CC  38 66 08 88 */	addi r3, r6, lbl_803D0888@l
+/* 800384CC 000333CC  38 66 08 88 */	addi r3, r6, instance$8268@l
 /* 800384D0 000333D0  3C 80 80 03 */	lis r4, __dt__Q44nw4r3snd6detail14ChannelManagerFv@ha
 /* 800384D4 000333D4  90 03 00 08 */	stw r0, 8(r3)
 /* 800384D8 000333D8  38 E3 00 08 */	addi r7, r3, 8
@@ -1156,18 +1189,18 @@ lbl_80038488:
 /* 800384E0 000333E0  38 84 74 E4 */	addi r4, r4, __dt__Q44nw4r3snd6detail14ChannelManagerFv@l
 /* 800384E4 000333E4  90 03 00 0C */	stw r0, 0xc(r3)
 /* 800384E8 000333E8  38 A5 08 78 */	addi r5, r5, lbl_803D0878@l
-/* 800384EC 000333EC  90 06 08 88 */	stw r0, 0x888(r6)
+/* 800384EC 000333EC  90 06 08 88 */	stw r0, instance$8268@l(r6)
 /* 800384F0 000333F0  90 03 00 04 */	stw r0, 4(r3)
 /* 800384F4 000333F4  90 E3 00 08 */	stw r7, 8(r3)
 /* 800384F8 000333F8  90 E3 00 0C */	stw r7, 0xc(r3)
 /* 800384FC 000333FC  98 03 00 10 */	stb r0, 0x10(r3)
 /* 80038500 00033400  90 03 00 14 */	stw r0, 0x14(r3)
 /* 80038504 00033404  48 07 93 31 */	bl __register_global_object
-/* 80038508 00033408  9B ED 97 00 */	stb r31, lbl_804BEA80-_SDA_BASE_(r13)
+/* 80038508 00033408  9B ED 97 00 */	stb r31, $$2GUARD$$2instance$8268-_SDA_BASE_(r13)
 lbl_8003850C:
-/* 8003850C 0003340C  3F E0 80 3D */	lis r31, lbl_803D0888@ha
+/* 8003850C 0003340C  3F E0 80 3D */	lis r31, instance$8268@ha
 /* 80038510 00033410  7F A4 EB 78 */	mr r4, r29
-/* 80038514 00033414  3B FF 08 88 */	addi r31, r31, lbl_803D0888@l
+/* 80038514 00033414  3B FF 08 88 */	addi r31, r31, instance$8268@l
 /* 80038518 00033418  38 7F 00 04 */	addi r3, r31, 4
 /* 8003851C 0003341C  4B FC F5 9D */	bl Erase__Q44nw4r2ut6detail12LinkListImplFPQ34nw4r2ut12LinkListNode
 /* 80038520 00033420  2C 1E 00 00 */	cmpwi r30, 0

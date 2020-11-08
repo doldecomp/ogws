@@ -9,15 +9,25 @@ namespace nw4r
 	{
 		namespace detail
 		{
+			enum PanMode
+			{
+				PAN_MODE_0 // Empty enums are ill-formed
+			};
+			
+			enum PanCurve
+			{
+				PAN_CURVE_0 // Empty enums are ill-formed
+			};
+			
 			struct BasicPlayer
 			{
-				inline virtual ~BasicPlayer() {}
-				virtual UNKTYPE Start() = 0;
-				virtual UNKTYPE Stop() = 0;
-				virtual UNKTYPE Pause(bool) = 0;
-				virtual bool IsActive() const = 0;
-				virtual bool IsStarted() const = 0;
-				virtual bool IsPause() const = 0;
+				inline virtual ~BasicPlayer() {} // at 0x8
+				virtual UNKWORD Start() = 0; // at 0xc
+				virtual UNKTYPE Stop() = 0; // at 0x10
+				virtual UNKTYPE Pause(bool) = 0; // at 0x14
+				virtual bool IsActive() const = 0; // at 0x18
+				virtual bool IsStarted() const = 0; // at 0x1c
+				virtual bool IsPause() const = 0; // at 0x20
 				
 				BasicPlayer();
 				void InitParam();
@@ -29,12 +39,12 @@ namespace nw4r
 				float GetRemoteSend(int) const;
 				float GetRemoteFxSend(int) const;
 				
-				UNKWORD WORD_0x4;
+				u32 mId; // at 0x4
 				float FLOAT_0x8;
 				float FLOAT_0xC;
 				float FLOAT_0x10;
 				float FLOAT_0x14;
-				float FLOAT_0x18;
+				float mLpfFreq; // at 0x18
 				char UNK_0x1C[0x4];
 				UNKWORD WORD_0x20;
 				float FLOAT_0x24;
@@ -43,9 +53,9 @@ namespace nw4r
 				float mRemoteOutputVolumes[4]; // at 0x38
 				float ARR_0x48[4];
 				float ARR_0x58[4];
-				char BYTE_0x68;
-				UNKWORD WORD_0x6C;
-				UNKWORD WORD_0x70;
+				char mRemoteFilter; // at 0x68
+				PanMode mPanMode; // at 0x6c
+				PanCurve mPanCurve; // at 0x70
 			};
 		}
 	}
