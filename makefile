@@ -52,8 +52,7 @@ CFLAGS_TRK := -Cpp_exceptions off -proc gekko -fp hard -O4,s -i include/RevoSDK/
 CFLAGS_NW4R := -lang c99 -enum int -inline auto -Cpp_exceptions off -RTTI off -proc gekko -fp hard -O4,p  -ir include/nw4r -I- -Iinclude -Iinclude/STL -ir include/RevoSDK -nodefaults
 
 # elf2dol needs to know these in order to calculate sbss correctly.
-SDATA_PDHR := 10
-SBSS_PDHR := 11
+BSS_PDHR := 9
 
 ASM_DIRS := asm \
 	asm/nw4r asm/RevoSDK \
@@ -88,7 +87,7 @@ $(LDSCRIPT): ldscript.lcf
 #	cp ldscript.lcf $(LDSCRIPT)
 
 $(DOL): $(ELF) | tools
-	$(ELF2DOL) $< $@ $(SDATA_PDHR) $(SBSS_PDHR) $(TARGET_COL)
+	$(ELF2DOL) $< $@ $(BSS_PDHR) $(TARGET_COL)
 	$(SHA1SUM) -c $(TARGET).sha1
 
 clean:
