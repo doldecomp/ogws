@@ -96,13 +96,17 @@ NW4R_O_FILES := \
 
 GROUP_1_O_FILES := \
 	build/asm/text.o \
+	build/asm/data.o \
+	build/asm/sdata.o \
+	build/WiiCore/rx/rxArchive.o \
+	build/asm/text_b.o \
+	build/asm/data_b.o \
+	build/asm/sdata_b.o \
 	build/asm/ctors_2.o \
 	build/asm/dtors.o \
 	build/asm/file.o \
 	build/asm/rodata.o \
-	build/asm/data.o \
 	build/asm/bss.o \
-	build/asm/sdata.o \
 	build/asm/sbss.o \
 	build/asm/sdata.o \
 	build/asm/sbss2.o \
