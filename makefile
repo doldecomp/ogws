@@ -45,8 +45,8 @@ LDFLAGS := -map $(MAP) -mapunused -proc gekko -fp hard -nodefaults -nofail
 CFLAGS_TRK := -Cpp_exceptions off -proc gekko -fp hard -O4,s -i include/RevoSDK/TRK -I- -i include -i include/STL -nodefaults
 # Compiler flags for NintendoWare for Revolution
 CFLAGS_NW4R := -lang c99 -enum int -inline auto -Cpp_exceptions off -RTTI off -proc gekko -fp hard -O4,p  -ir include/nw4r -I- -Iinclude -Iinclude/STL -ir include/RevoSDK -nodefaults
-# Compiler flags for the SDK
-CFLAGS_RX := -nodefaults -lang c99 -enum int -O4,p -inline auto -ipa file -volatileasm -Cpp_exceptions off -RTTI off -proc gekko -fp hard  -ir include/nw4r -I- -Iinclude -Iinclude/STL -ir include/RevoSDK -Isrc/rx -msgstyle=gcc -Imodules/WiiCore/include -gccinc
+# Compiler flags for ARC
+CFLAGS_ARC := -lang c99 -enum int -O4,p -inline auto -ipa file -volatileasm -Cpp_exceptions off -RTTI off -proc gekko -fp hard -I- -Iinclude -Iinclude/STL -ir include/RevoSDK -nodefaults
 
 # elf2dol needs to know these in order to calculate sbss correctly.
 BSS_PDHR := 9
@@ -59,10 +59,7 @@ ASM_DIRS := asm \
 SRC_DIRS := nw4r RevoSDK \
 	nw4r/ut nw4r/ef nw4r/snd \
 	RevoSDK/TRK RevoSDK/TRK_old \
-	WiiCore/rx
-
-MODULES := \
-	WiiCore
+	RevoSDK/ARC
 
 # Flags for Riidefi's post-processing script
 PPROCFLAGS := -fsymbol-fixup
@@ -75,7 +72,7 @@ default: all
 
 all: $(DOL)
 
-ALL_DIRS := build $(BUILD_DIR) $(addprefix $(BUILD_DIR)/,$(SRC_DIRS) $(ASM_DIRS) $(MODULES))
+ALL_DIRS := build $(BUILD_DIR) $(addprefix $(BUILD_DIR)/,$(SRC_DIRS) $(ASM_DIRS))
 $(warning ALL_DIRS is $(ALL_DIRS))
 # Make sure build directory exists before compiling anything
 DUMMY != mkdir -p $(ALL_DIRS)
@@ -117,6 +114,6 @@ $(BUILD_DIR)/nw4r/%.o: src/nw4r/%.cpp
 	$(CC) $(CFLAGS_NW4R) -c -o $@ $<
 	$(PPROC) $(PPROCFLAGS) $@
 
-$(BUILD_DIR)/WiiCore/rx/%.o: modules/WiiCore/source/rx/%.c
-	$(CC) $(CFLAGS_RX) -c -o $@ $<
+$(BUILD_DIR)/RevoSDK/ARC/%.o: src/RevoSDK/ARC/%.c
+	$(CC) $(CFLAGS_ARC) -c -o $@ $<
 	$(PPROC) $(PPROCFLAGS) $@

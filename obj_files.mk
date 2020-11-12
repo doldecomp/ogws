@@ -98,7 +98,7 @@ GROUP_1_O_FILES := \
 	build/asm/text.o \
 	build/asm/data.o \
 	build/asm/sdata.o \
-	build/WiiCore/rx/rxArchive.o \
+	build/RevoSDK/ARC/arc.o \
 	build/asm/text_b.o \
 	build/asm/data_b.o \
 	build/asm/sdata_b.o \
