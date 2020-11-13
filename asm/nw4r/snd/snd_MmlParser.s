@@ -132,6 +132,13 @@ lbl_80395E40:
 	.long lbl_8003C608 #80396028
 	.long lbl_8003C2E0 #8039602C
 	.long lbl_8003C280 #80396030
+.balign 0x8
+.global __vt__Q44nw4r3snd6detail9MmlParser
+__vt__Q44nw4r3snd6detail9MmlParser:
+	.long 0
+	.long 0
+	.long CommandProc__Q44nw4r3snd6detail9MmlParserCFPQ44nw4r3snd6detail11MmlSeqTrackUlll
+	.long NoteOnCommandProc__Q44nw4r3snd6detail9MmlParserCFPQ44nw4r3snd6detail11MmlSeqTrackiilb
 
 .section .sdata, "wa"  # 0x804BD380 - 0x804BE9E0
 
