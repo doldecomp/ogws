@@ -4,39 +4,6 @@
 
 .balign 0x8
 
-#.global lbl_80395D78
-#lbl_80395D78:
-#	.incbin "baserom.dol", 0x391E78, 0x20
-.global lbl_80395D98
-lbl_80395D98:
-#	.incbin "baserom.dol", 0x391E98, 0x60
-.fill 0x8
-.long GetRuntimeTypeInfo__Q34nw4r2ut10FileStreamCFv
-.long 0x8003b824
-.long 0x8003b730
-.long 0x8003b744
-.long ReadAsync__Q34nw4r2ut8IOStreamFPvUlPFlPQ34nw4r2ut8IOStreamPv_vPv
-.long Write__Q34nw4r2ut8IOStreamFPCvUl
-.long WriteAsync__Q34nw4r2ut8IOStreamFPCvUlPFlPQ34nw4r2ut8IOStreamPv_vPv
-.long IsBusy__Q34nw4r2ut8IOStreamCFv
-.long 0x8003b80c
-.long 0x8003b804
-.long 0x8003b7fc
-.long GetOffsetAlign__Q34nw4r2ut8IOStreamCFv
-.long GetSizeAlign__Q34nw4r2ut8IOStreamCFv
-.long GetBufferAlign__Q34nw4r2ut8IOStreamCFv
-.long 0x8003b7ec
-.long 0x8003b79c
-.long Cancel__Q34nw4r2ut10FileStreamFv
-.long CancelAsync__Q34nw4r2ut10FileStreamFPFlPQ34nw4r2ut8IOStreamPv_vPv
-.long 0x8003b81c
-.long 0x8003b814
-.long 0x8003b7f4
-.long 0
-
-.global lbl_80395DF8
-lbl_80395DF8:
-	.incbin "baserom.dol", 0x391EF8, 0x20
 .global lbl_80395E18
 lbl_80395E18:
 	.incbin "baserom.dol", 0x391F18, 0x28
