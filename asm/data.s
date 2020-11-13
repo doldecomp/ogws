@@ -4,39 +4,16 @@
 
 .balign 0x8
 
-#.global lbl_80396058
-#lbl_80396058:
-#	.incbin "baserom.dol", 0x392158, 0x18
-.global lbl_80396070
-lbl_80396070:
-#	.incbin "baserom.dol", 0x392170, 0x60
-.fill 8
-.long 0x80009a18
-.long 0x8003cdac
-.long 0x80009734
-.long 0x8003d028
-.long 0x80009800
-.long 0x800098a4
-.long 0x80009910
-.long 0x80009a10
-.long 0x800099f8
-.long 0x800099e8
-.long 0x800099e0
-.long 0x800099d0
-.long 0x800099c8
-.long 0x800099c0
-.long 0x8003d134
-.long 0x8003d0ac
-.long Cancel__Q34nw4r2ut10FileStreamFv
-.long CancelAsync__Q34nw4r2ut10FileStreamFPFlPQ34nw4r2ut8IOStreamPv_vPv
-.long 0x800099f0
-.long 0x800099d8
-.long 0x8003d13c
-.long 0
-
-.global lbl_803960D0
-lbl_803960D0:
-	.incbin "baserom.dol", 0x3921D0, 0x38
+.global lbl_803960F0
+lbl_803960F0:
+	.long 0
+	.long -1
+	.long func_80040B90
+.global lbl_803960FC
+lbl_803960FC:
+	.long 0
+	.long -1
+	.long func_80040B98
 .global lbl_80396108
 lbl_80396108:
 	.incbin "baserom.dol", 0x392208, 0x68
