@@ -63,8 +63,8 @@ Setup__Q44nw4r3snd6detail20RemoteSpeakerManagerFv:
 /* 8003DBDC 00038ADC  2C 00 00 00 */	cmpwi r0, 0
 /* 8003DBE0 00038AE0  40 82 00 6C */	bne lbl_8003DC4C
 /* 8003DBE4 00038AE4  38 63 00 08 */	addi r3, r3, 8
-/* 8003DBE8 00038AE8  48 0A F5 2D */	bl func_800ED114
-/* 8003DBEC 00038AEC  48 0B 7A 19 */	bl func_800F5604
+/* 8003DBE8 00038AE8  48 0A F5 2D */	bl OSCreateAlarm
+/* 8003DBEC 00038AEC  48 0B 7A 19 */	bl OSGetTime
 /* 8003DBF0 00038AF0  3C C0 80 00 */	lis r6, 0x800000F8@ha
 /* 8003DBF4 00038AF4  3C A0 43 1C */	lis r5, 0x431BDE83@ha
 /* 8003DBF8 00038AF8  80 06 00 F8 */	lwz r0, 0x800000F8@l(r6)
@@ -106,7 +106,7 @@ Shutdown__Q44nw4r3snd6detail20RemoteSpeakerManagerFv:
 /* 8003DC78 00038B78  2C 00 00 00 */	cmpwi r0, 0
 /* 8003DC7C 00038B7C  41 82 00 14 */	beq lbl_8003DC90
 /* 8003DC80 00038B80  38 63 00 08 */	addi r3, r3, 8
-/* 8003DC84 00038B84  48 0A F7 E5 */	bl func_800ED468
+/* 8003DC84 00038B84  48 0A F7 E5 */	bl OSCancelAlarm
 /* 8003DC88 00038B88  38 00 00 00 */	li r0, 0
 /* 8003DC8C 00038B8C  98 1F 00 00 */	stb r0, 0(r31)
 lbl_8003DC90:
@@ -169,7 +169,7 @@ lbl_8003DD34:
 /* 8003DD58 00038C58  4B FF F7 09 */	bl UpdateStreamData__Q34nw4r3snd13RemoteSpeakerFPCs
 lbl_8003DD5C:
 /* 8003DD5C 00038C5C  7F A3 EB 78 */	mr r3, r29
-/* 8003DD60 00038C60  4B FF F6 2D */	bl ExecCommand__Q34nw4r3snd13RemoteSpeakerFQ44nw4r3snd13RemoteSpeaker14SpeakerCommand
+/* 8003DD60 00038C60  4B FF F6 2D */	bl Update__Q34nw4r3snd13RemoteSpeakerFv
 /* 8003DD64 00038C64  3B FF 00 01 */	addi r31, r31, 1
 /* 8003DD68 00038C68  3B BD 00 A8 */	addi r29, r29, 0xa8
 /* 8003DD6C 00038C6C  2C 1F 00 04 */	cmpwi r31, 4
