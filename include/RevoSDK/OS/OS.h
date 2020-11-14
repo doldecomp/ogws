@@ -5,6 +5,8 @@
 extern "C" {
 #endif
 
+volatile u32 BUS_SPEED : 0x800000f8;
+
 UNKTYPE OSRegisterVersion(const char *);
 
 #ifdef __cplusplus
