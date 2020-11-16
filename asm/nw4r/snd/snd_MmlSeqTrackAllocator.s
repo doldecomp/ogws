@@ -1,5 +1,18 @@
 .include "macros.inc"
 
+.section .data, "wa"  # 0x80393A80 - 0x803CAF00
+
+.balign 0x8
+
+.global __vt__Q44nw4r3snd6detail20MmlSeqTrackAllocator
+__vt__Q44nw4r3snd6detail20MmlSeqTrackAllocator:
+	.long 0
+	.long 0
+	.long __dt__Q44nw4r3snd6detail20MmlSeqTrackAllocatorFv
+	.long AllocTrack__Q44nw4r3snd6detail20MmlSeqTrackAllocatorFPQ44nw4r3snd6detail9SeqPlayer
+	.long FreeTrack__Q44nw4r3snd6detail20MmlSeqTrackAllocatorFPQ44nw4r3snd6detail8SeqTrack
+	.long GetAllocatableTrackCount__Q44nw4r3snd6detail20MmlSeqTrackAllocatorCFv
+
 .section .text, "ax"  # 0x800076E0 - 0x80355080 
 
 .global AllocTrack__Q44nw4r3snd6detail20MmlSeqTrackAllocatorFPQ44nw4r3snd6detail9SeqPlayer

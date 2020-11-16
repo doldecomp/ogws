@@ -1,5 +1,16 @@
 .include "macros.inc"
 
+.section .data, "wa"  # 0x80393A80 - 0x803CAF00
+
+.balign 0x8
+
+.global __vt__Q44nw4r3snd6detail11MmlSeqTrack
+__vt__Q44nw4r3snd6detail11MmlSeqTrack:
+	.long 0
+	.long 0
+	.long __dt__Q44nw4r3snd6detail11MmlSeqTrackFv
+	.long Parse__Q44nw4r3snd6detail11MmlSeqTrackFb
+
 .section .text, "ax"  # 0x800076E0 - 0x80355080 
 
 .global __ct__Q44nw4r3snd6detail11MmlSeqTrackFv
@@ -10,11 +21,11 @@ __ct__Q44nw4r3snd6detail11MmlSeqTrackFv:
 /* 8003C7B0 000376B0  93 E1 00 0C */	stw r31, 0xc(r1)
 /* 8003C7B4 000376B4  7C 7F 1B 78 */	mr r31, r3
 /* 8003C7B8 000376B8  48 00 35 3D */	bl func_8003FCF4
-/* 8003C7BC 000376BC  3C A0 80 39 */	lis r5, lbl_80396048@ha
+/* 8003C7BC 000376BC  3C A0 80 39 */	lis r5, __vt__Q44nw4r3snd6detail11MmlSeqTrack@ha
 /* 8003C7C0 000376C0  38 80 00 01 */	li r4, 1
 /* 8003C7C4 000376C4  38 00 00 00 */	li r0, 0
 /* 8003C7C8 000376C8  98 9F 00 C5 */	stb r4, 0xc5(r31)
-/* 8003C7CC 000376CC  38 A5 60 48 */	addi r5, r5, lbl_80396048@l
+/* 8003C7CC 000376CC  38 A5 60 48 */	addi r5, r5, __vt__Q44nw4r3snd6detail11MmlSeqTrack@l
 /* 8003C7D0 000376D0  7F E3 FB 78 */	mr r3, r31
 /* 8003C7D4 000376D4  90 BF 00 00 */	stw r5, 0(r31)
 /* 8003C7D8 000376D8  98 1F 00 C6 */	stb r0, 0xc6(r31)

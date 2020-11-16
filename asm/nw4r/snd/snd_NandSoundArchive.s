@@ -1,5 +1,57 @@
 .include "macros.inc"
 
+.section .data, "wa"  # 0x80393A80 - 0x803CAF00
+
+.balign 0x8
+
+.global __vt__Q44nw4r3snd16NandSoundArchive14NandFileStream
+__vt__Q44nw4r3snd16NandSoundArchive14NandFileStream:
+	.long 0
+	.long 0
+	.long GetRuntimeTypeInfo__Q34nw4r2ut14NandFileStreamCFv
+	.long __dt__Q44nw4r3snd16NandSoundArchive14NandFileStreamFv
+	.long Close__Q34nw4r2ut14NandFileStreamFv
+	.long Read__Q44nw4r3snd16NandSoundArchive14NandFileStreamFPvUl
+	.long ReadAsync__Q34nw4r2ut14NandFileStreamFPvUlPFlPQ34nw4r2ut8IOStreamPv_vPv
+	.long Write__Q34nw4r2ut14NandFileStreamFPCvUl
+	.long WriteAsync__Q34nw4r2ut14NandFileStreamFPCvUlPFlPQ34nw4r2ut8IOStreamPv_vPv
+	.long IsBusy__Q34nw4r2ut14NandFileStreamCFv
+	.long CanAsync__Q34nw4r2ut14NandFileStreamCFv
+	.long CanRead__Q34nw4r2ut14NandFileStreamCFv
+	.long CanWrite__Q34nw4r2ut14NandFileStreamCFv
+	.long GetOffsetAlign__Q34nw4r2ut14NandFileStreamCFv
+	.long GetSizeAlign__Q34nw4r2ut14NandFileStreamCFv
+	.long GetBufferAlign__Q34nw4r2ut14NandFileStreamCFv
+	.long GetSize__Q44nw4r3snd16NandSoundArchive14NandFileStreamCFv
+	.long Seek__Q44nw4r3snd16NandSoundArchive14NandFileStreamFlUl
+	.long Cancel__Q34nw4r2ut10FileStreamFv
+	.long CancelAsync__Q34nw4r2ut10FileStreamFPFlPQ34nw4r2ut8IOStreamPv_vPv
+	.long CanSeek__Q34nw4r2ut14NandFileStreamCFv
+	.long CanCancel__Q34nw4r2ut14NandFileStreamCFv
+	.long Tell__Q44nw4r3snd16NandSoundArchive14NandFileStreamCFv
+
+.balign 0x8
+
+.global __vt__Q34nw4r3snd16NandSoundArchive
+__vt__Q34nw4r3snd16NandSoundArchive:
+	.long 0
+	.long 0
+	.long __dt__Q34nw4r3snd16NandSoundArchiveFv
+	.long detail_GetFileAddress__Q34nw4r3snd16NandSoundArchiveCFUl
+	.long detail_GetWaveDataFileAddress__Q34nw4r3snd16NandSoundArchiveCFUl
+	.long detail_GetRequiredStreamBufferSize__Q34nw4r3snd16NandSoundArchiveCFv
+	.long OpenStream__Q34nw4r3snd16NandSoundArchiveCFPviUlUl
+	.long OpenExtStream__Q34nw4r3snd16NandSoundArchiveCFPviPCcUlUl
+
+.section .sbss, "wa" # 0x804BE9E0 - 0x804BFA20
+
+.balign 0x8
+
+____headerAlignSize$7576: .skip 0x4
+
+# @GUARD@headerAlignSize$7576
+$$2GUARD$$2headerAlignSize$7576: .skip 0x1
+
 .section .text, "ax"  # 0x800076E0 - 0x80355080 
 
 .global __ct__Q34nw4r3snd16NandSoundArchiveFv
@@ -10,9 +62,9 @@ __ct__Q34nw4r3snd16NandSoundArchiveFv:
 /* 8003C99C 0003789C  93 E1 00 0C */	stw r31, 0xc(r1)
 /* 8003C9A0 000378A0  7C 7F 1B 78 */	mr r31, r3
 /* 8003C9A4 000378A4  48 00 53 6D */	bl func_80041D10
-/* 8003C9A8 000378A8  3C 80 80 39 */	lis r4, lbl_803960D0@ha
+/* 8003C9A8 000378A8  3C 80 80 39 */	lis r4, __vt__Q34nw4r3snd16NandSoundArchive@ha
 /* 8003C9AC 000378AC  38 7F 01 08 */	addi r3, r31, 0x108
-/* 8003C9B0 000378B0  38 84 60 D0 */	addi r4, r4, lbl_803960D0@l
+/* 8003C9B0 000378B0  38 84 60 D0 */	addi r4, r4, __vt__Q34nw4r3snd16NandSoundArchive@l
 /* 8003C9B4 000378B4  90 9F 00 00 */	stw r4, 0(r31)
 /* 8003C9B8 000378B8  48 00 59 79 */	bl func_80042330
 /* 8003C9BC 000378BC  38 00 00 00 */	li r0, 0
@@ -36,8 +88,8 @@ __dt__Q34nw4r3snd16NandSoundArchiveFv:
 /* 8003C9F8 000378F8  7C 7E 1B 78 */	mr r30, r3
 /* 8003C9FC 000378FC  41 82 00 50 */	beq lbl_8003CA4C
 /* 8003CA00 00037900  88 03 01 D8 */	lbz r0, 0x1d8(r3)
-/* 8003CA04 00037904  3C 80 80 39 */	lis r4, lbl_803960D0@ha
-/* 8003CA08 00037908  38 84 60 D0 */	addi r4, r4, lbl_803960D0@l
+/* 8003CA04 00037904  3C 80 80 39 */	lis r4, __vt__Q34nw4r3snd16NandSoundArchive@ha
+/* 8003CA08 00037908  38 84 60 D0 */	addi r4, r4, __vt__Q34nw4r3snd16NandSoundArchive@l
 /* 8003CA0C 0003790C  2C 00 00 00 */	cmpwi r0, 0
 /* 8003CA10 00037910  90 83 00 00 */	stw r4, 0(r3)
 /* 8003CA14 00037914  41 82 00 14 */	beq lbl_8003CA28
@@ -211,8 +263,8 @@ lbl_8003CC44:
 /* 8003CC58 00037B58  38 C0 00 00 */	li r6, 0
 /* 8003CC5C 00037B5C  4B FC C1 95 */	bl __ct__Q34nw4r2ut14NandFileStreamFPC12NANDFileInfoUlb
 /* 8003CC60 00037B60  88 1D 00 04 */	lbz r0, 4(r29)
-/* 8003CC64 00037B64  3C 60 80 39 */	lis r3, lbl_80396070@ha
-/* 8003CC68 00037B68  38 63 60 70 */	addi r3, r3, lbl_80396070@l
+/* 8003CC64 00037B64  3C 60 80 39 */	lis r3, __vt__Q44nw4r3snd16NandSoundArchive14NandFileStream@ha
+/* 8003CC68 00037B68  38 63 60 70 */	addi r3, r3, __vt__Q44nw4r3snd16NandSoundArchive14NandFileStream@l
 /* 8003CC6C 00037B6C  93 DD 01 6C */	stw r30, 0x16c(r29)
 /* 8003CC70 00037B70  2C 00 00 00 */	cmpwi r0, 0
 /* 8003CC74 00037B74  90 7D 00 00 */	stw r3, 0(r29)
@@ -267,8 +319,8 @@ lbl_8003CD08:
 /* 8003CD18 00037C18  38 A0 00 01 */	li r5, 1
 /* 8003CD1C 00037C1C  4B FC C0 65 */	bl __ct__Q34nw4r2ut14NandFileStreamFPCcUl
 /* 8003CD20 00037C20  88 1D 00 04 */	lbz r0, 4(r29)
-/* 8003CD24 00037C24  3C 60 80 39 */	lis r3, lbl_80396070@ha
-/* 8003CD28 00037C28  38 63 60 70 */	addi r3, r3, lbl_80396070@l
+/* 8003CD24 00037C24  3C 60 80 39 */	lis r3, __vt__Q44nw4r3snd16NandSoundArchive14NandFileStream@ha
+/* 8003CD28 00037C28  38 63 60 70 */	addi r3, r3, __vt__Q44nw4r3snd16NandSoundArchive14NandFileStream@l
 /* 8003CD2C 00037C2C  93 DD 01 6C */	stw r30, 0x16c(r29)
 /* 8003CD30 00037C30  2C 00 00 00 */	cmpwi r0, 0
 /* 8003CD34 00037C34  90 7D 00 00 */	stw r3, 0(r29)
@@ -346,13 +398,13 @@ LoadFileHeader__Q34nw4r3snd16NandSoundArchiveFv:
 /* 8003CE1C 00037D1C  93 C1 00 78 */	stw r30, 0x78(r1)
 /* 8003CE20 00037D20  93 A1 00 74 */	stw r29, 0x74(r1)
 /* 8003CE24 00037D24  7C 7D 1B 78 */	mr r29, r3
-/* 8003CE28 00037D28  88 0D 97 24 */	lbz r0, lbl_804BEAA4-_SDA_BASE_(r13)
+/* 8003CE28 00037D28  88 0D 97 24 */	lbz r0, $$2GUARD$$2headerAlignSize$7576-_SDA_BASE_(r13)
 /* 8003CE2C 00037D2C  7C 00 07 75 */	extsb. r0, r0
 /* 8003CE30 00037D30  40 82 00 14 */	bne lbl_8003CE44
 /* 8003CE34 00037D34  38 80 00 40 */	li r4, 0x40
 /* 8003CE38 00037D38  38 00 00 01 */	li r0, 1
-/* 8003CE3C 00037D3C  90 8D 97 20 */	stw r4, lbl_804BEAA0-_SDA_BASE_(r13)
-/* 8003CE40 00037D40  98 0D 97 24 */	stb r0, lbl_804BEAA4-_SDA_BASE_(r13)
+/* 8003CE3C 00037D3C  90 8D 97 20 */	stw r4, ____headerAlignSize$7576-_SDA_BASE_(r13)
+/* 8003CE40 00037D40  98 0D 97 24 */	stb r0, $$2GUARD$$2headerAlignSize$7576-_SDA_BASE_(r13)
 lbl_8003CE44:
 /* 8003CE44 00037D44  38 01 00 27 */	addi r0, r1, 0x27
 /* 8003CE48 00037D48  38 80 00 00 */	li r4, 0
@@ -365,7 +417,7 @@ lbl_8003CE44:
 /* 8003CE64 00037D64  38 60 00 00 */	li r3, 0
 /* 8003CE68 00037D68  48 00 00 44 */	b lbl_8003CEAC
 lbl_8003CE6C:
-/* 8003CE6C 00037D6C  83 CD 97 20 */	lwz r30, lbl_804BEAA0-_SDA_BASE_(r13)
+/* 8003CE6C 00037D6C  83 CD 97 20 */	lwz r30, ____headerAlignSize$7576-_SDA_BASE_(r13)
 /* 8003CE70 00037D70  7F E4 FB 78 */	mr r4, r31
 /* 8003CE74 00037D74  38 7D 01 4C */	addi r3, r29, 0x14c
 /* 8003CE78 00037D78  7F C5 F3 78 */	mr r5, r30

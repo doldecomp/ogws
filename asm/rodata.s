@@ -1743,4 +1743,4 @@ lbl_803938C8:
 	.incbin "baserom.dol", 0x38F9C8, 0x128
 .global lbl_803939F0
 lbl_803939F0:
-	.incbin "baserom.dol", 0x38FAF0, 0x90
+	.incbin "baserom.dol", 0x38FAF0, 0x80

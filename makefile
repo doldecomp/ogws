@@ -20,11 +20,6 @@ MAP     := $(BUILD_DIR)/$(TARGET).map
 
 include obj_files.mk
 
-O_FILES := $(INIT_O_FILES) $(EXTAB_O_FILES) $(EXTABINDEX_O_FILES) $(TEXT_O_FILES) \
-           $(CTORS_O_FILES) $(DTORS_O_FILES) $(RODATA_O_FILES) $(DATA_O_FILES)    \
-           $(DATA6_O_FILES) $(BSS_O_FILES) $(SDATA_O_FILES) $(SBSS_O_FILES) \
-		   $(SDATA2_O_FILES) $(SBSS2_O_FILES)
-
 #-------------------------------------------------------------------------------
 # Tools
 #-------------------------------------------------------------------------------
@@ -50,19 +45,21 @@ LDFLAGS := -map $(MAP) -mapunused -proc gekko -fp hard -nodefaults -nofail
 CFLAGS_TRK := -Cpp_exceptions off -proc gekko -fp hard -O4,s -i include/RevoSDK/TRK -I- -i include -i include/STL -nodefaults
 # Compiler flags for NintendoWare for Revolution
 CFLAGS_NW4R := -lang c99 -enum int -inline auto -Cpp_exceptions off -RTTI off -proc gekko -fp hard -O4,p  -ir include/nw4r -I- -Iinclude -Iinclude/STL -ir include/RevoSDK -nodefaults
+# Compiler flags for ARC
+CFLAGS_ARC := -lang c99 -enum int -O4,p -inline auto -ipa file -volatileasm -Cpp_exceptions off -RTTI off -proc gekko -fp hard -I- -Iinclude -Iinclude/STL -ir include/RevoSDK -nodefaults
 
 # elf2dol needs to know these in order to calculate sbss correctly.
-SDATA_PDHR := 10
-SBSS_PDHR := 11
+BSS_PDHR := 9
 
 ASM_DIRS := asm \
 	asm/nw4r asm/RevoSDK \
-	asm/nw4r/ut asm/nw4r/ef asm/nw4r/math asm/nw4r/snd\
+	asm/nw4r/ut asm/nw4r/ef asm/nw4r/math asm/nw4r/snd \
 	asm/RevoSDK/TRK
 
 SRC_DIRS := nw4r RevoSDK \
 	nw4r/ut nw4r/ef nw4r/snd \
-	RevoSDK/TRK RevoSDK/TRK_old
+	RevoSDK/TRK RevoSDK/TRK_old \
+	RevoSDK/ARC
 
 # Flags for Riidefi's post-processing script
 PPROCFLAGS := -fsymbol-fixup
@@ -76,7 +73,7 @@ default: all
 all: $(DOL)
 
 ALL_DIRS := build $(BUILD_DIR) $(addprefix $(BUILD_DIR)/,$(SRC_DIRS) $(ASM_DIRS))
-
+$(warning ALL_DIRS is $(ALL_DIRS))
 # Make sure build directory exists before compiling anything
 DUMMY != mkdir -p $(ALL_DIRS)
 
@@ -88,7 +85,7 @@ $(LDSCRIPT): ldscript.lcf
 #	cp ldscript.lcf $(LDSCRIPT)
 
 $(DOL): $(ELF) | tools
-	$(ELF2DOL) $< $@ $(SDATA_PDHR) $(SBSS_PDHR) $(TARGET_COL)
+	$(ELF2DOL) $< $@ $(BSS_PDHR) $(TARGET_COL)
 	$(SHA1SUM) -c $(TARGET).sha1
 
 clean:
@@ -115,4 +112,8 @@ $(BUILD_DIR)/RevoSDK/TRK_old/%.o: src/RevoSDK/TRK_old/%.c
 
 $(BUILD_DIR)/nw4r/%.o: src/nw4r/%.cpp
 	$(CC) $(CFLAGS_NW4R) -c -o $@ $<
+	$(PPROC) $(PPROCFLAGS) $@
+
+$(BUILD_DIR)/RevoSDK/ARC/%.o: src/RevoSDK/ARC/%.c
+	$(CC) $(CFLAGS_ARC) -c -o $@ $<
 	$(PPROC) $(PPROCFLAGS) $@

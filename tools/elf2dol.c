@@ -177,8 +177,9 @@ void increment_bss_size(DOL_map* map, uint32_t memsz)
 	map->header.bss_size = swap32(preAdd);
 }
 
-void read_elf_segments(DOL_map* map, const char* elf, uint32_t sdata_pdhr, uint32_t sbss_pdhr, const char* platform)
+void read_elf_segments(DOL_map* map, const char* elf, uint32_t bss_phdr, const char* platform)
 {
+	uint32_t sdata_pdhr = bss_phdr + 1, sbss_pdhr = bss_phdr + 2;
 	int read, i;
 	Elf32_Ehdr ehdr;
 	int isWii = !(strcmp(platform, "wii")) ? 1 : 0;
@@ -414,7 +415,16 @@ void write_dol(DOL_map* map, const char* dol)
 	FILE* dolf;
 	int written;
 	int i;
-
+	DOL_hdr header = map->header;
+	for (i = 0; i < map->text_cnt; i++)
+	{
+		header.text_size[i] = swap32(DOL_ALIGN(swap32(header.text_size[i])));
+	}
+	for (i = 0; i < map->data_cnt; i++)
+	{
+		header.data_size[i] = swap32(DOL_ALIGN(swap32(header.data_size[i])));
+	}
+	
 	if (verbosity >= 2)
 		fprintf(stderr, "Writing DOL file...\n");
 
@@ -439,7 +449,7 @@ void write_dol(DOL_map* map, const char* dol)
 		fprintf(stderr, "Writing DOL header...\n");
 	}
 
-	written = fwrite(&map->header, sizeof(DOL_hdr), 1, dolf);
+	written = fwrite(&header, sizeof(DOL_hdr), 1, dolf);
 	if (written != 1)
 		ferrordie(dolf, "writing DOL header");
 
@@ -502,15 +512,14 @@ int main(int argc, char** argv)
 
 	const char* elf_file = arg[0];
 	const char* dol_file = arg[1];
-	uint32_t sdata_pdhr = atoi(arg[2]);
-	uint32_t sbss_pdhr = atoi(arg[3]);
-	const char* platform = arg[4];
+	uint32_t bss_phdr = atoi(arg[2]);
+	const char* platform = arg[3];
 
 	DOL_map map;
 
 	memset(&map, 0, sizeof(map));
 
-	read_elf_segments(&map, elf_file, sdata_pdhr, sbss_pdhr, platform);
+	read_elf_segments(&map, elf_file, bss_phdr, platform);
 	map_dol(&map);
 	write_dol(&map, dol_file);
 

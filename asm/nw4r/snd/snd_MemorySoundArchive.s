@@ -1,5 +1,48 @@
 .include "macros.inc"
 
+.section .data, "wa"  # 0x80393A80 - 0x803CAF00
+
+.balign 0x8
+
+.global __vt__Q44nw4r3snd18MemorySoundArchive16MemoryFileStream
+__vt__Q44nw4r3snd18MemorySoundArchive16MemoryFileStream:
+	.long 0
+	.long 0
+	.long GetRuntimeTypeInfo__Q34nw4r2ut10FileStreamCFv
+	.long __dt__Q44nw4r3snd18MemorySoundArchive16MemoryFileStreamFv
+	.long Close__Q44nw4r3snd18MemorySoundArchive16MemoryFileStreamFv
+	.long Read__Q44nw4r3snd18MemorySoundArchive16MemoryFileStreamFPvUl
+	.long ReadAsync__Q34nw4r2ut8IOStreamFPvUlPFlPQ34nw4r2ut8IOStreamPv_vPv
+	.long Write__Q34nw4r2ut8IOStreamFPCvUl
+	.long WriteAsync__Q34nw4r2ut8IOStreamFPCvUlPFlPQ34nw4r2ut8IOStreamPv_vPv
+	.long IsBusy__Q34nw4r2ut8IOStreamCFv
+	.long CanAsync__Q44nw4r3snd18MemorySoundArchive16MemoryFileStreamCFv
+	.long CanRead__Q44nw4r3snd18MemorySoundArchive16MemoryFileStreamCFv
+	.long CanWrite__Q44nw4r3snd18MemorySoundArchive16MemoryFileStreamCFv
+	.long GetOffsetAlign__Q34nw4r2ut8IOStreamCFv
+	.long GetSizeAlign__Q34nw4r2ut8IOStreamCFv
+	.long GetBufferAlign__Q34nw4r2ut8IOStreamCFv
+	.long GetSize__Q44nw4r3snd18MemorySoundArchive16MemoryFileStreamCFv
+	.long Seek__Q44nw4r3snd18MemorySoundArchive16MemoryFileStreamFlUl
+	.long Cancel__Q34nw4r2ut10FileStreamFv
+	.long CancelAsync__Q34nw4r2ut10FileStreamFPFlPQ34nw4r2ut8IOStreamPv_vPv
+	.long CanSeek__Q44nw4r3snd18MemorySoundArchive16MemoryFileStreamCFv
+	.long CanCancel__Q44nw4r3snd18MemorySoundArchive16MemoryFileStreamCFv
+	.long Tell__Q44nw4r3snd18MemorySoundArchive16MemoryFileStreamCFv
+
+.balign 0x8
+
+.global __vt__Q34nw4r3snd18MemorySoundArchive
+__vt__Q34nw4r3snd18MemorySoundArchive:
+	.long 0
+	.long 0
+	.long __dt__Q34nw4r3snd18MemorySoundArchiveFv
+	.long detail_GetFileAddress__Q34nw4r3snd18MemorySoundArchiveCFUl
+	.long detail_GetWaveDataFileAddress__Q34nw4r3snd18MemorySoundArchiveCFUl
+	.long detail_GetRequiredStreamBufferSize__Q34nw4r3snd18MemorySoundArchiveCFv
+	.long OpenStream__Q34nw4r3snd18MemorySoundArchiveCFPviUlUl
+	.long OpenExtStream__Q34nw4r3snd18MemorySoundArchiveCFPviPCcUlUl
+
 .section .text, "ax"  # 0x800076E0 - 0x80355080 
 
 .global __ct__Q34nw4r3snd18MemorySoundArchiveFv
@@ -10,9 +53,9 @@ __ct__Q34nw4r3snd18MemorySoundArchiveFv:
 /* 8003B444 00036344  93 E1 00 0C */	stw r31, 0xc(r1)
 /* 8003B448 00036348  7C 7F 1B 78 */	mr r31, r3
 /* 8003B44C 0003634C  48 00 68 C5 */	bl func_80041D10
-/* 8003B450 00036350  3C 80 80 39 */	lis r4, lbl_80395DF8@ha
+/* 8003B450 00036350  3C 80 80 39 */	lis r4, __vt__Q34nw4r3snd18MemorySoundArchive@ha
 /* 8003B454 00036354  38 00 00 00 */	li r0, 0
-/* 8003B458 00036358  38 84 5D F8 */	addi r4, r4, lbl_80395DF8@l
+/* 8003B458 00036358  38 84 5D F8 */	addi r4, r4, __vt__Q34nw4r3snd18MemorySoundArchive@l
 /* 8003B45C 0003635C  90 1F 01 08 */	stw r0, 0x108(r31)
 /* 8003B460 00036360  38 7F 01 0C */	addi r3, r31, 0x10c
 /* 8003B464 00036364  90 9F 00 00 */	stw r4, 0(r31)
@@ -209,9 +252,9 @@ lbl_8003B6E4:
 /* 8003B6E4 000365E4  2C 04 00 00 */	cmpwi r4, 0
 /* 8003B6E8 000365E8  7C 83 23 78 */	mr r3, r4
 /* 8003B6EC 000365EC  4D 82 00 20 */	beqlr 
-/* 8003B6F0 000365F0  3C A0 80 39 */	lis r5, lbl_80395D98@ha
+/* 8003B6F0 000365F0  3C A0 80 39 */	lis r5, __vt__Q44nw4r3snd18MemorySoundArchive16MemoryFileStream@ha
 /* 8003B6F4 000365F4  39 00 00 00 */	li r8, 0
-/* 8003B6F8 000365F8  38 A5 5D 98 */	addi r5, r5, lbl_80395D98@l
+/* 8003B6F8 000365F8  38 A5 5D 98 */	addi r5, r5, __vt__Q44nw4r3snd18MemorySoundArchive16MemoryFileStream@l
 /* 8003B6FC 000365FC  7C 06 02 14 */	add r0, r6, r0
 /* 8003B700 00036600  99 04 00 04 */	stb r8, 4(r4)
 /* 8003B704 00036604  91 04 00 0C */	stw r8, 0xc(r4)

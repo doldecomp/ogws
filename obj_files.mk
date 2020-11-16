@@ -1,4 +1,9 @@
-INIT_O_FILES := \
+GROUP_0_O_FILES := \
+	build/asm/extab.o \
+	build/asm/extabindex.o \
+	build/asm/ctors_1.o \
+
+REVOSDK_O_FILES := \
 	build/RevoSDK/TRK/__mem.o \
 	build/RevoSDK/TRK_old/mem_TRK.o \
 	build/asm/RevoSDK/TRK/__exception.o \
@@ -6,17 +11,12 @@ INIT_O_FILES := \
 	build/asm/RevoSDK/TRK/__start.o \
 	build/asm/RevoSDK/TRK/__ppc_eabi_init.o \
 
-EXTAB_O_FILES := build/asm/extab.o
-
-EXTABINDEX_O_FILES := build/asm/extabindex.o
-
-TEXT_O_FILES := \
+NW4R_O_FILES := \
 	build/nw4r/ut/ut_list.o \
 	build/nw4r/ut/ut_LinkList.o \
 	build/nw4r/ut/ut_binaryFileFormat.o \
 	build/nw4r/ut/ut_CharStrmReader.o \
 	build/nw4r/ut/ut_TagProcessorBase.o \
-	build/asm/ctors_1.o \
 	build/nw4r/ut/ut_IOStream.o \
 	build/nw4r/ut/ut_FileStream.o \
 	build/asm/nw4r/ut/ut_DvdFileStream.o \
@@ -89,30 +89,27 @@ TEXT_O_FILES := \
 	build/asm/nw4r/snd/snd_MmlSeqTrack.o \
 	build/asm/nw4r/snd/snd_MmlSeqTrackAllocator.o \
 	build/asm/nw4r/snd/snd_NandSoundArchive.o \
-	build/asm/nw4r/snd/snd_RemoteSpeaker.o \
+	build/nw4r/snd/snd_RemoteSpeaker.o \
 	build/asm/nw4r/snd/snd_RemoteSpeakerManager.o \
 	build/asm/nw4r/snd/snd_SeqFile.o \
 	build/asm/nw4r/snd/snd_SeqPlayer.o \
+
+GROUP_1_O_FILES := \
 	build/asm/text.o \
+	build/asm/data.o \
+	build/asm/sdata.o \
+	build/RevoSDK/ARC/arc.o \
+	build/asm/text_b.o \
+	build/asm/data_b.o \
+	build/asm/sdata_b.o \
+	build/asm/ctors_2.o \
+	build/asm/dtors.o \
+	build/asm/file.o \
+	build/asm/rodata.o \
+	build/asm/bss.o \
+	build/asm/sbss.o \
+	build/asm/sdata.o \
+	build/asm/sbss2.o \
+	build/asm/sdata2.o \
 
-CTORS_O_FILES := build/asm/ctors_2.o
-
-DTORS_O_FILES := build/asm/dtors.o
-
-RODATA_O_FILES := build/asm/file.o
-
-DATA_O_FILES := build/asm/rodata.o
-
-DATA6_O_FILES := build/asm/data.o
-
-BSS_O_FILES := build/asm/bss.o
-
-SDATA_O_FILES := build/asm/sdata.o
-
-SBSS_O_FILES := build/asm/sbss.o
-
-SDATA_O_FILES := build/asm/sdata.o
-
-SBSS2_O_FILES := build/asm/sbss2.o
-
-SDATA2_O_FILES := build/asm/sdata2.o
+O_FILES := $(GROUP_0_O_FILES) $(NW4R_O_FILES) $(GROUP_1_O_FILES) $(REVOSDK_O_FILES)
