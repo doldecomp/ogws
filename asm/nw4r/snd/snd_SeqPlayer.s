@@ -772,8 +772,8 @@ lbl_8003E89C:
 /* 8003E8A8 000397A8  7C 85 03 2E */	sthx r4, r5, r0
 /* 8003E8AC 000397AC  4E 80 00 20 */	blr 
 
-.global SetTrackSilence__Q44nw4r3snd6detail9SeqPlayerFUlbi
-SetTrackSilence__Q44nw4r3snd6detail9SeqPlayerFUlbi:
+.global SetTrackVolume__Q44nw4r3snd6detail9SeqPlayerFUlf
+SetTrackVolume__Q44nw4r3snd6detail9SeqPlayerFUlf:
 /* 8003E8B0 000397B0  94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 8003E8B4 000397B4  7C 08 02 A6 */	mflr r0
 /* 8003E8B8 000397B8  3C C0 80 39 */	lis r6, lbl_80390004@ha
@@ -834,8 +834,8 @@ lbl_8003E958:
 /* 8003E97C 0003987C  38 21 00 30 */	addi r1, r1, 0x30
 /* 8003E980 00039880  4E 80 00 20 */	blr 
 
-.global SetTrackVolume__Q44nw4r3snd6detail9SeqPlayerFUlf
-SetTrackVolume__Q44nw4r3snd6detail9SeqPlayerFUlf:
+.global SetTrackPitch__Q44nw4r3snd6detail9SeqPlayerFUlf
+SetTrackPitch__Q44nw4r3snd6detail9SeqPlayerFUlf:
 /* 8003E984 00039884  94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 8003E988 00039888  7C 08 02 A6 */	mflr r0
 /* 8003E98C 0003988C  3C C0 80 39 */	lis r6, lbl_80390004@ha
