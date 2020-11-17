@@ -34,7 +34,7 @@ namespace nw4r
 			SpeakerCommand CMD_0x10;
 			SpeakerCommand CMD_0x14;
 			char UNK_0x18[0x20];
-			s32 INT_0x38;
+			s32 mChannelIndex; // at 0x38
 			RemoteSpeakerCallback mCallback; // at 0x3c
 			OSAlarm ALARM_0x40;
 			OSAlarm ALARM_0x70;
@@ -63,6 +63,11 @@ namespace nw4r
 			
 			static void ContinueAlarmHandler(OSAlarm *, OSContext *);
 			static void IntervalAlarmHandler(OSAlarm *, OSContext *);
+			
+			inline void SetChannelIndex(int channelIndex)
+			{
+				mChannelIndex = channelIndex;
+			}
 		};
 	}
 }

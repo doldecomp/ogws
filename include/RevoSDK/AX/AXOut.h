@@ -9,6 +9,10 @@ extern "C" {
 UNKTYPE AXSetMode(UNKWORD);
 AXCallback AXRegisterCallback(AXCallback);
 
+UNKWORD AXRmtGetSamplesLeft(void);
+UNKTYPE AXRmtGetSamples(int, UNKTYPE *, UNKWORD);
+UNKTYPE AXRmtAdvancePtr(UNKWORD);
+
 #ifdef __cplusplus
 }
 #endif

@@ -66,7 +66,7 @@ namespace nw4r
 			
 			if (mCallback)
 			{
-				mCallback(INT_0x38, 0);
+				mCallback(mChannelIndex, 0);
 				BOOL_0x4 = false;
 			}
 			
@@ -85,7 +85,7 @@ namespace nw4r
 			
 			if (mCallback)
 			{
-				mCallback(INT_0x38, 0);
+				mCallback(mChannelIndex, 0);
 				BOOL_0x4 = false;
 			}
 			
@@ -128,19 +128,19 @@ namespace nw4r
 					BOOL_0x4 = true;
 					BOOL_0x5 = true;
 					WORD_0xC = 1;
-					WPADControlSpeaker(INT_0x38, 1, SpeakerOnCallback);
+					WPADControlSpeaker(mChannelIndex, 1, SpeakerOnCallback);
 					break;
 				case SpeakerCommand_Play:
 					BOOL_0x4 = true;
 					BOOL_0x5 = true;
 					WORD_0xC = 3;
-					WPADControlSpeaker(INT_0x38, 4, SpeakerPlayCallback);
+					WPADControlSpeaker(mChannelIndex, 4, SpeakerPlayCallback);
 					break;
 				case SpeakerCommand_Off:
 					BOOL_0x4 = true;
 					BOOL_0x5 = true;
 					WORD_0xC = 5;
-					WPADControlSpeaker(INT_0x38, 0, SpeakerOffCallback);
+					WPADControlSpeaker(mChannelIndex, 0, SpeakerOffCallback);
 					break;
 			}
 		}
@@ -176,11 +176,11 @@ namespace nw4r
 			{
 				AutoInterruptLock lock;
 				
-				if (!WPADCanSendStreamData(INT_0x38)) return;
+				if (!WPADCanSendStreamData(mChannelIndex)) return;
 				UNKWORD r4 = !BOOL_0x3;
 				BOOL_0x3 = false;
 				WENCGetEncodeData(UNK_0x18, r4, pSample, 40, streamData);
-				if (WPADSendStreamData(INT_0x38, streamData, 20))
+				if (WPADSendStreamData(mChannelIndex, streamData, 20))
 				{
 					WORD_0xC = 0;
 					CMD_0x14 = SpeakerCommand_On;
