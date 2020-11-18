@@ -93,6 +93,7 @@ NW4R_O_FILES := \
 	build/nw4r/snd/snd_RemoteSpeakerManager.o \
 	build/nw4r/snd/snd_SeqFile.o \
 	build/asm/nw4r/snd/snd_SeqPlayer.o \
+	build/asm/nw4r/snd/snd_SeqSound.o \
 
 GROUP_1_O_FILES := \
 	build/asm/text.o \
