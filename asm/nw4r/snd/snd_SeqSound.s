@@ -429,13 +429,13 @@ lbl_8003F97C:
 /* 8003F9B0 0003A8B0  38 21 00 20 */	addi r1, r1, 0x20
 /* 8003F9B4 0003A8B4  4E 80 00 20 */	blr 
 
-.global SetTrackSilence__Q44nw4r3snd6detail8SeqSoundFUlbi
-SetTrackSilence__Q44nw4r3snd6detail8SeqSoundFUlbi:
+.global SetTrackVolume__Q44nw4r3snd6detail8SeqSoundFUlf
+SetTrackVolume__Q44nw4r3snd6detail8SeqSoundFUlf:
 /* 8003F9B8 0003A8B8  38 63 00 D8 */	addi r3, r3, 0xd8
 /* 8003F9BC 0003A8BC  4B FF EE F4 */	b SetTrackVolume__Q44nw4r3snd6detail9SeqPlayerFUlf
 
-.global SetTrackVolume__Q44nw4r3snd6detail8SeqSoundFUlf
-SetTrackVolume__Q44nw4r3snd6detail8SeqSoundFUlf:
+.global SetTrackPitch__Q44nw4r3snd6detail8SeqSoundFUlf
+SetTrackPitch__Q44nw4r3snd6detail8SeqSoundFUlf:
 /* 8003F9C0 0003A8C0  38 63 00 D8 */	addi r3, r3, 0xd8
 /* 8003F9C4 0003A8C4  4B FF EF C0 */	b SetTrackPitch__Q44nw4r3snd6detail9SeqPlayerFUlf
 
