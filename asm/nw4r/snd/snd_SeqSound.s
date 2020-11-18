@@ -477,7 +477,7 @@ IsAttachedTempSpecialHandle__Q44nw4r3snd6detail8SeqSoundFv:
 .global DetachTempSpecialHandle__Q44nw4r3snd6detail8SeqSoundFv
 DetachTempSpecialHandle__Q44nw4r3snd6detail8SeqSoundFv:
 /* 8003FA30 0003A930  80 63 01 F4 */	lwz r3, 0x1f4(r3)
-/* 8003FA34 0003A934  48 00 02 80 */	b func_8003FCB4
+/* 8003FA34 0003A934  48 00 02 80 */	b DetachSound__Q34nw4r3snd14SeqSoundHandleFv
 
 .global Execute__Q54nw4r3snd6detail8SeqSound11SeqLoadTaskFv
 Execute__Q54nw4r3snd6detail8SeqSound11SeqLoadTaskFv:
