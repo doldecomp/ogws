@@ -25,7 +25,6 @@ namespace nw4r
 				struct Iterator
 				{
 					LinkListNode * mNode;
-					inline Iterator(const Iterator & other) : mNode(other.mNode) {}
 					inline Iterator(LinkListNode * pNode) : mNode(pNode) {}
 					
 					inline Iterator & operator++()

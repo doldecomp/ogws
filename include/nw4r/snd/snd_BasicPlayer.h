@@ -1,5 +1,6 @@
 #ifndef NW4R_SND_BASIC_PLAYER_H
 #define NW4R_SND_BASIC_PLAYER_H
+#include "snd_Pan.h"
 #include "snd_AxManager.h"
 #include "types_nw4r.h"
 
@@ -9,16 +10,6 @@ namespace nw4r
 	{
 		namespace detail
 		{
-			enum PanMode
-			{
-				PAN_MODE_0 // Empty enums are ill-formed
-			};
-			
-			enum PanCurve
-			{
-				PAN_CURVE_0 // Empty enums are ill-formed
-			};
-			
 			struct BasicPlayer
 			{
 				inline virtual ~BasicPlayer() {} // at 0x8

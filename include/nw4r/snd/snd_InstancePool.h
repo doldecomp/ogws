@@ -54,6 +54,16 @@ namespace nw4r
 					DestroyImpl(ptr, num);
 				}
 			};
+			
+			template <typename T>
+			struct MemoryPool : PoolImpl
+			{
+				inline void Free(T * ptr)
+				{
+					ptr->~T();
+					FreeImpl(ptr);
+				}
+			};
 		}
 	}
 }

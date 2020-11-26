@@ -3,6 +3,7 @@
 #include "types_nw4r.h"
 #include "snd_AxManager.h"
 #include "snd_WaveFile.h"
+#include "snd_Pan.h"
 
 namespace nw4r
 {
@@ -10,16 +11,6 @@ namespace nw4r
 	{
 		namespace detail
 		{
-			enum PanMode
-			{
-				PAN_MODE_0
-			};
-			
-			enum PanCurve
-			{
-				PAN_CURVE_0
-			};
-			
 			struct Voice
 			{
 				enum VoiceCallbackStatus

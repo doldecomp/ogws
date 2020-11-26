@@ -1,5 +1,29 @@
 .include "macros.inc"
 
+.section .data, "wa"  # 0x80393A80 - 0x803CAF00
+
+.balign 0x8
+
+lbl_803960F0:
+	.long 0
+	.long -1
+	.long func_80040B90
+lbl_803960FC:
+	.long 0
+	.long -1
+	.long func_80040B98
+.global lbl_80396108
+lbl_80396108:
+	.incbin "baserom.dol", 0x392208, 0x68
+
+.section .sbss, "wa" # 0x804BE9E0 - 0x804BFA20
+
+.balign 0x8
+
+.global mGobalVariableInitialized__Q44nw4r3snd6detail9SeqPlayer
+mGobalVariableInitialized__Q44nw4r3snd6detail9SeqPlayer:
+	.skip 0x1
+
 .section .text, "ax"  # 0x800076E0 - 0x80355080 
 
 .global __ct__Q44nw4r3snd6detail9SeqPlayerFv
@@ -742,7 +766,7 @@ SetLocalVariable__Q44nw4r3snd6detail9SeqPlayerFis:
 
 .global SetGlobalVariable__Q44nw4r3snd6detail9SeqPlayerFis
 SetGlobalVariable__Q44nw4r3snd6detail9SeqPlayerFis:
-/* 8003E840 00039740  88 0D 97 30 */	lbz r0, lbl_804BEAB0-_SDA_BASE_(r13)
+/* 8003E840 00039740  88 0D 97 30 */	lbz r0, mGobalVariableInitialized__Q44nw4r3snd6detail9SeqPlayer-_SDA_BASE_(r13)
 /* 8003E844 00039744  2C 00 00 00 */	cmpwi r0, 0
 /* 8003E848 00039748  40 82 00 54 */	bne lbl_8003E89C
 /* 8003E84C 0003974C  38 00 FF FF */	li r0, -1
@@ -764,7 +788,7 @@ SetGlobalVariable__Q44nw4r3snd6detail9SeqPlayerFis:
 /* 8003E88C 0003978C  B0 05 00 1C */	sth r0, 0x1c(r5)
 /* 8003E890 00039790  B0 05 00 1E */	sth r0, 0x1e(r5)
 /* 8003E894 00039794  38 00 00 01 */	li r0, 1
-/* 8003E898 00039798  98 0D 97 30 */	stb r0, lbl_804BEAB0-_SDA_BASE_(r13)
+/* 8003E898 00039798  98 0D 97 30 */	stb r0, mGobalVariableInitialized__Q44nw4r3snd6detail9SeqPlayer-_SDA_BASE_(r13)
 lbl_8003E89C:
 /* 8003E89C 0003979C  3C A0 80 3D */	lis r5, lbl_803D0B98@ha
 /* 8003E8A0 000397A0  54 60 08 3C */	slwi r0, r3, 1

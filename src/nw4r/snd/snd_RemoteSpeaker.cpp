@@ -4,7 +4,7 @@
 #include <string.h>
 #include "snd_RemoteSpeaker.h"
 #include "snd_RemoteSpeakerManager.h"
-#include "ut_interrupt.h"
+#include "ut_lock.h"
 
 namespace nw4r
 {

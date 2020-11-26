@@ -2,7 +2,6 @@
 
 .section .ctors, "a"  # 0x80355080 - 0x80355260
 
-.4byte 0x8003FBA0
 .4byte 0x80047890
 .4byte 0x8004AF74
 .4byte 0x8004F22C

@@ -39,15 +39,23 @@ namespace nw4r
 		struct MTX34;
 	}
 	
-	namespace snd
+		namespace snd
 	{
 		struct FxBase;
 		struct SoundPlayer;
 		struct SoundHandle;
+		struct SeqSoundHandle;
 		
 		namespace detail
 		{
 			struct BasicSound;
+			struct SeqSound;
+			struct MmlParser;
+			struct MmlSeqTrack;
+			struct SeqTrack;
+			struct SeqTrackAllocator;
+			struct NoteOnCallback;
+			struct PlayerHeap;
 		}
 	}
 }

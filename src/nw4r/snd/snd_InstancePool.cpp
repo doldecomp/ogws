@@ -1,5 +1,5 @@
 #include "snd_InstancePool.h"
-#include "ut_interrupt.h"
+#include "ut_lock.h"
 #include "ut_algorithm.h"
 
 namespace nw4r

@@ -4,25 +4,25 @@
 
 .balign 0x8
 
-.global lbl_803960F0
-lbl_803960F0:
-	.long 0
-	.long -1
-	.long func_80040B90
-.global lbl_803960FC
-lbl_803960FC:
-	.long 0
-	.long -1
-	.long func_80040B98
-.global lbl_80396108
-lbl_80396108:
-	.incbin "baserom.dol", 0x392208, 0x68
-.global lbl_80396170
-lbl_80396170:
-	.incbin "baserom.dol", 0x392270, 0x70
-.global lbl_803961E0
-lbl_803961E0:
-	.incbin "baserom.dol", 0x3922E0, 0x18
+#.global lbl_803960F0
+#lbl_803960F0:
+#	.long 0
+#	.long -1
+#	.long func_80040B90
+#.global lbl_803960FC
+#lbl_803960FC:
+#	.long 0
+#	.long -1
+#	.long func_80040B98
+#.global lbl_80396108
+#lbl_80396108:
+#	.incbin "baserom.dol", 0x392208, 0x68
+#.global __vt__Q44nw4r3snd6detail8SeqSound
+#__vt__Q44nw4r3snd6detail8SeqSound:
+#	.incbin "baserom.dol", 0x392270, 0x70
+#.global __vt__Q54nw4r3snd6detail8SeqSound11SeqLoadTask
+#__vt__Q54nw4r3snd6detail8SeqSound11SeqLoadTask:
+#	.incbin "baserom.dol", 0x3922E0, 0x18
 .global lbl_803961F8
 lbl_803961F8:
 	.incbin "baserom.dol", 0x3922F8, 0x10

@@ -71,8 +71,7 @@ namespace nw4r
 				virtual BasicPlayer * GetBasicPlayer() = 0; // at 0x68
 				virtual const BasicPlayer * GetBasicPlayer() const = 0; // at 0x6c
 				
-				UNKWORD WORD_0x4;
-				
+				PlayerHeap * mPlayerHeap; // at 0x4
 				SoundHandle * mGeneralHandle; // at 0x8
 				SoundHandle * mTempGeneralHandle; // at 0xc
 				SoundPlayer * mSoundPlayer; // at 0x10
