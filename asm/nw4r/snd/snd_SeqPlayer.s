@@ -1210,7 +1210,7 @@ lbl_8003EE14:
 /* 8003EE2C 00039D2C  40 81 00 10 */	ble lbl_8003EE3C
 lbl_8003EE30:
 /* 8003EE30 00039D30  7F C3 F3 78 */	mr r3, r30
-/* 8003EE34 00039D34  48 00 02 F5 */	bl SkipTick__Q44nw4r3snd6detail9SeqPlayerFv
+/* 8003EE34 00039D34  48 00 02 F5 */	bl func_8003F128
 /* 8003EE38 00039D38  48 00 00 1C */	b lbl_8003EE54
 lbl_8003EE3C:
 /* 8003EE3C 00039D3C  88 1E 00 8E */	lbz r0, 0x8e(r30)
@@ -1218,7 +1218,7 @@ lbl_8003EE3C:
 /* 8003EE44 00039D44  40 82 00 10 */	bne lbl_8003EE54
 /* 8003EE48 00039D48  7F C3 F3 78 */	mr r3, r30
 /* 8003EE4C 00039D4C  38 80 00 03 */	li r4, 3
-/* 8003EE50 00039D50  48 00 00 75 */	bl UpdateTick__Q44nw4r3snd6detail9SeqPlayerFi
+/* 8003EE50 00039D50  48 00 00 75 */	bl func_8003EEC4
 lbl_8003EE54:
 /* 8003EE54 00039D54  48 00 8A 85 */	bl func_800478D8
 /* 8003EE58 00039D58  38 63 03 54 */	addi r3, r3, 0x354
@@ -1254,12 +1254,11 @@ lbl_8003EEAC:
 /* 8003EEBC 00039DBC  38 21 00 10 */	addi r1, r1, 0x10
 /* 8003EEC0 00039DC0  4E 80 00 20 */	blr 
 
-# OGWS' UpdateTick doesn't match BBA's;
-# this one looks like its args are not void.
-# The following symbol is from
-# American Mensa Academy, where its UpdateTick is not void
-.global UpdateTick__Q44nw4r3snd6detail9SeqPlayerFi
-UpdateTick__Q44nw4r3snd6detail9SeqPlayerFi:
+#=========#
+# Unknown #
+#=========#
+.global func_8003EEC4
+func_8003EEC4:
 /* 8003EEC4 00039DC4  94 21 FF 90 */	stwu r1, -0x70(r1)
 /* 8003EEC8 00039DC8  7C 08 02 A6 */	mflr r0
 /* 8003EECC 00039DCC  90 01 00 74 */	stw r0, 0x74(r1)
@@ -1427,9 +1426,11 @@ lbl_8003F0E0:
 /* 8003F120 0003A020  38 21 00 70 */	addi r1, r1, 0x70
 /* 8003F124 0003A024  4E 80 00 20 */	blr 
 
-# Symbol from American Mensa Academy, not present in BBA
-.global SkipTick__Q44nw4r3snd6detail9SeqPlayerFv
-SkipTick__Q44nw4r3snd6detail9SeqPlayerFv:
+#=========#
+# Unknown #
+#=========#
+.global func_8003F128
+func_8003F128:
 /* 8003F128 0003A028  94 21 FF B0 */	stwu r1, -0x50(r1)
 /* 8003F12C 0003A02C  7C 08 02 A6 */	mflr r0
 /* 8003F130 0003A030  90 01 00 54 */	stw r0, 0x54(r1)
