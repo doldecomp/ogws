@@ -116,6 +116,7 @@ NW4R_O_FILES := \
 	build/asm/nw4r/snd/snd_StrmSound.o \
 	build/asm/nw4r/snd/snd_StrmSoundHandle.o \
 	build/asm/nw4r/snd/snd_Task.o \
+	build/asm/nw4r/snd/snd_TaskManager.o \
 
 
 GROUP_1_O_FILES := \

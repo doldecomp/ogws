@@ -180,7 +180,7 @@ ShutdownSoundSystem__Q34nw4r3snd11SoundSystemFv:
 /* 800477C0 000426C0  48 00 01 19 */	bl GetInstance__Q44nw4r3snd6detail11SoundThreadFv
 /* 800477C4 000426C4  48 00 03 81 */	bl Shutdown__Q44nw4r3snd6detail11SoundThreadFv
 /* 800477C8 000426C8  48 00 38 31 */	bl GetInstance__Q44nw4r3snd6detail11TaskManagerFv
-/* 800477CC 000426CC  48 00 3D F5 */	bl func_8004B5C0
+/* 800477CC 000426CC  48 00 3D F5 */	bl CancelAllTask__Q44nw4r3snd6detail11TaskManagerFv
 /* 800477D0 000426D0  3C 60 80 3D */	lis r3, lbl_803D0BD0@ha
 /* 800477D4 000426D4  38 63 0B D0 */	addi r3, r3, lbl_803D0BD0@l
 /* 800477D8 000426D8  48 00 40 F9 */	bl func_8004B8D0
