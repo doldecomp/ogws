@@ -126,8 +126,8 @@ Alloc__Q34nw4r3snd9SoundHeapFUlPFPvUlPv_vPv:
 /* 80045D48 00040C48  38 21 00 20 */	addi r1, r1, 0x20
 /* 80045D4C 00040C4C  4E 80 00 20 */	blr 
 
-.global func_80045D50
-func_80045D50:
+.global Clear__Q34nw4r3snd9SoundHeapFv
+Clear__Q34nw4r3snd9SoundHeapFv:
 /* 80045D50 00040C50  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80045D54 00040C54  7C 08 02 A6 */	mflr r0
 /* 80045D58 00040C58  90 01 00 14 */	stw r0, 0x14(r1)
@@ -154,8 +154,8 @@ func_80045D50:
 /* 80045DAC 00040CAC  38 21 00 10 */	addi r1, r1, 0x10
 /* 80045DB0 00040CB0  4E 80 00 20 */	blr 
 
-.global func_80045DB4
-func_80045DB4:
+.global SaveState__Q34nw4r3snd9SoundHeapFv
+SaveState__Q34nw4r3snd9SoundHeapFv:
 /* 80045DB4 00040CB4  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80045DB8 00040CB8  7C 08 02 A6 */	mflr r0
 /* 80045DBC 00040CBC  90 01 00 14 */	stw r0, 0x14(r1)
@@ -178,8 +178,8 @@ func_80045DB4:
 /* 80045E00 00040D00  38 21 00 10 */	addi r1, r1, 0x10
 /* 80045E04 00040D04  4E 80 00 20 */	blr 
 
-.global func_80045E08
-func_80045E08:
+.global LoadState__Q34nw4r3snd9SoundHeapFi
+LoadState__Q34nw4r3snd9SoundHeapFi:
 /* 80045E08 00040D08  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 80045E0C 00040D0C  7C 08 02 A6 */	mflr r0
 /* 80045E10 00040D10  90 01 00 24 */	stw r0, 0x24(r1)
