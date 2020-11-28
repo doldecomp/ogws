@@ -453,7 +453,7 @@ lbl_80047F20:
 /* 80047F28 00042E28  4B FE F5 41 */	bl GetInstance__Q44nw4r3snd6detail14ChannelManagerFv
 /* 80047F2C 00042E2C  4B FE F8 31 */	bl UpdateAllChannel__Q44nw4r3snd6detail14ChannelManagerFv
 lbl_80047F30:
-/* 80047F30 00042E30  48 00 6D 29 */	bl func_8004EC58
+/* 80047F30 00042E30  48 00 6D 29 */	bl CalcRandom__Q44nw4r3snd6detail4UtilFv
 /* 80047F34 00042E34  48 00 61 81 */	bl GetInstance__Q44nw4r3snd6detail12VoiceManagerFv
 /* 80047F38 00042E38  48 00 66 75 */	bl UpdateAllVoices__Q44nw4r3snd6detail12VoiceManagerFv
 /* 80047F3C 00042E3C  48 0A D6 E1 */	bl func_800F561C
