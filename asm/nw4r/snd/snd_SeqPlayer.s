@@ -7,11 +7,11 @@
 lbl_803960F0:
 	.long 0
 	.long -1
-	.long func_80040B90
+	.long SetVolume__Q44nw4r3snd6detail8SeqTrackFf
 lbl_803960FC:
 	.long 0
 	.long -1
-	.long func_80040B98
+	.long SetPitch__Q44nw4r3snd6detail8SeqTrackFf
 .global lbl_80396108
 lbl_80396108:
 	.incbin "baserom.dol", 0x392208, 0x68
@@ -443,7 +443,7 @@ lbl_8003E400:
 /* 8003E400 00039300  93 3B 00 B8 */	stw r25, 0xb8(r27)
 /* 8003E404 00039304  7F 23 CB 78 */	mr r3, r25
 /* 8003E408 00039308  7F 44 D3 78 */	mr r4, r26
-/* 8003E40C 0003930C  48 00 18 E1 */	bl func_8003FCEC
+/* 8003E40C 0003930C  48 00 18 E1 */	bl SetPlayerTrackNo__Q44nw4r3snd6detail8SeqTrackFi
 /* 8003E410 00039310  48 00 94 C9 */	bl func_800478D8
 /* 8003E414 00039314  38 63 03 54 */	addi r3, r3, 0x354
 /* 8003E418 00039318  48 0B 48 41 */	bl OSUnlockMutex
@@ -499,9 +499,9 @@ SetSeqData__Q44nw4r3snd6detail9SeqPlayerFPCvl:
 /* 8003E4C4 000393C4  7F E3 FB 78 */	mr r3, r31
 /* 8003E4C8 000393C8  7F A4 EB 78 */	mr r4, r29
 /* 8003E4CC 000393CC  7F C5 F3 78 */	mr r5, r30
-/* 8003E4D0 000393D0  48 00 1A ED */	bl func_8003FFBC
+/* 8003E4D0 000393D0  48 00 1A ED */	bl SetSeqData__Q44nw4r3snd6detail8SeqTrackFPCvl
 /* 8003E4D4 000393D4  7F E3 FB 78 */	mr r3, r31
-/* 8003E4D8 000393D8  48 00 1A F5 */	bl func_8003FFCC
+/* 8003E4D8 000393D8  48 00 1A F5 */	bl Open__Q44nw4r3snd6detail8SeqTrackFv
 lbl_8003E4DC:
 /* 8003E4DC 000393DC  48 00 93 FD */	bl func_800478D8
 /* 8003E4E0 000393E0  38 63 03 54 */	addi r3, r3, 0x354
@@ -668,7 +668,7 @@ lbl_8003E70C:
 /* 8003E70C 0003960C  2C 03 00 00 */	cmpwi r3, 0
 /* 8003E710 00039610  41 82 00 0C */	beq lbl_8003E71C
 /* 8003E714 00039614  7F C4 F3 78 */	mr r4, r30
-/* 8003E718 00039618  48 00 1C 35 */	bl func_8004034C
+/* 8003E718 00039618  48 00 1C 35 */	bl PauseAllChannel__Q44nw4r3snd6detail8SeqTrackFb
 lbl_8003E71C:
 /* 8003E71C 0003961C  3B FF 00 01 */	addi r31, r31, 1
 /* 8003E720 00039620  3B BD 00 04 */	addi r29, r29, 4
@@ -1091,10 +1091,10 @@ lbl_8003EC90:
 /* 8003EC90 00039B90  2C 1E 00 00 */	cmpwi r30, 0
 /* 8003EC94 00039B94  41 82 00 94 */	beq lbl_8003ED28
 /* 8003EC98 00039B98  7F C3 F3 78 */	mr r3, r30
-/* 8003EC9C 00039B9C  48 00 14 0D */	bl func_800400A8
+/* 8003EC9C 00039B9C  48 00 14 0D */	bl UpdateChannelLength__Q44nw4r3snd6detail8SeqTrackFv
 /* 8003ECA0 00039BA0  7F C3 F3 78 */	mr r3, r30
 /* 8003ECA4 00039BA4  7F 44 D3 78 */	mr r4, r26
-/* 8003ECA8 00039BA8  48 00 14 E9 */	bl func_80040190
+/* 8003ECA8 00039BA8  48 00 14 E9 */	bl ParseNextTick__Q44nw4r3snd6detail8SeqTrackFb
 /* 8003ECAC 00039BAC  2C 03 00 00 */	cmpwi r3, 0
 /* 8003ECB0 00039BB0  40 80 00 68 */	bge lbl_8003ED18
 /* 8003ECB4 00039BB4  48 00 8C 25 */	bl func_800478D8
@@ -1234,7 +1234,7 @@ lbl_8003EE74:
 lbl_8003EE78:
 /* 8003EE78 00039D78  2C 03 00 00 */	cmpwi r3, 0
 /* 8003EE7C 00039D7C  41 82 00 08 */	beq lbl_8003EE84
-/* 8003EE80 00039D80  48 00 15 61 */	bl func_800403E0
+/* 8003EE80 00039D80  48 00 15 61 */	bl UpdateChannelParam__Q44nw4r3snd6detail8SeqTrackFv
 lbl_8003EE84:
 /* 8003EE84 00039D84  3B FF 00 01 */	addi r31, r31, 1
 /* 8003EE88 00039D88  3B DE 00 04 */	addi r30, r30, 4
@@ -1456,9 +1456,9 @@ lbl_8003F17C:
 /* 8003F180 0003A080  41 82 00 18 */	beq lbl_8003F198
 /* 8003F184 0003A084  7F C3 F3 78 */	mr r3, r30
 /* 8003F188 0003A088  38 80 00 7F */	li r4, 0x7f
-/* 8003F18C 0003A08C  48 00 11 31 */	bl func_800402BC
+/* 8003F18C 0003A08C  48 00 11 31 */	bl ReleaseAllChannel__Q44nw4r3snd6detail8SeqTrackFi
 /* 8003F190 0003A090  7F C3 F3 78 */	mr r3, r30
-/* 8003F194 0003A094  48 00 17 31 */	bl func_800408C4
+/* 8003F194 0003A094  48 00 17 31 */	bl FreeAllChannel__Q44nw4r3snd6detail8SeqTrackFv
 lbl_8003F198:
 /* 8003F198 0003A098  3B BD 00 01 */	addi r29, r29, 1
 /* 8003F19C 0003A09C  3B 9C 00 04 */	addi r28, r28, 4
