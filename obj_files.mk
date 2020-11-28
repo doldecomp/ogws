@@ -99,6 +99,7 @@ NW4R_O_FILES := \
 	build/asm/nw4r/snd/snd_80040F04.o \
 	build/asm/nw4r/snd/snd_Sound3DActor.o \
 	build/asm/nw4r/snd/snd_Sound3DListener.o \
+	build/asm/nw4r/snd/snd_Sound3DManager.o \
 
 GROUP_1_O_FILES := \
 	build/asm/text.o \
