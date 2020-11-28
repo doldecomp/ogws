@@ -106,6 +106,7 @@ NW4R_O_FILES := \
 	build/asm/nw4r/snd/snd_SoundArchivePlayer.o \
 	build/asm/nw4r/snd/snd_SoundHandle.o \
 	build/asm/nw4r/snd/snd_SoundHeap.o \
+	build/asm/nw4r/snd/snd_SoundPlayer.o \
 
 
 GROUP_1_O_FILES := \
