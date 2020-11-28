@@ -17,7 +17,7 @@ __ct__Q44nw4r3snd6detail9WaveSoundFPQ44nw4r3snd6detail50SoundInstanceManager$$0Q
 /* 8004EF04 00049E04  38 7E 00 D8 */	addi r3, r30, 0xd8
 /* 8004EF08 00049E08  38 84 64 78 */	addi r4, r4, lbl_80396478@l
 /* 8004EF0C 00049E0C  90 9E 00 00 */	stw r4, 0(r30)
-/* 8004EF10 00049E10  48 00 06 A9 */	bl func_8004F5B8
+/* 8004EF10 00049E10  48 00 06 A9 */	bl __ct__Q44nw4r3snd6detail9WsdPlayerFv
 /* 8004EF14 00049E14  38 00 00 00 */	li r0, 0
 /* 8004EF18 00049E18  93 FE 01 B4 */	stw r31, 0x1b4(r30)
 /* 8004EF1C 00049E1C  7F C3 F3 78 */	mr r3, r30
@@ -77,7 +77,7 @@ Prepare__Q44nw4r3snd6detail9WaveSoundFPCvlQ54nw4r3snd6detail9WsdPlayer15StartOff
 /* 8004EFD8 00049ED8  7F C9 F3 78 */	mr r9, r30
 /* 8004EFDC 00049EDC  7F EA FB 78 */	mr r10, r31
 /* 8004EFE0 00049EE0  38 78 00 D8 */	addi r3, r24, 0xd8
-/* 8004EFE4 00049EE4  48 00 06 E9 */	bl func_8004F6CC
+/* 8004EFE4 00049EE4  48 00 06 E9 */	bl Prepare__Q44nw4r3snd6detail9WsdPlayerFPCviQ54nw4r3snd6detail9WsdPlayer15StartOffsetTypeiiPCQ54nw4r3snd6detail9WsdPlayer11WsdCallbackUl
 /* 8004EFE8 00049EE8  2C 03 00 00 */	cmpwi r3, 0
 /* 8004EFEC 00049EEC  40 82 00 0C */	bne lbl_8004EFF8
 /* 8004EFF0 00049EF0  38 60 00 00 */	li r3, 0
@@ -161,12 +161,12 @@ lbl_8004F0E0:
 .global SetChannelPriority__Q44nw4r3snd6detail9WaveSoundFi
 SetChannelPriority__Q44nw4r3snd6detail9WaveSoundFi:
 /* 8004F0F8 00049FF8  38 63 00 D8 */	addi r3, r3, 0xd8
-/* 8004F0FC 00049FFC  48 00 09 B8 */	b func_8004FAB4
+/* 8004F0FC 00049FFC  48 00 09 B8 */	b SetChannelPriority__Q44nw4r3snd6detail9WsdPlayerFi
 
 .global SetReleasePriorityFix__Q44nw4r3snd6detail9WaveSoundFb
 SetReleasePriorityFix__Q44nw4r3snd6detail9WaveSoundFb:
 /* 8004F100 0004A000  38 63 00 D8 */	addi r3, r3, 0xd8
-/* 8004F104 0004A004  48 00 09 B8 */	b func_8004FABC
+/* 8004F104 0004A004  48 00 09 B8 */	b SetReleasePriorityFix__Q44nw4r3snd6detail9WsdPlayerFb
 
 .global SetPlayerPriority__Q44nw4r3snd6detail9WaveSoundFi
 SetPlayerPriority__Q44nw4r3snd6detail9WaveSoundFi:
