@@ -155,7 +155,7 @@ lbl_800476CC:
 /* 8004776C 0004266C  80 DA 00 0C */	lwz r6, 0xc(r26)
 /* 80047770 00042670  7F 65 DB 78 */	mr r5, r27
 /* 80047774 00042674  38 63 0B D0 */	addi r3, r3, lbl_803D0BD0@l
-/* 80047778 00042678  48 00 40 85 */	bl func_8004B7FC
+/* 80047778 00042678  48 00 40 85 */	bl Create__Q44nw4r3snd6detail10TaskThreadFlPvUl
 /* 8004777C 0004267C  48 00 01 5D */	bl GetInstance__Q44nw4r3snd6detail11SoundThreadFv
 /* 80047780 00042680  80 9A 00 00 */	lwz r4, 0(r26)
 /* 80047784 00042684  7F A5 EB 78 */	mr r5, r29
@@ -183,7 +183,7 @@ ShutdownSoundSystem__Q34nw4r3snd11SoundSystemFv:
 /* 800477CC 000426CC  48 00 3D F5 */	bl CancelAllTask__Q44nw4r3snd6detail11TaskManagerFv
 /* 800477D0 000426D0  3C 60 80 3D */	lis r3, lbl_803D0BD0@ha
 /* 800477D4 000426D4  38 63 0B D0 */	addi r3, r3, lbl_803D0BD0@l
-/* 800477D8 000426D8  48 00 40 F9 */	bl func_8004B8D0
+/* 800477D8 000426D8  48 00 40 F9 */	bl Destroy__Q44nw4r3snd6detail10TaskThreadFv
 /* 800477DC 000426DC  4B FF 63 41 */	bl GetInstance__Q44nw4r3snd6detail20RemoteSpeakerManagerFv
 /* 800477E0 000426E0  4B FF 64 81 */	bl Shutdown__Q44nw4r3snd6detail20RemoteSpeakerManagerFv
 /* 800477E4 000426E4  4B FE FC 85 */	bl GetInstance__Q44nw4r3snd6detail14ChannelManagerFv
@@ -246,11 +246,11 @@ __sinit_$$3snd_SoundSystem_cpp:
 /* 8004789C 0004279C  93 E1 00 0C */	stw r31, 0xc(r1)
 /* 800478A0 000427A0  3F E0 80 3D */	lis r31, lbl_803D0BD0@ha
 /* 800478A4 000427A4  38 7F 0B D0 */	addi r3, r31, lbl_803D0BD0@l
-/* 800478A8 000427A8  48 00 3E BD */	bl func_8004B764
-/* 800478AC 000427AC  3C 80 80 05 */	lis r4, func_8004B778@ha
+/* 800478A8 000427A8  48 00 3E BD */	bl __ct__Q44nw4r3snd6detail10TaskThreadFv
+/* 800478AC 000427AC  3C 80 80 05 */	lis r4, __dt__Q44nw4r3snd6detail10TaskThreadFv@ha
 /* 800478B0 000427B0  3C A0 80 3D */	lis r5, lbl_803D0BC0@ha
 /* 800478B4 000427B4  38 7F 0B D0 */	addi r3, r31, 0xbd0
-/* 800478B8 000427B8  38 84 B7 78 */	addi r4, r4, func_8004B778@l
+/* 800478B8 000427B8  38 84 B7 78 */	addi r4, r4, __dt__Q44nw4r3snd6detail10TaskThreadFv@l
 /* 800478BC 000427BC  38 A5 0B C0 */	addi r5, r5, lbl_803D0BC0@l
 /* 800478C0 000427C0  48 06 9F 75 */	bl func_800B1834
 /* 800478C4 000427C4  80 01 00 14 */	lwz r0, 0x14(r1)
