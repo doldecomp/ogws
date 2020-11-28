@@ -59,108 +59,108 @@ Shutdown__Q34nw4r3snd12SoundArchiveFv:
 .global GetPlayerCount__Q34nw4r3snd12SoundArchiveCFv
 GetPlayerCount__Q34nw4r3snd12SoundArchiveCFv:
 /* 80041DA8 0003CCA8  80 63 00 04 */	lwz r3, 4(r3)
-/* 80041DAC 0003CCAC  48 00 0F E4 */	b func_80042D90
+/* 80041DAC 0003CCAC  48 00 0F E4 */	b GetPlayerCount__Q44nw4r3snd6detail22SoundArchiveFileReaderCFv
 
 .global GetGroupCount__Q34nw4r3snd12SoundArchiveCFv
 GetGroupCount__Q34nw4r3snd12SoundArchiveCFv:
 /* 80041DB0 0003CCB0  80 63 00 04 */	lwz r3, 4(r3)
-/* 80041DB4 0003CCB4  48 00 10 1C */	b func_80042DD0
+/* 80041DB4 0003CCB4  48 00 10 1C */	b GetGroupCount__Q44nw4r3snd6detail22SoundArchiveFileReaderCFv
 
 .global GetSoundLabelString__Q34nw4r3snd12SoundArchiveCFUl
 GetSoundLabelString__Q34nw4r3snd12SoundArchiveCFUl:
 /* 80041DB8 0003CCB8  80 63 00 04 */	lwz r3, 4(r3)
-/* 80041DBC 0003CCBC  48 00 10 58 */	b func_80042E14
+/* 80041DBC 0003CCBC  48 00 10 58 */	b GetSoundLabelString__Q44nw4r3snd6detail22SoundArchiveFileReaderCFUl
 
 .global ConvertLabelStringToSoundId__Q34nw4r3snd12SoundArchiveCFPCc
 ConvertLabelStringToSoundId__Q34nw4r3snd12SoundArchiveCFPCc:
 /* 80041DC0 0003CCC0  80 63 00 04 */	lwz r3, 4(r3)
 /* 80041DC4 0003CCC4  7C 85 23 78 */	mr r5, r4
 /* 80041DC8 0003CCC8  80 83 00 34 */	lwz r4, 0x34(r3)
-/* 80041DCC 0003CCCC  48 00 14 24 */	b func_800431F0
+/* 80041DCC 0003CCCC  48 00 14 24 */	b ConvertLabelStringToId__Q44nw4r3snd6detail22SoundArchiveFileReaderCFPCQ54nw4r3snd6detail16SoundArchiveFile10StringTreePCc
 
 .global ConvertLabelStringToPlayerId__Q34nw4r3snd12SoundArchiveCFPCc
 ConvertLabelStringToPlayerId__Q34nw4r3snd12SoundArchiveCFPCc:
 /* 80041DD0 0003CCD0  80 63 00 04 */	lwz r3, 4(r3)
 /* 80041DD4 0003CCD4  7C 85 23 78 */	mr r5, r4
 /* 80041DD8 0003CCD8  80 83 00 38 */	lwz r4, 0x38(r3)
-/* 80041DDC 0003CCDC  48 00 14 14 */	b func_800431F0
+/* 80041DDC 0003CCDC  48 00 14 14 */	b ConvertLabelStringToId__Q44nw4r3snd6detail22SoundArchiveFileReaderCFPCQ54nw4r3snd6detail16SoundArchiveFile10StringTreePCc
 
 .global ConvertLabelStringToGroupId__Q34nw4r3snd12SoundArchiveCFPCc
 ConvertLabelStringToGroupId__Q34nw4r3snd12SoundArchiveCFPCc:
 /* 80041DE0 0003CCE0  80 63 00 04 */	lwz r3, 4(r3)
 /* 80041DE4 0003CCE4  7C 85 23 78 */	mr r5, r4
 /* 80041DE8 0003CCE8  80 83 00 3C */	lwz r4, 0x3c(r3)
-/* 80041DEC 0003CCEC  48 00 14 04 */	b func_800431F0
+/* 80041DEC 0003CCEC  48 00 14 04 */	b ConvertLabelStringToId__Q44nw4r3snd6detail22SoundArchiveFileReaderCFPCQ54nw4r3snd6detail16SoundArchiveFile10StringTreePCc
 
 .global GetSoundUserParam__Q34nw4r3snd12SoundArchiveCFUl
 GetSoundUserParam__Q34nw4r3snd12SoundArchiveCFUl:
 /* 80041DF0 0003CCF0  80 63 00 04 */	lwz r3, 4(r3)
-/* 80041DF4 0003CCF4  48 00 11 24 */	b func_80042F18
+/* 80041DF4 0003CCF4  48 00 11 24 */	b GetSoundUserParam__Q44nw4r3snd6detail22SoundArchiveFileReaderCFUl
 
 .global GetSoundType__Q34nw4r3snd12SoundArchiveCFUl
 GetSoundType__Q34nw4r3snd12SoundArchiveCFUl:
 /* 80041DF8 0003CCF8  80 63 00 04 */	lwz r3, 4(r3)
-/* 80041DFC 0003CCFC  48 00 06 BC */	b func_800424B8
+/* 80041DFC 0003CCFC  48 00 06 BC */	b GetSoundType__Q44nw4r3snd6detail22SoundArchiveFileReaderCFUl
 
 .global ReadSoundInfo__Q34nw4r3snd12SoundArchiveCFUlPQ44nw4r3snd12SoundArchive9SoundInfo
 ReadSoundInfo__Q34nw4r3snd12SoundArchiveCFUlPQ44nw4r3snd12SoundArchive9SoundInfo:
 /* 80041E00 0003CD00  80 63 00 04 */	lwz r3, 4(r3)
-/* 80041E04 0003CD04  48 00 07 A4 */	b func_800425A8
+/* 80041E04 0003CD04  48 00 07 A4 */	b ReadSoundInfo__Q44nw4r3snd6detail22SoundArchiveFileReaderCFUlPQ44nw4r3snd12SoundArchive9SoundInfo
 
 .global detail_ReadSeqSoundInfo__Q34nw4r3snd12SoundArchiveCFUlPQ44nw4r3snd12SoundArchive12SeqSoundInfo
 detail_ReadSeqSoundInfo__Q34nw4r3snd12SoundArchiveCFUlPQ44nw4r3snd12SoundArchive12SeqSoundInfo:
 /* 80041E08 0003CD08  80 63 00 04 */	lwz r3, 4(r3)
-/* 80041E0C 0003CD0C  48 00 09 C0 */	b func_800427CC
+/* 80041E0C 0003CD0C  48 00 09 C0 */	b ReadSeqSoundInfo__Q44nw4r3snd6detail22SoundArchiveFileReaderCFUlPQ44nw4r3snd12SoundArchive12SeqSoundInfo
 
 .global detail_ReadStrmSoundInfo__Q34nw4r3snd12SoundArchiveCFUlPQ44nw4r3snd12SoundArchive13StrmSoundInfo
 detail_ReadStrmSoundInfo__Q34nw4r3snd12SoundArchiveCFUlPQ44nw4r3snd12SoundArchive13StrmSoundInfo:
 /* 80041E10 0003CD10  80 63 00 04 */	lwz r3, 4(r3)
-/* 80041E14 0003CD14  48 00 0A 64 */	b func_80042878
+/* 80041E14 0003CD14  48 00 0A 64 */	b ReadStrmSoundInfo__Q44nw4r3snd6detail22SoundArchiveFileReaderCFUlPQ44nw4r3snd12SoundArchive13StrmSoundInfo
 
 .global detail_ReadWaveSoundInfo__Q34nw4r3snd12SoundArchiveCFUlPQ44nw4r3snd12SoundArchive13WaveSoundInfo
 detail_ReadWaveSoundInfo__Q34nw4r3snd12SoundArchiveCFUlPQ44nw4r3snd12SoundArchive13WaveSoundInfo:
 /* 80041E18 0003CD18  80 63 00 04 */	lwz r3, 4(r3)
-/* 80041E1C 0003CD1C  48 00 0A A8 */	b func_800428C4
+/* 80041E1C 0003CD1C  48 00 0A A8 */	b ReadWaveSoundInfo__Q44nw4r3snd6detail22SoundArchiveFileReaderCFUlPQ44nw4r3snd12SoundArchive13WaveSoundInfo
 
 .global ReadPlayerInfo__Q34nw4r3snd12SoundArchiveCFUlPQ44nw4r3snd12SoundArchive10PlayerInfo
 ReadPlayerInfo__Q34nw4r3snd12SoundArchiveCFUlPQ44nw4r3snd12SoundArchive10PlayerInfo:
 /* 80041E20 0003CD20  80 63 00 04 */	lwz r3, 4(r3)
-/* 80041E24 0003CD24  48 00 0B E8 */	b func_80042A0C
+/* 80041E24 0003CD24  48 00 0B E8 */	b ReadPlayerInfo__Q44nw4r3snd6detail22SoundArchiveFileReaderCFUlPQ44nw4r3snd12SoundArchive10PlayerInfo
 
 .global ReadSoundArchivePlayerInfo__Q34nw4r3snd12SoundArchiveCFPQ44nw4r3snd12SoundArchive22SoundArchivePlayerInfo
 ReadSoundArchivePlayerInfo__Q34nw4r3snd12SoundArchiveCFPQ44nw4r3snd12SoundArchive22SoundArchivePlayerInfo:
 /* 80041E28 0003CD28  80 63 00 04 */	lwz r3, 4(r3)
-/* 80041E2C 0003CD2C  48 00 0E E0 */	b func_80042D0C
+/* 80041E2C 0003CD2C  48 00 0E E0 */	b ReadSoundArchivePlayerInfo__Q44nw4r3snd6detail22SoundArchiveFileReaderCFPQ44nw4r3snd12SoundArchive22SoundArchivePlayerInfo
 
 .global detail_ReadSound3DParam__Q34nw4r3snd12SoundArchiveCFUlPQ44nw4r3snd12SoundArchive12Sound3DParam
 detail_ReadSound3DParam__Q34nw4r3snd12SoundArchiveCFUlPQ44nw4r3snd12SoundArchive12Sound3DParam:
 /* 80041E30 0003CD30  80 63 00 04 */	lwz r3, 4(r3)
-/* 80041E34 0003CD34  48 00 08 94 */	b func_800426C8
+/* 80041E34 0003CD34  48 00 08 94 */	b ReadSound3DParam__Q44nw4r3snd6detail22SoundArchiveFileReaderCFUlPQ44nw4r3snd12SoundArchive12Sound3DParam
 
 .global detail_ReadBankInfo__Q34nw4r3snd12SoundArchiveCFUlPQ44nw4r3snd12SoundArchive8BankInfo
 detail_ReadBankInfo__Q34nw4r3snd12SoundArchiveCFUlPQ44nw4r3snd12SoundArchive8BankInfo:
 /* 80041E38 0003CD38  80 63 00 04 */	lwz r3, 4(r3)
-/* 80041E3C 0003CD3C  48 00 0B 24 */	b func_80042960
+/* 80041E3C 0003CD3C  48 00 0B 24 */	b ReadBankInfo__Q44nw4r3snd6detail22SoundArchiveFileReaderCFUlPQ44nw4r3snd12SoundArchive8BankInfo
 
 .global detail_ReadGroupInfo__Q34nw4r3snd12SoundArchiveCFUlPQ44nw4r3snd12SoundArchive9GroupInfo
 detail_ReadGroupInfo__Q34nw4r3snd12SoundArchiveCFUlPQ44nw4r3snd12SoundArchive9GroupInfo:
 /* 80041E40 0003CD40  80 63 00 04 */	lwz r3, 4(r3)
-/* 80041E44 0003CD44  48 00 0C 80 */	b func_80042AC4
+/* 80041E44 0003CD44  48 00 0C 80 */	b ReadGroupInfo__Q44nw4r3snd6detail22SoundArchiveFileReaderCFUlPQ44nw4r3snd12SoundArchive9GroupInfo
 
 .global detail_ReadGroupItemInfo__Q34nw4r3snd12SoundArchiveCFUlUlPQ44nw4r3snd12SoundArchive13GroupItemInfo
 detail_ReadGroupItemInfo__Q34nw4r3snd12SoundArchiveCFUlUlPQ44nw4r3snd12SoundArchive13GroupItemInfo:
 /* 80041E48 0003CD48  80 63 00 04 */	lwz r3, 4(r3)
-/* 80041E4C 0003CD4C  48 00 0D 88 */	b func_80042BD4
+/* 80041E4C 0003CD4C  48 00 0D 88 */	b ReadGroupItemInfo__Q44nw4r3snd6detail22SoundArchiveFileReaderCFUlUlPQ44nw4r3snd12SoundArchive13GroupItemInfo
 
 .global detail_ReadFileInfo__Q34nw4r3snd12SoundArchiveCFUlPQ44nw4r3snd12SoundArchive8FileInfo
 detail_ReadFileInfo__Q34nw4r3snd12SoundArchiveCFUlPQ44nw4r3snd12SoundArchive8FileInfo:
 /* 80041E50 0003CD50  80 63 00 04 */	lwz r3, 4(r3)
-/* 80041E54 0003CD54  48 00 11 7C */	b func_80042FD0
+/* 80041E54 0003CD54  48 00 11 7C */	b ReadFileInfo__Q44nw4r3snd6detail22SoundArchiveFileReaderCFUlPQ44nw4r3snd12SoundArchive8FileInfo
 
 .global detail_ReadFilePos__Q34nw4r3snd12SoundArchiveCFUlUlPQ44nw4r3snd12SoundArchive7FilePos
 detail_ReadFilePos__Q34nw4r3snd12SoundArchiveCFUlUlPQ44nw4r3snd12SoundArchive7FilePos:
 /* 80041E58 0003CD58  80 63 00 04 */	lwz r3, 4(r3)
-/* 80041E5C 0003CD5C  48 00 12 74 */	b func_800430D0
+/* 80041E5C 0003CD5C  48 00 12 74 */	b ReadFilePos__Q44nw4r3snd6detail22SoundArchiveFileReaderCFUlUlPQ44nw4r3snd12SoundArchive7FilePos
 
 .global detail_OpenFileStream__Q34nw4r3snd12SoundArchiveCFUlPvi
 detail_OpenFileStream__Q34nw4r3snd12SoundArchiveCFUlPvi:
@@ -175,7 +175,7 @@ detail_OpenFileStream__Q34nw4r3snd12SoundArchiveCFUlPvi:
 /* 80041E80 0003CD80  7C 99 23 78 */	mr r25, r4
 /* 80041E84 0003CD84  7C DF 33 78 */	mr r31, r6
 /* 80041E88 0003CD88  38 A1 00 10 */	addi r5, r1, 0x10
-/* 80041E8C 0003CD8C  48 00 11 45 */	bl func_80042FD0
+/* 80041E8C 0003CD8C  48 00 11 45 */	bl ReadFileInfo__Q44nw4r3snd6detail22SoundArchiveFileReaderCFUlPQ44nw4r3snd12SoundArchive8FileInfo
 /* 80041E90 0003CD90  2C 03 00 00 */	cmpwi r3, 0
 /* 80041E94 0003CD94  40 82 00 0C */	bne lbl_80041EA0
 /* 80041E98 0003CD98  38 60 00 00 */	li r3, 0
@@ -227,7 +227,7 @@ lbl_80041F38:
 /* 80041F3C 0003CE3C  7F 24 CB 78 */	mr r4, r25
 /* 80041F40 0003CE40  38 C1 00 08 */	addi r6, r1, 8
 /* 80041F44 0003CE44  38 A0 00 00 */	li r5, 0
-/* 80041F48 0003CE48  48 00 11 89 */	bl func_800430D0
+/* 80041F48 0003CE48  48 00 11 89 */	bl ReadFilePos__Q44nw4r3snd6detail22SoundArchiveFileReaderCFUlUlPQ44nw4r3snd12SoundArchive7FilePos
 /* 80041F4C 0003CE4C  2C 03 00 00 */	cmpwi r3, 0
 /* 80041F50 0003CE50  40 82 00 0C */	bne lbl_80041F5C
 /* 80041F54 0003CE54  38 60 00 00 */	li r3, 0
@@ -236,7 +236,7 @@ lbl_80041F5C:
 /* 80041F5C 0003CE5C  80 7D 00 04 */	lwz r3, 4(r29)
 /* 80041F60 0003CE60  38 A1 00 38 */	addi r5, r1, 0x38
 /* 80041F64 0003CE64  80 81 00 08 */	lwz r4, 8(r1)
-/* 80041F68 0003CE68  48 00 0B 5D */	bl func_80042AC4
+/* 80041F68 0003CE68  48 00 0B 5D */	bl ReadGroupInfo__Q44nw4r3snd6detail22SoundArchiveFileReaderCFUlPQ44nw4r3snd12SoundArchive9GroupInfo
 /* 80041F6C 0003CE6C  2C 03 00 00 */	cmpwi r3, 0
 /* 80041F70 0003CE70  40 82 00 0C */	bne lbl_80041F7C
 /* 80041F74 0003CE74  38 60 00 00 */	li r3, 0
@@ -246,7 +246,7 @@ lbl_80041F7C:
 /* 80041F80 0003CE80  38 C1 00 20 */	addi r6, r1, 0x20
 /* 80041F84 0003CE84  80 81 00 08 */	lwz r4, 8(r1)
 /* 80041F88 0003CE88  80 A1 00 0C */	lwz r5, 0xc(r1)
-/* 80041F8C 0003CE8C  48 00 0C 49 */	bl func_80042BD4
+/* 80041F8C 0003CE8C  48 00 0C 49 */	bl ReadGroupItemInfo__Q44nw4r3snd6detail22SoundArchiveFileReaderCFUlUlPQ44nw4r3snd12SoundArchive13GroupItemInfo
 /* 80041F90 0003CE90  2C 03 00 00 */	cmpwi r3, 0
 /* 80041F94 0003CE94  40 82 00 0C */	bne lbl_80041FA0
 /* 80041F98 0003CE98  38 60 00 00 */	li r3, 0
@@ -327,7 +327,7 @@ detail_OpenGroupStream__Q34nw4r3snd12SoundArchiveCFUlPvi:
 /* 800420A0 0003CFA0  7C BA 2B 78 */	mr r26, r5
 /* 800420A4 0003CFA4  7C DB 33 78 */	mr r27, r6
 /* 800420A8 0003CFA8  38 A1 00 08 */	addi r5, r1, 8
-/* 800420AC 0003CFAC  48 00 0A 19 */	bl func_80042AC4
+/* 800420AC 0003CFAC  48 00 0A 19 */	bl ReadGroupInfo__Q44nw4r3snd6detail22SoundArchiveFileReaderCFUlPQ44nw4r3snd12SoundArchive9GroupInfo
 /* 800420B0 0003CFB0  2C 03 00 00 */	cmpwi r3, 0
 /* 800420B4 0003CFB4  40 82 00 0C */	bne lbl_800420C0
 /* 800420B8 0003CFB8  38 60 00 00 */	li r3, 0
@@ -406,7 +406,7 @@ detail_OpenGroupWaveDataStream__Q34nw4r3snd12SoundArchiveCFUlPvi:
 /* 800421B8 0003D0B8  7C BA 2B 78 */	mr r26, r5
 /* 800421BC 0003D0BC  7C DB 33 78 */	mr r27, r6
 /* 800421C0 0003D0C0  38 A1 00 08 */	addi r5, r1, 8
-/* 800421C4 0003D0C4  48 00 09 01 */	bl func_80042AC4
+/* 800421C4 0003D0C4  48 00 09 01 */	bl ReadGroupInfo__Q44nw4r3snd6detail22SoundArchiveFileReaderCFUlPQ44nw4r3snd12SoundArchive9GroupInfo
 /* 800421C8 0003D0C8  2C 03 00 00 */	cmpwi r3, 0
 /* 800421CC 0003D0CC  40 82 00 0C */	bne lbl_800421D8
 /* 800421D0 0003D0D0  38 60 00 00 */	li r3, 0

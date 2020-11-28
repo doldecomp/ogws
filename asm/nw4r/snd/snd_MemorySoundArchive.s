@@ -103,7 +103,7 @@ Setup__Q34nw4r3snd18MemorySoundArchiveFPCv:
 /* 8003B4F0 000363F0  93 C1 00 08 */	stw r30, 8(r1)
 /* 8003B4F4 000363F4  7C 7E 1B 78 */	mr r30, r3
 /* 8003B4F8 000363F8  38 63 01 0C */	addi r3, r3, 0x10c
-/* 8003B4FC 000363FC  48 00 6E 59 */	bl func_80042354
+/* 8003B4FC 000363FC  48 00 6E 59 */	bl Init__Q44nw4r3snd6detail22SoundArchiveFileReaderFPCv
 /* 8003B500 00036400  7F C3 F3 78 */	mr r3, r30
 /* 8003B504 00036404  38 9E 01 0C */	addi r4, r30, 0x10c
 /* 8003B508 00036408  48 00 68 81 */	bl Setup__Q34nw4r3snd12SoundArchiveFPQ44nw4r3snd6detail22SoundArchiveFileReader
@@ -111,12 +111,12 @@ Setup__Q34nw4r3snd18MemorySoundArchiveFPCv:
 /* 8003B510 00036410  38 7E 01 0C */	addi r3, r30, 0x10c
 /* 8003B514 00036414  80 BE 01 28 */	lwz r5, 0x128(r30)
 /* 8003B518 00036418  7C 80 FA 14 */	add r4, r0, r31
-/* 8003B51C 0003641C  48 00 6F 91 */	bl func_800424AC
+/* 8003B51C 0003641C  48 00 6F 91 */	bl SetInfoChunk__Q44nw4r3snd6detail22SoundArchiveFileReaderFPCvUl
 /* 8003B520 00036420  80 1E 01 1C */	lwz r0, 0x11c(r30)
 /* 8003B524 00036424  38 7E 01 0C */	addi r3, r30, 0x10c
 /* 8003B528 00036428  80 BE 01 20 */	lwz r5, 0x120(r30)
 /* 8003B52C 0003642C  7C 80 FA 14 */	add r4, r0, r31
-/* 8003B530 00036430  48 00 6E D5 */	bl func_80042404
+/* 8003B530 00036430  48 00 6E D5 */	bl SetStringChunk__Q44nw4r3snd6detail22SoundArchiveFileReaderFPCvUl
 /* 8003B534 00036434  93 FE 01 08 */	stw r31, 0x108(r30)
 /* 8003B538 00036438  38 60 00 01 */	li r3, 1
 /* 8003B53C 0003643C  83 E1 00 0C */	lwz r31, 0xc(r1)
