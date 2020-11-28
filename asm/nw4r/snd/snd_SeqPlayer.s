@@ -1218,7 +1218,7 @@ lbl_8003EE3C:
 /* 8003EE44 00039D44  40 82 00 10 */	bne lbl_8003EE54
 /* 8003EE48 00039D48  7F C3 F3 78 */	mr r3, r30
 /* 8003EE4C 00039D4C  38 80 00 03 */	li r4, 3
-/* 8003EE50 00039D50  48 00 00 75 */	bl func_8003EEC4
+/* 8003EE50 00039D50  48 00 00 75 */	bl UpdateTick__Q44nw4r3snd6detail9SeqPlayerFv
 lbl_8003EE54:
 /* 8003EE54 00039D54  48 00 8A 85 */	bl func_800478D8
 /* 8003EE58 00039D58  38 63 03 54 */	addi r3, r3, 0x354
@@ -1254,11 +1254,8 @@ lbl_8003EEAC:
 /* 8003EEBC 00039DBC  38 21 00 10 */	addi r1, r1, 0x10
 /* 8003EEC0 00039DC0  4E 80 00 20 */	blr 
 
-#=========#
-# Unknown #
-#=========#
-.global func_8003EEC4
-func_8003EEC4:
+.global UpdateTick__Q44nw4r3snd6detail9SeqPlayerFv
+UpdateTick__Q44nw4r3snd6detail9SeqPlayerFv:
 /* 8003EEC4 00039DC4  94 21 FF 90 */	stwu r1, -0x70(r1)
 /* 8003EEC8 00039DC8  7C 08 02 A6 */	mflr r0
 /* 8003EECC 00039DCC  90 01 00 74 */	stw r0, 0x74(r1)
