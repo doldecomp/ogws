@@ -97,6 +97,7 @@ NW4R_O_FILES := \
 	build/nw4r/snd/snd_SeqSoundHandle.o \
 	build/asm/nw4r/snd/snd_SeqTrack.o \
 	build/asm/nw4r/snd/snd_80040F04.o \
+	build/asm/nw4r/snd/snd_Sound3DActor.o \
 
 GROUP_1_O_FILES := \
 	build/asm/text.o \
