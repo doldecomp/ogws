@@ -1818,7 +1818,7 @@ lbl_80045338:
 /* 80045340 00040240  7F A6 EB 78 */	mr r6, r29
 /* 80045344 00040244  7F C7 F3 78 */	mr r7, r30
 /* 80045348 00040248  38 9A 00 BC */	addi r4, r26, 0xbc
-/* 8004534C 0004024C  48 00 59 59 */	bl func_8004ACA4
+/* 8004534C 0004024C  48 00 59 59 */	bl Prepare__Q44nw4r3snd6detail9StrmSoundFPQ44nw4r3snd6detail14StrmBufferPoolQ54nw4r3snd6detail10StrmPlayer15StartOffsetTypeliPQ34nw4r2ut10FileStream
 /* 80045350 00040250  2C 03 00 00 */	cmpwi r3, 0
 /* 80045354 00040254  40 82 00 0C */	bne lbl_80045360
 /* 80045358 00040258  38 60 00 FF */	li r3, 0xff
