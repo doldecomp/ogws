@@ -105,7 +105,7 @@ lbl_80041060:
 /* 80041068 0003BF68  38 61 00 08 */	addi r3, r1, 8
 /* 8004106C 0003BF6C  93 A1 00 08 */	stw r29, 8(r1)
 /* 80041070 0003BF70  38 84 FF 30 */	addi r4, r4, -208
-/* 80041074 0003BF74  48 00 4A 21 */	bl func_80045A94
+/* 80041074 0003BF74  48 00 4A 21 */	bl detail_AttachSoundAsTempHandle__Q34nw4r3snd11SoundHandleFPQ44nw4r3snd6detail10BasicSound
 /* 80041078 0003BF78  80 61 00 08 */	lwz r3, 8(r1)
 /* 8004107C 0003BF7C  2C 03 00 00 */	cmpwi r3, 0
 /* 80041080 0003BF80  41 82 00 08 */	beq lbl_80041088

@@ -85,7 +85,7 @@ detail_Update__Q34nw4r3snd14Sound3DManagerFPQ34nw4r3snd10SoundParamUlPQ44nw4r3sn
 /* 800413CC 0003C2CC  41 82 00 10 */	beq lbl_800413DC
 /* 800413D0 0003C2D0  7F E4 FB 78 */	mr r4, r31
 /* 800413D4 0003C2D4  38 61 00 08 */	addi r3, r1, 8
-/* 800413D8 0003C2D8  48 00 46 BD */	bl func_80045A94
+/* 800413D8 0003C2D8  48 00 46 BD */	bl detail_AttachSoundAsTempHandle__Q34nw4r3snd11SoundHandleFPQ44nw4r3snd6detail10BasicSound
 lbl_800413DC:
 /* 800413DC 0003C2DC  81 9A 00 00 */	lwz r12, 0(r26)
 /* 800413E0 0003C2E0  7C 1F 00 D0 */	neg r0, r31
