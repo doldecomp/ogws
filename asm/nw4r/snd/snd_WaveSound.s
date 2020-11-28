@@ -30,8 +30,8 @@ __ct__Q44nw4r3snd6detail9WaveSoundFPQ44nw4r3snd6detail50SoundInstanceManager$$0Q
 /* 8004EF38 00049E38  38 21 00 10 */	addi r1, r1, 0x10
 /* 8004EF3C 00049E3C  4E 80 00 20 */	blr 
 
-.global __dt__Q44nw4r3snd6detail9WsdPlayerFv
-__dt__Q44nw4r3snd6detail9WsdPlayerFv:
+.global ______dt__Q44nw4r3snd6detail9WsdPlayerFv
+______dt__Q44nw4r3snd6detail9WsdPlayerFv:
 /* 8004EF40 00049E40  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8004EF44 00049E44  7C 08 02 A6 */	mflr r0
 /* 8004EF48 00049E48  2C 03 00 00 */	cmpwi r3, 0
