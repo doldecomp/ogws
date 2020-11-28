@@ -231,7 +231,7 @@ IsAttachedTempSpecialHandle__Q44nw4r3snd6detail9StrmSoundFv:
 .global DetachTempSpecialHandle__Q44nw4r3snd6detail9StrmSoundFv
 DetachTempSpecialHandle__Q44nw4r3snd6detail9StrmSoundFv:
 /* 8004AF4C 00045E4C  80 63 09 20 */	lwz r3, 0x920(r3)
-/* 8004AF50 00045E50  48 00 00 30 */	b func_8004AF80
+/* 8004AF50 00045E50  48 00 00 30 */	b DetachSound__Q34nw4r3snd15StrmSoundHandleFv
 
 .global GetBasicPlayer__Q44nw4r3snd6detail9StrmSoundFv
 GetBasicPlayer__Q44nw4r3snd6detail9StrmSoundFv:
