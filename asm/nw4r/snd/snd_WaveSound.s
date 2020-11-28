@@ -247,7 +247,7 @@ IsAttachedTempSpecialHandle__Q44nw4r3snd6detail9WaveSoundFv:
 .global DetachTempSpecialHandle__Q44nw4r3snd6detail9WaveSoundFv
 DetachTempSpecialHandle__Q44nw4r3snd6detail9WaveSoundFv:
 /* 8004F204 0004A104  80 63 01 B0 */	lwz r3, 0x1b0(r3)
-/* 8004F208 0004A108  48 00 00 30 */	b func_8004F238
+/* 8004F208 0004A108  48 00 00 30 */	b DetachSound__Q34nw4r3snd15WaveSoundHandleFv
 
 .global GetBasicPlayer__Q44nw4r3snd6detail9WaveSoundFv
 GetBasicPlayer__Q44nw4r3snd6detail9WaveSoundFv:
