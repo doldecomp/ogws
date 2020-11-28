@@ -1146,8 +1146,8 @@ $$2116$$2InvalidateData__Q44nw4r3snd6detail9WsdPlayerFPCvPCv:
 /* 80050598 0004B498  38 63 FF 8C */	addi r3, r3, -116
 /* 8005059C 0004B49C  4B FF F5 28 */	b InvalidateData__Q44nw4r3snd6detail9WsdPlayerFPCvPCv
 
-# .global $$2116$$2__dt__Q44nw4r3snd6detail9WsdPlayerFv
-# $$2116$$2__dt__Q44nw4r3snd6detail9WsdPlayerFv:
+.global $$2116$$2__dt__Q44nw4r3snd6detail9WsdPlayerFv____
+$$2116$$2__dt__Q44nw4r3snd6detail9WsdPlayerFv____:
 /* 800505A0 0004B4A0  38 63 FF 8C */	addi r3, r3, -116
 /* 800505A4 0004B4A4  4B FF E9 9C */	b __dt__Q44nw4r3snd6detail9WsdPlayerFv
 
@@ -1161,7 +1161,7 @@ $$2128$$2OnUpdateFrameSoundThread__Q44nw4r3snd6detail9WsdPlayerFv:
 /* 800505B0 0004B4B0  38 63 FF 80 */	addi r3, r3, -128
 /* 800505B4 0004B4B4  4B FF FF 88 */	b OnUpdateFrameSoundThread__Q44nw4r3snd6detail9WsdPlayerFv
 
-# .global $$2128$$2__dt__Q44nw4r3snd6detail9WsdPlayerFv
-# $$2128$$2__dt__Q44nw4r3snd6detail9WsdPlayerFv:
+.global $$2128$$2__dt__Q44nw4r3snd6detail9WsdPlayerFv____
+$$2128$$2__dt__Q44nw4r3snd6detail9WsdPlayerFv____:
 /* 800505B8 0004B4B8  38 63 FF 80 */	addi r3, r3, -128
 /* 800505BC 0004B4BC  4B FF E9 84 */	b __dt__Q44nw4r3snd6detail9WsdPlayerFv
