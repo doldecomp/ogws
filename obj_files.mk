@@ -126,6 +126,7 @@ NW4R_O_FILES := \
 	build/asm/nw4r/snd/snd_WaveSoundHandle.o \
 	build/asm/nw4r/snd/snd_WsdFile.o \
 	build/asm/nw4r/snd/snd_WsdPlayer.o \
+	build/asm/nw4r/snd/snd_adpcm.o \
 
 
 GROUP_1_O_FILES := \
