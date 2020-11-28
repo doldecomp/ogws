@@ -802,7 +802,7 @@ lbl_8004C410:
 /* 8004C420 00047320  93 D8 00 9C */	stw r30, 0x9c(r24)
 /* 8004C424 00047324  48 00 1C 91 */	bl GetInstance__Q44nw4r3snd6detail12VoiceManagerFv
 /* 8004C428 00047328  7F 04 C3 78 */	mr r4, r24
-/* 8004C42C 0004732C  48 00 20 E9 */	bl func_8004E514
+/* 8004C42C 0004732C  48 00 20 E9 */	bl FreeVoice__Q44nw4r3snd6detail12VoiceManagerFPQ44nw4r3snd6detail5Voice
 /* 8004C430 00047330  9B D8 00 AC */	stb r30, 0xac(r24)
 /* 8004C434 00047334  7F E3 FB 78 */	mr r3, r31
 /* 8004C438 00047338  48 0A 54 B1 */	bl OSRestoreInterrupts
@@ -1438,7 +1438,7 @@ SetPriority__Q44nw4r3snd6detail5VoiceFi:
 /* 8004CC2C 00047B2C  7C 7B 1B 78 */	mr r27, r3
 /* 8004CC30 00047B30  48 00 14 85 */	bl GetInstance__Q44nw4r3snd6detail12VoiceManagerFv
 /* 8004CC34 00047B34  7F 64 DB 78 */	mr r4, r27
-/* 8004CC38 00047B38  48 00 1A 8D */	bl func_8004E6C4
+/* 8004CC38 00047B38  48 00 1A 8D */	bl ChangeVoicePriority__Q44nw4r3snd6detail12VoiceManagerFPQ44nw4r3snd6detail5Voice
 /* 8004CC3C 00047B3C  80 1B 00 B4 */	lwz r0, 0xb4(r27)
 /* 8004CC40 00047B40  2C 00 00 01 */	cmpwi r0, 1
 /* 8004CC44 00047B44  40 82 00 58 */	bne lbl_8004CC9C

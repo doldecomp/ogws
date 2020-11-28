@@ -40,7 +40,7 @@ GetRequiredMemSize__Q34nw4r3snd11SoundSystemFRCQ44nw4r3snd11SoundSystem16SoundSy
 /* 800475C8 000424C8  93 C1 00 08 */	stw r30, 8(r1)
 /* 800475CC 000424CC  7C 7E 1B 78 */	mr r30, r3
 /* 800475D0 000424D0  48 00 6A E5 */	bl GetInstance__Q44nw4r3snd6detail12VoiceManagerFv
-/* 800475D4 000424D4  48 00 6B DD */	bl func_8004E1B0
+/* 800475D4 000424D4  48 00 6B DD */	bl GetRequiredMemSize__Q44nw4r3snd6detail12VoiceManagerFv
 /* 800475D8 000424D8  7C 7F 1B 78 */	mr r31, r3
 /* 800475DC 000424DC  4B FE D9 6D */	bl GetInstance__Q44nw4r3snd6detail14AxVoiceManagerFv
 /* 800475E0 000424E0  4B FE DA 91 */	bl GetRequiredMemSize__Q44nw4r3snd6detail14AxVoiceManagerFv
@@ -132,15 +132,15 @@ lbl_800476CC:
 /* 80047710 00042610  4B FE D9 89 */	bl Setup__Q44nw4r3snd6detail14AxVoiceManagerFPvUl
 /* 80047714 00042614  7F DC F3 78 */	mr r28, r30
 /* 80047718 00042618  48 00 69 9D */	bl GetInstance__Q44nw4r3snd6detail12VoiceManagerFv
-/* 8004771C 0004261C  48 00 6A 95 */	bl func_8004E1B0
+/* 8004771C 0004261C  48 00 6A 95 */	bl GetRequiredMemSize__Q44nw4r3snd6detail12VoiceManagerFv
 /* 80047720 00042620  7F DE 1A 14 */	add r30, r30, r3
 /* 80047724 00042624  48 00 69 91 */	bl GetInstance__Q44nw4r3snd6detail12VoiceManagerFv
-/* 80047728 00042628  48 00 6A 89 */	bl func_8004E1B0
+/* 80047728 00042628  48 00 6A 89 */	bl GetRequiredMemSize__Q44nw4r3snd6detail12VoiceManagerFv
 /* 8004772C 0004262C  7C 7F 1B 78 */	mr r31, r3
 /* 80047730 00042630  48 00 69 85 */	bl GetInstance__Q44nw4r3snd6detail12VoiceManagerFv
 /* 80047734 00042634  7F 84 E3 78 */	mr r4, r28
 /* 80047738 00042638  7F E5 FB 78 */	mr r5, r31
-/* 8004773C 0004263C  48 00 6A 99 */	bl func_8004E1D4
+/* 8004773C 0004263C  48 00 6A 99 */	bl Setup__Q44nw4r3snd6detail12VoiceManagerFPvUl
 /* 80047740 00042640  4B FE FD 29 */	bl GetInstance__Q44nw4r3snd6detail14ChannelManagerFv
 /* 80047744 00042644  4B FE FE 01 */	bl GetRequiredMemSize__Q44nw4r3snd6detail14ChannelManagerFv
 /* 80047748 00042648  4B FE FD 21 */	bl GetInstance__Q44nw4r3snd6detail14ChannelManagerFv
@@ -189,7 +189,7 @@ ShutdownSoundSystem__Q34nw4r3snd11SoundSystemFv:
 /* 800477E4 000426E4  4B FE FC 85 */	bl GetInstance__Q44nw4r3snd6detail14ChannelManagerFv
 /* 800477E8 000426E8  4B FE FE 19 */	bl Shutdown__Q44nw4r3snd6detail14ChannelManagerFv
 /* 800477EC 000426EC  48 00 68 C9 */	bl GetInstance__Q44nw4r3snd6detail12VoiceManagerFv
-/* 800477F0 000426F0  48 00 6A 89 */	bl func_8004E278
+/* 800477F0 000426F0  48 00 6A 89 */	bl Shutdown__Q44nw4r3snd6detail12VoiceManagerFv
 /* 800477F4 000426F4  4B FE D7 55 */	bl GetInstance__Q44nw4r3snd6detail14AxVoiceManagerFv
 /* 800477F8 000426F8  4B FE D9 45 */	bl Shutdown__Q44nw4r3snd6detail14AxVoiceManagerFv
 /* 800477FC 000426FC  4B FE 9A ED */	bl GetInstance__Q44nw4r3snd6detail9AxManagerFv
