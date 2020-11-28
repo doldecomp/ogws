@@ -112,6 +112,7 @@ NW4R_O_FILES := \
 	build/asm/nw4r/snd/snd_SoundThread.o \
 	build/asm/nw4r/snd/snd_StrmChannel.o \
 	build/asm/nw4r/snd/snd_StrmFile.o \
+	build/asm/nw4r/snd/snd_StrmPlayer.o \
 
 
 GROUP_1_O_FILES := \
