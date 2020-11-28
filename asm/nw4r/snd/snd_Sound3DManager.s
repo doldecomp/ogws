@@ -34,7 +34,7 @@ func_8004130C:
 /* 8004131C 0003C21C  38 81 00 08 */	addi r4, r1, 8
 /* 80041320 0003C220  93 E1 00 2C */	stw r31, 0x2c(r1)
 /* 80041324 0003C224  3B E0 00 00 */	li r31, 0
-/* 80041328 0003C228  48 00 0B 01 */	bl func_80041E28
+/* 80041328 0003C228  48 00 0B 01 */	bl ReadSoundArchivePlayerInfo__Q34nw4r3snd12SoundArchiveCFPQ44nw4r3snd12SoundArchive22SoundArchivePlayerInfo
 /* 8004132C 0003C22C  2C 03 00 00 */	cmpwi r3, 0
 /* 80041330 0003C230  41 82 00 18 */	beq lbl_80041348
 /* 80041334 0003C234  80 81 00 08 */	lwz r4, 8(r1)
