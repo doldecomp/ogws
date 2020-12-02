@@ -80,7 +80,7 @@ NW4R_O_FILES := \
 	build/nw4r/snd/snd_FxChorus.o \
 	build/nw4r/snd/snd_FxDelay.o \
 	build/nw4r/snd/snd_FxReverbHi.o \
-	build/asm/nw4r/snd/snd_8003AAF8.o \
+	build/asm/nw4r/snd/snd_FxReverbHiDpl2.o \
 	build/nw4r/snd/snd_InstancePool.o \
 	build/nw4r/snd/snd_Lfo.o \
 	build/asm/nw4r/snd/snd_MemorySoundArchive.o \
@@ -95,6 +95,41 @@ NW4R_O_FILES := \
 	build/asm/nw4r/snd/snd_SeqPlayer.o \
 	build/nw4r/snd/snd_SeqSound.o \
 	build/nw4r/snd/snd_SeqSoundHandle.o \
+	build/asm/nw4r/snd/snd_SeqTrack.o \
+	build/asm/nw4r/snd/snd_80040F04.o \
+	build/asm/nw4r/snd/snd_Sound3DActor.o \
+	build/asm/nw4r/snd/snd_Sound3DListener.o \
+	build/asm/nw4r/snd/snd_Sound3DManager.o \
+	build/asm/nw4r/snd/snd_SoundArchive.o \
+	build/asm/nw4r/snd/snd_SoundArchiveFile.o \
+	build/asm/nw4r/snd/snd_SoundArchiveLoader.o \
+	build/asm/nw4r/snd/snd_SoundArchivePlayer.o \
+	build/asm/nw4r/snd/snd_SoundHandle.o \
+	build/asm/nw4r/snd/snd_SoundHeap.o \
+	build/asm/nw4r/snd/snd_SoundPlayer.o \
+	build/asm/nw4r/snd/snd_SoundStartable.o \
+	build/asm/nw4r/snd/snd_SoundSystem.o \
+	build/asm/nw4r/snd/snd_SoundThread.o \
+	build/asm/nw4r/snd/snd_StrmChannel.o \
+	build/asm/nw4r/snd/snd_StrmFile.o \
+	build/asm/nw4r/snd/snd_StrmPlayer.o \
+	build/asm/nw4r/snd/snd_StrmSound.o \
+	build/asm/nw4r/snd/snd_StrmSoundHandle.o \
+	build/asm/nw4r/snd/snd_Task.o \
+	build/asm/nw4r/snd/snd_TaskManager.o \
+	build/asm/nw4r/snd/snd_TaskThread.o \
+	build/asm/nw4r/snd/snd_Voice.o \
+	build/asm/nw4r/snd/snd_VoiceManager.o \
+	build/asm/nw4r/snd/snd_Util.o \
+	build/asm/nw4r/snd/snd_WaveFile.o \
+	build/asm/nw4r/snd/snd_WaveSound.o \
+	build/asm/nw4r/snd/snd_WaveSoundHandle.o \
+	build/asm/nw4r/snd/snd_WsdFile.o \
+	build/asm/nw4r/snd/snd_WsdPlayer.o \
+	build/asm/nw4r/snd/snd_adpcm.o \
+	build/asm/nw4r/g3d/g3d_rescommon.o \
+	build/asm/nw4r/g3d/g3d_resdict.o \
+
 
 GROUP_1_O_FILES := \
 	build/asm/text.o \

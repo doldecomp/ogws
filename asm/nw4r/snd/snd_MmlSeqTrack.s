@@ -20,7 +20,7 @@ __ct__Q44nw4r3snd6detail11MmlSeqTrackFv:
 /* 8003C7AC 000376AC  90 01 00 14 */	stw r0, 0x14(r1)
 /* 8003C7B0 000376B0  93 E1 00 0C */	stw r31, 0xc(r1)
 /* 8003C7B4 000376B4  7C 7F 1B 78 */	mr r31, r3
-/* 8003C7B8 000376B8  48 00 35 3D */	bl func_8003FCF4
+/* 8003C7B8 000376B8  48 00 35 3D */	bl __ct__Q44nw4r3snd6detail8SeqTrackFv
 /* 8003C7BC 000376BC  3C A0 80 39 */	lis r5, __vt__Q44nw4r3snd6detail11MmlSeqTrack@ha
 /* 8003C7C0 000376C0  38 80 00 01 */	li r4, 1
 /* 8003C7C4 000376C4  38 00 00 00 */	li r0, 0
@@ -57,7 +57,7 @@ __dt__Q44nw4r3snd6detail11MmlSeqTrackFv:
 /* 8003C828 00037728  7C 7E 1B 78 */	mr r30, r3
 /* 8003C82C 0003772C  41 82 00 1C */	beq lbl_8003C848
 /* 8003C830 00037730  38 80 00 00 */	li r4, 0
-/* 8003C834 00037734  48 00 35 21 */	bl func_8003FD54
+/* 8003C834 00037734  48 00 35 21 */	bl __dt__Q44nw4r3snd6detail8SeqTrackFv
 /* 8003C838 00037738  2C 1F 00 00 */	cmpwi r31, 0
 /* 8003C83C 0003773C  40 81 00 0C */	ble lbl_8003C848
 /* 8003C840 00037740  7F C3 F3 78 */	mr r3, r30

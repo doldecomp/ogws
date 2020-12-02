@@ -8,12 +8,12 @@
 #lbl_803960F0:
 #	.long 0
 #	.long -1
-#	.long func_80040B90
+#	.long SetVolume__Q44nw4r3snd6detail8SeqTrackFf
 #.global lbl_803960FC
 #lbl_803960FC:
 #	.long 0
 #	.long -1
-#	.long func_80040B98
+#	.long SetPitch__Q44nw4r3snd6detail8SeqTrackFf
 #.global lbl_80396108
 #lbl_80396108:
 #	.incbin "baserom.dol", 0x392208, 0x68
