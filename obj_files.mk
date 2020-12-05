@@ -127,7 +127,7 @@ NW4R_O_FILES := \
 	build/asm/nw4r/snd/snd_WsdFile.o \
 	build/asm/nw4r/snd/snd_WsdPlayer.o \
 	build/asm/nw4r/snd/snd_adpcm.o \
-	build/asm/nw4r/g3d/g3d_rescommon.o \
+	build/nw4r/g3d/g3d_rescommon.o \
 	build/asm/nw4r/g3d/g3d_resdict.o \
 
 
