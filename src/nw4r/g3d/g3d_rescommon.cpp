@@ -17,18 +17,18 @@ namespace nw4r
 
         namespace detail
         {
-			void ResWriteBPCmd(u8 *res, u32 arg)
-			{
-				ResWrite_u8(res, FIFO_ACCESS_BP);
-				ResWrite_u32(res + 1, arg);
-			}
-			
-			void ResWriteBPCmd(u8 *res, u32 arg, u32 writeMask)
-			{
-				arg &= writeMask;
-				
-				ResWrite_u8(res, FIFO_ACCESS_BP);
-				ResWrite_u32(res + 1, arg | (ResRead_u32(res + 1) & ~writeMask));
+            void ResWriteBPCmd(u8 *res, u32 arg)
+            {
+                ResWrite_u8(res, FIFO_ACCESS_BP);
+                ResWrite_u32(res + 1, arg);
+            }
+
+            void ResWriteBPCmd(u8 *res, u32 arg, u32 writeMask)
+            {
+                arg &= writeMask;
+                
+                ResWrite_u8(res, FIFO_ACCESS_BP);
+                ResWrite_u32(res + 1, arg | (ResRead_u32(res + 1) & ~writeMask));
             }
 
             void ResWriteCPCmd(u8 *res, u8 arg1, u32 arg2)
