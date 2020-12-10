@@ -21,6 +21,18 @@ namespace nw4r
 			inline T & ref() const { return *mPtr; }
 			inline T * ptr() const { return mPtr; }
 			inline bool IsValid() const { return mPtr; }
+
+            template <typename TPtr>
+            inline const TPtr * ofs_to_ptr_raw(s32 ofs) const
+			{
+				return (const TPtr *)((u8 *)mPtr + ofs);
+			}
+			
+			template <typename TPtr>
+            inline const TPtr * ofs_to_ptr(s32 ofs) const
+			{
+				return (const TPtr *)((u8 *)mPtr + ofs);
+			}
 		};
 		
         struct ResNameData
@@ -29,11 +41,12 @@ namespace nw4r
             char mName[];
         };
 
-        class ResName
+        struct ResName
         {
 			ResCommon<const ResNameData> mRes;
 			
-        public:
+            inline ResName(const void *vptr) : mRes(vptr) {}
+
 			inline u32 GetLength() const
 			{
 				return mRes.ref().mLength;
