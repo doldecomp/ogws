@@ -18,6 +18,8 @@ int strncmp(const char *, const char *, size_t);
 char * strchr(const char *, int);
 char * strstr(const char *, const char *);
 
+size_t strlen(const char *);
+
 #ifdef __cplusplus
 }
 #endif
