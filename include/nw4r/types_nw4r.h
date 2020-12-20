@@ -39,7 +39,7 @@ namespace nw4r
 		struct MTX34;
 	}
 	
-		namespace snd
+	namespace snd
 	{
 		struct FxBase;
 		struct SoundPlayer;
@@ -50,6 +50,7 @@ namespace nw4r
 		{
 			struct BasicSound;
 			struct SeqSound;
+			struct SeqPlayer;
 			struct MmlParser;
 			struct MmlSeqTrack;
 			struct SeqTrack;

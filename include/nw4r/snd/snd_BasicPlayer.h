@@ -13,9 +13,9 @@ namespace nw4r
 			struct BasicPlayer
 			{
 				inline virtual ~BasicPlayer() {} // at 0x8
-				virtual UNKWORD Start() = 0; // at 0xc
-				virtual UNKTYPE Stop() = 0; // at 0x10
-				virtual UNKTYPE Pause(bool) = 0; // at 0x14
+				virtual bool Start() = 0; // at 0xc
+				virtual void Stop() = 0; // at 0x10
+				virtual void Pause(bool) = 0; // at 0x14
 				virtual bool IsActive() const = 0; // at 0x18
 				virtual bool IsStarted() const = 0; // at 0x1c
 				virtual bool IsPause() const = 0; // at 0x20
@@ -37,14 +37,14 @@ namespace nw4r
 				float FLOAT_0x14;
 				float mLpfFreq; // at 0x18
 				char UNK_0x1C[0x4];
-				UNKWORD WORD_0x20;
+				int mOutputLine; // at 0x20
 				float FLOAT_0x24;
 				float FLOAT_0x28;
 				float ARR_0x2C[3];
 				float mRemoteOutputVolumes[4]; // at 0x38
 				float ARR_0x48[4];
 				float ARR_0x58[4];
-				char mRemoteFilter; // at 0x68
+				u8 mRemoteFilter; // at 0x68
 				PanMode mPanMode; // at 0x6c
 				PanCurve mPanCurve; // at 0x70
 			};

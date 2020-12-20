@@ -1,5 +1,6 @@
 #ifndef NW4R_SND_NOTE_ON_H
 #define NW4R_SND_NOTE_ON_H
+#include "types_nw4r.h"
 #include "snd_Channel.h"
 
 namespace nw4r
@@ -23,7 +24,8 @@ namespace nw4r
 			
 			struct NoteOnCallback
 			{
-				
+				virtual ~NoteOnCallback(); // at 0x8
+				virtual bool NoteOn(SeqPlayer *, int, const NoteOnInfo &) = 0; // at 0xc
 			};
 		}
 	}

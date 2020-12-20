@@ -1,5 +1,46 @@
 .include "macros.inc"
 
+.section .rodata, "a"  # 0x80375780 - 0x80393A80
+
+.balign 8
+
+lbl_80375BB8:
+	.long 0
+	.long 0
+	.long 0
+	.long 0
+	.long 0
+	.long 0
+	.long 0
+	.long ChannelCallbackFunc__Q44nw4r3snd6detail8SeqTrackFPQ44nw4r3snd6detail7ChannelQ54nw4r3snd6detail7Channel21ChannelCallbackStatusUl
+	.long 0
+
+.section .data, "wa"  # 0x80393A80 - 0x803CAF00
+
+.balign 0x8
+
+.global __vt__Q44nw4r3snd6detail8SeqTrack
+__vt__Q44nw4r3snd6detail8SeqTrack:
+	.long 0
+	.long 0
+	.long __dt__Q44nw4r3snd6detail8SeqTrackFv
+	.long 0
+
+.section .sdata2, "a"  # 0x804BFA20 - 0x804C69E0
+
+.balign 0x8
+
+lbl_804C0080: .single 0e1
+lbl_804C0084: .single 0e0
+lbl_804C0088: .single 0e127
+lbl_804C008C: .single 0e0.0078125
+lbl_804C0090: .single 0e63
+lbl_804C0094: .single 0e-1
+lbl_804C0098: .single 0e2
+lbl_804C009C: .single 0e0.015625
+lbl_804C00A0: .double 0e4.503599627370496E15
+lbl_804C00A8: .double 0e4.503601774854144E15
+
 .section .text, "ax"  # 0x800076E0 - 0x80355080 
 
 .global SetPlayerTrackNo__Q44nw4r3snd6detail8SeqTrackFi
@@ -11,9 +52,9 @@ SetPlayerTrackNo__Q44nw4r3snd6detail8SeqTrackFi:
 __ct__Q44nw4r3snd6detail8SeqTrackFv:
 /* 8003FCF4 0003ABF4  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8003FCF8 0003ABF8  7C 08 02 A6 */	mflr r0
-/* 8003FCFC 0003ABFC  3C 80 80 39 */	lis r4, lbl_803961F8@ha
+/* 8003FCFC 0003ABFC  3C 80 80 39 */	lis r4, __vt__Q44nw4r3snd6detail8SeqTrack@ha
 /* 8003FD00 0003AC00  90 01 00 14 */	stw r0, 0x14(r1)
-/* 8003FD04 0003AC04  38 84 61 F8 */	addi r4, r4, lbl_803961F8@l
+/* 8003FD04 0003AC04  38 84 61 F8 */	addi r4, r4, __vt__Q44nw4r3snd6detail8SeqTrack@l
 /* 8003FD08 0003AC08  93 E1 00 0C */	stw r31, 0xc(r1)
 /* 8003FD0C 0003AC0C  3B E0 00 00 */	li r31, 0
 /* 8003FD10 0003AC10  93 C1 00 08 */	stw r30, 8(r1)
@@ -46,8 +87,8 @@ __dt__Q44nw4r3snd6detail8SeqTrackFv:
 /* 8003FD70 0003AC70  93 A1 00 14 */	stw r29, 0x14(r1)
 /* 8003FD74 0003AC74  7C 7D 1B 78 */	mr r29, r3
 /* 8003FD78 0003AC78  41 82 00 C0 */	beq lbl_8003FE38
-/* 8003FD7C 0003AC7C  3C 80 80 39 */	lis r4, lbl_803961F8@ha
-/* 8003FD80 0003AC80  38 84 61 F8 */	addi r4, r4, lbl_803961F8@l
+/* 8003FD7C 0003AC7C  3C 80 80 39 */	lis r4, __vt__Q44nw4r3snd6detail8SeqTrack@ha
+/* 8003FD80 0003AC80  38 84 61 F8 */	addi r4, r4, __vt__Q44nw4r3snd6detail8SeqTrack@l
 /* 8003FD84 0003AC84  90 83 00 00 */	stw r4, 0(r3)
 /* 8003FD88 0003AC88  48 00 7B 51 */	bl GetInstance__Q44nw4r3snd6detail11SoundThreadFv
 /* 8003FD8C 0003AC8C  38 63 03 54 */	addi r3, r3, 0x354
@@ -1114,11 +1155,11 @@ NoteOn__Q44nw4r3snd6detail8SeqTrackFiilb:
 lbl_80040C44:
 /* 80040C44 0003BB44  2C 1F 00 00 */	cmpwi r31, 0
 /* 80040C48 0003BB48  40 82 00 F4 */	bne lbl_80040D3C
-/* 80040C4C 0003BB4C  3C 60 80 37 */	lis r3, lbl_80370004@ha
-/* 80040C50 0003BB50  85 63 5B B8 */	lwzu r11, 0x5bb8(r3)
+/* 80040C4C 0003BB4C  3C 60 80 37 */	lis r3, lbl_80375BB8@ha
+/* 80040C50 0003BB50  85 63 5B B8 */	lwzu r11, lbl_80375BB8@l(r3)
 /* 80040C54 0003BB54  2C 1A 00 00 */	cmpwi r26, 0
 /* 80040C58 0003BB58  38 00 FF FF */	li r0, -1
-/* 80040C5C 0003BB5C  81 43 00 04 */	lwz r10, lbl_80370004@l(r3)
+/* 80040C5C 0003BB5C  81 43 00 04 */	lwz r10, 0x4(r3)
 /* 80040C60 0003BB60  81 23 00 08 */	lwz r9, 8(r3)
 /* 80040C64 0003BB64  81 03 00 0C */	lwz r8, 0xc(r3)
 /* 80040C68 0003BB68  80 E3 00 10 */	lwz r7, 0x10(r3)

@@ -46,6 +46,8 @@ namespace nw4r
 				UNKTYPE SetRemoteOutVolume(int, float);
 				UNKTYPE SetRemoteSend(int, float);
 				UNKTYPE SetRemoteFxSend(int, float);
+				
+				UNKTYPE Pause(bool);
 			};
 		}
 	}

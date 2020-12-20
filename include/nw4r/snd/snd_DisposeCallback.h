@@ -14,8 +14,8 @@ namespace nw4r
 				ut::LinkListNode mNode; // at 0x0
 				
 				inline virtual ~DisposeCallback() {} // at 0x8
-				virtual UNKTYPE InvalidateData(const void *, const void *) = 0; // at 0xc
-				virtual UNKTYPE InvalidateWaveData(const void *, const void *) = 0; // at 0x10
+				virtual void InvalidateData(const void *, const void *) = 0; // at 0xc
+				virtual void InvalidateWaveData(const void *, const void *) = 0; // at 0x10
 			};
 		}
 	}

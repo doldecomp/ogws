@@ -92,7 +92,7 @@ NW4R_O_FILES := \
 	build/nw4r/snd/snd_RemoteSpeaker.o \
 	build/nw4r/snd/snd_RemoteSpeakerManager.o \
 	build/nw4r/snd/snd_SeqFile.o \
-	build/asm/nw4r/snd/snd_SeqPlayer.o \
+	build/nw4r/snd/snd_SeqPlayer.o \
 	build/nw4r/snd/snd_SeqSound.o \
 	build/nw4r/snd/snd_SeqSoundHandle.o \
 	build/asm/nw4r/snd/snd_SeqTrack.o \

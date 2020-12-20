@@ -23,7 +23,7 @@ namespace nw4r
 				mRemoteFilter = 0;
 				mPanMode = PAN_MODE_0;
 				mPanCurve = PAN_CURVE_0;
-				WORD_0x20 = 1;
+				mOutputLine = 1;
 				
 				FLOAT_0x28 = 0.0f;
 				FLOAT_0x24 = 1.0f;
