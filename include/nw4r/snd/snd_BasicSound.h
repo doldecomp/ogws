@@ -33,13 +33,22 @@ namespace nw4r
 				
 				struct AmbientArgUpdateCallback
 				{
-					virtual UNKTYPE detail_Update(void *, const BasicSound *) = 0;
+					virtual void detail_Update(void *, const BasicSound *) = 0;
 				};
 				
 				struct AmbientArgAllocaterCallback
 				{
 					virtual UNKTYPE detail_AllocAmbientArg(u32) = 0;
 					virtual UNKTYPE detail_FreeAmbientArg(void *, const BasicSound *) = 0;
+				};
+				
+				struct AmbientArgInfo
+				{
+					AmbientParamUpdateCallback * mParamUpdateCallback; // at 0x0
+					AmbientArgUpdateCallback * mArgUpdateCallback; // at 0x4
+					AmbientArgAllocaterCallback * mArgAllocaterCallback; // at 0x8
+					void * PTR_0xC;
+					UNKWORD WORD_0x10;
 				};
 				
 				static ut::detail::RuntimeTypeInfo typeInfo;

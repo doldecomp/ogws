@@ -1110,10 +1110,8 @@ lbl_8004495C:
 /* 8004499C 0003F89C  38 21 12 50 */	addi r1, r1, 0x1250
 /* 800449A0 0003F8A0  4E 80 00 20 */	blr 
 
-# I'm pretty sure this is GetSoundArchive, but i'm not 100% sure
-# GetSoundArchive__Q34nw4r3snd18SoundArchivePlayerCFv
-.global func_800449A4
-func_800449A4:
+.global GetSoundArchive__Q34nw4r3snd18SoundArchivePlayerCFv
+GetSoundArchive__Q34nw4r3snd18SoundArchivePlayerCFv:
 /* 800449A4 0003F8A4  80 63 00 10 */	lwz r3, 0x10(r3)
 /* 800449A8 0003F8A8  4E 80 00 20 */	blr 
 

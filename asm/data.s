@@ -4,18 +4,19 @@
 
 .balign 0x8
 
-#.global lbl_803961F8
-#lbl_803961F8:
-#	.incbin "baserom.dol", 0x3922F8, 0x10
-.global lbl_80396208
-lbl_80396208:
-	.incbin "baserom.dol", 0x392308, 0x28
-.global lbl_80396230
-lbl_80396230:
+.global __vt__Q34nw4r3snd14Sound3DManager
+__vt__Q34nw4r3snd14Sound3DManager:
 	.incbin "baserom.dol", 0x392330, 0x28
-.global lbl_80396258
-lbl_80396258:
-	.incbin "baserom.dol", 0x392358, 0x18
+.global __vt__Q44nw4r3snd6detail10SoundActor
+__vt__Q44nw4r3snd6detail10SoundActor:
+	.long 0
+	.long 0
+	.long __dt__Q44nw4r3snd6detail10SoundActorFv
+	.long func_80041CF0
+	.long detail_ConvertLabelStringToSoundId__Q44nw4r3snd6detail10SoundActorFPCc
+
+.balign 0x8
+
 .global lbl_80396270
 lbl_80396270:
 	.incbin "baserom.dol", 0x392370, 0x20

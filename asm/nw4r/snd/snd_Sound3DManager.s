@@ -4,9 +4,9 @@
 
 .global __ct__Q34nw4r3snd14Sound3DManagerFv
 __ct__Q34nw4r3snd14Sound3DManagerFv:
-/* 800412BC 0003C1BC  3C C0 80 39 */	lis r6, lbl_80396230@ha
+/* 800412BC 0003C1BC  3C C0 80 39 */	lis r6, __vt__Q34nw4r3snd14Sound3DManager@ha
 /* 800412C0 0003C1C0  C0 82 86 98 */	lfs f4, lbl_804C00B8-_SDA2_BASE_(r2)
-/* 800412C4 0003C1C4  38 C6 62 30 */	addi r6, r6, lbl_80396230@l
+/* 800412C4 0003C1C4  38 C6 62 30 */	addi r6, r6, __vt__Q34nw4r3snd14Sound3DManager@l
 /* 800412C8 0003C1C8  C0 62 86 9C */	lfs f3, lbl_804C00BC-_SDA2_BASE_(r2)
 /* 800412CC 0003C1CC  C0 42 86 A0 */	lfs f2, lbl_804C00C0-_SDA2_BASE_(r2)
 /* 800412D0 0003C1D0  38 A6 00 0C */	addi r5, r6, 0xc
@@ -722,8 +722,8 @@ detail_FreeAmbientArg__Q34nw4r3snd14Sound3DManagerFPvPCQ44nw4r3snd6detail10Basic
 /* 80041CB4 0003CBB4  4B FF 95 4C */	b FreeImpl__Q44nw4r3snd6detail8PoolImplFPv
 /* 80041CB8 0003CBB8  4E 80 00 20 */	blr 
 
-.global func_80041CBC
-func_80041CBC:
+.global __ct__Q44nw4r3snd14Sound3DManager17Sound3DActorParamFv
+__ct__Q44nw4r3snd14Sound3DManager17Sound3DActorParamFv:
 /* 80041CBC 0003CBBC  38 C0 FF FF */	li r6, -1
 /* 80041CC0 0003CBC0  38 A0 00 00 */	li r5, 0
 /* 80041CC4 0003CBC4  38 80 00 01 */	li r4, 1

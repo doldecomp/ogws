@@ -15,7 +15,8 @@ namespace nw4r
 			
 			enum PanCurve
 			{
-				PAN_CURVE_0
+				PAN_CURVE_0,
+				PAN_CURVE_3 = 3
 			};
 		}
 	}

@@ -40,7 +40,7 @@ namespace nw4r
 						
 						if (priority < curPriority) break;
 						
-						iter.mNode = iter.mNode->mNext;
+						iter.mIterator.mNode = iter.mIterator.mNode->mNext;
 					}
 					
 					mPriorityList.Insert(iter, pInstance);

@@ -126,13 +126,15 @@ namespace nw4r
 				return (T *)((char *)node - I);
 			}
 			
-			struct Iterator : detail::LinkListImpl::Iterator
+			struct Iterator
 			{
-				inline Iterator(detail::LinkListImpl::Iterator iter) : detail::LinkListImpl::Iterator(iter) {}
+				detail::LinkListImpl::Iterator mIterator; // at 0x0
+				
+				inline Iterator(detail::LinkListImpl::Iterator iter) : mIterator(iter) {}
 				
 				inline bool operator ==(Iterator other)
 				{
-					return detail::operator==(*this, other);
+					return detail::operator==(mIterator, other.mIterator);
 				}
 				
 				inline bool operator !=(Iterator other)
@@ -142,13 +144,13 @@ namespace nw4r
 				
 				inline Iterator & operator ++()
 				{
-					mNode = mNode->mNext;
+					mIterator.operator++();
 					return *this;
 				}
 				
 				inline Iterator & operator --()
 				{
-					mNode = mNode->mPrev;
+					mIterator.mNode = mIterator.mNode->mPrev;
 					return *this;
 				}
 				
@@ -161,12 +163,12 @@ namespace nw4r
 				
 				inline T * operator->() const
 				{
-					return GetPointerFromNode(mNode);
+					return GetPointerFromNode(mIterator.mNode);
 				}
 				
 				inline T & operator*() const
 				{
-					return *GetPointerFromNode(mNode);
+					return *GetPointerFromNode(mIterator.mNode);
 				}
 			};
 			
@@ -182,7 +184,7 @@ namespace nw4r
 			
 			inline UNKTYPE Insert(Iterator iter, T * ptr)
 			{
-				detail::LinkListImpl::Insert(iter, GetNodeFromPointer(ptr));
+				detail::LinkListImpl::Insert(iter.mIterator, GetNodeFromPointer(ptr));
 			}
 			
 			inline UNKTYPE PushBack(T * ptr)
