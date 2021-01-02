@@ -25,8 +25,8 @@ __ct__Q34nw4r3snd14Sound3DManagerFv:
 /* 80041304 0003C204  D0 03 00 24 */	stfs f0, 0x24(r3)
 /* 80041308 0003C208  4E 80 00 20 */	blr 
 
-.global func_8004130C
-func_8004130C:
+.global GetRequiredMemSize__Q34nw4r3snd14Sound3DManagerFPCQ34nw4r3snd12SoundArchive
+GetRequiredMemSize__Q34nw4r3snd14Sound3DManagerFPCQ34nw4r3snd12SoundArchive:
 /* 8004130C 0003C20C  94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 80041310 0003C210  7C 08 02 A6 */	mflr r0
 /* 80041314 0003C214  7C 83 23 78 */	mr r3, r4
@@ -50,8 +50,8 @@ lbl_80041348:
 /* 80041358 0003C258  38 21 00 30 */	addi r1, r1, 0x30
 /* 8004135C 0003C25C  4E 80 00 20 */	blr 
 
-.global func_80041360
-func_80041360:
+.global Setup__Q34nw4r3snd14Sound3DManagerFPCQ34nw4r3snd12SoundArchivePvUl
+Setup__Q34nw4r3snd14Sound3DManagerFPCQ34nw4r3snd12SoundArchivePvUl:
 /* 80041360 0003C260  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80041364 0003C264  7C 08 02 A6 */	mflr r0
 /* 80041368 0003C268  7C A4 2B 78 */	mr r4, r5
