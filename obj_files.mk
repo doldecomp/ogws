@@ -129,6 +129,8 @@ NW4R_O_FILES := \
 	build/nw4r/g3d/g3d_rescommon.o \
 	build/nw4r/g3d/g3d_resdict.o \
 	build/asm/nw4r/g3d/g3d_resfile.o \
+	build/asm/nw4r/g3d/g3d_resmdl.o \
+	build/asm/nw4r/g3d/g3d_resshp.o \
 
 
 GROUP_1_O_FILES := \
