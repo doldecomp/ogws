@@ -137,6 +137,8 @@ NW4R_O_FILES := \
 	build/asm/nw4r/g3d/g3d_restex.o \
 	build/asm/nw4r/g3d/g3d_resnode.o \
 	build/asm/nw4r/g3d/g3d_resanm.o \
+	build/asm/nw4r/g3d/g3d_resanmvis.o \
+	build/asm/nw4r/g3d/g3d_resanmclr.o \
 
 
 GROUP_1_O_FILES := \
