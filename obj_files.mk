@@ -144,6 +144,7 @@ NW4R_O_FILES := \
 	build/asm/nw4r/g3d/g3d_resanmchr.o \
 	build/asm/nw4r/g3d/g3d_reslightset.o \
 	build/asm/nw4r/g3d/g3d_anmvis.o \
+	build/asm/nw4r/g3d/g3d_anmclr.o \
 
 
 GROUP_1_O_FILES := \
