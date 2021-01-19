@@ -99,6 +99,7 @@ NW4R_O_FILES := \
 	build/nw4r/snd/snd_Sound3DActor.o \
 	build/asm/nw4r/snd/snd_Sound3DListener.o \
 	build/asm/nw4r/snd/snd_Sound3DManager.o \
+	build/asm/nw4r/snd/snd_SoundActor.o \
 	build/asm/nw4r/snd/snd_SoundArchive.o \
 	build/asm/nw4r/snd/snd_SoundArchiveFile.o \
 	build/asm/nw4r/snd/snd_SoundArchiveLoader.o \
