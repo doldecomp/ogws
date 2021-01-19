@@ -2,8 +2,8 @@
 
 .section .text, "ax"
 
-.global func_80041CF0
-func_80041CF0:
+.global detail_SetupSound__Q44nw4r3snd6detail10SoundActorFPQ34nw4r3snd11SoundHandleUlPQ54nw4r3snd6detail10BasicSound14AmbientArgInfoPQ44nw4r3snd6detail19ExternalSoundPlayerbPCQ44nw4r3snd14SoundStartable9StartInfo
+detail_SetupSound__Q44nw4r3snd6detail10SoundActorFPQ34nw4r3snd11SoundHandleUlPQ54nw4r3snd6detail10BasicSound14AmbientArgInfoPQ44nw4r3snd6detail19ExternalSoundPlayerbPCQ44nw4r3snd14SoundStartable9StartInfo:
 /* 80041CF0 0003CBF0  7C 66 1B 78 */	mr r6, r3
 /* 80041CF4 0003CBF4  80 63 00 04 */	lwz r3, 4(r3)
 /* 80041CF8 0003CBF8  38 E6 00 08 */	addi r7, r6, 8

@@ -12,7 +12,7 @@ __vt__Q44nw4r3snd6detail10SoundActor:
 	.long 0
 	.long 0
 	.long __dt__Q44nw4r3snd6detail10SoundActorFv
-	.long func_80041CF0
+	.long detail_SetupSound__Q44nw4r3snd6detail10SoundActorFPQ34nw4r3snd11SoundHandleUlPQ54nw4r3snd6detail10BasicSound14AmbientArgInfoPQ44nw4r3snd6detail19ExternalSoundPlayerbPCQ44nw4r3snd14SoundStartable9StartInfo
 	.long detail_ConvertLabelStringToSoundId__Q44nw4r3snd6detail10SoundActorFPCc
 
 .balign 0x8
