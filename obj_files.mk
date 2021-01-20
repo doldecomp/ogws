@@ -99,6 +99,7 @@ NW4R_O_FILES := \
 	build/nw4r/snd/snd_Sound3DActor.o \
 	build/asm/nw4r/snd/snd_Sound3DListener.o \
 	build/asm/nw4r/snd/snd_Sound3DManager.o \
+	build/asm/nw4r/snd/snd_SoundActor.o \
 	build/asm/nw4r/snd/snd_SoundArchive.o \
 	build/asm/nw4r/snd/snd_SoundArchiveFile.o \
 	build/asm/nw4r/snd/snd_SoundArchiveLoader.o \
@@ -128,6 +129,25 @@ NW4R_O_FILES := \
 	build/asm/nw4r/snd/snd_adpcm.o \
 	build/nw4r/g3d/g3d_rescommon.o \
 	build/nw4r/g3d/g3d_resdict.o \
+	build/asm/nw4r/g3d/g3d_resfile.o \
+	build/asm/nw4r/g3d/g3d_resmdl.o \
+	build/asm/nw4r/g3d/g3d_resshp.o \
+	build/asm/nw4r/g3d/g3d_restev.o \
+	build/asm/nw4r/g3d/g3d_resmat.o \
+	build/asm/nw4r/g3d/g3d_resvtx.o \
+	build/asm/nw4r/g3d/g3d_restex.o \
+	build/asm/nw4r/g3d/g3d_resnode.o \
+	build/asm/nw4r/g3d/g3d_resanm.o \
+	build/asm/nw4r/g3d/g3d_resanmvis.o \
+	build/asm/nw4r/g3d/g3d_resanmclr.o \
+	build/asm/nw4r/g3d/g3d_resanmtexpat.o \
+	build/asm/nw4r/g3d/g3d_resanmtexsrt.o \
+	build/asm/nw4r/g3d/g3d_resanmchr.o \
+	build/asm/nw4r/g3d/g3d_reslightset.o \
+	build/asm/nw4r/g3d/g3d_anmvis.o \
+	build/asm/nw4r/g3d/g3d_anmclr.o \
+	build/asm/nw4r/g3d/g3d_anmtexpat.o \
+	build/asm/nw4r/g3d/g3d_anmtexsrt.o \
 
 
 GROUP_1_O_FILES := \
