@@ -151,6 +151,7 @@ NW4R_O_FILES := \
 	build/asm/nw4r/g3d/g3d_anmchr.o \
 	build/asm/nw4r/g3d/g3d_anmshp.o \
 	build/asm/nw4r/g3d/g3d_anmscn.o \
+	build/asm/nw4r/g3d/g3d_obj.o \
 
 
 GROUP_1_O_FILES := \
