@@ -48,6 +48,7 @@ namespace nw4r
 		struct SoundArchive;
 		struct SoundArchivePlayer;
 		struct Sound3DActor;
+		struct Sound3DListener;
 		struct Sound3DManager;
 		
 		namespace detail

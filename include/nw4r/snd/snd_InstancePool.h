@@ -40,7 +40,11 @@ namespace nw4r
 				
 				inline T * Alloc()
 				{
-					return new (AllocImpl()) T;
+					void * ptr = AllocImpl();
+					
+					if (!ptr) return NULL;
+					
+					return new (ptr) T;
 				}
 				
 				inline void Free(T * ptr)

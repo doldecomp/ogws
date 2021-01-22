@@ -76,6 +76,14 @@ namespace nw4r
 			
 			inline VEC3() {}
 			
+			inline VEC3(const VEC3 & other) : mCoords(other.mCoords) {}
+			
+			inline VEC3 & operator=(const VEC3 & other)
+			{
+				mCoords = other.mCoords;
+				return *this;
+			}
+			
 			inline VEC3(float x, float y, float z)
 			{
 				mCoords.x = x;
@@ -181,6 +189,11 @@ namespace nw4r
 		inline float FSqrt(float f)
 		{
 			return f * FrSqrt(f);
+		}
+		
+		inline float VEC3Len(const VEC3 * in)
+		{
+			return PSVECMag(*in);
 		}
 	}
 }
