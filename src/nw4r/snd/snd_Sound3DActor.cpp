@@ -53,7 +53,7 @@ namespace nw4r
 			
 			SoundArchive::Sound3DParam param; // at 0x8
 			
-			actorParam.mPosition = mPosition.mCoords;
+			actorParam.mPosition = mPosition;
 			actorParam.WORD_0x0 = WORD_0xB4;
 			
 			if (mArchivePlayer.GetSoundArchive()->detail_ReadSound3DParam(r29_5, &param))
@@ -90,7 +90,7 @@ namespace nw4r
 		{
 			Sound3DManager::Sound3DActorParam * pActorParam = static_cast<Sound3DManager::Sound3DActorParam *>(ptr);
 			
-			pActorParam->mPosition = mPosition.mCoords;
+			pActorParam->mPosition = mPosition;
 			pActorParam->WORD_0x0 = WORD_0xB4;
 		}
 	}

@@ -19,7 +19,7 @@ namespace nw4r
 			float FLOAT_0xC;
 			float FLOAT_0x10;
 			float FLOAT_0x14;
-			UNKWORD WORD_0x18;
+			int INT_0x18;
 		};
 		
 		namespace detail
@@ -28,7 +28,7 @@ namespace nw4r
 			{
 				struct AmbientParamUpdateCallback
 				{
-					virtual UNKTYPE detail_Update(SoundParam *, u32, BasicSound *, const void *, u32) = 0;
+					virtual void detail_Update(SoundParam *, u32, BasicSound *, const void *, u32) = 0;
 				};
 				
 				struct AmbientArgUpdateCallback
@@ -38,8 +38,8 @@ namespace nw4r
 				
 				struct AmbientArgAllocaterCallback
 				{
-					virtual UNKTYPE detail_AllocAmbientArg(u32) = 0;
-					virtual UNKTYPE detail_FreeAmbientArg(void *, const BasicSound *) = 0;
+					virtual void * detail_AllocAmbientArg(u32) = 0;
+					virtual void detail_FreeAmbientArg(void *, const BasicSound *) = 0;
 				};
 				
 				struct AmbientArgInfo
@@ -137,7 +137,7 @@ namespace nw4r
 				
 				inline int CalcCurrentPlayerPriority() const
 				{
-					return ut::Clamp<int>(0, 0x7F, mPlayerPriority + mParam.WORD_0x18);
+					return ut::Clamp<int>(0, 0x7F, mPlayerPriority + mParam.INT_0x18);
 				}
 			};
 		}

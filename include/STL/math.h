@@ -8,9 +8,13 @@ extern "C" {
 double sin(double);
 double cos(double);
 
+double atan2(double y, double x);
+
 double sqrt(double);
 
 double ceil(double);
+
+double pow(double base, double exp);
 
 #ifdef __cplusplus
 }

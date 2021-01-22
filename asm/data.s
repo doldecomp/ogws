@@ -4,9 +4,9 @@
 
 .balign 0x8
 
-.global __vt__Q34nw4r3snd14Sound3DManager
-__vt__Q34nw4r3snd14Sound3DManager:
-	.incbin "baserom.dol", 0x392330, 0x28
+#.global __vt__Q34nw4r3snd14Sound3DManager
+#__vt__Q34nw4r3snd14Sound3DManager:
+#	.incbin "baserom.dol", 0x392330, 0x28
 .global __vt__Q44nw4r3snd6detail10SoundActor
 __vt__Q44nw4r3snd6detail10SoundActor:
 	.long 0
