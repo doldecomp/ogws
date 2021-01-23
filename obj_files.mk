@@ -156,6 +156,7 @@ NW4R_O_FILES := \
 	build/asm/nw4r/g3d/g3d_gpu.o \
 	build/asm/nw4r/g3d/g3d_cpu.o \
 	build/asm/nw4r/g3d/g3d_state.o \
+	build/asm/nw4r/g3d/g3d_draw1mat1shp.o \
 
 
 GROUP_1_O_FILES := \
