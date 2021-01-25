@@ -164,6 +164,7 @@ NW4R_O_FILES := \
 	build/asm/nw4r/g3d/g3d_draw.o \
 	build/asm/nw4r/g3d/g3d_camera.o \
 	build/asm/nw4r/g3d/g3d_basic.o \
+	build/asm/nw4r/g3d/g3d_maya.o \
 
 
 GROUP_1_O_FILES := \
