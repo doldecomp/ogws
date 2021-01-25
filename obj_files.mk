@@ -169,6 +169,7 @@ NW4R_O_FILES := \
 	build/asm/nw4r/g3d/g3d_3dsmax.o \
 	build/asm/nw4r/g3d/g3d_scnobj.o \
 	build/asm/nw4r/g3d/g3d_scnroot.o \
+	build/asm/nw4r/g3d/g3d_scnmdlsmpl.o \
 
 
 GROUP_1_O_FILES := \
