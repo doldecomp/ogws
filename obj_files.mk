@@ -176,6 +176,7 @@ NW4R_O_FILES := \
 	build/asm/nw4r/g3d/g3d_scnproc.o \
 	build/asm/nw4r/g3d/g3d_fog.o \
 	build/asm/nw4r/g3d/g3d_light.o \
+	build/asm/nw4r/g3d/g3d_calcvtx.o \
 
 
 GROUP_1_O_FILES := \
