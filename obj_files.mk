@@ -182,6 +182,7 @@ NW4R_O_FILES := \
 	build/asm/nw4r/lyt/lyt_layout.o \
 	build/asm/nw4r/lyt/lyt_picture.o \
 	build/asm/nw4r/lyt/lyt_textBox.o \
+	build/asm/nw4r/lyt/lyt_window.o \
 
 GROUP_1_O_FILES := \
 	build/asm/text.o \
