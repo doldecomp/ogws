@@ -187,6 +187,7 @@ NW4R_O_FILES := \
 	build/asm/nw4r/lyt/lyt_material.o \
 	build/asm/nw4r/lyt/lyt_texMap.o \
 	build/asm/nw4r/lyt/lyt_drawInfo.o \
+	build/asm/nw4r/lyt/lyt_animation.o \
 
 GROUP_1_O_FILES := \
 	build/asm/text.o \
