@@ -249,7 +249,7 @@ Build__Q34nw4r3lyt6LayoutFPCvPQ34nw4r3lyt16ResourceAccessor:
 /* 8007A86C 0007576C  7C AE 2B 78 */	mr r14, r5
 /* 8007A870 00075770  38 84 59 54 */	addi r4, r4, 0x524C5954@l
 /* 8007A874 00075774  7F E3 FB 78 */	mr r3, r31
-/* 8007A878 00075778  48 00 85 A5 */	bl func_80082E1C
+/* 8007A878 00075778  48 00 85 A5 */	bl TestFileHeader__Q34nw4r3lyt6detailFRCQ44nw4r3lyt3res16BinaryFileHeaderUl
 /* 8007A87C 0007577C  2C 03 00 00 */	cmpwi r3, 0
 /* 8007A880 00075780  40 82 00 0C */	bne lbl_8007A88C
 /* 8007A884 00075784  38 60 00 00 */	li r3, 0
@@ -470,7 +470,7 @@ CreateAnimTransform__Q34nw4r3lyt6LayoutFPCvPQ34nw4r3lyt16ResourceAccessor:
 /* 8007AB64 00075A64  7C 79 1B 78 */	mr r25, r3
 /* 8007AB68 00075A68  7C BA 2B 78 */	mr r26, r5
 /* 8007AB6C 00075A6C  7F C3 F3 78 */	mr r3, r30
-/* 8007AB70 00075A70  48 00 82 85 */	bl func_80082DF4
+/* 8007AB70 00075A70  48 00 82 85 */	bl TestFileHeader__Q34nw4r3lyt6detailFRCQ44nw4r3lyt3res16BinaryFileHeader
 /* 8007AB74 00075A74  2C 03 00 00 */	cmpwi r3, 0
 /* 8007AB78 00075A78  40 82 00 0C */	bne lbl_8007AB84
 /* 8007AB7C 00075A7C  38 60 00 00 */	li r3, 0
