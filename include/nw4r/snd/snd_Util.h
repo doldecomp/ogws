@@ -25,6 +25,13 @@ namespace nw4r
 					u32 INT_0x4;
 				};
 				
+				template <typename T>
+				struct Table
+				{
+					u32 mCount; // at 0x0
+					T mEntries[]; // at 0x4
+				};
+				
 				template <typename T0, typename T1, typename T2, typename T3>
 				inline const T0 * GetDataRefAddress0(const DataRef<T0, T1, T2, T3> & dataRef, const void * ptr)
 				{

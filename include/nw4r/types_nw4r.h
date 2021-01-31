@@ -62,6 +62,7 @@ namespace nw4r
 			struct SeqTrackAllocator;
 			struct NoteOnCallback;
 			struct PlayerHeap;
+			struct SoundArchiveFileReader;
 		}
 	}
 }
