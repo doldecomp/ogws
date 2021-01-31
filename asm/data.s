@@ -2,27 +2,6 @@
 
 .section .data, "wa"  # 0x80393A80 - 0x803CAF00
 
-.global __vt__Q44nw4r3snd6detail10SoundActor
-__vt__Q44nw4r3snd6detail10SoundActor:
-	.long 0
-	.long 0
-	.long __dt__Q44nw4r3snd6detail10SoundActorFv
-	.long detail_SetupSound__Q44nw4r3snd6detail10SoundActorFPQ34nw4r3snd11SoundHandleUlPQ54nw4r3snd6detail10BasicSound14AmbientArgInfoPQ44nw4r3snd6detail19ExternalSoundPlayerbPCQ44nw4r3snd14SoundStartable9StartInfo
-	.long detail_ConvertLabelStringToSoundId__Q44nw4r3snd6detail10SoundActorFPCc
-.balign 0x8
-
-.global __vt__Q34nw4r3snd12SoundArchive
-__vt__Q34nw4r3snd12SoundArchive:
-	.long 0
-	.long 0
-	.long __dt__Q34nw4r3snd12SoundArchiveFv
-	.long 0
-	.long 0
-	.long 0
-	.long 0
-	.long 0
-.balign 0x8
-
 .global __vt__Q34nw4r3snd18SoundArchivePlayer
 __vt__Q34nw4r3snd18SoundArchivePlayer:
 	.long 0

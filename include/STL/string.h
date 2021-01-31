@@ -7,7 +7,7 @@ extern "C" {
 #endif
 
 char * strcpy(char *, const char *);
-char * strncpy(char *, char *, size_t);
+char * strncpy(char *, const char *, size_t);
 
 char * strcat(char *, const char *);
 char * strncat(char *, const char *, size_t);

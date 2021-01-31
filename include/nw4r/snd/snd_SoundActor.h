@@ -28,6 +28,13 @@ namespace nw4r
 				{
 					return mStartable.detail_ConvertLabelStringToSoundId(labelString);
 				}
+				
+				virtual UNKWORD detail_SetupSound(SoundHandle *,
+					u32,
+					detail::BasicSound::AmbientArgInfo *,
+					detail::ExternalSoundPlayer *,
+					bool,
+					const StartInfo *);
 			};
 		}
 	}
