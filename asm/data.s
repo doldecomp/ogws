@@ -118,12 +118,50 @@ __vt__Q54nw4r3snd6detail10StrmPlayer18StrmHeaderLoadTask:
 	.long OnCancel__Q54nw4r3snd6detail10StrmPlayer18StrmHeaderLoadTaskFv
 .balign 0x8
 
-.global lbl_803963C0
-lbl_803963C0:
-	.incbin "baserom.dol", 0x3924C0, 0x70
-.global lbl_80396430
-lbl_80396430:
-	.incbin "baserom.dol", 0x392530, 0x24
+.global __vt__Q44nw4r3snd6detail9StrmSound
+__vt__Q44nw4r3snd6detail9StrmSound:
+	.long 0
+	.long 0
+	.long GetRuntimeTypeInfo__Q44nw4r3snd6detail9StrmSoundCFv
+	.long __dt__Q44nw4r3snd6detail9StrmSoundFv
+	.long Update__Q44nw4r3snd6detail10BasicSoundFv
+	.long StartPrepared__Q44nw4r3snd6detail10BasicSoundFv
+	.long Stop__Q44nw4r3snd6detail10BasicSoundFi
+	.long Pause__Q44nw4r3snd6detail10BasicSoundFbi
+	.long SetAutoStopCounter__Q44nw4r3snd6detail10BasicSoundFi
+	.long FadeIn__Q44nw4r3snd6detail10BasicSoundFi
+	.long Shutdown__Q44nw4r3snd6detail9StrmSoundFv
+	.long IsPrepared__Q44nw4r3snd6detail9StrmSoundCFv
+	.long IsPause__Q44nw4r3snd6detail10BasicSoundCFv
+	.long SetInitialVolume__Q44nw4r3snd6detail10BasicSoundFf
+	.long SetVolume__Q44nw4r3snd6detail10BasicSoundFfi
+	.long SetPitch__Q44nw4r3snd6detail10BasicSoundFf
+	.long SetPan__Q44nw4r3snd6detail10BasicSoundFf
+	.long SetSurroundPan__Q44nw4r3snd6detail10BasicSoundFf
+	.long SetLpfFreq__Q44nw4r3snd6detail10BasicSoundFf
+	.long SetPlayerPriority__Q44nw4r3snd6detail9StrmSoundFi
+	.long SetRemoteFilter__Q44nw4r3snd6detail10BasicSoundFi
+	.long SetPanMode__Q44nw4r3snd6detail10BasicSoundFQ44nw4r3snd6detail7PanMode
+	.long SetPanCurve__Q44nw4r3snd6detail10BasicSoundFQ44nw4r3snd6detail8PanCurve
+	.long IsAttachedTempSpecialHandle__Q44nw4r3snd6detail9StrmSoundFv
+	.long DetachTempSpecialHandle__Q44nw4r3snd6detail9StrmSoundFv
+	.long InitParam__Q44nw4r3snd6detail10BasicSoundFv
+	.long GetBasicPlayer__Q44nw4r3snd6detail9StrmSoundFv
+	.long GetBasicPlayer__Q44nw4r3snd6detail9StrmSoundCFv
+.balign 0x8
+
+.global switch_80396430
+switch_80396430:
+	.long 0x8004D780
+	.long 0x8004D788
+	.long 0x8004D798
+	.long 0x8004D7AC
+	.long 0x8004D7B8
+	.long 0x8004D7C8
+	.long 0x8004D7DC
+	.long 0x8004D7E8
+	.long 0x8004D7FC
+
 .global lbl_80396454
 lbl_80396454:
 	.incbin "baserom.dol", 0x392554, 0x14

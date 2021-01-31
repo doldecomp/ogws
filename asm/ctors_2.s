@@ -106,4 +106,3 @@
 .4byte 0x80346C18
 .4byte 0x80347574
 .4byte 0x8034DD08
-#.fill 0x4
