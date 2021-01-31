@@ -9,11 +9,17 @@ gTRKInterruptVectorTable:
 lbl_800041B8:
 .fill 0xD0
 
+#############################################
+# Interrupt vector slot 0x0000 is reserved. #
+#############################################
+
+# Slot 0x0100: System Reset Exception
 .global system_reset_exception_handler
 system_reset_exception_handler:
 /* 80004288 00000388  48 00 1E 34 */	b __TRK_reset
 .fill 0xFC
 
+# Slot 0x0200: Machine Check Exception
 .global machine_check_exception_handler
 machine_check_exception_handler:
 /* 80004388 00000488  7C 51 43 A6 */	mtspr 0x111, r2
@@ -37,6 +43,7 @@ machine_check_exception_handler:
 /* 800043D0 000004D0  4C 00 00 64 */	rfi 
 .fill 0xB4
 
+# Slot 0x0300: DSI Exception
 .global dsi_exception_handler
 dsi_exception_handler:
 /* 80004488 00000588  7C 51 43 A6 */	mtspr 0x111, r2
@@ -54,6 +61,7 @@ dsi_exception_handler:
 /* 800044B8 000005B8  4C 00 00 64 */	rfi 
 .fill 0xCC
 
+# Slot 0x0400: ISI Exception
 .global isi_exception_handler
 isi_exception_handler:
 /* 80004588 00000688  7C 51 43 A6 */	mtspr 0x111, r2
@@ -71,6 +79,7 @@ isi_exception_handler:
 /* 800045B8 000006B8  4C 00 00 64 */	rfi 
 .fill 0xCC
 
+# Slot 0x0500: External Interrupt Exception
 .global external_interrupt_exception_handler
 external_interrupt_exception_handler:
 /* 80004688 00000788  7C 51 43 A6 */	mtspr 0x111, r2
@@ -88,6 +97,7 @@ external_interrupt_exception_handler:
 /* 800046B8 000007B8  4C 00 00 64 */	rfi 
 .fill 0xCC
 
+# Slot 0x0600: Alignment Exception
 .global alignment_exception_handler
 alignment_exception_handler:
 /* 80004788 00000888  7C 51 43 A6 */	mtspr 0x111, r2
@@ -105,6 +115,7 @@ alignment_exception_handler:
 /* 800047B8 000008B8  4C 00 00 64 */	rfi 
 .fill 0xCC
 
+# Slot 0x0700: Program Exception
 .global program_exception_handler
 program_exception_handler:
 /* 80004888 00000988  7C 51 43 A6 */	mtspr 0x111, r2
@@ -122,6 +133,7 @@ program_exception_handler:
 /* 800048B8 000009B8  4C 00 00 64 */	rfi 
 .fill 0xCC
 
+# Slot 0x0800: Floating Point Unavailable Exception
 .global floating_point_unavailable_exception_handler
 floating_point_unavailable_exception_handler:
 /* 80004988 00000A88  7C 51 43 A6 */	mtspr 0x111, r2
@@ -139,6 +151,7 @@ floating_point_unavailable_exception_handler:
 /* 800049B8 00000AB8  4C 00 00 64 */	rfi 
 .fill 0xCC
 
+# Slot 0x0900: Decrementer Exception
 .global decrementer_exception_handler
 decrementer_exception_handler:
 /* 80004A88 00000B88  7C 51 43 A6 */	mtspr 0x111, r2
@@ -162,6 +175,7 @@ decrementer_exception_handler:
 .fill 0x100 
 ######################################################
 
+# Slot 0x0C00: System Call Exception
 .global system_call_exception_handler
 system_call_exception_handler:
 /* 80004D88 00000E88  7C 51 43 A6 */	mtspr 0x111, r2
@@ -179,6 +193,7 @@ system_call_exception_handler:
 /* 80004DB8 00000EB8  4C 00 00 64 */	rfi 
 .fill 0xCC
 
+# Slot 0x0D00: Trace Exception
 .global trace_exception_handler
 trace_exception_handler:
 /* 80004E88 00000F88  7C 51 43 A6 */	mtspr 0x111, r2
@@ -196,8 +211,14 @@ trace_exception_handler:
 /* 80004EB8 00000FB8  4C 00 00 64 */	rfi 
 .fill 0xCC
 
-.global floating_point_assist_exception_handler
-floating_point_assist_exception_handler:
+############################################################################
+# Slot 0x0E00 is usually for the Floating Point Assist Exception Handler,  #
+# however that exception is not implemented in the PPC 750CL architecture. #
+############################################################################
+
+# Slot 0x0F00: Performance Monitor Exception
+.global performance_monitor_exception_handler
+performance_monitor_exception_handler:
 /* 80004F88 00001088  7C 51 43 A6 */	mtspr 0x111, r2
 /* 80004F8C 0000108C  7C 72 43 A6 */	mtspr 0x112, r3
 /* 80004F90 00001090  7C 93 43 A6 */	mtspr 0x113, r4
@@ -213,12 +234,13 @@ floating_point_assist_exception_handler:
 /* 80004FB8 000010B8  4C 00 00 64 */	rfi 
 .fill 0xCC
 
-########################################################
-# The rest of the interrupt vector slots are reserved, #
-# and or implementation specific, and are currently    #
-# unidentified.                                        #
-########################################################
+##################################################################################
+# Interrupt vector slots 0x1000 through 0x1200 are not implemented in the 750CL. #
+##################################################################################
 
+# Slot 0x1300: Instruction Address Breakpoint Exception
+.global break_point_exception_handler
+break_point_exception_handler:
 /* 80005088 00001188  48 00 00 54 */	b lbl_800050DC
 .fill 0x1C
 /* 800050A8 000011A8  7C 51 43 A6 */	mtspr 0x111, r2
@@ -249,6 +271,10 @@ lbl_800050DC:
 /* 80005108 00001208  38 60 0F 00 */	li r3, 0xf00
 /* 8000510C 0000120C  4C 00 00 64 */	rfi 
 .fill 0x78
+
+# Slot 0x1400: System Management Interrupt Exception
+.global system_interrupt_exception_handler
+system_interrupt_exception_handler:
 /* 80005188 00001288  7C 51 43 A6 */	mtspr 0x111, r2
 /* 8000518C 0000128C  7C 40 00 26 */	mfcr r2
 /* 80005190 00001290  7C 52 43 A6 */	mtspr 0x112, r2
@@ -279,6 +305,14 @@ lbl_800051B8:
 /* 800051F0 000012F0  38 60 10 00 */	li r3, 0x1000
 /* 800051F4 000012F4  4C 00 00 64 */	rfi 
 .fill 0x90
+
+##############################################################################
+# Interrupt vector slots 0x1500 and 0x1600 are not implemented in the 750CL. #
+##############################################################################
+
+# Slot 0x1700: Thermal-Management Interrupt Exception
+.global thermal_interrupt_exception_handler
+thermal_interrupt_exception_handler:
 /* 80005288 00001388  7C 51 43 A6 */	mtspr 0x111, r2
 /* 8000528C 0000138C  7C 40 00 26 */	mfcr r2
 /* 80005290 00001390  7C 52 43 A6 */	mtspr 0x112, r2
@@ -309,6 +343,8 @@ lbl_800052B8:
 /* 800052F0 000013F0  38 60 11 00 */	li r3, 0x1100
 /* 800052F4 000013F4  4C 00 00 64 */	rfi 
 .fill 0x90
+
+# Slot 0x1800(?)
 /* 80005388 00001488  7C 51 43 A6 */	mtspr 0x111, r2
 /* 8000538C 0000148C  7C 40 00 26 */	mfcr r2
 /* 80005390 00001490  7C 52 43 A6 */	mtspr 0x112, r2
@@ -339,6 +375,8 @@ lbl_800053B8:
 /* 800053F0 000014F0  38 60 12 00 */	li r3, 0x1200
 /* 800053F4 000014F4  4C 00 00 64 */	rfi 
 .fill 0x90
+
+# Slot 0x1900(?)
 /* 80005488 00001588  7C 51 43 A6 */	mtspr 0x111, r2
 /* 8000548C 0000158C  7C 72 43 A6 */	mtspr 0x112, r3
 /* 80005490 00001590  7C 93 43 A6 */	mtspr 0x113, r4
@@ -353,6 +391,8 @@ lbl_800053B8:
 /* 800054B4 000015B4  38 60 13 00 */	li r3, 0x1300
 /* 800054B8 000015B8  4C 00 00 64 */	rfi 
 .fill 0xCC
+
+# Slot 0x1A00(?)
 /* 80005588 00001688  7C 51 43 A6 */	mtspr 0x111, r2
 /* 8000558C 0000168C  7C 72 43 A6 */	mtspr 0x112, r3
 /* 80005590 00001690  7C 93 43 A6 */	mtspr 0x113, r4
@@ -367,6 +407,8 @@ lbl_800053B8:
 /* 800055B4 000016B4  38 60 14 00 */	li r3, 0x1400
 /* 800055B8 000016B8  4C 00 00 64 */	rfi 
 .fill 0x1CC
+
+# Slot 0x1B00(?)
 /* 80005788 00001888  7C 51 43 A6 */	mtspr 0x111, r2
 /* 8000578C 0000188C  7C 72 43 A6 */	mtspr 0x112, r3
 /* 80005790 00001890  7C 93 43 A6 */	mtspr 0x113, r4
@@ -381,6 +423,8 @@ lbl_800053B8:
 /* 800057B4 000018B4  38 60 16 00 */	li r3, 0x1600
 /* 800057B8 000018B8  4C 00 00 64 */	rfi 
 .fill 0xCC
+
+# Slot 0x1C00(?)
 /* 80005888 00001988  7C 51 43 A6 */	mtspr 0x111, r2
 /* 8000588C 0000198C  7C 72 43 A6 */	mtspr 0x112, r3
 /* 80005890 00001990  7C 93 43 A6 */	mtspr 0x113, r4
@@ -395,6 +439,8 @@ lbl_800053B8:
 /* 800058B4 000019B4  38 60 17 00 */	li r3, 0x1700
 /* 800058B8 000019B8  4C 00 00 64 */	rfi 
 .fill 0x4CC
+
+# Slot 0x1D00(?)
 /* 80005D88 00001E88  7C 51 43 A6 */	mtspr 0x111, r2
 /* 80005D8C 00001E8C  7C 72 43 A6 */	mtspr 0x112, r3
 /* 80005D90 00001E90  7C 93 43 A6 */	mtspr 0x113, r4
@@ -409,6 +455,8 @@ lbl_800053B8:
 /* 80005DB4 00001EB4  38 60 1C 00 */	li r3, 0x1c00
 /* 80005DB8 00001EB8  4C 00 00 64 */	rfi 
 .fill 0xCC
+
+# Slot 0x1E00(?)
 /* 80005E88 00001F88  7C 51 43 A6 */	mtspr 0x111, r2
 /* 80005E8C 00001F8C  7C 72 43 A6 */	mtspr 0x112, r3
 /* 80005E90 00001F90  7C 93 43 A6 */	mtspr 0x113, r4
@@ -423,6 +471,8 @@ lbl_800053B8:
 /* 80005EB4 00001FB4  38 60 1D 00 */	li r3, 0x1d00
 /* 80005EB8 00001FB8  4C 00 00 64 */	rfi 
 .fill 0xCC
+
+# Slot 0x1F00(?)
 /* 80005F88 00002088  7C 51 43 A6 */	mtspr 0x111, r2
 /* 80005F8C 0000208C  7C 72 43 A6 */	mtspr 0x112, r3
 /* 80005F90 00002090  7C 93 43 A6 */	mtspr 0x113, r4
@@ -437,6 +487,8 @@ lbl_800053B8:
 /* 80005FB4 000020B4  38 60 1E 00 */	li r3, 0x1e00
 /* 80005FB8 000020B8  4C 00 00 64 */	rfi 
 .fill 0xCC
+
+# Slot 0x2000(?)
 /* 80006088 00002188  7C 51 43 A6 */	mtspr 0x111, r2
 /* 8000608C 0000218C  7C 72 43 A6 */	mtspr 0x112, r3
 /* 80006090 00002190  7C 93 43 A6 */	mtspr 0x113, r4

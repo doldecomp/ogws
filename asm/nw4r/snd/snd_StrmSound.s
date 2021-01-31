@@ -13,9 +13,9 @@ __ct__Q44nw4r3snd6detail9StrmSoundFPQ44nw4r3snd6detail50SoundInstanceManager$$0Q
 /* 8004AC5C 00045B5C  93 C1 00 08 */	stw r30, 8(r1)
 /* 8004AC60 00045B60  7C 7E 1B 78 */	mr r30, r3
 /* 8004AC64 00045B64  4B FE B6 1D */	bl __ct__Q44nw4r3snd6detail10BasicSoundFv
-/* 8004AC68 00045B68  3C 80 80 39 */	lis r4, lbl_803963C0@ha
+/* 8004AC68 00045B68  3C 80 80 39 */	lis r4, __vt__Q44nw4r3snd6detail9StrmSound@ha
 /* 8004AC6C 00045B6C  38 7E 00 D8 */	addi r3, r30, 0xd8
-/* 8004AC70 00045B70  38 84 63 C0 */	addi r4, r4, lbl_803963C0@l
+/* 8004AC70 00045B70  38 84 63 C0 */	addi r4, r4, __vt__Q44nw4r3snd6detail9StrmSound@l
 /* 8004AC74 00045B74  90 9E 00 00 */	stw r4, 0(r30)
 /* 8004AC78 00045B78  4B FF DB 41 */	bl __ct__Q44nw4r3snd6detail10StrmPlayerFv
 /* 8004AC7C 00045B7C  38 00 00 00 */	li r0, 0

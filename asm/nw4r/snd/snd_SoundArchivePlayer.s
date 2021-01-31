@@ -6,18 +6,18 @@
 __ct__Q34nw4r3snd18SoundArchivePlayerFv:
 /* 80043A7C 0003E97C  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80043A80 0003E980  7C 08 02 A6 */	mflr r0
-/* 80043A84 0003E984  3C C0 80 39 */	lis r6, lbl_80396290@ha
-/* 80043A88 0003E988  3C A0 80 39 */	lis r5, lbl_803962D0@ha
+/* 80043A84 0003E984  3C C0 80 39 */	lis r6, __vt__Q34nw4r3snd18SoundArchivePlayer@ha
+/* 80043A88 0003E988  3C A0 80 39 */	lis r5, __vt__Q44nw4r3snd18SoundArchivePlayer17SeqNoteOnCallback@ha
 /* 80043A8C 0003E98C  90 01 00 14 */	stw r0, 0x14(r1)
-/* 80043A90 0003E990  38 C6 62 90 */	addi r6, r6, lbl_80396290@l
-/* 80043A94 0003E994  3C 80 80 39 */	lis r4, lbl_803962C0@ha
+/* 80043A90 0003E990  38 C6 62 90 */	addi r6, r6, __vt__Q34nw4r3snd18SoundArchivePlayer@l
+/* 80043A94 0003E994  3C 80 80 39 */	lis r4, __vt__Q44nw4r3snd18SoundArchivePlayer11WsdCallback@ha
 /* 80043A98 0003E998  38 E3 00 40 */	addi r7, r3, 0x40
 /* 80043A9C 0003E99C  93 E1 00 0C */	stw r31, 0xc(r1)
 /* 80043AA0 0003E9A0  3B E0 00 00 */	li r31, 0
 /* 80043AA4 0003E9A4  38 06 00 14 */	addi r0, r6, 0x14
-/* 80043AA8 0003E9A8  38 A5 62 D0 */	addi r5, r5, lbl_803962D0@l
+/* 80043AA8 0003E9A8  38 A5 62 D0 */	addi r5, r5, __vt__Q44nw4r3snd18SoundArchivePlayer17SeqNoteOnCallback@l
 /* 80043AAC 0003E9AC  93 C1 00 08 */	stw r30, 8(r1)
-/* 80043AB0 0003E9B0  38 84 62 C0 */	addi r4, r4, lbl_803962C0@l
+/* 80043AB0 0003E9B0  38 84 62 C0 */	addi r4, r4, __vt__Q44nw4r3snd18SoundArchivePlayer11WsdCallback@l
 /* 80043AB4 0003E9B4  7C 7E 1B 78 */	mr r30, r3
 /* 80043AB8 0003E9B8  93 E3 00 40 */	stw r31, 0x40(r3)
 /* 80043ABC 0003E9BC  93 E3 00 44 */	stw r31, 0x44(r3)
@@ -242,8 +242,8 @@ __dt__Q34nw4r3snd18SoundArchivePlayerFv:
 /* 80043DA8 0003ECA8  93 C1 00 08 */	stw r30, 8(r1)
 /* 80043DAC 0003ECAC  7C 7E 1B 78 */	mr r30, r3
 /* 80043DB0 0003ECB0  41 82 00 7C */	beq lbl_80043E2C
-/* 80043DB4 0003ECB4  3C 80 80 39 */	lis r4, lbl_80396290@ha
-/* 80043DB8 0003ECB8  38 84 62 90 */	addi r4, r4, lbl_80396290@l
+/* 80043DB4 0003ECB4  3C 80 80 39 */	lis r4, __vt__Q34nw4r3snd18SoundArchivePlayer@ha
+/* 80043DB8 0003ECB8  38 84 62 90 */	addi r4, r4, __vt__Q34nw4r3snd18SoundArchivePlayer@l
 /* 80043DBC 0003ECBC  38 04 00 14 */	addi r0, r4, 0x14
 /* 80043DC0 0003ECC0  90 83 00 08 */	stw r4, 8(r3)
 /* 80043DC4 0003ECC4  90 03 00 0C */	stw r0, 0xc(r3)
@@ -758,11 +758,11 @@ SetupSoundPlayer__Q34nw4r3snd18SoundArchivePlayerFPCQ34nw4r3snd12SoundArchivePPv
 /* 800444C4 0003F3C4  48 00 01 30 */	b lbl_800445F4
 lbl_800444C8:
 /* 800444C8 0003F3C8  90 99 00 00 */	stw r4, 0(r25)
-/* 800444CC 0003F3CC  3E C0 80 39 */	lis r22, lbl_803962E0@ha
+/* 800444CC 0003F3CC  3E C0 80 39 */	lis r22, __vt__Q44nw4r3snd6detail10PlayerHeap@ha
 /* 800444D0 0003F3D0  3B A0 00 00 */	li r29, 0
 /* 800444D4 0003F3D4  3A E0 00 00 */	li r23, 0
 /* 800444D8 0003F3D8  93 D4 00 34 */	stw r30, 0x34(r20)
-/* 800444DC 0003F3DC  3A D6 62 E0 */	addi r22, r22, lbl_803962E0@l
+/* 800444DC 0003F3DC  3A D6 62 E0 */	addi r22, r22, __vt__Q44nw4r3snd6detail10PlayerHeap@l
 /* 800444E0 0003F3E0  90 74 00 30 */	stw r3, 0x30(r20)
 /* 800444E4 0003F3E4  48 00 01 04 */	b lbl_800445E8
 lbl_800444E8:

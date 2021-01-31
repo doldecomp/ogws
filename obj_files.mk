@@ -148,7 +148,49 @@ NW4R_O_FILES := \
 	build/asm/nw4r/g3d/g3d_anmclr.o \
 	build/asm/nw4r/g3d/g3d_anmtexpat.o \
 	build/asm/nw4r/g3d/g3d_anmtexsrt.o \
-
+	build/asm/nw4r/g3d/g3d_anmchr.o \
+	build/asm/nw4r/g3d/g3d_anmshp.o \
+	build/asm/nw4r/g3d/g3d_anmscn.o \
+	build/asm/nw4r/g3d/g3d_obj.o \
+	build/asm/nw4r/g3d/g3d_anmobj.o \
+	build/asm/nw4r/g3d/g3d_gpu.o \
+	build/asm/nw4r/g3d/g3d_cpu.o \
+	build/asm/nw4r/g3d/g3d_state.o \
+	build/asm/nw4r/g3d/g3d_draw1mat1shp.o \
+	build/asm/nw4r/g3d/g3d_calcview.o \
+	build/asm/nw4r/g3d/g3d_dcc.o \
+	build/asm/nw4r/g3d/g3d_workmem.o \
+	build/asm/nw4r/g3d/g3d_calcworld.o \
+	build/asm/nw4r/g3d/g3d_draw.o \
+	build/asm/nw4r/g3d/g3d_camera.o \
+	build/asm/nw4r/g3d/g3d_basic.o \
+	build/asm/nw4r/g3d/g3d_maya.o \
+	build/asm/nw4r/g3d/g3d_xsi.o \
+	build/asm/nw4r/g3d/g3d_3dsmax.o \
+	build/asm/nw4r/g3d/g3d_scnobj.o \
+	build/asm/nw4r/g3d/g3d_scnroot.o \
+	build/asm/nw4r/g3d/g3d_scnmdlsmpl.o \
+	build/asm/nw4r/g3d/g3d_scnmdl.o \
+	build/asm/nw4r/g3d/g3d_calcmaterial.o \
+	build/asm/nw4r/g3d/g3d_init.o \
+	build/asm/nw4r/g3d/g3d_scnproc.o \
+	build/asm/nw4r/g3d/g3d_fog.o \
+	build/asm/nw4r/g3d/g3d_light.o \
+	build/asm/nw4r/g3d/g3d_calcvtx.o \
+	build/asm/nw4r/lyt/lyt_pane.o \
+	build/asm/nw4r/lyt/lyt_group.o \
+	build/asm/nw4r/lyt/lyt_layout.o \
+	build/asm/nw4r/lyt/lyt_picture.o \
+	build/asm/nw4r/lyt/lyt_textBox.o \
+	build/asm/nw4r/lyt/lyt_window.o \
+	build/asm/nw4r/lyt/lyt_bounding.o \
+	build/asm/nw4r/lyt/lyt_material.o \
+	build/asm/nw4r/lyt/lyt_texMap.o \
+	build/asm/nw4r/lyt/lyt_drawInfo.o \
+	build/asm/nw4r/lyt/lyt_animation.o \
+	build/asm/nw4r/lyt/lyt_resourceAccessor.o \
+	build/asm/nw4r/lyt/lyt_arcResourceAccessor.o \
+	build/asm/nw4r/lyt/lyt_common.o \
 
 GROUP_1_O_FILES := \
 	build/asm/text.o \

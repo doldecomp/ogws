@@ -12,13 +12,13 @@ __ct__Q44nw4r3snd6detail10StrmPlayerFv:
 /* 800487CC 000436CC  7C 7E 1B 78 */	mr r30, r3
 /* 800487D0 000436D0  4B FE D9 51 */	bl __ct__Q44nw4r3snd6detail11BasicPlayerFv
 /* 800487D4 000436D4  3B E0 00 00 */	li r31, 0
-/* 800487D8 000436D8  3C C0 80 39 */	lis r6, lbl_80396348@ha
-/* 800487DC 000436DC  38 C6 63 48 */	addi r6, r6, lbl_80396348@l
-/* 800487E0 000436E0  3D 00 80 39 */	lis r8, lbl_803963A8@ha
+/* 800487D8 000436D8  3C C0 80 39 */	lis r6, __vt__Q44nw4r3snd6detail10StrmPlayer@ha
+/* 800487DC 000436DC  38 C6 63 48 */	addi r6, r6, __vt__Q44nw4r3snd6detail10StrmPlayer@l
+/* 800487E0 000436E0  3D 00 80 39 */	lis r8, __vt__Q54nw4r3snd6detail10StrmPlayer18StrmHeaderLoadTask@ha
 /* 800487E4 000436E4  38 06 00 24 */	addi r0, r6, 0x24
 /* 800487E8 000436E8  93 FE 01 2C */	stw r31, 0x12c(r30)
 /* 800487EC 000436EC  39 3E 01 2C */	addi r9, r30, 0x12c
-/* 800487F0 000436F0  39 08 63 A8 */	addi r8, r8, lbl_803963A8@l
+/* 800487F0 000436F0  39 08 63 A8 */	addi r8, r8, __vt__Q54nw4r3snd6detail10StrmPlayer18StrmHeaderLoadTask@l
 /* 800487F4 000436F4  93 FE 01 30 */	stw r31, 0x130(r30)
 /* 800487F8 000436F8  3C 80 80 05 */	lis r4, __ct__Q54nw4r3snd6detail10StrmPlayer16StrmDataLoadTaskFv@ha
 /* 800487FC 000436FC  3C A0 80 05 */	lis r5, __dt__Q54nw4r3snd6detail10StrmPlayer16StrmDataLoadTaskFv@ha
@@ -133,8 +133,8 @@ __dt__Q44nw4r3snd6detail10StrmPlayerFv:
 /* 80048980 00043880  93 A1 00 14 */	stw r29, 0x14(r1)
 /* 80048984 00043884  7C 7D 1B 78 */	mr r29, r3
 /* 80048988 00043888  41 82 00 C4 */	beq lbl_80048A4C
-/* 8004898C 0004388C  3C 80 80 39 */	lis r4, lbl_80396348@ha
-/* 80048990 00043890  38 84 63 48 */	addi r4, r4, lbl_80396348@l
+/* 8004898C 0004388C  3C 80 80 39 */	lis r4, __vt__Q44nw4r3snd6detail10StrmPlayer@ha
+/* 80048990 00043890  38 84 63 48 */	addi r4, r4, __vt__Q44nw4r3snd6detail10StrmPlayer@l
 /* 80048994 00043894  38 04 00 24 */	addi r0, r4, 0x24
 /* 80048998 00043898  90 83 00 00 */	stw r4, 0(r3)
 /* 8004899C 0004389C  90 03 00 7C */	stw r0, 0x7c(r3)
@@ -2132,9 +2132,9 @@ lbl_8004A58C:
 /* 8004A58C 0004548C  7C 7C 1B 78 */	mr r28, r3
 /* 8004A590 00045490  41 82 00 48 */	beq lbl_8004A5D8
 /* 8004A594 00045494  38 A0 00 00 */	li r5, 0
-/* 8004A598 00045498  3C 80 80 39 */	lis r4, lbl_80396390@ha
+/* 8004A598 00045498  3C 80 80 39 */	lis r4, __vt__Q54nw4r3snd6detail10StrmPlayer16StrmDataLoadTask@ha
 /* 8004A59C 0004549C  90 A3 00 04 */	stw r5, 4(r3)
-/* 8004A5A0 000454A0  38 84 63 90 */	addi r4, r4, lbl_80396390@l
+/* 8004A5A0 000454A0  38 84 63 90 */	addi r4, r4, __vt__Q54nw4r3snd6detail10StrmPlayer16StrmDataLoadTask@l
 /* 8004A5A4 000454A4  38 00 FF FF */	li r0, -1
 /* 8004A5A8 000454A8  90 A3 00 08 */	stw r5, 8(r3)
 /* 8004A5AC 000454AC  98 A3 00 0C */	stb r5, 0xc(r3)
@@ -2438,9 +2438,9 @@ lbl_8004A9A8:
 
 .global __ct__Q54nw4r3snd6detail10StrmPlayer16StrmDataLoadTaskFv
 __ct__Q54nw4r3snd6detail10StrmPlayer16StrmDataLoadTaskFv:
-/* 8004A9BC 000458BC  3C 80 80 39 */	lis r4, lbl_80396390@ha
+/* 8004A9BC 000458BC  3C 80 80 39 */	lis r4, __vt__Q54nw4r3snd6detail10StrmPlayer16StrmDataLoadTask@ha
 /* 8004A9C0 000458C0  38 A0 00 00 */	li r5, 0
-/* 8004A9C4 000458C4  38 84 63 90 */	addi r4, r4, lbl_80396390@l
+/* 8004A9C4 000458C4  38 84 63 90 */	addi r4, r4, __vt__Q54nw4r3snd6detail10StrmPlayer16StrmDataLoadTask@l
 /* 8004A9C8 000458C8  38 00 FF FF */	li r0, -1
 /* 8004A9CC 000458CC  90 A3 00 04 */	stw r5, 4(r3)
 /* 8004A9D0 000458D0  90 A3 00 08 */	stw r5, 8(r3)
@@ -2626,7 +2626,7 @@ IsActive__Q44nw4r3snd6detail10StrmPlayerCFv:
 /* 8004AC20 00045B20  88 63 00 B9 */	lbz r3, 0xb9(r3)
 /* 8004AC24 00045B24  4E 80 00 20 */	blr 
 
-.global $2116$2nShutdownSoundThread__Q44nw4r3snd6detail10StrmPlayerFv
+.global $2116$2OnShutdownSoundThread__Q44nw4r3snd6detail10StrmPlayerFv
 $2116$2OnShutdownSoundThread__Q44nw4r3snd6detail10StrmPlayerFv:
 /* 8004AC28 00045B28  38 63 FF 8C */	addi r3, r3, -116
 /* 8004AC2C 00045B2C  4B FF FF D4 */	b OnShutdownSoundThread__Q44nw4r3snd6detail10StrmPlayerFv

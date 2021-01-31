@@ -4,60 +4,88 @@
 
 .balign 0x8
 
-.global lbl_804BD408
-lbl_804BD408:
-	.incbin "baserom.dol", 0x3C7088, 0x8
-.global lbl_804BD410
-lbl_804BD410:
-	.incbin "baserom.dol", 0x3C7090, 0x8
+.global NW4R_SND_Version_
+NW4R_SND_Version_:
+	.long $$24063
+.balign 0x8
+
+.global u$7185
+u$7185:
+	.long 0x12345678
+.balign 0x8
+
 .global lbl_804BD418
 lbl_804BD418:
-	.incbin "baserom.dol", 0x3C7098, 0x8
+	.long PlayPolicy_Onetime__Q24nw4r3g3dFfff
+	.long PlayPolicy_Loop__Q24nw4r3g3dFfff
+.balign 0x8
+
 .global lbl_804BD420
 lbl_804BD420:
-	.incbin "baserom.dol", 0x3C70A0, 0x8
+	.single 0e1
+.balign 0x8
+
 .global lbl_804BD428
 lbl_804BD428:
-	.incbin "baserom.dol", 0x3C70A8, 0x4
-.global lbl_804BD42C
-lbl_804BD42C:
-	.incbin "baserom.dol", 0x3C70AC, 0x4
-.global lbl_804BD430
-lbl_804BD430:
-	.incbin "baserom.dol", 0x3C70B0, 0x8
+	.long -1
+
+# pG3DStateIndMtxOp__Q44nw4r3g3d8G3DState23@unnamed@g3d_state_cpp@
+.global pG3DStateIndMtxOp__Q44nw4r3g3d8G3DState23$$2unnamed$$2g3d_state_cpp$$2
+pG3DStateIndMtxOp__Q44nw4r3g3d8G3DState23$$2unnamed$$2g3d_state_cpp$$2:
+	.long 0x803f1620
+
+.global $$28814
+$$28814:
+	.string "NodeMix"
+
 .global lbl_804BD438
 lbl_804BD438:
-	.incbin "baserom.dol", 0x3C70B8, 0x4
+	.long -4
+
 .global lbl_804BD43C
 lbl_804BD43C:
-	.incbin "baserom.dol", 0x3C70BC, 0x4
+	.long -4
+
 .global lbl_804BD440
 lbl_804BD440:
-	.incbin "baserom.dol", 0x3C70C0, 0x4
+	.long 0x20
+
 .global lbl_804BD444
 lbl_804BD444:
-	.incbin "baserom.dol", 0x3C70C4, 0x4
+	.long 0x20
+
 .global lbl_804BD448
 lbl_804BD448:
-	.incbin "baserom.dol", 0x3C70C8, 0x4
+	.long -4
+
 .global lbl_804BD44C
 lbl_804BD44C:
-	.incbin "baserom.dol", 0x3C70CC, 0x4
+	.long -4
+
 .global lbl_804BD450
 lbl_804BD450:
-	.incbin "baserom.dol", 0x3C70D0, 0x8
+	.string "NodeMix"
+
 .global lbl_804BD458
 lbl_804BD458:
-	.incbin "baserom.dol", 0x3C70D8, 0x8
+	.string "DrawOpa"
+
 .global lbl_804BD460
 lbl_804BD460:
-	.incbin "baserom.dol", 0x3C70E0, 0x8
-.global lbl_804BD468
-lbl_804BD468:
-	.incbin "baserom.dol", 0x3C70E8, 0x8
-.global lbl_804BD470
-lbl_804BD470:
-	.incbin "baserom.dol", 0x3C70F0, 0x8
+	.string "DrawXlu"
+
+# NW4R_G3D_Version___22@unnamed@g3d_init_cpp@
+.global NW4R_G3D_Version___22$$2unnamed$$2g3d_init_cpp$$2
+NW4R_G3D_Version___22$$2unnamed$$2g3d_init_cpp$$2:
+	.long $$27641
+.balign 0x8
+
+# NW4R_LYT_Version___22@unnamed@lyt_pane_cpp@
+.global NW4R_LYT_Version___22$$2unnamed$$2lyt_pane_cpp$$2
+NW4R_LYT_Version___22$$2unnamed$$2lyt_pane_cpp$$2:
+	.long lbl_80397140
+.balign 0x8
+
 .global lbl_804BD478
 lbl_804BD478:
 	.incbin "baserom.dol", 0x3C70F8, 0x4

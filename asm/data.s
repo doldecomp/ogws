@@ -2,11 +2,6 @@
 
 .section .data, "wa"  # 0x80393A80 - 0x803CAF00
 
-.balign 0x8
-
-#.global __vt__Q34nw4r3snd14Sound3DManager
-#__vt__Q34nw4r3snd14Sound3DManager:
-#	.incbin "baserom.dol", 0x392330, 0x28
 .global __vt__Q44nw4r3snd6detail10SoundActor
 __vt__Q44nw4r3snd6detail10SoundActor:
 	.long 0
@@ -14,42 +9,159 @@ __vt__Q44nw4r3snd6detail10SoundActor:
 	.long __dt__Q44nw4r3snd6detail10SoundActorFv
 	.long detail_SetupSound__Q44nw4r3snd6detail10SoundActorFPQ34nw4r3snd11SoundHandleUlPQ54nw4r3snd6detail10BasicSound14AmbientArgInfoPQ44nw4r3snd6detail19ExternalSoundPlayerbPCQ44nw4r3snd14SoundStartable9StartInfo
 	.long detail_ConvertLabelStringToSoundId__Q44nw4r3snd6detail10SoundActorFPCc
-
 .balign 0x8
 
-.global lbl_80396270
-lbl_80396270:
-	.incbin "baserom.dol", 0x392370, 0x20
-.global lbl_80396290
-lbl_80396290:
-	.incbin "baserom.dol", 0x392390, 0x30
-.global lbl_803962C0
-lbl_803962C0:
-	.incbin "baserom.dol", 0x3923C0, 0x10
-.global lbl_803962D0
-lbl_803962D0:
-	.incbin "baserom.dol", 0x3923D0, 0x10
-.global lbl_803962E0
-lbl_803962E0:
-	.incbin "baserom.dol", 0x3923E0, 0x10
-.global lbl_803962F0
-lbl_803962F0:
-	.incbin "baserom.dol", 0x3923F0, 0x58
-.global lbl_80396348
-lbl_80396348:
-	.incbin "baserom.dol", 0x392448, 0x48
-.global lbl_80396390
-lbl_80396390:
-	.incbin "baserom.dol", 0x392490, 0x18
-.global lbl_803963A8
-lbl_803963A8:
-	.incbin "baserom.dol", 0x3924A8, 0x18
-.global lbl_803963C0
-lbl_803963C0:
-	.incbin "baserom.dol", 0x3924C0, 0x70
-.global lbl_80396430
-lbl_80396430:
-	.incbin "baserom.dol", 0x392530, 0x24
+.global __vt__Q34nw4r3snd12SoundArchive
+__vt__Q34nw4r3snd12SoundArchive:
+	.long 0
+	.long 0
+	.long __dt__Q34nw4r3snd12SoundArchiveFv
+	.long 0
+	.long 0
+	.long 0
+	.long 0
+	.long 0
+.balign 0x8
+
+.global __vt__Q34nw4r3snd18SoundArchivePlayer
+__vt__Q34nw4r3snd18SoundArchivePlayer:
+	.long 0
+	.long 0
+	.long __dt__Q34nw4r3snd18SoundArchivePlayerFv
+	.long InvalidateData__Q34nw4r3snd18SoundArchivePlayerFPCvPCv
+	.long InvalidateWaveData__Q34nw4r3snd18SoundArchivePlayerFPCvPCv
+	.long 0
+	.long 0
+	.long $$218$$2__dt__Q34nw4r3snd18SoundArchivePlayerFv____
+	.long $$218$$2detail_SetupSound__Q34nw4r3snd18SoundArchivePlayerFPQ34nw4r3snd11SoundHandleUlPQ54nw4r3snd6detail10BasicSound14AmbientArgInfoPQ44nw4r3snd6detail19ExternalSoundPlayerbPCQ44nw4r3snd14SoundStartable9StartInfo
+	.long $$218$$2detail_ConvertLabelStringToSoundId__Q34nw4r3snd18SoundArchivePlayerFPCc
+	.long detail_SetupSound__Q34nw4r3snd18SoundArchivePlayerFPQ34nw4r3snd11SoundHandleUlPQ54nw4r3snd6detail10BasicSound14AmbientArgInfoPQ44nw4r3snd6detail19ExternalSoundPlayerbPCQ44nw4r3snd14SoundStartable9StartInfo
+	.long detail_ConvertLabelStringToSoundId__Q34nw4r3snd18SoundArchivePlayerFPCc
+.balign 0x8
+
+.global __vt__Q44nw4r3snd18SoundArchivePlayer11WsdCallback
+__vt__Q44nw4r3snd18SoundArchivePlayer11WsdCallback:
+	.long 0
+	.long 0
+	.long __dt__Q44nw4r3snd18SoundArchivePlayer11WsdCallbackFv
+	.long GetWaveSoundData__Q44nw4r3snd18SoundArchivePlayer11WsdCallbackCFPQ44nw4r3snd6detail13WaveSoundInfoPQ44nw4r3snd6detail17WaveSoundNoteInfoPQ44nw4r3snd6detail8WaveDataPCviiUl
+.balign 0x8
+
+.global __vt__Q44nw4r3snd18SoundArchivePlayer17SeqNoteOnCallback
+__vt__Q44nw4r3snd18SoundArchivePlayer17SeqNoteOnCallback:
+	.long 0
+	.long 0
+	.long __dt__Q44nw4r3snd18SoundArchivePlayer17SeqNoteOnCallbackFv
+	.long NoteOn__Q44nw4r3snd18SoundArchivePlayer17SeqNoteOnCallbackFPQ44nw4r3snd6detail9SeqPlayeriRCQ44nw4r3snd6detail10NoteOnInfo
+.balign 0x8
+
+.global __vt__Q44nw4r3snd6detail10PlayerHeap
+__vt__Q44nw4r3snd6detail10PlayerHeap:
+	.long 0
+	.long 0
+	.long __dt__Q44nw4r3snd6detail10PlayerHeapFv
+	.long Alloc__Q34nw4r3snd9SoundHeapFUl
+.balign 0x8
+
+.global __vt__Q34nw4r3snd9SoundHeap
+__vt__Q34nw4r3snd9SoundHeap:
+	.long 0
+	.long 0
+	.long __dt__Q34nw4r3snd9SoundHeapFv
+	.long Alloc__Q34nw4r3snd9SoundHeapFUl
+.balign 0x8
+
+.global $$24063
+$$24063:
+.string "<< NW4R    - SND \tfinal   build: Jun  8 2007 11:17:15 (0x4199_60831) >>"
+.balign 0x8
+
+.global __vt__Q44nw4r3snd6detail10StrmPlayer
+__vt__Q44nw4r3snd6detail10StrmPlayer:
+	.long 0
+	.long 0
+	.long __dt__Q44nw4r3snd6detail10StrmPlayerFv
+	.long Start__Q44nw4r3snd6detail10StrmPlayerFv
+	.long Stop__Q44nw4r3snd6detail10StrmPlayerFv
+	.long Pause__Q44nw4r3snd6detail10StrmPlayerFb
+	.long IsActive__Q44nw4r3snd6detail10StrmPlayerCFv
+	.long IsStarted__Q44nw4r3snd6detail10StrmPlayerCFv
+	.long IsPause__Q44nw4r3snd6detail10StrmPlayerCFv
+	.long 0
+	.long 0
+	.long $2116$2__dt__Q44nw4r3snd6detail10StrmPlayerFv
+	.long $2116$2OnUpdateFrameSoundThread__Q44nw4r3snd6detail10StrmPlayerFv
+	.long $2116$2OnUpdateVoiceSoundThread__Q44nw4r3snd6detail10StrmPlayerFv
+	.long $2116$2OnShutdownSoundThread__Q44nw4r3snd6detail10StrmPlayerFv
+	.long OnUpdateFrameSoundThread__Q44nw4r3snd6detail10StrmPlayerFv
+	.long OnUpdateVoiceSoundThread__Q44nw4r3snd6detail10StrmPlayerFv
+	.long OnShutdownSoundThread__Q44nw4r3snd6detail10StrmPlayerFv
+.balign 0x8
+
+.global __vt__Q54nw4r3snd6detail10StrmPlayer16StrmDataLoadTask
+__vt__Q54nw4r3snd6detail10StrmPlayer16StrmDataLoadTask:
+	.long 0
+	.long 0
+	.long __dt__Q54nw4r3snd6detail10StrmPlayer16StrmDataLoadTaskFv
+	.long Execute__Q54nw4r3snd6detail10StrmPlayer16StrmDataLoadTaskFv
+	.long Cancel__Q54nw4r3snd6detail10StrmPlayer16StrmDataLoadTaskFv
+	.long OnCancel__Q54nw4r3snd6detail10StrmPlayer16StrmDataLoadTaskFv
+.balign 0x8
+
+.global __vt__Q54nw4r3snd6detail10StrmPlayer18StrmHeaderLoadTask
+__vt__Q54nw4r3snd6detail10StrmPlayer18StrmHeaderLoadTask:
+	.long 0
+	.long 0
+	.long __dt__Q54nw4r3snd6detail10StrmPlayer18StrmHeaderLoadTaskFv
+	.long Execute__Q54nw4r3snd6detail10StrmPlayer18StrmHeaderLoadTaskFv
+	.long Cancel__Q54nw4r3snd6detail10StrmPlayer18StrmHeaderLoadTaskFv
+	.long OnCancel__Q54nw4r3snd6detail10StrmPlayer18StrmHeaderLoadTaskFv
+.balign 0x8
+
+.global __vt__Q44nw4r3snd6detail9StrmSound
+__vt__Q44nw4r3snd6detail9StrmSound:
+	.long 0
+	.long 0
+	.long GetRuntimeTypeInfo__Q44nw4r3snd6detail9StrmSoundCFv
+	.long __dt__Q44nw4r3snd6detail9StrmSoundFv
+	.long Update__Q44nw4r3snd6detail10BasicSoundFv
+	.long StartPrepared__Q44nw4r3snd6detail10BasicSoundFv
+	.long Stop__Q44nw4r3snd6detail10BasicSoundFi
+	.long Pause__Q44nw4r3snd6detail10BasicSoundFbi
+	.long SetAutoStopCounter__Q44nw4r3snd6detail10BasicSoundFi
+	.long FadeIn__Q44nw4r3snd6detail10BasicSoundFi
+	.long Shutdown__Q44nw4r3snd6detail9StrmSoundFv
+	.long IsPrepared__Q44nw4r3snd6detail9StrmSoundCFv
+	.long IsPause__Q44nw4r3snd6detail10BasicSoundCFv
+	.long SetInitialVolume__Q44nw4r3snd6detail10BasicSoundFf
+	.long SetVolume__Q44nw4r3snd6detail10BasicSoundFfi
+	.long SetPitch__Q44nw4r3snd6detail10BasicSoundFf
+	.long SetPan__Q44nw4r3snd6detail10BasicSoundFf
+	.long SetSurroundPan__Q44nw4r3snd6detail10BasicSoundFf
+	.long SetLpfFreq__Q44nw4r3snd6detail10BasicSoundFf
+	.long SetPlayerPriority__Q44nw4r3snd6detail9StrmSoundFi
+	.long SetRemoteFilter__Q44nw4r3snd6detail10BasicSoundFi
+	.long SetPanMode__Q44nw4r3snd6detail10BasicSoundFQ44nw4r3snd6detail7PanMode
+	.long SetPanCurve__Q44nw4r3snd6detail10BasicSoundFQ44nw4r3snd6detail8PanCurve
+	.long IsAttachedTempSpecialHandle__Q44nw4r3snd6detail9StrmSoundFv
+	.long DetachTempSpecialHandle__Q44nw4r3snd6detail9StrmSoundFv
+	.long InitParam__Q44nw4r3snd6detail10BasicSoundFv
+	.long GetBasicPlayer__Q44nw4r3snd6detail9StrmSoundFv
+	.long GetBasicPlayer__Q44nw4r3snd6detail9StrmSoundCFv
+.balign 0x8
+
+.global switch_80396430
+switch_80396430:
+	.long 0x8004D780
+	.long 0x8004D788
+	.long 0x8004D798
+	.long 0x8004D7AC
+	.long 0x8004D7B8
+	.long 0x8004D7C8
+	.long 0x8004D7DC
+	.long 0x8004D7E8
+	.long 0x8004D7FC
+
 .global lbl_80396454
 lbl_80396454:
 	.incbin "baserom.dol", 0x392554, 0x14
@@ -214,10 +326,20 @@ lbl_80397030:
 	.incbin "baserom.dol", 0x393130, 0x48
 .global lbl_80397078
 lbl_80397078:
-	.incbin "baserom.dol", 0x393178, 0x90
+	.incbin "baserom.dol", 0x393178, 0x48
+
+.global $$27641
+$$27641:
+	.string "<< NW4R    - G3D \tfinal   build: Jun  8 2007 11:16:25 (0x4199_60831) >>"
+
 .global lbl_80397108
 lbl_80397108:
-	.incbin "baserom.dol", 0x393208, 0x80
+	.incbin "baserom.dol", 0x393208, 0x38
+
+.global lbl_80397140
+lbl_80397140:
+.string "<< NW4R    - LYT \tfinal   build: Jun  8 2007 11:17:26 (0x4199_60831) >>"
+
 .global lbl_80397188
 lbl_80397188:
 	.incbin "baserom.dol", 0x393288, 0x68
