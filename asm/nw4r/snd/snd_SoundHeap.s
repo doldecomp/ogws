@@ -6,9 +6,9 @@
 __ct__Q34nw4r3snd9SoundHeapFv:
 /* 80045BAC 00040AAC  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80045BB0 00040AB0  7C 08 02 A6 */	mflr r0
-/* 80045BB4 00040AB4  3C 80 80 39 */	lis r4, lbl_803962F0@ha
+/* 80045BB4 00040AB4  3C 80 80 39 */	lis r4, __vt__Q34nw4r3snd9SoundHeap@ha
 /* 80045BB8 00040AB8  90 01 00 14 */	stw r0, 0x14(r1)
-/* 80045BBC 00040ABC  38 84 62 F0 */	addi r4, r4, lbl_803962F0@l
+/* 80045BBC 00040ABC  38 84 62 F0 */	addi r4, r4, __vt__Q34nw4r3snd9SoundHeap@l
 /* 80045BC0 00040AC0  93 E1 00 0C */	stw r31, 0xc(r1)
 /* 80045BC4 00040AC4  7C 7F 1B 78 */	mr r31, r3
 /* 80045BC8 00040AC8  90 83 00 00 */	stw r4, 0(r3)
@@ -34,8 +34,8 @@ __dt__Q34nw4r3snd9SoundHeapFv:
 /* 80045C0C 00040B0C  93 C1 00 08 */	stw r30, 8(r1)
 /* 80045C10 00040B10  7C 7E 1B 78 */	mr r30, r3
 /* 80045C14 00040B14  41 82 00 34 */	beq lbl_80045C48
-/* 80045C18 00040B18  3C 80 80 39 */	lis r4, lbl_803962F0@ha
-/* 80045C1C 00040B1C  38 84 62 F0 */	addi r4, r4, lbl_803962F0@l
+/* 80045C18 00040B18  3C 80 80 39 */	lis r4, __vt__Q34nw4r3snd9SoundHeap@ha
+/* 80045C1C 00040B1C  38 84 62 F0 */	addi r4, r4, __vt__Q34nw4r3snd9SoundHeap@l
 /* 80045C20 00040B20  90 83 00 00 */	stw r4, 0(r3)
 /* 80045C24 00040B24  38 63 00 1C */	addi r3, r3, 0x1c
 /* 80045C28 00040B28  4B FF 3B 65 */	bl Destroy__Q44nw4r3snd6detail9FrameHeapFv

@@ -4,9 +4,9 @@
 
 .global __ct__Q34nw4r3snd12SoundArchiveFv
 __ct__Q34nw4r3snd12SoundArchiveFv:
-/* 80041D10 0003CC10  3C A0 80 39 */	lis r5, lbl_80396270@ha
+/* 80041D10 0003CC10  3C A0 80 39 */	lis r5, __vt__Q34nw4r3snd12SoundArchive@ha
 /* 80041D14 0003CC14  38 80 00 00 */	li r4, 0
-/* 80041D18 0003CC18  38 A5 62 70 */	addi r5, r5, lbl_80396270@l
+/* 80041D18 0003CC18  38 A5 62 70 */	addi r5, r5, __vt__Q34nw4r3snd12SoundArchive@l
 /* 80041D1C 0003CC1C  38 00 00 2F */	li r0, 0x2f
 /* 80041D20 0003CC20  90 A3 00 00 */	stw r5, 0(r3)
 /* 80041D24 0003CC24  90 83 00 04 */	stw r4, 4(r3)

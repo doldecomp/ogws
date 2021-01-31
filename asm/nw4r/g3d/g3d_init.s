@@ -9,7 +9,7 @@ G3dInit__Q24nw4r3g3dFb:
 /* 80077B44 00072A44  90 01 00 14 */	stw r0, 0x14(r1)
 /* 80077B48 00072A48  93 E1 00 0C */	stw r31, 0xc(r1)
 /* 80077B4C 00072A4C  7C 7F 1B 78 */	mr r31, r3
-/* 80077B50 00072A50  80 6D 80 E8 */	lwz r3, lbl_804BD468-_SDA_BASE_(r13)
+/* 80077B50 00072A50  80 6D 80 E8 */	lwz r3, NW4R_G3D_Version___22$$2unnamed$$2g3d_init_cpp$$2-_SDA_BASE_(r13)
 /* 80077B54 00072A54  48 07 54 ED */	bl OSRegisterVersion
 /* 80077B58 00072A58  2C 1F 00 00 */	cmpwi r31, 0
 /* 80077B5C 00072A5C  41 82 00 0C */	beq lbl_80077B68

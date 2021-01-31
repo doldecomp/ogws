@@ -7,7 +7,7 @@ LytInit__Q24nw4r3lytFv:
 /* 800792C8 000741C8  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 800792CC 000741CC  7C 08 02 A6 */	mflr r0
 /* 800792D0 000741D0  90 01 00 14 */	stw r0, 0x14(r1)
-/* 800792D4 000741D4  80 6D 80 F0 */	lwz r3, lbl_804BD470-_SDA_BASE_(r13)
+/* 800792D4 000741D4  80 6D 80 F0 */	lwz r3, NW4R_LYT_Version___22$$2unnamed$$2lyt_pane_cpp$$2-_SDA_BASE_(r13)
 /* 800792D8 000741D8  48 07 3D 69 */	bl OSRegisterVersion
 /* 800792DC 000741DC  38 60 00 04 */	li r3, 4
 /* 800792E0 000741E0  64 63 00 04 */	oris r3, r3, 4

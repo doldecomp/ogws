@@ -3220,7 +3220,7 @@ lbl_80066DC8:
 
 .global GetIndMtxOp__Q34nw4r3g3d8G3DStateFv
 GetIndMtxOp__Q34nw4r3g3d8G3DStateFv:
-/* 80066DD0 00061CD0  80 6D 80 AC */	lwz r3, lbl_804BD42C-_SDA_BASE_(r13)
+/* 80066DD0 00061CD0  80 6D 80 AC */	lwz r3, pG3DStateIndMtxOp__Q44nw4r3g3d8G3DState23$$2unnamed$$2g3d_state_cpp$$2-_SDA_BASE_(r13)
 /* 80066DD4 00061CD4  4E 80 00 20 */	blr 
 
 .global SetFog__Q34nw4r3g3d8G3DStateFQ34nw4r3g3d3Fogi
