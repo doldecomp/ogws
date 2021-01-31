@@ -162,9 +162,15 @@ switch_80396430:
 	.long 0x8004D7E8
 	.long 0x8004D7FC
 
-.global lbl_80396454
-lbl_80396454:
-	.incbin "baserom.dol", 0x392554, 0x14
+.global __vt__Q44nw4r3snd6detail5Voice
+__vt__Q44nw4r3snd6detail5Voice:
+	.long 0
+	.long 0
+	.long __dt__Q44nw4r3snd6detail5VoiceFv
+	.long InvalidateData__Q44nw4r3snd6detail5VoiceFPCvPCv
+	.long InvalidateWaveData__Q44nw4r3snd6detail5VoiceFPCvPCv
+.balign 0x8
+
 .global lbl_80396468
 lbl_80396468:
 	.incbin "baserom.dol", 0x392568, 0x10
