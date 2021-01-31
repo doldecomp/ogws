@@ -150,78 +150,347 @@ __vt__Q44nw4r3snd6detail5Voice:
 	.long InvalidateWaveData__Q44nw4r3snd6detail5VoiceFPCvPCv
 .balign 0x8
 
+# I think this is PanTableTable__Q44nw4r3snd6detail4Util, unsure though
 .global lbl_80396468
 lbl_80396468:
-	.incbin "baserom.dol", 0x392568, 0x10
-.global lbl_80396478
-lbl_80396478:
-	.incbin "baserom.dol", 0x392578, 0x70
-.global lbl_803964E8
-lbl_803964E8:
-	.incbin "baserom.dol", 0x3925E8, 0x78
-.global lbl_80396560
-lbl_80396560:
-	.incbin "baserom.dol", 0x392660, 0x20
-.global lbl_80396580
-lbl_80396580:
-	.incbin "baserom.dol", 0x392680, 0x20
-.global lbl_803965A0
-lbl_803965A0:
-	.incbin "baserom.dol", 0x3926A0, 0x20
-.global lbl_803965C0
-lbl_803965C0:
-	.incbin "baserom.dol", 0x3926C0, 0x20
-.global lbl_803965E0
-lbl_803965E0:
-	.incbin "baserom.dol", 0x3926E0, 0x20
-.global lbl_80396600
-lbl_80396600:
-	.incbin "baserom.dol", 0x392700, 0x20
-.global lbl_80396620
-lbl_80396620:
-	.incbin "baserom.dol", 0x392720, 0x20
-.global lbl_80396640
-lbl_80396640:
-	.incbin "baserom.dol", 0x392740, 0x20
-.global lbl_80396660
-lbl_80396660:
-	.incbin "baserom.dol", 0x392760, 0x20
-.global lbl_80396680
-lbl_80396680:
-	.incbin "baserom.dol", 0x392780, 0x40
-.global lbl_803966C0
-lbl_803966C0:
-	.incbin "baserom.dol", 0x3927C0, 0x60
-.global lbl_80396720
-lbl_80396720:
-	.incbin "baserom.dol", 0x392820, 0x20
-.global lbl_80396740
-lbl_80396740:
-	.incbin "baserom.dol", 0x392840, 0x20
-.global lbl_80396760
-lbl_80396760:
-	.incbin "baserom.dol", 0x392860, 0x20
-.global lbl_80396780
-lbl_80396780:
-	.incbin "baserom.dol", 0x392880, 0x44
-.global lbl_803967C4
-lbl_803967C4:
-	.incbin "baserom.dol", 0x3928C4, 0x44
-.global lbl_80396808
-lbl_80396808:
-	.incbin "baserom.dol", 0x392908, 0x44
-.global lbl_8039684C
-lbl_8039684C:
-	.incbin "baserom.dol", 0x39294C, 0x44
-.global lbl_80396890
-lbl_80396890:
-	.incbin "baserom.dol", 0x392990, 0x48
-.global lbl_803968D8
-lbl_803968D8:
-	.incbin "baserom.dol", 0x3929D8, 0x48
-.global lbl_80396920
-lbl_80396920:
-	.incbin "baserom.dol", 0x392A20, 0x48
+	.long 0x80376F3C
+	.long 0x80377340
+	.long 0x80377744
+	.long 0
+.balign 0x8
+
+.global __vt__Q44nw4r3snd6detail9WaveSound
+__vt__Q44nw4r3snd6detail9WaveSound:
+	.long 0
+	.long 0
+	.long GetRuntimeTypeInfo__Q44nw4r3snd6detail9WaveSoundCFv
+	.long __dt__Q44nw4r3snd6detail9WaveSoundFv
+	.long Update__Q44nw4r3snd6detail10BasicSoundFv
+	.long StartPrepared__Q44nw4r3snd6detail10BasicSoundFv
+	.long Stop__Q44nw4r3snd6detail10BasicSoundFi
+	.long Pause__Q44nw4r3snd6detail10BasicSoundFbi
+	.long SetAutoStopCounter__Q44nw4r3snd6detail10BasicSoundFi
+	.long FadeIn__Q44nw4r3snd6detail10BasicSoundFi
+	.long Shutdown__Q44nw4r3snd6detail9WaveSoundFv
+	.long IsPrepared__Q44nw4r3snd6detail9WaveSoundCFv
+	.long IsPause__Q44nw4r3snd6detail10BasicSoundCFv
+	.long SetInitialVolume__Q44nw4r3snd6detail10BasicSoundFf
+	.long SetVolume__Q44nw4r3snd6detail10BasicSoundFfi
+	.long SetPitch__Q44nw4r3snd6detail10BasicSoundFf
+	.long SetPan__Q44nw4r3snd6detail10BasicSoundFf
+	.long SetSurroundPan__Q44nw4r3snd6detail10BasicSoundFf
+	.long SetLpfFreq__Q44nw4r3snd6detail10BasicSoundFf
+	.long SetPlayerPriority__Q44nw4r3snd6detail9WaveSoundFi
+	.long SetRemoteFilter__Q44nw4r3snd6detail10BasicSoundFi
+	.long SetPanMode__Q44nw4r3snd6detail10BasicSoundFQ44nw4r3snd6detail7PanMode
+	.long SetPanCurve__Q44nw4r3snd6detail10BasicSoundFQ44nw4r3snd6detail8PanCurve
+	.long IsAttachedTempSpecialHandle__Q44nw4r3snd6detail9WaveSoundFv
+	.long DetachTempSpecialHandle__Q44nw4r3snd6detail9WaveSoundFv
+	.long InitParam__Q44nw4r3snd6detail10BasicSoundFv
+	.long GetBasicPlayer__Q44nw4r3snd6detail9WaveSoundFv
+	.long GetBasicPlayer__Q44nw4r3snd6detail9WaveSoundCFv
+
+.global __vt__Q44nw4r3snd6detail9WsdPlayer
+__vt__Q44nw4r3snd6detail9WsdPlayer:
+	.long 0
+	.long 0
+	.long ______dt__Q44nw4r3snd6detail9WsdPlayerFv
+	.long Start__Q44nw4r3snd6detail9WsdPlayerFv
+	.long Stop__Q44nw4r3snd6detail9WsdPlayerFv
+	.long Pause__Q44nw4r3snd6detail9WsdPlayerFb
+	.long IsActive__Q44nw4r3snd6detail9WsdPlayerCFv
+	.long IsStarted__Q44nw4r3snd6detail9WsdPlayerCFv
+	.long IsPause__Q44nw4r3snd6detail9WsdPlayerCFv
+	.long 0
+	.long 0
+	.long $$2116$$2__dt__Q44nw4r3snd6detail9WsdPlayerFv
+	.long $$2116$$2InvalidateData__Q44nw4r3snd6detail9WsdPlayerFPCvPCv
+	.long $$2116$$2InvalidateWaveData__Q44nw4r3snd6detail9WsdPlayerFPCvPCv
+	.long 0
+	.long 0
+	.long $$2128$$2__dt__Q44nw4r3snd6detail9WsdPlayerFv
+	.long $$2128$$2OnUpdateFrameSoundThread__Q44nw4r3snd6detail9WsdPlayerFv
+	.long OnUpdateVoiceSoundThread__Q54nw4r3snd6detail11SoundThread14PlayerCallbackFv
+	.long $$2128$$2OnShutdownSoundThread__Q44nw4r3snd6detail9WsdPlayerFv
+	.long InvalidateData__Q44nw4r3snd6detail9WsdPlayerFPCvPCv
+	.long InvalidateWaveData__Q44nw4r3snd6detail9WsdPlayerFPCvPCv
+	.long OnUpdateFrameSoundThread__Q44nw4r3snd6detail9WsdPlayerFv
+	.long OnShutdownSoundThread__Q44nw4r3snd6detail9WsdPlayerFv
+	.long 0
+	.long 0
+	.long 0
+	.long 0
+	.long 0
+	.long 0
+.balign 0x8
+
+# ResNameData_Models__Q34nw4r3g3d25@unnamed@g3d_resfile_cpp@
+.global ResNameData_Models__Q34nw4r3g3d25$$2unnamed$$2g3d_resfile_cpp$$2
+ResNameData_Models__Q34nw4r3g3d25$$2unnamed$$2g3d_resfile_cpp$$2:
+	.long 0xE # str length
+	# ResNameData name string has max len of 27 it seems
+	# Maybe the structure is supposed to align to 32?
+	.string "3DModels(NW4R)"
+	.balign 16
+
+# ResNameData_Pltts__Q34nw4r3g3d25@unnamed@g3d_resfile_cpp@
+.global ResNameData_Pltts__Q34nw4r3g3d25$$2unnamed$$2g3d_resfile_cpp$$2
+ ResNameData_Pltts__Q34nw4r3g3d25$$2unnamed$$2g3d_resfile_cpp$$2:
+	.long 0xE
+	.string "Palettes(NW4R)"
+	.balign 16
+
+# ResNameData_Textures__Q34nw4r3g3d25@unnamed@g3d_resfile_cpp@
+.global ResNameData_Textures__Q34nw4r3g3d25$$2unnamed$$2g3d_resfile_cpp$$2
+ResNameData_Textures__Q34nw4r3g3d25$$2unnamed$$2g3d_resfile_cpp$$2:
+	.long 0xE
+	.string "Textures(NW4R)"
+	.balign 16
+
+# ResNameData_AnmChr__Q34nw4r3g3d25@unnamed@g3d_resfile_cpp@
+.global ResNameData_AnmChr__Q34nw4r3g3d25$$2unnamed$$2g3d_resfile_cpp$$2
+ResNameData_AnmChr__Q34nw4r3g3d25$$2unnamed$$2g3d_resfile_cpp$$2:
+	.long 0xC
+	.string "AnmChr(NW4R)"
+	.balign 16
+
+# ResNameData_AnmVis__Q34nw4r3g3d25@unnamed@g3d_resfile_cpp@
+.global ResNameData_AnmVis__Q34nw4r3g3d25$$2unnamed$$2g3d_resfile_cpp$$2
+ResNameData_AnmVis__Q34nw4r3g3d25$$2unnamed$$2g3d_resfile_cpp$$2:
+	.long 0xC
+	.string "AnmVis(NW4R)"
+	.balign 16
+
+# ResNameData_AnmClr__Q34nw4r3g3d25@unnamed@g3d_resfile_cpp@
+.global ResNameData_AnmClr__Q34nw4r3g3d25$$2unnamed$$2g3d_resfile_cpp$$2
+ResNameData_AnmClr__Q34nw4r3g3d25$$2unnamed$$2g3d_resfile_cpp$$2:
+	.long 0xC
+	.string "AnmClr(NW4R)"
+	.balign 16
+
+# ResNameData_AnmTexPat__Q34nw4r3g3d25@unnamed@g3d_resfile_cpp@
+.global ResNameData_AnmTexPat__Q34nw4r3g3d25$$2unnamed$$2g3d_resfile_cpp$$2
+ResNameData_AnmTexPat__Q34nw4r3g3d25$$2unnamed$$2g3d_resfile_cpp$$2:
+	.long 0xF
+	.string "AnmTexPat(NW4R)"
+	.balign 16
+
+# ResNameData_AnmTexSrt__Q34nw4r3g3d25@unnamed@g3d_resfile_cpp@
+.global ResNameData_AnmTexSrt__Q34nw4r3g3d25$$2unnamed$$2g3d_resfile_cpp$$2
+ResNameData_AnmTexSrt__Q34nw4r3g3d25$$2unnamed$$2g3d_resfile_cpp$$2:
+	.long 0xF
+	.string "AnmTexSrt(NW4R)"
+	.balign 16
+
+# ResNameData_AnmShp__Q34nw4r3g3d25@unnamed@g3d_resfile_cpp@
+.global ResNameData_AnmShp__Q34nw4r3g3d25$$2unnamed$$2g3d_resfile_cpp$$2
+ResNameData_AnmShp__Q34nw4r3g3d25$$2unnamed$$2g3d_resfile_cpp$$2:
+	.long 0xC
+	.string "AnmShp(NW4R)"
+	.balign 16
+
+# ResNameData_AnmScn__Q34nw4r3g3d25@unnamed@g3d_resfile_cpp@
+.global ResNameData_AnmScn__Q34nw4r3g3d25$$2unnamed$$2g3d_resfile_cpp$$2
+ResNameData_AnmScn__Q34nw4r3g3d25$$2unnamed$$2g3d_resfile_cpp$$2:
+	.long 0xC
+	.string "AnmScn(NW4R)"
+	.balign 0x10
+
+# ResNameData_Ext__Q34nw4r3g3d25@unnamed@g3d_resfile_cpp@ (UNUSED)
+.global ResNameData_Ext__Q34nw4r3g3d25$$2unnamed$$2g3d_resfile_cpp$$2
+ResNameData_Ext__Q34nw4r3g3d25$$2unnamed$$2g3d_resfile_cpp$$2:
+	.long 0x8
+	.string "External"
+	.fill 0x13
+
+.global switch_803966C0
+switch_803966C0:
+    .long 0x80056124
+    .long 0x80056130
+    .long 0x8005613c
+    .long 0x80056148
+    .long 0x80056164
+    .long 0x8005616c
+    .long 0x80056174
+    .long 0x8005617c
+    .long 0x80056184
+    .long 0x8005618c
+    .long 0x80056194
+    .long 0x8005619c
+    .long 0x800561a4
+    .long 0x800561ac
+    .long 0x800561b4
+    .long 0x800561bc
+    .long 0x800561c4
+    .long 0x800561cc
+    .long 0x800561d4
+    .long 0x80056154
+    .long 0x8005615c
+    .long 0
+    .long 0
+    .long 0
+
+.global ResNameData_LightSet
+ResNameData_LightSet:
+	.long 0xE
+	.string "LightSet(NW4R)"
+	.balign 16
+
+.global ResNameData_AmbLights
+ResNameData_AmbLights:
+	.long 0xF
+	.string "AmbLights(NW4R)"
+	.balign 16
+
+.global ResNameData_Lights
+ResNameData_Lights:
+	.long 0xC
+	.string "Lights(NW4R)"
+	.balign 16
+
+.global __vt__Q34nw4r3g3d12AnmObjVisRes
+__vt__Q34nw4r3g3d12AnmObjVisRes:
+    .long 0
+    .long 0
+    .long IsDerivedFrom__Q34nw4r3g3d12AnmObjVisResCFQ44nw4r3g3d6G3dObj7TypeObj
+    .long G3dProc__Q34nw4r3g3d9AnmObjVisFUlUlPv
+    .long __dt__Q34nw4r3g3d12AnmObjVisResFv
+    .long GetTypeObj__Q34nw4r3g3d12AnmObjVisResCFv
+    .long GetTypeName__Q34nw4r3g3d12AnmObjVisResCFv
+    .long SetFrame__Q34nw4r3g3d12AnmObjVisResFf
+    .long GetFrame__Q34nw4r3g3d12AnmObjVisResCFv
+    .long UpdateFrame__Q34nw4r3g3d12AnmObjVisResFv
+    .long SetUpdateRate__Q34nw4r3g3d12AnmObjVisResFf
+    .long GetUpdateRate__Q34nw4r3g3d12AnmObjVisResCFv
+    .long Bind__Q34nw4r3g3d12AnmObjVisResFQ34nw4r3g3d6ResMdl
+    .long Release__Q34nw4r3g3d9AnmObjVisFv
+    .long GetResult__Q34nw4r3g3d12AnmObjVisResFUl
+    .long Attach__Q34nw4r3g3d9AnmObjVisFiPQ34nw4r3g3d12AnmObjVisRes
+    .long Detach__Q34nw4r3g3d9AnmObjVisFi
+
+.global __vt__Q34nw4r3g3d11AnmObjVisOR
+__vt__Q34nw4r3g3d11AnmObjVisOR:
+    .long 0
+    .long 0
+    .long IsDerivedFrom__Q34nw4r3g3d11AnmObjVisORCFQ44nw4r3g3d6G3dObj7TypeObj
+    .long G3dProc__Q34nw4r3g3d13AnmObjVisNodeFUlUlPv
+    .long __dt__Q34nw4r3g3d11AnmObjVisORFv
+    .long GetTypeObj__Q34nw4r3g3d11AnmObjVisORCFv
+    .long GetTypeName__Q34nw4r3g3d11AnmObjVisORCFv
+    .long SetFrame__Q34nw4r3g3d13AnmObjVisNodeFf
+    .long GetFrame__Q34nw4r3g3d13AnmObjVisNodeCFv
+    .long UpdateFrame__Q34nw4r3g3d13AnmObjVisNodeFv
+    .long SetUpdateRate__Q34nw4r3g3d13AnmObjVisNodeFf
+    .long GetUpdateRate__Q34nw4r3g3d13AnmObjVisNodeCFv
+    .long Bind__Q34nw4r3g3d13AnmObjVisNodeFQ34nw4r3g3d6ResMdl
+    .long Release__Q34nw4r3g3d13AnmObjVisNodeFv
+    .long GetResult__Q34nw4r3g3d11AnmObjVisORFUl
+    .long Attach__Q34nw4r3g3d13AnmObjVisNodeFiPQ34nw4r3g3d12AnmObjVisRes
+    .long Detach__Q34nw4r3g3d13AnmObjVisNodeFi
+
+.global __vt__Q34nw4r3g3d13AnmObjVisNode
+__vt__Q34nw4r3g3d13AnmObjVisNode:
+    .long 0
+    .long 0
+    .long IsDerivedFrom__Q34nw4r3g3d13AnmObjVisNodeCFQ44nw4r3g3d6G3dObj7TypeObj
+    .long G3dProc__Q34nw4r3g3d13AnmObjVisNodeFUlUlPv
+    .long __dt__Q34nw4r3g3d13AnmObjVisNodeFv
+    .long GetTypeObj__Q34nw4r3g3d13AnmObjVisNodeCFv
+    .long GetTypeName__Q34nw4r3g3d13AnmObjVisNodeCFv
+    .long SetFrame__Q34nw4r3g3d13AnmObjVisNodeFf
+    .long GetFrame__Q34nw4r3g3d13AnmObjVisNodeCFv
+    .long UpdateFrame__Q34nw4r3g3d13AnmObjVisNodeFv
+    .long SetUpdateRate__Q34nw4r3g3d13AnmObjVisNodeFf
+    .long GetUpdateRate__Q34nw4r3g3d13AnmObjVisNodeCFv
+    .long Bind__Q34nw4r3g3d13AnmObjVisNodeFQ34nw4r3g3d6ResMdl
+    .long Release__Q34nw4r3g3d13AnmObjVisNodeFv
+    .long 0
+    .long Attach__Q34nw4r3g3d13AnmObjVisNodeFiPQ34nw4r3g3d12AnmObjVisRes
+    .long Detach__Q34nw4r3g3d13AnmObjVisNodeFi
+
+.global __vt__Q34nw4r3g3d9AnmObjVis
+__vt__Q34nw4r3g3d9AnmObjVis:
+    .long 0
+    .long 0
+    .long IsDerivedFrom__Q34nw4r3g3d9AnmObjVisCFQ44nw4r3g3d6G3dObj7TypeObj
+    .long G3dProc__Q34nw4r3g3d9AnmObjVisFUlUlPv
+    .long __dt__Q34nw4r3g3d9AnmObjVisFv
+    .long GetTypeObj__Q34nw4r3g3d9AnmObjVisCFv
+    .long GetTypeName__Q34nw4r3g3d9AnmObjVisCFv
+    .long 0
+    .long 0
+    .long 0
+    .long 0
+    .long 0
+    .long 0
+    .long Release__Q34nw4r3g3d9AnmObjVisFv
+    .long 0
+    .long Attach__Q34nw4r3g3d9AnmObjVisFiPQ34nw4r3g3d12AnmObjVisRes
+    .long Detach__Q34nw4r3g3d9AnmObjVisFi
+
+.global __vt__Q34nw4r3g3d15AnmObjMatClrRes
+__vt__Q34nw4r3g3d15AnmObjMatClrRes:
+    .long 0
+    .long 0
+    .long IsDerivedFrom__Q34nw4r3g3d15AnmObjMatClrResCFQ44nw4r3g3d6G3dObj7TypeObj
+    .long G3dProc__Q34nw4r3g3d15AnmObjMatClrResFUlUlPv
+    .long __dt__Q34nw4r3g3d15AnmObjMatClrResFv
+    .long GetTypeObj__Q34nw4r3g3d15AnmObjMatClrResCFv
+    .long GetTypeName__Q34nw4r3g3d15AnmObjMatClrResCFv
+    .long SetFrame__Q34nw4r3g3d15AnmObjMatClrResFf
+    .long GetFrame__Q34nw4r3g3d15AnmObjMatClrResCFv
+    .long UpdateFrame__Q34nw4r3g3d15AnmObjMatClrResFv
+    .long SetUpdateRate__Q34nw4r3g3d15AnmObjMatClrResFf
+    .long GetUpdateRate__Q34nw4r3g3d15AnmObjMatClrResCFv
+    .long Bind__Q34nw4r3g3d15AnmObjMatClrResFQ34nw4r3g3d6ResMdl
+    .long Release__Q34nw4r3g3d12AnmObjMatClrFv
+    .long GetResult__Q34nw4r3g3d15AnmObjMatClrResFPQ34nw4r3g3d12ClrAnmResultUl
+    .long Attach__Q34nw4r3g3d12AnmObjMatClrFiPQ34nw4r3g3d15AnmObjMatClrRes
+    .long Detach__Q34nw4r3g3d12AnmObjMatClrFi
+    .long DetachAll__Q34nw4r3g3d12AnmObjMatClrFv
+
+.global __vt__Q34nw4r3g3d20AnmObjMatClrOverride
+__vt__Q34nw4r3g3d20AnmObjMatClrOverride:
+    .long 0
+    .long 0
+    .long IsDerivedFrom__Q34nw4r3g3d20AnmObjMatClrOverrideCFQ44nw4r3g3d6G3dObj7TypeObj
+    .long G3dProc__Q34nw4r3g3d16AnmObjMatClrNodeFUlUlPv
+    .long __dt__Q34nw4r3g3d20AnmObjMatClrOverrideFv
+    .long GetTypeObj__Q34nw4r3g3d20AnmObjMatClrOverrideCFv
+    .long GetTypeName__Q34nw4r3g3d20AnmObjMatClrOverrideCFv
+    .long SetFrame__Q34nw4r3g3d16AnmObjMatClrNodeFf
+    .long GetFrame__Q34nw4r3g3d16AnmObjMatClrNodeCFv
+    .long UpdateFrame__Q34nw4r3g3d16AnmObjMatClrNodeFv
+    .long SetUpdateRate__Q34nw4r3g3d16AnmObjMatClrNodeFf
+    .long GetUpdateRate__Q34nw4r3g3d16AnmObjMatClrNodeCFv
+    .long Bind__Q34nw4r3g3d16AnmObjMatClrNodeFQ34nw4r3g3d6ResMdl
+    .long Release__Q34nw4r3g3d16AnmObjMatClrNodeFv
+    .long GetResult__Q34nw4r3g3d20AnmObjMatClrOverrideFPQ34nw4r3g3d12ClrAnmResultUl
+    .long Attach__Q34nw4r3g3d16AnmObjMatClrNodeFiPQ34nw4r3g3d15AnmObjMatClrRes
+    .long Detach__Q34nw4r3g3d16AnmObjMatClrNodeFi
+    .long DetachAll__Q34nw4r3g3d16AnmObjMatClrNodeFv
+
+.global __vt__Q34nw4r3g3d16AnmObjMatClrNode
+__vt__Q34nw4r3g3d16AnmObjMatClrNode:
+    .long 0
+    .long 0
+    .long IsDerivedFrom__Q34nw4r3g3d16AnmObjMatClrNodeCFQ44nw4r3g3d6G3dObj7TypeObj
+    .long G3dProc__Q34nw4r3g3d16AnmObjMatClrNodeFUlUlPv
+    .long __dt__Q34nw4r3g3d16AnmObjMatClrNodeFv
+    .long GetTypeObj__Q34nw4r3g3d16AnmObjMatClrNodeCFv
+    .long GetTypeName__Q34nw4r3g3d16AnmObjMatClrNodeCFv
+    .long SetFrame__Q34nw4r3g3d16AnmObjMatClrNodeFf
+    .long GetFrame__Q34nw4r3g3d16AnmObjMatClrNodeCFv
+    .long UpdateFrame__Q34nw4r3g3d16AnmObjMatClrNodeFv
+    .long SetUpdateRate__Q34nw4r3g3d16AnmObjMatClrNodeFf
+    .long GetUpdateRate__Q34nw4r3g3d16AnmObjMatClrNodeCFv
+    .long Bind__Q34nw4r3g3d16AnmObjMatClrNodeFQ34nw4r3g3d6ResMdl
+    .long Release__Q34nw4r3g3d16AnmObjMatClrNodeFv
+    .long 0
+    .long Attach__Q34nw4r3g3d16AnmObjMatClrNodeFiPQ34nw4r3g3d15AnmObjMatClrRes
+    .long Detach__Q34nw4r3g3d16AnmObjMatClrNodeFi
+    .long DetachAll__Q34nw4r3g3d16AnmObjMatClrNodeFv
+
 .global lbl_80396968
 lbl_80396968:
 	.incbin "baserom.dol", 0x392A68, 0x48

@@ -13,9 +13,9 @@ __ct__Q44nw4r3snd6detail9WaveSoundFPQ44nw4r3snd6detail50SoundInstanceManager$$0Q
 /* 8004EEF4 00049DF4  93 C1 00 08 */	stw r30, 8(r1)
 /* 8004EEF8 00049DF8  7C 7E 1B 78 */	mr r30, r3
 /* 8004EEFC 00049DFC  4B FE 73 85 */	bl __ct__Q44nw4r3snd6detail10BasicSoundFv
-/* 8004EF00 00049E00  3C 80 80 39 */	lis r4, lbl_80396478@ha
+/* 8004EF00 00049E00  3C 80 80 39 */	lis r4, __vt__Q44nw4r3snd6detail9WaveSound@ha
 /* 8004EF04 00049E04  38 7E 00 D8 */	addi r3, r30, 0xd8
-/* 8004EF08 00049E08  38 84 64 78 */	addi r4, r4, lbl_80396478@l
+/* 8004EF08 00049E08  38 84 64 78 */	addi r4, r4, __vt__Q44nw4r3snd6detail9WaveSound@l
 /* 8004EF0C 00049E0C  90 9E 00 00 */	stw r4, 0(r30)
 /* 8004EF10 00049E10  48 00 06 A9 */	bl __ct__Q44nw4r3snd6detail9WsdPlayerFv
 /* 8004EF14 00049E14  38 00 00 00 */	li r0, 0

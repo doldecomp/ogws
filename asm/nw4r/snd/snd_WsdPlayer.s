@@ -10,9 +10,9 @@ __ct__Q44nw4r3snd6detail9WsdPlayerFv:
 /* 8004F5C4 0004A4C4  93 E1 00 0C */	stw r31, 0xc(r1)
 /* 8004F5C8 0004A4C8  7C 7F 1B 78 */	mr r31, r3
 /* 8004F5CC 0004A4CC  4B FE 6B 55 */	bl __ct__Q44nw4r3snd6detail11BasicPlayerFv
-/* 8004F5D0 0004A4D0  3C A0 80 39 */	lis r5, lbl_803964E8@ha
+/* 8004F5D0 0004A4D0  3C A0 80 39 */	lis r5, __vt__Q44nw4r3snd6detail9WsdPlayer@ha
 /* 8004F5D4 0004A4D4  38 C0 00 00 */	li r6, 0
-/* 8004F5D8 0004A4D8  38 A5 64 E8 */	addi r5, r5, lbl_803964E8@l
+/* 8004F5D8 0004A4D8  38 A5 64 E8 */	addi r5, r5, __vt__Q44nw4r3snd6detail9WsdPlayer@l
 /* 8004F5DC 0004A4DC  90 DF 00 74 */	stw r6, 0x74(r31)
 /* 8004F5E0 0004A4E0  38 85 00 24 */	addi r4, r5, 0x24
 /* 8004F5E4 0004A4E4  38 7F 00 B8 */	addi r3, r31, 0xb8
