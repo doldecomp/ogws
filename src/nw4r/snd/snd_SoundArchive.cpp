@@ -4,6 +4,8 @@
 
 namespace nw4r
 {
+	using namespace ut;
+	
 	namespace snd
 	{
 		using namespace detail;
@@ -133,7 +135,7 @@ namespace nw4r
 			return mFileReader->ReadFilePos(fileIndex, posIndex, pFilePos);
 		}
 		
-		UNKWORD SoundArchive::OpenExtStreamImpl(void * arg1, int arg2, const char * pExternalFileName, u32 arg4, u32 arg5) const
+		FileStream * SoundArchive::OpenExtStreamImpl(void * pBuffer, int bufferSize, const char * pExternalFileName, u32 startOffset, u32 streamSize) const
 		{
 			char absoluteFileName[0x100];
 			const char * pName;
@@ -148,7 +150,7 @@ namespace nw4r
 				u32 rootLength = strlen(mExternalFileRoot);
 				u32 absoluteLength = relativeLength + rootLength;
 				
-				if (absoluteLength >= sizeof absoluteFileName) return 0;
+				if (absoluteLength >= sizeof absoluteFileName) return NULL;
 				
 				strncpy(absoluteFileName, mExternalFileRoot, rootLength + 1);
 				strncat(absoluteFileName, pExternalFileName, relativeLength + 1);
@@ -156,54 +158,54 @@ namespace nw4r
 				pName = absoluteFileName;
 			}
 			
-			return OpenExtStream(arg1, arg2, pName, arg4, arg5);
+			return OpenExtStream(pBuffer, bufferSize, pName, startOffset, streamSize);
 		}
 		
-		UNKWORD SoundArchive::detail_OpenFileStream(u32 index, void * r30, int r31) const
+		FileStream * SoundArchive::detail_OpenFileStream(u32 index, void * pBuffer, int bufferSize) const
 		{
 			GroupInfo groupInfo; // at 0x38
 			GroupItemInfo groupItemInfo; // at 0x20
 			FileInfo fileInfo; // at 0x10
 			FilePos filePos; // at 0x8
 			
-			if (!detail_ReadFileInfo(index, &fileInfo)) return 0;
+			if (!detail_ReadFileInfo(index, &fileInfo)) return NULL;
 			
-			if (fileInfo.mExternalFileName) return OpenExtStreamImpl(r30, r31, fileInfo.mExternalFileName, 0, 0);
+			if (fileInfo.mExternalFileName) return OpenExtStreamImpl(pBuffer, bufferSize, fileInfo.mExternalFileName, 0, 0);
 			
-			if (!detail_ReadFilePos(index, 0, &filePos)) return 0;
+			if (!detail_ReadFilePos(index, 0, &filePos)) return NULL;
 			
-			if (!detail_ReadGroupInfo(filePos.mGroupIndex, &groupInfo)) return 0;
+			if (!detail_ReadGroupInfo(filePos.mGroupIndex, &groupInfo)) return NULL;
 			
-			if (!detail_ReadGroupItemInfo(filePos.mGroupIndex, filePos.mGroupItemIndex, &groupItemInfo)) return 0;
+			if (!detail_ReadGroupItemInfo(filePos.mGroupIndex, filePos.mGroupItemIndex, &groupItemInfo)) return NULL;
 			
-			u32 r26 = groupInfo.INT_0x8 + groupItemInfo.INT_0x4;
-			u32 r25 = groupItemInfo.INT_0x8;
+			u32 startOffset = groupInfo.INT_0x8 + groupItemInfo.INT_0x4;
+			u32 streamSize = groupItemInfo.INT_0x8;
 			
-			if (groupInfo.mExternalFileName) return OpenExtStreamImpl(r30, r31, groupInfo.mExternalFileName, r26, r25);
+			if (groupInfo.mExternalFileName) return OpenExtStreamImpl(pBuffer, bufferSize, groupInfo.mExternalFileName, startOffset, streamSize);
 			
-			return OpenStream(r30, r31, r26, r25);
+			return OpenStream(pBuffer, bufferSize, startOffset, streamSize);
 		}
 		
-		UNKWORD SoundArchive::detail_OpenGroupStream(u32 index, void * r26, int r27) const
+		FileStream * SoundArchive::detail_OpenGroupStream(u32 index, void * pBuffer, int bufferSize) const
 		{
 			GroupInfo groupInfo; // at 0x8
 			
-			if (!detail_ReadGroupInfo(index, &groupInfo)) return 0;
+			if (!detail_ReadGroupInfo(index, &groupInfo)) return NULL;
 			
-			if (groupInfo.mExternalFileName) return OpenExtStreamImpl(r26, r27, groupInfo.mExternalFileName, groupInfo.INT_0x8, groupInfo.INT_0xC);
+			if (groupInfo.mExternalFileName) return OpenExtStreamImpl(pBuffer, bufferSize, groupInfo.mExternalFileName, groupInfo.INT_0x8, groupInfo.INT_0xC);
 			
-			return OpenStream(r26, r27, groupInfo.INT_0x8, groupInfo.INT_0xC);
+			return OpenStream(pBuffer, bufferSize, groupInfo.INT_0x8, groupInfo.INT_0xC);
 		}
 		
-		UNKWORD SoundArchive::detail_OpenGroupWaveDataStream(u32 index, void * r26, int r27) const
+		FileStream * SoundArchive::detail_OpenGroupWaveDataStream(u32 index, void * pBuffer, int bufferSize) const
 		{
 			GroupInfo groupInfo; // at 0x8
 			
-			if (!detail_ReadGroupInfo(index, &groupInfo)) return 0;
+			if (!detail_ReadGroupInfo(index, &groupInfo)) return NULL;
 			
-			if (groupInfo.mExternalFileName) return OpenExtStreamImpl(r26, r27, groupInfo.mExternalFileName, groupInfo.INT_0x10, groupInfo.INT_0x14);
+			if (groupInfo.mExternalFileName) return OpenExtStreamImpl(pBuffer, bufferSize, groupInfo.mExternalFileName, groupInfo.INT_0x10, groupInfo.INT_0x14);
 			
-			return OpenStream(r26, r27, groupInfo.INT_0x10, groupInfo.INT_0x14);
+			return OpenStream(pBuffer, bufferSize, groupInfo.INT_0x10, groupInfo.INT_0x14);
 		}
 		
 		UNKTYPE SoundArchive::SetExternalFileRoot(const char * pExternalFileRoot)

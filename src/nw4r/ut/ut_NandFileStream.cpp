@@ -58,7 +58,7 @@ namespace nw4r
 			
 			BYTE_0x167 = 1;
 			BYTE_0x168 = 1;
-			BYTE_0x4 = 1;
+			BOOL_0x4 = true;
 			
 			return true;
 		}
@@ -86,25 +86,25 @@ namespace nw4r
 			
 			BYTE_0x167 = 0;
 			BYTE_0x168 = b;
-			BYTE_0x4 = 1;
+			BOOL_0x4 = true;
 			
 			return true;
 		}
 		
-		UNKTYPE NandFileStream::Close()
+		void NandFileStream::Close()
 		{
-			if (BYTE_0x168 && BYTE_0x4)
+			if (BYTE_0x168 && BOOL_0x4)
 			{
 				NANDClose(&mFileInfo);
-				BYTE_0x4 = false;
+				BOOL_0x4 = false;
 			}
 		}
 		
-		UNKWORD NandFileStream::Read(void * buf, u32 size)
+		int NandFileStream::Read(void * buf, u32 size)
 		{
-			UNKWORD ret;
+			int ret;
 			
-			NANDSeek(&mFileInfo, mPosition.LONG_0x4, 0);
+			NANDSeek(&mFileInfo, mPosition.mFileOffset, 0);
 			ret = NANDRead(&mFileInfo, buf, size);
 			if (ret > 0) mPosition.Skip(ret);
 			
@@ -117,7 +117,7 @@ namespace nw4r
 			ASYNC_0xC = async;
 			PTR_0x10 = ptr;
 			mBusyFlag = true;
-			NANDSeek(&mFileInfo, mPosition.LONG_0x4, 0);
+			NANDSeek(&mFileInfo, mPosition.mFileOffset, 0);
 			ret = NANDReadAsync(&mFileInfo, buf, size, NandAsyncCallback_, UNK_0x1C) == 0;
 			
 			if (ret)
@@ -134,7 +134,7 @@ namespace nw4r
 		
 		UNKTYPE NandFileStream::Write(const void * buf, u32 size)
 		{
-			NANDSeek(&mFileInfo, mPosition.LONG_0x4, 0);
+			NANDSeek(&mFileInfo, mPosition.mFileOffset, 0);
 			mPosition.Append(NANDWrite(&mFileInfo, buf, size));
 		}
 		
@@ -143,7 +143,7 @@ namespace nw4r
 			ASYNC_0xC = async;
 			PTR_0x10 = ptr;
 			mBusyFlag = true;
-			NANDSeek(&mFileInfo, mPosition.LONG_0x4, 0);
+			NANDSeek(&mFileInfo, mPosition.mFileOffset, 0);
 			
 			UNKWORD ret = NANDWriteAsync(&mFileInfo, buf, size, NandAsyncCallback_, UNK_0x1C);
 			
@@ -159,7 +159,7 @@ namespace nw4r
 			return ret == 0;
 		}
 		
-		UNKTYPE NandFileStream::Seek(s32 offset, u32 origin)
+		void NandFileStream::Seek(s32 offset, u32 origin)
 		{
 			mPosition.Seek(offset, origin);
 		}
@@ -175,7 +175,7 @@ namespace nw4r
 		bool NandFileStream::CanAsync() const { return true; }
 		
 		u32 NandFileStream::GetSize() const { return mPosition.mFileSize; }
-		u32 NandFileStream::Tell() const { return mPosition.LONG_0x4; }
+		u32 NandFileStream::Tell() const { return mPosition.mFileOffset; }
 
 		bool NandFileStream::IsBusy() const { return mBusyFlag; }
 		

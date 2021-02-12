@@ -19,12 +19,12 @@ namespace nw4r
 			
 			DvdFileStream(s32);
 			DvdFileStream(const DVDFileInfo *, bool);
-			UNKTYPE Close();
-			UNKWORD Read(void *, u32);
+			void Close();
+			int Read(void *, u32);
 			bool ReadAsync(void *, u32, AsyncFunctor, void *);
 			virtual UNKWORD Peek(void *, u32);
 			virtual bool PeekAsync(void *, u32, AsyncFunctor, void *);
-			UNKTYPE Seek(s32, u32);
+			void Seek(s32, u32);
 			UNKTYPE Cancel();
 			bool CancelAsync(AsyncFunctor, void *);
 			u32 GetBufferAlign() const;
@@ -40,10 +40,6 @@ namespace nw4r
 			bool IsBusy() const;
 			const detail::RuntimeTypeInfo * GetRuntimeTypeInfo() const;
 			
-			char BYTE_0x4;
-			UNKWORD WORD_0x8;
-			UNKWORD WORD_0xC;
-			UNKWORD WORD_0x10;
 			FilePosition mPosition; // at 0x14
 			UNKWORD WORD_0x1C;
 			UNKWORD WORD_0x20;

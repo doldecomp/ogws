@@ -32,7 +32,6 @@ struct DVDCB_UNK
 struct DVDFileInfo
 {
 	char UNK_0x0[0x3C];
-	struct DVD_UNK * PTR_0x3C;
 };
 
 struct DVDCommandBlock
@@ -42,6 +41,14 @@ struct DVDCommandBlock
 };
 
 u32 DVDGetDriveStatus(void);
+
+s32 DVDConvertPathToEntrynum(const char *);
+
+BOOL DVDFastOpen(s32, struct DVDFileInfo *);
+
+UNKTYPE DVDClose(struct DVDFileInfo *);
+
+u32 DVDReadPrio(struct DVDFileInfo *, void *, u32, s32, UNKWORD);
 
 #ifdef __cplusplus
 }

@@ -16,7 +16,11 @@ namespace nw4r
 				struct Header
 				{
 					ut::BinaryFileHeader mHeader; // at 0x0
-					UNKWORD UNK_0x10[0x18 / sizeof(UNKWORD)]; // at 0x10
+					u32 mLabelStringChunkOffset; // at 0x10
+					u32 mLabelStringChunkSize; // at 0x14
+					u32 mInfoChunkOffset; // at 0x18
+					u32 mInfoChunkSize; // at 0x1c
+					UNKWORD UNK_0x20[0x8 / sizeof(UNKWORD)]; // at 0x20
 				};
 				
 				struct Sound3DParam
@@ -91,7 +95,7 @@ namespace nw4r
 					UNKWORD WORD_0x0;
 					u32 INT_0x4;
 					u32 INT_0x8;
-					UNKWORD WORD_0xC;
+					u32 INT_0xC;
 					UNKWORD WORD_0x10;
 				};
 				
@@ -245,6 +249,26 @@ namespace nw4r
 				inline u16 GetVersion() const
 				{
 					return mHeader.mHeader.version;
+				}
+				
+				inline u32 GetLabelStringChunkOffset() const
+				{
+					return mHeader.mLabelStringChunkOffset;
+				}
+				
+				inline u32 GetLabelStringChunkSize() const
+				{
+					return mHeader.mLabelStringChunkSize;
+				}
+				
+				inline u32 GetInfoChunkOffset() const
+				{
+					return mHeader.mInfoChunkOffset;
+				}
+				
+				inline u32 GetInfoChunkSize() const
+				{
+					return mHeader.mInfoChunkSize;
 				}
 			};
 		}
