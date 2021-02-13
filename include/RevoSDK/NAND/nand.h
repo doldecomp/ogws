@@ -49,7 +49,9 @@ UNKWORD NANDWrite(struct NANDFileInfo *, const void *, u32);
 UNKWORD NANDReadAsync(struct NANDFileInfo *, void *, u32, NANDAsyncCallback, void *);
 UNKWORD NANDWriteAsync(struct NANDFileInfo *, const void *, u32, NANDAsyncCallback, void *);
 
-UNKTYPE NANDSeek(struct NANDFileInfo *, u32, UNKWORD);
+s32 NANDSeek(struct NANDFileInfo *, u32, s32);
+
+UNKTYPE NANDGetCurrentDir(char *);
 
 #ifdef __cplusplus
 }

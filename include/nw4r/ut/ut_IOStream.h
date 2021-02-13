@@ -16,8 +16,8 @@ namespace nw4r
 				
 			}
 			
-			virtual UNKTYPE Close() = 0;
-			virtual UNKWORD Read(void *, u32) = 0;
+			virtual void Close() = 0;
+			virtual int Read(void *, u32) = 0;
 			virtual bool ReadAsync(void *, u32, AsyncFunctor, void *);
 			virtual UNKTYPE Write(const void *, u32);
 			virtual bool WriteAsync(const void *, u32, AsyncFunctor, void *);
@@ -29,7 +29,7 @@ namespace nw4r
 			virtual u32 GetSizeAlign() const;
 			virtual u32 GetBufferAlign() const;
 			virtual u32 GetSize() const = 0;
-			virtual UNKTYPE Seek(s32, u32) = 0;
+			virtual void Seek(s32, u32) = 0;
 			virtual UNKTYPE Cancel() = 0;
 			virtual bool CancelAsync(AsyncFunctor, void *) = 0;
 			virtual bool CanSeek() const = 0;

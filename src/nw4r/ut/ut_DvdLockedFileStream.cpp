@@ -24,10 +24,10 @@ namespace nw4r
 			
 		}
 		
-		UNKWORD DvdLockedFileStream::Read(void * buffer, u32 count)
+		int DvdLockedFileStream::Read(void * buffer, u32 count)
 		{
 			OSLockMutex(&sMutex);
-			UNKWORD ret = this->DvdFileStream::Read(buffer, count);
+			int ret = this->DvdFileStream::Read(buffer, count);
 			OSUnlockMutex(&sMutex);
 			return ret;
 		}

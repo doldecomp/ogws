@@ -305,7 +305,7 @@ namespace nw4r
 				pGroupItemInfo->WORD_0x0 = pItemInfo->WORD_0x0;
 				pGroupItemInfo->INT_0x4 = pItemInfo->INT_0x4;
 				pGroupItemInfo->INT_0x8 = pItemInfo->INT_0x8;
-				pGroupItemInfo->WORD_0xC = pItemInfo->WORD_0xC;
+				pGroupItemInfo->INT_0xC = pItemInfo->INT_0xC;
 				pGroupItemInfo->WORD_0x10 = pItemInfo->WORD_0x10;
 				
 				return true;

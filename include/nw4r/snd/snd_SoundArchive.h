@@ -1,5 +1,6 @@
 #ifndef NW4R_SND_SOUND_ARCHIVE_H
 #define NW4R_SND_SOUND_ARCHIVE_H
+#include "ut_FileStream.h"
 #include "types_nw4r.h"
 
 namespace nw4r
@@ -84,7 +85,7 @@ namespace nw4r
 				UNKWORD WORD_0x0;
 				u32 INT_0x4;
 				u32 INT_0x8;
-				UNKWORD WORD_0xC;
+				u32 INT_0xC;
 				UNKWORD WORD_0x10;
 			};
 			
@@ -103,14 +104,14 @@ namespace nw4r
 			};
 			
 			virtual ~SoundArchive(); // at 0x8
-			virtual UNKTYPE detail_GetFileAddress(u32) const = 0; // at 0xc
-			virtual UNKTYPE detail_GetWaveDataFileAddress(u32) const = 0; // at 0x10
-			virtual UNKTYPE detail_GetRequiredStreamBufferSize() const = 0; // at 0x14
-			virtual UNKWORD OpenStream(void *, int, u32, u32) const = 0; // at 0x18
-			virtual UNKWORD OpenExtStream(void *, int, const char *, u32, u32) const = 0; // at 0x1c
+			virtual const void * detail_GetFileAddress(u32) const = 0; // at 0xc
+			virtual const void * detail_GetWaveDataFileAddress(u32) const = 0; // at 0x10
+			virtual int detail_GetRequiredStreamBufferSize() const = 0; // at 0x14
+			virtual ut::FileStream * OpenStream(void *, int, u32, u32) const = 0; // at 0x18
+			virtual ut::FileStream * OpenExtStream(void *, int, const char *, u32, u32) const = 0; // at 0x1c
 			
 			detail::SoundArchiveFileReader * mFileReader; // at 0x4
-			char mExternalFileRoot[]; // at 0x8; TODO: Find out the buffer size
+			char mExternalFileRoot[0x100]; // at 0x8
 			
 			SoundArchive();
 			
@@ -149,10 +150,10 @@ namespace nw4r
 			bool detail_ReadFileInfo(u32, FileInfo *) const;
 			bool detail_ReadFilePos(u32, u32, FilePos *) const;
 			
-			UNKWORD OpenExtStreamImpl(void *, int, const char *, u32, u32) const; //inlined
-			UNKWORD detail_OpenFileStream(u32, void *, int) const;
-			UNKWORD detail_OpenGroupStream(u32, void *, int) const;
-			UNKWORD detail_OpenGroupWaveDataStream(u32, void *, int) const;
+			ut::FileStream * OpenExtStreamImpl(void *, int, const char *, u32, u32) const; //inlined
+			ut::FileStream * detail_OpenFileStream(u32, void *, int) const;
+			ut::FileStream * detail_OpenGroupStream(u32, void *, int) const;
+			ut::FileStream * detail_OpenGroupWaveDataStream(u32, void *, int) const;
 			
 			UNKTYPE SetExternalFileRoot(const char *);
 		};

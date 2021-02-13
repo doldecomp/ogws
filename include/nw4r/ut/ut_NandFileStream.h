@@ -11,10 +11,6 @@ namespace nw4r
 	{
 		struct NandFileStream : FileStream
 		{
-			bool BYTE_0x4;
-			UNKWORD WORD_0x8;
-			AsyncFunctor ASYNC_0xC;
-			void * PTR_0x10;
 			FilePosition mPosition; // at 0x14
 			char UNK_0x1C[0xB8];
 			
@@ -40,7 +36,7 @@ namespace nw4r
 			
 			UNKTYPE Close();
 			
-			UNKWORD Read(void *, u32);
+			int Read(void *, u32);
 			bool ReadAsync(void *, u32, AsyncFunctor, void *);
 			
 			UNKTYPE Write(const void *, u32);
@@ -72,7 +68,7 @@ namespace nw4r
 				mWriteFlag = false;
 				BYTE_0x167 = false;
 				BYTE_0x168 = false;
-				BYTE_0x4 = 0;
+				BOOL_0x4 = false;
 				mBusyFlag = false;
 				ASYNC_0xC = NULL;
 				PTR_0x10 = NULL;

@@ -3,7 +3,8 @@
 #include "ut_IOStream.h"
 #include "ut_FileStream.h"
 #include "ut_DvdFileStream.h"
-#include <RevoSDK/OS/OSMutex.h>
+#include <OSMutex.h>
+#include <OSInterrupt.h>
 
 namespace nw4r
 {
@@ -16,7 +17,7 @@ namespace nw4r
 			
 			virtual ~DvdLockedFileStream();
 			
-			UNKWORD Read(void *, u32);
+			int Read(void *, u32);
 			UNKWORD Peek(void *, u32);
 			
 			bool CanAsync() const;
