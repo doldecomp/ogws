@@ -4,17 +4,6 @@
 
 .balign 0x8
 
-.global lbl_804C0108
-lbl_804C0108:
-	.single 0e127
-	.balign 0x8
-
-# int2float
-.global lbl_804C0110
-lbl_804C0110:
-	.long 0x43300000
-	.long 0x80000000
-
 .global lbl_804C0118
 lbl_804C0118:
 	.single 0e1

@@ -2,46 +2,6 @@
 
 .section .data, "wa"  # 0x80393A80 - 0x803CAF00
 
-.global __vt__Q34nw4r3snd18SoundArchivePlayer
-__vt__Q34nw4r3snd18SoundArchivePlayer:
-	.long 0
-	.long 0
-	.long __dt__Q34nw4r3snd18SoundArchivePlayerFv
-	.long InvalidateData__Q34nw4r3snd18SoundArchivePlayerFPCvPCv
-	.long InvalidateWaveData__Q34nw4r3snd18SoundArchivePlayerFPCvPCv
-	.long 0
-	.long 0
-	.long $$218$$2__dt__Q34nw4r3snd18SoundArchivePlayerFv____
-	.long $$218$$2detail_SetupSound__Q34nw4r3snd18SoundArchivePlayerFPQ34nw4r3snd11SoundHandleUlPQ54nw4r3snd6detail10BasicSound14AmbientArgInfoPQ44nw4r3snd6detail19ExternalSoundPlayerbPCQ44nw4r3snd14SoundStartable9StartInfo
-	.long $$218$$2detail_ConvertLabelStringToSoundId__Q34nw4r3snd18SoundArchivePlayerFPCc
-	.long detail_SetupSound__Q34nw4r3snd18SoundArchivePlayerFPQ34nw4r3snd11SoundHandleUlPQ54nw4r3snd6detail10BasicSound14AmbientArgInfoPQ44nw4r3snd6detail19ExternalSoundPlayerbPCQ44nw4r3snd14SoundStartable9StartInfo
-	.long detail_ConvertLabelStringToSoundId__Q34nw4r3snd18SoundArchivePlayerFPCc
-.balign 0x8
-
-.global __vt__Q44nw4r3snd18SoundArchivePlayer11WsdCallback
-__vt__Q44nw4r3snd18SoundArchivePlayer11WsdCallback:
-	.long 0
-	.long 0
-	.long __dt__Q44nw4r3snd18SoundArchivePlayer11WsdCallbackFv
-	.long GetWaveSoundData__Q44nw4r3snd18SoundArchivePlayer11WsdCallbackCFPQ44nw4r3snd6detail13WaveSoundInfoPQ44nw4r3snd6detail17WaveSoundNoteInfoPQ44nw4r3snd6detail8WaveDataPCviiUl
-.balign 0x8
-
-.global __vt__Q44nw4r3snd18SoundArchivePlayer17SeqNoteOnCallback
-__vt__Q44nw4r3snd18SoundArchivePlayer17SeqNoteOnCallback:
-	.long 0
-	.long 0
-	.long __dt__Q44nw4r3snd18SoundArchivePlayer17SeqNoteOnCallbackFv
-	.long NoteOn__Q44nw4r3snd18SoundArchivePlayer17SeqNoteOnCallbackFPQ44nw4r3snd6detail9SeqPlayeriRCQ44nw4r3snd6detail10NoteOnInfo
-.balign 0x8
-
-.global __vt__Q44nw4r3snd6detail10PlayerHeap
-__vt__Q44nw4r3snd6detail10PlayerHeap:
-	.long 0
-	.long 0
-	.long __dt__Q44nw4r3snd6detail10PlayerHeapFv
-	.long Alloc__Q34nw4r3snd9SoundHeapFUl
-.balign 0x8
-
 .global __vt__Q34nw4r3snd9SoundHeap
 __vt__Q34nw4r3snd9SoundHeap:
 	.long 0
