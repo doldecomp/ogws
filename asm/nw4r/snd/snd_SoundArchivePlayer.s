@@ -43,7 +43,6 @@ __vt__Q44nw4r3snd6detail10PlayerHeap:
 lbl_804C0108:
 	.single 0e127
 	.balign 0x8
-
 # int2float
 .global lbl_804C0110
 lbl_804C0110:
