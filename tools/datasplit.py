@@ -72,8 +72,8 @@ symbols = dict()
 def toHex8(val) -> str:
     return "{:08x}".format(val)
 
-def toF32_4(val) -> str:
-    return "{:.4f}".format(val)
+def toF32_7(val) -> str:
+    return "{:.7f}".format(val)
 
 def getU32(data, ofs) -> int:
     return ((data[ofs + 0] << 24) |
@@ -203,8 +203,8 @@ while True:
         else:
             label_txt += (
                 "    .long " + ("0" if (current_u32 == 0) else hex(current_u32))
-                + ((" # f32 = " + toF32_4(current_f32)) if (current_u32 != 0) else "")
-                + ((", int = " + str(current_u32BE) + '\n') if (current_u32 != 0) else "\n")
+                + ((" # f32 = " + toF32_7(current_f32)) if (current_u32 != 0) else "")
+                + ((", u32 = " + str(current_u32BE) + '\n') if (current_u32 != 0) else "\n")
             )
 
 print(label_txt)
