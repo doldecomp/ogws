@@ -2,14 +2,6 @@
 
 .section .data, "wa"  # 0x80393A80 - 0x803CAF00
 
-.global __vt__Q34nw4r3snd9SoundHeap
-__vt__Q34nw4r3snd9SoundHeap:
-	.long 0
-	.long 0
-	.long __dt__Q34nw4r3snd9SoundHeapFv
-	.long Alloc__Q34nw4r3snd9SoundHeapFUl
-.balign 0x8
-
 .global $$24063
 $$24063:
 .string "<< NW4R    - SND \tfinal   build: Jun  8 2007 11:17:15 (0x4199_60831) >>"

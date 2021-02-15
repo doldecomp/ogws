@@ -1,7 +1,15 @@
 .include "macros.inc"
 
-.section .text, "ax"  # 0x800076E0 - 0x80355080 
+.section .data, "wa"
+.global __vt__Q34nw4r3snd9SoundHeap
+__vt__Q34nw4r3snd9SoundHeap:
+	.long 0
+	.long 0
+	.long __dt__Q34nw4r3snd9SoundHeapFv
+	.long Alloc__Q34nw4r3snd9SoundHeapFUl
+.balign 0x8
 
+.section .text, "ax"  # 0x800076E0 - 0x80355080 
 .global __ct__Q34nw4r3snd9SoundHeapFv
 __ct__Q34nw4r3snd9SoundHeapFv:
 /* 80045BAC 00040AAC  94 21 FF F0 */	stwu r1, -0x10(r1)
