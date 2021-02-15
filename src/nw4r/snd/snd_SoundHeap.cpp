@@ -6,8 +6,8 @@
 
 namespace nw4r
 {
-	namespace snd
-	{
+    namespace snd
+    {
         using namespace detail;
 
         SoundHeap::SoundHeap()
@@ -87,5 +87,5 @@ namespace nw4r
             DisposeCallbackManager::GetInstance()->Dispose(p1, i, p2);
             DisposeCallbackManager::GetInstance()->DisposeWave(p1, i, p2);
         }
-	}
+    }
 }
