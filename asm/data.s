@@ -2,38 +2,6 @@
 
 .section .data, "wa"  # 0x80393A80 - 0x803CAF00
 
-.global __vt__Q44nw4r3snd6detail9StrmSound
-__vt__Q44nw4r3snd6detail9StrmSound:
-	.long 0
-	.long 0
-	.long GetRuntimeTypeInfo__Q44nw4r3snd6detail9StrmSoundCFv
-	.long __dt__Q44nw4r3snd6detail9StrmSoundFv
-	.long Update__Q44nw4r3snd6detail10BasicSoundFv
-	.long StartPrepared__Q44nw4r3snd6detail10BasicSoundFv
-	.long Stop__Q44nw4r3snd6detail10BasicSoundFi
-	.long Pause__Q44nw4r3snd6detail10BasicSoundFbi
-	.long SetAutoStopCounter__Q44nw4r3snd6detail10BasicSoundFi
-	.long FadeIn__Q44nw4r3snd6detail10BasicSoundFi
-	.long Shutdown__Q44nw4r3snd6detail9StrmSoundFv
-	.long IsPrepared__Q44nw4r3snd6detail9StrmSoundCFv
-	.long IsPause__Q44nw4r3snd6detail10BasicSoundCFv
-	.long SetInitialVolume__Q44nw4r3snd6detail10BasicSoundFf
-	.long SetVolume__Q44nw4r3snd6detail10BasicSoundFfi
-	.long SetPitch__Q44nw4r3snd6detail10BasicSoundFf
-	.long SetPan__Q44nw4r3snd6detail10BasicSoundFf
-	.long SetSurroundPan__Q44nw4r3snd6detail10BasicSoundFf
-	.long SetLpfFreq__Q44nw4r3snd6detail10BasicSoundFf
-	.long SetPlayerPriority__Q44nw4r3snd6detail9StrmSoundFi
-	.long SetRemoteFilter__Q44nw4r3snd6detail10BasicSoundFi
-	.long SetPanMode__Q44nw4r3snd6detail10BasicSoundFQ44nw4r3snd6detail7PanMode
-	.long SetPanCurve__Q44nw4r3snd6detail10BasicSoundFQ44nw4r3snd6detail8PanCurve
-	.long IsAttachedTempSpecialHandle__Q44nw4r3snd6detail9StrmSoundFv
-	.long DetachTempSpecialHandle__Q44nw4r3snd6detail9StrmSoundFv
-	.long InitParam__Q44nw4r3snd6detail10BasicSoundFv
-	.long GetBasicPlayer__Q44nw4r3snd6detail9StrmSoundFv
-	.long GetBasicPlayer__Q44nw4r3snd6detail9StrmSoundCFv
-.balign 0x8
-
 .global switch_80396430
 switch_80396430:
 	.long 0x8004D780
