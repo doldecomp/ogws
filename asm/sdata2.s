@@ -4,22 +4,6 @@
 
 .balign 0x8
 
-.global lbl_804C0118
-lbl_804C0118:
-	.single 0e1
-
-.global lbl_804C011C
-lbl_804C011C:
-	.single 0e0
-
-.global lbl_804C0120
-lbl_804C0120:
-	.single 0e1
-
-.global lbl_804C0124
-lbl_804C0124:
-	.single 0e0
-
 .global lbl_804C0128
 lbl_804C0128:
 	.single 0e1

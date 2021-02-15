@@ -1,7 +1,14 @@
 .include "macros.inc"
 
-.section .text, "ax"  # 0x800076E0 - 0x80355080 
+.section .sdata2, "a"
+.global lbl_804C0118
+lbl_804C0118:
+	.single 0e1
+.global lbl_804C011C
+lbl_804C011C:
+	.single 0e0
 
+.section .text, "ax"  # 0x800076E0 - 0x80355080 
 .global __ct__Q34nw4r3snd11SoundPlayerFv
 __ct__Q34nw4r3snd11SoundPlayerFv:
 /* 80045EE4 00040DE4  94 21 FF E0 */	stwu r1, -0x20(r1)
