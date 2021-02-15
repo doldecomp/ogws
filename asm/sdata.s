@@ -4,11 +4,6 @@
 
 .balign 0x8
 
-.global NW4R_SND_Version_
-NW4R_SND_Version_:
-	.long $$24063
-.balign 0x8
-
 .global u$7185
 u$7185:
 	.long 0x12345678

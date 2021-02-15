@@ -1,7 +1,35 @@
 .include "macros.inc"
 
-.section .text, "ax"  # 0x800076E0 - 0x80355080 
+.section .data, "wa"
+$$24063:
+.string "<< NW4R    - SND \tfinal   build: Jun  8 2007 11:17:15 (0x4199_60831) >>"
 
+.section .bss, "wa"
+.global lbl_803D0BB8
+lbl_803D0BB8:
+	.skip 0x8 # Contiguous with SeqPlayer::mLocalVariables, never seems to be used though
+.global lbl_803D0BC0
+lbl_803D0BC0:
+	.skip 0x10
+.global lbl_803D0BD0
+lbl_803D0BD0:
+	.skip 0x330
+.global lbl_803D0F00
+lbl_803D0F00:
+	.skip 0x16970
+
+.section .sdata, "wa"
+.global NW4R_SND_Version_
+NW4R_SND_Version_:
+	.long $$24063
+.balign 0x8
+
+.section .sbss, "wa"
+.global lbl_804BEB08
+lbl_804BEB08:
+	.skip 0x8
+
+.section .text, "ax"  # 0x800076E0 - 0x80355080 
 .global InitSoundSystem__Q34nw4r3snd11SoundSystemFll
 InitSoundSystem__Q34nw4r3snd11SoundSystemFll:
 /* 80047550 00042450  94 21 FF E0 */	stwu r1, -0x20(r1)

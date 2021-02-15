@@ -2,53 +2,6 @@
 
 .section .data, "wa"  # 0x80393A80 - 0x803CAF00
 
-.global $$24063
-$$24063:
-.string "<< NW4R    - SND \tfinal   build: Jun  8 2007 11:17:15 (0x4199_60831) >>"
-.balign 0x8
-
-.global __vt__Q44nw4r3snd6detail10StrmPlayer
-__vt__Q44nw4r3snd6detail10StrmPlayer:
-	.long 0
-	.long 0
-	.long __dt__Q44nw4r3snd6detail10StrmPlayerFv
-	.long Start__Q44nw4r3snd6detail10StrmPlayerFv
-	.long Stop__Q44nw4r3snd6detail10StrmPlayerFv
-	.long Pause__Q44nw4r3snd6detail10StrmPlayerFb
-	.long IsActive__Q44nw4r3snd6detail10StrmPlayerCFv
-	.long IsStarted__Q44nw4r3snd6detail10StrmPlayerCFv
-	.long IsPause__Q44nw4r3snd6detail10StrmPlayerCFv
-	.long 0
-	.long 0
-	.long $2116$2__dt__Q44nw4r3snd6detail10StrmPlayerFv
-	.long $2116$2OnUpdateFrameSoundThread__Q44nw4r3snd6detail10StrmPlayerFv
-	.long $2116$2OnUpdateVoiceSoundThread__Q44nw4r3snd6detail10StrmPlayerFv
-	.long $2116$2OnShutdownSoundThread__Q44nw4r3snd6detail10StrmPlayerFv
-	.long OnUpdateFrameSoundThread__Q44nw4r3snd6detail10StrmPlayerFv
-	.long OnUpdateVoiceSoundThread__Q44nw4r3snd6detail10StrmPlayerFv
-	.long OnShutdownSoundThread__Q44nw4r3snd6detail10StrmPlayerFv
-.balign 0x8
-
-.global __vt__Q54nw4r3snd6detail10StrmPlayer16StrmDataLoadTask
-__vt__Q54nw4r3snd6detail10StrmPlayer16StrmDataLoadTask:
-	.long 0
-	.long 0
-	.long __dt__Q54nw4r3snd6detail10StrmPlayer16StrmDataLoadTaskFv
-	.long Execute__Q54nw4r3snd6detail10StrmPlayer16StrmDataLoadTaskFv
-	.long Cancel__Q54nw4r3snd6detail10StrmPlayer16StrmDataLoadTaskFv
-	.long OnCancel__Q54nw4r3snd6detail10StrmPlayer16StrmDataLoadTaskFv
-.balign 0x8
-
-.global __vt__Q54nw4r3snd6detail10StrmPlayer18StrmHeaderLoadTask
-__vt__Q54nw4r3snd6detail10StrmPlayer18StrmHeaderLoadTask:
-	.long 0
-	.long 0
-	.long __dt__Q54nw4r3snd6detail10StrmPlayer18StrmHeaderLoadTaskFv
-	.long Execute__Q54nw4r3snd6detail10StrmPlayer18StrmHeaderLoadTaskFv
-	.long Cancel__Q54nw4r3snd6detail10StrmPlayer18StrmHeaderLoadTaskFv
-	.long OnCancel__Q54nw4r3snd6detail10StrmPlayer18StrmHeaderLoadTaskFv
-.balign 0x8
-
 .global __vt__Q44nw4r3snd6detail9StrmSound
 __vt__Q44nw4r3snd6detail9StrmSound:
 	.long 0
