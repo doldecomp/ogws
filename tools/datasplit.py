@@ -193,7 +193,7 @@ while True:
     else:
         current_u32 = getU32(label_data, offset)
         current_u32BE = getU32BE(label_data, offset)
-        current_f32 = getF32BE(label_data, offset)
+        current_f32 = getF32(label_data, offset)
         offset += 4
         # Possible pointer?
         if (isValidWiiPtr(current_u32)):
