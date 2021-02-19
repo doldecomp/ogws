@@ -1,7 +1,40 @@
 .include "macros.inc"
 
-.section .text, "ax"  # 0x800076E0 - 0x80355080 
+.section .rodata, "a"
+.long 0
+.global NoteTable__Q44nw4r3snd6detail4Util
+NoteTable__Q44nw4r3snd6detail4Util:
+	.incbin "baserom.dol", 0x371CF8, 0x30
+.global PitchTable__Q44nw4r3snd6detail4Util
+PitchTable__Q44nw4r3snd6detail4Util:
+	.incbin "baserom.dol", 0x371D28, 0x400
+.global Decibel2RatioTable__Q44nw4r3snd6detail4Util
+Decibel2RatioTable__Q44nw4r3snd6detail4Util:
+	.incbin "baserom.dol", 0x372128, 0xf14
+.global Pan2RatioTableSqrt__Q44nw4r3snd6detail4Util
+Pan2RatioTableSqrt__Q44nw4r3snd6detail4Util:
+	.incbin "baserom.dol", 0x37303C, 0x404
+.global Pan2RatioTableSinCos__Q44nw4r3snd6detail4Util
+Pan2RatioTableSinCos__Q44nw4r3snd6detail4Util:
+	.incbin "baserom.dol", 0x373440, 0x404
+.global Pan2RatioTableLinear__Q44nw4r3snd6detail4Util
+Pan2RatioTableLinear__Q44nw4r3snd6detail4Util:
+	.incbin "baserom.dol", 0x373844, 0x404
+.global RemoteFilterCoefTable__Q44nw4r3snd6detail4Util
+RemoteFilterCoefTable__Q44nw4r3snd6detail4Util:
+	.incbin "baserom.dol", 0x373C48, 0x500
 
+.section .data, "wa"
+# I think this is PanTableTable__Q44nw4r3snd6detail4Util, unsure though
+.global lbl_80396468
+lbl_80396468:
+	.long 0x80376F3C
+	.long 0x80377340
+	.long 0x80377744
+	.long 0
+.balign 0x8
+
+.section .text, "ax"  # 0x800076E0 - 0x80355080 
 .global CalcPitchRatio__Q44nw4r3snd6detail4UtilFi
 CalcPitchRatio__Q44nw4r3snd6detail4UtilFi:
 /* 8004E83C 0004973C  20 A3 0B FF */	subfic r5, r3, 0xbff
@@ -110,17 +143,17 @@ lbl_8004E978:
 /* 8004E98C 0004988C  54 00 40 3E */	rotlwi r0, r0, 8
 /* 8004E990 00049890  7C 60 1A 14 */	add r3, r0, r3
 /* 8004E994 00049894  41 82 00 18 */	beq lbl_8004E9AC
-/* 8004E998 00049898  3C 80 80 37 */	lis r4, lbl_80375BF8@ha
+/* 8004E998 00049898  3C 80 80 37 */	lis r4, NoteTable__Q44nw4r3snd6detail4Util@ha
 /* 8004E99C 0004989C  54 A0 10 3A */	slwi r0, r5, 2
-/* 8004E9A0 000498A0  38 84 5B F8 */	addi r4, r4, lbl_80375BF8@l
+/* 8004E9A0 000498A0  38 84 5B F8 */	addi r4, r4, NoteTable__Q44nw4r3snd6detail4Util@l
 /* 8004E9A4 000498A4  7C 04 04 2E */	lfsx f0, r4, r0
 /* 8004E9A8 000498A8  EC 21 00 32 */	fmuls f1, f1, f0
 lbl_8004E9AC:
 /* 8004E9AC 000498AC  2C 03 00 00 */	cmpwi r3, 0
 /* 8004E9B0 000498B0  4D 82 00 20 */	beqlr 
-/* 8004E9B4 000498B4  3C 80 80 37 */	lis r4, lbl_80375C28@ha
+/* 8004E9B4 000498B4  3C 80 80 37 */	lis r4, PitchTable__Q44nw4r3snd6detail4Util@ha
 /* 8004E9B8 000498B8  54 60 10 3A */	slwi r0, r3, 2
-/* 8004E9BC 000498BC  38 84 5C 28 */	addi r4, r4, lbl_80375C28@l
+/* 8004E9BC 000498BC  38 84 5C 28 */	addi r4, r4, PitchTable__Q44nw4r3snd6detail4Util@l
 /* 8004E9C0 000498C0  7C 04 04 2E */	lfsx f0, r4, r0
 /* 8004E9C4 000498C4  EC 21 00 32 */	fmuls f1, f1, f0
 /* 8004E9C8 000498C8  4E 80 00 20 */	blr 
@@ -141,8 +174,8 @@ lbl_8004E9F0:
 /* 8004E9F0 000498F0  FC 40 08 90 */	fmr f2, f1
 lbl_8004E9F4:
 /* 8004E9F4 000498F4  C0 02 87 54 */	lfs f0, lbl_804C0174-_SDA2_BASE_(r2)
-/* 8004E9F8 000498F8  3C 60 80 37 */	lis r3, lbl_80376028@ha
-/* 8004E9FC 000498FC  38 63 60 28 */	addi r3, r3, lbl_80376028@l
+/* 8004E9F8 000498F8  3C 60 80 37 */	lis r3, Decibel2RatioTable__Q44nw4r3snd6detail4Util@ha
+/* 8004E9FC 000498FC  38 63 60 28 */	addi r3, r3, Decibel2RatioTable__Q44nw4r3snd6detail4Util@l
 /* 8004EA00 00049900  EC 00 00 B2 */	fmuls f0, f0, f2
 /* 8004EA04 00049904  FC 00 00 1E */	fctiwz f0, f0
 /* 8004EA08 00049908  D8 01 00 08 */	stfd f0, 8(r1)
@@ -312,8 +345,8 @@ lbl_8004EC14:
 /* 8004EC18 00049B18  7C 60 00 78 */	andc r0, r3, r0
 lbl_8004EC1C:
 /* 8004EC1C 00049B1C  1D 20 00 0A */	mulli r9, r0, 0xa
-/* 8004EC20 00049B20  3C 60 80 37 */	lis r3, lbl_80377B48@ha
-/* 8004EC24 00049B24  38 63 7B 48 */	addi r3, r3, lbl_80377B48@l
+/* 8004EC20 00049B20  3C 60 80 37 */	lis r3, RemoteFilterCoefTable__Q44nw4r3snd6detail4Util@ha
+/* 8004EC24 00049B24  38 63 7B 48 */	addi r3, r3, RemoteFilterCoefTable__Q44nw4r3snd6detail4Util@l
 /* 8004EC28 00049B28  7C 03 4A 2E */	lhzx r0, r3, r9
 /* 8004EC2C 00049B2C  7D 23 4A 14 */	add r9, r3, r9
 /* 8004EC30 00049B30  A0 69 00 02 */	lhz r3, 2(r9)

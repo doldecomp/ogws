@@ -2,107 +2,137 @@
 
 .section .rodata, "a"  # 0x80375780 - 0x80393A80
 
-.balign 0x8
-
-.global lbl_80375BF8
-lbl_80375BF8:
-	.incbin "baserom.dol", 0x371CF8, 0x30
-.global lbl_80375C28
-lbl_80375C28:
-	.incbin "baserom.dol", 0x371D28, 0x400
-.global lbl_80376028
-lbl_80376028:
-	.incbin "baserom.dol", 0x372128, 0x1B20
-.global lbl_80377B48
-lbl_80377B48:
-	.incbin "baserom.dol", 0x373C48, 0x500
-.global lbl_80378048
-lbl_80378048:
-	.incbin "baserom.dol", 0x374148, 0x20
-.global lbl_80378068
-lbl_80378068:
-	.incbin "baserom.dol", 0x374168, 0x40
-.global lbl_803780A8
-lbl_803780A8:
-	.incbin "baserom.dol", 0x3741A8, 0x20
 .global lbl_803780C8
 lbl_803780C8:
-	.incbin "baserom.dol", 0x3741C8, 0x10
+	.long 0x0A
+	.string "AnmObjVis"
+	.balign 4
 .global lbl_803780D8
 lbl_803780D8:
-	.incbin "baserom.dol", 0x3741D8, 0x14
+	.long 0x0E
+	.string "AnmObjVisNode"
+	.balign 4
 .global lbl_803780EC
 lbl_803780EC:
-	.incbin "baserom.dol", 0x3741EC, 0x14
+	.long 0x0C
+	.string "AnmObjVisOR"
+	.balign 8
 .global lbl_80378100
 lbl_80378100:
-	.incbin "baserom.dol", 0x374200, 0x18
+	.long 0x0D
+	.string "AnmObjVisRes"
+	.balign 8
 .global lbl_80378118
 lbl_80378118:
-	.incbin "baserom.dol", 0x374218, 0x18
+	.long 0x0D
+	.string "AnmObjMatClr"
+	.balign 8
 .global lbl_80378130
 lbl_80378130:
-	.incbin "baserom.dol", 0x374230, 0x18
+	.long 0x11
+	.string "AnmObjMatClrNode"
+	.balign 8
 .global lbl_80378148
 lbl_80378148:
-	.incbin "baserom.dol", 0x374248, 0x20
+	.long 0x15
+	.string "AnmObjMatClrOverride"
+	.balign 8
 .global lbl_80378168
 lbl_80378168:
-	.incbin "baserom.dol", 0x374268, 0x18
+	.long 0x10
+	.string "AnmObjMatClrRes"
+	.balign 8
 .global lbl_80378180
 lbl_80378180:
-	.incbin "baserom.dol", 0x374280, 0x18
+	.long 0x0D
+	.string "AnmObjTexPat"
+	.balign 8
 .global lbl_80378198
 lbl_80378198:
-	.incbin "baserom.dol", 0x374298, 0x18
+	.long 0x11
+	.string "AnmObjTexPatNode"
+	.balign 8
 .global lbl_803781B0
 lbl_803781B0:
-	.incbin "baserom.dol", 0x3742B0, 0x20
+	.long 0x15
+	.string "AnmObjTexPatOverride"
+	.balign 8
 .global lbl_803781D0
 lbl_803781D0:
-	.incbin "baserom.dol", 0x3742D0, 0x18
+	.long 0x10
+	.string "AnmObjTexPatRes"
+	.balign 8
 .global lbl_803781E8
 lbl_803781E8:
-	.incbin "baserom.dol", 0x3742E8, 0x18
+	.long 0x0D
+	.string "AnmObjTexSrt"
+	.balign 8
 .global lbl_80378200
 lbl_80378200:
-	.incbin "baserom.dol", 0x374300, 0x18
+	.long 0x11
+	.string "AnmObjTexSrtNode"
+	.balign 8
 .global lbl_80378218
 lbl_80378218:
-	.incbin "baserom.dol", 0x374318, 0x20
+	.long 0x15
+	.string "AnmObjTexSrtOverride"
+	.balign 8
 .global lbl_80378238
 lbl_80378238:
-	.incbin "baserom.dol", 0x374338, 0x18
+	.long 0x10
+	.string "AnmObjTexSrtRes"
+	.balign 8
 .global lbl_80378250
 lbl_80378250:
-	.incbin "baserom.dol", 0x374350, 0x10
+	.long 0x0A
+	.string "AnmObjChr"
+	.balign 8
 .global lbl_80378260
 lbl_80378260:
-	.incbin "baserom.dol", 0x374360, 0x14
+	.long 0x0E
+	.string "AnmObjChrNode"
+	.balign 4
 .global lbl_80378274
 lbl_80378274:
-	.incbin "baserom.dol", 0x374374, 0x14
+	.long 0x0F
+	.string "AnmObjChrBlend"
+	.balign 8
 .global lbl_80378288
 lbl_80378288:
-	.incbin "baserom.dol", 0x374388, 0x18
+	.long 0x0D
+	.string "AnmObjChrRes"
+	.balign 8
 .global lbl_803782A0
 lbl_803782A0:
-	.incbin "baserom.dol", 0x3743A0, 0x10
+	.long 0x0A
+	.string "AnmObjShp"
+	.balign 8
 .global lbl_803782B0
 lbl_803782B0:
-	.incbin "baserom.dol", 0x3743B0, 0x14
+	.long 0x0E
+	.string "AnmObjShpNode"
+	.balign 4
 .global lbl_803782C4
 lbl_803782C4:
-	.incbin "baserom.dol", 0x3743C4, 0x14
+	.long 0x0F
+	.string "AnmObjShpBlend"
+	.balign 8
 .global lbl_803782D8
 lbl_803782D8:
-	.incbin "baserom.dol", 0x3743D8, 0x18
+	.long 0x0D
+	.string "AnmObjShpRes"
+	.balign 8
 .global lbl_803782F0
 lbl_803782F0:
-	.incbin "baserom.dol", 0x3743F0, 0x10
+	.long 0x07
+	.string "G3dObj"
+	.balign 8
 .global lbl_80378300
 lbl_80378300:
-	.incbin "baserom.dol", 0x374400, 0x10
+	.long 0x07
+	.string "AnmObj"
+	.balign 8
+	
 .global lbl_80378310
 lbl_80378310:
 	.incbin "baserom.dol", 0x374410, 0x3C0

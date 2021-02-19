@@ -1,7 +1,68 @@
 .include "macros.inc"
 
-.section .text, "ax"  # 0x800076E0 - 0x80355080 
+.section .data, "wa"
+.global switch_80396430
+switch_80396430:
+	.long 0x8004D780
+	.long 0x8004D788
+	.long 0x8004D798
+	.long 0x8004D7AC
+	.long 0x8004D7B8
+	.long 0x8004D7C8
+	.long 0x8004D7DC
+	.long 0x8004D7E8
+	.long 0x8004D7FC
+.global __vt__Q44nw4r3snd6detail5Voice
+__vt__Q44nw4r3snd6detail5Voice:
+	.long 0
+	.long 0
+	.long __dt__Q44nw4r3snd6detail5VoiceFv
+	.long InvalidateData__Q44nw4r3snd6detail5VoiceFPCvPCv
+	.long InvalidateWaveData__Q44nw4r3snd6detail5VoiceFPCvPCv
+.balign 0x8
 
+.section .sdata2, "a"
+.global lbl_804C0128
+lbl_804C0128:
+	.single 0e1
+.global lbl_804C012C
+lbl_804C012C:
+	.single 0e0
+.global lbl_804C0130
+lbl_804C0130:
+	.single 0e-0.12
+.global lbl_804C0134
+lbl_804C0134:
+	.single 0e0.88
+.global lbl_804C0138
+lbl_804C0138:
+	.single 0e0.5
+.global lbl_804C013C
+lbl_804C013C:
+	.single 0e1.12
+.global lbl_804C0140
+lbl_804C0140:
+	.single 0e0.85
+.global lbl_804C0144
+lbl_804C0144:
+	.single 0e0.14999998 # 3e 19 99 98
+.global lbl_804C0148
+lbl_804C0148:
+	.single 0e2
+.global lbl_804C014C
+lbl_804C014C:
+	.single 0e0.35000002 # 3e b3 33 34
+.global lbl_804C0150
+lbl_804C0150:
+	.single 0e-1
+.global lbl_804C0154
+lbl_804C0154:
+	.single 0e-3
+.global lbl_804C0158
+lbl_804C0158:
+	.single 0e32768
+
+.section .text, "ax"  # 0x800076E0 - 0x80355080 
 .global __ct__Q44nw4r3snd6detail5VoiceFv
 __ct__Q44nw4r3snd6detail5VoiceFv:
 /* 8004B980 00046880  3C 80 80 39 */	lis r4, __vt__Q44nw4r3snd6detail5Voice@ha

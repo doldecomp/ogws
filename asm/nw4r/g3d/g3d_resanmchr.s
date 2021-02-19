@@ -1,7 +1,18 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .rodata, "a"
+.global lbl_803780A8
+lbl_803780A8:
+    .long 0x800590a4
+    .long 0x800591b4
+    .long 0x80059148
+    .long 0x8005929c
+    .long 0x800590bc
+    .long 0x80059338
+    .long 0x800591f4
+    .long 0x800593d0
 
+.section .text, "ax"
 # GetAnmScale__Q34nw4r3g3d27@unnamed@g3d_resanmchr_cpp@FPQ34nw4r4math4VEC3PCQ34nw4r3g3d17ResAnmChrNodeDataPCQ44nw4r3g3d17ResAnmChrNodeData7AnmDataf
 .global GetAnmScale__Q34nw4r3g3d27$$2unnamed$$2g3d_resanmchr_cpp$$2FPQ34nw4r4math4VEC3PCQ34nw4r3g3d17ResAnmChrNodeDataPCQ44nw4r3g3d17ResAnmChrNodeData7AnmDataf
 GetAnmScale__Q34nw4r3g3d27$$2unnamed$$2g3d_resanmchr_cpp$$2FPQ34nw4r4math4VEC3PCQ34nw4r3g3d17ResAnmChrNodeDataPCQ44nw4r3g3d17ResAnmChrNodeData7AnmDataf:
