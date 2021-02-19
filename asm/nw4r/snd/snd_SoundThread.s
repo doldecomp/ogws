@@ -1,7 +1,19 @@
 .include "macros.inc"
 
-.section .text, "ax"  # 0x800076E0 - 0x80355080 
+.section .bss, "wa"
+.global lbl_803E7870
+lbl_803E7870:
+	.skip 0x10
+.global lbl_803E7880
+lbl_803E7880:
+	.skip 0x3A0
 
+.section .sbss, "wa"
+.global lbl_804BEB10
+lbl_804BEB10:
+	.skip 0x8
+
+.section .text, "ax"  # 0x800076E0 - 0x80355080 
 .global GetInstance__Q44nw4r3snd6detail11SoundThreadFv
 GetInstance__Q44nw4r3snd6detail11SoundThreadFv:
 /* 800478D8 000427D8  94 21 FF F0 */	stwu r1, -0x10(r1)

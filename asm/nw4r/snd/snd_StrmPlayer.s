@@ -1,7 +1,68 @@
 .include "macros.inc"
 
-.section .text, "ax"  # 0x800076E0 - 0x80355080 
+.section .data, "wa"
+.global __vt__Q44nw4r3snd6detail10StrmPlayer
+__vt__Q44nw4r3snd6detail10StrmPlayer:
+	.long 0
+	.long 0
+	.long __dt__Q44nw4r3snd6detail10StrmPlayerFv
+	.long Start__Q44nw4r3snd6detail10StrmPlayerFv
+	.long Stop__Q44nw4r3snd6detail10StrmPlayerFv
+	.long Pause__Q44nw4r3snd6detail10StrmPlayerFb
+	.long IsActive__Q44nw4r3snd6detail10StrmPlayerCFv
+	.long IsStarted__Q44nw4r3snd6detail10StrmPlayerCFv
+	.long IsPause__Q44nw4r3snd6detail10StrmPlayerCFv
+	.long 0
+	.long 0
+	.long $2116$2__dt__Q44nw4r3snd6detail10StrmPlayerFv
+	.long $2116$2OnUpdateFrameSoundThread__Q44nw4r3snd6detail10StrmPlayerFv
+	.long $2116$2OnUpdateVoiceSoundThread__Q44nw4r3snd6detail10StrmPlayerFv
+	.long $2116$2OnShutdownSoundThread__Q44nw4r3snd6detail10StrmPlayerFv
+	.long OnUpdateFrameSoundThread__Q44nw4r3snd6detail10StrmPlayerFv
+	.long OnUpdateVoiceSoundThread__Q44nw4r3snd6detail10StrmPlayerFv
+	.long OnShutdownSoundThread__Q44nw4r3snd6detail10StrmPlayerFv
+.balign 0x8
+.global __vt__Q54nw4r3snd6detail10StrmPlayer16StrmDataLoadTask
+__vt__Q54nw4r3snd6detail10StrmPlayer16StrmDataLoadTask:
+	.long 0
+	.long 0
+	.long __dt__Q54nw4r3snd6detail10StrmPlayer16StrmDataLoadTaskFv
+	.long Execute__Q54nw4r3snd6detail10StrmPlayer16StrmDataLoadTaskFv
+	.long Cancel__Q54nw4r3snd6detail10StrmPlayer16StrmDataLoadTaskFv
+	.long OnCancel__Q54nw4r3snd6detail10StrmPlayer16StrmDataLoadTaskFv
+.balign 0x8
+.global __vt__Q54nw4r3snd6detail10StrmPlayer18StrmHeaderLoadTask
+__vt__Q54nw4r3snd6detail10StrmPlayer18StrmHeaderLoadTask:
+	.long 0
+	.long 0
+	.long __dt__Q54nw4r3snd6detail10StrmPlayer18StrmHeaderLoadTaskFv
+	.long Execute__Q54nw4r3snd6detail10StrmPlayer18StrmHeaderLoadTaskFv
+	.long Cancel__Q54nw4r3snd6detail10StrmPlayer18StrmHeaderLoadTaskFv
+	.long OnCancel__Q54nw4r3snd6detail10StrmPlayer18StrmHeaderLoadTaskFv
+.balign 0x8
 
+.section .bss, "wa"
+.global lbl_803E7C20
+lbl_803E7C20:
+	.skip 0x4020
+.global lbl_803EBC40
+lbl_803EBC40:
+	.skip 0x18
+
+.section .sbss, "wa"
+.global lbl_804BEB18
+lbl_804BEB18:
+	.skip 0x8
+
+.section .sdata2, "a"
+.global lbl_804C0120
+lbl_804C0120:
+	.single 0e1
+.global lbl_804C0124
+lbl_804C0124:
+	.single 0e0
+
+.section .text, "ax"  # 0x800076E0 - 0x80355080 
 .global __ct__Q44nw4r3snd6detail10StrmPlayerFv
 __ct__Q44nw4r3snd6detail10StrmPlayerFv:
 /* 800487B8 000436B8  94 21 FF F0 */	stwu r1, -0x10(r1)

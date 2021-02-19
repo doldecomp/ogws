@@ -4,9 +4,9 @@
 
 .global __ct__Q44nw4r3snd6detail5VoiceFv
 __ct__Q44nw4r3snd6detail5VoiceFv:
-/* 8004B980 00046880  3C 80 80 39 */	lis r4, lbl_80396454@ha
+/* 8004B980 00046880  3C 80 80 39 */	lis r4, __vt__Q44nw4r3snd6detail5Voice@ha
 /* 8004B984 00046884  38 00 00 00 */	li r0, 0
-/* 8004B988 00046888  38 84 64 54 */	addi r4, r4, lbl_80396454@l
+/* 8004B988 00046888  38 84 64 54 */	addi r4, r4, __vt__Q44nw4r3snd6detail5Voice@l
 /* 8004B98C 0004688C  90 03 00 00 */	stw r0, 0(r3)
 /* 8004B990 00046890  90 03 00 04 */	stw r0, 4(r3)
 /* 8004B994 00046894  90 83 00 08 */	stw r4, 8(r3)
@@ -39,9 +39,9 @@ __dt__Q44nw4r3snd6detail5VoiceFv:
 /* 8004B9F4 000468F4  7C 79 1B 78 */	mr r25, r3
 /* 8004B9F8 000468F8  7C 9A 23 78 */	mr r26, r4
 /* 8004B9FC 000468FC  41 82 00 68 */	beq lbl_8004BA64
-/* 8004BA00 00046900  3C 80 80 39 */	lis r4, lbl_80396454@ha
+/* 8004BA00 00046900  3C 80 80 39 */	lis r4, __vt__Q44nw4r3snd6detail5Voice@ha
 /* 8004BA04 00046904  7F 3F CB 78 */	mr r31, r25
-/* 8004BA08 00046908  38 84 64 54 */	addi r4, r4, lbl_80396454@l
+/* 8004BA08 00046908  38 84 64 54 */	addi r4, r4, __vt__Q44nw4r3snd6detail5Voice@l
 /* 8004BA0C 0004690C  3B A0 00 00 */	li r29, 0
 /* 8004BA10 00046910  90 83 00 08 */	stw r4, 8(r3)
 lbl_8004BA14:

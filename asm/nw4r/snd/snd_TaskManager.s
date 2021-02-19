@@ -1,7 +1,19 @@
 .include "macros.inc"
 
-.section .text, "ax"  # 0x800076E0 - 0x80355080 
+.section .bss, "wa"
+.global lbl_803EBC58
+lbl_803EBC58:
+	.skip 0xC
+.global lbl_803EBC64
+lbl_803EBC64:
+	.skip 0x3C
 
+.section .sbss, "wa"
+.global lbl_804BEB28
+lbl_804BEB28:
+	.skip 0x8
+
+.section .text, "ax"  # 0x800076E0 - 0x80355080 
 .global GetInstance__Q44nw4r3snd6detail11TaskManagerFv
 GetInstance__Q44nw4r3snd6detail11TaskManagerFv:
 /* 8004AFF8 00045EF8  94 21 FF F0 */	stwu r1, -0x10(r1)
