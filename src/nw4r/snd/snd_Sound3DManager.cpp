@@ -347,7 +347,7 @@ namespace nw4r
 		
 		void Sound3DManager::detail_FreeAmbientArg(void * pArg, const detail::BasicSound *)
 		{
-			if (pArg) mPool.Free(static_cast<Sound3DActorParam *>(pArg));
+			mPool.Free(static_cast<Sound3DActorParam *>(pArg));
 		}
 		
 		Sound3DManager::Sound3DActorParam::Sound3DActorParam() : WORD_0x0(-1)

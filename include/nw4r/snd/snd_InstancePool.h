@@ -49,13 +49,21 @@ namespace nw4r
 				
 				inline void Free(T * ptr)
 				{
-					ptr->~T();
-					FreeImpl(ptr);
+					if (ptr)
+					{
+						ptr->~T();
+						FreeImpl(ptr);
+					}
 				}
 				
 				inline void Destroy(void * ptr, u32 num)
 				{
 					DestroyImpl(ptr, num);
+				}
+				
+				inline u32 Count() const
+				{
+					return CountImpl();
 				}
 			};
 			

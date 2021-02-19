@@ -58,6 +58,8 @@ namespace nw4r
 				
 				float CalcVolumeRatio(float);
 				float CalcPitchRatio(int);
+				
+				u16 CalcRandom();
 			}
 		}
 	}

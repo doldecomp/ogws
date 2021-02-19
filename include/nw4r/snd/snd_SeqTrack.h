@@ -37,8 +37,8 @@ namespace nw4r
 				float FLOATS_0x30[4];
 				float FLOATS_0x40[4];
 				
-				const UNKTYPE * PTR_0x50;
-				const UNKTYPE * PTR_0x54;
+				const u8 * PTR_0x50;
+				const u8 * PTR_0x54;
 				
 				int TIMER_0x58;
 				
@@ -120,7 +120,7 @@ namespace nw4r
 			{
 				inline virtual ~SeqTrackAllocator() {}
 				virtual SeqTrack * AllocTrack(SeqPlayer *) = 0;
-				virtual UNKTYPE FreeTrack(SeqTrack *) = 0;
+				virtual void FreeTrack(SeqTrack *) = 0;
 				virtual int GetAllocatableTrackCount() const = 0;
 			};
 		}
