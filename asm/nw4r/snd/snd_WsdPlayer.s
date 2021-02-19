@@ -35,6 +35,30 @@ ______vt__Q44nw4r3snd6detail9WsdPlayer:
 	.long 0
 .balign 0x8
 
+.section .sdata2, "a"
+.global lbl_804C01B0
+lbl_804C01B0:
+	.single 0e1
+.global lbl_804C01B4
+lbl_804C01B4:
+	.single 0e0
+.global lbl_804C01B8
+lbl_804C01B8:
+	.single 0e63
+.global lbl_804C01BC
+lbl_804C01BC:
+	.single 0e0.015625
+.global lbl_804C01C0
+lbl_804C01C0:
+	.single 0e127
+	.single 0e0
+.global lbl_804C01C8
+lbl_804C01C8:
+	.double 0e4.503601774854144E15
+.global lbl_804C01D0
+lbl_804C01D0:
+	.double 0e4.503599627370496E15
+
 .section .text, "ax"  # 0x800076E0 - 0x80355080 
 .global __ct__Q44nw4r3snd6detail9WsdPlayerFv
 __ct__Q44nw4r3snd6detail9WsdPlayerFv:

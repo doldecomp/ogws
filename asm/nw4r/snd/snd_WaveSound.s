@@ -33,6 +33,11 @@ __vt__Q44nw4r3snd6detail9WaveSound:
 	.long GetBasicPlayer__Q44nw4r3snd6detail9WaveSoundCFv
 .balign 0x8
 
+.section .sbss, "wa"
+.global lbl_804BEB38
+lbl_804BEB38:
+	.skip 0x8
+
 .section .text, "ax"  # 0x800076E0 - 0x80355080 
 # __ct__Q44nw4r3snd6detail9WaveSoundFPQ44nw4r3snd6detail50SoundInstanceManager<Q44nw4r3snd6detail9WaveSound>
 .global __ct__Q44nw4r3snd6detail9WaveSoundFPQ44nw4r3snd6detail50SoundInstanceManager$$0Q44nw4r3snd6detail9WaveSound$$1

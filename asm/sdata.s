@@ -4,11 +4,6 @@
 
 .balign 0x8
 
-.global u$7185
-u$7185:
-	.long 0x12345678
-.balign 0x8
-
 .global lbl_804BD418
 lbl_804BD418:
 	.long PlayPolicy_Onetime__Q24nw4r3g3dFfff

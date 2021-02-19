@@ -1,5 +1,11 @@
 .include "macros.inc"
 
+.section .sdata, "wa"
+.global u$7185
+u$7185:
+	.long 0x12345678
+.balign 0x8
+
 .section .rodata, "a"
 .long 0
 .global NoteTable__Q44nw4r3snd6detail4Util
@@ -33,6 +39,51 @@ lbl_80396468:
 	.long 0x80377744
 	.long 0
 .balign 0x8
+
+.section .sdata2, "a"
+.global lbl_804C0160
+lbl_804C0160:
+	.single 0e1
+.global lbl_804C0164
+lbl_804C0164:
+	.single 0e2
+.global lbl_804C0168
+lbl_804C0168:
+	.single 0e0.5
+.global lbl_804C016C
+lbl_804C016C:
+	.single 0e6
+.global lbl_804C0170
+lbl_804C0170:
+	.single 0e-90.4
+.global lbl_804C0174
+lbl_804C0174:
+	.single 0e10
+.global lbl_804C0178
+lbl_804C0178:
+	.single 0e-1
+.global lbl_804C017C
+lbl_804C017C:
+	.single 0e256
+.global lbl_804C0180
+lbl_804C0180:
+	.double 0e0
+.global lbl_804C0188
+lbl_804C0188:
+	.double 0e32000
+.global lbl_804C0190
+lbl_804C0190:
+	.double 0e2
+.global lbl_804C0198
+lbl_804C0198:
+	.double 0e10
+.global lbl_804C01A0
+lbl_804C01A0:
+	.double 0e1
+.global lbl_804C01A8
+lbl_804C01A8:
+	.single 0e1
+	.single 0e0
 
 .section .text, "ax"  # 0x800076E0 - 0x80355080 
 .global CalcPitchRatio__Q44nw4r3snd6detail4UtilFi

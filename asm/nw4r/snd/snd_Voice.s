@@ -61,6 +61,7 @@ lbl_804C0154:
 .global lbl_804C0158
 lbl_804C0158:
 	.single 0e32768
+	.single 0e0
 
 .section .text, "ax"  # 0x800076E0 - 0x80355080 
 .global __ct__Q44nw4r3snd6detail5VoiceFv
