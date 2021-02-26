@@ -1,7 +1,32 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .rodata, "a"
+.global lbl_80378A90
+lbl_80378A90:
+    .single 0e0.5
+    .long 0
+    .long 0
+    .single 0e0.5
+    .long 0
+    .single 0e-0.5
+    .long 0
+    .single 0e0.5
+    .long 0
+    .long 0
+    .long 0
+    .single 0e1
 
+.section .data, "wa"
+.global __vt__Q44nw4r3g3d8G3DState11IndMtxOpStd
+__vt__Q44nw4r3g3d8G3DState11IndMtxOpStd:
+    .long 0
+    .long 0
+    .long __cl__Q44nw4r3g3d8G3DState11IndMtxOpStdFPQ44nw4r3g3d8G3DState13IndTexMtxInfo
+    .long __dt__Q44nw4r3g3d8G3DState11IndMtxOpStdFv
+    .long Reset__Q44nw4r3g3d8G3DState11IndMtxOpStdFv
+    .long SetNrmMapMtx__Q44nw4r3g3d8G3DState11IndMtxOpStdF14_GXIndTexMtxIDPCQ34nw4r4math4VEC3PCQ34nw4r4math5MTX34Q44nw4r3g3d14ResMatMiscData14IndirectMethod
+
+.section .text, "ax"
 .global EnvironmentMapping__Q44nw4r3g3d6detail19ScnDependentMtxFuncFPQ34nw4r4math5MTX34ScSc
 EnvironmentMapping__Q44nw4r3g3d6detail19ScnDependentMtxFuncFPQ34nw4r4math5MTX34ScSc:
 /* 800640C8 0005EFC8  94 21 FF A0 */	stwu r1, -0x60(r1)

@@ -1,7 +1,48 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .rodata, "a"
+.global lbl_80378BC8
+lbl_80378BC8:
+    .long 13
+	.string "ScnMdlSimple"
+	.balign 8
 
+.section .data, "wa"
+.global switch_80397008
+switch_80397008:
+    .long 0x80073e54
+    .long 0x80073eac
+    .long 0x80073f04
+    .long 0x80073f5c
+    .long 0x80073fb4
+    .long 0x800741b8
+    .long 0x80074008
+.global lbl_80397024
+lbl_80397024:
+	.string "NodeTree"
+	.balign 0x8
+.global __vt__Q34nw4r3g3d12ScnMdlSimple
+__vt__Q34nw4r3g3d12ScnMdlSimple:
+    .long 0
+    .long 0
+    .long IsDerivedFrom__Q34nw4r3g3d12ScnMdlSimpleCFQ44nw4r3g3d6G3dObj7TypeObj
+    .long G3dProc__Q34nw4r3g3d12ScnMdlSimpleFUlUlPv
+    .long __dt__Q34nw4r3g3d12ScnMdlSimpleFv
+    .long GetTypeObj__Q34nw4r3g3d12ScnMdlSimpleCFv
+    .long GetTypeName__Q34nw4r3g3d12ScnMdlSimpleCFv
+    .long ForEach__Q34nw4r3g3d7ScnLeafFPFPQ34nw4r3g3d6ScnObjPv_Q44nw4r3g3d6ScnObj13ForEachResultPvb
+    .long SetScnObjOption__Q34nw4r3g3d12ScnMdlSimpleFUlUl
+    .long GetScnObjOption__Q34nw4r3g3d12ScnMdlSimpleCFUlPUl
+    .long GetValueForSortOpa__Q34nw4r3g3d6ScnObjCFv
+    .long GetValueForSortXlu__Q34nw4r3g3d6ScnObjCFv
+    .long CalcWorldMtx__Q34nw4r3g3d7ScnLeafFPCQ34nw4r4math5MTX34PUl
+    .long SetAnmObj__Q34nw4r3g3d12ScnMdlSimpleFPQ34nw4r3g3d6AnmObjQ44nw4r3g3d12ScnMdlSimple10AnmObjType
+    .long RemoveAnmObj__Q34nw4r3g3d12ScnMdlSimpleFPQ34nw4r3g3d6AnmObj
+    .long RemoveAnmObj__Q34nw4r3g3d12ScnMdlSimpleFQ44nw4r3g3d12ScnMdlSimple10AnmObjType
+    .long GetAnmObj__Q34nw4r3g3d12ScnMdlSimpleFQ44nw4r3g3d12ScnMdlSimple10AnmObjType
+    .long GetAnmObj__Q34nw4r3g3d12ScnMdlSimpleCFQ44nw4r3g3d12ScnMdlSimple10AnmObjType
+
+.section .text, "ax"
 .global Construct__Q34nw4r3g3d12ScnMdlSimpleFP12MEMAllocatorPUlQ34nw4r3g3d6ResMdli
 Construct__Q34nw4r3g3d12ScnMdlSimpleFP12MEMAllocatorPUlQ34nw4r3g3d6ResMdli:
 /* 80072C2C 0006DB2C  94 21 FF C0 */	stwu r1, -0x40(r1)

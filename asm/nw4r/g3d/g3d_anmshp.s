@@ -1,7 +1,118 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .data, "wa"
+.global __vt__Q34nw4r3g3d12AnmObjShpRes
+__vt__Q34nw4r3g3d12AnmObjShpRes:
+    .long 0
+    .long 0
+    .long IsDerivedFrom__Q34nw4r3g3d12AnmObjShpResCFQ44nw4r3g3d6G3dObj7TypeObj
+    .long G3dProc__Q34nw4r3g3d12AnmObjShpResFUlUlPv
+    .long __dt__Q34nw4r3g3d12AnmObjShpResFv
+    .long GetTypeObj__Q34nw4r3g3d12AnmObjShpResCFv
+    .long GetTypeName__Q34nw4r3g3d12AnmObjShpResCFv
+    .long SetFrame__Q34nw4r3g3d12AnmObjShpResFf
+    .long GetFrame__Q34nw4r3g3d12AnmObjShpResCFv
+    .long UpdateFrame__Q34nw4r3g3d12AnmObjShpResFv
+    .long SetUpdateRate__Q34nw4r3g3d12AnmObjShpResFf
+    .long GetUpdateRate__Q34nw4r3g3d12AnmObjShpResCFv
+    .long Bind__Q34nw4r3g3d12AnmObjShpResFQ34nw4r3g3d6ResMdl
+    .long Release__Q34nw4r3g3d9AnmObjShpFv
+    .long GetResult__Q34nw4r3g3d12AnmObjShpResFPQ34nw4r3g3d12ShpAnmResultUl
+    .long Attach__Q34nw4r3g3d9AnmObjShpFiPQ34nw4r3g3d12AnmObjShpRes
+    .long Detach__Q34nw4r3g3d9AnmObjShpFi
+    .long DetachAll__Q34nw4r3g3d9AnmObjShpFv
+    .long SetWeight__Q34nw4r3g3d9AnmObjShpFif
+    .long GetWeight__Q34nw4r3g3d9AnmObjShpCFi
+.global __vt__Q34nw4r3g3d14AnmObjShpBlend
+__vt__Q34nw4r3g3d14AnmObjShpBlend:
+    .long 0
+    .long 0
+    .long IsDerivedFrom__Q34nw4r3g3d14AnmObjShpBlendCFQ44nw4r3g3d6G3dObj7TypeObj
+    .long G3dProc__Q34nw4r3g3d13AnmObjShpNodeFUlUlPv
+    .long __dt__Q34nw4r3g3d14AnmObjShpBlendFv
+    .long GetTypeObj__Q34nw4r3g3d14AnmObjShpBlendCFv
+    .long GetTypeName__Q34nw4r3g3d14AnmObjShpBlendCFv
+    .long SetFrame__Q34nw4r3g3d13AnmObjShpNodeFf
+    .long GetFrame__Q34nw4r3g3d13AnmObjShpNodeCFv
+    .long UpdateFrame__Q34nw4r3g3d13AnmObjShpNodeFv
+    .long SetUpdateRate__Q34nw4r3g3d13AnmObjShpNodeFf
+    .long GetUpdateRate__Q34nw4r3g3d13AnmObjShpNodeCFv
+    .long Bind__Q34nw4r3g3d13AnmObjShpNodeFQ34nw4r3g3d6ResMdl
+    .long Release__Q34nw4r3g3d13AnmObjShpNodeFv
+    .long GetResult__Q34nw4r3g3d14AnmObjShpBlendFPQ34nw4r3g3d12ShpAnmResultUl
+    .long Attach__Q34nw4r3g3d13AnmObjShpNodeFiPQ34nw4r3g3d12AnmObjShpRes
+    .long Detach__Q34nw4r3g3d13AnmObjShpNodeFi
+    .long DetachAll__Q34nw4r3g3d13AnmObjShpNodeFv
+    .long SetWeight__Q34nw4r3g3d14AnmObjShpBlendFif
+    .long GetWeight__Q34nw4r3g3d14AnmObjShpBlendCFi
+.global __vt__Q34nw4r3g3d13AnmObjShpNode
+__vt__Q34nw4r3g3d13AnmObjShpNode:
+    .long 0
+    .long 0
+    .long IsDerivedFrom__Q34nw4r3g3d13AnmObjShpNodeCFQ44nw4r3g3d6G3dObj7TypeObj
+    .long G3dProc__Q34nw4r3g3d13AnmObjShpNodeFUlUlPv
+    .long __dt__Q34nw4r3g3d13AnmObjShpNodeFv
+    .long GetTypeObj__Q34nw4r3g3d13AnmObjShpNodeCFv
+    .long GetTypeName__Q34nw4r3g3d13AnmObjShpNodeCFv
+    .long SetFrame__Q34nw4r3g3d13AnmObjShpNodeFf
+    .long GetFrame__Q34nw4r3g3d13AnmObjShpNodeCFv
+    .long UpdateFrame__Q34nw4r3g3d13AnmObjShpNodeFv
+    .long SetUpdateRate__Q34nw4r3g3d13AnmObjShpNodeFf
+    .long GetUpdateRate__Q34nw4r3g3d13AnmObjShpNodeCFv
+    .long Bind__Q34nw4r3g3d13AnmObjShpNodeFQ34nw4r3g3d6ResMdl
+    .long Release__Q34nw4r3g3d13AnmObjShpNodeFv
+    .long 0
+    .long Attach__Q34nw4r3g3d13AnmObjShpNodeFiPQ34nw4r3g3d12AnmObjShpRes
+    .long Detach__Q34nw4r3g3d13AnmObjShpNodeFi
+    .long DetachAll__Q34nw4r3g3d13AnmObjShpNodeFv
+    .long SetWeight__Q34nw4r3g3d9AnmObjShpFif
+    .long GetWeight__Q34nw4r3g3d9AnmObjShpCFi
+.global __vt__Q34nw4r3g3d9AnmObjShp
+__vt__Q34nw4r3g3d9AnmObjShp:
+    .long 0
+    .long 0
+    .long IsDerivedFrom__Q34nw4r3g3d9AnmObjShpCFQ44nw4r3g3d6G3dObj7TypeObj
+    .long 0
+    .long __dt__Q34nw4r3g3d9AnmObjShpFv
+    .long GetTypeObj__Q34nw4r3g3d9AnmObjShpCFv
+    .long GetTypeName__Q34nw4r3g3d9AnmObjShpCFv
+    .long 0
+    .long 0
+    .long 0
+    .long 0
+    .long 0
+    .long 0
+    .long Release__Q34nw4r3g3d9AnmObjShpFv
+    .long 0
+    .long Attach__Q34nw4r3g3d9AnmObjShpFiPQ34nw4r3g3d12AnmObjShpRes
+    .long Detach__Q34nw4r3g3d9AnmObjShpFi
+    .long DetachAll__Q34nw4r3g3d9AnmObjShpFv
+    .long SetWeight__Q34nw4r3g3d9AnmObjShpFif
+    .long GetWeight__Q34nw4r3g3d9AnmObjShpCFi
 
+.section .rodata, "a"
+.global lbl_803782A0
+lbl_803782A0:
+	.long 0x0A
+	.string "AnmObjShp"
+	.balign 8
+.global lbl_803782B0
+lbl_803782B0:
+	.long 0x0E
+	.string "AnmObjShpNode"
+	.balign 4
+.global lbl_803782C4
+lbl_803782C4:
+	.long 0x0F
+	.string "AnmObjShpBlend"
+	.balign 8
+.global lbl_803782D8
+lbl_803782D8:
+	.long 0x0D
+	.string "AnmObjShpRes"
+	.balign 8
+
+.section .text, "ax"
 .global TestExistence__Q34nw4r3g3d9AnmObjShpCFUl
 TestExistence__Q34nw4r3g3d9AnmObjShpCFUl:
 /* 80061B6C 0005CA6C  80 63 00 14 */	lwz r3, 0x14(r3)

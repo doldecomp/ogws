@@ -1,7 +1,14 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .rodata, "a"
+.global lbl_80378310
+lbl_80378310:
+	.incbin "baserom.dol", 0x374410, 0x3C0
+.global lbl_803786D0
+lbl_803786D0:
+	.incbin "baserom.dol", 0x3747D0, 0x3C0
 
+.section .text, "ax"
 .global GDSetGenMode2__Q34nw4r3g3d4fifoFUcUcUcUc11_GXCullMode
 GDSetGenMode2__Q34nw4r3g3d4fifoFUcUcUcUc11_GXCullMode:
 /* 800636BC 0005E5BC  3D 40 CC 01 */	lis r10, 0xCC008000@ha

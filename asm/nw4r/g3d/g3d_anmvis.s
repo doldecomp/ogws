@@ -1,7 +1,106 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .rodata, "a"
+.global lbl_803780C8
+lbl_803780C8:
+	.long 0x0A
+	.string "AnmObjVis"
+	.balign 4
+.global lbl_803780D8
+lbl_803780D8:
+	.long 0x0E
+	.string "AnmObjVisNode"
+	.balign 4
+.global lbl_803780EC
+lbl_803780EC:
+	.long 0x0C
+	.string "AnmObjVisOR"
+	.balign 8
+.global lbl_80378100
+lbl_80378100:
+	.long 0x0D
+	.string "AnmObjVisRes"
+	.balign 8
 
+.section .data, "wa"
+.global __vt__Q34nw4r3g3d12AnmObjVisRes
+__vt__Q34nw4r3g3d12AnmObjVisRes:
+    .long 0
+    .long 0
+    .long IsDerivedFrom__Q34nw4r3g3d12AnmObjVisResCFQ44nw4r3g3d6G3dObj7TypeObj
+    .long G3dProc__Q34nw4r3g3d9AnmObjVisFUlUlPv
+    .long __dt__Q34nw4r3g3d12AnmObjVisResFv
+    .long GetTypeObj__Q34nw4r3g3d12AnmObjVisResCFv
+    .long GetTypeName__Q34nw4r3g3d12AnmObjVisResCFv
+    .long SetFrame__Q34nw4r3g3d12AnmObjVisResFf
+    .long GetFrame__Q34nw4r3g3d12AnmObjVisResCFv
+    .long UpdateFrame__Q34nw4r3g3d12AnmObjVisResFv
+    .long SetUpdateRate__Q34nw4r3g3d12AnmObjVisResFf
+    .long GetUpdateRate__Q34nw4r3g3d12AnmObjVisResCFv
+    .long Bind__Q34nw4r3g3d12AnmObjVisResFQ34nw4r3g3d6ResMdl
+    .long Release__Q34nw4r3g3d9AnmObjVisFv
+    .long GetResult__Q34nw4r3g3d12AnmObjVisResFUl
+    .long Attach__Q34nw4r3g3d9AnmObjVisFiPQ34nw4r3g3d12AnmObjVisRes
+    .long Detach__Q34nw4r3g3d9AnmObjVisFi
+.global __vt__Q34nw4r3g3d11AnmObjVisOR
+__vt__Q34nw4r3g3d11AnmObjVisOR:
+    .long 0
+    .long 0
+    .long IsDerivedFrom__Q34nw4r3g3d11AnmObjVisORCFQ44nw4r3g3d6G3dObj7TypeObj
+    .long G3dProc__Q34nw4r3g3d13AnmObjVisNodeFUlUlPv
+    .long __dt__Q34nw4r3g3d11AnmObjVisORFv
+    .long GetTypeObj__Q34nw4r3g3d11AnmObjVisORCFv
+    .long GetTypeName__Q34nw4r3g3d11AnmObjVisORCFv
+    .long SetFrame__Q34nw4r3g3d13AnmObjVisNodeFf
+    .long GetFrame__Q34nw4r3g3d13AnmObjVisNodeCFv
+    .long UpdateFrame__Q34nw4r3g3d13AnmObjVisNodeFv
+    .long SetUpdateRate__Q34nw4r3g3d13AnmObjVisNodeFf
+    .long GetUpdateRate__Q34nw4r3g3d13AnmObjVisNodeCFv
+    .long Bind__Q34nw4r3g3d13AnmObjVisNodeFQ34nw4r3g3d6ResMdl
+    .long Release__Q34nw4r3g3d13AnmObjVisNodeFv
+    .long GetResult__Q34nw4r3g3d11AnmObjVisORFUl
+    .long Attach__Q34nw4r3g3d13AnmObjVisNodeFiPQ34nw4r3g3d12AnmObjVisRes
+    .long Detach__Q34nw4r3g3d13AnmObjVisNodeFi
+.global __vt__Q34nw4r3g3d13AnmObjVisNode
+__vt__Q34nw4r3g3d13AnmObjVisNode:
+    .long 0
+    .long 0
+    .long IsDerivedFrom__Q34nw4r3g3d13AnmObjVisNodeCFQ44nw4r3g3d6G3dObj7TypeObj
+    .long G3dProc__Q34nw4r3g3d13AnmObjVisNodeFUlUlPv
+    .long __dt__Q34nw4r3g3d13AnmObjVisNodeFv
+    .long GetTypeObj__Q34nw4r3g3d13AnmObjVisNodeCFv
+    .long GetTypeName__Q34nw4r3g3d13AnmObjVisNodeCFv
+    .long SetFrame__Q34nw4r3g3d13AnmObjVisNodeFf
+    .long GetFrame__Q34nw4r3g3d13AnmObjVisNodeCFv
+    .long UpdateFrame__Q34nw4r3g3d13AnmObjVisNodeFv
+    .long SetUpdateRate__Q34nw4r3g3d13AnmObjVisNodeFf
+    .long GetUpdateRate__Q34nw4r3g3d13AnmObjVisNodeCFv
+    .long Bind__Q34nw4r3g3d13AnmObjVisNodeFQ34nw4r3g3d6ResMdl
+    .long Release__Q34nw4r3g3d13AnmObjVisNodeFv
+    .long 0
+    .long Attach__Q34nw4r3g3d13AnmObjVisNodeFiPQ34nw4r3g3d12AnmObjVisRes
+    .long Detach__Q34nw4r3g3d13AnmObjVisNodeFi
+.global __vt__Q34nw4r3g3d9AnmObjVis
+__vt__Q34nw4r3g3d9AnmObjVis:
+    .long 0
+    .long 0
+    .long IsDerivedFrom__Q34nw4r3g3d9AnmObjVisCFQ44nw4r3g3d6G3dObj7TypeObj
+    .long G3dProc__Q34nw4r3g3d9AnmObjVisFUlUlPv
+    .long __dt__Q34nw4r3g3d9AnmObjVisFv
+    .long GetTypeObj__Q34nw4r3g3d9AnmObjVisCFv
+    .long GetTypeName__Q34nw4r3g3d9AnmObjVisCFv
+    .long 0
+    .long 0
+    .long 0
+    .long 0
+    .long 0
+    .long 0
+    .long Release__Q34nw4r3g3d9AnmObjVisFv
+    .long 0
+    .long Attach__Q34nw4r3g3d9AnmObjVisFiPQ34nw4r3g3d12AnmObjVisRes
+    .long Detach__Q34nw4r3g3d9AnmObjVisFi
+
+.section .text, "ax"
 .global Release__Q34nw4r3g3d9AnmObjVisFv
 Release__Q34nw4r3g3d9AnmObjVisFv:
 /* 8005AC00 00055B00  3C 80 00 01 */	lis r4, 0x00008000@ha

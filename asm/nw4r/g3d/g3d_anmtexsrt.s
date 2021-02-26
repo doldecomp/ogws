@@ -1,7 +1,110 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .data, "wa"
+.global __vt__Q34nw4r3g3d15AnmObjTexSrtRes
+__vt__Q34nw4r3g3d15AnmObjTexSrtRes:
+    .long 0
+    .long 0
+    .long IsDerivedFrom__Q34nw4r3g3d15AnmObjTexSrtResCFQ44nw4r3g3d6G3dObj7TypeObj
+    .long G3dProc__Q34nw4r3g3d15AnmObjTexSrtResFUlUlPv
+    .long __dt__Q34nw4r3g3d15AnmObjTexSrtResFv
+    .long GetTypeObj__Q34nw4r3g3d15AnmObjTexSrtResCFv
+    .long GetTypeName__Q34nw4r3g3d15AnmObjTexSrtResCFv
+    .long SetFrame__Q34nw4r3g3d15AnmObjTexSrtResFf
+    .long GetFrame__Q34nw4r3g3d15AnmObjTexSrtResCFv
+    .long UpdateFrame__Q34nw4r3g3d15AnmObjTexSrtResFv
+    .long SetUpdateRate__Q34nw4r3g3d15AnmObjTexSrtResFf
+    .long GetUpdateRate__Q34nw4r3g3d15AnmObjTexSrtResCFv
+    .long Bind__Q34nw4r3g3d15AnmObjTexSrtResFQ34nw4r3g3d6ResMdl
+    .long Release__Q34nw4r3g3d12AnmObjTexSrtFv
+    .long GetResult__Q34nw4r3g3d15AnmObjTexSrtResFPQ34nw4r3g3d15TexSrtAnmResultUl
+    .long Attach__Q34nw4r3g3d12AnmObjTexSrtFiPQ34nw4r3g3d15AnmObjTexSrtRes
+    .long Detach__Q34nw4r3g3d12AnmObjTexSrtFi
+    .long DetachAll__Q34nw4r3g3d12AnmObjTexSrtFv
+.global __vt__Q34nw4r3g3d20AnmObjTexSrtOverride
+__vt__Q34nw4r3g3d20AnmObjTexSrtOverride:
+    .long 0
+    .long 0
+    .long IsDerivedFrom__Q34nw4r3g3d20AnmObjTexSrtOverrideCFQ44nw4r3g3d6G3dObj7TypeObj
+    .long G3dProc__Q34nw4r3g3d16AnmObjTexSrtNodeFUlUlPv
+    .long __dt__Q34nw4r3g3d20AnmObjTexSrtOverrideFv
+    .long GetTypeObj__Q34nw4r3g3d20AnmObjTexSrtOverrideCFv
+    .long GetTypeName__Q34nw4r3g3d20AnmObjTexSrtOverrideCFv
+    .long SetFrame__Q34nw4r3g3d16AnmObjTexSrtNodeFf
+    .long GetFrame__Q34nw4r3g3d16AnmObjTexSrtNodeCFv
+    .long UpdateFrame__Q34nw4r3g3d16AnmObjTexSrtNodeFv
+    .long SetUpdateRate__Q34nw4r3g3d16AnmObjTexSrtNodeFf
+    .long GetUpdateRate__Q34nw4r3g3d16AnmObjTexSrtNodeCFv
+    .long Bind__Q34nw4r3g3d16AnmObjTexSrtNodeFQ34nw4r3g3d6ResMdl
+    .long Release__Q34nw4r3g3d16AnmObjTexSrtNodeFv
+    .long GetResult__Q34nw4r3g3d20AnmObjTexSrtOverrideFPQ34nw4r3g3d15TexSrtAnmResultUl
+    .long Attach__Q34nw4r3g3d16AnmObjTexSrtNodeFiPQ34nw4r3g3d15AnmObjTexSrtRes
+    .long Detach__Q34nw4r3g3d16AnmObjTexSrtNodeFi
+    .long DetachAll__Q34nw4r3g3d16AnmObjTexSrtNodeFv
+.global __vt__Q34nw4r3g3d16AnmObjTexSrtNode
+__vt__Q34nw4r3g3d16AnmObjTexSrtNode:
+    .long 0
+    .long 0
+    .long IsDerivedFrom__Q34nw4r3g3d16AnmObjTexSrtNodeCFQ44nw4r3g3d6G3dObj7TypeObj
+    .long G3dProc__Q34nw4r3g3d16AnmObjTexSrtNodeFUlUlPv
+    .long __dt__Q34nw4r3g3d16AnmObjTexSrtNodeFv
+    .long GetTypeObj__Q34nw4r3g3d16AnmObjTexSrtNodeCFv
+    .long GetTypeName__Q34nw4r3g3d16AnmObjTexSrtNodeCFv
+    .long SetFrame__Q34nw4r3g3d16AnmObjTexSrtNodeFf
+    .long GetFrame__Q34nw4r3g3d16AnmObjTexSrtNodeCFv
+    .long UpdateFrame__Q34nw4r3g3d16AnmObjTexSrtNodeFv
+    .long SetUpdateRate__Q34nw4r3g3d16AnmObjTexSrtNodeFf
+    .long GetUpdateRate__Q34nw4r3g3d16AnmObjTexSrtNodeCFv
+    .long Bind__Q34nw4r3g3d16AnmObjTexSrtNodeFQ34nw4r3g3d6ResMdl
+    .long Release__Q34nw4r3g3d16AnmObjTexSrtNodeFv
+    .long 0
+    .long Attach__Q34nw4r3g3d16AnmObjTexSrtNodeFiPQ34nw4r3g3d15AnmObjTexSrtRes
+    .long Detach__Q34nw4r3g3d16AnmObjTexSrtNodeFi
+    .long DetachAll__Q34nw4r3g3d16AnmObjTexSrtNodeFv
+.global __vt__Q34nw4r3g3d12AnmObjTexSrt
+__vt__Q34nw4r3g3d12AnmObjTexSrt:
+    .long 0
+    .long 0
+    .long IsDerivedFrom__Q34nw4r3g3d12AnmObjTexSrtCFQ44nw4r3g3d6G3dObj7TypeObj
+    .long 0
+    .long __dt__Q34nw4r3g3d12AnmObjTexSrtFv
+    .long GetTypeObj__Q34nw4r3g3d12AnmObjTexSrtCFv
+    .long GetTypeName__Q34nw4r3g3d12AnmObjTexSrtCFv
+    .long 0
+    .long 0
+    .long 0
+    .long 0
+    .long 0
+    .long 0
+    .long Release__Q34nw4r3g3d12AnmObjTexSrtFv
+    .long 0
+    .long Attach__Q34nw4r3g3d12AnmObjTexSrtFiPQ34nw4r3g3d15AnmObjTexSrtRes
+    .long Detach__Q34nw4r3g3d12AnmObjTexSrtFi
+    .long DetachAll__Q34nw4r3g3d12AnmObjTexSrtFv
 
+.section .rodata, "a"
+.global lbl_803781E8
+lbl_803781E8:
+	.long 0x0D
+	.string "AnmObjTexSrt"
+	.balign 8
+.global lbl_80378200
+lbl_80378200:
+	.long 0x11
+	.string "AnmObjTexSrtNode"
+	.balign 8
+.global lbl_80378218
+lbl_80378218:
+	.long 0x15
+	.string "AnmObjTexSrtOverride"
+	.balign 8
+.global lbl_80378238
+lbl_80378238:
+	.long 0x10
+	.string "AnmObjTexSrtRes"
+	.balign 8
+
+.section .text, "ax"
 .global TestExistence__Q34nw4r3g3d12AnmObjTexSrtCFUl
 TestExistence__Q34nw4r3g3d12AnmObjTexSrtCFUl:
 /* 8005E9B0 000598B0  80 63 00 14 */	lwz r3, 0x14(r3)

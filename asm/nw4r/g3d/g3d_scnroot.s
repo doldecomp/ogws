@@ -1,7 +1,45 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .rodata, "a"
+.global lbl_80378BB8
+lbl_80378BB8:
+    .long 8
+	.string "ScnRoot"
+	.balign 8
 
+.section .data, "wa"
+.global __vt__Q34nw4r3g3d12ScnObjGather
+__vt__Q34nw4r3g3d12ScnObjGather:
+    .long 0
+    .long 0
+    .long __dt__Q34nw4r3g3d12ScnObjGatherFv
+    .long Add__Q34nw4r3g3d12ScnObjGatherFPQ34nw4r3g3d6ScnObjbb
+    .long Clear__Q34nw4r3g3d12ScnObjGatherFv
+    .long ZSort__Q34nw4r3g3d12ScnObjGatherFv
+    .long Sort__Q34nw4r3g3d12ScnObjGatherFv
+    .long Sort__Q34nw4r3g3d12ScnObjGatherFPFPCQ34nw4r3g3d6ScnObjPCQ34nw4r3g3d6ScnObj_bPFPCQ34nw4r3g3d6ScnObjPCQ34nw4r3g3d6ScnObj_b
+    .long DrawOpa__Q34nw4r3g3d12ScnObjGatherFPQ34nw4r3g3d14ResMdlDrawMode
+    .long DrawXlu__Q34nw4r3g3d12ScnObjGatherFPQ34nw4r3g3d14ResMdlDrawMode
+.global __vt__Q34nw4r3g3d7ScnRoot
+__vt__Q34nw4r3g3d7ScnRoot:
+    .long 0
+    .long 0
+    .long IsDerivedFrom__Q34nw4r3g3d7ScnRootCFQ44nw4r3g3d6G3dObj7TypeObj
+    .long G3dProc__Q34nw4r3g3d7ScnRootFUlUlPv
+    .long __dt__Q34nw4r3g3d7ScnRootFv
+    .long GetTypeObj__Q34nw4r3g3d7ScnRootCFv
+    .long GetTypeName__Q34nw4r3g3d7ScnRootCFv
+    .long ForEach__Q34nw4r3g3d8ScnGroupFPFPQ34nw4r3g3d6ScnObjPv_Q44nw4r3g3d6ScnObj13ForEachResultPvb
+    .long SetScnObjOption__Q34nw4r3g3d6ScnObjFUlUl
+    .long GetScnObjOption__Q34nw4r3g3d6ScnObjCFUlPUl
+    .long GetValueForSortOpa__Q34nw4r3g3d6ScnObjCFv
+    .long GetValueForSortXlu__Q34nw4r3g3d6ScnObjCFv
+    .long CalcWorldMtx__Q34nw4r3g3d6ScnObjFPCQ34nw4r4math5MTX34PUl
+    .long Insert__Q34nw4r3g3d8ScnGroupFUlPQ34nw4r3g3d6ScnObj
+    .long Remove__Q34nw4r3g3d8ScnGroupFUl
+    .long Remove__Q34nw4r3g3d8ScnGroupFPQ34nw4r3g3d6ScnObj
+
+.section .text, "ax"
 .global Construct__Q34nw4r3g3d7ScnRootFP12MEMAllocatorPUlUlUlUlUl
 Construct__Q34nw4r3g3d7ScnRootFP12MEMAllocatorPUlUlUlUlUl:
 /* 800712A4 0006C1A4  94 21 FF C0 */	stwu r1, -0x40(r1)

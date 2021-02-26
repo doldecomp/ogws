@@ -1,7 +1,13 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .rodata, "a"
+.global lbl_80378300
+lbl_80378300:
+	.long 0x07
+	.string "AnmObj"
+	.balign 8
 
+.section .text, "ax"
 .global PlayPolicy_Onetime__Q24nw4r3g3dFfff
 PlayPolicy_Onetime__Q24nw4r3g3dFfff:
 /* 80063604 0005E504  FC 20 18 90 */	fmr f1, f3

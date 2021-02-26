@@ -1,6 +1,43 @@
 .include "macros.inc"
 
+.section .rodata, "a"
+.global lbl_80378AE0
+lbl_80378AE0:
+    .long MakeTexSrtMtx_SRT__Q54nw4r3g3d6detail3dcc22$$2unnamed$$2g3d_maya_cpp$$2FPQ34nw4r4math5MTX34RCQ34nw4r3g3d6TexSrt
+    .long MakeTexSrtMtx_RT__Q54nw4r3g3d6detail3dcc22$$2unnamed$$2g3d_maya_cpp$$2FPQ34nw4r4math5MTX34RCQ34nw4r3g3d6TexSrt
+    .long MakeTexSrtMtx_ST__Q54nw4r3g3d6detail3dcc22$$2unnamed$$2g3d_maya_cpp$$2FPQ34nw4r4math5MTX34RCQ34nw4r3g3d6TexSrt
+    .long MakeTexSrtMtx_T__Q54nw4r3g3d6detail3dcc22$$2unnamed$$2g3d_maya_cpp$$2FPQ34nw4r4math5MTX34RCQ34nw4r3g3d6TexSrt
+    .long MakeTexSrtMtx_SR__Q54nw4r3g3d6detail3dcc22$$2unnamed$$2g3d_maya_cpp$$2FPQ34nw4r4math5MTX34RCQ34nw4r3g3d6TexSrt
+    .long MakeTexSrtMtx_R__Q54nw4r3g3d6detail3dcc22$$2unnamed$$2g3d_maya_cpp$$2FPQ34nw4r4math5MTX34RCQ34nw4r3g3d6TexSrt
+    .long MakeTexSrtMtx_S__Q54nw4r3g3d6detail3dcc22$$2unnamed$$2g3d_maya_cpp$$2FPQ34nw4r4math5MTX34RCQ34nw4r3g3d6TexSrt
+.global lbl_80378AFC
+lbl_80378AFC:
+    .long ProductTexSrtMtx_SRT__Q54nw4r3g3d6detail3dcc22$$2unnamed$$2g3d_maya_cpp$$2FPQ34nw4r4math5MTX34RCQ34nw4r3g3d6TexSrt
+    .long ProductTexSrtMtx_RT__Q54nw4r3g3d6detail3dcc22$$2unnamed$$2g3d_maya_cpp$$2FPQ34nw4r4math5MTX34RCQ34nw4r3g3d6TexSrt
+    .long ProductTexSrtMtx_ST__Q54nw4r3g3d6detail3dcc22$$2unnamed$$2g3d_maya_cpp$$2FPQ34nw4r4math5MTX34RCQ34nw4r3g3d6TexSrt
+    .long ProductTexSrtMtx_T__Q54nw4r3g3d6detail3dcc22$$2unnamed$$2g3d_maya_cpp$$2FPQ34nw4r4math5MTX34RCQ34nw4r3g3d6TexSrt
+    .long ProductTexSrtMtx_SR__Q54nw4r3g3d6detail3dcc22$$2unnamed$$2g3d_maya_cpp$$2FPQ34nw4r4math5MTX34RCQ34nw4r3g3d6TexSrt
+    .long ProductTexSrtMtx_R__Q54nw4r3g3d6detail3dcc22$$2unnamed$$2g3d_maya_cpp$$2FPQ34nw4r4math5MTX34RCQ34nw4r3g3d6TexSrt
+    .long ProductTexSrtMtx_S__Q54nw4r3g3d6detail3dcc22$$2unnamed$$2g3d_maya_cpp$$2FPQ34nw4r4math5MTX34RCQ34nw4r3g3d6TexSrt
+
 .section .text, "ax"
+# MakeTexSrtMtx_S__Q54nw4r3g3d6detail3dcc22@unnamed@g3d_maya_cpp@FPQ34nw4r4math5MTX34RCQ34nw4r3g3d6TexSrt
+.global MakeTexSrtMtx_S__Q54nw4r3g3d6detail3dcc22$$2unnamed$$2g3d_maya_cpp$$2FPQ34nw4r4math5MTX34RCQ34nw4r3g3d6TexSrt
+MakeTexSrtMtx_S__Q54nw4r3g3d6detail3dcc22$$2unnamed$$2g3d_maya_cpp$$2FPQ34nw4r4math5MTX34RCQ34nw4r3g3d6TexSrt:
+/* 8006D760 00068660  C0 24 00 04 */	lfs f1, 4(r4)
+/* 8006D764 00068664  C0 02 89 B4 */	lfs f0, lbl_804C03D4-_SDA2_BASE_(r2)
+/* 8006D768 00068668  C0 42 89 B0 */	lfs f2, lbl_804C03D0-_SDA2_BASE_(r2)
+/* 8006D76C 0006866C  EC 00 08 28 */	fsubs f0, f0, f1
+/* 8006D770 00068670  C0 64 00 00 */	lfs f3, 0(r4)
+/* 8006D774 00068674  D0 43 00 04 */	stfs f2, 4(r3)
+/* 8006D778 00068678  D0 63 00 00 */	stfs f3, 0(r3)
+/* 8006D77C 0006867C  D0 43 00 08 */	stfs f2, 8(r3)
+/* 8006D780 00068680  D0 43 00 0C */	stfs f2, 0xc(r3)
+/* 8006D784 00068684  D0 43 00 10 */	stfs f2, 0x10(r3)
+/* 8006D788 00068688  D0 23 00 14 */	stfs f1, 0x14(r3)
+/* 8006D78C 0006868C  D0 43 00 18 */	stfs f2, 0x18(r3)
+/* 8006D790 00068690  D0 03 00 1C */	stfs f0, 0x1c(r3)
+/* 8006D794 00068694  4E 80 00 20 */	blr 
 
 # MakeTexSrtMtx_R__Q54nw4r3g3d6detail3dcc22@unnamed@g3d_maya_cpp@FPQ34nw4r4math5MTX34RCQ34nw4r3g3d6TexSrt
 .global MakeTexSrtMtx_R__Q54nw4r3g3d6detail3dcc22$$2unnamed$$2g3d_maya_cpp$$2FPQ34nw4r4math5MTX34RCQ34nw4r3g3d6TexSrt
@@ -873,17 +910,3 @@ lbl_8006E404:
 /* 8006E410 00069310  7C 08 03 A6 */	mtlr r0
 /* 8006E414 00069314  38 21 00 40 */	addi r1, r1, 0x40
 /* 8006E418 00069318  4E 80 00 20 */	blr 
-/* 8006E41C 0006931C  C0 24 00 04 */	lfs f1, 4(r4)
-/* 8006E420 00069320  C0 02 89 CC */	lfs f0, lbl_804C03EC-_SDA2_BASE_(r2)
-/* 8006E424 00069324  C0 42 89 C8 */	lfs f2, lbl_804C03E8-_SDA2_BASE_(r2)
-/* 8006E428 00069328  EC 00 08 28 */	fsubs f0, f0, f1
-/* 8006E42C 0006932C  C0 64 00 00 */	lfs f3, 0(r4)
-/* 8006E430 00069330  D0 43 00 04 */	stfs f2, 4(r3)
-/* 8006E434 00069334  D0 63 00 00 */	stfs f3, 0(r3)
-/* 8006E438 00069338  D0 43 00 08 */	stfs f2, 8(r3)
-/* 8006E43C 0006933C  D0 43 00 0C */	stfs f2, 0xc(r3)
-/* 8006E440 00069340  D0 43 00 10 */	stfs f2, 0x10(r3)
-/* 8006E444 00069344  D0 23 00 14 */	stfs f1, 0x14(r3)
-/* 8006E448 00069348  D0 43 00 18 */	stfs f2, 0x18(r3)
-/* 8006E44C 0006934C  D0 03 00 1C */	stfs f0, 0x1c(r3)
-/* 8006E450 00069350  4E 80 00 20 */	blr 

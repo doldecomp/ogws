@@ -1,7 +1,83 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .rodata, "a"
+.global lbl_80378B88
+lbl_80378B88:
+    .long 7
+	.string "ScnObj"
+	.balign 8
+.global lbl_80378B98
+lbl_80378B98:
+    .long 8
+	.string "ScnLeaf"
+	.balign 8
+.global lbl_80378BA8
+lbl_80378BA8:
+    .long 9
+	.string "ScnGroup"
+	.balign 8
 
+.section .data, "wa"
+.global switch_80396ED8
+switch_80396ED8:
+    .long lbl_8006FE3C
+    .long 0x8006fcd4
+    .long 0x8006fcfc
+    .long 0x8006fd24
+    .long 0x8006fd4c
+    .long 0x8006fd74
+    .long 0x8006fd9c
+    .long 0x8006fdc4
+    .long 0x8006fdec
+    .long 0x8006fe14
+.global switch_80396F00
+switch_80396F00:
+    .long 0x8006ff0c
+    .long 0x8006fe7c
+    .long 0x8006fe8c
+    .long 0x8006fe9c
+    .long 0x8006feac
+    .long 0x8006febc
+    .long 0x8006fecc
+    .long 0x8006fedc
+    .long 0x8006feec
+    .long 0x8006fefc
+.global __vt__Q34nw4r3g3d8ScnGroup
+__vt__Q34nw4r3g3d8ScnGroup:
+    .long 0
+    .long 0
+    .long IsDerivedFrom__Q34nw4r3g3d8ScnGroupCFQ44nw4r3g3d6G3dObj7TypeObj
+    .long G3dProc__Q34nw4r3g3d8ScnGroupFUlUlPv
+    .long __dt__Q34nw4r3g3d8ScnGroupFv
+    .long GetTypeObj__Q34nw4r3g3d8ScnGroupCFv
+    .long GetTypeName__Q34nw4r3g3d8ScnGroupCFv
+    .long ForEach__Q34nw4r3g3d8ScnGroupFPFPQ34nw4r3g3d6ScnObjPv_Q44nw4r3g3d6ScnObj13ForEachResultPvb
+    .long SetScnObjOption__Q34nw4r3g3d6ScnObjFUlUl
+    .long GetScnObjOption__Q34nw4r3g3d6ScnObjCFUlPUl
+    .long GetValueForSortOpa__Q34nw4r3g3d6ScnObjCFv
+    .long GetValueForSortXlu__Q34nw4r3g3d6ScnObjCFv
+    .long CalcWorldMtx__Q34nw4r3g3d6ScnObjFPCQ34nw4r4math5MTX34PUl
+    .long Insert__Q34nw4r3g3d8ScnGroupFUlPQ34nw4r3g3d6ScnObj
+    .long Remove__Q34nw4r3g3d8ScnGroupFUl
+    .long Remove__Q34nw4r3g3d8ScnGroupFPQ34nw4r3g3d6ScnObj
+.global __vt__Q34nw4r3g3d6ScnObj
+__vt__Q34nw4r3g3d6ScnObj:
+    .long 0
+    .long 0
+    .long IsDerivedFrom__Q34nw4r3g3d6ScnObjCFQ44nw4r3g3d6G3dObj7TypeObj
+    .long 0
+    .long __dt__Q34nw4r3g3d6ScnObjFv
+    .long GetTypeObj__Q34nw4r3g3d6ScnObjCFv
+    .long GetTypeName__Q34nw4r3g3d6ScnObjCFv
+    .long 0
+    .long SetScnObjOption__Q34nw4r3g3d6ScnObjFUlUl
+    .long GetScnObjOption__Q34nw4r3g3d6ScnObjCFUlPUl
+    .long GetValueForSortOpa__Q34nw4r3g3d6ScnObjCFv
+    .long GetValueForSortXlu__Q34nw4r3g3d6ScnObjCFv
+    .long CalcWorldMtx__Q34nw4r3g3d6ScnObjFPCQ34nw4r4math5MTX34PUl
+    .long 0
+
+.section .text, "ax"
 .global CalcWorldMtx__Q34nw4r3g3d6ScnObjFPCQ34nw4r4math5MTX34PUl
 CalcWorldMtx__Q34nw4r3g3d6ScnObjFPCQ34nw4r4math5MTX34PUl:
 /* 8006FA88 0006A988  94 21 FF F0 */	stwu r1, -0x10(r1)

@@ -58,6 +58,11 @@ lbl_803F1700:
 .global lbl_80409700
 lbl_80409700:
 	.skip 0x20
+
+
+
+
+
 .global lbl_80409720
 lbl_80409720:
 	.skip 0x20

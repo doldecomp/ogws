@@ -1,7 +1,34 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .data, "wa"
+.global switch_803966C0
+switch_803966C0:
+    .long 0x80056124
+    .long 0x80056130
+    .long 0x8005613c
+    .long 0x80056148
+    .long 0x80056164
+    .long 0x8005616c
+    .long 0x80056174
+    .long 0x8005617c
+    .long 0x80056184
+    .long 0x8005618c
+    .long 0x80056194
+    .long 0x8005619c
+    .long 0x800561a4
+    .long 0x800561ac
+    .long 0x800561b4
+    .long 0x800561bc
+    .long 0x800561c4
+    .long 0x800561cc
+    .long 0x800561d4
+    .long 0x80056154
+    .long 0x8005615c
+    .long 0
+    .long 0
+    .long 0
 
+.section .text, "ax"
 .global GetParent__Q34nw4r3g3d6ResMatFv
 GetParent__Q34nw4r3g3d6ResMatFv:
 /* 800547B0 0004F6B0  80 63 00 00 */	lwz r3, 0(r3)

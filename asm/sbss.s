@@ -58,6 +58,11 @@ lbl_804BEBA0:
 .global lbl_804BEBA8
 lbl_804BEBA8:
 	.skip 0x8
+
+
+
+
+
 .global lbl_804BEBB0
 lbl_804BEBB0:
 	.skip 0x2

@@ -1,6 +1,43 @@
 .include "macros.inc"
 
+.section .rodata, "a"
+.global lbl_80378B18
+lbl_80378B18:
+    .long MakeTexSrtMtx_SRT__Q54nw4r3g3d6detail3dcc21$$2unnamed$$2g3d_xsi_cpp$$2FPQ34nw4r4math5MTX34RCQ34nw4r3g3d6TexSrt
+    .long MakeTexSrtMtx_RT__Q54nw4r3g3d6detail3dcc21$$2unnamed$$2g3d_xsi_cpp$$2FPQ34nw4r4math5MTX34RCQ34nw4r3g3d6TexSrt
+    .long MakeTexSrtMtx_ST__Q54nw4r3g3d6detail3dcc21$$2unnamed$$2g3d_xsi_cpp$$2FPQ34nw4r4math5MTX34RCQ34nw4r3g3d6TexSrt
+    .long MakeTexSrtMtx_T__Q54nw4r3g3d6detail3dcc21$$2unnamed$$2g3d_xsi_cpp$$2FPQ34nw4r4math5MTX34RCQ34nw4r3g3d6TexSrt
+    .long MakeTexSrtMtx_SR__Q54nw4r3g3d6detail3dcc21$$2unnamed$$2g3d_xsi_cpp$$2FPQ34nw4r4math5MTX34RCQ34nw4r3g3d6TexSrt
+    .long MakeTexSrtMtx_R__Q54nw4r3g3d6detail3dcc21$$2unnamed$$2g3d_xsi_cpp$$2FPQ34nw4r4math5MTX34RCQ34nw4r3g3d6TexSrt
+    .long MakeTexSrtMtx_S__Q54nw4r3g3d6detail3dcc21$$2unnamed$$2g3d_xsi_cpp$$2FPQ34nw4r4math5MTX34RCQ34nw4r3g3d6TexSrt
+.global lbl_80378B34
+lbl_80378B34:
+    .long ProductTexSrtMtx_SRT__Q54nw4r3g3d6detail3dcc21$$2unnamed$$2g3d_xsi_cpp$$2FPQ34nw4r4math5MTX34RCQ34nw4r3g3d6TexSrt
+    .long ProductTexSrtMtx_RT__Q54nw4r3g3d6detail3dcc21$$2unnamed$$2g3d_xsi_cpp$$2FPQ34nw4r4math5MTX34RCQ34nw4r3g3d6TexSrt
+    .long ProductTexSrtMtx_ST__Q54nw4r3g3d6detail3dcc21$$2unnamed$$2g3d_xsi_cpp$$2FPQ34nw4r4math5MTX34RCQ34nw4r3g3d6TexSrt
+    .long ProductTexSrtMtx_T__Q54nw4r3g3d6detail3dcc21$$2unnamed$$2g3d_xsi_cpp$$2FPQ34nw4r4math5MTX34RCQ34nw4r3g3d6TexSrt
+    .long ProductTexSrtMtx_SR__Q54nw4r3g3d6detail3dcc21$$2unnamed$$2g3d_xsi_cpp$$2FPQ34nw4r4math5MTX34RCQ34nw4r3g3d6TexSrt
+    .long ProductTexSrtMtx_R__Q54nw4r3g3d6detail3dcc21$$2unnamed$$2g3d_xsi_cpp$$2FPQ34nw4r4math5MTX34RCQ34nw4r3g3d6TexSrt
+    .long ProductTexSrtMtx_S__Q54nw4r3g3d6detail3dcc21$$2unnamed$$2g3d_xsi_cpp$$2FPQ34nw4r4math5MTX34RCQ34nw4r3g3d6TexSrt
+
 .section .text, "ax"
+# MakeTexSrtMtx_S__Q54nw4r3g3d6detail3dcc21@unnamed@g3d_xsi_cpp@FPQ34nw4r4math5MTX34RCQ34nw4r3g3d6TexSrt
+.global MakeTexSrtMtx_S__Q54nw4r3g3d6detail3dcc21$$2unnamed$$2g3d_xsi_cpp$$2FPQ34nw4r4math5MTX34RCQ34nw4r3g3d6TexSrt
+MakeTexSrtMtx_S__Q54nw4r3g3d6detail3dcc21$$2unnamed$$2g3d_xsi_cpp$$2FPQ34nw4r4math5MTX34RCQ34nw4r3g3d6TexSrt:
+/* 8006E41C 0006931C  C0 24 00 04 */	lfs f1, 4(r4)
+/* 8006E420 00069320  C0 02 89 CC */	lfs f0, lbl_804C03EC-_SDA2_BASE_(r2)
+/* 8006E424 00069324  C0 42 89 C8 */	lfs f2, lbl_804C03E8-_SDA2_BASE_(r2)
+/* 8006E428 00069328  EC 00 08 28 */	fsubs f0, f0, f1
+/* 8006E42C 0006932C  C0 64 00 00 */	lfs f3, 0(r4)
+/* 8006E430 00069330  D0 43 00 04 */	stfs f2, 4(r3)
+/* 8006E434 00069334  D0 63 00 00 */	stfs f3, 0(r3)
+/* 8006E438 00069338  D0 43 00 08 */	stfs f2, 8(r3)
+/* 8006E43C 0006933C  D0 43 00 0C */	stfs f2, 0xc(r3)
+/* 8006E440 00069340  D0 43 00 10 */	stfs f2, 0x10(r3)
+/* 8006E444 00069344  D0 23 00 14 */	stfs f1, 0x14(r3)
+/* 8006E448 00069348  D0 43 00 18 */	stfs f2, 0x18(r3)
+/* 8006E44C 0006934C  D0 03 00 1C */	stfs f0, 0x1c(r3)
+/* 8006E450 00069350  4E 80 00 20 */	blr 
 
 # MakeTexSrtMtx_R__Q54nw4r3g3d6detail3dcc21@unnamed@g3d_xsi_cpp@FPQ34nw4r4math5MTX34RCQ34nw4r3g3d6TexSrt
 .global MakeTexSrtMtx_R__Q54nw4r3g3d6detail3dcc21$$2unnamed$$2g3d_xsi_cpp$$2FPQ34nw4r4math5MTX34RCQ34nw4r3g3d6TexSrt
@@ -809,21 +846,3 @@ lbl_8006EFC0:
 /* 8006EFCC 00069ECC  7C 08 03 A6 */	mtlr r0
 /* 8006EFD0 00069ED0  38 21 00 40 */	addi r1, r1, 0x40
 /* 8006EFD4 00069ED4  4E 80 00 20 */	blr 
-/* 8006EFD8 00069ED8  C0 A4 00 00 */	lfs f5, 0(r4)
-/* 8006EFDC 00069EDC  C0 02 89 E0 */	lfs f0, lbl_804C0400-_SDA2_BASE_(r2)
-/* 8006EFE0 00069EE0  C0 24 00 04 */	lfs f1, 4(r4)
-/* 8006EFE4 00069EE4  EC 40 28 28 */	fsubs f2, f0, f5
-/* 8006EFE8 00069EE8  C0 62 89 DC */	lfs f3, lbl_804C03FC-_SDA2_BASE_(r2)
-/* 8006EFEC 00069EEC  EC 00 08 28 */	fsubs f0, f0, f1
-/* 8006EFF0 00069EF0  C0 82 89 D8 */	lfs f4, lbl_804C03F8-_SDA2_BASE_(r2)
-/* 8006EFF4 00069EF4  D0 A3 00 00 */	stfs f5, 0(r3)
-/* 8006EFF8 00069EF8  EC 43 00 B2 */	fmuls f2, f3, f2
-/* 8006EFFC 00069EFC  EC 03 00 32 */	fmuls f0, f3, f0
-/* 8006F000 00069F00  D0 83 00 04 */	stfs f4, 4(r3)
-/* 8006F004 00069F04  D0 83 00 08 */	stfs f4, 8(r3)
-/* 8006F008 00069F08  D0 43 00 0C */	stfs f2, 0xc(r3)
-/* 8006F00C 00069F0C  D0 83 00 10 */	stfs f4, 0x10(r3)
-/* 8006F010 00069F10  D0 23 00 14 */	stfs f1, 0x14(r3)
-/* 8006F014 00069F14  D0 83 00 18 */	stfs f4, 0x18(r3)
-/* 8006F018 00069F18  D0 03 00 1C */	stfs f0, 0x1c(r3)
-/* 8006F01C 00069F1C  4E 80 00 20 */	blr 

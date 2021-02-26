@@ -1,7 +1,11 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .data, "wa"
+.global $$27641
+$$27641:
+	.string "<< NW4R    - G3D \tfinal   build: Jun  8 2007 11:16:25 (0x4199_60831) >>"
 
+.section .text, "ax"
 .global G3dInit__Q24nw4r3g3dFb
 G3dInit__Q24nw4r3g3dFb:
 /* 80077B3C 00072A3C  94 21 FF F0 */	stwu r1, -0x10(r1)

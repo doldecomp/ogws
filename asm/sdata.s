@@ -82,6 +82,11 @@ lbl_804BD478:
 .global lbl_804BD47C
 lbl_804BD47C:
 	.incbin "baserom.dol", 0x3C70FC, 0x4
+
+
+
+
+
 .global lbl_804BD480
 lbl_804BD480:
 	.incbin "baserom.dol", 0x3C7100, 0x4

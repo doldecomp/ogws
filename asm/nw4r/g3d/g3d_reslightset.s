@@ -1,7 +1,23 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .data, "wa"
+.global ResNameData_LightSet
+ResNameData_LightSet:
+	.long 0xE
+	.string "LightSet(NW4R)"
+	.balign 16
+.global ResNameData_AmbLights
+ResNameData_AmbLights:
+	.long 0xF
+	.string "AmbLights(NW4R)"
+	.balign 16
+.global ResNameData_Lights
+ResNameData_Lights:
+	.long 0xC
+	.string "Lights(NW4R)"
+	.balign 16
 
+.section .text, "ax"
 .global func_800599DC
 func_800599DC:
 /* 800599DC 000548DC  94 21 FF D0 */	stwu r1, -0x30(r1)

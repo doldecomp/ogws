@@ -1,7 +1,18 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .rodata, "a"
+.global lbl_80378AC0
+lbl_80378AC0:
+    .long 0
+    .long Calc_BILLBOARD_STD__Q34nw4r3g3d26$$2unnamed$$2g3d_calcview_cpp$$2FPQ34nw4r4math5MTX34PCQ34nw4r4math5MTX34bPCQ34nw4r4math5MTX34Q34nw4r3g3d6ResMdlUl
+    .long Calc_BILLBOARD_PERSP_STD__Q34nw4r3g3d26$$2unnamed$$2g3d_calcview_cpp$$2FPQ34nw4r4math5MTX34PCQ34nw4r4math5MTX34bPCQ34nw4r4math5MTX34Q34nw4r3g3d6ResMdlUl
+    .long Calc_BILLBOARD_ROT__Q34nw4r3g3d26$$2unnamed$$2g3d_calcview_cpp$$2FPQ34nw4r4math5MTX34PCQ34nw4r4math5MTX34bPCQ34nw4r4math5MTX34Q34nw4r3g3d6ResMdlUl
+    .long Calc_BILLBOARD_PERSP_ROT__Q34nw4r3g3d26$$2unnamed$$2g3d_calcview_cpp$$2FPQ34nw4r4math5MTX34PCQ34nw4r4math5MTX34bPCQ34nw4r4math5MTX34Q34nw4r3g3d6ResMdlUl
+    .long Calc_BILLBOARD_Y__Q34nw4r3g3d26$$2unnamed$$2g3d_calcview_cpp$$2FPQ34nw4r4math5MTX34PCQ34nw4r4math5MTX34bPCQ34nw4r4math5MTX34Q34nw4r3g3d6ResMdlUl
+    .long Calc_BILLBOARD_PERSP_Y__Q34nw4r3g3d26$$2unnamed$$2g3d_calcview_cpp$$2FPQ34nw4r4math5MTX34PCQ34nw4r4math5MTX34bPCQ34nw4r4math5MTX34Q34nw4r3g3d6ResMdlUl
+    .long 0
 
+.section .text, "ax"
 # GetModelLocalAxisY2__Q34nw4r3g3d26@unnamed@g3d_calcview_cpp@FPQ34nw4r4math4VEC3PCQ34nw4r4math5MTX34PCQ34nw4r4math5MTX34
 .global GetModelLocalAxisY2__Q34nw4r3g3d26$$2unnamed$$2g3d_calcview_cpp$$2FPQ34nw4r4math4VEC3PCQ34nw4r4math5MTX34PCQ34nw4r4math5MTX34
 GetModelLocalAxisY2__Q34nw4r3g3d26$$2unnamed$$2g3d_calcview_cpp$$2FPQ34nw4r4math4VEC3PCQ34nw4r4math5MTX34PCQ34nw4r4math5MTX34:
