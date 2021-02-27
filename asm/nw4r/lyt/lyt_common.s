@@ -1,7 +1,11 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .bss, "wa"
+.global lbl_80409700
+lbl_80409700:
+	.skip 0x20
 
+.section .text, "ax"
 .global TestFileHeader__Q34nw4r3lyt6detailFRCQ44nw4r3lyt3res16BinaryFileHeader
 TestFileHeader__Q34nw4r3lyt6detailFRCQ44nw4r3lyt3res16BinaryFileHeader:
 /* 80082DF4 0007DCF4  A0 03 00 04 */	lhz r0, 4(r3)

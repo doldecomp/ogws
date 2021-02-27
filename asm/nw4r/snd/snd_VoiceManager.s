@@ -1,5 +1,13 @@
 .include "macros.inc"
 
+.section .bss, "wa"
+.global lbl_803EBCA0
+lbl_803EBCA0:
+	.skip 0xC
+.global lbl_803EBCAC
+lbl_803EBCAC:
+	.skip 0x1C
+
 .section .sbss, "wa"
 .global lbl_804BEB30
 lbl_804BEB30:

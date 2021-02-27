@@ -1,5 +1,13 @@
 .include "macros.inc"
 
+.section .bss, "wa"
+.global lbl_803EBCC8
+lbl_803EBCC8:
+	.skip 0x300
+.global lbl_803EBFC8
+lbl_803EBFC8:
+	.skip 0x158
+
 .section .rodata, "a"
 .global lbl_80378310
 lbl_80378310:
