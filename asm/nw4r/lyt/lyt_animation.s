@@ -1,5 +1,31 @@
 .include "macros.inc"
 
+.section .sdata2, "a"
+.global lbl_804C0510
+lbl_804C0510:
+	.single 0e-0.001
+.global lbl_804C0514
+lbl_804C0514:
+	.single 0e0.001
+.global lbl_804C0518
+lbl_804C0518:
+	.single 0e1
+.global lbl_804C051C
+lbl_804C051C:
+	.single 0e2
+.global lbl_804C0520
+lbl_804C0520:
+	.single 0e3
+.global lbl_804C0524
+lbl_804C0524:
+	.single 0e-2
+.global lbl_804C0528
+lbl_804C0528:
+	.single 0e0
+.global lbl_804C052C
+lbl_804C052C:
+	.single 0e0.5
+
 .section .data, "wa"
 .global __vt__Q34nw4r3lyt18AnimTransformBasic
 __vt__Q34nw4r3lyt18AnimTransformBasic:

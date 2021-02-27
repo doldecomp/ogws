@@ -1,5 +1,21 @@
 .include "macros.inc"
 
+.section .sdata2, "a"
+.global lbl_804C04A0
+lbl_804C04A0:
+	.single 0e0
+	.balign 8
+.global lbl_804C04A8
+lbl_804C04A8:
+	.long 0x43300000
+	.long 0x80000000
+.global lbl_804C04B0
+lbl_804C04B0:
+	.single 0e0.5
+.global lbl_804C04B4
+lbl_804C04B4:
+	.single 0e1
+    
 .section .sbss, "wa"
 .global typeInfo__Q34nw4r3lyt7TextBox
 typeInfo__Q34nw4r3lyt7TextBox:

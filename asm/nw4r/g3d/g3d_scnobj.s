@@ -1,5 +1,13 @@
 .include "macros.inc"
 
+.section .sdata2, "a"
+.global $$210166
+$$210166:
+	.single 0e0
+.global $$210491
+$$210491:
+	.single 0e1
+
 .section .sbss, "wa"
 .global gpCullingFrustum__Q24nw4r3g3d
 gpCullingFrustum__Q24nw4r3g3d:
@@ -172,7 +180,7 @@ __ct__Q34nw4r3g3d6ScnObjFP12MEMAllocator:
 /* 8006FBA8 0006AAA8  48 07 7A 51 */	bl PSMTXIdentity
 /* 8006FBAC 0006AAAC  38 7F 00 6C */	addi r3, r31, 0x6c
 /* 8006FBB0 0006AAB0  48 07 7A 49 */	bl PSMTXIdentity
-/* 8006FBB4 0006AAB4  C0 02 89 F0 */	lfs f0, lbl_804C0410-_SDA2_BASE_(r2)
+/* 8006FBB4 0006AAB4  C0 02 89 F0 */	lfs f0, $$210166-_SDA2_BASE_(r2)
 /* 8006FBB8 0006AAB8  7F E3 FB 78 */	mr r3, r31
 /* 8006FBBC 0006AABC  D0 1F 00 9C */	stfs f0, 0x9c(r31)
 /* 8006FBC0 0006AAC0  D0 1F 00 A0 */	stfs f0, 0xa0(r31)
@@ -769,7 +777,7 @@ GetScaleProperty__Q34nw4r3g3d7ScnLeafCFv:
 /* 80070358 0006B258  C0 03 00 E4 */	lfs f0, 0xe4(r3)
 /* 8007035C 0006B25C  FC 01 00 00 */	fcmpu cr0, f1, f0
 /* 80070360 0006B260  40 82 00 20 */	bne lbl_80070380
-/* 80070364 0006B264  C0 02 89 F4 */	lfs f0, lbl_804C0414-_SDA2_BASE_(r2)
+/* 80070364 0006B264  C0 02 89 F4 */	lfs f0, $$210491-_SDA2_BASE_(r2)
 /* 80070368 0006B268  FC 00 10 00 */	fcmpu cr0, f0, f2
 /* 8007036C 0006B26C  40 82 00 0C */	bne lbl_80070378
 /* 80070370 0006B270  38 60 00 00 */	li r3, 0

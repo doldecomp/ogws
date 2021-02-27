@@ -1,5 +1,17 @@
 .include "macros.inc"
 
+.section .sdata2, "a"
+.global $$29665
+$$29665:
+	.single 0e0
+.global $$29750
+$$29750:
+	.single 0e1
+.global $$210340
+$$210340:
+	.long 0x43300000
+	.long 0x80000000
+
 .section .data, "wa"
 .global __vt__Q34nw4r3g3d15AnmObjTexPatRes
 __vt__Q34nw4r3g3d15AnmObjTexPatRes:
@@ -472,7 +484,7 @@ lbl_8005DA0C:
 /* 8005DA10 00058910  38 C6 00 01 */	addi r6, r6, 1
 /* 8005DA14 00058914  42 00 FF D0 */	bdnz lbl_8005D9E4
 lbl_8005DA18:
-/* 8005DA18 00058918  C0 22 88 B0 */	lfs f1, lbl_804C02D0-_SDA2_BASE_(r2)
+/* 8005DA18 00058918  C0 22 88 B0 */	lfs f1, $$29665-_SDA2_BASE_(r2)
 /* 8005DA1C 0005891C  4E 80 00 20 */	blr 
 
 .global SetUpdateRate__Q34nw4r3g3d16AnmObjTexPatNodeFf
@@ -539,7 +551,7 @@ lbl_8005DAE8:
 /* 8005DAEC 000589EC  38 C6 00 01 */	addi r6, r6, 1
 /* 8005DAF0 000589F0  42 00 FF D0 */	bdnz lbl_8005DAC0
 lbl_8005DAF4:
-/* 8005DAF4 000589F4  C0 22 88 B4 */	lfs f1, lbl_804C02D4-_SDA2_BASE_(r2)
+/* 8005DAF4 000589F4  C0 22 88 B4 */	lfs f1, $$29750-_SDA2_BASE_(r2)
 /* 8005DAF8 000589F8  4E 80 00 20 */	blr 
 
 .global Bind__Q34nw4r3g3d16AnmObjTexPatNodeFQ34nw4r3g3d6ResMdl
@@ -938,14 +950,14 @@ lbl_8005DFF0:
 /* 8005E044 00058F44  80 BE 00 34 */	lwz r5, 0x34(r30)
 /* 8005E048 00058F48  3C 60 80 39 */	lis r3, __vt__Q34nw4r3g3d15AnmObjTexPatRes@ha
 /* 8005E04C 00058F4C  6C 84 80 00 */	xoris r4, r4, 0x8000
-/* 8005E050 00058F50  C0 22 88 B0 */	lfs f1, lbl_804C02D0-_SDA2_BASE_(r2)
+/* 8005E050 00058F50  C0 22 88 B0 */	lfs f1, $$29665-_SDA2_BASE_(r2)
 /* 8005E054 00058F54  90 81 00 0C */	stw r4, 0xc(r1)
 /* 8005E058 00058F58  54 A5 10 3A */	slwi r5, r5, 2
-/* 8005E05C 00058F5C  C0 02 88 B4 */	lfs f0, lbl_804C02D4-_SDA2_BASE_(r2)
+/* 8005E05C 00058F5C  C0 02 88 B4 */	lfs f0, $$29750-_SDA2_BASE_(r2)
 /* 8005E060 00058F60  38 8D 80 98 */	addi r4, r13, lbl_804BD418-_SDA_BASE_
 /* 8005E064 00058F64  90 01 00 08 */	stw r0, 8(r1)
 /* 8005E068 00058F68  38 63 69 B0 */	addi r3, r3, __vt__Q34nw4r3g3d15AnmObjTexPatRes@l
-/* 8005E06C 00058F6C  C8 62 88 B8 */	lfd f3, lbl_804C02D8-_SDA2_BASE_(r2)
+/* 8005E06C 00058F6C  C8 62 88 B8 */	lfd f3, $$210340-_SDA2_BASE_(r2)
 /* 8005E070 00058F70  2C 1B 00 00 */	cmpwi r27, 0
 /* 8005E074 00058F74  D0 3F 00 18 */	stfs f1, 0x18(r31)
 /* 8005E078 00058F78  C8 41 00 08 */	lfd f2, 8(r1)

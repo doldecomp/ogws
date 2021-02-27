@@ -1,5 +1,27 @@
 .include "macros.inc"
 
+.section .sdata2, "a"
+.global lbl_804C04D0
+lbl_804C04D0:
+	.single 0e0.5
+.global lbl_804C04D4
+lbl_804C04D4:
+	.single 0e0.7111111
+.global lbl_804C04D8
+lbl_804C04D8:
+	.single 0e0
+.global lbl_804C04DC
+lbl_804C04DC:
+	.single 0e1
+.global lbl_804C04E0
+lbl_804C04E0:
+	.single 0e2
+	.balign 8
+.global lbl_804C04E8
+lbl_804C04E8:
+	.long 0x43300000
+	.long 0x00000000
+
 .section .data, "wa"
 # Two copies of the same table???
 .global lbl_80397438
@@ -34,6 +56,12 @@ __vt__Q34nw4r3lyt8Material:
     .long Animate__Q34nw4r3lyt8MaterialFv
     .long FindAnimationLink__Q34nw4r3lyt8MaterialFPQ34nw4r3lyt13AnimTransform
     .long SetAnimationEnable__Q34nw4r3lyt8MaterialFPQ34nw4r3lyt13AnimTransformb
+
+.section .sbss2, "a"
+.balign 8
+.global DefaultBlackColor
+DefaultBlackColor:
+	.skip 0x8
 
 .section .text, "ax"
 # CalcTextureMtx__26@unnamed@lyt_material_cpp@FPQ34nw4r4math5MTX34RCQ34nw4r3lyt6TexSRT

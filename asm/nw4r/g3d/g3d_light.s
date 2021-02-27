@@ -1,7 +1,60 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .sdata2, "a"
+.global lbl_804C0438
+lbl_804C0438:
+	.single 0e0
+.global lbl_804C043C
+lbl_804C043C:
+	.single 0e1
+.global lbl_804C0440
+lbl_804C0440:
+	.single 0e0.5
+.global lbl_804C0444
+lbl_804C0444:
+	.byte 0xFF
+.global lbl_804C0445
+lbl_804C0445:
+	.byte 0xFF
+.global lbl_804C0446
+lbl_804C0446:
+	.byte 0xFF
+.global lbl_804C0447
+lbl_804C0447:
+	.byte 0xFF
+.global lbl_804C0448
+lbl_804C0448:
+	.byte 0xFF
+.global lbl_804C0449
+lbl_804C0449:
+	.byte 0xFF
+.global lbl_804C044A
+lbl_804C044A:
+	.byte 0xFF
+.global lbl_804C044B
+lbl_804C044B:
+	.byte 0xFF
+.global lbl_804C044C
+lbl_804C044C:
+	.single 0e4000000
+.global lbl_804C0450
+lbl_804C0450:
+	.single 0e-1
+.global lbl_804C0454
+lbl_804C0454:
+	.single 0e90
+.global lbl_804C0458
+lbl_804C0458:
+	.single 0e10
+.global lbl_804C045C
+lbl_804C045C:
+	.single 0e8
+.global lbl_804C0460
+lbl_804C0460:
+	.single 0e-7
+	.balign 8
 
+.section .text, "ax"
 .global Clear__Q34nw4r3g3d8LightObjFv
 Clear__Q34nw4r3g3d8LightObjFv:
 /* 8007809C 00072F9C  38 00 00 00 */	li r0, 0

@@ -1,5 +1,11 @@
 .include "macros.inc"
 
+.section .sdata2, "a"
+.global $$212092
+$$212092:
+	.single 0e1
+	.balign 8
+
 .section .sdata, "wa"
 .global lbl_804BD450
 lbl_804BD450:
@@ -2197,7 +2203,7 @@ __ct__Q34nw4r3g3d12ScnMdlSimpleFP12MEMAllocatorQ34nw4r3g3d6ResMdlPQ34nw4r4math5M
 /* 8007496C 0006F86C  7D 39 4B 78 */	mr r25, r9
 /* 80074970 0006F870  7D 5A 53 78 */	mr r26, r10
 /* 80074974 0006F874  4B FF B1 D1 */	bl __ct__Q34nw4r3g3d6ScnObjFP12MEMAllocator
-/* 80074978 0006F878  C0 02 8A 00 */	lfs f0, lbl_804C0420-_SDA2_BASE_(r2)
+/* 80074978 0006F878  C0 02 8A 00 */	lfs f0, $$212092-_SDA2_BASE_(r2)
 /* 8007497C 0006F87C  3C A0 80 39 */	lis r5, __vt__Q34nw4r3g3d12ScnMdlSimple@ha
 /* 80074980 0006F880  38 A5 70 30 */	addi r5, r5, __vt__Q34nw4r3g3d12ScnMdlSimple@l
 /* 80074984 0006F884  3C 80 80 39 */	lis r4, lbl_80397024@ha

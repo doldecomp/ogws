@@ -1,7 +1,12 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .sdata2, "a"
+.global $$26220
+$$26220:
+	.single 0e0
+	.balign 8
 
+.section .text, "ax"
 .global __ct__Q34nw4r3g3d3FogFPQ34nw4r3g3d7FogData
 __ct__Q34nw4r3g3d3FogFPQ34nw4r3g3d7FogData:
 /* 80077F28 00072E28  90 83 00 00 */	stw r4, 0(r3)
@@ -13,7 +18,7 @@ Init__Q34nw4r3g3d3FogFv:
 /* 80077F34 00072E34  2C 03 00 00 */	cmpwi r3, 0
 /* 80077F38 00072E38  4D 82 00 20 */	beqlr 
 /* 80077F3C 00072E3C  38 00 00 00 */	li r0, 0
-/* 80077F40 00072E40  C0 02 8A 10 */	lfs f0, lbl_804C0430-_SDA2_BASE_(r2)
+/* 80077F40 00072E40  C0 02 8A 10 */	lfs f0, $$26220-_SDA2_BASE_(r2)
 /* 80077F44 00072E44  90 03 00 00 */	stw r0, 0(r3)
 /* 80077F48 00072E48  D0 03 00 04 */	stfs f0, 4(r3)
 /* 80077F4C 00072E4C  D0 03 00 08 */	stfs f0, 8(r3)

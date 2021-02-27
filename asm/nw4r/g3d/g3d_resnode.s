@@ -1,7 +1,14 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .sdata2, "a"
+.global $$25827
+$$25827:
+	.single 0e0.7111111
+.global $$25874
+$$25874:
+	.single 0e1
 
+.section .text, "ax"
 .global PatchChrAnmResult__Q34nw4r3g3d7ResNodeCFPQ34nw4r3g3d12ChrAnmResult
 PatchChrAnmResult__Q34nw4r3g3d7ResNodeCFPQ34nw4r3g3d12ChrAnmResult:
 /* 80056C24 00051B24  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -44,7 +51,7 @@ lbl_80056C90:
 lbl_80056CAC:
 /* 80056CAC 00051BAC  C0 7F 00 34 */	lfs f3, 0x34(r31)
 /* 80056CB0 00051BB0  38 64 00 1C */	addi r3, r4, 0x1c
-/* 80056CB4 00051BB4  C0 02 87 E0 */	lfs f0, lbl_804C0200-_SDA2_BASE_(r2)
+/* 80056CB4 00051BB4  C0 02 87 E0 */	lfs f0, $$25827-_SDA2_BASE_(r2)
 /* 80056CB8 00051BB8  C0 5F 00 30 */	lfs f2, 0x30(r31)
 /* 80056CBC 00051BBC  C0 3F 00 2C */	lfs f1, 0x2c(r31)
 /* 80056CC0 00051BC0  EC 60 00 F2 */	fmuls f3, f0, f3
@@ -107,7 +114,7 @@ CalcChrAnmResult__Q34nw4r3g3d7ResNodeCFPQ34nw4r3g3d12ChrAnmResult:
 /* 80056D80 00051C80  3B C0 00 00 */	li r30, 0
 /* 80056D84 00051C84  54 60 07 39 */	rlwinm. r0, r3, 0, 0x1c, 0x1c
 /* 80056D88 00051C88  41 82 00 1C */	beq lbl_80056DA4
-/* 80056D8C 00051C8C  C0 02 87 E4 */	lfs f0, lbl_804C0204-_SDA2_BASE_(r2)
+/* 80056D8C 00051C8C  C0 02 87 E4 */	lfs f0, $$25874-_SDA2_BASE_(r2)
 /* 80056D90 00051C90  63 DE 00 18 */	ori r30, r30, 0x18
 /* 80056D94 00051C94  D0 04 00 0C */	stfs f0, 0xc(r4)
 /* 80056D98 00051C98  D0 04 00 08 */	stfs f0, 8(r4)
@@ -137,7 +144,7 @@ lbl_80056DE4:
 /* 80056DE8 00051CE8  38 64 00 1C */	addi r3, r4, 0x1c
 /* 80056DEC 00051CEC  C0 BF 00 30 */	lfs f5, 0x30(r31)
 /* 80056DF0 00051CF0  C0 9F 00 34 */	lfs f4, 0x34(r31)
-/* 80056DF4 00051CF4  C0 02 87 E0 */	lfs f0, lbl_804C0200-_SDA2_BASE_(r2)
+/* 80056DF4 00051CF4  C0 02 87 E0 */	lfs f0, $$25827-_SDA2_BASE_(r2)
 /* 80056DF8 00051CF8  D0 24 00 10 */	stfs f1, 0x10(r4)
 /* 80056DFC 00051CFC  D0 A4 00 14 */	stfs f5, 0x14(r4)
 /* 80056E00 00051D00  D0 84 00 18 */	stfs f4, 0x18(r4)

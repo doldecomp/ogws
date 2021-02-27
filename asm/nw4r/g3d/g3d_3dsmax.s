@@ -1,5 +1,23 @@
 .include "macros.inc"
 
+.section .sdata2, "a"
+.global lbl_804C03F8
+lbl_804C03F8:
+	.single 0e0
+.global lbl_804C03FC
+lbl_804C03FC:
+	.single 0e0.5
+.global lbl_804C0400
+lbl_804C0400:
+	.single 0e1
+.global lbl_804C0404
+lbl_804C0404:
+	.single 0e0.7111111
+.global lbl_804C0408
+lbl_804C0408:
+	.single 0e-0.5
+	.balign 8
+
 .section .rodata, "a"
 .global lbl_80378B50
 lbl_80378B50:

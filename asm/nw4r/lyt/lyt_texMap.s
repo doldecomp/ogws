@@ -1,7 +1,20 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .sdata2, "a"
+.global lbl_804C04F0
+lbl_804C04F0:
+	.single 0e0.00390625
+	.balign 8
+.global lbl_804C04F8
+lbl_804C04F8:
+	.long 0x43300000
+	.long 0x00000000
+.global lbl_804C0500
+lbl_804C0500:
+	.single 0e256
+	.balign 8
 
+.section .text, "ax"
 .global Get__Q34nw4r3lyt6TexMapCFP9_GXTexObj
 Get__Q34nw4r3lyt6TexMapCFP9_GXTexObj:
 /* 800819F8 0007C8F8  94 21 FF E0 */	stwu r1, -0x20(r1)

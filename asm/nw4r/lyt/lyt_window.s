@@ -1,5 +1,19 @@
 .include "macros.inc"
 
+.section .sdata2, "a"
+.global lbl_804C04B8
+lbl_804C04B8:
+	.single 0e0
+	.balign 8
+.global lbl_804C04C0
+lbl_804C04C0:
+	.long 0x43300000
+	.long 0x00000000
+.global lbl_804C04C8
+lbl_804C04C8:
+	.long 0x43300000
+	.long 0x80000000
+
 .section .sbss, "wa"
 .global typeInfo__Q34nw4r3lyt6Window
 typeInfo__Q34nw4r3lyt6Window:
@@ -8,7 +22,7 @@ typeInfo__Q34nw4r3lyt6Window:
 
 .section .data, "wa"
 # Length = 60
-# Likely not actually 10 * 6 but it was separated for readability
+# Likely not actually 10x6 but it was grouped for readability
 # Possibly "flipInfos$7807"
 .global lbl_80397318
 lbl_80397318:

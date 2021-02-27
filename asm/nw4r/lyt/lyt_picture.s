@@ -1,5 +1,11 @@
 .include "macros.inc"
 
+.section .sdata2, "a"
+.global lbl_804C0498
+lbl_804C0498:
+	.single 0e0
+	.balign 8
+
 .section .sbss, "wa"
 .global typeInfo__Q34nw4r3lyt7Picture
 typeInfo__Q34nw4r3lyt7Picture:

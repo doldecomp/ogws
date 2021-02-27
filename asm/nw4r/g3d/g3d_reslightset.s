@@ -1,5 +1,35 @@
 .include "macros.inc"
 
+.section .sdata2, "a"
+.global lbl_804C0278
+lbl_804C0278:
+	.single 0e0
+	.balign 8
+.global lbl_804C0280
+lbl_804C0280:
+	.long 0x43300000
+	.long 0x00000000
+.global lbl_804C0288
+lbl_804C0288:
+	.single 0e0
+	.balign 8
+.global lbl_804C0290
+lbl_804C0290:
+	.long 0x43300000
+	.long 0x00000000
+.global lbl_804C0298
+lbl_804C0298:
+	.single 0e0
+	.balign 8
+.global lbl_804C02A0
+lbl_804C02A0:
+	.long 0x43300000
+	.long 0x00000000
+.global lbl_804C02A8
+lbl_804C02A8:
+	.single 0e1
+	.balign 8
+
 .section .data, "wa"
 .global ResNameData_LightSet
 ResNameData_LightSet:

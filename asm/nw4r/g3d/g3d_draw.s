@@ -1,5 +1,17 @@
 .include "macros.inc"
 
+.section .sdata2, "a"
+.global $$212945
+$$212945:
+	.single 0e0
+.global $$212947
+$$212947:
+	.single 0e-2
+.global $$212948
+$$212948:
+	.single 0e1
+	.balign 8
+
 .section .sdata, "wa"
 .global lbl_804BD438
 lbl_804BD438:
@@ -71,11 +83,11 @@ lbl_8006AA0C:
 /* 8006AA1C 0006591C  81 8C 00 10 */	lwz r12, 0x10(r12)
 /* 8006AA20 00065920  7D 89 03 A6 */	mtctr r12
 /* 8006AA24 00065924  4E 80 04 21 */	bctrl 
-/* 8006AA28 00065928  C3 A2 89 6C */	lfs f29, lbl_804C038C-_SDA2_BASE_(r2)
+/* 8006AA28 00065928  C3 A2 89 6C */	lfs f29, $$212947-_SDA2_BASE_(r2)
 /* 8006AA2C 0006592C  3B E1 00 68 */	addi r31, r1, 0x68
-/* 8006AA30 00065930  C3 C2 89 70 */	lfs f30, lbl_804C0390-_SDA2_BASE_(r2)
+/* 8006AA30 00065930  C3 C2 89 70 */	lfs f30, $$212948-_SDA2_BASE_(r2)
 /* 8006AA34 00065934  3B C1 00 0C */	addi r30, r1, 0xc
-/* 8006AA38 00065938  C3 E2 89 68 */	lfs f31, lbl_804C0388-_SDA2_BASE_(r2)
+/* 8006AA38 00065938  C3 E2 89 68 */	lfs f31, $$212945-_SDA2_BASE_(r2)
 /* 8006AA3C 0006593C  3B 80 00 00 */	li r28, 0
 lbl_8006AA40:
 /* 8006AA40 00065940  80 1F 00 00 */	lwz r0, 0(r31)

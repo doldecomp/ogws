@@ -1,5 +1,17 @@
 .include "macros.inc"
 
+.section .sdata2, "a"
+.global $$27793
+$$27793:
+	.single 0e0
+.global $$27878
+$$27878:
+	.single 0e1
+.global $$28467
+$$28467:
+	.long 0x43300000
+	.long 0x80000000
+
 .section .data, "wa"
 .global __vt__Q34nw4r3g3d15AnmObjMatClrRes
 __vt__Q34nw4r3g3d15AnmObjMatClrRes:
@@ -472,7 +484,7 @@ lbl_8005C26C:
 /* 8005C270 00057170  38 C6 00 01 */	addi r6, r6, 1
 /* 8005C274 00057174  42 00 FF D0 */	bdnz lbl_8005C244
 lbl_8005C278:
-/* 8005C278 00057178  C0 22 88 A0 */	lfs f1, lbl_804C02C0-_SDA2_BASE_(r2)
+/* 8005C278 00057178  C0 22 88 A0 */	lfs f1, $$27793-_SDA2_BASE_(r2)
 /* 8005C27C 0005717C  4E 80 00 20 */	blr 
 
 .global SetUpdateRate__Q34nw4r3g3d16AnmObjMatClrNodeFf
@@ -539,7 +551,7 @@ lbl_8005C348:
 /* 8005C34C 0005724C  38 C6 00 01 */	addi r6, r6, 1
 /* 8005C350 00057250  42 00 FF D0 */	bdnz lbl_8005C320
 lbl_8005C354:
-/* 8005C354 00057254  C0 22 88 A4 */	lfs f1, lbl_804C02C4-_SDA2_BASE_(r2)
+/* 8005C354 00057254  C0 22 88 A4 */	lfs f1, $$27878-_SDA2_BASE_(r2)
 /* 8005C358 00057258  4E 80 00 20 */	blr 
 
 .global Bind__Q34nw4r3g3d16AnmObjMatClrNodeFQ34nw4r3g3d6ResMdl
@@ -934,14 +946,14 @@ lbl_8005C840:
 /* 8005C894 00057794  80 BE 00 20 */	lwz r5, 0x20(r30)
 /* 8005C898 00057798  3C 60 80 39 */	lis r3, __vt__Q34nw4r3g3d15AnmObjMatClrRes@ha
 /* 8005C89C 0005779C  6C 84 80 00 */	xoris r4, r4, 0x8000
-/* 8005C8A0 000577A0  C0 22 88 A0 */	lfs f1, lbl_804C02C0-_SDA2_BASE_(r2)
+/* 8005C8A0 000577A0  C0 22 88 A0 */	lfs f1, $$27793-_SDA2_BASE_(r2)
 /* 8005C8A4 000577A4  90 81 00 0C */	stw r4, 0xc(r1)
 /* 8005C8A8 000577A8  54 A5 10 3A */	slwi r5, r5, 2
-/* 8005C8AC 000577AC  C0 02 88 A4 */	lfs f0, lbl_804C02C4-_SDA2_BASE_(r2)
+/* 8005C8AC 000577AC  C0 02 88 A4 */	lfs f0, $$27878-_SDA2_BASE_(r2)
 /* 8005C8B0 000577B0  38 8D 80 98 */	addi r4, r13, lbl_804BD418-_SDA_BASE_
 /* 8005C8B4 000577B4  90 01 00 08 */	stw r0, 8(r1)
 /* 8005C8B8 000577B8  38 63 68 90 */	addi r3, r3, __vt__Q34nw4r3g3d15AnmObjMatClrRes@l
-/* 8005C8BC 000577BC  C8 62 88 A8 */	lfd f3, lbl_804C02C8-_SDA2_BASE_(r2)
+/* 8005C8BC 000577BC  C8 62 88 A8 */	lfd f3, $$28467-_SDA2_BASE_(r2)
 /* 8005C8C0 000577C0  2C 1B 00 00 */	cmpwi r27, 0
 /* 8005C8C4 000577C4  D0 3F 00 18 */	stfs f1, 0x18(r31)
 /* 8005C8C8 000577C8  C8 41 00 08 */	lfd f2, 8(r1)

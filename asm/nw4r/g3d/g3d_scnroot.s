@@ -1,5 +1,11 @@
 .include "macros.inc"
 
+.section .sdata2, "a"
+.global $$213191
+$$213191:
+	.single 0e0.5
+	.balign 8
+
 .section .sdata, "wa"
 .global lbl_804BD440
 lbl_804BD440:
@@ -353,7 +359,7 @@ lbl_8007166C:
 /* 8007169C 0006C59C  41 80 FF D0 */	blt lbl_8007166C
 /* 800716A0 0006C5A0  80 A1 00 28 */	lwz r5, 0x28(r1)
 /* 800716A4 0006C5A4  38 00 00 08 */	li r0, 8
-/* 800716A8 0006C5A8  C3 E2 89 F8 */	lfs f31, lbl_804C0418-_SDA2_BASE_(r2)
+/* 800716A8 0006C5A8  C3 E2 89 F8 */	lfs f31, $$213191-_SDA2_BASE_(r2)
 /* 800716AC 0006C5AC  3B 7C 22 78 */	addi r27, r28, 0x2278
 /* 800716B0 0006C5B0  80 65 00 A8 */	lwz r3, 0xa8(r5)
 /* 800716B4 0006C5B4  3B E0 00 00 */	li r31, 0

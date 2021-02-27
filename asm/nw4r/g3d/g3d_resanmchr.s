@@ -1,5 +1,37 @@
 .include "macros.inc"
 
+.section .sdata2, "a"
+.global lbl_804C0248
+lbl_804C0248:
+	.single 0e0
+.global lbl_804C024C
+lbl_804C024C:
+	.single 0e1
+.global lbl_804C0250
+lbl_804C0250:
+	.single 0e2
+.global lbl_804C0254
+lbl_804C0254:
+	.single 0e3
+.global lbl_804C0258
+lbl_804C0258:
+	.single 0e0.7111111
+	.balign 8
+.global lbl_804C0260
+lbl_804C0260:
+	.long 0x43300000
+	.long 0x00000000
+.global lbl_804C0268
+lbl_804C0268:
+	.single 0e1.40625
+.global lbl_804C026C
+lbl_804C026C:
+	.single 0e90
+.global lbl_804C0270
+lbl_804C0270:
+	.single 0e-90
+	.balign 8
+
 .section .rodata, "a"
 .global lbl_803780A8
 lbl_803780A8:

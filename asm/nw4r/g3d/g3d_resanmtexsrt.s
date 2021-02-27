@@ -1,7 +1,14 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .sdata2, "a"
+.global $$25340
+$$25340:
+	.single 0e1
+.global $$25341
+$$25341:
+	.single 0e0
 
+.section .text, "ax"
 .global GetAnmResult__Q34nw4r3g3d12ResAnmTexSrtCFPQ34nw4r3g3d15TexSrtAnmResultUlf
 GetAnmResult__Q34nw4r3g3d12ResAnmTexSrtCFPQ34nw4r3g3d15TexSrtAnmResultUlf:
 /* 800578B0 000527B0  94 21 FF 90 */	stwu r1, -0x70(r1)
@@ -50,9 +57,9 @@ lbl_80057934:
 /* 80057948 00052848  3B 64 00 0C */	addi r27, r4, 0xc
 /* 8005794C 0005284C  90 04 00 00 */	stw r0, 0(r4)
 /* 80057950 00052850  3B 80 00 00 */	li r28, 0
-/* 80057954 00052854  C3 E2 88 20 */	lfs f31, lbl_804C0240-_SDA2_BASE_(r2)
+/* 80057954 00052854  C3 E2 88 20 */	lfs f31, $$25340-_SDA2_BASE_(r2)
 /* 80057958 00052858  90 04 00 04 */	stw r0, 4(r4)
-/* 8005795C 0005285C  C3 C2 88 24 */	lfs f30, lbl_804C0244-_SDA2_BASE_(r2)
+/* 8005795C 0005285C  C3 C2 88 24 */	lfs f30, $$25341-_SDA2_BASE_(r2)
 /* 80057960 00052860  80 03 00 20 */	lwz r0, 0x20(r3)
 /* 80057964 00052864  90 04 00 08 */	stw r0, 8(r4)
 /* 80057968 00052868  48 00 01 80 */	b lbl_80057AE8
@@ -173,9 +180,9 @@ lbl_80057ADC:
 lbl_80057AE8:
 /* 80057AE8 000529E8  2C 1A 00 00 */	cmpwi r26, 0
 /* 80057AEC 000529EC  40 82 FE 80 */	bne lbl_8005796C
-/* 80057AF0 000529F0  C3 C2 88 20 */	lfs f30, lbl_804C0240-_SDA2_BASE_(r2)
+/* 80057AF0 000529F0  C3 C2 88 20 */	lfs f30, $$25340-_SDA2_BASE_(r2)
 /* 80057AF4 000529F4  3B 40 00 00 */	li r26, 0
-/* 80057AF8 000529F8  C3 E2 88 24 */	lfs f31, lbl_804C0244-_SDA2_BASE_(r2)
+/* 80057AF8 000529F8  C3 E2 88 24 */	lfs f31, $$25341-_SDA2_BASE_(r2)
 /* 80057AFC 000529FC  3B 60 00 00 */	li r27, 0
 /* 80057B00 00052A00  48 00 01 8C */	b lbl_80057C8C
 lbl_80057B04:

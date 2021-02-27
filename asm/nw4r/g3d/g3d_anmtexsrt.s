@@ -1,5 +1,24 @@
 .include "macros.inc"
 
+.section .sdata2, "a"
+.global $$28137
+$$28137:
+	.single 0e0
+.global $$28222
+$$28222:
+	.single 0e1
+.global $$28811
+$$28811:
+	.long 0x43300000
+	.long 0x80000000
+.global lbl_804C02F0
+lbl_804C02F0:
+	.single 0e1E-18
+	.balign 8
+.global lbl_804C02F8
+lbl_804C02F8:
+	.double 0e1
+
 .section .data, "wa"
 .global __vt__Q34nw4r3g3d15AnmObjTexSrtRes
 __vt__Q34nw4r3g3d15AnmObjTexSrtRes:
@@ -472,7 +491,7 @@ lbl_8005EE64:
 /* 8005EE68 00059D68  38 C6 00 01 */	addi r6, r6, 1
 /* 8005EE6C 00059D6C  42 00 FF D0 */	bdnz lbl_8005EE3C
 lbl_8005EE70:
-/* 8005EE70 00059D70  C0 22 88 C0 */	lfs f1, lbl_804C02E0-_SDA2_BASE_(r2)
+/* 8005EE70 00059D70  C0 22 88 C0 */	lfs f1, $$28137-_SDA2_BASE_(r2)
 /* 8005EE74 00059D74  4E 80 00 20 */	blr 
 
 .global SetUpdateRate__Q34nw4r3g3d16AnmObjTexSrtNodeFf
@@ -539,7 +558,7 @@ lbl_8005EF40:
 /* 8005EF44 00059E44  38 C6 00 01 */	addi r6, r6, 1
 /* 8005EF48 00059E48  42 00 FF D0 */	bdnz lbl_8005EF18
 lbl_8005EF4C:
-/* 8005EF4C 00059E4C  C0 22 88 C4 */	lfs f1, lbl_804C02E4-_SDA2_BASE_(r2)
+/* 8005EF4C 00059E4C  C0 22 88 C4 */	lfs f1, $$28222-_SDA2_BASE_(r2)
 /* 8005EF50 00059E50  4E 80 00 20 */	blr 
 
 .global Bind__Q34nw4r3g3d16AnmObjTexSrtNodeFQ34nw4r3g3d6ResMdl
@@ -934,14 +953,14 @@ lbl_8005F438:
 /* 8005F48C 0005A38C  80 BE 00 24 */	lwz r5, 0x24(r30)
 /* 8005F490 0005A390  3C 60 80 39 */	lis r3, __vt__Q34nw4r3g3d15AnmObjTexSrtRes@ha
 /* 8005F494 0005A394  6C 84 80 00 */	xoris r4, r4, 0x8000
-/* 8005F498 0005A398  C0 22 88 C0 */	lfs f1, lbl_804C02E0-_SDA2_BASE_(r2)
+/* 8005F498 0005A398  C0 22 88 C0 */	lfs f1, $$28137-_SDA2_BASE_(r2)
 /* 8005F49C 0005A39C  90 81 00 0C */	stw r4, 0xc(r1)
 /* 8005F4A0 0005A3A0  54 A5 10 3A */	slwi r5, r5, 2
-/* 8005F4A4 0005A3A4  C0 02 88 C4 */	lfs f0, lbl_804C02E4-_SDA2_BASE_(r2)
+/* 8005F4A4 0005A3A4  C0 02 88 C4 */	lfs f0, $$28222-_SDA2_BASE_(r2)
 /* 8005F4A8 0005A3A8  38 8D 80 98 */	addi r4, r13, lbl_804BD418-_SDA_BASE_
 /* 8005F4AC 0005A3AC  90 01 00 08 */	stw r0, 8(r1)
 /* 8005F4B0 0005A3B0  38 63 6A D0 */	addi r3, r3, __vt__Q34nw4r3g3d15AnmObjTexSrtRes@l
-/* 8005F4B4 0005A3B4  C8 62 88 C8 */	lfd f3, lbl_804C02E8-_SDA2_BASE_(r2)
+/* 8005F4B4 0005A3B4  C8 62 88 C8 */	lfd f3, $$28811-_SDA2_BASE_(r2)
 /* 8005F4B8 0005A3B8  2C 1B 00 00 */	cmpwi r27, 0
 /* 8005F4BC 0005A3BC  D0 3F 00 18 */	stfs f1, 0x18(r31)
 /* 8005F4C0 0005A3C0  C8 41 00 08 */	lfd f2, 8(r1)

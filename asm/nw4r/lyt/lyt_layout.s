@@ -1,5 +1,13 @@
 .include "macros.inc"
 
+.section .sdata2, "a"
+.global lbl_804C0490
+lbl_804C0490:
+	.single 0e0
+.global lbl_804C0494
+lbl_804C0494:
+	.single 0e0.5
+
 .section .sbss, "wa"
 .global mspAllocator__Q34nw4r3lyt6Layout
 mspAllocator__Q34nw4r3lyt6Layout:

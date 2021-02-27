@@ -1,5 +1,13 @@
 .include "macros.inc"
 
+.section .sdata2, "a"
+.global lbl_804C0530
+lbl_804C0530:
+	.single 0e0
+.global lbl_804C0534
+lbl_804C0534:
+	.single 0e1
+
 .section .sbss, "wa"
 # @GUARD@texCoords$7469
 .global $$2GUARD$$2texCoords$7469

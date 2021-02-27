@@ -1,7 +1,16 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .sdata2, "a"
+.global $$25252
+$$25252:
+	.single 0e0
+	.balign 8
+.global $$25254
+$$25254:
+	.long 0x43300000
+	.long 0x00000000
 
+.section .text, "ax"
 .global GetAnmResult__Q34nw4r3g3d9ResAnmVisCFUlf
 GetAnmResult__Q34nw4r3g3d9ResAnmVisCFUlf:
 /* 800570E8 00051FE8  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -40,7 +49,7 @@ lbl_80057148:
 /* 80057158 00052058  54 83 07 FE */	clrlwi r3, r4, 0x1f
 /* 8005715C 0005205C  48 00 00 98 */	b lbl_800571F4
 lbl_80057160:
-/* 80057160 00052060  C0 02 88 00 */	lfs f0, lbl_804C0220-_SDA2_BASE_(r2)
+/* 80057160 00052060  C0 02 88 00 */	lfs f0, $$25252-_SDA2_BASE_(r2)
 /* 80057164 00052064  FC 01 00 40 */	fcmpo cr0, f1, f0
 /* 80057168 00052068  4C 40 13 82 */	cror 2, 0, 2
 /* 8005716C 0005206C  40 82 00 08 */	bne lbl_80057174
@@ -49,7 +58,7 @@ lbl_80057174:
 /* 80057174 00052074  A0 63 00 1C */	lhz r3, 0x1c(r3)
 /* 80057178 00052078  3C 00 43 30 */	lis r0, 0x4330
 /* 8005717C 0005207C  90 01 00 08 */	stw r0, 8(r1)
-/* 80057180 00052080  C8 42 88 08 */	lfd f2, lbl_804C0228-_SDA2_BASE_(r2)
+/* 80057180 00052080  C8 42 88 08 */	lfd f2, $$25254-_SDA2_BASE_(r2)
 /* 80057184 00052084  90 61 00 0C */	stw r3, 0xc(r1)
 /* 80057188 00052088  C8 01 00 08 */	lfd f0, 8(r1)
 /* 8005718C 0005208C  EC 00 10 28 */	fsubs f0, f0, f2

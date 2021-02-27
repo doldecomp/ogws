@@ -1,5 +1,17 @@
 .include "macros.inc"
 
+.section .sdata2, "a"
+.global lbl_804C0318
+lbl_804C0318:
+	.single 0e0
+.global lbl_804C031C
+lbl_804C031C:
+	.single 0e1
+.global lbl_804C0320
+lbl_804C0320:
+	.long 0x43300000
+	.long 0x80000000
+
 .section .data, "wa"
 .global __vt__Q34nw4r3g3d12AnmObjShpRes
 __vt__Q34nw4r3g3d12AnmObjShpRes:

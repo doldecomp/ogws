@@ -1,5 +1,13 @@
 .include "macros.inc"
 
+.section .sdata2, "a"
+.global lbl_804C0508
+lbl_804C0508:
+	.single 0e0
+.global lbl_804C050C
+lbl_804C050C:
+	.single 0e1
+
 .section .data, "wa"
 .global __vt__Q34nw4r3lyt8DrawInfo
 __vt__Q34nw4r3lyt8DrawInfo:

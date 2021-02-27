@@ -1,5 +1,27 @@
 .include "macros.inc"
 
+.section .sdata2, "a"
+.global lbl_804C0470
+lbl_804C0470:
+	.single 0e0
+.global lbl_804C0474
+lbl_804C0474:
+	.single 0e1
+.global lbl_804C0478
+lbl_804C0478:
+	.single 0e0.017453292
+.global lbl_804C047C
+lbl_804C047C:
+	.single 0e0.003921569
+.global lbl_804C0480
+lbl_804C0480:
+	.long 0x43300000
+	.long 0x00000000
+.global lbl_804C0488
+lbl_804C0488:
+	.single 0e0.5
+	.balign 8
+
 .section .sbss, "wa"
 .global typeInfo__Q34nw4r3lyt4Pane
 typeInfo__Q34nw4r3lyt4Pane:

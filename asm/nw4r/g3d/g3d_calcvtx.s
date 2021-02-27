@@ -1,7 +1,12 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .sdata2, "a"
+.global $$26816
+$$26816:
+	.single 0e0
+	.balign 8
 
+.section .text, "ax"
 .global CalcVtx__Q24nw4r3g3dFQ34nw4r3g3d6ResMdlPQ34nw4r3g3d9AnmObjShpPPQ34nw4r3g3d13ResVtxPosDataPPQ34nw4r3g3d13ResVtxNrmDataPPQ34nw4r3g3d13ResVtxClrData
 CalcVtx__Q24nw4r3g3dFQ34nw4r3g3d6ResMdlPQ34nw4r3g3d9AnmObjShpPPQ34nw4r3g3d13ResVtxPosDataPPQ34nw4r3g3d13ResVtxNrmDataPPQ34nw4r3g3d13ResVtxClrData:
 /* 80078AD0 000739D0  94 21 FA 50 */	stwu r1, -0x5b0(r1)
@@ -21,7 +26,7 @@ CalcVtx__Q24nw4r3g3dFQ34nw4r3g3d6ResMdlPQ34nw4r3g3d9AnmObjShpPPQ34nw4r3g3d13ResV
 /* 80078B08 00073A08  7C 8E C0 50 */	subf r4, r14, r24
 /* 80078B0C 00073A0C  7C 77 1B 78 */	mr r23, r3
 /* 80078B10 00073A10  38 A4 00 0F */	addi r5, r4, 0xf
-/* 80078B14 00073A14  C3 E2 8A 48 */	lfs f31, lbl_804C0468-_SDA2_BASE_(r2)
+/* 80078B14 00073A14  C3 E2 8A 48 */	lfs f31, $$26816-_SDA2_BASE_(r2)
 /* 80078B18 00073A18  7C A0 26 70 */	srawi r0, r5, 4
 /* 80078B1C 00073A1C  54 94 00 00 */	rlwinm r20, r4, 0, 0, 0
 /* 80078B20 00073A20  7C 60 01 94 */	addze r3, r0
