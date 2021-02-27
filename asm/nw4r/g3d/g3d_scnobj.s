@@ -1,5 +1,11 @@
 .include "macros.inc"
 
+.section .sbss, "wa"
+.global gpCullingFrustum__Q24nw4r3g3d
+gpCullingFrustum__Q24nw4r3g3d:
+	.skip 0x4
+	.balign 8
+
 .section .rodata, "a"
 .global lbl_80378B88
 lbl_80378B88:
@@ -1123,11 +1129,11 @@ lbl_8007085C:
 lbl_8007086C:
 /* 8007086C 0006B76C  2C 03 00 01 */	cmpwi r3, 1
 /* 80070870 0006B770  40 82 00 58 */	bne lbl_800708C8
-/* 80070874 0006B774  83 6D 97 F0 */	lwz r27, lbl_804BEB70-_SDA_BASE_(r13)
+/* 80070874 0006B774  83 6D 97 F0 */	lwz r27, gpCullingFrustum__Q24nw4r3g3d-_SDA_BASE_(r13)
 /* 80070878 0006B778  38 00 00 00 */	li r0, 0
 /* 8007087C 0006B77C  3B 40 00 00 */	li r26, 0
 /* 80070880 0006B780  3B 80 00 00 */	li r28, 0
-/* 80070884 0006B784  90 0D 97 F0 */	stw r0, lbl_804BEB70-_SDA_BASE_(r13)
+/* 80070884 0006B784  90 0D 97 F0 */	stw r0, gpCullingFrustum__Q24nw4r3g3d-_SDA_BASE_(r13)
 /* 80070888 0006B788  48 00 00 30 */	b lbl_800708B8
 lbl_8007088C:
 /* 8007088C 0006B78C  80 7D 00 DC */	lwz r3, 0xdc(r29)
@@ -1145,7 +1151,7 @@ lbl_800708B8:
 /* 800708B8 0006B7B8  80 1D 00 E4 */	lwz r0, 0xe4(r29)
 /* 800708BC 0006B7BC  7C 1A 00 40 */	cmplw r26, r0
 /* 800708C0 0006B7C0  41 80 FF CC */	blt lbl_8007088C
-/* 800708C4 0006B7C4  93 6D 97 F0 */	stw r27, lbl_804BEB70-_SDA_BASE_(r13)
+/* 800708C4 0006B7C4  93 6D 97 F0 */	stw r27, gpCullingFrustum__Q24nw4r3g3d-_SDA_BASE_(r13)
 lbl_800708C8:
 /* 800708C8 0006B7C8  39 61 00 20 */	addi r11, r1, 0x20
 /* 800708CC 0006B7CC  48 04 14 C1 */	bl _restgpr_26

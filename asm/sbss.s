@@ -4,65 +4,6 @@
 
 .balign 0x8
 
-.global lbl_804BEB40
-lbl_804BEB40:
-	.skip 0x4
-.global lbl_804BEB44
-lbl_804BEB44:
-	.skip 0x4
-.global lbl_804BEB48
-lbl_804BEB48:
-	.skip 0x4
-.global lbl_804BEB4C
-lbl_804BEB4C:
-	.skip 0x4
-.global lbl_804BEB50
-lbl_804BEB50:
-	.skip 0x4
-.global lbl_804BEB54
-lbl_804BEB54:
-	.skip 0x4
-.global lbl_804BEB58
-lbl_804BEB58:
-	.skip 0x4
-.global lbl_804BEB5C
-lbl_804BEB5C:
-	.skip 0x4
-.global lbl_804BEB60
-lbl_804BEB60:
-	.skip 0x8
-.global lbl_804BEB68
-lbl_804BEB68:
-	.skip 0x8
-.global lbl_804BEB70
-lbl_804BEB70:
-	.skip 0x8
-.global lbl_804BEB78
-lbl_804BEB78:
-	.skip 0x8
-.global lbl_804BEB80
-lbl_804BEB80:
-	.skip 0x8
-.global lbl_804BEB88
-lbl_804BEB88:
-	.skip 0x8
-.global lbl_804BEB90
-lbl_804BEB90:
-	.skip 0x8
-.global lbl_804BEB98
-lbl_804BEB98:
-	.skip 0x8
-.global lbl_804BEBA0
-lbl_804BEBA0:
-	.skip 0x8
-.global lbl_804BEBA8
-lbl_804BEBA8:
-	.skip 0x8
-
-
-
-
-
 .global lbl_804BEBB0
 lbl_804BEBB0:
 	.skip 0x2

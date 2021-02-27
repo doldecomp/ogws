@@ -1,5 +1,11 @@
 .include "macros.inc"
 
+.section .sbss, "wa"
+.global typeInfo__Q34nw4r3lyt8Bounding
+typeInfo__Q34nw4r3lyt8Bounding:
+	.skip 0x4
+	.balign 8
+
 .section .data, "wa"
 .global __vt__Q34nw4r3lyt8Bounding
 __vt__Q34nw4r3lyt8Bounding:
@@ -81,12 +87,12 @@ DrawSelf__Q34nw4r3lyt8BoundingFRCQ34nw4r3lyt8DrawInfo:
 
 .global GetRuntimeTypeInfo__Q34nw4r3lyt8BoundingCFv
 GetRuntimeTypeInfo__Q34nw4r3lyt8BoundingCFv:
-/* 8007EA34 00079934  38 6D 98 20 */	addi r3, r13, lbl_804BEBA0-_SDA_BASE_
+/* 8007EA34 00079934  38 6D 98 20 */	addi r3, r13, typeInfo__Q34nw4r3lyt8Bounding-_SDA_BASE_
 /* 8007EA38 00079938  4E 80 00 20 */	blr 
 
 # __sinit_\lyt_bounding_cpp
 .global __sinit_$$3lyt_bounding_cpp
 __sinit_$$3lyt_bounding_cpp:
-/* 8007EA3C 0007993C  38 0D 97 F8 */	addi r0, r13, lbl_804BEB78-_SDA_BASE_
-/* 8007EA40 00079940  90 0D 98 20 */	stw r0, lbl_804BEBA0-_SDA_BASE_(r13)
+/* 8007EA3C 0007993C  38 0D 97 F8 */	addi r0, r13, typeInfo__Q34nw4r3lyt4Pane-_SDA_BASE_
+/* 8007EA40 00079940  90 0D 98 20 */	stw r0, typeInfo__Q34nw4r3lyt8Bounding-_SDA_BASE_(r13)
 /* 8007EA44 00079944  4E 80 00 20 */	blr 

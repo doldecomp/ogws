@@ -1,5 +1,11 @@
 .include "macros.inc"
 
+.section .sbss, "wa"
+.global typeInfo__Q34nw4r3lyt7Picture
+typeInfo__Q34nw4r3lyt7Picture:
+	.skip 0x4
+	.balign 8
+
 .section .data, "wa"
 .global __vt__Q34nw4r3lyt7Picture
 __vt__Q34nw4r3lyt7Picture:
@@ -85,7 +91,7 @@ lbl_8007B250:
 /* 8007B288 00076188  38 9D 00 60 */	addi r4, r29, 0x60
 /* 8007B28C 0007618C  48 00 7D 91 */	bl Copy__Q44nw4r3lyt6detail11TexCoordAryFPCvUc
 lbl_8007B290:
-/* 8007B290 00076190  80 6D 98 00 */	lwz r3, lbl_804BEB80-_SDA_BASE_(r13)
+/* 8007B290 00076190  80 6D 98 00 */	lwz r3, mspAllocator__Q34nw4r3lyt6Layout-_SDA_BASE_(r13)
 /* 8007B294 00076194  38 80 00 5C */	li r4, 0x5c
 /* 8007B298 00076198  48 06 C1 F5 */	bl func_800E748C
 /* 8007B29C 0007619C  2C 03 00 00 */	cmpwi r3, 0
@@ -138,7 +144,7 @@ __dt__Q34nw4r3lyt7PictureFv:
 /* 8007B344 00076244  81 8C 00 08 */	lwz r12, 8(r12)
 /* 8007B348 00076248  7D 89 03 A6 */	mtctr r12
 /* 8007B34C 0007624C  4E 80 04 21 */	bctrl 
-/* 8007B350 00076250  80 6D 98 00 */	lwz r3, lbl_804BEB80-_SDA_BASE_(r13)
+/* 8007B350 00076250  80 6D 98 00 */	lwz r3, mspAllocator__Q34nw4r3lyt6Layout-_SDA_BASE_(r13)
 /* 8007B354 00076254  80 9E 00 28 */	lwz r4, 0x28(r30)
 /* 8007B358 00076258  48 06 C1 45 */	bl func_800E749C
 /* 8007B35C 0007625C  38 00 00 00 */	li r0, 0
@@ -392,12 +398,12 @@ lbl_8007B6B4:
 
 .global GetRuntimeTypeInfo__Q34nw4r3lyt7PictureCFv
 GetRuntimeTypeInfo__Q34nw4r3lyt7PictureCFv:
-/* 8007B6D4 000765D4  38 6D 98 08 */	addi r3, r13, lbl_804BEB88-_SDA_BASE_
+/* 8007B6D4 000765D4  38 6D 98 08 */	addi r3, r13, typeInfo__Q34nw4r3lyt7Picture-_SDA_BASE_
 /* 8007B6D8 000765D8  4E 80 00 20 */	blr 
 
 # __sinit_\lyt_picture_cpp
 .global __sinit_$$3lyt_picture_cpp
 __sinit_$$3lyt_picture_cpp:
-/* 8007B6DC 000765DC  38 0D 97 F8 */	addi r0, r13, lbl_804BEB78-_SDA_BASE_
-/* 8007B6E0 000765E0  90 0D 98 08 */	stw r0, lbl_804BEB88-_SDA_BASE_(r13)
+/* 8007B6DC 000765DC  38 0D 97 F8 */	addi r0, r13, typeInfo__Q34nw4r3lyt4Pane-_SDA_BASE_
+/* 8007B6E0 000765E0  90 0D 98 08 */	stw r0, typeInfo__Q34nw4r3lyt7Picture-_SDA_BASE_(r13)
 /* 8007B6E4 000765E4  4E 80 00 20 */	blr 

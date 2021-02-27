@@ -1,5 +1,11 @@
 .include "macros.inc"
 
+.section .sbss, "wa"
+.global typeInfo__Q34nw4r3lyt7TextBox
+typeInfo__Q34nw4r3lyt7TextBox:
+	.skip 0x4
+	.balign 8
+
 .section .data, "wa"
 .global __vt__Q34nw4r3lyt7TextBox
 __vt__Q34nw4r3lyt7TextBox:
@@ -229,7 +235,7 @@ lbl_8007B978:
 /* 8007B99C 0007689C  2C 03 00 00 */	cmpwi r3, 0
 /* 8007B9A0 000768A0  7C 7B 1B 78 */	mr r27, r3
 /* 8007B9A4 000768A4  41 82 00 44 */	beq lbl_8007B9E8
-/* 8007B9A8 000768A8  80 6D 98 00 */	lwz r3, lbl_804BEB80-_SDA_BASE_(r13)
+/* 8007B9A8 000768A8  80 6D 98 00 */	lwz r3, mspAllocator__Q34nw4r3lyt6Layout-_SDA_BASE_(r13)
 /* 8007B9AC 000768AC  38 80 00 18 */	li r4, 0x18
 /* 8007B9B0 000768B0  48 06 BA DD */	bl func_800E748C
 /* 8007B9B4 000768B4  2C 03 00 00 */	cmpwi r3, 0
@@ -247,7 +253,7 @@ lbl_8007B9CC:
 /* 8007B9E0 000768E0  60 00 00 80 */	ori r0, r0, 0x80
 /* 8007B9E4 000768E4  98 1C 00 FD */	stb r0, 0xfd(r28)
 lbl_8007B9E8:
-/* 8007B9E8 000768E8  80 6D 98 00 */	lwz r3, lbl_804BEB80-_SDA_BASE_(r13)
+/* 8007B9E8 000768E8  80 6D 98 00 */	lwz r3, mspAllocator__Q34nw4r3lyt6Layout-_SDA_BASE_(r13)
 /* 8007B9EC 000768EC  38 80 00 5C */	li r4, 0x5c
 /* 8007B9F0 000768F0  48 06 BA 9D */	bl func_800E748C
 /* 8007B9F4 000768F4  2C 03 00 00 */	cmpwi r3, 0
@@ -295,7 +301,7 @@ __dt__Q34nw4r3lyt7TextBoxFv:
 /* 8007BA88 00076988  81 8C 00 08 */	lwz r12, 8(r12)
 /* 8007BA8C 0007698C  7D 89 03 A6 */	mtctr r12
 /* 8007BA90 00076990  4E 80 04 21 */	bctrl 
-/* 8007BA94 00076994  80 6D 98 00 */	lwz r3, lbl_804BEB80-_SDA_BASE_(r13)
+/* 8007BA94 00076994  80 6D 98 00 */	lwz r3, mspAllocator__Q34nw4r3lyt6Layout-_SDA_BASE_(r13)
 /* 8007BA98 00076998  80 9E 00 E0 */	lwz r4, 0xe0(r30)
 /* 8007BA9C 0007699C  48 06 BA 01 */	bl func_800E749C
 /* 8007BAA0 000769A0  88 1E 00 FD */	lbz r0, 0xfd(r30)
@@ -344,7 +350,7 @@ lbl_8007BB20:
 /* 8007BB40 00076A40  81 8C 00 08 */	lwz r12, 8(r12)
 /* 8007BB44 00076A44  7D 89 03 A6 */	mtctr r12
 /* 8007BB48 00076A48  4E 80 04 21 */	bctrl 
-/* 8007BB4C 00076A4C  80 6D 98 00 */	lwz r3, lbl_804BEB80-_SDA_BASE_(r13)
+/* 8007BB4C 00076A4C  80 6D 98 00 */	lwz r3, mspAllocator__Q34nw4r3lyt6Layout-_SDA_BASE_(r13)
 /* 8007BB50 00076A50  80 9E 00 28 */	lwz r4, 0x28(r30)
 /* 8007BB54 00076A54  48 06 B9 49 */	bl func_800E749C
 /* 8007BB58 00076A58  38 00 00 00 */	li r0, 0
@@ -653,7 +659,7 @@ AllocStringBuffer__Q34nw4r3lyt7TextBoxFUs:
 /* 8007BF84 00076E84  81 8C 00 68 */	lwz r12, 0x68(r12)
 /* 8007BF88 00076E88  7D 89 03 A6 */	mtctr r12
 /* 8007BF8C 00076E8C  4E 80 04 21 */	bctrl 
-/* 8007BF90 00076E90  80 6D 98 00 */	lwz r3, lbl_804BEB80-_SDA_BASE_(r13)
+/* 8007BF90 00076E90  80 6D 98 00 */	lwz r3, mspAllocator__Q34nw4r3lyt6Layout-_SDA_BASE_(r13)
 /* 8007BF94 00076E94  7F E4 FB 78 */	mr r4, r31
 /* 8007BF98 00076E98  48 06 B4 F5 */	bl func_800E748C
 /* 8007BF9C 00076E9C  2C 03 00 00 */	cmpwi r3, 0
@@ -678,7 +684,7 @@ FreeStringBuffer__Q34nw4r3lyt7TextBoxFv:
 /* 8007BFD8 00076ED8  80 83 00 D4 */	lwz r4, 0xd4(r3)
 /* 8007BFDC 00076EDC  2C 04 00 00 */	cmpwi r4, 0
 /* 8007BFE0 00076EE0  41 82 00 18 */	beq lbl_8007BFF8
-/* 8007BFE4 00076EE4  80 6D 98 00 */	lwz r3, lbl_804BEB80-_SDA_BASE_(r13)
+/* 8007BFE4 00076EE4  80 6D 98 00 */	lwz r3, mspAllocator__Q34nw4r3lyt6Layout-_SDA_BASE_(r13)
 /* 8007BFE8 00076EE8  48 06 B4 B5 */	bl func_800E749C
 /* 8007BFEC 00076EEC  38 00 00 00 */	li r0, 0
 /* 8007BFF0 00076EF0  90 1F 00 D4 */	stw r0, 0xd4(r31)
@@ -932,12 +938,12 @@ lbl_8007C2DC:
 
 .global GetRuntimeTypeInfo__Q34nw4r3lyt7TextBoxCFv
 GetRuntimeTypeInfo__Q34nw4r3lyt7TextBoxCFv:
-/* 8007C350 00077250  38 6D 98 10 */	addi r3, r13, lbl_804BEB90-_SDA_BASE_
+/* 8007C350 00077250  38 6D 98 10 */	addi r3, r13, typeInfo__Q34nw4r3lyt7TextBox-_SDA_BASE_
 /* 8007C354 00077254  4E 80 00 20 */	blr 
 
 # __sinit_\lyt_textBox_cpp
 .global __sinit_$$3lyt_textBox_cpp
 __sinit_$$3lyt_textBox_cpp:
-/* 8007C358 00077258  38 0D 97 F8 */	addi r0, r13, lbl_804BEB78-_SDA_BASE_
-/* 8007C35C 0007725C  90 0D 98 10 */	stw r0, lbl_804BEB90-_SDA_BASE_(r13)
+/* 8007C358 00077258  38 0D 97 F8 */	addi r0, r13, typeInfo__Q34nw4r3lyt4Pane-_SDA_BASE_
+/* 8007C35C 0007725C  90 0D 98 10 */	stw r0, typeInfo__Q34nw4r3lyt7TextBox-_SDA_BASE_(r13)
 /* 8007C360 00077260  4E 80 00 20 */	blr 

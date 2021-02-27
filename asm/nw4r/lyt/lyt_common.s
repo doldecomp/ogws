@@ -1,5 +1,12 @@
 .include "macros.inc"
 
+.section .sbss, "wa"
+# @GUARD@texCoords$7469
+.global $$2GUARD$$2texCoords$7469
+$$2GUARD$$2texCoords$7469:
+	.skip 0x1
+	.balign 8
+
 .section .bss, "wa"
 .global lbl_80409700
 lbl_80409700:
@@ -55,7 +62,7 @@ Free__Q44nw4r3lyt6detail11TexCoordAryFv:
 /* 80082E78 0007DD78  80 83 00 04 */	lwz r4, 4(r3)
 /* 80082E7C 0007DD7C  2C 04 00 00 */	cmpwi r4, 0
 /* 80082E80 0007DD80  41 82 00 1C */	beq lbl_80082E9C
-/* 80082E84 0007DD84  80 6D 98 00 */	lwz r3, lbl_804BEB80-_SDA_BASE_(r13)
+/* 80082E84 0007DD84  80 6D 98 00 */	lwz r3, mspAllocator__Q34nw4r3lyt6Layout-_SDA_BASE_(r13)
 /* 80082E88 0007DD88  48 06 46 15 */	bl func_800E749C
 /* 80082E8C 0007DD8C  38 00 00 00 */	li r0, 0
 /* 80082E90 0007DD90  90 1F 00 04 */	stw r0, 4(r31)
@@ -83,14 +90,14 @@ Reserve__Q44nw4r3lyt6detail11TexCoordAryFUc:
 /* 80082ED8 0007DDD8  80 83 00 04 */	lwz r4, 4(r3)
 /* 80082EDC 0007DDDC  2C 04 00 00 */	cmpwi r4, 0
 /* 80082EE0 0007DDE0  41 82 00 1C */	beq lbl_80082EFC
-/* 80082EE4 0007DDE4  80 6D 98 00 */	lwz r3, lbl_804BEB80-_SDA_BASE_(r13)
+/* 80082EE4 0007DDE4  80 6D 98 00 */	lwz r3, mspAllocator__Q34nw4r3lyt6Layout-_SDA_BASE_(r13)
 /* 80082EE8 0007DDE8  48 06 45 B5 */	bl func_800E749C
 /* 80082EEC 0007DDEC  38 00 00 00 */	li r0, 0
 /* 80082EF0 0007DDF0  90 1E 00 04 */	stw r0, 4(r30)
 /* 80082EF4 0007DDF4  98 1E 00 00 */	stb r0, 0(r30)
 /* 80082EF8 0007DDF8  98 1E 00 01 */	stb r0, 1(r30)
 lbl_80082EFC:
-/* 80082EFC 0007DDFC  80 6D 98 00 */	lwz r3, lbl_804BEB80-_SDA_BASE_(r13)
+/* 80082EFC 0007DDFC  80 6D 98 00 */	lwz r3, mspAllocator__Q34nw4r3lyt6Layout-_SDA_BASE_(r13)
 /* 80082F00 0007DE00  57 E4 2C F4 */	rlwinm r4, r31, 5, 0x13, 0x1a
 /* 80082F04 0007DE04  48 06 45 89 */	bl func_800E748C
 /* 80082F08 0007DE08  2C 03 00 00 */	cmpwi r3, 0
@@ -113,7 +120,7 @@ SetSize__Q44nw4r3lyt6detail11TexCoordAryFUc:
 /* 80082F3C 0007DE3C  88 03 00 00 */	lbz r0, 0(r3)
 /* 80082F40 0007DE40  7C 04 00 40 */	cmplw r4, r0
 /* 80082F44 0007DE44  4D 81 00 20 */	bgtlr 
-/* 80082F48 0007DE48  88 0D 98 28 */	lbz r0, lbl_804BEBA8-_SDA_BASE_(r13)
+/* 80082F48 0007DE48  88 0D 98 28 */	lbz r0, $$2GUARD$$2texCoords$7469-_SDA_BASE_(r13)
 /* 80082F4C 0007DE4C  7C 00 07 75 */	extsb. r0, r0
 /* 80082F50 0007DE50  40 82 00 3C */	bne lbl_80082F8C
 /* 80082F54 0007DE54  3C C0 80 41 */	lis r6, lbl_80409700@ha
@@ -129,7 +136,7 @@ SetSize__Q44nw4r3lyt6detail11TexCoordAryFUc:
 /* 80082F7C 0007DE7C  D0 05 00 14 */	stfs f0, 0x14(r5)
 /* 80082F80 0007DE80  D0 05 00 18 */	stfs f0, 0x18(r5)
 /* 80082F84 0007DE84  D0 05 00 1C */	stfs f0, 0x1c(r5)
-/* 80082F88 0007DE88  98 0D 98 28 */	stb r0, lbl_804BEBA8-_SDA_BASE_(r13)
+/* 80082F88 0007DE88  98 0D 98 28 */	stb r0, $$2GUARD$$2texCoords$7469-_SDA_BASE_(r13)
 lbl_80082F8C:
 /* 80082F8C 0007DE8C  88 E3 00 01 */	lbz r7, 1(r3)
 /* 80082F90 0007DE90  3C C0 80 41 */	lis r6, lbl_80409700@ha

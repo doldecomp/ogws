@@ -1,5 +1,19 @@
 .include "macros.inc"
 
+.section .sbss, "wa"
+.global lbl_804BEB40
+lbl_804BEB40:
+	.skip 0x4
+.global lbl_804BEB44
+lbl_804BEB44:
+	.skip 0x4
+.global lbl_804BEB48
+lbl_804BEB48:
+	.skip 0x4
+.global lbl_804BEB4C
+lbl_804BEB4C:
+	.skip 0x4
+
 .section .bss, "wa"
 .global lbl_803EBCC8
 lbl_803EBCC8:
