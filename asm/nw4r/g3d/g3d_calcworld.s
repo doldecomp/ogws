@@ -6,6 +6,11 @@ lbl_80396EC8:
 	.string "NodeTree"
 	.balign 0x8
 
+.section .sdata, "wa"
+.global $$28814
+$$28814:
+	.string "NodeMix"
+
 .section .text, "ax"
 .global CalcWorld__Q24nw4r3g3dFPQ34nw4r4math5MTX34PUlPCUcPCQ34nw4r4math5MTX34Q34nw4r3g3d6ResMdlPQ34nw4r3g3d9AnmObjChrPQ34nw4r3g3d16FuncObjCalcWorldUl
 CalcWorld__Q24nw4r3g3dFPQ34nw4r4math5MTX34PUlPCUcPCQ34nw4r4math5MTX34Q34nw4r3g3d6ResMdlPQ34nw4r3g3d9AnmObjChrPQ34nw4r3g3d16FuncObjCalcWorldUl:

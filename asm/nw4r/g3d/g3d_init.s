@@ -1,5 +1,12 @@
 .include "macros.inc"
 
+.section .sdata, "wa"
+# NW4R_G3D_Version___22@unnamed@g3d_init_cpp@
+.global NW4R_G3D_Version___22$$2unnamed$$2g3d_init_cpp$$2
+NW4R_G3D_Version___22$$2unnamed$$2g3d_init_cpp$$2:
+	.long $$27641
+.balign 0x8
+
 .section .data, "wa"
 .global $$27641
 $$27641:

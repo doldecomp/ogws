@@ -1,5 +1,16 @@
 .include "macros.inc"
 
+.section .sdata, "wa"
+.global lbl_804BD450
+lbl_804BD450:
+	.string "NodeMix"
+.global lbl_804BD458
+lbl_804BD458:
+	.string "DrawOpa"
+.global lbl_804BD460
+lbl_804BD460:
+	.string "DrawXlu"
+
 .section .rodata, "a"
 .global lbl_80378BC8
 lbl_80378BC8:

@@ -1,5 +1,19 @@
 .include "macros.inc"
 
+.section .sdata, "wa"
+.global lbl_804BD440
+lbl_804BD440:
+	.long 0x20
+.global lbl_804BD444
+lbl_804BD444:
+	.long 0x20
+.global lbl_804BD448
+lbl_804BD448:
+	.long -4
+.global lbl_804BD44C
+lbl_804BD44C:
+	.long -4
+
 .section .rodata, "a"
 .global lbl_80378BB8
 lbl_80378BB8:

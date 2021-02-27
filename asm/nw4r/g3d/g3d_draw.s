@@ -1,7 +1,14 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .sdata, "wa"
+.global lbl_804BD438
+lbl_804BD438:
+	.long -4
+.global lbl_804BD43C
+lbl_804BD43C:
+	.long -4
 
+.section .text, "ax"
 .global GetIndMtxOp__Q34nw4r3g3d6detailFQ34nw4r3g3d6ResMatQ34nw4r3g3d7ResNodeQ34nw4r3g3d6ResShp
 GetIndMtxOp__Q34nw4r3g3d6detailFQ34nw4r3g3d6ResMatQ34nw4r3g3d7ResNodeQ34nw4r3g3d6ResShp:
 /* 8006A944 00065844  94 21 FE D0 */	stwu r1, -0x130(r1)

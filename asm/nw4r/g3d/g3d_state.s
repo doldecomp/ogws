@@ -1,5 +1,25 @@
 .include "macros.inc"
 
+.section .sdata, "wa"
+.global lbl_804BD418
+lbl_804BD418:
+	.long PlayPolicy_Onetime__Q24nw4r3g3dFfff
+	.long PlayPolicy_Loop__Q24nw4r3g3dFfff
+.balign 0x8
+.global lbl_804BD420
+lbl_804BD420:
+	.single 0e1
+.balign 0x8
+.global lbl_804BD428
+lbl_804BD428:
+	.long -1
+# pG3DStateIndMtxOp__Q44nw4r3g3d8G3DState23@unnamed@g3d_state_cpp@
+.global pG3DStateIndMtxOp__Q44nw4r3g3d8G3DState23$$2unnamed$$2g3d_state_cpp$$2
+pG3DStateIndMtxOp__Q44nw4r3g3d8G3DState23$$2unnamed$$2g3d_state_cpp$$2:
+    # 803f1620 = IndMtxOpDefault__Q44nw4r3g3d8G3DState23@unnamed@g3d_state_cpp@
+    # In BSS section
+	.long 0x803f1620
+
 .section .bss, "wa"
 .global lbl_803EC120
 lbl_803EC120:

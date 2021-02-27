@@ -1,5 +1,12 @@
 .include "macros.inc"
 
+.section .sdata, "wa"
+# NW4R_LYT_Version___22@unnamed@lyt_pane_cpp@
+.global NW4R_LYT_Version___22$$2unnamed$$2lyt_pane_cpp$$2
+NW4R_LYT_Version___22$$2unnamed$$2lyt_pane_cpp$$2:
+	.long lbl_80397140
+.balign 0x8
+
 .section .data, "wa"
 .global lbl_80397140
 lbl_80397140:
