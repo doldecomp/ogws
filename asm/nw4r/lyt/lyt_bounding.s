@@ -1,7 +1,36 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .data, "wa"
+.global __vt__Q34nw4r3lyt8Bounding
+__vt__Q34nw4r3lyt8Bounding:
+    .long 0
+    .long 0
+    .long __dt__Q34nw4r3lyt8BoundingFv
+    .long GetRuntimeTypeInfo__Q34nw4r3lyt8BoundingCFv
+    .long CalculateMtx__Q34nw4r3lyt4PaneFRCQ34nw4r3lyt8DrawInfo
+    .long Draw__Q34nw4r3lyt4PaneFRCQ34nw4r3lyt8DrawInfo
+    .long DrawSelf__Q34nw4r3lyt8BoundingFRCQ34nw4r3lyt8DrawInfo
+    .long Animate__Q34nw4r3lyt4PaneFUl
+    .long AnimateSelf__Q34nw4r3lyt4PaneFUl
+    .long GetVtxColor__Q34nw4r3lyt4PaneCFUl
+    .long SetVtxColor__Q34nw4r3lyt4PaneFUlQ34nw4r2ut5Color
+    .long GetColorElement__Q34nw4r3lyt4PaneCFUl
+    .long SetColorElement__Q34nw4r3lyt4PaneFUlUc
+    .long GetVtxColorElement__Q34nw4r3lyt4PaneCFUl
+    .long SetVtxColorElement__Q34nw4r3lyt4PaneFUlUc
+    .long FindPaneByName__Q34nw4r3lyt4PaneFPCcb
+    .long FindMaterialByName__Q34nw4r3lyt4PaneFPCcb
+    .long BindAnimation__Q34nw4r3lyt4PaneFPQ34nw4r3lyt13AnimTransformb
+    .long UnbindAnimation__Q34nw4r3lyt4PaneFPQ34nw4r3lyt13AnimTransformb
+    .long UnbindAllAnimation__Q34nw4r3lyt4PaneFb
+    .long UnbindAnimationSelf__Q34nw4r3lyt4PaneFPQ34nw4r3lyt13AnimTransform
+    .long FindAnimationLink__Q34nw4r3lyt4PaneFPQ34nw4r3lyt13AnimTransform
+    .long SetAnimationEnable__Q34nw4r3lyt4PaneFPQ34nw4r3lyt13AnimTransformbb
+    .long GetMaterial__Q34nw4r3lyt4PaneCFv
+    .long LoadMtx__Q34nw4r3lyt4PaneFRCQ34nw4r3lyt8DrawInfo
+    .long 0
 
+.section .text, "ax"
 .global __ct__Q34nw4r3lyt8BoundingFPCQ44nw4r3lyt3res8BoundingRCQ34nw4r3lyt11ResBlockSet
 __ct__Q34nw4r3lyt8BoundingFPCQ44nw4r3lyt3res8BoundingRCQ34nw4r3lyt11ResBlockSet:
 /* 8007E99C 0007989C  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -10,9 +39,9 @@ __ct__Q34nw4r3lyt8BoundingFPCQ44nw4r3lyt3res8BoundingRCQ34nw4r3lyt11ResBlockSet:
 /* 8007E9A8 000798A8  93 E1 00 0C */	stw r31, 0xc(r1)
 /* 8007E9AC 000798AC  7C 7F 1B 78 */	mr r31, r3
 /* 8007E9B0 000798B0  4B FF A9 6D */	bl __ct__Q34nw4r3lyt4PaneFPCQ44nw4r3lyt3res4Pane
-/* 8007E9B4 000798B4  3C 80 80 39 */	lis r4, lbl_803973D0@ha
+/* 8007E9B4 000798B4  3C 80 80 39 */	lis r4, __vt__Q34nw4r3lyt8Bounding@ha
 /* 8007E9B8 000798B8  7F E3 FB 78 */	mr r3, r31
-/* 8007E9BC 000798BC  38 84 73 D0 */	addi r4, r4, lbl_803973D0@l
+/* 8007E9BC 000798BC  38 84 73 D0 */	addi r4, r4, __vt__Q34nw4r3lyt8Bounding@l
 /* 8007E9C0 000798C0  90 9F 00 00 */	stw r4, 0(r31)
 /* 8007E9C4 000798C4  83 E1 00 0C */	lwz r31, 0xc(r1)
 /* 8007E9C8 000798C8  80 01 00 14 */	lwz r0, 0x14(r1)

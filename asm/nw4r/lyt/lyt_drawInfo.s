@@ -1,15 +1,22 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .data, "wa"
+.global __vt__Q34nw4r3lyt8DrawInfo
+__vt__Q34nw4r3lyt8DrawInfo:
+    .long 0
+    .long 0
+    .long __dt__Q34nw4r3lyt8DrawInfoFv
+    .long 0
 
+.section .text, "ax"
 .global __ct__Q34nw4r3lyt8DrawInfoFv
 __ct__Q34nw4r3lyt8DrawInfoFv:
 /* 80081CF8 0007CBF8  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80081CFC 0007CBFC  7C 08 02 A6 */	mflr r0
-/* 80081D00 0007CC00  3C 80 80 39 */	lis r4, lbl_803974A0@ha
+/* 80081D00 0007CC00  3C 80 80 39 */	lis r4, __vt__Q34nw4r3lyt8DrawInfo@ha
 /* 80081D04 0007CC04  C0 22 8A E8 */	lfs f1, lbl_804C0508-_SDA2_BASE_(r2)
 /* 80081D08 0007CC08  90 01 00 14 */	stw r0, 0x14(r1)
-/* 80081D0C 0007CC0C  38 84 74 A0 */	addi r4, r4, lbl_803974A0@l
+/* 80081D0C 0007CC0C  38 84 74 A0 */	addi r4, r4, __vt__Q34nw4r3lyt8DrawInfo@l
 /* 80081D10 0007CC10  C0 02 8A EC */	lfs f0, lbl_804C050C-_SDA2_BASE_(r2)
 /* 80081D14 0007CC14  38 A0 00 01 */	li r5, 1
 /* 80081D18 0007CC18  93 E1 00 0C */	stw r31, 0xc(r1)

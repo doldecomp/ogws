@@ -1,96 +1,19 @@
 .include "macros.inc"
 
 .section .data, "wa"
-
-.global lbl_80397140
-lbl_80397140:
-.string "<< NW4R    - LYT \tfinal   build: Jun  8 2007 11:17:26 (0x4199_60831) >>"
-
-.global __vt__Q34nw4r3lyt4Pane
-__vt__Q34nw4r3lyt4Pane:
-    .long 0
-    .long 0
-    .long __dt__Q34nw4r3lyt4PaneFv
-    .long func_8007A218
-    .long CalculateMtx__Q34nw4r3lyt4PaneFRCQ34nw4r3lyt8DrawInfo
-    .long Draw__Q34nw4r3lyt4PaneFRCQ34nw4r3lyt8DrawInfo
-    .long DrawSelf__Q34nw4r3lyt4PaneFRCQ34nw4r3lyt8DrawInfo
-    .long Animate__Q34nw4r3lyt4PaneFUl
-    .long AnimateSelf__Q34nw4r3lyt4PaneFUl
-    .long GetVtxColor__Q34nw4r3lyt4PaneCFUl
-    .long SetVtxColor__Q34nw4r3lyt4PaneFUlQ34nw4r2ut5Color
-    .long GetColorElement__Q34nw4r3lyt4PaneCFUl
-    .long SetColorElement__Q34nw4r3lyt4PaneFUlUc
-    .long GetVtxColorElement__Q34nw4r3lyt4PaneCFUl
-    .long SetVtxColorElement__Q34nw4r3lyt4PaneFUlUc
-    .long FindPaneByName__Q34nw4r3lyt4PaneFPCcb
-    .long FindMaterialByName__Q34nw4r3lyt4PaneFPCcb
-    .long BindAnimation__Q34nw4r3lyt4PaneFPQ34nw4r3lyt13AnimTransformb
-    .long UnbindAnimation__Q34nw4r3lyt4PaneFPQ34nw4r3lyt13AnimTransformb
-    .long UnbindAllAnimation__Q34nw4r3lyt4PaneFb
-    .long UnbindAnimationSelf__Q34nw4r3lyt4PaneFPQ34nw4r3lyt13AnimTransform
-    .long FindAnimationLink__Q34nw4r3lyt4PaneFPQ34nw4r3lyt13AnimTransform
-    .long SetAnimationEnable__Q34nw4r3lyt4PaneFPQ34nw4r3lyt13AnimTransformbb
-    .long GetMaterial__Q34nw4r3lyt4PaneCFv
-    .long LoadMtx__Q34nw4r3lyt4PaneFRCQ34nw4r3lyt8DrawInfo
-    .long 0
-
-.global lbl_803971F0
-lbl_803971F0:
-	.incbin "baserom.dol", 0x3932F0, 0x10
-.global lbl_80397200
-lbl_80397200:
-	.incbin "baserom.dol", 0x393300, 0x38
-.global lbl_80397238
-lbl_80397238:
-	.incbin "baserom.dol", 0x393338, 0x68
-.global lbl_803972A0
-lbl_803972A0:
-	.incbin "baserom.dol", 0x3933A0, 0x78
-.global lbl_80397318
-lbl_80397318:
-	.incbin "baserom.dol", 0x393418, 0x3C
-.global lbl_80397354
-lbl_80397354:
-	.incbin "baserom.dol", 0x393454, 0x7C
-.global lbl_803973D0
-lbl_803973D0:
-	.incbin "baserom.dol", 0x3934D0, 0x68
-.global lbl_80397438
-lbl_80397438:
-	.incbin "baserom.dol", 0x393538, 0x20
-.global lbl_80397458
-lbl_80397458:
-	.incbin "baserom.dol", 0x393558, 0x20
-.global lbl_80397478
-lbl_80397478:
-	.incbin "baserom.dol", 0x393578, 0x28
-.global lbl_803974A0
-lbl_803974A0:
-	.incbin "baserom.dol", 0x3935A0, 0x10
-.global lbl_803974B0
-lbl_803974B0:
-	.incbin "baserom.dol", 0x3935B0, 0x20
-.global lbl_803974D0
-lbl_803974D0:
-	.incbin "baserom.dol", 0x3935D0, 0x18
-.global lbl_803974E8
-lbl_803974E8:
-	.incbin "baserom.dol", 0x3935E8, 0x18
-
-
-
-
-
 .global lbl_80397500
 lbl_80397500:
-	.incbin "baserom.dol", 0x393600, 0xC
+    .long 0
+    .long 0
+    .long 0x80083dd8
 .global lbl_8039750C
 lbl_8039750C:
-	.incbin "baserom.dol", 0x39360C, 0xC
+	.string "pCapTexture"
+	.balign 8
 .global lbl_80397518
 lbl_80397518:
-	.incbin "baserom.dol", 0x393618, 0x18
+	.string "eggPostEffectBase.h"
+	.balign 8
 .global lbl_80397530
 lbl_80397530:
 	.incbin "baserom.dol", 0x393630, 0x18

@@ -1,7 +1,14 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .data, "wa"
+.global __vt__Q34nw4r3lyt5Group
+__vt__Q34nw4r3lyt5Group:
+    .long 0
+    .long 0
+    .long __dt__Q34nw4r3lyt5GroupFv
+    .long 0
 
+.section .text, "ax"
 .global __ct__Q34nw4r3lyt5GroupFPCQ44nw4r3lyt3res5GroupPQ34nw4r3lyt4Pane
 __ct__Q34nw4r3lyt5GroupFPCQ44nw4r3lyt3res5GroupPQ34nw4r3lyt4Pane:
 /* 8007A22C 0007512C  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -10,10 +17,10 @@ __ct__Q34nw4r3lyt5GroupFPCQ44nw4r3lyt3res5GroupPQ34nw4r3lyt4Pane:
 /* 8007A238 00075138  39 61 00 30 */	addi r11, r1, 0x30
 /* 8007A23C 0007513C  48 03 7A FD */	bl _savegpr_24
 /* 8007A240 00075140  3B C0 00 00 */	li r30, 0
-/* 8007A244 00075144  3C C0 80 39 */	lis r6, lbl_803971F0@ha
+/* 8007A244 00075144  3C C0 80 39 */	lis r6, __vt__Q34nw4r3lyt5Group@ha
 /* 8007A248 00075148  93 C3 00 10 */	stw r30, 0x10(r3)
 /* 8007A24C 0007514C  38 E3 00 10 */	addi r7, r3, 0x10
-/* 8007A250 00075150  38 C6 71 F0 */	addi r6, r6, lbl_803971F0@l
+/* 8007A250 00075150  38 C6 71 F0 */	addi r6, r6, __vt__Q34nw4r3lyt5Group@l
 /* 8007A254 00075154  7C 99 23 78 */	mr r25, r4
 /* 8007A258 00075158  93 C3 00 14 */	stw r30, 0x14(r3)
 /* 8007A25C 0007515C  7C BA 2B 78 */	mr r26, r5
@@ -87,9 +94,9 @@ __dt__Q34nw4r3lyt5GroupFv:
 /* 8007A350 00075250  7C 7B 1B 78 */	mr r27, r3
 /* 8007A354 00075254  7C 9C 23 78 */	mr r28, r4
 /* 8007A358 00075258  41 82 00 68 */	beq lbl_8007A3C0
-/* 8007A35C 0007525C  3C 80 80 39 */	lis r4, lbl_803971F0@ha
+/* 8007A35C 0007525C  3C 80 80 39 */	lis r4, __vt__Q34nw4r3lyt5Group@ha
 /* 8007A360 00075260  83 E3 00 10 */	lwz r31, 0x10(r3)
-/* 8007A364 00075264  38 84 71 F0 */	addi r4, r4, lbl_803971F0@l
+/* 8007A364 00075264  38 84 71 F0 */	addi r4, r4, __vt__Q34nw4r3lyt5Group@l
 /* 8007A368 00075268  3B C3 00 10 */	addi r30, r3, 0x10
 /* 8007A36C 0007526C  90 83 00 00 */	stw r4, 0(r3)
 /* 8007A370 00075270  48 00 00 28 */	b lbl_8007A398

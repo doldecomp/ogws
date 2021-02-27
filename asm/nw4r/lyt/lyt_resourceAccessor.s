@@ -1,7 +1,16 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .data, "wa"
+.global __vt__Q34nw4r3lyt16ResourceAccessor
+__vt__Q34nw4r3lyt16ResourceAccessor:
+    .long 0
+    .long 0
+    .long __dt__Q34nw4r3lyt16ResourceAccessorFv
+    .long 0
+    .long GetFont__Q34nw4r3lyt16ResourceAccessorFPCc
+    .long 0
 
+.section .text, "ax"
 .global __dt__Q34nw4r3lyt16ResourceAccessorFv
 __dt__Q34nw4r3lyt16ResourceAccessorFv:
 /* 80082964 0007D864  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -24,8 +33,8 @@ lbl_8008298C:
 
 .global __ct__Q34nw4r3lyt16ResourceAccessorFv
 __ct__Q34nw4r3lyt16ResourceAccessorFv:
-/* 800829A4 0007D8A4  3C 80 80 39 */	lis r4, lbl_803974D0@ha
-/* 800829A8 0007D8A8  38 84 74 D0 */	addi r4, r4, lbl_803974D0@l
+/* 800829A4 0007D8A4  3C 80 80 39 */	lis r4, __vt__Q34nw4r3lyt16ResourceAccessor@ha
+/* 800829A8 0007D8A8  38 84 74 D0 */	addi r4, r4, __vt__Q34nw4r3lyt16ResourceAccessor@l
 /* 800829AC 0007D8AC  90 83 00 00 */	stw r4, 0(r3)
 /* 800829B0 0007D8B0  4E 80 00 20 */	blr 
 

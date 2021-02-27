@@ -1,7 +1,52 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .data, "wa"
+# Length = 60
+# Likely not actually 10 * 6 but it was separated for readability
+# Possibly "flipInfos$7807"
+.global lbl_80397318
+lbl_80397318:
+    .byte 00, 00, 01, 00, 00, 01, 01, 01, 00, 01
+    .byte 01, 00, 00, 00, 01, 01, 00, 01, 00, 01
+    .byte 00, 01, 01, 01, 00, 00, 01, 00, 00, 01
+    .byte 00, 01, 00, 00, 01, 01, 01, 00, 01, 00
+    .byte 01, 01, 00, 01, 01, 00, 00, 00, 00, 01
+    .byte 01, 00, 01, 01, 00, 00, 00, 01, 01, 00
+.global __vt__Q34nw4r3lyt6Window
+__vt__Q34nw4r3lyt6Window:
+    .long 0
+    .long 0
+    .long __dt__Q34nw4r3lyt6WindowFv
+    .long GetRuntimeTypeInfo__Q34nw4r3lyt6WindowCFv
+    .long CalculateMtx__Q34nw4r3lyt4PaneFRCQ34nw4r3lyt8DrawInfo
+    .long Draw__Q34nw4r3lyt4PaneFRCQ34nw4r3lyt8DrawInfo
+    .long DrawSelf__Q34nw4r3lyt6WindowFRCQ34nw4r3lyt8DrawInfo
+    .long Animate__Q34nw4r3lyt4PaneFUl
+    .long AnimateSelf__Q34nw4r3lyt6WindowFUl
+    .long GetVtxColor__Q34nw4r3lyt6WindowCFUl
+    .long SetVtxColor__Q34nw4r3lyt6WindowFUlQ34nw4r2ut5Color
+    .long GetColorElement__Q34nw4r3lyt4PaneCFUl
+    .long SetColorElement__Q34nw4r3lyt4PaneFUlUc
+    .long GetVtxColorElement__Q34nw4r3lyt6WindowCFUl
+    .long SetVtxColorElement__Q34nw4r3lyt6WindowFUlUc
+    .long FindPaneByName__Q34nw4r3lyt4PaneFPCcb
+    .long FindMaterialByName__Q34nw4r3lyt6WindowFPCcb
+    .long BindAnimation__Q34nw4r3lyt4PaneFPQ34nw4r3lyt13AnimTransformb
+    .long UnbindAnimation__Q34nw4r3lyt4PaneFPQ34nw4r3lyt13AnimTransformb
+    .long UnbindAllAnimation__Q34nw4r3lyt4PaneFb
+    .long UnbindAnimationSelf__Q34nw4r3lyt6WindowFPQ34nw4r3lyt13AnimTransform
+    .long FindAnimationLink__Q34nw4r3lyt6WindowFPQ34nw4r3lyt13AnimTransform
+    .long SetAnimationEnable__Q34nw4r3lyt6WindowFPQ34nw4r3lyt13AnimTransformbb
+    .long GetMaterial__Q34nw4r3lyt4PaneCFv
+    .long LoadMtx__Q34nw4r3lyt4PaneFRCQ34nw4r3lyt8DrawInfo
+    .long GetContentMaterial__Q34nw4r3lyt6WindowCFv
+    .long GetFrameMaterial__Q34nw4r3lyt6WindowCFUl
+    .long DrawContent__Q34nw4r3lyt6WindowFRCQ34nw4r4math4VEC2RCQ34nw4r3lyt15WindowFrameSizeUc
+    .long DrawFrame__Q34nw4r3lyt6WindowFRCQ34nw4r4math4VEC2RCQ44nw4r3lyt6Window5FrameRCQ34nw4r3lyt15WindowFrameSizeUc
+    .long DrawFrame4__Q34nw4r3lyt6WindowFRCQ34nw4r4math4VEC2PCQ44nw4r3lyt6Window5FrameRCQ34nw4r3lyt15WindowFrameSizeUc
+    .long DrawFrame8__Q34nw4r3lyt6WindowFRCQ34nw4r4math4VEC2PCQ44nw4r3lyt6Window5FrameRCQ34nw4r3lyt15WindowFrameSizeUc
 
+.section .text, "ax"
 .global __ct__Q34nw4r3lyt6WindowFPCQ44nw4r3lyt3res6WindowRCQ34nw4r3lyt11ResBlockSet
 __ct__Q34nw4r3lyt6WindowFPCQ44nw4r3lyt3res6WindowRCQ34nw4r3lyt11ResBlockSet:
 /* 8007C364 00077264  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -13,9 +58,9 @@ __ct__Q34nw4r3lyt6WindowFPCQ44nw4r3lyt3res6WindowRCQ34nw4r3lyt11ResBlockSet:
 /* 8007C37C 0007727C  7C 99 23 78 */	mr r25, r4
 /* 8007C380 00077280  7C BA 2B 78 */	mr r26, r5
 /* 8007C384 00077284  4B FF CF 99 */	bl __ct__Q34nw4r3lyt4PaneFPCQ44nw4r3lyt3res4Pane
-/* 8007C388 00077288  3C 60 80 39 */	lis r3, lbl_80397354@ha
+/* 8007C388 00077288  3C 60 80 39 */	lis r3, __vt__Q34nw4r3lyt6Window@ha
 /* 8007C38C 0007728C  3C 80 80 08 */	lis r4, __ct__Q34nw4r2ut5ColorFv@ha
-/* 8007C390 00077290  38 63 73 54 */	addi r3, r3, lbl_80397354@l
+/* 8007C390 00077290  38 63 73 54 */	addi r3, r3, __vt__Q34nw4r3lyt6Window@l
 /* 8007C394 00077294  3C A0 80 01 */	lis r5, __dt__Q34nw4r2ut5ColorFv@ha
 /* 8007C398 00077298  3B 78 00 E4 */	addi r27, r24, 0xe4
 /* 8007C39C 0007729C  90 78 00 00 */	stw r3, 0(r24)
@@ -158,8 +203,8 @@ __dt__Q34nw4r3lyt6WindowFv:
 /* 8007C590 00077490  7C 7C 1B 78 */	mr r28, r3
 /* 8007C594 00077494  41 82 00 FC */	beq lbl_8007C690
 /* 8007C598 00077498  80 03 00 FC */	lwz r0, 0xfc(r3)
-/* 8007C59C 0007749C  3C 80 80 39 */	lis r4, lbl_80397354@ha
-/* 8007C5A0 000774A0  38 84 73 54 */	addi r4, r4, lbl_80397354@l
+/* 8007C59C 0007749C  3C 80 80 39 */	lis r4, __vt__Q34nw4r3lyt6Window@ha
+/* 8007C5A0 000774A0  38 84 73 54 */	addi r4, r4, __vt__Q34nw4r3lyt6Window@l
 /* 8007C5A4 000774A4  2C 00 00 00 */	cmpwi r0, 0
 /* 8007C5A8 000774A8  90 83 00 00 */	stw r4, 0(r3)
 /* 8007C5AC 000774AC  41 82 00 64 */	beq lbl_8007C610

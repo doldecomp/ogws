@@ -1,7 +1,18 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .data, "wa"
+.global __vt__Q34nw4r3lyt18AnimTransformBasic
+__vt__Q34nw4r3lyt18AnimTransformBasic:
+    .long 0
+    .long 0
+    .long __dt__Q34nw4r3lyt18AnimTransformBasicFv
+    .long SetResource__Q34nw4r3lyt18AnimTransformBasicFPCQ44nw4r3lyt3res14AnimationBlockPQ34nw4r3lyt16ResourceAccessor
+    .long Bind__Q34nw4r3lyt18AnimTransformBasicFPQ34nw4r3lyt4Paneb
+    .long Bind__Q34nw4r3lyt18AnimTransformBasicFPQ34nw4r3lyt8Material
+    .long Animate__Q34nw4r3lyt18AnimTransformBasicFUlPQ34nw4r3lyt4Pane
+    .long Animate__Q34nw4r3lyt18AnimTransformBasicFUlPQ34nw4r3lyt8Material
 
+.section .text, "ax"
 # GetStepCurveValue__27@unnamed@lyt_animation_cpp@FfPCQ44nw4r3lyt3res7StepKeyUl
 .global GetStepCurveValue__27$$2unnamed$$2lyt_animation_cpp$$2FfPCQ44nw4r3lyt3res7StepKeyUl
 GetStepCurveValue__27$$2unnamed$$2lyt_animation_cpp$$2FfPCQ44nw4r3lyt3res7StepKeyUl:
@@ -217,9 +228,9 @@ IsLoopData__Q34nw4r3lyt13AnimTransformCFv:
 .global __ct__Q34nw4r3lyt18AnimTransformBasicFv
 __ct__Q34nw4r3lyt18AnimTransformBasicFv:
 /* 80082074 0007CF74  C0 02 8B 08 */	lfs f0, lbl_804C0528-_SDA2_BASE_(r2)
-/* 80082078 0007CF78  3C 80 80 39 */	lis r4, lbl_803974B0@ha
+/* 80082078 0007CF78  3C 80 80 39 */	lis r4, __vt__Q34nw4r3lyt18AnimTransformBasic@ha
 /* 8008207C 0007CF7C  38 00 00 00 */	li r0, 0
-/* 80082080 0007CF80  38 84 74 B0 */	addi r4, r4, lbl_803974B0@l
+/* 80082080 0007CF80  38 84 74 B0 */	addi r4, r4, __vt__Q34nw4r3lyt18AnimTransformBasic@l
 /* 80082084 0007CF84  90 03 00 04 */	stw r0, 4(r3)
 /* 80082088 0007CF88  90 03 00 08 */	stw r0, 8(r3)
 /* 8008208C 0007CF8C  90 03 00 0C */	stw r0, 0xc(r3)
@@ -242,8 +253,8 @@ __dt__Q34nw4r3lyt18AnimTransformBasicFv:
 /* 800820C4 0007CFC4  7C 7E 1B 78 */	mr r30, r3
 /* 800820C8 0007CFC8  41 82 00 48 */	beq lbl_80082110
 /* 800820CC 0007CFCC  80 83 00 18 */	lwz r4, 0x18(r3)
-/* 800820D0 0007CFD0  3C A0 80 39 */	lis r5, lbl_803974B0@ha
-/* 800820D4 0007CFD4  38 A5 74 B0 */	addi r5, r5, lbl_803974B0@l
+/* 800820D0 0007CFD0  3C A0 80 39 */	lis r5, __vt__Q34nw4r3lyt18AnimTransformBasic@ha
+/* 800820D4 0007CFD4  38 A5 74 B0 */	addi r5, r5, __vt__Q34nw4r3lyt18AnimTransformBasic@l
 /* 800820D8 0007CFD8  2C 04 00 00 */	cmpwi r4, 0
 /* 800820DC 0007CFDC  90 A3 00 00 */	stw r5, 0(r3)
 /* 800820E0 0007CFE0  41 82 00 0C */	beq lbl_800820EC

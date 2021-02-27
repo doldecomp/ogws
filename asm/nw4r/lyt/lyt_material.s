@@ -1,7 +1,41 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .data, "wa"
+# Two copies of the same table???
+.global lbl_80397438
+lbl_80397438:
+    .long 0x1f
+    .long 0x1b
+    .long 0x17
+    .long 0x13
+    .long 0x1e
+    .long 0x1a
+    .long 0x16
+    .long 0x12
+.global lbl_80397458
+lbl_80397458:
+    .long 0x1f
+    .long 0x1b
+    .long 0x17
+    .long 0x13
+    .long 0x1e
+    .long 0x1a
+    .long 0x16
+    .long 0x12
+.global __vt__Q34nw4r3lyt8Material
+__vt__Q34nw4r3lyt8Material:
+    .long 0
+    .long 0
+    .long __dt__Q34nw4r3lyt8MaterialFv
+    .long SetupGX__Q34nw4r3lyt8MaterialFbUc
+    .long BindAnimation__Q34nw4r3lyt8MaterialFPQ34nw4r3lyt13AnimTransform
+    .long UnbindAnimation__Q34nw4r3lyt8MaterialFPQ34nw4r3lyt13AnimTransform
+    .long UnbindAllAnimation__Q34nw4r3lyt8MaterialFv
+    .long Animate__Q34nw4r3lyt8MaterialFv
+    .long FindAnimationLink__Q34nw4r3lyt8MaterialFPQ34nw4r3lyt13AnimTransform
+    .long SetAnimationEnable__Q34nw4r3lyt8MaterialFPQ34nw4r3lyt13AnimTransformb
 
+.section .text, "ax"
 # CalcTextureMtx__26@unnamed@lyt_material_cpp@FPQ34nw4r4math5MTX34RCQ34nw4r3lyt6TexSRT
 .global CalcTextureMtx__26$$2unnamed$$2lyt_material_cpp$$2FPQ34nw4r4math5MTX34RCQ34nw4r3lyt6TexSRT
 CalcTextureMtx__26$$2unnamed$$2lyt_material_cpp$$2FPQ34nw4r4math5MTX34RCQ34nw4r3lyt6TexSRT:
@@ -216,10 +250,10 @@ __ct__Q34nw4r3lyt8MaterialFPCQ44nw4r3lyt3res8MaterialRCQ34nw4r3lyt11ResBlockSet:
 /* 8007ED58 00079C58  39 61 00 90 */	addi r11, r1, 0x90
 /* 8007ED5C 00079C5C  48 03 2F B5 */	bl _savegpr_14
 /* 8007ED60 00079C60  39 C0 00 00 */	li r14, 0
-/* 8007ED64 00079C64  3D 00 80 39 */	lis r8, lbl_80397478@ha
+/* 8007ED64 00079C64  3D 00 80 39 */	lis r8, __vt__Q34nw4r3lyt8Material@ha
 /* 8007ED68 00079C68  91 C3 00 08 */	stw r14, 8(r3)
 /* 8007ED6C 00079C6C  39 23 00 08 */	addi r9, r3, 8
-/* 8007ED70 00079C70  39 08 74 78 */	addi r8, r8, lbl_80397478@l
+/* 8007ED70 00079C70  39 08 74 78 */	addi r8, r8, __vt__Q34nw4r3lyt8Material@l
 /* 8007ED74 00079C74  3C E0 80 08 */	lis r7, __ct__Q34nw4r2ut5ColorFv@ha
 /* 8007ED78 00079C78  91 C3 00 0C */	stw r14, 0xc(r3)
 /* 8007ED7C 00079C7C  3C C0 80 01 */	lis r6, __dt__Q34nw4r2ut5ColorFv@ha
@@ -1311,8 +1345,8 @@ __dt__Q34nw4r3lyt8MaterialFv:
 /* 8007FDA0 0007ACA0  93 C1 00 08 */	stw r30, 8(r1)
 /* 8007FDA4 0007ACA4  7C 7E 1B 78 */	mr r30, r3
 /* 8007FDA8 0007ACA8  41 82 00 70 */	beq lbl_8007FE18
-/* 8007FDAC 0007ACAC  3D 80 80 39 */	lis r12, lbl_80397478@ha
-/* 8007FDB0 0007ACB0  39 8C 74 78 */	addi r12, r12, lbl_80397478@l
+/* 8007FDAC 0007ACAC  3D 80 80 39 */	lis r12, __vt__Q34nw4r3lyt8Material@ha
+/* 8007FDB0 0007ACB0  39 8C 74 78 */	addi r12, r12, __vt__Q34nw4r3lyt8Material@l
 /* 8007FDB4 0007ACB4  91 83 00 00 */	stw r12, 0(r3)
 /* 8007FDB8 0007ACB8  81 8C 00 18 */	lwz r12, 0x18(r12)
 /* 8007FDBC 0007ACBC  7D 89 03 A6 */	mtctr r12

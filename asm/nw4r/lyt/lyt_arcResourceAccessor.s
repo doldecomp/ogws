@@ -1,7 +1,16 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .data, "wa"
+.global __vt__Q34nw4r3lyt19ArcResourceAccessor
+__vt__Q34nw4r3lyt19ArcResourceAccessor:
+    .long 0
+    .long 0
+    .long __dt__Q34nw4r3lyt19ArcResourceAccessorFv
+    .long GetResource__Q34nw4r3lyt19ArcResourceAccessorFUlPCcPUl
+    .long GetFont__Q34nw4r3lyt19ArcResourceAccessorFPCc
+    .long 0
 
+.section .text, "ax"
 # FindNameResource__37@unnamed@lyt_arcResourceAccessor_cpp@FP9ARCHandlePCc
 .global FindNameResource__37$$2unnamed$$2lyt_arcResourceAccessor_cpp$$2FP9ARCHandlePCc
 FindNameResource__37$$2unnamed$$2lyt_arcResourceAccessor_cpp$$2FP9ARCHandlePCc:
@@ -160,10 +169,10 @@ __ct__Q34nw4r3lyt19ArcResourceAccessorFv:
 /* 80082BD8 0007DAD8  7C 7F 1B 78 */	mr r31, r3
 /* 80082BDC 0007DADC  4B FF FD C9 */	bl __ct__Q34nw4r3lyt16ResourceAccessorFv
 /* 80082BE0 0007DAE0  38 00 00 00 */	li r0, 0
-/* 80082BE4 0007DAE4  3C 80 80 39 */	lis r4, lbl_803974E8@ha
+/* 80082BE4 0007DAE4  3C 80 80 39 */	lis r4, __vt__Q34nw4r3lyt19ArcResourceAccessor@ha
 /* 80082BE8 0007DAE8  90 1F 00 28 */	stw r0, 0x28(r31)
 /* 80082BEC 0007DAEC  38 BF 00 28 */	addi r5, r31, 0x28
-/* 80082BF0 0007DAF0  38 84 74 E8 */	addi r4, r4, lbl_803974E8@l
+/* 80082BF0 0007DAF0  38 84 74 E8 */	addi r4, r4, __vt__Q34nw4r3lyt19ArcResourceAccessor@l
 /* 80082BF4 0007DAF4  7F E3 FB 78 */	mr r3, r31
 /* 80082BF8 0007DAF8  90 1F 00 2C */	stw r0, 0x2c(r31)
 /* 80082BFC 0007DAFC  90 9F 00 00 */	stw r4, 0(r31)
@@ -258,6 +267,9 @@ lbl_80082D14:
 /* 80082D24 0007DC24  7C 08 03 A6 */	mtlr r0
 /* 80082D28 0007DC28  38 21 00 20 */	addi r1, r1, 0x20
 /* 80082D2C 0007DC2C  4E 80 00 20 */	blr 
+
+.global __dt__Q34nw4r3lyt19ArcResourceAccessorFv
+__dt__Q34nw4r3lyt19ArcResourceAccessorFv:
 /* 80082D30 0007DC30  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80082D34 0007DC34  7C 08 02 A6 */	mflr r0
 /* 80082D38 0007DC38  2C 03 00 00 */	cmpwi r3, 0

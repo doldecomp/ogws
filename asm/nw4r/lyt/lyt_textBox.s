@@ -1,7 +1,40 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .data, "wa"
+.global __vt__Q34nw4r3lyt7TextBox
+__vt__Q34nw4r3lyt7TextBox:
+    .long 0
+    .long 0
+    .long __dt__Q34nw4r3lyt7TextBoxFv
+    .long GetRuntimeTypeInfo__Q34nw4r3lyt7TextBoxCFv
+    .long CalculateMtx__Q34nw4r3lyt4PaneFRCQ34nw4r3lyt8DrawInfo
+    .long Draw__Q34nw4r3lyt4PaneFRCQ34nw4r3lyt8DrawInfo
+    .long DrawSelf__Q34nw4r3lyt7TextBoxFRCQ34nw4r3lyt8DrawInfo
+    .long Animate__Q34nw4r3lyt4PaneFUl
+    .long AnimateSelf__Q34nw4r3lyt4PaneFUl
+    .long GetVtxColor__Q34nw4r3lyt7TextBoxCFUl
+    .long SetVtxColor__Q34nw4r3lyt7TextBoxFUlQ34nw4r2ut5Color
+    .long GetColorElement__Q34nw4r3lyt4PaneCFUl
+    .long SetColorElement__Q34nw4r3lyt4PaneFUlUc
+    .long GetVtxColorElement__Q34nw4r3lyt7TextBoxCFUl
+    .long SetVtxColorElement__Q34nw4r3lyt7TextBoxFUlUc
+    .long FindPaneByName__Q34nw4r3lyt4PaneFPCcb
+    .long FindMaterialByName__Q34nw4r3lyt4PaneFPCcb
+    .long BindAnimation__Q34nw4r3lyt4PaneFPQ34nw4r3lyt13AnimTransformb
+    .long UnbindAnimation__Q34nw4r3lyt4PaneFPQ34nw4r3lyt13AnimTransformb
+    .long UnbindAllAnimation__Q34nw4r3lyt4PaneFb
+    .long UnbindAnimationSelf__Q34nw4r3lyt4PaneFPQ34nw4r3lyt13AnimTransform
+    .long FindAnimationLink__Q34nw4r3lyt4PaneFPQ34nw4r3lyt13AnimTransform
+    .long SetAnimationEnable__Q34nw4r3lyt4PaneFPQ34nw4r3lyt13AnimTransformbb
+    .long GetMaterial__Q34nw4r3lyt4PaneCFv
+    .long LoadMtx__Q34nw4r3lyt4PaneFRCQ34nw4r3lyt8DrawInfo
+    .long AllocStringBuffer__Q34nw4r3lyt7TextBoxFUs
+    .long FreeStringBuffer__Q34nw4r3lyt7TextBoxFv
+    .long SetString__Q34nw4r3lyt7TextBoxFPCwUs
+    .long SetString__Q34nw4r3lyt7TextBoxFPCwUsUs
+    .long 0
 
+.section .text, "ax"
 # GetColor__25@unnamed@lyt_textBox_cpp@FRC11_GXColorS10
 .global GetColor__25$$2unnamed$$2lyt_textBox_cpp$$2FRC11_GXColorS10
 GetColor__25$$2unnamed$$2lyt_textBox_cpp$$2FRC11_GXColorS10:
@@ -70,9 +103,9 @@ __ct__Q34nw4r3lyt7TextBoxFPCQ44nw4r3lyt3res7TextBoxRCQ34nw4r3lyt11ResBlockSet:
 /* 8007B7B4 000766B4  7C 9D 23 78 */	mr r29, r4
 /* 8007B7B8 000766B8  7C BE 2B 78 */	mr r30, r5
 /* 8007B7BC 000766BC  4B FF DB 61 */	bl __ct__Q34nw4r3lyt4PaneFPCQ44nw4r3lyt3res4Pane
-/* 8007B7C0 000766C0  3C 60 80 39 */	lis r3, lbl_803972A0@ha
+/* 8007B7C0 000766C0  3C 60 80 39 */	lis r3, __vt__Q34nw4r3lyt7TextBox@ha
 /* 8007B7C4 000766C4  3C 80 80 08 */	lis r4, __ct__Q34nw4r2ut5ColorFv@ha
-/* 8007B7C8 000766C8  38 63 72 A0 */	addi r3, r3, lbl_803972A0@l
+/* 8007B7C8 000766C8  38 63 72 A0 */	addi r3, r3, __vt__Q34nw4r3lyt7TextBox@l
 /* 8007B7CC 000766CC  3C A0 80 01 */	lis r5, __dt__Q34nw4r2ut5ColorFv@ha
 /* 8007B7D0 000766D0  90 7C 00 00 */	stw r3, 0(r28)
 /* 8007B7D4 000766D4  38 7C 00 D8 */	addi r3, r28, 0xd8
@@ -251,8 +284,8 @@ __dt__Q34nw4r3lyt7TextBoxFv:
 /* 8007BA5C 0007695C  7C 7E 1B 78 */	mr r30, r3
 /* 8007BA60 00076960  41 82 01 48 */	beq lbl_8007BBA8
 /* 8007BA64 00076964  88 03 00 FD */	lbz r0, 0xfd(r3)
-/* 8007BA68 00076968  3C 80 80 39 */	lis r4, lbl_803972A0@ha
-/* 8007BA6C 0007696C  38 84 72 A0 */	addi r4, r4, lbl_803972A0@l
+/* 8007BA68 00076968  3C 80 80 39 */	lis r4, __vt__Q34nw4r3lyt7TextBox@ha
+/* 8007BA6C 0007696C  38 84 72 A0 */	addi r4, r4, __vt__Q34nw4r3lyt7TextBox@l
 /* 8007BA70 00076970  54 00 CF FF */	rlwinm. r0, r0, 0x19, 0x1f, 0x1f
 /* 8007BA74 00076974  90 83 00 00 */	stw r4, 0(r3)
 /* 8007BA78 00076978  41 82 00 34 */	beq lbl_8007BAAC

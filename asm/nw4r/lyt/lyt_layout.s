@@ -1,7 +1,24 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .data, "wa"
+.global __vt__Q34nw4r3lyt6Layout
+__vt__Q34nw4r3lyt6Layout:
+    .long 0
+    .long 0
+    .long __dt__Q34nw4r3lyt6LayoutFv
+    .long Build__Q34nw4r3lyt6LayoutFPCvPQ34nw4r3lyt16ResourceAccessor
+    .long CreateAnimTransform__Q34nw4r3lyt6LayoutFPCvPQ34nw4r3lyt16ResourceAccessor
+    .long BindAnimation__Q34nw4r3lyt6LayoutFPQ34nw4r3lyt13AnimTransform
+    .long UnbindAnimation__Q34nw4r3lyt6LayoutFPQ34nw4r3lyt13AnimTransform
+    .long UnbindAllAnimation__Q34nw4r3lyt6LayoutFv
+    .long SetAnimationEnable__Q34nw4r3lyt6LayoutFPQ34nw4r3lyt13AnimTransformb
+    .long CalculateMtx__Q34nw4r3lyt6LayoutFRCQ34nw4r3lyt8DrawInfo
+    .long Draw__Q34nw4r3lyt6LayoutFRCQ34nw4r3lyt8DrawInfo
+    .long Animate__Q34nw4r3lyt6LayoutFUl
+    .long SetTagProcessor__Q34nw4r3lyt6LayoutFPQ34nw4r2ut19TagProcessorBase$$0w$$1
+    .long 0
 
+.section .text, "ax"
 # SetTagProcessorImpl__24@unnamed@lyt_layout_cpp@FPQ34nw4r3lyt4PanePQ34nw4r2ut19TagProcessorBase<w>
 .global SetTagProcessorImpl__24$$2unnamed$$2lyt_layout_cpp$$2FPQ34nw4r3lyt4PanePQ34nw4r2ut19TagProcessorBase$$0w$$1
 SetTagProcessorImpl__24$$2unnamed$$2lyt_layout_cpp$$2FPQ34nw4r3lyt4PanePQ34nw4r2ut19TagProcessorBase$$0w$$1:
@@ -140,11 +157,11 @@ lbl_8007A6CC:
 __ct__Q34nw4r3lyt6LayoutFv:
 /* 8007A6EC 000755EC  38 00 00 00 */	li r0, 0
 /* 8007A6F0 000755F0  C0 02 8A 70 */	lfs f0, lbl_804C0490-_SDA2_BASE_(r2)
-/* 8007A6F4 000755F4  3C 80 80 39 */	lis r4, lbl_80397200@ha
+/* 8007A6F4 000755F4  3C 80 80 39 */	lis r4, __vt__Q34nw4r3lyt6Layout@ha
 /* 8007A6F8 000755F8  90 03 00 08 */	stw r0, 8(r3)
 /* 8007A6FC 000755FC  38 A3 00 08 */	addi r5, r3, 8
 /* 8007A700 00075600  90 03 00 0C */	stw r0, 0xc(r3)
-/* 8007A704 00075604  38 84 72 00 */	addi r4, r4, lbl_80397200@l
+/* 8007A704 00075604  38 84 72 00 */	addi r4, r4, __vt__Q34nw4r3lyt6Layout@l
 /* 8007A708 00075608  90 83 00 00 */	stw r4, 0(r3)
 /* 8007A70C 0007560C  90 03 00 04 */	stw r0, 4(r3)
 /* 8007A710 00075610  90 A3 00 08 */	stw r5, 8(r3)
@@ -168,8 +185,8 @@ __dt__Q34nw4r3lyt6LayoutFv:
 /* 8007A74C 0007564C  7C 9C 23 78 */	mr r28, r4
 /* 8007A750 00075650  41 82 00 E0 */	beq lbl_8007A830
 /* 8007A754 00075654  80 03 00 14 */	lwz r0, 0x14(r3)
-/* 8007A758 00075658  3C 80 80 39 */	lis r4, lbl_80397200@ha
-/* 8007A75C 0007565C  38 84 72 00 */	addi r4, r4, lbl_80397200@l
+/* 8007A758 00075658  3C 80 80 39 */	lis r4, __vt__Q34nw4r3lyt6Layout@ha
+/* 8007A75C 0007565C  38 84 72 00 */	addi r4, r4, __vt__Q34nw4r3lyt6Layout@l
 /* 8007A760 00075660  2C 00 00 00 */	cmpwi r0, 0
 /* 8007A764 00075664  90 83 00 00 */	stw r4, 0(r3)
 /* 8007A768 00075668  41 82 00 1C */	beq lbl_8007A784
