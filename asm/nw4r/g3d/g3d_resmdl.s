@@ -740,8 +740,8 @@ lbl_80053058:
 /* 80053058 0004DF58  38 60 00 00 */	li r3, 0
 /* 8005305C 0004DF5C  4E 80 00 20 */	blr 
 
-.global func_80053060
-func_80053060:
+.global Bind__Q34nw4r3g3d6ResMdlFQ34nw4r3g3d7ResFile
+Bind__Q34nw4r3g3d6ResMdlFQ34nw4r3g3d7ResFile:
 /* 80053060 0004DF60  94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 80053064 0004DF64  7C 08 02 A6 */	mflr r0
 /* 80053068 0004DF68  90 01 00 34 */	stw r0, 0x34(r1)
@@ -823,8 +823,8 @@ lbl_80053150:
 /* 80053164 0004E064  38 21 00 30 */	addi r1, r1, 0x30
 /* 80053168 0004E068  4E 80 00 20 */	blr 
 
-.global func_8005316C
-func_8005316C:
+.global Release__Q34nw4r3g3d6ResMdlFv
+Release__Q34nw4r3g3d6ResMdlFv:
 /* 8005316C 0004E06C  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 80053170 0004E070  7C 08 02 A6 */	mflr r0
 /* 80053174 0004E074  90 01 00 24 */	stw r0, 0x24(r1)
@@ -896,8 +896,8 @@ lbl_80053234:
 /* 8005324C 0004E14C  38 21 00 20 */	addi r1, r1, 0x20
 /* 80053250 0004E150  4E 80 00 20 */	blr 
 
-.global func_80053254
-func_80053254:
+.global Init__Q34nw4r3g3d6ResMdlFv
+Init__Q34nw4r3g3d6ResMdlFv:
 /* 80053254 0004E154  94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 80053258 0004E158  7C 08 02 A6 */	mflr r0
 /* 8005325C 0004E15C  90 01 00 34 */	stw r0, 0x34(r1)
@@ -1243,8 +1243,8 @@ lbl_80053674:
 /* 8005368C 0004E58C  38 21 00 30 */	addi r1, r1, 0x30
 /* 80053690 0004E590  4E 80 00 20 */	blr 
 
-.global func_80053694
-func_80053694:
+.global Terminate__Q34nw4r3g3d6ResMdlFv
+Terminate__Q34nw4r3g3d6ResMdlFv:
 /* 80053694 0004E594  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 80053698 0004E598  7C 08 02 A6 */	mflr r0
 /* 8005369C 0004E59C  90 01 00 24 */	stw r0, 0x24(r1)

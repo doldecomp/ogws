@@ -65,6 +65,21 @@ namespace nw4r
 			struct SoundArchiveFileReader;
 		}
 	}
+	
+	namespace g3d
+	{
+		struct ResFile;
+		struct ResMdl;
+		struct ResPltt;
+		struct ResTex;
+		struct ResAnmChr;
+		struct ResAnmVis;
+		struct ResAnmClr;
+		struct ResAnmTexPat;
+		struct ResAnmTexSrt;
+		struct ResAnmShp;
+		struct ResAnmScn;
+	}
 }
 
 typedef int UNKWORD;

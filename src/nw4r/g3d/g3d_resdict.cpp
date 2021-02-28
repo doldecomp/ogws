@@ -5,13 +5,13 @@ namespace nw4r
 {
     namespace g3d
     {
-        const ResDicEntry * ResDic::Get(ResName rn) const
+        ResDicEntry * ResDic::Get(ResName rn) const
         {
             u32 len = rn.GetLength();
             const char *name = rn.GetName();
-            const ResDicData &dict = this->mDict.ref();
-            const ResDicEntry *r5 = &dict.mEntries[0];
-            const ResDicEntry *r31 = &dict.mEntries[r5->unk_index];
+            ResDicData &dict = this->mDict.ref();
+            ResDicEntry *r5 = &dict.mEntries[0];
+            ResDicEntry *r31 = &dict.mEntries[r5->unk_index];
 
             while (r5->INT_0x0 > r31->INT_0x0)
             {
@@ -39,11 +39,11 @@ namespace nw4r
             return NULL;
         }
 
-        const ResDicEntry * ResDic::Get(const char* name, u32 len) const
+        ResDicEntry * ResDic::Get(const char* name, u32 len) const
         {
-            const ResDicData &dict = this->mDict.ref();
-            const ResDicEntry *r7 = &dict.mEntries[0];
-            const ResDicEntry *r31 = &dict.mEntries[r7->unk_index];
+            ResDicData &dict = this->mDict.ref();
+            ResDicEntry *r7 = &dict.mEntries[0];
+            ResDicEntry *r31 = &dict.mEntries[r7->unk_index];
 
             while (r7->INT_0x0 > r31->INT_0x0)
             {
@@ -71,25 +71,25 @@ namespace nw4r
             return NULL;
         }
 
-        const void * ResDic::operator[](const char *key) const
+        void * ResDic::operator[](const char *key) const
         {
             if (mDict.IsValid() && key)
             {
-                const ResDicEntry *entry = Get(key, strlen(key));
+                ResDicEntry *entry = Get(key, strlen(key));
                 
-				if (entry) return mDict.ofs_to_ptr_raw<void>(entry->INT_0xC);
+				if (entry) return (void *)mDict.ofs_to_ptr_raw<void>(entry->INT_0xC);
             }
 
             return NULL;
         }
 
-        const void * ResDic::operator[](ResName rn) const
+        void * ResDic::operator[](ResName rn) const
         {
 			if (mDict.IsValid() && rn.mRes.IsValid())
             {
-				const ResDicEntry *entry = Get(rn.mRes.ptr());
+				ResDicEntry *entry = Get(rn.mRes.ptr());
                 
-				if (entry) return mDict.ofs_to_ptr_raw<void>(entry->INT_0xC);
+				if (entry) return (void *)mDict.ofs_to_ptr_raw<void>(entry->INT_0xC);
             }
 			
             return NULL;
@@ -99,7 +99,7 @@ namespace nw4r
         {
             if (mDict.IsValid() && rn.mRes.IsValid())
             {
-                const ResDicEntry *entry = Get(rn.mRes.ptr());
+                ResDicEntry *entry = Get(rn.mRes.ptr());
 				
                 if (entry) return entry - (mDict.ref().mEntries + 1);
             }
