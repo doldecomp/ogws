@@ -1,7 +1,44 @@
 .include "macros.inc"
 
-.section .text, "ax"  # 0x800076E0 - 0x80355080 
+.section .data, "wa"
+.global __vt__Q44nw4r3snd6detail9WaveSound
+__vt__Q44nw4r3snd6detail9WaveSound:
+	.long 0
+	.long 0
+	.long GetRuntimeTypeInfo__Q44nw4r3snd6detail9WaveSoundCFv
+	.long __dt__Q44nw4r3snd6detail9WaveSoundFv
+	.long Update__Q44nw4r3snd6detail10BasicSoundFv
+	.long StartPrepared__Q44nw4r3snd6detail10BasicSoundFv
+	.long Stop__Q44nw4r3snd6detail10BasicSoundFi
+	.long Pause__Q44nw4r3snd6detail10BasicSoundFbi
+	.long SetAutoStopCounter__Q44nw4r3snd6detail10BasicSoundFi
+	.long FadeIn__Q44nw4r3snd6detail10BasicSoundFi
+	.long Shutdown__Q44nw4r3snd6detail9WaveSoundFv
+	.long IsPrepared__Q44nw4r3snd6detail9WaveSoundCFv
+	.long IsPause__Q44nw4r3snd6detail10BasicSoundCFv
+	.long SetInitialVolume__Q44nw4r3snd6detail10BasicSoundFf
+	.long SetVolume__Q44nw4r3snd6detail10BasicSoundFfi
+	.long SetPitch__Q44nw4r3snd6detail10BasicSoundFf
+	.long SetPan__Q44nw4r3snd6detail10BasicSoundFf
+	.long SetSurroundPan__Q44nw4r3snd6detail10BasicSoundFf
+	.long SetLpfFreq__Q44nw4r3snd6detail10BasicSoundFf
+	.long SetPlayerPriority__Q44nw4r3snd6detail9WaveSoundFi
+	.long SetRemoteFilter__Q44nw4r3snd6detail10BasicSoundFi
+	.long SetPanMode__Q44nw4r3snd6detail10BasicSoundFQ44nw4r3snd6detail7PanMode
+	.long SetPanCurve__Q44nw4r3snd6detail10BasicSoundFQ44nw4r3snd6detail8PanCurve
+	.long IsAttachedTempSpecialHandle__Q44nw4r3snd6detail9WaveSoundFv
+	.long DetachTempSpecialHandle__Q44nw4r3snd6detail9WaveSoundFv
+	.long InitParam__Q44nw4r3snd6detail10BasicSoundFv
+	.long GetBasicPlayer__Q44nw4r3snd6detail9WaveSoundFv
+	.long GetBasicPlayer__Q44nw4r3snd6detail9WaveSoundCFv
+.balign 0x8
 
+.section .sbss, "wa"
+.global lbl_804BEB38
+lbl_804BEB38:
+	.skip 0x8
+
+.section .text, "ax"  # 0x800076E0 - 0x80355080 
 # __ct__Q44nw4r3snd6detail9WaveSoundFPQ44nw4r3snd6detail50SoundInstanceManager<Q44nw4r3snd6detail9WaveSound>
 .global __ct__Q44nw4r3snd6detail9WaveSoundFPQ44nw4r3snd6detail50SoundInstanceManager$$0Q44nw4r3snd6detail9WaveSound$$1
 __ct__Q44nw4r3snd6detail9WaveSoundFPQ44nw4r3snd6detail50SoundInstanceManager$$0Q44nw4r3snd6detail9WaveSound$$1:

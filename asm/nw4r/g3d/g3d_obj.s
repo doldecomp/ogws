@@ -1,7 +1,25 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .data, "wa"
+.global __vt__Q34nw4r3g3d6G3dObj
+__vt__Q34nw4r3g3d6G3dObj:
+    .long 0
+    .long 0
+    .long IsDerivedFrom__Q34nw4r3g3d6G3dObjCFQ44nw4r3g3d6G3dObj7TypeObj
+    .long 0
+    .long __dt__Q34nw4r3g3d6G3dObjFv
+    .long GetTypeObj__Q34nw4r3g3d6G3dObjCFv
+    .long GetTypeName__Q34nw4r3g3d6G3dObjCFv
+    .long 0
 
+.section .rodata, "a"
+.global lbl_803782F0
+lbl_803782F0:
+	.long 0x07
+	.string "G3dObj"
+	.balign 8
+
+.section .text, "ax"
 .global __dt__Q34nw4r3g3d6G3dObjFv
 __dt__Q34nw4r3g3d6G3dObjFv:
 /* 800634E8 0005E3E8  94 21 FF F0 */	stwu r1, -0x10(r1)

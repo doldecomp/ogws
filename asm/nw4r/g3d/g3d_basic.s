@@ -1,7 +1,12 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .sdata2, "a"
+.global $$26533
+$$26533:
+	.single 0e1
+	.balign 8
 
+.section .text, "ax"
 .global CalcWorldMtx_Basic__Q44nw4r3g3d6detail3dccFPQ34nw4r4math5MTX34PQ34nw4r4math4VEC3PCQ34nw4r4math5MTX34PCQ34nw4r4math4VEC3UlPCQ34nw4r3g3d12ChrAnmResult
 CalcWorldMtx_Basic__Q44nw4r3g3d6detail3dccFPQ34nw4r4math5MTX34PQ34nw4r4math4VEC3PCQ34nw4r4math5MTX34PCQ34nw4r4math4VEC3UlPCQ34nw4r3g3d12ChrAnmResult:
 /* 8006D5F8 000684F8  94 21 FF A0 */	stwu r1, -0x60(r1)
@@ -15,7 +20,7 @@ CalcWorldMtx_Basic__Q44nw4r3g3d6detail3dccFPQ34nw4r4math5MTX34PQ34nw4r4math4VEC3
 /* 8006D618 00068518  7D 1D 43 78 */	mr r29, r8
 /* 8006D61C 0006851C  57 E0 07 39 */	rlwinm. r0, r31, 0, 0x1c, 0x1c
 /* 8006D620 00068520  41 82 00 1C */	beq lbl_8006D63C
-/* 8006D624 00068524  C0 02 89 A8 */	lfs f0, lbl_804C03C8-_SDA2_BASE_(r2)
+/* 8006D624 00068524  C0 02 89 A8 */	lfs f0, $$26533-_SDA2_BASE_(r2)
 /* 8006D628 00068528  64 FE 40 00 */	oris r30, r7, 0x4000
 /* 8006D62C 0006852C  D0 04 00 08 */	stfs f0, 8(r4)
 /* 8006D630 00068530  D0 04 00 04 */	stfs f0, 4(r4)
@@ -104,17 +109,3 @@ lbl_8006D748:
 /* 8006D754 00068654  7C 08 03 A6 */	mtlr r0
 /* 8006D758 00068658  38 21 00 60 */	addi r1, r1, 0x60
 /* 8006D75C 0006865C  4E 80 00 20 */	blr 
-/* 8006D760 00068660  C0 24 00 04 */	lfs f1, 4(r4)
-/* 8006D764 00068664  C0 02 89 B4 */	lfs f0, lbl_804C03D4-_SDA2_BASE_(r2)
-/* 8006D768 00068668  C0 42 89 B0 */	lfs f2, lbl_804C03D0-_SDA2_BASE_(r2)
-/* 8006D76C 0006866C  EC 00 08 28 */	fsubs f0, f0, f1
-/* 8006D770 00068670  C0 64 00 00 */	lfs f3, 0(r4)
-/* 8006D774 00068674  D0 43 00 04 */	stfs f2, 4(r3)
-/* 8006D778 00068678  D0 63 00 00 */	stfs f3, 0(r3)
-/* 8006D77C 0006867C  D0 43 00 08 */	stfs f2, 8(r3)
-/* 8006D780 00068680  D0 43 00 0C */	stfs f2, 0xc(r3)
-/* 8006D784 00068684  D0 43 00 10 */	stfs f2, 0x10(r3)
-/* 8006D788 00068688  D0 23 00 14 */	stfs f1, 0x14(r3)
-/* 8006D78C 0006868C  D0 43 00 18 */	stfs f2, 0x18(r3)
-/* 8006D790 00068690  D0 03 00 1C */	stfs f0, 0x1c(r3)
-/* 8006D794 00068694  4E 80 00 20 */	blr 

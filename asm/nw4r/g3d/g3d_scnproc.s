@@ -1,7 +1,37 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .sdata2, "a"
+.global lbl_804C0428
+lbl_804C0428:
+	.single 0e1
+	.balign 8
 
+.section .rodata, "a"
+.global lbl_80378C08
+lbl_80378C08:
+    .long 8
+	.string "ScnProc"
+	.balign 8
+
+.section .data, "wa"
+.global lbl_80397108
+lbl_80397108:
+    .long 0
+    .long 0
+    .long IsDerivedFrom__Q34nw4r3g3d7ScnProcCFQ44nw4r3g3d6G3dObj7TypeObj
+    .long 0x80077d3c
+    .long 0x80077ee8
+    .long GetTypeObj__Q34nw4r3g3d7ScnProcCFv
+    .long GetTypeName__Q34nw4r3g3d7ScnProcCFv
+    .long ForEach__Q34nw4r3g3d7ScnLeafFPFPQ34nw4r3g3d6ScnObjPv_Q44nw4r3g3d6ScnObj13ForEachResultPvb
+    .long SetScnObjOption__Q34nw4r3g3d7ScnLeafFUlUl
+    .long GetScnObjOption__Q34nw4r3g3d7ScnLeafCFUlPUl
+    .long GetValueForSortOpa__Q34nw4r3g3d6ScnObjCFv
+    .long GetValueForSortXlu__Q34nw4r3g3d6ScnObjCFv
+    .long CalcWorldMtx__Q34nw4r3g3d7ScnLeafFPCQ34nw4r4math5MTX34PUl
+    .long 0
+
+.section .text, "ax"
 .global func_80077C38
 func_80077C38:
 /* 80077C38 00072B38  94 21 FF D0 */	stwu r1, -0x30(r1)

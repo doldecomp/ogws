@@ -1,7 +1,74 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .sdata2, "a"
+.global lbl_804C0470
+lbl_804C0470:
+	.single 0e0
+.global lbl_804C0474
+lbl_804C0474:
+	.single 0e1
+.global lbl_804C0478
+lbl_804C0478:
+	.single 0e0.017453292
+.global lbl_804C047C
+lbl_804C047C:
+	.single 0e0.003921569
+.global lbl_804C0480
+lbl_804C0480:
+	.long 0x43300000
+	.long 0x00000000
+.global lbl_804C0488
+lbl_804C0488:
+	.single 0e0.5
+	.balign 8
 
+.section .sbss, "wa"
+.global typeInfo__Q34nw4r3lyt4Pane
+typeInfo__Q34nw4r3lyt4Pane:
+	.skip 0x4
+	.balign 8
+
+.section .sdata, "wa"
+# NW4R_LYT_Version___22@unnamed@lyt_pane_cpp@
+.global NW4R_LYT_Version___22$$2unnamed$$2lyt_pane_cpp$$2
+NW4R_LYT_Version___22$$2unnamed$$2lyt_pane_cpp$$2:
+	.long lbl_80397140
+.balign 0x8
+
+.section .data, "wa"
+.global lbl_80397140
+lbl_80397140:
+.string "<< NW4R    - LYT \tfinal   build: Jun  8 2007 11:17:26 (0x4199_60831) >>"
+.global __vt__Q34nw4r3lyt4Pane
+__vt__Q34nw4r3lyt4Pane:
+    .long 0
+    .long 0
+    .long __dt__Q34nw4r3lyt4PaneFv
+    .long GetRuntimeTypeInfo__Q34nw4r3lyt4PaneCFv
+    .long CalculateMtx__Q34nw4r3lyt4PaneFRCQ34nw4r3lyt8DrawInfo
+    .long Draw__Q34nw4r3lyt4PaneFRCQ34nw4r3lyt8DrawInfo
+    .long DrawSelf__Q34nw4r3lyt4PaneFRCQ34nw4r3lyt8DrawInfo
+    .long Animate__Q34nw4r3lyt4PaneFUl
+    .long AnimateSelf__Q34nw4r3lyt4PaneFUl
+    .long GetVtxColor__Q34nw4r3lyt4PaneCFUl
+    .long SetVtxColor__Q34nw4r3lyt4PaneFUlQ34nw4r2ut5Color
+    .long GetColorElement__Q34nw4r3lyt4PaneCFUl
+    .long SetColorElement__Q34nw4r3lyt4PaneFUlUc
+    .long GetVtxColorElement__Q34nw4r3lyt4PaneCFUl
+    .long SetVtxColorElement__Q34nw4r3lyt4PaneFUlUc
+    .long FindPaneByName__Q34nw4r3lyt4PaneFPCcb
+    .long FindMaterialByName__Q34nw4r3lyt4PaneFPCcb
+    .long BindAnimation__Q34nw4r3lyt4PaneFPQ34nw4r3lyt13AnimTransformb
+    .long UnbindAnimation__Q34nw4r3lyt4PaneFPQ34nw4r3lyt13AnimTransformb
+    .long UnbindAllAnimation__Q34nw4r3lyt4PaneFb
+    .long UnbindAnimationSelf__Q34nw4r3lyt4PaneFPQ34nw4r3lyt13AnimTransform
+    .long FindAnimationLink__Q34nw4r3lyt4PaneFPQ34nw4r3lyt13AnimTransform
+    .long SetAnimationEnable__Q34nw4r3lyt4PaneFPQ34nw4r3lyt13AnimTransformbb
+    .long GetMaterial__Q34nw4r3lyt4PaneCFv
+    .long LoadMtx__Q34nw4r3lyt4PaneFRCQ34nw4r3lyt8DrawInfo
+    .long 0
+
+.section .text, "ax"
 .global LytInit__Q24nw4r3lytFv
 LytInit__Q24nw4r3lytFv:
 /* 800792C8 000741C8  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -140,7 +207,7 @@ lbl_8007948C:
 /* 800794C0 000743C0  81 8C 00 08 */	lwz r12, 8(r12)
 /* 800794C4 000743C4  7D 89 03 A6 */	mtctr r12
 /* 800794C8 000743C8  4E 80 04 21 */	bctrl 
-/* 800794CC 000743CC  80 6D 98 00 */	lwz r3, lbl_804BEB80-_SDA_BASE_(r13)
+/* 800794CC 000743CC  80 6D 98 00 */	lwz r3, mspAllocator__Q34nw4r3lyt6Layout-_SDA_BASE_(r13)
 /* 800794D0 000743D0  7F A4 EB 78 */	mr r4, r29
 /* 800794D4 000743D4  48 06 DF C9 */	bl func_800E749C
 lbl_800794D8:
@@ -163,7 +230,7 @@ lbl_800794D8:
 /* 80079518 00074418  81 8C 00 08 */	lwz r12, 8(r12)
 /* 8007951C 0007441C  7D 89 03 A6 */	mtctr r12
 /* 80079520 00074420  4E 80 04 21 */	bctrl 
-/* 80079524 00074424  80 6D 98 00 */	lwz r3, lbl_804BEB80-_SDA_BASE_(r13)
+/* 80079524 00074424  80 6D 98 00 */	lwz r3, mspAllocator__Q34nw4r3lyt6Layout-_SDA_BASE_(r13)
 /* 80079528 00074428  80 9B 00 28 */	lwz r4, 0x28(r27)
 /* 8007952C 0007442C  48 06 DF 71 */	bl func_800E749C
 lbl_80079530:
@@ -1145,14 +1212,14 @@ GetMaterial__Q34nw4r3lyt4PaneCFv:
 /* 8007A210 00075110  80 63 00 28 */	lwz r3, 0x28(r3)
 /* 8007A214 00075114  4E 80 00 20 */	blr
 
-.global func_8007A218
-func_8007A218:
-/* 8007A218 00075118  38 6D 97 F8 */	addi r3, r13, lbl_804BEB78-_SDA_BASE_
+.global GetRuntimeTypeInfo__Q34nw4r3lyt4PaneCFv
+GetRuntimeTypeInfo__Q34nw4r3lyt4PaneCFv:
+/* 8007A218 00075118  38 6D 97 F8 */	addi r3, r13, typeInfo__Q34nw4r3lyt4Pane-_SDA_BASE_
 /* 8007A21C 0007511C  4E 80 00 20 */	blr 
 
 # __sinit_\lyt_pane_cpp
 .global __sinit_$$3lyt_pane_cpp
 __sinit_$$3lyt_pane_cpp:
 /* 8007A220 00075120  38 00 00 00 */	li r0, 0
-/* 8007A224 00075124  90 0D 97 F8 */	stw r0, lbl_804BEB78-_SDA_BASE_(r13)
+/* 8007A224 00075124  90 0D 97 F8 */	stw r0, typeInfo__Q34nw4r3lyt4Pane-_SDA_BASE_(r13)
 /* 8007A228 00075128  4E 80 00 20 */	blr 

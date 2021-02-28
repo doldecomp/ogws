@@ -1,7 +1,72 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .sdata2, "a"
+.global lbl_804C04B8
+lbl_804C04B8:
+	.single 0e0
+	.balign 8
+.global lbl_804C04C0
+lbl_804C04C0:
+	.long 0x43300000
+	.long 0x00000000
+.global lbl_804C04C8
+lbl_804C04C8:
+	.long 0x43300000
+	.long 0x80000000
 
+.section .sbss, "wa"
+.global typeInfo__Q34nw4r3lyt6Window
+typeInfo__Q34nw4r3lyt6Window:
+	.skip 0x4
+	.balign 8
+
+.section .data, "wa"
+# Length = 60
+# Likely not actually 10x6 but it was grouped for readability
+# Possibly "flipInfos$7807"
+.global lbl_80397318
+lbl_80397318:
+    .byte 00, 00, 01, 00, 00, 01, 01, 01, 00, 01
+    .byte 01, 00, 00, 00, 01, 01, 00, 01, 00, 01
+    .byte 00, 01, 01, 01, 00, 00, 01, 00, 00, 01
+    .byte 00, 01, 00, 00, 01, 01, 01, 00, 01, 00
+    .byte 01, 01, 00, 01, 01, 00, 00, 00, 00, 01
+    .byte 01, 00, 01, 01, 00, 00, 00, 01, 01, 00
+.global __vt__Q34nw4r3lyt6Window
+__vt__Q34nw4r3lyt6Window:
+    .long 0
+    .long 0
+    .long __dt__Q34nw4r3lyt6WindowFv
+    .long GetRuntimeTypeInfo__Q34nw4r3lyt6WindowCFv
+    .long CalculateMtx__Q34nw4r3lyt4PaneFRCQ34nw4r3lyt8DrawInfo
+    .long Draw__Q34nw4r3lyt4PaneFRCQ34nw4r3lyt8DrawInfo
+    .long DrawSelf__Q34nw4r3lyt6WindowFRCQ34nw4r3lyt8DrawInfo
+    .long Animate__Q34nw4r3lyt4PaneFUl
+    .long AnimateSelf__Q34nw4r3lyt6WindowFUl
+    .long GetVtxColor__Q34nw4r3lyt6WindowCFUl
+    .long SetVtxColor__Q34nw4r3lyt6WindowFUlQ34nw4r2ut5Color
+    .long GetColorElement__Q34nw4r3lyt4PaneCFUl
+    .long SetColorElement__Q34nw4r3lyt4PaneFUlUc
+    .long GetVtxColorElement__Q34nw4r3lyt6WindowCFUl
+    .long SetVtxColorElement__Q34nw4r3lyt6WindowFUlUc
+    .long FindPaneByName__Q34nw4r3lyt4PaneFPCcb
+    .long FindMaterialByName__Q34nw4r3lyt6WindowFPCcb
+    .long BindAnimation__Q34nw4r3lyt4PaneFPQ34nw4r3lyt13AnimTransformb
+    .long UnbindAnimation__Q34nw4r3lyt4PaneFPQ34nw4r3lyt13AnimTransformb
+    .long UnbindAllAnimation__Q34nw4r3lyt4PaneFb
+    .long UnbindAnimationSelf__Q34nw4r3lyt6WindowFPQ34nw4r3lyt13AnimTransform
+    .long FindAnimationLink__Q34nw4r3lyt6WindowFPQ34nw4r3lyt13AnimTransform
+    .long SetAnimationEnable__Q34nw4r3lyt6WindowFPQ34nw4r3lyt13AnimTransformbb
+    .long GetMaterial__Q34nw4r3lyt4PaneCFv
+    .long LoadMtx__Q34nw4r3lyt4PaneFRCQ34nw4r3lyt8DrawInfo
+    .long GetContentMaterial__Q34nw4r3lyt6WindowCFv
+    .long GetFrameMaterial__Q34nw4r3lyt6WindowCFUl
+    .long DrawContent__Q34nw4r3lyt6WindowFRCQ34nw4r4math4VEC2RCQ34nw4r3lyt15WindowFrameSizeUc
+    .long DrawFrame__Q34nw4r3lyt6WindowFRCQ34nw4r4math4VEC2RCQ44nw4r3lyt6Window5FrameRCQ34nw4r3lyt15WindowFrameSizeUc
+    .long DrawFrame4__Q34nw4r3lyt6WindowFRCQ34nw4r4math4VEC2PCQ44nw4r3lyt6Window5FrameRCQ34nw4r3lyt15WindowFrameSizeUc
+    .long DrawFrame8__Q34nw4r3lyt6WindowFRCQ34nw4r4math4VEC2PCQ44nw4r3lyt6Window5FrameRCQ34nw4r3lyt15WindowFrameSizeUc
+
+.section .text, "ax"
 .global __ct__Q34nw4r3lyt6WindowFPCQ44nw4r3lyt3res6WindowRCQ34nw4r3lyt11ResBlockSet
 __ct__Q34nw4r3lyt6WindowFPCQ44nw4r3lyt3res6WindowRCQ34nw4r3lyt11ResBlockSet:
 /* 8007C364 00077264  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -13,9 +78,9 @@ __ct__Q34nw4r3lyt6WindowFPCQ44nw4r3lyt3res6WindowRCQ34nw4r3lyt11ResBlockSet:
 /* 8007C37C 0007727C  7C 99 23 78 */	mr r25, r4
 /* 8007C380 00077280  7C BA 2B 78 */	mr r26, r5
 /* 8007C384 00077284  4B FF CF 99 */	bl __ct__Q34nw4r3lyt4PaneFPCQ44nw4r3lyt3res4Pane
-/* 8007C388 00077288  3C 60 80 39 */	lis r3, lbl_80397354@ha
+/* 8007C388 00077288  3C 60 80 39 */	lis r3, __vt__Q34nw4r3lyt6Window@ha
 /* 8007C38C 0007728C  3C 80 80 08 */	lis r4, __ct__Q34nw4r2ut5ColorFv@ha
-/* 8007C390 00077290  38 63 73 54 */	addi r3, r3, lbl_80397354@l
+/* 8007C390 00077290  38 63 73 54 */	addi r3, r3, __vt__Q34nw4r3lyt6Window@l
 /* 8007C394 00077294  3C A0 80 01 */	lis r5, __dt__Q34nw4r2ut5ColorFv@ha
 /* 8007C398 00077298  3B 78 00 E4 */	addi r27, r24, 0xe4
 /* 8007C39C 0007729C  90 78 00 00 */	stw r3, 0(r24)
@@ -66,7 +131,7 @@ lbl_8007C42C:
 /* 8007C44C 0007734C  57 65 06 3E */	clrlwi r5, r27, 0x18
 /* 8007C450 00077350  48 00 6B CD */	bl Copy__Q44nw4r3lyt6detail11TexCoordAryFPCvUc
 lbl_8007C454:
-/* 8007C454 00077354  80 6D 98 00 */	lwz r3, lbl_804BEB80-_SDA_BASE_(r13)
+/* 8007C454 00077354  80 6D 98 00 */	lwz r3, mspAllocator__Q34nw4r3lyt6Layout-_SDA_BASE_(r13)
 /* 8007C458 00077358  38 80 00 5C */	li r4, 0x5c
 /* 8007C45C 0007735C  48 06 B0 31 */	bl func_800E748C
 /* 8007C460 00077360  2C 03 00 00 */	cmpwi r3, 0
@@ -88,7 +153,7 @@ lbl_8007C48C:
 /* 8007C498 00077398  2C 00 00 00 */	cmpwi r0, 0
 /* 8007C49C 0007739C  93 F8 00 FC */	stw r31, 0xfc(r24)
 /* 8007C4A0 000773A0  41 82 00 B0 */	beq lbl_8007C550
-/* 8007C4A4 000773A4  80 6D 98 00 */	lwz r3, lbl_804BEB80-_SDA_BASE_(r13)
+/* 8007C4A4 000773A4  80 6D 98 00 */	lwz r3, mspAllocator__Q34nw4r3lyt6Layout-_SDA_BASE_(r13)
 /* 8007C4A8 000773A8  54 04 1D 78 */	rlwinm r4, r0, 3, 0x15, 0x1c
 /* 8007C4AC 000773AC  48 06 AF E1 */	bl func_800E748C
 /* 8007C4B0 000773B0  2C 03 00 00 */	cmpwi r3, 0
@@ -111,7 +176,7 @@ lbl_8007C4D8:
 /* 8007C4F0 000773F0  80 18 00 FC */	lwz r0, 0xfc(r24)
 /* 8007C4F4 000773F4  7C 60 EA 14 */	add r3, r0, r29
 /* 8007C4F8 000773F8  93 E3 00 04 */	stw r31, 4(r3)
-/* 8007C4FC 000773FC  80 6D 98 00 */	lwz r3, lbl_804BEB80-_SDA_BASE_(r13)
+/* 8007C4FC 000773FC  80 6D 98 00 */	lwz r3, mspAllocator__Q34nw4r3lyt6Layout-_SDA_BASE_(r13)
 /* 8007C500 00077400  48 06 AF 8D */	bl func_800E748C
 /* 8007C504 00077404  2C 03 00 00 */	cmpwi r3, 0
 /* 8007C508 00077408  41 82 00 30 */	beq lbl_8007C538
@@ -158,8 +223,8 @@ __dt__Q34nw4r3lyt6WindowFv:
 /* 8007C590 00077490  7C 7C 1B 78 */	mr r28, r3
 /* 8007C594 00077494  41 82 00 FC */	beq lbl_8007C690
 /* 8007C598 00077498  80 03 00 FC */	lwz r0, 0xfc(r3)
-/* 8007C59C 0007749C  3C 80 80 39 */	lis r4, lbl_80397354@ha
-/* 8007C5A0 000774A0  38 84 73 54 */	addi r4, r4, lbl_80397354@l
+/* 8007C59C 0007749C  3C 80 80 39 */	lis r4, __vt__Q34nw4r3lyt6Window@ha
+/* 8007C5A0 000774A0  38 84 73 54 */	addi r4, r4, __vt__Q34nw4r3lyt6Window@l
 /* 8007C5A4 000774A4  2C 00 00 00 */	cmpwi r0, 0
 /* 8007C5A8 000774A8  90 83 00 00 */	stw r4, 0(r3)
 /* 8007C5AC 000774AC  41 82 00 64 */	beq lbl_8007C610
@@ -176,7 +241,7 @@ lbl_8007C5BC:
 /* 8007C5D4 000774D4  7D 89 03 A6 */	mtctr r12
 /* 8007C5D8 000774D8  4E 80 04 21 */	bctrl 
 /* 8007C5DC 000774DC  80 1C 00 FC */	lwz r0, 0xfc(r28)
-/* 8007C5E0 000774E0  80 6D 98 00 */	lwz r3, lbl_804BEB80-_SDA_BASE_(r13)
+/* 8007C5E0 000774E0  80 6D 98 00 */	lwz r3, mspAllocator__Q34nw4r3lyt6Layout-_SDA_BASE_(r13)
 /* 8007C5E4 000774E4  7C 80 FA 14 */	add r4, r0, r31
 /* 8007C5E8 000774E8  80 84 00 04 */	lwz r4, 4(r4)
 /* 8007C5EC 000774EC  48 06 AE B1 */	bl func_800E749C
@@ -186,7 +251,7 @@ lbl_8007C5F8:
 /* 8007C5F8 000774F8  88 1C 01 00 */	lbz r0, 0x100(r28)
 /* 8007C5FC 000774FC  7C 1E 00 00 */	cmpw r30, r0
 /* 8007C600 00077500  41 80 FF BC */	blt lbl_8007C5BC
-/* 8007C604 00077504  80 6D 98 00 */	lwz r3, lbl_804BEB80-_SDA_BASE_(r13)
+/* 8007C604 00077504  80 6D 98 00 */	lwz r3, mspAllocator__Q34nw4r3lyt6Layout-_SDA_BASE_(r13)
 /* 8007C608 00077508  80 9C 00 FC */	lwz r4, 0xfc(r28)
 /* 8007C60C 0007750C  48 06 AE 91 */	bl func_800E749C
 lbl_8007C610:
@@ -201,7 +266,7 @@ lbl_8007C610:
 /* 8007C630 00077530  81 8C 00 08 */	lwz r12, 8(r12)
 /* 8007C634 00077534  7D 89 03 A6 */	mtctr r12
 /* 8007C638 00077538  4E 80 04 21 */	bctrl 
-/* 8007C63C 0007753C  80 6D 98 00 */	lwz r3, lbl_804BEB80-_SDA_BASE_(r13)
+/* 8007C63C 0007753C  80 6D 98 00 */	lwz r3, mspAllocator__Q34nw4r3lyt6Layout-_SDA_BASE_(r13)
 /* 8007C640 00077540  80 9C 00 28 */	lwz r4, 0x28(r28)
 /* 8007C644 00077544  48 06 AE 59 */	bl func_800E749C
 /* 8007C648 00077548  38 00 00 00 */	li r0, 0
@@ -2564,12 +2629,12 @@ GetContentMaterial__Q34nw4r3lyt6WindowCFv:
 
 .global GetRuntimeTypeInfo__Q34nw4r3lyt6WindowCFv
 GetRuntimeTypeInfo__Q34nw4r3lyt6WindowCFv:
-/* 8007E988 00079888  38 6D 98 18 */	addi r3, r13, lbl_804BEB98-_SDA_BASE_
+/* 8007E988 00079888  38 6D 98 18 */	addi r3, r13, typeInfo__Q34nw4r3lyt6Window-_SDA_BASE_
 /* 8007E98C 0007988C  4E 80 00 20 */	blr 
 
 # __sinit_\lyt_window_cpp
 .global __sinit_$$3lyt_window_cpp
 __sinit_$$3lyt_window_cpp:
-/* 8007E990 00079890  38 0D 97 F8 */	addi r0, r13, lbl_804BEB78-_SDA_BASE_
-/* 8007E994 00079894  90 0D 98 18 */	stw r0, lbl_804BEB98-_SDA_BASE_(r13)
+/* 8007E990 00079890  38 0D 97 F8 */	addi r0, r13, typeInfo__Q34nw4r3lyt4Pane-_SDA_BASE_
+/* 8007E994 00079894  90 0D 98 18 */	stw r0, typeInfo__Q34nw4r3lyt6Window-_SDA_BASE_(r13)
 /* 8007E998 00079898  4E 80 00 20 */	blr 

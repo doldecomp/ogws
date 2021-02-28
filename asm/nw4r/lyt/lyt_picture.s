@@ -1,7 +1,48 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .sdata2, "a"
+.global lbl_804C0498
+lbl_804C0498:
+	.single 0e0
+	.balign 8
 
+.section .sbss, "wa"
+.global typeInfo__Q34nw4r3lyt7Picture
+typeInfo__Q34nw4r3lyt7Picture:
+	.skip 0x4
+	.balign 8
+
+.section .data, "wa"
+.global __vt__Q34nw4r3lyt7Picture
+__vt__Q34nw4r3lyt7Picture:
+    .long 0
+    .long 0
+    .long __dt__Q34nw4r3lyt7PictureFv
+    .long GetRuntimeTypeInfo__Q34nw4r3lyt7PictureCFv
+    .long CalculateMtx__Q34nw4r3lyt4PaneFRCQ34nw4r3lyt8DrawInfo
+    .long Draw__Q34nw4r3lyt4PaneFRCQ34nw4r3lyt8DrawInfo
+    .long DrawSelf__Q34nw4r3lyt7PictureFRCQ34nw4r3lyt8DrawInfo
+    .long Animate__Q34nw4r3lyt4PaneFUl
+    .long AnimateSelf__Q34nw4r3lyt4PaneFUl
+    .long GetVtxColor__Q34nw4r3lyt7PictureCFUl
+    .long SetVtxColor__Q34nw4r3lyt7PictureFUlQ34nw4r2ut5Color
+    .long GetColorElement__Q34nw4r3lyt4PaneCFUl
+    .long SetColorElement__Q34nw4r3lyt4PaneFUlUc
+    .long GetVtxColorElement__Q34nw4r3lyt7PictureCFUl
+    .long SetVtxColorElement__Q34nw4r3lyt7PictureFUlUc
+    .long FindPaneByName__Q34nw4r3lyt4PaneFPCcb
+    .long FindMaterialByName__Q34nw4r3lyt4PaneFPCcb
+    .long BindAnimation__Q34nw4r3lyt4PaneFPQ34nw4r3lyt13AnimTransformb
+    .long UnbindAnimation__Q34nw4r3lyt4PaneFPQ34nw4r3lyt13AnimTransformb
+    .long UnbindAllAnimation__Q34nw4r3lyt4PaneFb
+    .long UnbindAnimationSelf__Q34nw4r3lyt4PaneFPQ34nw4r3lyt13AnimTransform
+    .long FindAnimationLink__Q34nw4r3lyt4PaneFPQ34nw4r3lyt13AnimTransform
+    .long SetAnimationEnable__Q34nw4r3lyt4PaneFPQ34nw4r3lyt13AnimTransformbb
+    .long GetMaterial__Q34nw4r3lyt4PaneCFv
+    .long LoadMtx__Q34nw4r3lyt4PaneFRCQ34nw4r3lyt8DrawInfo
+    .long Append__Q34nw4r3lyt7PictureFRCQ34nw4r3lyt6TexMap
+
+.section .text, "ax"
 .global __ct__Q34nw4r3lyt7PictureFPCQ44nw4r3lyt3res7PictureRCQ34nw4r3lyt11ResBlockSet
 __ct__Q34nw4r3lyt7PictureFPCQ44nw4r3lyt3res7PictureRCQ34nw4r3lyt11ResBlockSet:
 /* 8007B1CC 000760CC  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -15,9 +56,9 @@ __ct__Q34nw4r3lyt7PictureFPCQ44nw4r3lyt3res7PictureRCQ34nw4r3lyt11ResBlockSet:
 /* 8007B1EC 000760EC  93 81 00 10 */	stw r28, 0x10(r1)
 /* 8007B1F0 000760F0  7C 7C 1B 78 */	mr r28, r3
 /* 8007B1F4 000760F4  4B FF E1 29 */	bl __ct__Q34nw4r3lyt4PaneFPCQ44nw4r3lyt3res4Pane
-/* 8007B1F8 000760F8  3C 60 80 39 */	lis r3, lbl_80397238@ha
+/* 8007B1F8 000760F8  3C 60 80 39 */	lis r3, __vt__Q34nw4r3lyt7Picture@ha
 /* 8007B1FC 000760FC  3C 80 80 08 */	lis r4, __ct__Q34nw4r2ut5ColorFv@ha
-/* 8007B200 00076100  38 63 72 38 */	addi r3, r3, lbl_80397238@l
+/* 8007B200 00076100  38 63 72 38 */	addi r3, r3, __vt__Q34nw4r3lyt7Picture@l
 /* 8007B204 00076104  3C A0 80 01 */	lis r5, __dt__Q34nw4r2ut5ColorFv@ha
 /* 8007B208 00076108  90 7C 00 00 */	stw r3, 0(r28)
 /* 8007B20C 0007610C  38 7C 00 D4 */	addi r3, r28, 0xd4
@@ -56,7 +97,7 @@ lbl_8007B250:
 /* 8007B288 00076188  38 9D 00 60 */	addi r4, r29, 0x60
 /* 8007B28C 0007618C  48 00 7D 91 */	bl Copy__Q44nw4r3lyt6detail11TexCoordAryFPCvUc
 lbl_8007B290:
-/* 8007B290 00076190  80 6D 98 00 */	lwz r3, lbl_804BEB80-_SDA_BASE_(r13)
+/* 8007B290 00076190  80 6D 98 00 */	lwz r3, mspAllocator__Q34nw4r3lyt6Layout-_SDA_BASE_(r13)
 /* 8007B294 00076194  38 80 00 5C */	li r4, 0x5c
 /* 8007B298 00076198  48 06 C1 F5 */	bl func_800E748C
 /* 8007B29C 0007619C  2C 03 00 00 */	cmpwi r3, 0
@@ -95,8 +136,8 @@ __dt__Q34nw4r3lyt7PictureFv:
 /* 8007B30C 0007620C  7C 7E 1B 78 */	mr r30, r3
 /* 8007B310 00076210  41 82 00 90 */	beq lbl_8007B3A0
 /* 8007B314 00076214  80 A3 00 28 */	lwz r5, 0x28(r3)
-/* 8007B318 00076218  3C 80 80 39 */	lis r4, lbl_80397238@ha
-/* 8007B31C 0007621C  38 84 72 38 */	addi r4, r4, lbl_80397238@l
+/* 8007B318 00076218  3C 80 80 39 */	lis r4, __vt__Q34nw4r3lyt7Picture@ha
+/* 8007B31C 0007621C  38 84 72 38 */	addi r4, r4, __vt__Q34nw4r3lyt7Picture@l
 /* 8007B320 00076220  2C 05 00 00 */	cmpwi r5, 0
 /* 8007B324 00076224  90 83 00 00 */	stw r4, 0(r3)
 /* 8007B328 00076228  41 82 00 3C */	beq lbl_8007B364
@@ -109,7 +150,7 @@ __dt__Q34nw4r3lyt7PictureFv:
 /* 8007B344 00076244  81 8C 00 08 */	lwz r12, 8(r12)
 /* 8007B348 00076248  7D 89 03 A6 */	mtctr r12
 /* 8007B34C 0007624C  4E 80 04 21 */	bctrl 
-/* 8007B350 00076250  80 6D 98 00 */	lwz r3, lbl_804BEB80-_SDA_BASE_(r13)
+/* 8007B350 00076250  80 6D 98 00 */	lwz r3, mspAllocator__Q34nw4r3lyt6Layout-_SDA_BASE_(r13)
 /* 8007B354 00076254  80 9E 00 28 */	lwz r4, 0x28(r30)
 /* 8007B358 00076258  48 06 C1 45 */	bl func_800E749C
 /* 8007B35C 0007625C  38 00 00 00 */	li r0, 0
@@ -363,12 +404,12 @@ lbl_8007B6B4:
 
 .global GetRuntimeTypeInfo__Q34nw4r3lyt7PictureCFv
 GetRuntimeTypeInfo__Q34nw4r3lyt7PictureCFv:
-/* 8007B6D4 000765D4  38 6D 98 08 */	addi r3, r13, lbl_804BEB88-_SDA_BASE_
+/* 8007B6D4 000765D4  38 6D 98 08 */	addi r3, r13, typeInfo__Q34nw4r3lyt7Picture-_SDA_BASE_
 /* 8007B6D8 000765D8  4E 80 00 20 */	blr 
 
 # __sinit_\lyt_picture_cpp
 .global __sinit_$$3lyt_picture_cpp
 __sinit_$$3lyt_picture_cpp:
-/* 8007B6DC 000765DC  38 0D 97 F8 */	addi r0, r13, lbl_804BEB78-_SDA_BASE_
-/* 8007B6E0 000765E0  90 0D 98 08 */	stw r0, lbl_804BEB88-_SDA_BASE_(r13)
+/* 8007B6DC 000765DC  38 0D 97 F8 */	addi r0, r13, typeInfo__Q34nw4r3lyt4Pane-_SDA_BASE_
+/* 8007B6E0 000765E0  90 0D 98 08 */	stw r0, typeInfo__Q34nw4r3lyt7Picture-_SDA_BASE_(r13)
 /* 8007B6E4 000765E4  4E 80 00 20 */	blr 

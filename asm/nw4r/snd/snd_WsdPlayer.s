@@ -1,7 +1,65 @@
 .include "macros.inc"
 
-.section .text, "ax"  # 0x800076E0 - 0x80355080 
+.section .data, "wa"  # 0x80393A80 - 0x803CAF00
+.global ______vt__Q44nw4r3snd6detail9WsdPlayer
+______vt__Q44nw4r3snd6detail9WsdPlayer:
+	.long 0
+	.long 0
+	.long ______dt__Q44nw4r3snd6detail9WsdPlayerFv
+	.long Start__Q44nw4r3snd6detail9WsdPlayerFv
+	.long Stop__Q44nw4r3snd6detail9WsdPlayerFv
+	.long Pause__Q44nw4r3snd6detail9WsdPlayerFb
+	.long IsActive__Q44nw4r3snd6detail9WsdPlayerCFv
+	.long IsStarted__Q44nw4r3snd6detail9WsdPlayerCFv
+	.long IsPause__Q44nw4r3snd6detail9WsdPlayerCFv
+	.long 0
+	.long 0
+	.long $$2116$$2__dt__Q44nw4r3snd6detail9WsdPlayerFv
+	.long $$2116$$2InvalidateData__Q44nw4r3snd6detail9WsdPlayerFPCvPCv
+	.long $$2116$$2InvalidateWaveData__Q44nw4r3snd6detail9WsdPlayerFPCvPCv
+	.long 0
+	.long 0
+	.long $$2128$$2__dt__Q44nw4r3snd6detail9WsdPlayerFv
+	.long $$2128$$2OnUpdateFrameSoundThread__Q44nw4r3snd6detail9WsdPlayerFv
+	.long OnUpdateVoiceSoundThread__Q54nw4r3snd6detail11SoundThread14PlayerCallbackFv
+	.long $$2128$$2OnShutdownSoundThread__Q44nw4r3snd6detail9WsdPlayerFv
+	.long InvalidateData__Q44nw4r3snd6detail9WsdPlayerFPCvPCv
+	.long InvalidateWaveData__Q44nw4r3snd6detail9WsdPlayerFPCvPCv
+	.long OnUpdateFrameSoundThread__Q44nw4r3snd6detail9WsdPlayerFv
+	.long OnShutdownSoundThread__Q44nw4r3snd6detail9WsdPlayerFv
+	.long 0
+	.long 0
+	.long 0
+	.long 0
+	.long 0
+	.long 0
+.balign 0x8
 
+.section .sdata2, "a"
+.global lbl_804C01B0
+lbl_804C01B0:
+	.single 0e1
+.global lbl_804C01B4
+lbl_804C01B4:
+	.single 0e0
+.global lbl_804C01B8
+lbl_804C01B8:
+	.single 0e63
+.global lbl_804C01BC
+lbl_804C01BC:
+	.single 0e0.015625
+.global lbl_804C01C0
+lbl_804C01C0:
+	.single 0e127
+	.single 0e0
+.global lbl_804C01C8
+lbl_804C01C8:
+	.double 0e4.503601774854144E15
+.global lbl_804C01D0
+lbl_804C01D0:
+	.double 0e4.503599627370496E15
+
+.section .text, "ax"  # 0x800076E0 - 0x80355080 
 .global __ct__Q44nw4r3snd6detail9WsdPlayerFv
 __ct__Q44nw4r3snd6detail9WsdPlayerFv:
 /* 8004F5B8 0004A4B8  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -10,9 +68,9 @@ __ct__Q44nw4r3snd6detail9WsdPlayerFv:
 /* 8004F5C4 0004A4C4  93 E1 00 0C */	stw r31, 0xc(r1)
 /* 8004F5C8 0004A4C8  7C 7F 1B 78 */	mr r31, r3
 /* 8004F5CC 0004A4CC  4B FE 6B 55 */	bl __ct__Q44nw4r3snd6detail11BasicPlayerFv
-/* 8004F5D0 0004A4D0  3C A0 80 39 */	lis r5, __vt__Q44nw4r3snd6detail9WsdPlayer@ha
+/* 8004F5D0 0004A4D0  3C A0 80 39 */	lis r5, ______vt__Q44nw4r3snd6detail9WsdPlayer@ha
 /* 8004F5D4 0004A4D4  38 C0 00 00 */	li r6, 0
-/* 8004F5D8 0004A4D8  38 A5 64 E8 */	addi r5, r5, __vt__Q44nw4r3snd6detail9WsdPlayer@l
+/* 8004F5D8 0004A4D8  38 A5 64 E8 */	addi r5, r5, ______vt__Q44nw4r3snd6detail9WsdPlayer@l
 /* 8004F5DC 0004A4DC  90 DF 00 74 */	stw r6, 0x74(r31)
 /* 8004F5E0 0004A4E0  38 85 00 24 */	addi r4, r5, 0x24
 /* 8004F5E4 0004A4E4  38 7F 00 B8 */	addi r3, r31, 0xb8
@@ -1149,7 +1207,7 @@ $$2116$$2InvalidateData__Q44nw4r3snd6detail9WsdPlayerFPCvPCv:
 .global $$2116$$2__dt__Q44nw4r3snd6detail9WsdPlayerFv____
 $$2116$$2__dt__Q44nw4r3snd6detail9WsdPlayerFv____:
 /* 800505A0 0004B4A0  38 63 FF 8C */	addi r3, r3, -116
-/* 800505A4 0004B4A4  4B FF E9 9C */	b __dt__Q44nw4r3snd6detail9WsdPlayerFv
+/* 800505A4 0004B4A4  4B FF E9 9C */	b ______dt__Q44nw4r3snd6detail9WsdPlayerFv
 
 .global $$2128$$2OnShutdownSoundThread__Q44nw4r3snd6detail9WsdPlayerFv
 $$2128$$2OnShutdownSoundThread__Q44nw4r3snd6detail9WsdPlayerFv:
@@ -1164,4 +1222,4 @@ $$2128$$2OnUpdateFrameSoundThread__Q44nw4r3snd6detail9WsdPlayerFv:
 .global $$2128$$2__dt__Q44nw4r3snd6detail9WsdPlayerFv____
 $$2128$$2__dt__Q44nw4r3snd6detail9WsdPlayerFv____:
 /* 800505B8 0004B4B8  38 63 FF 80 */	addi r3, r3, -128
-/* 800505BC 0004B4BC  4B FF E9 84 */	b __dt__Q44nw4r3snd6detail9WsdPlayerFv
+/* 800505BC 0004B4BC  4B FF E9 84 */	b ______dt__Q44nw4r3snd6detail9WsdPlayerFv

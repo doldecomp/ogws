@@ -1,7 +1,44 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .sdata2, "a"
+.global lbl_804C0510
+lbl_804C0510:
+	.single 0e-0.001
+.global lbl_804C0514
+lbl_804C0514:
+	.single 0e0.001
+.global lbl_804C0518
+lbl_804C0518:
+	.single 0e1
+.global lbl_804C051C
+lbl_804C051C:
+	.single 0e2
+.global lbl_804C0520
+lbl_804C0520:
+	.single 0e3
+.global lbl_804C0524
+lbl_804C0524:
+	.single 0e-2
+.global lbl_804C0528
+lbl_804C0528:
+	.single 0e0
+.global lbl_804C052C
+lbl_804C052C:
+	.single 0e0.5
 
+.section .data, "wa"
+.global __vt__Q34nw4r3lyt18AnimTransformBasic
+__vt__Q34nw4r3lyt18AnimTransformBasic:
+    .long 0
+    .long 0
+    .long __dt__Q34nw4r3lyt18AnimTransformBasicFv
+    .long SetResource__Q34nw4r3lyt18AnimTransformBasicFPCQ44nw4r3lyt3res14AnimationBlockPQ34nw4r3lyt16ResourceAccessor
+    .long Bind__Q34nw4r3lyt18AnimTransformBasicFPQ34nw4r3lyt4Paneb
+    .long Bind__Q34nw4r3lyt18AnimTransformBasicFPQ34nw4r3lyt8Material
+    .long Animate__Q34nw4r3lyt18AnimTransformBasicFUlPQ34nw4r3lyt4Pane
+    .long Animate__Q34nw4r3lyt18AnimTransformBasicFUlPQ34nw4r3lyt8Material
+
+.section .text, "ax"
 # GetStepCurveValue__27@unnamed@lyt_animation_cpp@FfPCQ44nw4r3lyt3res7StepKeyUl
 .global GetStepCurveValue__27$$2unnamed$$2lyt_animation_cpp$$2FfPCQ44nw4r3lyt3res7StepKeyUl
 GetStepCurveValue__27$$2unnamed$$2lyt_animation_cpp$$2FfPCQ44nw4r3lyt3res7StepKeyUl:
@@ -217,9 +254,9 @@ IsLoopData__Q34nw4r3lyt13AnimTransformCFv:
 .global __ct__Q34nw4r3lyt18AnimTransformBasicFv
 __ct__Q34nw4r3lyt18AnimTransformBasicFv:
 /* 80082074 0007CF74  C0 02 8B 08 */	lfs f0, lbl_804C0528-_SDA2_BASE_(r2)
-/* 80082078 0007CF78  3C 80 80 39 */	lis r4, lbl_803974B0@ha
+/* 80082078 0007CF78  3C 80 80 39 */	lis r4, __vt__Q34nw4r3lyt18AnimTransformBasic@ha
 /* 8008207C 0007CF7C  38 00 00 00 */	li r0, 0
-/* 80082080 0007CF80  38 84 74 B0 */	addi r4, r4, lbl_803974B0@l
+/* 80082080 0007CF80  38 84 74 B0 */	addi r4, r4, __vt__Q34nw4r3lyt18AnimTransformBasic@l
 /* 80082084 0007CF84  90 03 00 04 */	stw r0, 4(r3)
 /* 80082088 0007CF88  90 03 00 08 */	stw r0, 8(r3)
 /* 8008208C 0007CF8C  90 03 00 0C */	stw r0, 0xc(r3)
@@ -242,18 +279,18 @@ __dt__Q34nw4r3lyt18AnimTransformBasicFv:
 /* 800820C4 0007CFC4  7C 7E 1B 78 */	mr r30, r3
 /* 800820C8 0007CFC8  41 82 00 48 */	beq lbl_80082110
 /* 800820CC 0007CFCC  80 83 00 18 */	lwz r4, 0x18(r3)
-/* 800820D0 0007CFD0  3C A0 80 39 */	lis r5, lbl_803974B0@ha
-/* 800820D4 0007CFD4  38 A5 74 B0 */	addi r5, r5, lbl_803974B0@l
+/* 800820D0 0007CFD0  3C A0 80 39 */	lis r5, __vt__Q34nw4r3lyt18AnimTransformBasic@ha
+/* 800820D4 0007CFD4  38 A5 74 B0 */	addi r5, r5, __vt__Q34nw4r3lyt18AnimTransformBasic@l
 /* 800820D8 0007CFD8  2C 04 00 00 */	cmpwi r4, 0
 /* 800820DC 0007CFDC  90 A3 00 00 */	stw r5, 0(r3)
 /* 800820E0 0007CFE0  41 82 00 0C */	beq lbl_800820EC
-/* 800820E4 0007CFE4  80 6D 98 00 */	lwz r3, lbl_804BEB80-_SDA_BASE_(r13)
+/* 800820E4 0007CFE4  80 6D 98 00 */	lwz r3, mspAllocator__Q34nw4r3lyt6Layout-_SDA_BASE_(r13)
 /* 800820E8 0007CFE8  48 06 53 B5 */	bl func_800E749C
 lbl_800820EC:
 /* 800820EC 0007CFEC  80 9E 00 14 */	lwz r4, 0x14(r30)
 /* 800820F0 0007CFF0  2C 04 00 00 */	cmpwi r4, 0
 /* 800820F4 0007CFF4  41 82 00 0C */	beq lbl_80082100
-/* 800820F8 0007CFF8  80 6D 98 00 */	lwz r3, lbl_804BEB80-_SDA_BASE_(r13)
+/* 800820F8 0007CFF8  80 6D 98 00 */	lwz r3, mspAllocator__Q34nw4r3lyt6Layout-_SDA_BASE_(r13)
 /* 800820FC 0007CFFC  48 06 53 A1 */	bl func_800E749C
 lbl_80082100:
 /* 80082100 0007D000  2C 1F 00 00 */	cmpwi r31, 0
@@ -285,7 +322,7 @@ SetResource__Q34nw4r3lyt18AnimTransformBasicFPCQ44nw4r3lyt3res14AnimationBlockPQ
 /* 80082158 0007D058  90 03 00 14 */	stw r0, 0x14(r3)
 /* 8008215C 0007D05C  7C B8 2B 78 */	mr r24, r5
 /* 80082160 0007D060  41 82 00 80 */	beq lbl_800821E0
-/* 80082164 0007D064  80 6D 98 00 */	lwz r3, lbl_804BEB80-_SDA_BASE_(r13)
+/* 80082164 0007D064  80 6D 98 00 */	lwz r3, mspAllocator__Q34nw4r3lyt6Layout-_SDA_BASE_(r13)
 /* 80082168 0007D068  54 C4 13 BA */	rlwinm r4, r6, 2, 0xe, 0x1d
 /* 8008216C 0007D06C  48 06 53 21 */	bl func_800E748C
 /* 80082170 0007D070  2C 03 00 00 */	cmpwi r3, 0
@@ -320,7 +357,7 @@ lbl_800821D0:
 /* 800821DC 0007D0DC  41 80 FF BC */	blt lbl_80082198
 lbl_800821E0:
 /* 800821E0 0007D0E0  A0 1F 00 0E */	lhz r0, 0xe(r31)
-/* 800821E4 0007D0E4  80 6D 98 00 */	lwz r3, lbl_804BEB80-_SDA_BASE_(r13)
+/* 800821E4 0007D0E4  80 6D 98 00 */	lwz r3, mspAllocator__Q34nw4r3lyt6Layout-_SDA_BASE_(r13)
 /* 800821E8 0007D0E8  54 04 20 36 */	slwi r4, r0, 4
 /* 800821EC 0007D0EC  48 06 52 A1 */	bl func_800E748C
 /* 800821F0 0007D0F0  2C 03 00 00 */	cmpwi r3, 0

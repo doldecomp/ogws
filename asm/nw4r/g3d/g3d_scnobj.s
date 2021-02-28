@@ -1,7 +1,97 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .sdata2, "a"
+.global $$210166
+$$210166:
+	.single 0e0
+.global $$210491
+$$210491:
+	.single 0e1
 
+.section .sbss, "wa"
+.global gpCullingFrustum__Q24nw4r3g3d
+gpCullingFrustum__Q24nw4r3g3d:
+	.skip 0x4
+	.balign 8
+
+.section .rodata, "a"
+.global lbl_80378B88
+lbl_80378B88:
+    .long 7
+	.string "ScnObj"
+	.balign 8
+.global lbl_80378B98
+lbl_80378B98:
+    .long 8
+	.string "ScnLeaf"
+	.balign 8
+.global lbl_80378BA8
+lbl_80378BA8:
+    .long 9
+	.string "ScnGroup"
+	.balign 8
+
+.section .data, "wa"
+.global switch_80396ED8
+switch_80396ED8:
+    .long lbl_8006FE3C
+    .long 0x8006fcd4
+    .long 0x8006fcfc
+    .long 0x8006fd24
+    .long 0x8006fd4c
+    .long 0x8006fd74
+    .long 0x8006fd9c
+    .long 0x8006fdc4
+    .long 0x8006fdec
+    .long 0x8006fe14
+.global switch_80396F00
+switch_80396F00:
+    .long 0x8006ff0c
+    .long 0x8006fe7c
+    .long 0x8006fe8c
+    .long 0x8006fe9c
+    .long 0x8006feac
+    .long 0x8006febc
+    .long 0x8006fecc
+    .long 0x8006fedc
+    .long 0x8006feec
+    .long 0x8006fefc
+.global __vt__Q34nw4r3g3d8ScnGroup
+__vt__Q34nw4r3g3d8ScnGroup:
+    .long 0
+    .long 0
+    .long IsDerivedFrom__Q34nw4r3g3d8ScnGroupCFQ44nw4r3g3d6G3dObj7TypeObj
+    .long G3dProc__Q34nw4r3g3d8ScnGroupFUlUlPv
+    .long __dt__Q34nw4r3g3d8ScnGroupFv
+    .long GetTypeObj__Q34nw4r3g3d8ScnGroupCFv
+    .long GetTypeName__Q34nw4r3g3d8ScnGroupCFv
+    .long ForEach__Q34nw4r3g3d8ScnGroupFPFPQ34nw4r3g3d6ScnObjPv_Q44nw4r3g3d6ScnObj13ForEachResultPvb
+    .long SetScnObjOption__Q34nw4r3g3d6ScnObjFUlUl
+    .long GetScnObjOption__Q34nw4r3g3d6ScnObjCFUlPUl
+    .long GetValueForSortOpa__Q34nw4r3g3d6ScnObjCFv
+    .long GetValueForSortXlu__Q34nw4r3g3d6ScnObjCFv
+    .long CalcWorldMtx__Q34nw4r3g3d6ScnObjFPCQ34nw4r4math5MTX34PUl
+    .long Insert__Q34nw4r3g3d8ScnGroupFUlPQ34nw4r3g3d6ScnObj
+    .long Remove__Q34nw4r3g3d8ScnGroupFUl
+    .long Remove__Q34nw4r3g3d8ScnGroupFPQ34nw4r3g3d6ScnObj
+.global __vt__Q34nw4r3g3d6ScnObj
+__vt__Q34nw4r3g3d6ScnObj:
+    .long 0
+    .long 0
+    .long IsDerivedFrom__Q34nw4r3g3d6ScnObjCFQ44nw4r3g3d6G3dObj7TypeObj
+    .long 0
+    .long __dt__Q34nw4r3g3d6ScnObjFv
+    .long GetTypeObj__Q34nw4r3g3d6ScnObjCFv
+    .long GetTypeName__Q34nw4r3g3d6ScnObjCFv
+    .long 0
+    .long SetScnObjOption__Q34nw4r3g3d6ScnObjFUlUl
+    .long GetScnObjOption__Q34nw4r3g3d6ScnObjCFUlPUl
+    .long GetValueForSortOpa__Q34nw4r3g3d6ScnObjCFv
+    .long GetValueForSortXlu__Q34nw4r3g3d6ScnObjCFv
+    .long CalcWorldMtx__Q34nw4r3g3d6ScnObjFPCQ34nw4r4math5MTX34PUl
+    .long 0
+
+.section .text, "ax"
 .global CalcWorldMtx__Q34nw4r3g3d6ScnObjFPCQ34nw4r4math5MTX34PUl
 CalcWorldMtx__Q34nw4r3g3d6ScnObjFPCQ34nw4r4math5MTX34PUl:
 /* 8006FA88 0006A988  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -90,7 +180,7 @@ __ct__Q34nw4r3g3d6ScnObjFP12MEMAllocator:
 /* 8006FBA8 0006AAA8  48 07 7A 51 */	bl PSMTXIdentity
 /* 8006FBAC 0006AAAC  38 7F 00 6C */	addi r3, r31, 0x6c
 /* 8006FBB0 0006AAB0  48 07 7A 49 */	bl PSMTXIdentity
-/* 8006FBB4 0006AAB4  C0 02 89 F0 */	lfs f0, lbl_804C0410-_SDA2_BASE_(r2)
+/* 8006FBB4 0006AAB4  C0 02 89 F0 */	lfs f0, $$210166-_SDA2_BASE_(r2)
 /* 8006FBB8 0006AAB8  7F E3 FB 78 */	mr r3, r31
 /* 8006FBBC 0006AABC  D0 1F 00 9C */	stfs f0, 0x9c(r31)
 /* 8006FBC0 0006AAC0  D0 1F 00 A0 */	stfs f0, 0xa0(r31)
@@ -687,7 +777,7 @@ GetScaleProperty__Q34nw4r3g3d7ScnLeafCFv:
 /* 80070358 0006B258  C0 03 00 E4 */	lfs f0, 0xe4(r3)
 /* 8007035C 0006B25C  FC 01 00 00 */	fcmpu cr0, f1, f0
 /* 80070360 0006B260  40 82 00 20 */	bne lbl_80070380
-/* 80070364 0006B264  C0 02 89 F4 */	lfs f0, lbl_804C0414-_SDA2_BASE_(r2)
+/* 80070364 0006B264  C0 02 89 F4 */	lfs f0, $$210491-_SDA2_BASE_(r2)
 /* 80070368 0006B268  FC 00 10 00 */	fcmpu cr0, f0, f2
 /* 8007036C 0006B26C  40 82 00 0C */	bne lbl_80070378
 /* 80070370 0006B270  38 60 00 00 */	li r3, 0
@@ -1047,11 +1137,11 @@ lbl_8007085C:
 lbl_8007086C:
 /* 8007086C 0006B76C  2C 03 00 01 */	cmpwi r3, 1
 /* 80070870 0006B770  40 82 00 58 */	bne lbl_800708C8
-/* 80070874 0006B774  83 6D 97 F0 */	lwz r27, lbl_804BEB70-_SDA_BASE_(r13)
+/* 80070874 0006B774  83 6D 97 F0 */	lwz r27, gpCullingFrustum__Q24nw4r3g3d-_SDA_BASE_(r13)
 /* 80070878 0006B778  38 00 00 00 */	li r0, 0
 /* 8007087C 0006B77C  3B 40 00 00 */	li r26, 0
 /* 80070880 0006B780  3B 80 00 00 */	li r28, 0
-/* 80070884 0006B784  90 0D 97 F0 */	stw r0, lbl_804BEB70-_SDA_BASE_(r13)
+/* 80070884 0006B784  90 0D 97 F0 */	stw r0, gpCullingFrustum__Q24nw4r3g3d-_SDA_BASE_(r13)
 /* 80070888 0006B788  48 00 00 30 */	b lbl_800708B8
 lbl_8007088C:
 /* 8007088C 0006B78C  80 7D 00 DC */	lwz r3, 0xdc(r29)
@@ -1069,7 +1159,7 @@ lbl_800708B8:
 /* 800708B8 0006B7B8  80 1D 00 E4 */	lwz r0, 0xe4(r29)
 /* 800708BC 0006B7BC  7C 1A 00 40 */	cmplw r26, r0
 /* 800708C0 0006B7C0  41 80 FF CC */	blt lbl_8007088C
-/* 800708C4 0006B7C4  93 6D 97 F0 */	stw r27, lbl_804BEB70-_SDA_BASE_(r13)
+/* 800708C4 0006B7C4  93 6D 97 F0 */	stw r27, gpCullingFrustum__Q24nw4r3g3d-_SDA_BASE_(r13)
 lbl_800708C8:
 /* 800708C8 0006B7C8  39 61 00 20 */	addi r11, r1, 0x20
 /* 800708CC 0006B7CC  48 04 14 C1 */	bl _restgpr_26

@@ -1,7 +1,31 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .sdata, "wa"
+#############################################
+# These are paths for use with ARCOpenDir() #
+#############################################
+# @2708
+.global $$22708
+$$22708:
+	.string "."
+	.balign 4
+# @2711
+.global $$22711
+$$22711:
+	.string ".."
+	.balign 4
 
+.section .data, "wa"
+.global __vt__Q34nw4r3lyt19ArcResourceAccessor
+__vt__Q34nw4r3lyt19ArcResourceAccessor:
+    .long 0
+    .long 0
+    .long __dt__Q34nw4r3lyt19ArcResourceAccessorFv
+    .long GetResource__Q34nw4r3lyt19ArcResourceAccessorFUlPCcPUl
+    .long GetFont__Q34nw4r3lyt19ArcResourceAccessorFPCc
+    .long 0
+
+.section .text, "ax"
 # FindNameResource__37@unnamed@lyt_arcResourceAccessor_cpp@FP9ARCHandlePCc
 .global FindNameResource__37$$2unnamed$$2lyt_arcResourceAccessor_cpp$$2FP9ARCHandlePCc
 FindNameResource__37$$2unnamed$$2lyt_arcResourceAccessor_cpp$$2FP9ARCHandlePCc:
@@ -13,7 +37,7 @@ FindNameResource__37$$2unnamed$$2lyt_arcResourceAccessor_cpp$$2FP9ARCHandlePCc:
 /* 800829D0 0007D8D0  3B E0 FF FF */	li r31, -1
 /* 800829D4 0007D8D4  93 C1 00 38 */	stw r30, 0x38(r1)
 /* 800829D8 0007D8D8  7C 9E 23 78 */	mr r30, r4
-/* 800829DC 0007D8DC  38 8D 80 F8 */	addi r4, r13, lbl_804BD478-_SDA_BASE_
+/* 800829DC 0007D8DC  38 8D 80 F8 */	addi r4, r13, $$22708-_SDA_BASE_
 /* 800829E0 0007D8E0  93 A1 00 34 */	stw r29, 0x34(r1)
 /* 800829E4 0007D8E4  7C 7D 1B 78 */	mr r29, r3
 /* 800829E8 0007D8E8  48 08 19 2D */	bl ARCOpenDir
@@ -30,7 +54,7 @@ lbl_800829F0:
 /* 80082A10 0007D910  4B FF FF AD */	bl FindNameResource__37$$2unnamed$$2lyt_arcResourceAccessor_cpp$$2FP9ARCHandlePCc
 /* 80082A14 0007D914  7C 7F 1B 78 */	mr r31, r3
 /* 80082A18 0007D918  7F A3 EB 78 */	mr r3, r29
-/* 80082A1C 0007D91C  38 8D 80 FC */	addi r4, r13, lbl_804BD47C-_SDA_BASE_
+/* 80082A1C 0007D91C  38 8D 80 FC */	addi r4, r13, $$22711-_SDA_BASE_
 /* 80082A20 0007D920  48 08 18 9D */	bl ARCChangeDir
 /* 80082A24 0007D924  2C 1F FF FF */	cmpwi r31, -1
 /* 80082A28 0007D928  40 82 00 38 */	bne lbl_80082A60
@@ -115,11 +139,11 @@ lbl_80082AF0:
 /* 80082B44 0007DA44  48 08 13 21 */	bl ARCConvertPathToEntrynum
 /* 80082B48 0007DA48  7C 7F 1B 78 */	mr r31, r3
 /* 80082B4C 0007DA4C  7F 43 D3 78 */	mr r3, r26
-/* 80082B50 0007DA50  38 8D 80 FC */	addi r4, r13, lbl_804BD47C-_SDA_BASE_
+/* 80082B50 0007DA50  38 8D 80 FC */	addi r4, r13, $$22711-_SDA_BASE_
 /* 80082B54 0007DA54  48 08 17 69 */	bl ARCChangeDir
 lbl_80082B58:
 /* 80082B58 0007DA58  7F 43 D3 78 */	mr r3, r26
-/* 80082B5C 0007DA5C  38 8D 80 FC */	addi r4, r13, lbl_804BD47C-_SDA_BASE_
+/* 80082B5C 0007DA5C  38 8D 80 FC */	addi r4, r13, $$22711-_SDA_BASE_
 /* 80082B60 0007DA60  48 08 17 5D */	bl ARCChangeDir
 lbl_80082B64:
 /* 80082B64 0007DA64  2C 1F FF FF */	cmpwi r31, -1
@@ -160,10 +184,10 @@ __ct__Q34nw4r3lyt19ArcResourceAccessorFv:
 /* 80082BD8 0007DAD8  7C 7F 1B 78 */	mr r31, r3
 /* 80082BDC 0007DADC  4B FF FD C9 */	bl __ct__Q34nw4r3lyt16ResourceAccessorFv
 /* 80082BE0 0007DAE0  38 00 00 00 */	li r0, 0
-/* 80082BE4 0007DAE4  3C 80 80 39 */	lis r4, lbl_803974E8@ha
+/* 80082BE4 0007DAE4  3C 80 80 39 */	lis r4, __vt__Q34nw4r3lyt19ArcResourceAccessor@ha
 /* 80082BE8 0007DAE8  90 1F 00 28 */	stw r0, 0x28(r31)
 /* 80082BEC 0007DAEC  38 BF 00 28 */	addi r5, r31, 0x28
-/* 80082BF0 0007DAF0  38 84 74 E8 */	addi r4, r4, lbl_803974E8@l
+/* 80082BF0 0007DAF0  38 84 74 E8 */	addi r4, r4, __vt__Q34nw4r3lyt19ArcResourceAccessor@l
 /* 80082BF4 0007DAF4  7F E3 FB 78 */	mr r3, r31
 /* 80082BF8 0007DAF8  90 1F 00 2C */	stw r0, 0x2c(r31)
 /* 80082BFC 0007DAFC  90 9F 00 00 */	stw r4, 0(r31)
@@ -258,6 +282,9 @@ lbl_80082D14:
 /* 80082D24 0007DC24  7C 08 03 A6 */	mtlr r0
 /* 80082D28 0007DC28  38 21 00 20 */	addi r1, r1, 0x20
 /* 80082D2C 0007DC2C  4E 80 00 20 */	blr 
+
+.global __dt__Q34nw4r3lyt19ArcResourceAccessorFv
+__dt__Q34nw4r3lyt19ArcResourceAccessorFv:
 /* 80082D30 0007DC30  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80082D34 0007DC34  7C 08 02 A6 */	mflr r0
 /* 80082D38 0007DC38  2C 03 00 00 */	cmpwi r3, 0

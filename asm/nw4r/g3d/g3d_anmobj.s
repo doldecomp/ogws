@@ -1,7 +1,19 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .sdata2, "a"
+.global $$24887
+$$24887:
+	.single 0e0
+	.balign 8
 
+.section .rodata, "a"
+.global lbl_80378300
+lbl_80378300:
+	.long 0x07
+	.string "AnmObj"
+	.balign 8
+
+.section .text, "ax"
 .global PlayPolicy_Onetime__Q24nw4r3g3dFfff
 PlayPolicy_Onetime__Q24nw4r3g3dFfff:
 /* 80063604 0005E504  FC 20 18 90 */	fmr f1, f3
@@ -14,7 +26,7 @@ PlayPolicy_Loop__Q24nw4r3g3dFfff:
 /* 80063614 0005E514  90 01 00 24 */	stw r0, 0x24(r1)
 /* 80063618 0005E518  DB E1 00 10 */	stfd f31, 0x10(r1)
 /* 8006361C 0005E51C  F3 E1 00 18 */	psq_st f31, 24(r1), 0, qr0
-/* 80063620 0005E520  C0 02 89 08 */	lfs f0, lbl_804C0328-_SDA2_BASE_(r2)
+/* 80063620 0005E520  C0 02 89 08 */	lfs f0, $$24887-_SDA2_BASE_(r2)
 /* 80063624 0005E524  EF E2 08 28 */	fsubs f31, f2, f1
 /* 80063628 0005E528  FC 03 00 40 */	fcmpo cr0, f3, f0
 /* 8006362C 0005E52C  4C 41 13 82 */	cror 2, 1, 2
@@ -29,7 +41,7 @@ lbl_80063648:
 /* 8006364C 0005E54C  EC 23 F8 2A */	fadds f1, f3, f31
 /* 80063650 0005E550  48 05 D8 2D */	bl fmod
 /* 80063654 0005E554  FC 20 08 18 */	frsp f1, f1
-/* 80063658 0005E558  C0 02 89 08 */	lfs f0, lbl_804C0328-_SDA2_BASE_(r2)
+/* 80063658 0005E558  C0 02 89 08 */	lfs f0, $$24887-_SDA2_BASE_(r2)
 /* 8006365C 0005E55C  FC 01 F8 2E */	fsel f0, f1, f0, f31
 /* 80063660 0005E560  EC 21 00 2A */	fadds f1, f1, f0
 lbl_80063664:

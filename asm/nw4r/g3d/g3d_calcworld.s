@@ -1,7 +1,25 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .sdata2, "a"
+.global lbl_804C0380
+lbl_804C0380:
+	.single 0e1
+.global lbl_804C0384
+lbl_804C0384:
+	.single 0e0
 
+.section .data, "wa"
+.global lbl_80396EC8
+lbl_80396EC8:
+	.string "NodeTree"
+	.balign 0x8
+
+.section .sdata, "wa"
+.global $$28814
+$$28814:
+	.string "NodeMix"
+
+.section .text, "ax"
 .global CalcWorld__Q24nw4r3g3dFPQ34nw4r4math5MTX34PUlPCUcPCQ34nw4r4math5MTX34Q34nw4r3g3d6ResMdlPQ34nw4r3g3d9AnmObjChrPQ34nw4r3g3d16FuncObjCalcWorldUl
 CalcWorld__Q24nw4r3g3dFPQ34nw4r4math5MTX34PUlPCUcPCQ34nw4r4math5MTX34Q34nw4r3g3d6ResMdlPQ34nw4r3g3d9AnmObjChrPQ34nw4r3g3d16FuncObjCalcWorldUl:
 /* 8006A074 00064F74  94 21 FF 30 */	stwu r1, -0xd0(r1)

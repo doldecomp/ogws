@@ -1,7 +1,122 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .sdata2, "a"
+.global $$27793
+$$27793:
+	.single 0e0
+.global $$27878
+$$27878:
+	.single 0e1
+.global $$28467
+$$28467:
+	.long 0x43300000
+	.long 0x80000000
 
+.section .data, "wa"
+.global __vt__Q34nw4r3g3d15AnmObjMatClrRes
+__vt__Q34nw4r3g3d15AnmObjMatClrRes:
+    .long 0
+    .long 0
+    .long IsDerivedFrom__Q34nw4r3g3d15AnmObjMatClrResCFQ44nw4r3g3d6G3dObj7TypeObj
+    .long G3dProc__Q34nw4r3g3d15AnmObjMatClrResFUlUlPv
+    .long __dt__Q34nw4r3g3d15AnmObjMatClrResFv
+    .long GetTypeObj__Q34nw4r3g3d15AnmObjMatClrResCFv
+    .long GetTypeName__Q34nw4r3g3d15AnmObjMatClrResCFv
+    .long SetFrame__Q34nw4r3g3d15AnmObjMatClrResFf
+    .long GetFrame__Q34nw4r3g3d15AnmObjMatClrResCFv
+    .long UpdateFrame__Q34nw4r3g3d15AnmObjMatClrResFv
+    .long SetUpdateRate__Q34nw4r3g3d15AnmObjMatClrResFf
+    .long GetUpdateRate__Q34nw4r3g3d15AnmObjMatClrResCFv
+    .long Bind__Q34nw4r3g3d15AnmObjMatClrResFQ34nw4r3g3d6ResMdl
+    .long Release__Q34nw4r3g3d12AnmObjMatClrFv
+    .long GetResult__Q34nw4r3g3d15AnmObjMatClrResFPQ34nw4r3g3d12ClrAnmResultUl
+    .long Attach__Q34nw4r3g3d12AnmObjMatClrFiPQ34nw4r3g3d15AnmObjMatClrRes
+    .long Detach__Q34nw4r3g3d12AnmObjMatClrFi
+    .long DetachAll__Q34nw4r3g3d12AnmObjMatClrFv
+.global __vt__Q34nw4r3g3d20AnmObjMatClrOverride
+__vt__Q34nw4r3g3d20AnmObjMatClrOverride:
+    .long 0
+    .long 0
+    .long IsDerivedFrom__Q34nw4r3g3d20AnmObjMatClrOverrideCFQ44nw4r3g3d6G3dObj7TypeObj
+    .long G3dProc__Q34nw4r3g3d16AnmObjMatClrNodeFUlUlPv
+    .long __dt__Q34nw4r3g3d20AnmObjMatClrOverrideFv
+    .long GetTypeObj__Q34nw4r3g3d20AnmObjMatClrOverrideCFv
+    .long GetTypeName__Q34nw4r3g3d20AnmObjMatClrOverrideCFv
+    .long SetFrame__Q34nw4r3g3d16AnmObjMatClrNodeFf
+    .long GetFrame__Q34nw4r3g3d16AnmObjMatClrNodeCFv
+    .long UpdateFrame__Q34nw4r3g3d16AnmObjMatClrNodeFv
+    .long SetUpdateRate__Q34nw4r3g3d16AnmObjMatClrNodeFf
+    .long GetUpdateRate__Q34nw4r3g3d16AnmObjMatClrNodeCFv
+    .long Bind__Q34nw4r3g3d16AnmObjMatClrNodeFQ34nw4r3g3d6ResMdl
+    .long Release__Q34nw4r3g3d16AnmObjMatClrNodeFv
+    .long GetResult__Q34nw4r3g3d20AnmObjMatClrOverrideFPQ34nw4r3g3d12ClrAnmResultUl
+    .long Attach__Q34nw4r3g3d16AnmObjMatClrNodeFiPQ34nw4r3g3d15AnmObjMatClrRes
+    .long Detach__Q34nw4r3g3d16AnmObjMatClrNodeFi
+    .long DetachAll__Q34nw4r3g3d16AnmObjMatClrNodeFv
+.global __vt__Q34nw4r3g3d16AnmObjMatClrNode
+__vt__Q34nw4r3g3d16AnmObjMatClrNode:
+    .long 0
+    .long 0
+    .long IsDerivedFrom__Q34nw4r3g3d16AnmObjMatClrNodeCFQ44nw4r3g3d6G3dObj7TypeObj
+    .long G3dProc__Q34nw4r3g3d16AnmObjMatClrNodeFUlUlPv
+    .long __dt__Q34nw4r3g3d16AnmObjMatClrNodeFv
+    .long GetTypeObj__Q34nw4r3g3d16AnmObjMatClrNodeCFv
+    .long GetTypeName__Q34nw4r3g3d16AnmObjMatClrNodeCFv
+    .long SetFrame__Q34nw4r3g3d16AnmObjMatClrNodeFf
+    .long GetFrame__Q34nw4r3g3d16AnmObjMatClrNodeCFv
+    .long UpdateFrame__Q34nw4r3g3d16AnmObjMatClrNodeFv
+    .long SetUpdateRate__Q34nw4r3g3d16AnmObjMatClrNodeFf
+    .long GetUpdateRate__Q34nw4r3g3d16AnmObjMatClrNodeCFv
+    .long Bind__Q34nw4r3g3d16AnmObjMatClrNodeFQ34nw4r3g3d6ResMdl
+    .long Release__Q34nw4r3g3d16AnmObjMatClrNodeFv
+    .long 0
+    .long Attach__Q34nw4r3g3d16AnmObjMatClrNodeFiPQ34nw4r3g3d15AnmObjMatClrRes
+    .long Detach__Q34nw4r3g3d16AnmObjMatClrNodeFi
+    .long DetachAll__Q34nw4r3g3d16AnmObjMatClrNodeFv
+.global __vt__Q34nw4r3g3d12AnmObjMatClr
+__vt__Q34nw4r3g3d12AnmObjMatClr:
+    .long 0
+    .long 0
+    .long IsDerivedFrom__Q34nw4r3g3d12AnmObjMatClrCFQ44nw4r3g3d6G3dObj7TypeObj
+    .long 0
+    .long __dt__Q34nw4r3g3d12AnmObjMatClrFv
+    .long GetTypeObj__Q34nw4r3g3d12AnmObjMatClrCFv
+    .long GetTypeName__Q34nw4r3g3d12AnmObjMatClrCFv
+    .long 0
+    .long 0
+    .long 0
+    .long 0
+    .long 0
+    .long 0
+    .long Release__Q34nw4r3g3d12AnmObjMatClrFv
+    .long 0
+    .long Attach__Q34nw4r3g3d12AnmObjMatClrFiPQ34nw4r3g3d15AnmObjMatClrRes
+    .long Detach__Q34nw4r3g3d12AnmObjMatClrFi
+    .long DetachAll__Q34nw4r3g3d12AnmObjMatClrFv
+
+.section .rodata, "a"
+.global lbl_80378118
+lbl_80378118:
+	.long 0x0D
+	.string "AnmObjMatClr"
+	.balign 8
+.global lbl_80378130
+lbl_80378130:
+	.long 0x11
+	.string "AnmObjMatClrNode"
+	.balign 8
+.global lbl_80378148
+lbl_80378148:
+	.long 0x15
+	.string "AnmObjMatClrOverride"
+	.balign 8
+.global lbl_80378168
+lbl_80378168:
+	.long 0x10
+	.string "AnmObjMatClrRes"
+	.balign 8
+
+.section .text, "ax"
 .global TestExistence__Q34nw4r3g3d12AnmObjMatClrCFUl
 TestExistence__Q34nw4r3g3d12AnmObjMatClrCFUl:
 /* 8005BDB8 00056CB8  80 63 00 14 */	lwz r3, 0x14(r3)
@@ -369,7 +484,7 @@ lbl_8005C26C:
 /* 8005C270 00057170  38 C6 00 01 */	addi r6, r6, 1
 /* 8005C274 00057174  42 00 FF D0 */	bdnz lbl_8005C244
 lbl_8005C278:
-/* 8005C278 00057178  C0 22 88 A0 */	lfs f1, lbl_804C02C0-_SDA2_BASE_(r2)
+/* 8005C278 00057178  C0 22 88 A0 */	lfs f1, $$27793-_SDA2_BASE_(r2)
 /* 8005C27C 0005717C  4E 80 00 20 */	blr 
 
 .global SetUpdateRate__Q34nw4r3g3d16AnmObjMatClrNodeFf
@@ -436,7 +551,7 @@ lbl_8005C348:
 /* 8005C34C 0005724C  38 C6 00 01 */	addi r6, r6, 1
 /* 8005C350 00057250  42 00 FF D0 */	bdnz lbl_8005C320
 lbl_8005C354:
-/* 8005C354 00057254  C0 22 88 A4 */	lfs f1, lbl_804C02C4-_SDA2_BASE_(r2)
+/* 8005C354 00057254  C0 22 88 A4 */	lfs f1, $$27878-_SDA2_BASE_(r2)
 /* 8005C358 00057258  4E 80 00 20 */	blr 
 
 .global Bind__Q34nw4r3g3d16AnmObjMatClrNodeFQ34nw4r3g3d6ResMdl
@@ -831,14 +946,14 @@ lbl_8005C840:
 /* 8005C894 00057794  80 BE 00 20 */	lwz r5, 0x20(r30)
 /* 8005C898 00057798  3C 60 80 39 */	lis r3, __vt__Q34nw4r3g3d15AnmObjMatClrRes@ha
 /* 8005C89C 0005779C  6C 84 80 00 */	xoris r4, r4, 0x8000
-/* 8005C8A0 000577A0  C0 22 88 A0 */	lfs f1, lbl_804C02C0-_SDA2_BASE_(r2)
+/* 8005C8A0 000577A0  C0 22 88 A0 */	lfs f1, $$27793-_SDA2_BASE_(r2)
 /* 8005C8A4 000577A4  90 81 00 0C */	stw r4, 0xc(r1)
 /* 8005C8A8 000577A8  54 A5 10 3A */	slwi r5, r5, 2
-/* 8005C8AC 000577AC  C0 02 88 A4 */	lfs f0, lbl_804C02C4-_SDA2_BASE_(r2)
+/* 8005C8AC 000577AC  C0 02 88 A4 */	lfs f0, $$27878-_SDA2_BASE_(r2)
 /* 8005C8B0 000577B0  38 8D 80 98 */	addi r4, r13, lbl_804BD418-_SDA_BASE_
 /* 8005C8B4 000577B4  90 01 00 08 */	stw r0, 8(r1)
 /* 8005C8B8 000577B8  38 63 68 90 */	addi r3, r3, __vt__Q34nw4r3g3d15AnmObjMatClrRes@l
-/* 8005C8BC 000577BC  C8 62 88 A8 */	lfd f3, lbl_804C02C8-_SDA2_BASE_(r2)
+/* 8005C8BC 000577BC  C8 62 88 A8 */	lfd f3, $$28467-_SDA2_BASE_(r2)
 /* 8005C8C0 000577C0  2C 1B 00 00 */	cmpwi r27, 0
 /* 8005C8C4 000577C4  D0 3F 00 18 */	stfs f1, 0x18(r31)
 /* 8005C8C8 000577C8  C8 41 00 08 */	lfd f2, 8(r1)

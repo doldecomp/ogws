@@ -1,7 +1,65 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .sdata2, "a"
+.global $$212092
+$$212092:
+	.single 0e1
+	.balign 8
 
+.section .sdata, "wa"
+.global lbl_804BD450
+lbl_804BD450:
+	.string "NodeMix"
+.global lbl_804BD458
+lbl_804BD458:
+	.string "DrawOpa"
+.global lbl_804BD460
+lbl_804BD460:
+	.string "DrawXlu"
+
+.section .rodata, "a"
+.global lbl_80378BC8
+lbl_80378BC8:
+    .long 13
+	.string "ScnMdlSimple"
+	.balign 8
+
+.section .data, "wa"
+.global switch_80397008
+switch_80397008:
+    .long 0x80073e54
+    .long 0x80073eac
+    .long 0x80073f04
+    .long 0x80073f5c
+    .long 0x80073fb4
+    .long 0x800741b8
+    .long 0x80074008
+.global lbl_80397024
+lbl_80397024:
+	.string "NodeTree"
+	.balign 0x8
+.global __vt__Q34nw4r3g3d12ScnMdlSimple
+__vt__Q34nw4r3g3d12ScnMdlSimple:
+    .long 0
+    .long 0
+    .long IsDerivedFrom__Q34nw4r3g3d12ScnMdlSimpleCFQ44nw4r3g3d6G3dObj7TypeObj
+    .long G3dProc__Q34nw4r3g3d12ScnMdlSimpleFUlUlPv
+    .long __dt__Q34nw4r3g3d12ScnMdlSimpleFv
+    .long GetTypeObj__Q34nw4r3g3d12ScnMdlSimpleCFv
+    .long GetTypeName__Q34nw4r3g3d12ScnMdlSimpleCFv
+    .long ForEach__Q34nw4r3g3d7ScnLeafFPFPQ34nw4r3g3d6ScnObjPv_Q44nw4r3g3d6ScnObj13ForEachResultPvb
+    .long SetScnObjOption__Q34nw4r3g3d12ScnMdlSimpleFUlUl
+    .long GetScnObjOption__Q34nw4r3g3d12ScnMdlSimpleCFUlPUl
+    .long GetValueForSortOpa__Q34nw4r3g3d6ScnObjCFv
+    .long GetValueForSortXlu__Q34nw4r3g3d6ScnObjCFv
+    .long CalcWorldMtx__Q34nw4r3g3d7ScnLeafFPCQ34nw4r4math5MTX34PUl
+    .long SetAnmObj__Q34nw4r3g3d12ScnMdlSimpleFPQ34nw4r3g3d6AnmObjQ44nw4r3g3d12ScnMdlSimple10AnmObjType
+    .long RemoveAnmObj__Q34nw4r3g3d12ScnMdlSimpleFPQ34nw4r3g3d6AnmObj
+    .long RemoveAnmObj__Q34nw4r3g3d12ScnMdlSimpleFQ44nw4r3g3d12ScnMdlSimple10AnmObjType
+    .long GetAnmObj__Q34nw4r3g3d12ScnMdlSimpleFQ44nw4r3g3d12ScnMdlSimple10AnmObjType
+    .long GetAnmObj__Q34nw4r3g3d12ScnMdlSimpleCFQ44nw4r3g3d12ScnMdlSimple10AnmObjType
+
+.section .text, "ax"
 .global Construct__Q34nw4r3g3d12ScnMdlSimpleFP12MEMAllocatorPUlQ34nw4r3g3d6ResMdli
 Construct__Q34nw4r3g3d12ScnMdlSimpleFP12MEMAllocatorPUlQ34nw4r3g3d6ResMdli:
 /* 80072C2C 0006DB2C  94 21 FF C0 */	stwu r1, -0x40(r1)
@@ -2145,7 +2203,7 @@ __ct__Q34nw4r3g3d12ScnMdlSimpleFP12MEMAllocatorQ34nw4r3g3d6ResMdlPQ34nw4r4math5M
 /* 8007496C 0006F86C  7D 39 4B 78 */	mr r25, r9
 /* 80074970 0006F870  7D 5A 53 78 */	mr r26, r10
 /* 80074974 0006F874  4B FF B1 D1 */	bl __ct__Q34nw4r3g3d6ScnObjFP12MEMAllocator
-/* 80074978 0006F878  C0 02 8A 00 */	lfs f0, lbl_804C0420-_SDA2_BASE_(r2)
+/* 80074978 0006F878  C0 02 8A 00 */	lfs f0, $$212092-_SDA2_BASE_(r2)
 /* 8007497C 0006F87C  3C A0 80 39 */	lis r5, __vt__Q34nw4r3g3d12ScnMdlSimple@ha
 /* 80074980 0006F880  38 A5 70 30 */	addi r5, r5, __vt__Q34nw4r3g3d12ScnMdlSimple@l
 /* 80074984 0006F884  3C 80 80 39 */	lis r4, lbl_80397024@ha

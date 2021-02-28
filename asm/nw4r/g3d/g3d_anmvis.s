@@ -1,7 +1,118 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .sdata2, "a"
+.global $$26718
+$$26718:
+	.single 0e0
+.global $$26803
+$$26803:
+	.single 0e1
+.global $$27319
+$$27319:
+	.long 0x43300000
+	.long 0x80000000
 
+.section .rodata, "a"
+.global lbl_803780C8
+lbl_803780C8:
+	.long 0x0A
+	.string "AnmObjVis"
+	.balign 4
+.global lbl_803780D8
+lbl_803780D8:
+	.long 0x0E
+	.string "AnmObjVisNode"
+	.balign 4
+.global lbl_803780EC
+lbl_803780EC:
+	.long 0x0C
+	.string "AnmObjVisOR"
+	.balign 8
+.global lbl_80378100
+lbl_80378100:
+	.long 0x0D
+	.string "AnmObjVisRes"
+	.balign 8
+
+.section .data, "wa"
+.global __vt__Q34nw4r3g3d12AnmObjVisRes
+__vt__Q34nw4r3g3d12AnmObjVisRes:
+    .long 0
+    .long 0
+    .long IsDerivedFrom__Q34nw4r3g3d12AnmObjVisResCFQ44nw4r3g3d6G3dObj7TypeObj
+    .long G3dProc__Q34nw4r3g3d9AnmObjVisFUlUlPv
+    .long __dt__Q34nw4r3g3d12AnmObjVisResFv
+    .long GetTypeObj__Q34nw4r3g3d12AnmObjVisResCFv
+    .long GetTypeName__Q34nw4r3g3d12AnmObjVisResCFv
+    .long SetFrame__Q34nw4r3g3d12AnmObjVisResFf
+    .long GetFrame__Q34nw4r3g3d12AnmObjVisResCFv
+    .long UpdateFrame__Q34nw4r3g3d12AnmObjVisResFv
+    .long SetUpdateRate__Q34nw4r3g3d12AnmObjVisResFf
+    .long GetUpdateRate__Q34nw4r3g3d12AnmObjVisResCFv
+    .long Bind__Q34nw4r3g3d12AnmObjVisResFQ34nw4r3g3d6ResMdl
+    .long Release__Q34nw4r3g3d9AnmObjVisFv
+    .long GetResult__Q34nw4r3g3d12AnmObjVisResFUl
+    .long Attach__Q34nw4r3g3d9AnmObjVisFiPQ34nw4r3g3d12AnmObjVisRes
+    .long Detach__Q34nw4r3g3d9AnmObjVisFi
+.global __vt__Q34nw4r3g3d11AnmObjVisOR
+__vt__Q34nw4r3g3d11AnmObjVisOR:
+    .long 0
+    .long 0
+    .long IsDerivedFrom__Q34nw4r3g3d11AnmObjVisORCFQ44nw4r3g3d6G3dObj7TypeObj
+    .long G3dProc__Q34nw4r3g3d13AnmObjVisNodeFUlUlPv
+    .long __dt__Q34nw4r3g3d11AnmObjVisORFv
+    .long GetTypeObj__Q34nw4r3g3d11AnmObjVisORCFv
+    .long GetTypeName__Q34nw4r3g3d11AnmObjVisORCFv
+    .long SetFrame__Q34nw4r3g3d13AnmObjVisNodeFf
+    .long GetFrame__Q34nw4r3g3d13AnmObjVisNodeCFv
+    .long UpdateFrame__Q34nw4r3g3d13AnmObjVisNodeFv
+    .long SetUpdateRate__Q34nw4r3g3d13AnmObjVisNodeFf
+    .long GetUpdateRate__Q34nw4r3g3d13AnmObjVisNodeCFv
+    .long Bind__Q34nw4r3g3d13AnmObjVisNodeFQ34nw4r3g3d6ResMdl
+    .long Release__Q34nw4r3g3d13AnmObjVisNodeFv
+    .long GetResult__Q34nw4r3g3d11AnmObjVisORFUl
+    .long Attach__Q34nw4r3g3d13AnmObjVisNodeFiPQ34nw4r3g3d12AnmObjVisRes
+    .long Detach__Q34nw4r3g3d13AnmObjVisNodeFi
+.global __vt__Q34nw4r3g3d13AnmObjVisNode
+__vt__Q34nw4r3g3d13AnmObjVisNode:
+    .long 0
+    .long 0
+    .long IsDerivedFrom__Q34nw4r3g3d13AnmObjVisNodeCFQ44nw4r3g3d6G3dObj7TypeObj
+    .long G3dProc__Q34nw4r3g3d13AnmObjVisNodeFUlUlPv
+    .long __dt__Q34nw4r3g3d13AnmObjVisNodeFv
+    .long GetTypeObj__Q34nw4r3g3d13AnmObjVisNodeCFv
+    .long GetTypeName__Q34nw4r3g3d13AnmObjVisNodeCFv
+    .long SetFrame__Q34nw4r3g3d13AnmObjVisNodeFf
+    .long GetFrame__Q34nw4r3g3d13AnmObjVisNodeCFv
+    .long UpdateFrame__Q34nw4r3g3d13AnmObjVisNodeFv
+    .long SetUpdateRate__Q34nw4r3g3d13AnmObjVisNodeFf
+    .long GetUpdateRate__Q34nw4r3g3d13AnmObjVisNodeCFv
+    .long Bind__Q34nw4r3g3d13AnmObjVisNodeFQ34nw4r3g3d6ResMdl
+    .long Release__Q34nw4r3g3d13AnmObjVisNodeFv
+    .long 0
+    .long Attach__Q34nw4r3g3d13AnmObjVisNodeFiPQ34nw4r3g3d12AnmObjVisRes
+    .long Detach__Q34nw4r3g3d13AnmObjVisNodeFi
+.global __vt__Q34nw4r3g3d9AnmObjVis
+__vt__Q34nw4r3g3d9AnmObjVis:
+    .long 0
+    .long 0
+    .long IsDerivedFrom__Q34nw4r3g3d9AnmObjVisCFQ44nw4r3g3d6G3dObj7TypeObj
+    .long G3dProc__Q34nw4r3g3d9AnmObjVisFUlUlPv
+    .long __dt__Q34nw4r3g3d9AnmObjVisFv
+    .long GetTypeObj__Q34nw4r3g3d9AnmObjVisCFv
+    .long GetTypeName__Q34nw4r3g3d9AnmObjVisCFv
+    .long 0
+    .long 0
+    .long 0
+    .long 0
+    .long 0
+    .long 0
+    .long Release__Q34nw4r3g3d9AnmObjVisFv
+    .long 0
+    .long Attach__Q34nw4r3g3d9AnmObjVisFiPQ34nw4r3g3d12AnmObjVisRes
+    .long Detach__Q34nw4r3g3d9AnmObjVisFi
+
+.section .text, "ax"
 .global Release__Q34nw4r3g3d9AnmObjVisFv
 Release__Q34nw4r3g3d9AnmObjVisFv:
 /* 8005AC00 00055B00  3C 80 00 01 */	lis r4, 0x00008000@ha
@@ -394,7 +505,7 @@ lbl_8005B11C:
 /* 8005B11C 0005601C  38 84 00 04 */	addi r4, r4, 4
 /* 8005B120 00056020  38 A5 00 01 */	addi r5, r5, 1
 /* 8005B124 00056024  42 00 FF D0 */	bdnz lbl_8005B0F4
-/* 8005B128 00056028  C0 22 88 90 */	lfs f1, lbl_804C02B0-_SDA2_BASE_(r2)
+/* 8005B128 00056028  C0 22 88 90 */	lfs f1, $$26718-_SDA2_BASE_(r2)
 /* 8005B12C 0005602C  4E 80 00 20 */	blr 
 
 .global SetUpdateRate__Q34nw4r3g3d13AnmObjVisNodeFf
@@ -451,7 +562,7 @@ lbl_8005B1D8:
 /* 8005B1D8 000560D8  38 84 00 04 */	addi r4, r4, 4
 /* 8005B1DC 000560DC  38 A5 00 01 */	addi r5, r5, 1
 /* 8005B1E0 000560E0  42 00 FF D0 */	bdnz lbl_8005B1B0
-/* 8005B1E4 000560E4  C0 22 88 94 */	lfs f1, lbl_804C02B4-_SDA2_BASE_(r2)
+/* 8005B1E4 000560E4  C0 22 88 94 */	lfs f1, $$26803-_SDA2_BASE_(r2)
 /* 8005B1E8 000560E8  4E 80 00 20 */	blr 
 
 .global Bind__Q34nw4r3g3d13AnmObjVisNodeFQ34nw4r3g3d6ResMdl
@@ -795,14 +906,14 @@ lbl_8005B630:
 /* 8005B674 00056574  80 BF 00 20 */	lwz r5, 0x20(r31)
 /* 8005B678 00056578  3C 60 80 39 */	lis r3, __vt__Q34nw4r3g3d12AnmObjVisRes@ha
 /* 8005B67C 0005657C  6C 84 80 00 */	xoris r4, r4, 0x8000
-/* 8005B680 00056580  C0 22 88 90 */	lfs f1, lbl_804C02B0-_SDA2_BASE_(r2)
+/* 8005B680 00056580  C0 22 88 90 */	lfs f1, $$26718-_SDA2_BASE_(r2)
 /* 8005B684 00056584  90 81 00 0C */	stw r4, 0xc(r1)
 /* 8005B688 00056588  54 A5 10 3A */	slwi r5, r5, 2
-/* 8005B68C 0005658C  C0 02 88 94 */	lfs f0, lbl_804C02B4-_SDA2_BASE_(r2)
+/* 8005B68C 0005658C  C0 02 88 94 */	lfs f0, $$26803-_SDA2_BASE_(r2)
 /* 8005B690 00056590  38 8D 80 98 */	addi r4, r13, lbl_804BD418-_SDA_BASE_
 /* 8005B694 00056594  90 01 00 08 */	stw r0, 8(r1)
 /* 8005B698 00056598  38 63 67 80 */	addi r3, r3, __vt__Q34nw4r3g3d12AnmObjVisRes@l
-/* 8005B69C 0005659C  C8 62 88 98 */	lfd f3, lbl_804C02B8-_SDA2_BASE_(r2)
+/* 8005B69C 0005659C  C8 62 88 98 */	lfd f3, $$27319-_SDA2_BASE_(r2)
 /* 8005B6A0 000565A0  D0 3D 00 18 */	stfs f1, 0x18(r29)
 /* 8005B6A4 000565A4  C8 41 00 08 */	lfd f2, 8(r1)
 /* 8005B6A8 000565A8  D0 1D 00 1C */	stfs f0, 0x1c(r29)

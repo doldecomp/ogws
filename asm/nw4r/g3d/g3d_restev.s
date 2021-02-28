@@ -1,7 +1,36 @@
 .include "macros.inc"
 
-.section .text, "ax"  # 0x800076E0 - 0x80355080 
+.section .rodata, "a"
+.global lbl_80378048
+lbl_80378048:
+	.long 4
+	.long 5
+	.long 0xFF
+	.long 0xFF
+	.long 0xFF
+	.long 7
+	.long 8
+	.long 6
+.global dlsize$7678
+dlsize$7678:
+	.long 0xA0
+	.long 0xA0
+	.long 0xC0
+	.long 0xC0
+	.long 0x100
+	.long 0x100
+	.long 0x120
+	.long 0x120
+	.long 0x160
+	.long 0x160
+	.long 0x180
+	.long 0x180
+	.long 0x1C0
+	.long 0x1C0
+	.long 0x1E0
+	.long 0x1E0
 
+.section .text, "ax"  # 0x800076E0 - 0x80355080 
 .global func_80054424
 func_80054424:
 /* 80054424 0004F324  1C 04 00 14 */	mulli r0, r4, 0x14
@@ -212,8 +241,8 @@ CallDisplayList__Q34nw4r3g3d6ResTevCFb:
 /* 800546F8 0004F5F8  48 0B 63 59 */	bl func_8010AA50
 lbl_800546FC:
 /* 800546FC 0004F5FC  80 7F 00 00 */	lwz r3, 0(r31)
-/* 80054700 0004F600  3C 80 80 38 */	lis r4, lbl_80378068@ha
-/* 80054704 0004F604  38 84 80 68 */	addi r4, r4, lbl_80378068@l
+/* 80054700 0004F600  3C 80 80 38 */	lis r4, dlsize$7678@ha
+/* 80054704 0004F604  38 84 80 68 */	addi r4, r4, dlsize$7678@l
 /* 80054708 0004F608  88 A3 00 0C */	lbz r5, 0xc(r3)
 /* 8005470C 0004F60C  38 63 00 20 */	addi r3, r3, 0x20
 /* 80054710 0004F610  38 05 FF FF */	addi r0, r5, -1

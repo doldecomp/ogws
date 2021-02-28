@@ -1,7 +1,65 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .sdata2, "a"
+.global $$213191
+$$213191:
+	.single 0e0.5
+	.balign 8
 
+.section .sdata, "wa"
+.global lbl_804BD440
+lbl_804BD440:
+	.long 0x20
+.global lbl_804BD444
+lbl_804BD444:
+	.long 0x20
+.global lbl_804BD448
+lbl_804BD448:
+	.long -4
+.global lbl_804BD44C
+lbl_804BD44C:
+	.long -4
+
+.section .rodata, "a"
+.global lbl_80378BB8
+lbl_80378BB8:
+    .long 8
+	.string "ScnRoot"
+	.balign 8
+
+.section .data, "wa"
+.global __vt__Q34nw4r3g3d12ScnObjGather
+__vt__Q34nw4r3g3d12ScnObjGather:
+    .long 0
+    .long 0
+    .long __dt__Q34nw4r3g3d12ScnObjGatherFv
+    .long Add__Q34nw4r3g3d12ScnObjGatherFPQ34nw4r3g3d6ScnObjbb
+    .long Clear__Q34nw4r3g3d12ScnObjGatherFv
+    .long ZSort__Q34nw4r3g3d12ScnObjGatherFv
+    .long Sort__Q34nw4r3g3d12ScnObjGatherFv
+    .long Sort__Q34nw4r3g3d12ScnObjGatherFPFPCQ34nw4r3g3d6ScnObjPCQ34nw4r3g3d6ScnObj_bPFPCQ34nw4r3g3d6ScnObjPCQ34nw4r3g3d6ScnObj_b
+    .long DrawOpa__Q34nw4r3g3d12ScnObjGatherFPQ34nw4r3g3d14ResMdlDrawMode
+    .long DrawXlu__Q34nw4r3g3d12ScnObjGatherFPQ34nw4r3g3d14ResMdlDrawMode
+.global __vt__Q34nw4r3g3d7ScnRoot
+__vt__Q34nw4r3g3d7ScnRoot:
+    .long 0
+    .long 0
+    .long IsDerivedFrom__Q34nw4r3g3d7ScnRootCFQ44nw4r3g3d6G3dObj7TypeObj
+    .long G3dProc__Q34nw4r3g3d7ScnRootFUlUlPv
+    .long __dt__Q34nw4r3g3d7ScnRootFv
+    .long GetTypeObj__Q34nw4r3g3d7ScnRootCFv
+    .long GetTypeName__Q34nw4r3g3d7ScnRootCFv
+    .long ForEach__Q34nw4r3g3d8ScnGroupFPFPQ34nw4r3g3d6ScnObjPv_Q44nw4r3g3d6ScnObj13ForEachResultPvb
+    .long SetScnObjOption__Q34nw4r3g3d6ScnObjFUlUl
+    .long GetScnObjOption__Q34nw4r3g3d6ScnObjCFUlPUl
+    .long GetValueForSortOpa__Q34nw4r3g3d6ScnObjCFv
+    .long GetValueForSortXlu__Q34nw4r3g3d6ScnObjCFv
+    .long CalcWorldMtx__Q34nw4r3g3d6ScnObjFPCQ34nw4r4math5MTX34PUl
+    .long Insert__Q34nw4r3g3d8ScnGroupFUlPQ34nw4r3g3d6ScnObj
+    .long Remove__Q34nw4r3g3d8ScnGroupFUl
+    .long Remove__Q34nw4r3g3d8ScnGroupFPQ34nw4r3g3d6ScnObj
+
+.section .text, "ax"
 .global Construct__Q34nw4r3g3d7ScnRootFP12MEMAllocatorPUlUlUlUlUl
 Construct__Q34nw4r3g3d7ScnRootFP12MEMAllocatorPUlUlUlUlUl:
 /* 800712A4 0006C1A4  94 21 FF C0 */	stwu r1, -0x40(r1)
@@ -301,7 +359,7 @@ lbl_8007166C:
 /* 8007169C 0006C59C  41 80 FF D0 */	blt lbl_8007166C
 /* 800716A0 0006C5A0  80 A1 00 28 */	lwz r5, 0x28(r1)
 /* 800716A4 0006C5A4  38 00 00 08 */	li r0, 8
-/* 800716A8 0006C5A8  C3 E2 89 F8 */	lfs f31, lbl_804C0418-_SDA2_BASE_(r2)
+/* 800716A8 0006C5A8  C3 E2 89 F8 */	lfs f31, $$213191-_SDA2_BASE_(r2)
 /* 800716AC 0006C5AC  3B 7C 22 78 */	addi r27, r28, 0x2278
 /* 800716B0 0006C5B0  80 65 00 A8 */	lwz r3, 0xa8(r5)
 /* 800716B4 0006C5B4  3B E0 00 00 */	li r31, 0
@@ -632,7 +690,7 @@ lbl_80071B1C:
 lbl_80071B40:
 /* 80071B40 0006CA40  38 01 00 40 */	addi r0, r1, 0x40
 /* 80071B44 0006CA44  7F E3 FB 78 */	mr r3, r31
-/* 80071B48 0006CA48  90 0D 97 F0 */	stw r0, lbl_804BEB70-_SDA_BASE_(r13)
+/* 80071B48 0006CA48  90 0D 97 F0 */	stw r0, gpCullingFrustum__Q24nw4r3g3d-_SDA_BASE_(r13)
 /* 80071B4C 0006CA4C  38 80 00 05 */	li r4, 5
 /* 80071B50 0006CA50  38 A0 00 00 */	li r5, 0
 /* 80071B54 0006CA54  81 9F 00 00 */	lwz r12, 0(r31)
@@ -641,7 +699,7 @@ lbl_80071B40:
 /* 80071B60 0006CA60  7D 89 03 A6 */	mtctr r12
 /* 80071B64 0006CA64  4E 80 04 21 */	bctrl 
 /* 80071B68 0006CA68  38 00 00 00 */	li r0, 0
-/* 80071B6C 0006CA6C  90 0D 97 F0 */	stw r0, lbl_804BEB70-_SDA_BASE_(r13)
+/* 80071B6C 0006CA6C  90 0D 97 F0 */	stw r0, gpCullingFrustum__Q24nw4r3g3d-_SDA_BASE_(r13)
 /* 80071B70 0006CA70  83 E1 01 3C */	lwz r31, 0x13c(r1)
 /* 80071B74 0006CA74  80 01 01 44 */	lwz r0, 0x144(r1)
 /* 80071B78 0006CA78  7C 08 03 A6 */	mtlr r0
@@ -854,7 +912,7 @@ Add__Q34nw4r3g3d12ScnObjGatherFPQ34nw4r3g3d6ScnObjbb:
 /* 80071E4C 0006CD4C  90 01 00 44 */	stw r0, 0x44(r1)
 /* 80071E50 0006CD50  39 61 00 40 */	addi r11, r1, 0x40
 /* 80071E54 0006CD54  48 03 FE F1 */	bl _savegpr_27
-/* 80071E58 0006CD58  80 0D 97 F0 */	lwz r0, lbl_804BEB70-_SDA_BASE_(r13)
+/* 80071E58 0006CD58  80 0D 97 F0 */	lwz r0, gpCullingFrustum__Q24nw4r3g3d-_SDA_BASE_(r13)
 /* 80071E5C 0006CD5C  7C 7B 1B 78 */	mr r27, r3
 /* 80071E60 0006CD60  7C 9C 23 78 */	mr r28, r4
 /* 80071E64 0006CD64  7C BD 2B 78 */	mr r29, r5
@@ -876,7 +934,7 @@ Add__Q34nw4r3g3d12ScnObjGatherFPQ34nw4r3g3d6ScnObjbb:
 /* 80071EA4 0006CDA4  38 A1 00 10 */	addi r5, r1, 0x10
 /* 80071EA8 0006CDA8  38 80 00 01 */	li r4, 1
 /* 80071EAC 0006CDAC  4B FF E2 7D */	bl GetBoundingVolume__Q34nw4r3g3d6ScnObjCFQ44nw4r3g3d6ScnObj24ScnObjBoundingVolumeTypePQ34nw4r4math4AABB
-/* 80071EB0 0006CDB0  80 6D 97 F0 */	lwz r3, lbl_804BEB70-_SDA_BASE_(r13)
+/* 80071EB0 0006CDB0  80 6D 97 F0 */	lwz r3, gpCullingFrustum__Q24nw4r3g3d-_SDA_BASE_(r13)
 /* 80071EB4 0006CDB4  38 81 00 10 */	addi r4, r1, 0x10
 /* 80071EB8 0006CDB8  4B FB ED 21 */	bl IntersectAABB_Ex__Q34nw4r4math7FRUSTUMCFPCQ34nw4r4math4AABB
 /* 80071EBC 0006CDBC  2C 03 00 00 */	cmpwi r3, 0

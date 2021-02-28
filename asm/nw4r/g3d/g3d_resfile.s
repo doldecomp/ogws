@@ -1,7 +1,76 @@
 .include "macros.inc"
 
-.section .text, "ax"  # 0x800076E0 - 0x80355080 
+.section .data, "wa"
+# ResNameData_Models__Q34nw4r3g3d25@unnamed@g3d_resfile_cpp@
+.global ResNameData_Models__Q34nw4r3g3d25$$2unnamed$$2g3d_resfile_cpp$$2
+ResNameData_Models__Q34nw4r3g3d25$$2unnamed$$2g3d_resfile_cpp$$2:
+	.long 0xE # str length
+	# ResNameData name string has max len of 27 it seems
+	# Maybe the structure is supposed to align to 32?
+	.string "3DModels(NW4R)"
+	.balign 16
+# ResNameData_Pltts__Q34nw4r3g3d25@unnamed@g3d_resfile_cpp@
+.global ResNameData_Pltts__Q34nw4r3g3d25$$2unnamed$$2g3d_resfile_cpp$$2
+ ResNameData_Pltts__Q34nw4r3g3d25$$2unnamed$$2g3d_resfile_cpp$$2:
+	.long 0xE
+	.string "Palettes(NW4R)"
+	.balign 16
+# ResNameData_Textures__Q34nw4r3g3d25@unnamed@g3d_resfile_cpp@
+.global ResNameData_Textures__Q34nw4r3g3d25$$2unnamed$$2g3d_resfile_cpp$$2
+ResNameData_Textures__Q34nw4r3g3d25$$2unnamed$$2g3d_resfile_cpp$$2:
+	.long 0xE
+	.string "Textures(NW4R)"
+	.balign 16
+# ResNameData_AnmChr__Q34nw4r3g3d25@unnamed@g3d_resfile_cpp@
+.global ResNameData_AnmChr__Q34nw4r3g3d25$$2unnamed$$2g3d_resfile_cpp$$2
+ResNameData_AnmChr__Q34nw4r3g3d25$$2unnamed$$2g3d_resfile_cpp$$2:
+	.long 0xC
+	.string "AnmChr(NW4R)"
+	.balign 16
+# ResNameData_AnmVis__Q34nw4r3g3d25@unnamed@g3d_resfile_cpp@
+.global ResNameData_AnmVis__Q34nw4r3g3d25$$2unnamed$$2g3d_resfile_cpp$$2
+ResNameData_AnmVis__Q34nw4r3g3d25$$2unnamed$$2g3d_resfile_cpp$$2:
+	.long 0xC
+	.string "AnmVis(NW4R)"
+	.balign 16
+# ResNameData_AnmClr__Q34nw4r3g3d25@unnamed@g3d_resfile_cpp@
+.global ResNameData_AnmClr__Q34nw4r3g3d25$$2unnamed$$2g3d_resfile_cpp$$2
+ResNameData_AnmClr__Q34nw4r3g3d25$$2unnamed$$2g3d_resfile_cpp$$2:
+	.long 0xC
+	.string "AnmClr(NW4R)"
+	.balign 16
+# ResNameData_AnmTexPat__Q34nw4r3g3d25@unnamed@g3d_resfile_cpp@
+.global ResNameData_AnmTexPat__Q34nw4r3g3d25$$2unnamed$$2g3d_resfile_cpp$$2
+ResNameData_AnmTexPat__Q34nw4r3g3d25$$2unnamed$$2g3d_resfile_cpp$$2:
+	.long 0xF
+	.string "AnmTexPat(NW4R)"
+	.balign 16
+# ResNameData_AnmTexSrt__Q34nw4r3g3d25@unnamed@g3d_resfile_cpp@
+.global ResNameData_AnmTexSrt__Q34nw4r3g3d25$$2unnamed$$2g3d_resfile_cpp$$2
+ResNameData_AnmTexSrt__Q34nw4r3g3d25$$2unnamed$$2g3d_resfile_cpp$$2:
+	.long 0xF
+	.string "AnmTexSrt(NW4R)"
+	.balign 16
+# ResNameData_AnmShp__Q34nw4r3g3d25@unnamed@g3d_resfile_cpp@
+.global ResNameData_AnmShp__Q34nw4r3g3d25$$2unnamed$$2g3d_resfile_cpp$$2
+ResNameData_AnmShp__Q34nw4r3g3d25$$2unnamed$$2g3d_resfile_cpp$$2:
+	.long 0xC
+	.string "AnmShp(NW4R)"
+	.balign 16
+# ResNameData_AnmScn__Q34nw4r3g3d25@unnamed@g3d_resfile_cpp@
+.global ResNameData_AnmScn__Q34nw4r3g3d25$$2unnamed$$2g3d_resfile_cpp$$2
+ResNameData_AnmScn__Q34nw4r3g3d25$$2unnamed$$2g3d_resfile_cpp$$2:
+	.long 0xC
+	.string "AnmScn(NW4R)"
+	.balign 0x10
+# ResNameData_Ext__Q34nw4r3g3d25@unnamed@g3d_resfile_cpp@ (UNUSED)
+.global ResNameData_Ext__Q34nw4r3g3d25$$2unnamed$$2g3d_resfile_cpp$$2
+ResNameData_Ext__Q34nw4r3g3d25$$2unnamed$$2g3d_resfile_cpp$$2:
+	.long 0x8
+	.string "External"
+	.fill 0x13
 
+.section .text, "ax"  # 0x800076E0 - 0x80355080 
 .global GetResMdl__Q34nw4r3g3d7ResFileCFPCc
 GetResMdl__Q34nw4r3g3d7ResFileCFPCc:
 /* 80050ADC 0004B9DC  94 21 FF E0 */	stwu r1, -0x20(r1)

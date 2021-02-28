@@ -1,7 +1,12 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .sdata2, "a"
+.global $$21164
+$$21164:
+	.single 0e0
+	.balign 8
 
+.section .text, "ax"
 .global Copy32ByteBlocks__Q34nw4r3g3d6detailFPvPCvUl
 Copy32ByteBlocks__Q34nw4r3g3d6detailFPvPCvUl:
 /* 80063F24 0005EE24  54 A5 D9 7F */	rlwinm. r5, r5, 0x1b, 5, 0x1f
@@ -66,7 +71,7 @@ lbl_80063FD0:
 .global ZeroMemory32ByteBlocks__Q34nw4r3g3d6detailFPvUl
 ZeroMemory32ByteBlocks__Q34nw4r3g3d6detailFPvUl:
 /* 80064000 0005EF00  54 84 D9 7F */	rlwinm. r4, r4, 0x1b, 5, 0x1f
-/* 80064004 0005EF04  C0 02 89 28 */	lfs f0, lbl_804C0348-_SDA2_BASE_(r2)
+/* 80064004 0005EF04  C0 02 89 28 */	lfs f0, $$21164-_SDA2_BASE_(r2)
 /* 80064008 0005EF08  4D 82 00 20 */	beqlr 
 /* 8006400C 0005EF0C  54 80 E8 FF */	rlwinm. r0, r4, 0x1d, 3, 0x1f
 /* 80064010 0005EF10  7C 09 03 A6 */	mtctr r0

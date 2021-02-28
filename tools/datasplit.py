@@ -4,7 +4,7 @@
 # Syntax: datasplit.py {VIRT_START_ADDR} {VIRT_END_ADDR}                       #
 #                                                                              #
 # Supported sections:                                                          #
-# .rodata, .data, .sdata, .sdata2                                              #
+# .ctors, .dtors, .rodata, .data, .sdata, .sdata2                              #
 #                                                                              #
 # Requirements:                                                                #
 #   - datasplit.py must be in the repo's \tools\ directory.                    #
@@ -43,6 +43,17 @@ def format(symbol):
     return symbol
 
 # Section info
+CTORS_SECTION = {
+    "START" : 0x80355080, # Virtual address of section
+    "OFFSET" : 0x351180,  # Local offset (in file)
+    "SIZE" : 0x1e0      # Size (B)
+}
+DTORS_SECTION = {
+    "START" : 0x80355260, # Virtual address of section
+    "OFFSET" : 0x351360,  # Local offset (in file)
+    "SIZE" : 0x20      # Size (B)
+}
+FILE_SIZE = 0x20500
 RODATA_SECTION = {
     "START" : 0x80375780, # Virtual address of section
     "OFFSET" : 0x371880,  # Local offset (in file)
@@ -150,6 +161,12 @@ with open("../include/baserom.dol", "rb") as f:
 
 # Split section data
 # baserom[offset : offset + size]
+ctors = baserom[
+    CTORS_SECTION["OFFSET"] :
+    CTORS_SECTION["OFFSET"] + CTORS_SECTION["SIZE"]]
+dtors = baserom[
+    DTORS_SECTION["OFFSET"] :
+    DTORS_SECTION["OFFSET"] + DTORS_SECTION["SIZE"]]
 rodata = baserom[
     RODATA_SECTION["OFFSET"] :
     RODATA_SECTION["OFFSET"] + RODATA_SECTION["SIZE"]]
@@ -164,11 +181,11 @@ sdata2 = baserom[
     SDATA2_SECTION["OFFSET"] + SDATA2_SECTION["SIZE"]]
 
 # Create contiguous section
-# rodata -> data -> bss -> sdata -> sbss -> sdata2
-baserom = bytearray(rodata + data + bytearray(BSS_SIZE) + sdata + bytearray(SBSS_SIZE) + sdata2)
+# ctors -> dtors -> file -> rodata -> data -> bss -> sdata -> sbss -> sdata2
+baserom = bytearray(ctors + dtors + bytearray(FILE_SIZE) + rodata + data + bytearray(BSS_SIZE) + sdata + bytearray(SBSS_SIZE) + sdata2)
 
 # Process data at label
-SECTION_BASE = RODATA_SECTION["START"] # Used to convert LBL_START into a local offset of baserom
+SECTION_BASE = CTORS_SECTION["START"] # Used to convert LBL_START into a local offset of baserom
 label_data = baserom[LBL_START - SECTION_BASE : LBL_END - SECTION_BASE]
 
 # Label header

@@ -1,13 +1,64 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .sdata2, "a"
+cm2hw__Q34nw4r3g3d4fifo: # local, redefined in g3d_state.s
+	.byte 00
+	.byte 02
+	.byte 01
+	.byte 03
+.global $$25835
+$$25835:
+	.single 0e1
+.global $$25836
+$$25836:
+	.single 0e0.5
+.global $$25837
+$$25837:
+	.single 0e2
+.global $$25838
+$$25838:
+	.single 0e1024
+.global $$25895
+$$25895:
+	.single 0e0
 
+.section .sbss, "wa"
+.global lbl_804BEB40
+lbl_804BEB40:
+	.skip 0x4
+.global lbl_804BEB44
+lbl_804BEB44:
+	.skip 0x4
+.global lbl_804BEB48
+lbl_804BEB48:
+	.skip 0x4
+.global lbl_804BEB4C
+lbl_804BEB4C:
+	.skip 0x4
+
+.section .bss, "wa"
+.global lbl_803EBCC8
+lbl_803EBCC8:
+	.skip 0x300
+.global lbl_803EBFC8
+lbl_803EBFC8:
+	.skip 0x158
+
+.section .rodata, "a"
+.global lbl_80378310
+lbl_80378310:
+	.incbin "baserom.dol", 0x374410, 0x3C0
+.global lbl_803786D0
+lbl_803786D0:
+	.incbin "baserom.dol", 0x3747D0, 0x3C0
+
+.section .text, "ax"
 .global GDSetGenMode2__Q34nw4r3g3d4fifoFUcUcUcUc11_GXCullMode
 GDSetGenMode2__Q34nw4r3g3d4fifoFUcUcUcUc11_GXCullMode:
 /* 800636BC 0005E5BC  3D 40 CC 01 */	lis r10, 0xCC008000@ha
 /* 800636C0 0005E5C0  39 60 00 61 */	li r11, 0x61
 /* 800636C4 0005E5C4  3D 20 FE 08 */	lis r9, 0xFE07FC3F@ha
-/* 800636C8 0005E5C8  39 02 89 10 */	addi r8, r2, lbl_804C0330-_SDA2_BASE_
+/* 800636C8 0005E5C8  39 02 89 10 */	addi r8, r2, cm2hw__Q34nw4r3g3d4fifo-_SDA2_BASE_
 /* 800636CC 0005E5CC  7C E8 38 AE */	lbzx r7, r8, r7
 /* 800636D0 0005E5D0  39 29 FC 3F */	addi r9, r9, 0xFE07FC3F@l
 /* 800636D4 0005E5D4  99 6A 80 00 */	stb r11, 0xCC008000@l(r10)
@@ -45,7 +96,7 @@ GDSetCullMode__Q34nw4r3g3d4fifoF11_GXCullMode:
 /* 80063748 0005E648  98 C5 80 00 */	stb r6, 0xCC008000@l(r5)
 /* 8006374C 0005E64C  38 04 C0 00 */	addi r0, r4, 0xFE00C000@l
 /* 80063750 0005E650  90 05 80 00 */	stw r0, -0x8000(r5)
-/* 80063754 0005E654  38 82 89 10 */	addi r4, r2, lbl_804C0330-_SDA2_BASE_
+/* 80063754 0005E654  38 82 89 10 */	addi r4, r2, cm2hw__Q34nw4r3g3d4fifo-_SDA2_BASE_
 /* 80063758 0005E658  7C 04 18 AE */	lbzx r0, r4, r3
 /* 8006375C 0005E65C  98 C5 80 00 */	stb r6, -0x8000(r5)
 /* 80063760 0005E660  54 00 70 22 */	slwi r0, r0, 0xe
@@ -89,7 +140,7 @@ GDSetIndTexMtx__Q34nw4r3g3d4fifoFUlRCQ34nw4r4math5MTX34:
 /* 800637E0 0005E6E0  38 A0 00 00 */	li r5, 0
 /* 800637E4 0005E6E4  C0 64 00 04 */	lfs f3, 4(r4)
 /* 800637E8 0005E6E8  FC A0 12 10 */	fabs f5, f2
-/* 800637EC 0005E6EC  C0 02 89 14 */	lfs f0, lbl_804C0334-_SDA2_BASE_(r2)
+/* 800637EC 0005E6EC  C0 02 89 14 */	lfs f0, $$25835-_SDA2_BASE_(r2)
 /* 800637F0 0005E6F0  C0 C4 00 08 */	lfs f6, 8(r4)
 /* 800637F4 0005E6F4  FD 20 1A 10 */	fabs f9, f3
 /* 800637F8 0005E6F8  C0 84 00 10 */	lfs f4, 0x10(r4)
@@ -119,8 +170,8 @@ GDSetIndTexMtx__Q34nw4r3g3d4fifoFUlRCQ34nw4r4math5MTX34:
 /* 80063858 0005E758  4C 41 13 82 */	cror 2, 1, 2
 /* 8006385C 0005E75C  40 82 00 98 */	bne lbl_800638F4
 lbl_80063860:
-/* 80063860 0005E760  C0 22 89 18 */	lfs f1, lbl_804C0338-_SDA2_BASE_(r2)
-/* 80063864 0005E764  C0 02 89 14 */	lfs f0, lbl_804C0334-_SDA2_BASE_(r2)
+/* 80063860 0005E760  C0 22 89 18 */	lfs f1, $$25836-_SDA2_BASE_(r2)
+/* 80063864 0005E764  C0 02 89 14 */	lfs f0, $$25835-_SDA2_BASE_(r2)
 lbl_80063868:
 /* 80063868 0005E768  7C A0 07 74 */	extsb r0, r5
 /* 8006386C 0005E76C  2C 00 00 2E */	cmpwi r0, 0x2e
@@ -158,7 +209,7 @@ lbl_80063868:
 /* 800638EC 0005E7EC  41 82 FF 7C */	beq lbl_80063868
 /* 800638F0 0005E7F0  48 00 00 AC */	b lbl_8006399C
 lbl_800638F4:
-/* 800638F4 0005E7F4  C0 22 89 18 */	lfs f1, lbl_804C0338-_SDA2_BASE_(r2)
+/* 800638F4 0005E7F4  C0 22 89 18 */	lfs f1, $$25836-_SDA2_BASE_(r2)
 /* 800638F8 0005E7F8  FC 05 08 40 */	fcmpo cr0, f5, f1
 /* 800638FC 0005E7FC  40 80 00 A0 */	bge lbl_8006399C
 /* 80063900 0005E800  FC 09 08 40 */	fcmpo cr0, f9, f1
@@ -171,7 +222,7 @@ lbl_800638F4:
 /* 8006391C 0005E81C  40 80 00 80 */	bge lbl_8006399C
 /* 80063920 0005E820  FC 0D 08 40 */	fcmpo cr0, f13, f1
 /* 80063924 0005E824  40 80 00 78 */	bge lbl_8006399C
-/* 80063928 0005E828  C0 02 89 1C */	lfs f0, lbl_804C033C-_SDA2_BASE_(r2)
+/* 80063928 0005E828  C0 02 89 1C */	lfs f0, $$25837-_SDA2_BASE_(r2)
 lbl_8006392C:
 /* 8006392C 0005E82C  EC A5 00 32 */	fmuls f5, f5, f0
 /* 80063930 0005E830  38 A5 FF FF */	addi r5, r5, -1
@@ -202,7 +253,7 @@ lbl_8006392C:
 /* 80063994 0005E894  2C 00 FF EF */	cmpwi r0, -17
 /* 80063998 0005E898  41 81 FF 94 */	bgt lbl_8006392C
 lbl_8006399C:
-/* 8006399C 0005E89C  C0 A2 89 20 */	lfs f5, lbl_804C0340-_SDA2_BASE_(r2)
+/* 8006399C 0005E89C  C0 A2 89 20 */	lfs f5, $$25838-_SDA2_BASE_(r2)
 /* 800639A0 0005E8A0  39 25 00 11 */	addi r9, r5, 0x11
 /* 800639A4 0005E8A4  38 03 00 06 */	addi r0, r3, 6
 /* 800639A8 0005E8A8  3C E0 CC 01 */	lis r7, 0xCC008000@ha
@@ -321,7 +372,7 @@ GDSetCurrentMtx__Q34nw4r3g3d4fifoFPCUl:
 GDLoadTexMtxImm3x3__Q34nw4r3g3d4fifoFRCQ34nw4r4math5MTX33Ul:
 /* 80063B4C 0005EA4C  94 21 FF C0 */	stwu r1, -0x40(r1)
 /* 80063B50 0005EA50  7C 08 02 A6 */	mflr r0
-/* 80063B54 0005EA54  C0 C2 89 24 */	lfs f6, lbl_804C0344-_SDA2_BASE_(r2)
+/* 80063B54 0005EA54  C0 C2 89 24 */	lfs f6, $$25895-_SDA2_BASE_(r2)
 /* 80063B58 0005EA58  38 A0 00 00 */	li r5, 0
 /* 80063B5C 0005EA5C  90 01 00 44 */	stw r0, 0x44(r1)
 /* 80063B60 0005EA60  C1 23 00 00 */	lfs f9, 0(r3)

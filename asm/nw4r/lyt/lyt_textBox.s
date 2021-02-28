@@ -1,7 +1,62 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .sdata2, "a"
+.global lbl_804C04A0
+lbl_804C04A0:
+	.single 0e0
+	.balign 8
+.global lbl_804C04A8
+lbl_804C04A8:
+	.long 0x43300000
+	.long 0x80000000
+.global lbl_804C04B0
+lbl_804C04B0:
+	.single 0e0.5
+.global lbl_804C04B4
+lbl_804C04B4:
+	.single 0e1
+    
+.section .sbss, "wa"
+.global typeInfo__Q34nw4r3lyt7TextBox
+typeInfo__Q34nw4r3lyt7TextBox:
+	.skip 0x4
+	.balign 8
 
+.section .data, "wa"
+.global __vt__Q34nw4r3lyt7TextBox
+__vt__Q34nw4r3lyt7TextBox:
+    .long 0
+    .long 0
+    .long __dt__Q34nw4r3lyt7TextBoxFv
+    .long GetRuntimeTypeInfo__Q34nw4r3lyt7TextBoxCFv
+    .long CalculateMtx__Q34nw4r3lyt4PaneFRCQ34nw4r3lyt8DrawInfo
+    .long Draw__Q34nw4r3lyt4PaneFRCQ34nw4r3lyt8DrawInfo
+    .long DrawSelf__Q34nw4r3lyt7TextBoxFRCQ34nw4r3lyt8DrawInfo
+    .long Animate__Q34nw4r3lyt4PaneFUl
+    .long AnimateSelf__Q34nw4r3lyt4PaneFUl
+    .long GetVtxColor__Q34nw4r3lyt7TextBoxCFUl
+    .long SetVtxColor__Q34nw4r3lyt7TextBoxFUlQ34nw4r2ut5Color
+    .long GetColorElement__Q34nw4r3lyt4PaneCFUl
+    .long SetColorElement__Q34nw4r3lyt4PaneFUlUc
+    .long GetVtxColorElement__Q34nw4r3lyt7TextBoxCFUl
+    .long SetVtxColorElement__Q34nw4r3lyt7TextBoxFUlUc
+    .long FindPaneByName__Q34nw4r3lyt4PaneFPCcb
+    .long FindMaterialByName__Q34nw4r3lyt4PaneFPCcb
+    .long BindAnimation__Q34nw4r3lyt4PaneFPQ34nw4r3lyt13AnimTransformb
+    .long UnbindAnimation__Q34nw4r3lyt4PaneFPQ34nw4r3lyt13AnimTransformb
+    .long UnbindAllAnimation__Q34nw4r3lyt4PaneFb
+    .long UnbindAnimationSelf__Q34nw4r3lyt4PaneFPQ34nw4r3lyt13AnimTransform
+    .long FindAnimationLink__Q34nw4r3lyt4PaneFPQ34nw4r3lyt13AnimTransform
+    .long SetAnimationEnable__Q34nw4r3lyt4PaneFPQ34nw4r3lyt13AnimTransformbb
+    .long GetMaterial__Q34nw4r3lyt4PaneCFv
+    .long LoadMtx__Q34nw4r3lyt4PaneFRCQ34nw4r3lyt8DrawInfo
+    .long AllocStringBuffer__Q34nw4r3lyt7TextBoxFUs
+    .long FreeStringBuffer__Q34nw4r3lyt7TextBoxFv
+    .long SetString__Q34nw4r3lyt7TextBoxFPCwUs
+    .long SetString__Q34nw4r3lyt7TextBoxFPCwUsUs
+    .long 0
+
+.section .text, "ax"
 # GetColor__25@unnamed@lyt_textBox_cpp@FRC11_GXColorS10
 .global GetColor__25$$2unnamed$$2lyt_textBox_cpp$$2FRC11_GXColorS10
 GetColor__25$$2unnamed$$2lyt_textBox_cpp$$2FRC11_GXColorS10:
@@ -70,9 +125,9 @@ __ct__Q34nw4r3lyt7TextBoxFPCQ44nw4r3lyt3res7TextBoxRCQ34nw4r3lyt11ResBlockSet:
 /* 8007B7B4 000766B4  7C 9D 23 78 */	mr r29, r4
 /* 8007B7B8 000766B8  7C BE 2B 78 */	mr r30, r5
 /* 8007B7BC 000766BC  4B FF DB 61 */	bl __ct__Q34nw4r3lyt4PaneFPCQ44nw4r3lyt3res4Pane
-/* 8007B7C0 000766C0  3C 60 80 39 */	lis r3, lbl_803972A0@ha
+/* 8007B7C0 000766C0  3C 60 80 39 */	lis r3, __vt__Q34nw4r3lyt7TextBox@ha
 /* 8007B7C4 000766C4  3C 80 80 08 */	lis r4, __ct__Q34nw4r2ut5ColorFv@ha
-/* 8007B7C8 000766C8  38 63 72 A0 */	addi r3, r3, lbl_803972A0@l
+/* 8007B7C8 000766C8  38 63 72 A0 */	addi r3, r3, __vt__Q34nw4r3lyt7TextBox@l
 /* 8007B7CC 000766CC  3C A0 80 01 */	lis r5, __dt__Q34nw4r2ut5ColorFv@ha
 /* 8007B7D0 000766D0  90 7C 00 00 */	stw r3, 0(r28)
 /* 8007B7D4 000766D4  38 7C 00 D8 */	addi r3, r28, 0xd8
@@ -196,7 +251,7 @@ lbl_8007B978:
 /* 8007B99C 0007689C  2C 03 00 00 */	cmpwi r3, 0
 /* 8007B9A0 000768A0  7C 7B 1B 78 */	mr r27, r3
 /* 8007B9A4 000768A4  41 82 00 44 */	beq lbl_8007B9E8
-/* 8007B9A8 000768A8  80 6D 98 00 */	lwz r3, lbl_804BEB80-_SDA_BASE_(r13)
+/* 8007B9A8 000768A8  80 6D 98 00 */	lwz r3, mspAllocator__Q34nw4r3lyt6Layout-_SDA_BASE_(r13)
 /* 8007B9AC 000768AC  38 80 00 18 */	li r4, 0x18
 /* 8007B9B0 000768B0  48 06 BA DD */	bl func_800E748C
 /* 8007B9B4 000768B4  2C 03 00 00 */	cmpwi r3, 0
@@ -214,7 +269,7 @@ lbl_8007B9CC:
 /* 8007B9E0 000768E0  60 00 00 80 */	ori r0, r0, 0x80
 /* 8007B9E4 000768E4  98 1C 00 FD */	stb r0, 0xfd(r28)
 lbl_8007B9E8:
-/* 8007B9E8 000768E8  80 6D 98 00 */	lwz r3, lbl_804BEB80-_SDA_BASE_(r13)
+/* 8007B9E8 000768E8  80 6D 98 00 */	lwz r3, mspAllocator__Q34nw4r3lyt6Layout-_SDA_BASE_(r13)
 /* 8007B9EC 000768EC  38 80 00 5C */	li r4, 0x5c
 /* 8007B9F0 000768F0  48 06 BA 9D */	bl func_800E748C
 /* 8007B9F4 000768F4  2C 03 00 00 */	cmpwi r3, 0
@@ -251,8 +306,8 @@ __dt__Q34nw4r3lyt7TextBoxFv:
 /* 8007BA5C 0007695C  7C 7E 1B 78 */	mr r30, r3
 /* 8007BA60 00076960  41 82 01 48 */	beq lbl_8007BBA8
 /* 8007BA64 00076964  88 03 00 FD */	lbz r0, 0xfd(r3)
-/* 8007BA68 00076968  3C 80 80 39 */	lis r4, lbl_803972A0@ha
-/* 8007BA6C 0007696C  38 84 72 A0 */	addi r4, r4, lbl_803972A0@l
+/* 8007BA68 00076968  3C 80 80 39 */	lis r4, __vt__Q34nw4r3lyt7TextBox@ha
+/* 8007BA6C 0007696C  38 84 72 A0 */	addi r4, r4, __vt__Q34nw4r3lyt7TextBox@l
 /* 8007BA70 00076970  54 00 CF FF */	rlwinm. r0, r0, 0x19, 0x1f, 0x1f
 /* 8007BA74 00076974  90 83 00 00 */	stw r4, 0(r3)
 /* 8007BA78 00076978  41 82 00 34 */	beq lbl_8007BAAC
@@ -262,7 +317,7 @@ __dt__Q34nw4r3lyt7TextBoxFv:
 /* 8007BA88 00076988  81 8C 00 08 */	lwz r12, 8(r12)
 /* 8007BA8C 0007698C  7D 89 03 A6 */	mtctr r12
 /* 8007BA90 00076990  4E 80 04 21 */	bctrl 
-/* 8007BA94 00076994  80 6D 98 00 */	lwz r3, lbl_804BEB80-_SDA_BASE_(r13)
+/* 8007BA94 00076994  80 6D 98 00 */	lwz r3, mspAllocator__Q34nw4r3lyt6Layout-_SDA_BASE_(r13)
 /* 8007BA98 00076998  80 9E 00 E0 */	lwz r4, 0xe0(r30)
 /* 8007BA9C 0007699C  48 06 BA 01 */	bl func_800E749C
 /* 8007BAA0 000769A0  88 1E 00 FD */	lbz r0, 0xfd(r30)
@@ -311,7 +366,7 @@ lbl_8007BB20:
 /* 8007BB40 00076A40  81 8C 00 08 */	lwz r12, 8(r12)
 /* 8007BB44 00076A44  7D 89 03 A6 */	mtctr r12
 /* 8007BB48 00076A48  4E 80 04 21 */	bctrl 
-/* 8007BB4C 00076A4C  80 6D 98 00 */	lwz r3, lbl_804BEB80-_SDA_BASE_(r13)
+/* 8007BB4C 00076A4C  80 6D 98 00 */	lwz r3, mspAllocator__Q34nw4r3lyt6Layout-_SDA_BASE_(r13)
 /* 8007BB50 00076A50  80 9E 00 28 */	lwz r4, 0x28(r30)
 /* 8007BB54 00076A54  48 06 B9 49 */	bl func_800E749C
 /* 8007BB58 00076A58  38 00 00 00 */	li r0, 0
@@ -620,7 +675,7 @@ AllocStringBuffer__Q34nw4r3lyt7TextBoxFUs:
 /* 8007BF84 00076E84  81 8C 00 68 */	lwz r12, 0x68(r12)
 /* 8007BF88 00076E88  7D 89 03 A6 */	mtctr r12
 /* 8007BF8C 00076E8C  4E 80 04 21 */	bctrl 
-/* 8007BF90 00076E90  80 6D 98 00 */	lwz r3, lbl_804BEB80-_SDA_BASE_(r13)
+/* 8007BF90 00076E90  80 6D 98 00 */	lwz r3, mspAllocator__Q34nw4r3lyt6Layout-_SDA_BASE_(r13)
 /* 8007BF94 00076E94  7F E4 FB 78 */	mr r4, r31
 /* 8007BF98 00076E98  48 06 B4 F5 */	bl func_800E748C
 /* 8007BF9C 00076E9C  2C 03 00 00 */	cmpwi r3, 0
@@ -645,7 +700,7 @@ FreeStringBuffer__Q34nw4r3lyt7TextBoxFv:
 /* 8007BFD8 00076ED8  80 83 00 D4 */	lwz r4, 0xd4(r3)
 /* 8007BFDC 00076EDC  2C 04 00 00 */	cmpwi r4, 0
 /* 8007BFE0 00076EE0  41 82 00 18 */	beq lbl_8007BFF8
-/* 8007BFE4 00076EE4  80 6D 98 00 */	lwz r3, lbl_804BEB80-_SDA_BASE_(r13)
+/* 8007BFE4 00076EE4  80 6D 98 00 */	lwz r3, mspAllocator__Q34nw4r3lyt6Layout-_SDA_BASE_(r13)
 /* 8007BFE8 00076EE8  48 06 B4 B5 */	bl func_800E749C
 /* 8007BFEC 00076EEC  38 00 00 00 */	li r0, 0
 /* 8007BFF0 00076EF0  90 1F 00 D4 */	stw r0, 0xd4(r31)
@@ -899,12 +954,12 @@ lbl_8007C2DC:
 
 .global GetRuntimeTypeInfo__Q34nw4r3lyt7TextBoxCFv
 GetRuntimeTypeInfo__Q34nw4r3lyt7TextBoxCFv:
-/* 8007C350 00077250  38 6D 98 10 */	addi r3, r13, lbl_804BEB90-_SDA_BASE_
+/* 8007C350 00077250  38 6D 98 10 */	addi r3, r13, typeInfo__Q34nw4r3lyt7TextBox-_SDA_BASE_
 /* 8007C354 00077254  4E 80 00 20 */	blr 
 
 # __sinit_\lyt_textBox_cpp
 .global __sinit_$$3lyt_textBox_cpp
 __sinit_$$3lyt_textBox_cpp:
-/* 8007C358 00077258  38 0D 97 F8 */	addi r0, r13, lbl_804BEB78-_SDA_BASE_
-/* 8007C35C 0007725C  90 0D 98 10 */	stw r0, lbl_804BEB90-_SDA_BASE_(r13)
+/* 8007C358 00077258  38 0D 97 F8 */	addi r0, r13, typeInfo__Q34nw4r3lyt4Pane-_SDA_BASE_
+/* 8007C35C 0007725C  90 0D 98 10 */	stw r0, typeInfo__Q34nw4r3lyt7TextBox-_SDA_BASE_(r13)
 /* 8007C360 00077260  4E 80 00 20 */	blr 

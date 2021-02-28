@@ -1,7 +1,11 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .bss, "wa"
+.global lbl_803F1700
+lbl_803F1700:
+	.skip 0x18000
 
+.section .text, "ax"
 .global GetScaleTemporary__Q44nw4r3g3d6detail7workmemFv
 GetScaleTemporary__Q44nw4r3g3d6detail7workmemFv:
 /* 8006A028 00064F28  3C 60 80 3F */	lis r3, lbl_803F1700@ha

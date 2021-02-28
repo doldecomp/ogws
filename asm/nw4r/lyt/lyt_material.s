@@ -1,7 +1,69 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .sdata2, "a"
+.global lbl_804C04D0
+lbl_804C04D0:
+	.single 0e0.5
+.global lbl_804C04D4
+lbl_804C04D4:
+	.single 0e0.7111111
+.global lbl_804C04D8
+lbl_804C04D8:
+	.single 0e0
+.global lbl_804C04DC
+lbl_804C04DC:
+	.single 0e1
+.global lbl_804C04E0
+lbl_804C04E0:
+	.single 0e2
+	.balign 8
+.global lbl_804C04E8
+lbl_804C04E8:
+	.long 0x43300000
+	.long 0x00000000
 
+.section .data, "wa"
+# Two copies of the same table???
+.global lbl_80397438
+lbl_80397438:
+    .long 0x1f
+    .long 0x1b
+    .long 0x17
+    .long 0x13
+    .long 0x1e
+    .long 0x1a
+    .long 0x16
+    .long 0x12
+.global lbl_80397458
+lbl_80397458:
+    .long 0x1f
+    .long 0x1b
+    .long 0x17
+    .long 0x13
+    .long 0x1e
+    .long 0x1a
+    .long 0x16
+    .long 0x12
+.global __vt__Q34nw4r3lyt8Material
+__vt__Q34nw4r3lyt8Material:
+    .long 0
+    .long 0
+    .long __dt__Q34nw4r3lyt8MaterialFv
+    .long SetupGX__Q34nw4r3lyt8MaterialFbUc
+    .long BindAnimation__Q34nw4r3lyt8MaterialFPQ34nw4r3lyt13AnimTransform
+    .long UnbindAnimation__Q34nw4r3lyt8MaterialFPQ34nw4r3lyt13AnimTransform
+    .long UnbindAllAnimation__Q34nw4r3lyt8MaterialFv
+    .long Animate__Q34nw4r3lyt8MaterialFv
+    .long FindAnimationLink__Q34nw4r3lyt8MaterialFPQ34nw4r3lyt13AnimTransform
+    .long SetAnimationEnable__Q34nw4r3lyt8MaterialFPQ34nw4r3lyt13AnimTransformb
+
+.section .sbss2, "a"
+.balign 8
+.global DefaultBlackColor
+DefaultBlackColor:
+	.skip 0x8
+
+.section .text, "ax"
 # CalcTextureMtx__26@unnamed@lyt_material_cpp@FPQ34nw4r4math5MTX34RCQ34nw4r3lyt6TexSRT
 .global CalcTextureMtx__26$$2unnamed$$2lyt_material_cpp$$2FPQ34nw4r4math5MTX34RCQ34nw4r3lyt6TexSRT
 CalcTextureMtx__26$$2unnamed$$2lyt_material_cpp$$2FPQ34nw4r4math5MTX34RCQ34nw4r3lyt6TexSRT:
@@ -216,10 +278,10 @@ __ct__Q34nw4r3lyt8MaterialFPCQ44nw4r3lyt3res8MaterialRCQ34nw4r3lyt11ResBlockSet:
 /* 8007ED58 00079C58  39 61 00 90 */	addi r11, r1, 0x90
 /* 8007ED5C 00079C5C  48 03 2F B5 */	bl _savegpr_14
 /* 8007ED60 00079C60  39 C0 00 00 */	li r14, 0
-/* 8007ED64 00079C64  3D 00 80 39 */	lis r8, lbl_80397478@ha
+/* 8007ED64 00079C64  3D 00 80 39 */	lis r8, __vt__Q34nw4r3lyt8Material@ha
 /* 8007ED68 00079C68  91 C3 00 08 */	stw r14, 8(r3)
 /* 8007ED6C 00079C6C  39 23 00 08 */	addi r9, r3, 8
-/* 8007ED70 00079C70  39 08 74 78 */	addi r8, r8, lbl_80397478@l
+/* 8007ED70 00079C70  39 08 74 78 */	addi r8, r8, __vt__Q34nw4r3lyt8Material@l
 /* 8007ED74 00079C74  3C E0 80 08 */	lis r7, __ct__Q34nw4r2ut5ColorFv@ha
 /* 8007ED78 00079C78  91 C3 00 0C */	stw r14, 0xc(r3)
 /* 8007ED7C 00079C7C  3C C0 80 01 */	lis r6, __dt__Q34nw4r2ut5ColorFv@ha
@@ -236,11 +298,11 @@ __ct__Q34nw4r3lyt8MaterialFPCQ44nw4r3lyt3res8MaterialRCQ34nw4r3lyt11ResBlockSet:
 /* 8007EDA8 00079CA8  91 23 00 0C */	stw r9, 0xc(r3)
 /* 8007EDAC 00079CAC  38 63 00 28 */	addi r3, r3, 0x28
 /* 8007EDB0 00079CB0  48 03 2C A5 */	bl __construct_array
-/* 8007EDB4 00079CB4  38 82 EF C8 */	addi r4, r2, lbl_804C69E8-_SDA2_BASE_
+/* 8007EDB4 00079CB4  38 82 EF C8 */	addi r4, r2, DefaultBlackColor-_SDA2_BASE_
 /* 8007EDB8 00079CB8  80 0F 00 3C */	lwz r0, 0x3c(r15)
 /* 8007EDBC 00079CBC  80 6F 00 38 */	lwz r3, 0x38(r15)
 /* 8007EDC0 00079CC0  38 E0 00 FF */	li r7, 0xff
-/* 8007EDC4 00079CC4  A9 42 EF C8 */	lha r10, lbl_804C69E8-_SDA2_BASE_(r2)
+/* 8007EDC4 00079CC4  A9 42 EF C8 */	lha r10, DefaultBlackColor-_SDA2_BASE_(r2)
 /* 8007EDC8 00079CC8  54 00 06 FE */	clrlwi r0, r0, 0x1b
 /* 8007EDCC 00079CCC  54 66 06 FE */	clrlwi r6, r3, 0x1b
 /* 8007EDD0 00079CD0  A8 A4 00 02 */	lha r5, 2(r4)
@@ -1311,8 +1373,8 @@ __dt__Q34nw4r3lyt8MaterialFv:
 /* 8007FDA0 0007ACA0  93 C1 00 08 */	stw r30, 8(r1)
 /* 8007FDA4 0007ACA4  7C 7E 1B 78 */	mr r30, r3
 /* 8007FDA8 0007ACA8  41 82 00 70 */	beq lbl_8007FE18
-/* 8007FDAC 0007ACAC  3D 80 80 39 */	lis r12, lbl_80397478@ha
-/* 8007FDB0 0007ACB0  39 8C 74 78 */	addi r12, r12, lbl_80397478@l
+/* 8007FDAC 0007ACAC  3D 80 80 39 */	lis r12, __vt__Q34nw4r3lyt8Material@ha
+/* 8007FDB0 0007ACB0  39 8C 74 78 */	addi r12, r12, __vt__Q34nw4r3lyt8Material@l
 /* 8007FDB4 0007ACB4  91 83 00 00 */	stw r12, 0(r3)
 /* 8007FDB8 0007ACB8  81 8C 00 18 */	lwz r12, 0x18(r12)
 /* 8007FDBC 0007ACBC  7D 89 03 A6 */	mtctr r12
@@ -1320,7 +1382,7 @@ __dt__Q34nw4r3lyt8MaterialFv:
 /* 8007FDC4 0007ACC4  80 9E 00 40 */	lwz r4, 0x40(r30)
 /* 8007FDC8 0007ACC8  2C 04 00 00 */	cmpwi r4, 0
 /* 8007FDCC 0007ACCC  41 82 00 14 */	beq lbl_8007FDE0
-/* 8007FDD0 0007ACD0  80 6D 98 00 */	lwz r3, lbl_804BEB80-_SDA_BASE_(r13)
+/* 8007FDD0 0007ACD0  80 6D 98 00 */	lwz r3, mspAllocator__Q34nw4r3lyt6Layout-_SDA_BASE_(r13)
 /* 8007FDD4 0007ACD4  48 06 76 C9 */	bl func_800E749C
 /* 8007FDD8 0007ACD8  38 00 00 00 */	li r0, 0
 /* 8007FDDC 0007ACDC  90 1E 00 40 */	stw r0, 0x40(r30)
@@ -1406,7 +1468,7 @@ lbl_8007FF00:
 /* 8007FF00 0007AE00  80 83 00 40 */	lwz r4, 0x40(r3)
 /* 8007FF04 0007AE04  2C 04 00 00 */	cmpwi r4, 0
 /* 8007FF08 0007AE08  41 82 00 2C */	beq lbl_8007FF34
-/* 8007FF0C 0007AE0C  80 6D 98 00 */	lwz r3, lbl_804BEB80-_SDA_BASE_(r13)
+/* 8007FF0C 0007AE0C  80 6D 98 00 */	lwz r3, mspAllocator__Q34nw4r3lyt6Layout-_SDA_BASE_(r13)
 /* 8007FF10 0007AE10  48 06 75 8D */	bl func_800E749C
 /* 8007FF14 0007AE14  80 74 00 38 */	lwz r3, 0x38(r20)
 /* 8007FF18 0007AE18  38 80 00 00 */	li r4, 0
@@ -1426,7 +1488,7 @@ lbl_8007FF34:
 /* 8007FF4C 0007AE4C  7C C5 1A 14 */	add r6, r5, r3
 /* 8007FF50 0007AE50  57 00 25 36 */	rlwinm r0, r24, 4, 0x14, 0x1b
 /* 8007FF54 0007AE54  1C B5 00 1C */	mulli r5, r21, 0x1c
-/* 8007FF58 0007AE58  80 6D 98 00 */	lwz r3, lbl_804BEB80-_SDA_BASE_(r13)
+/* 8007FF58 0007AE58  80 6D 98 00 */	lwz r3, mspAllocator__Q34nw4r3lyt6Layout-_SDA_BASE_(r13)
 /* 8007FF5C 0007AE5C  7C 86 22 14 */	add r4, r6, r4
 /* 8007FF60 0007AE60  54 84 10 3A */	slwi r4, r4, 2
 /* 8007FF64 0007AE64  7C 87 22 14 */	add r4, r7, r4
@@ -2808,10 +2870,10 @@ lbl_80081334:
 lbl_80081344:
 /* 80081344 0007C244  A8 7B 00 10 */	lha r3, 0x10(r27)
 /* 80081348 0007C248  38 A0 00 00 */	li r5, 0
-/* 8008134C 0007C24C  A8 02 EF C8 */	lha r0, lbl_804C69E8-_SDA2_BASE_(r2)
+/* 8008134C 0007C24C  A8 02 EF C8 */	lha r0, DefaultBlackColor-_SDA2_BASE_(r2)
 /* 80081350 0007C250  7C 03 00 00 */	cmpw r3, r0
 /* 80081354 0007C254  40 82 00 3C */	bne lbl_80081390
-/* 80081358 0007C258  38 82 EF C8 */	addi r4, r2, lbl_804C69E8-_SDA2_BASE_
+/* 80081358 0007C258  38 82 EF C8 */	addi r4, r2, DefaultBlackColor-_SDA2_BASE_
 /* 8008135C 0007C25C  A8 7B 00 12 */	lha r3, 0x12(r27)
 /* 80081360 0007C260  A8 04 00 02 */	lha r0, 2(r4)
 /* 80081364 0007C264  7C 03 00 00 */	cmpw r3, r0

@@ -2,15 +2,15 @@
 
 .section .ctors, "a"  # 0x80355080 - 0x80355260
 
-.4byte 0x80047890
-.4byte 0x8004AF74
-.4byte 0x8004F22C
-.4byte 0x8006783C
-.4byte 0x8007A220
-.4byte 0x8007B6DC
-.4byte 0x8007C358
-.4byte 0x8007E990
-.4byte 0x8007EA3C
+.4byte __sinit_$$3snd_SoundSystem_cpp
+.4byte __sinit_$$3snd_StrmSound_cpp
+.4byte __sinit_$$3snd_WaveSound_cpp
+.4byte __sinit_$$3g3d_state_cpp
+.4byte __sinit_$$3lyt_pane_cpp
+.4byte __sinit_$$3lyt_picture_cpp
+.4byte __sinit_$$3lyt_textBox_cpp
+.4byte __sinit_$$3lyt_window_cpp
+.4byte __sinit_$$3lyt_bounding_cpp
 .4byte 0x80085484
 .4byte 0x80085C7C
 .4byte 0x80089DC8

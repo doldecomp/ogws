@@ -1,7 +1,42 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .sdata2, "a"
+.global lbl_804C0398
+lbl_804C0398:
+	.single 0e0
+.global lbl_804C039C
+lbl_804C039C:
+	.single 0e15
+.global lbl_804C03A0
+lbl_804C03A0:
+	.single 0e1
+.global lbl_804C03A4
+lbl_804C03A4:
+	.single 0e60
+.global lbl_804C03A8
+lbl_804C03A8:
+	.single 0e1.3333334
+.global lbl_804C03AC
+lbl_804C03AC:
+	.single 0e0.1
+.global lbl_804C03B0
+lbl_804C03B0:
+	.single 0e1000
+.global lbl_804C03B4
+lbl_804C03B4:
+	.single 0e0.5
+.global lbl_804C03B8
+lbl_804C03B8:
+	.long 0x43300000
+	.long 0x00000000
+.global lbl_804C03C0
+lbl_804C03C0:
+	.single 0e-1
+.global lbl_804C03C4
+lbl_804C03C4:
+	.single 0e0.7111111
 
+.section .text, "ax"
 .global __ct__Q34nw4r3g3d6CameraFPQ34nw4r3g3d10CameraData
 __ct__Q34nw4r3g3d6CameraFPQ34nw4r3g3d10CameraData:
 /* 8006C784 00067684  90 83 00 00 */	stw r4, 0(r3)

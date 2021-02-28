@@ -1,7 +1,50 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .sdata2, "a"
+.global lbl_804C0248
+lbl_804C0248:
+	.single 0e0
+.global lbl_804C024C
+lbl_804C024C:
+	.single 0e1
+.global lbl_804C0250
+lbl_804C0250:
+	.single 0e2
+.global lbl_804C0254
+lbl_804C0254:
+	.single 0e3
+.global lbl_804C0258
+lbl_804C0258:
+	.single 0e0.7111111
+	.balign 8
+.global lbl_804C0260
+lbl_804C0260:
+	.long 0x43300000
+	.long 0x00000000
+.global lbl_804C0268
+lbl_804C0268:
+	.single 0e1.40625
+.global lbl_804C026C
+lbl_804C026C:
+	.single 0e90
+.global lbl_804C0270
+lbl_804C0270:
+	.single 0e-90
+	.balign 8
 
+.section .rodata, "a"
+.global lbl_803780A8
+lbl_803780A8:
+    .long 0x800590a4
+    .long 0x800591b4
+    .long 0x80059148
+    .long 0x8005929c
+    .long 0x800590bc
+    .long 0x80059338
+    .long 0x800591f4
+    .long 0x800593d0
+
+.section .text, "ax"
 # GetAnmScale__Q34nw4r3g3d27@unnamed@g3d_resanmchr_cpp@FPQ34nw4r4math4VEC3PCQ34nw4r3g3d17ResAnmChrNodeDataPCQ44nw4r3g3d17ResAnmChrNodeData7AnmDataf
 .global GetAnmScale__Q34nw4r3g3d27$$2unnamed$$2g3d_resanmchr_cpp$$2FPQ34nw4r4math4VEC3PCQ34nw4r3g3d17ResAnmChrNodeDataPCQ44nw4r3g3d17ResAnmChrNodeData7AnmDataf
 GetAnmScale__Q34nw4r3g3d27$$2unnamed$$2g3d_resanmchr_cpp$$2FPQ34nw4r4math4VEC3PCQ34nw4r3g3d17ResAnmChrNodeDataPCQ44nw4r3g3d17ResAnmChrNodeData7AnmDataf:

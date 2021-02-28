@@ -1,7 +1,122 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .sdata2, "a"
+.global $$29665
+$$29665:
+	.single 0e0
+.global $$29750
+$$29750:
+	.single 0e1
+.global $$210340
+$$210340:
+	.long 0x43300000
+	.long 0x80000000
 
+.section .data, "wa"
+.global __vt__Q34nw4r3g3d15AnmObjTexPatRes
+__vt__Q34nw4r3g3d15AnmObjTexPatRes:
+    .long 0
+    .long 0
+    .long IsDerivedFrom__Q34nw4r3g3d15AnmObjTexPatResCFQ44nw4r3g3d6G3dObj7TypeObj
+    .long G3dProc__Q34nw4r3g3d15AnmObjTexPatResFUlUlPv
+    .long __dt__Q34nw4r3g3d15AnmObjTexPatResFv
+    .long GetTypeObj__Q34nw4r3g3d15AnmObjTexPatResCFv
+    .long GetTypeName__Q34nw4r3g3d15AnmObjTexPatResCFv
+    .long SetFrame__Q34nw4r3g3d15AnmObjTexPatResFf
+    .long GetFrame__Q34nw4r3g3d15AnmObjTexPatResCFv
+    .long UpdateFrame__Q34nw4r3g3d15AnmObjTexPatResFv
+    .long SetUpdateRate__Q34nw4r3g3d15AnmObjTexPatResFf
+    .long GetUpdateRate__Q34nw4r3g3d15AnmObjTexPatResCFv
+    .long Bind__Q34nw4r3g3d15AnmObjTexPatResFQ34nw4r3g3d6ResMdl
+    .long Release__Q34nw4r3g3d12AnmObjTexPatFv
+    .long GetResult__Q34nw4r3g3d15AnmObjTexPatResFPQ34nw4r3g3d15TexPatAnmResultUl
+    .long Attach__Q34nw4r3g3d12AnmObjTexPatFiPQ34nw4r3g3d15AnmObjTexPatRes
+    .long Detach__Q34nw4r3g3d12AnmObjTexPatFi
+    .long DetachAll__Q34nw4r3g3d12AnmObjTexPatFv
+.global __vt__Q34nw4r3g3d20AnmObjTexPatOverride
+__vt__Q34nw4r3g3d20AnmObjTexPatOverride:
+    .long 0
+    .long 0
+    .long IsDerivedFrom__Q34nw4r3g3d20AnmObjTexPatOverrideCFQ44nw4r3g3d6G3dObj7TypeObj
+    .long G3dProc__Q34nw4r3g3d16AnmObjTexPatNodeFUlUlPv
+    .long __dt__Q34nw4r3g3d20AnmObjTexPatOverrideFv
+    .long GetTypeObj__Q34nw4r3g3d20AnmObjTexPatOverrideCFv
+    .long GetTypeName__Q34nw4r3g3d20AnmObjTexPatOverrideCFv
+    .long SetFrame__Q34nw4r3g3d16AnmObjTexPatNodeFf
+    .long GetFrame__Q34nw4r3g3d16AnmObjTexPatNodeCFv
+    .long UpdateFrame__Q34nw4r3g3d16AnmObjTexPatNodeFv
+    .long SetUpdateRate__Q34nw4r3g3d16AnmObjTexPatNodeFf
+    .long GetUpdateRate__Q34nw4r3g3d16AnmObjTexPatNodeCFv
+    .long Bind__Q34nw4r3g3d16AnmObjTexPatNodeFQ34nw4r3g3d6ResMdl
+    .long Release__Q34nw4r3g3d16AnmObjTexPatNodeFv
+    .long GetResult__Q34nw4r3g3d20AnmObjTexPatOverrideFPQ34nw4r3g3d15TexPatAnmResultUl
+    .long Attach__Q34nw4r3g3d16AnmObjTexPatNodeFiPQ34nw4r3g3d15AnmObjTexPatRes
+    .long Detach__Q34nw4r3g3d16AnmObjTexPatNodeFi
+    .long DetachAll__Q34nw4r3g3d16AnmObjTexPatNodeFv
+.global __vt__Q34nw4r3g3d16AnmObjTexPatNode
+__vt__Q34nw4r3g3d16AnmObjTexPatNode:
+    .long 0
+    .long 0
+    .long IsDerivedFrom__Q34nw4r3g3d16AnmObjTexPatNodeCFQ44nw4r3g3d6G3dObj7TypeObj
+    .long G3dProc__Q34nw4r3g3d16AnmObjTexPatNodeFUlUlPv
+    .long __dt__Q34nw4r3g3d16AnmObjTexPatNodeFv
+    .long GetTypeObj__Q34nw4r3g3d16AnmObjTexPatNodeCFv
+    .long GetTypeName__Q34nw4r3g3d16AnmObjTexPatNodeCFv
+    .long SetFrame__Q34nw4r3g3d16AnmObjTexPatNodeFf
+    .long GetFrame__Q34nw4r3g3d16AnmObjTexPatNodeCFv
+    .long UpdateFrame__Q34nw4r3g3d16AnmObjTexPatNodeFv
+    .long SetUpdateRate__Q34nw4r3g3d16AnmObjTexPatNodeFf
+    .long GetUpdateRate__Q34nw4r3g3d16AnmObjTexPatNodeCFv
+    .long Bind__Q34nw4r3g3d16AnmObjTexPatNodeFQ34nw4r3g3d6ResMdl
+    .long Release__Q34nw4r3g3d16AnmObjTexPatNodeFv
+    .long 0
+    .long Attach__Q34nw4r3g3d16AnmObjTexPatNodeFiPQ34nw4r3g3d15AnmObjTexPatRes
+    .long Detach__Q34nw4r3g3d16AnmObjTexPatNodeFi
+    .long DetachAll__Q34nw4r3g3d16AnmObjTexPatNodeFv
+.global __vt__Q34nw4r3g3d12AnmObjTexPat
+__vt__Q34nw4r3g3d12AnmObjTexPat:
+    .long 0
+    .long 0
+    .long IsDerivedFrom__Q34nw4r3g3d12AnmObjTexPatCFQ44nw4r3g3d6G3dObj7TypeObj
+    .long 0
+    .long __dt__Q34nw4r3g3d12AnmObjTexPatFv
+    .long GetTypeObj__Q34nw4r3g3d12AnmObjTexPatCFv
+    .long GetTypeName__Q34nw4r3g3d12AnmObjTexPatCFv
+    .long 0
+    .long 0
+    .long 0
+    .long 0
+    .long 0
+    .long 0
+    .long Release__Q34nw4r3g3d12AnmObjTexPatFv
+    .long 0
+    .long Attach__Q34nw4r3g3d12AnmObjTexPatFiPQ34nw4r3g3d15AnmObjTexPatRes
+    .long Detach__Q34nw4r3g3d12AnmObjTexPatFi
+    .long DetachAll__Q34nw4r3g3d12AnmObjTexPatFv
+
+.section .rodata, "a"
+.global lbl_80378180
+lbl_80378180:
+	.long 0x0D
+	.string "AnmObjTexPat"
+	.balign 8
+.global lbl_80378198
+lbl_80378198:
+	.long 0x11
+	.string "AnmObjTexPatNode"
+	.balign 8
+.global lbl_803781B0
+lbl_803781B0:
+	.long 0x15
+	.string "AnmObjTexPatOverride"
+	.balign 8
+.global lbl_803781D0
+lbl_803781D0:
+	.long 0x10
+	.string "AnmObjTexPatRes"
+	.balign 8
+
+.section .text, "ax"
 .global TestExistence__Q34nw4r3g3d12AnmObjTexPatCFUl
 TestExistence__Q34nw4r3g3d12AnmObjTexPatCFUl:
 /* 8005D558 00058458  80 63 00 14 */	lwz r3, 0x14(r3)
@@ -369,7 +484,7 @@ lbl_8005DA0C:
 /* 8005DA10 00058910  38 C6 00 01 */	addi r6, r6, 1
 /* 8005DA14 00058914  42 00 FF D0 */	bdnz lbl_8005D9E4
 lbl_8005DA18:
-/* 8005DA18 00058918  C0 22 88 B0 */	lfs f1, lbl_804C02D0-_SDA2_BASE_(r2)
+/* 8005DA18 00058918  C0 22 88 B0 */	lfs f1, $$29665-_SDA2_BASE_(r2)
 /* 8005DA1C 0005891C  4E 80 00 20 */	blr 
 
 .global SetUpdateRate__Q34nw4r3g3d16AnmObjTexPatNodeFf
@@ -436,7 +551,7 @@ lbl_8005DAE8:
 /* 8005DAEC 000589EC  38 C6 00 01 */	addi r6, r6, 1
 /* 8005DAF0 000589F0  42 00 FF D0 */	bdnz lbl_8005DAC0
 lbl_8005DAF4:
-/* 8005DAF4 000589F4  C0 22 88 B4 */	lfs f1, lbl_804C02D4-_SDA2_BASE_(r2)
+/* 8005DAF4 000589F4  C0 22 88 B4 */	lfs f1, $$29750-_SDA2_BASE_(r2)
 /* 8005DAF8 000589F8  4E 80 00 20 */	blr 
 
 .global Bind__Q34nw4r3g3d16AnmObjTexPatNodeFQ34nw4r3g3d6ResMdl
@@ -835,14 +950,14 @@ lbl_8005DFF0:
 /* 8005E044 00058F44  80 BE 00 34 */	lwz r5, 0x34(r30)
 /* 8005E048 00058F48  3C 60 80 39 */	lis r3, __vt__Q34nw4r3g3d15AnmObjTexPatRes@ha
 /* 8005E04C 00058F4C  6C 84 80 00 */	xoris r4, r4, 0x8000
-/* 8005E050 00058F50  C0 22 88 B0 */	lfs f1, lbl_804C02D0-_SDA2_BASE_(r2)
+/* 8005E050 00058F50  C0 22 88 B0 */	lfs f1, $$29665-_SDA2_BASE_(r2)
 /* 8005E054 00058F54  90 81 00 0C */	stw r4, 0xc(r1)
 /* 8005E058 00058F58  54 A5 10 3A */	slwi r5, r5, 2
-/* 8005E05C 00058F5C  C0 02 88 B4 */	lfs f0, lbl_804C02D4-_SDA2_BASE_(r2)
+/* 8005E05C 00058F5C  C0 02 88 B4 */	lfs f0, $$29750-_SDA2_BASE_(r2)
 /* 8005E060 00058F60  38 8D 80 98 */	addi r4, r13, lbl_804BD418-_SDA_BASE_
 /* 8005E064 00058F64  90 01 00 08 */	stw r0, 8(r1)
 /* 8005E068 00058F68  38 63 69 B0 */	addi r3, r3, __vt__Q34nw4r3g3d15AnmObjTexPatRes@l
-/* 8005E06C 00058F6C  C8 62 88 B8 */	lfd f3, lbl_804C02D8-_SDA2_BASE_(r2)
+/* 8005E06C 00058F6C  C8 62 88 B8 */	lfd f3, $$210340-_SDA2_BASE_(r2)
 /* 8005E070 00058F70  2C 1B 00 00 */	cmpwi r27, 0
 /* 8005E074 00058F74  D0 3F 00 18 */	stfs f1, 0x18(r31)
 /* 8005E078 00058F78  C8 41 00 08 */	lfd f2, 8(r1)
