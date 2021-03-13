@@ -2,6 +2,7 @@
 #define NW4R_G3D_RESMDL_H
 #include "types_nw4r.h"
 #include "g3d_rescommon.h"
+#include "g3d_resvtx.h"
 
 namespace nw4r
 {
@@ -35,6 +36,11 @@ namespace nw4r
 			{
 				return mMdl.ref().mRevision == REVISION;
 			}
+			
+			ResVtxPos GetResVtxPos(int) const;
+			ResVtxNrm GetResVtxNrm(int) const;
+			ResVtxClr GetResVtxClr(int) const;
+			ResVtxTexCoord GetResVtxTexCoord(int) const;
 		};
 	}
 }

@@ -16,6 +16,7 @@ u32 LCQueueLength(UNKTYPE);
 
 UNKTYPE DCFlushRange(UNKTYPE *, u32);
 UNKTYPE DCStoreRange(void *, u32);
+UNKTYPE DCStoreRangeNoSync(void *, u32);
 
 #ifdef __cplusplus
 }

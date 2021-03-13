@@ -10,7 +10,7 @@ DCStore__Q34nw4r3g3d7ResPlttFb:
 /* 80056A94 00051994  41 82 00 08 */	beq lbl_80056A9C
 /* 80056A98 00051998  48 09 76 C8 */	b DCStoreRange
 lbl_80056A9C:
-/* 80056A9C 0005199C  48 09 77 20 */	b func_800EE1BC
+/* 80056A9C 0005199C  48 09 77 20 */	b DCStoreRangeNoSync
 
 .global GetTexObjParam__Q34nw4r3g3d6ResTexCFPPvPUsPUsP9_GXTexFmtPfPfPUc
 GetTexObjParam__Q34nw4r3g3d6ResTexCFPPvPUsPUsP9_GXTexFmtPfPfPUc:

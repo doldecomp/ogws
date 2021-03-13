@@ -38,6 +38,14 @@ namespace nw4r
 				
 				return NULL;
 			}
+			
+			template <typename TObj>
+			inline TObj ofs_to_obj(s32 ofs) const
+			{
+				if (ofs) return (u8 *)mPtr + ofs;
+				
+				return NULL;
+			}
 		};
 		
 		struct ResNameData
@@ -99,10 +107,15 @@ namespace nw4r
 				ret |= ResRead_u8(res + 3);
 				return ret;
 			}
-
+			
 			inline void ResReadBPCmd(const u8 *res, u32 *out)
 			{
 				*out = ResRead_u32(res + 1);
+			}
+			
+			inline void ResReadCPCmd(const u8 *res, u32 *out)
+			{
+				*out = ResRead_u32(res + 2);
 			}
 			
 			void ResWriteBPCmd(u8 *, u32);

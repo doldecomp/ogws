@@ -236,7 +236,7 @@ DCStore__Q34nw4r3g3d9ResVtxPosFb:
 /* 80056A34 00051934  41 82 00 08 */	beq lbl_80056A3C
 /* 80056A38 00051938  48 09 77 28 */	b DCStoreRange
 lbl_80056A3C:
-/* 80056A3C 0005193C  48 09 77 80 */	b func_800EE1BC
+/* 80056A3C 0005193C  48 09 77 80 */	b DCStoreRangeNoSync
 
 .global DCStore__Q34nw4r3g3d9ResVtxNrmFb
 DCStore__Q34nw4r3g3d9ResVtxNrmFb:
@@ -246,7 +246,7 @@ DCStore__Q34nw4r3g3d9ResVtxNrmFb:
 /* 80056A4C 0005194C  41 82 00 08 */	beq lbl_80056A54
 /* 80056A50 00051950  48 09 77 10 */	b DCStoreRange
 lbl_80056A54:
-/* 80056A54 00051954  48 09 77 68 */	b func_800EE1BC
+/* 80056A54 00051954  48 09 77 68 */	b DCStoreRangeNoSync
 
 .global DCStore__Q34nw4r3g3d9ResVtxClrFb
 DCStore__Q34nw4r3g3d9ResVtxClrFb:
@@ -256,7 +256,7 @@ DCStore__Q34nw4r3g3d9ResVtxClrFb:
 /* 80056A64 00051964  41 82 00 08 */	beq lbl_80056A6C
 /* 80056A68 00051968  48 09 76 F8 */	b DCStoreRange
 lbl_80056A6C:
-/* 80056A6C 0005196C  48 09 77 50 */	b func_800EE1BC
+/* 80056A6C 0005196C  48 09 77 50 */	b DCStoreRangeNoSync
 
 .global DCStore__Q34nw4r3g3d14ResVtxTexCoordFb
 DCStore__Q34nw4r3g3d14ResVtxTexCoordFb:
@@ -266,4 +266,4 @@ DCStore__Q34nw4r3g3d14ResVtxTexCoordFb:
 /* 80056A7C 0005197C  41 82 00 08 */	beq lbl_80056A84
 /* 80056A80 00051980  48 09 76 E0 */	b DCStoreRange
 lbl_80056A84:
-/* 80056A84 00051984  48 09 77 38 */	b func_800EE1BC
+/* 80056A84 00051984  48 09 77 38 */	b DCStoreRangeNoSync
