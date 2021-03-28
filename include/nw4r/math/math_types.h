@@ -133,6 +133,29 @@ namespace nw4r
 				return mEntries.tbl;
 			}
 		};
+
+		struct _MTX44
+		{
+			float tbl[4][4];
+		};
+
+		struct MTX44
+		{
+			_MTX44 mEntries;
+
+			typedef float (* MtxRef)[4];
+			typedef const float (* MtxRefConst)[4];
+			
+			inline operator MtxRef()
+			{
+				return mEntries.tbl;
+			}
+			
+			inline operator MtxRefConst() const
+			{
+				return mEntries.tbl;
+			}
+		};
 		
 		inline void VEC3Normalize(VEC3 * out, const VEC3 * in)
 		{
