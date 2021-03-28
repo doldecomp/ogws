@@ -75,6 +75,9 @@ namespace nw4r
 
 		namespace detail
 		{
+			typedef u8 CPCmd[6];
+			typedef u8 BPCmd[5];
+			
 			inline void ResWrite_u8(u8 *res, u8 arg)
 			{
 				*res = arg;

@@ -1711,7 +1711,7 @@ InitGraphics__Q34nw4r2ef21DrawBillboardStrategyFRCQ34nw4r2ef8DrawInfoPQ34nw4r2ef
 /* 80024BEC 0001FAEC  38 60 00 0D */	li r3, 0xd
 /* 80024BF0 0001FAF0  38 8D 80 20 */	addi r4, r13, billboard_tex0_u8__Q24nw4r2ef-_SDA_BASE_
 /* 80024BF4 0001FAF4  38 A0 00 02 */	li r5, 2
-/* 80024BF8 0001FAF8  48 0B 91 19 */	bl func_800DDD10
+/* 80024BF8 0001FAF8  48 0B 91 19 */	bl GXSetArray
 /* 80024BFC 0001FAFC  48 0B 8A 1D */	bl GXClearVtxDesc
 /* 80024C00 0001FB00  38 60 00 09 */	li r3, 9
 /* 80024C04 0001FB04  38 80 00 01 */	li r4, 1

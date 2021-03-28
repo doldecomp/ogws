@@ -1,6 +1,6 @@
 #ifndef NW4R_G3D_RESVTX_H
 #define NW4R_G3D_RESVTX_H
-#include "types_nw4r.h"
+#include <GXAttr.h>
 #include "g3d_rescommon.h"
 
 namespace nw4r
@@ -9,22 +9,38 @@ namespace nw4r
 	{
 		struct ResVtxPosData
 		{
-			
+			u32 SIZE_0x0;
+			char UNK_0x4[0x4];
+			u32 mDataOffset; // at 0x8
+			char UNK_0xC[0x11];
+			u8 BYTE_0x1D;
 		};
 		
 		struct ResVtxNrmData
 		{
-			
+			u32 SIZE_0x0;
+			char UNK_0x4[0x4];
+			u32 mDataOffset; // at 0x8
+			char UNK_0xC[0x11];
+			u8 BYTE_0x1D;
 		};
 		
 		struct ResVtxClrData
 		{
-			
+			u32 SIZE_0x0;
+			char UNK_0x4[0x4];
+			u32 mDataOffset; // at 0x8
+			char UNK_0xC[0x10];
+			u8 BYTE_0x1C;
 		};
 		
 		struct ResVtxTexCoordData
 		{
-			
+			u32 SIZE_0x0;
+			char UNK_0x4[0x4];
+			u32 mDataOffset; // at 0x8
+			char UNK_0xC[0x11];
+			u8 BYTE_0x1D;
 		};
 		
 		struct ResVtxPos
@@ -38,7 +54,16 @@ namespace nw4r
 				return mPos.ref();
 			}
 			
-			UNKTYPE GetArray(const void **, u8 *) const;
+			inline const void * GetData() const
+			{
+				return mPos.ofs_to_ptr<void>(ref().mDataOffset);
+			}
+			
+			void SetArray();
+			void GetArray(const void **, u8 *) const;
+			UNKTYPE CopyTo(void *) const;
+			
+			UNKTYPE DCStore(bool);
 		};
 		
 		struct ResVtxNrm
@@ -52,7 +77,16 @@ namespace nw4r
 				return mNrm.ref();
 			}
 			
-			UNKTYPE GetArray(const void **, u8 *) const;
+			inline const void * GetData() const
+			{
+				return mNrm.ofs_to_ptr<void>(ref().mDataOffset);
+			}
+			
+			void SetArray();
+			void GetArray(const void **, u8 *) const;
+			UNKTYPE CopyTo(void *) const;
+			
+			UNKTYPE DCStore(bool);
 		};
 		
 		struct ResVtxClr
@@ -66,7 +100,16 @@ namespace nw4r
 				return mClr.ref();
 			}
 			
-			UNKTYPE GetArray(const void **, u8 *) const;
+			inline const void * GetData() const
+			{
+				return mClr.ofs_to_ptr<void>(ref().mDataOffset);
+			}
+			
+			void SetArray(_GXAttr);
+			void GetArray(const void **, u8 *) const;
+			UNKTYPE CopyTo(void *) const;
+			
+			UNKTYPE DCStore(bool);
 		};
 		
 		struct ResVtxTexCoord
@@ -80,7 +123,14 @@ namespace nw4r
 				return mTexCoord.ref();
 			}
 			
-			UNKTYPE GetArray(const void **, u8 *) const;
+			inline const void * GetData() const
+			{
+				return mTexCoord.ofs_to_ptr<void>(ref().mDataOffset);
+			}
+			
+			void GetArray(const void **, u8 *) const;
+			
+			UNKTYPE DCStore(bool);
 		};
 	}
 }

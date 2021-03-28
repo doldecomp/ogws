@@ -20,13 +20,13 @@ namespace nw4r
 		struct ResPrePrimDL
 		{
 			char UNK_0x0[0xA];
-			u8 CP_CMD_0xA[6];
-			u8 CP_CMD_0x10[6];
+			detail::CPCmd CP_CMD_0xA;
+			detail::CPCmd CP_CMD_0x10;
 			char UNK_0x16[0xA];
-			u8 CP_CMD_0x20[6];
-			u8 CP_CMD_0x26[6];
-			u8 CP_CMD_0x2C[6];
-			u8 CP_CMD_PAIRS_0x32[GX_ATTR_COUNT][2][6];
+			detail::CPCmd CP_CMD_0x20;
+			detail::CPCmd CP_CMD_0x26;
+			detail::CPCmd CP_CMD_0x2C;
+			detail::CPCmd CP_CMD_PAIRS_0x32[GX_ATTR_VTX_COUNT][2];
 			char UNK_0xC2[0x1E];
 		};
 		
@@ -41,8 +41,8 @@ namespace nw4r
 			
 			s16 mVtxPosIndex; // at 0x48
 			s16 mVtxNrmIndex; // at 0x4a
-			s16 mVtxClrIndices[GX_ATTR_CLR_COUNT]; // at 0x4c
-			s16 mVtxTexCoordIndices[GX_ATTR_TEX_COORD_COUNT]; // at 0x50
+			s16 mVtxClrIndices[GX_ATTR_VTX_CLR_COUNT]; // at 0x4c
+			s16 mVtxTexCoordIndices[GX_ATTR_VTX_TEX_COORD_COUNT]; // at 0x50
 		};
 		
 		struct ResTagDL

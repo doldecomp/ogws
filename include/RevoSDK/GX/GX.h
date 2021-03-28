@@ -26,6 +26,20 @@ struct _GXTexObj
 	char UNK_0x0[0x20];
 };
 
+enum _GXChannelID
+{
+	GX_CHANNEL_ID_0,
+	GX_CHANNEL_ID_1,
+	GX_CHANNEL_ID_2,
+	GX_CHANNEL_ID_3,
+	GX_CHANNEL_ID_4,
+	GX_CHANNEL_ID_5,
+	GX_CHANNEL_ID_6,
+	GX_CHANNEL_ID_7,
+	GX_CHANNEL_ID_8,
+	GX_CHANNEL_ID_INVALID = 0xFF
+};
+
 static void GXEnd(void) {}
 
 extern UNKTYPE GXBegin(UNKWORD, UNKWORD, UNKWORD);

@@ -360,7 +360,7 @@ Draw__Q34nw4r2ef23DrawDirectionalStrategyFRCQ34nw4r2ef8DrawInfoPQ34nw4r2ef15Part
 /* 800256F0 000205F0  38 60 00 0D */	li r3, 0xd
 /* 800256F4 000205F4  38 8D 80 40 */	addi r4, r13, directional_tex0_u8__Q24nw4r2ef-_SDA_BASE_
 /* 800256F8 000205F8  38 A0 00 02 */	li r5, 2
-/* 800256FC 000205FC  48 0B 86 15 */	bl func_800DDD10
+/* 800256FC 000205FC  48 0B 86 15 */	bl GXSetArray
 /* 80025700 00020600  48 0B 7F 19 */	bl GXClearVtxDesc
 /* 80025704 00020604  38 60 00 09 */	li r3, 9
 /* 80025708 00020608  38 80 00 01 */	li r4, 1
@@ -479,7 +479,7 @@ DrawDirectional__Q34nw4r2ef23DrawDirectionalStrategyFRCQ34nw4r2ef8DrawInfoPQ34nw
 /* 800258A8 000207A8  38 60 00 0D */	li r3, 0xd
 /* 800258AC 000207AC  38 8D 80 40 */	addi r4, r13, directional_tex0_u8__Q24nw4r2ef-_SDA_BASE_
 /* 800258B0 000207B0  38 A0 00 02 */	li r5, 2
-/* 800258B4 000207B4  48 0B 84 5D */	bl func_800DDD10
+/* 800258B4 000207B4  48 0B 84 5D */	bl GXSetArray
 /* 800258B8 000207B8  48 0B 7D 61 */	bl GXClearVtxDesc
 /* 800258BC 000207BC  38 60 00 09 */	li r3, 9
 /* 800258C0 000207C0  38 80 00 01 */	li r4, 1
@@ -2304,7 +2304,7 @@ InitGraphics__Q34nw4r2ef23DrawDirectionalStrategyFRCQ34nw4r2ef8DrawInfoPQ34nw4r2
 /* 80027308 00022208  38 60 00 0D */	li r3, 0xd
 /* 8002730C 0002220C  38 8D 80 40 */	addi r4, r13, directional_tex0_u8__Q24nw4r2ef-_SDA_BASE_
 /* 80027310 00022210  38 A0 00 02 */	li r5, 2
-/* 80027314 00022214  48 0B 69 FD */	bl func_800DDD10
+/* 80027314 00022214  48 0B 69 FD */	bl GXSetArray
 /* 80027318 00022218  48 0B 63 01 */	bl GXClearVtxDesc
 /* 8002731C 0002221C  38 60 00 09 */	li r3, 9
 /* 80027320 00022220  38 80 00 01 */	li r4, 1
