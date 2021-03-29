@@ -61,8 +61,8 @@ namespace nw4r
 			inline UNKTYPE GetWidth() const;
 			inline UNKTYPE GetHeight() const;
 
-			int GetTexObjParam(void **, u16 *, u16 *, _GXTexFmt *, f32 *, f32 *, u8 *) const;
-			int GetTexObjCIParam(void **, u16 *, u16 *, _GXCITexFmt *, f32 *, f32 *, u8 *) const;
+			bool GetTexObjParam(void **, u16 *, u16 *, _GXTexFmt *, f32 *, f32 *, u8 *) const;
+			bool GetTexObjCIParam(void **, u16 *, u16 *, _GXCITexFmt *, f32 *, f32 *, u8 *) const;
 			void Init();
 		};
 		

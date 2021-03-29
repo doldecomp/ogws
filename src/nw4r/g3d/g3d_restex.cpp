@@ -20,7 +20,7 @@ namespace nw4r
             }
         }
 
-        int ResTex::GetTexObjParam(void **r4, u16 *r5, u16 *r6, _GXTexFmt *pFmt,
+        bool ResTex::GetTexObjParam(void **r4, u16 *r5, u16 *r6, _GXTexFmt *pFmt,
         f32 *r8, f32 *r9, u8 *r10) const
         {
             if (mTex.ref().mFlags & 1) return 0;
@@ -51,7 +51,7 @@ namespace nw4r
             return 1;
         }
 
-        int ResTex::GetTexObjCIParam(void **r4, u16 *r5, u16 *r6, _GXCITexFmt *pFmt,
+        bool ResTex::GetTexObjCIParam(void **r4, u16 *r5, u16 *r6, _GXCITexFmt *pFmt,
         f32 *r8, f32 *r9, u8 *r10) const
         {
             if ((mTex.ref().mFlags & 1) == 0) return 0;
