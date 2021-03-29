@@ -79,7 +79,7 @@ namespace nw4r
             if (mFogData.IsValid())
             {
                 rFogData.mAdjTable[0] = param2;
-                GXInitFogAdjTable(&rFogData.mAdjTable[1], param1, const_cast<math::MTX44&>(rMtx));
+                GXInitFogAdjTable(&rFogData.mAdjTable[1], param1, rMtx);
             }
         }
 
