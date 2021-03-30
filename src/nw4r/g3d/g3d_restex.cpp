@@ -27,11 +27,7 @@ namespace nw4r
 
             ResTexData& rTex = mTex.ref();
 
-            if (r4)
-            {
-                u32 * r4_2 = reinterpret_cast<u32 *>(r4);
-                *r4_2 = (u32)mTex.ofs_to_obj<void *>(mTex.ref().INT_0x10);
-            }
+            if (r4) *r4 = mTex.ofs_to_obj<void *>(mTex.ref().INT_0x10);
             
             if (r5) *r5 = mTex.ref().SHORT_0x1C;
 
@@ -58,11 +54,7 @@ namespace nw4r
 
             ResTexData& rTex = mTex.ref();
 
-            if (r4)
-            {
-                u32 * r4_2 = reinterpret_cast<u32 *>(r4);
-                *r4_2 = (u32)mTex.ofs_to_obj<void *>(mTex.ref().INT_0x10);
-            }
+            if (r4) *r4 = mTex.ofs_to_obj<void *>(mTex.ref().INT_0x10);
             
             if (r5) *r5 = mTex.ref().SHORT_0x1C;
 
