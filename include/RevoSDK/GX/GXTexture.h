@@ -16,6 +16,16 @@ enum _GXTexMapID
 	GX_TEX_MAP_ID_INVALID = 0xFF
 };
 
+enum _GXTexFmt
+{
+
+};
+
+enum _GXCITexFmt
+{
+
+};
+
 #ifdef __cplusplus
 }
 #endif

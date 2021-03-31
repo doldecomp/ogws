@@ -45,6 +45,8 @@ static void GXEnd(void) {}
 extern UNKTYPE GXBegin(UNKWORD, UNKWORD, UNKWORD);
 
 extern UNKTYPE GXSetFog(int, struct _GXColor, float, float, float, float);
+extern UNKTYPE GXInitFogAdjTable(u16 *, u16, const float (*)[4]);
+extern UNKTYPE GXSetFogRangeAdj(u8, u16, u16 *);
 extern UNKTYPE GXSetTevSwapModeTable(UNKWORD, UNKWORD, UNKWORD, UNKWORD, UNKWORD);
 extern UNKTYPE GXSetZTexture(UNKWORD, UNKWORD, UNKWORD);
 extern UNKTYPE GXSetChanCtrl(UNKWORD, UNKWORD, UNKWORD, UNKWORD, UNKWORD, UNKWORD, UNKWORD);

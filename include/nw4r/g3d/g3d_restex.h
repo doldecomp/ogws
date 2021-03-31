@@ -2,6 +2,7 @@
 #define NW4R_G3D_RESTEX_H
 #include "types_nw4r.h"
 #include "g3d_rescommon.h"
+#include <RevoSDK/GX/GXTexture.h>
 
 namespace nw4r
 {
@@ -9,13 +10,30 @@ namespace nw4r
 	{
 		struct ResTexData
 		{
-			char UNK_0x0[0x8];
+			char mMagic[4]; // "TEX0"; at 0x0
+			u32 mLength; // at 0x4
 			u32 mRevision; // at 0x8
+			s16 SHORT_0xC;
+			u16 SHORT_0xE;
+			u32 INT_0x10;
+			UNKWORD WORD_0x14;
+			u32 mFlags; // at 0x18
+			u16 SHORT_0x1C;
+			u16 SHORT_0x1E;
+			union // at 0x20
+			{
+				_GXTexFmt mFormat;
+				_GXCITexFmt mCiFormat;
+			};
+			u32 WORD_0x24;
+			f32 FLOAT_0x28;
+			f32 FLOAT_0x2C;
 		};
 		
 		struct ResPlttData
 		{
-			char UNK_0x0[0x8];
+			char mMagic[4]; // "PLT0"; at 0x0
+			u32 mLength; // at 0x4
 			u32 mRevision; // at 0x8
 		};
 		
@@ -30,12 +48,22 @@ namespace nw4r
 			
 			inline ResTex(void * vptr) : mTex(vptr) {}
 			
-			UNKTYPE Init();
-			
 			inline bool CheckRevision() const
 			{
 				return mTex.ref().mRevision == REVISION;
 			}
+
+			/*
+				Inlines used in BBA's GetTexObjCIParam (and most likely also GetTexObjParam)
+				I don't know where they are used though so for now they are declarations
+			*/
+			inline UNKTYPE GetTexData() const;
+			inline UNKTYPE GetWidth() const;
+			inline UNKTYPE GetHeight() const;
+
+			bool GetTexObjParam(void **, u16 *, u16 *, _GXTexFmt *, f32 *, f32 *, u8 *) const;
+			bool GetTexObjCIParam(void **, u16 *, u16 *, _GXCITexFmt *, f32 *, f32 *, u8 *) const;
+			void Init();
 		};
 		
 		struct ResPltt
@@ -49,12 +77,12 @@ namespace nw4r
 			
 			inline ResPltt(void * vptr) : mPltt(vptr) {}
 			
-			UNKTYPE DCStore(bool);
-			
 			inline bool CheckRevision() const
 			{
 				return mPltt.ref().mRevision == REVISION;
 			}
+
+			void DCStore(bool);
 		};
 	}
 }
