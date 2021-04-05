@@ -79,6 +79,7 @@ namespace nw4r
 		struct ResAnmTexSrt;
 		struct ResAnmShp;
 		struct ResAnmScn;
+		struct ClrAnmResult;
 	}
 }
 

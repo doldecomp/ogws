@@ -137,9 +137,9 @@ NW4R_O_FILES := \
 	build/nw4r/g3d/g3d_resvtx.o \
 	build/nw4r/g3d/g3d_restex.o \
 	build/asm/nw4r/g3d/g3d_resnode.o \
-	build/asm/nw4r/g3d/g3d_resanm.o \
-	build/asm/nw4r/g3d/g3d_resanmvis.o \
-	build/asm/nw4r/g3d/g3d_resanmclr.o \
+	build/nw4r/g3d/g3d_resanm.o \
+	build/nw4r/g3d/g3d_resanmvis.o \
+	build/nw4r/g3d/g3d_resanmclr.o \
 	build/asm/nw4r/g3d/g3d_resanmtexpat.o \
 	build/asm/nw4r/g3d/g3d_resanmtexsrt.o \
 	build/asm/nw4r/g3d/g3d_resanmchr.o \
