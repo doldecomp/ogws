@@ -207,9 +207,6 @@ namespace nw4r
 		{
 			PSMTXConcat(*inMtx1, *inMtx2, *outMtx);
 		}
-		
-		// Overload of inlined function
-		void MTX34Scale(MTX34 *, const MTX34 *, const VEC3 *);
 
 		inline void MTX34Identity(MTX34 * mtx)
 		{
