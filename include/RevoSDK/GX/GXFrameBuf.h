@@ -51,9 +51,6 @@ struct _GXRenderModeObj
     u8 BYTE_0x36;
     u8 BYTE_0x37;
     u8 BYTE_0x38;
-
-    // G3DState::SetRenderModeObj
-    inline _GXRenderModeObj operator=(const _GXRenderModeObj&);
 };
 
 #ifdef __cplusplus
