@@ -104,7 +104,7 @@ NW4R_O_FILES := \
 	build/nw4r/snd/snd_SoundArchiveFile.o \
 	build/nw4r/snd/snd_SoundArchiveLoader.o \
 	build/asm/nw4r/snd/snd_SoundArchivePlayer.o \
-	build/asm/nw4r/snd/snd_SoundHandle.o \
+	build/nw4r/snd/snd_SoundHandle.o \
 	build/nw4r/snd/snd_SoundHeap.o \
 	build/asm/nw4r/snd/snd_SoundPlayer.o \
 	build/asm/nw4r/snd/snd_SoundStartable.o \
@@ -114,7 +114,7 @@ NW4R_O_FILES := \
 	build/asm/nw4r/snd/snd_StrmFile.o \
 	build/asm/nw4r/snd/snd_StrmPlayer.o \
 	build/asm/nw4r/snd/snd_StrmSound.o \
-	build/asm/nw4r/snd/snd_StrmSoundHandle.o \
+	build/nw4r/snd/snd_StrmSoundHandle.o \
 	build/nw4r/snd/snd_Task.o \
 	build/asm/nw4r/snd/snd_TaskManager.o \
 	build/nw4r/snd/snd_TaskThread.o \
@@ -123,7 +123,7 @@ NW4R_O_FILES := \
 	build/asm/nw4r/snd/snd_Util.o \
 	build/asm/nw4r/snd/snd_WaveFile.o \
 	build/asm/nw4r/snd/snd_WaveSound.o \
-	build/asm/nw4r/snd/snd_WaveSoundHandle.o \
+	build/nw4r/snd/snd_WaveSoundHandle.o \
 	build/asm/nw4r/snd/snd_WsdFile.o \
 	build/asm/nw4r/snd/snd_WsdPlayer.o \
 	build/asm/nw4r/snd/snd_adpcm.o \

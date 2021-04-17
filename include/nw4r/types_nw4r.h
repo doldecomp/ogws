@@ -50,10 +50,14 @@ namespace nw4r
 		struct Sound3DActor;
 		struct Sound3DListener;
 		struct Sound3DManager;
-		
+		struct SoundHandle;
+		struct StrmSoundHandle;
+		struct WaveSoundHandle;
+
 		namespace detail
 		{
 			struct BasicSound;
+			struct BasicPlayer;
 			struct SeqSound;
 			struct SeqPlayer;
 			struct MmlParser;
@@ -63,6 +67,8 @@ namespace nw4r
 			struct NoteOnCallback;
 			struct PlayerHeap;
 			struct SoundArchiveFileReader;
+			struct StrmSound;
+			struct WaveSound;
 		}
 	}
 	
