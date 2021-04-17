@@ -1,6 +1,6 @@
 #ifdef __DECOMP_NON_MATCHING
 #include "g3d_resnode.h"
-#include "math_types.h"
+#include "math_triangular.h"
 
 namespace nw4r
 {
@@ -38,14 +38,7 @@ namespace nw4r
                     }
                     else
                     {
-                        // Can't get these floats to alloc the right registers
-
-                        // 0.7111111 = 768/1080 (unsure of meaning)
-                        math::MTX34RotXYZFIdx(&pAnm->mMtx,
-                            0.7111111f * rNode.VEC3_0x2C.mCoords.x,
-                            0.7111111f * rNode.VEC3_0x2C.mCoords.y,
-                            0.7111111f * rNode.VEC3_0x2C.mCoords.z);
-                        
+                        math::MTX34RotXYZDeg(&pAnm->mMtx, rNode.VEC3_0x2C.mCoords.x, rNode.VEC3_0x2C.mCoords.y, rNode.VEC3_0x2C.mCoords.z);
                         newFlags &= 0x70;
                     }
 
@@ -114,16 +107,12 @@ namespace nw4r
                 }
                 else
                 {
+                    // Can't get these instructions to order properly
+                    math::VEC3 stack_0x10;
+                    stack_0x10 = rNode.VEC3_0x2C;
                     pAnm->VEC3_0x10 = rNode.VEC3_0x2C;
-
-                    // Trying to emulate unused stack VEC3 (80056E14)
-                    math::VEC3 stack_0x8(rNode.VEC3_0x2C);
-
-                    // Can't get these floats to alloc the right registers
-                    math::MTX34RotXYZFIdx(&pAnm->mMtx,
-                    0.7111111f * rNode.VEC3_0x2C.mCoords.x,
-                    0.7111111f * rNode.VEC3_0x2C.mCoords.y,
-                    0.7111111f * rNode.VEC3_0x2C.mCoords.z);
+                    
+                    math::MTX34RotXYZDeg(&pAnm->mMtx, rNode.VEC3_0x2C.mCoords.x, rNode.VEC3_0x2C.mCoords.y, rNode.VEC3_0x2C.mCoords.z);
                 }
 
                 if (rNode.mFlags & 0x2)

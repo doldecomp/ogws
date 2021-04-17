@@ -70,6 +70,22 @@ namespace nw4r
 			}
 		}
 		
+		inline float VEC3Dot(register const VEC3 * vec1, register const VEC3 * vec2)
+		{
+			register f32 a, b, d, c, e;
+			asm
+			{
+				psq_l a, 0x4(vec1), 0, 0
+				psq_l b, 0x4(vec2), 0, 0
+				ps_mul a, a, b
+				psq_l c, 0(vec1), 1, 0
+				psq_l d, 0(vec2), 1, 0
+				ps_madd b, c, d, a
+				ps_sum0 e, b, a, a
+			}
+			return e;
+		}
+
 		struct VEC3
 		{
 			_VEC3 mCoords;
@@ -100,6 +116,11 @@ namespace nw4r
 				return ret;
 			}
 			
+			inline bool operator!=(const VEC3 & other) const
+			{
+				return mCoords.x != other.mCoords.x || mCoords.y != other.mCoords.y || mCoords.z != other.mCoords.z;
+			}
+
 			inline operator Vec *()
 			{
 				return reinterpret_cast<Vec *>(this);
@@ -156,7 +177,12 @@ namespace nw4r
 				return mEntries.tbl;
 			}
 		};
-		
+
+		inline void VEC3Cross(VEC3 * out, const VEC3 * in1, const VEC3 * in2)
+		{
+			PSVECCrossProduct(*in1, *in2, *out);
+		}
+
 		inline void VEC3Normalize(VEC3 * out, const VEC3 * in)
 		{
 			PSVECNormalize(*in, *out);
@@ -181,7 +207,7 @@ namespace nw4r
 		{
 			PSMTXConcat(*inMtx1, *inMtx2, *outMtx);
 		}
-		
+
 		inline void MTX34Identity(MTX34 * mtx)
 		{
 			PSMTXIdentity(*mtx);
@@ -192,6 +218,8 @@ namespace nw4r
 			PSMTXCopy(*in, *out);
 		}
 		
+		void MTX44Copy(MTX44 *, const MTX44 *);
+
 		UNKTYPE GetDirMtxY(MTX34 *, const VEC3 &);
 		
 		UNKTYPE MTX34RotXYZFIdx(MTX34 *, float, float, float);

@@ -104,26 +104,26 @@ NW4R_O_FILES := \
 	build/nw4r/snd/snd_SoundArchiveFile.o \
 	build/nw4r/snd/snd_SoundArchiveLoader.o \
 	build/asm/nw4r/snd/snd_SoundArchivePlayer.o \
-	build/asm/nw4r/snd/snd_SoundHandle.o \
+	build/nw4r/snd/snd_SoundHandle.o \
 	build/nw4r/snd/snd_SoundHeap.o \
 	build/asm/nw4r/snd/snd_SoundPlayer.o \
 	build/asm/nw4r/snd/snd_SoundStartable.o \
 	build/asm/nw4r/snd/snd_SoundSystem.o \
 	build/asm/nw4r/snd/snd_SoundThread.o \
-	build/asm/nw4r/snd/snd_StrmChannel.o \
+	build/nw4r/snd/snd_StrmChannel.o \
 	build/asm/nw4r/snd/snd_StrmFile.o \
 	build/asm/nw4r/snd/snd_StrmPlayer.o \
 	build/asm/nw4r/snd/snd_StrmSound.o \
-	build/asm/nw4r/snd/snd_StrmSoundHandle.o \
-	build/asm/nw4r/snd/snd_Task.o \
+	build/nw4r/snd/snd_StrmSoundHandle.o \
+	build/nw4r/snd/snd_Task.o \
 	build/asm/nw4r/snd/snd_TaskManager.o \
-	build/asm/nw4r/snd/snd_TaskThread.o \
+	build/nw4r/snd/snd_TaskThread.o \
 	build/asm/nw4r/snd/snd_Voice.o \
 	build/asm/nw4r/snd/snd_VoiceManager.o \
 	build/asm/nw4r/snd/snd_Util.o \
 	build/asm/nw4r/snd/snd_WaveFile.o \
 	build/asm/nw4r/snd/snd_WaveSound.o \
-	build/asm/nw4r/snd/snd_WaveSoundHandle.o \
+	build/nw4r/snd/snd_WaveSoundHandle.o \
 	build/asm/nw4r/snd/snd_WsdFile.o \
 	build/asm/nw4r/snd/snd_WsdPlayer.o \
 	build/asm/nw4r/snd/snd_adpcm.o \
@@ -159,11 +159,11 @@ NW4R_O_FILES := \
 	build/asm/nw4r/g3d/g3d_draw1mat1shp.o \
 	build/asm/nw4r/g3d/g3d_calcview.o \
 	build/asm/nw4r/g3d/g3d_dcc.o \
-	build/asm/nw4r/g3d/g3d_workmem.o \
+	build/nw4r/g3d/g3d_workmem.o \
 	build/asm/nw4r/g3d/g3d_calcworld.o \
 	build/asm/nw4r/g3d/g3d_draw.o \
-	build/asm/nw4r/g3d/g3d_camera.o \
-	build/asm/nw4r/g3d/g3d_basic.o \
+	build/nw4r/g3d/g3d_camera.o \
+	build/nw4r/g3d/g3d_basic.o \
 	build/asm/nw4r/g3d/g3d_maya.o \
 	build/asm/nw4r/g3d/g3d_xsi.o \
 	build/asm/nw4r/g3d/g3d_3dsmax.o \

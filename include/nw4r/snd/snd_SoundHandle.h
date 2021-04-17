@@ -8,10 +8,11 @@ namespace nw4r
 	{
 		struct SoundHandle
 		{
-			detail::BasicSound * mSound;
+			detail::BasicSound * mSound; // at 0x0
 			
-			UNKTYPE DetachSound();
-			UNKTYPE detail_AttachSoundAsTempHandle(detail::BasicSound *);
+			void detail_AttachSound(detail::BasicSound *);
+			void detail_AttachSoundAsTempHandle(detail::BasicSound *);
+			void DetachSound();
 			
 			inline SoundHandle() : mSound(NULL) {}
 			

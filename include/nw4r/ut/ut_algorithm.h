@@ -64,6 +64,11 @@ namespace nw4r
 			{
 				return (const void *)(offset + (T)ptr);
 			}
+
+			inline u32 GetOffsetFromPtr(void *begin, void *end)
+			{
+				return (u32)end - (u32)begin;
+			}
 		}
 	}
 }
