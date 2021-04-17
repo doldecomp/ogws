@@ -7,7 +7,7 @@ extern "C" {
 
 #define OS_THREAD_STACK_MAGIC 0xBABE
 
-typedef int (* OSThreadFunc)(void *);
+typedef UNKWORD (* OSThreadFunc)(void *);
 
 struct OSThread
 {
@@ -16,17 +16,17 @@ struct OSThread
 
 struct OSThreadQueue
 {
-    OSThread *thread_0x0;
-    OSThread *thread_0x4;
+    struct OSThread *thread_0x0;
+    struct OSThread *thread_0x4;
 };
 
-bool OSCreateThread(OSThread *, OSThreadFunc, void *, void *, u32, s32, u8);
+BOOL OSCreateThread(struct OSThread *, OSThreadFunc, void *, void *, UNKWORD, UNKWORD, UNKWORD);
 UNKTYPE OSYieldThread(UNKTYPE);
-UNKTYPE OSResumeThread(OSThread *);
-bool OSJoinThread(OSThread *, int);
+UNKTYPE OSResumeThread(struct OSThread *);
+BOOL OSJoinThread(struct OSThread *, UNKWORD);
 
-UNKTYPE OSWakeupThread(OSThreadQueue *);
-UNKTYPE OSInitThreadQueue(OSThreadQueue *);
+UNKTYPE OSWakeupThread(struct OSThreadQueue *);
+UNKTYPE OSInitThreadQueue(struct OSThreadQueue *);
 
 #ifdef __cplusplus
 }

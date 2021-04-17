@@ -11,7 +11,7 @@ namespace nw4r
             TaskThread::TaskThread()
             {
                 mStackEnd = NULL;
-                BYTE_0x31C = 0;
+                mIsExiting = false;
                 mIsAlive = false;
             }
 
@@ -28,7 +28,7 @@ namespace nw4r
                     return false;
 
                 mStackEnd = stack;
-                BYTE_0x31C = 0;
+                mIsExiting = false;
                 mIsAlive = true;
                 OSResumeThread(&mThread);
                 return true;
@@ -38,7 +38,7 @@ namespace nw4r
             {
                 if (mIsAlive)
                 {
-                    BYTE_0x31C = 1;
+                    mIsExiting = true;
                     TaskManager *pInstance = TaskManager::GetInstance();
                     pInstance->CancelWaitTask();
                     OSJoinThread(&mThread, 0);
@@ -50,12 +50,12 @@ namespace nw4r
             {
                 TaskThread *pThread = (TaskThread *)p;
 
-                while (!pThread->BYTE_0x31C)
+                while (!pThread->mIsExiting)
                 {
                     TaskManager *pInstance = TaskManager::GetInstance();
                     pInstance->WaitTask();
 
-                    if (pThread->BYTE_0x31C) break;
+                    if (pThread->mIsExiting) break;
                     pInstance = TaskManager::GetInstance();
                     pInstance->ExecuteTask();
                 }

@@ -39,30 +39,24 @@ namespace nw4r
             {
                 ut::AutoInterruptLock lock;
 
-                if (mAllocCount >= mBlockCount)
-                {
-                    return NULL;
-                }
-                else
-                {
-                    int numBlockAligned8 = ut::RoundUp<int>(mBlockCount, 8) / 8;
+                if (mAllocCount >= mBlockCount) return NULL;
 
-                    for (int i = 0; i < numBlockAligned8; i++)
+                int numBlockAligned8 = ut::RoundUp<int>(mBlockCount, 8) / 8;
+                for (int i = 0; i < numBlockAligned8; i++)
+                {
+                    const u8 flag = mAllocFlags[i];
+                    if (flag != 0xff)
                     {
-                        const u8 flag = mAllocFlags[i];
-                        if (flag != 0xff)
+                        u8 k = 1;
+                        for (int j = 0; j < 8; j++, k <<= 1)
                         {
-                            u8 k = 1;
-                            for (int j = 0; j < 8; j++, k <<= 1)
+                            if ((flag & k) == 0)
                             {
-                                if ((flag & k) == 0)
-                                {
-                                    mAllocFlags[i] |= k;
-                                    mAllocCount++;
+                                mAllocFlags[i] |= k;
+                                mAllocCount++;
 
-                                    const void * p = ut::AddOffsetToPtr<u32>(mBuffer, mBlockSize * (j + i * 8));
-                                    return const_cast<void *>(p);
-                                }
+                                const void * p = ut::AddOffsetToPtr<u32>(mBuffer, mBlockSize * (j + i * 8));
+                                return const_cast<void *>(p);
                             }
                         }
                     }

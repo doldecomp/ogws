@@ -20,7 +20,7 @@ namespace nw4r
 
                 OSThread mThread; // at 0x0
                 void * mStackEnd; // at 0x318
-                u8 BYTE_0x31C;
+                bool mIsExiting; // at 0x31C
                 bool mIsAlive; // at 0x31D
             };
         }
