@@ -87,6 +87,11 @@ namespace nw4r
 		struct ResAnmScn;
 		struct ClrAnmResult;
 	}
+
+	namespace lyt
+	{
+		struct DrawInfo;
+	}
 }
 
 typedef int UNKWORD;

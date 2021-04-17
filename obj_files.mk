@@ -187,7 +187,7 @@ NW4R_O_FILES := \
 	build/asm/nw4r/lyt/lyt_bounding.o \
 	build/asm/nw4r/lyt/lyt_material.o \
 	build/asm/nw4r/lyt/lyt_texMap.o \
-	build/asm/nw4r/lyt/lyt_drawInfo.o \
+	build/nw4r/lyt/lyt_drawInfo.o \
 	build/asm/nw4r/lyt/lyt_animation.o \
 	build/asm/nw4r/lyt/lyt_resourceAccessor.o \
 	build/asm/nw4r/lyt/lyt_arcResourceAccessor.o \

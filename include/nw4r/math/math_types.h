@@ -20,6 +20,14 @@ namespace nw4r
 		struct VEC2
 		{
 			_VEC2 mCoords;
+
+			inline VEC2() {}
+
+			inline VEC2(f32 x, f32 y)
+			{
+				mCoords.x = x;
+				mCoords.y = y;
+			}
 		};
 		
 		struct _VEC3

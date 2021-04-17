@@ -57,7 +57,7 @@ ASM_DIRS := asm \
 	asm/RevoSDK/TRK
 
 SRC_DIRS := nw4r RevoSDK \
-	nw4r/ut nw4r/ef nw4r/snd nw4r/g3d \
+	nw4r/ut nw4r/ef nw4r/snd nw4r/g3d nw4r/lyt \
 	RevoSDK/TRK RevoSDK/TRK_old \
 	RevoSDK/ARC
 
