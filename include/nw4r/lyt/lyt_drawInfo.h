@@ -11,13 +11,12 @@ namespace nw4r
         struct DrawInfo
         {
             virtual ~DrawInfo();
-            virtual UNKTYPE UNUSED() = 0;
             DrawInfo();
 
             math::MTX34 mViewMtx; // at 0x0
             ut::Rect mViewRect; // at 0x34
             math::VEC2 mScale; // at 0x44
-            f32 mGlobalAlpha;
+            f32 mGlobalAlpha; // at 0x48
             u8 mFlags; // at 0x50
         };
     }

@@ -27,6 +27,7 @@ lbl_804C052C:
 	.single 0e0.5
 
 .section .data, "wa"
+.balign 8
 .global __vt__Q34nw4r3lyt18AnimTransformBasic
 __vt__Q34nw4r3lyt18AnimTransformBasic:
     .long 0
