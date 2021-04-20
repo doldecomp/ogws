@@ -91,6 +91,8 @@ namespace nw4r
 	namespace lyt
 	{
 		struct DrawInfo;
+		struct ResourceAccessor;
+		struct ArcResourceAccessor;
 	}
 }
 

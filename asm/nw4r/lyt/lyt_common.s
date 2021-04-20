@@ -21,6 +21,34 @@ lbl_80409700:
 	.skip 0x20
 
 .section .text, "ax"
+.global EqualsResName__Q34nw4r3lyt6detailFPCcPCc
+EqualsResName__Q34nw4r3lyt6detailFPCcPCc:
+/* 80082D9C 0007DC9C  94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 80082DA0 0007DCA0  7C 08 02 A6 */	mflr r0
+/* 80082DA4 0007DCA4  38 A0 00 10 */	li r5, 0x10
+/* 80082DA8 0007DCA8  90 01 00 14 */	stw r0, 0x14(r1)
+/* 80082DAC 0007DCAC  48 03 61 21 */	bl strncmp
+/* 80082DB0 0007DCB0  7C 60 00 34 */	cntlzw r0, r3
+/* 80082DB4 0007DCB4  54 03 D9 7E */	srwi r3, r0, 5
+/* 80082DB8 0007DCB8  80 01 00 14 */	lwz r0, 0x14(r1)
+/* 80082DBC 0007DCBC  7C 08 03 A6 */	mtlr r0
+/* 80082DC0 0007DCC0  38 21 00 10 */	addi r1, r1, 0x10
+/* 80082DC4 0007DCC4  4E 80 00 20 */	blr 
+
+.global EqualsMaterialName__Q34nw4r3lyt6detailFPCcPCc
+EqualsMaterialName__Q34nw4r3lyt6detailFPCcPCc:
+/* 80082DC8 0007DCC8  94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 80082DCC 0007DCCC  7C 08 02 A6 */	mflr r0
+/* 80082DD0 0007DCD0  38 A0 00 14 */	li r5, 0x14
+/* 80082DD4 0007DCD4  90 01 00 14 */	stw r0, 0x14(r1)
+/* 80082DD8 0007DCD8  48 03 60 F5 */	bl strncmp
+/* 80082DDC 0007DCDC  7C 60 00 34 */	cntlzw r0, r3
+/* 80082DE0 0007DCE0  54 03 D9 7E */	srwi r3, r0, 5
+/* 80082DE4 0007DCE4  80 01 00 14 */	lwz r0, 0x14(r1)
+/* 80082DE8 0007DCE8  7C 08 03 A6 */	mtlr r0
+/* 80082DEC 0007DCEC  38 21 00 10 */	addi r1, r1, 0x10
+/* 80082DF0 0007DCF0  4E 80 00 20 */	blr 
+
 .global TestFileHeader__Q34nw4r3lyt6detailFRCQ44nw4r3lyt3res16BinaryFileHeader
 TestFileHeader__Q34nw4r3lyt6detailFRCQ44nw4r3lyt3res16BinaryFileHeader:
 /* 80082DF4 0007DCF4  A0 03 00 04 */	lhz r0, 4(r3)
