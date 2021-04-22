@@ -59,6 +59,11 @@ namespace nw4r
 				return mPos.ofs_to_ptr<void>(ref().mDataOffset);
 			}
 			
+			inline UNKTYPE Init()
+			{
+				DCStore(false);
+			}
+
 			void SetArray();
 			void GetArray(const void **, u8 *) const;
 			UNKTYPE CopyTo(void *) const;
@@ -82,6 +87,11 @@ namespace nw4r
 				return mNrm.ofs_to_ptr<void>(ref().mDataOffset);
 			}
 			
+			inline UNKTYPE Init()
+			{
+				DCStore(false);
+			}
+	
 			void SetArray();
 			void GetArray(const void **, u8 *) const;
 			UNKTYPE CopyTo(void *) const;
@@ -104,7 +114,12 @@ namespace nw4r
 			{
 				return mClr.ofs_to_ptr<void>(ref().mDataOffset);
 			}
-			
+
+			inline UNKTYPE Init()
+			{
+				DCStore(false);
+			}
+
 			void SetArray(_GXAttr);
 			void GetArray(const void **, u8 *) const;
 			UNKTYPE CopyTo(void *) const;
@@ -128,6 +143,11 @@ namespace nw4r
 				return mTexCoord.ofs_to_ptr<void>(ref().mDataOffset);
 			}
 			
+			inline UNKTYPE Init()
+			{
+				DCStore(false);
+			}
+
 			void GetArray(const void **, u8 *) const;
 			
 			UNKTYPE DCStore(bool);
