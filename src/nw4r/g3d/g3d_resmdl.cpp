@@ -195,14 +195,14 @@ namespace nw4r
 
         bool ResMdl::Bind(ResFile rf)
         {
-			u32 i;
-			bool b = true;
-			
-			u32 numMat = GetResMatNumEntries();
-			for (i = 0; i < numMat; i++)
-			{
-				b = GetResMat(i).Bind(rf) && b;
-			}
+            u32 i;
+            bool b = true;
+
+            u32 numMat = GetResMatNumEntries();
+            for (i = 0; i < numMat; i++)
+            {
+                b = GetResMat(i).Bind(rf) && b;
+            }
 
             return b;
         }
