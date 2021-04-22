@@ -25,15 +25,21 @@ namespace nw4r
 			u32 mColor; // at 0x0
 		};
 		
-		struct ResColorAnmData
+		union ResColorAnmData
 		{
-			UNKWORD WORD_0x0;
-			UNKWORD WORD_0x4;
+			u32 mColor;
+			s32 mOffset;
 		};
 		
 		struct ResBoolAnmFramesData
 		{
 			u32 mFlags; // at 0x0
+		};
+		
+		union ResAnmData
+		{
+			float mValue;
+			s32 mOffset;
 		};
 		
 		namespace detail
@@ -44,9 +50,9 @@ namespace nw4r
 			
 			inline u32 GetResColorAnmResult(const ResColorAnmData * pData, float time, bool b)
 			{
-				if (b) return pData->WORD_0x4;
+				if (b) return pData->mColor;
 				
-				return GetResColorAnmResult((const ResColorAnmFramesData *)((u8 *)&pData->WORD_0x4 + pData->WORD_0x4), time);
+				return GetResColorAnmResult((const ResColorAnmFramesData *)((u8 *)pData + pData->mOffset), time);
 			}
 			
 			inline bool GetResBoolAnmFramesResult(const ResBoolAnmFramesData * pData, int i)
@@ -67,6 +73,13 @@ namespace nw4r
 				if (info.MAX_0x8 <= time) return info.MAX_0x8;
 				
 				return time;
+			}
+			
+			inline float GetResAnmResult(const ResAnmData * pData, float time, bool b)
+			{
+				if (b) return pData->mValue;
+				
+				return GetResKeyFrameAnmResult((const ResKeyFrameAnmData *)((u8 *)pData + pData->mOffset), time);
 			}
 		}
 	}

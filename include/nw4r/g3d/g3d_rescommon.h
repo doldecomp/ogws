@@ -32,6 +32,14 @@ namespace nw4r
 			}
 			
 			template <typename TPtr>
+			inline TPtr * ofs_to_ptr(s32 ofs)
+			{
+				if (ofs) return (TPtr *)((u8 *)mPtr + ofs);
+				
+				return NULL;
+			}
+			
+			template <typename TPtr>
 			inline const TPtr * ofs_to_ptr(s32 ofs) const
 			{
 				if (ofs) return (const TPtr *)((u8 *)mPtr + ofs);
