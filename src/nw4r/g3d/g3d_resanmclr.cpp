@@ -11,7 +11,7 @@ namespace nw4r
 		{
 			const ResAnmClrMatData * pMatAnm = GetMatAnm(i);
 			
-			const ResColorAnmData * r27 = pMatAnm->ARR_0x8;
+			const ResAnmClrMatData::AnmData * pAnm = pMatAnm->mAnms;
 			u32 flags = pMatAnm->mFlags;
 			ResAnmClrData & anmClr = ref();
 			
@@ -21,15 +21,15 @@ namespace nw4r
 			
 			float t = ClipFrame<const ResAnmClrInfoData>(anmClr.mInfo, time);
 			
-			for (int i = 0; i < 11; i++, flags >>= 2)
+			for (int i = 0; i < ClrAnmResult::ANM_COUNT; i++, flags >>= 2)
 			{
 				if (flags & 1)
 				{
 					pResult->mFlags |= 1 << i;
-					pResult->WORDS_0x30[i] = r27->WORD_0x0;
-					pResult->COLORS_0x4[i] = GetResColorAnmResult(r27, t, flags & 2);
+					pResult->WORDS_0x30[i] = pAnm->WORD_0x0;
+					pResult->COLORS_0x4[i] = GetResColorAnmResult(&pAnm->mColor, t, flags & 2);
 					
-					r27++;
+					pAnm++;
 				}
 			}
 		}

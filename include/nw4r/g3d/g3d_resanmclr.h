@@ -17,7 +17,12 @@ namespace nw4r
 		{
 			char UNK_0x0[0x4];
 			u32 mFlags; // at 0x4
-			ResColorAnmData ARR_0x8[];
+			
+			struct AnmData
+			{
+				UNKWORD WORD_0x0;
+				ResColorAnmData mColor; // at 0x4
+			} mAnms[]; // at 0x8
 		};
 		
 		struct ResAnmClrData
