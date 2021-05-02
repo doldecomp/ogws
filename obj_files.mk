@@ -193,10 +193,14 @@ NW4R_O_FILES := \
 	build/asm/nw4r/lyt/lyt_arcResourceAccessor.o \
 	build/asm/nw4r/lyt/lyt_common.o \
 
+EGG_O_FILES := \
+	build/asm/egg/egg_800838A8.o \
+	build/asm/egg/util/eggEffect.o \
+
 GROUP_1_O_FILES := \
-	build/asm/text.o \
 	build/asm/data.o \
 	build/asm/sdata.o \
+	build/asm/text.o \
 	build/RevoSDK/ARC/arc.o \
 	build/asm/text_b.o \
 	build/asm/data_b.o \
@@ -211,4 +215,4 @@ GROUP_1_O_FILES := \
 	build/asm/sbss2.o \
 	build/asm/sdata2.o \
 
-O_FILES := $(GROUP_0_O_FILES) $(NW4R_O_FILES) $(GROUP_1_O_FILES) $(REVOSDK_O_FILES)
+O_FILES := $(GROUP_0_O_FILES) $(NW4R_O_FILES) $(EGG_O_FILES) $(GROUP_1_O_FILES) $(REVOSDK_O_FILES)
