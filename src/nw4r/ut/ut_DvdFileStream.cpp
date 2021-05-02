@@ -33,11 +33,13 @@ namespace nw4r
         }
 
         /*
-            BOOL_0x6C has to be set super early in the constructors,
+            mIsBusy has to be set super early in the constructors,
             even before the vtable is written.
+            I tried making it volatile but that didn't change anything
 
             Other than that, these are functionally equivalent afaik
         */
+        #define __DECOMP_NON_MATCHING
         #ifdef __DECOMP_NON_MATCHING
         DvdFileStream::DvdFileStream(s32 r3)
         {
