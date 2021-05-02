@@ -25,16 +25,17 @@ include obj_files.mk
 #-------------------------------------------------------------------------------
 
 # Programs
-AS      := tools/powerpc-eabi-as
-OBJCOPY := tools/powerpc-eabi-objcopy
-CPP     := cpp -P
-CC      := tools/mwcceppc
-CC_OLD  := tools/old/mwcceppc
-LD      := tools/mwldeppc
-ELF2DOL := tools/elf2dol
-SHA1SUM := sha1sum
-PYTHON  := python
-PPROC   := tools/postprocess.py
+AS       := tools/powerpc-eabi-as
+OBJCOPY  := tools/powerpc-eabi-objcopy
+CPP      := cpp -P
+CC       := tools/mwcceppc
+CC_OLD   := tools/old/mwcceppc
+LD       := tools/mwldeppc
+ELF2DOL  := tools/elf2dol
+SHA1SUM  := sha1sum
+PYTHON   := python
+PPROC    := tools/postprocess.py
+PROGRESS := tools/calcprogress.py
 
 # Options
 ASFLAGS := -mgekko -I include
@@ -87,6 +88,7 @@ $(LDSCRIPT): ldscript.lcf
 $(DOL): $(ELF) | tools
 	$(ELF2DOL) $< $@ $(BSS_PDHR) $(TARGET_COL)
 	$(SHA1SUM) -c $(TARGET).sha1
+	$(PROGRESS)
 
 clean:
 	rm -fdr build
