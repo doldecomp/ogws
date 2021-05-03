@@ -204,6 +204,7 @@ EGG_O_FILES := \
 	build/asm/egg/core/eggTaskThread.o \
 	build/asm/egg/core/eggGraphicsFifo.o \
 	build/asm/egg/core/eggColorFader.o \
+	build/asm/egg/core/eggSceneManager.o \
 	build/asm/egg/egg_b.o \
 	build/asm/egg/audio/eggAudioSystem.o \
 	build/asm/egg/util/eggMsgRes.o \
