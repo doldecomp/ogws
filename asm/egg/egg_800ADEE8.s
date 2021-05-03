@@ -1,7 +1,6 @@
-###################################################
-# Could be eggList?                               #
-# Will observe class behavior when I get the time #
-###################################################
+###########################################################
+# Class referenced by the 1 unnamed function in ArcPlayer #
+###########################################################
 
 .include "macros.inc"
 
