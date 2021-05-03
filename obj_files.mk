@@ -195,6 +195,7 @@ NW4R_O_FILES := \
 
 EGG_O_FILES := \
 	build/asm/egg/egg.o \
+	build/asm/egg/math/eggMath.o \
 	build/asm/egg/math/eggMatrix.o \
 	build/asm/egg/math/eggQuat.o \
 	build/asm/egg/math/eggVector.o \
