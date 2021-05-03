@@ -218,6 +218,7 @@ EGG_O_FILES := \
 	build/asm/egg/core/eggDvdRipper.o \
 	build/asm/egg/core/eggDvdFile.o \
 	build/asm/egg/core/eggScene.o \
+	build/asm/egg/core/eggProcessMeter.o \
 	build/asm/egg/egg_b.o \
 	build/asm/egg/audio/eggAudioSystem.o \
 	build/asm/egg/util/eggMsgRes.o \
