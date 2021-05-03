@@ -2,8 +2,8 @@
 
 .section .text, "ax"
 
-.global func_800AF384
-func_800AF384:
+.global __ct__Q23EGG11ExpAudioMgrFv
+__ct__Q23EGG11ExpAudioMgrFv:
 /* 800AF384 000AA284  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 800AF388 000AA288  7C 08 02 A6 */	mflr r0
 /* 800AF38C 000AA28C  90 01 00 24 */	stw r0, 0x24(r1)
@@ -51,8 +51,8 @@ lbl_800AF3C4:
 /* 800AF42C 000AA32C  38 21 00 20 */	addi r1, r1, 0x20
 /* 800AF430 000AA330  4E 80 00 20 */	blr 
 
-.global func_800AF434
-func_800AF434:
+.global __dt__Q23EGG11ExpAudioMgrFv
+__dt__Q23EGG11ExpAudioMgrFv:
 /* 800AF434 000AA334  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 800AF438 000AA338  7C 08 02 A6 */	mflr r0
 /* 800AF43C 000AA33C  2C 03 00 00 */	cmpwi r3, 0
@@ -81,8 +81,8 @@ lbl_800AF480:
 /* 800AF494 000AA394  38 21 00 10 */	addi r1, r1, 0x10
 /* 800AF498 000AA398  4E 80 00 20 */	blr 
 
-.global func_800AF49C
-func_800AF49C:
+.global __ct__Q33EGG11ExpAudioMgr14ExpAudioMgrArgFv
+__ct__Q33EGG11ExpAudioMgr14ExpAudioMgrArgFv:
 /* 800AF49C 000AA39C  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 800AF4A0 000AA3A0  7C 08 02 A6 */	mflr r0
 /* 800AF4A4 000AA3A4  90 01 00 14 */	stw r0, 0x14(r1)
@@ -107,8 +107,8 @@ func_800AF49C:
 /* 800AF4F0 000AA3F0  38 21 00 10 */	addi r1, r1, 0x10
 /* 800AF4F4 000AA3F4  4E 80 00 20 */	blr 
 
-.global func_800AF4F8
-func_800AF4F8:
+.global initialize__Q23EGG11ExpAudioMgrFPQ33EGG9IAudioMgr3Arg
+initialize__Q23EGG11ExpAudioMgrFPQ33EGG9IAudioMgr3Arg:
 /* 800AF4F8 000AA3F8  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 800AF4FC 000AA3FC  7C 08 02 A6 */	mflr r0
 /* 800AF500 000AA400  90 01 00 24 */	stw r0, 0x24(r1)
@@ -210,8 +210,8 @@ lbl_800AF658:
 /* 800AF66C 000AA56C  38 21 00 20 */	addi r1, r1, 0x20
 /* 800AF670 000AA570  4E 80 00 20 */	blr 
 
-.global func_800AF674
-func_800AF674:
+.global openArchive__Q23EGG11ExpAudioMgrFPCcPQ34nw4r3snd9SoundHeapQ33EGG9ArcPlayer12SARC_STORAGE
+openArchive__Q23EGG11ExpAudioMgrFPCcPQ34nw4r3snd9SoundHeapQ33EGG9ArcPlayer12SARC_STORAGE:
 /* 800AF674 000AA574  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 800AF678 000AA578  7C 08 02 A6 */	mflr r0
 /* 800AF67C 000AA57C  90 01 00 24 */	stw r0, 0x24(r1)
@@ -264,8 +264,8 @@ lbl_800AF71C:
 /* 800AF72C 000AA62C  38 21 00 20 */	addi r1, r1, 0x20
 /* 800AF730 000AA630  4E 80 00 20 */	blr 
 
-.global func_800AF734
-func_800AF734:
+.global setupMemoryArchive__Q23EGG11ExpAudioMgrFPCvPQ34nw4r3snd9SoundHeap
+setupMemoryArchive__Q23EGG11ExpAudioMgrFPCvPQ34nw4r3snd9SoundHeap:
 /* 800AF734 000AA634  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 800AF738 000AA638  7C 08 02 A6 */	mflr r0
 /* 800AF73C 000AA63C  90 01 00 24 */	stw r0, 0x24(r1)
@@ -316,7 +316,9 @@ lbl_800AF7D8:
 /* 800AF7E4 000AA6E4  7C 08 03 A6 */	mtlr r0
 /* 800AF7E8 000AA6E8  38 21 00 20 */	addi r1, r1, 0x20
 /* 800AF7EC 000AA6EC  4E 80 00 20 */	blr 
-lbl_800AF7F0:
+
+.global closeArchive__Q23EGG11ExpAudioMgrFv
+closeArchive__Q23EGG11ExpAudioMgrFv:
 /* 800AF7F0 000AA6F0  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 800AF7F4 000AA6F4  7C 08 02 A6 */	mflr r0
 /* 800AF7F8 000AA6F8  90 01 00 14 */	stw r0, 0x14(r1)
@@ -330,12 +332,16 @@ lbl_800AF7F0:
 /* 800AF818 000AA718  7C 08 03 A6 */	mtlr r0
 /* 800AF81C 000AA71C  38 21 00 10 */	addi r1, r1, 0x10
 /* 800AF820 000AA720  4E 80 00 20 */	blr 
-lbl_800AF824:
+
+.global setupMemoryArchive__Q23EGG11ExpAudioMgrFPCvPQ34nw4r3snd9SoundHeapl
+setupMemoryArchive__Q23EGG11ExpAudioMgrFPCvPQ34nw4r3snd9SoundHeapl:
 /* 800AF824 000AA724  81 83 00 00 */	lwz r12, 0(r3)
 /* 800AF828 000AA728  81 8C 00 90 */	lwz r12, 0x90(r12)
 /* 800AF82C 000AA72C  7D 89 03 A6 */	mtctr r12
 /* 800AF830 000AA730  4E 80 04 20 */	bctr 
-lbl_800AF834:
+
+.global func_800AF834
+func_800AF834:
 /* 800AF834 000AA734  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 800AF838 000AA738  7C 08 02 A6 */	mflr r0
 /* 800AF83C 000AA73C  2C 04 00 01 */	cmpwi r4, 1
@@ -387,6 +393,9 @@ lbl_800AF8D4:
 /* 800AF8E8 000AA7E8  7C 08 03 A6 */	mtlr r0
 /* 800AF8EC 000AA7EC  38 21 00 20 */	addi r1, r1, 0x20
 /* 800AF8F0 000AA7F0  4E 80 00 20 */	blr 
+
+.global loadState__Q23EGG12SoundHeapMgrFl
+loadState__Q23EGG12SoundHeapMgrFl:
 /* 800AF8F4 000AA7F4  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 800AF8F8 000AA7F8  7C 08 02 A6 */	mflr r0
 /* 800AF8FC 000AA7FC  90 01 00 24 */	stw r0, 0x24(r1)
@@ -424,6 +433,12 @@ lbl_800AF960:
 /* 800AF974 000AA874  7C 08 03 A6 */	mtlr r0
 /* 800AF978 000AA878  38 21 00 20 */	addi r1, r1, 0x20
 /* 800AF97C 000AA87C  4E 80 00 20 */	blr 
+
+# Seems functionally like what would be SoundHeapMgr::saveState,
+# but there is no proof that a function with that name exists.
+# Only other known symbol is SoundHeapMgr::stateProc from Wii Fit U (might be this???)
+.global func_800AF980
+func_800AF980:
 /* 800AF980 000AA880  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 800AF984 000AA884  7C 08 02 A6 */	mflr r0
 /* 800AF988 000AA888  38 A0 00 00 */	li r5, 0
@@ -480,6 +495,9 @@ lbl_800AFA40:
 /* 800AFA48 000AA948  7C 08 03 A6 */	mtlr r0
 /* 800AFA4C 000AA94C  38 21 00 20 */	addi r1, r1, 0x20
 /* 800AFA50 000AA950  4E 80 00 20 */	blr 
+
+.global getCurrentLevel__Q23EGG12SoundHeapMgrFv
+getCurrentLevel__Q23EGG12SoundHeapMgrFv:
 /* 800AFA54 000AA954  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 800AFA58 000AA958  7C 08 02 A6 */	mflr r0
 /* 800AFA5C 000AA95C  90 01 00 14 */	stw r0, 0x14(r1)
@@ -509,7 +527,7 @@ lbl_800AFA40:
 /* 800AFAB4 000AA9B4  48 00 14 30 */	b func_800B0EE4
 
 /* 800AFAB8 000AA9B8  38 63 FF F8 */	addi r3, r3, -8
-/* 800AFABC 000AA9BC  4B FF FD 78 */	b lbl_800AF834
+/* 800AFABC 000AA9BC  4B FF FD 78 */	b func_800AF834
 
 /* 800AFAC0 000AA9C0  38 63 FF 08 */	addi r3, r3, -248
 /* 800AFAC4 000AA9C4  48 00 13 BC */	b func_800B0E80
@@ -524,13 +542,13 @@ lbl_800AFA40:
 /* 800AFADC 000AA9DC  48 00 14 28 */	b func_800B0F04
 
 /* 800AFAE0 000AA9E0  38 63 FF 08 */	addi r3, r3, -248
-/* 800AFAE4 000AA9E4  4B FF FD 0C */	b lbl_800AF7F0
+/* 800AFAE4 000AA9E4  4B FF FD 0C */	b closeArchive__Q23EGG11ExpAudioMgrFv
 
 /* 800AFAE8 000AA9E8  38 63 FF 08 */	addi r3, r3, -248
-/* 800AFAEC 000AA9EC  4B FF FC 48 */	b func_800AF734
+/* 800AFAEC 000AA9EC  4B FF FC 48 */	b setupMemoryArchive__Q23EGG11ExpAudioMgrFPCvPQ34nw4r3snd9SoundHeap
 
 /* 800AFAF0 000AA9F0  38 63 FF 08 */	addi r3, r3, -248
-/* 800AFAF4 000AA9F4  4B FF FD 30 */	b lbl_800AF824
+/* 800AFAF4 000AA9F4  4B FF FD 30 */	b setupMemoryArchive__Q23EGG11ExpAudioMgrFPCvPQ34nw4r3snd9SoundHeapl
 
 /* 800AFAF8 000AA9F8  38 63 FF 08 */	addi r3, r3, -248
 /* 800AFAFC 000AA9FC  48 00 13 E0 */	b func_800B0EDC
@@ -542,7 +560,7 @@ lbl_800AFA40:
 /* 800AFB0C 000AAA0C  48 00 13 C0 */	b func_800B0ECC
 
 /* 800AFB10 000AAA10  38 63 FF 08 */	addi r3, r3, -248
-/* 800AFB14 000AAA14  4B FF FB 60 */	b func_800AF674
+/* 800AFB14 000AAA14  4B FF FB 60 */	b openArchive__Q23EGG11ExpAudioMgrFPCcPQ34nw4r3snd9SoundHeapQ33EGG9ArcPlayer12SARC_STORAGE
 
 /* 800AFB18 000AAA18  38 63 FF 08 */	addi r3, r3, -248
-/* 800AFB1C 000AAA1C  4B FF F9 18 */	b func_800AF434
+/* 800AFB1C 000AAA1C  4B FF F9 18 */	b __dt__Q23EGG11ExpAudioMgrFv
