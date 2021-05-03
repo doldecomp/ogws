@@ -195,6 +195,7 @@ NW4R_O_FILES := \
 
 EGG_O_FILES := \
 	build/asm/egg/egg.o \
+	build/asm/egg/math/eggVector.o \
 	build/asm/egg/core/eggExpHeap.o \
 	build/asm/egg/core/eggFrmHeap.o \
 	build/asm/egg/core/eggHeap.o \
