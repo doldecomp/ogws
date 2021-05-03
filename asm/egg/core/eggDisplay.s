@@ -25,7 +25,7 @@ __ct__Q23EGG7DisplayFUc:
 
 .global getTickPerFrame__Q23EGG7DisplayFv
 getTickPerFrame__Q23EGG7DisplayFv:
-/* 800AA008 000A4F08  48 00 05 44 */	b func_800AA54C
+/* 800AA008 000A4F08  48 00 05 44 */	b getTickPerVRetrace__Q23EGG5VideoFv
 
 .global beginFrame__Q23EGG7DisplayFv
 beginFrame__Q23EGG7DisplayFv:
