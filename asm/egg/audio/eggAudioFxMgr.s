@@ -2,13 +2,16 @@
 
 .section .text, "ax"
 
-lbl_800AFB20:
+.global __ct__Q23EGG7AudioFxFv
+__ct__Q23EGG7AudioFxFv:
 /* 800AFB20 000AAA20  38 00 00 00 */	li r0, 0
 /* 800AFB24 000AAA24  90 03 00 00 */	stw r0, 0(r3)
 /* 800AFB28 000AAA28  90 03 00 0C */	stw r0, 0xc(r3)
 /* 800AFB2C 000AAA2C  90 03 00 10 */	stw r0, 0x10(r3)
 /* 800AFB30 000AAA30  4E 80 00 20 */	blr 
-lbl_800AFB34:
+
+.global __dt__Q23EGG7AudioFxFv
+__dt__Q23EGG7AudioFxFv:
 /* 800AFB34 000AAA34  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 800AFB38 000AAA38  7C 08 02 A6 */	mflr r0
 /* 800AFB3C 000AAA3C  2C 03 00 00 */	cmpwi r3, 0
@@ -69,8 +72,8 @@ lbl_800AFBF4:
 /* 800AFC08 000AAB08  38 21 00 10 */	addi r1, r1, 0x10
 /* 800AFC0C 000AAB0C  4E 80 00 20 */	blr 
 
-.global func_800AFC10
-func_800AFC10:
+.global createFxReverbHi__Q23EGG7AudioFxFPCQ44nw4r3snd10FxReverbHi13ReverbHiParam
+createFxReverbHi__Q23EGG7AudioFxFPCQ44nw4r3snd10FxReverbHi13ReverbHiParam:
 /* 800AFC10 000AAB10  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 800AFC14 000AAB14  7C 08 02 A6 */	mflr r0
 /* 800AFC18 000AAB18  90 01 00 24 */	stw r0, 0x24(r1)
@@ -243,8 +246,8 @@ lbl_800AFE6C:
 /* 800AFE80 000AAD80  38 21 00 20 */	addi r1, r1, 0x20
 /* 800AFE84 000AAD84  4E 80 00 20 */	blr 
 
-.global func_800AFE88
-func_800AFE88:
+.global createFxReverbHiDpl2__Q23EGG7AudioFxFPCQ44nw4r3snd14FxReverbHiDpl217ReverbHiDpl2Param
+createFxReverbHiDpl2__Q23EGG7AudioFxFPCQ44nw4r3snd14FxReverbHiDpl217ReverbHiDpl2Param:
 /* 800AFE88 000AAD88  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 800AFE8C 000AAD8C  7C 08 02 A6 */	mflr r0
 /* 800AFE90 000AAD90  90 01 00 24 */	stw r0, 0x24(r1)
@@ -427,8 +430,8 @@ lbl_800B010C:
 /* 800B0120 000AB020  38 21 00 20 */	addi r1, r1, 0x20
 /* 800B0124 000AB024  4E 80 00 20 */	blr 
 
-.global func_800B0128
-func_800B0128:
+.global createFxChorus__Q23EGG7AudioFxFPCQ44nw4r3snd8FxChorus11ChorusParam
+createFxChorus__Q23EGG7AudioFxFPCQ44nw4r3snd8FxChorus11ChorusParam:
 /* 800B0128 000AB028  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 800B012C 000AB02C  7C 08 02 A6 */	mflr r0
 /* 800B0130 000AB030  90 01 00 24 */	stw r0, 0x24(r1)
@@ -601,8 +604,8 @@ lbl_800B0384:
 /* 800B0398 000AB298  38 21 00 20 */	addi r1, r1, 0x20
 /* 800B039C 000AB29C  4E 80 00 20 */	blr 
 
-.global func_800B03A0
-func_800B03A0:
+.global createFxDelay__Q23EGG7AudioFxFPCQ44nw4r3snd7FxDelay10DelayParam
+createFxDelay__Q23EGG7AudioFxFPCQ44nw4r3snd7FxDelay10DelayParam:
 /* 800B03A0 000AB2A0  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 800B03A4 000AB2A4  7C 08 02 A6 */	mflr r0
 /* 800B03A8 000AB2A8  90 01 00 24 */	stw r0, 0x24(r1)
@@ -775,16 +778,16 @@ lbl_800B05FC:
 /* 800B0610 000AB510  38 21 00 20 */	addi r1, r1, 0x20
 /* 800B0614 000AB514  4E 80 00 20 */	blr 
 
-.global func_800B0618
-func_800B0618:
+.global __ct__Q23EGG10AudioFxMgrFv
+__ct__Q23EGG10AudioFxMgrFv:
 /* 800B0618 000AB518  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 800B061C 000AB51C  7C 08 02 A6 */	mflr r0
-/* 800B0620 000AB520  3C 80 80 0B */	lis r4, lbl_800AFB20@ha
-/* 800B0624 000AB524  3C A0 80 0B */	lis r5, lbl_800AFB34@ha
+/* 800B0620 000AB520  3C 80 80 0B */	lis r4, __ct__Q23EGG7AudioFxFv@ha
+/* 800B0624 000AB524  3C A0 80 0B */	lis r5, __dt__Q23EGG7AudioFxFv@ha
 /* 800B0628 000AB528  90 01 00 14 */	stw r0, 0x14(r1)
 /* 800B062C 000AB52C  38 C0 00 18 */	li r6, 0x18
-/* 800B0630 000AB530  38 84 FB 20 */	addi r4, r4, lbl_800AFB20@l
-/* 800B0634 000AB534  38 A5 FB 34 */	addi r5, r5, lbl_800AFB34@l
+/* 800B0630 000AB530  38 84 FB 20 */	addi r4, r4, __ct__Q23EGG7AudioFxFv@l
+/* 800B0634 000AB534  38 A5 FB 34 */	addi r5, r5, __dt__Q23EGG7AudioFxFv@l
 /* 800B0638 000AB538  93 E1 00 0C */	stw r31, 0xc(r1)
 /* 800B063C 000AB53C  7C 7F 1B 78 */	mr r31, r3
 /* 800B0640 000AB540  38 E0 00 03 */	li r7, 3
@@ -796,8 +799,8 @@ func_800B0618:
 /* 800B0658 000AB558  38 21 00 10 */	addi r1, r1, 0x10
 /* 800B065C 000AB55C  4E 80 00 20 */	blr 
 
-.global func_800B0660
-func_800B0660:
+.global __dt__Q23EGG10AudioFxMgrFv
+__dt__Q23EGG10AudioFxMgrFv:
 /* 800B0660 000AB560  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 800B0664 000AB564  7C 08 02 A6 */	mflr r0
 /* 800B0668 000AB568  2C 03 00 00 */	cmpwi r3, 0
@@ -807,9 +810,9 @@ func_800B0660:
 /* 800B0678 000AB578  93 C1 00 08 */	stw r30, 8(r1)
 /* 800B067C 000AB57C  7C 7E 1B 78 */	mr r30, r3
 /* 800B0680 000AB580  41 82 00 28 */	beq lbl_800B06A8
-/* 800B0684 000AB584  3C 80 80 0B */	lis r4, lbl_800AFB34@ha
+/* 800B0684 000AB584  3C 80 80 0B */	lis r4, __dt__Q23EGG7AudioFxFv@ha
 /* 800B0688 000AB588  38 A0 00 18 */	li r5, 0x18
-/* 800B068C 000AB58C  38 84 FB 34 */	addi r4, r4, lbl_800AFB34@l
+/* 800B068C 000AB58C  38 84 FB 34 */	addi r4, r4, __dt__Q23EGG7AudioFxFv@l
 /* 800B0690 000AB590  38 C0 00 03 */	li r6, 3
 /* 800B0694 000AB594  48 00 14 B9 */	bl __destroy_arr
 /* 800B0698 000AB598  2C 1F 00 00 */	cmpwi r31, 0
@@ -825,8 +828,8 @@ lbl_800B06A8:
 /* 800B06BC 000AB5BC  38 21 00 10 */	addi r1, r1, 0x10
 /* 800B06C0 000AB5C0  4E 80 00 20 */	blr 
 
-.global func_800B06C4
-func_800B06C4:
+.global initializeFx__Q23EGG10AudioFxMgrFPQ34nw4r3snd9SoundHeapPQ33EGG10AudioFxMgr13AudioFxMgrArg
+initializeFx__Q23EGG10AudioFxMgrFPQ34nw4r3snd9SoundHeapPQ33EGG10AudioFxMgr13AudioFxMgrArg:
 /* 800B06C4 000AB5C4  94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 800B06C8 000AB5C8  7C 08 02 A6 */	mflr r0
 /* 800B06CC 000AB5CC  90 01 00 34 */	stw r0, 0x34(r1)
@@ -882,8 +885,8 @@ lbl_800B0770:
 /* 800B077C 000AB67C  38 21 00 30 */	addi r1, r1, 0x30
 /* 800B0780 000AB680  4E 80 00 20 */	blr 
 
-.global func_800B0784
-func_800B0784:
+.global setFxReverbHi__Q23EGG10AudioFxMgrFQ34nw4r3snd6AuxBusPCQ44nw4r3snd10FxReverbHi13ReverbHiParam
+setFxReverbHi__Q23EGG10AudioFxMgrFQ34nw4r3snd6AuxBusPCQ44nw4r3snd10FxReverbHi13ReverbHiParam:
 /* 800B0784 000AB684  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 800B0788 000AB688  7C 08 02 A6 */	mflr r0
 /* 800B078C 000AB68C  2C 04 00 03 */	cmpwi r4, 3
@@ -905,7 +908,7 @@ lbl_800B07C8:
 /* 800B07C8 000AB6C8  1C 1E 00 18 */	mulli r0, r30, 0x18
 /* 800B07CC 000AB6CC  7F E4 FB 78 */	mr r4, r31
 /* 800B07D0 000AB6D0  7C 7D 02 14 */	add r3, r29, r0
-/* 800B07D4 000AB6D4  4B FF F4 3D */	bl func_800AFC10
+/* 800B07D4 000AB6D4  4B FF F4 3D */	bl createFxReverbHi__Q23EGG7AudioFxFPCQ44nw4r3snd10FxReverbHi13ReverbHiParam
 /* 800B07D8 000AB6D8  80 01 00 24 */	lwz r0, 0x24(r1)
 /* 800B07DC 000AB6DC  83 E1 00 1C */	lwz r31, 0x1c(r1)
 /* 800B07E0 000AB6E0  83 C1 00 18 */	lwz r30, 0x18(r1)
@@ -914,8 +917,8 @@ lbl_800B07C8:
 /* 800B07EC 000AB6EC  38 21 00 20 */	addi r1, r1, 0x20
 /* 800B07F0 000AB6F0  4E 80 00 20 */	blr 
 
-.global func_800B07F4
-func_800B07F4:
+.global setFxReverbHiDpl2__Q23EGG10AudioFxMgrFQ34nw4r3snd6AuxBusPCQ44nw4r3snd14FxReverbHiDpl217ReverbHiDpl2Param
+setFxReverbHiDpl2__Q23EGG10AudioFxMgrFQ34nw4r3snd6AuxBusPCQ44nw4r3snd14FxReverbHiDpl217ReverbHiDpl2Param:
 /* 800B07F4 000AB6F4  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 800B07F8 000AB6F8  7C 08 02 A6 */	mflr r0
 /* 800B07FC 000AB6FC  2C 04 00 03 */	cmpwi r4, 3
@@ -937,7 +940,7 @@ lbl_800B0838:
 /* 800B0838 000AB738  1C 1E 00 18 */	mulli r0, r30, 0x18
 /* 800B083C 000AB73C  7F E4 FB 78 */	mr r4, r31
 /* 800B0840 000AB740  7C 7D 02 14 */	add r3, r29, r0
-/* 800B0844 000AB744  4B FF F6 45 */	bl func_800AFE88
+/* 800B0844 000AB744  4B FF F6 45 */	bl createFxReverbHiDpl2__Q23EGG7AudioFxFPCQ44nw4r3snd14FxReverbHiDpl217ReverbHiDpl2Param
 /* 800B0848 000AB748  80 01 00 24 */	lwz r0, 0x24(r1)
 /* 800B084C 000AB74C  83 E1 00 1C */	lwz r31, 0x1c(r1)
 /* 800B0850 000AB750  83 C1 00 18 */	lwz r30, 0x18(r1)
@@ -946,8 +949,8 @@ lbl_800B0838:
 /* 800B085C 000AB75C  38 21 00 20 */	addi r1, r1, 0x20
 /* 800B0860 000AB760  4E 80 00 20 */	blr 
 
-.global func_800B0864
-func_800B0864:
+.global setFxChorus__Q23EGG10AudioFxMgrFQ34nw4r3snd6AuxBusPCQ44nw4r3snd8FxChorus11ChorusParam
+setFxChorus__Q23EGG10AudioFxMgrFQ34nw4r3snd6AuxBusPCQ44nw4r3snd8FxChorus11ChorusParam:
 /* 800B0864 000AB764  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 800B0868 000AB768  7C 08 02 A6 */	mflr r0
 /* 800B086C 000AB76C  2C 04 00 03 */	cmpwi r4, 3
@@ -969,7 +972,7 @@ lbl_800B08A8:
 /* 800B08A8 000AB7A8  1C 1E 00 18 */	mulli r0, r30, 0x18
 /* 800B08AC 000AB7AC  7F E4 FB 78 */	mr r4, r31
 /* 800B08B0 000AB7B0  7C 7D 02 14 */	add r3, r29, r0
-/* 800B08B4 000AB7B4  4B FF F8 75 */	bl func_800B0128
+/* 800B08B4 000AB7B4  4B FF F8 75 */	bl createFxChorus__Q23EGG7AudioFxFPCQ44nw4r3snd8FxChorus11ChorusParam
 /* 800B08B8 000AB7B8  80 01 00 24 */	lwz r0, 0x24(r1)
 /* 800B08BC 000AB7BC  83 E1 00 1C */	lwz r31, 0x1c(r1)
 /* 800B08C0 000AB7C0  83 C1 00 18 */	lwz r30, 0x18(r1)
@@ -978,8 +981,8 @@ lbl_800B08A8:
 /* 800B08CC 000AB7CC  38 21 00 20 */	addi r1, r1, 0x20
 /* 800B08D0 000AB7D0  4E 80 00 20 */	blr 
 
-.global func_800B08D4
-func_800B08D4:
+.global setFxDelay__Q23EGG10AudioFxMgrFQ34nw4r3snd6AuxBusPCQ44nw4r3snd7FxDelay10DelayParam
+setFxDelay__Q23EGG10AudioFxMgrFQ34nw4r3snd6AuxBusPCQ44nw4r3snd7FxDelay10DelayParam:
 /* 800B08D4 000AB7D4  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 800B08D8 000AB7D8  7C 08 02 A6 */	mflr r0
 /* 800B08DC 000AB7DC  2C 04 00 03 */	cmpwi r4, 3
@@ -1001,7 +1004,7 @@ lbl_800B0918:
 /* 800B0918 000AB818  1C 1E 00 18 */	mulli r0, r30, 0x18
 /* 800B091C 000AB81C  7F E4 FB 78 */	mr r4, r31
 /* 800B0920 000AB820  7C 7D 02 14 */	add r3, r29, r0
-/* 800B0924 000AB824  4B FF FA 7D */	bl func_800B03A0
+/* 800B0924 000AB824  4B FF FA 7D */	bl createFxDelay__Q23EGG7AudioFxFPCQ44nw4r3snd7FxDelay10DelayParam
 /* 800B0928 000AB828  80 01 00 24 */	lwz r0, 0x24(r1)
 /* 800B092C 000AB82C  83 E1 00 1C */	lwz r31, 0x1c(r1)
 /* 800B0930 000AB830  83 C1 00 18 */	lwz r30, 0x18(r1)
@@ -1010,8 +1013,8 @@ lbl_800B0918:
 /* 800B093C 000AB83C  38 21 00 20 */	addi r1, r1, 0x20
 /* 800B0940 000AB840  4E 80 00 20 */	blr 
 
-.global func_800B0944
-func_800B0944:
+.global clearFx__Q23EGG10AudioFxMgrFQ34nw4r3snd6AuxBus
+clearFx__Q23EGG10AudioFxMgrFQ34nw4r3snd6AuxBus:
 /* 800B0944 000AB844  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 800B0948 000AB848  7C 08 02 A6 */	mflr r0
 /* 800B094C 000AB84C  2C 04 00 03 */	cmpwi r4, 3
@@ -1074,26 +1077,26 @@ lbl_800B0A0C:
 /* 800B0A20 000AB920  38 21 00 20 */	addi r1, r1, 0x20
 /* 800B0A24 000AB924  4E 80 00 20 */	blr 
 
-.global func_800B0A28
-func_800B0A28:
+.global getDefaultFxReverbHi__Q23EGG10AudioFxMgrFv
+getDefaultFxReverbHi__Q23EGG10AudioFxMgrFv:
 /* 800B0A28 000AB928  3C 60 80 38 */	lis r3, lbl_8037AE68@ha
 /* 800B0A2C 000AB92C  38 63 AE 68 */	addi r3, r3, lbl_8037AE68@l
 /* 800B0A30 000AB930  4E 80 00 20 */	blr 
 
-.global func_800B0A34
-func_800B0A34:
+.global getDefaultFxReverbHiDpl2__Q23EGG10AudioFxMgrFv
+getDefaultFxReverbHiDpl2__Q23EGG10AudioFxMgrFv:
 /* 800B0A34 000AB934  3C 60 80 38 */	lis r3, lbl_8037AE80@ha
 /* 800B0A38 000AB938  38 63 AE 80 */	addi r3, r3, lbl_8037AE80@l
 /* 800B0A3C 000AB93C  4E 80 00 20 */	blr 
 
-.global func_800B0A40
-func_800B0A40:
+.global getDefaultFxChorus__Q23EGG10AudioFxMgrFv
+getDefaultFxChorus__Q23EGG10AudioFxMgrFv:
 /* 800B0A40 000AB940  3C 60 80 38 */	lis r3, lbl_8037AE98@ha
 /* 800B0A44 000AB944  38 63 AE 98 */	addi r3, r3, lbl_8037AE98@l
 /* 800B0A48 000AB948  4E 80 00 20 */	blr 
 
-.global func_800B0A4C
-func_800B0A4C:
+.global getDefaultFxDelay__Q23EGG10AudioFxMgrFv
+getDefaultFxDelay__Q23EGG10AudioFxMgrFv:
 /* 800B0A4C 000AB94C  3C 60 80 38 */	lis r3, lbl_8037AEA4@ha
 /* 800B0A50 000AB950  38 63 AE A4 */	addi r3, r3, lbl_8037AEA4@l
 /* 800B0A54 000AB954  4E 80 00 20 */	blr 
