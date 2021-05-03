@@ -195,6 +195,7 @@ NW4R_O_FILES := \
 
 EGG_O_FILES := \
 	build/asm/egg/egg_800838A8.o \
+	build/asm/egg/audio/eggAudioSystem.o \
 	build/asm/egg/util/eggMsgRes.o \
 	build/asm/egg/util/eggEffect.o \
 	build/asm/egg/egg_800B1744.o \
