@@ -225,6 +225,7 @@ EGG_O_FILES := \
 	build/asm/egg/core/eggAsyncDisplay.o \
 	build/asm/egg/egg_800ADEE8.o \
 	build/asm/egg/audio/eggAudioArcPlayerMgr.o \
+	build/asm/egg/audio/eggAudioExpMgr.o \
 	build/asm/egg/egg_b.o \
 	build/asm/egg/audio/eggAudioSystem.o \
 	build/asm/egg/util/eggMsgRes.o \
