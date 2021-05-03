@@ -207,6 +207,7 @@ EGG_O_FILES := \
 	build/asm/egg/core/eggSceneManager.o \
 	build/asm/egg/core/eggController.o \
 	build/asm/egg/core/eggStream.o \
+	build/asm/egg/core/eggDisplay.o \
 	build/asm/egg/egg_b.o \
 	build/asm/egg/audio/eggAudioSystem.o \
 	build/asm/egg/util/eggMsgRes.o \
