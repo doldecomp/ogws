@@ -251,6 +251,7 @@ lbl_800B13A0:
 /* 800B13B0 000AC2B0  38 21 00 10 */	addi r1, r1, 0x10
 /* 800B13B4 000AC2B4  4E 80 00 20 */	blr 
 
+# Static
 .global analyzeTag__Q23EGG6MsgResFUsPCwPUcPUiPPv
 analyzeTag__Q23EGG6MsgResFUsPCwPUcPUiPPv:
 /* 800B13B8 000AC2B8  94 21 FF E0 */	stwu r1, -0x20(r1)
