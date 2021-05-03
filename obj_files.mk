@@ -199,6 +199,7 @@ EGG_O_FILES := \
 	build/asm/egg/core/eggFrmHeap.o \
 	build/asm/egg/core/eggHeap.o \
 	build/asm/egg/core/eggAllocator.o \
+	build/asm/egg/core/eggThread.o \
 	build/asm/egg/egg_b.o \
 	build/asm/egg/audio/eggAudioSystem.o \
 	build/asm/egg/util/eggMsgRes.o \
