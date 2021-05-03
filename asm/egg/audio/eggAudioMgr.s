@@ -2,8 +2,8 @@
 
 .section .text, "ax"
 
-.global func_800B0B90
-func_800B0B90:
+.global __ct__Q33EGG14SimpleAudioMgr17SimpleAudioMgrArgFv
+__ct__Q33EGG14SimpleAudioMgr17SimpleAudioMgrArgFv:
 /* 800B0B90 000ABA90  3C 80 00 8D */	lis r4, 0x008CA000@ha
 /* 800B0B94 000ABA94  38 E0 00 00 */	li r7, 0
 /* 800B0B98 000ABA98  38 04 A0 00 */	addi r0, r4, 0x008CA000@l
@@ -20,8 +20,8 @@ func_800B0B90:
 /* 800B0BC4 000ABAC4  90 03 00 1C */	stw r0, 0x1c(r3)
 /* 800B0BC8 000ABAC8  4E 80 00 20 */	blr 
 
-.global func_800B0BCC
-func_800B0BCC:
+.global __ct__Q23EGG14SimpleAudioMgrFv
+__ct__Q23EGG14SimpleAudioMgrFv:
 /* 800B0BCC 000ABACC  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 800B0BD0 000ABAD0  7C 08 02 A6 */	mflr r0
 /* 800B0BD4 000ABAD4  3C A0 80 3A */	lis r5, lbl_80398738@ha
@@ -68,8 +68,8 @@ func_800B0BCC:
 /* 800B0C78 000ABB78  38 21 00 10 */	addi r1, r1, 0x10
 /* 800B0C7C 000ABB7C  4E 80 00 20 */	blr 
 
-.global func_800B0C80
-func_800B0C80:
+.global __dt__Q23EGG14SimpleAudioMgrFv
+__dt__Q23EGG14SimpleAudioMgrFv:
 /* 800B0C80 000ABB80  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 800B0C84 000ABB84  7C 08 02 A6 */	mflr r0
 /* 800B0C88 000ABB88  2C 03 00 00 */	cmpwi r3, 0
@@ -108,8 +108,8 @@ lbl_800B0CF0:
 /* 800B0D04 000ABC04  38 21 00 10 */	addi r1, r1, 0x10
 /* 800B0D08 000ABC08  4E 80 00 20 */	blr 
 
-.global func_800B0D0C
-func_800B0D0C:
+.global initialize__Q23EGG14SimpleAudioMgrFPQ33EGG9IAudioMgr3Arg
+initialize__Q23EGG14SimpleAudioMgrFPQ33EGG9IAudioMgr3Arg:
 /* 800B0D0C 000ABC0C  94 21 FF C0 */	stwu r1, -0x40(r1)
 /* 800B0D10 000ABC10  7C 08 02 A6 */	mflr r0
 /* 800B0D14 000ABC14  2C 04 00 00 */	cmpwi r4, 0
@@ -210,8 +210,8 @@ lbl_800B0E50:
 /* 800B0E78 000ABD78  38 21 00 40 */	addi r1, r1, 0x40
 /* 800B0E7C 000ABD7C  4E 80 00 20 */	blr 
 
-.global func_800B0E80
-func_800B0E80:
+.global calc__Q23EGG14SimpleAudioMgrFv
+calc__Q23EGG14SimpleAudioMgrFv:
 /* 800B0E80 000ABD80  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 800B0E84 000ABD84  7C 08 02 A6 */	mflr r0
 /* 800B0E88 000ABD88  90 01 00 14 */	stw r0, 0x14(r1)
@@ -272,6 +272,12 @@ func_800B0EFC:
 func_800B0F04:
 /* 800B0F04 000ABE04  38 63 00 F8 */	addi r3, r3, 0xf8
 /* 800B0F08 000ABE08  4B FF E0 0C */	b loadGroup__Q23EGG9ArcPlayerFPCcPQ34nw4r3snd9SoundHeapUl
+
+.global initialize__Q23EGG9IAudioMgrFPQ33EGG9IAudioMgr3Arg
+initialize__Q23EGG9IAudioMgrFPQ33EGG9IAudioMgr3Arg:
 /* 800B0F0C 000ABE0C  4E 80 00 20 */	blr 
+
+.global func_800B0F10
+func_800B0F10:
 /* 800B0F10 000ABE10  38 63 FF 08 */	addi r3, r3, -248
-/* 800B0F14 000ABE14  4B FF FD 6C */	b func_800B0C80
+/* 800B0F14 000ABE14  4B FF FD 6C */	b __dt__Q23EGG14SimpleAudioMgrFv
