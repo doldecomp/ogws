@@ -1,7 +1,63 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .data, "wa"
+.balign 0x8
+.global lbl_80398118
+lbl_80398118:
+    .long 0
+    .long 0
+    .long __dt__Q23EGG4HeapFv
+    .long 0
+    .long 0
+    .long 0
+    .long 0
+    .long 0
+    .long 0
+    .long 0
+    .long 0
+    .long 0
 
+.section .sdata2, "a"
+.balign 0x8
+.global lbl_804C09E0
+lbl_804C09E0:
+    # Megabytes -> Bytes
+	.single 0e1048576
+    .long 0x00000000
+.global lbl_804C09E8
+lbl_804C09E8:
+	.long 0x43300000
+    .long 0x80000000
+.global lbl_804C09F0
+lbl_804C09F0:
+	.long 0x43300000
+    .long 0x00000000
+
+.section .sbss, "wa"
+.balign 0x8
+.global lbl_804BECA8
+lbl_804BECA8:
+	.skip 0x4
+.global lbl_804BECAC
+lbl_804BECAC:
+	.skip 0x4
+.global lbl_804BECB0
+lbl_804BECB0:
+	.skip 0x8
+
+.section .rodata, "wa"
+.balign 0x8
+.global lbl_8037A268
+lbl_8037A268:
+	.string "eggHeap.cpp"
+    .string "Please call Heap::initialize()"
+    .string "cannot allocate from heap %x : %x\n"
+    .string "heap (%p):(%.1fMBytes) size(%d:%.1fMBytes)\n"
+    .string "cannot allocate %d from heap %x\n"
+    .string "mHeapHandle != NULL"
+    .string "this != NULL"
+
+.section .text, "ax"
 .global initialize__Q23EGG4HeapFv
 initialize__Q23EGG4HeapFv:
 /* 800A2C2C 0009DB2C  94 21 FF F0 */	stwu r1, -0x10(r1)
