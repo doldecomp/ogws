@@ -1,7 +1,36 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .bss, "wa"
+.balign 0x8
+.global lbl_8040AA90
+lbl_8040AA90:
+    .skip 0x30
+.global lbl_8040AAC0
+lbl_8040AAC0:
+	.skip 0x58
 
+.section .sbss, "wa"
+.balign 0x8
+.global lbl_804BEC90
+lbl_804BEC90:
+	.skip 0x8
+.global lbl_804BEC98
+lbl_804BEC98:
+	.skip 0x8
+.global lbl_804BECA0
+lbl_804BECA0:
+	.skip 0x8
+
+.section .sdata2, "a"
+.balign 0x8
+.global lbl_804C09D8
+lbl_804C09D8:
+	.single 0e1
+.global lbl_804C09DC
+lbl_804C09DC:
+	.single 0e0
+
+.section .text, "ax"
 .global normalise__Q23EGG8Vector3fFv
 normalise__Q23EGG8Vector3fFv:
 /* 800A2474 0009D374  94 21 FF F0 */	stwu r1, -0x10(r1)
