@@ -10,7 +10,4 @@ namespace EGG
     struct Vector3f;
 }
 
-typedef int UNKWORD;
-typedef void UNKTYPE;
-
 #endif

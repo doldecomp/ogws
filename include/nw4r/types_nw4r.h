@@ -105,7 +105,4 @@ namespace nw4r
 	}
 }
 
-typedef int UNKWORD;
-typedef void UNKTYPE;
-
 #endif
