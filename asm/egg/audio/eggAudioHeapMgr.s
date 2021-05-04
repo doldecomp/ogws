@@ -32,7 +32,7 @@ createSoundHeap__Q23EGG12SoundHeapMgrFPQ23EGG9AllocatorUl:
 /* 800B0B60 000ABA60  38 63 B0 C0 */	addi r3, r3, lbl_8037B0C0@l
 /* 800B0B64 000ABA64  38 A3 00 14 */	addi r5, r3, 0x14
 /* 800B0B68 000ABA68  4C C6 31 82 */	crclr 6
-/* 800B0B6C 000ABA6C  4B FF 13 9D */	bl func_800A1F08
+/* 800B0B6C 000ABA6C  4B FF 13 9D */	bl system_halt
 lbl_800B0B70:
 /* 800B0B70 000ABA70  80 01 00 14 */	lwz r0, 0x14(r1)
 /* 800B0B74 000ABA74  83 E1 00 0C */	lwz r31, 0xc(r1)

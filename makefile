@@ -46,6 +46,8 @@ LDFLAGS := -map $(MAP) -mapunused -proc gekko -fp hard -nodefaults -nofail
 CFLAGS_TRK := -Cpp_exceptions off -proc gekko -fp hard -O4,s -i include/RevoSDK/TRK -I- -i include -i include/STL -nodefaults
 # Compiler flags for NintendoWare for Revolution
 CFLAGS_NW4R := -lang c99 -enum int -inline auto -Cpp_exceptions off -RTTI off -proc gekko -fp hard -O4,p  -ir include/nw4r -I- -Iinclude -Iinclude/STL -ir include/RevoSDK -nodefaults
+# Compiler flags for EGG
+CFLAGS_EGG := -lang c99 -inline auto -Cpp_exceptions off -RTTI off -proc gekko -fp hard -O4,p  -ir include/egg -I- -Iinclude -Iinclude/STL -ir include/RevoSDK -nodefaults -rostr -str pool
 # Compiler flags for ARC
 CFLAGS_ARC := -lang c99 -enum int -O4,p -inline auto -ipa file -volatileasm -Cpp_exceptions off -RTTI off -proc gekko -fp hard -I- -Iinclude -Iinclude/STL -ir include/RevoSDK -nodefaults
 
@@ -58,10 +60,10 @@ ASM_DIRS := asm \
 	asm/nw4r/ut asm/nw4r/ef asm/nw4r/math asm/nw4r/snd asm/nw4r/g3d asm/nw4r/lyt \
 	asm/egg/math asm/egg/core asm/egg/audio asm/egg/util
 
-SRC_DIRS := nw4r RevoSDK \
+SRC_DIRS := nw4r egg RevoSDK \
 	nw4r/ut nw4r/ef nw4r/snd nw4r/g3d nw4r/lyt \
-	RevoSDK/TRK RevoSDK/TRK_old \
-	RevoSDK/ARC
+	egg/math \
+	RevoSDK/TRK RevoSDK/TRK_old RevoSDK/ARC
 
 # Flags for Riidefi's post-processing script
 PPROCFLAGS := -fsymbol-fixup
@@ -115,6 +117,10 @@ $(BUILD_DIR)/RevoSDK/TRK_old/%.o: src/RevoSDK/TRK_old/%.c
 
 $(BUILD_DIR)/nw4r/%.o: src/nw4r/%.cpp
 	$(CC) $(CFLAGS_NW4R) -c -o $@ $<
+	$(PPROC) $(PPROCFLAGS) $@
+
+$(BUILD_DIR)/egg/%.o: src/egg/%.cpp
+	$(CC) $(CFLAGS_EGG) -c -o $@ $<
 	$(PPROC) $(PPROCFLAGS) $@
 
 $(BUILD_DIR)/RevoSDK/ARC/%.o: src/RevoSDK/ARC/%.c

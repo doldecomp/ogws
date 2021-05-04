@@ -161,7 +161,7 @@ def getSymbolByAddr(addr) -> str:
 if __name__ == "__main__":
 
     # Build symbol dictionary
-    with open("../build/ogws_us_r1.map", "r") as f:
+    with open("build/ogws_us_r1.map", "r") as f:
         map = f.readlines() 
 
     for i in map:
@@ -188,7 +188,7 @@ if __name__ == "__main__":
         exit()
 
     # Read baserom data
-    with open("../include/baserom.dol", "rb") as f:
+    with open("include/baserom.dol", "rb") as f:
         baserom = bytearray(f.read())
 
     # Split section data

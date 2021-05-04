@@ -194,8 +194,16 @@ NW4R_O_FILES := \
 	build/asm/nw4r/lyt/lyt_common.o \
 
 EGG_O_FILES := \
-	build/asm/egg/egg.o \
-	build/asm/egg/math/eggMath.o \
+	build/asm/egg/text_egg.o \
+	build/asm/egg/rodata_egg.o \
+	build/asm/egg/data_egg.o \
+	build/asm/egg/bss_egg.o \
+	build/asm/egg/sdata_egg.o \
+	build/asm/egg/sbss_egg.o \
+	build/asm/egg/sdata2_egg.o \
+	build/asm/egg/sbss2_egg.o \
+	\
+	build/egg/math/eggMath.o \
 	build/asm/egg/math/eggMatrix.o \
 	build/asm/egg/math/eggQuat.o \
 	build/asm/egg/math/eggVector.o \
@@ -223,7 +231,7 @@ EGG_O_FILES := \
 	build/asm/egg/core/eggArchive.o \
 	build/asm/egg/core/eggDecomp.o \
 	build/asm/egg/core/eggAsyncDisplay.o \
-	build/asm/egg/egg_800ADEE8.o \
+	build/asm/egg/audio/egg_800ADEE8.o \
 	build/asm/egg/audio/eggAudioArcPlayerMgr.o \
 	build/asm/egg/audio/eggAudioExpMgr.o \
 	build/asm/egg/audio/eggAudioFxMgr.o \
@@ -232,7 +240,7 @@ EGG_O_FILES := \
 	build/asm/egg/audio/eggAudioSystem.o \
 	build/asm/egg/util/eggMsgRes.o \
 	build/asm/egg/util/eggEffect.o \
-	build/asm/egg/egg_800B1744.o \
+	build/asm/egg/util/egg_800B1744.o \
 
 GROUP_1_O_FILES := \
 	build/asm/data.o \
