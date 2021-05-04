@@ -1,7 +1,12 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .sdata2, "a"
+.balign 0x8
+.global lbl_804C09D0
+lbl_804C09D0:
+	.single 0e0.5
 
+.section .text, "ax"
 .global setAxisRotation__Q23EGG5QuatfFRCQ23EGG8Vector3ff
 setAxisRotation__Q23EGG5QuatfFRCQ23EGG8Vector3ff:
 /* 800A23DC 0009D2DC  94 21 FF D0 */	stwu r1, -0x30(r1)
