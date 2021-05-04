@@ -1,5 +1,8 @@
 .include "macros.inc"
 
+.section .ctors, "a"
+.4byte __sinit_$$3eggVector_cpp
+
 .section .bss, "wa"
 .balign 0x8
 .global lbl_8040AA90

@@ -1,7 +1,9 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .ctors, "a"
+.4byte __sinit_$$3eggController_cpp
 
+.section .text, "ax"
 .global getFSStickButton__Q23EGG10CoreStatusFv
 getFSStickButton__Q23EGG10CoreStatusFv:
 /* 800A5AA0 000A09A0  94 21 FF F0 */	stwu r1, -0x10(r1)

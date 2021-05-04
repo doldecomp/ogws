@@ -1,5 +1,8 @@
 .include "macros.inc"
 
+.section .ctors, "a"
+.4byte __sinit_$$3eggMatrix_cpp
+
 .section .sdata2, "a"
 .balign 0x8
 .global lbl_804C09C0

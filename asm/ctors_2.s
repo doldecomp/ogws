@@ -2,10 +2,6 @@
 
 .section .ctors, "a"  # 0x80355080 - 0x80355260
 
-.4byte __sinit_$$3eggMatrix_cpp
-.4byte __sinit_$$3eggVector_cpp
-.4byte __sinit_$$3eggController_cpp
-.4byte __sinit_$$3eggEffect_cpp
 .4byte 0x80183e80
 .4byte 0x801855a8
 .4byte 0x80186e40

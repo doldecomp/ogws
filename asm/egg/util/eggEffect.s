@@ -1,7 +1,9 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .ctors, "a"
+.4byte __sinit_$$3eggEffect_cpp
 
+.section .text, "ax"
 .global ModifierTravFunc_SetSimpleLightType__Q34nw4r2ef15ParticleManagerFPvUl
 ModifierTravFunc_SetSimpleLightType__Q34nw4r2ef15ParticleManagerFPvUl:
 /* 800B16E0 000AC5E0  98 83 00 6C */	stb r4, 0x6c(r3)
