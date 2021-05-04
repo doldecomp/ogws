@@ -1,7 +1,23 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .data, "wa"
+.balign 0x8
+.global __vt__Q23EGG7ExpHeap
+__vt__Q23EGG7ExpHeap:
+    .long 0
+    .long 0
+    .long __dt__Q23EGG7ExpHeapFv
+    .long getHeapKind__Q23EGG7ExpHeapCFv
+    .long initAllocator__Q23EGG7ExpHeapFPQ23EGG9Allocatorl
+    .long alloc__Q23EGG7ExpHeapFUll
+    .long free__Q23EGG7ExpHeapFPv
+    .long destroy__Q23EGG7ExpHeapFv
+    .long resizeForMBlock__Q23EGG7ExpHeapFPvUl
+    .long getAllocatableSize__Q23EGG7ExpHeapFl
+    .long adjust__Q23EGG7ExpHeapFv
+    .long 0
 
+.section .text, "ax"
 .global __dt__Q23EGG7ExpHeapFv
 __dt__Q23EGG7ExpHeapFv:
 /* 800A2620 0009D520  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -13,8 +29,8 @@ __dt__Q23EGG7ExpHeapFv:
 /* 800A2638 0009D538  93 C1 00 08 */	stw r30, 8(r1)
 /* 800A263C 0009D53C  7C 7E 1B 78 */	mr r30, r3
 /* 800A2640 0009D540  41 82 00 38 */	beq lbl_800A2678
-/* 800A2644 0009D544  3C 80 80 3A */	lis r4, lbl_803980B8@ha
-/* 800A2648 0009D548  38 84 80 B8 */	addi r4, r4, lbl_803980B8@l
+/* 800A2644 0009D544  3C 80 80 3A */	lis r4, __vt__Q23EGG7ExpHeap@ha
+/* 800A2648 0009D548  38 84 80 B8 */	addi r4, r4, __vt__Q23EGG7ExpHeap@l
 /* 800A264C 0009D54C  90 83 00 00 */	stw r4, 0(r3)
 /* 800A2650 0009D550  48 00 0B 29 */	bl dispose__Q23EGG4HeapFv
 /* 800A2654 0009D554  80 7E 00 10 */	lwz r3, 0x10(r30)
@@ -70,8 +86,8 @@ lbl_800A26D8:
 /* 800A2704 0009D604  7F 63 DB 78 */	mr r3, r27
 /* 800A2708 0009D608  7F 84 E3 78 */	mr r4, r28
 /* 800A270C 0009D60C  48 00 05 61 */	bl __ct__Q23EGG4HeapFP12MEMiHeapHead
-/* 800A2710 0009D610  3C 60 80 3A */	lis r3, lbl_803980B8@ha
-/* 800A2714 0009D614  38 63 80 B8 */	addi r3, r3, lbl_803980B8@l
+/* 800A2710 0009D610  3C 60 80 3A */	lis r3, __vt__Q23EGG7ExpHeap@ha
+/* 800A2714 0009D614  38 63 80 B8 */	addi r3, r3, __vt__Q23EGG7ExpHeap@l
 /* 800A2718 0009D618  90 7B 00 00 */	stw r3, 0(r27)
 lbl_800A271C:
 /* 800A271C 0009D61C  93 BB 00 14 */	stw r29, 0x14(r27)

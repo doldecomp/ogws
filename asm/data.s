@@ -2,9 +2,6 @@
 
 .section .data, "wa"
 
-.global lbl_803980B8
-lbl_803980B8:
-	.incbin "baserom.dol", 0x3941B8, 0x30
 .global lbl_803980E8
 lbl_803980E8:
 	.incbin "baserom.dol", 0x3941E8, 0x30
