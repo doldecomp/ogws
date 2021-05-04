@@ -1,5 +1,8 @@
 .include "macros.inc"
 
+.section .ctors, "a"
+.4byte __sinit_$$3snd_SoundSystem_cpp
+
 .section .data, "wa"
 $$24063:
 .string "<< NW4R    - SND \tfinal   build: Jun  8 2007 11:17:15 (0x4199_60831) >>"

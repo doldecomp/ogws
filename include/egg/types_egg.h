@@ -6,7 +6,7 @@ namespace EGG
 {
     template <typename T> struct Math;
     struct Matrix34f;
-    struct Quat;
+    struct Quatf;
     struct Vector3f;
 }
 

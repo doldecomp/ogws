@@ -2,22 +2,6 @@
 
 .section .ctors, "a"  # 0x80355080 - 0x80355260
 
-.4byte __sinit_$$3snd_SoundSystem_cpp
-.4byte __sinit_$$3snd_StrmSound_cpp
-.4byte __sinit_$$3snd_WaveSound_cpp
-.4byte __sinit_$$3g3d_state_cpp
-.4byte __sinit_$$3lyt_pane_cpp
-.4byte __sinit_$$3lyt_picture_cpp
-.4byte __sinit_$$3lyt_textBox_cpp
-.4byte __sinit_$$3lyt_window_cpp
-.4byte __sinit_$$3lyt_bounding_cpp
-.4byte 0x80085484
-.4byte 0x80085c7c
-.4byte 0x80089dc8
-.4byte 0x8009aed0
-.4byte 0x800a17b4
-.4byte 0x800a1c2c
-.4byte __sinit_$$3eggDrawHelper_cpp
 .4byte __sinit_$$3eggMatrix_cpp
 .4byte __sinit_$$3eggVector_cpp
 .4byte __sinit_$$3eggController_cpp

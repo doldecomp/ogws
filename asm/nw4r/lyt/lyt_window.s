@@ -1,5 +1,8 @@
 .include "macros.inc"
 
+.section .ctors, "a"
+.4byte __sinit_$$3lyt_window_cpp
+
 .section .sdata2, "a"
 .global lbl_804C04B8
 lbl_804C04B8:

@@ -195,6 +195,7 @@ NW4R_O_FILES := \
 
 EGG_O_FILES := \
 	build/asm/egg/text_egg.o \
+	build/asm/egg/ctors_egg.o \
 	build/asm/egg/rodata_egg.o \
 	build/asm/egg/data_egg.o \
 	build/asm/egg/bss_egg.o \

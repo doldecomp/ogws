@@ -1,5 +1,8 @@
 .include "macros.inc"
 
+.section .ctors, "a"
+.4byte __sinit_$$3lyt_bounding_cpp
+
 .section .sbss, "wa"
 .global typeInfo__Q34nw4r3lyt8Bounding
 typeInfo__Q34nw4r3lyt8Bounding:

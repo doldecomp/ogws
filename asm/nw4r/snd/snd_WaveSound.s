@@ -1,5 +1,8 @@
 .include "macros.inc"
 
+.section .ctors, "a"
+.4byte __sinit_$$3snd_WaveSound_cpp
+
 .section .data, "wa"
 .global __vt__Q44nw4r3snd6detail9WaveSound
 __vt__Q44nw4r3snd6detail9WaveSound:

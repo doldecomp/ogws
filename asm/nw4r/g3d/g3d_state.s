@@ -1,5 +1,8 @@
 .include "macros.inc"
 
+.section .ctors, "a"
+.4byte __sinit_$$3g3d_state_cpp
+
 .section .sdata2, "a"
 cm2hw__Q34nw4r3g3d4fifo: # local, see g3d_gpu.s
 	.byte 00
