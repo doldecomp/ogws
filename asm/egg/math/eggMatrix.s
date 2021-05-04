@@ -1,5 +1,23 @@
 .include "macros.inc"
 
+.section .bss, "wa"
+.balign 0x8
+# Static 3x4 identity matrix
+.global lbl_8040AA60
+lbl_8040AA60:
+	.skip 0x4
+	.skip 0x4
+	.skip 0x4
+	.skip 0x4
+	.skip 0x4
+	.skip 0x4
+	.skip 0x4
+	.skip 0x4
+	.skip 0x4
+	.skip 0x4
+	.skip 0x4
+	.skip 0x4
+
 .section .text, "ax"
 
 .global __dt__Q23EGG9Matrix34fFv

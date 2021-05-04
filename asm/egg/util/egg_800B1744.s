@@ -16,6 +16,7 @@ func_800B1744:
 /* 800B1748 000AC648  4E 80 00 20 */	blr 
 
 # FUN_800b174c(&PTR_DAT_803820b8);
+# Given double pointer to floating_point_unavailable_exception_handler
 .global func_800B174C
 func_800B174C:
 /* 800B174C 000AC64C  4E 80 00 20 */	blr 
