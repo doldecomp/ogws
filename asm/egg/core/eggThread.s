@@ -1,15 +1,41 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .bss, "wa"
+.balign 0x8
+.global sThreadList__Q23EGG6Thread
+sThreadList__Q23EGG6Thread:
+	.skip 0xC
+    # .fills to 0x10
 
+.section .data, "wa"
+.balign 0x8
+.global __vt__Q23EGG6Thread
+__vt__Q23EGG6Thread:
+    .long 0
+    .long 0
+    .long __dt__Q23EGG6ThreadFv
+    .long run__Q23EGG6ThreadFv
+    .long onEnter__Q23EGG6ThreadFv
+    .long onExit__Q23EGG6ThreadFv
+
+.section .rodata, "a"
+.balign 0x8
+.global lbl_8037A328
+lbl_8037A328:
+	.string "eggThread.cpp"
+    .string "mStackMemory"
+    .string "mOSThread"
+    .string "mMesgBuffer"
+
+.section .text, "ax"
 .global __ct__Q23EGG6ThreadFUliiPQ23EGG4Heap
 __ct__Q23EGG6ThreadFUliiPQ23EGG4Heap:
 /* 800A34B4 0009E3B4  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 800A34B8 0009E3B8  7C 08 02 A6 */	mflr r0
-/* 800A34BC 0009E3BC  3D 00 80 3A */	lis r8, lbl_80398160@ha
+/* 800A34BC 0009E3BC  3D 00 80 3A */	lis r8, __vt__Q23EGG6Thread@ha
 /* 800A34C0 0009E3C0  2C 07 00 00 */	cmpwi r7, 0
 /* 800A34C4 0009E3C4  90 01 00 24 */	stw r0, 0x24(r1)
-/* 800A34C8 0009E3C8  39 08 81 60 */	addi r8, r8, lbl_80398160@l
+/* 800A34C8 0009E3C8  39 08 81 60 */	addi r8, r8, __vt__Q23EGG6Thread@l
 /* 800A34CC 0009E3CC  93 E1 00 1C */	stw r31, 0x1c(r1)
 /* 800A34D0 0009E3D0  7C DF 33 78 */	mr r31, r6
 /* 800A34D4 0009E3D4  93 C1 00 18 */	stw r30, 0x18(r1)
@@ -80,9 +106,9 @@ lbl_800A35C4:
 /* 800A35C8 0009E4C8  38 7D 00 0C */	addi r3, r29, 0xc
 /* 800A35CC 0009E4CC  80 BD 00 30 */	lwz r5, 0x30(r29)
 /* 800A35D0 0009E4D0  48 04 EA 8D */	bl func_800F205C
-/* 800A35D4 0009E4D4  3C 60 80 41 */	lis r3, lbl_8040AB40@ha
+/* 800A35D4 0009E4D4  3C 60 80 41 */	lis r3, sThreadList__Q23EGG6Thread@ha
 /* 800A35D8 0009E4D8  7F A4 EB 78 */	mr r4, r29
-/* 800A35DC 0009E4DC  38 63 AB 40 */	addi r3, r3, lbl_8040AB40@l
+/* 800A35DC 0009E4DC  38 63 AB 40 */	addi r3, r3, sThreadList__Q23EGG6Thread@l
 /* 800A35E0 0009E4E0  4B F6 41 19 */	bl List_Append__Q24nw4r2utFPQ34nw4r2ut4ListPv
 /* 800A35E4 0009E4E4  83 E1 00 1C */	lwz r31, 0x1c(r1)
 /* 800A35E8 0009E4E8  7F A3 EB 78 */	mr r3, r29
@@ -97,11 +123,11 @@ lbl_800A35C4:
 __ct__Q23EGG6ThreadFP8OSThreadi:
 /* 800A3604 0009E504  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 800A3608 0009E508  7C 08 02 A6 */	mflr r0
-/* 800A360C 0009E50C  3C C0 80 3A */	lis r6, lbl_80398160@ha
+/* 800A360C 0009E50C  3C C0 80 3A */	lis r6, __vt__Q23EGG6Thread@ha
 /* 800A3610 0009E510  7C A7 2B 78 */	mr r7, r5
 /* 800A3614 0009E514  90 01 00 14 */	stw r0, 0x14(r1)
 /* 800A3618 0009E518  38 00 00 00 */	li r0, 0
-/* 800A361C 0009E51C  38 C6 81 60 */	addi r6, r6, lbl_80398160@l
+/* 800A361C 0009E51C  38 C6 81 60 */	addi r6, r6, __vt__Q23EGG6Thread@l
 /* 800A3620 0009E520  93 E1 00 0C */	stw r31, 0xc(r1)
 /* 800A3624 0009E524  7C 7F 1B 78 */	mr r31, r3
 /* 800A3628 0009E528  90 03 00 04 */	stw r0, 4(r3)
@@ -132,9 +158,9 @@ lbl_800A3684:
 /* 800A3688 0009E588  38 7F 00 0C */	addi r3, r31, 0xc
 /* 800A368C 0009E58C  80 BF 00 30 */	lwz r5, 0x30(r31)
 /* 800A3690 0009E590  48 04 E9 CD */	bl func_800F205C
-/* 800A3694 0009E594  3C 60 80 41 */	lis r3, lbl_8040AB40@ha
+/* 800A3694 0009E594  3C 60 80 41 */	lis r3, sThreadList__Q23EGG6Thread@ha
 /* 800A3698 0009E598  7F E4 FB 78 */	mr r4, r31
-/* 800A369C 0009E59C  38 63 AB 40 */	addi r3, r3, lbl_8040AB40@l
+/* 800A369C 0009E59C  38 63 AB 40 */	addi r3, r3, sThreadList__Q23EGG6Thread@l
 /* 800A36A0 0009E5A0  4B F6 40 59 */	bl List_Append__Q24nw4r2utFPQ34nw4r2ut4ListPv
 /* 800A36A4 0009E5A4  7F E3 FB 78 */	mr r3, r31
 /* 800A36A8 0009E5A8  83 E1 00 0C */	lwz r31, 0xc(r1)
@@ -154,12 +180,12 @@ __dt__Q23EGG6ThreadFv:
 /* 800A36D4 0009E5D4  93 C1 00 08 */	stw r30, 8(r1)
 /* 800A36D8 0009E5D8  7C 7E 1B 78 */	mr r30, r3
 /* 800A36DC 0009E5DC  41 82 00 80 */	beq lbl_800A375C
-/* 800A36E0 0009E5E0  3C C0 80 3A */	lis r6, lbl_80398160@ha
-/* 800A36E4 0009E5E4  3C A0 80 41 */	lis r5, lbl_8040AB40@ha
-/* 800A36E8 0009E5E8  38 C6 81 60 */	addi r6, r6, lbl_80398160@l
+/* 800A36E0 0009E5E0  3C C0 80 3A */	lis r6, __vt__Q23EGG6Thread@ha
+/* 800A36E4 0009E5E4  3C A0 80 41 */	lis r5, sThreadList__Q23EGG6Thread@ha
+/* 800A36E8 0009E5E8  38 C6 81 60 */	addi r6, r6, __vt__Q23EGG6Thread@l
 /* 800A36EC 0009E5EC  7F C4 F3 78 */	mr r4, r30
 /* 800A36F0 0009E5F0  90 C3 00 00 */	stw r6, 0(r3)
-/* 800A36F4 0009E5F4  38 65 AB 40 */	addi r3, r5, lbl_8040AB40@l
+/* 800A36F4 0009E5F4  38 65 AB 40 */	addi r3, r5, sThreadList__Q23EGG6Thread@l
 /* 800A36F8 0009E5F8  4B F6 41 91 */	bl List_Remove__Q24nw4r2utFPQ34nw4r2ut4ListPv
 /* 800A36FC 0009E5FC  80 1E 00 04 */	lwz r0, 4(r30)
 /* 800A3700 0009E600  2C 00 00 00 */	cmpwi r0, 0
@@ -200,10 +226,10 @@ lbl_800A375C:
 initialize__Q23EGG6ThreadFv:
 /* 800A3778 0009E678  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 800A377C 0009E67C  7C 08 02 A6 */	mflr r0
-/* 800A3780 0009E680  3C 60 80 41 */	lis r3, lbl_8040AB40@ha
+/* 800A3780 0009E680  3C 60 80 41 */	lis r3, sThreadList__Q23EGG6Thread@ha
 /* 800A3784 0009E684  38 80 00 3C */	li r4, 0x3c
 /* 800A3788 0009E688  90 01 00 14 */	stw r0, 0x14(r1)
-/* 800A378C 0009E68C  38 63 AB 40 */	addi r3, r3, lbl_8040AB40@l
+/* 800A378C 0009E68C  38 63 AB 40 */	addi r3, r3, sThreadList__Q23EGG6Thread@l
 /* 800A3790 0009E690  4B F6 3F 51 */	bl List_Init__Q24nw4r2utFPQ34nw4r2ut4ListUs
 /* 800A3794 0009E694  3C 60 80 0A */	lis r3, switchThreadCallback__Q23EGG6ThreadFP8OSThreadP8OSThread@ha
 /* 800A3798 0009E698  38 63 37 B0 */	addi r3, r3, switchThreadCallback__Q23EGG6ThreadFP8OSThreadP8OSThread@l
