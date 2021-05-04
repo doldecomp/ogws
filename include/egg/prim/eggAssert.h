@@ -1,19 +1,16 @@
 #ifndef EGG_PRIM_ASSERT_H
 #define EGG_PRIM_ASSERT_H
-#include "types_egg.h"
+
+#define EGG_ASSERT(EXP) (void)((EXP) || (system_halt(__FILE__, __LINE__, #EXP),0))
+#define EGG_ASSERT_MSG(MSG, EXP) (void)((EXP) || (system_halt(__FILE__, __LINE__, MSG),0))
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-UNKTYPE system_halt(const char *str, ...);
-UNKTYPE system_print(const char *str, ...);
+void system_halt(char const * file, int line, char const * msg, ...);
 
 #ifdef __cplusplus
 }
 #endif
-
-#define EGG_ASSERT(expr, ...) \
-    if (!(expr)) {system_halt(__VA_ARGS__);}
-
 #endif

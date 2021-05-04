@@ -7,7 +7,8 @@ namespace EGG
     template <typename T>
     T Math<T>::sqrt(T t)
     {
-        EGG_ASSERT(t >= 0.0f, "eggMath.cpp", 14, "t >= 0")
+        #line 14
+        EGG_ASSERT(t >= 0);
         return ::sqrt(t);
     }
 
@@ -37,7 +38,7 @@ const char * UNUSED_ArcCosSinWarning()
     return "-1 <= t && t <= 1";
 }
 
-const char * UNUSED_GcdResult()
+const char * UNUSED_GcdLog()
 {
     return "gcd(%d,%d)\n";
 }

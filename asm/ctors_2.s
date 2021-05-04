@@ -17,7 +17,7 @@
 .4byte 0x8009aed0
 .4byte 0x800a17b4
 .4byte 0x800a1c2c
-.4byte 0x800a1d90
+.4byte __sinit_$$3eggDrawHelper_cpp
 .4byte __sinit_$$3eggMatrix_cpp
 .4byte __sinit_$$3eggVector_cpp
 .4byte __sinit_$$3eggController_cpp

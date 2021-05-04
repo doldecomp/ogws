@@ -2,9 +2,8 @@
 
 .section .text, "ax"
 
-# Matrix34f destructor???
-.global func_800A21E8
-func_800A21E8:
+.global __dt__Q23EGG9Matrix34fFv
+__dt__Q23EGG9Matrix34fFv:
 /* 800A21E8 0009D0E8  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 800A21EC 0009D0EC  7C 08 02 A6 */	mflr r0
 /* 800A21F0 0009D0F0  2C 03 00 00 */	cmpwi r3, 0
@@ -128,7 +127,7 @@ setAxisRotation__Q23EGG9Matrix34fFRCQ23EGG8Vector3ff:
 
 .global loadPosMtx__Q23EGG9Matrix34fFUl
 loadPosMtx__Q23EGG9Matrix34fFUl:
-/* 800A2394 0009D294  48 04 0E E8 */	b func_800E327C
+/* 800A2394 0009D294  48 04 0E E8 */	b GXLoadPosMtxImm
 
 # __sinit_\eggMatrix_cpp
 .global __sinit_$$3eggMatrix_cpp

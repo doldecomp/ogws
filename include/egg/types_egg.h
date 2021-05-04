@@ -4,7 +4,10 @@
 
 namespace EGG
 {
-
+    template <typename T> struct Math;
+    struct Matrix34f;
+    struct Quat;
+    struct Vector3f;
 }
 
 typedef int UNKWORD;
