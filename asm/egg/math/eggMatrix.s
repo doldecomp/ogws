@@ -1,5 +1,17 @@
 .include "macros.inc"
 
+.section .sdata2, "a"
+.balign 0x8
+.global lbl_804C09C0
+lbl_804C09C0:
+	.single 0e1
+.global lbl_804C09C4
+lbl_804C09C4:
+	.single 0e2
+.global lbl_804C09C8
+lbl_804C09C8:
+	.single 0e0
+
 .section .bss, "wa"
 .balign 0x8
 # Static 3x4 identity matrix
