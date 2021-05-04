@@ -1,7 +1,46 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .data, "wa"
+.balign 0x8
+.global __vt__Q23EGG17ConfigurationData
+__vt__Q23EGG17ConfigurationData:
+    .long 0
+    .long 0
+    .long 0
+    .long 0
+    .long 0
+    .long 0
+    .long 0
+    .long 0
+    .long 0
+    .long onBeginFrame__Q23EGG17ConfigurationDataFv
+    .long onEndFrame__Q23EGG17ConfigurationDataFv
+    .long initMemory__Q23EGG17ConfigurationDataFv
+    .long run__Q23EGG17ConfigurationDataFv
+    .long 0
 
+.section .sdata2, "wa"
+.balign 0x8
+.global lbl_804C09F8
+lbl_804C09F8:
+	.single 0e1048576
+    .long 0x00000000
+.global lbl_804C0A00
+lbl_804C0A00:
+	.long 0x43300000
+    .long 0x00000000
+
+.section .rodata, "a"
+.balign 0x8
+.global lbl_8037A360
+lbl_8037A360:
+	.string "eggSystem.cpp"
+    .string "MEM1      : %p-> : (%.1fMBytes)\n"
+    .string "MEM2(Rel) : %p-> : (%.1fMBytes)\n"
+    .string "MEM2(Dbg) : %p-> : (%.1fMBytes)\n"
+    .string "mem == 0 || mem == 1"
+
+.section .text, "ax"
 .global initMemory__Q23EGG17ConfigurationDataFv
 initMemory__Q23EGG17ConfigurationDataFv:
 /* 800A38D4 0009E7D4  94 21 FF B0 */	stwu r1, -0x50(r1)
