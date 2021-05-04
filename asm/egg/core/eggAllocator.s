@@ -1,14 +1,23 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .data, "wa"
+.global __vt__Q23EGG9Allocator
+__vt__Q23EGG9Allocator:
+    .long 0
+    .long 0
+    .long __dt__Q23EGG9AllocatorFv
+    .long alloc__Q23EGG9AllocatorFUl
+    .long free__Q23EGG9AllocatorFPv
+    .long 0
 
+.section .text, "ax"
 .global __ct__Q23EGG9AllocatorFPQ23EGG4Heapl
 __ct__Q23EGG9AllocatorFPQ23EGG4Heapl:
 /* 800A341C 0009E31C  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 800A3420 0009E320  7C 08 02 A6 */	mflr r0
-/* 800A3424 0009E324  3C C0 80 3A */	lis r6, lbl_80398148@ha
+/* 800A3424 0009E324  3C C0 80 3A */	lis r6, __vt__Q23EGG9Allocator@ha
 /* 800A3428 0009E328  90 01 00 14 */	stw r0, 0x14(r1)
-/* 800A342C 0009E32C  38 C6 81 48 */	addi r6, r6, lbl_80398148@l
+/* 800A342C 0009E32C  38 C6 81 48 */	addi r6, r6, __vt__Q23EGG9Allocator@l
 /* 800A3430 0009E330  93 E1 00 0C */	stw r31, 0xc(r1)
 /* 800A3434 0009E334  7C 7F 1B 78 */	mr r31, r3
 /* 800A3438 0009E338  7C 83 23 78 */	mr r3, r4

@@ -1,10 +1,9 @@
 .include "macros.inc"
 
 .section .data, "wa"
+
 .balign 0x8
-.global lbl_80398148
-lbl_80398148:
-	.incbin "baserom.dol", 0x394248, 0x18
+
 .global lbl_80398160
 lbl_80398160:
 	.incbin "baserom.dol", 0x394260, 0x18
