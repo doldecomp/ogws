@@ -1,7 +1,34 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .sbss, "wa"
+.balign 0x8
+.global sGraphicsFifo__Q23EGG12GraphicsFifo
+sGraphicsFifo__Q23EGG12GraphicsFifo:
+	.skip 0x4
+.global sGpStatus__Q23EGG12GraphicsFifo
+sGpStatus__Q23EGG12GraphicsFifo:
+	.skip 0x5
+    # .fills to 0xC
 
+.section .data, "wa"
+.balign 0x8
+.global __vt__Q23EGG12GraphicsFifo
+__vt__Q23EGG12GraphicsFifo:
+    .long 0
+    .long 0
+    .long __dt__Q23EGG12GraphicsFifoFv
+    .long 0
+
+.section .rodata, "a"
+.balign 0x8
+.global lbl_8037A418
+lbl_8037A418:
+	.string "eggGraphicsFifo.cpp"
+    .string "!sGraphicsFifo"
+    .string "OSIsMEM1Region( heap )"
+    .string "mBufBase"
+
+.section .text, "ax"
 .global create__Q23EGG12GraphicsFifoFUlPQ23EGG4Heap
 create__Q23EGG12GraphicsFifoFUlPQ23EGG4Heap:
 /* 800A4394 0009F294  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -12,7 +39,7 @@ create__Q23EGG12GraphicsFifoFUlPQ23EGG4Heap:
 /* 800A43A8 0009F2A8  7C 9E 23 78 */	mr r30, r4
 /* 800A43AC 0009F2AC  93 A1 00 14 */	stw r29, 0x14(r1)
 /* 800A43B0 0009F2B0  7C 7D 1B 78 */	mr r29, r3
-/* 800A43B4 0009F2B4  80 0D 99 48 */	lwz r0, lbl_804BECC8-_SDA_BASE_(r13)
+/* 800A43B4 0009F2B4  80 0D 99 48 */	lwz r0, sGraphicsFifo__Q23EGG12GraphicsFifo-_SDA_BASE_(r13)
 /* 800A43B8 0009F2B8  2C 00 00 00 */	cmpwi r0, 0
 /* 800A43BC 0009F2BC  41 82 00 1C */	beq lbl_800A43D8
 /* 800A43C0 0009F2C0  3C 60 80 38 */	lis r3, lbl_8037A418@ha
@@ -42,9 +69,9 @@ lbl_800A4404:
 /* 800A4414 0009F314  2C 03 00 00 */	cmpwi r3, 0
 /* 800A4418 0009F318  7C 7F 1B 78 */	mr r31, r3
 /* 800A441C 0009F31C  41 82 00 64 */	beq lbl_800A4480
-/* 800A4420 0009F320  3C 80 80 3A */	lis r4, lbl_803981C8@ha
+/* 800A4420 0009F320  3C 80 80 3A */	lis r4, __vt__Q23EGG12GraphicsFifo@ha
 /* 800A4424 0009F324  38 1D 00 1F */	addi r0, r29, 0x1f
-/* 800A4428 0009F328  38 84 81 C8 */	addi r4, r4, lbl_803981C8@l
+/* 800A4428 0009F328  38 84 81 C8 */	addi r4, r4, __vt__Q23EGG12GraphicsFifo@l
 /* 800A442C 0009F32C  7F C5 F3 78 */	mr r5, r30
 /* 800A4430 0009F330  90 83 00 00 */	stw r4, 0(r3)
 /* 800A4434 0009F334  54 06 00 34 */	rlwinm r6, r0, 0, 0, 0x1a
@@ -68,7 +95,7 @@ lbl_800A4470:
 /* 800A4478 0009F378  48 03 6D BD */	bl func_800DB234
 /* 800A447C 0009F37C  90 7F 00 04 */	stw r3, 4(r31)
 lbl_800A4480:
-/* 800A4480 0009F380  93 ED 99 48 */	stw r31, lbl_804BECC8-_SDA_BASE_(r13)
+/* 800A4480 0009F380  93 ED 99 48 */	stw r31, sGraphicsFifo__Q23EGG12GraphicsFifo-_SDA_BASE_(r13)
 /* 800A4484 0009F384  7F E3 FB 78 */	mr r3, r31
 /* 800A4488 0009F388  83 E1 00 1C */	lwz r31, 0x1c(r1)
 /* 800A448C 0009F38C  83 C1 00 18 */	lwz r30, 0x18(r1)
@@ -90,16 +117,16 @@ __dt__Q23EGG12GraphicsFifoFv:
 /* 800A44C0 0009F3C0  93 A1 00 14 */	stw r29, 0x14(r1)
 /* 800A44C4 0009F3C4  7C 7D 1B 78 */	mr r29, r3
 /* 800A44C8 0009F3C8  41 82 00 54 */	beq lbl_800A451C
-/* 800A44CC 0009F3CC  3C 80 80 3A */	lis r4, lbl_803981C8@ha
-/* 800A44D0 0009F3D0  3B ED 99 4C */	addi r31, r13, lbl_804BECCC-_SDA_BASE_
-/* 800A44D4 0009F3D4  38 84 81 C8 */	addi r4, r4, lbl_803981C8@l
+/* 800A44CC 0009F3CC  3C 80 80 3A */	lis r4, __vt__Q23EGG12GraphicsFifo@ha
+/* 800A44D0 0009F3D0  3B ED 99 4C */	addi r31, r13, sGpStatus__Q23EGG12GraphicsFifo-_SDA_BASE_
+/* 800A44D4 0009F3D4  38 84 81 C8 */	addi r4, r4, __vt__Q23EGG12GraphicsFifo@l
 /* 800A44D8 0009F3D8  90 83 00 00 */	stw r4, 0(r3)
 lbl_800A44DC:
 /* 800A44DC 0009F3DC  38 9F 00 01 */	addi r4, r31, 1
 /* 800A44E0 0009F3E0  38 BF 00 02 */	addi r5, r31, 2
 /* 800A44E4 0009F3E4  38 DF 00 03 */	addi r6, r31, 3
 /* 800A44E8 0009F3E8  38 FF 00 04 */	addi r7, r31, 4
-/* 800A44EC 0009F3EC  38 6D 99 4C */	addi r3, r13, lbl_804BECCC-_SDA_BASE_
+/* 800A44EC 0009F3EC  38 6D 99 4C */	addi r3, r13, sGpStatus__Q23EGG12GraphicsFifo-_SDA_BASE_
 /* 800A44F0 0009F3F0  48 03 83 B5 */	bl func_800DC8A4
 /* 800A44F4 0009F3F4  88 1F 00 02 */	lbz r0, 2(r31)
 /* 800A44F8 0009F3F8  2C 00 00 00 */	cmpwi r0, 0
