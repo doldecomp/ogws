@@ -1,5 +1,150 @@
 .include "macros.inc"
 
+.section .sdata2, "a"
+.balign 0x8
+.global lbl_804C0A20
+lbl_804C0A20:
+	.single 0e-0.25
+.global lbl_804C0A24
+lbl_804C0A24:
+	.single 0e0.25
+.global lbl_804C0A28
+lbl_804C0A28:
+	.single 0e-0.5
+.global lbl_804C0A2C
+lbl_804C0A2C:
+	.single 0e0.5
+.global lbl_804C0A30
+lbl_804C0A30:
+	.single 0e0
+.global lbl_804C0A34
+lbl_804C0A34:
+	.single 0e0.13
+.global lbl_804C0A38
+lbl_804C0A38:
+	.single 0e1
+.global lbl_804C0A3C
+lbl_804C0A3C:
+	.single 0e-1
+
+.section .sbss, "wa"
+.balign 0x8
+.global sStaticDisposer__Q33EGG17CoreControllerMgr11T__Disposer
+sStaticDisposer__Q33EGG17CoreControllerMgr11T__Disposer:
+	.skip 0x4
+.global sCoreControllerFactory__Q23EGG17CoreControllerMgr
+sCoreControllerFactory__Q23EGG17CoreControllerMgr:
+	.skip 0x4
+.global sConnectCallback__Q23EGG17CoreControllerMgr
+sConnectCallback__Q23EGG17CoreControllerMgr:
+	.skip 0x4
+# sAllocator__Q23EGG27@unnamed@eggController_cpp@
+.global sAllocator__Q23EGG27$$2unnamed$$2eggController_cpp$$2
+sAllocator__Q23EGG27$$2unnamed$$2eggController_cpp$$2:
+	.skip 0x4
+
+.section .data, "wa"
+.balign 0x8
+.global __vt__Q23EGG19ControllerRumbleMgr
+__vt__Q23EGG19ControllerRumbleMgr:
+    .long 0
+    .long 0
+    .long __dt__Q23EGG19ControllerRumbleMgrFv
+.global __vt__Q23EGG20ControllerRumbleUnit
+__vt__Q23EGG20ControllerRumbleUnit:
+    .long 0
+    .long 0
+    .long __dt__Q23EGG20ControllerRumbleUnitFv
+.global lbl_80398240
+lbl_80398240:
+    .long 0
+    .long 0
+    .long setPosParam__Q23EGG14CoreControllerFff
+    .long setHoriParam__Q23EGG14CoreControllerFff
+    .long setDistParam__Q23EGG14CoreControllerFff
+    .long setAccParam__Q23EGG14CoreControllerFff
+    .long beginFrame__Q23EGG14CoreControllerFP9PADStatus
+    .long endFrame__Q23EGG14CoreControllerFv
+.global __vt__Q23EGG17CoreControllerMgr
+__vt__Q23EGG17CoreControllerMgr:
+    .long 0
+    .long 0
+    .long beginFrame__Q23EGG17CoreControllerMgrFv
+    .long endFrame__Q23EGG17CoreControllerMgrFv
+.global __vt__Q23EGG29TBuffer$$0Q23EGG12eCoreDevType$$1
+__vt__Q23EGG29TBuffer$$0Q23EGG12eCoreDevType$$1:
+    .long 0
+    .long 0
+    .long __dt__Q23EGG29TBuffer$$0Q23EGG12eCoreDevType$$1Fv
+    .long allocate__Q23EGG29TBuffer$$0Q23EGG12eCoreDevType$$1Fii
+    .long allocate__Q23EGG29TBuffer$$0Q23EGG12eCoreDevType$$1FiPQ23EGG4Heapi
+    .long onAllocate__Q23EGG29TBuffer$$0Q23EGG12eCoreDevType$$1FPQ23EGG4Heap
+    .long errRangeOver__Q23EGG29TBuffer$$0Q23EGG12eCoreDevType$$1CFv
+.global __vt__Q23EGG32TBuffer$$0PQ23EGG14CoreController$$1
+__vt__Q23EGG32TBuffer$$0PQ23EGG14CoreController$$1:
+    .long 0
+    .long 0
+    .long __dt__Q23EGG32TBuffer$$0PQ23EGG14CoreController$$1Fv
+    .long allocate__Q23EGG32TBuffer$$0PQ23EGG14CoreController$$1Fii
+    .long allocate__Q23EGG32TBuffer$$0PQ23EGG14CoreController$$1FiPQ23EGG4Heapi
+    .long onAllocate__Q23EGG32TBuffer$$0PQ23EGG14CoreController$$1FPQ23EGG4Heap
+    .long errRangeOver__Q23EGG32TBuffer$$0PQ23EGG14CoreController$$1CFv
+.global __vt__Q33EGG17CoreControllerMgr11T__Disposer
+__vt__Q33EGG17CoreControllerMgr11T__Disposer:
+    .long 0
+    .long 0
+    .long __dt__Q33EGG17CoreControllerMgr11T__DisposerFv
+    .long 0
+.global lbl_803982B8
+lbl_803982B8:
+    .long 0
+    .long 0
+    .long setPosParam__Q23EGG14CoreControllerFff
+    .long setHoriParam__Q23EGG14CoreControllerFff
+    .long setDistParam__Q23EGG14CoreControllerFff
+    .long setAccParam__Q23EGG14CoreControllerFff
+    .long beginFrame__Q23EGG14CoreControllerFP9PADStatus
+    .long endFrame__Q23EGG14CoreControllerFv
+.global lbl_803982D8
+lbl_803982D8:
+	.string "TBuffer::checkRange %d (0<=x<%d)\n"
+    .short 0
+.global lbl_803982FC
+lbl_803982FC:
+	.string "eggBuffer.h"
+	.string "TBuffer::checkRange %d (0<=x<%d)\n"
+    .short 0
+	.string "eggBuffer.h"
+
+.section .bss, "wa"
+.balign 0x8
+.global $$223951
+$$223951:
+	.skip 0x10
+# Might not be a GC controller, but it is a NullController
+.global sNullGCCont__3EGG
+sNullGCCont__3EGG:
+	.skip 0x980
+
+.section .rodata, "a"
+.balign 0x8
+.global lbl_8037A590
+lbl_8037A590:
+	.string "eggController.cpp"
+    .string "This Status is not for Free Style"
+    .string "bit_num > 0 && bit_num <= 32"
+    .string "mRumbleMgr == NULL"
+    .string "overlap_num > 0"
+    .string "index >= 0 && index < mKPADReadLength"
+    .string "(coreStatus->hold & cCORE_FSSTICK_BUTTONS) == 0"
+    .string "(coreStatus->trig & cCORE_FSSTICK_BUTTONS) == 0"
+    .string "(coreStatus->release & cCORE_FSSTICK_BUTTONS) == 0"
+    .string "Create Singleton Twice (%s) : addr %x\n"
+    .string "CoreControllerMgr"
+    .string "getDevType() == cDEV_DOLPHIN"
+    .string "c"
+    .string "0 <= channel && channel < 4"
+
 .section .ctors, "a"
 .4byte __sinit_$$3eggController_cpp
 
@@ -154,8 +299,8 @@ lbl_800A5C98:
 /* 800A5CB0 000A0BB0  38 21 00 20 */	addi r1, r1, 0x20
 /* 800A5CB4 000A0BB4  4E 80 00 20 */	blr 
 
-.global func_800A5CB8
-func_800A5CB8:
+.global stopMotor__Q23EGG14CoreControllerFv
+stopMotor__Q23EGG14CoreControllerFv:
 /* 800A5CB8 000A0BB8  80 63 00 04 */	lwz r3, 4(r3)
 /* 800A5CBC 000A0BBC  38 80 00 00 */	li r4, 0
 /* 800A5CC0 000A0BC0  48 02 7E 78 */	b func_800CDB38
@@ -186,9 +331,9 @@ lbl_800A5D0C:
 /* 800A5D14 000A0C14  2C 03 00 00 */	cmpwi r3, 0
 /* 800A5D18 000A0C18  7C 7E 1B 78 */	mr r30, r3
 /* 800A5D1C 000A0C1C  41 82 00 30 */	beq lbl_800A5D4C
-/* 800A5D20 000A0C20  3C A0 80 3A */	lis r5, lbl_80398228@ha
+/* 800A5D20 000A0C20  3C A0 80 3A */	lis r5, __vt__Q23EGG19ControllerRumbleMgr@ha
 /* 800A5D24 000A0C24  38 00 00 00 */	li r0, 0
-/* 800A5D28 000A0C28  38 A5 82 28 */	addi r5, r5, lbl_80398228@l
+/* 800A5D28 000A0C28  38 A5 82 28 */	addi r5, r5, __vt__Q23EGG19ControllerRumbleMgr@l
 /* 800A5D2C 000A0C2C  38 80 00 1C */	li r4, 0x1c
 /* 800A5D30 000A0C30  90 A3 00 00 */	stw r5, 0(r3)
 /* 800A5D34 000A0C34  90 03 00 1C */	stw r0, 0x1c(r3)
@@ -208,10 +353,10 @@ lbl_800A5D4C:
 /* 800A5D68 000A0C68  4C C6 31 82 */	crclr 6
 /* 800A5D6C 000A0C6C  4B FF C1 9D */	bl system_halt
 lbl_800A5D70:
-/* 800A5D70 000A0C70  3F C0 80 3A */	lis r30, lbl_80398234@ha
+/* 800A5D70 000A0C70  3F C0 80 3A */	lis r30, __vt__Q23EGG20ControllerRumbleUnit@ha
 /* 800A5D74 000A0C74  83 BA 08 74 */	lwz r29, 0x874(r26)
 /* 800A5D78 000A0C78  C3 E2 90 10 */	lfs f31, lbl_804C0A30-_SDA2_BASE_(r2)
-/* 800A5D7C 000A0C7C  3B DE 82 34 */	addi r30, r30, lbl_80398234@l
+/* 800A5D7C 000A0C7C  3B DE 82 34 */	addi r30, r30, __vt__Q23EGG20ControllerRumbleUnit@l
 /* 800A5D80 000A0C80  3B 80 00 00 */	li r28, 0
 /* 800A5D84 000A0C84  3B E0 00 00 */	li r31, 0
 /* 800A5D88 000A0C88  48 00 00 40 */	b lbl_800A5DC8
@@ -246,8 +391,8 @@ lbl_800A5DC8:
 /* 800A5DF0 000A0CF0  38 21 00 30 */	addi r1, r1, 0x30
 /* 800A5DF4 000A0CF4  4E 80 00 20 */	blr 
 
-.global func_800A5DF8
-func_800A5DF8:
+.global startPatternRumble__Q23EGG14CoreControllerFPCcib
+startPatternRumble__Q23EGG14CoreControllerFPCcib:
 /* 800A5DF8 000A0CF8  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 800A5DFC 000A0CFC  7C 08 02 A6 */	mflr r0
 /* 800A5E00 000A0D00  90 01 00 24 */	stw r0, 0x24(r1)
@@ -319,8 +464,8 @@ lbl_800A5EE8:
 /* 800A5EF4 000A0DF4  38 21 00 20 */	addi r1, r1, 0x20
 /* 800A5EF8 000A0DF8  4E 80 00 20 */	blr 
 
-.global func_800A5EFC
-func_800A5EFC:
+.global startPowerFrameRumble__Q23EGG14CoreControllerFfib
+startPowerFrameRumble__Q23EGG14CoreControllerFfib:
 /* 800A5EFC 000A0DFC  94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 800A5F00 000A0E00  7C 08 02 A6 */	mflr r0
 /* 800A5F04 000A0E04  90 01 00 34 */	stw r0, 0x34(r1)
@@ -393,8 +538,8 @@ lbl_800A5FE4:
 /* 800A6004 000A0F04  38 21 00 30 */	addi r1, r1, 0x30
 /* 800A6008 000A0F08  4E 80 00 20 */	blr 
 
-.global func_800A600C
-func_800A600C:
+.global stopRumbleMgr__Q23EGG14CoreControllerFv
+stopRumbleMgr__Q23EGG14CoreControllerFv:
 /* 800A600C 000A0F0C  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 800A6010 000A0F10  7C 08 02 A6 */	mflr r0
 /* 800A6014 000A0F14  90 01 00 14 */	stw r0, 0x14(r1)
@@ -431,8 +576,8 @@ lbl_800A6074:
 /* 800A6084 000A0F84  38 21 00 10 */	addi r1, r1, 0x10
 /* 800A6088 000A0F88  4E 80 00 20 */	blr 
 
-.global func_800A608C
-func_800A608C:
+.global getCoreStatus__Q23EGG14CoreControllerFi
+getCoreStatus__Q23EGG14CoreControllerFi:
 /* 800A608C 000A0F8C  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 800A6090 000A0F90  7C 08 02 A6 */	mflr r0
 /* 800A6094 000A0F94  2C 04 00 00 */	cmpwi r4, 0
@@ -921,6 +1066,9 @@ endFrame__Q23EGG14CoreControllerFv:
 /* 800A676C 000A166C  7C 08 03 A6 */	mtlr r0
 /* 800A6770 000A1670  38 21 00 20 */	addi r1, r1, 0x20
 /* 800A6774 000A1674  4E 80 00 20 */	blr 
+
+.global __dt__Q33EGG17CoreControllerMgr11T__DisposerFv
+__dt__Q33EGG17CoreControllerMgr11T__DisposerFv:
 /* 800A6778 000A1678  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 800A677C 000A167C  7C 08 02 A6 */	mflr r0
 /* 800A6780 000A1680  2C 03 00 00 */	cmpwi r3, 0
@@ -930,12 +1078,12 @@ endFrame__Q23EGG14CoreControllerFv:
 /* 800A6790 000A1690  93 C1 00 08 */	stw r30, 8(r1)
 /* 800A6794 000A1694  7C 7E 1B 78 */	mr r30, r3
 /* 800A6798 000A1698  41 82 00 30 */	beq lbl_800A67C8
-/* 800A679C 000A169C  3C A0 80 3A */	lis r5, lbl_803982A8@ha
+/* 800A679C 000A169C  3C A0 80 3A */	lis r5, __vt__Q33EGG17CoreControllerMgr11T__Disposer@ha
 /* 800A67A0 000A16A0  38 00 00 00 */	li r0, 0
-/* 800A67A4 000A16A4  38 A5 82 A8 */	addi r5, r5, lbl_803982A8@l
+/* 800A67A4 000A16A4  38 A5 82 A8 */	addi r5, r5, __vt__Q33EGG17CoreControllerMgr11T__Disposer@l
 /* 800A67A8 000A16A8  38 80 00 00 */	li r4, 0
 /* 800A67AC 000A16AC  90 A3 00 00 */	stw r5, 0(r3)
-/* 800A67B0 000A16B0  90 0D 99 68 */	stw r0, lbl_804BECE8-_SDA_BASE_(r13)
+/* 800A67B0 000A16B0  90 0D 99 68 */	stw r0, sStaticDisposer__Q33EGG17CoreControllerMgr11T__Disposer-_SDA_BASE_(r13)
 /* 800A67B4 000A16B4  48 00 58 E9 */	bl __dt__Q23EGG8DisposerFv
 /* 800A67B8 000A16B8  2C 1F 00 00 */	cmpwi r31, 0
 /* 800A67BC 000A16BC  40 81 00 0C */	ble lbl_800A67C8
@@ -992,20 +1140,30 @@ lbl_800A6858:
 /* 800A6870 000A1770  7C 08 03 A6 */	mtlr r0
 /* 800A6874 000A1774  38 21 00 10 */	addi r1, r1, 0x10
 /* 800A6878 000A1778  4E 80 00 20 */	blr 
+
+# errRangeOver__Q23EGG32TBuffer<PQ23EGG14CoreController>CFv
+.global errRangeOver__Q23EGG32TBuffer$$0PQ23EGG14CoreController$$1CFv
+errRangeOver__Q23EGG32TBuffer$$0PQ23EGG14CoreController$$1CFv:
 /* 800A687C 000A177C  4E 80 00 20 */	blr 
-lbl_800A6880:
+
+# alloc__Q23EGG27@unnamed@eggController_cpp@FUl
+.global alloc__Q23EGG27$$2unnamed$$2eggController_cpp$$2FUl
+alloc__Q23EGG27$$2unnamed$$2eggController_cpp$$2FUl:
 /* 800A6880 000A1780  7C 64 1B 78 */	mr r4, r3
-/* 800A6884 000A1784  80 6D 99 74 */	lwz r3, lbl_804BECF4-_SDA_BASE_(r13)
+/* 800A6884 000A1784  80 6D 99 74 */	lwz r3, sAllocator__Q23EGG27$$2unnamed$$2eggController_cpp$$2-_SDA_BASE_(r13)
 /* 800A6888 000A1788  81 83 00 10 */	lwz r12, 0x10(r3)
 /* 800A688C 000A178C  81 8C 00 0C */	lwz r12, 0xc(r12)
 /* 800A6890 000A1790  7D 89 03 A6 */	mtctr r12
 /* 800A6894 000A1794  4E 80 04 20 */	bctr 
-lbl_800A6898:
+
+# free__Q23EGG27@unnamed@eggController_cpp@FPv
+.global free__Q23EGG27$$2unnamed$$2eggController_cpp$$2FPv
+free__Q23EGG27$$2unnamed$$2eggController_cpp$$2FPv:
 /* 800A6898 000A1798  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 800A689C 000A179C  7C 08 02 A6 */	mflr r0
 /* 800A68A0 000A17A0  7C 64 1B 78 */	mr r4, r3
 /* 800A68A4 000A17A4  90 01 00 14 */	stw r0, 0x14(r1)
-/* 800A68A8 000A17A8  80 6D 99 74 */	lwz r3, lbl_804BECF4-_SDA_BASE_(r13)
+/* 800A68A8 000A17A8  80 6D 99 74 */	lwz r3, sAllocator__Q23EGG27$$2unnamed$$2eggController_cpp$$2-_SDA_BASE_(r13)
 /* 800A68AC 000A17AC  81 83 00 10 */	lwz r12, 0x10(r3)
 /* 800A68B0 000A17B0  81 8C 00 10 */	lwz r12, 0x10(r12)
 /* 800A68B4 000A17B4  7D 89 03 A6 */	mtctr r12
@@ -1015,11 +1173,13 @@ lbl_800A6898:
 /* 800A68C4 000A17C4  7C 08 03 A6 */	mtlr r0
 /* 800A68C8 000A17C8  38 21 00 10 */	addi r1, r1, 0x10
 /* 800A68CC 000A17CC  4E 80 00 20 */	blr 
-lbl_800A68D0:
+
+.global connectCallback__Q23EGG17CoreControllerMgrFll
+connectCallback__Q23EGG17CoreControllerMgrFll:
 /* 800A68D0 000A17D0  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 800A68D4 000A17D4  7C 08 02 A6 */	mflr r0
 /* 800A68D8 000A17D8  90 01 00 14 */	stw r0, 0x14(r1)
-/* 800A68DC 000A17DC  81 8D 99 70 */	lwz r12, lbl_804BECF0-_SDA_BASE_(r13)
+/* 800A68DC 000A17DC  81 8D 99 70 */	lwz r12, sConnectCallback__Q23EGG17CoreControllerMgr-_SDA_BASE_(r13)
 /* 800A68E0 000A17E0  90 61 00 08 */	stw r3, 8(r1)
 /* 800A68E4 000A17E4  2C 0C 00 00 */	cmpwi r12, 0
 /* 800A68E8 000A17E8  90 81 00 0C */	stw r4, 0xc(r1)
@@ -1033,8 +1193,11 @@ lbl_800A68FC:
 /* 800A6904 000A1804  38 21 00 10 */	addi r1, r1, 0x10
 /* 800A6908 000A1808  4E 80 00 20 */	blr 
 
-.global func_800A690C
-func_800A690C:
+# Inlines CoreController::CoreController, which in turn inlines CoreController::resetScene.
+# This can also be observed in core/eggController's static init function.
+
+.global __ct__Q23EGG17CoreControllerMgrFv
+__ct__Q23EGG17CoreControllerMgrFv:
 /* 800A690C 000A180C  94 21 FF 90 */	stwu r1, -0x70(r1)
 /* 800A6910 000A1810  7C 08 02 A6 */	mflr r0
 /* 800A6914 000A1814  90 01 00 74 */	stw r0, 0x74(r1)
@@ -1044,18 +1207,18 @@ func_800A690C:
 /* 800A6924 000A1824  F3 C1 00 58 */	psq_st f30, 88(r1), 0, qr0
 /* 800A6928 000A1828  39 61 00 50 */	addi r11, r1, 0x50
 /* 800A692C 000A182C  48 00 B3 F9 */	bl _savegpr_19
-/* 800A6930 000A1830  3C 80 80 3A */	lis r4, lbl_80398260@ha
+/* 800A6930 000A1830  3C 80 80 3A */	lis r4, __vt__Q23EGG17CoreControllerMgr@ha
 /* 800A6934 000A1834  7C 7D 1B 78 */	mr r29, r3
-/* 800A6938 000A1838  38 84 82 60 */	addi r4, r4, lbl_80398260@l
+/* 800A6938 000A1838  38 84 82 60 */	addi r4, r4, __vt__Q23EGG17CoreControllerMgr@l
 /* 800A693C 000A183C  90 83 00 10 */	stw r4, 0x10(r3)
 /* 800A6940 000A1840  48 00 57 09 */	bl __ct__Q23EGG8DisposerFv
-/* 800A6944 000A1844  3C A0 80 3A */	lis r5, lbl_803982A8@ha
-/* 800A6948 000A1848  3C C0 80 3A */	lis r6, lbl_8039828C@ha
+/* 800A6944 000A1844  3C A0 80 3A */	lis r5, __vt__Q33EGG17CoreControllerMgr11T__Disposer@ha
+/* 800A6948 000A1848  3C C0 80 3A */	lis r6, __vt__Q23EGG32TBuffer$$0PQ23EGG14CoreController$$1@ha
 /* 800A694C 000A184C  38 00 00 00 */	li r0, 0
-/* 800A6950 000A1850  3C 60 80 3A */	lis r3, lbl_80398270@ha
-/* 800A6954 000A1854  38 A5 82 A8 */	addi r5, r5, lbl_803982A8@l
-/* 800A6958 000A1858  38 C6 82 8C */	addi r6, r6, lbl_8039828C@l
-/* 800A695C 000A185C  38 63 82 70 */	addi r3, r3, lbl_80398270@l
+/* 800A6950 000A1850  3C 60 80 3A */	lis r3, __vt__Q23EGG29TBuffer$$0Q23EGG12eCoreDevType$$1@ha
+/* 800A6954 000A1854  38 A5 82 A8 */	addi r5, r5, __vt__Q33EGG17CoreControllerMgr11T__Disposer@l
+/* 800A6958 000A1858  38 C6 82 8C */	addi r6, r6, __vt__Q23EGG32TBuffer$$0PQ23EGG14CoreController$$1@l
+/* 800A695C 000A185C  38 63 82 70 */	addi r3, r3, __vt__Q23EGG29TBuffer$$0Q23EGG12eCoreDevType$$1@l
 /* 800A6960 000A1860  90 BD 00 00 */	stw r5, 0(r29)
 /* 800A6964 000A1864  3C 80 80 38 */	lis r4, lbl_80380004@ha
 /* 800A6968 000A1868  38 A0 00 00 */	li r5, 0
@@ -1088,11 +1251,11 @@ func_800A690C:
 /* 800A69D4 000A18D4  4B FF CA 49 */	bl __ct__Q23EGG9AllocatorFPQ23EGG4Heapl
 /* 800A69D8 000A18D8  7C 60 1B 78 */	mr r0, r3
 lbl_800A69DC:
-/* 800A69DC 000A18DC  3C 60 80 0A */	lis r3, lbl_800A6880@ha
-/* 800A69E0 000A18E0  3C 80 80 0A */	lis r4, lbl_800A6898@ha
-/* 800A69E4 000A18E4  90 0D 99 74 */	stw r0, lbl_804BECF4-_SDA_BASE_(r13)
-/* 800A69E8 000A18E8  38 63 68 80 */	addi r3, r3, lbl_800A6880@l
-/* 800A69EC 000A18EC  38 84 68 98 */	addi r4, r4, lbl_800A6898@l
+/* 800A69DC 000A18DC  3C 60 80 0A */	lis r3, alloc__Q23EGG27$$2unnamed$$2eggController_cpp$$2FUl@ha
+/* 800A69E0 000A18E0  3C 80 80 0A */	lis r4, free__Q23EGG27$$2unnamed$$2eggController_cpp$$2FPv@ha
+/* 800A69E4 000A18E4  90 0D 99 74 */	stw r0, sAllocator__Q23EGG27$$2unnamed$$2eggController_cpp$$2-_SDA_BASE_(r13)
+/* 800A69E8 000A18E8  38 63 68 80 */	addi r3, r3, alloc__Q23EGG27$$2unnamed$$2eggController_cpp$$2FUl@l
+/* 800A69EC 000A18EC  38 84 68 98 */	addi r4, r4, free__Q23EGG27$$2unnamed$$2eggController_cpp$$2FPv@l
 /* 800A69F0 000A18F0  48 02 59 55 */	bl func_800CC344
 /* 800A69F4 000A18F4  48 02 33 29 */	bl func_800C9D1C
 /* 800A69F8 000A18F8  81 9D 00 10 */	lwz r12, 0x10(r29)
@@ -1108,10 +1271,10 @@ lbl_800A69DC:
 /* 800A6A20 000A1920  48 05 48 D1 */	bl func_800FB2F0
 /* 800A6A24 000A1924  3A 81 00 08 */	addi r20, r1, 8
 /* 800A6A28 000A1928  3A 60 00 00 */	li r19, 0
-/* 800A6A2C 000A192C  3E A0 80 0A */	lis r21, lbl_800A68D0@ha
+/* 800A6A2C 000A192C  3E A0 80 0A */	lis r21, connectCallback__Q23EGG17CoreControllerMgrFll@ha
 lbl_800A6A30:
 /* 800A6A30 000A1930  80 74 00 00 */	lwz r3, 0(r20)
-/* 800A6A34 000A1934  38 95 68 D0 */	addi r4, r21, lbl_800A68D0@l
+/* 800A6A34 000A1934  38 95 68 D0 */	addi r4, r21, connectCallback__Q23EGG17CoreControllerMgrFll@l
 /* 800A6A38 000A1938  48 02 6C C5 */	bl func_800CD6FC
 /* 800A6A3C 000A193C  3A 73 00 01 */	addi r19, r19, 1
 /* 800A6A40 000A1940  3A 94 00 04 */	addi r20, r20, 4
@@ -1137,7 +1300,7 @@ lbl_800A6A30:
 /* 800A6A90 000A1990  3B 60 00 20 */	li r27, 0x20
 /* 800A6A94 000A1994  3B 40 00 1F */	li r26, 0x1f
 lbl_800A6A98:
-/* 800A6A98 000A1998  80 0D 99 6C */	lwz r0, lbl_804BECEC-_SDA_BASE_(r13)
+/* 800A6A98 000A1998  80 0D 99 6C */	lwz r0, sCoreControllerFactory__Q23EGG17CoreControllerMgr-_SDA_BASE_(r13)
 /* 800A6A9C 000A199C  2C 00 00 00 */	cmpwi r0, 0
 /* 800A6AA0 000A19A0  41 82 00 70 */	beq lbl_800A6B10
 /* 800A6AA4 000A19A4  2C 1E 00 00 */	cmpwi r30, 0
@@ -1163,7 +1326,7 @@ lbl_800A6AC0:
 /* 800A6AF0 000A19F0  4C C6 31 82 */	crclr 6
 /* 800A6AF4 000A19F4  4B FF B4 15 */	bl system_halt
 lbl_800A6AF8:
-/* 800A6AF8 000A19F8  81 8D 99 6C */	lwz r12, lbl_804BECEC-_SDA_BASE_(r13)
+/* 800A6AF8 000A19F8  81 8D 99 6C */	lwz r12, sCoreControllerFactory__Q23EGG17CoreControllerMgr-_SDA_BASE_(r13)
 /* 800A6AFC 000A19FC  82 FD 00 1C */	lwz r23, 0x1c(r29)
 /* 800A6B00 000A1A00  7D 89 03 A6 */	mtctr r12
 /* 800A6B04 000A1A04  4E 80 04 21 */	bctrl 
@@ -1341,7 +1504,15 @@ lbl_800A6D40:
 /* 800A6D84 000A1C84  7C 08 03 A6 */	mtlr r0
 /* 800A6D88 000A1C88  38 21 00 70 */	addi r1, r1, 0x70
 /* 800A6D8C 000A1C8C  4E 80 00 20 */	blr 
+
+# errRangeOver__Q23EGG29TBuffer<Q23EGG12eCoreDevType>CFv
+.global errRangeOver__Q23EGG29TBuffer$$0Q23EGG12eCoreDevType$$1CFv
+errRangeOver__Q23EGG29TBuffer$$0Q23EGG12eCoreDevType$$1CFv:
 /* 800A6D90 000A1C90  4E 80 00 20 */	blr 
+
+# __dt__Q23EGG32TBuffer<PQ23EGG14CoreController>Fv
+.global __dt__Q23EGG32TBuffer$$0PQ23EGG14CoreController$$1Fv
+__dt__Q23EGG32TBuffer$$0PQ23EGG14CoreController$$1Fv:
 /* 800A6D94 000A1C94  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 800A6D98 000A1C98  7C 08 02 A6 */	mflr r0
 /* 800A6D9C 000A1C9C  2C 03 00 00 */	cmpwi r3, 0
@@ -1352,8 +1523,8 @@ lbl_800A6D40:
 /* 800A6DB0 000A1CB0  7C 7E 1B 78 */	mr r30, r3
 /* 800A6DB4 000A1CB4  41 82 00 3C */	beq lbl_800A6DF0
 /* 800A6DB8 000A1CB8  80 03 00 08 */	lwz r0, 8(r3)
-/* 800A6DBC 000A1CBC  3C 80 80 3A */	lis r4, lbl_8039828C@ha
-/* 800A6DC0 000A1CC0  38 84 82 8C */	addi r4, r4, lbl_8039828C@l
+/* 800A6DBC 000A1CBC  3C 80 80 3A */	lis r4, __vt__Q23EGG32TBuffer$$0PQ23EGG14CoreController$$1@ha
+/* 800A6DC0 000A1CC0  38 84 82 8C */	addi r4, r4, __vt__Q23EGG32TBuffer$$0PQ23EGG14CoreController$$1@l
 /* 800A6DC4 000A1CC4  2C 00 00 00 */	cmpwi r0, 0
 /* 800A6DC8 000A1CC8  90 83 00 00 */	stw r4, 0(r3)
 /* 800A6DCC 000A1CCC  41 82 00 14 */	beq lbl_800A6DE0
@@ -1374,6 +1545,10 @@ lbl_800A6DF0:
 /* 800A6E00 000A1D00  7C 08 03 A6 */	mtlr r0
 /* 800A6E04 000A1D04  38 21 00 10 */	addi r1, r1, 0x10
 /* 800A6E08 000A1D08  4E 80 00 20 */	blr 
+
+# __dt__Q23EGG29TBuffer<Q23EGG12eCoreDevType>Fv
+.global __dt__Q23EGG29TBuffer$$0Q23EGG12eCoreDevType$$1Fv
+__dt__Q23EGG29TBuffer$$0Q23EGG12eCoreDevType$$1Fv:
 /* 800A6E0C 000A1D0C  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 800A6E10 000A1D10  7C 08 02 A6 */	mflr r0
 /* 800A6E14 000A1D14  2C 03 00 00 */	cmpwi r3, 0
@@ -1384,8 +1559,8 @@ lbl_800A6DF0:
 /* 800A6E28 000A1D28  7C 7E 1B 78 */	mr r30, r3
 /* 800A6E2C 000A1D2C  41 82 00 3C */	beq lbl_800A6E68
 /* 800A6E30 000A1D30  80 03 00 08 */	lwz r0, 8(r3)
-/* 800A6E34 000A1D34  3C 80 80 3A */	lis r4, lbl_80398270@ha
-/* 800A6E38 000A1D38  38 84 82 70 */	addi r4, r4, lbl_80398270@l
+/* 800A6E34 000A1D34  3C 80 80 3A */	lis r4, __vt__Q23EGG29TBuffer$$0Q23EGG12eCoreDevType$$1@ha
+/* 800A6E38 000A1D38  38 84 82 70 */	addi r4, r4, __vt__Q23EGG29TBuffer$$0Q23EGG12eCoreDevType$$1@l
 /* 800A6E3C 000A1D3C  2C 00 00 00 */	cmpwi r0, 0
 /* 800A6E40 000A1D40  90 83 00 00 */	stw r4, 0(r3)
 /* 800A6E44 000A1D44  41 82 00 14 */	beq lbl_800A6E58
@@ -1407,8 +1582,8 @@ lbl_800A6E68:
 /* 800A6E7C 000A1D7C  38 21 00 10 */	addi r1, r1, 0x10
 /* 800A6E80 000A1D80  4E 80 00 20 */	blr 
 
-.global func_800A6E84
-func_800A6E84:
+.global beginFrame__Q23EGG17CoreControllerMgrFv
+beginFrame__Q23EGG17CoreControllerMgrFv:
 /* 800A6E84 000A1D84  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 800A6E88 000A1D88  7C 08 02 A6 */	mflr r0
 /* 800A6E8C 000A1D8C  90 01 00 24 */	stw r0, 0x24(r1)
@@ -1461,8 +1636,8 @@ lbl_800A6F20:
 /* 800A6F38 000A1E38  38 21 00 20 */	addi r1, r1, 0x20
 /* 800A6F3C 000A1E3C  4E 80 00 20 */	blr 
 
-.global func_800A6F40
-func_800A6F40:
+.global endFrame__Q23EGG17CoreControllerMgrFv
+endFrame__Q23EGG17CoreControllerMgrFv:
 /* 800A6F40 000A1E40  94 21 FF C0 */	stwu r1, -0x40(r1)
 /* 800A6F44 000A1E44  7C 08 02 A6 */	mflr r0
 /* 800A6F48 000A1E48  90 01 00 44 */	stw r0, 0x44(r1)
@@ -1769,6 +1944,9 @@ lbl_800A7350:
 /* 800A7378 000A2278  7C 08 03 A6 */	mtlr r0
 /* 800A737C 000A227C  38 21 00 50 */	addi r1, r1, 0x50
 /* 800A7380 000A2280  4E 80 00 20 */	blr 
+
+.global __dt__Q23EGG19ControllerRumbleMgrFv
+__dt__Q23EGG19ControllerRumbleMgrFv:
 /* 800A7384 000A2284  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 800A7388 000A2288  7C 08 02 A6 */	mflr r0
 /* 800A738C 000A228C  2C 03 00 00 */	cmpwi r3, 0
@@ -1786,6 +1964,9 @@ lbl_800A73AC:
 /* 800A73B8 000A22B8  7C 08 03 A6 */	mtlr r0
 /* 800A73BC 000A22BC  38 21 00 10 */	addi r1, r1, 0x10
 /* 800A73C0 000A22C0  4E 80 00 20 */	blr 
+
+.global __dt__Q23EGG20ControllerRumbleUnitFv
+__dt__Q23EGG20ControllerRumbleUnitFv:
 /* 800A73C4 000A22C4  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 800A73C8 000A22C8  7C 08 02 A6 */	mflr r0
 /* 800A73CC 000A22CC  2C 03 00 00 */	cmpwi r3, 0
@@ -1823,6 +2004,10 @@ setHoriParam__Q23EGG14CoreControllerFff:
 setPosParam__Q23EGG14CoreControllerFff:
 /* 800A741C 000A231C  80 63 00 04 */	lwz r3, 4(r3)
 /* 800A7420 000A2320  48 01 FF 40 */	b func_800C7360
+
+# allocate__Q23EGG29TBuffer<Q23EGG12eCoreDevType>Fii
+.global allocate__Q23EGG29TBuffer$$0Q23EGG12eCoreDevType$$1Fii
+allocate__Q23EGG29TBuffer$$0Q23EGG12eCoreDevType$$1Fii:
 /* 800A7424 000A2324  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 800A7428 000A2328  7C 08 02 A6 */	mflr r0
 /* 800A742C 000A232C  90 01 00 14 */	stw r0, 0x14(r1)
@@ -1843,6 +2028,10 @@ setPosParam__Q23EGG14CoreControllerFff:
 /* 800A7468 000A2368  7C 08 03 A6 */	mtlr r0
 /* 800A746C 000A236C  38 21 00 10 */	addi r1, r1, 0x10
 /* 800A7470 000A2370  4E 80 00 20 */	blr 
+
+# allocate__Q23EGG29TBuffer<Q23EGG12eCoreDevType>FiPQ23EGG4Heapi
+.global allocate__Q23EGG29TBuffer$$0Q23EGG12eCoreDevType$$1FiPQ23EGG4Heapi
+allocate__Q23EGG29TBuffer$$0Q23EGG12eCoreDevType$$1FiPQ23EGG4Heapi:
 /* 800A7474 000A2374  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 800A7478 000A2378  7C 08 02 A6 */	mflr r0
 /* 800A747C 000A237C  2C 05 00 00 */	cmpwi r5, 0
@@ -1873,7 +2062,15 @@ lbl_800A74A0:
 /* 800A74DC 000A23DC  7C 08 03 A6 */	mtlr r0
 /* 800A74E0 000A23E0  38 21 00 10 */	addi r1, r1, 0x10
 /* 800A74E4 000A23E4  4E 80 00 20 */	blr 
+
+# onAllocate__Q23EGG29TBuffer<Q23EGG12eCoreDevType>FPQ23EGG4Heap
+.global onAllocate__Q23EGG29TBuffer$$0Q23EGG12eCoreDevType$$1FPQ23EGG4Heap
+onAllocate__Q23EGG29TBuffer$$0Q23EGG12eCoreDevType$$1FPQ23EGG4Heap:
 /* 800A74E8 000A23E8  4E 80 00 20 */	blr 
+
+# allocate__Q23EGG32TBuffer<PQ23EGG14CoreController>Fii
+.global allocate__Q23EGG32TBuffer$$0PQ23EGG14CoreController$$1Fii
+allocate__Q23EGG32TBuffer$$0PQ23EGG14CoreController$$1Fii:
 /* 800A74EC 000A23EC  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 800A74F0 000A23F0  7C 08 02 A6 */	mflr r0
 /* 800A74F4 000A23F4  90 01 00 14 */	stw r0, 0x14(r1)
@@ -1894,6 +2091,10 @@ lbl_800A74A0:
 /* 800A7530 000A2430  7C 08 03 A6 */	mtlr r0
 /* 800A7534 000A2434  38 21 00 10 */	addi r1, r1, 0x10
 /* 800A7538 000A2438  4E 80 00 20 */	blr 
+
+# allocate__Q23EGG32TBuffer<PQ23EGG14CoreController>FiPQ23EGG4Heapi
+.global allocate__Q23EGG32TBuffer$$0PQ23EGG14CoreController$$1FiPQ23EGG4Heapi
+allocate__Q23EGG32TBuffer$$0PQ23EGG14CoreController$$1FiPQ23EGG4Heapi:
 /* 800A753C 000A243C  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 800A7540 000A2440  7C 08 02 A6 */	mflr r0
 /* 800A7544 000A2444  2C 05 00 00 */	cmpwi r5, 0
@@ -1924,22 +2125,28 @@ lbl_800A7568:
 /* 800A75A4 000A24A4  7C 08 03 A6 */	mtlr r0
 /* 800A75A8 000A24A8  38 21 00 10 */	addi r1, r1, 0x10
 /* 800A75AC 000A24AC  4E 80 00 20 */	blr 
+
+# onAllocate__Q23EGG32TBuffer<PQ23EGG14CoreController>FPQ23EGG4Heap
+.global onAllocate__Q23EGG32TBuffer$$0PQ23EGG14CoreController$$1FPQ23EGG4Heap
+onAllocate__Q23EGG32TBuffer$$0PQ23EGG14CoreController$$1FPQ23EGG4Heap:
 /* 800A75B0 000A24B0  4E 80 00 20 */	blr 
 
 # __sinit_\eggController_cpp
+# Inlines NullController's constructor, which inherits from CoreController,
+# and CoreController's constructor inlines CoreController::resetScene
 .global __sinit_$$3eggController_cpp
 __sinit_$$3eggController_cpp:
 /* 800A75B4 000A24B4  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 800A75B8 000A24B8  7C 08 02 A6 */	mflr r0
 /* 800A75BC 000A24BC  3C 60 80 3A */	lis r3, lbl_803982B8@ha
-/* 800A75C0 000A24C0  3C 80 80 41 */	lis r4, lbl_8040AB80@ha
+/* 800A75C0 000A24C0  3C 80 80 41 */	lis r4, sNullGCCont__3EGG@ha
 /* 800A75C4 000A24C4  90 01 00 24 */	stw r0, 0x24(r1)
 /* 800A75C8 000A24C8  38 63 82 B8 */	addi r3, r3, lbl_803982B8@l
 /* 800A75CC 000A24CC  C0 02 90 10 */	lfs f0, lbl_804C0A30-_SDA2_BASE_(r2)
 /* 800A75D0 000A24D0  93 E1 00 1C */	stw r31, 0x1c(r1)
 /* 800A75D4 000A24D4  3B E0 00 00 */	li r31, 0
 /* 800A75D8 000A24D8  93 C1 00 18 */	stw r30, 0x18(r1)
-/* 800A75DC 000A24DC  3B C4 AB 80 */	addi r30, r4, lbl_8040AB80@l
+/* 800A75DC 000A24DC  3B C4 AB 80 */	addi r30, r4, sNullGCCont__3EGG@l
 /* 800A75E0 000A24E0  93 A1 00 14 */	stw r29, 0x14(r1)
 /* 800A75E4 000A24E4  90 64 AB 80 */	stw r3, -0x5480(r4)
 /* 800A75E8 000A24E8  38 7E 08 A8 */	addi r3, r30, 0x8a8
@@ -1999,13 +2206,13 @@ lbl_800A76B4:
 /* 800A76B4 000A25B4  3C C0 80 3A */	lis r6, lbl_80398240@ha
 /* 800A76B8 000A25B8  38 00 00 FE */	li r0, 0xfe
 /* 800A76BC 000A25BC  38 C6 82 40 */	addi r6, r6, lbl_80398240@l
-/* 800A76C0 000A25C0  3C 60 80 41 */	lis r3, lbl_8040AB80@ha
+/* 800A76C0 000A25C0  3C 60 80 41 */	lis r3, sNullGCCont__3EGG@ha
 /* 800A76C4 000A25C4  3C 80 80 0A */	lis r4, __dt__Q23EGG14NullControllerFv@ha
-/* 800A76C8 000A25C8  3C A0 80 41 */	lis r5, lbl_8040AB70@ha
+/* 800A76C8 000A25C8  3C A0 80 41 */	lis r5, $$223951@ha
 /* 800A76CC 000A25CC  90 DE 00 00 */	stw r6, 0(r30)
-/* 800A76D0 000A25D0  38 63 AB 80 */	addi r3, r3, lbl_8040AB80@l
+/* 800A76D0 000A25D0  38 63 AB 80 */	addi r3, r3, sNullGCCont__3EGG@l
 /* 800A76D4 000A25D4  38 84 77 00 */	addi r4, r4, __dt__Q23EGG14NullControllerFv@l
-/* 800A76D8 000A25D8  38 A5 AB 70 */	addi r5, r5, lbl_8040AB70@l
+/* 800A76D8 000A25D8  38 A5 AB 70 */	addi r5, r5, $$223951@l
 /* 800A76DC 000A25DC  98 1E 09 58 */	stb r0, 0x958(r30)
 /* 800A76E0 000A25E0  48 00 A1 55 */	bl func_800B1834
 /* 800A76E4 000A25E4  80 01 00 24 */	lwz r0, 0x24(r1)

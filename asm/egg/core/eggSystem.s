@@ -191,7 +191,7 @@ run__Q23EGG17ConfigurationDataFv:
 /* 800A3AFC 0009E9FC  93 E1 00 0C */	stw r31, 0xc(r1)
 /* 800A3B00 0009EA00  93 C1 00 08 */	stw r30, 8(r1)
 /* 800A3B04 0009EA04  7C 7E 1B 78 */	mr r30, r3
-/* 800A3B08 0009EA08  83 ED 99 68 */	lwz r31, lbl_804BECE8-_SDA_BASE_(r13)
+/* 800A3B08 0009EA08  83 ED 99 68 */	lwz r31, sStaticDisposer__Q33EGG17CoreControllerMgr11T__Disposer-_SDA_BASE_(r13)
 lbl_800A3B0C:
 /* 800A3B0C 0009EA0C  81 9E 00 00 */	lwz r12, 0(r30)
 /* 800A3B10 0009EA10  7F C3 F3 78 */	mr r3, r30
