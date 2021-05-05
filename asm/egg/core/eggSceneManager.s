@@ -1,15 +1,78 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .sdata2, "a"
+.balign 0x8
+# Screen resolution for the scene's ColorFader (Idk what the 0.0f is for)
+.global lbl_804C0A10
+lbl_804C0A10:
+	.single 0e0
+.global lbl_804C0A14
+lbl_804C0A14:
+	.single 0e640
+.global lbl_804C0A18
+lbl_804C0A18:
+	.single 0e480
 
+.section .sbss, "wa"
+.balign 0x8
+.global sHeapOptionFlg__Q23EGG12SceneManager
+sHeapOptionFlg__Q23EGG12SceneManager:
+	.skip 0x4
+# BBA's map mentions sHeapMem1_ForCreateScene__Q23EGG12SceneManager
+# and sHeapMem2_ForCreateScene__Q23EGG12SceneManager, but here there's three heaps(?)
+.global lbl_804BECDC
+lbl_804BECDC:
+	.skip 0x4
+.global lbl_804BECE0
+lbl_804BECE0:
+	.skip 0x4
+.global lbl_804BECE4
+lbl_804BECE4:
+	.skip 0x4
+
+.section .data, "wa"
+.balign 0x8
+.global __vt__Q23EGG12SceneManager
+__vt__Q23EGG12SceneManager:
+    .long 0
+    .long 0
+    .long calc__Q23EGG12SceneManagerFv
+    .long draw__Q23EGG12SceneManagerFv
+    .long calcCurrentScene__Q23EGG12SceneManagerFv
+    .long calcCurrentFader__Q23EGG12SceneManagerFv
+    .long drawCurrentScene__Q23EGG12SceneManagerFv
+    .long drawCurrentFader__Q23EGG12SceneManagerFv
+    .long createDefaultFader__Q23EGG12SceneManagerFv
+    .long 0
+
+.section .rodata, "a"
+.balign 0x8
+.global lbl_8037A480
+lbl_8037A480:
+    .string "eggSceneManager.cpp"
+    .string "mCurrentFader"
+    .string "pParentHeap_Mem1 && pParentHeap_Mem2"
+    .string "pNewHeap && pNewHeap_Mem1 && pNewHeap_Mem2"
+    .string "mSceneCreator"
+    .string "pNewScene"
+    .string "pParent"
+    .string "pParent->getChildScene() == NULL"
+    .string "pScene"
+    .string "pScene->getHeap() != pScene->getHeap_Debug()"
+    .string "0"
+    .string "pParentHeap != NULL"
+    .balign 8
+    .long 0, 1, 2, 3
+
+.section .text, "ax"
 .global __ct__Q23EGG12SceneManagerFPQ23EGG12SceneCreator
 __ct__Q23EGG12SceneManagerFPQ23EGG12SceneCreator:
 /* 800A4AF8 0009F9F8  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 800A4AFC 0009F9FC  7C 08 02 A6 */	mflr r0
-/* 800A4B00 0009FA00  3D 80 80 3A */	lis r12, lbl_80398200@ha
+/* 800A4B00 0009FA00  3D 80 80 3A */	lis r12, __vt__Q23EGG12SceneManager@ha
 /* 800A4B04 0009FA04  38 A0 FF FF */	li r5, -1
 /* 800A4B08 0009FA08  90 01 00 14 */	stw r0, 0x14(r1)
-/* 800A4B0C 0009FA0C  39 8C 82 00 */	addi r12, r12, lbl_80398200@l
+/* 800A4B0C 0009FA0C  39 8C 82 00 */	addi r12, r12, __vt__Q23EGG12SceneManager@l
 /* 800A4B10 0009FA10  38 C0 00 00 */	li r6, 0
 /* 800A4B14 0009FA14  38 00 00 01 */	li r0, 1
 /* 800A4B18 0009FA18  93 E1 00 0C */	stw r31, 0xc(r1)
@@ -387,7 +450,7 @@ lbl_800A5010:
 /* 800A5020 0009FF20  54 00 04 3C */	rlwinm r0, r0, 0, 0x10, 0x1e
 /* 800A5024 0009FF24  B0 1C 00 1C */	sth r0, 0x1c(r28)
 lbl_800A5028:
-/* 800A5028 0009FF28  A0 AD 99 58 */	lhz r5, lbl_804BECD8-_SDA_BASE_(r13)
+/* 800A5028 0009FF28  A0 AD 99 58 */	lhz r5, sHeapOptionFlg__Q23EGG12SceneManager-_SDA_BASE_(r13)
 /* 800A502C 0009FF2C  7F 84 E3 78 */	mr r4, r28
 /* 800A5030 0009FF30  38 60 FF FF */	li r3, -1
 /* 800A5034 0009FF34  4B FF D7 0D */	bl create__Q23EGG7ExpHeapFUlPQ23EGG4HeapUs
@@ -395,7 +458,7 @@ lbl_800A5028:
 /* 800A503C 0009FF3C  7C 77 1B 78 */	mr r23, r3
 /* 800A5040 0009FF40  3A C0 00 00 */	li r22, 0
 /* 800A5044 0009FF44  40 82 00 20 */	bne lbl_800A5064
-/* 800A5048 0009FF48  A0 AD 99 58 */	lhz r5, lbl_804BECD8-_SDA_BASE_(r13)
+/* 800A5048 0009FF48  A0 AD 99 58 */	lhz r5, sHeapOptionFlg__Q23EGG12SceneManager-_SDA_BASE_(r13)
 /* 800A504C 0009FF4C  7F 44 D3 78 */	mr r4, r26
 /* 800A5050 0009FF50  38 60 FF FF */	li r3, -1
 /* 800A5054 0009FF54  4B FF D6 ED */	bl create__Q23EGG7ExpHeapFUlPQ23EGG4HeapUs
@@ -403,7 +466,7 @@ lbl_800A5028:
 /* 800A505C 0009FF5C  7E FA BB 78 */	mr r26, r23
 /* 800A5060 0009FF60  48 00 00 1C */	b lbl_800A507C
 lbl_800A5064:
-/* 800A5064 0009FF64  A0 AD 99 58 */	lhz r5, lbl_804BECD8-_SDA_BASE_(r13)
+/* 800A5064 0009FF64  A0 AD 99 58 */	lhz r5, sHeapOptionFlg__Q23EGG12SceneManager-_SDA_BASE_(r13)
 /* 800A5068 0009FF68  7F 24 CB 78 */	mr r4, r25
 /* 800A506C 0009FF6C  38 60 FF FF */	li r3, -1
 /* 800A5070 0009FF70  4B FF D6 D1 */	bl create__Q23EGG7ExpHeapFUlPQ23EGG4HeapUs
@@ -412,7 +475,7 @@ lbl_800A5064:
 lbl_800A507C:
 /* 800A507C 0009FF7C  2C 18 00 00 */	cmpwi r24, 0
 /* 800A5080 0009FF80  41 82 00 18 */	beq lbl_800A5098
-/* 800A5084 0009FF84  A0 AD 99 58 */	lhz r5, lbl_804BECD8-_SDA_BASE_(r13)
+/* 800A5084 0009FF84  A0 AD 99 58 */	lhz r5, sHeapOptionFlg__Q23EGG12SceneManager-_SDA_BASE_(r13)
 /* 800A5088 0009FF88  7F 04 C3 78 */	mr r4, r24
 /* 800A508C 0009FF8C  38 60 FF FF */	li r3, -1
 /* 800A5090 0009FF90  4B FF D6 B1 */	bl create__Q23EGG7ExpHeapFUlPQ23EGG4HeapUs
