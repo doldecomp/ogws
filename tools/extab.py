@@ -109,7 +109,11 @@ class ExtabEntry:
     def ToString(self) -> str:
         code = ""
         for i in range(len(self.code) // PPC_INST_SIZE):
-            code = "".join([code, f"    .long 0x{self.code[i * 4 : (i + 1) * 4].hex()}", "\n"]); i += 4
+            currLong = self.code[i * 4 : (i + 1) * 4].hex()
+            # Sometimes a destructor is inserted after the stack-unwinding instructions.
+            # This will catch those occurrences and label them appropriately.
+            currSymb = getSymbolByAddr(currLong)
+            code = "".join([code, f"    .long {currSymb}", "\n"]); i += 4
 
         return "\n".join([f".global _unwind_{self.parent.symbol}",
                           f"_unwind_{self.parent.symbol}:",

@@ -64,7 +64,7 @@ _unwind_setAxisRotation__Q23EGG9Matrix34fFRCQ23EGG8Vector3ff:
     .long 0x00000010
     .long 0x00000000
     .long 0x82000008
-    .long 0x800a21e8
+    .long __dt__Q23EGG9Matrix34fFv
 
 .global _unwind_setAxisRotation__Q23EGG5QuatfFRCQ23EGG8Vector3ff
 _unwind_setAxisRotation__Q23EGG5QuatfFRCQ23EGG8Vector3ff:
@@ -1143,4 +1143,3 @@ _unwind_lbl_80177370:
 _unwind_func_801773D4:
     .long 0x28080000
     .long 0x00000000
-	
