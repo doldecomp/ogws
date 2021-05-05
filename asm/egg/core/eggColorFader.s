@@ -1,17 +1,47 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .sdata2, "a"
+.balign 0x8
+.global lbl_804C0A08
+lbl_804C0A08:
+	.single 0e0
+.global lbl_804C0A0C
+lbl_804C0A0C:
+	.single 0e1
 
+.section .data, "wa"
+.balign 0x8
+.global __vt__Q23EGG10ColorFader
+__vt__Q23EGG10ColorFader:
+    .long 0
+    .long 0
+    .long setStatus__Q23EGG10ColorFaderFQ33EGG5Fader7EStatus
+    .long getStatus__Q23EGG10ColorFaderCFv
+    .long fadeIn__Q23EGG10ColorFaderFv
+    .long fadeOut__Q23EGG10ColorFaderFv
+    .long calc__Q23EGG10ColorFaderFv
+    .long draw__Q23EGG10ColorFaderFv
+    .long __dt__Q23EGG10ColorFaderFv
+    .long 0
+
+.section .rodata, "a"
+.balign 0x8
+.global lbl_8037A460
+lbl_8037A460:
+	.string "eggColorFader.cpp"
+    .string "frame != 0"
+
+.section .text, "ax"
 .global __ct__Q23EGG10ColorFaderFffffQ34nw4r2ut5ColorQ33EGG5Fader7EStatus
 __ct__Q23EGG10ColorFaderFffffQ34nw4r2ut5ColorQ33EGG5Fader7EStatus:
 /* 800A453C 0009F43C  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 800A4540 0009F440  7C 08 02 A6 */	mflr r0
-/* 800A4544 0009F444  3C C0 80 3A */	lis r6, lbl_803981D8@ha
+/* 800A4544 0009F444  3C C0 80 3A */	lis r6, __vt__Q23EGG10ColorFader@ha
 /* 800A4548 0009F448  EC 61 18 2A */	fadds f3, f1, f3
 /* 800A454C 0009F44C  90 01 00 24 */	stw r0, 0x24(r1)
 /* 800A4550 0009F450  EC 02 20 2A */	fadds f0, f2, f4
 /* 800A4554 0009F454  39 20 00 00 */	li r9, 0
-/* 800A4558 0009F458  38 C6 81 D8 */	addi r6, r6, lbl_803981D8@l
+/* 800A4558 0009F458  38 C6 81 D8 */	addi r6, r6, __vt__Q23EGG10ColorFader@l
 /* 800A455C 0009F45C  93 E1 00 1C */	stw r31, 0x1c(r1)
 /* 800A4560 0009F460  7C BF 2B 78 */	mr r31, r5
 /* 800A4564 0009F464  38 00 00 14 */	li r0, 0x14
