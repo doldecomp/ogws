@@ -104,7 +104,7 @@ def format(symbol):
         symbol = symbol.replace(sub[0], sub[1])
     return symbol
 
-def toHex8(val) -> str:
+def toHex32(val) -> str:
     return "{:08x}".format(val)
 
 def toF32_7(val) -> str:
@@ -124,12 +124,12 @@ def getU32BE(data, ofs) -> int:
 
 def getF32(data, ofs) -> float:
     return (struct.unpack('!f', bytes.fromhex(
-        toHex8(getU32(data, ofs))
+        toHex32(getU32(data, ofs))
     ))[0])
 
 def getF32BE(data, ofs) -> float:
     return (struct.unpack('!f', bytes.fromhex(
-        toHex8(getU32BE(data, ofs))
+        toHex32(getU32BE(data, ofs))
     ))[0])
 
 def isValidWiiPtr(addr) -> bool:
@@ -247,7 +247,7 @@ if __name__ == "__main__":
             # Possible pointer?
             if (isValidWiiPtr(current_u32)):
                     label_txt += (
-                        "    .long " + getSymbolByAddr(toHex8(current_u32)) + '\n'
+                        "    .long " + getSymbolByAddr(toHex32(current_u32)) + '\n'
                     )   
             else:
                 label_txt += (
