@@ -1,7 +1,40 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .sbss, "wa"
+.balign 0x8
+.global sEndMesgBuffer__Q23EGG10TaskThread
+sEndMesgBuffer__Q23EGG10TaskThread:
+	.skip 0x4
+.global sEndMesgBufSize__Q23EGG10TaskThread
+sEndMesgBufSize__Q23EGG10TaskThread:
+	.skip 0x4
 
+.section .data, "wa"
+.balign 0x8
+.global __vt__Q23EGG10TaskThread
+__vt__Q23EGG10TaskThread:
+    .long 0
+    .long 0
+    .long __dt__Q23EGG10TaskThreadFv
+    .long run__Q23EGG10TaskThreadFv
+    .long onEnter__Q23EGG10TaskThreadFv
+    .long onExit__Q23EGG10TaskThreadFv
+
+.section .bss, "wa"
+.balign 0x8
+.global sEndMesgQueue__Q23EGG10TaskThread
+sEndMesgQueue__Q23EGG10TaskThread:
+	.skip 0x20
+
+.section .rodata, "a"
+.balign 0x8
+.global lbl_8037A3E8
+lbl_8037A3E8:
+	.string "eggTaskThread.cpp"
+    .string "size > 0"
+    .string "sEndMesgBuffer"
+
+.section .text, "ax"
 .global create__Q23EGG10TaskThreadFiiUlPQ23EGG4Heap
 create__Q23EGG10TaskThreadFiiUlPQ23EGG4Heap:
 /* 800A3D34 0009EC34  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -14,7 +47,7 @@ create__Q23EGG10TaskThreadFiiUlPQ23EGG4Heap:
 /* 800A3D50 0009EC50  7C BC 2B 78 */	mr r28, r5
 /* 800A3D54 0009EC54  7C DD 33 78 */	mr r29, r6
 /* 800A3D58 0009EC58  40 82 00 08 */	bne lbl_800A3D60
-/* 800A3D5C 0009EC5C  83 AD 99 28 */	lwz r29, lbl_804BECA8-_SDA_BASE_(r13)
+/* 800A3D5C 0009EC5C  83 AD 99 28 */	lwz r29, sCurrentHeap__Q23EGG4Heap-_SDA_BASE_(r13)
 lbl_800A3D60:
 /* 800A3D60 0009EC60  7F A4 EB 78 */	mr r4, r29
 /* 800A3D64 0009EC64  38 60 00 54 */	li r3, 0x54
@@ -28,9 +61,9 @@ lbl_800A3D60:
 /* 800A3D84 0009EC84  7F 66 DB 78 */	mr r6, r27
 /* 800A3D88 0009EC88  38 E0 00 00 */	li r7, 0
 /* 800A3D8C 0009EC8C  4B FF F7 29 */	bl __ct__Q23EGG6ThreadFUliiPQ23EGG4Heap
-/* 800A3D90 0009EC90  3C 60 80 3A */	lis r3, lbl_803981B0@ha
+/* 800A3D90 0009EC90  3C 60 80 3A */	lis r3, __vt__Q23EGG10TaskThread@ha
 /* 800A3D94 0009EC94  38 00 00 00 */	li r0, 0
-/* 800A3D98 0009EC98  38 63 81 B0 */	addi r3, r3, lbl_803981B0@l
+/* 800A3D98 0009EC98  38 63 81 B0 */	addi r3, r3, __vt__Q23EGG10TaskThread@l
 /* 800A3D9C 0009EC9C  90 7F 00 00 */	stw r3, 0(r31)
 /* 800A3DA0 0009ECA0  90 1F 00 50 */	stw r0, 0x50(r31)
 /* 800A3DA4 0009ECA4  80 7F 00 08 */	lwz r3, 8(r31)
@@ -279,13 +312,13 @@ createTaskEndMessageQueue__Q23EGG10TaskThreadFiPQ23EGG4Heap:
 /* 800A410C 0009F00C  4C C6 31 82 */	crclr 6
 /* 800A4110 0009F010  4B FF DD F9 */	bl system_halt
 lbl_800A4114:
-/* 800A4114 0009F014  93 CD 99 44 */	stw r30, lbl_804BECC4-_SDA_BASE_(r13)
+/* 800A4114 0009F014  93 CD 99 44 */	stw r30, sEndMesgBufSize__Q23EGG10TaskThread-_SDA_BASE_(r13)
 /* 800A4118 0009F018  7F E5 FB 78 */	mr r5, r31
 /* 800A411C 0009F01C  57 C3 10 3A */	slwi r3, r30, 2
 /* 800A4120 0009F020  38 80 00 04 */	li r4, 4
 /* 800A4124 0009F024  4B FF ED 15 */	bl alloc__Q23EGG4HeapFUliPQ23EGG4Heap
 /* 800A4128 0009F028  2C 03 00 00 */	cmpwi r3, 0
-/* 800A412C 0009F02C  90 6D 99 40 */	stw r3, lbl_804BECC0-_SDA_BASE_(r13)
+/* 800A412C 0009F02C  90 6D 99 40 */	stw r3, sEndMesgBuffer__Q23EGG10TaskThread-_SDA_BASE_(r13)
 /* 800A4130 0009F030  40 82 00 1C */	bne lbl_800A414C
 /* 800A4134 0009F034  3C 60 80 38 */	lis r3, lbl_8037A3E8@ha
 /* 800A4138 0009F038  38 80 01 85 */	li r4, 0x185
@@ -294,10 +327,10 @@ lbl_800A4114:
 /* 800A4144 0009F044  4C C6 31 82 */	crclr 6
 /* 800A4148 0009F048  4B FF DD C1 */	bl system_halt
 lbl_800A414C:
-/* 800A414C 0009F04C  3F E0 80 41 */	lis r31, lbl_8040AB50@ha
-/* 800A4150 0009F050  80 8D 99 40 */	lwz r4, lbl_804BECC0-_SDA_BASE_(r13)
-/* 800A4154 0009F054  80 AD 99 44 */	lwz r5, lbl_804BECC4-_SDA_BASE_(r13)
-/* 800A4158 0009F058  38 7F AB 50 */	addi r3, r31, lbl_8040AB50@l
+/* 800A414C 0009F04C  3F E0 80 41 */	lis r31, sEndMesgQueue__Q23EGG10TaskThread@ha
+/* 800A4150 0009F050  80 8D 99 40 */	lwz r4, sEndMesgBuffer__Q23EGG10TaskThread-_SDA_BASE_(r13)
+/* 800A4154 0009F054  80 AD 99 44 */	lwz r5, sEndMesgBufSize__Q23EGG10TaskThread-_SDA_BASE_(r13)
+/* 800A4158 0009F058  38 7F AB 50 */	addi r3, r31, sEndMesgQueue__Q23EGG10TaskThread@l
 /* 800A415C 0009F05C  48 04 DF 01 */	bl func_800F205C
 /* 800A4160 0009F060  38 7F AB 50 */	addi r3, r31, -21680
 /* 800A4164 0009F064  83 E1 00 0C */	lwz r31, 0xc(r1)
