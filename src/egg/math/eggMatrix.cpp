@@ -81,7 +81,7 @@ namespace EGG
 
     void Matrix34f::loadPosMtx(u32 i)
     {
-        GXLoadPosMtxImm(&tbl, i);
+        GXLoadPosMtxImm(tbl, i);
     }
 
     // TO-DO: Static members initialized here
