@@ -1,7 +1,48 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .data, "wa"
+.global __vt__Q23EGG9RamStream
+__vt__Q23EGG9RamStream:
+    .long 0
+    .long 0
+    .long __dt__Q23EGG9RamStreamFv
+    .long read__Q23EGG9RamStreamFPUcUl
+    .long write__Q23EGG9RamStreamFPUcUl
+    .long eof__Q23EGG9RamStreamFv
 
+.section .bss, "wa"
+.balign 0x8
+.global sTextBuffer__Q23EGG6Stream
+sTextBuffer__Q23EGG6Stream:
+	.skip 0x400
+
+.section .rodata, "a"
+.balign 0x8
+.global lbl_8037A738
+lbl_8037A738:
+    .string "eggStream.cpp"
+    .string "Token Error\n"
+    .string "%d"
+    .string "eof::_read (%x,%d) : mPosition %d\n"
+    .string "%d "
+    .string "eof::_write (%x,%d) : mPosition %d\n"
+    .string "%x"
+    .string "%04x "
+    .string "%08x "
+    .string "%f "
+    .string "%s"
+    .string "SJIS-Assertion : unterminated sjis"
+    .string "Yen error\n"
+    .string "readString(%x,%d) overflow\n"
+    .string "buffer overflow\n[%s]\n"
+    .string "# %s\r\n"
+    .string "{\r\n"
+    .string "}\r\n"
+    .string "copyToTextBuffer : eof or %d>=%d\n"
+    .string "isBeginGroup is out of support\n"
+    .string "isEndGroup is out of support\n"
+
+.section .text, "ax"
 .global __dt__Q23EGG6StreamFv
 __dt__Q23EGG6StreamFv:
 /* 800A7740 000A2640  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -2695,12 +2736,12 @@ lbl_800A9CEC:
 
 .global __ct__Q23EGG9RamStreamFPUcUl
 __ct__Q23EGG9RamStreamFPUcUl:
-/* 800A9D00 000A4C00  3C E0 80 41 */	lis r7, lbl_8040B500@ha
-/* 800A9D04 000A4C04  3C C0 80 3A */	lis r6, lbl_80398338@ha
+/* 800A9D00 000A4C00  3C E0 80 41 */	lis r7, sTextBuffer__Q23EGG6Stream@ha
+/* 800A9D04 000A4C04  3C C0 80 3A */	lis r6, __vt__Q23EGG9RamStream@ha
 /* 800A9D08 000A4C08  39 00 00 00 */	li r8, 0
 /* 800A9D0C 000A4C0C  38 00 04 00 */	li r0, 0x400
-/* 800A9D10 000A4C10  38 E7 B5 00 */	addi r7, r7, lbl_8040B500@l
-/* 800A9D14 000A4C14  38 C6 83 38 */	addi r6, r6, lbl_80398338@l
+/* 800A9D10 000A4C10  38 E7 B5 00 */	addi r7, r7, sTextBuffer__Q23EGG6Stream@l
+/* 800A9D14 000A4C14  38 C6 83 38 */	addi r6, r6, __vt__Q23EGG9RamStream@l
 /* 800A9D18 000A4C18  99 03 00 04 */	stb r8, 4(r3)
 /* 800A9D1C 000A4C1C  B1 03 00 0C */	sth r8, 0xc(r3)
 /* 800A9D20 000A4C20  91 03 00 08 */	stw r8, 8(r3)

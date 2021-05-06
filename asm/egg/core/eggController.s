@@ -1,5 +1,11 @@
 .include "macros.inc"
 
+.section .sdata, "wa"
+.balign 0x8
+.global sWPADWorkSize__Q23EGG17CoreControllerMgr
+sWPADWorkSize__Q23EGG17CoreControllerMgr:
+	.long 0x32000
+
 .section .sdata2, "a"
 .balign 0x8
 .global lbl_804C0A20
@@ -1234,7 +1240,7 @@ __ct__Q23EGG17CoreControllerMgrFv:
 /* 800A6990 000A1890  80 04 00 0C */	lwz r0, 0xc(r4)
 /* 800A6994 000A1894  80 8D 99 38 */	lwz r4, lbl_804BECB8-_SDA_BASE_(r13)
 /* 800A6998 000A1898  90 61 00 08 */	stw r3, 8(r1)
-/* 800A699C 000A189C  80 6D 81 80 */	lwz r3, lbl_804BD500-_SDA_BASE_(r13)
+/* 800A699C 000A189C  80 6D 81 80 */	lwz r3, sWPADWorkSize__Q23EGG17CoreControllerMgr-_SDA_BASE_(r13)
 /* 800A69A0 000A18A0  90 E1 00 0C */	stw r7, 0xc(r1)
 /* 800A69A4 000A18A4  80 84 00 1C */	lwz r4, 0x1c(r4)
 /* 800A69A8 000A18A8  90 C1 00 10 */	stw r6, 0x10(r1)
