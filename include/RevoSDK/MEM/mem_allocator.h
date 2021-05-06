@@ -2,16 +2,34 @@
 #define REVOSDK_MEM_ALLOCATOR_H
 #include <types.h>
 #include "mem_expHeap.h"
+#include "mem_frameHeap.h"
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-struct MEMAllocator
+typedef UNKTYPE (*MEMAllocatorHeapAllocFunc)(UNKTYPE);
+typedef UNKTYPE (*MEMAllocatorHeapFreeFunc)(UNKTYPE);
+
+typedef struct MEMAllocatorFuncs
 {
-    void *PTR_0x0;
-    MEMExpHeap *mExpHeap;
-    // . . .
+    MEMAllocatorHeapAllocFunc mHeapAllocFunc; // at 0x0
+    MEMAllocatorHeapFreeFunc mHeapFreeFunc; // at 0x4
 };
+
+typedef struct MEMAllocator
+{
+    struct MEMAllocatorFuncs * mAllocFuncs; // at 0x0
+    union
+    {
+        MEMExpHeap *mExpHeap; // at 0x4
+        MEMFrmHeap *mFrmHeap; // at 0x4
+    };
+    UNKWORD WORD_0x8;
+    UNKWORD WORD_0xC;
+};
+
+UNKTYPE MEMAllocFromAllocator(MEMAllocator *, UNKWORD);
+UNKTYPE MEMFreeToAllocator(MEMAllocator *, UNKTYPE *);
 
 #ifdef __cplusplus
 }

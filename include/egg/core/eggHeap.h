@@ -17,16 +17,16 @@ namespace EGG
         };
 
         Heap(MEMiHeapHead *);
-        virtual ~Heap();
+        virtual ~Heap(); // at 0x8
 
-        virtual EHeapKind getHeapKind() const = 0;
-        virtual UNKTYPE initAllocator() = 0;
-        virtual UNKTYPE alloc(u32, s32) = 0;
-        virtual UNKTYPE free(void *) = 0;
-        virtual UNKTYPE destroy() = 0;
-        virtual UNKTYPE resizeForMBlock(void *, u32) = 0;
-        virtual UNKTYPE getAllocatableSize(s32) = 0;
-        virtual UNKTYPE adjust() = 0;
+        virtual EHeapKind getHeapKind() const = 0; // at 0xC
+        virtual UNKTYPE initAllocator(Allocator *, s32) = 0; // at 0x10
+        virtual UNKTYPE alloc(u32, s32) = 0; // at 0x14
+        virtual UNKTYPE free(void *) = 0; // at 0x18
+        virtual UNKTYPE destroy() = 0; // at 0x1C
+        virtual UNKTYPE resizeForMBlock(void *, u32) = 0; // at 0x20
+        virtual UNKTYPE getAllocatableSize(s32) = 0; // at 0x24
+        virtual UNKTYPE adjust() = 0; // at 0x28
 
         static UNKTYPE initialize();
         static UNKTYPE alloc(u32, int, Heap *);

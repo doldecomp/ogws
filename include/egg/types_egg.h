@@ -12,6 +12,8 @@ namespace EGG
     struct Heap;
 
     struct Disposer;
+
+    struct Allocator;
 }
 
 #endif
