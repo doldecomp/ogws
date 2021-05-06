@@ -1,7 +1,58 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .sdata2, "a"
+.balign 0x8
+.global lbl_804C0A50
+lbl_804C0A50:
+	.long 0x43300000
+    .long 0x00000000
+.global lbl_804C0A58
+lbl_804C0A58:
+	.single 0e59.94 # NTSC framerate
+.global lbl_804C0A5C
+lbl_804C0A5C:
+	.single 0e50.0 # PAL50 framerate
 
+.section .rodata, "a"
+.balign 0x8
+# Not going to bother removing the .incbins here,
+# it is an array of GXRenderModeObj objects.
+.global gRMO_Ntsc_640x456IntDf_4x3__22$$2unnamed$$2eggVideo_cpp$$2
+gRMO_Ntsc_640x456IntDf_4x3__22$$2unnamed$$2eggVideo_cpp$$2:
+    .incbin "baserom.dol", 0x3769A8, 0x3C
+.global gRMO_Ntsc_640x456Prog_4x3__22$$2unnamed$$2eggVideo_cpp$$2
+gRMO_Ntsc_640x456Prog_4x3__22$$2unnamed$$2eggVideo_cpp$$2:
+    .incbin "baserom.dol", 0x3769E4, 0x3C
+.global gRMO_Pal50_640x456IntDf_4x3__22$$2unnamed$$2eggVideo_cpp$$2
+gRMO_Pal50_640x456IntDf_4x3__22$$2unnamed$$2eggVideo_cpp$$2:
+    .incbin "baserom.dol", 0x376A20, 0x3C
+.global gRMO_Pal60_640x456IntDf_4x3__22$$2unnamed$$2eggVideo_cpp$$2
+gRMO_Pal60_640x456IntDf_4x3__22$$2unnamed$$2eggVideo_cpp$$2:
+    .incbin "baserom.dol", 0x376A5C, 0x3C
+.global gRMO_Pal60_640x456Prog_4x3__22$$2unnamed$$2eggVideo_cpp$$2
+gRMO_Pal60_640x456Prog_4x3__22$$2unnamed$$2eggVideo_cpp$$2:
+    .incbin "baserom.dol", 0x376A98, 0x3C
+.global gRMO_Ntsc_640x456IntDf_16x9__22$$2unnamed$$2eggVideo_cpp$$2
+gRMO_Ntsc_640x456IntDf_16x9__22$$2unnamed$$2eggVideo_cpp$$2:
+    .incbin "baserom.dol", 0x376AD4, 0x3C
+.global gRMO_Ntsc_640x456Prog_16x9__22$$2unnamed$$2eggVideo_cpp$$2
+gRMO_Ntsc_640x456Prog_16x9__22$$2unnamed$$2eggVideo_cpp$$2:
+    .incbin "baserom.dol", 0x376B10, 0x3C
+.global gRMO_Pal50_640x456IntDf_16x9__22$$2unnamed$$2eggVideo_cpp$$2
+gRMO_Pal50_640x456IntDf_16x9__22$$2unnamed$$2eggVideo_cpp$$2:
+    .incbin "baserom.dol", 0x376B4C, 0x3C
+.global gRMO_Pal60_640x456IntDf_16x9__22$$2unnamed$$2eggVideo_cpp$$2
+gRMO_Pal60_640x456IntDf_16x9__22$$2unnamed$$2eggVideo_cpp$$2:
+    .incbin "baserom.dol", 0x376B88, 0x3C
+.global gRMO_Pal60_640x456Prog_16x9__22$$2unnamed$$2eggVideo_cpp$$2
+gRMO_Pal60_640x456Prog_16x9__22$$2unnamed$$2eggVideo_cpp$$2:
+    .incbin "baserom.dol", 0x376BC4, 0x3C
+# String pool placed after the render objs
+assertStrings:
+.string "eggVideo.cpp"
+.string "RenderMode is null"
+
+.section .text, "ax"
 .global initialize__Q23EGG5VideoFP16_GXRenderModeObj
 initialize__Q23EGG5VideoFP16_GXRenderModeObj:
 /* 800AA3A8 000A52A8  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -164,8 +215,8 @@ getStandardRenderModeObj__Q23EGG5VideoFv:
 /* 800AA5C4 000A54C4  7C 08 02 A6 */	mflr r0
 /* 800AA5C8 000A54C8  90 01 00 24 */	stw r0, 0x24(r1)
 /* 800AA5CC 000A54CC  BF 61 00 0C */	stmw r27, 0xc(r1)
-/* 800AA5D0 000A54D0  3F E0 80 38 */	lis r31, lbl_8037A8A8@ha
-/* 800AA5D4 000A54D4  3B FF A8 A8 */	addi r31, r31, lbl_8037A8A8@l
+/* 800AA5D0 000A54D0  3F E0 80 38 */	lis r31, gRMO_Ntsc_640x456IntDf_4x3__22$$2unnamed$$2eggVideo_cpp$$2@ha
+/* 800AA5D4 000A54D4  3B FF A8 A8 */	addi r31, r31, gRMO_Ntsc_640x456IntDf_4x3__22$$2unnamed$$2eggVideo_cpp$$2@l
 /* 800AA5D8 000A54D8  48 04 E5 25 */	bl func_800F8AFC
 /* 800AA5DC 000A54DC  54 63 06 3E */	clrlwi r3, r3, 0x18
 /* 800AA5E0 000A54E0  38 03 FF FF */	addi r0, r3, -1
