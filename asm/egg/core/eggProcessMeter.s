@@ -1,7 +1,97 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .sdata2, "a"
+.balign 0x8
+.global lbl_804C0A60
+lbl_804C0A60:
+	.single 0e0
+    .long 0 # Padding
+.global lbl_804C0A68
+lbl_804C0A68:
+	.long 0x43300000
+    .long 0x80000000
+.global lbl_804C0A70
+lbl_804C0A70:
+	.long 0x43300000
+    .long 0x00000000
+.global lbl_804C0A78
+lbl_804C0A78:
+	.single 0e1
+.global lbl_804C0A7C
+lbl_804C0A7C:
+	.single 0e5
+.global lbl_804C0A80
+lbl_804C0A80:
+	.single 0e90
+.global lbl_804C0A84
+lbl_804C0A84:
+	.single 0e2
+.global lbl_804C0A88
+lbl_804C0A88:
+	.single 0e-0.5
+.global lbl_804C0A8C
+lbl_804C0A8C:
+	.single 0e1000
+.global lbl_804C0A90
+lbl_804C0A90:
+	.single 0e100
 
+.section .data, "wa"
+.balign 0x8
+__vt__Q23EGG6Thread: # Local
+    .long 0
+    .long 0
+    .long 0x800abfb0
+    .long 0x800ab8b0
+    .long onEnter__Q23EGG6ThreadFv
+    .long onExit__Q23EGG6ThreadFv
+.global __vt__Q23EGG12ProcessMeter
+__vt__Q23EGG12ProcessMeter:
+    .long 0
+    .long 0
+    .long $$244$$2measureBeginFrame__Q23EGG12ProcessMeterFv
+    .long $$244$$2measureEndFrame__Q23EGG12ProcessMeterFv
+    .long $$244$$2measureBeginRender__Q23EGG12ProcessMeterFv
+    .long $$244$$2measureEndRender__Q23EGG12ProcessMeterFv
+    .long $$244$$2func_800AB864
+    .long func_800ABFAC
+    .long $$244$$2draw__Q23EGG12ProcessMeterFv
+    .long $$244$$2setVisible__Q23EGG12ProcessMeterFb
+    .long $$244$$2isVisible__Q23EGG12ProcessMeterFv
+    .long setVisible__Q23EGG12ProcessMeterFb
+    .long isVisible__Q23EGG12ProcessMeterFv
+    .long func_800AB864
+    .long measureBeginFrame__Q23EGG12ProcessMeterFv
+    .long measureEndFrame__Q23EGG12ProcessMeterFv
+    .long measureBeginRender__Q23EGG12ProcessMeterFv
+    .long measureEndRender__Q23EGG12ProcessMeterFv
+    .long draw__Q23EGG12ProcessMeterFv
+    .long 0
+.global __vt__Q33EGG12ProcessMeter12CpuGpMonitor
+__vt__Q33EGG12ProcessMeter12CpuGpMonitor:
+    .long 0
+    .long 0
+    .long func_800AB398
+    .long func_800AB3B4
+    .long measureBegin__Q33EGG12ProcessMeter12CpuGpMonitorFv
+    .long measureEnd__Q33EGG12ProcessMeter12CpuGpMonitorFv
+.global __vt__Q33EGG12ProcessMeter10CpuMonitor
+__vt__Q33EGG12ProcessMeter10CpuMonitor:
+    .long 0
+    .long 0
+    .long func_800ab220
+    .long func_800ab230
+    .long measureBegin__Q33EGG12ProcessMeter10CpuMonitorFv
+    .long measureEnd__Q33EGG12ProcessMeter10CpuMonitorFv
+
+.section .rodata, "a"
+.balign 0x8
+.global lbl_8037ABD0
+lbl_8037ABD0:
+	.string "eggProcessMeter.cpp"
+    .string "pGXThread->priority > 0"
+
+.section .text, "ax"
 # drawColor__29@unnamed@eggProcessMeter_cpp@FQ34nw4r2ut5Color
 .global drawColor__29$$2unnamed$$2eggProcessMeter_cpp$$2FQ34nw4r2ut5Color
 drawColor__29$$2unnamed$$2eggProcessMeter_cpp$$2FQ34nw4r2ut5Color:
@@ -49,10 +139,10 @@ __ct__Q33EGG12ProcessMeter10ProcessBarFQ34nw4r2ut5Colorff:
 __ct__Q33EGG12ProcessMeter10CpuMonitorFQ34nw4r2ut5Colorf:
 /* 800AB144 000A6044  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 800AB148 000A6048  7C 08 02 A6 */	mflr r0
-/* 800AB14C 000A604C  3C A0 80 3A */	lis r5, lbl_80398440@ha
+/* 800AB14C 000A604C  3C A0 80 3A */	lis r5, __vt__Q33EGG12ProcessMeter10CpuMonitor@ha
 /* 800AB150 000A6050  88 E4 00 00 */	lbz r7, 0(r4)
 /* 800AB154 000A6054  90 01 00 24 */	stw r0, 0x24(r1)
-/* 800AB158 000A6058  38 A5 84 40 */	addi r5, r5, lbl_80398440@l
+/* 800AB158 000A6058  38 A5 84 40 */	addi r5, r5, __vt__Q33EGG12ProcessMeter10CpuMonitor@l
 /* 800AB15C 000A605C  88 C4 00 01 */	lbz r6, 1(r4)
 /* 800AB160 000A6060  93 E1 00 1C */	stw r31, 0x1c(r1)
 /* 800AB164 000A6064  7C 7F 1B 78 */	mr r31, r3
@@ -109,10 +199,18 @@ lbl_800AB20C:
 /* 800AB214 000A6114  7C 08 03 A6 */	mtlr r0
 /* 800AB218 000A6118  38 21 00 10 */	addi r1, r1, 0x10
 /* 800AB21C 000A611C  4E 80 00 20 */	blr 
+
+# ! Functions like a CpuMonitor::show(), but no symbols for this exist.
+.global func_800ab220
+func_800ab220:
 /* 800AB220 000A6120  88 03 00 20 */	lbz r0, 0x20(r3)
 /* 800AB224 000A6124  54 00 06 3C */	rlwinm r0, r0, 0, 0x18, 0x1e
 /* 800AB228 000A6128  98 03 00 20 */	stb r0, 0x20(r3)
 /* 800AB22C 000A612C  4E 80 00 20 */	blr 
+
+# ! Functions like a CpuMonitor::hide(), but no symbols for this exist.
+.global func_800ab230
+func_800ab230:
 /* 800AB230 000A6130  88 03 00 20 */	lbz r0, 0x20(r3)
 /* 800AB234 000A6134  60 00 00 01 */	ori r0, r0, 1
 /* 800AB238 000A6138  98 03 00 20 */	stb r0, 0x20(r3)
@@ -140,9 +238,9 @@ __ct__Q33EGG12ProcessMeter12CpuGpMonitorFQ34nw4r2ut5ColorQ34nw4r2ut5Colorff:
 /* 800AB284 000A6184  98 C1 00 0E */	stb r6, 0xe(r1)
 /* 800AB288 000A6188  98 01 00 0F */	stb r0, 0xf(r1)
 /* 800AB28C 000A618C  4B FF FE B9 */	bl __ct__Q33EGG12ProcessMeter10CpuMonitorFQ34nw4r2ut5Colorf
-/* 800AB290 000A6190  3C 60 80 3A */	lis r3, lbl_80398428@ha
+/* 800AB290 000A6190  3C 60 80 3A */	lis r3, __vt__Q33EGG12ProcessMeter12CpuGpMonitor@ha
 /* 800AB294 000A6194  88 FF 00 00 */	lbz r7, 0(r31)
-/* 800AB298 000A6198  38 63 84 28 */	addi r3, r3, lbl_80398428@l
+/* 800AB298 000A6198  38 63 84 28 */	addi r3, r3, __vt__Q33EGG12ProcessMeter12CpuGpMonitor@l
 /* 800AB29C 000A619C  88 DF 00 01 */	lbz r6, 1(r31)
 /* 800AB2A0 000A61A0  90 7E 00 00 */	stw r3, 0(r30)
 /* 800AB2A4 000A61A4  FC 20 F8 90 */	fmr f1, f31
@@ -213,6 +311,10 @@ lbl_800AB378:
 /* 800AB38C 000A628C  7C 08 03 A6 */	mtlr r0
 /* 800AB390 000A6290  38 21 00 10 */	addi r1, r1, 0x10
 /* 800AB394 000A6294  4E 80 00 20 */	blr 
+
+# ! Functions like a CpuGpMonitor::show(), but no symbols for this exist.
+.global func_800AB398
+func_800AB398:
 /* 800AB398 000A6298  88 83 00 20 */	lbz r4, 0x20(r3)
 /* 800AB39C 000A629C  88 03 00 48 */	lbz r0, 0x48(r3)
 /* 800AB3A0 000A62A0  54 84 06 3C */	rlwinm r4, r4, 0, 0x18, 0x1e
@@ -220,6 +322,10 @@ lbl_800AB378:
 /* 800AB3A8 000A62A8  98 83 00 20 */	stb r4, 0x20(r3)
 /* 800AB3AC 000A62AC  98 03 00 48 */	stb r0, 0x48(r3)
 /* 800AB3B0 000A62B0  4E 80 00 20 */	blr 
+
+# ! Functions like a CpuGpMonitor::hide(), but no symbols for this exist.
+.global func_800AB3B4
+func_800AB3B4:
 /* 800AB3B4 000A62B4  88 83 00 20 */	lbz r4, 0x20(r3)
 /* 800AB3B8 000A62B8  88 03 00 48 */	lbz r0, 0x48(r3)
 /* 800AB3BC 000A62BC  60 84 00 01 */	ori r4, r4, 1
@@ -242,9 +348,9 @@ __ct__Q23EGG12ProcessMeterFb:
 /* 800AB3F4 000A62F4  7C 9E 23 78 */	mr r30, r4
 /* 800AB3F8 000A62F8  38 80 10 00 */	li r4, 0x1000
 /* 800AB3FC 000A62FC  4B FF 80 B9 */	bl __ct__Q23EGG6ThreadFUliiPQ23EGG4Heap
-/* 800AB400 000A6300  3C A0 80 3A */	lis r5, lbl_803983C0@ha
+/* 800AB400 000A6300  3C A0 80 3A */	lis r5, __vt__Q23EGG6Thread@ha
 /* 800AB404 000A6304  C0 42 90 5C */	lfs f2, lbl_804C0A7C-_SDA2_BASE_(r2)
-/* 800AB408 000A6308  38 A5 83 C0 */	addi r5, r5, lbl_803983C0@l
+/* 800AB408 000A6308  38 A5 83 C0 */	addi r5, r5, __vt__Q23EGG6Thread@l
 /* 800AB40C 000A630C  C0 22 90 60 */	lfs f1, lbl_804C0A80-_SDA2_BASE_(r2)
 /* 800AB410 000A6310  C0 02 90 58 */	lfs f0, lbl_804C0A78-_SDA2_BASE_(r2)
 /* 800AB414 000A6314  3C 60 CC CD */	lis r3, 0xCCCCCCFF@ha
@@ -1056,7 +1162,11 @@ drawSetting__Q23EGG12ProcessMeterFff:
 /* 800ABFA0 000A6EA0  7C 08 03 A6 */	mtlr r0
 /* 800ABFA4 000A6EA4  38 21 01 00 */	addi r1, r1, 0x100
 /* 800ABFA8 000A6EA8  4E 80 00 20 */	blr 
+
+.global func_800ABFAC
+func_800ABFAC:
 /* 800ABFAC 000A6EAC  4E 80 00 20 */	blr 
+
 /* 800ABFB0 000A6EB0  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 800ABFB4 000A6EB4  7C 08 02 A6 */	mflr r0
 /* 800ABFB8 000A6EB8  2C 03 00 00 */	cmpwi r3, 0

@@ -1,7 +1,5 @@
 .include "macros.inc"
 
-
-
 .section .data, "wa"
 .balign 0x8
 .global __vt__Q23EGG5Scene
