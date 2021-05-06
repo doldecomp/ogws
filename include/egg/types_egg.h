@@ -8,6 +8,10 @@ namespace EGG
     struct Matrix34f;
     struct Quatf;
     struct Vector3f;
+
+    struct Heap;
+
+    struct Disposer;
 }
 
 #endif

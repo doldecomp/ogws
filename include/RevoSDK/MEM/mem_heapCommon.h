@@ -5,6 +5,11 @@
 extern "C" {
 #endif
 
+struct MEMiHeapHead
+{
+
+};
+
 struct MEMHeap
 {
 	char UNK_0x0[0x1C];
