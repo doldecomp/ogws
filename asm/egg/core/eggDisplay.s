@@ -1,14 +1,45 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .sdata2, "a"
+.balign 0x8
+.global lbl_804C0A40
+lbl_804C0A40:
+    # 1,000,000
+	.single 0e1000000
+    .long 0 # Padding
+.global lbl_804C0A48
+lbl_804C0A48:
+	.long 0x43300000
+    .long 0x00000000
 
+.section .data, "wa"
+.balign 0x8
+.global __vt__Q23EGG7Display
+__vt__Q23EGG7Display:
+    .long 0
+    .long 0
+    .long beginFrame__Q23EGG7DisplayFv
+    .long beginRender__Q23EGG7DisplayFv
+    .long endRender__Q23EGG7DisplayFv
+    .long endFrame__Q23EGG7DisplayFv
+    .long getTickPerFrame__Q23EGG7DisplayFv
+    .long 0
+
+.section .rodata, "a"
+.balign 0x8
+.global lbl_8037A888
+lbl_8037A888:
+	.string "eggDisplay.cpp"
+    .string "pObj != NULL"
+
+.section .text, "ax"
 .global __ct__Q23EGG7DisplayFUc
 __ct__Q23EGG7DisplayFUc:
 /* 800A9FC0 000A4EC0  38 E0 00 00 */	li r7, 0
-/* 800A9FC4 000A4EC4  3D 00 80 3A */	lis r8, lbl_80398350@ha
+/* 800A9FC4 000A4EC4  3D 00 80 3A */	lis r8, __vt__Q23EGG7Display@ha
 /* 800A9FC8 000A4EC8  3C C0 80 81 */	lis r6, 0x808080FF@ha
 /* 800A9FCC 000A4ECC  3C A0 01 00 */	lis r5, 0x00FFFFFF@ha
-/* 800A9FD0 000A4ED0  39 08 83 50 */	addi r8, r8, lbl_80398350@l
+/* 800A9FD0 000A4ED0  39 08 83 50 */	addi r8, r8, __vt__Q23EGG7Display@l
 /* 800A9FD4 000A4ED4  60 E0 00 01 */	ori r0, r7, 1
 /* 800A9FD8 000A4ED8  38 C6 80 FF */	addi r6, r6, 0x808080FF@l
 /* 800A9FDC 000A4EDC  38 A5 FF FF */	addi r5, r5, 0x00FFFFFF@l
