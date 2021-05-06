@@ -13,7 +13,7 @@ namespace EGG
 
     }
 
-    UNKTYPE Allocator::alloc(u32 size)
+    UNKTYPE * Allocator::alloc(u32 size)
     {
         MEMAllocFromAllocator(this, size);
     }
