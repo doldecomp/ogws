@@ -1,7 +1,42 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .sdata, "wa"
+.balign 0x8
+.global sErrorRetry__Q23EGG9DvdRipper
+sErrorRetry__Q23EGG9DvdRipper:
+	.byte 0x01
 
+.section .data, "wa"
+.balign 0x8
+.global __vt__Q23EGG7DvdFile
+__vt__Q23EGG7DvdFile:
+    .long 0
+    .long 0
+    .long __dt__Q23EGG7DvdFileFv
+    .long open__Q23EGG7DvdFileFi
+    .long close__Q23EGG7DvdFileFv
+    .long readData__Q23EGG7DvdFileFPvll
+    .long writeData__Q23EGG7DvdFileFPCvll
+    .long getFileSize__Q23EGG7DvdFileCFv
+    .long open__Q23EGG7DvdFileFPCc
+    .long open__Q23EGG7DvdFileFiPv
+
+.section .bss, "wa"
+.balign 0x8
+.global sDvdList__Q23EGG7DvdFile
+sDvdList__Q23EGG7DvdFile:
+	.skip 0x10
+
+.section .rodata, "a"
+.balign 0x8
+.global lbl_8037AB50
+lbl_8037AB50:
+	.string "eggDvdRipper.cpp"
+    .string "heap allocation Failed: %d (heap %p)\n"
+    .string "readFailed : %d\n"
+    .string "read Header Failed\n"
+
+.section .text, "ax"
 .global loadToMainRAM__Q23EGG9DvdRipperFPCcPUcPQ23EGG4HeapQ33EGG9DvdRipper15EAllocDirectionUlPUlPUl
 loadToMainRAM__Q23EGG9DvdRipperFPCcPUcPQ23EGG4HeapQ33EGG9DvdRipper15EAllocDirectionUlPUlPUl:
 /* 800AA9B8 000A58B8  94 21 FF 00 */	stwu r1, -0x100(r1)
@@ -19,7 +54,7 @@ loadToMainRAM__Q23EGG9DvdRipperFPCcPUcPQ23EGG4HeapQ33EGG9DvdRipper15EAllocDirect
 /* 800AA9E8 000A58E8  48 00 02 7D */	bl __ct__Q23EGG7DvdFileFv
 /* 800AA9EC 000A58EC  7F 24 CB 78 */	mr r4, r25
 /* 800AA9F0 000A58F0  38 61 00 08 */	addi r3, r1, 8
-/* 800AA9F4 000A58F4  48 00 04 3D */	bl func_800AAE30
+/* 800AA9F4 000A58F4  48 00 04 3D */	bl open__Q23EGG7DvdFileFi
 /* 800AA9F8 000A58F8  2C 03 00 00 */	cmpwi r3, 0
 /* 800AA9FC 000A58FC  40 82 00 18 */	bne lbl_800AAA14
 /* 800AAA00 000A5900  38 61 00 08 */	addi r3, r1, 8
@@ -113,7 +148,7 @@ lbl_800AAB1C:
 /* 800AAB38 000A5A38  40 80 00 3C */	bge lbl_800AAB74
 /* 800AAB3C 000A5A3C  2C 03 FF FD */	cmpwi r3, -3
 /* 800AAB40 000A5A40  41 82 00 10 */	beq lbl_800AAB50
-/* 800AAB44 000A5A44  88 0D 81 88 */	lbz r0, lbl_804BD508-_SDA_BASE_(r13)
+/* 800AAB44 000A5A44  88 0D 81 88 */	lbz r0, sErrorRetry__Q23EGG9DvdRipper-_SDA_BASE_(r13)
 /* 800AAB48 000A5A48  2C 00 00 00 */	cmpwi r0, 0
 /* 800AAB4C 000A5A4C  40 82 00 20 */	bne lbl_800AAB6C
 lbl_800AAB50:
@@ -145,7 +180,7 @@ lbl_800AAB84:
 /* 800AABA0 000A5AA0  40 80 00 58 */	bge lbl_800AABF8
 /* 800AABA4 000A5AA4  2C 03 FF FD */	cmpwi r3, -3
 /* 800AABA8 000A5AA8  41 82 00 10 */	beq lbl_800AABB8
-/* 800AABAC 000A5AAC  88 0D 81 88 */	lbz r0, lbl_804BD508-_SDA_BASE_(r13)
+/* 800AABAC 000A5AAC  88 0D 81 88 */	lbz r0, sErrorRetry__Q23EGG9DvdRipper-_SDA_BASE_(r13)
 /* 800AABB0 000A5AB0  2C 00 00 00 */	cmpwi r0, 0
 /* 800AABB4 000A5AB4  40 82 00 3C */	bne lbl_800AABF0
 lbl_800AABB8:
@@ -190,15 +225,15 @@ initialize__Q23EGG7DvdFileFv:
 /* 800AAC24 000A5B24  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 800AAC28 000A5B28  7C 08 02 A6 */	mflr r0
 /* 800AAC2C 000A5B2C  90 01 00 14 */	stw r0, 0x14(r1)
-/* 800AAC30 000A5B30  88 0D 99 78 */	lbz r0, lbl_804BECF8-_SDA_BASE_(r13)
+/* 800AAC30 000A5B30  88 0D 99 78 */	lbz r0, sIsInitialized__Q23EGG7DvdFile-_SDA_BASE_(r13)
 /* 800AAC34 000A5B34  2C 00 00 00 */	cmpwi r0, 0
 /* 800AAC38 000A5B38  40 82 00 1C */	bne lbl_800AAC54
-/* 800AAC3C 000A5B3C  3C 60 80 41 */	lis r3, lbl_8040B900@ha
+/* 800AAC3C 000A5B3C  3C 60 80 41 */	lis r3, sDvdList__Q23EGG7DvdFile@ha
 /* 800AAC40 000A5B40  38 80 00 C8 */	li r4, 0xc8
-/* 800AAC44 000A5B44  38 63 B9 00 */	addi r3, r3, lbl_8040B900@l
+/* 800AAC44 000A5B44  38 63 B9 00 */	addi r3, r3, sDvdList__Q23EGG7DvdFile@l
 /* 800AAC48 000A5B48  4B F5 CA 99 */	bl List_Init__Q24nw4r2utFPQ34nw4r2ut4ListUs
 /* 800AAC4C 000A5B4C  38 00 00 01 */	li r0, 1
-/* 800AAC50 000A5B50  98 0D 99 78 */	stb r0, lbl_804BECF8-_SDA_BASE_(r13)
+/* 800AAC50 000A5B50  98 0D 99 78 */	stb r0, sIsInitialized__Q23EGG7DvdFile-_SDA_BASE_(r13)
 lbl_800AAC54:
 /* 800AAC54 000A5B54  80 01 00 14 */	lwz r0, 0x14(r1)
 /* 800AAC58 000A5B58  7C 08 03 A6 */	mtlr r0

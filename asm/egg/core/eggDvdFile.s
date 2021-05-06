@@ -1,14 +1,19 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .sbss, "wa"
+.balign 0x8
+.global sIsInitialized__Q23EGG7DvdFile
+sIsInitialized__Q23EGG7DvdFile:
+	.skip 0x8
 
+.section .text, "ax"
 .global __ct__Q23EGG7DvdFileFv
 __ct__Q23EGG7DvdFileFv:
 /* 800AAC64 000A5B64  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 800AAC68 000A5B68  7C 08 02 A6 */	mflr r0
-/* 800AAC6C 000A5B6C  3C 80 80 3A */	lis r4, lbl_80398370@ha
+/* 800AAC6C 000A5B6C  3C 80 80 3A */	lis r4, __vt__Q23EGG7DvdFile@ha
 /* 800AAC70 000A5B70  90 01 00 14 */	stw r0, 0x14(r1)
-/* 800AAC74 000A5B74  38 84 83 70 */	addi r4, r4, lbl_80398370@l
+/* 800AAC74 000A5B74  38 84 83 70 */	addi r4, r4, __vt__Q23EGG7DvdFile@l
 /* 800AAC78 000A5B78  93 E1 00 0C */	stw r31, 0xc(r1)
 /* 800AAC7C 000A5B7C  3B E0 00 00 */	li r31, 0
 /* 800AAC80 000A5B80  93 C1 00 08 */	stw r30, 8(r1)
@@ -49,8 +54,8 @@ __dt__Q23EGG7DvdFileFv:
 /* 800AAD00 000A5C00  93 C1 00 08 */	stw r30, 8(r1)
 /* 800AAD04 000A5C04  7C 7E 1B 78 */	mr r30, r3
 /* 800AAD08 000A5C08  41 82 00 2C */	beq lbl_800AAD34
-/* 800AAD0C 000A5C0C  3D 80 80 3A */	lis r12, lbl_80398370@ha
-/* 800AAD10 000A5C10  39 8C 83 70 */	addi r12, r12, lbl_80398370@l
+/* 800AAD0C 000A5C0C  3D 80 80 3A */	lis r12, __vt__Q23EGG7DvdFile@ha
+/* 800AAD10 000A5C10  39 8C 83 70 */	addi r12, r12, __vt__Q23EGG7DvdFile@l
 /* 800AAD14 000A5C14  91 83 00 00 */	stw r12, 0(r3)
 /* 800AAD18 000A5C18  81 8C 00 10 */	lwz r12, 0x10(r12)
 /* 800AAD1C 000A5C1C  7D 89 03 A6 */	mtctr r12
@@ -97,8 +102,8 @@ initiate__Q23EGG7DvdFileFv:
 /* 800AADB0 000A5CB0  38 21 00 10 */	addi r1, r1, 0x10
 /* 800AADB4 000A5CB4  4E 80 00 20 */	blr 
 
-.global open__Q23EGG7DvdFileFPi
-open__Q23EGG7DvdFileFPi:
+.global open__Q23EGG7DvdFileFPCc
+open__Q23EGG7DvdFileFPCc:
 /* 800AADB8 000A5CB8  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 800AADBC 000A5CBC  7C 08 02 A6 */	mflr r0
 /* 800AADC0 000A5CC0  90 01 00 14 */	stw r0, 0x14(r1)
@@ -117,9 +122,9 @@ open__Q23EGG7DvdFileFPi:
 /* 800AADF4 000A5CF4  54 00 0F FF */	rlwinm. r0, r0, 1, 0x1f, 0x1f
 /* 800AADF8 000A5CF8  98 1F 00 04 */	stb r0, 4(r31)
 /* 800AADFC 000A5CFC  41 82 00 1C */	beq lbl_800AAE18
-/* 800AAE00 000A5D00  3C 60 80 41 */	lis r3, lbl_8040B900@ha
+/* 800AAE00 000A5D00  3C 60 80 41 */	lis r3, sDvdList__Q23EGG7DvdFile@ha
 /* 800AAE04 000A5D04  7F E4 FB 78 */	mr r4, r31
-/* 800AAE08 000A5D08  38 63 B9 00 */	addi r3, r3, lbl_8040B900@l
+/* 800AAE08 000A5D08  38 63 B9 00 */	addi r3, r3, sDvdList__Q23EGG7DvdFile@l
 /* 800AAE0C 000A5D0C  4B F5 C8 ED */	bl List_Append__Q24nw4r2utFPQ34nw4r2ut4ListPv
 /* 800AAE10 000A5D10  38 7F 00 3C */	addi r3, r31, 0x3c
 /* 800AAE14 000A5D14  48 09 2D F9 */	bl func_8013DC0C
@@ -131,10 +136,9 @@ lbl_800AAE18:
 /* 800AAE28 000A5D28  38 21 00 10 */	addi r1, r1, 0x10
 /* 800AAE2C 000A5D2C  4E 80 00 20 */	blr 
 
-# func_800AAE30 -> open
-# Seems like an open overload?
-.global func_800AAE30
-func_800AAE30:
+# !!! UNVERIFIED SYMBOL (Wii Fit U) !!!
+.global open__Q23EGG7DvdFileFi
+open__Q23EGG7DvdFileFi:
 /* 800AAE30 000A5D30  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 800AAE34 000A5D34  7C 08 02 A6 */	mflr r0
 /* 800AAE38 000A5D38  90 01 00 14 */	stw r0, 0x14(r1)
@@ -154,10 +158,9 @@ func_800AAE30:
 /* 800AAE70 000A5D70  38 21 00 10 */	addi r1, r1, 0x10
 /* 800AAE74 000A5D74  4E 80 00 20 */	blr 
 
-# func_800AAE78 -> func_800AAE30 -> open
-# Seems like another open overload
-.global func_800AAE78
-func_800AAE78:
+# !!! UNVERIFIED SYMBOL (Wii Fit U) !!!
+.global open__Q23EGG7DvdFileFiPv
+open__Q23EGG7DvdFileFiPv:
 /* 800AAE78 000A5D78  81 83 00 00 */	lwz r12, 0(r3)
 /* 800AAE7C 000A5D7C  81 8C 00 0C */	lwz r12, 0xc(r12)
 /* 800AAE80 000A5D80  7D 89 03 A6 */	mtctr r12
@@ -178,10 +181,10 @@ close__Q23EGG7DvdFileFv:
 /* 800AAEB0 000A5DB0  2C 03 00 00 */	cmpwi r3, 0
 /* 800AAEB4 000A5DB4  41 82 00 1C */	beq lbl_800AAED0
 /* 800AAEB8 000A5DB8  38 00 00 00 */	li r0, 0
-/* 800AAEBC 000A5DBC  3C 60 80 41 */	lis r3, lbl_8040B900@ha
+/* 800AAEBC 000A5DBC  3C 60 80 41 */	lis r3, sDvdList__Q23EGG7DvdFile@ha
 /* 800AAEC0 000A5DC0  98 1F 00 04 */	stb r0, 4(r31)
 /* 800AAEC4 000A5DC4  7F E4 FB 78 */	mr r4, r31
-/* 800AAEC8 000A5DC8  38 63 B9 00 */	addi r3, r3, lbl_8040B900@l
+/* 800AAEC8 000A5DC8  38 63 B9 00 */	addi r3, r3, sDvdList__Q23EGG7DvdFile@l
 /* 800AAECC 000A5DCC  4B F5 C9 BD */	bl List_Remove__Q24nw4r2utFPQ34nw4r2ut4ListPv
 lbl_800AAED0:
 /* 800AAED0 000A5DD0  80 01 00 14 */	lwz r0, 0x14(r1)
