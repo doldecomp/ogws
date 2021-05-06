@@ -1,7 +1,6 @@
 .include "macros.inc"
 
 .section .text, "ax"
-
 .global attach__Q23EGG10XfbManagerFPQ23EGG3Xfb
 attach__Q23EGG10XfbManagerFPQ23EGG3Xfb:
 /* 800AA80C 000A570C  2C 04 00 00 */	cmpwi r4, 0
