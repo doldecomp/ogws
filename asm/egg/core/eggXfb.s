@@ -1,7 +1,15 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .rodata, "a"
+.balign 0x8
+.global lbl_8037AB20
+lbl_8037AB20:
+	.string "eggXfb.cpp"
+    .string "mBuffer"
+    .string "rm != NULL"
+    .string "video != NULL"
 
+.section .text, "ax"
 .global __ct__Q23EGG3XfbFPQ23EGG4Heap
 __ct__Q23EGG3XfbFPQ23EGG4Heap:
 /* 800AA708 000A5608  94 21 FF E0 */	stwu r1, -0x20(r1)
