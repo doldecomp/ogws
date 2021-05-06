@@ -1,14 +1,37 @@
 .include "macros.inc"
 
-.section .text, "ax"
 
+
+.section .data, "wa"
+.balign 0x8
+.global __vt__Q23EGG5Scene
+__vt__Q23EGG5Scene:
+    .long 0
+    .long 0
+    .long __dt__Q23EGG5SceneFv
+    .long calc__Q23EGG5SceneFv
+    .long draw__Q23EGG5SceneFv
+    .long enter__Q23EGG5SceneFv
+    .long exit__Q23EGG5SceneFv
+    .long reinit__Q23EGG5SceneFv
+    .long incoming_childDestroy__Q23EGG5SceneFv
+    .long outgoing_childCreate__Q23EGG5SceneFv
+
+.section .rodata, "a"
+.balign 0x8
+.global lbl_8037ABB0
+lbl_8037ABB0:
+	.string "eggScene.cpp"
+    .string "mHeap != NULL"
+
+.section .text, "ax"
 .global __ct__Q23EGG5SceneFv
 __ct__Q23EGG5SceneFv:
 /* 800AAFE4 000A5EE4  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 800AAFE8 000A5EE8  7C 08 02 A6 */	mflr r0
-/* 800AAFEC 000A5EEC  3C 80 80 3A */	lis r4, lbl_80398398@ha
+/* 800AAFEC 000A5EEC  3C 80 80 3A */	lis r4, __vt__Q23EGG5Scene@ha
 /* 800AAFF0 000A5EF0  90 01 00 14 */	stw r0, 0x14(r1)
-/* 800AAFF4 000A5EF4  38 84 83 98 */	addi r4, r4, lbl_80398398@l
+/* 800AAFF4 000A5EF4  38 84 83 98 */	addi r4, r4, __vt__Q23EGG5Scene@l
 /* 800AAFF8 000A5EF8  93 E1 00 0C */	stw r31, 0xc(r1)
 /* 800AAFFC 000A5EFC  7C 7F 1B 78 */	mr r31, r3
 /* 800AB000 000A5F00  90 83 00 00 */	stw r4, 0(r3)
