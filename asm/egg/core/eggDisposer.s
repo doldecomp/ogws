@@ -1,14 +1,22 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .data, "wa"
+.balign 0x8
+.global __vt__Q23EGG8Disposer
+__vt__Q23EGG8Disposer:
+    .long 0
+    .long 0
+    .long __dt__Q23EGG8DisposerFv
+    .long 0
 
+.section .text, "ax"
 .global __ct__Q23EGG8DisposerFv
 __ct__Q23EGG8DisposerFv:
 /* 800AC048 000A6F48  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 800AC04C 000A6F4C  7C 08 02 A6 */	mflr r0
-/* 800AC050 000A6F50  3C 80 80 3A */	lis r4, lbl_80398458@ha
+/* 800AC050 000A6F50  3C 80 80 3A */	lis r4, __vt__Q23EGG8Disposer@ha
 /* 800AC054 000A6F54  90 01 00 14 */	stw r0, 0x14(r1)
-/* 800AC058 000A6F58  38 84 84 58 */	addi r4, r4, lbl_80398458@l
+/* 800AC058 000A6F58  38 84 84 58 */	addi r4, r4, __vt__Q23EGG8Disposer@l
 /* 800AC05C 000A6F5C  93 E1 00 0C */	stw r31, 0xc(r1)
 /* 800AC060 000A6F60  7C 7F 1B 78 */	mr r31, r3
 /* 800AC064 000A6F64  90 83 00 00 */	stw r4, 0(r3)
@@ -39,8 +47,8 @@ __dt__Q23EGG8DisposerFv:
 /* 800AC0B8 000A6FB8  7C 7E 1B 78 */	mr r30, r3
 /* 800AC0BC 000A6FBC  41 82 00 38 */	beq lbl_800AC0F4
 /* 800AC0C0 000A6FC0  80 A3 00 04 */	lwz r5, 4(r3)
-/* 800AC0C4 000A6FC4  3C 80 80 3A */	lis r4, lbl_80398458@ha
-/* 800AC0C8 000A6FC8  38 84 84 58 */	addi r4, r4, lbl_80398458@l
+/* 800AC0C4 000A6FC4  3C 80 80 3A */	lis r4, __vt__Q23EGG8Disposer@ha
+/* 800AC0C8 000A6FC8  38 84 84 58 */	addi r4, r4, __vt__Q23EGG8Disposer@l
 /* 800AC0CC 000A6FCC  2C 05 00 00 */	cmpwi r5, 0
 /* 800AC0D0 000A6FD0  90 83 00 00 */	stw r4, 0(r3)
 /* 800AC0D4 000A6FD4  41 82 00 10 */	beq lbl_800AC0E4
