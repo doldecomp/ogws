@@ -14,6 +14,9 @@ namespace EGG
     struct Disposer;
 
     struct Allocator;
+
+    struct Xfb;
+    struct XfbManager;
 }
 
 #endif

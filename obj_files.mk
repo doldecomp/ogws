@@ -223,7 +223,7 @@ EGG_O_FILES := \
 	build/asm/egg/core/eggDisplay.o \
 	build/asm/egg/core/eggVideo.o \
 	build/asm/egg/core/eggXfb.o \
-	build/asm/egg/core/eggXfbManager.o \
+	build/egg/core/eggXfbManager.o \
 	build/asm/egg/core/eggDvdRipper.o \
 	build/asm/egg/core/eggDvdFile.o \
 	build/asm/egg/core/eggScene.o \

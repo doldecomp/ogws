@@ -20,14 +20,14 @@ sHeapOptionFlg__Q23EGG12SceneManager:
 	.skip 0x4
 # BBA's map mentions sHeapMem1_ForCreateScene__Q23EGG12SceneManager
 # and sHeapMem2_ForCreateScene__Q23EGG12SceneManager, but here there's three heaps(?)
-.global lbl_804BECDC
-lbl_804BECDC:
+.global sHeapMem1_ForCreateScene__Q23EGG12SceneManager
+sHeapMem1_ForCreateScene__Q23EGG12SceneManager:
 	.skip 0x4
-.global lbl_804BECE0
-lbl_804BECE0:
+.global sHeapMem2_ForCreateScene__Q23EGG12SceneManager
+sHeapMem2_ForCreateScene__Q23EGG12SceneManager:
 	.skip 0x4
-.global lbl_804BECE4
-lbl_804BECE4:
+.global sHeapDebug_ForCreateScene__Q23EGG12SceneManager
+sHeapDebug_ForCreateScene__Q23EGG12SceneManager:
 	.skip 0x4
 
 .section .data, "wa"
@@ -482,9 +482,9 @@ lbl_800A507C:
 /* 800A5094 0009FF94  7C 76 1B 78 */	mr r22, r3
 lbl_800A5098:
 /* 800A5098 0009FF98  2C 17 00 00 */	cmpwi r23, 0
-/* 800A509C 0009FF9C  93 2D 99 5C */	stw r25, lbl_804BECDC-_SDA_BASE_(r13)
-/* 800A50A0 0009FFA0  93 4D 99 60 */	stw r26, lbl_804BECE0-_SDA_BASE_(r13)
-/* 800A50A4 0009FFA4  92 CD 99 64 */	stw r22, lbl_804BECE4-_SDA_BASE_(r13)
+/* 800A509C 0009FF9C  93 2D 99 5C */	stw r25, sHeapMem1_ForCreateScene__Q23EGG12SceneManager-_SDA_BASE_(r13)
+/* 800A50A0 0009FFA0  93 4D 99 60 */	stw r26, sHeapMem2_ForCreateScene__Q23EGG12SceneManager-_SDA_BASE_(r13)
+/* 800A50A4 0009FFA4  92 CD 99 64 */	stw r22, sHeapDebug_ForCreateScene__Q23EGG12SceneManager-_SDA_BASE_(r13)
 /* 800A50A8 0009FFA8  41 82 00 14 */	beq lbl_800A50BC
 /* 800A50AC 0009FFAC  2C 19 00 00 */	cmpwi r25, 0
 /* 800A50B0 0009FFB0  41 82 00 0C */	beq lbl_800A50BC
@@ -764,7 +764,7 @@ lbl_800A544C:
 /* 800A546C 000A036C  7F A3 EB 78 */	mr r3, r29
 /* 800A5470 000A0370  4B FF FF 9D */	bl destroyScene__Q23EGG12SceneManagerFPQ23EGG5Scene
 lbl_800A5474:
-/* 800A5474 000A0374  48 03 8B C5 */	bl func_800DE038
+/* 800A5474 000A0374  48 03 8B C5 */	bl GXFlush
 /* 800A5478 000A0378  48 03 90 1D */	bl func_800DE494
 /* 800A547C 000A037C  80 1D 00 04 */	lwz r0, 4(r29)
 /* 800A5480 000A0380  83 FE 00 14 */	lwz r31, 0x14(r30)

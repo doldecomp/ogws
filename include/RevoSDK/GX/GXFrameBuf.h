@@ -53,6 +53,8 @@ struct _GXRenderModeObj
     u8 BYTE_0x38;
 };
 
+UNKTYPE GXCopyDisp(UNKTYPE *, u8);
+
 #ifdef __cplusplus
 }
 #endif
