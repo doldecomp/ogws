@@ -4,16 +4,16 @@
 
 namespace EGG
 {
-    UNKTYPE Quatf::setAxisRotation(const Vector3f &rVec, f32 f1)
+    UNKTYPE Quatf::setAxisRotation(const Vector3f &axis, f32 angle)
     {
-        f32 f1Half = f1 * 0.5f;
-        f32 rotCos = Math<f32>::cos(f1Half);
-        f32 rotSin = Math<f32>::sin(f1Half);
+        f32 angleHalf = angle * 0.5f;
+        f32 angleCos = Math<f32>::cos(angleHalf);
+        f32 angleSin = Math<f32>::sin(angleHalf);
 
-        w = rotCos;
-        z = rotSin * rVec.z;
-        f32 _y = rotSin * rVec.y;
-        x = rotSin * rVec.x;
+        w = angleCos;
+        z = angleSin * axis.z;
+        f32 _y = angleSin * axis.y;
+        x = angleSin * axis.x;
         y = _y;
     }
 }
