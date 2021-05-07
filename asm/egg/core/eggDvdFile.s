@@ -1,12 +1,38 @@
 .include "macros.inc"
 
+.section .bss, "wa"
+.balign 0x8
+.global sDvdList__Q23EGG7DvdFile
+sDvdList__Q23EGG7DvdFile:
+	.skip 0xC
+
 .section .sbss, "wa"
 .balign 0x8
 .global sIsInitialized__Q23EGG7DvdFile
 sIsInitialized__Q23EGG7DvdFile:
-	.skip 0x8
+	.skip 0x1
 
 .section .text, "ax"
+.global initialize__Q23EGG7DvdFileFv
+initialize__Q23EGG7DvdFileFv:
+/* 800AAC24 000A5B24  94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 800AAC28 000A5B28  7C 08 02 A6 */	mflr r0
+/* 800AAC2C 000A5B2C  90 01 00 14 */	stw r0, 0x14(r1)
+/* 800AAC30 000A5B30  88 0D 99 78 */	lbz r0, sIsInitialized__Q23EGG7DvdFile-_SDA_BASE_(r13)
+/* 800AAC34 000A5B34  2C 00 00 00 */	cmpwi r0, 0
+/* 800AAC38 000A5B38  40 82 00 1C */	bne lbl_800AAC54
+/* 800AAC3C 000A5B3C  3C 60 80 41 */	lis r3, sDvdList__Q23EGG7DvdFile@ha
+/* 800AAC40 000A5B40  38 80 00 C8 */	li r4, 0xc8
+/* 800AAC44 000A5B44  38 63 B9 00 */	addi r3, r3, sDvdList__Q23EGG7DvdFile@l
+/* 800AAC48 000A5B48  4B F5 CA 99 */	bl List_Init__Q24nw4r2utFPQ34nw4r2ut4ListUs
+/* 800AAC4C 000A5B4C  38 00 00 01 */	li r0, 1
+/* 800AAC50 000A5B50  98 0D 99 78 */	stb r0, sIsInitialized__Q23EGG7DvdFile-_SDA_BASE_(r13)
+lbl_800AAC54:
+/* 800AAC54 000A5B54  80 01 00 14 */	lwz r0, 0x14(r1)
+/* 800AAC58 000A5B58  7C 08 03 A6 */	mtlr r0
+/* 800AAC5C 000A5B5C  38 21 00 10 */	addi r1, r1, 0x10
+/* 800AAC60 000A5B60  4E 80 00 20 */	blr 
+
 .global __ct__Q23EGG7DvdFileFv
 __ct__Q23EGG7DvdFileFv:
 /* 800AAC64 000A5B64  94 21 FF F0 */	stwu r1, -0x10(r1)
