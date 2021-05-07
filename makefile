@@ -47,7 +47,7 @@ CFLAGS_TRK := -Cpp_exceptions off -proc gekko -fp hard -O4,s -i include/RevoSDK/
 # Compiler flags for NintendoWare for Revolution
 CFLAGS_NW4R := -lang c99 -enum int -inline auto -Cpp_exceptions off -RTTI off -proc gekko -fp hard -O4,p  -ir include/nw4r -I- -Iinclude -Iinclude/STL -ir include/RevoSDK -nodefaults
 # Compiler flags for EGG
-CFLAGS_EGG := -lang c99 -inline auto -Cpp_exceptions off -RTTI off -proc gekko -fp hard -O4,p  -ir include/egg -ir include/nw4r -I- -Iinclude -Iinclude/STL -ir include/RevoSDK -nodefaults -rostr -str pool
+CFLAGS_EGG := -lang c99 -enum int -inline auto -Cpp_exceptions off -RTTI off -proc gekko -fp hard -O4,p  -ir include/egg -ir include/nw4r -I- -Iinclude -Iinclude/STL -ir include/RevoSDK -nodefaults -rostr -str pool
 # Compiler flags for ARC
 CFLAGS_ARC := -lang c99 -enum int -O4,p -inline auto -ipa file -volatileasm -Cpp_exceptions off -RTTI off -proc gekko -fp hard -I- -Iinclude -Iinclude/STL -ir include/RevoSDK -nodefaults
 

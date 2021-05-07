@@ -6,21 +6,6 @@
 sErrorRetry__Q23EGG9DvdRipper:
 	.byte 0x01
 
-.section .data, "wa"
-.balign 0x8
-.global __vt__Q23EGG7DvdFile
-__vt__Q23EGG7DvdFile:
-    .long 0
-    .long 0
-    .long __dt__Q23EGG7DvdFileFv
-    .long open__Q23EGG7DvdFileFi
-    .long close__Q23EGG7DvdFileFv
-    .long readData__Q23EGG7DvdFileFPvll
-    .long writeData__Q23EGG7DvdFileFPCvll
-    .long getFileSize__Q23EGG7DvdFileCFv
-    .long open__Q23EGG7DvdFileFPCc
-    .long open__Q23EGG7DvdFileFiPv
-
 .section .rodata, "a"
 .balign 0x8
 .global lbl_8037AB50
@@ -48,7 +33,7 @@ loadToMainRAM__Q23EGG9DvdRipperFPCcPUcPQ23EGG4HeapQ33EGG9DvdRipper15EAllocDirect
 /* 800AA9E8 000A58E8  48 00 02 7D */	bl __ct__Q23EGG7DvdFileFv
 /* 800AA9EC 000A58EC  7F 24 CB 78 */	mr r4, r25
 /* 800AA9F0 000A58F0  38 61 00 08 */	addi r3, r1, 8
-/* 800AA9F4 000A58F4  48 00 04 3D */	bl open__Q23EGG7DvdFileFi
+/* 800AA9F4 000A58F4  48 00 04 3D */	bl open__Q23EGG7DvdFileFPCc
 /* 800AA9F8 000A58F8  2C 03 00 00 */	cmpwi r3, 0
 /* 800AA9FC 000A58FC  40 82 00 18 */	bne lbl_800AAA14
 /* 800AAA00 000A5900  38 61 00 08 */	addi r3, r1, 8

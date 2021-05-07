@@ -12,6 +12,21 @@ sDvdList__Q23EGG7DvdFile:
 sIsInitialized__Q23EGG7DvdFile:
 	.skip 0x1
 
+.section .data, "wa"
+.balign 0x8
+.global __vt__Q23EGG7DvdFile
+__vt__Q23EGG7DvdFile:
+    .long 0
+    .long 0
+    .long __dt__Q23EGG7DvdFileFv
+    .long open__Q23EGG7DvdFileFPCc
+    .long close__Q23EGG7DvdFileFv
+    .long readData__Q23EGG7DvdFileFPvll
+    .long writeData__Q23EGG7DvdFileFPCvll
+    .long getFileSize__Q23EGG7DvdFileCFv
+    .long open__Q23EGG7DvdFileFi
+    .long open__Q23EGG7DvdFileFPCcPv
+
 .section .text, "ax"
 .global initialize__Q23EGG7DvdFileFv
 initialize__Q23EGG7DvdFileFv:
@@ -128,8 +143,9 @@ initiate__Q23EGG7DvdFileFv:
 /* 800AADB0 000A5CB0  38 21 00 10 */	addi r1, r1, 0x10
 /* 800AADB4 000A5CB4  4E 80 00 20 */	blr 
 
-.global open__Q23EGG7DvdFileFPCc
-open__Q23EGG7DvdFileFPCc:
+# !!! UNVERIFIED SYMBOL (Wii Fit U) !!!
+.global open__Q23EGG7DvdFileFi
+open__Q23EGG7DvdFileFi:
 /* 800AADB8 000A5CB8  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 800AADBC 000A5CBC  7C 08 02 A6 */	mflr r0
 /* 800AADC0 000A5CC0  90 01 00 14 */	stw r0, 0x14(r1)
@@ -162,9 +178,8 @@ lbl_800AAE18:
 /* 800AAE28 000A5D28  38 21 00 10 */	addi r1, r1, 0x10
 /* 800AAE2C 000A5D2C  4E 80 00 20 */	blr 
 
-# !!! UNVERIFIED SYMBOL (Wii Fit U) !!!
-.global open__Q23EGG7DvdFileFi
-open__Q23EGG7DvdFileFi:
+.global open__Q23EGG7DvdFileFPCc
+open__Q23EGG7DvdFileFPCc:
 /* 800AAE30 000A5D30  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 800AAE34 000A5D34  7C 08 02 A6 */	mflr r0
 /* 800AAE38 000A5D38  90 01 00 14 */	stw r0, 0x14(r1)
@@ -184,9 +199,9 @@ open__Q23EGG7DvdFileFi:
 /* 800AAE70 000A5D70  38 21 00 10 */	addi r1, r1, 0x10
 /* 800AAE74 000A5D74  4E 80 00 20 */	blr 
 
-# !!! UNVERIFIED SYMBOL (Wii Fit U) !!!
-.global open__Q23EGG7DvdFileFiPv
-open__Q23EGG7DvdFileFiPv:
+# !!! Wii Fit U symbol !!!
+.global open__Q23EGG7DvdFileFPCcPv
+open__Q23EGG7DvdFileFPCcPv:
 /* 800AAE78 000A5D78  81 83 00 00 */	lwz r12, 0(r3)
 /* 800AAE7C 000A5D7C  81 8C 00 0C */	lwz r12, 0xc(r12)
 /* 800AAE80 000A5D80  7D 89 03 A6 */	mtctr r12
