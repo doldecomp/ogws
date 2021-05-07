@@ -241,7 +241,7 @@ EGG_O_FILES := \
 	build/asm/egg/audio/eggAudioSystem.o \
 	build/asm/egg/util/eggMsgRes.o \
 	build/asm/egg/util/eggEffect.o \
-	build/asm/egg/util/egg_800B1744.o \
+	build/asm/egg/util/eggException.o \
 
 GROUP_1_O_FILES := \
 	build/asm/data.o \
