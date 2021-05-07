@@ -1,7 +1,40 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .rodata, "a"
+.balign 0x8
+.global lbl_8037AC00
+lbl_8037AC00:
+    .string "eggArchive.cpp"
+	.string "arcBinary != NULL"
+    .string "archive != NULL"
+    .string "false"
+    .string "not mount this archive"
+    .string "openResult"
+    .string "param"
+    .string "/"
+    .string "(totalArray - 1) >= *numFiles_p"
+    .string "RestSizePathBuf >= NextDirNameLength"
+    .string "file"
+    .string "fileInfo"
 
+.section .data, "wa"
+.balign 0x8
+.global __vt__Q23EGG7Archive
+__vt__Q23EGG7Archive:
+    .long 0
+    .long 0
+    .long __dt__Q23EGG7ArchiveFv
+    .long 0
+    .long 0
+    .long 0
+
+.section .bss, "wa"
+.balign 0x8
+.global sArchiveList__Q23EGG7Archive
+sArchiveList__Q23EGG7Archive:
+	.skip 0x10
+
+.section .text, "ax"
 .global __dt__Q23EGG7ArchiveFv
 __dt__Q23EGG7ArchiveFv:
 /* 800AC110 000A7010  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -13,12 +46,12 @@ __dt__Q23EGG7ArchiveFv:
 /* 800AC128 000A7028  93 C1 00 08 */	stw r30, 8(r1)
 /* 800AC12C 000A702C  7C 7E 1B 78 */	mr r30, r3
 /* 800AC130 000A7030  41 82 00 3C */	beq lbl_800AC16C
-/* 800AC134 000A7034  3C C0 80 3A */	lis r6, lbl_80398468@ha
-/* 800AC138 000A7038  3C A0 80 41 */	lis r5, lbl_8040B910@ha
-/* 800AC13C 000A703C  38 C6 84 68 */	addi r6, r6, lbl_80398468@l
+/* 800AC134 000A7034  3C C0 80 3A */	lis r6, __vt__Q23EGG7Archive@ha
+/* 800AC138 000A7038  3C A0 80 41 */	lis r5, sArchiveList__Q23EGG7Archive@ha
+/* 800AC13C 000A703C  38 C6 84 68 */	addi r6, r6, __vt__Q23EGG7Archive@l
 /* 800AC140 000A7040  7F C4 F3 78 */	mr r4, r30
 /* 800AC144 000A7044  90 C3 00 00 */	stw r6, 0(r3)
-/* 800AC148 000A7048  38 65 B9 10 */	addi r3, r5, lbl_8040B910@l
+/* 800AC148 000A7048  38 65 B9 10 */	addi r3, r5, sArchiveList__Q23EGG7Archive@l
 /* 800AC14C 000A704C  4B F5 B7 3D */	bl List_Remove__Q24nw4r2utFPQ34nw4r2ut4ListPv
 /* 800AC150 000A7050  7F C3 F3 78 */	mr r3, r30
 /* 800AC154 000A7054  38 80 00 00 */	li r4, 0
@@ -84,9 +117,9 @@ lbl_800AC208:
 /* 800AC224 000A7124  7C 7E 1B 78 */	mr r30, r3
 /* 800AC228 000A7128  41 82 00 64 */	beq lbl_800AC28C
 /* 800AC22C 000A712C  4B FF FE 1D */	bl __ct__Q23EGG8DisposerFv
-/* 800AC230 000A7130  3C 60 80 3A */	lis r3, lbl_80398468@ha
+/* 800AC230 000A7130  3C 60 80 3A */	lis r3, __vt__Q23EGG7Archive@ha
 /* 800AC234 000A7134  3B E0 00 01 */	li r31, 1
-/* 800AC238 000A7138  38 63 84 68 */	addi r3, r3, lbl_80398468@l
+/* 800AC238 000A7138  38 63 84 68 */	addi r3, r3, __vt__Q23EGG7Archive@l
 /* 800AC23C 000A713C  38 00 00 00 */	li r0, 0
 /* 800AC240 000A7140  90 7E 00 00 */	stw r3, 0(r30)
 /* 800AC244 000A7144  38 7E 00 18 */	addi r3, r30, 0x18
@@ -98,15 +131,15 @@ lbl_800AC208:
 /* 800AC25C 000A715C  88 0D 99 80 */	lbz r0, lbl_804BED00-_SDA_BASE_(r13)
 /* 800AC260 000A7160  2C 00 00 00 */	cmpwi r0, 0
 /* 800AC264 000A7164  40 82 00 18 */	bne lbl_800AC27C
-/* 800AC268 000A7168  3C 60 80 41 */	lis r3, lbl_8040B910@ha
+/* 800AC268 000A7168  3C 60 80 41 */	lis r3, sArchiveList__Q23EGG7Archive@ha
 /* 800AC26C 000A716C  38 80 00 34 */	li r4, 0x34
-/* 800AC270 000A7170  38 63 B9 10 */	addi r3, r3, lbl_8040B910@l
+/* 800AC270 000A7170  38 63 B9 10 */	addi r3, r3, sArchiveList__Q23EGG7Archive@l
 /* 800AC274 000A7174  4B F5 B4 6D */	bl List_Init__Q24nw4r2utFPQ34nw4r2ut4ListUs
 /* 800AC278 000A7178  9B ED 99 80 */	stb r31, lbl_804BED00-_SDA_BASE_(r13)
 lbl_800AC27C:
-/* 800AC27C 000A717C  3C 60 80 41 */	lis r3, lbl_8040B910@ha
+/* 800AC27C 000A717C  3C 60 80 41 */	lis r3, sArchiveList__Q23EGG7Archive@ha
 /* 800AC280 000A7180  7F C4 F3 78 */	mr r4, r30
-/* 800AC284 000A7184  38 63 B9 10 */	addi r3, r3, lbl_8040B910@l
+/* 800AC284 000A7184  38 63 B9 10 */	addi r3, r3, sArchiveList__Q23EGG7Archive@l
 /* 800AC288 000A7188  4B F5 B4 71 */	bl List_Append__Q24nw4r2utFPQ34nw4r2ut4ListPv
 lbl_800AC28C:
 /* 800AC28C 000A718C  2C 1E 00 00 */	cmpwi r30, 0
