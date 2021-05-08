@@ -13,20 +13,20 @@ extern volatile union {
 	float f;
 } WGPIPE : 0xcc008000;
 
-struct _GXColor
+typedef struct _GXColor
 {
 	u8 r;
 	u8 g;
 	u8 b;
 	u8 a;
-};
+} GXColor;
 
-struct _GXTexObj
+typedef struct _GXTexObj
 {
 	char UNK_0x0[0x20];
-};
+} GXTexObj;
 
-enum _GXChannelID
+typedef enum _GXChannelID
 {
 	GX_CHANNEL_ID_0,
 	GX_CHANNEL_ID_1,
@@ -38,13 +38,13 @@ enum _GXChannelID
 	GX_CHANNEL_ID_7,
 	GX_CHANNEL_ID_8,
 	GX_CHANNEL_ID_INVALID = 0xFF
-};
+} GXChannelID;
 
 static void GXEnd(void) {}
 
 extern UNKTYPE GXBegin(UNKWORD, UNKWORD, UNKWORD);
 
-extern UNKTYPE GXSetFog(int, struct _GXColor, float, float, float, float);
+extern UNKTYPE GXSetFog(int, GXColor, float, float, float, float);
 extern UNKTYPE GXInitFogAdjTable(u16 *, u16, const float (*)[4]);
 extern UNKTYPE GXSetFogRangeAdj(u8, u16, u16 *);
 extern UNKTYPE GXSetTevSwapModeTable(UNKWORD, UNKWORD, UNKWORD, UNKWORD, UNKWORD);
@@ -61,7 +61,7 @@ extern UNKTYPE GXSetTevSwapMode(UNKWORD, UNKWORD, UNKWORD);
 extern UNKTYPE GXSetTevOrder(UNKWORD, UNKWORD, UNKWORD, UNKWORD);
 extern UNKTYPE GXSetBlendMode(UNKWORD, UNKWORD, UNKWORD, UNKWORD);
 extern UNKTYPE GXSetTexCoordGen2(UNKWORD, UNKWORD, UNKWORD, UNKWORD, UNKWORD, UNKWORD);
-extern UNKTYPE GXSetTevColor(UNKWORD, _GXColor);
+extern UNKTYPE GXSetTevColor(UNKWORD, GXColor);
 extern UNKTYPE GXSetTevColorIn(UNKWORD, UNKWORD, UNKWORD, UNKWORD, UNKWORD);
 extern UNKTYPE GXSetTevAlphaIn(UNKWORD, UNKWORD, UNKWORD, UNKWORD, UNKWORD);
 extern UNKTYPE GXSetTevColorOp(UNKWORD, UNKWORD, UNKWORD, UNKWORD, UNKWORD, UNKWORD);
@@ -71,9 +71,9 @@ extern UNKTYPE GXClearVtxDesc(UNKTYPE);
 extern UNKTYPE GXSetVtxDesc(UNKWORD, UNKWORD);
 extern UNKTYPE GXSetTevOp(UNKWORD, UNKWORD);
 
-extern UNKTYPE GXInitTexObj(_GXTexObj *, u8 *, UNKWORD, UNKWORD, UNKWORD, UNKWORD, UNKWORD, UNKWORD);
-extern UNKTYPE GXInitTexObjLOD(_GXTexObj *, int, int, UNKWORD, UNKWORD, UNKWORD, float, float, float);
-extern UNKTYPE GXLoadTexObj(_GXTexObj *, UNKWORD);
+extern UNKTYPE GXInitTexObj(GXTexObj *, u8 *, UNKWORD, UNKWORD, UNKWORD, UNKWORD, UNKWORD, UNKWORD);
+extern UNKTYPE GXInitTexObjLOD(GXTexObj *, int, int, UNKWORD, UNKWORD, UNKWORD, float, float, float);
+extern UNKTYPE GXLoadTexObj(GXTexObj *, UNKWORD);
 
 #ifdef __cplusplus
 }

@@ -19,6 +19,16 @@ namespace nw4r
 				
 				inline FilePosition() : mFileSize(), mFileOffset() {}
 				
+				inline u32 Tell() const
+				{
+					return mFileOffset;
+				}
+
+				inline u32 GetFileSize() const
+				{
+					return mFileSize;
+				}
+
 				inline void SetFileSize(u32 fileSize)
 				{
 					mFileSize = fileSize;

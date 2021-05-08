@@ -8,8 +8,8 @@ namespace nw4r
     {
         namespace G3DState
         {
-            _GXRenderModeObj& GetRenderModeObj();
-            UNKTYPE SetRenderModeObj(const _GXRenderModeObj&);
+            GXRenderModeObj& GetRenderModeObj();
+            UNKTYPE SetRenderModeObj(const GXRenderModeObj&);
         }
     }
 }

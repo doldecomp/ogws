@@ -1,0 +1,47 @@
+.include "macros.inc"
+
+.section .text, "ax"
+
+.global createSoundHeap__Q23EGG12SoundHeapMgrFPQ23EGG9AllocatorUl
+createSoundHeap__Q23EGG12SoundHeapMgrFPQ23EGG9AllocatorUl:
+/* 800B0AFC 000AB9FC  94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 800B0B00 000ABA00  7C 08 02 A6 */	mflr r0
+/* 800B0B04 000ABA04  90 01 00 14 */	stw r0, 0x14(r1)
+/* 800B0B08 000ABA08  93 E1 00 0C */	stw r31, 0xc(r1)
+/* 800B0B0C 000ABA0C  7C BF 2B 78 */	mr r31, r5
+/* 800B0B10 000ABA10  93 C1 00 08 */	stw r30, 8(r1)
+/* 800B0B14 000ABA14  7C 7E 1B 78 */	mr r30, r3
+/* 800B0B18 000ABA18  80 03 00 20 */	lwz r0, 0x20(r3)
+/* 800B0B1C 000ABA1C  2C 00 00 00 */	cmpwi r0, 0
+/* 800B0B20 000ABA20  40 82 00 50 */	bne lbl_800B0B70
+/* 800B0B24 000ABA24  7C 83 23 78 */	mr r3, r4
+/* 800B0B28 000ABA28  7F E4 FB 78 */	mr r4, r31
+/* 800B0B2C 000ABA2C  81 83 00 10 */	lwz r12, 0x10(r3)
+/* 800B0B30 000ABA30  81 8C 00 0C */	lwz r12, 0xc(r12)
+/* 800B0B34 000ABA34  7D 89 03 A6 */	mtctr r12
+/* 800B0B38 000ABA38  4E 80 04 21 */	bctrl 
+/* 800B0B3C 000ABA3C  7C 64 1B 78 */	mr r4, r3
+/* 800B0B40 000ABA40  7F E5 FB 78 */	mr r5, r31
+/* 800B0B44 000ABA44  38 7E 00 04 */	addi r3, r30, 4
+/* 800B0B48 000ABA48  4B F9 51 1D */	bl Create__Q34nw4r3snd9SoundHeapFPvUl
+/* 800B0B4C 000ABA4C  80 1E 00 20 */	lwz r0, 0x20(r30)
+/* 800B0B50 000ABA50  2C 00 00 00 */	cmpwi r0, 0
+/* 800B0B54 000ABA54  40 82 00 1C */	bne lbl_800B0B70
+/* 800B0B58 000ABA58  3C 60 80 38 */	lis r3, lbl_8037B0C0@ha
+/* 800B0B5C 000ABA5C  38 80 00 3B */	li r4, 0x3b
+/* 800B0B60 000ABA60  38 63 B0 C0 */	addi r3, r3, lbl_8037B0C0@l
+/* 800B0B64 000ABA64  38 A3 00 14 */	addi r5, r3, 0x14
+/* 800B0B68 000ABA68  4C C6 31 82 */	crclr 6
+/* 800B0B6C 000ABA6C  4B FF 13 9D */	bl system_halt
+lbl_800B0B70:
+/* 800B0B70 000ABA70  80 01 00 14 */	lwz r0, 0x14(r1)
+/* 800B0B74 000ABA74  83 E1 00 0C */	lwz r31, 0xc(r1)
+/* 800B0B78 000ABA78  83 C1 00 08 */	lwz r30, 8(r1)
+/* 800B0B7C 000ABA7C  7C 08 03 A6 */	mtlr r0
+/* 800B0B80 000ABA80  38 21 00 10 */	addi r1, r1, 0x10
+/* 800B0B84 000ABA84  4E 80 00 20 */	blr 
+
+.global destroySoundHeap__Q23EGG12SoundHeapMgrFv
+destroySoundHeap__Q23EGG12SoundHeapMgrFv:
+/* 800B0B88 000ABA88  38 63 00 04 */	addi r3, r3, 4
+/* 800B0B8C 000ABA8C  4B F9 50 E0 */	b Destroy__Q34nw4r3snd9SoundHeapFv

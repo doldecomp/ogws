@@ -14,7 +14,7 @@ namespace nw4r
 
         void Camera::Init()
         {
-            _GXRenderModeObj& rRenderMode = G3DState::GetRenderModeObj();
+            GXRenderModeObj& rRenderMode = G3DState::GetRenderModeObj();
             Init(rRenderMode.SHORT_0x4, rRenderMode.SHORT_0x6, rRenderMode.SHORT_0x4,
                 rRenderMode.SHORT_0x8, rRenderMode.SHORT_0xE, rRenderMode.SHORT_0x10);
         }
@@ -375,7 +375,7 @@ namespace nw4r
 
             if (mCamData.IsValid())
             {
-                _GXRenderModeObj& rRenderMode = G3DState::GetRenderModeObj();
+                GXRenderModeObj& rRenderMode = G3DState::GetRenderModeObj();
                 if (rRenderMode.BYTE_0x18)
                 {
                     ::GXSetViewportJitter(rCamData.FLOAT_0xDC, rCamData.FLOAT_0xE0, rCamData.FLOAT_0xE4,

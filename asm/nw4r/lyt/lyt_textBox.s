@@ -1,5 +1,8 @@
 .include "macros.inc"
 
+.section .ctors, "a"
+.4byte __sinit_$$3lyt_textBox_cpp
+
 .section .sdata2, "a"
 .global lbl_804C04A0
 lbl_804C04A0:
@@ -253,7 +256,7 @@ lbl_8007B978:
 /* 8007B9A4 000768A4  41 82 00 44 */	beq lbl_8007B9E8
 /* 8007B9A8 000768A8  80 6D 98 00 */	lwz r3, mspAllocator__Q34nw4r3lyt6Layout-_SDA_BASE_(r13)
 /* 8007B9AC 000768AC  38 80 00 18 */	li r4, 0x18
-/* 8007B9B0 000768B0  48 06 BA DD */	bl func_800E748C
+/* 8007B9B0 000768B0  48 06 BA DD */	bl MEMAllocFromAllocator
 /* 8007B9B4 000768B4  2C 03 00 00 */	cmpwi r3, 0
 /* 8007B9B8 000768B8  41 82 00 30 */	beq lbl_8007B9E8
 /* 8007B9BC 000768BC  7C 7F 1B 78 */	mr r31, r3
@@ -271,7 +274,7 @@ lbl_8007B9CC:
 lbl_8007B9E8:
 /* 8007B9E8 000768E8  80 6D 98 00 */	lwz r3, mspAllocator__Q34nw4r3lyt6Layout-_SDA_BASE_(r13)
 /* 8007B9EC 000768EC  38 80 00 5C */	li r4, 0x5c
-/* 8007B9F0 000768F0  48 06 BA 9D */	bl func_800E748C
+/* 8007B9F0 000768F0  48 06 BA 9D */	bl MEMAllocFromAllocator
 /* 8007B9F4 000768F4  2C 03 00 00 */	cmpwi r3, 0
 /* 8007B9F8 000768F8  41 82 00 2C */	beq lbl_8007BA24
 /* 8007B9FC 000768FC  A0 1D 00 50 */	lhz r0, 0x50(r29)
@@ -319,7 +322,7 @@ __dt__Q34nw4r3lyt7TextBoxFv:
 /* 8007BA90 00076990  4E 80 04 21 */	bctrl 
 /* 8007BA94 00076994  80 6D 98 00 */	lwz r3, mspAllocator__Q34nw4r3lyt6Layout-_SDA_BASE_(r13)
 /* 8007BA98 00076998  80 9E 00 E0 */	lwz r4, 0xe0(r30)
-/* 8007BA9C 0007699C  48 06 BA 01 */	bl func_800E749C
+/* 8007BA9C 0007699C  48 06 BA 01 */	bl MEMFreeToAllocator
 /* 8007BAA0 000769A0  88 1E 00 FD */	lbz r0, 0xfd(r30)
 /* 8007BAA4 000769A4  54 00 06 6E */	rlwinm r0, r0, 0, 0x19, 0x17
 /* 8007BAA8 000769A8  98 1E 00 FD */	stb r0, 0xfd(r30)
@@ -368,7 +371,7 @@ lbl_8007BB20:
 /* 8007BB48 00076A48  4E 80 04 21 */	bctrl 
 /* 8007BB4C 00076A4C  80 6D 98 00 */	lwz r3, mspAllocator__Q34nw4r3lyt6Layout-_SDA_BASE_(r13)
 /* 8007BB50 00076A50  80 9E 00 28 */	lwz r4, 0x28(r30)
-/* 8007BB54 00076A54  48 06 B9 49 */	bl func_800E749C
+/* 8007BB54 00076A54  48 06 B9 49 */	bl MEMFreeToAllocator
 /* 8007BB58 00076A58  38 00 00 00 */	li r0, 0
 /* 8007BB5C 00076A5C  90 1E 00 28 */	stw r0, 0x28(r30)
 lbl_8007BB60:
@@ -677,7 +680,7 @@ AllocStringBuffer__Q34nw4r3lyt7TextBoxFUs:
 /* 8007BF8C 00076E8C  4E 80 04 21 */	bctrl 
 /* 8007BF90 00076E90  80 6D 98 00 */	lwz r3, mspAllocator__Q34nw4r3lyt6Layout-_SDA_BASE_(r13)
 /* 8007BF94 00076E94  7F E4 FB 78 */	mr r4, r31
-/* 8007BF98 00076E98  48 06 B4 F5 */	bl func_800E748C
+/* 8007BF98 00076E98  48 06 B4 F5 */	bl MEMAllocFromAllocator
 /* 8007BF9C 00076E9C  2C 03 00 00 */	cmpwi r3, 0
 /* 8007BFA0 00076EA0  90 7E 00 D4 */	stw r3, 0xd4(r30)
 /* 8007BFA4 00076EA4  41 82 00 08 */	beq lbl_8007BFAC
@@ -701,7 +704,7 @@ FreeStringBuffer__Q34nw4r3lyt7TextBoxFv:
 /* 8007BFDC 00076EDC  2C 04 00 00 */	cmpwi r4, 0
 /* 8007BFE0 00076EE0  41 82 00 18 */	beq lbl_8007BFF8
 /* 8007BFE4 00076EE4  80 6D 98 00 */	lwz r3, mspAllocator__Q34nw4r3lyt6Layout-_SDA_BASE_(r13)
-/* 8007BFE8 00076EE8  48 06 B4 B5 */	bl func_800E749C
+/* 8007BFE8 00076EE8  48 06 B4 B5 */	bl MEMFreeToAllocator
 /* 8007BFEC 00076EEC  38 00 00 00 */	li r0, 0
 /* 8007BFF0 00076EF0  90 1F 00 D4 */	stw r0, 0xd4(r31)
 /* 8007BFF4 00076EF4  B0 1F 00 F8 */	sth r0, 0xf8(r31)

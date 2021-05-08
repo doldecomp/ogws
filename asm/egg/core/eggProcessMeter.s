@@ -1,0 +1,1240 @@
+.include "macros.inc"
+
+.section .sdata2, "a"
+.balign 0x8
+.global lbl_804C0A60
+lbl_804C0A60:
+	.single 0e0
+    .long 0 # Padding
+.global lbl_804C0A68
+lbl_804C0A68:
+	.long 0x43300000
+    .long 0x80000000
+.global lbl_804C0A70
+lbl_804C0A70:
+	.long 0x43300000
+    .long 0x00000000
+.global lbl_804C0A78
+lbl_804C0A78:
+	.single 0e1
+.global lbl_804C0A7C
+lbl_804C0A7C:
+	.single 0e5
+.global lbl_804C0A80
+lbl_804C0A80:
+	.single 0e90
+.global lbl_804C0A84
+lbl_804C0A84:
+	.single 0e2
+.global lbl_804C0A88
+lbl_804C0A88:
+	.single 0e-0.5
+.global lbl_804C0A8C
+lbl_804C0A8C:
+	.single 0e1000
+.global lbl_804C0A90
+lbl_804C0A90:
+	.single 0e100
+
+.section .data, "wa"
+.balign 0x8
+__vt__Q23EGG6Thread: # Local
+    .long 0
+    .long 0
+    .long 0x800abfb0
+    .long 0x800ab8b0
+    .long onEnter__Q23EGG6ThreadFv
+    .long onExit__Q23EGG6ThreadFv
+.global __vt__Q23EGG12ProcessMeter
+__vt__Q23EGG12ProcessMeter:
+    .long 0
+    .long 0
+    .long $$244$$2measureBeginFrame__Q23EGG12ProcessMeterFv
+    .long $$244$$2measureEndFrame__Q23EGG12ProcessMeterFv
+    .long $$244$$2measureBeginRender__Q23EGG12ProcessMeterFv
+    .long $$244$$2measureEndRender__Q23EGG12ProcessMeterFv
+    .long $$244$$2func_800AB864
+    .long func_800ABFAC
+    .long $$244$$2draw__Q23EGG12ProcessMeterFv
+    .long $$244$$2setVisible__Q23EGG12ProcessMeterFb
+    .long $$244$$2isVisible__Q23EGG12ProcessMeterFv
+    .long setVisible__Q23EGG12ProcessMeterFb
+    .long isVisible__Q23EGG12ProcessMeterFv
+    .long func_800AB864
+    .long measureBeginFrame__Q23EGG12ProcessMeterFv
+    .long measureEndFrame__Q23EGG12ProcessMeterFv
+    .long measureBeginRender__Q23EGG12ProcessMeterFv
+    .long measureEndRender__Q23EGG12ProcessMeterFv
+    .long draw__Q23EGG12ProcessMeterFv
+    .long 0
+.global __vt__Q33EGG12ProcessMeter12CpuGpMonitor
+__vt__Q33EGG12ProcessMeter12CpuGpMonitor:
+    .long 0
+    .long 0
+    .long func_800AB398
+    .long func_800AB3B4
+    .long measureBegin__Q33EGG12ProcessMeter12CpuGpMonitorFv
+    .long measureEnd__Q33EGG12ProcessMeter12CpuGpMonitorFv
+.global __vt__Q33EGG12ProcessMeter10CpuMonitor
+__vt__Q33EGG12ProcessMeter10CpuMonitor:
+    .long 0
+    .long 0
+    .long func_800ab220
+    .long func_800ab230
+    .long measureBegin__Q33EGG12ProcessMeter10CpuMonitorFv
+    .long measureEnd__Q33EGG12ProcessMeter10CpuMonitorFv
+
+.section .rodata, "a"
+.balign 0x8
+.global lbl_8037ABD0
+lbl_8037ABD0:
+	.string "eggProcessMeter.cpp"
+    .string "pGXThread->priority > 0"
+
+.section .text, "ax"
+# drawColor__29@unnamed@eggProcessMeter_cpp@FQ34nw4r2ut5Color
+.global drawColor__29$$2unnamed$$2eggProcessMeter_cpp$$2FQ34nw4r2ut5Color
+drawColor__29$$2unnamed$$2eggProcessMeter_cpp$$2FQ34nw4r2ut5Color:
+/* 800AB0B4 000A5FB4  94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 800AB0B8 000A5FB8  7C 08 02 A6 */	mflr r0
+/* 800AB0BC 000A5FBC  88 E3 00 00 */	lbz r7, 0(r3)
+/* 800AB0C0 000A5FC0  90 01 00 14 */	stw r0, 0x14(r1)
+/* 800AB0C4 000A5FC4  38 81 00 08 */	addi r4, r1, 8
+/* 800AB0C8 000A5FC8  88 C3 00 01 */	lbz r6, 1(r3)
+/* 800AB0CC 000A5FCC  88 A3 00 02 */	lbz r5, 2(r3)
+/* 800AB0D0 000A5FD0  88 03 00 03 */	lbz r0, 3(r3)
+/* 800AB0D4 000A5FD4  38 60 00 04 */	li r3, 4
+/* 800AB0D8 000A5FD8  98 E1 00 08 */	stb r7, 8(r1)
+/* 800AB0DC 000A5FDC  98 C1 00 09 */	stb r6, 9(r1)
+/* 800AB0E0 000A5FE0  98 A1 00 0A */	stb r5, 0xa(r1)
+/* 800AB0E4 000A5FE4  98 01 00 0B */	stb r0, 0xb(r1)
+/* 800AB0E8 000A5FE8  48 03 4D A9 */	bl func_800DFE90
+/* 800AB0EC 000A5FEC  80 01 00 14 */	lwz r0, 0x14(r1)
+/* 800AB0F0 000A5FF0  7C 08 03 A6 */	mtlr r0
+/* 800AB0F4 000A5FF4  38 21 00 10 */	addi r1, r1, 0x10
+/* 800AB0F8 000A5FF8  4E 80 00 20 */	blr 
+
+.global __ct__Q33EGG12ProcessMeter10ProcessBarFQ34nw4r2ut5Colorff
+__ct__Q33EGG12ProcessMeter10ProcessBarFQ34nw4r2ut5Colorff:
+/* 800AB0FC 000A5FFC  C0 02 90 40 */	lfs f0, lbl_804C0A60-_SDA2_BASE_(r2)
+/* 800AB100 000A6000  39 00 00 00 */	li r8, 0
+/* 800AB104 000A6004  88 E4 00 00 */	lbz r7, 0(r4)
+/* 800AB108 000A6008  88 C4 00 01 */	lbz r6, 1(r4)
+/* 800AB10C 000A600C  88 A4 00 02 */	lbz r5, 2(r4)
+/* 800AB110 000A6010  88 04 00 03 */	lbz r0, 3(r4)
+/* 800AB114 000A6014  D0 03 00 00 */	stfs f0, 0(r3)
+/* 800AB118 000A6018  D0 03 00 04 */	stfs f0, 4(r3)
+/* 800AB11C 000A601C  91 03 00 08 */	stw r8, 8(r3)
+/* 800AB120 000A6020  91 03 00 0C */	stw r8, 0xc(r3)
+/* 800AB124 000A6024  98 E3 00 10 */	stb r7, 0x10(r3)
+/* 800AB128 000A6028  98 C3 00 11 */	stb r6, 0x11(r3)
+/* 800AB12C 000A602C  98 A3 00 12 */	stb r5, 0x12(r3)
+/* 800AB130 000A6030  98 03 00 13 */	stb r0, 0x13(r3)
+/* 800AB134 000A6034  D0 23 00 14 */	stfs f1, 0x14(r3)
+/* 800AB138 000A6038  D0 43 00 18 */	stfs f2, 0x18(r3)
+/* 800AB13C 000A603C  99 03 00 1C */	stb r8, 0x1c(r3)
+/* 800AB140 000A6040  4E 80 00 20 */	blr 
+
+.global __ct__Q33EGG12ProcessMeter10CpuMonitorFQ34nw4r2ut5Colorf
+__ct__Q33EGG12ProcessMeter10CpuMonitorFQ34nw4r2ut5Colorf:
+/* 800AB144 000A6044  94 21 FF E0 */	stwu r1, -0x20(r1)
+/* 800AB148 000A6048  7C 08 02 A6 */	mflr r0
+/* 800AB14C 000A604C  3C A0 80 3A */	lis r5, __vt__Q33EGG12ProcessMeter10CpuMonitor@ha
+/* 800AB150 000A6050  88 E4 00 00 */	lbz r7, 0(r4)
+/* 800AB154 000A6054  90 01 00 24 */	stw r0, 0x24(r1)
+/* 800AB158 000A6058  38 A5 84 40 */	addi r5, r5, __vt__Q33EGG12ProcessMeter10CpuMonitor@l
+/* 800AB15C 000A605C  88 C4 00 01 */	lbz r6, 1(r4)
+/* 800AB160 000A6060  93 E1 00 1C */	stw r31, 0x1c(r1)
+/* 800AB164 000A6064  7C 7F 1B 78 */	mr r31, r3
+/* 800AB168 000A6068  88 04 00 03 */	lbz r0, 3(r4)
+/* 800AB16C 000A606C  90 A3 00 00 */	stw r5, 0(r3)
+/* 800AB170 000A6070  38 63 00 04 */	addi r3, r3, 4
+/* 800AB174 000A6074  88 A4 00 02 */	lbz r5, 2(r4)
+/* 800AB178 000A6078  38 81 00 08 */	addi r4, r1, 8
+/* 800AB17C 000A607C  98 E1 00 08 */	stb r7, 8(r1)
+/* 800AB180 000A6080  C0 42 90 58 */	lfs f2, lbl_804C0A78-_SDA2_BASE_(r2)
+/* 800AB184 000A6084  98 C1 00 09 */	stb r6, 9(r1)
+/* 800AB188 000A6088  98 A1 00 0A */	stb r5, 0xa(r1)
+/* 800AB18C 000A608C  98 01 00 0B */	stb r0, 0xb(r1)
+/* 800AB190 000A6090  4B FF FF 6D */	bl __ct__Q33EGG12ProcessMeter10ProcessBarFQ34nw4r2ut5Colorff
+/* 800AB194 000A6094  7F E3 FB 78 */	mr r3, r31
+/* 800AB198 000A6098  83 E1 00 1C */	lwz r31, 0x1c(r1)
+/* 800AB19C 000A609C  80 01 00 24 */	lwz r0, 0x24(r1)
+/* 800AB1A0 000A60A0  7C 08 03 A6 */	mtlr r0
+/* 800AB1A4 000A60A4  38 21 00 20 */	addi r1, r1, 0x20
+/* 800AB1A8 000A60A8  4E 80 00 20 */	blr 
+
+.global measureBegin__Q33EGG12ProcessMeter10CpuMonitorFv
+measureBegin__Q33EGG12ProcessMeter10CpuMonitorFv:
+/* 800AB1AC 000A60AC  94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 800AB1B0 000A60B0  7C 08 02 A6 */	mflr r0
+/* 800AB1B4 000A60B4  90 01 00 14 */	stw r0, 0x14(r1)
+/* 800AB1B8 000A60B8  93 E1 00 0C */	stw r31, 0xc(r1)
+/* 800AB1BC 000A60BC  7C 7F 1B 78 */	mr r31, r3
+/* 800AB1C0 000A60C0  48 04 A4 5D */	bl func_800F561C
+/* 800AB1C4 000A60C4  38 00 00 00 */	li r0, 0
+/* 800AB1C8 000A60C8  90 7F 00 0C */	stw r3, 0xc(r31)
+/* 800AB1CC 000A60CC  90 1F 00 10 */	stw r0, 0x10(r31)
+/* 800AB1D0 000A60D0  83 E1 00 0C */	lwz r31, 0xc(r1)
+/* 800AB1D4 000A60D4  80 01 00 14 */	lwz r0, 0x14(r1)
+/* 800AB1D8 000A60D8  7C 08 03 A6 */	mtlr r0
+/* 800AB1DC 000A60DC  38 21 00 10 */	addi r1, r1, 0x10
+/* 800AB1E0 000A60E0  4E 80 00 20 */	blr 
+
+.global measureEnd__Q33EGG12ProcessMeter10CpuMonitorFv
+measureEnd__Q33EGG12ProcessMeter10CpuMonitorFv:
+/* 800AB1E4 000A60E4  94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 800AB1E8 000A60E8  7C 08 02 A6 */	mflr r0
+/* 800AB1EC 000A60EC  90 01 00 14 */	stw r0, 0x14(r1)
+/* 800AB1F0 000A60F0  93 E1 00 0C */	stw r31, 0xc(r1)
+/* 800AB1F4 000A60F4  7C 7F 1B 78 */	mr r31, r3
+/* 800AB1F8 000A60F8  80 03 00 0C */	lwz r0, 0xc(r3)
+/* 800AB1FC 000A60FC  2C 00 00 00 */	cmpwi r0, 0
+/* 800AB200 000A6100  41 82 00 0C */	beq lbl_800AB20C
+/* 800AB204 000A6104  48 04 A4 19 */	bl func_800F561C
+/* 800AB208 000A6108  90 7F 00 10 */	stw r3, 0x10(r31)
+lbl_800AB20C:
+/* 800AB20C 000A610C  80 01 00 14 */	lwz r0, 0x14(r1)
+/* 800AB210 000A6110  83 E1 00 0C */	lwz r31, 0xc(r1)
+/* 800AB214 000A6114  7C 08 03 A6 */	mtlr r0
+/* 800AB218 000A6118  38 21 00 10 */	addi r1, r1, 0x10
+/* 800AB21C 000A611C  4E 80 00 20 */	blr 
+
+# ! Functions like a CpuMonitor::show(), but no symbols for this exist.
+.global func_800ab220
+func_800ab220:
+/* 800AB220 000A6120  88 03 00 20 */	lbz r0, 0x20(r3)
+/* 800AB224 000A6124  54 00 06 3C */	rlwinm r0, r0, 0, 0x18, 0x1e
+/* 800AB228 000A6128  98 03 00 20 */	stb r0, 0x20(r3)
+/* 800AB22C 000A612C  4E 80 00 20 */	blr 
+
+# ! Functions like a CpuMonitor::hide(), but no symbols for this exist.
+.global func_800ab230
+func_800ab230:
+/* 800AB230 000A6130  88 03 00 20 */	lbz r0, 0x20(r3)
+/* 800AB234 000A6134  60 00 00 01 */	ori r0, r0, 1
+/* 800AB238 000A6138  98 03 00 20 */	stb r0, 0x20(r3)
+/* 800AB23C 000A613C  4E 80 00 20 */	blr 
+
+.global __ct__Q33EGG12ProcessMeter12CpuGpMonitorFQ34nw4r2ut5ColorQ34nw4r2ut5Colorff
+__ct__Q33EGG12ProcessMeter12CpuGpMonitorFQ34nw4r2ut5ColorQ34nw4r2ut5Colorff:
+/* 800AB240 000A6140  94 21 FF D0 */	stwu r1, -0x30(r1)
+/* 800AB244 000A6144  7C 08 02 A6 */	mflr r0
+/* 800AB248 000A6148  90 01 00 34 */	stw r0, 0x34(r1)
+/* 800AB24C 000A614C  DB E1 00 20 */	stfd f31, 0x20(r1)
+/* 800AB250 000A6150  F3 E1 00 28 */	psq_st f31, 40(r1), 0, qr0
+/* 800AB254 000A6154  FF E0 10 90 */	fmr f31, f2
+/* 800AB258 000A6158  89 04 00 00 */	lbz r8, 0(r4)
+/* 800AB25C 000A615C  93 E1 00 1C */	stw r31, 0x1c(r1)
+/* 800AB260 000A6160  7C BF 2B 78 */	mr r31, r5
+/* 800AB264 000A6164  88 E4 00 01 */	lbz r7, 1(r4)
+/* 800AB268 000A6168  93 C1 00 18 */	stw r30, 0x18(r1)
+/* 800AB26C 000A616C  7C 7E 1B 78 */	mr r30, r3
+/* 800AB270 000A6170  88 C4 00 02 */	lbz r6, 2(r4)
+/* 800AB274 000A6174  88 04 00 03 */	lbz r0, 3(r4)
+/* 800AB278 000A6178  38 81 00 0C */	addi r4, r1, 0xc
+/* 800AB27C 000A617C  99 01 00 0C */	stb r8, 0xc(r1)
+/* 800AB280 000A6180  98 E1 00 0D */	stb r7, 0xd(r1)
+/* 800AB284 000A6184  98 C1 00 0E */	stb r6, 0xe(r1)
+/* 800AB288 000A6188  98 01 00 0F */	stb r0, 0xf(r1)
+/* 800AB28C 000A618C  4B FF FE B9 */	bl __ct__Q33EGG12ProcessMeter10CpuMonitorFQ34nw4r2ut5Colorf
+/* 800AB290 000A6190  3C 60 80 3A */	lis r3, __vt__Q33EGG12ProcessMeter12CpuGpMonitor@ha
+/* 800AB294 000A6194  88 FF 00 00 */	lbz r7, 0(r31)
+/* 800AB298 000A6198  38 63 84 28 */	addi r3, r3, __vt__Q33EGG12ProcessMeter12CpuGpMonitor@l
+/* 800AB29C 000A619C  88 DF 00 01 */	lbz r6, 1(r31)
+/* 800AB2A0 000A61A0  90 7E 00 00 */	stw r3, 0(r30)
+/* 800AB2A4 000A61A4  FC 20 F8 90 */	fmr f1, f31
+/* 800AB2A8 000A61A8  88 BF 00 02 */	lbz r5, 2(r31)
+/* 800AB2AC 000A61AC  38 7E 00 2C */	addi r3, r30, 0x2c
+/* 800AB2B0 000A61B0  88 1F 00 03 */	lbz r0, 3(r31)
+/* 800AB2B4 000A61B4  38 81 00 08 */	addi r4, r1, 8
+/* 800AB2B8 000A61B8  98 E1 00 08 */	stb r7, 8(r1)
+/* 800AB2BC 000A61BC  C0 42 90 58 */	lfs f2, lbl_804C0A78-_SDA2_BASE_(r2)
+/* 800AB2C0 000A61C0  98 C1 00 09 */	stb r6, 9(r1)
+/* 800AB2C4 000A61C4  98 A1 00 0A */	stb r5, 0xa(r1)
+/* 800AB2C8 000A61C8  98 01 00 0B */	stb r0, 0xb(r1)
+/* 800AB2CC 000A61CC  4B FF FE 31 */	bl __ct__Q33EGG12ProcessMeter10ProcessBarFQ34nw4r2ut5Colorff
+/* 800AB2D0 000A61D0  38 00 00 00 */	li r0, 0
+/* 800AB2D4 000A61D4  93 DE 00 68 */	stw r30, 0x68(r30)
+/* 800AB2D8 000A61D8  7F C3 F3 78 */	mr r3, r30
+/* 800AB2DC 000A61DC  B0 1E 00 54 */	sth r0, 0x54(r30)
+/* 800AB2E0 000A61E0  93 DE 00 78 */	stw r30, 0x78(r30)
+/* 800AB2E4 000A61E4  E3 E1 00 28 */	psq_l f31, 40(r1), 0, qr0
+/* 800AB2E8 000A61E8  CB E1 00 20 */	lfd f31, 0x20(r1)
+/* 800AB2EC 000A61EC  83 E1 00 1C */	lwz r31, 0x1c(r1)
+/* 800AB2F0 000A61F0  83 C1 00 18 */	lwz r30, 0x18(r1)
+/* 800AB2F4 000A61F4  80 01 00 34 */	lwz r0, 0x34(r1)
+/* 800AB2F8 000A61F8  7C 08 03 A6 */	mtlr r0
+/* 800AB2FC 000A61FC  38 21 00 30 */	addi r1, r1, 0x30
+/* 800AB300 000A6200  4E 80 00 20 */	blr 
+
+.global measureBegin__Q33EGG12ProcessMeter12CpuGpMonitorFv
+measureBegin__Q33EGG12ProcessMeter12CpuGpMonitorFv:
+/* 800AB304 000A6204  94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 800AB308 000A6208  7C 08 02 A6 */	mflr r0
+/* 800AB30C 000A620C  90 01 00 14 */	stw r0, 0x14(r1)
+/* 800AB310 000A6210  93 E1 00 0C */	stw r31, 0xc(r1)
+/* 800AB314 000A6214  7C 7F 1B 78 */	mr r31, r3
+/* 800AB318 000A6218  48 04 A3 05 */	bl func_800F561C
+/* 800AB31C 000A621C  38 A0 00 00 */	li r5, 0
+/* 800AB320 000A6220  38 00 00 01 */	li r0, 1
+/* 800AB324 000A6224  90 7F 00 0C */	stw r3, 0xc(r31)
+/* 800AB328 000A6228  38 9F 00 5C */	addi r4, r31, 0x5c
+/* 800AB32C 000A622C  80 7F 00 58 */	lwz r3, 0x58(r31)
+/* 800AB330 000A6230  90 BF 00 10 */	stw r5, 0x10(r31)
+/* 800AB334 000A6234  B0 1F 00 54 */	sth r0, 0x54(r31)
+/* 800AB338 000A6238  48 00 06 2D */	bl func_800AB964
+/* 800AB33C 000A623C  80 01 00 14 */	lwz r0, 0x14(r1)
+/* 800AB340 000A6240  83 E1 00 0C */	lwz r31, 0xc(r1)
+/* 800AB344 000A6244  7C 08 03 A6 */	mtlr r0
+/* 800AB348 000A6248  38 21 00 10 */	addi r1, r1, 0x10
+/* 800AB34C 000A624C  4E 80 00 20 */	blr 
+
+.global measureEnd__Q33EGG12ProcessMeter12CpuGpMonitorFv
+measureEnd__Q33EGG12ProcessMeter12CpuGpMonitorFv:
+/* 800AB350 000A6250  94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 800AB354 000A6254  7C 08 02 A6 */	mflr r0
+/* 800AB358 000A6258  90 01 00 14 */	stw r0, 0x14(r1)
+/* 800AB35C 000A625C  93 E1 00 0C */	stw r31, 0xc(r1)
+/* 800AB360 000A6260  7C 7F 1B 78 */	mr r31, r3
+/* 800AB364 000A6264  80 03 00 0C */	lwz r0, 0xc(r3)
+/* 800AB368 000A6268  2C 00 00 00 */	cmpwi r0, 0
+/* 800AB36C 000A626C  41 82 00 0C */	beq lbl_800AB378
+/* 800AB370 000A6270  48 04 A2 AD */	bl func_800F561C
+/* 800AB374 000A6274  90 7F 00 10 */	stw r3, 0x10(r31)
+lbl_800AB378:
+/* 800AB378 000A6278  80 7F 00 58 */	lwz r3, 0x58(r31)
+/* 800AB37C 000A627C  38 9F 00 6C */	addi r4, r31, 0x6c
+/* 800AB380 000A6280  48 00 05 E5 */	bl func_800AB964
+/* 800AB384 000A6284  80 01 00 14 */	lwz r0, 0x14(r1)
+/* 800AB388 000A6288  83 E1 00 0C */	lwz r31, 0xc(r1)
+/* 800AB38C 000A628C  7C 08 03 A6 */	mtlr r0
+/* 800AB390 000A6290  38 21 00 10 */	addi r1, r1, 0x10
+/* 800AB394 000A6294  4E 80 00 20 */	blr 
+
+# ! Functions like a CpuGpMonitor::show(), but no symbols for this exist.
+.global func_800AB398
+func_800AB398:
+/* 800AB398 000A6298  88 83 00 20 */	lbz r4, 0x20(r3)
+/* 800AB39C 000A629C  88 03 00 48 */	lbz r0, 0x48(r3)
+/* 800AB3A0 000A62A0  54 84 06 3C */	rlwinm r4, r4, 0, 0x18, 0x1e
+/* 800AB3A4 000A62A4  54 00 06 3C */	rlwinm r0, r0, 0, 0x18, 0x1e
+/* 800AB3A8 000A62A8  98 83 00 20 */	stb r4, 0x20(r3)
+/* 800AB3AC 000A62AC  98 03 00 48 */	stb r0, 0x48(r3)
+/* 800AB3B0 000A62B0  4E 80 00 20 */	blr 
+
+# ! Functions like a CpuGpMonitor::hide(), but no symbols for this exist.
+.global func_800AB3B4
+func_800AB3B4:
+/* 800AB3B4 000A62B4  88 83 00 20 */	lbz r4, 0x20(r3)
+/* 800AB3B8 000A62B8  88 03 00 48 */	lbz r0, 0x48(r3)
+/* 800AB3BC 000A62BC  60 84 00 01 */	ori r4, r4, 1
+/* 800AB3C0 000A62C0  60 00 00 01 */	ori r0, r0, 1
+/* 800AB3C4 000A62C4  98 83 00 20 */	stb r4, 0x20(r3)
+/* 800AB3C8 000A62C8  98 03 00 48 */	stb r0, 0x48(r3)
+/* 800AB3CC 000A62CC  4E 80 00 20 */	blr 
+
+.global __ct__Q23EGG12ProcessMeterFb
+__ct__Q23EGG12ProcessMeterFb:
+/* 800AB3D0 000A62D0  94 21 FF E0 */	stwu r1, -0x20(r1)
+/* 800AB3D4 000A62D4  7C 08 02 A6 */	mflr r0
+/* 800AB3D8 000A62D8  38 A0 00 04 */	li r5, 4
+/* 800AB3DC 000A62DC  38 C0 00 00 */	li r6, 0
+/* 800AB3E0 000A62E0  90 01 00 24 */	stw r0, 0x24(r1)
+/* 800AB3E4 000A62E4  38 E0 00 00 */	li r7, 0
+/* 800AB3E8 000A62E8  93 E1 00 1C */	stw r31, 0x1c(r1)
+/* 800AB3EC 000A62EC  7C 7F 1B 78 */	mr r31, r3
+/* 800AB3F0 000A62F0  93 C1 00 18 */	stw r30, 0x18(r1)
+/* 800AB3F4 000A62F4  7C 9E 23 78 */	mr r30, r4
+/* 800AB3F8 000A62F8  38 80 10 00 */	li r4, 0x1000
+/* 800AB3FC 000A62FC  4B FF 80 B9 */	bl __ct__Q23EGG6ThreadFUliiPQ23EGG4Heap
+/* 800AB400 000A6300  3C A0 80 3A */	lis r5, __vt__Q23EGG6Thread@ha
+/* 800AB404 000A6304  C0 42 90 5C */	lfs f2, lbl_804C0A7C-_SDA2_BASE_(r2)
+/* 800AB408 000A6308  38 A5 83 C0 */	addi r5, r5, __vt__Q23EGG6Thread@l
+/* 800AB40C 000A630C  C0 22 90 60 */	lfs f1, lbl_804C0A80-_SDA2_BASE_(r2)
+/* 800AB410 000A6310  C0 02 90 58 */	lfs f0, lbl_804C0A78-_SDA2_BASE_(r2)
+/* 800AB414 000A6314  3C 60 CC CD */	lis r3, 0xCCCCCCFF@ha
+/* 800AB418 000A6318  38 03 CC FF */	addi r0, r3, 0xCCCCCCFF@l
+/* 800AB41C 000A631C  38 85 00 18 */	addi r4, r5, 0x18
+/* 800AB420 000A6320  90 9F 00 44 */	stw r4, 0x44(r31)
+/* 800AB424 000A6324  38 7F 00 5C */	addi r3, r31, 0x5c
+/* 800AB428 000A6328  38 80 00 20 */	li r4, 0x20
+/* 800AB42C 000A632C  90 BF 00 00 */	stw r5, 0(r31)
+/* 800AB430 000A6330  90 1F 00 48 */	stw r0, 0x48(r31)
+/* 800AB434 000A6334  D0 5F 00 4C */	stfs f2, 0x4c(r31)
+/* 800AB438 000A6338  D0 5F 00 50 */	stfs f2, 0x50(r31)
+/* 800AB43C 000A633C  D0 3F 00 54 */	stfs f1, 0x54(r31)
+/* 800AB440 000A6340  D0 1F 00 58 */	stfs f0, 0x58(r31)
+/* 800AB444 000A6344  4B F5 C2 9D */	bl List_Init__Q24nw4r2utFPQ34nw4r2ut4ListUs
+/* 800AB448 000A6348  38 00 32 C8 */	li r0, 0x32c8
+/* 800AB44C 000A634C  C0 22 90 40 */	lfs f1, lbl_804C0A60-_SDA2_BASE_(r2)
+/* 800AB450 000A6350  90 01 00 14 */	stw r0, 0x14(r1)
+/* 800AB454 000A6354  38 7F 00 70 */	addi r3, r31, 0x70
+/* 800AB458 000A6358  C0 42 90 58 */	lfs f2, lbl_804C0A78-_SDA2_BASE_(r2)
+/* 800AB45C 000A635C  38 81 00 14 */	addi r4, r1, 0x14
+/* 800AB460 000A6360  4B FF FC 9D */	bl __ct__Q33EGG12ProcessMeter10ProcessBarFQ34nw4r2ut5Colorff
+/* 800AB464 000A6364  3C 60 FF 50 */	lis r3, 0xFF5050FF@ha
+/* 800AB468 000A6368  C0 22 90 40 */	lfs f1, lbl_804C0A60-_SDA2_BASE_(r2)
+/* 800AB46C 000A636C  38 03 50 FF */	addi r0, r3, 0xFF5050FF@l
+/* 800AB470 000A6370  38 81 00 10 */	addi r4, r1, 0x10
+/* 800AB474 000A6374  90 01 00 10 */	stw r0, 0x10(r1)
+/* 800AB478 000A6378  38 7F 00 98 */	addi r3, r31, 0x98
+/* 800AB47C 000A637C  4B FF FC C9 */	bl __ct__Q33EGG12ProcessMeter10CpuMonitorFQ34nw4r2ut5Colorf
+/* 800AB480 000A6380  3C 80 50 FF */	lis r4, 0x50FF50FF@ha
+/* 800AB484 000A6384  3C 60 50 51 */	lis r3, 0x5050FFFF@ha
+/* 800AB488 000A6388  38 03 FF FF */	addi r0, r3, 0x5050FFFF@l
+/* 800AB48C 000A638C  C0 22 90 58 */	lfs f1, lbl_804C0A78-_SDA2_BASE_(r2)
+/* 800AB490 000A6390  38 84 50 FF */	addi r4, r4, 0x50FF50FF@l
+/* 800AB494 000A6394  C0 42 90 64 */	lfs f2, lbl_804C0A84-_SDA2_BASE_(r2)
+/* 800AB498 000A6398  90 81 00 0C */	stw r4, 0xc(r1)
+/* 800AB49C 000A639C  38 7F 00 C4 */	addi r3, r31, 0xc4
+/* 800AB4A0 000A63A0  38 81 00 0C */	addi r4, r1, 0xc
+/* 800AB4A4 000A63A4  38 A1 00 08 */	addi r5, r1, 8
+/* 800AB4A8 000A63A8  90 01 00 08 */	stw r0, 8(r1)
+/* 800AB4AC 000A63AC  4B FF FD 95 */	bl __ct__Q33EGG12ProcessMeter12CpuGpMonitorFQ34nw4r2ut5ColorQ34nw4r2ut5Colorff
+/* 800AB4B0 000A63B0  38 00 00 00 */	li r0, 0
+/* 800AB4B4 000A63B4  38 7F 00 5C */	addi r3, r31, 0x5c
+/* 800AB4B8 000A63B8  98 1F 01 4A */	stb r0, 0x14a(r31)
+/* 800AB4BC 000A63BC  38 9F 00 9C */	addi r4, r31, 0x9c
+/* 800AB4C0 000A63C0  90 1F 00 68 */	stw r0, 0x68(r31)
+/* 800AB4C4 000A63C4  90 1F 00 6C */	stw r0, 0x6c(r31)
+/* 800AB4C8 000A63C8  4B F5 C2 31 */	bl List_Append__Q24nw4r2utFPQ34nw4r2ut4ListPv
+/* 800AB4CC 000A63CC  38 7F 00 5C */	addi r3, r31, 0x5c
+/* 800AB4D0 000A63D0  38 9F 00 C8 */	addi r4, r31, 0xc8
+/* 800AB4D4 000A63D4  4B F5 C2 25 */	bl List_Append__Q24nw4r2utFPQ34nw4r2ut4ListPv
+/* 800AB4D8 000A63D8  38 7F 00 5C */	addi r3, r31, 0x5c
+/* 800AB4DC 000A63DC  38 9F 00 F0 */	addi r4, r31, 0xf0
+/* 800AB4E0 000A63E0  4B F5 C2 19 */	bl List_Append__Q24nw4r2utFPQ34nw4r2ut4ListPv
+/* 800AB4E4 000A63E4  88 1F 01 4A */	lbz r0, 0x14a(r31)
+/* 800AB4E8 000A63E8  2C 1E 00 00 */	cmpwi r30, 0
+/* 800AB4EC 000A63EC  93 FF 01 1C */	stw r31, 0x11c(r31)
+/* 800AB4F0 000A63F0  60 00 00 01 */	ori r0, r0, 1
+/* 800AB4F4 000A63F4  98 1F 01 4A */	stb r0, 0x14a(r31)
+/* 800AB4F8 000A63F8  41 82 00 10 */	beq lbl_800AB508
+/* 800AB4FC 000A63FC  3C 60 80 0B */	lis r3, callbackDrawSyncStatic__Q23EGG12ProcessMeterFUs@ha
+/* 800AB500 000A6400  38 63 B5 68 */	addi r3, r3, callbackDrawSyncStatic__Q23EGG12ProcessMeterFUs@l
+/* 800AB504 000A6404  48 03 31 69 */	bl func_800DE66C
+lbl_800AB508:
+/* 800AB508 000A6408  48 03 18 79 */	bl func_800DCD80
+/* 800AB50C 000A640C  80 03 02 D0 */	lwz r0, 0x2d0(r3)
+/* 800AB510 000A6410  7C 7E 1B 78 */	mr r30, r3
+/* 800AB514 000A6414  2C 00 00 00 */	cmpwi r0, 0
+/* 800AB518 000A6418  41 81 00 1C */	bgt lbl_800AB534
+/* 800AB51C 000A641C  3C 60 80 38 */	lis r3, lbl_8037ABD0@ha
+/* 800AB520 000A6420  38 80 01 3F */	li r4, 0x13f
+/* 800AB524 000A6424  38 63 AB D0 */	addi r3, r3, lbl_8037ABD0@l
+/* 800AB528 000A6428  38 A3 00 14 */	addi r5, r3, 0x14
+/* 800AB52C 000A642C  4C C6 31 82 */	crclr 6
+/* 800AB530 000A6430  4B FF 69 D9 */	bl system_halt
+lbl_800AB534:
+/* 800AB534 000A6434  80 9E 02 D0 */	lwz r4, 0x2d0(r30)
+/* 800AB538 000A6438  80 7F 00 08 */	lwz r3, 8(r31)
+/* 800AB53C 000A643C  38 84 FF FF */	addi r4, r4, -1
+/* 800AB540 000A6440  48 04 9F 01 */	bl func_800F5440
+/* 800AB544 000A6444  80 7F 00 08 */	lwz r3, 8(r31)
+/* 800AB548 000A6448  48 04 98 ED */	bl OSResumeThread
+/* 800AB54C 000A644C  7F E3 FB 78 */	mr r3, r31
+/* 800AB550 000A6450  83 E1 00 1C */	lwz r31, 0x1c(r1)
+/* 800AB554 000A6454  83 C1 00 18 */	lwz r30, 0x18(r1)
+/* 800AB558 000A6458  80 01 00 24 */	lwz r0, 0x24(r1)
+/* 800AB55C 000A645C  7C 08 03 A6 */	mtlr r0
+/* 800AB560 000A6460  38 21 00 20 */	addi r1, r1, 0x20
+/* 800AB564 000A6464  4E 80 00 20 */	blr 
+
+.global callbackDrawSyncStatic__Q23EGG12ProcessMeterFUs
+callbackDrawSyncStatic__Q23EGG12ProcessMeterFUs:
+/* 800AB568 000A6468  94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 800AB56C 000A646C  7C 08 02 A6 */	mflr r0
+/* 800AB570 000A6470  90 01 00 14 */	stw r0, 0x14(r1)
+/* 800AB574 000A6474  93 E1 00 0C */	stw r31, 0xc(r1)
+/* 800AB578 000A6478  7C 7F 1B 78 */	mr r31, r3
+/* 800AB57C 000A647C  80 6D 99 38 */	lwz r3, lbl_804BECB8-_SDA_BASE_(r13)
+/* 800AB580 000A6480  81 83 00 00 */	lwz r12, 0(r3)
+/* 800AB584 000A6484  81 8C 00 18 */	lwz r12, 0x18(r12)
+/* 800AB588 000A6488  7D 89 03 A6 */	mtctr r12
+/* 800AB58C 000A648C  4E 80 04 21 */	bctrl 
+/* 800AB590 000A6490  81 83 00 00 */	lwz r12, 0(r3)
+/* 800AB594 000A6494  7F E4 FB 78 */	mr r4, r31
+/* 800AB598 000A6498  81 8C 00 18 */	lwz r12, 0x18(r12)
+/* 800AB59C 000A649C  7D 89 03 A6 */	mtctr r12
+/* 800AB5A0 000A64A0  4E 80 04 21 */	bctrl 
+/* 800AB5A4 000A64A4  80 01 00 14 */	lwz r0, 0x14(r1)
+/* 800AB5A8 000A64A8  83 E1 00 0C */	lwz r31, 0xc(r1)
+/* 800AB5AC 000A64AC  7C 08 03 A6 */	mtlr r0
+/* 800AB5B0 000A64B0  38 21 00 10 */	addi r1, r1, 0x10
+/* 800AB5B4 000A64B4  4E 80 00 20 */	blr 
+
+.global measureBeginFrame__Q23EGG12ProcessMeterFv
+measureBeginFrame__Q23EGG12ProcessMeterFv:
+/* 800AB5B8 000A64B8  94 21 FF 80 */	stwu r1, -0x80(r1)
+/* 800AB5BC 000A64BC  7C 08 02 A6 */	mflr r0
+/* 800AB5C0 000A64C0  90 01 00 84 */	stw r0, 0x84(r1)
+/* 800AB5C4 000A64C4  DB E1 00 70 */	stfd f31, 0x70(r1)
+/* 800AB5C8 000A64C8  F3 E1 00 78 */	psq_st f31, 120(r1), 0, qr0
+/* 800AB5CC 000A64CC  DB C1 00 60 */	stfd f30, 0x60(r1)
+/* 800AB5D0 000A64D0  F3 C1 00 68 */	psq_st f30, 104(r1), 0, qr0
+/* 800AB5D4 000A64D4  DB A1 00 50 */	stfd f29, 0x50(r1)
+/* 800AB5D8 000A64D8  F3 A1 00 58 */	psq_st f29, 88(r1), 0, qr0
+/* 800AB5DC 000A64DC  DB 81 00 40 */	stfd f28, 0x40(r1)
+/* 800AB5E0 000A64E0  F3 81 00 48 */	psq_st f28, 72(r1), 0, qr0
+/* 800AB5E4 000A64E4  DB 61 00 30 */	stfd f27, 0x30(r1)
+/* 800AB5E8 000A64E8  F3 61 00 38 */	psq_st f27, 56(r1), 0, qr0
+/* 800AB5EC 000A64EC  3C 80 43 30 */	lis r4, 0x4330
+/* 800AB5F0 000A64F0  93 E1 00 2C */	stw r31, 0x2c(r1)
+/* 800AB5F4 000A64F4  93 C1 00 28 */	stw r30, 0x28(r1)
+/* 800AB5F8 000A64F8  7C 7E 1B 78 */	mr r30, r3
+/* 800AB5FC 000A64FC  93 A1 00 24 */	stw r29, 0x24(r1)
+/* 800AB600 000A6500  93 81 00 20 */	stw r28, 0x20(r1)
+/* 800AB604 000A6504  80 03 00 78 */	lwz r0, 0x78(r3)
+/* 800AB608 000A6508  90 81 00 08 */	stw r4, 8(r1)
+/* 800AB60C 000A650C  2C 00 00 00 */	cmpwi r0, 0
+/* 800AB610 000A6510  90 81 00 10 */	stw r4, 0x10(r1)
+/* 800AB614 000A6514  41 82 00 0C */	beq lbl_800AB620
+/* 800AB618 000A6518  48 04 A0 05 */	bl func_800F561C
+/* 800AB61C 000A651C  90 7E 00 7C */	stw r3, 0x7c(r30)
+lbl_800AB620:
+/* 800AB620 000A6520  C0 02 90 40 */	lfs f0, lbl_804C0A60-_SDA2_BASE_(r2)
+/* 800AB624 000A6524  83 FE 00 78 */	lwz r31, 0x78(r30)
+/* 800AB628 000A6528  FC 00 00 40 */	fcmpo cr0, f0, f0
+/* 800AB62C 000A652C  D0 1E 00 70 */	stfs f0, 0x70(r30)
+/* 800AB630 000A6530  40 80 00 08 */	bge lbl_800AB638
+/* 800AB634 000A6534  D0 1E 00 70 */	stfs f0, 0x70(r30)
+lbl_800AB638:
+/* 800AB638 000A6538  80 1E 00 78 */	lwz r0, 0x78(r30)
+/* 800AB63C 000A653C  2C 00 00 00 */	cmpwi r0, 0
+/* 800AB640 000A6540  41 82 00 18 */	beq lbl_800AB658
+/* 800AB644 000A6544  80 7E 00 7C */	lwz r3, 0x7c(r30)
+/* 800AB648 000A6548  2C 03 00 00 */	cmpwi r3, 0
+/* 800AB64C 000A654C  41 82 00 0C */	beq lbl_800AB658
+/* 800AB650 000A6550  7C A0 18 50 */	subf r5, r0, r3
+/* 800AB654 000A6554  48 00 00 08 */	b lbl_800AB65C
+lbl_800AB658:
+/* 800AB658 000A6558  38 A0 00 00 */	li r5, 0
+lbl_800AB65C:
+/* 800AB65C 000A655C  3C 80 80 00 */	lis r4, 0x800000F8@ha
+/* 800AB660 000A6560  3C 60 10 62 */	lis r3, 0x10624DD3@ha
+/* 800AB664 000A6564  80 04 00 F8 */	lwz r0, 0x800000F8@l(r4)
+/* 800AB668 000A6568  38 63 4D D3 */	addi r3, r3, 0x10624DD3@l
+/* 800AB66C 000A656C  90 A1 00 0C */	stw r5, 0xc(r1)
+/* 800AB670 000A6570  54 00 F0 BE */	srwi r0, r0, 2
+/* 800AB674 000A6574  C8 62 90 50 */	lfd f3, lbl_804C0A70-_SDA2_BASE_(r2)
+/* 800AB678 000A6578  7C 03 00 16 */	mulhwu r0, r3, r0
+/* 800AB67C 000A657C  C8 21 00 08 */	lfd f1, 8(r1)
+/* 800AB680 000A6580  C0 02 90 40 */	lfs f0, lbl_804C0A60-_SDA2_BASE_(r2)
+/* 800AB684 000A6584  EC 41 18 28 */	fsubs f2, f1, f3
+/* 800AB688 000A6588  54 00 D1 BE */	srwi r0, r0, 6
+/* 800AB68C 000A658C  90 01 00 14 */	stw r0, 0x14(r1)
+/* 800AB690 000A6590  C8 21 00 10 */	lfd f1, 0x10(r1)
+/* 800AB694 000A6594  EC 21 18 28 */	fsubs f1, f1, f3
+/* 800AB698 000A6598  EC 22 08 24 */	fdivs f1, f2, f1
+/* 800AB69C 000A659C  FC 01 00 40 */	fcmpo cr0, f1, f0
+/* 800AB6A0 000A65A0  D0 3E 00 74 */	stfs f1, 0x74(r30)
+/* 800AB6A4 000A65A4  7C 00 00 26 */	mfcr r0
+/* 800AB6A8 000A65A8  54 00 17 FF */	rlwinm. r0, r0, 2, 0x1f, 0x1f
+/* 800AB6AC 000A65AC  2C 00 00 00 */	cmpwi r0, 0
+/* 800AB6B0 000A65B0  C3 E2 90 40 */	lfs f31, lbl_804C0A60-_SDA2_BASE_(r2)
+/* 800AB6B4 000A65B4  3C 60 10 62 */	lis r3, 0x10624DD3@ha
+/* 800AB6B8 000A65B8  CB 62 90 48 */	lfd f27, lbl_804C0A68-_SDA2_BASE_(r2)
+/* 800AB6BC 000A65BC  3B 83 4D D3 */	addi r28, r3, 0x10624DD3@l
+/* 800AB6C0 000A65C0  FF A0 F8 90 */	fmr f29, f31
+/* 800AB6C4 000A65C4  CB 82 90 50 */	lfd f28, lbl_804C0A70-_SDA2_BASE_(r2)
+/* 800AB6C8 000A65C8  FF C0 F8 90 */	fmr f30, f31
+/* 800AB6CC 000A65CC  38 80 00 00 */	li r4, 0
+/* 800AB6D0 000A65D0  3F A0 80 00 */	lis r29, 0x8000
+/* 800AB6D4 000A65D4  48 00 00 D4 */	b lbl_800AB7A8
+lbl_800AB6D8:
+/* 800AB6D8 000A65D8  80 1D 00 F8 */	lwz r0, 0xf8(r29)
+/* 800AB6DC 000A65DC  80 A3 00 08 */	lwz r5, 8(r3)
+/* 800AB6E0 000A65E0  54 00 F0 BE */	srwi r0, r0, 2
+/* 800AB6E4 000A65E4  7C 1C 00 16 */	mulhwu r0, r28, r0
+/* 800AB6E8 000A65E8  7C BF 28 50 */	subf r5, r31, r5
+/* 800AB6EC 000A65EC  6C A5 80 00 */	xoris r5, r5, 0x8000
+/* 800AB6F0 000A65F0  90 A1 00 0C */	stw r5, 0xc(r1)
+/* 800AB6F4 000A65F4  C8 01 00 08 */	lfd f0, 8(r1)
+/* 800AB6F8 000A65F8  54 00 D1 BE */	srwi r0, r0, 6
+/* 800AB6FC 000A65FC  90 01 00 14 */	stw r0, 0x14(r1)
+/* 800AB700 000A6600  EC 20 D8 28 */	fsubs f1, f0, f27
+/* 800AB704 000A6604  C8 01 00 10 */	lfd f0, 0x10(r1)
+/* 800AB708 000A6608  EC 00 E0 28 */	fsubs f0, f0, f28
+/* 800AB70C 000A660C  EC 01 00 24 */	fdivs f0, f1, f0
+/* 800AB710 000A6610  FC 00 E8 40 */	fcmpo cr0, f0, f29
+/* 800AB714 000A6614  D0 03 00 00 */	stfs f0, 0(r3)
+/* 800AB718 000A6618  40 80 00 08 */	bge lbl_800AB720
+/* 800AB71C 000A661C  D3 A3 00 00 */	stfs f29, 0(r3)
+lbl_800AB720:
+/* 800AB720 000A6620  80 03 00 08 */	lwz r0, 8(r3)
+/* 800AB724 000A6624  2C 00 00 00 */	cmpwi r0, 0
+/* 800AB728 000A6628  41 82 00 18 */	beq lbl_800AB740
+/* 800AB72C 000A662C  80 A3 00 0C */	lwz r5, 0xc(r3)
+/* 800AB730 000A6630  2C 05 00 00 */	cmpwi r5, 0
+/* 800AB734 000A6634  41 82 00 0C */	beq lbl_800AB740
+/* 800AB738 000A6638  7C A0 28 50 */	subf r5, r0, r5
+/* 800AB73C 000A663C  48 00 00 08 */	b lbl_800AB744
+lbl_800AB740:
+/* 800AB740 000A6640  38 A0 00 00 */	li r5, 0
+lbl_800AB744:
+/* 800AB744 000A6644  80 1D 00 F8 */	lwz r0, 0xf8(r29)
+/* 800AB748 000A6648  90 A1 00 0C */	stw r5, 0xc(r1)
+/* 800AB74C 000A664C  54 00 F0 BE */	srwi r0, r0, 2
+/* 800AB750 000A6650  7C 1C 00 16 */	mulhwu r0, r28, r0
+/* 800AB754 000A6654  C8 01 00 08 */	lfd f0, 8(r1)
+/* 800AB758 000A6658  EC 20 E0 28 */	fsubs f1, f0, f28
+/* 800AB75C 000A665C  54 00 D1 BE */	srwi r0, r0, 6
+/* 800AB760 000A6660  90 01 00 14 */	stw r0, 0x14(r1)
+/* 800AB764 000A6664  C8 01 00 10 */	lfd f0, 0x10(r1)
+/* 800AB768 000A6668  EC 00 E0 28 */	fsubs f0, f0, f28
+/* 800AB76C 000A666C  EC 01 00 24 */	fdivs f0, f1, f0
+/* 800AB770 000A6670  FC 00 F0 40 */	fcmpo cr0, f0, f30
+/* 800AB774 000A6674  D0 03 00 04 */	stfs f0, 4(r3)
+/* 800AB778 000A6678  40 81 00 14 */	ble lbl_800AB78C
+/* 800AB77C 000A667C  C0 23 00 14 */	lfs f1, 0x14(r3)
+/* 800AB780 000A6680  C0 03 00 18 */	lfs f0, 0x18(r3)
+/* 800AB784 000A6684  EC 01 00 2A */	fadds f0, f1, f0
+/* 800AB788 000A6688  48 00 00 08 */	b lbl_800AB790
+lbl_800AB78C:
+/* 800AB78C 000A668C  FC 00 F0 90 */	fmr f0, f30
+lbl_800AB790:
+/* 800AB790 000A6690  88 03 00 1C */	lbz r0, 0x1c(r3)
+/* 800AB794 000A6694  54 00 07 FF */	clrlwi. r0, r0, 0x1f
+/* 800AB798 000A6698  40 82 00 10 */	bne lbl_800AB7A8
+/* 800AB79C 000A669C  FC 00 F8 40 */	fcmpo cr0, f0, f31
+/* 800AB7A0 000A66A0  40 81 00 08 */	ble lbl_800AB7A8
+/* 800AB7A4 000A66A4  FF E0 00 90 */	fmr f31, f0
+lbl_800AB7A8:
+/* 800AB7A8 000A66A8  38 7E 00 5C */	addi r3, r30, 0x5c
+/* 800AB7AC 000A66AC  4B F5 C1 49 */	bl List_GetNext__Q24nw4r2utFPCQ34nw4r2ut4ListPCv
+/* 800AB7B0 000A66B0  2C 03 00 00 */	cmpwi r3, 0
+/* 800AB7B4 000A66B4  7C 64 1B 78 */	mr r4, r3
+/* 800AB7B8 000A66B8  40 82 FF 20 */	bne lbl_800AB6D8
+/* 800AB7BC 000A66BC  C0 02 90 58 */	lfs f0, lbl_804C0A78-_SDA2_BASE_(r2)
+/* 800AB7C0 000A66C0  EC 00 F8 2A */	fadds f0, f0, f31
+/* 800AB7C4 000A66C4  D0 1E 01 40 */	stfs f0, 0x140(r30)
+/* 800AB7C8 000A66C8  48 04 9E 55 */	bl func_800F561C
+/* 800AB7CC 000A66CC  38 00 00 00 */	li r0, 0
+/* 800AB7D0 000A66D0  90 7E 00 78 */	stw r3, 0x78(r30)
+/* 800AB7D4 000A66D4  38 7E 00 98 */	addi r3, r30, 0x98
+/* 800AB7D8 000A66D8  90 1E 00 7C */	stw r0, 0x7c(r30)
+/* 800AB7DC 000A66DC  81 9E 00 98 */	lwz r12, 0x98(r30)
+/* 800AB7E0 000A66E0  81 8C 00 10 */	lwz r12, 0x10(r12)
+/* 800AB7E4 000A66E4  7D 89 03 A6 */	mtctr r12
+/* 800AB7E8 000A66E8  4E 80 04 21 */	bctrl 
+/* 800AB7EC 000A66EC  E3 E1 00 78 */	psq_l f31, 120(r1), 0, qr0
+/* 800AB7F0 000A66F0  CB E1 00 70 */	lfd f31, 0x70(r1)
+/* 800AB7F4 000A66F4  E3 C1 00 68 */	psq_l f30, 104(r1), 0, qr0
+/* 800AB7F8 000A66F8  CB C1 00 60 */	lfd f30, 0x60(r1)
+/* 800AB7FC 000A66FC  E3 A1 00 58 */	psq_l f29, 88(r1), 0, qr0
+/* 800AB800 000A6700  CB A1 00 50 */	lfd f29, 0x50(r1)
+/* 800AB804 000A6704  E3 81 00 48 */	psq_l f28, 72(r1), 0, qr0
+/* 800AB808 000A6708  CB 81 00 40 */	lfd f28, 0x40(r1)
+/* 800AB80C 000A670C  E3 61 00 38 */	psq_l f27, 56(r1), 0, qr0
+/* 800AB810 000A6710  CB 61 00 30 */	lfd f27, 0x30(r1)
+/* 800AB814 000A6714  83 E1 00 2C */	lwz r31, 0x2c(r1)
+/* 800AB818 000A6718  83 C1 00 28 */	lwz r30, 0x28(r1)
+/* 800AB81C 000A671C  83 A1 00 24 */	lwz r29, 0x24(r1)
+/* 800AB820 000A6720  80 01 00 84 */	lwz r0, 0x84(r1)
+/* 800AB824 000A6724  83 81 00 20 */	lwz r28, 0x20(r1)
+/* 800AB828 000A6728  7C 08 03 A6 */	mtlr r0
+/* 800AB82C 000A672C  38 21 00 80 */	addi r1, r1, 0x80
+/* 800AB830 000A6730  4E 80 00 20 */	blr 
+
+.global measureEndFrame__Q23EGG12ProcessMeterFv
+measureEndFrame__Q23EGG12ProcessMeterFv:
+/* 800AB834 000A6734  85 83 00 98 */	lwzu r12, 0x98(r3)
+/* 800AB838 000A6738  81 8C 00 14 */	lwz r12, 0x14(r12)
+/* 800AB83C 000A673C  7D 89 03 A6 */	mtctr r12
+/* 800AB840 000A6740  4E 80 04 20 */	bctr 
+
+.global measureBeginRender__Q23EGG12ProcessMeterFv
+measureBeginRender__Q23EGG12ProcessMeterFv:
+/* 800AB844 000A6744  85 83 00 C4 */	lwzu r12, 0xc4(r3)
+/* 800AB848 000A6748  81 8C 00 10 */	lwz r12, 0x10(r12)
+/* 800AB84C 000A674C  7D 89 03 A6 */	mtctr r12
+/* 800AB850 000A6750  4E 80 04 20 */	bctr 
+
+.global measureEndRender__Q23EGG12ProcessMeterFv
+measureEndRender__Q23EGG12ProcessMeterFv:
+/* 800AB854 000A6754  85 83 00 C4 */	lwzu r12, 0xc4(r3)
+/* 800AB858 000A6758  81 8C 00 14 */	lwz r12, 0x14(r12)
+/* 800AB85C 000A675C  7D 89 03 A6 */	mtctr r12
+/* 800AB860 000A6760  4E 80 04 20 */	bctr 
+
+.global func_800AB864
+func_800AB864:
+/* 800AB864 000A6764  94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 800AB868 000A6768  7C 08 02 A6 */	mflr r0
+/* 800AB86C 000A676C  90 01 00 14 */	stw r0, 0x14(r1)
+/* 800AB870 000A6770  93 E1 00 0C */	stw r31, 0xc(r1)
+/* 800AB874 000A6774  7C 7F 1B 78 */	mr r31, r3
+/* 800AB878 000A6778  80 A3 00 68 */	lwz r5, 0x68(r3)
+/* 800AB87C 000A677C  A0 05 00 04 */	lhz r0, 4(r5)
+/* 800AB880 000A6780  7C 00 20 40 */	cmplw r0, r4
+/* 800AB884 000A6784  40 82 00 18 */	bne lbl_800AB89C
+/* 800AB888 000A6788  48 04 9D 95 */	bl func_800F561C
+/* 800AB88C 000A678C  7C 64 1B 78 */	mr r4, r3
+/* 800AB890 000A6790  38 7F 00 0C */	addi r3, r31, 0xc
+/* 800AB894 000A6794  38 A0 00 00 */	li r5, 0
+/* 800AB898 000A6798  48 04 68 25 */	bl func_800F20BC
+lbl_800AB89C:
+/* 800AB89C 000A679C  80 01 00 14 */	lwz r0, 0x14(r1)
+/* 800AB8A0 000A67A0  83 E1 00 0C */	lwz r31, 0xc(r1)
+/* 800AB8A4 000A67A4  7C 08 03 A6 */	mtlr r0
+/* 800AB8A8 000A67A8  38 21 00 10 */	addi r1, r1, 0x10
+/* 800AB8AC 000A67AC  4E 80 00 20 */	blr 
+/* 800AB8B0 000A67B0  94 21 FF D0 */	stwu r1, -0x30(r1)
+/* 800AB8B4 000A67B4  7C 08 02 A6 */	mflr r0
+/* 800AB8B8 000A67B8  90 01 00 34 */	stw r0, 0x34(r1)
+/* 800AB8BC 000A67BC  BF 61 00 1C */	stmw r27, 0x1c(r1)
+/* 800AB8C0 000A67C0  7C 7B 1B 78 */	mr r27, r3
+/* 800AB8C4 000A67C4  3B C0 00 02 */	li r30, 2
+/* 800AB8C8 000A67C8  3B E0 00 00 */	li r31, 0
+lbl_800AB8CC:
+/* 800AB8CC 000A67CC  38 7B 00 0C */	addi r3, r27, 0xc
+/* 800AB8D0 000A67D0  38 81 00 08 */	addi r4, r1, 8
+/* 800AB8D4 000A67D4  38 A0 00 01 */	li r5, 1
+/* 800AB8D8 000A67D8  48 04 68 AD */	bl func_800F2184
+/* 800AB8DC 000A67DC  83 A1 00 08 */	lwz r29, 8(r1)
+/* 800AB8E0 000A67E0  48 04 5F E1 */	bl OSDisableInterrupts
+/* 800AB8E4 000A67E4  80 9B 00 68 */	lwz r4, 0x68(r27)
+/* 800AB8E8 000A67E8  7C 7C 1B 78 */	mr r28, r3
+/* 800AB8EC 000A67EC  80 64 00 08 */	lwz r3, 8(r4)
+/* 800AB8F0 000A67F0  2C 03 00 00 */	cmpwi r3, 0
+/* 800AB8F4 000A67F4  41 82 00 20 */	beq lbl_800AB914
+/* 800AB8F8 000A67F8  80 63 00 08 */	lwz r3, 8(r3)
+/* 800AB8FC 000A67FC  2C 03 00 00 */	cmpwi r3, 0
+/* 800AB900 000A6800  41 82 00 10 */	beq lbl_800AB910
+/* 800AB904 000A6804  80 63 00 00 */	lwz r3, 0(r3)
+/* 800AB908 000A6808  48 03 11 75 */	bl func_800DCA7C
+/* 800AB90C 000A680C  48 00 00 08 */	b lbl_800AB914
+lbl_800AB910:
+/* 800AB910 000A6810  48 03 12 0D */	bl func_800DCB1C
+lbl_800AB914:
+/* 800AB914 000A6814  80 9B 00 68 */	lwz r4, 0x68(r27)
+/* 800AB918 000A6818  7F 83 E3 78 */	mr r3, r28
+/* 800AB91C 000A681C  83 84 00 0C */	lwz r28, 0xc(r4)
+/* 800AB920 000A6820  80 04 00 08 */	lwz r0, 8(r4)
+/* 800AB924 000A6824  90 1B 00 68 */	stw r0, 0x68(r27)
+/* 800AB928 000A6828  48 04 5F C1 */	bl OSRestoreInterrupts
+/* 800AB92C 000A682C  A0 1C 00 54 */	lhz r0, 0x54(r28)
+/* 800AB930 000A6830  2C 00 00 01 */	cmpwi r0, 1
+/* 800AB934 000A6834  41 82 00 18 */	beq lbl_800AB94C
+/* 800AB938 000A6838  40 80 00 08 */	bge lbl_800AB940
+/* 800AB93C 000A683C  4B FF FF 90 */	b lbl_800AB8CC
+lbl_800AB940:
+/* 800AB940 000A6840  2C 00 00 03 */	cmpwi r0, 3
+/* 800AB944 000A6844  40 80 FF 88 */	bge lbl_800AB8CC
+/* 800AB948 000A6848  48 00 00 10 */	b lbl_800AB958
+lbl_800AB94C:
+/* 800AB94C 000A684C  93 BC 00 34 */	stw r29, 0x34(r28)
+/* 800AB950 000A6850  B3 DC 00 54 */	sth r30, 0x54(r28)
+/* 800AB954 000A6854  4B FF FF 78 */	b lbl_800AB8CC
+lbl_800AB958:
+/* 800AB958 000A6858  93 BC 00 38 */	stw r29, 0x38(r28)
+/* 800AB95C 000A685C  B3 FC 00 54 */	sth r31, 0x54(r28)
+/* 800AB960 000A6860  4B FF FF 6C */	b lbl_800AB8CC
+
+.global func_800AB964
+func_800AB964:
+/* 800AB964 000A6864  94 21 FF 60 */	stwu r1, -0xa0(r1)
+/* 800AB968 000A6868  7C 08 02 A6 */	mflr r0
+/* 800AB96C 000A686C  90 01 00 A4 */	stw r0, 0xa4(r1)
+/* 800AB970 000A6870  93 E1 00 9C */	stw r31, 0x9c(r1)
+/* 800AB974 000A6874  93 C1 00 98 */	stw r30, 0x98(r1)
+/* 800AB978 000A6878  7C 9E 23 78 */	mr r30, r4
+/* 800AB97C 000A687C  93 A1 00 94 */	stw r29, 0x94(r1)
+/* 800AB980 000A6880  7C 7D 1B 78 */	mr r29, r3
+/* 800AB984 000A6884  48 04 5F 3D */	bl OSDisableInterrupts
+/* 800AB988 000A6888  A0 9D 01 48 */	lhz r4, 0x148(r29)
+/* 800AB98C 000A688C  7C 7F 1B 78 */	mr r31, r3
+/* 800AB990 000A6890  38 64 00 01 */	addi r3, r4, 1
+/* 800AB994 000A6894  54 60 04 3E */	clrlwi r0, r3, 0x10
+/* 800AB998 000A6898  B0 7D 01 48 */	sth r3, 0x148(r29)
+/* 800AB99C 000A689C  28 00 DF FF */	cmplwi r0, 0xdfff
+/* 800AB9A0 000A68A0  40 81 00 10 */	ble lbl_800AB9B0
+/* 800AB9A4 000A68A4  3C 60 00 01 */	lis r3, 0x0000D000@ha
+/* 800AB9A8 000A68A8  38 03 D0 00 */	addi r0, r3, 0x0000D000@l
+/* 800AB9AC 000A68AC  B0 1D 01 48 */	sth r0, 0x148(r29)
+lbl_800AB9B0:
+/* 800AB9B0 000A68B0  A0 7D 01 48 */	lhz r3, 0x148(r29)
+/* 800AB9B4 000A68B4  38 00 00 00 */	li r0, 0
+/* 800AB9B8 000A68B8  B0 7E 00 04 */	sth r3, 4(r30)
+/* 800AB9BC 000A68BC  90 1E 00 08 */	stw r0, 8(r30)
+/* 800AB9C0 000A68C0  80 1D 00 68 */	lwz r0, 0x68(r29)
+/* 800AB9C4 000A68C4  2C 00 00 00 */	cmpwi r0, 0
+/* 800AB9C8 000A68C8  41 82 00 44 */	beq lbl_800ABA0C
+/* 800AB9CC 000A68CC  38 61 00 10 */	addi r3, r1, 0x10
+/* 800AB9D0 000A68D0  48 03 0F B5 */	bl func_800DC984
+/* 800AB9D4 000A68D4  7F C5 F3 78 */	mr r5, r30
+/* 800AB9D8 000A68D8  38 61 00 10 */	addi r3, r1, 0x10
+/* 800AB9DC 000A68DC  38 81 00 08 */	addi r4, r1, 8
+/* 800AB9E0 000A68E0  48 03 10 35 */	bl func_800DCA14
+/* 800AB9E4 000A68E4  80 7D 00 68 */	lwz r3, 0x68(r29)
+/* 800AB9E8 000A68E8  80 03 00 08 */	lwz r0, 8(r3)
+/* 800AB9EC 000A68EC  2C 00 00 00 */	cmpwi r0, 0
+/* 800AB9F0 000A68F0  40 82 00 0C */	bne lbl_800AB9FC
+/* 800AB9F4 000A68F4  80 7E 00 00 */	lwz r3, 0(r30)
+/* 800AB9F8 000A68F8  48 03 10 85 */	bl func_800DCA7C
+lbl_800AB9FC:
+/* 800AB9FC 000A68FC  80 7D 00 6C */	lwz r3, 0x6c(r29)
+/* 800ABA00 000A6900  93 C3 00 08 */	stw r30, 8(r3)
+/* 800ABA04 000A6904  93 DD 00 6C */	stw r30, 0x6c(r29)
+/* 800ABA08 000A6908  48 00 00 0C */	b lbl_800ABA14
+lbl_800ABA0C:
+/* 800ABA0C 000A690C  93 DD 00 68 */	stw r30, 0x68(r29)
+/* 800ABA10 000A6910  93 DD 00 6C */	stw r30, 0x6c(r29)
+lbl_800ABA14:
+/* 800ABA14 000A6914  A0 7D 01 48 */	lhz r3, 0x148(r29)
+/* 800ABA18 000A6918  48 03 29 C9 */	bl func_800DE3E0
+/* 800ABA1C 000A691C  7F E3 FB 78 */	mr r3, r31
+/* 800ABA20 000A6920  48 04 5E C9 */	bl OSRestoreInterrupts
+/* 800ABA24 000A6924  80 01 00 A4 */	lwz r0, 0xa4(r1)
+/* 800ABA28 000A6928  83 E1 00 9C */	lwz r31, 0x9c(r1)
+/* 800ABA2C 000A692C  83 C1 00 98 */	lwz r30, 0x98(r1)
+/* 800ABA30 000A6930  83 A1 00 94 */	lwz r29, 0x94(r1)
+/* 800ABA34 000A6934  7C 08 03 A6 */	mtlr r0
+/* 800ABA38 000A6938  38 21 00 A0 */	addi r1, r1, 0xa0
+/* 800ABA3C 000A693C  4E 80 00 20 */	blr 
+
+.global setVisible__Q23EGG12ProcessMeterFb
+setVisible__Q23EGG12ProcessMeterFb:
+/* 800ABA40 000A6940  2C 04 00 00 */	cmpwi r4, 0
+/* 800ABA44 000A6944  41 82 00 14 */	beq lbl_800ABA58
+/* 800ABA48 000A6948  88 03 01 4A */	lbz r0, 0x14a(r3)
+/* 800ABA4C 000A694C  60 00 00 01 */	ori r0, r0, 1
+/* 800ABA50 000A6950  98 03 01 4A */	stb r0, 0x14a(r3)
+/* 800ABA54 000A6954  4E 80 00 20 */	blr 
+lbl_800ABA58:
+/* 800ABA58 000A6958  88 03 01 4A */	lbz r0, 0x14a(r3)
+/* 800ABA5C 000A695C  54 00 06 3C */	rlwinm r0, r0, 0, 0x18, 0x1e
+/* 800ABA60 000A6960  98 03 01 4A */	stb r0, 0x14a(r3)
+/* 800ABA64 000A6964  4E 80 00 20 */	blr 
+
+.global isVisible__Q23EGG12ProcessMeterFv
+isVisible__Q23EGG12ProcessMeterFv:
+/* 800ABA68 000A6968  88 03 01 4A */	lbz r0, 0x14a(r3)
+/* 800ABA6C 000A696C  54 03 07 FE */	clrlwi r3, r0, 0x1f
+/* 800ABA70 000A6970  4E 80 00 20 */	blr 
+
+.global draw__Q23EGG12ProcessMeterFffUl
+draw__Q23EGG12ProcessMeterFffUl:
+/* 800ABA74 000A6974  94 21 FF 80 */	stwu r1, -0x80(r1)
+/* 800ABA78 000A6978  7C 08 02 A6 */	mflr r0
+/* 800ABA7C 000A697C  90 01 00 84 */	stw r0, 0x84(r1)
+/* 800ABA80 000A6980  DB E1 00 70 */	stfd f31, 0x70(r1)
+/* 800ABA84 000A6984  F3 E1 00 78 */	psq_st f31, 120(r1), 0, qr0
+/* 800ABA88 000A6988  DB C1 00 60 */	stfd f30, 0x60(r1)
+/* 800ABA8C 000A698C  F3 C1 00 68 */	psq_st f30, 104(r1), 0, qr0
+/* 800ABA90 000A6990  DB A1 00 50 */	stfd f29, 0x50(r1)
+/* 800ABA94 000A6994  F3 A1 00 58 */	psq_st f29, 88(r1), 0, qr0
+/* 800ABA98 000A6998  DB 81 00 40 */	stfd f28, 0x40(r1)
+/* 800ABA9C 000A699C  F3 81 00 48 */	psq_st f28, 72(r1), 0, qr0
+/* 800ABAA0 000A69A0  DB 61 00 30 */	stfd f27, 0x30(r1)
+/* 800ABAA4 000A69A4  F3 61 00 38 */	psq_st f27, 56(r1), 0, qr0
+/* 800ABAA8 000A69A8  93 E1 00 2C */	stw r31, 0x2c(r1)
+/* 800ABAAC 000A69AC  7C 7F 1B 78 */	mr r31, r3
+/* 800ABAB0 000A69B0  93 C1 00 28 */	stw r30, 0x28(r1)
+/* 800ABAB4 000A69B4  93 A1 00 24 */	stw r29, 0x24(r1)
+/* 800ABAB8 000A69B8  7C 9D 23 78 */	mr r29, r4
+/* 800ABABC 000A69BC  88 03 01 4A */	lbz r0, 0x14a(r3)
+/* 800ABAC0 000A69C0  54 00 07 FF */	clrlwi. r0, r0, 0x1f
+/* 800ABAC4 000A69C4  41 82 02 08 */	beq lbl_800ABCCC
+/* 800ABAC8 000A69C8  48 00 02 F1 */	bl drawSetting__Q23EGG12ProcessMeterFff
+/* 800ABACC 000A69CC  C3 FF 01 40 */	lfs f31, 0x140(r31)
+/* 800ABAD0 000A69D0  38 61 00 0C */	addi r3, r1, 0xc
+/* 800ABAD4 000A69D4  88 1F 00 80 */	lbz r0, 0x80(r31)
+/* 800ABAD8 000A69D8  98 01 00 0C */	stb r0, 0xc(r1)
+/* 800ABADC 000A69DC  88 1F 00 81 */	lbz r0, 0x81(r31)
+/* 800ABAE0 000A69E0  98 01 00 0D */	stb r0, 0xd(r1)
+/* 800ABAE4 000A69E4  88 1F 00 82 */	lbz r0, 0x82(r31)
+/* 800ABAE8 000A69E8  98 01 00 0E */	stb r0, 0xe(r1)
+/* 800ABAEC 000A69EC  88 1F 00 83 */	lbz r0, 0x83(r31)
+/* 800ABAF0 000A69F0  98 01 00 0F */	stb r0, 0xf(r1)
+/* 800ABAF4 000A69F4  4B FF F5 C1 */	bl drawColor__29$$2unnamed$$2eggProcessMeter_cpp$$2FQ34nw4r2ut5Color
+/* 800ABAF8 000A69F8  C3 DF 00 74 */	lfs f30, 0x74(r31)
+/* 800ABAFC 000A69FC  C0 02 90 40 */	lfs f0, lbl_804C0A60-_SDA2_BASE_(r2)
+/* 800ABB00 000A6A00  C3 BF 00 70 */	lfs f29, 0x70(r31)
+/* 800ABB04 000A6A04  FC 1E 00 40 */	fcmpo cr0, f30, f0
+/* 800ABB08 000A6A08  40 81 00 54 */	ble lbl_800ABB5C
+/* 800ABB0C 000A6A0C  FC 1F 00 40 */	fcmpo cr0, f31, f0
+/* 800ABB10 000A6A10  40 81 00 4C */	ble lbl_800ABB5C
+/* 800ABB14 000A6A14  38 60 00 80 */	li r3, 0x80
+/* 800ABB18 000A6A18  38 80 00 00 */	li r4, 0
+/* 800ABB1C 000A6A1C  38 A0 00 04 */	li r5, 4
+/* 800ABB20 000A6A20  48 03 2F B5 */	bl GXBegin
+/* 800ABB24 000A6A24  3C 60 CC 01 */	lis r3, 0xCC008000@ha
+/* 800ABB28 000A6A28  C0 02 90 68 */	lfs f0, lbl_804C0A88-_SDA2_BASE_(r2)
+/* 800ABB2C 000A6A2C  D3 A3 80 00 */	stfs f29, 0xCC008000@l(r3)
+/* 800ABB30 000A6A30  EC 5D F0 2A */	fadds f2, f29, f30
+/* 800ABB34 000A6A34  C0 22 90 68 */	lfs f1, lbl_804C0A88-_SDA2_BASE_(r2)
+/* 800ABB38 000A6A38  EC 00 F8 2A */	fadds f0, f0, f31
+/* 800ABB3C 000A6A3C  D0 23 80 00 */	stfs f1, -0x8000(r3)
+/* 800ABB40 000A6A40  D0 43 80 00 */	stfs f2, -0x8000(r3)
+/* 800ABB44 000A6A44  C0 22 90 68 */	lfs f1, lbl_804C0A88-_SDA2_BASE_(r2)
+/* 800ABB48 000A6A48  D0 23 80 00 */	stfs f1, -0x8000(r3)
+/* 800ABB4C 000A6A4C  D0 43 80 00 */	stfs f2, -0x8000(r3)
+/* 800ABB50 000A6A50  D0 03 80 00 */	stfs f0, -0x8000(r3)
+/* 800ABB54 000A6A54  D3 A3 80 00 */	stfs f29, -0x8000(r3)
+/* 800ABB58 000A6A58  D0 03 80 00 */	stfs f0, -0x8000(r3)
+lbl_800ABB5C:
+/* 800ABB5C 000A6A5C  3C 80 80 00 */	lis r4, 0x800000F8@ha
+/* 800ABB60 000A6A60  3C 60 43 1C */	lis r3, 0x431BDE83@ha
+/* 800ABB64 000A6A64  80 84 00 F8 */	lwz r4, 0x800000F8@l(r4)
+/* 800ABB68 000A6A68  3C 00 43 30 */	lis r0, 0x4330
+/* 800ABB6C 000A6A6C  38 A3 DE 83 */	addi r5, r3, 0x431BDE83@l
+/* 800ABB70 000A6A70  90 01 00 18 */	stw r0, 0x18(r1)
+/* 800ABB74 000A6A74  54 83 F0 BE */	srwi r3, r4, 2
+/* 800ABB78 000A6A78  57 A6 18 38 */	slwi r6, r29, 3
+/* 800ABB7C 000A6A7C  7C 05 18 16 */	mulhwu r0, r5, r3
+/* 800ABB80 000A6A80  C8 42 90 50 */	lfd f2, lbl_804C0A70-_SDA2_BASE_(r2)
+/* 800ABB84 000A6A84  C0 02 90 6C */	lfs f0, lbl_804C0A8C-_SDA2_BASE_(r2)
+/* 800ABB88 000A6A88  38 60 00 0C */	li r3, 0xc
+/* 800ABB8C 000A6A8C  C3 82 90 40 */	lfs f28, lbl_804C0A60-_SDA2_BASE_(r2)
+/* 800ABB90 000A6A90  38 80 00 00 */	li r4, 0
+/* 800ABB94 000A6A94  54 00 8B FE */	srwi r0, r0, 0xf
+/* 800ABB98 000A6A98  C3 DF 00 74 */	lfs f30, 0x74(r31)
+/* 800ABB9C 000A6A9C  7C 06 03 96 */	divwu r0, r6, r0
+/* 800ABBA0 000A6AA0  90 01 00 1C */	stw r0, 0x1c(r1)
+/* 800ABBA4 000A6AA4  C8 21 00 18 */	lfd f1, 0x18(r1)
+/* 800ABBA8 000A6AA8  EC 21 10 28 */	fsubs f1, f1, f2
+/* 800ABBAC 000A6AAC  EF 61 00 24 */	fdivs f27, f1, f0
+/* 800ABBB0 000A6AB0  48 03 31 49 */	bl func_800DECF8
+/* 800ABBB4 000A6AB4  3F C0 CC 01 */	lis r30, 0xcc01
+/* 800ABBB8 000A6AB8  48 00 00 58 */	b lbl_800ABC10
+lbl_800ABBBC:
+/* 800ABBBC 000A6ABC  88 1F 00 48 */	lbz r0, 0x48(r31)
+/* 800ABBC0 000A6AC0  38 61 00 10 */	addi r3, r1, 0x10
+/* 800ABBC4 000A6AC4  98 01 00 10 */	stb r0, 0x10(r1)
+/* 800ABBC8 000A6AC8  88 1F 00 49 */	lbz r0, 0x49(r31)
+/* 800ABBCC 000A6ACC  98 01 00 11 */	stb r0, 0x11(r1)
+/* 800ABBD0 000A6AD0  88 1F 00 4A */	lbz r0, 0x4a(r31)
+/* 800ABBD4 000A6AD4  98 01 00 12 */	stb r0, 0x12(r1)
+/* 800ABBD8 000A6AD8  88 1F 00 4B */	lbz r0, 0x4b(r31)
+/* 800ABBDC 000A6ADC  98 01 00 13 */	stb r0, 0x13(r1)
+/* 800ABBE0 000A6AE0  4B FF F4 D5 */	bl drawColor__29$$2unnamed$$2eggProcessMeter_cpp$$2FQ34nw4r2ut5Color
+/* 800ABBE4 000A6AE4  C3 BF 01 40 */	lfs f29, 0x140(r31)
+/* 800ABBE8 000A6AE8  38 60 00 A8 */	li r3, 0xa8
+/* 800ABBEC 000A6AEC  38 80 00 00 */	li r4, 0
+/* 800ABBF0 000A6AF0  38 A0 00 02 */	li r5, 2
+/* 800ABBF4 000A6AF4  48 03 2E E1 */	bl GXBegin
+/* 800ABBF8 000A6AF8  D3 9E 80 00 */	stfs f28, -0x8000(r30)
+/* 800ABBFC 000A6AFC  C0 02 90 68 */	lfs f0, lbl_804C0A88-_SDA2_BASE_(r2)
+/* 800ABC00 000A6B00  D0 1E 80 00 */	stfs f0, -0x8000(r30)
+/* 800ABC04 000A6B04  D3 9E 80 00 */	stfs f28, -0x8000(r30)
+/* 800ABC08 000A6B08  EF 9C D8 2A */	fadds f28, f28, f27
+/* 800ABC0C 000A6B0C  D3 BE 80 00 */	stfs f29, -0x8000(r30)
+lbl_800ABC10:
+/* 800ABC10 000A6B10  FC 1C F0 40 */	fcmpo cr0, f28, f30
+/* 800ABC14 000A6B14  41 80 FF A8 */	blt lbl_800ABBBC
+/* 800ABC18 000A6B18  C3 E2 90 40 */	lfs f31, lbl_804C0A60-_SDA2_BASE_(r2)
+/* 800ABC1C 000A6B1C  3B A0 00 00 */	li r29, 0
+/* 800ABC20 000A6B20  3F C0 CC 01 */	lis r30, 0xcc01
+/* 800ABC24 000A6B24  48 00 00 90 */	b lbl_800ABCB4
+lbl_800ABC28:
+/* 800ABC28 000A6B28  88 03 00 1C */	lbz r0, 0x1c(r3)
+/* 800ABC2C 000A6B2C  54 00 07 FF */	clrlwi. r0, r0, 0x1f
+/* 800ABC30 000A6B30  40 82 00 84 */	bne lbl_800ABCB4
+/* 800ABC34 000A6B34  C3 83 00 18 */	lfs f28, 0x18(r3)
+/* 800ABC38 000A6B38  C3 63 00 14 */	lfs f27, 0x14(r3)
+/* 800ABC3C 000A6B3C  88 03 00 10 */	lbz r0, 0x10(r3)
+/* 800ABC40 000A6B40  98 01 00 08 */	stb r0, 8(r1)
+/* 800ABC44 000A6B44  88 03 00 11 */	lbz r0, 0x11(r3)
+/* 800ABC48 000A6B48  98 01 00 09 */	stb r0, 9(r1)
+/* 800ABC4C 000A6B4C  88 03 00 12 */	lbz r0, 0x12(r3)
+/* 800ABC50 000A6B50  98 01 00 0A */	stb r0, 0xa(r1)
+/* 800ABC54 000A6B54  88 03 00 13 */	lbz r0, 0x13(r3)
+/* 800ABC58 000A6B58  38 61 00 08 */	addi r3, r1, 8
+/* 800ABC5C 000A6B5C  98 01 00 0B */	stb r0, 0xb(r1)
+/* 800ABC60 000A6B60  4B FF F4 55 */	bl drawColor__29$$2unnamed$$2eggProcessMeter_cpp$$2FQ34nw4r2ut5Color
+/* 800ABC64 000A6B64  C3 DD 00 04 */	lfs f30, 4(r29)
+/* 800ABC68 000A6B68  C3 BD 00 00 */	lfs f29, 0(r29)
+/* 800ABC6C 000A6B6C  FC 1E F8 40 */	fcmpo cr0, f30, f31
+/* 800ABC70 000A6B70  40 81 00 44 */	ble lbl_800ABCB4
+/* 800ABC74 000A6B74  FC 1C F8 40 */	fcmpo cr0, f28, f31
+/* 800ABC78 000A6B78  40 81 00 3C */	ble lbl_800ABCB4
+/* 800ABC7C 000A6B7C  38 60 00 80 */	li r3, 0x80
+/* 800ABC80 000A6B80  38 80 00 00 */	li r4, 0
+/* 800ABC84 000A6B84  38 A0 00 04 */	li r5, 4
+/* 800ABC88 000A6B88  48 03 2E 4D */	bl GXBegin
+/* 800ABC8C 000A6B8C  D3 BE 80 00 */	stfs f29, -0x8000(r30)
+/* 800ABC90 000A6B90  EC 3D F0 2A */	fadds f1, f29, f30
+/* 800ABC94 000A6B94  EC 1B E0 2A */	fadds f0, f27, f28
+/* 800ABC98 000A6B98  D3 7E 80 00 */	stfs f27, -0x8000(r30)
+/* 800ABC9C 000A6B9C  D0 3E 80 00 */	stfs f1, -0x8000(r30)
+/* 800ABCA0 000A6BA0  D3 7E 80 00 */	stfs f27, -0x8000(r30)
+/* 800ABCA4 000A6BA4  D0 3E 80 00 */	stfs f1, -0x8000(r30)
+/* 800ABCA8 000A6BA8  D0 1E 80 00 */	stfs f0, -0x8000(r30)
+/* 800ABCAC 000A6BAC  D3 BE 80 00 */	stfs f29, -0x8000(r30)
+/* 800ABCB0 000A6BB0  D0 1E 80 00 */	stfs f0, -0x8000(r30)
+lbl_800ABCB4:
+/* 800ABCB4 000A6BB4  7F A4 EB 78 */	mr r4, r29
+/* 800ABCB8 000A6BB8  38 7F 00 5C */	addi r3, r31, 0x5c
+/* 800ABCBC 000A6BBC  4B F5 BC 39 */	bl List_GetNext__Q24nw4r2utFPCQ34nw4r2ut4ListPCv
+/* 800ABCC0 000A6BC0  2C 03 00 00 */	cmpwi r3, 0
+/* 800ABCC4 000A6BC4  7C 7D 1B 78 */	mr r29, r3
+/* 800ABCC8 000A6BC8  40 82 FF 60 */	bne lbl_800ABC28
+lbl_800ABCCC:
+/* 800ABCCC 000A6BCC  E3 E1 00 78 */	psq_l f31, 120(r1), 0, qr0
+/* 800ABCD0 000A6BD0  CB E1 00 70 */	lfd f31, 0x70(r1)
+/* 800ABCD4 000A6BD4  E3 C1 00 68 */	psq_l f30, 104(r1), 0, qr0
+/* 800ABCD8 000A6BD8  CB C1 00 60 */	lfd f30, 0x60(r1)
+/* 800ABCDC 000A6BDC  E3 A1 00 58 */	psq_l f29, 88(r1), 0, qr0
+/* 800ABCE0 000A6BE0  CB A1 00 50 */	lfd f29, 0x50(r1)
+/* 800ABCE4 000A6BE4  E3 81 00 48 */	psq_l f28, 72(r1), 0, qr0
+/* 800ABCE8 000A6BE8  CB 81 00 40 */	lfd f28, 0x40(r1)
+/* 800ABCEC 000A6BEC  E3 61 00 38 */	psq_l f27, 56(r1), 0, qr0
+/* 800ABCF0 000A6BF0  CB 61 00 30 */	lfd f27, 0x30(r1)
+/* 800ABCF4 000A6BF4  83 E1 00 2C */	lwz r31, 0x2c(r1)
+/* 800ABCF8 000A6BF8  83 C1 00 28 */	lwz r30, 0x28(r1)
+/* 800ABCFC 000A6BFC  80 01 00 84 */	lwz r0, 0x84(r1)
+/* 800ABD00 000A6C00  83 A1 00 24 */	lwz r29, 0x24(r1)
+/* 800ABD04 000A6C04  7C 08 03 A6 */	mtlr r0
+/* 800ABD08 000A6C08  38 21 00 80 */	addi r1, r1, 0x80
+/* 800ABD0C 000A6C0C  4E 80 00 20 */	blr 
+
+.global draw__Q23EGG12ProcessMeterFv
+draw__Q23EGG12ProcessMeterFv:
+/* 800ABD10 000A6C10  94 21 FF E0 */	stwu r1, -0x20(r1)
+/* 800ABD14 000A6C14  7C 08 02 A6 */	mflr r0
+/* 800ABD18 000A6C18  90 01 00 24 */	stw r0, 0x24(r1)
+/* 800ABD1C 000A6C1C  93 E1 00 1C */	stw r31, 0x1c(r1)
+/* 800ABD20 000A6C20  93 C1 00 18 */	stw r30, 0x18(r1)
+/* 800ABD24 000A6C24  7C 7E 1B 78 */	mr r30, r3
+/* 800ABD28 000A6C28  80 6D 99 38 */	lwz r3, lbl_804BECB8-_SDA_BASE_(r13)
+/* 800ABD2C 000A6C2C  81 83 00 00 */	lwz r12, 0(r3)
+/* 800ABD30 000A6C30  81 8C 00 08 */	lwz r12, 8(r12)
+/* 800ABD34 000A6C34  7D 89 03 A6 */	mtctr r12
+/* 800ABD38 000A6C38  4E 80 04 21 */	bctrl 
+/* 800ABD3C 000A6C3C  83 E3 00 00 */	lwz r31, 0(r3)
+/* 800ABD40 000A6C40  80 6D 99 38 */	lwz r3, lbl_804BECB8-_SDA_BASE_(r13)
+/* 800ABD44 000A6C44  81 83 00 00 */	lwz r12, 0(r3)
+/* 800ABD48 000A6C48  81 8C 00 10 */	lwz r12, 0x10(r12)
+/* 800ABD4C 000A6C4C  7D 89 03 A6 */	mtctr r12
+/* 800ABD50 000A6C50  4E 80 04 21 */	bctrl 
+/* 800ABD54 000A6C54  81 83 00 04 */	lwz r12, 4(r3)
+/* 800ABD58 000A6C58  81 8C 00 18 */	lwz r12, 0x18(r12)
+/* 800ABD5C 000A6C5C  7D 89 03 A6 */	mtctr r12
+/* 800ABD60 000A6C60  4E 80 04 21 */	bctrl 
+/* 800ABD64 000A6C64  A0 DF 00 04 */	lhz r6, 4(r31)
+/* 800ABD68 000A6C68  3C A0 43 30 */	lis r5, 0x4330
+/* 800ABD6C 000A6C6C  A0 1F 00 06 */	lhz r0, 6(r31)
+/* 800ABD70 000A6C70  7C 64 1B 78 */	mr r4, r3
+/* 800ABD74 000A6C74  90 C1 00 0C */	stw r6, 0xc(r1)
+/* 800ABD78 000A6C78  7F C3 F3 78 */	mr r3, r30
+/* 800ABD7C 000A6C7C  C8 42 90 50 */	lfd f2, lbl_804C0A70-_SDA2_BASE_(r2)
+/* 800ABD80 000A6C80  90 A1 00 08 */	stw r5, 8(r1)
+/* 800ABD84 000A6C84  C8 01 00 08 */	lfd f0, 8(r1)
+/* 800ABD88 000A6C88  90 01 00 14 */	stw r0, 0x14(r1)
+/* 800ABD8C 000A6C8C  EC 20 10 28 */	fsubs f1, f0, f2
+/* 800ABD90 000A6C90  90 A1 00 10 */	stw r5, 0x10(r1)
+/* 800ABD94 000A6C94  C8 01 00 10 */	lfd f0, 0x10(r1)
+/* 800ABD98 000A6C98  EC 40 10 28 */	fsubs f2, f0, f2
+/* 800ABD9C 000A6C9C  4B FF FC D9 */	bl draw__Q23EGG12ProcessMeterFffUl
+/* 800ABDA0 000A6CA0  80 01 00 24 */	lwz r0, 0x24(r1)
+/* 800ABDA4 000A6CA4  83 E1 00 1C */	lwz r31, 0x1c(r1)
+/* 800ABDA8 000A6CA8  83 C1 00 18 */	lwz r30, 0x18(r1)
+/* 800ABDAC 000A6CAC  7C 08 03 A6 */	mtlr r0
+/* 800ABDB0 000A6CB0  38 21 00 20 */	addi r1, r1, 0x20
+/* 800ABDB4 000A6CB4  4E 80 00 20 */	blr 
+
+.global drawSetting__Q23EGG12ProcessMeterFff
+drawSetting__Q23EGG12ProcessMeterFff:
+/* 800ABDB8 000A6CB8  94 21 FF 00 */	stwu r1, -0x100(r1)
+/* 800ABDBC 000A6CBC  7C 08 02 A6 */	mflr r0
+/* 800ABDC0 000A6CC0  90 01 01 04 */	stw r0, 0x104(r1)
+/* 800ABDC4 000A6CC4  DB E1 00 F0 */	stfd f31, 0xf0(r1)
+/* 800ABDC8 000A6CC8  F3 E1 00 F8 */	psq_st f31, 248(r1), 0, qr0
+/* 800ABDCC 000A6CCC  DB C1 00 E0 */	stfd f30, 0xe0(r1)
+/* 800ABDD0 000A6CD0  F3 C1 00 E8 */	psq_st f30, 232(r1), 0, qr0
+/* 800ABDD4 000A6CD4  FF C0 08 90 */	fmr f30, f1
+/* 800ABDD8 000A6CD8  FF E0 10 90 */	fmr f31, f2
+/* 800ABDDC 000A6CDC  C0 22 90 40 */	lfs f1, lbl_804C0A60-_SDA2_BASE_(r2)
+/* 800ABDE0 000A6CE0  93 E1 00 DC */	stw r31, 0xdc(r1)
+/* 800ABDE4 000A6CE4  FC 40 08 90 */	fmr f2, f1
+/* 800ABDE8 000A6CE8  C0 C2 90 58 */	lfs f6, lbl_804C0A78-_SDA2_BASE_(r2)
+/* 800ABDEC 000A6CEC  93 C1 00 D8 */	stw r30, 0xd8(r1)
+/* 800ABDF0 000A6CF0  FC 60 F0 90 */	fmr f3, f30
+/* 800ABDF4 000A6CF4  7C 7E 1B 78 */	mr r30, r3
+/* 800ABDF8 000A6CF8  FC 80 F8 90 */	fmr f4, f31
+/* 800ABDFC 000A6CFC  FC A0 08 90 */	fmr f5, f1
+/* 800ABE00 000A6D00  48 03 77 25 */	bl GXSetViewport
+/* 800ABE04 000A6D04  FC 20 F8 90 */	fmr f1, f31
+/* 800ABE08 000A6D08  48 00 5E 15 */	bl __cvt_fp2unsigned
+/* 800ABE0C 000A6D0C  FC 20 F0 90 */	fmr f1, f30
+/* 800ABE10 000A6D10  7C 7F 1B 78 */	mr r31, r3
+/* 800ABE14 000A6D14  48 00 5E 09 */	bl __cvt_fp2unsigned
+/* 800ABE18 000A6D18  7C 65 1B 78 */	mr r5, r3
+/* 800ABE1C 000A6D1C  7F E6 FB 78 */	mr r6, r31
+/* 800ABE20 000A6D20  38 60 00 00 */	li r3, 0
+/* 800ABE24 000A6D24  38 80 00 00 */	li r4, 0
+/* 800ABE28 000A6D28  48 03 77 79 */	bl GXSetScissor
+/* 800ABE2C 000A6D2C  C0 22 90 58 */	lfs f1, lbl_804C0A78-_SDA2_BASE_(r2)
+/* 800ABE30 000A6D30  38 61 00 98 */	addi r3, r1, 0x98
+/* 800ABE34 000A6D34  C0 42 90 40 */	lfs f2, lbl_804C0A60-_SDA2_BASE_(r2)
+/* 800ABE38 000A6D38  FC 80 08 90 */	fmr f4, f1
+/* 800ABE3C 000A6D3C  FC 60 10 90 */	fmr f3, f2
+/* 800ABE40 000A6D40  FC A0 10 90 */	fmr f5, f2
+/* 800ABE44 000A6D44  FC C0 08 90 */	fmr f6, f1
+/* 800ABE48 000A6D48  48 03 C5 F5 */	bl C_MTXOrtho
+/* 800ABE4C 000A6D4C  38 61 00 98 */	addi r3, r1, 0x98
+/* 800ABE50 000A6D50  38 80 00 01 */	li r4, 1
+/* 800ABE54 000A6D54  48 03 73 39 */	bl GXSetProjection
+/* 800ABE58 000A6D58  C0 3E 00 4C */	lfs f1, 0x4c(r30)
+/* 800ABE5C 000A6D5C  38 61 00 08 */	addi r3, r1, 8
+/* 800ABE60 000A6D60  C0 42 90 70 */	lfs f2, lbl_804C0A90-_SDA2_BASE_(r2)
+/* 800ABE64 000A6D64  C0 1E 00 50 */	lfs f0, 0x50(r30)
+/* 800ABE68 000A6D68  EC 21 10 24 */	fdivs f1, f1, f2
+/* 800ABE6C 000A6D6C  C0 62 90 40 */	lfs f3, lbl_804C0A60-_SDA2_BASE_(r2)
+/* 800ABE70 000A6D70  EC 40 10 24 */	fdivs f2, f0, f2
+/* 800ABE74 000A6D74  48 03 BE B1 */	bl func_800E7D24
+/* 800ABE78 000A6D78  C0 3E 00 54 */	lfs f1, 0x54(r30)
+/* 800ABE7C 000A6D7C  38 61 00 38 */	addi r3, r1, 0x38
+/* 800ABE80 000A6D80  C0 42 90 70 */	lfs f2, lbl_804C0A90-_SDA2_BASE_(r2)
+/* 800ABE84 000A6D84  C0 1E 00 58 */	lfs f0, 0x58(r30)
+/* 800ABE88 000A6D88  EC 21 10 24 */	fdivs f1, f1, f2
+/* 800ABE8C 000A6D8C  C0 62 90 40 */	lfs f3, lbl_804C0A60-_SDA2_BASE_(r2)
+/* 800ABE90 000A6D90  EC 40 10 24 */	fdivs f2, f0, f2
+/* 800ABE94 000A6D94  48 03 BF 11 */	bl func_800E7DA4
+/* 800ABE98 000A6D98  38 61 00 08 */	addi r3, r1, 8
+/* 800ABE9C 000A6D9C  38 81 00 38 */	addi r4, r1, 0x38
+/* 800ABEA0 000A6DA0  38 A1 00 68 */	addi r5, r1, 0x68
+/* 800ABEA4 000A6DA4  48 03 B7 B5 */	bl PSMTXConcat
+/* 800ABEA8 000A6DA8  C0 42 90 58 */	lfs f2, lbl_804C0A78-_SDA2_BASE_(r2)
+/* 800ABEAC 000A6DAC  38 61 00 38 */	addi r3, r1, 0x38
+/* 800ABEB0 000A6DB0  C0 1E 00 74 */	lfs f0, 0x74(r30)
+/* 800ABEB4 000A6DB4  FC 60 10 90 */	fmr f3, f2
+/* 800ABEB8 000A6DB8  EC 22 00 24 */	fdivs f1, f2, f0
+/* 800ABEBC 000A6DBC  48 03 BE E9 */	bl func_800E7DA4
+/* 800ABEC0 000A6DC0  38 61 00 68 */	addi r3, r1, 0x68
+/* 800ABEC4 000A6DC4  38 81 00 38 */	addi r4, r1, 0x38
+/* 800ABEC8 000A6DC8  7C 65 1B 78 */	mr r5, r3
+/* 800ABECC 000A6DCC  48 03 B7 8D */	bl PSMTXConcat
+/* 800ABED0 000A6DD0  38 61 00 68 */	addi r3, r1, 0x68
+/* 800ABED4 000A6DD4  38 80 00 00 */	li r4, 0
+/* 800ABED8 000A6DD8  48 03 73 A5 */	bl GXLoadPosMtxImm
+/* 800ABEDC 000A6DDC  38 60 00 00 */	li r3, 0
+/* 800ABEE0 000A6DE0  48 03 74 A5 */	bl func_800E3384
+/* 800ABEE4 000A6DE4  38 60 00 04 */	li r3, 4
+/* 800ABEE8 000A6DE8  38 80 00 00 */	li r4, 0
+/* 800ABEEC 000A6DEC  38 A0 00 00 */	li r5, 0
+/* 800ABEF0 000A6DF0  38 C0 00 00 */	li r6, 0
+/* 800ABEF4 000A6DF4  38 E0 00 00 */	li r7, 0
+/* 800ABEF8 000A6DF8  39 00 00 00 */	li r8, 0
+/* 800ABEFC 000A6DFC  39 20 00 02 */	li r9, 2
+/* 800ABF00 000A6E00  48 03 40 8D */	bl GXSetChanCtrl
+/* 800ABF04 000A6E04  38 60 00 01 */	li r3, 1
+/* 800ABF08 000A6E08  48 03 40 61 */	bl GXSetNumChans
+/* 800ABF0C 000A6E0C  38 60 00 00 */	li r3, 0
+/* 800ABF10 000A6E10  48 03 55 B5 */	bl GXSetNumIndStages
+/* 800ABF14 000A6E14  38 60 00 00 */	li r3, 0
+/* 800ABF18 000A6E18  48 03 20 71 */	bl GXSetNumTexGens
+/* 800ABF1C 000A6E1C  38 60 00 00 */	li r3, 0
+/* 800ABF20 000A6E20  38 80 00 FF */	li r4, 0xff
+/* 800ABF24 000A6E24  38 A0 00 FF */	li r5, 0xff
+/* 800ABF28 000A6E28  38 C0 00 04 */	li r6, 4
+/* 800ABF2C 000A6E2C  48 03 5B 59 */	bl GXSetTevOrder
+/* 800ABF30 000A6E30  38 60 00 00 */	li r3, 0
+/* 800ABF34 000A6E34  38 80 00 04 */	li r4, 4
+/* 800ABF38 000A6E38  48 03 56 4D */	bl GXSetTevOp
+/* 800ABF3C 000A6E3C  38 60 00 01 */	li r3, 1
+/* 800ABF40 000A6E40  48 03 5C A1 */	bl GXSetNumTevStages
+/* 800ABF44 000A6E44  38 60 00 00 */	li r3, 0
+/* 800ABF48 000A6E48  48 03 2E 55 */	bl func_800DED9C
+/* 800ABF4C 000A6E4C  38 60 00 02 */	li r3, 2
+/* 800ABF50 000A6E50  38 80 00 01 */	li r4, 1
+/* 800ABF54 000A6E54  38 A0 00 00 */	li r5, 0
+/* 800ABF58 000A6E58  38 C0 00 03 */	li r6, 3
+/* 800ABF5C 000A6E5C  48 03 61 59 */	bl GXSetBlendMode
+/* 800ABF60 000A6E60  38 60 00 01 */	li r3, 1
+/* 800ABF64 000A6E64  48 03 61 A1 */	bl GXSetColorUpdate
+/* 800ABF68 000A6E68  48 03 16 B1 */	bl GXClearVtxDesc
+/* 800ABF6C 000A6E6C  38 60 00 00 */	li r3, 0
+/* 800ABF70 000A6E70  38 80 00 09 */	li r4, 9
+/* 800ABF74 000A6E74  38 A0 00 00 */	li r5, 0
+/* 800ABF78 000A6E78  38 C0 00 04 */	li r6, 4
+/* 800ABF7C 000A6E7C  38 E0 00 00 */	li r7, 0
+/* 800ABF80 000A6E80  48 03 16 CD */	bl GXSetVtxAttrFmt
+/* 800ABF84 000A6E84  E3 E1 00 F8 */	psq_l f31, 248(r1), 0, qr0
+/* 800ABF88 000A6E88  CB E1 00 F0 */	lfd f31, 0xf0(r1)
+/* 800ABF8C 000A6E8C  E3 C1 00 E8 */	psq_l f30, 232(r1), 0, qr0
+/* 800ABF90 000A6E90  CB C1 00 E0 */	lfd f30, 0xe0(r1)
+/* 800ABF94 000A6E94  83 E1 00 DC */	lwz r31, 0xdc(r1)
+/* 800ABF98 000A6E98  80 01 01 04 */	lwz r0, 0x104(r1)
+/* 800ABF9C 000A6E9C  83 C1 00 D8 */	lwz r30, 0xd8(r1)
+/* 800ABFA0 000A6EA0  7C 08 03 A6 */	mtlr r0
+/* 800ABFA4 000A6EA4  38 21 01 00 */	addi r1, r1, 0x100
+/* 800ABFA8 000A6EA8  4E 80 00 20 */	blr 
+
+.global func_800ABFAC
+func_800ABFAC:
+/* 800ABFAC 000A6EAC  4E 80 00 20 */	blr 
+
+/* 800ABFB0 000A6EB0  94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 800ABFB4 000A6EB4  7C 08 02 A6 */	mflr r0
+/* 800ABFB8 000A6EB8  2C 03 00 00 */	cmpwi r3, 0
+/* 800ABFBC 000A6EBC  90 01 00 14 */	stw r0, 0x14(r1)
+/* 800ABFC0 000A6EC0  93 E1 00 0C */	stw r31, 0xc(r1)
+/* 800ABFC4 000A6EC4  7C 9F 23 78 */	mr r31, r4
+/* 800ABFC8 000A6EC8  93 C1 00 08 */	stw r30, 8(r1)
+/* 800ABFCC 000A6ECC  7C 7E 1B 78 */	mr r30, r3
+/* 800ABFD0 000A6ED0  41 82 00 1C */	beq lbl_800ABFEC
+/* 800ABFD4 000A6ED4  38 80 00 00 */	li r4, 0
+/* 800ABFD8 000A6ED8  4B FF 76 E5 */	bl __dt__Q23EGG6ThreadFv
+/* 800ABFDC 000A6EDC  2C 1F 00 00 */	cmpwi r31, 0
+/* 800ABFE0 000A6EE0  40 81 00 0C */	ble lbl_800ABFEC
+/* 800ABFE4 000A6EE4  7F C3 F3 78 */	mr r3, r30
+/* 800ABFE8 000A6EE8  4B FF 72 9D */	bl __dl__FPv
+lbl_800ABFEC:
+/* 800ABFEC 000A6EEC  7F C3 F3 78 */	mr r3, r30
+/* 800ABFF0 000A6EF0  83 E1 00 0C */	lwz r31, 0xc(r1)
+/* 800ABFF4 000A6EF4  83 C1 00 08 */	lwz r30, 8(r1)
+/* 800ABFF8 000A6EF8  80 01 00 14 */	lwz r0, 0x14(r1)
+/* 800ABFFC 000A6EFC  7C 08 03 A6 */	mtlr r0
+/* 800AC000 000A6F00  38 21 00 10 */	addi r1, r1, 0x10
+/* 800AC004 000A6F04  4E 80 00 20 */	blr 
+
+# @44@isVisible__Q23EGG12ProcessMeterFv
+.global $$244$$2isVisible__Q23EGG12ProcessMeterFv
+$$244$$2isVisible__Q23EGG12ProcessMeterFv:
+/* 800AC008 000A6F08  38 63 FF BC */	addi r3, r3, -68
+/* 800AC00C 000A6F0C  4B FF FA 5C */	b isVisible__Q23EGG12ProcessMeterFv
+
+# @44@setVisible__Q23EGG12ProcessMeterFb
+.global $$244$$2setVisible__Q23EGG12ProcessMeterFb
+$$244$$2setVisible__Q23EGG12ProcessMeterFb:
+/* 800AC010 000A6F10  38 63 FF BC */	addi r3, r3, -68
+/* 800AC014 000A6F14  4B FF FA 2C */	b setVisible__Q23EGG12ProcessMeterFb
+
+# @44@draw__Q23EGG12ProcessMeterFv
+.global $$244$$2draw__Q23EGG12ProcessMeterFv
+$$244$$2draw__Q23EGG12ProcessMeterFv:
+/* 800AC018 000A6F18  38 63 FF BC */	addi r3, r3, -68
+/* 800AC01C 000A6F1C  4B FF FC F4 */	b draw__Q23EGG12ProcessMeterFv
+
+# @44@func_800AB864
+.global $$244$$2func_800AB864
+$$244$$2func_800AB864:
+/* 800AC020 000A6F20  38 63 FF BC */	addi r3, r3, -68
+/* 800AC024 000A6F24  4B FF F8 40 */	b func_800AB864
+
+# @44@measureEndRender__Q23EGG12ProcessMeterFv
+.global $$244$$2measureEndRender__Q23EGG12ProcessMeterFv
+$$244$$2measureEndRender__Q23EGG12ProcessMeterFv:
+/* 800AC028 000A6F28  38 63 FF BC */	addi r3, r3, -68
+/* 800AC02C 000A6F2C  4B FF F8 28 */	b measureEndRender__Q23EGG12ProcessMeterFv
+
+# @44@measureBeginRender__Q23EGG12ProcessMeterFv
+.global $$244$$2measureBeginRender__Q23EGG12ProcessMeterFv
+$$244$$2measureBeginRender__Q23EGG12ProcessMeterFv:
+/* 800AC030 000A6F30  38 63 FF BC */	addi r3, r3, -68
+/* 800AC034 000A6F34  4B FF F8 10 */	b measureBeginRender__Q23EGG12ProcessMeterFv
+
+# @44@measureEndFrame__Q23EGG12ProcessMeterFv
+.global $$244$$2measureEndFrame__Q23EGG12ProcessMeterFv
+$$244$$2measureEndFrame__Q23EGG12ProcessMeterFv:
+/* 800AC038 000A6F38  38 63 FF BC */	addi r3, r3, -68
+/* 800AC03C 000A6F3C  4B FF F7 F8 */	b measureEndFrame__Q23EGG12ProcessMeterFv
+
+# @44@measureBeginFrame__Q23EGG12ProcessMeterFv
+.global $$244$$2measureBeginFrame__Q23EGG12ProcessMeterFv
+$$244$$2measureBeginFrame__Q23EGG12ProcessMeterFv:
+/* 800AC040 000A6F40  38 63 FF BC */	addi r3, r3, -68
+/* 800AC044 000A6F44  4B FF F5 74 */	b measureBeginFrame__Q23EGG12ProcessMeterFv

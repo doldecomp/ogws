@@ -182,7 +182,7 @@ namespace nw4r
 		
 		void CharWriter::LoadTexture(const Glyph & glyph)
 		{
-			_GXTexObj texObj;
+			GXTexObj texObj;
 			LoadingTexture loadingTexture;
 			
 			loadingTexture.s32_0x0 = 0;

@@ -78,6 +78,9 @@ namespace nw4r
 		struct ResMdl;
 		struct ResPltt;
 		struct ResTex;
+		struct ResMat;
+		struct ResTexPlttInfo;
+		struct ResShp;
 		struct ResAnmChr;
 		struct ResAnmVis;
 		struct ResAnmClr;
@@ -85,13 +88,21 @@ namespace nw4r
 		struct ResAnmTexSrt;
 		struct ResAnmShp;
 		struct ResAnmScn;
+		struct ResVtxPos;
+		struct ResVtxNrm;
+		struct ResVtxClr;
+		struct ResVtxTexCoord;
 		struct ClrAnmResult;
 		struct TexPatAnmResult;
 		struct TexSrtAnmResult;
 	}
-}
 
-typedef int UNKWORD;
-typedef void UNKTYPE;
+	namespace lyt
+	{
+		struct DrawInfo;
+		struct ResourceAccessor;
+		struct ArcResourceAccessor;
+	}
+}
 
 #endif

@@ -1,5 +1,8 @@
 .include "macros.inc"
 
+.section .ctors, "a"
+.4byte __sinit_$$3lyt_pane_cpp
+
 .section .sdata2, "a"
 .global lbl_804C0470
 lbl_804C0470:
@@ -209,7 +212,7 @@ lbl_8007948C:
 /* 800794C8 000743C8  4E 80 04 21 */	bctrl 
 /* 800794CC 000743CC  80 6D 98 00 */	lwz r3, mspAllocator__Q34nw4r3lyt6Layout-_SDA_BASE_(r13)
 /* 800794D0 000743D0  7F A4 EB 78 */	mr r4, r29
-/* 800794D4 000743D4  48 06 DF C9 */	bl func_800E749C
+/* 800794D4 000743D4  48 06 DF C9 */	bl MEMFreeToAllocator
 lbl_800794D8:
 /* 800794D8 000743D8  7C 1F F0 40 */	cmplw r31, r30
 /* 800794DC 000743DC  40 82 FF B0 */	bne lbl_8007948C
@@ -232,7 +235,7 @@ lbl_800794D8:
 /* 80079520 00074420  4E 80 04 21 */	bctrl 
 /* 80079524 00074424  80 6D 98 00 */	lwz r3, mspAllocator__Q34nw4r3lyt6Layout-_SDA_BASE_(r13)
 /* 80079528 00074428  80 9B 00 28 */	lwz r4, 0x28(r27)
-/* 8007952C 0007442C  48 06 DF 71 */	bl func_800E749C
+/* 8007952C 0007442C  48 06 DF 71 */	bl MEMFreeToAllocator
 lbl_80079530:
 /* 80079530 00074430  34 7B 00 1C */	addic. r3, r27, 0x1c
 /* 80079534 00074434  41 82 00 0C */	beq lbl_80079540
@@ -413,7 +416,7 @@ FindPaneByName__Q34nw4r3lyt4PaneFPCcb:
 /* 80079758 00074658  93 81 00 10 */	stw r28, 0x10(r1)
 /* 8007975C 0007465C  7C 7C 1B 78 */	mr r28, r3
 /* 80079760 00074660  38 63 00 B8 */	addi r3, r3, 0xb8
-/* 80079764 00074664  48 00 96 39 */	bl func_80082D9C
+/* 80079764 00074664  48 00 96 39 */	bl EqualsResName__Q34nw4r3lyt6detailFPCcPCc
 /* 80079768 00074668  2C 03 00 00 */	cmpwi r3, 0
 /* 8007976C 0007466C  41 82 00 0C */	beq lbl_80079778
 /* 80079770 00074670  7F 83 E3 78 */	mr r3, r28
@@ -468,7 +471,7 @@ FindMaterialByName__Q34nw4r3lyt4PaneFPCcb:
 /* 80079810 00074710  2C 06 00 00 */	cmpwi r6, 0
 /* 80079814 00074714  41 82 00 1C */	beq lbl_80079830
 /* 80079818 00074718  38 66 00 44 */	addi r3, r6, 0x44
-/* 8007981C 0007471C  48 00 95 AD */	bl func_80082DC8
+/* 8007981C 0007471C  48 00 95 AD */	bl EqualsMaterialName__Q34nw4r3lyt6detailFPCcPCc
 /* 80079820 00074720  2C 03 00 00 */	cmpwi r3, 0
 /* 80079824 00074724  41 82 00 0C */	beq lbl_80079830
 /* 80079828 00074728  80 7C 00 28 */	lwz r3, 0x28(r28)
@@ -1126,7 +1129,7 @@ lbl_8007A0FC:
 /* 8007A0FC 00074FFC  38 63 00 84 */	addi r3, r3, 0x84
 lbl_8007A100:
 /* 8007A100 00075000  38 80 00 00 */	li r4, 0
-/* 8007A104 00075004  48 06 91 79 */	bl func_800E327C
+/* 8007A104 00075004  48 06 91 79 */	bl GXLoadPosMtxImm
 /* 8007A108 00075008  38 60 00 00 */	li r3, 0
 /* 8007A10C 0007500C  48 06 92 79 */	bl func_800E3384
 /* 8007A110 00075010  80 01 00 44 */	lwz r0, 0x44(r1)

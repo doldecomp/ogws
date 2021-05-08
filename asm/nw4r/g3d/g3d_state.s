@@ -1,5 +1,8 @@
 .include "macros.inc"
 
+.section .ctors, "a"
+.4byte __sinit_$$3g3d_state_cpp
+
 .section .sdata2, "a"
 cm2hw__Q34nw4r3g3d4fifo: # local, see g3d_gpu.s
 	.byte 00
@@ -3030,7 +3033,7 @@ lbl_80066960:
 /* 80066974 00061874  41 82 00 48 */	beq lbl_800669BC
 /* 80066978 00061878  7F 63 DB 78 */	mr r3, r27
 /* 8006697C 0006187C  38 80 00 00 */	li r4, 0
-/* 80066980 00061880  48 07 C8 FD */	bl func_800E327C
+/* 80066980 00061880  48 07 C8 FD */	bl GXLoadPosMtxImm
 /* 80066984 00061884  80 78 00 00 */	lwz r3, 0(r24)
 /* 80066988 00061888  80 03 00 30 */	lwz r0, 0x30(r3)
 /* 8006698C 0006188C  54 00 05 6B */	rlwinm. r0, r0, 0, 0x15, 0x15

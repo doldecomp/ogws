@@ -27,6 +27,7 @@ lbl_804C052C:
 	.single 0e0.5
 
 .section .data, "wa"
+.balign 8
 .global __vt__Q34nw4r3lyt18AnimTransformBasic
 __vt__Q34nw4r3lyt18AnimTransformBasic:
     .long 0
@@ -285,13 +286,13 @@ __dt__Q34nw4r3lyt18AnimTransformBasicFv:
 /* 800820DC 0007CFDC  90 A3 00 00 */	stw r5, 0(r3)
 /* 800820E0 0007CFE0  41 82 00 0C */	beq lbl_800820EC
 /* 800820E4 0007CFE4  80 6D 98 00 */	lwz r3, mspAllocator__Q34nw4r3lyt6Layout-_SDA_BASE_(r13)
-/* 800820E8 0007CFE8  48 06 53 B5 */	bl func_800E749C
+/* 800820E8 0007CFE8  48 06 53 B5 */	bl MEMFreeToAllocator
 lbl_800820EC:
 /* 800820EC 0007CFEC  80 9E 00 14 */	lwz r4, 0x14(r30)
 /* 800820F0 0007CFF0  2C 04 00 00 */	cmpwi r4, 0
 /* 800820F4 0007CFF4  41 82 00 0C */	beq lbl_80082100
 /* 800820F8 0007CFF8  80 6D 98 00 */	lwz r3, mspAllocator__Q34nw4r3lyt6Layout-_SDA_BASE_(r13)
-/* 800820FC 0007CFFC  48 06 53 A1 */	bl func_800E749C
+/* 800820FC 0007CFFC  48 06 53 A1 */	bl MEMFreeToAllocator
 lbl_80082100:
 /* 80082100 0007D000  2C 1F 00 00 */	cmpwi r31, 0
 /* 80082104 0007D004  40 81 00 0C */	ble lbl_80082110
@@ -324,7 +325,7 @@ SetResource__Q34nw4r3lyt18AnimTransformBasicFPCQ44nw4r3lyt3res14AnimationBlockPQ
 /* 80082160 0007D060  41 82 00 80 */	beq lbl_800821E0
 /* 80082164 0007D064  80 6D 98 00 */	lwz r3, mspAllocator__Q34nw4r3lyt6Layout-_SDA_BASE_(r13)
 /* 80082168 0007D068  54 C4 13 BA */	rlwinm r4, r6, 2, 0xe, 0x1d
-/* 8008216C 0007D06C  48 06 53 21 */	bl func_800E748C
+/* 8008216C 0007D06C  48 06 53 21 */	bl MEMAllocFromAllocator
 /* 80082170 0007D070  2C 03 00 00 */	cmpwi r3, 0
 /* 80082174 0007D074  90 7E 00 14 */	stw r3, 0x14(r30)
 /* 80082178 0007D078  41 82 00 68 */	beq lbl_800821E0
@@ -359,7 +360,7 @@ lbl_800821E0:
 /* 800821E0 0007D0E0  A0 1F 00 0E */	lhz r0, 0xe(r31)
 /* 800821E4 0007D0E4  80 6D 98 00 */	lwz r3, mspAllocator__Q34nw4r3lyt6Layout-_SDA_BASE_(r13)
 /* 800821E8 0007D0E8  54 04 20 36 */	slwi r4, r0, 4
-/* 800821EC 0007D0EC  48 06 52 A1 */	bl func_800E748C
+/* 800821EC 0007D0EC  48 06 52 A1 */	bl MEMAllocFromAllocator
 /* 800821F0 0007D0F0  2C 03 00 00 */	cmpwi r3, 0
 /* 800821F4 0007D0F4  90 7E 00 18 */	stw r3, 0x18(r30)
 /* 800821F8 0007D0F8  41 82 00 5C */	beq lbl_80082254
@@ -491,7 +492,7 @@ lbl_800823A4:
 /* 800823B4 0007D2B4  28 00 00 01 */	cmplwi r0, 1
 /* 800823B8 0007D2B8  40 82 00 38 */	bne lbl_800823F0
 /* 800823BC 0007D2BC  38 7D 00 44 */	addi r3, r29, 0x44
-/* 800823C0 0007D2C0  48 00 0A 09 */	bl func_80082DC8
+/* 800823C0 0007D2C0  48 00 0A 09 */	bl EqualsMaterialName__Q34nw4r3lyt6detailFPCcPCc
 /* 800823C4 0007D2C4  2C 03 00 00 */	cmpwi r3, 0
 /* 800823C8 0007D2C8  41 82 00 28 */	beq lbl_800823F0
 /* 800823CC 0007D2CC  80 1C 00 18 */	lwz r0, 0x18(r28)

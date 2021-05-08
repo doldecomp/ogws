@@ -14,7 +14,7 @@ namespace nw4r
 	{
 		struct Color
 		{
-			_GXColor mChannels;
+			GXColor mChannels;
 			
 			inline u32 & ToU32ref()
 			{
@@ -70,7 +70,7 @@ namespace nw4r
 				return ToU32ref();
 			}
 			
-			inline operator _GXColor() const
+			inline operator GXColor() const
 			{
 				return mChannels;
 			}

@@ -1,4 +1,5 @@
 ﻿.vs/
+.vscode/
 build/
 tools/*.exe
 tools/old/*.exe

@@ -9,7 +9,7 @@ namespace nw4r
 	{
 		using namespace detail;
 		
-		bool ResTev::GXGetTevSwapModeTable(_GXTevSwapSel sel, _GXTevColorChan * r_5, _GXTevColorChan * r_6, _GXTevColorChan * r_7, _GXTevColorChan * r_8) const
+		bool ResTev::GXGetTevSwapModeTable(GXTevSwapSel sel, GXTevColorChan * r_5, GXTevColorChan * r_6, GXTevColorChan * r_7, GXTevColorChan * r_8) const
 		{
 			BPCmd * pSwapSelCmd = ref().mSwapSelCmds[sel];
 			
@@ -19,20 +19,20 @@ namespace nw4r
 			
 			ResReadBPCmd(pSwapSelCmd[1], &r10);
 			
-			if (r_5) *r_5 = (_GXTevColorChan)(r10 & 0x3);
-			if (r_6) *r_6 = (_GXTevColorChan)(r10 >> 2 & 0x3);
+			if (r_5) *r_5 = (GXTevColorChan)(r10 & 0x3);
+			if (r_6) *r_6 = (GXTevColorChan)(r10 >> 2 & 0x3);
 			
 			u32 r5;
 			
 			ResReadBPCmd(pSwapSelCmd[3], &r5);
 			
-			if (r_7) *r_7 = (_GXTevColorChan)(r5 & 0x3);
-			if (r_8) *r_8 = (_GXTevColorChan)(r5 >> 2 & 0x3);
+			if (r_7) *r_7 = (GXTevColorChan)(r5 & 0x3);
+			if (r_8) *r_8 = (GXTevColorChan)(r5 >> 2 & 0x3);
 			
 			return true;
 		}
 		
-		void ResTev::GXSetTevSwapModeTable(_GXTevSwapSel sel, _GXTevColorChan r26_5, _GXTevColorChan r31_6, _GXTevColorChan r27_7, _GXTevColorChan r28_8)
+		void ResTev::GXSetTevSwapModeTable(GXTevSwapSel sel, GXTevColorChan r26_5, GXTevColorChan r31_6, GXTevColorChan r27_7, GXTevColorChan r28_8)
 		{
 			u32 r30 = sel;
 			BPCmd * pSwapSelCmd = ref().mSwapSelCmds[sel];
@@ -56,7 +56,7 @@ namespace nw4r
 			ResWriteBPCmd(pSwapSelCmd[3], r4_, 0xFF00000F);
 		}
 		
-		bool ResTev::GXGetTevOrder(_GXTevStageID stageID, _GXTexCoordID * pCoordID, _GXTexMapID * pMapID, _GXChannelID * pChannelID) const
+		bool ResTev::GXGetTevOrder(GXTevStageID stageID, GXTexCoordID * pCoordID, GXTexMapID * pMapID, GXChannelID * pChannelID) const
 		{
 			u8 * pCmds = ref().mStageCmds[stageID / 2].BP_CMD_0xA;
 			
@@ -64,13 +64,13 @@ namespace nw4r
 			
 			u32 r9;
 			u32 r0;
-			_GXTexCoordID r4;
-			_GXTexMapID r3;
-			_GXChannelID r8;
+			GXTexCoordID r4;
+			GXTexMapID r3;
+			GXChannelID r8;
 			
 			ResReadBPCmd(pCmds, &r9);
 			
-			static const _GXChannelID r2c[] = {
+			static const GXChannelID r2c[] = {
 				GX_CHANNEL_ID_4,
 				GX_CHANNEL_ID_5,
 				GX_CHANNEL_ID_INVALID,
@@ -84,16 +84,16 @@ namespace nw4r
 			if (stageID & 1)
 			{
 				r8 = r2c[r9 >> 19 & 0x7];
-				r4 = (_GXTexCoordID)(r9 >> 15 & 0x7);
+				r4 = (GXTexCoordID)(r9 >> 15 & 0x7);
 				r0 = r9 >> 18 & 0x1;
-				r3 = (_GXTexMapID)(r9 >> 12 & 0x7);
+				r3 = (GXTexMapID)(r9 >> 12 & 0x7);
 			}
 			else
 			{
 				r8 = r2c[r9 >> 7 & 0x7];
-				r4 = (_GXTexCoordID)(r9 >> 3 & 0x7);
+				r4 = (GXTexCoordID)(r9 >> 3 & 0x7);
 				r0 = r9 >> 6 & 0x1;
-				r3 = (_GXTexMapID)(r9 & 0x7);
+				r3 = (GXTexMapID)(r9 & 0x7);
 			}
 			
 			if (pCoordID) *pCoordID = r4;
@@ -106,7 +106,7 @@ namespace nw4r
 			return true;
 		}
 		
-		void ResTev::GXSetTevColorIn(_GXTevStageID stageID, _GXTevColorArg r_5, _GXTevColorArg r_6, _GXTevColorArg r_7, _GXTevColorArg r_8)
+		void ResTev::GXSetTevColorIn(GXTevStageID stageID, GXTevColorArg r_5, GXTevColorArg r_6, GXTevColorArg r_7, GXTevColorArg r_8)
 		{
 			u8 * pCmds = ref().mStageCmds[stageID / 2].BP_CMD_PAIR_0xF[stageID % 2];
 			/*

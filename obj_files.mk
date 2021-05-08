@@ -187,16 +187,66 @@ NW4R_O_FILES := \
 	build/asm/nw4r/lyt/lyt_bounding.o \
 	build/asm/nw4r/lyt/lyt_material.o \
 	build/asm/nw4r/lyt/lyt_texMap.o \
-	build/asm/nw4r/lyt/lyt_drawInfo.o \
+	build/nw4r/lyt/lyt_drawInfo.o \
 	build/asm/nw4r/lyt/lyt_animation.o \
-	build/asm/nw4r/lyt/lyt_resourceAccessor.o \
+	build/nw4r/lyt/lyt_resourceAccessor.o \
 	build/asm/nw4r/lyt/lyt_arcResourceAccessor.o \
 	build/asm/nw4r/lyt/lyt_common.o \
 
+EGG_O_FILES := \
+	build/asm/egg/text_egg.o \
+	build/asm/egg/ctors_egg.o \
+	build/asm/egg/rodata_egg.o \
+	build/asm/egg/data_egg.o \
+	build/asm/egg/bss_egg.o \
+	build/asm/egg/sdata_egg.o \
+	build/asm/egg/sbss_egg.o \
+	build/asm/egg/sdata2_egg.o \
+	build/asm/egg/sbss2_egg.o \
+	\
+	build/egg/math/eggMath.o \
+	build/asm/egg/math/eggMatrix.o \
+	build/egg/math/eggQuat.o \
+	build/asm/egg/math/eggVector.o \
+	build/asm/egg/core/eggExpHeap.o \
+	build/asm/egg/core/eggFrmHeap.o \
+	build/asm/egg/core/eggHeap.o \
+	build/egg/core/eggAllocator.o \
+	build/asm/egg/core/eggThread.o \
+	build/asm/egg/core/eggSystem.o \
+	build/asm/egg/core/eggTaskThread.o \
+	build/asm/egg/core/eggGraphicsFifo.o \
+	build/asm/egg/core/eggColorFader.o \
+	build/asm/egg/core/eggSceneManager.o \
+	build/asm/egg/core/eggController.o \
+	build/asm/egg/core/eggStream.o \
+	build/asm/egg/core/eggDisplay.o \
+	build/asm/egg/core/eggVideo.o \
+	build/asm/egg/core/eggXfb.o \
+	build/egg/core/eggXfbManager.o \
+	build/asm/egg/core/eggDvdRipper.o \
+	build/asm/egg/core/eggDvdFile.o \
+	build/asm/egg/core/eggScene.o \
+	build/asm/egg/core/eggProcessMeter.o \
+	build/egg/core/eggDisposer.o \
+	build/egg/core/eggArchive.o \
+	build/asm/egg/core/eggDecomp.o \
+	build/asm/egg/core/eggAsyncDisplay.o \
+	build/asm/egg/audio/egg_800ADEE8.o \
+	build/asm/egg/audio/eggAudioArcPlayerMgr.o \
+	build/asm/egg/audio/eggAudioExpMgr.o \
+	build/asm/egg/audio/eggAudioFxMgr.o \
+	build/asm/egg/audio/eggAudioHeapMgr.o \
+	build/asm/egg/audio/eggAudioMgr.o \
+	build/asm/egg/audio/eggAudioSystem.o \
+	build/asm/egg/util/eggMsgRes.o \
+	build/asm/egg/util/eggEffect.o \
+	build/asm/egg/util/eggException.o \
+
 GROUP_1_O_FILES := \
-	build/asm/text.o \
 	build/asm/data.o \
 	build/asm/sdata.o \
+	build/asm/text.o \
 	build/RevoSDK/ARC/arc.o \
 	build/asm/text_b.o \
 	build/asm/data_b.o \
@@ -211,4 +261,4 @@ GROUP_1_O_FILES := \
 	build/asm/sbss2.o \
 	build/asm/sdata2.o \
 
-O_FILES := $(GROUP_0_O_FILES) $(NW4R_O_FILES) $(GROUP_1_O_FILES) $(REVOSDK_O_FILES)
+O_FILES := $(GROUP_0_O_FILES) $(NW4R_O_FILES) $(EGG_O_FILES) $(GROUP_1_O_FILES) $(REVOSDK_O_FILES)

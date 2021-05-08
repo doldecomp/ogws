@@ -105,11 +105,11 @@ namespace nw4r
 			ResVtxClr GetResVtxClr(u32) const;
 			ResVtxTexCoord GetResVtxTexCoord(u32) const; //inlined
 			
-			void GXSetArray(_GXAttr, const void *, u8); //inlined
+			void GXSetArray(GXAttr, const void *, u8); //inlined
 			
 			void Init();
 			
-			void DisableSetArray(_GXAttr); //inlined
+			void DisableSetArray(GXAttr); //inlined
 			void Terminate();
 			
 			void CallPrePrimitiveDisplayList(bool, bool) const;

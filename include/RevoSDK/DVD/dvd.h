@@ -5,39 +5,45 @@
 extern "C" {
 #endif
 
-struct DVD_UNK;
-struct DVDCB_UNK;
-
-typedef UNKTYPE (* DVDAsyncCallback)(s32, struct DVD_UNK *, UNKWORD);
-typedef UNKTYPE (* DVDCBAsyncCallback)(s32, struct DVDCB_UNK *, UNKWORD);
-
-struct DVD_UNK
-{
-	char UNK_0x0[0x8];
-	signed long LONG_0x8;
-	DVDAsyncCallback CALLBACK_0xC;
-	UNKWORD WORD_0x10;
-	char UNK_0x14[0x58];
-	char BYTE_0x6C;
-};
-
-struct DVDCB_UNK
-{
-	char UNK_0x0[0x1C];
-	DVDCBAsyncCallback CALLBACK_0x1C;
-	UNKWORD WORD_0x20;
-	char BYTE_0x24;
-};
+typedef UNKTYPE (* DVDAsyncCallback)(s32, struct DVDFileInfo *);
+typedef UNKTYPE (* DVDCBAsyncCallback)(s32, struct DVDCommandBlock *);
 
 struct DVDFileInfo
 {
-	char UNK_0x0[0x3C];
+	UNKWORD WORD_0x0;
+	UNKWORD WORD_0x4;
+	UNKWORD WORD_0x8;
+	UNKWORD WORD_0xC;
+	UNKWORD WORD_0x10;
+	UNKWORD WORD_0x14;
+	UNKWORD WORD_0x18;
+	UNKWORD WORD_0x1C;
+	UNKWORD WORD_0x20;
+	UNKWORD WORD_0x24;
+	UNKWORD WORD_0x28;
+	UNKWORD WORD_0x2C;
+	UNKWORD WORD_0x30;
+	UNKWORD WORD_0x34;
+	UNKWORD WORD_0x38;
 };
 
 struct DVDCommandBlock
 {
-	char UNK_0x0[0x3C];
-	struct DVDCB_UNK * PTR_0x3C;
+	UNKWORD WORD_0x0;
+	UNKWORD WORD_0x4;
+	UNKWORD WORD_0x8;
+	UNKWORD WORD_0xC;
+	UNKWORD WORD_0x10;
+	UNKWORD WORD_0x14;
+	UNKWORD WORD_0x18;
+	UNKWORD WORD_0x1C;
+	UNKWORD WORD_0x20;
+	UNKWORD WORD_0x24;
+	UNKWORD WORD_0x28;
+	UNKWORD WORD_0x2C;
+	UNKWORD WORD_0x30;
+	UNKWORD WORD_0x34;
+	UNKWORD WORD_0x38;
 };
 
 u32 DVDGetDriveStatus(void);
@@ -48,7 +54,11 @@ BOOL DVDFastOpen(s32, struct DVDFileInfo *);
 
 UNKTYPE DVDClose(struct DVDFileInfo *);
 
-u32 DVDReadPrio(struct DVDFileInfo *, void *, u32, s32, UNKWORD);
+s32 DVDReadPrio(struct DVDFileInfo *, void *, u32, s32, UNKWORD);
+u32 DVDReadAsyncPrio(struct DVDFileInfo *, void *, u32, s32, DVDAsyncCallback, UNKWORD);
+
+u32 DVDCancel(struct DVDFileInfo *);
+u32 DVDCancelAsync(struct DVDFileInfo *, DVDCBAsyncCallback);
 
 #ifdef __cplusplus
 }

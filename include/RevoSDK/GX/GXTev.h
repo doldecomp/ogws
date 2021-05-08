@@ -6,29 +6,29 @@
 extern "C" {
 #endif
 
-enum _GXTevSwapSel
+typedef enum _GXTevSwapSel
 {
 	GX_TEV_SWAP_SEL_0,
 	GX_TEV_SWAP_SEL_1,
 	GX_TEV_SWAP_SEL_2,
 	GX_TEV_SWAP_SEL_3,
 	GX_TEV_SWAP_SEL_COUNT
-};
+} GXTevSwapSel;
 
-enum _GXTevColorChan
+typedef enum _GXTevColorChan
 {
 	
-};
+} GXTevColorChan;
 
-enum _GXTevStageID
+typedef enum _GXTevStageID
 {
 	
-};
+} GXTevStageID;
 
-enum _GXTevColorArg
+typedef enum _GXTevColorArg
 {
 	
-};
+} GXTevColorArg;
 
 #ifdef __cplusplus
 }

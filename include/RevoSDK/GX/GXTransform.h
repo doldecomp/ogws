@@ -14,6 +14,8 @@ UNKTYPE GXSetViewportJitter(f32, f32, f32, f32, f32, f32, u32);
 
 UNKTYPE GXSetProjection(float (*)[4], u32);
 
+UNKTYPE GXLoadPosMtxImm(float (*)[4], u32);
+
 #ifdef __cplusplus
 }
 #endif
