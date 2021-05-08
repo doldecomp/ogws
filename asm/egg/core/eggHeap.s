@@ -49,8 +49,8 @@ sCurrentHeap__Q23EGG4Heap:
 .global sIsHeapListInitialized__Q23EGG4Heap
 sIsHeapListInitialized__Q23EGG4Heap:
 	.skip 0x4
-.global lbl_804BECB0
-lbl_804BECB0:
+.global sAllocatableHeap__Q23EGG4Heap
+sAllocatableHeap__Q23EGG4Heap:
 	.skip 0x8
 .global lbl_804BECB8
 lbl_804BECB8:
@@ -223,7 +223,7 @@ alloc__Q23EGG4HeapFUliPQ23EGG4Heap:
 /* 800A2E48 0009DD48  93 E1 00 1C */	stw r31, 0x1c(r1)
 /* 800A2E4C 0009DD4C  93 C1 00 18 */	stw r30, 0x18(r1)
 /* 800A2E50 0009DD50  7C 7E 1B 78 */	mr r30, r3
-/* 800A2E54 0009DD54  80 ED 99 30 */	lwz r7, lbl_804BECB0-_SDA_BASE_(r13)
+/* 800A2E54 0009DD54  80 ED 99 30 */	lwz r7, sAllocatableHeap__Q23EGG4Heap-_SDA_BASE_(r13)
 /* 800A2E58 0009DD58  2C 07 00 00 */	cmpwi r7, 0
 /* 800A2E5C 0009DD5C  41 82 00 48 */	beq lbl_800A2EA4
 /* 800A2E60 0009DD60  80 0D 99 28 */	lwz r0, sCurrentHeap__Q23EGG4Heap-_SDA_BASE_(r13)
