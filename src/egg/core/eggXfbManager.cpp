@@ -71,8 +71,8 @@ namespace EGG
     {
         if (mXfb.XFB_0xC != NULL)
         {
-            Xfb *pXfb;
-            if (pXfb = mXfb.XFB_0xC->XFB_0x4, pXfb == VIGetCurrentFrameBuffer())
+            Xfb* pXfb = mXfb.XFB_0xC->XFB_0x4;
+            if (pXfb == VIGetCurrentFrameBuffer())
             {
                 mXfb.XFB_0x0 = mXfb.XFB_0xC;
                 mXfb.XFB_0xC = NULL;
