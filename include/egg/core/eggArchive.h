@@ -45,6 +45,7 @@ namespace EGG
         virtual ~Archive(); // at 0x8
         static Archive * mount(void *, Heap *, int);
         void * getFile(const char *, FileInfo *);
+        bool initHandle(void *); // inlined
 
         void *PTR_0x8;
         int INT_0xC;

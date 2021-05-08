@@ -7,6 +7,14 @@ namespace EGG
 {
     using namespace nw4r;
 
+    bool Archive::initHandle(void *arcBinary)
+    {
+        #line 61
+        EGG_ASSERT(arcBinary != NULL);
+
+        return ARCInitHandle(arcBinary, &this->mHandle);
+    }
+
     Archive::~Archive()
     {
         removeList(this);
@@ -38,11 +46,8 @@ namespace EGG
             
             #line 159
             EGG_ASSERT(archive != NULL);
-            
-            #line 61
-            EGG_ASSERT(arcBinary != NULL);
 
-            bool success = ARCInitHandle(arcBinary, &archive->mHandle);
+            bool success = archive->initHandle(arcBinary);
             if (success)
             {
                 archive->INT_0x10 = 1;
