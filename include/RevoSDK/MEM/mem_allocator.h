@@ -28,7 +28,7 @@ struct MEMAllocator
     UNKWORD WORD_0xC;
 };
 
-UNKTYPE MEMAllocFromAllocator(struct MEMAllocator *, UNKWORD);
+void * MEMAllocFromAllocator(struct MEMAllocator *, UNKWORD);
 UNKTYPE MEMFreeToAllocator(struct MEMAllocator *, UNKTYPE *);
 
 #ifdef __cplusplus

@@ -13,12 +13,12 @@ namespace EGG
 
     }
 
-    UNKTYPE * Allocator::alloc(u32 size)
+    void * Allocator::alloc(u32 size)
     {
-        MEMAllocFromAllocator(this, size);
+        return MEMAllocFromAllocator(this, size);
     }
 
-    UNKTYPE Allocator::free(void *pBlock)
+    void Allocator::free(void *pBlock)
     {
         MEMFreeToAllocator(this, pBlock);
     }
