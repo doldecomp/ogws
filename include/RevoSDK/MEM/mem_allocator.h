@@ -10,26 +10,26 @@ extern "C" {
 typedef UNKTYPE (*MEMAllocatorHeapAllocFunc)(UNKTYPE);
 typedef UNKTYPE (*MEMAllocatorHeapFreeFunc)(UNKTYPE);
 
-typedef struct MEMAllocatorFuncs
+struct MEMAllocatorFuncs
 {
     MEMAllocatorHeapAllocFunc mHeapAllocFunc; // at 0x0
     MEMAllocatorHeapFreeFunc mHeapFreeFunc; // at 0x4
 };
 
-typedef struct MEMAllocator
+struct MEMAllocator
 {
     struct MEMAllocatorFuncs * mAllocFuncs; // at 0x0
     union
     {
-        MEMExpHeap *mExpHeap; // at 0x4
-        MEMFrmHeap *mFrmHeap; // at 0x4
+        struct MEMExpHeap *mExpHeap; // at 0x4
+        struct MEMFrmHeap *mFrmHeap; // at 0x4
     };
     UNKWORD WORD_0x8;
     UNKWORD WORD_0xC;
 };
 
-UNKTYPE MEMAllocFromAllocator(MEMAllocator *, UNKWORD);
-UNKTYPE MEMFreeToAllocator(MEMAllocator *, UNKTYPE *);
+UNKTYPE MEMAllocFromAllocator(struct MEMAllocator *, UNKWORD);
+UNKTYPE MEMFreeToAllocator(struct MEMAllocator *, UNKTYPE *);
 
 #ifdef __cplusplus
 }
