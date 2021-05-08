@@ -21,7 +21,7 @@ namespace EGG
         {
             INT_0x14 = 1;
             INT_0x10 = 0;
-            memset(&mHandle, NULL, sizeof(mHandle));
+            memset(&mHandle, 0, sizeof(mHandle));
 
             if (!sIsArchiveListInitialized)
             {
