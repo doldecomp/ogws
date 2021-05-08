@@ -18,11 +18,11 @@ UNKTYPE VISetNextFrameBuffer(UNKTYPE *);
 
 enum VITvFormat
 {
-    VI_NTSC = 0,
-    VI_PAL50 = 1
+    VI_NTSC,
+    VI_PAL50
 };
 
-VITvFormat VIGetTvFormat(void);
+enum VITvFormat VIGetTvFormat(void);
 
 #ifdef __cplusplus
 }
