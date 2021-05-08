@@ -6,8 +6,6 @@
 
 namespace EGG
 {
-    using namespace nw4r;
-
     struct Heap
     {
         enum EHeapKind
@@ -45,7 +43,7 @@ namespace EGG
         UNKWORD WORD_0x1C;
         UNKWORD WORD_0x20;
         UNKWORD WORD_0x24;
-        ut::List mChildren; // at 0x28
+        nw4r::ut::List mChildren; // at 0x28
         // . . .
     };
 }

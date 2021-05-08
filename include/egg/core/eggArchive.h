@@ -10,8 +10,6 @@
 
 namespace EGG
 {
-    using namespace nw4r;
-
     struct Archive : Disposer
     {
         struct FileInfo
@@ -24,11 +22,11 @@ namespace EGG
         {
             INT_0x14 = 1;
             INT_0x10 = 0;
-            memset(&mHandle, NULL, 0x1C);
+            memset(&mHandle, NULL, sizeof(mHandle));
 
             if (!sIsArchiveListInitialized)
             {
-                ut::List_Init(&sArchiveList, sizeof(Archive) - sizeof(Disposer));
+                nw4r::ut::List_Init(&sArchiveList, sizeof(Archive) - sizeof(mNode));
                 sIsArchiveListInitialized = true;
             }
 
@@ -37,12 +35,12 @@ namespace EGG
 
         inline static void appendList(Archive *p)
         {
-            ut::List_Append(&sArchiveList, p);
+            nw4r::ut::List_Append(&sArchiveList, p);
         }
 
         inline static void removeList(Archive *p)
         {
-            ut::List_Remove(&sArchiveList, p);
+            nw4r::ut::List_Remove(&sArchiveList, p);
         }
 
         virtual ~Archive(); // at 0x8
@@ -54,9 +52,9 @@ namespace EGG
         int INT_0x10;
         int INT_0x14;
         ARCHandle mHandle; // at 0x18
-        char UNK_0x48[8];
+        nw4r::ut::Node mNode; // at 0x34
 
-        static ut::List sArchiveList;
+        static nw4r::ut::List sArchiveList;
         static bool sIsArchiveListInitialized;
     };
 }
