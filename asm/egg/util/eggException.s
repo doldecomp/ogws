@@ -11,7 +11,6 @@ create__Q23EGG9ExceptionFUsUsUsPQ23EGG4Heap:
 /* 800B1748 000AC648  4E 80 00 20 */	blr 
 
 # Given double pointer to floating_point_unavailable_exception_handler
-# Non-stubbed version sets user exception callback
-.global setPadInfo__Q23EGG9ExceptionFPCUs
-setPadInfo__Q23EGG9ExceptionFPCUs:
+.global func_800B174C
+func_800B174C:
 /* 800B174C 000AC64C  4E 80 00 20 */	blr 
