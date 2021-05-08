@@ -42,12 +42,12 @@ namespace nw4r
 				return mTev.ref();
 			}
 			
-			bool GXGetTevSwapModeTable(_GXTevSwapSel, _GXTevColorChan *, _GXTevColorChan *, _GXTevColorChan *, _GXTevColorChan *) const;
-			void GXSetTevSwapModeTable(_GXTevSwapSel, _GXTevColorChan, _GXTevColorChan, _GXTevColorChan, _GXTevColorChan);
+			bool GXGetTevSwapModeTable(GXTevSwapSel, GXTevColorChan *, GXTevColorChan *, GXTevColorChan *, GXTevColorChan *) const;
+			void GXSetTevSwapModeTable(GXTevSwapSel, GXTevColorChan, GXTevColorChan, GXTevColorChan, GXTevColorChan);
 			
-			bool GXGetTevOrder(_GXTevStageID, _GXTexCoordID *, _GXTexMapID *, _GXChannelID *) const;
+			bool GXGetTevOrder(GXTevStageID, GXTexCoordID *, GXTexMapID *, GXChannelID *) const;
 			
-			void GXSetTevColorIn(_GXTevStageID, _GXTevColorArg, _GXTevColorArg, _GXTevColorArg, _GXTevColorArg);
+			void GXSetTevColorIn(GXTevStageID, GXTevColorArg, GXTevColorArg, GXTevColorArg, GXTevColorArg);
 			
 			void CallDisplayList(bool) const;
 			

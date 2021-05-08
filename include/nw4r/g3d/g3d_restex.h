@@ -22,8 +22,8 @@ namespace nw4r
 			u16 SHORT_0x1E;
 			union // at 0x20
 			{
-				_GXTexFmt mFormat;
-				_GXCITexFmt mCiFormat;
+				GXTexFmt mFormat;
+				GXCITexFmt mCiFormat;
 			};
 			u32 WORD_0x24;
 			f32 FLOAT_0x28;
@@ -61,8 +61,8 @@ namespace nw4r
 			inline UNKTYPE GetWidth() const;
 			inline UNKTYPE GetHeight() const;
 
-			bool GetTexObjParam(void **, u16 *, u16 *, _GXTexFmt *, f32 *, f32 *, u8 *) const;
-			bool GetTexObjCIParam(void **, u16 *, u16 *, _GXCITexFmt *, f32 *, f32 *, u8 *) const;
+			bool GetTexObjParam(void **, u16 *, u16 *, GXTexFmt *, f32 *, f32 *, u8 *) const;
+			bool GetTexObjCIParam(void **, u16 *, u16 *, GXCITexFmt *, f32 *, f32 *, u8 *) const;
 			void Init();
 		};
 		

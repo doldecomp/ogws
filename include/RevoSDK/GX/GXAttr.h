@@ -5,7 +5,7 @@
 extern "C" {
 #endif
 
-enum _GXAttr
+typedef enum _GXAttr
 {
 	GX_ATTR_0,
 	GX_ATTR_1,
@@ -32,7 +32,7 @@ enum _GXAttr
 	GX_ATTR_VTX_COUNT = GX_ATTR_COUNT - GX_ATTR_VTX,
 	
 	GX_ATTR_INVALID = 0xFF
-};
+} GXAttr;
 
 typedef struct _GXVtxDescList
 {
@@ -48,7 +48,7 @@ typedef struct _GXVtxAttrFmtList
 	char BYTE_0xC;
 } GXVtxAttrFmtList[];
 
-UNKTYPE GXSetArray(enum _GXAttr, const void *, u8);
+UNKTYPE GXSetArray(GXAttr, const void *, u8);
 
 #ifdef __cplusplus
 }

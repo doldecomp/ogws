@@ -120,7 +120,7 @@ namespace nw4r
 				DCStore(false);
 			}
 
-			void SetArray(_GXAttr);
+			void SetArray(GXAttr);
 			void GetArray(const void **, u8 *) const;
 			UNKTYPE CopyTo(void *) const;
 			

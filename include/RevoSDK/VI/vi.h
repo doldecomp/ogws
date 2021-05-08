@@ -8,7 +8,7 @@ extern "C" {
 
 void VIInit(void);
 void VISetBlack(UNKWORD);
-void VIConfigure(_GXRenderModeObj *);
+void VIConfigure(GXRenderModeObj *);
 void VIWaitForRetrace(void);
 void VIFlush(void);
 

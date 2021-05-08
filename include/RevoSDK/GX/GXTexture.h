@@ -6,25 +6,25 @@
 extern "C" {
 #endif
 
-enum _GXTexCoordID
+typedef enum _GXTexCoordID
 {
 	
-};
+} GXTexCoordID;
 
-enum _GXTexMapID
+typedef enum _GXTexMapID
 {
 	GX_TEX_MAP_ID_INVALID = 0xFF
-};
+} GXTexMapID;
 
-enum _GXTexFmt
+typedef enum _GXTexFmt
 {
 
-};
+} GXTexFmt;
 
-enum _GXCITexFmt
+typedef enum _GXCITexFmt
 {
 
-};
+} GXCITexFmt;
 
 #ifdef __cplusplus
 }

@@ -54,7 +54,7 @@ namespace nw4r
 			}
 		}
 		
-		void ResVtxClr::SetArray(_GXAttr attr)
+		void ResVtxClr::SetArray(GXAttr attr)
 		{
 			if (mClr.IsValid() && (u32)(attr - GX_ATTR_VTX_CLR) <= GX_ATTR_VTX_CLR_COUNT - 1) GXSetArray(attr, GetData(), ref().BYTE_0x1C);
 		}

@@ -24,7 +24,7 @@ namespace nw4r
 			
 			for (int i = 0; i < GX_ATTR_COUNT; i++)
 			{
-				list[i].mAttr = (_GXAttr)i;
+				list[i].mAttr = (GXAttr)i;
 			}
 			
 			list[GX_ATTR_COUNT].mAttr = GX_ATTR_INVALID;
@@ -72,7 +72,7 @@ namespace nw4r
 			
 			for (i = 0; i < GX_ATTR_VTX_COUNT; i++)
 			{
-				list[i].mAttr = (_GXAttr)(i + GX_ATTR_VTX);
+				list[i].mAttr = (GXAttr)(i + GX_ATTR_VTX);
 			}
 			
 			list[GX_ATTR_VTX_POS - GX_ATTR_VTX].WORD_0x8 = r0 >> 1 & 0x7;
@@ -155,7 +155,7 @@ namespace nw4r
 			return NULL;
 		}
 		
-		void ResShp::GXSetArray(_GXAttr attr, const void * ptr, u8 byte)
+		void ResShp::GXSetArray(GXAttr attr, const void * ptr, u8 byte)
 		{
 			ResShpPrePrim prePrim = GetResShpPrePrim();
 			u32 i = attr - GX_ATTR_VTX;
@@ -191,7 +191,7 @@ namespace nw4r
 				if (vtxClr.mClr.IsValid())
 				{
 					vtxClr.GetArray(&ptr_0x2c, &byte_0x8);
-					GXSetArray((_GXAttr)(GX_ATTR_VTX_CLR + i), ptr_0x2c, byte_0x8);
+					GXSetArray((GXAttr)(GX_ATTR_VTX_CLR + i), ptr_0x2c, byte_0x8);
 				}
 			}
 			
@@ -203,7 +203,7 @@ namespace nw4r
 				if (vtxTexCoord.mTexCoord.IsValid())
 				{
 					vtxTexCoord.GetArray(&ptr_0x2c, &byte_0x8);
-					GXSetArray((_GXAttr)(GX_ATTR_VTX_TEX_COORD + i), ptr_0x2c, byte_0x8);
+					GXSetArray((GXAttr)(GX_ATTR_VTX_TEX_COORD + i), ptr_0x2c, byte_0x8);
 				}
 			}
 			
@@ -215,7 +215,7 @@ namespace nw4r
 			DCStoreRangeNoSync(ResTagDL(&data.mPrimDLTag).GetDL(), data.mPrimDLTag.mBufSize);
 		}
 		
-		void ResShp::DisableSetArray(_GXAttr attr)
+		void ResShp::DisableSetArray(GXAttr attr)
 		{
 			memset(GetResShpPrePrim().ref().CP_CMD_PAIRS_0x32[attr - GX_ATTR_VTX], 0, sizeof(CPCmd) * 2);
 		}
@@ -224,16 +224,16 @@ namespace nw4r
 		{
 			DisableSetArray(GX_ATTR_VTX_POS);
 			DisableSetArray(GX_ATTR_VTX_NRM);
-			DisableSetArray((_GXAttr)(GX_ATTR_VTX_CLR + 0));
-			DisableSetArray((_GXAttr)(GX_ATTR_VTX_CLR + 1));
-			DisableSetArray((_GXAttr)(GX_ATTR_VTX_TEX_COORD + 0));
-			DisableSetArray((_GXAttr)(GX_ATTR_VTX_TEX_COORD + 1));
-			DisableSetArray((_GXAttr)(GX_ATTR_VTX_TEX_COORD + 2));
-			DisableSetArray((_GXAttr)(GX_ATTR_VTX_TEX_COORD + 3));
-			DisableSetArray((_GXAttr)(GX_ATTR_VTX_TEX_COORD + 4));
-			DisableSetArray((_GXAttr)(GX_ATTR_VTX_TEX_COORD + 5));
-			DisableSetArray((_GXAttr)(GX_ATTR_VTX_TEX_COORD + 6));
-			DisableSetArray((_GXAttr)(GX_ATTR_VTX_TEX_COORD + 7));
+			DisableSetArray((GXAttr)(GX_ATTR_VTX_CLR + 0));
+			DisableSetArray((GXAttr)(GX_ATTR_VTX_CLR + 1));
+			DisableSetArray((GXAttr)(GX_ATTR_VTX_TEX_COORD + 0));
+			DisableSetArray((GXAttr)(GX_ATTR_VTX_TEX_COORD + 1));
+			DisableSetArray((GXAttr)(GX_ATTR_VTX_TEX_COORD + 2));
+			DisableSetArray((GXAttr)(GX_ATTR_VTX_TEX_COORD + 3));
+			DisableSetArray((GXAttr)(GX_ATTR_VTX_TEX_COORD + 4));
+			DisableSetArray((GXAttr)(GX_ATTR_VTX_TEX_COORD + 5));
+			DisableSetArray((GXAttr)(GX_ATTR_VTX_TEX_COORD + 6));
+			DisableSetArray((GXAttr)(GX_ATTR_VTX_TEX_COORD + 7));
 		}
 		
 		void ResShp::CallPrePrimitiveDisplayList(bool r4, bool r5) const
