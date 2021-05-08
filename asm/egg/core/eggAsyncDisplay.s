@@ -1,7 +1,70 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .sdata2, "a"
+.balign 8
+.global lbl_804C0A98
+lbl_804C0A98:
+	.single 0e1
+    .long 0 # Padding
+.global lbl_804C0AA0
+lbl_804C0AA0:
+	.long 0x43300000
+    .long 0x80000000
+.global lbl_804C0AA8
+lbl_804C0AA8:
+	.long 0x43300000
+    .long 0x00000000
+.global lbl_804C0AB0
+lbl_804C0AB0:
+	.single 0e0
 
+.section .bss, "wa"
+.balign 8
+# clear_z_tobj__29@unnamed@eggAsyncDisplay_cpp@
+.global clear_z_tobj__29$$2unnamed$$2eggAsyncDisplay_cpp$$2
+clear_z_tobj__29$$2unnamed$$2eggAsyncDisplay_cpp$$2:
+	.skip 0x20
+
+.section .sbss, "wa"
+.balign 8
+.global spSelector
+spSelector:
+	.skip 0x8
+
+.section .data, "wa"
+.balign 32
+# clear_z_TX__29@unnamed@eggAsyncDisplay_cpp@
+.global clear_z_TX__29$$2unnamed$$2eggAsyncDisplay_cpp$$2
+clear_z_TX__29$$2unnamed$$2eggAsyncDisplay_cpp$$2:
+    .long 0xff00ff
+    .long 0xff00ff
+    .long 0xff00ff
+    .long 0xff00ff
+    .long 0xff00ff
+    .long 0xff00ff
+    .long 0xff00ff
+    .long 0xff00ff
+    .long 0xffffffff
+    .long 0xffffffff
+    .long 0xffffffff
+    .long 0xffffffff
+    .long 0xffffffff
+    .long 0xffffffff
+    .long 0xffffffff
+    .long 0xffffffff
+.balign 8
+.global __vt__Q23EGG12AsyncDisplay
+__vt__Q23EGG12AsyncDisplay:
+    .long 0
+    .long 0
+    .long beginFrame__Q23EGG12AsyncDisplayFv
+    .long beginRender__Q23EGG12AsyncDisplayFv
+    .long endRender__Q23EGG12AsyncDisplayFv
+    .long endFrame__Q23EGG7DisplayFv
+    .long getTickPerFrame__Q23EGG12AsyncDisplayFv
+    .long 0
+
+.section .text, "ax"
 .global PostRetraceCallback
 PostRetraceCallback:
 /* 800AD7D4 000A86D4  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -9,7 +72,7 @@ PostRetraceCallback:
 /* 800AD7DC 000A86DC  90 01 00 14 */	stw r0, 0x14(r1)
 /* 800AD7E0 000A86E0  93 E1 00 0C */	stw r31, 0xc(r1)
 /* 800AD7E4 000A86E4  80 6D 99 38 */	lwz r3, lbl_804BECB8-_SDA_BASE_(r13)
-/* 800AD7E8 000A86E8  83 ED 99 B0 */	lwz r31, lbl_804BED30-_SDA_BASE_(r13)
+/* 800AD7E8 000A86E8  83 ED 99 B0 */	lwz r31, spSelector-_SDA_BASE_(r13)
 /* 800AD7EC 000A86EC  81 83 00 00 */	lwz r12, 0(r3)
 /* 800AD7F0 000A86F0  81 8C 00 14 */	lwz r12, 0x14(r12)
 /* 800AD7F4 000A86F4  7D 89 03 A6 */	mtctr r12
@@ -57,10 +120,10 @@ __ct__Q23EGG12AsyncDisplayFUc:
 /* 800AD880 000A8780  7C 7F 1B 78 */	mr r31, r3
 /* 800AD884 000A8784  4B FF C7 3D */	bl __ct__Q23EGG7DisplayFUc
 /* 800AD888 000A8788  C0 02 90 78 */	lfs f0, lbl_804C0A98-_SDA2_BASE_(r2)
-/* 800AD88C 000A878C  3C A0 80 3A */	lis r5, lbl_803984C0@ha
+/* 800AD88C 000A878C  3C A0 80 3A */	lis r5, __vt__Q23EGG12AsyncDisplay@ha
 /* 800AD890 000A8790  38 80 00 00 */	li r4, 0
 /* 800AD894 000A8794  38 00 00 01 */	li r0, 1
-/* 800AD898 000A8798  38 A5 84 C0 */	addi r5, r5, lbl_803984C0@l
+/* 800AD898 000A8798  38 A5 84 C0 */	addi r5, r5, __vt__Q23EGG12AsyncDisplay@l
 /* 800AD89C 000A879C  90 9F 00 60 */	stw r4, 0x60(r31)
 /* 800AD8A0 000A87A0  38 7F 00 58 */	addi r3, r31, 0x58
 /* 800AD8A4 000A87A4  90 BF 00 04 */	stw r5, 4(r31)
@@ -68,7 +131,7 @@ __ct__Q23EGG12AsyncDisplayFUc:
 /* 800AD8AC 000A87AC  90 9F 00 68 */	stw r4, 0x68(r31)
 /* 800AD8B0 000A87B0  90 9F 00 6C */	stw r4, 0x6c(r31)
 /* 800AD8B4 000A87B4  98 1F 00 70 */	stb r0, 0x70(r31)
-/* 800AD8B8 000A87B8  93 ED 99 B0 */	stw r31, lbl_804BED30-_SDA_BASE_(r13)
+/* 800AD8B8 000A87B8  93 ED 99 B0 */	stw r31, spSelector-_SDA_BASE_(r13)
 /* 800AD8BC 000A87BC  48 04 68 8D */	bl func_800F4148
 /* 800AD8C0 000A87C0  3C 60 80 0B */	lis r3, PostRetraceCallback@ha
 /* 800AD8C4 000A87C4  38 63 D7 D4 */	addi r3, r3, PostRetraceCallback@l
@@ -262,9 +325,9 @@ clearEFB__Q23EGG12AsyncDisplayFUsUsUsUsUsUsQ34nw4r2ut5Color:
 /* 800ADB3C 000A8A3C  39 61 00 80 */	addi r11, r1, 0x80
 /* 800ADB40 000A8A40  48 00 41 F9 */	bl _savegpr_24
 /* 800ADB44 000A8A44  3C 00 43 30 */	lis r0, 0x4330
-/* 800ADB48 000A8A48  3F E0 80 41 */	lis r31, lbl_8040B920@ha
+/* 800ADB48 000A8A48  3F E0 80 41 */	lis r31, clear_z_tobj__29$$2unnamed$$2eggAsyncDisplay_cpp$$2@ha
 /* 800ADB4C 000A8A4C  90 01 00 50 */	stw r0, 0x50(r1)
-/* 800ADB50 000A8A50  3D 60 80 3A */	lis r11, lbl_80398480@ha
+/* 800ADB50 000A8A50  3D 60 80 3A */	lis r11, clear_z_TX__29$$2unnamed$$2eggAsyncDisplay_cpp$$2@ha
 /* 800ADB54 000A8A54  7C 98 23 78 */	mr r24, r4
 /* 800ADB58 000A8A58  7C B9 2B 78 */	mr r25, r5
 /* 800ADB5C 000A8A5C  7C DA 33 78 */	mr r26, r6
@@ -273,8 +336,8 @@ clearEFB__Q23EGG12AsyncDisplayFUsUsUsUsUsUsQ34nw4r2ut5Color:
 /* 800ADB68 000A8A68  7D 3D 4B 78 */	mr r29, r9
 /* 800ADB6C 000A8A6C  7D 5E 53 78 */	mr r30, r10
 /* 800ADB70 000A8A70  90 01 00 58 */	stw r0, 0x58(r1)
-/* 800ADB74 000A8A74  38 7F B9 20 */	addi r3, r31, lbl_8040B920@l
-/* 800ADB78 000A8A78  38 8B 84 80 */	addi r4, r11, lbl_80398480@l
+/* 800ADB74 000A8A74  38 7F B9 20 */	addi r3, r31, clear_z_tobj__29$$2unnamed$$2eggAsyncDisplay_cpp$$2@l
+/* 800ADB78 000A8A78  38 8B 84 80 */	addi r4, r11, clear_z_TX__29$$2unnamed$$2eggAsyncDisplay_cpp$$2@l
 /* 800ADB7C 000A8A7C  38 A0 00 04 */	li r5, 4
 /* 800ADB80 000A8A80  38 C0 00 04 */	li r6, 4
 /* 800ADB84 000A8A84  38 E0 00 16 */	li r7, 0x16

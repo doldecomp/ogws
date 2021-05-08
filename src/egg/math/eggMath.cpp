@@ -33,4 +33,4 @@ namespace EGG
     template struct Math<f32>;
 }
 
-const char * UNUSED_ASSERTS[] = {"-1 <= t && t <= 1", "gcd(%d,%d)\n"};
+const char * eggMath_asserts[] = {"-1 <= t && t <= 1", "gcd(%d,%d)\n"};

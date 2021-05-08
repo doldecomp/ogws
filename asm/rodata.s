@@ -3,9 +3,6 @@
 .section .rodata, "a"  # 0x80375780 - 0x80393A80
 .balign 0x8
 
-.global lbl_8037ACB8
-lbl_8037ACB8:
-	.incbin "baserom.dol", 0x376DB8, 0x38
 .global lbl_8037ACF0
 lbl_8037ACF0:
 	.incbin "baserom.dol", 0x376DF0, 0x20

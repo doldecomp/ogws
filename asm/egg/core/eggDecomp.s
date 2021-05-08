@@ -1,10 +1,36 @@
 # Wii Fit U's symbols show that EGG::Decomp 
-# is a static utility class, rather than just a namespace.
+# is a utility class, rather than just a namespace.
 
 .include "macros.inc"
 
-.section .text, "ax"
+.section .rodata, "a"
+.balign 0x8
+.global lbl_8037ACB8
+lbl_8037ACB8:
+	.string "eggDecomp.cpp"
+    .string "!sWorkArea"
+    .string "sWorkArea"
+    .string "sp < cTreeStackSize"
 
+.section .sbss, "wa"
+.balign 0x8
+.global lbl_804BED08
+lbl_804BED08:
+	.skip 0x8
+.global lbl_804BED10
+lbl_804BED10:
+	.skip 0x8
+.global lbl_804BED18
+lbl_804BED18:
+	.skip 0x8
+.global lbl_804BED20
+lbl_804BED20:
+	.skip 0x8
+.global lbl_804BED28
+lbl_804BED28:
+	.skip 0x8
+
+.section .text, "ax"
 .global decode__Q23EGG6DecompFPUcPUc
 decode__Q23EGG6DecompFPUcPUc:
 /* 800AC408 000A7308  88 A3 00 00 */	lbz r5, 0(r3)

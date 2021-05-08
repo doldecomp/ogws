@@ -229,7 +229,7 @@ EGG_O_FILES := \
 	build/asm/egg/core/eggScene.o \
 	build/asm/egg/core/eggProcessMeter.o \
 	build/egg/core/eggDisposer.o \
-	build/asm/egg/core/eggArchive.o \
+	build/egg/core/eggArchive.o \
 	build/asm/egg/core/eggDecomp.o \
 	build/asm/egg/core/eggAsyncDisplay.o \
 	build/asm/egg/audio/egg_800ADEE8.o \
