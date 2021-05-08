@@ -1,4 +1,3 @@
-#pragma readonly_strings on
 #ifndef EGG_CORE_ARCHIVE_H
 #define EGG_CORE_ARCHIVE_H
 #include "types_egg.h"
