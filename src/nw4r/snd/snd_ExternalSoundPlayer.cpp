@@ -1,4 +1,3 @@
-#ifdef __DECOMP_NON_MATCHING
 #pragma ipa file
 #include "snd_ExternalSoundPlayer.h"
 #include "snd_BasicSound.h"
@@ -16,8 +15,7 @@ namespace nw4r
 			ExternalSoundPlayer::~ExternalSoundPlayer()
 			{
 				LinkList<BasicSound, 0xD0>::Iterator iter = mSoundList.GetBeginIter();
-				
-				while (iter.mNode != mSoundList.GetEndIter().mNode)
+				while (iter != mSoundList.GetEndIter())
 				{
 					iter++->mExternalSoundPlayer = NULL;
 				}
@@ -26,10 +24,8 @@ namespace nw4r
 			void ExternalSoundPlayer::SetPlayableSoundCount(int playableSoundCount)
 			{
 				mPlayableSoundCount = playableSoundCount;
-				
-				if (mSoundList.mCount <= mPlayableSoundCount) return;
-				
-				while (mSoundList.mCount > mPlayableSoundCount)
+						
+				while ((int)mSoundList.mCount > mPlayableSoundCount)
 				{
 					GetLowestPrioritySound()->Shutdown();
 				}
@@ -70,6 +66,3 @@ namespace nw4r
 		}
 	}
 }
-#else
-#error This file has yet to be decompiled accurately. Use "snd_ExternalSoundPlayer.s" instead.
-#endif

@@ -75,7 +75,7 @@ NW4R_O_FILES := \
 	build/asm/nw4r/snd/snd_DisposeCallbackManager.o \
 	build/asm/nw4r/snd/snd_DvdSoundArchive.o \
 	build/nw4r/snd/snd_EnvGenerator.o \
-	build/asm/nw4r/snd/snd_ExternalSoundPlayer.o \
+	build/nw4r/snd/snd_ExternalSoundPlayer.o \
 	build/asm/nw4r/snd/snd_FrameHeap.o \
 	build/nw4r/snd/snd_FxChorus.o \
 	build/nw4r/snd/snd_FxDelay.o \
