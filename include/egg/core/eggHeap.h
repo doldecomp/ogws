@@ -21,21 +21,21 @@ namespace EGG
         Heap(MEMiHeapHead *);
         virtual ~Heap(); // at 0x8
         virtual EHeapKind getHeapKind() const = 0; // at 0xC
-        virtual UNKTYPE initAllocator(Allocator *, s32) = 0; // at 0x10
-        virtual UNKTYPE alloc(u32, s32) = 0; // at 0x14
-        virtual UNKTYPE free(void *) = 0; // at 0x18
-        virtual UNKTYPE destroy() = 0; // at 0x1C
-        virtual UNKTYPE resizeForMBlock(void *, u32) = 0; // at 0x20
-        virtual UNKTYPE getAllocatableSize(s32) = 0; // at 0x24
-        virtual UNKTYPE adjust() = 0; // at 0x28
+        virtual void initAllocator(Allocator *, s32) = 0; // at 0x10
+        virtual void * alloc(u32, s32) = 0; // at 0x14
+        virtual void free(void *) = 0; // at 0x18
+        virtual void destroy() = 0; // at 0x1C
+        virtual UNKWORD resizeForMBlock(void *, u32) = 0; // at 0x20
+        virtual UNKWORD getAllocatableSize(s32) = 0; // at 0x24
+        virtual UNKWORD adjust() = 0; // at 0x28
 
-        static UNKTYPE initialize();
-        static UNKTYPE alloc(u32, int, Heap *);
+        static void initialize();
+        static void * alloc(u32, int, Heap *);
         Heap * findParentHeap();
         static Heap * findContainHeap(const void *);
-        static UNKTYPE free(void *, Heap *);
-        UNKTYPE dispose();
-        UNKTYPE becomeCurrentHeap();
+        static void free(void *, Heap *);
+        void dispose();
+        Heap * becomeCurrentHeap();
 
         UNKWORD WORD_0x8;
         UNKWORD WORD_0xC;
@@ -46,6 +46,7 @@ namespace EGG
         nw4r::ut::Node mNode; // at 0x20
         nw4r::ut::List mChildren; // at 0x28
 
+        // TO-DO: Figure out the rest of the static members in the assembly
         static nw4r::ut::List sHeapList;
         static OSMutex sRootMutex;
         static Heap *sCurrentHeap;
@@ -54,7 +55,7 @@ namespace EGG
 }
 
 void * operator new(size_t);
-void * operator new (size_t, EGG::Heap *, int);
+void * operator new(size_t, EGG::Heap *, int);
 void * operator new[](size_t);
 void * operator new[](size_t, int);
 void * operator new[](size_t, EGG::Heap *, int);
