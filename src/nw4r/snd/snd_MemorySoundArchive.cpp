@@ -1,4 +1,3 @@
-#ifdef __DECOMP_NON_MATCHING
 #include <string.h>
 #include <new>
 #include "ut_algorithm.h"
@@ -144,7 +143,7 @@ namespace nw4r
 		
 		bool MemorySoundArchive::MemoryFileStream::CanWrite() const
 		{
-			return true;
+			return false;
 		}
 		
 		bool MemorySoundArchive::MemoryFileStream::CanRead() const
@@ -166,9 +165,10 @@ namespace nw4r
 		{
 			return true;
 		}
+
+		MemorySoundArchive::MemoryFileStream::~MemoryFileStream()
+		{
+			
+		}
 	}
 }
-
-#else
-#error This file has yet to be decompiled accurately. Use "snd_MemorySoundArchive.s" instead.
-#endif
