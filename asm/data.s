@@ -4,21 +4,6 @@
 
 .balign 0x8
 
-.global lbl_80398570
-lbl_80398570:
-	.incbin "baserom.dol", 0x394670, 0xB0
-.global lbl_80398620
-lbl_80398620:
-	.incbin "baserom.dol", 0x394720, 0x10
-.global lbl_80398630
-lbl_80398630:
-	.incbin "baserom.dol", 0x394730, 0x10
-.global lbl_80398640
-lbl_80398640:
-	.incbin "baserom.dol", 0x394740, 0x38
-.global lbl_80398678
-lbl_80398678:
-	.incbin "baserom.dol", 0x394778, 0x18
 .global lbl_80398690
 lbl_80398690:
 	.incbin "baserom.dol", 0x394790, 0xA8

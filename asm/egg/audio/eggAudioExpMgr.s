@@ -1,7 +1,107 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .sdata2, "a"
+.balign 8
+.global lbl_804C0AB8
+lbl_804C0AB8:
+	.single 0e1
 
+.section .sdata, "wa"
+.balign 8
+.global lbl_804BD518
+lbl_804BD518:
+	.string "heap"
+    .balign 8
+.global lbl_804BD520
+lbl_804BD520:
+	.string "arg"
+    .balign 8
+
+.section .sbss, "wa"
+.balign 8
+.global lbl_804BED40
+lbl_804BED40:
+	.skip 0x4
+.global lbl_804BED44
+lbl_804BED44:
+	.skip 0x4
+
+.section .rodata, "a"
+.balign 8
+.global lbl_8037AE50
+lbl_8037AE50:
+	.string "eggAudioExpMgr.cpp"
+    .string "ret"
+
+.section .data, "wa"
+.balign 8
+# These two functions are supposedly on separate vtables in BBA.
+.global vtable_80398570
+vtable_80398570:
+    .long 0
+    .long 0
+    .long initialize__Q23EGG11ExpAudioMgrFPQ33EGG9IAudioMgr3Arg
+    .long calc__Q23EGG14SimpleAudioMgrFv
+.global __vt__Q23EGG12SoundHeapMgr
+__vt__Q23EGG12SoundHeapMgr:
+    .long 0
+    .long 0
+    .long 0x800afab8
+    .long getCurrentLevel__Q23EGG12SoundHeapMgrFv
+    .long func_800AF980
+.global vtable_80398594
+vtable_80398594:
+    .long 0
+    .long 0
+    .long 0x800afb18
+    .long 0x800afb10
+    .long 0x800afb08
+    .long 0x800afb00
+    .long 0x800afaf8
+    .long 0x800afae8
+    .long 0x800afaf0
+    .long 0x800afae0
+    .long 0x800afac8
+    .long 0x800afad0
+    .long 0x800afad8
+    .long 0x800afac0
+    .long startSound__Q23EGG9ArcPlayerFPQ34nw4r3snd11SoundHandleUl
+    .long startSound__Q23EGG9ArcPlayerFPQ34nw4r3snd11SoundHandleUi
+    .long startSound__Q23EGG9ArcPlayerFPQ34nw4r3snd11SoundHandlePCc
+    .long prepareSound__Q23EGG9ArcPlayerFPQ34nw4r3snd11SoundHandleUl
+    .long prepareSound__Q23EGG9ArcPlayerFPQ34nw4r3snd11SoundHandleUi
+    .long prepareSound__Q23EGG9ArcPlayerFPQ34nw4r3snd11SoundHandlePCc
+    .long holdSound__Q23EGG9ArcPlayerFPQ34nw4r3snd11SoundHandleUl
+    .long holdSound__Q23EGG9ArcPlayerFPQ34nw4r3snd11SoundHandleUi
+    .long holdSound__Q23EGG9ArcPlayerFPQ34nw4r3snd11SoundHandlePCc
+    .long __dt__Q23EGG11ExpAudioMgrFv
+    .long func_800B0ECC
+    .long func_800B0ED4
+    .long func_800B0EDC
+    .long setupMemoryArchive__Q23EGG11ExpAudioMgrFPCvPQ34nw4r3snd9SoundHeap
+    .long closeArchive__Q23EGG11ExpAudioMgrFv
+    .long func_800B0EF4
+    .long func_800B0EFC
+    .long func_800B0F04
+    .long openArchive__Q23EGG11ExpAudioMgrFPCcPQ34nw4r3snd9SoundHeapQ33EGG9ArcPlayer12SARC_STORAGE
+    .long setupMemoryArchive__Q23EGG11ExpAudioMgrFPCvPQ34nw4r3snd9SoundHeapl
+    .long func_800AF834
+.global lbl_80398620
+lbl_80398620:
+	.string "eggAudio3DMgr.h"
+.global lbl_80398630
+lbl_80398630:
+	.string "eggAudio3DMgr.h"
+.global lbl_80398640
+lbl_80398640:
+	# "When the archive is opened, it cannot be returned to the level 1 state." (Shift-JIS)
+    .long 0x8341815B, 0x834A8343, 0x83758349, 0x815B8376, 0x83938E9E, 0x82CD838C, 0x8378838B
+    .long 0x3182CC83, 0x58836581, 0x5B836782, 0xC982CD96, 0xDF82B982, 0xDC82B982, 0xF1814200
+.global lbl_80398678
+lbl_80398678:
+	.string "eggAudioExpMgr.h"
+
+.section .text, "ax"
 .global __ct__Q23EGG11ExpAudioMgrFv
 __ct__Q23EGG11ExpAudioMgrFv:
 /* 800AF384 000AA284  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -35,9 +135,9 @@ lbl_800AF3C4:
 /* 800AF3EC 000AA2EC  90 9D 08 50 */	stw r4, 0x850(r29)
 /* 800AF3F0 000AA2F0  90 1D 08 48 */	stw r0, 0x848(r29)
 /* 800AF3F4 000AA2F4  48 00 12 25 */	bl __ct__Q23EGG10AudioFxMgrFv
-/* 800AF3F8 000AA2F8  3C A0 80 3A */	lis r5, lbl_80398570@ha
+/* 800AF3F8 000AA2F8  3C A0 80 3A */	lis r5, vtable_80398570@ha
 /* 800AF3FC 000AA2FC  7F A3 EB 78 */	mr r3, r29
-/* 800AF400 000AA300  38 A5 85 70 */	addi r5, r5, lbl_80398570@l
+/* 800AF400 000AA300  38 A5 85 70 */	addi r5, r5, vtable_80398570@l
 /* 800AF404 000AA304  38 85 00 10 */	addi r4, r5, 0x10
 /* 800AF408 000AA308  90 BD 00 00 */	stw r5, 0(r29)
 /* 800AF40C 000AA30C  38 05 00 24 */	addi r0, r5, 0x24
