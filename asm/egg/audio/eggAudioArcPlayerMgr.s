@@ -1,14 +1,57 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .rodata, "a"
+.balign 8
+.global lbl_8037AD10
+lbl_8037AD10:
+    .string "eggAudioArcPlayerMgr.cpp"
+    .string "Unlknown Storage :%d\n"
+    .string "Set Sound Heap\n"
+    .string "Sound Archive is already opened\n"
+    .string "cannot alloc setup memory %d\n"
+    .string "cannot alloc setup strm memory %d\n"
+    .string "openArchive : Cannot Use String Data : %s\n"
+    .string "Now Setteing (oprn archive not finished)!!!\n"
+    .string "archive is not opened!!!\n"
+    .string "playernum<getPlayer().GetSoundPlayerCount()"
 
+.section .data, "wa"
+.balign 8
+.global __vt__Q23EGG9ArcPlayer
+__vt__Q23EGG9ArcPlayer:
+    .long 0
+    .long 0
+    .long __dt__Q23EGG9ArcPlayerFv
+    .long openArchive__Q23EGG9ArcPlayerFPCcPQ34nw4r3snd9SoundHeapQ33EGG9ArcPlayer12SARC_STORAGE
+    .long openDvdArchive__Q23EGG9ArcPlayerFPCcPQ34nw4r3snd9SoundHeap
+    .long openNandArchive__Q23EGG9ArcPlayerFPCcPQ34nw4r3snd9SoundHeap
+    .long func_800AE884 # This is just not part of the link map's vtable
+    .long setupMemoryArchive__Q23EGG9ArcPlayerFPCvPQ34nw4r3snd9SoundHeap
+    .long setupMemoryArchive__Q23EGG9ArcPlayerFPCvPQ34nw4r3snd9SoundHeapl
+    .long closeArchive__Q23EGG9ArcPlayerFv
+    .long loadGroup__Q23EGG9ArcPlayerFUiPQ34nw4r3snd9SoundHeapUl
+    .long loadGroup__Q23EGG9ArcPlayerFiPQ34nw4r3snd9SoundHeapUl
+    .long loadGroup__Q23EGG9ArcPlayerFPCcPQ34nw4r3snd9SoundHeapUl
+    .long calc__Q23EGG9ArcPlayerFv
+    .long startSound__Q23EGG9ArcPlayerFPQ34nw4r3snd11SoundHandleUl
+    .long startSound__Q23EGG9ArcPlayerFPQ34nw4r3snd11SoundHandleUi
+    .long startSound__Q23EGG9ArcPlayerFPQ34nw4r3snd11SoundHandlePCc
+    .long prepareSound__Q23EGG9ArcPlayerFPQ34nw4r3snd11SoundHandleUl
+    .long prepareSound__Q23EGG9ArcPlayerFPQ34nw4r3snd11SoundHandleUi
+    .long prepareSound__Q23EGG9ArcPlayerFPQ34nw4r3snd11SoundHandlePCc
+    .long holdSound__Q23EGG9ArcPlayerFPQ34nw4r3snd11SoundHandleUl
+    .long holdSound__Q23EGG9ArcPlayerFPQ34nw4r3snd11SoundHandleUi
+    .long holdSound__Q23EGG9ArcPlayerFPQ34nw4r3snd11SoundHandlePCc
+    .long 0
+
+.section .text, "ax"
 .global __ct__Q23EGG9ArcPlayerFPQ34nw4r3snd9SoundHeap
 __ct__Q23EGG9ArcPlayerFPQ34nw4r3snd9SoundHeap:
 /* 800AE24C 000A914C  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 800AE250 000A9150  7C 08 02 A6 */	mflr r0
-/* 800AE254 000A9154  3C A0 80 3A */	lis r5, lbl_80398510@ha
+/* 800AE254 000A9154  3C A0 80 3A */	lis r5, __vt__Q23EGG9ArcPlayer@ha
 /* 800AE258 000A9158  90 01 00 24 */	stw r0, 0x24(r1)
-/* 800AE25C 000A915C  38 A5 85 10 */	addi r5, r5, lbl_80398510@l
+/* 800AE25C 000A915C  38 A5 85 10 */	addi r5, r5, __vt__Q23EGG9ArcPlayer@l
 /* 800AE260 000A9160  93 E1 00 1C */	stw r31, 0x1c(r1)
 /* 800AE264 000A9164  3B E0 00 00 */	li r31, 0
 /* 800AE268 000A9168  93 C1 00 18 */	stw r30, 0x18(r1)
