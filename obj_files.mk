@@ -204,6 +204,8 @@ EGG_O_FILES := \
 	build/asm/egg/sdata2_egg.o \
 	build/asm/egg/sbss2_egg.o \
 	\
+	build/asm/egg/prim/eggAssert.o \
+	build/asm/egg/egg_800A204C.o \
 	build/egg/math/eggMath.o \
 	build/asm/egg/math/eggMatrix.o \
 	build/egg/math/eggQuat.o \
