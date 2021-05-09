@@ -1,5 +1,11 @@
 .include "macros.inc"
 
+.section .sbss, "wa"
+.balign 8
+.global mConfigData__Q23EGG10BaseSystem
+mConfigData__Q23EGG10BaseSystem:
+	.skip 0x8
+
 .section .data, "wa"
 .balign 0x8
 .global __vt__Q23EGG17ConfigurationData
