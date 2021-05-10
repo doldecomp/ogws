@@ -19,7 +19,7 @@ NW4R_O_FILES := \
 	build/nw4r/ut/ut_TagProcessorBase.o \
 	build/nw4r/ut/ut_IOStream.o \
 	build/nw4r/ut/ut_FileStream.o \
-	build/asm/nw4r/ut/ut_DvdFileStream.o \
+	build/nw4r/ut/ut_DvdFileStream.o \
 	build/nw4r/ut/ut_DvdLockedFileStream.o \
 	build/nw4r/ut/ut_NandFileStream.o \
 	build/nw4r/ut/ut_LockedCache.o \
