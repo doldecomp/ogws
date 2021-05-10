@@ -1,5 +1,11 @@
 .include "macros.inc"
 
+.section .sbss, "wa"
+.balign 8
+.global cInvalidHandle__3EGG
+cInvalidHandle__3EGG:
+	.skip 0x8
+
 .section .ctors, "a"
 .4byte __sinit_$$3eggEffect_cpp
 
@@ -42,5 +48,5 @@ ModifierTravFunc_SetRotate__Q34nw4r2ef15ParticleManagerFPvUl:
 # __sinit_\eggEffect_cpp
 .global __sinit_$$3eggEffect_cpp
 __sinit_$$3eggEffect_cpp:
-/* 800B173C 000AC63C  38 6D 99 D0 */	addi r3, r13, lbl_804BED50-_SDA_BASE_
+/* 800B173C 000AC63C  38 6D 99 D0 */	addi r3, r13, cInvalidHandle__3EGG-_SDA_BASE_
 /* 800B1740 000AC640  4B F6 B3 8C */	b __ct__Q34nw4r2ef10HandleBaseFv
