@@ -1,7 +1,78 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .rodata, "a"
+.balign 8
+.global lbl_8037B0C0
+lbl_8037B0C0:
+	.string "eggAudioHeapMgr.cpp"
+    .string "mHeap.IsValid()"
 
+.section .data, "wa"
+.balign 8
+.global __vt__Q23EGG14SimpleAudioMgr
+__vt__Q23EGG14SimpleAudioMgr:
+    .long 0
+    .long 0
+    .long initialize__Q23EGG14SimpleAudioMgrFPQ33EGG9IAudioMgr3Arg
+    .long calc__Q23EGG14SimpleAudioMgrFv
+.global vtable_803986a0
+vtable_803986a0:
+    .long 0
+    .long 0
+    .long loadState__Q23EGG12SoundHeapMgrFl
+    .long getCurrentLevel__Q23EGG12SoundHeapMgrFv
+    .long func_800AF980
+.global vtable_803986bc
+vtable_803986bc:
+    .long 0
+    .long 0
+    .long func_800B0F10
+    .long openArchive__Q23EGG9ArcPlayerFPCcPQ34nw4r3snd9SoundHeapQ33EGG9ArcPlayer12SARC_STORAGE
+    .long 0x800afb08
+    .long 0x800afb00
+    .long 0x800afaf8
+    .long 0x800afab0
+    .long setupMemoryArchive__Q23EGG9ArcPlayerFPCvPQ34nw4r3snd9SoundHeapl
+    .long 0x800afaa8
+    .long 0x800afac8
+    .long 0x800afad0
+    .long 0x800afad8
+    .long 0x800afac0
+    .long startSound__Q23EGG9ArcPlayerFPQ34nw4r3snd11SoundHandleUl
+    .long startSound__Q23EGG9ArcPlayerFPQ34nw4r3snd11SoundHandleUi
+    .long startSound__Q23EGG9ArcPlayerFPQ34nw4r3snd11SoundHandlePCc
+    .long prepareSound__Q23EGG9ArcPlayerFPQ34nw4r3snd11SoundHandleUl
+    .long prepareSound__Q23EGG9ArcPlayerFPQ34nw4r3snd11SoundHandleUi
+    .long prepareSound__Q23EGG9ArcPlayerFPQ34nw4r3snd11SoundHandlePCc
+    .long holdSound__Q23EGG9ArcPlayerFPQ34nw4r3snd11SoundHandleUl
+    .long holdSound__Q23EGG9ArcPlayerFPQ34nw4r3snd11SoundHandleUi
+    .long holdSound__Q23EGG9ArcPlayerFPQ34nw4r3snd11SoundHandlePCc
+    .long __dt__Q23EGG14SimpleAudioMgrFv
+    .long func_800B0ECC
+    .long func_800B0ED4
+    .long func_800B0EDC
+    .long func_800B0EE4
+    .long func_800B0EEC
+    .long func_800B0EF4
+    .long func_800B0EFC
+    .long func_800B0F04
+    .long 0
+.global __vt__Q23EGG9IAudioMgr
+__vt__Q23EGG9IAudioMgr:
+    .long 0
+    .long 0
+    .long initialize__Q23EGG9IAudioMgrFPQ33EGG9IAudioMgr3Arg
+    .long 0
+.global vtable_80398748
+vtable_80398748:
+    .long 0
+    .long 0
+    .long loadState__Q23EGG12SoundHeapMgrFl
+    .long getCurrentLevel__Q23EGG12SoundHeapMgrFv
+    .long func_800AF980
+    .long 0
+
+.section .text, "ax"
 .global func_800B0A58
 func_800B0A58:
 /* 800B0A58 000AB958  94 21 FF D0 */	stwu r1, -0x30(r1)

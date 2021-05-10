@@ -42,8 +42,8 @@ vtable_80398570:
     .long 0
     .long initialize__Q23EGG11ExpAudioMgrFPQ33EGG9IAudioMgr3Arg
     .long calc__Q23EGG14SimpleAudioMgrFv
-.global __vt__Q23EGG12SoundHeapMgr
-__vt__Q23EGG12SoundHeapMgr:
+.global vtable_80398580
+vtable_80398580:
     .long 0
     .long 0
     .long 0x800afab8
