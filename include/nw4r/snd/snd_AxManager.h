@@ -6,6 +6,17 @@
 #include "ut_LinkList.h"
 #include "snd_MoveValue.h"
 
+namespace
+{
+	struct AXUnk
+	{
+		void * PTR_0x0;
+		void * PTR_0x4;
+		void * PTR_0x8;
+		void * PTR_0xC;
+	};
+}
+
 namespace nw4r
 {
 	namespace snd
