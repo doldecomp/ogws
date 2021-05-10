@@ -1,7 +1,13 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .rodata, "a"
+.balign 8
+.global lbl_8037B0E8
+lbl_8037B0E8:
+	.string "eggAudioMgr.cpp"
+    .string "arg_"
 
+.section .text, "ax"
 .global __ct__Q33EGG14SimpleAudioMgr17SimpleAudioMgrArgFv
 __ct__Q33EGG14SimpleAudioMgr17SimpleAudioMgrArgFv:
 /* 800B0B90 000ABA90  3C 80 00 8D */	lis r4, 0x008CA000@ha
