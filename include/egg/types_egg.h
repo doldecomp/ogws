@@ -19,6 +19,8 @@ namespace EGG
     struct XfbManager;
 
     struct Archive;
+
+    struct MsgRes;
 }
 
 #endif
