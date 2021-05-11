@@ -366,28 +366,28 @@ namespace nw4r
 			#ifdef __DECOMP_NON_MATCHING
 			void AxManager::AuxCallbackFunc(void * arg1, void * arg2)
 			{
-				AXUnk *pUnk = (AXUnk *)arg1;
-				AuxBus bus = (AuxBus)((u32)arg2);
-
 				int len;
 				void * arrPtr[4];
 				
+				void ** ptrs = (void **)arg1;
+				AuxBus bus = (AuxBus)arg2;
+
 				if (GetInstance()->mOutputMode == 2)
 				{
 					//80032174
 					len = 4;
-					arrPtr[0] = pUnk->PTR_0x0;
-					arrPtr[1] = pUnk->PTR_0x4;
-					arrPtr[2] = pUnk->PTR_0x8;
-					arrPtr[3] = pUnk->PTR_0xC;
+					arrPtr[0] = ptrs[0];
+					arrPtr[1] = ptrs[1];
+					arrPtr[2] = ptrs[2];
+					arrPtr[3] = ptrs[3];
 				}
 				else
 				{
 					//8003219C
 					len = 3;
-					arrPtr[0] = pUnk->PTR_0x0;
-					arrPtr[1] = pUnk->PTR_0x4;
-					arrPtr[2] = pUnk->PTR_0x8;
+					arrPtr[0] = ptrs[0];
+					arrPtr[1] = ptrs[1];
+					arrPtr[2] = ptrs[2];
 				}
 				//800321B8
 				if (GetInstance()->ARR_0xF0[bus])
