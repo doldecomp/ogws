@@ -111,60 +111,60 @@ namespace EGG
         return (wchar_t *)((u32)mMsgDataBlk->mStringPool + pEntry->mDataBlkOfs);
     }
 
-    void * MsgRes::extractMsgHeader(const void *data)
+    const void * MsgRes::extractMsgHeader(const void *data)
     {
         #line 223
         EGG_ASSERT(data);
         mMsgHeader = (MsgHeaderBlock *)data;
-        return (void *)data;
+        return data;
     }
 
-    void * MsgRes::extractMsgInfoDataBlk(const void *data)
+    const void * MsgRes::extractMsgInfoDataBlk(const void *data)
     {
         #line 251
         EGG_ASSERT(data);
         mMsgInfoDataBlk = (MsgInfoBlock *)data;
-        return (void *)data;
+        return data;
     }
 
-    void * MsgRes::extractMsgDataBlk(const void *data)
+    const void * MsgRes::extractMsgDataBlk(const void *data)
     {
         #line 277
         EGG_ASSERT(data);
         mMsgDataBlk = (MsgDataBlock *)data;
-        return (void *)data;
+        return data;
     }   
 
-    void * MsgRes::extractStrAttrDataBlk(const void *data)
+    const void * MsgRes::extractStrAttrDataBlk(const void *data)
     {
         #line 298
         EGG_ASSERT(data);
         mMsgStrDataBlk = (MsgStrAttrBlock *)data;
-        return (void *)data;
+        return data;
     }
 
-    void * MsgRes::extractMsgIDDataBlk(const void *data)
+    const void * MsgRes::extractMsgIDDataBlk(const void *data)
     {
         #line 309
         EGG_ASSERT(data);
         mMsgIDDataBlk = (MsgIdBlock *)data;
-        return (void *)data;
+        return data;
     }
 
-    void * MsgRes::extractFlowChartInfoDataBlk(const void *data)
+    const void * MsgRes::extractFlowChartInfoDataBlk(const void *data)
     {
         #line 334
         EGG_ASSERT(data);
         mMsgFlowChartBlk = (MsgFlowChartBlock *)data;
-        return (void *)data;
+        return data;
     }
 
-    void * MsgRes::extractFlowLabelInfoDataBlk(const void *data)
+    const void * MsgRes::extractFlowLabelInfoDataBlk(const void *data)
     {
         #line 345
         EGG_ASSERT(data);
         mMsgFlowLabelBlk = (MsgFlowLabelBlock *)data;
-        return (void *)data;
+        return data;
     }
 
     /*
@@ -175,7 +175,7 @@ namespace EGG
         only global/static.
     */
     #ifdef __DECOMP_NON_MATCHING
-    MsgRes::eDataBlkKind MsgRes::analyzeDataBlkKind(unsigned int kind)
+    MsgRes::EDataBlkKind MsgRes::analyzeDataBlkKind(unsigned int kind)
     {
         if (kind == cMsgSectionMagic[BLOCK_MSGINFO]) return BLOCK_MSGINFO;
         else if (kind == cMsgSectionMagic[BLOCK_MSGDATA]) return BLOCK_MSGDATA;

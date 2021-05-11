@@ -5,8 +5,7 @@
 
 // Escape sequence (Official name = "Tag")
 const char cTagMark = 0x1A;
-                                /* "INF1"      "DAT1"      "STR1"      "MID1"      "FLW1"      "FLI1"  */
-const u32 cMsgSectionMagic[] = {0x494E4631, 0x44415431, 0x53545231, 0x4D494431, 0x464C5731, 0x464C4931};
+const u32 cMsgSectionMagic[] = {'INF1', 'DAT1', 'STR1', 'MID1', 'FLW1', 'FLI1'};
 const u32 cShifts[]          = {0x00000020, 0x00000018, 0x00000010, 0x00000008, 0x00000000, 0x00000000};
 
 struct MaskUnk
@@ -100,7 +99,7 @@ namespace EGG
 {
     struct MsgRes : BinaryMESG
     {
-        enum eDataBlkKind
+        enum EDataBlkKind
         {
             BLOCK_MSGINFO,   /* INF1 */
             BLOCK_MSGDATA,   /* DAT1 */
@@ -136,14 +135,14 @@ namespace EGG
         const wchar_t * getMsg(unsigned int, unsigned int);
         MsgInfoBlockEntry * getMsgEntry(unsigned int, unsigned int) __attribute__((never_inline));
         u32 getMsgID(u16); // inlined
-        eDataBlkKind analyzeDataBlkKind(unsigned int); // inlined
-        void * extractMsgHeader(const void *); // inlined
-        void * extractMsgInfoDataBlk(const void *); // inlined
-        void * extractMsgDataBlk(const void *); // inlined
-        void * extractStrAttrDataBlk(const void *); // inlined
-        void * extractMsgIDDataBlk(const void *); // inlined
-        void * extractFlowChartInfoDataBlk(const void *); // inlined
-        void * extractFlowLabelInfoDataBlk(const void *); // inlined
+        EDataBlkKind analyzeDataBlkKind(unsigned int); // inlined
+        const void * extractMsgHeader(const void *); // inlined
+        const void * extractMsgInfoDataBlk(const void *); // inlined
+        const void * extractMsgDataBlk(const void *); // inlined
+        const void * extractStrAttrDataBlk(const void *); // inlined
+        const void * extractMsgIDDataBlk(const void *); // inlined
+        const void * extractFlowChartInfoDataBlk(const void *); // inlined
+        const void * extractFlowLabelInfoDataBlk(const void *); // inlined
     };
 }
 
