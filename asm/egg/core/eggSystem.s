@@ -25,7 +25,7 @@ __vt__Q23EGG17ConfigurationData:
     .long run__Q23EGG17ConfigurationDataFv
     .long 0
 
-.section .sdata2, "wa"
+.section .sdata2, "a"
 .balign 0x8
 .global lbl_804C09F8
 lbl_804C09F8:

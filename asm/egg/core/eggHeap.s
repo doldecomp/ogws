@@ -53,7 +53,7 @@ sIsHeapListInitialized__Q23EGG4Heap:
 sAllocatableHeap__Q23EGG4Heap:
 	.skip 0x8
 
-.section .rodata, "wa"
+.section .rodata, "a"
 .balign 0x8
 .global lbl_8037A268
 lbl_8037A268:
