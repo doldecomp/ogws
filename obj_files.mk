@@ -194,6 +194,8 @@ NW4R_O_FILES := \
 	build/asm/nw4r/lyt/lyt_common.o \
 
 EGG_O_FILES := \
+	build/asm/egg/gfx/eggShadowTextureManager.o \
+	\
 	build/asm/egg/text_egg.o \
 	build/asm/egg/ctors_egg.o \
 	build/asm/egg/rodata_egg.o \
