@@ -9,11 +9,16 @@ namespace EGG
     struct Quatf;
     struct Vector3f;
 
+    template <typename T> struct TBitFlag;
+
     struct Heap;
 
     struct Disposer;
 
     struct Allocator;
+
+    struct Fader;
+    struct ColorFader;
 
     struct Xfb;
     struct XfbManager;

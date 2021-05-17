@@ -9,6 +9,8 @@ extern "C" {
 UNKTYPE GXSetScissor(u32, u32, u32, u32);
 UNKTYPE GXSetScissorBoxOffset(u32, u32);
 
+UNKTYPE GXSetCurrentMtx(UNKWORD);
+
 UNKTYPE GXSetViewport(f32, f32, f32, f32, f32, f32);
 UNKTYPE GXSetViewportJitter(f32, f32, f32, f32, f32, f32, u32);
 
