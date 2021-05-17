@@ -1,3 +1,5 @@
+#ifdef __DECOMP_NON_MATCHING
+
 #include "eggColorFader.h"
 #include "eggAssert.h"
 #include "math_types.h"
@@ -204,3 +206,7 @@ namespace EGG
 
     }
 }
+
+#else
+#error This file has yet to be decompiled accurately. Use "eggColorFader.s" instead.
+#endif
