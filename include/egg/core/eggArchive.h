@@ -47,8 +47,6 @@ namespace EGG
         void * getFile(const char *, FileInfo *);
         bool initHandle(void *); // inlined
 
-        void *PTR_0x8;
-        int INT_0xC;
         int INT_0x10;
         int INT_0x14;
         ARCHandle mHandle; // at 0x18

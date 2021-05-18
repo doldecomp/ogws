@@ -24,7 +24,7 @@ namespace nw4r
 				static void Free(void *);
 				
 				bool mPoweredFlag; // at 0x0
-				MEMHeap * mHeap; // at 0x4
+				MEMiHeapHead * mHeap; // at 0x4
 				u32 mAllocCount; // at 0x8
 				
 				inline AxfxImpl() : mPoweredFlag(false), mHeap(NULL), mAllocCount(0) {}

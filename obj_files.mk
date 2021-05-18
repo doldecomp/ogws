@@ -214,7 +214,7 @@ EGG_O_FILES := \
 	build/asm/egg/math/eggVector.o \
 	build/asm/egg/core/eggExpHeap.o \
 	build/asm/egg/core/eggFrmHeap.o \
-	build/asm/egg/core/eggHeap.o \
+	build/egg/core/eggHeap.o \
 	build/egg/core/eggAllocator.o \
 	build/asm/egg/core/eggThread.o \
 	build/asm/egg/core/eggSystem.o \

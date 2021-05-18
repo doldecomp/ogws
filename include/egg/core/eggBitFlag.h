@@ -10,6 +10,16 @@ namespace EGG
 	{
 		T value;
 		
+		inline void makeAllZero()
+		{
+			value = T();
+		}
+		
+		inline TBitFlag()
+		{
+			makeAllZero();
+		}
+		
 		inline T makeMask(u8 bit) const
 		{
 			return 1 << bit;

@@ -2,11 +2,12 @@
 #define EGG_CORE_HEAP_H
 #include "types_egg.h"
 #include "eggDisposer.h"
+#include "eggBitFlag.h"
 #include "ut_list.h"
 #include <RevoSDK/MEM/mem_heapCommon.h>
 #include <RevoSDK/OS/OSMutex.h>
 
-#define MB_AS_B 1024.0f * 1024.0f // 1048576.0f
+#define MB_AS_B (1024.0f * 1024.0f) // 1048576.0f
 
 namespace EGG
 {
@@ -17,6 +18,36 @@ namespace EGG
             HEAP_EXPANDED = 1,
             HEAP_FRAME = 2
         };
+
+        inline u8 * getStartAddress()
+        {
+            return (u8 *)this;
+        }
+
+        inline u8 * getEndAddress()
+        {
+            return mHeapHandle->mEndAddress;
+        }
+
+        inline int getTotalSize()
+        {
+            return getEndAddress() - getStartAddress();
+        }
+
+		inline bool tstDisableAllocation()
+		{
+			return mFlags.onBit(0);
+		}
+		
+		inline void disableAllocation()
+		{
+			mFlags.setBit(0);
+		}
+		
+		inline void enableAllocation()
+		{
+			mFlags.resetBit(0);
+		}
 
         Heap(MEMiHeapHead *);
         virtual ~Heap(); // at 0x8
@@ -31,26 +62,25 @@ namespace EGG
 
         static void initialize();
         static void * alloc(u32, int, Heap *);
+        static Heap * findHeap(MEMiHeapHead *);
         Heap * findParentHeap();
         static Heap * findContainHeap(const void *);
         static void free(void *, Heap *);
         void dispose();
         Heap * becomeCurrentHeap();
 
-        UNKWORD WORD_0x8;
-        UNKWORD WORD_0xC;
         MEMiHeapHead * mHeapHandle; // at 0x10
         UNKWORD WORD_0x14;
         Heap * mParentHeap; // at 0x18
-        UNKWORD WORD_0x1C;
+        TBitFlag<u16> mFlags; // at 0x1C
         nw4r::ut::Node mNode; // at 0x20
         nw4r::ut::List mChildren; // at 0x28
 
-        // TO-DO: Figure out the rest of the static members in the assembly
         static nw4r::ut::List sHeapList;
         static OSMutex sRootMutex;
         static Heap *sCurrentHeap;
-        static bool sIsHeapListInitialized;
+        static BOOL sIsHeapListInitialized;
+        static Heap *sAllocatableHeap;
     };
 }
 
