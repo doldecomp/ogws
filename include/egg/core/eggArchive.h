@@ -25,7 +25,7 @@ namespace EGG
 
             if (!sIsArchiveListInitialized)
             {
-                nw4r::ut::List_Init(&sArchiveList, sizeof(Archive) - sizeof(mNode));
+                nw4r::ut::List_Init(&sArchiveList, offsetof(Archive, mNode));
                 sIsArchiveListInitialized = true;
             }
 

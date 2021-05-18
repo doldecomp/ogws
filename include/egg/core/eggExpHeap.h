@@ -18,8 +18,8 @@ namespace EGG
         virtual UNKWORD getAllocatableSize(s32); // at 0x24
         virtual UNKWORD adjust(); // at 0x28
 
-        ExpHeap * create(void *, u32, u16);
-        ExpHeap * create(u32, Heap *, u16);
+        static ExpHeap * create(void *, u32, u16);
+        static ExpHeap * create(u32, Heap *, u16);
     };
 }
 

@@ -18,8 +18,8 @@ namespace EGG
         virtual UNKWORD getAllocatableSize(s32); // at 0x24
         virtual UNKWORD adjust(); // at 0x28
 
-        FrmHeap * create(void *, u32, u16);
-        FrmHeap * create(u32, Heap *, u16);
+        static FrmHeap * create(void *, u32, u16);
+        static FrmHeap * create(u32, Heap *, u16);
     };
 }
 

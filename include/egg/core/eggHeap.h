@@ -70,7 +70,7 @@ namespace EGG
         Heap * becomeCurrentHeap();
 
         MEMiHeapHead * mHeapHandle; // at 0x10
-        UNKWORD WORD_0x14;
+        void * mMemBlock; // at 0x14
         Heap * mParentHeap; // at 0x18
         TBitFlag<u16> mFlags; // at 0x1C
         nw4r::ut::Node mNode; // at 0x20

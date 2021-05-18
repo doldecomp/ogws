@@ -5,12 +5,6 @@
 extern "C" {
 #endif
 
-struct MEMExpHeap
-{
-    u32 mMagic; // "EXPH"
-    // . . .
-};
-
 #ifdef __cplusplus
 }
 #endif

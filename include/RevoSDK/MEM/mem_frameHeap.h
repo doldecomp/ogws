@@ -5,12 +5,6 @@
 extern "C" {
 #endif
 
-struct MEMFrmHeap
-{
-    u32 mMagic; // "FRMH"
-    // . . .
-};
-
 UNKTYPE * MEMCreateFrmHeapEx(void *, u32, UNKWORD);
 UNKTYPE MEMDestroyFrmHeap(UNKTYPE *);
 void * MEMAllocFromFrmHeapEx(UNKTYPE *, u32, UNKWORD);

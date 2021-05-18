@@ -15,7 +15,7 @@ namespace EGG
     }
 
 	Heap::Heap(MEMiHeapHead * pHeapHandle)
-		: mHeapHandle(pHeapHandle), WORD_0x14(), mParentHeap(NULL)
+		: mHeapHandle(pHeapHandle), mMemBlock(NULL), mParentHeap(NULL)
 	{
 		ut::List_Init(&mChildren, offsetof(Disposer, mNode));
 		
