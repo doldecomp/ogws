@@ -19,7 +19,7 @@ struct OSMessageQueue
     UNKWORD WORD_0x1C;
 };
 
-UNKWORD OSInitMessageQueue(struct OSMessageQueue *, OSMessage buffer, UNKWORD mesgCount);
+UNKWORD OSInitMessageQueue(struct OSMessageQueue *, OSMessage* buffer, UNKWORD mesgCount);
 
 #ifdef __cplusplus
 }
