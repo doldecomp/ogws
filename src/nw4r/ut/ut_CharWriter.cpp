@@ -1,4 +1,5 @@
 #include "ut_CharWriter.h"
+#include <RevoSDK/GX/GXVert.h>
 
 namespace
 {
@@ -233,34 +234,22 @@ namespace nw4r
 			LoadTexture(glyph);
 			
 			GXBegin(0x80, 0, 4);
-			
-			WGPIPE.f = x;
-			WGPIPE.f = y;
-			WGPIPE.f = z;
-			WGPIPE.i = mVertexColor.mTopLeft;
-			WGPIPE.s = normLeft;
-			WGPIPE.s = normTop;
-			
-			WGPIPE.f = x2;
-			WGPIPE.f = y;
-			WGPIPE.f = z;
-			WGPIPE.i = mVertexColor.mTopRight;
-			WGPIPE.s = normRight;
-			WGPIPE.s = normTop;
-			
-			WGPIPE.f = x2;
-			WGPIPE.f = y2;
-			WGPIPE.f = z;
-			WGPIPE.i = mVertexColor.mBottomRight;
-			WGPIPE.s = normRight;
-			WGPIPE.s = normBottom;
-			
-			WGPIPE.f = x;
-			WGPIPE.f = y2;
-			WGPIPE.f = z;
-			WGPIPE.i = mVertexColor.mBottomLeft;
-			WGPIPE.s = normLeft;
-			WGPIPE.s = normBottom;
+
+			GXPosition3f32(x, y, z);
+			GXColor1u32(mVertexColor.mTopLeft);
+			GXTexCoord2u16(normLeft, normTop);
+
+			GXPosition3f32(x2, y, z);
+			GXColor1u32(mVertexColor.mTopRight);
+			GXTexCoord2u16(normRight, normTop);
+
+			GXPosition3f32(x2, y2, z);
+			GXColor1u32(mVertexColor.mBottomRight);
+			GXTexCoord2u16(normRight, normBottom);
+
+			GXPosition3f32(x, y2, z);
+			GXColor1u32(mVertexColor.mBottomLeft);
+			GXTexCoord2u16(normLeft, normBottom);
 			
 			GXEnd();
 		}

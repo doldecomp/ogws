@@ -10,6 +10,7 @@
 #include <RevoSDK/GX/GXBump.h>
 #include <RevoSDK/GX/GXPixel.h>
 #include <RevoSDK/GX/GXGeometry.h>
+#include <RevoSDK/GX/GXVert.h>
 
 namespace EGG
 {
@@ -175,24 +176,15 @@ namespace EGG
 
             GXSetZMode(0, 0, 0);
             GXSetCullMode(2);
+
             GXBegin(0x80, 0, 4);
 
-            // 3x4 matrix??
-            WGPIPE.f = mStartX;
-            WGPIPE.f = mStartY;
-            WGPIPE.f = 0.0f;
+            GXPosition3f32(mStartX, mStartY, 0.0f);
+            GXPosition3f32(mEndX, mStartY, 0.0f);
+            GXPosition3f32(mEndX, mEndY, 0.0f);
+            GXPosition3f32(mStartX, mEndY, 0.0f);
 
-            WGPIPE.f = mEndX;
-            WGPIPE.f = mStartY;
-            WGPIPE.f = 0.0f;
-
-            WGPIPE.f = mEndX;
-            WGPIPE.f = mEndY;
-            WGPIPE.f = 0.0f;
-
-            WGPIPE.f = mStartX;
-            WGPIPE.f = mEndY;
-            WGPIPE.f = 0.0f;
+            GXEnd();
         }
     }
 
