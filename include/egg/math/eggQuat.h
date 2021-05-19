@@ -6,7 +6,7 @@ namespace EGG
 {
     struct Quatf
     {
-        UNKTYPE setAxisRotation(const Vector3f &, f32);
+        void setAxisRotation(const Vector3f &, f32);
 
         f32 x, y, z, w;
     };

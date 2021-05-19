@@ -4,7 +4,7 @@
 
 namespace EGG
 {
-    UNKTYPE Quatf::setAxisRotation(const Vector3f &axis, f32 angle)
+    void Quatf::setAxisRotation(const Vector3f &axis, f32 angle)
     {
         f32 angleHalf = angle * 0.5f;
         f32 angleCos = Math<f32>::cos(angleHalf);
