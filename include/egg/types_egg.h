@@ -11,11 +11,14 @@ namespace EGG
 
     template <typename T> struct TBitFlag;
 
+    struct ExpHeap;
+    struct FrmHeap;
     struct Heap;
 
     struct Disposer;
 
     struct Allocator;
+    struct Thread;
 
     struct Fader;
     struct ColorFader;
