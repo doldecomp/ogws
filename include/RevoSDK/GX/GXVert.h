@@ -1,4 +1,4 @@
-#ifndef REVOSDK_GX_VERT__H
+#ifndef REVOSDK_GX_VERT_H
 #define REVOSDK_GX_VERT_H
 #include <types.h>
 #include <GX.h>
