@@ -26,21 +26,12 @@ namespace nw4r
             DvdFileStream *pStrm = pPair->mStrm;
             pStrm->BYTE_0x24 = 0;
 
-            if (pStrm->ASYNC_0xC)
+            if (pStrm->ASYNC_0x1C)
             {
-                pStrm->ASYNC_0xC(r3, pStrm, pStrm->PTR_0x20);
+                pStrm->ASYNC_0x1C(r3, pStrm, pStrm->PTR_0x20);
             }
         }
 
-        /*
-            mIsBusy has to be set super early in the constructors,
-            even before the vtable is written.
-            I tried making it volatile but that didn't change anything
-
-            Other than that, these are functionally equivalent afaik
-        */
-        #define __DECOMP_NON_MATCHING
-        #ifdef __DECOMP_NON_MATCHING
         DvdFileStream::DvdFileStream(s32 r3)
         {
             Initialize_();
@@ -52,9 +43,6 @@ namespace nw4r
             Initialize_();
             Open(pInfo, b);
         }
-        #else
-        #error This file has yet to be decompiled accurately. Use "ut_DvdFileStream.s" instead.
-        #endif
 
         DvdFileStream::~DvdFileStream()
         {
@@ -77,7 +65,7 @@ namespace nw4r
         {
             len = AdjustReadLength_(len);
             u32 pos = mPosition.Tell();
-            u32 bytesRead = DVDReadPrio(&mFileInfo, pData, len, mPosition.Tell(), WORD_0x68);
+            s32 bytesRead = DVDReadPrio(&mFileInfo, pData, len, mPosition.Tell(), WORD_0x68);
             if (bytesRead > 0)
             {
                 mPosition.Skip(bytesRead);

@@ -19,7 +19,7 @@ NW4R_O_FILES := \
 	build/nw4r/ut/ut_TagProcessorBase.o \
 	build/nw4r/ut/ut_IOStream.o \
 	build/nw4r/ut/ut_FileStream.o \
-	build/asm/nw4r/ut/ut_DvdFileStream.o \
+	build/nw4r/ut/ut_DvdFileStream.o \
 	build/nw4r/ut/ut_DvdLockedFileStream.o \
 	build/nw4r/ut/ut_NandFileStream.o \
 	build/nw4r/ut/ut_LockedCache.o \
@@ -75,7 +75,7 @@ NW4R_O_FILES := \
 	build/asm/nw4r/snd/snd_DisposeCallbackManager.o \
 	build/asm/nw4r/snd/snd_DvdSoundArchive.o \
 	build/nw4r/snd/snd_EnvGenerator.o \
-	build/asm/nw4r/snd/snd_ExternalSoundPlayer.o \
+	build/nw4r/snd/snd_ExternalSoundPlayer.o \
 	build/asm/nw4r/snd/snd_FrameHeap.o \
 	build/nw4r/snd/snd_FxChorus.o \
 	build/nw4r/snd/snd_FxDelay.o \
@@ -83,7 +83,7 @@ NW4R_O_FILES := \
 	build/asm/nw4r/snd/snd_FxReverbHiDpl2.o \
 	build/nw4r/snd/snd_InstancePool.o \
 	build/nw4r/snd/snd_Lfo.o \
-	build/asm/nw4r/snd/snd_MemorySoundArchive.o \
+	build/nw4r/snd/snd_MemorySoundArchive.o \
 	build/asm/nw4r/snd/snd_MidiSeqPlayer.o \
 	build/nw4r/snd/snd_MmlParser.o \
 	build/nw4r/snd/snd_MmlSeqTrack.o \
@@ -151,7 +151,7 @@ NW4R_O_FILES := \
 	build/asm/nw4r/g3d/g3d_anmchr.o \
 	build/asm/nw4r/g3d/g3d_anmshp.o \
 	build/asm/nw4r/g3d/g3d_anmscn.o \
-	build/asm/nw4r/g3d/g3d_obj.o \
+	build/nw4r/g3d/g3d_obj.o \
 	build/asm/nw4r/g3d/g3d_anmobj.o \
 	build/asm/nw4r/g3d/g3d_gpu.o \
 	build/asm/nw4r/g3d/g3d_cpu.o \
@@ -194,6 +194,8 @@ NW4R_O_FILES := \
 	build/asm/nw4r/lyt/lyt_common.o \
 
 EGG_O_FILES := \
+	build/asm/egg/gfx/eggShadowTextureManager.o \
+	\
 	build/asm/egg/text_egg.o \
 	build/asm/egg/ctors_egg.o \
 	build/asm/egg/rodata_egg.o \
@@ -204,15 +206,17 @@ EGG_O_FILES := \
 	build/asm/egg/sdata2_egg.o \
 	build/asm/egg/sbss2_egg.o \
 	\
+	build/asm/egg/prim/eggAssert.o \
+	build/asm/egg/egg_800A204C.o \
 	build/egg/math/eggMath.o \
 	build/asm/egg/math/eggMatrix.o \
 	build/egg/math/eggQuat.o \
 	build/asm/egg/math/eggVector.o \
 	build/asm/egg/core/eggExpHeap.o \
 	build/asm/egg/core/eggFrmHeap.o \
-	build/asm/egg/core/eggHeap.o \
+	build/egg/core/eggHeap.o \
 	build/egg/core/eggAllocator.o \
-	build/asm/egg/core/eggThread.o \
+	build/egg/core/eggThread.o \
 	build/asm/egg/core/eggSystem.o \
 	build/asm/egg/core/eggTaskThread.o \
 	build/asm/egg/core/eggGraphicsFifo.o \
@@ -232,7 +236,7 @@ EGG_O_FILES := \
 	build/egg/core/eggArchive.o \
 	build/asm/egg/core/eggDecomp.o \
 	build/asm/egg/core/eggAsyncDisplay.o \
-	build/asm/egg/audio/egg_800ADEE8.o \
+	build/asm/egg/core/eggCntFile.o \
 	build/asm/egg/audio/eggAudioArcPlayerMgr.o \
 	build/asm/egg/audio/eggAudioExpMgr.o \
 	build/asm/egg/audio/eggAudioFxMgr.o \

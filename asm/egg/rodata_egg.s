@@ -149,8 +149,5 @@ lbl_8037A0F0:
 .global lbl_8037A178
 lbl_8037A178:
 	.incbin "baserom.dol", 0x376278, 0x68
-.global lbl_8037A1E0
-lbl_8037A1E0:
-	.incbin "baserom.dol", 0x3762E0, 0x50
 
 .balign 0x8

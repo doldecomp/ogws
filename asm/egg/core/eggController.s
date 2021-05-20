@@ -1238,7 +1238,7 @@ __ct__Q23EGG17CoreControllerMgrFv:
 /* 800A6988 000A1888  80 E4 00 04 */	lwz r7, lbl_80380004@l(r4)
 /* 800A698C 000A188C  80 C4 00 08 */	lwz r6, 8(r4)
 /* 800A6990 000A1890  80 04 00 0C */	lwz r0, 0xc(r4)
-/* 800A6994 000A1894  80 8D 99 38 */	lwz r4, lbl_804BECB8-_SDA_BASE_(r13)
+/* 800A6994 000A1894  80 8D 99 38 */	lwz r4, mConfigData__Q23EGG10BaseSystem-_SDA_BASE_(r13)
 /* 800A6998 000A1898  90 61 00 08 */	stw r3, 8(r1)
 /* 800A699C 000A189C  80 6D 81 80 */	lwz r3, sWPADWorkSize__Q23EGG17CoreControllerMgr-_SDA_BASE_(r13)
 /* 800A69A0 000A18A0  90 E1 00 0C */	stw r7, 0xc(r1)

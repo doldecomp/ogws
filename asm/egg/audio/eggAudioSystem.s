@@ -1,7 +1,26 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .sdata2, "a"
+.balign 8
+.global lbl_804C0AC0
+lbl_804C0AC0:
+	.single 0e1
+.global lbl_804C0AC4
+lbl_804C0AC4:
+	.single 0e0
+.global lbl_804C0AC8
+lbl_804C0AC8:
+	.long 0x43300000
+    .long 0x80000000
 
+.section .sbss, "wa"
+.balign 8
+# This is not a typo
+.global sInstanse__Q23EGG11AudioSystem
+sInstanse__Q23EGG11AudioSystem:
+	.skip 0x8
+
+.section .text, "ax"
 .global __ct__Q23EGG11AudioSystemFv
 __ct__Q23EGG11AudioSystemFv:
 /* 800B0F18 000ABE18  C0 02 90 A0 */	lfs f0, lbl_804C0AC0-_SDA2_BASE_(r2)
@@ -9,7 +28,7 @@ __ct__Q23EGG11AudioSystemFv:
 /* 800B0F20 000ABE20  90 03 00 08 */	stw r0, 8(r3)
 /* 800B0F24 000ABE24  D0 03 00 00 */	stfs f0, 0(r3)
 /* 800B0F28 000ABE28  90 03 00 04 */	stw r0, 4(r3)
-/* 800B0F2C 000ABE2C  90 6D 99 C8 */	stw r3, lbl_804BED48-_SDA_BASE_(r13)
+/* 800B0F2C 000ABE2C  90 6D 99 C8 */	stw r3, sInstanse__Q23EGG11AudioSystem-_SDA_BASE_(r13)
 /* 800B0F30 000ABE30  4E 80 00 20 */	blr 
 
 .global __dt__Q23EGG11AudioSystemFv

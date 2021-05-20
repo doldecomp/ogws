@@ -16,8 +16,8 @@ $$2GUARD$$2texCoords$7469:
 	.balign 8
 
 .section .bss, "wa"
-.global lbl_80409700
-lbl_80409700:
+.global texCoords$7469
+texCoords$7469:
 	.skip 0x20
 
 .section .text, "ax"
@@ -159,9 +159,9 @@ SetSize__Q44nw4r3lyt6detail11TexCoordAryFUc:
 /* 80082F48 0007DE48  88 0D 98 28 */	lbz r0, $$2GUARD$$2texCoords$7469-_SDA_BASE_(r13)
 /* 80082F4C 0007DE4C  7C 00 07 75 */	extsb. r0, r0
 /* 80082F50 0007DE50  40 82 00 3C */	bne lbl_80082F8C
-/* 80082F54 0007DE54  3C C0 80 41 */	lis r6, lbl_80409700@ha
+/* 80082F54 0007DE54  3C C0 80 41 */	lis r6, texCoords$7469@ha
 /* 80082F58 0007DE58  C0 22 8B 10 */	lfs f1, lbl_804C0530-_SDA2_BASE_(r2)
-/* 80082F5C 0007DE5C  38 A6 97 00 */	addi r5, r6, lbl_80409700@l
+/* 80082F5C 0007DE5C  38 A6 97 00 */	addi r5, r6, texCoords$7469@l
 /* 80082F60 0007DE60  C0 02 8B 14 */	lfs f0, lbl_804C0534-_SDA2_BASE_(r2)
 /* 80082F64 0007DE64  38 00 00 01 */	li r0, 1
 /* 80082F68 0007DE68  D0 26 97 00 */	stfs f1, -0x6900(r6)
@@ -175,8 +175,8 @@ SetSize__Q44nw4r3lyt6detail11TexCoordAryFUc:
 /* 80082F88 0007DE88  98 0D 98 28 */	stb r0, $$2GUARD$$2texCoords$7469-_SDA_BASE_(r13)
 lbl_80082F8C:
 /* 80082F8C 0007DE8C  88 E3 00 01 */	lbz r7, 1(r3)
-/* 80082F90 0007DE90  3C C0 80 41 */	lis r6, lbl_80409700@ha
-/* 80082F94 0007DE94  38 A6 97 00 */	addi r5, r6, lbl_80409700@l
+/* 80082F90 0007DE90  3C C0 80 41 */	lis r6, texCoords$7469@ha
+/* 80082F94 0007DE94  38 A6 97 00 */	addi r5, r6, texCoords$7469@l
 /* 80082F98 0007DE98  C0 E6 97 00 */	lfs f7, -0x6900(r6)
 /* 80082F9C 0007DE9C  7C 07 20 50 */	subf r0, r7, r4
 /* 80082FA0 0007DEA0  54 E6 28 34 */	slwi r6, r7, 5

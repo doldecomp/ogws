@@ -18,7 +18,7 @@ namespace nw4r
 		{
 			struct LinkListImpl
 			{
-				u32 mCount;
+				int mCount;
 				
 				LinkListNode mEndNode;
 				

@@ -24,11 +24,11 @@ namespace nw4r
 
 			inline void Initialize_()
 			{
-				mIsBusy = false;
 				BOOL_0x6D = false;
 				BOOL_0x6E = false;
 				BOOL_0x4 = false;
 				WORD_0x68 = 2;
+				mIsBusy = false;
 				ASYNC_0xC = NULL;
 				PTR_0x10 = NULL;
 				WORD_0x8 = 0;
@@ -118,18 +118,16 @@ namespace nw4r
 			u32 Tell() const;
 			bool IsBusy() const;
 			const detail::RuntimeTypeInfo * GetRuntimeTypeInfo() const;
-			
+
 			FilePosition mPosition; // at 0x14
 			AsyncFunctor ASYNC_0x1C; // at 0x1C
 			void * PTR_0x20;
-			char BYTE_0x24;
-			char BYTE_0x25;
-			char BYTE_0x26;
-			char BYTE_0x27;
+			volatile bool BYTE_0x24;
+			volatile char UNK_0x25[3];
 			DVDFileInfo mFileInfo; // at 0x28
 			DvdFileStream *THIS_0x64;
 			UNKWORD WORD_0x68;
-			bool mIsBusy; // at 0x6C
+			volatile bool mIsBusy; // at 0x6C
 			bool BOOL_0x6D;
 			bool BOOL_0x6E;
 

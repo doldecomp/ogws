@@ -1,4 +1,3 @@
-#ifdef __DECOMP_NON_MATCHING
 #include <string.h>
 #include <new>
 #include "ut_algorithm.h"
@@ -12,6 +11,27 @@ namespace nw4r
 	{
 		using namespace detail;
 		
+		struct MemorySoundArchive::MemoryFileStream : ut::FileStream
+		{
+			const void * mMemory; // at 0x14
+			int mSize; // at 0x18
+			int mOffset; // at 0x1c
+			
+			MemoryFileStream(const void *, u32); //inlined
+
+			virtual ~MemoryFileStream();
+			virtual void Close();
+			virtual int Read(void *, u32); // at 0x14
+			virtual void Seek(s32, u32); // at 0x44
+			virtual u32 GetSize() const; // at 0x40
+			virtual u32 Tell() const; // at 0x58
+			virtual bool CanWrite() const; // at 0x30
+			virtual bool CanRead() const; // at 0x2c
+			virtual bool CanAsync() const; // at 0x28
+			virtual bool CanCancel() const; // at 0x54
+			virtual bool CanSeek() const; // at 0x50
+		};
+
 		MemorySoundArchive::MemorySoundArchive() : mMemory(NULL) {}
 		
 		MemorySoundArchive::~MemorySoundArchive() {}
@@ -144,7 +164,7 @@ namespace nw4r
 		
 		bool MemorySoundArchive::MemoryFileStream::CanWrite() const
 		{
-			return true;
+			return false;
 		}
 		
 		bool MemorySoundArchive::MemoryFileStream::CanRead() const
@@ -166,9 +186,10 @@ namespace nw4r
 		{
 			return true;
 		}
+
+		MemorySoundArchive::MemoryFileStream::~MemoryFileStream()
+		{
+			
+		}
 	}
 }
-
-#else
-#error This file has yet to be decompiled accurately. Use "snd_MemorySoundArchive.s" instead.
-#endif

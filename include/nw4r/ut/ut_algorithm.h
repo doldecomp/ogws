@@ -58,14 +58,32 @@ namespace nw4r
 			{
 				return (u8 *)RoundUp<u32>((u32)ptr, alignment);
 			}
+
+			template <typename T>
+			inline T RoundDown(T t, unsigned int alignment)
+			{
+				return t & -alignment;
+			}
+
+			template <>
+			inline void * RoundDown(void * ptr, unsigned int alignment)
+			{
+				return (void *)RoundDown<u32>((u32)ptr, alignment);
+			}
 			
+			template <>
+			inline u8 * RoundDown(u8 * ptr, unsigned int alignment)
+			{
+				return (u8 *)RoundDown<u32>((u32)ptr, alignment);
+			}
+
 			template <typename T>
 			inline const void * AddOffsetToPtr(const void * ptr, T offset)
 			{
 				return (const void *)(offset + (T)ptr);
 			}
 
-			inline u32 GetOffsetFromPtr(void *begin, void *end)
+			inline u32 GetOffsetFromPtr(const void *begin, const void *end)
 			{
 				return (u32)end - (u32)begin;
 			}

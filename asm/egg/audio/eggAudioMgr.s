@@ -1,7 +1,13 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .rodata, "a"
+.balign 8
+.global lbl_8037B0E8
+lbl_8037B0E8:
+	.string "eggAudioMgr.cpp"
+    .string "arg_"
 
+.section .text, "ax"
 .global __ct__Q33EGG14SimpleAudioMgr17SimpleAudioMgrArgFv
 __ct__Q33EGG14SimpleAudioMgr17SimpleAudioMgrArgFv:
 /* 800B0B90 000ABA90  3C 80 00 8D */	lis r4, 0x008CA000@ha
@@ -24,11 +30,11 @@ __ct__Q33EGG14SimpleAudioMgr17SimpleAudioMgrArgFv:
 __ct__Q23EGG14SimpleAudioMgrFv:
 /* 800B0BCC 000ABACC  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 800B0BD0 000ABAD0  7C 08 02 A6 */	mflr r0
-/* 800B0BD4 000ABAD4  3C A0 80 3A */	lis r5, lbl_80398738@ha
-/* 800B0BD8 000ABAD8  3C 80 80 3A */	lis r4, lbl_80398748@ha
+/* 800B0BD4 000ABAD4  3C A0 80 3A */	lis r5, __vt__Q23EGG9IAudioMgr@ha
+/* 800B0BD8 000ABAD8  3C 80 80 3A */	lis r4, vtable_80398748@ha
 /* 800B0BDC 000ABADC  90 01 00 14 */	stw r0, 0x14(r1)
-/* 800B0BE0 000ABAE0  38 A5 87 38 */	addi r5, r5, lbl_80398738@l
-/* 800B0BE4 000ABAE4  38 84 87 48 */	addi r4, r4, lbl_80398748@l
+/* 800B0BE0 000ABAE0  38 A5 87 38 */	addi r5, r5, __vt__Q23EGG9IAudioMgr@l
+/* 800B0BE4 000ABAE4  38 84 87 48 */	addi r4, r4, vtable_80398748@l
 /* 800B0BE8 000ABAE8  93 E1 00 0C */	stw r31, 0xc(r1)
 /* 800B0BEC 000ABAEC  7C 7F 1B 78 */	mr r31, r3
 /* 800B0BF0 000ABAF0  90 A3 00 00 */	stw r5, 0(r3)
@@ -38,23 +44,23 @@ __ct__Q23EGG14SimpleAudioMgrFv:
 /* 800B0C00 000ABB00  38 7F 00 68 */	addi r3, r31, 0x68
 /* 800B0C04 000ABB04  38 9F 00 88 */	addi r4, r31, 0x88
 /* 800B0C08 000ABB08  38 A0 00 04 */	li r5, 4
-/* 800B0C0C 000ABB0C  48 04 14 51 */	bl func_800F205C
+/* 800B0C0C 000ABB0C  48 04 14 51 */	bl OSInitMessageQueue
 /* 800B0C10 000ABB10  38 7F 00 98 */	addi r3, r31, 0x98
 /* 800B0C14 000ABB14  38 9F 00 B8 */	addi r4, r31, 0xb8
 /* 800B0C18 000ABB18  38 A0 00 04 */	li r5, 4
-/* 800B0C1C 000ABB1C  48 04 14 41 */	bl func_800F205C
+/* 800B0C1C 000ABB1C  48 04 14 41 */	bl OSInitMessageQueue
 /* 800B0C20 000ABB20  38 7F 00 C8 */	addi r3, r31, 0xc8
 /* 800B0C24 000ABB24  38 9F 00 E8 */	addi r4, r31, 0xe8
 /* 800B0C28 000ABB28  38 A0 00 04 */	li r5, 4
-/* 800B0C2C 000ABB2C  48 04 14 31 */	bl func_800F205C
+/* 800B0C2C 000ABB2C  48 04 14 31 */	bl OSInitMessageQueue
 /* 800B0C30 000ABB30  38 7F 00 F8 */	addi r3, r31, 0xf8
 /* 800B0C34 000ABB34  38 9F 00 0C */	addi r4, r31, 0xc
 /* 800B0C38 000ABB38  4B FF D6 15 */	bl __ct__Q23EGG9ArcPlayerFPQ34nw4r3snd9SoundHeap
 /* 800B0C3C 000ABB3C  38 7F 06 AC */	addi r3, r31, 0x6ac
 /* 800B0C40 000ABB40  48 00 02 D9 */	bl __ct__Q23EGG11AudioSystemFv
-/* 800B0C44 000ABB44  3C A0 80 3A */	lis r5, lbl_80398690@ha
+/* 800B0C44 000ABB44  3C A0 80 3A */	lis r5, __vt__Q23EGG14SimpleAudioMgr@ha
 /* 800B0C48 000ABB48  38 00 00 00 */	li r0, 0
-/* 800B0C4C 000ABB4C  38 A5 86 90 */	addi r5, r5, lbl_80398690@l
+/* 800B0C4C 000ABB4C  38 A5 86 90 */	addi r5, r5, __vt__Q23EGG14SimpleAudioMgr@l
 /* 800B0C50 000ABB50  98 1F 00 04 */	stb r0, 4(r31)
 /* 800B0C54 000ABB54  38 85 00 10 */	addi r4, r5, 0x10
 /* 800B0C58 000ABB58  7F E3 FB 78 */	mr r3, r31
@@ -87,8 +93,8 @@ __dt__Q23EGG14SimpleAudioMgrFv:
 /* 800B0CB8 000ABBB8  4B FF D6 29 */	bl __dt__Q23EGG9ArcPlayerFv
 /* 800B0CBC 000ABBBC  34 7E 00 08 */	addic. r3, r30, 8
 /* 800B0CC0 000ABBC0  41 82 00 20 */	beq lbl_800B0CE0
-/* 800B0CC4 000ABBC4  3C 80 80 3A */	lis r4, lbl_80398748@ha
-/* 800B0CC8 000ABBC8  38 84 87 48 */	addi r4, r4, lbl_80398748@l
+/* 800B0CC4 000ABBC4  3C 80 80 3A */	lis r4, vtable_80398748@ha
+/* 800B0CC8 000ABBC8  38 84 87 48 */	addi r4, r4, vtable_80398748@l
 /* 800B0CCC 000ABBCC  90 9E 00 08 */	stw r4, 8(r30)
 /* 800B0CD0 000ABBD0  4B FF FE B9 */	bl destroySoundHeap__Q23EGG12SoundHeapMgrFv
 /* 800B0CD4 000ABBD4  38 7E 00 0C */	addi r3, r30, 0xc

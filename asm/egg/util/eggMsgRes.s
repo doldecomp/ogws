@@ -2,16 +2,72 @@
 
 .include "macros.inc"
 
-.section .text, "ax"
+.section .sdata, "wa"
+.balign 8
+.global lbl_804BD528
+lbl_804BD528:
+	.string "data"
 
+.section .rodata, "a"
+.balign 8
+.global lbl_8037B100
+lbl_8037B100:
+    # Section names in U32 form
+    # They are not strings because this has no null-terminator,
+    # and is left out of the string table.
+    # (This also explains their weird accesses)
+	.long 0x494E4631
+    .long 0x44415431
+    .long 0x53545231
+    .long 0x4D494431
+    .long 0x464C5731
+    .long 0x464C4931
+.global lbl_8037B118
+lbl_8037B118:
+	.byte 0x00, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x18, 0x00, 0x00, 0x00, 0x10, 0x00, 0x00, 0x00, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+.global lbl_8037B130
+lbl_8037B130:
+	.byte 0xff, 0xff, 0xff, 0xff, 0x00, 0x00, 0x00, 0x00, 0xff, 0xff, 0xff, 0x00, 0x00, 0x00, 0x00, 0xff, 0xff, 0xff, 0x00, 0x00
+    .byte 0x00, 0x00, 0xff, 0xff,0xff, 0x00, 0x00, 0x00, 0x00, 0xff, 0xff, 0xff, 0x00, 0x00, 0x00, 0x00, 0xff, 0xff, 0xff, 0xff
+.global lbl_8037B158
+lbl_8037B158:
+	.string "eggMsgRes.cpp"
+    .string "data"
+    .string "( u32 )data + mMsgHeader->mDataSize > ( u32 )current"
+    .string "Illegal data block.\n"
+    .string "tag"
+    .string "tagLength"
+    .string "tagID"
+    .string "param"
+    .string "cTagMark == code"
+    .string "mMsgDataBlk"
+    .string "Not found message %d, %d.\n"
+    .string "mMsgInfoDataBlk"
+    .string "mMsgIDDataBlk"
+    .string "mMsgInfoDataBlk->mNumEntries > i"
+
+.section .data, "wa"
+.balign 8
+.global __vt__Q23EGG6MsgResFv
+__vt__Q23EGG6MsgResFv:
+	.long 0
+	.long 0
+	.long __dt__Q23EGG6MsgResFv
+stringBase:
+    .string "eggMsgRes.h"
+    .string "dataBlkHeader"
+.balign 8
+    .string "eggMsgRes.h"
+
+.section .text, "ax"
 .global __ct__Q23EGG6MsgResFPCv
 __ct__Q23EGG6MsgResFPCv:
 /* 800B106C 000ABF6C  94 21 FF C0 */	stwu r1, -0x40(r1)
 /* 800B1070 000ABF70  7C 08 02 A6 */	mflr r0
-/* 800B1074 000ABF74  3C A0 80 3A */	lis r5, lbl_80398760@ha
+/* 800B1074 000ABF74  3C A0 80 3A */	lis r5, __vt__Q23EGG6MsgResFv@ha
 /* 800B1078 000ABF78  2C 04 00 00 */	cmpwi r4, 0
 /* 800B107C 000ABF7C  90 01 00 44 */	stw r0, 0x44(r1)
-/* 800B1080 000ABF80  38 A5 87 60 */	addi r5, r5, lbl_80398760@l
+/* 800B1080 000ABF80  38 A5 87 60 */	addi r5, r5, __vt__Q23EGG6MsgResFv@l
 /* 800B1084 000ABF84  BE A1 00 14 */	stmw r21, 0x14(r1)
 /* 800B1088 000ABF88  7C 7E 1B 78 */	mr r30, r3
 /* 800B108C 000ABF8C  7C 9F 23 78 */	mr r31, r4

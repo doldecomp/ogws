@@ -1,14 +1,57 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .rodata, "a"
+.balign 8
+.global lbl_8037AD10
+lbl_8037AD10:
+    .string "eggAudioArcPlayerMgr.cpp"
+    .string "Unlknown Storage :%d\n"
+    .string "Set Sound Heap\n"
+    .string "Sound Archive is already opened\n"
+    .string "cannot alloc setup memory %d\n"
+    .string "cannot alloc setup strm memory %d\n"
+    .string "openArchive : Cannot Use String Data : %s\n"
+    .string "Now Setteing (oprn archive not finished)!!!\n"
+    .string "archive is not opened!!!\n"
+    .string "playernum<getPlayer().GetSoundPlayerCount()"
 
+.section .data, "wa"
+.balign 8
+.global __vt__Q23EGG9ArcPlayer
+__vt__Q23EGG9ArcPlayer:
+    .long 0
+    .long 0
+    .long __dt__Q23EGG9ArcPlayerFv
+    .long openArchive__Q23EGG9ArcPlayerFPCcPQ34nw4r3snd9SoundHeapQ33EGG9ArcPlayer12SARC_STORAGE
+    .long openDvdArchive__Q23EGG9ArcPlayerFPCcPQ34nw4r3snd9SoundHeap
+    .long openNandArchive__Q23EGG9ArcPlayerFPCcPQ34nw4r3snd9SoundHeap
+    .long func_800AE884 # This is just not part of the link map's vtable
+    .long setupMemoryArchive__Q23EGG9ArcPlayerFPCvPQ34nw4r3snd9SoundHeap
+    .long setupMemoryArchive__Q23EGG9ArcPlayerFPCvPQ34nw4r3snd9SoundHeapl
+    .long closeArchive__Q23EGG9ArcPlayerFv
+    .long loadGroup__Q23EGG9ArcPlayerFUiPQ34nw4r3snd9SoundHeapUl
+    .long loadGroup__Q23EGG9ArcPlayerFiPQ34nw4r3snd9SoundHeapUl
+    .long loadGroup__Q23EGG9ArcPlayerFPCcPQ34nw4r3snd9SoundHeapUl
+    .long calc__Q23EGG9ArcPlayerFv
+    .long startSound__Q23EGG9ArcPlayerFPQ34nw4r3snd11SoundHandleUl
+    .long startSound__Q23EGG9ArcPlayerFPQ34nw4r3snd11SoundHandleUi
+    .long startSound__Q23EGG9ArcPlayerFPQ34nw4r3snd11SoundHandlePCc
+    .long prepareSound__Q23EGG9ArcPlayerFPQ34nw4r3snd11SoundHandleUl
+    .long prepareSound__Q23EGG9ArcPlayerFPQ34nw4r3snd11SoundHandleUi
+    .long prepareSound__Q23EGG9ArcPlayerFPQ34nw4r3snd11SoundHandlePCc
+    .long holdSound__Q23EGG9ArcPlayerFPQ34nw4r3snd11SoundHandleUl
+    .long holdSound__Q23EGG9ArcPlayerFPQ34nw4r3snd11SoundHandleUi
+    .long holdSound__Q23EGG9ArcPlayerFPQ34nw4r3snd11SoundHandlePCc
+    .long 0
+
+.section .text, "ax"
 .global __ct__Q23EGG9ArcPlayerFPQ34nw4r3snd9SoundHeap
 __ct__Q23EGG9ArcPlayerFPQ34nw4r3snd9SoundHeap:
 /* 800AE24C 000A914C  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 800AE250 000A9150  7C 08 02 A6 */	mflr r0
-/* 800AE254 000A9154  3C A0 80 3A */	lis r5, lbl_80398510@ha
+/* 800AE254 000A9154  3C A0 80 3A */	lis r5, __vt__Q23EGG9ArcPlayer@ha
 /* 800AE258 000A9158  90 01 00 24 */	stw r0, 0x24(r1)
-/* 800AE25C 000A915C  38 A5 85 10 */	addi r5, r5, lbl_80398510@l
+/* 800AE25C 000A915C  38 A5 85 10 */	addi r5, r5, __vt__Q23EGG9ArcPlayer@l
 /* 800AE260 000A9160  93 E1 00 1C */	stw r31, 0x1c(r1)
 /* 800AE264 000A9164  3B E0 00 00 */	li r31, 0
 /* 800AE268 000A9168  93 C1 00 18 */	stw r30, 0x18(r1)
@@ -485,13 +528,13 @@ lbl_800AE8D0:
 /* 800AE8F8 000A97F8  48 00 01 A8 */	b lbl_800AEAA0
 lbl_800AE8FC:
 /* 800AE8FC 000A97FC  38 61 00 08 */	addi r3, r1, 8
-/* 800AE900 000A9800  4B FF F5 E9 */	bl func_800ADEE8
+/* 800AE900 000A9800  4B FF F5 E9 */	bl __ct__Q23EGG7CntFileFv
 /* 800AE904 000A9804  38 61 00 08 */	addi r3, r1, 8
-/* 800AE908 000A9808  4B FF F6 D1 */	bl func_800ADFD8
+/* 800AE908 000A9808  4B FF F6 D1 */	bl initiate__Q23EGG7CntFileFv
 /* 800AE90C 000A980C  7F 84 E3 78 */	mr r4, r28
 /* 800AE910 000A9810  7F 65 DB 78 */	mr r5, r27
 /* 800AE914 000A9814  38 61 00 08 */	addi r3, r1, 8
-/* 800AE918 000A9818  4B FF F7 35 */	bl func_800AE04C
+/* 800AE918 000A9818  4B FF F7 35 */	bl open__Q23EGG7CntFileFPCcPi
 /* 800AE91C 000A981C  38 61 00 44 */	addi r3, r1, 0x44
 /* 800AE920 000A9820  48 09 31 99 */	bl func_80141AB8
 /* 800AE924 000A9824  7C 7E 1B 78 */	mr r30, r3
@@ -505,12 +548,12 @@ lbl_800AE8FC:
 /* 800AE944 000A9844  7F A4 EB 78 */	mr r4, r29
 /* 800AE948 000A9848  38 61 00 08 */	addi r3, r1, 8
 /* 800AE94C 000A984C  38 C0 00 00 */	li r6, 0
-/* 800AE950 000A9850  4B FF F8 19 */	bl func_800AE168
+/* 800AE950 000A9850  4B FF F8 19 */	bl readData__Q23EGG7CntFileFPvii
 /* 800AE954 000A9854  7F A3 EB 78 */	mr r3, r29
 /* 800AE958 000A9858  7F C4 F3 78 */	mr r4, r30
 /* 800AE95C 000A985C  48 03 F7 D5 */	bl DCFlushRange
 /* 800AE960 000A9860  38 61 00 08 */	addi r3, r1, 8
-/* 800AE964 000A9864  4B FF F7 A5 */	bl func_800AE108
+/* 800AE964 000A9864  4B FF F7 A5 */	bl close__Q23EGG7CntFileFv
 /* 800AE968 000A9868  3B DF 03 74 */	addi r30, r31, 0x374
 /* 800AE96C 000A986C  7F A4 EB 78 */	mr r4, r29
 /* 800AE970 000A9870  93 DF 00 08 */	stw r30, 8(r31)
@@ -574,7 +617,7 @@ lbl_800AEA28:
 /* 800AEA50 000A9950  38 61 00 08 */	addi r3, r1, 8
 /* 800AEA54 000A9954  98 1F 00 04 */	stb r0, 4(r31)
 /* 800AEA58 000A9958  38 80 FF FF */	li r4, -1
-/* 800AEA5C 000A995C  4B FF F5 15 */	bl func_800ADF70
+/* 800AEA5C 000A995C  4B FF F5 15 */	bl __dt__Q23EGG7CntFileFv
 /* 800AEA60 000A9960  38 60 00 00 */	li r3, 0
 /* 800AEA64 000A9964  48 00 00 3C */	b lbl_800AEAA0
 lbl_800AEA68:
@@ -585,13 +628,13 @@ lbl_800AEA68:
 /* 800AEA78 000A9978  83 DF 05 A4 */	lwz r30, 0x5a4(r31)
 /* 800AEA7C 000A997C  38 80 FF FF */	li r4, -1
 /* 800AEA80 000A9980  98 1F 00 04 */	stb r0, 4(r31)
-/* 800AEA84 000A9984  4B FF F4 ED */	bl func_800ADF70
+/* 800AEA84 000A9984  4B FF F4 ED */	bl __dt__Q23EGG7CntFileFv
 /* 800AEA88 000A9988  7F C3 F3 78 */	mr r3, r30
 /* 800AEA8C 000A998C  48 00 00 14 */	b lbl_800AEAA0
 lbl_800AEA90:
 /* 800AEA90 000A9990  38 61 00 08 */	addi r3, r1, 8
 /* 800AEA94 000A9994  38 80 FF FF */	li r4, -1
-/* 800AEA98 000A9998  4B FF F4 D9 */	bl func_800ADF70
+/* 800AEA98 000A9998  4B FF F4 D9 */	bl __dt__Q23EGG7CntFileFv
 /* 800AEA9C 000A999C  38 60 00 00 */	li r3, 0
 lbl_800AEAA0:
 /* 800AEAA0 000A99A0  BB 41 00 B8 */	lmw r26, 0xb8(r1)

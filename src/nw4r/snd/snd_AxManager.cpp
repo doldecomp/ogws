@@ -1,4 +1,3 @@
-#ifdef __DECOMP_NON_MATCHING
 #include <string.h>
 #include <ai.h>
 #include <dvd.h>
@@ -7,7 +6,7 @@
 #include <AXOut.h>
 #include <AXCL.h>
 #include <AXVPB.h>
-#include "ut_interrupt.h"
+#include "ut_Lock.h"
 #include "ut_algorithm.h"
 #include "snd_VoiceManager.h"
 #include "snd_AxManager.h"
@@ -344,7 +343,8 @@ namespace nw4r
 				
 				while (it != fxList->GetEndIter())
 				{
-					it++->Shutdown();
+					it->Shutdown();
+					it++;
 				}
 				
 				fxList->Clear();
@@ -363,6 +363,7 @@ namespace nw4r
 				}
 			}
 			
+			#ifdef __DECOMP_NON_MATCHING
 			void AxManager::AuxCallbackFunc(void * arg1, void * arg2)
 			{
 				int len;
@@ -370,7 +371,7 @@ namespace nw4r
 				
 				void ** ptrs = (void **)arg1;
 				AuxBus bus = (AuxBus)arg2;
-				
+
 				if (GetInstance()->mOutputMode == 2)
 				{
 					//80032174
@@ -423,7 +424,10 @@ namespace nw4r
 				
 				//800323D0 (END)
 			}
-			
+			#else
+			#error This file has yet to be decompiled accurately. Use "snd_AxManager.s" instead.
+			#endif
+
 			void AxManager::PrepareReset()
 			{
 				if (mAIDMACallback)
@@ -460,6 +464,3 @@ namespace nw4r
 		}
 	}
 }
-#else
-#error This file has yet to be decompiled accurately. Use "snd_AxManager.s" instead.
-#endif

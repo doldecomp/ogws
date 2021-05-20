@@ -49,6 +49,7 @@ typedef struct _GXVtxAttrFmtList
 } GXVtxAttrFmtList[];
 
 UNKTYPE GXSetArray(GXAttr, const void *, u8);
+UNKTYPE GXInvalidateVtxCache(void);
 
 #ifdef __cplusplus
 }

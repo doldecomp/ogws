@@ -12,7 +12,7 @@ namespace nw4r
 		{
 			bool AxfxImpl::CreateHeap(void * ptr, u32 num)
 			{
-				return mHeap = (MEMHeap *)MEMCreateFrmHeapEx(ptr, num, 0);
+				return mHeap = (MEMiHeapHead *)MEMCreateFrmHeapEx(ptr, num, 0);
 			}
 			
 			UNKTYPE AxfxImpl::DestroyHeap()

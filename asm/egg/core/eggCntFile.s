@@ -1,18 +1,68 @@
-###########################################################
-# Class referenced by the 1 unnamed function in ArcPlayer #
-###########################################################
+####################################
+# ALL Symbols taken from Wii Fit U #
+####################################
 
 .include "macros.inc"
 
+.section .sdata, "wa"
+.balign 8
+.global lbl_804BD510
+lbl_804BD510:
+	.string "false"
+
+.section .sbss, "wa"
+.balign 8
+# Technically "unofficial", but it is referenced in this file's asserts
+.global sIsInitialized__Q23EGG7CntFile
+sIsInitialized__Q23EGG7CntFile:
+	.skip 0x8
+
+.section .rodata, "a"
+.balign 8
+.global lbl_8037ACF0
+lbl_8037ACF0:
+	.string "eggCntFile.cpp"
+	.string "sIsInitialized"
+
+.section .data, "wa"
+.balign 8
+# !!! UNOFFICIAL SYMBOL !!!
+.global __vt__Q23EGG7CntFile
+__vt__Q23EGG7CntFile:
+    .long 0
+    .long 0
+    .long __dt__Q23EGG7CntFileFv
+    .long func_800ae214
+    .long close__Q23EGG7CntFileFv
+    .long readData__Q23EGG7CntFileFPvii
+    .long writeData__Q23EGG7CntFileFPCvii
+    .long func_800ADEE0
+.global lbl_80398500
+lbl_80398500:
+	.string "eggCntFile.h"
+
+.section .bss, "wa"
+.balign 8
+# !!! UNOFFICIAL SYMBOL !!!
+.global sCntList__Q23EGG7CntFile
+sCntList__Q23EGG7CntFile:
+	.skip 0xC
+
 .section .text, "ax"
 
-.global func_800ADEE8
-func_800ADEE8:
+# Seems to be CntFile::getFileSize (based on vtable slot), but a verified symbol for this does not exist.
+.global func_800ADEE0
+func_800ADEE0:
+/* 800ADEE0 000A8DE0  38 63 00 3C */	addi r3, r3, 0x3c
+/* 800ADEE4 000A8DE4  48 09 3B D4 */	b func_80141AB8
+
+.global __ct__Q23EGG7CntFileFv
+__ct__Q23EGG7CntFileFv:
 /* 800ADEE8 000A8DE8  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 800ADEEC 000A8DEC  7C 08 02 A6 */	mflr r0
-/* 800ADEF0 000A8DF0  3C 80 80 3A */	lis r4, lbl_803984E0@ha
+/* 800ADEF0 000A8DF0  3C 80 80 3A */	lis r4, __vt__Q23EGG7CntFile@ha
 /* 800ADEF4 000A8DF4  90 01 00 14 */	stw r0, 0x14(r1)
-/* 800ADEF8 000A8DF8  38 84 84 E0 */	addi r4, r4, lbl_803984E0@l
+/* 800ADEF8 000A8DF8  38 84 84 E0 */	addi r4, r4, __vt__Q23EGG7CntFile@l
 /* 800ADEFC 000A8DFC  93 E1 00 0C */	stw r31, 0xc(r1)
 /* 800ADF00 000A8E00  3B E0 00 00 */	li r31, 0
 /* 800ADF04 000A8E04  93 C1 00 08 */	stw r30, 8(r1)
@@ -28,11 +78,11 @@ func_800ADEE8:
 /* 800ADF2C 000A8E2C  38 7E 00 78 */	addi r3, r30, 0x78
 /* 800ADF30 000A8E30  38 9E 00 98 */	addi r4, r30, 0x98
 /* 800ADF34 000A8E34  38 A0 00 01 */	li r5, 1
-/* 800ADF38 000A8E38  48 04 41 25 */	bl func_800F205C
+/* 800ADF38 000A8E38  48 04 41 25 */	bl OSInitMessageQueue
 /* 800ADF3C 000A8E3C  38 7E 00 54 */	addi r3, r30, 0x54
 /* 800ADF40 000A8E40  38 9E 00 74 */	addi r4, r30, 0x74
 /* 800ADF44 000A8E44  38 A0 00 01 */	li r5, 1
-/* 800ADF48 000A8E48  48 04 41 15 */	bl func_800F205C
+/* 800ADF48 000A8E48  48 04 41 15 */	bl OSInitMessageQueue
 /* 800ADF4C 000A8E4C  93 FE 00 9C */	stw r31, 0x9c(r30)
 /* 800ADF50 000A8E50  7F C3 F3 78 */	mr r3, r30
 /* 800ADF54 000A8E54  93 FE 00 38 */	stw r31, 0x38(r30)
@@ -43,8 +93,8 @@ func_800ADEE8:
 /* 800ADF68 000A8E68  38 21 00 10 */	addi r1, r1, 0x10
 /* 800ADF6C 000A8E6C  4E 80 00 20 */	blr 
 
-.global func_800ADF70
-func_800ADF70:
+.global __dt__Q23EGG7CntFileFv
+__dt__Q23EGG7CntFileFv:
 /* 800ADF70 000A8E70  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 800ADF74 000A8E74  7C 08 02 A6 */	mflr r0
 /* 800ADF78 000A8E78  2C 03 00 00 */	cmpwi r3, 0
@@ -54,8 +104,8 @@ func_800ADF70:
 /* 800ADF88 000A8E88  93 C1 00 08 */	stw r30, 8(r1)
 /* 800ADF8C 000A8E8C  7C 7E 1B 78 */	mr r30, r3
 /* 800ADF90 000A8E90  41 82 00 2C */	beq lbl_800ADFBC
-/* 800ADF94 000A8E94  3D 80 80 3A */	lis r12, lbl_803984E0@ha
-/* 800ADF98 000A8E98  39 8C 84 E0 */	addi r12, r12, lbl_803984E0@l
+/* 800ADF94 000A8E94  3D 80 80 3A */	lis r12, __vt__Q23EGG7CntFile@ha
+/* 800ADF98 000A8E98  39 8C 84 E0 */	addi r12, r12, __vt__Q23EGG7CntFile@l
 /* 800ADF9C 000A8E9C  91 83 00 00 */	stw r12, 0(r3)
 /* 800ADFA0 000A8EA0  81 8C 00 10 */	lwz r12, 0x10(r12)
 /* 800ADFA4 000A8EA4  7D 89 03 A6 */	mtctr r12
@@ -73,8 +123,8 @@ lbl_800ADFBC:
 /* 800ADFD0 000A8ED0  38 21 00 10 */	addi r1, r1, 0x10
 /* 800ADFD4 000A8ED4  4E 80 00 20 */	blr 
 
-.global func_800ADFD8
-func_800ADFD8:
+.global initiate__Q23EGG7CntFileFv
+initiate__Q23EGG7CntFileFv:
 /* 800ADFD8 000A8ED8  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 800ADFDC 000A8EDC  7C 08 02 A6 */	mflr r0
 /* 800ADFE0 000A8EE0  90 01 00 14 */	stw r0, 0x14(r1)
@@ -91,11 +141,11 @@ func_800ADFD8:
 /* 800AE00C 000A8F0C  38 7E 00 78 */	addi r3, r30, 0x78
 /* 800AE010 000A8F10  38 9E 00 98 */	addi r4, r30, 0x98
 /* 800AE014 000A8F14  38 A0 00 01 */	li r5, 1
-/* 800AE018 000A8F18  48 04 40 45 */	bl func_800F205C
+/* 800AE018 000A8F18  48 04 40 45 */	bl OSInitMessageQueue
 /* 800AE01C 000A8F1C  38 7E 00 54 */	addi r3, r30, 0x54
 /* 800AE020 000A8F20  38 9E 00 74 */	addi r4, r30, 0x74
 /* 800AE024 000A8F24  38 A0 00 01 */	li r5, 1
-/* 800AE028 000A8F28  48 04 40 35 */	bl func_800F205C
+/* 800AE028 000A8F28  48 04 40 35 */	bl OSInitMessageQueue
 /* 800AE02C 000A8F2C  93 FE 00 9C */	stw r31, 0x9c(r30)
 /* 800AE030 000A8F30  93 FE 00 38 */	stw r31, 0x38(r30)
 /* 800AE034 000A8F34  83 E1 00 0C */	lwz r31, 0xc(r1)
@@ -105,8 +155,8 @@ func_800ADFD8:
 /* 800AE044 000A8F44  38 21 00 10 */	addi r1, r1, 0x10
 /* 800AE048 000A8F48  4E 80 00 20 */	blr 
 
-.global func_800AE04C
-func_800AE04C:
+.global open__Q23EGG7CntFileFPCcPi
+open__Q23EGG7CntFileFPCcPi:
 /* 800AE04C 000A8F4C  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 800AE050 000A8F50  7C 08 02 A6 */	mflr r0
 /* 800AE054 000A8F54  90 01 00 14 */	stw r0, 0x14(r1)
@@ -129,7 +179,7 @@ func_800AE04C:
 /* 800AE098 000A8F98  40 82 00 48 */	bne lbl_800AE0E0
 /* 800AE09C 000A8F9C  38 00 00 01 */	li r0, 1
 /* 800AE0A0 000A8FA0  98 1E 00 04 */	stb r0, 4(r30)
-/* 800AE0A4 000A8FA4  88 0D 99 B8 */	lbz r0, lbl_804BED38-_SDA_BASE_(r13)
+/* 800AE0A4 000A8FA4  88 0D 99 B8 */	lbz r0, sIsInitialized__Q23EGG7CntFile-_SDA_BASE_(r13)
 /* 800AE0A8 000A8FA8  2C 00 00 00 */	cmpwi r0, 0
 /* 800AE0AC 000A8FAC  40 82 00 1C */	bne lbl_800AE0C8
 /* 800AE0B0 000A8FB0  3C 60 80 38 */	lis r3, lbl_8037ACF0@ha
@@ -139,9 +189,9 @@ func_800AE04C:
 /* 800AE0C0 000A8FC0  4C C6 31 82 */	crclr 6
 /* 800AE0C4 000A8FC4  4B FF 3E 45 */	bl system_halt
 lbl_800AE0C8:
-/* 800AE0C8 000A8FC8  3C 60 80 41 */	lis r3, lbl_8040B940@ha
+/* 800AE0C8 000A8FC8  3C 60 80 41 */	lis r3, sCntList__Q23EGG7CntFile@ha
 /* 800AE0CC 000A8FCC  7F C4 F3 78 */	mr r4, r30
-/* 800AE0D0 000A8FD0  38 63 B9 40 */	addi r3, r3, lbl_8040B940@l
+/* 800AE0D0 000A8FD0  38 63 B9 40 */	addi r3, r3, sCntList__Q23EGG7CntFile@l
 /* 800AE0D4 000A8FD4  4B F5 96 25 */	bl List_Append__Q24nw4r2utFPQ34nw4r2ut4ListPv
 /* 800AE0D8 000A8FD8  93 FE 00 4C */	stw r31, 0x4c(r30)
 /* 800AE0DC 000A8FDC  48 00 00 10 */	b lbl_800AE0EC
@@ -158,8 +208,8 @@ lbl_800AE0EC:
 /* 800AE100 000A9000  38 21 00 10 */	addi r1, r1, 0x10
 /* 800AE104 000A9004  4E 80 00 20 */	blr 
 
-.global func_800AE108
-func_800AE108:
+.global close__Q23EGG7CntFileFv
+close__Q23EGG7CntFileFv:
 /* 800AE108 000A9008  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 800AE10C 000A900C  7C 08 02 A6 */	mflr r0
 /* 800AE110 000A9010  90 01 00 14 */	stw r0, 0x14(r1)
@@ -174,10 +224,10 @@ func_800AE108:
 /* 800AE134 000A9034  2C 03 00 00 */	cmpwi r3, 0
 /* 800AE138 000A9038  90 1F 00 4C */	stw r0, 0x4c(r31)
 /* 800AE13C 000A903C  40 82 00 18 */	bne lbl_800AE154
-/* 800AE140 000A9040  3C 60 80 41 */	lis r3, lbl_8040B940@ha
+/* 800AE140 000A9040  3C 60 80 41 */	lis r3, sCntList__Q23EGG7CntFile@ha
 /* 800AE144 000A9044  98 1F 00 04 */	stb r0, 4(r31)
 /* 800AE148 000A9048  7F E4 FB 78 */	mr r4, r31
-/* 800AE14C 000A904C  38 63 B9 40 */	addi r3, r3, lbl_8040B940@l
+/* 800AE14C 000A904C  38 63 B9 40 */	addi r3, r3, sCntList__Q23EGG7CntFile@l
 /* 800AE150 000A9050  4B F5 97 39 */	bl List_Remove__Q24nw4r2utFPQ34nw4r2ut4ListPv
 lbl_800AE154:
 /* 800AE154 000A9054  80 01 00 14 */	lwz r0, 0x14(r1)
@@ -186,8 +236,8 @@ lbl_800AE154:
 /* 800AE160 000A9060  38 21 00 10 */	addi r1, r1, 0x10
 /* 800AE164 000A9064  4E 80 00 20 */	blr 
 
-.global func_800AE168
-func_800AE168:
+.global readData__Q23EGG7CntFileFPvii
+readData__Q23EGG7CntFileFPvii:
 /* 800AE168 000A9068  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 800AE16C 000A906C  7C 08 02 A6 */	mflr r0
 /* 800AE170 000A9070  90 01 00 24 */	stw r0, 0x24(r1)
@@ -231,8 +281,15 @@ lbl_800AE1EC:
 /* 800AE200 000A9100  7C 08 03 A6 */	mtlr r0
 /* 800AE204 000A9104  38 21 00 20 */	addi r1, r1, 0x20
 /* 800AE208 000A9108  4E 80 00 20 */	blr 
+
+.global writeData__Q23EGG7CntFileFPCvii
+writeData__Q23EGG7CntFileFPCvii:
 /* 800AE20C 000A910C  38 60 FF FF */	li r3, -1
 /* 800AE210 000A9110  4E 80 00 20 */	blr 
+
+# In the vtable's open() slot, but I'm not sure what to think of this
+.global func_800ae214
+func_800ae214:
 /* 800AE214 000A9114  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 800AE218 000A9118  7C 08 02 A6 */	mflr r0
 /* 800AE21C 000A911C  3C 60 80 3A */	lis r3, lbl_80398500@ha
