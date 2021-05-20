@@ -134,6 +134,7 @@ sNullGCCont__3EGG:
 
 .section .rodata, "a"
 .balign 0x8
+.long 0, 1, 2, 3
 .global lbl_8037A590
 lbl_8037A590:
 	.string "eggController.cpp"

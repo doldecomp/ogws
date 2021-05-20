@@ -6,6 +6,7 @@ extern "C" {
 #endif
 
 UNKTYPE GXFlush(void);
+UNKTYPE GXDrawDone(void);
 
 #ifdef __cplusplus
 }

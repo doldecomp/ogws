@@ -25,7 +25,7 @@ namespace EGG
 			return 1 << bit;
 		}
 		
-		inline T on(T mask) const
+		inline bool on(T mask) const
 		{
 			return value & mask;
 		}

@@ -217,7 +217,7 @@ lbl_800AA1EC:
 
 .global endFrame__Q23EGG7DisplayFv
 endFrame__Q23EGG7DisplayFv:
-/* 800AA240 000A5140  48 03 42 54 */	b func_800DE494
+/* 800AA240 000A5140  48 03 42 54 */	b GXDrawDone
 
 .global copyEFBtoXFB__Q23EGG7DisplayFv
 copyEFBtoXFB__Q23EGG7DisplayFv:
