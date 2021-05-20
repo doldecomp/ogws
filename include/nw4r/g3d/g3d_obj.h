@@ -34,7 +34,7 @@ namespace nw4r
             struct ResNameDataT
             {
                 u32 mLength;
-                char mName[N + 1]; // Null-terminated
+                char mName[N]; // Null-terminated
             };
 
             struct TypeObj
