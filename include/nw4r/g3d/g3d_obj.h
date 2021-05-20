@@ -34,7 +34,7 @@ namespace nw4r
             struct ResNameDataT
             {
                 u32 mLength;
-                char mName[N]; // Null-terminated
+                char mName[N];
             };
 
             struct TypeObj
@@ -51,7 +51,6 @@ namespace nw4r
                 template <u32 N>
                 inline TypeObj(const ResNameDataT<N>& pRes) : mData((const TypeObjData *)&pRes) {}
 
-                // What???
                 inline u32 GetTypeID() const
                 {
                     return (u32)mData;
