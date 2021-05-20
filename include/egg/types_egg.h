@@ -29,6 +29,13 @@ namespace EGG
     struct Archive;
 
     struct MsgRes;
+	
+	struct Scene;
+	struct SceneManager;
+	
+	struct Video;
+	
+	struct Display;
 }
 
 #endif

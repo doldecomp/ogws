@@ -301,7 +301,7 @@ beginFrame__Q23EGG12AsyncDisplayFv:
 
 .global beginRender__Q23EGG12AsyncDisplayFv
 beginRender__Q23EGG12AsyncDisplayFv:
-/* 800ADB10 000A8A10  48 03 09 84 */	b func_800DE494
+/* 800ADB10 000A8A10  48 03 09 84 */	b GXDrawDone
 
 .global endRender__Q23EGG12AsyncDisplayFv
 endRender__Q23EGG12AsyncDisplayFv:

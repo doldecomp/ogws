@@ -1,8 +1,8 @@
 #ifndef EGG_PRIM_ASSERT_H
 #define EGG_PRIM_ASSERT_H
 
-#define EGG_ASSERT(EXP) (void)((EXP) || (system_halt(__FILE__, __LINE__, #EXP),0))
-#define EGG_ASSERT_MSG(EXP, ...) (void)((EXP) || (system_halt(__FILE__, __LINE__, __VA_ARGS__),0))
+#define EGG_ASSERT(EXP) if (!(EXP)) system_halt(__FILE__, __LINE__, #EXP)
+#define EGG_ASSERT_MSG(EXP, ...) if (!(EXP)) system_halt(__FILE__, __LINE__, __VA_ARGS__)
 #define EGG_PRINT(...) system_print(true, __FILE__, __VA_ARGS__)
 
 #ifdef __cplusplus

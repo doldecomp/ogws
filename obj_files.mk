@@ -221,7 +221,7 @@ EGG_O_FILES := \
 	build/asm/egg/core/eggTaskThread.o \
 	build/asm/egg/core/eggGraphicsFifo.o \
 	build/asm/egg/core/eggColorFader.o \
-	build/asm/egg/core/eggSceneManager.o \
+	build/egg/core/eggSceneManager.o \
 	build/asm/egg/core/eggController.o \
 	build/asm/egg/core/eggStream.o \
 	build/asm/egg/core/eggDisplay.o \
@@ -230,7 +230,7 @@ EGG_O_FILES := \
 	build/egg/core/eggXfbManager.o \
 	build/asm/egg/core/eggDvdRipper.o \
 	build/asm/egg/core/eggDvdFile.o \
-	build/asm/egg/core/eggScene.o \
+	build/egg/core/eggScene.o \
 	build/asm/egg/core/eggProcessMeter.o \
 	build/egg/core/eggDisposer.o \
 	build/egg/core/eggArchive.o \
