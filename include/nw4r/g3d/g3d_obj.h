@@ -74,11 +74,11 @@ namespace nw4r
             // Unofficial
             virtual UNKTYPE G3dProc(u32, u32, void *) = 0; // at 0xC
             virtual ~G3dObj(); // at 0x10
-            virtual const G3dObj::TypeObj GetTypeObj() const; // at 0x14
+            virtual const TypeObj GetTypeObj() const; // at 0x14
             virtual const char * GetTypeName() const; // at 0x18
 
-            inline G3dObj(MEMAllocator *pAllocator, G3dObj *pObj)
-                : mAllocator(pAllocator), mParent(pObj) {}
+            inline G3dObj(MEMAllocator *pAllocator, G3dObj *pParent)
+                : mAllocator(pAllocator), mParent(pParent) {}
 
             inline G3dObj * GetParent() const
             {

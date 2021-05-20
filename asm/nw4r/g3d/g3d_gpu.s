@@ -1,6 +1,7 @@
 .include "macros.inc"
 
 .section .sdata2, "a"
+.balign 8
 cm2hw__Q34nw4r3g3d4fifo: # local, redefined in g3d_state.s
 	.byte 00
 	.byte 02
@@ -23,6 +24,7 @@ $$25895:
 	.single 0e0
 
 .section .sbss, "wa"
+.balign 8
 .global lbl_804BEB40
 lbl_804BEB40:
 	.skip 0x4
@@ -37,6 +39,7 @@ lbl_804BEB4C:
 	.skip 0x4
 
 .section .bss, "wa"
+.balign 8
 .global lbl_803EBCC8
 lbl_803EBCC8:
 	.skip 0x300
@@ -45,6 +48,7 @@ lbl_803EBFC8:
 	.skip 0x158
 
 .section .rodata, "a"
+.balign 8
 .global lbl_80378310
 lbl_80378310:
 	.incbin "baserom.dol", 0x374410, 0x3C0
