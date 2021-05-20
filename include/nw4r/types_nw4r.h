@@ -99,9 +99,28 @@ namespace nw4r
 
 	namespace lyt
 	{
+		struct Size;
+
+		namespace detail
+		{
+			struct PaneBase;
+		}
+
+		namespace res
+		{
+			struct Pane;
+			struct AnimationBlock;
+		}
+
+		struct Pane;
 		struct DrawInfo;
+		struct AnimResource;
+		struct AnimTransform;
+		struct AnimTransformBasic;
+		struct AnimationLink;
 		struct ResourceAccessor;
 		struct ArcResourceAccessor;
+		struct Material;
 	}
 }
 

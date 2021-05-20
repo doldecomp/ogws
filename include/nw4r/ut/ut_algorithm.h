@@ -42,6 +42,12 @@ namespace nw4r
 			}
 			
 			template <typename T>
+			inline bool TestBit(T t, int bitIndexLSB)
+			{
+				return BitExtract<T>(t, sizeof(T), bitIndexLSB);
+			}
+
+			template <typename T>
 			inline T RoundUp(T t, unsigned int alignment)
 			{
 				return (t + alignment - 1) & -alignment;

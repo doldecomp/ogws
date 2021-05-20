@@ -21,6 +21,14 @@ typedef struct _GXColor
 	u8 a;
 } GXColor;
 
+typedef struct _GXColorS10
+{
+	u16 r;
+	u16 g;
+	u16 b;
+	u16 a;
+} GXColorS10;
+
 typedef struct _GXTexObj
 {
 	char UNK_0x0[0x20];
