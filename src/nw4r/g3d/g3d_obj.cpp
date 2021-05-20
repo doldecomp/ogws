@@ -24,7 +24,7 @@ namespace nw4r
             return rhs == GetTypeObjStatic();
         }
 
-        char * G3dObj::GetTypeName() const
+        const char * G3dObj::GetTypeName() const
         {
             return GetTypeObj().GetTypeName();
         }

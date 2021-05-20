@@ -49,7 +49,7 @@ namespace nw4r
                 };
 
                 template <u32 N>
-                inline TypeObj(const ResNameDataT<N>& pRes) : mData((TypeObjData *)&pRes) {}
+                inline TypeObj(const ResNameDataT<N>& pRes) : mData((const TypeObjData *)&pRes) {}
 
                 // What???
                 inline u32 GetTypeID() const
@@ -57,7 +57,7 @@ namespace nw4r
                     return (u32)mData;
                 }
 
-                inline char * GetTypeName() const
+                inline const char * GetTypeName() const
                 {
                     return mData->mName;
                 }
@@ -67,7 +67,7 @@ namespace nw4r
                     return GetTypeID() == rhs.GetTypeID();
                 }
 
-                TypeObjData *mData; // at 0x0
+                const TypeObjData *mData; // at 0x0
             };
 
             void Destroy();
@@ -76,7 +76,7 @@ namespace nw4r
             virtual UNKTYPE G3dProc(u32, u32, void *) = 0; // at 0xC
             virtual ~G3dObj(); // at 0x10
             virtual const G3dObj::TypeObj GetTypeObj() const; // at 0x14
-            virtual char * GetTypeName() const; // at 0x18
+            virtual const char * GetTypeName() const; // at 0x18
 
             inline G3dObj(MEMAllocator *pAllocator, G3dObj *pObj)
                 : mAllocator(pAllocator), mParent(pObj) {}
