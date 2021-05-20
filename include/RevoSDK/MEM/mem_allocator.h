@@ -18,10 +18,7 @@ struct MEMAllocatorFuncs
 struct MEMAllocator
 {
     struct MEMAllocatorFuncs * mAllocFuncs; // at 0x0
-    union
-    {
-        struct MEMiHeapHead *mHeapHandle; // at 0x4
-    };
+    struct MEMiHeapHead *mHeapHandle; // at 0x4
     UNKWORD WORD_0x8;
     UNKWORD WORD_0xC;
 };

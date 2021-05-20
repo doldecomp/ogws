@@ -23,7 +23,7 @@ namespace EGG
         #line 80
         EGG_ASSERT(mOSThread);
 
-        OSCreateThread(mOSThread, Thread::start, this, (void *)((u32)mStackMemory + mStackSize), mStackSize, r6, 1);
+        OSCreateThread(mOSThread, Thread::start, this, (u8 *)mStackMemory + mStackSize, mStackSize, r6, 1);
 
         setCommonMesgQueue(mesgCount, mHeap);
     }
