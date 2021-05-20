@@ -128,6 +128,7 @@ lbl_80378A90:
     .single 0e1
 
 .section .data, "wa"
+.balign 8
 .global __vt__Q44nw4r3g3d8G3DState11IndMtxOpStd
 __vt__Q44nw4r3g3d8G3DState11IndMtxOpStd:
     .long 0
