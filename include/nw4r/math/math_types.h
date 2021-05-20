@@ -140,6 +140,29 @@ namespace nw4r
 			}
 		};
 		
+		struct _MTX33
+		{
+			float tbl[3][3];
+		};
+
+		struct MTX33
+		{
+			_MTX33 mEntries;
+
+			typedef float (* MtxRef)[3];
+			typedef const float (* MtxRefConst)[3];
+			
+			inline operator MtxRef()
+			{
+				return mEntries.tbl;
+			}
+			
+			inline operator MtxRefConst() const
+			{
+				return mEntries.tbl;
+			}
+		};
+
 		struct _MTX34
 		{
 			float tbl[3][4];

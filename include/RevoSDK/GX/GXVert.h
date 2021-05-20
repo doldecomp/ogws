@@ -24,6 +24,21 @@ void GXTexCoord2u16(u16 c1, u16 c2)
     WGPIPE.s = c2;
 }
 
+void GXCmd1u8(u8 uc)
+{
+    WGPIPE.c = uc;
+}
+
+void GXCmd1u16(u16 us)
+{
+    WGPIPE.s = us;
+}
+
+void GXCmd1u32(u32 ul)
+{
+    WGPIPE.i = ul;
+}
+
 #ifdef __cplusplus
 }
 #endif

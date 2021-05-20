@@ -6,6 +6,12 @@
 extern "C" {
 #endif
 
+
+typedef enum _GXCullMode
+{
+    
+} GXCullMode;
+
 UNKTYPE GXSetCullMode(UNKWORD);
 
 #ifdef __cplusplus
