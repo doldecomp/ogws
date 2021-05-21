@@ -63,6 +63,23 @@ static void OSf32tou16(const f32 * in, u16 * out)
 	*out = __OSf32tou16(*in);
 }
 
+static float __OSs16tof32(register const s16 * arg)
+{
+	register f32 ret;
+	
+	asm
+	{
+		psq_l ret, 0(arg), 1, 3
+	}
+	
+	return ret;
+}
+
+static void OSs16tof32(const s16 * in, f32 * out)
+{
+	*out = __OSs16tof32(in);
+}
+
 static int __OSf32tos16(register f32 arg)
 {
 	s16 ret[2];

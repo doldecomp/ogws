@@ -6,7 +6,10 @@
 #include <RevoSDK/math/mtxvec.h>
 
 #define NW4R_PI_F32 3.1415927f
-#define NW4R_BRAD_TO_RAD 0.024543693f
+#define NW4R_DEG_TO_FIDX (256.0f / 360.0f)
+#define	NW4R_FIDX_TO_DEG (2.0f * NW4R_PI_F32 / 256.0f)
+#define NW4R_MATH_BLOG_TO_LN 1.442695f
+#define NW4R_LN_2 0.6931472f
 
 namespace nw4r
 {

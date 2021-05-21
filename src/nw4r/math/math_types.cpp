@@ -244,7 +244,7 @@ namespace nw4r
 
         MTX34 * MTX34RotAxisFIdx(MTX34 *pMtx, const VEC3 *pVec, f32 angle)
         {
-            PSMTXRotAxisRad(*pMtx, *pVec, NW4R_BRAD_TO_RAD * angle);
+            PSMTXRotAxisRad(*pMtx, *pVec, NW4R_FIDX_TO_DEG * angle);
             return pMtx;
         }
 
