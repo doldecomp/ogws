@@ -61,7 +61,7 @@ NW4R_O_FILES := \
 	build/asm/nw4r/nw4r_8002F700.o \
 	build/asm/nw4r/math/math_arithmetic.o \
 	build/asm/nw4r/math/math_triangular.o \
-	build/asm/nw4r/math/math_types.o \
+	build/nw4r/math/math_types.o \
 	build/asm/nw4r/math/math_geometry.o \
 	build/asm/nw4r/snd/snd_AxManager.o \
 	build/asm/nw4r/snd/snd_AxVoice.o \

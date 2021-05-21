@@ -61,7 +61,7 @@ ASM_DIRS := asm \
 	asm/egg/gfx asm/egg/prim asm/egg/math asm/egg/core asm/egg/audio asm/egg/util
 
 SRC_DIRS := nw4r egg RevoSDK \
-	nw4r/ut nw4r/ef nw4r/snd nw4r/g3d nw4r/lyt \
+	nw4r/ut nw4r/ef nw4r/math nw4r/snd nw4r/g3d nw4r/lyt \
 	egg/math egg/core \
 	RevoSDK/TRK RevoSDK/TRK_old RevoSDK/ARC
 
