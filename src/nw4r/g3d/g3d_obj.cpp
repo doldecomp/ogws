@@ -17,11 +17,11 @@ namespace nw4r
             delete this;
         }
 
-        bool G3dObj::IsDerivedFrom(const TypeObj& rhs) const
+        bool G3dObj::IsDerivedFrom(const TypeObj& other) const
         {
             // Interestingly, the comparison has to be done this order,
             // otherwise the subtraction occurs in the wrong order
-            return rhs == GetTypeObjStatic();
+            return other == GetTypeObjStatic();
         }
 
         const char * G3dObj::GetTypeName() const

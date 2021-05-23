@@ -50,10 +50,10 @@ namespace nw4r
             return this->mFlags & flag;
         }
 
-        bool AnmObj::IsDerivedFrom(const TypeObj& rhs) const
+        bool AnmObj::IsDerivedFrom(const TypeObj& other) const
         {
             // Check base class too
-            return (rhs == GetTypeObjStatic()) ? true : G3dObj::IsDerivedFrom(rhs);
+            return (other == GetTypeObjStatic()) ? true : G3dObj::IsDerivedFrom(other);
         }
 
         const G3dObj::TypeObj AnmObj::GetTypeObj() const
