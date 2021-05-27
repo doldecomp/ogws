@@ -6,6 +6,11 @@
 extern "C" {
 #endif
 
+enum VITvFormat
+{
+
+};
+
 void VIInit(void);
 void VISetBlack(UNKWORD);
 void VIConfigure(GXRenderModeObj *);
@@ -16,11 +21,7 @@ UNKTYPE * VIGetCurrentFrameBuffer(void);
 
 UNKTYPE VISetNextFrameBuffer(UNKTYPE *);
 
-enum VITvFormat
-{
-
-};
-
+UNKWORD VIGetRetraceCount(void);
 enum VITvFormat VIGetTvFormat(void);
 
 #ifdef __cplusplus

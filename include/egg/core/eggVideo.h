@@ -1,6 +1,7 @@
 #ifndef EGG_CORE_VIDEO_H
 #define EGG_CORE_VIDEO_H
 #include "types_egg.h"
+#include "eggBitFlag.h"
 #include <RevoSDK/GX/GXFrameBuf.h>
 #include <RevoSDK/VI/vi.h>
 
@@ -11,7 +12,7 @@ namespace EGG
 {
 	struct Video
 	{
-		inline Video(GXRenderModeObj *obj) : mRenderMode(NULL), BYTE_0x4(0), mOSTick(0)
+		inline Video(GXRenderModeObj *obj) : mRenderMode(NULL), mFlags(), mOSTick(0)
 		{
 			(void)initialize(obj);
 		}
@@ -23,7 +24,7 @@ namespace EGG
 		static GXRenderModeObj * getStandardRenderModeObj();
 
 		GXRenderModeObj *mRenderMode; // at 0x0
-		char BYTE_0x4;
+		TBitFlag<u8> mFlags;
 		char UNK_0x5[3];
 		s32 mOSTick; // at 0x8
 	};

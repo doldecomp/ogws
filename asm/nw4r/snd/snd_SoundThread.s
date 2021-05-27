@@ -439,7 +439,7 @@ lbl_80047EB4:
 lbl_80047ECC:
 /* 80047ECC 00042DCC  7C 1F F0 40 */	cmplw r31, r30
 /* 80047ED0 00042DD0  40 82 FF E4 */	bne lbl_80047EB4
-/* 80047ED4 00042DD4  48 0A D7 49 */	bl func_800F561C
+/* 80047ED4 00042DD4  48 0A D7 49 */	bl OSGetTick
 /* 80047ED8 00042DD8  7C 7D 1B 78 */	mr r29, r3
 /* 80047EDC 00042DDC  4B FE D0 6D */	bl GetInstance__Q44nw4r3snd6detail14AxVoiceManagerFv
 /* 80047EE0 00042DE0  4B FE D9 21 */	bl FreeAllReservedAxVoice__Q44nw4r3snd6detail14AxVoiceManagerFv
@@ -468,7 +468,7 @@ lbl_80047F30:
 /* 80047F30 00042E30  48 00 6D 29 */	bl CalcRandom__Q44nw4r3snd6detail4UtilFv
 /* 80047F34 00042E34  48 00 61 81 */	bl GetInstance__Q44nw4r3snd6detail12VoiceManagerFv
 /* 80047F38 00042E38  48 00 66 75 */	bl UpdateAllVoices__Q44nw4r3snd6detail12VoiceManagerFv
-/* 80047F3C 00042E3C  48 0A D6 E1 */	bl func_800F561C
+/* 80047F3C 00042E3C  48 0A D6 E1 */	bl OSGetTick
 /* 80047F40 00042E40  7C 1D 18 50 */	subf r0, r29, r3
 /* 80047F44 00042E44  83 DB 03 7C */	lwz r30, 0x37c(r27)
 /* 80047F48 00042E48  90 1B 03 90 */	stw r0, 0x390(r27)
