@@ -15,7 +15,7 @@ namespace nw4r
         void Camera::Init()
         {
             GXRenderModeObj& rRenderMode = G3DState::GetRenderModeObj();
-            Init(rRenderMode.SHORT_0x4, rRenderMode.SHORT_0x6, rRenderMode.SHORT_0x4,
+            Init(rRenderMode.mFbWidth, rRenderMode.mEfbHeight, rRenderMode.mFbWidth,
                 rRenderMode.SHORT_0x8, rRenderMode.SHORT_0xE, rRenderMode.SHORT_0x10);
         }
 
