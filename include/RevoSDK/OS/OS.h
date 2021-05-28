@@ -5,6 +5,8 @@
 extern "C" {
 #endif
 
+#define OSIsMEM1Region(addr) (((u32)addr & 0x30000000) == 0)
+
 volatile u32 BUS_SPEED : 0x800000f8;
 
 UNKTYPE OSRegisterVersion(const char *);
