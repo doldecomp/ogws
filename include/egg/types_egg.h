@@ -30,6 +30,8 @@ namespace EGG
 
     struct MsgRes;
 	
+    struct DvdFile;
+
 	struct Scene;
 	struct SceneManager;
 	
