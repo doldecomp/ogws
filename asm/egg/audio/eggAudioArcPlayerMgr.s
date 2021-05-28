@@ -22,10 +22,10 @@ __vt__Q23EGG9ArcPlayer:
     .long 0
     .long 0
     .long __dt__Q23EGG9ArcPlayerFv
-    .long openArchive__Q23EGG9ArcPlayerFPCcPQ34nw4r3snd9SoundHeapQ33EGG9ArcPlayer12SARC_STORAGE
+    .long openArchive__Q23EGG9ArcPlayerFPCcPQ34nw4r3snd9SoundHeapQ33EGG9ArcPlayer12SARC_STORAGEPi
     .long openDvdArchive__Q23EGG9ArcPlayerFPCcPQ34nw4r3snd9SoundHeap
     .long openNandArchive__Q23EGG9ArcPlayerFPCcPQ34nw4r3snd9SoundHeap
-    .long func_800AE884 # This is just not part of the link map's vtable
+    .long openCntArchive__Q23EGG9ArcPlayerFPCcPiPQ34nw4r3snd9SoundHeap
     .long setupMemoryArchive__Q23EGG9ArcPlayerFPCvPQ34nw4r3snd9SoundHeap
     .long setupMemoryArchive__Q23EGG9ArcPlayerFPCvPQ34nw4r3snd9SoundHeapl
     .long closeArchive__Q23EGG9ArcPlayerFv
@@ -133,8 +133,9 @@ lbl_800AE378:
 /* 800AE378 000A9278  38 60 00 00 */	li r3, 0
 /* 800AE37C 000A927C  4E 80 00 20 */	blr 
 
-.global openArchive__Q23EGG9ArcPlayerFPCcPQ34nw4r3snd9SoundHeapQ33EGG9ArcPlayer12SARC_STORAGE
-openArchive__Q23EGG9ArcPlayerFPCcPQ34nw4r3snd9SoundHeapQ33EGG9ArcPlayer12SARC_STORAGE:
+# From Wii Fit U (normal symbol has one less arg)
+.global openArchive__Q23EGG9ArcPlayerFPCcPQ34nw4r3snd9SoundHeapQ33EGG9ArcPlayer12SARC_STORAGEPi
+openArchive__Q23EGG9ArcPlayerFPCcPQ34nw4r3snd9SoundHeapQ33EGG9ArcPlayer12SARC_STORAGEPi:
 /* 800AE380 000A9280  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 800AE384 000A9284  7C 08 02 A6 */	mflr r0
 /* 800AE388 000A9288  2C 06 00 02 */	cmpwi r6, 2
@@ -489,11 +490,9 @@ lbl_800AE870:
 /* 800AE87C 000A977C  38 21 00 30 */	addi r1, r1, 0x30
 /* 800AE880 000A9780  4E 80 00 20 */	blr 
 
-# Looks like another setupMemoryArchive overload,
-# but I'm not sure what args this takes, and there aren't
-# any more setupMemoryArchive overloads in BBA
-.global func_800AE884
-func_800AE884:
+# From Wii Fit U
+.global openCntArchive__Q23EGG9ArcPlayerFPCcPiPQ34nw4r3snd9SoundHeap
+openCntArchive__Q23EGG9ArcPlayerFPCcPiPQ34nw4r3snd9SoundHeap:
 /* 800AE884 000A9784  94 21 FF 30 */	stwu r1, -0xd0(r1)
 /* 800AE888 000A9788  7C 08 02 A6 */	mflr r0
 /* 800AE88C 000A978C  2C 06 00 00 */	cmpwi r6, 0
