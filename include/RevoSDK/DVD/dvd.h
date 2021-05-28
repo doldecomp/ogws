@@ -52,13 +52,15 @@ s32 DVDConvertPathToEntrynum(const char *);
 
 BOOL DVDFastOpen(s32, struct DVDFileInfo *);
 
-UNKTYPE DVDClose(struct DVDFileInfo *);
+BOOL DVDClose(struct DVDFileInfo *);
 
 s32 DVDReadPrio(struct DVDFileInfo *, void *, u32, s32, UNKWORD);
 u32 DVDReadAsyncPrio(struct DVDFileInfo *, void *, u32, s32, DVDAsyncCallback, UNKWORD);
 
 u32 DVDCancel(struct DVDFileInfo *);
 u32 DVDCancelAsync(struct DVDFileInfo *, DVDCBAsyncCallback);
+
+UNKWORD DVDGetCommandBlockStatus(struct DVDCommandBlock *);
 
 #ifdef __cplusplus
 }

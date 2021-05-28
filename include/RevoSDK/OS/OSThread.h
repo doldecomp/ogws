@@ -31,6 +31,7 @@ BOOL OSJoinThread(struct OSThread *, UNKWORD);
 
 UNKTYPE OSWakeupThread(struct OSThreadQueue *);
 UNKTYPE OSInitThreadQueue(struct OSThreadQueue *);
+OSThread * OSGetCurrentThread(void);
 
 UNKWORD OSSetSwitchThreadCallback(OSSwitchThreadFunc);
 BOOL OSIsThreadTerminated(struct OSThread *);

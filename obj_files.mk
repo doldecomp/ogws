@@ -230,7 +230,7 @@ EGG_O_FILES := \
 	build/asm/egg/core/eggXfb.o \
 	build/egg/core/eggXfbManager.o \
 	build/asm/egg/core/eggDvdRipper.o \
-	build/asm/egg/core/eggDvdFile.o \
+	build/egg/core/eggDvdFile.o \
 	build/egg/core/eggScene.o \
 	build/asm/egg/core/eggProcessMeter.o \
 	build/egg/core/eggDisposer.o \
