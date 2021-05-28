@@ -31,6 +31,7 @@ namespace EGG
     struct MsgRes;
 	
     struct DvdFile;
+    struct DvdRipper;
 
 	struct Scene;
 	struct SceneManager;
