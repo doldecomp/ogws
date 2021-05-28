@@ -51,15 +51,15 @@ namespace EGG
         return mIsOpen;
     }
 
-    void DvdFile::open(const char *name)
+    bool DvdFile::open(const char *name)
     {
         s32 entry = DVDConvertPathToEntrynum(name);
-        open(entry);
+        return open(entry);
     }
 
-    void DvdFile::open(const char *name, void *buf)
+    bool DvdFile::open(const char *name, void *buf)
     {
-        open(name);
+        return open(name);
     }
 
     void DvdFile::close()

@@ -26,13 +26,13 @@ namespace EGG
         static void doneProcess(s32, DVDFileInfo *);
 
         virtual ~DvdFile(); // at 0x8
-        virtual void open(const char *); // at 0xC
+        virtual bool open(const char *); // at 0xC
         virtual void close(); // at 0x10
         virtual int readData(void *, s32, s32); // at 0x14
         virtual int writeData(const void *, s32, s32); // at 0x18
         virtual UNKWORD getFileSize() const; // at 0x1C
         virtual bool open(int); // at 0x20
-        virtual void open(const char *, void *); // at 0x24
+        virtual bool open(const char *, void *); // at 0x24
 
         bool mIsOpen; // at 0x4
         OSMutex mMutex_0x8;
