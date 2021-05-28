@@ -49,6 +49,7 @@ namespace EGG
         OSMessageQueue mMesgQueue_0xA0;
         OSMessage mMesg_0xC0;
         OSThread *mThread; // at 0xC4
+        nw4r::ut::Node mNode; // at 0xC8
 
         static ut::List sDvdList;
         static bool sIsInitialized;

@@ -9,7 +9,7 @@ namespace EGG
     {
         if (!sIsInitialized)
         {
-            ut::List_Init(&sDvdList, sizeof(DvdFile));
+            ut::List_Init(&sDvdList, offsetof(DvdFile, mNode));
             sIsInitialized = true;
         }
     }
