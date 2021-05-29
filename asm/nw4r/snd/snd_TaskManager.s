@@ -37,9 +37,9 @@ GetInstance__Q44nw4r3snd6detail11TaskManagerFv:
 /* 8004B040 00045F40  38 7F 00 2C */	addi r3, r31, 0x2c
 /* 8004B044 00045F44  90 1F 00 24 */	stw r0, 0x24(r31)
 /* 8004B048 00045F48  98 1F 00 28 */	stb r0, 0x28(r31)
-/* 8004B04C 00045F4C  48 0A 90 FD */	bl func_800F4148
+/* 8004B04C 00045F4C  48 0A 90 FD */	bl OSInitThreadQueue
 /* 8004B050 00045F50  38 7F 00 34 */	addi r3, r31, 0x34
-/* 8004B054 00045F54  48 0A 90 F5 */	bl func_800F4148
+/* 8004B054 00045F54  48 0A 90 F5 */	bl OSInitThreadQueue
 /* 8004B058 00045F58  3C 80 80 05 */	lis r4, __dt__Q44nw4r3snd6detail11TaskManagerFv@ha
 /* 8004B05C 00045F5C  3C A0 80 3F */	lis r5, lbl_803EBC58@ha
 /* 8004B060 00045F60  7F E3 FB 78 */	mr r3, r31
@@ -146,7 +146,7 @@ AppendTask__Q44nw4r3snd6detail11TaskManagerFPQ44nw4r3snd6detail4TaskQ54nw4r3snd6
 /* 8004B1B8 000460B8  90 01 00 08 */	stw r0, 8(r1)
 /* 8004B1BC 000460BC  4B FB C8 D1 */	bl Insert__Q44nw4r2ut6detail12LinkListImplFQ54nw4r2ut6detail12LinkListImpl8IteratorPQ34nw4r2ut12LinkListNode
 /* 8004B1C0 000460C0  38 7D 00 2C */	addi r3, r29, 0x2c
-/* 8004B1C4 000460C4  48 0A A1 89 */	bl func_800F534C
+/* 8004B1C4 000460C4  48 0A A1 89 */	bl OSWakeupThread
 /* 8004B1C8 000460C8  7F E3 FB 78 */	mr r3, r31
 /* 8004B1CC 000460CC  48 0A 67 1D */	bl OSRestoreInterrupts
 /* 8004B1D0 000460D0  80 01 00 24 */	lwz r0, 0x24(r1)
@@ -362,7 +362,7 @@ lbl_8004B488:
 /* 8004B4A0 000463A0  4E 80 04 21 */	bctrl 
 /* 8004B4A4 000463A4  93 FD 00 24 */	stw r31, 0x24(r29)
 /* 8004B4A8 000463A8  38 7D 00 34 */	addi r3, r29, 0x34
-/* 8004B4AC 000463AC  48 0A 9E A1 */	bl func_800F534C
+/* 8004B4AC 000463AC  48 0A 9E A1 */	bl OSWakeupThread
 /* 8004B4B0 000463B0  7F C3 F3 78 */	mr r3, r30
 lbl_8004B4B4:
 /* 8004B4B4 000463B4  80 01 00 24 */	lwz r0, 0x24(r1)
@@ -558,7 +558,7 @@ CancelWaitTask__Q44nw4r3snd6detail11TaskManagerFv:
 /* 8004B734 00046634  7C 7F 1B 78 */	mr r31, r3
 /* 8004B738 00046638  98 1E 00 28 */	stb r0, 0x28(r30)
 /* 8004B73C 0004663C  38 7E 00 2C */	addi r3, r30, 0x2c
-/* 8004B740 00046640  48 0A 9C 0D */	bl func_800F534C
+/* 8004B740 00046640  48 0A 9C 0D */	bl OSWakeupThread
 /* 8004B744 00046644  7F E3 FB 78 */	mr r3, r31
 /* 8004B748 00046648  48 0A 61 A1 */	bl OSRestoreInterrupts
 /* 8004B74C 0004664C  80 01 00 14 */	lwz r0, 0x14(r1)

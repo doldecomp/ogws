@@ -36,14 +36,14 @@ spSelector:
 # clear_z_TX__29@unnamed@eggAsyncDisplay_cpp@
 .global clear_z_TX__29$$2unnamed$$2eggAsyncDisplay_cpp$$2
 clear_z_TX__29$$2unnamed$$2eggAsyncDisplay_cpp$$2:
-    .long 0xff00ff
-    .long 0xff00ff
-    .long 0xff00ff
-    .long 0xff00ff
-    .long 0xff00ff
-    .long 0xff00ff
-    .long 0xff00ff
-    .long 0xff00ff
+    .long 0x00ff00ff
+    .long 0x00ff00ff
+    .long 0x00ff00ff
+    .long 0x00ff00ff
+    .long 0x00ff00ff
+    .long 0x00ff00ff
+    .long 0x00ff00ff
+    .long 0x00ff00ff
     .long 0xffffffff
     .long 0xffffffff
     .long 0xffffffff
@@ -87,7 +87,7 @@ PostRetraceCallback:
 /* 800AD818 000A8718  38 7F 00 58 */	addi r3, r31, 0x58
 /* 800AD81C 000A871C  38 04 00 01 */	addi r0, r4, 1
 /* 800AD820 000A8720  90 1F 00 6C */	stw r0, 0x6c(r31)
-/* 800AD824 000A8724  48 04 7B 29 */	bl func_800F534C
+/* 800AD824 000A8724  48 04 7B 29 */	bl OSWakeupThread
 lbl_800AD828:
 /* 800AD828 000A8728  80 01 00 14 */	lwz r0, 0x14(r1)
 /* 800AD82C 000A872C  83 E1 00 0C */	lwz r31, 0xc(r1)
@@ -132,10 +132,10 @@ __ct__Q23EGG12AsyncDisplayFUc:
 /* 800AD8B0 000A87B0  90 9F 00 6C */	stw r4, 0x6c(r31)
 /* 800AD8B4 000A87B4  98 1F 00 70 */	stb r0, 0x70(r31)
 /* 800AD8B8 000A87B8  93 ED 99 B0 */	stw r31, spSelector-_SDA_BASE_(r13)
-/* 800AD8BC 000A87BC  48 04 68 8D */	bl func_800F4148
+/* 800AD8BC 000A87BC  48 04 68 8D */	bl OSInitThreadQueue
 /* 800AD8C0 000A87C0  3C 60 80 0B */	lis r3, PostRetraceCallback@ha
 /* 800AD8C4 000A87C4  38 63 D7 D4 */	addi r3, r3, PostRetraceCallback@l
-/* 800AD8C8 000A87C8  48 04 D1 85 */	bl func_800FAA4C
+/* 800AD8C8 000A87C8  48 04 D1 85 */	bl VISetPostRetraceCallback
 /* 800AD8CC 000A87CC  7F E3 FB 78 */	mr r3, r31
 /* 800AD8D0 000A87D0  83 E1 00 0C */	lwz r31, 0xc(r1)
 /* 800AD8D4 000A87D4  80 01 00 14 */	lwz r0, 0x14(r1)
@@ -388,9 +388,9 @@ clearEFB__Q23EGG12AsyncDisplayFUsUsUsUsUsUsQ34nw4r2ut5Color:
 /* 800ADC38 000A8B38  38 60 00 00 */	li r3, 0
 /* 800ADC3C 000A8B3C  38 80 00 00 */	li r4, 0
 /* 800ADC40 000A8B40  48 03 59 61 */	bl GXSetScissor
-/* 800ADC44 000A8B44  3C 60 80 41 */	lis r3, lbl_8040AA60@ha
+/* 800ADC44 000A8B44  3C 60 80 41 */	lis r3, ident__Q23EGG9Matrix34f@ha
 /* 800ADC48 000A8B48  38 80 00 00 */	li r4, 0
-/* 800ADC4C 000A8B4C  38 63 AA 60 */	addi r3, r3, lbl_8040AA60@l
+/* 800ADC4C 000A8B4C  38 63 AA 60 */	addi r3, r3, ident__Q23EGG9Matrix34f@l
 /* 800ADC50 000A8B50  4B FF 47 45 */	bl loadPosMtx__Q23EGG9Matrix34fFUl
 /* 800ADC54 000A8B54  38 60 00 00 */	li r3, 0
 /* 800ADC58 000A8B58  48 03 57 2D */	bl GXSetCurrentMtx

@@ -47,7 +47,7 @@ GetInstance__Q44nw4r3snd6detail11SoundThreadFv:
 /* 80047948 00042848  98 1F 03 94 */	stb r0, 0x394(r31)
 /* 8004794C 0004284C  48 0A A7 11 */	bl OSInitMessageQueue
 /* 80047950 00042850  38 7F 03 18 */	addi r3, r31, 0x318
-/* 80047954 00042854  48 0A C7 F5 */	bl func_800F4148
+/* 80047954 00042854  48 0A C7 F5 */	bl OSInitThreadQueue
 /* 80047958 00042858  38 7F 03 54 */	addi r3, r31, 0x354
 /* 8004795C 0004285C  48 0A B1 E9 */	bl OSInitMutex
 /* 80047960 00042860  3C 80 80 04 */	lis r4, __dt__Q44nw4r3snd6detail11SoundThreadFv@ha
@@ -148,7 +148,7 @@ lbl_80047A44:
 /* 80047AB0 000429B0  98 1E 03 94 */	stb r0, 0x394(r30)
 /* 80047AB4 000429B4  48 0A A5 A9 */	bl OSInitMessageQueue
 /* 80047AB8 000429B8  38 7E 03 18 */	addi r3, r30, 0x318
-/* 80047ABC 000429BC  48 0A C6 8D */	bl func_800F4148
+/* 80047ABC 000429BC  48 0A C6 8D */	bl OSInitThreadQueue
 /* 80047AC0 000429C0  38 7E 03 54 */	addi r3, r30, 0x354
 /* 80047AC4 000429C4  48 0A B0 81 */	bl OSInitMutex
 /* 80047AC8 000429C8  3C 80 80 04 */	lis r4, __dt__Q44nw4r3snd6detail11SoundThreadFv@ha
@@ -224,7 +224,7 @@ Shutdown__Q44nw4r3snd6detail11SoundThreadFv:
 /* 80047BC8 00042AC8  98 1F 03 94 */	stb r0, 0x394(r31)
 /* 80047BCC 00042ACC  48 0A A4 91 */	bl OSInitMessageQueue
 /* 80047BD0 00042AD0  38 7F 03 18 */	addi r3, r31, 0x318
-/* 80047BD4 00042AD4  48 0A C5 75 */	bl func_800F4148
+/* 80047BD4 00042AD4  48 0A C5 75 */	bl OSInitThreadQueue
 /* 80047BD8 00042AD8  38 7F 03 54 */	addi r3, r31, 0x354
 /* 80047BDC 00042ADC  48 0A AF 69 */	bl OSInitMutex
 /* 80047BE0 00042AE0  3C 80 80 04 */	lis r4, __dt__Q44nw4r3snd6detail11SoundThreadFv@ha
@@ -289,7 +289,7 @@ AxCallbackFunc__Q44nw4r3snd6detail11SoundThreadFv:
 /* 80047CB8 00042BB8  98 1E 03 94 */	stb r0, 0x394(r30)
 /* 80047CBC 00042BBC  48 0A A3 A1 */	bl OSInitMessageQueue
 /* 80047CC0 00042BC0  38 7E 03 18 */	addi r3, r30, 0x318
-/* 80047CC4 00042BC4  48 0A C4 85 */	bl func_800F4148
+/* 80047CC4 00042BC4  48 0A C4 85 */	bl OSInitThreadQueue
 /* 80047CC8 00042BC8  38 7E 03 54 */	addi r3, r30, 0x354
 /* 80047CCC 00042BCC  48 0A AE 79 */	bl OSInitMutex
 /* 80047CD0 00042BD0  3C 80 80 04 */	lis r4, __dt__Q44nw4r3snd6detail11SoundThreadFv@ha

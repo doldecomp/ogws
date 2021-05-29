@@ -6,6 +6,8 @@
 extern "C" {
 #endif
 
+#define GX_TEX_MAX_DIMENSION 1024 // Both width and height are limited to 1024
+
 typedef enum _GXTexCoordID
 {
 	
@@ -13,18 +15,35 @@ typedef enum _GXTexCoordID
 
 typedef enum _GXTexMapID
 {
+	GX_TEX_MAP_ID_0,
 	GX_TEX_MAP_ID_INVALID = 0xFF
 } GXTexMapID;
 
 typedef enum _GXTexFmt
 {
-
+	GX_TEX_FMT_0
 } GXTexFmt;
 
 typedef enum _GXCITexFmt
 {
 
 } GXCITexFmt;
+
+typedef struct _GXTexObj
+{
+	UNKWORD mFlags; // at 0x0
+	char UNK_0x4[0x4];
+	UNKWORD mDimensions; // at 0x8 (Height/width are split between these bits)
+	char UNK_0xC[0x4];
+	UNKWORD mUserData; // at 0x10
+	enum GXTexFmt mFormat; // at 0x14
+	char UNK_0x18[0x4 + 0x3];
+	u8 mMipMap; // at 0x1F
+} GXTexObj;
+
+extern UNKTYPE GXInitTexObj(GXTexObj *, u8 *, UNKWORD width, UNKWORD height, UNKWORD texFormat, UNKWORD, UNKWORD, UNKWORD);
+extern UNKTYPE GXInitTexObjLOD(GXTexObj *, int min_filt, int mag_filt, UNKWORD, UNKWORD, UNKWORD, float, float, float);
+extern UNKTYPE GXLoadTexObj(GXTexObj *, GXTexMapID texMapID);
 
 #ifdef __cplusplus
 }

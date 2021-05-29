@@ -6,15 +6,22 @@
 extern "C" {
 #endif
 
+typedef void (* VIPostRetraceCallback)(void);
+
 enum VITvFormat
 {
-
+    VI_NTSC,
+    VI_PAL,
+    VI_MPAL,
 };
 
 void VIInit(void);
 void VISetBlack(UNKWORD);
 void VIConfigure(GXRenderModeObj *);
 void VIWaitForRetrace(void);
+
+void VISetPostRetraceCallback(VIPostRetraceCallback);
+
 void VIFlush(void);
 
 UNKTYPE * VIGetCurrentFrameBuffer(void);

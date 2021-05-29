@@ -4,19 +4,20 @@
 extern "C" {
 #endif
 #include <types.h>
-#include <RevoSDK/math/mtxvec.h>
 
-void PSMTXIdentity(float[3][4]);
-void PSMTXCopy(const float[3][4], float[3][4]);
-void PSMTXInverse(const float[3][4], float[3][4]);
-void PSMTXConcat(const float[3][4], const float[3][4], float[3][4]);
-void PSMTXRotAxisRad(float[3][4], const Vec *, float);
-void PSMTXScaleApply(const float[3][4], float[3][4], float, float, float);
+typedef float Mtx[3][4];
 
-void C_MTXLookAt(float[3][4], Vec *, Vec *, Vec *);
-void C_MTXLightOrtho(float[3][4], float, float, float, float, float, float, float, float);
-void C_MTXLightFrustum(float[3][4], float, float, float, float, float, float, float, float, float);
-void C_MTXLightPerspective(float[3][4], float, float, float, float, float, float);
+void PSMTXIdentity(Mtx);
+void PSMTXCopy(const Mtx, Mtx);
+void PSMTXInverse(const Mtx, Mtx);
+void PSMTXConcat(const Mtx, const Mtx, Mtx);
+void PSMTXRotAxisRad(Mtx, const struct Vec *, float);
+void PSMTXScaleApply(const Mtx, Mtx, float, float, float);
+
+void C_MTXLookAt(Mtx, struct Vec *, struct Vec *, struct Vec *);
+void C_MTXLightOrtho(Mtx, float, float, float, float, float, float, float, float);
+void C_MTXLightFrustum(Mtx, float, float, float, float, float, float, float, float, float);
+void C_MTXLightPerspective(Mtx, float, float, float, float, float, float);
 
 #ifdef __cplusplus
 }

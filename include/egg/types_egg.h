@@ -15,8 +15,6 @@ namespace EGG
     struct FrmHeap;
     struct Heap;
 
-    struct Disposer;
-
     struct Allocator;
     struct Thread;
 
@@ -26,19 +24,22 @@ namespace EGG
     struct Xfb;
     struct XfbManager;
 
-    struct Archive;
-
-    struct MsgRes;
-	
     struct DvdFile;
     struct DvdRipper;
 
+    struct Disposer;
+
+    struct Archive;
+
+    struct Display;
+    struct AsyncDisplay;
+
+    struct Video;
+
+    struct MsgRes;
+
 	struct Scene;
 	struct SceneManager;
-	
-	struct Video;
-	
-	struct Display;
 }
 
 #endif

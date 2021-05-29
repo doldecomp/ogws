@@ -18,8 +18,8 @@ lbl_804C09C8:
 .section .bss, "wa"
 .balign 0x8
 # Static 3x4 identity matrix
-.global lbl_8040AA60
-lbl_8040AA60:
+.global ident__Q23EGG9Matrix34f
+ident__Q23EGG9Matrix34f:
 	.skip 0x4
 	.skip 0x4
 	.skip 0x4
@@ -165,9 +165,9 @@ loadPosMtx__Q23EGG9Matrix34fFUl:
 # __sinit_\eggMatrix_cpp
 .global __sinit_$$3eggMatrix_cpp
 __sinit_$$3eggMatrix_cpp:
-/* 800A2398 0009D298  3C 80 80 41 */	lis r4, lbl_8040AA60@ha
+/* 800A2398 0009D298  3C 80 80 41 */	lis r4, ident__Q23EGG9Matrix34f@ha
 /* 800A239C 0009D29C  C0 22 8F A0 */	lfs f1, lbl_804C09C0-_SDA2_BASE_(r2)
-/* 800A23A0 0009D2A0  38 64 AA 60 */	addi r3, r4, lbl_8040AA60@l
+/* 800A23A0 0009D2A0  38 64 AA 60 */	addi r3, r4, ident__Q23EGG9Matrix34f@l
 /* 800A23A4 0009D2A4  C0 02 8F A8 */	lfs f0, lbl_804C09C8-_SDA2_BASE_(r2)
 /* 800A23A8 0009D2A8  D0 24 AA 60 */	stfs f1, -0x55a0(r4)
 /* 800A23AC 0009D2AC  D0 03 00 04 */	stfs f0, 4(r3)

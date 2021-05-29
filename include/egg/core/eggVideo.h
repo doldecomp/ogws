@@ -19,7 +19,7 @@ namespace EGG
 
 		GXRenderModeObj * initialize(GXRenderModeObj *);
 		GXRenderModeObj * configure(GXRenderModeObj *);
-		static u32 getTickPerVRetrace(VITvFormat);
+		static u32 getTickPerVRetrace(u32);
 		static u32 getTickPerVRetrace();
 		static GXRenderModeObj * getStandardRenderModeObj();
 

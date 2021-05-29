@@ -29,11 +29,6 @@ typedef struct _GXColorS10
 	u16 a;
 } GXColorS10;
 
-typedef struct _GXTexObj
-{
-	char UNK_0x0[0x20];
-} GXTexObj;
-
 typedef enum _GXChannelID
 {
 	GX_CHANNEL_ID_0,
@@ -50,7 +45,7 @@ typedef enum _GXChannelID
 
 static void GXEnd(void) {}
 
-extern UNKTYPE GXBegin(UNKWORD, UNKWORD, UNKWORD);
+extern UNKTYPE GXBegin(UNKWORD, UNKWORD formatIndex, UNKWORD);
 
 extern UNKTYPE GXSetFog(int, GXColor, float, float, float, float);
 extern UNKTYPE GXInitFogAdjTable(u16 *, u16, const float (*)[4]);
@@ -78,10 +73,6 @@ extern UNKTYPE GXSetVtxAttrFmt(UNKWORD, UNKWORD, UNKWORD, UNKWORD, UNKWORD);
 extern UNKTYPE GXClearVtxDesc(UNKTYPE);
 extern UNKTYPE GXSetVtxDesc(UNKWORD, UNKWORD);
 extern UNKTYPE GXSetTevOp(UNKWORD, UNKWORD);
-
-extern UNKTYPE GXInitTexObj(GXTexObj *, u8 *, UNKWORD, UNKWORD, UNKWORD, UNKWORD, UNKWORD, UNKWORD);
-extern UNKTYPE GXInitTexObjLOD(GXTexObj *, int, int, UNKWORD, UNKWORD, UNKWORD, float, float, float);
-extern UNKTYPE GXLoadTexObj(GXTexObj *, UNKWORD);
 
 #ifdef __cplusplus
 }

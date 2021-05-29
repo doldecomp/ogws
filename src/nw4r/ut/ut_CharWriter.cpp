@@ -1,5 +1,6 @@
 #include "ut_CharWriter.h"
 #include <RevoSDK/GX/GXVert.h>
+#include <RevoSDK/GX/GXTexture.h>
 
 namespace
 {
@@ -196,7 +197,7 @@ namespace nw4r
 				glyph.WORD_0x8, 0, 0, 0);
 				GXInitTexObjLOD(&texObj, mFilter.WORD_0x0, mFilter.WORD_0x4, 0, 0, 0,
 				0.0f, 0.0f, 0.0f);
-				GXLoadTexObj(&texObj, 0);
+				GXLoadTexObj(&texObj, GX_TEX_MAP_ID_0);
 				mLoadingTexture = loadingTexture;
 			}
 		}
