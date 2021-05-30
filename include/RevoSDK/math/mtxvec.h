@@ -4,8 +4,9 @@
 extern "C" {
 #endif
 #include <types.h>
+#include <mtx.h>
 
-void PSMTXMultVec(const float[3][4], const struct Vec *, struct Vec *);
+void PSMTXMultVec(const Mtx, const struct Vec *, struct Vec *);
 
 #ifdef __cplusplus
 }
