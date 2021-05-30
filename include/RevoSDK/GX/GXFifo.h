@@ -6,6 +6,12 @@
 extern "C" {
 #endif
 
+typedef struct _GXFifoObj
+{
+    // TO-DO
+    char UNK_0x0[0x80];
+} GXFifoObj;
+
 void GXGetGPStatus(u8 *, u8 *, u8 *, u8 *, u8 *);
 
 #ifdef __cplusplus

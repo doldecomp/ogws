@@ -13,7 +13,7 @@ static void GXFastCallDisplayList(void * ptr, u32 cmdSize)
 	WGPIPE.i = cmdSize;
 }
 
-UNKTYPE GXCallDisplayList(void *, u32);
+UNKTYPE GXCallDisplayList(void *list, u32 nbytes);
 
 #ifdef __cplusplus
 }

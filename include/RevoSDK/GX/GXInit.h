@@ -2,11 +2,12 @@
 #define REVOSDK_GX_INIT_H
 #include <types.h>
 #include <GX.h>
+#include <GXFifo.h>
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-UNKTYPE * GXInit(void *, u32);
+GXFifoObj * GXInit(void *, u32);
 
 #ifdef __cplusplus
 }

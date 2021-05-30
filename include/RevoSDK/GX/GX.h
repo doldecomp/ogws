@@ -21,6 +21,11 @@ typedef struct _GXColor
 	u8 a;
 } GXColor;
 
+typedef enum _GXColorSrc
+{
+
+} GXColorSrc;
+
 typedef struct _GXColorS10
 {
 	u16 r;
@@ -43,36 +48,15 @@ typedef enum _GXChannelID
 	GX_CHANNEL_ID_INVALID = 0xFF
 } GXChannelID;
 
-static void GXEnd(void) {}
+typedef enum _GXDiffuseFn
+{
+    
+} GXDiffuseFn;
 
-extern UNKTYPE GXBegin(UNKWORD, UNKWORD formatIndex, UNKWORD);
+typedef enum _GXAttnFn
+{
 
-extern UNKTYPE GXSetFog(int, GXColor, float, float, float, float);
-extern UNKTYPE GXInitFogAdjTable(u16 *, u16, const float (*)[4]);
-extern UNKTYPE GXSetFogRangeAdj(u8, u16, u16 *);
-extern UNKTYPE GXSetTevSwapModeTable(UNKWORD, UNKWORD, UNKWORD, UNKWORD, UNKWORD);
-extern UNKTYPE GXSetZTexture(UNKWORD, UNKWORD, UNKWORD);
-extern UNKTYPE GXSetChanCtrl(UNKWORD, UNKWORD, UNKWORD, UNKWORD, UNKWORD, UNKWORD, UNKWORD);
-
-extern UNKTYPE GXSetNumChans(UNKWORD);
-extern UNKTYPE GXSetNumTexGens(UNKWORD);
-extern UNKTYPE GXSetNumIndStages(UNKWORD);
-extern UNKTYPE GXSetNumTevStages(UNKWORD);
-
-extern UNKTYPE GXSetTevDirect(UNKWORD);
-extern UNKTYPE GXSetTevSwapMode(UNKWORD, UNKWORD, UNKWORD);
-extern UNKTYPE GXSetTevOrder(UNKWORD, UNKWORD, UNKWORD, UNKWORD);
-extern UNKTYPE GXSetBlendMode(UNKWORD, UNKWORD, UNKWORD, UNKWORD);
-extern UNKTYPE GXSetTexCoordGen2(UNKWORD, UNKWORD, UNKWORD, UNKWORD, UNKWORD, UNKWORD);
-extern UNKTYPE GXSetTevColor(UNKWORD, GXColor);
-extern UNKTYPE GXSetTevColorIn(UNKWORD, UNKWORD, UNKWORD, UNKWORD, UNKWORD);
-extern UNKTYPE GXSetTevAlphaIn(UNKWORD, UNKWORD, UNKWORD, UNKWORD, UNKWORD);
-extern UNKTYPE GXSetTevColorOp(UNKWORD, UNKWORD, UNKWORD, UNKWORD, UNKWORD, UNKWORD);
-extern UNKTYPE GXSetTevAlphaOp(UNKWORD, UNKWORD, UNKWORD, UNKWORD, UNKWORD, UNKWORD);
-extern UNKTYPE GXSetVtxAttrFmt(UNKWORD, UNKWORD, UNKWORD, UNKWORD, UNKWORD);
-extern UNKTYPE GXClearVtxDesc(UNKTYPE);
-extern UNKTYPE GXSetVtxDesc(UNKWORD, UNKWORD);
-extern UNKTYPE GXSetTevOp(UNKWORD, UNKWORD);
+} GXAttnFn;
 
 #ifdef __cplusplus
 }

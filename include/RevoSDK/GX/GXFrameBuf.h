@@ -25,7 +25,7 @@ typedef struct _GXRenderModeObj
 } GXRenderModeObj;
 
 UNKTYPE GXCopyDisp(UNKTYPE *, u8);
-UNKTYPE GXSetCopyClear(GXColor, UNKWORD);
+UNKTYPE GXSetCopyClear(GXColor, UNKWORD zClear);
 UNKTYPE GXSetCopyFilter(u8, u8(*)[24], u8, u8(*)[7]);
 
 #ifdef __cplusplus

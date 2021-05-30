@@ -1,6 +1,12 @@
 #include "ut_CharWriter.h"
 #include <RevoSDK/GX/GXVert.h>
 #include <RevoSDK/GX/GXTexture.h>
+#include <RevoSDK/GX/GXPixel.h>
+#include <RevoSDK/GX/GXTev.h>
+#include <RevoSDK/GX/GXLight.h>
+#include <RevoSDK/GX/GXAttr.h>
+#include <RevoSDK/GX/GXBump.h>
+#include <RevoSDK/GX/GXGeometry.h>
 
 namespace
 {
@@ -9,13 +15,13 @@ namespace
 		static const nw4r::ut::Color fog = 0;
 		
 		GXSetFog(0, fog, 0.0f, 0.0f, 0.0f, 0.0f);
-		GXSetTevSwapModeTable(0, 0, 1, 2, 3);
+		GXSetTevSwapModeTable(GX_TEV_SWAP_SEL_0, 0, 1, 2, 3);
 		GXSetZTexture(0, 17, 0);
 		GXSetNumChans(1);
-		GXSetChanCtrl(4, 0, 0, 1, 0, 0, 2);
-		GXSetChanCtrl(5, 0, 0, 0, 0, 0, 2);
+		GXSetChanCtrl(GX_CHANNEL_ID_4, 0, 0, 1, 0, 0, 2);
+		GXSetChanCtrl(GX_CHANNEL_ID_5, 0, 0, 0, 0, 0, 2);
 		GXSetNumTexGens(1);
-		GXSetTexCoordGen2(0, 1, 4, 60, 0, 125);
+		GXSetTexCoordGen2(GX_TEX_COORD_ID_0, GX_TEX_GEN_TYPE_1, GX_TEX_GEN_SRC_4, 60, 0, 125);
 		GXSetNumIndStages(0);
 		GXSetBlendMode(1, 4, 5, 15);
 	}
@@ -63,16 +69,16 @@ namespace nw4r
 			SetupGXCommon();
 			GXSetNumTevStages(1);
 			GXSetTevDirect(0);
-			GXSetTevSwapMode(0,0,0);
-			GXSetTevOrder(0,0,0,4);
-			GXSetTevOp(0,0);
-			GXSetVtxAttrFmt(0,9,1,4,0);
-			GXSetVtxAttrFmt(0,0xb,1,5,0);
-			GXSetVtxAttrFmt(0,0xd,1,2,0xf);
+			GXSetTevSwapMode(GX_TEV_STAGE_0, 0, 0);
+			GXSetTevOrder(GX_TEV_STAGE_0, GX_TEX_COORD_ID_0, GX_TEX_MAP_ID_0,4);
+			GXSetTevOp(GX_TEV_STAGE_0, 0);
+			GXSetVtxAttrFmt(0, GX_ATTR_VTX, 1, 4, 0);
+			GXSetVtxAttrFmt(0, GX_ATTR_VTX_CLR, 1, 5, 0);
+			GXSetVtxAttrFmt(0, GX_ATTR_VTX_TEX_COORD, 1, 2, 0xf);
 			GXClearVtxDesc();
-			GXSetVtxDesc(9,1);
-			GXSetVtxDesc(0xb,1);
-			GXSetVtxDesc(0xd,1);
+			GXSetVtxDesc(GX_ATTR_VTX, 1);
+			GXSetVtxDesc(GX_ATTR_VTX_CLR, 1);
+			GXSetVtxDesc(GX_ATTR_VTX_TEX_COORD, 1);
 		}
 		
 		void CharWriter::SetupGX()
@@ -91,19 +97,19 @@ namespace nw4r
 						SetupGXCommon();
 						GXSetNumTevStages(1);
 						GXSetTevDirect(0);
-						GXSetTevSwapMode(0,0,0);
-						GXSetTevOrder(0,0,0,4);
-						GXSetTevColorIn(0,0xf,0xf,0xf,10);
-						GXSetTevAlphaIn(0,7,4,5,7);
-						GXSetTevColorOp(0,0,0,0,1,0);
-						GXSetTevAlphaOp(0,0,0,0,1,0);
-						GXSetVtxAttrFmt(0,9,1,4,0);
-						GXSetVtxAttrFmt(0,0xb,1,5,0);
-						GXSetVtxAttrFmt(0,0xd,1,2,0xf);
+						GXSetTevSwapMode(GX_TEV_STAGE_0, 0, 0);
+						GXSetTevOrder(GX_TEV_STAGE_0, GX_TEX_COORD_ID_0, GX_TEX_MAP_ID_0, 4);
+						GXSetTevColorIn(GX_TEV_STAGE_0, 0xf, 0xf, 0xf, 10);
+						GXSetTevAlphaIn(GX_TEV_STAGE_0, 7, 4, 5, 7);
+						GXSetTevColorOp(GX_TEV_STAGE_0, 0, 0, 0, 1, 0);
+						GXSetTevAlphaOp(GX_TEV_STAGE_0, 0, 0, 0, 1, 0);
+						GXSetVtxAttrFmt(0, GX_ATTR_VTX, 1, 4, 0);
+						GXSetVtxAttrFmt(0, GX_ATTR_VTX_CLR, 1, 5, 0);
+						GXSetVtxAttrFmt(0, GX_ATTR_VTX_TEX_COORD, 1, 2, 0xf);
 						GXClearVtxDesc();
-						GXSetVtxDesc(9,1);
-						GXSetVtxDesc(0xb,1);
-						GXSetVtxDesc(0xd,1);
+						GXSetVtxDesc(GX_ATTR_VTX, 1);
+						GXSetVtxDesc(GX_ATTR_VTX_CLR, 1);
+						GXSetVtxDesc(GX_ATTR_VTX_TEX_COORD, 1);
 						break;
 					case 2:
 					case 3:
@@ -274,27 +280,27 @@ namespace nw4r
 			GXSetNumTevStages(2);
 			GXSetTevDirect(0);
 			GXSetTevDirect(1);
-			GXSetTevSwapMode(0, 0, 0);
-			GXSetTevSwapMode(1, 0, 0);
-			GXSetTevOrder(0, 0, 0, 0xFF);
-			GXSetTevColor(1, color1.mChannels);
-			GXSetTevColor(2, color2.mChannels);
-			GXSetTevColorIn(0,2,4,8,0xf);
-			GXSetTevAlphaIn(0,1,2,4,7);
-			GXSetTevColorOp(0,0,0,0,1,0);
-			GXSetTevAlphaOp(0,0,0,0,1,0);
-			GXSetTevOrder(1,0xff,0xff,4);
-			GXSetTevColorIn(1,0xf,0,10,0xf);
-			GXSetTevAlphaIn(1,7,0,5,7);
-			GXSetTevColorOp(1,0,0,0,1,0);
-			GXSetTevAlphaOp(1,0,0,0,1,0);
-			GXSetVtxAttrFmt(0,9,1,4,0);
-			GXSetVtxAttrFmt(0,0xb,1,5,0);
-			GXSetVtxAttrFmt(0,0xd,1,2,0xf);
+			GXSetTevSwapMode(GX_TEV_STAGE_0, 0, 0);
+			GXSetTevSwapMode(GX_TEV_STAGE_1, 0, 0);
+			GXSetTevOrder(GX_TEV_STAGE_0, GX_TEX_COORD_ID_0, GX_TEX_MAP_ID_0, 0xFF);
+			GXSetTevColor(GX_TEV_REG_ID_1, color1.mChannels);
+			GXSetTevColor(GX_TEV_REG_ID_2, color2.mChannels);
+			GXSetTevColorIn(GX_TEV_STAGE_0, 2, 4, 8, 0xf);
+			GXSetTevAlphaIn(GX_TEV_STAGE_0, 1, 2, 4, 7);
+			GXSetTevColorOp(GX_TEV_STAGE_0, 0, 0, 0, 1, 0);
+			GXSetTevAlphaOp(GX_TEV_STAGE_0, 0, 0, 0, 1, 0);
+			GXSetTevOrder(GX_TEV_STAGE_1, GX_TEX_COORD_ID_INVALID, GX_TEX_MAP_ID_INVALID, 4);
+			GXSetTevColorIn(GX_TEV_STAGE_1, 0xf, 0, 10, 0xf);
+			GXSetTevAlphaIn(GX_TEV_STAGE_1, 7, 0, 5, 7);
+			GXSetTevColorOp(GX_TEV_STAGE_1, 0, 0, 0, 1, 0);
+			GXSetTevAlphaOp(GX_TEV_STAGE_1, 0, 0, 0, 1, 0);
+			GXSetVtxAttrFmt(0, GX_ATTR_VTX, 1, 4, 0);
+			GXSetVtxAttrFmt(0, GX_ATTR_VTX_CLR, 1, 5, 0);
+			GXSetVtxAttrFmt(0, GX_ATTR_VTX_TEX_COORD, 1, 2, 0xf);
 			GXClearVtxDesc();
-			GXSetVtxDesc(9,1);
-			GXSetVtxDesc(0xb,1);
-			GXSetVtxDesc(0xd,1);
+			GXSetVtxDesc(GX_ATTR_VTX, 1);
+			GXSetVtxDesc(GX_ATTR_VTX_CLR, 1);
+			GXSetVtxDesc(GX_ATTR_VTX_TEX_COORD, 1);
 		}
 		
 		CharWriter::LoadingTexture CharWriter::mLoadingTexture;

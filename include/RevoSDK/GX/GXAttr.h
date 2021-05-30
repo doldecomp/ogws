@@ -1,6 +1,7 @@
 #ifndef REVOSDK_GX_ATTR_H
 #define REVOSDK_GX_ATTR_H
 #include <types.h>
+#include <GXTexture.h>
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -24,7 +25,7 @@ typedef enum _GXAttr
 	
 	GX_ATTR_VTX_CLR,
 	GX_ATTR_VTX_CLR_COUNT = 2,
-	
+
 	GX_ATTR_VTX_TEX_COORD = GX_ATTR_VTX_CLR + GX_ATTR_VTX_CLR_COUNT,
 	GX_ATTR_VTX_TEX_COORD_COUNT = 8,
 	
@@ -36,20 +37,27 @@ typedef enum _GXAttr
 
 typedef struct _GXVtxDescList
 {
-	enum _GXAttr mAttr; // at 0x0
+	GXAttr mAttr; // at 0x0
 	UNKWORD WORD_0x4;
 } GXVtxDescList[];
 
 typedef struct _GXVtxAttrFmtList
 {
-	enum _GXAttr mAttr; // at 0x0
+	GXAttr mAttr; // at 0x0
 	UNKWORD WORD_0x4;
 	UNKWORD WORD_0x8;
 	char BYTE_0xC;
 } GXVtxAttrFmtList[];
 
+UNKTYPE GXSetVtxDesc(GXAttr, UNKWORD);
+
+UNKTYPE GXClearVtxDesc(UNKTYPE);
+UNKTYPE GXSetVtxAttrFmt(UNKWORD formatIndex, GXAttr, UNKWORD, UNKWORD, UNKWORD fracValue);
+
 UNKTYPE GXSetArray(GXAttr, const void *, u8);
 UNKTYPE GXInvalidateVtxCache(void);
+UNKTYPE GXSetTexCoordGen2(GXTexCoordID, GXTexGenType function, GXTexGenSrc, UNKWORD, UNKWORD, UNKWORD);
+UNKTYPE GXSetNumTexGens(UNKWORD);
 
 #ifdef __cplusplus
 }
