@@ -54,8 +54,8 @@ BOOL DVDFastOpen(s32, struct DVDFileInfo *);
 
 BOOL DVDClose(struct DVDFileInfo *);
 
-s32 DVDReadPrio(struct DVDFileInfo *, void *, u32, s32, UNKWORD);
-u32 DVDReadAsyncPrio(struct DVDFileInfo *, void *, u32, s32, DVDAsyncCallback, UNKWORD);
+s32 DVDReadPrio(struct DVDFileInfo *, void *addr, u32 length, s32 offset, UNKWORD);
+u32 DVDReadAsyncPrio(struct DVDFileInfo *, void *addr, u32 length, s32 offset, DVDAsyncCallback, UNKWORD);
 
 u32 DVDCancel(struct DVDFileInfo *);
 u32 DVDCancelAsync(struct DVDFileInfo *, DVDCBAsyncCallback);
