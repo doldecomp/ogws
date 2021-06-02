@@ -54,6 +54,12 @@ namespace EGG
 		{
 			reset(makeMask(bit));
 		}
+
+		inline void toggleBit(u8 bit)
+		{
+			if (!onBit(bit)) setBit(bit);
+			else resetBit(bit);
+		}
 	};
 }
 

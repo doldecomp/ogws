@@ -39,14 +39,7 @@ namespace EGG
                     bool b = (!pVideo->mFlags.onBit(0));
                     VISetBlack(b);
 
-                    if (!(pVideo->mFlags.onBit(0)))
-                    {
-                        pVideo->mFlags.setBit(0);
-                    }
-                    else
-                    {
-                        pVideo->mFlags.resetBit(0);
-                    }
+                    pVideo->mFlags.toggleBit(0);
 
                     BYTE_0x9 &= (u8)~1;
                 }

@@ -24,14 +24,12 @@ namespace EGG
         f32 FLOAT_0x64;
         UNKWORD WORD_0x68;
         UNKWORD WORD_0x6C;
-        UNKWORD WORD_0x70;
-        UNKWORD WORD_0x74;
+        u8 BYTE_0x70;
+        char UNK_0x71[3];
+        u32 WORD_0x74;
         UNKWORD WORD_0x78;
-        UNKWORD WORD_0x7C;
+        s32 OSTICK_0x7C;
         s32 OSTICK_0x80;
-
-        static GXTexObj clear_z_tobj;
-        static u8 clear_z_TX[];
     };
 }
 

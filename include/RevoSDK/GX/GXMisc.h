@@ -5,9 +5,13 @@
 extern "C" {
 #endif
 
+typedef void (* GXDrawDoneCallback)(void);
+
 UNKTYPE GXFlush(void);
 
 UNKTYPE GXDrawDone(void);
+
+UNKTYPE GXSetDrawDoneCallback(GXDrawDoneCallback);
 
 #ifdef __cplusplus
 }

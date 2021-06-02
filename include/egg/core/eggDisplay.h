@@ -20,7 +20,7 @@ namespace EGG
 		virtual void endFrame();
 		virtual u32 getTickPerFrame();
 
-		char BYTE_0x8;
+		u8 BYTE_0x8;
 		volatile char BYTE_0x9;
 		UNKWORD WORD_0xC;
 		UNKWORD WORD_0x10;
