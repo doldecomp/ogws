@@ -36,8 +36,7 @@ namespace EGG
                 if (BYTE_0x9 & 1)
                 {
                     Video *pVideo = BaseSystem::getVideo();
-                    bool b = (!pVideo->mFlags.onBit(0));
-                    VISetBlack(b);
+                    VISetBlack(!pVideo->mFlags.onBit(0));
 
                     pVideo->mFlags.toggleBit(0);
 
