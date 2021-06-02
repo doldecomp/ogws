@@ -46,7 +46,7 @@ namespace EGG
 			return mConfigData->getDisplay();
 		}
 
-		static inline XfbManager * getXfbMgr()
+		static inline XfbManager * getXfbManager()
 		{
 			return mConfigData->getXfbMgr();
 		}

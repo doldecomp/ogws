@@ -37,7 +37,7 @@ using namespace EGG;
 void PostRetraceCallback()
 {
     AsyncDisplay *disp = spSelector;
-    BaseSystem::getXfbMgr()->postVRetrace();
+    BaseSystem::getXfbManager()->postVRetrace();
     disp->OSTICK_0x80 = OSGetTick();
 
     if (disp->WORD_0x60 == 0)
@@ -49,7 +49,7 @@ void PostRetraceCallback()
 
 void DrawDoneCallback()
 {
-    BaseSystem::getXfbMgr()->setNextFrameBuffer();
+    BaseSystem::getXfbManager()->setNextFrameBuffer();
 }
 
 namespace EGG
@@ -102,7 +102,7 @@ namespace EGG
             if (val > 1.0f) FLOAT_0x64 = 1.0f;
         }
 
-        XfbManager *xfbmgr = BaseSystem::getXfbMgr();
+        XfbManager *xfbmgr = BaseSystem::getXfbManager();
         Xfb *xfb_04 = xfbmgr->mXfb.XFB_0x4;
         bool b = false;
         

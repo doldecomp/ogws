@@ -44,7 +44,7 @@ namespace EGG
                     BYTE_0x9 &= (u8)~1;
                 }
 
-                BaseSystem::getXfbMgr()->setNextFrameBuffer();
+                BaseSystem::getXfbManager()->setNextFrameBuffer();
             }
 
             VIWaitForRetrace();
@@ -86,7 +86,7 @@ namespace EGG
         GXSetCopyFilter(pObj->BYTE_0x19, &pObj->BYTES_0x1A, b, &pObj->BYTES_0x32);
         
         bool efbFlag = FLAG_0x0.onBit(0);
-        BaseSystem::getXfbMgr()->copyEFB(efbFlag);
+        BaseSystem::getXfbManager()->copyEFB(efbFlag);
     }
 
 	void Display::calcFrequency()
