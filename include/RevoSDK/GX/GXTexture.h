@@ -6,8 +6,6 @@
 extern "C" {
 #endif
 
-#define GX_TEX_MAX_DIMENSION 1024 // Both width and height are limited to 1024
-
 typedef enum _GXTexMapID
 {
 	GX_TEX_MAP_ID_0,

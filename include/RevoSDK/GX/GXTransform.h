@@ -6,8 +6,6 @@
 extern "C" {
 #endif
 
-#define GX_SCISSOR_DIMENSION_MAX 1708 
-
 UNKTYPE GXSetScissor(u32 left, u32 top, u32 width, u32 height);
 UNKTYPE GXSetScissorBoxOffset(u32 xOffset, u32 yOffset);
 

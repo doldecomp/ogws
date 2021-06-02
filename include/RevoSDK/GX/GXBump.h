@@ -7,8 +7,6 @@
 extern "C" {
 #endif
 
-#define GX_IND_STAGES_MAX 4
-
 UNKTYPE GXSetNumIndStages(UNKWORD);
 UNKTYPE GXSetTevDirect(UNKWORD);
 

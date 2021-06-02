@@ -6,8 +6,6 @@
 extern "C" {
 #endif
 
-#define GX_FOG_MAX_WIDTH 640
-
 UNKTYPE GXSetFog(int, GXColor, float, float, float nearz, float farz);
 
 UNKTYPE GXInitFogAdjTable(u16 *table, u16 width, const float (*)[4]);
