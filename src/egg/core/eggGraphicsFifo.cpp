@@ -17,9 +17,8 @@ namespace EGG
         #line 69
         EGG_ASSERT(OSIsMEM1Region( heap ));
 
-        GraphicsFifo *pFifo = new (heap, 4) GraphicsFifo(size, heap);
-        sGraphicsFifo = pFifo;
-        return pFifo;
+        sGraphicsFifo = new (heap, 4) GraphicsFifo(size, heap);
+        return sGraphicsFifo;
     }
     
     GraphicsFifo::~GraphicsFifo()
@@ -34,12 +33,9 @@ namespace EGG
 
     GraphicsFifo::GraphicsFifo(u32 size, Heap *heap)
     {
-        u32 alignedSize = nw4r::ut::RoundUp<u32>(size, 32);
-        mBufSize = alignedSize;
-
+        mBufSize = nw4r::ut::RoundUp<u32>(size, 32);
         void *buf = Heap::alloc(mBufSize + 0xA0, 32, heap);
-        buf = nw4r::ut::RoundUp<void *>(buf, 32);
-        mBufBase = buf;
+        mBufBase = nw4r::ut::RoundUp<void *>(buf, 32);
         #line 145
         EGG_ASSERT(mBufBase);
 
