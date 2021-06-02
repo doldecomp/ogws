@@ -21,11 +21,6 @@ typedef struct _GXColor
 	u8 a;
 } GXColor;
 
-typedef enum _GXColorSrc
-{
-
-} GXColorSrc;
-
 typedef struct _GXColorS10
 {
 	u16 r;
@@ -47,16 +42,6 @@ typedef enum _GXChannelID
 	GX_CHANNEL_ID_8,
 	GX_CHANNEL_ID_INVALID = 0xFF
 } GXChannelID;
-
-typedef enum _GXDiffuseFn
-{
-    
-} GXDiffuseFn;
-
-typedef enum _GXAttnFn
-{
-
-} GXAttnFn;
 
 #ifdef __cplusplus
 }
