@@ -19,12 +19,12 @@ namespace EGG
 
     void AudioSystem::calc()
     {
-        f32 currentVolume = snd::detail::AxManager::GetInstance()->mOutputVolume.GetValue();
+        f32 currentVolume = snd::SoundSystem::GetMasterVolume();
 
         if ((WORD_0x8 == 1) && (currentVolume == 0.0f))
         {
             snd::SoundSystem::ShutdownSoundSystem();
-            snd::detail::AxManager::GetInstance()->PrepareReset();
+            snd::SoundSystem::PrepareReset();
             snd::SoundSystem::WaitForResetReady();
             WORD_0x8 = 2;
         }
