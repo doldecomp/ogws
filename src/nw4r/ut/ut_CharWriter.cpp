@@ -281,7 +281,7 @@ namespace nw4r
 			GXSetTevDirect(0);
 			GXSetTevDirect(1);
 			GXSetTevSwapMode(GX_TEV_STAGE_ID_0, 0, 0);
-			GXSetTevSwapMode(GX_TEV_STAGE_1, 0, 0);
+			GXSetTevSwapMode(GX_TEV_STAGE_ID_1, 0, 0);
 			GXSetTevOrder(GX_TEV_STAGE_ID_0, GX_TEX_COORD_ID_0, GX_TEX_MAP_ID_0, 0xFF);
 			GXSetTevColor(GX_TEV_REG_ID_1, color1.mChannels);
 			GXSetTevColor(GX_TEV_REG_ID_2, color2.mChannels);
@@ -289,11 +289,11 @@ namespace nw4r
 			GXSetTevAlphaIn(GX_TEV_STAGE_ID_0, 1, 2, 4, 7);
 			GXSetTevColorOp(GX_TEV_STAGE_ID_0, 0, 0, 0, 1, 0);
 			GXSetTevAlphaOp(GX_TEV_STAGE_ID_0, 0, 0, 0, 1, 0);
-			GXSetTevOrder(GX_TEV_STAGE_1, GX_TEX_COORD_ID_INVALID, GX_TEX_MAP_ID_INVALID, 4);
-			GXSetTevColorIn(GX_TEV_STAGE_1, 0xf, 0, 10, 0xf);
-			GXSetTevAlphaIn(GX_TEV_STAGE_1, 7, 0, 5, 7);
-			GXSetTevColorOp(GX_TEV_STAGE_1, 0, 0, 0, 1, 0);
-			GXSetTevAlphaOp(GX_TEV_STAGE_1, 0, 0, 0, 1, 0);
+			GXSetTevOrder(GX_TEV_STAGE_ID_1, GX_TEX_COORD_ID_INVALID, GX_TEX_MAP_ID_INVALID, 4);
+			GXSetTevColorIn(GX_TEV_STAGE_ID_1, 0xf, 0, 10, 0xf);
+			GXSetTevAlphaIn(GX_TEV_STAGE_ID_1, 7, 0, 5, 7);
+			GXSetTevColorOp(GX_TEV_STAGE_ID_1, 0, 0, 0, 1, 0);
+			GXSetTevAlphaOp(GX_TEV_STAGE_ID_1, 0, 0, 0, 1, 0);
 			GXSetVtxAttrFmt(0, GX_ATTR_VTX, 1, 4, 0);
 			GXSetVtxAttrFmt(0, GX_ATTR_VTX_CLR, 1, 5, 0);
 			GXSetVtxAttrFmt(0, GX_ATTR_VTX_TEX_COORD, 1, 2, 0xf);
