@@ -25,7 +25,6 @@ namespace EGG
 
 		GXRenderModeObj *mRenderMode; // at 0x0
 		TBitFlag<u8> mFlags;
-		char UNK_0x5[3];
 		s32 mOSTick; // at 0x8
 	};
 }

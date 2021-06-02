@@ -9,7 +9,6 @@ namespace EGG
 	struct Display
 	{
 		TBitFlag<u8> FLAG_0x0;
-		volatile char UNK_0x1[3];
 
 		Display(u8);
 		void copyEFBtoXFB();
