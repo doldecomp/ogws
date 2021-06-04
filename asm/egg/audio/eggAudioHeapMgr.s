@@ -27,7 +27,7 @@ vtable_803986bc:
     .long 0
     .long 0
     .long func_800B0F10
-    .long openArchive__Q23EGG9ArcPlayerFPCcPQ34nw4r3snd9SoundHeapQ33EGG9ArcPlayer12SARC_STORAGE
+    .long openArchive__Q23EGG9ArcPlayerFPCcPQ34nw4r3snd9SoundHeapQ33EGG9ArcPlayer12SARC_STORAGEPi
     .long 0x800afb08
     .long 0x800afb00
     .long 0x800afaf8

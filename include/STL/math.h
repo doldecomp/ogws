@@ -8,6 +8,8 @@ extern "C" {
 double sin(double);
 double cos(double);
 
+double fmod(double, double);
+
 double atan2(double y, double x);
 
 double sqrt(double);

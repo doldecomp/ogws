@@ -36,14 +36,14 @@ spSelector:
 # clear_z_TX__29@unnamed@eggAsyncDisplay_cpp@
 .global clear_z_TX__29$$2unnamed$$2eggAsyncDisplay_cpp$$2
 clear_z_TX__29$$2unnamed$$2eggAsyncDisplay_cpp$$2:
-    .long 0xff00ff
-    .long 0xff00ff
-    .long 0xff00ff
-    .long 0xff00ff
-    .long 0xff00ff
-    .long 0xff00ff
-    .long 0xff00ff
-    .long 0xff00ff
+    .long 0x00ff00ff
+    .long 0x00ff00ff
+    .long 0x00ff00ff
+    .long 0x00ff00ff
+    .long 0x00ff00ff
+    .long 0x00ff00ff
+    .long 0x00ff00ff
+    .long 0x00ff00ff
     .long 0xffffffff
     .long 0xffffffff
     .long 0xffffffff
@@ -78,7 +78,7 @@ PostRetraceCallback:
 /* 800AD7F4 000A86F4  7D 89 03 A6 */	mtctr r12
 /* 800AD7F8 000A86F8  4E 80 04 21 */	bctrl 
 /* 800AD7FC 000A86FC  4B FF D1 61 */	bl postVRetrace__Q23EGG10XfbManagerFv
-/* 800AD800 000A8700  48 04 7E 1D */	bl func_800F561C
+/* 800AD800 000A8700  48 04 7E 1D */	bl OSGetTick
 /* 800AD804 000A8704  90 7F 00 80 */	stw r3, 0x80(r31)
 /* 800AD808 000A8708  80 1F 00 60 */	lwz r0, 0x60(r31)
 /* 800AD80C 000A870C  2C 00 00 00 */	cmpwi r0, 0
@@ -87,7 +87,7 @@ PostRetraceCallback:
 /* 800AD818 000A8718  38 7F 00 58 */	addi r3, r31, 0x58
 /* 800AD81C 000A871C  38 04 00 01 */	addi r0, r4, 1
 /* 800AD820 000A8720  90 1F 00 6C */	stw r0, 0x6c(r31)
-/* 800AD824 000A8724  48 04 7B 29 */	bl func_800F534C
+/* 800AD824 000A8724  48 04 7B 29 */	bl OSWakeupThread
 lbl_800AD828:
 /* 800AD828 000A8728  80 01 00 14 */	lwz r0, 0x14(r1)
 /* 800AD82C 000A872C  83 E1 00 0C */	lwz r31, 0xc(r1)
@@ -132,10 +132,10 @@ __ct__Q23EGG12AsyncDisplayFUc:
 /* 800AD8B0 000A87B0  90 9F 00 6C */	stw r4, 0x6c(r31)
 /* 800AD8B4 000A87B4  98 1F 00 70 */	stb r0, 0x70(r31)
 /* 800AD8B8 000A87B8  93 ED 99 B0 */	stw r31, spSelector-_SDA_BASE_(r13)
-/* 800AD8BC 000A87BC  48 04 68 8D */	bl func_800F4148
+/* 800AD8BC 000A87BC  48 04 68 8D */	bl OSInitThreadQueue
 /* 800AD8C0 000A87C0  3C 60 80 0B */	lis r3, PostRetraceCallback@ha
 /* 800AD8C4 000A87C4  38 63 D7 D4 */	addi r3, r3, PostRetraceCallback@l
-/* 800AD8C8 000A87C8  48 04 D1 85 */	bl func_800FAA4C
+/* 800AD8C8 000A87C8  48 04 D1 85 */	bl VISetPostRetraceCallback
 /* 800AD8CC 000A87CC  7F E3 FB 78 */	mr r3, r31
 /* 800AD8D0 000A87D0  83 E1 00 0C */	lwz r31, 0xc(r1)
 /* 800AD8D4 000A87D4  80 01 00 14 */	lwz r0, 0x14(r1)
@@ -156,7 +156,7 @@ syncTick__Q23EGG12AsyncDisplayFv:
 /* 800AD904 000A8804  7F C4 00 50 */	subf r30, r4, r0
 lbl_800AD908:
 /* 800AD908 000A8808  38 7F 00 58 */	addi r3, r31, 0x58
-/* 800AD90C 000A880C  48 04 79 55 */	bl func_800F5260
+/* 800AD90C 000A880C  48 04 79 55 */	bl OSSleepThread
 /* 800AD910 000A8810  88 1F 00 08 */	lbz r0, 8(r31)
 /* 800AD914 000A8814  3B DE 00 01 */	addi r30, r30, 1
 /* 800AD918 000A8818  7C 1E 00 40 */	cmplw r30, r0
@@ -178,7 +178,7 @@ lbl_800AD950:
 lbl_800AD954:
 /* 800AD954 000A8854  7C 1E 00 00 */	cmpw r30, r0
 /* 800AD958 000A8858  41 80 FF F8 */	blt lbl_800AD950
-/* 800AD95C 000A885C  48 04 7C C1 */	bl func_800F561C
+/* 800AD95C 000A885C  48 04 7C C1 */	bl OSGetTick
 /* 800AD960 000A8860  80 1F 00 80 */	lwz r0, 0x80(r31)
 /* 800AD964 000A8864  80 9F 00 74 */	lwz r4, 0x74(r31)
 /* 800AD968 000A8868  7C 60 18 50 */	subf r3, r0, r3
@@ -228,7 +228,7 @@ lbl_800ADA00:
 /* 800ADA0C 000A890C  4B FF C8 39 */	bl copyEFBtoXFB__Q23EGG7DisplayFv
 /* 800ADA10 000A8910  3C 60 80 0B */	lis r3, DrawDoneCallback@ha
 /* 800ADA14 000A8914  38 63 D8 3C */	addi r3, r3, DrawDoneCallback@l
-/* 800ADA18 000A8918  48 03 0D 1D */	bl func_800DE734
+/* 800ADA18 000A8918  48 03 0D 1D */	bl GXSetDrawDoneCallback
 /* 800ADA1C 000A891C  48 00 00 60 */	b lbl_800ADA7C
 lbl_800ADA20:
 /* 800ADA20 000A8920  80 6D 99 38 */	lwz r3, mConfigData__Q23EGG10BaseSystem-_SDA_BASE_(r13)
@@ -268,7 +268,7 @@ lbl_800ADA7C:
 /* 800ADAA4 000A89A4  54 00 07 FE */	clrlwi r0, r0, 0x1f
 /* 800ADAA8 000A89A8  7C 00 00 34 */	cntlzw r0, r0
 /* 800ADAAC 000A89AC  54 03 D9 7E */	srwi r3, r0, 5
-/* 800ADAB0 000A89B0  48 04 E9 4D */	bl func_800FC3FC
+/* 800ADAB0 000A89B0  48 04 E9 4D */	bl VISetBlack
 /* 800ADAB4 000A89B4  88 1E 00 04 */	lbz r0, 4(r30)
 /* 800ADAB8 000A89B8  54 00 07 FF */	clrlwi. r0, r0, 0x1f
 /* 800ADABC 000A89BC  40 82 00 14 */	bne lbl_800ADAD0
@@ -388,9 +388,9 @@ clearEFB__Q23EGG12AsyncDisplayFUsUsUsUsUsUsQ34nw4r2ut5Color:
 /* 800ADC38 000A8B38  38 60 00 00 */	li r3, 0
 /* 800ADC3C 000A8B3C  38 80 00 00 */	li r4, 0
 /* 800ADC40 000A8B40  48 03 59 61 */	bl GXSetScissor
-/* 800ADC44 000A8B44  3C 60 80 41 */	lis r3, lbl_8040AA60@ha
+/* 800ADC44 000A8B44  3C 60 80 41 */	lis r3, ident__Q23EGG9Matrix34f@ha
 /* 800ADC48 000A8B48  38 80 00 00 */	li r4, 0
-/* 800ADC4C 000A8B4C  38 63 AA 60 */	addi r3, r3, lbl_8040AA60@l
+/* 800ADC4C 000A8B4C  38 63 AA 60 */	addi r3, r3, ident__Q23EGG9Matrix34f@l
 /* 800ADC50 000A8B50  4B FF 47 45 */	bl loadPosMtx__Q23EGG9Matrix34fFUl
 /* 800ADC54 000A8B54  38 60 00 00 */	li r3, 0
 /* 800ADC58 000A8B58  48 03 57 2D */	bl GXSetCurrentMtx
@@ -492,13 +492,13 @@ clearEFB__Q23EGG12AsyncDisplayFUsUsUsUsUsUsQ34nw4r2ut5Color:
 /* 800ADDD8 000A8CD8  38 A0 00 01 */	li r5, 1
 /* 800ADDDC 000A8CDC  38 C0 00 07 */	li r6, 7
 /* 800ADDE0 000A8CE0  38 E0 00 00 */	li r7, 0
-/* 800ADDE4 000A8CE4  48 03 3B DD */	bl func_800E19C0
+/* 800ADDE4 000A8CE4  48 03 3B DD */	bl GXSetAlphaCompare
 /* 800ADDE8 000A8CE8  38 60 00 02 */	li r3, 2
 /* 800ADDEC 000A8CEC  38 80 00 16 */	li r4, 0x16
 /* 800ADDF0 000A8CF0  38 A0 00 00 */	li r5, 0
 /* 800ADDF4 000A8CF4  48 03 3C 05 */	bl GXSetZTexture
 /* 800ADDF8 000A8CF8  38 60 00 00 */	li r3, 0
-/* 800ADDFC 000A8CFC  48 03 43 95 */	bl func_800E2190
+/* 800ADDFC 000A8CFC  48 03 43 95 */	bl GXSetZCompLoc
 /* 800ADE00 000A8D00  38 60 00 00 */	li r3, 0
 /* 800ADE04 000A8D04  38 80 00 00 */	li r4, 0
 /* 800ADE08 000A8D08  38 A0 00 00 */	li r5, 0
@@ -508,13 +508,13 @@ clearEFB__Q23EGG12AsyncDisplayFUsUsUsUsUsUsQ34nw4r2ut5Color:
 /* 800ADE18 000A8D18  48 03 43 19 */	bl GXSetAlphaUpdate
 /* 800ADE1C 000A8D1C  88 9E 00 03 */	lbz r4, 3(r30)
 /* 800ADE20 000A8D20  38 60 00 01 */	li r3, 1
-/* 800ADE24 000A8D24  48 03 44 71 */	bl func_800E2294
+/* 800ADE24 000A8D24  48 03 44 71 */	bl GXSetDstAlpha
 /* 800ADE28 000A8D28  38 60 00 01 */	li r3, 1
 /* 800ADE2C 000A8D2C  38 80 00 07 */	li r4, 7
 /* 800ADE30 000A8D30  38 A0 00 01 */	li r5, 1
 /* 800ADE34 000A8D34  48 03 43 29 */	bl GXSetZMode
 /* 800ADE38 000A8D38  38 60 00 02 */	li r3, 2
-/* 800ADE3C 000A8D3C  48 03 0F 61 */	bl func_800DED9C
+/* 800ADE3C 000A8D3C  48 03 0F 61 */	bl GXSetCullMode
 /* 800ADE40 000A8D40  38 60 00 80 */	li r3, 0x80
 /* 800ADE44 000A8D44  38 80 00 00 */	li r4, 0
 /* 800ADE48 000A8D48  38 A0 00 04 */	li r5, 4
@@ -545,10 +545,10 @@ clearEFB__Q23EGG12AsyncDisplayFUsUsUsUsUsUsQ34nw4r2ut5Color:
 /* 800ADEAC 000A8DAC  98 C8 80 00 */	stb r6, -0x8000(r8)
 /* 800ADEB0 000A8DB0  48 03 3B 49 */	bl GXSetZTexture
 /* 800ADEB4 000A8DB4  38 60 00 01 */	li r3, 1
-/* 800ADEB8 000A8DB8  48 03 42 D9 */	bl func_800E2190
+/* 800ADEB8 000A8DB8  48 03 42 D9 */	bl GXSetZCompLoc
 /* 800ADEBC 000A8DBC  88 9E 00 03 */	lbz r4, 3(r30)
 /* 800ADEC0 000A8DC0  38 60 00 00 */	li r3, 0
-/* 800ADEC4 000A8DC4  48 03 43 D1 */	bl func_800E2294
+/* 800ADEC4 000A8DC4  48 03 43 D1 */	bl GXSetDstAlpha
 /* 800ADEC8 000A8DC8  39 61 00 80 */	addi r11, r1, 0x80
 /* 800ADECC 000A8DCC  48 00 3E B9 */	bl _restgpr_24
 /* 800ADED0 000A8DD0  80 01 00 84 */	lwz r0, 0x84(r1)

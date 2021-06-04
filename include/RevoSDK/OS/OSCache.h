@@ -14,6 +14,7 @@ UNKTYPE LCDisable(void);
 
 u32 LCQueueLength(UNKTYPE);
 
+UNKTYPE DCInvalidateRange(UNKTYPE *, u32);
 UNKTYPE DCFlushRange(UNKTYPE *, u32);
 UNKTYPE DCFlushRangeNoSync(void *, u32);
 UNKTYPE DCStoreRange(void *, u32);

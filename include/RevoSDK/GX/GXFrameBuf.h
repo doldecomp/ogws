@@ -9,8 +9,8 @@ extern "C" {
 typedef struct _GXRenderModeObj
 {
     u32 INT_0x0;
-    u16 SHORT_0x4;
-    u16 SHORT_0x6;
+    u16 mFbWidth; // at 0x4
+    u16 mEfbHeight; // at 0x8
     u16 SHORT_0x8;
     u16 SHORT_0xA;
     u16 SHORT_0xC;
@@ -21,16 +21,12 @@ typedef struct _GXRenderModeObj
     u8 BYTE_0x18;
     u8 BYTE_0x19;
     u8 BYTES_0x1A[24];
-    u8 BYTE_0x32;
-    u8 BYTE_0x33;
-    u8 BYTE_0x34;
-    u8 BYTE_0x35;
-    u8 BYTE_0x36;
-    u8 BYTE_0x37;
-    u8 BYTE_0x38;
+    u8 BYTES_0x32[7];
 } GXRenderModeObj;
 
 UNKTYPE GXCopyDisp(UNKTYPE *, u8);
+UNKTYPE GXSetCopyClear(GXColor, UNKWORD zClear);
+UNKTYPE GXSetCopyFilter(u8, u8(*)[24], u8, u8(*)[7]);
 
 #ifdef __cplusplus
 }

@@ -9,6 +9,7 @@ namespace EGG
 		virtual Video * getVideo() = 0; // at 0x8
 		virtual UNKTYPE VIRT_0xC(UNKTYPE) = 0; // at 0xc
 		virtual Display * getDisplay() = 0; // at 0x10
+		virtual XfbManager * getXfbMgr() = 0; // at 0x14
 		
 		char UNK_0x4[0x14];
 		Heap * mRootHeapMem1; // at 0x18
@@ -43,6 +44,11 @@ namespace EGG
 		static inline Display * getDisplay()
 		{
 			return mConfigData->getDisplay();
+		}
+
+		static inline XfbManager * getXfbManager()
+		{
+			return mConfigData->getXfbMgr();
 		}
 	};
 }

@@ -6,6 +6,10 @@
 #include <RevoSDK/math/mtxvec.h>
 
 #define NW4R_PI_F32 3.1415927f
+#define NW4R_DEG_TO_FIDX (256.0f / 360.0f)
+#define	NW4R_FIDX_TO_DEG (2.0f * NW4R_PI_F32 / 256.0f)
+#define NW4R_MATH_BLOG_TO_LN 1.442695f
+#define NW4R_LN_2 0.6931472f
 
 namespace nw4r
 {
@@ -140,6 +144,29 @@ namespace nw4r
 			}
 		};
 		
+		struct _MTX33
+		{
+			float tbl[3][3];
+		};
+
+		struct MTX33
+		{
+			_MTX33 mEntries;
+
+			typedef float (* MtxRef)[3];
+			typedef const float (* MtxRefConst)[3];
+			
+			inline operator MtxRef()
+			{
+				return mEntries.tbl;
+			}
+			
+			inline operator MtxRefConst() const
+			{
+				return mEntries.tbl;
+			}
+		};
+
 		struct _MTX34
 		{
 			float tbl[3][4];
@@ -191,6 +218,9 @@ namespace nw4r
 			PSVECCrossProduct(*in1, *in2, *out);
 		}
 
+		void VEC3Maximize(VEC3 *, const VEC3 *, const VEC3 *);
+		void VEC3Minimize(VEC3 *, const VEC3 *, const VEC3 *);
+
 		inline void VEC3Normalize(VEC3 * out, const VEC3 * in)
 		{
 			PSVECNormalize(*in, *out);
@@ -206,6 +236,14 @@ namespace nw4r
 			PSMTXMultVec(*mtx, *inVec, *outVec);
 		}
 		
+		void MTX33Identity(register MTX33 *);
+
+		int MTX34InvTranspose(register MTX33 *, register const MTX34 *);
+
+		void MTX34ToMTX33(register MTX33 *, register const MTX34 *);
+
+		void MTX34Zero(register MTX34 *);
+
 		inline void MTX34Inv(MTX34 * out, const MTX34 * in)
 		{
 			PSMTXInverse(*in, *out);
@@ -215,6 +253,14 @@ namespace nw4r
 		{
 			PSMTXConcat(*inMtx1, *inMtx2, *outMtx);
 		}
+
+		void MTX34Scale(register MTX34 *, register const MTX34 *, register const VEC3 *);
+
+		void MTX34Trans(register MTX34 *, register const MTX34 *, register const VEC3 *);
+
+		MTX34 * MTX34RotAxisFIdx(MTX34 *, const VEC3 *, f32 );
+
+		MTX34 * MTX34RotXYZFIdx(MTX34 *, f32, f32, f32);
 
 		inline void MTX34Identity(MTX34 * mtx)
 		{
@@ -226,13 +272,15 @@ namespace nw4r
 			PSMTXCopy(*in, *out);
 		}
 		
-		void MTX44Copy(MTX44 *, const MTX44 *);
+		VEC3 * VEC3TransformNormal(VEC3 *, const MTX34 *, const VEC3 *);
+
+		void MTX44Identity(register MTX44 *);
+
+		void MTX44Copy(register MTX44 *, register const MTX44 *);
 
 		UNKTYPE GetDirMtxY(MTX34 *, const VEC3 &);
 		
-		UNKTYPE MTX34RotXYZFIdx(MTX34 *, float, float, float);
-		
-		UNKTYPE MTX34Scale(MTX34 *, const MTX34 *, const VEC3 *);
+		MTX34 * MTX34RotXYZFIdx(MTX34 *, float, float, float);
 		
 		inline void MTX34Scale(MTX34 * outMtx, const VEC3 * vec, const MTX34 * inMtx)
 		{
@@ -240,8 +288,6 @@ namespace nw4r
 		}
 		
 		UNKTYPE MtxGetRotation(const MTX34 &, VEC3 *);
-		
-		UNKTYPE MTX34Trans(MTX34 *, const MTX34 *, const VEC3 *);
 		
 		float FrSqrt(float);
 		

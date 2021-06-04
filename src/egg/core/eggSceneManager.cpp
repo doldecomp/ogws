@@ -418,8 +418,8 @@ namespace EGG
 			//800a5974
 			Display * pDisplay = BaseSystem::getDisplay();
 			Video * pVideo = BaseSystem::getVideo();
-			//TODO: DECOMPILE EGG::Video AND EGG::Display
-			if ((pVideo->BYTE_0x4 & 1) && ((pDisplay->BYTE_0x9 & 1)==0))
+			//TODO: DECOMPILE EGG::Video
+			if (pVideo->mFlags.onBit(0) && ((pDisplay->BYTE_0x9 & 1) == 0))
 			{
 				pDisplay->BYTE_0x9 |= 1;
 			}

@@ -6,7 +6,14 @@
 extern "C" {
 #endif
 
-UNKTYPE GXSetChanMatColor(UNKWORD, GXColor);
+typedef enum _GXLightID
+{
+
+} GXLightID;
+
+UNKTYPE GXSetChanMatColor(GXChannelID, GXColor);
+UNKTYPE GXSetNumChans(UNKWORD nChans);
+UNKTYPE GXSetChanCtrl(GXChannelID, UNKWORD, UNKWORD, UNKWORD, UNKWORD, UNKWORD, UNKWORD);
 
 #ifdef __cplusplus
 }

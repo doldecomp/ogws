@@ -5,9 +5,11 @@ extern "C" {
 #endif
 #include <types.h>
 
-UNKTYPE C_MTXPerspective(float, float, float, float, float[4][4]);
-UNKTYPE C_MTXFrustum(float, float, float, float, float, float, float[4][4]);
-UNKTYPE C_MTXOrtho(float, float, float, float, float, float, float[4][4]);
+typedef float Mtx44[4][4];
+
+UNKTYPE C_MTXPerspective(float, float, float, float, Mtx44);
+UNKTYPE C_MTXFrustum(float, float, float, float, float, float, Mtx44);
+UNKTYPE C_MTXOrtho(float, float, float, float, float, float, Mtx44);
 
 #ifdef __cplusplus
 }

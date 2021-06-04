@@ -61,8 +61,9 @@ NW4R_O_FILES := \
 	build/asm/nw4r/nw4r_8002F700.o \
 	build/asm/nw4r/math/math_arithmetic.o \
 	build/asm/nw4r/math/math_triangular.o \
-	build/asm/nw4r/math/math_types.o \
+	build/nw4r/math/math_types.o \
 	build/asm/nw4r/math/math_geometry.o \
+	build/asm/nw4r/snd/snd_AnimSound.o \
 	build/asm/nw4r/snd/snd_AxManager.o \
 	build/asm/nw4r/snd/snd_AxVoice.o \
 	build/asm/nw4r/snd/snd_AxVoiceManager.o \
@@ -152,7 +153,7 @@ NW4R_O_FILES := \
 	build/asm/nw4r/g3d/g3d_anmshp.o \
 	build/asm/nw4r/g3d/g3d_anmscn.o \
 	build/nw4r/g3d/g3d_obj.o \
-	build/asm/nw4r/g3d/g3d_anmobj.o \
+	build/nw4r/g3d/g3d_anmobj.o \
 	build/asm/nw4r/g3d/g3d_gpu.o \
 	build/asm/nw4r/g3d/g3d_cpu.o \
 	build/asm/nw4r/g3d/g3d_state.o \
@@ -219,17 +220,17 @@ EGG_O_FILES := \
 	build/egg/core/eggThread.o \
 	build/asm/egg/core/eggSystem.o \
 	build/asm/egg/core/eggTaskThread.o \
-	build/asm/egg/core/eggGraphicsFifo.o \
+	build/egg/core/eggGraphicsFifo.o \
 	build/asm/egg/core/eggColorFader.o \
 	build/egg/core/eggSceneManager.o \
 	build/asm/egg/core/eggController.o \
 	build/asm/egg/core/eggStream.o \
-	build/asm/egg/core/eggDisplay.o \
+	build/egg/core/eggDisplay.o \
 	build/asm/egg/core/eggVideo.o \
 	build/asm/egg/core/eggXfb.o \
 	build/egg/core/eggXfbManager.o \
 	build/asm/egg/core/eggDvdRipper.o \
-	build/asm/egg/core/eggDvdFile.o \
+	build/egg/core/eggDvdFile.o \
 	build/egg/core/eggScene.o \
 	build/asm/egg/core/eggProcessMeter.o \
 	build/egg/core/eggDisposer.o \
@@ -242,7 +243,7 @@ EGG_O_FILES := \
 	build/asm/egg/audio/eggAudioFxMgr.o \
 	build/asm/egg/audio/eggAudioHeapMgr.o \
 	build/asm/egg/audio/eggAudioMgr.o \
-	build/asm/egg/audio/eggAudioSystem.o \
+	build/egg/audio/eggAudioSystem.o \
 	build/asm/egg/util/eggMsgRes.o \
 	build/asm/egg/util/eggEffect.o \
 	build/asm/egg/util/eggException.o \

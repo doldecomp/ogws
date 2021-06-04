@@ -8,6 +8,42 @@ namespace nw4r
 {
     namespace math
     {
+		namespace
+		{
+			f32 FExpLn2(f32);
+			f32 FLog1_2(f32);
+		}
+
+		namespace detail
+		{
+			f32 FExp(f32);
+			f32 FLog(f32);
+		}
+
+		f32 FrSqrt(register f32);
+
+		inline u32 F32AsU32(f32 x)
+		{
+			return *(u32 *)&x;
+		}
+
+		inline u32 U32AsF32(u32 x)
+		{
+			return *(f32 *)&x;
+		}
+
+	    inline s32 FGetExpPart(f32 x)
+        {
+            u32 ul = F32AsU32(x);
+            return ((ul >> 23) & 0xFF) - 127;
+        }
+
+		inline f32 FGetMantPart(f32 x)
+        {
+            u32 ul = F32AsU32(x);
+            return U32AsF32((ul & 0x807FFFFF) | 0x3F800000);
+        }
+
 		inline float FFloor(float arg)
 		{
 			return floor(arg);
@@ -57,6 +93,15 @@ namespace nw4r
 			return ret;
 		}
 		
+		inline f32 S16ToF32(s16 arg)
+		{
+			f32 ret;
+
+			OSs16tof32(&arg, &ret);
+
+			return ret;
+		}
+
 		inline s16 F32ToS16(f32 arg)
 		{
 			s16 ret;

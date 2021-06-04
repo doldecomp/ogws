@@ -23,7 +23,7 @@ struct DVDFileInfo
 	UNKWORD WORD_0x28;
 	UNKWORD WORD_0x2C;
 	UNKWORD WORD_0x30;
-	UNKWORD WORD_0x34;
+	UNKWORD mFileSize;
 	UNKWORD WORD_0x38;
 };
 
@@ -52,13 +52,15 @@ s32 DVDConvertPathToEntrynum(const char *);
 
 BOOL DVDFastOpen(s32, struct DVDFileInfo *);
 
-UNKTYPE DVDClose(struct DVDFileInfo *);
+BOOL DVDClose(struct DVDFileInfo *);
 
-s32 DVDReadPrio(struct DVDFileInfo *, void *, u32, s32, UNKWORD);
-u32 DVDReadAsyncPrio(struct DVDFileInfo *, void *, u32, s32, DVDAsyncCallback, UNKWORD);
+s32 DVDReadPrio(struct DVDFileInfo *, void *addr, u32 length, s32 offset, UNKWORD);
+u32 DVDReadAsyncPrio(struct DVDFileInfo *, void *addr, u32 length, s32 offset, DVDAsyncCallback, UNKWORD);
 
 u32 DVDCancel(struct DVDFileInfo *);
 u32 DVDCancelAsync(struct DVDFileInfo *, DVDCBAsyncCallback);
+
+UNKWORD DVDGetCommandBlockStatus(struct DVDCommandBlock *);
 
 #ifdef __cplusplus
 }

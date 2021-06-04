@@ -47,7 +47,7 @@ namespace nw4r
 
 				if (DVDFastOpen(r4, &mFileInfo))
 				{
-					mPosition.SetFileSize(mFileInfo.WORD_0x34);
+					mPosition.SetFileSize(mFileInfo.mFileSize);
 					mPosition.Seek(0, 0);
 					BOOL_0x6D = true;
 					BOOL_0x6E = true;
@@ -65,7 +65,7 @@ namespace nw4r
 				}
 
 				mFileInfo = *pInfo;
-				mPosition.SetFileSize(mFileInfo.WORD_0x34);
+				mPosition.SetFileSize(mFileInfo.mFileSize);
 				mPosition.Seek(0, 0);
 				BOOL_0x6D = false;
 				BOOL_0x6E = b;

@@ -24,13 +24,17 @@ struct OSThreadQueue
 typedef UNKWORD (* OSThreadFunc)(void *);
 typedef void (* OSSwitchThreadFunc)(OSThread *, OSThread *);
 
-BOOL OSCreateThread(struct OSThread *, OSThreadFunc, void *, void *, UNKWORD, UNKWORD, UNKWORD);
 UNKTYPE OSYieldThread(UNKTYPE);
-UNKTYPE OSResumeThread(struct OSThread *);
+BOOL OSCreateThread(struct OSThread *, OSThreadFunc, void *, void *, UNKWORD, UNKWORD, UNKWORD);
+
 BOOL OSJoinThread(struct OSThread *, UNKWORD);
 
+UNKTYPE OSResumeThread(struct OSThread *);
+
+UNKTYPE OSSleepThread(struct OSThreadQueue *);
 UNKTYPE OSWakeupThread(struct OSThreadQueue *);
 UNKTYPE OSInitThreadQueue(struct OSThreadQueue *);
+OSThread * OSGetCurrentThread(void);
 
 UNKWORD OSSetSwitchThreadCallback(OSSwitchThreadFunc);
 BOOL OSIsThreadTerminated(struct OSThread *);

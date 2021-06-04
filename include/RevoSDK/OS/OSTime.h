@@ -5,6 +5,7 @@
 extern "C" {
 #endif
 
+s32 OSGetTick(void);
 s64 OSGetTime(void);
 
 #ifdef __cplusplus

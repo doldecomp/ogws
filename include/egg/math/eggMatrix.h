@@ -24,8 +24,7 @@ namespace EGG
 
         f32 tbl[3][4];
 
-        // TO-DO: Static items declared here
-
+        static Matrix34f ident;
     };
 }
 

@@ -47,7 +47,7 @@ GetInstance__Q44nw4r3snd6detail11SoundThreadFv:
 /* 80047948 00042848  98 1F 03 94 */	stb r0, 0x394(r31)
 /* 8004794C 0004284C  48 0A A7 11 */	bl OSInitMessageQueue
 /* 80047950 00042850  38 7F 03 18 */	addi r3, r31, 0x318
-/* 80047954 00042854  48 0A C7 F5 */	bl func_800F4148
+/* 80047954 00042854  48 0A C7 F5 */	bl OSInitThreadQueue
 /* 80047958 00042858  38 7F 03 54 */	addi r3, r31, 0x354
 /* 8004795C 0004285C  48 0A B1 E9 */	bl OSInitMutex
 /* 80047960 00042860  3C 80 80 04 */	lis r4, __dt__Q44nw4r3snd6detail11SoundThreadFv@ha
@@ -148,7 +148,7 @@ lbl_80047A44:
 /* 80047AB0 000429B0  98 1E 03 94 */	stb r0, 0x394(r30)
 /* 80047AB4 000429B4  48 0A A5 A9 */	bl OSInitMessageQueue
 /* 80047AB8 000429B8  38 7E 03 18 */	addi r3, r30, 0x318
-/* 80047ABC 000429BC  48 0A C6 8D */	bl func_800F4148
+/* 80047ABC 000429BC  48 0A C6 8D */	bl OSInitThreadQueue
 /* 80047AC0 000429C0  38 7E 03 54 */	addi r3, r30, 0x354
 /* 80047AC4 000429C4  48 0A B0 81 */	bl OSInitMutex
 /* 80047AC8 000429C8  3C 80 80 04 */	lis r4, __dt__Q44nw4r3snd6detail11SoundThreadFv@ha
@@ -224,7 +224,7 @@ Shutdown__Q44nw4r3snd6detail11SoundThreadFv:
 /* 80047BC8 00042AC8  98 1F 03 94 */	stb r0, 0x394(r31)
 /* 80047BCC 00042ACC  48 0A A4 91 */	bl OSInitMessageQueue
 /* 80047BD0 00042AD0  38 7F 03 18 */	addi r3, r31, 0x318
-/* 80047BD4 00042AD4  48 0A C5 75 */	bl func_800F4148
+/* 80047BD4 00042AD4  48 0A C5 75 */	bl OSInitThreadQueue
 /* 80047BD8 00042AD8  38 7F 03 54 */	addi r3, r31, 0x354
 /* 80047BDC 00042ADC  48 0A AF 69 */	bl OSInitMutex
 /* 80047BE0 00042AE0  3C 80 80 04 */	lis r4, __dt__Q44nw4r3snd6detail11SoundThreadFv@ha
@@ -289,7 +289,7 @@ AxCallbackFunc__Q44nw4r3snd6detail11SoundThreadFv:
 /* 80047CB8 00042BB8  98 1E 03 94 */	stb r0, 0x394(r30)
 /* 80047CBC 00042BBC  48 0A A3 A1 */	bl OSInitMessageQueue
 /* 80047CC0 00042BC0  38 7E 03 18 */	addi r3, r30, 0x318
-/* 80047CC4 00042BC4  48 0A C4 85 */	bl func_800F4148
+/* 80047CC4 00042BC4  48 0A C4 85 */	bl OSInitThreadQueue
 /* 80047CC8 00042BC8  38 7E 03 54 */	addi r3, r30, 0x354
 /* 80047CCC 00042BCC  48 0A AE 79 */	bl OSInitMutex
 /* 80047CD0 00042BD0  3C 80 80 04 */	lis r4, __dt__Q44nw4r3snd6detail11SoundThreadFv@ha
@@ -306,7 +306,7 @@ lbl_80047CF0:
 /* 80047CF8 00042BF8  3B DE 78 80 */	addi r30, r30, lbl_803E7880@l
 /* 80047CFC 00042BFC  38 A0 00 00 */	li r5, 0
 /* 80047D00 00042C00  38 7E 03 20 */	addi r3, r30, 0x320
-/* 80047D04 00042C04  48 0A A3 B9 */	bl func_800F20BC
+/* 80047D04 00042C04  48 0A A3 B9 */	bl OSSendMessage
 /* 80047D08 00042C08  87 FE 03 88 */	lwzu r31, 0x388(r30)
 /* 80047D0C 00042C0C  48 00 00 1C */	b lbl_80047D28
 lbl_80047D10:
@@ -419,7 +419,7 @@ lbl_80047E80:
 /* 80047E80 00042D80  38 7B 03 20 */	addi r3, r27, 0x320
 /* 80047E84 00042D84  38 81 00 08 */	addi r4, r1, 8
 /* 80047E88 00042D88  38 A0 00 01 */	li r5, 1
-/* 80047E8C 00042D8C  48 0A A2 F9 */	bl func_800F2184
+/* 80047E8C 00042D8C  48 0A A2 F9 */	bl OSReceiveMessage
 /* 80047E90 00042D90  80 01 00 08 */	lwz r0, 8(r1)
 /* 80047E94 00042D94  28 00 00 01 */	cmplwi r0, 1
 /* 80047E98 00042D98  40 82 00 E8 */	bne lbl_80047F80
@@ -439,7 +439,7 @@ lbl_80047EB4:
 lbl_80047ECC:
 /* 80047ECC 00042DCC  7C 1F F0 40 */	cmplw r31, r30
 /* 80047ED0 00042DD0  40 82 FF E4 */	bne lbl_80047EB4
-/* 80047ED4 00042DD4  48 0A D7 49 */	bl func_800F561C
+/* 80047ED4 00042DD4  48 0A D7 49 */	bl OSGetTick
 /* 80047ED8 00042DD8  7C 7D 1B 78 */	mr r29, r3
 /* 80047EDC 00042DDC  4B FE D0 6D */	bl GetInstance__Q44nw4r3snd6detail14AxVoiceManagerFv
 /* 80047EE0 00042DE0  4B FE D9 21 */	bl FreeAllReservedAxVoice__Q44nw4r3snd6detail14AxVoiceManagerFv
@@ -468,7 +468,7 @@ lbl_80047F30:
 /* 80047F30 00042E30  48 00 6D 29 */	bl CalcRandom__Q44nw4r3snd6detail4UtilFv
 /* 80047F34 00042E34  48 00 61 81 */	bl GetInstance__Q44nw4r3snd6detail12VoiceManagerFv
 /* 80047F38 00042E38  48 00 66 75 */	bl UpdateAllVoices__Q44nw4r3snd6detail12VoiceManagerFv
-/* 80047F3C 00042E3C  48 0A D6 E1 */	bl func_800F561C
+/* 80047F3C 00042E3C  48 0A D6 E1 */	bl OSGetTick
 /* 80047F40 00042E40  7C 1D 18 50 */	subf r0, r29, r3
 /* 80047F44 00042E44  83 DB 03 7C */	lwz r30, 0x37c(r27)
 /* 80047F48 00042E48  90 1B 03 90 */	stw r0, 0x390(r27)
