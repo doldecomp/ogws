@@ -28,8 +28,8 @@ namespace EGG
         virtual ~DvdFile(); // at 0x8
         virtual bool open(const char *); // at 0xC
         virtual void close(); // at 0x10
-        virtual int readData(void *, s32, s32); // at 0x14
-        virtual int writeData(const void *, s32, s32); // at 0x18
+        virtual s32 readData(void *, s32, s32); // at 0x14
+        virtual s32 writeData(const void *, s32, s32); // at 0x18
         virtual UNKWORD getFileSize() const; // at 0x1C
         virtual bool open(int); // at 0x20
         virtual bool open(const char *, void *); // at 0x24

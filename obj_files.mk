@@ -219,7 +219,7 @@ EGG_O_FILES := \
 	build/egg/core/eggAllocator.o \
 	build/egg/core/eggThread.o \
 	build/asm/egg/core/eggSystem.o \
-	build/asm/egg/core/eggTaskThread.o \
+	build/egg/core/eggTaskThread.o \
 	build/egg/core/eggGraphicsFifo.o \
 	build/asm/egg/core/eggColorFader.o \
 	build/egg/core/eggSceneManager.o \

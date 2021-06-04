@@ -31,6 +31,34 @@ namespace EGG
         nw4r::ut::Node mNode; // at 0x3C
 
         static nw4r::ut::List sThreadList;
+		
+		inline bool sendMessage(OSMessage message)
+		{
+			return OSSendMessage(&mMesgQueue, message, 0);
+		}
+		
+		inline void resume()
+		{
+			OSResumeThread(mOSThread);
+		}
+		
+		inline OSMessage waitMessageBlock()
+		{
+			OSMessage message;
+			
+			OSReceiveMessage(&mMesgQueue, &message, 1);
+			
+			return message;
+		}
+		
+		inline OSMessage waitMessage(BOOL * pSuccess)
+		{
+			OSMessage message;
+			
+			*pSuccess = OSReceiveMessage(&mMesgQueue, &message, 0);
+			
+			return message;
+		}
     };
 }
 

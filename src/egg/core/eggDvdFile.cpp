@@ -16,7 +16,7 @@ namespace EGG
 
     DvdFile::DvdFile()
     {
-        mIsOpen = FALSE;
+        mIsOpen = false;
         initiate();
     }
 
@@ -71,9 +71,9 @@ namespace EGG
         }
     }
 
-    int DvdFile::readData(void *data, s32 len, s32 pos)
+    s32 DvdFile::readData(void *data, s32 len, s32 pos)
     {
-        int result;
+        s32 result;
 
         OSLockMutex(&mMutex_0x8);
         if (mThread)
@@ -81,40 +81,38 @@ namespace EGG
             OSUnlockMutex(&mMutex_0x8);
             return -1;
         }
-        else
+        
+        mThread = OSGetCurrentThread();
+        result = -1;
+        u32 success = DVDReadAsyncPrio(&mFileInfo, data, len, pos, DvdFile::doneProcess, 2);
+        
+        if (success != 0)
         {
-            mThread = OSGetCurrentThread();
-            result = -1;
-            u32 success = DVDReadAsyncPrio(&mFileInfo, data, len, pos, DvdFile::doneProcess, 2);
-            
-            if (success != 0)
-            {
-                OSLockMutex(&mMutex_0x8);
+            OSLockMutex(&mMutex_0x8);
 
-                OSMessage mesg;
-                OSReceiveMessage(&mMesgQueue_0xA0, &mesg, 1);
-
-                mThread = NULL;
-                OSUnlockMutex(&mMutex_0x8);
-                result = (int)mesg;
-            }
+            OSMessage mesg;
+            OSReceiveMessage(&mMesgQueue_0xA0, &mesg, 1);
 
             mThread = NULL;
             OSUnlockMutex(&mMutex_0x8);
+            result = (s32)mesg;
         }
+
+        mThread = NULL;
+        OSUnlockMutex(&mMutex_0x8);
 
         return result;
     }
 
-    int DvdFile::writeData(const void *, s32, s32)
+    s32 DvdFile::writeData(const void *, s32, s32)
     {
         return -1;
     }
 
-    void DvdFile::doneProcess(s32 i, DVDFileInfo *pInfo)
+    void DvdFile::doneProcess(s32 mesg, DVDFileInfo *pInfo)
     {
         FileInfoPair *pPair = (FileInfoPair *)pInfo;
-        OSSendMessage(&pPair->pDvdFile->mMesgQueue_0xA0, i, 0);
+        OSSendMessage(&pPair->pDvdFile->mMesgQueue_0xA0, (OSMessage)mesg, 0);
     }
 
     ut::List DvdFile::sDvdList;
