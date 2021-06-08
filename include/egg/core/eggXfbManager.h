@@ -7,7 +7,7 @@ namespace EGG
 {
     struct XfbManager
     {
-        inline XfbManager() {}
+        inline XfbManager(Heap *heap) {}
         inline ~XfbManager() {}
 
         bool attach(Xfb *);
@@ -15,7 +15,10 @@ namespace EGG
         void setNextFrameBuffer();
         void postVRetrace();
 
-        Xfb mXfb;
+        Xfb *XFB_0x0;
+        Xfb *XFB_0x4;
+        Xfb *XFB_0x8;
+        Xfb *XFB_0xC;
     };
 }
 
