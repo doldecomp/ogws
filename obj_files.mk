@@ -236,7 +236,7 @@ EGG_O_FILES := \
 	build/egg/core/eggDisposer.o \
 	build/egg/core/eggArchive.o \
 	build/asm/egg/core/eggDecomp.o \
-	build/asm/egg/core/eggAsyncDisplay.o \
+	build/egg/core/eggAsyncDisplay.o \
 	build/asm/egg/core/eggCntFile.o \
 	build/asm/egg/audio/eggAudioArcPlayerMgr.o \
 	build/asm/egg/audio/eggAudioExpMgr.o \
