@@ -19,16 +19,20 @@ namespace EGG
         if (!heap) heap = Heap::sCurrentHeap;
 
         mBuffer = new (heap, 32) char[bufSize];
-        #line 48
+        #line 40
         EGG_ASSERT(mBuffer);
 
         XFB_0xC = NULL;
         XFB_0x8 = NULL;
     }
 
-    // The strings  aren't ordered correctly
-    // "rm != NULL" must come before "video != NULL" in the pool.
-    #ifdef __DECOMP_NON_MATCHING
+    // Force string pool ordering by creating an instance of "rm != NULL"
+    void UNUSED()
+    {
+        GXRenderModeObj *rm;
+        EGG_ASSERT(rm != NULL);
+    }
+
     Xfb::Xfb(Heap *heap)
     {
         Video *video = BaseSystem::getVideo();
@@ -37,14 +41,12 @@ namespace EGG
         GXRenderModeObj *rm = video->mRenderMode;
         EGG_ASSERT(rm != NULL);
 
-        init(rm->mFbWidth, rm->mEfbHeight, heap);
+        init(rm->mFbWidth, rm->mFbHeight, heap);
     }
-    #else
-    #error This file has yet to be decompiled accurately. Use "eggXfb.s" instead.
-    #endif
 
     UNKWORD Xfb::calcBufferSize(u16 width, u16 height)
     {
-        return (ut::RoundUp(width, 16) * height * 2);
+        u16 round = ut::RoundUp(width, 16);
+        return (round * height * 2);
     }
 }

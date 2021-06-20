@@ -258,7 +258,7 @@ EGG_O_FILES := \
 	build/asm/egg/core/eggStream.o \
 	build/egg/core/eggDisplay.o \
 	build/asm/egg/core/eggVideo.o \
-	build/asm/egg/core/eggXfb.o \
+	build/egg/core/eggXfb.o \
 	build/egg/core/eggXfbManager.o \
 	build/asm/egg/core/eggDvdRipper.o \
 	build/egg/core/eggDvdFile.o \
