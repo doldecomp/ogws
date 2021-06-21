@@ -10,8 +10,6 @@
 
 namespace EGG
 {
-    using namespace nw4r;
-
     struct DvdFile : File
     {
         struct FileInfoPair
@@ -51,7 +49,7 @@ namespace EGG
         OSThread *mThread; // at 0xC4
         nw4r::ut::Node mNode; // at 0xC8
 
-        static ut::List sDvdList;
+        static nw4r::ut::List sDvdList;
         static bool sIsInitialized;
     };
 }
