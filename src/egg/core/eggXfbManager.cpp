@@ -14,22 +14,22 @@ namespace EGG
 
         if (pXfb)
         {
-            if (mXfb.XFB_0x0 == NULL)
+            if (!XFB_0x0)
             {
-                mXfb.XFB_0x0 = pXfb;
-                mXfb.XFB_0x4 = pXfb;
+                XFB_0x0 = pXfb;
+                XFB_0x4 = pXfb;
                 pXfb->XFB_0x8 = pXfb;
                 pXfb->XFB_0xC = pXfb;
             }
             else
             {
-                mXfb.XFB_0x0->XFB_0xC->XFB_0x8 = pXfb;
+                XFB_0x0->XFB_0xC->XFB_0x8 = pXfb;
 
-                pXfb->XFB_0xC = mXfb.XFB_0x0->XFB_0xC;
-                mXfb.XFB_0x0->XFB_0xC = pXfb;
+                pXfb->XFB_0xC = XFB_0x0->XFB_0xC;
+                XFB_0x0->XFB_0xC = pXfb;
 
-                pXfb->XFB_0x8 = mXfb.XFB_0x0;
-                mXfb.XFB_0x4 = mXfb.XFB_0x0->XFB_0x8;
+                pXfb->XFB_0x8 = XFB_0x0;
+                XFB_0x4 = XFB_0x0->XFB_0x8;
             }
             success = true;
         }
@@ -46,22 +46,22 @@ namespace EGG
             GXSetColorUpdate(1);
         }
 
-        GXCopyDisp(mXfb.XFB_0x4->XFB_0x4, bUpdate);
+        GXCopyDisp(XFB_0x4->mBuffer, bUpdate);
         GXFlush();
-        mXfb.XFB_0x8 = mXfb.XFB_0x4;
-        mXfb.XFB_0x4 = mXfb.XFB_0x4->XFB_0x8;
+        XFB_0x8 = XFB_0x4;
+        XFB_0x4 = XFB_0x4->XFB_0x8;
     }
 
     void XfbManager::setNextFrameBuffer()
     {
         UNKWORD r31 = OSDisableInterrupts();
 
-        if (mXfb.XFB_0x8)
+        if (XFB_0x8)
         {
-            VISetNextFrameBuffer(mXfb.XFB_0x8->XFB_0x4);
+            VISetNextFrameBuffer(XFB_0x8->mBuffer);
             VIFlush();
-            mXfb.XFB_0xC = mXfb.XFB_0x8;
-            mXfb.XFB_0x8 = NULL;
+            XFB_0xC = XFB_0x8;
+            XFB_0x8 = NULL;
         }
 
         OSRestoreInterrupts(r31);
@@ -69,13 +69,13 @@ namespace EGG
 
     void XfbManager::postVRetrace()
     {
-        if (mXfb.XFB_0xC != NULL)
+        if (XFB_0xC != NULL)
         {
-            Xfb* pXfb = mXfb.XFB_0xC->XFB_0x4;
-            if (pXfb == VIGetCurrentFrameBuffer())
+            char* frameBuf = XFB_0xC->mBuffer;
+            if (frameBuf == VIGetCurrentFrameBuffer())
             {
-                mXfb.XFB_0x0 = mXfb.XFB_0xC;
-                mXfb.XFB_0xC = NULL;
+                XFB_0x0 = XFB_0xC;
+                XFB_0xC = NULL;
             }
         }
     }

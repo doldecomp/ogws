@@ -20,7 +20,7 @@
 namespace
 {
     static GXTexObj clear_z_tobj;
-    static u8 clear_z_TX[] = {
+    static u8 clear_z_TX[] __attribute__ ((aligned (32))) = {
         0x00, 0xff, 0x00, 0xff, 0x00, 0xff, 0x00, 0xff,
         0x00, 0xff, 0x00, 0xff, 0x00, 0xff, 0x00, 0xff,
         0x00, 0xff, 0x00, 0xff, 0x00, 0xff, 0x00, 0xff,
@@ -103,11 +103,11 @@ namespace EGG
         }
 
         XfbManager *xfbmgr = BaseSystem::getXfbManager();
-        Xfb *xfb_04 = xfbmgr->mXfb.XFB_0x4;
+        Xfb *xfb_04 = xfbmgr->XFB_0x4;
         bool b = false;
         
-        if ((xfb_04 != xfbmgr->mXfb.XFB_0xC)
-            && (xfb_04 != xfbmgr->mXfb.XFB_0x0))
+        if ((xfb_04 != xfbmgr->XFB_0xC)
+            && (xfb_04 != xfbmgr->XFB_0x0))
         {
             b = true;
         }
@@ -121,8 +121,8 @@ namespace EGG
         {
             GXRenderModeObj *pObj = BaseSystem::getVideo()->mRenderMode;
 
-            clearEFB(pObj->mFbWidth, pObj->mEfbHeight,
-                0, 0, pObj->mFbWidth, pObj->mEfbHeight, mColor);
+            clearEFB(pObj->mFbWidth, pObj->mEfbHeight, 0, 0,
+                pObj->mFbWidth, pObj->mEfbHeight, mColor);
         }
 
         if (BYTE_0x9 & 1)
@@ -190,7 +190,7 @@ namespace EGG
         GXLoadTexObj(&clear_z_tobj, GX_TEX_MAP_ID_0);
 
         GXSetNumTevStages(1);
-        GXSetTevColor(GX_TEV_REG_ID_1, color);
+        GXSetTevColor(GX_TEV_REG_ID_1, color.mChannels);
         GXSetTevOrder(GX_TEV_STAGE_ID_0, GX_TEX_COORD_ID_0, GX_TEX_MAP_ID_0, 0xff);
         GXSetTevColorIn(GX_TEV_STAGE_ID_0, 15, 15, 15, 2);
         GXSetTevColorOp(GX_TEV_STAGE_ID_0, 0, 0, 0, 1, 0);

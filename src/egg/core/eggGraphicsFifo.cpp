@@ -1,3 +1,4 @@
+#pragma ipa file
 #include "eggGraphicsFifo.h"
 #include "eggHeap.h"
 #include "eggAssert.h"

@@ -31,6 +31,8 @@ namespace EGG
 
     struct Archive;
 
+    struct Decomp;
+
     struct Display;
     struct AsyncDisplay;
 

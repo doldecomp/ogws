@@ -196,8 +196,39 @@ NW4R_O_FILES := \
 
 EGG_O_FILES := \
 	build/asm/egg/gfx/eggShadowTextureManager.o \
+	build/asm/egg/gfx/eggStateGX.o \
+	build/asm/egg/gfx/eggTextureBuffer.o \
+	build/asm/egg/gfx/eggAnalizeDL.o \
+	build/asm/egg/gfx/eggCapTexture.o \
+	build/asm/egg/gfx/eggCpuTexture.o \
+	build/asm/egg/gfx/eggDrawGX.o \
+	build/asm/egg/gfx/egg_80089DCC.o \
+	build/asm/egg/gfx/eggDrawPathBloom.o \
+	build/asm/egg/gfx/eggDrawPathDOF.o \
+	build/asm/egg/gfx/egg_8008D4BC.o \
+	build/asm/egg/gfx/eggG3DUtility.o \
+	build/asm/egg/gfx/eggGfxEngine.o \
+	build/asm/egg/gfx/eggLightManager.o \
+	build/asm/egg/gfx/eggLightTexture.o \
+	build/asm/egg/gfx/eggLightTextureManager.o \
+	build/asm/egg/gfx/eggModelBoundingInfo.o \
+	build/asm/egg/gfx/eggModelEx.o \
+	build/asm/egg/gfx/eggModelSnapshot.o \
+	build/asm/egg/gfx/eggPostEffectBase.o \
+	build/asm/egg/gfx/eggPostEffectMask.o \
+	build/asm/egg/gfx/eggScnRootEx.o \
+	build/asm/egg/gfx/eggScreen.o \
+	build/asm/egg/gfx/eggShadowTexture.o \
+	build/asm/egg/gfx/eggIScnProc.o \
+	build/asm/egg/gfx/eggScnRenderer.o \
+	build/asm/egg/gfx/eggLightObject.o \
+	build/asm/egg/gfx/eggPostEffectMaskDOF.o \
+	build/asm/egg/gfx/eggScreenEffectBase.o \
+	build/asm/egg/gfx/eggFrustum.o \
+	build/asm/egg/gfx/eggGXUtility.o \
+	build/asm/egg/gfx/eggDrawHelper.o \
+	build/asm/egg/gfx/egg_800A1DB0.o \
 	\
-	build/asm/egg/text_egg.o \
 	build/asm/egg/ctors_egg.o \
 	build/asm/egg/rodata_egg.o \
 	build/asm/egg/data_egg.o \
@@ -227,7 +258,7 @@ EGG_O_FILES := \
 	build/asm/egg/core/eggStream.o \
 	build/egg/core/eggDisplay.o \
 	build/asm/egg/core/eggVideo.o \
-	build/asm/egg/core/eggXfb.o \
+	build/egg/core/eggXfb.o \
 	build/egg/core/eggXfbManager.o \
 	build/asm/egg/core/eggDvdRipper.o \
 	build/egg/core/eggDvdFile.o \
@@ -236,7 +267,7 @@ EGG_O_FILES := \
 	build/egg/core/eggDisposer.o \
 	build/egg/core/eggArchive.o \
 	build/asm/egg/core/eggDecomp.o \
-	build/asm/egg/core/eggAsyncDisplay.o \
+	build/egg/core/eggAsyncDisplay.o \
 	build/asm/egg/core/eggCntFile.o \
 	build/asm/egg/audio/eggAudioArcPlayerMgr.o \
 	build/asm/egg/audio/eggAudioExpMgr.o \
