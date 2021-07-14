@@ -2,13 +2,13 @@
 
 .section extab_, "wa"
 
-.global _unwind_func_800A1C30
-_unwind_func_800A1C30:
+.global _unwind___dt__Q23EGG8Vector3fFv
+_unwind___dt__Q23EGG8Vector3fFv:
     .long 0x08080000
     .long 0x00000000
 
-.global _unwind_func_800A1C70
-_unwind_func_800A1C70:
+.global _unwind___dt__Q23EGG8Vector2fFv
+_unwind___dt__Q23EGG8Vector2fFv:
     .long 0x08080000
     .long 0x00000000
 

@@ -243,7 +243,7 @@ EGG_O_FILES := \
 	build/egg/math/eggMath.o \
 	build/asm/egg/math/eggMatrix.o \
 	build/egg/math/eggQuat.o \
-	build/asm/egg/math/eggVector.o \
+	build/egg/math/eggVector.o \
 	build/asm/egg/core/eggExpHeap.o \
 	build/asm/egg/core/eggFrmHeap.o \
 	build/egg/core/eggHeap.o \

@@ -2,8 +2,8 @@
 
 .section .text, "ax"  # 0x800076E0 - 0x80355080 
 
-.global func_800A1C30
-func_800A1C30:
+.global __dt__Q23EGG8Vector3fFv
+__dt__Q23EGG8Vector3fFv:
 /* 800A1C30 0009CB30  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 800A1C34 0009CB34  7C 08 02 A6 */	mflr r0
 /* 800A1C38 0009CB38  2C 03 00 00 */	cmpwi r3, 0
@@ -22,8 +22,8 @@ lbl_800A1C58:
 /* 800A1C68 0009CB68  38 21 00 10 */	addi r1, r1, 0x10
 /* 800A1C6C 0009CB6C  4E 80 00 20 */	blr 
 
-.global func_800A1C70
-func_800A1C70:
+.global __dt__Q23EGG8Vector2fFv
+__dt__Q23EGG8Vector2fFv:
 /* 800A1C70 0009CB70  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 800A1C74 0009CB74  7C 08 02 A6 */	mflr r0
 /* 800A1C78 0009CB78  2C 03 00 00 */	cmpwi r3, 0
