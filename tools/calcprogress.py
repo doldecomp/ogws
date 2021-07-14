@@ -19,9 +19,6 @@
 #                                             #
 ###############################################
 
-import os
-import sys
-import struct
 import re
 
 ###############################################
@@ -98,13 +95,10 @@ if __name__ == "__main__":
     for i in range(DATA_SECTION_COUNT):
         data_sizes.append(int.from_bytes(dol_handle.read(4), byteorder='big'))
 
-
-
     # BSS address + length
     bss_start = int.from_bytes(dol_handle.read(4), byteorder='big')
     bss_size = int.from_bytes(dol_handle.read(4), byteorder='big')
     bss_end = bss_start + bss_size
-
 
     dol_code_size = 0
     dol_data_size = 0
