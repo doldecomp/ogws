@@ -9,9 +9,6 @@
 #include <RevoSDK/GX/GXAttr.h>
 #include <RevoSDK/GX/GXGeometry.h>
 
-#define NW4R_RES_NAME_SIZE 16
-#define NW4R_MAT_NAME_SIZE 20
-
 #define BOM_BIG_ENDIAN 0xFEFF
 #define BOM_LITTLE_ENDIAN 0xFFFE
 

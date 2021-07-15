@@ -1,6 +1,6 @@
 #ifndef NW4R_LYT_BOUNDING_H
 #define NW4R_LYT_BOUNDING_H
-#include <types.h>
+#include "types_nw4r.h"
 #include "lyt_pane.h"
 #include "lyt_drawInfo.h"
 

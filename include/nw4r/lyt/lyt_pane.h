@@ -118,7 +118,7 @@ namespace nw4r
             virtual UNKTYPE SetColorElement(u32, u8); // at 0x30
             virtual u8 GetVtxColorElement(u32) const; // at 0x34
             virtual void SetVtxColorElement(u32, u8); // at 0x38
-            virtual UNKTYPE FindPaneByName(const char *, bool); // at 0x3C
+            virtual Pane * FindPaneByName(const char *, bool); // at 0x3C
             virtual UNKTYPE FindMaterialByName(const char *, bool); // at 0x40
             virtual UNKTYPE BindAnimation(AnimTransform *, bool); // at 0x44
             virtual UNKTYPE UnbindAnimation(AnimTransform *, bool); // at 0x48
@@ -134,6 +134,7 @@ namespace nw4r
             UNKTYPE AddAnimationLink(AnimationLink *);
             UNKTYPE GetVtxPos() const;
             
+            ut::LinkListNode mNode; // at 0x4
             Pane *mParent; // at 0x8
             ut::LinkList<Pane, 4> mChildren; // at 0x14
             ut::LinkList<AnimationLink, 0> mAnims; // at 0x20;

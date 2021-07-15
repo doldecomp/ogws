@@ -111,11 +111,15 @@ namespace nw4r
 
 		namespace res
 		{
+			struct Group;
 			struct Pane;
+			struct Bounding;
 			struct AnimationBlock;
 			struct BinaryFileHeader;
 		}
 
+		struct Group;
+		struct GroupContainer;
 		struct Pane;
 		struct DrawInfo;
 		struct AnimResource;
@@ -126,6 +130,8 @@ namespace nw4r
 		struct ArcResourceAccessor;
 		struct Material;
 		struct Layout;
+		struct Bounding;
+		struct ResBlockSet;
 	}
 }
 

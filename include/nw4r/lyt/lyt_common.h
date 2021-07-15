@@ -3,6 +3,9 @@
 #include "types_nw4r.h"
 #include "math_types.h"
 
+#define NW4R_RES_NAME_SIZE 16
+#define NW4R_MAT_NAME_SIZE 20
+
 #define TEXCOORD_VTX_COUNT 4
 
 namespace nw4r
