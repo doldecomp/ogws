@@ -54,19 +54,7 @@ namespace nw4r
 
         namespace detail
         {
-            inline ut::Font * FindFont(ut::LinkList<FontRefLink, 0> *pList, const char *pName)
-            {
-                ut::LinkList<FontRefLink, 0>::Iterator it = pList->GetBeginIter();
-				while (it != pList->GetEndIter())
-				{
-					if (strcmp(pName, it++->GetFontName()) == 0)
-                    {
-                        return it->GetFont();
-                    }
-				}
-
-                return NULL;
-            }
+            ut::Font * FindFont(ut::LinkList<FontRefLink, 0> *, const char *);
         }
     }
 }
