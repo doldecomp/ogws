@@ -2,6 +2,8 @@
 
 .section .rodata, "a"
 
+.balign 0x8
+
 .global lbl_80378C18
 lbl_80378C18:
 	.string "eggShadowTextureManager.cpp"

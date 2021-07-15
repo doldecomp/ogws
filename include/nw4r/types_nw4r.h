@@ -8,6 +8,8 @@ namespace nw4r
 	{
 		template <typename T> struct TextWriterBase;
 		template <typename T> struct TagProcessorBase;
+
+		struct Color;
 	}
 	
 	namespace ef
@@ -104,12 +106,14 @@ namespace nw4r
 		namespace detail
 		{
 			struct PaneBase;
+			struct TexCoordAry;
 		}
 
 		namespace res
 		{
 			struct Pane;
 			struct AnimationBlock;
+			struct BinaryFileHeader;
 		}
 
 		struct Pane;
@@ -121,6 +125,7 @@ namespace nw4r
 		struct ResourceAccessor;
 		struct ArcResourceAccessor;
 		struct Material;
+		struct Layout;
 	}
 }
 

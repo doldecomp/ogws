@@ -32,6 +32,12 @@ namespace nw4r
 				mCoords.x = x;
 				mCoords.y = y;
 			}
+
+			inline VEC2 & operator=(const VEC2 & other)
+			{
+				mCoords = other.mCoords;
+				return *this;
+			}
 		};
 		
 		struct _VEC3
