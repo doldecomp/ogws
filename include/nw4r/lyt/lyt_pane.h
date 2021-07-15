@@ -9,10 +9,9 @@
 #include "lyt_animation.h"
 #include <STL/string.h>
 
-#define PANE_NAME_SIZE 16
-#define PANE_USERDATA_SIZE 8
+#define PANE_NAME_SIZE 17
+#define PANE_USERDATA_SIZE 9
 #define ANIMTARGET_PANE_MAX 10
-
 
 namespace nw4r
 {
@@ -85,16 +84,16 @@ namespace nw4r
             inline void SetName(const char *pName)
             {
                 strncpy(mName, pName, PANE_NAME_SIZE);
-                BYTE_0xCC = 0;
+                mName[PANE_NAME_SIZE - 1] = '\0';
             }
 
             inline void SetUserData(const char *pData)
             {
                 strncpy(mUserData, pData, PANE_USERDATA_SIZE);
-                BYTE_0xD5 = 0;
+                mUserData[PANE_USERDATA_SIZE - 1] = '\0';
             }
 
-            inline void InsertChild(ut::LinkList<nw4r::lyt::Pane, 4>::Iterator iter, nw4r::lyt::Pane *pChild)
+            inline void InsertChild(ut::LinkList<lyt::Pane, 4>::Iterator iter, lyt::Pane *pChild)
             {
                 mChildren.Insert(iter.mIterator, pChild);
                 pChild->mParent = this;
@@ -107,10 +106,10 @@ namespace nw4r
 
             Pane(const res::Pane *);
             virtual ~Pane(); // at 0x8
-            virtual UNKTYPE GetRuntimeTypeInfo() const; // at 0xC
+            virtual const ut::detail::RuntimeTypeInfo * GetRuntimeTypeInfo() const; // at 0xC
             virtual UNKTYPE CalculateMtx(const DrawInfo&); // at 0x10
             virtual UNKTYPE Draw(const DrawInfo&); // at 0x14
-            virtual UNKTYPE DrawSelf(const DrawInfo&); // at 0x18
+            virtual void DrawSelf(const DrawInfo&); // at 0x18
             virtual UNKTYPE Animate(u32); // at 0x1C
             virtual UNKTYPE AnimateSelf(u32); // at 0x20
             virtual ut::Color GetVtxColor(u32) const; // at 0x24
@@ -151,9 +150,7 @@ namespace nw4r
             u8 BYTE_0xBA;
             u8 mFlags; // at 0xBB
             char mName[PANE_NAME_SIZE]; // at 0xBC
-            u8 BYTE_0xCC;
             char mUserData[PANE_USERDATA_SIZE]; // at 0xCD
-            u8 BYTE_0xD5;
             u8 BYTE_0xD6;
 
             static ut::detail::RuntimeTypeInfo typeInfo;

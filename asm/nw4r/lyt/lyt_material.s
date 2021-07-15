@@ -1,6 +1,7 @@
 .include "macros.inc"
 
 .section .sdata2, "a"
+.balign 0x8
 .global lbl_804C04D0
 lbl_804C04D0:
 	.single 0e0.5
@@ -23,6 +24,7 @@ lbl_804C04E8:
 	.long 0x00000000
 
 .section .data, "wa"
+.balign 0x8
 # Two copies of the same table???
 .global lbl_80397438
 lbl_80397438:
