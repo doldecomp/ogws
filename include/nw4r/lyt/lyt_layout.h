@@ -42,6 +42,20 @@ namespace nw4r
                 return array;
             }
 
+            template <typename T>
+            static void DeleteObj(T *t)
+            {
+                t->~T();
+                FreeMemory(t);
+            }
+
+            template <typename T>
+            static T * NewObj()
+            {
+                T *obj = (T *)AllocMemory(sizeof(T));
+                return new (obj) T();
+            }
+
             static MEMAllocator *mspAllocator;
         };
     }

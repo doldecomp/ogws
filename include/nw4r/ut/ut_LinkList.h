@@ -196,6 +196,11 @@ namespace nw4r
 			{
 				detail::LinkListImpl::Erase(GetNodeFromPointer(ptr));
 			}
+
+			inline UNKTYPE Erase(Iterator iter)
+			{
+				detail::LinkListImpl::Erase(iter.mIterator);
+			}
 			
 			inline T * GetBack()
 			{
