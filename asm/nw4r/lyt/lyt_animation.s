@@ -1,6 +1,7 @@
 .include "macros.inc"
 
 .section .sdata2, "a"
+.balign 0x8
 .global lbl_804C0510
 lbl_804C0510:
 	.single 0e-0.001

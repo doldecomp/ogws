@@ -132,6 +132,7 @@ namespace nw4r
 		struct Layout;
 		struct Bounding;
 		struct ResBlockSet;
+		struct TexMap;
 	}
 }
 
