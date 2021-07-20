@@ -4,13 +4,14 @@
 
 namespace nw4r
 {
-	namespace g3d
-	{
-		namespace detail
-		{
-			UNKTYPE Copy32ByteBlocks(void *, const void *, u32);
-		}
-	}
+    namespace g3d
+    {
+        namespace detail
+        {
+            void Copy32ByteBlocks(void *, const void *, u32);
+            void ZeroMemory32ByteBlocks(void *, u32);
+        }
+    }
 }
 
 #endif
