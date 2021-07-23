@@ -62,7 +62,7 @@ ASM_DIRS := asm \
 
 SRC_DIRS := nw4r egg RevoSDK \
 	nw4r/ut nw4r/ef nw4r/math nw4r/snd nw4r/g3d nw4r/lyt \
-	egg/math egg/core egg/audio \
+	egg/math egg/core egg/audio egg\util \
 	RevoSDK/TRK RevoSDK/TRK_old RevoSDK/ARC
 
 # Flags for Riidefi's post-processing script

@@ -276,7 +276,7 @@ EGG_O_FILES := \
 	build/asm/egg/audio/eggAudioMgr.o \
 	build/egg/audio/eggAudioSystem.o \
 	build/asm/egg/util/eggMsgRes.o \
-	build/asm/egg/util/eggEffect.o \
+	build/egg/util/eggEffect.o \
 	build/asm/egg/util/eggException.o \
 
 GROUP_1_O_FILES := \
