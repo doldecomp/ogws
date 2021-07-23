@@ -45,7 +45,7 @@ namespace nw4r
 
             ParticleModifier mMod; // at 0x58
 
-            char UNK_0x7A[0x14];
+            char UNK_0x74[0x14];
 
             s8 BYTE_0x88;
             u8 BYTE_0x89;
