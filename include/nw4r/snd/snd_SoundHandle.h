@@ -1,6 +1,7 @@
 #ifndef NW4R_SND_SOUND_HANDLE_H
 #define NW4R_SND_SOUND_HANDLE_H
 #include "types_nw4r.h"
+#include "snd_BasicSound.h"
 
 namespace nw4r
 {
@@ -20,6 +21,17 @@ namespace nw4r
 			{
 				DetachSound();
 			}
+
+			inline detail::BasicSound * detail_GetAttachedSound() { return mSound; }
+
+			inline bool IsAttachedSound() const { return mSound != NULL; }
+
+			inline void StartPrepared() 
+			{
+				if (IsAttachedSound()) mSound->StartPrepared();
+			}
+
+			inline u32 GetId() const { return IsAttachedSound() ? mSound->GetId() : -1; }
 		};
 	}
 }

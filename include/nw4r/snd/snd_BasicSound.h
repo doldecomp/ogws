@@ -133,6 +133,7 @@ namespace nw4r
 				UNKTYPE DetachGeneralHandle();
 				bool IsAttachedTempGeneralHandle();
 				UNKTYPE DetachTempGeneralHandle();
+				inline u32 GetId() const { return mId; }
 				UNKTYPE SetId(u32);
 				
 				inline int CalcCurrentPlayerPriority() const
