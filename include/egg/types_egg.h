@@ -40,8 +40,10 @@ namespace EGG
 
     struct MsgRes;
 
-	struct Scene;
-	struct SceneManager;
+    struct Exception;
+
+    struct Scene;
+    struct SceneManager;
 }
 
 #endif
