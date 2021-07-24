@@ -5,6 +5,15 @@
 
 namespace EGG
 {
+    Matrix34f::Matrix34f(f32 _00, f32 _01, f32 _02, f32 _03,
+        f32 _10, f32 _11, f32 _12, f32 _13,
+        f32 _20, f32 _21, f32 _22, f32 _23)
+    {
+        tbl[0][0] = _00; tbl[0][1] = _01; tbl[0][2] = _02; tbl[0][3] = _03;
+        tbl[1][0] = _00; tbl[1][1] = _01; tbl[1][2] = _02; tbl[1][3] = _03;
+        tbl[2][0] = _00; tbl[2][1] = _01; tbl[2][2] = _02; tbl[2][3] = _03;
+    }
+
     Matrix34f::~Matrix34f()
     {
 
@@ -28,52 +37,57 @@ namespace EGG
     */
     void Matrix34f::makeQ(const Quatf& rQuat)
     {
-        // 800A2270
-        f32 x2 = 2.0f * rQuat.x; // f9
-        f32 w2 = 2.0f * rQuat.w; // f6
-        f32 y2 = 2.0f * rQuat.y; // f3
-        f32 z2 = 2.0f * rQuat.z; // f5
+        f32 x2, y2, z2, w2;
+        f32 xx2, xy2, xz2, xw2, yy2, yz2, yw2, zz2, zw2, ww2;
+        f32 _00, _01, _02;
+        f32 _10, _11, _12;
+        f32 _20, _21, _22;
 
-        // 800A2290
-        f32 xx2 = x2 * rQuat.x; // f11
-        f32 ww2 = w2 * rQuat.w; // f4
+        x2 = rQuat.x * 2.0f;
+        y2 = rQuat.y * 2.0f;
+        z2 = rQuat.z * 2.0f;
+        w2 = rQuat.w * 2.0f;
+
+        xx2 = x2 * rQuat.x;
+        yy2 = y2 * rQuat.y;
+        zz2 = z2 * rQuat.z;
+        ww2 = w2 * rQuat.w;
+
+        xy2 = x2 * rQuat.y;
+        xz2 = x2 * rQuat.z;
+        xw2 = x2 * rQuat.w;
+
+        yz2 = y2 * rQuat.z;
+        yw2 = y2 * rQuat.w;
+
+        zw2 = z2 * rQuat.w;
+
+        _00 = 1.0f - yy2 - zz2;
+        _01 = xy2 - zw2;
+        _02 = xz2 + yw2;
         tbl[0][3] = 0.0f;
-        f32 yy2 = y2 * rQuat.y; // f3
-        f32 xx2_m1 = 1.0f - xx2; // f1
+
+        _10 = xy2 + zw2;
+        _11 = 1.0f - xx2 - zz2;
+        _12 = yz2 - xw2;
         tbl[1][3] = 0.0f;
-        f32 wx2 = w2 * rQuat.x; // f12
+
+        _20 = xz2 - yw2;
+        _21 = yz2 + xw2;
+        _22 = 1.0f - xx2 - yy2;
         tbl[2][3] = 0.0f;
 
-        // 800A22B0
-        f32 zy2 = z2 * rQuat.y; // f13
-        f32 ww2_m1 = 1.0f - ww2; // f2
-        f32 xx2_m1_myy2 = xx2_m1 - yy2; // f0
-        f32 wx2_mzy2 = wx2 - zy2; // f4
-        f32 ww2_m1_myy2 = ww2_m1 - yy2; // f1
+        tbl[0][0] = _00;
+        tbl[0][1] = _01;
+        tbl[0][2] = _02;
 
-        // 800A22C4
-        f32 wx2_pzy2 = wx2 + zy2; // f3
-        tbl[0][0] = xx2_m1_myy2;
-        f32 ww2_m1_mxx2 = ww2_m1 - xx2; // f0
-        f32 wy2 = w2 * rQuat.y; // f2
-        tbl[0][1] = wx2_mzy2;
-        f32 zx2 = z2 * rQuat.x; // f6
-        tbl[1][0] = wx2_pzy2;
+        tbl[1][0] = _10;
+        tbl[1][1] = _11;
+        tbl[1][2] = _12;
 
-        // 800A22E0
-        f32 xy2 = x2 * rQuat.y; // f4
-        f32 zw2 = z2 * rQuat.w; // f5
-        f32 wy2_pzx2 = wy2 + zx2; // f6
-        tbl[1][1] = ww2_m1_myy2;
-        f32 wy2_mzx2 = wy2 - zx2; // f1
-        f32 xy2_mzw2 = xy2 - zw2; // f2
-        tbl[2][2] = ww2_m1_mxx2;
-
-        // 800A22FC
-        f32 xy2_pzw2 = xy2 + zw2; // f0
-        tbl[1][2] = wx2_pzy2;
-        tbl[2][0] = wy2_mzx2;
-        tbl[2][1] = xy2_pzw2;
+        tbl[2][0] = _20;
+        tbl[2][1] = _21;
+        tbl[2][2] = _22;
     }
     #else
     #error This file has yet to be decompiled accurately. Use "eggMatrix.s" instead.
@@ -100,6 +114,7 @@ namespace EGG
     void Matrix34f::setAxisRotation(const Vector3f & rVec, f32 f1)
     {
         Quatf q;
+        
         q.setAxisRotation(rVec, f1);
         makeQ(q);
     }
@@ -109,5 +124,9 @@ namespace EGG
         GXLoadPosMtxImm(tbl, i);
     }
 
-    // TO-DO: Static members initialized here
+    Matrix34f Matrix34f::ident = Matrix34f(
+        1.0f, 0.0f, 0.0f, 0.0f,
+        0.0f, 1.0f, 0.0f, 0.0f,
+        0.0f, 0.0f, 1.0f, 0.0f
+    );
 }
