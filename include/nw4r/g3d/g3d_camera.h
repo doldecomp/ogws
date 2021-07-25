@@ -67,20 +67,20 @@ namespace nw4r
 
                 if (rCamData.mFlags & 0x40)
                 {
-                    C_MTXOrtho(rCamData.FLOAT_0xBC, rCamData.FLOAT_0xC0, rCamData.FLOAT_0xC4,
-                        rCamData.FLOAT_0xC8, rCamData.FLOAT_0xB4, rCamData.FLOAT_0xB8, rCamData.mProjMtx);
+                    C_MTXOrtho(rCamData.mProjMtx, rCamData.FLOAT_0xBC, rCamData.FLOAT_0xC0,
+                        rCamData.FLOAT_0xC4, rCamData.FLOAT_0xC8, rCamData.FLOAT_0xB4, rCamData.FLOAT_0xB8);
                 }
                 else
                 {
                     if (rCamData.mFlags & 0x10)
                     {
-                        C_MTXFrustum(rCamData.FLOAT_0xBC, rCamData.FLOAT_0xC0, rCamData.FLOAT_0xC4,
-                            rCamData.FLOAT_0xC8, rCamData.FLOAT_0xB4, rCamData.FLOAT_0xB8, rCamData.mProjMtx);
+                        C_MTXFrustum(rCamData.mProjMtx, rCamData.FLOAT_0xBC, rCamData.FLOAT_0xC0,
+                            rCamData.FLOAT_0xC4, rCamData.FLOAT_0xC8, rCamData.FLOAT_0xB4, rCamData.FLOAT_0xB8);
                     }
                     else
                     {
-                        C_MTXPerspective(rCamData.FLOAT_0xAC, rCamData.FLOAT_0xB0, rCamData.FLOAT_0xB4,
-                            rCamData.FLOAT_0xB8, rCamData.mProjMtx);
+                        C_MTXPerspective(rCamData.mProjMtx, rCamData.FLOAT_0xAC, rCamData.FLOAT_0xB0,
+                            rCamData.FLOAT_0xB4, rCamData.FLOAT_0xB8);
                     }
                 }
 

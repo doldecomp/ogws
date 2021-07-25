@@ -108,7 +108,7 @@ drawColor__29$$2unnamed$$2eggProcessMeter_cpp$$2FQ34nw4r2ut5Color:
 /* 800AB0DC 000A5FDC  98 C1 00 09 */	stb r6, 9(r1)
 /* 800AB0E0 000A5FE0  98 A1 00 0A */	stb r5, 0xa(r1)
 /* 800AB0E4 000A5FE4  98 01 00 0B */	stb r0, 0xb(r1)
-/* 800AB0E8 000A5FE8  48 03 4D A9 */	bl func_800DFE90
+/* 800AB0E8 000A5FE8  48 03 4D A9 */	bl GXSetChanMatColor
 /* 800AB0EC 000A5FEC  80 01 00 14 */	lwz r0, 0x14(r1)
 /* 800AB0F0 000A5FF0  7C 08 03 A6 */	mtlr r0
 /* 800AB0F4 000A5FF4  38 21 00 10 */	addi r1, r1, 0x10

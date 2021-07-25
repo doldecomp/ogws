@@ -7,9 +7,9 @@ extern "C" {
 
 typedef float Mtx44[4][4];
 
-UNKTYPE C_MTXPerspective(float, float, float, float, Mtx44);
-UNKTYPE C_MTXFrustum(float, float, float, float, float, float, Mtx44);
-UNKTYPE C_MTXOrtho(float, float, float, float, float, float, Mtx44);
+UNKTYPE C_MTXPerspective(Mtx44, float, float, float, float);
+UNKTYPE C_MTXFrustum(Mtx44, float, float, float, float, float, float);
+UNKTYPE C_MTXOrtho(Mtx44, float, float, float, float, float, float);
 
 #ifdef __cplusplus
 }

@@ -169,7 +169,7 @@ namespace EGG
         GXInitTexObjLOD(&clear_z_tobj, 0, 0, 0, 0, 0, 0.0f, 0.0f, 0.0f);
 
         Mtx44 mtx44;
-        C_MTXOrtho(0.0f, (f32)height, 0.0f, (f32)width, 0.0f, 1.0f, mtx44);
+        C_MTXOrtho(mtx44, 0.0f, (f32)height, 0.0f, (f32)width, 0.0f, 1.0f);
         GXSetProjection(mtx44, 1);
         GXSetViewport(0.0f, 0.0f, (f32)width, (f32)height, 0.0f, 1.0f);
         GXSetScissor(0, 0, width, height);
