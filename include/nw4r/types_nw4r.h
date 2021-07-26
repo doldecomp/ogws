@@ -97,6 +97,7 @@ namespace nw4r
 		struct ClrAnmResult;
 		struct TexPatAnmResult;
 		struct TexSrtAnmResult;
+		struct ScnMdl1Mat1Shp;
 	}
 
 	namespace lyt
