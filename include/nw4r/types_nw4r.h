@@ -98,6 +98,8 @@ namespace nw4r
 		struct TexPatAnmResult;
 		struct TexSrtAnmResult;
 		struct ScnMdl1Mat1Shp;
+		struct TexSrt;
+		struct TexSrtTypedef;
 	}
 
 	namespace lyt
