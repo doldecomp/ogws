@@ -100,6 +100,11 @@ namespace nw4r
 		struct ScnMdl1Mat1Shp;
 		struct TexSrt;
 		struct TexSrtTypedef;
+		struct LightObj;
+		struct LightSet;
+		struct LightSetting;
+		struct LightSetData;
+		struct AmbLightObj;
 	}
 
 	namespace lyt
