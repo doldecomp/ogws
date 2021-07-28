@@ -24,6 +24,11 @@ typedef struct _GXRenderModeObj
     u8 BYTES_0x32[7];
 } GXRenderModeObj;
 
+extern GXRenderModeObj GXNtsc480IntDf;
+extern GXRenderModeObj GXPal528IntDf;
+extern GXRenderModeObj GXEurgb60Hz480IntDf;
+extern GXRenderModeObj GXMpal480IntDf;
+
 UNKTYPE GXCopyDisp(UNKTYPE *, u8);
 UNKTYPE GXSetCopyClear(GXColor, UNKWORD zClear);
 UNKTYPE GXSetCopyFilter(u8, u8(*)[24], u8, u8(*)[7]);

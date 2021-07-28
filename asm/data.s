@@ -181,17 +181,17 @@ lbl_8039B3D4:
 .global lbl_8039B3F0
 lbl_8039B3F0:
 	.incbin "baserom.dol", 0x3974F0, 0x58
-.global lbl_8039B448
-lbl_8039B448:
+.global GXNtsc480IntDf
+GXNtsc480IntDf:
 	.incbin "baserom.dol", 0x397548, 0x3C
-.global lbl_8039B484
-lbl_8039B484:
+.global GXMpal480IntDf
+GXMpal480IntDf:
 	.incbin "baserom.dol", 0x397584, 0x3C
-.global lbl_8039B4C0
-lbl_8039B4C0:
+.global GXPal528IntDf
+GXPal528IntDf:
 	.incbin "baserom.dol", 0x3975C0, 0x3C
-.global lbl_8039B4FC
-lbl_8039B4FC:
+.global GXEurgb60Hz480IntDf
+GXEurgb60Hz480IntDf:
 	.incbin "baserom.dol", 0x3975FC, 0x3C
 .global lbl_8039B538
 lbl_8039B538:

@@ -13,6 +13,9 @@ enum VITvFormat
     VI_NTSC,
     VI_PAL,
     VI_MPAL,
+    VI_TV_FORMAT_3,
+    VI_TV_FORMAT_4,
+    VI_EURGB60
 };
 
 void VIInit(void);

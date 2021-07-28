@@ -10,6 +10,8 @@ namespace nw4r
         {
             GXRenderModeObj& GetRenderModeObj();
             UNKTYPE SetRenderModeObj(const GXRenderModeObj&);
+            
+            UNKTYPE Invalidate(u32);
         }
     }
 }

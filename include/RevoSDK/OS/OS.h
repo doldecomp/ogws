@@ -30,6 +30,24 @@ static void OSInitFastCast(void)
 	}
 }
 
+static void OSSetGQR6(register u32 a, register u32 b)
+{
+	register u32 val = ((b << 8 | a) << 16) | ((b << 8) | a);
+	asm
+	{
+		mtspr 0x396, val
+	}
+}
+
+static void OSSetGQR7(register u32 a, register u32 b)
+{
+	register u32 val = ((b << 8 | a) << 16) | ((b << 8) | a);
+	asm
+	{
+		mtspr 0x397, val
+	}
+}
+
 static float __OSu16tof32(register const u16 * arg)
 {
 	register f32 ret;
