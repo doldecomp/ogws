@@ -177,7 +177,7 @@ NW4R_O_FILES := \
 	build/nw4r/g3d/g3d_scnmdl1mat1shp.o \
 	build/asm/nw4r/g3d/g3d_scnproc.o \
 	build/nw4r/g3d/g3d_fog.o \
-	build/asm/nw4r/g3d/g3d_light.o \
+	build/nw4r/g3d/g3d_light.o \
 	build/asm/nw4r/g3d/g3d_calcvtx.o \
 	build/asm/nw4r/lyt/lyt_pane.o \
 	build/asm/nw4r/lyt/lyt_group.o \
