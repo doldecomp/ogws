@@ -23,35 +23,30 @@ namespace EGG
     #ifdef __DECOMP_NON_MATCHING
     FrmHeap * FrmHeap::create(void *memBlock, u32 size, u16 r5)
     {
-        void *heapEnd = ut::RoundDown((void *)((u32)memBlock + size), 4);
-        void *heapStart = ut::RoundUp(memBlock, 4);
         FrmHeap *newHeap = NULL;
+        u32 heapSize;
+        void *heapEnd = ut::RoundDown(addOffset(memBlock, size), 4);
+        void *heapStart = ut::RoundUp(memBlock, 4);
 
         // 1. Heap size must be positive (end > start)
         // 2. Heap size must be bigger than heap object size + 4 (Smallest reasonable heap size?)
-        u32 heapSize = ut::GetOffsetFromPtr(heapStart, heapEnd);
-        if (heapEnd < heapStart || heapSize < sizeof(FrmHeap) + 4)
+        if (heapEnd > heapStart ||
+            (heapSize = ut::GetOffsetFromPtr(heapStart, heapEnd)) < sizeof(FrmHeap) + 4)
         {
             return NULL;
         }
 
         // Beginning of mem block is reserved for FrmHeap object
         // As a result, max heap size is (Mem block size - sizeof(FrmHeap))
-        MEMiHeapHead *handle = MEMCreateFrmHeapEx((void *)ut::AddOffsetToPtr<u32>(heapStart, sizeof(FrmHeap)),
+        MEMiHeapHead *handle = MEMCreateFrmHeapEx(addOffset(heapStart, sizeof(FrmHeap)),
             heapSize - sizeof(FrmHeap), r5);
 
         if (handle)
         {
-            Heap * containHeap = findContainHeap(heapStart);
-            if (containHeap)
-            {
-                (void)new (heapStart) FrmHeap(handle);
-            }
-
-            FrmHeap *temp = (FrmHeap *)heapStart;
-            temp->mMemBlock = memBlock;
-            temp->mParentHeap = containHeap;
-            newHeap = temp;
+            Heap *containHeap = findContainHeap(heapStart);
+            newHeap = new (heapStart) FrmHeap(handle);
+            newHeap->mMemBlock = memBlock;
+            newHeap->mParentHeap = containHeap;
         }
 
         return newHeap;
@@ -121,10 +116,11 @@ namespace EGG
             mParentHeap->resizeForMBlock(mMemBlock, newSize);
             return newSize;
         }
-        else
-        {
-            return 0;
-        }
+        // else
+        // {
+        //     return 0;
+        // }
+        return 0;
     }
 
     void FrmHeap::initAllocator(Allocator *pAllocator, s32 r5)

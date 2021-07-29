@@ -19,35 +19,14 @@ namespace EGG
             HEAP_FRAME = 2
         };
 
-        inline u8 * getStartAddress()
-        {
-            return (u8 *)this;
-        }
+        inline u8 * getStartAddress() { return (u8 *)this; }
+        inline u8 * getEndAddress() { return mHeapHandle->mEndAddress; }
+        inline int getTotalSize() { return getEndAddress() - getStartAddress(); }
+        inline bool tstDisableAllocation() { return mFlags.onBit(0); }
+		inline void disableAllocation() { mFlags.setBit(0); }
+		inline void enableAllocation() { mFlags.resetBit(0); }
 
-        inline u8 * getEndAddress()
-        {
-            return mHeapHandle->mEndAddress;
-        }
-
-        inline int getTotalSize()
-        {
-            return getEndAddress() - getStartAddress();
-        }
-
-		inline bool tstDisableAllocation()
-		{
-			return mFlags.onBit(0);
-		}
-		
-		inline void disableAllocation()
-		{
-			mFlags.setBit(0);
-		}
-		
-		inline void enableAllocation()
-		{
-			mFlags.resetBit(0);
-		}
+        static void * addOffset(void *p, u32 ofs) { return (char *)p + ofs;}
 
         Heap(MEMiHeapHead *);
         virtual ~Heap(); // at 0x8
