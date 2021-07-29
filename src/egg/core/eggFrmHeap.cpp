@@ -116,10 +116,7 @@ namespace EGG
             mParentHeap->resizeForMBlock(mMemBlock, newSize);
             return newSize;
         }
-        // else
-        // {
-        //     return 0;
-        // }
+
         return 0;
     }
 
