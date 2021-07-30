@@ -14,9 +14,8 @@ namespace EGG
         }
     }
 
-    DvdFile::DvdFile()
+    DvdFile::DvdFile() : mIsOpen(false)
     {
-        mIsOpen = false;
         initiate();
     }
 
@@ -28,10 +27,12 @@ namespace EGG
     void DvdFile::initiate()
     {
         PTR_0x78 = this;
+
         OSInitMutex(&mMutex_0x8);
         OSInitMutex(&mMutex_0x20);
         OSInitMessageQueue(&mMesgQueue_0xA0, &mMesg_0xC0, 1);
         OSInitMessageQueue(&mMesgQueue_0x7C, &mMesg_0x9C, 1);
+
         mThread = NULL;
         WORD_0x38 = 0;
     }
@@ -73,8 +74,6 @@ namespace EGG
 
     s32 DvdFile::readData(void *data, s32 len, s32 pos)
     {
-        s32 result;
-
         OSLockMutex(&mMutex_0x8);
         if (mThread)
         {
@@ -83,7 +82,7 @@ namespace EGG
         }
         
         mThread = OSGetCurrentThread();
-        result = -1;
+        s32 result = -1;
         u32 success = DVDReadAsyncPrio(&mFileInfo, data, len, pos, DvdFile::doneProcess, 2);
         
         if (success != 0)

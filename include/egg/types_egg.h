@@ -44,6 +44,8 @@ namespace EGG
 
     struct Scene;
     struct SceneManager;
+
+    struct CntFile;
 }
 
 #endif
