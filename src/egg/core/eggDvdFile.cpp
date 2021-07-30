@@ -72,7 +72,7 @@ namespace EGG
         }
     }
 
-    s32 DvdFile::readData(void *data, s32 len, s32 pos)
+    s32 DvdFile::readData(void *buf, s32 len, s32 pos)
     {
         OSLockMutex(&mMutex_0x8);
         if (mThread)
@@ -83,7 +83,7 @@ namespace EGG
         
         mThread = OSGetCurrentThread();
         s32 result = -1;
-        u32 success = DVDReadAsyncPrio(&mFileInfo, data, len, pos, DvdFile::doneProcess, 2);
+        u32 success = DVDReadAsyncPrio(&mFileInfo, buf, len, pos, DvdFile::doneProcess, 2);
         
         if (success != 0)
         {

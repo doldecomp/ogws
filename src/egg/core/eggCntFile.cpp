@@ -75,7 +75,7 @@ namespace EGG
         }
     }
 
-    s32 CntFile::readData(void *data, s32 len, s32 pos)
+    s32 CntFile::readData(void *buf, s32 len, s32 pos)
     {
         OSLockMutex(&mMutex_0x8);
         if (mThread)
@@ -86,7 +86,7 @@ namespace EGG
         else
         {
             mThread = OSGetCurrentThread();
-            s32 ret = contentReadNAND(&mFileInfo, data, len, pos);
+            s32 ret = contentReadNAND(&mFileInfo, buf, len, pos);
             mThread = NULL;
 
             OSUnlockMutex(&mMutex_0x8);
