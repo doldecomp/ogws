@@ -3,14 +3,17 @@
 #include "eggAssert.h"
 #include <RevoSDK/ARC/arc.h>
 
+namespace
+{
+    UNKTYPE INSTANTIATE_WEAK(EGG::CntFile *f)
+    {
+        f->getFileSize();
+    }
+}
+
 namespace EGG
 {
     using namespace nw4r;
-
-    UNKWORD CntFile::getFileSize() const
-    {
-        return contentGetLengthNAND(&mFileInfo);
-    }
 
     CntFile::CntFile() : mIsOpen(false)
     {

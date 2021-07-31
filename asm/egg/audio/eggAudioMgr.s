@@ -252,7 +252,7 @@ func_800B0ED4:
 .global func_800B0EDC
 func_800B0EDC:
 /* 800B0EDC 000ABDDC  38 63 00 F8 */	addi r3, r3, 0xf8
-/* 800B0EE0 000ABDE0  4B FF D9 A4 */	b openCntArchive__Q23EGG9ArcPlayerFPCcPiPQ34nw4r3snd9SoundHeap
+/* 800B0EE0 000ABDE0  4B FF D9 A4 */	b openCntArchive__Q23EGG9ArcPlayerFPCcP9ARCHandlePQ34nw4r3snd9SoundHeap
 
 .global func_800B0EE4
 func_800B0EE4:

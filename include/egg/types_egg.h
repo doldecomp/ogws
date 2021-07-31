@@ -46,6 +46,8 @@ namespace EGG
     struct SceneManager;
 
     struct CntFile;
+
+    struct ArcPlayer;
 }
 
 #endif

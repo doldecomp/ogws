@@ -2,13 +2,14 @@
 #define NW4R_SND_SOUND_HEAP_H
 #include "types_nw4r.h"
 #include "snd_FrameHeap.h"
+#include "snd_SoundMemoryAllocatable.h"
 #include <OSMutex.h>
 
 namespace nw4r
 {
 	namespace snd
 	{
-		struct SoundHeap
+		struct SoundHeap : SoundMemoryAllocatable
 		{
 			SoundHeap();
 			virtual ~SoundHeap();      // VMT 0x8

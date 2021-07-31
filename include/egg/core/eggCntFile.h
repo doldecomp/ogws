@@ -26,7 +26,7 @@ namespace EGG
         virtual void close(); // at 0x10
         virtual s32 readData(void *, s32, s32); // at 0x14
         virtual s32 writeData(const void *, s32, s32); // at 0x18
-        virtual UNKWORD getFileSize() const; // at 0x1C
+        virtual UNKWORD getFileSize() const { return contentGetLengthNAND(&mFileInfo); }; // at 0x1C
 
         void initiate();
         // Unofficial symbol
@@ -45,6 +45,7 @@ namespace EGG
         OSMessageQueue mMesgQueue_0x78;
         OSMessage mMesgBuffer_0x98;
         OSThread *mThread; // at 0x9C
+        nw4r::ut::Node mNode; // at 0xA0
 
         // Unofficial symbol
         static nw4r::ut::List sCntList;
