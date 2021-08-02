@@ -1,6 +1,4 @@
 #pragma ipa file
-#pragma opt_lifetimes off
-#pragma opt_strength_reduction off
 
 #include "g3d_resmdl.h"
 #include "g3d_resdict.h"
@@ -217,7 +215,6 @@ namespace nw4r
             }
         }
         
-        #ifdef __DECOMP_NON_MATCHING
         void ResMdl::Init()
         {
             u32 i;
@@ -258,9 +255,6 @@ namespace nw4r
                 GetResVtxTexCoord(i).Init();
             }
         }
-        #else
-        #error This file has yet to be decompiled accurately. Use "g3d_resmdl.s" instead.
-        #endif
 
         void ResMdl::Terminate()
         {
@@ -271,6 +265,5 @@ namespace nw4r
                 GetResShp(i).Terminate();
             }
         }
-
     }
 }
