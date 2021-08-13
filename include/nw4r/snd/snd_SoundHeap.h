@@ -22,6 +22,8 @@ namespace nw4r
 			void LoadState(int);
 			static void DisposeCallbackFunc(void *, u32, void *);
 
+			bool IsValid() { return mFrameHeap.PTR_0x0 != NULL; }
+
 			OSMutex mMutex;               // 0x00
 			detail::FrameHeap mFrameHeap; // 0x1C
 		};

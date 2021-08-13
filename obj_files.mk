@@ -273,7 +273,7 @@ EGG_O_FILES := \
 	build/egg/audio/eggAudioArcPlayerMgr.o \
 	build/asm/egg/audio/eggAudioExpMgr.o \
 	build/asm/egg/audio/eggAudioFxMgr.o \
-	build/asm/egg/audio/eggAudioHeapMgr.o \
+	build/egg/audio/eggAudioHeapMgr.o \
 	build/asm/egg/audio/eggAudioMgr.o \
 	build/egg/audio/eggAudioSystem.o \
 	build/asm/egg/util/eggMsgRes.o \

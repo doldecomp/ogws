@@ -48,6 +48,10 @@ namespace EGG
     struct CntFile;
 
     struct ArcPlayer;
+
+    struct IAudioMgr;
+    struct SoundHeapMgr;
+    struct SimpleAudioMgr;
 }
 
 #endif

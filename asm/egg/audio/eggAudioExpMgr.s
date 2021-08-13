@@ -48,7 +48,7 @@ vtable_80398580:
     .long 0
     .long 0x800afab8
     .long getCurrentLevel__Q23EGG12SoundHeapMgrFv
-    .long func_800AF980
+    .long saveState__Q23EGG12SoundHeapMgrFv
 .global vtable_80398594
 vtable_80398594:
     .long 0
@@ -534,11 +534,8 @@ lbl_800AF960:
 /* 800AF978 000AA878  38 21 00 20 */	addi r1, r1, 0x20
 /* 800AF97C 000AA87C  4E 80 00 20 */	blr 
 
-# Seems functionally like what would be SoundHeapMgr::saveState,
-# but there is no proof that a function with that name exists.
-# Only other known symbol is SoundHeapMgr::stateProc from Wii Fit U (might be this???)
-.global func_800AF980
-func_800AF980:
+.global saveState__Q23EGG12SoundHeapMgrFv
+saveState__Q23EGG12SoundHeapMgrFv:
 /* 800AF980 000AA880  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 800AF984 000AA884  7C 08 02 A6 */	mflr r0
 /* 800AF988 000AA888  38 A0 00 00 */	li r5, 0
