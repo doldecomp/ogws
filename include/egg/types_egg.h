@@ -7,6 +7,9 @@ namespace EGG
     struct CpuTexture;
     struct CapTexture;
 
+    struct GXUtility;
+    struct ResTIMG;
+
     template <typename T> struct Math;
     struct Matrix34f;
     struct Quatf;

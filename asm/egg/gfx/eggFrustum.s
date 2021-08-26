@@ -516,7 +516,7 @@ lbl_800A0E84:
 /* 800A0F38 0009BE38  EC 62 18 24 */	fdivs f3, f2, f3
 /* 800A0F3C 0009BE3C  C0 45 00 04 */	lfs f2, 4(r5)
 /* 800A0F40 0009BE40  EC 80 20 24 */	fdivs f4, f0, f4
-/* 800A0F44 0009BE44  48 00 08 ED */	bl func_800A1830
+/* 800A0F44 0009BE44  48 00 08 ED */	bl setScaleOffsetPerspective__Q23EGG9GXUtilityFPfffff
 /* 800A0F48 0009BE48  80 01 00 14 */	lwz r0, 0x14(r1)
 /* 800A0F4C 0009BE4C  83 E1 00 0C */	lwz r31, 0xc(r1)
 /* 800A0F50 0009BE50  83 C1 00 08 */	lwz r30, 8(r1)

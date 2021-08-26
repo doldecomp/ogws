@@ -2,8 +2,8 @@
 
 .section .text, "ax"
 
-.global func_800A17D8
-func_800A17D8:
+.global getTexCoordGenVal__Q23EGG9GXUtilityFi
+getTexCoordGenVal__Q23EGG9GXUtilityFi:
 /* 800A17D8 0009C6D8  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 800A17DC 0009C6DC  7C 08 02 A6 */	mflr r0
 /* 800A17E0 0009C6E0  2C 03 00 00 */	cmpwi r3, 0
@@ -29,8 +29,8 @@ lbl_800A1814:
 /* 800A1828 0009C728  38 21 00 10 */	addi r1, r1, 0x10
 /* 800A182C 0009C72C  4E 80 00 20 */	blr 
 
-.global func_800A1830
-func_800A1830:
+.global setScaleOffsetPerspective__Q23EGG9GXUtilityFPfffff
+setScaleOffsetPerspective__Q23EGG9GXUtilityFPfffff:
 /* 800A1830 0009C730  94 21 FF B0 */	stwu r1, -0x50(r1)
 /* 800A1834 0009C734  7C 08 02 A6 */	mflr r0
 /* 800A1838 0009C738  90 01 00 54 */	stw r0, 0x54(r1)
@@ -106,8 +106,8 @@ lbl_800A18DC:
 /* 800A1944 0009C844  38 21 00 50 */	addi r1, r1, 0x50
 /* 800A1948 0009C848  4E 80 00 20 */	blr 
 
-.global func_800A194C
-func_800A194C:
+.global getTexObj__Q23EGG9GXUtilityFP9_GXTexObjRCQ23EGG7ResTIMG
+getTexObj__Q23EGG9GXUtilityFP9_GXTexObjRCQ23EGG7ResTIMG:
 /* 800A194C 0009C84C  94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 800A1950 0009C850  7C 08 02 A6 */	mflr r0
 /* 800A1954 0009C854  2C 03 00 00 */	cmpwi r3, 0
@@ -183,8 +183,8 @@ lbl_800A199C:
 /* 800A1A64 0009C964  38 21 00 30 */	addi r1, r1, 0x30
 /* 800A1A68 0009C968  4E 80 00 20 */	blr 
 
-.global func_800A1A6C
-func_800A1A6C:
+.global getTexObj__Q23EGG9GXUtilityFP9_GXTexObjRCQ34nw4r3g3d6ResTexiiii
+getTexObj__Q23EGG9GXUtilityFP9_GXTexObjRCQ34nw4r3g3d6ResTexiiii:
 /* 800A1A6C 0009C96C  94 21 FF C0 */	stwu r1, -0x40(r1)
 /* 800A1A70 0009C970  7C 08 02 A6 */	mflr r0
 /* 800A1A74 0009C974  90 01 00 44 */	stw r0, 0x44(r1)

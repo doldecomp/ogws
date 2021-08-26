@@ -64,6 +64,8 @@ namespace nw4r
 			bool GetTexObjParam(void **, u16 *, u16 *, GXTexFmt *, f32 *, f32 *, u8 *) const;
 			bool GetTexObjCIParam(void **, u16 *, u16 *, GXCITexFmt *, f32 *, f32 *, u8 *) const;
 			void Init();
+
+			bool IsValid() const { return mTex.IsValid(); }
 		};
 		
 		struct ResPltt
