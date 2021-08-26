@@ -4,6 +4,8 @@
 
 namespace EGG
 {
+    struct CpuTexture;
+
     template <typename T> struct Math;
     struct Matrix34f;
     struct Quatf;

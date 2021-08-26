@@ -96,6 +96,8 @@ typedef struct _GXTexObj
 	UNKWORD mTLUT; // at 0x18
 } GXTexObj;
 
+UNKWORD GXGetTexBufferSize(UNKWORD width, UNKWORD height, GXTexFmt format, UNKWORD, UNKWORD);
+
 UNKTYPE GXInitTexObj(GXTexObj *, UNKTYPE *image, u16 width, UNKWORD height, UNKWORD texFormat, UNKWORD wrapModeS, UNKWORD wrapModeT, BOOL mipmap);
 UNKTYPE GXInitTexObjCI(GXTexObj *, UNKTYPE *, UNKWORD width, UNKWORD height, UNKWORD texFormat, UNKWORD wrapModeS, UNKWORD wrapModeT, BOOL mipmap, UNKWORD tlut);
 UNKTYPE GXInitTexObjLOD(GXTexObj *, int min_filt, int mag_filt, UNKWORD biasClampEnable, UNKWORD edgeLodEnable, UNKWORD anisotropy, f32 minLod, f32 maxLod, f32 lodBias);

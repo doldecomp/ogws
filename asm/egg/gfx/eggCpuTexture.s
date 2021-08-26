@@ -2,8 +2,8 @@
 
 .section .text, "ax"
 
-.global func_80085FE0
-func_80085FE0:
+.global makeGradient__Q23EGG10CpuTextureFv
+makeGradient__Q23EGG10CpuTextureFv:
 /* 80085FE0 00080EE0  94 21 FF 50 */	stwu r1, -0xb0(r1)
 /* 80085FE4 00080EE4  7C 08 02 A6 */	mflr r0
 /* 80085FE8 00080EE8  90 01 00 B4 */	stw r0, 0xb4(r1)
@@ -430,8 +430,8 @@ lbl_800865D8:
 /* 80086618 00081518  38 21 00 B0 */	addi r1, r1, 0xb0
 /* 8008661C 0008151C  4E 80 00 20 */	blr 
 
-.global func_80086620
-func_80086620:
+.global __ct__Q23EGG10CpuTextureFv
+__ct__Q23EGG10CpuTextureFv:
 /* 80086620 00081520  3C C0 80 39 */	lis r6, lbl_803975C0@ha
 /* 80086624 00081524  38 A0 00 00 */	li r5, 0
 /* 80086628 00081528  38 00 00 01 */	li r0, 1
@@ -448,8 +448,8 @@ func_80086620:
 /* 80086654 00081554  90 A3 00 10 */	stw r5, 0x10(r3)
 /* 80086658 00081558  4E 80 00 20 */	blr 
 
-.global func_8008665C
-func_8008665C:
+.global __ct__Q23EGG10CpuTextureFUsUs9_GXTexFmt
+__ct__Q23EGG10CpuTextureFUsUs9_GXTexFmt:
 /* 8008665C 0008155C  3D 00 80 39 */	lis r8, lbl_803975C0@ha
 /* 80086660 00081560  38 E0 00 00 */	li r7, 0
 /* 80086664 00081564  38 00 00 01 */	li r0, 1
@@ -465,11 +465,14 @@ func_8008665C:
 /* 8008668C 0008158C  90 E3 00 10 */	stw r7, 0x10(r3)
 /* 80086690 00081590  4E 80 00 20 */	blr 
 
-.global func_80086694
-func_80086694:
+.global configure__Q23EGG10CpuTextureFv
+configure__Q23EGG10CpuTextureFv:
 /* 80086694 00081594  38 00 00 01 */	li r0, 1
 /* 80086698 00081598  B0 03 00 00 */	sth r0, 0(r3)
 /* 8008669C 0008159C  4E 80 00 20 */	blr 
+
+.global initTexObj__Q23EGG10CpuTextureCFP9_GXTexObj
+initTexObj__Q23EGG10CpuTextureCFP9_GXTexObj:
 /* 800866A0 000815A0  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 800866A4 000815A4  7C 08 02 A6 */	mflr r0
 /* 800866A8 000815A8  90 01 00 14 */	stw r0, 0x14(r1)
@@ -532,8 +535,8 @@ lbl_80086724:
 /* 80086780 00081680  38 21 00 10 */	addi r1, r1, 0x10
 /* 80086784 00081684  4E 80 00 20 */	blr 
 
-.global func_80086788
-func_80086788:
+.global loadTexObj__Q23EGG10CpuTextureF11_GXTexMapID
+loadTexObj__Q23EGG10CpuTextureF11_GXTexMapID:
 /* 80086788 00081688  94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 8008678C 0008168C  7C 08 02 A6 */	mflr r0
 /* 80086790 00081690  90 01 00 34 */	stw r0, 0x34(r1)
@@ -567,8 +570,8 @@ lbl_800867C8:
 /* 800867FC 000816FC  38 21 00 30 */	addi r1, r1, 0x30
 /* 80086800 00081700  4E 80 00 20 */	blr 
 
-.global func_80086804
-func_80086804:
+.global invalidateTexBuffer__Q23EGG10CpuTextureFv
+invalidateTexBuffer__Q23EGG10CpuTextureFv:
 /* 80086804 00081704  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80086808 00081708  7C 08 02 A6 */	mflr r0
 /* 8008680C 0008170C  90 01 00 14 */	stw r0, 0x14(r1)
@@ -585,7 +588,7 @@ func_80086804:
 /* 80086838 00081738  48 01 B6 D1 */	bl system_halt
 lbl_8008683C:
 /* 8008683C 0008173C  7F E3 FB 78 */	mr r3, r31
-/* 80086840 00081740  48 00 00 85 */	bl func_800868C4
+/* 80086840 00081740  48 00 00 85 */	bl getTexBufferSize__Q23EGG10CpuTextureFv
 /* 80086844 00081744  7C 64 1B 78 */	mr r4, r3
 /* 80086848 00081748  80 7F 00 10 */	lwz r3, 0x10(r31)
 /* 8008684C 0008174C  48 06 78 B9 */	bl func_800EE104
@@ -595,8 +598,8 @@ lbl_8008683C:
 /* 8008685C 0008175C  38 21 00 10 */	addi r1, r1, 0x10
 /* 80086860 00081760  4E 80 00 20 */	blr 
 
-.global func_80086864
-func_80086864:
+.global flushTexBuffer__Q23EGG10CpuTextureFv
+flushTexBuffer__Q23EGG10CpuTextureFv:
 /* 80086864 00081764  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80086868 00081768  7C 08 02 A6 */	mflr r0
 /* 8008686C 0008176C  90 01 00 14 */	stw r0, 0x14(r1)
@@ -613,7 +616,7 @@ func_80086864:
 /* 80086898 00081798  48 01 B6 71 */	bl system_halt
 lbl_8008689C:
 /* 8008689C 0008179C  7F E3 FB 78 */	mr r3, r31
-/* 800868A0 000817A0  48 00 00 25 */	bl func_800868C4
+/* 800868A0 000817A0  48 00 00 25 */	bl getTexBufferSize__Q23EGG10CpuTextureFv
 /* 800868A4 000817A4  7C 64 1B 78 */	mr r4, r3
 /* 800868A8 000817A8  80 7F 00 10 */	lwz r3, 0x10(r31)
 /* 800868AC 000817AC  48 06 78 85 */	bl DCFlushRange
@@ -623,8 +626,8 @@ lbl_8008689C:
 /* 800868BC 000817BC  38 21 00 10 */	addi r1, r1, 0x10
 /* 800868C0 000817C0  4E 80 00 20 */	blr 
 
-.global func_800868C4
-func_800868C4:
+.global getTexBufferSize__Q23EGG10CpuTextureFv
+getTexBufferSize__Q23EGG10CpuTextureFv:
 /* 800868C4 000817C4  7C 65 1B 78 */	mr r5, r3
 /* 800868C8 000817C8  A0 63 00 02 */	lhz r3, 2(r3)
 /* 800868CC 000817CC  A0 85 00 04 */	lhz r4, 4(r5)
@@ -633,8 +636,8 @@ func_800868C4:
 /* 800868D8 000817D8  38 E0 00 01 */	li r7, 1
 /* 800868DC 000817DC  48 05 97 54 */	b func_800E0030
 
-.global func_800868E0
-func_800868E0:
+.global buildHeader__Q23EGG10CpuTextureCFv
+buildHeader__Q23EGG10CpuTextureCFv:
 /* 800868E0 000817E0  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 800868E4 000817E4  7C 08 02 A6 */	mflr r0
 /* 800868E8 000817E8  90 01 00 14 */	stw r0, 0x14(r1)
@@ -698,14 +701,14 @@ lbl_8008693C:
 /* 800869C8 000818C8  38 21 00 10 */	addi r1, r1, 0x10
 /* 800869CC 000818CC  4E 80 00 20 */	blr 
 
-.global func_800869D0
-func_800869D0:
+.global initHeader__Q23EGG10CpuTextureFv
+initHeader__Q23EGG10CpuTextureFv:
 /* 800869D0 000818D0  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 800869D4 000818D4  7C 08 02 A6 */	mflr r0
 /* 800869D8 000818D8  90 01 00 14 */	stw r0, 0x14(r1)
 /* 800869DC 000818DC  93 E1 00 0C */	stw r31, 0xc(r1)
 /* 800869E0 000818E0  7C 7F 1B 78 */	mr r31, r3
-/* 800869E4 000818E4  4B FF FE FD */	bl func_800868E0
+/* 800869E4 000818E4  4B FF FE FD */	bl buildHeader__Q23EGG10CpuTextureCFv
 /* 800869E8 000818E8  80 7F 00 10 */	lwz r3, 0x10(r31)
 /* 800869EC 000818EC  83 E1 00 0C */	lwz r31, 0xc(r1)
 /* 800869F0 000818F0  80 01 00 14 */	lwz r0, 0x14(r1)
@@ -980,7 +983,7 @@ lbl_80086DAC:
 /* 80086DC0 00081CC0  7E C9 B3 78 */	mr r9, r22
 /* 80086DC4 00081CC4  57 DC FC 7E */	rlwinm r28, r30, 0x1f, 0x11, 0x1f
 /* 80086DC8 00081CC8  38 81 04 10 */	addi r4, r1, 0x410
-/* 80086DCC 00081CCC  4B FF F2 15 */	bl func_80085FE0
+/* 80086DCC 00081CCC  4B FF F2 15 */	bl makeGradient__Q23EGG10CpuTextureFv
 /* 80086DD0 00081CD0  2C 17 00 00 */	cmpwi r23, 0
 /* 80086DD4 00081CD4  41 82 02 64 */	beq lbl_80087038
 /* 80086DD8 00081CD8  7F 85 E3 78 */	mr r5, r28
@@ -1230,8 +1233,8 @@ lbl_8008712C:
 /* 8008715C 0008205C  38 21 14 40 */	addi r1, r1, 0x1440
 /* 80087160 00082060  4E 80 00 20 */	blr 
 
-.global func_80087164
-func_80087164:
+.global allocTexBuffer__Q23EGG10CpuTextureFv
+allocTexBuffer__Q23EGG10CpuTextureFv:
 /* 80087164 00082064  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80087168 00082068  7C 08 02 A6 */	mflr r0
 /* 8008716C 0008206C  38 C0 00 00 */	li r6, 0
@@ -1301,8 +1304,8 @@ lbl_8008723C:
 /* 8008725C 0008215C  38 21 00 10 */	addi r1, r1, 0x10
 /* 80087260 00082160  4E 80 00 20 */	blr 
 
-.global func_80087264
-func_80087264:
+.global allocTexBufferAndHeader__Q23EGG10CpuTextureFv
+allocTexBufferAndHeader__Q23EGG10CpuTextureFv:
 /* 80087264 00082164  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80087268 00082168  7C 08 02 A6 */	mflr r0
 /* 8008726C 0008216C  38 C0 00 00 */	li r6, 0
@@ -1370,7 +1373,7 @@ lbl_80087344:
 /* 80087354 00082254  54 00 07 FA */	rlwinm r0, r0, 0, 0x1f, 0x1d
 /* 80087358 00082258  60 00 00 02 */	ori r0, r0, 2
 /* 8008735C 0008225C  B0 1E 00 00 */	sth r0, 0(r30)
-/* 80087360 00082260  4B FF F5 81 */	bl func_800868E0
+/* 80087360 00082260  4B FF F5 81 */	bl buildHeader__Q23EGG10CpuTextureCFv
 /* 80087364 00082264  80 01 00 14 */	lwz r0, 0x14(r1)
 /* 80087368 00082268  83 E1 00 0C */	lwz r31, 0xc(r1)
 /* 8008736C 0008226C  83 C1 00 08 */	lwz r30, 8(r1)
