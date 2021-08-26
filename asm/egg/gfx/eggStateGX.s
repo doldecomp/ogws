@@ -1,7 +1,90 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .bss, "wa"
+.balign 0x8
+.global lbl_80409720
+lbl_80409720:
+	.skip 0x20
+.global lbl_80409740
+lbl_80409740:
+	.skip 0x10
 
+.section .rodata, "wa"
+.balign 0x8
+# Some form of mtx (passed to GXSetIndTexMtx)
+.global lbl_80378C68
+lbl_80378C68:
+	.incbin "baserom.dol", 0x374D68, 0x34
+.global lbl_80378C9C
+lbl_80378C9C:
+    .string "eggStateGX.cpp"
+    .string "0"
+    .string "s0 < 2048"
+    .string "s1 < 2048"
+    .string "s2 < 2048"
+    .string "s3 < 2048"
+    .string "b0 % 2 == 0"
+    .string "b1 % 2 == 0"
+
+.section .sbss, "wa"
+.balign 0x8
+.global lbl_804BEBB0
+lbl_804BEBB0:
+	.skip 0x2
+.global lbl_804BEBB2
+lbl_804BEBB2:
+	.skip 0x2
+.global lbl_804BEBB4
+lbl_804BEBB4:
+	.skip 0x4
+.global lbl_804BEBB8
+lbl_804BEBB8:
+	.skip 0x4
+.global lbl_804BEBBC
+lbl_804BEBBC:
+	.skip 0x4
+.global lbl_804BEBC0
+lbl_804BEBC0:
+	.skip 0x4
+
+.section .sdata, "wa"
+.balign 0x8
+.global lbl_804BD480
+lbl_804BD480:
+	.long 0x00200000
+.global lbl_804BD484
+lbl_804BD484:
+	.single 0e1
+.global lbl_804BD488
+lbl_804BD488:
+	.long 1
+	.long 0
+
+.section .sdata2, "a"
+.balign 0x8
+.global lbl_804C0548
+lbl_804C0548:
+	.byte 0xFF
+.global lbl_804C0549
+lbl_804C0549:
+	.byte 0xFF
+.global lbl_804C054A
+lbl_804C054A:
+	.byte 0xFF
+.global lbl_804C054B
+lbl_804C054B:
+	.byte 0xFF
+.global lbl_804C054C
+lbl_804C054C:
+	.incbin "baserom.dol", 0x3C918C, 0x4
+.global lbl_804C0550
+lbl_804C0550:
+	.incbin "baserom.dol", 0x3C9190, 0x4
+.global lbl_804C0554
+lbl_804C0554:
+	.incbin "baserom.dol", 0x3C9194, 0x4
+
+.section .text, "ax"
 .global func_80083E18
 func_80083E18:
 /* 80083E18 0007ED18  94 21 FF F0 */	stwu r1, -0x10(r1)

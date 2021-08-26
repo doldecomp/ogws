@@ -4,16 +4,6 @@
 
 .balign 0x8
 
-.global lbl_804BD480
-lbl_804BD480:
-	.long 0x00200000
-.global lbl_804BD484
-lbl_804BD484:
-	.single 0e1
-.global lbl_804BD488
-lbl_804BD488:
-	.long 1
-	.long 0
 .global lbl_804BD490
 lbl_804BD490:
 	.string "pBuffer"
