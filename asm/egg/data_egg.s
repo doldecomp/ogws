@@ -4,19 +4,6 @@
 
 .balign 0x8
 
-.global lbl_80397500
-lbl_80397500:
-    .long 0
-    .long 0
-    .long 0x80083dd8
-.global lbl_8039750C
-lbl_8039750C:
-	.string "pCapTexture"
-	.balign 8
-.global lbl_80397518
-lbl_80397518:
-	.string "eggPostEffectBase.h"
-	.balign 8
 .global lbl_80397530
 lbl_80397530:
 	.incbin "baserom.dol", 0x393630, 0x18

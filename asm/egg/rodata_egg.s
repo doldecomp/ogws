@@ -4,12 +4,6 @@
 
 .balign 0x8
 
-.global lbl_80378C18
-lbl_80378C18:
-	.string "eggShadowTextureManager.cpp"
-	.string "group < GROUP_MAX"
-	.string "Can't set texture any more."
-	.balign 8
 .global lbl_80378C68
 lbl_80378C68:
 	.incbin "baserom.dol", 0x374D68, 0x34

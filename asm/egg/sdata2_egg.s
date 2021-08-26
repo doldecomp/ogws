@@ -4,24 +4,6 @@
 
 .balign 0x8
 
-.global lbl_804C0538
-lbl_804C0538:
-	.byte 00
-.global lbl_804C0539
-lbl_804C0539:
-	.byte 00
-.global lbl_804C053A
-lbl_804C053A:
-	.byte 00
-.global lbl_804C053B
-lbl_804C053B:
-	.byte 0xFF
-.global lbl_804C053C
-lbl_804C053C:
-	.incbin "baserom.dol", 0x3C917C, 0x4
-.global lbl_804C0540
-lbl_804C0540:
-	.incbin "baserom.dol", 0x3C9180, 0x8
 .global lbl_804C0548
 lbl_804C0548:
 	.incbin "baserom.dol", 0x3C9188, 0x1

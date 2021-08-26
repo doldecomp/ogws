@@ -1,11 +1,57 @@
 .include "macros.inc"
 
+.section .data, "wa"
+.balign 0x8
+.global __vt__Q23EGG20ShadowTextureManager
+__vt__Q23EGG20ShadowTextureManager:
+    .long 0
+    .long 0
+    .long __dt__Q23EGG20ShadowTextureManagerFv
+.global lbl_8039750C
+lbl_8039750C:
+	.string "pCapTexture"
+	.balign 8
+.global lbl_80397518
+lbl_80397518:
+	.string "eggPostEffectBase.h"
+	.balign 8
+
+.section .rodata, "a"
+.balign 0x8
+.global lbl_80378C18
+lbl_80378C18:
+	.string "eggShadowTextureManager.cpp"
+	.string "group < GROUP_MAX"
+	.string "Can't set texture any more."
+	.balign 8
+
+.section .sdata2, "a"
+.balign 0x8
+.global lbl_804C0538
+lbl_804C0538:
+	.byte 00
+.global lbl_804C0539
+lbl_804C0539:
+	.byte 00
+.global lbl_804C053A
+lbl_804C053A:
+	.byte 00
+.global lbl_804C053B
+lbl_804C053B:
+	.byte 0xFF
+.global lbl_804C053C
+lbl_804C053C:
+	.single 0e0
+.global lbl_804C0540
+lbl_804C0540:
+	.single 0e1
+
 .section .text, "ax"
 .global __ct__Q23EGG20ShadowTextureManagerFv
 __ct__Q23EGG20ShadowTextureManagerFv:
-/* 800838A8 0007E7A8  3C C0 80 39 */	lis r6, lbl_80397500@ha
+/* 800838A8 0007E7A8  3C C0 80 39 */	lis r6, __vt__Q23EGG20ShadowTextureManager@ha
 /* 800838AC 0007E7AC  38 00 00 00 */	li r0, 0
-/* 800838B0 0007E7B0  38 C6 75 00 */	addi r6, r6, lbl_80397500@l
+/* 800838B0 0007E7B0  38 C6 75 00 */	addi r6, r6, __vt__Q23EGG20ShadowTextureManager@l
 /* 800838B4 0007E7B4  38 A0 00 01 */	li r5, 1
 /* 800838B8 0007E7B8  38 80 00 10 */	li r4, 0x10
 /* 800838BC 0007E7BC  90 C3 00 48 */	stw r6, 0x48(r3)
