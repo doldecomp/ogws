@@ -5,6 +5,7 @@
 namespace EGG
 {
     struct CpuTexture;
+    struct CapTexture;
 
     template <typename T> struct Math;
     struct Matrix34f;

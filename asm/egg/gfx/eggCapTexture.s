@@ -2,8 +2,8 @@
 
 .section .text, "ax"
 
-.global func_80085C80
-func_80085C80:
+.global configure__Q23EGG10CapTextureFv
+configure__Q23EGG10CapTextureFv:
 /* 80085C80 00080B80  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 80085C84 00080B84  7C 08 02 A6 */	mflr r0
 /* 80085C88 00080B88  90 01 00 24 */	stw r0, 0x24(r1)
@@ -53,6 +53,9 @@ func_80085C80:
 /* 80085D38 00080C38  7C 08 03 A6 */	mtlr r0
 /* 80085D3C 00080C3C  38 21 00 20 */	addi r1, r1, 0x20
 /* 80085D40 00080C40  4E 80 00 20 */	blr 
+
+.global loadTexObj__Q23EGG10CapTextureF11_GXTexMapID
+loadTexObj__Q23EGG10CapTextureF11_GXTexMapID:
 /* 80085D44 00080C44  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80085D48 00080C48  7C 08 02 A6 */	mflr r0
 /* 80085D4C 00080C4C  90 01 00 14 */	stw r0, 0x14(r1)
