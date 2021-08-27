@@ -124,6 +124,8 @@ lbl_80084D4C:
 /* 80084D5C 0007FC5C  38 21 00 10 */	addi r1, r1, 0x10
 /* 80084D60 0007FC60  4E 80 00 20 */	blr 
 
+.global __dt__Q23EGG10CpuTextureFv
+__dt__Q23EGG10CpuTextureFv:
 /* 80084D64 0007FC64  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80084D68 0007FC68  7C 08 02 A6 */	mflr r0
 /* 80084D6C 0007FC6C  2C 03 00 00 */	cmpwi r3, 0

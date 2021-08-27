@@ -12,6 +12,66 @@ switch_803975a0:
     .long 0x80086440
     .long 0x80086450
 
+.section .data, "wa"
+.balign 0x8
+.global lbl_803975C0
+lbl_803975C0:
+    .long 0
+    .long 0
+    .long __dt__Q23EGG10CpuTextureFv # (weak, in eggTextureBuffer.s)
+    .long configure__Q23EGG10CpuTextureFv
+    .long initTexObj__Q23EGG10CpuTextureCFP9_GXTexObj
+    .long loadTexObj__Q23EGG10CpuTextureF11_GXTexMapID
+    .long 0
+    .long 0
+
+.section .rodata, "a"
+.balign 0x8
+.global lbl_80378E90
+lbl_80378E90:
+    .string "eggCpuTexture.cpp"
+    .string "pColor"
+    .string "tableStart <= tableGoal"
+    .string "tableStart <= tableSize && tableGoal <= tableSize"
+    .string "tableSize <= 1024"
+    .string "Please call configure() after construct!"
+    .string "pObj"
+    .string "mpBuffer"
+    .string "checkHasHeader()"
+    .string "getFormat() == GX_TF_RGBA8"
+    .string "getBuffer()"
+    .string "getFormat() == GX_TF_RGBA8 || getFormat() == GX_TF_I8"
+    .string "isSLine || dir == 't' || dir == 'T'"
+    .string "tableSize % 2 == 0"
+    .string "getTexBufferSize() > 0"
+    .string "pBuffer"
+    .string "x < getWidth()"
+    .string "y < getHeight()"
+
+.section .sdata2, "a"
+.balign 0x8
+.global lbl_804C0590
+lbl_804C0590:
+	.incbin "baserom.dol", 0x3C91D0, 0x4
+.global lbl_804C0594
+lbl_804C0594:
+	.incbin "baserom.dol", 0x3C91D4, 0x4
+.global lbl_804C0598
+lbl_804C0598:
+	.incbin "baserom.dol", 0x3C91D8, 0x4
+.global lbl_804C059C
+lbl_804C059C:
+	.incbin "baserom.dol", 0x3C91DC, 0x4
+.global lbl_804C05A0
+lbl_804C05A0:
+	.incbin "baserom.dol", 0x3C91E0, 0x8
+.global lbl_804C05A8
+lbl_804C05A8:
+	.incbin "baserom.dol", 0x3C91E8, 0x8
+.global lbl_804C05B0
+lbl_804C05B0:
+	.incbin "baserom.dol", 0x3C91F0, 0x10
+
 .section .text, "ax"
 .global makeGradient__Q23EGG10CpuTextureFv
 makeGradient__Q23EGG10CpuTextureFv:
