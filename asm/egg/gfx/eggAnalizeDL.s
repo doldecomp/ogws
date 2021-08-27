@@ -1,7 +1,61 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .bss, "wa"
+.balign 0x8
+.global lbl_8040A660
+lbl_8040A660:
+	.skip 0xB0
+.global lbl_8040A710
+lbl_8040A710:
+	.skip 0xD0
+.global lbl_8040A7E0
+lbl_8040A7E0:
+	.skip 0x50
 
+.section .rodata, "a"
+.balign 0x8
+.global lbl_80378DC0
+lbl_80378DC0:
+	.string "eggAnalizeDL.cpp"
+    .string "vtxDesc"
+    .string "vtxAttr"
+    .string "i_idx >= nw4r::g3d::ResPrePrimDL::SIZE_GXVTXATTRFMTLIST"
+
+.section .sbss, "wa"
+.balign 0x8
+.global lbl_804BEBD8
+lbl_804BEBD8:
+	.skip 0x8
+
+.section .sdata2, "a"
+.global lbl_804C0558
+lbl_804C0558:
+	.incbin "baserom.dol", 0x3C9198, 0x8
+.global lbl_804C0560
+lbl_804C0560:
+	.incbin "baserom.dol", 0x3C91A0, 0x8
+.global lbl_804C0568
+lbl_804C0568:
+	.incbin "baserom.dol", 0x3C91A8, 0x8
+.global lbl_804C0570
+lbl_804C0570:
+	.byte 0x00, 0xFF, 0x01, 0x02
+.global lbl_804C0574
+lbl_804C0574:
+	.byte 0x01
+	.byte 0x01
+	.byte 0x02
+	.byte 0x02
+	.byte 0x04
+	.byte 0x00
+	.byte 0x00
+	.byte 0x00
+	.byte 0x00
+	.byte 0x00
+	.byte 0x00
+	.byte 0x00
+
+.section .text, "ax"
 .global func_800854F8
 func_800854F8:
 /* 800854F8 000803F8  94 21 FF E0 */	stwu r1, -0x20(r1)
