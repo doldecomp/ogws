@@ -1,7 +1,46 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .data, "wa"
+.balign 0x8
+.global __vt__Q23EGG10CapTexture
+__vt__Q23EGG10CapTexture:
+    .long 0
+    .long 0
+    .long __dt__Q23EGG10CapTextureFv # (weak, in eggTextureBuffer.s)
+    .long configure__Q23EGG10CapTextureFv
+    .long initTexObj__Q23EGG10CpuTextureCFP9_GXTexObj
+    .long loadTexObj__Q23EGG10CapTextureF11_GXTexMapID
 
+.section .rodata, "a"
+.balign 0x8
+# Read-only buffer of zeroes??
+.global lbl_80378E20
+lbl_80378E20:
+	.incbin "baserom.dol", 0x374F20, 0x18
+.global lbl_80378E38
+lbl_80378E38:
+	.string "eggCapTexture.cpp"
+    .string "getBuffer()"
+    .string "Please call configure() after construct!"
+    .string "w > 0 && h > 0"
+
+.section .sbss2, "a"
+.balign 0x8
+.global lbl_804C69F0
+lbl_804C69F0:
+	.skip 0x1
+
+# TO-DO: Not 100% sure what TU lbl_804C0580 comes from
+.section .sdata2, "a"
+.balign 0x8
+.global lbl_804C0580
+lbl_804C0580:
+	.incbin "baserom.dol", 0x3C91C0, 0x8
+.global lbl_804C0588
+lbl_804C0588:
+	.incbin "baserom.dol", 0x3C91C8, 0x8
+
+.section .text, "ax"
 .global configure__Q23EGG10CapTextureFv
 configure__Q23EGG10CapTextureFv:
 /* 80085C80 00080B80  94 21 FF E0 */	stwu r1, -0x20(r1)

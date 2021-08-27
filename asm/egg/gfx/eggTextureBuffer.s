@@ -103,6 +103,9 @@ lbl_80084CD4:
 /* 80084D18 0007FC18  7C 08 03 A6 */	mtlr r0
 /* 80084D1C 0007FC1C  38 21 00 10 */	addi r1, r1, 0x10
 /* 80084D20 0007FC20  4E 80 00 20 */	blr 
+
+.global __dt__Q23EGG10CapTextureFv
+__dt__Q23EGG10CapTextureFv:
 /* 80084D24 0007FC24  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80084D28 0007FC28  7C 08 02 A6 */	mflr r0
 /* 80084D2C 0007FC2C  2C 03 00 00 */	cmpwi r3, 0

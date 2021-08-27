@@ -1,7 +1,18 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .data, "wa"
+.balign 0x8
+.global switch_803975a0
+switch_803975a0:
+    .long 0x80086464
+    .long 0x80086408
+    .long 0x80086410
+    .long 0x8008641c
+    .long 0x8008642c
+    .long 0x80086440
+    .long 0x80086450
 
+.section .text, "ax"
 .global makeGradient__Q23EGG10CpuTextureFv
 makeGradient__Q23EGG10CpuTextureFv:
 /* 80085FE0 00080EE0  94 21 FF 50 */	stwu r1, -0xb0(r1)
