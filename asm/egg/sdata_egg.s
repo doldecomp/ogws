@@ -4,10 +4,6 @@
 
 .balign 0x8
 
-.global lbl_804BD490
-lbl_804BD490:
-	.string "pBuffer"
-	.balign 4
 .global lbl_804BD498
 lbl_804BD498:
 	.incbin "baserom.dol", 0x3C7118, 0x4

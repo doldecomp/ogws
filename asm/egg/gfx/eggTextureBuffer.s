@@ -1,7 +1,87 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .bss, "wa"
+.balign 0x8
+.global lbl_80409750
+lbl_80409750:
+	.skip 0x10
+.global lbl_80409760
+lbl_80409760:
+	.skip 0xF00
 
+.section .data, "wa"
+.balign 0x8
+.global lbl_80397530
+lbl_80397530:
+    .long 0
+    .long 0
+    .long lbl_80085444
+    .long func_80084DA4
+    .long initTexObj__Q23EGG10CpuTextureCFP9_GXTexObj
+    .long loadTexObj__Q23EGG10CapTextureF11_GXTexMapID
+.global lbl_80397548
+lbl_80397548:
+	.string "( u32 )pBuffer % 32 == 0"
+    .balign 8
+.global lbl_80397568
+lbl_80397568:
+	.string "eggCpuTexture.h"
+.global lbl_80397578
+lbl_80397578:
+	.string "eggCpuTexture.h"
+
+.section .rodata, "a"
+.balign 0x8
+.global lbl_80378CF0
+lbl_80378CF0:
+    .string "eggTextureBuffer.cpp"
+    .string "mState == STATE_ALLOCED"
+    .string "spBufferAll == NULL"
+    .string "size % 32 == 0"
+    .string "spBufferAll"
+    .string "Please call TextureBuffer::initialize()."
+    .string "p_buffer"
+    .string "p_buffer->mpNext == NULL"
+    .string "size > 0"
+    .string "p_list == spHead"
+    .string "No free area."
+
+# TO-DO: Why does this TU not align?
+# Maybe it is part of StateGX but I highly doubt it
+.section .sbss, "wa"
+.global lbl_804BEBC4
+lbl_804BEBC4:
+	.skip 0x1
+.global lbl_804BEBC5
+lbl_804BEBC5:
+	.skip 0x1
+.global lbl_804BEBC6
+lbl_804BEBC6:
+	.skip 0x1
+.global lbl_804BEBC7
+lbl_804BEBC7:
+	.skip 0x1
+.global lbl_804BEBC8
+lbl_804BEBC8:
+	.skip 0x4
+.global lbl_804BEBCC
+lbl_804BEBCC:
+	.skip 0x4
+.global lbl_804BEBD0
+lbl_804BEBD0:
+	.skip 0x4
+.global lbl_804BEBD4
+lbl_804BEBD4:
+	.skip 0x4
+
+.section .sdata, "wa"
+.balign 0x8
+.global lbl_804BD490
+lbl_804BD490:
+	.string "pBuffer"
+	.balign 4
+
+.section .text, "ax"
 lbl_80084CD4:
 /* 80084CD4 0007FBD4  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80084CD8 0007FBD8  7C 08 02 A6 */	mflr r0
@@ -58,6 +138,9 @@ lbl_80084D8C:
 /* 80084D98 0007FC98  7C 08 03 A6 */	mtlr r0
 /* 80084D9C 0007FC9C  38 21 00 10 */	addi r1, r1, 0x10
 /* 80084DA0 0007FCA0  4E 80 00 20 */	blr 
+
+.global func_80084DA4
+func_80084DA4:
 /* 80084DA4 0007FCA4  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80084DA8 0007FCA8  7C 08 02 A6 */	mflr r0
 /* 80084DAC 0007FCAC  90 01 00 14 */	stw r0, 0x14(r1)
