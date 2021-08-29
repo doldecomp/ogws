@@ -46,6 +46,9 @@ lbl_804BEBBC:
 .global lbl_804BEBC0
 lbl_804BEBC0:
 	.skip 0x4
+.global sDefaultTexColor__Q23EGG7StateGX
+sDefaultTexColor__Q23EGG7StateGX:
+	.skip 0x4
 
 .section .sdata, "wa"
 .balign 0x8

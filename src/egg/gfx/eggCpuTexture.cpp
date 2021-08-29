@@ -123,26 +123,25 @@ namespace EGG
     {
         #line 469
         EGG_ASSERT(getTexBufferSize() > 0);
-        u8 *pBuffer = new (32) u8[getTexBufferSize()];
-        EGG_ASSERT(pBuffer);
-        checkBuffer(pBuffer);
 
-        mpBuffer = pBuffer;
-        mFlags &= ~HAS_HEADER;
+        u8 *pBuffer = new (32) u8[getTexBufferSize()];
+        #line 472
+        EGG_ASSERT(pBuffer);
+        
+        setBuffer(pBuffer);
     }
 
     void CpuTexture::allocTexBufferAndHeader()
     {
         #line 480
         EGG_ASSERT(getTexBufferSize() > 0);
+
         u8 *pBuffer = new (32) u8[getTexBufferSize() + sizeof(CpuTexture::Header)];
+        #line 482
         EGG_ASSERT(pBuffer);
-        checkBuffer(pBuffer + sizeof(CpuTexture::Header));
 
-        mpBuffer = pBuffer + sizeof(CpuTexture::Header);
-        mFlags &= ~HAS_HEADER;
+        setBuffer(pBuffer + sizeof(CpuTexture::Header));
         mFlags |= HAS_HEADER;
-
         initHeader();
     }
 

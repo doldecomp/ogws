@@ -198,7 +198,7 @@ NW4R_O_FILES := \
 EGG_O_FILES := \
 	build/asm/egg/gfx/eggShadowTextureManager.o \
 	build/asm/egg/gfx/eggStateGX.o \
-	build/asm/egg/gfx/eggTextureBuffer.o \
+	build/egg/gfx/eggTextureBuffer.o \
 	build/asm/egg/gfx/eggAnalizeDL.o \
 	build/asm/egg/gfx/eggCapTexture.o \
 	build/asm/egg/gfx/eggCpuTexture.o \

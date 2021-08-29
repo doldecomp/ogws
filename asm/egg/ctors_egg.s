@@ -2,7 +2,6 @@
 
 .section .ctors, "a"
 
-.4byte 0x80085484
 .4byte 0x80085c7c
 .4byte 0x80089dc8
 .4byte 0x8009aed0

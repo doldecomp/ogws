@@ -4,6 +4,10 @@
 
 namespace EGG
 {
+    struct StateGX;
+    
+    struct TextureBuffer;
+
     struct CpuTexture;
     struct CapTexture;
 

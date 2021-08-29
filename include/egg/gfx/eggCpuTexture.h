@@ -18,7 +18,7 @@ namespace EGG
         u8 mMinFilt; // at 0x9
         u8 mMagFilt; // at 0xA
         char UNK_0xB[0x10 - 0xB];
-        u8 *mpBuffer; // at 0x10
+        void *mpBuffer; // at 0x10
 
         void makeGradient(UNKTYPE);
 
@@ -54,7 +54,7 @@ namespace EGG
             HAS_HEADER
         };
 
-        virtual ~CpuTexture(); // at 0x8
+        virtual ~CpuTexture() {} // at 0x8
         virtual void configure(); // at 0xC
         virtual void initTexObj(GXTexObj *) const; // at 0x10
         virtual void loadTexObj(GXTexMapID); // at 0x14
@@ -83,15 +83,18 @@ namespace EGG
 
         Header * getHeader() const
         {
-            return (Header *)(mpBuffer - sizeof(Header));
+            return (Header *)((u8 *)mpBuffer - sizeof(Header));
         }
 
-        void checkBuffer(void *pBuffer) const
+        void setBuffer(void *pBuffer)
         {
             #line 180
             EGG_ASSERT(pBuffer);
             #line 180
             EGG_ASSERT(( u32 )pBuffer % 32 == 0);
+
+            mpBuffer = pBuffer;
+            mFlags &= ~HAS_HEADER;
         }
     };
 }
