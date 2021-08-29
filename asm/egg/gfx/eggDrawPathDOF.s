@@ -1,7 +1,53 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .data, "wa"
+.balign 0x8
+.global vt_803977B0
+vt_803977B0:
+    .long 0
+    .long 0
+    .long lbl_8008BD58
+    .long 0
+    .long 0
+    .long 0x8008d504
+    .long 0x80089f60
+    .long 0x8008d4fc
+    .long 0x80089ed8
+    .long 0x8008bf40
+    .long 0x8008c2ec
+    .long lbl_80089F38
+.global lbl_803977E0
+lbl_803977E0:
+	.incbin "baserom.dol", 0x3938E0, 0x20
+.global lbl_80397800
+lbl_80397800:
+	.incbin "baserom.dol", 0x393900, 0x18
+.global lbl_80397818
+lbl_80397818:
+	.incbin "baserom.dol", 0x393918, 0x1C
+.global lbl_80397834
+lbl_80397834:
+	.incbin "baserom.dol", 0x393934, 0x18
+.global lbl_8039784C
+lbl_8039784C:
+	.incbin "baserom.dol", 0x39394C, 0x20
+.global lbl_8039786C
+lbl_8039786C:
+	.incbin "baserom.dol", 0x39396C, 0x1C
 
+.section .rodata, "a"
+.balign 0x8
+.global lbl_80379340
+lbl_80379340:
+    .string "eggDrawPathDOF.cpp"
+    .string "mpDOF"
+    .string "mpBlur"
+    .string "mpBlurSimple"
+    .string "mpMask"
+    .string "mFocusRange > 0.f"
+    .string "StateGX::getDefaultPixelFormat() == GX_PF_RGBA6_Z24"
+
+.section .text, "ax"
 .global func_8008BB30
 func_8008BB30:
 /* 8008BB30 00086A30  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -10,9 +56,9 @@ func_8008BB30:
 /* 8008BB3C 00086A3C  93 E1 00 0C */	stw r31, 0xc(r1)
 /* 8008BB40 00086A40  7C 7F 1B 78 */	mr r31, r3
 /* 8008BB44 00086A44  4B FF E2 89 */	bl func_80089DCC
-/* 8008BB48 00086A48  3C 60 80 39 */	lis r3, lbl_803977B0@ha
+/* 8008BB48 00086A48  3C 60 80 39 */	lis r3, vt_803977B0@ha
 /* 8008BB4C 00086A4C  38 00 00 00 */	li r0, 0
-/* 8008BB50 00086A50  38 63 77 B0 */	addi r3, r3, lbl_803977B0@l
+/* 8008BB50 00086A50  38 63 77 B0 */	addi r3, r3, vt_803977B0@l
 /* 8008BB54 00086A54  C0 22 8C 7C */	lfs f1, lbl_804C069C-_SDA2_BASE_(r2)
 /* 8008BB58 00086A58  C0 42 8C 78 */	lfs f2, lbl_804C0698-_SDA2_BASE_(r2)
 /* 8008BB5C 00086A5C  38 C3 00 0C */	addi r6, r3, 0xc
@@ -163,8 +209,8 @@ lbl_8008BD58:
 /* 8008BD74 00086C74  7C 7E 1B 78 */	mr r30, r3
 /* 8008BD78 00086C78  41 82 01 6C */	beq lbl_8008BEE4
 /* 8008BD7C 00086C7C  80 03 00 A8 */	lwz r0, 0xa8(r3)
-/* 8008BD80 00086C80  3C A0 80 39 */	lis r5, lbl_803977B0@ha
-/* 8008BD84 00086C84  38 A5 77 B0 */	addi r5, r5, lbl_803977B0@l
+/* 8008BD80 00086C80  3C A0 80 39 */	lis r5, vt_803977B0@ha
+/* 8008BD84 00086C84  38 A5 77 B0 */	addi r5, r5, vt_803977B0@l
 /* 8008BD88 00086C88  38 85 00 0C */	addi r4, r5, 0xc
 /* 8008BD8C 00086C8C  2C 00 00 00 */	cmpwi r0, 0
 /* 8008BD90 00086C90  90 A3 00 6C */	stw r5, 0x6c(r3)
