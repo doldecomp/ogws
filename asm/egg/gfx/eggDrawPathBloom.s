@@ -1,7 +1,20 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .rodata, "a"
+.balign 0x8
+.global lbl_80379318
+lbl_80379318:
+    .string "bblm"
+    .string "PBLM"
+    .string "eggDrawPathBloom.cpp"
+    .string "pData"
 
+.section .sdata, "wa"
+.global lbl_804BD4A0
+lbl_804BD4A0:
+	.long lbl_80379318
+
+.section .text, "ax"
 .global lbl_8008B1E0
 lbl_8008B1E0:
 /* 8008B1E0 000860E0  3C 60 80 38 */	lis r3, lbl_80379318@ha
