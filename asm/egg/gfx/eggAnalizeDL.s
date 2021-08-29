@@ -1,5 +1,8 @@
 .include "macros.inc"
 
+.section .ctors, "a"
+	.4byte __sinit_$$3eggAnalizeDL_cpp
+
 .section .bss, "wa"
 .balign 0x8
 .global lbl_8040A660
@@ -582,4 +585,6 @@ lbl_80085C5C:
 /* 80085C74 00080B74  38 21 00 30 */	addi r1, r1, 0x30
 /* 80085C78 00080B78  4E 80 00 20 */	blr 
 
+.global __sinit_$$3eggAnalizeDL_cpp
+__sinit_$$3eggAnalizeDL_cpp:
 /* 80085C7C 00080B7C  4E 80 00 20 */	blr 

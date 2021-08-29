@@ -1,7 +1,109 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .ctors, "a"
+    .4byte __sinit_$$3eggDrawGX_cpp
 
+.section .bss, "wa"
+.balign 0x8
+.global lbl_8040A830
+lbl_8040A830:
+	.skip 0x90
+.global lbl_8040A8C0
+lbl_8040A8C0:
+	.skip 0x30
+.global lbl_8040A8F0
+lbl_8040A8F0:
+	.skip 0x20
+
+.section .data, "wa"
+.balign 0x8
+.global lbl_803975E0 # Image for GXInitTexObj
+lbl_803975E0:
+	.incbin "baserom.dol", 0x3936E0, 0x40
+.global switch_80397620
+switch_80397620:
+    .long 0x80088ef4
+    .long 0x8008901c
+    .long 0x80088f60
+    .long 0x80088f60
+    .long 0x80088f60
+    .long 0x80088f60
+    .long 0x80088fac
+    .long 0x80089044
+    .long 0x80089044
+    .long 0x800890e4
+    .long 0x80089174
+    .long 0x80089174
+    .long 0x80089174
+    .long 0x80089174
+.global lbl_80397658
+lbl_80397658:
+    .long 0x80089398
+    .long 0x800894e0
+    .long 0x800895b4
+    .long 0x80089698
+    .long 0x800896a8
+    .long 0x800896b8
+    .long 0x800896b8
+    .long 0x800898e0
+    .long 0x800898e0
+    .long 0x80089758
+    .long 0x80089758
+    .long 0x8008989c
+    .long 0x8008989c
+    .long 0x80089910
+    .long 0x80089910
+    .long 0x800899a0
+    .long 0x80089a2c
+    .long 0x80089a2c
+
+.section .rodata, "a"
+.balign 0x8
+.global lbl_80379020
+lbl_80379020:
+	.incbin "baserom.dol", 0x375120, 0x130
+.global lbl_80379150
+lbl_80379150:
+	.incbin "baserom.dol", 0x375250, 0x30
+.global lbl_80379180
+lbl_80379180:
+	.incbin "baserom.dol", 0x375280, 0xA0
+.global lbl_80379220
+lbl_80379220:
+	.string "eggDrawGX.cpp"
+    .string "divide > 0"
+    .string "pTexObj"
+    .string "num % 2 == 0"
+    .string "pRes != NULL"
+    .string "tex.IsValid()"
+    .string "( s_flag & FLAG_INITIALIZE_DISPLAY_LIST ) == 0"
+    .string "0"
+    .string "s_DL[i_dl].m_size < tmpSize"
+    .string "s_flag & FLAG_INITIALIZE_DISPLAY_LIST"
+    .string "zMode < ZMODE_MAX"
+    .string "blendMode < BLEND_MAX"
+
+.section .sbss, "wa"
+.balign 0x8
+.global s_flag__Q23EGG6DrawGX
+s_flag__Q23EGG6DrawGX:
+	.skip 0x4
+# Type = GXTexMapID
+.global lbl_804BEBE4
+lbl_804BEBE4:
+	.skip 0x4
+
+.section .sdata, "wa"
+.balign 0x8
+.global lbl_804BD498
+lbl_804BD498:
+    # For GXSetChanCtrl
+	.long 1
+.global lbl_804BD49C
+lbl_804BD49C:
+	.single 0e1
+
+.section .text, "ax"
 .global func_800874DC
 func_800874DC:
 /* 800874DC 000823DC  94 21 FF 30 */	stwu r1, -0xd0(r1)
@@ -1800,9 +1902,9 @@ func_80088EA8:
 /* 80088ED0 00083DD0  48 05 47 49 */	bl GXClearVtxDesc
 /* 80088ED4 00083DD4  28 1C 00 0D */	cmplwi r28, 0xd
 /* 80088ED8 00083DD8  41 81 03 5C */	bgt lbl_80089234
-/* 80088EDC 00083DDC  3C 60 80 39 */	lis r3, lbl_80397620@ha
+/* 80088EDC 00083DDC  3C 60 80 39 */	lis r3, switch_80397620@ha
 /* 80088EE0 00083DE0  57 80 10 3A */	slwi r0, r28, 2
-/* 80088EE4 00083DE4  38 63 76 20 */	addi r3, r3, lbl_80397620@l
+/* 80088EE4 00083DE4  38 63 76 20 */	addi r3, r3, switch_80397620@l
 /* 80088EE8 00083DE8  7C 63 00 2E */	lwzx r3, r3, r0
 /* 80088EEC 00083DEC  7C 69 03 A6 */	mtctr r3
 /* 80088EF0 00083DF0  4E 80 04 20 */	bctr 
@@ -2056,7 +2158,7 @@ func_80089254:
 /* 800892A0 000841A0  F3 2C 0F 98 */	.4byte 0xF32C0F98
 /* 800892A4 000841A4  39 6C FF 90 */	addi r11, r12, -112
 /* 800892A8 000841A8  48 02 8A 69 */	bl _savegpr_14
-/* 800892AC 000841AC  80 0D 98 60 */	lwz r0, lbl_804BEBE0-_SDA_BASE_(r13)
+/* 800892AC 000841AC  80 0D 98 60 */	lwz r0, s_flag__Q23EGG6DrawGX-_SDA_BASE_(r13)
 /* 800892B0 000841B0  3C 80 43 30 */	lis r4, 0x4330
 /* 800892B4 000841B4  90 81 40 C0 */	stw r4, 0x40c0(r1)
 /* 800892B8 000841B8  7C 6F 1B 78 */	mr r15, r3
@@ -2616,9 +2718,9 @@ lbl_80089B00:
 /* 80089B1C 00084A1C  2C 12 00 12 */	cmpwi r18, 0x12
 /* 80089B20 00084A20  3B FF 00 08 */	addi r31, r31, 8
 /* 80089B24 00084A24  41 80 F8 40 */	blt lbl_80089364
-/* 80089B28 00084A28  80 0D 98 60 */	lwz r0, lbl_804BEBE0-_SDA_BASE_(r13)
+/* 80089B28 00084A28  80 0D 98 60 */	lwz r0, s_flag__Q23EGG6DrawGX-_SDA_BASE_(r13)
 /* 80089B2C 00084A2C  60 00 00 01 */	ori r0, r0, 1
-/* 80089B30 00084A30  90 0D 98 60 */	stw r0, lbl_804BEBE0-_SDA_BASE_(r13)
+/* 80089B30 00084A30  90 0D 98 60 */	stw r0, s_flag__Q23EGG6DrawGX-_SDA_BASE_(r13)
 /* 80089B34 00084A34  81 41 00 00 */	lwz r10, 0(r1)
 /* 80089B38 00084A38  38 00 FF F8 */	li r0, -8
 /* 80089B3C 00084A3C  13 EA 00 0C */	.4byte 0x13EA000C
@@ -2657,7 +2759,7 @@ func_80089BA4:
 /* 80089BB4 00084AB4  7C 9F 23 78 */	mr r31, r4
 /* 80089BB8 00084AB8  93 C1 00 08 */	stw r30, 8(r1)
 /* 80089BBC 00084ABC  7C 7E 1B 78 */	mr r30, r3
-/* 80089BC0 00084AC0  80 0D 98 60 */	lwz r0, lbl_804BEBE0-_SDA_BASE_(r13)
+/* 80089BC0 00084AC0  80 0D 98 60 */	lwz r0, s_flag__Q23EGG6DrawGX-_SDA_BASE_(r13)
 /* 80089BC4 00084AC4  54 00 07 FF */	clrlwi. r0, r0, 0x1f
 /* 80089BC8 00084AC8  40 82 00 1C */	bne lbl_80089BE4
 /* 80089BCC 00084ACC  3C 60 80 38 */	lis r3, lbl_80379220@ha
@@ -2698,7 +2800,7 @@ func_80089C30:
 /* 80089C48 00084B48  7C 9E 23 78 */	mr r30, r4
 /* 80089C4C 00084B4C  93 A1 00 14 */	stw r29, 0x14(r1)
 /* 80089C50 00084B50  7C 7D 1B 78 */	mr r29, r3
-/* 80089C54 00084B54  80 0D 98 60 */	lwz r0, lbl_804BEBE0-_SDA_BASE_(r13)
+/* 80089C54 00084B54  80 0D 98 60 */	lwz r0, s_flag__Q23EGG6DrawGX-_SDA_BASE_(r13)
 /* 80089C58 00084B58  54 00 07 FF */	clrlwi. r0, r0, 0x1f
 /* 80089C5C 00084B5C  40 82 00 1C */	bne lbl_80089C78
 /* 80089C60 00084B60  3C 60 80 38 */	lis r3, lbl_80379220@ha
@@ -2801,4 +2903,6 @@ lbl_80089D90:
 /* 80089DC0 00084CC0  38 21 00 10 */	addi r1, r1, 0x10
 /* 80089DC4 00084CC4  4E 80 00 20 */	blr 
 
+.global __sinit_$$3eggDrawGX_cpp
+__sinit_$$3eggDrawGX_cpp:
 /* 80089DC8 00084CC8  4E 80 00 20 */	blr 
