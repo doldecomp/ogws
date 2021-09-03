@@ -1,7 +1,82 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .sdata2, "wa"
+.balign 0x8
+# Color?
+.global lbl_804C05C0
+lbl_804C05C0:
+	.byte 0x00
+.global lbl_804C05C1
+lbl_804C05C1:
+	.byte 0x00
+.global lbl_804C05C2
+lbl_804C05C2:
+	.byte 0x00
+.global lbl_804C05C3
+lbl_804C05C3:
+	.byte 0xFF
+# Color?
+.global lbl_804C05C4
+lbl_804C05C4:
+	.byte 0xFF
+.global lbl_804C05C5
+lbl_804C05C5:
+	.byte 0xFF
+.global lbl_804C05C6
+lbl_804C05C6:
+	.byte 0xFF
+.global lbl_804C05C7
+lbl_804C05C7:
+	.byte 0xFF
 
+.section .sdata, "wa"
+.balign 0x8
+.global lbl_804BD4A8
+lbl_804BD4A8:
+	.long lbl_80379518
+
+.section .rodata, "a"
+.balign 0x8
+.global lbl_803794F8
+lbl_803794F8:
+	.incbin "baserom.dol", 0x3755F8, 0x20
+.global lbl_80379518
+lbl_80379518:
+    .string "blight"
+    .string "eggLightManager.cpp"
+    .string "lightNum > 0"
+    .string "ambientNum > 0"
+    .string "m_pLightTextureManager != NULL"
+    .string "m_pObjSet != NULL"
+    .string "m_ppLightSet != NULL"
+    .string "m_pAmbientSet != NULL"
+    .string "m_ppLightSet[i_light] != NULL"
+    .string "lightNum <= GetNum()"
+    .string "ambientNum <= GetAmbientNum()"
+    .string "viewNo < m_viewNum"
+    .string "pScnRoot != NULL"
+    .string "l.GetNumLightObj() >= GetNum()"
+    .string "l.GetNumLightSet() >= GetAmbientNum()"
+    .string "is_success"
+    .string "LGHT"
+    .string "eggIBinary.h"
+    .string "bin"
+    .string "Not for this class."
+
+.section .data, "wa"
+.balign 0x8
+# vtable followed by assert strings
+.global lbl_80397950
+lbl_80397950:
+	.incbin "baserom.dol", 0x393A50, 0x48
+.global lbl_80397998
+lbl_80397998:
+	.incbin "baserom.dol", 0x393A98, 0x14
+.global lbl_803979AC
+lbl_803979AC:
+	.incbin "baserom.dol", 0x393AAC, 0x14
+
+.section .text, "ax"
 .global func_8008FF24
 func_8008FF24:
 /* 8008FF24 0008AE24  94 21 FF E0 */	stwu r1, -0x20(r1)

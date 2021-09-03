@@ -4,30 +4,6 @@
 
 .balign 0x8
 
-.global lbl_804C05C0
-lbl_804C05C0:
-	.incbin "baserom.dol", 0x3C9200, 0x1
-.global lbl_804C05C1
-lbl_804C05C1:
-	.incbin "baserom.dol", 0x3C9201, 0x1
-.global lbl_804C05C2
-lbl_804C05C2:
-	.incbin "baserom.dol", 0x3C9202, 0x1
-.global lbl_804C05C3
-lbl_804C05C3:
-	.incbin "baserom.dol", 0x3C9203, 0x1
-.global lbl_804C05C4
-lbl_804C05C4:
-	.incbin "baserom.dol", 0x3C9204, 0x1
-.global lbl_804C05C5
-lbl_804C05C5:
-	.incbin "baserom.dol", 0x3C9205, 0x1
-.global lbl_804C05C6
-lbl_804C05C6:
-	.incbin "baserom.dol", 0x3C9206, 0x1
-.global lbl_804C05C7
-lbl_804C05C7:
-	.incbin "baserom.dol", 0x3C9207, 0x1
 .global lbl_804C05C8
 lbl_804C05C8:
 	.incbin "baserom.dol", 0x3C9208, 0x1
