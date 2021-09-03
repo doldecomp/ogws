@@ -1,7 +1,31 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .sbss, "wa"
+.balign 0x8
+.global sManualProjectionMapMode__Q23EGG10G3DUtility
+sManualProjectionMapMode__Q23EGG10G3DUtility:
+	.skip 0x4
+# Not sure if this is really in this TU,
+# but it is a g3d::ScnProc pointer (xrefs from EGG::IScnProc)
+# 8B alignment makes the DOL only match if it is in this file
+.global lbl_804BEBEC
+lbl_804BEBEC:
+	.skip 0x4
 
+.section .rodata, "a"
+.balign 0x8
+.global lbl_80379410
+lbl_80379410:
+	.string "eggG3DUtility.cpp"
+    .string "tmpSize % 32 == 0"
+    .string "sManualProjectionMapMode == i"
+    .string "sManualProjectionMapMode != 0"
+    .string "srt.IsValid()"
+    .string "pM"
+    .string "pName"
+    .string "p_resObj"
+
+.section .text, "ax"
 .global func_8008F334
 func_8008F334:
 /* 8008F334 0008A234  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -53,7 +77,7 @@ lbl_8008F3C0:
 /* 8008F3D8 0008A2D8  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 8008F3DC 0008A2DC  7C 00 F8 40 */	cmplw r0, r31
 /* 8008F3E0 0008A2E0  40 82 00 2C */	bne lbl_8008F40C
-/* 8008F3E4 0008A2E4  88 0D 98 68 */	lbz r0, lbl_804BEBE8-_SDA_BASE_(r13)
+/* 8008F3E4 0008A2E4  88 0D 98 68 */	lbz r0, sManualProjectionMapMode__Q23EGG10G3DUtility-_SDA_BASE_(r13)
 /* 8008F3E8 0008A2E8  7C 00 F0 40 */	cmplw r0, r30
 /* 8008F3EC 0008A2EC  41 82 00 A8 */	beq lbl_8008F494
 /* 8008F3F0 0008A2F0  3C 60 80 38 */	lis r3, lbl_80379410@ha
@@ -81,7 +105,7 @@ lbl_8008F424:
 /* 8008F440 0008A340  7C 00 F8 40 */	cmplw r0, r31
 /* 8008F444 0008A344  40 82 00 20 */	bne lbl_8008F464
 /* 8008F448 0008A348  3C 80 80 09 */	lis r4, lbl_8008F548@ha
-/* 8008F44C 0008A34C  9B CD 98 68 */	stb r30, lbl_804BEBE8-_SDA_BASE_(r13)
+/* 8008F44C 0008A34C  9B CD 98 68 */	stb r30, sManualProjectionMapMode__Q23EGG10G3DUtility-_SDA_BASE_(r13)
 /* 8008F450 0008A350  7F C3 F3 78 */	mr r3, r30
 /* 8008F454 0008A354  38 A0 00 02 */	li r5, 2
 /* 8008F458 0008A358  38 84 F5 48 */	addi r4, r4, lbl_8008F548@l
@@ -91,7 +115,7 @@ lbl_8008F464:
 /* 8008F464 0008A364  3B DE 00 01 */	addi r30, r30, 1
 /* 8008F468 0008A368  28 1E 01 00 */	cmplwi r30, 0x100
 /* 8008F46C 0008A36C  41 80 FF B8 */	blt lbl_8008F424
-/* 8008F470 0008A370  88 0D 98 68 */	lbz r0, lbl_804BEBE8-_SDA_BASE_(r13)
+/* 8008F470 0008A370  88 0D 98 68 */	lbz r0, sManualProjectionMapMode__Q23EGG10G3DUtility-_SDA_BASE_(r13)
 /* 8008F474 0008A374  2C 00 00 00 */	cmpwi r0, 0
 /* 8008F478 0008A378  40 82 00 1C */	bne lbl_8008F494
 /* 8008F47C 0008A37C  3C 60 80 38 */	lis r3, lbl_80379410@ha
@@ -135,7 +159,7 @@ lbl_8008F4EC:
 /* 8008F500 0008A400  4B FC 59 21 */	bl func_80054E20
 /* 8008F504 0008A404  2C 03 00 00 */	cmpwi r3, 0
 /* 8008F508 0008A408  41 82 00 24 */	beq lbl_8008F52C
-/* 8008F50C 0008A40C  88 AD 98 68 */	lbz r5, lbl_804BEBE8-_SDA_BASE_(r13)
+/* 8008F50C 0008A40C  88 AD 98 68 */	lbz r5, sManualProjectionMapMode__Q23EGG10G3DUtility-_SDA_BASE_(r13)
 /* 8008F510 0008A410  7F C3 F3 78 */	mr r3, r30
 /* 8008F514 0008A414  80 C1 00 0C */	lwz r6, 0xc(r1)
 /* 8008F518 0008A418  7F E4 FB 78 */	mr r4, r31
