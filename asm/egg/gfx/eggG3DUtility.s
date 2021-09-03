@@ -5,12 +5,18 @@
 .global sManualProjectionMapMode__Q23EGG10G3DUtility
 sManualProjectionMapMode__Q23EGG10G3DUtility:
 	.skip 0x4
-# Not sure if this is really in this TU,
-# but it is a g3d::ScnProc pointer (xrefs from EGG::IScnProc)
-# 8B alignment makes the DOL only match if it is in this file
 .global lbl_804BEBEC
 lbl_804BEBEC:
 	.skip 0x4
+.global lbl_804BEBF0
+lbl_804BEBF0:
+	.skip 0x4
+.global lbl_804BEBF4
+lbl_804BEBF4:
+	.skip 0x4
+.global lbl_804BEBF8
+lbl_804BEBF8:
+	.skip 0x8
 
 .section .rodata, "a"
 .balign 0x8

@@ -1,7 +1,33 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .sbss, "wa"
+.balign 0x8
+.global spInstance__Q23EGG9GfxEngine
+spInstance__Q23EGG9GfxEngine:
+	.skip 0x8
 
+.section .rodata, "a"
+.balign 0x8
+.global lbl_80379490
+lbl_80379490:
+	.string "eggGfxEngine.cpp"
+    .string "spInstance == NULL"
+    .string "spInstance"
+    .string "interlace < cVFilter_Max"
+    .string "progressive < cVFilter_Max"
+    
+.section .data, "wa"
+.balign 0x8
+.global __vt__Q23EGG9GfxEngine
+__vt__Q23EGG9GfxEngine:
+    .long 0
+    .long 0
+    .long __dt__Q23EGG9GfxEngine
+    .long 0
+
+.section .text, "ax"
+# GfxEngine::initialize() ???
+# (Unofficial symbol)
 .global func_8008FCEC
 func_8008FCEC:
 /* 8008FCEC 0008ABEC  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -13,7 +39,7 @@ func_8008FCEC:
 /* 8008FD04 0008AC04  7C 9E 23 78 */	mr r30, r4
 /* 8008FD08 0008AC08  93 A1 00 14 */	stw r29, 0x14(r1)
 /* 8008FD0C 0008AC0C  7C 7D 1B 78 */	mr r29, r3
-/* 8008FD10 0008AC10  80 0D 98 80 */	lwz r0, lbl_804BEC00-_SDA_BASE_(r13)
+/* 8008FD10 0008AC10  80 0D 98 80 */	lwz r0, spInstance__Q23EGG9GfxEngine-_SDA_BASE_(r13)
 /* 8008FD14 0008AC14  2C 00 00 00 */	cmpwi r0, 0
 /* 8008FD18 0008AC18  41 82 00 1C */	beq lbl_8008FD34
 /* 8008FD1C 0008AC1C  3C 60 80 38 */	lis r3, lbl_80379490@ha
@@ -33,10 +59,10 @@ lbl_8008FD40:
 /* 8008FD4C 0008AC4C  48 01 35 05 */	bl __nw__FUlPQ23EGG4Heapi
 /* 8008FD50 0008AC50  2C 03 00 00 */	cmpwi r3, 0
 /* 8008FD54 0008AC54  41 82 00 08 */	beq lbl_8008FD5C
-/* 8008FD58 0008AC58  48 00 01 41 */	bl func_8008FE98
+/* 8008FD58 0008AC58  48 00 01 41 */	bl __ct__Q23EGG9GfxEngineFv
 lbl_8008FD5C:
 /* 8008FD5C 0008AC5C  2C 03 00 00 */	cmpwi r3, 0
-/* 8008FD60 0008AC60  90 6D 98 80 */	stw r3, lbl_804BEC00-_SDA_BASE_(r13)
+/* 8008FD60 0008AC60  90 6D 98 80 */	stw r3, spInstance__Q23EGG9GfxEngine-_SDA_BASE_(r13)
 /* 8008FD64 0008AC64  40 82 00 1C */	bne lbl_8008FD80
 /* 8008FD68 0008AC68  3C 60 80 38 */	lis r3, lbl_80379490@ha
 /* 8008FD6C 0008AC6C  38 80 00 38 */	li r4, 0x38
@@ -110,6 +136,7 @@ func_8008FE04:
 /* 8008FE6C 0008AD6C  38 21 00 10 */	addi r1, r1, 0x10
 /* 8008FE70 0008AD70  4E 80 00 20 */	blr 
 
+# EGG::Display::getColor (weak)
 .global func_8008FE74
 func_8008FE74:
 /* 8008FE74 0008AD74  88 E4 00 14 */	lbz r7, 0x14(r4)
@@ -122,14 +149,14 @@ func_8008FE74:
 /* 8008FE90 0008AD90  98 03 00 03 */	stb r0, 3(r3)
 /* 8008FE94 0008AD94  4E 80 00 20 */	blr 
 
-.global func_8008FE98
-func_8008FE98:
+.global __ct__Q23EGG9GfxEngineFv
+__ct__Q23EGG9GfxEngineFv:
 /* 8008FE98 0008AD98  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8008FE9C 0008AD9C  7C 08 02 A6 */	mflr r0
-/* 8008FEA0 0008ADA0  3C 80 80 39 */	lis r4, lbl_80397940@ha
+/* 8008FEA0 0008ADA0  3C 80 80 39 */	lis r4, __vt__Q23EGG9GfxEngine@ha
 /* 8008FEA4 0008ADA4  90 01 00 14 */	stw r0, 0x14(r1)
 /* 8008FEA8 0008ADA8  38 00 00 00 */	li r0, 0
-/* 8008FEAC 0008ADAC  38 84 79 40 */	addi r4, r4, lbl_80397940@l
+/* 8008FEAC 0008ADAC  38 84 79 40 */	addi r4, r4, __vt__Q23EGG9GfxEngine@l
 /* 8008FEB0 0008ADB0  93 E1 00 0C */	stw r31, 0xc(r1)
 /* 8008FEB4 0008ADB4  7C 7F 1B 78 */	mr r31, r3
 /* 8008FEB8 0008ADB8  90 03 00 00 */	stw r0, 0(r3)
@@ -143,6 +170,9 @@ func_8008FE98:
 /* 8008FED8 0008ADD8  7C 08 03 A6 */	mtlr r0
 /* 8008FEDC 0008ADDC  38 21 00 10 */	addi r1, r1, 0x10
 /* 8008FEE0 0008ADE0  4E 80 00 20 */	blr 
+
+.global __dt__Q23EGG9GfxEngine
+__dt__Q23EGG9GfxEngine:
 /* 8008FEE4 0008ADE4  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8008FEE8 0008ADE8  7C 08 02 A6 */	mflr r0
 /* 8008FEEC 0008ADEC  2C 03 00 00 */	cmpwi r3, 0
