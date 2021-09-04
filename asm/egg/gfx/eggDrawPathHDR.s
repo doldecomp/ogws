@@ -38,6 +38,8 @@ lbl_8008D4E4:
 /* 8008D504 00088404  38 63 FF 90 */	addi r3, r3, -112
 /* 8008D508 00088408  4B FF E8 50 */	b lbl_8008BD58
 
+# DrawPathHDR::DrawPathHDR
+# Inherits from DrawPathBase
 .global func_8008D50C
 func_8008D50C:
 /* 8008D50C 0008840C  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -70,6 +72,8 @@ lbl_8008D554:
 /* 8008D574 00088474  7C 08 03 A6 */	mtlr r0
 /* 8008D578 00088478  38 21 00 10 */	addi r1, r1, 0x10
 /* 8008D57C 0008847C  4E 80 00 20 */	blr 
+
+# DrawPathHDR::~DrawPathHDR
 lbl_8008D580:
 /* 8008D580 00088480  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8008D584 00088484  7C 08 02 A6 */	mflr r0
