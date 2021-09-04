@@ -48,6 +48,8 @@ lbl_80379340:
     .string "StateGX::getDefaultPixelFormat() == GX_PF_RGBA6_Z24"
 
 .section .text, "ax"
+# DrawPathDOF::DrawPathDOF
+# Inherits from DrawPathBase
 .global func_8008BB30
 func_8008BB30:
 /* 8008BB30 00086A30  94 21 FF F0 */	stwu r1, -0x10(r1)
