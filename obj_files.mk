@@ -203,7 +203,7 @@ EGG_O_FILES := \
 	build/asm/egg/gfx/eggCapTexture.o \
 	build/asm/egg/gfx/eggCpuTexture.o \
 	build/asm/egg/gfx/eggDrawGX.o \
-	build/asm/egg/gfx/egg_80089DCC.o \
+	build/asm/egg/gfx/eggDrawPathBase.o \
 	build/asm/egg/gfx/eggDrawPathBloom.o \
 	build/asm/egg/gfx/eggDrawPathDOF.o \
 	build/asm/egg/gfx/eggDrawPathHDR.o \
