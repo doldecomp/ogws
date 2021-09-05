@@ -1,7 +1,61 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .sdata2, "a"
+.balign 0x8
+.global lbl_804C0760
+lbl_804C0760:
+	.incbin "baserom.dol", 0x3C93A0, 0x4
+.global lbl_804C0764
+lbl_804C0764:
+	.incbin "baserom.dol", 0x3C93A4, 0x4
+.global lbl_804C0768
+lbl_804C0768:
+	.incbin "baserom.dol", 0x3C93A8, 0x8
+.global lbl_804C0770
+lbl_804C0770:
+	.incbin "baserom.dol", 0x3C93B0, 0x8
 
+.section .sdata, "wa"
+.balign 0x8
+.global lbl_804BD4B8
+lbl_804BD4B8:
+    # (const char *) "blmap"
+	.long lbl_80379820
+
+.section .rodata, "a"
+.balign 0x8
+.global lbl_80379820
+lbl_80379820:
+    .string "blmap"
+    .string "eggLightTextureManager.cpp"
+    .string "pManager"
+    .string "mTexNum < getMax()"
+    .string "pMdl"
+    .string "0 <= index && index < mTexNum"
+    .string "srt.IsValid()"
+    .string "gen.IsValid()"
+    .string "tex_index != -1"
+    .string "p_obj"
+    .string "isEnableClearWorkSpace()"
+    .string "LMAP"
+    .string "eggIBinary.h"
+    .string "bin"
+    .string "Not for this class."
+
+.section .data, "wa"
+.balign 0x8
+.global lbl_80397B08
+lbl_80397B08:
+    .long 0
+    .long 0
+    .long 0x80093940
+    .long 0x800939f4
+    .long 0x80093930
+    .long 0x80093c90
+    .long 0x80093a78
+    .long 0
+
+.section .text, "ax"
 .global func_80092D84
 func_80092D84:
 /* 80092D84 0008DC84  94 21 FF F0 */	stwu r1, -0x10(r1)
