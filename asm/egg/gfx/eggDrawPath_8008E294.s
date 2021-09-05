@@ -13,6 +13,27 @@
 ######################################
 .include "macros.inc"
 
+.section .sdata2, "a"
+.balign 0x8
+.global lbl_804C0710
+lbl_804C0710:
+	.incbin "baserom.dol", 0x3C9350, 0x1
+.global lbl_804C0711
+lbl_804C0711:
+	.incbin "baserom.dol", 0x3C9351, 0x1
+.global lbl_804C0712
+lbl_804C0712:
+	.incbin "baserom.dol", 0x3C9352, 0x1
+.global lbl_804C0713
+lbl_804C0713:
+	.incbin "baserom.dol", 0x3C9353, 0x1
+.global lbl_804C0714
+lbl_804C0714:
+	.incbin "baserom.dol", 0x3C9354, 0x4
+.global lbl_804C0718
+lbl_804C0718:
+	.incbin "baserom.dol", 0x3C9358, 0x8
+
 .section .data, "wa"
 .global lbl_803978E8
 lbl_803978E8:

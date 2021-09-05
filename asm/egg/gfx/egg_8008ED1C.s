@@ -1,5 +1,14 @@
 .include "macros.inc"
 
+.section .sdata2, "a"
+.balign 0x8
+.global lbl_804C0720
+lbl_804C0720:
+	.incbin "baserom.dol", 0x3C9360, 0x4
+.global lbl_804C0724
+lbl_804C0724:
+	.incbin "baserom.dol", 0x3C9364, 0x4
+
 .section .data, "wa"
 .balign 0x8
 .global lbl_80397918

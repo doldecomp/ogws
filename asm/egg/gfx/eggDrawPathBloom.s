@@ -1,5 +1,47 @@
 .include "macros.inc"
 
+.section .sdata2, "a"
+.balign 0x8
+.global lbl_804C0658
+lbl_804C0658:
+	.incbin "baserom.dol", 0x3C9298, 0x4
+.global lbl_804C065C
+lbl_804C065C:
+	.incbin "baserom.dol", 0x3C929C, 0x4
+.global lbl_804C0660
+lbl_804C0660:
+	.incbin "baserom.dol", 0x3C92A0, 0x4
+.global lbl_804C0664
+lbl_804C0664:
+	.incbin "baserom.dol", 0x3C92A4, 0x4
+.global lbl_804C0668
+lbl_804C0668:
+	.incbin "baserom.dol", 0x3C92A8, 0x4
+.global lbl_804C066C
+lbl_804C066C:
+	.incbin "baserom.dol", 0x3C92AC, 0x4
+.global lbl_804C0670
+lbl_804C0670:
+	.incbin "baserom.dol", 0x3C92B0, 0x4
+.global lbl_804C0674
+lbl_804C0674:
+	.incbin "baserom.dol", 0x3C92B4, 0x4
+.global lbl_804C0678
+lbl_804C0678:
+	.incbin "baserom.dol", 0x3C92B8, 0x4
+.global lbl_804C067C
+lbl_804C067C:
+	.incbin "baserom.dol", 0x3C92BC, 0x4
+.global lbl_804C0680
+lbl_804C0680:
+	.incbin "baserom.dol", 0x3C92C0, 0x8
+.global lbl_804C0688
+lbl_804C0688:
+	.incbin "baserom.dol", 0x3C92C8, 0x8
+.global lbl_804C0690
+lbl_804C0690:
+	.incbin "baserom.dol", 0x3C92D0, 0x8
+
 .section .rodata, "a"
 .balign 0x8
 .global lbl_80379318

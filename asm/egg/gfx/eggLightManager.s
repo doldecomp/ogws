@@ -1,33 +1,19 @@
 .include "macros.inc"
 
-.section .sdata2, "wa"
+.section .sdata2, "a"
 .balign 0x8
-# Color?
-.global lbl_804C05C0
-lbl_804C05C0:
-	.byte 0x00
-.global lbl_804C05C1
-lbl_804C05C1:
-	.byte 0x00
-.global lbl_804C05C2
-lbl_804C05C2:
-	.byte 0x00
-.global lbl_804C05C3
-lbl_804C05C3:
-	.byte 0xFF
-# Color?
-.global lbl_804C05C4
-lbl_804C05C4:
-	.byte 0xFF
-.global lbl_804C05C5
-lbl_804C05C5:
-	.byte 0xFF
-.global lbl_804C05C6
-lbl_804C05C6:
-	.byte 0xFF
-.global lbl_804C05C7
-lbl_804C05C7:
-	.byte 0xFF
+.global lbl_804C0730
+lbl_804C0730:
+	.incbin "baserom.dol", 0x3C9370, 0x1
+.global lbl_804C0731
+lbl_804C0731:
+	.incbin "baserom.dol", 0x3C9371, 0x1
+.global lbl_804C0732
+lbl_804C0732:
+	.incbin "baserom.dol", 0x3C9372, 0x1
+.global lbl_804C0733
+lbl_804C0733:
+	.incbin "baserom.dol", 0x3C9373, 0x5
 
 .section .sdata, "wa"
 .balign 0x8

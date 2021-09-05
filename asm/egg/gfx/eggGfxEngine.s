@@ -1,5 +1,14 @@
 .include "macros.inc"
 
+.section .sdata2, "a"
+.balign 0x8
+.global lbl_804C0728
+lbl_804C0728:
+	.incbin "baserom.dol", 0x3C9368, 0x2
+.global lbl_804C072A
+lbl_804C072A:
+	.incbin "baserom.dol", 0x3C936A, 0x6
+
 .section .sbss, "wa"
 .balign 0x8
 .global spInstance__Q23EGG9GfxEngine

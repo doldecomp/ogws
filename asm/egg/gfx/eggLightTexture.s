@@ -1,7 +1,106 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .sdata2, "a"
+.balign 0x8
+.global lbl_804C0738
+lbl_804C0738:
+	.incbin "baserom.dol", 0x3C9378, 0x4
+.global lbl_804C073C
+lbl_804C073C:
+	.incbin "baserom.dol", 0x3C937C, 0x4
+.global lbl_804C0740
+lbl_804C0740:
+	.incbin "baserom.dol", 0x3C9380, 0x8
+.global lbl_804C0748
+lbl_804C0748:
+	.incbin "baserom.dol", 0x3C9388, 0x8
+.global lbl_804C0750
+lbl_804C0750:
+	.incbin "baserom.dol", 0x3C9390, 0x8
+.global lbl_804C0758
+lbl_804C0758:
+	.incbin "baserom.dol", 0x3C9398, 0x4
+.global lbl_804C075C
+lbl_804C075C:
+	.incbin "baserom.dol", 0x3C939C, 0x4
 
+.section .sdata, "wa"
+.balign 0x8
+.global lbl_804BD4B0
+lbl_804BD4B0:
+	.incbin "baserom.dol", 0x3C7130, 0x4
+.global lbl_804BD4B4
+lbl_804BD4B4:
+	# (const char *) "bltex"
+	.long lbl_80379718
+
+.section .sbss, "wa"
+.balign 0x8
+.global lbl_804BEC08
+lbl_804BEC08:
+	.skip 0x2
+.global lbl_804BEC0A
+lbl_804BEC0A:
+	.skip 0x2
+.global lbl_804BEC0C
+lbl_804BEC0C:
+	.skip 0x2
+.global lbl_804BEC0E
+lbl_804BEC0E:
+	.skip 0x2
+.global lbl_804BEC10
+lbl_804BEC10:
+	.skip 0x2
+.global lbl_804BEC12
+lbl_804BEC12:
+	.skip 0x2
+.global lbl_804BEC14
+lbl_804BEC14:
+	.skip 0x2
+.global lbl_804BEC16
+lbl_804BEC16:
+	.skip 0x2
+.global lbl_804BEC18
+lbl_804BEC18:
+	.skip 0x8
+
+.section .rodata, "a"
+.balign 0x8
+.global lbl_803796A0
+lbl_803796A0:
+	.incbin "baserom.dol", 0x3757A0, 0xC
+.global lbl_803796AC
+lbl_803796AC:
+	.incbin "baserom.dol", 0x3757AC, 0xC
+.global lbl_803796B8
+lbl_803796B8:
+	.incbin "baserom.dol", 0x3757B8, 0x10
+.global lbl_803796C8
+lbl_803796C8:
+	.incbin "baserom.dol", 0x3757C8, 0x38
+.global lbl_80379700
+lbl_80379700:
+	.incbin "baserom.dol", 0x375800, 0x18
+.global lbl_80379718
+lbl_80379718:
+	.incbin "baserom.dol", 0x375818, 0x108
+
+.section .data, "wa"
+.balign 0x8
+.global lbl_803979C0
+lbl_803979C0:
+	.incbin "baserom.dol", 0x393AC0, 0xA4
+.global lbl_80397A64
+lbl_80397A64:
+	.incbin "baserom.dol", 0x393B64, 0x14
+
+.section .bss, "wa"
+.balign 0x8
+.global lbl_8040A910
+lbl_8040A910:
+	.skip 0x28
+
+.section .text, "ax"
 .global func_800914A0
 func_800914A0:
 /* 800914A0 0008C3A0  94 21 FF E0 */	stwu r1, -0x20(r1)

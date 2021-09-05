@@ -1,5 +1,86 @@
 .include "macros.inc"
 
+.section .sdata2, "a"
+.balign 0x8
+.global lbl_804C0698
+lbl_804C0698:
+	.incbin "baserom.dol", 0x3C92D8, 0x4
+.global lbl_804C069C
+lbl_804C069C:
+	.incbin "baserom.dol", 0x3C92DC, 0x4
+.global lbl_804C06A0
+lbl_804C06A0:
+	.incbin "baserom.dol", 0x3C92E0, 0x4
+.global lbl_804C06A4
+lbl_804C06A4:
+	.incbin "baserom.dol", 0x3C92E4, 0x4
+.global lbl_804C06A8
+lbl_804C06A8:
+	.incbin "baserom.dol", 0x3C92E8, 0x4
+.global lbl_804C06AC
+lbl_804C06AC:
+	.incbin "baserom.dol", 0x3C92EC, 0x7
+.global lbl_804C06B3
+lbl_804C06B3:
+	.incbin "baserom.dol", 0x3C92F3, 0x1
+.global lbl_804C06B4
+lbl_804C06B4:
+	.incbin "baserom.dol", 0x3C92F4, 0x4
+.global lbl_804C06B8
+lbl_804C06B8:
+	.incbin "baserom.dol", 0x3C92F8, 0x4
+.global lbl_804C06BC
+lbl_804C06BC:
+	.incbin "baserom.dol", 0x3C92FC, 0x4
+.global lbl_804C06C0
+lbl_804C06C0:
+	.incbin "baserom.dol", 0x3C9300, 0x4
+.global lbl_804C06C4
+lbl_804C06C4:
+	.incbin "baserom.dol", 0x3C9304, 0x4
+.global lbl_804C06C8
+lbl_804C06C8:
+	.incbin "baserom.dol", 0x3C9308, 0x8
+.global lbl_804C06D0
+lbl_804C06D0:
+	.incbin "baserom.dol", 0x3C9310, 0x8
+.global lbl_804C06D8
+lbl_804C06D8:
+	.incbin "baserom.dol", 0x3C9318, 0x1
+.global lbl_804C06D9
+lbl_804C06D9:
+	.incbin "baserom.dol", 0x3C9319, 0x1
+.global lbl_804C06DA
+lbl_804C06DA:
+	.incbin "baserom.dol", 0x3C931A, 0x1
+.global lbl_804C06DB
+lbl_804C06DB:
+	.incbin "baserom.dol", 0x3C931B, 0x1
+.global lbl_804C06DC
+lbl_804C06DC:
+	.incbin "baserom.dol", 0x3C931C, 0x1
+.global lbl_804C06DD
+lbl_804C06DD:
+	.incbin "baserom.dol", 0x3C931D, 0x1
+.global lbl_804C06DE
+lbl_804C06DE:
+	.incbin "baserom.dol", 0x3C931E, 0x1
+.global lbl_804C06DF
+lbl_804C06DF:
+	.incbin "baserom.dol", 0x3C931F, 0x1
+.global lbl_804C06E0
+lbl_804C06E0:
+	.incbin "baserom.dol", 0x3C9320, 0x1
+.global lbl_804C06E1
+lbl_804C06E1:
+	.incbin "baserom.dol", 0x3C9321, 0x1
+.global lbl_804C06E2
+lbl_804C06E2:
+	.incbin "baserom.dol", 0x3C9322, 0x6
+.global lbl_804C06E8
+lbl_804C06E8:
+	.incbin "baserom.dol", 0x3C9328, 0x8
+
 .section .data, "wa"
 .balign 0x8
 .global vt_803977B0
