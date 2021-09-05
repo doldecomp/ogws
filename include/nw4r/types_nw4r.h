@@ -83,6 +83,7 @@ namespace nw4r
 		struct ResMat;
 		struct ResTexPlttInfo;
 		struct ResShp;
+		struct ResFog;
 		struct ResAnmChr;
 		struct ResAnmVis;
 		struct ResAnmClr;
@@ -90,6 +91,7 @@ namespace nw4r
 		struct ResAnmTexSrt;
 		struct ResAnmShp;
 		struct ResAnmScn;
+		struct ResAnmFog;
 		struct ResVtxPos;
 		struct ResVtxNrm;
 		struct ResVtxClr;
@@ -105,6 +107,7 @@ namespace nw4r
 		struct LightSetting;
 		struct LightSetData;
 		struct AmbLightObj;
+		struct Fog;
 	}
 
 	namespace lyt

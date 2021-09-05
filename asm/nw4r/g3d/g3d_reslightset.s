@@ -512,8 +512,8 @@ lbl_80059FE8:
 /* 8005A008 00054F08  38 21 00 60 */	addi r1, r1, 0x60
 /* 8005A00C 00054F0C  4E 80 00 20 */	blr 
 
-.global func_8005A010
-func_8005A010:
+.global GetAnmResult__Q34nw4r3g3d9ResAnmFogCFPQ34nw4r3g3d12FogAnmResultf
+GetAnmResult__Q34nw4r3g3d9ResAnmFogCFPQ34nw4r3g3d12FogAnmResultf:
 /* 8005A010 00054F10  94 21 FF B0 */	stwu r1, -0x50(r1)
 /* 8005A014 00054F14  7C 08 02 A6 */	mflr r0
 /* 8005A018 00054F18  90 01 00 54 */	stw r0, 0x54(r1)

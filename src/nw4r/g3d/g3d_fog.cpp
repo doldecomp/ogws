@@ -14,22 +14,23 @@ namespace nw4r
             {
                 FogData& rFogData = mFogData.ref();
                 
-                rFogData.INT_0x0 = 0;
+                rFogData.mFogType = GX_FOG_TYPE_0;
 
-                for (int i = 0; i < 4; i++)
-                {
-                    rFogData.FLOATS_0x4[i] = 0.0f;
-                }
+                rFogData.mStartZ = 0.0f;
+                rFogData.mEndZ = 0.0f;
+                rFogData.mNear = 0.0f;
+                rFogData.mFar = 0.0f;
 
-                rFogData.mColor.mChannels.a = 0;
-                rFogData.mColor.mChannels.b = 0;
-                rFogData.mColor.mChannels.g = 0;
-                rFogData.mColor.mChannels.r = 0;
+                rFogData.mColor.a = 0;
+                rFogData.mColor.b = 0;
+                rFogData.mColor.g = 0;
+                rFogData.mColor.r = 0;
                 
-                rFogData.BYTE_0x18 = 0;
+                rFogData.mFogRangeAdjEnable = 0;
                 rFogData.BYTE_0x19 = 0;
 
-                for (int i = 0; i < 11; i++)
+                rFogData.mAdjTableWidth = 0;
+                for (int i = 0; i < 10; i++)
                 {
                     rFogData.mAdjTable[i] = 0;
                 }
@@ -73,14 +74,14 @@ namespace nw4r
             return NULL;
         }
 
-        void Fog::SetFogRangeAdjParam(u16 param1, u16 param2, const math::MTX44& rMtx)
+        void Fog::SetFogRangeAdjParam(u16 param1, u16 width, const math::MTX44& rMtx)
         {
             FogData& rFogData = mFogData.ref();
 
             if (mFogData.IsValid())
             {
-                rFogData.mAdjTable[0] = param2;
-                GXInitFogAdjTable(&rFogData.mAdjTable[1], param1, rMtx);
+                rFogData.mAdjTableWidth = width;
+                GXInitFogAdjTable(rFogData.mAdjTable, param1, rMtx);
             }
         }
 
@@ -90,13 +91,13 @@ namespace nw4r
             
             if (mFogData.IsValid())
             {
-                if (rFogData.INT_0x0 != 0)
+                if (rFogData.mFogType != GX_FOG_TYPE_0)
                 {
-                    GXSetFogRangeAdj(rFogData.BYTE_0x18, rFogData.mAdjTable[0], &rFogData.mAdjTable[1]);
+                    GXSetFogRangeAdj(rFogData.mFogRangeAdjEnable, rFogData.mAdjTableWidth, rFogData.mAdjTable);
                 }
 
-                GXSetFog(rFogData.INT_0x0, rFogData.mColor, rFogData.FLOATS_0x4[0], rFogData.FLOATS_0x4[1],
-                    rFogData.FLOATS_0x4[2], rFogData.FLOATS_0x4[3]);
+                GXSetFog(rFogData.mFogType, rFogData.mColor, rFogData.mStartZ, rFogData.mEndZ,
+                    rFogData.mNear, rFogData.mFar);
             }
         }
     }

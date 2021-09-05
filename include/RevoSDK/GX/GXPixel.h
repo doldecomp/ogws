@@ -6,7 +6,14 @@
 extern "C" {
 #endif
 
-UNKTYPE GXSetFog(int, GXColor, float, float, float nearz, float farz);
+typedef enum _GXFogType
+{
+    GX_FOG_TYPE_0,
+    GX_FOG_TYPE_1,
+    GX_FOG_TYPE_2,
+} GXFogType;
+
+UNKTYPE GXSetFog(GXFogType, GXColor, float startz, float endz, float nearz, float farz);
 
 UNKTYPE GXInitFogAdjTable(u16 *table, u16 width, const float (*)[4]);
 UNKTYPE GXSetFogRangeAdj(u8, u16, u16 *table);

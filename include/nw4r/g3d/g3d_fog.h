@@ -4,6 +4,7 @@
 #include "g3d_rescommon.h"
 #include "math_types.h"
 #include "ut_Color.h"
+#include <GX/GXPixel.h>
 
 namespace nw4r
 {
@@ -11,12 +12,16 @@ namespace nw4r
     {
         struct FogData
         {
-            u32 INT_0x0;
-            f32 FLOATS_0x4[4];
-            ut::Color mColor;
-            u8 BYTE_0x18;
+            GXFogType mFogType; // at 0x0
+            f32 mStartZ; // at 0x4
+            f32 mEndZ; // at 0x8
+            f32 mNear; // at 0xC
+            f32 mFar; // at 0x10
+            GXColor mColor; // at 0x14
+            u8 mFogRangeAdjEnable; // at 0x18
             u8 BYTE_0x19;
-            u16 mAdjTable[11]; // at 0x1A
+            u16 mAdjTableWidth; // at 0x1A
+            u16 mAdjTable[10]; // at 0x1C
         };
 
         struct Fog
@@ -30,6 +35,43 @@ namespace nw4r
             void * CopyTo(void *) const;
             void SetFogRangeAdjParam(u16, u16, const math::MTX44&);
             void SetGP() const;
+
+            bool IsValid() const { return mFogData.IsValid(); }
+
+            bool IsFogRangeAdjEnable() const
+            {
+                return (IsValid() && mFogData.ref().mFogRangeAdjEnable != 1) ? true : false;
+            }
+
+            void SetFogColor(GXColor c)
+            {
+                if (IsValid()) mFogData.ref().mColor = c;
+            }
+
+            void SetFogType(GXFogType fog)
+            {
+                if (IsValid()) mFogData.ref().mFogType = fog;
+            }
+
+            void SetNearFar(f32 near, f32 far)
+            {
+                if (IsValid())
+                {
+                    FogData& ref = mFogData.ref();
+                    ref.mNear = near;
+                    ref.mFar = far;
+                }
+            }
+
+            void SetZ(f32 start, f32 end)
+            {
+                if (IsValid())
+                {
+                    FogData& ref = mFogData.ref();
+                    ref.mStartZ = start;
+                    ref.mEndZ = end;
+                }
+            } 
         };
     }
 }
