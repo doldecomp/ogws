@@ -1,7 +1,38 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .sdata2, "a"
+.balign 0x8
+.global lbl_804C0778
+lbl_804C0778:
+	.incbin "baserom.dol", 0x3C93B8, 0x4
+.global lbl_804C077C
+lbl_804C077C:
+	.incbin "baserom.dol", 0x3C93BC, 0x4
+.global lbl_804C0780
+lbl_804C0780:
+	.incbin "baserom.dol", 0x3C93C0, 0x8
 
+.section .rodata, "a"
+.balign 0x8
+.global lbl_803798F8
+lbl_803798F8:
+	.incbin "baserom.dol", 0x3759F8, 0x78
+    
+.section .data, "wa"
+.balign 0x8
+.global lbl_80397B28
+lbl_80397B28:
+    .long 0
+    .long 0
+    .long func_80094108
+.global lbl_80397B34
+lbl_80397B34:
+	.incbin "baserom.dol", 0x393C34, 0x28
+.global lbl_80397B5C
+lbl_80397B5C:
+	.incbin "baserom.dol", 0x393C5C, 0x1C
+
+.section .text, "ax"
 .global func_80093C98
 func_80093C98:
 /* 80093C98 0008EB98  94 21 FF C0 */	stwu r1, -0x40(r1)
