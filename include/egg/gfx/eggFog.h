@@ -1,7 +1,6 @@
 #ifndef EGG_GFX_FOG_H
 #define EGG_GFX_FOG_H
 #include "types_egg.h"
-#include "eggBitFlag.h"
 #include "g3d_fog.h"
 
 namespace EGG
@@ -18,7 +17,7 @@ namespace EGG
         u8 mFlags; // at 0x18
 
     public:
-        enum
+        enum FogFlag
         {
             IS_INITIALIZED = 1,
         };
@@ -37,7 +36,7 @@ namespace EGG
         void resetFlags()
         {
             // Typo?
-            mFlags |= 0xFFFE;
+            mFlags |= ~IS_INITIALIZED;
         }
     };
 }
