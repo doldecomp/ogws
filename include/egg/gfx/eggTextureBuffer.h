@@ -30,9 +30,6 @@ namespace EGG
             ENodeState mState; // at 0x30
             BufferNode *mpNext; // at 0x34
             BufferNode *mpPrev; // at 0x38
-
-        private:
-            static GXColor sDefaultColor;
         };
 
         static void initialize(u32, Heap *);
