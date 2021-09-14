@@ -248,8 +248,8 @@ SetCurrentCamera__Q34nw4r3g3d7ScnRootFi:
 /* 80071520 0006C420  98 83 00 F4 */	stb r4, 0xf4(r3)
 /* 80071524 0006C424  4E 80 00 20 */	blr 
 
-.global func_80071528
-func_80071528:
+.global GetFog__Q34nw4r3g3d7ScnRootFi
+GetFog__Q34nw4r3g3d7ScnRootFi:
 /* 80071528 0006C428  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8007152C 0006C42C  7C 08 02 A6 */	mflr r0
 /* 80071530 0006C430  2C 04 00 00 */	cmpwi r4, 0

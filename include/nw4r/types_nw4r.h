@@ -108,6 +108,7 @@ namespace nw4r
 		struct LightSetData;
 		struct AmbLightObj;
 		struct Fog;
+		struct ScnRoot;
 	}
 
 	namespace lyt

@@ -1170,8 +1170,8 @@ lbl_8005A878:
 /* 8005A88C 0005578C  38 60 00 00 */	li r3, 0
 /* 8005A890 00055790  4E 80 00 20 */	blr 
 
-.global func_8005A894
-func_8005A894:
+.global GetResAnmFogByRefNumber__Q34nw4r3g3d9ResAnmScnCFUl
+GetResAnmFogByRefNumber__Q34nw4r3g3d9ResAnmScnCFUl:
 /* 8005A894 00055794  80 63 00 00 */	lwz r3, 0(r3)
 /* 8005A898 00055798  A0 A3 00 3E */	lhz r5, 0x3e(r3)
 /* 8005A89C 0005579C  7C 05 20 40 */	cmplw r5, r4

@@ -13,6 +13,9 @@ namespace EGG
     struct DrawGX;
 
     struct Fog;
+    struct FogManager;
+
+    struct eggScreen;
 
     struct GXUtility;
     struct ResTIMG;

@@ -13,7 +13,7 @@ namespace EGG
     void Fog::reset()
     {
         mFlags = 0;
-        resetFlags();
+        setFlags();
 
         mColor.a = 0xFF;
         mColor.b = 0xFF;
@@ -71,7 +71,7 @@ namespace EGG
         else
         {
             mFogType = GX_FOG_TYPE_0;
-            resetFlags();
+            setFlags();
         }
     }
 

@@ -7,7 +7,7 @@ namespace EGG
 {
     class Fog
     {
-    private:
+    public:
         GXColor mColor; // at 0x0
         f32 mStartZ; // at 0x4
         f32 mEndZ; // at 0x8
@@ -22,18 +22,19 @@ namespace EGG
             IS_INITIALIZED = 1,
         };
 
+    public:
         // Symbols are unofficial
 
         Fog();
-        virtual ~Fog();
-        virtual void reset();
-        virtual UNKTYPE VF_0x10(UNKTYPE);
-        virtual void setGX() const;
+        virtual ~Fog(); // at 0x8
+        virtual void reset(); // at 0xC
+        virtual UNKTYPE VF_0x10(UNKTYPE); // at 0x10
+        virtual void setGX() const; // at 0x14
         
         void initialize(const nw4r::g3d::ResAnmFog&, f32);
         void setG3D(nw4r::g3d::Fog&) const;
 
-        void resetFlags()
+        void setFlags()
         {
             // Typo?
             mFlags |= ~IS_INITIALIZED;
