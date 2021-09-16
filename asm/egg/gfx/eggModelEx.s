@@ -1,7 +1,56 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .sdata, "wa"
+.balign 0x8
+.global lbl_804BD4C0
+lbl_804BD4C0:
+	.incbin "baserom.dol", 0x3C7140, 0x8
 
+.section .rodata, "a"
+.balign 0x8
+.global lbl_80379970
+lbl_80379970:
+	.incbin "baserom.dol", 0x375A70, 0x3C
+.global lbl_803799AC
+lbl_803799AC:
+    .string "eggModelEx.cpp"
+    .string "pModel"
+    .string "mpBV"
+    .string "mpBV == NULL && !( mFlag & cFlag_HasOriginalBV )"
+    .string "RFL"
+    .string "Unknown"
+    .string "pMin"
+    .string "pMax"
+    .string "shapeIndex < getNumShape()"
+    .string "shp.IsValid()"
+    .string "NodeTree"
+    .string "NodeMix"
+    .string "pWorldMtxArray != NULL"
+    .string "pViewMtxArray != NULL"
+    .string "!( drawFlag & cDrawShape_None )"
+    .string "type < cSearchType_Max"
+    .string "mpBV == NULL"
+    .string "matIndex < getNumMaterial()"
+
+.section .data, "wa"
+.balign 0x8
+.global lbl_80397B78
+lbl_80397B78:
+	.incbin "baserom.dol", 0x393C78, 0xC
+.global lbl_80397B84
+lbl_80397B84:
+	.incbin "baserom.dol", 0x393C84, 0xC
+.global lbl_80397B90
+lbl_80397B90:
+	.incbin "baserom.dol", 0x393C90, 0x70
+.global lbl_80397C00
+lbl_80397C00:
+	.incbin "baserom.dol", 0x393D00, 0x1C
+.global lbl_80397C1C
+lbl_80397C1C:
+	.incbin "baserom.dol", 0x393D1C, 0x14
+
+.section .text, "ax"
 .global func_80094C58
 func_80094C58:
 /* 80094C58 0008FB58  94 21 FF D0 */	stwu r1, -0x30(r1)
