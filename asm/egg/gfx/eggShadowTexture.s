@@ -1,7 +1,112 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .sdata2, "a"
+.balign 0x8
+.global lbl_804C0880
+lbl_804C0880:
+	.single 0e1.05
+.global lbl_804C0884
+lbl_804C0884:
+	.long 0
+.global lbl_804C0888
+lbl_804C0888:
+	.single 0e-1
+.global lbl_804C088C
+lbl_804C088C:
+	.single 0e1
+.global lbl_804C0890
+lbl_804C0890:
+	.single 0e0.5
+.global lbl_804C0894
+lbl_804C0894:
+	.single 0e2
+.global lbl_804C0898
+lbl_804C0898:
+	.single 0e0.9999
+    .long 0
+.global lbl_804C08A0
+lbl_804C08A0:
+	.long 0x43300000
+    .long 0x00000000
+.global lbl_804C08A8
+lbl_804C08A8:
+	.single 0e-0.5
+.global lbl_804C08AC
+lbl_804C08AC:
+	.single 0e4
+.global lbl_804C08B0
+lbl_804C08B0:
+	.single 0e0.02
+    .long 0
+.global lbl_804C08B8
+lbl_804C08B8:
+	.long 0x43300000
+    .long 0x80000000
 
+.section .sbss2, "a"
+.balign 0x8
+# Color
+.global lbl_804C69F8
+lbl_804C69F8:
+	.skip 0x1
+.global lbl_804C69F9
+lbl_804C69F9:
+	.skip 0x1
+.global lbl_804C69FA
+lbl_804C69FA:
+	.skip 0x1
+.global lbl_804C69FB
+lbl_804C69FB:
+	.skip 0x5
+
+.section .sbss, "wa"
+.balign 0x8
+# Flags?
+.global lbl_804BEC48
+lbl_804BEC48:
+	.skip 0x8
+
+.section .rodata, "a"
+.balign 0x8
+.global lbl_80379CD8
+lbl_80379CD8:
+	.long 0x28
+	.long 0x20
+	.long 0x28
+	.long 0x20
+.global lbl_80379CE8
+lbl_80379CE8:
+	.long 0x6
+	.long 0x5
+	.long 0x0
+.global lbl_80379CF4
+lbl_80379CF4:
+	.string "eggShadowTexture.cpp"
+    .string "Can't use this format for shadow texture."
+    .string "pMdl"
+    .string "m_effectMtxNum < EFFECT_MTX_MAX"
+    .string "Too much texture."
+    .string "no such a texture."
+    .string "len > 0.f"
+    .string "m_effectMtxSet[i].m_texSrt.IsValid()"
+    .string "count_calc == count_draw"
+    .string "Width range over."
+    .string "Height range over."
+
+.section .data, "wa"
+.balign 0x8
+.global __vt__Q23EGG13ShadowTexture
+__vt__Q23EGG13ShadowTexture:
+    .long 0
+    .long 0
+    .long __dt__Q23EGG13ShadowTextureFv
+    .long configure__Q23EGG10CapTextureFv
+    .long initTexObj__Q23EGG10CpuTextureCFP9_GXTexObj
+    .long loadTexObj__Q23EGG10CapTextureF11_GXTexMapID
+    .long func_8009B1EC
+    .long func_8009665C
+
+.section .text, "ax"
 .global func_8009AF30
 func_8009AF30:
 /* 8009AF30 00095E30  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -16,11 +121,11 @@ func_8009AF30:
 /* 8009AF54 00095E54  38 C0 00 01 */	li r6, 1
 /* 8009AF58 00095E58  4B FF B5 F9 */	bl func_80096550
 /* 8009AF5C 00095E5C  C0 02 8E 68 */	lfs f0, lbl_804C0888-_SDA2_BASE_(r2)
-/* 8009AF60 00095E60  3C C0 80 39 */	lis r6, lbl_80397E80@ha
+/* 8009AF60 00095E60  3C C0 80 39 */	lis r6, __vt__Q23EGG13ShadowTexture@ha
 /* 8009AF64 00095E64  38 00 00 00 */	li r0, 0
 /* 8009AF68 00095E68  C0 42 8E 60 */	lfs f2, lbl_804C0880-_SDA2_BASE_(r2)
 /* 8009AF6C 00095E6C  C0 22 8E 64 */	lfs f1, lbl_804C0884-_SDA2_BASE_(r2)
-/* 8009AF70 00095E70  38 C6 7E 80 */	addi r6, r6, lbl_80397E80@l
+/* 8009AF70 00095E70  38 C6 7E 80 */	addi r6, r6, __vt__Q23EGG13ShadowTexture@l
 /* 8009AF74 00095E74  38 A0 00 30 */	li r5, 0x30
 /* 8009AF78 00095E78  38 80 00 FF */	li r4, 0xff
 /* 8009AF7C 00095E7C  38 FE 01 08 */	addi r7, r30, 0x108
@@ -192,6 +297,9 @@ lbl_8009B180:
 /* 8009B1E0 000960E0  7C 08 03 A6 */	mtlr r0
 /* 8009B1E4 000960E4  38 21 00 20 */	addi r1, r1, 0x20
 /* 8009B1E8 000960E8  4E 80 00 20 */	blr 
+
+.global func_8009B1EC
+func_8009B1EC:
 /* 8009B1EC 000960EC  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8009B1F0 000960F0  7C 08 02 A6 */	mflr r0
 /* 8009B1F4 000960F4  90 01 00 14 */	stw r0, 0x14(r1)
@@ -1444,6 +1552,9 @@ lbl_8009C3CC:
 /* 8009C3F0 000972F0  7C 08 03 A6 */	mtlr r0
 /* 8009C3F4 000972F4  38 21 00 10 */	addi r1, r1, 0x10
 /* 8009C3F8 000972F8  4E 80 00 20 */	blr 
+
+.global __dt__Q23EGG13ShadowTextureFv
+__dt__Q23EGG13ShadowTextureFv:
 /* 8009C3FC 000972FC  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8009C400 00097300  7C 08 02 A6 */	mflr r0
 /* 8009C404 00097304  2C 03 00 00 */	cmpwi r3, 0
