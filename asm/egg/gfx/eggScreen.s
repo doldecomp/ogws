@@ -1,7 +1,121 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .ctors, "a"
+.4byte __sinit_$$3eggScreen_cpp
 
+.section .sdata2, "a"
+.balign 0x8
+.global lbl_804C0850
+lbl_804C0850:
+	.incbin "baserom.dol", 0x3C9490, 0x4
+.global lbl_804C0854
+lbl_804C0854:
+	.incbin "baserom.dol", 0x3C9494, 0x4
+.global lbl_804C0858
+lbl_804C0858:
+	.incbin "baserom.dol", 0x3C9498, 0x4
+.global lbl_804C085C
+lbl_804C085C:
+	.incbin "baserom.dol", 0x3C949C, 0x4
+.global lbl_804C0860
+lbl_804C0860:
+	.incbin "baserom.dol", 0x3C94A0, 0x8
+.global lbl_804C0868
+lbl_804C0868:
+	.incbin "baserom.dol", 0x3C94A8, 0x8
+.global lbl_804C0870
+lbl_804C0870:
+	.incbin "baserom.dol", 0x3C94B0, 0x8
+.global lbl_804C0878
+lbl_804C0878:
+	.incbin "baserom.dol", 0x3C94B8, 0x8
+
+.section .sdata, "wa"
+.balign 0x8
+.global lbl_804BD4E8
+lbl_804BD4E8:
+	.incbin "baserom.dol", 0x3C7168, 0x4
+.global lbl_804BD4EC
+lbl_804BD4EC:
+	.incbin "baserom.dol", 0x3C716C, 0x4
+
+.section .sbss, "wa"
+.balign 0x8
+.global lbl_804BEC20
+lbl_804BEC20:
+	.skip 0x4
+.global lbl_804BEC24
+lbl_804BEC24:
+	.skip 0x4
+.global lbl_804BEC28
+lbl_804BEC28:
+	.skip 0x4
+.global lbl_804BEC2C
+lbl_804BEC2C:
+	.skip 0x4
+.global lbl_804BEC30
+lbl_804BEC30:
+	.skip 0x8
+.global lbl_804BEC38
+lbl_804BEC38:
+	.skip 0x8
+.global lbl_804BEC40
+lbl_804BEC40:
+	.skip 0x8
+
+.section .rodata, "a"
+.balign 0x8
+.global lbl_80379C50
+lbl_80379C50:
+	.string "eggScreen.cpp"
+    .string "maxX != NULL"
+    .string "maxY != NULL"
+    .string "spRoot == NULL || ( spRoot != NULL && spRoot == this )"
+    .string "GetSizeXMax() > 0"
+    .string "GetSizeYMax() > 0"
+
+.section .data, "wa"
+.balign 0x8
+.global __vt__Q23EGG6Screen
+__vt__Q23EGG6Screen:
+    .long 0
+    .long 0
+    .long lbl_8008D4BC
+    .long func_80099A04
+    .long 0x80099aec
+# Weak asserts
+.global lbl_80397E3C
+lbl_80397E3C:
+	.string "sizeX >= 0.f"
+    .balign 0x4
+.global lbl_80397E4C
+lbl_80397E4C:
+	.string "eggFrustum.h"
+    .balign 0x4
+.global lbl_80397E5C
+lbl_80397E5C:
+	.string "sizeY >= 0.f"
+    .balign 0x4
+.global lbl_80397E6C
+lbl_80397E6C:
+	.string "eggFrustum.h"
+    .balign 0x4
+
+.section .bss, "wa"
+.balign 0x8
+# Type: unk8[2]
+.global lbl_8040A938
+lbl_8040A938:
+	.skip 0x10
+.global lbl_8040A948
+lbl_8040A948:
+	.skip 0x10
+# Type: eggScreen
+.global lbl_8040A958
+lbl_8040A958:
+	.skip 0x68
+
+.section .text, "ax"
 .global func_800995CC
 func_800995CC:
 /* 800995CC 000944CC  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -137,9 +251,9 @@ func_8009973C:
 /* 800997A8 000946A8  D0 01 00 08 */	stfs f0, 8(r1)
 /* 800997AC 000946AC  48 00 70 55 */	bl func_800A0800
 /* 800997B0 000946B0  A0 1F 00 34 */	lhz r0, 0x34(r31)
-/* 800997B4 000946B4  3C 60 80 39 */	lis r3, lbl_80397E28@ha
+/* 800997B4 000946B4  3C 60 80 39 */	lis r3, __vt__Q23EGG6Screen@ha
 /* 800997B8 000946B8  C0 02 8E 30 */	lfs f0, lbl_804C0850-_SDA2_BASE_(r2)
-/* 800997BC 000946BC  38 63 7E 28 */	addi r3, r3, lbl_80397E28@l
+/* 800997BC 000946BC  38 63 7E 28 */	addi r3, r3, __vt__Q23EGG6Screen@l
 /* 800997C0 000946C0  60 00 00 01 */	ori r0, r0, 1
 /* 800997C4 000946C4  90 7F 00 38 */	stw r3, 0x38(r31)
 /* 800997C8 000946C8  D0 1F 00 40 */	stfs f0, 0x40(r31)
@@ -204,8 +318,8 @@ func_80099850:
 /* 8009989C 0009479C  D0 81 00 0C */	stfs f4, 0xc(r1)
 /* 800998A0 000947A0  48 00 6F 61 */	bl func_800A0800
 /* 800998A4 000947A4  A0 1E 00 34 */	lhz r0, 0x34(r30)
-/* 800998A8 000947A8  3C 60 80 39 */	lis r3, lbl_80397E28@ha
-/* 800998AC 000947AC  38 63 7E 28 */	addi r3, r3, lbl_80397E28@l
+/* 800998A8 000947A8  3C 60 80 39 */	lis r3, __vt__Q23EGG6Screen@ha
+/* 800998AC 000947AC  38 63 7E 28 */	addi r3, r3, __vt__Q23EGG6Screen@l
 /* 800998B0 000947B0  D3 DE 00 40 */	stfs f30, 0x40(r30)
 /* 800998B4 000947B4  60 00 00 01 */	ori r0, r0, 1
 /* 800998B8 000947B8  90 7E 00 38 */	stw r3, 0x38(r30)
@@ -250,9 +364,9 @@ func_80099924:
 /* 80099938 00094838  93 C1 00 08 */	stw r30, 8(r1)
 /* 8009993C 0009483C  7C 9E 23 78 */	mr r30, r4
 /* 80099940 00094840  48 00 6F 25 */	bl func_800A0864
-/* 80099944 00094844  3C 60 80 39 */	lis r3, lbl_80397E28@ha
+/* 80099944 00094844  3C 60 80 39 */	lis r3, __vt__Q23EGG6Screen@ha
 /* 80099948 00094848  A0 1F 00 34 */	lhz r0, 0x34(r31)
-/* 8009994C 0009484C  38 63 7E 28 */	addi r3, r3, lbl_80397E28@l
+/* 8009994C 0009484C  38 63 7E 28 */	addi r3, r3, __vt__Q23EGG6Screen@l
 /* 80099950 00094850  90 7F 00 38 */	stw r3, 0x38(r31)
 /* 80099954 00094854  60 00 00 01 */	ori r0, r0, 1
 /* 80099958 00094858  80 9E 00 40 */	lwz r4, 0x40(r30)
@@ -1015,9 +1129,9 @@ func_8009A3CC:
 /* 8009A408 00095308  7F A4 EB 78 */	mr r4, r29
 /* 8009A40C 0009530C  7F 83 E3 78 */	mr r3, r28
 /* 8009A410 00095310  48 00 64 55 */	bl func_800A0864
-/* 8009A414 00095314  3C 60 80 39 */	lis r3, lbl_80397E28@ha
+/* 8009A414 00095314  3C 60 80 39 */	lis r3, __vt__Q23EGG6Screen@ha
 /* 8009A418 00095318  A0 01 00 74 */	lhz r0, 0x74(r1)
-/* 8009A41C 0009531C  38 63 7E 28 */	addi r3, r3, lbl_80397E28@l
+/* 8009A41C 0009531C  38 63 7E 28 */	addi r3, r3, __vt__Q23EGG6Screen@l
 /* 8009A420 00095320  80 AD 98 A4 */	lwz r5, lbl_804BEC24-_SDA_BASE_(r13)
 /* 8009A424 00095324  90 61 00 78 */	stw r3, 0x78(r1)
 /* 8009A428 00095328  60 00 00 01 */	ori r0, r0, 1
@@ -1785,6 +1899,9 @@ lbl_8009AE14:
 /* 8009AEC4 00095DC4  7C 08 03 A6 */	mtlr r0
 /* 8009AEC8 00095DC8  38 21 00 20 */	addi r1, r1, 0x20
 /* 8009AECC 00095DCC  4E 80 00 20 */	blr 
+
+.global __sinit_$$3eggScreen_cpp
+__sinit_$$3eggScreen_cpp:
 /* 8009AED0 00095DD0  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8009AED4 00095DD4  7C 08 02 A6 */	mflr r0
 /* 8009AED8 00095DD8  3C 60 80 41 */	lis r3, lbl_8040A938@ha
