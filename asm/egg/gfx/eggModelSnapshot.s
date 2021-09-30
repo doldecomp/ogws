@@ -1,7 +1,47 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .sdata2, "a"
+.balign 0x8
+.global lbl_804C0788
+lbl_804C0788:
+	.single 0e0
+.global lbl_804C078C
+lbl_804C078C:
+	.single 0e1
+.global lbl_804C0790
+lbl_804C0790:
+	.single 0e0.5
 
+.section .rodata, "a"
+.balign 0x8
+.global lbl_80379AD8
+lbl_80379AD8:
+	.string "eggModelSnapshot.cpp"
+    .string "mdlMax > 0"
+    .string "m_mdlNum < m_mdlMax"
+    .string "pModel"
+    .string "ModelEx has no bounding info. Please create."
+    .string "pScreen"
+
+.section .data, "wa"
+.balign 0x8
+.global __vt__Q23EGG13ModelSnapshot
+__vt__Q23EGG13ModelSnapshot:
+    .long 0
+    .long 0
+    .long func_800969B4
+    .long configure__Q23EGG10CapTextureFv
+    .long initTexObj__Q23EGG10CpuTextureCFP9_GXTexObj
+    .long loadTexObj__Q23EGG10CapTextureF11_GXTexMapID
+    .long func_8009664C
+    .long func_8009665C
+.global lbl_80397C50
+lbl_80397C50:
+    .string "m_pSphere"
+.balign 0x4
+    .string "eggModelBoundingInfo.h"
+
+.section .text, "ax"
 .global func_80096550
 func_80096550:
 /* 80096550 00091450  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -17,10 +57,10 @@ func_80096550:
 /* 80096578 00091478  7C 7C 1B 78 */	mr r28, r3
 /* 8009657C 0009147C  4B FF 00 E1 */	bl __ct__Q23EGG10CpuTextureFUsUs9_GXTexFmt
 /* 80096580 00091480  C0 02 8D 68 */	lfs f0, lbl_804C0788-_SDA2_BASE_(r2)
-/* 80096584 00091484  3C 60 80 39 */	lis r3, lbl_80397C30@ha
+/* 80096584 00091484  3C 60 80 39 */	lis r3, __vt__Q23EGG13ModelSnapshot@ha
 /* 80096588 00091488  38 00 00 00 */	li r0, 0
 /* 8009658C 0009148C  2C 1F 00 00 */	cmpwi r31, 0
-/* 80096590 00091490  38 63 7C 30 */	addi r3, r3, lbl_80397C30@l
+/* 80096590 00091490  38 63 7C 30 */	addi r3, r3, __vt__Q23EGG13ModelSnapshot@l
 /* 80096594 00091494  B3 FC 00 2C */	sth r31, 0x2c(r28)
 /* 80096598 00091498  90 7C 00 14 */	stw r3, 0x14(r28)
 /* 8009659C 0009149C  B3 BC 00 2E */	sth r29, 0x2e(r28)
@@ -75,6 +115,9 @@ func_8009664C:
 /* 80096650 00091550  81 8C 00 1C */	lwz r12, 0x1c(r12)
 /* 80096654 00091554  7D 89 03 A6 */	mtctr r12
 /* 80096658 00091558  4E 80 04 20 */	bctr 
+
+.global func_8009665C
+func_8009665C:
 /* 8009665C 0009155C  38 A0 00 00 */	li r5, 0
 /* 80096660 00091560  C0 02 8D 6C */	lfs f0, lbl_804C078C-_SDA2_BASE_(r2)
 /* 80096664 00091564  B0 A3 00 32 */	sth r5, 0x32(r3)
@@ -310,6 +353,9 @@ lbl_80096984:
 /* 800969A8 000918A8  7C 08 03 A6 */	mtlr r0
 /* 800969AC 000918AC  38 21 00 70 */	addi r1, r1, 0x70
 /* 800969B0 000918B0  4E 80 00 20 */	blr 
+
+.global func_800969B4
+func_800969B4:
 /* 800969B4 000918B4  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 800969B8 000918B8  7C 08 02 A6 */	mflr r0
 /* 800969BC 000918BC  2C 03 00 00 */	cmpwi r3, 0
