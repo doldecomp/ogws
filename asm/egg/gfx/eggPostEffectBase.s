@@ -1,7 +1,220 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .sdata2, "a"
+.balign 0x8
+.global lbl_804C0798
+lbl_804C0798:
+	.incbin "baserom.dol", 0x3C93D8, 0x4
+.global lbl_804C079C
+lbl_804C079C:
+	.incbin "baserom.dol", 0x3C93DC, 0x4
+.global lbl_804C07A0
+lbl_804C07A0:
+	.incbin "baserom.dol", 0x3C93E0, 0x8
+.global lbl_804C07A8
+lbl_804C07A8:
+	.incbin "baserom.dol", 0x3C93E8, 0x1
+.global lbl_804C07A9
+lbl_804C07A9:
+	.incbin "baserom.dol", 0x3C93E9, 0x1
+.global lbl_804C07AA
+lbl_804C07AA:
+	.incbin "baserom.dol", 0x3C93EA, 0x1
+.global lbl_804C07AB
+lbl_804C07AB:
+	.incbin "baserom.dol", 0x3C93EB, 0x1
+.global lbl_804C07AC
+lbl_804C07AC:
+	.incbin "baserom.dol", 0x3C93EC, 0x4
+.global lbl_804C07B0
+lbl_804C07B0:
+	.incbin "baserom.dol", 0x3C93F0, 0x1
+.global lbl_804C07B1
+lbl_804C07B1:
+	.incbin "baserom.dol", 0x3C93F1, 0x1
+.global lbl_804C07B2
+lbl_804C07B2:
+	.incbin "baserom.dol", 0x3C93F2, 0x1
+.global lbl_804C07B3
+lbl_804C07B3:
+	.incbin "baserom.dol", 0x3C93F3, 0x1
+.global lbl_804C07B4
+lbl_804C07B4:
+	.incbin "baserom.dol", 0x3C93F4, 0x4
+.global lbl_804C07B8
+lbl_804C07B8:
+	.incbin "baserom.dol", 0x3C93F8, 0x4
+.global lbl_804C07BC
+lbl_804C07BC:
+	.incbin "baserom.dol", 0x3C93FC, 0x4
+.global lbl_804C07C0
+lbl_804C07C0:
+	.incbin "baserom.dol", 0x3C9400, 0x8
+.global lbl_804C07C8
+lbl_804C07C8:
+	.incbin "baserom.dol", 0x3C9408, 0x8
+.global lbl_804C07D0
+lbl_804C07D0:
+	.incbin "baserom.dol", 0x3C9410, 0x8
+.global lbl_804C07D8
+lbl_804C07D8:
+	.incbin "baserom.dol", 0x3C9418, 0x4
+.global lbl_804C07DC
+lbl_804C07DC:
+	.incbin "baserom.dol", 0x3C941C, 0x4
+.global lbl_804C07E0
+lbl_804C07E0:
+	.incbin "baserom.dol", 0x3C9420, 0x8
+.global lbl_804C07E8
+lbl_804C07E8:
+	.incbin "baserom.dol", 0x3C9428, 0x1
+.global lbl_804C07E9
+lbl_804C07E9:
+	.incbin "baserom.dol", 0x3C9429, 0x1
+.global lbl_804C07EA
+lbl_804C07EA:
+	.incbin "baserom.dol", 0x3C942A, 0x1
+.global lbl_804C07EB
+lbl_804C07EB:
+	.incbin "baserom.dol", 0x3C942B, 0x1
+.global lbl_804C07EC
+lbl_804C07EC:
+	.incbin "baserom.dol", 0x3C942C, 0x4
+.global lbl_804C07F0
+lbl_804C07F0:
+	.incbin "baserom.dol", 0x3C9430, 0x4
+.global lbl_804C07F4
+lbl_804C07F4:
+	.incbin "baserom.dol", 0x3C9434, 0x4
+.global lbl_804C07F8
+lbl_804C07F8:
+	.incbin "baserom.dol", 0x3C9438, 0x8
+.global lbl_804C0800
+lbl_804C0800:
+	.incbin "baserom.dol", 0x3C9440, 0x8
+.global lbl_804C0808
+lbl_804C0808:
+	.incbin "baserom.dol", 0x3C9448, 0x8
+.global lbl_804C0810
+lbl_804C0810:
+	.incbin "baserom.dol", 0x3C9450, 0x4
+.global lbl_804C0814
+lbl_804C0814:
+	.incbin "baserom.dol", 0x3C9454, 0x4
+.global lbl_804C0818
+lbl_804C0818:
+	.incbin "baserom.dol", 0x3C9458, 0x4
+.global lbl_804C081C
+lbl_804C081C:
+	.incbin "baserom.dol", 0x3C945C, 0x4
+.global lbl_804C0820
+lbl_804C0820:
+	.incbin "baserom.dol", 0x3C9460, 0x4
+.global lbl_804C0824
+lbl_804C0824:
+	.incbin "baserom.dol", 0x3C9464, 0x4
+.global lbl_804C0828
+lbl_804C0828:
+	.incbin "baserom.dol", 0x3C9468, 0x4
+.global lbl_804C082C
+lbl_804C082C:
+	.incbin "baserom.dol", 0x3C946C, 0x4
+.global lbl_804C0830
+lbl_804C0830:
+	.incbin "baserom.dol", 0x3C9470, 0x8
 
+.section .rodata, "a"
+.balign 0x8
+.global lbl_80379B48
+lbl_80379B48:
+    .string "eggPostEffectBase.cpp"
+	.string "mpCapTexture"
+    .string "scale >= 0.f"
+
+.section .data, "wa"
+.balign 0x8
+.global lbl_80397C78
+lbl_80397C78:
+    .long 0x80096de4
+    .long 0x80096dec
+    .long 0x80096df4
+    .long 0x80096dfc
+    .long 0x80096e04
+    .long 0x80096e18
+    .long 0x80096e2c
+    .long 0x80096e34
+    .long 0x80096e48
+    .long 0x80096e5c
+.global lbl_80397CA0
+lbl_80397CA0:
+    .long 0
+    .long 0
+    .long func_800969F4
+    .long 0x80096a6c
+    .long 0x80096a80
+    .long 0x80096a7c
+    .long 0x80096b20
+    .long 0x80096bc0
+    .long 0x80096c54
+    .long 0
+.global lbl_80397CC8
+lbl_80397CC8:
+	.incbin "baserom.dol", 0x393DC8, 0x10
+.global lbl_80397CD8
+lbl_80397CD8:
+	.incbin "baserom.dol", 0x393DD8, 0x10
+.global lbl_80397CE8
+lbl_80397CE8:
+    .long 0
+    .long 0
+    .long 0x8008a350
+    .long 0x80096a6c
+    .long 0x8009725c
+    .long 0x80097110
+    .long 0x80096b20
+    .long 0x80096bc0
+    .long 0x80096c54
+    .long 0
+.global lbl_80397D10
+lbl_80397D10:
+    .long 0
+    .long 0
+    .long 0x8008a310
+    .long 0x80096a6c
+    .long 0x80096a80
+    .long 0x800977e4
+    .long 0x8009786c
+    .long 0x80096bc0
+    .long 0x80096c54
+    .long 0
+.global lbl_80397D38
+lbl_80397D38:
+    .long 0
+    .long 0
+    .long 0x8008a390
+    .long 0x80096a6c
+    .long 0x80096a80
+    .long 0x80097c58
+    .long 0x80097cbc
+    .long 0x80096bc0
+    .long 0x80096c54
+    .long 0
+.global lbl_80397D60
+lbl_80397D60:
+    .long 0
+    .long 0
+    .long 0x8008d624
+    .long 0x80096a6c
+    .long 0x80096a80
+    .long 0x80098124
+    .long 0x8009834c
+    .long 0x80096bc0
+    .long 0x80096c54
+    .long 0
+
+.section .text, "ax"
+.global func_800969F4
+func_800969F4:
 /* 800969F4 000918F4  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 800969F8 000918F8  7C 08 02 A6 */	mflr r0
 /* 800969FC 000918FC  2C 03 00 00 */	cmpwi r3, 0

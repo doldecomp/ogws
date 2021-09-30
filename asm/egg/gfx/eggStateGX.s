@@ -9,7 +9,7 @@ lbl_80409720:
 lbl_80409740:
 	.skip 0x10
 
-.section .rodata, "wa"
+.section .rodata, "a"
 .balign 0x8
 # Some form of mtx (passed to GXSetIndTexMtx)
 .global lbl_80378C68

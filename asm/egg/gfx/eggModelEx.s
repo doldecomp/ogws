@@ -5,6 +5,21 @@
 .global lbl_804BD4C0
 lbl_804BD4C0:
 	.incbin "baserom.dol", 0x3C7140, 0x8
+.global lbl_804BD4C8
+lbl_804BD4C8:
+	.incbin "baserom.dol", 0x3C7148, 0x8
+.global lbl_804BD4D0
+lbl_804BD4D0:
+	.incbin "baserom.dol", 0x3C7150, 0x8
+.global lbl_804BD4D8
+lbl_804BD4D8:
+	.incbin "baserom.dol", 0x3C7158, 0x4
+.global lbl_804BD4DC
+lbl_804BD4DC:
+	.incbin "baserom.dol", 0x3C715C, 0x4
+.global lbl_804BD4E0
+lbl_804BD4E0:
+	.incbin "baserom.dol", 0x3C7160, 0x8
 
 .section .rodata, "a"
 .balign 0x8
