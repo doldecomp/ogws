@@ -1,19 +1,52 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .rodata, "a"
+.balign 0x8
+.global lbl_80379DF0
+lbl_80379DF0:
+	.string "eggIScnProc.cpp"
+    .string "mpDataSet != NULL"
+    .string "mpDataSet == NULL"
+    .string "procNum > 0"
+    .string "procIndex < getNumScnProc()"
+    .string "pScnGroup"
+    .string "is_push_back"
+    .string "is_remove"
+    .string "m"
+    .string "pScnProc"
+    .string "p_data"
+    .string "p_data->mpThis"
 
-.global func_8009C43C
-func_8009C43C:
-/* 8009C43C 0009733C  3C 80 80 39 */	lis r4, lbl_80397EA0@ha
+.section .data, "wa"
+.balign 0x8
+.global __vt__Q23EGG8IScnProc
+__vt__Q23EGG8IScnProc:
+    .long 0
+    .long 0
+    .long __dt__Q23EGG8IScnProcFv
+    .long 0
+.global lbl_80397EB0
+lbl_80397EB0:
+	.string "procIndex < getNumScnProc()"
+    .balign 0x4
+.global lbl_80397ECC
+lbl_80397ECC:
+	.string "eggIScnProc.h"
+    .balign 0x4
+
+.section .text, "ax"
+.global __ct__Q23EGG8IScnProcFv
+__ct__Q23EGG8IScnProcFv:
+/* 8009C43C 0009733C  3C 80 80 39 */	lis r4, __vt__Q23EGG8IScnProc@ha
 /* 8009C440 00097340  38 00 00 00 */	li r0, 0
-/* 8009C444 00097344  38 84 7E A0 */	addi r4, r4, lbl_80397EA0@l
+/* 8009C444 00097344  38 84 7E A0 */	addi r4, r4, __vt__Q23EGG8IScnProc@l
 /* 8009C448 00097348  90 03 00 04 */	stw r0, 4(r3)
 /* 8009C44C 0009734C  90 83 00 00 */	stw r4, 0(r3)
 /* 8009C450 00097350  B0 03 00 08 */	sth r0, 8(r3)
 /* 8009C454 00097354  4E 80 00 20 */	blr 
 
-.global func_8009C458
-func_8009C458:
+.global __dt__Q23EGG8IScnProcFv
+__dt__Q23EGG8IScnProcFv:
 /* 8009C458 00097358  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8009C45C 0009735C  7C 08 02 A6 */	mflr r0
 /* 8009C460 00097360  2C 03 00 00 */	cmpwi r3, 0
@@ -23,8 +56,8 @@ func_8009C458:
 /* 8009C470 00097370  7C 9C 23 78 */	mr r28, r4
 /* 8009C474 00097374  41 82 00 94 */	beq lbl_8009C508
 /* 8009C478 00097378  80 03 00 04 */	lwz r0, 4(r3)
-/* 8009C47C 0009737C  3C 80 80 39 */	lis r4, lbl_80397EA0@ha
-/* 8009C480 00097380  38 84 7E A0 */	addi r4, r4, lbl_80397EA0@l
+/* 8009C47C 0009737C  3C 80 80 39 */	lis r4, __vt__Q23EGG8IScnProc@ha
+/* 8009C480 00097380  38 84 7E A0 */	addi r4, r4, __vt__Q23EGG8IScnProc@l
 /* 8009C484 00097384  2C 00 00 00 */	cmpwi r0, 0
 /* 8009C488 00097388  90 83 00 00 */	stw r4, 0(r3)
 /* 8009C48C 0009738C  40 82 00 1C */	bne lbl_8009C4A8
@@ -69,8 +102,8 @@ lbl_8009C508:
 /* 8009C518 00097418  38 21 00 20 */	addi r1, r1, 0x20
 /* 8009C51C 0009741C  4E 80 00 20 */	blr 
 
-.global func_8009C520
-func_8009C520:
+.global createScnProc__Q23EGG8IScnProcFUsP12MEMAllocator
+createScnProc__Q23EGG8IScnProcFUsP12MEMAllocator:
 /* 8009C520 00097420  94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 8009C524 00097424  7C 08 02 A6 */	mflr r0
 /* 8009C528 00097428  90 01 00 34 */	stw r0, 0x34(r1)
@@ -140,7 +173,7 @@ lbl_8009C5B4:
 /* 8009C614 00097514  80 1D 00 04 */	lwz r0, 4(r29)
 /* 8009C618 00097518  7C E0 D2 14 */	add r7, r0, r26
 /* 8009C61C 0009751C  9B 87 00 0A */	stb r28, 0xa(r7)
-/* 8009C620 00097520  48 00 00 2D */	bl func_8009C64C
+/* 8009C620 00097520  48 00 00 2D */	bl setPriorityScnProc__Q23EGG8IScnProcFUsUcb
 /* 8009C624 00097524  3B FF 00 01 */	addi r31, r31, 1
 lbl_8009C628:
 /* 8009C628 00097528  A0 1D 00 08 */	lhz r0, 8(r29)
@@ -153,8 +186,8 @@ lbl_8009C628:
 /* 8009C644 00097544  38 21 00 30 */	addi r1, r1, 0x30
 /* 8009C648 00097548  4E 80 00 20 */	blr 
 
-.global func_8009C64C
-func_8009C64C:
+.global setPriorityScnProc__Q23EGG8IScnProcFUsUcb
+setPriorityScnProc__Q23EGG8IScnProcFUsUcb:
 /* 8009C64C 0009754C  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8009C650 00097550  7C 08 02 A6 */	mflr r0
 /* 8009C654 00097554  90 01 00 24 */	stw r0, 0x24(r1)
@@ -193,9 +226,9 @@ lbl_8009C6C4:
 /* 8009C6D0 000975D0  7C 60 FA 14 */	add r3, r0, r31
 /* 8009C6D4 000975D4  80 63 00 04 */	lwz r3, 4(r3)
 /* 8009C6D8 000975D8  41 82 00 2C */	beq lbl_8009C704
-/* 8009C6DC 000975DC  3C A0 80 0A */	lis r5, lbl_8009C908@ha
+/* 8009C6DC 000975DC  3C A0 80 0A */	lis r5, func_8009C908@ha
 /* 8009C6E0 000975E0  7F A4 EB 78 */	mr r4, r29
-/* 8009C6E4 000975E4  38 A5 C9 08 */	addi r5, r5, lbl_8009C908@l
+/* 8009C6E4 000975E4  38 A5 C9 08 */	addi r5, r5, func_8009C908@l
 /* 8009C6E8 000975E8  90 A3 00 EC */	stw r5, 0xec(r3)
 /* 8009C6EC 000975EC  80 03 00 E8 */	lwz r0, 0xe8(r3)
 /* 8009C6F0 000975F0  60 00 00 01 */	ori r0, r0, 1
@@ -204,9 +237,9 @@ lbl_8009C6C4:
 /* 8009C6FC 000975FC  4B FD 39 0D */	bl func_80070008
 /* 8009C700 00097600  48 00 00 28 */	b lbl_8009C728
 lbl_8009C704:
-/* 8009C704 00097604  3C A0 80 0A */	lis r5, lbl_8009C908@ha
+/* 8009C704 00097604  3C A0 80 0A */	lis r5, func_8009C908@ha
 /* 8009C708 00097608  7F A4 EB 78 */	mr r4, r29
-/* 8009C70C 0009760C  38 A5 C9 08 */	addi r5, r5, lbl_8009C908@l
+/* 8009C70C 0009760C  38 A5 C9 08 */	addi r5, r5, func_8009C908@l
 /* 8009C710 00097610  90 A3 00 EC */	stw r5, 0xec(r3)
 /* 8009C714 00097614  80 03 00 E8 */	lwz r0, 0xe8(r3)
 /* 8009C718 00097618  54 00 00 3C */	rlwinm r0, r0, 0, 0, 0x1e
@@ -226,8 +259,8 @@ lbl_8009C728:
 /* 8009C74C 0009764C  38 21 00 20 */	addi r1, r1, 0x20
 /* 8009C750 00097650  4E 80 00 20 */	blr 
 
-.global func_8009C754
-func_8009C754:
+.global pushBackToScnGroup__Q23EGG8IScnProcFPQ34nw4r3g3d8ScnGroup
+pushBackToScnGroup__Q23EGG8IScnProcFPQ34nw4r3g3d8ScnGroup:
 /* 8009C754 00097654  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8009C758 00097658  7C 08 02 A6 */	mflr r0
 /* 8009C75C 0009765C  2C 04 00 00 */	cmpwi r4, 0
@@ -289,8 +322,8 @@ lbl_8009C80C:
 /* 8009C828 00097728  38 21 00 20 */	addi r1, r1, 0x20
 /* 8009C82C 0009772C  4E 80 00 20 */	blr 
 
-.global func_8009C830
-func_8009C830:
+.global removeFromScnGroup__Q23EGG8IScnProcFPQ34nw4r3g3d8ScnGroup
+removeFromScnGroup__Q23EGG8IScnProcFPQ34nw4r3g3d8ScnGroup:
 /* 8009C830 00097730  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8009C834 00097734  7C 08 02 A6 */	mflr r0
 /* 8009C838 00097738  2C 04 00 00 */	cmpwi r4, 0
@@ -350,7 +383,12 @@ lbl_8009C8E4:
 /* 8009C8FC 000977FC  7C 08 03 A6 */	mtlr r0
 /* 8009C900 00097800  38 21 00 20 */	addi r1, r1, 0x20
 /* 8009C904 00097804  4E 80 00 20 */	blr 
-lbl_8009C908:
+
+# Either       drawProcFunc__Q23EGG8IScnProcFPQ34nw4r3g3d8ScnGroupb or
+# drawProcFuncNoGlobalState__Q23EGG8IScnProcFPQ34nw4r3g3d8ScnGroupb
+# Either way, this function is static according to WFU's map
+.global func_8009C908
+func_8009C908:
 /* 8009C908 00097808  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8009C90C 0009780C  7C 08 02 A6 */	mflr r0
 /* 8009C910 00097810  2C 03 00 00 */	cmpwi r3, 0
