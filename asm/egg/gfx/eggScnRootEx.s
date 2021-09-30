@@ -1,15 +1,49 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .rodata, "a"
+.balign 0x8
+.global lbl_80379BD0
+lbl_80379BD0:
+	.string "eggScnRootEx.cpp"
+    .string "pScnRoot"
+    .string "mpShadowTextureManager"
+    .string "mpScreen"
+    .string "Can't call this func if not isEnableDoubleBuffer()."
+    .string "pScnRoot != NULL"
 
+.section .data, "wa"
+.balign 0x8
+.global __vt__Q23EGG9ScnRootEx
+__vt__Q23EGG9ScnRootEx:
+    .long 0
+    .long 0
+    .long func_80098EE4
+    .long 0x80098ed0
+    .long 0x800994ac
+    .long func_80099508
+    .long 0x80099224
+    .long func_80099288
+    .long 0x800992a0
+    .long func_80099388
+    .long 0x800994a4
+    .long 0x800994a8
+.global lbl_80397E08
+lbl_80397E08:
+	.string "mpScreen"
+    .balign 0x4
+.global lbl_80397E14
+lbl_80397E14:
+	.string "eggScnRootEx.h"
+
+.section .text, "ax"
 .global func_80098DA8
 func_80098DA8:
 /* 80098DA8 00093CA8  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 80098DAC 00093CAC  7C 08 02 A6 */	mflr r0
-/* 80098DB0 00093CB0  3C E0 80 39 */	lis r7, lbl_80397DD8@ha
+/* 80098DB0 00093CB0  3C E0 80 39 */	lis r7, __vt__Q23EGG9ScnRootEx@ha
 /* 80098DB4 00093CB4  38 C0 00 00 */	li r6, 0
 /* 80098DB8 00093CB8  90 01 00 24 */	stw r0, 0x24(r1)
-/* 80098DBC 00093CBC  38 E7 7D D8 */	addi r7, r7, lbl_80397DD8@l
+/* 80098DBC 00093CBC  38 E7 7D D8 */	addi r7, r7, __vt__Q23EGG9ScnRootEx@l
 /* 80098DC0 00093CC0  38 A0 07 FF */	li r5, 0x7ff
 /* 80098DC4 00093CC4  38 00 00 3F */	li r0, 0x3f
 /* 80098DC8 00093CC8  93 E1 00 1C */	stw r31, 0x1c(r1)
@@ -107,8 +141,8 @@ func_80098EE4:
 /* 80098F00 00093E00  7C 7E 1B 78 */	mr r30, r3
 /* 80098F04 00093E04  41 82 00 74 */	beq lbl_80098F78
 /* 80098F08 00093E08  80 03 00 0C */	lwz r0, 0xc(r3)
-/* 80098F0C 00093E0C  3C 80 80 39 */	lis r4, lbl_80397DD8@ha
-/* 80098F10 00093E10  38 84 7D D8 */	addi r4, r4, lbl_80397DD8@l
+/* 80098F0C 00093E0C  3C 80 80 39 */	lis r4, __vt__Q23EGG9ScnRootEx@ha
+/* 80098F10 00093E10  38 84 7D D8 */	addi r4, r4, __vt__Q23EGG9ScnRootEx@l
 /* 80098F14 00093E14  2C 00 00 00 */	cmpwi r0, 0
 /* 80098F18 00093E18  90 83 00 50 */	stw r4, 0x50(r3)
 /* 80098F1C 00093E1C  41 82 00 1C */	beq lbl_80098F38
