@@ -1,7 +1,64 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .sdata2, "a"
+.balign 0x8
+.global lbl_804C0838
+lbl_804C0838:
+	.incbin "baserom.dol", 0x3C9478, 0x1
+.global lbl_804C0839
+lbl_804C0839:
+	.incbin "baserom.dol", 0x3C9479, 0x1
+.global lbl_804C083A
+lbl_804C083A:
+	.incbin "baserom.dol", 0x3C947A, 0x1
+.global lbl_804C083B
+lbl_804C083B:
+	.incbin "baserom.dol", 0x3C947B, 0x1
+.global lbl_804C083C
+lbl_804C083C:
+	.incbin "baserom.dol", 0x3C947C, 0x4
+.global lbl_804C0840
+lbl_804C0840:
+	.incbin "baserom.dol", 0x3C9480, 0x8
+.global lbl_804C0848
+lbl_804C0848:
+	.incbin "baserom.dol", 0x3C9488, 0x8
 
+.section .rodata, "a"
+.balign 0x8
+.global lbl_80379B78
+lbl_80379B78:
+	.string "eggPostEffectMask.cpp"
+    .string "getCapTexture()->getLoadMap() != mpDstScreen->getLoadMap()"
+
+.section .data, "wa"
+.balign 0x8
+.global lbl_80397D88
+lbl_80397D88:
+    .long 0
+    .long 0
+    .long 0x8008a3d0
+    .long 0x80096a6c
+    .long 0x80096a80
+    .long 0x80098678
+    .long 0x800986bc
+    .long 0x80096bc0
+    .long 0x80096c54
+    .long 0
+.global lbl_80397DB0
+lbl_80397DB0:
+    .long 0
+    .long 0
+    .long 0x8008a2d0
+    .long 0x80096a6c
+    .long 0x80096a80
+    .long 0x80098b60
+    .long 0x80098b98
+    .long 0x80096bc0
+    .long 0x80096c54
+    .long 0
+
+.section .text, "ax"
 .global func_8009863C
 func_8009863C:
 /* 8009863C 0009353C  94 21 FF F0 */	stwu r1, -0x10(r1)
