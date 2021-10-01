@@ -141,7 +141,7 @@ lbl_8009C580:
 lbl_8009C5A0:
 /* 8009C5A0 000974A0  2C 1E 00 00 */	cmpwi r30, 0
 /* 8009C5A4 000974A4  40 82 00 0C */	bne lbl_8009C5B0
-/* 8009C5A8 000974A8  80 6D 98 6C */	lwz r3, lbl_804BEBEC-_SDA_BASE_(r13)
+/* 8009C5A8 000974A8  80 6D 98 6C */	lwz r3, sAllocator__Q23EGG10G3DUtility-_SDA_BASE_(r13)
 /* 8009C5AC 000974AC  48 00 00 08 */	b lbl_8009C5B4
 lbl_8009C5B0:
 /* 8009C5B0 000974B0  7F C3 F3 78 */	mr r3, r30
@@ -386,7 +386,7 @@ lbl_8009C8E4:
 
 # Either       drawProcFunc__Q23EGG8IScnProcFPQ34nw4r3g3d8ScnGroupb or
 # drawProcFuncNoGlobalState__Q23EGG8IScnProcFPQ34nw4r3g3d8ScnGroupb
-# Either way, this function is static according to WFU's map
+# Need to look into GXUtility to see what this function does exactly
 .global func_8009C908
 func_8009C908:
 /* 8009C908 00097808  94 21 FF F0 */	stwu r1, -0x10(r1)

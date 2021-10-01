@@ -39,6 +39,7 @@ namespace nw4r
 		struct VEC2;
 		struct VEC3;
 		struct MTX34;
+		struct AABB;
 	}
 	
 	namespace snd
@@ -109,6 +110,10 @@ namespace nw4r
 		struct AmbLightObj;
 		struct Fog;
 		struct ScnRoot;
+		struct ScnProc;
+		struct ScnLeaf;
+		struct ScnObj;
+		struct ScnGroup;
 	}
 
 	namespace lyt

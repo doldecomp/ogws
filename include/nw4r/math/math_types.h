@@ -306,6 +306,16 @@ namespace nw4r
 		{
 			return PSVECMag(*in);
 		}
+
+        struct AABB
+        {
+            AABB() {}
+
+            void Set(const AABB *, const MTX34 *);
+
+            VEC3 VEC3_0x0;
+            VEC3 VEC3_0xC;
+        };
 	}
 }
 

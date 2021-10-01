@@ -5,17 +5,17 @@
 .global sManualProjectionMapMode__Q23EGG10G3DUtility
 sManualProjectionMapMode__Q23EGG10G3DUtility:
 	.skip 0x4
-.global lbl_804BEBEC
-lbl_804BEBEC:
+.global sAllocator__Q23EGG10G3DUtility
+sAllocator__Q23EGG10G3DUtility:
 	.skip 0x4
-.global lbl_804BEBF0
-lbl_804BEBF0:
+.global sTempMem__Q23EGG10G3DUtility
+sTempMem__Q23EGG10G3DUtility:
 	.skip 0x4
-.global lbl_804BEBF4
-lbl_804BEBF4:
+.global sTempMemIndex__Q23EGG10G3DUtility
+sTempMemIndex__Q23EGG10G3DUtility:
 	.skip 0x4
-.global lbl_804BEBF8
-lbl_804BEBF8:
+.global sTempMemSize__Q23EGG10G3DUtility
+sTempMemSize__Q23EGG10G3DUtility:
 	.skip 0x8
 
 .section .rodata, "a"
@@ -60,17 +60,17 @@ lbl_8008F37C:
 /* 8008F388 0008A288  7F C4 F3 78 */	mr r4, r30
 /* 8008F38C 0008A28C  38 A0 00 20 */	li r5, 0x20
 /* 8008F390 0008A290  48 01 3E E5 */	bl __nwa__FUlPQ23EGG4Heapi
-/* 8008F394 0008A294  90 6D 98 70 */	stw r3, lbl_804BEBF0-_SDA_BASE_(r13)
-/* 8008F398 0008A298  93 ED 98 78 */	stw r31, lbl_804BEBF8-_SDA_BASE_(r13)
+/* 8008F394 0008A294  90 6D 98 70 */	stw r3, sTempMem__Q23EGG10G3DUtility-_SDA_BASE_(r13)
+/* 8008F398 0008A298  93 ED 98 78 */	stw r31, sTempMemSize__Q23EGG10G3DUtility-_SDA_BASE_(r13)
 /* 8008F39C 0008A29C  48 00 00 10 */	b lbl_8008F3AC
 lbl_8008F3A0:
 /* 8008F3A0 0008A2A0  38 00 00 00 */	li r0, 0
-/* 8008F3A4 0008A2A4  90 0D 98 70 */	stw r0, lbl_804BEBF0-_SDA_BASE_(r13)
-/* 8008F3A8 0008A2A8  90 0D 98 78 */	stw r0, lbl_804BEBF8-_SDA_BASE_(r13)
+/* 8008F3A4 0008A2A4  90 0D 98 70 */	stw r0, sTempMem__Q23EGG10G3DUtility-_SDA_BASE_(r13)
+/* 8008F3A8 0008A2A8  90 0D 98 78 */	stw r0, sTempMemSize__Q23EGG10G3DUtility-_SDA_BASE_(r13)
 lbl_8008F3AC:
 /* 8008F3AC 0008A2AC  38 00 00 00 */	li r0, 0
 /* 8008F3B0 0008A2B0  3F E0 80 09 */	lis r31, lbl_8008F548@ha
-/* 8008F3B4 0008A2B4  90 0D 98 74 */	stw r0, lbl_804BEBF4-_SDA_BASE_(r13)
+/* 8008F3B4 0008A2B4  90 0D 98 74 */	stw r0, sTempMemIndex__Q23EGG10G3DUtility-_SDA_BASE_(r13)
 /* 8008F3B8 0008A2B8  3B FF F5 48 */	addi r31, r31, lbl_8008F548@l
 /* 8008F3BC 0008A2BC  3B C0 00 05 */	li r30, 5
 lbl_8008F3C0:

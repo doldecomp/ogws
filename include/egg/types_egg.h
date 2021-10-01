@@ -4,6 +4,9 @@
 
 namespace EGG
 {
+    struct G3DUtility;
+    struct IScnProc;
+
     struct StateGX;
     struct TextureBuffer;
 
