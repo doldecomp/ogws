@@ -1,13 +1,91 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .sdata2, "a"
+.balign 0x8
+.global lbl_804C0970
+lbl_804C0970:
+	.incbin "baserom.dol", 0x3C95B0, 0x4
+.global lbl_804C0974
+lbl_804C0974:
+	.incbin "baserom.dol", 0x3C95B4, 0x4
+.global lbl_804C0978
+lbl_804C0978:
+	.incbin "baserom.dol", 0x3C95B8, 0x4
+.global lbl_804C097C
+lbl_804C097C:
+	.incbin "baserom.dol", 0x3C95BC, 0x4
+.global lbl_804C0980
+lbl_804C0980:
+	.incbin "baserom.dol", 0x3C95C0, 0x4
+.global lbl_804C0984
+lbl_804C0984:
+	.incbin "baserom.dol", 0x3C95C4, 0x4
+.global lbl_804C0988
+lbl_804C0988:
+	.incbin "baserom.dol", 0x3C95C8, 0x4
+.global lbl_804C098C
+lbl_804C098C:
+	.incbin "baserom.dol", 0x3C95CC, 0x4
+.global lbl_804C0990
+lbl_804C0990:
+	.incbin "baserom.dol", 0x3C95D0, 0x8
 
+.section .sbss, "wa"
+.balign 0x8
+.global lbl_804BEC60
+lbl_804BEC60:
+	.skip 0x8
+.global lbl_804BEC68
+lbl_804BEC68:
+	.skip 0x8
+
+.section .rodata, "a"
+.balign 0x8
+.global lbl_8037A0F0
+lbl_8037A0F0:
+	.string "eggFrustum.cpp"
+    .string "pMtx"
+    .string "Illegal camera number."
+    .string "Unknown GXProjectionType"
+    .string "p != NULL"
+    .string "pT"
+    .string "pB"
+    .string "pL"
+    .string "pR"
+    .string "pScreenPos"
+    .string "pViewPos"
+    .string "div != 0.f"
+    .string "pPosView"
+    .string "pVec"
+
+.section .data, "wa"
+.balign 0x8
+.global __vt__Q23EGG7Frustum
+__vt__Q23EGG7Frustum:
+    .long 0
+    .long 0
+    .long 0x80099810 # Weak dtor
+    .long func_800A08E4 # SetProjectionGX(?)
+    .long func_800A08F8 # CopyToG3D(?)
+.global lbl_8039808C
+lbl_8039808C:
+    # "0.f < fovy && fovy < 180.f"
+	.incbin "baserom.dol", 0x39418C, 0x1C
+.global lbl_803980A8
+lbl_803980A8:
+    # "eggFrustum.h"
+	.incbin "baserom.dol", 0x3941A8, 0x10
+
+.section .ctors, "a"
+.4byte __sinit_$$3eggFrustum_cpp # eggFrustum
+
+.section .text, "ax"
 .global func_800A0800
 func_800A0800:
 /* 800A0800 0009B700  C0 02 8F 50 */	lfs f0, lbl_804C0970-_SDA2_BASE_(r2)
-/* 800A0804 0009B704  3D 00 80 3A */	lis r8, lbl_80398078@ha
+/* 800A0804 0009B704  3D 00 80 3A */	lis r8, __vt__Q23EGG7Frustum@ha
 /* 800A0808 0009B708  C0 62 8F 5C */	lfs f3, lbl_804C097C-_SDA2_BASE_(r2)
-/* 800A080C 0009B70C  39 08 80 78 */	addi r8, r8, lbl_80398078@l
+/* 800A080C 0009B70C  39 08 80 78 */	addi r8, r8, __vt__Q23EGG7Frustum@l
 /* 800A0810 0009B710  80 E5 00 00 */	lwz r7, 0(r5)
 /* 800A0814 0009B714  38 00 00 01 */	li r0, 1
 /* 800A0818 0009B718  80 A5 00 04 */	lwz r5, 4(r5)
@@ -32,8 +110,8 @@ func_800A0800:
 
 .global func_800A0864
 func_800A0864:
-/* 800A0864 0009B764  3C A0 80 3A */	lis r5, lbl_80398078@ha
-/* 800A0868 0009B768  38 A5 80 78 */	addi r5, r5, lbl_80398078@l
+/* 800A0864 0009B764  3C A0 80 3A */	lis r5, __vt__Q23EGG7Frustum@ha
+/* 800A0868 0009B768  38 A5 80 78 */	addi r5, r5, __vt__Q23EGG7Frustum@l
 /* 800A086C 0009B76C  90 A3 00 38 */	stw r5, 0x38(r3)
 /* 800A0870 0009B770  80 04 00 00 */	lwz r0, 0(r4)
 /* 800A0874 0009B774  90 03 00 00 */	stw r0, 0(r3)
@@ -1096,6 +1174,9 @@ lbl_800A1798:
 /* 800A17A8 0009C6A8  7C 08 03 A6 */	mtlr r0
 /* 800A17AC 0009C6AC  38 21 00 20 */	addi r1, r1, 0x20
 /* 800A17B0 0009C6B0  4E 80 00 20 */	blr 
+
+.global __sinit_$$3eggFrustum_cpp
+__sinit_$$3eggFrustum_cpp:
 /* 800A17B4 0009C6B4  C0 22 8F 50 */	lfs f1, lbl_804C0970-_SDA2_BASE_(r2)
 /* 800A17B8 0009C6B8  38 8D 98 E0 */	addi r4, r13, lbl_804BEC60-_SDA_BASE_
 /* 800A17BC 0009C6BC  C0 02 8F 5C */	lfs f0, lbl_804C097C-_SDA2_BASE_(r2)
