@@ -54,7 +54,7 @@ lbl_804C0940:
 lbl_804C6A00:
 	.skip 0x8
 
-.section .rodata, "wa"
+.section .rodata, "a"
 .balign 0x8
 .global lbl_80379FF8
 lbl_80379FF8:

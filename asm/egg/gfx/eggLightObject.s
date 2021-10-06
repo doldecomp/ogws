@@ -1,6 +1,6 @@
 .include "macros.inc"
 
-.section .sdata2, "wa"
+.section .sdata2, "a"
 .balign 0x8
 .global lbl_804C08C0
 lbl_804C08C0:
@@ -58,7 +58,7 @@ lbl_804C08F8:
 lbl_804BD4F0:
 	.long lbl_80379F64
 
-.section .rodata, "wa"
+.section .rodata, "a"
 .balign 0x8
 # Used for GXInitLightDir
 .global lbl_80379F58
