@@ -1,7 +1,63 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .sdata2, "a"
+.balign 0x8
+.global lbl_804C0998
+lbl_804C0998:
+	.incbin "baserom.dol", 0x3C95D8, 0x8
+.global lbl_804C09A0
+lbl_804C09A0:
+	.incbin "baserom.dol", 0x3C95E0, 0x4
+.global lbl_804C09A4
+lbl_804C09A4:
+	.incbin "baserom.dol", 0x3C95E4, 0x4
+.global lbl_804C09A8
+lbl_804C09A8:
+	.incbin "baserom.dol", 0x3C95E8, 0x4
+.global lbl_804C09AC
+lbl_804C09AC:
+	.incbin "baserom.dol", 0x3C95EC, 0x4
+.global lbl_804C09B0
+lbl_804C09B0:
+	.incbin "baserom.dol", 0x3C95F0, 0x8
 
+.section .sbss, "wa"
+.balign 0x8
+# "spScreen"
+# Inherited through IDrawGX???
+.global lbl_804BEC70
+lbl_804BEC70:
+	.skip 0x4
+.global lbl_804BEC74
+lbl_804BEC74:
+	.skip 0x4
+.global lbl_804BEC78
+lbl_804BEC78:
+	.skip 0x4
+.global lbl_804BEC7C
+lbl_804BEC7C:
+	.skip 0x4
+.global lbl_804BEC80
+lbl_804BEC80:
+	.skip 0x8
+
+.section .rodata, "a"
+.balign 0x8
+.global lbl_8037A178
+lbl_8037A178:
+	.string "eggGXUtility.cpp"
+    .string "0 <= no && no < 8"
+    .string "p != NULL"
+    .string "sx != 0.f"
+    .string "sy != 0.f"
+    .string "Not implemented."
+    .string "pObj"
+    .string "tex.IsValid()"
+
+.section .ctors, "a"
+.4byte __sinit_$$3eggGXUtility_cpp
+
+.section .text, "ax"
 .global getTexCoordGenVal__Q23EGG9GXUtilityFi
 getTexCoordGenVal__Q23EGG9GXUtilityFi:
 /* 800A17D8 0009C6D8  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -308,4 +364,7 @@ lbl_800A1C04:
 /* 800A1C20 0009CB20  7C 08 03 A6 */	mtlr r0
 /* 800A1C24 0009CB24  38 21 00 10 */	addi r1, r1, 0x10
 /* 800A1C28 0009CB28  4E 80 00 20 */	blr 
+
+.global __sinit_$$3eggGXUtility_cpp
+__sinit_$$3eggGXUtility_cpp:
 /* 800A1C2C 0009CB2C  4E 80 00 20 */	blr 
