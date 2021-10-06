@@ -1,7 +1,70 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .rodata, "a"
+.balign 0x8
+.global lbl_80379E90
+lbl_80379E90:
+	.string "eggScnRenderer.cpp"
+    .string "mppPathSet"
+    .string "mppPathSet == NULL"
+    .string "0"
+    .string "mppPathSet != NULL"
+    .string "getDrawPathBase( i )"
+    .string "pScnRoot != NULL"
+    .string "pObj"
+    .string "This timing is not opa."
+    .string "Local priority range over."
+    .string "This timing is not xlu."
+    .string "pScnProc"
 
+.section .data, "wa"
+.balign 0x8
+.global switch_80397EE0
+switch_80397EE0:
+    .long 0x8009cc74
+    .long 0x8009cc80
+    .long 0x8009cc8c
+    .long 0x8009cc98
+    .long 0x8009cca4
+    .long 0x8009ccb4
+    .long 0x8009ccc4
+.global __vt__Q23EGG11ScnRenderer
+__vt__Q23EGG11ScnRenderer:
+    .long 0
+    .long 0
+    .long 0x8009ca20
+    .long 0x8009cb30
+    .long 0x800994ac
+    .long 0x8009d1f4
+    .long 0x80099224
+    .long 0x8009d464
+    .long 0x800992a0
+    .long 0x8009d4f8
+    .long 0x800994a4
+    .long 0x800994a8
+    .long 0x8009d308
+    .long 0x8009cb28
+    .long 0x8009cd24
+.global lbl_80397F38
+lbl_80397F38:
+	.incbin "baserom.dol", 0x394038, 0x1C
+.global lbl_80397F54
+lbl_80397F54:
+	.incbin "baserom.dol", 0x394054, 0x14
+.global lbl_80397F68
+lbl_80397F68:
+	.incbin "baserom.dol", 0x394068, 0x18
+.global lbl_80397F80
+lbl_80397F80:
+	.incbin "baserom.dol", 0x394080, 0x18
+.global lbl_80397F98
+lbl_80397F98:
+	.incbin "baserom.dol", 0x394098, 0x18
+.global lbl_80397FB0
+lbl_80397FB0:
+	.incbin "baserom.dol", 0x3940B0, 0x18
+
+.section .text, "ax"
 .global func_8009C9D0
 func_8009C9D0:
 /* 8009C9D0 000978D0  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -10,9 +73,9 @@ func_8009C9D0:
 /* 8009C9DC 000978DC  93 E1 00 0C */	stw r31, 0xc(r1)
 /* 8009C9E0 000978E0  7C 7F 1B 78 */	mr r31, r3
 /* 8009C9E4 000978E4  4B FF C3 C5 */	bl func_80098DA8
-/* 8009C9E8 000978E8  3C 60 80 39 */	lis r3, lbl_80397EFC@ha
+/* 8009C9E8 000978E8  3C 60 80 39 */	lis r3, __vt__Q23EGG11ScnRenderer@ha
 /* 8009C9EC 000978EC  38 80 00 00 */	li r4, 0
-/* 8009C9F0 000978F0  38 63 7E FC */	addi r3, r3, lbl_80397EFC@l
+/* 8009C9F0 000978F0  38 63 7E FC */	addi r3, r3, __vt__Q23EGG11ScnRenderer@l
 /* 8009C9F4 000978F4  38 00 00 01 */	li r0, 1
 /* 8009C9F8 000978F8  90 7F 00 50 */	stw r3, 0x50(r31)
 /* 8009C9FC 000978FC  7F E3 FB 78 */	mr r3, r31
@@ -33,8 +96,8 @@ func_8009C9D0:
 /* 8009CA38 00097938  7C 9C 23 78 */	mr r28, r4
 /* 8009CA3C 0009793C  41 82 00 D4 */	beq lbl_8009CB10
 /* 8009CA40 00097940  80 03 00 54 */	lwz r0, 0x54(r3)
-/* 8009CA44 00097944  3C 80 80 39 */	lis r4, lbl_80397EFC@ha
-/* 8009CA48 00097948  38 84 7E FC */	addi r4, r4, lbl_80397EFC@l
+/* 8009CA44 00097944  3C 80 80 39 */	lis r4, __vt__Q23EGG11ScnRenderer@ha
+/* 8009CA48 00097948  38 84 7E FC */	addi r4, r4, __vt__Q23EGG11ScnRenderer@l
 /* 8009CA4C 0009794C  2C 00 00 00 */	cmpwi r0, 0
 /* 8009CA50 00097950  90 83 00 50 */	stw r4, 0x50(r3)
 /* 8009CA54 00097954  40 82 00 1C */	bne lbl_8009CA70
