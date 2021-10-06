@@ -1,7 +1,84 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .sdata2, "a"
+.balign 0x8
+.global lbl_804C0900
+lbl_804C0900:
+	.incbin "baserom.dol", 0x3C9540, 0x4
+.global lbl_804C0904
+lbl_804C0904:
+	.incbin "baserom.dol", 0x3C9544, 0x4
+.global lbl_804C0908
+lbl_804C0908:
+	.incbin "baserom.dol", 0x3C9548, 0x4
+.global lbl_804C090C
+lbl_804C090C:
+	.incbin "baserom.dol", 0x3C954C, 0x4
+.global lbl_804C0910
+lbl_804C0910:
+	.incbin "baserom.dol", 0x3C9550, 0x4
+.global lbl_804C0914
+lbl_804C0914:
+	.incbin "baserom.dol", 0x3C9554, 0x4
+.global lbl_804C0918
+lbl_804C0918:
+	.incbin "baserom.dol", 0x3C9558, 0x8
+.global lbl_804C0920
+lbl_804C0920:
+	.incbin "baserom.dol", 0x3C9560, 0x8
+.global lbl_804C0928
+lbl_804C0928:
+	.incbin "baserom.dol", 0x3C9568, 0x4
+.global lbl_804C092C
+lbl_804C092C:
+	.incbin "baserom.dol", 0x3C956C, 0x4
+.global lbl_804C0930
+lbl_804C0930:
+	.incbin "baserom.dol", 0x3C9570, 0x4
+.global lbl_804C0934
+lbl_804C0934:
+	.incbin "baserom.dol", 0x3C9574, 0x4
+.global lbl_804C0938
+lbl_804C0938:
+	.incbin "baserom.dol", 0x3C9578, 0x4
+.global lbl_804C093C
+lbl_804C093C:
+	.incbin "baserom.dol", 0x3C957C, 0x4
+.global lbl_804C0940
+lbl_804C0940:
+	.incbin "baserom.dol", 0x3C9580, 0x8
 
+.section .sbss2, "a"
+.balign 0x8
+.global lbl_804C6A00
+lbl_804C6A00:
+	.skip 0x8
+
+.section .rodata, "wa"
+.balign 0x8
+.global lbl_80379FF8
+lbl_80379FF8:
+	.string "eggPostEffectMaskDOF.cpp"
+    .string "getCapTexture()"
+    .string  "m_pDstScreen"
+    .string "-17 <= scale_exp && scale_exp <= 46"
+
+.section .data, "wa"
+.balign 0x8
+.global lbl_80398010
+lbl_80398010:
+    .long 0
+    .long 0
+    .long 0x8008bf00
+    .long 0x80096a6c
+    .long 0x8009f288
+    .long 0x8009ef20
+    .long 0x8009f41c
+    .long 0x80096bc0
+    .long 0x80096c54
+    .long 0
+
+.section .text, "ax"
 .global func_8009ED44
 func_8009ED44:
 /* 8009ED44 00099C44  94 21 FF F0 */	stwu r1, -0x10(r1)
