@@ -3,15 +3,6 @@
 .section .data, "wa"
 
 .balign 0x8
-.global lbl_80397FC8
-lbl_80397FC8:
-	.incbin "baserom.dol", 0x3940C8, 0x1C
-.global lbl_80397FE4
-lbl_80397FE4:
-	.incbin "baserom.dol", 0x3940E4, 0x18
-.global lbl_80397FFC
-lbl_80397FFC:
-	.incbin "baserom.dol", 0x3940FC, 0x14
 .global lbl_80398010
 lbl_80398010:
 	.incbin "baserom.dol", 0x394110, 0x28

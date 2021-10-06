@@ -1,7 +1,120 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .sdata2, "wa"
+.balign 0x8
+.global lbl_804C08C0
+lbl_804C08C0:
+	.incbin "baserom.dol", 0x3C9500, 0x4
+.global lbl_804C08C4
+lbl_804C08C4:
+	.incbin "baserom.dol", 0x3C9504, 0x4
+.global lbl_804C08C8
+lbl_804C08C8:
+	.incbin "baserom.dol", 0x3C9508, 0x4
+.global lbl_804C08CC
+lbl_804C08CC:
+	.incbin "baserom.dol", 0x3C950C, 0x4
+.global lbl_804C08D0
+lbl_804C08D0:
+	.incbin "baserom.dol", 0x3C9510, 0x4
+.global lbl_804C08D4
+lbl_804C08D4:
+	.incbin "baserom.dol", 0x3C9514, 0x4
+.global lbl_804C08D8
+lbl_804C08D8:
+	.incbin "baserom.dol", 0x3C9518, 0x4
+.global lbl_804C08DC
+lbl_804C08DC:
+	.incbin "baserom.dol", 0x3C951C, 0x4
+.global lbl_804C08E0
+lbl_804C08E0:
+	.incbin "baserom.dol", 0x3C9520, 0x8
+.global lbl_804C08E8
+lbl_804C08E8:
+	.incbin "baserom.dol", 0x3C9528, 0x8
+.global lbl_804C08F0
+lbl_804C08F0:
+	.incbin "baserom.dol", 0x3C9530, 0x1
+.global lbl_804C08F1
+lbl_804C08F1:
+	.incbin "baserom.dol", 0x3C9531, 0x1
+.global lbl_804C08F2
+lbl_804C08F2:
+	.incbin "baserom.dol", 0x3C9532, 0x1
+.global lbl_804C08F3
+lbl_804C08F3:
+	.incbin "baserom.dol", 0x3C9533, 0x1
+.global lbl_804C08F4
+lbl_804C08F4:
+	.incbin "baserom.dol", 0x3C9534, 0x4
+.global lbl_804C08F8
+lbl_804C08F8:
+	.incbin "baserom.dol", 0x3C9538, 0x8
 
+.section .sdata, "wa"
+.balign 0x8
+# const char *magic
+.global lbl_804BD4F0
+lbl_804BD4F0:
+	.long lbl_80379F64
+
+.section .rodata, "wa"
+.balign 0x8
+# Used for GXInitLightDir
+.global lbl_80379F58
+lbl_80379F58:
+	.single 0e0
+	.single 0e0
+	.single 0e0
+.global lbl_80379F64
+lbl_80379F64:
+	.string "blobj"
+# 80379F6A
+    .string "eggLightObject.cpp"
+    .string "pDir"
+    .string "pColor"
+    .string "pObj"
+    .string "ref brightness B must be (0 < B && B < 1)"
+    .string "0"
+    .string "LOBJ"
+    .string "pData"
+    .balign 0x4
+# 80379FC8
+# Some form of mtx (passed to GXSetIndTexMtx)
+    .single 0e0.001953125
+    .single 0e0.5
+    .single 0e0
+    .single 0e0
+    .single 0e0
+    .single 0e0
+    .single 0e0
+    .single 0e0.5
+    .single 0e0
+    .single 0e0
+    .single 0e0
+    .single 0e0
+
+.section .data, "wa"
+.balign 0x8
+.global lbl_80397FC8
+lbl_80397FC8:
+    .long 0
+    .long 0
+    .long 0x8009e74c
+    .long 0x8009ec24
+    .long 0x8009e73c
+    .long 0x80091430
+    .long 0x8009ed3c
+.global lbl_80397FE4
+lbl_80397FE4:
+    # "VEC3Len( &dir ) > 0.f"
+	.incbin "baserom.dol", 0x3940E4, 0x18
+.global lbl_80397FFC
+lbl_80397FFC:
+    # "eggLightObject.h"
+	.incbin "baserom.dol", 0x3940FC, 0x14
+
+.section .text, "ax"
 .global func_8009D710
 func_8009D710:
 /* 8009D710 00098610  94 21 FF F0 */	stwu r1, -0x10(r1)
