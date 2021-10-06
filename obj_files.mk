@@ -233,12 +233,6 @@ EGG_O_FILES := \
 	build/asm/egg/gfx/eggGXUtility.o \
 	build/asm/egg/gfx/eggDrawHelper.o \
 	build/asm/egg/gfx/egg_800A1DB0.o \
-	\
-	build/asm/egg/ctors_egg.o \
-	build/asm/egg/rodata_egg.o \
-	build/asm/egg/bss_egg.o \
-	build/asm/egg/sbss_egg.o \
-	\
 	build/asm/egg/prim/eggAssert.o \
 	build/asm/egg/egg_800A204C.o \
 	build/egg/math/eggMath.o \

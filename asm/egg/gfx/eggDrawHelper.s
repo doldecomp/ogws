@@ -1,7 +1,21 @@
 .include "macros.inc"
 
-.section .text, "ax"  # 0x800076E0 - 0x80355080 
+.section .sbss, "wa"
+.balign 0x8
+.global lbl_804BEC88
+lbl_804BEC88:
+	.skip 0x8
 
+.section .bss, "wa"
+.balign 0x8
+.global lbl_8040AA50
+lbl_8040AA50:
+	.skip 0x10
+
+.section .ctors, "a"
+.4byte __sinit_$$3eggDrawHelper_cpp
+
+.section .text, "ax"
 .global __dt__Q23EGG8Vector3fFv
 __dt__Q23EGG8Vector3fFv:
 /* 800A1C30 0009CB30  94 21 FF F0 */	stwu r1, -0x10(r1)

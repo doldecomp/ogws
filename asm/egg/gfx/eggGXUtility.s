@@ -54,6 +54,12 @@ lbl_8037A178:
     .string "pObj"
     .string "tex.IsValid()"
 
+.section .bss, "wa"
+.balign 0x8
+.global lbl_8040AA20
+lbl_8040AA20:
+	.skip 0x30
+
 .section .ctors, "a"
 .4byte __sinit_$$3eggGXUtility_cpp
 
