@@ -1,15 +1,102 @@
 .include "macros.inc"
 
-.section .text, "ax"
+.section .sdata2, "a"
+.balign 0x8
+.global lbl_804C0948
+lbl_804C0948:
+	.incbin "baserom.dol", 0x3C9588, 0x4
+.global lbl_804C094C
+lbl_804C094C:
+	.incbin "baserom.dol", 0x3C958C, 0x4
+.global lbl_804C0950
+lbl_804C0950:
+	.incbin "baserom.dol", 0x3C9590, 0x4
+.global lbl_804C0954
+lbl_804C0954:
+	.incbin "baserom.dol", 0x3C9594, 0x4
+.global lbl_804C0958
+lbl_804C0958:
+	.incbin "baserom.dol", 0x3C9598, 0x8
+.global lbl_804C0960
+lbl_804C0960:
+	.incbin "baserom.dol", 0x3C95A0, 0x8
+.global lbl_804C0968
+lbl_804C0968:
+	.incbin "baserom.dol", 0x3C95A8, 0x8
 
-.global func_8009FCAC
-func_8009FCAC:
+.section .sdata, "wa"
+.balign 0x8
+.global lbl_804BD4F8
+lbl_804BD4F8:
+	.long -1
+
+.section .sbss, "wa"
+.balign 0x8
+# Flags?
+.global lbl_804BEC50
+lbl_804BEC50:
+	.skip 0x4
+# Flags?
+.global lbl_804BEC54
+lbl_804BEC54:
+	.skip 0x4
+.global lbl_804BEC58
+lbl_804BEC58:
+	.skip 0x4
+# Some counter
+.global lbl_804BEC5C
+lbl_804BEC5C:
+	.skip 0x4
+
+.section .rodata, "a"
+.balign 0x8
+.global lbl_8037A058
+lbl_8037A058:
+	.string "eggScreenEffectBase.cpp"
+    .string "getBuffer( ( BufferType )i ) == NULL"
+    .string "0"
+    .string "cap_x >= 0.f && cap_y >= 0.f"
+    .string "spBufferSet[cBufferType_Hide_1_16].mpAllocBase != NULL"
+
+.section .data, "wa"
+.balign 0x8
+.global __vt__Q23EGG16ScreenEffectBase
+__vt__Q23EGG16ScreenEffectBase:
+    .long 0
+    .long 0
+    .long __dt__Q23EGG16ScreenEffectBaseFv
+.global lbl_80398044
+lbl_80398044:
+    # "type < cBufferType_Max"
+	.incbin "baserom.dol", 0x394144, 0x18
+.global lbl_8039805C
+lbl_8039805C:
+    # "eggScreenEffectBase.h"
+	.incbin "baserom.dol", 0x39415C, 0x1C
+
+.section .bss, "wa"
+.balign 0x8
+# BufferNode[] I think?
+.global lbl_8040A9C0
+lbl_8040A9C0:
+	.skip 0x30
+# Some float structure
+.global lbl_8040A9F0
+lbl_8040A9F0:
+	.skip 0x18
+.global lbl_8040AA08
+lbl_8040AA08:
+	.skip 0x18
+
+.section .text, "ax"
+.global __ct__Q23EGG16ScreenEffectBaseFv
+__ct__Q23EGG16ScreenEffectBaseFv:
 /* 8009FCAC 0009ABAC  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8009FCB0 0009ABB0  7C 08 02 A6 */	mflr r0
-/* 8009FCB4 0009ABB4  3C 80 80 3A */	lis r4, lbl_80398038@ha
+/* 8009FCB4 0009ABB4  3C 80 80 3A */	lis r4, __vt__Q23EGG16ScreenEffectBase@ha
 /* 8009FCB8 0009ABB8  90 01 00 14 */	stw r0, 0x14(r1)
 /* 8009FCBC 0009ABBC  38 00 00 01 */	li r0, 1
-/* 8009FCC0 0009ABC0  38 84 80 38 */	addi r4, r4, lbl_80398038@l
+/* 8009FCC0 0009ABC0  38 84 80 38 */	addi r4, r4, __vt__Q23EGG16ScreenEffectBase@l
 /* 8009FCC4 0009ABC4  93 E1 00 0C */	stw r31, 0xc(r1)
 /* 8009FCC8 0009ABC8  7C 7F 1B 78 */	mr r31, r3
 /* 8009FCCC 0009ABCC  98 03 00 00 */	stb r0, 0(r3)

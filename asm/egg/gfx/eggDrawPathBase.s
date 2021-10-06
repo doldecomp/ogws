@@ -27,7 +27,7 @@ func_80089DCC:
 /* 80089DD4 00084CD4  90 01 00 14 */	stw r0, 0x14(r1)
 /* 80089DD8 00084CD8  93 E1 00 0C */	stw r31, 0xc(r1)
 /* 80089DDC 00084CDC  7C 7F 1B 78 */	mr r31, r3
-/* 80089DE0 00084CE0  48 01 5E CD */	bl func_8009FCAC
+/* 80089DE0 00084CE0  48 01 5E CD */	bl __ct__Q23EGG16ScreenEffectBaseFv
 /* 80089DE4 00084CE4  38 7F 00 70 */	addi r3, r31, 0x70
 /* 80089DE8 00084CE8  48 01 26 55 */	bl __ct__Q23EGG8IScnProcFv
 /* 80089DEC 00084CEC  3C 80 80 39 */	lis r4, lbl_803976A0@ha
@@ -43,6 +43,8 @@ func_80089DCC:
 /* 80089E14 00084D14  4E 80 00 20 */	blr 
 
 # ScreenEffectBase::~ScreenEffectBase (weak)
+.global __dt__Q23EGG16ScreenEffectBaseFv
+__dt__Q23EGG16ScreenEffectBaseFv:
 /* 80089E18 00084D18  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80089E1C 00084D1C  7C 08 02 A6 */	mflr r0
 /* 80089E20 00084D20  2C 03 00 00 */	cmpwi r3, 0

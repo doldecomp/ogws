@@ -238,7 +238,6 @@ EGG_O_FILES := \
 	build/asm/egg/rodata_egg.o \
 	build/asm/egg/data_egg.o \
 	build/asm/egg/bss_egg.o \
-	build/asm/egg/sdata_egg.o \
 	build/asm/egg/sbss_egg.o \
 	build/asm/egg/sdata2_egg.o \
 	\
