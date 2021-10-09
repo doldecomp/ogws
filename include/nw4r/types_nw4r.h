@@ -10,6 +10,12 @@ namespace nw4r
 		template <typename T> struct TagProcessorBase;
 
 		struct Color;
+		struct FileStream;
+
+		namespace detail
+		{
+			struct RuntimeTypeInfo;
+		}
 	}
 	
 	namespace ef
@@ -67,6 +73,9 @@ namespace nw4r
 			struct MmlSeqTrack;
 			struct SeqTrack;
 			struct SeqTrackAllocator;
+			template <typename T> struct SoundInstanceManager;
+			struct StrmBufferPool;
+			struct StrmSound;
 			struct NoteOnCallback;
 			struct PlayerHeap;
 			struct SoundArchiveFileReader;
