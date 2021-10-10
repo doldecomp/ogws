@@ -79,8 +79,9 @@ namespace nw4r
 			struct NoteOnCallback;
 			struct PlayerHeap;
 			struct SoundArchiveFileReader;
-			struct StrmSound;
 			struct WaveSound;
+			struct StrmPlayer;
+			struct WsdPlayer;
 		}
 	}
 	

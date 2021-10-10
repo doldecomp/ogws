@@ -20,18 +20,17 @@ namespace nw4r
                 StrmSound(SoundInstanceManager<StrmSound> *);
                 bool Prepare(StrmBufferPool *, StrmPlayer::StartOffsetType, s32, int, ut::FileStream *);
 
-				static ut::detail::RuntimeTypeInfo typeInfo;
-				
-				virtual const ut::detail::RuntimeTypeInfo * GetRuntimeTypeInfo() const; // at 0x8
-				virtual ~StrmSound(); // at 0xc
-				virtual UNKTYPE Shutdown(); // at 0x28
-				virtual bool IsPrepared() const; // at 0x2c
-				virtual void SetPlayerPriority(int); // at 0x4c
-				virtual bool IsAttachedTempSpecialHandle(); // at 0x5c
-				virtual UNKTYPE DetachTempSpecialHandle(); // at 0x60
-				virtual BasicPlayer * GetBasicPlayer(); // at 0x68
-				virtual const BasicPlayer * GetBasicPlayer() const; // at 0x6c
-
+                static ut::detail::RuntimeTypeInfo typeInfo;
+                
+                virtual const ut::detail::RuntimeTypeInfo * GetRuntimeTypeInfo() const; // at 0x8
+                virtual ~StrmSound(); // at 0xc
+                virtual UNKTYPE Shutdown(); // at 0x28
+                virtual bool IsPrepared() const; // at 0x2c
+                virtual void SetPlayerPriority(int); // at 0x4c
+                virtual bool IsAttachedTempSpecialHandle(); // at 0x5c
+                virtual UNKTYPE DetachTempSpecialHandle(); // at 0x60
+                virtual BasicPlayer * GetBasicPlayer(); // at 0x68
+                virtual const BasicPlayer * GetBasicPlayer() const; // at 0x6c
             };
         }
     }
