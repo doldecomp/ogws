@@ -1,4 +1,3 @@
-#ifdef __DECOMP_NON_MATCHING
 #pragma ipa file
 #include <string.h>
 #include <new>
@@ -13,6 +12,21 @@ namespace nw4r
 	{
 		using namespace detail;
 		
+		struct DvdSoundArchive::DvdFileStream : ut::DvdLockedFileStream
+		{
+			int mStartOffset; // at 0x70
+			int mSize; // at 0x74
+			
+			DvdFileStream(const DVDFileInfo *, u32, u32); //inlined
+			DvdFileStream(s32, u32, u32); //inlined
+
+			virtual ~DvdFileStream(); // at 0xC
+			virtual int Read(void *, u32); // at 0x14
+			virtual void Seek(s32, u32); // at 0x44
+			virtual u32 GetSize() const; // at 0x40
+			virtual u32 Tell() const; // at 0x58
+		};
+
 		DvdSoundArchive::DvdSoundArchive() : mOpenFlag(false) {}
 		
 		DvdSoundArchive::~DvdSoundArchive()
@@ -23,20 +37,10 @@ namespace nw4r
 		bool DvdSoundArchive::Open(s32 entrynum)
 		{
 			if (!DVDFastOpen(entrynum, &mFileInfo)) return false;
-			
+
 			mOpenFlag = true;
 			
-			static const u32 headerAlignSize = RoundUp<u32>(sizeof(SoundArchiveFile::Header), 0x20);
-			u8 unalignedHeader[0x68]; // at 0x8
-			void * alignedHeader = RoundUp<u8 *>(unalignedHeader, 0x20);
-			u32 bytesRead = DVDReadPrio(&mFileInfo, alignedHeader, headerAlignSize, 0, 2);
-			
-			if (bytesRead != headerAlignSize) return false;
-			
-			mFileReader.Init(alignedHeader);
-			SoundArchive::Setup(&mFileReader);
-			
-			return true;
+			return LoadFileHeader();
 		}
 		
 		bool DvdSoundArchive::Open(const char * pPath)
@@ -53,7 +57,7 @@ namespace nw4r
 			{
 				if (pPath[i] == '/' || pPath[i] == '\\')
 				{
-					strncpy(externalFileRoot, pPath + i, i);
+					strncpy(externalFileRoot, pPath, i);
 					externalFileRoot[i] = '\0';
 					SoundArchive::SetExternalFileRoot(externalFileRoot);
 					break;
@@ -70,38 +74,22 @@ namespace nw4r
 			SoundArchive::Shutdown();
 		}
 		
-		DvdSoundArchive::DvdFileStream::DvdFileStream(const DVDFileInfo * pFileInfo, u32 startOffset, u32 size)
-			: DvdLockedFileStream(pFileInfo, false), mStartOffset(startOffset), mSize(size)
-		{
-			if (!mSize) mSize = mPosition.mFileSize;
-			
-			ut::DvdFileStream::Seek(mStartOffset, 0);
-		}
-		
 		FileStream * DvdSoundArchive::OpenStream(void * pBuffer, int bufferSize, u32 startOffset, u32 streamSize) const
 		{
-			if (mOpenFlag) return NULL;
+			if (!mOpenFlag) return NULL;
 			
 			if (bufferSize < sizeof(DvdFileStream)) return NULL;
 			
 			return new (pBuffer) DvdFileStream(&mFileInfo, startOffset, streamSize);
 		}
 		
-		DvdSoundArchive::DvdFileStream::DvdFileStream(s32 entrynum, u32 startOffset, u32 size)
-			: DvdLockedFileStream(entrynum), mStartOffset(startOffset), mSize(size)
-		{
-			if (!mSize) mSize = mPosition.mFileSize;
-			
-			ut::DvdFileStream::Seek(mStartOffset, 0);
-		}
-		
 		FileStream * DvdSoundArchive::OpenExtStream(void * pBuffer, int bufferSize, const char * pPath, u32 startOffset, u32 streamSize) const
 		{
-			if (mOpenFlag) return NULL;
+			if (!mOpenFlag) return NULL;
 			
 			if (bufferSize < sizeof(DvdFileStream)) return NULL;
 			
-			u32 entrynum = DVDConvertPathToEntrynum(pPath);
+			s32 entrynum = DVDConvertPathToEntrynum(pPath);
 			
 			if (entrynum < 0) return NULL;
 			
@@ -113,6 +101,22 @@ namespace nw4r
 			return sizeof(DvdFileStream);
 		}
 		
+		bool DvdSoundArchive::LoadFileHeader()
+		{
+			u8 unalignedHeader[0x68];
+
+			static const u32 headerAlignSize = RoundUp<u32>(sizeof(SoundArchiveFile::Header), 32);
+			void * alignedHeader = RoundUp<u8 *>(unalignedHeader, 0x20);
+			u32 bytesRead = DVDReadPrio(&mFileInfo, alignedHeader, headerAlignSize, 0, 2);
+			
+			if (bytesRead != headerAlignSize) return false;
+			
+			mFileReader.Init(alignedHeader);
+			SoundArchive::Setup(&mFileReader);
+
+			return true;
+		}
+
 		bool DvdSoundArchive::LoadHeader(void * pBuffer, u32 bufferSize)
 		{
 			u32 infoChunkSize = mFileReader.GetInfoChunkSize();
@@ -145,6 +149,22 @@ namespace nw4r
 			return true;
 		}
 		
+		DvdSoundArchive::DvdFileStream::DvdFileStream(const DVDFileInfo * pFileInfo, u32 startOffset, u32 size)
+			: DvdLockedFileStream(pFileInfo, false), mStartOffset(startOffset), mSize(size)
+		{
+			if (!mSize) mSize = mPosition.mFileSize;
+			
+			ut::DvdFileStream::Seek(mStartOffset, 0);
+		}
+
+		DvdSoundArchive::DvdFileStream::DvdFileStream(s32 entrynum, u32 startOffset, u32 size)
+			: DvdLockedFileStream(entrynum), mStartOffset(startOffset), mSize(size)
+		{
+			if (!mSize) mSize = mPosition.mFileSize;
+			
+			ut::DvdFileStream::Seek(mStartOffset, 0);
+		}
+
 		int DvdSoundArchive::DvdFileStream::Read(void * pBuffer, u32 count)
 		{
 			u32 endOffset = mStartOffset + mSize;
@@ -202,9 +222,10 @@ namespace nw4r
 		{
 			return NULL;
 		}
+
+		DvdSoundArchive::DvdFileStream::~DvdFileStream()
+		{
+
+		}
 	}
 }
-
-#else
-#error This file has yet to be decompiled accurately. Use "snd_DvdSoundArchive.s" instead.
-#endif
