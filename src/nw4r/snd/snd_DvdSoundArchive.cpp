@@ -20,7 +20,7 @@ namespace nw4r
 			DvdFileStream(const DVDFileInfo *, u32, u32); //inlined
 			DvdFileStream(s32, u32, u32); //inlined
 
-			virtual ~DvdFileStream(); // at 0xC
+			virtual ~DvdFileStream() {} // at 0xC
 			virtual int Read(void *, u32); // at 0x14
 			virtual void Seek(s32, u32); // at 0x44
 			virtual u32 GetSize() const; // at 0x40
@@ -106,7 +106,7 @@ namespace nw4r
 			u8 unalignedHeader[0x68];
 
 			static const u32 headerAlignSize = RoundUp<u32>(sizeof(SoundArchiveFile::Header), 32);
-			void * alignedHeader = RoundUp<u8 *>(unalignedHeader, 0x20);
+			void * alignedHeader = RoundUp<u8 *>(unalignedHeader, 32);
 			u32 bytesRead = DVDReadPrio(&mFileInfo, alignedHeader, headerAlignSize, 0, 2);
 			
 			if (bytesRead != headerAlignSize) return false;
@@ -221,11 +221,6 @@ namespace nw4r
 		const void * DvdSoundArchive::detail_GetFileAddress(u32) const
 		{
 			return NULL;
-		}
-
-		DvdSoundArchive::DvdFileStream::~DvdFileStream()
-		{
-
 		}
 	}
 }

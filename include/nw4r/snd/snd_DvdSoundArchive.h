@@ -20,6 +20,8 @@ namespace nw4r
 			DvdSoundArchive();
 
 			virtual ~DvdSoundArchive(); // at 0x8
+			virtual const void * detail_GetFileAddress(u32) const; // at 0xC
+			virtual const void * detail_GetWaveDataFileAddress(u32) const; // at 0x10
 			virtual int detail_GetRequiredStreamBufferSize() const; // at 0x14
 			virtual ut::FileStream * OpenStream(void *, int, u32, u32) const; // at 0x18
 			virtual ut::FileStream * OpenExtStream(void *, int, const char *, u32, u32) const; // at 0x1c
@@ -32,9 +34,6 @@ namespace nw4r
 			bool LoadFileHeader(); //inlined
 			bool LoadHeader(void *, u32);
 			bool LoadLabelStringData(void *, u32);
-			
-			const void * detail_GetWaveDataFileAddress(u32) const;
-			const void * detail_GetFileAddress(u32) const;
 		};
 	}
 }
