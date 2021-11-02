@@ -28,7 +28,6 @@ namespace EGG
         mpDataSet = NULL;
     }
 
-    #ifdef __DECOMP_NON_MATCHING
     void IScnProc::createScnProc(u16 procNum, MEMAllocator *pAllocator)
     {
         #line 47
@@ -47,16 +46,13 @@ namespace EGG
                 IScnProc::drawProcFunc, true, false, 0);
 
             mpDataSet[i].mpScnProc->SetUserData(&mpDataSet[i]);
-            mpDataSet[i].WORD_0x8 = i;
+            mpDataSet[i].SHORT_0x8 = i;
             mpDataSet[i].mpThis = this;
             mpDataSet[i].bUseOpa = true;
 
             setPriorityScnProc(i, i, true);
         }
     }
-    #else
-    #error This file has yet to be decompiled accurately. Use "eggIScnProc.s" instead.
-    #endif
 
     void IScnProc::setPriorityScnProc(u16 procIndex, u8 priority, bool bUseOpa)
     {
