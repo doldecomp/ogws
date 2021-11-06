@@ -4,7 +4,7 @@
 #include "ut_algorithm.h"
 #include "ut_color.h"
 #include "math_types.h"
-#include <STL/string.h>
+#include <string.h>
 #include <RevoSDK/GX/GXVert.h>
 #include <RevoSDK/GX/GXAttr.h>
 #include <RevoSDK/GX/GXGeometry.h>

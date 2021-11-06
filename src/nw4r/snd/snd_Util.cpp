@@ -1,6 +1,6 @@
 #include "snd_Util.h"
 #include "ut_algorithm.h"
-#include <STL/math.h>
+#include <math.h>
 
 namespace nw4r
 {

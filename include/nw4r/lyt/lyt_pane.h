@@ -7,7 +7,7 @@
 #include "ut_Color.h"
 #include "ut_algorithm.h"
 #include "lyt_animation.h"
-#include <STL/string.h>
+#include <string.h>
 
 #define PANE_NAME_SIZE 17
 #define PANE_USERDATA_SIZE 9

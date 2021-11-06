@@ -5,7 +5,7 @@
 #include "ut_Font.h"
 #include "lyt_resourceAccessor.h"
 #include <RevoSDK/ARC/arc.h>
-#include <STL/string.h>
+#include <string.h>
 
 #define FONTNAMEBUF_MAX 127
 

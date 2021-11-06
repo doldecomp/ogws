@@ -1,6 +1,6 @@
 #include "g3d_anmobj.h"
 #include "math_equation.h"
-#include <STL/math.h>
+#include <math.h>
 
 namespace nw4r
 {

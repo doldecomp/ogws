@@ -4,7 +4,7 @@
 #include "lyt_layout.h"
 #include "ut_algorithm.h"
 #include "ut_LinkList.h"
-#include <STL/string.h>
+#include <string.h>
 
 namespace nw4r
 {
