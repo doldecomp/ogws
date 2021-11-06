@@ -27,7 +27,7 @@ namespace EGG
     }
 
     // Force string pool ordering by creating an instance of "rm != NULL"
-    void UNUSED()
+    void UNUSED_eggXfb()
     {
         GXRenderModeObj *rm;
         EGG_ASSERT(rm != NULL);
