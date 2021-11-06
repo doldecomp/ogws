@@ -13,9 +13,9 @@ namespace EGG
 
         f32 x, y;
 
-        static Vector2f zero;
-        static Vector2f ex;
-        static Vector2f ey;
+        static const Vector2f zero;
+        static const Vector2f ex;
+        static const Vector2f ey;
     };
 
     struct Vector3f
@@ -38,10 +38,10 @@ namespace EGG
 
         f32 x, y, z;
 
-        static Vector3f zero;
-        static Vector3f ex;
-        static Vector3f ey;
-        static Vector3f ez;
+        static const Vector3f zero;
+        static const Vector3f ex;
+        static const Vector3f ey;
+        static const Vector3f ez;
     };
 }
 

@@ -23,12 +23,12 @@ namespace EGG
         return mag;
     }
 
-    Vector2f Vector2f::zero = Vector2f(0.0f, 0.0f);
-    Vector2f Vector2f::ex = Vector2f(1.0f, 0.0f);
-    Vector2f Vector2f::ey = Vector2f(0.0f, 1.0f);
+    const Vector2f Vector2f::zero(0.0f, 0.0f);
+    const Vector2f Vector2f::ex(1.0f, 0.0f);
+    const Vector2f Vector2f::ey(0.0f, 1.0f);
 
-    Vector3f Vector3f::zero = Vector3f(0.0f, 0.0f, 0.0f);
-    Vector3f Vector3f::ex = Vector3f(1.0f, 0.0f, 0.0f);
-    Vector3f Vector3f::ey = Vector3f(0.0f, 1.0f, 0.0f);
-    Vector3f Vector3f::ez = Vector3f(0.0f, 0.0f, 1.0f);
+    const Vector3f Vector3f::zero(0.0f, 0.0f, 0.0f);
+    const Vector3f Vector3f::ex(1.0f, 0.0f, 0.0f);
+    const Vector3f Vector3f::ey(0.0f, 1.0f, 0.0f);
+    const Vector3f Vector3f::ez(0.0f, 0.0f, 1.0f);
 }
