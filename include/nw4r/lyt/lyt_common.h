@@ -2,6 +2,7 @@
 #define NW4R_LYT_COMMON_H
 #include "types_nw4r.h"
 #include "math_types.h"
+#include "ut_binaryFileFormat.h"
 
 #define NW4R_RES_NAME_SIZE 16
 #define NW4R_MAT_NAME_SIZE 20
@@ -14,12 +15,9 @@ namespace nw4r
     {
         namespace res
         {
-            struct BinaryFileHeader
+            struct BinaryFileHeader : ut::BinaryFileHeader
             {
-                u32 magic; // File magic
-                u16 bom; // Byte Order Mark
-                u16 version; // File version
-                // . . .
+
             };
         }
 
@@ -45,7 +43,7 @@ namespace nw4r
             bool TestFileHeader(const res::BinaryFileHeader&);
             bool TestFileHeader(const res::BinaryFileHeader&, u32);
             bool IsModulateVertexColor(ut::Color *, u8);
-            void MultipleAlpha(ut::Color *, const ut::Color *, u8);
+            void MultipleAlpha(ut::Color *, const ut::Color *, u8); // Inlined
             ut::Color MultipleAlpha(ut::Color, u8);
             void SetVertexFormat(bool, u8);
             void DrawQuad(const math::VEC2&, const Size&, u8, const TexCoordData *, const ut::Color *);

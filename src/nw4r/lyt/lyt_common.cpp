@@ -33,24 +33,12 @@ namespace nw4r
 
             bool TestFileHeader(const res::BinaryFileHeader& header)
             {
-                bool ret = false;
-                if ((header.bom == BOM_BIG_ENDIAN) && (header.version == 8))
-                {
-                    ret = true;
-                }
-
-                return ret;
+                return ((header.bom == BOM_BIG_ENDIAN) && (header.version == 8));
             }
 
             bool TestFileHeader(const res::BinaryFileHeader& header, u32 magic)
             {
-                bool ret = false;
-                if ((magic == header.magic) && (header.bom == BOM_BIG_ENDIAN) && (header.version == 8))
-                {
-                    ret = true;
-                }
-
-                return ret;
+                return ((magic == header.magic) && TestFileHeader(header));
             }
 
             TexCoordAry::TexCoordAry() : mCap(0), mSize(0), mTexCoords(NULL) {}
@@ -132,7 +120,6 @@ namespace nw4r
                 }
             }
 
-            // Inlined
             void MultipleAlpha(Color *dest, const Color *src, u8 alpha)
             {
                 for (int i = 0; i < TEXCOORD_VTX_COUNT; i++)
