@@ -31,9 +31,9 @@ namespace nw4r
             return true;
         }
 
-        UNKTYPE * ArcResourceAccessor::GetResource(u32 r4, const char *r5, u32 *r6)
+        UNKTYPE * ArcResourceAccessor::GetResource(u32 filetype, const char *filename, u32 *pSize)
         {
-            return GetResourceSub(&mHandle, mRootDir, r4, r5, r6);
+            return GetResourceSub(&mHandle, mRootDir, filetype, filename, pSize);
         }
 
         ut::Font * ArcResourceAccessor::GetFont(const char *name)

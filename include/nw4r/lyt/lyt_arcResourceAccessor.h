@@ -120,30 +120,31 @@ namespace
         return resource;
     }
 
-    UNKTYPE * GetResourceSub(ARCHandle *pHandle, const char *r4, u32 r5, const char *r6, u32 *pSize)
+    UNKTYPE * GetResourceSub(ARCHandle *pHandle, const char *rootDir, u32 filetype, const char *filename, u32 *pSize)
     {
         s32 entrynum = -1;
 
-        if (ARCConvertPathToEntrynum(pHandle, r4) != -1 && ARCChangeDir(pHandle, r4))
+        if (ARCConvertPathToEntrynum(pHandle, rootDir) != -1 && ARCChangeDir(pHandle, rootDir))
         {
-            if (r5 == 0)
+            // Usually 'timg', RP checks for 'font'
+            if (filetype == 0)
             {
-                entrynum = FindNameResource(pHandle, r6);
+                entrynum = FindNameResource(pHandle, filename);
             }
             else
             {
                 char path[5];
-                path[0] = r5 >> 24;
-                path[1] = r5 >> 16;
-                path[2] = r5 >> 8;
-                path[3] = r5 >> 0;
+                path[0] = filetype >> 24;
+                path[1] = filetype >> 16;
+                path[2] = filetype >> 8;
+                path[3] = filetype >> 0;
                 path[4] = '\0';
 
                 if (ARCConvertPathToEntrynum(pHandle, path) != -1)
                 {
                     if (ARCChangeDir(pHandle, path))
                     {
-                        entrynum = ARCConvertPathToEntrynum(pHandle, r6);
+                        entrynum = ARCConvertPathToEntrynum(pHandle, filename);
                         ARCChangeDir(pHandle, "..");
                     }
                 }
