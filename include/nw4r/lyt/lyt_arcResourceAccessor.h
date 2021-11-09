@@ -1,5 +1,5 @@
-#ifndef NW4R_LYT_ARCRESOURCEACCESSOR_H
-#define NW4R_LYT_ARCRESOURCEACCESSOR_H
+#ifndef NW4R_LYT_ARC_RESOURCE_ACCESSOR_H
+#define NW4R_LYT_ARC_RESOURCE_ACCESSOR_H
 #include "types_nw4r.h"
 #include "ut_LinkList.h"
 #include "ut_Font.h"
@@ -9,53 +9,163 @@
 
 #define FONTNAMEBUF_MAX 127
 
-namespace
-{
-    UNKWORD FindNameResource(ARCHandle *, const char *);
-    UNKTYPE GetResourceSub(ARCHandle *, const char *, u32, const char *, u32 *);
-}
-
 namespace nw4r
 {
     namespace lyt
     {
-        struct FontRefLink
+        class FontRefLink
         {
-            inline FontRefLink() : mNode(), mFont(NULL) {}
+        public:
+            FontRefLink();
+            ~FontRefLink() {}
 
-            inline ut::Font * GetFont() const
+            void Set(const char *, ut::Font *);
+
+            ut::Font * GetFont() const
             {
                 return mFont;
             }
 
-            inline const char * GetFontName() const
+            const char * GetFontName() const
             {
                 return mFontName;
             }
 
+        private:
             ut::LinkListNode mNode; // at 0x0
             char mFontName[FONTNAMEBUF_MAX]; // at 0x8
             ut::Font *mFont; // at 0x88
         };
 
-        struct ArcResourceAccessor : ResourceAccessor
+        class ArcResourceAccessor : public ResourceAccessor
         {
+        public:
             ArcResourceAccessor();
-            virtual ~ArcResourceAccessor(); // at 0x8
-            virtual UNKTYPE GetResource(u32, const char *, u32 *); // at 0x10
-            virtual ut::Font * GetFont(const char *); // at 0x14
-            bool Attach(void *, const char *);
+            virtual ~ArcResourceAccessor() {} // at 0x8
+            virtual UNKTYPE * GetResource(u32, const char *, u32 *); // at 0xC
+            virtual ut::Font * GetFont(const char *); // at 0x10
             
+            bool Attach(void *, const char *);
+            void * Detach()
+            {
+                void *old = mArchive;
+                mArchive = NULL;
+                
+                return old;
+            }
+
+            bool IsAttached() const { return (mArchive != NULL); }
+
+            void RegistFont(FontRefLink *pLink)
+            {
+                mRefList.PushBack(pLink);
+            }
+            void UnregistFont(FontRefLink *pLink)
+            {
+                mRefList.Erase(pLink);
+            }
+
+        private:
             ARCHandle mHandle; // at 0x4
-            void *PTR_0x20;
+            void *mArchive; // at 0x8
             ut::LinkList<FontRefLink, 0> mRefList; // at 0x24
-            char mName[FONTNAMEBUF_MAX]; // at 0x30
+            char mRootDir[FONTNAMEBUF_MAX]; // at 0x30
         };
 
         namespace detail
         {
-            ut::Font * FindFont(ut::LinkList<FontRefLink, 0> *, const char *);
+            static ut::Font * FindFont(ut::LinkList<FontRefLink, 0> *pList, const char *name)
+            {
+                ut::LinkList<FontRefLink, 0>::Iterator it = pList->GetBeginIter();
+                for (; it != pList->GetEndIter(); it++)
+                {
+                    if (strcmp(name, it->GetFontName()) == 0) return it->GetFont();
+                }
+
+                return NULL;
+            }
         }
+    }
+}
+
+namespace
+{
+    UNKWORD FindNameResource(ARCHandle *pHandle, const char *name)
+    {
+        UNKWORD resource = -1;
+        ARCDir dir;
+        ARCEntry entry;
+        
+        ARCOpenDir(pHandle, ".", &dir);
+        while (ARCReadDir(&dir, &entry))
+        {
+            if (entry.node_type != RX_ARCHIVE_FILE)
+            {
+                ARCChangeDir(pHandle, entry.name);
+                resource = FindNameResource(pHandle, name);
+                ARCChangeDir(pHandle, "..");
+                if (resource != -1) break;
+            }
+            else
+            {
+                if (stricmp(name, entry.name) == 0)
+                {
+                    resource = entry.path;
+                    break;
+                }
+            }
+        }
+
+        ARCCloseDir(&dir);
+        return resource;
+    }
+
+    UNKTYPE * GetResourceSub(ARCHandle *pHandle, const char *r4, u32 r5, const char *r6, u32 *pSize)
+    {
+        s32 entrynum = -1;
+
+        if (ARCConvertPathToEntrynum(pHandle, r4) != -1 && ARCChangeDir(pHandle, r4))
+        {
+            if (r5 == 0)
+            {
+                entrynum = FindNameResource(pHandle, r6);
+            }
+            else
+            {
+                char path[5];
+                path[0] = r5 >> 24;
+                path[1] = r5 >> 16;
+                path[2] = r5 >> 8;
+                path[3] = r5 >> 0;
+                path[4] = '\0';
+
+                if (ARCConvertPathToEntrynum(pHandle, path) != -1)
+                {
+                    if (ARCChangeDir(pHandle, path))
+                    {
+                        entrynum = ARCConvertPathToEntrynum(pHandle, r6);
+                        ARCChangeDir(pHandle, "..");
+                    }
+                }
+            }
+
+            ARCChangeDir(pHandle, "..");
+        }
+
+        if (entrynum != -1)
+        {
+            ARCFile file;
+
+            ARCFastOpen(pHandle, entrynum, &file);
+            void *start = ARCGetStartAddrInMem(&file);
+
+            if (pSize != NULL) *pSize = ARCGetLength(&file);
+
+            ARCClose(&file);
+            return start;
+        }
+
+        return NULL;
     }
 }
 

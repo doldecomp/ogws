@@ -192,7 +192,7 @@ NW4R_O_FILES := \
 	build/nw4r/lyt/lyt_drawInfo.o \
 	build/asm/nw4r/lyt/lyt_animation.o \
 	build/nw4r/lyt/lyt_resourceAccessor.o \
-	build/asm/nw4r/lyt/lyt_arcResourceAccessor.o \
+	build/nw4r/lyt/lyt_arcResourceAccessor.o \
 	build/nw4r/lyt/lyt_common.o \
 
 EGG_O_FILES := \

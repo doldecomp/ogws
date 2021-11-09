@@ -155,6 +155,7 @@ namespace nw4r
 		struct AnimationLink;
 		struct ResourceAccessor;
 		struct ArcResourceAccessor;
+		struct FontRefLink;
 		struct Material;
 		struct Layout;
 		struct Bounding;

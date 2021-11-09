@@ -14,7 +14,7 @@ namespace nw4r
 
         }
 
-        ut::Font * ResourceAccessor::GetFont(const char *pName)
+        ut::Font * ResourceAccessor::GetFont(const char *name)
         {
             return NULL;
         }

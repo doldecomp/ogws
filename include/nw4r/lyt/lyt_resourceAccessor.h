@@ -1,5 +1,5 @@
-#ifndef NW4R_LYT_RESOURCEACCESSOR_H
-#define NW4R_LYT_RESOURCEACCESSOR_H
+#ifndef NW4R_LYT_RESOURCE_ACCESSOR_H
+#define NW4R_LYT_RESOURCE_ACCESSOR_H
 #include "types_nw4r.h"
 #include "ut_Font.h"
 
@@ -7,12 +7,13 @@ namespace nw4r
 {
     namespace lyt
     {
-        struct ResourceAccessor
+        class ResourceAccessor
         {
+        public:
             ResourceAccessor();
-            virtual ~ResourceAccessor();
-            virtual void GetResource(u32, const char *, u32 *) = 0;
-            virtual ut::Font * GetFont(const char *);
+            virtual ~ResourceAccessor(); // at 0x8
+            virtual UNKTYPE * GetResource(u32, const char *, u32 *) = 0; // at 0xC
+            virtual ut::Font * GetFont(const char *); // at 0x10
         };
     }
 }
