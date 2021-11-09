@@ -23,7 +23,7 @@ namespace nw4r
 				{
 					ut::detail::AutoLock<OSMutex> lock(mMutex);
 					
-					if (!mPriorityList.mCount) return;
+					if (mPriorityList.IsEmpty()) return;
 					
 					mPriorityList.Erase(pInstance);
 					mPool.Free(pInstance);
@@ -40,7 +40,7 @@ namespace nw4r
 						
 						if (priority < curPriority) break;
 						
-						iter.mIterator.mNode = iter.mIterator.mNode->mNext;
+						iter++;
 					}
 					
 					mPriorityList.Insert(iter, pInstance);

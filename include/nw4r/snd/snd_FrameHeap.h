@@ -80,7 +80,7 @@ namespace nw4r
 				
 				inline bool IsValid() const
 				{
-					return mList.mCount;
+					return mList.GetSize();
 				}
 			};
 		}
