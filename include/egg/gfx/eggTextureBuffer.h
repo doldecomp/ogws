@@ -6,54 +6,48 @@
 
 namespace EGG
 {
-    class TextureBuffer
+    class TextureBuffer : public CapTexture
     {
     public:
-        // Unofficial name
-        class BufferNode : public CapTexture
+        enum EBufferState
         {
-        public:
-            enum ENodeState
-            {
-                STATE_FREED,
-                STATE_ALLOCED
-            };
-
-            BufferNode();
-            // Unofficial
-            void free();
-
-            virtual ~BufferNode() {} // at 0x8
-            virtual void configure(); // at 0xC
-
-            UNKWORD mSize; // at 0x2C
-            ENodeState mState; // at 0x30
-            BufferNode *mpNext; // at 0x34
-            BufferNode *mpPrev; // at 0x38
+            STATE_FREE,
+            STATE_ALLOCED
         };
 
         static void initialize(u32, Heap *);
-        static BufferNode * getNotJoin();
-        static void alloc(BufferNode *, u32);
+        static TextureBuffer * getNotJoin();
+        static void alloc(TextureBuffer *, u32);
 
         // Unofficial
-        static void append(BufferNode *node)
+        static void append(TextureBuffer *buf)
         {
-            if (spTail != NULL) spTail->mpNext = node;
+            if (spTail != NULL) spTail->mpNext = buf;
 
-            node->mpPrev = spTail;
-            node->mpNext = NULL;
+            buf->mpPrev = spTail;
+            buf->mpNext = NULL;
 
-            spTail = node;
+            spTail = buf;
         }
 
+        virtual ~TextureBuffer() {} // at 0x8
+        virtual void configure(); // at 0xC
+
+        TextureBuffer();
+        void free();
+
     private:
-        static const u32 cMaxNodes = 64;
-        static BufferNode *spHead;
-        static BufferNode *spTail;
-        static BufferNode *spBufferAll;
+        u32 mSize; // at 0x2C
+        EBufferState mState; // at 0x30
+        TextureBuffer *mpNext; // at 0x34
+        TextureBuffer *mpPrev; // at 0x38
+
+        static const u32 cMaxBuffers = 64;
+        static TextureBuffer *spHead;
+        static TextureBuffer *spTail;
+        static TextureBuffer *spBufferAll;
         static u32 sBufferSize;
-        static BufferNode sBufferNodes[cMaxNodes];
+        static TextureBuffer sBuffers[cMaxBuffers];
     };
 }
 
