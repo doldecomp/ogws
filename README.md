@@ -24,25 +24,25 @@
 
 ### Instructions
 
-1. Obtain a clean **DOL** of `Wii Sports US rev1`.
+1. Obtain a clean **DOL** of `Wii Sports US rev1` .
 
-2. Place it in the `include` folder with `baserom.dol` as it's name.
+2. Place it in the `include` folder with `baserom.dol` as it's name.
 
-3. Obtain `mwcceppc.exe` & `mwldeppc.exe`.
+3. Obtain <kbd>mwcceppc.exe</kbd> & <kbd>mwldeppc.exe</kbd> .
 
     *Version : `3.0`*
 
-4. Place them in `tools`.
+4. Place them in `tools`.
 
-5. Obtain  `mwcceppc.exe` & `mwldeppc.exe`.
+5. Obtain <kbd>mwcceppc.exe</kbd> & <kbd>mwldeppc.exe</kbd> .
 
     *Version : `2.7`*
 
-6. Place them in `tools/old`.
+6. Place them in `tools/old` .
 
-7. Obtain `powerpc-eabi-as.exe` from **[DevKitPPC]**.
+7. Obtain <kbd>powerpc-eabi-as.exe</kbd> from **[DevKitPPC]** .
 
-8. Place it in `tools`.
+8. Place it in `tools` .
 
 9. Run the **Make** command :
 
