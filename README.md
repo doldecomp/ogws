@@ -1,24 +1,71 @@
-# Wii Sports
+# Wii Sports [![Discord Badge]][Discord]
 
-This repo contains a WIP decompilation of Wii Sports (US, revision 1).
+*A* ***WIP*** *decompilation of the* ***1st*** *revision of the* ***US*** *version.*
 
-## Required tools
+<br>
 
-* gcc
-* devkitPro
+---
 
-## Build instructions
+<br>
 
-1. Obtain a clean DOL of Wii Sports (US Rev 1), place it in `include` and name it `baserom.dol`.
+## Building
 
-2. Obtain version 3.0 of `mwcceppc.exe` and `mwldeppc.exe` and place them in `tools`.
+### Requirements
 
-3. Obtain version 2.7 of `mwcceppc.exe` and `mwldeppc.exe` and place them in `tools/old`.
+- **[DevKitPro]**
 
-4. Obtain `powerpc-eabi-as.exe` from devkitPPC and place it in `tools`.
+- **[GCC]**
 
-5. Run `make`.
+    ```sh
+    pacman -S gcc
+    ```
+
+<br>
+
+### Instructions
+
+1. Obtain a clean **DOL** of `Wii Sports US rev1`.
+
+2. Place it in the `include` folder with `baserom.dol` as it's name.
+
+3. Obtain `mwcceppc.exe` & `mwldeppc.exe`.
+
+    *Version : `3.0`*
+
+4. Place them in `tools`.
+
+5. Obtain  `mwcceppc.exe` & `mwldeppc.exe`.
+
+    *Version : `2.7`*
+
+6. Place them in `tools/old`.
+
+7. Obtain `powerpc-eabi-as.exe` from **[DevKitPPC]**.
+
+8. Place it in `tools`.
+
+9. Run the **Make** command :
+
+    ```sh
+    make
+    ```
+
+<br>
+
+---
+
+<br>
 
 ## Contributions
 
-Contributions and PRs are welcome.
+*`Contributions` / `Pull Requests` are welcome !*
+
+
+<!----------------------------------------------------------------------------->
+
+[DevKitPro]: https://devkitpro.org/wiki/Getting_Started
+[DevKitPPC]: https://wiibrew.org/wiki/DevkitPPC
+[GCC]: https://gcc.gnu.org/
+
+[Discord Badge]: https://img.shields.io/badge/Discord-7289DA?style=for-the-badge&logo=discord&logoColor=white
+[Discord]: https://discord.gg/hKx3FJJgrV
