@@ -15,13 +15,13 @@ gpCullingFrustum__Q24nw4r3g3d:
 	.balign 8
 
 .section .rodata, "a"
-.global lbl_80378B88
-lbl_80378B88:
+.global TYPE_NAME__Q34nw4r3g3d6ScnObj
+TYPE_NAME__Q34nw4r3g3d6ScnObj:
     .long 7
 	.string "ScnObj"
 	.balign 8
-.global lbl_80378B98
-lbl_80378B98:
+.global TYPE_NAME__Q34nw4r3g3d7ScnLeaf
+TYPE_NAME__Q34nw4r3g3d7ScnLeaf:
     .long 8
 	.string "ScnLeaf"
 	.balign 8
@@ -1809,9 +1809,9 @@ IsDerivedFrom__Q34nw4r3g3d8ScnGroupCFQ44nw4r3g3d6G3dObj7TypeObj:
 /* 800711B8 0006C0B8  38 60 00 01 */	li r3, 1
 /* 800711BC 0006C0BC  4E 80 00 20 */	blr 
 lbl_800711C0:
-/* 800711C0 0006C0C0  3C 60 80 38 */	lis r3, lbl_80378B88@ha
+/* 800711C0 0006C0C0  3C 60 80 38 */	lis r3, TYPE_NAME__Q34nw4r3g3d6ScnObj@ha
 /* 800711C4 0006C0C4  80 04 00 00 */	lwz r0, 0(r4)
-/* 800711C8 0006C0C8  38 63 8B 88 */	addi r3, r3, lbl_80378B88@l
+/* 800711C8 0006C0C8  38 63 8B 88 */	addi r3, r3, TYPE_NAME__Q34nw4r3g3d6ScnObj@l
 /* 800711CC 0006C0CC  7C 00 18 40 */	cmplw r0, r3
 /* 800711D0 0006C0D0  40 82 00 0C */	bne lbl_800711DC
 /* 800711D4 0006C0D4  38 60 00 01 */	li r3, 1
@@ -1826,9 +1826,9 @@ lbl_800711DC:
 
 .global IsDerivedFrom__Q34nw4r3g3d6ScnObjCFQ44nw4r3g3d6G3dObj7TypeObj
 IsDerivedFrom__Q34nw4r3g3d6ScnObjCFQ44nw4r3g3d6G3dObj7TypeObj:
-/* 800711F4 0006C0F4  3C 60 80 38 */	lis r3, lbl_80378B88@ha
+/* 800711F4 0006C0F4  3C 60 80 38 */	lis r3, TYPE_NAME__Q34nw4r3g3d6ScnObj@ha
 /* 800711F8 0006C0F8  80 04 00 00 */	lwz r0, 0(r4)
-/* 800711FC 0006C0FC  38 63 8B 88 */	addi r3, r3, lbl_80378B88@l
+/* 800711FC 0006C0FC  38 63 8B 88 */	addi r3, r3, TYPE_NAME__Q34nw4r3g3d6ScnObj@l
 /* 80071200 0006C100  7C 00 18 40 */	cmplw r0, r3
 /* 80071204 0006C104  40 82 00 0C */	bne lbl_80071210
 /* 80071208 0006C108  38 60 00 01 */	li r3, 1
@@ -1880,6 +1880,6 @@ GetTypeName__Q34nw4r3g3d6ScnObjCFv:
 
 .global GetTypeObj__Q34nw4r3g3d6ScnObjCFv
 GetTypeObj__Q34nw4r3g3d6ScnObjCFv:
-/* 80071298 0006C198  3C 60 80 38 */	lis r3, lbl_80378B88@ha
-/* 8007129C 0006C19C  38 63 8B 88 */	addi r3, r3, lbl_80378B88@l
+/* 80071298 0006C198  3C 60 80 38 */	lis r3, TYPE_NAME__Q34nw4r3g3d6ScnObj@ha
+/* 8007129C 0006C19C  38 63 8B 88 */	addi r3, r3, TYPE_NAME__Q34nw4r3g3d6ScnObj@l
 /* 800712A0 0006C1A0  4E 80 00 20 */	blr 

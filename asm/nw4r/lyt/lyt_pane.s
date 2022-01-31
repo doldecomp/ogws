@@ -4,6 +4,7 @@
 .4byte __sinit_$$3lyt_pane_cpp
 
 .section .sdata2, "a"
+.balign 8
 .global lbl_804C0470
 lbl_804C0470:
 	.single 0e0
@@ -26,12 +27,14 @@ lbl_804C0488:
 	.balign 8
 
 .section .sbss, "wa"
+.balign 8
 .global typeInfo__Q34nw4r3lyt4Pane
 typeInfo__Q34nw4r3lyt4Pane:
 	.skip 0x4
 	.balign 8
 
 .section .sdata, "wa"
+.balign 8
 # NW4R_LYT_Version___22@unnamed@lyt_pane_cpp@
 .global NW4R_LYT_Version___22$$2unnamed$$2lyt_pane_cpp$$2
 NW4R_LYT_Version___22$$2unnamed$$2lyt_pane_cpp$$2:
@@ -39,6 +42,7 @@ NW4R_LYT_Version___22$$2unnamed$$2lyt_pane_cpp$$2:
 .balign 0x8
 
 .section .data, "wa"
+.balign 8
 .global lbl_80397140
 lbl_80397140:
 .string "<< NW4R    - LYT \tfinal   build: Jun  8 2007 11:17:26 (0x4199_60831) >>"

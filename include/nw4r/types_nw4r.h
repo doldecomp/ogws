@@ -46,6 +46,7 @@ namespace nw4r
 		struct VEC3;
 		struct MTX34;
 		struct AABB;
+		struct FRUSTUM;
 	}
 	
 	namespace snd

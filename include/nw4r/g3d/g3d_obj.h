@@ -12,22 +12,35 @@ namespace nw4r
     {
         namespace detail
         {
-            inline void * AllocFromAllocator(MEMAllocator *pAllocator, u32 size)
+            static void * AllocFromAllocator(MEMAllocator *pAllocator, u32 size)
             {
                 return MEMAllocFromAllocator(pAllocator, size);
             }
 
-            inline void FreeToAllocator(MEMAllocator *pAllocator, void * pBlock)
+            static void FreeToAllocator(MEMAllocator *pAllocator, void * pBlock)
             {
                 return MEMFreeToAllocator(pAllocator, pBlock);
             }
         }
 
-        struct G3dObj
+        class G3dObj
         {
+        public:
             enum G3dProcTask
             {
+                G3DPROC_CALC_WORLD = 0x1,
+                G3DPROC_CALC_MAT = 0x2,
+                G3DPROC_CALC_VTX = 0x3,
+                G3DPROC_CALC_VIEW = 0x4,
+                G3DPROC_GATHER_SCNOBJ = 0x5,
+                G3DPROC_DRAW_OPA = 0x6,
+                G3DPROC_DRAW_XLU = 0x7,
+                G3DPROC_UPDATEFRAME = 0x8,
+
                 G3DPROC_CHILD_DETACHED = 0x10001,
+                G3DPROC_ATTACH_PARENT = 0x10002,
+                G3DPROC_DETACH_PARENT = 0x10003,
+                G3DPROC_0x10005 = 0x10005
             };
 
             template <u32 N>
@@ -39,9 +52,6 @@ namespace nw4r
 
             struct TypeObj
             {
-                // Unoffical name, but structure does exist via GPCS
-                // It also makes sense because templates need to be resolved at compile-time,
-                // so this is a way to store a pointer to one
                 struct TypeObjData
                 {
                     u32 mLength; // at 0x0
@@ -49,19 +59,19 @@ namespace nw4r
                 };
 
                 template <u32 N>
-                inline TypeObj(const ResNameDataT<N>& pRes) : mData((const TypeObjData *)&pRes) {}
+                TypeObj(const ResNameDataT<N>& pRes) : mData((const TypeObjData *)&pRes) {}
 
-                inline u32 GetTypeID() const
+                u32 GetTypeID() const
                 {
                     return (u32)mData;
                 }
 
-                inline const char * GetTypeName() const
+                const char * GetTypeName() const
                 {
                     return mData->mName;
                 }
 
-                inline bool operator==(const TypeObj& rhs) const
+                bool operator==(const TypeObj& rhs) const
                 {
                     return GetTypeID() == rhs.GetTypeID();
                 }
@@ -69,33 +79,37 @@ namespace nw4r
                 const TypeObjData *mData; // at 0x0
             };
 
-            void Destroy();
-            virtual bool IsDerivedFrom(const TypeObj&) const; // at 0x8
-            // Unofficial
-            virtual UNKTYPE G3dProc(u32, u32, void *) = 0; // at 0xC
-            virtual ~G3dObj(); // at 0x10
-            virtual const TypeObj GetTypeObj() const; // at 0x14
-            virtual const char * GetTypeName() const; // at 0x18
-
-            inline G3dObj(MEMAllocator *pAllocator, G3dObj *pParent)
-                : mAllocator(pAllocator), mParent(pParent) {}
-
-            inline G3dObj * GetParent() const
+        public:
+            virtual bool IsDerivedFrom(TypeObj other) const // at 0x8 
             {
-                return mParent;
+                return other == GetTypeObjStatic();
             }
-
-            static inline const G3dObj::TypeObj GetTypeObjStatic()
+            virtual void G3dProc(u32, u32, void *) = 0; // at 0xC
+            virtual ~G3dObj(); // at 0x10
+            virtual const TypeObj GetTypeObj() const // at 0x14
             {
                 return TypeObj(TYPE_NAME);
             }
+            virtual const char * GetTypeName() const // at 0x18
+            {
+                return GetTypeObj().GetTypeName();
+            }
 
-            static inline void * Alloc(MEMAllocator *pAllocator, u32 size)
+            void Destroy();
+
+            G3dObj(MEMAllocator *pAllocator, G3dObj *pParent)
+                : mAllocator(pAllocator), mParent(pParent) {}
+
+            G3dObj * GetParent() const { return mParent; }
+
+            static const G3dObj::TypeObj GetTypeObjStatic() { return TypeObj(TYPE_NAME); }
+
+            static void * Alloc(MEMAllocator *pAllocator, u32 size)
             {
                 return detail::AllocFromAllocator(pAllocator, size);
             }
 
-            static inline void Dealloc(MEMAllocator *pAllocator, void *pBlock)
+            static void Dealloc(MEMAllocator *pAllocator, void *pBlock)
             {
                 detail::FreeToAllocator(pAllocator, pBlock);
             }
@@ -103,6 +117,7 @@ namespace nw4r
             static inline void * operator new(size_t size, void *pBlock) {return pBlock;}
             static inline void operator delete(void *pBlock) {}
 
+        private:
             G3dObj *mParent; // at 0x4
             MEMAllocator *mAllocator; // at 0x8
 

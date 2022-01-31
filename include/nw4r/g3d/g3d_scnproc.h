@@ -10,7 +10,7 @@ namespace nw4r
         class ScnProc : public ScnLeaf
         {
         public:
-            typedef void (* DrawProc)(ScnProc *, bool);
+            typedef void (* DrawProc)(ScnProc *, bool opa);
 
             ScnProc(MEMAllocator *allocator, DrawProc proc, void *userdata, bool set1, bool set2)
                 : ScnLeaf(allocator), mFlags(0), mDrawProc(proc), mUserData(userdata)
@@ -21,13 +21,24 @@ namespace nw4r
 
             static ScnProc * Construct(MEMAllocator *, u32 *, DrawProc, bool, bool, u32);
 
-            virtual bool IsDerivedFrom(const TypeObj& other) const {
-                return other == GetTypeObjStatic() ? true : ScnLeaf::IsDerivedFrom(other); }; // at 0x8
-            virtual UNKTYPE G3dProc(u32, u32, void *); // at 0xC
-            virtual ~ScnProc() {}; // at 0x10
-            virtual const TypeObj GetTypeObj() const { return TypeObj(TYPE_NAME); } // at 0x14
-            virtual const char * GetTypeName() const { return GetTypeObj().GetTypeName(); } // at 0x18
+            virtual bool IsDerivedFrom(TypeObj other) const // at 0x8
+            {
+                return other == GetTypeObjStatic() ? true
+                    : ScnLeaf::IsDerivedFrom(other);
+            };
+            virtual void G3dProc(u32, u32, void *); // at 0xC
+            virtual ~ScnProc() {} // at 0x10
+            virtual const TypeObj GetTypeObj() const // at 0x14
+            {
+                return TypeObj(TYPE_NAME);
+            }
+            virtual const char * GetTypeName() const // at 0x18
+            {
+                return GetTypeObj().GetTypeName();
+            }
             
+            static const G3dObj::TypeObj GetTypeObjStatic() { return TypeObj(TYPE_NAME); }
+
             void * GetUserData() { return mUserData; }
             void SetUserData(void *data) { mUserData = data; }
 

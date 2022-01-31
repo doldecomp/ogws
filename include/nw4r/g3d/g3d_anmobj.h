@@ -71,7 +71,7 @@ namespace nw4r
             
             void SetAnmFlag(AnmFlag, bool);
             bool TestAnmFlag(AnmFlag) const;
-            virtual bool IsDerivedFrom(const TypeObj&) const;
+            virtual bool IsDerivedFrom(TypeObj) const;
             virtual const TypeObj GetTypeObj() const;
             static const TypeObj GetTypeObjStatic();
             virtual const char * GetTypeName() const;
