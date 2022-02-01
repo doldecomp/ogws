@@ -28,11 +28,6 @@ namespace nw4r
             }
         }
 
-        AnmObj::~AnmObj()
-        {
-
-        }
-
         void AnmObj::SetAnmFlag(AnmFlag flag, bool value)
         {
             if (value)
@@ -48,26 +43,6 @@ namespace nw4r
         bool AnmObj::TestAnmFlag(AnmFlag flag) const
         {
             return this->mFlags & flag;
-        }
-
-        bool AnmObj::IsDerivedFrom(TypeObj other) const
-        {
-            return (other == GetTypeObjStatic()) ? true : G3dObj::IsDerivedFrom(other);
-        }
-
-        const G3dObj::TypeObj AnmObj::GetTypeObj() const
-        {
-            return TypeObj(TYPE_NAME);
-        }
-
-        const G3dObj::TypeObj AnmObj::GetTypeObjStatic()
-        {
-            return TypeObj(TYPE_NAME);
-        }
-
-        const char * AnmObj::GetTypeName() const
-        {
-            return GetTypeObj().GetTypeName();
         }
 
         NW4R_G3D_TYPE_OBJ_DEF(AnmObj);
