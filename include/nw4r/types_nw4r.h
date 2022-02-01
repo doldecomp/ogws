@@ -125,6 +125,8 @@ namespace nw4r
 		struct ScnLeaf;
 		struct ScnObj;
 		struct ScnGroup;
+		struct IScnObjGather;
+		struct IScnObjCallback;
 	}
 
 	namespace lyt

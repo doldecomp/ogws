@@ -40,14 +40,16 @@ namespace nw4r
                 G3DPROC_CHILD_DETACHED = 0x10001,
                 G3DPROC_ATTACH_PARENT = 0x10002,
                 G3DPROC_DETACH_PARENT = 0x10003,
-                G3DPROC_0x10005 = 0x10005
+                G3DPROC_0x10004 = 0x10004
             };
 
             template <u32 N>
             struct ResNameDataT
             {
                 u32 mLength;
-                char mName[N];
+                // Bug? +1 seemingly for null terminator,
+                // but size N already includes it
+                char mName[N + 1 + 3 & ~3];
             };
 
             struct TypeObj
@@ -95,14 +97,18 @@ namespace nw4r
                 return GetTypeObj().GetTypeName();
             }
 
+            static const G3dObj::TypeObj GetTypeObjStatic()
+            {
+                return TypeObj(TYPE_NAME);
+            }
+
             void Destroy();
 
             G3dObj(MEMAllocator *pAllocator, G3dObj *pParent)
                 : mAllocator(pAllocator), mParent(pParent) {}
 
             G3dObj * GetParent() const { return mParent; }
-
-            static const G3dObj::TypeObj GetTypeObjStatic() { return TypeObj(TYPE_NAME); }
+            void SetParent(G3dObj *parent) { mParent = parent; }
 
             static void * Alloc(MEMAllocator *pAllocator, u32 size)
             {
@@ -114,7 +120,7 @@ namespace nw4r
                 detail::FreeToAllocator(pAllocator, pBlock);
             }
 
-            static inline void * operator new(size_t size, void *pBlock) {return pBlock;}
+            static inline void * operator new(size_t size, void *pBlock) { return pBlock; }
             static inline void operator delete(void *pBlock) {}
 
         private:

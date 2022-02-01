@@ -1,12 +1,14 @@
 .include "macros.inc"
 
 .section .sdata2, "a"
+.balign 0x8
 .global $$213191
 $$213191:
 	.single 0e0.5
 	.balign 8
 
 .section .sdata, "wa"
+.balign 0x8
 .global lbl_804BD440
 lbl_804BD440:
 	.long 0x20
@@ -21,6 +23,7 @@ lbl_804BD44C:
 	.long -4
 
 .section .rodata, "a"
+.balign 0x8
 .global lbl_80378BB8
 lbl_80378BB8:
     .long 8
@@ -28,6 +31,7 @@ lbl_80378BB8:
 	.balign 8
 
 .section .data, "wa"
+.balign 0x8
 .global __vt__Q34nw4r3g3d12ScnObjGather
 __vt__Q34nw4r3g3d12ScnObjGather:
     .long 0
@@ -1900,9 +1904,9 @@ IsDerivedFrom__Q34nw4r3g3d7ScnRootCFQ44nw4r3g3d6G3dObj7TypeObj:
 /* 80072B9C 0006DA9C  38 60 00 01 */	li r3, 1
 /* 80072BA0 0006DAA0  4E 80 00 20 */	blr 
 lbl_80072BA4:
-/* 80072BA4 0006DAA4  3C 60 80 38 */	lis r3, lbl_80378BA8@ha
+/* 80072BA4 0006DAA4  3C 60 80 38 */	lis r3, TYPE_NAME__Q34nw4r3g3d8ScnGroup@ha
 /* 80072BA8 0006DAA8  80 04 00 00 */	lwz r0, 0(r4)
-/* 80072BAC 0006DAAC  38 63 8B A8 */	addi r3, r3, lbl_80378BA8@l
+/* 80072BAC 0006DAAC  38 63 8B A8 */	addi r3, r3, TYPE_NAME__Q34nw4r3g3d8ScnGroup@l
 /* 80072BB0 0006DAB0  7C 00 18 40 */	cmplw r0, r3
 /* 80072BB4 0006DAB4  40 82 00 0C */	bne lbl_80072BC0
 /* 80072BB8 0006DAB8  38 60 00 01 */	li r3, 1

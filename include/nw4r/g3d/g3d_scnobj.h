@@ -14,8 +14,6 @@ namespace nw4r
             static inline u32 align4(u32 x) { return x + 3 & ~3; }
         }
 
-        static math::FRUSTUM *gpCullingFrustum;
-
         struct IScnObjGather
         {
             virtual ~IScnObjGather();
@@ -25,11 +23,6 @@ namespace nw4r
         class ScnObj : public G3dObj
         {
         public:
-            struct UnkObject0xD4
-            {
-                virtual ~UnkObject0xD4();
-            };
-
             enum ForEachResult
             {
                 FOREACH_RESULT_0,
@@ -63,14 +56,16 @@ namespace nw4r
 
             enum Timing
             {
-                TIMING_0 = 0x1,
-                TIMING_1 = 0x2,
-                TIMING_2 = 0x3
+                TIMING_1 = 0x1,
+                TIMING_2 = 0x2,
+                TIMING_4 = 0x4
             };
 
             enum ExecOp
             {
-
+                EXEC_OP_1 = 0x1,
+                EXEC_OP_2 = 0x2,
+                EXEC_OP_4 = 0x4
             };
 
             enum ScnObjBoundingVolumeType
@@ -82,6 +77,7 @@ namespace nw4r
 
             typedef ForEachResult (* ForEachAction)(ScnObj *, void *);
 
+        public:
             ScnObj(MEMAllocator *);
 
             virtual bool IsDerivedFrom(TypeObj other) const // at 0x8
@@ -99,25 +95,32 @@ namespace nw4r
             {
                 return GetTypeObj().GetTypeName();
             }
-            virtual bool ForEach(ForEachAction, void *, bool) = 0; // at 0x1C
+            virtual ForEachResult ForEach(ForEachAction, void *, bool) = 0; // at 0x1C
             virtual bool SetScnObjOption(u32, u32); // at 0x20
             virtual bool GetScnObjOption(u32, u32 *) const; // at 0x24
             virtual f32 GetValueForSortOpa() const; // at 0x28
             virtual f32 GetValueForSortXlu() const; // at 0x2C
             virtual void CalcWorldMtx(const math::MTX34 *, u32 *); // at 0x30
 
-            static const G3dObj::TypeObj GetTypeObjStatic() { return TypeObj(TYPE_NAME); }
+            static const G3dObj::TypeObj GetTypeObjStatic()
+            {
+                return TypeObj(TYPE_NAME);
+            }
 
-            // to-do: order these
             void CalcViewMtx(const math::MTX34 *);
             bool SetMtx(ScnObjMtxType, const math::MTX34 *);
-            bool GetMtx(ScnObjMtxType, math::MTX34 *);
+            bool GetMtx(ScnObjMtxType, math::MTX34 *) const;
             void SetPriorityDrawOpa(int);
             void SetPriorityDrawXlu(int);
             void EnableScnObjCallbackTiming(Timing);
             void EnableScnObjCallbackExecOp(ExecOp);
             bool SetBoundingVolume(ScnObjBoundingVolumeType, const math::AABB *);
             bool GetBoundingVolume(ScnObjBoundingVolumeType, math::AABB *) const;
+
+            const math::MTX34 * GetMtxPtr(ScnObjMtxType type) const
+            {
+                return &mMatrices[type];
+            }
 
             void SetScnObjFlag(ScnObjFlag f, u32 set)
             {
@@ -130,7 +133,14 @@ namespace nw4r
                     mFlags &= ~f;
                 }
             }
-            bool TestScnObjFlag(ScnObjFlag f) const { return mFlags & f; }
+            bool TestScnObjFlag(ScnObjFlag f) const
+            {
+                return mFlags & f;
+            }
+
+            inline void CheckCallback_CALC_VIEW(Timing timing, u32 r5, void *r6);
+            inline void CheckCallback_CALC_MAT(Timing timing, u32 r5, void *r6);
+            inline void CheckCallback_CALC_WORLD(Timing timing, u32 r5, void *r6);
 
             bool IsG3dProcDisabled(u32 task) const
             {
@@ -139,17 +149,7 @@ namespace nw4r
             }
 
         protected:
-            union
-            {
-                struct
-                {
-                    math::MTX34 MTX34_0xC;
-                    math::MTX34 mWorldMtx; // at 0x3C
-                    math::MTX34 mViewMtx; // at 0x6C
-                };
-                math::MTX34 mMatrices[MTX_TYPE_MAX]; // at 0xC
-            };
-            
+            math::MTX34 mMatrices[MTX_TYPE_MAX]; // at 0xC
             math::AABB mBounds[BOUNDING_MAX]; // at 0x9C
 
             u32 mFlags; // at 0xCC
@@ -157,18 +157,60 @@ namespace nw4r
             u8 mPriorityDrawXlu; // at 0xD1
             u8 BYTE_0xD2;
             u8 BYTE_0xD3;
-            UnkObject0xD4 *PTR_0xD4;
-            u8 BYTE_0xD8;
+            IScnObjCallback *mCallback; // at 0xD4
+            u8 mTiming; // at 0xD8
             u8 BYTE_0xD9;
-            u16 SHORT_0xDA;
+            u16 mExecOp; // at 0xDA
 
             NW4R_G3D_TYPE_OBJ_DECL(ScnObj);
         };
 
+        struct IScnObjCallback
+        {
+            virtual ~IScnObjCallback() {} // at 0x8
+            virtual void ExecCallback_CALC_WORLD(ScnObj::Timing, ScnObj *, u32, void *) {} // at 0xC
+            virtual void ExecCallback_CALC_MAT(ScnObj::Timing, ScnObj *, u32, void *) {} // at 0x10
+            virtual void ExecCallback_CALC_VIEW(ScnObj::Timing, ScnObj *, u32, void *) {} // at 0x14
+        };
+
+        // Is there a better way of resolving this dependency?
+        void ScnObj::CheckCallback_CALC_VIEW(Timing timing, u32 r5, void *r6)
+        {
+            if (mCallback != NULL)
+            {
+                if ((mExecOp & EXEC_OP_4) && (mTiming & timing))
+                {
+                    mCallback->ExecCallback_CALC_VIEW(timing, this, r5, r6);
+                }
+            }  
+        }
+
+        void ScnObj::CheckCallback_CALC_MAT(Timing timing, u32 r5, void *r6)
+        {
+            if (mCallback != NULL)
+            {
+                if ((mExecOp & EXEC_OP_2) && (mTiming & timing))
+                {
+                    mCallback->ExecCallback_CALC_MAT(timing, this, r5, r6);
+                }
+            }
+        }
+
+        void ScnObj::CheckCallback_CALC_WORLD(Timing timing, u32 r5, void *r6)
+        {
+            if (mCallback != NULL)
+            {
+                if ((mExecOp & EXEC_OP_1) && (mTiming & timing))
+                {
+                    mCallback->ExecCallback_CALC_WORLD(timing, this, r5, r6);
+                }
+            }
+        }    
+
         class ScnLeaf : public ScnObj
         {
         public:
-            // Unofficial name, GetScaleProperty just needs to return an enum to match
+            // Unofficial name, however GetScaleProperty needs to return an enum to match
             enum ScaleProperty
             {
                 SCALE_PROPERTY_0,
@@ -177,7 +219,7 @@ namespace nw4r
             };
 
         public:
-            ScnLeaf(MEMAllocator *allocator) : ScnObj(allocator), VEC3_0xDC(1.0f, 1.0f, 1.0f) {}
+            ScnLeaf(MEMAllocator *allocator) : ScnObj(allocator), mScale(1.0f, 1.0f, 1.0f) {}
 
             virtual bool IsDerivedFrom(TypeObj other) const // at 0x8
             {
@@ -194,18 +236,21 @@ namespace nw4r
             {
                 return GetTypeObj().GetTypeName();
             }
-            virtual bool ForEach(ForEachAction, void *, bool); // at 0x1C
+            virtual ForEachResult ForEach(ForEachAction, void *, bool); // at 0x1C
             virtual bool SetScnObjOption(u32, u32); // at 0x20
             virtual bool GetScnObjOption(u32, u32 *) const; // at 0x24
-            virtual UNKTYPE CalcWorldMtx(const math::MTX34 *, u32 *); // at 0x30
+            virtual void CalcWorldMtx(const math::MTX34 *, u32 *); // at 0x30
 
-            static const G3dObj::TypeObj GetTypeObjStatic() { return TypeObj(TYPE_NAME); }
+            static const G3dObj::TypeObj GetTypeObjStatic()
+            {
+                return TypeObj(TYPE_NAME);
+            }
 
             ScaleProperty GetScaleProperty() const;
             void DefG3dProcScnLeaf(u32, u32, void *);
 
         private:
-            math::VEC3 VEC3_0xDC;
+            math::VEC3 mScale;
 
             NW4R_G3D_TYPE_OBJ_DECL(ScnLeaf);
         };
@@ -230,15 +275,26 @@ namespace nw4r
             {
                 return GetTypeObj().GetTypeName();
             }
-            virtual bool ForEach(ForEachAction, void *, bool); // at 0x1C
+            virtual ForEachResult ForEach(ForEachAction, void *, bool); // at 0x1C
             virtual bool Insert(u32, ScnObj *); // at 0x34
             virtual ScnObj * Remove(u32); // at 0x38
             virtual bool Remove(ScnObj *); // at 0x3C
 
-            static const G3dObj::TypeObj GetTypeObjStatic() { return TypeObj(TYPE_NAME); }
+            static const G3dObj::TypeObj GetTypeObjStatic()
+            {
+                return TypeObj(TYPE_NAME);
+            }
 
-            bool Empty() const { return mSize == 0; }
-            u32 Size() const { return mSize; }
+            bool Empty() const
+            {
+                return mSize == 0;
+            }
+
+            u32 Size() const
+            {
+                return mSize;
+            }
+
             ScnObj * PopBack()
             {
                 if (!Empty())
@@ -258,12 +314,14 @@ namespace nw4r
             }
 
             void ScnGroup_G3DPROC_GATHER_SCNOBJ(u32, IScnObjGather *);
-            void ScnGroup_G3DPROC_CALC_WORLD(u32, const math::MTX34*);
+            void ScnGroup_G3DPROC_CALC_WORLD(u32, const math::MTX34 *);
+            void ScnGroup_G3DPROC_CALC_MAT(u32, void *);
+            void ScnGroup_G3DPROC_CALC_VIEW(u32, const math::MTX34 *);
             void DefG3dProcScnGroup(u32, u32, void *);
 
             bool PushBack(ScnObj *);
             
-            ScnObj **mBuffer; // at 0xDC
+            ScnObj **mObjects; // at 0xDC
             u32 mCapacity; // at 0xE0
             u32 mSize; // at 0xE4
 

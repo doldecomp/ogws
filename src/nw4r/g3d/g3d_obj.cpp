@@ -19,6 +19,7 @@ namespace nw4r
 
         namespace
         {
+            // Force order of weak functions
             void UNUSED_FUNC_ORDER_G3DOBJ(G3dObj *obj)
             {
                 (void)obj->GetTypeObj();
