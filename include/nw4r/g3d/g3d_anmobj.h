@@ -2,6 +2,7 @@
 #define NW4R_G3D_ANMOBJ_H
 #include "types_nw4r.h"
 #include "g3d_rescommon.h"
+#include "g3d_resmdl.h"
 #include "g3d_obj.h"
 
 namespace nw4r
@@ -67,20 +68,28 @@ namespace nw4r
             AnmObj(MEMAllocator *pAllocator, G3dObj *pParent)
                 : G3dObj(pAllocator, pParent), mFlags(0) {}
 
-            virtual ~AnmObj() {} // at 0x8
-            virtual bool IsDerivedFrom(TypeObj other) const // at 0xC
+            virtual bool IsDerivedFrom(TypeObj other) const // at 0x8
             {
                 return (other == GetTypeObjStatic()) ? true
                     : G3dObj::IsDerivedFrom(other);
             }
-            virtual const TypeObj GetTypeObj() const // at 0x10
+            virtual void G3dProc(u32, u32, void *) = 0; // at 0xC
+            virtual ~AnmObj() {} // at 0x10
+            virtual const TypeObj GetTypeObj() const // at 0x14
             {
                 return TypeObj(TYPE_NAME);
             }
-            virtual const char * GetTypeName() const // at 0x14
+            virtual const char * GetTypeName() const // at 0x18
             {
                 return GetTypeObj().GetTypeName();
             }
+            virtual void SetFrame(f32) = 0; // at 0x1C
+            virtual f32 GetFrame() const = 0; // at 0x20
+            virtual void UpdateFrame() = 0; // at 0x24
+            virtual void SetUpdateRate(f32) = 0; // at 0x1C
+            virtual f32 GetUpdateRate() const = 0; // at 0x20
+            virtual bool Bind(ResMdl) = 0; // at 0x24
+            virtual void Release() = 0; // at 0x28
 
             static const TypeObj GetTypeObjStatic()
             {
