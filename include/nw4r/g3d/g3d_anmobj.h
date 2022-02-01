@@ -58,13 +58,20 @@ namespace nw4r
             static f32 smBaseUpdateRate;
         };
 
-        struct AnmObj : G3dObj
+        class AnmObj : G3dObj
         {
+        public:
+            struct AnmResult
+            {
+
+            };
+             
             enum AnmFlag
             {
                 ANMFLAG_ISBOUND = 0x4
             };
 
+        public:
             AnmObj(MEMAllocator *pAllocator, G3dObj *pParent)
                 : G3dObj(pAllocator, pParent), mFlags(0) {}
 
@@ -86,10 +93,11 @@ namespace nw4r
             virtual void SetFrame(f32) = 0; // at 0x1C
             virtual f32 GetFrame() const = 0; // at 0x20
             virtual void UpdateFrame() = 0; // at 0x24
-            virtual void SetUpdateRate(f32) = 0; // at 0x1C
-            virtual f32 GetUpdateRate() const = 0; // at 0x20
-            virtual bool Bind(ResMdl) = 0; // at 0x24
-            virtual void Release() = 0; // at 0x28
+            virtual void SetUpdateRate(f32) = 0; // at 0x28
+            virtual f32 GetUpdateRate() const = 0; // at 0x2C
+            virtual bool Bind(ResMdl) = 0; // at 0x30
+            virtual void Release(); // at 0x34
+            virtual AnmResult * GetResult(u32) = 0; // at 0x38
 
             static const TypeObj GetTypeObjStatic()
             {
@@ -99,6 +107,7 @@ namespace nw4r
             void SetAnmFlag(AnmFlag, bool);
             bool TestAnmFlag(AnmFlag) const;
 
+        private:
             u32 mFlags; // at 0x0
 
             NW4R_G3D_TYPE_OBJ_DECL(AnmObj);
