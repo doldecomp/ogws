@@ -52,8 +52,8 @@ _unwind_atan2__Q23EGG7Math$$0f$$1Fff:
     .long 0x000a0000
     .long 0x00000000
 
-.global _unwind___dt__Q23EGG9Matrix34fFv
-_unwind___dt__Q23EGG9Matrix34fFv:
+.global _unwind___dt__Q23EGG13UnknownStructFv
+_unwind___dt__Q23EGG13UnknownStructFv:
     .long 0x08080000
     .long 0x00000000
 
@@ -64,7 +64,7 @@ _unwind_setAxisRotation__Q23EGG9Matrix34fFRCQ23EGG8Vector3ff:
     .long 0x00000010
     .long 0x00000000
     .long 0x82000008
-    .long __dt__Q23EGG9Matrix34fFv
+    .long __dt__Q23EGG13UnknownStructFv
 
 .global _unwind_setAxisRotation__Q23EGG5QuatfFRCQ23EGG8Vector3ff
 _unwind_setAxisRotation__Q23EGG5QuatfFRCQ23EGG8Vector3ff:

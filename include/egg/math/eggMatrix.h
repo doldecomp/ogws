@@ -8,7 +8,6 @@ namespace EGG
     {
         Matrix34f() {}
         Matrix34f(f32, f32, f32, f32, f32, f32, f32, f32, f32, f32, f32, f32);
-        ~Matrix34f();
 
         void makeZero()
         {

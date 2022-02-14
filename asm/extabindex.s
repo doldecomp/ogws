@@ -62,11 +62,11 @@ _index_atan2__Q23EGG7Math$$0f$$1Fff:
     .long 0x00000024
     .long _unwind_atan2__Q23EGG7Math$$0f$$1Fff
 
-.global _index___dt__Q23EGG9Matrix34fFv
-_index___dt__Q23EGG9Matrix34fFv:
-    .long __dt__Q23EGG9Matrix34fFv
+.global _index___dt__Q23EGG13UnknownStructFv
+_index___dt__Q23EGG13UnknownStructFv:
+    .long __dt__Q23EGG13UnknownStructFv
     .long 0x00000040
-    .long _unwind___dt__Q23EGG9Matrix34fFv
+    .long _unwind___dt__Q23EGG13UnknownStructFv
 
 .global _index_setAxisRotation__Q23EGG9Matrix34fFRCQ23EGG8Vector3ff
 _index_setAxisRotation__Q23EGG9Matrix34fFRCQ23EGG8Vector3ff:
