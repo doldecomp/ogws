@@ -27,10 +27,13 @@ namespace EGG
         static void GXSetProjection(Mtx, int);
         static void GXSetProjectionv(const f32 *);
         static void GXSetViewport(f32, f32, f32, f32, f32, f32);
-
+        static void GXSetScissor(u32, u32, u32, u32);
+        static void GXSetScissorBoxOffset(int, int);
         static void GXSetColorUpdate(bool);
         static void GXSetAlphaUpdate(bool);
         static void GXSetDither(bool);
+
+        // ? func_80084C40()
 
     public:
         static GXColor sDefaultTexColor;
