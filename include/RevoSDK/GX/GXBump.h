@@ -3,9 +3,28 @@
 #include <types.h>
 #include <GXTev.h>
 #include <GXTexture.h>
+#include <math/mtx.h>
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+typedef enum _GXIndTexStageID
+{
+    GX_IND_TEX_STAGE_0
+} GXIndTexStageID;
+
+typedef enum _GXIndTexScale
+{
+    GX_IND_TEX_SCALE_0
+} GXIndTexScale;
+
+typedef enum _GXIndTexMtxID
+{
+    GX_IND_TEX_MTX_0
+} GXIndTexMtxID;
+
+UNKTYPE GXSetIndTexCoordScale(GXIndTexStageID, GXIndTexScale, GXIndTexScale);
+UNKTYPE GXSetIndTexMtx(GXIndTexMtxID, Mtx *, UNKWORD);
 
 UNKTYPE GXSetNumIndStages(UNKWORD);
 UNKTYPE GXSetTevDirect(UNKWORD);

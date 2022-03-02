@@ -9,6 +9,14 @@ extern "C" {
 typedef enum _GXTexMapID
 {
 	GX_TEX_MAP_ID_0,
+	GX_TEX_MAP_ID_1,
+	GX_TEX_MAP_ID_2,
+	GX_TEX_MAP_ID_3,
+	GX_TEX_MAP_ID_4,
+	GX_TEX_MAP_ID_5,
+	GX_TEX_MAP_ID_6,
+	GX_TEX_MAP_ID_7,
+	
 	GX_TEX_MAP_ID_INVALID = 0xFF
 } GXTexMapID;
 
@@ -104,6 +112,8 @@ UNKTYPE GXInitTexObjLOD(GXTexObj *, int min_filt, int mag_filt, UNKWORD biasClam
 UNKTYPE GXLoadTexObj(GXTexObj *, GXTexMapID texMapID);
 UNKWORD GXGetTexObjTlut(GXTexObj *);
 UNKTYPE GXInitTlutObj(GXTlutObj *, UNKTYPE *palette, UNKWORD paletteFmt, UNKWORD paletteEntryNum);
+
+UNKTYPE GXInvalidateTexAll();
 
 #ifdef __cplusplus
 }

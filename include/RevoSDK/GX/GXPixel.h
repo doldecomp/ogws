@@ -13,6 +13,19 @@ typedef enum _GXFogType
     GX_FOG_TYPE_2,
 } GXFogType;
 
+// Unofficial name
+typedef enum _GXPixelFmt
+{
+    GX_PIXEL_FMT_0,
+    GX_PIXEL_FMT_1,
+    GX_PIXEL_FMT_2,
+    GX_PIXEL_FMT_3,
+    GX_PIXEL_FMT_4,
+    GX_PIXEL_FMT_5,
+    GX_PIXEL_FMT_6,
+    GX_PIXEL_FMT_7,
+} GXPixelFmt;
+
 UNKTYPE GXSetFog(GXFogType, GXColor, float startz, float endz, float nearz, float farz);
 
 UNKTYPE GXInitFogAdjTable(u16 *table, u16 width, const float (*)[4]);
