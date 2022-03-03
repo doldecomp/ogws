@@ -31,6 +31,7 @@ lbl_804BEBD8:
 	.skip 0x8
 
 .section .sdata2, "a"
+.balign 0x8
 .global lbl_804C0558
 lbl_804C0558:
 	.incbin "baserom.dol", 0x3C9198, 0x8
