@@ -24,7 +24,7 @@ typedef enum _GXIndTexMtxID
 } GXIndTexMtxID;
 
 UNKTYPE GXSetIndTexCoordScale(GXIndTexStageID, GXIndTexScale, GXIndTexScale);
-UNKTYPE GXSetIndTexMtx(GXIndTexMtxID, Mtx *, UNKWORD);
+UNKTYPE GXSetIndTexMtx(GXIndTexMtxID, const f32 *, UNKWORD);
 
 UNKTYPE GXSetNumIndStages(UNKWORD);
 UNKTYPE GXSetTevDirect(UNKWORD);

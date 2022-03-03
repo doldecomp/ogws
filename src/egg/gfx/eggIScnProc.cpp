@@ -114,7 +114,7 @@ namespace EGG
         // GXUtility::func_800A1B88(b);
 
         p_data->mpThis->VIRT_0xC(p_data->SHORT_0x8);
-        // func_80084548();
+        // setupCache__Q23EGG7StateGXFv();
 
         // GXUtility::func_800A1B88(b);
     }

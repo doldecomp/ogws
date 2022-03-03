@@ -11,20 +11,50 @@ namespace EGG
     class StateGX
     {
     public:
-        static void func_80083E18();
-        static void func_80083E5C();
-        static void func_80083EBC();
-        static void func_80083EC0();
-        static void func_80083EF8();
-        static void func_80084034();
-        static void func_80084110();
-        static void func_80084188();
-        static void func_8008422C();
-        static void func_800842E0();
-        static void func_80084490();
-        static void func_80084548();
+        enum StateFlags
+        {
+            USE_TMEM = 0x10,
+            VALID_CACHE = 0x20
+        };
 
-        static void GXSetProjection(Mtx, int);
+        enum CacheFlags
+        {
+            PROJECTIONV_CACHED = 0x1,
+            VIEWPORT_CACHED = 0x2,
+            SCISSOR_CACHED = 0x4,
+            SCISSOR_BOX_CACHED = 0x8,
+            DITHER_CACHED = 0x10,
+            COLOR_UPDATE_CACHED = 0x20,
+            ALPHA_UPDATE_CACHED = 0x40,
+        };
+
+        struct CachedState
+        {
+            u32 flags; // at 0x0
+            int scissorOfsX; // at 0x4
+            int scissorOfsY; // at 0x8
+            bool colorUpdate; // at 0xC
+            bool alphaUpdate; // at 0xD
+            bool dither; // at 0xE
+        };
+
+    public:
+        static GXPixelFmt getDefaultPixelFormat() { return sDefaultPixelFormat; }
+        static const GXColor& getDefaultTexColor() { return sDefaultTexColor; }
+
+        static void invalidateTexAllGX();
+        static void resetGXCache();
+        static void resetCache();
+        static void resetGX();
+        static void resetGXAttr();
+        static void resetGXChans();
+        static void resetGXTexMtx();
+        static void resetGXTexObjs();
+        static void resetGXTexCoords();
+        static void resetGXTevs();
+        static void resetGXFog();
+        static void setupCache();
+        static void GXSetProjection(Mtx44, int);
         static void GXSetProjectionv(const f32 *);
         static void GXSetViewport(f32, f32, f32, f32, f32, f32);
         static void GXSetScissor(u32, u32, u32, u32);
@@ -32,20 +62,28 @@ namespace EGG
         static void GXSetColorUpdate(bool);
         static void GXSetAlphaUpdate(bool);
         static void GXSetDither(bool);
-
-        // ? func_80084C40()
-
-    public:
-        static GXColor sDefaultTexColor;
+        static void GXSetPixelFmt(GXPixelFmt, UNKWORD);
 
     private:
-        static u16 sStateFlags1; // 804BD480
-        static nw4r::g3d::tmem::TMemLayout sTMemLayout; // 804BD488
+        static CachedState sCache;
+        static u8 sDefaultTexObjImage[4 * 4] __attribute__ ((aligned (32)));
 
-        static u32 sStateFlags2; // 80409720
-        static u8 sTexObjImage[4 * 4] __attribute__ ((aligned (32))); // 80409740
+        static const f32 lbl_80378C68[];
+        static const f32 lbl_80378C80[];
 
-        static const GXColor cAmbColorWhite;
+        static u16 sScreenWidth;
+        static u16 sScreenHeight;
+        static GXPixelFmt sDefaultPixelFormat;
+        static UNKWORD sDefaultPixelFormatArg2;
+        static GXPixelFmt sCurrentPixelFormat;
+        static UNKWORD sCurrentPixelFormatArg2;
+        static GXColor sDefaultTexColor;
+
+        static u16 sStateFlags;
+        static f32 sModifyRatio;
+        static nw4r::g3d::tmem::TMemLayout sTMemLayout;
+
+        static const GXColor cDefaultGXColor;
     };
 }
 

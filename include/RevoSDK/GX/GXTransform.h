@@ -6,18 +6,25 @@
 extern "C" {
 #endif
 
-UNKTYPE GXSetScissor(u32 left, u32 top, u32 width, u32 height);
-UNKTYPE GXSetScissorBoxOffset(u32 xOffset, u32 yOffset);
+UNKTYPE GXSetProjection(float (*)[4], u32);
+UNKTYPE GXSetProjectionv(const f32 *);
+UNKTYPE GXGetProjectionv(f32 *);
+
+UNKTYPE GXLoadPosMtxImm(float (*)[4], u32);
+
+UNKTYPE GXLoadTexMtxImm(float (*)[4], UNKWORD, UNKWORD type);
 
 UNKTYPE GXSetCurrentMtx(UNKWORD);
 
-UNKTYPE GXSetViewport(f32, f32, f32, f32, f32, f32);
 UNKTYPE GXSetViewportJitter(f32, f32, f32, f32, f32, f32, u32);
+UNKTYPE GXSetViewport(f32, f32, f32, f32, f32, f32);
+UNKTYPE GXGetViewportv(f32[6]);
 
-UNKTYPE GXSetProjection(float (*)[4], u32);
-UNKTYPE GXSetProjectionv(float (*)[4]);
+UNKTYPE GXSetScissor(u32 left, u32 top, u32 width, u32 height);
+UNKTYPE GXGetScissor(u32 *, u32 *, u32 *, u32 *);
+UNKTYPE GXSetScissorBoxOffset(u32 xOffset, u32 yOffset);
 
-UNKTYPE GXLoadPosMtxImm(float (*)[4], u32);
+UNKTYPE GXSetClipMode(UNKWORD);
 
 #ifdef __cplusplus
 }

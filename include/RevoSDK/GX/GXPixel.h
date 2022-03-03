@@ -17,7 +17,7 @@ typedef enum _GXFogType
 typedef enum _GXPixelFmt
 {
     GX_PIXEL_FMT_0,
-    GX_PIXEL_FMT_1,
+    GX_PF_RGBA6_Z24,
     GX_PIXEL_FMT_2,
     GX_PIXEL_FMT_3,
     GX_PIXEL_FMT_4,
@@ -33,11 +33,13 @@ UNKTYPE GXSetFogRangeAdj(u8, u16, u16 *table);
 
 UNKTYPE GXSetBlendMode(UNKWORD, UNKWORD, UNKWORD, UNKWORD);
 
-UNKTYPE GXSetColorUpdate(UNKWORD);
-UNKTYPE GXSetAlphaUpdate(UNKWORD);
+UNKTYPE GXSetColorUpdate(u8);
+UNKTYPE GXSetAlphaUpdate(u8);
 UNKTYPE GXSetZMode(UNKWORD, UNKWORD, UNKWORD);
 UNKTYPE GXSetZCompLoc(UNKWORD);
 
+UNKTYPE GXSetPixelFmt(GXPixelFmt, UNKWORD);
+UNKTYPE GXSetDither(u8);
 UNKTYPE GXSetDstAlpha(UNKWORD, UNKWORD);
 
 #ifdef __cplusplus

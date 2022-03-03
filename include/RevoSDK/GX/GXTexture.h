@@ -115,6 +115,9 @@ UNKTYPE GXInitTlutObj(GXTlutObj *, UNKTYPE *palette, UNKWORD paletteFmt, UNKWORD
 
 UNKTYPE GXInvalidateTexAll();
 
+UNKTYPE GXSetTexCoordScaleManually(UNKWORD, UNKWORD, UNKWORD, UNKWORD);
+UNKTYPE GXSetTexCoordCylWrap(UNKWORD, UNKWORD, UNKWORD);
+
 #ifdef __cplusplus
 }
 #endif
