@@ -14,6 +14,7 @@ namespace EGG
     struct CapTexture;
 
     struct DrawGX;
+    struct StateGX;
 
     struct Fog;
     struct FogManager;
