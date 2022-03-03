@@ -16,6 +16,8 @@ static void GXEnd(void) {}
 
 UNKTYPE GXSetCullMode(UNKWORD);
 
+UNKTYPE GXSetCoPlanar(UNKWORD);
+
 #ifdef __cplusplus
 }
 #endif

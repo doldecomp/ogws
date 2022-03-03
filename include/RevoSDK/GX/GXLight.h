@@ -38,6 +38,7 @@ UNKTYPE GXInitLightAttn(GXLightObj *, float, float, float, float, float, float);
 UNKTYPE GXGetLightPos(const GXLightObj *, float *, float *, float *);
 UNKTYPE GXGetLightDir(const GXLightObj *, float *, float *, float *);
 
+UNKTYPE GXSetChanAmbColor(GXChannelID, GXColor);
 UNKTYPE GXSetChanMatColor(GXChannelID, GXColor);
 UNKTYPE GXSetNumChans(UNKWORD nChans);
 UNKTYPE GXSetChanCtrl(GXChannelID, UNKWORD, UNKWORD, UNKWORD, UNKWORD, UNKWORD, UNKWORD);
