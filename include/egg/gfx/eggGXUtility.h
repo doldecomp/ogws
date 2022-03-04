@@ -1,13 +1,14 @@
 #ifndef EGG_GFX_GX_UTILITY_H
 #define EGG_GFX_GX_UTILITY_H
 #include "types_egg.h"
+#include "eggIDrawGX.h"
 #include "types_nw4r.h"
 #include <GX/GXTexture.h>
 #include <math/mtx.h>
 
 namespace EGG
 {
-    class GXUtility
+    class GXUtility : public IDrawGX
     {
     public:
         // Unofficial symbol

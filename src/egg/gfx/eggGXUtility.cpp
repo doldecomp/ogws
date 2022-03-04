@@ -8,6 +8,8 @@ namespace EGG
 {
     using namespace nw4r;
 
+    eggScreen *IDrawGX::spScreen;
+
     u8 GXUtility::getTexCoordGenVal(int no)
     {
         #line 22
