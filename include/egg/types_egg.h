@@ -4,82 +4,65 @@
 
 namespace EGG
 {
-    struct G3DUtility;
-    struct IScnProc;
-
-    struct StateGX;
-    struct TextureBuffer;
-
-    struct CpuTexture;
+    // gfx
     struct CapTexture;
-
-    struct IDrawGX;
+    struct CpuTexture;
     struct DrawGX;
-    struct StateGX;
-
+    struct DrawPathBase;
     struct Fog;
     struct FogManager;
-
-    struct eggScreen;
-    struct ScreenEffectBase;
-
+    struct G3DUtility;
     struct GXUtility;
+    struct IDrawGX;
+    struct IScnProc;
     struct ResTIMG;
+    struct ScreenEffectBase;
+    struct StateGX;
+    struct StateGX;
+    struct TextureBuffer;
+    struct eggScreen;
 
+    // math
     template <typename T> struct Math;
     struct Matrix33f;
     struct Matrix34f;
     struct Matrix44f;
     struct Quatf;
-    struct Vector3f;
     struct Vector2f;
+    struct Vector3f;
 
-    template <typename T> struct TBitFlag;
-
+    // core
+    struct Allocator;
+    struct Archive;
+    struct AsyncDisplay;
+    struct CntFile;
+    struct ColorFader;
+    struct Decomp;
+    struct Display;
+    struct Disposer;
+    struct DvdFile;
+    struct DvdRipper;
     struct ExpHeap;
+    struct Fader;
     struct FrmHeap;
     struct Heap;
-
-    struct Allocator;
+    struct Scene;
+    struct SceneManager;
+    template <typename T> struct TBitFlag;
     struct Thread;
-
-    struct Fader;
-    struct ColorFader;
-
+    struct Video;
     struct Xfb;
     struct XfbManager;
 
-    struct DvdFile;
-    struct DvdRipper;
-
-    struct Disposer;
-
-    struct Archive;
-
-    struct Decomp;
-
-    struct Display;
-    struct AsyncDisplay;
-
-    struct Video;
-
-    struct MsgRes;
-
-    struct Exception;
-
-    struct Scene;
-    struct SceneManager;
-
-    struct CntFile;
-
+    // audio
     struct ArcPlayer;
-
     struct IAudioMgr;
-    struct SoundHeapMgr;
     struct SimpleAudioMgr;
+    struct SoundHeapMgr;
 
-    struct DrawPathBase;
-    
+    // util
+    struct Exception;
+    struct MsgRes;
 }
 
 #endif
