@@ -44,6 +44,10 @@ lbl_804C0690:
 
 .section .rodata, "a"
 .balign 0x8
+.global lbl_80379308
+lbl_80379308:
+	.incbin "baserom.dol", 0x375408, 0x10
+.balign 0x8
 .global lbl_80379318
 lbl_80379318:
     .string "bblm"
@@ -72,7 +76,7 @@ lbl_803976F0:
     .long 0x80089ed8
     .long 0x8008a410
     .long 0x8008a678
-    .long lbl_80089F38
+    .long doDraw__Q23EGG12DrawPathBaseFUs
     .long 0
     .long 0
     .long 0x8008bb10
@@ -103,7 +107,7 @@ func_80089F68:
 /* 80089F70 00084E70  90 01 00 14 */	stw r0, 0x14(r1)
 /* 80089F74 00084E74  93 E1 00 0C */	stw r31, 0xc(r1)
 /* 80089F78 00084E78  7C 7F 1B 78 */	mr r31, r3
-/* 80089F7C 00084E7C  4B FF FE 51 */	bl func_80089DCC
+/* 80089F7C 00084E7C  4B FF FE 51 */	bl __ct__Q23EGG12DrawPathBaseFv
 /* 80089F80 00084E80  3C 60 80 39 */	lis r3, lbl_803976F0@ha
 /* 80089F84 00084E84  38 80 00 07 */	li r4, 7
 /* 80089F88 00084E88  38 63 76 F0 */	addi r3, r3, lbl_803976F0@l
@@ -583,7 +587,7 @@ lbl_8008A648:
 /* 8008A680 00085580  90 01 00 D4 */	stw r0, 0xd4(r1)
 /* 8008A684 00085584  39 61 00 D0 */	addi r11, r1, 0xd0
 /* 8008A688 00085588  48 02 76 89 */	bl _savegpr_14
-/* 8008A68C 0008558C  80 0D 98 F0 */	lwz r0, lbl_804BEC70-_SDA_BASE_(r13)
+/* 8008A68C 0008558C  80 0D 98 F0 */	lwz r0, spScreen__Q23EGG7IDrawGX-_SDA_BASE_(r13)
 /* 8008A690 00085590  3C A0 43 30 */	lis r5, 0x4330
 /* 8008A694 00085594  90 A1 00 40 */	stw r5, 0x40(r1)
 /* 8008A698 00085598  7C 71 1B 78 */	mr r17, r3
@@ -591,16 +595,16 @@ lbl_8008A648:
 /* 8008A6A0 000855A0  7C 8E 23 78 */	mr r14, r4
 /* 8008A6A4 000855A4  90 A1 00 48 */	stw r5, 0x48(r1)
 /* 8008A6A8 000855A8  40 82 00 20 */	bne lbl_8008A6C8
-/* 8008A6AC 000855AC  3C 60 80 39 */	lis r3, lbl_803976DC@ha
-/* 8008A6B0 000855B0  3C A0 80 39 */	lis r5, lbl_803976D0@ha
-/* 8008A6B4 000855B4  38 63 76 DC */	addi r3, r3, lbl_803976DC@l
+/* 8008A6AC 000855AC  3C 60 80 39 */	lis r3, $$2STRING$$2getScreen__Q23EGG7IDrawGXFv@ha
+/* 8008A6B0 000855B0  3C A0 80 39 */	lis r5, $$2STRING$$2getScreen__Q23EGG7IDrawGXFv$$20@ha
+/* 8008A6B4 000855B4  38 63 76 DC */	addi r3, r3, $$2STRING$$2getScreen__Q23EGG7IDrawGXFv@l
 /* 8008A6B8 000855B8  38 80 00 3B */	li r4, 0x3b
-/* 8008A6BC 000855BC  38 A5 76 D0 */	addi r5, r5, lbl_803976D0@l
+/* 8008A6BC 000855BC  38 A5 76 D0 */	addi r5, r5, $$2STRING$$2getScreen__Q23EGG7IDrawGXFv$$20@l
 /* 8008A6C0 000855C0  4C C6 31 82 */	crclr 6
 /* 8008A6C4 000855C4  48 01 78 45 */	bl system_halt
 lbl_8008A6C8:
 /* 8008A6C8 000855C8  2C 0E 00 01 */	cmpwi r14, 1
-/* 8008A6CC 000855CC  83 CD 98 F0 */	lwz r30, lbl_804BEC70-_SDA_BASE_(r13)
+/* 8008A6CC 000855CC  83 CD 98 F0 */	lwz r30, spScreen__Q23EGG7IDrawGX-_SDA_BASE_(r13)
 /* 8008A6D0 000855D0  41 82 09 F8 */	beq lbl_8008B0C8
 /* 8008A6D4 000855D4  40 80 00 10 */	bge lbl_8008A6E4
 /* 8008A6D8 000855D8  2C 0E 00 00 */	cmpwi r14, 0

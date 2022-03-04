@@ -22,9 +22,26 @@ namespace EGG
         void setAxisRotation(const Vector3f &, f32);
         void loadPosMtx(u32);
 
+        f32& operator()(int i, int j) { return tbl[i][j]; }        
+
+        void operator=(const Matrix34f& rhs)
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < 4; j++)
+                {
+                    tbl[i][j] = rhs.tbl[i][j];
+                }
+            }
+        }
+
         f32 tbl[3][4];
 
         static Matrix34f ident;
+    };
+
+    struct Matrix44f
+    {
     };
 }
 

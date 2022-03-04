@@ -4,24 +4,18 @@
 .global lbl_803976A0
 lbl_803976A0:
 	.incbin "baserom.dol", 0x3937A0, 0x30
-.global lbl_803976D0
-lbl_803976D0:
+.global $$2STRING$$2getScreen__Q23EGG7IDrawGXFv$$20
+$$2STRING$$2getScreen__Q23EGG7IDrawGXFv$$20:
 	.incbin "baserom.dol", 0x3937D0, 0xC
-.global lbl_803976DC
-lbl_803976DC:
+.global $$2STRING$$2getScreen__Q23EGG7IDrawGXFv
+$$2STRING$$2getScreen__Q23EGG7IDrawGXFv:
 	.incbin "baserom.dol", 0x3937DC, 0x14
-
-.section .rodata, "a"
-.balign 0x8
-.global lbl_80379308
-lbl_80379308:
-	.incbin "baserom.dol", 0x375408, 0x10
 
 .section .text, "ax"
 # DrawPathBase::DrawPathBase
 # Inherits from ScreenEffectBase, IScnProc
-.global func_80089DCC
-func_80089DCC:
+.global __ct__Q23EGG12DrawPathBaseFv
+__ct__Q23EGG12DrawPathBaseFv:
 /* 80089DCC 00084CCC  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80089DD0 00084CD0  7C 08 02 A6 */	mflr r0
 /* 80089DD4 00084CD4  90 01 00 14 */	stw r0, 0x14(r1)
@@ -63,8 +57,8 @@ lbl_80089E40:
 /* 80089E50 00084D50  38 21 00 10 */	addi r1, r1, 0x10
 /* 80089E54 00084D54  4E 80 00 20 */	blr 
 
-.global func_80089E58
-func_80089E58:
+.global CopyGlobalScreen__Q23EGG12DrawPathBaseFv
+CopyGlobalScreen__Q23EGG12DrawPathBaseFv:
 /* 80089E58 00084D58  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80089E5C 00084D5C  7C 08 02 A6 */	mflr r0
 /* 80089E60 00084D60  90 01 00 14 */	stw r0, 0x14(r1)
@@ -73,20 +67,20 @@ func_80089E58:
 /* 80089E6C 00084D6C  88 03 00 00 */	lbz r0, 0(r3)
 /* 80089E70 00084D70  54 00 07 FF */	clrlwi. r0, r0, 0x1f
 /* 80089E74 00084D74  41 82 00 4C */	beq lbl_80089EC0
-/* 80089E78 00084D78  80 0D 98 F0 */	lwz r0, lbl_804BEC70-_SDA_BASE_(r13)
+/* 80089E78 00084D78  80 0D 98 F0 */	lwz r0, spScreen__Q23EGG7IDrawGX-_SDA_BASE_(r13)
 /* 80089E7C 00084D7C  2C 00 00 00 */	cmpwi r0, 0
 /* 80089E80 00084D80  40 82 00 20 */	bne lbl_80089EA0
-/* 80089E84 00084D84  3C 60 80 39 */	lis r3, lbl_803976DC@ha
-/* 80089E88 00084D88  3C A0 80 39 */	lis r5, lbl_803976D0@ha
-/* 80089E8C 00084D8C  38 63 76 DC */	addi r3, r3, lbl_803976DC@l
+/* 80089E84 00084D84  3C 60 80 39 */	lis r3, $$2STRING$$2getScreen__Q23EGG7IDrawGXFv@ha
+/* 80089E88 00084D88  3C A0 80 39 */	lis r5, $$2STRING$$2getScreen__Q23EGG7IDrawGXFv$$20@ha
+/* 80089E8C 00084D8C  38 63 76 DC */	addi r3, r3, $$2STRING$$2getScreen__Q23EGG7IDrawGXFv@l
 /* 80089E90 00084D90  38 80 00 3B */	li r4, 0x3b
-/* 80089E94 00084D94  38 A5 76 D0 */	addi r5, r5, lbl_803976D0@l
+/* 80089E94 00084D94  38 A5 76 D0 */	addi r5, r5, $$2STRING$$2getScreen__Q23EGG7IDrawGXFv$$20@l
 /* 80089E98 00084D98  4C C6 31 82 */	crclr 6
 /* 80089E9C 00084D9C  48 01 80 6D */	bl system_halt
 lbl_80089EA0:
-/* 80089EA0 00084DA0  80 8D 98 F0 */	lwz r4, lbl_804BEC70-_SDA_BASE_(r13)
+/* 80089EA0 00084DA0  80 8D 98 F0 */	lwz r4, spScreen__Q23EGG7IDrawGX-_SDA_BASE_(r13)
 /* 80089EA4 00084DA4  7F E3 FB 78 */	mr r3, r31
-/* 80089EA8 00084DA8  48 01 5E 4D */	bl func_8009FCF4
+/* 80089EA8 00084DA8  48 01 5E 4D */	bl CopyScreenFromAnother__Q23EGG16ScreenEffectBaseFRQ23EGG9eggScreen
 /* 80089EAC 00084DAC  81 9F 00 6C */	lwz r12, 0x6c(r31)
 /* 80089EB0 00084DB0  7F E3 FB 78 */	mr r3, r31
 /* 80089EB4 00084DB4  81 8C 00 24 */	lwz r12, 0x24(r12)
@@ -104,7 +98,7 @@ lbl_80089EC0:
 /* 80089ED8 00084DD8  4E 80 00 20 */	blr 
 
 # DrawPathBase::~DrawPathBase
-lbl_80089EDC:
+__dt__Q23EGG12DrawPathBaseFv:
 /* 80089EDC 00084DDC  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80089EE0 00084DE0  7C 08 02 A6 */	mflr r0
 /* 80089EE4 00084DE4  2C 03 00 00 */	cmpwi r3, 0
@@ -130,8 +124,8 @@ lbl_80089F1C:
 /* 80089F30 00084E30  38 21 00 10 */	addi r1, r1, 0x10
 /* 80089F34 00084E34  4E 80 00 20 */	blr 
 
-.global lbl_80089F38
-lbl_80089F38:
+.global doDraw__Q23EGG12DrawPathBaseFUs
+doDraw__Q23EGG12DrawPathBaseFUs:
 /* 80089F38 00084E38  88 03 00 00 */	lbz r0, 0(r3)
 /* 80089F3C 00084E3C  54 00 07 FF */	clrlwi. r0, r0, 0x1f
 /* 80089F40 00084E40  4D 82 00 20 */	beqlr 
@@ -142,7 +136,7 @@ lbl_80089F38:
 /* 80089F54 00084E54  4E 80 00 20 */	blr 
 
 /* 80089F58 00084E58  38 63 FF 90 */	addi r3, r3, -112
-/* 80089F5C 00084E5C  4B FF FF 80 */	b lbl_80089EDC
+/* 80089F5C 00084E5C  4B FF FF 80 */	b __dt__Q23EGG12DrawPathBaseFv
 
 /* 80089F60 00084E60  38 63 FF 90 */	addi r3, r3, -112
-/* 80089F64 00084E64  4B FF FF D4 */	b lbl_80089F38
+/* 80089F64 00084E64  4B FF FF D4 */	b doDraw__Q23EGG12DrawPathBaseFUs

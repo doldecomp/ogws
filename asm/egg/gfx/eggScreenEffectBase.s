@@ -110,8 +110,8 @@ __ct__Q23EGG16ScreenEffectBaseFv:
 /* 8009FCEC 0009ABEC  38 21 00 10 */	addi r1, r1, 0x10
 /* 8009FCF0 0009ABF0  4E 80 00 20 */	blr 
 
-.global func_8009FCF4
-func_8009FCF4:
+.global CopyScreenFromAnother__Q23EGG16ScreenEffectBaseFRQ23EGG9eggScreen
+CopyScreenFromAnother__Q23EGG16ScreenEffectBaseFRQ23EGG9eggScreen:
 /* 8009FCF4 0009ABF4  38 63 00 04 */	addi r3, r3, 4
 /* 8009FCF8 0009ABF8  4B FF A0 90 */	b func_80099D88
 

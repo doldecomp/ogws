@@ -1,14 +1,40 @@
 #ifndef EGG_GFX_SCREEN_H
 #define EGG_GFX_SCREEN_H
 #include "types_egg.h"
+#include "eggFrustum.h"
 
 namespace EGG
 {
-    struct eggScreen // : public eggFrustum
+    class eggScreen : public eggFrustum
     {
-        char UNK_0x0[0x18];
-        f32 mNearZ; // at 0x18
-        f32 mFarZ; // at 0x1C
+    public:
+        struct EfbData
+        {
+            f32 FLOAT_0x0;
+            f32 FLOAT_0x4;
+            f32 FLOAT_0x8;
+            f32 FLOAT_0xC;
+            f32 FLOAT_0x10;
+            f32 FLOAT_0x14;
+            f32 FLOAT_0x18;
+            f32 FLOAT_0x1C;
+        };
+
+    public:
+        eggScreen();
+
+        virtual ~eggScreen() {} // at 0x8
+        virtual void SetProjectionGX() const; // at 0xC
+        virtual void CopyToG3D(nw4r::g3d::Camera) const; // at 0x10
+
+        void CopyFromAnother(eggScreen&);
+
+        EfbData * GetDataEfb() const;
+
+    private:
+        f32 FLOAT_0x40;
+        f32 FLOAT_0x44;
+        EfbData mEfbData;
     };
 }
 
