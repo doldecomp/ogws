@@ -19,7 +19,8 @@ namespace EGG
 
         enum CanvasMode
         {
-
+            CANVASMODE_0,
+            CANVASMODE_1,
         };
 
     private:
@@ -37,7 +38,14 @@ namespace EGG
         virtual void SetProjectionGX() const; // at 0xC
         virtual void CopyToG3D(nw4r::g3d::Camera) const; // at 0x10
 
+        void setProjectionType(ProjectionType type) { mProjection = type; }
+
+        CanvasMode getCanvasMode() const { return mCanvas; }
+        void setCanvasMode(CanvasMode mode) { mCanvas = mode; }
+
         Matrix33f& getMatrix() { return mMatrix; }
+        
+        void setFlag(u32 flag) { mFlags |= flag; }
 
         // void g_mtx_projection(Matrix44f *) const;
         // void g_camera_projection();

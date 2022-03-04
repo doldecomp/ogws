@@ -21,7 +21,7 @@ namespace EGG
         };
 
     public:
-        eggScreen();
+        eggScreen(const eggScreen&);
 
         virtual ~eggScreen() {} // at 0x8
         virtual void SetProjectionGX() const; // at 0xC
