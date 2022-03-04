@@ -15,7 +15,7 @@ namespace EGG
         {
             IScnProc *mpThis; // at 0x0
             nw4r::g3d::ScnProc *mpScnProc; // at 0x4
-            u16 SHORT_0x8;
+            u16 mIndex; // at 0x8
             bool bUseOpa; // at 0xA
         };
 

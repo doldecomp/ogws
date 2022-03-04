@@ -3,6 +3,8 @@
 #include "eggIScnProc.h"
 #include "eggHeap.h"
 #include "eggG3DUtility.h"
+#include "eggGXUtility.h"
+#include "eggStateGX.h"
 #include "g3d_scnproc.h"
 
 namespace EGG
@@ -46,7 +48,7 @@ namespace EGG
                 IScnProc::drawProcFunc, true, false, 0);
 
             mpDataSet[i].mpScnProc->SetUserData(&mpDataSet[i]);
-            mpDataSet[i].SHORT_0x8 = i;
+            mpDataSet[i].mIndex = i;
             mpDataSet[i].mpThis = this;
             mpDataSet[i].bUseOpa = true;
 
@@ -79,9 +81,11 @@ namespace EGG
         #line 125
         EGG_ASSERT(pScnGroup);
 
-        for (int i = 0; i < getNumScnProc(); i++)
+        for (u16 i = 0; i < getNumScnProc(); i++)
         {
-            bool is_push_back = pScnGroup->PushBack(getData(i)->mpScnProc);
+            bool is_push_back = pScnGroup->Insert(
+                pScnGroup->Size(), getData(i)->mpScnProc);
+
             #line 129
             EGG_ASSERT(is_push_back);
         }
@@ -92,15 +96,23 @@ namespace EGG
         #line 140
         EGG_ASSERT(pScnGroup);
 
-        for (int i = 0; i < getNumScnProc(); i++)
+        for (u16 i = 0; i < getNumScnProc(); i++)
         {
             bool is_remove = pScnGroup->Remove(getData(i)->mpScnProc);
+
             #line 144
             EGG_ASSERT(is_remove);
         }
     }
 
-    #ifdef __DECOMP_NON_MATCHING
+    namespace
+    {
+        void UNUSED_ASSERTS_ISCNPROC()
+        {
+            EGG_ASSERT_MSG(false, "m");
+        }
+    }
+
     void IScnProc::drawProcFunc(nw4r::g3d::ScnProc *pScnProc, bool b)
     {
         #line 184
@@ -111,13 +123,11 @@ namespace EGG
         EGG_ASSERT(p_data);
         EGG_ASSERT(p_data->mpThis);
 
-        // GXUtility::setScreenProjection(b);
+        GXUtility::setScreenProjection(b);
 
-        p_data->mpThis->VIRT_0xC(p_data->SHORT_0x8);
-        // setupCache__Q23EGG7StateGXFv();
+        p_data->mpThis->doDraw(p_data->mIndex);
+        StateGX::setupCache();
 
-        // GXUtility::setScreenProjection(b);
+        GXUtility::setScreenProjection(b);
     }
-    #else
-    #endif
 }

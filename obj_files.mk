@@ -224,7 +224,7 @@ EGG_O_FILES := \
 	build/asm/egg/gfx/eggScnRootEx.o \
 	build/asm/egg/gfx/eggScreen.o \
 	build/asm/egg/gfx/eggShadowTexture.o \
-	build/asm/egg/gfx/eggIScnProc.o \
+	build/egg/gfx/eggIScnProc.o \
 	build/asm/egg/gfx/eggScnRenderer.o \
 	build/asm/egg/gfx/eggLightObject.o \
 	build/asm/egg/gfx/eggPostEffectMaskDOF.o \
