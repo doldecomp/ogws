@@ -1,4 +1,4 @@
-#define ISCNPROC_ORDER_VF
+#pragma ipa file
 #include "eggDrawPathBase.h"
 #include "eggGXUtility.h"
 
