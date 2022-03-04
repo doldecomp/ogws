@@ -13,6 +13,7 @@ namespace EGG
     struct CpuTexture;
     struct CapTexture;
 
+    struct IDrawGX;
     struct DrawGX;
     struct StateGX;
 
@@ -26,6 +27,7 @@ namespace EGG
     struct ResTIMG;
 
     template <typename T> struct Math;
+    struct Matrix33f;
     struct Matrix34f;
     struct Matrix44f;
     struct Quatf;

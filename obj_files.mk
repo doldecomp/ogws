@@ -230,7 +230,7 @@ EGG_O_FILES := \
 	build/asm/egg/gfx/eggPostEffectMaskDOF.o \
 	build/asm/egg/gfx/eggScreenEffectBase.o \
 	build/asm/egg/gfx/eggFrustum.o \
-	build/asm/egg/gfx/eggGXUtility.o \
+	build/egg/gfx/eggGXUtility.o \
 	build/asm/egg/gfx/eggDrawHelper.o \
 	build/asm/egg/gfx/egg_800A1DB0.o \
 	build/asm/egg/prim/eggAssert.o \

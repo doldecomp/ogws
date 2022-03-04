@@ -1,6 +1,9 @@
 #include "eggGXUtility.h"
 #include "eggAssert.h"
 #include "eggResTIMG.h"
+#include "eggMatrix.h"
+#include "eggStateGX.h"
+#include "eggScreen.h"
 #include "ut_algorithm.h"
 #include "g3d_restex.h"
 
@@ -8,7 +11,13 @@ namespace EGG
 {
     using namespace nw4r;
 
+    const u8 GXUtility::sTexCoordGenVals[] = {0x1E, 0x21, 0x24, 0x27, 0x2A, 0x2D, 0x30, 0x33};
     eggScreen *IDrawGX::spScreen;
+    GXUtility::ProjectionCallback GXUtility::sProjectionCallback;
+    UNKWORD GXUtility::sProjectionCallbackArg;
+    u16 GXUtility::lbl_804BEC7C;
+    u32 GXUtility::sStateFlags;
+    Matrix34f GXUtility::sCameraMtx;
 
     u8 GXUtility::getTexCoordGenVal(int no)
     {
@@ -22,13 +31,21 @@ namespace EGG
     {
         #line 38
         EGG_ASSERT(p != NULL);
-        EGG_ASSERT(sx != 0.0f);
-        EGG_ASSERT(sy != 0.0f);
+        EGG_ASSERT(sx != 0.f);
+        EGG_ASSERT(sy != 0.f);
 
         p[1] *= (1.0f / sx);
         p[3] *= (1.0f / sy);
         p[2] += ox;
         p[4] += oy;
+    }
+
+    namespace
+    {
+        void UNUSED_ASSERTS_GXUTILITY()
+        {
+            EGG_ASSERT_MSG(false, "Not implemented.");
+        }
     }
 
     void GXUtility::getTexObj(GXTexObj *pObj, const ResTIMG& tex)
@@ -66,17 +83,22 @@ namespace EGG
         }
     }
 
-    #ifdef __DECOMP_NON_MATCHING
-    void GXUtility::func_800a1b6c(u16 s, Mtx m, UNKTYPE *p)
+    void GXUtility::set(u16 s, Matrix34f& out, eggScreen& screen)
     {
-
+        lbl_804BEC7C = s;
+        setScreen(screen);
+        PSMTXCopy(out, sCameraMtx);
     }
-    #endif
 
-    #ifdef __DECOMP_NON_MATCHING
-    void GXUtility::func_800a1b88(UNKTYPE *p)
+    void GXUtility::setScreenProjection(bool b)
     {
+        StateGX::GXSetColorUpdate(sStateFlags & ENABLE_COLOR_UPDATE);
+        StateGX::GXSetAlphaUpdate(sStateFlags & ENABLE_ALPHA_UPDATE);
+        StateGX::GXSetDither(sStateFlags & ENABLE_DITHER);
 
+        if (sProjectionCallback != NULL)
+            sProjectionCallback(sProjectionCallbackArg, b);
+
+        GXUtility::getScreen().SetProjectionGX();
     }
-    #endif
 }

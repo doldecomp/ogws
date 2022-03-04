@@ -18,7 +18,6 @@ namespace EGG
         u8 mAnisotropy; // at 0x13
         u8 mMinFilt; // at 0x14
         u8 mMagFilt; // at 0x15
-        char UNK_0x16[0x1C - 0x16];
         s8 mMinLod; // at 0x16
         s8 mMaxLod; // at 0x17
         char UNK_0x18[0x1A - 0x18];

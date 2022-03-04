@@ -40,8 +40,8 @@ namespace EGG
     {
         for (int i = 0; i < cNumFog; i++)
         {
-            mFog[i]->mNearZ = screen->getMatrix()(1, 0);
-            mFog[i]->mFarZ = screen->getMatrix()(1, 1);
+            mFog[i]->mNearZ = screen->getMatrix()(0, 2);
+            mFog[i]->mFarZ = screen->getMatrix()(1, 0);
         }
     }
 

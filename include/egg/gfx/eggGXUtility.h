@@ -11,20 +11,30 @@ namespace EGG
     class GXUtility : public IDrawGX
     {
     public:
-        // Unofficial symbol
-        static u8 getTexCoordGenVal(int);
+        typedef UNKTYPE (* ProjectionCallback)(UNKWORD, bool);
 
+        enum StateFlags
+        {
+            ENABLE_COLOR_UPDATE = 0x1,
+            ENABLE_ALPHA_UPDATE = 0x2,
+            ENABLE_DITHER = 0x4,
+        };
+
+    public:
+        static u8 getTexCoordGenVal(int);
         static void setScaleOffsetPerspective(f32 *, f32, f32, f32, f32);
         static void getTexObj(GXTexObj *, const ResTIMG&);
-
-        // Unofficial symbols
         static void getTexObj(GXTexObj *, const nw4r::g3d::ResTex&, UNKWORD, UNKWORD, UNKWORD, UNKWORD);
-        static void func_800a1b6c(u16, Mtx, UNKTYPE *);
-        static void func_800a1b88(UNKTYPE *);
+        static void set(u16, Matrix34f&, eggScreen&);
+        static void setScreenProjection(bool);
 
     private:
-        // Unofficial symbol
-        static u8 sTexCoordGenVals[8];
+        static const u8 sTexCoordGenVals[];
+        static ProjectionCallback sProjectionCallback;
+        static UNKWORD sProjectionCallbackArg;
+        static u16 lbl_804BEC7C;
+        static u32 sStateFlags;
+        static Matrix34f sCameraMtx;
     };
 }
 

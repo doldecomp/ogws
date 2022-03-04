@@ -111,12 +111,12 @@ namespace EGG
         EGG_ASSERT(p_data);
         EGG_ASSERT(p_data->mpThis);
 
-        // GXUtility::func_800A1B88(b);
+        // GXUtility::setScreenProjection(b);
 
         p_data->mpThis->VIRT_0xC(p_data->SHORT_0x8);
         // setupCache__Q23EGG7StateGXFv();
 
-        // GXUtility::func_800A1B88(b);
+        // GXUtility::setScreenProjection(b);
     }
     #else
     #endif

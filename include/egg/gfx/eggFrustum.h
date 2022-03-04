@@ -22,10 +22,11 @@ namespace EGG
 
         };
 
-    protected:
+    private:
         u32 mProjection; // at 0x0
         CanvasMode mCanvas; // at 0x4
-        Matrix34f mMatrix; // at 0x8
+        Vector2f mScale; // at 0x8
+        Matrix33f mMatrix; // at 0x10
         u16 mFlags; // at 0x34
         
     public:
@@ -36,7 +37,7 @@ namespace EGG
         virtual void SetProjectionGX() const; // at 0xC
         virtual void CopyToG3D(nw4r::g3d::Camera) const; // at 0x10
 
-        Matrix34f& getMatrix() { return mMatrix; }
+        Matrix33f& getMatrix() { return mMatrix; }
 
         // void g_mtx_projection(Matrix44f *) const;
         // void g_camera_projection();
