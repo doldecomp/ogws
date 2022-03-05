@@ -220,6 +220,7 @@ EGG_O_FILES := \
 	build/asm/egg/gfx/eggModelEx.o \
 	build/asm/egg/gfx/eggModelSnapshot.o \
 	build/egg/gfx/eggPostEffectBase.o \
+	build/asm/egg/gfx/eggPostEffectBlur.o \
 	build/asm/egg/gfx/eggPostEffect_800970D4.o \
 	build/asm/egg/gfx/eggPostEffectMask.o \
 	build/asm/egg/gfx/eggScnRootEx.o \
