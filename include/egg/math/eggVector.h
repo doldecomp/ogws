@@ -9,7 +9,7 @@ namespace EGG
     {
         Vector2f() {}
         Vector2f(f32 _x, f32 _y) : x(_x), y(_y) {}
-        ~Vector2f();
+        ~Vector2f() {}
 
         f32 x, y;
 

@@ -81,7 +81,7 @@ __vt__Q23EGG6Screen:
     .long 0
     .long 0
     .long lbl_8008D4BC
-    .long func_80099A04
+    .long SetProjectionGX__Q23EGG9eggScreenCFv
     .long 0x80099aec
 # Weak asserts
 .global lbl_80397E3C
@@ -354,8 +354,8 @@ lbl_800998F0:
 /* 8009991C 0009481C  38 21 00 40 */	addi r1, r1, 0x40
 /* 80099920 00094820  4E 80 00 20 */	blr 
 
-.global func_80099924
-func_80099924:
+.global __ct__Q23EGG9eggScreenFRCQ23EGG9eggScreen
+__ct__Q23EGG9eggScreenFRCQ23EGG9eggScreen:
 /* 80099924 00094824  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80099928 00094828  7C 08 02 A6 */	mflr r0
 /* 8009992C 0009482C  90 01 00 14 */	stw r0, 0x14(r1)
@@ -420,8 +420,8 @@ lbl_800999DC:
 func_80099A00:
 /* 80099A00 00094900  4E 80 00 20 */	blr 
 
-.global func_80099A04
-func_80099A04:
+.global SetProjectionGX__Q23EGG9eggScreenCFv
+SetProjectionGX__Q23EGG9eggScreenCFv:
 /* 80099A04 00094904  94 21 FF A0 */	stwu r1, -0x60(r1)
 /* 80099A08 00094908  7C 08 02 A6 */	mflr r0
 /* 80099A0C 0009490C  90 01 00 64 */	stw r0, 0x64(r1)
@@ -1083,7 +1083,7 @@ func_8009A31C:
 /* 8009A364 00095264  7C 7E 1B 78 */	mr r30, r3
 /* 8009A368 00095268  FC 40 F8 90 */	fmr f2, f31
 /* 8009A36C 0009526C  7F E3 FB 78 */	mr r3, r31
-/* 8009A370 00095270  48 04 DA 35 */	bl func_800E7DA4
+/* 8009A370 00095270  48 04 DA 35 */	bl PSMTXScale
 /* 8009A374 00095274  C0 02 8E 30 */	lfs f0, lbl_804C0850-_SDA2_BASE_(r2)
 /* 8009A378 00095278  D3 BF 00 0C */	stfs f29, 0xc(r31)
 /* 8009A37C 0009527C  D0 1F 00 2C */	stfs f0, 0x2c(r31)
@@ -1187,7 +1187,7 @@ lbl_8009A4CC:
 /* 8009A4DC 000953DC  D0 21 00 58 */	stfs f1, 0x58(r1)
 /* 8009A4E0 000953E0  D0 01 00 5C */	stfs f0, 0x5c(r1)
 /* 8009A4E4 000953E4  90 01 00 40 */	stw r0, 0x40(r1)
-/* 8009A4E8 000953E8  4B FF F5 1D */	bl func_80099A04
+/* 8009A4E8 000953E8  4B FF F5 1D */	bl SetProjectionGX__Q23EGG9eggScreenCFv
 /* 8009A4EC 000953EC  C0 7D 00 0C */	lfs f3, 0xc(r29)
 /* 8009A4F0 000953F0  38 61 00 10 */	addi r3, r1, 0x10
 /* 8009A4F4 000953F4  C0 5D 00 2C */	lfs f2, 0x2c(r29)
@@ -1197,7 +1197,7 @@ lbl_8009A4CC:
 /* 8009A504 00095404  C0 62 8E 34 */	lfs f3, lbl_804C0854-_SDA2_BASE_(r2)
 /* 8009A508 00095408  EC 21 00 32 */	fmuls f1, f1, f0
 /* 8009A50C 0009540C  FC 40 F8 90 */	fmr f2, f31
-/* 8009A510 00095410  48 04 D8 95 */	bl func_800E7DA4
+/* 8009A510 00095410  48 04 D8 95 */	bl PSMTXScale
 /* 8009A514 00095414  80 01 00 44 */	lwz r0, 0x44(r1)
 /* 8009A518 00095418  C0 02 8E 30 */	lfs f0, lbl_804C0850-_SDA2_BASE_(r2)
 /* 8009A51C 0009541C  2C 00 00 00 */	cmpwi r0, 0

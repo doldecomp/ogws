@@ -20,8 +20,10 @@ namespace EGG
             COLOR_0x1C = c; 
         }
 
+        GXTexMapID getLoadMap() const { return mLoadMap; }
+
     private:
-        GXTexMapID mTexMapID; // at 0x18
+        GXTexMapID mLoadMap; // at 0x18
         GXColor COLOR_0x1C;
         UNKWORD WORD_0x20;
         u8 BYTES_0x24[0x2A - 0x24];
