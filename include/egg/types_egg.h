@@ -15,12 +15,14 @@ namespace EGG
     struct GXUtility;
     struct IDrawGX;
     struct IScnProc;
+    struct PostEffectBase;
+    struct PostEffectBlur;
     struct ResTIMG;
+    struct eggScreen;
     struct ScreenEffectBase;
     struct StateGX;
     struct StateGX;
     struct TextureBuffer;
-    struct eggScreen;
 
     // math
     template <typename T> struct Math;

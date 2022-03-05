@@ -55,8 +55,8 @@ lbl_80397CE8:
     .long 0
 
 .section .text, "ax"
-.global func_800970D4
-func_800970D4:
+.global __ct__Q23EGG14PostEffectBlurFv
+__ct__Q23EGG14PostEffectBlurFv:
 /* 800970D4 00091FD4  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 800970D8 00091FD8  7C 08 02 A6 */	mflr r0
 /* 800970DC 00091FDC  90 01 00 14 */	stw r0, 0x14(r1)
