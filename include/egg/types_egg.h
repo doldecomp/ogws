@@ -17,6 +17,7 @@ namespace EGG
     struct IScnProc;
     struct PostEffectBase;
     struct PostEffectBlur;
+    struct PostEffectBlurGather;
     struct ResTIMG;
     struct eggScreen;
     struct ScreenEffectBase;

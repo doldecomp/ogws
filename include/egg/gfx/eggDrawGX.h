@@ -54,12 +54,12 @@ namespace EGG
         static void SetBlendMode(Blend);
 
     public:
-        static GXColor sColorBlack;
-        static GXColor sColorWhite;
-        static GXColor sColorRed;
-        static GXColor sColorGreen;
-        static GXColor sColorBlue;
-        static GXColor sColorOrange;
+        static const GXColor sColorBlack;
+        static const GXColor sColorWhite;
+        static const GXColor sColorRed;
+        static const GXColor sColorGreen;
+        static const GXColor sColorBlue;
+        static const GXColor sColorOrange;
 
     private:
         static DisplayList s_DL[18];
