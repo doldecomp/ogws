@@ -1,5 +1,3 @@
-#ifdef __DECOMP_NON_MATCHING
-
 #include "math_arithmetic.h"
 #include "math_types.h"
 
@@ -11,8 +9,8 @@ namespace nw4r
         {
             struct FloatTableEntry
             {
-                f32 mValue;
-                f32 mDeltaToNext;
+                f32 value;
+                f32 delta;
             };
 
             static FloatTableEntry sExpTbl[] = {
@@ -117,29 +115,19 @@ namespace nw4r
                 0.6853040f, 0.0019666f, 0.6872706f, 0.0019627f, 0.6892333f, 0.0019589f,
                 0.6911922f, 0.0019550f, 0.6931472f, 0.0019512f
             };
-            
-            f32 FExpLn2(f32 x)
-            {
-                f32 val = (16.0f / NW4R_LN_2) * (NW4R_LN_2 + x);
-                u16 val_s = F32ToU16(val);
-                f32 val_f = U16ToF32(val_s);
-
-                return sExpTbl[val_s].mValue + (val - val_f) * sExpTbl[val_s].mDeltaToNext;
-            }
-
-            f32 FLog1_2(f32 x)
-            {
-                f32 val = 256.0f * (x - 1.0f);
-                u16 val_s = F32ToU16(val);
-                f32 val_f = U16ToF32(val_s);
-
-                return sLogTbl[val_s].mValue + (val - val_f) * sLogTbl[val_s].mDeltaToNext;
-            }
         }
 
+        namespace
+        {
+            f32 FExpLn2(f32);
+            f32 FLog1_2(f32);
+        }
+
+        #ifdef __DECOMP_NON_MATCHING
         namespace detail
         {
-			f32 FExp(f32 x)
+            // https://decomp.me/scratch/rlTCd
+            f32 FExp(f32 x)
             {
                 s16 val_s = F32ToS16(NW4R_MATH_BLOG_TO_LN * x);
                 f32 val_f = S16ToF32(val_s);
@@ -147,15 +135,42 @@ namespace nw4r
                 u32 val_ul = F32AsU32(expLn2);
                 return U32AsF32(((val_s << 23) + val_ul) & 0x7FFFFFFF); 
             }
+        }
 
-			f32 FLog(f32 x)
+        namespace
+        {
+            f32 FExpLn2(f32 x)
+            {
+                f32 val = 23.08312f * (NW4R_LN_2 + x);
+                u16 val_s = F32ToU16(val);
+                f32 val_f = val - U16ToF32(val_s);
+                return sExpTbl[val_s].value + val_f * sExpTbl[val_s].delta;
+            }
+        }
+        #else
+        #error This file has yet to be decompiled accurately. Use "math_arithmetic.s" instead.
+        #endif
+
+        namespace detail
+        {
+            f32 FLog(f32 x)
             {
                 s32 exp = FGetExpPart(x);
                 f32 mant = FGetMantPart(x);
-                f32 exp_f = S16ToF32((s16)exp);
+                f32 exp_f = S16ToF32(exp);
                 f32 log1_2 = FLog1_2(mant);
-
                 return log1_2 + NW4R_LN_2 * exp_f;
+            }
+        }
+
+        namespace
+        {
+            f32 FLog1_2(f32 x)
+            {
+                f32 val = 256.0f * (x - 1.0f);
+                u16 val_s = F32ToU16(val);
+                f32 val_f = val - U16ToF32(val_s);
+                return sLogTbl[val_s].value + val_f * sLogTbl[val_s].delta; 
             }
         }
 
@@ -182,7 +197,3 @@ namespace nw4r
         }
     }
 }
-
-#else
-#error This file has yet to be decompiled accurately. Use "math_arithmetic.s" instead.
-#endif

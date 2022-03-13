@@ -89,7 +89,7 @@ static float __OSs16tof32(register const s16 * arg)
 	
 	asm
 	{
-		psq_l ret, 0(arg), 1, 3
+		psq_l ret, 0(arg), 1, 5
 	}
 	
 	return ret;
