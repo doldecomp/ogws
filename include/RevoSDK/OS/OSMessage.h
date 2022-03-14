@@ -23,6 +23,7 @@ UNKWORD OSInitMessageQueue(struct OSMessageQueue *, OSMessage * buffer, UNKWORD 
 
 BOOL OSSendMessage(struct OSMessageQueue *, OSMessage, UNKWORD);
 BOOL OSReceiveMessage(struct OSMessageQueue *, OSMessage *, UNKWORD);
+BOOL OSJamMessage(struct OSMessageQueue *, UNKWORD, UNKWORD);
 
 #ifdef __cplusplus
 }

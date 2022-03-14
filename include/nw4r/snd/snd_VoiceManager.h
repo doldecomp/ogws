@@ -12,8 +12,11 @@ namespace nw4r
 			struct VoiceManager
 			{
 				static VoiceManager * GetInstance();
-				UNKTYPE UpdateAllVoicesSync(u32);
+
 				Voice * AllocVoice(int, int, int, Voice::VoiceCallback, void *);
+				void UpdateAllVoices();
+				void NotifyVoiceUpdate();
+				UNKTYPE UpdateAllVoicesSync(u32);
 			};
 		}
 	}

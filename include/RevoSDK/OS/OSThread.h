@@ -23,7 +23,7 @@ typedef UNKWORD (* OSThreadFunc)(void *);
 typedef void (* OSSwitchThreadFunc)(OSThread *, OSThread *);
 
 UNKTYPE OSYieldThread(UNKTYPE);
-BOOL OSCreateThread(struct OSThread *, OSThreadFunc, void *, void *, UNKWORD, UNKWORD, UNKWORD);
+BOOL OSCreateThread(struct OSThread *, OSThreadFunc, void *, void *, UNKWORD, UNKWORD, UNKWORD prio);
 
 BOOL OSJoinThread(struct OSThread *, UNKWORD);
 

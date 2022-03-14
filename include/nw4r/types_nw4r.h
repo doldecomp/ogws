@@ -68,6 +68,7 @@ namespace nw4r
 		{
 			struct BasicSound;
 			struct BasicPlayer;
+			struct ChannelManager;
 			struct SeqSound;
 			struct SeqPlayer;
 			struct MmlParser;
@@ -80,6 +81,7 @@ namespace nw4r
 			struct NoteOnCallback;
 			struct PlayerHeap;
 			struct SoundArchiveFileReader;
+			struct SoundThread;
 			struct WaveSound;
 			struct StrmPlayer;
 			struct WsdPlayer;
