@@ -218,7 +218,7 @@ EGG_O_FILES := \
 	build/asm/egg/gfx/eggLightTextureManager.o \
 	build/asm/egg/gfx/eggModelBoundingInfo.o \
 	build/asm/egg/gfx/eggModelEx.o \
-	build/asm/egg/gfx/eggModelSnapshot.o \
+	build/egg/gfx/eggModelSnapshot.o \
 	build/egg/gfx/eggPostEffectBase.o \
 	build/asm/egg/gfx/eggPostEffectBlur.o \
 	build/asm/egg/gfx/eggPostEffectBlurGather.o \

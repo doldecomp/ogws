@@ -15,6 +15,9 @@ namespace EGG
     struct GXUtility;
     struct IDrawGX;
     struct IScnProc;
+    struct ModelBoundingInfo;
+    struct ModelEx;
+    struct ModelSnapshot;
     struct PostEffectBase;
     struct PostEffectBlur;
     struct PostEffectBlurGather;

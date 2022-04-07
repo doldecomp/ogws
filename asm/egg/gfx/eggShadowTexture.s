@@ -104,7 +104,7 @@ __vt__Q23EGG13ShadowTexture:
     .long initTexObj__Q23EGG10CpuTextureCFP9_GXTexObj
     .long loadTexObj__Q23EGG10CapTextureF11_GXTexMapID
     .long func_8009B1EC
-    .long func_8009665C
+    .long ResetList__Q23EGG13ModelSnapshotFv
 
 .section .text, "ax"
 .global func_8009AF30
@@ -119,7 +119,7 @@ func_8009AF30:
 /* 8009AF4C 00095E4C  7C 7E 1B 78 */	mr r30, r3
 /* 8009AF50 00095E50  7C 85 23 78 */	mr r5, r4
 /* 8009AF54 00095E54  38 C0 00 01 */	li r6, 1
-/* 8009AF58 00095E58  4B FF B5 F9 */	bl func_80096550
+/* 8009AF58 00095E58  4B FF B5 F9 */	bl __ct__Q23EGG13ModelSnapshotFUsUs9_GXTexFmtUs
 /* 8009AF5C 00095E5C  C0 02 8E 68 */	lfs f0, lbl_804C0888-_SDA2_BASE_(r2)
 /* 8009AF60 00095E60  3C C0 80 39 */	lis r6, __vt__Q23EGG13ShadowTexture@ha
 /* 8009AF64 00095E64  38 00 00 00 */	li r0, 0
@@ -305,7 +305,7 @@ func_8009B1EC:
 /* 8009B1F4 000960F4  90 01 00 14 */	stw r0, 0x14(r1)
 /* 8009B1F8 000960F8  93 E1 00 0C */	stw r31, 0xc(r1)
 /* 8009B1FC 000960FC  7C 7F 1B 78 */	mr r31, r3
-/* 8009B200 00096100  4B FF B4 4D */	bl func_8009664C
+/* 8009B200 00096100  4B FF B4 4D */	bl DoResetList__Q23EGG13ModelSnapshotFv
 /* 8009B204 00096104  3C 60 80 4C */	lis r3, lbl_804C0580@ha
 /* 8009B208 00096108  A0 1F 00 00 */	lhz r0, 0(r31)
 /* 8009B20C 0009610C  39 03 05 80 */	addi r8, r3, lbl_804C0580@l
@@ -506,7 +506,7 @@ lbl_8009B49C:
 /* 8009B4D4 000963D4  41 80 FF A4 */	blt lbl_8009B478
 /* 8009B4D8 000963D8  C0 3F 00 74 */	lfs f1, 0x74(r31)
 /* 8009B4DC 000963DC  7F E3 FB 78 */	mr r3, r31
-/* 8009B4E0 000963E0  4B FF B2 C1 */	bl func_800967A0
+/* 8009B4E0 000963E0  4B FF B2 C1 */	bl GatherModel__Q23EGG13ModelSnapshotFf
 /* 8009B4E4 000963E4  7F E3 FB 78 */	mr r3, r31
 /* 8009B4E8 000963E8  48 00 00 61 */	bl func_8009B548
 /* 8009B4EC 000963EC  7F E3 FB 78 */	mr r3, r31

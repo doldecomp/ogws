@@ -10,6 +10,7 @@ namespace EGG
     {
     public:
         CapTexture() {}
+        CapTexture(u16 w, u16 h, GXTexFmt fmt) : CpuTexture(w, h, fmt) {}
 
         virtual ~CapTexture() {} // at 0x8
         virtual void configure(); // at 0xC
@@ -26,7 +27,7 @@ namespace EGG
         GXTexMapID mLoadMap; // at 0x18
         GXColor COLOR_0x1C;
         UNKWORD WORD_0x20;
-        u8 BYTES_0x24[0x2A - 0x24];
+        u8 BYTES_0x24[0x2C - 0x24];
     };
 }
 
