@@ -603,8 +603,8 @@ CalcMaterial__Q34nw4r3g3d7ScnRootFv:
 /* 800719FC 0006C8FC  7D 89 03 A6 */	mtctr r12
 /* 80071A00 0006C900  4E 80 04 20 */	bctr 
 
-.global func_80071A04
-func_80071A04:
+.global CalcVtx__Q34nw4r3g3d7ScnRootFv
+CalcVtx__Q34nw4r3g3d7ScnRootFv:
 /* 80071A04 0006C904  81 83 00 00 */	lwz r12, 0(r3)
 /* 80071A08 0006C908  38 80 00 03 */	li r4, 3
 /* 80071A0C 0006C90C  38 A0 00 00 */	li r5, 0

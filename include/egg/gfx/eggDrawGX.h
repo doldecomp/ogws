@@ -61,6 +61,8 @@ namespace EGG
         static const GXColor sColorBlue;
         static const GXColor sColorOrange;
 
+        static Matrix34f sPositionMtx;
+
     private:
         static DisplayList s_DL[18];
     };

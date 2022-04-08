@@ -187,8 +187,8 @@ lbl_80083A5C:
 /* 80083A84 0007E984  4E 80 00 20 */	blr 
 
 # calcGroups
-.global lbl_80083A88
-lbl_80083A88:
+.global Calc__Q23EGG20ShadowTextureManagerFv
+Calc__Q23EGG20ShadowTextureManagerFv:
 /* 80083A88 0007E988  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 80083A8C 0007E98C  7C 08 02 A6 */	mflr r0
 /* 80083A90 0007E990  90 01 00 24 */	stw r0, 0x24(r1)
@@ -226,8 +226,8 @@ lbl_80083AEC:
 /* 80083B04 0007EA04  4E 80 00 20 */	blr 
 
 # calcTextures
-.global func_80083B08
-func_80083B08:
+.global Draw__Q23EGG20ShadowTextureManagerFPQ23EGG9eggScreen
+Draw__Q23EGG20ShadowTextureManagerFPQ23EGG9eggScreen:
 /* 80083B08 0007EA08  94 21 FF 70 */	stwu r1, -0x90(r1)
 /* 80083B0C 0007EA0C  7C 08 02 A6 */	mflr r0
 /* 80083B10 0007EA10  90 01 00 94 */	stw r0, 0x94(r1)

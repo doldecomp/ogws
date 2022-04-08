@@ -7,13 +7,12 @@ namespace EGG
 {
     Fog::Fog()
     {
-
     }
 
-    void Fog::reset()
+    void Fog::Reset()
     {
         mFlags = 0;
-        setFlags();
+        Unbind();
 
         mColor.a = 0xFF;
         mColor.b = 0xFF;
@@ -28,14 +27,13 @@ namespace EGG
         mFogType = GX_FOG_TYPE_2;
     }
 
-    void Fog::VF_0x10()
+    void Fog::Calc()
     {
-
     }
 
-    void Fog::setGX() const
+    void Fog::SetGX() const
     {
-        if (mFlags & IS_INITIALIZED)
+        if (mFlags & BOUND)
         {
             GXSetFog(mFogType, mColor, mStartZ, mEndZ, mNearZ, mFarZ);
         }
@@ -47,14 +45,14 @@ namespace EGG
         GXSetFogRangeAdj(0, 0, NULL);
     }
 
-    void Fog::setG3D(nw4r::g3d::Fog& fog) const
+    void Fog::CopyToG3D(nw4r::g3d::Fog& fog) const
     {
-        fog.SetFogType((mFlags & IS_INITIALIZED) ? mFogType : GX_FOG_TYPE_0);
+        fog.SetFogType((mFlags & BOUND) ? mFogType : GX_FOG_TYPE_0);
         fog.SetZ(mStartZ, mEndZ);
         fog.SetFogColor(mColor);
     }
 
-    void Fog::initialize(const nw4r::g3d::ResAnmFog& res, f32 f1)
+    void Fog::Bind(const nw4r::g3d::ResAnmFog& res, f32 f1)
     {
         if (res.IsValid())
         {
@@ -66,17 +64,16 @@ namespace EGG
             mEndZ = result.mEndZ;
             mColor = result.mColor.mChannels;
 
-            mFlags |= IS_INITIALIZED;
+            mFlags |= BOUND;
         }
         else
         {
             mFogType = GX_FOG_TYPE_0;
-            setFlags();
+            Unbind();
         }
     }
 
     Fog::~Fog()
     {
-
     }
 }

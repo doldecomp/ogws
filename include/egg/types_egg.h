@@ -15,6 +15,8 @@ namespace EGG
     struct GXUtility;
     struct IDrawGX;
     struct IScnProc;
+    struct LightManager;
+    struct LightTextureManager;
     struct ModelBoundingInfo;
     struct ModelEx;
     struct ModelSnapshot;
@@ -23,7 +25,10 @@ namespace EGG
     struct PostEffectBlurGather;
     struct ResTIMG;
     struct eggScreen;
+    struct ScnRootEx;
     struct ScreenEffectBase;
+    struct ShadowTextureManager;
+    struct ShadowTexture;
     struct StateGX;
     struct StateGX;
     struct TextureBuffer;
@@ -41,6 +46,8 @@ namespace EGG
     struct Allocator;
     struct Archive;
     struct AsyncDisplay;
+    template <typename T> struct IBinary;
+    template <typename T> struct TBitFlag;
     struct CntFile;
     struct ColorFader;
     struct Decomp;
@@ -54,7 +61,6 @@ namespace EGG
     struct Heap;
     struct Scene;
     struct SceneManager;
-    template <typename T> struct TBitFlag;
     struct Thread;
     struct Video;
     struct Xfb;

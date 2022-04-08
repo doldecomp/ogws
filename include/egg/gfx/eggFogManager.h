@@ -15,21 +15,19 @@ namespace EGG
     
         enum
         {
-            FLAG_4 = 4,
+            DRAW_READY = 4,
         };
 
     public:
         FogManager();
         virtual ~FogManager(); // at 0x8
 
-        // Symbols are unofficial
-        // Mostly from EGG coding style and Rii's MKW symbols
-        void reset();
-        void callVF_0x10();
-        void useScreenZ(eggScreen *);
-        void setG3D(nw4r::g3d::ScnRoot *);
-        void initialize(nw4r::g3d::ResAnmScn *, f32);
-        void resetFlags();
+        void Reset();
+        void Calc();
+        void UseScreenZ(eggScreen&);
+        void CopyToG3D(nw4r::g3d::ScnRoot *);
+        void LoadScnFog(nw4r::g3d::ResAnmScn *, f32);
+        void DoneDraw();
     };
 }
 
