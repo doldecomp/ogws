@@ -305,8 +305,8 @@ lbl_80090238:
 /* 80090284 0008B184  38 21 00 30 */	addi r1, r1, 0x30
 /* 80090288 0008B188  4E 80 00 20 */	blr 
 
-.global func_8009028C
-func_8009028C:
+.global Calc__Q23EGG12LightManagerFPQ34nw4r3g3d7ScnRoot
+Calc__Q23EGG12LightManagerFPQ34nw4r3g3d7ScnRoot:
 /* 8009028C 0008B18C  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 80090290 0008B190  7C 08 02 A6 */	mflr r0
 /* 80090294 0008B194  90 01 00 24 */	stw r0, 0x24(r1)
@@ -357,8 +357,8 @@ lbl_80090328:
 /* 80090334 0008B234  38 21 00 20 */	addi r1, r1, 0x20
 /* 80090338 0008B238  4E 80 00 20 */	blr 
 
-.global func_8009033C
-func_8009033C:
+.global CalcView__Q23EGG12LightManagerFRCQ23EGG9Matrix34fUcPQ34nw4r3g3d7ScnRoot
+CalcView__Q23EGG12LightManagerFRCQ23EGG9Matrix34fUcPQ34nw4r3g3d7ScnRoot:
 /* 8009033C 0008B23C  94 21 FF A0 */	stwu r1, -0x60(r1)
 /* 80090340 0008B240  7C 08 02 A6 */	mflr r0
 /* 80090344 0008B244  90 01 00 64 */	stw r0, 0x64(r1)
@@ -544,8 +544,8 @@ lbl_800905C0:
 /* 800905CC 0008B4CC  38 21 00 20 */	addi r1, r1, 0x20
 /* 800905D0 0008B4D0  4E 80 00 20 */	blr 
 
-.global func_800905D4
-func_800905D4:
+.global DoneDraw__Q23EGG12LightManagerFv
+DoneDraw__Q23EGG12LightManagerFv:
 /* 800905D4 0008B4D4  A0 83 00 1A */	lhz r4, 0x1a(r3)
 /* 800905D8 0008B4D8  54 80 07 39 */	rlwinm. r0, r4, 0, 0x1c, 0x1c
 /* 800905DC 0008B4DC  41 82 00 14 */	beq lbl_800905F0

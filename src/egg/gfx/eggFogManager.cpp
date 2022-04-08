@@ -15,46 +15,46 @@ namespace EGG
         }
     }
 
-    void FogManager::reset()
+    void FogManager::Reset()
     {
         for (int i = 0; i < cNumFog; i++)
         {
-            mFog[i]->reset();
+            mFog[i]->Reset();
         }
     }
 
-    void FogManager::callVF_0x10()
+    void FogManager::Calc()
     {
-        if ((mFlags & FLAG_4) == 0)
+        if ((mFlags & DRAW_READY) == 0)
         {
             for (int i = 0; i < cNumFog; i++)
             {
-                mFog[i]->VF_0x10();
+                mFog[i]->Calc();
             }
 
-            mFlags |= FLAG_4;
+            mFlags |= DRAW_READY;
         }
     }
 
-    void FogManager::useScreenZ(eggScreen *screen)
+    void FogManager::UseScreenZ(eggScreen& screen)
     {
         for (int i = 0; i < cNumFog; i++)
         {
-            mFog[i]->mNearZ = screen->getMatrix()(0, 2);
-            mFog[i]->mFarZ = screen->getMatrix()(1, 0);
+            mFog[i]->mNearZ = screen.getMatrix()(0, 2);
+            mFog[i]->mFarZ = screen.getMatrix()(1, 0);
         }
     }
 
-    void FogManager::setG3D(nw4r::g3d::ScnRoot *root)
+    void FogManager::CopyToG3D(nw4r::g3d::ScnRoot *root)
     {
         for (int i = 0; i < cNumFog; i++)
         {
             nw4r::g3d::Fog f = root->GetFog(i);
-            mFog[i]->setG3D(f);
+            mFog[i]->CopyToG3D(f);
         }
     }
 
-    void FogManager::initialize(nw4r::g3d::ResAnmScn *scene, f32 f1)
+    void FogManager::LoadScnFog(nw4r::g3d::ResAnmScn *scene, f32 f1)
     {
         if (scene->IsValid() && scene->GetResAnmFogMaxRefNumber() > 0)
         {
@@ -63,15 +63,15 @@ namespace EGG
             
             for (int i = 0; i < numFog; i++)
             {
-                mFog[i]->setFlags();
-                mFog[i]->initialize(scene->GetResAnmFogByRefNumber(i), f1);
+                mFog[i]->Unbind();
+                mFog[i]->Bind(scene->GetResAnmFogByRefNumber(i), f1);
             }
         }
     }
 
-    void FogManager::resetFlags()
+    void FogManager::DoneDraw()
     {
-        mFlags &= ~FLAG_4;
+        mFlags &= ~DRAW_READY;
     }
 
     FogManager::~FogManager()

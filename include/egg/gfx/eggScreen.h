@@ -21,20 +21,22 @@ namespace EGG
         };
 
     public:
+        eggScreen();
         eggScreen(const eggScreen&);
 
         virtual ~eggScreen() {} // at 0x8
         virtual void SetProjectionGX() const; // at 0xC
         virtual void CopyToG3D(nw4r::g3d::Camera) const; // at 0x10
 
-        void CopyFromAnother(eggScreen&);
+        void CopyFromAnother(const eggScreen&);
 
         EfbData * GetDataEfb() const;
 
     private:
         f32 FLOAT_0x40;
         f32 FLOAT_0x44;
-        EfbData mEfbData;
+        EfbData mEfbData; // at 0x48
+        char UNK_0x64[0x4];
     };
 }
 

@@ -16,7 +16,7 @@ namespace EGG
     GXUtility::ProjectionCallback GXUtility::sProjectionCallback;
     UNKWORD GXUtility::sProjectionCallbackArg;
     u16 GXUtility::lbl_804BEC7C;
-    u32 GXUtility::sStateFlags;
+    u32 GXUtility::sDrawSettings;
     Matrix34f GXUtility::sCameraMtx;
 
     u8 GXUtility::getTexCoordGenVal(int no)
@@ -92,9 +92,9 @@ namespace EGG
 
     void GXUtility::setScreenProjection(bool b)
     {
-        StateGX::GXSetColorUpdate(sStateFlags & ENABLE_COLOR_UPDATE);
-        StateGX::GXSetAlphaUpdate(sStateFlags & ENABLE_ALPHA_UPDATE);
-        StateGX::GXSetDither(sStateFlags & ENABLE_DITHER);
+        StateGX::GXSetColorUpdate(sDrawSettings & ENABLE_COLOR_UPDATE);
+        StateGX::GXSetAlphaUpdate(sDrawSettings & ENABLE_ALPHA_UPDATE);
+        StateGX::GXSetDither(sDrawSettings & ENABLE_DITHER);
 
         if (sProjectionCallback != NULL)
             sProjectionCallback(sProjectionCallbackArg, b);

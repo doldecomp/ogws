@@ -505,8 +505,8 @@ func_80093384:
 /* 800933BC 0008E2BC  38 21 00 10 */	addi r1, r1, 0x10
 /* 800933C0 0008E2C0  4E 80 00 20 */	blr 
 
-.global func_800933C4
-func_800933C4:
+.global Draw__Q23EGG19LightTextureManagerFPQ23EGG12LightManagerPQ33EGG9eggScreen7EfbDataffff
+Draw__Q23EGG19LightTextureManagerFPQ23EGG12LightManagerPQ33EGG9eggScreen7EfbDataffff:
 /* 800933C4 0008E2C4  94 21 FE D0 */	stwu r1, -0x130(r1)
 /* 800933C8 0008E2C8  7C 08 02 A6 */	mflr r0
 /* 800933CC 0008E2CC  90 01 01 34 */	stw r0, 0x134(r1)

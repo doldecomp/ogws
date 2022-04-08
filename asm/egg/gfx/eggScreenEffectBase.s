@@ -102,7 +102,7 @@ __ct__Q23EGG16ScreenEffectBaseFv:
 /* 8009FCCC 0009ABCC  98 03 00 00 */	stb r0, 0(r3)
 /* 8009FCD0 0009ABD0  90 83 00 6C */	stw r4, 0x6c(r3)
 /* 8009FCD4 0009ABD4  38 63 00 04 */	addi r3, r3, 4
-/* 8009FCD8 0009ABD8  4B FF 9A 65 */	bl func_8009973C
+/* 8009FCD8 0009ABD8  4B FF 9A 65 */	bl __ct__Q23EGG9eggScreenFv
 /* 8009FCDC 0009ABDC  7F E3 FB 78 */	mr r3, r31
 /* 8009FCE0 0009ABE0  83 E1 00 0C */	lwz r31, 0xc(r1)
 /* 8009FCE4 0009ABE4  80 01 00 14 */	lwz r0, 0x14(r1)
@@ -113,7 +113,7 @@ __ct__Q23EGG16ScreenEffectBaseFv:
 .global CopyScreenFromAnother__Q23EGG16ScreenEffectBaseFRQ23EGG9eggScreen
 CopyScreenFromAnother__Q23EGG16ScreenEffectBaseFRQ23EGG9eggScreen:
 /* 8009FCF4 0009ABF4  38 63 00 04 */	addi r3, r3, 4
-/* 8009FCF8 0009ABF8  4B FF A0 90 */	b func_80099D88
+/* 8009FCF8 0009ABF8  4B FF A0 90 */	b CopyFromAnother__Q23EGG9eggScreenFRCQ23EGG9eggScreen
 
 .global func_8009FCFC
 func_8009FCFC:
@@ -189,7 +189,7 @@ func_8009FDCC:
 /* 8009FDFC 0009ACFC  7C BA 2B 78 */	mr r26, r5
 /* 8009FE00 0009AD00  3B DE A9 C0 */	addi r30, r30, lbl_8040A9C0@l
 /* 8009FE04 0009AD04  38 63 00 04 */	addi r3, r3, 4
-/* 8009FE08 0009AD08  4B FF A3 4D */	bl func_8009A154
+/* 8009FE08 0009AD08  4B FF A3 4D */	bl GetDataEfb__Q23EGG9eggScreenCFv
 /* 8009FE0C 0009AD0C  1F 99 00 0C */	mulli r28, r25, 0xc
 /* 8009FE10 0009AD10  3B FE 00 00 */	addi r31, r30, 0
 /* 8009FE14 0009AD14  7C 1F E0 2E */	lwzx r0, r31, r28
@@ -811,7 +811,7 @@ func_800A06D0:
 /* 800A06E0 0009B5E0  93 E1 00 3C */	stw r31, 0x3c(r1)
 /* 800A06E4 0009B5E4  93 C1 00 38 */	stw r30, 0x38(r1)
 /* 800A06E8 0009B5E8  93 A1 00 34 */	stw r29, 0x34(r1)
-/* 800A06EC 0009B5EC  4B FF 9A 69 */	bl func_8009A154
+/* 800A06EC 0009B5EC  4B FF 9A 69 */	bl GetDataEfb__Q23EGG9eggScreenCFv
 /* 800A06F0 0009B5F0  3C 80 80 41 */	lis r4, lbl_8040A9F0@ha
 /* 800A06F4 0009B5F4  C0 03 00 08 */	lfs f0, 8(r3)
 /* 800A06F8 0009B5F8  C0 84 A9 F0 */	lfs f4, lbl_8040A9F0@l(r4)
