@@ -42,8 +42,8 @@ lbl_803978B8:
 .section .text, "ax"
 # DrawPathShadowVolume::DrawPathShadowVolume
 # Inherits from DrawPathBase
-.global func_8008D7F4
-func_8008D7F4:
+.global __ct__Q23EGG20DrawPathShadowVolumeFv
+__ct__Q23EGG20DrawPathShadowVolumeFv:
 /* 8008D7F4 000886F4  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8008D7F8 000886F8  7C 08 02 A6 */	mflr r0
 /* 8008D7FC 000886FC  90 01 00 14 */	stw r0, 0x14(r1)

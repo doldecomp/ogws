@@ -100,8 +100,8 @@ lbl_80397768:
 .section .text, "ax"
 # DrawPathBloom::DrawPathBloom
 # Inherits from DrawPathBase
-.global func_80089F68
-func_80089F68:
+.global __ct__Q23EGG13DrawPathBloomFv
+__ct__Q23EGG13DrawPathBloomFv:
 /* 80089F68 00084E68  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80089F6C 00084E6C  7C 08 02 A6 */	mflr r0
 /* 80089F70 00084E70  90 01 00 14 */	stw r0, 0x14(r1)

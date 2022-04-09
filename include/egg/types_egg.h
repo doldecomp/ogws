@@ -9,6 +9,11 @@ namespace EGG
     struct CpuTexture;
     struct DrawGX;
     struct DrawPathBase;
+    struct DrawPathBloom;
+    struct DrawPathDOF;
+    struct DrawPathHDR;
+    struct DrawPathLightMap;
+    struct DrawPathShadowVolume;
     struct Fog;
     struct FogManager;
     struct G3DUtility;
@@ -24,8 +29,9 @@ namespace EGG
     struct PostEffectBlur;
     struct PostEffectBlurGather;
     struct ResTIMG;
-    struct eggScreen;
+    struct ScnRenderer;
     struct ScnRootEx;
+    struct eggScreen;
     struct ScreenEffectBase;
     struct ShadowTextureManager;
     struct ShadowTexture;

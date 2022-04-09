@@ -131,8 +131,8 @@ lbl_80379340:
 .section .text, "ax"
 # DrawPathDOF::DrawPathDOF
 # Inherits from DrawPathBase
-.global func_8008BB30
-func_8008BB30:
+.global __ct__Q23EGG11DrawPathDOFFv
+__ct__Q23EGG11DrawPathDOFFv:
 /* 8008BB30 00086A30  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8008BB34 00086A34  7C 08 02 A6 */	mflr r0
 /* 8008BB38 00086A38  90 01 00 14 */	stw r0, 0x14(r1)

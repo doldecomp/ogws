@@ -115,8 +115,8 @@ CopyScreenFromAnother__Q23EGG16ScreenEffectBaseFRQ23EGG9eggScreen:
 /* 8009FCF4 0009ABF4  38 63 00 04 */	addi r3, r3, 4
 /* 8009FCF8 0009ABF8  4B FF A0 90 */	b CopyFromAnother__Q23EGG9eggScreenFRCQ23EGG9eggScreen
 
-.global func_8009FCFC
-func_8009FCFC:
+.global initialize__Q23EGG16ScreenEffectBaseFv
+initialize__Q23EGG16ScreenEffectBaseFv:
 /* 8009FCFC 0009ABFC  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8009FD00 0009AC00  7C 08 02 A6 */	mflr r0
 /* 8009FD04 0009AC04  90 01 00 24 */	stw r0, 0x24(r1)

@@ -41,7 +41,7 @@ namespace EGG
             DRAW_SETTING_ALL = DRAW_SETTING_MAX - 1
         };
 
-    private:
+    protected:
         nw4r::g3d::ScnRoot *mBase; // at 0x0
         LightManager *mpLightManager; // at 0x4
         FogManager *mpFogManager; // at 0x8

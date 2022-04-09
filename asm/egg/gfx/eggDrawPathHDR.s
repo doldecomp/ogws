@@ -46,8 +46,8 @@ lbl_8008D4E4:
 
 # DrawPathHDR::DrawPathHDR
 # Inherits from DrawPathBase
-.global func_8008D50C
-func_8008D50C:
+.global __ct__Q23EGG11DrawPathHDRFv
+__ct__Q23EGG11DrawPathHDRFv:
 /* 8008D50C 0008840C  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8008D510 00088410  7C 08 02 A6 */	mflr r0
 /* 8008D514 00088414  90 01 00 14 */	stw r0, 0x14(r1)

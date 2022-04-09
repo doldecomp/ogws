@@ -12,11 +12,11 @@ namespace EGG
     {
     public:
         DrawPathBase();
-        virtual int getNumScnProc() = 0; // at 0x1C
+        virtual int getNumScnProc() const = 0; // at 0x1C
         virtual void calc_after_CalcWorld(); // at 0x20
         virtual void calc(); // at 0x24
         virtual void draw() = 0; // at 0x28
-        virtual ~DrawPathBase() {} // at 0x8
+        virtual ~DrawPathBase(); // at 0x8
         virtual void doDraw(u16) { if (isVisible()) draw(); } // at 0x2C
 
         void CopyGlobalScreen();

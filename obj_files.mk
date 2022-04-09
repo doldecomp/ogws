@@ -208,7 +208,7 @@ EGG_O_FILES := \
 	build/asm/egg/gfx/eggDrawPathDOF.o \
 	build/asm/egg/gfx/eggDrawPathHDR.o \
 	build/asm/egg/gfx/eggDrawPathShadowVolume.o \
-	build/asm/egg/gfx/eggDrawPath_8008E294.o \
+	build/asm/egg/gfx/eggDrawPathLightMap.o \
 	build/egg/gfx/eggFog.o \
 	build/egg/gfx/eggFogManager.o \
 	build/asm/egg/gfx/eggG3DUtility.o \
@@ -229,7 +229,7 @@ EGG_O_FILES := \
 	build/asm/egg/gfx/eggScreen.o \
 	build/asm/egg/gfx/eggShadowTexture.o \
 	build/egg/gfx/eggIScnProc.o \
-	build/asm/egg/gfx/eggScnRenderer.o \
+	build/egg/gfx/eggScnRenderer.o \
 	build/asm/egg/gfx/eggLightObject.o \
 	build/asm/egg/gfx/eggPostEffectMaskDOF.o \
 	build/asm/egg/gfx/eggScreenEffectBase.o \
