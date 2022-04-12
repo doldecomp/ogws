@@ -5,20 +5,17 @@
 
 namespace EGG
 {
-    /**
-     * This was previously believed to be Matrix34f's destructor,
-     * however __sinit_\eggMatrix_cpp and the BBA map prove that
-     * Matrix34f does not have a destructor declared.
-     * 
-     * Perhaps this is some base class to Matrix34f?
-     * Having Matrix34f inherit a weak destructor from UnknownStruct
-     * also places the function at the top of the file.
-     */
-    struct UnknownStruct
+
+    // This weak destructor likely belongs to Quatf due to the BBA map
+    // and that this is referenced in the stack unwinding instructions of setAxisRotation.
+    namespace
     {
-        ~UnknownStruct();
-    };
-    UnknownStruct::~UnknownStruct() {}
+        void INSTANTIATE_WEAK_EGGMATRIX()
+        {
+            Quatf q;
+            q.~Quatf();
+        }
+    }
 
     Matrix34f::Matrix34f(f32 _00, f32 _01, f32 _02, f32 _03,
         f32 _10, f32 _11, f32 _12, f32 _13,
