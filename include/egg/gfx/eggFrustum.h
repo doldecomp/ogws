@@ -23,11 +23,16 @@ namespace EGG
             CANVASMODE_1,
         };
 
-    private:
-        u32 mProjection; // at 0x0
-        CanvasMode mCanvas; // at 0x4
-        Vector2f mScale; // at 0x8
-        Matrix33f mMatrix; // at 0x10
+    protected:
+        ProjectionType mProjType; // at 0x0
+        CanvasMode mCanvasMode; // at 0x4
+        nw4r::math::VEC2 mSize; // at 0x8
+        f32 mFovY; // at 0x10
+        f32 FLOAT_0x14;
+        f32 mNearZ; // at 0x18
+        f32 mFarZ; // at 0x1C
+        nw4r::math::VEC2 mOffset; // at 0x20
+        nw4r::math::VEC3 mScale; // at 0x28
         u16 mFlags; // at 0x34
         
     public:
@@ -46,13 +51,18 @@ namespace EGG
 
         UNKTYPE FUN_800a0b90(UNKTYPE);
 
-        void setProjectionType(ProjectionType type) { mProjection = type; }
+        ProjectionType getProjectionType() const { return mProjType; }
+        void setProjectionType(ProjectionType type) { mProjType = type; }
+        CanvasMode getCanvasMode() const { return mCanvasMode; }
+        void setCanvasMode(CanvasMode mode) { mCanvasMode = mode; }
 
-        CanvasMode getCanvasMode() const { return mCanvas; }
-        void setCanvasMode(CanvasMode mode) { mCanvas = mode; }
+        void setNearZ(f32 nearZ) { mNearZ = nearZ; }
+        f32 getNearZ() const { return mNearZ; }
+        void setFarZ(f32 farZ) { mFarZ = farZ; }
+        f32 getFarZ() const { return mFarZ; }
 
-        Matrix33f& getMatrix() { return mMatrix; }
-        
+        void setScale(const nw4r::math::VEC3& scale) { mScale = scale; }
+        void setOffset(const nw4r::math::VEC2& offset) { mOffset = offset; }
         void setFlag(u32 flag) { mFlags |= flag; }
 
     private:
