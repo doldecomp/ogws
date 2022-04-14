@@ -2,27 +2,26 @@
 #define EGG_MATH_VECTOR_H
 #include "types_egg.h"
 #include "eggMath.h"
+#include "math_types.h"
 
 namespace EGG
 {
-    struct Vector2f
+    struct Vector2f : nw4r::math::VEC2
     {
         Vector2f() {}
-        Vector2f(f32 _x, f32 _y) : x(_x), y(_y) {}
+        Vector2f(f32 _x, f32 _y) : VEC2(_x, _y) {}
         ~Vector2f() {}
-
-        f32 x, y;
 
         static const Vector2f zero;
         static const Vector2f ex;
         static const Vector2f ey;
     };
 
-    struct Vector3f
+    struct Vector3f : nw4r::math::VEC3
     {
         Vector3f() {}
-        Vector3f(f32 _x, f32 _y, f32 _z) : x(_x), y(_y), z(_z) {}
-        ~Vector3f();
+        Vector3f(f32 _x, f32 _y, f32 _z) : VEC3(_x, _y, _z) {}
+        ~Vector3f() {}
 
         f32 normalise();
 
@@ -33,10 +32,10 @@ namespace EGG
 
         f32 squaredLength() const
         {
-            return x * x + y * y + z * z;
+            return mCoords.x * mCoords.x
+                + mCoords.y * mCoords.y
+                + mCoords.z * mCoords.z;
         }
-
-        f32 x, y, z;
 
         static const Vector3f zero;
         static const Vector3f ex;

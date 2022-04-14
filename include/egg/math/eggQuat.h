@@ -9,9 +9,9 @@ namespace EGG
     {
         Quatf() {}
         Quatf(f32 _w, Vector3f vec) :
-            x(vec.x),
-            y(vec.y),
-            z(vec.z),
+            x(vec.mCoords.x),
+            y(vec.mCoords.y),
+            z(vec.mCoords.z),
             w(_w)
             {}
 
