@@ -81,7 +81,7 @@ __vt__Q23EGG6Screen:
     .long 0
     .long 0
     .long lbl_8008D4BC
-    .long SetProjectionGX__Q23EGG6ScreenCFv
+    .long SetProjectionGX__Q23EGG6ScreenFv
     .long 0x80099aec
 # Weak asserts
 .global lbl_80397E3C
@@ -420,8 +420,8 @@ lbl_800999DC:
 func_80099A00:
 /* 80099A00 00094900  4E 80 00 20 */	blr 
 
-.global SetProjectionGX__Q23EGG6ScreenCFv
-SetProjectionGX__Q23EGG6ScreenCFv:
+.global SetProjectionGX__Q23EGG6ScreenFv
+SetProjectionGX__Q23EGG6ScreenFv:
 /* 80099A04 00094904  94 21 FF A0 */	stwu r1, -0x60(r1)
 /* 80099A08 00094908  7C 08 02 A6 */	mflr r0
 /* 80099A0C 0009490C  90 01 00 64 */	stw r0, 0x64(r1)
@@ -1187,7 +1187,7 @@ lbl_8009A4CC:
 /* 8009A4DC 000953DC  D0 21 00 58 */	stfs f1, 0x58(r1)
 /* 8009A4E0 000953E0  D0 01 00 5C */	stfs f0, 0x5c(r1)
 /* 8009A4E4 000953E4  90 01 00 40 */	stw r0, 0x40(r1)
-/* 8009A4E8 000953E8  4B FF F5 1D */	bl SetProjectionGX__Q23EGG6ScreenCFv
+/* 8009A4E8 000953E8  4B FF F5 1D */	bl SetProjectionGX__Q23EGG6ScreenFv
 /* 8009A4EC 000953EC  C0 7D 00 0C */	lfs f3, 0xc(r29)
 /* 8009A4F0 000953F0  38 61 00 10 */	addi r3, r1, 0x10
 /* 8009A4F4 000953F4  C0 5D 00 2C */	lfs f2, 0x2c(r29)

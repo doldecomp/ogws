@@ -13,6 +13,8 @@
 
 namespace EGG
 {
+    using namespace nw4r;
+    
     PostEffectBase::~PostEffectBase()
     {
     }
@@ -165,40 +167,23 @@ namespace EGG
 
     void PostEffectBase::setProjection(const Screen& screen)
     {
-        // Separating the floats could not produce the correct stack behavior.
-        // It seems this really is some structure
-        struct ScreenUnk
-        {
-            ScreenUnk(const Screen& scr) : screen(scr) {}
-            f32 floats[6];
-            Screen screen;
-        };
+        Screen clone(screen);
+        
+        clone.SetFlag(0x80);
 
-        ScreenUnk temp(screen);
-        temp.screen.setFlag(0x80);
-
-        if (temp.screen.getCanvasMode() != Frustum::CANVASMODE_1)
+        if (clone.GetCanvasMode() != Frustum::CANVASMODE_1)
         {
-            temp.screen.setFlag(0x1);
-            temp.screen.setCanvasMode(Frustum::CANVASMODE_1);
+            clone.SetFlag(0x1);
+            clone.SetCanvasMode(Frustum::CANVASMODE_1);
         }
 
-        temp.screen.setProjectionType(Frustum::PROJ_ORTHO);
+        clone.SetProjectionType(Frustum::PROJ_ORTHO);
 
-        Matrix33f& mtx = temp.screen.getMatrix();
-        mtx(0, 2) = 0.0f;
-        mtx(1, 0) = 1.0f;
-        temp.floats[2] = 1.0f;
-        temp.floats[3] = 1.0f;
-        temp.floats[4] = 1.0f;
-        mtx(2, 0) = 1.0f;
-        mtx(2, 1) = 1.0f;
-        mtx(2, 2) = 1.0f;
-        temp.floats[0] = 0.0f;
-        temp.floats[1] = 0.0f;
-        mtx(1, 1) = 0.0f;
-        mtx(1, 2) = 0.0f;
+        clone.SetNearZ(0.0f);
+        clone.SetFarZ(1.0f);
+        clone.SetScale(math::VEC3(1.0f, 1.0f, 1.0f));
+        clone.SetOffset(math::VEC2(0.0f, 0.0f));
 
-        temp.screen.Screen::SetProjectionGX();
+        clone.Screen::SetProjectionGX();
     }
 }
