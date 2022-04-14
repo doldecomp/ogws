@@ -30,7 +30,7 @@ namespace EGG
         virtual void SetGX() const; // at 0x14
         
         void Bind(const nw4r::g3d::ResAnmFog&, f32);
-        void CopyToG3D(nw4r::g3d::Fog&) const;
+        void CopyToG3D(nw4r::g3d::Fog) const;
 
         void Unbind()
         {

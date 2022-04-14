@@ -26,14 +26,14 @@ namespace EGG
 
         struct EffectBuffer
         {
-            TextureBuffer *mpTexBuffer; // at 0x0
+            TextureBuffer * mpTexBuffer; // at 0x0
             ScreenEffectBase * mpAllocBase; // at 0x4
             UNKWORD WORD_0x8; // at 0x8
         };
 
     private:
-        u8 mFlags;
-        eggScreen mScreen;
+        u8 mFlags; // at 0x0
+        Screen mScreen; // at 0x4
 
         static EffectBuffer spBufferSet[cBufferType_Max];
 
@@ -57,7 +57,7 @@ namespace EGG
             return spBufferSet[type].mpTexBuffer;
         }
 
-        void CopyScreenFromAnother(eggScreen&);
+        void CopyScreenFromAnother(Screen&);
        
         static void initialize();
         bool freeEffectBuffer(BufferType);

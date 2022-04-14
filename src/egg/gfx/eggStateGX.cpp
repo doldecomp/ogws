@@ -26,11 +26,11 @@ namespace EGG
         1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f
     };
 
-    u16 StateGX::sScreenWidth;
-    u16 StateGX::sScreenHeight;
-    GXPixelFmt StateGX::sDefaultPixelFormat;
+    u16 StateGX::s_widthFb;
+    u16 StateGX::s_heightEfb;
+    GXPixelFmt StateGX::s_pixFormat;
     UNKWORD StateGX::sDefaultPixelFormatArg2;
-    GXPixelFmt StateGX::sCurrentPixelFormat;
+    GXPixelFmt StateGX::s_pixFormatCurrent;
     UNKWORD StateGX::sCurrentPixelFormatArg2;
     GXColor StateGX::sDefaultTexColor;
     u8 StateGX::sDefaultTexObjImage[4 * 4];
@@ -44,21 +44,21 @@ namespace EGG
 {
     using namespace nw4r::g3d;
 
-    void StateGX::invalidateTexAllGX()
+    void StateGX::initialize()
     {
         sStateFlags &= ~VALID_CACHE;
 
         GXInvalidateTexAll();
-        resetGXCache();
-        resetCache();
+        frameInit();
+        doResetStateCache();
 
         sTMemLayout = tmem::TMEM_LAYOUT_1;
         tmem::SetTMemLayout(tmem::TMEM_LAYOUT_1);
     }
 
-    void StateGX::resetGXCache()
+    void StateGX::frameInit()
     {
-        GXSetPixelFmt(sDefaultPixelFormat, sDefaultPixelFormatArg2);
+        GXSetPixelFmt_(s_pixFormat, sDefaultPixelFormatArg2);
         GXInvalidateVtxCache();
         GXSetCurrentMtx(0);
         GXSetCoPlanar(0);
@@ -70,23 +70,23 @@ namespace EGG
         if (sStateFlags & USE_TMEM) tmem::SetTMemLayout(sTMemLayout);
     }
 
-    void StateGX::resetCache()
+    void StateGX::doResetStateCache()
     {
-        setupCache();
+        resetStateCache();
     }
 
     void StateGX::resetGX()
     {
-        resetGXAttr();
-        resetGXTexMtx();
-        resetGXChans();
-        resetGXTexObjs();
-        resetGXTexCoords();
-        resetGXTevs();
-        resetGXFog();
+        resetVtx();
+        resetIndirect();
+        resetColorChannel();
+        resetTexture();
+        resetTexGen();
+        resetTev();
+        resetPE();
     }
 
-    void StateGX::resetGXAttr()
+    void StateGX::resetVtx()
     {
         GXSetVtxAttrFmt(0, GX_ATTR_VTX, 1, 4, 0);
         GXSetVtxAttrFmt(0, GX_ATTR_VTX_NRM, 0, 4, 0);
@@ -102,7 +102,7 @@ namespace EGG
         GXSetVtxAttrFmt(0, GX_ATTR_20, 1, 3, 7);
     }
 
-    void StateGX::resetGXChans()
+    void StateGX::resetColorChannel()
     {
         GXSetNumChans(1);
 
@@ -116,7 +116,7 @@ namespace EGG
         GXSetChanCtrl(GX_CHANNEL_ID_5, 0, 0, 0, 0, 2, 2);
     }
 
-    void StateGX::resetGXTexMtx()
+    void StateGX::resetIndirect()
     {
         GXSetNumIndStages(0);
 
@@ -132,7 +132,7 @@ namespace EGG
         }
     }
 
-    void StateGX::resetGXTexObjs()
+    void StateGX::resetTexture()
     {
         GXTexObj gxTex;
         GXInitTexObj(&gxTex, sDefaultTexObjImage, 4, 4, 3, 0, 0, 0);
@@ -147,7 +147,7 @@ namespace EGG
         GXLoadTexObj(&gxTex, GX_TEX_MAP_ID_7);
     }
 
-    void StateGX::resetGXTexCoords()
+    void StateGX::resetTexGen()
     {
         Mtx ident;
         PSMTXIdentity(ident);
@@ -169,7 +169,7 @@ namespace EGG
         }
     }
 
-    void StateGX::resetGXTevs()
+    void StateGX::resetTev()
     {
         GXSetNumTevStages(1);
 
@@ -201,7 +201,7 @@ namespace EGG
         GXSetTevSwapModeTable(GX_TEV_SWAP_SEL_3, 2, 2, 2, 3);
     }
 
-    void StateGX::resetGXFog()
+    void StateGX::resetPE()
     {
         GXSetBlendMode(1, 4, 5, 5);
         GXSetAlphaCompare(7, 0, 0, 7, 0);
@@ -213,16 +213,16 @@ namespace EGG
         GXSetDstAlpha(0, 0);
     }
 
-    void StateGX::setupCache()
+    void StateGX::resetStateCache()
     {
         sCache.flags = 0;
-        StateGX::GXSetColorUpdate(true);
-        StateGX::GXSetAlphaUpdate(true);
-        StateGX::GXSetDither(true);
+        StateGX::GXSetColorUpdate_(true);
+        StateGX::GXSetAlphaUpdate_(true);
+        StateGX::GXSetDither_(true);
     }
 
     // Fake match: Figure out what is actually happening here
-    void StateGX::GXSetProjection(Mtx44 mtx, int type)
+    void StateGX::GXSetProjection_(Mtx44 mtx, int type)
     {
         f32 pj[12];
 
@@ -236,7 +236,7 @@ namespace EGG
                 pj[11] = mtx[1][2];
                 pj[12] = mtx[2][2];
                 pj[13] = mtx[2][3];
-                GXSetProjectionv(&pj[7]);
+                GXSetProjectionv_(&pj[7]);
                 break;
             case 1:
                 __memcpy(&pj[0], lbl_80378C80, 7 * 0x4);
@@ -246,7 +246,7 @@ namespace EGG
                 pj[4] = mtx[1][3];
                 pj[5] = mtx[2][2];
                 pj[6] = mtx[2][3];
-                GXSetProjectionv(&pj[0]);
+                GXSetProjectionv_(&pj[0]);
                 break;
             default:
                 #line 288
@@ -254,7 +254,7 @@ namespace EGG
         }
     }
 
-    void StateGX::GXSetProjectionv(const f32 *proj)
+    void StateGX::GXSetProjectionv_(const f32 *proj)
     {
         f32 old_pj[6];
         GXGetProjectionv(old_pj);
@@ -267,12 +267,12 @@ namespace EGG
                 && proj[6] == old_pj[6]) return;
         }
 
-        ::GXSetProjectionv(proj);
+        GXSetProjectionv(proj);
 
         if (sStateFlags & VALID_CACHE) sCache.flags |= PROJECTIONV_CACHED;
     }
 
-    void StateGX::GXSetViewport(f32 x1, f32 y1, f32 w, f32 h, f32 f5, f32 f6)
+    void StateGX::GXSetViewport_(f32 x1, f32 y1, f32 w, f32 h, f32 f5, f32 f6)
     {
         f32 old_vp[5];
         GXGetViewportv(old_vp);
@@ -284,12 +284,12 @@ namespace EGG
                 && f5 == old_vp[4] && f6 == old_vp[5]) return;
         }
 
-        ::GXSetViewport(x1, y1, w, h, f5, f6);
+        GXSetViewport(x1, y1, w, h, f5, f6);
 
         if (sStateFlags & VALID_CACHE) sCache.flags |= VIEWPORT_CACHED;
     }
 
-    void StateGX::GXSetScissor(u32 s0, u32 s1, u32 s2, u32 s3)
+    void StateGX::GXSetScissor_(u32 s0, u32 s1, u32 s2, u32 s3)
     {
         #line 385
         EGG_ASSERT(s0 < 2048);
@@ -306,12 +306,12 @@ namespace EGG
                 && s2 == old_s2 && s3 == old_s3) return;
         }
 
-        ::GXSetScissor(s0, s1, s2, s3);
+        GXSetScissor(s0, s1, s2, s3);
 
         if (sStateFlags & VALID_CACHE) sCache.flags |= SCISSOR_CACHED;
     }
 
-    void StateGX::GXSetScissorBoxOffset(int b0, int b1)
+    void StateGX::GXSetScissorBoxOffset_(int b0, int b1)
     {
         #line 422
         EGG_ASSERT(b0 % 2 == 0);
@@ -323,65 +323,65 @@ namespace EGG
                 && b1 == sCache.scissorOfsY) return;
         }
 
-        ::GXSetScissorBoxOffset(b0, b1);
+        GXSetScissorBoxOffset(b0, b1);
         sCache.scissorOfsX = b0;
         sCache.scissorOfsY = b1;
 
         if (sStateFlags & VALID_CACHE) sCache.flags |= SCISSOR_BOX_CACHED;
     }
 
-    void StateGX::GXSetColorUpdate(bool enable)
+    void StateGX::GXSetColorUpdate_(bool enable)
     {
         if (sCache.flags & COLOR_UPDATE_CACHED)
         {
             if (enable == sCache.colorUpdate) return;
         }
 
-        ::GXSetColorUpdate(enable);
+        GXSetColorUpdate(enable);
         sCache.colorUpdate = enable;
 
         if (sStateFlags & VALID_CACHE) sCache.flags |= COLOR_UPDATE_CACHED;
     }
 
-    void StateGX::GXSetAlphaUpdate(bool enable)
+    void StateGX::GXSetAlphaUpdate_(bool enable)
     {
         if (sCache.flags & ALPHA_UPDATE_CACHED)
         {
             if (enable == sCache.alphaUpdate) return;
         }
 
-        ::GXSetAlphaUpdate(enable);
+        GXSetAlphaUpdate(enable);
         sCache.alphaUpdate = enable;
 
         if (sStateFlags & VALID_CACHE) sCache.flags |= ALPHA_UPDATE_CACHED;
     }
 
-    void StateGX::GXSetDither(bool enable)
+    void StateGX::GXSetDither_(bool enable)
     {
         if (sCache.flags & DITHER_CACHED)
         {
             if (enable == sCache.dither) return;
         }
 
-        ::GXSetDither(enable);
+        GXSetDither(enable);
         sCache.dither = enable;
 
         if (sStateFlags & VALID_CACHE) sCache.flags |= DITHER_CACHED;
     }
 
-    void StateGX::GXSetPixelFmt(GXPixelFmt fmt, UNKWORD arg2)
+    void StateGX::GXSetPixelFmt_(GXPixelFmt fmt, UNKWORD arg2)
     {
         // New setting only required if cache exists
         if (sStateFlags & VALID_CACHE
-            && (sCurrentPixelFormat != fmt || sCurrentPixelFormatArg2 != arg2)
+            && (s_pixFormatCurrent != fmt || sCurrentPixelFormatArg2 != arg2)
             || ((sStateFlags & VALID_CACHE) == 0))
         {
-            ::GXSetPixelFmt(fmt, arg2);
-            ::GXSetColorUpdate(sCache.colorUpdate);
-            ::GXSetAlphaUpdate(sCache.alphaUpdate);
+            GXSetPixelFmt(fmt, arg2);
+            GXSetColorUpdate(sCache.colorUpdate);
+            GXSetAlphaUpdate(sCache.alphaUpdate);
         }
 
-        sCurrentPixelFormat = fmt;
+        s_pixFormatCurrent = fmt;
         sCurrentPixelFormatArg2 = arg2;
     }
 }

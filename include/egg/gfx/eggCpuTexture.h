@@ -56,18 +56,18 @@ namespace EGG
 
         virtual ~CpuTexture() {} // at 0x8
         virtual void configure(); // at 0xC
-        virtual void initTexObj(GXTexObj *) const; // at 0x10
-        virtual void loadTexObj(GXTexMapID); // at 0x14
+        virtual void getTexObj(GXTexObj *) const; // at 0x10
+        virtual void load(GXTexMapID) const; // at 0x14
 
         CpuTexture();
         CpuTexture(u16, u16, GXTexFmt);
         
-        void invalidateTexBuffer() const;
-        void flushTexBuffer() const;
+        void invalidate() const;
+        void flush() const;
         u32 getTexBufferSize() const;
         void buildHeader() const;
         Header * initHeader();
-        UNKTYPE func_80086A04(UNKTYPE);
+        void fillNormalMapSphere();
         UNKTYPE func_80086C8C(UNKTYPE);
         void allocTexBuffer();
         void allocTexBufferAndHeader();

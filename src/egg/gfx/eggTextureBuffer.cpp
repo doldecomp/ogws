@@ -73,15 +73,15 @@ namespace EGG
 
         if (heap == NULL) heap = Heap::sCurrentHeap;
 
-        sBufferSize = size;
+        sBufferAllSize = size;
         spBufferAll = (TextureBuffer *)new (heap, 32) char[size];
         #line 100
         EGG_ASSERT(spBufferAll);
 
-        spTail = NULL;
-        for (u32 i = 0; i < cMaxBuffers; i++)
+        spTailNotJoin = NULL;
+        for (u32 i = 0; i < NUM_BUFFERS; i++)
         {
-            append(&sBuffers[i]);
+            append(&spBufferTable[i]);
         }
 
         // Initialize head
@@ -97,14 +97,14 @@ namespace EGG
         #line 122
         EGG_ASSERT_MSG(spBufferAll != NULL, "Please call TextureBuffer::initialize().");
 
-        TextureBuffer *p_buffer = spTail;
+        TextureBuffer *p_buffer = spTailNotJoin;
         #line 125
         EGG_ASSERT(p_buffer);
         EGG_ASSERT(p_buffer->mpNext == NULL);
 
         // Move list tail back
-        spTail = spTail->mpPrev;
-        if (spTail != NULL) spTail->mpNext = NULL;
+        spTailNotJoin = spTailNotJoin->mpPrev;
+        if (spTailNotJoin != NULL) spTailNotJoin->mpNext = NULL;
 
         // Pop old tail
         p_buffer->mpPrev = NULL;
@@ -176,8 +176,8 @@ namespace EGG
     }
 
     TextureBuffer *TextureBuffer::spHead;
-    TextureBuffer *TextureBuffer::spTail;
+    TextureBuffer *TextureBuffer::spTailNotJoin;
     TextureBuffer *TextureBuffer::spBufferAll;
-    u32 TextureBuffer::sBufferSize;
-    TextureBuffer TextureBuffer::sBuffers[cMaxBuffers];
+    u32 TextureBuffer::sBufferAllSize;
+    TextureBuffer TextureBuffer::spBufferTable[NUM_BUFFERS];
 }

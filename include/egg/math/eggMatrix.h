@@ -40,12 +40,6 @@ namespace EGG
 
         static Matrix34f ident;
     };
-
-    struct Matrix44f
-    {
-        f32& operator()(int i, int j) { return tbl[i][j]; }
-        f32 tbl[4][4];
-    };
 }
 
 #endif

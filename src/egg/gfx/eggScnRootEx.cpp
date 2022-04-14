@@ -33,7 +33,7 @@ namespace EGG
         #line 68
         EGG_ASSERT(mpShadowTextureManager);
 
-        mpScreen = new eggScreen();
+        mpScreen = new Screen();
         #line 71
         EGG_ASSERT(mpScreen);
 
@@ -94,7 +94,7 @@ namespace EGG
         calc_after_CalcWorld();
     }
 
-    void ScnRootEx::SetCurrentCamera(int id, const Matrix34f& mtx, const eggScreen& screen)
+    void ScnRootEx::SetCurrentCamera(int id, const Matrix34f& mtx, const Screen& screen)
     {
         SHORT_0x12 &= ~0x1;
 
@@ -168,7 +168,7 @@ namespace EGG
             mpShadowTextureManager->Calc();
     }
 
-    void ScnRootEx::setCurrentCamera(u8 id, const eggScreen& screen)
+    void ScnRootEx::setCurrentCamera(u8 id, const Screen& screen)
     {
         mpScreen->CopyFromAnother(screen);
         mBase->SetCurrentCamera(id);
@@ -177,12 +177,12 @@ namespace EGG
         current.GetCameraMtx(&mCamMtx);
         mpScreen->CopyToG3D(current);
 
-        DrawGX::sPositionMtx = mCamMtx;
+        DrawGX::s_cameraMtx = mCamMtx;
     }
 
     void ScnRootEx::draw_before_CalcView()
     {
-        StateGX::setupCache();
+        StateGX::resetStateCache();
         GXUtility::set(mBase->GetCurrentCameraID(), mCamMtx, getScreen());
 
         if (mpLightManager != NULL)
@@ -199,7 +199,7 @@ namespace EGG
         if (mpLightManager != NULL &&
             mSceneSettings & SCENE_SETTING_0x1)
         {
-            eggScreen::EfbData *efb = mpScreen->GetDataEfb();
+            Screen::EfbData *efb = mpScreen->GetDataEfb();
             LightTextureManager *mgr = mpLightManager->GetLightTextureManager();
 
             mgr->Draw(mpLightManager, efb,

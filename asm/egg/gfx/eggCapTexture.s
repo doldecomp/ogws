@@ -8,8 +8,8 @@ __vt__Q23EGG10CapTexture:
     .long 0
     .long __dt__Q23EGG10CapTextureFv # (weak, in eggTextureBuffer.s)
     .long configure__Q23EGG10CapTextureFv
-    .long initTexObj__Q23EGG10CpuTextureCFP9_GXTexObj
-    .long loadTexObj__Q23EGG10CapTextureF11_GXTexMapID
+    .long getTexObj__Q23EGG10CpuTextureCFP9_GXTexObj
+    .long load__Q23EGG10CapTextureCF11_GXTexMapID
 
 .section .rodata, "a"
 .balign 0x8
@@ -93,8 +93,8 @@ configure__Q23EGG10CapTextureFv:
 /* 80085D3C 00080C3C  38 21 00 20 */	addi r1, r1, 0x20
 /* 80085D40 00080C40  4E 80 00 20 */	blr 
 
-.global loadTexObj__Q23EGG10CapTextureF11_GXTexMapID
-loadTexObj__Q23EGG10CapTextureF11_GXTexMapID:
+.global load__Q23EGG10CapTextureCF11_GXTexMapID
+load__Q23EGG10CapTextureCF11_GXTexMapID:
 /* 80085D44 00080C44  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80085D48 00080C48  7C 08 02 A6 */	mflr r0
 /* 80085D4C 00080C4C  90 01 00 14 */	stw r0, 0x14(r1)
@@ -115,7 +115,7 @@ lbl_80085D84:
 /* 80085D84 00080C84  93 FE 00 18 */	stw r31, 0x18(r30)
 /* 80085D88 00080C88  7F C3 F3 78 */	mr r3, r30
 /* 80085D8C 00080C8C  7F E4 FB 78 */	mr r4, r31
-/* 80085D90 00080C90  48 00 09 F9 */	bl loadTexObj__Q23EGG10CpuTextureF11_GXTexMapID
+/* 80085D90 00080C90  48 00 09 F9 */	bl load__Q23EGG10CpuTextureCF11_GXTexMapID
 /* 80085D94 00080C94  80 01 00 14 */	lwz r0, 0x14(r1)
 /* 80085D98 00080C98  83 E1 00 0C */	lwz r31, 0xc(r1)
 /* 80085D9C 00080C9C  83 C1 00 08 */	lwz r30, 8(r1)
@@ -123,8 +123,8 @@ lbl_80085D84:
 /* 80085DA4 00080CA4  38 21 00 10 */	addi r1, r1, 0x10
 /* 80085DA8 00080CA8  4E 80 00 20 */	blr 
 
-.global func_80085DAC
-func_80085DAC:
+.global capture__Q23EGG10CapTextureFUsUsbi
+capture__Q23EGG10CapTextureFUsUsbi:
 /* 80085DAC 00080CAC  94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 80085DB0 00080CB0  7C 08 02 A6 */	mflr r0
 /* 80085DB4 00080CB4  90 01 00 34 */	stw r0, 0x34(r1)
@@ -231,11 +231,11 @@ lbl_80085F0C:
 /* 80085F18 00080E18  7C 00 23 78 */	or r0, r0, r4
 /* 80085F1C 00080E1C  8B DD 00 0C */	lbz r30, 0xc(r29)
 /* 80085F20 00080E20  54 03 0F FE */	srwi r3, r0, 0x1f
-/* 80085F24 00080E24  4B FF EB C1 */	bl GXSetColorUpdate__Q23EGG7StateGXFb
+/* 80085F24 00080E24  4B FF EB C1 */	bl GXSetColorUpdate___Q23EGG7StateGXFb
 /* 80085F28 00080E28  A0 1F 00 00 */	lhz r0, 0(r31)
 /* 80085F2C 00080E2C  8B BD 00 0D */	lbz r29, 0xd(r29)
 /* 80085F30 00080E30  54 03 E7 FE */	rlwinm r3, r0, 0x1c, 0x1f, 0x1f
-/* 80085F34 00080E34  4B FF EC 25 */	bl GXSetAlphaUpdate__Q23EGG7StateGXFb
+/* 80085F34 00080E34  4B FF EC 25 */	bl GXSetAlphaUpdate___Q23EGG7StateGXFb
 /* 80085F38 00080E38  A0 1F 00 00 */	lhz r0, 0(r31)
 /* 80085F3C 00080E3C  38 60 00 01 */	li r3, 1
 /* 80085F40 00080E40  38 80 00 07 */	li r4, 7
@@ -256,9 +256,9 @@ lbl_80085F0C:
 /* 80085F7C 00080E7C  38 80 00 01 */	li r4, 1
 /* 80085F80 00080E80  48 05 97 D1 */	bl func_800DF750
 /* 80085F84 00080E84  7F A3 EB 78 */	mr r3, r29
-/* 80085F88 00080E88  4B FF EB D1 */	bl GXSetAlphaUpdate__Q23EGG7StateGXFb
+/* 80085F88 00080E88  4B FF EB D1 */	bl GXSetAlphaUpdate___Q23EGG7StateGXFb
 /* 80085F8C 00080E8C  7F C3 F3 78 */	mr r3, r30
-/* 80085F90 00080E90  4B FF EB 55 */	bl GXSetColorUpdate__Q23EGG7StateGXFb
+/* 80085F90 00080E90  4B FF EB 55 */	bl GXSetColorUpdate___Q23EGG7StateGXFb
 /* 80085F94 00080E94  48 00 00 10 */	b lbl_80085FA4
 lbl_80085F98:
 /* 80085F98 00080E98  80 7F 00 10 */	lwz r3, 0x10(r31)

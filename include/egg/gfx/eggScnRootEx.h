@@ -50,7 +50,7 @@ namespace EGG
         u16 SHORT_0x12;
         u16 mDrawSettings; // at 0x14
         Matrix34f mCamMtx; // 0x18
-        eggScreen *mpScreen; // at 0x48
+        Screen *mpScreen; // at 0x48
         UNKWORD WORD_0x4C;
 
     public:
@@ -61,7 +61,7 @@ namespace EGG
         virtual void changeScnRoot(nw4r::g3d::ScnRoot *); // at 0x14
         virtual void calc_before_CalcWorld(); // at 0x18
         virtual void calc_after_CalcWorld(); // at 0x1C
-        virtual void setCurrentCamera(u8, const eggScreen&); // at 0x20
+        virtual void setCurrentCamera(u8, const Screen&); // at 0x20
         virtual void draw_before_CalcView(); // at 0x24
         virtual void draw_after_DrawOpa(); // at 0x28
         virtual void draw_after_DrawOpaXlu(); // at 0x2C
@@ -73,7 +73,7 @@ namespace EGG
         void CalcMaterial();
         void CalcVtx();
         void CalcWorld();
-        void SetCurrentCamera(int, const Matrix34f&, const eggScreen&);
+        void SetCurrentCamera(int, const Matrix34f&, const Screen&);
         void CalcView();
         void GatherDrawScnObj();
         void ZSort();
@@ -82,7 +82,7 @@ namespace EGG
 
         void setDrawSettingGX(bool) const;
 
-        eggScreen& getScreen() const
+        Screen& getScreen() const
         {
             #line 171
             EGG_ASSERT(mpScreen);

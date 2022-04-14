@@ -45,7 +45,7 @@ namespace EGG
         GXSetFogRangeAdj(0, 0, NULL);
     }
 
-    void Fog::CopyToG3D(nw4r::g3d::Fog& fog) const
+    void Fog::CopyToG3D(nw4r::g3d::Fog fog) const
     {
         fog.SetFogType((mFlags & BOUND) ? mFogType : GX_FOG_TYPE_0);
         fog.SetZ(mStartZ, mEndZ);

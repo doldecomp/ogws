@@ -24,8 +24,9 @@ namespace EGG
         static u8 getTexCoordGenVal(int);
         static void setScaleOffsetPerspective(f32 *, f32, f32, f32, f32);
         static void getTexObj(GXTexObj *, const ResTIMG&);
-        static void getTexObj(GXTexObj *, const nw4r::g3d::ResTex&, UNKWORD, UNKWORD, UNKWORD, UNKWORD);
-        static void set(u16, Matrix34f&, eggScreen&);
+        static void getTexObj(GXTexObj *, nw4r::g3d::ResTex,
+            GXTexWrapMode, GXTexWrapMode, GXTexFilter, GXTexFilter);
+        static void set(u16, Matrix34f&, Screen&);
         static void setScreenProjection(bool);
 
         static void setDrawSetting(u32 setting) { sDrawSettings = setting; }

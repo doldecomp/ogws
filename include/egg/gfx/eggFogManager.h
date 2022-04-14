@@ -24,8 +24,8 @@ namespace EGG
 
         void Reset();
         void Calc();
-        void UseScreenZ(eggScreen&);
-        void CopyToG3D(nw4r::g3d::ScnRoot *);
+        void UseScreenZ(Screen&);
+        void CopyToG3D(nw4r::g3d::ScnRoot *) const;
         void LoadScnFog(nw4r::g3d::ResAnmScn *, f32);
         void DoneDraw();
     };

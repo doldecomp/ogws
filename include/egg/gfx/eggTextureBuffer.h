@@ -19,21 +19,20 @@ namespace EGG
         static TextureBuffer * getNotJoin();
         static void alloc(TextureBuffer *, u32);
 
-        // Unofficial
         static void append(TextureBuffer *buf)
         {
-            if (spTail != NULL) spTail->mpNext = buf;
+            if (spTailNotJoin != NULL) spTailNotJoin->mpNext = buf;
 
-            buf->mpPrev = spTail;
+            buf->mpPrev = spTailNotJoin;
             buf->mpNext = NULL;
 
-            spTail = buf;
+            spTailNotJoin = buf;
         }
 
+        TextureBuffer();
         virtual ~TextureBuffer() {} // at 0x8
         virtual void configure(); // at 0xC
 
-        TextureBuffer();
         void free();
 
     private:
@@ -42,12 +41,12 @@ namespace EGG
         TextureBuffer *mpNext; // at 0x34
         TextureBuffer *mpPrev; // at 0x38
 
-        static const u32 cMaxBuffers = 64;
+        static const u32 NUM_BUFFERS = 64;
         static TextureBuffer *spHead;
-        static TextureBuffer *spTail;
+        static TextureBuffer *spTailNotJoin;
         static TextureBuffer *spBufferAll;
-        static u32 sBufferSize;
-        static TextureBuffer sBuffers[cMaxBuffers];
+        static u32 sBufferAllSize;
+        static TextureBuffer spBufferTable[NUM_BUFFERS];
     };
 }
 

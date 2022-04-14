@@ -22,7 +22,7 @@ namespace EGG
         void Set(u16, ShadowTexture *);
         void Append(ShadowTexture *);
         void Calc();
-        void Draw(eggScreen *);
+        void Draw(Screen *);
     };
 }
 

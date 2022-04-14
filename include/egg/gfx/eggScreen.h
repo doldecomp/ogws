@@ -5,7 +5,7 @@
 
 namespace EGG
 {
-    class eggScreen : public eggFrustum
+    class Screen : public Frustum
     {
     public:
         struct EfbData
@@ -21,14 +21,14 @@ namespace EGG
         };
 
     public:
-        eggScreen();
-        eggScreen(const eggScreen&);
+        Screen();
+        Screen(const Screen&);
 
-        virtual ~eggScreen() {} // at 0x8
+        virtual ~Screen() {} // at 0x8
         virtual void SetProjectionGX() const; // at 0xC
         virtual void CopyToG3D(nw4r::g3d::Camera) const; // at 0x10
 
-        void CopyFromAnother(const eggScreen&);
+        void CopyFromAnother(const Screen&);
 
         EfbData * GetDataEfb() const;
 

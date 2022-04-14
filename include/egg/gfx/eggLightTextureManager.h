@@ -22,7 +22,7 @@ namespace EGG
         virtual u8 GetVersion() const = 0; // at 0x18
 
         void Draw(LightManager *,
-            eggScreen::EfbData *, f32, f32, f32, f32);
+            Screen::EfbData *, f32, f32, f32, f32);
 
     private:
     };

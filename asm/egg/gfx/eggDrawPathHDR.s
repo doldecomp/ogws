@@ -19,7 +19,7 @@ lbl_80397888:
 	.incbin "baserom.dol", 0x393988, 0x30
 
 .section .text, "ax"
-# EGG::eggScreen::~eggScreen (weak)
+# EGG::Screen::~Screen (weak)
 .global lbl_8008D4BC
 lbl_8008D4BC:
 /* 8008D4BC 000883BC  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -153,7 +153,7 @@ lbl_8008D64C:
 /* 8008D684 00088584  93 81 00 30 */	stw r28, 0x30(r1)
 /* 8008D688 00088588  7C 7C 1B 78 */	mr r28, r3
 /* 8008D68C 0008858C  38 63 00 04 */	addi r3, r3, 4
-/* 8008D690 00088590  48 00 CA C5 */	bl GetDataEfb__Q23EGG9eggScreenCFv
+/* 8008D690 00088590  48 00 CA C5 */	bl GetDataEfb__Q23EGG6ScreenCFv
 /* 8008D694 00088594  2C 1D 00 01 */	cmpwi r29, 1
 /* 8008D698 00088598  41 82 00 34 */	beq lbl_8008D6CC
 /* 8008D69C 0008859C  40 80 01 28 */	bge lbl_8008D7C4
@@ -174,7 +174,7 @@ lbl_8008D6CC:
 /* 8008D6D0 000885D0  38 60 00 00 */	li r3, 0
 /* 8008D6D4 000885D4  38 84 97 20 */	addi r4, r4, sCache__Q23EGG7StateGX@l
 /* 8008D6D8 000885D8  8B E4 00 0D */	lbz r31, 0xd(r4)
-/* 8008D6DC 000885DC  4B FF 74 7D */	bl GXSetAlphaUpdate__Q23EGG7StateGXFb
+/* 8008D6DC 000885DC  4B FF 74 7D */	bl GXSetAlphaUpdate___Q23EGG7StateGXFb
 /* 8008D6E0 000885E0  3C 60 80 41 */	lis r3, lbl_8040A9C0@ha
 /* 8008D6E4 000885E4  38 63 A9 C0 */	addi r3, r3, lbl_8040A9C0@l
 /* 8008D6E8 000885E8  83 A3 00 18 */	lwz r29, 0x18(r3)
@@ -200,7 +200,7 @@ lbl_8008D70C:
 lbl_8008D734:
 /* 8008D734 00088634  93 BE 00 08 */	stw r29, 8(r30)
 /* 8008D738 00088638  38 7C 00 04 */	addi r3, r28, 4
-/* 8008D73C 0008863C  48 00 99 01 */	bl setProjectionGX__Q23EGG14PostEffectBaseFRCQ23EGG9eggScreen
+/* 8008D73C 0008863C  48 00 99 01 */	bl setProjection__Q23EGG14PostEffectBaseFRCQ23EGG6Screen
 /* 8008D740 00088640  C0 3C 00 10 */	lfs f1, 0x10(r28)
 /* 8008D744 00088644  3C 80 43 30 */	lis r4, 0x4330
 /* 8008D748 00088648  C0 1C 00 0C */	lfs f0, 0xc(r28)
@@ -233,7 +233,7 @@ lbl_8008D734:
 /* 8008D7B4 000886B4  7F E3 FB 78 */	mr r3, r31
 /* 8008D7B8 000886B8  54 00 00 3A */	rlwinm r0, r0, 0, 0, 0x1d
 /* 8008D7BC 000886BC  90 0D 98 D4 */	stw r0, lbl_804BEC54-_SDA_BASE_(r13)
-/* 8008D7C0 000886C0  4B FF 73 99 */	bl GXSetAlphaUpdate__Q23EGG7StateGXFb
+/* 8008D7C0 000886C0  4B FF 73 99 */	bl GXSetAlphaUpdate___Q23EGG7StateGXFb
 lbl_8008D7C4:
 /* 8008D7C4 000886C4  80 01 00 44 */	lwz r0, 0x44(r1)
 /* 8008D7C8 000886C8  83 E1 00 3C */	lwz r31, 0x3c(r1)

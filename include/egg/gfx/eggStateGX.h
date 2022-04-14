@@ -39,30 +39,30 @@ namespace EGG
         };
 
     public:
-        static GXPixelFmt getDefaultPixelFormat() { return sDefaultPixelFormat; }
+        static GXPixelFmt getDefaultPixelFormat() { return s_pixFormat; }
         static const GXColor& getDefaultTexColor() { return sDefaultTexColor; }
 
-        static void invalidateTexAllGX();
-        static void resetGXCache();
-        static void resetCache();
+        static void initialize();
+        static void frameInit();
+        static void doResetStateCache();
         static void resetGX();
-        static void resetGXAttr();
-        static void resetGXChans();
-        static void resetGXTexMtx();
-        static void resetGXTexObjs();
-        static void resetGXTexCoords();
-        static void resetGXTevs();
-        static void resetGXFog();
-        static void setupCache();
-        static void GXSetProjection(Mtx44, int);
-        static void GXSetProjectionv(const f32 *);
-        static void GXSetViewport(f32, f32, f32, f32, f32, f32);
-        static void GXSetScissor(u32, u32, u32, u32);
-        static void GXSetScissorBoxOffset(int, int);
-        static void GXSetColorUpdate(bool);
-        static void GXSetAlphaUpdate(bool);
-        static void GXSetDither(bool);
-        static void GXSetPixelFmt(GXPixelFmt, UNKWORD);
+        static void resetVtx();
+        static void resetColorChannel();
+        static void resetIndirect();
+        static void resetTexture();
+        static void resetTexGen();
+        static void resetTev();
+        static void resetPE();
+        static void resetStateCache();
+        static void GXSetProjection_(Mtx44, int);
+        static void GXSetProjectionv_(const f32 *);
+        static void GXSetViewport_(f32, f32, f32, f32, f32, f32);
+        static void GXSetScissor_(u32, u32, u32, u32);
+        static void GXSetScissorBoxOffset_(int, int);
+        static void GXSetColorUpdate_(bool);
+        static void GXSetAlphaUpdate_(bool);
+        static void GXSetDither_(bool);
+        static void GXSetPixelFmt_(GXPixelFmt, UNKWORD);
 
     private:
         static CachedState sCache;
@@ -71,11 +71,11 @@ namespace EGG
         static const f32 lbl_80378C68[];
         static const f32 lbl_80378C80[];
 
-        static u16 sScreenWidth;
-        static u16 sScreenHeight;
-        static GXPixelFmt sDefaultPixelFormat;
+        static u16 s_widthFb;
+        static u16 s_heightEfb;
+        static GXPixelFmt s_pixFormat;
         static UNKWORD sDefaultPixelFormatArg2;
-        static GXPixelFmt sCurrentPixelFormat;
+        static GXPixelFmt s_pixFormatCurrent;
         static UNKWORD sCurrentPixelFormatArg2;
         static GXColor sDefaultTexColor;
 

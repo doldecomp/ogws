@@ -357,8 +357,8 @@ lbl_80090328:
 /* 80090334 0008B234  38 21 00 20 */	addi r1, r1, 0x20
 /* 80090338 0008B238  4E 80 00 20 */	blr 
 
-.global CalcView__Q23EGG12LightManagerFRCQ23EGG9Matrix34fUcPQ34nw4r3g3d7ScnRoot
-CalcView__Q23EGG12LightManagerFRCQ23EGG9Matrix34fUcPQ34nw4r3g3d7ScnRoot:
+.global CalcView__Q23EGG12LightManagerFRCQ34nw4r4math5MTX34UcPQ34nw4r3g3d7ScnRoot
+CalcView__Q23EGG12LightManagerFRCQ34nw4r4math5MTX34UcPQ34nw4r3g3d7ScnRoot:
 /* 8009033C 0008B23C  94 21 FF A0 */	stwu r1, -0x60(r1)
 /* 80090340 0008B240  7C 08 02 A6 */	mflr r0
 /* 80090344 0008B244  90 01 00 64 */	stw r0, 0x64(r1)

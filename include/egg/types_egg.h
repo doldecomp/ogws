@@ -31,7 +31,7 @@ namespace EGG
     struct ResTIMG;
     struct ScnRenderer;
     struct ScnRootEx;
-    struct eggScreen;
+    struct Screen;
     struct ScreenEffectBase;
     struct ShadowTextureManager;
     struct ShadowTexture;

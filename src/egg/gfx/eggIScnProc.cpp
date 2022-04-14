@@ -126,7 +126,7 @@ namespace EGG
         GXUtility::setScreenProjection(b);
 
         p_data->mpThis->doDraw(p_data->mIndex);
-        StateGX::setupCache();
+        StateGX::resetStateCache();
 
         GXUtility::setScreenProjection(b);
     }

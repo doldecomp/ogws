@@ -12,7 +12,7 @@ namespace EGG
     using namespace nw4r;
 
     const u8 GXUtility::sTexCoordGenVals[] = {0x1E, 0x21, 0x24, 0x27, 0x2A, 0x2D, 0x30, 0x33};
-    eggScreen *IDrawGX::spScreen;
+    Screen *IDrawGX::spScreen;
     GXUtility::ProjectionCallback GXUtility::sProjectionCallback;
     UNKWORD GXUtility::sProjectionCallbackArg;
     u16 GXUtility::lbl_804BEC7C;
@@ -63,8 +63,8 @@ namespace EGG
             tex.mAnisotropy, tex.mMinLod / 8.0f, tex.mMaxLod / 8.0f, tex.mLodBias / 100.0f);
     }
 
-    void GXUtility::getTexObj(GXTexObj *pObj, const nw4r::g3d::ResTex& tex,
-        UNKWORD wrapS, UNKWORD wrapT, UNKWORD minFilt, UNKWORD magFilt)
+    void GXUtility::getTexObj(GXTexObj *pObj, nw4r::g3d::ResTex tex,
+        GXTexWrapMode wrapS, GXTexWrapMode wrapT, GXTexFilter minFilt, GXTexFilter magFilt)
     {
         #line 113
         EGG_ASSERT(pObj);
@@ -83,7 +83,7 @@ namespace EGG
         }
     }
 
-    void GXUtility::set(u16 s, Matrix34f& out, eggScreen& screen)
+    void GXUtility::set(u16 s, Matrix34f& out, Screen& screen)
     {
         lbl_804BEC7C = s;
         setScreen(screen);
@@ -92,9 +92,9 @@ namespace EGG
 
     void GXUtility::setScreenProjection(bool b)
     {
-        StateGX::GXSetColorUpdate(sDrawSettings & ENABLE_COLOR_UPDATE);
-        StateGX::GXSetAlphaUpdate(sDrawSettings & ENABLE_ALPHA_UPDATE);
-        StateGX::GXSetDither(sDrawSettings & ENABLE_DITHER);
+        StateGX::GXSetColorUpdate_(sDrawSettings & ENABLE_COLOR_UPDATE);
+        StateGX::GXSetAlphaUpdate_(sDrawSettings & ENABLE_ALPHA_UPDATE);
+        StateGX::GXSetDither_(sDrawSettings & ENABLE_DITHER);
 
         if (sProjectionCallback != NULL)
             sProjectionCallback(sProjectionCallbackArg, b);

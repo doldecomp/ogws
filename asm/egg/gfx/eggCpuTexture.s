@@ -20,8 +20,8 @@ lbl_803975C0:
     .long 0
     .long __dt__Q23EGG10CpuTextureFv # (weak, in eggTextureBuffer.s)
     .long configure__Q23EGG10CpuTextureFv
-    .long initTexObj__Q23EGG10CpuTextureCFP9_GXTexObj
-    .long loadTexObj__Q23EGG10CpuTextureF11_GXTexMapID
+    .long getTexObj__Q23EGG10CpuTextureCFP9_GXTexObj
+    .long load__Q23EGG10CpuTextureCF11_GXTexMapID
     .long 0
     .long 0
 
@@ -542,8 +542,8 @@ configure__Q23EGG10CpuTextureFv:
 /* 80086698 00081598  B0 03 00 00 */	sth r0, 0(r3)
 /* 8008669C 0008159C  4E 80 00 20 */	blr 
 
-.global initTexObj__Q23EGG10CpuTextureCFP9_GXTexObj
-initTexObj__Q23EGG10CpuTextureCFP9_GXTexObj:
+.global getTexObj__Q23EGG10CpuTextureCFP9_GXTexObj
+getTexObj__Q23EGG10CpuTextureCFP9_GXTexObj:
 /* 800866A0 000815A0  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 800866A4 000815A4  7C 08 02 A6 */	mflr r0
 /* 800866A8 000815A8  90 01 00 14 */	stw r0, 0x14(r1)
@@ -606,8 +606,8 @@ lbl_80086724:
 /* 80086780 00081680  38 21 00 10 */	addi r1, r1, 0x10
 /* 80086784 00081684  4E 80 00 20 */	blr 
 
-.global loadTexObj__Q23EGG10CpuTextureF11_GXTexMapID
-loadTexObj__Q23EGG10CpuTextureF11_GXTexMapID:
+.global load__Q23EGG10CpuTextureCF11_GXTexMapID
+load__Q23EGG10CpuTextureCF11_GXTexMapID:
 /* 80086788 00081688  94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 8008678C 0008168C  7C 08 02 A6 */	mflr r0
 /* 80086790 00081690  90 01 00 34 */	stw r0, 0x34(r1)
@@ -641,8 +641,8 @@ lbl_800867C8:
 /* 800867FC 000816FC  38 21 00 30 */	addi r1, r1, 0x30
 /* 80086800 00081700  4E 80 00 20 */	blr 
 
-.global invalidateTexBuffer__Q23EGG10CpuTextureFv
-invalidateTexBuffer__Q23EGG10CpuTextureFv:
+.global invalidate__Q23EGG10CpuTextureCFv
+invalidate__Q23EGG10CpuTextureCFv:
 /* 80086804 00081704  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80086808 00081708  7C 08 02 A6 */	mflr r0
 /* 8008680C 0008170C  90 01 00 14 */	stw r0, 0x14(r1)
@@ -669,8 +669,8 @@ lbl_8008683C:
 /* 8008685C 0008175C  38 21 00 10 */	addi r1, r1, 0x10
 /* 80086860 00081760  4E 80 00 20 */	blr 
 
-.global flushTexBuffer__Q23EGG10CpuTextureFv
-flushTexBuffer__Q23EGG10CpuTextureFv:
+.global flush__Q23EGG10CpuTextureCFv
+flush__Q23EGG10CpuTextureCFv:
 /* 80086864 00081764  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80086868 00081768  7C 08 02 A6 */	mflr r0
 /* 8008686C 0008176C  90 01 00 14 */	stw r0, 0x14(r1)
@@ -788,8 +788,8 @@ initHeader__Q23EGG10CpuTextureFv:
 /* 800869FC 000818FC  38 21 00 10 */	addi r1, r1, 0x10
 /* 80086A00 00081900  4E 80 00 20 */	blr 
 
-.global func_80086A04
-func_80086A04:
+.global fillNormalMapSphere__Q23EGG10CpuTextureFv
+fillNormalMapSphere__Q23EGG10CpuTextureFv:
 /* 80086A04 00081904  94 21 FF 20 */	stwu r1, -0xe0(r1)
 /* 80086A08 00081908  7C 08 02 A6 */	mflr r0
 /* 80086A0C 0008190C  90 01 00 E4 */	stw r0, 0xe4(r1)

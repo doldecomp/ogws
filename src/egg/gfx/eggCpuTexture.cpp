@@ -26,7 +26,7 @@ namespace EGG
         mFlags = CONFIGURED;
     }
 
-    void CpuTexture::initTexObj(GXTexObj *pObj) const
+    void CpuTexture::getTexObj(GXTexObj *pObj) const
     {
         #line 230
         EGG_ASSERT_MSG(isConfigured(), "Please call configure() after construct!");
@@ -37,18 +37,18 @@ namespace EGG
         GXInitTexObjLOD(pObj, mMinFilt, mMagFilt, 0, 0, 0, 0.0f, 0.0f, 0.0f);
     }
 
-    void CpuTexture::loadTexObj(GXTexMapID id)
+    void CpuTexture::load(GXTexMapID id) const
     {
         #line 247
         EGG_ASSERT(mpBuffer);
 
         GXTexObj obj;
-        initTexObj(&obj);
+        getTexObj(&obj);
 
         GXLoadTexObj(&obj, id);
     }
     
-    void CpuTexture::invalidateTexBuffer() const
+    void CpuTexture::invalidate() const
     {
         #line 259
         EGG_ASSERT(mpBuffer);
@@ -56,7 +56,7 @@ namespace EGG
         DCInvalidateRange(mpBuffer, getTexBufferSize());
     }
 
-    void CpuTexture::flushTexBuffer() const
+    void CpuTexture::flush() const
     {
         #line 259
         EGG_ASSERT(mpBuffer);
@@ -106,7 +106,7 @@ namespace EGG
     }
 
     #ifdef __DECOMP_NON_MATCHING
-    UNKTYPE CpuTexture::func_80086A04(UNKTYPE)
+    void CpuTexture::fillNormalMapSphere()
     {
 
     }

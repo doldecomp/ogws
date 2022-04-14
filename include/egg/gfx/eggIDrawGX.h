@@ -8,17 +8,17 @@ namespace EGG
     class IDrawGX
     {
     public:
-        static eggScreen& getScreen()
+        static Screen& getScreen()
         {
             #line 59
             EGG_ASSERT(spScreen);
             return *spScreen;
         }
 
-        static void setScreen(eggScreen& pScreen) { spScreen = &pScreen; }
+        static void setScreen(Screen& pScreen) { spScreen = &pScreen; }
     
     private:
-        static eggScreen *spScreen;
+        static Screen *spScreen;
     };
 }
 

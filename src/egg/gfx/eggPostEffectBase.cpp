@@ -37,7 +37,7 @@ namespace EGG
         if (isVisible())
         {
             preDraw();
-            setGXVtxState();
+            setVtxState();
             drawDL(mOffsetX, mOffsetY, mScaleX * width, mScaleY * height);
         }
     }
@@ -53,7 +53,7 @@ namespace EGG
         draw(mpCapTexture->getWidth(), mpCapTexture->getHeight());
     }
 
-    void PostEffectBase::setGXVtxState()
+    void PostEffectBase::setVtxState()
     {
         DrawGX::SetVtxState(DrawGX::VTX_TYPE_11);
     }
@@ -73,10 +73,10 @@ namespace EGG
     {
         #line 98
         EGG_ASSERT(mpCapTexture);
-        mpCapTexture->loadTexObj(mpCapTexture->getLoadMap());
+        mpCapTexture->load(mpCapTexture->getLoadMap());
     }
 
-    void PostEffectBase::setGXChanState()
+    void PostEffectBase::setMatColorChannel()
     {
         GXSetNumChans(0);
         GXSetChanCtrl(GX_CHANNEL_ID_4, 0, 0, 0, 0, 1, 2);
@@ -84,22 +84,22 @@ namespace EGG
         GXSetCullMode(2);
     }
 
-    void PostEffectBase::setGXIndStages()
+    void PostEffectBase::setMatInd()
     {
         GXSetNumIndStages(0);
     }
 
-    void PostEffectBase::setGXFog()
+    void PostEffectBase::setMatPE()
     {
         GXSetAlphaCompare(7, 0, 1, 7, 0);
         GXSetZMode(0, 7, 0);
 
         GXColor black = {0, 0, 0, 255};
         GXSetFog(GX_FOG_TYPE_0, black, 0.0f, 1.0f, 0.0f, 1.0f);
-        setGXBlendMode();
+        setBlendModeInternal();
     }
 
-    void PostEffectBase::setGXBlendMode()
+    void PostEffectBase::setBlendModeInternal()
     {
         switch(mBlendMode)
         {
@@ -163,27 +163,27 @@ namespace EGG
         }
     }
 
-    void PostEffectBase::setProjectionGX(const eggScreen& screen)
+    void PostEffectBase::setProjection(const Screen& screen)
     {
         // Separating the floats could not produce the correct stack behavior.
         // It seems this really is some structure
         struct ScreenUnk
         {
-            ScreenUnk(const eggScreen& scr) : screen(scr) {}
+            ScreenUnk(const Screen& scr) : screen(scr) {}
             f32 floats[6];
-            eggScreen screen;
+            Screen screen;
         };
 
         ScreenUnk temp(screen);
         temp.screen.setFlag(0x80);
 
-        if (temp.screen.getCanvasMode() != eggFrustum::CANVASMODE_1)
+        if (temp.screen.getCanvasMode() != Frustum::CANVASMODE_1)
         {
             temp.screen.setFlag(0x1);
-            temp.screen.setCanvasMode(eggFrustum::CANVASMODE_1);
+            temp.screen.setCanvasMode(Frustum::CANVASMODE_1);
         }
 
-        temp.screen.setProjectionType(eggFrustum::PROJ_ORTHO);
+        temp.screen.setProjectionType(Frustum::PROJ_ORTHO);
 
         Matrix33f& mtx = temp.screen.getMatrix();
         mtx(0, 2) = 0.0f;
@@ -199,7 +199,6 @@ namespace EGG
         mtx(1, 1) = 0.0f;
         mtx(1, 2) = 0.0f;
 
-        // Could this non-virtual call mean there really is a derived structure?
-        temp.screen.eggScreen::SetProjectionGX();
+        temp.screen.Screen::SetProjectionGX();
     }
 }

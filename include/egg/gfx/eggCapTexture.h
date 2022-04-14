@@ -14,13 +14,11 @@ namespace EGG
 
         virtual ~CapTexture() {} // at 0x8
         virtual void configure(); // at 0xC
-        virtual void loadTexObj(GXTexMapID); // at 0x14
+        virtual void load(GXTexMapID) const; // at 0x14
 
-        void setColor(const GXColor& c)
-        {
-            COLOR_0x1C = c; 
-        }
+        void capture(u16, u16, bool, int);
 
+        void setColor(const GXColor& c) { COLOR_0x1C = c; }
         GXTexMapID getLoadMap() const { return mLoadMap; }
 
     private:

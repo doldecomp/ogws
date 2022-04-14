@@ -80,7 +80,7 @@ CopyGlobalScreen__Q23EGG12DrawPathBaseFv:
 lbl_80089EA0:
 /* 80089EA0 00084DA0  80 8D 98 F0 */	lwz r4, spScreen__Q23EGG7IDrawGX-_SDA_BASE_(r13)
 /* 80089EA4 00084DA4  7F E3 FB 78 */	mr r3, r31
-/* 80089EA8 00084DA8  48 01 5E 4D */	bl CopyScreenFromAnother__Q23EGG16ScreenEffectBaseFRQ23EGG9eggScreen
+/* 80089EA8 00084DA8  48 01 5E 4D */	bl CopyScreenFromAnother__Q23EGG16ScreenEffectBaseFRQ23EGG6Screen
 /* 80089EAC 00084DAC  81 9F 00 6C */	lwz r12, 0x6c(r31)
 /* 80089EB0 00084DB0  7F E3 FB 78 */	mr r3, r31
 /* 80089EB4 00084DB4  81 8C 00 24 */	lwz r12, 0x24(r12)

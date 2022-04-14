@@ -36,7 +36,7 @@ namespace EGG
         }
     }
 
-    void FogManager::UseScreenZ(eggScreen& screen)
+    void FogManager::UseScreenZ(Screen& screen)
     {
         for (int i = 0; i < cNumFog; i++)
         {
@@ -45,7 +45,7 @@ namespace EGG
         }
     }
 
-    void FogManager::CopyToG3D(nw4r::g3d::ScnRoot *root)
+    void FogManager::CopyToG3D(nw4r::g3d::ScnRoot *root) const
     {
         for (int i = 0; i < cNumFog; i++)
         {

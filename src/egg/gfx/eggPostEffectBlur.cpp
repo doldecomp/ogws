@@ -34,10 +34,10 @@ namespace EGG
         if (isVisible())
         {
             loadTexObj();
-            setGXChanState();
-            setGXIndStages();
-            setGXFog();
-            setGXVtxState();
+            setMatColorChannel();
+            setMatInd();
+            setMatPE();
+            setVtxState();
 
             for (u8 i = 0; i < mNumBlurData; i++)
             {

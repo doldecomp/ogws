@@ -36,14 +36,14 @@ namespace EGG
         CapTexture * getCapTexture() const { return mpCapTexture; }
 
         void drawTexture();
-        void setGXVtxState();
-        void setGXChanState();
-        void setGXIndStages();
-        void setGXFog();
-        void setGXBlendMode();
+        void setVtxState();
+        void setMatColorChannel();
+        void setMatInd();
+        void setMatPE();
+        void setBlendModeInternal();
 
         static void scaleColor(GXColor&, const GXColor&, f32, bool);
-        static void setProjectionGX(const eggScreen&);
+        static void setProjection(const Screen&);
     };
 }
 

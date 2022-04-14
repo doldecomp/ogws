@@ -2,6 +2,7 @@
 #define EGG_GFX_LIGHT_MANAGER_H
 #include "types_egg.h"
 #include "eggIBinary.h"
+#include "types_nw4r.h"
 
 namespace EGG
 {
@@ -23,7 +24,7 @@ namespace EGG
 
         void Reset();
         void Calc(nw4r::g3d::ScnRoot *);
-        void CalcView(const Matrix34f&, u8, nw4r::g3d::ScnRoot *);
+        void CalcView(const nw4r::math::MTX34&, u8, nw4r::g3d::ScnRoot *);
 
         void DoneDraw();
 
