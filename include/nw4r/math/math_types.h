@@ -180,6 +180,8 @@ namespace nw4r
 		
 		struct MTX34
 		{
+			MTX34() {}
+
 			_MTX34 mEntries;
 			
 			typedef float (* MtxRef)[4];

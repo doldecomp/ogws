@@ -2,7 +2,7 @@
 #define EGG_GFX_GX_UTILITY_H
 #include "types_egg.h"
 #include "eggIDrawGX.h"
-#include "types_nw4r.h"
+#include "math_types.h"
 #include <GX/GXTexture.h>
 #include <math/mtx.h>
 
@@ -26,7 +26,7 @@ namespace EGG
         static void getTexObj(GXTexObj *, const ResTIMG&);
         static void getTexObj(GXTexObj *, nw4r::g3d::ResTex,
             GXTexWrapMode, GXTexWrapMode, GXTexFilter, GXTexFilter);
-        static void set(u16, Matrix34f&, Screen&);
+        static void set(u16, const nw4r::math::MTX34&, Screen&);
         static void setScreenProjection(bool);
 
         static void setDrawSetting(u32 setting) { sDrawSettings = setting; }
@@ -37,7 +37,7 @@ namespace EGG
         static UNKWORD sProjectionCallbackArg;
         static u16 lbl_804BEC7C;
         static u32 sDrawSettings;
-        static Matrix34f sCameraMtx;
+        static nw4r::math::MTX34 sCameraMtx;
     };
 }
 

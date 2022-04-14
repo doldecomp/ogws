@@ -17,7 +17,7 @@ namespace EGG
     UNKWORD GXUtility::sProjectionCallbackArg;
     u16 GXUtility::lbl_804BEC7C;
     u32 GXUtility::sDrawSettings;
-    Matrix34f GXUtility::sCameraMtx;
+    math::MTX34 GXUtility::sCameraMtx;
 
     u8 GXUtility::getTexCoordGenVal(int no)
     {
@@ -83,11 +83,11 @@ namespace EGG
         }
     }
 
-    void GXUtility::set(u16 s, Matrix34f& out, Screen& screen)
+    void GXUtility::set(u16 s, const nw4r::math::MTX34& mtx, Screen& screen)
     {
         lbl_804BEC7C = s;
         setScreen(screen);
-        PSMTXCopy(out, sCameraMtx);
+        PSMTXCopy(mtx, sCameraMtx);
     }
 
     void GXUtility::setScreenProjection(bool b)

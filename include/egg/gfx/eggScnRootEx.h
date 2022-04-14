@@ -1,9 +1,10 @@
 #ifndef EGG_GFX_SCN_ROOT_EX_H
 #define EGG_GFX_SCN_ROOT_EX_H
 #include "types_egg.h"
-#include "types_nw4r.h"
 #include "eggMatrix.h"
 #include "eggAssert.h"
+#include "types_nw4r.h"
+#include "math_types.h"
 
 namespace EGG
 {
@@ -49,7 +50,7 @@ namespace EGG
         u16 mSceneSettings; // at 0x10
         u16 SHORT_0x12;
         u16 mDrawSettings; // at 0x14
-        Matrix34f mCamMtx; // 0x18
+        nw4r::math::MTX34 mCamMtx; // 0x18
         Screen *mpScreen; // at 0x48
         UNKWORD WORD_0x4C;
 
@@ -73,7 +74,7 @@ namespace EGG
         void CalcMaterial();
         void CalcVtx();
         void CalcWorld();
-        void SetCurrentCamera(int, const Matrix34f&, const Screen&);
+        void SetCurrentCamera(int, const nw4r::math::MTX34&, const Screen&);
         void CalcView();
         void GatherDrawScnObj();
         void ZSort();

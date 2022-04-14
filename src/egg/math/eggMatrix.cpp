@@ -21,9 +21,9 @@ namespace EGG
         f32 _10, f32 _11, f32 _12, f32 _13,
         f32 _20, f32 _21, f32 _22, f32 _23)
     {
-        mEntries.tbl[0][0] = _00; mEntries.tbl[0][1] = _01; mEntries.tbl[0][2] = _02; mEntries.tbl[0][3] = _03;
-        mEntries.tbl[1][0] = _10; mEntries.tbl[1][1] = _11; mEntries.tbl[1][2] = _12; mEntries.tbl[1][3] = _13;
-        mEntries.tbl[2][0] = _20; mEntries.tbl[2][1] = _21; mEntries.tbl[2][2] = _22; mEntries.tbl[2][3] = _23;
+        tbl[0][0] = _00; tbl[0][1] = _01; tbl[0][2] = _02; tbl[0][3] = _03;
+        tbl[1][0] = _10; tbl[1][1] = _11; tbl[1][2] = _12; tbl[1][3] = _13;
+        tbl[2][0] = _20; tbl[2][1] = _21; tbl[2][2] = _22; tbl[2][3] = _23;
     }
 
     void Matrix34f::makeIdentity()
@@ -34,9 +34,9 @@ namespace EGG
         0.0f;
 
         makeZero();
-        mEntries.tbl[2][2] = 1.0f;
-        mEntries.tbl[1][1] = 1.0f;
-        mEntries.tbl[0][0] = 1.0f;
+        tbl[2][2] = 1.0f;
+        tbl[1][1] = 1.0f;
+        tbl[0][0] = 1.0f;
     }
 
    /**
@@ -59,40 +59,40 @@ namespace EGG
         f32 wx = 2.0f * quat.w * quat.x;
         f32 wy = 2.0f * quat.w * quat.y;
 
-        mEntries.tbl[0][0] = 1.0f - yy - zz;
-        mEntries.tbl[0][1] = xy - wz;
-        mEntries.tbl[0][2] = xz + wy;
+        tbl[0][0] = 1.0f - yy - zz;
+        tbl[0][1] = xy - wz;
+        tbl[0][2] = xz + wy;
 
-        mEntries.tbl[1][0] = xy + wz;
-        mEntries.tbl[1][1] = 1.0f - xx - zz;
-        mEntries.tbl[1][2] = yz - wx;
+        tbl[1][0] = xy + wz;
+        tbl[1][1] = 1.0f - xx - zz;
+        tbl[1][2] = yz - wx;
 
-        mEntries.tbl[2][0] = xz - wy;
-        mEntries.tbl[2][1] = yz + wx;
-        mEntries.tbl[2][2] = 1 - xx - yy;
+        tbl[2][0] = xz - wy;
+        tbl[2][1] = yz + wx;
+        tbl[2][2] = 1 - xx - yy;
 
-        mEntries.tbl[0][3] = 0.0f;
-        mEntries.tbl[1][3] = 0.0f;
-        mEntries.tbl[2][3] = 0.0f;
+        tbl[0][3] = 0.0f;
+        tbl[1][3] = 0.0f;
+        tbl[2][3] = 0.0f;
     }
 
     void Matrix34f::makeS(const Vector3f& vec)
     {
-        mEntries.tbl[0][0] = vec.mCoords.x;
-        mEntries.tbl[0][1] = 0.0f;
-        mEntries.tbl[0][2] = 0.0f;
+        tbl[0][0] = vec.mCoords.x;
+        tbl[0][1] = 0.0f;
+        tbl[0][2] = 0.0f;
 
-        mEntries.tbl[1][0] = 0.0f;
-        mEntries.tbl[1][1] = vec.mCoords.y;
-        mEntries.tbl[1][2] = 0.0f;
+        tbl[1][0] = 0.0f;
+        tbl[1][1] = vec.mCoords.y;
+        tbl[1][2] = 0.0f;
 
-        mEntries.tbl[2][0] = 0.0f;
-        mEntries.tbl[2][1] = 0.0f;
-        mEntries.tbl[2][2] = vec.mCoords.z;
+        tbl[2][0] = 0.0f;
+        tbl[2][1] = 0.0f;
+        tbl[2][2] = vec.mCoords.z;
 
-        mEntries.tbl[0][3] = 0.0f;
-        mEntries.tbl[1][3] = 0.0f;
-        mEntries.tbl[2][3] = 0.0f;
+        tbl[0][3] = 0.0f;
+        tbl[1][3] = 0.0f;
+        tbl[2][3] = 0.0f;
     }
 
     void Matrix34f::setAxisRotation(const Vector3f & vec, f32 f1)
@@ -105,7 +105,7 @@ namespace EGG
 
     void Matrix34f::loadPosMtx(u32 i)
     {
-        GXLoadPosMtxImm(mEntries.tbl, i);
+        GXLoadPosMtxImm(tbl, i);
     }
 
     Matrix34f Matrix34f::ident(

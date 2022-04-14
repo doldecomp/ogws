@@ -1,6 +1,7 @@
 #ifndef EGG_GFX_DRAWGX_H
 #define EGG_GFX_DRAWGX_H
 #include "types_egg.h"
+#include "math_types.h"
 #include <GX/GX.h>
 
 namespace EGG
@@ -61,7 +62,7 @@ namespace EGG
         static const GXColor sColorBlue;
         static const GXColor sColorOrange;
 
-        static Matrix34f s_cameraMtx;
+        static nw4r::math::MTX34 s_cameraMtx;
 
     private:
         static DisplayList s_DL[18];

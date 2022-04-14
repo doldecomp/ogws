@@ -15,7 +15,7 @@ namespace EGG
             return *spScreen;
         }
 
-        static void setScreen(Screen& pScreen) { spScreen = &pScreen; }
+        static void setScreen(Screen& screen) { spScreen = &screen; }
     
     private:
         static Screen *spScreen;

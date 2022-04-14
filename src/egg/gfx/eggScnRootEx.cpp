@@ -94,7 +94,7 @@ namespace EGG
         calc_after_CalcWorld();
     }
 
-    void ScnRootEx::SetCurrentCamera(int id, const Matrix34f& mtx, const Screen& screen)
+    void ScnRootEx::SetCurrentCamera(int id, const math::MTX34& mtx, const Screen& screen)
     {
         SHORT_0x12 &= ~0x1;
 
