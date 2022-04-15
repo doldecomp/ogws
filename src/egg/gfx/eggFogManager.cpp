@@ -40,8 +40,8 @@ namespace EGG
     {
         for (int i = 0; i < cNumFog; i++)
         {
-            mFog[i]->mNearZ = screen.getNearZ();
-            mFog[i]->mFarZ = screen.getFarZ();
+            mFog[i]->mNearZ = screen.GetNearZ();
+            mFog[i]->mFarZ = screen.GetFarZ();
         }
     }
 

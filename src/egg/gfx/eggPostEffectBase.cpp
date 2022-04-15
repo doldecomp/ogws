@@ -169,20 +169,20 @@ namespace EGG
     {
         Screen clone(screen);
         
-        clone.setFlag(0x80);
+        clone.SetFlag(0x80);
 
-        if (clone.getCanvasMode() != Frustum::CANVASMODE_1)
+        if (clone.GetCanvasMode() != Frustum::CANVASMODE_1)
         {
-            clone.setFlag(0x1);
-            clone.setCanvasMode(Frustum::CANVASMODE_1);
+            clone.SetFlag(0x1);
+            clone.SetCanvasMode(Frustum::CANVASMODE_1);
         }
 
-        clone.setProjectionType(Frustum::PROJ_ORTHO);
+        clone.SetProjectionType(Frustum::PROJ_ORTHO);
 
-        clone.setNearZ(0.0f);
-        clone.setFarZ(1.0f);
-        clone.setScale(math::VEC3(1.0f, 1.0f, 1.0f));
-        clone.setOffset(math::VEC2(0.0f, 0.0f));
+        clone.SetNearZ(0.0f);
+        clone.SetFarZ(1.0f);
+        clone.SetScale(math::VEC3(1.0f, 1.0f, 1.0f));
+        clone.SetOffset(math::VEC2(0.0f, 0.0f));
 
         clone.Screen::SetProjectionGX();
     }

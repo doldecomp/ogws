@@ -106,6 +106,7 @@ namespace nw4r
 		struct ResAnmShp;
 		struct ResAnmScn;
 		struct ResAnmFog;
+		struct ResAnmCamera;
 		struct ResVtxPos;
 		struct ResVtxNrm;
 		struct ResVtxClr;

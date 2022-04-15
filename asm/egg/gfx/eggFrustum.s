@@ -65,8 +65,8 @@ __vt__Q23EGG7Frustum:
     .long 0
     .long 0
     .long 0x80099810 # Weak dtor
-    .long func_800A08E4 # SetProjectionGX(?)
-    .long func_800A08F8 # CopyToG3D(?)
+    .long SetProjectionGX__Q23EGG7FrustumCFv # SetProjectionGX(?)
+    .long CopyToG3D__Q23EGG7FrustumCFQ34nw4r3g3d6Camera # CopyToG3D(?)
 .global lbl_8039808C
 lbl_8039808C:
     # "0.f < fovy && fovy < 180.f"
@@ -80,8 +80,8 @@ lbl_803980A8:
 .4byte __sinit_$$3eggFrustum_cpp # eggFrustum
 
 .section .text, "ax"
-.global func_800A0800
-func_800A0800:
+.global __ct__Q23EGG7FrustumFQ33EGG7Frustum14ProjectionTypeRCQ34nw4r4math4VEC2ffQ33EGG7Frustum10CanvasMode
+__ct__Q23EGG7FrustumFQ33EGG7Frustum14ProjectionTypeRCQ34nw4r4math4VEC2ffQ33EGG7Frustum10CanvasMode:
 /* 800A0800 0009B700  C0 02 8F 50 */	lfs f0, lbl_804C0970-_SDA2_BASE_(r2)
 /* 800A0804 0009B704  3D 00 80 3A */	lis r8, __vt__Q23EGG7Frustum@ha
 /* 800A0808 0009B708  C0 62 8F 5C */	lfs f3, lbl_804C097C-_SDA2_BASE_(r2)
@@ -108,8 +108,8 @@ func_800A0800:
 /* 800A085C 0009B75C  B0 03 00 34 */	sth r0, 0x34(r3)
 /* 800A0860 0009B760  4E 80 00 20 */	blr 
 
-.global func_800A0864
-func_800A0864:
+.global __ct__Q23EGG7FrustumFRQ23EGG7Frustum
+__ct__Q23EGG7FrustumFRQ23EGG7Frustum:
 /* 800A0864 0009B764  3C A0 80 3A */	lis r5, __vt__Q23EGG7Frustum@ha
 /* 800A0868 0009B768  38 A5 80 78 */	addi r5, r5, __vt__Q23EGG7Frustum@l
 /* 800A086C 0009B76C  90 A3 00 38 */	stw r5, 0x38(r3)
@@ -143,17 +143,17 @@ func_800A0864:
 /* 800A08DC 0009B7DC  B0 03 00 34 */	sth r0, 0x34(r3)
 /* 800A08E0 0009B7E0  4E 80 00 20 */	blr 
 
-.global func_800A08E4
-func_800A08E4:
+.global SetProjectionGX__Q23EGG7FrustumCFv
+SetProjectionGX__Q23EGG7FrustumCFv:
 /* 800A08E4 0009B7E4  80 03 00 00 */	lwz r0, 0(r3)
 /* 800A08E8 0009B7E8  2C 00 00 00 */	cmpwi r0, 0
 /* 800A08EC 0009B7EC  40 82 00 08 */	bne lbl_800A08F4
-/* 800A08F0 0009B7F0  48 00 00 80 */	b lbl_800A0970
+/* 800A08F0 0009B7F0  48 00 00 80 */	b SetProjectionOrthographicGX___Q23EGG7FrustumCFv
 lbl_800A08F4:
-/* 800A08F4 0009B7F4  48 00 00 50 */	b lbl_800A0944
+/* 800A08F4 0009B7F4  48 00 00 50 */	b SetProjectionPerspectiveGX___Q23EGG7FrustumCFv
 
-.global func_800A08F8
-func_800A08F8:
+.global CopyToG3D__Q23EGG7FrustumCFQ34nw4r3g3d6Camera
+CopyToG3D__Q23EGG7FrustumCFQ34nw4r3g3d6Camera:
 /* 800A08F8 0009B7F8  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 800A08FC 0009B7FC  7C 08 02 A6 */	mflr r0
 /* 800A0900 0009B800  90 01 00 14 */	stw r0, 0x14(r1)
@@ -175,7 +175,9 @@ lbl_800A0934:
 /* 800A0938 0009B838  7C 08 03 A6 */	mtlr r0
 /* 800A093C 0009B83C  38 21 00 10 */	addi r1, r1, 0x10
 /* 800A0940 0009B840  4E 80 00 20 */	blr 
-lbl_800A0944:
+
+.global SetProjectionPerspectiveGX___Q23EGG7FrustumCFv
+SetProjectionPerspectiveGX___Q23EGG7FrustumCFv:
 /* 800A0944 0009B844  94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 800A0948 0009B848  7C 08 02 A6 */	mflr r0
 /* 800A094C 0009B84C  90 01 00 34 */	stw r0, 0x34(r1)
@@ -187,7 +189,8 @@ lbl_800A0944:
 /* 800A0964 0009B864  7C 08 03 A6 */	mtlr r0
 /* 800A0968 0009B868  38 21 00 30 */	addi r1, r1, 0x30
 /* 800A096C 0009B86C  4E 80 00 20 */	blr 
-lbl_800A0970:
+
+SetProjectionOrthographicGX___Q23EGG7FrustumCFv:
 /* 800A0970 0009B870  94 21 FF B0 */	stwu r1, -0x50(r1)
 /* 800A0974 0009B874  7C 08 02 A6 */	mflr r0
 /* 800A0978 0009B878  90 01 00 54 */	stw r0, 0x54(r1)

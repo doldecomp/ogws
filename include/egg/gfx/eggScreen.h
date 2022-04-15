@@ -25,8 +25,8 @@ namespace EGG
         Screen(const Screen&);
 
         virtual ~Screen() {} // at 0x8
-        virtual void SetProjectionGX() const; // at 0xC
-        virtual void CopyToG3D(nw4r::g3d::Camera) const; // at 0x10
+        virtual void SetProjectionGX(); // at 0xC
+        virtual void CopyToG3D(nw4r::g3d::Camera); // at 0x10
 
         void CopyFromAnother(const Screen&);
 
