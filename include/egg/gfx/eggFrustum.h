@@ -78,7 +78,7 @@ namespace EGG
         void SetFovy(f32 fovy)
         {
             if (mFovY == fovy) return;
-
+          
             #line 391
             EGG_ASSERT(0.f < fovy && fovy < 180.f);
             mFovY = fovy;
