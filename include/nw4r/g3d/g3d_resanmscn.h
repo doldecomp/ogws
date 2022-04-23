@@ -3,6 +3,7 @@
 #include "types_nw4r.h"
 #include "g3d_rescommon.h"
 #include "g3d_resanmfog.h"
+#include "g3d_resanmcamera.h"
 
 namespace nw4r
 {
@@ -26,6 +27,7 @@ namespace nw4r
 			ResCommon<ResAnmScnData> mAnmScn;
 			
 			ResAnmFog GetResAnmFogByRefNumber(u32) const;
+			ResAnmCamera GetResAnmCameraByRefNumber(u32) const;
 
 			inline ResAnmScn(void * vptr) : mAnmScn(vptr) {}
 

@@ -63,6 +63,7 @@ namespace EGG
         {
             #line 117
             EGG_ASSERT(sizeX >= 0.f);
+            mFlags |= 0x1;
             mSize.mCoords.x = sizeX;
         }
 
@@ -70,11 +71,14 @@ namespace EGG
         {
             #line 123
             EGG_ASSERT(sizeY >= 0.f);
+            mFlags |= 0x1;
             mSize.mCoords.y = sizeY;
         }
 
         void SetFovy(f32 fovy)
         {
+            if (mFovY == fovy) return;
+          
             #line 391
             EGG_ASSERT(0.f < fovy && fovy < 180.f);
             mFovY = fovy;

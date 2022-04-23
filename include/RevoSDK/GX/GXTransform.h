@@ -6,6 +6,12 @@
 extern "C" {
 #endif
 
+typedef enum _GXProjectionType 
+{
+    GX_PROJECTION_PERSP,
+    GX_PROJECTION_ORTHO
+} GXProjectionType;
+
 UNKTYPE GXSetProjection(float (*)[4], u32);
 UNKTYPE GXSetProjectionv(const f32 *);
 UNKTYPE GXGetProjectionv(f32 *);
