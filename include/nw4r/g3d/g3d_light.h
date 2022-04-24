@@ -11,17 +11,20 @@ namespace nw4r
     {
         struct LightSetData
         {
-            static const int cNumLights = 8;
+            static const int NUM_LIGHTS = 8;
 
-            s8 mLights[cNumLights]; // at 0x0
+            s8 mLights[NUM_LIGHTS]; // at 0x0
             s8 mAmbient; // at 0x8
             char UNK_0x8[3]; // at 0x9
         };
 
         struct AmbLightObj
         {
-            // GXColor nor u8[4] produce the correct operator= behavior
             u8 r, g, b, a;
+        };
+
+        struct AmbLightAnmResult
+        {
         };
 
         class LightObj
@@ -48,7 +51,6 @@ namespace nw4r
             bool IsSpotLight() const { return mFlags & SPOT_LIGHT; }
             bool IsSpecularLight() const { return mFlags & SPECULAR_LIGHT; }
             bool IsEnable() const { return mFlags & ENABLED; }
-            // Unofficial symbol
             bool IsSpecularDir() const { return mFlags & SPECULAR_DIR; }
             bool IsColorEnable() const { return mFlags & COLOR_ENABLE; }
             bool IsAlphaEnable() const { return mFlags & ALPHA_ENABLE; }
@@ -76,26 +78,8 @@ namespace nw4r
             GXLightObj mLightObj; // at 0x4
         };
 
-        class LightSetting
+        struct LightAnmResult
         {
-        public:
-            LightSetting(LightObj *, AmbLightObj *, u32, LightSetData *, u32);
-            bool Import(const LightSetting&);
-            void ApplyViewMtx(const math::MTX34&, u32);  
-
-            u16 GetNumLightObj() const { return mNumLightObj; }
-            u16 GetNumLightSet() const { return mNumLightSet; }
-            LightObj * GetLightObjArray() const { return mLightObjArray; }
-            AmbLightObj * GetAmbLightObjArray() const { return mAmbLightObjArray; }
-            // Unofficial symbol
-            LightSetData * GetLightSetDataArray() const { return mLightSetDataArray; }
-
-        private:
-            u16 mNumLightObj; // at 0x0
-            u16 mNumLightSet; // at 0x2
-            LightObj *mLightObjArray; // at 0x4
-            AmbLightObj *mAmbLightObjArray; // at 0x8
-            LightSetData *mLightSetDataArray; // at 0xC
         };
 
         struct LightSet
@@ -109,6 +93,37 @@ namespace nw4r
 
             ResCommon<LightSetting> mSetting; // at 0x0
             ResCommon<LightSetData> mLightSetData; // at 0x4
+        };
+
+        class LightSetting
+        {
+        public:
+            LightSetting(LightObj *, AmbLightObj *, u32, LightSetData *, u32);
+            bool Import(const LightSetting&);
+            void ApplyViewMtx(const math::MTX34&, u32);  
+
+            u16 GetNumLightObj() const { return mNumLightObj; }
+            u16 GetNumLightSet() const { return mNumLightSet; }
+            LightObj * GetLightObjArray() const { return mLightObjArray; }
+            AmbLightObj * GetAmbLightObjArray() const { return mAmbLightObjArray; }
+            LightSetData * GetLightSetDataArray() const { return mLightSetDataArray; }
+
+            LightSet GetLightSet(int i)
+            {
+                if (i < mNumLightSet && i > 0)
+                {
+                    return LightSet(this, &mLightSetDataArray[i]);
+                }
+
+                return LightSet(this, NULL);
+            }
+
+        private:
+            u16 mNumLightObj; // at 0x0
+            u16 mNumLightSet; // at 0x2
+            LightObj *mLightObjArray; // at 0x4
+            AmbLightObj *mAmbLightObjArray; // at 0x8
+            LightSetData *mLightSetDataArray; // at 0xC
         };
     }
 }

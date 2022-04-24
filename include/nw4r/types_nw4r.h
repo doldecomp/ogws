@@ -90,6 +90,10 @@ namespace nw4r
 	
 	namespace g3d
 	{
+		struct AnmScn;
+		struct AnmScnRes;
+		struct CameraAnmResult;
+		struct FogAnmResult;
 		struct ResFile;
 		struct ResMdl;
 		struct ResPltt;
@@ -118,10 +122,12 @@ namespace nw4r
 		struct TexSrt;
 		struct TexSrtTypedef;
 		struct LightObj;
+		struct LightAnmResult;
 		struct LightSet;
 		struct LightSetting;
 		struct LightSetData;
 		struct AmbLightObj;
+		struct AmbLightAnmResult;
 		struct Fog;
 		struct ScnRoot;
 		struct ScnProc;

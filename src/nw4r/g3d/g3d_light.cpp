@@ -141,7 +141,7 @@ namespace nw4r
                 LightSetData *p = &GetLightSetDataArray()[i];
                 p->mAmbient = -1;
 
-                for (u32 j = 0; j < LightSetData::cNumLights; j++)
+                for (u32 j = 0; j < LightSetData::NUM_LIGHTS; j++)
                 {
                     p->mLights[j] = -1;
                 }
@@ -248,7 +248,7 @@ namespace nw4r
         bool LightSet::SelectLightObj(u32 r4, int r5)
         {
             LightSetData *set;
-            if (IsValid() && r4 < LightSetData::cNumLights)
+            if (IsValid() && r4 < LightSetData::NUM_LIGHTS)
             {
                 if (r5 < 0)
                 {
