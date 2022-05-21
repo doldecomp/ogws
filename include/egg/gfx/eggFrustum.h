@@ -59,6 +59,7 @@ namespace EGG
         CanvasMode GetCanvasMode() const { return mCanvasMode; }
         void SetCanvasMode(CanvasMode mode) { mCanvasMode = mode; }
 
+        u16 GetWidth() const { return mSize.mCoords.x; }
         void SetSizeX(f32 sizeX)
         {
             #line 117
@@ -67,6 +68,7 @@ namespace EGG
             mSize.mCoords.x = sizeX;
         }
 
+        u16 GetHeight() const { return mSize.mCoords.y; }
         void SetSizeY(f32 sizeY)
         {
             #line 123

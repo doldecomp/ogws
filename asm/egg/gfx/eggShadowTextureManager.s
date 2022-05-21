@@ -7,12 +7,12 @@ __vt__Q23EGG20ShadowTextureManager:
     .long 0
     .long 0
     .long __dt__Q23EGG20ShadowTextureManagerFv
-.global lbl_8039750C
-lbl_8039750C:
+.global $$2STRING$$2setCapTexture__Q23EGG14PostEffectBaseFPQ23EGG10CapTexture$$20
+$$2STRING$$2setCapTexture__Q23EGG14PostEffectBaseFPQ23EGG10CapTexture$$20:
 	.string "pCapTexture"
 	.balign 8
-.global lbl_80397518
-lbl_80397518:
+.global $$2STRING$$2setCapTexture__Q23EGG14PostEffectBaseFPQ23EGG10CapTexture
+$$2STRING$$2setCapTexture__Q23EGG14PostEffectBaseFPQ23EGG10CapTexture:
 	.string "eggPostEffectBase.h"
 	.balign 8
 

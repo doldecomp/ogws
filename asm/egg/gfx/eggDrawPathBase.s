@@ -95,9 +95,12 @@ lbl_80089EC0:
 
 /* 80089ED4 00084DD4  4E 80 00 20 */	blr 
 
+.global calc_after_CalcWorld__Q23EGG12DrawPathBaseFv
+calc_after_CalcWorld__Q23EGG12DrawPathBaseFv:
 /* 80089ED8 00084DD8  4E 80 00 20 */	blr 
 
 # DrawPathBase::~DrawPathBase
+.global __dt__Q23EGG12DrawPathBaseFv
 __dt__Q23EGG12DrawPathBaseFv:
 /* 80089EDC 00084DDC  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80089EE0 00084DE0  7C 08 02 A6 */	mflr r0
@@ -124,8 +127,8 @@ lbl_80089F1C:
 /* 80089F30 00084E30  38 21 00 10 */	addi r1, r1, 0x10
 /* 80089F34 00084E34  4E 80 00 20 */	blr 
 
-.global doDraw__Q23EGG12DrawPathBaseFUs
-doDraw__Q23EGG12DrawPathBaseFUs:
+.global ____doDraw__Q23EGG12DrawPathBaseFUs
+____doDraw__Q23EGG12DrawPathBaseFUs:
 /* 80089F38 00084E38  88 03 00 00 */	lbz r0, 0(r3)
 /* 80089F3C 00084E3C  54 00 07 FF */	clrlwi. r0, r0, 0x1f
 /* 80089F40 00084E40  4D 82 00 20 */	beqlr 
@@ -138,5 +141,7 @@ doDraw__Q23EGG12DrawPathBaseFUs:
 /* 80089F58 00084E58  38 63 FF 90 */	addi r3, r3, -112
 /* 80089F5C 00084E5C  4B FF FF 80 */	b __dt__Q23EGG12DrawPathBaseFv
 
+.global $$2112$$2doDraw__Q23EGG12DrawPathBaseFUs
+$$2112$$2doDraw__Q23EGG12DrawPathBaseFUs:
 /* 80089F60 00084E60  38 63 FF 90 */	addi r3, r3, -112
-/* 80089F64 00084E64  4B FF FF D4 */	b doDraw__Q23EGG12DrawPathBaseFUs
+/* 80089F64 00084E64  4B FF FF D4 */	b ____doDraw__Q23EGG12DrawPathBaseFUs

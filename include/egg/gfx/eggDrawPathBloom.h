@@ -12,7 +12,7 @@ namespace EGG
         DrawPathBloom();
         virtual int getNumScnProc() const; // at 0x1C
         virtual void calc(); // at 0x24
-        virtual void draw(); // at 0x28
+        virtual void draw(u16); // at 0x28
         virtual ~DrawPathBloom(); // at 0x8
 
         virtual void SetBinaryInner(const Bin&); // at 0x8

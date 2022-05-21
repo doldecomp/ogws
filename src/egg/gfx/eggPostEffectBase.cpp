@@ -14,9 +14,13 @@
 namespace EGG
 {
     using namespace nw4r;
-    
-    PostEffectBase::~PostEffectBase()
+
+    namespace
     {
+        void UNUSED_FUNC_ORDER_POSTEFFECTBASE(PostEffectBase *eff)
+        {
+            eff->~PostEffectBase();
+        }
     }
 
     PostEffectBase::PostEffectBase()

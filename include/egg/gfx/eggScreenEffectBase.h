@@ -41,6 +41,9 @@ namespace EGG
         ScreenEffectBase();
         virtual ~ScreenEffectBase() {} // at 0x8
 
+        Screen& GetScreen() { return mScreen; }
+        const Screen& GetScreen() const { return mScreen; }
+
         bool isVisible() const { return mFlags & EFFECT_VISIBLE; }
 
         static void clearEffectBuffer(BufferType type)
@@ -60,7 +63,11 @@ namespace EGG
         void CopyScreenFromAnother(Screen&);
        
         static void initialize();
+        void g_capture_for_efb(BufferType, bool);
         bool freeEffectBuffer(BufferType);
+
+        // TO-DO
+        static u32 lbl_804BEC54;
     };
 }
 

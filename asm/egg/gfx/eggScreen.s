@@ -80,7 +80,7 @@ lbl_80379C50:
 __vt__Q23EGG6Screen:
     .long 0
     .long 0
-    .long lbl_8008D4BC
+    .long __dt__Q23EGG6ScreenFv
     .long SetProjectionGX__Q23EGG6ScreenFv
     .long 0x80099aec
 # Weak asserts
@@ -161,10 +161,10 @@ lbl_80099630:
 /* 80099664 00094564  3F C0 80 41 */	lis r30, lbl_8040A958@ha
 /* 80099668 00094568  38 7E A9 58 */	addi r3, r30, lbl_8040A958@l
 /* 8009966C 0009456C  48 00 00 D1 */	bl __ct__Q23EGG6ScreenFv
-/* 80099670 00094570  3C 80 80 09 */	lis r4, lbl_8008D4BC@ha
+/* 80099670 00094570  3C 80 80 09 */	lis r4, __dt__Q23EGG6ScreenFv@ha
 /* 80099674 00094574  3C A0 80 41 */	lis r5, lbl_8040A948@ha
 /* 80099678 00094578  38 7E A9 58 */	addi r3, r30, -22184
-/* 8009967C 0009457C  38 84 D4 BC */	addi r4, r4, lbl_8008D4BC@l
+/* 8009967C 0009457C  38 84 D4 BC */	addi r4, r4, __dt__Q23EGG6ScreenFv@l
 /* 80099680 00094580  38 A5 A9 48 */	addi r5, r5, lbl_8040A948@l
 /* 80099684 00094584  48 01 81 B1 */	bl func_800B1834
 /* 80099688 00094588  38 00 00 01 */	li r0, 1

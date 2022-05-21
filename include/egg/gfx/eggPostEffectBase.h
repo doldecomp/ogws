@@ -2,6 +2,7 @@
 #define EGG_GFX_POST_EFFECT_BASE_H
 #include "types_egg.h"
 #include <RevoSDK/GX/GX.h>
+#include "eggAssert.h"
 
 namespace EGG
 {
@@ -24,7 +25,7 @@ namespace EGG
 
     public:
         PostEffectBase();
-        virtual ~PostEffectBase(); // at 0x8
+        virtual ~PostEffectBase() {} // at 0x8
         virtual void onReset(); // at 0xC
         virtual void draw(f32, f32); // at 0x10
         virtual void reset(); // at 0x14
@@ -33,7 +34,14 @@ namespace EGG
         virtual void loadTexObj(); // at 0x20
 
         bool isVisible() const { return ((mFlags & POSTEFFECT_HIDDEN) == 0); }
+
         CapTexture * getCapTexture() const { return mpCapTexture; }
+        void setCapTexture(CapTexture *pCapTexture)
+        {
+            #line 95
+            EGG_ASSERT(pCapTexture);
+            mpCapTexture = pCapTexture;
+        }
 
         void drawTexture();
         void setVtxState();

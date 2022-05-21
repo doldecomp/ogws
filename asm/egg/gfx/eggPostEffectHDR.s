@@ -37,7 +37,7 @@ lbl_804C0830:
 lbl_80397D60:
     .long 0
     .long 0
-    .long 0x8008d624
+    .long __dt__Q23EGG13PostEffectHDRFv
     .long 0x80096a6c
     .long 0x80096a80
     .long 0x80098124
@@ -48,8 +48,8 @@ lbl_80397D60:
 
 .section .text, "ax"
 
-.global func_800980E8
-func_800980E8:
+.global __ct__Q23EGG13PostEffectHDRFv
+__ct__Q23EGG13PostEffectHDRFv:
 /* 800980E8 00092FE8  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 800980EC 00092FEC  7C 08 02 A6 */	mflr r0
 /* 800980F0 00092FF0  90 01 00 14 */	stw r0, 0x14(r1)

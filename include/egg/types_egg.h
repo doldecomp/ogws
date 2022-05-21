@@ -28,6 +28,7 @@ namespace EGG
     struct PostEffectBase;
     struct PostEffectBlur;
     struct PostEffectBlurGather;
+    struct PostEffectHDR;
     struct ResTIMG;
     struct ScnRenderer;
     struct ScnRootEx;

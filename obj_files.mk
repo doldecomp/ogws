@@ -206,7 +206,7 @@ EGG_O_FILES := \
 	build/asm/egg/gfx/eggDrawPathBase.o \
 	build/asm/egg/gfx/eggDrawPathBloom.o \
 	build/asm/egg/gfx/eggDrawPathDOF.o \
-	build/asm/egg/gfx/eggDrawPathHDR.o \
+	build/egg/gfx/eggDrawPathHDR.o \
 	build/asm/egg/gfx/eggDrawPathShadowVolume.o \
 	build/asm/egg/gfx/eggDrawPathLightMap.o \
 	build/egg/gfx/eggFog.o \
