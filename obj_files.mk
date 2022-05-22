@@ -223,7 +223,7 @@ EGG_O_FILES := \
 	build/asm/egg/gfx/eggPostEffectBlur.o \
 	build/asm/egg/gfx/eggPostEffectBlurGather.o \
 	build/asm/egg/gfx/eggPostEffectBlurSimple.o \
-	build/asm/egg/gfx/eggPostEffectHDR.o \
+	build/egg/gfx/eggPostEffectHDR.o \
 	build/asm/egg/gfx/eggPostEffectMask.o \
 	build/egg/gfx/eggScnRootEx.o \
 	build/asm/egg/gfx/eggScreen.o \
