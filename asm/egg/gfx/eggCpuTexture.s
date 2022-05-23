@@ -659,7 +659,7 @@ invalidate__Q23EGG10CpuTextureCFv:
 /* 80086838 00081738  48 01 B6 D1 */	bl system_halt
 lbl_8008683C:
 /* 8008683C 0008173C  7F E3 FB 78 */	mr r3, r31
-/* 80086840 00081740  48 00 00 85 */	bl getTexBufferSize__Q23EGG10CpuTextureFv
+/* 80086840 00081740  48 00 00 85 */	bl getTexBufferSize__Q23EGG10CpuTextureCFv
 /* 80086844 00081744  7C 64 1B 78 */	mr r4, r3
 /* 80086848 00081748  80 7F 00 10 */	lwz r3, 0x10(r31)
 /* 8008684C 0008174C  48 06 78 B9 */	bl func_800EE104
@@ -687,7 +687,7 @@ flush__Q23EGG10CpuTextureCFv:
 /* 80086898 00081798  48 01 B6 71 */	bl system_halt
 lbl_8008689C:
 /* 8008689C 0008179C  7F E3 FB 78 */	mr r3, r31
-/* 800868A0 000817A0  48 00 00 25 */	bl getTexBufferSize__Q23EGG10CpuTextureFv
+/* 800868A0 000817A0  48 00 00 25 */	bl getTexBufferSize__Q23EGG10CpuTextureCFv
 /* 800868A4 000817A4  7C 64 1B 78 */	mr r4, r3
 /* 800868A8 000817A8  80 7F 00 10 */	lwz r3, 0x10(r31)
 /* 800868AC 000817AC  48 06 78 85 */	bl DCFlushRange
@@ -697,8 +697,8 @@ lbl_8008689C:
 /* 800868BC 000817BC  38 21 00 10 */	addi r1, r1, 0x10
 /* 800868C0 000817C0  4E 80 00 20 */	blr 
 
-.global getTexBufferSize__Q23EGG10CpuTextureFv
-getTexBufferSize__Q23EGG10CpuTextureFv:
+.global getTexBufferSize__Q23EGG10CpuTextureCFv
+getTexBufferSize__Q23EGG10CpuTextureCFv:
 /* 800868C4 000817C4  7C 65 1B 78 */	mr r5, r3
 /* 800868C8 000817C8  A0 63 00 02 */	lhz r3, 2(r3)
 /* 800868CC 000817CC  A0 85 00 04 */	lhz r4, 4(r5)

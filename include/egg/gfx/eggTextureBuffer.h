@@ -19,6 +19,25 @@ namespace EGG
         static TextureBuffer * getNotJoin();
         static void alloc(TextureBuffer *, u32);
 
+        static TextureBuffer * alloc(u16 w, u16 h, GXTexFmt fmt)
+        {
+            if (w == 0 || h == 0) return NULL;
+
+            TextureBuffer *buf = getNotJoin();
+            buf->setWidth(w);
+            buf->setHeight(h);
+            buf->setFormat(fmt);
+            buf->configure();
+
+            buf->setWrapS(0);
+            buf->setWrapT(0);
+            buf->setMinFilt(1);
+            buf->setMagFilt(1);
+
+            alloc(buf, buf->getTexBufferSize());
+            return buf;
+        }
+
         static void append(TextureBuffer *buf)
         {
             if (spTailNotJoin != NULL) spTailNotJoin->mpNext = buf;

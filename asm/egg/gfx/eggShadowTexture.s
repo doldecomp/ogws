@@ -464,8 +464,8 @@ func_8009B3BC:
 /* 8009B440 00096340  98 03 01 FC */	stb r0, 0x1fc(r3)
 /* 8009B444 00096344  4E 80 00 20 */	blr 
 
-.global func_8009B448
-func_8009B448:
+.global Calc__Q23EGG13ShadowTextureFv
+Calc__Q23EGG13ShadowTextureFv:
 /* 8009B448 00096348  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8009B44C 0009634C  7C 08 02 A6 */	mflr r0
 /* 8009B450 00096350  90 01 00 24 */	stw r0, 0x24(r1)
@@ -982,8 +982,8 @@ lbl_8009BBA0:
 /* 8009BBAC 00096AAC  38 21 04 80 */	addi r1, r1, 0x480
 /* 8009BBB0 00096AB0  4E 80 00 20 */	blr 
 
-.global func_8009BBB4
-func_8009BBB4:
+.global Draw__Q23EGG13ShadowTextureFPQ23EGG6Screenbbb
+Draw__Q23EGG13ShadowTextureFPQ23EGG6Screenbbb:
 /* 8009BBB4 00096AB4  94 21 FE A0 */	stwu r1, -0x160(r1)
 /* 8009BBB8 00096AB8  7C 08 02 A6 */	mflr r0
 /* 8009BBBC 00096ABC  90 01 01 64 */	stw r0, 0x164(r1)

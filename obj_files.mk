@@ -196,7 +196,7 @@ NW4R_O_FILES := \
 	build/nw4r/lyt/lyt_common.o \
 
 EGG_O_FILES := \
-	build/asm/egg/gfx/eggShadowTextureManager.o \
+	build/egg/gfx/eggShadowTextureManager.o \
 	build/egg/gfx/eggStateGX.o \
 	build/egg/gfx/eggTextureBuffer.o \
 	build/asm/egg/gfx/eggAnalizeDL.o \

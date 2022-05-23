@@ -75,17 +75,27 @@ namespace EGG
 
         bool isConfigured() const { return mFlags & CONFIGURED; }
         bool checkHasHeader() const { return mFlags & HAS_HEADER; }
-        // Only 4 official symbols besides configure/getTexBufferSize
+
         u16 getWidth() const { return mWidth; }
+        void setWidth(u16 w) { mWidth = w; }
+
         u16 getHeight() const { return mHeight; }
+        void setHeight(u16 h) { mHeight = h; }
+
         GXTexFmt getFormat() const { return (GXTexFmt)mTexFormat; }
-        UNKTYPE * getBuffer() const { return mpBuffer; }
+        void setFormat(GXTexFmt fmt) { mTexFormat = fmt; }
+
+        void setWrapS(u8 wrap) { mWrapS = wrap; }
+        void setWrapT(u8 wrap) { mWrapT = wrap; }
+        void setMinFilt(u8 filt) { mMinFilt = filt; }
+        void setMagFilt(u8 filt) { mMagFilt = filt; }
 
         Header * getHeader() const
         {
             return (Header *)((u8 *)mpBuffer - sizeof(Header));
         }
 
+        UNKTYPE * getBuffer() const { return mpBuffer; }
         void setBuffer(void *pBuffer)
         {
             #line 180
