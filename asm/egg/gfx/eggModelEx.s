@@ -66,8 +66,8 @@ lbl_80397C1C:
 	.incbin "baserom.dol", 0x393D1C, 0x14
 
 .section .text, "ax"
-.global func_80094C58
-func_80094C58:
+.global __ct__Q23EGG7ModelExFPQ34nw4r3g3d6ScnObj
+__ct__Q23EGG7ModelExFPQ34nw4r3g3d6ScnObj:
 /* 80094C58 0008FB58  94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 80094C5C 0008FB5C  7C 08 02 A6 */	mflr r0
 /* 80094C60 0008FB60  3C A0 80 39 */	lis r5, lbl_80397B78@ha
@@ -219,7 +219,7 @@ lbl_80094E54:
 /* 80094E60 0008FD60  90 1F 00 00 */	stw r0, 0(r31)
 lbl_80094E64:
 /* 80094E64 0008FD64  7F E3 FB 78 */	mr r3, r31
-/* 80094E68 0008FD68  48 00 00 D1 */	bl func_80094F38
+/* 80094E68 0008FD68  48 00 00 D1 */	bl reset__Q23EGG7ModelExFv
 /* 80094E6C 0008FD6C  7F E3 FB 78 */	mr r3, r31
 /* 80094E70 0008FD70  83 E1 00 2C */	lwz r31, 0x2c(r1)
 /* 80094E74 0008FD74  83 C1 00 28 */	lwz r30, 0x28(r1)
@@ -228,6 +228,9 @@ lbl_80094E64:
 /* 80094E80 0008FD80  7C 08 03 A6 */	mtlr r0
 /* 80094E84 0008FD84  38 21 00 30 */	addi r1, r1, 0x30
 /* 80094E88 0008FD88  4E 80 00 20 */	blr 
+
+.global __dt__Q23EGG7ModelExFv
+__dt__Q23EGG7ModelExFv:
 /* 80094E8C 0008FD8C  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80094E90 0008FD90  7C 08 02 A6 */	mflr r0
 /* 80094E94 0008FD94  2C 03 00 00 */	cmpwi r3, 0
@@ -275,15 +278,15 @@ lbl_80094F1C:
 /* 80094F30 0008FE30  38 21 00 10 */	addi r1, r1, 0x10
 /* 80094F34 0008FE34  4E 80 00 20 */	blr 
 
-.global func_80094F38
-func_80094F38:
+.global reset__Q23EGG7ModelExFv
+reset__Q23EGG7ModelExFv:
 /* 80094F38 0008FE38  38 00 00 00 */	li r0, 0
 /* 80094F3C 0008FE3C  90 03 00 0C */	stw r0, 0xc(r3)
 /* 80094F40 0008FE40  B0 03 00 04 */	sth r0, 4(r3)
 /* 80094F44 0008FE44  4E 80 00 20 */	blr 
 
-.global func_80094F48
-func_80094F48:
+.global getNumShape__Q23EGG7ModelExCFv
+getNumShape__Q23EGG7ModelExCFv:
 /* 80094F48 0008FE48  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80094F4C 0008FE4C  7C 08 02 A6 */	mflr r0
 /* 80094F50 0008FE50  80 83 00 00 */	lwz r4, 0(r3)
@@ -329,8 +332,8 @@ lbl_80094FC4:
 /* 80094FCC 0008FECC  38 21 00 10 */	addi r1, r1, 0x10
 /* 80094FD0 0008FED0  4E 80 00 20 */	blr 
 
-.global func_80094FD4
-func_80094FD4:
+.global getNumMaterial__Q23EGG7ModelExCFv
+getNumMaterial__Q23EGG7ModelExCFv:
 /* 80094FD4 0008FED4  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80094FD8 0008FED8  7C 08 02 A6 */	mflr r0
 /* 80094FDC 0008FEDC  80 83 00 00 */	lwz r4, 0(r3)
@@ -389,8 +392,8 @@ lbl_80095078:
 /* 80095080 0008FF80  38 21 00 10 */	addi r1, r1, 0x10
 /* 80095084 0008FF84  4E 80 00 20 */	blr 
 
-.global func_80095088
-func_80095088:
+.global getNumNode__Q23EGG7ModelExCFv
+getNumNode__Q23EGG7ModelExCFv:
 /* 80095088 0008FF88  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8009508C 0008FF8C  7C 08 02 A6 */	mflr r0
 /* 80095090 0008FF90  80 83 00 00 */	lwz r4, 0(r3)
@@ -436,8 +439,8 @@ lbl_80095104:
 /* 8009510C 0009000C  38 21 00 10 */	addi r1, r1, 0x10
 /* 80095110 00090010  4E 80 00 20 */	blr 
 
-.global func_80095114
-func_80095114:
+.global getNumViewMtx__Q23EGG7ModelExCFv
+getNumViewMtx__Q23EGG7ModelExCFv:
 /* 80095114 00090014  80 83 00 00 */	lwz r4, 0(r3)
 /* 80095118 00090018  2C 04 00 02 */	cmpwi r4, 2
 /* 8009511C 0009001C  40 80 00 10 */	bge lbl_8009512C
@@ -472,8 +475,8 @@ lbl_80095170:
 /* 80095170 00090070  38 60 00 00 */	li r3, 0
 /* 80095174 00090074  4E 80 00 20 */	blr 
 
-.global func_80095178
-func_80095178:
+.global getShapeMinMax__Q23EGG7ModelExFUsPQ34nw4r4math4VEC3PQ34nw4r4math4VEC3b
+getShapeMinMax__Q23EGG7ModelExFUsPQ34nw4r4math4VEC3PQ34nw4r4math4VEC3b:
 /* 80095178 00090078  94 21 FF 70 */	stwu r1, -0x90(r1)
 /* 8009517C 0009007C  7C 08 02 A6 */	mflr r0
 /* 80095180 00090080  90 01 00 94 */	stw r0, 0x94(r1)
@@ -566,7 +569,7 @@ lbl_8009529C:
 lbl_800952A8:
 /* 800952A8 000901A8  7F 83 E3 78 */	mr r3, r28
 /* 800952AC 000901AC  7E C4 B3 78 */	mr r4, r22
-/* 800952B0 000901B0  48 00 0E 21 */	bl func_800960D0
+/* 800952B0 000901B0  48 00 0E 21 */	bl getResShp__Q23EGG7ModelExCFUs
 /* 800952B4 000901B4  2C 03 00 00 */	cmpwi r3, 0
 /* 800952B8 000901B8  90 61 00 14 */	stw r3, 0x14(r1)
 /* 800952BC 000901BC  40 82 00 1C */	bne lbl_800952D8
@@ -636,7 +639,7 @@ lbl_8009538C:
 /* 80095390 00090290  41 82 00 10 */	beq lbl_800953A0
 /* 80095394 00090294  7F 83 E3 78 */	mr r3, r28
 /* 80095398 00090298  7F 24 CB 78 */	mr r4, r25
-/* 8009539C 0009029C  48 00 02 69 */	bl func_80095604
+/* 8009539C 0009029C  48 00 02 69 */	bl calcWorld__Q23EGG7ModelExCFPQ34nw4r4math5MTX34
 lbl_800953A0:
 /* 800953A0 000902A0  38 61 00 14 */	addi r3, r1, 0x14
 /* 800953A4 000902A4  4B FB E8 49 */	bl GetResVtxPos__Q34nw4r3g3d6ResShpCFv
@@ -794,8 +797,8 @@ lbl_800955C0:
 /* 800955D0 000904D0  38 21 00 90 */	addi r1, r1, 0x90
 /* 800955D4 000904D4  4E 80 00 20 */	blr 
 
-.global func_800955D8
-func_800955D8:
+.global setVisible__Q23EGG7ModelExFb
+setVisible__Q23EGG7ModelExFb:
 /* 800955D8 000904D8  80 63 00 08 */	lwz r3, 8(r3)
 /* 800955DC 000904DC  2C 03 00 00 */	cmpwi r3, 0
 /* 800955E0 000904E0  4D 82 00 20 */	beqlr 
@@ -808,8 +811,8 @@ func_800955D8:
 /* 800955FC 000904FC  4E 80 04 20 */	bctr 
 /* 80095600 00090500  4E 80 00 20 */	blr 
 
-.global func_80095604
-func_80095604:
+.global calcWorld__Q23EGG7ModelExCFPQ34nw4r4math5MTX34
+calcWorld__Q23EGG7ModelExCFPQ34nw4r4math5MTX34:
 /* 80095604 00090504  94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 80095608 00090508  7C 08 02 A6 */	mflr r0
 /* 8009560C 0009050C  2C 04 00 00 */	cmpwi r4, 0
@@ -941,8 +944,8 @@ lbl_800957AC:
 /* 800957C0 000906C0  38 21 00 30 */	addi r1, r1, 0x30
 /* 800957C4 000906C4  4E 80 00 20 */	blr 
 
-.global func_800957C8
-func_800957C8:
+.global calcView__Q23EGG7ModelExCFPCQ34nw4r4math5MTX34PQ34nw4r4math5MTX34
+calcView__Q23EGG7ModelExCFPCQ34nw4r4math5MTX34PQ34nw4r4math5MTX34:
 /* 800957C8 000906C8  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 800957CC 000906CC  7C 08 02 A6 */	mflr r0
 /* 800957D0 000906D0  2C 05 00 00 */	cmpwi r5, 0
@@ -1064,8 +1067,8 @@ lbl_80095940:
 /* 80095954 00090854  38 21 00 20 */	addi r1, r1, 0x20
 /* 80095958 00090858  4E 80 00 20 */	blr 
 
-.global func_8009595C
-func_8009595C:
+.global drawShapeDirectly__Q23EGG7ModelExFUlbbPQ34nw4r4math5MTX34
+drawShapeDirectly__Q23EGG7ModelExFUlbbPQ34nw4r4math5MTX34:
 /* 8009595C 0009085C  94 21 FF C0 */	stwu r1, -0x40(r1)
 /* 80095960 00090860  7C 08 02 A6 */	mflr r0
 /* 80095964 00090864  90 01 00 44 */	stw r0, 0x44(r1)
@@ -1107,7 +1110,7 @@ lbl_800959E4:
 /* 800959E4 000908E4  38 60 00 00 */	li r3, 0
 /* 800959E8 000908E8  4B FD 19 B5 */	bl Invalidate__Q34nw4r3g3d8G3DStateFUl
 /* 800959EC 000908EC  7F A3 EB 78 */	mr r3, r29
-/* 800959F0 000908F0  48 00 0A 05 */	bl func_800963F4
+/* 800959F0 000908F0  48 00 0A 05 */	bl getDrawMode__Q23EGG7ModelExFUl
 /* 800959F4 000908F4  2C 1F 00 00 */	cmpwi r31, 0
 /* 800959F8 000908F8  90 61 00 18 */	stw r3, 0x18(r1)
 /* 800959FC 000908FC  40 82 00 B0 */	bne lbl_80095AAC
@@ -1265,7 +1268,7 @@ lbl_80095BDC:
 /* 80095BE8 00090AE8  7F A3 EB 78 */	mr r3, r29
 /* 80095BEC 00090AEC  98 01 00 08 */	stb r0, 8(r1)
 /* 80095BF0 00090AF0  38 81 00 08 */	addi r4, r1, 8
-/* 80095BF4 00090AF4  48 00 08 35 */	bl func_80096428
+/* 80095BF4 00090AF4  48 00 08 35 */	bl getDrawCtrl__Q23EGG7ModelExFUlPb
 /* 80095BF8 00090AF8  2C 1F 00 00 */	cmpwi r31, 0
 /* 80095BFC 00090AFC  7C 7C 1B 78 */	mr r28, r3
 /* 80095C00 00090B00  40 82 00 0C */	bne lbl_80095C0C
@@ -1416,8 +1419,8 @@ lbl_80095DE4:
 /* 80095DF0 00090CF0  38 21 00 40 */	addi r1, r1, 0x40
 /* 80095DF4 00090CF4  4E 80 00 20 */	blr 
 
-.global func_80095DF8
-func_80095DF8:
+.global replaceTexture__Q23EGG7ModelExFPCcRCibPQ23EGG20TextureReplaceResultUsbUl
+replaceTexture__Q23EGG7ModelExFPCcRCibPQ23EGG20TextureReplaceResultUsbUl:
 /* 80095DF8 00090CF8  94 21 FF 80 */	stwu r1, -0x80(r1)
 /* 80095DFC 00090CFC  7C 08 02 A6 */	mflr r0
 /* 80095E00 00090D00  90 01 00 84 */	stw r0, 0x84(r1)
@@ -1467,7 +1470,7 @@ lbl_80095E94:
 /* 80095E98 00090D98  4B FD F0 DD */	bl __ct__Q44nw4r3g3d6ScnMdl15CopiedMatAccessFPQ34nw4r3g3d6ScnMdlUl
 /* 80095E9C 00090D9C  7E A3 AB 78 */	mr r3, r21
 /* 80095EA0 00090DA0  57 84 04 3E */	clrlwi r4, r28, 0x10
-/* 80095EA4 00090DA4  48 00 03 A9 */	bl func_8009624C
+/* 80095EA4 00090DA4  48 00 03 A9 */	bl getResMat__Q23EGG7ModelExCFUs
 /* 80095EA8 00090DA8  90 61 00 10 */	stw r3, 0x10(r1)
 /* 80095EAC 00090DAC  7C 1D D0 50 */	subf r0, r29, r26
 /* 80095EB0 00090DB0  7E C5 B3 78 */	mr r5, r22
@@ -1482,7 +1485,7 @@ lbl_80095E94:
 lbl_80095ED4:
 /* 80095ED4 00090DD4  7E A3 AB 78 */	mr r3, r21
 /* 80095ED8 00090DD8  57 84 04 3E */	clrlwi r4, r28, 0x10
-/* 80095EDC 00090DDC  48 00 03 71 */	bl func_8009624C
+/* 80095EDC 00090DDC  48 00 03 71 */	bl getResMat__Q23EGG7ModelExCFUs
 /* 80095EE0 00090DE0  90 61 00 0C */	stw r3, 0xc(r1)
 /* 80095EE4 00090DE4  7C 1D D0 50 */	subf r0, r29, r26
 /* 80095EE8 00090DE8  7E C5 B3 78 */	mr r5, r22
@@ -1605,8 +1608,8 @@ lbl_8009605C:
 /* 8009606C 00090F6C  38 21 00 80 */	addi r1, r1, 0x80
 /* 80096070 00090F70  4E 80 00 20 */	blr 
 
-.global func_80096074
-func_80096074:
+.global attachBoundingInfo__Q23EGG7ModelExFPQ23EGG17ModelBoundingInfo
+attachBoundingInfo__Q23EGG7ModelExFPQ23EGG17ModelBoundingInfo:
 /* 80096074 00090F74  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80096078 00090F78  7C 08 02 A6 */	mflr r0
 /* 8009607C 00090F7C  90 01 00 14 */	stw r0, 0x14(r1)
@@ -1632,8 +1635,8 @@ lbl_800960B4:
 /* 800960C8 00090FC8  38 21 00 10 */	addi r1, r1, 0x10
 /* 800960CC 00090FCC  4E 80 00 20 */	blr 
 
-.global func_800960D0
-func_800960D0:
+.global getResShp__Q23EGG7ModelExCFUs
+getResShp__Q23EGG7ModelExCFUs:
 /* 800960D0 00090FD0  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 800960D4 00090FD4  7C 08 02 A6 */	mflr r0
 /* 800960D8 00090FD8  80 A3 00 00 */	lwz r5, 0(r3)
@@ -1754,8 +1757,8 @@ lbl_80096234:
 /* 80096244 00091144  38 21 00 20 */	addi r1, r1, 0x20
 /* 80096248 00091148  4E 80 00 20 */	blr 
 
-.global func_8009624C
-func_8009624C:
+.global getResMat__Q23EGG7ModelExCFUs
+getResMat__Q23EGG7ModelExCFUs:
 /* 8009624C 0009114C  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 80096250 00091150  7C 08 02 A6 */	mflr r0
 /* 80096254 00091154  80 A3 00 00 */	lwz r5, 0(r3)
@@ -1890,8 +1893,8 @@ lbl_800963DC:
 /* 800963EC 000912EC  38 21 00 20 */	addi r1, r1, 0x20
 /* 800963F0 000912F0  4E 80 00 20 */	blr 
 
-.global func_800963F4
-func_800963F4:
+.global getDrawMode__Q23EGG7ModelExFUl
+getDrawMode__Q23EGG7ModelExFUl:
 /* 800963F4 000912F4  54 60 07 39 */	rlwinm. r0, r3, 0, 0x1c, 0x1c
 /* 800963F8 000912F8  38 80 00 03 */	li r4, 3
 /* 800963FC 000912FC  41 82 00 0C */	beq lbl_80096408
@@ -1909,8 +1912,8 @@ lbl_80096420:
 /* 80096420 00091320  7C 83 23 78 */	mr r3, r4
 /* 80096424 00091324  4E 80 00 20 */	blr 
 
-.global func_80096428
-func_80096428:
+.global getDrawCtrl__Q23EGG7ModelExFUlPb
+getDrawCtrl__Q23EGG7ModelExFUlPb:
 /* 80096428 00091328  54 60 07 39 */	rlwinm. r0, r3, 0, 0x1c, 0x1c
 /* 8009642C 0009132C  38 A0 00 01 */	li r5, 1
 /* 80096430 00091330  38 C0 00 01 */	li r6, 1
@@ -1934,8 +1937,8 @@ lbl_80096468:
 /* 80096468 00091368  7C A3 2B 78 */	mr r3, r5
 /* 8009646C 0009136C  4E 80 00 20 */	blr 
 
-.global func_80096470
-func_80096470:
+.global getResTexSrt__Q23EGG7ModelExFUs
+getResTexSrt__Q23EGG7ModelExFUs:
 /* 80096470 00091370  94 21 FF C0 */	stwu r1, -0x40(r1)
 /* 80096474 00091374  7C 08 02 A6 */	mflr r0
 /* 80096478 00091378  7C 66 1B 78 */	mr r6, r3

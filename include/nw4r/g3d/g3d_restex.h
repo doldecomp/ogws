@@ -53,14 +53,6 @@ namespace nw4r
 				return mTex.ref().mRevision == REVISION;
 			}
 
-			/*
-				Inlines used in BBA's GetTexObjCIParam (and most likely also GetTexObjParam)
-				I don't know where they are used though so for now they are declarations
-			*/
-			inline UNKTYPE GetTexData() const;
-			inline UNKTYPE GetWidth() const;
-			inline UNKTYPE GetHeight() const;
-
 			bool GetTexObjParam(void **, u16 *, u16 *, GXTexFmt *, f32 *, f32 *, u8 *) const;
 			bool GetTexObjCIParam(void **, u16 *, u16 *, GXCITexFmt *, f32 *, f32 *, u8 *) const;
 			void Init();

@@ -61,6 +61,20 @@ namespace EGG
             EGG_ASSERT(m_pSphere);
             return m_pSphere;
         }
+
+        // 80094b64, stub inline for weak data in eggModelEx.o
+        UNKTYPE UNKNOWN_INLINE_1(SphereData *pSphere)
+        {
+            #line 191
+            EGG_ASSERT(pSphere);
+        }
+
+        // 80093db8, stub inline for weak data in eggModelEx.o
+        UNKTYPE UNKNOWN_INLINE_0(AABBData *pAABB)
+        {
+            #line 214
+            EGG_ASSERT(pAABB);
+        }
     };
 }
 

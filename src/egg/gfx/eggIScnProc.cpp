@@ -42,7 +42,7 @@ namespace EGG
         for (u16 i = 0; i < getNumScnProc(); i++)
         {
             u32 sp8;
-            MEMAllocator *allocator = (pAllocator == NULL) ? G3DUtility::sAllocator : pAllocator;
+            MEMAllocator *allocator = (pAllocator == NULL) ? G3DUtility::getAllocator() : pAllocator;
 
             mpDataSet[i].mpScnProc = nw4r::g3d::ScnProc::Construct(allocator, &sp8,
                 IScnProc::drawProcFunc, true, false, 0);

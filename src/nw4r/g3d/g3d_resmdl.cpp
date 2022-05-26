@@ -11,10 +11,10 @@ namespace nw4r
 {
     namespace g3d
     {
-        void * ResMdl::GetResByteCode(const char *pName) const
+        u8 * ResMdl::GetResByteCode(const char *pName) const
         {
             ResMdlData& ref = mMdl.ref();
-            return mMdl.ofs_to_obj<ResDic>(ref.mByteCodeDictOfs)[pName];
+            return static_cast<u8 *>(mMdl.ofs_to_obj<ResDic>(ref.mByteCodeDictOfs)[pName]);
         }
 
         ResNode ResMdl::GetResNode(const char *pName) const

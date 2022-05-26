@@ -3,8 +3,8 @@
 #include "types_nw4r.h"
 #include <RevoSDK/MEM/mem_allocator.h>
 
-#define NW4R_G3D_TYPE_OBJ_DECL(VAL) static const G3dObj::ResNameDataT<sizeof(#VAL)> TYPE_NAME
-#define NW4R_G3D_TYPE_OBJ_DEF(VAL) const G3dObj::ResNameDataT<sizeof(#VAL)> VAL::TYPE_NAME = {sizeof(#VAL), #VAL}
+#define NW4R_G3D_TYPE_OBJ_DECL(VAL) static const nw4r::g3d::G3dObj::ResNameDataT<sizeof(#VAL)> TYPE_NAME
+#define NW4R_G3D_TYPE_OBJ_DEF(VAL) const nw4r::g3d::G3dObj::ResNameDataT<sizeof(#VAL)> VAL::TYPE_NAME = {sizeof(#VAL), #VAL}
 
 namespace nw4r
 {
@@ -122,6 +122,13 @@ namespace nw4r
 
             static inline void * operator new(size_t size, void *pBlock) { return pBlock; }
             static inline void operator delete(void *pBlock) {}
+
+            template <typename T>
+            static T * DynamicCast(G3dObj *obj)
+            {
+                return (obj != NULL && obj->IsDerivedFrom(T::GetTypeObjStatic()))
+                    ? static_cast<T *>(obj) : NULL;
+            }
 
         private:
             G3dObj *mParent; // at 0x4

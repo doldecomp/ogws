@@ -75,6 +75,11 @@ namespace nw4r
                 BOUNDING_MAX
             };
 
+            enum ScnObjOption
+            {
+                OPTION_VISIBLE = (1 << 0)
+            };
+
             typedef ForEachResult (* ForEachAction)(ScnObj *, void *);
 
         public:

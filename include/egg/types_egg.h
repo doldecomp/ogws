@@ -17,9 +17,11 @@ namespace EGG
     struct Fog;
     struct FogManager;
     struct G3DUtility;
+    struct g3dScnRfl;
     struct GXUtility;
     struct IDrawGX;
     struct IScnProc;
+    struct IScnProcModel;
     struct LightManager;
     struct LightTextureManager;
     struct ModelBoundingInfo;

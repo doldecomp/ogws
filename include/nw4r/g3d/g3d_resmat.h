@@ -8,6 +8,18 @@ namespace nw4r
 {
     namespace g3d
     {
+        struct ResTexSrtData
+        {
+        };
+        
+        struct ResTexSrt
+        {
+            ResCommon<ResTexSrtData> mTexSrt; // at 0x0
+            
+            inline ResTexSrt(void * vptr) : mTexSrt(vptr) {}
+            bool IsValid() const { return mTexSrt.IsValid(); }
+        };     
+
         struct ResTexPlttInfoData
         {
             u32 mNumOffsets; // at 0x0
@@ -28,7 +40,8 @@ namespace nw4r
 
         struct ResMatData
         {
-            // . . .
+            char UNK_0x0[0x1A4];
+            ResTexSrt mResTexSrt;
         };
 
         struct ResMat
@@ -36,6 +49,10 @@ namespace nw4r
             ResCommon<ResMatData> mMat;
 
             inline ResMat(void * vptr) : mMat(vptr) {}
+            bool IsValid() const { return mMat.IsValid(); }
+
+            ResTexSrt GetResTexSrt() { return mMat.ref().mResTexSrt; }
+
             bool Bind(ResFile);
             UNKTYPE Release();
             UNKTYPE Init();

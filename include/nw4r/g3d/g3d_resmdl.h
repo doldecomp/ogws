@@ -38,7 +38,7 @@ namespace nw4r
 			
 			inline ResMdl(void * vptr) : mMdl(vptr) {}
 			
-			void * GetResByteCode(const char *) const;
+			u8 * GetResByteCode(const char *) const;
 
 			ResNode GetResNode(const char *) const;
 			ResNode GetResNode(ResName) const;

@@ -44,6 +44,7 @@ namespace nw4r
 	{
 		struct VEC2;
 		struct VEC3;
+		struct MTX33;
 		struct MTX34;
 		struct AABB;
 		struct FRUSTUM;
@@ -90,14 +91,20 @@ namespace nw4r
 	
 	namespace g3d
 	{
+		struct AnmObj;
+		struct AnmObjChr;
+		struct FuncObjCalcWorld;
 		struct AnmScn;
 		struct AnmScnRes;
 		struct CameraAnmResult;
+		struct Draw1Mat1ShpSwap;
+		struct DrawResMdlReplacement;
 		struct FogAnmResult;
 		struct ResFile;
 		struct ResMdl;
 		struct ResPltt;
 		struct ResTex;
+		struct ResTexSrt;
 		struct ResMat;
 		struct ResTexPlttInfo;
 		struct ResShp;
@@ -134,8 +141,15 @@ namespace nw4r
 		struct ScnLeaf;
 		struct ScnObj;
 		struct ScnGroup;
+		struct ScnMdlSimple;
+		struct ScnMdl;
 		struct IScnObjGather;
 		struct IScnObjCallback;
+
+		namespace G3DState
+		{
+			struct IndMtxOp;
+		}
 	}
 
 	namespace lyt
