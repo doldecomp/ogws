@@ -16,9 +16,10 @@ namespace EGG
         static void initialize(u32, Heap *);
         static bool setManualMapMode(nw4r::g3d::ResTexSrt, u32);
         static void texCamMtxFunc(nw4r::math::MTX34 *, s8, s8);
-        // static bool light_func_8008F59C(nw4r::g3d::LightSetting *, u32, nw4r::g3d::ResAnmScn);
-        // static int node_func_8008F748(nw4r::g3d::ResMdl, const char *, u16 *, u32);
-        // static void mat_func_8008F818(nw4r::g3d::ResMdl, const char *, u16 *, u32);
+        static bool light_func_8008F59C(nw4r::g3d::LightSetting *, nw4r::g3d::ResAnmScn, u32);
+        static int searchStringResNode(nw4r::g3d::ResMdl, const char *, u16 *, u32);
+        static void searchStringResMat(nw4r::g3d::ResMdl, const char *, u16 *, u32);
+        static void searchStringResTexPlttInfo(nw4r::g3d::ResMdl, const char *, u16 *, u32);
         static int replaceTexture(nw4r::g3d::ResMat, nw4r::g3d::ScnMdl::CopiedMatAccess *,
             const char *, const int&, bool, u16);
 
