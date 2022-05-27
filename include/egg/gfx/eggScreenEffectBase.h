@@ -12,7 +12,8 @@ namespace EGG
     public:
         enum ScreenEffectFlags
         {
-            EFFECT_VISIBLE = 0x1
+            EFFECT_VISIBLE = (1 << 0),
+            EFFECT_0x2 = (1 << 1)
         };
 
         enum BufferType
@@ -45,6 +46,7 @@ namespace EGG
         const Screen& GetScreen() const { return mScreen; }
 
         bool isVisible() const { return mFlags & EFFECT_VISIBLE; }
+        bool isFlag0x2() const { return mFlags & EFFECT_0x2; }
 
         static void clearEffectBuffer(BufferType type)
         {

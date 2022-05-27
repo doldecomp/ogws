@@ -15,7 +15,16 @@ namespace EGG
         virtual ~DrawPathLightMap(); // at 0x8
 
     private:
-        char UNK_0x7C[0x90 - 0x7C];
+        u8 BYTE_0x7A;
+        u8 BYTE_0x7B;
+        u8 BYTE_0x7C;
+        u8 BYTE_0x7D;
+        int WORD_0x80;
+        TextureBuffer *BUF_0x84;
+        TextureBuffer *BUF_0x88;
+        TextureBuffer *BUF_0x8C;
+
+        static const int NUM_SCNPROC = 4;
     };
 }
 

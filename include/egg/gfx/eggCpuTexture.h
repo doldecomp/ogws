@@ -76,6 +76,10 @@ namespace EGG
         bool isConfigured() const { return mFlags & CONFIGURED; }
         bool checkHasHeader() const { return mFlags & HAS_HEADER; }
 
+        void setFlag(u8 flag) { mFlags |= flag; }
+        void clearFlag(u8 flag) { mFlags &= ~flag; }
+        bool testFlag(u8 flag) { return mFlags & flag; }
+
         u16 getWidth() const { return mWidth; }
         void setWidth(u16 w) { mWidth = w; }
 

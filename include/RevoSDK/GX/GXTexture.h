@@ -35,6 +35,19 @@ typedef enum _GXTexFmt
 	GX_TEX_FMT_8,
 	GX_TEX_FMT_9,
 	GX_TEX_FMT_10,
+
+	GX_TEX_FMT_11,
+	GX_TEX_FMT_12,
+	GX_TEX_FMT_13,
+	GX_TEX_FMT_14,
+	GX_TEX_FMT_15,
+	GX_TEX_FMT_16,
+	GX_TEX_FMT_17,
+	GX_TEX_FMT_18,
+	GX_TEX_FMT_19,
+	GX_TEX_FMT_20,
+	GX_TEX_FMT_21,
+	GX_TEX_FMT_22
 } GXTexFmt;
 
 typedef enum _GXTlutFmt
