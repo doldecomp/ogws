@@ -202,7 +202,7 @@ namespace EGG
             Screen::EfbData *efb = mpScreen->GetDataEfb();
             LightTextureManager *mgr = mpLightManager->GetLightTextureManager();
 
-            mgr->Draw(mpLightManager, efb,
+            mgr->draw(mpLightManager, efb,
                 efb->FLOAT_0x0, efb->FLOAT_0x4, efb->FLOAT_0x8, efb->FLOAT_0xC);
         }
 

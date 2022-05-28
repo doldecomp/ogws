@@ -13,6 +13,18 @@ namespace EGG
 {
     struct TextureReplaceResult
     {
+        struct Data
+        {
+            union
+            {
+                void *p;
+                u32 l;
+                u16 s[2];
+                u8 b[4];
+            };
+        };
+
+        Data data[256];
     };
 
     class ModelEx
@@ -62,7 +74,7 @@ namespace EGG
         void calcWorld(nw4r::math::MTX34 *) const;
         void calcView(const nw4r::math::MTX34 *, nw4r::math::MTX34 *) const;
         void drawShapeDirectly(u32, bool, bool, const nw4r::math::MTX34 *);
-        int replaceTexture(const char *, const int&, bool,
+        u16 replaceTexture(const char *, const int&, bool,
             TextureReplaceResult *, u16, bool);
         void attachBoundingInfo(ModelBoundingInfo *);
         nw4r::g3d::ResShp getResShp(u16) const;

@@ -276,7 +276,7 @@ namespace EGG
 
     // https://decomp.me/scratch/0xxAL
     #ifdef __DECOMP_NON_MATCHING
-    int ModelEx::replaceTexture(const char *name, const int& r5, bool r6,
+    u16 ModelEx::replaceTexture(const char *name, const int& r5, bool r6,
         TextureReplaceResult *result, u16 r8, bool matAccess)
     {
     }

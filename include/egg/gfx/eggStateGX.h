@@ -40,8 +40,11 @@ namespace EGG
 
     public:
         static GXPixelFmt getDefaultPixelFormat() { return s_pixFormat; }
+        static UNKWORD getDefaultPixelFormatArg2() { return sDefaultPixelFormatArg2; }
         static const GXColor& getDefaultTexColor() { return sDefaultTexColor; }
         static const CachedState& getCache() { return sCache; }
+        static u16 getEfbWidth() { return s_widthFb; } 
+        static u16 getEfbHeight() { return s_heightEfb; } 
 
         static void initialize();
         static void frameInit();

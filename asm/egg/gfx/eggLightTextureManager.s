@@ -56,8 +56,8 @@ lbl_80397B08:
     .long 0
 
 .section .text, "ax"
-.global func_80092D84
-func_80092D84:
+.global __ct__Q23EGG19LightTextureManagerFPQ23EGG12LightManager
+__ct__Q23EGG19LightTextureManagerFPQ23EGG12LightManager:
 /* 80092D84 0008DC84  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80092D88 0008DC88  7C 08 02 A6 */	mflr r0
 /* 80092D8C 0008DC8C  3C E0 80 39 */	lis r7, lbl_80397B08@ha
@@ -167,8 +167,8 @@ lbl_80092F00:
 /* 80092F1C 0008DE1C  38 21 00 10 */	addi r1, r1, 0x10
 /* 80092F20 0008DE20  4E 80 00 20 */	blr 
 
-.global func_80092F24
-func_80092F24:
+.global createTexture__Q23EGG19LightTextureManagerFPCc
+createTexture__Q23EGG19LightTextureManagerFPCc:
 /* 80092F24 0008DE24  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 80092F28 0008DE28  7C 08 02 A6 */	mflr r0
 /* 80092F2C 0008DE2C  90 01 00 24 */	stw r0, 0x24(r1)
@@ -237,8 +237,8 @@ lbl_80093004:
 /* 80093010 0008DF10  38 21 00 20 */	addi r1, r1, 0x20
 /* 80093014 0008DF14  4E 80 00 20 */	blr 
 
-.global func_80093018
-func_80093018:
+.global replaceModelTexture__Q23EGG19LightTextureManagerCFiPQ23EGG7ModelEx
+replaceModelTexture__Q23EGG19LightTextureManagerCFiPQ23EGG7ModelEx:
 /* 80093018 0008DF18  94 21 FB A0 */	stwu r1, -0x460(r1)
 /* 8009301C 0008DF1C  7C 08 02 A6 */	mflr r0
 /* 80093020 0008DF20  2C 05 00 00 */	cmpwi r5, 0
@@ -375,8 +375,8 @@ lbl_800931F0:
 /* 80093208 0008E108  38 21 04 60 */	addi r1, r1, 0x460
 /* 8009320C 0008E10C  4E 80 00 20 */	blr 
 
-.global func_80093210
-func_80093210:
+.global getTextureIndex__Q23EGG19LightTextureManagerCFPCc
+getTextureIndex__Q23EGG19LightTextureManagerCFPCc:
 /* 80093210 0008E110  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 80093214 0008E114  7C 08 02 A6 */	mflr r0
 /* 80093218 0008E118  90 01 00 24 */	stw r0, 0x24(r1)
@@ -411,8 +411,8 @@ lbl_80093270:
 /* 8009327C 0008E17C  38 21 00 20 */	addi r1, r1, 0x20
 /* 80093280 0008E180  4E 80 00 20 */	blr 
 
-.global func_80093284
-func_80093284:
+.global correctLightObject__Q23EGG19LightTextureManagerFv
+correctLightObject__Q23EGG19LightTextureManagerFv:
 /* 80093284 0008E184  94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 80093288 0008E188  7C 08 02 A6 */	mflr r0
 /* 8009328C 0008E18C  90 01 00 34 */	stw r0, 0x34(r1)
@@ -486,14 +486,14 @@ lbl_80093364:
 /* 8009337C 0008E27C  38 21 00 30 */	addi r1, r1, 0x30
 /* 80093380 0008E280  4E 80 00 20 */	blr 
 
-.global func_80093384
-func_80093384:
+.global frameReset__Q23EGG19LightTextureManagerFv
+frameReset__Q23EGG19LightTextureManagerFv:
 /* 80093384 0008E284  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80093388 0008E288  7C 08 02 A6 */	mflr r0
 /* 8009338C 0008E28C  90 01 00 14 */	stw r0, 0x14(r1)
 /* 80093390 0008E290  93 E1 00 0C */	stw r31, 0xc(r1)
 /* 80093394 0008E294  7C 7F 1B 78 */	mr r31, r3
-/* 80093398 0008E298  4B FF FE ED */	bl func_80093284
+/* 80093398 0008E298  4B FF FE ED */	bl correctLightObject__Q23EGG19LightTextureManagerFv
 /* 8009339C 0008E29C  88 7F 00 04 */	lbz r3, 4(r31)
 /* 800933A0 0008E2A0  38 00 00 00 */	li r0, 0
 /* 800933A4 0008E2A4  90 1F 00 10 */	stw r0, 0x10(r31)
@@ -505,8 +505,8 @@ func_80093384:
 /* 800933BC 0008E2BC  38 21 00 10 */	addi r1, r1, 0x10
 /* 800933C0 0008E2C0  4E 80 00 20 */	blr 
 
-.global Draw__Q23EGG19LightTextureManagerFPQ23EGG12LightManagerPQ33EGG6Screen7EfbDataffff
-Draw__Q23EGG19LightTextureManagerFPQ23EGG12LightManagerPQ33EGG6Screen7EfbDataffff:
+.global draw__Q23EGG19LightTextureManagerFPQ23EGG12LightManagerPQ33EGG6Screen7EfbDataffff
+draw__Q23EGG19LightTextureManagerFPQ23EGG12LightManagerPQ33EGG6Screen7EfbDataffff:
 /* 800933C4 0008E2C4  94 21 FE D0 */	stwu r1, -0x130(r1)
 /* 800933C8 0008E2C8  7C 08 02 A6 */	mflr r0
 /* 800933CC 0008E2CC  90 01 01 34 */	stw r0, 0x134(r1)
@@ -873,10 +873,16 @@ lbl_800938F8:
 /* 80093924 0008E824  7C 08 03 A6 */	mtlr r0
 /* 80093928 0008E828  38 21 01 30 */	addi r1, r1, 0x130
 /* 8009392C 0008E82C  4E 80 00 20 */	blr 
+
+.global GetBinaryType__Q23EGG19LightTextureManagerCFv
+GetBinaryType__Q23EGG19LightTextureManagerCFv:
 /* 80093930 0008E830  3C 60 80 38 */	lis r3, lbl_80379820@ha
 /* 80093934 0008E834  38 63 98 20 */	addi r3, r3, lbl_80379820@l
 /* 80093938 0008E838  38 63 00 AB */	addi r3, r3, 0xab
 /* 8009393C 0008E83C  4E 80 00 20 */	blr 
+
+.global SetBinaryInner__Q23EGG19LightTextureManagerFRCQ33EGG36IBinary$$0Q23EGG19LightTextureManager$$13Bin
+SetBinaryInner__Q23EGG19LightTextureManagerFRCQ33EGG36IBinary$$0Q23EGG19LightTextureManager$$13Bin:
 /* 80093940 0008E840  94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 80093944 0008E844  7C 08 02 A6 */	mflr r0
 /* 80093948 0008E848  90 01 00 34 */	stw r0, 0x34(r1)
@@ -908,7 +914,7 @@ lbl_80093984:
 /* 800939A4 0008E8A4  7F 64 DB 78 */	mr r4, r27
 /* 800939A8 0008E8A8  7C 7C 00 2E */	lwzx r3, r28, r0
 /* 800939AC 0008E8AC  38 63 00 2C */	addi r3, r3, 0x2c
-/* 800939B0 0008E8B0  48 00 00 D1 */	bl func_80093A80
+/* 800939B0 0008E8B0  48 00 00 D1 */	bl SetBinary__Q23EGG29IBinary$$0Q23EGG12LightTexture$$1FPCv
 /* 800939B4 0008E8B4  48 00 00 14 */	b lbl_800939C8
 lbl_800939B8:
 /* 800939B8 0008E8B8  3B DE 00 04 */	addi r30, r30, 4
@@ -930,6 +936,9 @@ lbl_800939E0:
 /* 800939E8 0008E8E8  7C 08 03 A6 */	mtlr r0
 /* 800939EC 0008E8EC  38 21 00 30 */	addi r1, r1, 0x30
 /* 800939F0 0008E8F0  4E 80 00 20 */	blr 
+
+.global GetBinaryInner__Q23EGG19LightTextureManagerCFPQ33EGG36IBinary$$0Q23EGG19LightTextureManager$$13Bin
+GetBinaryInner__Q23EGG19LightTextureManagerCFPQ33EGG36IBinary$$0Q23EGG19LightTextureManager$$13Bin:
 /* 800939F4 0008E8F4  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 800939F8 0008E8F8  7C 08 02 A6 */	mflr r0
 /* 800939FC 0008E8FC  90 01 00 24 */	stw r0, 0x24(r1)
@@ -947,7 +956,7 @@ lbl_80093A24:
 /* 80093A28 0008E928  7F C4 F3 78 */	mr r4, r30
 /* 80093A2C 0008E92C  7C 63 F8 2E */	lwzx r3, r3, r31
 /* 80093A30 0008E930  38 63 00 2C */	addi r3, r3, 0x2c
-/* 80093A34 0008E934  48 00 01 79 */	bl func_80093BAC
+/* 80093A34 0008E934  48 00 01 79 */	bl GetBinary__Q23EGG29IBinary$$0Q23EGG12LightTexture$$1CFPv
 /* 80093A38 0008E938  80 7C 00 04 */	lwz r3, 4(r28)
 /* 80093A3C 0008E93C  3B FF 00 04 */	addi r31, r31, 4
 /* 80093A40 0008E940  80 1E 00 04 */	lwz r0, 4(r30)
@@ -965,11 +974,14 @@ lbl_80093A58:
 /* 80093A6C 0008E96C  7C 08 03 A6 */	mtlr r0
 /* 80093A70 0008E970  38 21 00 20 */	addi r1, r1, 0x20
 /* 80093A74 0008E974  4E 80 00 20 */	blr 
+
+.global GetVersion__Q23EGG19LightTextureManagerCFv
+GetVersion__Q23EGG19LightTextureManagerCFv:
 /* 80093A78 0008E978  38 60 00 00 */	li r3, 0
 /* 80093A7C 0008E97C  4E 80 00 20 */	blr 
 
-.global func_80093A80
-func_80093A80:
+.global SetBinary__Q23EGG29IBinary$$0Q23EGG12LightTexture$$1FPCv
+SetBinary__Q23EGG29IBinary$$0Q23EGG12LightTexture$$1FPCv:
 /* 80093A80 0008E980  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80093A84 0008E984  7C 08 02 A6 */	mflr r0
 /* 80093A88 0008E988  2C 04 00 00 */	cmpwi r4, 0
@@ -1049,8 +1061,8 @@ lbl_80093B7C:
 /* 80093BA4 0008EAA4  38 21 00 10 */	addi r1, r1, 0x10
 /* 80093BA8 0008EAA8  4E 80 00 20 */	blr 
 
-.global func_80093BAC
-func_80093BAC:
+.global GetBinary__Q23EGG29IBinary$$0Q23EGG12LightTexture$$1CFPv
+GetBinary__Q23EGG29IBinary$$0Q23EGG12LightTexture$$1CFPv:
 /* 80093BAC 0008EAAC  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 80093BB0 0008EAB0  7C 08 02 A6 */	mflr r0
 /* 80093BB4 0008EAB4  2C 04 00 00 */	cmpwi r4, 0
@@ -1111,5 +1123,7 @@ lbl_80093C2C:
 /* 80093C88 0008EB88  38 21 00 20 */	addi r1, r1, 0x20
 /* 80093C8C 0008EB8C  4E 80 00 20 */	blr 
 
+.global GetBinarySize__Q23EGG36IBinary$$0Q23EGG19LightTextureManager$$1CFv
+GetBinarySize__Q23EGG36IBinary$$0Q23EGG19LightTextureManager$$1CFv:
 /* 80093C90 0008EB90  38 60 00 20 */	li r3, 0x20
 /* 80093C94 0008EB94  4E 80 00 20 */	blr 

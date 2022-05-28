@@ -11,7 +11,11 @@ namespace EGG
     public:
         struct Bin
         {
-            char magic[4];
+            char magic[4]; // at 0x0
+            u32 size; // at 0x4
+            u8 UNK_0x5[0x8 - 0x5];
+            u8 version; // at 0x8
+            u8 UNK_0x09[0x10 - 0x9];
         };
 
         virtual void SetBinaryInner(const Bin&) = 0; // at 0x8
@@ -20,17 +24,35 @@ namespace EGG
         virtual u32 GetBinarySize() const { return sizeof(T::Bin); }; // at 0x14
         virtual u8 GetVersion() const = 0; // at 0x18
 
-        void Mount(const Bin *bin)
+        void SetBinary(const void *bin)
         {
             #line 93
             EGG_ASSERT(bin);
-            EGG_ASSERT_MSG(GetBinaryType()[0] == bin->magic[0]
-                && GetBinaryType()[1] == bin->magic[1]
-                && GetBinaryType()[2] == bin->magic[2]
-                && GetBinaryType()[3] == bin->magic[3],
+            Bin *binary = (Bin *)bin;
+
+            EGG_ASSERT_MSG(GetBinaryType()[0] == binary->magic[0]
+                && GetBinaryType()[1] == binary->magic[1]
+                && GetBinaryType()[2] == binary->magic[2]
+                && GetBinaryType()[3] == binary->magic[3],
                 "Not for this class.");
 
             SetBinaryInner(*bin);
+        }
+
+        void GetBinary(void *bin) const
+        {
+            #line 105
+            EGG_ASSERT(bin);
+            Bin *binary = (Bin *)bin;
+
+            binary->version = GetVersion();
+            binary->size = GetBinarySize();
+            for (int i = 0; i < sizeof(Bin::magic); i++)
+            {
+                binary->magic[i] = GetBinaryType()[i];
+            }
+
+            GetBinaryInner(binary);
         }
 
         static void SetBinaryExtension(const char *ext) { sExtension = ext; }

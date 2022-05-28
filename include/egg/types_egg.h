@@ -22,7 +22,9 @@ namespace EGG
     struct IDrawGX;
     struct IScnProc;
     struct IScnProcModel;
+    struct LightObj;
     struct LightManager;
+    struct LightTexture;
     struct LightTextureManager;
     struct ModelBoundingInfo;
     struct ModelEx;
