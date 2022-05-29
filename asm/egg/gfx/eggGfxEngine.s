@@ -35,10 +35,8 @@ __vt__Q23EGG9GfxEngine:
     .long 0
 
 .section .text, "ax"
-# GfxEngine::initialize() ???
-# (Unofficial symbol)
-.global func_8008FCEC
-func_8008FCEC:
+.global initialize__Q23EGG9GfxEngineFUsUsPQ23EGG4Heap
+initialize__Q23EGG9GfxEngineFUsUsPQ23EGG4Heap:
 /* 8008FCEC 0008ABEC  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8008FCF0 0008ABF0  7C 08 02 A6 */	mflr r0
 /* 8008FCF4 0008ABF4  90 01 00 24 */	stw r0, 0x24(r1)
@@ -92,16 +90,16 @@ lbl_8008FD80:
 /* 8008FDA4 0008ACA4  B0 01 00 0E */	sth r0, 0xe(r1)
 /* 8008FDA8 0008ACA8  B3 C1 00 08 */	sth r30, 8(r1)
 /* 8008FDAC 0008ACAC  B3 C1 00 0A */	sth r30, 0xa(r1)
-/* 8008FDB0 0008ACB0  48 00 98 1D */	bl func_800995CC
-/* 8008FDB4 0008ACB4  48 00 AE B1 */	bl func_8009AC64
+/* 8008FDB0 0008ACB0  48 00 98 1D */	bl Initialize__Q23EGG6ScreenFPCUsPCUsPQ23EGG6Screen
+/* 8008FDB4 0008ACB4  48 00 AE B1 */	bl SetTVModeDefault__Q23EGG6ScreenFv
 /* 8008FDB8 0008ACB8  7F E4 FB 78 */	mr r4, r31
 /* 8008FDBC 0008ACBC  38 60 60 00 */	li r3, 0x6000
-/* 8008FDC0 0008ACC0  4B FF F5 75 */	bl func_8008F334
+/* 8008FDC0 0008ACC0  4B FF F5 75 */	bl initialize__Q23EGG10G3DUtilityFUlPQ23EGG4Heap
 /* 8008FDC4 0008ACC4  7F E3 FB 78 */	mr r3, r31
-/* 8008FDC8 0008ACC8  4B FF 7A 65 */	bl func_8008782C
+/* 8008FDC8 0008ACC8  4B FF 7A 65 */	bl Initialize__Q23EGG6DrawGXFPQ23EGG4Heap
 /* 8008FDCC 0008ACCC  7F E4 FB 78 */	mr r4, r31
 /* 8008FDD0 0008ACD0  38 60 00 20 */	li r3, 0x20
-/* 8008FDD4 0008ACD4  48 00 1B 4D */	bl func_80091920
+/* 8008FDD4 0008ACD4  48 00 1B 4D */	bl initialize__Q23EGG12LightTextureFUsPQ23EGG4Heap
 /* 8008FDD8 0008ACD8  7C 1D F1 D6 */	mullw r0, r29, r30
 /* 8008FDDC 0008ACDC  7F E4 FB 78 */	mr r4, r31
 /* 8008FDE0 0008ACE0  1C 60 00 0C */	mulli r3, r0, 0xc
@@ -114,8 +112,8 @@ lbl_8008FD80:
 /* 8008FDFC 0008ACFC  38 21 00 20 */	addi r1, r1, 0x20
 /* 8008FE00 0008AD00  4E 80 00 20 */	blr 
 
-.global func_8008FE04
-func_8008FE04:
+.global beginDraw__Q23EGG9GfxEngineFv
+beginDraw__Q23EGG9GfxEngineFv:
 /* 8008FE04 0008AD04  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8008FE08 0008AD08  7C 08 02 A6 */	mflr r0
 /* 8008FE0C 0008AD0C  90 01 00 14 */	stw r0, 0x14(r1)

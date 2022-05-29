@@ -432,8 +432,8 @@ lbl_800877DC:
 /* 80087824 00082724  38 21 00 D0 */	addi r1, r1, 0xd0
 /* 80087828 00082728  4E 80 00 20 */	blr 
 
-.global func_8008782C
-func_8008782C:
+.global Initialize__Q23EGG6DrawGXFPQ23EGG4Heap
+Initialize__Q23EGG6DrawGXFPQ23EGG4Heap:
 /* 8008782C 0008272C  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80087830 00082730  7C 08 02 A6 */	mflr r0
 /* 80087834 00082734  2C 03 00 00 */	cmpwi r3, 0

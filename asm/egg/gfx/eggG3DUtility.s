@@ -32,8 +32,8 @@ lbl_80379410:
     .string "p_resObj"
 
 .section .text, "ax"
-.global func_8008F334
-func_8008F334:
+.global initialize__Q23EGG10G3DUtilityFUlPQ23EGG4Heap
+initialize__Q23EGG10G3DUtilityFUlPQ23EGG4Heap:
 /* 8008F334 0008A234  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8008F338 0008A238  7C 08 02 A6 */	mflr r0
 /* 8008F33C 0008A23C  90 01 00 24 */	stw r0, 0x24(r1)

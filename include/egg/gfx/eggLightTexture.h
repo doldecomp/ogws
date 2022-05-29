@@ -15,6 +15,7 @@ namespace EGG
         };
 
     public:
+        static void initialize(u16, Heap *);
         static void initDrawSetting(u16, u16, u16, u16);
         static void getDrawSetting(u16 *, u16 *, u16 *, u16 *, u16);
 

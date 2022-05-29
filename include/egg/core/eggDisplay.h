@@ -19,6 +19,8 @@ namespace EGG
 		virtual void endFrame();
 		virtual u32 getTickPerFrame();
 
+		nw4r::ut::Color getColor() const { return mColor; }
+
 		u8 BYTE_0x8;
 		volatile char BYTE_0x9;
 		UNKWORD WORD_0xC;

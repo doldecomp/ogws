@@ -411,8 +411,8 @@ lbl_80091848:
 /* 80091918 0008C818  38 21 00 20 */	addi r1, r1, 0x20
 /* 8009191C 0008C81C  4E 80 00 20 */	blr 
 
-.global func_80091920
-func_80091920:
+.global initialize__Q23EGG12LightTextureFUsPQ23EGG4Heap
+initialize__Q23EGG12LightTextureFUsPQ23EGG4Heap:
 /* 80091920 0008C820  94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 80091924 0008C824  7C 08 02 A6 */	mflr r0
 /* 80091928 0008C828  2C 04 00 00 */	cmpwi r4, 0

@@ -116,8 +116,8 @@ lbl_8040A958:
 	.skip 0x68
 
 .section .text, "ax"
-.global func_800995CC
-func_800995CC:
+.global Initialize__Q23EGG6ScreenFPCUsPCUsPQ23EGG6Screen
+Initialize__Q23EGG6ScreenFPCUsPCUsPQ23EGG6Screen:
 /* 800995CC 000944CC  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 800995D0 000944D0  7C 08 02 A6 */	mflr r0
 /* 800995D4 000944D4  2C 03 00 00 */	cmpwi r3, 0
@@ -210,7 +210,7 @@ lbl_80099710:
 lbl_80099714:
 /* 80099714 00094614  48 00 16 89 */	bl func_8009AD9C
 /* 80099718 00094618  80 6D 98 A0 */	lwz r3, lbl_804BEC20-_SDA_BASE_(r13)
-/* 8009971C 0009461C  48 00 14 25 */	bl func_8009AB40
+/* 8009971C 0009461C  48 00 14 25 */	bl SetTVMode__Q23EGG6ScreenFQ33EGG6Screen6TVMode
 /* 80099720 00094620  80 01 00 24 */	lwz r0, 0x24(r1)
 /* 80099724 00094624  83 E1 00 1C */	lwz r31, 0x1c(r1)
 /* 80099728 00094628  83 C1 00 18 */	lwz r30, 0x18(r1)
@@ -1653,8 +1653,8 @@ func_8009AB38:
 /* 8009AB38 00095A38  80 63 00 3C */	lwz r3, 0x3c(r3)
 /* 8009AB3C 00095A3C  4E 80 00 20 */	blr 
 
-.global func_8009AB40
-func_8009AB40:
+.global SetTVMode__Q23EGG6ScreenFQ33EGG6Screen6TVMode
+SetTVMode__Q23EGG6ScreenFQ33EGG6Screen6TVMode:
 /* 8009AB40 00095A40  94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 8009AB44 00095A44  7C 08 02 A6 */	mflr r0
 /* 8009AB48 00095A48  90 01 00 34 */	stw r0, 0x34(r1)
@@ -1733,8 +1733,8 @@ lbl_8009AC48:
 /* 8009AC5C 00095B5C  38 21 00 30 */	addi r1, r1, 0x30
 /* 8009AC60 00095B60  4E 80 00 20 */	blr 
 
-.global func_8009AC64
-func_8009AC64:
+.global SetTVModeDefault__Q23EGG6ScreenFv
+SetTVModeDefault__Q23EGG6ScreenFv:
 /* 8009AC64 00095B64  94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 8009AC68 00095B68  7C 08 02 A6 */	mflr r0
 /* 8009AC6C 00095B6C  90 01 00 34 */	stw r0, 0x34(r1)

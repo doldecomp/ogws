@@ -20,7 +20,15 @@ namespace EGG
             f32 FLOAT_0x1C;
         };
 
+        enum TVMode
+        {
+        };
+
     public:
+        static void Initialize(const u16 *, const u16 *, Screen *);
+        static void SetTVModeDefault();
+        static void SetTVMode(TVMode);
+
         Screen();
         Screen(const Screen&);
 
