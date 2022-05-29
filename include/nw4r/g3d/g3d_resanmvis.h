@@ -2,6 +2,7 @@
 #define NW4R_G3D_RESANMVIS_H
 #include "g3d_resdict.h"
 #include "g3d_resanm.h"
+#include "g3d_anmobj.h"
 
 namespace nw4r
 {
@@ -10,12 +11,14 @@ namespace nw4r
 		struct ResAnmVisInfoData
 		{
 			char UNK_0x0[0x8];
-			u16 MAX_0x8;
+			u16 mNumFrames; // at 0x1C
+			u16 mNumNodes;
+			AnmPolicy mAnmPolicy; // at 0x20
 		};
 		
 		struct ResAnmVisNodeData
 		{
-			char UNK_0x0[0x4];
+			UNKWORD WORD_0x0;
 			u32 mFlags; // at 0x4
 			ResBoolAnmFramesData mBoolFrames[]; // at 0x8
 		};
@@ -39,7 +42,8 @@ namespace nw4r
 			ResCommon<ResAnmVisData> mAnmVis;
 			
 			inline ResAnmVis(void * vptr) : mAnmVis(vptr) {}
-			
+			bool IsValid() const { return mAnmVis.IsValid(); }
+
 			inline ResAnmVisData & ref() const
 			{
 				return mAnmVis.ref();
@@ -53,6 +57,21 @@ namespace nw4r
 			inline const ResAnmVisNodeData * GetNodeAnm(u32 i) const
 			{
 				return static_cast<const ResAnmVisNodeData *>(mAnmVis.ofs_to_obj<ResDic>(ref().mNodeDictOffset)[i]);
+			}
+
+			AnmPolicy GetAnmPolicy() const
+			{
+				return ref().mInfo.mAnmPolicy;
+			}
+
+			int GetNumFrame() const
+			{
+				return ref().mInfo.mNumFrames;
+			}
+
+			int GetNumNode() const
+			{
+				return ref().mInfo.mNumNodes;
 			}
 			
 			bool GetAnmResult(u32, float) const;

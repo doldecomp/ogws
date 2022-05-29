@@ -37,6 +37,7 @@ namespace nw4r
 			ResCommon<ResMdlData> mMdl;
 			
 			inline ResMdl(void * vptr) : mMdl(vptr) {}
+			bool IsValid() const { return mMdl.IsValid(); }
 			
 			u8 * GetResByteCode(const char *) const;
 

@@ -10,7 +10,7 @@ namespace nw4r
 		struct ResAnmClrInfoData
 		{
 			char UNK_0x0[0x8];
-			u16 MAX_0x8;
+			u16 mNumFrames;
 		};
 		
 		struct ResAnmClrMatData
