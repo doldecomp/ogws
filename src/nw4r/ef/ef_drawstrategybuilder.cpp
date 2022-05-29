@@ -1,3 +1,5 @@
+#pragma ipa file
+
 #include "ef_drawstrategybuilder.h"
 #include "ef_drawstrategy.h"
 #include "ef_drawsmoothstripestrategy.h"
@@ -22,7 +24,6 @@ namespace nw4r
 			static DrawStripeStrategy stripeStrategy;
 			static DrawSmoothStripeStrategy smoothStripeStrategy;
 			
-			
 			switch (strategyType)
 			{
 				case DrawStratType_Billboard:
@@ -42,14 +43,6 @@ namespace nw4r
 			}
 			
 			return &billboardStrategy;
-		}
-		
-		inline DrawBillboardStrategy::~DrawBillboardStrategy() {}
-		inline DrawDirectionalStrategy::~DrawDirectionalStrategy() {}
-		inline DrawFreeStrategy::~DrawFreeStrategy() {}
-		inline DrawLineStrategy::~DrawLineStrategy() {}
-		inline DrawPointStrategy::~DrawPointStrategy() {}
-		inline DrawStripeStrategy::~DrawStripeStrategy() {}
-		inline DrawSmoothStripeStrategy::~DrawSmoothStripeStrategy() {}
+		}		
 	}
 }

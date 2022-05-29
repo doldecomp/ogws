@@ -1694,16 +1694,16 @@ InitGraphics__Q34nw4r2ef21DrawBillboardStrategyFRCQ34nw4r2ef8DrawInfoPQ34nw4r2ef
 /* 80024BA8 0001FAA8  80 C5 00 24 */	lwz r6, 0x24(r5)
 /* 80024BAC 0001FAAC  3B E6 00 9C */	addi r31, r6, 0x9c
 /* 80024BB0 0001FAB0  7F E4 FB 78 */	mr r4, r31
-/* 80024BB4 0001FAB4  4B FF CE 85 */	bl InitTexture__Q34nw4r2ef16DrawStrategyImplFRCQ34nw4r2ef18EmitterDrawSetting
+/* 80024BB4 0001FAB4  4B FF CE 85 */	bl _InitTexture__Q34nw4r2ef16DrawStrategyImplFRCQ34nw4r2ef18EmitterDrawSetting
 /* 80024BB8 0001FAB8  7F 83 E3 78 */	mr r3, r28
 /* 80024BBC 0001FABC  7F E4 FB 78 */	mr r4, r31
 /* 80024BC0 0001FAC0  7F A5 EB 78 */	mr r5, r29
-/* 80024BC4 0001FAC4  4B FF CE E5 */	bl InitTev__Q34nw4r2ef16DrawStrategyImplFRCQ34nw4r2ef18EmitterDrawSettingRCQ34nw4r2ef8DrawInfo
+/* 80024BC4 0001FAC4  4B FF CE E5 */	bl _InitTev__Q34nw4r2ef16DrawStrategyImplFRCQ34nw4r2ef18EmitterDrawSettingRCQ34nw4r2ef8DrawInfo
 /* 80024BC8 0001FAC8  7F 83 E3 78 */	mr r3, r28
 /* 80024BCC 0001FACC  7F C4 F3 78 */	mr r4, r30
 /* 80024BD0 0001FAD0  7F E5 FB 78 */	mr r5, r31
 /* 80024BD4 0001FAD4  7F A6 EB 78 */	mr r6, r29
-/* 80024BD8 0001FAD8  4B FF D1 B1 */	bl InitColor__Q34nw4r2ef16DrawStrategyImplFPQ34nw4r2ef15ParticleManagerRCQ34nw4r2ef18EmitterDrawSettingRCQ34nw4r2ef8DrawInfo
+/* 80024BD8 0001FAD8  4B FF D1 B1 */	bl _InitColor__Q34nw4r2ef16DrawStrategyImplFPQ34nw4r2ef15ParticleManagerRCQ34nw4r2ef18EmitterDrawSettingRCQ34nw4r2ef8DrawInfo
 /* 80024BDC 0001FADC  38 60 00 00 */	li r3, 0
 /* 80024BE0 0001FAE0  38 80 00 01 */	li r4, 1
 /* 80024BE4 0001FAE4  38 A0 00 01 */	li r5, 1

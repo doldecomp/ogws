@@ -29,6 +29,7 @@ namespace nw4r
 		struct EffectSystem;
 		struct EffectProject;
 		struct Emitter;
+		struct EmitterDrawSetting;
 		struct EmitFormBuilder;
 		struct ResEmitter;
 		struct EmitterResource;

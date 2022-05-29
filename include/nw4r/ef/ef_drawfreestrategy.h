@@ -1,21 +1,21 @@
-#ifndef NW4R_EF_DRAWFREESTRATEGY_H
-#define NW4R_EF_DRAWFREESTRATEGY_H
+#ifndef NW4R_EF_DRAW_FREE_STRATEGY_H
+#define NW4R_EF_DRAW_FREE_STRATEGY_H
 #include "types_nw4r.h"
 #include "ef_drawstrategyimpl.h"
 
 namespace nw4r
 {
-	namespace ef
-	{
-		//TODO: Implement the object accurately
-		struct DrawFreeStrategy : DrawStrategyImpl
-		{
-			DrawFreeStrategy();
-			~DrawFreeStrategy();
-			
-			UNKTYPE Draw(const DrawInfo &, ParticleManager *);
-		};
-	}
+    namespace ef
+    {
+        class DrawFreeStrategy : public DrawStrategyImpl
+        {
+        public:
+            DrawFreeStrategy();
+            virtual ~DrawFreeStrategy() {} // at 0x8
+            
+            UNKTYPE Draw(const DrawInfo &, ParticleManager *);
+        };
+    }
 }
 
 #endif

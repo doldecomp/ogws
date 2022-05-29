@@ -64,16 +64,16 @@ Draw__Q34nw4r2ef17DrawPointStrategyFRCQ34nw4r2ef8DrawInfoPQ34nw4r2ef15ParticleMa
 /* 80028118 00023018  7C BF 2B 78 */	mr r31, r5
 /* 8002811C 0002301C  3B 66 00 9C */	addi r27, r6, 0x9c
 /* 80028120 00023020  7F 64 DB 78 */	mr r4, r27
-/* 80028124 00023024  4B FF 99 15 */	bl InitTexture__Q34nw4r2ef16DrawStrategyImplFRCQ34nw4r2ef18EmitterDrawSetting
+/* 80028124 00023024  4B FF 99 15 */	bl _InitTexture__Q34nw4r2ef16DrawStrategyImplFRCQ34nw4r2ef18EmitterDrawSetting
 /* 80028128 00023028  7F A3 EB 78 */	mr r3, r29
 /* 8002812C 0002302C  7F 64 DB 78 */	mr r4, r27
 /* 80028130 00023030  7F C5 F3 78 */	mr r5, r30
-/* 80028134 00023034  4B FF 99 75 */	bl InitTev__Q34nw4r2ef16DrawStrategyImplFRCQ34nw4r2ef18EmitterDrawSettingRCQ34nw4r2ef8DrawInfo
+/* 80028134 00023034  4B FF 99 75 */	bl _InitTev__Q34nw4r2ef16DrawStrategyImplFRCQ34nw4r2ef18EmitterDrawSettingRCQ34nw4r2ef8DrawInfo
 /* 80028138 00023038  7F A3 EB 78 */	mr r3, r29
 /* 8002813C 0002303C  7F E4 FB 78 */	mr r4, r31
 /* 80028140 00023040  7F 65 DB 78 */	mr r5, r27
 /* 80028144 00023044  7F C6 F3 78 */	mr r6, r30
-/* 80028148 00023048  4B FF 9C 41 */	bl InitColor__Q34nw4r2ef16DrawStrategyImplFPQ34nw4r2ef15ParticleManagerRCQ34nw4r2ef18EmitterDrawSettingRCQ34nw4r2ef8DrawInfo
+/* 80028148 00023048  4B FF 9C 41 */	bl _InitColor__Q34nw4r2ef16DrawStrategyImplFPQ34nw4r2ef15ParticleManagerRCQ34nw4r2ef18EmitterDrawSettingRCQ34nw4r2ef8DrawInfo
 /* 8002814C 0002304C  38 60 00 00 */	li r3, 0
 /* 80028150 00023050  38 80 00 01 */	li r4, 1
 /* 80028154 00023054  38 A0 00 01 */	li r5, 1
