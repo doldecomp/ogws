@@ -145,6 +145,7 @@ namespace nw4r
 		struct ScnProc;
 		struct ScnLeaf;
 		struct ScnObj;
+		struct ScnRfl;
 		struct ScnGroup;
 		struct ScnMdlSimple;
 		struct ScnMdl;

@@ -2,7 +2,6 @@
 
 #include "eggModelEx.h"
 #include "eggModelBoundingInfo.h"
-#include "eggScnRfl.h"
 #include "eggIScnProcModel.h"
 #include "eggG3DUtility.h"
 #include "eggAnalizeDL.h"
@@ -10,6 +9,7 @@
 #include "g3d_scnmdl.h"
 #include "g3d_scnmdlsmpl.h"
 #include "g3d_scnmdl1mat1shp.h"
+#include "g3d_scnrfl.h"
 #include "g3d_calcworld.h"
 #include "g3d_calcview.h"
 #include "g3d_state.h"
@@ -40,7 +40,7 @@ namespace EGG
         {
             mType = cType_ScnMdl1Mat1Shp;
         }
-        else if (g3d::G3dObj::DynamicCast<g3dScnRfl>(mScnObj) != NULL)
+        else if (g3d::G3dObj::DynamicCast<g3d::ScnRfl>(mScnObj) != NULL)
         {
             mType = cType_ScnRfl;
         }
@@ -266,8 +266,8 @@ namespace EGG
                 if (drawXlu) getScnProcModel()->draw(false, procDrawFlag);
                 break;
             case cType_ScnRfl:
-                if (drawOpa) getScnRfl()->G3dProc(g3dScnRfl::G3DPROC_DRAW_OPA, 0, NULL);
-                if (drawXlu) getScnRfl()->G3dProc(g3dScnRfl::G3DPROC_DRAW_XLU, 0, NULL);
+                if (drawOpa) getScnRfl()->G3dProc(g3d::G3dObj::G3DPROC_DRAW_OPA, 0, NULL);
+                if (drawXlu) getScnRfl()->G3dProc(g3d::G3dObj::G3DPROC_DRAW_XLU, 0, NULL);
                 break;
         }
 

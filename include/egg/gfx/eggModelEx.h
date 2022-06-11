@@ -8,7 +8,6 @@
 #include "g3d_resmat.h"
 #include "g3d_resshp.h"
 #include "math_types.h"
-
 namespace EGG
 {
     struct TextureReplaceResult
@@ -110,10 +109,10 @@ namespace EGG
             return (IScnProcModel *)((nw4r::g3d::ScnProc *)mScnObj)->GetUserData();
         }
 
-        g3dScnRfl * getScnRfl() const
+        nw4r::g3d::ScnRfl * getScnRfl() const
         {
             return (mType == cType_ScnRfl)
-                ? (g3dScnRfl *)mScnObj : NULL;
+                ? (nw4r::g3d::ScnRfl *)mScnObj : NULL;
         }
 
         void getMtxType0(nw4r::math::MTX34 *pMtx) const
@@ -132,7 +131,6 @@ namespace EGG
             }
         }
     };
-
 }
 
 #endif
