@@ -302,11 +302,11 @@ _index_vsnprintf:
     .long 0x00000084
     .long _unwind_vsnprintf
 
-.global _index_func_800B7480
-_index_func_800B7480:
-    .long func_800B7480
+.global _index_vsprintf
+_index_vsprintf:
+    .long vsprintf
     .long 0x00000080
-    .long _unwind_func_800B7480
+    .long _unwind_vsprintf
 
 .global _index_func_800B7500
 _index_func_800B7500:
@@ -332,11 +332,11 @@ _index_func_800B7D7C:
     .long 0x00000d60
     .long _unwind_func_800B7D7C
 
-.global _index_func_800B8B6C
-_index_func_800B8B6C:
-    .long func_800B8B6C
+.global _index_sscanf
+_index_sscanf:
+    .long sscanf
     .long 0x000000c8
-    .long _unwind_func_800B8B6C
+    .long _unwind_sscanf
 
 .global _index_func_800B8FA8
 _index_func_800B8FA8:

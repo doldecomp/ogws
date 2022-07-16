@@ -264,8 +264,8 @@ _unwind_vsnprintf:
     .long 0x18080000
     .long 0x00000000
 
-.global _unwind_func_800B7480
-_unwind_func_800B7480:
+.global _unwind_vsprintf
+_unwind_vsprintf:
     .long 0x18080000
     .long 0x00000000
 
@@ -289,8 +289,8 @@ _unwind_func_800B7D7C:
     .long 0x880a0000
     .long 0x00000000
 
-.global _unwind_func_800B8B6C
-_unwind_func_800B8B6C:
+.global _unwind_sscanf
+_unwind_sscanf:
     .long 0x08080000
     .long 0x00000000
 
