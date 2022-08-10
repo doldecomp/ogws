@@ -25,7 +25,7 @@
 <!----------------------------------------------------------------------------->
 
 [Discord]: https://discord.gg/hKx3FJJgrV
-[Issues]: https://github.com/doldecomp/sms/issues
+[Issues]: https://github.com/doldecomp/ogws/issues
 
 [Build]: docs/Building.md
 
