@@ -73,7 +73,7 @@ namespace EGG
     void Frustum::SetProjectionOrthographicGX_()
     {
         math::MTX44 mtx;
-        GetOrthographicParam_(&mtx.mEntries.tbl[0][0]);
+        GetOrthographicParam_(mtx);
         StateGX::GXSetProjection_(mtx, 1);
     }
 
@@ -203,14 +203,47 @@ namespace EGG
             sGlobalOffset.mCoords.y / (0.5f * mSize.mCoords.y));
     }
 
-    #ifdef __DECOMP_NON_MATCHING
-    // https://decomp.me/scratch/50U2U
     void Frustum::GetOrthographicParam_(f32 *pT, f32 *pB, f32 *pL, f32 *pR)
     {
+        #line 387
+        EGG_ASSERT(pT);
+        EGG_ASSERT(pB);
+        EGG_ASSERT(pL);
+        EGG_ASSERT(pR);
+
+        if (mCanvasMode == CANVASMODE_0)
+        {
+            const math::VEC2 adjScale(
+                mScale.mCoords.x * sGlobalScale.mCoords.x,
+                mScale.mCoords.y * sGlobalScale.mCoords.y
+            );
+            
+            *pT = adjScale.mCoords.y * ((0.5f * mSize.mCoords.y) + (mOffset.mCoords.y + sGlobalOffset.mCoords.y));
+            *pB = adjScale.mCoords.y * ((-0.5f * mSize.mCoords.y) + (mOffset.mCoords.y + sGlobalOffset.mCoords.y));
+            *pL = adjScale.mCoords.x * ((-0.5f * mSize.mCoords.x) + (mOffset.mCoords.x + sGlobalOffset.mCoords.x));
+            *pR = adjScale.mCoords.x * ((0.5f * mSize.mCoords.x) + (mOffset.mCoords.x + sGlobalOffset.mCoords.x));
+        }
+        else if (mCanvasMode == CANVASMODE_1)
+        {
+            *pT = mOffset.mCoords.y + sGlobalOffset.mCoords.y;
+            const f32 new_var = mOffset.mCoords.y + sGlobalOffset.mCoords.y;
+            *pB = new_var + -1.0f * mSize.mCoords.y * mScale.mCoords.y;
+            *pL = mOffset.mCoords.x + sGlobalOffset.mCoords.x;
+            *pR = mOffset.mCoords.x + sGlobalOffset.mCoords.x + mSize.mCoords.x * mScale.mCoords.x;
+            
+            *pT *= -sGlobalScale.mCoords.y;
+            *pB *= -sGlobalScale.mCoords.y;
+            *pL *= sGlobalScale.mCoords.x;
+            *pR *= sGlobalScale.mCoords.x;
+
+            const f32 x = -(sGlobalScale.mCoords.x - 1.0f) * (0.5f * mSize.mCoords.x);
+            const f32 y = -(sGlobalScale.mCoords.y - 1.0f) * (0.5f * mSize.mCoords.y);
+            *pT += y;
+            *pB += y;
+            *pL += x;
+            *pR += x;
+        }
     }
-    #else
-    #error This file has yet to be decompiled accurately. Use "eggFrustum.s" instead.
-    #endif
 
     void Frustum::CopyFromAnother(Frustum& other)
     {
