@@ -22,7 +22,8 @@ namespace nw4r
 
             u32 OFFSET_0x0;
             u32 mResourceBlock;
-            u32 OFFSET_0x8;
+            u16 mFrameSize;
+			u16 OFFSET_0xA;
             u32 OFFSET_0xC;
         };
 
@@ -30,7 +31,7 @@ namespace nw4r
         {
             inline AnimTransform() : mNode(), mResource(NULL), FLOAT_0x10(0.0f) {}
 
-            u32 GetFrameSize() const;
+            u16 GetFrameSize() const;
             bool IsLoopData() const;
 
             ut::LinkListNode mNode; // at 0x0
