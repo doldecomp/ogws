@@ -23,7 +23,7 @@ namespace nw4r
             u32 OFFSET_0x0;
             u32 mResourceBlock;
             u16 mFrameSize;
-			u16 OFFSET_0xA;
+            u16 OFFSET_0xA;
             u32 OFFSET_0xC;
         };
 
