@@ -32,9 +32,11 @@ lbl_804C0990:
 
 .section .sbss, "wa"
 .balign 0x8
+# sGlobalScale
 .global lbl_804BEC60
 lbl_804BEC60:
 	.skip 0x8
+# sGlobalOffset
 .global lbl_804BEC68
 lbl_804BEC68:
 	.skip 0x8
@@ -108,8 +110,8 @@ __ct__Q23EGG7FrustumFQ33EGG7Frustum14ProjectionTypeRCQ34nw4r4math4VEC2ffQ33EGG7F
 /* 800A085C 0009B75C  B0 03 00 34 */	sth r0, 0x34(r3)
 /* 800A0860 0009B760  4E 80 00 20 */	blr 
 
-.global __ct__Q23EGG7FrustumFRQ23EGG7Frustum
-__ct__Q23EGG7FrustumFRQ23EGG7Frustum:
+.global __ct__Q23EGG7FrustumFRCQ23EGG7Frustum
+__ct__Q23EGG7FrustumFRCQ23EGG7Frustum:
 /* 800A0864 0009B764  3C A0 80 3A */	lis r5, __vt__Q23EGG7Frustum@ha
 /* 800A0868 0009B768  38 A5 80 78 */	addi r5, r5, __vt__Q23EGG7Frustum@l
 /* 800A086C 0009B76C  90 A3 00 38 */	stw r5, 0x38(r3)
@@ -163,13 +165,13 @@ CopyToG3D__Q23EGG7FrustumCFQ34nw4r3g3d6Camera:
 /* 800A0910 0009B810  80 04 00 00 */	lwz r0, 0(r4)
 /* 800A0914 0009B814  38 81 00 0C */	addi r4, r1, 0xc
 /* 800A0918 0009B818  90 01 00 0C */	stw r0, 0xc(r1)
-/* 800A091C 0009B81C  48 00 00 F1 */	bl func_800A0A0C
+/* 800A091C 0009B81C  48 00 00 F1 */	bl CopyToG3D_Orthographic___Q23EGG7FrustumCFQ34nw4r3g3d6Camera
 /* 800A0920 0009B820  48 00 00 14 */	b lbl_800A0934
 lbl_800A0924:
 /* 800A0924 0009B824  80 04 00 00 */	lwz r0, 0(r4)
 /* 800A0928 0009B828  38 81 00 08 */	addi r4, r1, 8
 /* 800A092C 0009B82C  90 01 00 08 */	stw r0, 8(r1)
-/* 800A0930 0009B830  48 00 00 71 */	bl func_800A09A0
+/* 800A0930 0009B830  48 00 00 71 */	bl CopyToG3D_Perspective___Q23EGG7FrustumCFQ34nw4r3g3d6Camera
 lbl_800A0934:
 /* 800A0934 0009B834  80 01 00 14 */	lwz r0, 0x14(r1)
 /* 800A0938 0009B838  7C 08 03 A6 */	mtlr r0
@@ -182,7 +184,7 @@ SetProjectionPerspectiveGX___Q23EGG7FrustumCFv:
 /* 800A0948 0009B848  7C 08 02 A6 */	mflr r0
 /* 800A094C 0009B84C  90 01 00 34 */	stw r0, 0x34(r1)
 /* 800A0950 0009B850  38 81 00 08 */	addi r4, r1, 8
-/* 800A0954 0009B854  48 00 04 F5 */	bl func_800A0E48
+/* 800A0954 0009B854  48 00 04 F5 */	bl GetPerspectiveParam___Q23EGG7FrustumCFPf
 /* 800A0958 0009B858  38 61 00 08 */	addi r3, r1, 8
 /* 800A095C 0009B85C  4B FE 3D 4D */	bl GXSetProjectionv___Q23EGG7StateGXFPCf
 /* 800A0960 0009B860  80 01 00 34 */	lwz r0, 0x34(r1)
@@ -190,12 +192,13 @@ SetProjectionPerspectiveGX___Q23EGG7FrustumCFv:
 /* 800A0968 0009B868  38 21 00 30 */	addi r1, r1, 0x30
 /* 800A096C 0009B86C  4E 80 00 20 */	blr 
 
+.global SetProjectionOrthographicGX___Q23EGG7FrustumCFv
 SetProjectionOrthographicGX___Q23EGG7FrustumCFv:
 /* 800A0970 0009B870  94 21 FF B0 */	stwu r1, -0x50(r1)
 /* 800A0974 0009B874  7C 08 02 A6 */	mflr r0
 /* 800A0978 0009B878  90 01 00 54 */	stw r0, 0x54(r1)
 /* 800A097C 0009B87C  38 81 00 08 */	addi r4, r1, 8
-/* 800A0980 0009B880  48 00 01 85 */	bl func_800A0B04
+/* 800A0980 0009B880  48 00 01 85 */	bl GetOrthographicParam___Q23EGG7FrustumCFPQ34nw4r4math5MTX44
 /* 800A0984 0009B884  38 61 00 08 */	addi r3, r1, 8
 /* 800A0988 0009B888  38 80 00 01 */	li r4, 1
 /* 800A098C 0009B88C  4B FE 3B FD */	bl GXSetProjection___Q23EGG7StateGXFPA4_fi
@@ -204,8 +207,8 @@ SetProjectionOrthographicGX___Q23EGG7FrustumCFv:
 /* 800A0998 0009B898  38 21 00 50 */	addi r1, r1, 0x50
 /* 800A099C 0009B89C  4E 80 00 20 */	blr 
 
-.global func_800A09A0
-func_800A09A0:
+.global CopyToG3D_Perspective___Q23EGG7FrustumCFQ34nw4r3g3d6Camera
+CopyToG3D_Perspective___Q23EGG7FrustumCFQ34nw4r3g3d6Camera:
 /* 800A09A0 0009B8A0  94 21 FF B0 */	stwu r1, -0x50(r1)
 /* 800A09A4 0009B8A4  7C 08 02 A6 */	mflr r0
 /* 800A09A8 0009B8A8  90 01 00 54 */	stw r0, 0x54(r1)
@@ -223,7 +226,7 @@ func_800A09A0:
 /* 800A09D8 0009B8D8  4B FC C1 E5 */	bl SetPerspective__Q34nw4r3g3d6CameraFffff
 /* 800A09DC 0009B8DC  7F C3 F3 78 */	mr r3, r30
 /* 800A09E0 0009B8E0  38 81 00 08 */	addi r4, r1, 8
-/* 800A09E4 0009B8E4  48 00 00 91 */	bl func_800A0A74
+/* 800A09E4 0009B8E4  48 00 00 91 */	bl CalcMtxPerspective___Q23EGG7FrustumCFPQ34nw4r4math5MTX44
 /* 800A09E8 0009B8E8  7F E3 FB 78 */	mr r3, r31
 /* 800A09EC 0009B8EC  38 81 00 08 */	addi r4, r1, 8
 /* 800A09F0 0009B8F0  4B FC C2 45 */	bl SetProjectionMtxDirectly__Q34nw4r3g3d6CameraFPCQ34nw4r4math5MTX44
@@ -234,8 +237,8 @@ func_800A09A0:
 /* 800A0A04 0009B904  38 21 00 50 */	addi r1, r1, 0x50
 /* 800A0A08 0009B908  4E 80 00 20 */	blr 
 
-.global func_800A0A0C
-func_800A0A0C:
+.global CopyToG3D_Orthographic___Q23EGG7FrustumCFQ34nw4r3g3d6Camera
+CopyToG3D_Orthographic___Q23EGG7FrustumCFQ34nw4r3g3d6Camera:
 /* 800A0A0C 0009B90C  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 800A0A10 0009B910  7C 08 02 A6 */	mflr r0
 /* 800A0A14 0009B914  90 01 00 24 */	stw r0, 0x24(r1)
@@ -247,7 +250,7 @@ func_800A0A0C:
 /* 800A0A2C 0009B92C  38 81 00 14 */	addi r4, r1, 0x14
 /* 800A0A30 0009B930  93 C1 00 18 */	stw r30, 0x18(r1)
 /* 800A0A34 0009B934  7C 7E 1B 78 */	mr r30, r3
-/* 800A0A38 0009B938  48 00 05 29 */	bl func_800A0F60
+/* 800A0A38 0009B938  48 00 05 29 */	bl GetOrthographicParam___Q23EGG7FrustumCFPfPfPfPf
 /* 800A0A3C 0009B93C  C0 21 00 14 */	lfs f1, 0x14(r1)
 /* 800A0A40 0009B940  7F E3 FB 78 */	mr r3, r31
 /* 800A0A44 0009B944  C0 41 00 10 */	lfs f2, 0x10(r1)
@@ -263,15 +266,15 @@ func_800A0A0C:
 /* 800A0A6C 0009B96C  38 21 00 20 */	addi r1, r1, 0x20
 /* 800A0A70 0009B970  4E 80 00 20 */	blr 
 
-.global func_800A0A74
-func_800A0A74:
+.global CalcMtxPerspective___Q23EGG7FrustumCFPQ34nw4r4math5MTX44
+CalcMtxPerspective___Q23EGG7FrustumCFPQ34nw4r4math5MTX44:
 /* 800A0A74 0009B974  94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 800A0A78 0009B978  7C 08 02 A6 */	mflr r0
 /* 800A0A7C 0009B97C  90 01 00 34 */	stw r0, 0x34(r1)
 /* 800A0A80 0009B980  93 E1 00 2C */	stw r31, 0x2c(r1)
 /* 800A0A84 0009B984  7C 9F 23 78 */	mr r31, r4
 /* 800A0A88 0009B988  38 81 00 08 */	addi r4, r1, 8
-/* 800A0A8C 0009B98C  48 00 03 BD */	bl func_800A0E48
+/* 800A0A8C 0009B98C  48 00 03 BD */	bl GetPerspectiveParam___Q23EGG7FrustumCFPf
 /* 800A0A90 0009B990  C0 42 8F 5C */	lfs f2, lbl_804C097C-_SDA2_BASE_(r2)
 /* 800A0A94 0009B994  C0 02 8F 6C */	lfs f0, lbl_804C098C-_SDA2_BASE_(r2)
 /* 800A0A98 0009B998  D0 5F 00 0C */	stfs f2, 0xc(r31)
@@ -302,8 +305,8 @@ func_800A0A74:
 /* 800A0AFC 0009B9FC  38 21 00 30 */	addi r1, r1, 0x30
 /* 800A0B00 0009BA00  4E 80 00 20 */	blr 
 
-.global func_800A0B04
-func_800A0B04:
+.global GetOrthographicParam___Q23EGG7FrustumCFPQ34nw4r4math5MTX44
+GetOrthographicParam___Q23EGG7FrustumCFPQ34nw4r4math5MTX44:
 /* 800A0B04 0009BA04  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 800A0B08 0009BA08  7C 08 02 A6 */	mflr r0
 /* 800A0B0C 0009BA0C  2C 04 00 00 */	cmpwi r4, 0
@@ -325,7 +328,7 @@ lbl_800A0B40:
 /* 800A0B48 0009BA48  38 A1 00 10 */	addi r5, r1, 0x10
 /* 800A0B4C 0009BA4C  38 C1 00 0C */	addi r6, r1, 0xc
 /* 800A0B50 0009BA50  38 E1 00 08 */	addi r7, r1, 8
-/* 800A0B54 0009BA54  48 00 04 0D */	bl func_800A0F60
+/* 800A0B54 0009BA54  48 00 04 0D */	bl GetOrthographicParam___Q23EGG7FrustumCFPfPfPfPf
 /* 800A0B58 0009BA58  C0 21 00 14 */	lfs f1, 0x14(r1)
 /* 800A0B5C 0009BA5C  7F E3 FB 78 */	mr r3, r31
 /* 800A0B60 0009BA60  C0 41 00 10 */	lfs f2, 0x10(r1)
@@ -341,8 +344,8 @@ lbl_800A0B40:
 /* 800A0B88 0009BA88  38 21 00 20 */	addi r1, r1, 0x20
 /* 800A0B8C 0009BA8C  4E 80 00 20 */	blr 
 
-.global func_800A0B90
-func_800A0B90:
+.global LoadScnCamera__Q23EGG7FrustumFQ34nw4r3g3d9ResAnmScnUcfUl
+LoadScnCamera__Q23EGG7FrustumFQ34nw4r3g3d9ResAnmScnUcfUl:
 /* 800A0B90 0009BA90  94 21 FF 70 */	stwu r1, -0x90(r1)
 /* 800A0B94 0009BA94  7C 08 02 A6 */	mflr r0
 /* 800A0B98 0009BA98  90 01 00 94 */	stw r0, 0x94(r1)
@@ -531,8 +534,8 @@ lbl_800A0E28:
 /* 800A0E40 0009BD40  38 21 00 90 */	addi r1, r1, 0x90
 /* 800A0E44 0009BD44  4E 80 00 20 */	blr 
 
-.global func_800A0E48
-func_800A0E48:
+.global GetPerspectiveParam___Q23EGG7FrustumCFPf
+GetPerspectiveParam___Q23EGG7FrustumCFPf:
 /* 800A0E48 0009BD48  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 800A0E4C 0009BD4C  7C 08 02 A6 */	mflr r0
 /* 800A0E50 0009BD50  2C 04 00 00 */	cmpwi r4, 0
@@ -605,8 +608,8 @@ lbl_800A0E84:
 /* 800A0F58 0009BE58  38 21 00 10 */	addi r1, r1, 0x10
 /* 800A0F5C 0009BE5C  4E 80 00 20 */	blr 
 
-.global func_800A0F60
-func_800A0F60:
+.global GetOrthographicParam___Q23EGG7FrustumCFPfPfPfPf
+GetOrthographicParam___Q23EGG7FrustumCFPfPfPfPf:
 /* 800A0F60 0009BE60  94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 800A0F64 0009BE64  7C 08 02 A6 */	mflr r0
 /* 800A0F68 0009BE68  90 01 00 34 */	stw r0, 0x34(r1)
@@ -778,8 +781,8 @@ lbl_800A11D8:
 /* 800A11E8 0009C0E8  38 21 00 30 */	addi r1, r1, 0x30
 /* 800A11EC 0009C0EC  4E 80 00 20 */	blr 
 
-.global func_800A11F0
-func_800A11F0:
+.global CopyFromAnother__Q23EGG7FrustumFRCQ23EGG7Frustum
+CopyFromAnother__Q23EGG7FrustumFRCQ23EGG7Frustum:
 /* 800A11F0 0009C0F0  80 04 00 00 */	lwz r0, 0(r4)
 /* 800A11F4 0009C0F4  90 03 00 00 */	stw r0, 0(r3)
 /* 800A11F8 0009C0F8  80 04 00 04 */	lwz r0, 4(r4)
@@ -810,8 +813,8 @@ func_800A11F0:
 /* 800A125C 0009C15C  B0 03 00 34 */	sth r0, 0x34(r3)
 /* 800A1260 0009C160  4E 80 00 20 */	blr 
 
-.global func_800A1264
-func_800A1264:
+.global GetViewToScreen__Q23EGG7FrustumCFPQ34nw4r4math4VEC3RCQ34nw4r4math4VEC3
+GetViewToScreen__Q23EGG7FrustumCFPQ34nw4r4math4VEC3RCQ34nw4r4math4VEC3:
 /* 800A1264 0009C164  94 21 FF A0 */	stwu r1, -0x60(r1)
 /* 800A1268 0009C168  7C 08 02 A6 */	mflr r0
 /* 800A126C 0009C16C  90 01 00 64 */	stw r0, 0x64(r1)
@@ -955,8 +958,8 @@ lbl_800A1450:
 /* 800A147C 0009C37C  38 21 00 60 */	addi r1, r1, 0x60
 /* 800A1480 0009C380  4E 80 00 20 */	blr 
 
-.global func_800A1484
-func_800A1484:
+.global GetScreenToView__Q23EGG7FrustumCFPQ34nw4r4math4VEC3RCQ34nw4r4math4VEC3
+GetScreenToView__Q23EGG7FrustumCFPQ34nw4r4math4VEC3RCQ34nw4r4math4VEC3:
 /* 800A1484 0009C384  94 21 FF C0 */	stwu r1, -0x40(r1)
 /* 800A1488 0009C388  7C 08 02 A6 */	mflr r0
 /* 800A148C 0009C38C  90 01 00 44 */	stw r0, 0x44(r1)
@@ -1098,8 +1101,8 @@ lbl_800A1674:
 /* 800A1690 0009C590  38 21 00 40 */	addi r1, r1, 0x40
 /* 800A1694 0009C594  4E 80 00 20 */	blr 
 
-.global func_800A1698
-func_800A1698:
+.global GetScreenToView__Q23EGG7FrustumCFPQ34nw4r4math4VEC3RCQ34nw4r4math4VEC2
+GetScreenToView__Q23EGG7FrustumCFPQ34nw4r4math4VEC3RCQ34nw4r4math4VEC2:
 /* 800A1698 0009C598  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 800A169C 0009C59C  7C 08 02 A6 */	mflr r0
 /* 800A16A0 0009C5A0  2C 04 00 00 */	cmpwi r4, 0

@@ -227,7 +227,7 @@ getStandardRenderModeObj__Q23EGG5VideoFv:
 /* 800AA5F4 000A54F4  38 03 FF FF */	addi r0, r3, -1
 /* 800AA5F8 000A54F8  7C 00 00 34 */	cntlzw r0, r0
 /* 800AA5FC 000A54FC  54 1D D9 7E */	srwi r29, r0, 5
-/* 800AA600 000A5500  48 04 E3 69 */	bl func_800F8968
+/* 800AA600 000A5500  48 04 E3 69 */	bl SCGetAspectRatio
 /* 800AA604 000A5504  54 60 06 3E */	clrlwi r0, r3, 0x18
 /* 800AA608 000A5508  7C 00 00 34 */	cntlzw r0, r0
 /* 800AA60C 000A550C  54 1C D9 7E */	srwi r28, r0, 5

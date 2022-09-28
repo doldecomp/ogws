@@ -154,7 +154,7 @@ namespace EGG
 
     // https://decomp.me/scratch/rqOkd
     #ifdef __DECOMP_NON_MATCHING
-    void LightTextureManager::draw(LightManager *pManager, Screen::EfbData *efb, f32 x1, f32 y1, f32 x2, f32 y2)
+    void LightTextureManager::draw(LightManager *pManager, const Screen::DataEfb &efb, f32 x1, f32 y1, f32 x2, f32 y2)
     {
         u8 view = 1 << pManager->GetCurrentView();
         bool setPixelFmt = mFlags >> 5 & 1;

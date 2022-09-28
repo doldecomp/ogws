@@ -16,21 +16,21 @@ namespace EGG
         mCanvasMode(canvas),
         mSize(size),
         mFovY(45.0f),
-        mTanFovy(0.41421357f),
+        mTanFovY(0.41421357f),
         mNearZ(nearZ),
         mFarZ(farZ),
         mOffset(0.0f, 0.0f),
         mScale(1.0f, 1.0f, 1.0f),
-        mFlags(0x1)
+        mFlags(FLAG_DIRTY)
     {
     }
 
-    Frustum::Frustum(Frustum& other) :
+    Frustum::Frustum(const Frustum& other) :
         mProjType(other.mProjType),
         mCanvasMode(other.mCanvasMode),
         mSize(other.mSize),
         mFovY(other.mFovY),
-        mTanFovy(other.mTanFovy),
+        mTanFovY(other.mTanFovY),
         mNearZ(other.mNearZ),
         mFarZ(other.mFarZ),
         mOffset(other.mOffset),
@@ -39,7 +39,7 @@ namespace EGG
     {
     }
 
-    void Frustum::SetProjectionGX()
+    void Frustum::SetProjectionGX() const
     {
         if (mProjType == PROJ_ORTHO)
         {
@@ -51,7 +51,7 @@ namespace EGG
         }
     }
 
-    void Frustum::CopyToG3D(g3d::Camera cam)
+    void Frustum::CopyToG3D(g3d::Camera cam) const
     {
         if (mProjType == PROJ_ORTHO)
         {
@@ -63,21 +63,21 @@ namespace EGG
         }
     }
 
-    void Frustum::SetProjectionPerspectiveGX_()
+    void Frustum::SetProjectionPerspectiveGX_() const
     {
         f32 params[7];
         GetPerspectiveParam_(params);
         StateGX::GXSetProjectionv_(params);
     }
 
-    void Frustum::SetProjectionOrthographicGX_()
+    void Frustum::SetProjectionOrthographicGX_() const
     {
         math::MTX44 mtx;
-        GetOrthographicParam_(mtx);
+        GetOrthographicParam_(&mtx);
         StateGX::GXSetProjection_(mtx, 1);
     }
 
-    void Frustum::CopyToG3D_Perspective_(g3d::Camera cam)
+    void Frustum::CopyToG3D_Perspective_(g3d::Camera cam) const
     {
         math::MTX44 mtx;
         cam.SetPerspective(mFovY, mSize.mCoords.x / mSize.mCoords.y, mNearZ, mFarZ);
@@ -85,14 +85,14 @@ namespace EGG
         cam.SetProjectionMtxDirectly(&mtx);
     }
 
-    void Frustum::CopyToG3D_Orthographic_(g3d::Camera cam)
+    void Frustum::CopyToG3D_Orthographic_(g3d::Camera cam) const
     {
         f32 t, b, l, r;
         GetOrthographicParam_(&t, &b, &l, &r);
         cam.SetOrtho(t, b, l, r, mNearZ, mFarZ);
     }
 
-    void Frustum::CalcMtxPerspective_(math::MTX44 *out)
+    void Frustum::CalcMtxPerspective_(math::MTX44 *out) const
     {
         f32 params[7];
         GetPerspectiveParam_(params);
@@ -118,7 +118,7 @@ namespace EGG
         out->mEntries.tbl[3][2] = -1.0f;
     }
 
-    void Frustum::GetOrthographicParam_(math::MTX44 *pMtx)
+    void Frustum::GetOrthographicParam_(math::MTX44 *pMtx) const
     {
         #line 267
         EGG_ASSERT(pMtx);
@@ -145,7 +145,7 @@ namespace EGG
                 mProjType = PROJ_PERSP;
                 if ((flags & 0x1) == 0)
                 {
-                    SetFovy(result.FLOAT_0x30);
+                    SetFovY(result.FLOAT_0x30);
                 }
                 if ((flags & 0x2) == 0)
                 {
@@ -182,12 +182,12 @@ namespace EGG
         }
     }
 
-    void Frustum::GetPerspectiveParam_(f32 *p)
+    void Frustum::GetPerspectiveParam_(f32 *p) const
     {
         #line 267
         EGG_ASSERT(p != NULL);
 
-        const f32 inv = 1.0f / mTanFovy;
+        const f32 inv = 1.0f / mTanFovY;
         p[0] = 0.0f;
         p[1] = (inv / (mSize.mCoords.x / mSize.mCoords.y)) / mScale.mCoords.x;
         p[2] = mOffset.mCoords.x / (0.5f * mSize.mCoords.x);
@@ -203,7 +203,7 @@ namespace EGG
             sGlobalOffset.mCoords.y / (0.5f * mSize.mCoords.y));
     }
 
-    void Frustum::GetOrthographicParam_(f32 *pT, f32 *pB, f32 *pL, f32 *pR)
+    void Frustum::GetOrthographicParam_(f32 *pT, f32 *pB, f32 *pL, f32 *pR) const
     {
         #line 387
         EGG_ASSERT(pT);
@@ -245,14 +245,14 @@ namespace EGG
         }
     }
 
-    void Frustum::CopyFromAnother(Frustum& other)
+    void Frustum::CopyFromAnother(const Frustum& other)
     {
         *this = other;
     }
 
     #ifdef __DECOMP_NON_MATCHING
     // https://decomp.me/scratch/XO2Aa
-    void Frustum::GetViewToScreen(nw4r::math::VEC3 *pScreenPos, const nw4r::math::VEC3& viewPos)
+    void Frustum::GetViewToScreen(nw4r::math::VEC3 *pScreenPos, const nw4r::math::VEC3& viewPos) const
     {
     }
     #else
@@ -261,14 +261,14 @@ namespace EGG
 
     #ifdef __DECOMP_NON_MATCHING
     // https://decomp.me/scratch/r9gD9
-    void Frustum::GetScreenToView(nw4r::math::VEC3 *pViewPos, const nw4r::math::VEC3& screenPos)
+    void Frustum::GetScreenToView(nw4r::math::VEC3 *pViewPos, const nw4r::math::VEC3& screenPos) const
     {
     }
     #else
     #error This file has yet to be decompiled accurately. Use "eggFrustum.s" instead.
     #endif
 
-    void Frustum::GetScreenToView(math::VEC3 *pPosView, const math::VEC2& screenPos)
+    void Frustum::GetScreenToView(math::VEC3 *pPosView, const math::VEC2& screenPos) const
     {
         #line 568
         EGG_ASSERT(pPosView);
@@ -297,7 +297,7 @@ namespace EGG
 
                 pPosView->mCoords.x = adjustedPos.mCoords.x;
                 pPosView->mCoords.y = adjustedPos.mCoords.y;
-                pPosView->mCoords.z = -(mSize.mCoords.y / 2.0f) / mTanFovy;
+                pPosView->mCoords.z = -(mSize.mCoords.y / 2.0f) / mTanFovY;
                 break;
             case PROJ_ORTHO:
                 screenY = screenPos.mCoords.y;
@@ -310,6 +310,6 @@ namespace EGG
         }
     }
 
-    const math::VEC2 Frustum::sGlobalScale(1.0f, 1.0f);
-    const math::VEC2 Frustum::sGlobalOffset(0.0f, 0.0f);
+    math::VEC2 Frustum::sGlobalScale(1.0f, 1.0f);
+    math::VEC2 Frustum::sGlobalOffset(0.0f, 0.0f);
 }

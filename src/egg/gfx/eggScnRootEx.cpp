@@ -199,11 +199,11 @@ namespace EGG
         if (mpLightManager != NULL &&
             mSceneSettings & SCENE_SETTING_0x1)
         {
-            Screen::EfbData *efb = mpScreen->GetDataEfb();
+            const Screen::DataEfb& efb = mpScreen->GetDataEfb();
             LightTextureManager *mgr = mpLightManager->GetLightTextureManager();
 
             mgr->draw(mpLightManager, efb,
-                efb->FLOAT_0x0, efb->FLOAT_0x4, efb->FLOAT_0x8, efb->FLOAT_0xC);
+                efb.vp.x1, efb.vp.y1, efb.vp.x2, efb.vp.y2);
         }
 
         if (mSceneSettings & SCENE_SETTING_0x2)

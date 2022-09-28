@@ -23,7 +23,7 @@ namespace EGG
 
     void DrawPathHDR::draw(u16 idx)
     {
-        const Screen::EfbData* efb = GetScreen().GetDataEfb();
+        const Screen::DataEfb& efb = GetScreen().GetDataEfb();
 
         switch(idx)
         {

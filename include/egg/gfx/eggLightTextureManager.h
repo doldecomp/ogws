@@ -31,8 +31,7 @@ namespace EGG
         int getTextureIndex(const char *) const;
         void correctLightObject();
         void frameReset();
-        void draw(LightManager *,
-            Screen::EfbData *, f32, f32, f32, f32);
+        void draw(LightManager *, const Screen::DataEfb&, f32, f32, f32, f32);
 
         bool isEnableClearWorkSpace() const { return mFlags & CLEAR_WORKSPACE; }
 

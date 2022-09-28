@@ -36,7 +36,7 @@ namespace EGG
     #ifdef __DECOMP_NON_MATCHING
     void DrawPathLightMap::draw(u16 idx)
     {
-        const Screen::EfbData* efb = GXUtility::getScreen().GetDataEfb();
+        const Screen::DataEfb* efb = GXUtility::getScreen().GetDataEfb();
         
         switch(idx)
         {

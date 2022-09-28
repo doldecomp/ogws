@@ -174,13 +174,7 @@ namespace EGG
         Screen clone(screen);
         
         clone.SetFlag(0x80);
-
-        if (clone.GetCanvasMode() != Frustum::CANVASMODE_1)
-        {
-            clone.SetFlag(0x1);
-            clone.SetCanvasMode(Frustum::CANVASMODE_1);
-        }
-
+        clone.SetCanvasMode(Frustum::CANVASMODE_1);
         clone.SetProjectionType(Frustum::PROJ_ORTHO);
 
         clone.SetNearZ(0.0f);
