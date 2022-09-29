@@ -8,8 +8,9 @@ namespace EGG
 {
     class CpuTexture
     {
-    private:
+    protected:
         u16 mFlags; // at 0x0
+    private:
         u16 mWidth; // at 0x2
         u16 mHeight; // at 0x4
         u8 mTexFormat; // at 0x6
@@ -71,14 +72,13 @@ namespace EGG
         UNKTYPE func_80086C8C(UNKTYPE);
         void allocTexBuffer();
         void allocTexBufferAndHeader();
-        UNKTYPE func_8008737C(u16, u16, GXColor);
+        void setColor(u16, u16, GXColor);
 
         bool isConfigured() const { return mFlags & CONFIGURED; }
         bool checkHasHeader() const { return mFlags & HAS_HEADER; }
 
         void setFlag(u8 flag) { mFlags |= flag; }
         void clearFlag(u8 flag) { mFlags &= ~flag; }
-        bool testFlag(u8 flag) { return mFlags & flag; }
 
         u16 getWidth() const { return mWidth; }
         void setWidth(u16 w) { mWidth = w; }

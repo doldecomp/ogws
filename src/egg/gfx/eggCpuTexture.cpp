@@ -146,7 +146,7 @@ namespace EGG
     }
 
     #ifdef __DECOMP_NON_MATCHING
-    UNKTYPE CpuTexture::func_8008737C(u16 x, u16 y, GXColor c)
+    void CpuTexture::setColor(u16 x, u16 y, GXColor c)
     {
         #line 497
         EGG_ASSERT(x < getWidth());

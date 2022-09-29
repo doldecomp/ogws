@@ -18,14 +18,19 @@ namespace EGG
 
         void capture(u16, u16, bool, int);
 
-        void setColor(const GXColor& c) { COLOR_0x1C = c; }
         GXTexMapID getLoadMap() const { return mLoadMap; }
+        
+        void setClearColor(const GXColor& c) { mClearColor = c; }
 
     private:
-        GXTexMapID mLoadMap; // at 0x18
-        GXColor COLOR_0x1C;
-        UNKWORD WORD_0x20;
-        u8 BYTES_0x24[0x2C - 0x24];
+        mutable GXTexMapID mLoadMap; // at 0x18
+        GXColor mClearColor; // at 0x1C
+        u32 mClearZ; // at 0x20
+        u8 mCopyFilterArg1[7]; // at 0x24
+
+        static const u8 scCopyFilterArg0[24];
+        static u8 sCopyFilterArg1_0[7];
+        static u8 sCopyFilterArg1_1[7];
     };
 }
 

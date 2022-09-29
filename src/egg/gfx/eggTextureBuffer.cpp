@@ -11,7 +11,7 @@ namespace EGG
     void TextureBuffer::configure()
     {
         CapTexture::configure();
-        setColor(StateGX::getDefaultTexColor());
+        setClearColor(StateGX::getDefaultTexColor());
     }
 
     // Allow buffer to be reclaimed

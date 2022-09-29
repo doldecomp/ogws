@@ -61,8 +61,8 @@ namespace EGG
     // https://decomp.me/scratch/RYUOH
     // - Despite the setBuffer inline being used, it seems like
     //   there is a temp variable for &spBufferSet[type]
-    // - The CapTexture color application (see cBufferType_3's case)
-    //   is not yet understood (should decompile CapTexture::configure first)
+    // - The cap texture copy filter application is not yet
+    //   understood
     TextureBuffer* ScreenEffectBase::capture(BufferType type, bool clear) const
     {
         TextureBuffer* buffer;
@@ -127,6 +127,7 @@ namespace EGG
                     setBuffer(type, buffer);
                     upscale = true;
                     buffer->setFlag(0x40);
+                    // TO-DO: Copy filter args are set here, not colors
                     // buffer->setColor_24((GXColor){21, 0, 0, 22});
                     // buffer->setColor_28((GXColor){21, 0, 0, 22});
                     break;
@@ -143,7 +144,7 @@ namespace EGG
                 if (clear)
                 {
                     getBuffer(type)->setFlag(0x10);
-                    getBuffer(type)->setColor((GXColor){0, 0, 0, 0});
+                    getBuffer(type)->setClearColor((GXColor){0, 0, 0, 0});
                 }
             }
 

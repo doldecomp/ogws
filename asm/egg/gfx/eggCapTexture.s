@@ -13,7 +13,7 @@ __vt__Q23EGG10CapTexture:
 
 .section .rodata, "a"
 .balign 0x8
-# Read-only buffer of zeroes??
+# scCopyFilterArg0
 .global lbl_80378E20
 lbl_80378E20:
 	.incbin "baserom.dol", 0x374F20, 0x18
@@ -26,16 +26,18 @@ lbl_80378E38:
 
 .section .sbss2, "a"
 .balign 0x8
+# scDefaultClearColor
 .global lbl_804C69F0
 lbl_804C69F0:
-	.skip 0x1
+	.skip 0x4
 
-# TO-DO: Not 100% sure what TU lbl_804C0580 comes from
 .section .sdata2, "a"
 .balign 0x8
+# sCopyFilterArg1_0
 .global lbl_804C0580
 lbl_804C0580:
 	.incbin "baserom.dol", 0x3C91C0, 0x8
+# sCopyFilterArg1_1
 .global lbl_804C0588
 lbl_804C0588:
 	.incbin "baserom.dol", 0x3C91C8, 0x8
