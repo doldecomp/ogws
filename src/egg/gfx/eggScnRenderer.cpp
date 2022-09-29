@@ -273,7 +273,7 @@ namespace EGG
                     {
                         DrawPathBloom *bloom = (DrawPathBloom *)getDrawPathBase(DRAW_PATH_BLOOM);
                         bloom->setFlag(0x8);
-                        goto init;
+                        goto clean;
                     }
                 }
 
@@ -282,8 +282,8 @@ namespace EGG
             }
         }
 
-    init:
-        ScreenEffectBase::initialize();
+    clean:
+        ScreenEffectBase::clean();
         for (u16 i = 0; i < getNumDrawPath(); i++)
         {
             if (mppPathSet[i] != NULL)

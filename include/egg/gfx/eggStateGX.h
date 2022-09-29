@@ -38,6 +38,14 @@ namespace EGG
             bool dither; // at 0xE
         };
 
+        // For cache getter/setter regalloc.
+        // Save value into byte, then use boolean when restoring
+        union Bool8
+        {
+            u8 byte;
+            bool boolean;
+        };
+
     public:
         static GXPixelFmt getDefaultPixelFormat() { return s_pixFormat; }
         static UNKWORD getDefaultPixelFormatArg2() { return sDefaultPixelFormatArg2; }

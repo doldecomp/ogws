@@ -26,26 +26,24 @@ lbl_804C0968:
 
 .section .sdata, "wa"
 .balign 0x8
-.global lbl_804BD4F8
-lbl_804BD4F8:
+.global sWorkBuffer__Q23EGG16ScreenEffectBase
+sWorkBuffer__Q23EGG16ScreenEffectBase:
 	.long -1
 
 .section .sbss, "wa"
 .balign 0x8
-# Flags?
-.global lbl_804BEC50
-lbl_804BEC50:
+.global sCaptureFlag__Q23EGG16ScreenEffectBase
+sCaptureFlag__Q23EGG16ScreenEffectBase:
 	.skip 0x4
-# Flags?
-.global lbl_804BEC54__Q23EGG16ScreenEffectBase
-lbl_804BEC54__Q23EGG16ScreenEffectBase:
+.global sFlag__Q23EGG16ScreenEffectBase
+sFlag__Q23EGG16ScreenEffectBase:
 	.skip 0x4
-.global lbl_804BEC58
-lbl_804BEC58:
+# Not referenced outside of clean
+.global D_804BEC58__Q23EGG16ScreenEffectBase
+D_804BEC58__Q23EGG16ScreenEffectBase:
 	.skip 0x4
-# Some counter
-.global lbl_804BEC5C
-lbl_804BEC5C:
+.global sPushCount__Q23EGG16ScreenEffectBase
+sPushCount__Q23EGG16ScreenEffectBase:
 	.skip 0x4
 
 .section .rodata, "a"
@@ -76,16 +74,14 @@ lbl_8039805C:
 
 .section .bss, "wa"
 .balign 0x8
-# BufferNode[] I think?
 .global spBufferSet__Q23EGG16ScreenEffectBase
 spBufferSet__Q23EGG16ScreenEffectBase:
 	.skip 0x30
-# Some float structure
-.global lbl_8040A9F0
-lbl_8040A9F0:
+.global sWorkSpaceV__Q23EGG16ScreenEffectBase
+sWorkSpaceV__Q23EGG16ScreenEffectBase:
 	.skip 0x18
-.global lbl_8040AA08
-lbl_8040AA08:
+.global sWorkSpaceHideV__Q23EGG16ScreenEffectBase
+sWorkSpaceHideV__Q23EGG16ScreenEffectBase:
 	.skip 0x18
 
 .section .text, "ax"
@@ -110,31 +106,31 @@ __ct__Q23EGG16ScreenEffectBaseFv:
 /* 8009FCEC 0009ABEC  38 21 00 10 */	addi r1, r1, 0x10
 /* 8009FCF0 0009ABF0  4E 80 00 20 */	blr 
 
-.global CopyScreenFromAnother__Q23EGG16ScreenEffectBaseFRQ23EGG6Screen
-CopyScreenFromAnother__Q23EGG16ScreenEffectBaseFRQ23EGG6Screen:
+.global copyFromAnother__Q23EGG16ScreenEffectBaseFRCQ23EGG6Screen
+copyFromAnother__Q23EGG16ScreenEffectBaseFRCQ23EGG6Screen:
 /* 8009FCF4 0009ABF4  38 63 00 04 */	addi r3, r3, 4
 /* 8009FCF8 0009ABF8  4B FF A0 90 */	b CopyFromAnother__Q23EGG6ScreenFRCQ23EGG6Screen
 
-.global initialize__Q23EGG16ScreenEffectBaseFv
-initialize__Q23EGG16ScreenEffectBaseFv:
+.global clean__Q23EGG16ScreenEffectBaseFv
+clean__Q23EGG16ScreenEffectBaseFv:
 /* 8009FCFC 0009ABFC  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8009FD00 0009AC00  7C 08 02 A6 */	mflr r0
 /* 8009FD04 0009AC04  90 01 00 24 */	stw r0, 0x24(r1)
 /* 8009FD08 0009AC08  39 61 00 20 */	addi r11, r1, 0x20
 /* 8009FD0C 0009AC0C  48 01 20 39 */	bl _savegpr_27
-/* 8009FD10 0009AC10  80 6D 98 D4 */	lwz r3, lbl_804BEC54__Q23EGG16ScreenEffectBase-_SDA_BASE_(r13)
+/* 8009FD10 0009AC10  80 6D 98 D4 */	lwz r3, sFlag__Q23EGG16ScreenEffectBase-_SDA_BASE_(r13)
 /* 8009FD14 0009AC14  3B C0 00 00 */	li r30, 0
 /* 8009FD18 0009AC18  3F A0 80 41 */	lis r29, spBufferSet__Q23EGG16ScreenEffectBase@ha
 /* 8009FD1C 0009AC1C  38 00 FF FF */	li r0, -1
 /* 8009FD20 0009AC20  54 63 00 3A */	rlwinm r3, r3, 0, 0, 0x1d
-/* 8009FD24 0009AC24  90 0D 81 78 */	stw r0, lbl_804BD4F8-_SDA_BASE_(r13)
+/* 8009FD24 0009AC24  90 0D 81 78 */	stw r0, sWorkBuffer__Q23EGG16ScreenEffectBase-_SDA_BASE_(r13)
 /* 8009FD28 0009AC28  3B BD A9 C0 */	addi r29, r29, spBufferSet__Q23EGG16ScreenEffectBase@l
 /* 8009FD2C 0009AC2C  3B 60 00 00 */	li r27, 0
-/* 8009FD30 0009AC30  90 6D 98 D4 */	stw r3, lbl_804BEC54__Q23EGG16ScreenEffectBase-_SDA_BASE_(r13)
+/* 8009FD30 0009AC30  90 6D 98 D4 */	stw r3, sFlag__Q23EGG16ScreenEffectBase-_SDA_BASE_(r13)
 /* 8009FD34 0009AC34  3B 9D 00 00 */	addi r28, r29, 0
 /* 8009FD38 0009AC38  3F E0 80 38 */	lis r31, 0x8038
-/* 8009FD3C 0009AC3C  93 CD 98 D8 */	stw r30, lbl_804BEC58-_SDA_BASE_(r13)
-/* 8009FD40 0009AC40  93 CD 98 DC */	stw r30, lbl_804BEC5C-_SDA_BASE_(r13)
+/* 8009FD3C 0009AC3C  93 CD 98 D8 */	stw r30, D_804BEC58__Q23EGG16ScreenEffectBase-_SDA_BASE_(r13)
+/* 8009FD40 0009AC40  93 CD 98 DC */	stw r30, sPushCount__Q23EGG16ScreenEffectBase-_SDA_BASE_(r13)
 lbl_8009FD44:
 /* 8009FD44 0009AC44  80 1C 00 00 */	lwz r0, 0(r28)
 /* 8009FD48 0009AC48  2C 00 00 00 */	cmpwi r0, 0
@@ -172,8 +168,8 @@ lbl_8009FD64:
 /* 8009FDC4 0009ACC4  38 21 00 20 */	addi r1, r1, 0x20
 /* 8009FDC8 0009ACC8  4E 80 00 20 */	blr 
 
-.global g_capture_for_efb__Q23EGG16ScreenEffectBaseFQ33EGG16ScreenEffectBase10BufferTypeb
-g_capture_for_efb__Q23EGG16ScreenEffectBaseFQ33EGG16ScreenEffectBase10BufferTypeb:
+.global capture__Q23EGG16ScreenEffectBaseCFQ33EGG16ScreenEffectBase10BufferTypeb
+capture__Q23EGG16ScreenEffectBaseCFQ33EGG16ScreenEffectBase10BufferTypeb:
 /* 8009FDCC 0009ACCC  94 21 FF 90 */	stwu r1, -0x70(r1)
 /* 8009FDD0 0009ACD0  7C 08 02 A6 */	mflr r0
 /* 8009FDD4 0009ACD4  90 01 00 74 */	stw r0, 0x74(r1)
@@ -217,7 +213,7 @@ lbl_8009FE5C:
 lbl_8009FE60:
 /* 8009FE60 0009AD60  C0 03 00 08 */	lfs f0, 8(r3)
 /* 8009FE64 0009AD64  38 DE 00 30 */	addi r6, r30, 0x30
-/* 8009FE68 0009AD68  A0 0D 98 D0 */	lhz r0, lbl_804BEC50-_SDA_BASE_(r13)
+/* 8009FE68 0009AD68  A0 0D 98 D0 */	lhz r0, sCaptureFlag__Q23EGG16ScreenEffectBase-_SDA_BASE_(r13)
 /* 8009FE6C 0009AD6C  EC 40 00 72 */	fmuls f2, f0, f1
 /* 8009FE70 0009AD70  54 00 07 FF */	clrlwi. r0, r0, 0x1f
 /* 8009FE74 0009AD74  D0 46 00 08 */	stfs f2, 8(r6)
@@ -539,8 +535,8 @@ lbl_800A02E4:
 /* 800A0308 0009B208  38 21 00 70 */	addi r1, r1, 0x70
 /* 800A030C 0009B20C  4E 80 00 20 */	blr 
 
-.global freeEffectBuffer__Q23EGG16ScreenEffectBaseFQ33EGG16ScreenEffectBase10BufferType
-freeEffectBuffer__Q23EGG16ScreenEffectBaseFQ33EGG16ScreenEffectBase10BufferType:
+.global release__Q23EGG16ScreenEffectBaseCFQ33EGG16ScreenEffectBase10BufferType
+release__Q23EGG16ScreenEffectBaseCFQ33EGG16ScreenEffectBase10BufferType:
 /* 800A0310 0009B210  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 800A0314 0009B214  7C 08 02 A6 */	mflr r0
 /* 800A0318 0009B218  3C A0 80 41 */	lis r5, spBufferSet__Q23EGG16ScreenEffectBase@ha
@@ -590,8 +586,8 @@ lbl_800A03A8:
 /* 800A03BC 0009B2BC  38 21 00 20 */	addi r1, r1, 0x20
 /* 800A03C0 0009B2C0  4E 80 00 20 */	blr 
 
-.global func_800A03C4
-func_800A03C4:
+.global doCapture__Q23EGG16ScreenEffectBaseCFi
+doCapture__Q23EGG16ScreenEffectBaseCFi:
 /* 800A03C4 0009B2C4  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 800A03C8 0009B2C8  7C 08 02 A6 */	mflr r0
 /* 800A03CC 0009B2CC  2C 04 00 00 */	cmpwi r4, 0
@@ -601,7 +597,7 @@ func_800A03C4:
 /* 800A03DC 0009B2DC  93 A1 00 14 */	stw r29, 0x14(r1)
 /* 800A03E0 0009B2E0  7C 7D 1B 78 */	mr r29, r3
 /* 800A03E4 0009B2E4  40 82 00 8C */	bne lbl_800A0470
-/* 800A03E8 0009B2E8  80 0D 81 78 */	lwz r0, lbl_804BD4F8-_SDA_BASE_(r13)
+/* 800A03E8 0009B2E8  80 0D 81 78 */	lwz r0, sWorkBuffer__Q23EGG16ScreenEffectBase-_SDA_BASE_(r13)
 /* 800A03EC 0009B2EC  2C 00 00 01 */	cmpwi r0, 1
 /* 800A03F0 0009B2F0  40 82 00 64 */	bne lbl_800A0454
 /* 800A03F4 0009B2F4  3C 60 80 41 */	lis r3, spBufferSet__Q23EGG16ScreenEffectBase@ha
@@ -633,21 +629,21 @@ lbl_800A0454:
 /* 800A0454 0009B354  7F A3 EB 78 */	mr r3, r29
 /* 800A0458 0009B358  38 80 00 01 */	li r4, 1
 /* 800A045C 0009B35C  38 A0 00 00 */	li r5, 0
-/* 800A0460 0009B360  4B FF F9 6D */	bl g_capture_for_efb__Q23EGG16ScreenEffectBaseFQ33EGG16ScreenEffectBase10BufferTypeb
+/* 800A0460 0009B360  4B FF F9 6D */	bl capture__Q23EGG16ScreenEffectBaseCFQ33EGG16ScreenEffectBase10BufferTypeb
 /* 800A0464 0009B364  38 00 00 00 */	li r0, 0
-/* 800A0468 0009B368  90 0D 81 78 */	stw r0, lbl_804BD4F8-_SDA_BASE_(r13)
+/* 800A0468 0009B368  90 0D 81 78 */	stw r0, sWorkBuffer__Q23EGG16ScreenEffectBase-_SDA_BASE_(r13)
 /* 800A046C 0009B36C  48 00 00 2C */	b lbl_800A0498
 lbl_800A0470:
 /* 800A0470 0009B370  2C 04 00 01 */	cmpwi r4, 1
 /* 800A0474 0009B374  40 82 00 24 */	bne lbl_800A0498
-/* 800A0478 0009B378  80 0D 81 78 */	lwz r0, lbl_804BD4F8-_SDA_BASE_(r13)
+/* 800A0478 0009B378  80 0D 81 78 */	lwz r0, sWorkBuffer__Q23EGG16ScreenEffectBase-_SDA_BASE_(r13)
 /* 800A047C 0009B37C  2C 00 00 00 */	cmpwi r0, 0
 /* 800A0480 0009B380  41 82 00 18 */	beq lbl_800A0498
 /* 800A0484 0009B384  38 80 00 00 */	li r4, 0
 /* 800A0488 0009B388  38 A0 00 00 */	li r5, 0
-/* 800A048C 0009B38C  4B FF F9 41 */	bl g_capture_for_efb__Q23EGG16ScreenEffectBaseFQ33EGG16ScreenEffectBase10BufferTypeb
+/* 800A048C 0009B38C  4B FF F9 41 */	bl capture__Q23EGG16ScreenEffectBaseCFQ33EGG16ScreenEffectBase10BufferTypeb
 /* 800A0490 0009B390  38 00 00 01 */	li r0, 1
-/* 800A0494 0009B394  90 0D 81 78 */	stw r0, lbl_804BD4F8-_SDA_BASE_(r13)
+/* 800A0494 0009B394  90 0D 81 78 */	stw r0, sWorkBuffer__Q23EGG16ScreenEffectBase-_SDA_BASE_(r13)
 lbl_800A0498:
 /* 800A0498 0009B398  80 01 00 24 */	lwz r0, 0x24(r1)
 /* 800A049C 0009B39C  83 E1 00 1C */	lwz r31, 0x1c(r1)
@@ -657,14 +653,14 @@ lbl_800A0498:
 /* 800A04AC 0009B3AC  38 21 00 20 */	addi r1, r1, 0x20
 /* 800A04B0 0009B3B0  4E 80 00 20 */	blr 
 
-.global func_800A04B4
-func_800A04B4:
+.global setupGX__Q23EGG16ScreenEffectBaseCFb
+setupGX__Q23EGG16ScreenEffectBaseCFb:
 /* 800A04B4 0009B3B4  94 21 FF 90 */	stwu r1, -0x70(r1)
 /* 800A04B8 0009B3B8  7C 08 02 A6 */	mflr r0
 /* 800A04BC 0009B3BC  90 01 00 74 */	stw r0, 0x74(r1)
 /* 800A04C0 0009B3C0  39 61 00 70 */	addi r11, r1, 0x70
 /* 800A04C4 0009B3C4  48 01 18 69 */	bl _savegpr_21
-/* 800A04C8 0009B3C8  80 0D 81 78 */	lwz r0, lbl_804BD4F8-_SDA_BASE_(r13)
+/* 800A04C8 0009B3C8  80 0D 81 78 */	lwz r0, sWorkBuffer__Q23EGG16ScreenEffectBase-_SDA_BASE_(r13)
 /* 800A04CC 0009B3CC  7C 7C 1B 78 */	mr r28, r3
 /* 800A04D0 0009B3D0  2C 00 FF FF */	cmpwi r0, -1
 /* 800A04D4 0009B3D4  41 82 01 E4 */	beq lbl_800A06B8
@@ -700,9 +696,9 @@ lbl_800A04F8:
 /* 800A0544 0009B444  4B FE 46 89 */	bl GXSetDither___Q23EGG7StateGXFb
 /* 800A0548 0009B448  38 7C 00 04 */	addi r3, r28, 4
 /* 800A054C 0009B44C  4B FF 6A F1 */	bl setProjection__Q23EGG14PostEffectBaseFRCQ23EGG6Screen
-/* 800A0550 0009B450  3F 00 80 41 */	lis r24, lbl_8040AA08@ha
+/* 800A0550 0009B450  3F 00 80 41 */	lis r24, sWorkSpaceHideV__Q23EGG16ScreenEffectBase@ha
 /* 800A0554 0009B454  C0 A2 8F 28 */	lfs f5, lbl_804C0948-_SDA2_BASE_(r2)
-/* 800A0558 0009B458  3A F8 AA 08 */	addi r23, r24, lbl_8040AA08@l
+/* 800A0558 0009B458  3A F8 AA 08 */	addi r23, r24, sWorkSpaceHideV__Q23EGG16ScreenEffectBase@l
 /* 800A055C 0009B45C  C0 38 AA 08 */	lfs f1, -0x55f8(r24)
 /* 800A0560 0009B460  C0 57 00 04 */	lfs f2, 4(r23)
 /* 800A0564 0009B464  C0 77 00 08 */	lfs f3, 8(r23)
@@ -789,11 +785,11 @@ lbl_800A0688:
 /* 800A069C 0009B59C  90 1F 00 04 */	stw r0, 4(r31)
 /* 800A06A0 0009B5A0  90 03 00 08 */	stw r0, 8(r3)
 lbl_800A06A4:
-/* 800A06A4 0009B5A4  80 6D 98 DC */	lwz r3, lbl_804BEC5C-_SDA_BASE_(r13)
+/* 800A06A4 0009B5A4  80 6D 98 DC */	lwz r3, sPushCount__Q23EGG16ScreenEffectBase-_SDA_BASE_(r13)
 /* 800A06A8 0009B5A8  38 00 FF FF */	li r0, -1
-/* 800A06AC 0009B5AC  90 0D 81 78 */	stw r0, lbl_804BD4F8-_SDA_BASE_(r13)
+/* 800A06AC 0009B5AC  90 0D 81 78 */	stw r0, sWorkBuffer__Q23EGG16ScreenEffectBase-_SDA_BASE_(r13)
 /* 800A06B0 0009B5B0  38 03 00 01 */	addi r0, r3, 1
-/* 800A06B4 0009B5B4  90 0D 98 DC */	stw r0, lbl_804BEC5C-_SDA_BASE_(r13)
+/* 800A06B4 0009B5B4  90 0D 98 DC */	stw r0, sPushCount__Q23EGG16ScreenEffectBase-_SDA_BASE_(r13)
 lbl_800A06B8:
 /* 800A06B8 0009B5B8  39 61 00 70 */	addi r11, r1, 0x70
 /* 800A06BC 0009B5BC  48 01 16 BD */	bl _restgpr_21
@@ -802,8 +798,8 @@ lbl_800A06B8:
 /* 800A06C8 0009B5C8  38 21 00 70 */	addi r1, r1, 0x70
 /* 800A06CC 0009B5CC  4E 80 00 20 */	blr 
 
-.global func_800A06D0
-func_800A06D0:
+.global setupView__Q23EGG16ScreenEffectBaseCFv
+setupView__Q23EGG16ScreenEffectBaseCFv:
 /* 800A06D0 0009B5D0  94 21 FF C0 */	stwu r1, -0x40(r1)
 /* 800A06D4 0009B5D4  7C 08 02 A6 */	mflr r0
 /* 800A06D8 0009B5D8  38 63 00 04 */	addi r3, r3, 4
@@ -812,9 +808,9 @@ func_800A06D0:
 /* 800A06E4 0009B5E4  93 C1 00 38 */	stw r30, 0x38(r1)
 /* 800A06E8 0009B5E8  93 A1 00 34 */	stw r29, 0x34(r1)
 /* 800A06EC 0009B5EC  4B FF 9A 69 */	bl GetDataEfb__Q23EGG6ScreenCFv
-/* 800A06F0 0009B5F0  3C 80 80 41 */	lis r4, lbl_8040A9F0@ha
+/* 800A06F0 0009B5F0  3C 80 80 41 */	lis r4, sWorkSpaceV__Q23EGG16ScreenEffectBase@ha
 /* 800A06F4 0009B5F4  C0 03 00 08 */	lfs f0, 8(r3)
-/* 800A06F8 0009B5F8  C0 84 A9 F0 */	lfs f4, lbl_8040A9F0@l(r4)
+/* 800A06F8 0009B5F8  C0 84 A9 F0 */	lfs f4, sWorkSpaceV__Q23EGG16ScreenEffectBase@l(r4)
 /* 800A06FC 0009B5FC  38 84 A9 F0 */	addi r4, r4, -22032
 /* 800A0700 0009B600  C0 44 00 04 */	lfs f2, 4(r4)
 /* 800A0704 0009B604  EC 60 20 2A */	fadds f3, f0, f4
@@ -876,9 +872,9 @@ lbl_800A0768:
 /* 800A07D4 0009B6D4  38 80 00 00 */	li r4, 0
 /* 800A07D8 0009B6D8  4B FE 42 21 */	bl GXSetScissorBoxOffset___Q23EGG7StateGXFii
 /* 800A07DC 0009B6DC  83 E1 00 3C */	lwz r31, 0x3c(r1)
-/* 800A07E0 0009B6E0  3C 60 80 41 */	lis r3, lbl_8040A9F0@ha
+/* 800A07E0 0009B6E0  3C 60 80 41 */	lis r3, sWorkSpaceV__Q23EGG16ScreenEffectBase@ha
 /* 800A07E4 0009B6E4  83 C1 00 38 */	lwz r30, 0x38(r1)
-/* 800A07E8 0009B6E8  38 63 A9 F0 */	addi r3, r3, lbl_8040A9F0@l
+/* 800A07E8 0009B6E8  38 63 A9 F0 */	addi r3, r3, sWorkSpaceV__Q23EGG16ScreenEffectBase@l
 /* 800A07EC 0009B6EC  83 A1 00 34 */	lwz r29, 0x34(r1)
 /* 800A07F0 0009B6F0  80 01 00 44 */	lwz r0, 0x44(r1)
 /* 800A07F4 0009B6F4  7C 08 03 A6 */	mtlr r0

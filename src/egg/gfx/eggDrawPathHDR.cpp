@@ -1,6 +1,7 @@
 #include "eggDrawPathHDR.h"
 #include "eggPostEffectHDR.h"
 #include "eggStateGX.h"
+#include "eggTextureBuffer.h"
 
 namespace EGG
 {
@@ -28,18 +29,12 @@ namespace EGG
         switch(idx)
         {
             case 0:
-                g_capture_for_efb(cBufferType_2, false);
-                lbl_804BEC54 |= 0x2;
+                capture(cBufferType_2, false);
+                ScreenEffectBase::sFlag |= 0x2;
                 break;
             case 1:
-                // u8 required to fix regalloc with any cache usage,
-                // but StateGX functions require bool to match
-                union
-                {
-                    u8 alpha;
-                    bool bAlpha;
-                };
-                alpha = StateGX::getCache().alphaUpdate;
+                StateGX::Bool8 alpha;
+                alpha.byte = StateGX::getCache().alphaUpdate;
                 
                 StateGX::GXSetAlphaUpdate_(false);
                 
@@ -50,10 +45,10 @@ namespace EGG
                 mPostEffect->setProjection(GetScreen());
                 mPostEffect->draw(GetScreen().GetWidth(), GetScreen().GetHeight());
 
-                freeEffectBuffer(cBufferType_2);
-                lbl_804BEC54 &= ~0x3;
+                release(cBufferType_2);
+                ScreenEffectBase::sFlag &= ~0x3;
 
-                StateGX::GXSetAlphaUpdate_(bAlpha);
+                StateGX::GXSetAlphaUpdate_(alpha.boolean);
                 break;
         }
     }

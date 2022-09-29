@@ -71,12 +71,8 @@ namespace EGG
     {
         if (!IsActive() || mShadowIdx == 0) return;
 
-        union
-        {
-            u8 dither;
-            bool bDither;
-        };
-        dither = StateGX::getCache().dither;
+        StateGX::Bool8 dither;
+        dither.byte = StateGX::getCache().dither;
         StateGX::GXSetDither_(true);
         
         GXSetChanAmbColor(GX_CHANNEL_ID_4, DrawGX::sColorWhite);
@@ -140,6 +136,6 @@ namespace EGG
                 localGroups[i]->free();
         }
         
-        StateGX::GXSetDither_(bDither);
+        StateGX::GXSetDither_(dither.boolean);
     }
 }

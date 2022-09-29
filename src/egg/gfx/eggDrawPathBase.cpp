@@ -12,7 +12,7 @@ namespace EGG
     {
         if (isVisible())
         {
-            CopyScreenFromAnother(GXUtility::getScreen());
+            copyFromAnother(GXUtility::getScreen());
             calc();
         }
     }

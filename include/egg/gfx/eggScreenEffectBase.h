@@ -3,7 +3,6 @@
 #include "types_egg.h"
 #include "eggAssert.h"
 #include "eggScreen.h"
-#include "eggTextureBuffer.h"
 
 namespace EGG
 {
@@ -27,18 +26,63 @@ namespace EGG
 
         struct EffectBuffer
         {
-            TextureBuffer * mpTexBuffer; // at 0x0
-            ScreenEffectBase * mpAllocBase; // at 0x4
+            TextureBuffer* mpTexBuffer; // at 0x0
+            const ScreenEffectBase* mpAllocBase; // at 0x4
             UNKWORD WORD_0x8; // at 0x8
+        };
+
+        // Workspace viewport
+        struct WorkView
+        {
+            f32 x1; // at 0x0
+            f32 y1; // at 0x4
+            f32 x2; // at 0x8
+            f32 y2; // at 0xC
+            f32 FLOAT_0x10;
+            f32 FLOAT_0x14;
+        };
+
+        // For constructing full viewport
+        struct FullView
+        {
+            f32 x2; // at 0x0
+            f32 y2; // at 0x4
+            f32 x1; // at 0x8
+            f32 y1; // at 0xC
+            f32 cx; // at 0x10
+            f32 cy; // at 0x14
+            f32 z1; // at 0x18
+            f32 z2; // at 0x1C
         };
 
     private:
         u8 mFlags; // at 0x0
         Screen mScreen; // at 0x4
 
-        static EffectBuffer spBufferSet[cBufferType_Max];
-
     public:
+        static void clean();
+
+        static void setBuffer(BufferType type, TextureBuffer* buffer)
+        {
+            #line 163
+            EGG_ASSERT(type < cBufferType_Max);
+            spBufferSet[type].mpTexBuffer = buffer;
+        }
+
+        static void clearBuffer(BufferType type)
+        {
+            #line 174
+            EGG_ASSERT(type < cBufferType_Max);
+            spBufferSet[type].mpTexBuffer = NULL;
+            spBufferSet[type].mpAllocBase = NULL;
+            spBufferSet[type].WORD_0x8 = 0;
+        }
+
+        static TextureBuffer* getBuffer(BufferType type)
+        {
+            return spBufferSet[type].mpTexBuffer;
+        }
+
         ScreenEffectBase();
         virtual ~ScreenEffectBase() {} // at 0x8
 
@@ -48,28 +92,27 @@ namespace EGG
         bool isVisible() const { return mFlags & EFFECT_VISIBLE; }
         bool isFlag0x2() const { return mFlags & EFFECT_0x2; }
 
-        static void clearEffectBuffer(BufferType type)
-        {
-            #line 174
-            EGG_ASSERT(type < cBufferType_Max);
-            spBufferSet[type].mpTexBuffer = NULL;
-            spBufferSet[type].mpAllocBase = NULL;
-            spBufferSet[type].WORD_0x8 = 0;
-        }
+        void copyFromAnother(const Screen&);
+        TextureBuffer* capture(BufferType, bool) const;
+        bool release(BufferType) const;
+        void doCapture(int) const;
+        void setupGX(bool) const;
+        const WorkView& setupView() const;
 
-        TextureBuffer * getBuffer(BufferType type) const
-        {
-            return spBufferSet[type].mpTexBuffer;
-        }
+    private:
+        static EffectBuffer spBufferSet[cBufferType_Max];
 
-        void CopyScreenFromAnother(Screen&);
-       
-        static void initialize();
-        void g_capture_for_efb(BufferType, bool);
-        bool freeEffectBuffer(BufferType);
+        static WorkView sWorkSpaceV;
+        static WorkView sWorkSpaceHideV;
 
-        // TO-DO
-        static u32 lbl_804BEC54;
+        static u32 sCaptureFlag;
+    public:
+        // Public for now, until flag test functions are determined
+        static u32 sFlag;
+    private:
+        static u32 D_804BEC58;
+        static u32 sPushCount;
+        static s32 sWorkBuffer;
     };
 }
 

@@ -35,6 +35,8 @@ namespace EGG
 
         bool isVisible() const { return ((mFlags & POSTEFFECT_HIDDEN) == 0); }
 
+        void setBlendMode(u32 mode) { mBlendMode = mode; }
+
         CapTexture * getCapTexture() const { return mpCapTexture; }
         void setCapTexture(CapTexture *pCapTexture)
         {

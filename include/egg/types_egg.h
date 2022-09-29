@@ -33,6 +33,7 @@ namespace EGG
     struct PostEffectBlur;
     struct PostEffectBlurGather;
     struct PostEffectHDR;
+    struct PostEffectSimple;
     struct ResTIMG;
     struct ScnRenderer;
     struct ScnRootEx;
