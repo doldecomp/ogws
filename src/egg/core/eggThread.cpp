@@ -11,7 +11,7 @@ namespace EGG
 
     Thread::Thread(u32 stackSize, int mesgCount, int r6, Heap *pHeap)
     {
-        if (!pHeap) pHeap = Heap::sCurrentHeap;
+        if (!pHeap) pHeap = Heap::getCurrentHeap();
         mHeap = pHeap;
 
         mStackSize = ut::RoundDown<u32>(stackSize, 32);
@@ -35,7 +35,7 @@ namespace EGG
         mStackSize = ut::GetOffsetFromPtr(pThread->mStackTop, pThread->mStackBottom);
         mStackMemory = pThread->mStackTop;
         
-        setCommonMesgQueue(mesgCount, Heap::sCurrentHeap);
+        setCommonMesgQueue(mesgCount, Heap::getCurrentHeap());
     }
 
     Thread::~Thread()

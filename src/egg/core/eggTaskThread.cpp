@@ -14,7 +14,7 @@ namespace EGG
 	
 	TaskThread * TaskThread::create(int jobCount, int r27_4, u32 size, Heap * pHeap)
 	{
-		if (!pHeap) pHeap = Heap::sCurrentHeap;
+		if (!pHeap) pHeap = Heap::getCurrentHeap();
 		
 		TaskThread * pTaskThread = new (pHeap, 4) TaskThread(jobCount, r27_4, size); // at r31
 		

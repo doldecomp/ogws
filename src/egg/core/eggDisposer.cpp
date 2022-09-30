@@ -8,19 +8,15 @@ namespace EGG
 
     Disposer::Disposer()
     {
-        Heap *myHeap = Heap::findContainHeap(this);
-        mHeap = myHeap;
-        if (mHeap)
-        {
-            ut::List_Append(&mHeap->mChildren, this);
-        }
+        mHeap = Heap::findContainHeap(this);
+
+        if (mHeap != NULL)
+            mHeap->appendDisposer(this);
     }
 
     Disposer::~Disposer()
     {
-        if (mHeap)
-        {
-            ut::List_Remove(&mHeap->mChildren, this);
-        }
+        if (mHeap != NULL)
+            mHeap->removeDisposer(this);
     }
 }

@@ -20,7 +20,7 @@ namespace EGG
         const u32 bufferSize = calcBufferSize(width, height);
         
         if (!heap)
-            heap = Heap::sCurrentHeap;
+            heap = Heap::getCurrentHeap();
 
         mBuffer = new (heap, 32) u8[bufferSize];
         #line 40

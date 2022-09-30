@@ -59,7 +59,7 @@ namespace EGG
     {
         FrmHeap *newHeap = NULL;
 
-        if (!pHeap) pHeap = sCurrentHeap;
+        if (!pHeap) pHeap = getCurrentHeap();
         if (size == -1) size = pHeap->getAllocatableSize(4);
 
         void *memBlock = pHeap->alloc(size, 4);

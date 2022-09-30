@@ -71,7 +71,7 @@ namespace EGG
         EGG_ASSERT(spBufferAll == NULL);
         EGG_ASSERT(size % 32 == 0);
 
-        if (heap == NULL) heap = Heap::sCurrentHeap;
+        if (heap == NULL) heap = Heap::getCurrentHeap();
 
         sBufferAllSize = size;
         spBufferAll = (TextureBuffer *)new (heap, 32) char[size];
