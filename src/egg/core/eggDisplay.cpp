@@ -4,16 +4,23 @@
 #include "eggSystem.h"
 #include "eggAssert.h"
 #include "eggXfbManager.h"
-#include <RevoSDK/GX/GXMisc.h>
-#include <RevoSDK/GX/GXFrameBuf.h>
-#include <RevoSDK/OS/OS.h>
-#include <RevoSDK/OS/OSTime.h>
-#include <RevoSDK/VI/vi.h>
+
+#include <GX/GXMisc.h>
+#include <GX/GXFrameBuf.h>
+#include <OS/OS.h>
+#include <OS/OSTime.h>
+#include <VI/vi.h>
 
 namespace EGG
 {
-    Display::Display(u8 uc) : BYTE_0x9(0), BYTE_0x8(uc), WORD_0xC(0),
-        WORD_0x10(0), mColor(0x808080ff), WORD_0x18(0x00ffffff), mBeginTick(0)
+    Display::Display(u8 wait) :
+        BYTE_0x9(0),
+        mRetraceWait(wait),
+        mRetraceCount(0),
+        mFrameCount(0),
+        mClearColor(0x808080ff),
+        mClearZ(0x00ffffff),
+        mBeginTick(0)
     {
         FLAG_0x0.setBit(0);
     }
@@ -25,34 +32,30 @@ namespace EGG
 
     void Display::beginFrame()
     {
-        u8 r31 = BYTE_0x8;
-        u32 r30 = VIGetRetraceCount() - WORD_0xC;
-        u32 r29 = r31 - 1;
-
-        do
+        const u8 wait = mRetraceWait;
+        u32 retraceDiff = VIGetRetraceCount() - mRetraceCount;
+        const u32 maxDiff = wait - 1;
+    
+        while (true)
         {
-            if (r30 >= r29)
+            if (retraceDiff >= maxDiff)
             {
-                if (BYTE_0x9 & 1)
+                if (isBlack())
                 {
-                    Video *pVideo = BaseSystem::getVideo();
-                    VISetBlack(!pVideo->mFlags.onBit(0));
-
-                    pVideo->mFlags.toggleBit(0);
-
-                    BYTE_0x9 &= (u8)~1;
+                    BaseSystem::getVideo()->changeBlack();
+                    setBlack(false);
                 }
-
+    
                 BaseSystem::getXfbManager()->setNextFrameBuffer();
             }
-
+    
             VIWaitForRetrace();
-            r30++;
-        } while (r30 < r31);
-
+            if (++retraceDiff >= wait) break;
+        }
+    
         calcFrequency();
-        WORD_0xC = VIGetRetraceCount();
-        WORD_0x10++;
+        mRetraceCount = VIGetRetraceCount();
+        mFrameCount++;
     }
 
     void Display::beginRender()
@@ -74,7 +77,7 @@ namespace EGG
     {
         if (FLAG_0x0.onBit(0))
         {
-            GXSetCopyClear(mColor, WORD_0x18);
+            GXSetCopyClear(mClearColor, mClearZ);
         }
 
         GXRenderModeObj *pObj = BaseSystem::getVideo()->mRenderMode;
@@ -90,7 +93,7 @@ namespace EGG
 
 	void Display::calcFrequency()
     {
-        s32 endTick = OSGetTick();
+        const s32 endTick = OSGetTick();
         mDeltaTick = endTick - mBeginTick;
         mFrequency = 1000000.0f / ((mDeltaTick * 8) / ((BUS_SPEED >> 2) / 125000));
         mBeginTick = endTick;

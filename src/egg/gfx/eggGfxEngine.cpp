@@ -45,7 +45,7 @@ namespace EGG
         StateGX::doResetStateCache();
 
         Display *disp = BaseSystem::getDisplay();
-        StateGX::setDefaultTexColor(disp->getColor());
+        StateGX::setDefaultTexColor(disp->getClearColor());
 
         G3DUtility::clearTempMem();
     }

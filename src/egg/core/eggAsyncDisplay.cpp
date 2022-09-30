@@ -3,19 +3,21 @@
 #include "eggXfbManager.h"
 #include "eggVideo.h"
 #include "eggMatrix.h"
+
 #include "ut_algorithm.h"
-#include <RevoSDK/OS/OSTime.h>
-#include <RevoSDK/VI/vi.h>
-#include <RevoSDK/GX/GXMisc.h>
-#include <RevoSDK/GX/GXTransform.h>
-#include <RevoSDK/GX/GXAttr.h>
-#include <RevoSDK/GX/GXTev.h>
-#include <RevoSDK/GX/GXLight.h>
-#include <RevoSDK/GX/GXGeometry.h>
-#include <RevoSDK/GX/GXBump.h>
-#include <RevoSDK/GX/GXPixel.h>
-#include <RevoSDK/GX/GXVert.h>
-#include <RevoSDK/math/mtx44.h>
+
+#include <OS/OSTime.h>
+#include <VI/vi.h>
+#include <GX/GXMisc.h>
+#include <GX/GXTransform.h>
+#include <GX/GXAttr.h>
+#include <GX/GXTev.h>
+#include <GX/GXLight.h>
+#include <GX/GXGeometry.h>
+#include <GX/GXBump.h>
+#include <GX/GXPixel.h>
+#include <GX/GXVert.h>
+#include <math/mtx44.h>
 
 namespace
 {
@@ -56,8 +58,13 @@ namespace EGG
 {
     using namespace nw4r;
 
-    AsyncDisplay::AsyncDisplay(u8 uc) : Display(uc), WORD_0x60(0), FLOAT_0x64(1.0f),
-        WORD_0x68(0), WORD_0x6C(0), BYTE_0x70(1)
+    AsyncDisplay::AsyncDisplay(u8 wait) :
+        Display(wait),
+        WORD_0x60(0),
+        FLOAT_0x64(1.0f),
+        WORD_0x68(0),
+        WORD_0x6C(0),
+        BYTE_0x70(1)
     {
         spSelector = this;
         OSInitThreadQueue(&mThreadQueue);
@@ -70,7 +77,7 @@ namespace EGG
         while (true)
         {
             OSSleepThread(&mThreadQueue);
-            if (++i >= BYTE_0x8) break;
+            if (++i >= mRetraceWait) break;
         }
 
         WORD_0x68 = WORD_0x6C;
@@ -92,7 +99,6 @@ namespace EGG
             u32 _0x74 = WORD_0x74;
             u32 temp = r30 - _0x74;
             
-
             s32 diff = temp - tickDelta;
             if (diff < 0) diff += _0x74;
 
@@ -112,20 +118,16 @@ namespace EGG
             GXRenderModeObj *pObj = BaseSystem::getVideo()->mRenderMode;
 
             clearEFB(pObj->mFbWidth, pObj->mEfbHeight, 0, 0,
-                pObj->mFbWidth, pObj->mEfbHeight, mColor);
+                pObj->mFbWidth, pObj->mEfbHeight, mClearColor);
         }
 
-        if (BYTE_0x9 & 1)
+        if (isBlack())
         {
-            Video *pVideo = BaseSystem::getVideo();
-            bool setBlack = (!pVideo->mFlags.onBit(0));
-            VISetBlack(setBlack);
-
-            pVideo->mFlags.toggleBit(0);
-            BYTE_0x9 &= (u8)~1;
+            BaseSystem::getVideo()->changeBlack();
+            setBlack(false);
         }
 
-        WORD_0x10++;
+        mFrameCount++;
     }
 
     void AsyncDisplay::beginFrame()
