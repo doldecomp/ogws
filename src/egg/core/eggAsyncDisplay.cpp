@@ -102,17 +102,7 @@ namespace EGG
             if (val > 1.0f) FLOAT_0x64 = 1.0f;
         }
 
-        XfbManager *xfbmgr = BaseSystem::getXfbManager();
-        Xfb *xfb_04 = xfbmgr->XFB_0x4;
-        bool b = false;
-        
-        if ((xfb_04 != xfbmgr->XFB_0xC)
-            && (xfb_04 != xfbmgr->XFB_0x0))
-        {
-            b = true;
-        }
-
-        if (b)
+        if (BaseSystem::getXfbManager()->isReadytoCopy())
         {
             copyEFBtoXFB();
             GXSetDrawDoneCallback(DrawDoneCallback);

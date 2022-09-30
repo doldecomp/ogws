@@ -5,20 +5,28 @@
 
 namespace EGG
 {
-    struct XfbManager
+    class XfbManager
     {
-        inline XfbManager(Heap *heap) {}
-        inline ~XfbManager() {}
+    public:
+        XfbManager(Heap *heap) {}
+        ~XfbManager() {}
+
+        bool isReadytoCopy() const
+        {
+            return mListTail != mShowXfb
+                && mListTail != mListHead;
+        }
 
         bool attach(Xfb *);
         void copyEFB(bool);
         void setNextFrameBuffer();
         void postVRetrace();
 
-        Xfb *XFB_0x0;
-        Xfb *XFB_0x4;
-        Xfb *XFB_0x8;
-        Xfb *XFB_0xC;
+    private:
+        Xfb *mListHead; // at 0x0
+        Xfb *mListTail; // at 0x4
+        Xfb *mCopiedXfb; // at 0x8
+        Xfb *mShowXfb; // at 0xC
     };
 }
 
