@@ -29,8 +29,7 @@ namespace EGG
 
     public:
         PostEffectBlur();
-        // TO-DO: Resolve weak instance (eggDrawPathBloom, 8008a350)
-        virtual ~PostEffectBlur(); // at 0x8
+        virtual ~PostEffectBlur() {} // at 0x8
         virtual void draw(f32, f32); // at 0x10
         virtual void reset(); // at 0x14
 
