@@ -20,7 +20,7 @@ namespace EGG
             void reset()
             {
                 mpCapTexture = NULL;
-                mColor = DrawGX::sColorWhite;
+                mColor = DrawGX::scColorWhite;
                 mColorScale = 1.0f;
                 BYTE_0xC = 0;
             }

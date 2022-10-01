@@ -258,7 +258,7 @@ namespace EGG
                     DrawGX::SetBlendMode(DrawGX::BLEND_9);
                     GXSetBlendMode(0, 4, 5, 0);
                     texBuf->load(GX_TEX_MAP_ID_0);
-                    DrawGX::DrawDL(DrawGX::DL_16, forDL, DrawGX::sColorWhite);
+                    DrawGX::DrawDL(DrawGX::DL_16, forDL, DrawGX::scColorWhite);
                     texBuf->free();
                 }
                 else

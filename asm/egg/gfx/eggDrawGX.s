@@ -5,38 +5,38 @@
 
 .section .sdata2, "a"
 .balign 0x8
-.global sColorBlack__Q23EGG6DrawGX
-sColorBlack__Q23EGG6DrawGX:
+.global scColorBlack__Q23EGG6DrawGX
+scColorBlack__Q23EGG6DrawGX:
 	.byte 0x00
 	.byte 0x00
 	.byte 0x00
 	.byte 0xFF
-.global sColorWhite__Q23EGG6DrawGX
-sColorWhite__Q23EGG6DrawGX:
+.global scColorWhite__Q23EGG6DrawGX
+scColorWhite__Q23EGG6DrawGX:
 	.byte 0xFF
 	.byte 0xFF
 	.byte 0xFF
 	.byte 0xFF
-.global sColorRed__Q23EGG6DrawGX
-sColorRed__Q23EGG6DrawGX:
+.global scColorRed__Q23EGG6DrawGX
+scColorRed__Q23EGG6DrawGX:
 	.byte 0xFF
-	.byte 0x00
-	.byte 0x00
-	.byte 0xFF
-.global sColorGreen__Q23EGG6DrawGX
-sColorGreen__Q23EGG6DrawGX:
-	.byte 0x00
-	.byte 0xFF
-	.byte 0x00
-	.byte 0xFF
-.global sColorBlue__Q23EGG6DrawGX
-sColorBlue__Q23EGG6DrawGX:
 	.byte 0x00
 	.byte 0x00
 	.byte 0xFF
+.global scColorGreen__Q23EGG6DrawGX
+scColorGreen__Q23EGG6DrawGX:
+	.byte 0x00
 	.byte 0xFF
-.global sColorOrange__Q23EGG6DrawGX
-sColorOrange__Q23EGG6DrawGX:
+	.byte 0x00
+	.byte 0xFF
+.global scColorBlue__Q23EGG6DrawGX
+scColorBlue__Q23EGG6DrawGX:
+	.byte 0x00
+	.byte 0x00
+	.byte 0xFF
+	.byte 0xFF
+.global scColorOrange__Q23EGG6DrawGX
+scColorOrange__Q23EGG6DrawGX:
 	.byte 0xFF
 	.byte 0xA2
 	.byte 0x00
@@ -648,12 +648,12 @@ lbl_80087AE4:
 /* 80087B04 00082A04  38 7F A8 C0 */	addi r3, r31, -22336
 /* 80087B08 00082A08  38 80 00 00 */	li r4, 0
 /* 80087B0C 00082A0C  48 05 B7 ED */	bl func_800E32F8
-/* 80087B10 00082A10  88 E2 8B A4 */	lbz r7, sColorWhite__Q23EGG6DrawGX-_SDA2_BASE_(r2)
+/* 80087B10 00082A10  88 E2 8B A4 */	lbz r7, scColorWhite__Q23EGG6DrawGX-_SDA2_BASE_(r2)
 /* 80087B14 00082A14  38 81 00 08 */	addi r4, r1, 8
-/* 80087B18 00082A18  88 C2 8B A5 */	lbz r6, sColorWhite__Q23EGG6DrawGX+1-_SDA2_BASE_(r2)
+/* 80087B18 00082A18  88 C2 8B A5 */	lbz r6, scColorWhite__Q23EGG6DrawGX+1-_SDA2_BASE_(r2)
 /* 80087B1C 00082A1C  38 60 00 04 */	li r3, 4
-/* 80087B20 00082A20  88 A2 8B A6 */	lbz r5, sColorWhite__Q23EGG6DrawGX+2-_SDA2_BASE_(r2)
-/* 80087B24 00082A24  88 02 8B A7 */	lbz r0, sColorWhite__Q23EGG6DrawGX+3-_SDA2_BASE_(r2)
+/* 80087B20 00082A20  88 A2 8B A6 */	lbz r5, scColorWhite__Q23EGG6DrawGX+2-_SDA2_BASE_(r2)
+/* 80087B24 00082A24  88 02 8B A7 */	lbz r0, scColorWhite__Q23EGG6DrawGX+3-_SDA2_BASE_(r2)
 /* 80087B28 00082A28  98 E1 00 08 */	stb r7, 8(r1)
 /* 80087B2C 00082A2C  98 C1 00 09 */	stb r6, 9(r1)
 /* 80087B30 00082A30  98 A1 00 0A */	stb r5, 0xa(r1)
@@ -787,12 +787,12 @@ func_80087CD4:
 /* 80087D00 00082C00  38 60 00 00 */	li r3, 0
 /* 80087D04 00082C04  48 00 0E AD */	bl func_80088BB0
 /* 80087D08 00082C08  48 00 0F 29 */	bl func_80088C30
-/* 80087D0C 00082C0C  88 E2 8B A4 */	lbz r7, sColorWhite__Q23EGG6DrawGX-_SDA2_BASE_(r2)
+/* 80087D0C 00082C0C  88 E2 8B A4 */	lbz r7, scColorWhite__Q23EGG6DrawGX-_SDA2_BASE_(r2)
 /* 80087D10 00082C10  38 81 00 18 */	addi r4, r1, 0x18
-/* 80087D14 00082C14  88 C2 8B A5 */	lbz r6, sColorWhite__Q23EGG6DrawGX+1-_SDA2_BASE_(r2)
+/* 80087D14 00082C14  88 C2 8B A5 */	lbz r6, scColorWhite__Q23EGG6DrawGX+1-_SDA2_BASE_(r2)
 /* 80087D18 00082C18  38 60 00 04 */	li r3, 4
-/* 80087D1C 00082C1C  88 A2 8B A6 */	lbz r5, sColorWhite__Q23EGG6DrawGX+2-_SDA2_BASE_(r2)
-/* 80087D20 00082C20  88 02 8B A7 */	lbz r0, sColorWhite__Q23EGG6DrawGX+3-_SDA2_BASE_(r2)
+/* 80087D1C 00082C1C  88 A2 8B A6 */	lbz r5, scColorWhite__Q23EGG6DrawGX+2-_SDA2_BASE_(r2)
+/* 80087D20 00082C20  88 02 8B A7 */	lbz r0, scColorWhite__Q23EGG6DrawGX+3-_SDA2_BASE_(r2)
 /* 80087D24 00082C24  98 E1 00 08 */	stb r7, 8(r1)
 /* 80087D28 00082C28  98 C1 00 09 */	stb r6, 9(r1)
 /* 80087D2C 00082C2C  98 A1 00 0A */	stb r5, 0xa(r1)
@@ -2328,12 +2328,12 @@ lbl_80089364:
 /* 8008938C 0008428C  7C 84 F0 2E */	lwzx r4, r4, r30
 /* 80089390 00084290  7C 89 03 A6 */	mtctr r4
 /* 80089394 00084294  4E 80 04 20 */	bctr 
-/* 80089398 00084298  88 E2 8B A8 */	lbz r7, sColorRed__Q23EGG6DrawGX-_SDA2_BASE_(r2)
+/* 80089398 00084298  88 E2 8B A8 */	lbz r7, scColorRed__Q23EGG6DrawGX-_SDA2_BASE_(r2)
 /* 8008939C 0008429C  38 81 00 28 */	addi r4, r1, 0x28
-/* 800893A0 000842A0  88 C2 8B A9 */	lbz r6, sColorRed__Q23EGG6DrawGX+1-_SDA2_BASE_(r2)
+/* 800893A0 000842A0  88 C2 8B A9 */	lbz r6, scColorRed__Q23EGG6DrawGX+1-_SDA2_BASE_(r2)
 /* 800893A4 000842A4  38 60 00 04 */	li r3, 4
-/* 800893A8 000842A8  88 A2 8B AA */	lbz r5, sColorRed__Q23EGG6DrawGX+2-_SDA2_BASE_(r2)
-/* 800893AC 000842AC  88 02 8B AB */	lbz r0, sColorRed__Q23EGG6DrawGX+3-_SDA2_BASE_(r2)
+/* 800893A8 000842A8  88 A2 8B AA */	lbz r5, scColorRed__Q23EGG6DrawGX+2-_SDA2_BASE_(r2)
+/* 800893AC 000842AC  88 02 8B AB */	lbz r0, scColorRed__Q23EGG6DrawGX+3-_SDA2_BASE_(r2)
 /* 800893B0 000842B0  98 E1 00 28 */	stb r7, 0x28(r1)
 /* 800893B4 000842B4  98 C1 00 29 */	stb r6, 0x29(r1)
 /* 800893B8 000842B8  98 A1 00 2A */	stb r5, 0x2a(r1)
@@ -2345,17 +2345,17 @@ lbl_80089364:
 /* 800893D0 000842D0  48 05 57 05 */	bl GXBegin
 /* 800893D4 000842D4  C0 02 8B C4 */	lfs f0, lbl_804C05E4-_SDA2_BASE_(r2)
 /* 800893D8 000842D8  38 81 00 24 */	addi r4, r1, 0x24
-/* 800893DC 000842DC  88 E2 8B AC */	lbz r7, sColorGreen__Q23EGG6DrawGX-_SDA2_BASE_(r2)
+/* 800893DC 000842DC  88 E2 8B AC */	lbz r7, scColorGreen__Q23EGG6DrawGX-_SDA2_BASE_(r2)
 /* 800893E0 000842E0  38 60 00 04 */	li r3, 4
 /* 800893E4 000842E4  D0 1C 80 00 */	stfs f0, -0x8000(r28)
 /* 800893E8 000842E8  C0 02 8B C4 */	lfs f0, lbl_804C05E4-_SDA2_BASE_(r2)
-/* 800893EC 000842EC  88 C2 8B AD */	lbz r6, sColorGreen__Q23EGG6DrawGX+1-_SDA2_BASE_(r2)
+/* 800893EC 000842EC  88 C2 8B AD */	lbz r6, scColorGreen__Q23EGG6DrawGX+1-_SDA2_BASE_(r2)
 /* 800893F0 000842F0  D0 1C 80 00 */	stfs f0, -0x8000(r28)
 /* 800893F4 000842F4  C0 02 8B C4 */	lfs f0, lbl_804C05E4-_SDA2_BASE_(r2)
-/* 800893F8 000842F8  88 A2 8B AE */	lbz r5, sColorGreen__Q23EGG6DrawGX+2-_SDA2_BASE_(r2)
+/* 800893F8 000842F8  88 A2 8B AE */	lbz r5, scColorGreen__Q23EGG6DrawGX+2-_SDA2_BASE_(r2)
 /* 800893FC 000842FC  D0 1C 80 00 */	stfs f0, -0x8000(r28)
 /* 80089400 00084300  C0 02 8B C8 */	lfs f0, lbl_804C05E8-_SDA2_BASE_(r2)
-/* 80089404 00084304  88 02 8B AF */	lbz r0, sColorGreen__Q23EGG6DrawGX+3-_SDA2_BASE_(r2)
+/* 80089404 00084304  88 02 8B AF */	lbz r0, scColorGreen__Q23EGG6DrawGX+3-_SDA2_BASE_(r2)
 /* 80089408 00084308  D0 1C 80 00 */	stfs f0, -0x8000(r28)
 /* 8008940C 0008430C  C0 02 8B C4 */	lfs f0, lbl_804C05E4-_SDA2_BASE_(r2)
 /* 80089410 00084310  D0 1C 80 00 */	stfs f0, -0x8000(r28)
@@ -2372,17 +2372,17 @@ lbl_80089364:
 /* 8008943C 0008433C  48 05 56 99 */	bl GXBegin
 /* 80089440 00084340  C0 02 8B C4 */	lfs f0, lbl_804C05E4-_SDA2_BASE_(r2)
 /* 80089444 00084344  38 81 00 20 */	addi r4, r1, 0x20
-/* 80089448 00084348  88 E2 8B B0 */	lbz r7, sColorBlue__Q23EGG6DrawGX-_SDA2_BASE_(r2)
+/* 80089448 00084348  88 E2 8B B0 */	lbz r7, scColorBlue__Q23EGG6DrawGX-_SDA2_BASE_(r2)
 /* 8008944C 0008434C  38 60 00 04 */	li r3, 4
 /* 80089450 00084350  D0 1C 80 00 */	stfs f0, -0x8000(r28)
 /* 80089454 00084354  C0 02 8B C4 */	lfs f0, lbl_804C05E4-_SDA2_BASE_(r2)
-/* 80089458 00084358  88 C2 8B B1 */	lbz r6, sColorBlue__Q23EGG6DrawGX+1-_SDA2_BASE_(r2)
+/* 80089458 00084358  88 C2 8B B1 */	lbz r6, scColorBlue__Q23EGG6DrawGX+1-_SDA2_BASE_(r2)
 /* 8008945C 0008435C  D0 1C 80 00 */	stfs f0, -0x8000(r28)
 /* 80089460 00084360  C0 02 8B C4 */	lfs f0, lbl_804C05E4-_SDA2_BASE_(r2)
-/* 80089464 00084364  88 A2 8B B2 */	lbz r5, sColorBlue__Q23EGG6DrawGX+2-_SDA2_BASE_(r2)
+/* 80089464 00084364  88 A2 8B B2 */	lbz r5, scColorBlue__Q23EGG6DrawGX+2-_SDA2_BASE_(r2)
 /* 80089468 00084368  D0 1C 80 00 */	stfs f0, -0x8000(r28)
 /* 8008946C 0008436C  C0 02 8B C4 */	lfs f0, lbl_804C05E4-_SDA2_BASE_(r2)
-/* 80089470 00084370  88 02 8B B3 */	lbz r0, sColorBlue__Q23EGG6DrawGX+3-_SDA2_BASE_(r2)
+/* 80089470 00084370  88 02 8B B3 */	lbz r0, scColorBlue__Q23EGG6DrawGX+3-_SDA2_BASE_(r2)
 /* 80089474 00084374  D0 1C 80 00 */	stfs f0, -0x8000(r28)
 /* 80089478 00084378  C0 02 8B C8 */	lfs f0, lbl_804C05E8-_SDA2_BASE_(r2)
 /* 8008947C 0008437C  D0 1C 80 00 */	stfs f0, -0x8000(r28)

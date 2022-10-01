@@ -96,7 +96,7 @@ namespace EGG
                     alpha = StateGX::getCache().alphaUpdate;
                     StateGX::GXSetAlphaUpdate_(true);
 
-                    DrawGX::DrawDL(DrawGX::DL_16, forDL, DrawGX::sColorWhite);
+                    DrawGX::DrawDL(DrawGX::DL_16, forDL, DrawGX::scColorWhite);
                     BUF_0x8C->free();
                     BUF_0x8C = NULL;
 

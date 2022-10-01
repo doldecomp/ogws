@@ -75,7 +75,7 @@ namespace EGG
         dither.byte = StateGX::getCache().dither;
         StateGX::GXSetDither_(true);
         
-        GXSetChanAmbColor(GX_CHANNEL_ID_4, DrawGX::sColorWhite);
+        GXSetChanAmbColor(GX_CHANNEL_ID_4, DrawGX::scColorWhite);
 
         GXColor fog = {0, 0, 0, 255};
         GXSetFog(GX_FOG_TYPE_0, fog, 0.0f, 1.0f, 0.0f, 1.0f);

@@ -14,7 +14,10 @@ namespace EGG
         virtual void preDraw(); // at 0x18
 
     private:
-        char UNK_0x20[0xC];
+        GXColor mColor; // at 0x20
+        f32 FLOAT_0x24;
+        char UNK_0x28[0x4];
+        UNKWORD WORD_0x2C;
     };
 }
 

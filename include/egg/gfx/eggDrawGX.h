@@ -164,12 +164,12 @@ namespace EGG
         static DisplayList * GetDisplayList(u32 i) { return &s_DL[i]; }
 
     public:
-        static const GXColor sColorBlack;
-        static const GXColor sColorWhite;
-        static const GXColor sColorRed;
-        static const GXColor sColorGreen;
-        static const GXColor sColorBlue;
-        static const GXColor sColorOrange;
+        static const GXColor scColorBlack;
+        static const GXColor scColorWhite;
+        static const GXColor scColorRed;
+        static const GXColor scColorGreen;
+        static const GXColor scColorBlue;
+        static const GXColor scColorOrange;
 
         static nw4r::math::MTX34 s_cameraMtx;
 

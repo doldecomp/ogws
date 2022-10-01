@@ -13,7 +13,7 @@ namespace EGG
 
     void PostEffectHDR::reset()
     {
-        COLOR_0x38 = DrawGX::sColorWhite;
+        COLOR_0x38 = DrawGX::scColorWhite;
         COLOR_0x30 = COLOR_0x38;
         COLOR_0x20 = COLOR_0x38;
         COLOR_0x34 = COLOR_0x38;

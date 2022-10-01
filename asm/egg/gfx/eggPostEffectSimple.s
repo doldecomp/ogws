@@ -23,8 +23,8 @@ lbl_80397DB0:
     .long 0
 
 .section .text, "ax"
-.global func_80098B24
-func_80098B24:
+.global __ct__Q23EGG16PostEffectSimpleFv
+__ct__Q23EGG16PostEffectSimpleFv:
 /* 80098B24 00093A24  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80098B28 00093A28  7C 08 02 A6 */	mflr r0
 /* 80098B2C 00093A2C  90 01 00 14 */	stw r0, 0x14(r1)
@@ -40,8 +40,9 @@ func_80098B24:
 /* 80098B54 00093A54  7C 08 03 A6 */	mtlr r0
 /* 80098B58 00093A58  38 21 00 10 */	addi r1, r1, 0x10
 /* 80098B5C 00093A5C  4E 80 00 20 */	blr 
-/* 80098B60 00093A60  38 82 8B A4 */	addi r4, r2, sColorWhite__Q23EGG6DrawGX-_SDA2_BASE_
-/* 80098B64 00093A64  88 E2 8B A4 */	lbz r7, sColorWhite__Q23EGG6DrawGX-_SDA2_BASE_(r2)
+
+/* 80098B60 00093A60  38 82 8B A4 */	addi r4, r2, scColorWhite__Q23EGG6DrawGX-_SDA2_BASE_
+/* 80098B64 00093A64  88 E2 8B A4 */	lbz r7, scColorWhite__Q23EGG6DrawGX-_SDA2_BASE_(r2)
 /* 80098B68 00093A68  88 C4 00 01 */	lbz r6, 1(r4)
 /* 80098B6C 00093A6C  38 00 00 01 */	li r0, 1
 /* 80098B70 00093A70  88 A4 00 02 */	lbz r5, 2(r4)
@@ -54,6 +55,7 @@ func_80098B24:
 /* 80098B8C 00093A8C  D0 03 00 24 */	stfs f0, 0x24(r3)
 /* 80098B90 00093A90  90 03 00 2C */	stw r0, 0x2c(r3)
 /* 80098B94 00093A94  4E 80 00 20 */	blr 
+
 /* 80098B98 00093A98  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 80098B9C 00093A9C  7C 08 02 A6 */	mflr r0
 /* 80098BA0 00093AA0  90 01 00 24 */	stw r0, 0x24(r1)
@@ -112,7 +114,7 @@ lbl_80098BFC:
 /* 80098C70 00093B70  48 04 8B F9 */	bl GXSetTevKColorSel
 /* 80098C74 00093B74  38 60 00 00 */	li r3, 0
 /* 80098C78 00093B78  38 80 00 1C */	li r4, 0x1c
-/* 80098C7C 00093B7C  48 04 8C 3D */	bl func_800E18B8
+/* 80098C7C 00093B7C  48 04 8C 3D */	bl GXSetTevKAlphaSel
 /* 80098C80 00093B80  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 80098C84 00093B84  38 81 00 08 */	addi r4, r1, 8
 /* 80098C88 00093B88  38 60 00 00 */	li r3, 0
