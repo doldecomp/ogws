@@ -21,7 +21,7 @@ namespace nw4r
 			DrawStrategyBuilder * mDrawStrategyBuilder; // at 0x8
 			EmitFormBuilder * mEmitFormBuilder; // at 0xc
 			CreationQueue mCreationQueue; // at 0x10
-			u32 mMaxGroupID;
+			u32 mNumGroup;
 			ActivityList * ARR_0x5018;
 			Random mRandom; // at 0x501C
 			math::VEC3 VEC_0x5020;

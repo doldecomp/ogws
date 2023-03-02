@@ -35,13 +35,13 @@ namespace nw4r
 			}
 			
 			mMemoryManager = NULL;
-			mMaxGroupID = 0;
+			mNumGroup = 0;
 			BYTE_0x5064 = 0;
 		}
 		
 		EffectSystem::~EffectSystem()
 		{
-			for (u32 i = 0; i < mMaxGroupID; i++)
+			for (u32 i = 0; i < mNumGroup; i++)
 			{
 				RetireEffectAll(i);
 			}
@@ -54,12 +54,12 @@ namespace nw4r
 		
 		bool EffectSystem::Initialize(u32 maxGroupID)
 		{
-			u32 len = mMaxGroupID = maxGroupID;
+			u32 len = mNumGroup = maxGroupID;
 
-			void *p = mMemoryManager->AllocHeap(mMaxGroupID * sizeof(ActivityList) + 32);
+			void *p = mMemoryManager->AllocHeap(mNumGroup * sizeof(ActivityList) + 32);
 			ARR_0x5018 = new (p) ActivityList[len];
 			
-			for (u32 i = 0; i < mMaxGroupID; i++)
+			for (u32 i = 0; i < mNumGroup; i++)
 			{
 				ARR_0x5018[i].SetOffset(0x14);
 				ARR_0x5018[i].Initialize();
