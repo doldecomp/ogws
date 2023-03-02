@@ -8,25 +8,25 @@ namespace nw4r
 {
     namespace g3d
     {
-        void CalcTexMtx(math::MTX34 *pMtx, bool b, const TexSrt &srt, TexSrt::Flag flag,
+        void CalcTexMtx(math::MTX34 *pMtx, bool set, const TexSrt &srt, TexSrt::Flag flag,
             TexSrtTypedef::TexMatrixMode mode)
         {
-            bool result;
+            bool identity;
 
             if (mode == TexSrtTypedef::TEX_MTX_MAYA)
             {
-                result = detail::dcc::CalcTexMtx_Maya(pMtx, b, srt, flag) == false;
+                identity = !detail::dcc::CalcTexMtx_Maya(pMtx, set, srt, flag);
             }
             else if (mode == TexSrtTypedef::TEX_MTX_XSI)
             {
-                result = detail::dcc::CalcTexMtx_Xsi(pMtx, b, srt, flag) == false;
+                identity = !detail::dcc::CalcTexMtx_Xsi(pMtx, set, srt, flag);
             }
-            else /* TexSrtTypedef::TEX_MTX_3DSMAX */
+            else
             {
-                result = detail::dcc::CalcTexMtx_3dsmax(pMtx, b, srt, flag) == false;
+                identity = !detail::dcc::CalcTexMtx_3dsmax(pMtx, set, srt, flag);
             }
 
-            if (result && b)
+            if (identity && set)
             {
                 math::MTX34Identity(pMtx);
             }
