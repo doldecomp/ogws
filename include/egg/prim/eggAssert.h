@@ -10,8 +10,8 @@
 extern "C" {
 #endif
 
-void system_halt(char *file, int line, const char *msg, ...);
-void system_print(bool bVisible, char *file, const char *msg, ...);
+void system_halt(char *file, int line, char *msg, ...);
+void system_print(bool bVisible, char *file, char *msg, ...);
 
 #ifdef __cplusplus
 }

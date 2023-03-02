@@ -6,7 +6,7 @@
 #include <string.h>
 #include <stdio.h>
 
-void system_print(bool bVisible, char *file, const char *msg, ...)
+void system_print(bool bVisible, char *file, char *msg, ...)
 {
     if (!bVisible) return;
 
@@ -33,7 +33,7 @@ void system_print(bool bVisible, char *file, const char *msg, ...)
     OSReport("%s", msg_buf);
 }
 
-void system_halt(char *file, int line, const char *msg, ...)
+void system_halt(char *file, int line, char *msg, ...)
 {
     OSReport("---------- HALT -------------\n");
 
