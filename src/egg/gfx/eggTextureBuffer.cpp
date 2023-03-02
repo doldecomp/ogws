@@ -112,7 +112,7 @@ namespace EGG
     }
 
     // Attempt to alloc buffer of specified size
-    void TextureBuffer::alloc(TextureBuffer *newBuf, u32 size)
+    void TextureBuffer::alloc(u32 size)
     {
         #line 148
         EGG_ASSERT(size > 0);
@@ -127,19 +127,19 @@ namespace EGG
             if (p_list->mState == STATE_FREE && p_list->mSize >= size)
             {
                 // Assign free buffer data to new buffer
-                newBuf->mSize = size;
-                newBuf->mState = STATE_ALLOCED;
-                newBuf->setBuffer(p_list->getBuffer());
+                mSize = size;
+                mState = STATE_ALLOCED;
+                setBuffer(p_list->getBuffer());
 
                 // Prepend new buffer before old buffer
-                newBuf->mpNext = p_list;
+                mpNext = p_list;
                 TextureBuffer *oldPrev = p_list->mpPrev;
-                newBuf->mpPrev = oldPrev;
+                mpPrev = oldPrev;
 
-                // Fix newBuf->prev link
+                // Fix this->prev link
                 if (oldPrev != NULL)
                 {
-                    oldPrev->mpNext = newBuf;
+                    oldPrev->mpNext = this;
                 }
                 else
                 {
@@ -147,7 +147,7 @@ namespace EGG
                     #line 181
                     EGG_ASSERT(p_list == spHead);
 
-                    spHead = newBuf;
+                    spHead = this;
                 }
 
                 // Remove requested size from old buffer
@@ -156,15 +156,15 @@ namespace EGG
                 // Free old buffer if now empty
                 if (p_list->mSize == 0)
                 {
-                    if (p_list->mpNext != NULL) p_list->mpNext->mpPrev = newBuf;
-                    newBuf->mpNext = p_list->mpNext;
+                    if (p_list->mpNext != NULL) p_list->mpNext->mpPrev = this;
+                    mpNext = p_list->mpNext;
                     append(p_list);
                 }
                 // Adjust old buffer by requested size
                 else
                 {
                     p_list->setBuffer((u8 *)p_list->getBuffer() + size);
-                    p_list->mpPrev = newBuf;
+                    p_list->mpPrev = this;
                 }
 
                 return;

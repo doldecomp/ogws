@@ -17,7 +17,6 @@ namespace EGG
 
         static void initialize(u32, Heap *);
         static TextureBuffer * getNotJoin();
-        static void alloc(TextureBuffer *, u32);
 
         static TextureBuffer * alloc(u16 w, u16 h, GXTexFmt fmt)
         {
@@ -34,7 +33,7 @@ namespace EGG
             buf->setMinFilt(1);
             buf->setMagFilt(1);
 
-            alloc(buf, buf->getTexBufferSize());
+            buf->alloc(buf->getTexBufferSize());
             return buf;
         }
 
@@ -52,6 +51,7 @@ namespace EGG
         virtual ~TextureBuffer() {} // at 0x8
         virtual void configure(); // at 0xC
 
+        void alloc(u32);
         void free();
 
     private:
