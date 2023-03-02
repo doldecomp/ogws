@@ -53,7 +53,7 @@ namespace EGG
         #line 70
         EGG_ASSERT(pObj);
 
-        u32 imageOfs = (tex.mImageOfs != 0) ? tex.mImageOfs : 32;
+        u32 imageOfs = (tex.mImageOfs != 0) ? tex.mImageOfs : sizeof(tex);
         BOOL bMipmap = (tex.mMipmap) ? TRUE : FALSE;
 
         GXInitTexObj(pObj, (char *)&tex + imageOfs, tex.mWidth, tex.mHeight,
