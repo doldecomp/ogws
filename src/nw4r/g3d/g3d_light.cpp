@@ -2,7 +2,7 @@
 #include "g3d_light.h"
 #include "g3d_cpu.h"
 #include "math_types.h"
-#include <algorithm.h>
+#include <algorithm>
 
 namespace nw4r
 {

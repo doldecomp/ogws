@@ -1,6 +1,6 @@
 #include "g3d_scnobj.h"
 #include "math_types.h"
-#include <STL/algorithm.h>
+#include <algorithm>
 
 namespace nw4r
 {

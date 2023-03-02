@@ -1,5 +1,5 @@
 #include "g3d_anmscn.h"
-#include <algorithm.h>
+#include <algorithm>
 
 namespace nw4r
 {
