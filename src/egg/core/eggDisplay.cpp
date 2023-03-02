@@ -36,7 +36,7 @@ namespace EGG
         u32 retraceDiff = VIGetRetraceCount() - mRetraceCount;
         const u32 maxDiff = wait - 1;
     
-        while (true)
+        do
         {
             if (retraceDiff >= maxDiff)
             {
@@ -50,8 +50,7 @@ namespace EGG
             }
     
             VIWaitForRetrace();
-            if (++retraceDiff >= wait) break;
-        }
+        } while(++retraceDiff < wait);
     
         calcFrequency();
         mRetraceCount = VIGetRetraceCount();
