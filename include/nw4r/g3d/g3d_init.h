@@ -7,7 +7,7 @@ namespace nw4r
 {
     namespace g3d
     {
-        static void InitFastCast()
+        inline void InitFastCast()
         {
             OSInitFastCast();
             OSSetGQR6(7, 5);

@@ -12,12 +12,12 @@ namespace nw4r
     {
         namespace detail
         {
-            static void * AllocFromAllocator(MEMAllocator *pAllocator, u32 size)
+            inline void * AllocFromAllocator(MEMAllocator *pAllocator, u32 size)
             {
                 return MEMAllocFromAllocator(pAllocator, size);
             }
 
-            static void FreeToAllocator(MEMAllocator *pAllocator, void * pBlock)
+            inline void FreeToAllocator(MEMAllocator *pAllocator, void * pBlock)
             {
                 return MEMFreeToAllocator(pAllocator, pBlock);
             }
