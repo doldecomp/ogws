@@ -38,12 +38,13 @@ namespace nw4r
                 FLAG_10 = 0x10,
                 FLAG_20 = 0x20,
                 FLAG_40 = 0x40,
-                FLAG_60 = 0x60,
                 FLAG_80 = 0x80,
                 FLAG_10000000 = 0x10000000,
                 FLAG_20000000 = 0x20000000,
                 FLAG_40000000 = 0x40000000,
-                FLAG_80000000 = 0x80000000
+                FLAG_80000000 = 0x80000000,
+
+                FLAG_60 = FLAG_40 | FLAG_20
             };
 
             enum ScnObjMtxType
