@@ -84,15 +84,15 @@ namespace nw4r
 
         struct LightSet
         {
-            LightSet(void * vptr, void * vptr2) : mSetting(vptr), mLightSetData(vptr2) {}
+            LightSet(LightSetting *setting, LightSetData *data) : mSetting(setting), mLightSetData(data) {}
             
-            bool IsValid() const { return mSetting.IsValid() && mLightSetData.IsValid(); }
+            bool IsValid() const { return mSetting != NULL && mLightSetData != NULL; }
 
             bool SelectLightObj(u32, int);
             bool SelectAmbLightObj(int);
 
-            ResCommon<LightSetting> mSetting; // at 0x0
-            ResCommon<LightSetData> mLightSetData; // at 0x4
+            LightSetting* mSetting; // at 0x0
+            LightSetData* mLightSetData; // at 0x4
         };
 
         class LightSetting

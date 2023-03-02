@@ -252,13 +252,13 @@ namespace nw4r
             {
                 if (r5 < 0)
                 {
-                    set = mLightSetData.ptr();
+                    set = mLightSetData;
                     set->mLights[r4] = -1;
                     return true;
                 }
-                if (r5 < mSetting.ref().GetNumLightObj())
+                if (r5 < mSetting->GetNumLightObj())
                 {
-                    set = mLightSetData.ptr();
+                    set = mLightSetData;
                     set->mLights[r4] = r5;
                     return true;
                 }
@@ -273,12 +273,12 @@ namespace nw4r
             {
                 if (r4 < 0)
                 {
-                    mLightSetData.ref().mAmbient = -1;
+                    mLightSetData->mAmbient = -1;
                     return true;
                 }
-                if (r4 < mSetting.ref().GetNumLightObj())
+                if (r4 < mSetting->GetNumLightObj())
                 {
-                    mLightSetData.ref().mAmbient = r4;
+                    mLightSetData->mAmbient = r4;
                     return true;
                 }
             }
