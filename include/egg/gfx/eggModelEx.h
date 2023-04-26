@@ -12,18 +12,13 @@ namespace EGG
 {
     struct TextureReplaceResult
     {
-        struct Data
+        union Data
         {
-            union
-            {
-                void *p;
-                u32 l;
-                u16 s[2];
-                u8 b[4];
-            };
-        };
-
-        Data data[256];
+            void *p;
+            u32 l;
+            u16 s;
+            u8 b;
+        } data[256];
     };
 
     class ModelEx
