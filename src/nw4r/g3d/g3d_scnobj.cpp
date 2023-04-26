@@ -1,5 +1,6 @@
 #include "g3d_scnobj.h"
 #include "math_types.h"
+#include "math_geometry.h"
 #include <algorithm>
 
 namespace nw4r
@@ -541,21 +542,20 @@ namespace nw4r
                 && obj != NULL && obj->GetParent() == NULL)
             {
                 ScnObj **pObj = std::find(&mObjects[0], &mObjects[mSize], obj);
-                if (pObj != &mObjects[mSize]) goto exit;
+                if (pObj == &mObjects[mSize]) {
+                    for (u32 i = mSize; i > idx; i--)
+                    {
+                        mObjects[i] = mObjects[i - 1];
+                    }
 
-                for (u32 i = mSize; i > idx; i--)
-                {
-                    mObjects[i] = mObjects[i - 1];
+                    mObjects[idx] = obj;
+                    obj->G3dProc(G3DPROC_ATTACH_PARENT, 0, this);
+                    
+                    mSize++;
+                    return true;
                 }
-
-                mObjects[idx] = obj;
-                obj->G3dProc(G3DPROC_ATTACH_PARENT, 0, this);
-                
-                mSize++;
-                return true;
             }
 
-        exit:
             return false;
         }
 
