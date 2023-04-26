@@ -117,9 +117,7 @@ namespace EGG
     {
         #line 184
         EGG_ASSERT(pScnProc);
-
         ProcData *p_data = (ProcData *)pScnProc->GetUserData();
-        #line 186
         EGG_ASSERT(p_data);
         EGG_ASSERT(p_data->mpThis);
 
