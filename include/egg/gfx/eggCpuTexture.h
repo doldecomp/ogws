@@ -63,6 +63,7 @@ namespace EGG
         CpuTexture();
         CpuTexture(u16, u16, GXTexFmt);
         
+        void checkTexBuffer() const;
         void invalidate() const;
         void flush() const;
         u32 getTexBufferSize() const;
@@ -74,7 +75,7 @@ namespace EGG
         void allocTexBufferAndHeader();
         void setColor(u16, u16, GXColor);
 
-        bool isConfigured() const { return mFlags & CONFIGURED; }
+        bool checkIsConfigure() const { return mFlags & CONFIGURED; }
         bool checkHasHeader() const { return mFlags & HAS_HEADER; }
 
         void setFlag(u8 flag) { mFlags |= flag; }
@@ -103,9 +104,7 @@ namespace EGG
         void setBuffer(void *pBuffer)
         {
             #line 180
-            EGG_ASSERT(pBuffer);
-            #line 180
-            EGG_ASSERT(( u32 )pBuffer % 32 == 0);
+            EGG_ASSERT(pBuffer); EGG_ASSERT(( u32 )pBuffer % 32 == 0);
 
             mpBuffer = pBuffer;
             mFlags &= ~HAS_HEADER;

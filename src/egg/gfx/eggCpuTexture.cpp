@@ -29,7 +29,7 @@ namespace EGG
     void CpuTexture::getTexObj(GXTexObj *pObj) const
     {
         #line 230
-        EGG_ASSERT_MSG(isConfigured(), "Please call configure() after construct!");
+        EGG_ASSERT_MSG(checkIsConfigure(), "Please call configure() after construct!");
         EGG_ASSERT(pObj);
         EGG_ASSERT(mpBuffer);
 
@@ -48,19 +48,21 @@ namespace EGG
         GXLoadTexObj(&obj, id);
     }
     
-    void CpuTexture::invalidate() const
+    void CpuTexture::checkTexBuffer() const
     {
         #line 259
         EGG_ASSERT(mpBuffer);
+    }
 
+    void CpuTexture::invalidate() const
+    {
+        checkTexBuffer();
         DCInvalidateRange(mpBuffer, getTexBufferSize());
     }
 
     void CpuTexture::flush() const
     {
-        #line 259
-        EGG_ASSERT(mpBuffer);
-
+        checkTexBuffer();
         DCFlushRange(mpBuffer, getTexBufferSize());
     }
 
@@ -72,7 +74,7 @@ namespace EGG
     void CpuTexture::buildHeader() const
     {
         #line 294
-        EGG_ASSERT_MSG(isConfigured(), "Please call configure() after construct!");
+        EGG_ASSERT_MSG(checkIsConfigure(), "Please call configure() after construct!");
         EGG_ASSERT(checkHasHeader());
 
         CpuTexture::Header *pHdr = getHeader();

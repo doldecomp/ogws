@@ -44,7 +44,7 @@ namespace EGG
 
         #line 60
         EGG_ASSERT(getBuffer());
-        EGG_ASSERT_MSG(isConfigured(), "Please call configure() after construct!");
+        EGG_ASSERT_MSG(checkIsConfigure(), "Please call configure() after construct!");
 
         if (format == -1)
             format = static_cast<int>(getFormat());
