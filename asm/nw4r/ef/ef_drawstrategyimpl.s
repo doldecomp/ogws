@@ -263,8 +263,8 @@ lbl_800219FC:
 /* 80021A30 0001C930  42 00 FF CC */	bdnz lbl_800219FC
 /* 80021A34 0001C934  4E 80 00 20 */	blr 
 
-.global _InitTexture__Q34nw4r2ef16DrawStrategyImplFRCQ34nw4r2ef18EmitterDrawSetting
-_InitTexture__Q34nw4r2ef16DrawStrategyImplFRCQ34nw4r2ef18EmitterDrawSetting:
+.global InitTexture__Q34nw4r2ef16DrawStrategyImplFRCQ34nw4r2ef18EmitterDrawSetting
+InitTexture__Q34nw4r2ef16DrawStrategyImplFRCQ34nw4r2ef18EmitterDrawSetting:
 /* 80021A38 0001C938  A0 04 00 00 */	lhz r0, 0(r4)
 /* 80021A3C 0001C93C  38 A0 FF FF */	li r5, -1
 /* 80021A40 0001C940  38 C0 00 00 */	li r6, 0
@@ -297,8 +297,8 @@ lbl_80021AA0:
 /* 80021AA0 0001C9A0  88 63 00 AE */	lbz r3, 0xae(r3)
 /* 80021AA4 0001C9A4  48 0B C4 E4 */	b GXSetNumTexGens
 
-.global _InitTev__Q34nw4r2ef16DrawStrategyImplFRCQ34nw4r2ef18EmitterDrawSettingRCQ34nw4r2ef8DrawInfo
-_InitTev__Q34nw4r2ef16DrawStrategyImplFRCQ34nw4r2ef18EmitterDrawSettingRCQ34nw4r2ef8DrawInfo:
+.global InitTev__Q34nw4r2ef16DrawStrategyImplFRCQ34nw4r2ef18EmitterDrawSettingRCQ34nw4r2ef8DrawInfo
+InitTev__Q34nw4r2ef16DrawStrategyImplFRCQ34nw4r2ef18EmitterDrawSettingRCQ34nw4r2ef8DrawInfo:
 /* 80021AA8 0001C9A8  94 21 FF C0 */	stwu r1, -0x40(r1)
 /* 80021AAC 0001C9AC  7C 08 02 A6 */	mflr r0
 /* 80021AB0 0001C9B0  90 01 00 44 */	stw r0, 0x44(r1)
@@ -494,8 +494,8 @@ lbl_80021D70:
 /* 80021D80 0001CC80  38 21 00 40 */	addi r1, r1, 0x40
 /* 80021D84 0001CC84  4E 80 00 20 */	blr 
 
-.global _InitColor__Q34nw4r2ef16DrawStrategyImplFPQ34nw4r2ef15ParticleManagerRCQ34nw4r2ef18EmitterDrawSettingRCQ34nw4r2ef8DrawInfo
-_InitColor__Q34nw4r2ef16DrawStrategyImplFPQ34nw4r2ef15ParticleManagerRCQ34nw4r2ef18EmitterDrawSettingRCQ34nw4r2ef8DrawInfo:
+.global InitColor__Q34nw4r2ef16DrawStrategyImplFPQ34nw4r2ef15ParticleManagerRCQ34nw4r2ef18EmitterDrawSettingRCQ34nw4r2ef8DrawInfo
+InitColor__Q34nw4r2ef16DrawStrategyImplFPQ34nw4r2ef15ParticleManagerRCQ34nw4r2ef18EmitterDrawSettingRCQ34nw4r2ef8DrawInfo:
 /* 80021D88 0001CC88  94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 80021D8C 0001CC8C  7C 08 02 A6 */	mflr r0
 /* 80021D90 0001CC90  90 01 00 34 */	stw r0, 0x34(r1)

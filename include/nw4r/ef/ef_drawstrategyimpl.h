@@ -30,9 +30,9 @@ namespace nw4r
 			virtual UNKTYPE GetGetFirstDrawParticleFunc(int);
 			virtual UNKTYPE GetGetNextDrawParticleFunc(int);
 
-			void _InitTexture(const EmitterDrawSetting &);
-			void _InitTev(const EmitterDrawSetting &, const DrawInfo &);
-			void _InitColor(ParticleManager *, const EmitterDrawSetting &, const DrawInfo &);
+			void InitTexture(const EmitterDrawSetting &);
+			void InitTev(const EmitterDrawSetting &, const DrawInfo &);
+			void InitColor(ParticleManager *, const EmitterDrawSetting &, const DrawInfo &);
 
 		private:
 			PrevTexture mPrevTextures[3]; // at 0x4
