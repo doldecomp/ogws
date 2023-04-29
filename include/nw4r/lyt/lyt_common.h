@@ -19,6 +19,11 @@ namespace nw4r
             {
 
             };
+
+            struct DataBlockHeader {
+                u32 kind; // at 0x0
+                u32 size; // at 0x4
+            };
         }
 
         namespace detail

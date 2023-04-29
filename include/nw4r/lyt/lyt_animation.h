@@ -3,6 +3,7 @@
 #include "types_nw4r.h"
 #include "ut_LinkList.h"
 #include "lyt_resourceAccessor.h"
+#include "lyt_common.h"
 
 namespace nw4r
 {
@@ -16,26 +17,24 @@ namespace nw4r
             };
         }
 
-        struct AnimResource
+        struct AnimationBlock
         {
-            inline AnimResource() : OFFSET_0x0(0), mResourceBlock(0), OFFSET_0x8(0), OFFSET_0xC(0) {}
-
-            u32 OFFSET_0x0;
-            u32 mResourceBlock;
-            u32 OFFSET_0x8;
-            u32 OFFSET_0xC;
+            res::DataBlockHeader header; // at 0x0
+            u16 frameSize; // at 0x8
+            bool loop; // at 0xA
+            // . . .
         };
 
         struct AnimTransform
         {
-            inline AnimTransform() : mNode(), mResource(NULL), FLOAT_0x10(0.0f) {}
+            inline AnimTransform() : mNode(), mResource(NULL), mFrame(0.0f) {}
 
-            u32 GetFrameSize() const;
+            u16 GetFrameSize() const;
             bool IsLoopData() const;
 
             ut::LinkListNode mNode; // at 0x0
-            AnimResource *mResource; // at 0xC
-            f32 FLOAT_0x10;
+            AnimationBlock *mResource; // at 0xC
+            f32 mFrame; // at 0x10
         };
 
         struct AnimTransformBasic : AnimTransform
