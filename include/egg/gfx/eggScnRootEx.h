@@ -6,6 +6,10 @@
 #include "types_nw4r.h"
 #include "math_types.h"
 
+#define CALC_BEFORE_FUNC(x) void calc_before_##x()
+#define CALC_AFTER_FUNC(x) void calc_after_##x()
+#define DRAW_BEFORE_FUNC(x) void draw_before_##x()
+#define DRAW_AFTER_FUNC(x) void draw_after_##x()
 namespace EGG
 {
     class ScnRootEx
@@ -60,12 +64,12 @@ namespace EGG
         virtual void configure(); // at 0xC
         virtual void finishDraw(); // at 0x10
         virtual void changeScnRoot(nw4r::g3d::ScnRoot *); // at 0x14
-        virtual void calc_before_CalcWorld(); // at 0x18
-        virtual void calc_after_CalcWorld(); // at 0x1C
-        virtual void setCurrentCamera(u8, const Screen&); // at 0x20
-        virtual void draw_before_CalcView(); // at 0x24
-        virtual void draw_after_DrawOpa(); // at 0x28
-        virtual void draw_after_DrawOpaXlu(); // at 0x2C
+        virtual CALC_BEFORE_FUNC(CalcWorld); // at 0x18
+        virtual CALC_AFTER_FUNC(CalcWorld); // at 0x1C
+        virtual void SetCurrentCamera(u8, const Screen&); // at 0x20
+        virtual DRAW_BEFORE_FUNC(CalcView); // at 0x24
+        virtual DRAW_AFTER_FUNC(DrawOpa); // at 0x28
+        virtual DRAW_AFTER_FUNC(DrawOpaXlu); // at 0x2C
 
         void setLightManager(LightManager *);
         void setFogManager(FogManager *);

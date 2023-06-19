@@ -99,7 +99,7 @@ namespace EGG
         SHORT_0x12 &= ~0x1;
 
         mBase->GetCamera(id).SetCameraMtxDirectly(mtx);
-        setCurrentCamera(id, screen);
+        SetCurrentCamera(id, screen);
     }
 
     void ScnRootEx::CalcView()
@@ -168,7 +168,7 @@ namespace EGG
             mpShadowTextureManager->Calc();
     }
 
-    void ScnRootEx::setCurrentCamera(u8 id, const Screen& screen)
+    void ScnRootEx::SetCurrentCamera(u8 id, const Screen& screen)
     {
         mpScreen->CopyFromAnother(screen);
         mBase->SetCurrentCamera(id);
