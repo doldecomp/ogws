@@ -2,8 +2,8 @@
 #define EGG_CORE_THREAD_H
 #include "types_egg.h"
 #include "ut_list.h"
-#include <RevoSDK/OS/OSThread.h>
-#include <RevoSDK/OS/OSMessage.h>
+#include <revolution/OS/OSThread.h>
+#include <revolution/OS/OSMessage.h>
 
 namespace EGG
 {

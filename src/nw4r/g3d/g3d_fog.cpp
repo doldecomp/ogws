@@ -1,6 +1,6 @@
 #include "g3d_fog.h"
-#include <RevoSDK/GX/GX.h>
-#include <RevoSDK/GX/GXPixel.h>
+#include <revolution/GX/GX.h>
+#include <revolution/GX/GXPixel.h>
 
 namespace nw4r
 {

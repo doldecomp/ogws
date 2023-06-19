@@ -3,8 +3,8 @@
 #include "types_egg.h"
 #include "eggDisplay.h"
 #include "types_nw4r.h"
-#include <RevoSDK/GX/GXTexture.h>
-#include <RevoSDK/OS/OSThread.h>
+#include <revolution/GX/GXTexture.h>
+#include <revolution/OS/OSThread.h>
 
 namespace EGG
 {

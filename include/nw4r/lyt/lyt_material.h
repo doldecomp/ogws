@@ -1,6 +1,6 @@
 #ifndef NW4R_LYT_MATERIAL_H
 #define NW4R_LYT_MATERIAL_H
-#include <RevoSDK/GX/GX.h>
+#include <revolution/GX/GX.h>
 #include "lyt_animation.h"
 #include "ut_LinkList.h"
 

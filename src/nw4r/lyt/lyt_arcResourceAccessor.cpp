@@ -1,7 +1,7 @@
 #pragma ipa file
 #include "lyt_arcResourceAccessor.h"
 #include <string.h>
-#include <RevoSDK/ARC/arc.h>
+#include <revolution/ARC/arc.h>
 
 namespace
 {

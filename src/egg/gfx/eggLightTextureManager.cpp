@@ -11,8 +11,8 @@
 #include "eggTextureBuffer.h"
 #include "math_types.h"
 #include "g3d_resmat.h"
-#include <RevoSDK/GX/GXPixel.h>
-#include <RevoSDK/GX/GXTexture.h>
+#include <revolution/GX/GXPixel.h>
+#include <revolution/GX/GXTexture.h>
 #include <string.h>
 
 namespace EGG

@@ -1,7 +1,7 @@
 #ifndef NW4R_UT_COLOR_H
 #define NW4R_UT_COLOR_H
 #include "types_nw4r.h"
-#include <RevoSDK/GX/GX.h>
+#include <revolution/GX/GX.h>
 /*
 #define r channels[0]
 #define g channels[1]

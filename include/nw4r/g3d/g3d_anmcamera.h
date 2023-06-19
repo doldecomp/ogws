@@ -2,7 +2,7 @@
 #define NW4R_G3D_ANMCAMERA_H
 #include "types_nw4r.h"
 #include "math_types.h"
-#include <RevoSDK/GX/GXTransform.h>
+#include <revolution/GX/GXTransform.h>
 
 namespace nw4r
 {

@@ -2,9 +2,9 @@
 #include "eggGraphicsFifo.h"
 #include "eggHeap.h"
 #include "eggAssert.h"
-#include <RevoSDK/OS/OS.h>
-#include <RevoSDK/GX/GXFifo.h>
-#include <RevoSDK/GX/GXInit.h>
+#include <revolution/OS/OS.h>
+#include <revolution/GX/GXFifo.h>
+#include <revolution/GX/GXInit.h>
 
 namespace EGG
 {

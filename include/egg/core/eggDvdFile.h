@@ -3,10 +3,10 @@
 #include "types_egg.h"
 #include "eggFile.h"
 #include "ut_list.h"
-#include <RevoSDK/DVD/dvd.h>
-#include <RevoSDK/OS/OSMutex.h>
-#include <RevoSDK/OS/OSMessage.h>
-#include <RevoSDK/OS/OSThread.h>
+#include <revolution/DVD/dvd.h>
+#include <revolution/OS/OSMutex.h>
+#include <revolution/OS/OSMessage.h>
+#include <revolution/OS/OSThread.h>
 
 namespace EGG
 {

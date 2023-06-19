@@ -1,6 +1,6 @@
 #include "ut_RomFont.h"
 #include "ut_algorithm.h"
-#include <RevoSDK/OS/OSFont.h>
+#include <revolution/OS/OSFont.h>
 
 namespace nw4r
 {

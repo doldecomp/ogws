@@ -1,5 +1,5 @@
 #include "lyt_drawInfo.h"
-#include <RevoSDK/TRK/__mem.h>
+#include <revolution/TRK/__mem.h>
 
 namespace nw4r
 {

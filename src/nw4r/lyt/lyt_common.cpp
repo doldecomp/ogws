@@ -5,9 +5,9 @@
 #include "ut_color.h"
 #include "math_types.h"
 #include <string.h>
-#include <RevoSDK/GX/GXVert.h>
-#include <RevoSDK/GX/GXAttr.h>
-#include <RevoSDK/GX/GXGeometry.h>
+#include <revolution/GX/GXVert.h>
+#include <revolution/GX/GXAttr.h>
+#include <revolution/GX/GXGeometry.h>
 
 #define BOM_BIG_ENDIAN 0xFEFF
 #define BOM_LITTLE_ENDIAN 0xFFFE

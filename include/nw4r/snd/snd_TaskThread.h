@@ -1,7 +1,7 @@
 #ifndef NW4R_SND_TASKTHREAD_H
 #define NW4R_SND_TASKTHREAD_H
 #include "types_nw4r.h"
-#include <RevoSDK/OS/OSThread.h>
+#include <revolution/OS/OSThread.h>
 
 namespace nw4r
 {

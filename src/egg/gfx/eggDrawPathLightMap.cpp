@@ -6,8 +6,8 @@
 #include "eggDrawGX.h"
 #include "eggStateGX.h"
 #include "math_types.h"
-#include <RevoSDK/GX/GXTev.h>
-#include <RevoSDK/GX/GXBump.h>
+#include <revolution/GX/GXTev.h>
+#include <revolution/GX/GXBump.h>
 
 namespace EGG
 {

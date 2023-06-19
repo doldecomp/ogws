@@ -1,9 +1,9 @@
 #ifndef NW4R_UT_LOCKED_CACHE
 #define NW4R_UT_LOCKED_CACHE
 #include "types_nw4r.h"
-#include <RevoSDK/OS/OSMutex.h>
-#include <RevoSDK/OS/OSCache.h>
-#include <RevoSDK/OS/OSThread.h>
+#include <revolution/OS/OSMutex.h>
+#include <revolution/OS/OSCache.h>
+#include <revolution/OS/OSThread.h>
 
 namespace nw4r
 {

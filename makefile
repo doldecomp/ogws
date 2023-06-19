@@ -43,27 +43,27 @@ LDFLAGS := -map $(MAP) -mapunused -proc gekko -fp hard -nodefaults -nofail
 #CFLAGS  := -Cpp_exceptions off -proc gekko -fp hard -O2,p -i include
 
 # Compiler flags for the Target Resident Kernel
-CFLAGS_TRK := -Cpp_exceptions off -proc gekko -fp hard -O4,s -i include/RevoSDK/TRK -I- -i include -i include/STL -nodefaults
+CFLAGS_TRK := -Cpp_exceptions off -proc gekko -fp hard -O4,s -i include/revolution/TRK -I- -i include -i include/STL -nodefaults
 # Compiler flags for NintendoWare for Revolution
-CFLAGS_NW4R := -lang c99 -enum int -inline auto -Cpp_exceptions off -RTTI off -proc gekko -fp hard -O4,p  -ir include/nw4r -I- -Iinclude -Iinclude/STL -ir include/RevoSDK -nodefaults
+CFLAGS_NW4R := -lang c99 -enum int -inline auto -Cpp_exceptions off -RTTI off -proc gekko -fp hard -O4,p  -ir include/nw4r -I- -Iinclude -Iinclude/STL -ir include/revolution -nodefaults
 # Compiler flags for EGG
-CFLAGS_EGG := -lang c99 -enum int -inline auto -Cpp_exceptions off -RTTI off -proc gekko -fp hard -O4,p  -ir include/egg -ir include/nw4r -I- -Iinclude -Iinclude/STL -ir include/RevoSDK -nodefaults -rostr -str pool
+CFLAGS_EGG := -lang c99 -enum int -inline auto -Cpp_exceptions off -RTTI off -proc gekko -fp hard -O4,p  -ir include/egg -ir include/nw4r -I- -Iinclude -Iinclude/STL -ir include/revolution -nodefaults -rostr -str pool
 # Compiler flags for ARC
-CFLAGS_ARC := -lang c99 -enum int -O4,p -inline auto -ipa file -volatileasm -Cpp_exceptions off -RTTI off -proc gekko -fp hard -I- -Iinclude -Iinclude/STL -ir include/RevoSDK -nodefaults
+CFLAGS_ARC := -lang c99 -enum int -O4,p -inline auto -ipa file -volatileasm -Cpp_exceptions off -RTTI off -proc gekko -fp hard -I- -Iinclude -Iinclude/STL -ir include/revolution -nodefaults
 
 # elf2dol needs to know these in order to calculate sbss correctly.
 BSS_PDHR := 9
 
 ASM_DIRS := asm \
-	asm/RevoSDK asm/nw4r asm/egg \
-	asm/RevoSDK/TRK \
+	asm/revolution asm/nw4r asm/egg \
+	asm/revolution/TRK \
 	asm/nw4r/ut asm/nw4r/ef asm/nw4r/math asm/nw4r/snd asm/nw4r/g3d asm/nw4r/lyt \
 	asm/egg/gfx asm/egg/math asm/egg/core asm/egg/audio asm/egg/util
 
-SRC_DIRS := nw4r egg RevoSDK \
+SRC_DIRS := nw4r egg revolution \
 	nw4r/ut nw4r/ef nw4r/math nw4r/snd nw4r/g3d nw4r/lyt \
 	egg/math egg/core egg/audio egg/util egg/gfx egg/prim \
-	RevoSDK/TRK RevoSDK/TRK_old RevoSDK/ARC
+	revolution/TRK revolution/TRK_old revolution/ARC
 
 # Flags for Riidefi's post-processing script
 PPROCFLAGS := -fsymbol-fixup
@@ -109,10 +109,10 @@ $(BUILD_DIR)/%.o: %.s
 	$(AS) $(ASFLAGS) -o $@ $<
 	$(PPROC) $(PPROCFLAGS) $@
 
-$(BUILD_DIR)/RevoSDK/TRK/%.o: src/RevoSDK/TRK/%.c
+$(BUILD_DIR)/revolution/TRK/%.o: src/revolution/TRK/%.c
 	$(CC) $(CFLAGS_TRK) -c -o $@ $<
 
-$(BUILD_DIR)/RevoSDK/TRK_old/%.o: src/RevoSDK/TRK_old/%.c
+$(BUILD_DIR)/revolution/TRK_old/%.o: src/revolution/TRK_old/%.c
 	$(CC_OLD) $(CFLAGS_TRK) -c -o $@ $<
 
 $(BUILD_DIR)/nw4r/%.o: src/nw4r/%.cpp
@@ -123,6 +123,6 @@ $(BUILD_DIR)/egg/%.o: src/egg/%.cpp
 	$(CC) $(CFLAGS_EGG) -c -o $@ $<
 	$(PPROC) $(PPROCFLAGS) $@
 
-$(BUILD_DIR)/RevoSDK/ARC/%.o: src/RevoSDK/ARC/%.c
+$(BUILD_DIR)/revolution/ARC/%.o: src/revolution/ARC/%.c
 	$(CC) $(CFLAGS_ARC) -c -o $@ $<
 	$(PPROC) $(PPROCFLAGS) $@

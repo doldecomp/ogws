@@ -2,14 +2,14 @@
 #include "eggAssert.h"
 #include "g3d_init.h"
 #include "g3d_tmem.h"
-#include <RevoSDK/GX/GXAttr.h>
-#include <RevoSDK/GX/GXBump.h>
-#include <RevoSDK/GX/GXGeometry.h>
-#include <RevoSDK/GX/GXLight.h>
-#include <RevoSDK/GX/GXPixel.h>
-#include <RevoSDK/GX/GXTexture.h>
-#include <RevoSDK/GX/GXTransform.h>
-#include <RevoSDK/math/mtx.h>
+#include <revolution/GX/GXAttr.h>
+#include <revolution/GX/GXBump.h>
+#include <revolution/GX/GXGeometry.h>
+#include <revolution/GX/GXLight.h>
+#include <revolution/GX/GXPixel.h>
+#include <revolution/GX/GXTexture.h>
+#include <revolution/GX/GXTransform.h>
+#include <revolution/math/mtx.h>
 
 namespace EGG
 {

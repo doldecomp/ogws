@@ -1,9 +1,9 @@
 #include "g3d_init.h"
 #include "g3d_state.h"
 #include "ut_LockedCache.h"
-#include <RevoSDK/OS/OS.h>
-#include <RevoSDK/VI/vi.h>
-#include <RevoSDK/GX/GXFrameBuf.h>
+#include <revolution/OS/OS.h>
+#include <revolution/VI/vi.h>
+#include <revolution/GX/GXFrameBuf.h>
 
 namespace
 {

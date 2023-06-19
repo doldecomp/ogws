@@ -1,8 +1,8 @@
 #ifndef NW4R_LYT_TEXMAP_H
 #define NW4R_LYT_TEXMAP_H
 #include "types_nw4r.h"
-#include <RevoSDK/GX/GXTexture.h>
-#include <RevoSDK/TPL/TPL.h>
+#include <revolution/GX/GXTexture.h>
+#include <revolution/TPL/TPL.h>
 
 namespace nw4r
 {

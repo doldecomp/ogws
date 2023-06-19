@@ -1,7 +1,7 @@
 #pragma use_lmw_stmw on
 
 #include "eggAssert.h"
-#include <RevoSDK/OS/OSError.h>
+#include <revolution/OS/OSError.h>
 #include <stdarg.h>
 #include <string.h>
 #include <stdio.h>

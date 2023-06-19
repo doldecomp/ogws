@@ -3,7 +3,7 @@
 #include <types.h>
 #include "ut_IOStream.h"
 #include "ut_FileStream.h"
-#include <RevoSDK/NAND/nand.h>
+#include <revolution/NAND/nand.h>
 
 namespace nw4r
 {

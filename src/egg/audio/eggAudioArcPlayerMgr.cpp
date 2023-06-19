@@ -4,7 +4,7 @@
 #include "eggAssert.h"
 #include "eggCntFile.h"
 #include "snd_SoundPlayer.h"
-#include <RevoSDK/OS/OSCache.h>
+#include <revolution/OS/OSCache.h>
 
 namespace EGG
 {

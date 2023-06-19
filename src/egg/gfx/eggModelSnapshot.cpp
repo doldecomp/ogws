@@ -3,7 +3,7 @@
 #include "eggModelSnapshot.h"
 #include "eggModelEx.h"
 #include "eggModelBoundingInfo.h"
-#include <RevoSDK/math/vec.h>
+#include <revolution/math/vec.h>
 
 namespace EGG
 {

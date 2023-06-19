@@ -1,7 +1,7 @@
 #ifndef EGG_UTIL_EXCEPTION_H
 #define EGG_UTIL_EXCEPTION_H
 #include "types_egg.h"
-#include <RevoSDK/KPAD/KPAD.h>
+#include <revolution/KPAD/KPAD.h>
 
 namespace EGG
 {

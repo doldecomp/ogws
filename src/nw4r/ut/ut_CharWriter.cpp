@@ -1,12 +1,12 @@
 #include "ut_CharWriter.h"
-#include <RevoSDK/GX/GXVert.h>
-#include <RevoSDK/GX/GXTexture.h>
-#include <RevoSDK/GX/GXPixel.h>
-#include <RevoSDK/GX/GXTev.h>
-#include <RevoSDK/GX/GXLight.h>
-#include <RevoSDK/GX/GXAttr.h>
-#include <RevoSDK/GX/GXBump.h>
-#include <RevoSDK/GX/GXGeometry.h>
+#include <revolution/GX/GXVert.h>
+#include <revolution/GX/GXTexture.h>
+#include <revolution/GX/GXPixel.h>
+#include <revolution/GX/GXTev.h>
+#include <revolution/GX/GXLight.h>
+#include <revolution/GX/GXAttr.h>
+#include <revolution/GX/GXBump.h>
+#include <revolution/GX/GXGeometry.h>
 
 namespace
 {

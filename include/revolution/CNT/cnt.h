@@ -2,7 +2,7 @@
 #define REVOSDK_CNT_H
 #ifdef __cplusplus
 #include <types.h>
-#include <RevoSDK/ARC/arc.h>
+#include <revolution/ARC/arc.h>
 extern "C" {
 #endif
 

@@ -2,8 +2,8 @@
 #define EGG_GFX_LIGHT_OBJECT_H
 #include "eggIBinary.h"
 #include "eggVector.h"
-#include <RevoSDK/GX/GX.h>
-#include <RevoSDK/GX/GXLight.h>
+#include <revolution/GX/GX.h>
+#include <revolution/GX/GXLight.h>
 
 namespace EGG
 {

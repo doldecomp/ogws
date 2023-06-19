@@ -7,7 +7,7 @@
 #include "snd_NandSoundArchive.h"
 #include "snd_MemorySoundArchive.h"
 #include "snd_SoundArchivePlayer.h"
-#include <RevoSDK/CNT/cnt.h>
+#include <revolution/CNT/cnt.h>
 
 namespace EGG
 {

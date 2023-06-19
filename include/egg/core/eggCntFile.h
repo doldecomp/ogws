@@ -4,11 +4,11 @@
 #include "eggAssert.h"
 #include "ut_list.h"
 #include "eggFile.h"
-#include <RevoSDK/CNT/cnt.h>
-#include <RevoSDK/ARC/arc.h>
-#include <RevoSDK/OS/OSMutex.h>
-#include <RevoSDK/OS/OSMessage.h>
-#include <RevoSDK/OS/OSThread.h>
+#include <revolution/CNT/cnt.h>
+#include <revolution/ARC/arc.h>
+#include <revolution/OS/OSMutex.h>
+#include <revolution/OS/OSMessage.h>
+#include <revolution/OS/OSThread.h>
 
 namespace EGG
 {

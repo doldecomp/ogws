@@ -4,12 +4,12 @@ GROUP_0_O_FILES := \
 	build/asm/ctors_1.o \
 
 REVOSDK_O_FILES := \
-	build/RevoSDK/TRK/__mem.o \
-	build/RevoSDK/TRK_old/mem_TRK.o \
-	build/asm/RevoSDK/TRK/__exception.o \
-	build/asm/RevoSDK/TRK/dolphin_trk.o \
-	build/asm/RevoSDK/TRK/__start.o \
-	build/asm/RevoSDK/TRK/__ppc_eabi_init.o \
+	build/revolution/TRK/__mem.o \
+	build/revolution/TRK_old/mem_TRK.o \
+	build/asm/revolution/TRK/__exception.o \
+	build/asm/revolution/TRK/dolphin_trk.o \
+	build/asm/revolution/TRK/__start.o \
+	build/asm/revolution/TRK/__ppc_eabi_init.o \
 
 NW4R_O_FILES := \
 	build/nw4r/ut/ut_list.o \
@@ -283,7 +283,7 @@ GROUP_1_O_FILES := \
 	build/asm/data.o \
 	build/asm/sdata.o \
 	build/asm/text.o \
-	build/RevoSDK/ARC/arc.o \
+	build/revolution/ARC/arc.o \
 	build/asm/text_b.o \
 	build/asm/data_b.o \
 	build/asm/sdata_b.o \

@@ -5,9 +5,9 @@
 #include "eggDrawGX.h"
 #include "eggTextureBuffer.h"
 #include "eggAssert.h"
-#include <RevoSDK/GX/GXLight.h>
-#include <RevoSDK/GX/GXPixel.h>
-#include <RevoSDK/GX/GXTexture.h>
+#include <revolution/GX/GXLight.h>
+#include <revolution/GX/GXPixel.h>
+#include <revolution/GX/GXTexture.h>
 
 namespace EGG
 {

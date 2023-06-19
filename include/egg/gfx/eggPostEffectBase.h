@@ -1,7 +1,7 @@
 #ifndef EGG_GFX_POST_EFFECT_BASE_H
 #define EGG_GFX_POST_EFFECT_BASE_H
 #include "types_egg.h"
-#include <RevoSDK/GX/GX.h>
+#include <revolution/GX/GX.h>
 #include "eggAssert.h"
 
 namespace EGG
