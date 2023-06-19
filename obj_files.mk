@@ -1,7 +1,6 @@
 GROUP_0_O_FILES := \
 	build/asm/extab.o \
 	build/asm/extabindex.o \
-	build/asm/ctors_1.o \
 	
 REVOSDK_O_FILES := \
 	build/revolution/TRK_old/mem_TRK.o \
@@ -277,9 +276,18 @@ EGG_O_FILES := \
 	build/asm/egg/util/eggMsgRes.o \
 	build/egg/util/eggEffect.o \
 	build/egg/util/eggException.o \
+	build/asm/egg/egg_8037B248.o \
 
 RUNTIME_O_FILES := \
 	build/runtime/__mem.o \
+	build/asm/runtime/__va_arg.o \
+	build/asm/runtime/global_destructor_chain.o \
+	build/asm/runtime/NMWException.o \
+	build/asm/runtime/ptmf.o \
+	build/asm/runtime/runtime.o \
+	build/asm/runtime/__init_cpp_exceptions.o \
+	build/asm/runtime/Gecko_ExceptionPPC.o \
+	build/asm/runtime/GCN_mem_alloc.o \
 
 GROUP_1_O_FILES := \
 	build/asm/data.o \
@@ -290,7 +298,6 @@ GROUP_1_O_FILES := \
 	build/asm/data_b.o \
 	build/asm/sdata_b.o \
 	build/asm/ctors_2.o \
-	build/asm/dtors.o \
 	build/asm/file.o \
 	build/asm/rodata.o \
 	build/asm/bss.o \

@@ -98,11 +98,11 @@ _index___construct_new_array:
     .long 0x00000104
     .long _unwind___construct_new_array
 
-.global _index_0x800b1998
-_index_0x800b1998:
-    .long 0x800b1998
+.global _index___dt__26__partial_array_destructorFv
+_index___dt__26__partial_array_destructorFv:
+    .long __dt__26__partial_array_destructorFv
     .long 0x000000bc
-    .long _unwind_0x800b1998
+    .long _unwind___dt__26__partial_array_destructorFv
 
 .global _index___construct_array
 _index___construct_array:

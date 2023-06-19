@@ -88,10 +88,10 @@ _unwind___construct_new_array:
     .long 0x00000010
     .long 0x00000000
     .long 0x82000008
-    .long 0x800b1998
+    .long __dt__26__partial_array_destructorFv
 
-.global _unwind_0x800b1998
-_unwind_0x800b1998:
+.global _unwind___dt__26__partial_array_destructorFv
+_unwind___dt__26__partial_array_destructorFv:
     .long 0x18080000
     .long 0x00000000
 
@@ -102,7 +102,7 @@ _unwind___construct_array:
     .long 0x00000010
     .long 0x00000000
     .long 0x82000008
-    .long 0x800b1998
+    .long __dt__26__partial_array_destructorFv
 
 .global _unwind___destroy_arr
 _unwind___destroy_arr:
