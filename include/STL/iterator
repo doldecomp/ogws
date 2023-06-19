@@ -1,5 +1,5 @@
-#ifndef MSL_ITERATOR_H
-#define MSL_ITERATOR_H
+#ifndef MSL_CPP_ITERATOR_H
+#define MSL_CPP_ITERATOR_H
 
 namespace std
 {

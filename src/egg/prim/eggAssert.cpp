@@ -2,7 +2,6 @@
 
 #include "eggAssert.h"
 #include <revolution/OS/OSError.h>
-#include <stdarg.h>
 #include <string.h>
 #include <stdio.h>
 
@@ -27,7 +26,7 @@ void system_print(bool bVisible, char *file, char *msg, ...)
 
     char msg_buf[0x800];
     va_list list;
-    va_start(msg, list);
+    va_start(list, msg);
     vsnprintf(msg_buf, sizeof(msg_buf), msg, list);
     va_end(list);
     OSReport("%s", msg_buf);
@@ -52,7 +51,7 @@ void system_halt(char *file, int line, char *msg, ...)
 
     char msg_buf[0x800];
     va_list list;
-    va_start(msg, list);
+    va_start(list, msg);
     vsnprintf(msg_buf, sizeof(msg_buf), msg, list);
     va_end(list);
     OSReport("%s\n", msg_buf);

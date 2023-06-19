@@ -1,5 +1,5 @@
-#ifndef MSL_ALGORITHM_H
-#define MSL_ALGORITHM_H
+#ifndef MSL_CPP_ALGORITHM_H
+#define MSL_CPP_ALGORITHM_H
 #include <iterator>
 
 namespace std

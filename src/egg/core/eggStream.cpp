@@ -558,7 +558,7 @@ namespace EGG
     {
         va_list list;
         char buf[0x400];
-        va_start(str, list);
+        va_start(list, str);
         vsprintf(buf, str, list);
         va_end(list);
 

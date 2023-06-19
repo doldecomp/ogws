@@ -16,8 +16,8 @@ lbl_80398A00:
 .global lbl_80398A40
 lbl_80398A40:
 	.incbin "baserom.dol", 0x394B40, 0x1B0
-.global lbl_80398BF0
-lbl_80398BF0:
+.global _current_locale
+_current_locale:
 	.incbin "baserom.dol", 0x394CF0, 0x48
 .global lbl_80398C38
 lbl_80398C38:
