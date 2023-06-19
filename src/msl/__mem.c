@@ -1,6 +1,6 @@
-#include "__mem.h"
+#include <string.h>
 
-void * memcpy(void * dest, const void * src, size_t count)
+DECL_SECTION(".init") void * memcpy(void * dest, const void * src, size_t count)
 {
 	const char * csrc = (const char *)src;
 	char * cdest = (char *)dest;
@@ -29,7 +29,7 @@ void * memcpy(void * dest, const void * src, size_t count)
 	}
 }
 
-void __fill_mem(void * dest, int val, size_t count)
+DECL_SECTION(".init") void __fill_mem(void * dest, int val, size_t count)
 {
 	char * cdest = (char *)dest;
 	int cval = (unsigned char)val;
@@ -97,8 +97,19 @@ void __fill_mem(void * dest, int val, size_t count)
 	}
 }
 
-void * memset(void * dest, int val, size_t count)
+DECL_SECTION(".init") void * memset(void * dest, int val, size_t count)
 {
 	__fill_mem(dest, val, count);
 	return dest;
+}
+
+DECL_WEAK size_t strlen(const char* s) {
+    const u8* p = (u8*)s - 1;
+    size_t len = -1;
+    
+    do {
+        len++;
+    } while (*++p);
+
+    return len;
 }

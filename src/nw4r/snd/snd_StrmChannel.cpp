@@ -2,7 +2,7 @@
 #include "ut_lock.h"
 #include "ut_algorithm.h"
 #include <revolution/OS/OSThread.h>
-#include <revolution/TRK/__mem.h>
+#include <string.h>
 
 namespace nw4r
 {

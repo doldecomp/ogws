@@ -5,8 +5,8 @@
 extern "C" {
 #endif
 
-__declspec(section ".init") void * TRK_memset(void *, int, size_t);
-__declspec(section ".init") void * TRK_memcpy(void *, const void *, size_t);
+DECL_SECTION(".init") void * TRK_memset(void *, int, size_t);
+DECL_SECTION(".init") void * TRK_memcpy(void *, const void *, size_t);
 
 void TRK_fill_mem(void *, int, size_t);
 

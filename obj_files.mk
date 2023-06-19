@@ -4,7 +4,6 @@ GROUP_0_O_FILES := \
 	build/asm/ctors_1.o \
 
 REVOSDK_O_FILES := \
-	build/revolution/TRK/__mem.o \
 	build/revolution/TRK_old/mem_TRK.o \
 	build/asm/revolution/TRK/__exception.o \
 	build/asm/revolution/TRK/dolphin_trk.o \
@@ -279,6 +278,9 @@ EGG_O_FILES := \
 	build/egg/util/eggEffect.o \
 	build/egg/util/eggException.o \
 
+MSL_O_FILES := \
+	build/msl/__mem.o \
+
 GROUP_1_O_FILES := \
 	build/asm/data.o \
 	build/asm/sdata.o \
@@ -297,4 +299,4 @@ GROUP_1_O_FILES := \
 	build/asm/sbss2.o \
 	build/asm/sdata2.o \
 
-O_FILES := $(GROUP_0_O_FILES) $(NW4R_O_FILES) $(EGG_O_FILES) $(GROUP_1_O_FILES) $(REVOSDK_O_FILES)
+O_FILES := $(GROUP_0_O_FILES) $(NW4R_O_FILES) $(EGG_O_FILES) $(MSL_O_FILES) $(GROUP_1_O_FILES) $(REVOSDK_O_FILES)

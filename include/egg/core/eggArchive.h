@@ -4,7 +4,7 @@
 #include "eggDisposer.h"
 #include "eggAssert.h"
 #include "ut_list.h"
-#include <revolution/TRK/__mem.h>
+#include <string.h>
 #include <revolution/ARC/arc.h>
 
 namespace EGG
