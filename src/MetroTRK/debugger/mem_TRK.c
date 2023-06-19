@@ -1,35 +1,31 @@
-#include <string.h>
+#include "mem_TRK.h"
 
-DECL_SECTION(".init") void * memcpy(void * dest, const void * src, size_t count)
+DECL_SECTION(".init") void * TRK_memset(void * dest, int val, size_t count)
+{
+    TRK_fill_mem(dest, val, count);
+    return dest;
+}
+
+DECL_SECTION(".init") void * TRK_memcpy(void * dest, const void * src, size_t count)
 {
     const char * csrc = (const char *)src;
     char * cdest = (char *)dest;
     
-    if (src >= dest)
+    csrc--;
+    cdest--;
+    count++;
+    
+    while (--count)
     {
-        csrc--;
-        cdest--;
-        count++;
-        
-        while (--count)
-        {
-            *++cdest = *++csrc;
-        }
+        *++cdest = *++csrc;
     }
-    else
-    {
-        csrc += count;
-        cdest += count;
-        count++;
-        
-        while (--count)
-        {
-            *--cdest = *--csrc;
-        }
-    }
+    
+    return dest;
 }
 
-DECL_SECTION(".init") void __fill_mem(void* dst, int c, size_t n)
+#ifdef __DECOMP_NON_MATCHING
+// https://decomp.me/scratch/xJC0Q
+void TRK_fill_mem(void* dst, int c, size_t n)
 {
     int work;
     char* bdst = (char*)dst;
@@ -102,20 +98,6 @@ DECL_SECTION(".init") void __fill_mem(void* dst, int c, size_t n)
         } while(--n);
     }
 }
-
-DECL_SECTION(".init") void * memset(void * dest, int val, size_t count)
-{
-    __fill_mem(dest, val, count);
-    return dest;
-}
-
-DECL_WEAK size_t strlen(const char* s) {
-    const u8* p = (u8*)s - 1;
-    size_t len = -1;
-    
-    do {
-        len++;
-    } while (*++p);
-
-    return len;
-}
+#else
+#error This file has not yet been decompiled accurately. Use "mem_TRK.s" instead.
+#endif

@@ -1,13 +1,6 @@
 GROUP_0_O_FILES := \
 	build/asm/extab.o \
 	build/asm/extabindex.o \
-	
-REVOSDK_O_FILES := \
-	build/revolution/TRK_old/mem_TRK.o \
-	build/asm/revolution/TRK/__exception.o \
-	build/asm/revolution/TRK/dolphin_trk.o \
-	build/asm/revolution/TRK/__start.o \
-	build/asm/revolution/TRK/__ppc_eabi_init.o \
 
 NW4R_O_FILES := \
 	build/nw4r/ut/ut_list.o \
@@ -351,6 +344,41 @@ MSL_O_FILES := \
 	build/asm/msl/math_ppc.o \
 	build/asm/msl/w_sqrt.o \
 
+METROTRK_O_FILES := \
+	build/asm/MetroTRK/debugger/mainloop.o \
+	build/asm/MetroTRK/debugger/nubevent.o \
+	build/asm/MetroTRK/debugger/nubinit.o \
+	build/asm/MetroTRK/debugger/msg.o \
+	build/asm/MetroTRK/debugger/msgbuf.o \
+	build/asm/MetroTRK/debugger/serpoll.o \
+	build/asm/MetroTRK/debugger/usr_put.o \
+	build/asm/MetroTRK/debugger/dispatch.o \
+	build/asm/MetroTRK/debugger/msghndlr.o \
+	build/asm/MetroTRK/debugger/support.o \
+	build/asm/MetroTRK/debugger/mutex_TRK.o \
+	build/asm/MetroTRK/debugger/notify.o \
+	build/asm/MetroTRK/debugger/flush_cache.o \
+	build/asm/MetroTRK/debugger/mem_TRK.o \
+	build/asm/MetroTRK/debugger/string_TRK.o \
+	build/asm/MetroTRK/debugger/targimpl.o \
+	build/asm/MetroTRK/debugger/targsupp.o \
+	build/asm/MetroTRK/debugger/mpc_7xx_603e.o \
+	build/asm/MetroTRK/debugger/mslsupp.o \
+	build/asm/MetroTRK/debugger/__exception.o \
+	build/asm/MetroTRK/debugger/dolphin_trk.o \
+	build/asm/MetroTRK/debugger/main_TRK.o \
+	build/asm/MetroTRK/debugger/dolphin_trk_glue.o \
+	build/asm/MetroTRK/debugger/targcont.o \
+	build/asm/MetroTRK/debugger/target_options.o \
+	build/asm/MetroTRK/debugger/UDP_Stubs.o \
+	build/asm/MetroTRK/gamedev/main.o \
+	build/asm/MetroTRK/gamedev/CircleBuffer.o \
+	build/asm/MetroTRK/gamedev/MWCriticalSection_gc.o \
+
+RVL_SDK_O_FILES := \
+	build/asm/revolution/OS/__start.o \
+	build/asm/revolution/OS/__ppc_eabi_init.o \
+
 GROUP_1_O_FILES := \
 	build/asm/data.o \
 	build/asm/sdata.o \
@@ -368,4 +396,4 @@ GROUP_1_O_FILES := \
 	build/asm/sbss2.o \
 	build/asm/sdata2.o \
 
-O_FILES := $(GROUP_0_O_FILES) $(NW4R_O_FILES) $(EGG_O_FILES) $(RUNTIME_O_FILES) $(MSL_O_FILES) $(GROUP_1_O_FILES) $(REVOSDK_O_FILES)
+O_FILES := $(GROUP_0_O_FILES) $(NW4R_O_FILES) $(EGG_O_FILES) $(RUNTIME_O_FILES) $(MSL_O_FILES) $(METROTRK_O_FILES) $(GROUP_1_O_FILES) $(RVL_SDK_O_FILES)

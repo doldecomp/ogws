@@ -1,0 +1,46 @@
+.include "macros.inc"
+
+.section .text, "ax"
+.global usr_put_initialize
+usr_put_initialize:
+/* 800C1F8C 000BCE8C  4E 80 00 20 */	blr 
+
+.global usr_puts_serial
+usr_puts_serial:
+/* 800C1F90 000BCE90  94 21 FF E0 */	stwu r1, -0x20(r1)
+/* 800C1F94 000BCE94  7C 08 02 A6 */	mflr r0
+/* 800C1F98 000BCE98  90 01 00 24 */	stw r0, 0x24(r1)
+/* 800C1F9C 000BCE9C  93 E1 00 1C */	stw r31, 0x1c(r1)
+/* 800C1FA0 000BCEA0  3B E0 00 00 */	li r31, 0
+/* 800C1FA4 000BCEA4  93 C1 00 18 */	stw r30, 0x18(r1)
+/* 800C1FA8 000BCEA8  93 A1 00 14 */	stw r29, 0x14(r1)
+/* 800C1FAC 000BCEAC  7C 7D 1B 78 */	mr r29, r3
+/* 800C1FB0 000BCEB0  38 60 00 00 */	li r3, 0
+/* 800C1FB4 000BCEB4  48 00 00 30 */	b lbl_800C1FE4
+lbl_800C1FB8:
+/* 800C1FB8 000BCEB8  48 00 12 75 */	bl GetTRKConnected
+/* 800C1FBC 000BCEBC  9B C1 00 08 */	stb r30, 8(r1)
+/* 800C1FC0 000BCEC0  7C 7E 1B 78 */	mr r30, r3
+/* 800C1FC4 000BCEC4  38 60 00 00 */	li r3, 0
+/* 800C1FC8 000BCEC8  9B E1 00 09 */	stb r31, 9(r1)
+/* 800C1FCC 000BCECC  48 00 12 55 */	bl SetTRKConnected
+/* 800C1FD0 000BCED0  38 61 00 08 */	addi r3, r1, 8
+/* 800C1FD4 000BCED4  48 0C 1F 45 */	bl OSReport
+/* 800C1FD8 000BCED8  7F C3 F3 78 */	mr r3, r30
+/* 800C1FDC 000BCEDC  48 00 12 45 */	bl SetTRKConnected
+/* 800C1FE0 000BCEE0  38 60 00 00 */	li r3, 0
+lbl_800C1FE4:
+/* 800C1FE4 000BCEE4  2C 03 00 00 */	cmpwi r3, 0
+/* 800C1FE8 000BCEE8  40 82 00 14 */	bne lbl_800C1FFC
+/* 800C1FEC 000BCEEC  88 1D 00 00 */	lbz r0, 0(r29)
+/* 800C1FF0 000BCEF0  3B BD 00 01 */	addi r29, r29, 1
+/* 800C1FF4 000BCEF4  7C 1E 07 75 */	extsb. r30, r0
+/* 800C1FF8 000BCEF8  40 82 FF C0 */	bne lbl_800C1FB8
+lbl_800C1FFC:
+/* 800C1FFC 000BCEFC  80 01 00 24 */	lwz r0, 0x24(r1)
+/* 800C2000 000BCF00  83 E1 00 1C */	lwz r31, 0x1c(r1)
+/* 800C2004 000BCF04  83 C1 00 18 */	lwz r30, 0x18(r1)
+/* 800C2008 000BCF08  83 A1 00 14 */	lwz r29, 0x14(r1)
+/* 800C200C 000BCF0C  7C 08 03 A6 */	mtlr r0
+/* 800C2010 000BCF10  38 21 00 20 */	addi r1, r1, 0x20
+/* 800C2014 000BCF14  4E 80 00 20 */	blr 
