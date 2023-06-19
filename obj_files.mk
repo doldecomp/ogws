@@ -289,6 +289,68 @@ RUNTIME_O_FILES := \
 	build/asm/runtime/Gecko_ExceptionPPC.o \
 	build/asm/runtime/GCN_mem_alloc.o \
 
+MSL_O_FILES := \
+	build/asm/msl/alloc.o \
+	build/asm/msl/ansi_files.o \
+	build/asm/msl/ansi_fp.o \
+	build/asm/msl/arith.o \
+	build/asm/msl/buffer_io.o \
+	build/asm/msl/direct_io.o \
+	build/asm/msl/errno.o \
+	build/asm/msl/file_io.o \
+	build/asm/msl/FILE_POS.o \
+	build/asm/msl/locale.o \
+	build/asm/msl/mbstring.o \
+	build/asm/msl/mem.o \
+	build/asm/msl/mem_funcs.o \
+	build/asm/msl/math_api.o \
+	build/asm/msl/misc_io.o \
+	build/asm/msl/printf.o \
+	build/asm/msl/rand.o \
+	build/asm/msl/scanf.o \
+	build/asm/msl/string.o \
+	build/asm/msl/strtold.o \
+	build/asm/msl/strtoul.o \
+	build/asm/msl/wctype.o \
+	build/asm/msl/wmem.o \
+	build/asm/msl/wprintf.o \
+	build/asm/msl/wstring.o \
+	build/asm/msl/wchar_io.o \
+	build/asm/msl/uart_console_io_gcn.o \
+	build/asm/msl/abort_exit_ppc_eabi.o \
+	build/asm/msl/math_sun.o \
+	build/asm/msl/math_float.o \
+	build/asm/msl/extras.o \
+	build/asm/msl/float.o \
+	build/asm/msl/e_acos.o \
+	build/asm/msl/e_asin.o \
+	build/asm/msl/e_atan2.o \
+	build/asm/msl/e_fmod.o \
+	build/asm/msl/e_pow.o \
+	build/asm/msl/e_rem_pio2.o \
+	build/asm/msl/k_cos.o \
+	build/asm/msl/k_rem_pio2.o \
+	build/asm/msl/k_sin.o \
+	build/asm/msl/k_tan.o \
+	build/asm/msl/s_atan.o \
+	build/asm/msl/s_ceil.o \
+	build/asm/msl/s_copysign.o \
+	build/asm/msl/s_cos.o \
+	build/asm/msl/s_floor.o \
+	build/asm/msl/s_frexp.o \
+	build/asm/msl/s_ldexp.o \
+	build/asm/msl/s_modf.o \
+	build/asm/msl/s_sin.o \
+	build/asm/msl/s_tan.o \
+	build/asm/msl/w_acos.o \
+	build/asm/msl/w_asin.o \
+	build/asm/msl/w_atan2.o \
+	build/asm/msl/w_fmod.o \
+	build/asm/msl/w_pow.o \
+	build/asm/msl/e_sqrt.o \
+	build/asm/msl/math_ppc.o \
+	build/asm/msl/w_sqrt.o \
+
 GROUP_1_O_FILES := \
 	build/asm/data.o \
 	build/asm/sdata.o \
@@ -306,4 +368,4 @@ GROUP_1_O_FILES := \
 	build/asm/sbss2.o \
 	build/asm/sdata2.o \
 
-O_FILES := $(GROUP_0_O_FILES) $(NW4R_O_FILES) $(EGG_O_FILES) $(RUNTIME_O_FILES) $(GROUP_1_O_FILES) $(REVOSDK_O_FILES)
+O_FILES := $(GROUP_0_O_FILES) $(NW4R_O_FILES) $(EGG_O_FILES) $(RUNTIME_O_FILES) $(MSL_O_FILES) $(GROUP_1_O_FILES) $(REVOSDK_O_FILES)
