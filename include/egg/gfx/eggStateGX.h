@@ -38,39 +38,48 @@ namespace EGG
             bool dither; // at 0xE
         };
 
-        struct ScopedColor {
-            ScopedColor(bool x) {
+        struct ScopedColor
+        {
+            ScopedColor(bool x)
+            {
                 old = sCache.colorUpdate;
                 GXSetColorUpdate_(x);
             }
 
-            ~ScopedColor() {
+            ~ScopedColor()
+            {
                 GXSetColorUpdate_(old);
             }
 
             bool old;
         };
 
-        struct ScopedAlpha {
-            ScopedAlpha(bool x) {
+        struct ScopedAlpha
+        {
+            ScopedAlpha(bool x)
+            {
                 old = sCache.alphaUpdate;
                 GXSetAlphaUpdate_(x);
             }
 
-            ~ScopedAlpha() {
+            ~ScopedAlpha()
+            {
                 GXSetAlphaUpdate_(old);
             }
 
             bool old;
         };
 
-        struct ScopedDither {
-            ScopedDither(bool x) {
+        struct ScopedDither
+        {
+            ScopedDither(bool x)
+            {
                 old = sCache.dither;
                 GXSetDither_(x);
             }
 
-            ~ScopedDither() {
+            ~ScopedDither()
+            {
                 GXSetDither_(old);
             }
 
