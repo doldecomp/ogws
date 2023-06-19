@@ -1,4 +1,3 @@
-#pragma ipa file
 #ifndef EGG_CORE_GRAPHICS_FIFO_H
 #define EGG_CORE_GRAPHICS_FIFO_H
 #include "types_egg.h"

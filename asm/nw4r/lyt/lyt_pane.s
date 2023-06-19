@@ -4,6 +4,7 @@
 .4byte __sinit_$$3lyt_pane_cpp
 
 .section .sdata2, "a"
+.balign 8
 .global lbl_804C0470
 lbl_804C0470:
 	.single 0e0
@@ -26,12 +27,14 @@ lbl_804C0488:
 	.balign 8
 
 .section .sbss, "wa"
+.balign 8
 .global typeInfo__Q34nw4r3lyt4Pane
 typeInfo__Q34nw4r3lyt4Pane:
 	.skip 0x4
 	.balign 8
 
 .section .sdata, "wa"
+.balign 8
 # NW4R_LYT_Version___22@unnamed@lyt_pane_cpp@
 .global NW4R_LYT_Version___22$$2unnamed$$2lyt_pane_cpp$$2
 NW4R_LYT_Version___22$$2unnamed$$2lyt_pane_cpp$$2:
@@ -39,6 +42,7 @@ NW4R_LYT_Version___22$$2unnamed$$2lyt_pane_cpp$$2:
 .balign 0x8
 
 .section .data, "wa"
+.balign 8
 .global lbl_80397140
 lbl_80397140:
 .string "<< NW4R    - LYT \tfinal   build: Jun  8 2007 11:17:26 (0x4199_60831) >>"
@@ -550,7 +554,7 @@ lbl_8007991C:
 /* 80079920 00074820  38 61 00 40 */	addi r3, r1, 0x40
 /* 80079924 00074824  C0 41 00 0C */	lfs f2, 0xc(r1)
 /* 80079928 00074828  C0 62 8A 54 */	lfs f3, lbl_804C0474-_SDA2_BASE_(r2)
-/* 8007992C 0007482C  48 06 E4 79 */	bl func_800E7DA4
+/* 8007992C 0007482C  48 06 E4 79 */	bl PSMTXScale
 /* 80079930 00074830  C0 22 8A 58 */	lfs f1, lbl_804C0478-_SDA2_BASE_(r2)
 /* 80079934 00074834  38 61 00 10 */	addi r3, r1, 0x10
 /* 80079938 00074838  C0 1E 00 38 */	lfs f0, 0x38(r30)
@@ -586,7 +590,7 @@ lbl_8007991C:
 /* 800799B0 000748B0  C0 5E 00 30 */	lfs f2, 0x30(r30)
 /* 800799B4 000748B4  38 9E 00 54 */	addi r4, r30, 0x54
 /* 800799B8 000748B8  C0 7E 00 34 */	lfs f3, 0x34(r30)
-/* 800799BC 000748BC  48 06 E3 9D */	bl func_800E7D58
+/* 800799BC 000748BC  48 06 E3 9D */	bl PSMTXTransApply
 /* 800799C0 000748C0  80 7E 00 0C */	lwz r3, 0xc(r30)
 /* 800799C4 000748C4  2C 03 00 00 */	cmpwi r3, 0
 /* 800799C8 000748C8  41 82 00 18 */	beq lbl_800799E0

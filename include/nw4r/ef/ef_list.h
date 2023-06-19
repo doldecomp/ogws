@@ -12,13 +12,13 @@ namespace nw4r
 		{
 			ut::List mActive;
 			ut::List mClosing;
-			u16 SHORT_0x18;
+			u16 mNumActive;
 			
 			inline void SetOffset(u16 offset)
 			{
 				ut::List_Init(&mActive, offset);
 				ut::List_Init(&mClosing, offset);
-				SHORT_0x18 = 0;
+				mNumActive = 0;
 			}
 			
 			inline ActivityList(u16 offset)
@@ -41,13 +41,13 @@ namespace nw4r
 				mClosing.size = 0;
 				mClosing.last = NULL;
 				
-				SHORT_0x18 = 0;
+				mNumActive = 0;
 			}
 			
 			inline void ToActive(void * pNode)
 			{
 				ut::List_Append(&mActive, pNode);
-				SHORT_0x18++;
+				mNumActive++;
 			}
 			
 			inline void ToClosing(void * pNode)
@@ -58,7 +58,7 @@ namespace nw4r
 			
 			inline void ToWait(void * pNode)
 			{
-				SHORT_0x18--;
+				mNumActive--;
 			}
 		};
 	}

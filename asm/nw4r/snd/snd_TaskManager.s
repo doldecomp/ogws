@@ -1,6 +1,7 @@
 .include "macros.inc"
 
 .section .bss, "wa"
+.balign 0x8
 .global lbl_803EBC58
 lbl_803EBC58:
 	.skip 0xC
@@ -9,6 +10,7 @@ lbl_803EBC64:
 	.skip 0x3C
 
 .section .sbss, "wa"
+.balign 0x8
 .global lbl_804BEB28
 lbl_804BEB28:
 	.skip 0x8

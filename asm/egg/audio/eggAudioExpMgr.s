@@ -48,7 +48,7 @@ vtable_80398580:
     .long 0
     .long 0x800afab8
     .long getCurrentLevel__Q23EGG12SoundHeapMgrFv
-    .long func_800AF980
+    .long saveState__Q23EGG12SoundHeapMgrFv
 .global vtable_80398594
 vtable_80398594:
     .long 0
@@ -318,7 +318,7 @@ openArchive__Q23EGG11ExpAudioMgrFPCcPQ34nw4r3snd9SoundHeapQ33EGG9ArcPlayer12SARC
 /* 800AF680 000AA580  BF 41 00 08 */	stmw r26, 8(r1)
 /* 800AF684 000AA584  7C 7A 1B 78 */	mr r26, r3
 /* 800AF688 000AA588  38 63 00 F8 */	addi r3, r3, 0xf8
-/* 800AF68C 000AA58C  4B FF EC F5 */	bl openArchive__Q23EGG9ArcPlayerFPCcPQ34nw4r3snd9SoundHeapQ33EGG9ArcPlayer12SARC_STORAGEPi
+/* 800AF68C 000AA58C  4B FF EC F5 */	bl openArchive__Q23EGG9ArcPlayerFPCcPQ34nw4r3snd9SoundHeapQ33EGG9ArcPlayer12SARC_STORAGEP9ARCHandle
 /* 800AF690 000AA590  2C 03 00 00 */	cmpwi r3, 0
 /* 800AF694 000AA594  7C 7B 1B 78 */	mr r27, r3
 /* 800AF698 000AA598  41 82 00 84 */	beq lbl_800AF71C
@@ -534,11 +534,8 @@ lbl_800AF960:
 /* 800AF978 000AA878  38 21 00 20 */	addi r1, r1, 0x20
 /* 800AF97C 000AA87C  4E 80 00 20 */	blr 
 
-# Seems functionally like what would be SoundHeapMgr::saveState,
-# but there is no proof that a function with that name exists.
-# Only other known symbol is SoundHeapMgr::stateProc from Wii Fit U (might be this???)
-.global func_800AF980
-func_800AF980:
+.global saveState__Q23EGG12SoundHeapMgrFv
+saveState__Q23EGG12SoundHeapMgrFv:
 /* 800AF980 000AA880  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 800AF984 000AA884  7C 08 02 A6 */	mflr r0
 /* 800AF988 000AA888  38 A0 00 00 */	li r5, 0

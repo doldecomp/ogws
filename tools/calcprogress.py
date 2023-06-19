@@ -19,8 +19,7 @@
 #                                             #
 ###############################################
 
-import os
-import sys
+import re
 
 ###############################################
 #                                             #
@@ -28,76 +27,44 @@ import sys
 #                                             #
 ###############################################
 
-# Section sizes (code)
-SECTION_SIZE_INIT = 0x24e0   # .init
-SECTION_SIZE_TEXT = 0x34d9a0 # .text
-SECTION_SIZE_CODE = SECTION_SIZE_INIT + SECTION_SIZE_TEXT
-# All data sections added together
-SECTION_SIZE_DATAS = (
-    + 0x1e300 # .rodata
-    + 0x37480 # .data
-    + 0xf2480 # .bss
-    + 0x1660  # .sdata
-    + 0x1040  # .sbss
-    + 0x6fc0  # .sdata2
-    + 0x3c    # .sbss2
-)
+DOL_PATH = "include/baserom.dol"
+MAP_PATH = "build/ogws_us_r1.map"
 
-# Section names
-SECTION_NAMES = ["init", "text", "rodata", "data", "bss", "sdata", "sbss", "sdata2", "sbss2"]
+MEM1_HI = 0x81200000
+MEM1_LO = 0x80004000
 
-###############################################
-#                                             #
-#                  Classes                    #
-#                                             #
-###############################################
+MW_WII_SYMBOL_REGEX = r"^\s*"\
+r"(?P<SectOfs>\w{8})\s+"\
+r"(?P<Size>\w{6})\s+"\
+r"(?P<VirtOfs>\w{8})\s+"\
+r"(?P<FileOfs>\w{8})\s+"\
+r"(\w{1,2})\s+"\
+r"(?P<Symbol>[0-9A-Za-z_<>$@.*]*)\s*"\
+r"(?P<Object>\S*)"
 
-# Symbol class
-class MWSymbol:
-    # Constructor
-    # 'mapLine' represents a line from the Metrowerks/Codewarrior symbol map
-    def __init__(self, mapLine : str):
-        tokens = mapLine.split()
-        # Only symbols that will fail this check are "UNUSED"
-        if (len(tokens) >= 7):
-            self.unused = False
-            self.Setup(tokens[0], tokens[1], tokens[2],
-            tokens[3], tokens[5], tokens[6])
-        else:
-            self.unused = True
+MW_GC_SYMBOL_REGEX = r"^\s*"\
+r"(?P<SectOfs>\w{8})\s+"\
+r"(?P<Size>\w{6})\s+"\
+r"(?P<VirtOfs>\w{8})\s+"\
+r"(\w{1,2})\s+"\
+r"(?P<Symbol>[0-9A-Za-z_<>$@.*]*)\s*"\
+r"(?P<Object>\S*)"
 
-    # Does rest of constructor's work under the hood
-    def Setup(self, localOfs : str, size : str,
-    virtualOfs : str, fileOfs : str, symbol : str, sourceFile : str):
-        if (self.unused == True): return
-        self.localOfs = int(localOfs, 16)
-        self.size = int(size, 16)
-        self.virtualOfs = int(virtualOfs, 16)
-        self.fileOfs = int(fileOfs, 16)
-        self.symbol = symbol
-        self.sourceFile = sourceFile
+REGEX_TO_USE = MW_WII_SYMBOL_REGEX
 
-    # Whether a given MWSymbol will be used for the progress calculation
-    # 'section': String, name of the current section (init, data, etc.)
-    # Filters out things like unused symbols, non-source (asm) symbols, etc.
-    def IsNeeded(self) -> bool:
-        if (self.unused == True): return False
-        if (self.size == 0): return False
-        if (self.localOfs == "UNUSED"): return False
-        if (IsReserved(self.symbol)): return False
-        if (self.symbol == "(entry") and (self.sourceFile == "of"): return False
-        return True
+TEXT_SECTIONS = ["init", "text"]
+DATA_SECTIONS = [
+"rodata", "data", "bss", "sdata", "sbss", "sdata2", "sbss2", "file",
+"ctors", "_ctors", "dtors", "ctors$99", "_ctors$99", "ctors$00", "dtors$99",
+"extab_", "extabindex_"
+]
 
-###############################################
-#                                             #
-#                  Functions                  #
-#                                             #
-###############################################
+# DOL info
+TEXT_SECTION_COUNT = 7
+DATA_SECTION_COUNT = 11
 
-def IsReserved(s : str) -> bool:
-    for i in SECTION_NAMES:
-        if (s.find(i) != -1): return True
-    return False
+SECTION_TEXT = 0
+SECTION_DATA = 1
 
 ###############################################
 #                                             #
@@ -106,41 +73,88 @@ def IsReserved(s : str) -> bool:
 ###############################################
 
 if __name__ == "__main__":
+    # Sum up DOL section sizes
+    dol_handle = open(DOL_PATH, "rb")
+
+    # Seek to virtual addresses
+    dol_handle.seek(0x48)
+    
+    # Read virtual addresses
+    text_starts = list()
+    for i in range(TEXT_SECTION_COUNT):
+        text_starts.append(int.from_bytes(dol_handle.read(4), byteorder='big'))
+    data_starts = list()
+    for i in range(DATA_SECTION_COUNT):
+        data_starts.append(int.from_bytes(dol_handle.read(4), byteorder='big'))
+
+    # Read lengths
+    text_sizes = list()
+    for i in range(TEXT_SECTION_COUNT):
+        text_sizes.append(int.from_bytes(dol_handle.read(4), byteorder='big'))
+    data_sizes = list()
+    for i in range(DATA_SECTION_COUNT):
+        data_sizes.append(int.from_bytes(dol_handle.read(4), byteorder='big'))
+
+    # BSS address + length
+    bss_start = int.from_bytes(dol_handle.read(4), byteorder='big')
+    bss_size = int.from_bytes(dol_handle.read(4), byteorder='big')
+    bss_end = bss_start + bss_size
+
+    dol_code_size = 0
+    dol_data_size = 0
+    for i in range(DATA_SECTION_COUNT):
+        # Ignore sections inside BSS
+        if (data_starts[i] >= bss_start) and (data_starts[i] + data_sizes[i] <= bss_end): continue
+        dol_data_size += data_sizes[i]
+
+    dol_data_size += bss_size
+
+    for i in text_sizes:
+        dol_code_size += i
+
     # Open map file
-    mapfile = open("build/ogws_us_r1.map", "r")
+    mapfile = open(MAP_PATH, "r")
     symbols = mapfile.readlines()
 
-    # Split code symbols from data symbols
-    initStartIdx = symbols.index(".init section layout\n") + 4
-    initEndIdx = symbols.index("extab_ section layout\n") - 3
-    # Remove unused symbols and symbols from assembly code
-    initSymbols = [MWSymbol(s) for s in symbols[initStartIdx : initEndIdx] if MWSymbol(s).IsNeeded()]
+    decomp_code_size = 0
+    decomp_data_size = 0
+    section_type = None
 
-    textStartIdx = symbols.index(".text section layout\n") + 4
-    textEndIdx = symbols.index(".ctors section layout\n") - 3
-    textSymbols = [MWSymbol(s) for s in symbols[textStartIdx : textEndIdx] if MWSymbol(s).IsNeeded()]
+    # Find first section
+    first_section = 0
+    while (symbols[first_section].startswith(".") == False and "section layout" not in symbols[first_section]): first_section += 1
+    assert(first_section < len(symbols)), "Map file contains no sections!!!"
 
-    dataStartIdx = symbols.index(".rodata section layout\n") + 4
-    dataEndIdx = symbols.index(".stack section layout\n") - 3
-    dataSymbols = [MWSymbol(s) for s in symbols[dataStartIdx : dataEndIdx] if MWSymbol(s).IsNeeded()]
-
-    # Sum size of decomp progress for code
-    decompCodeSize = 0
-    for i in initSymbols:
-        decompCodeSize += i.size
-    for i in textSymbols:
-        decompCodeSize += i.size
-
-    # Same for data
-    decompDataSize = 0
-    for i in dataSymbols:
-        decompDataSize += i.size
+    for i in range(first_section, len(symbols)):
+        # New section
+        if (symbols[i].startswith(".") == True or "section layout" in symbols[i]):
+            # Grab section name (i.e. ".init section layout" -> "init")
+            sectionName = re.search(r"\.*(?P<Name>\w+)\s", symbols[i]).group("Name")
+            # Determine type of section
+            section_type = SECTION_DATA if (sectionName in DATA_SECTIONS) else SECTION_TEXT
+        # Parse symbols until we hit the next section declaration
+        else:
+            if ("entry of" in symbols[i]) or ("UNUSED" in symbols[i]): continue
+            assert(section_type != None), f"Symbol found outside of a section!!!\n{symbols[i]}"
+            match_obj = re.search(REGEX_TO_USE, symbols[i])
+            # Should be a symbol in ASM (so we discard it)
+            if (match_obj == None): continue
+            # Is the symbol a file-wide section?
+            symb = match_obj.group("Symbol")
+            if (symb.startswith("*fill*")) or (symb.startswith(".") and symb[1:] in TEXT_SECTIONS or symb[1:] in DATA_SECTIONS): continue
+            # For sections that don't start with "."
+            if (symb in DATA_SECTIONS): continue
+            # If not, we accumulate the file size
+            if (section_type == SECTION_TEXT):
+                decomp_code_size += int(match_obj.group("Size"), 16)
+            else:
+                decomp_data_size += int(match_obj.group("Size"), 16)
 
     # Calculate percentages
-    codeCompletionPcnt = (decompCodeSize / SECTION_SIZE_CODE)
-    dataCompletionPcnt = (decompDataSize / SECTION_SIZE_DATAS)
+    codeCompletionPcnt = (decomp_code_size / dol_code_size)
+    dataCompletionPcnt = (decomp_data_size / dol_data_size)
 
     print("Progress:")
-    print("\tCode sections: {} / {} bytes in src ({:%})".format(decompCodeSize, SECTION_SIZE_CODE, codeCompletionPcnt))
-    print("\tData sections: {} / {} bytes in src ({:%})".format(decompDataSize, SECTION_SIZE_DATAS, dataCompletionPcnt))
+    print(f"\tCode sections: {decomp_code_size} / {dol_code_size} bytes in src ({codeCompletionPcnt:%})")
+    print(f"\tData sections: {decomp_data_size} / {dol_data_size} bytes in src ({dataCompletionPcnt:%})")
     

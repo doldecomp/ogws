@@ -54,8 +54,8 @@ lbl_804BEB68:
 	.skip 0x8
 
 .section .sdata, "wa"
-.global lbl_804BD418
-lbl_804BD418:
+.global $$2LOCAL$$2GetAnmPlayPolicy__Q24nw4r3g3dFQ34nw4r3g3d9AnmPolicy$$2policyTable
+$$2LOCAL$$2GetAnmPlayPolicy__Q24nw4r3g3dFQ34nw4r3g3d9AnmPolicy$$2policyTable:
 	.long PlayPolicy_Onetime__Q24nw4r3g3dFfff
 	.long PlayPolicy_Loop__Q24nw4r3g3dFfff
 .balign 0x8
@@ -2817,7 +2817,7 @@ lbl_8006663C:
 /* 80066668 00061568  7F 04 C3 78 */	mr r4, r24
 /* 8006666C 0006156C  38 61 00 08 */	addi r3, r1, 8
 /* 80066670 00061570  38 A0 00 00 */	li r5, 0
-/* 80066674 00061574  48 07 CD 31 */	bl func_800E33A4
+/* 80066674 00061574  48 07 CD 31 */	bl GXLoadTexMtxImm
 /* 80066678 00061578  48 00 00 2C */	b lbl_800666A4
 lbl_8006667C:
 /* 8006667C 0006157C  80 AD 97 D8 */	lwz r5, lbl_804BEB58-_SDA_BASE_(r13)
@@ -2827,7 +2827,7 @@ lbl_8006667C:
 /* 8006668C 0006158C  7C A0 00 78 */	andc r0, r5, r0
 /* 80066690 00061590  38 A0 00 00 */	li r5, 0
 /* 80066694 00061594  90 0D 97 D8 */	stw r0, lbl_804BEB58-_SDA_BASE_(r13)
-/* 80066698 00061598  48 07 CD 0D */	bl func_800E33A4
+/* 80066698 00061598  48 07 CD 0D */	bl GXLoadTexMtxImm
 /* 8006669C 0006159C  48 00 00 08 */	b lbl_800666A4
 lbl_800666A0:
 /* 800666A0 000615A0  93 FA 00 00 */	stw r31, 0(r26)

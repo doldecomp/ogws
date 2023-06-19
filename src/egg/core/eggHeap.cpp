@@ -1,7 +1,11 @@
 #pragma ipa file
+
 #include "eggHeap.h"
-#include "ut_list.h"
 #include "eggAssert.h"
+
+#include "ut_list.h"
+
+#define MB_AS_B (1024.0f * 1024.0f)
 
 namespace EGG
 {
@@ -36,7 +40,7 @@ namespace EGG
 
     void * Heap::alloc(u32 size, int align, Heap *pHeap)
     {
-        void *block;
+        void *block = NULL;
 
         if (sAllocatableHeap)
         {
@@ -83,11 +87,11 @@ namespace EGG
     Heap * Heap::findHeap(MEMiHeapHead *handle)
     {
         Heap *containHeap = NULL;
+
         OSLockMutex(&sRootMutex);
         if (sIsHeapListInitialized)
         {
             Heap *node = NULL;
-
             while (node = (Heap *)nw4r::ut::List_GetNext(&sHeapList, node))
             {
                 if (node->mHeapHandle == handle)
@@ -113,6 +117,7 @@ namespace EGG
     Heap * Heap::findContainHeap(const void *p)
     {
         Heap *containHeap = NULL;
+
         MEMiHeapHead *containHandle = MEMFindContainHeap(p);
         if (containHandle)
         {
@@ -158,48 +163,45 @@ namespace EGG
         return oldHeap;
     }
 
-    // .bss
     nw4r::ut::List Heap::sHeapList;
     OSMutex Heap::sRootMutex;
-    // .sbss
+
     Heap *Heap::sCurrentHeap;
     BOOL Heap::sIsHeapListInitialized;
     Heap *Heap::sAllocatableHeap;
 }
 
-using namespace EGG;
-
 void * operator new(size_t size)
 {
-    return Heap::alloc(size, 4, NULL);
+    return EGG::Heap::alloc(size, 4, NULL);
 }
 
-void * operator new(size_t size, Heap *pHeap, int align)
+void * operator new(size_t size, EGG::Heap *pHeap, int align)
 {
-    return Heap::alloc(size, align, pHeap);
+    return EGG::Heap::alloc(size, align, pHeap);
 }
 
 void * operator new[](size_t size)
 {
-    return Heap::alloc(size, 4, NULL);
+    return EGG::Heap::alloc(size, 4, NULL);
 }
 
 void * operator new[](size_t size, int align)
 {
-    return Heap::alloc(size, align, NULL);
+    return EGG::Heap::alloc(size, align, NULL);
 }
 
-void * operator new[](size_t size, Heap *pHeap, int align)
+void * operator new[](size_t size, EGG::Heap *pHeap, int align)
 {
-    return Heap::alloc(size, align, pHeap);
+    return EGG::Heap::alloc(size, align, pHeap);
 }
 
 void operator delete(void *p)
 {
-    Heap::free(p, NULL);
+    EGG::Heap::free(p, NULL);
 }
 
 void operator delete[](void *p)
 {
-    Heap::free(p, NULL);
+    EGG::Heap::free(p, NULL);
 }

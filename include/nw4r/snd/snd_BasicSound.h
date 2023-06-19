@@ -53,7 +53,7 @@ namespace nw4r
 				
 				static ut::detail::RuntimeTypeInfo typeInfo;
 				
-				inline const ut::detail::RuntimeTypeInfo * GetRuntimeTypeInfo() const { return &typeInfo; } // at 0x8
+				inline virtual const ut::detail::RuntimeTypeInfo * GetRuntimeTypeInfo() const { return &typeInfo; } // at 0x8
 				inline virtual ~BasicSound() {}; // at 0xc
 				virtual UNKTYPE Update(); // at 0x10
 				virtual UNKTYPE StartPrepared(); // at 0x14
@@ -133,6 +133,7 @@ namespace nw4r
 				UNKTYPE DetachGeneralHandle();
 				bool IsAttachedTempGeneralHandle();
 				UNKTYPE DetachTempGeneralHandle();
+				inline u32 GetId() const { return mId; }
 				UNKTYPE SetId(u32);
 				
 				inline int CalcCurrentPlayerPriority() const

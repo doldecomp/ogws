@@ -1,5 +1,6 @@
 #ifndef NW4R_G3D_STATE_H
 #define NW4R_G3D_STATE_H
+#include "types_nw4r.h"
 #include <RevoSDK/GX/GXFrameBuf.h>
 
 namespace nw4r
@@ -8,8 +9,16 @@ namespace nw4r
     {
         namespace G3DState
         {
+            struct IndMtxOp
+            {
+            };
+
+            void SetViewPosNrmMtxArray(const math::MTX34 *, const math::MTX33 *,
+                const math::MTX34 *);
+
+            void SetRenderModeObj(const GXRenderModeObj&);
             GXRenderModeObj& GetRenderModeObj();
-            UNKTYPE SetRenderModeObj(const GXRenderModeObj&);
+            void Invalidate(u32);
         }
     }
 }

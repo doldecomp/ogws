@@ -3,24 +3,26 @@
 #include "eggXfbManager.h"
 #include "eggVideo.h"
 #include "eggMatrix.h"
+
 #include "ut_algorithm.h"
-#include <RevoSDK/OS/OSTime.h>
-#include <RevoSDK/VI/vi.h>
-#include <RevoSDK/GX/GXMisc.h>
-#include <RevoSDK/GX/GXTransform.h>
-#include <RevoSDK/GX/GXAttr.h>
-#include <RevoSDK/GX/GXTev.h>
-#include <RevoSDK/GX/GXLight.h>
-#include <RevoSDK/GX/GXGeometry.h>
-#include <RevoSDK/GX/GXBump.h>
-#include <RevoSDK/GX/GXPixel.h>
-#include <RevoSDK/GX/GXVert.h>
-#include <RevoSDK/math/mtx44.h>
+
+#include <OS/OSTime.h>
+#include <VI/vi.h>
+#include <GX/GXMisc.h>
+#include <GX/GXTransform.h>
+#include <GX/GXAttr.h>
+#include <GX/GXTev.h>
+#include <GX/GXLight.h>
+#include <GX/GXGeometry.h>
+#include <GX/GXBump.h>
+#include <GX/GXPixel.h>
+#include <GX/GXVert.h>
+#include <math/mtx44.h>
 
 namespace
 {
     static GXTexObj clear_z_tobj;
-    static u8 clear_z_TX[] = {
+    static u8 clear_z_TX[] __attribute__ ((aligned (32))) = {
         0x00, 0xff, 0x00, 0xff, 0x00, 0xff, 0x00, 0xff,
         0x00, 0xff, 0x00, 0xff, 0x00, 0xff, 0x00, 0xff,
         0x00, 0xff, 0x00, 0xff, 0x00, 0xff, 0x00, 0xff,
@@ -56,8 +58,13 @@ namespace EGG
 {
     using namespace nw4r;
 
-    AsyncDisplay::AsyncDisplay(u8 uc) : Display(uc), WORD_0x60(0), FLOAT_0x64(1.0f),
-        WORD_0x68(0), WORD_0x6C(0), BYTE_0x70(1)
+    AsyncDisplay::AsyncDisplay(u8 wait) :
+        Display(wait),
+        WORD_0x60(0),
+        FLOAT_0x64(1.0f),
+        WORD_0x68(0),
+        WORD_0x6C(0),
+        BYTE_0x70(1)
     {
         spSelector = this;
         OSInitThreadQueue(&mThreadQueue);
@@ -70,7 +77,7 @@ namespace EGG
         while (true)
         {
             OSSleepThread(&mThreadQueue);
-            if (++i >= BYTE_0x8) break;
+            if (++i >= mRetraceWait) break;
         }
 
         WORD_0x68 = WORD_0x6C;
@@ -92,7 +99,6 @@ namespace EGG
             u32 _0x74 = WORD_0x74;
             u32 temp = r30 - _0x74;
             
-
             s32 diff = temp - tickDelta;
             if (diff < 0) diff += _0x74;
 
@@ -102,17 +108,7 @@ namespace EGG
             if (val > 1.0f) FLOAT_0x64 = 1.0f;
         }
 
-        XfbManager *xfbmgr = BaseSystem::getXfbManager();
-        Xfb *xfb_04 = xfbmgr->mXfb.XFB_0x4;
-        bool b = false;
-        
-        if ((xfb_04 != xfbmgr->mXfb.XFB_0xC)
-            && (xfb_04 != xfbmgr->mXfb.XFB_0x0))
-        {
-            b = true;
-        }
-
-        if (b)
+        if (BaseSystem::getXfbManager()->isReadytoCopy())
         {
             copyEFBtoXFB();
             GXSetDrawDoneCallback(DrawDoneCallback);
@@ -121,21 +117,17 @@ namespace EGG
         {
             GXRenderModeObj *pObj = BaseSystem::getVideo()->mRenderMode;
 
-            clearEFB(pObj->mFbWidth, pObj->mEfbHeight,
-                0, 0, pObj->mFbWidth, pObj->mEfbHeight, mColor);
+            clearEFB(pObj->mFbWidth, pObj->mEfbHeight, 0, 0,
+                pObj->mFbWidth, pObj->mEfbHeight, mClearColor);
         }
 
-        if (BYTE_0x9 & 1)
+        if (isBlack())
         {
-            Video *pVideo = BaseSystem::getVideo();
-            bool setBlack = (!pVideo->mFlags.onBit(0));
-            VISetBlack(setBlack);
-
-            pVideo->mFlags.toggleBit(0);
-            BYTE_0x9 &= (u8)~1;
+            BaseSystem::getVideo()->changeBlack();
+            setBlack(false);
         }
 
-        WORD_0x10++;
+        mFrameCount++;
     }
 
     void AsyncDisplay::beginFrame()
@@ -169,7 +161,7 @@ namespace EGG
         GXInitTexObjLOD(&clear_z_tobj, 0, 0, 0, 0, 0, 0.0f, 0.0f, 0.0f);
 
         Mtx44 mtx44;
-        C_MTXOrtho(0.0f, (f32)height, 0.0f, (f32)width, 0.0f, 1.0f, mtx44);
+        C_MTXOrtho(mtx44, 0.0f, (f32)height, 0.0f, (f32)width, 0.0f, 1.0f);
         GXSetProjection(mtx44, 1);
         GXSetViewport(0.0f, 0.0f, (f32)width, (f32)height, 0.0f, 1.0f);
         GXSetScissor(0, 0, width, height);
@@ -190,7 +182,7 @@ namespace EGG
         GXLoadTexObj(&clear_z_tobj, GX_TEX_MAP_ID_0);
 
         GXSetNumTevStages(1);
-        GXSetTevColor(GX_TEV_REG_ID_1, color);
+        GXSetTevColor(GX_TEV_REG_ID_1, color.mChannels);
         GXSetTevOrder(GX_TEV_STAGE_ID_0, GX_TEX_COORD_ID_0, GX_TEX_MAP_ID_0, 0xff);
         GXSetTevColorIn(GX_TEV_STAGE_ID_0, 15, 15, 15, 2);
         GXSetTevColorOp(GX_TEV_STAGE_ID_0, 0, 0, 0, 1, 0);

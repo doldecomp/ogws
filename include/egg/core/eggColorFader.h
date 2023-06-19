@@ -5,8 +5,6 @@
 #include "eggBitFlag.h"
 #include "eggFader.h"
 
-#define DEFAULT_FADE_LEN 20
-
 namespace EGG
 {
     struct ColorFader : Fader
@@ -21,6 +19,10 @@ namespace EGG
         virtual bool calc(); // at 0x18
         virtual void draw();  // at 0x1C
         virtual ~ColorFader(); // at 0x20
+
+        // Unofficial symbols
+        f32 getWidth() const { return mEndX - mStartX; }
+        f32 getHeight() const { return mEndY - mStartY; }
 
         EStatus mStatus; // at 0x4
         TBitFlag<u8> mFlags; // at 0x8

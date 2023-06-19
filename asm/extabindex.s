@@ -2,17 +2,17 @@
 
 .section extabindex_, "wa"
 
-.global _index_func_800A1C30
-_index_func_800A1C30:
-    .long func_800A1C30
+.global _index___dt__Q23EGG8Vector3fFv
+_index___dt__Q23EGG8Vector3fFv:
+    .long __dt__Q23EGG8Vector3fFv
     .long 0x00000040
-    .long _unwind_func_800A1C30
+    .long _unwind___dt__Q23EGG8Vector3fFv
 
-.global _index_func_800A1C70
-_index_func_800A1C70:
-    .long func_800A1C70
+.global _index___dt__Q23EGG8Vector2fFv
+_index___dt__Q23EGG8Vector2fFv:
+    .long __dt__Q23EGG8Vector2fFv
     .long 0x00000040
-    .long _unwind_func_800A1C70
+    .long _unwind___dt__Q23EGG8Vector2fFv
 
 .global _index_func_800A1CF0
 _index_func_800A1CF0:
@@ -62,11 +62,11 @@ _index_atan2__Q23EGG7Math$$0f$$1Fff:
     .long 0x00000024
     .long _unwind_atan2__Q23EGG7Math$$0f$$1Fff
 
-.global _index___dt__Q23EGG9Matrix34fFv
-_index___dt__Q23EGG9Matrix34fFv:
-    .long __dt__Q23EGG9Matrix34fFv
+.global _index___dt__Q23EGG5QuatfFv
+_index___dt__Q23EGG5QuatfFv:
+    .long __dt__Q23EGG5QuatfFv
     .long 0x00000040
-    .long _unwind___dt__Q23EGG9Matrix34fFv
+    .long _unwind___dt__Q23EGG5QuatfFv
 
 .global _index_setAxisRotation__Q23EGG9Matrix34fFRCQ23EGG8Vector3ff
 _index_setAxisRotation__Q23EGG9Matrix34fFRCQ23EGG8Vector3ff:
@@ -88,7 +88,7 @@ _index_normalise__Q23EGG8Vector3fFv:
 
 .global _index___sinit_$$3eggVector_cpp
 _index___sinit_$$3eggVector_cpp:
-    .long __sinit_$$3eggVector_cpp
+    .long 0x800a24f0 # __sinit_\eggVector_cpp (local)
     .long 0x00000130
     .long _unwind___sinit_$$3eggVector_cpp
 
@@ -302,11 +302,11 @@ _index_vsnprintf:
     .long 0x00000084
     .long _unwind_vsnprintf
 
-.global _index_func_800B7480
-_index_func_800B7480:
-    .long func_800B7480
+.global _index_vsprintf
+_index_vsprintf:
+    .long vsprintf
     .long 0x00000080
-    .long _unwind_func_800B7480
+    .long _unwind_vsprintf
 
 .global _index_func_800B7500
 _index_func_800B7500:
@@ -332,11 +332,11 @@ _index_func_800B7D7C:
     .long 0x00000d60
     .long _unwind_func_800B7D7C
 
-.global _index_func_800B8B6C
-_index_func_800B8B6C:
-    .long func_800B8B6C
+.global _index_sscanf
+_index_sscanf:
+    .long sscanf
     .long 0x000000c8
-    .long _unwind_func_800B8B6C
+    .long _unwind_sscanf
 
 .global _index_func_800B8FA8
 _index_func_800B8FA8:
@@ -1361,9 +1361,9 @@ _index_func_801773D4:
 # For __init_cpp_exceptions/__register_fragment
 .global _eti_init_info_
 _eti_init_info_:
-    .long _index_func_800A1C30 # &extabindex[0]
+    .long _index___dt__Q23EGG8Vector3fFv # &extabindex[0]
     .long _eti_init_info_ # &_eti_init_info_
-    .long func_800A1C30 # &extabindex[0].func
+    .long __dt__Q23EGG8Vector3fFv # &extabindex[0].func
     .long 0x000d58ac # unkValue
     .long 0x00000000 # Padding
     .long 0x00000000 # Padding

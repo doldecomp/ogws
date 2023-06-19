@@ -31,7 +31,7 @@ NW4R_O_FILES := \
 	build/asm/nw4r/ut/ut_TextWriterBase.o \
 	build/nw4r/ef/ef_draworder.o \
 	build/nw4r/ef/ef_effect.o \
-	build/asm/nw4r/ef/ef_effectsystem.o \
+	build/nw4r/ef/ef_effectsystem.o \
 	build/asm/nw4r/ef/ef_emitter.o \
 	build/asm/nw4r/ef/ef_animcurve.o \
 	build/asm/nw4r/ef/ef_particle.o \
@@ -74,7 +74,7 @@ NW4R_O_FILES := \
 	build/asm/nw4r/snd/snd_BasicSound.o \
 	build/asm/nw4r/snd/snd_Channel.o \
 	build/asm/nw4r/snd/snd_DisposeCallbackManager.o \
-	build/asm/nw4r/snd/snd_DvdSoundArchive.o \
+	build/nw4r/snd/snd_DvdSoundArchive.o \
 	build/nw4r/snd/snd_EnvGenerator.o \
 	build/nw4r/snd/snd_ExternalSoundPlayer.o \
 	build/asm/nw4r/snd/snd_FrameHeap.o \
@@ -108,22 +108,22 @@ NW4R_O_FILES := \
 	build/nw4r/snd/snd_SoundHandle.o \
 	build/nw4r/snd/snd_SoundHeap.o \
 	build/asm/nw4r/snd/snd_SoundPlayer.o \
-	build/asm/nw4r/snd/snd_SoundStartable.o \
+	build/nw4r/snd/snd_SoundStartable.o \
 	build/asm/nw4r/snd/snd_SoundSystem.o \
-	build/asm/nw4r/snd/snd_SoundThread.o \
+	build/nw4r/snd/snd_SoundThread.o \
 	build/nw4r/snd/snd_StrmChannel.o \
 	build/asm/nw4r/snd/snd_StrmFile.o \
 	build/asm/nw4r/snd/snd_StrmPlayer.o \
-	build/asm/nw4r/snd/snd_StrmSound.o \
+	build/nw4r/snd/snd_StrmSound.o \
 	build/nw4r/snd/snd_StrmSoundHandle.o \
 	build/nw4r/snd/snd_Task.o \
 	build/asm/nw4r/snd/snd_TaskManager.o \
 	build/nw4r/snd/snd_TaskThread.o \
 	build/asm/nw4r/snd/snd_Voice.o \
 	build/asm/nw4r/snd/snd_VoiceManager.o \
-	build/asm/nw4r/snd/snd_Util.o \
+	build/nw4r/snd/snd_Util.o \
 	build/asm/nw4r/snd/snd_WaveFile.o \
-	build/asm/nw4r/snd/snd_WaveSound.o \
+	build/nw4r/snd/snd_WaveSound.o \
 	build/nw4r/snd/snd_WaveSoundHandle.o \
 	build/asm/nw4r/snd/snd_WsdFile.o \
 	build/asm/nw4r/snd/snd_WsdPlayer.o \
@@ -131,7 +131,7 @@ NW4R_O_FILES := \
 	build/nw4r/g3d/g3d_rescommon.o \
 	build/nw4r/g3d/g3d_resdict.o \
 	build/nw4r/g3d/g3d_resfile.o \
-	build/asm/nw4r/g3d/g3d_resmdl.o \
+	build/nw4r/g3d/g3d_resmdl.o \
 	build/nw4r/g3d/g3d_resshp.o \
 	build/nw4r/g3d/g3d_restev.o \
 	build/asm/nw4r/g3d/g3d_resmat.o \
@@ -155,11 +155,12 @@ NW4R_O_FILES := \
 	build/nw4r/g3d/g3d_obj.o \
 	build/nw4r/g3d/g3d_anmobj.o \
 	build/asm/nw4r/g3d/g3d_gpu.o \
-	build/asm/nw4r/g3d/g3d_cpu.o \
+	build/asm/nw4r/g3d/g3d_tmem.o \
+	build/nw4r/g3d/g3d_cpu.o \
 	build/asm/nw4r/g3d/g3d_state.o \
 	build/asm/nw4r/g3d/g3d_draw1mat1shp.o \
 	build/asm/nw4r/g3d/g3d_calcview.o \
-	build/asm/nw4r/g3d/g3d_dcc.o \
+	build/nw4r/g3d/g3d_dcc.o \
 	build/nw4r/g3d/g3d_workmem.o \
 	build/asm/nw4r/g3d/g3d_calcworld.o \
 	build/asm/nw4r/g3d/g3d_draw.o \
@@ -168,16 +169,16 @@ NW4R_O_FILES := \
 	build/asm/nw4r/g3d/g3d_maya.o \
 	build/asm/nw4r/g3d/g3d_xsi.o \
 	build/asm/nw4r/g3d/g3d_3dsmax.o \
-	build/asm/nw4r/g3d/g3d_scnobj.o \
+	build/nw4r/g3d/g3d_scnobj.o \
 	build/asm/nw4r/g3d/g3d_scnroot.o \
 	build/asm/nw4r/g3d/g3d_scnmdlsmpl.o \
 	build/asm/nw4r/g3d/g3d_scnmdl.o \
 	build/asm/nw4r/g3d/g3d_calcmaterial.o \
-	build/asm/nw4r/g3d/g3d_init.o \
-	build/asm/nw4r/g3d/g3d_scnmdl1mat1shp.o \
-	build/asm/nw4r/g3d/g3d_scnproc.o \
+	build/nw4r/g3d/g3d_init.o \
+	build/nw4r/g3d/g3d_scnmdl1mat1shp.o \
+	build/nw4r/g3d/g3d_scnproc.o \
 	build/nw4r/g3d/g3d_fog.o \
-	build/asm/nw4r/g3d/g3d_light.o \
+	build/nw4r/g3d/g3d_light.o \
 	build/asm/nw4r/g3d/g3d_calcvtx.o \
 	build/asm/nw4r/lyt/lyt_pane.o \
 	build/asm/nw4r/lyt/lyt_group.o \
@@ -185,34 +186,64 @@ NW4R_O_FILES := \
 	build/asm/nw4r/lyt/lyt_picture.o \
 	build/asm/nw4r/lyt/lyt_textBox.o \
 	build/asm/nw4r/lyt/lyt_window.o \
-	build/asm/nw4r/lyt/lyt_bounding.o \
+	build/nw4r/lyt/lyt_bounding.o \
 	build/asm/nw4r/lyt/lyt_material.o \
-	build/asm/nw4r/lyt/lyt_texMap.o \
+	build/nw4r/lyt/lyt_texMap.o \
 	build/nw4r/lyt/lyt_drawInfo.o \
 	build/asm/nw4r/lyt/lyt_animation.o \
 	build/nw4r/lyt/lyt_resourceAccessor.o \
-	build/asm/nw4r/lyt/lyt_arcResourceAccessor.o \
-	build/asm/nw4r/lyt/lyt_common.o \
+	build/nw4r/lyt/lyt_arcResourceAccessor.o \
+	build/nw4r/lyt/lyt_common.o \
 
 EGG_O_FILES := \
-	build/asm/egg/gfx/eggShadowTextureManager.o \
-	\
-	build/asm/egg/text_egg.o \
-	build/asm/egg/ctors_egg.o \
-	build/asm/egg/rodata_egg.o \
-	build/asm/egg/data_egg.o \
-	build/asm/egg/bss_egg.o \
-	build/asm/egg/sdata_egg.o \
-	build/asm/egg/sbss_egg.o \
-	build/asm/egg/sdata2_egg.o \
-	build/asm/egg/sbss2_egg.o \
-	\
-	build/asm/egg/prim/eggAssert.o \
+	build/egg/gfx/eggShadowTextureManager.o \
+	build/egg/gfx/eggStateGX.o \
+	build/egg/gfx/eggTextureBuffer.o \
+	build/asm/egg/gfx/eggAnalizeDL.o \
+	build/asm/egg/gfx/eggCapTexture.o \
+	build/asm/egg/gfx/eggCpuTexture.o \
+	build/asm/egg/gfx/eggDrawGX.o \
+	build/asm/egg/gfx/eggDrawPathBase.o \
+	build/asm/egg/gfx/eggDrawPathBloom.o \
+	build/asm/egg/gfx/eggDrawPathDOF.o \
+	build/egg/gfx/eggDrawPathHDR.o \
+	build/asm/egg/gfx/eggDrawPathShadowVolume.o \
+	build/asm/egg/gfx/eggDrawPathLightMap.o \
+	build/egg/gfx/eggFog.o \
+	build/egg/gfx/eggFogManager.o \
+	build/asm/egg/gfx/eggG3DUtility.o \
+	build/asm/egg/gfx/eggGfxEngine.o \
+	build/asm/egg/gfx/eggLightManager.o \
+	build/asm/egg/gfx/eggLightTexture.o \
+	build/asm/egg/gfx/eggLightTextureManager.o \
+	build/asm/egg/gfx/eggModelBoundingInfo.o \
+	build/asm/egg/gfx/eggModelEx.o \
+	build/egg/gfx/eggModelSnapshot.o \
+	build/egg/gfx/eggPostEffectBase.o \
+	build/asm/egg/gfx/eggPostEffectBlur.o \
+	build/asm/egg/gfx/eggPostEffectBlurGather.o \
+	build/asm/egg/gfx/eggPostEffectBlurSimple.o \
+	build/egg/gfx/eggPostEffectHDR.o \
+	build/asm/egg/gfx/eggPostEffectMask.o \
+	build/egg/gfx/eggPostEffectSimple.o \
+	build/egg/gfx/eggScnRootEx.o \
+	build/asm/egg/gfx/eggScreen.o \
+	build/asm/egg/gfx/eggShadowTexture.o \
+	build/egg/gfx/eggIScnProc.o \
+	build/egg/gfx/eggScnRenderer.o \
+	build/asm/egg/gfx/eggLightObject.o \
+	build/asm/egg/gfx/eggPostEffectMaskDOF.o \
+	build/asm/egg/gfx/eggScreenEffectBase.o \
+	build/asm/egg/gfx/eggFrustum.o \
+	build/egg/gfx/eggGXUtility.o \
+	build/asm/egg/gfx/eggDrawHelper.o \
+	build/asm/egg/gfx/egg_800A1DB0.o \
+	build/egg/prim/eggAssert.o \
 	build/asm/egg/egg_800A204C.o \
 	build/egg/math/eggMath.o \
-	build/asm/egg/math/eggMatrix.o \
+	build/egg/math/eggMatrix.o \
 	build/egg/math/eggQuat.o \
-	build/asm/egg/math/eggVector.o \
+	build/egg/math/eggVector.o \
 	build/asm/egg/core/eggExpHeap.o \
 	build/asm/egg/core/eggFrmHeap.o \
 	build/egg/core/eggHeap.o \
@@ -221,13 +252,13 @@ EGG_O_FILES := \
 	build/asm/egg/core/eggSystem.o \
 	build/egg/core/eggTaskThread.o \
 	build/egg/core/eggGraphicsFifo.o \
-	build/asm/egg/core/eggColorFader.o \
+	build/egg/core/eggColorFader.o \
 	build/egg/core/eggSceneManager.o \
 	build/asm/egg/core/eggController.o \
 	build/asm/egg/core/eggStream.o \
 	build/egg/core/eggDisplay.o \
 	build/asm/egg/core/eggVideo.o \
-	build/asm/egg/core/eggXfb.o \
+	build/egg/core/eggXfb.o \
 	build/egg/core/eggXfbManager.o \
 	build/asm/egg/core/eggDvdRipper.o \
 	build/egg/core/eggDvdFile.o \
@@ -236,17 +267,17 @@ EGG_O_FILES := \
 	build/egg/core/eggDisposer.o \
 	build/egg/core/eggArchive.o \
 	build/asm/egg/core/eggDecomp.o \
-	build/asm/egg/core/eggAsyncDisplay.o \
-	build/asm/egg/core/eggCntFile.o \
-	build/asm/egg/audio/eggAudioArcPlayerMgr.o \
+	build/egg/core/eggAsyncDisplay.o \
+	build/egg/core/eggCntFile.o \
+	build/egg/audio/eggAudioArcPlayerMgr.o \
 	build/asm/egg/audio/eggAudioExpMgr.o \
 	build/asm/egg/audio/eggAudioFxMgr.o \
-	build/asm/egg/audio/eggAudioHeapMgr.o \
+	build/egg/audio/eggAudioHeapMgr.o \
 	build/asm/egg/audio/eggAudioMgr.o \
 	build/egg/audio/eggAudioSystem.o \
 	build/asm/egg/util/eggMsgRes.o \
-	build/asm/egg/util/eggEffect.o \
-	build/asm/egg/util/eggException.o \
+	build/egg/util/eggEffect.o \
+	build/egg/util/eggException.o \
 
 GROUP_1_O_FILES := \
 	build/asm/data.o \

@@ -98,11 +98,6 @@ namespace EGG
     #error This file has yet to be decompiled accurately. Use "eggDvdRipper.s" instead.
     #endif
 
-    UNKWORD DvdFile::getFileSize() const
-    {
-        return mFileInfo.mFileSize;
-    }
-
     bool DvdRipper::sErrorRetry = true;
 }
 

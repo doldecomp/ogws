@@ -8,12 +8,6 @@ namespace nw4r
 {
     namespace math
     {
-		namespace
-		{
-			f32 FExpLn2(f32);
-			f32 FLog1_2(f32);
-		}
-
 		namespace detail
 		{
 			f32 FExp(f32);
@@ -27,7 +21,7 @@ namespace nw4r
 			return *(u32 *)&x;
 		}
 
-		inline u32 U32AsF32(u32 x)
+		inline f32 U32AsF32(u32 x)
 		{
 			return *(f32 *)&x;
 		}

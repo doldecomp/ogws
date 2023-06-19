@@ -12,9 +12,16 @@ namespace EGG
 {
 	struct Video
 	{
-		inline Video(GXRenderModeObj *obj) : mRenderMode(NULL), mFlags(), mOSTick(0)
+		Video(GXRenderModeObj *obj) : mRenderMode(NULL), mFlags(), mOSTick(0)
 		{
 			(void)initialize(obj);
+		}
+
+		bool isBlack() { return mFlags.onBit(0); }
+		void changeBlack()
+		{
+			VISetBlack(!isBlack());
+			mFlags.toggleBit(0);
 		}
 
 		GXRenderModeObj * initialize(GXRenderModeObj *);

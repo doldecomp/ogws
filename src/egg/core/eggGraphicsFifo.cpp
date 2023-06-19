@@ -1,3 +1,4 @@
+#pragma ipa file
 #include "eggGraphicsFifo.h"
 #include "eggHeap.h"
 #include "eggAssert.h"
@@ -12,7 +13,7 @@ namespace EGG
         #line 59
         EGG_ASSERT(!sGraphicsFifo);
 
-        if (!heap) heap = Heap::sCurrentHeap;
+        if (!heap) heap = Heap::getCurrentHeap();
 
         #line 69
         EGG_ASSERT(OSIsMEM1Region( heap ));

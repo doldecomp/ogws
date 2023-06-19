@@ -70,7 +70,7 @@ namespace nw4r
 			{
 				if (time <= 0.0f) return 0.0f;
 				
-				if (info.MAX_0x8 <= time) return info.MAX_0x8;
+				if (info.mNumFrames <= time) return info.mNumFrames;
 				
 				return time;
 			}

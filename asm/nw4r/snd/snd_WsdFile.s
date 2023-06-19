@@ -1,7 +1,13 @@
 .include "macros.inc"
 
-.section .text, "ax"  # 0x800076E0 - 0x80355080 
+.section .sdata2, "a"
+.balign 0x8
+.global lbl_804C01A8
+lbl_804C01A8:
+	.single 0e1
+	.single 0e0
 
+.section .text, "ax"  # 0x800076E0 - 0x80355080 
 .global __ct__Q44nw4r3snd6detail13WsdFileReaderFPCv
 __ct__Q44nw4r3snd6detail13WsdFileReaderFPCv:
 /* 8004F270 0004A170  80 A4 00 00 */	lwz r5, 0(r4)

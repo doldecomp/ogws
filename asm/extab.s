@@ -2,13 +2,13 @@
 
 .section extab_, "wa"
 
-.global _unwind_func_800A1C30
-_unwind_func_800A1C30:
+.global _unwind___dt__Q23EGG8Vector3fFv
+_unwind___dt__Q23EGG8Vector3fFv:
     .long 0x08080000
     .long 0x00000000
 
-.global _unwind_func_800A1C70
-_unwind_func_800A1C70:
+.global _unwind___dt__Q23EGG8Vector2fFv
+_unwind___dt__Q23EGG8Vector2fFv:
     .long 0x08080000
     .long 0x00000000
 
@@ -52,8 +52,8 @@ _unwind_atan2__Q23EGG7Math$$0f$$1Fff:
     .long 0x000a0000
     .long 0x00000000
 
-.global _unwind___dt__Q23EGG9Matrix34fFv
-_unwind___dt__Q23EGG9Matrix34fFv:
+.global _unwind___dt__Q23EGG5QuatfFv
+_unwind___dt__Q23EGG5QuatfFv:
     .long 0x08080000
     .long 0x00000000
 
@@ -64,7 +64,7 @@ _unwind_setAxisRotation__Q23EGG9Matrix34fFRCQ23EGG8Vector3ff:
     .long 0x00000010
     .long 0x00000000
     .long 0x82000008
-    .long __dt__Q23EGG9Matrix34fFv
+    .long __dt__Q23EGG5QuatfFv
 
 .global _unwind_setAxisRotation__Q23EGG5QuatfFRCQ23EGG8Vector3ff
 _unwind_setAxisRotation__Q23EGG5QuatfFRCQ23EGG8Vector3ff:
@@ -264,8 +264,8 @@ _unwind_vsnprintf:
     .long 0x18080000
     .long 0x00000000
 
-.global _unwind_func_800B7480
-_unwind_func_800B7480:
+.global _unwind_vsprintf
+_unwind_vsprintf:
     .long 0x18080000
     .long 0x00000000
 
@@ -289,8 +289,8 @@ _unwind_func_800B7D7C:
     .long 0x880a0000
     .long 0x00000000
 
-.global _unwind_func_800B8B6C
-_unwind_func_800B8B6C:
+.global _unwind_sscanf
+_unwind_sscanf:
     .long 0x08080000
     .long 0x00000000
 

@@ -101,34 +101,34 @@ namespace nw4r
 			
 			void SeqTrack::Close()
 			{
-				OSLockMutex(&SoundThread::GetInstance()->mMutex);
+				SoundThread::GetInstance()->Lock();
 				
 				ReleaseAllChannel(-1);
 				FreeAllChannel();
 				
 				mOpenFlag = false;
 				
-				OSUnlockMutex(&SoundThread::GetInstance()->mMutex);
+				SoundThread::GetInstance()->Unlock();
 			}
 			
 			void SeqTrack::UpdateChannelRelease(Channel * pChannel)
 			{
-				OSLockMutex(&SoundThread::GetInstance()->mMutex);
+				SoundThread::GetInstance()->Lock();
 				
 				if (!pChannel->mLength &&
 					pChannel->mEnvGenerator.mStatus != EnvGenerator::Status_Release &&
 					BOOL_0x60) pChannel->Release();
 				
-				OSUnlockMutex(&SoundThread::GetInstance()->mMutex);
+				SoundThread::GetInstance()->Unlock();
 			}
 			
 			void SeqTrack::UpdateChannelLength()
 			{
-				OSLockMutex(&SoundThread::GetInstance()->mMutex);
+				SoundThread::GetInstance()->Lock();
 				
 				if (!mOpenFlag)
 				{
-					OSUnlockMutex(&SoundThread::GetInstance()->mMutex);
+					SoundThread::GetInstance()->Unlock();
 					return;
 				}
 				
@@ -141,16 +141,16 @@ namespace nw4r
 					if (!pChannel->IsAutoUpdateSweep()) pChannel->UpdateSweep(1);
 				}
 				
-				OSUnlockMutex(&SoundThread::GetInstance()->mMutex);
+				SoundThread::GetInstance()->Unlock();
 			}
 			
 			UNKWORD SeqTrack::ParseNextTick(bool flag)
 			{
-				OSLockMutex(&SoundThread::GetInstance()->mMutex);
+				SoundThread::GetInstance()->Lock();
 				
 				if (!mOpenFlag)
 				{
-					OSUnlockMutex(&SoundThread::GetInstance()->mMutex);
+					SoundThread::GetInstance()->Unlock();
 					return 0;
 				}
 				
@@ -158,7 +158,7 @@ namespace nw4r
 				{
 					if (mChannel)
 					{
-						OSUnlockMutex(&SoundThread::GetInstance()->mMutex);
+						SoundThread::GetInstance()->Unlock();
 						return 1;
 					}
 					BOOL_0x5E = false;
@@ -166,7 +166,7 @@ namespace nw4r
 				
 				if (TIMER_0x58 > 0 && --TIMER_0x58 > 0)
 				{
-					OSUnlockMutex(&SoundThread::GetInstance()->mMutex);
+					SoundThread::GetInstance()->Unlock();
 					return 1;
 				}
 				
@@ -176,20 +176,20 @@ namespace nw4r
 					{
 						if (Parse(flag) == 1)
 						{
-							OSUnlockMutex(&SoundThread::GetInstance()->mMutex);
+							SoundThread::GetInstance()->Unlock();
 							return -1;
 						}
 					}
 				}
 				
-				OSUnlockMutex(&SoundThread::GetInstance()->mMutex);
+				SoundThread::GetInstance()->Unlock();
 				
 				return 1;
 			}
 			
 			void SeqTrack::ReleaseAllChannel(int release)
 			{
-				OSLockMutex(&SoundThread::GetInstance()->mMutex);
+				SoundThread::GetInstance()->Lock();
 				
 				UpdateChannelParam();
 				
@@ -198,12 +198,12 @@ namespace nw4r
 					if (pChannel->IsActive()) pChannel->SetRelease(release);
 				}
 				
-				OSUnlockMutex(&SoundThread::GetInstance()->mMutex);
+				SoundThread::GetInstance()->Unlock();
 			}
 			
 			void SeqTrack::PauseAllChannel(bool flag)
 			{
-				OSLockMutex(&SoundThread::GetInstance()->mMutex);
+				SoundThread::GetInstance()->Lock();
 				
 				UpdateChannelParam();
 				
@@ -212,22 +212,22 @@ namespace nw4r
 					if (pChannel->IsActive() && flag != (pChannel->IsPause() != false)) pChannel->Pause(flag);
 				}
 				
-				OSUnlockMutex(&SoundThread::GetInstance()->mMutex);
+				SoundThread::GetInstance()->Unlock();
 			}
 			
 			void SeqTrack::UpdateChannelParam()
 			{
-				OSLockMutex(&SoundThread::GetInstance()->mMutex);
+				SoundThread::GetInstance()->Lock();
 				
 				if (!mOpenFlag)
 				{
-					OSUnlockMutex(&SoundThread::GetInstance()->mMutex);
+					SoundThread::GetInstance()->Unlock();
 					return;
 				}
 				//8004047C
 				if (!mChannel)
 				{
-					OSUnlockMutex(&SoundThread::GetInstance()->mMutex);
+					SoundThread::GetInstance()->Unlock();
 					return;
 				}
 				//80040498
@@ -340,12 +340,12 @@ namespace nw4r
 					//80040848
 				}
 				
-				OSUnlockMutex(&SoundThread::GetInstance()->mMutex);
+				SoundThread::GetInstance()->Unlock();
 			}
 			
 			void SeqTrack::FreeAllChannel()
 			{
-				OSLockMutex(&SoundThread::GetInstance()->mMutex);
+				SoundThread::GetInstance()->Lock();
 				
 				for (Channel * pChannel = mChannel; pChannel; pChannel = pChannel->mNext)
 				{
@@ -354,12 +354,12 @@ namespace nw4r
 				
 				mChannel = NULL;
 				
-				OSUnlockMutex(&SoundThread::GetInstance()->mMutex);
+				SoundThread::GetInstance()->Unlock();
 			}
 			
 			void SeqTrack::ChannelCallbackFunc(Channel * pChannel, Channel::ChannelCallbackStatus status, u32 arg)
 			{
-				OSLockMutex(&SoundThread::GetInstance()->mMutex);
+				SoundThread::GetInstance()->Lock();
 				
 				SeqTrack * pTrack = (SeqTrack *)arg;
 				
@@ -376,7 +376,7 @@ namespace nw4r
 				if (pTrack->mChannel == pChannel)
 				{
 					pTrack->mChannel = pChannel->mNext;
-					OSUnlockMutex(&SoundThread::GetInstance()->mMutex);
+					SoundThread::GetInstance()->Unlock();
 					return;
 				}
 				
@@ -385,17 +385,17 @@ namespace nw4r
 					if (pCur->mNext == pChannel)
 					{
 						pCur->mNext = pChannel->mNext;
-						OSUnlockMutex(&SoundThread::GetInstance()->mMutex);
+						SoundThread::GetInstance()->Unlock();
 						return;
 					}
 				}
 				
-				OSUnlockMutex(&SoundThread::GetInstance()->mMutex);
+				SoundThread::GetInstance()->Unlock();
 			}
 			
 			void SeqTrack::StopAllChannel()
 			{
-				OSLockMutex(&SoundThread::GetInstance()->mMutex);
+				SoundThread::GetInstance()->Lock();
 				
 				for (Channel * pChannel = mChannel; pChannel; pChannel = pChannel->mNext)
 				{
@@ -405,12 +405,12 @@ namespace nw4r
 				
 				mChannel = NULL;
 				
-				OSUnlockMutex(&SoundThread::GetInstance()->mMutex);
+				SoundThread::GetInstance()->Unlock();
 			}
 			
 			void SeqTrack::SetMute(SeqMute mute)
 			{
-				OSLockMutex(&SoundThread::GetInstance()->mMutex);
+				SoundThread::GetInstance()->Lock();
 				
 				switch (mute)
 				{
@@ -431,7 +431,7 @@ namespace nw4r
 						break;
 				}
 				
-				OSUnlockMutex(&SoundThread::GetInstance()->mMutex);
+				SoundThread::GetInstance()->Unlock();
 			}
 			
 			void SeqTrack::SetVolume(float volume)
@@ -453,17 +453,17 @@ namespace nw4r
 			
 			void SeqTrack::AddChannel(Channel * pChannel)
 			{
-				OSLockMutex(&SoundThread::GetInstance()->mMutex);
+				SoundThread::GetInstance()->Lock();
 				
 				pChannel->mNext = mChannel;
 				mChannel = pChannel;
 				
-				OSUnlockMutex(&SoundThread::GetInstance()->mMutex);
+				SoundThread::GetInstance()->Unlock();
 			}
 			
 			Channel * SeqTrack::NoteOn(int r4_28, int r5_29, s32 r6_30, bool r7_26)
 			{
-				OSLockMutex(&SoundThread::GetInstance()->mMutex);
+				SoundThread::GetInstance()->Lock();
 				
 				SeqPlayer * pPlayer = mPlayer;
 				Channel * pChannel = NULL;
@@ -489,7 +489,7 @@ namespace nw4r
 					
 					if (!mPlayer->NoteOn(INT_0x64, noteOnInfo))
 					{
-						OSUnlockMutex(&SoundThread::GetInstance()->mMutex);
+						SoundThread::GetInstance()->Unlock();
 						return NULL;
 					}
 					
@@ -529,7 +529,7 @@ namespace nw4r
 				pChannel->mPanMode = mPlayer->mPanMode;
 				pChannel->mPanCurve = mPlayer->mPanCurve;
 				
-				OSUnlockMutex(&SoundThread::GetInstance()->mMutex);
+				SoundThread::GetInstance()->Unlock();
 				return pChannel;
 			}
 		}

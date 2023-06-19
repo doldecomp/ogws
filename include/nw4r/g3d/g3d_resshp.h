@@ -84,7 +84,8 @@ namespace nw4r
 			ResCommon<ResShpData> mShp;
 			
 			inline ResShp(void * vptr) : mShp(vptr) {}
-			
+			bool IsValid() const { return mShp.IsValid(); }
+
 			inline ResShpData & ref() const
 			{
 				return mShp.ref();

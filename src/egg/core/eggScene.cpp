@@ -7,7 +7,7 @@ namespace EGG
 {
 	Scene::Scene()
 	{
-		mHeap = Heap::sCurrentHeap;
+		mHeap = Heap::getCurrentHeap();
 		
 		#line 32
 		EGG_ASSERT(mHeap != NULL);

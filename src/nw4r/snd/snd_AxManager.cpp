@@ -303,7 +303,7 @@ namespace nw4r
 				
 				AutoInterruptLock lock;
 				
-				if (!LIST_0xB4[bus].mCount)
+				if (LIST_0xB4[bus].IsEmpty())
 				{
 					switch (bus)
 					{
@@ -337,7 +337,7 @@ namespace nw4r
 				
 				LinkList<FxBase, 4> * fxList = GetEffectList(bus);
 				
-				if (!fxList->mCount) return;
+				if (fxList->IsEmpty()) return;
 				
 				LinkList<FxBase, 4>::Iterator it = fxList->GetBeginIter();
 				

@@ -1,69 +1,86 @@
-#ifndef NW4R_LYT_ARCRESOURCEACCESSOR_H
-#define NW4R_LYT_ARCRESOURCEACCESSOR_H
+#ifndef NW4R_LYT_ARC_RESOURCE_ACCESSOR_H
+#define NW4R_LYT_ARC_RESOURCE_ACCESSOR_H
 #include "types_nw4r.h"
 #include "ut_LinkList.h"
 #include "ut_Font.h"
 #include "lyt_resourceAccessor.h"
 #include <RevoSDK/ARC/arc.h>
-#include <STL/string.h>
+#include <string.h>
 
 #define FONTNAMEBUF_MAX 127
-
-namespace
-{
-    UNKWORD FindNameResource(ARCHandle *, const char *);
-    UNKTYPE GetResourceSub(ARCHandle *, const char *, u32, const char *, u32 *);
-}
 
 namespace nw4r
 {
     namespace lyt
     {
-        struct FontRefLink
+        class FontRefLink
         {
-            inline FontRefLink() : mNode(), mFont(NULL) {}
+        public:
+            FontRefLink();
+            ~FontRefLink() {}
 
-            inline ut::Font * GetFont() const
+            void Set(const char *, ut::Font *);
+
+            ut::Font * GetFont() const
             {
                 return mFont;
             }
 
-            inline const char * GetFontName() const
+            const char * GetFontName() const
             {
                 return mFontName;
             }
 
+        private:
             ut::LinkListNode mNode; // at 0x0
             char mFontName[FONTNAMEBUF_MAX]; // at 0x8
             ut::Font *mFont; // at 0x88
         };
 
-        struct ArcResourceAccessor : ResourceAccessor
+        class ArcResourceAccessor : public ResourceAccessor
         {
+        public:
             ArcResourceAccessor();
-            virtual ~ArcResourceAccessor(); // at 0x8
-            virtual UNKTYPE GetResource(u32, const char *, u32 *); // at 0x10
-            virtual ut::Font * GetFont(const char *); // at 0x14
-            bool Attach(void *, const char *);
+            virtual ~ArcResourceAccessor() {} // at 0x8
+            virtual UNKTYPE * GetResource(u32, const char *, u32 *); // at 0xC
+            virtual ut::Font * GetFont(const char *); // at 0x10
             
+            bool Attach(void *, const char *);
+            void * Detach()
+            {
+                void *old = mArchive;
+                mArchive = NULL;
+                
+                return old;
+            }
+
+            bool IsAttached() const { return (mArchive != NULL); }
+
+            void RegistFont(FontRefLink *pLink)
+            {
+                mRefList.PushBack(pLink);
+            }
+            void UnregistFont(FontRefLink *pLink)
+            {
+                mRefList.Erase(pLink);
+            }
+
+        private:
             ARCHandle mHandle; // at 0x4
-            void *PTR_0x20;
+            void *mArchive; // at 0x8
             ut::LinkList<FontRefLink, 0> mRefList; // at 0x24
-            char mName[FONTNAMEBUF_MAX]; // at 0x30
+            char mRootDir[FONTNAMEBUF_MAX]; // at 0x30
         };
 
         namespace detail
         {
-            inline ut::Font * FindFont(ut::LinkList<FontRefLink, 0> *pList, const char *pName)
+            static ut::Font * FindFont(ut::LinkList<FontRefLink, 0> *pList, const char *name)
             {
                 ut::LinkList<FontRefLink, 0>::Iterator it = pList->GetBeginIter();
-				while (it != pList->GetEndIter())
-				{
-					if (strcmp(pName, it++->GetFontName()) == 0)
-                    {
-                        return it->GetFont();
-                    }
-				}
+                for (; it != pList->GetEndIter(); it++)
+                {
+                    if (strcmp(name, it->GetFontName()) == 0) return it->GetFont();
+                }
 
                 return NULL;
             }

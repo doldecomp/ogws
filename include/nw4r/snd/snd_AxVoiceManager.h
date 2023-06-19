@@ -10,7 +10,11 @@ namespace nw4r
 		{
 			struct AxVoiceManager
 			{
+				static AxVoiceManager * GetInstance();
+
 				AxVoiceManager();
+
+				void FreeAllReservedAxVoice();
 			};
 		}
 	}

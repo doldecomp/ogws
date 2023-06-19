@@ -1,22 +1,22 @@
-#ifndef NW4R_EF_DRAWBILLBOARDSTRATEGY_H
-#define NW4R_EF_DRAWBILLBOARDSTRATEGY_H
+#ifndef NW4R_EF_DRAW_BILLBOARD_STRATEGY_H
+#define NW4R_EF_DRAW_BILLBOARD_STRATEGY_H
 #include "types_nw4r.h"
 #include "ef_drawstrategyimpl.h"
 
 namespace nw4r
 {
-	namespace ef
-	{
-		//TODO: Implement the object accurately
-		struct DrawBillboardStrategy : DrawStrategyImpl
-		{
-			DrawBillboardStrategy();
-			~DrawBillboardStrategy();
-			
-			UNKTYPE Draw(const DrawInfo &, ParticleManager *);
-			virtual UNKTYPE GetCalcAheadFunc(ParticleManager *);
-		};
-	}
+    namespace ef
+    {
+        class DrawBillboardStrategy : public DrawStrategyImpl
+        {
+        public:
+            DrawBillboardStrategy();
+            virtual ~DrawBillboardStrategy() {} // at 0x8
+            virtual UNKTYPE GetCalcAheadFunc(ParticleManager *); // at 0x18
+            
+            void Draw(const DrawInfo &, ParticleManager *);
+        };
+    }
 }
 
 #endif

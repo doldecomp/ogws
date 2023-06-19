@@ -1,5 +1,66 @@
 .include "macros.inc"
 
+.section .data, "wa"
+.balign 8
+.global __vt__Q23EGG14SimpleAudioMgr
+__vt__Q23EGG14SimpleAudioMgr:
+    .long 0
+    .long 0
+    .long initialize__Q23EGG14SimpleAudioMgrFPQ33EGG9IAudioMgr3Arg
+    .long calc__Q23EGG14SimpleAudioMgrFv
+    .long 0
+    .long 0
+    .long loadState__Q23EGG12SoundHeapMgrFl
+    .long getCurrentLevel__Q23EGG12SoundHeapMgrFv
+    .long saveState__Q23EGG12SoundHeapMgrFv
+    .long 0
+    .long 0
+    .long func_800B0F10
+    .long openArchive__Q23EGG9ArcPlayerFPCcPQ34nw4r3snd9SoundHeapQ33EGG9ArcPlayer12SARC_STORAGEP9ARCHandle
+    .long 0x800afb08
+    .long 0x800afb00
+    .long 0x800afaf8
+    .long 0x800afab0
+    .long setupMemoryArchive__Q23EGG9ArcPlayerFPCvPQ34nw4r3snd9SoundHeapl
+    .long 0x800afaa8
+    .long 0x800afac8
+    .long 0x800afad0
+    .long 0x800afad8
+    .long 0x800afac0
+    .long startSound__Q23EGG9ArcPlayerFPQ34nw4r3snd11SoundHandleUl
+    .long startSound__Q23EGG9ArcPlayerFPQ34nw4r3snd11SoundHandleUi
+    .long startSound__Q23EGG9ArcPlayerFPQ34nw4r3snd11SoundHandlePCc
+    .long prepareSound__Q23EGG9ArcPlayerFPQ34nw4r3snd11SoundHandleUl
+    .long prepareSound__Q23EGG9ArcPlayerFPQ34nw4r3snd11SoundHandleUi
+    .long prepareSound__Q23EGG9ArcPlayerFPQ34nw4r3snd11SoundHandlePCc
+    .long holdSound__Q23EGG9ArcPlayerFPQ34nw4r3snd11SoundHandleUl
+    .long holdSound__Q23EGG9ArcPlayerFPQ34nw4r3snd11SoundHandleUi
+    .long holdSound__Q23EGG9ArcPlayerFPQ34nw4r3snd11SoundHandlePCc
+    .long __dt__Q23EGG14SimpleAudioMgrFv
+    .long func_800B0ECC
+    .long func_800B0ED4
+    .long func_800B0EDC
+    .long func_800B0EE4
+    .long func_800B0EEC
+    .long func_800B0EF4
+    .long func_800B0EFC
+    .long func_800B0F04
+    .long 0
+.global __vt__Q23EGG9IAudioMgr
+__vt__Q23EGG9IAudioMgr:
+    .long 0
+    .long 0
+    .long initialize__Q23EGG9IAudioMgrFPQ33EGG9IAudioMgr3Arg
+    .long 0
+.global __vt__Q23EGG12SoundHeapMgr
+__vt__Q23EGG12SoundHeapMgr:
+    .long 0
+    .long 0
+    .long loadState__Q23EGG12SoundHeapMgrFl
+    .long getCurrentLevel__Q23EGG12SoundHeapMgrFv
+    .long saveState__Q23EGG12SoundHeapMgrFv
+    .long 0
+
 .section .rodata, "a"
 .balign 8
 .global lbl_8037B0E8
@@ -31,10 +92,10 @@ __ct__Q23EGG14SimpleAudioMgrFv:
 /* 800B0BCC 000ABACC  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 800B0BD0 000ABAD0  7C 08 02 A6 */	mflr r0
 /* 800B0BD4 000ABAD4  3C A0 80 3A */	lis r5, __vt__Q23EGG9IAudioMgr@ha
-/* 800B0BD8 000ABAD8  3C 80 80 3A */	lis r4, vtable_80398748@ha
+/* 800B0BD8 000ABAD8  3C 80 80 3A */	lis r4, __vt__Q23EGG12SoundHeapMgr@ha
 /* 800B0BDC 000ABADC  90 01 00 14 */	stw r0, 0x14(r1)
 /* 800B0BE0 000ABAE0  38 A5 87 38 */	addi r5, r5, __vt__Q23EGG9IAudioMgr@l
-/* 800B0BE4 000ABAE4  38 84 87 48 */	addi r4, r4, vtable_80398748@l
+/* 800B0BE4 000ABAE4  38 84 87 48 */	addi r4, r4, __vt__Q23EGG12SoundHeapMgr@l
 /* 800B0BE8 000ABAE8  93 E1 00 0C */	stw r31, 0xc(r1)
 /* 800B0BEC 000ABAEC  7C 7F 1B 78 */	mr r31, r3
 /* 800B0BF0 000ABAF0  90 A3 00 00 */	stw r5, 0(r3)
@@ -93,8 +154,8 @@ __dt__Q23EGG14SimpleAudioMgrFv:
 /* 800B0CB8 000ABBB8  4B FF D6 29 */	bl __dt__Q23EGG9ArcPlayerFv
 /* 800B0CBC 000ABBBC  34 7E 00 08 */	addic. r3, r30, 8
 /* 800B0CC0 000ABBC0  41 82 00 20 */	beq lbl_800B0CE0
-/* 800B0CC4 000ABBC4  3C 80 80 3A */	lis r4, vtable_80398748@ha
-/* 800B0CC8 000ABBC8  38 84 87 48 */	addi r4, r4, vtable_80398748@l
+/* 800B0CC4 000ABBC4  3C 80 80 3A */	lis r4, __vt__Q23EGG12SoundHeapMgr@ha
+/* 800B0CC8 000ABBC8  38 84 87 48 */	addi r4, r4, __vt__Q23EGG12SoundHeapMgr@l
 /* 800B0CCC 000ABBCC  90 9E 00 08 */	stw r4, 8(r30)
 /* 800B0CD0 000ABBD0  4B FF FE B9 */	bl destroySoundHeap__Q23EGG12SoundHeapMgrFv
 /* 800B0CD4 000ABBD4  38 7E 00 0C */	addi r3, r30, 0xc
@@ -252,7 +313,7 @@ func_800B0ED4:
 .global func_800B0EDC
 func_800B0EDC:
 /* 800B0EDC 000ABDDC  38 63 00 F8 */	addi r3, r3, 0xf8
-/* 800B0EE0 000ABDE0  4B FF D9 A4 */	b openCntArchive__Q23EGG9ArcPlayerFPCcPiPQ34nw4r3snd9SoundHeap
+/* 800B0EE0 000ABDE0  4B FF D9 A4 */	b openCntArchive__Q23EGG9ArcPlayerFPCcP9ARCHandlePQ34nw4r3snd9SoundHeap
 
 .global func_800B0EE4
 func_800B0EE4:

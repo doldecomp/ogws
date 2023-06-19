@@ -30,7 +30,7 @@ namespace nw4r
 			u8 BYTE_0x6;
 			u8 BYTE_0x7;
 		};
-		
+
 		struct EmitterDesc
 		{
 			UNKWORD FLAGS_0x0; // at 0x0/0x8

@@ -10,8 +10,8 @@ typedef struct _GXRenderModeObj
 {
     u32 INT_0x0;
     u16 mFbWidth; // at 0x4
-    u16 mEfbHeight; // at 0x8
-    u16 SHORT_0x8;
+    u16 mEfbHeight; // at 0x6
+    u16 mFbHeight; // at 0x8
     u16 SHORT_0xA;
     u16 SHORT_0xC;
     u16 SHORT_0xE;
@@ -23,6 +23,11 @@ typedef struct _GXRenderModeObj
     u8 BYTES_0x1A[24];
     u8 BYTES_0x32[7];
 } GXRenderModeObj;
+
+extern GXRenderModeObj GXNtsc480IntDf;
+extern GXRenderModeObj GXPal528IntDf;
+extern GXRenderModeObj GXEurgb60Hz480IntDf;
+extern GXRenderModeObj GXMpal480IntDf;
 
 UNKTYPE GXCopyDisp(UNKTYPE *, u8);
 UNKTYPE GXSetCopyClear(GXColor, UNKWORD zClear);

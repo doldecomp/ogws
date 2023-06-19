@@ -413,17 +413,15 @@ namespace EGG
 	{
 		if (mCurrentScene)
 		{
-			//800a5964
 			mCurrentScene->draw();
-			//800a5974
+
 			Display * pDisplay = BaseSystem::getDisplay();
 			Video * pVideo = BaseSystem::getVideo();
-			//TODO: DECOMPILE EGG::Video
-			if (pVideo->mFlags.onBit(0) && ((pDisplay->BYTE_0x9 & 1) == 0))
+
+			if (pVideo->isBlack() && !pDisplay->isBlack())
 			{
-				pDisplay->BYTE_0x9 |= 1;
+				pDisplay->setBlack(true);
 			}
-			//800a59c4 (END)
 		}
 	}
 	

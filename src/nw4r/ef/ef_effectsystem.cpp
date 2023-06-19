@@ -13,9 +13,9 @@ namespace
 	const char * NW4R_EF_Version = "<< NW4R    - EF \tfinal   build: Jun  8 2007 11:16:29 (0x4199_60831) >>";
 }
 
-inline void * operator new[](u32 size, void * pMemoryManager)
+inline void * operator new[](size_t size, void *p)
 {
-	return static_cast<nw4r::ef::MemoryManager *>(pMemoryManager)->AllocHeap(size + 0x10);
+	return p;
 }
 
 namespace nw4r
@@ -35,13 +35,13 @@ namespace nw4r
 			}
 			
 			mMemoryManager = NULL;
-			INT_0x5014 = 0;
+			mNumGroup = 0;
 			BYTE_0x5064 = 0;
 		}
 		
 		EffectSystem::~EffectSystem()
 		{
-			for (u32 i = 0; i < INT_0x5014; i++)
+			for (u32 i = 0; i < mNumGroup; i++)
 			{
 				RetireEffectAll(i);
 			}
@@ -52,19 +52,20 @@ namespace nw4r
 			return &instance;
 		}
 		
-		#ifdef __DECOMP_NON_MATCHING
-		bool EffectSystem::Initialize(u32 count)
+		bool EffectSystem::Initialize(u32 maxGroupID)
 		{
-			INT_0x5014 = count;
-			ARR_0x5018 = new (mMemoryManager) ActivityList[count];
+			u32 len = mNumGroup = maxGroupID;
+
+			void *p = mMemoryManager->AllocHeap(mNumGroup * sizeof(ActivityList) + 32);
+			ARR_0x5018 = new (p) ActivityList[len];
 			
-			for (u32 i = 0; i < INT_0x5014; i++)
+			for (u32 i = 0; i < mNumGroup; i++)
 			{
 				ARR_0x5018[i].SetOffset(0x14);
 				ARR_0x5018[i].Initialize();
 			}
 			
-			WORD_0x501C = 0;
+			mRandom.Srand(0);
 			
 			mDrawOrder = &gBasicDrawOrder;
 			mDrawStrategyBuilder = &gBasicDrawStrategyBuilder;
@@ -72,9 +73,6 @@ namespace nw4r
 			
 			return true;
 		}
-		#else
-		#error This file has yet to be decompiled accurately. Use "ef_effectsystem.s" instead.
-		#endif
 		
 		bool EffectSystem::Closing(Effect * pEffect)
 		{

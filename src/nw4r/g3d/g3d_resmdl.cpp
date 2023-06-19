@@ -1,6 +1,4 @@
 #pragma ipa file
-#pragma opt_lifetimes off
-#pragma opt_strength_reduction off
 
 #include "g3d_resmdl.h"
 #include "g3d_resdict.h"
@@ -13,10 +11,10 @@ namespace nw4r
 {
     namespace g3d
     {
-        void * ResMdl::GetResByteCode(const char *pName) const
+        u8 * ResMdl::GetResByteCode(const char *pName) const
         {
             ResMdlData& ref = mMdl.ref();
-            return mMdl.ofs_to_obj<ResDic>(ref.mByteCodeDictOfs)[pName];
+            return static_cast<u8 *>(mMdl.ofs_to_obj<ResDic>(ref.mByteCodeDictOfs)[pName]);
         }
 
         ResNode ResMdl::GetResNode(const char *pName) const
@@ -217,7 +215,6 @@ namespace nw4r
             }
         }
         
-        #ifdef __DECOMP_NON_MATCHING
         void ResMdl::Init()
         {
             u32 i;
@@ -258,9 +255,6 @@ namespace nw4r
                 GetResVtxTexCoord(i).Init();
             }
         }
-        #else
-        #error This file has yet to be decompiled accurately. Use "g3d_resmdl.s" instead.
-        #endif
 
         void ResMdl::Terminate()
         {
@@ -271,6 +265,5 @@ namespace nw4r
                 GetResShp(i).Terminate();
             }
         }
-
     }
 }

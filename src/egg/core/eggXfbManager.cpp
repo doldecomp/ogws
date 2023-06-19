@@ -1,36 +1,40 @@
 #include "eggXfbManager.h"
 #include "eggXfb.h"
-#include <RevoSDK/VI/vi.h>
-#include <RevoSDK/OS/OSInterrupt.h>
-#include <RevoSDK/GX/GXPixel.h>
-#include <RevoSDK/GX/GXFrameBuf.h>
-#include <RevoSDK/GX/GXMisc.h>
+
+#include <VI/vi.h>
+#include <OS/OSInterrupt.h>
+#include <GX/GXPixel.h>
+#include <GX/GXFrameBuf.h>
+#include <GX/GXMisc.h>
 
 namespace EGG
 {
-    bool XfbManager::attach(Xfb *pXfb)
+    bool XfbManager::attach(Xfb *xfb)
     {
         bool success = false;
 
-        if (pXfb)
+        if (xfb != NULL)
         {
-            if (mXfb.XFB_0x0 == NULL)
+            if (mListHead == NULL)
             {
-                mXfb.XFB_0x0 = pXfb;
-                mXfb.XFB_0x4 = pXfb;
-                pXfb->XFB_0x8 = pXfb;
-                pXfb->XFB_0xC = pXfb;
+                // Circular linked list
+                mListHead = xfb;
+                mListTail = xfb;
+                xfb->setPrev(xfb);
+                xfb->setNext(xfb);
             }
             else
             {
-                mXfb.XFB_0x0->XFB_0xC->XFB_0x8 = pXfb;
-
-                pXfb->XFB_0xC = mXfb.XFB_0x0->XFB_0xC;
-                mXfb.XFB_0x0->XFB_0xC = pXfb;
-
-                pXfb->XFB_0x8 = mXfb.XFB_0x0;
-                mXfb.XFB_0x4 = mXfb.XFB_0x0->XFB_0x8;
+                // Attach as next XFB after list head
+                mListHead->getNext()->setPrev(xfb);
+                xfb->setNext(mListHead->getNext());
+                // Link to list head
+                mListHead->setNext(xfb);
+                xfb->setPrev(mListHead);
+                // Fix tail (redundant?)
+                mListTail = mListHead->getPrev();
             }
+
             success = true;
         }
 
@@ -46,36 +50,37 @@ namespace EGG
             GXSetColorUpdate(1);
         }
 
-        GXCopyDisp(mXfb.XFB_0x4->XFB_0x4, bUpdate);
+        GXCopyDisp(mListTail->getBuffer(), bUpdate);
         GXFlush();
-        mXfb.XFB_0x8 = mXfb.XFB_0x4;
-        mXfb.XFB_0x4 = mXfb.XFB_0x4->XFB_0x8;
+
+        mCopiedXfb = mListTail;
+        mListTail = mListTail->getPrev();
     }
 
     void XfbManager::setNextFrameBuffer()
     {
-        UNKWORD r31 = OSDisableInterrupts();
+        UNKWORD intr = OSDisableInterrupts();
 
-        if (mXfb.XFB_0x8)
+        if (mCopiedXfb != NULL)
         {
-            VISetNextFrameBuffer(mXfb.XFB_0x8->XFB_0x4);
+            VISetNextFrameBuffer(mCopiedXfb->getBuffer());
             VIFlush();
-            mXfb.XFB_0xC = mXfb.XFB_0x8;
-            mXfb.XFB_0x8 = NULL;
+
+            mShowXfb = mCopiedXfb;
+            mCopiedXfb = NULL;
         }
 
-        OSRestoreInterrupts(r31);
+        OSRestoreInterrupts(intr);
     }
 
     void XfbManager::postVRetrace()
     {
-        if (mXfb.XFB_0xC != NULL)
+        if (mShowXfb != NULL)
         {
-            Xfb* pXfb = mXfb.XFB_0xC->XFB_0x4;
-            if (pXfb == VIGetCurrentFrameBuffer())
+            if (mShowXfb->getBuffer() == VIGetCurrentFrameBuffer())
             {
-                mXfb.XFB_0x0 = mXfb.XFB_0xC;
-                mXfb.XFB_0xC = NULL;
+                mListHead = mShowXfb;
+                mShowXfb = NULL;
             }
         }
     }

@@ -23,7 +23,7 @@ namespace nw4r
 			
 			inline T & ref() const { return *mPtr; }
 			inline T * ptr() const { return mPtr; }
-			inline bool IsValid() const { return mPtr; }
+			inline bool IsValid() const { return mPtr != NULL; }
 
 			template <typename TPtr>
 			inline const TPtr * ofs_to_ptr_raw(s32 ofs) const

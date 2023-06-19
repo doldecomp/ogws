@@ -30,14 +30,34 @@ namespace nw4r
 
         struct ResNode
         {
+            enum ResNodeFlags
+            {
+                NODE_IS_VISIBLE = 0x100
+            };
+
             ResCommon<ResNodeData> mNode;
 
             inline ResNode(void * vptr) : mNode(vptr) {}
-            inline UNKTYPE GetID() const;
-            inline UNKTYPE GetBillboardType() const;
-            inline UNKTYPE GetChildNode();
-            inline UNKTYPE GetNextSibling();
-            inline UNKTYPE GetParentNode();
+            
+            bool IsValid() const { return mNode.IsValid(); }
+
+            UNKWORD GetID() const
+            {
+                if (IsValid())
+                    return mNode.ptr()->WORD_0xC;
+                return 0;
+            }
+
+            void SetVisibility(bool visible)
+            {
+                if (IsValid())
+                {
+                    if (visible)
+                        mNode.ptr()->mFlags |= NODE_IS_VISIBLE;
+                    else
+                        mNode.ptr()->mFlags &= ~NODE_IS_VISIBLE;
+                }
+            }
 
             void PatchChrAnmResult(ChrAnmResult *) const;
             void CalcChrAnmResult(ChrAnmResult *) const;

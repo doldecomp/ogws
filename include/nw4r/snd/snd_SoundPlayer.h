@@ -11,6 +11,8 @@ namespace nw4r
 			float FLOAT_0x28;
 			float FLOAT_0x34;
 			
+			void StopAllSound(int);
+
 			bool detail_IsEnabledOutputLine() const;
 			int detail_GetOutputLine() const;
 			float detail_GetRemoteOutVolume(int) const;

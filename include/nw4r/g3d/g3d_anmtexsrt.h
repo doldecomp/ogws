@@ -6,8 +6,23 @@ namespace nw4r
 {
 	namespace g3d
 	{
+		struct TexSrtTypedef
+		{
+			enum TexMatrixMode
+			{
+				TEX_MTX_MAYA,
+				TEX_MTX_XSI,
+				TEX_MTX_3DSMAX
+			};
+		};
+
 		struct TexSrt
 		{
+			enum Flag
+			{
+				FLAG_ANM_EXISTS,
+			};
+
 			float mScaleX; // at 0x0
 			float mScaleY; // at 0x4
 			float mRotation; // at 0x8

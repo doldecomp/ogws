@@ -1,6 +1,6 @@
 #include "eggMath.h"
 #include "eggAssert.h"
-#include "STL/math.h"
+#include <math.h>
 
 namespace EGG
 {

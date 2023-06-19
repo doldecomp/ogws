@@ -14,7 +14,7 @@ namespace
 	{
 		static const nw4r::ut::Color fog = 0;
 		
-		GXSetFog(0, fog, 0.0f, 0.0f, 0.0f, 0.0f);
+		GXSetFog(GX_FOG_TYPE_0, fog, 0.0f, 0.0f, 0.0f, 0.0f);
 		GXSetTevSwapModeTable(GX_TEV_SWAP_SEL_0, 0, 1, 2, 3);
 		GXSetZTexture(0, 17, 0);
 		GXSetNumChans(1);

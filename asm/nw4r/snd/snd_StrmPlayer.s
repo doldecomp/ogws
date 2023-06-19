@@ -1,6 +1,7 @@
 .include "macros.inc"
 
 .section .data, "wa"
+.balign 0x8
 .global __vt__Q44nw4r3snd6detail10StrmPlayer
 __vt__Q44nw4r3snd6detail10StrmPlayer:
 	.long 0
@@ -42,19 +43,23 @@ __vt__Q54nw4r3snd6detail10StrmPlayer18StrmHeaderLoadTask:
 .balign 0x8
 
 .section .bss, "wa"
-.global lbl_803E7C20
-lbl_803E7C20:
+.balign 0x8
+.global sLoadBuffer__Q44nw4r3snd6detail10StrmPlayer # align to 32
+sLoadBuffer__Q44nw4r3snd6detail10StrmPlayer:
+	.balign 32
 	.skip 0x4020
-.global lbl_803EBC40
-lbl_803EBC40:
+.global sLoadBufferMutex__Q44nw4r3snd6detail10StrmPlayer
+sLoadBufferMutex__Q44nw4r3snd6detail10StrmPlayer:
 	.skip 0x18
 
 .section .sbss, "wa"
+.balign 0x8
 .global lbl_804BEB18
 lbl_804BEB18:
 	.skip 0x8
 
 .section .sdata2, "a"
+.balign 0x8
 .global lbl_804C0120
 lbl_804C0120:
 	.single 0e1
@@ -111,8 +116,8 @@ __ct__Q44nw4r3snd6detail10StrmPlayerFv:
 /* 80048864 00043764  88 0D 97 98 */	lbz r0, lbl_804BEB18-_SDA_BASE_(r13)
 /* 80048868 00043768  2C 00 00 00 */	cmpwi r0, 0
 /* 8004886C 0004376C  40 82 00 18 */	bne lbl_80048884
-/* 80048870 00043770  3C 60 80 3F */	lis r3, lbl_803EBC40@ha
-/* 80048874 00043774  38 63 BC 40 */	addi r3, r3, lbl_803EBC40@l
+/* 80048870 00043770  3C 60 80 3F */	lis r3, sLoadBufferMutex__Q44nw4r3snd6detail10StrmPlayer@ha
+/* 80048874 00043774  38 63 BC 40 */	addi r3, r3, sLoadBufferMutex__Q44nw4r3snd6detail10StrmPlayer@l
 /* 80048878 00043778  48 0A A2 CD */	bl OSInitMutex
 /* 8004887C 0004377C  38 00 00 01 */	li r0, 1
 /* 80048880 00043780  98 0D 97 98 */	stb r0, lbl_804BEB18-_SDA_BASE_(r13)
@@ -801,9 +806,9 @@ LoadHeader__Q44nw4r3snd6detail10StrmPlayerFPQ34nw4r2ut10FileStreamQ54nw4r3snd6de
 /* 80049210 00044110  90 01 02 14 */	stw r0, 0x214(r1)
 /* 80049214 00044114  39 61 02 10 */	addi r11, r1, 0x210
 /* 80049218 00044118  48 06 8B 29 */	bl _savegpr_26
-/* 8004921C 0004411C  3F E0 80 3F */	lis r31, lbl_803EBC40@ha
+/* 8004921C 0004411C  3F E0 80 3F */	lis r31, sLoadBufferMutex__Q44nw4r3snd6detail10StrmPlayer@ha
 /* 80049220 00044120  7C 7D 1B 78 */	mr r29, r3
-/* 80049224 00044124  3B FF BC 40 */	addi r31, r31, lbl_803EBC40@l
+/* 80049224 00044124  3B FF BC 40 */	addi r31, r31, sLoadBufferMutex__Q44nw4r3snd6detail10StrmPlayer@l
 /* 80049228 00044128  7C 9A 23 78 */	mr r26, r4
 /* 8004922C 0004412C  7C BB 2B 78 */	mr r27, r5
 /* 80049230 00044130  7C DE 33 78 */	mr r30, r6
@@ -812,9 +817,9 @@ LoadHeader__Q44nw4r3snd6detail10StrmPlayerFPQ34nw4r2ut10FileStreamQ54nw4r3snd6de
 /* 8004923C 0004413C  93 41 00 08 */	stw r26, 8(r1)
 /* 80049240 00044140  38 61 00 0C */	addi r3, r1, 0xc
 /* 80049244 00044144  4B FF EF A9 */	bl __ct__Q44nw4r3snd6detail14StrmFileReaderFv
-/* 80049248 00044148  3C 80 80 3E */	lis r4, lbl_803E7C20@ha
+/* 80049248 00044148  3C 80 80 3E */	lis r4, sLoadBuffer__Q44nw4r3snd6detail10StrmPlayer@ha
 /* 8004924C 0004414C  38 61 00 08 */	addi r3, r1, 8
-/* 80049250 00044150  38 84 7C 20 */	addi r4, r4, lbl_803E7C20@l
+/* 80049250 00044150  38 84 7C 20 */	addi r4, r4, sLoadBuffer__Q44nw4r3snd6detail10StrmPlayer@l
 /* 80049254 00044154  38 A0 02 00 */	li r5, 0x200
 /* 80049258 00044158  4B FF F1 F9 */	bl LoadFileHeader__Q44nw4r3snd6detail14StrmFileLoaderFPvUl
 /* 8004925C 0004415C  2C 03 00 00 */	cmpwi r3, 0
@@ -1026,13 +1031,13 @@ lbl_80049514:
 /* 8004951C 0004441C  38 00 00 01 */	li r0, 1
 /* 80049520 00044420  90 03 00 68 */	stw r0, 0x68(r3)
 lbl_80049524:
-/* 80049524 00044424  3F E0 80 3F */	lis r31, lbl_803EBC40@ha
-/* 80049528 00044428  3B FF BC 40 */	addi r31, r31, lbl_803EBC40@l
+/* 80049524 00044424  3F E0 80 3F */	lis r31, sLoadBufferMutex__Q44nw4r3snd6detail10StrmPlayer@ha
+/* 80049528 00044428  3B FF BC 40 */	addi r31, r31, sLoadBufferMutex__Q44nw4r3snd6detail10StrmPlayer@l
 /* 8004952C 0004442C  7F E3 FB 78 */	mr r3, r31
 /* 80049530 00044430  48 0A 96 4D */	bl OSLockMutex
-/* 80049534 00044434  3E A0 80 3E */	lis r21, lbl_803E7C20@ha
+/* 80049534 00044434  3E A0 80 3E */	lis r21, sLoadBuffer__Q44nw4r3snd6detail10StrmPlayer@ha
 /* 80049538 00044438  7E 84 A3 78 */	mr r4, r20
-/* 8004953C 0004443C  38 75 7C 20 */	addi r3, r21, lbl_803E7C20@l
+/* 8004953C 0004443C  38 75 7C 20 */	addi r3, r21, sLoadBuffer__Q44nw4r3snd6detail10StrmPlayer@l
 /* 80049540 00044440  48 0A 4B C5 */	bl func_800EE104
 /* 80049544 00044444  81 97 00 00 */	lwz r12, 0(r23)
 /* 80049548 00044448  7E E3 BB 78 */	mr r3, r23

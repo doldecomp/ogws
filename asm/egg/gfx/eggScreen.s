@@ -1,0 +1,1937 @@
+.include "macros.inc"
+
+.section .ctors, "a"
+.4byte __sinit_$$3eggScreen_cpp
+
+.section .sdata2, "a"
+.balign 0x8
+.global lbl_804C0850
+lbl_804C0850:
+	.incbin "baserom.dol", 0x3C9490, 0x4
+.global lbl_804C0854
+lbl_804C0854:
+	.incbin "baserom.dol", 0x3C9494, 0x4
+.global lbl_804C0858
+lbl_804C0858:
+	.incbin "baserom.dol", 0x3C9498, 0x4
+.global lbl_804C085C
+lbl_804C085C:
+	.incbin "baserom.dol", 0x3C949C, 0x4
+.global lbl_804C0860
+lbl_804C0860:
+	.incbin "baserom.dol", 0x3C94A0, 0x8
+.global lbl_804C0868
+lbl_804C0868:
+	.incbin "baserom.dol", 0x3C94A8, 0x8
+.global lbl_804C0870
+lbl_804C0870:
+	.incbin "baserom.dol", 0x3C94B0, 0x8
+.global lbl_804C0878
+lbl_804C0878:
+	.incbin "baserom.dol", 0x3C94B8, 0x8
+
+.section .sdata, "wa"
+.balign 0x8
+.global sTVModeWidths__Q23EGG6Screen
+sTVModeWidths__Q23EGG6Screen:
+	.incbin "baserom.dol", 0x3C7168, 0x4
+.global sTVModeHeights__Q23EGG6Screen
+sTVModeHeights__Q23EGG6Screen:
+	.incbin "baserom.dol", 0x3C716C, 0x4
+
+.section .sbss, "wa"
+.balign 0x8
+.global sTVMode__Q23EGG6Screen
+sTVMode__Q23EGG6Screen:
+	.skip 0x4
+.global spRoot__Q23EGG6Screen
+spRoot__Q23EGG6Screen:
+	.skip 0x4
+.global sChangeTVModeFunc__Q23EGG6Screen
+sChangeTVModeFunc__Q23EGG6Screen:
+	.skip 0x4
+.global spChangeTVModeFuncInfo__Q23EGG6Screen
+spChangeTVModeFuncInfo__Q23EGG6Screen:
+	.skip 0x4
+.global sCanvasScale__Q23EGG6Screen
+sCanvasScale__Q23EGG6Screen:
+	.skip 0x8
+.global sCanvasOffset__Q23EGG6Screen
+sCanvasOffset__Q23EGG6Screen:
+	.skip 0x8
+.global $$2GUARD$$2defaultRoot$813
+$$2GUARD$$2defaultRoot$813:
+	.skip 0x8
+
+.section .rodata, "a"
+.balign 0x8
+.global lbl_80379C50
+lbl_80379C50:
+	.string "eggScreen.cpp"
+    .string "maxX != NULL"
+    .string "maxY != NULL"
+    .string "spRoot == NULL || ( spRoot != NULL && spRoot == this )"
+    .string "GetSizeXMax() > 0"
+    .string "GetSizeYMax() > 0"
+
+.section .data, "wa"
+.balign 0x8
+.global __vt__Q23EGG6Screen
+__vt__Q23EGG6Screen:
+    .long 0
+    .long 0
+    .long __dt__Q23EGG6ScreenFv
+    .long SetProjectionGX__Q23EGG6ScreenCFv
+    .long 0x80099aec
+# Weak asserts
+.global lbl_80397E3C
+lbl_80397E3C:
+	.string "sizeX >= 0.f"
+    .balign 0x4
+.global lbl_80397E4C
+lbl_80397E4C:
+	.string "eggFrustum.h"
+    .balign 0x4
+.global lbl_80397E5C
+lbl_80397E5C:
+	.string "sizeY >= 0.f"
+    .balign 0x4
+.global lbl_80397E6C
+lbl_80397E6C:
+	.string "eggFrustum.h"
+    .balign 0x4
+
+.section .bss, "wa"
+.balign 0x8
+.global sTVModeRatios__Q23EGG6Screen
+sTVModeRatios__Q23EGG6Screen:
+	.skip 0x10
+# defaultRoot GOBJ info
+.global lbl_8040A948
+lbl_8040A948:
+	.skip 0x10
+.global defaultRoot$813
+defaultRoot$813:
+	.skip 0x68
+
+.section .text, "ax"
+.global Initialize__Q23EGG6ScreenFPCUsPCUsPQ23EGG6Screen
+Initialize__Q23EGG6ScreenFPCUsPCUsPQ23EGG6Screen:
+/* 800995CC 000944CC  94 21 FF E0 */	stwu r1, -0x20(r1)
+/* 800995D0 000944D0  7C 08 02 A6 */	mflr r0
+/* 800995D4 000944D4  2C 03 00 00 */	cmpwi r3, 0
+/* 800995D8 000944D8  90 01 00 24 */	stw r0, 0x24(r1)
+/* 800995DC 000944DC  93 E1 00 1C */	stw r31, 0x1c(r1)
+/* 800995E0 000944E0  7C BF 2B 78 */	mr r31, r5
+/* 800995E4 000944E4  93 C1 00 18 */	stw r30, 0x18(r1)
+/* 800995E8 000944E8  7C 9E 23 78 */	mr r30, r4
+/* 800995EC 000944EC  93 A1 00 14 */	stw r29, 0x14(r1)
+/* 800995F0 000944F0  7C 7D 1B 78 */	mr r29, r3
+/* 800995F4 000944F4  40 82 00 1C */	bne lbl_80099610
+/* 800995F8 000944F8  3C 60 80 38 */	lis r3, lbl_80379C50@ha
+/* 800995FC 000944FC  38 80 00 2F */	li r4, 0x2f
+/* 80099600 00094500  38 63 9C 50 */	addi r3, r3, lbl_80379C50@l
+/* 80099604 00094504  38 A3 00 0E */	addi r5, r3, 0xe
+/* 80099608 00094508  4C C6 31 82 */	crclr 6
+/* 8009960C 0009450C  48 00 88 FD */	bl system_halt
+lbl_80099610:
+/* 80099610 00094510  2C 1E 00 00 */	cmpwi r30, 0
+/* 80099614 00094514  40 82 00 1C */	bne lbl_80099630
+/* 80099618 00094518  3C 60 80 38 */	lis r3, lbl_80379C50@ha
+/* 8009961C 0009451C  38 80 00 30 */	li r4, 0x30
+/* 80099620 00094520  38 63 9C 50 */	addi r3, r3, lbl_80379C50@l
+/* 80099624 00094524  38 A3 00 1B */	addi r5, r3, 0x1b
+/* 80099628 00094528  4C C6 31 82 */	crclr 6
+/* 8009962C 0009452C  48 00 88 DD */	bl system_halt
+lbl_80099630:
+/* 80099630 00094530  A0 BD 00 00 */	lhz r5, 0(r29)
+/* 80099634 00094534  38 8D 81 68 */	addi r4, r13, sTVModeWidths__Q23EGG6Screen@sda21
+/* 80099638 00094538  88 0D 98 C0 */	lbz r0, $$2GUARD$$2defaultRoot$813@sda21(r13)
+/* 8009963C 0009453C  38 6D 81 6C */	addi r3, r13, sTVModeHeights__Q23EGG6Screen@sda21
+/* 80099640 00094540  B0 AD 81 68 */	sth r5, sTVModeWidths__Q23EGG6Screen@sda21(r13)
+/* 80099644 00094544  7C 00 07 75 */	extsb. r0, r0
+/* 80099648 00094548  A0 1E 00 00 */	lhz r0, 0(r30)
+/* 8009964C 0009454C  B0 0D 81 6C */	sth r0, sTVModeHeights__Q23EGG6Screen@sda21(r13)
+/* 80099650 00094550  A0 1D 00 02 */	lhz r0, 2(r29)
+/* 80099654 00094554  B0 04 00 02 */	sth r0, 2(r4)
+/* 80099658 00094558  A0 1E 00 02 */	lhz r0, 2(r30)
+/* 8009965C 0009455C  B0 03 00 02 */	sth r0, 2(r3)
+/* 80099660 00094560  40 82 00 30 */	bne lbl_80099690
+/* 80099664 00094564  3F C0 80 41 */	lis r30, defaultRoot$813@ha
+/* 80099668 00094568  38 7E A9 58 */	addi r3, r30, defaultRoot$813@l
+/* 8009966C 0009456C  48 00 00 D1 */	bl __ct__Q23EGG6ScreenFv
+/* 80099670 00094570  3C 80 80 09 */	lis r4, __dt__Q23EGG6ScreenFv@ha
+/* 80099674 00094574  3C A0 80 41 */	lis r5, lbl_8040A948@ha
+/* 80099678 00094578  38 7E A9 58 */	addi r3, r30, -22184
+/* 8009967C 0009457C  38 84 D4 BC */	addi r4, r4, __dt__Q23EGG6ScreenFv@l
+/* 80099680 00094580  38 A5 A9 48 */	addi r5, r5, lbl_8040A948@l
+/* 80099684 00094584  48 01 81 B1 */	bl func_800B1834
+/* 80099688 00094588  38 00 00 01 */	li r0, 1
+/* 8009968C 0009458C  98 0D 98 C0 */	stb r0, $$2GUARD$$2defaultRoot$813@sda21(r13)
+lbl_80099690:
+/* 80099690 00094590  3C 60 80 41 */	lis r3, defaultRoot$813@ha
+/* 80099694 00094594  38 00 00 00 */	li r0, 0
+/* 80099698 00094598  38 83 A9 58 */	addi r4, r3, defaultRoot$813@l
+/* 8009969C 0009459C  90 03 A9 58 */	stw r0, -0x56a8(r3)
+/* 800996A0 000945A0  80 04 00 04 */	lwz r0, 4(r4)
+/* 800996A4 000945A4  2C 00 00 01 */	cmpwi r0, 1
+/* 800996A8 000945A8  41 82 00 18 */	beq lbl_800996C0
+/* 800996AC 000945AC  A0 64 00 34 */	lhz r3, 0x34(r4)
+/* 800996B0 000945B0  38 00 00 01 */	li r0, 1
+/* 800996B4 000945B4  90 04 00 04 */	stw r0, 4(r4)
+/* 800996B8 000945B8  60 60 00 01 */	ori r0, r3, 1
+/* 800996BC 000945BC  B0 04 00 34 */	sth r0, 0x34(r4)
+lbl_800996C0:
+/* 800996C0 000945C0  3C 60 80 41 */	lis r3, defaultRoot$813@ha
+/* 800996C4 000945C4  C0 22 8E 30 */	lfs f1, lbl_804C0850@sda21(r2)
+/* 800996C8 000945C8  38 63 A9 58 */	addi r3, r3, defaultRoot$813@l
+/* 800996CC 000945CC  C0 02 8E 34 */	lfs f0, lbl_804C0854@sda21(r2)
+/* 800996D0 000945D0  2C 1F 00 00 */	cmpwi r31, 0
+/* 800996D4 000945D4  D0 23 00 18 */	stfs f1, 0x18(r3)
+/* 800996D8 000945D8  D0 03 00 1C */	stfs f0, 0x1c(r3)
+/* 800996DC 000945DC  40 82 00 08 */	bne lbl_800996E4
+/* 800996E0 000945E0  48 00 00 08 */	b lbl_800996E8
+lbl_800996E4:
+/* 800996E4 000945E4  7F E3 FB 78 */	mr r3, r31
+lbl_800996E8:
+/* 800996E8 000945E8  90 6D 98 A4 */	stw r3, spRoot__Q23EGG6Screen@sda21(r13)
+/* 800996EC 000945EC  A0 03 00 34 */	lhz r0, 0x34(r3)
+/* 800996F0 000945F0  60 00 00 01 */	ori r0, r0, 1
+/* 800996F4 000945F4  B0 03 00 34 */	sth r0, 0x34(r3)
+/* 800996F8 000945F8  80 0D 98 A4 */	lwz r0, spRoot__Q23EGG6Screen@sda21(r13)
+/* 800996FC 000945FC  7C 00 18 40 */	cmplw r0, r3
+/* 80099700 00094600  40 82 00 10 */	bne lbl_80099710
+/* 80099704 00094604  38 00 00 00 */	li r0, 0
+/* 80099708 00094608  90 03 00 3C */	stw r0, 0x3c(r3)
+/* 8009970C 0009460C  48 00 00 08 */	b lbl_80099714
+lbl_80099710:
+/* 80099710 00094610  90 03 00 3C */	stw r0, 0x3c(r3)
+lbl_80099714:
+/* 80099714 00094614  48 00 16 89 */	bl CalcRatio__Q23EGG6ScreenFv
+/* 80099718 00094618  80 6D 98 A0 */	lwz r3, sTVMode__Q23EGG6Screen@sda21(r13)
+/* 8009971C 0009461C  48 00 14 25 */	bl SetTVMode__Q23EGG6ScreenFQ33EGG6Screen6TVMode
+/* 80099720 00094620  80 01 00 24 */	lwz r0, 0x24(r1)
+/* 80099724 00094624  83 E1 00 1C */	lwz r31, 0x1c(r1)
+/* 80099728 00094628  83 C1 00 18 */	lwz r30, 0x18(r1)
+/* 8009972C 0009462C  83 A1 00 14 */	lwz r29, 0x14(r1)
+/* 80099730 00094630  7C 08 03 A6 */	mtlr r0
+/* 80099734 00094634  38 21 00 20 */	addi r1, r1, 0x20
+/* 80099738 00094638  4E 80 00 20 */	blr 
+
+.global __ct__Q23EGG6ScreenFv
+__ct__Q23EGG6ScreenFv:
+/* 8009973C 0009463C  94 21 FF D0 */	stwu r1, -0x30(r1)
+/* 80099740 00094640  7C 08 02 A6 */	mflr r0
+/* 80099744 00094644  3C E0 43 30 */	lis r7, 0x4330
+/* 80099748 00094648  38 AD 81 6C */	addi r5, r13, sTVModeHeights__Q23EGG6Screen@sda21
+/* 8009974C 0009464C  90 01 00 34 */	stw r0, 0x34(r1)
+/* 80099750 00094650  38 8D 81 68 */	addi r4, r13, sTVModeWidths__Q23EGG6Screen@sda21
+/* 80099754 00094654  C8 62 8E 40 */	lfd f3, lbl_804C0860@sda21(r2)
+/* 80099758 00094658  93 E1 00 2C */	stw r31, 0x2c(r1)
+/* 8009975C 0009465C  7C 7F 1B 78 */	mr r31, r3
+/* 80099760 00094660  C0 22 8E 38 */	lfs f1, lbl_804C0858@sda21(r2)
+/* 80099764 00094664  80 0D 98 A0 */	lwz r0, sTVMode__Q23EGG6Screen@sda21(r13)
+/* 80099768 00094668  90 E1 00 10 */	stw r7, 0x10(r1)
+/* 8009976C 0009466C  54 00 08 3C */	slwi r0, r0, 1
+/* 80099770 00094670  C0 42 8E 3C */	lfs f2, lbl_804C085C@sda21(r2)
+/* 80099774 00094674  7C C5 02 2E */	lhzx r6, r5, r0
+/* 80099778 00094678  38 A1 00 08 */	addi r5, r1, 8
+/* 8009977C 0009467C  7C 04 02 2E */	lhzx r0, r4, r0
+/* 80099780 00094680  38 80 00 01 */	li r4, 1
+/* 80099784 00094684  90 C1 00 14 */	stw r6, 0x14(r1)
+/* 80099788 00094688  38 C0 00 01 */	li r6, 1
+/* 8009978C 0009468C  C8 01 00 10 */	lfd f0, 0x10(r1)
+/* 80099790 00094690  90 01 00 1C */	stw r0, 0x1c(r1)
+/* 80099794 00094694  EC 80 18 28 */	fsubs f4, f0, f3
+/* 80099798 00094698  90 E1 00 18 */	stw r7, 0x18(r1)
+/* 8009979C 0009469C  C8 01 00 18 */	lfd f0, 0x18(r1)
+/* 800997A0 000946A0  D0 81 00 0C */	stfs f4, 0xc(r1)
+/* 800997A4 000946A4  EC 00 18 28 */	fsubs f0, f0, f3
+/* 800997A8 000946A8  D0 01 00 08 */	stfs f0, 8(r1)
+/* 800997AC 000946AC  48 00 70 55 */	bl __ct__Q23EGG7FrustumFQ33EGG7Frustum14ProjectionTypeRCQ34nw4r4math4VEC2ffQ33EGG7Frustum10CanvasMode
+/* 800997B0 000946B0  A0 1F 00 34 */	lhz r0, 0x34(r31)
+/* 800997B4 000946B4  3C 60 80 39 */	lis r3, __vt__Q23EGG6Screen@ha
+/* 800997B8 000946B8  C0 02 8E 30 */	lfs f0, lbl_804C0850@sda21(r2)
+/* 800997BC 000946BC  38 63 7E 28 */	addi r3, r3, __vt__Q23EGG6Screen@l
+/* 800997C0 000946C0  60 00 00 01 */	ori r0, r0, 1
+/* 800997C4 000946C4  90 7F 00 38 */	stw r3, 0x38(r31)
+/* 800997C8 000946C8  D0 1F 00 40 */	stfs f0, 0x40(r31)
+/* 800997CC 000946CC  D0 1F 00 44 */	stfs f0, 0x44(r31)
+/* 800997D0 000946D0  B0 1F 00 34 */	sth r0, 0x34(r31)
+/* 800997D4 000946D4  80 0D 98 A4 */	lwz r0, spRoot__Q23EGG6Screen@sda21(r13)
+/* 800997D8 000946D8  7C 00 F8 40 */	cmplw r0, r31
+/* 800997DC 000946DC  40 82 00 10 */	bne lbl_800997EC
+/* 800997E0 000946E0  38 00 00 00 */	li r0, 0
+/* 800997E4 000946E4  90 1F 00 3C */	stw r0, 0x3c(r31)
+/* 800997E8 000946E8  48 00 00 08 */	b lbl_800997F0
+lbl_800997EC:
+/* 800997EC 000946EC  90 1F 00 3C */	stw r0, 0x3c(r31)
+lbl_800997F0:
+/* 800997F0 000946F0  7F E3 FB 78 */	mr r3, r31
+/* 800997F4 000946F4  48 00 02 0D */	bl NullSub_0__Q23EGG6ScreenFv
+/* 800997F8 000946F8  7F E3 FB 78 */	mr r3, r31
+/* 800997FC 000946FC  83 E1 00 2C */	lwz r31, 0x2c(r1)
+/* 80099800 00094700  80 01 00 34 */	lwz r0, 0x34(r1)
+/* 80099804 00094704  7C 08 03 A6 */	mtlr r0
+/* 80099808 00094708  38 21 00 30 */	addi r1, r1, 0x30
+/* 8009980C 0009470C  4E 80 00 20 */	blr 
+/* 80099810 00094710  94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 80099814 00094714  7C 08 02 A6 */	mflr r0
+/* 80099818 00094718  2C 03 00 00 */	cmpwi r3, 0
+/* 8009981C 0009471C  90 01 00 14 */	stw r0, 0x14(r1)
+/* 80099820 00094720  93 E1 00 0C */	stw r31, 0xc(r1)
+/* 80099824 00094724  7C 7F 1B 78 */	mr r31, r3
+/* 80099828 00094728  41 82 00 10 */	beq lbl_80099838
+/* 8009982C 0009472C  2C 04 00 00 */	cmpwi r4, 0
+/* 80099830 00094730  40 81 00 08 */	ble lbl_80099838
+/* 80099834 00094734  48 00 9A 51 */	bl __dl__FPv
+lbl_80099838:
+/* 80099838 00094738  7F E3 FB 78 */	mr r3, r31
+/* 8009983C 0009473C  83 E1 00 0C */	lwz r31, 0xc(r1)
+/* 80099840 00094740  80 01 00 14 */	lwz r0, 0x14(r1)
+/* 80099844 00094744  7C 08 03 A6 */	mtlr r0
+/* 80099848 00094748  38 21 00 10 */	addi r1, r1, 0x10
+/* 8009984C 0009474C  4E 80 00 20 */	blr 
+
+.global __ct__Q23EGG6ScreenFffffPCQ23EGG6ScreenQ33EGG7Frustum10CanvasMode
+__ct__Q23EGG6ScreenFffffPCQ23EGG6ScreenQ33EGG7Frustum10CanvasMode:
+/* 80099850 00094750  94 21 FF C0 */	stwu r1, -0x40(r1)
+/* 80099854 00094754  7C 08 02 A6 */	mflr r0
+/* 80099858 00094758  90 01 00 44 */	stw r0, 0x44(r1)
+/* 8009985C 0009475C  DB E1 00 30 */	stfd f31, 0x30(r1)
+/* 80099860 00094760  F3 E1 00 38 */	psq_st f31, 56(r1), 0, qr0
+/* 80099864 00094764  DB C1 00 20 */	stfd f30, 0x20(r1)
+/* 80099868 00094768  F3 C1 00 28 */	psq_st f30, 40(r1), 0, qr0
+/* 8009986C 0009476C  FF C0 08 90 */	fmr f30, f1
+/* 80099870 00094770  FF E0 10 90 */	fmr f31, f2
+/* 80099874 00094774  7C A6 2B 78 */	mr r6, r5
+/* 80099878 00094778  93 E1 00 1C */	stw r31, 0x1c(r1)
+/* 8009987C 0009477C  7C 9F 23 78 */	mr r31, r4
+/* 80099880 00094780  C0 22 8E 38 */	lfs f1, lbl_804C0858@sda21(r2)
+/* 80099884 00094784  93 C1 00 18 */	stw r30, 0x18(r1)
+/* 80099888 00094788  C0 42 8E 48 */	lfs f2, lbl_804C0868@sda21(r2)
+/* 8009988C 0009478C  7C 7E 1B 78 */	mr r30, r3
+/* 80099890 00094790  D0 61 00 08 */	stfs f3, 8(r1)
+/* 80099894 00094794  38 A1 00 08 */	addi r5, r1, 8
+/* 80099898 00094798  38 80 00 01 */	li r4, 1
+/* 8009989C 0009479C  D0 81 00 0C */	stfs f4, 0xc(r1)
+/* 800998A0 000947A0  48 00 6F 61 */	bl __ct__Q23EGG7FrustumFQ33EGG7Frustum14ProjectionTypeRCQ34nw4r4math4VEC2ffQ33EGG7Frustum10CanvasMode
+/* 800998A4 000947A4  A0 1E 00 34 */	lhz r0, 0x34(r30)
+/* 800998A8 000947A8  3C 60 80 39 */	lis r3, __vt__Q23EGG6Screen@ha
+/* 800998AC 000947AC  38 63 7E 28 */	addi r3, r3, __vt__Q23EGG6Screen@l
+/* 800998B0 000947B0  D3 DE 00 40 */	stfs f30, 0x40(r30)
+/* 800998B4 000947B4  60 00 00 01 */	ori r0, r0, 1
+/* 800998B8 000947B8  90 7E 00 38 */	stw r3, 0x38(r30)
+/* 800998BC 000947BC  D3 FE 00 44 */	stfs f31, 0x44(r30)
+/* 800998C0 000947C0  B0 1E 00 34 */	sth r0, 0x34(r30)
+/* 800998C4 000947C4  80 0D 98 A4 */	lwz r0, spRoot__Q23EGG6Screen@sda21(r13)
+/* 800998C8 000947C8  7C 00 F0 40 */	cmplw r0, r30
+/* 800998CC 000947CC  40 82 00 10 */	bne lbl_800998DC
+/* 800998D0 000947D0  38 00 00 00 */	li r0, 0
+/* 800998D4 000947D4  90 1E 00 3C */	stw r0, 0x3c(r30)
+/* 800998D8 000947D8  48 00 00 18 */	b lbl_800998F0
+lbl_800998DC:
+/* 800998DC 000947DC  2C 1F 00 00 */	cmpwi r31, 0
+/* 800998E0 000947E0  41 82 00 08 */	beq lbl_800998E8
+/* 800998E4 000947E4  48 00 00 08 */	b lbl_800998EC
+lbl_800998E8:
+/* 800998E8 000947E8  7C 1F 03 78 */	mr r31, r0
+lbl_800998EC:
+/* 800998EC 000947EC  93 FE 00 3C */	stw r31, 0x3c(r30)
+lbl_800998F0:
+/* 800998F0 000947F0  7F C3 F3 78 */	mr r3, r30
+/* 800998F4 000947F4  48 00 01 0D */	bl NullSub_0__Q23EGG6ScreenFv
+/* 800998F8 000947F8  7F C3 F3 78 */	mr r3, r30
+/* 800998FC 000947FC  E3 E1 00 38 */	psq_l f31, 56(r1), 0, qr0
+/* 80099900 00094800  CB E1 00 30 */	lfd f31, 0x30(r1)
+/* 80099904 00094804  E3 C1 00 28 */	psq_l f30, 40(r1), 0, qr0
+/* 80099908 00094808  CB C1 00 20 */	lfd f30, 0x20(r1)
+/* 8009990C 0009480C  83 E1 00 1C */	lwz r31, 0x1c(r1)
+/* 80099910 00094810  83 C1 00 18 */	lwz r30, 0x18(r1)
+/* 80099914 00094814  80 01 00 44 */	lwz r0, 0x44(r1)
+/* 80099918 00094818  7C 08 03 A6 */	mtlr r0
+/* 8009991C 0009481C  38 21 00 40 */	addi r1, r1, 0x40
+/* 80099920 00094820  4E 80 00 20 */	blr 
+
+.global __ct__Q23EGG6ScreenFRCQ23EGG6Screen
+__ct__Q23EGG6ScreenFRCQ23EGG6Screen:
+/* 80099924 00094824  94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 80099928 00094828  7C 08 02 A6 */	mflr r0
+/* 8009992C 0009482C  90 01 00 14 */	stw r0, 0x14(r1)
+/* 80099930 00094830  93 E1 00 0C */	stw r31, 0xc(r1)
+/* 80099934 00094834  7C 7F 1B 78 */	mr r31, r3
+/* 80099938 00094838  93 C1 00 08 */	stw r30, 8(r1)
+/* 8009993C 0009483C  7C 9E 23 78 */	mr r30, r4
+/* 80099940 00094840  48 00 6F 25 */	bl __ct__Q23EGG7FrustumFRCQ23EGG7Frustum
+/* 80099944 00094844  3C 60 80 39 */	lis r3, __vt__Q23EGG6Screen@ha
+/* 80099948 00094848  A0 1F 00 34 */	lhz r0, 0x34(r31)
+/* 8009994C 0009484C  38 63 7E 28 */	addi r3, r3, __vt__Q23EGG6Screen@l
+/* 80099950 00094850  90 7F 00 38 */	stw r3, 0x38(r31)
+/* 80099954 00094854  60 00 00 01 */	ori r0, r0, 1
+/* 80099958 00094858  80 9E 00 40 */	lwz r4, 0x40(r30)
+/* 8009995C 0009485C  80 7E 00 44 */	lwz r3, 0x44(r30)
+/* 80099960 00094860  90 9F 00 40 */	stw r4, 0x40(r31)
+/* 80099964 00094864  90 7F 00 44 */	stw r3, 0x44(r31)
+/* 80099968 00094868  80 9E 00 48 */	lwz r4, 0x48(r30)
+/* 8009996C 0009486C  80 7E 00 4C */	lwz r3, 0x4c(r30)
+/* 80099970 00094870  90 9F 00 48 */	stw r4, 0x48(r31)
+/* 80099974 00094874  90 7F 00 4C */	stw r3, 0x4c(r31)
+/* 80099978 00094878  80 9E 00 50 */	lwz r4, 0x50(r30)
+/* 8009997C 0009487C  80 7E 00 54 */	lwz r3, 0x54(r30)
+/* 80099980 00094880  90 9F 00 50 */	stw r4, 0x50(r31)
+/* 80099984 00094884  90 7F 00 54 */	stw r3, 0x54(r31)
+/* 80099988 00094888  80 9E 00 58 */	lwz r4, 0x58(r30)
+/* 8009998C 0009488C  80 7E 00 5C */	lwz r3, 0x5c(r30)
+/* 80099990 00094890  90 9F 00 58 */	stw r4, 0x58(r31)
+/* 80099994 00094894  90 7F 00 5C */	stw r3, 0x5c(r31)
+/* 80099998 00094898  80 9E 00 60 */	lwz r4, 0x60(r30)
+/* 8009999C 0009489C  80 7E 00 64 */	lwz r3, 0x64(r30)
+/* 800999A0 000948A0  90 9F 00 60 */	stw r4, 0x60(r31)
+/* 800999A4 000948A4  90 7F 00 64 */	stw r3, 0x64(r31)
+/* 800999A8 000948A8  80 7E 00 3C */	lwz r3, 0x3c(r30)
+/* 800999AC 000948AC  B0 1F 00 34 */	sth r0, 0x34(r31)
+/* 800999B0 000948B0  80 0D 98 A4 */	lwz r0, spRoot__Q23EGG6Screen@sda21(r13)
+/* 800999B4 000948B4  7C 00 F8 40 */	cmplw r0, r31
+/* 800999B8 000948B8  40 82 00 10 */	bne lbl_800999C8
+/* 800999BC 000948BC  38 00 00 00 */	li r0, 0
+/* 800999C0 000948C0  90 1F 00 3C */	stw r0, 0x3c(r31)
+/* 800999C4 000948C4  48 00 00 18 */	b lbl_800999DC
+lbl_800999C8:
+/* 800999C8 000948C8  2C 03 00 00 */	cmpwi r3, 0
+/* 800999CC 000948CC  41 82 00 08 */	beq lbl_800999D4
+/* 800999D0 000948D0  48 00 00 08 */	b lbl_800999D8
+lbl_800999D4:
+/* 800999D4 000948D4  7C 03 03 78 */	mr r3, r0
+lbl_800999D8:
+/* 800999D8 000948D8  90 7F 00 3C */	stw r3, 0x3c(r31)
+lbl_800999DC:
+/* 800999DC 000948DC  7F E3 FB 78 */	mr r3, r31
+/* 800999E0 000948E0  48 00 00 21 */	bl NullSub_0__Q23EGG6ScreenFv
+/* 800999E4 000948E4  7F E3 FB 78 */	mr r3, r31
+/* 800999E8 000948E8  83 E1 00 0C */	lwz r31, 0xc(r1)
+/* 800999EC 000948EC  83 C1 00 08 */	lwz r30, 8(r1)
+/* 800999F0 000948F0  80 01 00 14 */	lwz r0, 0x14(r1)
+/* 800999F4 000948F4  7C 08 03 A6 */	mtlr r0
+/* 800999F8 000948F8  38 21 00 10 */	addi r1, r1, 0x10
+/* 800999FC 000948FC  4E 80 00 20 */	blr 
+
+.global NullSub_0__Q23EGG6ScreenFv
+NullSub_0__Q23EGG6ScreenFv:
+/* 80099A00 00094900  4E 80 00 20 */	blr 
+
+.global SetProjectionGX__Q23EGG6ScreenCFv
+SetProjectionGX__Q23EGG6ScreenCFv:
+/* 80099A04 00094904  94 21 FF A0 */	stwu r1, -0x60(r1)
+/* 80099A08 00094908  7C 08 02 A6 */	mflr r0
+/* 80099A0C 0009490C  90 01 00 64 */	stw r0, 0x64(r1)
+/* 80099A10 00094910  DB E1 00 50 */	stfd f31, 0x50(r1)
+/* 80099A14 00094914  F3 E1 00 58 */	psq_st f31, 88(r1), 0, qr0
+/* 80099A18 00094918  DB C1 00 40 */	stfd f30, 0x40(r1)
+/* 80099A1C 0009491C  F3 C1 00 48 */	psq_st f30, 72(r1), 0, qr0
+/* 80099A20 00094920  DB A1 00 30 */	stfd f29, 0x30(r1)
+/* 80099A24 00094924  F3 A1 00 38 */	psq_st f29, 56(r1), 0, qr0
+/* 80099A28 00094928  DB 81 00 20 */	stfd f28, 0x20(r1)
+/* 80099A2C 0009492C  F3 81 00 28 */	psq_st f28, 40(r1), 0, qr0
+/* 80099A30 00094930  93 E1 00 1C */	stw r31, 0x1c(r1)
+/* 80099A34 00094934  93 C1 00 18 */	stw r30, 0x18(r1)
+/* 80099A38 00094938  93 A1 00 14 */	stw r29, 0x14(r1)
+/* 80099A3C 0009493C  7C 7D 1B 78 */	mr r29, r3
+/* 80099A40 00094940  A0 03 00 34 */	lhz r0, 0x34(r3)
+/* 80099A44 00094944  54 00 06 31 */	rlwinm. r0, r0, 0, 0x18, 0x18
+/* 80099A48 00094948  40 82 00 5C */	bne lbl_80099AA4
+/* 80099A4C 0009494C  3B CD 98 E0 */	addi r30, r13, lbl_804BEC60@sda21
+/* 80099A50 00094950  3B ED 98 E8 */	addi r31, r13, lbl_804BEC68@sda21
+/* 80099A54 00094954  38 AD 98 B8 */	addi r5, r13, sCanvasOffset__Q23EGG6Screen@sda21
+/* 80099A58 00094958  38 8D 98 B0 */	addi r4, r13, sCanvasScale__Q23EGG6Screen@sda21
+/* 80099A5C 0009495C  C3 ED 98 E0 */	lfs f31, lbl_804BEC60@sda21(r13)
+/* 80099A60 00094960  C0 0D 98 B0 */	lfs f0, sCanvasScale__Q23EGG6Screen@sda21(r13)
+/* 80099A64 00094964  C3 DE 00 04 */	lfs f30, 4(r30)
+/* 80099A68 00094968  C0 24 00 04 */	lfs f1, 4(r4)
+/* 80099A6C 0009496C  C3 AD 98 E8 */	lfs f29, lbl_804BEC68@sda21(r13)
+/* 80099A70 00094970  C0 4D 98 B8 */	lfs f2, sCanvasOffset__Q23EGG6Screen@sda21(r13)
+/* 80099A74 00094974  C3 9F 00 04 */	lfs f28, 4(r31)
+/* 80099A78 00094978  C0 65 00 04 */	lfs f3, 4(r5)
+/* 80099A7C 0009497C  D0 0D 98 E0 */	stfs f0, lbl_804BEC60@sda21(r13)
+/* 80099A80 00094980  D0 3E 00 04 */	stfs f1, 4(r30)
+/* 80099A84 00094984  D0 4D 98 E8 */	stfs f2, lbl_804BEC68@sda21(r13)
+/* 80099A88 00094988  D0 7F 00 04 */	stfs f3, 4(r31)
+/* 80099A8C 0009498C  48 00 6E 59 */	bl SetProjectionGX__Q23EGG7FrustumCFv
+/* 80099A90 00094990  D3 ED 98 E0 */	stfs f31, lbl_804BEC60@sda21(r13)
+/* 80099A94 00094994  D3 DE 00 04 */	stfs f30, 4(r30)
+/* 80099A98 00094998  D3 AD 98 E8 */	stfs f29, lbl_804BEC68@sda21(r13)
+/* 80099A9C 0009499C  D3 9F 00 04 */	stfs f28, 4(r31)
+/* 80099AA0 000949A0  48 00 00 08 */	b lbl_80099AA8
+lbl_80099AA4:
+/* 80099AA4 000949A4  48 00 6E 41 */	bl SetProjectionGX__Q23EGG7FrustumCFv
+lbl_80099AA8:
+/* 80099AA8 000949A8  7F A3 EB 78 */	mr r3, r29
+/* 80099AAC 000949AC  48 00 01 59 */	bl SetViewGX__Q23EGG6ScreenCFv
+/* 80099AB0 000949B0  E3 E1 00 58 */	psq_l f31, 88(r1), 0, qr0
+/* 80099AB4 000949B4  CB E1 00 50 */	lfd f31, 0x50(r1)
+/* 80099AB8 000949B8  E3 C1 00 48 */	psq_l f30, 72(r1), 0, qr0
+/* 80099ABC 000949BC  CB C1 00 40 */	lfd f30, 0x40(r1)
+/* 80099AC0 000949C0  E3 A1 00 38 */	psq_l f29, 56(r1), 0, qr0
+/* 80099AC4 000949C4  CB A1 00 30 */	lfd f29, 0x30(r1)
+/* 80099AC8 000949C8  E3 81 00 28 */	psq_l f28, 40(r1), 0, qr0
+/* 80099ACC 000949CC  CB 81 00 20 */	lfd f28, 0x20(r1)
+/* 80099AD0 000949D0  83 E1 00 1C */	lwz r31, 0x1c(r1)
+/* 80099AD4 000949D4  83 C1 00 18 */	lwz r30, 0x18(r1)
+/* 80099AD8 000949D8  80 01 00 64 */	lwz r0, 0x64(r1)
+/* 80099ADC 000949DC  83 A1 00 14 */	lwz r29, 0x14(r1)
+/* 80099AE0 000949E0  7C 08 03 A6 */	mtlr r0
+/* 80099AE4 000949E4  38 21 00 60 */	addi r1, r1, 0x60
+/* 80099AE8 000949E8  4E 80 00 20 */	blr 
+
+.global CopyToG3D__Q23EGG6ScreenCFQ34nw4r3g3d6Camera
+CopyToG3D__Q23EGG6ScreenCFQ34nw4r3g3d6Camera:
+/* 80099AEC 000949EC  94 21 FF 90 */	stwu r1, -0x70(r1)
+/* 80099AF0 000949F0  7C 08 02 A6 */	mflr r0
+/* 80099AF4 000949F4  90 01 00 74 */	stw r0, 0x74(r1)
+/* 80099AF8 000949F8  DB E1 00 60 */	stfd f31, 0x60(r1)
+/* 80099AFC 000949FC  F3 E1 00 68 */	psq_st f31, 104(r1), 0, qr0
+/* 80099B00 00094A00  DB C1 00 50 */	stfd f30, 0x50(r1)
+/* 80099B04 00094A04  F3 C1 00 58 */	psq_st f30, 88(r1), 0, qr0
+/* 80099B08 00094A08  DB A1 00 40 */	stfd f29, 0x40(r1)
+/* 80099B0C 00094A0C  F3 A1 00 48 */	psq_st f29, 72(r1), 0, qr0
+/* 80099B10 00094A10  DB 81 00 30 */	stfd f28, 0x30(r1)
+/* 80099B14 00094A14  F3 81 00 38 */	psq_st f28, 56(r1), 0, qr0
+/* 80099B18 00094A18  93 E1 00 2C */	stw r31, 0x2c(r1)
+/* 80099B1C 00094A1C  93 C1 00 28 */	stw r30, 0x28(r1)
+/* 80099B20 00094A20  93 A1 00 24 */	stw r29, 0x24(r1)
+/* 80099B24 00094A24  7C 9D 23 78 */	mr r29, r4
+/* 80099B28 00094A28  93 81 00 20 */	stw r28, 0x20(r1)
+/* 80099B2C 00094A2C  7C 7C 1B 78 */	mr r28, r3
+/* 80099B30 00094A30  A0 03 00 34 */	lhz r0, 0x34(r3)
+/* 80099B34 00094A34  54 00 06 31 */	rlwinm. r0, r0, 0, 0x18, 0x18
+/* 80099B38 00094A38  40 82 00 68 */	bne lbl_80099BA0
+/* 80099B3C 00094A3C  80 04 00 00 */	lwz r0, 0(r4)
+/* 80099B40 00094A40  3B CD 98 E0 */	addi r30, r13, lbl_804BEC60@sda21
+/* 80099B44 00094A44  3B ED 98 E8 */	addi r31, r13, lbl_804BEC68@sda21
+/* 80099B48 00094A48  38 AD 98 B8 */	addi r5, r13, sCanvasOffset__Q23EGG6Screen@sda21
+/* 80099B4C 00094A4C  38 8D 98 B0 */	addi r4, r13, sCanvasScale__Q23EGG6Screen@sda21
+/* 80099B50 00094A50  C3 ED 98 E0 */	lfs f31, lbl_804BEC60@sda21(r13)
+/* 80099B54 00094A54  C0 0D 98 B0 */	lfs f0, sCanvasScale__Q23EGG6Screen@sda21(r13)
+/* 80099B58 00094A58  C0 24 00 04 */	lfs f1, 4(r4)
+/* 80099B5C 00094A5C  38 81 00 10 */	addi r4, r1, 0x10
+/* 80099B60 00094A60  C3 DE 00 04 */	lfs f30, 4(r30)
+/* 80099B64 00094A64  C3 AD 98 E8 */	lfs f29, lbl_804BEC68@sda21(r13)
+/* 80099B68 00094A68  C0 4D 98 B8 */	lfs f2, sCanvasOffset__Q23EGG6Screen@sda21(r13)
+/* 80099B6C 00094A6C  C3 9F 00 04 */	lfs f28, 4(r31)
+/* 80099B70 00094A70  C0 65 00 04 */	lfs f3, 4(r5)
+/* 80099B74 00094A74  D0 0D 98 E0 */	stfs f0, lbl_804BEC60@sda21(r13)
+/* 80099B78 00094A78  D0 3E 00 04 */	stfs f1, 4(r30)
+/* 80099B7C 00094A7C  D0 4D 98 E8 */	stfs f2, lbl_804BEC68@sda21(r13)
+/* 80099B80 00094A80  D0 7F 00 04 */	stfs f3, 4(r31)
+/* 80099B84 00094A84  90 01 00 10 */	stw r0, 0x10(r1)
+/* 80099B88 00094A88  48 00 6D 71 */	bl CopyToG3D__Q23EGG7FrustumCFQ34nw4r3g3d6Camera
+/* 80099B8C 00094A8C  D3 ED 98 E0 */	stfs f31, lbl_804BEC60@sda21(r13)
+/* 80099B90 00094A90  D3 DE 00 04 */	stfs f30, 4(r30)
+/* 80099B94 00094A94  D3 AD 98 E8 */	stfs f29, lbl_804BEC68@sda21(r13)
+/* 80099B98 00094A98  D3 9F 00 04 */	stfs f28, 4(r31)
+/* 80099B9C 00094A9C  48 00 00 14 */	b lbl_80099BB0
+lbl_80099BA0:
+/* 80099BA0 00094AA0  80 04 00 00 */	lwz r0, 0(r4)
+/* 80099BA4 00094AA4  38 81 00 0C */	addi r4, r1, 0xc
+/* 80099BA8 00094AA8  90 01 00 0C */	stw r0, 0xc(r1)
+/* 80099BAC 00094AAC  48 00 6D 4D */	bl CopyToG3D__Q23EGG7FrustumCFQ34nw4r3g3d6Camera
+lbl_80099BB0:
+/* 80099BB0 00094AB0  80 1D 00 00 */	lwz r0, 0(r29)
+/* 80099BB4 00094AB4  7F 83 E3 78 */	mr r3, r28
+/* 80099BB8 00094AB8  38 81 00 08 */	addi r4, r1, 8
+/* 80099BBC 00094ABC  90 01 00 08 */	stw r0, 8(r1)
+/* 80099BC0 00094AC0  48 00 00 ED */	bl SetViewG3D__Q23EGG6ScreenCFQ34nw4r3g3d6Camera
+/* 80099BC4 00094AC4  E3 E1 00 68 */	psq_l f31, 104(r1), 0, qr0
+/* 80099BC8 00094AC8  CB E1 00 60 */	lfd f31, 0x60(r1)
+/* 80099BCC 00094ACC  E3 C1 00 58 */	psq_l f30, 88(r1), 0, qr0
+/* 80099BD0 00094AD0  CB C1 00 50 */	lfd f30, 0x50(r1)
+/* 80099BD4 00094AD4  E3 A1 00 48 */	psq_l f29, 72(r1), 0, qr0
+/* 80099BD8 00094AD8  CB A1 00 40 */	lfd f29, 0x40(r1)
+/* 80099BDC 00094ADC  E3 81 00 38 */	psq_l f28, 56(r1), 0, qr0
+/* 80099BE0 00094AE0  CB 81 00 30 */	lfd f28, 0x30(r1)
+/* 80099BE4 00094AE4  83 E1 00 2C */	lwz r31, 0x2c(r1)
+/* 80099BE8 00094AE8  83 C1 00 28 */	lwz r30, 0x28(r1)
+/* 80099BEC 00094AEC  83 A1 00 24 */	lwz r29, 0x24(r1)
+/* 80099BF0 00094AF0  80 01 00 74 */	lwz r0, 0x74(r1)
+/* 80099BF4 00094AF4  83 81 00 20 */	lwz r28, 0x20(r1)
+/* 80099BF8 00094AF8  7C 08 03 A6 */	mtlr r0
+/* 80099BFC 00094AFC  38 21 00 70 */	addi r1, r1, 0x70
+/* 80099C00 00094B00  4E 80 00 20 */	blr 
+
+.global SetViewGX__Q23EGG6ScreenCFv
+SetViewGX__Q23EGG6ScreenCFv:
+/* 80099C04 00094B04  94 21 FF E0 */	stwu r1, -0x20(r1)
+/* 80099C08 00094B08  7C 08 02 A6 */	mflr r0
+/* 80099C0C 00094B0C  90 01 00 24 */	stw r0, 0x24(r1)
+/* 80099C10 00094B10  93 E1 00 1C */	stw r31, 0x1c(r1)
+/* 80099C14 00094B14  93 C1 00 18 */	stw r30, 0x18(r1)
+/* 80099C18 00094B18  93 A1 00 14 */	stw r29, 0x14(r1)
+/* 80099C1C 00094B1C  93 81 00 10 */	stw r28, 0x10(r1)
+/* 80099C20 00094B20  48 00 05 35 */	bl GetDataEfb__Q23EGG6ScreenCFv
+/* 80099C24 00094B24  C0 23 00 00 */	lfs f1, 0(r3)
+/* 80099C28 00094B28  7C 7C 1B 78 */	mr r28, r3
+/* 80099C2C 00094B2C  C0 43 00 04 */	lfs f2, 4(r3)
+/* 80099C30 00094B30  C0 63 00 08 */	lfs f3, 8(r3)
+/* 80099C34 00094B34  C0 83 00 0C */	lfs f4, 0xc(r3)
+/* 80099C38 00094B38  C0 A3 00 10 */	lfs f5, 0x10(r3)
+/* 80099C3C 00094B3C  C0 C3 00 14 */	lfs f6, 0x14(r3)
+/* 80099C40 00094B40  4B FE AB 3D */	bl GXSetViewport___Q23EGG7StateGXFffffff
+/* 80099C44 00094B44  C0 3C 00 0C */	lfs f1, 0xc(r28)
+/* 80099C48 00094B48  48 01 7F D5 */	bl __cvt_fp2unsigned
+/* 80099C4C 00094B4C  C0 3C 00 08 */	lfs f1, 8(r28)
+/* 80099C50 00094B50  7C 7D 1B 78 */	mr r29, r3
+/* 80099C54 00094B54  48 01 7F C9 */	bl __cvt_fp2unsigned
+/* 80099C58 00094B58  C0 3C 00 04 */	lfs f1, 4(r28)
+/* 80099C5C 00094B5C  7C 7E 1B 78 */	mr r30, r3
+/* 80099C60 00094B60  48 01 7F BD */	bl __cvt_fp2unsigned
+/* 80099C64 00094B64  C0 3C 00 00 */	lfs f1, 0(r28)
+/* 80099C68 00094B68  7C 7F 1B 78 */	mr r31, r3
+/* 80099C6C 00094B6C  48 01 7F B1 */	bl __cvt_fp2unsigned
+/* 80099C70 00094B70  7F E4 FB 78 */	mr r4, r31
+/* 80099C74 00094B74  7F C5 F3 78 */	mr r5, r30
+/* 80099C78 00094B78  7F A6 EB 78 */	mr r6, r29
+/* 80099C7C 00094B7C  4B FE AC 2D */	bl GXSetScissor___Q23EGG7StateGXFUlUlUlUl
+/* 80099C80 00094B80  80 7C 00 18 */	lwz r3, 0x18(r28)
+/* 80099C84 00094B84  80 9C 00 1C */	lwz r4, 0x1c(r28)
+/* 80099C88 00094B88  4B FE AD 71 */	bl GXSetScissorBoxOffset___Q23EGG7StateGXFii
+/* 80099C8C 00094B8C  80 01 00 24 */	lwz r0, 0x24(r1)
+/* 80099C90 00094B90  83 E1 00 1C */	lwz r31, 0x1c(r1)
+/* 80099C94 00094B94  83 C1 00 18 */	lwz r30, 0x18(r1)
+/* 80099C98 00094B98  83 A1 00 14 */	lwz r29, 0x14(r1)
+/* 80099C9C 00094B9C  83 81 00 10 */	lwz r28, 0x10(r1)
+/* 80099CA0 00094BA0  7C 08 03 A6 */	mtlr r0
+/* 80099CA4 00094BA4  38 21 00 20 */	addi r1, r1, 0x20
+/* 80099CA8 00094BA8  4E 80 00 20 */	blr 
+
+.global SetViewG3D__Q23EGG6ScreenCFQ34nw4r3g3d6Camera
+SetViewG3D__Q23EGG6ScreenCFQ34nw4r3g3d6Camera:
+/* 80099CAC 00094BAC  94 21 FF C0 */	stwu r1, -0x40(r1)
+/* 80099CB0 00094BB0  7C 08 02 A6 */	mflr r0
+/* 80099CB4 00094BB4  90 01 00 44 */	stw r0, 0x44(r1)
+/* 80099CB8 00094BB8  DB E1 00 30 */	stfd f31, 0x30(r1)
+/* 80099CBC 00094BBC  F3 E1 00 38 */	psq_st f31, 56(r1), 0, qr0
+/* 80099CC0 00094BC0  DB C1 00 20 */	stfd f30, 0x20(r1)
+/* 80099CC4 00094BC4  F3 C1 00 28 */	psq_st f30, 40(r1), 0, qr0
+/* 80099CC8 00094BC8  39 61 00 20 */	addi r11, r1, 0x20
+/* 80099CCC 00094BCC  48 01 80 79 */	bl _savegpr_27
+/* 80099CD0 00094BD0  7C 9B 23 78 */	mr r27, r4
+/* 80099CD4 00094BD4  48 00 04 81 */	bl GetDataEfb__Q23EGG6ScreenCFv
+/* 80099CD8 00094BD8  C0 83 00 0C */	lfs f4, 0xc(r3)
+/* 80099CDC 00094BDC  7C 7C 1B 78 */	mr r28, r3
+/* 80099CE0 00094BE0  C0 63 00 08 */	lfs f3, 8(r3)
+/* 80099CE4 00094BE4  C0 43 00 04 */	lfs f2, 4(r3)
+/* 80099CE8 00094BE8  C0 23 00 00 */	lfs f1, 0(r3)
+/* 80099CEC 00094BEC  C3 C3 00 14 */	lfs f30, 0x14(r3)
+/* 80099CF0 00094BF0  C3 E3 00 10 */	lfs f31, 0x10(r3)
+/* 80099CF4 00094BF4  7F 63 DB 78 */	mr r3, r27
+/* 80099CF8 00094BF8  4B FD 2F C1 */	bl SetViewport__Q34nw4r3g3d6CameraFffff
+/* 80099CFC 00094BFC  FC 20 F8 90 */	fmr f1, f31
+/* 80099D00 00094C00  7F 63 DB 78 */	mr r3, r27
+/* 80099D04 00094C04  FC 40 F0 90 */	fmr f2, f30
+/* 80099D08 00094C08  4B FD 30 4D */	bl SetViewportZRange__Q34nw4r3g3d6CameraFff
+/* 80099D0C 00094C0C  C0 3C 00 0C */	lfs f1, 0xc(r28)
+/* 80099D10 00094C10  48 01 7F 0D */	bl __cvt_fp2unsigned
+/* 80099D14 00094C14  C0 3C 00 08 */	lfs f1, 8(r28)
+/* 80099D18 00094C18  7C 7D 1B 78 */	mr r29, r3
+/* 80099D1C 00094C1C  48 01 7F 01 */	bl __cvt_fp2unsigned
+/* 80099D20 00094C20  C0 3C 00 04 */	lfs f1, 4(r28)
+/* 80099D24 00094C24  7C 7E 1B 78 */	mr r30, r3
+/* 80099D28 00094C28  48 01 7E F5 */	bl __cvt_fp2unsigned
+/* 80099D2C 00094C2C  C0 3C 00 00 */	lfs f1, 0(r28)
+/* 80099D30 00094C30  7C 7F 1B 78 */	mr r31, r3
+/* 80099D34 00094C34  48 01 7E E9 */	bl __cvt_fp2unsigned
+/* 80099D38 00094C38  7C 64 1B 78 */	mr r4, r3
+/* 80099D3C 00094C3C  7F 63 DB 78 */	mr r3, r27
+/* 80099D40 00094C40  7F E5 FB 78 */	mr r5, r31
+/* 80099D44 00094C44  7F C6 F3 78 */	mr r6, r30
+/* 80099D48 00094C48  7F A7 EB 78 */	mr r7, r29
+/* 80099D4C 00094C4C  4B FD 2F 35 */	bl SetScissor__Q34nw4r3g3d6CameraFUlUlUlUl
+/* 80099D50 00094C50  80 9C 00 18 */	lwz r4, 0x18(r28)
+/* 80099D54 00094C54  7F 63 DB 78 */	mr r3, r27
+/* 80099D58 00094C58  80 BC 00 1C */	lwz r5, 0x1c(r28)
+/* 80099D5C 00094C5C  4B FD 2F 45 */	bl SetScissorBoxOffset__Q34nw4r3g3d6CameraFll
+/* 80099D60 00094C60  E3 E1 00 38 */	psq_l f31, 56(r1), 0, qr0
+/* 80099D64 00094C64  CB E1 00 30 */	lfd f31, 0x30(r1)
+/* 80099D68 00094C68  E3 C1 00 28 */	psq_l f30, 40(r1), 0, qr0
+/* 80099D6C 00094C6C  39 61 00 20 */	addi r11, r1, 0x20
+/* 80099D70 00094C70  CB C1 00 20 */	lfd f30, 0x20(r1)
+/* 80099D74 00094C74  48 01 80 1D */	bl _restgpr_27
+/* 80099D78 00094C78  80 01 00 44 */	lwz r0, 0x44(r1)
+/* 80099D7C 00094C7C  7C 08 03 A6 */	mtlr r0
+/* 80099D80 00094C80  38 21 00 40 */	addi r1, r1, 0x40
+/* 80099D84 00094C84  4E 80 00 20 */	blr 
+
+.global CopyFromAnother__Q23EGG6ScreenFRCQ23EGG6Screen
+CopyFromAnother__Q23EGG6ScreenFRCQ23EGG6Screen:
+/* 80099D88 00094C88  94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 80099D8C 00094C8C  7C 08 02 A6 */	mflr r0
+/* 80099D90 00094C90  90 01 00 14 */	stw r0, 0x14(r1)
+/* 80099D94 00094C94  93 E1 00 0C */	stw r31, 0xc(r1)
+/* 80099D98 00094C98  7C 9F 23 78 */	mr r31, r4
+/* 80099D9C 00094C9C  93 C1 00 08 */	stw r30, 8(r1)
+/* 80099DA0 00094CA0  7C 7E 1B 78 */	mr r30, r3
+/* 80099DA4 00094CA4  48 00 74 4D */	bl CopyFromAnother__Q23EGG7FrustumFRCQ23EGG7Frustum
+/* 80099DA8 00094CA8  A0 1E 00 34 */	lhz r0, 0x34(r30)
+/* 80099DAC 00094CAC  80 7F 00 3C */	lwz r3, 0x3c(r31)
+/* 80099DB0 00094CB0  60 00 00 01 */	ori r0, r0, 1
+/* 80099DB4 00094CB4  B0 1E 00 34 */	sth r0, 0x34(r30)
+/* 80099DB8 00094CB8  80 0D 98 A4 */	lwz r0, spRoot__Q23EGG6Screen@sda21(r13)
+/* 80099DBC 00094CBC  7C 00 F0 40 */	cmplw r0, r30
+/* 80099DC0 00094CC0  40 82 00 10 */	bne lbl_80099DD0
+/* 80099DC4 00094CC4  38 00 00 00 */	li r0, 0
+/* 80099DC8 00094CC8  90 1E 00 3C */	stw r0, 0x3c(r30)
+/* 80099DCC 00094CCC  48 00 00 18 */	b lbl_80099DE4
+lbl_80099DD0:
+/* 80099DD0 00094CD0  2C 03 00 00 */	cmpwi r3, 0
+/* 80099DD4 00094CD4  41 82 00 08 */	beq lbl_80099DDC
+/* 80099DD8 00094CD8  48 00 00 08 */	b lbl_80099DE0
+lbl_80099DDC:
+/* 80099DDC 00094CDC  7C 03 03 78 */	mr r3, r0
+lbl_80099DE0:
+/* 80099DE0 00094CE0  90 7E 00 3C */	stw r3, 0x3c(r30)
+lbl_80099DE4:
+/* 80099DE4 00094CE4  C0 1F 00 40 */	lfs f0, 0x40(r31)
+/* 80099DE8 00094CE8  D0 1E 00 40 */	stfs f0, 0x40(r30)
+/* 80099DEC 00094CEC  C0 1F 00 44 */	lfs f0, 0x44(r31)
+/* 80099DF0 00094CF0  D0 1E 00 44 */	stfs f0, 0x44(r30)
+/* 80099DF4 00094CF4  80 7F 00 48 */	lwz r3, 0x48(r31)
+/* 80099DF8 00094CF8  80 1F 00 4C */	lwz r0, 0x4c(r31)
+/* 80099DFC 00094CFC  90 7E 00 48 */	stw r3, 0x48(r30)
+/* 80099E00 00094D00  90 1E 00 4C */	stw r0, 0x4c(r30)
+/* 80099E04 00094D04  80 7F 00 50 */	lwz r3, 0x50(r31)
+/* 80099E08 00094D08  80 1F 00 54 */	lwz r0, 0x54(r31)
+/* 80099E0C 00094D0C  90 7E 00 50 */	stw r3, 0x50(r30)
+/* 80099E10 00094D10  90 1E 00 54 */	stw r0, 0x54(r30)
+/* 80099E14 00094D14  80 7F 00 58 */	lwz r3, 0x58(r31)
+/* 80099E18 00094D18  80 1F 00 5C */	lwz r0, 0x5c(r31)
+/* 80099E1C 00094D1C  90 7E 00 58 */	stw r3, 0x58(r30)
+/* 80099E20 00094D20  90 1E 00 5C */	stw r0, 0x5c(r30)
+/* 80099E24 00094D24  80 1F 00 60 */	lwz r0, 0x60(r31)
+/* 80099E28 00094D28  90 1E 00 60 */	stw r0, 0x60(r30)
+/* 80099E2C 00094D2C  80 1F 00 64 */	lwz r0, 0x64(r31)
+/* 80099E30 00094D30  90 1E 00 64 */	stw r0, 0x64(r30)
+/* 80099E34 00094D34  83 E1 00 0C */	lwz r31, 0xc(r1)
+/* 80099E38 00094D38  83 C1 00 08 */	lwz r30, 8(r1)
+/* 80099E3C 00094D3C  80 01 00 14 */	lwz r0, 0x14(r1)
+/* 80099E40 00094D40  7C 08 03 A6 */	mtlr r0
+/* 80099E44 00094D44  38 21 00 10 */	addi r1, r1, 0x10
+/* 80099E48 00094D48  4E 80 00 20 */	blr 
+
+.global GetPosSizeInEfb__Q23EGG6ScreenCFv
+GetPosSizeInEfb__Q23EGG6ScreenCFv:
+/* 80099E4C 00094D4C  94 21 FF C0 */	stwu r1, -0x40(r1)
+/* 80099E50 00094D50  7C 08 02 A6 */	mflr r0
+/* 80099E54 00094D54  3C 80 43 30 */	lis r4, 0x4330
+/* 80099E58 00094D58  90 01 00 44 */	stw r0, 0x44(r1)
+/* 80099E5C 00094D5C  93 E1 00 3C */	stw r31, 0x3c(r1)
+/* 80099E60 00094D60  93 C1 00 38 */	stw r30, 0x38(r1)
+/* 80099E64 00094D64  93 A1 00 34 */	stw r29, 0x34(r1)
+/* 80099E68 00094D68  93 81 00 30 */	stw r28, 0x30(r1)
+/* 80099E6C 00094D6C  7C 7C 1B 78 */	mr r28, r3
+/* 80099E70 00094D70  A0 03 00 34 */	lhz r0, 0x34(r3)
+/* 80099E74 00094D74  90 81 00 08 */	stw r4, 8(r1)
+/* 80099E78 00094D78  54 00 06 B5 */	rlwinm. r0, r0, 0, 0x1a, 0x1a
+/* 80099E7C 00094D7C  90 81 00 10 */	stw r4, 0x10(r1)
+/* 80099E80 00094D80  38 00 00 00 */	li r0, 0
+/* 80099E84 00094D84  40 82 00 08 */	bne lbl_80099E8C
+/* 80099E88 00094D88  80 0D 98 A0 */	lwz r0, sTVMode__Q23EGG6Screen@sda21(r13)
+lbl_80099E8C:
+/* 80099E8C 00094D8C  3C C0 80 41 */	lis r6, sTVModeRatios__Q23EGG6Screen@ha
+/* 80099E90 00094D90  3B C3 00 48 */	addi r30, r3, 0x48
+/* 80099E94 00094D94  3B A3 00 4C */	addi r29, r3, 0x4c
+/* 80099E98 00094D98  54 00 18 38 */	slwi r0, r0, 3
+/* 80099E9C 00094D9C  38 C6 A9 38 */	addi r6, r6, sTVModeRatios__Q23EGG6Screen@l
+/* 80099EA0 00094DA0  7F 83 E3 78 */	mr r3, r28
+/* 80099EA4 00094DA4  7F C4 F3 78 */	mr r4, r30
+/* 80099EA8 00094DA8  7F A5 EB 78 */	mr r5, r29
+/* 80099EAC 00094DAC  7F E6 02 14 */	add r31, r6, r0
+/* 80099EB0 00094DB0  48 00 06 F1 */	bl GetGlobalPos__Q23EGG6ScreenCFPfPf
+/* 80099EB4 00094DB4  C0 4D 98 B0 */	lfs f2, sCanvasScale__Q23EGG6Screen@sda21(r13)
+/* 80099EB8 00094DB8  38 6D 98 B0 */	addi r3, r13, sCanvasScale__Q23EGG6Screen@sda21
+/* 80099EBC 00094DBC  C0 3E 00 00 */	lfs f1, 0(r30)
+/* 80099EC0 00094DC0  38 00 00 00 */	li r0, 0
+/* 80099EC4 00094DC4  C0 1D 00 00 */	lfs f0, 0(r29)
+/* 80099EC8 00094DC8  EC 82 00 72 */	fmuls f4, f2, f1
+/* 80099ECC 00094DCC  C0 22 8E 30 */	lfs f1, lbl_804C0850@sda21(r2)
+/* 80099ED0 00094DD0  D0 9E 00 00 */	stfs f4, 0(r30)
+/* 80099ED4 00094DD4  C0 43 00 04 */	lfs f2, 4(r3)
+/* 80099ED8 00094DD8  EC 62 00 32 */	fmuls f3, f2, f0
+/* 80099EDC 00094DDC  D0 7D 00 00 */	stfs f3, 0(r29)
+/* 80099EE0 00094DE0  C0 1F 00 00 */	lfs f0, 0(r31)
+/* 80099EE4 00094DE4  EC 44 00 32 */	fmuls f2, f4, f0
+/* 80099EE8 00094DE8  D0 5E 00 00 */	stfs f2, 0(r30)
+/* 80099EEC 00094DEC  FC 02 08 40 */	fcmpo cr0, f2, f1
+/* 80099EF0 00094DF0  C0 1F 00 04 */	lfs f0, 4(r31)
+/* 80099EF4 00094DF4  EC 03 00 32 */	fmuls f0, f3, f0
+/* 80099EF8 00094DF8  90 1C 00 64 */	stw r0, 0x64(r28)
+/* 80099EFC 00094DFC  90 1C 00 60 */	stw r0, 0x60(r28)
+/* 80099F00 00094E00  D0 1D 00 00 */	stfs f0, 0(r29)
+/* 80099F04 00094E04  40 80 00 24 */	bge lbl_80099F28
+/* 80099F08 00094E08  FC 00 10 50 */	fneg f0, f2
+/* 80099F0C 00094E0C  D0 3E 00 00 */	stfs f1, 0(r30)
+/* 80099F10 00094E10  FC 00 00 1E */	fctiwz f0, f0
+/* 80099F14 00094E14  D8 01 00 18 */	stfd f0, 0x18(r1)
+/* 80099F18 00094E18  80 61 00 1C */	lwz r3, 0x1c(r1)
+/* 80099F1C 00094E1C  54 60 07 FE */	clrlwi r0, r3, 0x1f
+/* 80099F20 00094E20  7C 00 18 50 */	subf r0, r0, r3
+/* 80099F24 00094E24  90 1C 00 60 */	stw r0, 0x60(r28)
+lbl_80099F28:
+/* 80099F28 00094E28  C0 1D 00 00 */	lfs f0, 0(r29)
+/* 80099F2C 00094E2C  C0 22 8E 30 */	lfs f1, lbl_804C0850@sda21(r2)
+/* 80099F30 00094E30  FC 00 08 40 */	fcmpo cr0, f0, f1
+/* 80099F34 00094E34  40 80 00 24 */	bge lbl_80099F58
+/* 80099F38 00094E38  FC 00 00 50 */	fneg f0, f0
+/* 80099F3C 00094E3C  D0 3D 00 00 */	stfs f1, 0(r29)
+/* 80099F40 00094E40  FC 00 00 1E */	fctiwz f0, f0
+/* 80099F44 00094E44  D8 01 00 18 */	stfd f0, 0x18(r1)
+/* 80099F48 00094E48  80 61 00 1C */	lwz r3, 0x1c(r1)
+/* 80099F4C 00094E4C  54 60 07 FE */	clrlwi r0, r3, 0x1f
+/* 80099F50 00094E50  7C 00 18 50 */	subf r0, r0, r3
+/* 80099F54 00094E54  90 1C 00 64 */	stw r0, 0x64(r28)
+lbl_80099F58:
+/* 80099F58 00094E58  A0 1C 00 34 */	lhz r0, 0x34(r28)
+/* 80099F5C 00094E5C  54 00 07 BD */	rlwinm. r0, r0, 0, 0x1e, 0x1e
+/* 80099F60 00094E60  41 82 00 60 */	beq lbl_80099FC0
+/* 80099F64 00094E64  C0 9E 00 00 */	lfs f4, 0(r30)
+/* 80099F68 00094E68  C0 3D 00 00 */	lfs f1, 0(r29)
+/* 80099F6C 00094E6C  FC 40 20 1E */	fctiwz f2, f4
+/* 80099F70 00094E70  C8 62 8E 50 */	lfd f3, lbl_804C0870@sda21(r2)
+/* 80099F74 00094E74  FC 00 08 1E */	fctiwz f0, f1
+/* 80099F78 00094E78  D8 41 00 18 */	stfd f2, 0x18(r1)
+/* 80099F7C 00094E7C  D8 01 00 20 */	stfd f0, 0x20(r1)
+/* 80099F80 00094E80  80 61 00 1C */	lwz r3, 0x1c(r1)
+/* 80099F84 00094E84  80 01 00 24 */	lwz r0, 0x24(r1)
+/* 80099F88 00094E88  54 63 07 FE */	clrlwi r3, r3, 0x1f
+/* 80099F8C 00094E8C  54 00 07 FE */	clrlwi r0, r0, 0x1f
+/* 80099F90 00094E90  6C 63 80 00 */	xoris r3, r3, 0x8000
+/* 80099F94 00094E94  6C 00 80 00 */	xoris r0, r0, 0x8000
+/* 80099F98 00094E98  90 61 00 0C */	stw r3, 0xc(r1)
+/* 80099F9C 00094E9C  90 01 00 14 */	stw r0, 0x14(r1)
+/* 80099FA0 00094EA0  C8 41 00 08 */	lfd f2, 8(r1)
+/* 80099FA4 00094EA4  C8 01 00 10 */	lfd f0, 0x10(r1)
+/* 80099FA8 00094EA8  EC 42 18 28 */	fsubs f2, f2, f3
+/* 80099FAC 00094EAC  EC 00 18 28 */	fsubs f0, f0, f3
+/* 80099FB0 00094EB0  EC 44 10 28 */	fsubs f2, f4, f2
+/* 80099FB4 00094EB4  EC 01 00 28 */	fsubs f0, f1, f0
+/* 80099FB8 00094EB8  D0 5E 00 00 */	stfs f2, 0(r30)
+/* 80099FBC 00094EBC  D0 1D 00 00 */	stfs f0, 0(r29)
+lbl_80099FC0:
+/* 80099FC0 00094EC0  C0 3E 00 00 */	lfs f1, 0(r30)
+/* 80099FC4 00094EC4  C0 1D 00 00 */	lfs f0, 0(r29)
+/* 80099FC8 00094EC8  FC 60 08 1E */	fctiwz f3, f1
+/* 80099FCC 00094ECC  A0 1C 00 34 */	lhz r0, 0x34(r28)
+/* 80099FD0 00094ED0  FC 00 00 1E */	fctiwz f0, f0
+/* 80099FD4 00094ED4  C0 5C 00 08 */	lfs f2, 8(r28)
+/* 80099FD8 00094ED8  C0 3C 00 0C */	lfs f1, 0xc(r28)
+/* 80099FDC 00094EDC  54 00 07 39 */	rlwinm. r0, r0, 0, 0x1c, 0x1c
+/* 80099FE0 00094EE0  D8 61 00 20 */	stfd f3, 0x20(r1)
+/* 80099FE4 00094EE4  C8 82 8E 50 */	lfd f4, lbl_804C0870@sda21(r2)
+/* 80099FE8 00094EE8  D8 01 00 18 */	stfd f0, 0x18(r1)
+/* 80099FEC 00094EEC  80 61 00 24 */	lwz r3, 0x24(r1)
+/* 80099FF0 00094EF0  80 01 00 1C */	lwz r0, 0x1c(r1)
+/* 80099FF4 00094EF4  6C 63 80 00 */	xoris r3, r3, 0x8000
+/* 80099FF8 00094EF8  D0 5C 00 50 */	stfs f2, 0x50(r28)
+/* 80099FFC 00094EFC  6C 00 80 00 */	xoris r0, r0, 0x8000
+/* 8009A000 00094F00  90 61 00 0C */	stw r3, 0xc(r1)
+/* 8009A004 00094F04  90 01 00 14 */	stw r0, 0x14(r1)
+/* 8009A008 00094F08  C8 61 00 08 */	lfd f3, 8(r1)
+/* 8009A00C 00094F0C  C8 01 00 10 */	lfd f0, 0x10(r1)
+/* 8009A010 00094F10  EC 63 20 28 */	fsubs f3, f3, f4
+/* 8009A014 00094F14  D0 3C 00 54 */	stfs f1, 0x54(r28)
+/* 8009A018 00094F18  EC 00 20 28 */	fsubs f0, f0, f4
+/* 8009A01C 00094F1C  D0 7E 00 00 */	stfs f3, 0(r30)
+/* 8009A020 00094F20  D0 1D 00 00 */	stfs f0, 0(r29)
+/* 8009A024 00094F24  40 82 00 1C */	bne lbl_8009A040
+/* 8009A028 00094F28  C0 1F 00 00 */	lfs f0, 0(r31)
+/* 8009A02C 00094F2C  EC 02 00 32 */	fmuls f0, f2, f0
+/* 8009A030 00094F30  D0 1C 00 50 */	stfs f0, 0x50(r28)
+/* 8009A034 00094F34  C0 1F 00 04 */	lfs f0, 4(r31)
+/* 8009A038 00094F38  EC 01 00 32 */	fmuls f0, f1, f0
+/* 8009A03C 00094F3C  D0 1C 00 54 */	stfs f0, 0x54(r28)
+lbl_8009A040:
+/* 8009A040 00094F40  A0 1C 00 34 */	lhz r0, 0x34(r28)
+/* 8009A044 00094F44  54 00 07 7B */	rlwinm. r0, r0, 0, 0x1d, 0x1d
+/* 8009A048 00094F48  41 82 00 60 */	beq lbl_8009A0A8
+/* 8009A04C 00094F4C  C0 9C 00 50 */	lfs f4, 0x50(r28)
+/* 8009A050 00094F50  C0 3C 00 54 */	lfs f1, 0x54(r28)
+/* 8009A054 00094F54  FC 40 20 1E */	fctiwz f2, f4
+/* 8009A058 00094F58  C8 62 8E 50 */	lfd f3, lbl_804C0870@sda21(r2)
+/* 8009A05C 00094F5C  FC 00 08 1E */	fctiwz f0, f1
+/* 8009A060 00094F60  D8 41 00 20 */	stfd f2, 0x20(r1)
+/* 8009A064 00094F64  D8 01 00 18 */	stfd f0, 0x18(r1)
+/* 8009A068 00094F68  80 61 00 24 */	lwz r3, 0x24(r1)
+/* 8009A06C 00094F6C  80 01 00 1C */	lwz r0, 0x1c(r1)
+/* 8009A070 00094F70  54 63 07 BE */	clrlwi r3, r3, 0x1e
+/* 8009A074 00094F74  54 00 07 BE */	clrlwi r0, r0, 0x1e
+/* 8009A078 00094F78  6C 63 80 00 */	xoris r3, r3, 0x8000
+/* 8009A07C 00094F7C  6C 00 80 00 */	xoris r0, r0, 0x8000
+/* 8009A080 00094F80  90 61 00 0C */	stw r3, 0xc(r1)
+/* 8009A084 00094F84  90 01 00 14 */	stw r0, 0x14(r1)
+/* 8009A088 00094F88  C8 41 00 08 */	lfd f2, 8(r1)
+/* 8009A08C 00094F8C  C8 01 00 10 */	lfd f0, 0x10(r1)
+/* 8009A090 00094F90  EC 42 18 28 */	fsubs f2, f2, f3
+/* 8009A094 00094F94  EC 00 18 28 */	fsubs f0, f0, f3
+/* 8009A098 00094F98  EC 44 10 28 */	fsubs f2, f4, f2
+/* 8009A09C 00094F9C  EC 01 00 28 */	fsubs f0, f1, f0
+/* 8009A0A0 00094FA0  D0 5C 00 50 */	stfs f2, 0x50(r28)
+/* 8009A0A4 00094FA4  D0 1C 00 54 */	stfs f0, 0x54(r28)
+lbl_8009A0A8:
+/* 8009A0A8 00094FA8  C0 3C 00 50 */	lfs f1, 0x50(r28)
+/* 8009A0AC 00094FAC  C0 02 8E 30 */	lfs f0, lbl_804C0850@sda21(r2)
+/* 8009A0B0 00094FB0  FC 01 00 40 */	fcmpo cr0, f1, f0
+/* 8009A0B4 00094FB4  4C 41 13 82 */	cror 2, 1, 2
+/* 8009A0B8 00094FB8  40 82 00 08 */	bne lbl_8009A0C0
+/* 8009A0BC 00094FBC  48 00 00 08 */	b lbl_8009A0C4
+lbl_8009A0C0:
+/* 8009A0C0 00094FC0  FC 20 00 90 */	fmr f1, f0
+lbl_8009A0C4:
+/* 8009A0C4 00094FC4  C0 7C 00 54 */	lfs f3, 0x54(r28)
+/* 8009A0C8 00094FC8  C0 02 8E 30 */	lfs f0, lbl_804C0850@sda21(r2)
+/* 8009A0CC 00094FCC  D0 3C 00 50 */	stfs f1, 0x50(r28)
+/* 8009A0D0 00094FD0  FC 03 00 40 */	fcmpo cr0, f3, f0
+/* 8009A0D4 00094FD4  4C 41 13 82 */	cror 2, 1, 2
+/* 8009A0D8 00094FD8  40 82 00 08 */	bne lbl_8009A0E0
+/* 8009A0DC 00094FDC  48 00 00 08 */	b lbl_8009A0E4
+lbl_8009A0E0:
+/* 8009A0E0 00094FE0  FC 60 00 90 */	fmr f3, f0
+lbl_8009A0E4:
+/* 8009A0E4 00094FE4  FC 00 18 18 */	frsp f0, f3
+/* 8009A0E8 00094FE8  C0 3C 00 50 */	lfs f1, 0x50(r28)
+/* 8009A0EC 00094FEC  C8 42 8E 50 */	lfd f2, lbl_804C0870@sda21(r2)
+/* 8009A0F0 00094FF0  FC 20 08 1E */	fctiwz f1, f1
+/* 8009A0F4 00094FF4  D0 7C 00 54 */	stfs f3, 0x54(r28)
+/* 8009A0F8 00094FF8  FC 00 00 1E */	fctiwz f0, f0
+/* 8009A0FC 00094FFC  D8 21 00 20 */	stfd f1, 0x20(r1)
+/* 8009A100 00095000  D8 01 00 18 */	stfd f0, 0x18(r1)
+/* 8009A104 00095004  80 61 00 24 */	lwz r3, 0x24(r1)
+/* 8009A108 00095008  80 01 00 1C */	lwz r0, 0x1c(r1)
+/* 8009A10C 0009500C  6C 63 80 00 */	xoris r3, r3, 0x8000
+/* 8009A110 00095010  6C 00 80 00 */	xoris r0, r0, 0x8000
+/* 8009A114 00095014  90 61 00 0C */	stw r3, 0xc(r1)
+/* 8009A118 00095018  90 01 00 14 */	stw r0, 0x14(r1)
+/* 8009A11C 0009501C  C8 21 00 08 */	lfd f1, 8(r1)
+/* 8009A120 00095020  C8 01 00 10 */	lfd f0, 0x10(r1)
+/* 8009A124 00095024  EC 21 10 28 */	fsubs f1, f1, f2
+/* 8009A128 00095028  EC 00 10 28 */	fsubs f0, f0, f2
+/* 8009A12C 0009502C  D0 3C 00 50 */	stfs f1, 0x50(r28)
+/* 8009A130 00095030  D0 1C 00 54 */	stfs f0, 0x54(r28)
+/* 8009A134 00095034  83 E1 00 3C */	lwz r31, 0x3c(r1)
+/* 8009A138 00095038  83 C1 00 38 */	lwz r30, 0x38(r1)
+/* 8009A13C 0009503C  83 A1 00 34 */	lwz r29, 0x34(r1)
+/* 8009A140 00095040  83 81 00 30 */	lwz r28, 0x30(r1)
+/* 8009A144 00095044  80 01 00 44 */	lwz r0, 0x44(r1)
+/* 8009A148 00095048  7C 08 03 A6 */	mtlr r0
+/* 8009A14C 0009504C  38 21 00 40 */	addi r1, r1, 0x40
+/* 8009A150 00095050  4E 80 00 20 */	blr 
+
+.global GetDataEfb__Q23EGG6ScreenCFv
+GetDataEfb__Q23EGG6ScreenCFv:
+/* 8009A154 00095054  94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 8009A158 00095058  7C 08 02 A6 */	mflr r0
+/* 8009A15C 0009505C  90 01 00 14 */	stw r0, 0x14(r1)
+/* 8009A160 00095060  93 E1 00 0C */	stw r31, 0xc(r1)
+/* 8009A164 00095064  7C 7F 1B 78 */	mr r31, r3
+/* 8009A168 00095068  48 00 00 49 */	bl IsChangeEfb__Q23EGG6ScreenCFv
+/* 8009A16C 0009506C  2C 03 00 00 */	cmpwi r3, 0
+/* 8009A170 00095070  41 82 00 28 */	beq lbl_8009A198
+/* 8009A174 00095074  7F E3 FB 78 */	mr r3, r31
+/* 8009A178 00095078  4B FF FC D5 */	bl GetPosSizeInEfb__Q23EGG6ScreenCFv
+/* 8009A17C 0009507C  A0 1F 00 34 */	lhz r0, 0x34(r31)
+/* 8009A180 00095080  C0 22 8E 30 */	lfs f1, lbl_804C0850@sda21(r2)
+/* 8009A184 00095084  C0 02 8E 34 */	lfs f0, lbl_804C0854@sda21(r2)
+/* 8009A188 00095088  54 00 04 3C */	rlwinm r0, r0, 0, 0x10, 0x1e
+/* 8009A18C 0009508C  D0 3F 00 58 */	stfs f1, 0x58(r31)
+/* 8009A190 00095090  D0 1F 00 5C */	stfs f0, 0x5c(r31)
+/* 8009A194 00095094  B0 1F 00 34 */	sth r0, 0x34(r31)
+lbl_8009A198:
+/* 8009A198 00095098  38 7F 00 48 */	addi r3, r31, 0x48
+/* 8009A19C 0009509C  83 E1 00 0C */	lwz r31, 0xc(r1)
+/* 8009A1A0 000950A0  80 01 00 14 */	lwz r0, 0x14(r1)
+/* 8009A1A4 000950A4  7C 08 03 A6 */	mtlr r0
+/* 8009A1A8 000950A8  38 21 00 10 */	addi r1, r1, 0x10
+/* 8009A1AC 000950AC  4E 80 00 20 */	blr 
+
+.global IsChangeEfb__Q23EGG6ScreenCFv
+IsChangeEfb__Q23EGG6ScreenCFv:
+/* 8009A1B0 000950B0  A0 03 00 34 */	lhz r0, 0x34(r3)
+/* 8009A1B4 000950B4  54 00 07 FF */	clrlwi. r0, r0, 0x1f
+/* 8009A1B8 000950B8  41 82 00 0C */	beq lbl_8009A1C4
+/* 8009A1BC 000950BC  38 60 00 01 */	li r3, 1
+/* 8009A1C0 000950C0  4E 80 00 20 */	blr 
+lbl_8009A1C4:
+/* 8009A1C4 000950C4  80 63 00 3C */	lwz r3, 0x3c(r3)
+/* 8009A1C8 000950C8  2C 03 00 00 */	cmpwi r3, 0
+/* 8009A1CC 000950CC  41 82 01 48 */	beq lbl_8009A314
+/* 8009A1D0 000950D0  A0 03 00 34 */	lhz r0, 0x34(r3)
+/* 8009A1D4 000950D4  54 00 07 FF */	clrlwi. r0, r0, 0x1f
+/* 8009A1D8 000950D8  41 82 00 0C */	beq lbl_8009A1E4
+/* 8009A1DC 000950DC  38 60 00 01 */	li r3, 1
+/* 8009A1E0 000950E0  4E 80 00 20 */	blr 
+lbl_8009A1E4:
+/* 8009A1E4 000950E4  80 63 00 3C */	lwz r3, 0x3c(r3)
+/* 8009A1E8 000950E8  2C 03 00 00 */	cmpwi r3, 0
+/* 8009A1EC 000950EC  41 82 01 20 */	beq lbl_8009A30C
+/* 8009A1F0 000950F0  A0 03 00 34 */	lhz r0, 0x34(r3)
+/* 8009A1F4 000950F4  54 00 07 FF */	clrlwi. r0, r0, 0x1f
+/* 8009A1F8 000950F8  41 82 00 0C */	beq lbl_8009A204
+/* 8009A1FC 000950FC  38 60 00 01 */	li r3, 1
+/* 8009A200 00095100  4E 80 00 20 */	blr 
+lbl_8009A204:
+/* 8009A204 00095104  80 63 00 3C */	lwz r3, 0x3c(r3)
+/* 8009A208 00095108  2C 03 00 00 */	cmpwi r3, 0
+/* 8009A20C 0009510C  41 82 00 F8 */	beq lbl_8009A304
+/* 8009A210 00095110  A0 03 00 34 */	lhz r0, 0x34(r3)
+/* 8009A214 00095114  54 00 07 FF */	clrlwi. r0, r0, 0x1f
+/* 8009A218 00095118  41 82 00 0C */	beq lbl_8009A224
+/* 8009A21C 0009511C  38 60 00 01 */	li r3, 1
+/* 8009A220 00095120  4E 80 00 20 */	blr 
+lbl_8009A224:
+/* 8009A224 00095124  80 63 00 3C */	lwz r3, 0x3c(r3)
+/* 8009A228 00095128  2C 03 00 00 */	cmpwi r3, 0
+/* 8009A22C 0009512C  41 82 00 D0 */	beq lbl_8009A2FC
+/* 8009A230 00095130  A0 03 00 34 */	lhz r0, 0x34(r3)
+/* 8009A234 00095134  54 00 07 FF */	clrlwi. r0, r0, 0x1f
+/* 8009A238 00095138  41 82 00 0C */	beq lbl_8009A244
+/* 8009A23C 0009513C  38 60 00 01 */	li r3, 1
+/* 8009A240 00095140  4E 80 00 20 */	blr 
+lbl_8009A244:
+/* 8009A244 00095144  80 63 00 3C */	lwz r3, 0x3c(r3)
+/* 8009A248 00095148  2C 03 00 00 */	cmpwi r3, 0
+/* 8009A24C 0009514C  41 82 00 A8 */	beq lbl_8009A2F4
+/* 8009A250 00095150  A0 03 00 34 */	lhz r0, 0x34(r3)
+/* 8009A254 00095154  54 00 07 FF */	clrlwi. r0, r0, 0x1f
+/* 8009A258 00095158  41 82 00 0C */	beq lbl_8009A264
+/* 8009A25C 0009515C  38 60 00 01 */	li r3, 1
+/* 8009A260 00095160  4E 80 00 20 */	blr 
+lbl_8009A264:
+/* 8009A264 00095164  80 63 00 3C */	lwz r3, 0x3c(r3)
+/* 8009A268 00095168  2C 03 00 00 */	cmpwi r3, 0
+/* 8009A26C 0009516C  41 82 00 80 */	beq lbl_8009A2EC
+/* 8009A270 00095170  A0 03 00 34 */	lhz r0, 0x34(r3)
+/* 8009A274 00095174  54 00 07 FF */	clrlwi. r0, r0, 0x1f
+/* 8009A278 00095178  41 82 00 0C */	beq lbl_8009A284
+/* 8009A27C 0009517C  38 60 00 01 */	li r3, 1
+/* 8009A280 00095180  4E 80 00 20 */	blr 
+lbl_8009A284:
+/* 8009A284 00095184  80 63 00 3C */	lwz r3, 0x3c(r3)
+/* 8009A288 00095188  2C 03 00 00 */	cmpwi r3, 0
+/* 8009A28C 0009518C  41 82 00 58 */	beq lbl_8009A2E4
+/* 8009A290 00095190  A0 03 00 34 */	lhz r0, 0x34(r3)
+/* 8009A294 00095194  54 00 07 FF */	clrlwi. r0, r0, 0x1f
+/* 8009A298 00095198  41 82 00 0C */	beq lbl_8009A2A4
+/* 8009A29C 0009519C  38 60 00 01 */	li r3, 1
+/* 8009A2A0 000951A0  4E 80 00 20 */	blr 
+lbl_8009A2A4:
+/* 8009A2A4 000951A4  80 63 00 3C */	lwz r3, 0x3c(r3)
+/* 8009A2A8 000951A8  2C 03 00 00 */	cmpwi r3, 0
+/* 8009A2AC 000951AC  41 82 00 30 */	beq lbl_8009A2DC
+/* 8009A2B0 000951B0  A0 03 00 34 */	lhz r0, 0x34(r3)
+/* 8009A2B4 000951B4  54 00 07 FF */	clrlwi. r0, r0, 0x1f
+/* 8009A2B8 000951B8  41 82 00 0C */	beq lbl_8009A2C4
+/* 8009A2BC 000951BC  38 60 00 01 */	li r3, 1
+/* 8009A2C0 000951C0  4E 80 00 20 */	blr 
+lbl_8009A2C4:
+/* 8009A2C4 000951C4  80 63 00 3C */	lwz r3, 0x3c(r3)
+/* 8009A2C8 000951C8  2C 03 00 00 */	cmpwi r3, 0
+/* 8009A2CC 000951CC  41 82 00 08 */	beq lbl_8009A2D4
+/* 8009A2D0 000951D0  4B FF FE E0 */	b IsChangeEfb__Q23EGG6ScreenCFv
+lbl_8009A2D4:
+/* 8009A2D4 000951D4  38 60 00 00 */	li r3, 0
+/* 8009A2D8 000951D8  4E 80 00 20 */	blr 
+lbl_8009A2DC:
+/* 8009A2DC 000951DC  38 60 00 00 */	li r3, 0
+/* 8009A2E0 000951E0  4E 80 00 20 */	blr 
+lbl_8009A2E4:
+/* 8009A2E4 000951E4  38 60 00 00 */	li r3, 0
+/* 8009A2E8 000951E8  4E 80 00 20 */	blr 
+lbl_8009A2EC:
+/* 8009A2EC 000951EC  38 60 00 00 */	li r3, 0
+/* 8009A2F0 000951F0  4E 80 00 20 */	blr 
+lbl_8009A2F4:
+/* 8009A2F4 000951F4  38 60 00 00 */	li r3, 0
+/* 8009A2F8 000951F8  4E 80 00 20 */	blr 
+lbl_8009A2FC:
+/* 8009A2FC 000951FC  38 60 00 00 */	li r3, 0
+/* 8009A300 00095200  4E 80 00 20 */	blr 
+lbl_8009A304:
+/* 8009A304 00095204  38 60 00 00 */	li r3, 0
+/* 8009A308 00095208  4E 80 00 20 */	blr 
+lbl_8009A30C:
+/* 8009A30C 0009520C  38 60 00 00 */	li r3, 0
+/* 8009A310 00095210  4E 80 00 20 */	blr 
+lbl_8009A314:
+/* 8009A314 00095214  38 60 00 00 */	li r3, 0
+/* 8009A318 00095218  4E 80 00 20 */	blr 
+
+.global CalcMatrixForDrawQuad__Q23EGG6ScreenCFPQ34nw4r4math5MTX34ffff
+CalcMatrixForDrawQuad__Q23EGG6ScreenCFPQ34nw4r4math5MTX34ffff:
+/* 8009A31C 0009521C  94 21 FF C0 */	stwu r1, -0x40(r1)
+/* 8009A320 00095220  7C 08 02 A6 */	mflr r0
+/* 8009A324 00095224  90 01 00 44 */	stw r0, 0x44(r1)
+/* 8009A328 00095228  DB E1 00 30 */	stfd f31, 0x30(r1)
+/* 8009A32C 0009522C  F3 E1 00 38 */	psq_st f31, 56(r1), 0, qr0
+/* 8009A330 00095230  DB C1 00 20 */	stfd f30, 0x20(r1)
+/* 8009A334 00095234  F3 C1 00 28 */	psq_st f30, 40(r1), 0, qr0
+/* 8009A338 00095238  DB A1 00 10 */	stfd f29, 0x10(r1)
+/* 8009A33C 0009523C  F3 A1 00 18 */	psq_st f29, 24(r1), 0, qr0
+/* 8009A340 00095240  FC 00 18 90 */	fmr f0, f3
+/* 8009A344 00095244  FF E0 20 90 */	fmr f31, f4
+/* 8009A348 00095248  C0 62 8E 34 */	lfs f3, lbl_804C0854@sda21(r2)
+/* 8009A34C 0009524C  93 E1 00 0C */	stw r31, 0xc(r1)
+/* 8009A350 00095250  FF A0 08 90 */	fmr f29, f1
+/* 8009A354 00095254  FF C0 10 90 */	fmr f30, f2
+/* 8009A358 00095258  93 C1 00 08 */	stw r30, 8(r1)
+/* 8009A35C 0009525C  FC 20 00 90 */	fmr f1, f0
+/* 8009A360 00095260  7C 9F 23 78 */	mr r31, r4
+/* 8009A364 00095264  7C 7E 1B 78 */	mr r30, r3
+/* 8009A368 00095268  FC 40 F8 90 */	fmr f2, f31
+/* 8009A36C 0009526C  7F E3 FB 78 */	mr r3, r31
+/* 8009A370 00095270  48 04 DA 35 */	bl PSMTXScale
+/* 8009A374 00095274  C0 02 8E 30 */	lfs f0, lbl_804C0850@sda21(r2)
+/* 8009A378 00095278  D3 BF 00 0C */	stfs f29, 0xc(r31)
+/* 8009A37C 0009527C  D0 1F 00 2C */	stfs f0, 0x2c(r31)
+/* 8009A380 00095280  80 1E 00 04 */	lwz r0, 4(r30)
+/* 8009A384 00095284  2C 00 00 00 */	cmpwi r0, 0
+/* 8009A388 00095288  40 82 00 10 */	bne lbl_8009A398
+/* 8009A38C 0009528C  EC 1E F8 28 */	fsubs f0, f30, f31
+/* 8009A390 00095290  D0 1F 00 1C */	stfs f0, 0x1c(r31)
+/* 8009A394 00095294  48 00 00 08 */	b lbl_8009A39C
+lbl_8009A398:
+/* 8009A398 00095298  D3 DF 00 1C */	stfs f30, 0x1c(r31)
+lbl_8009A39C:
+/* 8009A39C 0009529C  E3 E1 00 38 */	psq_l f31, 56(r1), 0, qr0
+/* 8009A3A0 000952A0  CB E1 00 30 */	lfd f31, 0x30(r1)
+/* 8009A3A4 000952A4  E3 C1 00 28 */	psq_l f30, 40(r1), 0, qr0
+/* 8009A3A8 000952A8  CB C1 00 20 */	lfd f30, 0x20(r1)
+/* 8009A3AC 000952AC  E3 A1 00 18 */	psq_l f29, 24(r1), 0, qr0
+/* 8009A3B0 000952B0  CB A1 00 10 */	lfd f29, 0x10(r1)
+/* 8009A3B4 000952B4  83 E1 00 0C */	lwz r31, 0xc(r1)
+/* 8009A3B8 000952B8  80 01 00 44 */	lwz r0, 0x44(r1)
+/* 8009A3BC 000952BC  83 C1 00 08 */	lwz r30, 8(r1)
+/* 8009A3C0 000952C0  7C 08 03 A6 */	mtlr r0
+/* 8009A3C4 000952C4  38 21 00 40 */	addi r1, r1, 0x40
+/* 8009A3C8 000952C8  4E 80 00 20 */	blr 
+
+.global FillBufferGX__Q23EGG6ScreenCFUl8_GXColorUl
+FillBufferGX__Q23EGG6ScreenCFUl8_GXColorUl:
+/* 8009A3CC 000952CC  94 21 FF 30 */	stwu r1, -0xd0(r1)
+/* 8009A3D0 000952D0  7C 08 02 A6 */	mflr r0
+/* 8009A3D4 000952D4  90 01 00 D4 */	stw r0, 0xd4(r1)
+/* 8009A3D8 000952D8  DB E1 00 C0 */	stfd f31, 0xc0(r1)
+/* 8009A3DC 000952DC  F3 E1 00 C8 */	psq_st f31, 200(r1), 0, qr0
+/* 8009A3E0 000952E0  2C 04 00 00 */	cmpwi r4, 0
+/* 8009A3E4 000952E4  93 E1 00 BC */	stw r31, 0xbc(r1)
+/* 8009A3E8 000952E8  7C BF 2B 78 */	mr r31, r5
+/* 8009A3EC 000952EC  93 C1 00 B8 */	stw r30, 0xb8(r1)
+/* 8009A3F0 000952F0  7C 9E 23 78 */	mr r30, r4
+/* 8009A3F4 000952F4  93 A1 00 B4 */	stw r29, 0xb4(r1)
+/* 8009A3F8 000952F8  7C 7D 1B 78 */	mr r29, r3
+/* 8009A3FC 000952FC  93 81 00 B0 */	stw r28, 0xb0(r1)
+/* 8009A400 00095300  41 82 01 78 */	beq lbl_8009A578
+/* 8009A404 00095304  3B 81 00 40 */	addi r28, r1, 0x40
+/* 8009A408 00095308  7F A4 EB 78 */	mr r4, r29
+/* 8009A40C 0009530C  7F 83 E3 78 */	mr r3, r28
+/* 8009A410 00095310  48 00 64 55 */	bl __ct__Q23EGG7FrustumFRCQ23EGG7Frustum
+/* 8009A414 00095314  3C 60 80 39 */	lis r3, __vt__Q23EGG6Screen@ha
+/* 8009A418 00095318  A0 01 00 74 */	lhz r0, 0x74(r1)
+/* 8009A41C 0009531C  38 63 7E 28 */	addi r3, r3, __vt__Q23EGG6Screen@l
+/* 8009A420 00095320  80 AD 98 A4 */	lwz r5, spRoot__Q23EGG6Screen@sda21(r13)
+/* 8009A424 00095324  90 61 00 78 */	stw r3, 0x78(r1)
+/* 8009A428 00095328  60 00 00 01 */	ori r0, r0, 1
+/* 8009A42C 0009532C  7C 05 E0 40 */	cmplw r5, r28
+/* 8009A430 00095330  80 9D 00 40 */	lwz r4, 0x40(r29)
+/* 8009A434 00095334  80 7D 00 44 */	lwz r3, 0x44(r29)
+/* 8009A438 00095338  90 81 00 80 */	stw r4, 0x80(r1)
+/* 8009A43C 0009533C  90 61 00 84 */	stw r3, 0x84(r1)
+/* 8009A440 00095340  80 9D 00 48 */	lwz r4, 0x48(r29)
+/* 8009A444 00095344  80 7D 00 4C */	lwz r3, 0x4c(r29)
+/* 8009A448 00095348  90 81 00 88 */	stw r4, 0x88(r1)
+/* 8009A44C 0009534C  90 61 00 8C */	stw r3, 0x8c(r1)
+/* 8009A450 00095350  80 9D 00 50 */	lwz r4, 0x50(r29)
+/* 8009A454 00095354  80 7D 00 54 */	lwz r3, 0x54(r29)
+/* 8009A458 00095358  90 81 00 90 */	stw r4, 0x90(r1)
+/* 8009A45C 0009535C  90 61 00 94 */	stw r3, 0x94(r1)
+/* 8009A460 00095360  80 9D 00 58 */	lwz r4, 0x58(r29)
+/* 8009A464 00095364  80 7D 00 5C */	lwz r3, 0x5c(r29)
+/* 8009A468 00095368  90 81 00 98 */	stw r4, 0x98(r1)
+/* 8009A46C 0009536C  90 61 00 9C */	stw r3, 0x9c(r1)
+/* 8009A470 00095370  80 9D 00 60 */	lwz r4, 0x60(r29)
+/* 8009A474 00095374  80 7D 00 64 */	lwz r3, 0x64(r29)
+/* 8009A478 00095378  90 81 00 A0 */	stw r4, 0xa0(r1)
+/* 8009A47C 0009537C  90 61 00 A4 */	stw r3, 0xa4(r1)
+/* 8009A480 00095380  80 7D 00 3C */	lwz r3, 0x3c(r29)
+/* 8009A484 00095384  B0 01 00 74 */	sth r0, 0x74(r1)
+/* 8009A488 00095388  40 82 00 10 */	bne lbl_8009A498
+/* 8009A48C 0009538C  38 00 00 00 */	li r0, 0
+/* 8009A490 00095390  90 01 00 7C */	stw r0, 0x7c(r1)
+/* 8009A494 00095394  48 00 00 18 */	b lbl_8009A4AC
+lbl_8009A498:
+/* 8009A498 00095398  2C 03 00 00 */	cmpwi r3, 0
+/* 8009A49C 0009539C  41 82 00 08 */	beq lbl_8009A4A4
+/* 8009A4A0 000953A0  48 00 00 08 */	b lbl_8009A4A8
+lbl_8009A4A4:
+/* 8009A4A4 000953A4  7C A3 2B 78 */	mr r3, r5
+lbl_8009A4A8:
+/* 8009A4A8 000953A8  90 61 00 7C */	stw r3, 0x7c(r1)
+lbl_8009A4AC:
+/* 8009A4AC 000953AC  80 01 00 44 */	lwz r0, 0x44(r1)
+/* 8009A4B0 000953B0  2C 00 00 01 */	cmpwi r0, 1
+/* 8009A4B4 000953B4  41 82 00 18 */	beq lbl_8009A4CC
+/* 8009A4B8 000953B8  A0 61 00 74 */	lhz r3, 0x74(r1)
+/* 8009A4BC 000953BC  38 00 00 01 */	li r0, 1
+/* 8009A4C0 000953C0  90 01 00 44 */	stw r0, 0x44(r1)
+/* 8009A4C4 000953C4  60 60 00 01 */	ori r0, r3, 1
+/* 8009A4C8 000953C8  B0 01 00 74 */	sth r0, 0x74(r1)
+lbl_8009A4CC:
+/* 8009A4CC 000953CC  C0 22 8E 30 */	lfs f1, lbl_804C0850@sda21(r2)
+/* 8009A4D0 000953D0  38 00 00 00 */	li r0, 0
+/* 8009A4D4 000953D4  C0 02 8E 34 */	lfs f0, lbl_804C0854@sda21(r2)
+/* 8009A4D8 000953D8  38 61 00 40 */	addi r3, r1, 0x40
+/* 8009A4DC 000953DC  D0 21 00 58 */	stfs f1, 0x58(r1)
+/* 8009A4E0 000953E0  D0 01 00 5C */	stfs f0, 0x5c(r1)
+/* 8009A4E4 000953E4  90 01 00 40 */	stw r0, 0x40(r1)
+/* 8009A4E8 000953E8  4B FF F5 1D */	bl SetProjectionGX__Q23EGG6ScreenCFv
+/* 8009A4EC 000953EC  C0 7D 00 0C */	lfs f3, 0xc(r29)
+/* 8009A4F0 000953F0  38 61 00 10 */	addi r3, r1, 0x10
+/* 8009A4F4 000953F4  C0 5D 00 2C */	lfs f2, 0x2c(r29)
+/* 8009A4F8 000953F8  C0 3D 00 08 */	lfs f1, 8(r29)
+/* 8009A4FC 000953FC  EF E3 00 B2 */	fmuls f31, f3, f2
+/* 8009A500 00095400  C0 1D 00 28 */	lfs f0, 0x28(r29)
+/* 8009A504 00095404  C0 62 8E 34 */	lfs f3, lbl_804C0854@sda21(r2)
+/* 8009A508 00095408  EC 21 00 32 */	fmuls f1, f1, f0
+/* 8009A50C 0009540C  FC 40 F8 90 */	fmr f2, f31
+/* 8009A510 00095410  48 04 D8 95 */	bl PSMTXScale
+/* 8009A514 00095414  80 01 00 44 */	lwz r0, 0x44(r1)
+/* 8009A518 00095418  C0 02 8E 30 */	lfs f0, lbl_804C0850@sda21(r2)
+/* 8009A51C 0009541C  2C 00 00 00 */	cmpwi r0, 0
+/* 8009A520 00095420  D0 01 00 1C */	stfs f0, 0x1c(r1)
+/* 8009A524 00095424  D0 01 00 3C */	stfs f0, 0x3c(r1)
+/* 8009A528 00095428  40 82 00 10 */	bne lbl_8009A538
+/* 8009A52C 0009542C  EC 00 F8 28 */	fsubs f0, f0, f31
+/* 8009A530 00095430  D0 01 00 2C */	stfs f0, 0x2c(r1)
+/* 8009A534 00095434  48 00 00 08 */	b lbl_8009A53C
+lbl_8009A538:
+/* 8009A538 00095438  D0 01 00 2C */	stfs f0, 0x2c(r1)
+lbl_8009A53C:
+/* 8009A53C 0009543C  88 9F 00 00 */	lbz r4, 0(r31)
+/* 8009A540 00095440  38 E1 00 08 */	addi r7, r1, 8
+/* 8009A544 00095444  89 5F 00 01 */	lbz r10, 1(r31)
+/* 8009A548 00095448  57 C6 F7 FE */	rlwinm r6, r30, 0x1e, 0x1f, 0x1f
+/* 8009A54C 0009544C  89 3F 00 02 */	lbz r9, 2(r31)
+/* 8009A550 00095450  57 C5 FF FE */	rlwinm r5, r30, 0x1f, 0x1f, 0x1f
+/* 8009A554 00095454  88 1F 00 03 */	lbz r0, 3(r31)
+/* 8009A558 00095458  38 61 00 10 */	addi r3, r1, 0x10
+/* 8009A55C 0009545C  98 81 00 08 */	stb r4, 8(r1)
+/* 8009A560 00095460  57 C4 07 FE */	clrlwi r4, r30, 0x1f
+/* 8009A564 00095464  39 00 00 01 */	li r8, 1
+/* 8009A568 00095468  99 41 00 09 */	stb r10, 9(r1)
+/* 8009A56C 0009546C  99 21 00 0A */	stb r9, 0xa(r1)
+/* 8009A570 00095470  98 01 00 0B */	stb r0, 0xb(r1)
+/* 8009A574 00095474  4B FE E2 B1 */	bl func_80088824
+lbl_8009A578:
+/* 8009A578 00095478  E3 E1 00 C8 */	psq_l f31, 200(r1), 0, qr0
+/* 8009A57C 0009547C  80 01 00 D4 */	lwz r0, 0xd4(r1)
+/* 8009A580 00095480  CB E1 00 C0 */	lfd f31, 0xc0(r1)
+/* 8009A584 00095484  83 E1 00 BC */	lwz r31, 0xbc(r1)
+/* 8009A588 00095488  83 C1 00 B8 */	lwz r30, 0xb8(r1)
+/* 8009A58C 0009548C  83 A1 00 B4 */	lwz r29, 0xb4(r1)
+/* 8009A590 00095490  83 81 00 B0 */	lwz r28, 0xb0(r1)
+/* 8009A594 00095494  7C 08 03 A6 */	mtlr r0
+/* 8009A598 00095498  38 21 00 D0 */	addi r1, r1, 0xd0
+/* 8009A59C 0009549C  4E 80 00 20 */	blr 
+
+.global GetGlobalPos__Q23EGG6ScreenCFPfPf
+GetGlobalPos__Q23EGG6ScreenCFPfPf:
+/* 8009A5A0 000954A0  94 21 FE D0 */	stwu r1, -0x130(r1)
+/* 8009A5A4 000954A4  7C 08 02 A6 */	mflr r0
+/* 8009A5A8 000954A8  90 01 01 34 */	stw r0, 0x134(r1)
+/* 8009A5AC 000954AC  DB E1 01 20 */	stfd f31, 0x120(r1)
+/* 8009A5B0 000954B0  F3 E1 01 28 */	psq_st f31, 296(r1), 0, qr0
+/* 8009A5B4 000954B4  DB C1 01 10 */	stfd f30, 0x110(r1)
+/* 8009A5B8 000954B8  F3 C1 01 18 */	psq_st f30, 280(r1), 0, qr0
+/* 8009A5BC 000954BC  DB A1 01 00 */	stfd f29, 0x100(r1)
+/* 8009A5C0 000954C0  F3 A1 01 08 */	.4byte 0xF3A10108
+/* 8009A5C4 000954C4  DB 81 00 F0 */	stfd f28, 0xf0(r1)
+/* 8009A5C8 000954C8  F3 81 00 F8 */	psq_st f28, 248(r1), 0, qr0
+/* 8009A5CC 000954CC  DB 61 00 E0 */	stfd f27, 0xe0(r1)
+/* 8009A5D0 000954D0  F3 61 00 E8 */	psq_st f27, 232(r1), 0, qr0
+/* 8009A5D4 000954D4  DB 41 00 D0 */	stfd f26, 0xd0(r1)
+/* 8009A5D8 000954D8  F3 41 00 D8 */	psq_st f26, 216(r1), 0, qr0
+/* 8009A5DC 000954DC  DB 21 00 C0 */	stfd f25, 0xc0(r1)
+/* 8009A5E0 000954E0  F3 21 00 C8 */	psq_st f25, 200(r1), 0, qr0
+/* 8009A5E4 000954E4  DB 01 00 B0 */	stfd f24, 0xb0(r1)
+/* 8009A5E8 000954E8  F3 01 00 B8 */	psq_st f24, 184(r1), 0, qr0
+/* 8009A5EC 000954EC  DA E1 00 A0 */	stfd f23, 0xa0(r1)
+/* 8009A5F0 000954F0  F2 E1 00 A8 */	psq_st f23, 168(r1), 0, qr0
+/* 8009A5F4 000954F4  DA C1 00 90 */	stfd f22, 0x90(r1)
+/* 8009A5F8 000954F8  F2 C1 00 98 */	psq_st f22, 152(r1), 0, qr0
+/* 8009A5FC 000954FC  DA A1 00 80 */	stfd f21, 0x80(r1)
+/* 8009A600 00095500  F2 A1 00 88 */	psq_st f21, 136(r1), 0, qr0
+/* 8009A604 00095504  DA 81 00 70 */	stfd f20, 0x70(r1)
+/* 8009A608 00095508  F2 81 00 78 */	psq_st f20, 120(r1), 0, qr0
+/* 8009A60C 0009550C  DA 61 00 60 */	stfd f19, 0x60(r1)
+/* 8009A610 00095510  F2 61 00 68 */	psq_st f19, 104(r1), 0, qr0
+/* 8009A614 00095514  DA 41 00 50 */	stfd f18, 0x50(r1)
+/* 8009A618 00095518  F2 41 00 58 */	psq_st f18, 88(r1), 0, qr0
+/* 8009A61C 0009551C  39 61 00 50 */	addi r11, r1, 0x50
+/* 8009A620 00095520  48 01 77 11 */	bl _savegpr_22
+/* 8009A624 00095524  83 63 00 3C */	lwz r27, 0x3c(r3)
+/* 8009A628 00095528  7C 7D 1B 78 */	mr r29, r3
+/* 8009A62C 0009552C  7C 9E 23 78 */	mr r30, r4
+/* 8009A630 00095530  7C BF 2B 78 */	mr r31, r5
+/* 8009A634 00095534  2C 1B 00 00 */	cmpwi r27, 0
+/* 8009A638 00095538  41 82 03 C8 */	beq lbl_8009AA00
+/* 8009A63C 0009553C  83 5B 00 3C */	lwz r26, 0x3c(r27)
+/* 8009A640 00095540  2C 1A 00 00 */	cmpwi r26, 0
+/* 8009A644 00095544  41 82 03 30 */	beq lbl_8009A974
+/* 8009A648 00095548  83 3A 00 3C */	lwz r25, 0x3c(r26)
+/* 8009A64C 0009554C  2C 19 00 00 */	cmpwi r25, 0
+/* 8009A650 00095550  41 82 02 A0 */	beq lbl_8009A8F0
+/* 8009A654 00095554  83 19 00 3C */	lwz r24, 0x3c(r25)
+/* 8009A658 00095558  2C 18 00 00 */	cmpwi r24, 0
+/* 8009A65C 0009555C  41 82 02 10 */	beq lbl_8009A86C
+/* 8009A660 00095560  82 F8 00 3C */	lwz r23, 0x3c(r24)
+/* 8009A664 00095564  2C 17 00 00 */	cmpwi r23, 0
+/* 8009A668 00095568  41 82 01 80 */	beq lbl_8009A7E8
+/* 8009A66C 0009556C  82 D7 00 3C */	lwz r22, 0x3c(r23)
+/* 8009A670 00095570  2C 16 00 00 */	cmpwi r22, 0
+/* 8009A674 00095574  41 82 00 DC */	beq lbl_8009A750
+/* 8009A678 00095578  7E C3 B3 78 */	mr r3, r22
+/* 8009A67C 0009557C  48 00 04 BD */	bl GetParent__Q23EGG6ScreenCFv
+/* 8009A680 00095580  2C 03 00 00 */	cmpwi r3, 0
+/* 8009A684 00095584  7C 7C 1B 78 */	mr r28, r3
+/* 8009A688 00095588  41 82 00 44 */	beq lbl_8009A6CC
+/* 8009A68C 0009558C  38 81 00 08 */	addi r4, r1, 8
+/* 8009A690 00095590  38 A1 00 0C */	addi r5, r1, 0xc
+/* 8009A694 00095594  4B FF FF 0D */	bl GetGlobalPos__Q23EGG6ScreenCFPfPf
+/* 8009A698 00095598  C0 36 00 40 */	lfs f1, 0x40(r22)
+/* 8009A69C 0009559C  7F 83 E3 78 */	mr r3, r28
+/* 8009A6A0 000955A0  C0 56 00 44 */	lfs f2, 0x44(r22)
+/* 8009A6A4 000955A4  38 81 00 10 */	addi r4, r1, 0x10
+/* 8009A6A8 000955A8  38 A1 00 14 */	addi r5, r1, 0x14
+/* 8009A6AC 000955AC  48 00 04 49 */	bl ConvertToCanvasLU__Q23EGG7FrustumCFffPfPf
+/* 8009A6B0 000955B0  C0 61 00 10 */	lfs f3, 0x10(r1)
+/* 8009A6B4 000955B4  C0 41 00 08 */	lfs f2, 8(r1)
+/* 8009A6B8 000955B8  C0 21 00 14 */	lfs f1, 0x14(r1)
+/* 8009A6BC 000955BC  C0 01 00 0C */	lfs f0, 0xc(r1)
+/* 8009A6C0 000955C0  EE 83 10 2A */	fadds f20, f3, f2
+/* 8009A6C4 000955C4  EE A1 00 2A */	fadds f21, f1, f0
+/* 8009A6C8 000955C8  48 00 00 3C */	b lbl_8009A704
+lbl_8009A6CC:
+/* 8009A6CC 000955CC  80 0D 98 A4 */	lwz r0, spRoot__Q23EGG6Screen@sda21(r13)
+/* 8009A6D0 000955D0  2C 00 00 00 */	cmpwi r0, 0
+/* 8009A6D4 000955D4  41 82 00 28 */	beq lbl_8009A6FC
+/* 8009A6D8 000955D8  41 82 00 0C */	beq lbl_8009A6E4
+/* 8009A6DC 000955DC  7C 00 B0 40 */	cmplw r0, r22
+/* 8009A6E0 000955E0  41 82 00 1C */	beq lbl_8009A6FC
+lbl_8009A6E4:
+/* 8009A6E4 000955E4  3C 60 80 38 */	lis r3, lbl_80379C50@ha
+/* 8009A6E8 000955E8  38 80 01 E5 */	li r4, 0x1e5
+/* 8009A6EC 000955EC  38 63 9C 50 */	addi r3, r3, lbl_80379C50@l
+/* 8009A6F0 000955F0  38 A3 00 28 */	addi r5, r3, 0x28
+/* 8009A6F4 000955F4  4C C6 31 82 */	crclr 6
+/* 8009A6F8 000955F8  48 00 78 11 */	bl system_halt
+lbl_8009A6FC:
+/* 8009A6FC 000955FC  C2 96 00 40 */	lfs f20, 0x40(r22)
+/* 8009A700 00095600  C2 B6 00 44 */	lfs f21, 0x44(r22)
+lbl_8009A704:
+/* 8009A704 00095604  80 16 00 04 */	lwz r0, 4(r22)
+/* 8009A708 00095608  C0 57 00 44 */	lfs f2, 0x44(r23)
+/* 8009A70C 0009560C  2C 00 00 01 */	cmpwi r0, 1
+/* 8009A710 00095610  C0 37 00 40 */	lfs f1, 0x40(r23)
+/* 8009A714 00095614  40 82 00 10 */	bne lbl_8009A724
+/* 8009A718 00095618  D0 21 00 18 */	stfs f1, 0x18(r1)
+/* 8009A71C 0009561C  D0 41 00 1C */	stfs f2, 0x1c(r1)
+/* 8009A720 00095620  48 00 00 1C */	b lbl_8009A73C
+lbl_8009A724:
+/* 8009A724 00095624  2C 00 00 00 */	cmpwi r0, 0
+/* 8009A728 00095628  40 82 00 14 */	bne lbl_8009A73C
+/* 8009A72C 0009562C  7E C3 B3 78 */	mr r3, r22
+/* 8009A730 00095630  38 81 00 18 */	addi r4, r1, 0x18
+/* 8009A734 00095634  38 A1 00 1C */	addi r5, r1, 0x1c
+/* 8009A738 00095638  48 00 03 99 */	bl ConvertToCanvasLU_Inline_0__Q23EGG7FrustumCFffPfPf
+lbl_8009A73C:
+/* 8009A73C 0009563C  C0 21 00 18 */	lfs f1, 0x18(r1)
+/* 8009A740 00095640  C0 01 00 1C */	lfs f0, 0x1c(r1)
+/* 8009A744 00095644  EE 81 A0 2A */	fadds f20, f1, f20
+/* 8009A748 00095648  EE A0 A8 2A */	fadds f21, f0, f21
+/* 8009A74C 0009564C  48 00 00 3C */	b lbl_8009A788
+lbl_8009A750:
+/* 8009A750 00095650  80 0D 98 A4 */	lwz r0, spRoot__Q23EGG6Screen@sda21(r13)
+/* 8009A754 00095654  2C 00 00 00 */	cmpwi r0, 0
+/* 8009A758 00095658  41 82 00 28 */	beq lbl_8009A780
+/* 8009A75C 0009565C  41 82 00 0C */	beq lbl_8009A768
+/* 8009A760 00095660  7C 00 B8 40 */	cmplw r0, r23
+/* 8009A764 00095664  41 82 00 1C */	beq lbl_8009A780
+lbl_8009A768:
+/* 8009A768 00095668  3C 60 80 38 */	lis r3, lbl_80379C50@ha
+/* 8009A76C 0009566C  38 80 01 E5 */	li r4, 0x1e5
+/* 8009A770 00095670  38 63 9C 50 */	addi r3, r3, lbl_80379C50@l
+/* 8009A774 00095674  38 A3 00 28 */	addi r5, r3, 0x28
+/* 8009A778 00095678  4C C6 31 82 */	crclr 6
+/* 8009A77C 0009567C  48 00 77 8D */	bl system_halt
+lbl_8009A780:
+/* 8009A780 00095680  C2 97 00 40 */	lfs f20, 0x40(r23)
+/* 8009A784 00095684  C2 B7 00 44 */	lfs f21, 0x44(r23)
+lbl_8009A788:
+/* 8009A788 00095688  80 17 00 04 */	lwz r0, 4(r23)
+/* 8009A78C 0009568C  C2 58 00 44 */	lfs f18, 0x44(r24)
+/* 8009A790 00095690  2C 00 00 01 */	cmpwi r0, 1
+/* 8009A794 00095694  C2 78 00 40 */	lfs f19, 0x40(r24)
+/* 8009A798 00095698  40 82 00 10 */	bne lbl_8009A7A8
+/* 8009A79C 0009569C  FE C0 98 90 */	fmr f22, f19
+/* 8009A7A0 000956A0  FE E0 90 90 */	fmr f23, f18
+/* 8009A7A4 000956A4  48 00 00 38 */	b lbl_8009A7DC
+lbl_8009A7A8:
+/* 8009A7A8 000956A8  2C 00 00 00 */	cmpwi r0, 0
+/* 8009A7AC 000956AC  40 82 00 30 */	bne lbl_8009A7DC
+/* 8009A7B0 000956B0  7E E3 BB 78 */	mr r3, r23
+/* 8009A7B4 000956B4  48 00 03 15 */	bl GetSize__Q23EGG7FrustumCFv
+/* 8009A7B8 000956B8  C0 23 00 00 */	lfs f1, 0(r3)
+/* 8009A7BC 000956BC  7E E3 BB 78 */	mr r3, r23
+/* 8009A7C0 000956C0  C0 02 8E 58 */	lfs f0, lbl_804C0878@sda21(r2)
+/* 8009A7C4 000956C4  EE C1 98 3A */	fmadds f22, f1, f0, f19
+/* 8009A7C8 000956C8  48 00 03 01 */	bl GetSize__Q23EGG7FrustumCFv
+/* 8009A7CC 000956CC  C0 23 00 04 */	lfs f1, 4(r3)
+/* 8009A7D0 000956D0  C0 02 8E 58 */	lfs f0, lbl_804C0878@sda21(r2)
+/* 8009A7D4 000956D4  EC 01 90 3C */	fnmsubs f0, f1, f0, f18
+/* 8009A7D8 000956D8  FE E0 00 50 */	fneg f23, f0
+lbl_8009A7DC:
+/* 8009A7DC 000956DC  EC 96 A0 2A */	fadds f4, f22, f20
+/* 8009A7E0 000956E0  EC 77 A8 2A */	fadds f3, f23, f21
+/* 8009A7E4 000956E4  48 00 00 3C */	b lbl_8009A820
+lbl_8009A7E8:
+/* 8009A7E8 000956E8  80 0D 98 A4 */	lwz r0, spRoot__Q23EGG6Screen@sda21(r13)
+/* 8009A7EC 000956EC  2C 00 00 00 */	cmpwi r0, 0
+/* 8009A7F0 000956F0  41 82 00 28 */	beq lbl_8009A818
+/* 8009A7F4 000956F4  41 82 00 0C */	beq lbl_8009A800
+/* 8009A7F8 000956F8  7C 00 C0 40 */	cmplw r0, r24
+/* 8009A7FC 000956FC  41 82 00 1C */	beq lbl_8009A818
+lbl_8009A800:
+/* 8009A800 00095700  3C 60 80 38 */	lis r3, lbl_80379C50@ha
+/* 8009A804 00095704  38 80 01 E5 */	li r4, 0x1e5
+/* 8009A808 00095708  38 63 9C 50 */	addi r3, r3, lbl_80379C50@l
+/* 8009A80C 0009570C  38 A3 00 28 */	addi r5, r3, 0x28
+/* 8009A810 00095710  4C C6 31 82 */	crclr 6
+/* 8009A814 00095714  48 00 76 F5 */	bl system_halt
+lbl_8009A818:
+/* 8009A818 00095718  C0 98 00 40 */	lfs f4, 0x40(r24)
+/* 8009A81C 0009571C  C0 78 00 44 */	lfs f3, 0x44(r24)
+lbl_8009A820:
+/* 8009A820 00095720  80 18 00 04 */	lwz r0, 4(r24)
+/* 8009A824 00095724  C0 D9 00 44 */	lfs f6, 0x44(r25)
+/* 8009A828 00095728  2C 00 00 01 */	cmpwi r0, 1
+/* 8009A82C 0009572C  C0 B9 00 40 */	lfs f5, 0x40(r25)
+/* 8009A830 00095730  40 82 00 10 */	bne lbl_8009A840
+/* 8009A834 00095734  FF 00 28 90 */	fmr f24, f5
+/* 8009A838 00095738  FF 20 30 90 */	fmr f25, f6
+/* 8009A83C 0009573C  48 00 00 24 */	b lbl_8009A860
+lbl_8009A840:
+/* 8009A840 00095740  2C 00 00 00 */	cmpwi r0, 0
+/* 8009A844 00095744  40 82 00 1C */	bne lbl_8009A860
+/* 8009A848 00095748  C0 22 8E 58 */	lfs f1, lbl_804C0878@sda21(r2)
+/* 8009A84C 0009574C  C0 18 00 0C */	lfs f0, 0xc(r24)
+/* 8009A850 00095750  C0 58 00 08 */	lfs f2, 8(r24)
+/* 8009A854 00095754  EC 00 30 7C */	fnmsubs f0, f0, f1, f6
+/* 8009A858 00095758  EF 02 28 7A */	fmadds f24, f2, f1, f5
+/* 8009A85C 0009575C  FF 20 00 50 */	fneg f25, f0
+lbl_8009A860:
+/* 8009A860 00095760  EC 98 20 2A */	fadds f4, f24, f4
+/* 8009A864 00095764  EC 79 18 2A */	fadds f3, f25, f3
+/* 8009A868 00095768  48 00 00 3C */	b lbl_8009A8A4
+lbl_8009A86C:
+/* 8009A86C 0009576C  80 0D 98 A4 */	lwz r0, spRoot__Q23EGG6Screen@sda21(r13)
+/* 8009A870 00095770  2C 00 00 00 */	cmpwi r0, 0
+/* 8009A874 00095774  41 82 00 28 */	beq lbl_8009A89C
+/* 8009A878 00095778  41 82 00 0C */	beq lbl_8009A884
+/* 8009A87C 0009577C  7C 00 C8 40 */	cmplw r0, r25
+/* 8009A880 00095780  41 82 00 1C */	beq lbl_8009A89C
+lbl_8009A884:
+/* 8009A884 00095784  3C 60 80 38 */	lis r3, lbl_80379C50@ha
+/* 8009A888 00095788  38 80 01 E5 */	li r4, 0x1e5
+/* 8009A88C 0009578C  38 63 9C 50 */	addi r3, r3, lbl_80379C50@l
+/* 8009A890 00095790  38 A3 00 28 */	addi r5, r3, 0x28
+/* 8009A894 00095794  4C C6 31 82 */	crclr 6
+/* 8009A898 00095798  48 00 76 71 */	bl system_halt
+lbl_8009A89C:
+/* 8009A89C 0009579C  C0 99 00 40 */	lfs f4, 0x40(r25)
+/* 8009A8A0 000957A0  C0 79 00 44 */	lfs f3, 0x44(r25)
+lbl_8009A8A4:
+/* 8009A8A4 000957A4  80 19 00 04 */	lwz r0, 4(r25)
+/* 8009A8A8 000957A8  C0 DA 00 44 */	lfs f6, 0x44(r26)
+/* 8009A8AC 000957AC  2C 00 00 01 */	cmpwi r0, 1
+/* 8009A8B0 000957B0  C0 BA 00 40 */	lfs f5, 0x40(r26)
+/* 8009A8B4 000957B4  40 82 00 10 */	bne lbl_8009A8C4
+/* 8009A8B8 000957B8  FF 40 28 90 */	fmr f26, f5
+/* 8009A8BC 000957BC  FF 60 30 90 */	fmr f27, f6
+/* 8009A8C0 000957C0  48 00 00 24 */	b lbl_8009A8E4
+lbl_8009A8C4:
+/* 8009A8C4 000957C4  2C 00 00 00 */	cmpwi r0, 0
+/* 8009A8C8 000957C8  40 82 00 1C */	bne lbl_8009A8E4
+/* 8009A8CC 000957CC  C0 22 8E 58 */	lfs f1, lbl_804C0878@sda21(r2)
+/* 8009A8D0 000957D0  C0 19 00 0C */	lfs f0, 0xc(r25)
+/* 8009A8D4 000957D4  C0 59 00 08 */	lfs f2, 8(r25)
+/* 8009A8D8 000957D8  EC 00 30 7C */	fnmsubs f0, f0, f1, f6
+/* 8009A8DC 000957DC  EF 42 28 7A */	fmadds f26, f2, f1, f5
+/* 8009A8E0 000957E0  FF 60 00 50 */	fneg f27, f0
+lbl_8009A8E4:
+/* 8009A8E4 000957E4  EC 9A 20 2A */	fadds f4, f26, f4
+/* 8009A8E8 000957E8  EC 7B 18 2A */	fadds f3, f27, f3
+/* 8009A8EC 000957EC  48 00 00 3C */	b lbl_8009A928
+lbl_8009A8F0:
+/* 8009A8F0 000957F0  80 0D 98 A4 */	lwz r0, spRoot__Q23EGG6Screen@sda21(r13)
+/* 8009A8F4 000957F4  2C 00 00 00 */	cmpwi r0, 0
+/* 8009A8F8 000957F8  41 82 00 28 */	beq lbl_8009A920
+/* 8009A8FC 000957FC  41 82 00 0C */	beq lbl_8009A908
+/* 8009A900 00095800  7C 00 D0 40 */	cmplw r0, r26
+/* 8009A904 00095804  41 82 00 1C */	beq lbl_8009A920
+lbl_8009A908:
+/* 8009A908 00095808  3C 60 80 38 */	lis r3, lbl_80379C50@ha
+/* 8009A90C 0009580C  38 80 01 E5 */	li r4, 0x1e5
+/* 8009A910 00095810  38 63 9C 50 */	addi r3, r3, lbl_80379C50@l
+/* 8009A914 00095814  38 A3 00 28 */	addi r5, r3, 0x28
+/* 8009A918 00095818  4C C6 31 82 */	crclr 6
+/* 8009A91C 0009581C  48 00 75 ED */	bl system_halt
+lbl_8009A920:
+/* 8009A920 00095820  C0 9A 00 40 */	lfs f4, 0x40(r26)
+/* 8009A924 00095824  C0 7A 00 44 */	lfs f3, 0x44(r26)
+lbl_8009A928:
+/* 8009A928 00095828  80 1A 00 04 */	lwz r0, 4(r26)
+/* 8009A92C 0009582C  C0 DB 00 44 */	lfs f6, 0x44(r27)
+/* 8009A930 00095830  2C 00 00 01 */	cmpwi r0, 1
+/* 8009A934 00095834  C0 BB 00 40 */	lfs f5, 0x40(r27)
+/* 8009A938 00095838  40 82 00 10 */	bne lbl_8009A948
+/* 8009A93C 0009583C  FF C0 28 90 */	fmr f30, f5
+/* 8009A940 00095840  FF E0 30 90 */	fmr f31, f6
+/* 8009A944 00095844  48 00 00 24 */	b lbl_8009A968
+lbl_8009A948:
+/* 8009A948 00095848  2C 00 00 00 */	cmpwi r0, 0
+/* 8009A94C 0009584C  40 82 00 1C */	bne lbl_8009A968
+/* 8009A950 00095850  C0 22 8E 58 */	lfs f1, lbl_804C0878@sda21(r2)
+/* 8009A954 00095854  C0 1A 00 0C */	lfs f0, 0xc(r26)
+/* 8009A958 00095858  C0 5A 00 08 */	lfs f2, 8(r26)
+/* 8009A95C 0009585C  EC 00 30 7C */	fnmsubs f0, f0, f1, f6
+/* 8009A960 00095860  EF C2 28 7A */	fmadds f30, f2, f1, f5
+/* 8009A964 00095864  FF E0 00 50 */	fneg f31, f0
+lbl_8009A968:
+/* 8009A968 00095868  EC BE 20 2A */	fadds f5, f30, f4
+/* 8009A96C 0009586C  EC DF 18 2A */	fadds f6, f31, f3
+/* 8009A970 00095870  48 00 00 3C */	b lbl_8009A9AC
+lbl_8009A974:
+/* 8009A974 00095874  80 0D 98 A4 */	lwz r0, spRoot__Q23EGG6Screen@sda21(r13)
+/* 8009A978 00095878  2C 00 00 00 */	cmpwi r0, 0
+/* 8009A97C 0009587C  41 82 00 28 */	beq lbl_8009A9A4
+/* 8009A980 00095880  41 82 00 0C */	beq lbl_8009A98C
+/* 8009A984 00095884  7C 00 D8 40 */	cmplw r0, r27
+/* 8009A988 00095888  41 82 00 1C */	beq lbl_8009A9A4
+lbl_8009A98C:
+/* 8009A98C 0009588C  3C 60 80 38 */	lis r3, lbl_80379C50@ha
+/* 8009A990 00095890  38 80 01 E5 */	li r4, 0x1e5
+/* 8009A994 00095894  38 63 9C 50 */	addi r3, r3, lbl_80379C50@l
+/* 8009A998 00095898  38 A3 00 28 */	addi r5, r3, 0x28
+/* 8009A99C 0009589C  4C C6 31 82 */	crclr 6
+/* 8009A9A0 000958A0  48 00 75 69 */	bl system_halt
+lbl_8009A9A4:
+/* 8009A9A4 000958A4  C0 BB 00 40 */	lfs f5, 0x40(r27)
+/* 8009A9A8 000958A8  C0 DB 00 44 */	lfs f6, 0x44(r27)
+lbl_8009A9AC:
+/* 8009A9AC 000958AC  80 1B 00 04 */	lwz r0, 4(r27)
+/* 8009A9B0 000958B0  C0 9D 00 44 */	lfs f4, 0x44(r29)
+/* 8009A9B4 000958B4  2C 00 00 01 */	cmpwi r0, 1
+/* 8009A9B8 000958B8  C0 7D 00 40 */	lfs f3, 0x40(r29)
+/* 8009A9BC 000958BC  40 82 00 10 */	bne lbl_8009A9CC
+/* 8009A9C0 000958C0  FF A0 18 90 */	fmr f29, f3
+/* 8009A9C4 000958C4  FF 80 20 90 */	fmr f28, f4
+/* 8009A9C8 000958C8  48 00 00 24 */	b lbl_8009A9EC
+lbl_8009A9CC:
+/* 8009A9CC 000958CC  2C 00 00 00 */	cmpwi r0, 0
+/* 8009A9D0 000958D0  40 82 00 1C */	bne lbl_8009A9EC
+/* 8009A9D4 000958D4  C0 22 8E 58 */	lfs f1, lbl_804C0878@sda21(r2)
+/* 8009A9D8 000958D8  C0 1B 00 0C */	lfs f0, 0xc(r27)
+/* 8009A9DC 000958DC  C0 5B 00 08 */	lfs f2, 8(r27)
+/* 8009A9E0 000958E0  EC 00 20 7C */	fnmsubs f0, f0, f1, f4
+/* 8009A9E4 000958E4  EF A2 18 7A */	fmadds f29, f2, f1, f3
+/* 8009A9E8 000958E8  FF 80 00 50 */	fneg f28, f0
+lbl_8009A9EC:
+/* 8009A9EC 000958EC  EC 3D 28 2A */	fadds f1, f29, f5
+/* 8009A9F0 000958F0  EC 1C 30 2A */	fadds f0, f28, f6
+/* 8009A9F4 000958F4  D0 3E 00 00 */	stfs f1, 0(r30)
+/* 8009A9F8 000958F8  D0 1F 00 00 */	stfs f0, 0(r31)
+/* 8009A9FC 000958FC  48 00 00 44 */	b lbl_8009AA40
+lbl_8009AA00:
+/* 8009AA00 00095900  80 0D 98 A4 */	lwz r0, spRoot__Q23EGG6Screen@sda21(r13)
+/* 8009AA04 00095904  2C 00 00 00 */	cmpwi r0, 0
+/* 8009AA08 00095908  41 82 00 28 */	beq lbl_8009AA30
+/* 8009AA0C 0009590C  41 82 00 0C */	beq lbl_8009AA18
+/* 8009AA10 00095910  7C 00 18 40 */	cmplw r0, r3
+/* 8009AA14 00095914  41 82 00 1C */	beq lbl_8009AA30
+lbl_8009AA18:
+/* 8009AA18 00095918  3C 60 80 38 */	lis r3, lbl_80379C50@ha
+/* 8009AA1C 0009591C  38 80 01 E5 */	li r4, 0x1e5
+/* 8009AA20 00095920  38 63 9C 50 */	addi r3, r3, lbl_80379C50@l
+/* 8009AA24 00095924  38 A3 00 28 */	addi r5, r3, 0x28
+/* 8009AA28 00095928  4C C6 31 82 */	crclr 6
+/* 8009AA2C 0009592C  48 00 74 DD */	bl system_halt
+lbl_8009AA30:
+/* 8009AA30 00095930  C0 1D 00 40 */	lfs f0, 0x40(r29)
+/* 8009AA34 00095934  D0 1E 00 00 */	stfs f0, 0(r30)
+/* 8009AA38 00095938  C0 1D 00 44 */	lfs f0, 0x44(r29)
+/* 8009AA3C 0009593C  D0 1F 00 00 */	stfs f0, 0(r31)
+lbl_8009AA40:
+/* 8009AA40 00095940  E3 E1 01 28 */	psq_l f31, 296(r1), 0, qr0
+/* 8009AA44 00095944  CB E1 01 20 */	lfd f31, 0x120(r1)
+/* 8009AA48 00095948  E3 C1 01 18 */	psq_l f30, 280(r1), 0, qr0
+/* 8009AA4C 0009594C  CB C1 01 10 */	lfd f30, 0x110(r1)
+/* 8009AA50 00095950  E3 A1 01 08 */	psq_l f29, 264(r1), 0, qr0
+/* 8009AA54 00095954  CB A1 01 00 */	lfd f29, 0x100(r1)
+/* 8009AA58 00095958  E3 81 00 F8 */	psq_l f28, 248(r1), 0, qr0
+/* 8009AA5C 0009595C  CB 81 00 F0 */	lfd f28, 0xf0(r1)
+/* 8009AA60 00095960  E3 61 00 E8 */	psq_l f27, 232(r1), 0, qr0
+/* 8009AA64 00095964  CB 61 00 E0 */	lfd f27, 0xe0(r1)
+/* 8009AA68 00095968  E3 41 00 D8 */	psq_l f26, 216(r1), 0, qr0
+/* 8009AA6C 0009596C  CB 41 00 D0 */	lfd f26, 0xd0(r1)
+/* 8009AA70 00095970  E3 21 00 C8 */	psq_l f25, 200(r1), 0, qr0
+/* 8009AA74 00095974  CB 21 00 C0 */	lfd f25, 0xc0(r1)
+/* 8009AA78 00095978  E3 01 00 B8 */	psq_l f24, 184(r1), 0, qr0
+/* 8009AA7C 0009597C  CB 01 00 B0 */	lfd f24, 0xb0(r1)
+/* 8009AA80 00095980  E2 E1 00 A8 */	psq_l f23, 168(r1), 0, qr0
+/* 8009AA84 00095984  CA E1 00 A0 */	lfd f23, 0xa0(r1)
+/* 8009AA88 00095988  E2 C1 00 98 */	psq_l f22, 152(r1), 0, qr0
+/* 8009AA8C 0009598C  CA C1 00 90 */	lfd f22, 0x90(r1)
+/* 8009AA90 00095990  E2 A1 00 88 */	psq_l f21, 136(r1), 0, qr0
+/* 8009AA94 00095994  CA A1 00 80 */	lfd f21, 0x80(r1)
+/* 8009AA98 00095998  E2 81 00 78 */	psq_l f20, 120(r1), 0, qr0
+/* 8009AA9C 0009599C  CA 81 00 70 */	lfd f20, 0x70(r1)
+/* 8009AAA0 000959A0  E2 61 00 68 */	psq_l f19, 104(r1), 0, qr0
+/* 8009AAA4 000959A4  CA 61 00 60 */	lfd f19, 0x60(r1)
+/* 8009AAA8 000959A8  E2 41 00 58 */	psq_l f18, 88(r1), 0, qr0
+/* 8009AAAC 000959AC  39 61 00 50 */	addi r11, r1, 0x50
+/* 8009AAB0 000959B0  CA 41 00 50 */	lfd f18, 0x50(r1)
+/* 8009AAB4 000959B4  48 01 72 C9 */	bl _restgpr_22
+/* 8009AAB8 000959B8  80 01 01 34 */	lwz r0, 0x134(r1)
+/* 8009AABC 000959BC  7C 08 03 A6 */	mtlr r0
+/* 8009AAC0 000959C0  38 21 01 30 */	addi r1, r1, 0x130
+/* 8009AAC4 000959C4  4E 80 00 20 */	blr 
+
+# Weak function generated from GetGlobalPos recursion
+.global GetSize__Q23EGG7FrustumCFv
+GetSize__Q23EGG7FrustumCFv:
+/* 8009AAC8 000959C8  38 63 00 08 */	addi r3, r3, 8
+/* 8009AACC 000959CC  4E 80 00 20 */	blr 
+
+# Weak function generated from GetGlobalPos recursion
+.global ConvertToCanvasLU_Inline_0__Q23EGG7FrustumCFffPfPf
+ConvertToCanvasLU_Inline_0__Q23EGG7FrustumCFffPfPf:
+/* 8009AAD0 000959D0  C0 03 00 08 */	lfs f0, 8(r3)
+/* 8009AAD4 000959D4  C0 62 8E 58 */	lfs f3, lbl_804C0878@sda21(r2)
+/* 8009AAD8 000959D8  EC 00 08 FA */	fmadds f0, f0, f3, f1
+/* 8009AADC 000959DC  D0 04 00 00 */	stfs f0, 0(r4)
+/* 8009AAE0 000959E0  C0 03 00 0C */	lfs f0, 0xc(r3)
+/* 8009AAE4 000959E4  EC 00 10 FC */	fnmsubs f0, f0, f3, f2
+/* 8009AAE8 000959E8  FC 00 00 50 */	fneg f0, f0
+/* 8009AAEC 000959EC  D0 05 00 00 */	stfs f0, 0(r5)
+/* 8009AAF0 000959F0  4E 80 00 20 */	blr 
+
+# Weak function generated from GetGlobalPos recursion
+.global ConvertToCanvasLU__Q23EGG7FrustumCFffPfPf
+ConvertToCanvasLU__Q23EGG7FrustumCFffPfPf:
+/* 8009AAF4 000959F4  80 03 00 04 */	lwz r0, 4(r3)
+/* 8009AAF8 000959F8  2C 00 00 01 */	cmpwi r0, 1
+/* 8009AAFC 000959FC  40 82 00 10 */	bne lbl_8009AB0C
+/* 8009AB00 00095A00  D0 24 00 00 */	stfs f1, 0(r4)
+/* 8009AB04 00095A04  D0 45 00 00 */	stfs f2, 0(r5)
+/* 8009AB08 00095A08  4E 80 00 20 */	blr 
+lbl_8009AB0C:
+/* 8009AB0C 00095A0C  2C 00 00 00 */	cmpwi r0, 0
+/* 8009AB10 00095A10  4C 82 00 20 */	bnelr 
+/* 8009AB14 00095A14  C0 03 00 08 */	lfs f0, 8(r3)
+/* 8009AB18 00095A18  C0 62 8E 58 */	lfs f3, lbl_804C0878@sda21(r2)
+/* 8009AB1C 00095A1C  EC 00 08 FA */	fmadds f0, f0, f3, f1
+/* 8009AB20 00095A20  D0 04 00 00 */	stfs f0, 0(r4)
+/* 8009AB24 00095A24  C0 03 00 0C */	lfs f0, 0xc(r3)
+/* 8009AB28 00095A28  EC 00 10 FC */	fnmsubs f0, f0, f3, f2
+/* 8009AB2C 00095A2C  FC 00 00 50 */	fneg f0, f0
+/* 8009AB30 00095A30  D0 05 00 00 */	stfs f0, 0(r5)
+/* 8009AB34 00095A34  4E 80 00 20 */	blr 
+
+# Weak function generated from GetGlobalPos recursion
+.global GetParent__Q23EGG6ScreenCFv
+GetParent__Q23EGG6ScreenCFv:
+/* 8009AB38 00095A38  80 63 00 3C */	lwz r3, 0x3c(r3)
+/* 8009AB3C 00095A3C  4E 80 00 20 */	blr 
+
+.global SetTVMode__Q23EGG6ScreenFQ33EGG6Screen6TVMode
+SetTVMode__Q23EGG6ScreenFQ33EGG6Screen6TVMode:
+/* 8009AB40 00095A40  94 21 FF D0 */	stwu r1, -0x30(r1)
+/* 8009AB44 00095A44  7C 08 02 A6 */	mflr r0
+/* 8009AB48 00095A48  90 01 00 34 */	stw r0, 0x34(r1)
+/* 8009AB4C 00095A4C  DB E1 00 20 */	stfd f31, 0x20(r1)
+/* 8009AB50 00095A50  F3 E1 00 28 */	psq_st f31, 40(r1), 0, qr0
+/* 8009AB54 00095A54  93 E1 00 1C */	stw r31, 0x1c(r1)
+/* 8009AB58 00095A58  83 ED 98 A4 */	lwz r31, spRoot__Q23EGG6Screen@sda21(r13)
+/* 8009AB5C 00095A5C  90 6D 98 A0 */	stw r3, sTVMode__Q23EGG6Screen@sda21(r13)
+/* 8009AB60 00095A60  2C 1F 00 00 */	cmpwi r31, 0
+/* 8009AB64 00095A64  41 82 00 CC */	beq lbl_8009AC30
+/* 8009AB68 00095A68  54 60 08 3C */	slwi r0, r3, 1
+/* 8009AB6C 00095A6C  38 6D 81 68 */	addi r3, r13, sTVModeWidths__Q23EGG6Screen@sda21
+/* 8009AB70 00095A70  7C 63 02 2E */	lhzx r3, r3, r0
+/* 8009AB74 00095A74  3C 00 43 30 */	lis r0, 0x4330
+/* 8009AB78 00095A78  90 01 00 08 */	stw r0, 8(r1)
+/* 8009AB7C 00095A7C  C8 42 8E 40 */	lfd f2, lbl_804C0860@sda21(r2)
+/* 8009AB80 00095A80  90 61 00 0C */	stw r3, 0xc(r1)
+/* 8009AB84 00095A84  C0 02 8E 30 */	lfs f0, lbl_804C0850@sda21(r2)
+/* 8009AB88 00095A88  C8 21 00 08 */	lfd f1, 8(r1)
+/* 8009AB8C 00095A8C  EF E1 10 28 */	fsubs f31, f1, f2
+/* 8009AB90 00095A90  FC 1F 00 40 */	fcmpo cr0, f31, f0
+/* 8009AB94 00095A94  4C 41 13 82 */	cror 2, 1, 2
+/* 8009AB98 00095A98  41 82 00 20 */	beq lbl_8009ABB8
+/* 8009AB9C 00095A9C  3C 60 80 39 */	lis r3, lbl_80397E4C@ha
+/* 8009ABA0 00095AA0  3C A0 80 39 */	lis r5, lbl_80397E3C@ha
+/* 8009ABA4 00095AA4  38 63 7E 4C */	addi r3, r3, lbl_80397E4C@l
+/* 8009ABA8 00095AA8  38 80 00 75 */	li r4, 0x75
+/* 8009ABAC 00095AAC  38 A5 7E 3C */	addi r5, r5, lbl_80397E3C@l
+/* 8009ABB0 00095AB0  4C C6 31 82 */	crclr 6
+/* 8009ABB4 00095AB4  48 00 73 55 */	bl system_halt
+lbl_8009ABB8:
+/* 8009ABB8 00095AB8  A0 9F 00 34 */	lhz r4, 0x34(r31)
+/* 8009ABBC 00095ABC  3C 00 43 30 */	lis r0, 0x4330
+/* 8009ABC0 00095AC0  90 01 00 08 */	stw r0, 8(r1)
+/* 8009ABC4 00095AC4  38 6D 81 6C */	addi r3, r13, sTVModeHeights__Q23EGG6Screen@sda21
+/* 8009ABC8 00095AC8  60 80 00 01 */	ori r0, r4, 1
+/* 8009ABCC 00095ACC  C8 42 8E 40 */	lfd f2, lbl_804C0860@sda21(r2)
+/* 8009ABD0 00095AD0  B0 1F 00 34 */	sth r0, 0x34(r31)
+/* 8009ABD4 00095AD4  C0 02 8E 30 */	lfs f0, lbl_804C0850@sda21(r2)
+/* 8009ABD8 00095AD8  D3 FF 00 08 */	stfs f31, 8(r31)
+/* 8009ABDC 00095ADC  80 0D 98 A0 */	lwz r0, sTVMode__Q23EGG6Screen@sda21(r13)
+/* 8009ABE0 00095AE0  83 ED 98 A4 */	lwz r31, spRoot__Q23EGG6Screen@sda21(r13)
+/* 8009ABE4 00095AE4  54 00 08 3C */	slwi r0, r0, 1
+/* 8009ABE8 00095AE8  7C 03 02 2E */	lhzx r0, r3, r0
+/* 8009ABEC 00095AEC  90 01 00 0C */	stw r0, 0xc(r1)
+/* 8009ABF0 00095AF0  C8 21 00 08 */	lfd f1, 8(r1)
+/* 8009ABF4 00095AF4  EF E1 10 28 */	fsubs f31, f1, f2
+/* 8009ABF8 00095AF8  FC 1F 00 40 */	fcmpo cr0, f31, f0
+/* 8009ABFC 00095AFC  4C 41 13 82 */	cror 2, 1, 2
+/* 8009AC00 00095B00  41 82 00 20 */	beq lbl_8009AC20
+/* 8009AC04 00095B04  3C 60 80 39 */	lis r3, lbl_80397E6C@ha
+/* 8009AC08 00095B08  3C A0 80 39 */	lis r5, lbl_80397E5C@ha
+/* 8009AC0C 00095B0C  38 63 7E 6C */	addi r3, r3, lbl_80397E6C@l
+/* 8009AC10 00095B10  38 80 00 7B */	li r4, 0x7b
+/* 8009AC14 00095B14  38 A5 7E 5C */	addi r5, r5, lbl_80397E5C@l
+/* 8009AC18 00095B18  4C C6 31 82 */	crclr 6
+/* 8009AC1C 00095B1C  48 00 72 ED */	bl system_halt
+lbl_8009AC20:
+/* 8009AC20 00095B20  A0 1F 00 34 */	lhz r0, 0x34(r31)
+/* 8009AC24 00095B24  60 00 00 01 */	ori r0, r0, 1
+/* 8009AC28 00095B28  B0 1F 00 34 */	sth r0, 0x34(r31)
+/* 8009AC2C 00095B2C  D3 FF 00 0C */	stfs f31, 0xc(r31)
+lbl_8009AC30:
+/* 8009AC30 00095B30  81 8D 98 A8 */	lwz r12, sChangeTVModeFunc__Q23EGG6Screen@sda21(r13)
+/* 8009AC34 00095B34  2C 0C 00 00 */	cmpwi r12, 0
+/* 8009AC38 00095B38  41 82 00 10 */	beq lbl_8009AC48
+/* 8009AC3C 00095B3C  80 6D 98 AC */	lwz r3, spChangeTVModeFuncInfo__Q23EGG6Screen@sda21(r13)
+/* 8009AC40 00095B40  7D 89 03 A6 */	mtctr r12
+/* 8009AC44 00095B44  4E 80 04 21 */	bctrl 
+lbl_8009AC48:
+/* 8009AC48 00095B48  E3 E1 00 28 */	psq_l f31, 40(r1), 0, qr0
+/* 8009AC4C 00095B4C  80 01 00 34 */	lwz r0, 0x34(r1)
+/* 8009AC50 00095B50  CB E1 00 20 */	lfd f31, 0x20(r1)
+/* 8009AC54 00095B54  83 E1 00 1C */	lwz r31, 0x1c(r1)
+/* 8009AC58 00095B58  7C 08 03 A6 */	mtlr r0
+/* 8009AC5C 00095B5C  38 21 00 30 */	addi r1, r1, 0x30
+/* 8009AC60 00095B60  4E 80 00 20 */	blr 
+
+.global SetTVModeDefault__Q23EGG6ScreenFv
+SetTVModeDefault__Q23EGG6ScreenFv:
+/* 8009AC64 00095B64  94 21 FF D0 */	stwu r1, -0x30(r1)
+/* 8009AC68 00095B68  7C 08 02 A6 */	mflr r0
+/* 8009AC6C 00095B6C  90 01 00 34 */	stw r0, 0x34(r1)
+/* 8009AC70 00095B70  DB E1 00 20 */	stfd f31, 0x20(r1)
+/* 8009AC74 00095B74  F3 E1 00 28 */	psq_st f31, 40(r1), 0, qr0
+/* 8009AC78 00095B78  93 E1 00 1C */	stw r31, 0x1c(r1)
+/* 8009AC7C 00095B7C  48 05 DC ED */	bl SCGetAspectRatio
+/* 8009AC80 00095B80  54 63 06 3E */	clrlwi r3, r3, 0x18
+/* 8009AC84 00095B84  83 ED 98 A4 */	lwz r31, spRoot__Q23EGG6Screen@sda21(r13)
+/* 8009AC88 00095B88  7C 03 00 D0 */	neg r0, r3
+/* 8009AC8C 00095B8C  7C 00 1B 78 */	or r0, r0, r3
+/* 8009AC90 00095B90  2C 1F 00 00 */	cmpwi r31, 0
+/* 8009AC94 00095B94  54 00 0F FE */	srwi r0, r0, 0x1f
+/* 8009AC98 00095B98  90 0D 98 A0 */	stw r0, sTVMode__Q23EGG6Screen@sda21(r13)
+/* 8009AC9C 00095B9C  41 82 00 CC */	beq lbl_8009AD68
+/* 8009ACA0 00095BA0  54 00 08 3C */	slwi r0, r0, 1
+/* 8009ACA4 00095BA4  38 6D 81 68 */	addi r3, r13, sTVModeWidths__Q23EGG6Screen@sda21
+/* 8009ACA8 00095BA8  7C 63 02 2E */	lhzx r3, r3, r0
+/* 8009ACAC 00095BAC  3C 00 43 30 */	lis r0, 0x4330
+/* 8009ACB0 00095BB0  90 01 00 08 */	stw r0, 8(r1)
+/* 8009ACB4 00095BB4  C8 42 8E 40 */	lfd f2, lbl_804C0860@sda21(r2)
+/* 8009ACB8 00095BB8  90 61 00 0C */	stw r3, 0xc(r1)
+/* 8009ACBC 00095BBC  C0 02 8E 30 */	lfs f0, lbl_804C0850@sda21(r2)
+/* 8009ACC0 00095BC0  C8 21 00 08 */	lfd f1, 8(r1)
+/* 8009ACC4 00095BC4  EF E1 10 28 */	fsubs f31, f1, f2
+/* 8009ACC8 00095BC8  FC 1F 00 40 */	fcmpo cr0, f31, f0
+/* 8009ACCC 00095BCC  4C 41 13 82 */	cror 2, 1, 2
+/* 8009ACD0 00095BD0  41 82 00 20 */	beq lbl_8009ACF0
+/* 8009ACD4 00095BD4  3C 60 80 39 */	lis r3, lbl_80397E4C@ha
+/* 8009ACD8 00095BD8  3C A0 80 39 */	lis r5, lbl_80397E3C@ha
+/* 8009ACDC 00095BDC  38 63 7E 4C */	addi r3, r3, lbl_80397E4C@l
+/* 8009ACE0 00095BE0  38 80 00 75 */	li r4, 0x75
+/* 8009ACE4 00095BE4  38 A5 7E 3C */	addi r5, r5, lbl_80397E3C@l
+/* 8009ACE8 00095BE8  4C C6 31 82 */	crclr 6
+/* 8009ACEC 00095BEC  48 00 72 1D */	bl system_halt
+lbl_8009ACF0:
+/* 8009ACF0 00095BF0  A0 9F 00 34 */	lhz r4, 0x34(r31)
+/* 8009ACF4 00095BF4  3C 00 43 30 */	lis r0, 0x4330
+/* 8009ACF8 00095BF8  90 01 00 08 */	stw r0, 8(r1)
+/* 8009ACFC 00095BFC  38 6D 81 6C */	addi r3, r13, sTVModeHeights__Q23EGG6Screen@sda21
+/* 8009AD00 00095C00  60 80 00 01 */	ori r0, r4, 1
+/* 8009AD04 00095C04  C8 42 8E 40 */	lfd f2, lbl_804C0860@sda21(r2)
+/* 8009AD08 00095C08  B0 1F 00 34 */	sth r0, 0x34(r31)
+/* 8009AD0C 00095C0C  C0 02 8E 30 */	lfs f0, lbl_804C0850@sda21(r2)
+/* 8009AD10 00095C10  D3 FF 00 08 */	stfs f31, 8(r31)
+/* 8009AD14 00095C14  80 0D 98 A0 */	lwz r0, sTVMode__Q23EGG6Screen@sda21(r13)
+/* 8009AD18 00095C18  83 ED 98 A4 */	lwz r31, spRoot__Q23EGG6Screen@sda21(r13)
+/* 8009AD1C 00095C1C  54 00 08 3C */	slwi r0, r0, 1
+/* 8009AD20 00095C20  7C 03 02 2E */	lhzx r0, r3, r0
+/* 8009AD24 00095C24  90 01 00 0C */	stw r0, 0xc(r1)
+/* 8009AD28 00095C28  C8 21 00 08 */	lfd f1, 8(r1)
+/* 8009AD2C 00095C2C  EF E1 10 28 */	fsubs f31, f1, f2
+/* 8009AD30 00095C30  FC 1F 00 40 */	fcmpo cr0, f31, f0
+/* 8009AD34 00095C34  4C 41 13 82 */	cror 2, 1, 2
+/* 8009AD38 00095C38  41 82 00 20 */	beq lbl_8009AD58
+/* 8009AD3C 00095C3C  3C 60 80 39 */	lis r3, lbl_80397E6C@ha
+/* 8009AD40 00095C40  3C A0 80 39 */	lis r5, lbl_80397E5C@ha
+/* 8009AD44 00095C44  38 63 7E 6C */	addi r3, r3, lbl_80397E6C@l
+/* 8009AD48 00095C48  38 80 00 7B */	li r4, 0x7b
+/* 8009AD4C 00095C4C  38 A5 7E 5C */	addi r5, r5, lbl_80397E5C@l
+/* 8009AD50 00095C50  4C C6 31 82 */	crclr 6
+/* 8009AD54 00095C54  48 00 71 B5 */	bl system_halt
+lbl_8009AD58:
+/* 8009AD58 00095C58  A0 1F 00 34 */	lhz r0, 0x34(r31)
+/* 8009AD5C 00095C5C  60 00 00 01 */	ori r0, r0, 1
+/* 8009AD60 00095C60  B0 1F 00 34 */	sth r0, 0x34(r31)
+/* 8009AD64 00095C64  D3 FF 00 0C */	stfs f31, 0xc(r31)
+lbl_8009AD68:
+/* 8009AD68 00095C68  81 8D 98 A8 */	lwz r12, sChangeTVModeFunc__Q23EGG6Screen@sda21(r13)
+/* 8009AD6C 00095C6C  2C 0C 00 00 */	cmpwi r12, 0
+/* 8009AD70 00095C70  41 82 00 10 */	beq lbl_8009AD80
+/* 8009AD74 00095C74  80 6D 98 AC */	lwz r3, spChangeTVModeFuncInfo__Q23EGG6Screen@sda21(r13)
+/* 8009AD78 00095C78  7D 89 03 A6 */	mtctr r12
+/* 8009AD7C 00095C7C  4E 80 04 21 */	bctrl 
+lbl_8009AD80:
+/* 8009AD80 00095C80  E3 E1 00 28 */	psq_l f31, 40(r1), 0, qr0
+/* 8009AD84 00095C84  80 01 00 34 */	lwz r0, 0x34(r1)
+/* 8009AD88 00095C88  CB E1 00 20 */	lfd f31, 0x20(r1)
+/* 8009AD8C 00095C8C  83 E1 00 1C */	lwz r31, 0x1c(r1)
+/* 8009AD90 00095C90  7C 08 03 A6 */	mtlr r0
+/* 8009AD94 00095C94  38 21 00 30 */	addi r1, r1, 0x30
+/* 8009AD98 00095C98  4E 80 00 20 */	blr 
+
+.global CalcRatio__Q23EGG6ScreenFv
+CalcRatio__Q23EGG6ScreenFv:
+/* 8009AD9C 00095C9C  94 21 FF E0 */	stwu r1, -0x20(r1)
+/* 8009ADA0 00095CA0  7C 08 02 A6 */	mflr r0
+/* 8009ADA4 00095CA4  3C 80 43 30 */	lis r4, 0x4330
+/* 8009ADA8 00095CA8  38 6D 81 68 */	addi r3, r13, sTVModeWidths__Q23EGG6Screen@sda21
+/* 8009ADAC 00095CAC  90 01 00 24 */	stw r0, 0x24(r1)
+/* 8009ADB0 00095CB0  80 0D 98 A0 */	lwz r0, sTVMode__Q23EGG6Screen@sda21(r13)
+/* 8009ADB4 00095CB4  90 81 00 08 */	stw r4, 8(r1)
+/* 8009ADB8 00095CB8  54 00 08 3C */	slwi r0, r0, 1
+/* 8009ADBC 00095CBC  7C 03 02 2E */	lhzx r0, r3, r0
+/* 8009ADC0 00095CC0  90 81 00 10 */	stw r4, 0x10(r1)
+/* 8009ADC4 00095CC4  2C 00 00 00 */	cmpwi r0, 0
+/* 8009ADC8 00095CC8  40 82 00 1C */	bne lbl_8009ADE4
+/* 8009ADCC 00095CCC  3C 60 80 38 */	lis r3, lbl_80379C50@ha
+/* 8009ADD0 00095CD0  38 80 02 12 */	li r4, 0x212
+/* 8009ADD4 00095CD4  38 63 9C 50 */	addi r3, r3, lbl_80379C50@l
+/* 8009ADD8 00095CD8  38 A3 00 5F */	addi r5, r3, 0x5f
+/* 8009ADDC 00095CDC  4C C6 31 82 */	crclr 6
+/* 8009ADE0 00095CE0  48 00 71 29 */	bl system_halt
+lbl_8009ADE4:
+/* 8009ADE4 00095CE4  80 0D 98 A0 */	lwz r0, sTVMode__Q23EGG6Screen@sda21(r13)
+/* 8009ADE8 00095CE8  38 6D 81 6C */	addi r3, r13, sTVModeHeights__Q23EGG6Screen@sda21
+/* 8009ADEC 00095CEC  54 00 08 3C */	slwi r0, r0, 1
+/* 8009ADF0 00095CF0  7C 03 02 2E */	lhzx r0, r3, r0
+/* 8009ADF4 00095CF4  2C 00 00 00 */	cmpwi r0, 0
+/* 8009ADF8 00095CF8  40 82 00 1C */	bne lbl_8009AE14
+/* 8009ADFC 00095CFC  3C 60 80 38 */	lis r3, lbl_80379C50@ha
+/* 8009AE00 00095D00  38 80 02 13 */	li r4, 0x213
+/* 8009AE04 00095D04  38 63 9C 50 */	addi r3, r3, lbl_80379C50@l
+/* 8009AE08 00095D08  38 A3 00 71 */	addi r5, r3, 0x71
+/* 8009AE0C 00095D0C  4C C6 31 82 */	crclr 6
+/* 8009AE10 00095D10  48 00 70 F9 */	bl system_halt
+lbl_8009AE14:
+/* 8009AE14 00095D14  A0 ED 98 30 */	lhz r7, s_widthFb__Q23EGG7StateGX@sda21(r13)
+/* 8009AE18 00095D18  38 8D 81 68 */	addi r4, r13, sTVModeWidths__Q23EGG6Screen@sda21
+/* 8009AE1C 00095D1C  A0 0D 81 68 */	lhz r0, sTVModeWidths__Q23EGG6Screen@sda21(r13)
+/* 8009AE20 00095D20  3C C0 80 41 */	lis r6, sTVModeRatios__Q23EGG6Screen@ha
+/* 8009AE24 00095D24  90 E1 00 0C */	stw r7, 0xc(r1)
+/* 8009AE28 00095D28  38 6D 81 6C */	addi r3, r13, sTVModeHeights__Q23EGG6Screen@sda21
+/* 8009AE2C 00095D2C  A1 0D 98 32 */	lhz r8, s_heightEfb__Q23EGG7StateGX@sda21(r13)
+/* 8009AE30 00095D30  38 A6 A9 38 */	addi r5, r6, sTVModeRatios__Q23EGG6Screen@l
+/* 8009AE34 00095D34  90 01 00 14 */	stw r0, 0x14(r1)
+/* 8009AE38 00095D38  C8 A1 00 08 */	lfd f5, 8(r1)
+/* 8009AE3C 00095D3C  C8 81 00 10 */	lfd f4, 0x10(r1)
+/* 8009AE40 00095D40  A0 0D 81 6C */	lhz r0, sTVModeHeights__Q23EGG6Screen@sda21(r13)
+/* 8009AE44 00095D44  91 01 00 0C */	stw r8, 0xc(r1)
+/* 8009AE48 00095D48  A0 84 00 02 */	lhz r4, 2(r4)
+/* 8009AE4C 00095D4C  90 01 00 14 */	stw r0, 0x14(r1)
+/* 8009AE50 00095D50  C8 21 00 08 */	lfd f1, 8(r1)
+/* 8009AE54 00095D54  C8 01 00 10 */	lfd f0, 0x10(r1)
+/* 8009AE58 00095D58  90 E1 00 0C */	stw r7, 0xc(r1)
+/* 8009AE5C 00095D5C  C9 02 8E 40 */	lfd f8, lbl_804C0860@sda21(r2)
+/* 8009AE60 00095D60  C8 61 00 08 */	lfd f3, 8(r1)
+/* 8009AE64 00095D64  90 81 00 14 */	stw r4, 0x14(r1)
+/* 8009AE68 00095D68  EC E5 40 28 */	fsubs f7, f5, f8
+/* 8009AE6C 00095D6C  EC C4 40 28 */	fsubs f6, f4, f8
+/* 8009AE70 00095D70  A0 03 00 02 */	lhz r0, 2(r3)
+/* 8009AE74 00095D74  C8 41 00 10 */	lfd f2, 0x10(r1)
+/* 8009AE78 00095D78  EC A1 40 28 */	fsubs f5, f1, f8
+/* 8009AE7C 00095D7C  91 01 00 0C */	stw r8, 0xc(r1)
+/* 8009AE80 00095D80  EC 80 40 28 */	fsubs f4, f0, f8
+/* 8009AE84 00095D84  90 01 00 14 */	stw r0, 0x14(r1)
+/* 8009AE88 00095D88  EC C7 30 24 */	fdivs f6, f7, f6
+/* 8009AE8C 00095D8C  C8 21 00 08 */	lfd f1, 8(r1)
+/* 8009AE90 00095D90  C8 01 00 10 */	lfd f0, 0x10(r1)
+/* 8009AE94 00095D94  EC 85 20 24 */	fdivs f4, f5, f4
+/* 8009AE98 00095D98  D0 C6 A9 38 */	stfs f6, -0x56c8(r6)
+/* 8009AE9C 00095D9C  EC 63 40 28 */	fsubs f3, f3, f8
+/* 8009AEA0 00095DA0  D0 85 00 04 */	stfs f4, 4(r5)
+/* 8009AEA4 00095DA4  EC 42 40 28 */	fsubs f2, f2, f8
+/* 8009AEA8 00095DA8  EC 21 40 28 */	fsubs f1, f1, f8
+/* 8009AEAC 00095DAC  EC 00 40 28 */	fsubs f0, f0, f8
+/* 8009AEB0 00095DB0  EC 43 10 24 */	fdivs f2, f3, f2
+/* 8009AEB4 00095DB4  EC 01 00 24 */	fdivs f0, f1, f0
+/* 8009AEB8 00095DB8  D0 45 00 08 */	stfs f2, 8(r5)
+/* 8009AEBC 00095DBC  D0 05 00 0C */	stfs f0, 0xc(r5)
+/* 8009AEC0 00095DC0  80 01 00 24 */	lwz r0, 0x24(r1)
+/* 8009AEC4 00095DC4  7C 08 03 A6 */	mtlr r0
+/* 8009AEC8 00095DC8  38 21 00 20 */	addi r1, r1, 0x20
+/* 8009AECC 00095DCC  4E 80 00 20 */	blr 
+
+.global __sinit_$$3eggScreen_cpp
+__sinit_$$3eggScreen_cpp:
+/* 8009AED0 00095DD0  94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 8009AED4 00095DD4  7C 08 02 A6 */	mflr r0
+/* 8009AED8 00095DD8  3C 60 80 41 */	lis r3, sTVModeRatios__Q23EGG6Screen@ha
+/* 8009AEDC 00095DDC  3C 80 80 0A */	lis r4, __ct__Q33EGG6Screen11TVModeRatioFv@ha
+/* 8009AEE0 00095DE0  90 01 00 14 */	stw r0, 0x14(r1)
+/* 8009AEE4 00095DE4  38 63 A9 38 */	addi r3, r3, sTVModeRatios__Q23EGG6Screen@l
+/* 8009AEE8 00095DE8  38 A0 00 00 */	li r5, 0
+/* 8009AEEC 00095DEC  38 84 AF 2C */	addi r4, r4, __ct__Q33EGG6Screen11TVModeRatioFv@l
+/* 8009AEF0 00095DF0  38 C0 00 08 */	li r6, 8
+/* 8009AEF4 00095DF4  38 E0 00 02 */	li r7, 2
+/* 8009AEF8 00095DF8  48 01 6B 5D */	bl __construct_array
+/* 8009AEFC 00095DFC  C0 22 8E 34 */	lfs f1, lbl_804C0854@sda21(r2)
+/* 8009AF00 00095E00  38 8D 98 B0 */	addi r4, r13, sCanvasScale__Q23EGG6Screen@sda21
+/* 8009AF04 00095E04  C0 02 8E 30 */	lfs f0, lbl_804C0850@sda21(r2)
+/* 8009AF08 00095E08  38 6D 98 B8 */	addi r3, r13, sCanvasOffset__Q23EGG6Screen@sda21
+/* 8009AF0C 00095E0C  D0 2D 98 B0 */	stfs f1, sCanvasScale__Q23EGG6Screen@sda21(r13)
+/* 8009AF10 00095E10  D0 24 00 04 */	stfs f1, 4(r4)
+/* 8009AF14 00095E14  D0 0D 98 B8 */	stfs f0, sCanvasOffset__Q23EGG6Screen@sda21(r13)
+/* 8009AF18 00095E18  D0 03 00 04 */	stfs f0, 4(r3)
+/* 8009AF1C 00095E1C  80 01 00 14 */	lwz r0, 0x14(r1)
+/* 8009AF20 00095E20  7C 08 03 A6 */	mtlr r0
+/* 8009AF24 00095E24  38 21 00 10 */	addi r1, r1, 0x10
+/* 8009AF28 00095E28  4E 80 00 20 */	blr 
+
+.global __ct__Q33EGG6Screen11TVModeRatioFv
+__ct__Q33EGG6Screen11TVModeRatioFv:
+/* 8009AF2C 00095E2C  4E 80 00 20 */	blr 

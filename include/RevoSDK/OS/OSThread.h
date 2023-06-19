@@ -5,8 +5,6 @@
 extern "C" {
 #endif __cplusplus
 
-#define OS_THREAD_STACK_MAGIC 0xBABE
-
 struct OSThread
 {
     char UNK_0x0[0x304];
@@ -25,7 +23,7 @@ typedef UNKWORD (* OSThreadFunc)(void *);
 typedef void (* OSSwitchThreadFunc)(OSThread *, OSThread *);
 
 UNKTYPE OSYieldThread(UNKTYPE);
-BOOL OSCreateThread(struct OSThread *, OSThreadFunc, void *, void *, UNKWORD, UNKWORD, UNKWORD);
+BOOL OSCreateThread(struct OSThread *, OSThreadFunc, void *, void *, UNKWORD, UNKWORD, UNKWORD prio);
 
 BOOL OSJoinThread(struct OSThread *, UNKWORD);
 

@@ -512,8 +512,8 @@ lbl_80059FE8:
 /* 8005A008 00054F08  38 21 00 60 */	addi r1, r1, 0x60
 /* 8005A00C 00054F0C  4E 80 00 20 */	blr 
 
-.global func_8005A010
-func_8005A010:
+.global GetAnmResult__Q34nw4r3g3d9ResAnmFogCFPQ34nw4r3g3d12FogAnmResultf
+GetAnmResult__Q34nw4r3g3d9ResAnmFogCFPQ34nw4r3g3d12FogAnmResultf:
 /* 8005A010 00054F10  94 21 FF B0 */	stwu r1, -0x50(r1)
 /* 8005A014 00054F14  7C 08 02 A6 */	mflr r0
 /* 8005A018 00054F18  90 01 00 54 */	stw r0, 0x54(r1)
@@ -1170,8 +1170,8 @@ lbl_8005A878:
 /* 8005A88C 0005578C  38 60 00 00 */	li r3, 0
 /* 8005A890 00055790  4E 80 00 20 */	blr 
 
-.global func_8005A894
-func_8005A894:
+.global GetResAnmFogByRefNumber__Q34nw4r3g3d9ResAnmScnCFUl
+GetResAnmFogByRefNumber__Q34nw4r3g3d9ResAnmScnCFUl:
 /* 8005A894 00055794  80 63 00 00 */	lwz r3, 0(r3)
 /* 8005A898 00055798  A0 A3 00 3E */	lhz r5, 0x3e(r3)
 /* 8005A89C 0005579C  7C 05 20 40 */	cmplw r5, r4

@@ -17,21 +17,15 @@ namespace nw4r
             delete this;
         }
 
-        bool G3dObj::IsDerivedFrom(const TypeObj& other) const
+        namespace
         {
-            // Interestingly, the comparison has to be done this order,
-            // otherwise the subtraction occurs in the wrong order
-            return other == GetTypeObjStatic();
-        }
-
-        const char * G3dObj::GetTypeName() const
-        {
-            return GetTypeObj().GetTypeName();
-        }
-
-        const G3dObj::TypeObj G3dObj::GetTypeObj() const
-        {
-            return TypeObj(TYPE_NAME);
+            // Force order of weak functions
+            void UNUSED_FUNC_ORDER_G3DOBJ(G3dObj *obj)
+            {
+                (void)obj->GetTypeObj();
+                (void)obj->GetTypeName();
+                (void)obj->IsDerivedFrom(obj->GetTypeObjStatic());
+            }
         }
 
         NW4R_G3D_TYPE_OBJ_DEF(G3dObj);
