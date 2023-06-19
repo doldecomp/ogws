@@ -43,13 +43,13 @@ LDFLAGS := -map $(MAP) -mapunused -proc gekko -fp hard -nodefaults -nofail
 #CFLAGS  := -Cpp_exceptions off -proc gekko -fp hard -O2,p -i include
 
 # Compiler flags for the Target Resident Kernel
-CFLAGS_TRK := -Cpp_exceptions off -proc gekko -fp hard -O4,s -i include/revolution/TRK -I- -i include -i include/stl -nodefaults
+CFLAGS_TRK := -Cpp_exceptions off -proc gekko -fp hard -O4,s -i include/revolution/TRK -I- -i include -i include/msl -nodefaults
 # Compiler flags for NintendoWare for Revolution
-CFLAGS_NW4R := -lang c99 -enum int -inline auto -Cpp_exceptions off -RTTI off -proc gekko -fp hard -O4,p  -ir include/nw4r -I- -Iinclude -ir include/stl -ir include/revolution -nodefaults
+CFLAGS_NW4R := -lang c99 -enum int -inline auto -Cpp_exceptions off -RTTI off -proc gekko -fp hard -O4,p  -ir include/nw4r -I- -Iinclude -ir include/msl -ir include/revolution -nodefaults
 # Compiler flags for EGG
-CFLAGS_EGG := -lang c99 -enum int -inline auto -Cpp_exceptions off -RTTI off -proc gekko -fp hard -O4,p  -ir include/egg -ir include/nw4r -I- -Iinclude -ir include/stl -ir include/revolution -nodefaults -rostr -str pool
+CFLAGS_EGG := -lang c99 -enum int -inline auto -Cpp_exceptions off -RTTI off -proc gekko -fp hard -O4,p  -ir include/egg -ir include/nw4r -I- -Iinclude -ir include/msl -ir include/revolution -nodefaults -rostr -str pool
 # Compiler flags for ARC
-CFLAGS_ARC := -lang c99 -enum int -O4,p -inline auto -ipa file -volatileasm -Cpp_exceptions off -RTTI off -proc gekko -fp hard -I- -Iinclude -ir include/stl -ir include/revolution -nodefaults
+CFLAGS_ARC := -lang c99 -enum int -O4,p -inline auto -ipa file -volatileasm -Cpp_exceptions off -RTTI off -proc gekko -fp hard -I- -Iinclude -ir include/msl -ir include/revolution -nodefaults
 
 # elf2dol needs to know these in order to calculate sbss correctly.
 BSS_PDHR := 9
