@@ -10,6 +10,7 @@
 #define CALC_AFTER_FUNC(x) void calc_after_##x()
 #define DRAW_BEFORE_FUNC(x) void draw_before_##x()
 #define DRAW_AFTER_FUNC(x) void draw_after_##x()
+
 namespace EGG
 {
     class ScnRootEx
