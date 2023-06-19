@@ -44,8 +44,8 @@ LDFLAGS := -map $(MAP) -mapunused -proc gekko -fp hard -nodefaults -nofail
 
 # Compiler flags for the Metrowerks Target Resident Kernel (MetroTRK)
 CFLAGS_TRK := -Cpp_exceptions off -proc gekko -fp hard -O4,s -i include/revolution/TRK -I- -i include -ir include/msl -nodefaults
-# Compiler flags for the Metrowerks Standard Library (MSL)
-CFLAGS_MSL := -Cpp_exceptions off -proc gekko -fp hard -O4,s -i include/revolution/TRK -I- -i include -ir include/msl -nodefaults
+# Compiler flags for the CodeWarrior runtime library
+CFLAGS_RUNTIME := -Cpp_exceptions off -proc gekko -fp hard -O4,s -i include/revolution/TRK -I- -i include -ir include/msl -nodefaults
 # Compiler flags for NintendoWare for Revolution
 CFLAGS_NW4R := -lang c99 -enum int -inline auto -Cpp_exceptions off -RTTI off -proc gekko -fp hard -O4,p  -ir include/nw4r -I- -Iinclude -ir include/msl -ir include/revolution -nodefaults
 # Compiler flags for EGG
@@ -57,12 +57,12 @@ CFLAGS_ARC := -lang c99 -enum int -O4,p -inline auto -ipa file -volatileasm -Cpp
 BSS_PDHR := 9
 
 ASM_DIRS := asm \
-	asm/revolution asm/nw4r asm/egg \
+	asm/revolution asm/nw4r asm/egg asm/runtime asm/msl \
 	asm/revolution/TRK \
 	asm/nw4r/ut asm/nw4r/ef asm/nw4r/math asm/nw4r/snd asm/nw4r/g3d asm/nw4r/lyt \
 	asm/egg/gfx asm/egg/math asm/egg/core asm/egg/audio asm/egg/util
 
-SRC_DIRS := nw4r egg revolution msl \
+SRC_DIRS := nw4r egg revolution runtime \
 	nw4r/ut nw4r/ef nw4r/math nw4r/snd nw4r/g3d nw4r/lyt \
 	egg/math egg/core egg/audio egg/util egg/gfx egg/prim \
 	revolution/TRK revolution/TRK_old revolution/ARC
@@ -117,8 +117,8 @@ $(BUILD_DIR)/revolution/TRK/%.o: src/revolution/TRK/%.c
 $(BUILD_DIR)/revolution/TRK_old/%.o: src/revolution/TRK_old/%.c
 	$(CC_OLD) $(CFLAGS_TRK) -c -o $@ $<
 
-$(BUILD_DIR)/msl/%.o: src/msl/%.c
-	$(CC) $(CFLAGS_MSL) -c -o $@ $<
+$(BUILD_DIR)/runtime/%.o: src/runtime/%.c
+	$(CC) $(CFLAGS_RUNTIME) -c -o $@ $<
 
 $(BUILD_DIR)/nw4r/%.o: src/nw4r/%.cpp
 	$(CC) $(CFLAGS_NW4R) -c -o $@ $<
