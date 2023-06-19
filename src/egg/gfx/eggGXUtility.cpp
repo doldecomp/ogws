@@ -11,7 +11,7 @@ namespace EGG
 {
     using namespace nw4r;
 
-    const u8 GXUtility::sTexCoordGenVals[] = {0x1E, 0x21, 0x24, 0x27, 0x2A, 0x2D, 0x30, 0x33};
+    const u8 GXUtility::sTexMtxIDs[] = {0x1E, 0x21, 0x24, 0x27, 0x2A, 0x2D, 0x30, 0x33};
     Screen *IDrawGX::spScreen;
     GXUtility::ProjectionCallback GXUtility::sProjectionCallback;
     UNKWORD GXUtility::sProjectionCallbackArg;
@@ -19,12 +19,12 @@ namespace EGG
     u32 GXUtility::sDrawSettings;
     math::MTX34 GXUtility::sCameraMtx;
 
-    u8 GXUtility::getTexCoordGenVal(int no)
+    u8 GXUtility::getTexMtxID(int no)
     {
         #line 22
         EGG_ASSERT(0 <= no && no < 8);
 
-        return sTexCoordGenVals[no];
+        return sTexMtxIDs[no];
     }
 
     void GXUtility::setScaleOffsetPerspective(f32 *p, f32 sx, f32 sy, f32 ox, f32 oy)

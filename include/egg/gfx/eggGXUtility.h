@@ -21,7 +21,7 @@ namespace EGG
         };
 
     public:
-        static u8 getTexCoordGenVal(int);
+        static u8 getTexMtxID(int);
         static void setScaleOffsetPerspective(f32 *, f32, f32, f32, f32);
         static void getTexObj(GXTexObj *, const ResTIMG&);
         static void getTexObj(GXTexObj *, nw4r::g3d::ResTex,
@@ -32,7 +32,7 @@ namespace EGG
         static void setDrawSetting(u32 setting) { sDrawSettings = setting; }
 
     private:
-        static const u8 sTexCoordGenVals[];
+        static const u8 sTexMtxIDs[];
         static ProjectionCallback sProjectionCallback;
         static UNKWORD sProjectionCallbackArg;
         static u16 lbl_804BEC7C;
