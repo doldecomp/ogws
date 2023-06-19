@@ -208,16 +208,9 @@ namespace EGG
             {
                 if (!cache)
                 {
-                    StateGX::Bool8 color;
-                    StateGX::Bool8 alpha;
-                    StateGX::Bool8 dither;
-                    
-                    color.byte = StateGX::getCache().colorUpdate;
-                    StateGX::GXSetColorUpdate_(true);
-                    alpha.byte = StateGX::getCache().alphaUpdate;
-                    StateGX::GXSetAlphaUpdate_(true);
-                    dither.byte = StateGX::getCache().dither;
-                    StateGX::GXSetDither_(false);
+                    StateGX::ScopedColor color(true);
+                    StateGX::ScopedAlpha alpha(true);
+                    StateGX::ScopedDither dither(false);
 
                     PostEffectBase::setProjection(mScreen);
                     
@@ -235,10 +228,6 @@ namespace EGG
                     const f32 sx = mScreen.GetSizeX();
                     const f32 sy = mScreen.GetSizeY();
                     eff.draw(sx, sy);
-                    
-                    StateGX::GXSetDither_(dither.boolean);
-                    StateGX::GXSetAlphaUpdate_(alpha.boolean);
-                    StateGX::GXSetColorUpdate_(color.boolean);
                 }
 
                 release(type);

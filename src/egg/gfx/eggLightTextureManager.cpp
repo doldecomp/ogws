@@ -170,21 +170,8 @@ namespace EGG
 
         mDrawFlags |= view;
 
-        union
-        {
-            u8 color;
-            bool bColor;
-        };
-        color = StateGX::getCache().colorUpdate;
-        StateGX::GXSetColorUpdate_(true);
-
-        union
-        {
-            u8 alpha;
-            bool bAlpha;
-        };
-        alpha = StateGX::getCache().alphaUpdate;
-        StateGX::GXSetAlphaUpdate_(false);
+        StateGX::ScopedColor color(true);
+        StateGX::ScopedAlpha alpha(false);
 
         // TODO
         
@@ -224,21 +211,8 @@ namespace EGG
         
         if (!(mFlags & 0x40))
         {   
-            union
-            {
-                u8 color2;
-                bool bColor2;
-            };
-            color2 = StateGX::getCache().colorUpdate;
-            StateGX::GXSetColorUpdate_(true);
-
-            union
-            {
-                u8 alpha2;
-                bool bAlpha2;
-            };
-            alpha2 = StateGX::getCache().alphaUpdate;
-            StateGX::GXSetAlphaUpdate_(true);
+            StateGX::ScopedColor color(true);
+            StateGX::ScopedAlpha alpha(true);
 
             if ((mFlags & 0x8) || texBuf != NULL)
             {
@@ -274,14 +248,8 @@ namespace EGG
                     }
                 }
             }
-
-            StateGX::GXSetAlphaUpdate_(bAlpha2);
-            StateGX::GXSetColorUpdate_(bColor2);
         }
-
         GXInvalidateTexAll();
-        StateGX::GXSetAlphaUpdate_(bAlpha);
-        StateGX::GXSetColorUpdate_(bColor);
     }
     #else
     #error This file has yet to be decompiled accurately. Use "eggLightTextureManager.s" instead.

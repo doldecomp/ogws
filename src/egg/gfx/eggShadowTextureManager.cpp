@@ -71,10 +71,8 @@ namespace EGG
     {
         if (!IsActive() || mShadowIdx == 0) return;
 
-        StateGX::Bool8 dither;
-        dither.byte = StateGX::getCache().dither;
-        StateGX::GXSetDither_(true);
-        
+        StateGX::ScopedDither dither(true);
+
         GXSetChanAmbColor(GX_CHANNEL_ID_4, DrawGX::scColorWhite);
 
         GXColor fog = {0, 0, 0, 255};
@@ -135,7 +133,5 @@ namespace EGG
             if (localGroups[i] != NULL)
                 localGroups[i]->free();
         }
-        
-        StateGX::GXSetDither_(dither.boolean);
     }
 }

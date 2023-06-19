@@ -80,28 +80,12 @@ namespace EGG
                     DrawGX::BeginDrawScreen(true, true, false);
                     GXSetBlendMode(0, 4, 5, 0);
 
-                    union
-                    {
-                        u8 color;
-                        bool bColor;
-                    };
-                    color = StateGX::getCache().colorUpdate;
-                    StateGX::GXSetColorUpdate_(true);
-                    
-                    union
-                    {
-                        u8 alpha;
-                        bool bAlpha;
-                    };
-                    alpha = StateGX::getCache().alphaUpdate;
-                    StateGX::GXSetAlphaUpdate_(true);
+                    StateGX::ScopedColor color(true);
+                    StateGX::ScopedAlpha alpha(true);
 
                     DrawGX::DrawDL(DrawGX::DL_16, forDL, DrawGX::scColorWhite);
                     BUF_0x8C->free();
                     BUF_0x8C = NULL;
-
-                    StateGX::GXSetAlphaUpdate_(bAlpha);
-                    StateGX::GXSetColorUpdate_(bColor);
                 }
 
                 if (BYTE_0x7C & 2)
@@ -135,30 +119,9 @@ namespace EGG
                     
                     GXColor tevColor = {255, 255, 255, BYTE_0x7D};
                     
-                    union
-                    {
-                        u8 color;
-                        bool bColor;
-                    };
-                    color = StateGX::getCache().colorUpdate;
-                    StateGX::GXSetColorUpdate_(true);
-                    
-                    union
-                    {
-                        u8 alpha;
-                        bool bAlpha;
-                    };
-                    alpha = StateGX::getCache().alphaUpdate;
-                    StateGX::GXSetAlphaUpdate_(false);
-                    
-                    union
-                    {
-                        u8 dither;
-                        bool bDither;
-                    };
-                    dither = StateGX::getCache().dither;
-                    StateGX::GXSetDither_(true);
-
+                    StateGX::ScopedColor color(true);
+                    StateGX::ScopedAlpha alpha(false);
+                    StateGX::ScopedDither dither(true);
                     
                     if (BUF_0x88 != NULL)
                     {
@@ -221,9 +184,6 @@ namespace EGG
 
                     DrawGX::DrawDL(DrawGX::DL_16, forDL, tevColor);
                     GXSetZTexture(0, 22, 0);
-                    StateGX::GXSetDither_(bDither);
-                    StateGX::GXSetAlphaUpdate_(bAlpha);
-                    StateGX::GXSetColorUpdate_(bColor);
                 }
 
                 if (BUF_0x88 != NULL)

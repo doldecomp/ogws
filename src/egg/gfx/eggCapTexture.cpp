@@ -74,20 +74,12 @@ namespace EGG
 
         if ((mFlags & 0x8) || (mFlags & 0x10) || (mFlags & 0x20))
         {
-            StateGX::Bool8 color, alpha;
-            
-            color.byte = StateGX::getCache().colorUpdate;
-            StateGX::GXSetColorUpdate_(mFlags & 0x8);
-
-            alpha.byte = StateGX::getCache().alphaUpdate;
-            StateGX::GXSetAlphaUpdate_(mFlags & 0x10);
+            StateGX::ScopedColor color(mFlags & 0x8);
+            StateGX::ScopedAlpha alpha(mFlags & 0x10);
 
             GXSetZMode(1, 7, (mFlags & 0x20) != 0);
             GXSetCopyClear(mClearColor, mClearZ);
             GXCopyTex(getBuffer(), 1);
-            
-            StateGX::GXSetAlphaUpdate_(alpha.boolean);
-            StateGX::GXSetColorUpdate_(color.boolean);
         }
         else
         {

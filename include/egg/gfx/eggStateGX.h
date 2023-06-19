@@ -38,12 +38,43 @@ namespace EGG
             bool dither; // at 0xE
         };
 
-        // For cache getter/setter regalloc.
-        // Save value into byte, then use boolean when restoring
-        union Bool8
-        {
-            u8 byte;
-            bool boolean;
+        struct ScopedColor {
+            ScopedColor(bool x) {
+                old = sCache.colorUpdate;
+                GXSetColorUpdate_(x);
+            }
+
+            ~ScopedColor() {
+                GXSetColorUpdate_(old);
+            }
+
+            bool old;
+        };
+
+        struct ScopedAlpha {
+            ScopedAlpha(bool x) {
+                old = sCache.alphaUpdate;
+                GXSetAlphaUpdate_(x);
+            }
+
+            ~ScopedAlpha() {
+                GXSetAlphaUpdate_(old);
+            }
+
+            bool old;
+        };
+
+        struct ScopedDither {
+            ScopedDither(bool x) {
+                old = sCache.dither;
+                GXSetDither_(x);
+            }
+
+            ~ScopedDither() {
+                GXSetDither_(old);
+            }
+
+            bool old;
         };
 
     public:
@@ -51,7 +82,6 @@ namespace EGG
         static UNKWORD getDefaultPixelFormatArg2() { return sDefaultPixelFormatArg2; }
         static GXColor& getDefaultTexColor() { return sDefaultTexColor; }
         static void setDefaultTexColor(GXColor c) { sDefaultTexColor = c; }
-        static const CachedState& getCache() { return sCache; }
         static u16 getEfbWidth() { return s_widthFb; } 
         static void setEfbWidth(u16 w) { s_widthFb = w; }
         static u16 getEfbHeight() { return s_heightEfb; } 

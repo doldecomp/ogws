@@ -33,10 +33,7 @@ namespace EGG
                 ScreenEffectBase::sFlag |= 0x2;
                 break;
             case 1:
-                StateGX::Bool8 alpha;
-                alpha.byte = StateGX::getCache().alphaUpdate;
-                
-                StateGX::GXSetAlphaUpdate_(false);
+                StateGX::ScopedAlpha alpha(false);
                 
                 TextureBuffer *p_buff = getBuffer(cBufferType_2);
                 #line 74
@@ -47,8 +44,6 @@ namespace EGG
 
                 release(cBufferType_2);
                 ScreenEffectBase::sFlag &= ~0x3;
-
-                StateGX::GXSetAlphaUpdate_(alpha.boolean);
                 break;
         }
     }
