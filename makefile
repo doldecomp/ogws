@@ -59,15 +59,15 @@ BSS_PDHR := 9
 ASM_DIRS := asm \
 	asm/revolution asm/nw4r asm/egg asm/runtime asm/msl asm/MetroTRK \
 	asm/MetroTRK/debugger asm/MetroTRK/gamedev \
-	asm/revolution/NdevExi2AD asm/revolution/OS \
+	asm/revolution/NdevExi2AD asm/revolution/KPAD asm/revolution/OS \
 	asm/nw4r/ut asm/nw4r/ef asm/nw4r/math asm/nw4r/snd asm/nw4r/g3d asm/nw4r/lyt \
 	asm/egg/gfx asm/egg/math asm/egg/core asm/egg/audio asm/egg/util
 
 SRC_DIRS := nw4r egg revolution runtime MetroTRK \
-	nw4r/ut nw4r/ef nw4r/math nw4r/snd nw4r/g3d nw4r/lyt \
-	egg/math egg/core egg/audio egg/util egg/gfx egg/prim \
 	MetroTRK/debugger MetroTRK/gamedev \
-	revolution/ARC
+	revolution/ARC \
+	nw4r/ut nw4r/ef nw4r/math nw4r/snd nw4r/g3d nw4r/lyt \
+	egg/math egg/core egg/audio egg/util egg/gfx egg/prim
 
 # Flags for Riidefi's post-processing script
 PPROCFLAGS := -fsymbol-fixup
