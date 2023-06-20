@@ -4,8 +4,6 @@
 
 .balign 0x8
 
-lbl_8039aee0:
-    .string "<< RVL_SDK - EXI \trelease build: Nov 30 2006 03:26:56 (0x4199_60831) >>"
 .global lbl_8039AF28
 lbl_8039AF28:
 	.incbin "baserom.dol", 0x397028, 0x38

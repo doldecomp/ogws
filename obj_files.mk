@@ -397,6 +397,9 @@ RVL_SDK_O_FILES := \
 	build/asm/revolution/WPAD/WPADMem.o \
 	build/asm/revolution/WPAD/debug_msg.o \
 	build/asm/revolution/EUART/euart.o \
+	build/asm/revolution/EXI/EXIBios.o \
+	build/asm/revolution/EXI/EXIUart.o \
+	build/asm/revolution/EXI/EXICommon.o \
 	build/asm/revolution/OS/__start.o \
 	build/asm/revolution/OS/__ppc_eabi_init.o \
 

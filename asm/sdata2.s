@@ -3,9 +3,6 @@
 .section .sdata2, "a"  # 0x804BFA20 - 0x804C69E0
 .balign 0x8
 
-.global __EXIFreq
-__EXIFreq:
-	.incbin "baserom.dol", 0x3C9CA0, 0x8
 .global lbl_804C1068
 lbl_804C1068:
 	.incbin "baserom.dol", 0x3C9CA8, 0x4
