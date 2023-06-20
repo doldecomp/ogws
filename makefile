@@ -43,21 +43,21 @@ LDFLAGS := -map $(MAP) -mapunused -proc gekko -fp hard -nodefaults -nofail
 #CFLAGS  := -Cpp_exceptions off -proc gekko -fp hard -O2,p -i include
 
 # Compiler flags for the Metrowerks Target Resident Kernel (MetroTRK)
-CFLAGS_TRK := -Cpp_exceptions off -proc gekko -fp hard -O4,s -ir include/MetroTRK -I- -i include -ir include/msl -nodefaults
+CFLAGS_TRK := -Cpp_exceptions off -proc gekko -fp hard -O4,s -ir include/MetroTRK -I- -i include -ir include/MSL -nodefaults
 # Compiler flags for the CodeWarrior runtime library
-CFLAGS_RUNTIME := -Cpp_exceptions off -proc gekko -fp hard -O4,s -ir include/MetroTRK -I- -i include -ir include/msl -nodefaults
+CFLAGS_RUNTIME := -Cpp_exceptions off -proc gekko -fp hard -O4,s -ir include/MetroTRK -I- -i include -ir include/MSL -nodefaults
 # Compiler flags for NintendoWare for Revolution
-CFLAGS_NW4R := -lang c99 -enum int -inline auto -Cpp_exceptions off -RTTI off -proc gekko -fp hard -O4,p  -ir include/nw4r -I- -Iinclude -ir include/msl -ir include/revolution -nodefaults
+CFLAGS_NW4R := -lang c99 -enum int -inline auto -Cpp_exceptions off -RTTI off -proc gekko -fp hard -O4,p  -ir include/nw4r -I- -Iinclude -ir include/MSL -ir include/revolution -nodefaults
 # Compiler flags for EGG
-CFLAGS_EGG := -lang c99 -enum int -inline auto -Cpp_exceptions off -RTTI off -proc gekko -fp hard -O4,p  -ir include/egg -ir include/nw4r -I- -Iinclude -ir include/msl -ir include/revolution -nodefaults -rostr -str pool
+CFLAGS_EGG := -lang c99 -enum int -inline auto -Cpp_exceptions off -RTTI off -proc gekko -fp hard -O4,p  -ir include/egg -ir include/nw4r -I- -Iinclude -ir include/MSL -ir include/revolution -nodefaults -rostr -str pool
 # Compiler flags for ARC
-CFLAGS_ARC := -lang c99 -enum int -O4,p -inline auto -ipa file -volatileasm -Cpp_exceptions off -RTTI off -proc gekko -fp hard -I- -Iinclude -ir include/msl -ir include/revolution -nodefaults
+CFLAGS_ARC := -lang c99 -enum int -O4,p -inline auto -ipa file -volatileasm -Cpp_exceptions off -RTTI off -proc gekko -fp hard -I- -Iinclude -ir include/MSL -ir include/revolution -nodefaults
 
 # elf2dol needs to know these in order to calculate sbss correctly.
 BSS_PDHR := 9
 
 ASM_DIRS := asm \
-	asm/revolution asm/nw4r asm/egg asm/runtime asm/msl asm/MetroTRK \
+	asm/revolution asm/nw4r asm/egg asm/runtime asm/MSL asm/MetroTRK \
 	asm/MetroTRK/debugger asm/MetroTRK/gamedev \
 	asm/revolution/NdevExi2AD asm/revolution/KPAD asm/revolution/PAD asm/revolution/WPAD asm/revolution/EUART asm/revolution/EXI asm/revolution/FS asm/revolution/GX asm/revolution/OS \
 	asm/nw4r/ut asm/nw4r/ef asm/nw4r/math asm/nw4r/snd asm/nw4r/g3d asm/nw4r/lyt \
