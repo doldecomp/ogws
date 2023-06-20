@@ -475,6 +475,10 @@ RVL_SDK_O_FILES := \
 	build/asm/revolution/OS/OSStateFlags.o \
 	build/asm/revolution/OS/OSNet.o \
 	build/asm/revolution/OS/__ppc_eabi_init.o \
+	\
+	build/asm/revolution/SC/scsystem.o \
+	build/asm/revolution/SC/scapi.o \
+	build/asm/revolution/SC/scapi_prdinfo.o \
 
 GROUP_1_O_FILES := \
 	build/asm/data.o \

@@ -217,12 +217,12 @@ getStandardRenderModeObj__Q23EGG5VideoFv:
 /* 800AA5CC 000A54CC  BF 61 00 0C */	stmw r27, 0xc(r1)
 /* 800AA5D0 000A54D0  3F E0 80 38 */	lis r31, gRMO_Ntsc_640x456IntDf_4x3__22$$2unnamed$$2eggVideo_cpp$$2@ha
 /* 800AA5D4 000A54D4  3B FF A8 A8 */	addi r31, r31, gRMO_Ntsc_640x456IntDf_4x3__22$$2unnamed$$2eggVideo_cpp$$2@l
-/* 800AA5D8 000A54D8  48 04 E5 25 */	bl func_800F8AFC
+/* 800AA5D8 000A54D8  48 04 E5 25 */	bl SCGetProgressiveMode
 /* 800AA5DC 000A54DC  54 63 06 3E */	clrlwi r3, r3, 0x18
 /* 800AA5E0 000A54E0  38 03 FF FF */	addi r0, r3, -1
 /* 800AA5E4 000A54E4  7C 00 00 34 */	cntlzw r0, r0
 /* 800AA5E8 000A54E8  54 1E D9 7E */	srwi r30, r0, 5
-/* 800AA5EC 000A54EC  48 04 E4 45 */	bl func_800F8A30
+/* 800AA5EC 000A54EC  48 04 E4 45 */	bl SCGetEuRgb60Mode
 /* 800AA5F0 000A54F0  54 63 06 3E */	clrlwi r3, r3, 0x18
 /* 800AA5F4 000A54F4  38 03 FF FF */	addi r0, r3, -1
 /* 800AA5F8 000A54F8  7C 00 00 34 */	cntlzw r0, r0
