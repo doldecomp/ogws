@@ -20,6 +20,7 @@ NW4R_O_FILES := \
 	build/nw4r/ut/ut_ResFont.o \
 	build/nw4r/ut/ut_CharWriter.o \
 	build/asm/nw4r/ut/ut_TextWriterBase.o \
+	\
 	build/nw4r/ef/ef_draworder.o \
 	build/nw4r/ef/ef_effect.o \
 	build/nw4r/ef/ef_effectsystem.o \
@@ -50,10 +51,12 @@ NW4R_O_FILES := \
 	build/asm/nw4r/ef/ef_drawstripestrategy.o \
 	build/asm/nw4r/ef/ef_drawsmoothstripestrategy.o \
 	build/asm/nw4r/nw4r_8002F700.o \
+	\
 	build/asm/nw4r/math/math_arithmetic.o \
 	build/asm/nw4r/math/math_triangular.o \
 	build/nw4r/math/math_types.o \
 	build/asm/nw4r/math/math_geometry.o \
+	\
 	build/asm/nw4r/snd/snd_AnimSound.o \
 	build/asm/nw4r/snd/snd_AxManager.o \
 	build/asm/nw4r/snd/snd_AxVoice.o \
@@ -119,6 +122,7 @@ NW4R_O_FILES := \
 	build/asm/nw4r/snd/snd_WsdFile.o \
 	build/asm/nw4r/snd/snd_WsdPlayer.o \
 	build/asm/nw4r/snd/snd_adpcm.o \
+	\
 	build/nw4r/g3d/g3d_rescommon.o \
 	build/nw4r/g3d/g3d_resdict.o \
 	build/nw4r/g3d/g3d_resfile.o \
@@ -171,6 +175,7 @@ NW4R_O_FILES := \
 	build/nw4r/g3d/g3d_fog.o \
 	build/nw4r/g3d/g3d_light.o \
 	build/asm/nw4r/g3d/g3d_calcvtx.o \
+	\
 	build/asm/nw4r/lyt/lyt_pane.o \
 	build/asm/nw4r/lyt/lyt_group.o \
 	build/asm/nw4r/lyt/lyt_layout.o \
@@ -229,12 +234,15 @@ EGG_O_FILES := \
 	build/egg/gfx/eggGXUtility.o \
 	build/asm/egg/gfx/eggDrawHelper.o \
 	build/asm/egg/gfx/egg_800A1DB0.o \
+	\
 	build/egg/prim/eggAssert.o \
 	build/asm/egg/egg_800A204C.o \
+	\
 	build/egg/math/eggMath.o \
 	build/egg/math/eggMatrix.o \
 	build/egg/math/eggQuat.o \
 	build/egg/math/eggVector.o \
+	\
 	build/asm/egg/core/eggExpHeap.o \
 	build/asm/egg/core/eggFrmHeap.o \
 	build/egg/core/eggHeap.o \
@@ -260,12 +268,14 @@ EGG_O_FILES := \
 	build/asm/egg/core/eggDecomp.o \
 	build/egg/core/eggAsyncDisplay.o \
 	build/egg/core/eggCntFile.o \
+	\
 	build/egg/audio/eggAudioArcPlayerMgr.o \
 	build/asm/egg/audio/eggAudioExpMgr.o \
 	build/asm/egg/audio/eggAudioFxMgr.o \
 	build/egg/audio/eggAudioHeapMgr.o \
 	build/asm/egg/audio/eggAudioMgr.o \
 	build/egg/audio/eggAudioSystem.o \
+	\
 	build/asm/egg/util/eggMsgRes.o \
 	build/egg/util/eggEffect.o \
 	build/egg/util/eggException.o \
@@ -371,6 +381,7 @@ METROTRK_O_FILES := \
 	build/asm/MetroTRK/debugger/targcont.o \
 	build/asm/MetroTRK/debugger/target_options.o \
 	build/asm/MetroTRK/debugger/UDP_Stubs.o \
+	\
 	build/asm/MetroTRK/gamedev/main.o \
 	build/asm/MetroTRK/gamedev/CircleBuffer.o \
 	build/asm/MetroTRK/gamedev/MWCriticalSection_gc.o \
