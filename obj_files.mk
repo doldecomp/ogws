@@ -387,6 +387,8 @@ METROTRK_O_FILES := \
 	build/asm/MetroTRK/gamedev/MWCriticalSection_gc.o \
 
 RVL_SDK_O_FILES := \
+	build/asm/revolution/NdevExi2AD/DebuggerDriver.o \
+	build/asm/revolution/NdevExi2AD/exi2.o \
 	build/asm/revolution/OS/__start.o \
 	build/asm/revolution/OS/__ppc_eabi_init.o \
 
@@ -407,4 +409,4 @@ GROUP_1_O_FILES := \
 	build/asm/sbss2.o \
 	build/asm/sdata2.o \
 
-O_FILES := $(GROUP_0_O_FILES) $(NW4R_O_FILES) $(EGG_O_FILES) $(RUNTIME_O_FILES) $(MSL_O_FILES) $(METROTRK_O_FILES) $(GROUP_1_O_FILES) $(RVL_SDK_O_FILES)
+O_FILES := $(GROUP_0_O_FILES) $(NW4R_O_FILES) $(EGG_O_FILES) $(RUNTIME_O_FILES) $(MSL_O_FILES) $(METROTRK_O_FILES) $(RVL_SDK_O_FILES) $(GROUP_1_O_FILES)
