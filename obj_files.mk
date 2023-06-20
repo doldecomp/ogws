@@ -401,6 +401,21 @@ RVL_SDK_O_FILES := \
 	build/asm/revolution/EXI/EXIUart.o \
 	build/asm/revolution/EXI/EXICommon.o \
 	build/asm/revolution/FS/fs.o \
+	build/asm/revolution/GX/GXInit.o \
+	build/asm/revolution/GX/GXFifo.o \
+	build/asm/revolution/GX/GXAttr.o \
+	build/asm/revolution/GX/GXMisc.o \
+	build/asm/revolution/GX/GXGeometry.o \
+	build/asm/revolution/GX/GXFrameBuf.o \
+	build/asm/revolution/GX/GXLight.o \
+	build/asm/revolution/GX/GXTexture.o \
+	build/asm/revolution/GX/GXBump.o \
+	build/asm/revolution/GX/GXTev.o \
+	build/asm/revolution/GX/GXPixel.o \
+	build/asm/revolution/GX/GXDraw.o \
+	build/asm/revolution/GX/GXDisplayList.o \
+	build/asm/revolution/GX/GXTransform.o \
+	build/asm/revolution/GX/GXPerf.o \
 	build/asm/revolution/OS/__start.o \
 	build/asm/revolution/OS/__ppc_eabi_init.o \
 
