@@ -4,96 +4,9 @@
 
 .balign 0x8
 
-.global lbl_8039BAF0
-lbl_8039BAF0:
-	.incbin "baserom.dol", 0x397BF0, 0x1F0
-.global lbl_8039BCE0
-lbl_8039BCE0:
-	.incbin "baserom.dol", 0x397DE0, 0x200
-.global lbl_8039BEE0
-lbl_8039BEE0:
-	.incbin "baserom.dol", 0x397FE0, 0x10
-.global lbl_8039BEF0
-lbl_8039BEF0:
-	.incbin "baserom.dol", 0x397FF0, 0x80
-.global lbl_8039BF70
-lbl_8039BF70:
-	.incbin "baserom.dol", 0x398070, 0x238
-.global lbl_8039C1A8
-lbl_8039C1A8:
-	.incbin "baserom.dol", 0x3982A8, 0x1B8
-.global lbl_8039C360
-lbl_8039C360:
-	.incbin "baserom.dol", 0x398460, 0x28
-.global lbl_8039C388
-lbl_8039C388:
-	.incbin "baserom.dol", 0x398488, 0x2DC
-.global lbl_8039C664
-lbl_8039C664:
-	.incbin "baserom.dol", 0x398764, 0x44
-.global lbl_8039C6A8
-lbl_8039C6A8:
-	.incbin "baserom.dol", 0x3987A8, 0x180
-.global lbl_8039C828
-lbl_8039C828:
-	.incbin "baserom.dol", 0x398928, 0x990
-.global lbl_8039D1B8
-lbl_8039D1B8:
-	.incbin "baserom.dol", 0x3992B8, 0x30
-.global lbl_8039D1E8
-lbl_8039D1E8:
-	.incbin "baserom.dol", 0x3992E8, 0x10
-.global lbl_8039D1F8
-lbl_8039D1F8:
-	.incbin "baserom.dol", 0x3992F8, 0xC
-.global lbl_8039D204
-lbl_8039D204:
-	.incbin "baserom.dol", 0x399304, 0x30
-.global lbl_8039D234
-lbl_8039D234:
-	.incbin "baserom.dol", 0x399334, 0x3C
-.global lbl_8039D270
-lbl_8039D270:
-	.incbin "baserom.dol", 0x399370, 0x30
-.global lbl_8039D2A0
-lbl_8039D2A0:
-	.incbin "baserom.dol", 0x3993A0, 0x30
-.global lbl_8039D2D0
-lbl_8039D2D0:
-	.incbin "baserom.dol", 0x3993D0, 0xBA40
-.global lbl_803A8D10
-lbl_803A8D10:
-	.incbin "baserom.dol", 0x3A4E10, 0x400
-.global lbl_803A9110
-lbl_803A9110:
-	.incbin "baserom.dol", 0x3A5210, 0x14
-.global lbl_803A9124
-lbl_803A9124:
-	.incbin "baserom.dol", 0x3A5224, 0x14
-.global lbl_803A9138
-lbl_803A9138:
-	.incbin "baserom.dol", 0x3A5238, 0xC
-.global lbl_803A9144
-lbl_803A9144:
-	.incbin "baserom.dol", 0x3A5244, 0x38
-.global lbl_803A917C
-lbl_803A917C:
-	.incbin "baserom.dol", 0x3A527C, 0x38
-.global lbl_803A91B4
-lbl_803A91B4:
-	.incbin "baserom.dol", 0x3A52B4, 0x24
-.global lbl_803A91D8
-lbl_803A91D8:
-	.incbin "baserom.dol", 0x3A52D8, 0x2C
-.global lbl_803A9204
-lbl_803A9204:
-	.incbin "baserom.dol", 0x3A5304, 0x1C
-.global lbl_803A9220
-lbl_803A9220:
-	.incbin "baserom.dol", 0x3A5320, 0x28
-.global lbl_803A9248
-lbl_803A9248:
-	.incbin "baserom.dol", 0x3A5348, 0x1F8
+.global lbl_803a93b0
+lbl_803a93b0:
+	.incbin "baserom.dol", 0x3A54B0, 0x90
 .global lbl_803A9440
 lbl_803A9440:
 	.incbin "baserom.dol", 0x3A5540, 0x118

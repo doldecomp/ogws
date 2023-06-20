@@ -1,0 +1,558 @@
+.include "macros.inc"
+
+.section .sbss, "wa"
+.balign 0x8
+ResetDown:
+	.skip 0x4
+StmReady:
+	.skip 0x4
+StmImDesc:
+	.skip 0x4
+StmEhDesc:
+	.skip 0x4
+StmEhRegistered:
+	.skip 0x4
+StmVdInUse:
+	.skip 0x4
+PowerCallback:
+	.skip 0x4
+ResetCallback:
+	.skip 0x4
+
+.section .data, "wa"
+.balign 0x8
+.global lbl_803A9110
+lbl_803A9110:
+	.string "/dev/stm/immediate"
+    .balign 4
+.global lbl_803A9124
+lbl_803A9124:
+	.string "/dev/stm/eventhook"
+    .balign 4
+.global lbl_803A9138
+lbl_803A9138:
+	.string "OSStateTM.c"
+    .balign 4
+.global lbl_803A9144
+lbl_803A9144:
+	.string "Error: The firmware doesn't support shutdown feature.\n"
+    .balign 4
+.global lbl_803A917C
+lbl_803A917C:
+	.string "Error: The firmware doesn't support reboot feature.\n"
+    .balign 4
+.global lbl_803A91B4
+lbl_803A91B4:
+	.string "Error on STM state event handler\n"
+    .balign 4
+
+.section .bss, "wa"
+.balign 0x8
+# Different order than link map fsr
+StmEhInBuf:
+	.balign 32
+	.skip 0x20
+StmEhOutBuf:
+	.balign 32
+	.skip 0x20
+StmImInBuf:
+	.balign 32
+	.skip 0x20
+StmImOutBuf:
+	.balign 32
+	.skip 0x20
+StmVdInBuf:
+	.balign 32
+	.skip 0x20
+StmVdOutBuf:
+	.balign 32
+	.skip 0x20
+
+.section .text, "ax"
+.global OSSetResetCallback
+OSSetResetCallback:
+/* 800F5F18 000F0E18  94 21 FF E0 */	stwu r1, -0x20(r1)
+/* 800F5F1C 000F0E1C  7C 08 02 A6 */	mflr r0
+/* 800F5F20 000F0E20  90 01 00 24 */	stw r0, 0x24(r1)
+/* 800F5F24 000F0E24  93 E1 00 1C */	stw r31, 0x1c(r1)
+/* 800F5F28 000F0E28  7C 7F 1B 78 */	mr r31, r3
+/* 800F5F2C 000F0E2C  93 C1 00 18 */	stw r30, 0x18(r1)
+/* 800F5F30 000F0E30  93 A1 00 14 */	stw r29, 0x14(r1)
+/* 800F5F34 000F0E34  4B FF B9 8D */	bl OSDisableInterrupts
+/* 800F5F38 000F0E38  80 0D 9C 50 */	lwz r0, StmEhRegistered-_SDA_BASE_(r13)
+/* 800F5F3C 000F0E3C  7C 7E 1B 78 */	mr r30, r3
+/* 800F5F40 000F0E40  83 AD 9C 5C */	lwz r29, ResetCallback-_SDA_BASE_(r13)
+/* 800F5F44 000F0E44  2C 00 00 00 */	cmpwi r0, 0
+/* 800F5F48 000F0E48  93 ED 9C 5C */	stw r31, ResetCallback-_SDA_BASE_(r13)
+/* 800F5F4C 000F0E4C  40 82 00 60 */	bne lbl_800F5FAC
+/* 800F5F50 000F0E50  4B FF B9 71 */	bl OSDisableInterrupts
+/* 800F5F54 000F0E54  7C 7F 1B 78 */	mr r31, r3
+/* 800F5F58 000F0E58  3C A0 80 42 */	lis r5, StmEhInBuf@ha
+/* 800F5F5C 000F0E5C  3C E0 80 42 */	lis r7, StmEhOutBuf@ha
+/* 800F5F60 000F0E60  3D 20 80 0F */	lis r9, __OSStateEventHandler@ha
+/* 800F5F64 000F0E64  80 6D 9C 4C */	lwz r3, StmEhDesc-_SDA_BASE_(r13)
+/* 800F5F68 000F0E68  38 A5 0C 00 */	addi r5, r5, StmEhInBuf@l
+/* 800F5F6C 000F0E6C  38 E7 0C 20 */	addi r7, r7, StmEhOutBuf@l
+/* 800F5F70 000F0E70  39 29 64 58 */	addi r9, r9, __OSStateEventHandler@l
+/* 800F5F74 000F0E74  38 80 10 00 */	li r4, 0x1000
+/* 800F5F78 000F0E78  38 C0 00 20 */	li r6, 0x20
+/* 800F5F7C 000F0E7C  39 00 00 20 */	li r8, 0x20
+/* 800F5F80 000F0E80  39 40 00 00 */	li r10, 0
+/* 800F5F84 000F0E84  4B FE F1 2D */	bl IOS_IoctlAsync
+/* 800F5F88 000F0E88  2C 03 00 00 */	cmpwi r3, 0
+/* 800F5F8C 000F0E8C  40 82 00 10 */	bne lbl_800F5F9C
+/* 800F5F90 000F0E90  38 00 00 01 */	li r0, 1
+/* 800F5F94 000F0E94  90 0D 9C 50 */	stw r0, StmEhRegistered-_SDA_BASE_(r13)
+/* 800F5F98 000F0E98  48 00 00 0C */	b lbl_800F5FA4
+lbl_800F5F9C:
+/* 800F5F9C 000F0E9C  38 00 00 00 */	li r0, 0
+/* 800F5FA0 000F0EA0  90 0D 9C 50 */	stw r0, StmEhRegistered-_SDA_BASE_(r13)
+lbl_800F5FA4:
+/* 800F5FA4 000F0EA4  7F E3 FB 78 */	mr r3, r31
+/* 800F5FA8 000F0EA8  4B FF B9 41 */	bl OSRestoreInterrupts
+lbl_800F5FAC:
+/* 800F5FAC 000F0EAC  7F C3 F3 78 */	mr r3, r30
+/* 800F5FB0 000F0EB0  4B FF B9 39 */	bl OSRestoreInterrupts
+/* 800F5FB4 000F0EB4  83 E1 00 1C */	lwz r31, 0x1c(r1)
+/* 800F5FB8 000F0EB8  7F A3 EB 78 */	mr r3, r29
+/* 800F5FBC 000F0EBC  83 C1 00 18 */	lwz r30, 0x18(r1)
+/* 800F5FC0 000F0EC0  83 A1 00 14 */	lwz r29, 0x14(r1)
+/* 800F5FC4 000F0EC4  80 01 00 24 */	lwz r0, 0x24(r1)
+/* 800F5FC8 000F0EC8  7C 08 03 A6 */	mtlr r0
+/* 800F5FCC 000F0ECC  38 21 00 20 */	addi r1, r1, 0x20
+/* 800F5FD0 000F0ED0  4E 80 00 20 */	blr 
+
+.global OSSetPowerCallback
+OSSetPowerCallback:
+/* 800F5FD4 000F0ED4  94 21 FF E0 */	stwu r1, -0x20(r1)
+/* 800F5FD8 000F0ED8  7C 08 02 A6 */	mflr r0
+/* 800F5FDC 000F0EDC  90 01 00 24 */	stw r0, 0x24(r1)
+/* 800F5FE0 000F0EE0  93 E1 00 1C */	stw r31, 0x1c(r1)
+/* 800F5FE4 000F0EE4  7C 7F 1B 78 */	mr r31, r3
+/* 800F5FE8 000F0EE8  93 C1 00 18 */	stw r30, 0x18(r1)
+/* 800F5FEC 000F0EEC  93 A1 00 14 */	stw r29, 0x14(r1)
+/* 800F5FF0 000F0EF0  4B FF B8 D1 */	bl OSDisableInterrupts
+/* 800F5FF4 000F0EF4  80 0D 9C 50 */	lwz r0, StmEhRegistered-_SDA_BASE_(r13)
+/* 800F5FF8 000F0EF8  7C 7E 1B 78 */	mr r30, r3
+/* 800F5FFC 000F0EFC  83 AD 9C 58 */	lwz r29, PowerCallback-_SDA_BASE_(r13)
+/* 800F6000 000F0F00  2C 00 00 00 */	cmpwi r0, 0
+/* 800F6004 000F0F04  93 ED 9C 58 */	stw r31, PowerCallback-_SDA_BASE_(r13)
+/* 800F6008 000F0F08  40 82 00 60 */	bne lbl_800F6068
+/* 800F600C 000F0F0C  4B FF B8 B5 */	bl OSDisableInterrupts
+/* 800F6010 000F0F10  7C 7F 1B 78 */	mr r31, r3
+/* 800F6014 000F0F14  3C A0 80 42 */	lis r5, StmEhInBuf@ha
+/* 800F6018 000F0F18  3C E0 80 42 */	lis r7, StmEhOutBuf@ha
+/* 800F601C 000F0F1C  3D 20 80 0F */	lis r9, __OSStateEventHandler@ha
+/* 800F6020 000F0F20  80 6D 9C 4C */	lwz r3, StmEhDesc-_SDA_BASE_(r13)
+/* 800F6024 000F0F24  38 A5 0C 00 */	addi r5, r5, StmEhInBuf@l
+/* 800F6028 000F0F28  38 E7 0C 20 */	addi r7, r7, StmEhOutBuf@l
+/* 800F602C 000F0F2C  39 29 64 58 */	addi r9, r9, __OSStateEventHandler@l
+/* 800F6030 000F0F30  38 80 10 00 */	li r4, 0x1000
+/* 800F6034 000F0F34  38 C0 00 20 */	li r6, 0x20
+/* 800F6038 000F0F38  39 00 00 20 */	li r8, 0x20
+/* 800F603C 000F0F3C  39 40 00 00 */	li r10, 0
+/* 800F6040 000F0F40  4B FE F0 71 */	bl IOS_IoctlAsync
+/* 800F6044 000F0F44  2C 03 00 00 */	cmpwi r3, 0
+/* 800F6048 000F0F48  40 82 00 10 */	bne lbl_800F6058
+/* 800F604C 000F0F4C  38 00 00 01 */	li r0, 1
+/* 800F6050 000F0F50  90 0D 9C 50 */	stw r0, StmEhRegistered-_SDA_BASE_(r13)
+/* 800F6054 000F0F54  48 00 00 0C */	b lbl_800F6060
+lbl_800F6058:
+/* 800F6058 000F0F58  38 00 00 00 */	li r0, 0
+/* 800F605C 000F0F5C  90 0D 9C 50 */	stw r0, StmEhRegistered-_SDA_BASE_(r13)
+lbl_800F6060:
+/* 800F6060 000F0F60  7F E3 FB 78 */	mr r3, r31
+/* 800F6064 000F0F64  4B FF B8 85 */	bl OSRestoreInterrupts
+lbl_800F6068:
+/* 800F6068 000F0F68  7F C3 F3 78 */	mr r3, r30
+/* 800F606C 000F0F6C  4B FF B8 7D */	bl OSRestoreInterrupts
+/* 800F6070 000F0F70  83 E1 00 1C */	lwz r31, 0x1c(r1)
+/* 800F6074 000F0F74  7F A3 EB 78 */	mr r3, r29
+/* 800F6078 000F0F78  83 C1 00 18 */	lwz r30, 0x18(r1)
+/* 800F607C 000F0F7C  83 A1 00 14 */	lwz r29, 0x14(r1)
+/* 800F6080 000F0F80  80 01 00 24 */	lwz r0, 0x24(r1)
+/* 800F6084 000F0F84  7C 08 03 A6 */	mtlr r0
+/* 800F6088 000F0F88  38 21 00 20 */	addi r1, r1, 0x20
+/* 800F608C 000F0F8C  4E 80 00 20 */	blr 
+
+.global __OSInitSTM
+__OSInitSTM:
+/* 800F6090 000F0F90  94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 800F6094 000F0F94  7C 08 02 A6 */	mflr r0
+/* 800F6098 000F0F98  3C 80 80 0F */	lis r4, __OSDefaultPowerCallback@ha
+/* 800F609C 000F0F9C  3C 60 80 0F */	lis r3, __OSDefaultResetCallback@ha
+/* 800F60A0 000F0FA0  90 01 00 14 */	stw r0, 0x14(r1)
+/* 800F60A4 000F0FA4  38 84 64 54 */	addi r4, r4, __OSDefaultPowerCallback@l
+/* 800F60A8 000F0FA8  38 63 64 50 */	addi r3, r3, __OSDefaultResetCallback@l
+/* 800F60AC 000F0FAC  93 E1 00 0C */	stw r31, 0xc(r1)
+/* 800F60B0 000F0FB0  3B E0 00 00 */	li r31, 0
+/* 800F60B4 000F0FB4  93 C1 00 08 */	stw r30, 8(r1)
+/* 800F60B8 000F0FB8  80 0D 9C 44 */	lwz r0, StmReady-_SDA_BASE_(r13)
+/* 800F60BC 000F0FBC  90 8D 9C 58 */	stw r4, PowerCallback-_SDA_BASE_(r13)
+/* 800F60C0 000F0FC0  2C 00 00 00 */	cmpwi r0, 0
+/* 800F60C4 000F0FC4  90 6D 9C 5C */	stw r3, ResetCallback-_SDA_BASE_(r13)
+/* 800F60C8 000F0FC8  93 ED 9C 40 */	stw r31, ResetDown-_SDA_BASE_(r13)
+/* 800F60CC 000F0FCC  41 82 00 0C */	beq lbl_800F60D8
+/* 800F60D0 000F0FD0  38 60 00 01 */	li r3, 1
+/* 800F60D4 000F0FD4  48 00 00 BC */	b lbl_800F6190
+lbl_800F60D8:
+/* 800F60D8 000F0FD8  3C 60 80 3B */	lis r3, lbl_803A9110@ha
+/* 800F60DC 000F0FDC  93 ED 9C 54 */	stw r31, StmVdInUse-_SDA_BASE_(r13)
+/* 800F60E0 000F0FE0  38 80 00 00 */	li r4, 0
+/* 800F60E4 000F0FE4  38 63 91 10 */	addi r3, r3, lbl_803A9110@l
+/* 800F60E8 000F0FE8  4B FE E7 69 */	bl IOS_Open
+/* 800F60EC 000F0FEC  2C 03 00 00 */	cmpwi r3, 0
+/* 800F60F0 000F0FF0  90 6D 9C 48 */	stw r3, StmImDesc-_SDA_BASE_(r13)
+/* 800F60F4 000F0FF4  40 80 00 10 */	bge lbl_800F6104
+/* 800F60F8 000F0FF8  93 ED 9C 44 */	stw r31, StmReady-_SDA_BASE_(r13)
+/* 800F60FC 000F0FFC  38 60 00 00 */	li r3, 0
+/* 800F6100 000F1000  48 00 00 90 */	b lbl_800F6190
+lbl_800F6104:
+/* 800F6104 000F1004  3C 60 80 3B */	lis r3, lbl_803A9124@ha
+/* 800F6108 000F1008  38 80 00 00 */	li r4, 0
+/* 800F610C 000F100C  38 63 91 24 */	addi r3, r3, lbl_803A9124@l
+/* 800F6110 000F1010  4B FE E7 41 */	bl IOS_Open
+/* 800F6114 000F1014  2C 03 00 00 */	cmpwi r3, 0
+/* 800F6118 000F1018  90 6D 9C 4C */	stw r3, StmEhDesc-_SDA_BASE_(r13)
+/* 800F611C 000F101C  40 80 00 10 */	bge lbl_800F612C
+/* 800F6120 000F1020  93 ED 9C 44 */	stw r31, StmReady-_SDA_BASE_(r13)
+/* 800F6124 000F1024  38 60 00 00 */	li r3, 0
+/* 800F6128 000F1028  48 00 00 68 */	b lbl_800F6190
+lbl_800F612C:
+/* 800F612C 000F102C  4B FF B7 95 */	bl OSDisableInterrupts
+/* 800F6130 000F1030  7C 7E 1B 78 */	mr r30, r3
+/* 800F6134 000F1034  3C A0 80 42 */	lis r5, StmEhInBuf@ha
+/* 800F6138 000F1038  3C E0 80 42 */	lis r7, StmEhOutBuf@ha
+/* 800F613C 000F103C  3D 20 80 0F */	lis r9, __OSStateEventHandler@ha
+/* 800F6140 000F1040  80 6D 9C 4C */	lwz r3, StmEhDesc-_SDA_BASE_(r13)
+/* 800F6144 000F1044  38 A5 0C 00 */	addi r5, r5, StmEhInBuf@l
+/* 800F6148 000F1048  38 E7 0C 20 */	addi r7, r7, StmEhOutBuf@l
+/* 800F614C 000F104C  39 29 64 58 */	addi r9, r9, __OSStateEventHandler@l
+/* 800F6150 000F1050  38 80 10 00 */	li r4, 0x1000
+/* 800F6154 000F1054  38 C0 00 20 */	li r6, 0x20
+/* 800F6158 000F1058  39 00 00 20 */	li r8, 0x20
+/* 800F615C 000F105C  39 40 00 00 */	li r10, 0
+/* 800F6160 000F1060  4B FE EF 51 */	bl IOS_IoctlAsync
+/* 800F6164 000F1064  2C 03 00 00 */	cmpwi r3, 0
+/* 800F6168 000F1068  40 82 00 10 */	bne lbl_800F6178
+/* 800F616C 000F106C  38 00 00 01 */	li r0, 1
+/* 800F6170 000F1070  90 0D 9C 50 */	stw r0, StmEhRegistered-_SDA_BASE_(r13)
+/* 800F6174 000F1074  48 00 00 08 */	b lbl_800F617C
+lbl_800F6178:
+/* 800F6178 000F1078  93 ED 9C 50 */	stw r31, StmEhRegistered-_SDA_BASE_(r13)
+lbl_800F617C:
+/* 800F617C 000F107C  7F C3 F3 78 */	mr r3, r30
+/* 800F6180 000F1080  4B FF B7 69 */	bl OSRestoreInterrupts
+/* 800F6184 000F1084  38 00 00 01 */	li r0, 1
+/* 800F6188 000F1088  38 60 00 01 */	li r3, 1
+/* 800F618C 000F108C  90 0D 9C 44 */	stw r0, StmReady-_SDA_BASE_(r13)
+lbl_800F6190:
+/* 800F6190 000F1090  80 01 00 14 */	lwz r0, 0x14(r1)
+/* 800F6194 000F1094  83 E1 00 0C */	lwz r31, 0xc(r1)
+/* 800F6198 000F1098  83 C1 00 08 */	lwz r30, 8(r1)
+/* 800F619C 000F109C  7C 08 03 A6 */	mtlr r0
+/* 800F61A0 000F10A0  38 21 00 10 */	addi r1, r1, 0x10
+/* 800F61A4 000F10A4  4E 80 00 20 */	blr 
+
+.global __OSShutdownToSBY
+__OSShutdownToSBY:
+/* 800F61A8 000F10A8  94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 800F61AC 000F10AC  7C 08 02 A6 */	mflr r0
+/* 800F61B0 000F10B0  3C 60 CC 00 */	lis r3, 0xCC002002@ha
+/* 800F61B4 000F10B4  90 01 00 14 */	stw r0, 0x14(r1)
+/* 800F61B8 000F10B8  38 00 00 00 */	li r0, 0
+/* 800F61BC 000F10BC  B0 03 20 02 */	sth r0, 0xCC002002@l(r3)
+/* 800F61C0 000F10C0  80 0D 9C 44 */	lwz r0, StmReady-_SDA_BASE_(r13)
+/* 800F61C4 000F10C4  2C 00 00 00 */	cmpwi r0, 0
+/* 800F61C8 000F10C8  40 82 00 20 */	bne lbl_800F61E8
+/* 800F61CC 000F10CC  3C 60 80 3B */	lis r3, lbl_803A9138@ha
+/* 800F61D0 000F10D0  3C A0 80 3B */	lis r5, lbl_803A9144@ha
+/* 800F61D4 000F10D4  38 63 91 38 */	addi r3, r3, lbl_803A9138@l
+/* 800F61D8 000F10D8  38 80 01 14 */	li r4, 0x114
+/* 800F61DC 000F10DC  38 A5 91 44 */	addi r5, r5, lbl_803A9144@l
+/* 800F61E0 000F10E0  4C C6 31 82 */	crclr 6
+/* 800F61E4 000F10E4  4B FF 8D C5 */	bl OSPanic
+lbl_800F61E8:
+/* 800F61E8 000F10E8  3C 80 80 42 */	lis r4, StmImInBuf@ha
+/* 800F61EC 000F10EC  38 00 00 00 */	li r0, 0
+/* 800F61F0 000F10F0  3C E0 80 42 */	lis r7, StmImOutBuf@ha
+/* 800F61F4 000F10F4  90 04 0C 40 */	stw r0, StmImInBuf@l(r4)
+/* 800F61F8 000F10F8  38 A4 0C 40 */	addi r5, r4, 0xc40
+/* 800F61FC 000F10FC  80 6D 9C 48 */	lwz r3, StmImDesc-_SDA_BASE_(r13)
+/* 800F6200 000F1100  38 E7 0C 60 */	addi r7, r7, StmImOutBuf@l
+/* 800F6204 000F1104  38 80 20 03 */	li r4, 0x2003
+/* 800F6208 000F1108  38 C0 00 20 */	li r6, 0x20
+/* 800F620C 000F110C  39 00 00 20 */	li r8, 0x20
+/* 800F6210 000F1110  4B FE EF D9 */	bl IOS_Ioctl
+/* 800F6214 000F1114  4B FF B6 AD */	bl OSDisableInterrupts
+/* 800F6218 000F1118  4B FF 80 31 */	bl ICFlashInvalidate
+lbl_800F621C:
+/* 800F621C 000F111C  48 00 00 00 */	b lbl_800F621C
+
+.global __OSHotReset
+__OSHotReset:
+/* 800F6220 000F1120  94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 800F6224 000F1124  7C 08 02 A6 */	mflr r0
+/* 800F6228 000F1128  3C 60 CC 00 */	lis r3, 0xCC002002@ha
+/* 800F622C 000F112C  90 01 00 14 */	stw r0, 0x14(r1)
+/* 800F6230 000F1130  38 00 00 00 */	li r0, 0
+/* 800F6234 000F1134  B0 03 20 02 */	sth r0, 0xCC002002@l(r3)
+/* 800F6238 000F1138  80 0D 9C 44 */	lwz r0, StmReady-_SDA_BASE_(r13)
+/* 800F623C 000F113C  2C 00 00 00 */	cmpwi r0, 0
+/* 800F6240 000F1140  40 82 00 20 */	bne lbl_800F6260
+/* 800F6244 000F1144  3C 60 80 3B */	lis r3, lbl_803A9138@ha
+/* 800F6248 000F1148  3C A0 80 3B */	lis r5, lbl_803A917C@ha
+/* 800F624C 000F114C  38 63 91 38 */	addi r3, r3, lbl_803A9138@l
+/* 800F6250 000F1150  38 80 01 54 */	li r4, 0x154
+/* 800F6254 000F1154  38 A5 91 7C */	addi r5, r5, lbl_803A917C@l
+/* 800F6258 000F1158  4C C6 31 82 */	crclr 6
+/* 800F625C 000F115C  4B FF 8D 4D */	bl OSPanic
+lbl_800F6260:
+/* 800F6260 000F1160  3C A0 80 42 */	lis r5, StmImInBuf@ha
+/* 800F6264 000F1164  3C E0 80 42 */	lis r7, StmImOutBuf@ha
+/* 800F6268 000F1168  80 6D 9C 48 */	lwz r3, StmImDesc-_SDA_BASE_(r13)
+/* 800F626C 000F116C  38 A5 0C 40 */	addi r5, r5, StmImInBuf@l
+/* 800F6270 000F1170  38 E7 0C 60 */	addi r7, r7, StmImOutBuf@l
+/* 800F6274 000F1174  38 80 20 01 */	li r4, 0x2001
+/* 800F6278 000F1178  38 C0 00 20 */	li r6, 0x20
+/* 800F627C 000F117C  39 00 00 20 */	li r8, 0x20
+/* 800F6280 000F1180  4B FE EF 69 */	bl IOS_Ioctl
+/* 800F6284 000F1184  4B FF B6 3D */	bl OSDisableInterrupts
+/* 800F6288 000F1188  4B FF 7F C1 */	bl ICFlashInvalidate
+lbl_800F628C:
+/* 800F628C 000F118C  48 00 00 00 */	b lbl_800F628C
+
+.global __OSSetVIForceDimming
+__OSSetVIForceDimming:
+/* 800F6290 000F1190  94 21 FF E0 */	stwu r1, -0x20(r1)
+/* 800F6294 000F1194  7C 08 02 A6 */	mflr r0
+/* 800F6298 000F1198  90 01 00 24 */	stw r0, 0x24(r1)
+/* 800F629C 000F119C  93 E1 00 1C */	stw r31, 0x1c(r1)
+/* 800F62A0 000F11A0  7C BF 2B 78 */	mr r31, r5
+/* 800F62A4 000F11A4  93 C1 00 18 */	stw r30, 0x18(r1)
+/* 800F62A8 000F11A8  7C 9E 23 78 */	mr r30, r4
+/* 800F62AC 000F11AC  93 A1 00 14 */	stw r29, 0x14(r1)
+/* 800F62B0 000F11B0  7C 7D 1B 78 */	mr r29, r3
+/* 800F62B4 000F11B4  80 0D 9C 44 */	lwz r0, StmReady-_SDA_BASE_(r13)
+/* 800F62B8 000F11B8  2C 00 00 00 */	cmpwi r0, 0
+/* 800F62BC 000F11BC  40 82 00 0C */	bne lbl_800F62C8
+/* 800F62C0 000F11C0  38 60 FF F6 */	li r3, -10
+/* 800F62C4 000F11C4  48 00 00 A8 */	b lbl_800F636C
+lbl_800F62C8:
+/* 800F62C8 000F11C8  4B FF B5 F9 */	bl OSDisableInterrupts
+/* 800F62CC 000F11CC  80 0D 9C 54 */	lwz r0, StmVdInUse-_SDA_BASE_(r13)
+/* 800F62D0 000F11D0  2C 00 00 00 */	cmpwi r0, 0
+/* 800F62D4 000F11D4  41 82 00 10 */	beq lbl_800F62E4
+/* 800F62D8 000F11D8  4B FF B6 11 */	bl OSRestoreInterrupts
+/* 800F62DC 000F11DC  38 60 00 00 */	li r3, 0
+/* 800F62E0 000F11E0  48 00 00 8C */	b lbl_800F636C
+lbl_800F62E4:
+/* 800F62E4 000F11E4  38 00 00 01 */	li r0, 1
+/* 800F62E8 000F11E8  90 0D 9C 54 */	stw r0, StmVdInUse-_SDA_BASE_(r13)
+/* 800F62EC 000F11EC  4B FF B5 FD */	bl OSRestoreInterrupts
+/* 800F62F0 000F11F0  57 A0 38 30 */	slwi r0, r29, 7
+/* 800F62F4 000F11F4  3C 60 80 42 */	lis r3, StmVdInBuf@ha
+/* 800F62F8 000F11F8  7C 04 FB 78 */	or r4, r0, r31
+/* 800F62FC 000F11FC  3C E0 80 42 */	lis r7, StmVdOutBuf@ha
+/* 800F6300 000F1200  57 C0 18 38 */	slwi r0, r30, 3
+/* 800F6304 000F1204  38 A3 0C 80 */	addi r5, r3, StmVdInBuf@l
+/* 800F6308 000F1208  39 80 00 00 */	li r12, 0
+/* 800F630C 000F120C  39 60 FF FF */	li r11, -1
+/* 800F6310 000F1210  7C 84 03 78 */	or r4, r4, r0
+/* 800F6314 000F1214  3C 00 FF FF */	lis r0, 0xffff
+/* 800F6318 000F1218  90 83 0C 80 */	stw r4, 0xc80(r3)
+/* 800F631C 000F121C  3D 20 80 0F */	lis r9, __OSVIDimReplyHandler@ha
+/* 800F6320 000F1220  80 6D 9C 48 */	lwz r3, StmImDesc-_SDA_BASE_(r13)
+/* 800F6324 000F1224  38 E7 0C A0 */	addi r7, r7, StmVdOutBuf@l
+/* 800F6328 000F1228  91 85 00 04 */	stw r12, 4(r5)
+/* 800F632C 000F122C  39 29 64 40 */	addi r9, r9, __OSVIDimReplyHandler@l
+/* 800F6330 000F1230  38 80 50 01 */	li r4, 0x5001
+/* 800F6334 000F1234  38 C0 00 20 */	li r6, 0x20
+/* 800F6338 000F1238  91 85 00 08 */	stw r12, 8(r5)
+/* 800F633C 000F123C  39 00 00 20 */	li r8, 0x20
+/* 800F6340 000F1240  39 40 00 00 */	li r10, 0
+/* 800F6344 000F1244  91 85 00 0C */	stw r12, 0xc(r5)
+/* 800F6348 000F1248  91 85 00 10 */	stw r12, 0x10(r5)
+/* 800F634C 000F124C  91 65 00 14 */	stw r11, 0x14(r5)
+/* 800F6350 000F1250  90 05 00 18 */	stw r0, 0x18(r5)
+/* 800F6354 000F1254  91 85 00 1C */	stw r12, 0x1c(r5)
+/* 800F6358 000F1258  4B FE ED 59 */	bl IOS_IoctlAsync
+/* 800F635C 000F125C  2C 03 00 00 */	cmpwi r3, 0
+/* 800F6360 000F1260  41 82 00 08 */	beq lbl_800F6368
+/* 800F6364 000F1264  48 00 00 08 */	b lbl_800F636C
+lbl_800F6368:
+/* 800F6368 000F1268  38 60 00 01 */	li r3, 1
+lbl_800F636C:
+/* 800F636C 000F126C  80 01 00 24 */	lwz r0, 0x24(r1)
+/* 800F6370 000F1270  83 E1 00 1C */	lwz r31, 0x1c(r1)
+/* 800F6374 000F1274  83 C1 00 18 */	lwz r30, 0x18(r1)
+/* 800F6378 000F1278  83 A1 00 14 */	lwz r29, 0x14(r1)
+/* 800F637C 000F127C  7C 08 03 A6 */	mtlr r0
+/* 800F6380 000F1280  38 21 00 20 */	addi r1, r1, 0x20
+/* 800F6384 000F1284  4E 80 00 20 */	blr 
+
+.global __OSSetIdleLEDMode
+__OSSetIdleLEDMode:
+/* 800F6388 000F1288  80 0D 9C 44 */	lwz r0, StmReady-_SDA_BASE_(r13)
+/* 800F638C 000F128C  2C 00 00 00 */	cmpwi r0, 0
+/* 800F6390 000F1290  40 82 00 0C */	bne lbl_800F639C
+/* 800F6394 000F1294  38 60 FF FA */	li r3, -6
+/* 800F6398 000F1298  4E 80 00 20 */	blr 
+lbl_800F639C:
+/* 800F639C 000F129C  3C 80 80 42 */	lis r4, StmImInBuf@ha
+/* 800F63A0 000F12A0  3C E0 80 42 */	lis r7, StmImOutBuf@ha
+/* 800F63A4 000F12A4  90 64 0C 40 */	stw r3, StmImInBuf@l(r4)
+/* 800F63A8 000F12A8  38 A4 0C 40 */	addi r5, r4, 0xc40
+/* 800F63AC 000F12AC  80 6D 9C 48 */	lwz r3, StmImDesc-_SDA_BASE_(r13)
+/* 800F63B0 000F12B0  38 E7 0C 60 */	addi r7, r7, StmImOutBuf@l
+/* 800F63B4 000F12B4  38 80 60 02 */	li r4, 0x6002
+/* 800F63B8 000F12B8  38 C0 00 20 */	li r6, 0x20
+/* 800F63BC 000F12BC  39 00 00 20 */	li r8, 0x20
+/* 800F63C0 000F12C0  4B FE EE 28 */	b IOS_Ioctl
+/* 800F63C4 000F12C4  4E 80 00 20 */	blr 
+
+.global __OSUnRegisterStateEvent
+__OSUnRegisterStateEvent:
+/* 800F63C8 000F12C8  94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 800F63CC 000F12CC  7C 08 02 A6 */	mflr r0
+/* 800F63D0 000F12D0  90 01 00 14 */	stw r0, 0x14(r1)
+/* 800F63D4 000F12D4  80 0D 9C 50 */	lwz r0, StmEhRegistered-_SDA_BASE_(r13)
+/* 800F63D8 000F12D8  2C 00 00 00 */	cmpwi r0, 0
+/* 800F63DC 000F12DC  40 82 00 0C */	bne lbl_800F63E8
+/* 800F63E0 000F12E0  38 60 00 00 */	li r3, 0
+/* 800F63E4 000F12E4  48 00 00 4C */	b lbl_800F6430
+lbl_800F63E8:
+/* 800F63E8 000F12E8  80 0D 9C 44 */	lwz r0, StmReady-_SDA_BASE_(r13)
+/* 800F63EC 000F12EC  2C 00 00 00 */	cmpwi r0, 0
+/* 800F63F0 000F12F0  40 82 00 0C */	bne lbl_800F63FC
+/* 800F63F4 000F12F4  38 60 FF FA */	li r3, -6
+/* 800F63F8 000F12F8  48 00 00 38 */	b lbl_800F6430
+lbl_800F63FC:
+/* 800F63FC 000F12FC  3C A0 80 42 */	lis r5, StmImInBuf@ha
+/* 800F6400 000F1300  3C E0 80 42 */	lis r7, StmImOutBuf@ha
+/* 800F6404 000F1304  80 6D 9C 48 */	lwz r3, StmImDesc-_SDA_BASE_(r13)
+/* 800F6408 000F1308  38 A5 0C 40 */	addi r5, r5, StmImInBuf@l
+/* 800F640C 000F130C  38 E7 0C 60 */	addi r7, r7, StmImOutBuf@l
+/* 800F6410 000F1310  38 80 30 02 */	li r4, 0x3002
+/* 800F6414 000F1314  38 C0 00 20 */	li r6, 0x20
+/* 800F6418 000F1318  39 00 00 20 */	li r8, 0x20
+/* 800F641C 000F131C  4B FE ED CD */	bl IOS_Ioctl
+/* 800F6420 000F1320  2C 03 00 00 */	cmpwi r3, 0
+/* 800F6424 000F1324  40 82 00 0C */	bne lbl_800F6430
+/* 800F6428 000F1328  38 00 00 00 */	li r0, 0
+/* 800F642C 000F132C  90 0D 9C 50 */	stw r0, StmEhRegistered-_SDA_BASE_(r13)
+lbl_800F6430:
+/* 800F6430 000F1330  80 01 00 14 */	lwz r0, 0x14(r1)
+/* 800F6434 000F1334  7C 08 03 A6 */	mtlr r0
+/* 800F6438 000F1338  38 21 00 10 */	addi r1, r1, 0x10
+/* 800F643C 000F133C  4E 80 00 20 */	blr 
+
+.global __OSVIDimReplyHandler
+__OSVIDimReplyHandler:
+/* 800F6440 000F1340  38 00 00 00 */	li r0, 0
+/* 800F6444 000F1344  38 60 00 00 */	li r3, 0
+/* 800F6448 000F1348  90 0D 9C 54 */	stw r0, StmVdInUse-_SDA_BASE_(r13)
+/* 800F644C 000F134C  4E 80 00 20 */	blr 
+
+.global __OSDefaultResetCallback
+__OSDefaultResetCallback:
+/* 800F6450 000F1350  4E 80 00 20 */	blr 
+
+.global __OSDefaultPowerCallback
+__OSDefaultPowerCallback:
+/* 800F6454 000F1354  4E 80 00 20 */	blr 
+
+.global __OSStateEventHandler
+__OSStateEventHandler:
+/* 800F6458 000F1358  94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 800F645C 000F135C  7C 08 02 A6 */	mflr r0
+/* 800F6460 000F1360  2C 03 00 00 */	cmpwi r3, 0
+/* 800F6464 000F1364  90 01 00 14 */	stw r0, 0x14(r1)
+/* 800F6468 000F1368  93 E1 00 0C */	stw r31, 0xc(r1)
+/* 800F646C 000F136C  41 82 00 20 */	beq lbl_800F648C
+/* 800F6470 000F1370  3C 60 80 3B */	lis r3, lbl_803A9138@ha
+/* 800F6474 000F1374  3C A0 80 3B */	lis r5, lbl_803A91B4@ha
+/* 800F6478 000F1378  38 63 91 38 */	addi r3, r3, lbl_803A9138@l
+/* 800F647C 000F137C  38 80 02 EC */	li r4, 0x2ec
+/* 800F6480 000F1380  38 A5 91 B4 */	addi r5, r5, lbl_803A91B4@l
+/* 800F6484 000F1384  4C C6 31 82 */	crclr 6
+/* 800F6488 000F1388  4B FF 8B 21 */	bl OSPanic
+lbl_800F648C:
+/* 800F648C 000F138C  3C 60 80 42 */	lis r3, StmEhOutBuf@ha
+/* 800F6490 000F1390  38 00 00 00 */	li r0, 0
+/* 800F6494 000F1394  80 63 0C 20 */	lwz r3, StmEhOutBuf@l(r3)
+/* 800F6498 000F1398  90 0D 9C 50 */	stw r0, StmEhRegistered-_SDA_BASE_(r13)
+/* 800F649C 000F139C  3C 03 FF FE */	addis r0, r3, 0xfffe
+/* 800F64A0 000F13A0  28 00 00 00 */	cmplwi r0, 0
+/* 800F64A4 000F13A4  40 82 00 B4 */	bne lbl_800F6558
+/* 800F64A8 000F13A8  3C 60 CC 00 */	lis r3, 0xCC003000@ha
+/* 800F64AC 000F13AC  80 03 30 00 */	lwz r0, 0xCC003000@l(r3)
+/* 800F64B0 000F13B0  54 00 03 DF */	rlwinm. r0, r0, 0, 0xf, 0xf
+/* 800F64B4 000F13B4  40 82 00 0C */	bne lbl_800F64C0
+/* 800F64B8 000F13B8  38 00 00 01 */	li r0, 1
+/* 800F64BC 000F13BC  48 00 00 08 */	b lbl_800F64C4
+lbl_800F64C0:
+/* 800F64C0 000F13C0  38 00 00 00 */	li r0, 0
+lbl_800F64C4:
+/* 800F64C4 000F13C4  2C 00 00 00 */	cmpwi r0, 0
+/* 800F64C8 000F13C8  41 82 00 34 */	beq lbl_800F64FC
+/* 800F64CC 000F13CC  4B FF B3 F5 */	bl OSDisableInterrupts
+/* 800F64D0 000F13D0  3C 80 80 0F */	lis r4, __OSDefaultResetCallback@ha
+/* 800F64D4 000F13D4  81 8D 9C 5C */	lwz r12, ResetCallback-_SDA_BASE_(r13)
+/* 800F64D8 000F13D8  38 84 64 50 */	addi r4, r4, __OSDefaultResetCallback@l
+/* 800F64DC 000F13DC  38 00 00 01 */	li r0, 1
+/* 800F64E0 000F13E0  7C 7F 1B 78 */	mr r31, r3
+/* 800F64E4 000F13E4  90 0D 9C 40 */	stw r0, ResetDown-_SDA_BASE_(r13)
+/* 800F64E8 000F13E8  90 8D 9C 5C */	stw r4, ResetCallback-_SDA_BASE_(r13)
+/* 800F64EC 000F13EC  7D 89 03 A6 */	mtctr r12
+/* 800F64F0 000F13F0  4E 80 04 21 */	bctrl 
+/* 800F64F4 000F13F4  7F E3 FB 78 */	mr r3, r31
+/* 800F64F8 000F13F8  4B FF B3 F1 */	bl OSRestoreInterrupts
+lbl_800F64FC:
+/* 800F64FC 000F13FC  4B FF B3 C5 */	bl OSDisableInterrupts
+/* 800F6500 000F1400  7C 7F 1B 78 */	mr r31, r3
+/* 800F6504 000F1404  3C A0 80 42 */	lis r5, StmEhInBuf@ha
+/* 800F6508 000F1408  3C E0 80 42 */	lis r7, StmEhOutBuf@ha
+/* 800F650C 000F140C  3D 20 80 0F */	lis r9, __OSStateEventHandler@ha
+/* 800F6510 000F1410  80 6D 9C 4C */	lwz r3, StmEhDesc-_SDA_BASE_(r13)
+/* 800F6514 000F1414  38 A5 0C 00 */	addi r5, r5, StmEhInBuf@l
+/* 800F6518 000F1418  38 E7 0C 20 */	addi r7, r7, StmEhOutBuf@l
+/* 800F651C 000F141C  39 29 64 58 */	addi r9, r9, __OSStateEventHandler@l
+/* 800F6520 000F1420  38 80 10 00 */	li r4, 0x1000
+/* 800F6524 000F1424  38 C0 00 20 */	li r6, 0x20
+/* 800F6528 000F1428  39 00 00 20 */	li r8, 0x20
+/* 800F652C 000F142C  39 40 00 00 */	li r10, 0
+/* 800F6530 000F1430  4B FE EB 81 */	bl IOS_IoctlAsync
+/* 800F6534 000F1434  2C 03 00 00 */	cmpwi r3, 0
+/* 800F6538 000F1438  40 82 00 10 */	bne lbl_800F6548
+/* 800F653C 000F143C  38 00 00 01 */	li r0, 1
+/* 800F6540 000F1440  90 0D 9C 50 */	stw r0, StmEhRegistered-_SDA_BASE_(r13)
+/* 800F6544 000F1444  48 00 00 0C */	b lbl_800F6550
+lbl_800F6548:
+/* 800F6548 000F1448  38 00 00 00 */	li r0, 0
+/* 800F654C 000F144C  90 0D 9C 50 */	stw r0, StmEhRegistered-_SDA_BASE_(r13)
+lbl_800F6550:
+/* 800F6550 000F1450  7F E3 FB 78 */	mr r3, r31
+/* 800F6554 000F1454  4B FF B3 95 */	bl OSRestoreInterrupts
+lbl_800F6558:
+/* 800F6558 000F1458  3C 60 80 42 */	lis r3, StmEhOutBuf@ha
+/* 800F655C 000F145C  80 03 0C 20 */	lwz r0, StmEhOutBuf@l(r3)
+/* 800F6560 000F1460  28 00 08 00 */	cmplwi r0, 0x800
+/* 800F6564 000F1464  40 82 00 2C */	bne lbl_800F6590
+/* 800F6568 000F1468  4B FF B3 59 */	bl OSDisableInterrupts
+/* 800F656C 000F146C  3C 80 80 0F */	lis r4, __OSDefaultPowerCallback@ha
+/* 800F6570 000F1470  81 8D 9C 58 */	lwz r12, PowerCallback-_SDA_BASE_(r13)
+/* 800F6574 000F1474  38 84 64 54 */	addi r4, r4, __OSDefaultPowerCallback@l
+/* 800F6578 000F1478  7C 7F 1B 78 */	mr r31, r3
+/* 800F657C 000F147C  90 8D 9C 58 */	stw r4, PowerCallback-_SDA_BASE_(r13)
+/* 800F6580 000F1480  7D 89 03 A6 */	mtctr r12
+/* 800F6584 000F1484  4E 80 04 21 */	bctrl 
+/* 800F6588 000F1488  7F E3 FB 78 */	mr r3, r31
+/* 800F658C 000F148C  4B FF B3 5D */	bl OSRestoreInterrupts
+lbl_800F6590:
+/* 800F6590 000F1490  83 E1 00 0C */	lwz r31, 0xc(r1)
+/* 800F6594 000F1494  38 60 00 00 */	li r3, 0
+/* 800F6598 000F1498  80 01 00 14 */	lwz r0, 0x14(r1)
+/* 800F659C 000F149C  7C 08 03 A6 */	mtlr r0
+/* 800F65A0 000F14A0  38 21 00 10 */	addi r1, r1, 0x10
+/* 800F65A4 000F14A4  4E 80 00 20 */	blr 

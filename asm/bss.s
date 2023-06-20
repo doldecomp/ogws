@@ -4,60 +4,6 @@
 
 .balign 0x8
 
-.global lbl_804140E0
-lbl_804140E0:
-	.skip 0x20
-.global lbl_80414100
-lbl_80414100:
-	.skip 0x50
-.global lbl_80414150
-lbl_80414150:
-	.skip 0x70
-.global lbl_804141C0
-lbl_804141C0:
-	.skip 0xBD00
-.global lbl_8041FEC0
-lbl_8041FEC0:
-	.skip 0x2C8
-.global lbl_80420188
-lbl_80420188:
-	.skip 0x18
-.global lbl_804201A0
-lbl_804201A0:
-	.skip 0x58
-.global lbl_804201F8
-lbl_804201F8:
-	.skip 0x318
-.global lbl_80420510
-lbl_80420510:
-	.skip 0x100
-.global lbl_80420610
-lbl_80420610:
-	.skip 0x5F0
-.global lbl_80420C00
-lbl_80420C00:
-	.skip 0x20
-.global lbl_80420C20
-lbl_80420C20:
-	.skip 0x20
-.global lbl_80420C40
-lbl_80420C40:
-	.skip 0x20
-.global lbl_80420C60
-lbl_80420C60:
-	.skip 0x20
-.global lbl_80420C80
-lbl_80420C80:
-	.skip 0x20
-.global lbl_80420CA0
-lbl_80420CA0:
-	.skip 0x20
-.global lbl_80420CC0
-lbl_80420CC0:
-	.skip 0x200
-.global lbl_80420EC0
-lbl_80420EC0:
-	.skip 0x20
 .global lbl_80420EE0
 lbl_80420EE0:
 	.skip 0x1A0

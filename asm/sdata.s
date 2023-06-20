@@ -4,54 +4,6 @@
 
 .balign 0x8
 
-.global lbl_804BD6B8
-lbl_804BD6B8:
-	.incbin "baserom.dol", 0x3C7338, 0x4
-.global lbl_804BD6BC
-lbl_804BD6BC:
-	.incbin "baserom.dol", 0x3C733C, 0x8
-.global lbl_804BD6C4
-lbl_804BD6C4:
-	.incbin "baserom.dol", 0x3C7344, 0x4
-.global lbl_804BD6C8
-lbl_804BD6C8:
-	.incbin "baserom.dol", 0x3C7348, 0x10
-.global lbl_804BD6D8
-lbl_804BD6D8:
-	.incbin "baserom.dol", 0x3C7358, 0x8
-.global __OSCurrHeap
-__OSCurrHeap:
-	.incbin "baserom.dol", 0x3C7360, 0x8
-.global lbl_804BD6E8
-lbl_804BD6E8:
-	.incbin "baserom.dol", 0x3C7368, 0x4
-.global lbl_804BD6EC
-lbl_804BD6EC:
-	.incbin "baserom.dol", 0x3C736C, 0x4
-.global lbl_804BD6F0
-lbl_804BD6F0:
-	.incbin "baserom.dol", 0x3C7370, 0x4
-.global lbl_804BD6F4
-lbl_804BD6F4:
-	.incbin "baserom.dol", 0x3C7374, 0x4
-.global lbl_804BD6F8
-lbl_804BD6F8:
-	.incbin "baserom.dol", 0x3C7378, 0x8
-.global lbl_804BD700
-lbl_804BD700:
-	.incbin "baserom.dol", 0x3C7380, 0x8
-.global lbl_804BD708
-lbl_804BD708:
-	.incbin "baserom.dol", 0x3C7388, 0x8
-.global lbl_804BD710
-lbl_804BD710:
-	.incbin "baserom.dol", 0x3C7390, 0x8
-.global lbl_804BD718
-lbl_804BD718:
-	.incbin "baserom.dol", 0x3C7398, 0x8
-.global lbl_804BD720
-lbl_804BD720:
-	.incbin "baserom.dol", 0x3C73A0, 0x8
 .global lbl_804BD728
 lbl_804BD728:
 	.incbin "baserom.dol", 0x3C73A8, 0xF0

@@ -1,7 +1,11 @@
 .include "macros.inc"
 
-.section .init, "ax"  # 0x80004000 - 0x800064E0
+.section .sbss, "wa"
+.balign 0x8
+Debug_BBA:
+    .skip 1
 
+.section .init, "ax"
 .global __check_pad3
 __check_pad3:
 /* 800060E8 000021E8  3C 60 80 00 */	lis r3, 0x800030E4@ha
@@ -12,7 +16,7 @@ __check_pad3:
 /* 800060FC 000021FC  38 60 00 00 */	li r3, 0
 /* 80006100 00002200  38 80 00 00 */	li r4, 0
 /* 80006104 00002204  38 A0 00 00 */	li r5, 0
-/* 80006108 00002208  48 0E D2 20 */	b func_800F3328
+/* 80006108 00002208  48 0E D2 20 */	b OSResetSystem
 /* 8000610C 0000220C  4E 80 00 20 */	blr 
 
 .global __set_debug_bba
@@ -124,11 +128,11 @@ lbl_8000626C:
 /* 80006274 00002374  40 82 00 08 */	bne lbl_8000627C
 /* 80006278 00002378  48 0B F7 F9 */	bl InitMetroTRK_BBA
 lbl_8000627C:
-/* 8000627C 0000237C  48 0F 0C D5 */	bl func_800F6F50
+/* 8000627C 0000237C  48 0F 0C D5 */	bl __init_user
 /* 80006280 00002380  7D C3 73 78 */	mr r3, r14
 /* 80006284 00002384  7D E4 7B 78 */	mr r4, r15
 /* 80006288 00002388  48 17 DC 5D */	bl func_80183EE4
-/* 8000628C 0000238C  48 0F 0D 2C */	b lbl_800F6FB8
+/* 8000628C 0000238C  48 0F 0D 2C */	b __fini_cpp
 
 .global __init_registers
 __init_registers:

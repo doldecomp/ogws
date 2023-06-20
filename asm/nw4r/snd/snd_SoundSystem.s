@@ -106,7 +106,7 @@ InitSoundSystem__Q34nw4r3snd11SoundSystemFRCQ44nw4r3snd11SoundSystem16SoundSyste
 /* 80047648 00042548  98 0D 97 88 */	stb r0, lbl_804BEB08-_SDA_BASE_(r13)
 /* 8004764C 0004254C  4B FE 9C 9D */	bl GetInstance__Q44nw4r3snd6detail9AxManagerFv
 /* 80047650 00042550  4B FE 9D 75 */	bl Init__Q44nw4r3snd6detail9AxManagerFv
-/* 80047654 00042554  48 0A F9 B1 */	bl func_800F7004
+/* 80047654 00042554  48 0A F9 B1 */	bl SCInit
 lbl_80047658:
 /* 80047658 00042558  48 0A FA 4D */	bl SCCheckStatus
 /* 8004765C 0004255C  28 03 00 01 */	cmplwi r3, 1

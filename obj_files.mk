@@ -446,7 +446,34 @@ RVL_SDK_O_FILES := \
 	build/asm/revolution/NAND/NANDCore.o \
 	build/asm/revolution/NAND/NANDCheck.o \
 	\
+	build/asm/revolution/OS/OS.o \
+	build/asm/revolution/OS/OSAlarm.o \
+	build/asm/revolution/OS/OSAlloc.o \
+	build/asm/revolution/OS/OSArena.o \
+	build/asm/revolution/OS/OSAudioSystem.o \
+	build/asm/revolution/OS/OSCache.o \
+	build/asm/revolution/OS/OSContext.o \
+	build/asm/revolution/OS/OSError.o \
+	build/asm/revolution/OS/OSExec.o \
+	build/asm/revolution/OS/OSFatal.o \
+	build/asm/revolution/OS/OSFont.o \
+	build/asm/revolution/OS/OSInterrupt.o \
+	build/asm/revolution/OS/OSLink.o \
+	build/asm/revolution/OS/OSMessage.o \
+	build/asm/revolution/OS/OSMemory.o \
+	build/asm/revolution/OS/OSMutex.o \
+	build/asm/revolution/OS/OSReset.o \
+	build/asm/revolution/OS/OSRtc.o \
+	build/asm/revolution/OS/OSSync.o \
+	build/asm/revolution/OS/OSThread.o \
+	build/asm/revolution/OS/OSTime.o \
+	build/asm/revolution/OS/OSUtf.o \
+	build/asm/revolution/OS/OSIpc.o \
+	build/asm/revolution/OS/OSStateTM.o \
 	build/asm/revolution/OS/__start.o \
+	build/asm/revolution/OS/OSPlayRecord.o \
+	build/asm/revolution/OS/OSStateFlags.o \
+	build/asm/revolution/OS/OSNet.o \
 	build/asm/revolution/OS/__ppc_eabi_init.o \
 
 GROUP_1_O_FILES := \
