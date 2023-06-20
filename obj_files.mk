@@ -435,6 +435,12 @@ RVL_SDK_O_FILES := \
 	build/asm/revolution/MEM/mem_allocator.o \
 	build/asm/revolution/MEM/mem_list.o \
 	\
+	build/asm/revolution/MTX/mtx.o \
+	build/asm/revolution/MTX/mtxvec.o \
+	build/asm/revolution/MTX/mtx44.o \
+	build/asm/revolution/MTX/vec.o \
+	build/asm/revolution/MTX/quat.o \
+	\
 	build/asm/revolution/OS/__start.o \
 	build/asm/revolution/OS/__ppc_eabi_init.o \
 
