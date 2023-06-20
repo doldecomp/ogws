@@ -1038,7 +1038,7 @@ lbl_80049524:
 /* 80049534 00044434  3E A0 80 3E */	lis r21, sLoadBuffer__Q44nw4r3snd6detail10StrmPlayer@ha
 /* 80049538 00044438  7E 84 A3 78 */	mr r4, r20
 /* 8004953C 0004443C  38 75 7C 20 */	addi r3, r21, sLoadBuffer__Q44nw4r3snd6detail10StrmPlayer@l
-/* 80049540 00044440  48 0A 4B C5 */	bl func_800EE104
+/* 80049540 00044440  48 0A 4B C5 */	bl DCInvalidateRange
 /* 80049544 00044444  81 97 00 00 */	lwz r12, 0(r23)
 /* 80049548 00044448  7E E3 BB 78 */	mr r3, r23
 /* 8004954C 0004444C  7E C4 B3 78 */	mr r4, r22

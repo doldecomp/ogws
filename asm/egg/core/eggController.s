@@ -1263,7 +1263,7 @@ lbl_800A69DC:
 /* 800A69E4 000A18E4  90 0D 99 74 */	stw r0, sAllocator__Q23EGG27$$2unnamed$$2eggController_cpp$$2-_SDA_BASE_(r13)
 /* 800A69E8 000A18E8  38 63 68 80 */	addi r3, r3, alloc__Q23EGG27$$2unnamed$$2eggController_cpp$$2FUl@l
 /* 800A69EC 000A18EC  38 84 68 98 */	addi r4, r4, free__Q23EGG27$$2unnamed$$2eggController_cpp$$2FPv@l
-/* 800A69F0 000A18F0  48 02 59 55 */	bl func_800CC344
+/* 800A69F0 000A18F0  48 02 59 55 */	bl WPADRegisterAllocator
 /* 800A69F4 000A18F4  48 02 33 29 */	bl KPADInit
 /* 800A69F8 000A18F8  81 9D 00 10 */	lwz r12, 0x10(r29)
 /* 800A69FC 000A18FC  7F A3 EB 78 */	mr r3, r29
@@ -1282,7 +1282,7 @@ lbl_800A69DC:
 lbl_800A6A30:
 /* 800A6A30 000A1930  80 74 00 00 */	lwz r3, 0(r20)
 /* 800A6A34 000A1934  38 95 68 D0 */	addi r4, r21, connectCallback__Q23EGG17CoreControllerMgrFll@l
-/* 800A6A38 000A1938  48 02 6C C5 */	bl func_800CD6FC
+/* 800A6A38 000A1938  48 02 6C C5 */	bl WPADSetConnectCallback
 /* 800A6A3C 000A193C  3A 73 00 01 */	addi r19, r19, 1
 /* 800A6A40 000A1940  3A 94 00 04 */	addi r20, r20, 4
 /* 800A6A44 000A1944  2C 13 00 04 */	cmpwi r19, 4

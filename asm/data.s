@@ -4,75 +4,8 @@
 
 .balign 0x8
 
-.global lbl_80399470
-lbl_80399470:
-	.incbin "baserom.dol", 0x395570, 0x4C
-.global lbl_803994BC
-lbl_803994BC:
-	.incbin "baserom.dol", 0x3955BC, 0x1C
-.global lbl_803994D8
-lbl_803994D8:
-	.incbin "baserom.dol", 0x3955D8, 0x1C
-.global lbl_803994F4
-lbl_803994F4:
-	.incbin "baserom.dol", 0x3955F4, 0x34
-.global lbl_80399528
-lbl_80399528:
-	.incbin "baserom.dol", 0x395628, 0x10
-.global lbl_80399538
-lbl_80399538:
-	.incbin "baserom.dol", 0x395638, 0x28
-.global lbl_80399560
-lbl_80399560:
-	.incbin "baserom.dol", 0x395660, 0x18
-.global lbl_80399578
-lbl_80399578:
-	.incbin "baserom.dol", 0x395678, 0xC
-.global lbl_80399584
-lbl_80399584:
-	.incbin "baserom.dol", 0x395684, 0x38
-.global lbl_803995BC
-lbl_803995BC:
-	.incbin "baserom.dol", 0x3956BC, 0xA4
-.global lbl_80399660
-lbl_80399660:
-	.incbin "baserom.dol", 0x395760, 0x18
-.global lbl_80399678
-lbl_80399678:
-	.incbin "baserom.dol", 0x395778, 0x2C
-.global lbl_803996A4
-lbl_803996A4:
-	.incbin "baserom.dol", 0x3957A4, 0x1C
-.global lbl_803996C0
-lbl_803996C0:
-	.incbin "baserom.dol", 0x3957C0, 0x1C
-.global lbl_803996DC
-lbl_803996DC:
-	.incbin "baserom.dol", 0x3957DC, 0x1C
-.global lbl_803996F8
-lbl_803996F8:
-	.incbin "baserom.dol", 0x3957F8, 0x1C
-.global lbl_80399714
-lbl_80399714:
-	.incbin "baserom.dol", 0x395814, 0x1C
-.global lbl_80399730
-lbl_80399730:
-	.incbin "baserom.dol", 0x395830, 0x28
-.global lbl_80399758
-lbl_80399758:
-	.incbin "baserom.dol", 0x395858, 0x80
-.global lbl_803997D8
-lbl_803997D8:
-	.incbin "baserom.dol", 0x3958D8, 0x290
-.global lbl_80399A68
-lbl_80399A68:
-	.incbin "baserom.dol", 0x395B68, 0xC
-.global lbl_80399A74
-lbl_80399A74:
-	.incbin "baserom.dol", 0x395B74, 0x144
-.global lbl_80399BB8
-lbl_80399BB8:
-	.incbin "baserom.dol", 0x395CB8, 0x1370
+lbl_8039aee0:
+    .string "<< RVL_SDK - EXI \trelease build: Nov 30 2006 03:26:56 (0x4199_60831) >>"
 .global lbl_8039AF28
 lbl_8039AF28:
 	.incbin "baserom.dol", 0x397028, 0x38
