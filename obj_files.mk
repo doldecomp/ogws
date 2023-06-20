@@ -429,6 +429,12 @@ RVL_SDK_O_FILES := \
 	build/asm/revolution/IPC/memory.o \
 	build/asm/revolution/IPC/ipcProfile.o \
 	\
+	build/asm/revolution/MEM/mem_heapCommon.o \
+	build/asm/revolution/MEM/mem_expHeap.o \
+	build/asm/revolution/MEM/mem_frameHeap.o \
+	build/asm/revolution/MEM/mem_allocator.o \
+	build/asm/revolution/MEM/mem_list.o \
+	\
 	build/asm/revolution/OS/__start.o \
 	build/asm/revolution/OS/__ppc_eabi_init.o \
 
