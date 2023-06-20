@@ -389,18 +389,25 @@ METROTRK_O_FILES := \
 RVL_SDK_O_FILES := \
 	build/asm/revolution/NdevExi2AD/DebuggerDriver.o \
 	build/asm/revolution/NdevExi2AD/exi2.o \
+	\
 	build/asm/revolution/KPAD/KPAD.o \
+	\
 	build/asm/revolution/PAD/Pad.o \
+	\
 	build/asm/revolution/WPAD/WPAD.o \
 	build/asm/revolution/WPAD/WPADHIDParser.o \
 	build/asm/revolution/WPAD/WPADEncrypt.o \
 	build/asm/revolution/WPAD/WPADMem.o \
 	build/asm/revolution/WPAD/debug_msg.o \
+	\
 	build/asm/revolution/EUART/euart.o \
+	\
 	build/asm/revolution/EXI/EXIBios.o \
 	build/asm/revolution/EXI/EXIUart.o \
 	build/asm/revolution/EXI/EXICommon.o \
+	\
 	build/asm/revolution/FS/fs.o \
+	\
 	build/asm/revolution/GX/GXInit.o \
 	build/asm/revolution/GX/GXFifo.o \
 	build/asm/revolution/GX/GXAttr.o \
@@ -416,6 +423,12 @@ RVL_SDK_O_FILES := \
 	build/asm/revolution/GX/GXDisplayList.o \
 	build/asm/revolution/GX/GXTransform.o \
 	build/asm/revolution/GX/GXPerf.o \
+	\
+	build/asm/revolution/IPC/ipcMain.o \
+	build/asm/revolution/IPC/ipcclt.o \
+	build/asm/revolution/IPC/memory.o \
+	build/asm/revolution/IPC/ipcProfile.o \
+	\
 	build/asm/revolution/OS/__start.o \
 	build/asm/revolution/OS/__ppc_eabi_init.o \
 
