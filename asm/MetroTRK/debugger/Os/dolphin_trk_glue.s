@@ -67,12 +67,12 @@ TRKUARTInterruptHandler:
 InitializeProgramEndTrap:
 /* 800C5DC4 000C0CC4  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 800C5DC8 000C0CC8  7C 08 02 A6 */	mflr r0
-/* 800C5DCC 000C0CCC  3C 80 80 11 */	lis r4, func_8010AA58@ha
+/* 800C5DCC 000C0CCC  3C 80 80 11 */	lis r4, PPCHalt@ha
 /* 800C5DD0 000C0CD0  3C 60 80 38 */	lis r3, EndofProgramInstruction$159@ha
 /* 800C5DD4 000C0CD4  90 01 00 14 */	stw r0, 0x14(r1)
 /* 800C5DD8 000C0CD8  38 A0 00 04 */	li r5, 4
 /* 800C5DDC 000C0CDC  93 E1 00 0C */	stw r31, 0xc(r1)
-/* 800C5DE0 000C0CE0  3B E4 AA 58 */	addi r31, r4, func_8010AA58@l
+/* 800C5DE0 000C0CE0  3B E4 AA 58 */	addi r31, r4, PPCHalt@l
 /* 800C5DE4 000C0CE4  38 83 C3 68 */	addi r4, r3, EndofProgramInstruction$159@l
 /* 800C5DE8 000C0CE8  38 7F 00 04 */	addi r3, r31, 4
 /* 800C5DEC 000C0CEC  4B F3 E3 79 */	bl TRK_memcpy

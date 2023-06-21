@@ -50,8 +50,11 @@ CFLAGS_RUNTIME := -Cpp_exceptions off -proc gekko -fp hard -O4,s -ir include/Met
 CFLAGS_NW4R := -lang c99 -enum int -inline auto -Cpp_exceptions off -RTTI off -proc gekko -fp hard -O4,p  -ir include/nw4r -I- -Iinclude -ir include/MSL -ir include/revolution -nodefaults
 # Compiler flags for EGG
 CFLAGS_EGG := -lang c99 -enum int -inline auto -Cpp_exceptions off -RTTI off -proc gekko -fp hard -O4,p  -ir include/egg -ir include/nw4r -I- -Iinclude -ir include/MSL -ir include/revolution -nodefaults -rostr -str pool
+
 # Compiler flags for ARC
 CFLAGS_ARC := -lang c99 -enum int -O4,p -inline auto -ipa file -volatileasm -Cpp_exceptions off -RTTI off -proc gekko -fp hard -I- -Iinclude -ir include/MSL -ir include/revolution -nodefaults
+# Compiler flags for BASE
+CFLAGS_BASE := -lang c99 -enum int -O4,p -inline auto -ipa file -volatileasm -Cpp_exceptions off -RTTI off -proc gekko -fp hard -I- -Iinclude -ir include/MSL -ir include/revolution -nodefaults
 
 # elf2dol needs to know these in order to calculate sbss correctly.
 BSS_PDHR := 9
@@ -61,13 +64,14 @@ ASM_DIRS := asm \
 	asm/MetroTRK/debugger/Export asm/MetroTRK/debugger/Os asm/MetroTRK/debugger/Portable asm/MetroTRK/debugger/Processor asm/MetroTRK/gamedev \
 	asm/revolution/NdevExi2AD asm/revolution/KPAD asm/revolution/PAD asm/revolution/WPAD asm/revolution/EUART asm/revolution/EXI asm/revolution/FS \
 	asm/revolution/GX asm/revolution/IPC asm/revolution/MEM asm/revolution/MTX asm/revolution/NAND asm/revolution/OS asm/revolution/SC \
-	asm/revolution/USB asm/revolution/VI asm/revolution/WUD asm/revolution/AI asm/revolution/AX asm/revolution/AXFX \
+	asm/revolution/USB asm/revolution/VI asm/revolution/WUD asm/revolution/AI asm/revolution/ARC asm/revolution/AX asm/revolution/AXFX \
+	asm/revolution/BASE \
 	asm/nw4r/ut asm/nw4r/ef asm/nw4r/math asm/nw4r/snd asm/nw4r/g3d asm/nw4r/lyt \
 	asm/egg/gfx asm/egg/math asm/egg/core asm/egg/audio asm/egg/util
 
-SRC_DIRS := nw4r egg revolution runtime MetroTRK \
-	MetroTRK/debugger MetroTRK/gamedev \
-	revolution/ARC \
+SRC_DIRS := src \
+	revolution nw4r egg runtime MetroTRK \
+	revolution/ARC revolution/BASE \
 	nw4r/ut nw4r/ef nw4r/math nw4r/snd nw4r/g3d nw4r/lyt \
 	egg/math egg/core egg/audio egg/util egg/gfx egg/prim
 
@@ -133,4 +137,8 @@ $(BUILD_DIR)/MetroTRK/%.o: src/MetroTRK/%.c
 
 $(BUILD_DIR)/revolution/ARC/%.o: src/revolution/ARC/%.c
 	$(CC) $(CFLAGS_ARC) -c -o $@ $<
+	$(PPROC) $(PPROCFLAGS) $@
+
+$(BUILD_DIR)/revolution/BASE/%.o: src/revolution/BASE/%.c
+	$(CC) $(CFLAGS_BASE) -c -o $@ $<
 	$(PPROC) $(PPROCFLAGS) $@

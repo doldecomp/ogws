@@ -514,6 +514,8 @@ RVL_SDK_O_FILES := \
 	build/asm/revolution/AXFX/AXFXLfoTable.o \
 	build/asm/revolution/AXFX/AXFXSrcCoef.o \
 	build/asm/revolution/AXFX/AXFXHooks.o \
+	\
+	build/revolution/BASE/PPCArch.o \
 
 GROUP_1_O_FILES := \
 	build/asm/text.o \
