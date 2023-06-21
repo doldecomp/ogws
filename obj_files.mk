@@ -491,10 +491,33 @@ RVL_SDK_O_FILES := \
 	build/asm/revolution/WUD/debug_msg.o \
 	\
 	build/asm/revolution/AI/ai.o \
+	\
+	build/revolution/ARC/arc.o \
+	\
+	build/asm/revolution/AX/AX.o \
+	build/asm/revolution/AX/AXAlloc.o \
+	build/asm/revolution/AX/AXAux.o \
+	build/asm/revolution/AX/AXCL.o \
+	build/asm/revolution/AX/AXOut.o \
+	build/asm/revolution/AX/AXSPB.o \
+	build/asm/revolution/AX/AXVPB.o \
+	build/asm/revolution/AX/AXComp.o \
+	build/asm/revolution/AX/DSPCode.o \
+	build/asm/revolution/AX/AXProf.o \
+	build/asm/revolution/AXFX/AXFXReverbHi.o \
+	build/asm/revolution/AXFX/AXFXReverbHiDpl2.o \
+	build/asm/revolution/AXFX/AXFXReverbHiExp.o \
+	build/asm/revolution/AXFX/AXFXReverbHiExpDpl2.o \
+	build/asm/revolution/AXFX/AXFXDelay.o \
+	build/asm/revolution/AXFX/AXFXChorus.o \
+	build/asm/revolution/AXFX/AXFXChorusExp.o \
+	build/asm/revolution/AXFX/AXFXLfoTable.o \
+	build/asm/revolution/AXFX/AXFXSrcCoef.o \
+	build/asm/revolution/AXFX/AXFXHooks.o \
 
 GROUP_1_O_FILES := \
-	build/revolution/ARC/arc.o \
 	build/asm/text.o \
+	build/asm/text_rp.o \
 	build/asm/data.o \
 	build/asm/sdata.o \
 	build/asm/ctors.o \
