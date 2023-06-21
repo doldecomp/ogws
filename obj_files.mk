@@ -485,9 +485,12 @@ RVL_SDK_O_FILES := \
 	build/asm/revolution/VI/vi.o \
 	build/asm/revolution/VI/i2c.o \
 	build/asm/revolution/VI/vi3in1.o \
+	\
+	build/asm/revolution/WUD/WUD.o \
+	build/asm/revolution/WUD/WUDHidHost.o \
+	build/asm/revolution/WUD/debug_msg.o \
 
 GROUP_1_O_FILES := \
-	build/asm/data.o \
 	build/asm/sdata.o \
 	build/asm/text.o \
 	build/revolution/ARC/arc.o \
