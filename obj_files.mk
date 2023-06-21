@@ -489,15 +489,15 @@ RVL_SDK_O_FILES := \
 	build/asm/revolution/WUD/WUD.o \
 	build/asm/revolution/WUD/WUDHidHost.o \
 	build/asm/revolution/WUD/debug_msg.o \
+	\
+	build/asm/revolution/AI/ai.o \
 
 GROUP_1_O_FILES := \
-	build/asm/sdata.o \
-	build/asm/text.o \
 	build/revolution/ARC/arc.o \
-	build/asm/text_b.o \
-	build/asm/data_b.o \
-	build/asm/sdata_b.o \
-	build/asm/ctors_2.o \
+	build/asm/text.o \
+	build/asm/data.o \
+	build/asm/sdata.o \
+	build/asm/ctors.o \
 	build/asm/file.o \
 	build/asm/rodata.o \
 	build/asm/bss.o \

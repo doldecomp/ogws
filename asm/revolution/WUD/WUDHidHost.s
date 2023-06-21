@@ -12,12 +12,6 @@ lbl_803AB6CC:
 	.string "bta_hh_co_close()\n"
     .balign 4
 
-# TEMP!!!!!!!!!
-.global lbl_803ab6e0
-lbl_803ab6e0:
-	.string "<< RVL_SDK - AI \trelease build: Nov 30 2006 03:26:11 (0x4199_60831) >>"
-	.balign 4
-
 .section .text, "ax"
 .global bta_hh_co_data
 bta_hh_co_data:
