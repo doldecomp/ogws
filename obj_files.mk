@@ -516,6 +516,8 @@ RVL_SDK_O_FILES := \
 	build/asm/revolution/AXFX/AXFXHooks.o \
 	\
 	build/revolution/BASE/PPCArch.o \
+	\
+	build/asm/revolution/BTE/bte_unsplit.o \
 
 GROUP_1_O_FILES := \
 	build/asm/text.o \

@@ -3,54 +3,6 @@
 .section .rodata, "a"  # 0x80375780 - 0x80393A80
 .balign 0x8
 
-.global lbl_8037C658
-lbl_8037C658:
-	.incbin "baserom.dol", 0x378758, 0x18
-.global lbl_8037C670
-lbl_8037C670:
-	.incbin "baserom.dol", 0x378770, 0xA0
-.global lbl_8037C710
-lbl_8037C710:
-	.incbin "baserom.dol", 0x378810, 0x30
-.global lbl_8037C740
-lbl_8037C740:
-	.incbin "baserom.dol", 0x378840, 0x60
-.global lbl_8037C7A0
-lbl_8037C7A0:
-	.incbin "baserom.dol", 0x3788A0, 0x18
-.global lbl_8037C7B8
-lbl_8037C7B8:
-	.incbin "baserom.dol", 0x3788B8, 0x34
-.global lbl_8037C7EC
-lbl_8037C7EC:
-	.incbin "baserom.dol", 0x3788EC, 0x2C
-.global lbl_8037C818
-lbl_8037C818:
-	.incbin "baserom.dol", 0x378918, 0xB8
-.global lbl_8037C8D0
-lbl_8037C8D0:
-	.incbin "baserom.dol", 0x3789D0, 0x10
-.global lbl_8037C8E0
-lbl_8037C8E0:
-	.incbin "baserom.dol", 0x3789E0, 0x78
-.global lbl_8037C958
-lbl_8037C958:
-	.incbin "baserom.dol", 0x378A58, 0x10
-.global lbl_8037C968
-lbl_8037C968:
-	.incbin "baserom.dol", 0x378A68, 0x20
-.global lbl_8037C988
-lbl_8037C988:
-	.incbin "baserom.dol", 0x378A88, 0x10
-.global lbl_8037C998
-lbl_8037C998:
-	.incbin "baserom.dol", 0x378A98, 0x28
-.global lbl_8037C9C0
-lbl_8037C9C0:
-	.incbin "baserom.dol", 0x378AC0, 0x100
-.global lbl_8037CAC0
-lbl_8037CAC0:
-	.incbin "baserom.dol", 0x378BC0, 0x10
 .global lbl_8037CAD0
 lbl_8037CAD0:
 	.incbin "baserom.dol", 0x378BD0, 0x60
