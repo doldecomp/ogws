@@ -518,6 +518,9 @@ RVL_SDK_O_FILES := \
 	build/revolution/BASE/PPCArch.o \
 	\
 	build/asm/revolution/BTE/bte_unsplit.o \
+	\
+	build/asm/revolution/DB/db.o \
+
 
 GROUP_1_O_FILES := \
 	build/asm/text.o \
