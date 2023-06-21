@@ -481,6 +481,10 @@ RVL_SDK_O_FILES := \
 	build/asm/revolution/SC/scapi_prdinfo.o \
 	\
 	build/asm/revolution/USB/usb.o \
+	\
+	build/asm/revolution/VI/vi.o \
+	build/asm/revolution/VI/i2c.o \
+	build/asm/revolution/VI/vi3in1.o \
 
 GROUP_1_O_FILES := \
 	build/asm/data.o \
