@@ -32,7 +32,7 @@ namespace EGG
 
             while (node = (Archive *)ut::List_GetNext(&sArchiveList, node))
             {
-                if (node->mHandle.mHeader == (ARCHeader *)arcBinary)
+                if (node->mHandle.header == (ARCHeader *)arcBinary)
                 {
                     archive = node;
                     break;
@@ -77,23 +77,23 @@ namespace EGG
     void * Archive::getFile(const char *name, FileInfo *fileInfo)
     {
         void *startAddr = NULL;
-        ARCFile file;
+        ARCFileInfo info;
         
-        bool openResult = ARCOpen(&mHandle, name, &file);
+        bool openResult = ARCOpen(&mHandle, name, &info);
         if (openResult)
         {
             if (INT_0x10 == 1)
             {
-                startAddr = ARCGetStartAddrInMem(&file);
+                startAddr = ARCGetStartAddrInMem(&info);
             }
             if (fileInfo)
             {
-                fileInfo->mArcStartOffset = ARCGetStartOffset(&file);
-                fileInfo->mArcLength = ARCGetLength(&file);
+                fileInfo->mArcStartOffset = ARCGetStartOffset(&info);
+                fileInfo->mArcLength = ARCGetLength(&info);
             }
         }
 
-        ARCClose(&file);
+        ARCClose(&info);
         return startAddr;
     }
 

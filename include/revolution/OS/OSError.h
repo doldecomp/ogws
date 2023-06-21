@@ -5,9 +5,13 @@
 extern "C" {
 #endif
 
-UNKTYPE OSReport(const char *, ...);
-UNKTYPE OSPanic(const char *, UNKWORD, const char *, ...);
-#define OSError(...) OSPanic(__FILE__,__LINE__,__VA_ARGS__)
+#define OSError(...) OSPanic(__FILE__, __LINE__, __VA_ARGS__)
+#define OSAssert(exp, ...)                                                     \
+    if (!(exp))                                                                \
+    OSPanic(__FILE__, __LINE__, __VA_ARGS__)
+
+DECL_WEAK void OSReport(const char* msg, ...);
+DECL_WEAK void OSPanic(const char* file, int line, const char* msg, ...);
 
 #ifdef __cplusplus
 }

@@ -1,104 +1,97 @@
-#ifndef REVOSDK_ARC_H
-#define REVOSDK_ARC_H
+#ifndef RVL_SDK_ARC_H
+#define RVL_SDK_ARC_H
 #include <types.h>
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-// based on WiiCore
-enum ARCType
-{
-  //! The entry is a file.
-  //! Accessed via rxArchiveFile with rxArchiveFileOpen/rxArchiveFileOpenLow
-  //!
-  RX_ARCHIVE_FILE,
+/**
+ * Modified from decompilation by riidefi in WiiCore
+ * https://github.com/riidefi/WiiCore/tree/master/source/rx
+ */
 
-  //! The entry is a folder.
-  //!
-  RX_ARCHIVE_FOLDER
-};
+typedef enum { ARC_ENTRY_FILE, ARC_ENTRY_FOLDER } ARCEntryType;
 
-struct ARCHandle
-{
-  const struct ARCHeader* mHeader; //!< 00 Pointer to the archive header.
-  const struct ARCNode* mNodes; //!< 04 Array of nodes for each archive entry.
-  const u8* mFileData;         //!< 08 File data buffer, accessed by nodes.
-  u32 mCount;                  //!< 0C Number of nodes in the archive.
-  const char* mStrings;        //!< 10 String buffer, accessed by nodes.
-  u32 mFstSize;                //!< 14 Total bytesize of nodes and strings.
-  u32 mCurrentPath;            //!< 18 The current directory of the archive.
-};
+typedef struct ARCNode {
+    union {
+        struct {
+            u32 is_folder : 8;
+            u32 name : 24;
+        };
+        u32 packed_type_name;
+    }; // at 0x0
 
-struct ARCFile
-{
-  struct ARCHandle* parent; //!< 00 The archive the file is a part of.
-  u32 offset;        //!< 04 Offset into the archive's file data buffer.
-  u32 size;          //!< 08 Size of the file.
-};
+    union {
+        struct {
+            u32 offset;
+            u32 size;
+        } file;
 
-struct ARCEntry
-{
-  struct ARCHandle* parent;       //!< 00 The archive the file is a part of.
-  u32 path;                //!< 04 Special ID corresponding to a file path.
-                           //!< Accepted by rxArchiveFileOpenLow.
-  enum ARCType node_type; //!< The entry type.
-  const char* name;        //!< 0C Name of this entry in specific.
-                           //!< (Not an absolute path)
-};
+        struct {
+            u32 parent;
+            u32 sibling_next;
+        } folder;
+    }; // at 0x4
+} ARCNode;
 
-struct ARCDir
-{
-  struct ARCHandle* parent; //!< 00 The archive the file is a part of.
-  u32 path_begin;    //!< 04 The lower bound of the iterator range.
-  u32 path_it;       //!< 08 The current position of the iterator.
-  u32 path_end;      //!< 0C The upper bound of the iterator range.
-};
+typedef struct ARCHeader {
+    u32 magic; // at 0x0
 
-struct ARCNode {
-  union {
     struct {
-      u32 is_folder : 8;
-      u32 name : 24;
-    };
-    u32 packed_type_name;
-  };
-  union {
+        s32 offset; // at 0x4
+        s32 size;   // at 0x8
+    } nodes;
+
     struct {
-      u32 offset;
-      u32 size;
-    } file;
-    struct {
-      u32 parent;
-      u32 sibling_next;
-    } folder;
-  };
-};
+        s32 offset; // at 0xC
+    } files;
 
-struct ARCHeader {
-  u32 magic; // 00
-  struct {
-    s32 offset; // 04
-    s32 size;   // 08
-  } nodes;
-  struct {
-    s32 offset; // 0C
-  } files;
+    char UNK_0x10[0x10];
+} ARCHeader;
 
-  u8 _10[0x10];
-};
+typedef struct ARCHandle {
+    ARCHeader* header;   // at 0x0
+    ARCNode* nodes;      // at 0x4
+    u8* file;            // at 0x8
+    u32 count;           // at 0xC
+    const char* strings; // at 0x10
+    u32 fstSize;         // at 0x14
+    s32 entrynum;        // at 0x18
+} ARCHandle;
 
-BOOL ARCInitHandle(void *, struct ARCHandle *);
-BOOL ARCOpen(const struct ARCHandle *, const char *, struct ARCFile *);
-BOOL ARCFastOpen(const struct ARCHandle *, s32, struct ARCFile *);
-s32 ARCConvertPathToEntrynum(struct ARCHandle *, const char *);
-void * ARCGetStartAddrInMem(const struct ARCFile *);
-s32 ARCGetStartOffset(const struct ARCFile *);
-u32 ARCGetLength(const struct ARCFile *);
-BOOL ARCClose(struct ARCFile *);
-BOOL ARCChangeDir(struct ARCHandle *, const char *);
-BOOL ARCOpenDir(const struct ARCHandle *, const char *, struct ARCDir *);
-BOOL ARCReadDir(struct ARCDir *, struct ARCEntry *);
-BOOL ARCCloseDir(struct ARCDir *);
+typedef struct ARCFileInfo {
+    ARCHandle* handle; // at 0x0
+    u32 offset;        // at 0x4
+    u32 size;          // at 0x8
+} ARCFileInfo;
+
+typedef struct ARCEntry {
+    ARCHandle* handle; // at 0x0
+    u32 path;          // at 0x4
+    ARCEntryType type; // at 0x8
+    const char* name;  // at 0xC
+} ARCEntry;
+
+typedef struct ARCDir {
+    ARCHandle* handle; // at 0x0
+    u32 path_begin;    // at 0x4
+    u32 path_it;       // at 0x8
+    u32 path_end;      // at 0xC
+} ARCDir;
+
+BOOL ARCGetCurrentDir(ARCHandle* handle, char* string, u32 maxlen);
+BOOL ARCInitHandle(void* bin, ARCHandle* handle);
+BOOL ARCOpen(ARCHandle* handle, const char* path, ARCFileInfo* info);
+BOOL ARCFastOpen(ARCHandle* handle, s32 entrynum, ARCFileInfo* info);
+s32 ARCConvertPathToEntrynum(ARCHandle* handle, const char* path);
+void* ARCGetStartAddrInMem(ARCFileInfo* info);
+s32 ARCGetStartOffset(ARCFileInfo* info);
+u32 ARCGetLength(ARCFileInfo* info);
+BOOL ARCClose(ARCFileInfo* info);
+BOOL ARCChangeDir(ARCHandle* info, const char* path);
+BOOL ARCOpenDir(ARCHandle* info, const char* path, ARCDir* dir);
+BOOL ARCReadDir(ARCDir* dir, ARCEntry* entry);
+BOOL ARCCloseDir(ARCDir* dir);
 
 #ifdef __cplusplus
 }

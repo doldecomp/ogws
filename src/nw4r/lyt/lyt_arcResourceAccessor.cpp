@@ -14,7 +14,7 @@ namespace
         ARCOpenDir(pHandle, ".", &dir);
         while (ARCReadDir(&dir, &entry))
         {
-            if (entry.node_type != RX_ARCHIVE_FILE)
+            if (entry.type != ARC_ENTRY_FILE)
             {
                 ARCChangeDir(pHandle, entry.name);
                 resource = FindNameResource(pHandle, name);
@@ -70,14 +70,14 @@ namespace
 
         if (entrynum != -1)
         {
-            ARCFile file;
+            ARCFileInfo info;
 
-            ARCFastOpen(pHandle, entrynum, &file);
-            void *start = ARCGetStartAddrInMem(&file);
+            ARCFastOpen(pHandle, entrynum, &info);
+            void *start = ARCGetStartAddrInMem(&info);
 
-            if (pSize != NULL) *pSize = ARCGetLength(&file);
+            if (pSize != NULL) *pSize = ARCGetLength(&info);
 
-            ARCClose(&file);
+            ARCClose(&info);
             return start;
         }
 
