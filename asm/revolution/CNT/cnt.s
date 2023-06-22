@@ -6,7 +6,7 @@ lbl_803B72C8:
 	.string "CAUTION!  Unexpected error code [%d] was found.\n"
 .balign 8
 lbl_803B7300: # unnamed data (array was marked const but not static so it is constructed at runtime)
-	.incbin "baserom.dol", 0x3B3400, 0x340
+	.incbin "baserom.dol", 0x3B3400, 0x278
 
 .section .text, "ax"
 .global contentFastOpenNAND
