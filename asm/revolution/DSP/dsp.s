@@ -1,0 +1,198 @@
+.include "macros.inc"
+
+.section .sbss, "wa"
+.balign 0x8
+__DSP_init_flag:
+	.skip 0x4
+
+.section .sdata, "wa"
+.balign 0x8
+.global __DSPVersion
+__DSPVersion:
+	.long strings_803B5B00
+
+.section .data, "wa"
+.balign 0x8
+strings_803B5B00:
+	.string "<< RVL_SDK - DSP \trelease build: Nov 30 2006 03:26:46 (0x4199_60831) >>"
+    .balign 4
+    .string "DSPInit(): Build Date: %s %s\n"
+    .balign 4
+    .string "Nov 30 2006"
+    .balign 4
+    .string "03:26:46"
+    .balign 4
+
+.section .text, "ax"
+.global DSPCheckMailToDSP
+DSPCheckMailToDSP:
+/* 80138B00 00133A00  3C 60 CC 00 */	lis r3, 0xCC005000@ha
+/* 80138B04 00133A04  A0 03 50 00 */	lhz r0, 0xCC005000@l(r3)
+/* 80138B08 00133A08  54 03 8F FE */	rlwinm r3, r0, 0x11, 0x1f, 0x1f
+/* 80138B0C 00133A0C  4E 80 00 20 */	blr 
+
+.global DSPCheckMailFromDSP
+DSPCheckMailFromDSP:
+/* 80138B10 00133A10  3C 60 CC 00 */	lis r3, 0xCC005004@ha
+/* 80138B14 00133A14  A0 03 50 04 */	lhz r0, 0xCC005004@l(r3)
+/* 80138B18 00133A18  54 03 8F FE */	rlwinm r3, r0, 0x11, 0x1f, 0x1f
+/* 80138B1C 00133A1C  4E 80 00 20 */	blr 
+
+.global DSPReadMailFromDSP
+DSPReadMailFromDSP:
+/* 80138B20 00133A20  3C 60 CC 00 */	lis r3, 0xCC005004@ha
+/* 80138B24 00133A24  A0 03 50 04 */	lhz r0, 0xCC005004@l(r3)
+/* 80138B28 00133A28  A0 63 50 06 */	lhz r3, 0x5006(r3)
+/* 80138B2C 00133A2C  50 03 80 1E */	rlwimi r3, r0, 0x10, 0, 0xf
+/* 80138B30 00133A30  4E 80 00 20 */	blr 
+
+.global DSPSendMailToDSP
+DSPSendMailToDSP:
+/* 80138B34 00133A34  3C 80 CC 00 */	lis r4, 0xCC005000@ha
+/* 80138B38 00133A38  54 60 84 3E */	srwi r0, r3, 0x10
+/* 80138B3C 00133A3C  B0 04 50 00 */	sth r0, 0xCC005000@l(r4)
+/* 80138B40 00133A40  B0 64 50 02 */	sth r3, 0x5002(r4)
+/* 80138B44 00133A44  4E 80 00 20 */	blr 
+
+.global DSPInit
+DSPInit:
+/* 80138B48 00133A48  94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 80138B4C 00133A4C  7C 08 02 A6 */	mflr r0
+/* 80138B50 00133A50  3C A0 80 3B */	lis r5, strings_803B5B00@ha
+/* 80138B54 00133A54  90 01 00 14 */	stw r0, 0x14(r1)
+/* 80138B58 00133A58  38 A5 5B 00 */	addi r5, r5, strings_803B5B00@l
+/* 80138B5C 00133A5C  38 65 00 48 */	addi r3, r5, 0x48
+/* 80138B60 00133A60  93 E1 00 0C */	stw r31, 0xc(r1)
+/* 80138B64 00133A64  38 85 00 68 */	addi r4, r5, 0x68
+/* 80138B68 00133A68  38 A5 00 74 */	addi r5, r5, 0x74
+/* 80138B6C 00133A6C  4C C6 31 82 */	crclr 6
+/* 80138B70 00133A70  48 00 01 CD */	bl __DSP_debug_printf
+/* 80138B74 00133A74  80 0D 9F 58 */	lwz r0, __DSP_init_flag-_SDA_BASE_(r13)
+/* 80138B78 00133A78  2C 00 00 01 */	cmpwi r0, 1
+/* 80138B7C 00133A7C  41 82 00 78 */	beq lbl_80138BF4
+/* 80138B80 00133A80  80 6D 85 E0 */	lwz r3, __DSPVersion-_SDA_BASE_(r13)
+/* 80138B84 00133A84  4B FB 44 BD */	bl OSRegisterVersion
+/* 80138B88 00133A88  4B FB 8D 39 */	bl OSDisableInterrupts
+/* 80138B8C 00133A8C  3C 80 80 14 */	lis r4, __DSPHandler@ha
+/* 80138B90 00133A90  7C 7F 1B 78 */	mr r31, r3
+/* 80138B94 00133A94  38 84 8D 8C */	addi r4, r4, __DSPHandler@l
+/* 80138B98 00133A98  38 60 00 07 */	li r3, 7
+/* 80138B9C 00133A9C  4B FB 8D 71 */	bl __OSSetInterruptHandler
+/* 80138BA0 00133AA0  3C 60 01 00 */	lis r3, 0x100
+/* 80138BA4 00133AA4  4B FB 91 2D */	bl __OSUnmaskInterrupts
+/* 80138BA8 00133AA8  3C E0 CC 00 */	lis r7, 0xCC00500A@ha
+/* 80138BAC 00133AAC  38 60 FF 57 */	li r3, -169
+/* 80138BB0 00133AB0  A0 C7 50 0A */	lhz r6, 0xCC00500A@l(r7)
+/* 80138BB4 00133AB4  38 A0 FF 53 */	li r5, -173
+/* 80138BB8 00133AB8  38 80 00 00 */	li r4, 0
+/* 80138BBC 00133ABC  38 00 00 01 */	li r0, 1
+/* 80138BC0 00133AC0  7C C3 18 38 */	and r3, r6, r3
+/* 80138BC4 00133AC4  60 63 08 00 */	ori r3, r3, 0x800
+/* 80138BC8 00133AC8  B0 67 50 0A */	sth r3, 0x500a(r7)
+/* 80138BCC 00133ACC  7F E3 FB 78 */	mr r3, r31
+/* 80138BD0 00133AD0  A0 C7 50 0A */	lhz r6, 0x500a(r7)
+/* 80138BD4 00133AD4  7C C5 28 38 */	and r5, r6, r5
+/* 80138BD8 00133AD8  B0 A7 50 0A */	sth r5, 0x500a(r7)
+/* 80138BDC 00133ADC  90 8D 9F 68 */	stw r4, __DSP_tmp_task-_SDA_BASE_(r13)
+/* 80138BE0 00133AE0  90 8D 9F 74 */	stw r4, __DSP_curr_task-_SDA_BASE_(r13)
+/* 80138BE4 00133AE4  90 8D 9F 6C */	stw r4, __DSP_last_task-_SDA_BASE_(r13)
+/* 80138BE8 00133AE8  90 8D 9F 70 */	stw r4, __DSP_first_task-_SDA_BASE_(r13)
+/* 80138BEC 00133AEC  90 0D 9F 58 */	stw r0, __DSP_init_flag-_SDA_BASE_(r13)
+/* 80138BF0 00133AF0  4B FB 8C F9 */	bl OSRestoreInterrupts
+lbl_80138BF4:
+/* 80138BF4 00133AF4  80 01 00 14 */	lwz r0, 0x14(r1)
+/* 80138BF8 00133AF8  83 E1 00 0C */	lwz r31, 0xc(r1)
+/* 80138BFC 00133AFC  7C 08 03 A6 */	mtlr r0
+/* 80138C00 00133B00  38 21 00 10 */	addi r1, r1, 0x10
+/* 80138C04 00133B04  4E 80 00 20 */	blr 
+
+.global DSPCheckInit
+DSPCheckInit:
+/* 80138C08 00133B08  80 6D 9F 58 */	lwz r3, __DSP_init_flag-_SDA_BASE_(r13)
+/* 80138C0C 00133B0C  4E 80 00 20 */	blr 
+
+.global DSPAddTask
+DSPAddTask:
+/* 80138C10 00133B10  94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 80138C14 00133B14  7C 08 02 A6 */	mflr r0
+/* 80138C18 00133B18  90 01 00 14 */	stw r0, 0x14(r1)
+/* 80138C1C 00133B1C  93 E1 00 0C */	stw r31, 0xc(r1)
+/* 80138C20 00133B20  93 C1 00 08 */	stw r30, 8(r1)
+/* 80138C24 00133B24  7C 7E 1B 78 */	mr r30, r3
+/* 80138C28 00133B28  4B FB 8C 99 */	bl OSDisableInterrupts
+/* 80138C2C 00133B2C  7C 7F 1B 78 */	mr r31, r3
+/* 80138C30 00133B30  7F C3 F3 78 */	mr r3, r30
+/* 80138C34 00133B34  48 00 08 BD */	bl __DSP_insert_task
+/* 80138C38 00133B38  38 60 00 00 */	li r3, 0
+/* 80138C3C 00133B3C  38 00 00 01 */	li r0, 1
+/* 80138C40 00133B40  90 7E 00 00 */	stw r3, 0(r30)
+/* 80138C44 00133B44  7F E3 FB 78 */	mr r3, r31
+/* 80138C48 00133B48  90 1E 00 08 */	stw r0, 8(r30)
+/* 80138C4C 00133B4C  4B FB 8C 9D */	bl OSRestoreInterrupts
+/* 80138C50 00133B50  80 0D 9F 70 */	lwz r0, __DSP_first_task-_SDA_BASE_(r13)
+/* 80138C54 00133B54  7C 1E 00 40 */	cmplw r30, r0
+/* 80138C58 00133B58  40 82 00 0C */	bne lbl_80138C64
+/* 80138C5C 00133B5C  7F C3 F3 78 */	mr r3, r30
+/* 80138C60 00133B60  48 00 07 05 */	bl __DSP_boot_task
+lbl_80138C64:
+/* 80138C64 00133B64  7F C3 F3 78 */	mr r3, r30
+/* 80138C68 00133B68  83 E1 00 0C */	lwz r31, 0xc(r1)
+/* 80138C6C 00133B6C  83 C1 00 08 */	lwz r30, 8(r1)
+/* 80138C70 00133B70  80 01 00 14 */	lwz r0, 0x14(r1)
+/* 80138C74 00133B74  7C 08 03 A6 */	mtlr r0
+/* 80138C78 00133B78  38 21 00 10 */	addi r1, r1, 0x10
+/* 80138C7C 00133B7C  4E 80 00 20 */	blr 
+
+.global DSPAssertTask
+DSPAssertTask:
+/* 80138C80 00133B80  94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 80138C84 00133B84  7C 08 02 A6 */	mflr r0
+/* 80138C88 00133B88  90 01 00 14 */	stw r0, 0x14(r1)
+/* 80138C8C 00133B8C  93 E1 00 0C */	stw r31, 0xc(r1)
+/* 80138C90 00133B90  93 C1 00 08 */	stw r30, 8(r1)
+/* 80138C94 00133B94  7C 7E 1B 78 */	mr r30, r3
+/* 80138C98 00133B98  4B FB 8C 29 */	bl OSDisableInterrupts
+/* 80138C9C 00133B9C  80 AD 9F 74 */	lwz r5, __DSP_curr_task-_SDA_BASE_(r13)
+/* 80138CA0 00133BA0  7C 7F 1B 78 */	mr r31, r3
+/* 80138CA4 00133BA4  7C 05 F0 40 */	cmplw r5, r30
+/* 80138CA8 00133BA8  40 82 00 1C */	bne lbl_80138CC4
+/* 80138CAC 00133BAC  38 00 00 01 */	li r0, 1
+/* 80138CB0 00133BB0  93 CD 9F 64 */	stw r30, __DSP_rude_task-_SDA_BASE_(r13)
+/* 80138CB4 00133BB4  90 0D 9F 60 */	stw r0, __DSP_rude_task_pending-_SDA_BASE_(r13)
+/* 80138CB8 00133BB8  4B FB 8C 31 */	bl OSRestoreInterrupts
+/* 80138CBC 00133BBC  7F C3 F3 78 */	mr r3, r30
+/* 80138CC0 00133BC0  48 00 00 64 */	b lbl_80138D24
+lbl_80138CC4:
+/* 80138CC4 00133BC4  80 9E 00 04 */	lwz r4, 4(r30)
+/* 80138CC8 00133BC8  80 05 00 04 */	lwz r0, 4(r5)
+/* 80138CCC 00133BCC  7C 04 00 40 */	cmplw r4, r0
+/* 80138CD0 00133BD0  40 80 00 4C */	bge lbl_80138D1C
+/* 80138CD4 00133BD4  38 00 00 01 */	li r0, 1
+/* 80138CD8 00133BD8  93 CD 9F 64 */	stw r30, __DSP_rude_task-_SDA_BASE_(r13)
+/* 80138CDC 00133BDC  90 0D 9F 60 */	stw r0, __DSP_rude_task_pending-_SDA_BASE_(r13)
+/* 80138CE0 00133BE0  80 05 00 00 */	lwz r0, 0(r5)
+/* 80138CE4 00133BE4  28 00 00 01 */	cmplwi r0, 1
+/* 80138CE8 00133BE8  40 82 00 24 */	bne lbl_80138D0C
+/* 80138CEC 00133BEC  4B FB 8B D5 */	bl OSDisableInterrupts
+/* 80138CF0 00133BF0  3C A0 CC 00 */	lis r5, 0xCC00500A@ha
+/* 80138CF4 00133BF4  38 00 FF 57 */	li r0, -169
+/* 80138CF8 00133BF8  A0 85 50 0A */	lhz r4, 0xCC00500A@l(r5)
+/* 80138CFC 00133BFC  7C 80 00 38 */	and r0, r4, r0
+/* 80138D00 00133C00  60 00 00 02 */	ori r0, r0, 2
+/* 80138D04 00133C04  B0 05 50 0A */	sth r0, 0x500a(r5)
+/* 80138D08 00133C08  4B FB 8B E1 */	bl OSRestoreInterrupts
+lbl_80138D0C:
+/* 80138D0C 00133C0C  7F E3 FB 78 */	mr r3, r31
+/* 80138D10 00133C10  4B FB 8B D9 */	bl OSRestoreInterrupts
+/* 80138D14 00133C14  7F C3 F3 78 */	mr r3, r30
+/* 80138D18 00133C18  48 00 00 0C */	b lbl_80138D24
+lbl_80138D1C:
+/* 80138D1C 00133C1C  4B FB 8B CD */	bl OSRestoreInterrupts
+/* 80138D20 00133C20  38 60 00 00 */	li r3, 0
+lbl_80138D24:
+/* 80138D24 00133C24  80 01 00 14 */	lwz r0, 0x14(r1)
+/* 80138D28 00133C28  83 E1 00 0C */	lwz r31, 0xc(r1)
+/* 80138D2C 00133C2C  83 C1 00 08 */	lwz r30, 8(r1)
+/* 80138D30 00133C30  7C 08 03 A6 */	mtlr r0
+/* 80138D34 00133C34  38 21 00 10 */	addi r1, r1, 0x10
+/* 80138D38 00133C38  4E 80 00 20 */	blr 
