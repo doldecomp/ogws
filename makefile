@@ -66,7 +66,7 @@ ASM_DIRS := asm \
 	asm/revolution/GX asm/revolution/IPC asm/revolution/MEM asm/revolution/MTX asm/revolution/NAND asm/revolution/OS asm/revolution/SC \
 	asm/revolution/USB asm/revolution/VI asm/revolution/WUD asm/revolution/AI asm/revolution/ARC asm/revolution/AX asm/revolution/AXFX \
 	asm/revolution/BASE asm/revolution/BTE asm/revolution/DB asm/revolution/DSP asm/revolution/DVD asm/revolution/SI asm/revolution/TPL \
-	asm/revolution/WENC asm/revolution/CNT \
+	asm/revolution/WENC asm/revolution/CNT asm/revolution/ESP \
 	asm/nw4r/ut asm/nw4r/ef asm/nw4r/math asm/nw4r/snd asm/nw4r/g3d asm/nw4r/lyt \
 	asm/egg/gfx asm/egg/math asm/egg/core asm/egg/audio asm/egg/util
 
