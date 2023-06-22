@@ -4,21 +4,6 @@
 
 .balign 0x8
 
-# ??????
-dummy:
-	.skip 0x40
-.global lbl_8047A400
-lbl_8047A400:
-	.skip 0x80
-.global lbl_8047A480
-lbl_8047A480:
-	.skip 0x20
-.global lbl_8047A4A0
-lbl_8047A4A0:
-	.skip 0x20
-.global lbl_8047A4C0
-lbl_8047A4C0:
-	.skip 0x160
 .global lbl_8047A620
 lbl_8047A620:
 	.skip 0x40

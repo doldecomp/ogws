@@ -3,18 +3,6 @@
 .section .data, "wa"  # 0x80393A80 - 0x803CAF00
 
 .balign 0x8
-dummy:
-	.string "<< RVL_SDK - SI \trelease build: Nov 30 2006 03:31:44 (0x4199_60831) >>"
-	.balign 4
-.global lbl_803B71D8
-lbl_803B71D8:
-	.incbin "baserom.dol", 0x3B32D8, 0x18
-.global lbl_803B71F0
-lbl_803B71F0:
-	.incbin "baserom.dol", 0x3B32F0, 0x10
-.global lbl_803B7200
-lbl_803B7200:
-	.incbin "baserom.dol", 0x3B3300, 0x98
 .global lbl_803B7298
 lbl_803B7298:
 	.incbin "baserom.dol", 0x3B3398, 0x30

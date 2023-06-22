@@ -532,6 +532,9 @@ RVL_SDK_O_FILES := \
 	build/asm/revolution/DVD/dvdidutils.o \
 	build/asm/revolution/DVD/dvdFatal.o \
 	build/asm/revolution/DVD/dvd_broadway.o \
+	\
+	build/asm/revolution/SI/SIBios.o \
+	build/asm/revolution/SI/SISamplingRate.o \
 
 GROUP_1_O_FILES := \
 	build/asm/text.o \
