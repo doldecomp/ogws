@@ -1060,7 +1060,7 @@ lbl_80470A68:
 	.skip 0x418
 .global lbl_80470E80
 lbl_80470E80:
-	.skip 0x4640
+	.skip 0x4634
 
 .section .text, "ax"
 .global func_8010AB88

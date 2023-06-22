@@ -1,0 +1,250 @@
+.include "macros.inc"
+
+.section .sbss, "wa"
+.balign 0x8
+Callback:
+	.skip 0x4
+
+.section .data, "wa"
+.balign 0x8
+lbl_803B60B8:
+	.string "/shared2/test2/dvderror.dat"
+	.balign 4
+lbl_803B60D4:
+	.string "/shared2/test2"
+	.balign 4
+
+.section .bss, "wa"
+.balign 0x8
+NandInfo:
+	.skip 0x8C
+    .balign 8
+NandCb:
+	.skip 0xB8
+.balign 32
+.global __ErrorInfo
+__ErrorInfo: # ALIGN(32)
+	.skip 0x80
+
+.section .text, "ax"
+.global cbForNandClose
+cbForNandClose:
+/* 8013E634 00139534  81 8D A0 20 */	lwz r12, Callback-_SDA_BASE_(r13)
+/* 8013E638 00139538  2C 0C 00 00 */	cmpwi r12, 0
+/* 8013E63C 0013953C  4D 82 00 20 */	beqlr 
+/* 8013E640 00139540  7C 60 00 34 */	cntlzw r0, r3
+/* 8013E644 00139544  38 80 00 00 */	li r4, 0
+/* 8013E648 00139548  54 00 DF FE */	rlwinm r0, r0, 0x1b, 0x1f, 0x1f
+/* 8013E64C 0013954C  7C 60 00 D0 */	neg r3, r0
+/* 8013E650 00139550  38 63 00 02 */	addi r3, r3, 2
+/* 8013E654 00139554  7D 89 03 A6 */	mtctr r12
+/* 8013E658 00139558  4E 80 04 20 */	bctr 
+/* 8013E65C 0013955C  4E 80 00 20 */	blr 
+
+.global cbForNandWrite
+cbForNandWrite:
+/* 8013E660 00139560  94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 8013E664 00139564  7C 08 02 A6 */	mflr r0
+/* 8013E668 00139568  3C 60 80 48 */	lis r3, NandInfo@ha
+/* 8013E66C 0013956C  3C 80 80 14 */	lis r4, cbForNandClose@ha
+/* 8013E670 00139570  3C A0 80 48 */	lis r5, NandCb@ha
+/* 8013E674 00139574  90 01 00 14 */	stw r0, 0x14(r1)
+/* 8013E678 00139578  38 63 A0 C0 */	addi r3, r3, NandInfo@l
+/* 8013E67C 0013957C  38 84 E6 34 */	addi r4, r4, cbForNandClose@l
+/* 8013E680 00139580  38 A5 A1 50 */	addi r5, r5, NandCb@l
+/* 8013E684 00139584  4B FA B9 7D */	bl NANDCloseAsync
+/* 8013E688 00139588  2C 03 00 00 */	cmpwi r3, 0
+/* 8013E68C 0013958C  41 82 00 20 */	beq lbl_8013E6AC
+/* 8013E690 00139590  81 8D A0 20 */	lwz r12, Callback-_SDA_BASE_(r13)
+/* 8013E694 00139594  2C 0C 00 00 */	cmpwi r12, 0
+/* 8013E698 00139598  41 82 00 14 */	beq lbl_8013E6AC
+/* 8013E69C 0013959C  38 60 00 02 */	li r3, 2
+/* 8013E6A0 001395A0  38 80 00 00 */	li r4, 0
+/* 8013E6A4 001395A4  7D 89 03 A6 */	mtctr r12
+/* 8013E6A8 001395A8  4E 80 04 21 */	bctrl 
+lbl_8013E6AC:
+/* 8013E6AC 001395AC  80 01 00 14 */	lwz r0, 0x14(r1)
+/* 8013E6B0 001395B0  7C 08 03 A6 */	mtlr r0
+/* 8013E6B4 001395B4  38 21 00 10 */	addi r1, r1, 0x10
+/* 8013E6B8 001395B8  4E 80 00 20 */	blr 
+
+.global cbForNandOpen
+cbForNandOpen:
+/* 8013E6BC 001395BC  94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 8013E6C0 001395C0  7C 08 02 A6 */	mflr r0
+/* 8013E6C4 001395C4  2C 03 00 00 */	cmpwi r3, 0
+/* 8013E6C8 001395C8  90 01 00 14 */	stw r0, 0x14(r1)
+/* 8013E6CC 001395CC  93 E1 00 0C */	stw r31, 0xc(r1)
+/* 8013E6D0 001395D0  3F E0 80 48 */	lis r31, NandInfo@ha
+/* 8013E6D4 001395D4  3B FF A0 C0 */	addi r31, r31, NandInfo@l
+/* 8013E6D8 001395D8  40 82 00 64 */	bne lbl_8013E73C
+/* 8013E6DC 001395DC  3C C0 80 14 */	lis r6, cbForNandWrite@ha
+/* 8013E6E0 001395E0  38 7F 00 00 */	addi r3, r31, 0
+/* 8013E6E4 001395E4  38 9F 01 60 */	addi r4, r31, 0x160
+/* 8013E6E8 001395E8  38 FF 00 90 */	addi r7, r31, 0x90
+/* 8013E6EC 001395EC  38 C6 E6 60 */	addi r6, r6, cbForNandWrite@l
+/* 8013E6F0 001395F0  38 A0 00 80 */	li r5, 0x80
+/* 8013E6F4 001395F4  4B FA A9 F5 */	bl NANDWriteAsync
+/* 8013E6F8 001395F8  2C 03 00 00 */	cmpwi r3, 0
+/* 8013E6FC 001395FC  41 82 00 5C */	beq lbl_8013E758
+/* 8013E700 00139600  3C 80 80 14 */	lis r4, cbForNandClose@ha
+/* 8013E704 00139604  38 7F 00 00 */	addi r3, r31, 0
+/* 8013E708 00139608  38 84 E6 34 */	addi r4, r4, cbForNandClose@l
+/* 8013E70C 0013960C  38 BF 00 90 */	addi r5, r31, 0x90
+/* 8013E710 00139610  4B FA B8 F1 */	bl NANDCloseAsync
+/* 8013E714 00139614  2C 03 00 00 */	cmpwi r3, 0
+/* 8013E718 00139618  41 82 00 40 */	beq lbl_8013E758
+/* 8013E71C 0013961C  81 8D A0 20 */	lwz r12, Callback-_SDA_BASE_(r13)
+/* 8013E720 00139620  2C 0C 00 00 */	cmpwi r12, 0
+/* 8013E724 00139624  41 82 00 34 */	beq lbl_8013E758
+/* 8013E728 00139628  38 60 00 02 */	li r3, 2
+/* 8013E72C 0013962C  38 80 00 00 */	li r4, 0
+/* 8013E730 00139630  7D 89 03 A6 */	mtctr r12
+/* 8013E734 00139634  4E 80 04 21 */	bctrl 
+/* 8013E738 00139638  48 00 00 20 */	b lbl_8013E758
+lbl_8013E73C:
+/* 8013E73C 0013963C  81 8D A0 20 */	lwz r12, Callback-_SDA_BASE_(r13)
+/* 8013E740 00139640  2C 0C 00 00 */	cmpwi r12, 0
+/* 8013E744 00139644  41 82 00 14 */	beq lbl_8013E758
+/* 8013E748 00139648  38 60 00 02 */	li r3, 2
+/* 8013E74C 0013964C  38 80 00 00 */	li r4, 0
+/* 8013E750 00139650  7D 89 03 A6 */	mtctr r12
+/* 8013E754 00139654  4E 80 04 21 */	bctrl 
+lbl_8013E758:
+/* 8013E758 00139658  80 01 00 14 */	lwz r0, 0x14(r1)
+/* 8013E75C 0013965C  83 E1 00 0C */	lwz r31, 0xc(r1)
+/* 8013E760 00139660  7C 08 03 A6 */	mtlr r0
+/* 8013E764 00139664  38 21 00 10 */	addi r1, r1, 0x10
+/* 8013E768 00139668  4E 80 00 20 */	blr 
+
+.global cbForNandCreate
+cbForNandCreate:
+/* 8013E76C 0013966C  94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 8013E770 00139670  7C 08 02 A6 */	mflr r0
+/* 8013E774 00139674  2C 03 00 00 */	cmpwi r3, 0
+/* 8013E778 00139678  90 01 00 14 */	stw r0, 0x14(r1)
+/* 8013E77C 0013967C  41 82 00 0C */	beq lbl_8013E788
+/* 8013E780 00139680  2C 03 FF FA */	cmpwi r3, -6
+/* 8013E784 00139684  40 82 00 54 */	bne lbl_8013E7D8
+lbl_8013E788:
+/* 8013E788 00139688  3C 60 80 3B */	lis r3, lbl_803B60B8@ha
+/* 8013E78C 0013968C  3C 80 80 48 */	lis r4, NandInfo@ha
+/* 8013E790 00139690  3C C0 80 14 */	lis r6, cbForNandOpen@ha
+/* 8013E794 00139694  3C E0 80 48 */	lis r7, NandCb@ha
+/* 8013E798 00139698  38 63 60 B8 */	addi r3, r3, lbl_803B60B8@l
+/* 8013E79C 0013969C  38 84 A0 C0 */	addi r4, r4, NandInfo@l
+/* 8013E7A0 001396A0  38 C6 E6 BC */	addi r6, r6, cbForNandOpen@l
+/* 8013E7A4 001396A4  38 E7 A1 50 */	addi r7, r7, NandCb@l
+/* 8013E7A8 001396A8  38 A0 00 02 */	li r5, 2
+/* 8013E7AC 001396AC  4B FA B6 F9 */	bl NANDPrivateOpenAsync
+/* 8013E7B0 001396B0  2C 03 00 00 */	cmpwi r3, 0
+/* 8013E7B4 001396B4  41 82 00 40 */	beq lbl_8013E7F4
+/* 8013E7B8 001396B8  81 8D A0 20 */	lwz r12, Callback-_SDA_BASE_(r13)
+/* 8013E7BC 001396BC  2C 0C 00 00 */	cmpwi r12, 0
+/* 8013E7C0 001396C0  41 82 00 34 */	beq lbl_8013E7F4
+/* 8013E7C4 001396C4  38 60 00 02 */	li r3, 2
+/* 8013E7C8 001396C8  38 80 00 00 */	li r4, 0
+/* 8013E7CC 001396CC  7D 89 03 A6 */	mtctr r12
+/* 8013E7D0 001396D0  4E 80 04 21 */	bctrl 
+/* 8013E7D4 001396D4  48 00 00 20 */	b lbl_8013E7F4
+lbl_8013E7D8:
+/* 8013E7D8 001396D8  81 8D A0 20 */	lwz r12, Callback-_SDA_BASE_(r13)
+/* 8013E7DC 001396DC  2C 0C 00 00 */	cmpwi r12, 0
+/* 8013E7E0 001396E0  41 82 00 14 */	beq lbl_8013E7F4
+/* 8013E7E4 001396E4  38 60 00 02 */	li r3, 2
+/* 8013E7E8 001396E8  38 80 00 00 */	li r4, 0
+/* 8013E7EC 001396EC  7D 89 03 A6 */	mtctr r12
+/* 8013E7F0 001396F0  4E 80 04 21 */	bctrl 
+lbl_8013E7F4:
+/* 8013E7F4 001396F4  80 01 00 14 */	lwz r0, 0x14(r1)
+/* 8013E7F8 001396F8  7C 08 03 A6 */	mtlr r0
+/* 8013E7FC 001396FC  38 21 00 10 */	addi r1, r1, 0x10
+/* 8013E800 00139700  4E 80 00 20 */	blr 
+
+.global cbForNandCreateDir
+cbForNandCreateDir:
+/* 8013E804 00139704  94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 8013E808 00139708  7C 08 02 A6 */	mflr r0
+/* 8013E80C 0013970C  2C 03 00 00 */	cmpwi r3, 0
+/* 8013E810 00139710  90 01 00 14 */	stw r0, 0x14(r1)
+/* 8013E814 00139714  41 82 00 0C */	beq lbl_8013E820
+/* 8013E818 00139718  2C 03 FF FA */	cmpwi r3, -6
+/* 8013E81C 0013971C  40 82 00 50 */	bne lbl_8013E86C
+lbl_8013E820:
+/* 8013E820 00139720  3C 60 80 3B */	lis r3, lbl_803B60B8@ha
+/* 8013E824 00139724  3C C0 80 14 */	lis r6, cbForNandCreate@ha
+/* 8013E828 00139728  3C E0 80 48 */	lis r7, NandCb@ha
+/* 8013E82C 0013972C  38 80 00 3F */	li r4, 0x3f
+/* 8013E830 00139730  38 63 60 B8 */	addi r3, r3, lbl_803B60B8@l
+/* 8013E834 00139734  38 C6 E7 6C */	addi r6, r6, cbForNandCreate@l
+/* 8013E838 00139738  38 E7 A1 50 */	addi r7, r7, NandCb@l
+/* 8013E83C 0013973C  38 A0 00 00 */	li r5, 0
+/* 8013E840 00139740  4B FA A4 E1 */	bl NANDPrivateCreateAsync
+/* 8013E844 00139744  2C 03 00 00 */	cmpwi r3, 0
+/* 8013E848 00139748  41 82 00 40 */	beq lbl_8013E888
+/* 8013E84C 0013974C  81 8D A0 20 */	lwz r12, Callback-_SDA_BASE_(r13)
+/* 8013E850 00139750  2C 0C 00 00 */	cmpwi r12, 0
+/* 8013E854 00139754  41 82 00 34 */	beq lbl_8013E888
+/* 8013E858 00139758  38 60 00 02 */	li r3, 2
+/* 8013E85C 0013975C  38 80 00 00 */	li r4, 0
+/* 8013E860 00139760  7D 89 03 A6 */	mtctr r12
+/* 8013E864 00139764  4E 80 04 21 */	bctrl 
+/* 8013E868 00139768  48 00 00 20 */	b lbl_8013E888
+lbl_8013E86C:
+/* 8013E86C 0013976C  81 8D A0 20 */	lwz r12, Callback-_SDA_BASE_(r13)
+/* 8013E870 00139770  2C 0C 00 00 */	cmpwi r12, 0
+/* 8013E874 00139774  41 82 00 14 */	beq lbl_8013E888
+/* 8013E878 00139778  38 60 00 02 */	li r3, 2
+/* 8013E87C 0013977C  38 80 00 00 */	li r4, 0
+/* 8013E880 00139780  7D 89 03 A6 */	mtctr r12
+/* 8013E884 00139784  4E 80 04 21 */	bctrl 
+lbl_8013E888:
+/* 8013E888 00139788  80 01 00 14 */	lwz r0, 0x14(r1)
+/* 8013E88C 0013978C  7C 08 03 A6 */	mtlr r0
+/* 8013E890 00139790  38 21 00 10 */	addi r1, r1, 0x10
+/* 8013E894 00139794  4E 80 00 20 */	blr 
+
+.global __DVDStoreErrorCode
+__DVDStoreErrorCode:
+/* 8013E898 00139798  94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 8013E89C 0013979C  7C 08 02 A6 */	mflr r0
+/* 8013E8A0 001397A0  90 01 00 14 */	stw r0, 0x14(r1)
+/* 8013E8A4 001397A4  93 E1 00 0C */	stw r31, 0xc(r1)
+/* 8013E8A8 001397A8  3F E0 80 48 */	lis r31, __ErrorInfo@ha
+/* 8013E8AC 001397AC  3B FF A2 20 */	addi r31, r31, __ErrorInfo@l
+/* 8013E8B0 001397B0  93 C1 00 08 */	stw r30, 8(r1)
+/* 8013E8B4 001397B4  7C 9E 23 78 */	mr r30, r4
+/* 8013E8B8 001397B8  90 7F 00 08 */	stw r3, 8(r31)
+/* 8013E8BC 001397BC  4B FB 6D 49 */	bl OSGetTime
+/* 8013E8C0 001397C0  3C C0 80 00 */	lis r6, 0x800000F8@ha
+/* 8013E8C4 001397C4  38 A0 00 00 */	li r5, 0
+/* 8013E8C8 001397C8  80 06 00 F8 */	lwz r0, 0x800000F8@l(r6)
+/* 8013E8CC 001397CC  54 06 F0 BE */	srwi r6, r0, 2
+/* 8013E8D0 001397D0  4B F7 35 C5 */	bl __div2i
+/* 8013E8D4 001397D4  90 9F 00 0C */	stw r4, 0xc(r31)
+/* 8013E8D8 001397D8  3C 60 80 3B */	lis r3, lbl_803B60D4@ha
+/* 8013E8DC 001397DC  3C C0 80 14 */	lis r6, cbForNandCreateDir@ha
+/* 8013E8E0 001397E0  3C E0 80 48 */	lis r7, NandCb@ha
+/* 8013E8E4 001397E4  93 CD A0 20 */	stw r30, Callback-_SDA_BASE_(r13)
+/* 8013E8E8 001397E8  38 63 60 D4 */	addi r3, r3, lbl_803B60D4@l
+/* 8013E8EC 001397EC  38 C6 E8 04 */	addi r6, r6, cbForNandCreateDir@l
+/* 8013E8F0 001397F0  38 E7 A1 50 */	addi r7, r7, NandCb@l
+/* 8013E8F4 001397F4  38 80 00 3F */	li r4, 0x3f
+/* 8013E8F8 001397F8  38 A0 00 00 */	li r5, 0
+/* 8013E8FC 001397FC  4B FA AB 55 */	bl NANDPrivateCreateDirAsync
+/* 8013E900 00139800  2C 03 00 00 */	cmpwi r3, 0
+/* 8013E904 00139804  41 82 00 20 */	beq lbl_8013E924
+/* 8013E908 00139808  81 8D A0 20 */	lwz r12, Callback-_SDA_BASE_(r13)
+/* 8013E90C 0013980C  2C 0C 00 00 */	cmpwi r12, 0
+/* 8013E910 00139810  41 82 00 14 */	beq lbl_8013E924
+/* 8013E914 00139814  38 60 00 02 */	li r3, 2
+/* 8013E918 00139818  38 80 00 00 */	li r4, 0
+/* 8013E91C 0013981C  7D 89 03 A6 */	mtctr r12
+/* 8013E920 00139820  4E 80 04 21 */	bctrl 
+lbl_8013E924:
+/* 8013E924 00139824  80 01 00 14 */	lwz r0, 0x14(r1)
+/* 8013E928 00139828  83 E1 00 0C */	lwz r31, 0xc(r1)
+/* 8013E92C 0013982C  83 C1 00 08 */	lwz r30, 8(r1)
+/* 8013E930 00139830  7C 08 03 A6 */	mtlr r0
+/* 8013E934 00139834  38 21 00 10 */	addi r1, r1, 0x10
+/* 8013E938 00139838  4E 80 00 20 */	blr 

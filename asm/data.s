@@ -3,43 +3,9 @@
 .section .data, "wa"  # 0x80393A80 - 0x803CAF00
 
 .balign 0x8
-
-lbl_803b5cc0:
-	.incbin "baserom.dol", 0x3B1DC0, 0xC8
-
-.global lbl_803B5D88
-lbl_803B5D88:
-	.incbin "baserom.dol", 0x3B1E88, 0x38
-.global lbl_803B5DC0
-lbl_803B5DC0:
-	.incbin "baserom.dol", 0x3B1EC0, 0x34
-.global lbl_803B5DF4
-lbl_803B5DF4:
-	.incbin "baserom.dol", 0x3B1EF4, 0x7C
-.global lbl_803B5E70
-lbl_803B5E70:
-	.incbin "baserom.dol", 0x3B1F70, 0x34
-.global lbl_803B5EA4
-lbl_803B5EA4:
-	.incbin "baserom.dol", 0x3B1FA4, 0x9C
-.global lbl_803B5F40
-lbl_803B5F40:
-	.incbin "baserom.dol", 0x3B2040, 0xA8
-.global lbl_803B5FE8
-lbl_803B5FE8:
-	.incbin "baserom.dol", 0x3B20E8, 0x98
-.global lbl_803B6080
-lbl_803B6080:
-	.incbin "baserom.dol", 0x3B2180, 0x38
-.global lbl_803B60B8
-lbl_803B60B8:
-	.incbin "baserom.dol", 0x3B21B8, 0x1C
-.global lbl_803B60D4
-lbl_803B60D4:
-	.incbin "baserom.dol", 0x3B21D4, 0x4C4
-.global lbl_803B6598
-lbl_803B6598:
-	.incbin "baserom.dol", 0x3B2698, 0xC40
+dummy:
+	.string "<< RVL_SDK - SI \trelease build: Nov 30 2006 03:31:44 (0x4199_60831) >>"
+	.balign 4
 .global lbl_803B71D8
 lbl_803B71D8:
 	.incbin "baserom.dol", 0x3B32D8, 0x18

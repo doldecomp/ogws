@@ -524,7 +524,14 @@ RVL_SDK_O_FILES := \
 	build/asm/revolution/DSP/dsp.o \
 	build/asm/revolution/DSP/dsp_debug.o \
 	build/asm/revolution/DSP/dsp_task.o \
-
+	\
+	build/asm/revolution/DVD/dvdfs.o \
+	build/asm/revolution/DVD/dvd.o \
+	build/asm/revolution/DVD/dvdqueue.o \
+	build/asm/revolution/DVD/dvderror.o \
+	build/asm/revolution/DVD/dvdidutils.o \
+	build/asm/revolution/DVD/dvdFatal.o \
+	build/asm/revolution/DVD/dvd_broadway.o \
 
 GROUP_1_O_FILES := \
 	build/asm/text.o \
