@@ -1,5 +1,11 @@
 .include "macros.inc"
 
+.section .sdata, "wa"
+.balign 0x8
+lbl_804BD9A8:
+	.string "TPL.c"
+    .balign 4
+
 .section .data, "wa"
 .balign 0x8
 lbl_803B7298:

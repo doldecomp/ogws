@@ -537,7 +537,8 @@ RVL_SDK_O_FILES := \
 	build/asm/revolution/SI/SISamplingRate.o \
 	\
 	build/asm/revolution/TPL/TPL.o \
-
+	\
+	build/asm/revolution/WENC/wenc.o \
 
 GROUP_1_O_FILES := \
 	build/asm/text.o \
