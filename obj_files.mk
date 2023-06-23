@@ -424,10 +424,10 @@ RVL_SDK_O_FILES := \
 	build/revolution/GX/GXTransform.o \
 	build/asm/revolution/GX/GXPerf.o \
 	\
-	build/asm/revolution/IPC/ipcMain.o \
-	build/asm/revolution/IPC/ipcclt.o \
+	build/revolution/IPC/ipcMain.o \
+	build/revolution/IPC/ipcclt.o \
 	build/asm/revolution/IPC/memory.o \
-	build/asm/revolution/IPC/ipcProfile.o \
+	build/revolution/IPC/ipcProfile.o \
 	\
 	build/asm/revolution/MEM/mem_heapCommon.o \
 	build/asm/revolution/MEM/mem_expHeap.o \
