@@ -67,6 +67,8 @@ CFLAGS_ARC := -lang c99 -enum int -O4,p -inline auto -ipa file -volatileasm -Cpp
 CFLAGS_BASE := -lang c99 -enum int -O4,p -inline auto -ipa file -volatileasm -Cpp_exceptions off -RTTI off -proc gekko -fp hard -I- -Iinclude -ir include/MSL -ir include/revolution -nodefaults
 # Compiler flags for CNT
 CFLAGS_CNT := -lang c99 -enum int -O4,p -inline auto -ipa file -volatileasm -Cpp_exceptions off -RTTI off -proc gekko -fp hard -I- -Iinclude -ir include/MSL -ir include/revolution -nodefaults
+# Compiler flags for DB
+CFLAGS_DB := -lang c99 -enum int -O4,p -inline auto -ipa file -volatileasm -Cpp_exceptions off -RTTI off -proc gekko -fp hard -I- -Iinclude -ir include/MSL -ir include/revolution -nodefaults
 
 # elf2dol needs to know these in order to calculate sbss correctly.
 BSS_PDHR := 9
@@ -174,4 +176,8 @@ $(BUILD_DIR)/revolution/BASE/%.o: src/revolution/BASE/%.c
 
 $(BUILD_DIR)/revolution/CNT/%.o: src/revolution/CNT/%.c
 	$(CC) $(CFLAGS_CNT) -c -o $@ $<
+	$(PPROC) $(PPROCFLAGS) $@
+
+$(BUILD_DIR)/revolution/DB/%.o: src/revolution/DB/%.c
+	$(CC) $(CFLAGS_DB) -c -o $@ $<
 	$(PPROC) $(PPROCFLAGS) $@

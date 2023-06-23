@@ -519,7 +519,7 @@ RVL_SDK_O_FILES := \
 	\
 	build/asm/revolution/BTE/bte_unsplit.o \
 	\
-	build/asm/revolution/DB/db.o \
+	build/revolution/DB/db.o \
 	\
 	build/asm/revolution/DSP/dsp.o \
 	build/asm/revolution/DSP/dsp_debug.o \
