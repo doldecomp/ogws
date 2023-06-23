@@ -15101,4 +15101,4 @@ lbl_804C69C4:
 	.incbin "baserom.dol", 0x3CF604, 0x4
 .global lbl_804C69C8
 lbl_804C69C8:
-	.incbin "baserom.dol", 0x3CF608, 0x18
+	.incbin "baserom.dol", 0x3CF608, 0x8

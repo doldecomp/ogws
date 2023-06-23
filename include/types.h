@@ -32,4 +32,6 @@ typedef void UNKTYPE;
 enum { FALSE, TRUE };
 typedef int BOOL;
 
+typedef void (*funcptr_t)(void);
+
 #endif

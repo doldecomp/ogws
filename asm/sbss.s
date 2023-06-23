@@ -770,4 +770,4 @@ lbl_804BFA00:
 	.skip 0x8
 .global lbl_804BFA08
 lbl_804BFA08:
-	.skip 0x18
+	.skip 0x8

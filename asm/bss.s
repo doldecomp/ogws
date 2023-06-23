@@ -684,4 +684,4 @@ lbl_804BD2E8:
 	.skip 0x40
 .global lbl_804BD328
 lbl_804BD328:
-	.skip 0x58
+	.skip 0x44

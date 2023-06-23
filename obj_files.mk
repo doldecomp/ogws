@@ -446,34 +446,34 @@ RVL_SDK_O_FILES := \
 	build/revolution/NAND/NANDCore.o \
 	build/revolution/NAND/NANDCheck.o \
 	\
-	build/asm/revolution/OS/OS.o \
-	build/asm/revolution/OS/OSAlarm.o \
-	build/asm/revolution/OS/OSAlloc.o \
-	build/asm/revolution/OS/OSArena.o \
-	build/asm/revolution/OS/OSAudioSystem.o \
-	build/asm/revolution/OS/OSCache.o \
-	build/asm/revolution/OS/OSContext.o \
-	build/asm/revolution/OS/OSError.o \
-	build/asm/revolution/OS/OSExec.o \
-	build/asm/revolution/OS/OSFatal.o \
-	build/asm/revolution/OS/OSFont.o \
-	build/asm/revolution/OS/OSInterrupt.o \
-	build/asm/revolution/OS/OSLink.o \
-	build/asm/revolution/OS/OSMessage.o \
-	build/asm/revolution/OS/OSMemory.o \
-	build/asm/revolution/OS/OSMutex.o \
-	build/asm/revolution/OS/OSReset.o \
-	build/asm/revolution/OS/OSRtc.o \
-	build/asm/revolution/OS/OSSync.o \
-	build/asm/revolution/OS/OSThread.o \
-	build/asm/revolution/OS/OSTime.o \
-	build/asm/revolution/OS/OSUtf.o \
-	build/asm/revolution/OS/OSIpc.o \
-	build/asm/revolution/OS/OSStateTM.o \
-	build/asm/revolution/OS/__start.o \
-	build/asm/revolution/OS/OSPlayRecord.o \
-	build/asm/revolution/OS/OSStateFlags.o \
-	build/asm/revolution/OS/OSNet.o \
+	build/revolution/OS/OS.o \
+	build/revolution/OS/OSAlarm.o \
+	build/revolution/OS/OSAlloc.o \
+	build/revolution/OS/OSArena.o \
+	build/revolution/OS/OSAudioSystem.o \
+	build/revolution/OS/OSCache.o \
+	build/revolution/OS/OSContext.o \
+	build/revolution/OS/OSError.o \
+	build/revolution/OS/OSExec.o \
+	build/revolution/OS/OSFatal.o \
+	build/revolution/OS/OSFont.o \
+	build/revolution/OS/OSInterrupt.o \
+	build/revolution/OS/OSLink.o \
+	build/revolution/OS/OSMessage.o \
+	build/revolution/OS/OSMemory.o \
+	build/revolution/OS/OSMutex.o \
+	build/revolution/OS/OSReset.o \
+	build/revolution/OS/OSRtc.o \
+	build/revolution/OS/OSSync.o \
+	build/revolution/OS/OSThread.o \
+	build/revolution/OS/OSTime.o \
+	build/revolution/OS/OSUtf.o \
+	build/revolution/OS/OSIpc.o \
+	build/revolution/OS/OSStateTM.o \
+	build/revolution/OS/__start.o \
+	build/revolution/OS/OSPlayRecord.o \
+	build/revolution/OS/OSStateFlags.o \
+	build/revolution/OS/OSNet.o \
 	build/asm/revolution/OS/__ppc_eabi_init.o \
 	\
 	build/asm/revolution/SC/scsystem.o \

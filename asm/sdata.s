@@ -2334,4 +2334,4 @@ lbl_804BE970:
 	.incbin "baserom.dol", 0x3C85F0, 0x4
 .global lbl_804BE974
 lbl_804BE974:
-	.incbin "baserom.dol", 0x3C85F4, 0x6C
+	.incbin "baserom.dol", 0x3C85F4, 0x5C
