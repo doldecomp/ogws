@@ -36,7 +36,7 @@ extern "C" {
 #define FP_SUBNORMAL 5
 
 #define M_PI 3.141592653589793f
-#define M_SQRT3 1.7320508075688772f
+#define M_SQRT3 1.73205f
 
 #define fpclassify(x)                                                          \
     (sizeof(x) == sizeof(float)                                                \

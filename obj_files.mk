@@ -410,18 +410,18 @@ RVL_SDK_O_FILES := \
 	\
 	build/asm/revolution/GX/GXInit.o \
 	build/asm/revolution/GX/GXFifo.o \
-	build/asm/revolution/GX/GXAttr.o \
+	build/revolution/GX/GXAttr.o \
 	build/asm/revolution/GX/GXMisc.o \
-	build/asm/revolution/GX/GXGeometry.o \
+	build/revolution/GX/GXGeometry.o \
 	build/asm/revolution/GX/GXFrameBuf.o \
-	build/asm/revolution/GX/GXLight.o \
+	build/revolution/GX/GXLight.o \
 	build/asm/revolution/GX/GXTexture.o \
-	build/asm/revolution/GX/GXBump.o \
+	build/revolution/GX/GXBump.o \
 	build/asm/revolution/GX/GXTev.o \
-	build/asm/revolution/GX/GXPixel.o \
-	build/asm/revolution/GX/GXDraw.o \
-	build/asm/revolution/GX/GXDisplayList.o \
-	build/asm/revolution/GX/GXTransform.o \
+	build/revolution/GX/GXPixel.o \
+	build/revolution/GX/GXDraw.o \
+	build/revolution/GX/GXDisplayList.o \
+	build/revolution/GX/GXTransform.o \
 	build/asm/revolution/GX/GXPerf.o \
 	\
 	build/asm/revolution/IPC/ipcMain.o \
