@@ -71,6 +71,8 @@ CFLAGS_CNT := -lang c99 -enum int -O4,p -inline auto -ipa file -volatileasm -Cpp
 CFLAGS_DB := -lang c99 -enum int -O4,p -inline auto -ipa file -volatileasm -Cpp_exceptions off -RTTI off -proc gekko -fp hard -I- -Iinclude -ir include/MSL -ir include/revolution -nodefaults
 # Compiler flags for DSP
 CFLAGS_DSP := -lang c99 -enum int -O4,p -inline auto -ipa file -volatileasm -Cpp_exceptions off -RTTI off -proc gekko -fp hard -I- -Iinclude -ir include/MSL -ir include/revolution -nodefaults
+# Compiler flags for DVD
+CFLAGS_DVD := -lang c99 -enum int -O4,p -inline auto -ipa file -volatileasm -Cpp_exceptions off -RTTI off -proc gekko -fp hard -I- -Iinclude -ir include/MSL -ir include/revolution -nodefaults
 # Compiler flags for EXI
 CFLAGS_EXI := -lang c99 -enum int -O4,p -inline auto -ipa file -volatileasm -Cpp_exceptions off -RTTI off -proc gekko -fp hard -I- -Iinclude -ir include/MSL -ir include/revolution -nodefaults
 CFLAGS_EXIBIOS := -lang c99 -enum int -O3 -inline auto -ipa file -volatileasm -Cpp_exceptions off -RTTI off -proc gekko -fp hard -I- -Iinclude -ir include/MSL -ir include/revolution -nodefaults
@@ -193,6 +195,10 @@ $(BUILD_DIR)/revolution/DB/%.o: src/revolution/DB/%.c
 
 $(BUILD_DIR)/revolution/DSP/%.o: src/revolution/DSP/%.c
 	$(CC) $(CFLAGS_DSP) -c -o $@ $<
+	$(PPROC) $(PPROCFLAGS) $@
+
+$(BUILD_DIR)/revolution/DVD/%.o: src/revolution/DVD/%.c
+	$(CC) $(CFLAGS_DVD) -c -o $@ $<
 	$(PPROC) $(PPROCFLAGS) $@
 
 # EXIBios is a special case, compiled differently from rest of library

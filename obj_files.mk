@@ -529,9 +529,9 @@ RVL_SDK_O_FILES := \
 	build/asm/revolution/DVD/dvd.o \
 	build/asm/revolution/DVD/dvdqueue.o \
 	build/asm/revolution/DVD/dvderror.o \
-	build/asm/revolution/DVD/dvdidutils.o \
+	build/revolution/DVD/dvdidutils.o \
 	build/asm/revolution/DVD/dvdFatal.o \
-	build/asm/revolution/DVD/dvd_broadway.o \
+	build/revolution/DVD/dvd_broadway.o \
 	\
 	build/asm/revolution/SI/SIBios.o \
 	build/asm/revolution/SI/SISamplingRate.o \
