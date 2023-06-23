@@ -4,24 +4,24 @@ namespace nw4r
 {
 	namespace ut
 	{
-		UNKTYPE NandFileStream::NandAsyncCallback_(s32 r3, NANDCommandBlock * r4)
-		{
-			NANDCB_UNK * r4_2 = r4->PTR_0x144;
-			
-			r4_2->BYTE_0x166 = false;
-			r4_2->WORD_0x8 = r3;
-			if (!r4_2->CALLBACK_0xC) return;
-			r4_2->CALLBACK_0xC(r3, r4_2, r4_2->WORD_0x10);
-			return;
+		void NandFileStream::NandAsyncCallback_(s32 result, NANDCommandBlock* block) {
+			NandFileStream* strm = reinterpret_cast<AsyncContext*>(block)->stream;
+
+			strm->mBusyFlag = false;
+			strm->WORD_0x8 = result;
+
+			if (strm->ASYNC_0xC != NULL) {
+				strm->ASYNC_0xC(result, strm, strm->PTR_0x10);
+			}
 		}
 		
-		NandFileStream::NandFileStream(const char * str, u32 num) : mPosition()
+		NandFileStream::NandFileStream(const char * str, u32 num) : mFilePosition()
 		{
 			Initialize_();
 			Open(str, num);
 		}
 		
-		NandFileStream::NandFileStream(const NANDFileInfo * fileInfo, u32 num, bool b) : mPosition()
+		NandFileStream::NandFileStream(const NANDFileInfo * fileInfo, u32 num, bool b) : mFilePosition()
 		{
 			Initialize_();
 			Open(fileInfo, num, b);
@@ -41,20 +41,20 @@ namespace nw4r
 			mReadFlag = num & 0x00000001;
 			mWriteFlag = num & 0x00000002;
 			
-			if (NANDOpen(str, &mFileInfo, num)) return false;
+			if (NANDOpen(str, &mAsyncContext.info, num)) return false;
 			
 			if (mReadFlag)
 			{
-				if (NANDGetLength(&mFileInfo, &fileSize) != 0)
+				if (NANDGetLength(&mAsyncContext.info, &fileSize) != 0)
 				{
-					NANDClose(&mFileInfo);
+					NANDClose(&mAsyncContext.info);
 					return false;
 				}
 				
-				mPosition.SetFileSize(fileSize);
+				mFilePosition.SetFileSize(fileSize);
 			}
 			
-			mPosition.Seek(0, 0);
+			mFilePosition.Seek(0, 0);
 			
 			BYTE_0x167 = 1;
 			BYTE_0x168 = 1;
@@ -72,17 +72,17 @@ namespace nw4r
 			mReadFlag = num & 0x00000001;
 			mWriteFlag = num & 0x00000002;
 			
-			mFileInfo = *fileInfo;
+			mAsyncContext.info = *fileInfo;
 			
-			if (NANDGetLength(&mFileInfo, &fileSize) != 0)
+			if (NANDGetLength(&mAsyncContext.info, &fileSize) != 0)
 			{
-				if (b) NANDClose(&mFileInfo);
+				if (b) NANDClose(&mAsyncContext.info);
 				
 				return false;
 			}
 			
-			mPosition.SetFileSize(fileSize);
-			mPosition.Seek(0, 0);
+			mFilePosition.SetFileSize(fileSize);
+			mFilePosition.Seek(0, 0);
 			
 			BYTE_0x167 = 0;
 			BYTE_0x168 = b;
@@ -95,7 +95,7 @@ namespace nw4r
 		{
 			if (BYTE_0x168 && BOOL_0x4)
 			{
-				NANDClose(&mFileInfo);
+				NANDClose(&mAsyncContext.info);
 				BOOL_0x4 = false;
 			}
 		}
@@ -104,9 +104,9 @@ namespace nw4r
 		{
 			int ret;
 			
-			NANDSeek(&mFileInfo, mPosition.mFileOffset, 0);
-			ret = NANDRead(&mFileInfo, buf, size);
-			if (ret > 0) mPosition.Skip(ret);
+			NANDSeek(&mAsyncContext.info, mFilePosition.mFileOffset, NAND_SEEK_BEG);
+			ret = NANDRead(&mAsyncContext.info, buf, size);
+			if (ret > 0) mFilePosition.Skip(ret);
 			
 			return ret;
 		}
@@ -117,12 +117,12 @@ namespace nw4r
 			ASYNC_0xC = async;
 			PTR_0x10 = ptr;
 			mBusyFlag = true;
-			NANDSeek(&mFileInfo, mPosition.mFileOffset, 0);
-			ret = NANDReadAsync(&mFileInfo, buf, size, NandAsyncCallback_, UNK_0x1C) == 0;
+			NANDSeek(&mAsyncContext.info, mFilePosition.mFileOffset, NAND_SEEK_BEG);
+			ret = NANDReadAsync(&mAsyncContext.info, buf, size, NandAsyncCallback_, &mAsyncContext.block) == 0;
 			
 			if (ret)
 			{
-				mPosition.Skip(size);
+				mFilePosition.Skip(size);
 			}
 			else
 			{
@@ -134,8 +134,8 @@ namespace nw4r
 		
 		UNKTYPE NandFileStream::Write(const void * buf, u32 size)
 		{
-			NANDSeek(&mFileInfo, mPosition.mFileOffset, 0);
-			mPosition.Append(NANDWrite(&mFileInfo, buf, size));
+			NANDSeek(&mAsyncContext.info, mFilePosition.mFileOffset, NAND_SEEK_BEG);
+			mFilePosition.Append(NANDWrite(&mAsyncContext.info, buf, size));
 		}
 		
 		bool NandFileStream::WriteAsync(const void * buf, u32 size, AsyncFunctor async, void * ptr)
@@ -143,13 +143,13 @@ namespace nw4r
 			ASYNC_0xC = async;
 			PTR_0x10 = ptr;
 			mBusyFlag = true;
-			NANDSeek(&mFileInfo, mPosition.mFileOffset, 0);
+			NANDSeek(&mAsyncContext.info, mFilePosition.mFileOffset, NAND_SEEK_BEG);
 			
-			UNKWORD ret = NANDWriteAsync(&mFileInfo, buf, size, NandAsyncCallback_, UNK_0x1C);
+			UNKWORD ret = NANDWriteAsync(&mAsyncContext.info, buf, size, NandAsyncCallback_, &mAsyncContext.block);
 			
 			if (ret == 0)
 			{
-				mPosition.Append(size);
+				mFilePosition.Append(size);
 			}
 			else
 			{
@@ -161,7 +161,7 @@ namespace nw4r
 		
 		void NandFileStream::Seek(s32 offset, u32 origin)
 		{
-			mPosition.Seek(offset, origin);
+			mFilePosition.Seek(offset, origin);
 		}
 		
 		u32 NandFileStream::GetBufferAlign() const { return 0x20; }
@@ -174,8 +174,8 @@ namespace nw4r
 		bool NandFileStream::CanSeek() const { return true; }
 		bool NandFileStream::CanAsync() const { return true; }
 		
-		u32 NandFileStream::GetSize() const { return mPosition.mFileSize; }
-		u32 NandFileStream::Tell() const { return mPosition.mFileOffset; }
+		u32 NandFileStream::GetSize() const { return mFilePosition.mFileSize; }
+		u32 NandFileStream::Tell() const { return mFilePosition.mFileOffset; }
 
 		bool NandFileStream::IsBusy() const { return mBusyFlag; }
 		

@@ -3,7 +3,7 @@
 #include <types.h>
 #include "ut_IOStream.h"
 #include "ut_FileStream.h"
-#include <revolution/NAND/nand.h>
+#include <revolution/NAND.h>
 
 namespace nw4r
 {
@@ -11,12 +11,14 @@ namespace nw4r
 	{
 		struct NandFileStream : FileStream
 		{
-			FilePosition mPosition; // at 0x14
-			char UNK_0x1C[0xB8];
-			
-			NANDFileInfo mFileInfo; // at 0xd4 (ends in 0x160)
-			
-			NandFileStream * THIS_0x160;
+			struct AsyncContext {
+				NANDCommandBlock block; // at 0x0
+				NANDFileInfo info;      // at 0xB8
+				NandFileStream* stream; // at 0x144
+			};
+
+			FilePosition mFilePosition; // at 0x14
+			AsyncContext mAsyncContext; // at 0x1C
 			
 			bool mReadFlag; // at 0x164
 			bool mWriteFlag; // at 0x165
@@ -24,7 +26,7 @@ namespace nw4r
 			bool BYTE_0x167; // at 0x167
 			bool BYTE_0x168; // at 0x168
 			
-			static UNKTYPE NandAsyncCallback_(s32, NANDCommandBlock *);
+			static void NandAsyncCallback_(s32, NANDCommandBlock *);
 			
 			NandFileStream(const char *, u32);
 			NandFileStream(const NANDFileInfo *, u32, bool);
@@ -73,7 +75,7 @@ namespace nw4r
 				ASYNC_0xC = NULL;
 				PTR_0x10 = NULL;
 				WORD_0x8 = 0;
-				THIS_0x160 = this;
+				mAsyncContext.stream = this;
 			}
 			
 			static detail::RuntimeTypeInfo typeInfo;
