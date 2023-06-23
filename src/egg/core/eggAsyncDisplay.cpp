@@ -28,7 +28,7 @@ namespace
 
 using namespace EGG;
 
-void PostRetraceCallback()
+void PostRetraceCallback(u32 retraceCount)
 {
     AsyncDisplay *disp = spSelector;
     BaseSystem::getXfbManager()->postVRetrace();
@@ -141,7 +141,7 @@ namespace EGG
     {
         if (WORD_0x60 == 1)
         {
-            return Video::getTickPerVRetrace(VI_NTSC);
+            return Video::getTickPerVRetrace(VI_TV_FMT_NTSC);
         }
 
         return Video::getTickPerVRetrace();

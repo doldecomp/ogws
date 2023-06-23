@@ -36,7 +36,7 @@ namespace EGG
 #ifdef __cplusplus
 extern "C" {
 #endif
-    void PostRetraceCallback(void);
+    void PostRetraceCallback(u32 retraceCount);
     void DrawDoneCallback(void);
     static EGG::AsyncDisplay *spSelector;
 #ifdef __cplusplus
