@@ -2,7 +2,7 @@
 #include "eggGraphicsFifo.h"
 #include "eggHeap.h"
 #include "eggAssert.h"
-#include <revolution/OS/OS.h>
+#include <revolution/OS.h>
 #include <revolution/GX/GXFifo.h>
 #include <revolution/GX/GXInit.h>
 

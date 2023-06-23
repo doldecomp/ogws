@@ -32,8 +32,8 @@ namespace EGG
     {
         mHeap = NULL;
         mOSThread = pThread;
-        mStackSize = ut::GetOffsetFromPtr(pThread->mStackTop, pThread->mStackBottom);
-        mStackMemory = pThread->mStackTop;
+        mStackSize = ut::GetOffsetFromPtr(pThread->stackBegin, pThread->stackEnd);
+        mStackMemory = pThread->stackBegin;
         
         setCommonMesgQueue(mesgCount, Heap::getCurrentHeap());
     }
@@ -108,14 +108,14 @@ namespace EGG
 
     }
 
-    UNKWORD Thread::start(void *pThread)
+    void* Thread::start(void *pThread)
     {
         return static_cast<Thread *>(pThread)->run();
     }
 
-    UNKWORD Thread::run()
+    void* Thread::run()
     {
-        return 0;
+        return NULL;
     }
 
     ut::List Thread::sThreadList;

@@ -54,7 +54,7 @@ namespace nw4r
 				void Shutdown();
 				static void AxCallbackFunc();
 				void AxCallbackProc();
-				static UNKWORD SoundThreadFunc(void *);
+				static void* SoundThreadFunc(void *);
 				void RegisterPlayerCallback(PlayerCallback *);
 				void UnregisterPlayerCallback(PlayerCallback *);
 				void SoundThreadProc();

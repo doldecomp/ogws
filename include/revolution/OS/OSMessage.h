@@ -1,29 +1,29 @@
-#ifndef REVOSDK_OS_MESSAGE
-#define REVOSDK_OS_MESSAGE
+#ifndef RVL_SDK_OS_MESSAGE_H
+#define RVL_SDK_OS_MESSAGE_H
+#include <revolution/OS/OSThread.h>
 #include <types.h>
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-typedef void * OSMessage;
+// General-purpose typedef
+typedef void* OSMessage;
 
-struct OSMessageQueue
-{
-    UNKWORD WORD_0x0;
-    UNKWORD WORD_0x4;
-    UNKWORD WORD_0x8;
-    UNKWORD WORD_0xC;
-    UNKWORD WORD_0x10;
-    UNKWORD WORD_0x14;
-    UNKWORD WORD_0x18;
-    UNKWORD WORD_0x1C;
-};
+typedef enum { OS_MSG_PERSISTENT = (1 << 0) } OSMessageFlags;
 
-UNKWORD OSInitMessageQueue(struct OSMessageQueue *, OSMessage * buffer, UNKWORD mesgCount);
+typedef struct OSMessageQueue {
+    OSThreadQueue sendQueue; // at 0x0
+    OSThreadQueue recvQueue; // at 0x8
+    OSMessage* buffer;       // at 0x10
+    s32 capacity;            // at 0x14
+    s32 front;               // at 0x18
+    s32 size;                // at 0x1C
+} OSMessageQueue;
 
-BOOL OSSendMessage(struct OSMessageQueue *, OSMessage, UNKWORD);
-BOOL OSReceiveMessage(struct OSMessageQueue *, OSMessage *, UNKWORD);
-BOOL OSJamMessage(struct OSMessageQueue *, UNKWORD, UNKWORD);
+void OSInitMessageQueue(OSMessageQueue* queue, OSMessage* buffer, s32 capacity);
+BOOL OSSendMessage(OSMessageQueue* queue, OSMessage mesg, u32 flags);
+BOOL OSReceiveMessage(OSMessageQueue* queue, OSMessage* mesg, u32 flags);
+BOOL OSJamMessage(OSMessageQueue* queue, OSMessage mesg, u32 flags);
 
 #ifdef __cplusplus
 }

@@ -56,7 +56,7 @@ namespace nw4r
 		{
 			if (mBuffer) return false;
 			
-			UNKWORD ret = OSInitFont(pBuffer);
+			UNKWORD ret = OSInitFont(static_cast<OSFontHeader*>(pBuffer));
 			
 			if (ret)
 			{
@@ -78,9 +78,9 @@ namespace nw4r
 		{
 			switch (OSGetFontEncode())
 			{
-				case OS_ENCODE_CP1252:
+				case OS_FONT_ENCODE_ANSI:
 					return 0x00020120;
-				case OS_ENCODE_SJIS:
+				case OS_FONT_ENCODE_SJIS:
 					return 0x00120F00;
 			}
 			
@@ -89,7 +89,7 @@ namespace nw4r
 		
 		int RomFont::GetWidth() const
 		{
-			return static_cast<OSFontHeader *>(mBuffer)->charWidth;
+			return static_cast<OSFontHeader *>(mBuffer)->width;
 		}
 		
 		int RomFont::GetHeight() const
@@ -124,7 +124,7 @@ namespace nw4r
 		
 		int RomFont::GetMaxCharWidth() const
 		{
-			return static_cast<OSFontHeader *>(mBuffer)->charWidth;
+			return static_cast<OSFontHeader *>(mBuffer)->width;
 		}
 		
 		UNKWORD RomFont::GetType() const
@@ -139,7 +139,7 @@ namespace nw4r
 		
 		int RomFont::GetLineFeed() const
 		{
-			return static_cast<OSFontHeader *>(mBuffer)->linefeed;
+			return static_cast<OSFontHeader *>(mBuffer)->leading;
 		}
 		
 		CharWidths RomFont::GetDefaultCharWidths() const
@@ -156,16 +156,15 @@ namespace nw4r
 		{
 			switch (mFontEncode)
 			{
-				case OS_ENCODE_CP1252:
+				case OS_FONT_ENCODE_ANSI:
 					return IsCP1252Char(undefChar);
-				case OS_ENCODE_SJIS:
+				case OS_FONT_ENCODE_SJIS:
 					return IsSJISHalfWidthChar(undefChar) || IsSJISFullWidthChar(undefChar);
 			}
 		}
 		
 		bool RomFont::SetAlternateChar(u16 alt)
 		{
-			
 			u16 prevAlt;
 			
 			u8 lo;
@@ -180,10 +179,10 @@ namespace nw4r
 			//cond = HandleUndefinedChar(alt);
 			switch (mFontEncode)
 			{
-				case OS_ENCODE_CP1252:
+				case OS_FONT_ENCODE_ANSI:
 					cond = IsCP1252Char(alt);
 					break;
-				case OS_ENCODE_SJIS:
+				case OS_FONT_ENCODE_SJIS:
 					cond = IsSJISHalfWidthChar(alt) || (
 						hi = BitExtract<u16>(alt, 8, 8),
 						lo = BitExtract<u16>(alt, 8, 0),
@@ -204,7 +203,7 @@ namespace nw4r
 		
 		void RomFont::SetLineFeed(int lf)
 		{
-			static_cast<OSFontHeader *>(mBuffer)->linefeed = lf;
+			static_cast<OSFontHeader *>(mBuffer)->leading = lf;
 		}
 		
 		int RomFont::GetCharWidth(u16 ch) const
@@ -262,10 +261,10 @@ namespace nw4r
 			
 			u8 nch;
 			
-			u8 * stack_0x18;
-			UNKWORD stack_0x14;
-			UNKWORD stack_0x10;
-			UNKWORD stack_0xc;
+			void * stack_0x18;
+			u32 stack_0x14;
+			u32 stack_0x10;
+			u32 stack_0xc;
 			
 			char str[4];
 			
@@ -289,7 +288,7 @@ namespace nw4r
 			
 			OSGetFontTexture(str, &stack_0x18, &stack_0x14, &stack_0x10, &stack_0xc);
 			
-			pGlyph->PTR_0x0 = stack_0x18;
+			pGlyph->PTR_0x0 = static_cast<u8*>(stack_0x18);
 			
 			pGlyph->BYTE_0x4 = 0;
 			pGlyph->cellWidth = stack_0xc;
@@ -298,8 +297,8 @@ namespace nw4r
 			
 			pGlyph->WORD_0x8 = 0;
 			
-			pGlyph->SHORT_0xC = static_cast<OSFontHeader *>(mBuffer)->SHORT_0x1E;
-			pGlyph->SHORT_0xE = static_cast<OSFontHeader *>(mBuffer)->SHORT_0x20;
+			pGlyph->SHORT_0xC = static_cast<OSFontHeader *>(mBuffer)->sheetWidth;
+			pGlyph->SHORT_0xE = static_cast<OSFontHeader *>(mBuffer)->sheetHeight;
 			pGlyph->SHORT_0x10 = stack_0x14;
 			pGlyph->SHORT_0x12 = stack_0x10;
 		}
@@ -308,9 +307,9 @@ namespace nw4r
 		{
 			switch (mFontEncode)
 			{
-				case OS_ENCODE_CP1252:
+				case OS_FONT_ENCODE_ANSI:
 					return FontEnc_CP1252;
-				case OS_ENCODE_SJIS:
+				case OS_FONT_ENCODE_SJIS:
 					return FontEnc_SJIS;
 			}
 			

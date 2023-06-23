@@ -11,7 +11,7 @@ namespace nw4r
         {
             struct TaskThread
             {
-                static int ThreadFunc(void *);
+                static void* ThreadFunc(void *);
                 
                 TaskThread();
                 ~TaskThread();

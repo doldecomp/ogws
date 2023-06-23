@@ -36,7 +36,7 @@ namespace nw4r
 				OSCreateAlarm(&mAlarm);
 				
 				s64 time = OSGetTime();
-				u32 num = BUS_SPEED / 4 / 125000 * 6666667 / 8000;
+				u32 num = OS_BUS_CLOCK_SPEED / 4 / 125000 * 6666667 / 8000;
 				
 				OSSetPeriodicAlarm(&mAlarm, time, num, RemoteSpeakerAlarmProc);
 				

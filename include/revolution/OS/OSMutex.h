@@ -1,17 +1,24 @@
-#ifndef REVOSDK_OS_MUTEX
-#define REVOSDK_OS_MUTEX
+#ifndef RVL_SDK_OS_MUTEX_H
+#define RVL_SDK_OS_MUTEX_H
+#include <revolution/OS/OSThread.h>
+#include <types.h>
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-struct OSMutex
-{
-	char UNK_0x0[0x18];
-} __attribute__ ((aligned(4)));
+typedef struct OSMutex {
+    OSThreadQueue queue;  // at 0x0
+    OSThread* thread;     // at 0x8
+    s32 lock;             // at 0xC
+    struct OSMutex* next; // at 0x10
+    struct OSMutex* prev; // at 0x14
+} OSMutex;
 
-void OSLockMutex(struct OSMutex *);
-void OSInitMutex(struct OSMutex *);
-void OSUnlockMutex(struct OSMutex *);
+void OSInitMutex(OSMutex* mutex);
+void OSLockMutex(OSMutex* mutex);
+void OSUnlockMutex(OSMutex* mutex);
+void __OSUnlockAllMutex(OSThread* thread);
+BOOL OSTryLockMutex(OSMutex* mutex);
 
 #ifdef __cplusplus
 }

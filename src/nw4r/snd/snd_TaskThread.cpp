@@ -46,7 +46,7 @@ namespace nw4r
                 }
             }
 
-            int TaskThread::ThreadFunc(void *p)
+            void* TaskThread::ThreadFunc(void *p)
             {
                 TaskThread *pThread = (TaskThread *)p;
 
@@ -60,7 +60,7 @@ namespace nw4r
                     pInstance->ExecuteTask();
                 }
 
-                return 0;
+                return NULL;
             }
         }
     }

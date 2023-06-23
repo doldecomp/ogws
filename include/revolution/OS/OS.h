@@ -1,122 +1,87 @@
-#ifndef REVOSDK_OS_H
-#define REVOSDK_OS_H
+#ifndef RVL_SDK_OS_H
+#define RVL_SDK_OS_H
+#include <revolution/OS/OSContext.h>
+#include <revolution/OS/OSExec.h>
 #include <types.h>
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#define OSIsMEM1Region(addr) (((u32)addr & 0x30000000) == 0)
+typedef enum {
+    OS_CONSOLE_MASK = 0xF0000000,
+    OS_CONSOLE_MASK_RVL = 0x00000000,
+    OS_CONSOLE_MASK_EMU = 0x10000000,
+    OS_CONSOLE_MASK_TDEV = 0x20000000,
 
-volatile u32 BUS_SPEED : 0x800000f8;
+    OS_CONSOLE_RVL_PP_1 = 0x00000011,
+    OS_CONSOLE_RVL_PP_2_1 = 0x00000012,
+    OS_CONSOLE_RVL_PP_2_2 = 0x00000020,
 
-UNKTYPE OSRegisterVersion(const char *);
+    OS_CONSOLE_RVL_EMU = 0x10000008,
+    OS_CONSOLE_NDEV_1_0 = 0x10000010,
+    OS_CONSOLE_NDEV_1_1 = 0x10000011,
+    OS_CONSOLE_NDEV_1_2 = 0x10000012,
+    OS_CONSOLE_NDEV_2_0 = 0x10000020,
+    OS_CONSOLE_NDEV_2_1 = 0x10000021,
+} OSConsoleType;
 
-static void OSInitFastCast(void)
-{
-	asm
-	{
-		li r3, 4
-		oris r3, r3, 4
-		mtspr 0x392, r3
-		li r3, 5
-		oris r3, r3, 5
-		mtspr 0x393, r3
-		li r3, 6
-		oris r3, r3, 6
-		mtspr 0x394, r3
-		li r3, 7
-		oris r3, r3, 7
-		mtspr 0x395, r3
-	}
-}
+typedef enum {
+    OS_APP_TYPE_IPL = 0x40,
+    OS_APP_TYPE_DVD = 0x80,
+    OS_APP_TYPE_CHANNEL = 0x81,
+} OSAppType;
 
-static void OSSetGQR6(register u32 a, register u32 b)
-{
-	register u32 val = ((b << 8 | a) << 16) | ((b << 8) | a);
-	asm
-	{
-		mtspr 0x396, val
-	}
-}
+typedef enum {
+    OS_EXC_SYSTEM_RESET,
+    OS_EXC_MACHINE_CHECK,
+    OS_EXC_DSI,
+    OS_EXC_ISI,
+    OS_EXC_EXT_INTERRUPT,
+    OS_EXC_ALIGNMENT,
+    OS_EXC_PROGRAM,
+    OS_EXC_FP_UNAVAIL,
+    OS_EXC_DECREMENTER,
+    OS_EXC_SYSTEM_CALL,
+    OS_EXC_TRACE,
+    OS_EXC_PERF_MONITOR,
+    OS_EXC_IABR,
+    OS_EXC_SMI,
+    OS_EXC_THERMAL_INT,
 
-static void OSSetGQR7(register u32 a, register u32 b)
-{
-	register u32 val = ((b << 8 | a) << 16) | ((b << 8) | a);
-	asm
-	{
-		mtspr 0x397, val
-	}
-}
+    OS_EXC_MAX
+} OSExceptionType;
 
-static float __OSu16tof32(register const u16 * arg)
-{
-	register f32 ret;
-	
-	asm
-	{
-		psq_l ret, 0(arg), 1, 3
-	}
-	
-	return ret;
-}
+typedef struct OSIOSRev {
+    u8 idHi;       // at 0x0
+    u8 idLo;       // at 0x1
+    u8 verMajor;   // at 0x2
+    u8 verMinor;   // at 0x3
+    u8 buildMon;   // at 0x4
+    u8 buildDay;   // at 0x5
+    u16 buildYear; // at 0x6
+} OSIOSRev;
 
-static void OSu16tof32(const u16 * in, f32 * out)
-{
-	*out = __OSu16tof32(in);
-}
+typedef void (*OSExceptionHandler)(u8 type, OSContext* ctx);
 
-static int __OSf32tou16(register f32 arg)
-{
-	u16 ret[2];
-	register u16 * ptr = ret;
-	
-	asm
-	{
-		psq_st arg, 0(ptr), 1, 3
-	}
-	
-	return *ptr;
-}
+extern BOOL __OSInIPL;
+extern BOOL __OSInNandBoot;
+extern BOOL __OSIsGcam;
+extern s64 __OSStartTime;
+extern OSExecParams __OSRebootParams;
 
-static void OSf32tou16(const f32 * in, u16 * out)
-{
-	*out = __OSf32tou16(*in);
-}
-
-static float __OSs16tof32(register const s16 * arg)
-{
-	register f32 ret;
-	
-	asm
-	{
-		psq_l ret, 0(arg), 1, 5
-	}
-	
-	return ret;
-}
-
-static void OSs16tof32(const s16 * in, f32 * out)
-{
-	*out = __OSs16tof32(in);
-}
-
-static int __OSf32tos16(register f32 arg)
-{
-	s16 ret[2];
-	register s16 * ptr = ret;
-	
-	asm
-	{
-		psq_st arg, 0(ptr), 1, 5
-	}
-	
-	return *ptr;
-}
-
-static void OSf32tos16(const f32 * in, s16 * out)
-{
-	*out = __OSf32tos16(*in);
-}
+void __OSFPRInit(void);
+u32 __OSGetHollywoodRev(void);
+void __OSGetIOSRev(OSIOSRev* rev);
+u32 OSGetConsoleType(void);
+void OSInit(void);
+OSExceptionHandler __OSSetExceptionHandler(u8 type, OSExceptionHandler handler);
+OSExceptionHandler __OSGetExceptionHandler(u8 type);
+void OSDefaultExceptionHandler(u8 type, OSContext* ctx);
+void __OSPSInit(void);
+u32 __OSGetDIConfig(void);
+void OSRegisterVersion(const char* ver);
+const char* OSGetAppGamename(void);
+u8 OSGetAppType(void);
 
 #ifdef __cplusplus
 }

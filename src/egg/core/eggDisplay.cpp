@@ -94,7 +94,7 @@ namespace EGG
     {
         const s32 endTick = OSGetTick();
         mDeltaTick = endTick - mBeginTick;
-        mFrequency = 1000000.0f / ((mDeltaTick * 8) / ((BUS_SPEED >> 2) / 125000));
+        mFrequency = 1000000.0f / ((mDeltaTick * 8) / ((OS_BUS_CLOCK_SPEED >> 2) / 125000));
         mBeginTick = endTick;
     }
 }

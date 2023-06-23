@@ -15,9 +15,9 @@ namespace EGG
         void initialize();
         static UNKTYPE switchThreadCallback(OSThread *, OSThread *);
         void setCommonMesgQueue(int, Heap *); // inlined
-        static UNKWORD start(void *);
+        static void* start(void *);
         virtual ~Thread(); // at 0x8
-        virtual UNKWORD run(); // at 0xC
+        virtual void* run(); // at 0xC
         virtual void onEnter(); // at 0x10
         virtual void onExit(); // at 0x14
 
