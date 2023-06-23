@@ -60,7 +60,7 @@ CFLAGS_BASE := -lang c99 -enum int -O4,p -inline auto -ipa file -volatileasm -Cp
 BSS_PDHR := 9
 
 ASM_DIRS := asm \
-	asm/revolution asm/nw4r asm/egg asm/runtime asm/MSL asm/MetroTRK asm/RVLFaceLib asm/homebuttonMiniLib \
+	asm/revolution asm/nw4r asm/egg asm/runtime asm/MSL asm/MetroTRK asm/RVLFaceLib asm/homebuttonMiniLib asm/RP \
 	asm/MetroTRK/debugger/Export asm/MetroTRK/debugger/Os asm/MetroTRK/debugger/Portable asm/MetroTRK/debugger/Processor asm/MetroTRK/gamedev \
 	asm/revolution/NdevExi2AD asm/revolution/KPAD asm/revolution/PAD asm/revolution/WPAD asm/revolution/EUART asm/revolution/EXI asm/revolution/FS \
 	asm/revolution/GX asm/revolution/IPC asm/revolution/MEM asm/revolution/MTX asm/revolution/NAND asm/revolution/OS asm/revolution/SC \
@@ -68,7 +68,8 @@ ASM_DIRS := asm \
 	asm/revolution/BASE asm/revolution/BTE asm/revolution/DB asm/revolution/DSP asm/revolution/DVD asm/revolution/SI asm/revolution/TPL \
 	asm/revolution/WENC asm/revolution/CNT asm/revolution/ESP asm/revolution/NET asm/revolution/NWC24 asm/revolution/VF \
 	asm/nw4r/ut asm/nw4r/ef asm/nw4r/math asm/nw4r/snd asm/nw4r/g3d asm/nw4r/lyt \
-	asm/egg/gfx asm/egg/math asm/egg/core asm/egg/audio asm/egg/util
+	asm/egg/gfx asm/egg/math asm/egg/core asm/egg/audio asm/egg/util \
+	asm/RP/RPKernel
 
 SRC_DIRS := src \
 	revolution nw4r egg runtime MetroTRK \

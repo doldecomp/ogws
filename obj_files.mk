@@ -571,6 +571,9 @@ RVL_SDK_O_FILES := \
 	build/asm/RVLFaceLib/rfl_unsplit.o \
 	\
 	build/asm/homebuttonMiniLib/hbm_unsplit.o \
+	\
+	build/asm/RP/RPKernel/RPSysSystem.o \
+	build/asm/main.o \
 
 
 GROUP_1_O_FILES := \
