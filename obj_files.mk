@@ -521,9 +521,9 @@ RVL_SDK_O_FILES := \
 	\
 	build/revolution/DB/db.o \
 	\
-	build/asm/revolution/DSP/dsp.o \
-	build/asm/revolution/DSP/dsp_debug.o \
-	build/asm/revolution/DSP/dsp_task.o \
+	build/revolution/DSP/dsp.o \
+	build/revolution/DSP/dsp_debug.o \
+	build/revolution/DSP/dsp_task.o \
 	\
 	build/asm/revolution/DVD/dvdfs.o \
 	build/asm/revolution/DVD/dvd.o \
