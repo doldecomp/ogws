@@ -36,7 +36,7 @@ namespace EGG
     }
     
     UNKTYPE * ArcPlayer::openArchive(const char *name, snd::SoundHeap *heap,
-        SARC_STORAGE storage, struct ARCHandle *handle) 
+        SARC_STORAGE storage, CNTHandle *handle) 
     {
         UNKTYPE *ret = NULL;
 
@@ -182,7 +182,7 @@ namespace EGG
         return NULL;
     }
     
-    UNKTYPE * ArcPlayer::openCntArchive(const char *name, struct ARCHandle *handle, snd::SoundHeap *heap) 
+    UNKTYPE * ArcPlayer::openCntArchive(const char *name, CNTHandle *handle, snd::SoundHeap *heap) 
     {
         if (!heap) heap = mSoundHeap;
         #line 282

@@ -29,8 +29,7 @@ namespace EGG
         virtual UNKWORD getFileSize() const { return contentGetLengthNAND(&mFileInfo); }; // at 0x1C
 
         void initiate();
-        // Unofficial symbol
-        bool open(const char *, struct ARCHandle *);
+        bool open(const char *, CNTHandle *);
 
     private:
         bool mIsOpen; // at 0x4
@@ -38,7 +37,7 @@ namespace EGG
         OSMutex mMutex_0x20; // at 0x20
         UNKWORD WORD_0x38;
         CNTFileInfo mFileInfo; // at 0x3C
-        struct ARCHandle *mOpenFile; // at 0x4C
+        CNTHandle *mOpenFile; // at 0x4C
         CntFile *PTR_0x50;
         OSMessageQueue mMesgQueue_0x54;
         OSMessage mMesgBuffer_0x74;

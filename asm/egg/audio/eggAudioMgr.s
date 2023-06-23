@@ -16,7 +16,7 @@ __vt__Q23EGG14SimpleAudioMgr:
     .long 0
     .long 0
     .long func_800B0F10
-    .long openArchive__Q23EGG9ArcPlayerFPCcPQ34nw4r3snd9SoundHeapQ33EGG9ArcPlayer12SARC_STORAGEP9ARCHandle
+    .long openArchive__Q23EGG9ArcPlayerFPCcPQ34nw4r3snd9SoundHeapQ33EGG9ArcPlayer12SARC_STORAGEP9CNTHandle
     .long 0x800afb08
     .long 0x800afb00
     .long 0x800afaf8
@@ -313,7 +313,7 @@ func_800B0ED4:
 .global func_800B0EDC
 func_800B0EDC:
 /* 800B0EDC 000ABDDC  38 63 00 F8 */	addi r3, r3, 0xf8
-/* 800B0EE0 000ABDE0  4B FF D9 A4 */	b openCntArchive__Q23EGG9ArcPlayerFPCcP9ARCHandlePQ34nw4r3snd9SoundHeap
+/* 800B0EE0 000ABDE0  4B FF D9 A4 */	b openCntArchive__Q23EGG9ArcPlayerFPCcP9CNTHandlePQ34nw4r3snd9SoundHeap
 
 .global func_800B0EE4
 func_800B0EE4:
