@@ -3,7 +3,7 @@
 #include "ut_IOStream.h"
 #include "ut_FileStream.h"
 #include "ut_algorithm.h"
-#include <revolution/DVD/dvd.h>
+#include <revolution/DVD.h>
 
 namespace nw4r
 {
@@ -14,11 +14,7 @@ namespace nw4r
 			// For the async callbacks
 			struct FileInfoStreamPair
 			{
-				union
-				{
-					DVDFileInfo mFileInfo;
-					DVDCommandBlock mCmdBlock;
-				};
+				DVDFileInfo mFileInfo;
 				DvdFileStream *mStrm;
 			};
 
@@ -47,7 +43,7 @@ namespace nw4r
 
 				if (DVDFastOpen(r4, &mFileInfo))
 				{
-					mPosition.SetFileSize(mFileInfo.mFileSize);
+					mPosition.SetFileSize(mFileInfo.size);
 					mPosition.Seek(0, 0);
 					BOOL_0x6D = true;
 					BOOL_0x6E = true;
@@ -65,7 +61,7 @@ namespace nw4r
 				}
 
 				mFileInfo = *pInfo;
-				mPosition.SetFileSize(mFileInfo.mFileSize);
+				mPosition.SetFileSize(mFileInfo.size);
 				mPosition.Seek(0, 0);
 				BOOL_0x6D = false;
 				BOOL_0x6E = b;

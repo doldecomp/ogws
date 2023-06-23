@@ -3,7 +3,7 @@
 #include "types_egg.h"
 #include "eggFile.h"
 #include "ut_list.h"
-#include <revolution/DVD/dvd.h>
+#include <revolution/DVD.h>
 #include <revolution/OS/OSMutex.h>
 #include <revolution/OS/OSMessage.h>
 #include <revolution/OS/OSThread.h>
@@ -29,7 +29,7 @@ namespace EGG
         virtual void close(); // at 0x10
         virtual s32 readData(void *, s32, s32); // at 0x14
         virtual s32 writeData(const void *, s32, s32); // at 0x18
-        virtual UNKWORD getFileSize() const { return mFileInfo.mFileSize; }; // at 0x1C
+        virtual UNKWORD getFileSize() const { return mFileInfo.size; }; // at 0x1C
         virtual bool open(int); // at 0x20
         virtual bool open(const char *, void *); // at 0x24
 
