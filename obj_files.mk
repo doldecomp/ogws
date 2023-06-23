@@ -402,9 +402,9 @@ RVL_SDK_O_FILES := \
 	\
 	build/asm/revolution/EUART/euart.o \
 	\
-	build/asm/revolution/EXI/EXIBios.o \
+	build/revolution/EXI/EXIBios.o \
 	build/asm/revolution/EXI/EXIUart.o \
-	build/asm/revolution/EXI/EXICommon.o \
+	build/revolution/EXI/EXICommon.o \
 	\
 	build/asm/revolution/FS/fs.o \
 	\
