@@ -3,7 +3,7 @@
 #include "eggCapTexture.h"
 #include "eggDrawGX.h"
 #include "eggScreen.h"
-#include <revolution/math/mtx.h>
+#include <revolution/MTX.h>
 #include <revolution/GX/GXTransform.h>
 #include <revolution/GX/GXDisplayList.h>
 #include <revolution/GX/GXLight.h>

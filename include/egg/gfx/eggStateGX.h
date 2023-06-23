@@ -4,7 +4,7 @@
 #include "g3d_tmem.h"
 #include <revolution/GX/GX.h>
 #include <revolution/GX/GXPixel.h>
-#include <revolution/math/mtx44.h>
+#include <revolution/MTX.h>
 
 namespace EGG
 {

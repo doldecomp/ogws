@@ -1,7 +1,7 @@
 #include "eggColorFader.h"
 #include "eggAssert.h"
 #include "math_types.h"
-#include <revolution/math/mtx44.h>
+#include <revolution/MTX.h>
 #include <revolution/GX/GXTransform.h>
 #include <revolution/GX/GXAttr.h>
 #include <revolution/GX/GXLight.h>

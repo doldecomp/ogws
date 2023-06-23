@@ -17,7 +17,7 @@
 #include <GX/GXBump.h>
 #include <GX/GXPixel.h>
 #include <GX/GXVert.h>
-#include <math/mtx44.h>
+#include <revolution/MTX.h>
 
 namespace
 {

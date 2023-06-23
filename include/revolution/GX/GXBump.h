@@ -3,7 +3,7 @@
 #include <types.h>
 #include <GXTev.h>
 #include <GXTexture.h>
-#include <math/mtx.h>
+#include <revolution/MTX.h>
 #ifdef __cplusplus
 extern "C" {
 #endif

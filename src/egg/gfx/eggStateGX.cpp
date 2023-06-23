@@ -9,7 +9,7 @@
 #include <revolution/GX/GXPixel.h>
 #include <revolution/GX/GXTexture.h>
 #include <revolution/GX/GXTransform.h>
-#include <revolution/math/mtx.h>
+#include <revolution/MTX.h>
 
 namespace EGG
 {

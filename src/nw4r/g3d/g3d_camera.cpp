@@ -2,8 +2,7 @@
 #include "g3d_state.h"
 #include "math_types.h"
 #include "math_triangular.h"
-#include <revolution/math/mtx.h>
-#include <revolution/math/mtx44.h>
+#include <revolution/MTX.h>
 #include <revolution/GX/GXTransform.h>
 
 namespace nw4r

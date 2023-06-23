@@ -3,7 +3,7 @@
 #include "types_nw4r.h"
 #include "g3d_rescommon.h"
 #include "math_types.h"
-#include <revolution/math/mtx44.h>
+#include <revolution/MTX.h>
 
 namespace nw4r
 {
