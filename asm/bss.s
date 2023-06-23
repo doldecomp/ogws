@@ -4,60 +4,6 @@
 
 .balign 0x8
 
-.global lbl_8047A920
-lbl_8047A920:
-	.skip 0xB68
-.global lbl_8047B488
-lbl_8047B488:
-	.skip 0x24B7C
-.global lbl_804A0004
-lbl_804A0004:
-	.skip 0x343C
-.global lbl_804A3440
-lbl_804A3440:
-	.skip 0x18
-.global lbl_804A3458
-lbl_804A3458:
-	.skip 0x68
-.global lbl_804A34C0
-lbl_804A34C0:
-	.skip 0xD0
-.global lbl_804A3590
-lbl_804A3590:
-	.skip 0x10
-.global lbl_804A35A0
-lbl_804A35A0:
-	.skip 0x230
-.global lbl_804A37D0
-lbl_804A37D0:
-	.skip 0x208
-.global lbl_804A39D8
-lbl_804A39D8:
-	.skip 0x1A0
-.global lbl_804A3B78
-lbl_804A3B78:
-	.skip 0x10
-.global lbl_804A3B88
-lbl_804A3B88:
-	.skip 0x8
-.global lbl_804A3B90
-lbl_804A3B90:
-	.skip 0x18
-.global lbl_804A3BA8
-lbl_804A3BA8:
-	.skip 0x8
-.global lbl_804A3BB0
-lbl_804A3BB0:
-	.skip 0xC8
-.global lbl_804A3C78
-lbl_804A3C78:
-	.skip 0xC0
-.global lbl_804A3D38
-lbl_804A3D38:
-	.skip 0x10
-.global lbl_804A3D48
-lbl_804A3D48:
-	.skip 0x8
 .global lbl_804A3D50
 lbl_804A3D50:
 	.skip 0x50

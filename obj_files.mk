@@ -565,11 +565,16 @@ RVL_SDK_O_FILES := \
 	build/asm/revolution/NWC24/NWC24Ipc.o \
 	build/asm/revolution/NWC24/NWC24Download.o \
 	build/asm/revolution/NWC24/NWC24System.o \
+	\
+	build/asm/revolution/VF/vf_unsplit.o \
+	\
+	build/asm/RVLFaceLib/rfl_unsplit.o \
+	\
+	build/asm/homebuttonMiniLib/hbm_unsplit.o \
 
 
 GROUP_1_O_FILES := \
 	build/asm/text.o \
-	build/asm/text_rp.o \
 	build/asm/data.o \
 	build/asm/sdata.o \
 	build/asm/ctors.o \
