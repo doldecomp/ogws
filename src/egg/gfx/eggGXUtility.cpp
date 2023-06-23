@@ -57,10 +57,11 @@ namespace EGG
         BOOL bMipmap = (tex.mMipmap) ? TRUE : FALSE;
 
         GXInitTexObj(pObj, (char *)&tex + imageOfs, tex.mWidth, tex.mHeight,
-            tex.mTexFormat, tex.mWrapS, tex.mWrapT, bMipmap);
+            (GXTexFmt)tex.mTexFormat, (GXTexWrapMode)tex.mWrapS, (GXTexWrapMode)tex.mWrapT, bMipmap);
 
-        GXInitTexObjLOD(pObj, tex.mMinFilt, tex.mMagFilt, tex.mBiasClampEnable, tex.mEdgeLodEnable,
-            tex.mAnisotropy, tex.mMinLod / 8.0f, tex.mMaxLod / 8.0f, tex.mLodBias / 100.0f);
+        GXInitTexObjLOD(pObj, (GXTexFilter)tex.mMinFilt, (GXTexFilter)tex.mMagFilt,
+            tex.mMinLod / 8.0f, tex.mMaxLod / 8.0f, tex.mLodBias / 100.0f,
+            tex.mBiasClampEnable, tex.mEdgeLodEnable, (GXAnisotropy)tex.mAnisotropy);
     }
 
     void GXUtility::getTexObj(GXTexObj *pObj, nw4r::g3d::ResTex tex,
@@ -79,7 +80,7 @@ namespace EGG
         if (tex.GetTexObjParam(&image, &width, &height, &fmt, &minLod, &maxLod, &mipmap))
         {
             GXInitTexObj(pObj, image, width, height, fmt, wrapS, wrapT, mipmap);
-            GXInitTexObjLOD(pObj, minFilt, magFilt, 0, 0, 0, minLod, maxLod, 0.0f);
+            GXInitTexObjLOD(pObj, minFilt, magFilt, minLod, maxLod, 0.0f, 0, 0, GX_ANISO_1);
         }
     }
 

@@ -5,9 +5,7 @@
 #include "ut_color.h"
 #include "math_types.h"
 #include <string.h>
-#include <revolution/GX/GXVert.h>
-#include <revolution/GX/GXAttr.h>
-#include <revolution/GX/GXGeometry.h>
+#include <revolution/GX.h>
 
 #define BOM_BIG_ENDIAN 0xFEFF
 #define BOM_LITTLE_ENDIAN 0xFFFE
@@ -143,26 +141,26 @@ namespace nw4r
             {
                 GXClearVtxDesc();
 
-                GXSetVtxDesc(GX_ATTR_VTX, 1);
-                if (bColor) GXSetVtxDesc(GX_ATTR_VTX_CLR, 1);
+                GXSetVtxDesc(GX_VA_POS, GX_DIRECT);
+                if (bColor) GXSetVtxDesc(GX_VA_CLR0, GX_DIRECT);
 
                 for (int i = 0; i < n; i++)
                 {
-                    GXSetVtxDesc((GXAttr)(GX_ATTR_VTX_TEX_COORD + i), 1);
+                    GXSetVtxDesc((GXAttr)(GX_VA_TEX0 + i), GX_DIRECT);
                 }
 
-                GXSetVtxAttrFmt(0, GX_ATTR_VTX, 0, 4, 0);
-                if (bColor) GXSetVtxAttrFmt(0, GX_ATTR_VTX_CLR, 1, 5, 0);
+                GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_POS, GX_POS_XY, GX_F32, 0);
+                if (bColor) GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_CLR0, GX_CLR_RGBA, GX_RGBA8, 0);
 
                 for (int i = 0; i < n; i++)
                 {
-                    GXSetVtxAttrFmt(0, (GXAttr)(GX_ATTR_VTX_TEX_COORD + i), 1, 4, 0);
+                    GXSetVtxAttrFmt(GX_VTXFMT0, (GXAttr)(GX_VA_TEX0 + i), GX_TEX_ST, GX_F32, 0);
                 }
             }
 
             void DrawQuad(const VEC2 &pos, const Size &size, u8 c, const TexCoordData *tc, const Color *vertexClrs)
             {
-                GXBegin(0x80, 0, 4);
+                GXBegin(GX_QUADS, GX_VTXFMT0, 4);
 
                 GXPosition2f32(pos.mCoords.x, pos.mCoords.y);
                 if (vertexClrs != NULL) 

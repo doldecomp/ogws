@@ -2,7 +2,7 @@
 #define REVOSDK_VI_H
 #ifdef __cplusplus
 #include <types.h>
-#include <GX/GXFrameBuf.h>
+#include <revolution/GX.h>
 extern "C" {
 #endif
 

@@ -1,9 +1,7 @@
 #include "eggPostEffectBlurGather.h"
 #include "eggDrawGX.h"
 #include "eggCapTexture.h"
-#include <revolution/GX/GXAttr.h>
-#include <revolution/GX/GXTev.h>
-#include <revolution/GX/GXBump.h>
+#include <revolution/GX.h>
 
 namespace EGG
 {

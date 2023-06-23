@@ -1,7 +1,7 @@
 #ifndef NW4R_G3D_STATE_H
 #define NW4R_G3D_STATE_H
 #include "types_nw4r.h"
-#include <revolution/GX/GXFrameBuf.h>
+#include <revolution/GX.h>
 
 namespace nw4r
 {

@@ -1,63 +1,34 @@
-#ifndef REVOSDK_GX_TEV_H
-#define REVOSDK_GX_TEV_H
+#ifndef RVL_SDK_GX_TEV_H
+#define RVL_SDK_GX_TEV_H
+#include <revolution/GX/GXTypes.h>
 #include <types.h>
-#include <GX.h>
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-typedef enum _GXTevSwapSel
-{
-	GX_TEV_SWAP_SEL_0,
-	GX_TEV_SWAP_SEL_1,
-	GX_TEV_SWAP_SEL_2,
-	GX_TEV_SWAP_SEL_3,
-	GX_TEV_SWAP_SEL_COUNT
-} GXTevSwapSel;
+void GXSetTevOp(GXTevStageID, UNKWORD);
+void GXSetTevColorIn(GXTevStageID, GXTevColorArg, GXTevColorArg, GXTevColorArg,
+                     GXTevColorArg);
+void GXSetTevAlphaIn(GXTevStageID, GXTevAlphaArg, GXTevAlphaArg, GXTevAlphaArg,
+                     GXTevAlphaArg);
+void GXSetTevColorOp(GXTevStageID, GXTevOp, GXTevBias, GXTevScale, u8,
+                     GXTevRegID);
+void GXSetTevAlphaOp(GXTevStageID, GXTevOp, GXTevBias, GXTevScale, u8,
+                     GXTevRegID);
 
-typedef enum _GXTevColorChan
-{
-	
-} GXTevColorChan;
+void GXSetTevColor(GXTevRegID, GXColor);
 
-typedef enum _GXTevStageID
-{
-	GX_TEV_STAGE_ID_0,
-	GX_TEV_STAGE_ID_1,
-	GX_TEV_STAGE_ID_2,
-	GX_TEV_STAGE_ID_COUNT = 16
-} GXTevStageID;
+void GXSetTevKColor(GXTevKColorID, GXColor);
+void GXSetTevKColorSel(GXTevStageID, GXTevKColorSel);
+void GXSetTevKAlphaSel(GXTevStageID, GXTevKAlphaSel);
+void GXSetTevSwapMode(GXTevStageID, GXTevSwapSel, GXTevSwapSel);
+void GXSetTevSwapModeTable(GXTevSwapSel, GXTevColorChan, GXTevColorChan,
+                           GXTevColorChan, GXTevColorChan);
 
-typedef enum _GXTevColorArg
-{
-	
-} GXTevColorArg;
-
-typedef enum _GXTevRegID
-{
-	GX_TEV_REG_ID_0,
-	GX_TEV_REG_ID_1,
-	GX_TEV_REG_ID_2,
-	GX_TEV_REG_ID_3,
-} GXTevRegID;
-
-UNKTYPE GXSetTevOp(GXTevStageID, UNKWORD tevMode);
-UNKTYPE GXSetTevColorIn(GXTevStageID, UNKWORD a, UNKWORD b, UNKWORD c, UNKWORD d);
-UNKTYPE GXSetTevAlphaIn(GXTevStageID, UNKWORD a, UNKWORD b, UNKWORD c, UNKWORD d);
-UNKTYPE GXSetTevColorOp(GXTevStageID, UNKWORD, UNKWORD, UNKWORD, UNKWORD, UNKWORD);
-UNKTYPE GXSetTevAlphaOp(GXTevStageID, UNKWORD, UNKWORD, UNKWORD, UNKWORD, UNKWORD);
-UNKTYPE GXSetTevColor(GXTevRegID, GXColor);
-
-UNKTYPE GXSetTevKColor(GXTevRegID, GXColor);
-UNKTYPE GXSetTevKColorSel(GXTevStageID, UNKWORD);
-UNKTYPE GXSetTevKAlphaSel(GXTevStageID, UNKWORD);
-
-UNKTYPE GXSetTevSwapModeTable(GXTevSwapSel, UNKWORD, UNKWORD, UNKWORD, UNKWORD);
-
-UNKTYPE GXSetAlphaCompare(UNKWORD, UNKWORD, UNKWORD, UNKWORD, UNKWORD);
-UNKTYPE GXSetZTexture(UNKWORD, UNKWORD zTexFormat, UNKWORD);
-
-UNKTYPE GXSetNumTevStages(u8);
+void GXSetAlphaCompare(GXCompare, u8, GXAlphaOp, GXCompare, u8);
+void GXSetZTexture(UNKWORD, UNKWORD, UNKWORD);
+void GXSetTevOrder(GXTevStageID, GXTexCoordID, GXTexMapID, GXChannelID);
+void GXSetNumTevStages(u8);
 
 #ifdef __cplusplus
 }

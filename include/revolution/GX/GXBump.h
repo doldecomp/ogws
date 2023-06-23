@@ -1,39 +1,27 @@
-#ifndef REVOSDK_GX_BUMP_H
-#define REVOSDK_GX_BUMP_H
+#ifndef RVL_SDK_GX_BUMP_H
+#define RVL_SDK_GX_BUMP_H
+#include <revolution/GX/GXTypes.h>
 #include <types.h>
-#include <GXTev.h>
-#include <GXTexture.h>
-#include <revolution/MTX.h>
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-typedef enum _GXIndTexStageID
-{
-    GX_IND_TEX_STAGE_0
-} GXIndTexStageID;
+void GXSetTevIndirect(GXTevStageID tevStage, GXIndTexStageID texStage,
+                      GXIndTexFormat texFmt, GXIndTexBiasSel biasSel,
+                      GXIndTexMtxID mtxId, GXIndTexWrap wrapS,
+                      GXIndTexWrap wrapT, GXBool addPrev, GXBool utcLod,
+                      GXIndTexAlphaSel alphaSel);
+void GXSetIndTexMtx(GXIndTexMtxID id, const f32 offset[2][3], s8 scaleExp);
+void GXSetIndTexCoordScale(GXIndTexStageID stage, GXIndTexScale scaleS,
+                           GXIndTexScale scaleT);
+void GXSetIndTexOrder(GXIndTexStageID stage, GXTexCoordID coord,
+                      GXTexMapID map);
+void GXSetNumIndStages(u8 num);
+void GXSetTevDirect(GXTevStageID stage);
 
-typedef enum _GXIndTexScale
-{
-    GX_IND_TEX_SCALE_0
-} GXIndTexScale;
-
-typedef enum _GXIndTexMtxID
-{
-    GX_IND_TEX_MTX_0
-} GXIndTexMtxID;
-
-UNKTYPE GXSetIndTexCoordScale(GXIndTexStageID, GXIndTexScale, GXIndTexScale);
-UNKTYPE GXSetIndTexMtx(GXIndTexMtxID, const f32 *, UNKWORD);
-
-UNKTYPE GXSetNumIndStages(UNKWORD);
-UNKTYPE GXSetTevDirect(UNKWORD);
-
-UNKTYPE __GXSetIndirectMask(UNKWORD);
-
-UNKTYPE GXSetTevSwapMode(GXTevStageID, UNKWORD, UNKWORD);
-
-UNKTYPE GXSetTevOrder(GXTevStageID, GXTexCoordID, GXTexMapID, UNKWORD colorChanID);
+void __GXUpdateBPMask(void);
+void __GXSetIndirectMask(u32 mask);
+void __GXFlushTextureState(void);
 
 #ifdef __cplusplus
 }

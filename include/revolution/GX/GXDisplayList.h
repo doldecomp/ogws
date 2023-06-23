@@ -1,19 +1,20 @@
-#ifndef REVOSDK_GX_DISPLAY_LIST_H
-#define REVOSDK_GX_DISPLAY_LIST_H
+#ifndef RVL_SDK_GX_DISPLAY_LIST_H
+#define RVL_SDK_GX_DISPLAY_LIST_H
+#include <revolution/GX/GXHardware.h>
 #include <types.h>
-#include <GX.h>
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-static void GXFastCallDisplayList(void * ptr, u32 cmdSize)
-{
-	WGPIPE.c = 0x40;
-	WGPIPE.p = ptr;
-	WGPIPE.i = cmdSize;
-}
+void GXBeginDisplayList(void* list, u32 size);
+u32 GXEndDisplayList(void);
+void GXCallDisplayList(void* list, u32 size);
 
-UNKTYPE GXCallDisplayList(void *list, u32 nbytes);
+static inline void GXFastCallDisplayList(void* list, u32 size) {
+    WGPIPE.c = GX_FIFO_CMD_CALL_DL;
+    WGPIPE.p = list;
+    WGPIPE.i = size;
+}
 
 #ifdef __cplusplus
 }

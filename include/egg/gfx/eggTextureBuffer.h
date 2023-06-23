@@ -2,7 +2,7 @@
 #define EGG_GFX_TEXTURE_BUFFER_H
 #include "types_egg.h"
 #include "eggCapTexture.h"
-#include <GX/GXTexture.h>
+#include <revolution/GX.h>
 
 namespace EGG
 {

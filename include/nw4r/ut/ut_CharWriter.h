@@ -12,6 +12,8 @@ namespace nw4r
 		// TODO: Implement the object accurately
 		struct CharWriter
 		{
+			enum GradationMode { GRADMODE_NONE, GRADMODE_H, GRADMODE_V };
+
 			struct ColorMapping
 			{
 				Color COLOR_0x0;
@@ -26,56 +28,42 @@ namespace nw4r
 				Color mBottomRight;
 			};
 			
-			struct TextureFilter
-			{
-				int WORD_0x0;
-				int WORD_0x4;
-				
-				inline bool operator!=(const TextureFilter & other) const
-				{
-					return WORD_0x0 != other.WORD_0x0 || WORD_0x4 != other.WORD_0x4;
+			struct TextureFilter {
+				GXTexFilter atSmall; // at 0x0
+				GXTexFilter atLarge; // at 0x4
+
+				bool operator!=(const TextureFilter& other) const {
+					return atSmall != other.atSmall || atLarge != other.atLarge;
 				}
 			};
 			
-			//sizeof(LoadingTexture) = 0x10
-			struct LoadingTexture
-			{
-				s32 s32_0x0;
-				u8 * PTR_0x4;
-				TextureFilter mFilter;
-				
-				inline bool operator!=(const LoadingTexture & other) const
-				{
-					return s32_0x0 != other.s32_0x0 || PTR_0x4 != other.PTR_0x4 || mFilter != other.mFilter;
+			struct LoadingTexture {
+				GXTexMapID slot; // at 0x0
+				void* texture;   // at 0x4
+				TextureFilter filter;
+
+				bool operator!=(const LoadingTexture& other) const {
+					return slot != other.slot || texture != other.texture ||
+						filter != other.filter;
 				}
-				
-				inline void Reset()
-				{
-					s32_0x0 = 0xFF;
-					PTR_0x4 = 0;
+
+				void Reset() {
+					slot = GX_TEXMAP_NULL;
+					texture = NULL;
 				}
 			};
 			
-			struct TextColor
-			{
-				Color mStart;
-				Color mEnd;
-			};
-			
-			enum GradationMode
-			{
-				GradMode_None,
-				GradMode_Horizontal,
-				GradMode_Vertical
+			struct TextColor {
+				Color start;            // at 0x0
+				Color end;              // at 0x4
+				GradationMode gradMode; // at 0x8
 			};
 			
 			static LoadingTexture mLoadingTexture;
 			
-			ColorMapping mColorMapping; // at 0x0
-			
+			ColorMapping mColorMapping; // at 0x0		
 			VertexColor mVertexColor; // at 0x8
 			TextColor mTextColor; // at 0x18
-			GradationMode mGradationMode; // at 0x20
 			math::VEC2 mScale; // at 0x24
 			math::VEC3 mCursor; // at 0x2c
 			TextureFilter mFilter; // at 0x38
@@ -148,12 +136,12 @@ namespace nw4r
 			
 			inline void SetGradationMode(GradationMode gradationMode)
 			{
-				mGradationMode = gradationMode;
+				mTextColor.gradMode = gradationMode;
 				
-				mVertexColor.mTopLeft = mTextColor.mStart;
-				mVertexColor.mTopRight = (mGradationMode != GradMode_Horizontal) ? mTextColor.mStart : mTextColor.mEnd;
-				mVertexColor.mBottomLeft = (mGradationMode != GradMode_Vertical) ? mTextColor.mStart : mTextColor.mEnd;
-				mVertexColor.mBottomRight = (mGradationMode == GradMode_None) ? mTextColor.mStart : mTextColor.mEnd;
+				mVertexColor.mTopLeft = mTextColor.start;
+				mVertexColor.mTopRight = (mTextColor.gradMode != GRADMODE_H) ? mTextColor.start : mTextColor.end;
+				mVertexColor.mBottomLeft = (mTextColor.gradMode != GRADMODE_V) ? mTextColor.start : mTextColor.end;
+				mVertexColor.mBottomRight = (mTextColor.gradMode == GRADMODE_NONE) ? mTextColor.start : mTextColor.end;
 				
 				mVertexColor.mTopLeft.mChannels.a = (mVertexColor.mTopLeft.mChannels.a * BYTE_0x42) / 0xFF,
 				mVertexColor.mTopRight.mChannels.a = (mVertexColor.mTopRight.mChannels.a * BYTE_0x42) / 0xFF;

@@ -5,9 +5,7 @@
 #include "eggDrawGX.h"
 #include "eggTextureBuffer.h"
 #include "eggAssert.h"
-#include <revolution/GX/GXLight.h>
-#include <revolution/GX/GXPixel.h>
-#include <revolution/GX/GXTexture.h>
+#include <revolution/GX.h>
 
 namespace EGG
 {
@@ -73,10 +71,10 @@ namespace EGG
 
         StateGX::ScopedDither dither(true);
 
-        GXSetChanAmbColor(GX_CHANNEL_ID_4, DrawGX::scColorWhite);
+        GXSetChanAmbColor(GX_COLOR0A0, DrawGX::scColorWhite);
 
         GXColor fog = {0, 0, 0, 255};
-        GXSetFog(GX_FOG_TYPE_0, fog, 0.0f, 1.0f, 0.0f, 1.0f);
+        GXSetFog(GX_FOG_NONE, fog, 0.0f, 1.0f, 0.0f, 1.0f);
         
         TextureBuffer *localGroups[GROUP_MAX];
         int firstGroupIdx = -1;
@@ -102,7 +100,7 @@ namespace EGG
                             h <<= 1;
                         }
                         
-                        localGroups[i] = TextureBuffer::alloc(w, h, GX_TEX_FMT_1);
+                        localGroups[i] = TextureBuffer::alloc(w, h, GX_TF_I8);
                         group->SetCapTexture0(localGroups[i]);
                         group->SetCapTexture1(localGroups[i]);
                     }

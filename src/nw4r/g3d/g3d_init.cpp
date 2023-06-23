@@ -3,7 +3,7 @@
 #include "ut_LockedCache.h"
 #include <revolution/OS/OS.h>
 #include <revolution/VI/vi.h>
-#include <revolution/GX/GXFrameBuf.h>
+#include <revolution/GX.h>
 
 namespace
 {

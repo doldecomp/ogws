@@ -4,12 +4,7 @@
 #include "eggDrawGX.h"
 #include "eggScreen.h"
 #include <revolution/MTX.h>
-#include <revolution/GX/GXTransform.h>
-#include <revolution/GX/GXDisplayList.h>
-#include <revolution/GX/GXLight.h>
-#include <revolution/GX/GXGeometry.h>
-#include <revolution/GX/GXBump.h>
-#include <revolution/GX/GXPixel.h>
+#include <revolution/GX.h>
 
 namespace EGG
 {
@@ -85,9 +80,9 @@ namespace EGG
     void PostEffectBase::setMatColorChannel()
     {
         GXSetNumChans(0);
-        GXSetChanCtrl(GX_CHANNEL_ID_4, 0, 0, 0, 0, 1, 2);
-        GXSetChanCtrl(GX_CHANNEL_ID_5, 0, 0, 0, 0, 1, 2);
-        GXSetCullMode(2);
+        GXSetChanCtrl(GX_COLOR0A0, 0, GX_SRC_REG, GX_SRC_REG, GX_LIGHT_NULL, GX_DF_SIGN, GX_AF_NONE);
+        GXSetChanCtrl(GX_COLOR1A1, 0, GX_SRC_REG, GX_SRC_REG, GX_LIGHT_NULL, GX_DF_SIGN, GX_AF_NONE);
+        GXSetCullMode(GX_CULL_BACK);
     }
 
     void PostEffectBase::setMatInd()
@@ -97,11 +92,11 @@ namespace EGG
 
     void PostEffectBase::setMatPE()
     {
-        GXSetAlphaCompare(7, 0, 1, 7, 0);
-        GXSetZMode(0, 7, 0);
+        GXSetAlphaCompare(GX_ALWAYS, 0, GX_AOP_OR, GX_ALWAYS, 0);
+        GXSetZMode(0, GX_ALWAYS, 0);
 
         GXColor black = {0, 0, 0, 255};
-        GXSetFog(GX_FOG_TYPE_0, black, 0.0f, 1.0f, 0.0f, 1.0f);
+        GXSetFog(GX_FOG_NONE, black, 0.0f, 1.0f, 0.0f, 1.0f);
         setBlendModeInternal();
     }
 
@@ -122,19 +117,19 @@ namespace EGG
                 DrawGX::SetBlendMode(DrawGX::BLEND_4);
                 break;
             case 4:
-                GXSetBlendMode(1, 3, 1, 0);
+                GXSetBlendMode(GX_BM_BLEND, GX_BL_INVSRCCLR, GX_BL_ONE, GX_LO_CLEAR);
                 break;
             case 5:
-                GXSetBlendMode(1, 3, 3, 0);
+                GXSetBlendMode(GX_BM_BLEND, GX_BL_INVSRCCLR, GX_BL_INVSRCCLR, GX_LO_CLEAR);
                 break;
             case 6:
                 DrawGX::SetBlendMode(DrawGX::BLEND_3);
                 break;
             case 7:
-                GXSetBlendMode(1, 5, 1, 0);
+                GXSetBlendMode(GX_BM_BLEND, GX_BL_INVSRCALPHA, GX_BL_ONE, GX_LO_CLEAR);
                 break;
             case 8:
-                GXSetBlendMode(3, 4, 5, 0);
+                GXSetBlendMode(GX_BM_SUBTRACT, GX_BL_SRCALPHA, GX_BL_INVSRCALPHA, GX_LO_CLEAR);
                 break;
             case 9:
                 DrawGX::SetBlendMode(DrawGX::BLEND_6);

@@ -3,10 +3,7 @@
 #include "eggGXUtility.h"
 #include "eggCapTexture.h"
 #include "math_triangular.h"
-#include <revolution/GX/GXAttr.h>
-#include <revolution/GX/GXTev.h>
-#include <revolution/GX/GXTransform.h>
-#include <revolution/GX/GXBump.h>
+#include <revolution/GX.h>
 
 namespace EGG
 {

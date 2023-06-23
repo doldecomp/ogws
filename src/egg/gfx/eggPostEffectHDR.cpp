@@ -1,9 +1,7 @@
 #include "eggPostEffectHDR.h"
 #include "eggCapTexture.h"
 #include "eggDrawGX.h"
-#include <revolution/GX/GXAttr.h>
-#include <revolution/GX/GXTev.h>
-#include <revolution/GX/GXBump.h>
+#include <revolution/GX.h>
 
 namespace EGG
 {
@@ -84,51 +82,51 @@ namespace EGG
         
         setMatColorChannel();
         GXSetNumTexGens(1);
-        GXSetTexCoordGen2(GX_TEX_COORD_ID_0, GX_TEX_GEN_TYPE_1, GX_TEX_GEN_SRC_4, 0x3C, 0, 0x7D);
+        GXSetTexCoordGen2(GX_TEXCOORD0, GX_TG_MTX2x4, GX_TG_TEX0, 0x3C, 0, 0x7D);
         setMatInd();
-        GXSetTevKColor(GX_TEV_REG_ID_0, COLOR_0x34);
-        GXSetTevKColor(GX_TEV_REG_ID_1, COLOR_0x30);
-        GXSetTevSwapModeTable(GX_TEV_SWAP_SEL_0, 0, 1, 2, 3);
+        GXSetTevKColor(GX_KCOLOR0, COLOR_0x34);
+        GXSetTevKColor(GX_KCOLOR1, COLOR_0x30);
+        GXSetTevSwapModeTable(GX_TEV_SWAP0, GX_CH_RED, GX_CH_GREEN, GX_CH_BLUE, GX_CH_ALPHA);
         GXSetNumTevStages(stages1);
 
         for (int i = 0; i < stages1; i++)
         {
-            GXSetTevDirect(i);
-            GXSetTevSwapMode((GXTevStageID)i, 0, 0);
+            GXSetTevDirect((GXTevStageID)i);
+            GXSetTevSwapMode((GXTevStageID)i, GX_TEV_SWAP0, GX_TEV_SWAP0);
 
             switch(i)
             {
                 case 0:
-                    GXSetTevKColorSel((GXTevStageID)i, 0xC);
-                    GXSetTevOrder((GXTevStageID)i, GX_TEX_COORD_ID_0, getCapTexture()->getLoadMap(), 0xFF);
-                    GXSetTevColorIn((GXTevStageID)i, 0xE, 0xF, 0xF, 0x8);
-                    GXSetTevColorOp((GXTevStageID)i, 1, 0, WORD_0x3C, 1, 1);
+                    GXSetTevKColorSel((GXTevStageID)i, GX_TEV_KCSEL_K0);
+                    GXSetTevOrder((GXTevStageID)i, GX_TEXCOORD0, getCapTexture()->getLoadMap(), GX_COLOR_NULL);
+                    GXSetTevColorIn((GXTevStageID)i, GX_CC_KONST, GX_CC_ZERO, GX_CC_ZERO, GX_CC_TEXC);
+                    GXSetTevColorOp((GXTevStageID)i, GX_TEV_SUB, GX_TB_ZERO, (GXTevScale)WORD_0x3C, 1, GX_TEVREG0);
                     break;
                 case 1:
-                    GXSetTevKColorSel((GXTevStageID)i, 0xD);
-                    GXSetTevOrder((GXTevStageID)i, GX_TEX_COORD_ID_INVALID, GX_TEX_MAP_ID_INVALID, 0xFF);
+                    GXSetTevKColorSel((GXTevStageID)i, GX_TEV_KCSEL_K1);
+                    GXSetTevOrder((GXTevStageID)i, GX_TEXCOORD_NULL, GX_TEXMAP_NULL, GX_COLOR_NULL);
                     if (stages0 == 0)
                     {
-                        GXSetTevColorIn((GXTevStageID)i, 0xF, 0x2, 0xE, 0x2);
-                        GXSetTevColorOp((GXTevStageID)i, BYTE_0x44 != 0, 0, WORD_0x40, 1, 0);
+                        GXSetTevColorIn((GXTevStageID)i, GX_CC_ZERO, GX_CC_C0, GX_CC_KONST, GX_CC_C0);
+                        GXSetTevColorOp((GXTevStageID)i, BYTE_0x44 != 0 ? GX_TEV_SUB : GX_TEV_ADD, GX_TB_ZERO, (GXTevScale)WORD_0x40, 1, GX_TEVPREV);
                     }
                     else
                     {
-                        GXSetTevColorIn((GXTevStageID)i, 0xF, 0x2, 0xE, 0xF);
-                        GXSetTevColorOp((GXTevStageID)i, 0, 0, 0, 1, 0);
+                        GXSetTevColorIn((GXTevStageID)i, GX_CC_ZERO, GX_CC_C0, GX_CC_KONST, GX_CC_ZERO);
+                        GXSetTevColorOp((GXTevStageID)i, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, 1, GX_TEVPREV);
                     }
                     break;
                 case 2:
-                    GXSetTevOrder((GXTevStageID)i, GX_TEX_COORD_ID_INVALID, GX_TEX_MAP_ID_INVALID, 0xFF);
-                    GXSetTevColorIn((GXTevStageID)i, 0x0, 0xF, 0x2, 0x2);
-                    GXSetTevColorOp((GXTevStageID)i, BYTE_0x44 != 0, 0, WORD_0x40, 1, 0);
+                    GXSetTevOrder((GXTevStageID)i, GX_TEXCOORD_NULL, GX_TEXMAP_NULL, GX_COLOR_NULL);
+                    GXSetTevColorIn((GXTevStageID)i, GX_CC_CPREV, GX_CC_ZERO, GX_CC_C0, GX_CC_C0);
+                    GXSetTevColorOp((GXTevStageID)i, BYTE_0x44 != 0 ? GX_TEV_SUB : GX_TEV_ADD, GX_TB_ZERO, (GXTevScale)WORD_0x40, 1, GX_TEVPREV);
                     break;
                 default:
                     break;
             }
 
-            GXSetTevAlphaIn((GXTevStageID)i, 0x7, 0x7, 0x7, 0x6);
-            GXSetTevAlphaOp((GXTevStageID)i, 0, 0, 0, 1, 0);
+            GXSetTevAlphaIn((GXTevStageID)i, GX_CA_ZERO, GX_CA_ZERO, GX_CA_ZERO, GX_CA_KONST);
+            GXSetTevAlphaOp((GXTevStageID)i, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, 1, GX_TEVPREV);
         }
 
         setMatPE();

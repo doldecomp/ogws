@@ -1,46 +1,31 @@
-#ifndef REVOSDK_GX_PIXEL_H
-#define REVOSDK_GX_PIXEL_H
+#ifndef RVL_SDK_GX_PIXEL_H
+#define RVL_SDK_GX_PIXEL_H
+#include <revolution/GX/GXTypes.h>
+#include <revolution/MTX.h>
 #include <types.h>
-#include <GX.h>
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-typedef enum _GXFogType
-{
-    GX_FOG_TYPE_0,
-    GX_FOG_TYPE_1,
-    GX_FOG_TYPE_2,
-} GXFogType;
+typedef struct _GXFogAdjTable {
+    u16 r[10]; // at 0x0
+} GXFogAdjTable;
 
-// Unofficial name
-typedef enum _GXPixelFmt
-{
-    GX_PIXEL_FMT_0,
-    GX_PF_RGBA6_Z24,
-    GX_PIXEL_FMT_2,
-    GX_PIXEL_FMT_3,
-    GX_PIXEL_FMT_4,
-    GX_PIXEL_FMT_5,
-    GX_PIXEL_FMT_6,
-    GX_PIXEL_FMT_7,
-} GXPixelFmt;
-
-UNKTYPE GXSetFog(GXFogType, GXColor, float startz, float endz, float nearz, float farz);
-
-UNKTYPE GXInitFogAdjTable(u16 *table, u16 width, const float (*)[4]);
-UNKTYPE GXSetFogRangeAdj(u8, u16, u16 *table);
-
-UNKTYPE GXSetBlendMode(UNKWORD, UNKWORD, UNKWORD, UNKWORD);
-
-UNKTYPE GXSetColorUpdate(u8);
-UNKTYPE GXSetAlphaUpdate(u8);
-UNKTYPE GXSetZMode(UNKWORD, UNKWORD, UNKWORD);
-UNKTYPE GXSetZCompLoc(UNKWORD);
-
-UNKTYPE GXSetPixelFmt(GXPixelFmt, UNKWORD);
-UNKTYPE GXSetDither(u8);
-UNKTYPE GXSetDstAlpha(UNKWORD, UNKWORD);
+void GXSetFog(GXFogType type, GXColor color, f32 start, f32 end, f32 near,
+              f32 far);
+void GXInitFogAdjTable(GXFogAdjTable* table, u16 width, const Mtx44 proj);
+void GXSetFogRangeAdj(GXBool enable, u16 center, const GXFogAdjTable* table);
+void GXSetBlendMode(GXBlendMode mode, GXBlendFactor src, GXBlendFactor dst,
+                    GXLogicOp op);
+void GXSetColorUpdate(GXBool enable);
+void GXSetAlphaUpdate(GXBool enable);
+void GXSetZMode(GXBool enableTest, GXCompare func, GXBool enableUpdate);
+void GXSetZCompLoc(GXBool beforeTex);
+void GXSetPixelFmt(GXPixelFmt pixelFmt, GXZFmt zFmt);
+void GXSetDither(GXBool enable);
+void GXSetDstAlpha(GXBool enable, u8 alpha);
+void GXSetFieldMask(GXBool enableEven, GXBool enableOdd);
+void GXSetFieldMode(GXBool texLOD, GXBool adjustAR);
 
 #ifdef __cplusplus
 }

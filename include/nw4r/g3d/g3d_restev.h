@@ -17,7 +17,7 @@ namespace nw4r
 			u8 BYTE_0xC;
 			char UNK_0xD[0x13];
 			
-			detail::BPCmd mSwapSelCmds[GX_TEV_SWAP_SEL_COUNT][4];
+			detail::BPCmd mSwapSelCmds[GX_MAX_TEVSWAP][4];
 			
 			char UNK_0x70[0x10];
 			

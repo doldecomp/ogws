@@ -3,7 +3,7 @@
 #include "types_egg.h"
 #include "eggDisplay.h"
 #include "types_nw4r.h"
-#include <revolution/GX/GXTexture.h>
+#include <revolution/GX.h>
 #include <revolution/OS/OSThread.h>
 
 namespace EGG

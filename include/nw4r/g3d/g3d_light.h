@@ -2,8 +2,7 @@
 #define NW4R_G3D_LIGHT_H
 #include "types_nw4r.h"
 #include "g3d_rescommon.h"
-#include <revolution/GX/GX.h>
-#include <revolution/GX/GXLight.h>
+#include <revolution/GX.h>
 
 namespace nw4r
 {

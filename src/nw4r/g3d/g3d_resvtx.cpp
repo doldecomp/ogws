@@ -10,7 +10,7 @@ namespace nw4r
 		
 		void ResVtxPos::SetArray()
 		{
-			if (mPos.IsValid()) GXSetArray(GX_ATTR_VTX_POS, GetData(), ref().BYTE_0x1D);
+			if (mPos.IsValid()) GXSetArray(GX_VA_POS, GetData(), ref().BYTE_0x1D);
 		}
 		
 		void ResVtxPos::GetArray(const void ** pPtr, u8 * pByte) const
@@ -33,7 +33,7 @@ namespace nw4r
 		
 		void ResVtxNrm::SetArray()
 		{
-			if (mNrm.IsValid()) GXSetArray(GX_ATTR_VTX_NRM, GetData(), ref().BYTE_0x1D);
+			if (mNrm.IsValid()) GXSetArray(GX_VA_NRM, GetData(), ref().BYTE_0x1D);
 		}
 		
 		void ResVtxNrm::GetArray(const void ** pPtr, u8 * pByte) const
@@ -56,7 +56,7 @@ namespace nw4r
 		
 		void ResVtxClr::SetArray(GXAttr attr)
 		{
-			if (mClr.IsValid() && (u32)(attr - GX_ATTR_VTX_CLR) <= GX_ATTR_VTX_CLR_COUNT - 1) GXSetArray(attr, GetData(), ref().BYTE_0x1C);
+			if (mClr.IsValid() && (u32)(attr - GX_VA_CLR0) <= (GX_VA_TEX0 - GX_VA_CLR0) - 1) GXSetArray(attr, GetData(), ref().BYTE_0x1C);
 		}
 		
 		void ResVtxClr::GetArray(const void ** pPtr, u8 * pByte) const

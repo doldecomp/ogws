@@ -12,7 +12,7 @@ namespace nw4r
         {
             if (IsCITexelFormat(GetTexelFormat()))
             {
-                UNKWORD tlut = GXGetTexObjTlut(pTexObj);
+                u32 tlut = GXGetTexObjTlut(pTexObj);
                 GXInitTexObjCI(pTexObj, GetImage(), GetWidth(), GetHeight(),
                     GetTexelFormat(), GetWrapModeS(), GetWrapModeT(), IsMipMap(), tlut);
             }
@@ -22,8 +22,8 @@ namespace nw4r
                     GetTexelFormat(), GetWrapModeS(), GetWrapModeT(), IsMipMap());
             }
 
-            GXInitTexObjLOD(pTexObj, GetMinFilter(), GetMagFilter(), IsBiasClampEnable(),
-                IsEdgeLODEnable(), GetAnisotropy(), GetMinLOD(), GetMaxLOD(), GetLODBias());
+            GXInitTexObjLOD(pTexObj, GetMinFilter(), GetMagFilter(), GetMinLOD(),
+                GetMaxLOD(), GetLODBias(), IsBiasClampEnable(), IsEdgeLODEnable(), GetAnisotropy());
         }
 
         void TexMap::Get(GXTlutObj *pTLUTObj) const
@@ -83,7 +83,7 @@ namespace nw4r
             else
             {
                 SetPalette(NULL);
-                SetPaletteFormat(GX_TLUT_FORMAT_0);
+                SetPaletteFormat(GX_TL_IA8);
                 SetPaletteEntryNum(0);
             }
         }

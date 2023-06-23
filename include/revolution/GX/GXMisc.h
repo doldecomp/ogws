@@ -1,17 +1,21 @@
-#ifndef REVOSDK_GX_MISC_H
-#define REVOSDK_GX_MISC_H
+#ifndef RVL_SDK_GX_MISC_H
+#define RVL_SDK_GX_MISC_H
 #include <types.h>
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-typedef void (* GXDrawDoneCallback)(void);
+typedef void (*GXDrawDoneCallback)(void);
 
-UNKTYPE GXFlush(void);
+void GXSetMisc(UNKWORD token, UNKWORD val);
+void GXFlush(void);
+void GXResetWriteGatherPipe(void);
 
-UNKTYPE GXDrawDone(void);
+void GXAbortFrame(void);
 
-UNKTYPE GXSetDrawDoneCallback(GXDrawDoneCallback);
+void GXDrawDone(void);
+
+GXDrawDoneCallback GXSetDrawDoneCallback(GXDrawDoneCallback);
 
 #ifdef __cplusplus
 }

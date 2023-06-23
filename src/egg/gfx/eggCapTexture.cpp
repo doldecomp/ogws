@@ -3,9 +3,7 @@
 #include "eggCapTexture.h"
 #include "eggStateGX.h"
 
-#include <GX/GXFrameBuf.h>
-#include <GX/GXPixel.h>
-#include <GX/GXMisc.h>
+#include <revolution/GX.h>
 
 namespace EGG
 {
@@ -18,7 +16,7 @@ namespace EGG
 
         CpuTexture::configure();
 
-        mLoadMap = GX_TEX_MAP_ID_0;
+        mLoadMap = GX_TEXMAP0;
         mClearZ = 0x00FFFFFF;
         setClearColor(scDefaultClearColor);
         // setCopyFilterArg1(sCopyFilterArg1_1);

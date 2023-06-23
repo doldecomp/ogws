@@ -24,7 +24,7 @@ namespace EGG
         mEndZ = 0.0f;
         mStartZ = 0.0f;
 
-        mFogType = GX_FOG_TYPE_2;
+        mFogType = GX_FOG_PERSP_LIN;
     }
 
     void Fog::Calc()
@@ -39,7 +39,7 @@ namespace EGG
         }
         else
         {
-            GXSetFog(GX_FOG_TYPE_0, DrawGX::scColorWhite, 0.0f, 1.0f, 0.0f, 1.0f);
+            GXSetFog(GX_FOG_NONE, DrawGX::scColorWhite, 0.0f, 1.0f, 0.0f, 1.0f);
         }
 
         GXSetFogRangeAdj(0, 0, NULL);
@@ -47,7 +47,7 @@ namespace EGG
 
     void Fog::CopyToG3D(nw4r::g3d::Fog fog) const
     {
-        fog.SetFogType((mFlags & BOUND) ? mFogType : GX_FOG_TYPE_0);
+        fog.SetFogType((mFlags & BOUND) ? mFogType : GX_FOG_NONE);
         fog.SetZ(mStartZ, mEndZ);
         fog.SetFogColor(mColor);
     }
@@ -68,7 +68,7 @@ namespace EGG
         }
         else
         {
-            mFogType = GX_FOG_TYPE_0;
+            mFogType = GX_FOG_NONE;
             Unbind();
         }
     }

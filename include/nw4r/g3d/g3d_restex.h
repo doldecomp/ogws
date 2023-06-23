@@ -2,7 +2,7 @@
 #define NW4R_G3D_RESTEX_H
 #include "types_nw4r.h"
 #include "g3d_rescommon.h"
-#include <revolution/GX/GXTexture.h>
+#include <revolution/GX.h>
 
 namespace nw4r
 {

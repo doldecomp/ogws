@@ -5,8 +5,7 @@
 #include "eggAssert.h"
 #include "eggXfbManager.h"
 
-#include <GX/GXMisc.h>
-#include <GX/GXFrameBuf.h>
+#include <revolution/GX.h>
 #include <OS/OS.h>
 #include <OS/OSTime.h>
 #include <VI/vi.h>
@@ -83,8 +82,8 @@ namespace EGG
         #line 150
         EGG_ASSERT(pObj != NULL);
 
-        bool b = (pObj->BYTE_0x19 == 0);
-        GXSetCopyFilter(pObj->BYTE_0x19, &pObj->BYTES_0x1A, b, &pObj->BYTES_0x32);
+        bool b = (pObj->aa == 0);
+        GXSetCopyFilter(pObj->aa, pObj->sample_pattern, b, pObj->vfilter);
         
         bool efbFlag = FLAG_0x0.onBit(0);
         BaseSystem::getXfbManager()->copyEFB(efbFlag);

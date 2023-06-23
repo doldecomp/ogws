@@ -1,7 +1,7 @@
 #include "eggMatrix.h"
 #include "eggVector.h"
 #include "eggQuat.h"
-#include <revolution/GX/GXTransform.h>
+#include <revolution/GX.h>
 
 namespace EGG
 {
