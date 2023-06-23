@@ -7,7 +7,7 @@
 #include <RVLFaceLib/RFLi_NANDAccess.h>
 #include <RVLFaceLib/RFLi_NANDLoader.h>
 #include <RVLFaceLib/RFLi_Types.h>
-#include <revolution/types.h>
+#include <types.h>
 #ifdef __cplusplus
 extern "C" {
 #endif

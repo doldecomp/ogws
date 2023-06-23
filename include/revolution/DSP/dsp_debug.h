@@ -1,6 +1,6 @@
 #ifndef RVL_SDK_DSP_DEBUG_H
 #define RVL_SDK_DSP_DEBUG_H
-#include <revolution/types.h>
+#include <types.h>
 #ifdef __cplusplus
 extern "C" {
 #endif
