@@ -6,3 +6,4 @@ tools/old/*.exe
 tools/*.dll
 tools/old/*.dll
 include/baserom.dol
+*.pyc

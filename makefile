@@ -35,7 +35,7 @@ ELF2DOL  := tools/elf2dol
 SHA1SUM  := sha1sum
 PYTHON   := python
 PPROC    := tools/postprocess.py
-PROGRESS := tools/calcprogress.py
+PROGRESS := tools/calcprogress/calcprogress.py
 
 # Options
 ASFLAGS := -mgekko -I include
@@ -80,6 +80,9 @@ SRC_DIRS := src \
 # Flags for Riidefi's post-processing script
 PPROCFLAGS := -fsymbol-fixup
 
+# Flags for progress calculation script
+PROGRESSFLAGS := --dol=$(DOL) --map=$(MAP)
+
 #-------------------------------------------------------------------------------
 # Recipes
 #-------------------------------------------------------------------------------
@@ -103,7 +106,7 @@ $(LDSCRIPT): ldscript.lcf
 $(DOL): $(ELF) | tools
 	$(ELF2DOL) $< $@ $(BSS_PDHR) $(TARGET_COL)
 	$(SHA1SUM) -c $(TARGET).sha1
-	$(PROGRESS)
+	$(PROGRESS) $(PROGRESSFLAGS)
 
 clean:
 	rm -fdr build
