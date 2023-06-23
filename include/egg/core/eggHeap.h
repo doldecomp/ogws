@@ -43,7 +43,7 @@ namespace EGG
         virtual u32 adjust() = 0; // at 0x28
 
         u8 * getStartAddress() { return (u8 *)this; }
-        u8 * getEndAddress() { return mHeapHandle->mEndAddress; }
+        u8 * getEndAddress() { return mHeapHandle->end; }
         int getTotalSize() { return getEndAddress() - getStartAddress(); }
 
         bool tstDisableAllocation() { return mFlags.onBit(0); }
