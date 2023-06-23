@@ -54,34 +54,14 @@ CFLAGS_RUNTIME := -Cpp_exceptions off -proc gekko -fp hard -O4,s -ir include/Met
 CFLAGS_NW4R := -lang c99 -enum int -inline auto -Cpp_exceptions off -RTTI off -proc gekko -fp hard -O4,p  -ir include/nw4r -I- -Iinclude -ir include/MSL -ir include/revolution -nodefaults
 # Compiler flags for EGG
 CFLAGS_EGG := -lang c99 -enum int -inline auto -Cpp_exceptions off -RTTI off -proc gekko -fp hard -O4,p  -ir include/egg -ir include/nw4r -I- -Iinclude -ir include/MSL -ir include/revolution -nodefaults -rostr -str pool
+# Compiler flags for RVL SDK
+CFLAGS_RVL := -lang c99 -enum int -O4,p -inline auto -ipa file -volatileasm -Cpp_exceptions off -RTTI off -proc gekko -fp hard -I- -Iinclude -ir include/MSL -ir include/revolution -nodefaults
 
 #
-# RVL SDK module flags
+# One-off file flags
 #
-
-# Compiler flags for AI
-CFLAGS_AI := -lang c99 -enum int -O4,p -inline auto -ipa file -volatileasm -Cpp_exceptions off -RTTI off -proc gekko -fp hard -I- -Iinclude -ir include/MSL -ir include/revolution -nodefaults
-# Compiler flags for ARC
-CFLAGS_ARC := -lang c99 -enum int -O4,p -inline auto -ipa file -volatileasm -Cpp_exceptions off -RTTI off -proc gekko -fp hard -I- -Iinclude -ir include/MSL -ir include/revolution -nodefaults
-# Compiler flags for BASE
-CFLAGS_BASE := -lang c99 -enum int -O4,p -inline auto -ipa file -volatileasm -Cpp_exceptions off -RTTI off -proc gekko -fp hard -I- -Iinclude -ir include/MSL -ir include/revolution -nodefaults
-# Compiler flags for CNT
-CFLAGS_CNT := -lang c99 -enum int -O4,p -inline auto -ipa file -volatileasm -Cpp_exceptions off -RTTI off -proc gekko -fp hard -I- -Iinclude -ir include/MSL -ir include/revolution -nodefaults
-# Compiler flags for DB
-CFLAGS_DB := -lang c99 -enum int -O4,p -inline auto -ipa file -volatileasm -Cpp_exceptions off -RTTI off -proc gekko -fp hard -I- -Iinclude -ir include/MSL -ir include/revolution -nodefaults
-# Compiler flags for DSP
-CFLAGS_DSP := -lang c99 -enum int -O4,p -inline auto -ipa file -volatileasm -Cpp_exceptions off -RTTI off -proc gekko -fp hard -I- -Iinclude -ir include/MSL -ir include/revolution -nodefaults
-# Compiler flags for DVD
-CFLAGS_DVD := -lang c99 -enum int -O4,p -inline auto -ipa file -volatileasm -Cpp_exceptions off -RTTI off -proc gekko -fp hard -I- -Iinclude -ir include/MSL -ir include/revolution -nodefaults
-# Compiler flags for EXI
-CFLAGS_EXI := -lang c99 -enum int -O4,p -inline auto -ipa file -volatileasm -Cpp_exceptions off -RTTI off -proc gekko -fp hard -I- -Iinclude -ir include/MSL -ir include/revolution -nodefaults
+# EXI/EXIBios.c
 CFLAGS_EXIBIOS := -lang c99 -enum int -O3 -inline auto -ipa file -volatileasm -Cpp_exceptions off -RTTI off -proc gekko -fp hard -I- -Iinclude -ir include/MSL -ir include/revolution -nodefaults
-# Compiler flags for FS
-CFLAGS_FS := -lang c99 -enum int -O4,p -inline auto -ipa file -volatileasm -Cpp_exceptions off -RTTI off -proc gekko -fp hard -I- -Iinclude -ir include/MSL -ir include/revolution -nodefaults
-# Compiler flags for GX
-CFLAGS_GX := -lang c99 -enum int -O4,p -inline auto -ipa file -volatileasm -Cpp_exceptions off -RTTI off -proc gekko -fp hard -I- -Iinclude -ir include/MSL -ir include/revolution -nodefaults
-# Compiler flags for IPC
-CFLAGS_IPC := -lang c99 -enum int -O4,p -inline auto -ipa file -volatileasm -Cpp_exceptions off -RTTI off -proc gekko -fp hard -I- -Iinclude -ir include/MSL -ir include/revolution -nodefaults
 
 # elf2dol needs to know these in order to calculate sbss correctly.
 BSS_PDHR := 9
@@ -171,55 +151,11 @@ $(BUILD_DIR)/MetroTRK/%.o: src/MetroTRK/%.c
 	$(CC_OLD) $(CFLAGS_TRK) -c -o $@ $<
 	$(PPROC) $(PPROCFLAGS) $@
 
-#
-# RVL SDK build rules
-#
-
-$(BUILD_DIR)/revolution/AI/%.o: src/revolution/AI/%.c
-	$(CC) $(CFLAGS_AI) -c -o $@ $<
-	$(PPROC) $(PPROCFLAGS) $@
-
-$(BUILD_DIR)/revolution/ARC/%.o: src/revolution/ARC/%.c
-	$(CC) $(CFLAGS_ARC) -c -o $@ $<
-	$(PPROC) $(PPROCFLAGS) $@
-
-$(BUILD_DIR)/revolution/BASE/%.o: src/revolution/BASE/%.c
-	$(CC) $(CFLAGS_BASE) -c -o $@ $<
-	$(PPROC) $(PPROCFLAGS) $@
-
-$(BUILD_DIR)/revolution/CNT/%.o: src/revolution/CNT/%.c
-	$(CC) $(CFLAGS_CNT) -c -o $@ $<
-	$(PPROC) $(PPROCFLAGS) $@
-
-$(BUILD_DIR)/revolution/DB/%.o: src/revolution/DB/%.c
-	$(CC) $(CFLAGS_DB) -c -o $@ $<
-	$(PPROC) $(PPROCFLAGS) $@
-
-$(BUILD_DIR)/revolution/DSP/%.o: src/revolution/DSP/%.c
-	$(CC) $(CFLAGS_DSP) -c -o $@ $<
-	$(PPROC) $(PPROCFLAGS) $@
-
-$(BUILD_DIR)/revolution/DVD/%.o: src/revolution/DVD/%.c
-	$(CC) $(CFLAGS_DVD) -c -o $@ $<
-	$(PPROC) $(PPROCFLAGS) $@
-
 # EXIBios is a special case, compiled differently from rest of library
 $(BUILD_DIR)/revolution/EXI/EXIBios.o: src/revolution/EXI/EXIBios.c
 	$(CC) $(CFLAGS_EXIBIOS) -c -o $@ $<
 	$(PPROC) $(PPROCFLAGS) $@
 
-$(BUILD_DIR)/revolution/EXI/%.o: src/revolution/EXI/%.c
-	$(CC) $(CFLAGS_EXI) -c -o $@ $<
-	$(PPROC) $(PPROCFLAGS) $@
-
-$(BUILD_DIR)/revolution/FS/%.o: src/revolution/FS/%.c
-	$(CC) $(CFLAGS_FS) -c -o $@ $<
-	$(PPROC) $(PPROCFLAGS) $@
-
-$(BUILD_DIR)/revolution/GX/%.o: src/revolution/GX/%.c
-	$(CC) $(CFLAGS_GX) -c -o $@ $<
-	$(PPROC) $(PPROCFLAGS) $@
-
-$(BUILD_DIR)/revolution/IPC/%.o: src/revolution/IPC/%.c
-	$(CC) $(CFLAGS_IPC) -c -o $@ $<
+$(BUILD_DIR)/revolution/%.o: src/revolution/%.c
+	$(CC) $(CFLAGS_RVL) -c -o $@ $<
 	$(PPROC) $(PPROCFLAGS) $@

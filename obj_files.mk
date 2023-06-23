@@ -429,11 +429,11 @@ RVL_SDK_O_FILES := \
 	build/asm/revolution/IPC/memory.o \
 	build/revolution/IPC/ipcProfile.o \
 	\
-	build/asm/revolution/MEM/mem_heapCommon.o \
+	build/revolution/MEM/mem_heapCommon.o \
 	build/asm/revolution/MEM/mem_expHeap.o \
-	build/asm/revolution/MEM/mem_frameHeap.o \
-	build/asm/revolution/MEM/mem_allocator.o \
-	build/asm/revolution/MEM/mem_list.o \
+	build/revolution/MEM/mem_frameHeap.o \
+	build/revolution/MEM/mem_allocator.o \
+	build/revolution/MEM/mem_list.o \
 	\
 	build/asm/revolution/MTX/mtx.o \
 	build/asm/revolution/MTX/mtxvec.o \

@@ -75,6 +75,7 @@ lbl_8039B9E8:
 
 .section .bss, "wa"
 .balign 0x8
+.balign 32
 s_homeDir:
 	.skip 0x40
 
