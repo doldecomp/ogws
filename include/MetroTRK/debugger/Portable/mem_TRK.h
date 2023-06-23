@@ -1,5 +1,5 @@
-#ifndef REVOSDK_TRK_MEM_TRK_H
-#define REVOSDK_TRK_MEM_TRK_H
+#ifndef METROTRK_PORTABLE_MEM_TRK_H
+#define METROTRK_PORTABLE_MEM_TRK_H
 #include <types.h>
 #ifdef __cplusplus
 extern "C" {
