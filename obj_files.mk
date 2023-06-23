@@ -441,10 +441,10 @@ RVL_SDK_O_FILES := \
 	build/asm/revolution/MTX/vec.o \
 	build/asm/revolution/MTX/quat.o \
 	\
-	build/asm/revolution/NAND/nand.o \
-	build/asm/revolution/NAND/NANDOpenClose.o \
-	build/asm/revolution/NAND/NANDCore.o \
-	build/asm/revolution/NAND/NANDCheck.o \
+	build/revolution/NAND/nand.o \
+	build/revolution/NAND/NANDOpenClose.o \
+	build/revolution/NAND/NANDCore.o \
+	build/revolution/NAND/NANDCheck.o \
 	\
 	build/asm/revolution/OS/OS.o \
 	build/asm/revolution/OS/OSAlarm.o \
