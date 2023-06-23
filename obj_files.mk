@@ -490,7 +490,7 @@ RVL_SDK_O_FILES := \
 	build/asm/revolution/WUD/WUDHidHost.o \
 	build/asm/revolution/WUD/debug_msg.o \
 	\
-	build/asm/revolution/AI/ai.o \
+	build/revolution/AI/ai.o \
 	\
 	build/revolution/ARC/arc.o \
 	\

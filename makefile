@@ -42,19 +42,31 @@ ASFLAGS := -mgekko -I include
 LDFLAGS := -map $(MAP) -mapunused -proc gekko -fp hard -nodefaults -nofail
 #CFLAGS  := -Cpp_exceptions off -proc gekko -fp hard -O2,p -i include
 
-# Compiler flags for the Metrowerks Target Resident Kernel (MetroTRK)
-CFLAGS_TRK := -maxerrors 1 -Cpp_exceptions off -proc gekko -fp hard -O4,s -ir include/MetroTRK -I- -i include -ir include/MSL -nodefaults
-# Compiler flags for the CodeWarrior runtime library
-CFLAGS_RUNTIME := -maxerrors 1 -Cpp_exceptions off -proc gekko -fp hard -O4,s -ir include/MetroTRK -I- -i include -ir include/MSL -nodefaults
-# Compiler flags for NintendoWare for Revolution
-CFLAGS_NW4R := -maxerrors 1 -lang c99 -enum int -inline auto -Cpp_exceptions off -RTTI off -proc gekko -fp hard -O4,p  -ir include/nw4r -I- -Iinclude -ir include/MSL -ir include/revolution -nodefaults
-# Compiler flags for EGG
-CFLAGS_EGG := -maxerrors 1 -lang c99 -enum int -inline auto -Cpp_exceptions off -RTTI off -proc gekko -fp hard -O4,p  -ir include/egg -ir include/nw4r -I- -Iinclude -ir include/MSL -ir include/revolution -nodefaults -rostr -str pool
+#
+# Module flags
+#
 
+# Compiler flags for the Metrowerks Target Resident Kernel (MetroTRK)
+CFLAGS_TRK := -Cpp_exceptions off -proc gekko -fp hard -O4,s -ir include/MetroTRK -I- -i include -ir include/MSL -nodefaults
+# Compiler flags for the CodeWarrior runtime library
+CFLAGS_RUNTIME := -Cpp_exceptions off -proc gekko -fp hard -O4,s -ir include/MetroTRK -I- -i include -ir include/MSL -nodefaults
+# Compiler flags for NintendoWare for Revolution
+CFLAGS_NW4R := -lang c99 -enum int -inline auto -Cpp_exceptions off -RTTI off -proc gekko -fp hard -O4,p  -ir include/nw4r -I- -Iinclude -ir include/MSL -ir include/revolution -nodefaults
+# Compiler flags for EGG
+CFLAGS_EGG := -lang c99 -enum int -inline auto -Cpp_exceptions off -RTTI off -proc gekko -fp hard -O4,p  -ir include/egg -ir include/nw4r -I- -Iinclude -ir include/MSL -ir include/revolution -nodefaults -rostr -str pool
+
+#
+# RVL SDK module flags
+#
+
+# Compiler flags for AI
+CFLAGS_AI := -lang c99 -enum int -O4,p -inline auto -ipa file -volatileasm -Cpp_exceptions off -RTTI off -proc gekko -fp hard -I- -Iinclude -ir include/MSL -ir include/revolution -nodefaults
 # Compiler flags for ARC
-CFLAGS_ARC := -maxerrors 1 -lang c99 -enum int -O4,p -inline auto -ipa file -volatileasm -Cpp_exceptions off -RTTI off -proc gekko -fp hard -I- -Iinclude -ir include/MSL -ir include/revolution -nodefaults
+CFLAGS_ARC := -lang c99 -enum int -O4,p -inline auto -ipa file -volatileasm -Cpp_exceptions off -RTTI off -proc gekko -fp hard -I- -Iinclude -ir include/MSL -ir include/revolution -nodefaults
 # Compiler flags for BASE
-CFLAGS_BASE := -maxerrors 1 -lang c99 -enum int -O4,p -inline auto -ipa file -volatileasm -Cpp_exceptions off -RTTI off -proc gekko -fp hard -I- -Iinclude -ir include/MSL -ir include/revolution -nodefaults
+CFLAGS_BASE := -lang c99 -enum int -O4,p -inline auto -ipa file -volatileasm -Cpp_exceptions off -RTTI off -proc gekko -fp hard -I- -Iinclude -ir include/MSL -ir include/revolution -nodefaults
+# Compiler flags for CNT
+CFLAGS_CNT := -lang c99 -enum int -O4,p -inline auto -ipa file -volatileasm -Cpp_exceptions off -RTTI off -proc gekko -fp hard -I- -Iinclude -ir include/MSL -ir include/revolution -nodefaults
 
 # elf2dol needs to know these in order to calculate sbss correctly.
 BSS_PDHR := 9
@@ -73,7 +85,11 @@ ASM_DIRS := asm \
 
 SRC_DIRS := src \
 	revolution nw4r egg runtime MetroTRK \
-	revolution/ARC revolution/BASE \
+	revolution/NdevExi2AD revolution/KPAD revolution/PAD revolution/WPAD revolution/EUART revolution/EXI revolution/FS \
+	revolution/GX revolution/IPC revolution/MEM revolution/MTX revolution/NAND revolution/OS revolution/SC \
+	revolution/USB revolution/VI revolution/WUD revolution/AI revolution/ARC revolution/AX revolution/AXFX \
+	revolution/BASE revolution/BTE revolution/DB revolution/DSP revolution/DVD revolution/SI revolution/TPL \
+	revolution/WENC revolution/CNT revolution/ESP revolution/NET revolution/NWC24 revolution/VF \
 	nw4r/ut nw4r/ef nw4r/math nw4r/snd nw4r/g3d nw4r/lyt \
 	egg/math egg/core egg/audio egg/util egg/gfx egg/prim
 
@@ -140,10 +156,22 @@ $(BUILD_DIR)/MetroTRK/%.o: src/MetroTRK/%.c
 	$(CC_OLD) $(CFLAGS_TRK) -c -o $@ $<
 	$(PPROC) $(PPROCFLAGS) $@
 
+#
+# RVL SDK build rules
+#
+
+$(BUILD_DIR)/revolution/AI/%.o: src/revolution/AI/%.c
+	$(CC) $(CFLAGS_AI) -c -o $@ $<
+	$(PPROC) $(PPROCFLAGS) $@
+
 $(BUILD_DIR)/revolution/ARC/%.o: src/revolution/ARC/%.c
 	$(CC) $(CFLAGS_ARC) -c -o $@ $<
 	$(PPROC) $(PPROCFLAGS) $@
 
 $(BUILD_DIR)/revolution/BASE/%.o: src/revolution/BASE/%.c
 	$(CC) $(CFLAGS_BASE) -c -o $@ $<
+	$(PPROC) $(PPROCFLAGS) $@
+
+$(BUILD_DIR)/revolution/CNT/%.o: src/revolution/CNT/%.c
+	$(CC) $(CFLAGS_CNT) -c -o $@ $<
 	$(PPROC) $(PPROCFLAGS) $@
