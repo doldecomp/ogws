@@ -2,6 +2,7 @@
 
 from src.main import main
 from src.progress import SliceGroup, Slice
+from math import floor
 
 # Can track non-code sections, but it's not really necessary.
 # Slice groups in dependancy order (except TRK).
@@ -38,7 +39,14 @@ def exec_progress_callback(src_code: int, total_code: int, src_data: int, total_
     """Executable (DOL/REL) progress callback.
     Any game-specific counters or extra things should go here.
     """
+    code_progress = src_code / total_code  # range [0, 1]
+    data_progress = src_data / total_data  # range [0, 1]
+    total_progress = (code_progress + data_progress) / (1 + 1)
 
+    SKILL_MAX = 2500
+    skill_level = floor(SKILL_MAX * total_progress)
+
+    print(f"You currently have {skill_level}/{SKILL_MAX} skill points ({total_progress:%}).")
 
 def slice_group_progress_callback(name: str, src_size: int, total_size: int):
     """Slice group progress callback.
