@@ -406,7 +406,7 @@ RVL_SDK_O_FILES := \
 	build/asm/revolution/EXI/EXIUart.o \
 	build/revolution/EXI/EXICommon.o \
 	\
-	build/asm/revolution/FS/fs.o \
+	build/revolution/FS/fs.o \
 	\
 	build/asm/revolution/GX/GXInit.o \
 	build/asm/revolution/GX/GXFifo.o \

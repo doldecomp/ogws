@@ -74,6 +74,8 @@ CFLAGS_DSP := -lang c99 -enum int -O4,p -inline auto -ipa file -volatileasm -Cpp
 # Compiler flags for EXI
 CFLAGS_EXI := -lang c99 -enum int -O4,p -inline auto -ipa file -volatileasm -Cpp_exceptions off -RTTI off -proc gekko -fp hard -I- -Iinclude -ir include/MSL -ir include/revolution -nodefaults
 CFLAGS_EXIBIOS := -lang c99 -enum int -O3 -inline auto -ipa file -volatileasm -Cpp_exceptions off -RTTI off -proc gekko -fp hard -I- -Iinclude -ir include/MSL -ir include/revolution -nodefaults
+# Compiler flags for FS
+CFLAGS_FS := -lang c99 -enum int -O4,p -inline auto -ipa file -volatileasm -Cpp_exceptions off -RTTI off -proc gekko -fp hard -I- -Iinclude -ir include/MSL -ir include/revolution -nodefaults
 
 # elf2dol needs to know these in order to calculate sbss correctly.
 BSS_PDHR := 9
@@ -198,4 +200,8 @@ $(BUILD_DIR)/revolution/EXI/EXIBios.o: src/revolution/EXI/EXIBios.c
 
 $(BUILD_DIR)/revolution/EXI/%.o: src/revolution/EXI/%.c
 	$(CC) $(CFLAGS_EXI) -c -o $@ $<
+	$(PPROC) $(PPROCFLAGS) $@
+
+$(BUILD_DIR)/revolution/FS/%.o: src/revolution/FS/%.c
+	$(CC) $(CFLAGS_FS) -c -o $@ $<
 	$(PPROC) $(PPROCFLAGS) $@
