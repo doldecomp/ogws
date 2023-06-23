@@ -546,6 +546,26 @@ RVL_SDK_O_FILES := \
 	\
 	build/asm/revolution/NET/nettime.o \
 	build/asm/revolution/NET/NETVersion.o \
+	\
+	build/asm/revolution/NWC24/NWC24StdApi.o \
+	build/asm/revolution/NWC24/NWC24FileApi.o \
+	build/asm/revolution/NWC24/NWC24Config.o \
+	build/asm/revolution/NWC24/NWC24Utils.o \
+	build/asm/revolution/NWC24/NWC24Manage.o \
+	build/asm/revolution/NWC24/NWC24MsgObj.o \
+	build/asm/revolution/NWC24/NWC24MBoxCtrl.o \
+	build/asm/revolution/NWC24/NWC24Mime.o \
+	build/asm/revolution/NWC24/NWC24Parser.o \
+	build/asm/revolution/NWC24/NWC24MsgCommit.o \
+	build/asm/revolution/NWC24/NWC24Schedule.o \
+	build/asm/revolution/NWC24/NWC24DateParser.o \
+	build/asm/revolution/NWC24/NWC24FriendList.o \
+	build/asm/revolution/NWC24/NWC24SecretFList.o \
+	build/asm/revolution/NWC24/NWC24Time.o \
+	build/asm/revolution/NWC24/NWC24Ipc.o \
+	build/asm/revolution/NWC24/NWC24Download.o \
+	build/asm/revolution/NWC24/NWC24System.o \
+
 
 GROUP_1_O_FILES := \
 	build/asm/text.o \
