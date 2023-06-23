@@ -1,50 +1,55 @@
-#ifndef REVOSDK_TPL_H
-#define REVOSDK_TPL_H
-#ifdef __cplusplus
-#include <types.h>
+#ifndef RVL_SDK_TPL_H
+#define RVL_SDK_TPL_H
 #include <revolution/GX.h>
+#include <types.h>
+#ifdef __cplusplus
 extern "C" {
 #endif
 
-typedef struct
-{
-    u32 mVersion; // 00 20 AF 30
-    UNKWORD WORD_0x4;
-    UNKWORD WORD_0x8;
-} TPLPalette;
+/**
+ * Documentation from:
+ * https://github.com/soopercool101/BrawlCrate/blob/master/BrawlLib/SSBB/Types/TPL.cs
+ * https://wiki.tockdom.com/wiki/TPL_(File_Format)
+ * DWARF debugging info
+ */
 
-typedef struct
-{
-    u16 mHeight; // at 0x0
-    u16 mWidth; // at 0x2
-    GXTexFmt mTexFmt; // at 0x4
-    UNKTYPE *mImage; // at 0x8
-    GXTexWrapMode mWrapModeS; // at 0xC
-    GXTexWrapMode mWrapModeT; // at 0x10
-    GXTexFilter mMinFilter; // at 0x14
-    GXTexFilter mMagFilter; // at 0x18
-    f32 mLODBias; // at 0x1C
-    u8 mEdgeLODEnable; // at 0x20
-    u8 mMinLOD; // at 0x21
-    u8 mMaxLOD; // at 0x22
-} TPLDescriptorUnk0;
+typedef struct TPLHeader {
+    u16 height;          // at 0x0
+    u16 width;           // at 0x2
+    u32 format;          // at 0x4
+    char* data;          // at 0x8
+    GXTexWrapMode wrapS; // at 0xC
+    GXTexWrapMode wrapT; // at 0x10
+    GXTexFilter minFilt; // at 0x14
+    GXTexFilter magFilt; // at 0x18
+    f32 lodBias;         // at 0x1C
+    u8 edgeLodEnable;    // at 0x20
+    u8 minLod;           // at 0x21
+    u8 maxLod;           // at 0x22
+    u8 unpacked;         // at 0x23
+} TPLHeader;
 
-typedef struct
-{
-    u16 mPalEntryNum; // at 0x0
-    char UNK_0x2[0x2];
-    GXTlutFmt mPaletteFmt; // at 0x4
-    UNKTYPE *mPalette; // at 0x8
-} TPLDescriptorUnk1;
+typedef struct TPLClutHeader {
+    u16 numEntries;   // at 0x0
+    u8 unpacked;      // at 0x1
+    u8 padding;       // at 0x2
+    GXTlutFmt format; // at 0x4
+    char* data;       // at 0x8
+} TPLClutHeader;
 
-typedef struct
-{
-    TPLDescriptorUnk0 *PTR_0x0;
-    TPLDescriptorUnk1 *PTR_0x4;
+typedef struct TPLDescriptor {
+    TPLHeader* texHeader;      // at 0x0
+    TPLClutHeader* clutHeader; // at 0x4
 } TPLDescriptor;
 
-UNKTYPE TPLBind(TPLPalette *);
-TPLDescriptor * TPLGet(TPLPalette *, u32 id);
+typedef struct TPLPalette {
+    u32 version;                // at 0x0
+    u32 numImages;              // at 0x4
+    TPLDescriptor* descriptors; // at 0x8
+} TPLPalette;
+
+void TPLBind(TPLPalette* pal);
+TPLDescriptor* TPLGet(TPLPalette* pal, u32 id);
 
 #ifdef __cplusplus
 }
