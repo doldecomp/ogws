@@ -62,7 +62,7 @@ void DBInitInterrupts(void) {
     __OSUnmaskInterrupts(OS_INTR_MASK(OS_INTR_PI_DEBUG));
 }
 #else
-#error This file has not yet been decompiled accurately. Use "cnt.s" instead.
+#error This file has not yet been decompiled accurately. Use "DebuggerDriver.s" instead.
 #endif
 
 u32 DBQueryData(void) {

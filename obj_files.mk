@@ -477,8 +477,8 @@ RVL_SDK_O_FILES := \
 	build/asm/revolution/OS/__ppc_eabi_init.o \
 	\
 	build/asm/revolution/SC/scsystem.o \
-	build/asm/revolution/SC/scapi.o \
-	build/asm/revolution/SC/scapi_prdinfo.o \
+	build/revolution/SC/scapi.o \
+	build/revolution/SC/scapi_prdinfo.o \
 	\
 	build/asm/revolution/USB/usb.o \
 	\
@@ -536,7 +536,7 @@ RVL_SDK_O_FILES := \
 	build/asm/revolution/SI/SIBios.o \
 	build/asm/revolution/SI/SISamplingRate.o \
 	\
-	build/asm/revolution/TPL/TPL.o \
+	build/revolution/TPL/TPL.o \
 	\
 	build/asm/revolution/WENC/wenc.o \
 	\
