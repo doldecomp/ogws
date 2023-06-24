@@ -93,7 +93,7 @@ BOOL EXIImm(EXIChannel chan, void* buf, s32 len, u32 type,
 
     exi->buffer = buf;
     exi->bytesRead = (type != EXI_WRITE) ? len : 0;
-    EXI_CHAN_CTRL[chan].cr = type << 2 | 1 | (len - 1) * 16;
+    EXI_CHAN_CTRL[chan].cr = 1 | type << 2 | (len - 1) << 4;
 
     OSRestoreInterrupts(enabled);
     return TRUE;
