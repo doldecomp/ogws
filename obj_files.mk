@@ -388,7 +388,7 @@ METROTRK_O_FILES := \
 
 RVL_SDK_O_FILES := \
 	build/asm/revolution/NdevExi2AD/DebuggerDriver.o \
-	build/asm/revolution/NdevExi2AD/exi2.o \
+	build/revolution/NdevExi2AD/exi2.o \
 	\
 	build/asm/revolution/KPAD/KPAD.o \
 	\
