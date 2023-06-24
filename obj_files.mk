@@ -283,7 +283,7 @@ EGG_O_FILES := \
 
 RUNTIME_O_FILES := \
 	build/runtime/__mem.o \
-	build/asm/runtime/__va_arg.o \
+	build/runtime/__va_arg.o \
 	build/asm/runtime/global_destructor_chain.o \
 	build/asm/runtime/NMWException.o \
 	build/asm/runtime/ptmf.o \
