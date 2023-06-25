@@ -1,7 +1,7 @@
 #include <revolution/OS.h>
 #include <runtime/GCN_mem_alloc.h>
 
-static inline void InitDefaultHeap(void) {
+static void InitDefaultHeap(void) {
     void* start;
     void* end;
     s32 heap;
