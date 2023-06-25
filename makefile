@@ -47,7 +47,7 @@ LDFLAGS := -map $(MAP) -mapunused -proc gekko -fp hard -nodefaults -nofail
 #
 
 # Compiler flags for the Metrowerks Target Resident Kernel (MetroTRK)
-CFLAGS_TRK := -lang c -enum int -inline auto -Cpp_exceptions off -proc gekko -fp hard -O4,s -ir include/MetroTRK -I- -i include -ir include/MSL -nodefaults
+CFLAGS_TRK := -lang c -enum int -inline auto -Cpp_exceptions off -proc gekko -fp hard -O4,p -ir include/MetroTRK -I- -i include -ir include/MSL -nodefaults
 # Compiler flags for the CodeWarrior runtime library
 CFLAGS_RUNTIME := -lang c -enum int -inline auto -rostr -Cpp_exceptions off -proc gekko -fp hard -O4,p -ir include/MetroTRK -I- -i include -ir include/MSL -nodefaults
 # Compiler flags for NintendoWare for Revolution
@@ -80,6 +80,7 @@ ASM_DIRS := asm \
 
 SRC_DIRS := src \
 	revolution nw4r egg runtime MetroTRK \
+	MetroTRK/debugger/Export MetroTRK/debugger/Os MetroTRK/debugger/Portable MetroTRK/debugger/Processor MetroTRK/gamedev \
 	revolution/NdevExi2AD revolution/KPAD revolution/PAD revolution/WPAD revolution/EUART revolution/EXI revolution/FS \
 	revolution/GX revolution/IPC revolution/MEM revolution/MTX revolution/NAND revolution/OS revolution/SC \
 	revolution/USB revolution/VI revolution/WUD revolution/AI revolution/ARC revolution/AX revolution/AXFX \

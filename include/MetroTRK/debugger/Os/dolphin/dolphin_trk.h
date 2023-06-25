@@ -1,5 +1,5 @@
-#ifndef METROTRK_DOLPHIN_TRK_H
-#define METROTRK_DOLPHIN_TRK_H
+#ifndef METROTRK_DEBUGGER_OS_DOLPHIN_DOLPHIN_TRK_H
+#define METROTRK_DEBUGGER_OS_DOLPHIN_DOLPHIN_TRK_H
 #include <types.h>
 #ifdef __cplusplus
 extern "C" {

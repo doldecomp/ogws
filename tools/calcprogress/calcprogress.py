@@ -8,16 +8,16 @@ from math import floor
 # Slice groups in dependancy order (except TRK).
 # (Currently broken until BTE/RFL/HBM are split (why?))
 EXEC_SLICE_GROUPS = [
-    # SliceGroup("Runtime", [
-    #     Slice(0x80004000, 0x80004134), # .init
-    #     Slice(0x800B1750, 0x800B2414), # .text
-    #     ]),
+    SliceGroup("Runtime", [
+        Slice(0x80004000, 0x80004134),  # .init
+        Slice(0x800B1750, 0x800B2414),  # .text
+    ]),
     # SliceGroup("MSL", [
     #     Slice(0x800B2414, 0x800C10D4) # .text
     #     ]),
-    # SliceGroup("MetroTRK", [
-    #     Slice(0x800C10D4, 0x800C6810) # .text
-    #     ]),
+    SliceGroup("MetroTRK", [
+        Slice(0x800C10D4, 0x800C6810)  # .text
+    ]),
     # SliceGroup("RVL SDK", [
     #     Slice(0x800C6810, 0x80167B2C) # .text
     #     ]),
@@ -35,6 +35,7 @@ EXEC_SLICE_GROUPS = [
     #     ])
 ]
 
+
 def exec_progress_callback(src_code: int, total_code: int, src_data: int, total_data: int):
     """Executable (DOL/REL) progress callback.
     Any game-specific counters or extra things should go here.
@@ -46,7 +47,9 @@ def exec_progress_callback(src_code: int, total_code: int, src_data: int, total_
     SKILL_MAX = 2500
     skill_level = floor(SKILL_MAX * total_progress)
 
-    print(f"You currently have {skill_level}/{SKILL_MAX} skill points ({total_progress:%}).")
+    print(
+        f"You currently have {skill_level}/{SKILL_MAX} skill points ({total_progress:%}).")
+
 
 def slice_group_progress_callback(name: str, src_size: int, total_size: int):
     """Slice group progress callback.

@@ -356,7 +356,7 @@ MSL_O_FILES := \
 
 METROTRK_O_FILES := \
 	build/asm/MetroTRK/debugger/Portable/mainloop.o \
-	build/asm/MetroTRK/debugger/Portable/nubevent.o \
+	build/MetroTRK/debugger/Portable/nubevent.o \
 	build/asm/MetroTRK/debugger/Portable/nubinit.o \
 	build/asm/MetroTRK/debugger/Portable/msg.o \
 	build/asm/MetroTRK/debugger/Portable/msgbuf.o \
@@ -365,7 +365,7 @@ METROTRK_O_FILES := \
 	build/asm/MetroTRK/debugger/Portable/dispatch.o \
 	build/asm/MetroTRK/debugger/Portable/msghndlr.o \
 	build/asm/MetroTRK/debugger/Portable/support.o \
-	build/asm/MetroTRK/debugger/Portable/mutex_TRK.o \
+	build/MetroTRK/debugger/Portable/mutex_TRK.o \
 	build/asm/MetroTRK/debugger/Portable/notify.o \
 	build/asm/MetroTRK/debugger/Processor/flush_cache.o \
 	build/asm/MetroTRK/debugger/Portable/mem_TRK.o \
