@@ -1361,12 +1361,13 @@ _index_func_801773D4:
 # For __init_cpp_exceptions/__register_fragment
 .global _eti_init_info_
 _eti_init_info_:
-    .long _index___dt__Q23EGG8Vector3fFv # &extabindex[0]
-    .long _eti_init_info_ # &_eti_init_info_
-    .long __dt__Q23EGG8Vector3fFv # &extabindex[0].func
-    .long 0x000d58ac # unkValue
-    .long 0x00000000 # Padding
-    .long 0x00000000 # Padding
-    .long 0x00000000 # Padding
-    .long 0x00000000 # Padding
+    .long _index___dt__Q23EGG8Vector3fFv # section
+    .long _eti_init_info_                # info
+    .long __dt__Q23EGG8Vector3fFv        # codeStart
+    .long 0x000d58ac                     # codeSize
+    # Empty/terminator entry
+    .long 0x00000000                     # section
+    .long 0x00000000                     # info
+    .long 0x00000000                     # codeStart
+    .long 0x00000000                     # codeSize
 .balign 0x8
