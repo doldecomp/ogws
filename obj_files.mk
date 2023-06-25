@@ -290,7 +290,7 @@ RUNTIME_O_FILES := \
 	build/runtime/runtime.o \
 	build/asm/runtime/__init_cpp_exceptions.o \
 	build/runtime/Gecko_ExceptionPPC.o \
-	build/asm/runtime/GCN_mem_alloc.o \
+	build/runtime/GCN_mem_alloc.o \
 
 MSL_O_FILES := \
 	build/asm/MSL/alloc.o \
