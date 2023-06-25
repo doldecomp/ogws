@@ -278,7 +278,7 @@ _after_init_metro_trk_bba:
     mr r3, r14
     mr r4, r15
     bl main
-    b __fini_cpp // <- Will halt CPU
+    b exit // <- Will halt CPU
     // clang-format on
 }
 
@@ -356,7 +356,7 @@ DECL_SECTION(".init") static void __init_data(void) {
             break;
         }
 
-        __copy_rom_section(rs->virtualOfs, rs->romOfs, rs->size);
+        __copy_rom_section(rs->virt, rs->phys, rs->size);
         rs++;
     }
 
@@ -366,7 +366,7 @@ DECL_SECTION(".init") static void __init_data(void) {
             break;
         }
 
-        __init_bss_section(bs->virtualOfs, bs->size);
+        __init_bss_section(bs->virt, bs->size);
         bs++;
     }
 }

@@ -147,6 +147,10 @@ $(BUILD_DIR)/runtime/%.o: src/runtime/%.c
 	$(CC) $(CFLAGS_RUNTIME) -c -o $@ $<
 	$(PPROC) $(PPROCFLAGS) $@
 
+$(BUILD_DIR)/runtime/%.o: src/runtime/%.cpp
+	$(CC) $(CFLAGS_RUNTIME) -c -o $@ $<
+	$(PPROC) $(PPROCFLAGS) $@
+
 $(BUILD_DIR)/MetroTRK/%.o: src/MetroTRK/%.c
 	$(CC_OLD) $(CFLAGS_TRK) -c -o $@ $<
 	$(PPROC) $(PPROCFLAGS) $@

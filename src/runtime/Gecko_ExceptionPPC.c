@@ -1,23 +1,17 @@
-#include <types.h>
+#include <revolution/OS.h>
+#include <runtime/Gecko_ExceptionPPC.h>
 
 #define NUM_FRAGMENT 1
 
-typedef struct ExtabInfo {
-    void* section;           // at 0x0
-    struct ExtabInfo* extab; // at 0x4
-    void* codeStart;         // at 0x8
-    u32 codeSize;            // at 0xC
-} ExtabInfo;
-
 typedef struct FragmentInfo {
-    ExtabInfo* extab; // at 0x0
-    void* toc;        // at 0x4
-    BOOL regist;      // at 0x8
+    const ExtabIndexInfo* eti; // at 0x0
+    void* toc;                 // at 0x4
+    BOOL regist;               // at 0x8
 } FragmentInfo;
 
 static FragmentInfo fragmentInfo[NUM_FRAGMENT];
 
-int __register_fragment(ExtabInfo* extab, void* toc) {
+int __register_fragment(const ExtabIndexInfo* eti, void* toc) {
     int i;
     FragmentInfo* frag;
 
@@ -25,7 +19,7 @@ int __register_fragment(ExtabInfo* extab, void* toc) {
         frag = &fragmentInfo[i];
 
         if (!frag->regist) {
-            frag->extab = extab;
+            frag->eti = eti;
             frag->toc = toc;
             frag->regist = TRUE;
             return 0;
@@ -47,7 +41,7 @@ void __unregister_fragment(int i) {
     }
 
     frag = &fragmentInfo[i];
-    frag->extab = NULL;
+    frag->eti = NULL;
     frag->toc = NULL;
     frag->regist = FALSE;
 }

@@ -65,8 +65,8 @@ lbl_800F6F98:
 /* 800F6FB0 000F1EB0  38 21 00 10 */	addi r1, r1, 0x10
 /* 800F6FB4 000F1EB4  4E 80 00 20 */	blr 
 
-.global __fini_cpp
-__fini_cpp:
+.global exit
+exit:
 /* 800F6FB8 000F1EB8  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 800F6FBC 000F1EBC  7C 08 02 A6 */	mflr r0
 /* 800F6FC0 000F1EC0  90 01 00 14 */	stw r0, 0x14(r1)
