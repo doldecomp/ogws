@@ -287,7 +287,7 @@ RUNTIME_O_FILES := \
 	build/asm/runtime/global_destructor_chain.o \
 	build/asm/runtime/NMWException.o \
 	build/runtime/ptmf.o \
-	build/asm/runtime/runtime.o \
+	build/runtime/runtime.o \
 	build/asm/runtime/__init_cpp_exceptions.o \
 	build/runtime/Gecko_ExceptionPPC.o \
 	build/asm/runtime/GCN_mem_alloc.o \
