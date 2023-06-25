@@ -3,7 +3,7 @@
 #define QUEUE_CAPACITY 2
 
 typedef struct TRKEventQueue {
-    char UNK_0x0[0x4];
+    TRKMutex mutex;                 // at 0x0
     int size;                       // at 0x4
     int front;                      // at 0x8
     TRKEvent queue[QUEUE_CAPACITY]; // at 0xC
@@ -23,8 +23,7 @@ void TRKConstructEvent(TRKEvent* event, TRKEventType type) {
 DSError TRKPostEvent(TRKEvent* event) {
     s32 id;
     DSError err = kNoError;
-
-    TRKAcquireMutex(&gTRKEventQueue);
+    TRKAcquireMutex(&gTRKEventQueue.mutex);
 
     if (gTRKEventQueue.size == QUEUE_CAPACITY) {
         err = kMsgQueueFull;
@@ -40,14 +39,13 @@ DSError TRKPostEvent(TRKEvent* event) {
         gTRKEventQueue.size++;
     }
 
-    TRKReleaseMutex(&gTRKEventQueue);
+    TRKReleaseMutex(&gTRKEventQueue.mutex);
     return err;
 }
 
 BOOL TRKGetNextEvent(TRKEvent* event) {
     BOOL success = FALSE;
-
-    TRKAcquireMutex(&gTRKEventQueue);
+    TRKAcquireMutex(&gTRKEventQueue.mutex);
 
     if (gTRKEventQueue.size > 0) {
         TRK_memcpy(event, &gTRKEventQueue.queue[gTRKEventQueue.front],
@@ -62,18 +60,18 @@ BOOL TRKGetNextEvent(TRKEvent* event) {
         success = TRUE;
     }
 
-    TRKReleaseMutex(&gTRKEventQueue);
+    TRKReleaseMutex(&gTRKEventQueue.mutex);
     return success;
 }
 
 DSError TRKInitializeEventQueue(TRKEvent* event) {
-    TRKInitializeMutex(&gTRKEventQueue);
-    TRKAcquireMutex(&gTRKEventQueue);
+    TRKInitializeMutex(&gTRKEventQueue.mutex);
+    TRKAcquireMutex(&gTRKEventQueue.mutex);
 
     gTRKEventQueue.size = 0;
     gTRKEventQueue.front = 0;
     gTRKEventQueue.uid = 256;
 
-    TRKReleaseMutex(&gTRKEventQueue);
+    TRKReleaseMutex(&gTRKEventQueue.mutex);
     return kNoError;
 }

@@ -1,5 +1,6 @@
 #ifndef METROTRK_DEBUGGER_PORTABLE_MSGBUF_H
 #define METROTRK_DEBUGGER_PORTABLE_MSGBUF_H
+#include <MetroTRK/debugger/portable/mutex_TRK.h>
 #include <types.h>
 #ifdef __cplusplus
 extern "C" {
@@ -8,7 +9,7 @@ extern "C" {
 #define kMessageBufferSize 2048 /* data block */ + 128 /* additional items */
 
 typedef struct TRKMessageBuffer {
-    unsigned int WORD_0x0;
+    TRKMutex mutex;                        // at 0x0
     BOOL used;                             // at 0x4
     unsigned int size;                     // at 0x8
     unsigned int pos;                      // at 0xC

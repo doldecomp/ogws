@@ -6,9 +6,14 @@
 extern "C" {
 #endif
 
-DSError TRKReleaseMutex(void* p);
-DSError TRKAcquireMutex(void* p);
-DSError TRKInitializeMutex(void* p);
+// Unused?
+typedef struct TRKMutex {
+    char dummy[4];
+} TRKMutex;
+
+DSError TRKReleaseMutex(TRKMutex* mutex);
+DSError TRKAcquireMutex(TRKMutex* mutex);
+DSError TRKInitializeMutex(TRKMutex* mutex);
 
 #ifdef __cplusplus
 }

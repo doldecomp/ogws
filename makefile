@@ -47,7 +47,7 @@ LDFLAGS := -map $(MAP) -mapunused -proc gekko -fp hard -nodefaults -nofail
 #
 
 # Compiler flags for the Metrowerks Target Resident Kernel (MetroTRK)
-CFLAGS_TRK := -lang c -enum int -inline auto -Cpp_exceptions off -proc gekko -fp hard -O4,p -ir include/MetroTRK -I- -i include -ir include/MSL -nodefaults
+CFLAGS_TRK := -lang c -sdata 0 -use_lmw_stmw on -enum int -inline auto -Cpp_exceptions off -proc gekko -fp hard -O4,p -ir include/MetroTRK -I- -i include -ir include/MSL -nodefaults
 # Compiler flags for the CodeWarrior runtime library
 CFLAGS_RUNTIME := -lang c -enum int -inline auto -rostr -Cpp_exceptions off -proc gekko -fp hard -O4,p -ir include/MetroTRK -I- -i include -ir include/MSL -nodefaults
 # Compiler flags for NintendoWare for Revolution

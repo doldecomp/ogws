@@ -1,7 +1,16 @@
 #include <MetroTRK.h>
 
-DSError TRKReleaseMutex(void* p) { return kNoError; }
+DSError TRKReleaseMutex(TRKMutex* mutex) {
+#pragma unused(mutex)
+    return kNoError;
+}
 
-DSError TRKAcquireMutex(void* p) { return kNoError; }
+DSError TRKAcquireMutex(TRKMutex* mutex) {
+#pragma unused(mutex)
+    return kNoError;
+}
 
-DSError TRKInitializeMutex(void* p) { return kNoError; }
+DSError TRKInitializeMutex(TRKMutex* mutex) {
+#pragma unused(mutex)
+    return kNoError;
+}
