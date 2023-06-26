@@ -28,9 +28,10 @@ include obj_files.mk
 AS       := tools/powerpc-eabi-as
 OBJCOPY  := tools/powerpc-eabi-objcopy
 CPP      := cpp -P
-CC       := tools/mwcceppc
-CC_OLD   := tools/old/mwcceppc
-LD       := tools/mwldeppc
+CC       := tools/codewarrior/GC/3.0/mwcceppc
+CC_TRK   := tools/codewarrior/GC/2.7/mwcceppc
+CC_MSL   := tools/codewarrior/GC/3.0a3/mwcceppc
+LD       := tools/codewarrior/GC/3.0/mwldeppc
 ELF2DOL  := tools/elf2dol
 SHA1SUM  := sha1sum
 PYTHON   := python
@@ -50,6 +51,8 @@ LDFLAGS := -map $(MAP) -mapunused -proc gekko -fp hard -nodefaults -nofail
 CFLAGS_TRK := -lang c -sdata 0 -use_lmw_stmw on -enum int -inline deferred -Cpp_exceptions off -proc gekko -fp hard -O4,p -ir include/MetroTRK -I- -i include -ir include/MSL -nodefaults
 # Compiler flags for the CodeWarrior runtime library
 CFLAGS_RUNTIME := -lang c -enum int -inline auto -rostr -Cpp_exceptions off -proc gekko -fp hard -O4,p -ir include/MetroTRK -I- -i include -ir include/MSL -nodefaults
+# Compiler flags for the Metrowerks Standard Library (MSL)
+CFLAGS_MSL := -lang c -use_lmw_stmw on -enum int -inline auto -rostr -D_IEEE_LIBM -Cpp_exceptions off -proc gekko -fp hard -O4,p -ir include/MetroTRK -I- -i include -ir include/MSL -nodefaults
 # Compiler flags for NintendoWare for Revolution
 CFLAGS_NW4R := -lang c99 -enum int -inline auto -Cpp_exceptions off -RTTI off -proc gekko -fp hard -O4,p  -ir include/nw4r -I- -Iinclude -ir include/MSL -ir include/revolution -nodefaults
 # Compiler flags for EGG
@@ -79,7 +82,7 @@ ASM_DIRS := asm \
 	asm/RP/RPKernel
 
 SRC_DIRS := src \
-	revolution nw4r egg runtime MetroTRK \
+	revolution nw4r egg runtime MetroTRK MSL RVLFaceLib homebuttonMiniLib \
 	MetroTRK/debugger/Export MetroTRK/debugger/Os MetroTRK/debugger/Os/dolphin MetroTRK/debugger/Portable MetroTRK/debugger/Processor MetroTRK/gamedev \
 	revolution/NdevExi2AD revolution/KPAD revolution/PAD revolution/WPAD revolution/EUART revolution/EXI revolution/FS \
 	revolution/GX revolution/IPC revolution/MEM revolution/MTX revolution/NAND revolution/OS revolution/SC \
@@ -152,8 +155,12 @@ $(BUILD_DIR)/runtime/%.o: src/runtime/%.cpp
 	$(CC) $(CFLAGS_RUNTIME) -c -o $@ $<
 	$(PPROC) $(PPROCFLAGS) $@
 
+$(BUILD_DIR)/MSL/%.o: src/MSL/%.c
+	$(CC_MSL) $(CFLAGS_MSL) -c -o $@ $<
+	$(PPROC) $(PPROCFLAGS) $@
+
 $(BUILD_DIR)/MetroTRK/%.o: src/MetroTRK/%.c
-	$(CC_OLD) $(CFLAGS_TRK) -c -o $@ $<
+	$(CC_TRK) $(CFLAGS_TRK) -c -o $@ $<
 	$(PPROC) $(PPROCFLAGS) $@
 
 # EXIBios is a special case, compiled differently from rest of library

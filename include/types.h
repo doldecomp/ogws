@@ -9,7 +9,7 @@
 #include <stddef.h>
 #endif
 
-#include "macros.h"
+#include <macros.h>
 
 typedef unsigned long long u64;
 typedef signed long long s64;

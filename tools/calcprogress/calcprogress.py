@@ -12,9 +12,9 @@ EXEC_SLICE_GROUPS = [
         Slice(0x80004000, 0x80004134),  # .init
         Slice(0x800B1750, 0x800B2414),  # .text
     ]),
-    # SliceGroup("MSL", [
-    #     Slice(0x800B2414, 0x800C10D4) # .text
-    #     ]),
+    SliceGroup("MSL", [
+        Slice(0x800B2414, 0x800C10D4) # .text
+        ]),
     SliceGroup("MetroTRK", [
         Slice(0x800C10D4, 0x800C6810)  # .text
     ]),

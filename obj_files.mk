@@ -324,35 +324,35 @@ MSL_O_FILES := \
 	build/asm/MSL/math_sun.o \
 	build/asm/MSL/math_float.o \
 	build/asm/MSL/extras.o \
-	build/asm/MSL/float.o \
-	build/asm/MSL/e_acos.o \
-	build/asm/MSL/e_asin.o \
-	build/asm/MSL/e_atan2.o \
-	build/asm/MSL/e_fmod.o \
-	build/asm/MSL/e_pow.o \
-	build/asm/MSL/e_rem_pio2.o \
-	build/asm/MSL/k_cos.o \
-	build/asm/MSL/k_rem_pio2.o \
-	build/asm/MSL/k_sin.o \
-	build/asm/MSL/k_tan.o \
-	build/asm/MSL/s_atan.o \
-	build/asm/MSL/s_ceil.o \
-	build/asm/MSL/s_copysign.o \
-	build/asm/MSL/s_cos.o \
-	build/asm/MSL/s_floor.o \
-	build/asm/MSL/s_frexp.o \
-	build/asm/MSL/s_ldexp.o \
-	build/asm/MSL/s_modf.o \
-	build/asm/MSL/s_sin.o \
-	build/asm/MSL/s_tan.o \
-	build/asm/MSL/w_acos.o \
-	build/asm/MSL/w_asin.o \
-	build/asm/MSL/w_atan2.o \
-	build/asm/MSL/w_fmod.o \
-	build/asm/MSL/w_pow.o \
-	build/asm/MSL/e_sqrt.o \
-	build/asm/MSL/math_ppc.o \
-	build/asm/MSL/w_sqrt.o \
+	build/MSL/float.o \
+	build/MSL/e_acos.o \
+	build/MSL/e_asin.o \
+	build/MSL/e_atan2.o \
+	build/MSL/e_fmod.o \
+	build/MSL/e_pow.o \
+	build/MSL/e_rem_pio2.o \
+	build/MSL/k_cos.o \
+	build/MSL/k_rem_pio2.o \
+	build/MSL/k_sin.o \
+	build/MSL/k_tan.o \
+	build/MSL/s_atan.o \
+	build/MSL/s_ceil.o \
+	build/MSL/s_copysign.o \
+	build/MSL/s_cos.o \
+	build/MSL/s_floor.o \
+	build/MSL/s_frexp.o \
+	build/MSL/s_ldexp.o \
+	build/MSL/s_modf.o \
+	build/MSL/s_sin.o \
+	build/MSL/s_tan.o \
+	build/MSL/w_acos.o \
+	build/MSL/w_asin.o \
+	build/MSL/w_atan2.o \
+	build/MSL/w_fmod.o \
+	build/MSL/w_pow.o \
+	build/MSL/e_sqrt.o \
+	build/MSL/math_ppc.o \
+	build/MSL/w_sqrt.o \
 
 METROTRK_O_FILES := \
 	build/asm/MetroTRK/debugger/Portable/mainloop.o \

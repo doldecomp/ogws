@@ -7,6 +7,8 @@ extern "C" {
 
 extern int errno;
 
+#define EDOM 33
+
 #ifdef __cplusplus
 }
 #endif

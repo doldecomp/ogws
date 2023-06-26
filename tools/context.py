@@ -12,7 +12,7 @@ from re import compile
 
 INCLUDE_DIR = "include/"
 SRC_DIR = "src/"
-STL_INCLUDE_DIR = "include/msl"
+STL_INCLUDE_DIR = "include/MSL"
 RVL_INCLUDE_DIR = "include/revolution"
 TYPES_H_PATH = f"{RVL_INCLUDE_DIR}/types.h"
 SCRIPT_DIR = dirname(realpath(__file__))

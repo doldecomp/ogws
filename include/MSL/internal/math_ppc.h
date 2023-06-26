@@ -5,7 +5,7 @@
 extern "C" {
 #endif
 
-double nan(const char*);
+double nan(const char* arg);
 
 #ifdef __cplusplus
 }

@@ -1,7 +1,7 @@
 #ifndef REVOSDK_AX_OUT_H
 #define REVOSDK_AX_OUT_H
 #include <types.h>
-#include "AX.h"
+#include <AX.h>
 #ifdef __cplusplus
 extern "C" {
 #endif
