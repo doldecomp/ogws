@@ -361,7 +361,7 @@ METROTRK_O_FILES := \
 	build/MetroTRK/debugger/Portable/msg.o \
 	build/asm/MetroTRK/debugger/Portable/msgbuf.o \
 	build/asm/MetroTRK/debugger/Portable/serpoll.o \
-	build/asm/MetroTRK/debugger/Os/usr_put.o \
+	build/asm/MetroTRK/debugger/Os/dolphin/usr_put.o \
 	build/asm/MetroTRK/debugger/Portable/dispatch.o \
 	build/asm/MetroTRK/debugger/Portable/msghndlr.o \
 	build/asm/MetroTRK/debugger/Portable/support.o \
@@ -375,12 +375,12 @@ METROTRK_O_FILES := \
 	build/asm/MetroTRK/debugger/Processor/mpc_7xx_603e.o \
 	build/asm/MetroTRK/debugger/Export/mslsupp.o \
 	build/asm/MetroTRK/debugger/Processor/__exception.o \
-	build/asm/MetroTRK/debugger/Os/dolphin_trk.o \
+	build/asm/MetroTRK/debugger/Os/dolphin/dolphin_trk.o \
 	build/asm/MetroTRK/debugger/Portable/main_TRK.o \
-	build/asm/MetroTRK/debugger/Os/dolphin_trk_glue.o \
-	build/asm/MetroTRK/debugger/Os/targcont.o \
-	build/asm/MetroTRK/debugger/Os/target_options.o \
-	build/asm/MetroTRK/debugger/Os/UDP_Stubs.o \
+	build/asm/MetroTRK/debugger/Os/dolphin/dolphin_trk_glue.o \
+	build/asm/MetroTRK/debugger/Os/dolphin/targcont.o \
+	build/asm/MetroTRK/debugger/Os/dolphin/target_options.o \
+	build/asm/MetroTRK/debugger/Os/dolphin/UDP_Stubs.o \
 	\
 	build/asm/MetroTRK/gamedev/main.o \
 	build/asm/MetroTRK/gamedev/CircleBuffer.o \

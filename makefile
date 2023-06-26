@@ -47,7 +47,7 @@ LDFLAGS := -map $(MAP) -mapunused -proc gekko -fp hard -nodefaults -nofail
 #
 
 # Compiler flags for the Metrowerks Target Resident Kernel (MetroTRK)
-CFLAGS_TRK := -lang c -sdata 0 -use_lmw_stmw on -enum int -inline auto -Cpp_exceptions off -proc gekko -fp hard -O4,p -ir include/MetroTRK -I- -i include -ir include/MSL -nodefaults
+CFLAGS_TRK := -lang c -sdata 0 -use_lmw_stmw on -enum int -inline deferred -Cpp_exceptions off -proc gekko -fp hard -O4,p -ir include/MetroTRK -I- -i include -ir include/MSL -nodefaults
 # Compiler flags for the CodeWarrior runtime library
 CFLAGS_RUNTIME := -lang c -enum int -inline auto -rostr -Cpp_exceptions off -proc gekko -fp hard -O4,p -ir include/MetroTRK -I- -i include -ir include/MSL -nodefaults
 # Compiler flags for NintendoWare for Revolution
@@ -68,7 +68,7 @@ BSS_PDHR := 9
 
 ASM_DIRS := asm \
 	asm/revolution asm/nw4r asm/egg asm/runtime asm/MSL asm/MetroTRK asm/RVLFaceLib asm/homebuttonMiniLib asm/RP \
-	asm/MetroTRK/debugger/Export asm/MetroTRK/debugger/Os asm/MetroTRK/debugger/Portable asm/MetroTRK/debugger/Processor asm/MetroTRK/gamedev \
+	asm/MetroTRK/debugger/Export asm/MetroTRK/debugger/Os asm/MetroTRK/debugger/Os/dolphin asm/MetroTRK/debugger/Portable asm/MetroTRK/debugger/Processor asm/MetroTRK/gamedev \
 	asm/revolution/NdevExi2AD asm/revolution/KPAD asm/revolution/PAD asm/revolution/WPAD asm/revolution/EUART asm/revolution/EXI asm/revolution/FS \
 	asm/revolution/GX asm/revolution/IPC asm/revolution/MEM asm/revolution/MTX asm/revolution/NAND asm/revolution/OS asm/revolution/SC \
 	asm/revolution/USB asm/revolution/VI asm/revolution/WUD asm/revolution/AI asm/revolution/ARC asm/revolution/AX asm/revolution/AXFX \
@@ -80,7 +80,7 @@ ASM_DIRS := asm \
 
 SRC_DIRS := src \
 	revolution nw4r egg runtime MetroTRK \
-	MetroTRK/debugger/Export MetroTRK/debugger/Os MetroTRK/debugger/Portable MetroTRK/debugger/Processor MetroTRK/gamedev \
+	MetroTRK/debugger/Export MetroTRK/debugger/Os MetroTRK/debugger/Os/dolphin MetroTRK/debugger/Portable MetroTRK/debugger/Processor MetroTRK/gamedev \
 	revolution/NdevExi2AD revolution/KPAD revolution/PAD revolution/WPAD revolution/EUART revolution/EXI revolution/FS \
 	revolution/GX revolution/IPC revolution/MEM revolution/MTX revolution/NAND revolution/OS revolution/SC \
 	revolution/USB revolution/VI revolution/WUD revolution/AI revolution/ARC revolution/AX revolution/AXFX \

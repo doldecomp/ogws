@@ -7,12 +7,12 @@ extern "C" {
 #endif
 
 typedef enum {
-    EVENT_TYPE_NONE,
-    EVENT_TYPE_WAIT,
-    EVENT_TYPE_MESSAGE,
-    EVENT_TYPE_EXCEPTION,
-    EVENT_TYPE_BREAKPOINT,
-    EVENT_TYPE_SUPPORT_REQ
+    kEventNone,
+    kEventWait,
+    kEventMessage,
+    kEventException,
+    kEventBreakpoint,
+    kEventSupportRequest
 } TRKEventType;
 
 typedef struct TRKEvent {

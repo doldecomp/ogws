@@ -1,10 +1,5 @@
 #include <MetroTRK.h>
 
-DECL_SECTION(".init") void* TRK_memset(void* dest, int val, size_t count) {
-    TRK_fill_mem(dest, val, count);
-    return dest;
-}
-
 DECL_SECTION(".init")
 void* TRK_memcpy(void* dest, const void* src, size_t count) {
     const char* csrc = (const char*)src;
@@ -18,6 +13,11 @@ void* TRK_memcpy(void* dest, const void* src, size_t count) {
         *++cdest = *++csrc;
     }
 
+    return dest;
+}
+
+DECL_SECTION(".init") void* TRK_memset(void* dest, int val, size_t count) {
+    TRK_fill_mem(dest, val, count);
     return dest;
 }
 

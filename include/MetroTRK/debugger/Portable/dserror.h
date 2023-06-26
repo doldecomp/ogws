@@ -8,6 +8,9 @@ extern "C" {
 typedef enum {
     kNoError = 0x0000,
     kMsgQueueFull = 0x0100,
+    kMsgBufUnavailable = 0x0300,
+    kMsgBufWriteOverflow = 0x0301,
+    kMsgBufReadOverflow = 0x0302,
     kInvalidMemory = 0x0700,
 } DSError;
 

@@ -1,6 +1,6 @@
 #include <MetroTRK.h>
 
 DSError TRKMessageSend(TRKMessageBuffer* buf) {
-    TRKWriteUARTN(buf->buf, buf->size);
+    TRKWriteUARTN(buf->data, buf->size);
     return kNoError;
 }
