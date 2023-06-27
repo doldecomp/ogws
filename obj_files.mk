@@ -359,7 +359,7 @@ METROTRK_O_FILES := \
 	build/MetroTRK/debugger/Portable/nubevent.o \
 	build/asm/MetroTRK/debugger/Portable/nubinit.o \
 	build/MetroTRK/debugger/Portable/msg.o \
-	build/asm/MetroTRK/debugger/Portable/msgbuf.o \
+	build/MetroTRK/debugger/Portable/msgbuf.o \
 	build/asm/MetroTRK/debugger/Portable/serpoll.o \
 	build/asm/MetroTRK/debugger/Os/dolphin/usr_put.o \
 	build/asm/MetroTRK/debugger/Portable/dispatch.o \
