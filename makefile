@@ -50,7 +50,7 @@ LDFLAGS := -map $(MAP) -mapunused -proc gekko -fp hard -nodefaults -nofail
 # Compiler flags for the Metrowerks Target Resident Kernel (MetroTRK)
 CFLAGS_TRK := -lang c -sdata 0 -use_lmw_stmw on -enum int -inline deferred -Cpp_exceptions off -proc gekko -fp hard -O4,p -ir include/MetroTRK -I- -i include -ir include/MSL -nodefaults
 # Compiler flags for the CodeWarrior runtime library
-CFLAGS_RUNTIME := -lang c -enum int -inline auto -rostr -Cpp_exceptions off -proc gekko -fp hard -O4,p -ir include/MetroTRK -I- -i include -ir include/MSL -nodefaults
+CFLAGS_RUNTIME := -use_lmw_stmw on -enum int -inline auto -rostr -Cpp_exceptions off -proc gekko -fp hard -O4,p -ir include/MetroTRK -I- -i include -ir include/MSL -nodefaults
 # Compiler flags for the Metrowerks Standard Library (MSL)
 CFLAGS_MSL := -lang c -use_lmw_stmw on -enum int -inline auto -rostr -D_IEEE_LIBM -Cpp_exceptions off -proc gekko -fp hard -O4,p -ir include/MetroTRK -I- -i include -ir include/MSL -nodefaults
 # Compiler flags for NintendoWare for Revolution
@@ -148,11 +148,11 @@ $(BUILD_DIR)/egg/%.o: src/egg/%.cpp
 	$(PPROC) $(PPROCFLAGS) $@
 
 $(BUILD_DIR)/runtime/%.o: src/runtime/%.c
-	$(CC) $(CFLAGS_RUNTIME) -c -o $@ $<
+	$(CC) -lang c $(CFLAGS_RUNTIME) -c -o $@ $<
 	$(PPROC) $(PPROCFLAGS) $@
 
 $(BUILD_DIR)/runtime/%.o: src/runtime/%.cpp
-	$(CC) $(CFLAGS_RUNTIME) -c -o $@ $<
+	$(CC) -lang c++ $(CFLAGS_RUNTIME) -c -o $@ $<
 	$(PPROC) $(PPROCFLAGS) $@
 
 $(BUILD_DIR)/MSL/%.o: src/MSL/%.c
