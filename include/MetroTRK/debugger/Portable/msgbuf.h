@@ -9,6 +9,26 @@ extern "C" {
 #define kMessageBufferNum 3
 #define kMessageBufferSize 2048 /* data block */ + 128 /* additional items */
 
+typedef enum {
+    kDSConnect = 1,
+    kDSDisconnect,
+    kDSReset,
+    kDSVersions,
+    kDSSupportMask,
+
+    kDSOverride = 7,
+
+    kDSReadMemory = 16,
+    kDSWriteMemory,
+    kDSReadRegisters,
+    kDSWriteRegisters,
+
+    kDSSetOption = 23,
+    kDSContinue,
+    kDSStep,
+    kDSStop
+} TRKMessageCommand;
+
 typedef struct TRKMessageBuffer {
     TRKMutex mutex;                         // at 0x0
     BOOL used;                              // at 0x4
@@ -16,6 +36,8 @@ typedef struct TRKMessageBuffer {
     unsigned int pos;                       // at 0xC
     unsigned char data[kMessageBufferSize]; // at 0x10
 } TRKMessageBuffer;
+
+#define TRKMessageBufferGet(buf, type, offset) (*(type*)(buf->data + offset))
 
 extern TRKMessageBuffer gTRKMsgBufs[kMessageBufferNum];
 

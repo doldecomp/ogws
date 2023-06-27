@@ -7,6 +7,7 @@ extern "C" {
 #include <MetroTRK/debugger/Os/dolphin/dolphin_trk.h>
 #include <MetroTRK/debugger/Os/dolphin/dolphin_trk_glue.h>
 #include <MetroTRK/debugger/Os/dolphin/usr_put.h>
+#include <MetroTRK/debugger/Portable/dispatch.h>
 #include <MetroTRK/debugger/Portable/dserror.h>
 #include <MetroTRK/debugger/Portable/mem_TRK.h>
 #include <MetroTRK/debugger/Portable/msgbuf.h>

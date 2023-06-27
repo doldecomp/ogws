@@ -87,7 +87,7 @@ DSError TRKSetBufferPosition(TRKMessageBuffer* buf, unsigned int pos) {
     DSError err = kNoError;
 
     if (pos > sizeof(buf->data)) {
-        err = kMsgBufWriteOverflow;
+        err = kMsgWriteOverflow;
     } else {
         buf->pos = pos;
         if (pos > buf->size) {
@@ -111,7 +111,7 @@ DSError TRKAppendBuffer(TRKMessageBuffer* buf, const void* src,
     // Clamp write size
     avail = sizeof(buf->data) - buf->pos;
     if (avail < n) {
-        err = kMsgBufWriteOverflow;
+        err = kMsgWriteOverflow;
         n = avail;
     }
 
@@ -140,7 +140,7 @@ DSError TRKReadBuffer(TRKMessageBuffer* buf, void* dst, unsigned int n) {
     // Clamp read size
     avail = buf->size - buf->pos;
     if (n > avail) {
-        err = kMsgBufReadOverflow;
+        err = kMsgReadOverflow;
         n = avail;
     }
 
@@ -152,7 +152,7 @@ DSError TRKReadBuffer(TRKMessageBuffer* buf, void* dst, unsigned int n) {
 
 DSError TRKAppendBuffer1_ui8(TRKMessageBuffer* buf, unsigned char x) {
     if (buf->pos >= sizeof(buf->data)) {
-        return kMsgBufWriteOverflow;
+        return kMsgWriteOverflow;
     }
 
     buf->data[buf->pos++] = x;
