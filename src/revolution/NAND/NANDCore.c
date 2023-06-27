@@ -378,7 +378,7 @@ static s32 nandGetType(const char* path, u8* type, NANDCommandBlock* block,
         return ISFS_ReadDirAsync(block->path, NULL, &block->dirFileCount,
                                  nandGetTypeCallback, block);
     } else {
-        CLEAR_PATH(absPath);
+        BZERO(absPath);
         nandGenerateAbsPath(absPath, path);
 
         if (!priv && nandIsUnderPrivatePath(absPath)) {

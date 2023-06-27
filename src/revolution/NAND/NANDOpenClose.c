@@ -22,7 +22,7 @@ static s32 nandOpen(const char* path, u8 mode, NANDCommandBlock* block,
     IPCOpenMode ipcMode;
     char absPath[64];
 
-    CLEAR_PATH(absPath);
+    BZERO(absPath);
     ipcMode = IPC_OPEN_NONE;
     nandGenerateAbsPath(absPath, path);
 
@@ -369,7 +369,7 @@ static void nandSafeCloseCallback(s32 result, void* arg) {
                                         nandSafeCloseCallback, block);
         } else if (block->state == 13) {
             char parentDir[64];
-            CLEAR_PATH(parentDir);
+            BZERO(parentDir);
 
             info->stage = 8;
             nandGetParentDirectory(parentDir, info->tempPath);
