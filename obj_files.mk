@@ -573,7 +573,7 @@ RVL_SDK_O_FILES := \
 	build/RVLFaceLib/RFL_NANDAccess.o \
 	build/asm/RVLFaceLib/RFL_Model.o \
 	build/asm/RVLFaceLib/RFL_MakeTex.o \
-	build/asm/RVLFaceLib/RFL_Icon.o \
+	build/RVLFaceLib/RFL_Icon.o \
 	build/asm/RVLFaceLib/RFL_HiddenDatabase.o \
 	build/asm/RVLFaceLib/RFL_Database.o \
 	build/asm/RVLFaceLib/RFL_Controller.o \
