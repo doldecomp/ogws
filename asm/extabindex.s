@@ -950,11 +950,11 @@ _index_RFLiIsValidHiddenData:
     .long 0x000000e0
     .long _unwind_RFLiIsValidHiddenData
 
-.global _index_func_80172498
-_index_func_80172498:
-    .long func_80172498
+.global _index_RFLiIsCachedHDB
+_index_RFLiIsCachedHDB:
+    .long RFLiIsCachedHDB
     .long 0x00000048
-    .long _unwind_func_80172498
+    .long _unwind_RFLiIsCachedHDB
 
 .global _index_RFLiInitDatabase
 _index_RFLiInitDatabase:
@@ -1312,51 +1312,51 @@ _index_RFLiClearDBBuffer:
 
 .global _index_lbl_801770A4
 _index_lbl_801770A4:
-    .long lbl_801770A4
+    .long 0x801770A4
     .long 0x00000034
     .long _unwind_lbl_801770A4
 
 .global _index_lbl_801770D8
 _index_lbl_801770D8:
-    .long lbl_801770D8
+    .long 0x801770D8
     .long 0x00000030
     .long _unwind_lbl_801770D8
 
 .global _index_lbl_80177108
 _index_lbl_80177108:
-    .long lbl_80177108
+    .long 0x80177108
     .long 0x00000158
     .long _unwind_lbl_80177108
 
 .global _index_lbl_80177260
 _index_lbl_80177260:
-    .long lbl_80177260
+    .long 0x80177260
     .long 0x00000040
     .long _unwind_lbl_80177260
 
 .global _index_lbl_801772A0
 _index_lbl_801772A0:
-    .long lbl_801772A0
+    .long 0x801772A0
     .long 0x00000094
     .long _unwind_lbl_801772A0
 
 .global _index_lbl_80177334
 _index_lbl_80177334:
-    .long lbl_80177334
+    .long 0x80177334
     .long 0x0000003c
     .long _unwind_lbl_80177334
 
 .global _index_lbl_80177370
 _index_lbl_80177370:
-    .long lbl_80177370
+    .long 0x80177370
     .long 0x00000064
     .long _unwind_lbl_80177370
 
-.global _index_func_801773D4
-_index_func_801773D4:
-    .long func_801773D4
+.global _index_RFLiFormatAsync
+_index_RFLiFormatAsync:
+    .long RFLiFormatAsync
     .long 0x00000108
-    .long _unwind_func_801773D4
+    .long _unwind_RFLiFormatAsync
 
 # For __init_cpp_exceptions/__register_fragment
 .global _eti_init_info_

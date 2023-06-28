@@ -804,8 +804,8 @@ _unwind_RFLiIsValidHiddenData:
     .long 0x18080000
     .long 0x00000000
 
-.global _unwind_func_80172498
-_unwind_func_80172498:
+.global _unwind_RFLiIsCachedHDB
+_unwind_RFLiIsCachedHDB:
     .long 0x00080000
     .long 0x00000000
 
@@ -1139,7 +1139,7 @@ _unwind_lbl_80177370:
     .long 0x08080000
     .long 0x00000000
 
-.global _unwind_func_801773D4
-_unwind_func_801773D4:
+.global _unwind_RFLiFormatAsync
+_unwind_RFLiFormatAsync:
     .long 0x28080000
     .long 0x00000000

@@ -18,7 +18,7 @@ typedef struct RFLiDatabase {
     u32 isolation : 1; // at 0x1CEC
     u32 padding1 : 31;
 
-    u8 specialInvite[13]; // at 1CF0
+    u8 specialInvite[13]; // at 0x1CF0
     u8 nwc24Month;        // at 0x1CFD
     u8 mwc24Day;          // at 0x1CFE
     u8 padding2;          // at 0x1CFF
@@ -60,6 +60,8 @@ RFLiHiddenDB* RFLiGetHiddenHeader(void);
 BOOL RFLiIsValidID(const u8[RFL_CREATEID_LEN]);
 
 BOOL RFLiDBIsLoaded(void);
+
+void RFLiCheckHeaderCRCAsync(RFLiAsyncCallback);
 
 #ifdef __cplusplus
 }

@@ -182,7 +182,7 @@ u16 RFLiCountupHiddenDataNum(RFLSex sex) {
 
 s16 RFLiGetHiddenNext(u16 index) {
     RFLiHDBManager* mgr;
-    RFLiHDBData* data;
+    RFLiTableData* data;
 
     mgr = RFLiGetHDBManager();
 
@@ -205,7 +205,7 @@ s16 RFLiGetHiddenNext(u16 index) {
 
 s16 RFLiGetHiddenPrev(u16 index) {
     RFLiHDBManager* mgr;
-    RFLiHDBData* data;
+    RFLiTableData* data;
 
     mgr = RFLiGetHDBManager();
 

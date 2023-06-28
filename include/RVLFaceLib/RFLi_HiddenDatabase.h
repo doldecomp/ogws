@@ -1,5 +1,6 @@
 #ifndef RVL_FACE_LIBRARY_INTERNAL_HIDDEN_DATABASE_H
 #define RVL_FACE_LIBRARY_INTERNAL_HIDDEN_DATABASE_H
+#include <RVLFaceLib/RFLi_Format.h>
 #include <RVLFaceLib/RFLi_Types.h>
 #include <types.h>
 #ifdef __cplusplus
@@ -8,25 +9,13 @@ extern "C" {
 
 #define RFL_HDB_DATA_MAX 10000
 
-typedef struct RFLiHDBData {
-    u8 createID[RFL_CREATEID_LEN]; // at 0x0
-
-    // at 0x8
-    u16 sex : 1;
-    s16 next : 15;
-
-    // at 0xA
-    s16 padding2 : 1;
-    s16 prev : 15;
-} RFLiHDBData;
-
 typedef struct RFLiHiddenDB {
-    u32 identifier;                     // at 0x0
-    s16 head;                           // at 0x4
-    s16 tail;                           // at 0x6
-    RFLiHDBData data[RFL_HDB_DATA_MAX]; // at 0x8
-    u8 padding[22];                     // at 0x1D4C8
-    u16 crc;                            // at 0x1D4DE
+    u32 identifier;                       // at 0x0
+    s16 head;                             // at 0x4
+    s16 tail;                             // at 0x6
+    RFLiTableData data[RFL_HDB_DATA_MAX]; // at 0x8
+    u8 padding[22];                       // at 0x1D4C8
+    u16 crc;                              // at 0x1D4DE
 } RFLiHiddenDB;
 
 typedef struct RFLiHDBList {
