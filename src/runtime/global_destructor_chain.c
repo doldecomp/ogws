@@ -27,3 +27,7 @@ void __destroy_global_chain(void) {
         link->dtor(link->object, -1);
     }
 }
+
+#pragma section ".dtors$10"
+DECL_SECTION(".dtors$10")
+DECL_WEAK funcptr_t __destroy_global_chain_reference = __destroy_global_chain;
