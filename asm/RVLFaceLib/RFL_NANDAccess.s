@@ -1,5 +1,17 @@
 .include "macros.inc"
 
+.section .data, "wa"
+.balign 0x8
+lbl_803b8050:
+	.string "/shared2/menu/FaceLib/RFL_DB.dat"
+	.balign 4
+	.string "/shared2/menu/FaceLib/RFL_Res.dat"
+	.balign 4
+	.string "/shared2/menu"
+	.balign 4
+	.string "/shared2/menu/FaceLib"
+	.balign 4
+
 .section .sdata, "wa"
 .balign 0x8
 .global lbl_804BDB68

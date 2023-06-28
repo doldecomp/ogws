@@ -1,5 +1,11 @@
 .include "macros.inc"
 
+.section .data, "wa"
+.balign 0x8
+lbl_803b8050:
+	.string "/shared2/FaceLib/RFL_Res.dat"
+	.balign 4
+
 .section .rodata, "a"
 .balign 0x8
 .global lbl_80380EA0

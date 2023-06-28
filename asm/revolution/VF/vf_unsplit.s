@@ -154,7 +154,7 @@ lbl_803B7F58:
 	.incbin "baserom.dol", 0x3B4058, 0xA0
 .global lbl_803B7FF8
 lbl_803B7FF8:
-	.incbin "baserom.dol", 0x3B40F8, 0xE8
+	.incbin "baserom.dol", 0x3B40F8, 0x10
 
 .section .bss, "wa"
 .balign 0x8

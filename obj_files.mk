@@ -568,7 +568,7 @@ RVL_SDK_O_FILES := \
 	\
 	build/asm/revolution/VF/vf_unsplit.o \
 	\
-	build/asm/RVLFaceLib/RFL_System.o \
+	build/RVLFaceLib/RFL_System.o \
 	build/asm/RVLFaceLib/RFL_NANDLoader.o \
 	build/asm/RVLFaceLib/RFL_NANDAccess.o \
 	build/asm/RVLFaceLib/RFL_Model.o \

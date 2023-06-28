@@ -436,7 +436,7 @@ _index_RFLExit:
 
 .global _index_bootloadDB2Res_
 _index_bootloadDB2Res_:
-    .long bootloadDB2Res_
+    .long 0x80168108
     .long 0x0000022c
     .long _unwind_bootloadDB2Res_
 
