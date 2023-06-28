@@ -8,6 +8,7 @@ extern "C" {
 #include <RVLFaceLib/RFLi_Controller.h>
 #include <RVLFaceLib/RFLi_DataUtility.h>
 #include <RVLFaceLib/RFLi_Database.h>
+#include <RVLFaceLib/RFLi_DefaultDatabase.h>
 #include <RVLFaceLib/RFLi_HiddenDatabase.h>
 #include <RVLFaceLib/RFLi_MakeTex.h>
 #include <RVLFaceLib/RFLi_MiddleDatabase.h>
