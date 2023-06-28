@@ -1,5 +1,14 @@
 .include "macros.inc"
 
+.section .sbss2, "a"
+.balign 0x8
+.global lbl_804C6A08
+lbl_804C6A08:
+	.skip 0x8
+.global lbl_804C6A10
+lbl_804C6A10:
+	.skip 0x8
+
 .section .sdata2, "a"
 .balign 0x8
 .global lbl_804C1380

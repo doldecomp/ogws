@@ -460,31 +460,31 @@ _index_RFLiInitLoader:
 
 .global _index_parseOnmemoryRes_
 _index_parseOnmemoryRes_:
-    .long parseOnmemoryRes_
+    .long 0x80168728
     .long 0x00000178
     .long _unwind_parseOnmemoryRes_
 
 .global _index_loadResRead2ndcallback_
 _index_loadResRead2ndcallback_:
-    .long loadResRead2ndcallback_
+    .long 0x801688a0
     .long 0x00000120
     .long _unwind_loadResRead2ndcallback_
 
 .global _index_loadResRead1stcallback_
 _index_loadResRead1stcallback_:
-    .long loadResRead1stcallback_
+    .long 0x801689c4
     .long 0x000000ec
     .long _unwind_loadResRead1stcallback_
 
 .global _index_loadResGetlengthcallback_
 _index_loadResGetlengthcallback_:
-    .long loadResGetlengthcallback_
+    .long 0x80168ab0
     .long 0x000000a4
     .long _unwind_loadResGetlengthcallback_
 
 .global _index_loadResOpencallback_
 _index_loadResOpencallback_:
-    .long loadResOpencallback_
+    .long 0x80168b54
     .long 0x00000070
     .long _unwind_loadResOpencallback_
 
@@ -496,7 +496,7 @@ _index_RFLiLoadResourceHeaderAsync:
 
 .global _index_getNANDFile_
 _index_getNANDFile_:
-    .long getNANDFile_
+    .long 0x80168c58
     .long 0x00000184
     .long _unwind_getNANDFile_
 
@@ -580,25 +580,25 @@ _index_RFLiEndWorking:
 
 .global _index_alarmCallback_
 _index_alarmCallback_:
-    .long alarmCallback_
+    .long 0x80169854
     .long 0x00000050
     .long _unwind_alarmCallback_
 
 .global _index_opencallback_
 _index_opencallback_:
-    .long opencallback_
+    .long 0x801698a4
     .long 0x000002e4
     .long _unwind_opencallback_
 
 .global _index_createcallback_
 _index_createcallback_:
-    .long createcallback_
+    .long 0x80169b88
     .long 0x000002d8
     .long _unwind_createcallback_
 
 .global _index_close2opencallback_
 _index_close2opencallback_:
-    .long close2opencallback_
+    .long 0x80169e60
     .long 0x000002c8
     .long _unwind_close2opencallback_
 
@@ -610,13 +610,13 @@ _index_RFLiOpenAsync:
 
 .global _index_readcallback_
 _index_readcallback_:
-    .long readcallback_
+    .long 0x8016a504
     .long 0x00000268
     .long _unwind_readcallback_
 
 .global _index_readseekcallback_
 _index_readseekcallback_:
-    .long readseekcallback_
+    .long 0x8016a76c
     .long 0x000002f4
     .long _unwind_readseekcallback_
 
@@ -628,25 +628,25 @@ _index_RFLiReadAsync:
 
 .global _index_retryWrite_
 _index_retryWrite_:
-    .long retryWrite_
+    .long 0x8016ac28
     .long 0x00000298
     .long _unwind_retryWrite_
 
 .global _index_writecallback_
 _index_writecallback_:
-    .long writecallback_
+    .long 0x8016aec0
     .long 0x000002d0
     .long _unwind_writecallback_
 
 .global _index_retryWriteSeek_
 _index_retryWriteSeek_:
-    .long retryWriteSeek_
+    .long 0x8016b190
     .long 0x00000260
     .long _unwind_retryWriteSeek_
 
 .global _index_writeseekcallback_
 _index_writeseekcallback_:
-    .long writeseekcallback_
+    .long 0x8016b3f0
     .long 0x00000404
     .long _unwind_writeseekcallback_
 
@@ -658,7 +658,7 @@ _index_RFLiWriteAsync:
 
 .global _index_closecallback_
 _index_closecallback_:
-    .long closecallback_
+    .long 0x8016ba34
     .long 0x00000198
     .long _unwind_closecallback_
 
@@ -670,7 +670,7 @@ _index_RFLiCloseAsync:
 
 .global _index_getlengthcallback_
 _index_getlengthcallback_:
-    .long getlengthcallback_
+    .long 0x8016bd98
     .long 0x00000190
     .long _unwind_getlengthcallback_
 
@@ -682,7 +682,7 @@ _index_RFLiGetLengthAsync:
 
 .global _index_deletecallback_
 _index_deletecallback_:
-    .long deletecallback_
+    .long 0x8016c0d4
     .long 0x000001a8
     .long _unwind_deletecallback_
 
@@ -694,13 +694,13 @@ _index_RFLiDeleteAsync:
 
 .global _index_createdircallback2_
 _index_createdircallback2_:
-    .long createdircallback2_
+    .long 0x8016c470
     .long 0x000001bc
     .long _unwind_createdircallback2_
 
 .global _index_createdircallback1_
 _index_createdircallback1_:
-    .long createdircallback1_
+    .long 0x8016c62c
     .long 0x000002d0
     .long _unwind_createdircallback1_
 

@@ -569,8 +569,8 @@ RVL_SDK_O_FILES := \
 	build/asm/revolution/VF/vf_unsplit.o \
 	\
 	build/RVLFaceLib/RFL_System.o \
-	build/asm/RVLFaceLib/RFL_NANDLoader.o \
-	build/asm/RVLFaceLib/RFL_NANDAccess.o \
+	build/RVLFaceLib/RFL_NANDLoader.o \
+	build/RVLFaceLib/RFL_NANDAccess.o \
 	build/asm/RVLFaceLib/RFL_Model.o \
 	build/asm/RVLFaceLib/RFL_MakeTex.o \
 	build/asm/RVLFaceLib/RFL_Icon.o \
@@ -600,7 +600,6 @@ GROUP_1_O_FILES := \
 	build/asm/bss.o \
 	build/asm/sbss.o \
 	build/asm/sdata.o \
-	build/asm/sbss2.o \
 	build/asm/sdata2.o \
 
 O_FILES := $(GROUP_0_O_FILES) $(NW4R_O_FILES) $(EGG_O_FILES) $(RUNTIME_O_FILES) $(MSL_O_FILES) $(METROTRK_O_FILES) $(RVL_SDK_O_FILES) $(GROUP_1_O_FILES)
