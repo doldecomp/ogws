@@ -568,7 +568,21 @@ RVL_SDK_O_FILES := \
 	\
 	build/asm/revolution/VF/vf_unsplit.o \
 	\
-	build/asm/RVLFaceLib/rfl_unsplit.o \
+	build/asm/RVLFaceLib/RFL_System.o \
+	build/asm/RVLFaceLib/RFL_NANDLoader.o \
+	build/asm/RVLFaceLib/RFL_NANDAccess.o \
+	build/asm/RVLFaceLib/RFL_Model.o \
+	build/asm/RVLFaceLib/RFL_MakeTex.o \
+	build/asm/RVLFaceLib/RFL_Icon.o \
+	build/asm/RVLFaceLib/RFL_HiddenDatabase.o \
+	build/asm/RVLFaceLib/RFL_Database.o \
+	build/asm/RVLFaceLib/RFL_Controller.o \
+	build/asm/RVLFaceLib/RFL_MiddleDatabase.o \
+	build/asm/RVLFaceLib/RFL_MakeRandomFace.o \
+	build/asm/RVLFaceLib/RFL_DefaultDatabase.o \
+	build/asm/RVLFaceLib/RFL_DataUtility.o \
+	build/asm/RVLFaceLib/RFL_NWC24.o \
+	build/asm/RVLFaceLib/RFL_Format.o \
 	\
 	build/asm/homebuttonMiniLib/hbm_unsplit.o \
 	\

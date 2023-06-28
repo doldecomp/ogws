@@ -40,7 +40,7 @@ lbl_80380004:
 	.incbin "baserom.dol", 0x37C104, 0xE6C
 .global lbl_80380E70
 lbl_80380E70:
-	.incbin "baserom.dol", 0x37CF70, 0x30
+	.incbin "baserom.dol", 0x37CF70, 0x20
 
 .section .sbss, "wa"
 .balign 0x8

@@ -359,393 +359,393 @@ _unwind_scalbn:
     .long 0x08080000
     .long 0x00000000
 
-.global _unwind_func_80167B48
-_unwind_func_80167B48:
+.global _unwind_RFLInitResAsync
+_unwind_RFLInitResAsync:
     .long 0x28080000
     .long 0x00000000
 
-.global _unwind_func_80167EE0
-_unwind_func_80167EE0:
+.global _unwind_RFLInitRes
+_unwind_RFLInitRes:
     .long 0x00080000
     .long 0x00000000
 
-.global _unwind_func_80167F80
-_unwind_func_80167F80:
+.global _unwind_RFLExit
+_unwind_RFLExit:
     .long 0x00080000
     .long 0x00000000
 
-.global _unwind_lbl_80168108
-_unwind_lbl_80168108:
+.global _unwind_bootloadDB2Res_
+_unwind_bootloadDB2Res_:
     .long 0x00080000
     .long 0x00000000
 
-.global _unwind_func_80168404
-_unwind_func_80168404:
+.global _unwind_RFLGetAsyncStatus
+_unwind_RFLGetAsyncStatus:
     .long 0x00080000
     .long 0x00000000
 
-.global _unwind_func_801684B4
-_unwind_func_801684B4:
+.global _unwind_RFLWaitAsync
+_unwind_RFLWaitAsync:
     .long 0x00080000
     .long 0x00000000
 
-.global _unwind_func_80168614
-_unwind_func_80168614:
+.global _unwind_RFLiInitLoader
+_unwind_RFLiInitLoader:
     .long 0x00080000
     .long 0x00000000
 
-.global _unwind_func_80168728
-_unwind_func_80168728:
+.global _unwind_parseOnmemoryRes_
+_unwind_parseOnmemoryRes_:
     .long 0x10080000
     .long 0x00000000
 
-.global _unwind_lbl_801688A0
-_unwind_lbl_801688A0:
+.global _unwind_loadResRead2ndcallback_
+_unwind_loadResRead2ndcallback_:
     .long 0x18080000
     .long 0x00000000
 
-.global _unwind_lbl_801689C4
-_unwind_lbl_801689C4:
+.global _unwind_loadResRead1stcallback_
+_unwind_loadResRead1stcallback_:
     .long 0x18080000
     .long 0x00000000
 
-.global _unwind_lbl_80168AB0
-_unwind_lbl_80168AB0:
+.global _unwind_loadResGetlengthcallback_
+_unwind_loadResGetlengthcallback_:
     .long 0x08080000
     .long 0x00000000
 
-.global _unwind_lbl_80168B54
-_unwind_lbl_80168B54:
+.global _unwind_loadResOpencallback_
+_unwind_loadResOpencallback_:
     .long 0x00080000
     .long 0x00000000
 
-.global _unwind_func_80168BC4
-_unwind_func_80168BC4:
+.global _unwind_RFLiLoadResourceHeaderAsync
+_unwind_RFLiLoadResourceHeaderAsync:
     .long 0x00080000
     .long 0x00000000
 
-.global _unwind_func_80168C58
-_unwind_func_80168C58:
+.global _unwind_getNANDFile_
+_unwind_getNANDFile_:
     .long 0x30080000
     .long 0x00000000
 
-.global _unwind_func_80168DDC
-_unwind_func_80168DDC:
+.global _unwind_RFLiGetTexSize
+_unwind_RFLiGetTexSize:
     .long 0x20080000
     .long 0x00000000
 
-.global _unwind_func_80168F48
-_unwind_func_80168F48:
+.global _unwind_RFLiLoadTexture
+_unwind_RFLiLoadTexture:
     .long 0x28080000
     .long 0x00000000
 
-.global _unwind_func_8016906C
-_unwind_func_8016906C:
+.global _unwind_RFLiGetShpTexSize
+_unwind_RFLiGetShpTexSize:
     .long 0x20080000
     .long 0x00000000
 
-.global _unwind_func_801691D8
-_unwind_func_801691D8:
+.global _unwind_RFLiLoadShpTexture
+_unwind_RFLiLoadShpTexture:
     .long 0x28080000
     .long 0x00000000
 
-.global _unwind_func_801692FC
-_unwind_func_801692FC:
+.global _unwind_RFLiGetShapeSize
+_unwind_RFLiGetShapeSize:
     .long 0x20080000
     .long 0x00000000
 
-.global _unwind_func_80169468
-_unwind_func_80169468:
+.global _unwind_RFLiLoadShape
+_unwind_RFLiLoadShape:
     .long 0x28080000
     .long 0x00000000
 
-.global _unwind_func_8016958C
-_unwind_func_8016958C:
+.global _unwind_RFLFreeCachedResource
+_unwind_RFLFreeCachedResource:
     .long 0x00080000
     .long 0x00000000
 
-.global _unwind_func_801695F8
-_unwind_func_801695F8:
+.global _unwind_RFLIsResourceCached
+_unwind_RFLIsResourceCached:
     .long 0x00080000
     .long 0x00000000
 
-.global _unwind_func_80169640
-_unwind_func_80169640:
+.global _unwind_RFLiInitAccessInfo
+_unwind_RFLiInitAccessInfo:
     .long 0x18080000
     .long 0x00000000
 
-.global _unwind_func_801696BC
-_unwind_func_801696BC:
+.global _unwind_RFLiExitAccessInfo
+_unwind_RFLiExitAccessInfo:
     .long 0x08080000
     .long 0x00000000
 
-.global _unwind_func_80169704
-_unwind_func_80169704:
+.global _unwind_RFLiStartWorking
+_unwind_RFLiStartWorking:
     .long 0x10080000
     .long 0x00000000
 
-.global _unwind_func_80169754
-_unwind_func_80169754:
+.global _unwind_RFLiEndWorkingReason
+_unwind_RFLiEndWorkingReason:
     .long 0x18080000
     .long 0x00000000
 
-.global _unwind_func_801697D8
-_unwind_func_801697D8:
+.global _unwind_RFLiEndWorking
+_unwind_RFLiEndWorking:
     .long 0x10080000
     .long 0x00000000
 
-.global _unwind_lbl_80169854
-_unwind_lbl_80169854:
+.global _unwind_alarmCallback_
+_unwind_alarmCallback_:
     .long 0x08080000
     .long 0x00000000
 
-.global _unwind_lbl_801698A4
-_unwind_lbl_801698A4:
+.global _unwind_opencallback_
+_unwind_opencallback_:
     .long 0x30080000
     .long 0x00000000
 
-.global _unwind_lbl_80169B88
-_unwind_lbl_80169B88:
+.global _unwind_createcallback_
+_unwind_createcallback_:
     .long 0x30080000
     .long 0x00000000
 
-.global _unwind_lbl_80169E60
-_unwind_lbl_80169E60:
+.global _unwind_close2opencallback_
+_unwind_close2opencallback_:
     .long 0x30080000
     .long 0x00000000
 
-.global _unwind_func_8016A128
-_unwind_func_8016A128:
+.global _unwind_RFLiOpenAsync
+_unwind_RFLiOpenAsync:
     .long 0x38080000
     .long 0x00000000
 
-.global _unwind_lbl_8016A504
-_unwind_lbl_8016A504:
+.global _unwind_readcallback_
+_unwind_readcallback_:
     .long 0x28080000
     .long 0x00000000
 
-.global _unwind_lbl_8016A76C
-_unwind_lbl_8016A76C:
+.global _unwind_readseekcallback_
+_unwind_readseekcallback_:
     .long 0x28080000
     .long 0x00000000
 
-.global _unwind_func_8016AA60
-_unwind_func_8016AA60:
+.global _unwind_RFLiReadAsync
+_unwind_RFLiReadAsync:
     .long 0x48080000
     .long 0x00000000
 
-.global _unwind_lbl_8016AC28
-_unwind_lbl_8016AC28:
+.global _unwind_retryWrite_
+_unwind_retryWrite_:
     .long 0x20080000
     .long 0x00000000
 
-.global _unwind_lbl_8016AEC0
-_unwind_lbl_8016AEC0:
+.global _unwind_writecallback_
+_unwind_writecallback_:
     .long 0x28080000
     .long 0x00000000
 
-.global _unwind_lbl_8016B190
-_unwind_lbl_8016B190:
+.global _unwind_retryWriteSeek_
+_unwind_retryWriteSeek_:
     .long 0x18080000
     .long 0x00000000
 
-.global _unwind_lbl_8016B3F0
-_unwind_lbl_8016B3F0:
+.global _unwind_writeseekcallback_
+_unwind_writeseekcallback_:
     .long 0x30080000
     .long 0x00000000
 
-.global _unwind_func_8016B7F4
-_unwind_func_8016B7F4:
+.global _unwind_RFLiWriteAsync
+_unwind_RFLiWriteAsync:
     .long 0x48080000
     .long 0x00000000
 
-.global _unwind_lbl_8016BA34
-_unwind_lbl_8016BA34:
+.global _unwind_closecallback_
+_unwind_closecallback_:
     .long 0x20080000
     .long 0x00000000
 
-.global _unwind_func_8016BBCC
-_unwind_func_8016BBCC:
+.global _unwind_RFLiCloseAsync
+_unwind_RFLiCloseAsync:
     .long 0x28080000
     .long 0x00000000
 
-.global _unwind_lbl_8016BD98
-_unwind_lbl_8016BD98:
+.global _unwind_getlengthcallback_
+_unwind_getlengthcallback_:
     .long 0x20080000
     .long 0x00000000
 
-.global _unwind_func_8016BF28
-_unwind_func_8016BF28:
+.global _unwind_RFLiGetLengthAsync
+_unwind_RFLiGetLengthAsync:
     .long 0x30080000
     .long 0x00000000
 
-.global _unwind_lbl_8016C0D4
-_unwind_lbl_8016C0D4:
+.global _unwind_deletecallback_
+_unwind_deletecallback_:
     .long 0x20080000
     .long 0x00000000
 
-.global _unwind_func_8016C27C
-_unwind_func_8016C27C:
+.global _unwind_RFLiDeleteAsync
+_unwind_RFLiDeleteAsync:
     .long 0x28080000
     .long 0x00000000
 
-.global _unwind_func_8016C470
-_unwind_func_8016C470:
+.global _unwind_createdircallback2_
+_unwind_createdircallback2_:
     .long 0x20080000
     .long 0x00000000
 
-.global _unwind_func_8016C62C
-_unwind_func_8016C62C:
+.global _unwind_createdircallback1_
+_unwind_createdircallback1_:
     .long 0x20080000
     .long 0x00000000
 
-.global _unwind_func_8016C8FC
-_unwind_func_8016C8FC:
+.global _unwind_RFLiCreateSaveDirAsync
+_unwind_RFLiCreateSaveDirAsync:
     .long 0x20080000
     .long 0x00000000
 
-.global _unwind_func_8016CAD4
-_unwind_func_8016CAD4:
+.global _unwind_RFLSetCoordinate
+_unwind_RFLSetCoordinate:
     .long 0x00080000
     .long 0x00000000
 
-.global _unwind_func_8016CC3C
-_unwind_func_8016CC3C:
+.global _unwind_RFLGetModelBufferSize
+_unwind_RFLGetModelBufferSize:
     .long 0x08080000
     .long 0x00000000
 
-.global _unwind_func_8016CD18
-_unwind_func_8016CD18:
+.global _unwind_RFLInitCharModel
+_unwind_RFLInitCharModel:
     .long 0x28080000
     .long 0x00000000
 
-.global _unwind_func_8016CD84
-_unwind_func_8016CD84:
+.global _unwind_RFLiInitCharModel
+_unwind_RFLiInitCharModel:
     .long 0x484a0000
     .long 0x00000000
 
-.global _unwind_func_8016D0F8
-_unwind_func_8016D0F8:
+.global _unwind_RFLSetMtx
+_unwind_RFLSetMtx:
     .long 0x10080000
     .long 0x00000000
 
-.global _unwind_func_8016D194
-_unwind_func_8016D194:
+.global _unwind_RFLLoadDrawSetting
+_unwind_RFLLoadDrawSetting:
     .long 0x08080000
     .long 0x00000000
 
-.global _unwind_func_8016D490
-_unwind_func_8016D490:
+.global _unwind_RFLLoadVertexSetting
+_unwind_RFLLoadVertexSetting:
     .long 0x08080000
     .long 0x00000000
 
-.global _unwind_func_8016D530
-_unwind_func_8016D530:
+.global _unwind_RFLLoadMaterialSetting
+_unwind_RFLLoadMaterialSetting:
     .long 0x08080000
     .long 0x00000000
 
-.global _unwind_func_8016D5F0
-_unwind_func_8016D5F0:
+.global _unwind_RFLDrawOpaCore
+_unwind_RFLDrawOpaCore:
     .long 0x20080000
     .long 0x00000000
 
-.global _unwind_func_8016DAFC
-_unwind_func_8016DAFC:
+.global _unwind_RFLDrawXluCore
+_unwind_RFLDrawXluCore:
     .long 0x18080000
     .long 0x00000000
 
-.global _unwind_func_8016DD80
-_unwind_func_8016DD80:
+.global _unwind_RFLiInitCharModelRes
+_unwind_RFLiInitCharModelRes:
     .long 0x484a0000
     .long 0x00000000
 
-.global _unwind_func_8016E4B8
-_unwind_func_8016E4B8:
+.global _unwind_RFLiInitShapeRes
+_unwind_RFLiInitShapeRes:
     .long 0x400a0000
     .long 0x00000000
 
-.global _unwind_func_8016EAA0
-_unwind_func_8016EAA0:
+.global _unwind_RFLiInitTexRes
+_unwind_RFLiInitTexRes:
     .long 0x280a0000
     .long 0x00000000
 
-.global _unwind_func_8016EBBC
-_unwind_func_8016EBBC:
+.global _unwind_RFLDrawShape
+_unwind_RFLDrawShape:
     .long 0x10080000
     .long 0x00000000
 
-.global _unwind_func_8016EEA0
-_unwind_func_8016EEA0:
+.global _unwind_RFLiSetupCopyTex
+_unwind_RFLiSetupCopyTex:
     .long 0x280a0000
     .long 0x00000000
 
-.global _unwind_func_8016EFD0
-_unwind_func_8016EFD0:
+.global _unwind_RFLiMakeTexture
+_unwind_RFLiMakeTexture:
     .long 0x904a0000
     .long 0x00000000
 
-.global _unwind_func_80170058
-_unwind_func_80170058:
+.global _unwind_RFLiSetup2DCameraAndParam
+_unwind_RFLiSetup2DCameraAndParam:
     .long 0x000a0000
     .long 0x00000000
 
-.global _unwind_func_80170230
-_unwind_func_80170230:
+.global _unwind_RFLiSetTev4Mouth
+_unwind_RFLiSetTev4Mouth:
     .long 0x08080000
     .long 0x00000000
 
-.global _unwind_func_80170478
-_unwind_func_80170478:
+.global _unwind_RFLiSetTev4Eye
+_unwind_RFLiSetTev4Eye:
     .long 0x10080000
     .long 0x00000000
 
-.global _unwind_func_80170728
-_unwind_func_80170728:
+.global _unwind_RFLiSetFaceParts
+_unwind_RFLiSetFaceParts:
     .long 0x040a0000
     .long 0x00000000
 
-.global _unwind_func_80170C30
-_unwind_func_80170C30:
+.global _unwind_RFLiCapture
+_unwind_RFLiCapture:
     .long 0x380a0000
     .long 0x00000000
 
-.global _unwind_func_80171498
-_unwind_func_80171498:
+.global _unwind_RFLiDrawQuad
+_unwind_RFLiDrawQuad:
     .long 0x114a0000
     .long 0x00000000
 
-.global _unwind_func_80171738
-_unwind_func_80171738:
+.global _unwind_RFLSetIconDrawDoneCallback
+_unwind_RFLSetIconDrawDoneCallback:
     .long 0x08080000
     .long 0x00000000
 
-.global _unwind_func_80171768
-_unwind_func_80171768:
+.global _unwind_RFLiInitHiddenDatabase
+_unwind_RFLiInitHiddenDatabase:
     .long 0x00080000
     .long 0x00000000
 
-.global _unwind_lbl_8017179C
-_unwind_lbl_8017179C:
+.global _unwind_loadclosecallback_
+_unwind_loadclosecallback_:
     .long 0x00080000
     .long 0x00000000
 
-.global _unwind_lbl_801717D4
-_unwind_lbl_801717D4:
+.global _unwind_loadcallback_
+_unwind_loadcallback_:
     .long 0x10080000
     .long 0x00000000
 
-.global _unwind_lbl_801718A8
-_unwind_lbl_801718A8:
+.global _unwind_loadopencallback_
+_unwind_loadopencallback_:
     .long 0x10080000
     .long 0x00000000
 
-.global _unwind_func_80171964
-_unwind_func_80171964:
+.global _unwind_RFLiLoadHiddenDataAsync
+_unwind_RFLiLoadHiddenDataAsync:
     .long 0x20080000
     .long 0x00000000
 
-.global _unwind_func_80171A1C
-_unwind_func_80171A1C:
+.global _unwind_RFLiLoadCachedHiddenData
+_unwind_RFLiLoadCachedHiddenData:
     .long 0x20080000
     .long 0x00000000
 
@@ -784,23 +784,23 @@ _unwind_func_80172044:
     .long 0x30080000
     .long 0x00000000
 
-.global _unwind_func_801721FC
-_unwind_func_801721FC:
+.global _unwind_RFLiCountupHiddenDataNum
+_unwind_RFLiCountupHiddenDataNum:
     .long 0x18080000
     .long 0x00000000
 
-.global _unwind_func_801722A8
-_unwind_func_801722A8:
+.global _unwind_RFLiGetHiddenNext
+_unwind_RFLiGetHiddenNext:
     .long 0x08080000
     .long 0x00000000
 
-.global _unwind_func_80172328
-_unwind_func_80172328:
+.global _unwind_RFLiGetHiddenPrev
+_unwind_RFLiGetHiddenPrev:
     .long 0x08080000
     .long 0x00000000
 
-.global _unwind_func_801723A8
-_unwind_func_801723A8:
+.global _unwind_RFLiIsValidHiddenData
+_unwind_RFLiIsValidHiddenData:
     .long 0x18080000
     .long 0x00000000
 
@@ -809,33 +809,33 @@ _unwind_func_80172498:
     .long 0x00080000
     .long 0x00000000
 
-.global _unwind_func_801724E0
-_unwind_func_801724E0:
+.global _unwind_RFLiInitDatabase
+_unwind_RFLiInitDatabase:
     .long 0x10080000
     .long 0x00000000
 
-.global _unwind_lbl_80172544
-_unwind_lbl_80172544:
+.global _unwind_bootloadCheckCRCCb_
+_unwind_bootloadCheckCRCCb_:
     .long 0x10080000
     .long 0x00000000
 
-.global _unwind_lbl_801725B4
-_unwind_lbl_801725B4:
+.global _unwind_bootloadDBcallback_
+_unwind_bootloadDBcallback_:
     .long 0x10080000
     .long 0x00000000
 
-.global _unwind_lbl_8017270C
-_unwind_lbl_8017270C:
+.global _unwind_bootloadDBopencallback_
+_unwind_bootloadDBopencallback_:
     .long 0x10080000
     .long 0x00000000
 
-.global _unwind_func_8017283C
-_unwind_func_8017283C:
+.global _unwind_RFLiBootLoadDatabaseAsync
+_unwind_RFLiBootLoadDatabaseAsync:
     .long 0x10080000
     .long 0x00000000
 
-.global _unwind_lbl_8017291C
-_unwind_lbl_8017291C:
+.global _unwind_saveDBcallback_
+_unwind_saveDBcallback_:
     .long 0x00080000
     .long 0x00000000
 
@@ -859,58 +859,58 @@ _unwind_func_80172AE0:
     .long 0x18080000
     .long 0x00000000
 
-.global _unwind_func_80172C40
-_unwind_func_80172C40:
+.global _unwind_RFLiGetCharData
+_unwind_RFLiGetCharData:
     .long 0x18080000
     .long 0x00000000
 
-.global _unwind_func_80172DAC
-_unwind_func_80172DAC:
+.global _unwind_convertRaw2InfoCore_
+_unwind_convertRaw2InfoCore_:
     .long 0x20080000
     .long 0x00000000
 
-.global _unwind_func_80172F64
-_unwind_func_80172F64:
+.global _unwind_RFLiConvertRaw2Info
+_unwind_RFLiConvertRaw2Info:
     .long 0x10080000
     .long 0x00000000
 
-.global _unwind_func_80172FB4
-_unwind_func_80172FB4:
+.global _unwind_RFLiConvertHRaw2Info
+_unwind_RFLiConvertHRaw2Info:
     .long 0x08080000
     .long 0x00000000
 
-.global _unwind_func_80173004
-_unwind_func_80173004:
+.global _unwind_convertInfo2RawCore_
+_unwind_convertInfo2RawCore_:
     .long 0x28080000
     .long 0x00000000
 
-.global _unwind_func_801731B0
-_unwind_func_801731B0:
+.global _unwind_RFLiConvertInfo2HRaw
+_unwind_RFLiConvertInfo2HRaw:
     .long 0x08080000
     .long 0x00000000
 
-.global _unwind_func_801731E8
-_unwind_func_801731E8:
+.global _unwind_RFLiConvertRaw2HRaw
+_unwind_RFLiConvertRaw2HRaw:
     .long 0x10080000
     .long 0x00000000
 
-.global _unwind_func_80173248
-_unwind_func_80173248:
+.global _unwind_RFLiGetCharRawData
+_unwind_RFLiGetCharRawData:
     .long 0x08080000
     .long 0x00000000
 
-.global _unwind_func_801732BC
-_unwind_func_801732BC:
+.global _unwind_RFLiGetCharInfo
+_unwind_RFLiGetCharInfo:
     .long 0x10080000
     .long 0x00000000
 
-.global _unwind_func_80173360
-_unwind_func_80173360:
+.global _unwind_RFLIsAvailableOfficialData
+_unwind_RFLIsAvailableOfficialData:
     .long 0x00080000
     .long 0x00000000
 
-.global _unwind_func_80173694
-_unwind_func_80173694:
+.global _unwind_RFLSearchOfficialData
+_unwind_RFLSearchOfficialData:
     .long 0x28080000
     .long 0x00000000
 
@@ -919,38 +919,38 @@ _unwind_func_80173788:
     .long 0x08080000
     .long 0x00000000
 
-.global _unwind_func_801737F8
-_unwind_func_801737F8:
+.global _unwind_RFLiGetIsolation
+_unwind_RFLiGetIsolation:
     .long 0x08080000
     .long 0x00000000
 
-.global _unwind_func_80173884
-_unwind_func_80173884:
+.global _unwind_RFLiGetHiddenHeader
+_unwind_RFLiGetHiddenHeader:
     .long 0x08080000
     .long 0x00000000
 
-.global _unwind_func_8017390C
-_unwind_func_8017390C:
+.global _unwind_RFLiDBIsLoaded
+_unwind_RFLiDBIsLoaded:
     .long 0x08080000
     .long 0x00000000
 
-.global _unwind_lbl_80173A68
-_unwind_lbl_80173A68:
+.global _unwind_alarmCreateCb_
+_unwind_alarmCreateCb_:
     .long 0x10080000
     .long 0x00000000
 
-.global _unwind_func_80173C14
-_unwind_func_80173C14:
+.global _unwind_RFLiCheckHeaderCRCAsync
+_unwind_RFLiCheckHeaderCRCAsync:
     .long 0x10080000
     .long 0x00000000
 
-.global _unwind_lbl_80173CD8
-_unwind_lbl_80173CD8:
+.global _unwind_alarmCheckCb_
+_unwind_alarmCheckCb_:
     .long 0x10080000
     .long 0x00000000
 
-.global _unwind_func_80173E78
-_unwind_func_80173E78:
+.global _unwind_RFLiInitCtrlBuf
+_unwind_RFLiInitCtrlBuf:
     .long 0x40080000
     .long 0x00000000
 
@@ -974,8 +974,8 @@ _unwind_lbl_80174518:
     .long 0x20080000
     .long 0x00000000
 
-.global _unwind_func_80174608
-_unwind_func_80174608:
+.global _unwind_RFLiGetControllerData
+_unwind_RFLiGetControllerData:
     .long 0x28080000
     .long 0x00000000
 
@@ -1044,13 +1044,13 @@ _unwind_func_80175764:
     .long 0x10080000
     .long 0x00000000
 
-.global _unwind_func_801757F4
-_unwind_func_801757F4:
+.global _unwind_RFLi_MakeRandomFace
+_unwind_RFLi_MakeRandomFace:
     .long 0x20080000
     .long 0x00000000
 
-.global _unwind_func_80175940
-_unwind_func_80175940:
+.global _unwind_RFLi_MakeRandomFace_Core
+_unwind_RFLi_MakeRandomFace_Core:
     .long 0x80080000
     .long 0x00000000
 
@@ -1089,8 +1089,8 @@ _unwind_func_80176E54:
     .long 0x10080000
     .long 0x00000000
 
-.global _unwind_func_80176EA8
-_unwind_func_80176EA8:
+.global _unwind_RFLCommitNWC24Msg
+_unwind_RFLCommitNWC24Msg:
     .long 0x18080000
     .long 0x00000000
 

@@ -90,7 +90,7 @@ def calc_slice_group_progress(group: SliceGroup, asm_list: list[AsmUtil.Section]
     # Percentages
     slice_percent = src_size / total_size
     print(
-        f"\t{group.name}: {src_size} / {total_size} bytes in src ({slice_percent:%})")
+        f"    {group.name}: {src_size} / {total_size} bytes in src ({slice_percent:%})")
 
     # User callback
     callback(group.name, src_size, total_size)
