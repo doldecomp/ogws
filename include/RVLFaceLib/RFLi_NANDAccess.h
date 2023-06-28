@@ -14,7 +14,7 @@ typedef struct RFLiCallbackTag {
 } RFLiCallbackTag;
 
 typedef struct RFLiAccessInfo {
-    RFLiAccessCallback callback; // at 0x0
+    RFLiCallback callback; // at 0x0
     union {
         struct {
             char path[FS_MAX_PATH + 1]; // at 0x4
@@ -48,7 +48,7 @@ typedef struct RFLiAccessInfo {
     RFLiCallbackTag tag;             // at 0x190
     OSAlarm alarm;                   // at 0x198
     RFLiFileType alarmData;          // at 0x1C8
-    RFLiAlarmCallback retryCallback; // at 0x1CC
+    RFLiAsyncCallback retryCallback; // at 0x1CC
     u8 retryCount;                   // at 0x1D0
     void* safeBuffer;                // at 0x1D4
     u8 opened;                       // at 0x1D8
@@ -64,16 +64,16 @@ NANDCommandBlock* RFLiSetCommandBlock(RFLiFileType type, RFLiAsyncTag tag);
 RFLiFileType RFLiGetType(NANDCommandBlock* block);
 NANDFileInfo* RFLiGetWorkingFile(RFLiFileType type);
 RFLErrcode RFLiOpenAsync(RFLiFileType type, u8 openMode,
-                         RFLiAccessCallback callback);
+                         RFLiCallback callback);
 RFLErrcode RFLiReadAsync(RFLiFileType type, void* dst, u32 size,
-                         RFLiAccessCallback callback, s32 offset);
+                         RFLiCallback callback, s32 offset);
 RFLErrcode RFLiWriteAsync(RFLiFileType type, const void* src, u32 size,
-                          RFLiAccessCallback callback, s32 offset);
-RFLErrcode RFLiCloseAsync(RFLiFileType type, RFLiAccessCallback callback);
+                          RFLiCallback callback, s32 offset);
+RFLErrcode RFLiCloseAsync(RFLiFileType type, RFLiCallback callback);
 RFLErrcode RFLiGetLengthAsync(RFLiFileType type, u32* out,
-                              RFLiAccessCallback callback);
-RFLErrcode RFLiDeleteAsync(RFLiFileType type, RFLiAccessCallback callback);
-RFLErrcode RFLiCreateSaveDirAsync(RFLiAccessCallback callback);
+                              RFLiCallback callback);
+RFLErrcode RFLiDeleteAsync(RFLiFileType type, RFLiCallback callback);
+RFLErrcode RFLiCreateSaveDirAsync(RFLiCallback callback);
 
 #ifdef __cplusplus
 }

@@ -1064,28 +1064,28 @@ _unwind_func_80176474:
     .long 0x08080000
     .long 0x00000000
 
-.global _unwind_func_801765E4
-_unwind_func_801765E4:
+.global _unwind_RFLiCheckValidInfo
+_unwind_RFLiCheckValidInfo:
     .long 0x08080000
     .long 0x00000000
 
-.global _unwind_func_80176A48
-_unwind_func_80176A48:
+.global _unwind_RFLiIsValidOnNAND
+_unwind_RFLiIsValidOnNAND:
     .long 0x00080000
     .long 0x00000000
 
-.global _unwind_func_80176B84
-_unwind_func_80176B84:
+.global _unwind_RFLiPickupCharInfo
+_unwind_RFLiPickupCharInfo:
     .long 0x20080000
     .long 0x00000000
 
-.global _unwind_func_80176CC4
-_unwind_func_80176CC4:
+.global _unwind_copyChar2Additional_
+_unwind_copyChar2Additional_:
     .long 0x18080000
     .long 0x00000000
 
-.global _unwind_func_80176E54
-_unwind_func_80176E54:
+.global _unwind_RFLGetAdditionalInfo
+_unwind_RFLGetAdditionalInfo:
     .long 0x10080000
     .long 0x00000000
 
@@ -1094,13 +1094,13 @@ _unwind_RFLCommitNWC24Msg:
     .long 0x18080000
     .long 0x00000000
 
-.global _unwind_func_80176F9C
-_unwind_func_80176F9C:
+.global _unwind_RFLiClearTableData
+_unwind_RFLiClearTableData:
     .long 0x08080000
     .long 0x00000000
 
-.global _unwind_func_80176FE8
-_unwind_func_80176FE8:
+.global _unwind_RFLiClearDBBuffer
+_unwind_RFLiClearDBBuffer:
     .long 0x18080000
     .long 0x00000000
 

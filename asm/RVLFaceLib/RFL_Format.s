@@ -3,8 +3,9 @@
 .include "macros.inc"
 
 .section .text, "ax"
-.global func_80176F9C
-func_80176F9C:
+
+.global RFLiClearTableData
+RFLiClearTableData:
 /* 80176F9C 00171E9C  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80176FA0 00171EA0  7C 08 02 A6 */	mflr r0
 /* 80176FA4 00171EA4  38 80 00 00 */	li r4, 0
@@ -25,8 +26,8 @@ func_80176F9C:
 /* 80176FE0 00171EE0  38 21 00 10 */	addi r1, r1, 0x10
 /* 80176FE4 00171EE4  4E 80 00 20 */	blr 
 
-.global func_80176FE8
-func_80176FE8:
+.global RFLiClearDBBuffer
+RFLiClearDBBuffer:
 /* 80176FE8 00171EE8  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 80176FEC 00171EEC  7C 08 02 A6 */	mflr r0
 /* 80176FF0 00171EF0  90 01 00 24 */	stw r0, 0x24(r1)

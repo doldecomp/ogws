@@ -1262,35 +1262,35 @@ _index_func_80176474:
     .long 0x00000158
     .long _unwind_func_80176474
 
-.global _index_func_801765E4
-_index_func_801765E4:
-    .long func_801765E4
+.global _index_RFLiCheckValidInfo
+_index_RFLiCheckValidInfo:
+    .long RFLiCheckValidInfo
     .long 0x00000464
-    .long _unwind_func_801765E4
+    .long _unwind_RFLiCheckValidInfo
 
-.global _index_func_80176A48
-_index_func_80176A48:
-    .long func_80176A48
+.global _index_RFLiIsValidOnNAND
+_index_RFLiIsValidOnNAND:
+    .long RFLiIsValidOnNAND
     .long 0x0000002c
-    .long _unwind_func_80176A48
+    .long _unwind_RFLiIsValidOnNAND
 
-.global _index_func_80176B84
-_index_func_80176B84:
-    .long func_80176B84
+.global _index_RFLiPickupCharInfo
+_index_RFLiPickupCharInfo:
+    .long RFLiPickupCharInfo
     .long 0x00000140
-    .long _unwind_func_80176B84
+    .long _unwind_RFLiPickupCharInfo
 
-.global _index_func_80176CC4
-_index_func_80176CC4:
-    .long func_80176CC4
+.global _index_copyChar2Additional_
+_index_copyChar2Additional_:
+    .long copyChar2Additional_
     .long 0x00000190
-    .long _unwind_func_80176CC4
+    .long _unwind_copyChar2Additional_
 
-.global _index_func_80176E54
-_index_func_80176E54:
-    .long func_80176E54
+.global _index_RFLGetAdditionalInfo
+_index_RFLGetAdditionalInfo:
+    .long RFLGetAdditionalInfo
     .long 0x00000054
-    .long _unwind_func_80176E54
+    .long _unwind_RFLGetAdditionalInfo
 
 .global _index_RFLCommitNWC24Msg
 _index_RFLCommitNWC24Msg:
@@ -1298,17 +1298,17 @@ _index_RFLCommitNWC24Msg:
     .long 0x000000f4
     .long _unwind_RFLCommitNWC24Msg
 
-.global _index_func_80176F9C
-_index_func_80176F9C:
-    .long func_80176F9C
+.global _index_RFLiClearTableData
+_index_RFLiClearTableData:
+    .long RFLiClearTableData
     .long 0x0000004c
-    .long _unwind_func_80176F9C
+    .long _unwind_RFLiClearTableData
 
-.global _index_func_80176FE8
-_index_func_80176FE8:
-    .long func_80176FE8
+.global _index_RFLiClearDBBuffer
+_index_RFLiClearDBBuffer:
+    .long RFLiClearDBBuffer
     .long 0x000000bc
-    .long _unwind_func_80176FE8
+    .long _unwind_RFLiClearDBBuffer
 
 .global _index_lbl_801770A4
 _index_lbl_801770A4:

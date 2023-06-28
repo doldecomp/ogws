@@ -10,8 +10,11 @@ extern "C" {
 typedef struct RFLiCharInfo;
 typedef struct RFLMiddleDB;
 
-RFLErrcode RFLiPickupCharInfo(struct RFLiCharInfo*, RFLDataSource,
-                              struct RFLMiddleDB*, u16);
+RFLErrcode RFLiPickupCharInfo(RFLiCharInfo*, RFLDataSource, struct RFLMiddleDB*,
+                              u16);
+
+BOOL RFLiCheckValidInfo(const RFLiCharInfo*);
+BOOL RFLiIsValidOnNAND(const RFLiCharInfo*);
 
 #ifdef __cplusplus
 }

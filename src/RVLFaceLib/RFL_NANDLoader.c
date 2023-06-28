@@ -54,7 +54,7 @@ static void parseOnmemoryRes_(void) DONT_INLINE {
 static void loadResRead2ndcallback_(void) {
     RFLiLoader* loader;
     BOOL free;
-    RFLiAccessCallback cb;
+    RFLiCallback cb;
     u32* headerBuf1;
     u32* headerBuf2;
 

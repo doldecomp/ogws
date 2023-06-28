@@ -9,8 +9,9 @@ lbl_80381D18:
 	.incbin "baserom.dol", 0x37DE18, 0x10
 
 .section .text, "ax"
-.global func_801765E4
-func_801765E4:
+
+.global RFLiCheckValidInfo
+RFLiCheckValidInfo:
 /* 801765E4 001714E4  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 801765E8 001714E8  7C 08 02 A6 */	mflr r0
 /* 801765EC 001714EC  A0 83 00 00 */	lhz r4, 0(r3)
@@ -345,8 +346,8 @@ lbl_80176A34:
 /* 80176A40 00171940  38 21 00 10 */	addi r1, r1, 0x10
 /* 80176A44 00171944  4E 80 00 20 */	blr 
 
-.global func_80176A48
-func_80176A48:
+.global RFLiIsValidOnNAND
+RFLiIsValidOnNAND:
 /* 80176A48 00171948  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80176A4C 0017194C  7C 08 02 A6 */	mflr r0
 /* 80176A50 00171950  38 63 00 46 */	addi r3, r3, 0x46
@@ -438,8 +439,8 @@ lbl_80176B64:
 /* 80176B7C 00171A7C  54 03 D9 7E */	srwi r3, r0, 5
 /* 80176B80 00171A80  4E 80 00 20 */	blr 
 
-.global func_80176B84
-func_80176B84:
+.global RFLiPickupCharInfo
+RFLiPickupCharInfo:
 /* 80176B84 00171A84  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 80176B88 00171A88  7C 08 02 A6 */	mflr r0
 /* 80176B8C 00171A8C  90 01 00 24 */	stw r0, 0x24(r1)
@@ -517,7 +518,7 @@ lbl_80176C6C:
 /* 80176C88 00171B88  48 00 00 18 */	b lbl_80176CA0
 lbl_80176C8C:
 /* 80176C8C 00171B8C  7F 83 E3 78 */	mr r3, r28
-/* 80176C90 00171B90  4B FF F9 55 */	bl func_801765E4
+/* 80176C90 00171B90  4B FF F9 55 */	bl RFLiCheckValidInfo
 /* 80176C94 00171B94  2C 03 00 00 */	cmpwi r3, 0
 /* 80176C98 00171B98  40 82 00 08 */	bne lbl_80176CA0
 /* 80176C9C 00171B9C  3B E0 00 07 */	li r31, 7
@@ -533,8 +534,8 @@ lbl_80176CA4:
 /* 80176CBC 00171BBC  38 21 00 20 */	addi r1, r1, 0x20
 /* 80176CC0 00171BC0  4E 80 00 20 */	blr 
 
-.global func_80176CC4
-func_80176CC4:
+.global copyChar2Additional_
+copyChar2Additional_:
 /* 80176CC4 00171BC4  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 80176CC8 00171BC8  7C 08 02 A6 */	mflr r0
 /* 80176CCC 00171BCC  38 A0 00 14 */	li r5, 0x14
@@ -645,8 +646,8 @@ lbl_80176DE8:
 /* 80176E4C 00171D4C  38 21 00 20 */	addi r1, r1, 0x20
 /* 80176E50 00171D50  4E 80 00 20 */	blr 
 
-.global func_80176E54
-func_80176E54:
+.global RFLGetAdditionalInfo
+RFLGetAdditionalInfo:
 /* 80176E54 00171D54  94 21 FF A0 */	stwu r1, -0x60(r1)
 /* 80176E58 00171D58  7C 08 02 A6 */	mflr r0
 /* 80176E5C 00171D5C  90 01 00 64 */	stw r0, 0x64(r1)
@@ -654,13 +655,13 @@ func_80176E54:
 /* 80176E64 00171D64  93 C1 00 58 */	stw r30, 0x58(r1)
 /* 80176E68 00171D68  7C 7E 1B 78 */	mr r30, r3
 /* 80176E6C 00171D6C  38 61 00 08 */	addi r3, r1, 8
-/* 80176E70 00171D70  4B FF FD 15 */	bl func_80176B84
+/* 80176E70 00171D70  4B FF FD 15 */	bl RFLiPickupCharInfo
 /* 80176E74 00171D74  2C 03 00 00 */	cmpwi r3, 0
 /* 80176E78 00171D78  7C 7F 1B 78 */	mr r31, r3
 /* 80176E7C 00171D7C  40 82 00 10 */	bne lbl_80176E8C
 /* 80176E80 00171D80  7F C3 F3 78 */	mr r3, r30
 /* 80176E84 00171D84  38 81 00 08 */	addi r4, r1, 8
-/* 80176E88 00171D88  4B FF FE 3D */	bl func_80176CC4
+/* 80176E88 00171D88  4B FF FE 3D */	bl copyChar2Additional_
 lbl_80176E8C:
 /* 80176E8C 00171D8C  7F E3 FB 78 */	mr r3, r31
 /* 80176E90 00171D90  83 E1 00 5C */	lwz r31, 0x5c(r1)
