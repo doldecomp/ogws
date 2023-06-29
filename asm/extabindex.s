@@ -920,11 +920,11 @@ _index_lbl_80171FAC:
     .long 0x00000070
     .long _unwind_lbl_80171FAC
 
-.global _index_func_80172044
-_index_func_80172044:
-    .long func_80172044
+.global _index_RFLiWriteCtrlToHiddenDB
+_index_RFLiWriteCtrlToHiddenDB:
+    .long RFLiWriteCtrlToHiddenDB
     .long 0x000001b8
-    .long _unwind_func_80172044
+    .long _unwind_RFLiWriteCtrlToHiddenDB
 
 .global _index_RFLiCountupHiddenDataNum
 _index_RFLiCountupHiddenDataNum:
@@ -1132,27 +1132,27 @@ _index_RFLiInitCtrlBuf:
 
 .global _index_func_80174078
 _index_func_80174078:
-    .long func_80174078
+    .long 0x80174078
     .long 0x00000124
     .long _unwind_func_80174078
 
 .global _index_lbl_8017419C
 _index_lbl_8017419C:
-    .long lbl_8017419C
+    .long 0x8017419C
     .long 0x000002bc
     .long _unwind_lbl_8017419C
 
 .global _index_func_80174458
 _index_func_80174458:
-    .long func_80174458
+    .long 0x80174458
     .long 0x000000c0
     .long _unwind_func_80174458
 
-.global _index_lbl_80174518
-_index_lbl_80174518:
-    .long lbl_80174518
+.global _index_RFLiLoadControllerAsync
+_index_RFLiLoadControllerAsync:
+    .long RFLiLoadControllerAsync
     .long 0x000000e8
-    .long _unwind_lbl_80174518
+    .long _unwind_RFLiLoadControllerAsync
 
 .global _index_RFLiGetControllerData
 _index_RFLiGetControllerData:
@@ -1160,11 +1160,11 @@ _index_RFLiGetControllerData:
     .long 0x000000f4
     .long _unwind_RFLiGetControllerData
 
-.global _index_func_801746FC
-_index_func_801746FC:
-    .long func_801746FC
+.global _index_RFLIsAvailableControllerData
+_index_RFLIsAvailableControllerData:
+    .long RFLIsAvailableControllerData
     .long 0x000000d4
-    .long _unwind_func_801746FC
+    .long _unwind_RFLIsAvailableControllerData
 
 .global _index_lbl_80174884
 _index_lbl_80174884:

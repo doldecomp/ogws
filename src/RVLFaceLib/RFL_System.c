@@ -74,8 +74,8 @@ RFLErrcode RFLInitResAsync(void* workBuffer, void* resBuffer, u32 resSize,
 
         RFLiGetManager()->lastErrCode = RFLErrcode_Success;
         RFLiGetManager()->beforeCloseErr = RFLErrcode_Success;
-        RFLiGetManager()->lastReason = NAND_RESULT_OK;
-        RFLiGetManager()->beforeCloseReason = NAND_RESULT_OK;
+        RFLiGetManager()->lastReason = 0;
+        RFLiGetManager()->beforeCloseReason = 0;
         RFLiGetManager()->deluxeTex = deluxeTex;
         RFLiGetManager()->brokenType = RFLiFileBrokenType_DBNotFound;
 
@@ -226,7 +226,7 @@ RFLiCtrlBufManager* RFLiGetCtrlBufManager(void) {
 }
 
 s32 RFLiGetLastReason(void) {
-    return !RFLAvailable() ? NAND_RESULT_OK : RFLiGetManager()->lastReason;
+    return !RFLAvailable() ? 0 : RFLiGetManager()->lastReason;
 }
 
 void RFLiSetFileBroken(RFLiFileBrokenType type) {

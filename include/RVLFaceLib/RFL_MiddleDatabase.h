@@ -19,6 +19,10 @@ typedef struct RFLMiddleDB {
     u8 dummy[0x18];
 } RFLMiddleDB;
 
+u32 RFLGetMiddleDBBufferSize(u16);
+
+void RFLInitMiddleDB(RFLMiddleDB*, RFLMiddleDBType, void*, u16);
+
 #ifdef __cplusplus
 }
 #endif

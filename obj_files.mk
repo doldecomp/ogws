@@ -576,7 +576,7 @@ RVL_SDK_O_FILES := \
 	build/RVLFaceLib/RFL_Icon.o \
 	build/asm/RVLFaceLib/RFL_HiddenDatabase.o \
 	build/asm/RVLFaceLib/RFL_Database.o \
-	build/asm/RVLFaceLib/RFL_Controller.o \
+	build/RVLFaceLib/RFL_Controller.o \
 	build/asm/RVLFaceLib/RFL_MiddleDatabase.o \
 	build/asm/RVLFaceLib/RFL_MakeRandomFace.o \
 	build/RVLFaceLib/RFL_DefaultDatabase.o \

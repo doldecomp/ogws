@@ -9,8 +9,8 @@ RFLGetMiddleDBBufferSize:
 /* 801747D0 0016F6D0  54 63 32 B2 */	rlwinm r3, r3, 6, 0xa, 0x19
 /* 801747D4 0016F6D4  4E 80 00 20 */	blr 
 
-.global func_801747D8
-func_801747D8:
+.global RFLInitMiddleDB
+RFLInitMiddleDB:
 /* 801747D8 0016F6D8  2C 03 00 00 */	cmpwi r3, 0
 /* 801747DC 0016F6DC  4D 82 00 20 */	beqlr 
 /* 801747E0 0016F6E0  2C 05 00 00 */	cmpwi r5, 0

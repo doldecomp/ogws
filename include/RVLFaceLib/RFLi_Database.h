@@ -70,6 +70,10 @@ BOOL RFLiIsTemporaryID(const RFLCreateID);
 
 BOOL RFLiIsValidName2(const RFLiCharInfo*);
 
+BOOL RFLiGetIsolation(void);
+
+u16 RFLiCalculateCRC(const void*, u32);
+
 #ifdef __cplusplus
 }
 #endif

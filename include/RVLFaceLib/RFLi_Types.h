@@ -83,6 +83,12 @@ typedef enum {
 } RFLiFileType;
 
 typedef enum {
+    RFLiHiddenType_Any,
+    RFLiHiddenType_No,
+    RFLiHiddenType_Yes,
+} RFLiHiddenType;
+
+typedef enum {
     RFLi_MASKRSL_32 = 32,
     RFLi_MASKRSL_64 = 64,
     RFLi_MASKRSL_128 = 128,

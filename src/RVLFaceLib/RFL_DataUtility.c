@@ -258,11 +258,11 @@ static void copyChar2Additional_(RFLAdditionalInfo* dst,
     u8 height;
     u8 build;
 
-    memcpy(dst->name, src->personal.name, sizeof(wchar_t[RFL_NAME_LEN]));
+    memcpy(dst->name, src->personal.name, sizeof(wchar_t) * RFL_NAME_LEN);
     dst->name[RFL_NAME_LEN] = '\0';
 
     memcpy(dst->creator, src->personal.creator,
-           sizeof(wchar_t[RFL_CREATOR_LEN]));
+           sizeof(wchar_t) * RFL_CREATOR_LEN);
     // @bug Copy paste error
     dst->name[RFL_CREATOR_LEN] = '\0';
 

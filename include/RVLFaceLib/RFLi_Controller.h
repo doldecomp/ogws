@@ -1,36 +1,35 @@
 #ifndef RVL_FACE_LIBRARY_INTERNAL_CONTROLLER_H
 #define RVL_FACE_LIBRARY_INTERNAL_CONTROLLER_H
+#include <RVLFaceLib/RFL_MiddleDatabase.h>
 #include <RVLFaceLib/RFLi_Types.h>
 #include <revolution/CARD.h>
 #include <revolution/MEM.h>
+#include <revolution/WPAD.h>
 #include <types.h>
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-// 0x34919d
-typedef struct RFLiCtrlCharInfo {
-    u8 dummy;
-} RFLiCtrlCharInfo;
+#define REPLACE_BUF_NUM 2
 
-typedef struct RFLiCtrlData {
-    u32 id;                                    // at 0x0
-    u16 secretFlag;                            // at 0x4
-    u16 padding;                               // at 0x6
-    RFLiCtrlCharInfo* data[RFL_CTRL_CHAR_MAX]; // at 0x8
-    u16 deleted;                               // at 0x2EC
-    u16 checksum;                              // at 0x2EE
-} RFLiCtrlData;
+typedef struct RFLiCtrlBuf {
+    u32 identifier;                          // at 0x0
+    u16 secretFlag;                          // at 0x4
+    u16 padding;                             // at 0x6
+    RFLiCharRawData data[RFL_CTRL_CHAR_MAX]; // at 0x8
+    u16 deleted;                             // at 0x2EC
+    u16 checksum;                            // at 0x2EE
+} RFLiCtrlBuf;
 
 typedef struct RFLiCtrlWriteDeleteList {
-    u8 isDelete[100];
+    u8 deleted[100];
 } RFLiCtrlWriteDeleteList;
 
 typedef struct RFLiCtrlBufManager {
-    RFLiCtrlData* buffer[RFL_CTRL_MAX];             // at 0x0
-    BOOL isLoaded[RFL_CTRL_MAX];                    // at 0x10
-    RFLiCtrlData* replaceBuf[2];                    // at 0x20
-    BOOL isRead;                                    // at 0x28
+    RFLiCtrlBuf* buffer[WPAD_MAX_CONTROLLERS];      // at 0x0
+    BOOL loaded[WPAD_MAX_CONTROLLERS];              // at 0x10
+    RFLiCtrlBuf* replaceBuf[REPLACE_BUF_NUM];       // at 0x20
+    BOOL read;                                      // at 0x28
     CARDFileInfo file;                              // at 0x2C
     void* tempBuffer;                               // at 0x40
     void* readBuffer;                               // at 0x44
@@ -47,13 +46,14 @@ typedef struct RFLiCtrlBufManager {
     u16 rwLen;                                      // at 0x66
     u8 retry;                                       // at 0x68
     u8* verifyBuffer;                               // at 0x6C
-    u8 hiddenMDB[24];                               // at 0x0
+    RFLMiddleDB hiddenMDB;                          // at 0x0
 } RFLiCtrlBufManager;
 
-void RFLiInitCtrlBuf(MEMiHeapHead*);
-
+void RFLiInitCtrlBuf(MEMiHeapHead* heap);
+BOOL RFLiCheckCtrlBufferCore(RFLiCtrlBuf* buf, u16 index, RFLiHiddenType type);
+RFLErrcode RFLiLoadControllerAsync(s32 chan, BOOL ch);
 BOOL RFLiGetControllerData(RFLiCharInfo* info, s32 chan, u16 index,
-                           BOOL hidden);
+                           BOOL allowHidden);
 
 #ifdef __cplusplus
 }

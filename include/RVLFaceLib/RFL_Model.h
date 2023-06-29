@@ -55,7 +55,7 @@ RFLErrcode RFLInitCharModel(RFLCharModel* model, RFLDataSource src,
                             RFLResolution res, u32 exprFlags);
 void RFLSetMtx(RFLCharModel* model, const Mtx mvMtx);
 void RFLSetExpression(RFLCharModel* model, RFLExpression expr);
-RFLExpression RFLGetExpression(RFLCharModel* model);
+RFLExpression RFLGetExpression(const RFLCharModel* model);
 GXColor RFLGetFavoriteColor(RFLFavoriteColor color);
 void RFLLoadDrawSetting(const RFLDrawSetting* setting);
 void RFLDrawOpa(const RFLCharModel* model);

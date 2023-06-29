@@ -9,6 +9,9 @@ extern "C" {
 
 #define RFL_HDB_DATA_MAX 10000
 
+// Forward declarations
+typedef struct RFLiCtrlBuf;
+
 typedef struct RFLiHiddenDB {
     u32 identifier;                       // at 0x0
     s16 head;                             // at 0x4
@@ -47,7 +50,7 @@ void RFLiInitHiddenDatabase(void);
 RFLErrcode RFLiLoadHiddenDataAsync(RFLiCharHRawData* hraw, u16 index,
                                    RFLiAsyncCallback cb, u32 arg);
 RFLErrcode RFLiLoadCachedHiddenData(RFLiCharHRawData* hraw, u16 index);
-
+void RFLiWriteCtrlToHiddenDB(struct RFLiCtrlBuf* buf, BOOL ch);
 u16 RFLiCountupHiddenDataNum(RFLSex sex);
 s16 RFLiGetHiddenNext(u16 index);
 s16 RFLiGetHiddenPrev(u16 index);

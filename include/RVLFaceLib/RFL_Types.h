@@ -23,9 +23,7 @@ extern "C" {
 #define RFL_CREATOR_LEN 10
 #define RFL_CREATEID_LEN 8
 
-#define RFL_CTRL_MAX 4
 #define RFL_CTRL_CHAR_MAX 10
-
 #define RFL_DB_CHAR_MAX 100
 
 /**

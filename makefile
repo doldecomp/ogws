@@ -60,7 +60,7 @@ CFLAGS_EGG := -lang c99 -enum int -inline auto -Cpp_exceptions off -RTTI off -pr
 # Compiler flags for the RVL SDK
 CFLAGS_RVL := -lang c99 -enum int -O4,p -inline auto -ipa file -volatileasm -Cpp_exceptions off -RTTI off -proc gekko -fp hard -I- -Iinclude -ir include/MSL -ir include/revolution -nodefaults
 # Compiler flags for the RVL Face Library
-CFLAGS_RFL :=  -lang c99 -enum int -O4,p -inline auto -ipa file -volatileasm -Cpp_exceptions off -RTTI off -proc gekko -fp hard -I- -Iinclude -ir include/MSL -ir include/revolution -nodefaults
+CFLAGS_RFL := -lang c99 -enum int -O4,p -inline auto -ipa file -volatileasm -Cpp_exceptions off -RTTI off -proc gekko -fp hard -I- -Iinclude -ir include/MSL -ir include/revolution -nodefaults
 
 #
 # One-off file flags

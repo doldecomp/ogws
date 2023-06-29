@@ -268,7 +268,7 @@ void RFLSetExpression(RFLCharModel* model, RFLExpression expr) {
     model_->expression = expr;
 }
 
-RFLExpression RFLGetExpression(RFLCharModel* model) {
+RFLExpression RFLGetExpression(const RFLCharModel* model) {
     RFLiCharModel* model_ = (RFLiCharModel*)model;
     return model_->expression;
 }
@@ -278,7 +278,7 @@ GXColor RFLGetFavoriteColor(RFLFavoriteColor color) {
 }
 
 GXColor RFLiGetFacelineColor(const RFLiCharInfo* info) {
-    s32 color = 0;
+    int color = 0;
 
     if (info->faceline.color < ARRAY_LENGTH(cFacelineColor)) {
         color = info->faceline.color;
@@ -290,12 +290,12 @@ GXColor RFLiGetFacelineColor(const RFLiCharInfo* info) {
 void RFLLoadDrawSetting(const RFLDrawSetting* setting) {
     GXSetAlphaCompare(GX_GREATER, 0, GX_AOP_OR, GX_NEVER, 0);
     GXSetBlendMode(GX_BM_BLEND, GX_BL_SRCALPHA, GX_BL_INVSRCALPHA, GX_LO_COPY);
-    GXSetZMode(1, GX_LEQUAL, 1);
+    GXSetZMode(TRUE, GX_LEQUAL, TRUE);
     GXSetZCompLoc(setting->compLoc);
-    GXSetColorUpdate(1);
-    GXSetAlphaUpdate(1);
-    GXSetDither(0);
-    GXSetDstAlpha(0, 0);
+    GXSetColorUpdate(TRUE);
+    GXSetAlphaUpdate(TRUE);
+    GXSetDither(FALSE);
+    GXSetDstAlpha(FALSE, 0);
 
     if (setting->lightEnable) {
         GXSetTevDirect(GX_TEVSTAGE1);

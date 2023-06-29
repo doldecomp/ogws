@@ -94,7 +94,7 @@ static void endWorkingCloseReason_(RFLErrcode err, s32 reason) {
     RFLiSetWorking(FALSE);
     if (err == RFLErrcode_Success) {
         RFLiGetManager()->lastErrCode = RFLiGetManager()->beforeCloseErr;
-        // @bug Reason (NAND code) set to RFLErrcode
+        // @bug Should be beforeCloseReason
         RFLiGetManager()->lastReason = RFLiGetManager()->beforeCloseErr;
     } else {
         RFLiGetManager()->lastErrCode = err;
