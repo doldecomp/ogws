@@ -1,9 +1,6 @@
-# TODO: Finish labeling
-
 .include "macros.inc"
 
 .section .text, "ax"
-
 .global RFLGetMiddleDBBufferSize
 RFLGetMiddleDBBufferSize:
 /* 801747D0 0016F6D0  54 63 32 B2 */	rlwinm r3, r3, 6, 0xa, 0x19
@@ -59,8 +56,8 @@ lbl_8017486C:
 /* 8017487C 0016F77C  4B E8 F8 88 */	b memset
 /* 80174880 0016F780  4E 80 00 20 */	blr 
 
-.global lbl_80174884
-lbl_80174884:
+.global updateHDBcallback_
+updateHDBcallback_:
 /* 80174884 0016F784  94 21 FF 90 */	stwu r1, -0x70(r1)
 /* 80174888 0016F788  7C 08 02 A6 */	mflr r0
 /* 8017488C 0016F78C  90 01 00 74 */	stw r0, 0x74(r1)
@@ -137,7 +134,7 @@ lbl_80174960:
 /* 80174990 0016F890  7C 03 00 00 */	cmpw r3, r0
 /* 80174994 0016F894  40 80 00 48 */	bge lbl_801749DC
 /* 80174998 0016F898  53 E4 78 A0 */	rlwimi r4, r31, 0xf, 2, 0x10
-/* 8017499C 0016F89C  3C A0 80 17 */	lis r5, lbl_80174884@ha
+/* 8017499C 0016F89C  3C A0 80 17 */	lis r5, updateHDBcallback_@ha
 /* 801749A0 0016F8A0  90 9E 00 10 */	stw r4, 0x10(r30)
 /* 801749A4 0016F8A4  54 80 10 1E */	rlwinm r0, r4, 2, 0, 0xf
 /* 801749A8 0016F8A8  7C 00 8E 70 */	srawi r0, r0, 0x11
@@ -145,7 +142,7 @@ lbl_80174960:
 /* 801749B0 0016F8B0  A0 7E 00 0E */	lhz r3, 0xe(r30)
 /* 801749B4 0016F8B4  54 04 04 3E */	clrlwi r4, r0, 0x10
 /* 801749B8 0016F8B8  80 FE 00 08 */	lwz r7, 8(r30)
-/* 801749BC 0016F8BC  38 A5 48 84 */	addi r5, r5, lbl_80174884@l
+/* 801749BC 0016F8BC  38 A5 48 84 */	addi r5, r5, updateHDBcallback_@l
 /* 801749C0 0016F8C0  54 60 30 32 */	slwi r0, r3, 6
 /* 801749C4 0016F8C4  7C 67 02 14 */	add r3, r7, r0
 /* 801749C8 0016F8C8  4B FF CF 9D */	bl RFLiLoadHiddenDataAsync
@@ -195,8 +192,8 @@ lbl_80174A50:
 /* 80174A64 0016F964  38 21 00 70 */	addi r1, r1, 0x70
 /* 80174A68 0016F968  4E 80 00 20 */	blr 
 
-.global func_80174A6C
-func_80174A6C:
+.global loadHiddenDataSync_
+loadHiddenDataSync_:
 /* 80174A6C 0016F96C  94 21 FF 90 */	stwu r1, -0x70(r1)
 /* 80174A70 0016F970  7C 08 02 A6 */	mflr r0
 /* 80174A74 0016F974  90 01 00 74 */	stw r0, 0x74(r1)
@@ -300,8 +297,8 @@ lbl_80174BBC:
 /* 80174BD8 0016FAD8  38 21 00 70 */	addi r1, r1, 0x70
 /* 80174BDC 0016FADC  4E 80 00 20 */	blr 
 
-.global func_80174BE0
-func_80174BE0:
+.global updateHiddenOld_
+updateHiddenOld_:
 /* 80174BE0 0016FAE0  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 80174BE4 0016FAE4  7C 08 02 A6 */	mflr r0
 /* 80174BE8 0016FAE8  90 01 00 24 */	stw r0, 0x24(r1)
@@ -366,17 +363,17 @@ lbl_80174CA4:
 /* 80174CB8 0016FBB8  90 9C 00 10 */	stw r4, 0x10(r28)
 /* 80174CBC 0016FBBC  41 82 00 10 */	beq lbl_80174CCC
 /* 80174CC0 0016FBC0  7F 83 E3 78 */	mr r3, r28
-/* 80174CC4 0016FBC4  4B FF FD A9 */	bl func_80174A6C
+/* 80174CC4 0016FBC4  4B FF FD A9 */	bl loadHiddenDataSync_
 /* 80174CC8 0016FBC8  48 00 00 4C */	b lbl_80174D14
 lbl_80174CCC:
 /* 80174CCC 0016FBCC  54 80 88 1E */	rlwinm r0, r4, 0x11, 0, 0xf
-/* 80174CD0 0016FBD0  3C A0 80 17 */	lis r5, lbl_80174884@ha
+/* 80174CD0 0016FBD0  3C A0 80 17 */	lis r5, updateHDBcallback_@ha
 /* 80174CD4 0016FBD4  7C 03 8E 70 */	srawi r3, r0, 0x11
 /* 80174CD8 0016FBD8  7F 86 E3 78 */	mr r6, r28
 /* 80174CDC 0016FBDC  54 80 10 1E */	rlwinm r0, r4, 2, 0, 0xf
 /* 80174CE0 0016FBE0  80 9C 00 08 */	lwz r4, 8(r28)
 /* 80174CE4 0016FBE4  54 63 30 32 */	slwi r3, r3, 6
-/* 80174CE8 0016FBE8  38 A5 48 84 */	addi r5, r5, lbl_80174884@l
+/* 80174CE8 0016FBE8  38 A5 48 84 */	addi r5, r5, updateHDBcallback_@l
 /* 80174CEC 0016FBEC  7C 00 8E 70 */	srawi r0, r0, 0x11
 /* 80174CF0 0016FBF0  7C 64 1A 14 */	add r3, r4, r3
 /* 80174CF4 0016FBF4  54 04 04 3E */	clrlwi r4, r0, 0x10
@@ -398,8 +395,8 @@ lbl_80174D14:
 /* 80174D2C 0016FC2C  38 21 00 20 */	addi r1, r1, 0x20
 /* 80174D30 0016FC30  4E 80 00 20 */	blr 
 
-.global func_80174D34
-func_80174D34:
+.global loadHiddenRandomSync_
+loadHiddenRandomSync_:
 /* 80174D34 0016FC34  94 21 FF 90 */	stwu r1, -0x70(r1)
 /* 80174D38 0016FC38  7C 08 02 A6 */	mflr r0
 /* 80174D3C 0016FC3C  90 01 00 74 */	stw r0, 0x74(r1)
@@ -488,8 +485,8 @@ lbl_80174E48:
 /* 80174E68 0016FD68  38 21 00 70 */	addi r1, r1, 0x70
 /* 80174E6C 0016FD6C  4E 80 00 20 */	blr 
 
-.global lbl_80174E70
-lbl_80174E70:
+.global updateHDBRandcallback_
+updateHDBRandcallback_:
 /* 80174E70 0016FD70  94 21 FF A0 */	stwu r1, -0x60(r1)
 /* 80174E74 0016FD74  7C 08 02 A6 */	mflr r0
 /* 80174E78 0016FD78  90 01 00 64 */	stw r0, 0x64(r1)
@@ -548,12 +545,12 @@ lbl_80174F08:
 /* 80174F3C 0016FE3C  40 80 00 38 */	bge lbl_80174F74
 /* 80174F40 0016FE40  A0 7F 00 0E */	lhz r3, 0xe(r31)
 /* 80174F44 0016FE44  38 04 FF FF */	addi r0, r4, -1
-/* 80174F48 0016FE48  3C A0 80 17 */	lis r5, lbl_80174E70@ha
+/* 80174F48 0016FE48  3C A0 80 17 */	lis r5, updateHDBRandcallback_@ha
 /* 80174F4C 0016FE4C  7F E6 FB 78 */	mr r6, r31
 /* 80174F50 0016FE50  54 63 30 32 */	slwi r3, r3, 6
 /* 80174F54 0016FE54  54 04 04 3E */	clrlwi r4, r0, 0x10
 /* 80174F58 0016FE58  7C 67 1A 14 */	add r3, r7, r3
-/* 80174F5C 0016FE5C  38 A5 4E 70 */	addi r5, r5, lbl_80174E70@l
+/* 80174F5C 0016FE5C  38 A5 4E 70 */	addi r5, r5, updateHDBRandcallback_@l
 /* 80174F60 0016FE60  4B FF CA 05 */	bl RFLiLoadHiddenDataAsync
 /* 80174F64 0016FE64  2C 03 00 06 */	cmpwi r3, 6
 /* 80174F68 0016FE68  41 82 00 3C */	beq lbl_80174FA4
@@ -602,8 +599,8 @@ lbl_80174FEC:
 /* 80174FFC 0016FEFC  38 21 00 60 */	addi r1, r1, 0x60
 /* 80175000 0016FF00  4E 80 00 20 */	blr 
 
-.global func_80175004
-func_80175004:
+.global updateHiddenRandom_
+updateHiddenRandom_:
 /* 80175004 0016FF04  94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 80175008 0016FF08  7C 08 02 A6 */	mflr r0
 /* 8017500C 0016FF0C  90 01 00 34 */	stw r0, 0x34(r1)
@@ -786,12 +783,12 @@ lbl_80175290:
 /* 80175298 00170198  54 04 04 3E */	clrlwi r4, r0, 0x10
 /* 8017529C 0017019C  41 82 00 10 */	beq lbl_801752AC
 /* 801752A0 001701A0  7F 63 DB 78 */	mr r3, r27
-/* 801752A4 001701A4  4B FF FA 91 */	bl func_80174D34
+/* 801752A4 001701A4  4B FF FA 91 */	bl loadHiddenRandomSync_
 /* 801752A8 001701A8  48 00 00 20 */	b lbl_801752C8
 lbl_801752AC:
-/* 801752AC 001701AC  3C A0 80 17 */	lis r5, lbl_80174E70@ha
+/* 801752AC 001701AC  3C A0 80 17 */	lis r5, updateHDBRandcallback_@ha
 /* 801752B0 001701B0  7F 66 DB 78 */	mr r6, r27
-/* 801752B4 001701B4  38 A5 4E 70 */	addi r5, r5, lbl_80174E70@l
+/* 801752B4 001701B4  38 A5 4E 70 */	addi r5, r5, updateHDBRandcallback_@l
 /* 801752B8 001701B8  4B FF C6 AD */	bl RFLiLoadHiddenDataAsync
 /* 801752BC 001701BC  2C 03 00 06 */	cmpwi r3, 6
 /* 801752C0 001701C0  41 82 00 08 */	beq lbl_801752C8
@@ -804,8 +801,8 @@ lbl_801752C8:
 /* 801752D8 001701D8  38 21 00 30 */	addi r1, r1, 0x30
 /* 801752DC 001701DC  4E 80 00 20 */	blr 
 
-.global func_801752E0
-func_801752E0:
+.global updateRandom_
+updateRandom_:
 /* 801752E0 001701E0  94 21 FF 40 */	stwu r1, -0xc0(r1)
 /* 801752E4 001701E4  7C 08 02 A6 */	mflr r0
 /* 801752E8 001701E8  90 01 00 C4 */	stw r0, 0xc4(r1)
@@ -875,8 +872,8 @@ lbl_801753A0:
 /* 801753D0 001702D0  38 21 00 C0 */	addi r1, r1, 0xc0
 /* 801753D4 001702D4  4E 80 00 20 */	blr 
 
-.global func_801753D8
-func_801753D8:
+.global RFLUpdateMiddleDBAsync
+RFLUpdateMiddleDBAsync:
 /* 801753D8 001702D8  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 801753DC 001702DC  7C 08 02 A6 */	mflr r0
 /* 801753E0 001702E0  2C 03 00 00 */	cmpwi r3, 0
@@ -893,7 +890,7 @@ lbl_801753FC:
 /* 80175408 00170308  7F E3 FB 78 */	mr r3, r31
 /* 8017540C 0017030C  38 80 00 00 */	li r4, 0
 /* 80175410 00170310  38 A0 00 00 */	li r5, 0
-/* 80175414 00170314  48 00 00 21 */	bl func_80175434
+/* 80175414 00170314  48 00 00 21 */	bl RFLiUpdateMiddleDBAsync
 /* 80175418 00170318  48 00 00 08 */	b lbl_80175420
 lbl_8017541C:
 /* 8017541C 0017031C  38 60 00 01 */	li r3, 1
@@ -904,8 +901,8 @@ lbl_80175420:
 /* 8017542C 0017032C  38 21 00 10 */	addi r1, r1, 0x10
 /* 80175430 00170330  4E 80 00 20 */	blr 
 
-.global func_80175434
-func_80175434:
+.global RFLiUpdateMiddleDBAsync
+RFLiUpdateMiddleDBAsync:
 /* 80175434 00170334  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 80175438 00170338  7C 08 02 A6 */	mflr r0
 /* 8017543C 0017033C  2C 03 00 00 */	cmpwi r3, 0
@@ -959,23 +956,23 @@ lbl_801754E0:
 lbl_801754EC:
 /* 801754EC 001703EC  7F A3 EB 78 */	mr r3, r29
 /* 801754F0 001703F0  7F C4 F3 78 */	mr r4, r30
-/* 801754F4 001703F4  4B FF FB 11 */	bl func_80175004
+/* 801754F4 001703F4  4B FF FB 11 */	bl updateHiddenRandom_
 /* 801754F8 001703F8  48 00 00 34 */	b lbl_8017552C
 lbl_801754FC:
 /* 801754FC 001703FC  7F A3 EB 78 */	mr r3, r29
 /* 80175500 00170400  7F C5 F3 78 */	mr r5, r30
 /* 80175504 00170404  38 80 00 00 */	li r4, 0
-/* 80175508 00170408  4B FF F6 D9 */	bl func_80174BE0
+/* 80175508 00170408  4B FF F6 D9 */	bl updateHiddenOld_
 /* 8017550C 0017040C  48 00 00 20 */	b lbl_8017552C
 lbl_80175510:
 /* 80175510 00170410  7F A3 EB 78 */	mr r3, r29
 /* 80175514 00170414  7F C5 F3 78 */	mr r5, r30
 /* 80175518 00170418  38 80 00 01 */	li r4, 1
-/* 8017551C 0017041C  4B FF F6 C5 */	bl func_80174BE0
+/* 8017551C 0017041C  4B FF F6 C5 */	bl updateHiddenOld_
 /* 80175520 00170420  48 00 00 0C */	b lbl_8017552C
 lbl_80175524:
 /* 80175524 00170424  7F A3 EB 78 */	mr r3, r29
-/* 80175528 00170428  4B FF FD B9 */	bl func_801752E0
+/* 80175528 00170428  4B FF FD B9 */	bl updateRandom_
 lbl_8017552C:
 /* 8017552C 0017042C  4B FF 41 D5 */	bl RFLiIsWorking
 /* 80175530 00170430  2C 03 00 00 */	cmpwi r3, 0
@@ -996,8 +993,8 @@ lbl_80175550:
 /* 80175564 00170464  38 21 00 20 */	addi r1, r1, 0x20
 /* 80175568 00170468  4E 80 00 20 */	blr 
 
-.global func_8017556C
-func_8017556C:
+.global RFLGetMiddleDBStoredSize
+RFLGetMiddleDBStoredSize:
 /* 8017556C 0017046C  A0 63 00 0E */	lhz r3, 0xe(r3)
 /* 80175570 00170470  4E 80 00 20 */	blr 
 
@@ -1048,8 +1045,8 @@ lbl_801755F8:
 /* 80175608 00170508  38 21 00 10 */	addi r1, r1, 0x10
 /* 8017560C 0017050C  4E 80 00 20 */	blr 
 
-.global func_80175610
-func_80175610:
+.global RFLSetMiddleDBRandomMask
+RFLSetMiddleDBRandomMask:
 /* 80175610 00170510  80 03 00 00 */	lwz r0, 0(r3)
 /* 80175614 00170514  2C 00 00 03 */	cmpwi r0, 3
 /* 80175618 00170518  4C 82 00 20 */	bnelr 
@@ -1058,8 +1055,8 @@ func_80175610:
 /* 80175624 00170524  98 C3 00 12 */	stb r6, 0x12(r3)
 /* 80175628 00170528  4E 80 00 20 */	blr 
 
-.global func_8017562C
-func_8017562C:
+.global RFLSetMiddleDBHiddenMask
+RFLSetMiddleDBHiddenMask:
 /* 8017562C 0017052C  80 03 00 00 */	lwz r0, 0(r3)
 /* 80175630 00170530  2C 00 00 00 */	cmpwi r0, 0
 /* 80175634 00170534  41 82 00 14 */	beq lbl_80175648
@@ -1076,8 +1073,8 @@ lbl_80175650:
 /* 80175658 00170558  90 03 00 10 */	stw r0, 0x10(r3)
 /* 8017565C 0017055C  4E 80 00 20 */	blr 
 
-.global func_80175660
-func_80175660:
+.global RFLiAddMiddleDBUserData
+RFLiAddMiddleDBUserData:
 /* 80175660 00170560  94 21 FF 60 */	stwu r1, -0xa0(r1)
 /* 80175664 00170564  7C 08 02 A6 */	mflr r0
 /* 80175668 00170568  2C 03 00 00 */	cmpwi r3, 0
@@ -1152,8 +1149,8 @@ lbl_8017574C:
 /* 8017575C 0017065C  38 21 00 A0 */	addi r1, r1, 0xa0
 /* 80175760 00170660  4E 80 00 20 */	blr 
 
-.global func_80175764
-func_80175764:
+.global RFLAddMiddleDBStoreData
+RFLAddMiddleDBStoreData:
 /* 80175764 00170664  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80175768 00170668  7C 08 02 A6 */	mflr r0
 /* 8017576C 0017066C  2C 03 00 00 */	cmpwi r3, 0
@@ -1187,7 +1184,7 @@ lbl_801757B4:
 lbl_801757D0:
 /* 801757D0 001706D0  7F C3 F3 78 */	mr r3, r30
 /* 801757D4 001706D4  7F E4 FB 78 */	mr r4, r31
-/* 801757D8 001706D8  4B FF FE 89 */	bl func_80175660
+/* 801757D8 001706D8  4B FF FE 89 */	bl RFLiAddMiddleDBUserData
 lbl_801757DC:
 /* 801757DC 001706DC  80 01 00 14 */	lwz r0, 0x14(r1)
 /* 801757E0 001706E0  83 E1 00 0C */	lwz r31, 0xc(r1)

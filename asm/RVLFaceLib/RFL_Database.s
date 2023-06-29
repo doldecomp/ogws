@@ -1,9 +1,6 @@
-# TODO: Finish labeling
-
 .include "macros.inc"
 
 .section .text, "ax"
-
 .global RFLiInitDatabase
 RFLiInitDatabase:
 /* 801724E0 0016D3E0  94 21 FF F0 */	stwu r1, -0x10(r1)
@@ -332,8 +329,8 @@ saveDBcallback_:
 /* 80172944 0016D844  38 21 00 10 */	addi r1, r1, 0x10
 /* 80172948 0016D848  4E 80 00 20 */	blr
 
-.global lbl_8017294C
-lbl_8017294C:
+.global saveDBopencallback_
+saveDBopencallback_:
 /* 8017294C 0016D84C  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80172950 0016D850  7C 08 02 A6 */	mflr r0
 /* 80172954 0016D854  90 01 00 14 */	stw r0, 0x14(r1)
@@ -365,8 +362,8 @@ lbl_801729AC:
 /* 801729B4 0016D8B4  38 21 00 10 */	addi r1, r1, 0x10
 /* 801729B8 0016D8B8  4E 80 00 20 */	blr 
 
-.global lbl_801729BC
-lbl_801729BC:
+.global saveDBmultiopencallback_
+saveDBmultiopencallback_:
 /* 801729BC 0016D8BC  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 801729C0 0016D8C0  7C 08 02 A6 */	mflr r0
 /* 801729C4 0016D8C4  90 01 00 14 */	stw r0, 0x14(r1)
@@ -401,8 +398,8 @@ lbl_80172A24:
 /* 80172A30 0016D930  38 21 00 10 */	addi r1, r1, 0x10
 /* 80172A34 0016D934  4E 80 00 20 */	blr 
 
-.global lbl_80172A38
-lbl_80172A38:
+.global RFLiSaveDatabase
+RFLiSaveDatabase:
 /* 80172A38 0016D938  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80172A3C 0016D93C  7C 08 02 A6 */	mflr r0
 /* 80172A40 0016D940  90 01 00 14 */	stw r0, 0x14(r1)
@@ -420,16 +417,16 @@ lbl_80172A68:
 /* 80172A6C 0016D96C  40 80 00 60 */	bge lbl_80172ACC
 /* 80172A70 0016D970  48 00 00 34 */	b lbl_80172AA4
 lbl_80172A74:
-/* 80172A74 0016D974  3C A0 80 17 */	lis r5, lbl_801729BC@ha
+/* 80172A74 0016D974  3C A0 80 17 */	lis r5, saveDBmultiopencallback_@ha
 /* 80172A78 0016D978  38 60 00 00 */	li r3, 0
-/* 80172A7C 0016D97C  38 A5 29 BC */	addi r5, r5, lbl_801729BC@l
+/* 80172A7C 0016D97C  38 A5 29 BC */	addi r5, r5, saveDBmultiopencallback_@l
 /* 80172A80 0016D980  38 80 00 02 */	li r4, 2
 /* 80172A84 0016D984  4B FF 76 A5 */	bl RFLiOpenAsync
 /* 80172A88 0016D988  48 00 00 44 */	b lbl_80172ACC
 lbl_80172A8C:
-/* 80172A8C 0016D98C  3C A0 80 17 */	lis r5, lbl_8017294C@ha
+/* 80172A8C 0016D98C  3C A0 80 17 */	lis r5, saveDBopencallback_@ha
 /* 80172A90 0016D990  38 60 00 00 */	li r3, 0
-/* 80172A94 0016D994  38 A5 29 4C */	addi r5, r5, lbl_8017294C@l
+/* 80172A94 0016D994  38 A5 29 4C */	addi r5, r5, saveDBopencallback_@l
 /* 80172A98 0016D998  38 80 00 02 */	li r4, 2
 /* 80172A9C 0016D99C  4B FF 76 8D */	bl RFLiOpenAsync
 /* 80172AA0 0016D9A0  48 00 00 2C */	b lbl_80172ACC
@@ -451,8 +448,8 @@ lbl_80172ACC:
 /* 80172AD8 0016D9D8  38 21 00 10 */	addi r1, r1, 0x10
 /* 80172ADC 0016D9DC  4E 80 00 20 */	blr 
 
-.global func_80172AE0
-func_80172AE0:
+.global RFLiSaveDatabaseAsync
+RFLiSaveDatabaseAsync:
 /* 80172AE0 0016D9E0  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 80172AE4 0016D9E4  7C 08 02 A6 */	mflr r0
 /* 80172AE8 0016D9E8  90 01 00 24 */	stw r0, 0x24(r1)
@@ -510,11 +507,11 @@ lbl_80172B9C:
 /* 80172B9C 0016DA9C  80 BF 00 00 */	lwz r5, 0(r31)
 /* 80172BA0 0016DAA0  3C 60 00 02 */	lis r3, 0x0001F1E0@ha
 /* 80172BA4 0016DAA4  38 03 F1 E0 */	addi r0, r3, 0x0001F1E0@l
-/* 80172BA8 0016DAA8  3C 80 80 17 */	lis r4, lbl_80172A38@ha
+/* 80172BA8 0016DAA8  3C 80 80 17 */	lis r4, RFLiSaveDatabase@ha
 /* 80172BAC 0016DAAC  38 C0 00 00 */	li r6, 0
 /* 80172BB0 0016DAB0  3C A5 00 02 */	addis r5, r5, 2
 /* 80172BB4 0016DAB4  B0 C5 F1 DE */	sth r6, -0xe22(r5)
-/* 80172BB8 0016DAB8  38 84 2A 38 */	addi r4, r4, lbl_80172A38@l
+/* 80172BB8 0016DAB8  38 84 2A 38 */	addi r4, r4, RFLiSaveDatabase@l
 /* 80172BBC 0016DABC  38 7F 00 78 */	addi r3, r31, 0x78
 /* 80172BC0 0016DAC0  80 BF 00 00 */	lwz r5, 0(r31)
 /* 80172BC4 0016DAC4  90 BF 00 60 */	stw r5, 0x60(r31)

@@ -839,23 +839,23 @@ _unwind_saveDBcallback_:
     .long 0x00080000
     .long 0x00000000
 
-.global _unwind_lbl_8017294C
-_unwind_lbl_8017294C:
+.global _unwind_saveDBopencallback_
+_unwind_saveDBopencallback_:
     .long 0x00080000
     .long 0x00000000
 
-.global _unwind_lbl_801729BC
-_unwind_lbl_801729BC:
+.global _unwind_saveDBmultiopencallback_
+_unwind_saveDBmultiopencallback_:
     .long 0x08080000
     .long 0x00000000
 
-.global _unwind_lbl_80172A38
-_unwind_lbl_80172A38:
+.global _unwind_RFLiSaveDatabase
+_unwind_RFLiSaveDatabase:
     .long 0x08080000
     .long 0x00000000
 
-.global _unwind_func_80172AE0
-_unwind_func_80172AE0:
+.global _unwind_RFLiSaveDatabaseAsync
+_unwind_RFLiSaveDatabaseAsync:
     .long 0x18080000
     .long 0x00000000
 
@@ -984,48 +984,48 @@ _unwind_RFLIsAvailableControllerData:
     .long 0x10080000
     .long 0x00000000
 
-.global _unwind_lbl_80174884
-_unwind_lbl_80174884:
+.global _unwind_updateHDBcallback_
+_unwind_updateHDBcallback_:
     .long 0x18080000
     .long 0x00000000
 
-.global _unwind_func_80174A6C
-_unwind_func_80174A6C:
+.global _unwind_loadHiddenDataSync_
+_unwind_loadHiddenDataSync_:
     .long 0x20080000
     .long 0x00000000
 
-.global _unwind_func_80174BE0
-_unwind_func_80174BE0:
+.global _unwind_updateHiddenOld_
+_unwind_updateHiddenOld_:
     .long 0x20080000
     .long 0x00000000
 
-.global _unwind_func_80174D34
-_unwind_func_80174D34:
+.global _unwind_loadHiddenRandomSync_
+_unwind_loadHiddenRandomSync_:
     .long 0x20080000
     .long 0x00000000
 
-.global _unwind_lbl_80174E70
-_unwind_lbl_80174E70:
+.global _unwind_updateHDBRandcallback_
+_unwind_updateHDBRandcallback_:
     .long 0x10080000
     .long 0x00000000
 
-.global _unwind_func_80175004
-_unwind_func_80175004:
+.global _unwind_updateHiddenRandom_
+_unwind_updateHiddenRandom_:
     .long 0x48080000
     .long 0x00000000
 
-.global _unwind_func_801752E0
-_unwind_func_801752E0:
+.global _unwind_updateRandom_
+_unwind_updateRandom_:
     .long 0x20080000
     .long 0x00000000
 
-.global _unwind_func_801753D8
-_unwind_func_801753D8:
+.global _unwind_RFLUpdateMiddleDBAsync
+_unwind_RFLUpdateMiddleDBAsync:
     .long 0x08080000
     .long 0x00000000
 
-.global _unwind_func_80175434
-_unwind_func_80175434:
+.global _unwind_RFLiUpdateMiddleDBAsync
+_unwind_RFLiUpdateMiddleDBAsync:
     .long 0x18080000
     .long 0x00000000
 
@@ -1034,13 +1034,13 @@ _unwind_RFLiGetCharInfoMiddleDB:
     .long 0x10080000
     .long 0x00000000
 
-.global _unwind_func_80175660
-_unwind_func_80175660:
+.global _unwind_RFLiAddMiddleDBUserData
+_unwind_RFLiAddMiddleDBUserData:
     .long 0x10080000
     .long 0x00000000
 
-.global _unwind_func_80175764
-_unwind_func_80175764:
+.global _unwind_RFLAddMiddleDBStoreData
+_unwind_RFLAddMiddleDBStoreData:
     .long 0x10080000
     .long 0x00000000
 
@@ -1054,13 +1054,13 @@ _unwind_RFLi_MakeRandomFace_Core:
     .long 0x80080000
     .long 0x00000000
 
-.global _unwind_func_80176344
-_unwind_func_80176344:
+.global _unwind_RFLi_GetHairType
+_unwind_RFLi_GetHairType:
     .long 0x48080000
     .long 0x00000000
 
-.global _unwind_func_80176474
-_unwind_func_80176474:
+.global _unwind_RFLi_GetGlassType
+_unwind_RFLi_GetGlassType:
     .long 0x08080000
     .long 0x00000000
 

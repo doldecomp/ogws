@@ -1,5 +1,3 @@
-# TODO: finish labeling
-
 .include "macros.inc"
 
 .section .data, "wa"
@@ -28,7 +26,6 @@ lbl_803B8578:
 .global lbl_803B8728
 lbl_803B8728:
 	.incbin "baserom.dol", 0x3B4828, 0x18
-
 
 .section .rodata, "a"
 .balign 0x8
@@ -253,7 +250,7 @@ lbl_801759BC:
 /* 80175A8C 0017098C  7C C7 30 AE */	lbzx r6, r7, r6
 /* 80175A90 00170990  50 C0 35 B2 */	rlwimi r0, r6, 6, 0x16, 0x19
 /* 80175A94 00170994  B0 18 00 00 */	sth r0, 0(r24)
-/* 80175A98 00170998  48 00 08 AD */	bl func_80176344
+/* 80175A98 00170998  48 00 08 AD */	bl RFLi_GetHairType
 /* 80175A9C 0017099C  A0 18 00 02 */	lhz r0, 2(r24)
 /* 80175AA0 001709A0  50 60 4C 2C */	rlwimi r0, r3, 9, 0x10, 0x16
 /* 80175AA4 001709A4  B0 18 00 02 */	sth r0, 2(r24)
@@ -736,7 +733,7 @@ lbl_801761D4:
 /* 801761DC 001710DC  B0 18 00 10 */	sth r0, 0x10(r24)
 lbl_801761E0:
 /* 801761E0 001710E0  7F 63 DB 78 */	mr r3, r27
-/* 801761E4 001710E4  48 00 02 91 */	bl func_80176474
+/* 801761E4 001710E4  48 00 02 91 */	bl RFLi_GetGlassType
 /* 801761E8 001710E8  A0 98 00 12 */	lhz r4, 0x12(r24)
 /* 801761EC 001710EC  50 64 64 26 */	rlwimi r4, r3, 0xc, 0x10, 0x13
 /* 801761F0 001710F0  A0 18 00 14 */	lhz r0, 0x14(r24)
@@ -825,8 +822,8 @@ lbl_801761E0:
 /* 8017633C 0017123C  38 21 06 80 */	addi r1, r1, 0x680
 /* 80176340 00171240  4E 80 00 20 */	blr 
 
-.global func_80176344
-func_80176344:
+.global RFLi_GetHairType
+RFLi_GetHairType:
 /* 80176344 00171244  94 21 FA A0 */	stwu r1, -0x560(r1)
 /* 80176348 00171248  7C 08 02 A6 */	mflr r0
 /* 8017634C 0017124C  90 01 05 64 */	stw r0, 0x564(r1)
@@ -905,8 +902,8 @@ lbl_80176370:
 /* 8017646C 0017136C  38 21 05 60 */	addi r1, r1, 0x560
 /* 80176470 00171370  4E 80 00 20 */	blr 
 
-.global func_80176474
-func_80176474:
+.global RFLi_GetGlassType
+RFLi_GetGlassType:
 /* 80176474 00171374  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80176478 00171378  7C 08 02 A6 */	mflr r0
 /* 8017647C 0017137C  90 01 00 14 */	stw r0, 0x14(r1)
