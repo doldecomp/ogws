@@ -51,7 +51,7 @@ typedef struct RFLDrawCoreSetting {
 void RFLSetCoordinate(RFLCoordinateType t1, RFLCoordinateType t2);
 u32 RFLGetModelBufferSize(RFLResolution res, u32 exprFlags);
 RFLErrcode RFLInitCharModel(RFLCharModel* model, RFLDataSource src,
-                            RFLMiddleDB* db, u16 id, void* work,
+                            struct RFLMiddleDB* db, u16 id, void* work,
                             RFLResolution res, u32 exprFlags);
 void RFLSetMtx(RFLCharModel* model, const Mtx mvMtx);
 void RFLSetExpression(RFLCharModel* model, RFLExpression expr);

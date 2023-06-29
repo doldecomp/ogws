@@ -114,6 +114,8 @@ typedef enum {
 typedef void (*RFLIconDrawDoneCallback)(void);
 typedef void (*RFLModelDrawDoneCallback)(void);
 
+typedef u8 RFLCreateID[RFL_CREATEID_LEN];
+
 #ifdef __cplusplus
 }
 #endif

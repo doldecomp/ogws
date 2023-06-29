@@ -7,19 +7,17 @@
 #include <RVLFaceLib/RFLi_NANDAccess.h>
 #include <RVLFaceLib/RFLi_NANDLoader.h>
 #include <RVLFaceLib/RFLi_Types.h>
+#include <revolution/MEM.h>
 #include <types.h>
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-// Forward declarations
-typedef struct MEMiHeapHead;
-
 typedef struct RFLiManager {
     void* workBuffer;                      // at 0x0
-    struct MEMiHeapHead* rootHeap;         // at 0x4
-    struct MEMiHeapHead* systemHeap;       // at 0x8
-    struct MEMiHeapHead* tmpHeap;          // at 0xC
+    MEMiHeapHead* rootHeap;                // at 0x4
+    MEMiHeapHead* systemHeap;              // at 0x8
+    MEMiHeapHead* tmpHeap;                 // at 0xC
     RFLiDBManager dbMgr;                   // at 0x10
     RFLiLoader loader;                     // at 0xC0
     RFLiHDBManager hdbMgr;                 // at 0x16C
@@ -32,7 +30,7 @@ typedef struct RFLiManager {
     s32 lastReason;                        // at 0x1B48
     s32 beforeCloseReason;                 // at 0x1B4C
     RFLiAccessInfo info[RFLiFileType_Max]; // at 0x1B50
-    RFLiCallback systemCb;           // at 0x1F10
+    RFLiCallback systemCb;                 // at 0x1F10
     RFLIconDrawDoneCallback iconDrawCb;    // at 0x1F14
     RFLModelDrawDoneCallback modelDrawCb;  // at 0x1F18
     char UNK_0x1F1C[0x4];

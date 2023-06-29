@@ -277,7 +277,7 @@ GXColor RFLGetFavoriteColor(RFLFavoriteColor color) {
     return cFavoriteColor[color];
 }
 
-GXColor RFLiGetFacelineColor(RFLiCharInfo* info) {
+GXColor RFLiGetFacelineColor(const RFLiCharInfo* info) {
     s32 color = 0;
 
     if (info->faceline.color < ARRAY_LENGTH(cFacelineColor)) {
@@ -371,7 +371,7 @@ void RFLDrawOpaCore(const RFLCharModel* model,
     GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_ZERO, GX_CA_ZERO, GX_CA_ZERO,
                     GX_CA_KONST);
 
-    // @bug Copy-paste error(?)
+    // @bug Copy-paste error
     GXSetTevSwapMode(GX_TEVSTAGE0, setting->tevSwapTable,
                      setting->tevSwapTable);
     GXSetTevSwapMode(GX_TEVSTAGE0, setting->tevSwapTable,

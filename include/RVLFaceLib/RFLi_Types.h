@@ -245,8 +245,10 @@ typedef struct RFLiCharInfo {
     } body; // at 0x16
 
     struct {
-        wchar_t name[RFL_NAME_LEN + 1];
-        wchar_t creator[RFL_CREATOR_LEN + 1];
+        wchar_t name[RFL_NAME_LEN + 1];       // at 0x18
+        wchar_t creator[RFL_CREATOR_LEN + 1]; // at 0x2E
+
+        // at 0x44
         u16 sex : 1;
         u16 bmonth : 4;
         u16 bday : 5;
@@ -255,9 +257,7 @@ typedef struct RFLiCharInfo {
         u16 localOnly : 1;
     } personal; // at 0x18
 
-    struct {
-        u8 data[RFL_CREATEID_LEN];
-    } createID; // at 0x46
+    RFLCreateID createID; // at 0x46
 } RFLiCharInfo;
 
 typedef struct RFLiCharRawData {
@@ -269,10 +269,10 @@ typedef struct RFLiCharRawData {
     u16 favoriteColor : 4;
     u16 favorite : 1;
 
-    wchar_t name[RFL_NAME_LEN];    // at 0x2
-    u8 height;                     // at 0x16
-    u8 build;                      // at 0x17
-    u8 createID[RFL_CREATEID_LEN]; // at 0x18
+    wchar_t name[RFL_NAME_LEN]; // at 0x2
+    u8 height;                  // at 0x16
+    u8 build;                   // at 0x17
+    RFLCreateID createID;       // at 0x18
 
     // at 0x20
     u16 faceType : 3;
@@ -353,10 +353,10 @@ typedef struct RFLiCharHRawData {
     u16 favoriteColor : 4;
     u16 favorite : 1;
 
-    wchar_t name[RFL_NAME_LEN];    // at 0x2
-    u8 height;                     // at 0x16
-    u8 build;                      // at 0x17
-    u8 createID[RFL_CREATEID_LEN]; // at 0x18
+    wchar_t name[RFL_NAME_LEN]; // at 0x2
+    u8 height;                  // at 0x16
+    u8 build;                   // at 0x17
+    RFLCreateID createID;       // at 0x18
 
     // at 0x20
     u16 faceType : 3;

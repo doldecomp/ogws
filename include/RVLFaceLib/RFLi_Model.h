@@ -142,7 +142,7 @@ static inline void RFLiSetCoordinateData(const RFLiCoordinateData* data) {
 u32 RFLiGetExpressionNum(u32 exprFlags);
 void RFLiInitCharModel(RFLCharModel* model, RFLiCharInfo* info, void* work,
                        RFLResolution res, u32 exprFlags);
-GXColor RFLiGetFacelineColor(RFLiCharInfo* info);
+GXColor RFLiGetFacelineColor(const RFLiCharInfo* info);
 void RFLiInitCharModelRes(RFLiCharModelRes* res, const RFLiCharInfo* info);
 void RFLiInitShapeRes(RFLiShapeRes* shape);
 void RFLiInitTexRes(GXTexObj* texObj, RFLiPartsShpTex part, u16 file,

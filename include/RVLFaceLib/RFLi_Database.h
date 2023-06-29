@@ -2,20 +2,19 @@
 #define RVL_FACE_LIBRARY_INTERNAL_DATABASE_H
 #include <RVLFaceLib/RFLi_HiddenDatabase.h>
 #include <RVLFaceLib/RFLi_Types.h>
+#include <revolution/MEM.h>
 #include <revolution/OS.h>
 #include <types.h>
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-// Forward declarations
-typedef struct MEMiHeapHead;
-
 typedef struct RFLiDatabase {
     u32 identifier;                           // at 0x0
     RFLiCharRawData rawData[RFL_DB_CHAR_MAX]; // at 0x4
 
-    u32 isolation : 1; // at 0x1CEC
+    // at 0x1CEC
+    u32 isolation : 1;
     u32 padding1 : 31;
 
     u8 specialInvite[13]; // at 0x1CF0
@@ -46,22 +45,30 @@ typedef struct RFLiDBManager {
     RFLiCRCInfo crcInfo;     // at 0x60
 } RFLiDBManager;
 
-void RFLiInitDatabase(struct MEMiHeapHead*);
+void RFLiInitDatabase(MEMiHeapHead*);
 
 RFLErrcode RFLiBootLoadDatabaseAsync(RFLiCallback);
 
-BOOL RFLiIsSameID(const u8[RFL_CREATEID_LEN], const u8[RFL_CREATEID_LEN]);
+BOOL RFLiIsSameID(const RFLCreateID, const RFLCreateID);
 
 void RFLiConvertRaw2Info(const RFLiCharRawData*, RFLiCharInfo*);
 void RFLiConvertHRaw2Info(const RFLiCharHRawData*, RFLiCharInfo*);
 
 RFLiHiddenDB* RFLiGetHiddenHeader(void);
 
-BOOL RFLiIsValidID(const u8[RFL_CREATEID_LEN]);
+BOOL RFLiIsValidID(const RFLCreateID);
+
+BOOL RFLiIsSpecialID(const RFLCreateID);
 
 BOOL RFLiDBIsLoaded(void);
 
 void RFLiCheckHeaderCRCAsync(RFLiAsyncCallback);
+
+RFLErrcode RFLiGetCharInfo(RFLiCharInfo*, u16);
+
+BOOL RFLiIsTemporaryID(const RFLCreateID);
+
+BOOL RFLiIsValidName2(const RFLiCharInfo*);
 
 #ifdef __cplusplus
 }

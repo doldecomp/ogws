@@ -914,8 +914,8 @@ _unwind_RFLSearchOfficialData:
     .long 0x28080000
     .long 0x00000000
 
-.global _unwind_func_80173788
-_unwind_func_80173788:
+.global _unwind_RFLiIsValidName2
+_unwind_RFLiIsValidName2:
     .long 0x08080000
     .long 0x00000000
 
@@ -1029,8 +1029,8 @@ _unwind_func_80175434:
     .long 0x18080000
     .long 0x00000000
 
-.global _unwind_func_80175574
-_unwind_func_80175574:
+.global _unwind_RFLiGetCharInfoMiddleDB
+_unwind_RFLiGetCharInfoMiddleDB:
     .long 0x10080000
     .long 0x00000000
 

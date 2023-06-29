@@ -7,14 +7,14 @@ extern "C" {
 #endif
 
 // Forward declarations
-typedef struct RFLiCharInfo;
 typedef struct RFLMiddleDB;
 
-RFLErrcode RFLiPickupCharInfo(RFLiCharInfo*, RFLDataSource, struct RFLMiddleDB*,
-                              u16);
-
-BOOL RFLiCheckValidInfo(const RFLiCharInfo*);
-BOOL RFLiIsValidOnNAND(const RFLiCharInfo*);
+BOOL RFLiCheckValidInfo(const RFLiCharInfo* info);
+BOOL RFLiIsValidOnNAND(const RFLiCharInfo* info);
+BOOL RFLiIsSameFaceCore(const RFLiCharInfo* lhs, const RFLiCharInfo* rhs);
+RFLErrcode RFLiPickupCharInfo(RFLiCharInfo* info, RFLDataSource source,
+                              struct RFLMiddleDB* db, u16 index);
+BOOL RFLiCheckBirthday(u8 month, u8 day);
 
 #ifdef __cplusplus
 }

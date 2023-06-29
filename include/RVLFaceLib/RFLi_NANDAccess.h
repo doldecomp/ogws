@@ -2,6 +2,7 @@
 #define RVL_FACE_LIBRARY_INTERNAL_NAND_ACCESS_H
 #include <RVLFaceLib/RFLi_Types.h>
 #include <revolution/FS.h>
+#include <revolution/MEM.h>
 #include <revolution/NAND.h>
 #include <types.h>
 #ifdef __cplusplus
@@ -54,7 +55,7 @@ typedef struct RFLiAccessInfo {
     u8 opened;                       // at 0x1D8
 } RFLiAccessInfo;
 
-void RFLiInitAccessInfo(struct MEMiHeapHead* heap);
+void RFLiInitAccessInfo(MEMiHeapHead* heap);
 void RFLiExitAccessInfo(void);
 BOOL RFLiIsWorking(void);
 void RFLiStartWorking(void);
@@ -63,8 +64,7 @@ void RFLiEndWorking(RFLErrcode err);
 NANDCommandBlock* RFLiSetCommandBlock(RFLiFileType type, RFLiAsyncTag tag);
 RFLiFileType RFLiGetType(NANDCommandBlock* block);
 NANDFileInfo* RFLiGetWorkingFile(RFLiFileType type);
-RFLErrcode RFLiOpenAsync(RFLiFileType type, u8 openMode,
-                         RFLiCallback callback);
+RFLErrcode RFLiOpenAsync(RFLiFileType type, u8 openMode, RFLiCallback callback);
 RFLErrcode RFLiReadAsync(RFLiFileType type, void* dst, u32 size,
                          RFLiCallback callback, s32 offset);
 RFLErrcode RFLiWriteAsync(RFLiFileType type, const void* src, u32 size,

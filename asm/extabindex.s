@@ -1082,11 +1082,11 @@ _index_RFLSearchOfficialData:
     .long 0x000000f4
     .long _unwind_RFLSearchOfficialData
 
-.global _index_func_80173788
-_index_func_80173788:
-    .long func_80173788
+.global _index_RFLiIsValidName2
+_index_RFLiIsValidName2:
+    .long RFLiIsValidName2
     .long 0x00000070
-    .long _unwind_func_80173788
+    .long _unwind_RFLiIsValidName2
 
 .global _index_RFLiGetIsolation
 _index_RFLiGetIsolation:
@@ -1220,11 +1220,11 @@ _index_func_80175434:
     .long 0x00000138
     .long _unwind_func_80175434
 
-.global _index_func_80175574
-_index_func_80175574:
-    .long func_80175574
+.global _index_RFLiGetCharInfoMiddleDB
+_index_RFLiGetCharInfoMiddleDB:
+    .long RFLiGetCharInfoMiddleDB
     .long 0x0000009c
-    .long _unwind_func_80175574
+    .long _unwind_RFLiGetCharInfoMiddleDB
 
 .global _index_func_80175660
 _index_func_80175660:
@@ -1282,7 +1282,7 @@ _index_RFLiPickupCharInfo:
 
 .global _index_copyChar2Additional_
 _index_copyChar2Additional_:
-    .long copyChar2Additional_
+    .long 0x80176cc4
     .long 0x00000190
     .long _unwind_copyChar2Additional_
 

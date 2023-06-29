@@ -1399,8 +1399,8 @@ lbl_80173770:
 /* 80173780 0016E680  38 21 00 20 */	addi r1, r1, 0x20
 /* 80173784 0016E684  4E 80 00 20 */	blr 
 
-.global func_80173788
-func_80173788:
+.global RFLiIsValidName2
+RFLiIsValidName2:
 /* 80173788 0016E688  94 21 FF A0 */	stwu r1, -0x60(r1)
 /* 8017378C 0016E68C  7C 08 02 A6 */	mflr r0
 /* 80173790 0016E690  2C 03 00 00 */	cmpwi r3, 0

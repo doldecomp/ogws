@@ -2,13 +2,11 @@
 #define RVL_FACE_LIBRARY_INTERNAL_CONTROLLER_H
 #include <RVLFaceLib/RFLi_Types.h>
 #include <revolution/CARD.h>
+#include <revolution/MEM.h>
 #include <types.h>
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-// Forward declarations
-typedef struct MEMiHeapHead;
 
 // 0x34919d
 typedef struct RFLiCtrlCharInfo {
@@ -52,7 +50,10 @@ typedef struct RFLiCtrlBufManager {
     u8 hiddenMDB[24];                               // at 0x0
 } RFLiCtrlBufManager;
 
-void RFLiInitCtrlBuf(struct MEMiHeapHead*);
+void RFLiInitCtrlBuf(MEMiHeapHead*);
+
+BOOL RFLiGetControllerData(RFLiCharInfo* info, s32 chan, u16 index,
+                           BOOL hidden);
 
 #ifdef __cplusplus
 }

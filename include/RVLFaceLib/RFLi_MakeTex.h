@@ -6,10 +6,7 @@
 extern "C" {
 #endif
 
-// Forward declarations
-typedef struct RFLiCharInfo;
-
-void RFLiMakeTexture(const struct RFLiCharInfo* info, u8** texBuffer,
+void RFLiMakeTexture(const RFLiCharInfo* info, u8** texBuffer,
                      RFLResolution res);
 
 RFLi_MASKRSL RFLiGetMaxMaskRsl(RFLResolution);
