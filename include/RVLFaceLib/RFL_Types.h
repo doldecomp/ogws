@@ -30,6 +30,8 @@ extern "C" {
  * Common enums
  */
 
+typedef enum { RFLAge_Child, RFLAge_Adult, RFLAge_Elder, RFLAge_All } RFLAge;
+
 typedef enum {
     RFLDataSource_Official,
     RFLDataSource_Hidden,
@@ -96,6 +98,13 @@ typedef enum {
 } RFLFavoriteColor;
 
 typedef enum {
+    RFLRace_Black,
+    RFLRace_White,
+    RFLRace_Asian,
+    RFLRace_All
+} RFLRace;
+
+typedef enum {
     RFLResolution_64 = 64,
     RFLResolution_128 = 128,
     RFLResolution_256 = 256,
@@ -104,6 +113,8 @@ typedef enum {
     RFLResolution_128M = 224,
     RFLResolution_256M = 480
 } RFLResolution;
+
+typedef enum { RFLSex_Male, RFLSex_Female, RFLSex_All } RFLSex;
 
 /**
  * Common typedefs

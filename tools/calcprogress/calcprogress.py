@@ -13,17 +13,17 @@ EXEC_SLICE_GROUPS = [
         Slice(0x800B1750, 0x800B2414),  # .text
     ]),
     SliceGroup("MSL", [
-        Slice(0x800B2414, 0x800C10D4) # .text
-        ]),
+        Slice(0x800B2414, 0x800C10D4)  # .text
+    ]),
     SliceGroup("MetroTRK", [
         Slice(0x800C10D4, 0x800C6810)  # .text
     ]),
     # SliceGroup("RVL SDK", [
     #     Slice(0x800C6810, 0x80167B2C) # .text
     #     ]),
-    # SliceGroup("RVLFaceLib", [
-    #     Slice(0x80167B2C, 0x801774DC) # .text
-    #     ]),
+    SliceGroup("RVLFaceLib", [
+        Slice(0x80167B2C, 0x801774DC)  # .text
+    ]),
     # SliceGroup("NW4R", [
     #     Slice(0x800076E0, 0x800838A8) # .text
     #     ]),

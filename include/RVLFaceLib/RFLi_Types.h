@@ -134,8 +134,6 @@ typedef enum {
     RFLiPartsTex_Max
 } RFLiPartsTex;
 
-typedef enum { RFLSex_Male, RFLSex_Female, RFLSex_All } RFLSex;
-
 /**
  * Common typedefs
  */
