@@ -689,7 +689,7 @@ destroy__17RPSysSceneCreatorFl:
 /* 80184818 0017F718  2C 03 00 00 */	cmpwi r3, 0
 /* 8018481C 0017F71C  41 82 00 0C */	beq lbl_80184828
 /* 80184820 0017F720  80 6D A1 38 */	lwz r3, sInstance__11RPSysSystem-_SDA_BASE_(r13)
-/* 80184824 0017F724  4B FF E9 CD */	bl func_801831F0
+/* 80184824 0017F724  4B FF E9 CD */	bl systemShutDown__11RPSysSystemFv
 lbl_80184828:
 /* 80184828 0017F728  80 01 00 14 */	lwz r0, 0x14(r1)
 /* 8018482C 0017F72C  7C 08 03 A6 */	mtlr r0

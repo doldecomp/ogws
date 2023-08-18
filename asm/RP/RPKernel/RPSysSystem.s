@@ -55,7 +55,7 @@ lbl_804BF4C4:
 __vt__11RPSysSystem:
 	.long 0
     .long 0
-    .long __dt__11RPSysSystem
+    .long __dt__11RPSysSystemFv
 .global __vt__15RPSysConfigData
 __vt__15RPSysConfigData:
 	.incbin "baserom.dol", 0x3B5684, 0x34
@@ -67,11 +67,14 @@ sConfigData__11RPSysSystem:
 	.skip 0x50
 
 .section .text, "ax"
-lbl_80182BAC:
+.global shutdownSystemCallBack__11RPSysSystemFv
+shutdownSystemCallBack__11RPSysSystemFv:
 /* 80182BAC 0017DAAC  80 6D A1 58 */	lwz r3, lbl_804BF4D8-_SDA_BASE_(r13)
 /* 80182BB0 0017DAB0  38 80 00 00 */	li r4, 0
 /* 80182BB4 0017DAB4  48 00 33 C0 */	b lbl_80185F74
-lbl_80182BB8:
+
+.global softResetCallBack__11RPSysSystemFv
+softResetCallBack__11RPSysSystemFv:
 /* 80182BB8 0017DAB8  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80182BBC 0017DABC  7C 08 02 A6 */	mflr r0
 /* 80182BC0 0017DAC0  90 01 00 14 */	stw r0, 0x14(r1)
@@ -103,24 +106,24 @@ lbl_80182C18:
 /* 80182C20 0017DB20  38 21 00 10 */	addi r1, r1, 0x10
 /* 80182C24 0017DB24  4E 80 00 20 */	blr 
 
-.global func_80182C28
-func_80182C28:
+.global setCallBack__11RPSysSystemFv
+setCallBack__11RPSysSystemFv:
 /* 80182C28 0017DB28  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80182C2C 0017DB2C  7C 08 02 A6 */	mflr r0
-/* 80182C30 0017DB30  3C 60 80 18 */	lis r3, lbl_80182BB8@ha
+/* 80182C30 0017DB30  3C 60 80 18 */	lis r3, softResetCallBack__11RPSysSystemFv@ha
 /* 80182C34 0017DB34  90 01 00 14 */	stw r0, 0x14(r1)
-/* 80182C38 0017DB38  38 63 2B B8 */	addi r3, r3, lbl_80182BB8@l
+/* 80182C38 0017DB38  38 63 2B B8 */	addi r3, r3, softResetCallBack__11RPSysSystemFv@l
 /* 80182C3C 0017DB3C  4B F7 32 DD */	bl OSSetResetCallback
-/* 80182C40 0017DB40  3C 60 80 18 */	lis r3, lbl_80182BAC@ha
-/* 80182C44 0017DB44  38 63 2B AC */	addi r3, r3, lbl_80182BAC@l
+/* 80182C40 0017DB40  3C 60 80 18 */	lis r3, shutdownSystemCallBack__11RPSysSystemFv@ha
+/* 80182C44 0017DB44  38 63 2B AC */	addi r3, r3, shutdownSystemCallBack__11RPSysSystemFv@l
 /* 80182C48 0017DB48  4B F7 33 8D */	bl OSSetPowerCallback
 /* 80182C4C 0017DB4C  80 01 00 14 */	lwz r0, 0x14(r1)
 /* 80182C50 0017DB50  7C 08 03 A6 */	mtlr r0
 /* 80182C54 0017DB54  38 21 00 10 */	addi r1, r1, 0x10
 /* 80182C58 0017DB58  4E 80 00 20 */	blr 
 
-.global func_80182C5C
-func_80182C5C:
+.global waitRenderModeChange__11RPSysSystemFv
+waitRenderModeChange__11RPSysSystemFv:
 /* 80182C5C 0017DB5C  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 80182C60 0017DB60  7C 08 02 A6 */	mflr r0
 /* 80182C64 0017DB64  90 01 00 24 */	stw r0, 0x24(r1)
@@ -164,8 +167,8 @@ lbl_80182CDC:
 /* 80182CF4 0017DBF4  38 21 00 20 */	addi r1, r1, 0x20
 /* 80182CF8 0017DBF8  4E 80 00 20 */	blr 
 
-.global func_80182CFC
-func_80182CFC:
+.global setupLocalSettings__11RPSysSystemFv
+setupLocalSettings__11RPSysSystemFv:
 /* 80182CFC 0017DBFC  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80182D00 0017DC00  7C 08 02 A6 */	mflr r0
 /* 80182D04 0017DC04  90 01 00 14 */	stw r0, 0x14(r1)
@@ -213,8 +216,8 @@ lbl_80182D94:
 /* 80182D9C 0017DC9C  38 21 00 10 */	addi r1, r1, 0x10
 /* 80182DA0 0017DCA0  4E 80 00 20 */	blr 
 
-.global func_80182DA4
-func_80182DA4:
+.global createEffectWork__11RPSysSystemFv
+createEffectWork__11RPSysSystemFv:
 /* 80182DA4 0017DCA4  94 21 FF 90 */	stwu r1, -0x70(r1)
 /* 80182DA8 0017DCA8  7C 08 02 A6 */	mflr r0
 /* 80182DAC 0017DCAC  90 01 00 74 */	stw r0, 0x74(r1)
@@ -300,8 +303,8 @@ lbl_80182EAC:
 /* 80182EE4 0017DDE4  38 21 00 70 */	addi r1, r1, 0x70
 /* 80182EE8 0017DDE8  4E 80 00 20 */	blr 
 
-.global func_80182EEC
-func_80182EEC:
+.global createFromSystemHeap__11RPSysSystemFv
+createFromSystemHeap__11RPSysSystemFv:
 /* 80182EEC 0017DDEC  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 80182EF0 0017DDF0  7C 08 02 A6 */	mflr r0
 /* 80182EF4 0017DDF4  90 01 00 24 */	stw r0, 0x24(r1)
@@ -332,7 +335,7 @@ func_80182EEC:
 /* 80182F58 0017DE58  80 7F 00 24 */	lwz r3, 0x24(r31)
 /* 80182F5C 0017DE5C  48 00 34 49 */	bl func_801863A4
 /* 80182F60 0017DE60  7F A3 EB 78 */	mr r3, r29
-/* 80182F64 0017DE64  4B FF FD 99 */	bl func_80182CFC
+/* 80182F64 0017DE64  4B FF FD 99 */	bl setupLocalSettings__11RPSysSystemFv
 /* 80182F68 0017DE68  80 7F 00 24 */	lwz r3, 0x24(r31)
 /* 80182F6C 0017DE6C  48 00 53 15 */	bl func_80188280
 /* 80182F70 0017DE70  80 8D A1 3C */	lwz r4, sRenderModeObj__11RPSysSystem-_SDA_BASE_(r13)
@@ -411,8 +414,8 @@ func_80182EEC:
 /* 80183094 0017DF94  38 21 00 20 */	addi r1, r1, 0x20
 /* 80183098 0017DF98  4E 80 00 20 */	blr 
 
-.global func_8018309C
-func_8018309C:
+.global __ct__11RPSysSystemFv
+__ct__11RPSysSystemFv:
 /* 8018309C 0017DF9C  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 801830A0 0017DFA0  7C 08 02 A6 */	mflr r0
 /* 801830A4 0017DFA4  3C 80 80 3C */	lis r4, __vt__11RPSysSystem@ha
@@ -469,8 +472,8 @@ func_8018309C:
 /* 80183170 0017E070  38 21 00 20 */	addi r1, r1, 0x20
 /* 80183174 0017E074  4E 80 00 20 */	blr 
 
-.global __dt__11RPSysSystem
-__dt__11RPSysSystem:
+.global __dt__11RPSysSystemFv
+__dt__11RPSysSystemFv:
 /* 80183178 0017E078  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8018317C 0017E07C  7C 08 02 A6 */	mflr r0
 /* 80183180 0017E080  2C 03 00 00 */	cmpwi r3, 0
@@ -489,43 +492,44 @@ lbl_801831A0:
 /* 801831B0 0017E0B0  38 21 00 10 */	addi r1, r1, 0x10
 /* 801831B4 0017E0B4  4E 80 00 20 */	blr 
 
-.global func_801831B8
-func_801831B8:
+.global getTimeStampString__11RPSysSystemFv
+getTimeStampString__11RPSysSystemFv:
 /* 801831B8 0017E0B8  80 63 00 58 */	lwz r3, 0x58(r3)
 /* 801831BC 0017E0BC  4E 80 00 20 */	blr 
 
-.global func_801831C0
-func_801831C0:
+.global getDvdEndMessage__11RPSysSystemCFv
+getDvdEndMessage__11RPSysSystemCFv:
 /* 801831C0 0017E0C0  38 63 00 44 */	addi r3, r3, 0x44
 /* 801831C4 0017E0C4  4E 80 00 20 */	blr 
 
-.global func_801831C8
-func_801831C8:
+.global getNandEndMessage__11RPSysSystemCFv
+getNandEndMessage__11RPSysSystemCFv:
 /* 801831C8 0017E0C8  38 63 00 40 */	addi r3, r3, 0x40
 /* 801831CC 0017E0CC  4E 80 00 20 */	blr 
 
-.global func_801831D0
-func_801831D0:
+.global getNwc24Thread__11RPSysSystemFv
+getNwc24Thread__11RPSysSystemFv:
 /* 801831D0 0017E0D0  80 63 00 3C */	lwz r3, 0x3c(r3)
 /* 801831D4 0017E0D4  4E 80 00 20 */	blr 
 
-.global func_801831D8
-func_801831D8:
+.global getDvdThread__11RPSysSystemFv
+getDvdThread__11RPSysSystemFv:
 /* 801831D8 0017E0D8  80 63 00 38 */	lwz r3, 0x38(r3)
 /* 801831DC 0017E0DC  4E 80 00 20 */	blr 
 
-.global func_801831E0
-func_801831E0:
+.global getNandThread__11RPSysSystemFv
+getNandThread__11RPSysSystemFv:
 /* 801831E0 0017E0E0  80 63 00 34 */	lwz r3, 0x34(r3)
 /* 801831E4 0017E0E4  4E 80 00 20 */	blr 
 
-.global func_801831E8
-func_801831E8:
+# C BOOL argument I think
+.global setDimming__11RPSysSystemFi
+setDimming__11RPSysSystemFi:
 /* 801831E8 0017E0E8  7C 83 23 78 */	mr r3, r4
 /* 801831EC 0017E0EC  4B F7 96 50 */	b VIEnableDimming
 
-.global func_801831F0
-func_801831F0:
+.global systemShutDown__11RPSysSystemFv
+systemShutDown__11RPSysSystemFv:
 /* 801831F0 0017E0F0  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 801831F4 0017E0F4  7C 08 02 A6 */	mflr r0
 /* 801831F8 0017E0F8  90 01 00 24 */	stw r0, 0x24(r1)
@@ -587,8 +591,8 @@ lbl_801832AC:
 /* 801832C0 0017E1C0  38 21 00 20 */	addi r1, r1, 0x20
 /* 801832C4 0017E1C4  4E 80 00 20 */	blr 
 
-.global func_801832C8
-func_801832C8:
+.global createTimeStamp__11RPSysSystemFv
+createTimeStamp__11RPSysSystemFv:
 /* 801832C8 0017E1C8  3C A0 80 38 */	lis r5, lbl_803820C8@ha
 /* 801832CC 0017E1CC  80 83 00 58 */	lwz r4, 0x58(r3)
 /* 801832D0 0017E1D0  38 A5 20 C8 */	addi r5, r5, lbl_803820C8@l
@@ -600,8 +604,8 @@ func_801832C8:
 /* 801832E8 0017E1E8  39 20 00 00 */	li r9, 0
 /* 801832EC 0017E1EC  4B F2 76 CC */	b loadToMainRAM__Q23EGG9DvdRipperFPCcPUcPQ23EGG4HeapQ33EGG9DvdRipper15EAllocDirectionUlPUlPUl
 
-.global func_801832F0
-func_801832F0:
+.global isLoadCountEnd__11RPSysSystemCFv
+isLoadCountEnd__11RPSysSystemCFv:
 /* 801832F0 0017E1F0  80 63 00 54 */	lwz r3, 0x54(r3)
 /* 801832F4 0017E1F4  68 60 01 2C */	xori r0, r3, 0x12c
 /* 801832F8 0017E1F8  7C 00 00 34 */	cntlzw r0, r0
@@ -609,14 +613,14 @@ func_801832F0:
 /* 80183300 0017E200  54 03 0F FE */	srwi r3, r0, 0x1f
 /* 80183304 0017E204  4E 80 00 20 */	blr 
 
-.global func_80183308
-func_80183308:
+.global startLoadCount__11RPSysSystemFv
+startLoadCount__11RPSysSystemFv:
 /* 80183308 0017E208  38 00 00 00 */	li r0, 0
 /* 8018330C 0017E20C  90 03 00 54 */	stw r0, 0x54(r3)
 /* 80183310 0017E210  4E 80 00 20 */	blr 
 
-.global func_80183314
-func_80183314:
+.global getCalendarTime__11RPSysSystemFPCUsRUlRUlRUl
+getCalendarTime__11RPSysSystemFPCUsRUlRUlRUl:
 /* 80183314 0017E214  94 21 FF C0 */	stwu r1, -0x40(r1)
 /* 80183318 0017E218  7C 08 02 A6 */	mflr r0
 /* 8018331C 0017E21C  2C 04 00 00 */	cmpwi r4, 0
@@ -660,8 +664,8 @@ lbl_80183398:
 /* 801833AC 0017E2AC  38 21 00 40 */	addi r1, r1, 0x40
 /* 801833B0 0017E2B0  4E 80 00 20 */	blr 
 
-.global func_801833B4
-func_801833B4:
+.global getCalendarTime__11RPSysSystemFPCUlRUlRUlRUlRUlRUl
+getCalendarTime__11RPSysSystemFPCUlRUlRUlRUlRUlRUl:
 /* 801833B4 0017E2B4  94 21 FF B0 */	stwu r1, -0x50(r1)
 /* 801833B8 0017E2B8  7C 08 02 A6 */	mflr r0
 /* 801833BC 0017E2BC  2C 04 00 00 */	cmpwi r4, 0
@@ -712,8 +716,8 @@ lbl_8018345C:
 /* 80183468 0017E368  38 21 00 50 */	addi r1, r1, 0x50
 /* 8018346C 0017E36C  4E 80 00 20 */	blr 
 
-.global func_80183470
-func_80183470:
+.global getCalendarTime16__11RPSysSystemFv
+getCalendarTime16__11RPSysSystemFv:
 /* 80183470 0017E370  94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 80183474 0017E374  7C 08 02 A6 */	mflr r0
 /* 80183478 0017E378  90 01 00 34 */	stw r0, 0x34(r1)
@@ -734,8 +738,8 @@ func_80183470:
 /* 801834B4 0017E3B4  38 21 00 30 */	addi r1, r1, 0x30
 /* 801834B8 0017E3B8  4E 80 00 20 */	blr 
 
-.global func_801834BC
-func_801834BC:
+.global getCalendarTime32__11RPSysSystemFv
+getCalendarTime32__11RPSysSystemFv:
 /* 801834BC 0017E3BC  94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 801834C0 0017E3C0  7C 08 02 A6 */	mflr r0
 /* 801834C4 0017E3C4  90 01 00 34 */	stw r0, 0x34(r1)
@@ -760,21 +764,24 @@ func_801834BC:
 /* 80183510 0017E410  38 21 00 30 */	addi r1, r1, 0x30
 /* 80183514 0017E414  4E 80 00 20 */	blr 
 
-.global func_80183518
-func_80183518:
+# This may be const, this function is static in WFU
+.global destroyHeap__11RPSysSystemFPQ23EGG4Heap
+destroyHeap__11RPSysSystemFPQ23EGG4Heap:
 /* 80183518 0017E418  81 84 00 00 */	lwz r12, 0(r4)
 /* 8018351C 0017E41C  7C 83 23 78 */	mr r3, r4
 /* 80183520 0017E420  81 8C 00 1C */	lwz r12, 0x1c(r12)
 /* 80183524 0017E424  7D 89 03 A6 */	mtctr r12
 /* 80183528 0017E428  4E 80 04 20 */	bctr 
 
-.global func_8018352C
-func_8018352C:
+# This may be const, this function doesn't exist in WFU
+.global getBootSceneID__11RPSysSystemFv
+getBootSceneID__11RPSysSystemFv:
 /* 8018352C 0017E42C  38 60 00 08 */	li r3, 8
 /* 80183530 0017E430  4E 80 00 20 */	blr 
 
-.global func_80183534
-func_80183534:
+# May be const, also may use NW4R color
+.global setDisplayClearColor__11RPSysSystemFQ23EGG5Color
+setDisplayClearColor__11RPSysSystemFQ23EGG5Color:
 /* 80183534 0017E434  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80183538 0017E438  7C 08 02 A6 */	mflr r0
 /* 8018353C 0017E43C  3C 60 80 4A */	lis r3, sConfigData__11RPSysSystem@ha
@@ -790,14 +797,15 @@ func_80183534:
 /* 80183564 0017E464  98 C1 00 09 */	stb r6, 9(r1)
 /* 80183568 0017E468  98 A1 00 0A */	stb r5, 0xa(r1)
 /* 8018356C 0017E46C  98 01 00 0B */	stb r0, 0xb(r1)
-/* 80183570 0017E470  48 00 00 15 */	bl func_80183584
+/* 80183570 0017E470  48 00 00 15 */	bl setClearColor__Q23EGG7DisplayFQ34nw4r2ut5Color
 /* 80183574 0017E474  80 01 00 14 */	lwz r0, 0x14(r1)
 /* 80183578 0017E478  7C 08 03 A6 */	mtlr r0
 /* 8018357C 0017E47C  38 21 00 10 */	addi r1, r1, 0x10
 /* 80183580 0017E480  4E 80 00 20 */	blr 
 
-.global func_80183584
-func_80183584:
+# Weak function
+.global setClearColor__Q23EGG7DisplayFQ34nw4r2ut5Color
+setClearColor__Q23EGG7DisplayFQ34nw4r2ut5Color:
 /* 80183584 0017E484  88 E4 00 00 */	lbz r7, 0(r4)
 /* 80183588 0017E488  88 C4 00 01 */	lbz r6, 1(r4)
 /* 8018358C 0017E48C  88 A4 00 02 */	lbz r5, 2(r4)
@@ -808,33 +816,33 @@ func_80183584:
 /* 801835A0 0017E4A0  98 03 00 17 */	stb r0, 0x17(r3)
 /* 801835A4 0017E4A4  4E 80 00 20 */	blr 
 
-.global func_801835A8
-func_801835A8:
+.global getFBHeight__11RPSysSystemCFv
+getFBHeight__11RPSysSystemCFv:
 /* 801835A8 0017E4A8  80 6D A1 3C */	lwz r3, sRenderModeObj__11RPSysSystem-_SDA_BASE_(r13)
 /* 801835AC 0017E4AC  A0 63 00 06 */	lhz r3, 6(r3)
 /* 801835B0 0017E4B0  4E 80 00 20 */	blr 
 
-.global func_801835B4
-func_801835B4:
+.global getFBWidth__11RPSysSystemCFv
+getFBWidth__11RPSysSystemCFv:
 /* 801835B4 0017E4B4  80 6D A1 3C */	lwz r3, sRenderModeObj__11RPSysSystem-_SDA_BASE_(r13)
 /* 801835B8 0017E4B8  A0 63 00 04 */	lhz r3, 4(r3)
 /* 801835BC 0017E4BC  4E 80 00 20 */	blr 
 
-.global func_801835C0
-func_801835C0:
+.global getModifyRatio__11RPSysSystemCFv
+getModifyRatio__11RPSysSystemCFv:
 /* 801835C0 0017E4C0  3C 60 80 4A */	lis r3, sConfigData__11RPSysSystem@ha
 /* 801835C4 0017E4C4  38 63 3D 50 */	addi r3, r3, sConfigData__11RPSysSystem@l
 /* 801835C8 0017E4C8  80 63 00 40 */	lwz r3, 0x40(r3)
 /* 801835CC 0017E4CC  C0 23 00 64 */	lfs f1, 0x64(r3)
 /* 801835D0 0017E4D0  4E 80 00 20 */	blr 
 
-.global func_801835D4
-func_801835D4:
+.global getFrameRate__11RPSysSystemCFv
+getFrameRate__11RPSysSystemCFv:
 /* 801835D4 0017E4D4  88 63 00 4C */	lbz r3, 0x4c(r3)
 /* 801835D8 0017E4D8  4E 80 00 20 */	blr 
 
-.global func_801835DC
-func_801835DC:
+.global setupRenderMode__11RPSysSystemFv
+setupRenderMode__11RPSysSystemFv:
 /* 801835DC 0017E4DC  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 801835E0 0017E4E0  7C 08 02 A6 */	mflr r0
 /* 801835E4 0017E4E4  90 01 00 14 */	stw r0, 0x14(r1)
@@ -920,8 +928,8 @@ lbl_801836FC:
 /* 80183704 0017E604  38 21 00 10 */	addi r1, r1, 0x10
 /* 80183708 0017E608  4E 80 00 20 */	blr 
 
-.global func_8018370C
-func_8018370C:
+.global setupTVMode__11RPSysSystemFv
+setupTVMode__11RPSysSystemFv:
 /* 8018370C 0017E60C  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80183710 0017E610  7C 08 02 A6 */	mflr r0
 /* 80183714 0017E614  90 01 00 14 */	stw r0, 0x14(r1)
@@ -954,8 +962,8 @@ lbl_80183764:
 /* 80183770 0017E670  38 21 00 10 */	addi r1, r1, 0x10
 /* 80183774 0017E674  4E 80 00 20 */	blr 
 
-.global func_80183778
-func_80183778:
+.global loadFrameWork__11RPSysSystemFv
+loadFrameWork__11RPSysSystemFv:
 /* 80183778 0017E678  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8018377C 0017E67C  7C 08 02 A6 */	mflr r0
 /* 80183780 0017E680  90 01 00 24 */	stw r0, 0x24(r1)
@@ -1046,7 +1054,7 @@ lbl_801838A0:
 /* 801838CC 0017E7CC  2C 03 00 00 */	cmpwi r3, 0
 /* 801838D0 0017E7D0  41 82 00 0C */	beq lbl_801838DC
 /* 801838D4 0017E7D4  7F A3 EB 78 */	mr r3, r29
-/* 801838D8 0017E7D8  4B FF F9 19 */	bl func_801831F0
+/* 801838D8 0017E7D8  4B FF F9 19 */	bl systemShutDown__11RPSysSystemFv
 lbl_801838DC:
 /* 801838DC 0017E7DC  80 01 00 24 */	lwz r0, 0x24(r1)
 /* 801838E0 0017E7E0  83 E1 00 1C */	lwz r31, 0x1c(r1)
@@ -1180,9 +1188,9 @@ setup__11RPSysSystemFv:
 /* 80183AC4 0017E9C4  4B F1 EC 7D */	bl create__Q23EGG7ExpHeapFUlPQ23EGG4HeapUs
 /* 80183AC8 0017E9C8  90 7E 00 0C */	stw r3, 0xc(r30)
 /* 80183ACC 0017E9CC  7F C3 F3 78 */	mr r3, r30
-/* 80183AD0 0017E9D0  4B FF F4 1D */	bl func_80182EEC
+/* 80183AD0 0017E9D0  4B FF F4 1D */	bl createFromSystemHeap__11RPSysSystemFv
 /* 80183AD4 0017E9D4  7F C3 F3 78 */	mr r3, r30
-/* 80183AD8 0017E9D8  4B FF F2 CD */	bl func_80182DA4
+/* 80183AD8 0017E9D8  4B FF F2 CD */	bl createEffectWork__11RPSysSystemFv
 /* 80183ADC 0017E9DC  80 7F 00 1C */	lwz r3, 0x1c(r31)
 /* 80183AE0 0017E9E0  48 00 6D C5 */	bl func_8018A8A4
 /* 80183AE4 0017E9E4  80 7F 00 1C */	lwz r3, 0x1c(r31)
@@ -1215,16 +1223,16 @@ setup__11RPSysSystemFv:
 /* 80183B50 0017EA50  48 03 27 5D */	bl func_801B62AC
 /* 80183B54 0017EA54  48 01 85 3D */	bl func_8019C090
 /* 80183B58 0017EA58  7F C3 F3 78 */	mr r3, r30
-/* 80183B5C 0017EA5C  4B FF F1 01 */	bl func_80182C5C
+/* 80183B5C 0017EA5C  4B FF F1 01 */	bl waitRenderModeChange__11RPSysSystemFv
 /* 80183B60 0017EA60  80 6D A1 48 */	lwz r3, sInstance__17RPSysSceneCreator-_SDA_BASE_(r13)
 /* 80183B64 0017EA64  38 80 00 00 */	li r4, 0
 /* 80183B68 0017EA68  38 A0 00 00 */	li r5, 0
 /* 80183B6C 0017EA6C  48 00 10 39 */	bl changeSceneAfterFade__17RPSysSceneCreatorFlb
-/* 80183B70 0017EA70  3C 60 80 18 */	lis r3, lbl_80182BB8@ha
-/* 80183B74 0017EA74  38 63 2B B8 */	addi r3, r3, lbl_80182BB8@l
+/* 80183B70 0017EA70  3C 60 80 18 */	lis r3, softResetCallBack__11RPSysSystemFv@ha
+/* 80183B74 0017EA74  38 63 2B B8 */	addi r3, r3, softResetCallBack__11RPSysSystemFv@l
 /* 80183B78 0017EA78  4B F7 23 A1 */	bl OSSetResetCallback
-/* 80183B7C 0017EA7C  3C 60 80 18 */	lis r3, lbl_80182BAC@ha
-/* 80183B80 0017EA80  38 63 2B AC */	addi r3, r3, lbl_80182BAC@l
+/* 80183B7C 0017EA7C  3C 60 80 18 */	lis r3, shutdownSystemCallBack__11RPSysSystemFv@ha
+/* 80183B80 0017EA80  38 63 2B AC */	addi r3, r3, shutdownSystemCallBack__11RPSysSystemFv@l
 /* 80183B84 0017EA84  4B F7 24 51 */	bl OSSetPowerCallback
 /* 80183B88 0017EA88  80 01 00 14 */	lwz r0, 0x14(r1)
 /* 80183B8C 0017EA8C  83 E1 00 0C */	lwz r31, 0xc(r1)
@@ -1246,7 +1254,7 @@ create__11RPSysSystemFv:
 /* 80183BC0 0017EAC0  4B F1 F6 91 */	bl __nw__FUlPQ23EGG4Heapi
 /* 80183BC4 0017EAC4  2C 03 00 00 */	cmpwi r3, 0
 /* 80183BC8 0017EAC8  41 82 00 08 */	beq lbl_80183BD0
-/* 80183BCC 0017EACC  4B FF F4 D1 */	bl func_8018309C
+/* 80183BCC 0017EACC  4B FF F4 D1 */	bl __ct__11RPSysSystemFv
 lbl_80183BD0:
 /* 80183BD0 0017EAD0  90 6D A1 38 */	stw r3, sInstance__11RPSysSystem-_SDA_BASE_(r13)
 /* 80183BD4 0017EAD4  80 01 00 14 */	lwz r0, 0x14(r1)
@@ -1330,8 +1338,8 @@ initialize__11RPSysSystemFv:
 /* 80183D00 0017EC00  3C 60 00 08 */	lis r3, 8
 /* 80183D04 0017EC04  38 80 00 00 */	li r4, 0
 /* 80183D08 0017EC08  4B F2 06 8D */	bl create__Q23EGG12GraphicsFifoFUlPQ23EGG4Heap
-/* 80183D0C 0017EC0C  4B FF FA 01 */	bl func_8018370C
-/* 80183D10 0017EC10  4B FF F8 CD */	bl func_801835DC
+/* 80183D0C 0017EC0C  4B FF FA 01 */	bl setupTVMode__11RPSysSystemFv
+/* 80183D10 0017EC10  4B FF F8 CD */	bl setupRenderMode__11RPSysSystemFv
 /* 80183D14 0017EC14  38 60 00 0C */	li r3, 0xc
 /* 80183D18 0017EC18  4B F1 F5 2D */	bl __nw__FUl
 /* 80183D1C 0017EC1C  2C 03 00 00 */	cmpwi r3, 0
@@ -1446,17 +1454,44 @@ __sinit_$$3RPSysSystem_cpp:
 /* 80183EA4 0017EDA4  90 65 3D 50 */	stw r3, 0x3d50(r5)
 /* 80183EA8 0017EDA8  4E 80 00 20 */	blr 
 
+# Weak function
+.global getSystemHeap__15RPSysConfigDataFv
+getSystemHeap__15RPSysConfigDataFv:
 /* 80183EAC 0017EDAC  80 63 00 24 */	lwz r3, 0x24(r3)
 /* 80183EB0 0017EDB0  4E 80 00 20 */	blr 
+
+# Weak function
+.global getVideo__15RPSysConfigDataFv
+getVideo__15RPSysConfigDataFv:
 /* 80183EB4 0017EDB4  80 63 00 38 */	lwz r3, 0x38(r3)
 /* 80183EB8 0017EDB8  4E 80 00 20 */	blr 
+
+# Weak function
+.global getDisplay__15RPSysConfigDataFv
+getDisplay__15RPSysConfigDataFv:
 /* 80183EBC 0017EDBC  80 63 00 40 */	lwz r3, 0x40(r3)
 /* 80183EC0 0017EDC0  4E 80 00 20 */	blr 
+
+# Weak function
+.global getXfbMgr__15RPSysConfigDataFv
+getXfbMgr__15RPSysConfigDataFv:
 /* 80183EC4 0017EDC4  80 63 00 3C */	lwz r3, 0x3c(r3)
 /* 80183EC8 0017EDC8  4E 80 00 20 */	blr 
+
+# Weak function
+.global getPerfView__15RPSysConfigDataFv
+getPerfView__15RPSysConfigDataFv:
 /* 80183ECC 0017EDCC  80 63 00 44 */	lwz r3, 0x44(r3)
 /* 80183ED0 0017EDD0  4E 80 00 20 */	blr 
+
+# Weak function
+.global getSceneMgr__15RPSysConfigDataFv
+getSceneMgr__15RPSysConfigDataFv:
 /* 80183ED4 0017EDD4  80 63 00 48 */	lwz r3, 0x48(r3)
 /* 80183ED8 0017EDD8  4E 80 00 20 */	blr 
+
+# Weak function
+.global getAudioMgr__15RPSysConfigDataFv
+getAudioMgr__15RPSysConfigDataFv:
 /* 80183EDC 0017EDDC  80 63 00 4C */	lwz r3, 0x4c(r3)
 /* 80183EE0 0017EDE0  4E 80 00 20 */	blr 
