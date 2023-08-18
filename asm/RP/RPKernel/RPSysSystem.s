@@ -1,5 +1,8 @@
 .include "macros.inc"
 
+.section .ctors, "a"
+.4byte __sinit_$$3RPSysSystem_cpp
+
 .section .sdata2, "a"
 .balign 0x8
 .global lbl_804C1508
@@ -20,8 +23,8 @@ lbl_804C1520:
 
 .section .rodata, "a"
 .balign 0x8
-.global scDebugKeyCombo__11RPSysSystem
-scDebugKeyCombo__11RPSysSystem:
+.global scExceptionPadInfo__11RPSysSystem
+scExceptionPadInfo__11RPSysSystem:
 	.short 0x8000, 0x0800, 0x0400, 0x0200, 0x0100, 0x1000, 0x0010, 0x0000
 # RP uses -str pool (as does EGG)
 .global lbl_803820C8
@@ -323,7 +326,7 @@ func_80182EEC:
 /* 80182F40 0017DE40  48 00 31 C9 */	bl func_80186108
 /* 80182F44 0017DE44  90 7F 00 48 */	stw r3, 0x48(r31)
 /* 80182F48 0017DE48  80 7F 00 24 */	lwz r3, 0x24(r31)
-/* 80182F4C 0017DE4C  48 00 1E C5 */	bl func_80184E10
+/* 80182F4C 0017DE4C  48 00 1E C5 */	bl CreateInstance__17RPSysSceneCreatorFv
 /* 80182F50 0017DE50  80 8D A1 58 */	lwz r4, lbl_804BF4D8-_SDA_BASE_(r13)
 /* 80182F54 0017DE54  90 64 00 04 */	stw r3, 4(r4)
 /* 80182F58 0017DE58  80 7F 00 24 */	lwz r3, 0x24(r31)
@@ -1213,10 +1216,10 @@ setup__11RPSysSystemFv:
 /* 80183B54 0017EA54  48 01 85 3D */	bl func_8019C090
 /* 80183B58 0017EA58  7F C3 F3 78 */	mr r3, r30
 /* 80183B5C 0017EA5C  4B FF F1 01 */	bl func_80182C5C
-/* 80183B60 0017EA60  80 6D A1 48 */	lwz r3, lbl_804BF4C8-_SDA_BASE_(r13)
+/* 80183B60 0017EA60  80 6D A1 48 */	lwz r3, sInstance__17RPSysSceneCreator-_SDA_BASE_(r13)
 /* 80183B64 0017EA64  38 80 00 00 */	li r4, 0
 /* 80183B68 0017EA68  38 A0 00 00 */	li r5, 0
-/* 80183B6C 0017EA6C  48 00 10 39 */	bl func_80184BA4
+/* 80183B6C 0017EA6C  48 00 10 39 */	bl changeSceneAfterFade__17RPSysSceneCreatorFlb
 /* 80183B70 0017EA70  3C 60 80 18 */	lis r3, lbl_80182BB8@ha
 /* 80183B74 0017EA74  38 63 2B B8 */	addi r3, r3, lbl_80182BB8@l
 /* 80183B78 0017EA78  4B F7 23 A1 */	bl OSSetResetCallback
@@ -1418,8 +1421,8 @@ lbl_80183E34:
 /* 80183E4C 0017ED4C  38 A0 00 04 */	li r5, 4
 /* 80183E50 0017ED50  38 C0 00 00 */	li r6, 0
 /* 80183E54 0017ED54  4B F2 D8 F1 */	bl create__Q23EGG9ExceptionFUsUsUsPQ23EGG4Heap
-/* 80183E58 0017ED58  3C 60 80 38 */	lis r3, scDebugKeyCombo__11RPSysSystem@ha
-/* 80183E5C 0017ED5C  38 63 20 B8 */	addi r3, r3, scDebugKeyCombo__11RPSysSystem@l
+/* 80183E58 0017ED58  3C 60 80 38 */	lis r3, scExceptionPadInfo__11RPSysSystem@ha
+/* 80183E5C 0017ED5C  38 63 20 B8 */	addi r3, r3, scExceptionPadInfo__11RPSysSystem@l
 /* 80183E60 0017ED60  4B F2 D8 ED */	bl setUserCallBack__Q23EGG9ExceptionFPFP10KPADStatus_v
 /* 80183E64 0017ED64  80 7F 00 1C */	lwz r3, 0x1c(r31)
 /* 80183E68 0017ED68  4B F1 F3 65 */	bl becomeCurrentHeap__Q23EGG4HeapFv
@@ -1428,6 +1431,9 @@ lbl_80183E34:
 /* 80183E74 0017ED74  7C 08 03 A6 */	mtlr r0
 /* 80183E78 0017ED78  38 21 00 20 */	addi r1, r1, 0x20
 /* 80183E7C 0017ED7C  4E 80 00 20 */	blr 
+
+.global __sinit_$$3RPSysSystem_cpp
+__sinit_$$3RPSysSystem_cpp:
 /* 80183E80 0017ED80  3C 80 80 3A */	lis r4, __vt__Q23EGG17ConfigurationData@ha
 /* 80183E84 0017ED84  3C 60 80 3C */	lis r3, __vt__15RPSysConfigData@ha
 /* 80183E88 0017ED88  3C A0 80 4A */	lis r5, sConfigData__11RPSysSystem@ha
@@ -1439,6 +1445,7 @@ lbl_80183E34:
 /* 80183EA0 0017EDA0  90 04 00 34 */	stw r0, 0x34(r4)
 /* 80183EA4 0017EDA4  90 65 3D 50 */	stw r3, 0x3d50(r5)
 /* 80183EA8 0017EDA8  4E 80 00 20 */	blr 
+
 /* 80183EAC 0017EDAC  80 63 00 24 */	lwz r3, 0x24(r3)
 /* 80183EB0 0017EDB0  4E 80 00 20 */	blr 
 /* 80183EB4 0017EDB4  80 63 00 38 */	lwz r3, 0x38(r3)

@@ -81,7 +81,7 @@ ASM_DIRS := asm \
 	asm/revolution/WENC asm/revolution/CNT asm/revolution/ESP asm/revolution/NET asm/revolution/NWC24 asm/revolution/VF \
 	asm/nw4r/ut asm/nw4r/ef asm/nw4r/math asm/nw4r/snd asm/nw4r/g3d asm/nw4r/lyt \
 	asm/egg/gfx asm/egg/math asm/egg/core asm/egg/audio asm/egg/util \
-	asm/RP/RPKernel
+	asm/RP/RPKernel asm/RP/RPSystem
 
 SRC_DIRS := src \
 	revolution nw4r egg runtime MetroTRK MSL RVLFaceLib homebuttonMiniLib \
