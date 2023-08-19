@@ -1,7 +1,7 @@
 .include "macros.inc"
 
 .section .ctors, "a"
-.4byte __sinit_$$3RPSysSystem_cpp
+.4byte "__sinit_\RPSysSystem_cpp"
 
 .section .sdata2, "a"
 .balign 0x8
@@ -1440,8 +1440,8 @@ lbl_80183E34:
 /* 80183E78 0017ED78  38 21 00 20 */	addi r1, r1, 0x20
 /* 80183E7C 0017ED7C  4E 80 00 20 */	blr 
 
-.global __sinit_$$3RPSysSystem_cpp
-__sinit_$$3RPSysSystem_cpp:
+.global "__sinit_\RPSysSystem_cpp"
+"__sinit_\RPSysSystem_cpp":
 /* 80183E80 0017ED80  3C 80 80 3A */	lis r4, __vt__Q23EGG17ConfigurationData@ha
 /* 80183E84 0017ED84  3C 60 80 3C */	lis r3, __vt__15RPSysConfigData@ha
 /* 80183E88 0017ED88  3C A0 80 4A */	lis r5, sConfigData__11RPSysSystem@ha
