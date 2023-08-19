@@ -591,6 +591,7 @@ RVL_SDK_O_FILES := \
 	build/asm/RP/RPSystem/RPSysSceneCreator.o \
 	build/asm/RP/RPSystem/RPSysScene.o \
 	build/asm/RP/RPSystem/RPSysRenderMode.o \
+	build/asm/RP/RPSystem/RPSysSceneMgr.o \
 
 
 GROUP_1_O_FILES := \
