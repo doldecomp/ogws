@@ -851,8 +851,8 @@ getCurrentScene__Q23EGG12SceneManagerCFv:
 /* 80186100 00181000  80 63 00 0C */	lwz r3, 0xc(r3)
 /* 80186104 00181004  4E 80 00 20 */	blr 
 
-.global CreateInstance__13RPSysSceneMgrFv
-CreateInstance__13RPSysSceneMgrFv:
+.global CreateInstance__13RPSysSceneMgrFPQ23EGG4Heap
+CreateInstance__13RPSysSceneMgrFPQ23EGG4Heap:
 /* 80186108 00181008  94 21 FF C0 */	stwu r1, -0x40(r1)
 /* 8018610C 0018100C  7C 08 02 A6 */	mflr r0
 /* 80186110 00181010  90 01 00 44 */	stw r0, 0x44(r1)

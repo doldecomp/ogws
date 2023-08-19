@@ -593,6 +593,7 @@ RVL_SDK_O_FILES := \
 	build/asm/RP/RPSystem/RPSysRenderMode.o \
 	build/asm/RP/RPSystem/RPSysSceneMgr.o \
 	build/asm/RP/RPSystem/RPSysProjectLocal.o \
+	build/asm/RP/RPSystem/RPSysGameConfig.o \
 
 
 GROUP_1_O_FILES := \

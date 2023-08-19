@@ -322,18 +322,18 @@ createFromSystemHeap__11RPSysSystemFv:
 /* 80182F24 0017DE24  90 1D 00 18 */	stw r0, 0x18(r29)
 /* 80182F28 0017DE28  4B F2 02 A5 */	bl becomeCurrentHeap__Q23EGG4HeapFv
 /* 80182F2C 0017DE2C  80 7F 00 24 */	lwz r3, 0x24(r31)
-/* 80182F30 0017DE30  48 00 37 B1 */	bl func_801866E0
+/* 80182F30 0017DE30  48 00 37 B1 */	bl CreateInstance__15RPSysGameConfigFPQ23EGG4Heap
 /* 80182F34 0017DE34  48 00 D9 55 */	bl func_80190888
 /* 80182F38 0017DE38  48 01 91 C1 */	bl func_8019C0F8
 /* 80182F3C 0017DE3C  80 7F 00 24 */	lwz r3, 0x24(r31)
-/* 80182F40 0017DE40  48 00 31 C9 */	bl CreateInstance__13RPSysSceneMgrFv
+/* 80182F40 0017DE40  48 00 31 C9 */	bl CreateInstance__13RPSysSceneMgrFPQ23EGG4Heap
 /* 80182F44 0017DE44  90 7F 00 48 */	stw r3, 0x48(r31)
 /* 80182F48 0017DE48  80 7F 00 24 */	lwz r3, 0x24(r31)
-/* 80182F4C 0017DE4C  48 00 1E C5 */	bl CreateInstance__17RPSysSceneCreatorFv
+/* 80182F4C 0017DE4C  48 00 1E C5 */	bl CreateInstance__17RPSysSceneCreatorFPQ23EGG4Heap
 /* 80182F50 0017DE50  80 8D A1 58 */	lwz r4, sInstance__13RPSysSceneMgr-_SDA_BASE_(r13)
 /* 80182F54 0017DE54  90 64 00 04 */	stw r3, 4(r4)
 /* 80182F58 0017DE58  80 7F 00 24 */	lwz r3, 0x24(r31)
-/* 80182F5C 0017DE5C  48 00 34 49 */	bl CreateInstance__17RPSysProjectLocalFv
+/* 80182F5C 0017DE5C  48 00 34 49 */	bl CreateInstance__17RPSysProjectLocalFPQ23EGG4Heap
 /* 80182F60 0017DE60  7F A3 EB 78 */	mr r3, r29
 /* 80182F64 0017DE64  4B FF FD 99 */	bl setupLocalSettings__11RPSysSystemFv
 /* 80182F68 0017DE68  80 7F 00 24 */	lwz r3, 0x24(r31)

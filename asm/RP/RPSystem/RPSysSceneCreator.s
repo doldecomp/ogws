@@ -1140,8 +1140,8 @@ lbl_80184DF8:
 /* 80184E0C 0017FD0C  4E 80 00 20 */	blr 
 
 # Yes, this is capitalized. Part of some common RP macro/base class?
-.global CreateInstance__17RPSysSceneCreatorFv
-CreateInstance__17RPSysSceneCreatorFv:
+.global CreateInstance__17RPSysSceneCreatorFPQ23EGG4Heap
+CreateInstance__17RPSysSceneCreatorFPQ23EGG4Heap:
 /* 80184E10 0017FD10  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80184E14 0017FD14  7C 08 02 A6 */	mflr r0
 /* 80184E18 0017FD18  90 01 00 14 */	stw r0, 0x14(r1)

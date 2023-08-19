@@ -11,19 +11,12 @@ sInstance__17RPSysProjectLocal:
 .global strings_80382450
 strings_80382450:
     .string "EN/"
-    .balign 4
     .string "FR/"
-    .balign 4
     .string "GE/"
-    .balign 4
     .string "IT/"
-    .balign 4
     .string "SP/"
-    .balign 4
     .string "JP/"
-    .balign 4
     .string "US/"
-    .balign 4
 
 .section .data, "wa"
 .balign 0x8
@@ -145,8 +138,8 @@ lbl_8018638C:
 /* 8018639C 0018129C  38 21 00 10 */	addi r1, r1, 0x10
 /* 801863A0 001812A0  4E 80 00 20 */	blr 
 
-.global CreateInstance__17RPSysProjectLocalFv
-CreateInstance__17RPSysProjectLocalFv:
+.global CreateInstance__17RPSysProjectLocalFPQ23EGG4Heap
+CreateInstance__17RPSysProjectLocalFPQ23EGG4Heap:
 /* 801863A4 001812A4  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 801863A8 001812A8  7C 08 02 A6 */	mflr r0
 /* 801863AC 001812AC  90 01 00 14 */	stw r0, 0x14(r1)
