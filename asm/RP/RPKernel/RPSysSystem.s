@@ -860,10 +860,10 @@ lbl_80183610:
 /* 80183610 0017E510  38 A0 00 00 */	li r5, 0
 /* 80183614 0017E514  90 AD A1 40 */	stw r5, lbl_804BF4C0-_SDA_BASE_(r13)
 lbl_80183618:
-/* 80183618 0017E518  3C 80 80 38 */	lis r4, lbl_80382438@ha
+/* 80183618 0017E518  3C 80 80 38 */	lis r4, sRenderModeTable__15RPSysRenderMode@ha
 /* 8018361C 0017E51C  80 6D 98 A0 */	lwz r3, sTVMode__Q23EGG6Screen-_SDA_BASE_(r13)
 /* 80183620 0017E520  54 A6 10 3A */	slwi r6, r5, 2
-/* 80183624 0017E524  38 84 24 38 */	addi r4, r4, lbl_80382438@l
+/* 80183624 0017E524  38 84 24 38 */	addi r4, r4, sRenderModeTable__15RPSysRenderMode@l
 /* 80183628 0017E528  38 03 FF FF */	addi r0, r3, -1
 /* 8018362C 0017E52C  7C 84 30 2E */	lwzx r4, r4, r6
 /* 80183630 0017E530  7C 00 00 34 */	cntlzw r0, r0

@@ -3,8 +3,6 @@
 .section .data, "wa"  # 0x80393A80 - 0x803CAF00
 
 .balign 0x8
-
-	.incbin "baserom.dol", 0x3B5760, 0x130
 .global lbl_803B9790
 lbl_803B9790:
 	.incbin "baserom.dol", 0x3B5890, 0x20
