@@ -3,7 +3,7 @@
 #include "types_nw4r.h"
 #include "g3d_rescommon.h"
 #include "math_types.h"
-#include <RevoSDK/GX/GXTexture.h>
+#include <revolution/GX.h>
 
 namespace nw4r
 {

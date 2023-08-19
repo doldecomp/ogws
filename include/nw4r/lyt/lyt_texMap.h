@@ -1,8 +1,8 @@
 #ifndef NW4R_LYT_TEXMAP_H
 #define NW4R_LYT_TEXMAP_H
 #include "types_nw4r.h"
-#include <RevoSDK/GX/GXTexture.h>
-#include <RevoSDK/TPL/TPL.h>
+#include <revolution/GX.h>
+#include <revolution/TPL/TPL.h>
 
 namespace nw4r
 {
@@ -12,7 +12,7 @@ namespace nw4r
         {
             bool IsCITexelFormat(GXTexFmt fmt)
             {
-                return (fmt == GX_TEX_FMT_8 || fmt == GX_TEX_FMT_9 || fmt == GX_TEX_FMT_10);
+                return (fmt == GX_TF_C4 || fmt == GX_TF_C8 || fmt == GX_TF_C14X2);
             }
         }
 

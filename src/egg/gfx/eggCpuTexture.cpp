@@ -161,7 +161,7 @@ namespace EGG
             case GX_TEX_FMT_6:
                 break;
 
-            case GX_TEX_FMT_1:
+            case GX_TF_I8:
                 break;
         }
     }

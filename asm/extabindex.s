@@ -98,11 +98,11 @@ _index___construct_new_array:
     .long 0x00000104
     .long _unwind___construct_new_array
 
-.global _index_0x800b1998
-_index_0x800b1998:
-    .long 0x800b1998
+.global _index___dt__26__partial_array_destructorFv
+_index___dt__26__partial_array_destructorFv:
+    .long __dt__26__partial_array_destructorFv
     .long 0x000000bc
-    .long _unwind_0x800b1998
+    .long _unwind___dt__26__partial_array_destructorFv
 
 .global _index___construct_array
 _index___construct_array:
@@ -116,185 +116,185 @@ _index___destroy_arr:
     .long 0x00000078
     .long _unwind___destroy_arr
 
-.global _index_func_800B2414
-_index_func_800B2414:
-    .long func_800B2414
+.global _index_Block_link
+_index_Block_link:
+    .long Block_link
     .long 0x00000150
-    .long _unwind_func_800B2414
+    .long _unwind_Block_link
 
-.global _index_func_800B260C
-_index_func_800B260C:
-    .long func_800B260C
+.global _index_deallocate_from_fixed_pools
+_index_deallocate_from_fixed_pools:
+    .long deallocate_from_fixed_pools
     .long 0x000001ec
-    .long _unwind_func_800B260C
+    .long _unwind_deallocate_from_fixed_pools
 
-.global _index_func_800B27F8
-_index_func_800B27F8:
-    .long func_800B27F8
+.global _index_free
+_index_free:
+    .long free
     .long 0x00000130
-    .long _unwind_func_800B27F8
+    .long _unwind_free
 
-.global _index_lbl_800B2928
-_index_lbl_800B2928:
-    .long lbl_800B2928
+.global _index___close_all
+_index___close_all:
+    .long __close_all
     .long 0x000000a4
-    .long _unwind_lbl_800B2928
+    .long _unwind___close_all
 
-.global _index_func_800B29CC
-_index_func_800B29CC:
-    .long func_800B29CC
+.global _index___flush_all
+_index___flush_all:
+    .long __flush_all
     .long 0x0000006c
-    .long _unwind_func_800B29CC
+    .long _unwind___flush_all
 
-.global _index_func_800B2A38
-_index_func_800B2A38:
-    .long func_800B2A38
+.global _index___ull2dec
+_index___ull2dec:
+    .long __ull2dec
     .long 0x000000dc
-    .long _unwind_func_800B2A38
+    .long _unwind___ull2dec
 
-.global _index_func_800B2B14
-_index_func_800B2B14:
-    .long func_800B2B14
+.global _index___timesdec
+_index___timesdec:
+    .long __timesdec
     .long 0x00000288
-    .long _unwind_func_800B2B14
+    .long _unwind___timesdec
 
-.global _index_func_800B2E88
-_index_func_800B2E88:
-    .long func_800B2E88
+.global _index___two_exp
+_index___two_exp:
+    .long __two_exp
     .long 0x0000036c
-    .long _unwind_func_800B2E88
+    .long _unwind___two_exp
 
-.global _index_func_800B33D8
-_index_func_800B33D8:
-    .long func_800B33D8
+.global _index___minus_dec
+_index___minus_dec:
+    .long __minus_dec
     .long 0x0000051c
-    .long _unwind_func_800B33D8
+    .long _unwind___minus_dec
 
-.global _index_func_800B38F4
-_index_func_800B38F4:
-    .long func_800B38F4
+.global _index___num2dec_internal
+_index___num2dec_internal:
+    .long __num2dec_internal
     .long 0x00000164
-    .long _unwind_func_800B38F4
+    .long _unwind___num2dec_internal
 
-.global _index_func_800B3A58
-_index_func_800B3A58:
-    .long func_800B3A58
+.global _index___num2dec
+_index___num2dec:
+    .long __num2dec
     .long 0x000001a0
-    .long _unwind_func_800B3A58
+    .long _unwind___num2dec
 
-.global _index_func_800B3BF8
-_index_func_800B3BF8:
-    .long func_800B3BF8
+.global _index___dec2num
+_index___dec2num:
+    .long __dec2num
     .long 0x000007b0
-    .long _unwind_func_800B3BF8
+    .long _unwind___dec2num
 
-.global _index_func_800B43E0
-_index_func_800B43E0:
-    .long func_800B43E0
+.global _index___flush_buffer
+_index___flush_buffer:
+    .long __flush_buffer
     .long 0x000000b8
-    .long _unwind_func_800B43E0
+    .long _unwind___flush_buffer
 
-.global _index_func_800B4498
-_index_func_800B4498:
-    .long func_800B4498
+.global _index___fwrite
+_index___fwrite:
+    .long __fwrite
     .long 0x00000308
-    .long _unwind_func_800B4498
+    .long _unwind___fwrite
 
-.global _index_func_800B47A0
-_index_func_800B47A0:
-    .long func_800B47A0
+.global _index_fclose
+_index_fclose:
+    .long fclose
     .long 0x000000bc
-    .long _unwind_func_800B47A0
+    .long _unwind_fclose
 
-.global _index_func_800B485C
-_index_func_800B485C:
-    .long func_800B485C
+.global _index_fflush
+_index_fflush:
+    .long fflush
     .long 0x00000134
-    .long _unwind_func_800B485C
+    .long _unwind_fflush
 
-.global _index_func_800B4A3C
-_index_func_800B4A3C:
-    .long func_800B4A3C
+.global _index__fseek
+_index__fseek:
+    .long _fseek
     .long 0x000001c4
-    .long _unwind_func_800B4A3C
+    .long _unwind__fseek
 
-.global _index_func_800B4C80
-_index_func_800B4C80:
-    .long func_800B4C80
+.global _index_mbstowcs
+_index_mbstowcs:
+    .long mbstowcs
     .long 0x000000c0
-    .long _unwind_func_800B4C80
+    .long _unwind_mbstowcs
 
-.global _index_func_800B4D40
-_index_func_800B4D40:
-    .long func_800B4D40
+.global _index_wcstombs
+_index_wcstombs:
+    .long wcstombs
     .long 0x000000b8
-    .long _unwind_func_800B4D40
+    .long _unwind_wcstombs
 
-.global _index_func_800B4DF8
-_index_func_800B4DF8:
-    .long func_800B4DF8
+.global _index_memmove
+_index_memmove:
+    .long memmove
     .long 0x000000cc
-    .long _unwind_func_800B4DF8
+    .long _unwind_memmove
 
-.global _index_func_800B5238
-_index_func_800B5238:
-    .long func_800B5238
+.global _index___signbitd
+_index___signbitd:
+    .long __signbitd
     .long 0x00000018
-    .long _unwind_func_800B5238
+    .long _unwind___signbitd
 
-.global _index_func_800B5250
-_index_func_800B5250:
-    .long func_800B5250
+.global _index___fpclassifyd
+_index___fpclassifyd:
+    .long __fpclassifyd
     .long 0x00000080
-    .long _unwind_func_800B5250
+    .long _unwind___fpclassifyd
 
-.global _index_func_800B52E0
-_index_func_800B52E0:
-    .long func_800B52E0
+.global _index_parse_format_printf_o
+_index_parse_format_printf_o:
+    .long parse_format_printf_o
     .long 0x000005fc
-    .long _unwind_func_800B52E0
+    .long _unwind_parse_format_printf_o
 
-.global _index_func_800B5B04
-_index_func_800B5B04:
-    .long func_800B5B04
+.global _index_longlong2str_printf_o
+_index_longlong2str_printf_o:
+    .long longlong2str_printf_o
     .long 0x000002a0
-    .long _unwind_func_800B5B04
+    .long _unwind_longlong2str_printf_o
 
-.global _index_func_800B5DA4
-_index_func_800B5DA4:
-    .long func_800B5DA4
+.global _index_double2hex_printf_o
+_index_double2hex_printf_o:
+    .long double2hex_printf_o
     .long 0x000003c8
-    .long _unwind_func_800B5DA4
+    .long _unwind_double2hex_printf_o
 
-.global _index_func_800B6294
-_index_func_800B6294:
-    .long func_800B6294
+.global _index_float2str_printf_o
+_index_float2str_printf_o:
+    .long float2str_printf_o
     .long 0x000007d0
-    .long _unwind_func_800B6294
+    .long _unwind_float2str_printf_o
 
-.global _index_func_800B6A64
-_index_func_800B6A64:
-    .long func_800B6A64
+.global _index___pformatter
+_index___pformatter:
+    .long __pformatter
     .long 0x0000085c
-    .long _unwind_func_800B6A64
+    .long _unwind___pformatter
 
-.global _index_lbl_800B72C0
-_index_lbl_800B72C0:
-    .long lbl_800B72C0
+.global _index___FileWrite
+_index___FileWrite:
+    .long __FileWrite
     .long 0x00000058
-    .long _unwind_lbl_800B72C0
+    .long _unwind___FileWrite
 
-.global _index_lbl_800B7318
-_index_lbl_800B7318:
-    .long lbl_800B7318
+.global _index___StringWrite
+_index___StringWrite:
+    .long __StringWrite
     .long 0x0000006c
-    .long _unwind_lbl_800B7318
+    .long _unwind___StringWrite
 
-.global _index_func_800B7384
-_index_func_800B7384:
-    .long func_800B7384
+.global _index_vprintf
+_index_vprintf:
+    .long vprintf
     .long 0x00000078
-    .long _unwind_func_800B7384
+    .long _unwind_vprintf
 
 .global _index_vsnprintf
 _index_vsnprintf:
@@ -308,29 +308,29 @@ _index_vsprintf:
     .long 0x00000080
     .long _unwind_vsprintf
 
-.global _index_func_800B7500
-_index_func_800B7500:
-    .long func_800B7500
+.global _index_snprintf
+_index_snprintf:
+    .long snprintf
     .long 0x000000d8
-    .long _unwind_func_800B7500
+    .long _unwind_snprintf
 
-.global _index_func_800B75D8
-_index_func_800B75D8:
-    .long func_800B75D8
+.global _index_sprintf
+_index_sprintf:
+    .long sprintf
     .long 0x000000d0
-    .long _unwind_func_800B75D8
+    .long _unwind_sprintf
 
-.global _index_func_800B76C8
-_index_func_800B76C8:
-    .long func_800B76C8
+.global _index_parse_format_scanf_o
+_index_parse_format_scanf_o:
+    .long parse_format_scanf_o
     .long 0x000006b4
-    .long _unwind_func_800B76C8
+    .long _unwind_parse_format_scanf_o
 
-.global _index_func_800B7D7C
-_index_func_800B7D7C:
-    .long func_800B7D7C
+.global _index___sformatter
+_index___sformatter:
+    .long __sformatter
     .long 0x00000d60
-    .long _unwind_func_800B7D7C
+    .long _unwind___sformatter
 
 .global _index_sscanf
 _index_sscanf:
@@ -338,71 +338,71 @@ _index_sscanf:
     .long 0x000000c8
     .long _unwind_sscanf
 
-.global _index_func_800B8FA8
-_index_func_800B8FA8:
-    .long func_800B8FA8
+.global _index___strtold
+_index___strtold:
+    .long __strtold
     .long 0x000013f4
-    .long _unwind_func_800B8FA8
+    .long _unwind___strtold
 
-.global _index_func_800BA39C
-_index_func_800BA39C:
-    .long func_800BA39C
+.global _index_atof
+_index_atof:
+    .long atof
     .long 0x00000084
-    .long _unwind_func_800BA39C
+    .long _unwind_atof
 
-.global _index_func_800BA420
-_index_func_800BA420:
-    .long func_800BA420
+.global _index___strtoul
+_index___strtoul:
+    .long __strtoul
     .long 0x00000430
-    .long _unwind_func_800BA420
+    .long _unwind___strtoul
 
-.global _index_func_800BA850
-_index_func_800BA850:
-    .long func_800BA850
+.global _index___strtoull
+_index___strtoull:
+    .long __strtoull
     .long 0x000004c4
-    .long _unwind_func_800BA850
+    .long _unwind___strtoull
 
-.global _index_func_800BAD44
-_index_func_800BAD44:
-    .long func_800BAD44
+.global _index_parse_format_wprintf_o
+_index_parse_format_wprintf_o:
+    .long parse_format_wprintf_o
     .long 0x000005c0
-    .long _unwind_func_800BAD44
+    .long _unwind_parse_format_wprintf_o
 
-.global _index_func_800BB538
-_index_func_800BB538:
-    .long func_800BB538
+.global _index_longlong2str_wprintf_o
+_index_longlong2str_wprintf_o:
+    .long longlong2str_wprintf_o
     .long 0x000002ac
-    .long _unwind_func_800BB538
+    .long _unwind_longlong2str_wprintf_o
 
-.global _index_func_800BB7E4
-_index_func_800BB7E4:
-    .long func_800BB7E4
+.global _index_double2hex_wprintf_o
+_index_double2hex_wprintf_o:
+    .long double2hex_wprintf_o
     .long 0x000003c8
-    .long _unwind_func_800BB7E4
+    .long _unwind_double2hex_wprintf_o
 
-.global _index_func_800BBCD4
-_index_func_800BBCD4:
-    .long func_800BBCD4
+.global _index_float2str_wprintf_o
+_index_float2str_wprintf_o:
+    .long float2str_wprintf_o
     .long 0x000007a0
-    .long _unwind_func_800BBCD4
+    .long _unwind_float2str_wprintf_o
 
-.global _index_func_800BC474
-_index_func_800BC474:
-    .long func_800BC474
+.global _index___wpformatter
+_index___wpformatter:
+    .long __wpformatter
     .long 0x00000944
-    .long _unwind_func_800BC474
+    .long _unwind___wpformatter
 
-.global _index_lbl_800BCDB8
-_index_lbl_800BCDB8:
-    .long lbl_800BCDB8
+.global _index___wStringWrite
+_index___wStringWrite:
+    .long __wStringWrite
     .long 0x0000006c
-    .long _unwind_lbl_800BCDB8
+    .long _unwind___wStringWrite
 
-.global _index_func_800BCE24
-_index_func_800BCE24:
-    .long func_800BCE24
+.global _index_swprintf
+_index_swprintf:
+    .long swprintf
     .long 0x000000dc
-    .long _unwind_func_800BCE24
+    .long _unwind_swprintf
 
 .global _index_0x800bd08c
 _index_0x800bd08c:
@@ -410,479 +410,479 @@ _index_0x800bd08c:
     .long 0x000000d0
     .long _unwind_0x800bd08c
 
-.global _index_func_800BD164
-_index_func_800BD164:
-    .long func_800BD164
+.global _index_scalbn
+_index_scalbn:
+    .long scalbn
     .long 0x00000040
-    .long _unwind_func_800BD164
+    .long _unwind_scalbn
 
-.global _index_func_80167B48
-_index_func_80167B48:
-    .long func_80167B48
+.global _index_RFLInitResAsync
+_index_RFLInitResAsync:
+    .long RFLInitResAsync
     .long 0x00000398
-    .long _unwind_func_80167B48
+    .long _unwind_RFLInitResAsync
 
-.global _index_func_80167EE0
-_index_func_80167EE0:
-    .long func_80167EE0
+.global _index_RFLInitRes
+_index_RFLInitRes:
+    .long RFLInitRes
     .long 0x000000a0
-    .long _unwind_func_80167EE0
+    .long _unwind_RFLInitRes
 
-.global _index_func_80167F80
-_index_func_80167F80:
-    .long func_80167F80
+.global _index_RFLExit
+_index_RFLExit:
+    .long RFLExit
     .long 0x00000188
-    .long _unwind_func_80167F80
+    .long _unwind_RFLExit
 
-.global _index_lbl_80168108
-_index_lbl_80168108:
-    .long lbl_80168108
+.global _index_bootloadDB2Res_
+_index_bootloadDB2Res_:
+    .long 0x80168108
     .long 0x0000022c
-    .long _unwind_lbl_80168108
+    .long _unwind_bootloadDB2Res_
 
-.global _index_func_80168404
-_index_func_80168404:
-    .long func_80168404
+.global _index_RFLGetAsyncStatus
+_index_RFLGetAsyncStatus:
+    .long RFLGetAsyncStatus
     .long 0x00000088
-    .long _unwind_func_80168404
+    .long _unwind_RFLGetAsyncStatus
 
-.global _index_func_801684B4
-_index_func_801684B4:
-    .long func_801684B4
+.global _index_RFLWaitAsync
+_index_RFLWaitAsync:
+    .long RFLWaitAsync
     .long 0x0000009c
-    .long _unwind_func_801684B4
+    .long _unwind_RFLWaitAsync
 
-.global _index_func_80168614
-_index_func_80168614:
-    .long func_80168614
+.global _index_RFLiInitLoader
+_index_RFLiInitLoader:
+    .long RFLiInitLoader
     .long 0x00000114
-    .long _unwind_func_80168614
+    .long _unwind_RFLiInitLoader
 
-.global _index_func_80168728
-_index_func_80168728:
-    .long func_80168728
+.global _index_parseOnmemoryRes_
+_index_parseOnmemoryRes_:
+    .long 0x80168728
     .long 0x00000178
-    .long _unwind_func_80168728
+    .long _unwind_parseOnmemoryRes_
 
-.global _index_lbl_801688A0
-_index_lbl_801688A0:
-    .long lbl_801688A0
+.global _index_loadResRead2ndcallback_
+_index_loadResRead2ndcallback_:
+    .long 0x801688a0
     .long 0x00000120
-    .long _unwind_lbl_801688A0
+    .long _unwind_loadResRead2ndcallback_
 
-.global _index_lbl_801689C4
-_index_lbl_801689C4:
-    .long lbl_801689C4
+.global _index_loadResRead1stcallback_
+_index_loadResRead1stcallback_:
+    .long 0x801689c4
     .long 0x000000ec
-    .long _unwind_lbl_801689C4
+    .long _unwind_loadResRead1stcallback_
 
-.global _index_lbl_80168AB0
-_index_lbl_80168AB0:
-    .long lbl_80168AB0
+.global _index_loadResGetlengthcallback_
+_index_loadResGetlengthcallback_:
+    .long 0x80168ab0
     .long 0x000000a4
-    .long _unwind_lbl_80168AB0
+    .long _unwind_loadResGetlengthcallback_
 
-.global _index_lbl_80168B54
-_index_lbl_80168B54:
-    .long lbl_80168B54
+.global _index_loadResOpencallback_
+_index_loadResOpencallback_:
+    .long 0x80168b54
     .long 0x00000070
-    .long _unwind_lbl_80168B54
+    .long _unwind_loadResOpencallback_
 
-.global _index_func_80168BC4
-_index_func_80168BC4:
-    .long func_80168BC4
+.global _index_RFLiLoadResourceHeaderAsync
+_index_RFLiLoadResourceHeaderAsync:
+    .long RFLiLoadResourceHeaderAsync
     .long 0x00000094
-    .long _unwind_func_80168BC4
+    .long _unwind_RFLiLoadResourceHeaderAsync
 
-.global _index_func_80168C58
-_index_func_80168C58:
-    .long func_80168C58
+.global _index_getNANDFile_
+_index_getNANDFile_:
+    .long 0x80168c58
     .long 0x00000184
-    .long _unwind_func_80168C58
+    .long _unwind_getNANDFile_
 
-.global _index_func_80168DDC
-_index_func_80168DDC:
-    .long func_80168DDC
+.global _index_RFLiGetTexSize
+_index_RFLiGetTexSize:
+    .long RFLiGetTexSize
     .long 0x0000016c
-    .long _unwind_func_80168DDC
+    .long _unwind_RFLiGetTexSize
 
-.global _index_func_80168F48
-_index_func_80168F48:
-    .long func_80168F48
+.global _index_RFLiLoadTexture
+_index_RFLiLoadTexture:
+    .long RFLiLoadTexture
     .long 0x00000124
-    .long _unwind_func_80168F48
+    .long _unwind_RFLiLoadTexture
 
-.global _index_func_8016906C
-_index_func_8016906C:
-    .long func_8016906C
+.global _index_RFLiGetShpTexSize
+_index_RFLiGetShpTexSize:
+    .long RFLiGetShpTexSize
     .long 0x0000016c
-    .long _unwind_func_8016906C
+    .long _unwind_RFLiGetShpTexSize
 
-.global _index_func_801691D8
-_index_func_801691D8:
-    .long func_801691D8
+.global _index_RFLiLoadShpTexture
+_index_RFLiLoadShpTexture:
+    .long RFLiLoadShpTexture
     .long 0x00000124
-    .long _unwind_func_801691D8
+    .long _unwind_RFLiLoadShpTexture
 
-.global _index_func_801692FC
-_index_func_801692FC:
-    .long func_801692FC
+.global _index_RFLiGetShapeSize
+_index_RFLiGetShapeSize:
+    .long RFLiGetShapeSize
     .long 0x0000016c
-    .long _unwind_func_801692FC
+    .long _unwind_RFLiGetShapeSize
 
-.global _index_func_80169468
-_index_func_80169468:
-    .long func_80169468
+.global _index_RFLiLoadShape
+_index_RFLiLoadShape:
+    .long RFLiLoadShape
     .long 0x00000124
-    .long _unwind_func_80169468
+    .long _unwind_RFLiLoadShape
 
-.global _index_func_8016958C
-_index_func_8016958C:
-    .long func_8016958C
+.global _index_RFLFreeCachedResource
+_index_RFLFreeCachedResource:
+    .long RFLFreeCachedResource
     .long 0x0000006c
-    .long _unwind_func_8016958C
+    .long _unwind_RFLFreeCachedResource
 
-.global _index_func_801695F8
-_index_func_801695F8:
-    .long func_801695F8
+.global _index_RFLIsResourceCached
+_index_RFLIsResourceCached:
+    .long RFLIsResourceCached
     .long 0x00000048
-    .long _unwind_func_801695F8
+    .long _unwind_RFLIsResourceCached
 
-.global _index_func_80169640
-_index_func_80169640:
-    .long func_80169640
+.global _index_RFLiInitAccessInfo
+_index_RFLiInitAccessInfo:
+    .long RFLiInitAccessInfo
     .long 0x0000007c
-    .long _unwind_func_80169640
+    .long _unwind_RFLiInitAccessInfo
 
-.global _index_func_801696BC
-_index_func_801696BC:
-    .long func_801696BC
+.global _index_RFLiExitAccessInfo
+_index_RFLiExitAccessInfo:
+    .long RFLiExitAccessInfo
     .long 0x00000044
-    .long _unwind_func_801696BC
+    .long _unwind_RFLiExitAccessInfo
 
-.global _index_func_80169704
-_index_func_80169704:
-    .long func_80169704
+.global _index_RFLiStartWorking
+_index_RFLiStartWorking:
+    .long RFLiStartWorking
     .long 0x00000050
-    .long _unwind_func_80169704
+    .long _unwind_RFLiStartWorking
 
-.global _index_func_80169754
-_index_func_80169754:
-    .long func_80169754
+.global _index_RFLiEndWorkingReason
+_index_RFLiEndWorkingReason:
+    .long RFLiEndWorkingReason
     .long 0x00000084
-    .long _unwind_func_80169754
+    .long _unwind_RFLiEndWorkingReason
 
-.global _index_func_801697D8
-_index_func_801697D8:
-    .long func_801697D8
+.global _index_RFLiEndWorking
+_index_RFLiEndWorking:
+    .long RFLiEndWorking
     .long 0x0000007c
-    .long _unwind_func_801697D8
+    .long _unwind_RFLiEndWorking
 
-.global _index_lbl_80169854
-_index_lbl_80169854:
-    .long lbl_80169854
+.global _index_alarmCallback_
+_index_alarmCallback_:
+    .long 0x80169854
     .long 0x00000050
-    .long _unwind_lbl_80169854
+    .long _unwind_alarmCallback_
 
-.global _index_lbl_801698A4
-_index_lbl_801698A4:
-    .long lbl_801698A4
+.global _index_opencallback_
+_index_opencallback_:
+    .long 0x801698a4
     .long 0x000002e4
-    .long _unwind_lbl_801698A4
+    .long _unwind_opencallback_
 
-.global _index_lbl_80169B88
-_index_lbl_80169B88:
-    .long lbl_80169B88
+.global _index_createcallback_
+_index_createcallback_:
+    .long 0x80169b88
     .long 0x000002d8
-    .long _unwind_lbl_80169B88
+    .long _unwind_createcallback_
 
-.global _index_lbl_80169E60
-_index_lbl_80169E60:
-    .long lbl_80169E60
+.global _index_close2opencallback_
+_index_close2opencallback_:
+    .long 0x80169e60
     .long 0x000002c8
-    .long _unwind_lbl_80169E60
+    .long _unwind_close2opencallback_
 
-.global _index_func_8016A128
-_index_func_8016A128:
-    .long func_8016A128
+.global _index_RFLiOpenAsync
+_index_RFLiOpenAsync:
+    .long RFLiOpenAsync
     .long 0x000003dc
-    .long _unwind_func_8016A128
+    .long _unwind_RFLiOpenAsync
 
-.global _index_lbl_8016A504
-_index_lbl_8016A504:
-    .long lbl_8016A504
+.global _index_readcallback_
+_index_readcallback_:
+    .long 0x8016a504
     .long 0x00000268
-    .long _unwind_lbl_8016A504
+    .long _unwind_readcallback_
 
-.global _index_lbl_8016A76C
-_index_lbl_8016A76C:
-    .long lbl_8016A76C
+.global _index_readseekcallback_
+_index_readseekcallback_:
+    .long 0x8016a76c
     .long 0x000002f4
-    .long _unwind_lbl_8016A76C
+    .long _unwind_readseekcallback_
 
-.global _index_func_8016AA60
-_index_func_8016AA60:
-    .long func_8016AA60
+.global _index_RFLiReadAsync
+_index_RFLiReadAsync:
+    .long RFLiReadAsync
     .long 0x000001c8
-    .long _unwind_func_8016AA60
+    .long _unwind_RFLiReadAsync
 
-.global _index_lbl_8016AC28
-_index_lbl_8016AC28:
-    .long lbl_8016AC28
+.global _index_retryWrite_
+_index_retryWrite_:
+    .long 0x8016ac28
     .long 0x00000298
-    .long _unwind_lbl_8016AC28
+    .long _unwind_retryWrite_
 
-.global _index_lbl_8016AEC0
-_index_lbl_8016AEC0:
-    .long lbl_8016AEC0
+.global _index_writecallback_
+_index_writecallback_:
+    .long 0x8016aec0
     .long 0x000002d0
-    .long _unwind_lbl_8016AEC0
+    .long _unwind_writecallback_
 
-.global _index_lbl_8016B190
-_index_lbl_8016B190:
-    .long lbl_8016B190
+.global _index_retryWriteSeek_
+_index_retryWriteSeek_:
+    .long 0x8016b190
     .long 0x00000260
-    .long _unwind_lbl_8016B190
+    .long _unwind_retryWriteSeek_
 
-.global _index_lbl_8016B3F0
-_index_lbl_8016B3F0:
-    .long lbl_8016B3F0
+.global _index_writeseekcallback_
+_index_writeseekcallback_:
+    .long 0x8016b3f0
     .long 0x00000404
-    .long _unwind_lbl_8016B3F0
+    .long _unwind_writeseekcallback_
 
-.global _index_func_8016B7F4
-_index_func_8016B7F4:
-    .long func_8016B7F4
+.global _index_RFLiWriteAsync
+_index_RFLiWriteAsync:
+    .long RFLiWriteAsync
     .long 0x00000240
-    .long _unwind_func_8016B7F4
+    .long _unwind_RFLiWriteAsync
 
-.global _index_lbl_8016BA34
-_index_lbl_8016BA34:
-    .long lbl_8016BA34
+.global _index_closecallback_
+_index_closecallback_:
+    .long 0x8016ba34
     .long 0x00000198
-    .long _unwind_lbl_8016BA34
+    .long _unwind_closecallback_
 
-.global _index_func_8016BBCC
-_index_func_8016BBCC:
-    .long func_8016BBCC
+.global _index_RFLiCloseAsync
+_index_RFLiCloseAsync:
+    .long RFLiCloseAsync
     .long 0x000001cc
-    .long _unwind_func_8016BBCC
+    .long _unwind_RFLiCloseAsync
 
-.global _index_lbl_8016BD98
-_index_lbl_8016BD98:
-    .long lbl_8016BD98
+.global _index_getlengthcallback_
+_index_getlengthcallback_:
+    .long 0x8016bd98
     .long 0x00000190
-    .long _unwind_lbl_8016BD98
+    .long _unwind_getlengthcallback_
 
-.global _index_func_8016BF28
-_index_func_8016BF28:
-    .long func_8016BF28
+.global _index_RFLiGetLengthAsync
+_index_RFLiGetLengthAsync:
+    .long RFLiGetLengthAsync
     .long 0x000001ac
-    .long _unwind_func_8016BF28
+    .long _unwind_RFLiGetLengthAsync
 
-.global _index_lbl_8016C0D4
-_index_lbl_8016C0D4:
-    .long lbl_8016C0D4
+.global _index_deletecallback_
+_index_deletecallback_:
+    .long 0x8016c0d4
     .long 0x000001a8
-    .long _unwind_lbl_8016C0D4
+    .long _unwind_deletecallback_
 
-.global _index_func_8016C27C
-_index_func_8016C27C:
-    .long func_8016C27C
+.global _index_RFLiDeleteAsync
+_index_RFLiDeleteAsync:
+    .long RFLiDeleteAsync
     .long 0x000001f4
-    .long _unwind_func_8016C27C
+    .long _unwind_RFLiDeleteAsync
 
-.global _index_func_8016C470
-_index_func_8016C470:
-    .long func_8016C470
+.global _index_createdircallback2_
+_index_createdircallback2_:
+    .long 0x8016c470
     .long 0x000001bc
-    .long _unwind_func_8016C470
+    .long _unwind_createdircallback2_
 
-.global _index_func_8016C62C
-_index_func_8016C62C:
-    .long func_8016C62C
+.global _index_createdircallback1_
+_index_createdircallback1_:
+    .long 0x8016c62c
     .long 0x000002d0
-    .long _unwind_func_8016C62C
+    .long _unwind_createdircallback1_
 
-.global _index_func_8016C8FC
-_index_func_8016C8FC:
-    .long func_8016C8FC
+.global _index_RFLiCreateSaveDirAsync
+_index_RFLiCreateSaveDirAsync:
+    .long RFLiCreateSaveDirAsync
     .long 0x000001d8
-    .long _unwind_func_8016C8FC
+    .long _unwind_RFLiCreateSaveDirAsync
 
-.global _index_func_8016CAD4
-_index_func_8016CAD4:
-    .long func_8016CAD4
+.global _index_RFLSetCoordinate
+_index_RFLSetCoordinate:
+    .long RFLSetCoordinate
     .long 0x00000168
-    .long _unwind_func_8016CAD4
+    .long _unwind_RFLSetCoordinate
 
-.global _index_func_8016CC3C
-_index_func_8016CC3C:
-    .long func_8016CC3C
+.global _index_RFLGetModelBufferSize
+_index_RFLGetModelBufferSize:
+    .long RFLGetModelBufferSize
     .long 0x000000dc
-    .long _unwind_func_8016CC3C
+    .long _unwind_RFLGetModelBufferSize
 
-.global _index_func_8016CD18
-_index_func_8016CD18:
-    .long func_8016CD18
+.global _index_RFLInitCharModel
+_index_RFLInitCharModel:
+    .long RFLInitCharModel
     .long 0x0000006c
-    .long _unwind_func_8016CD18
+    .long _unwind_RFLInitCharModel
 
-.global _index_func_8016CD84
-_index_func_8016CD84:
-    .long func_8016CD84
+.global _index_RFLiInitCharModel
+_index_RFLiInitCharModel:
+    .long RFLiInitCharModel
     .long 0x00000374
-    .long _unwind_func_8016CD84
+    .long _unwind_RFLiInitCharModel
 
-.global _index_func_8016D0F8
-_index_func_8016D0F8:
-    .long func_8016D0F8
+.global _index_RFLSetMtx
+_index_RFLSetMtx:
+    .long RFLSetMtx
     .long 0x0000004c
-    .long _unwind_func_8016D0F8
+    .long _unwind_RFLSetMtx
 
-.global _index_func_8016D194
-_index_func_8016D194:
-    .long func_8016D194
+.global _index_RFLLoadDrawSetting
+_index_RFLLoadDrawSetting:
+    .long RFLLoadDrawSetting
     .long 0x000002e4
-    .long _unwind_func_8016D194
+    .long _unwind_RFLLoadDrawSetting
 
-.global _index_func_8016D490
-_index_func_8016D490:
-    .long func_8016D490
+.global _index_RFLLoadVertexSetting
+_index_RFLLoadVertexSetting:
+    .long RFLLoadVertexSetting
     .long 0x000000a0
-    .long _unwind_func_8016D490
+    .long _unwind_RFLLoadVertexSetting
 
-.global _index_func_8016D530
-_index_func_8016D530:
-    .long func_8016D530
+.global _index_RFLLoadMaterialSetting
+_index_RFLLoadMaterialSetting:
+    .long RFLLoadMaterialSetting
     .long 0x000000c0
-    .long _unwind_func_8016D530
+    .long _unwind_RFLLoadMaterialSetting
 
-.global _index_func_8016D5F0
-_index_func_8016D5F0:
-    .long func_8016D5F0
+.global _index_RFLDrawOpaCore
+_index_RFLDrawOpaCore:
+    .long RFLDrawOpaCore
     .long 0x0000050c
-    .long _unwind_func_8016D5F0
+    .long _unwind_RFLDrawOpaCore
 
-.global _index_func_8016DAFC
-_index_func_8016DAFC:
-    .long func_8016DAFC
+.global _index_RFLDrawXluCore
+_index_RFLDrawXluCore:
+    .long RFLDrawXluCore
     .long 0x00000284
-    .long _unwind_func_8016DAFC
+    .long _unwind_RFLDrawXluCore
 
-.global _index_func_8016DD80
-_index_func_8016DD80:
-    .long func_8016DD80
+.global _index_RFLiInitCharModelRes
+_index_RFLiInitCharModelRes:
+    .long RFLiInitCharModelRes
     .long 0x00000738
-    .long _unwind_func_8016DD80
+    .long _unwind_RFLiInitCharModelRes
 
-.global _index_func_8016E4B8
-_index_func_8016E4B8:
-    .long func_8016E4B8
+.global _index_RFLiInitShapeRes
+_index_RFLiInitShapeRes:
+    .long RFLiInitShapeRes
     .long 0x000005e8
-    .long _unwind_func_8016E4B8
+    .long _unwind_RFLiInitShapeRes
 
-.global _index_func_8016EAA0
-_index_func_8016EAA0:
-    .long func_8016EAA0
+.global _index_RFLiInitTexRes
+_index_RFLiInitTexRes:
+    .long RFLiInitTexRes
     .long 0x0000011c
-    .long _unwind_func_8016EAA0
+    .long _unwind_RFLiInitTexRes
 
-.global _index_func_8016EBBC
-_index_func_8016EBBC:
-    .long func_8016EBBC
+.global _index_RFLDrawShape
+_index_RFLDrawShape:
+    .long RFLDrawShape
     .long 0x000002e4
-    .long _unwind_func_8016EBBC
+    .long _unwind_RFLDrawShape
 
-.global _index_func_8016EEA0
-_index_func_8016EEA0:
-    .long func_8016EEA0
+.global _index_RFLiSetupCopyTex
+_index_RFLiSetupCopyTex:
+    .long RFLiSetupCopyTex
     .long 0x00000130
-    .long _unwind_func_8016EEA0
+    .long _unwind_RFLiSetupCopyTex
 
-.global _index_func_8016EFD0
-_index_func_8016EFD0:
-    .long func_8016EFD0
+.global _index_RFLiMakeTexture
+_index_RFLiMakeTexture:
+    .long RFLiMakeTexture
     .long 0x00001088
-    .long _unwind_func_8016EFD0
+    .long _unwind_RFLiMakeTexture
 
-.global _index_func_80170058
-_index_func_80170058:
-    .long func_80170058
+.global _index_RFLiSetup2DCameraAndParam
+_index_RFLiSetup2DCameraAndParam:
+    .long RFLiSetup2DCameraAndParam
     .long 0x000001d8
-    .long _unwind_func_80170058
+    .long _unwind_RFLiSetup2DCameraAndParam
 
-.global _index_func_80170230
-_index_func_80170230:
-    .long func_80170230
+.global _index_RFLiSetTev4Mouth
+_index_RFLiSetTev4Mouth:
+    .long RFLiSetTev4Mouth
     .long 0x00000248
-    .long _unwind_func_80170230
+    .long _unwind_RFLiSetTev4Mouth
 
-.global _index_func_80170478
-_index_func_80170478:
-    .long func_80170478
+.global _index_RFLiSetTev4Eye
+_index_RFLiSetTev4Eye:
+    .long RFLiSetTev4Eye
     .long 0x000002b0
-    .long _unwind_func_80170478
+    .long _unwind_RFLiSetTev4Eye
 
-.global _index_func_80170728
-_index_func_80170728:
-    .long func_80170728
+.global _index_RFLiSetFaceParts
+_index_RFLiSetFaceParts:
+    .long RFLiSetFaceParts
     .long 0x00000508
-    .long _unwind_func_80170728
+    .long _unwind_RFLiSetFaceParts
 
-.global _index_func_80170C30
-_index_func_80170C30:
-    .long func_80170C30
+.global _index_RFLiCapture
+_index_RFLiCapture:
+    .long RFLiCapture
     .long 0x00000868
-    .long _unwind_func_80170C30
+    .long _unwind_RFLiCapture
 
-.global _index_func_80171498
-_index_func_80171498:
-    .long func_80171498
+.global _index_RFLiDrawQuad
+_index_RFLiDrawQuad:
+    .long RFLiDrawQuad
     .long 0x000001f8
-    .long _unwind_func_80171498
+    .long _unwind_RFLiDrawQuad
 
-.global _index_func_80171738
-_index_func_80171738:
-    .long func_80171738
+.global _index_RFLSetIconDrawDoneCallback
+_index_RFLSetIconDrawDoneCallback:
+    .long RFLSetIconDrawDoneCallback
     .long 0x00000030
-    .long _unwind_func_80171738
+    .long _unwind_RFLSetIconDrawDoneCallback
 
-.global _index_func_80171768
-_index_func_80171768:
-    .long func_80171768
+.global _index_RFLiInitHiddenDatabase
+_index_RFLiInitHiddenDatabase:
+    .long RFLiInitHiddenDatabase
     .long 0x00000034
-    .long _unwind_func_80171768
+    .long _unwind_RFLiInitHiddenDatabase
 
-.global _index_lbl_8017179C
-_index_lbl_8017179C:
-    .long lbl_8017179C
+.global _index_loadclosecallback_
+_index_loadclosecallback_:
+    .long loadclosecallback_
     .long 0x00000038
-    .long _unwind_lbl_8017179C
+    .long _unwind_loadclosecallback_
 
-.global _index_lbl_801717D4
-_index_lbl_801717D4:
-    .long lbl_801717D4
+.global _index_loadcallback_
+_index_loadcallback_:
+    .long loadcallback_
     .long 0x000000d4
-    .long _unwind_lbl_801717D4
+    .long _unwind_loadcallback_
 
-.global _index_lbl_801718A8
-_index_lbl_801718A8:
-    .long lbl_801718A8
+.global _index_loadopencallback_
+_index_loadopencallback_:
+    .long loadopencallback_
     .long 0x000000bc
-    .long _unwind_lbl_801718A8
+    .long _unwind_loadopencallback_
 
-.global _index_func_80171964
-_index_func_80171964:
-    .long func_80171964
+.global _index_RFLiLoadHiddenDataAsync
+_index_RFLiLoadHiddenDataAsync:
+    .long RFLiLoadHiddenDataAsync
     .long 0x000000b8
-    .long _unwind_func_80171964
+    .long _unwind_RFLiLoadHiddenDataAsync
 
-.global _index_func_80171A1C
-_index_func_80171A1C:
-    .long func_80171A1C
+.global _index_RFLiLoadCachedHiddenData
+_index_RFLiLoadCachedHiddenData:
+    .long RFLiLoadCachedHiddenData
     .long 0x00000140
-    .long _unwind_func_80171A1C
+    .long _unwind_RFLiLoadCachedHiddenData
 
 .global _index_func_80171B68
 _index_func_80171B68:
@@ -920,453 +920,454 @@ _index_lbl_80171FAC:
     .long 0x00000070
     .long _unwind_lbl_80171FAC
 
-.global _index_func_80172044
-_index_func_80172044:
-    .long func_80172044
+.global _index_RFLiWriteCtrlToHiddenDB
+_index_RFLiWriteCtrlToHiddenDB:
+    .long RFLiWriteCtrlToHiddenDB
     .long 0x000001b8
-    .long _unwind_func_80172044
+    .long _unwind_RFLiWriteCtrlToHiddenDB
 
-.global _index_func_801721FC
-_index_func_801721FC:
-    .long func_801721FC
+.global _index_RFLiCountupHiddenDataNum
+_index_RFLiCountupHiddenDataNum:
+    .long RFLiCountupHiddenDataNum
     .long 0x000000ac
-    .long _unwind_func_801721FC
+    .long _unwind_RFLiCountupHiddenDataNum
 
-.global _index_func_801722A8
-_index_func_801722A8:
-    .long func_801722A8
+.global _index_RFLiGetHiddenNext
+_index_RFLiGetHiddenNext:
+    .long RFLiGetHiddenNext
     .long 0x00000080
-    .long _unwind_func_801722A8
+    .long _unwind_RFLiGetHiddenNext
 
-.global _index_func_80172328
-_index_func_80172328:
-    .long func_80172328
+.global _index_RFLiGetHiddenPrev
+_index_RFLiGetHiddenPrev:
+    .long RFLiGetHiddenPrev
     .long 0x00000080
-    .long _unwind_func_80172328
+    .long _unwind_RFLiGetHiddenPrev
 
-.global _index_func_801723A8
-_index_func_801723A8:
-    .long func_801723A8
+.global _index_RFLiIsValidHiddenData
+_index_RFLiIsValidHiddenData:
+    .long RFLiIsValidHiddenData
     .long 0x000000e0
-    .long _unwind_func_801723A8
+    .long _unwind_RFLiIsValidHiddenData
 
-.global _index_func_80172498
-_index_func_80172498:
-    .long func_80172498
+.global _index_RFLiIsCachedHDB
+_index_RFLiIsCachedHDB:
+    .long RFLiIsCachedHDB
     .long 0x00000048
-    .long _unwind_func_80172498
+    .long _unwind_RFLiIsCachedHDB
 
-.global _index_func_801724E0
-_index_func_801724E0:
-    .long func_801724E0
+.global _index_RFLiInitDatabase
+_index_RFLiInitDatabase:
+    .long RFLiInitDatabase
     .long 0x00000064
-    .long _unwind_func_801724E0
+    .long _unwind_RFLiInitDatabase
 
-.global _index_lbl_80172544
-_index_lbl_80172544:
-    .long lbl_80172544
+.global _index_bootloadCheckCRCCb_
+_index_bootloadCheckCRCCb_:
+    .long bootloadCheckCRCCb_
     .long 0x00000070
-    .long _unwind_lbl_80172544
+    .long _unwind_bootloadCheckCRCCb_
 
-.global _index_lbl_801725B4
-_index_lbl_801725B4:
-    .long lbl_801725B4
+.global _index_bootloadDBcallback_
+_index_bootloadDBcallback_:
+    .long bootloadDBcallback_
     .long 0x00000158
-    .long _unwind_lbl_801725B4
+    .long _unwind_bootloadDBcallback_
 
-.global _index_lbl_8017270C
-_index_lbl_8017270C:
-    .long lbl_8017270C
+.global _index_bootloadDBopencallback_
+_index_bootloadDBopencallback_:
+    .long bootloadDBopencallback_
     .long 0x00000130
-    .long _unwind_lbl_8017270C
+    .long _unwind_bootloadDBopencallback_
 
-.global _index_func_8017283C
-_index_func_8017283C:
-    .long func_8017283C
+.global _index_RFLiBootLoadDatabaseAsync
+_index_RFLiBootLoadDatabaseAsync:
+    .long RFLiBootLoadDatabaseAsync
     .long 0x000000e0
-    .long _unwind_func_8017283C
+    .long _unwind_RFLiBootLoadDatabaseAsync
 
-.global _index_lbl_8017291C
-_index_lbl_8017291C:
-    .long lbl_8017291C
+.global _index_saveDBcallback_
+_index_saveDBcallback_:
+    .long saveDBcallback_
     .long 0x00000030
-    .long _unwind_lbl_8017291C
+    .long _unwind_saveDBcallback_
 
-.global _index_lbl_8017294C
-_index_lbl_8017294C:
-    .long lbl_8017294C
+.global _index_saveDBopencallback_
+_index_saveDBopencallback_:
+    .long saveDBopencallback_
     .long 0x00000070
-    .long _unwind_lbl_8017294C
+    .long _unwind_saveDBopencallback_
 
-.global _index_lbl_801729BC
-_index_lbl_801729BC:
-    .long lbl_801729BC
+.global _index_saveDBmultiopencallback_
+_index_saveDBmultiopencallback_:
+    .long saveDBmultiopencallback_
     .long 0x0000007c
-    .long _unwind_lbl_801729BC
+    .long _unwind_saveDBmultiopencallback_
 
-.global _index_lbl_80172A38
-_index_lbl_80172A38:
-    .long lbl_80172A38
+.global _index_RFLiSaveDatabase
+_index_RFLiSaveDatabase:
+    .long RFLiSaveDatabase
     .long 0x000000a8
-    .long _unwind_lbl_80172A38
+    .long _unwind_RFLiSaveDatabase
 
-.global _index_func_80172AE0
-_index_func_80172AE0:
-    .long func_80172AE0
+.global _index_RFLiSaveDatabaseAsync
+_index_RFLiSaveDatabaseAsync:
+    .long RFLiSaveDatabaseAsync
     .long 0x00000160
-    .long _unwind_func_80172AE0
+    .long _unwind_RFLiSaveDatabaseAsync
 
-.global _index_func_80172C40
-_index_func_80172C40:
-    .long func_80172C40
+.global _index_RFLiGetCharData
+_index_RFLiGetCharData:
+    .long RFLiGetCharData
     .long 0x0000016c
-    .long _unwind_func_80172C40
+    .long _unwind_RFLiGetCharData
 
-.global _index_func_80172DAC
-_index_func_80172DAC:
-    .long func_80172DAC
+.global _index_convertRaw2InfoCore_
+_index_convertRaw2InfoCore_:
+    .long convertRaw2InfoCore_
     .long 0x000001b8
-    .long _unwind_func_80172DAC
+    .long _unwind_convertRaw2InfoCore_
 
-.global _index_func_80172F64
-_index_func_80172F64:
-    .long func_80172F64
+.global _index_RFLiConvertRaw2Info
+_index_RFLiConvertRaw2Info:
+    .long RFLiConvertRaw2Info
     .long 0x00000050
-    .long _unwind_func_80172F64
+    .long _unwind_RFLiConvertRaw2Info
 
-.global _index_func_80172FB4
-_index_func_80172FB4:
-    .long func_80172FB4
+.global _index_RFLiConvertHRaw2Info
+_index_RFLiConvertHRaw2Info:
+    .long RFLiConvertHRaw2Info
     .long 0x00000050
-    .long _unwind_func_80172FB4
+    .long _unwind_RFLiConvertHRaw2Info
 
-.global _index_func_80173004
-_index_func_80173004:
-    .long func_80173004
+.global _index_convertInfo2RawCore_
+_index_convertInfo2RawCore_:
+    .long convertInfo2RawCore_
     .long 0x000001ac
-    .long _unwind_func_80173004
+    .long _unwind_convertInfo2RawCore_
 
-.global _index_func_801731B0
-_index_func_801731B0:
-    .long func_801731B0
+.global _index_RFLiConvertInfo2HRaw
+_index_RFLiConvertInfo2HRaw:
+    .long RFLiConvertInfo2HRaw
     .long 0x00000038
-    .long _unwind_func_801731B0
+    .long _unwind_RFLiConvertInfo2HRaw
 
-.global _index_func_801731E8
-_index_func_801731E8:
-    .long func_801731E8
+.global _index_RFLiConvertRaw2HRaw
+_index_RFLiConvertRaw2HRaw:
+    .long RFLiConvertRaw2HRaw
     .long 0x00000060
-    .long _unwind_func_801731E8
+    .long _unwind_RFLiConvertRaw2HRaw
 
-.global _index_func_80173248
-_index_func_80173248:
-    .long func_80173248
+.global _index_RFLiGetCharRawData
+_index_RFLiGetCharRawData:
+    .long RFLiGetCharRawData
     .long 0x00000074
-    .long _unwind_func_80173248
+    .long _unwind_RFLiGetCharRawData
 
-.global _index_func_801732BC
-_index_func_801732BC:
-    .long func_801732BC
+.global _index_RFLiGetCharInfo
+_index_RFLiGetCharInfo:
+    .long RFLiGetCharInfo
     .long 0x000000a4
-    .long _unwind_func_801732BC
+    .long _unwind_RFLiGetCharInfo
 
-.global _index_func_80173360
-_index_func_80173360:
-    .long func_80173360
+.global _index_RFLIsAvailableOfficialData
+_index_RFLIsAvailableOfficialData:
+    .long RFLIsAvailableOfficialData
     .long 0x0000003c
-    .long _unwind_func_80173360
+    .long _unwind_RFLIsAvailableOfficialData
 
-.global _index_func_80173694
-_index_func_80173694:
-    .long func_80173694
+.global _index_RFLSearchOfficialData
+_index_RFLSearchOfficialData:
+    .long RFLSearchOfficialData
     .long 0x000000f4
-    .long _unwind_func_80173694
+    .long _unwind_RFLSearchOfficialData
 
-.global _index_func_80173788
-_index_func_80173788:
-    .long func_80173788
+.global _index_RFLiIsValidName2
+_index_RFLiIsValidName2:
+    .long RFLiIsValidName2
     .long 0x00000070
-    .long _unwind_func_80173788
+    .long _unwind_RFLiIsValidName2
 
-.global _index_func_801737F8
-_index_func_801737F8:
-    .long func_801737F8
+.global _index_RFLiGetIsolation
+_index_RFLiGetIsolation:
+    .long RFLiGetIsolation
     .long 0x0000008c
-    .long _unwind_func_801737F8
+    .long _unwind_RFLiGetIsolation
 
-.global _index_func_80173884
-_index_func_80173884:
-    .long func_80173884
+.global _index_RFLiGetHiddenHeader
+_index_RFLiGetHiddenHeader:
+    .long RFLiGetHiddenHeader
     .long 0x00000088
-    .long _unwind_func_80173884
+    .long _unwind_RFLiGetHiddenHeader
 
-.global _index_func_8017390C
-_index_func_8017390C:
-    .long func_8017390C
+.global _index_RFLiDBIsLoaded
+_index_RFLiDBIsLoaded:
+    .long RFLiDBIsLoaded
     .long 0x00000070
-    .long _unwind_func_8017390C
+    .long _unwind_RFLiDBIsLoaded
 
-.global _index_lbl_80173A68
-_index_lbl_80173A68:
-    .long lbl_80173A68
+.global _index_alarmCreateCb_
+_index_alarmCreateCb_:
+    .long alarmCreateCb_
     .long 0x000001ac
-    .long _unwind_lbl_80173A68
+    .long _unwind_alarmCreateCb_
 
-.global _index_func_80173C14
-_index_func_80173C14:
-    .long func_80173C14
+.global _index_RFLiCheckHeaderCRCAsync
+_index_RFLiCheckHeaderCRCAsync:
+    .long RFLiCheckHeaderCRCAsync
     .long 0x000000c4
-    .long _unwind_func_80173C14
+    .long _unwind_RFLiCheckHeaderCRCAsync
 
-.global _index_lbl_80173CD8
-_index_lbl_80173CD8:
-    .long lbl_80173CD8
+.global _index_alarmCheckCb_
+_index_alarmCheckCb_:
+    .long alarmCheckCb_
     .long 0x000001a0
-    .long _unwind_lbl_80173CD8
+    .long _unwind_alarmCheckCb_
 
-.global _index_func_80173E78
-_index_func_80173E78:
-    .long func_80173E78
+.global _index_RFLiInitCtrlBuf
+_index_RFLiInitCtrlBuf:
+    .long RFLiInitCtrlBuf
     .long 0x000001a8
-    .long _unwind_func_80173E78
+    .long _unwind_RFLiInitCtrlBuf
 
 .global _index_func_80174078
 _index_func_80174078:
-    .long func_80174078
+    .long 0x80174078
     .long 0x00000124
     .long _unwind_func_80174078
 
 .global _index_lbl_8017419C
 _index_lbl_8017419C:
-    .long lbl_8017419C
+    .long 0x8017419C
     .long 0x000002bc
     .long _unwind_lbl_8017419C
 
 .global _index_func_80174458
 _index_func_80174458:
-    .long func_80174458
+    .long 0x80174458
     .long 0x000000c0
     .long _unwind_func_80174458
 
-.global _index_lbl_80174518
-_index_lbl_80174518:
-    .long lbl_80174518
+.global _index_RFLiLoadControllerAsync
+_index_RFLiLoadControllerAsync:
+    .long RFLiLoadControllerAsync
     .long 0x000000e8
-    .long _unwind_lbl_80174518
+    .long _unwind_RFLiLoadControllerAsync
 
-.global _index_func_80174608
-_index_func_80174608:
-    .long func_80174608
+.global _index_RFLiGetControllerData
+_index_RFLiGetControllerData:
+    .long RFLiGetControllerData
     .long 0x000000f4
-    .long _unwind_func_80174608
+    .long _unwind_RFLiGetControllerData
 
-.global _index_func_801746FC
-_index_func_801746FC:
-    .long func_801746FC
+.global _index_RFLIsAvailableControllerData
+_index_RFLIsAvailableControllerData:
+    .long RFLIsAvailableControllerData
     .long 0x000000d4
-    .long _unwind_func_801746FC
+    .long _unwind_RFLIsAvailableControllerData
 
-.global _index_lbl_80174884
-_index_lbl_80174884:
-    .long lbl_80174884
+.global _index_updateHDBcallback_
+_index_updateHDBcallback_:
+    .long updateHDBcallback_
     .long 0x000001e8
-    .long _unwind_lbl_80174884
+    .long _unwind_updateHDBcallback_
 
-.global _index_func_80174A6C
-_index_func_80174A6C:
-    .long func_80174A6C
+.global _index_loadHiddenDataSync_
+_index_loadHiddenDataSync_:
+    .long loadHiddenDataSync_
     .long 0x00000174
-    .long _unwind_func_80174A6C
+    .long _unwind_loadHiddenDataSync_
 
-.global _index_func_80174BE0
-_index_func_80174BE0:
-    .long func_80174BE0
+.global _index_updateHiddenOld_
+_index_updateHiddenOld_:
+    .long updateHiddenOld_
     .long 0x00000154
-    .long _unwind_func_80174BE0
+    .long _unwind_updateHiddenOld_
 
-.global _index_func_80174D34
-_index_func_80174D34:
-    .long func_80174D34
+.global _index_loadHiddenRandomSync_
+_index_loadHiddenRandomSync_:
+    .long loadHiddenRandomSync_
     .long 0x0000013c
-    .long _unwind_func_80174D34
+    .long _unwind_loadHiddenRandomSync_
 
-.global _index_lbl_80174E70
-_index_lbl_80174E70:
-    .long lbl_80174E70
+.global _index_updateHDBRandcallback_
+_index_updateHDBRandcallback_:
+    .long updateHDBRandcallback_
     .long 0x00000194
-    .long _unwind_lbl_80174E70
+    .long _unwind_updateHDBRandcallback_
 
-.global _index_func_80175004
-_index_func_80175004:
-    .long func_80175004
+.global _index_updateHiddenRandom_
+_index_updateHiddenRandom_:
+    .long updateHiddenRandom_
     .long 0x000002dc
-    .long _unwind_func_80175004
+    .long _unwind_updateHiddenRandom_
 
-.global _index_func_801752E0
-_index_func_801752E0:
-    .long func_801752E0
+.global _index_updateRandom_
+_index_updateRandom_:
+    .long updateRandom_
     .long 0x000000f8
-    .long _unwind_func_801752E0
+    .long _unwind_updateRandom_
 
-.global _index_func_801753D8
-_index_func_801753D8:
-    .long func_801753D8
+.global _index_RFLUpdateMiddleDBAsync
+_index_RFLUpdateMiddleDBAsync:
+    .long RFLUpdateMiddleDBAsync
     .long 0x0000005c
-    .long _unwind_func_801753D8
+    .long _unwind_RFLUpdateMiddleDBAsync
 
-.global _index_func_80175434
-_index_func_80175434:
-    .long func_80175434
+.global _index_RFLiUpdateMiddleDBAsync
+_index_RFLiUpdateMiddleDBAsync:
+    .long RFLiUpdateMiddleDBAsync
     .long 0x00000138
-    .long _unwind_func_80175434
+    .long _unwind_RFLiUpdateMiddleDBAsync
 
-.global _index_func_80175574
-_index_func_80175574:
-    .long func_80175574
+.global _index_RFLiGetCharInfoMiddleDB
+_index_RFLiGetCharInfoMiddleDB:
+    .long RFLiGetCharInfoMiddleDB
     .long 0x0000009c
-    .long _unwind_func_80175574
+    .long _unwind_RFLiGetCharInfoMiddleDB
 
-.global _index_func_80175660
-_index_func_80175660:
-    .long func_80175660
+.global _index_RFLiAddMiddleDBUserData
+_index_RFLiAddMiddleDBUserData:
+    .long RFLiAddMiddleDBUserData
     .long 0x00000104
-    .long _unwind_func_80175660
+    .long _unwind_RFLiAddMiddleDBUserData
 
-.global _index_func_80175764
-_index_func_80175764:
-    .long func_80175764
+.global _index_RFLAddMiddleDBStoreData
+_index_RFLAddMiddleDBStoreData:
+    .long RFLAddMiddleDBStoreData
     .long 0x00000090
-    .long _unwind_func_80175764
+    .long _unwind_RFLAddMiddleDBStoreData
 
-.global _index_func_801757F4
-_index_func_801757F4:
-    .long func_801757F4
+.global _index_RFLi_MakeRandomFace
+_index_RFLi_MakeRandomFace:
+    .long RFLi_MakeRandomFace
     .long 0x0000014c
-    .long _unwind_func_801757F4
+    .long _unwind_RFLi_MakeRandomFace
 
-.global _index_func_80175940
-_index_func_80175940:
-    .long func_80175940
+.global _index_RFLi_MakeRandomFace_Core
+_index_RFLi_MakeRandomFace_Core:
+    .long RFLi_MakeRandomFace_Core
     .long 0x00000a04
-    .long _unwind_func_80175940
+    .long _unwind_RFLi_MakeRandomFace_Core
 
-.global _index_func_80176344
-_index_func_80176344:
-    .long func_80176344
+.global _index_RFLi_GetHairType
+_index_RFLi_GetHairType:
+    .long RFLi_GetHairType
     .long 0x00000130
-    .long _unwind_func_80176344
+    .long _unwind_RFLi_GetHairType
 
-.global _index_func_80176474
-_index_func_80176474:
-    .long func_80176474
+.global _index_RFLi_GetGlassType
+_index_RFLi_GetGlassType:
+    .long RFLi_GetGlassType
     .long 0x00000158
-    .long _unwind_func_80176474
+    .long _unwind_RFLi_GetGlassType
 
-.global _index_func_801765E4
-_index_func_801765E4:
-    .long func_801765E4
+.global _index_RFLiCheckValidInfo
+_index_RFLiCheckValidInfo:
+    .long RFLiCheckValidInfo
     .long 0x00000464
-    .long _unwind_func_801765E4
+    .long _unwind_RFLiCheckValidInfo
 
-.global _index_func_80176A48
-_index_func_80176A48:
-    .long func_80176A48
+.global _index_RFLiIsValidOnNAND
+_index_RFLiIsValidOnNAND:
+    .long RFLiIsValidOnNAND
     .long 0x0000002c
-    .long _unwind_func_80176A48
+    .long _unwind_RFLiIsValidOnNAND
 
-.global _index_func_80176B84
-_index_func_80176B84:
-    .long func_80176B84
+.global _index_RFLiPickupCharInfo
+_index_RFLiPickupCharInfo:
+    .long RFLiPickupCharInfo
     .long 0x00000140
-    .long _unwind_func_80176B84
+    .long _unwind_RFLiPickupCharInfo
 
-.global _index_func_80176CC4
-_index_func_80176CC4:
-    .long func_80176CC4
+.global _index_copyChar2Additional_
+_index_copyChar2Additional_:
+    .long 0x80176cc4
     .long 0x00000190
-    .long _unwind_func_80176CC4
+    .long _unwind_copyChar2Additional_
 
-.global _index_func_80176E54
-_index_func_80176E54:
-    .long func_80176E54
+.global _index_RFLGetAdditionalInfo
+_index_RFLGetAdditionalInfo:
+    .long RFLGetAdditionalInfo
     .long 0x00000054
-    .long _unwind_func_80176E54
+    .long _unwind_RFLGetAdditionalInfo
 
-.global _index_func_80176EA8
-_index_func_80176EA8:
-    .long func_80176EA8
+.global _index_RFLCommitNWC24Msg
+_index_RFLCommitNWC24Msg:
+    .long RFLCommitNWC24Msg
     .long 0x000000f4
-    .long _unwind_func_80176EA8
+    .long _unwind_RFLCommitNWC24Msg
 
-.global _index_func_80176F9C
-_index_func_80176F9C:
-    .long func_80176F9C
+.global _index_RFLiClearTableData
+_index_RFLiClearTableData:
+    .long RFLiClearTableData
     .long 0x0000004c
-    .long _unwind_func_80176F9C
+    .long _unwind_RFLiClearTableData
 
-.global _index_func_80176FE8
-_index_func_80176FE8:
-    .long func_80176FE8
+.global _index_RFLiClearDBBuffer
+_index_RFLiClearDBBuffer:
+    .long RFLiClearDBBuffer
     .long 0x000000bc
-    .long _unwind_func_80176FE8
+    .long _unwind_RFLiClearDBBuffer
 
 .global _index_lbl_801770A4
 _index_lbl_801770A4:
-    .long lbl_801770A4
+    .long 0x801770A4
     .long 0x00000034
     .long _unwind_lbl_801770A4
 
 .global _index_lbl_801770D8
 _index_lbl_801770D8:
-    .long lbl_801770D8
+    .long 0x801770D8
     .long 0x00000030
     .long _unwind_lbl_801770D8
 
 .global _index_lbl_80177108
 _index_lbl_80177108:
-    .long lbl_80177108
+    .long 0x80177108
     .long 0x00000158
     .long _unwind_lbl_80177108
 
 .global _index_lbl_80177260
 _index_lbl_80177260:
-    .long lbl_80177260
+    .long 0x80177260
     .long 0x00000040
     .long _unwind_lbl_80177260
 
 .global _index_lbl_801772A0
 _index_lbl_801772A0:
-    .long lbl_801772A0
+    .long 0x801772A0
     .long 0x00000094
     .long _unwind_lbl_801772A0
 
 .global _index_lbl_80177334
 _index_lbl_80177334:
-    .long lbl_80177334
+    .long 0x80177334
     .long 0x0000003c
     .long _unwind_lbl_80177334
 
 .global _index_lbl_80177370
 _index_lbl_80177370:
-    .long lbl_80177370
+    .long 0x80177370
     .long 0x00000064
     .long _unwind_lbl_80177370
 
-.global _index_func_801773D4
-_index_func_801773D4:
-    .long func_801773D4
+.global _index_RFLiFormatAsync
+_index_RFLiFormatAsync:
+    .long RFLiFormatAsync
     .long 0x00000108
-    .long _unwind_func_801773D4
+    .long _unwind_RFLiFormatAsync
 
 # For __init_cpp_exceptions/__register_fragment
 .global _eti_init_info_
 _eti_init_info_:
-    .long _index___dt__Q23EGG8Vector3fFv # &extabindex[0]
-    .long _eti_init_info_ # &_eti_init_info_
-    .long __dt__Q23EGG8Vector3fFv # &extabindex[0].func
-    .long 0x000d58ac # unkValue
-    .long 0x00000000 # Padding
-    .long 0x00000000 # Padding
-    .long 0x00000000 # Padding
-    .long 0x00000000 # Padding
+    .long _index___dt__Q23EGG8Vector3fFv # section
+    .long _eti_init_info_                # info
+    .long __dt__Q23EGG8Vector3fFv        # codeStart
+    .long 0x000d58ac                     # codeSize
+    # Empty/terminator entry
+    .long 0x00000000                     # section
+    .long 0x00000000                     # info
+    .long 0x00000000                     # codeStart
+    .long 0x00000000                     # codeSize
 .balign 0x8

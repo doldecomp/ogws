@@ -2,9 +2,8 @@
 #include "g3d_state.h"
 #include "math_types.h"
 #include "math_triangular.h"
-#include <RevoSDK/math/mtx.h>
-#include <RevoSDK/math/mtx44.h>
-#include <RevoSDK/GX/GXTransform.h>
+#include <revolution/MTX.h>
+#include <revolution/GX.h>
 
 namespace nw4r
 {
@@ -15,8 +14,8 @@ namespace nw4r
         void Camera::Init()
         {
             GXRenderModeObj& rRenderMode = G3DState::GetRenderModeObj();
-            Init(rRenderMode.mFbWidth, rRenderMode.mEfbHeight, rRenderMode.mFbWidth,
-                rRenderMode.mFbHeight, rRenderMode.SHORT_0xE, rRenderMode.SHORT_0x10);
+            Init(rRenderMode.fbWidth, rRenderMode.efbHeight, rRenderMode.fbWidth,
+                rRenderMode.xfbHeight, rRenderMode.viWidth, rRenderMode.viHeight);
         }
 
         void Camera::Init(u16 r4, u16 r5, u16 r6, u16 r7, u16 r8, u16 r9)
@@ -376,7 +375,7 @@ namespace nw4r
             if (mCamData.IsValid())
             {
                 GXRenderModeObj& rRenderMode = G3DState::GetRenderModeObj();
-                if (rRenderMode.BYTE_0x18)
+                if (rRenderMode.field_rendering)
                 {
                     ::GXSetViewportJitter(rCamData.FLOAT_0xDC, rCamData.FLOAT_0xE0, rCamData.FLOAT_0xE4,
                         rCamData.FLOAT_0xE8, rCamData.FLOAT_0xEC, rCamData.FLOAT_0xF0, rCamData.mFlags >> 8 & 1);
@@ -400,7 +399,8 @@ namespace nw4r
                     UpdateProjectionMtx();
                 }
 
-                ::GXSetProjection(const_cast<math::MTX44&>(rCamData.mProjMtx), rCamData.INT_0xA8);
+                ::GXSetProjection(const_cast<math::MTX44&>(rCamData.mProjMtx),
+                    (GXProjectionType)rCamData.INT_0xA8);
             }
         }
 

@@ -1,0 +1,10 @@
+#ifndef MSL_CPP_NEW
+#define MSL_CPP_NEW
+#include <stddef.h>
+
+inline void * operator new(size_t, void * ptr)
+{
+	return ptr;
+}
+
+#endif

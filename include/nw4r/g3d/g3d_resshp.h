@@ -26,7 +26,7 @@ namespace nw4r
 			detail::CPCmd CP_CMD_0x20;
 			detail::CPCmd CP_CMD_0x26;
 			detail::CPCmd CP_CMD_0x2C;
-			detail::CPCmd CP_CMD_PAIRS_0x32[GX_ATTR_VTX_COUNT][2];
+			detail::CPCmd CP_CMD_PAIRS_0x32[GX_POS_MTX_ARRAY - GX_VA_POS][2];
 			char UNK_0xC2[0x1E];
 		};
 		
@@ -41,8 +41,8 @@ namespace nw4r
 			
 			s16 mVtxPosIndex; // at 0x48
 			s16 mVtxNrmIndex; // at 0x4a
-			s16 mVtxClrIndices[GX_ATTR_VTX_CLR_COUNT]; // at 0x4c
-			s16 mVtxTexCoordIndices[GX_ATTR_VTX_TEX_COORD_COUNT]; // at 0x50
+			s16 mVtxClrIndices[GX_VA_TEX0 - GX_VA_CLR0]; // at 0x4c
+			s16 mVtxTexCoordIndices[GX_POS_MTX_ARRAY - GX_VA_TEX0]; // at 0x50
 		};
 		
 		struct ResTagDL
@@ -96,8 +96,8 @@ namespace nw4r
 				return ResTagDL(&ref().mPrePrimDLTag).GetDL();
 			}
 			
-			bool GXGetVtxDescv(GXVtxDescList) const;
-			bool GXGetVtxAttrFmtv(GXVtxAttrFmtList) const;
+			bool GXGetVtxDescv(GXVtxDescList*) const;
+			bool GXGetVtxAttrFmtv(GXVtxAttrFmtList*) const;
 			
 			ResMdl GetParent() const; //inlined
 			

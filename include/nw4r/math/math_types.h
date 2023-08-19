@@ -1,9 +1,7 @@
 #ifndef NW4R_MATH_TYPES_H
 #define NW4R_MATH_TYPES_H
 #include "types_nw4r.h"
-#include <RevoSDK/math/mtx.h>
-#include <RevoSDK/math/vec.h>
-#include <RevoSDK/math/mtxvec.h>
+#include <revolution/MTX.h>
 
 #define NW4R_PI_F32 3.1415927f
 #define NW4R_DEG_TO_FIDX (256.0f / 360.0f)

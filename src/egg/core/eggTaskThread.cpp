@@ -101,7 +101,7 @@ namespace EGG
 		}
 	}
 	
-	UNKWORD TaskThread::run()
+	void* TaskThread::run()
 	{
 		OSInitFastCast();
 		

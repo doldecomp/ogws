@@ -2,8 +2,8 @@
 #define EGG_CORE_VIDEO_H
 #include "types_egg.h"
 #include "eggBitFlag.h"
-#include <RevoSDK/GX/GXFrameBuf.h>
-#include <RevoSDK/VI/vi.h>
+#include <revolution/GX.h>
+#include <revolution/VI/vi.h>
 
 #define FRAMERATE_50HZ 50.0f
 #define FRAMERATE_60HZ 59.94f

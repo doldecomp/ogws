@@ -1,14 +1,8 @@
 #include "eggColorFader.h"
 #include "eggAssert.h"
 #include "math_types.h"
-#include <RevoSDK/math/mtx44.h>
-#include <RevoSDK/GX/GXTransform.h>
-#include <RevoSDK/GX/GXAttr.h>
-#include <RevoSDK/GX/GXLight.h>
-#include <RevoSDK/GX/GXBump.h>
-#include <RevoSDK/GX/GXPixel.h>
-#include <RevoSDK/GX/GXGeometry.h>
-#include <RevoSDK/GX/GXVert.h>
+#include <revolution/MTX.h>
+#include <revolution/GX.h>
 
 #define DEFAULT_FADE_LEN 20
 
@@ -131,7 +125,7 @@ namespace EGG
         math::MTX44 mtx;
         C_MTXOrtho(mtx, mStartY, mEndY, mStartX, mEndX, 0.0f, 1.0f);
         
-        GXSetProjection(mtx, 1);
+        GXSetProjection(mtx, GX_ORTHOGRAPHIC);
         
         GXSetViewport(mStartX, mStartY, getWidth(), getHeight(), 0.0f, 1.0f);
         GXSetScissor((u32)mStartX, (u32)mStartY, (u32)getWidth(), (u32)getHeight());
@@ -143,39 +137,39 @@ namespace EGG
 
         GXClearVtxDesc();
         GXInvalidateVtxCache();
-        GXSetVtxDesc(GX_ATTR_VTX, 1);
-        GXSetVtxDesc(GX_ATTR_VTX_CLR, 0);
-        GXSetVtxDesc(GX_ATTR_VTX_TEX_COORD, 0);
-        GXSetVtxAttrFmt(0, GX_ATTR_VTX, 1, 4, 0);
+        GXSetVtxDesc(GX_VA_POS, GX_DIRECT);
+        GXSetVtxDesc(GX_VA_CLR0, GX_NONE);
+        GXSetVtxDesc(GX_VA_TEX0, GX_NONE);
+        GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_POS, GX_POS_XYZ, GX_F32, 0);
 
         GXSetNumChans(1);
-        GXSetChanMatColor(GX_CHANNEL_ID_4, mColor);
-        GXSetChanCtrl(GX_CHANNEL_ID_4, 0, 0, 0, 0, 0, 2);
+        GXSetChanMatColor(GX_COLOR0A0, mColor);
+        GXSetChanCtrl(GX_COLOR0A0, 0, GX_SRC_REG, GX_SRC_REG, GX_LIGHT_NULL, GX_DF_NONE, GX_AF_NONE);
 
         GXSetNumTexGens(0);
         GXSetNumIndStages(0);
         __GXSetIndirectMask(0);
 
         GXSetNumTevStages(1);
-        GXSetTevOp(GX_TEV_STAGE_ID_0, 4);
-        GXSetTevOrder(GX_TEV_STAGE_ID_0, GX_TEX_COORD_ID_INVALID, GX_TEX_MAP_ID_INVALID, 4);
+        GXSetTevOp(GX_TEVSTAGE0, 4);
+        GXSetTevOrder(GX_TEVSTAGE0, GX_TEXCOORD_NULL, GX_TEXMAP_NULL, GX_COLOR0A0);
 
         if (mColor.mChannels.a == 255)
         {
-            GXSetBlendMode(0, 1, 0, 15);
+            GXSetBlendMode(GX_BM_NONE, GX_BL_ONE, GX_BL_ZERO, GX_LO_SET);
         }
         else
         {
-            GXSetBlendMode(1, 4, 5, 15);
+            GXSetBlendMode(GX_BM_BLEND, GX_BL_SRCALPHA, GX_BL_INVSRCALPHA, GX_LO_SET);
         }
 
         GXSetColorUpdate(1);
         GXSetAlphaUpdate(1);
 
-        GXSetZMode(0, 0, 0);
-        GXSetCullMode(2);
+        GXSetZMode(0, GX_NEVER, 0);
+        GXSetCullMode(GX_CULL_BACK);
 
-        GXBegin(0x80, 0, 4);
+        GXBegin(GX_QUADS, GX_VTXFMT0, 4);
 
         GXPosition3f32(mStartX, mStartY, 0.0f);
         GXPosition3f32(mEndX, mStartY, 0.0f);

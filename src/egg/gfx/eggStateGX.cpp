@@ -2,14 +2,8 @@
 #include "eggAssert.h"
 #include "g3d_init.h"
 #include "g3d_tmem.h"
-#include <RevoSDK/GX/GXAttr.h>
-#include <RevoSDK/GX/GXBump.h>
-#include <RevoSDK/GX/GXGeometry.h>
-#include <RevoSDK/GX/GXLight.h>
-#include <RevoSDK/GX/GXPixel.h>
-#include <RevoSDK/GX/GXTexture.h>
-#include <RevoSDK/GX/GXTransform.h>
-#include <RevoSDK/math/mtx.h>
+#include <revolution/GX.h>
+#include <revolution/MTX.h>
 
 namespace EGG
 {
@@ -19,8 +13,8 @@ namespace EGG
 
     StateGX::CachedState StateGX::sCache;
 
-    const f32 StateGX::lbl_80378C68[] = {
-        0.5f, 0.0f, 0.0f, 0.0f, 0.5f, 0.0f,
+    const f32 StateGX::lbl_80378C68[2][3] = {
+        {0.5f, 0.0f, 0.0f}, {0.0f, 0.5f, 0.0f},
     };
     const f32 StateGX::lbl_80378C80[] = {
         1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f
@@ -62,7 +56,7 @@ namespace EGG
         GXInvalidateVtxCache();
         GXSetCurrentMtx(0);
         GXSetCoPlanar(0);
-        GXSetClipMode(0);
+        GXSetClipMode(GX_CLIP_ENABLE);
 
         resetGX();
         G3dReset();
@@ -88,32 +82,32 @@ namespace EGG
 
     void StateGX::resetVtx()
     {
-        GXSetVtxAttrFmt(0, GX_ATTR_VTX, 1, 4, 0);
-        GXSetVtxAttrFmt(0, GX_ATTR_VTX_NRM, 0, 4, 0);
-        GXSetVtxAttrFmt(0, GX_ATTR_VTX_CLR, 1, 5, 0);
-        GXSetVtxAttrFmt(0, GX_ATTR_VTX_COUNT, 1, 5, 0);
-        GXSetVtxAttrFmt(0, GX_ATTR_VTX_TEX_COORD, 1, 3, 7);
-        GXSetVtxAttrFmt(0, GX_ATTR_14, 1, 3, 7);
-        GXSetVtxAttrFmt(0, GX_ATTR_15, 1, 3, 7);
-        GXSetVtxAttrFmt(0, GX_ATTR_16, 1, 3, 7);
-        GXSetVtxAttrFmt(0, GX_ATTR_17, 1, 3, 7);
-        GXSetVtxAttrFmt(0, GX_ATTR_18, 1, 3, 7);
-        GXSetVtxAttrFmt(0, GX_ATTR_19, 1, 3, 7);
-        GXSetVtxAttrFmt(0, GX_ATTR_20, 1, 3, 7);
+        GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_POS, GX_POS_XYZ, GX_F32, 0);
+        GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_NRM, GX_NRM_XYZ, GX_F32, 0);
+        GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_CLR0, GX_CLR_RGBA, GX_RGBA8, 0);
+        GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_CLR1, GX_CLR_RGBA, GX_RGBA8, 0);
+        GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_TEX0, GX_TEX_ST, GX_S16, 7);
+        GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_TEX1, GX_TEX_ST, GX_S16, 7);
+        GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_TEX2, GX_TEX_ST, GX_S16, 7);
+        GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_TEX3, GX_TEX_ST, GX_S16, 7);
+        GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_TEX4, GX_TEX_ST, GX_S16, 7);
+        GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_TEX5, GX_TEX_ST, GX_S16, 7);
+        GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_TEX6, GX_TEX_ST, GX_S16, 7);
+        GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_TEX7, GX_TEX_ST, GX_S16, 7);
     }
 
     void StateGX::resetColorChannel()
     {
         GXSetNumChans(1);
 
-        GXSetChanAmbColor(GX_CHANNEL_ID_4, cDefaultGXColor);
-        GXSetChanAmbColor(GX_CHANNEL_ID_5, cDefaultGXColor);
-        GXSetChanMatColor(GX_CHANNEL_ID_4, cDefaultGXColor);
-        GXSetChanMatColor(GX_CHANNEL_ID_5, cDefaultGXColor);
+        GXSetChanAmbColor(GX_COLOR0A0, cDefaultGXColor);
+        GXSetChanAmbColor(GX_COLOR1A1, cDefaultGXColor);
+        GXSetChanMatColor(GX_COLOR0A0, cDefaultGXColor);
+        GXSetChanMatColor(GX_COLOR1A1, cDefaultGXColor);
 
-        GXSetCullMode(2);
-        GXSetChanCtrl(GX_CHANNEL_ID_4, 0, 0, 0, 0, 2, 2);
-        GXSetChanCtrl(GX_CHANNEL_ID_5, 0, 0, 0, 0, 2, 2);
+        GXSetCullMode(GX_CULL_BACK);
+        GXSetChanCtrl(GX_COLOR0A0, 0, GX_SRC_REG, GX_SRC_REG, GX_LIGHT_NULL, GX_DF_CLAMP, GX_AF_NONE);
+        GXSetChanCtrl(GX_COLOR1A1, 0, GX_SRC_REG, GX_SRC_REG, GX_LIGHT_NULL, GX_DF_CLAMP, GX_AF_NONE);
     }
 
     void StateGX::resetIndirect()
@@ -127,24 +121,23 @@ namespace EGG
 
         for (u32 i = 0; i < 4; i++)
         {
-            GXSetIndTexCoordScale((GXIndTexStageID)i,
-                GX_IND_TEX_SCALE_0, GX_IND_TEX_SCALE_0);
+            GXSetIndTexCoordScale((GXIndTexStageID)i, GX_ITS_1, GX_ITS_1);
         }
     }
 
     void StateGX::resetTexture()
     {
         GXTexObj gxTex;
-        GXInitTexObj(&gxTex, sDefaultTexObjImage, 4, 4, 3, 0, 0, 0);
+        GXInitTexObj(&gxTex, sDefaultTexObjImage, 4, 4, GX_TF_IA8, GX_CLAMP, GX_CLAMP, 0);
 
-        GXLoadTexObj(&gxTex, GX_TEX_MAP_ID_0);
-        GXLoadTexObj(&gxTex, GX_TEX_MAP_ID_1);
-        GXLoadTexObj(&gxTex, GX_TEX_MAP_ID_2);
-        GXLoadTexObj(&gxTex, GX_TEX_MAP_ID_3);
-        GXLoadTexObj(&gxTex, GX_TEX_MAP_ID_4);
-        GXLoadTexObj(&gxTex, GX_TEX_MAP_ID_5);
-        GXLoadTexObj(&gxTex, GX_TEX_MAP_ID_6);
-        GXLoadTexObj(&gxTex, GX_TEX_MAP_ID_7);
+        GXLoadTexObj(&gxTex, GX_TEXMAP0);
+        GXLoadTexObj(&gxTex, GX_TEXMAP1);
+        GXLoadTexObj(&gxTex, GX_TEXMAP2);
+        GXLoadTexObj(&gxTex, GX_TEXMAP3);
+        GXLoadTexObj(&gxTex, GX_TEXMAP4);
+        GXLoadTexObj(&gxTex, GX_TEXMAP5);
+        GXLoadTexObj(&gxTex, GX_TEXMAP6);
+        GXLoadTexObj(&gxTex, GX_TEXMAP7);
     }
 
     void StateGX::resetTexGen()
@@ -156,13 +149,13 @@ namespace EGG
 
         for (u32 i = 0; i < 10; i++)
         {
-            GXLoadTexMtxImm(ident, 30 + 3 * i, 0);
+            GXLoadTexMtxImm(ident, 30 + 3 * i, GX_MTX_3x4);
         }
 
         for (u32 i = 0; i < 8; i++)
         {
-            GXSetTexCoordGen2((GXTexCoordID)i, GX_TEX_GEN_TYPE_1,
-                GX_TEX_GEN_SRC_4, 0x3C, 0, 0x7D);
+            GXSetTexCoordGen2((GXTexCoordID)i, GX_TG_MTX2x4,
+                GX_TG_TEX0, 0x3C, 0, 0x7D);
 
             GXSetTexCoordScaleManually(i, 0, 0, 0);
             GXSetTexCoordCylWrap(i, 0, 0);
@@ -175,19 +168,19 @@ namespace EGG
 
         for (u32 i = 0; i < 16; i++)
         {
-            GXSetTevDirect(i);
-            GXSetTevColorIn((GXTevStageID)i, 10, 15, 15, 15);
-            GXSetTevColorOp((GXTevStageID)i, 0, 0, 0, 1, 0);
-            GXSetTevAlphaIn((GXTevStageID)i, 5, 7, 7, 7);
-            GXSetTevAlphaOp((GXTevStageID)i, 0, 0, 0, 1, 0);
-            GXSetTevOrder((GXTevStageID)i, GX_TEX_COORD_ID_INVALID,
-                GX_TEX_MAP_ID_INVALID, 0xFF);
-            GXSetTevSwapMode((GXTevStageID)i, 0, 0);
+            GXSetTevDirect((GXTevStageID)i);
+            GXSetTevColorIn((GXTevStageID)i, GX_CC_RASC, GX_CC_ZERO, GX_CC_ZERO, GX_CC_ZERO);
+            GXSetTevColorOp((GXTevStageID)i, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, 1, GX_TEVPREV);
+            GXSetTevAlphaIn((GXTevStageID)i, GX_CA_RASA, GX_CA_ZERO, GX_CA_ZERO, GX_CA_ZERO);
+            GXSetTevAlphaOp((GXTevStageID)i, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, 1, GX_TEVPREV);
+            GXSetTevOrder((GXTevStageID)i, GX_TEXCOORD_NULL,
+                GX_TEXMAP_NULL, GX_COLOR_NULL);
+            GXSetTevSwapMode((GXTevStageID)i, GX_TEV_SWAP0, GX_TEV_SWAP0);
         }
 
         for (u32 i = 0; i < 4; i++)
         {
-            GXSetTevKColor((GXTevRegID)i, cDefaultGXColor);
+            GXSetTevKColor((GXTevKColorID)i, cDefaultGXColor);
         }
 
         for (u32 i = 0; i < 4; i++)
@@ -195,19 +188,19 @@ namespace EGG
             GXSetTevColor((GXTevRegID)i, cDefaultGXColor);
         }
 
-        GXSetTevSwapModeTable(GX_TEV_SWAP_SEL_0, 0, 1, 2, 3);
-        GXSetTevSwapModeTable(GX_TEV_SWAP_SEL_1, 0, 0, 0, 3);
-        GXSetTevSwapModeTable(GX_TEV_SWAP_SEL_2, 1, 1, 1, 3);
-        GXSetTevSwapModeTable(GX_TEV_SWAP_SEL_3, 2, 2, 2, 3);
+        GXSetTevSwapModeTable(GX_TEV_SWAP0, GX_CH_RED, GX_CH_GREEN, GX_CH_BLUE, GX_CH_ALPHA);
+        GXSetTevSwapModeTable(GX_TEV_SWAP1, GX_CH_RED, GX_CH_RED, GX_CH_RED, GX_CH_ALPHA);
+        GXSetTevSwapModeTable(GX_TEV_SWAP2, GX_CH_GREEN, GX_CH_GREEN, GX_CH_GREEN, GX_CH_ALPHA);
+        GXSetTevSwapModeTable(GX_TEV_SWAP3, GX_CH_BLUE, GX_CH_BLUE, GX_CH_BLUE, GX_CH_ALPHA);
     }
 
     void StateGX::resetPE()
     {
-        GXSetBlendMode(1, 4, 5, 5);
-        GXSetAlphaCompare(7, 0, 0, 7, 0);
-        GXSetZMode(1, 3, 1);
+        GXSetBlendMode(GX_BM_BLEND, GX_BL_SRCALPHA, GX_BL_INVSRCALPHA, GX_LO_NOOP);
+        GXSetAlphaCompare(GX_ALWAYS, 0, GX_AOP_AND, GX_ALWAYS, 0);
+        GXSetZMode(true, GX_LEQUAL, true);
 
-        GXSetFog(GX_FOG_TYPE_0, cDefaultGXColor, 0.0f, 1.0f, 0.1f, 1.0f);
+        GXSetFog(GX_FOG_NONE, cDefaultGXColor, 0.0f, 1.0f, 0.1f, 1.0f);
         GXSetFogRangeAdj(0, 0, NULL);
         GXSetZCompLoc(1);
         GXSetDstAlpha(0, 0);
@@ -376,7 +369,7 @@ namespace EGG
             && (s_pixFormatCurrent != fmt || sCurrentPixelFormatArg2 != arg2)
             || ((sStateFlags & VALID_CACHE) == 0))
         {
-            GXSetPixelFmt(fmt, arg2);
+            GXSetPixelFmt(fmt, (GXZFmt)arg2);
             GXSetColorUpdate(sCache.colorUpdate);
             GXSetAlphaUpdate(sCache.alphaUpdate);
         }

@@ -1,6 +1,5 @@
 #include "g3d_fog.h"
-#include <RevoSDK/GX/GX.h>
-#include <RevoSDK/GX/GXPixel.h>
+#include <revolution/GX.h>
 
 namespace nw4r
 {
@@ -14,7 +13,7 @@ namespace nw4r
             {
                 FogData& rFogData = mFogData.ref();
                 
-                rFogData.mFogType = GX_FOG_TYPE_0;
+                rFogData.mFogType = GX_FOG_NONE;
 
                 rFogData.mStartZ = 0.0f;
                 rFogData.mEndZ = 0.0f;
@@ -32,7 +31,7 @@ namespace nw4r
                 rFogData.mAdjTableWidth = 0;
                 for (int i = 0; i < 10; i++)
                 {
-                    rFogData.mAdjTable[i] = 0;
+                    rFogData.mAdjTable.r[i] = 0;
                 }
             }
         }
@@ -81,7 +80,7 @@ namespace nw4r
             if (mFogData.IsValid())
             {
                 rFogData.mAdjTableWidth = width;
-                GXInitFogAdjTable(rFogData.mAdjTable, param1, rMtx);
+                GXInitFogAdjTable(&rFogData.mAdjTable, param1, rMtx);
             }
         }
 
@@ -91,9 +90,9 @@ namespace nw4r
             
             if (mFogData.IsValid())
             {
-                if (rFogData.mFogType != GX_FOG_TYPE_0)
+                if (rFogData.mFogType != GX_FOG_NONE)
                 {
-                    GXSetFogRangeAdj(rFogData.mFogRangeAdjEnable, rFogData.mAdjTableWidth, rFogData.mAdjTable);
+                    GXSetFogRangeAdj(rFogData.mFogRangeAdjEnable, rFogData.mAdjTableWidth, &rFogData.mAdjTable);
                 }
 
                 GXSetFog(rFogData.mFogType, rFogData.mColor, rFogData.mStartZ, rFogData.mEndZ,

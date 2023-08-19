@@ -1,8 +1,8 @@
 #include "snd_StrmChannel.h"
 #include "ut_lock.h"
 #include "ut_algorithm.h"
-#include <RevoSDK/OS/OSThread.h>
-#include <RevoSDK/TRK/__mem.h>
+#include <revolution/OS/OSThread.h>
+#include <string.h>
 
 namespace nw4r
 {

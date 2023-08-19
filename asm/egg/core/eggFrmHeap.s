@@ -204,7 +204,7 @@ free__Q23EGG7FrmHeapFPv:
 .global resizeForMBlock__Q23EGG7FrmHeapFPvUl
 resizeForMBlock__Q23EGG7FrmHeapFPvUl:
 /* 800A2B90 0009DA90  80 63 00 10 */	lwz r3, 0x10(r3)
-/* 800A2B94 0009DA94  48 04 47 FC */	b func_800E7390
+/* 800A2B94 0009DA94  48 04 47 FC */	b MEMResizeForMBlockFrmHeap
 
 .global getAllocatableSize__Q23EGG7FrmHeapFl
 getAllocatableSize__Q23EGG7FrmHeapFl:
@@ -220,7 +220,7 @@ adjust__Q23EGG7FrmHeapFv:
 /* 800A2BB0 0009DAB0  93 C1 00 08 */	stw r30, 8(r1)
 /* 800A2BB4 0009DAB4  7C 7E 1B 78 */	mr r30, r3
 /* 800A2BB8 0009DAB8  80 63 00 10 */	lwz r3, 0x10(r3)
-/* 800A2BBC 0009DABC  48 04 47 51 */	bl func_800E730C
+/* 800A2BBC 0009DABC  48 04 47 51 */	bl MEMAdjustFrmHeap
 /* 800A2BC0 0009DAC0  3B E3 00 34 */	addi r31, r3, 0x34
 /* 800A2BC4 0009DAC4  28 1F 00 34 */	cmplwi r31, 0x34
 /* 800A2BC8 0009DAC8  40 81 00 30 */	ble lbl_800A2BF8
@@ -250,7 +250,7 @@ initAllocator__Q23EGG7FrmHeapFPQ23EGG9Allocatorl:
 /* 800A2C14 0009DB14  7C 66 1B 78 */	mr r6, r3
 /* 800A2C18 0009DB18  7C 83 23 78 */	mr r3, r4
 /* 800A2C1C 0009DB1C  80 86 00 10 */	lwz r4, 0x10(r6)
-/* 800A2C20 0009DB20  48 04 48 A8 */	b func_800E74C8
+/* 800A2C20 0009DB20  48 04 48 A8 */	b MEMInitAllocatorForFrmHeap
 
 .global getHeapKind__Q23EGG7FrmHeapCFv
 getHeapKind__Q23EGG7FrmHeapCFv:

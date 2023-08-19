@@ -11,8 +11,7 @@
 #include "eggTextureBuffer.h"
 #include "math_types.h"
 #include "g3d_resmat.h"
-#include <RevoSDK/GX/GXPixel.h>
-#include <RevoSDK/GX/GXTexture.h>
+#include <revolution/GX.h>
 #include <string.h>
 
 namespace EGG
@@ -231,7 +230,7 @@ namespace EGG
                     DrawGX::BeginDrawScreen(true, true, false);
                     DrawGX::SetBlendMode(DrawGX::BLEND_9);
                     GXSetBlendMode(0, 4, 5, 0);
-                    texBuf->load(GX_TEX_MAP_ID_0);
+                    texBuf->load(GX_TEXMAP0);
                     DrawGX::DrawDL(DrawGX::DL_16, forDL, DrawGX::scColorWhite);
                     texBuf->free();
                 }

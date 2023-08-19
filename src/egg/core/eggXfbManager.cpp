@@ -3,9 +3,7 @@
 
 #include <VI/vi.h>
 #include <OS/OSInterrupt.h>
-#include <GX/GXPixel.h>
-#include <GX/GXFrameBuf.h>
-#include <GX/GXMisc.h>
+#include <revolution/GX.h>
 
 namespace EGG
 {
@@ -45,7 +43,7 @@ namespace EGG
     {
         if (bUpdate)
         {
-            GXSetZMode(1, 7, 1);
+            GXSetZMode(1, GX_ALWAYS, 1);
             GXSetAlphaUpdate(1);
             GXSetColorUpdate(1);
         }

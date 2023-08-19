@@ -16,7 +16,7 @@ __vt__Q23EGG14SimpleAudioMgr:
     .long 0
     .long 0
     .long func_800B0F10
-    .long openArchive__Q23EGG9ArcPlayerFPCcPQ34nw4r3snd9SoundHeapQ33EGG9ArcPlayer12SARC_STORAGEP9ARCHandle
+    .long openArchive__Q23EGG9ArcPlayerFPCcPQ34nw4r3snd9SoundHeapQ33EGG9ArcPlayer12SARC_STORAGEP9CNTHandle
     .long 0x800afb08
     .long 0x800afb00
     .long 0x800afaf8
@@ -195,8 +195,8 @@ initialize__Q23EGG14SimpleAudioMgrFPQ33EGG9IAudioMgr3Arg:
 /* 800B0D48 000ABC48  4B FF 11 C1 */	bl system_halt
 lbl_800B0D4C:
 /* 800B0D4C 000ABC4C  38 60 00 00 */	li r3, 0
-/* 800B0D50 000ABC50  48 05 29 31 */	bl func_80103680
-/* 800B0D54 000ABC54  48 05 36 FD */	bl func_80104450
+/* 800B0D50 000ABC50  48 05 29 31 */	bl AIInit
+/* 800B0D54 000ABC54  48 05 36 FD */	bl AXInit
 /* 800B0D58 000ABC58  80 1E 00 1C */	lwz r0, 0x1c(r30)
 /* 800B0D5C 000ABC5C  2C 00 00 00 */	cmpwi r0, 0
 /* 800B0D60 000ABC60  41 82 00 38 */	beq lbl_800B0D98
@@ -313,7 +313,7 @@ func_800B0ED4:
 .global func_800B0EDC
 func_800B0EDC:
 /* 800B0EDC 000ABDDC  38 63 00 F8 */	addi r3, r3, 0xf8
-/* 800B0EE0 000ABDE0  4B FF D9 A4 */	b openCntArchive__Q23EGG9ArcPlayerFPCcP9ARCHandlePQ34nw4r3snd9SoundHeap
+/* 800B0EE0 000ABDE0  4B FF D9 A4 */	b openCntArchive__Q23EGG9ArcPlayerFPCcP9CNTHandlePQ34nw4r3snd9SoundHeap
 
 .global func_800B0EE4
 func_800B0EE4:

@@ -1,8 +1,8 @@
 #include "ut_IOStream.h"
 #include "ut_FileStream.h"
 #include "ut_DvdFileStream.h"
-#include <RevoSDK/OS/OSMutex.h>
-#include <RevoSDK/OS/OSInterrupt.h>
+#include <revolution/OS/OSMutex.h>
+#include <revolution/OS/OSInterrupt.h>
 #include "ut_DvdLockedFileStream.h"
 
 namespace nw4r

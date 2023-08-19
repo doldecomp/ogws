@@ -356,7 +356,7 @@ Draw__Q34nw4r2ef23DrawDirectionalStrategyFRCQ34nw4r2ef8DrawInfoPQ34nw4r2ef15Part
 /* 800256E0 000205E0  38 60 00 00 */	li r3, 0
 /* 800256E4 000205E4  38 80 00 01 */	li r4, 1
 /* 800256E8 000205E8  38 A0 00 01 */	li r5, 1
-/* 800256EC 000205EC  48 0B 96 75 */	bl func_800DED60
+/* 800256EC 000205EC  48 0B 96 75 */	bl GXEnableTexOffsets
 /* 800256F0 000205F0  38 60 00 0D */	li r3, 0xd
 /* 800256F4 000205F4  38 8D 80 40 */	addi r4, r13, directional_tex0_u8__Q24nw4r2ef-_SDA_BASE_
 /* 800256F8 000205F8  38 A0 00 02 */	li r5, 2
@@ -475,7 +475,7 @@ DrawDirectional__Q34nw4r2ef23DrawDirectionalStrategyFRCQ34nw4r2ef8DrawInfoPQ34nw
 /* 80025898 00020798  38 60 00 00 */	li r3, 0
 /* 8002589C 0002079C  38 80 00 01 */	li r4, 1
 /* 800258A0 000207A0  38 A0 00 01 */	li r5, 1
-/* 800258A4 000207A4  48 0B 94 BD */	bl func_800DED60
+/* 800258A4 000207A4  48 0B 94 BD */	bl GXEnableTexOffsets
 /* 800258A8 000207A8  38 60 00 0D */	li r3, 0xd
 /* 800258AC 000207AC  38 8D 80 40 */	addi r4, r13, directional_tex0_u8__Q24nw4r2ef-_SDA_BASE_
 /* 800258B0 000207B0  38 A0 00 02 */	li r5, 2
@@ -2300,7 +2300,7 @@ InitGraphics__Q34nw4r2ef23DrawDirectionalStrategyFRCQ34nw4r2ef8DrawInfoPQ34nw4r2
 /* 800272F8 000221F8  38 60 00 00 */	li r3, 0
 /* 800272FC 000221FC  38 80 00 01 */	li r4, 1
 /* 80027300 00022200  38 A0 00 01 */	li r5, 1
-/* 80027304 00022204  48 0B 7A 5D */	bl func_800DED60
+/* 80027304 00022204  48 0B 7A 5D */	bl GXEnableTexOffsets
 /* 80027308 00022208  38 60 00 0D */	li r3, 0xd
 /* 8002730C 0002220C  38 8D 80 40 */	addi r4, r13, directional_tex0_u8__Q24nw4r2ef-_SDA_BASE_
 /* 80027310 00022210  38 A0 00 02 */	li r5, 2

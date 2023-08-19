@@ -1,0 +1,42 @@
+.include "macros.inc"
+
+.section .text, "ax"
+.global main
+main:
+/* 80183EE4 0017EDE4  94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 80183EE8 0017EDE8  7C 08 02 A6 */	mflr r0
+/* 80183EEC 0017EDEC  90 01 00 14 */	stw r0, 0x14(r1)
+/* 80183EF0 0017EDF0  4B FF FC F5 */	bl initialize__11RPSysSystemFv
+/* 80183EF4 0017EDF4  4B FF FC AD */	bl create__11RPSysSystemFv
+/* 80183EF8 0017EDF8  80 6D A1 38 */	lwz r3, sInstance__11RPSysSystem-_SDA_BASE_(r13)
+/* 80183EFC 0017EDFC  4B FF FB 69 */	bl setup__11RPSysSystemFv
+/* 80183F00 0017EE00  80 6D A1 38 */	lwz r3, sInstance__11RPSysSystem-_SDA_BASE_(r13)
+/* 80183F04 0017EE04  4B FF F9 F5 */	bl mainLoop__11RPSysSystemFv
+/* 80183F08 0017EE08  80 01 00 14 */	lwz r0, 0x14(r1)
+/* 80183F0C 0017EE0C  7C 08 03 A6 */	mtlr r0
+/* 80183F10 0017EE10  38 21 00 10 */	addi r1, r1, 0x10
+/* 80183F14 0017EE14  4E 80 00 20 */	blr 
+
+.global OSReport
+OSReport:
+/* 80183F18 0017EE18  94 21 FF 90 */	stwu r1, -0x70(r1)
+/* 80183F1C 0017EE1C  40 86 00 24 */	bne cr1, lbl_80183F40
+/* 80183F20 0017EE20  D8 21 00 28 */	stfd f1, 0x28(r1)
+/* 80183F24 0017EE24  D8 41 00 30 */	stfd f2, 0x30(r1)
+/* 80183F28 0017EE28  D8 61 00 38 */	stfd f3, 0x38(r1)
+/* 80183F2C 0017EE2C  D8 81 00 40 */	stfd f4, 0x40(r1)
+/* 80183F30 0017EE30  D8 A1 00 48 */	stfd f5, 0x48(r1)
+/* 80183F34 0017EE34  D8 C1 00 50 */	stfd f6, 0x50(r1)
+/* 80183F38 0017EE38  D8 E1 00 58 */	stfd f7, 0x58(r1)
+/* 80183F3C 0017EE3C  D9 01 00 60 */	stfd f8, 0x60(r1)
+lbl_80183F40:
+/* 80183F40 0017EE40  90 61 00 08 */	stw r3, 8(r1)
+/* 80183F44 0017EE44  90 81 00 0C */	stw r4, 0xc(r1)
+/* 80183F48 0017EE48  90 A1 00 10 */	stw r5, 0x10(r1)
+/* 80183F4C 0017EE4C  90 C1 00 14 */	stw r6, 0x14(r1)
+/* 80183F50 0017EE50  90 E1 00 18 */	stw r7, 0x18(r1)
+/* 80183F54 0017EE54  91 01 00 1C */	stw r8, 0x1c(r1)
+/* 80183F58 0017EE58  91 21 00 20 */	stw r9, 0x20(r1)
+/* 80183F5C 0017EE5C  91 41 00 24 */	stw r10, 0x24(r1)
+/* 80183F60 0017EE60  38 21 00 70 */	addi r1, r1, 0x70
+/* 80183F64 0017EE64  4E 80 00 20 */	blr 

@@ -1,5 +1,5 @@
 #pragma ipa file
-#include <RevoSDK/OS/OSTime.h>
+#include <revolution/OS/OSTime.h>
 #include "ut_lock.h"
 #include "snd_SoundThread.h"
 #include "snd_VoiceManager.h"
@@ -43,7 +43,7 @@ namespace nw4r
             {
                 if (!mIsCreated) return;
 
-                OSJamMessage(&GetInstance()->mMesgQueue, 2, 1);
+                OSJamMessage(&GetInstance()->mMesgQueue, (OSMessage)2, 1);
                 OSJoinThread(&mThread, 0);
                 mIsCreated = false;
             }
@@ -66,7 +66,7 @@ namespace nw4r
                 VoiceManager::GetInstance()->NotifyVoiceUpdate();
             }
 
-            UNKWORD SoundThread::SoundThreadFunc(void *data)
+            void* SoundThread::SoundThreadFunc(void *data)
             {
                 SoundThread *thisx = (SoundThread *)data;
 
@@ -74,7 +74,7 @@ namespace nw4r
                 thisx->SoundThreadProc();
                 AxManager::GetInstance()->UnregisterCallback(&thisx->mAxNode);
 
-                return 0;
+                return NULL;
             }
 
             void SoundThread::RegisterPlayerCallback(PlayerCallback *cb)

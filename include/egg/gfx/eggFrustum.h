@@ -7,7 +7,7 @@
 #include "g3d_camera.h"
 #include "g3d_resanmscn.h"
 #include "math_triangular.h"
-#include <GX/GXTransform.h>
+#include <revolution/GX.h>
 
 namespace EGG
 {

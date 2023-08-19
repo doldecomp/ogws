@@ -1,0 +1,33 @@
+#ifndef MSL_CPP_CMATH_H
+#define MSL_CPP_CMATH_H
+#include <math.h>
+#ifdef __cplusplus
+
+namespace std {
+using ::acos;
+using ::asin;
+using ::atan;
+using ::atan2;
+using ::ceil;
+using ::copysign;
+using ::cos;
+using ::cosf;
+using ::fabsf;
+using ::floor;
+using ::fmod;
+using ::frexp;
+using ::ldexp;
+using ::modf;
+using ::nan;
+using ::pow;
+using ::scalbn;
+using ::sin;
+using ::sinf;
+using ::sqrt;
+using ::sqrtf;
+using ::tan;
+using ::tanf;
+} // namespace std
+
+#endif
+#endif

@@ -2,7 +2,7 @@
 #define NW4R_G3D_ANMFOG_H
 #include "types_nw4r.h"
 #include "ut_Color.h"
-#include <GX/GXPixel.h>
+#include <revolution/GX.h>
 
 namespace nw4r
 {

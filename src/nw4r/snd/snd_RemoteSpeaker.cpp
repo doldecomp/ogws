@@ -194,7 +194,7 @@ namespace nw4r
 				AutoInterruptLock lock;
 				if (!BOOL_0x7)
 				{
-					u32 bs = BUS_SPEED;
+					u32 bs = OS_BUS_CLOCK_SPEED;
 					s64 busSpeed = bs / 4;
 					OSSetAlarm(&ALARM_0x40, busSpeed * 480, ContinueAlarmHandler);
 					mTime = OSGetTime();
@@ -210,7 +210,7 @@ namespace nw4r
 				
 				BOOL_0x8 = true;
 				OSCancelAlarm(&ALARM_0x70);
-				u32 busSpeed = BUS_SPEED / 4;
+				u32 busSpeed = OS_BUS_CLOCK_SPEED / 4;
 				OSSetAlarm(&ALARM_0x70, busSpeed, IntervalAlarmHandler);
 			}
 			//8003D758

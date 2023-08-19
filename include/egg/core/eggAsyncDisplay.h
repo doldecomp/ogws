@@ -3,8 +3,8 @@
 #include "types_egg.h"
 #include "eggDisplay.h"
 #include "types_nw4r.h"
-#include <RevoSDK/GX/GXTexture.h>
-#include <RevoSDK/OS/OSThread.h>
+#include <revolution/GX.h>
+#include <revolution/OS/OSThread.h>
 
 namespace EGG
 {
@@ -36,7 +36,7 @@ namespace EGG
 #ifdef __cplusplus
 extern "C" {
 #endif
-    void PostRetraceCallback(void);
+    void PostRetraceCallback(u32 retraceCount);
     void DrawDoneCallback(void);
     static EGG::AsyncDisplay *spSelector;
 #ifdef __cplusplus

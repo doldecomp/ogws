@@ -30,8 +30,7 @@ namespace nw4r
 
         void LightObj::InitLightColor(GXColor color)
         {
-            GXColor temp = color;
-            GXInitLightColor(&mLightObj, &temp);
+            GXInitLightColor(&mLightObj, color);
         }
 
         void LightObj::InitLightPos(f32 x, f32 y, f32 z)
@@ -164,8 +163,8 @@ namespace nw4r
             lobjA.InitLightColor(white);
             lobjA.InitLightPos(4000000.0f, 4000000.0f, 4000000.0f);
             lobjA.InitLightDir(0.0f, -1.0f, 0.0f);
-            lobjA.InitLightSpot(90.0f, GX_SPOT_FN_0);
-            lobjA.InitLightDistAttn(10.0f, 0.5f, GX_DIST_ATTN_FN_0);
+            lobjA.InitLightSpot(90.0f, GX_SP_OFF);
+            lobjA.InitLightDistAttn(10.0f, 0.5f, GX_DA_OFF);
             lobjA.Enable();
 
             lobjB.InitLightColor(white);

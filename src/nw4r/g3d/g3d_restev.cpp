@@ -71,14 +71,14 @@ namespace nw4r
 			ResReadBPCmd(pCmds, &r9);
 			
 			static const GXChannelID r2c[] = {
-				GX_CHANNEL_ID_4,
-				GX_CHANNEL_ID_5,
-				GX_CHANNEL_ID_INVALID,
-				GX_CHANNEL_ID_INVALID,
-				GX_CHANNEL_ID_INVALID,
-				GX_CHANNEL_ID_7,
-				GX_CHANNEL_ID_8,
-				GX_CHANNEL_ID_6
+				GX_COLOR0A0,
+				GX_COLOR1A1,
+				GX_COLOR_NULL,
+				GX_COLOR_NULL,
+				GX_COLOR_NULL,
+				GX_ALPHA_BUMP,
+				GX_ALPHA_BUMPN,
+				GX_COLOR_ZERO
 			};
 			
 			if (stageID & 1)
@@ -99,8 +99,8 @@ namespace nw4r
 			if (pCoordID) *pCoordID = r4;
 			if (pChannelID) *pChannelID = r8;
 			
-			//if (pMapID) *pMapID = !r0 ? GX_TEX_MAP_ID_INVALID : r3;
-			if (!r0) r3 = GX_TEX_MAP_ID_INVALID;
+			//if (pMapID) *pMapID = !r0 ? GX_TEXMAP_NULL : r3;
+			if (!r0) r3 = GX_TEXMAP_NULL;
 			if (pMapID) *pMapID = r3;
 			
 			return true;

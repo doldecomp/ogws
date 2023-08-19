@@ -4,7 +4,7 @@
 #include "g3d_rescommon.h"
 #include "math_types.h"
 #include "ut_Color.h"
-#include <GX/GXPixel.h>
+#include <revolution/GX.h>
 
 namespace nw4r
 {
@@ -21,7 +21,7 @@ namespace nw4r
             u8 mFogRangeAdjEnable; // at 0x18
             u8 BYTE_0x19;
             u16 mAdjTableWidth; // at 0x1A
-            u16 mAdjTable[10]; // at 0x1C
+            GXFogAdjTable mAdjTable; // at 0x1C
         };
 
         struct Fog

@@ -2,8 +2,8 @@
 #define EGG_GFX_DRAWGX_H
 #include "types_egg.h"
 #include "types_nw4r.h"
-#include <GX/GX.h>
-#include <GX/GXTexture.h>
+#include <revolution/GX.h>
+
 
 namespace EGG
 {

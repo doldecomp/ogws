@@ -34,7 +34,7 @@ __dt__Q23EGG7ExpHeapFv:
 /* 800A264C 0009D54C  90 83 00 00 */	stw r4, 0(r3)
 /* 800A2650 0009D550  48 00 0B 29 */	bl dispose__Q23EGG4HeapFv
 /* 800A2654 0009D554  80 7E 00 10 */	lwz r3, 0x10(r30)
-/* 800A2658 0009D558  48 04 42 F9 */	bl func_800E6950
+/* 800A2658 0009D558  48 04 42 F9 */	bl MEMDestroyExpHeap
 /* 800A265C 0009D55C  7F C3 F3 78 */	mr r3, r30
 /* 800A2660 0009D560  38 80 00 00 */	li r4, 0
 /* 800A2664 0009D564  48 00 06 B9 */	bl __dt__Q23EGG4HeapFv
@@ -74,7 +74,7 @@ lbl_800A26D0:
 lbl_800A26D8:
 /* 800A26D8 0009D5D8  38 7B 00 34 */	addi r3, r27, 0x34
 /* 800A26DC 0009D5DC  38 84 FF CC */	addi r4, r4, -52
-/* 800A26E0 0009D5E0  48 04 41 C1 */	bl func_800E68A0
+/* 800A26E0 0009D5E0  48 04 41 C1 */	bl MEMCreateExpHeapEx
 /* 800A26E4 0009D5E4  2C 03 00 00 */	cmpwi r3, 0
 /* 800A26E8 0009D5E8  7C 7C 1B 78 */	mr r28, r3
 /* 800A26EC 0009D5EC  41 82 00 3C */	beq lbl_800A2728
@@ -195,22 +195,22 @@ lbl_800A2864:
 .global alloc__Q23EGG7ExpHeapFUll
 alloc__Q23EGG7ExpHeapFUll:
 /* 800A287C 0009D77C  80 63 00 10 */	lwz r3, 0x10(r3)
-/* 800A2880 0009D780  48 04 41 00 */	b func_800E6980
+/* 800A2880 0009D780  48 04 41 00 */	b MEMAllocFromExpHeapEx
 
 .global free__Q23EGG7ExpHeapFPv
 free__Q23EGG7ExpHeapFPv:
 /* 800A2884 0009D784  80 63 00 10 */	lwz r3, 0x10(r3)
-/* 800A2888 0009D788  48 04 43 94 */	b func_800E6C1C
+/* 800A2888 0009D788  48 04 43 94 */	b MEMFreeToExpHeap
 
 .global resizeForMBlock__Q23EGG7ExpHeapFPvUl
 resizeForMBlock__Q23EGG7ExpHeapFPvUl:
 /* 800A288C 0009D78C  80 63 00 10 */	lwz r3, 0x10(r3)
-/* 800A2890 0009D790  48 04 41 A0 */	b func_800E6A30
+/* 800A2890 0009D790  48 04 41 A0 */	b MEMResizeForMBlockExpHeap
 
 .global getAllocatableSize__Q23EGG7ExpHeapFl
 getAllocatableSize__Q23EGG7ExpHeapFl:
 /* 800A2894 0009D794  80 63 00 10 */	lwz r3, 0x10(r3)
-/* 800A2898 0009D798  48 04 44 50 */	b func_800E6CE8
+/* 800A2898 0009D798  48 04 44 50 */	b MEMGetAllocatableSizeForExpHeapEx
 
 .global adjust__Q23EGG7ExpHeapFv
 adjust__Q23EGG7ExpHeapFv:
@@ -221,7 +221,7 @@ adjust__Q23EGG7ExpHeapFv:
 /* 800A28AC 0009D7AC  93 C1 00 08 */	stw r30, 8(r1)
 /* 800A28B0 0009D7B0  7C 7E 1B 78 */	mr r30, r3
 /* 800A28B4 0009D7B4  80 63 00 10 */	lwz r3, 0x10(r3)
-/* 800A28B8 0009D7B8  48 04 45 09 */	bl func_800E6DC0
+/* 800A28B8 0009D7B8  48 04 45 09 */	bl MEMAdjustExpHeap
 /* 800A28BC 0009D7BC  3B E3 00 34 */	addi r31, r3, 0x34
 /* 800A28C0 0009D7C0  28 1F 00 34 */	cmplwi r31, 0x34
 /* 800A28C4 0009D7C4  40 81 00 30 */	ble lbl_800A28F4
@@ -251,7 +251,7 @@ initAllocator__Q23EGG7ExpHeapFPQ23EGG9Allocatorl:
 /* 800A2910 0009D810  7C 66 1B 78 */	mr r6, r3
 /* 800A2914 0009D814  7C 83 23 78 */	mr r3, r4
 /* 800A2918 0009D818  80 86 00 10 */	lwz r4, 0x10(r6)
-/* 800A291C 0009D81C  48 04 4B 90 */	b func_800E74AC
+/* 800A291C 0009D81C  48 04 4B 90 */	b MEMInitAllocatorForExpHeap
 
 .global getHeapKind__Q23EGG7ExpHeapCFv
 getHeapKind__Q23EGG7ExpHeapCFv:

@@ -6,8 +6,7 @@
 #include "eggDrawGX.h"
 #include "eggStateGX.h"
 #include "math_types.h"
-#include <RevoSDK/GX/GXTev.h>
-#include <RevoSDK/GX/GXBump.h>
+#include <revolution/GX.h>
 
 namespace EGG
 {
@@ -76,7 +75,7 @@ namespace EGG
                     u16 screenW = GetScreen().GetWidth();
                     PSMTXScale(forDL, screenW, screenH, 1.0f);
                     
-                    BUF_0x8C->load(GX_TEX_MAP_ID_0);
+                    BUF_0x8C->load(GX_TEXMAP0);
                     DrawGX::BeginDrawScreen(true, true, false);
                     GXSetBlendMode(0, 4, 5, 0);
 
@@ -111,7 +110,7 @@ namespace EGG
                 {
                     BUF_0x84->setMinFilt(0);
                     BUF_0x84->setMagFilt(0);
-                    BUF_0x84->load(GX_TEX_MAP_ID_0);
+                    BUF_0x84->load(GX_TEXMAP0);
                     
                     math::MTX34 forDL;
                     PostEffectBase::setProjection(GetScreen());
@@ -127,42 +126,42 @@ namespace EGG
                     {
                         BUF_0x88->setMinFilt(0);
                         BUF_0x88->setMagFilt(0);
-                        BUF_0x88->load(GX_TEX_MAP_ID_1);
+                        BUF_0x88->load(GX_TEXMAP1);
 
                         DrawGX::SetMat_ColorChannel(DrawGX::COLOR_CHANNEL_1);
                         DrawGX::SetMat_TexGen(DrawGX::TEX_GEN_1);
                         DrawGX::SetMat_Ind();
 
-                        GXSetTevKColor(GX_TEV_REG_ID_0, (GXColor){0, 0, 0, 0});
+                        GXSetTevKColor(GX_KCOLOR0, (GXColor){0, 0, 0, 0});
 
-                        GXSetTevSwapModeTable(GX_TEV_SWAP_SEL_0, 0, 1, 2, 3);
+                        GXSetTevSwapModeTable(GX_TEV_SWAP0, 0, 1, 2, 3);
                         GXSetNumTevStages(2);
                         GXSetTevDirect(0);
                         GXSetTevDirect(1);
-                        GXSetTevSwapMode(GX_TEV_STAGE_ID_0, 0, 0);
+                        GXSetTevSwapMode(GX_TEVSTAGE0, 0, 0);
                         GXSetTevSwapMode(GX_TEV_STAGE_ID_1, 0, 0);
 
                         if (WORD_0x80 == 0)
                         {
-                            GXSetTevKAlphaSel(GX_TEV_STAGE_ID_0, 28);
-                            GXSetTevOrder(GX_TEV_STAGE_ID_0, GX_TEX_COORD_ID_0, GX_TEX_MAP_ID_0, 4);
-                            GXSetTevColorIn(GX_TEV_STAGE_ID_0, 15, 8, 10, 15);
-                            GXSetTevColorOp(GX_TEV_STAGE_ID_0, 0, 0, 0, 1, 0);
-                            GXSetTevAlphaIn(GX_TEV_STAGE_ID_0, 4, 6, 5, 7);
-                            GXSetTevAlphaOp(GX_TEV_STAGE_ID_0, 14, 0, 0, 1, 0);
+                            GXSetTevKAlphaSel(GX_TEVSTAGE0, 28);
+                            GXSetTevOrder(GX_TEVSTAGE0, GX_TEXCOORD0, GX_TEXMAP0, 4);
+                            GXSetTevColorIn(GX_TEVSTAGE0, 15, 8, 10, 15);
+                            GXSetTevColorOp(GX_TEVSTAGE0, 0, 0, 0, 1, 0);
+                            GXSetTevAlphaIn(GX_TEVSTAGE0, 4, 6, 5, 7);
+                            GXSetTevAlphaOp(GX_TEVSTAGE0, 14, 0, 0, 1, 0);
                         }
                         else
                         {
-                            GXSetTevKAlphaSel(GX_TEV_STAGE_ID_0, 28);
-                            GXSetTevOrder(GX_TEV_STAGE_ID_0, GX_TEX_COORD_ID_0, GX_TEX_MAP_ID_0, 4);
-                            GXSetTevColorIn(GX_TEV_STAGE_ID_0, 15, 15, 15, 8);
-                            GXSetTevColorOp(GX_TEV_STAGE_ID_0, 0, 0, 0, 1, 0);
-                            GXSetTevAlphaIn(GX_TEV_STAGE_ID_0, 7, 7, 7, 5);
-                            GXSetTevAlphaOp(GX_TEV_STAGE_ID_0, 0, 0, 0, 1, 0);
+                            GXSetTevKAlphaSel(GX_TEVSTAGE0, 28);
+                            GXSetTevOrder(GX_TEVSTAGE0, GX_TEXCOORD0, GX_TEXMAP0, 4);
+                            GXSetTevColorIn(GX_TEVSTAGE0, 15, 15, 15, 8);
+                            GXSetTevColorOp(GX_TEVSTAGE0, 0, 0, 0, 1, 0);
+                            GXSetTevAlphaIn(GX_TEVSTAGE0, 7, 7, 7, 5);
+                            GXSetTevAlphaOp(GX_TEVSTAGE0, 0, 0, 0, 1, 0);
                         }
 
                         GXSetTevSwapMode(GX_TEV_STAGE_ID_1, 0, 0);
-                        GXSetTevOrder(GX_TEV_STAGE_ID_1, GX_TEX_COORD_ID_0, GX_TEX_MAP_ID_1, 0xFF);
+                        GXSetTevOrder(GX_TEV_STAGE_ID_1, GX_TEXCOORD0, GX_TEXMAP1, 0xFF);
                         GXSetTevColorIn(GX_TEV_STAGE_ID_1, 15, 15,15, 0);
                         GXSetTevColorOp(GX_TEV_STAGE_ID_1, 0, 0, 0, 1, 0);
                         GXSetTevAlphaIn(GX_TEV_STAGE_ID_1, 7, 7, 7, 0);
@@ -177,9 +176,9 @@ namespace EGG
                     else
                     {
                         DrawGX::BeginDrawScreen(true, true, false);
-                        GXSetTevKAlphaSel(GX_TEV_STAGE_ID_0, 0x1C);
-                        GXSetTevAlphaIn(GX_TEV_STAGE_ID_0, 4, 7, 5, 7);
-                        GXSetTevAlphaOp(GX_TEV_STAGE_ID_0, 14, 0, 0, 1, 0);
+                        GXSetTevKAlphaSel(GX_TEVSTAGE0, 0x1C);
+                        GXSetTevAlphaIn(GX_TEVSTAGE0, 4, 7, 5, 7);
+                        GXSetTevAlphaOp(GX_TEVSTAGE0, 14, 0, 0, 1, 0);
                     }
 
                     DrawGX::DrawDL(DrawGX::DL_16, forDL, tevColor);

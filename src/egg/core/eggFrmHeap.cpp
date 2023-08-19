@@ -1,8 +1,8 @@
 #pragma use_lmw_stmw on
 #include "eggFrmHeap.h"
 #include "ut_algorithm.h"
-#include <RevoSDK/MEM/mem_frameHeap.h>
-#include <RevoSDK/MEM/mem_allocator.h>
+#include <revolution/MEM/mem_frameHeap.h>
+#include <revolution/MEM/mem_allocator.h>
 #include <new>
 
 namespace EGG

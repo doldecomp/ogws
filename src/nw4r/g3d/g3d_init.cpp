@@ -1,9 +1,9 @@
 #include "g3d_init.h"
 #include "g3d_state.h"
 #include "ut_LockedCache.h"
-#include <RevoSDK/OS/OS.h>
-#include <RevoSDK/VI/vi.h>
-#include <RevoSDK/GX/GXFrameBuf.h>
+#include <revolution/OS/OS.h>
+#include <revolution/VI/vi.h>
+#include <revolution/GX.h>
 
 namespace
 {
@@ -28,16 +28,16 @@ namespace nw4r
             GXRenderModeObj* rmo;
             switch(VIGetTvFormat())
             {
-                case VI_NTSC:
+                case VI_TV_FMT_NTSC:
                     rmo = &GXNtsc480IntDf;
                     break;
-                case VI_PAL:
+                case VI_TV_FMT_PAL:
                     rmo = &GXPal528IntDf;
                     break;
-                case VI_EURGB60:
+                case VI_TV_FMT_EURGB60:
                     rmo = &GXEurgb60Hz480IntDf;
                     break;
-                case VI_MPAL:
+                case VI_TV_FMT_MPAL:
                     rmo = &GXMpal480IntDf;
                     break;
                 default:
