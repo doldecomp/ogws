@@ -1,3 +1,5 @@
+# WFU link references to watch for: EGG::TBitFlag<u32>
+
 .include "macros.inc"
 
 .section .sbss, "wa"

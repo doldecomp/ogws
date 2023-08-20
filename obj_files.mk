@@ -596,6 +596,7 @@ RVL_SDK_O_FILES := \
 	build/asm/RP/RPSystem/RPSysGameConfig.o \
 	build/asm/RP/RPSystem/RPSysLoadScene.o \
 	build/asm/RP/RPSystem/RP_80186e40.o \
+	build/asm/RP/RPSystem/RPSysResourceManager.o \
 
 
 GROUP_1_O_FILES := \

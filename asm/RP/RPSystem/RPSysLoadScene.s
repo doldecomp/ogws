@@ -1,5 +1,16 @@
 .include "macros.inc"
 
+.section .rodata, "a"
+.balign 0x8
+strings_80382568:
+	.string "Sound/RPSportsCommon/rp_Common_Sports.brsar"
+	.string "GROUP_LOGO"
+	.string "GROUP_COMMON_01"
+	.balign 4
+.global lbl_803825B0
+lbl_803825B0:
+	.string "%s %s %s %s"
+
 .section .sdata2, "a"
 .balign 0x8
 .global lbl_804C1538
@@ -34,8 +45,8 @@ loadResourceFunc__10RPSysSceneFPv:
 /* 801868AC 001817AC  2C 03 00 01 */	cmpwi r3, 1
 /* 801868B0 001817B0  40 82 00 84 */	bne lbl_80186934
 /* 801868B4 001817B4  80 6D A2 C4 */	lwz r3, lbl_804BF644-_SDA_BASE_(r13)
-/* 801868B8 001817B8  3F E0 80 38 */	lis r31, lbl_80382568@ha
-/* 801868BC 001817BC  38 9F 25 68 */	addi r4, r31, lbl_80382568@l
+/* 801868B8 001817B8  3F E0 80 38 */	lis r31, strings_80382568@ha
+/* 801868BC 001817BC  38 9F 25 68 */	addi r4, r31, strings_80382568@l
 /* 801868C0 001817C0  38 A0 00 00 */	li r5, 0
 /* 801868C4 001817C4  81 83 00 00 */	lwz r12, 0(r3)
 /* 801868C8 001817C8  38 C0 00 01 */	li r6, 1
