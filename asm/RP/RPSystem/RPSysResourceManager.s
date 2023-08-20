@@ -38,8 +38,8 @@ lbl_8038262e:
 
 .section .data, "wa"
 .balign 0x8
-.global sStaticPaths__20RPSysResourceManager
-sStaticPaths__20RPSysResourceManager:
+.global scStaticPaths__20RPSysResourceManager
+scStaticPaths__20RPSysResourceManager:
 	.incbin "baserom.dol", 0x3B5950, 0x10
 .global __vt__20RPSysResourceManager
 __vt__20RPSysResourceManager:
@@ -403,8 +403,8 @@ GetStaticSoundLocalPath__20RPSysResourceManagerFPcUl:
 /* 80187398 00182298  83 CD A1 60 */	lwz r30, sInstance__17RPSysProjectLocal-_SDA_BASE_(r13)
 /* 8018739C 0018229C  4B F3 18 99 */	bl strcpy
 /* 801873A0 001822A0  80 1E 00 0C */	lwz r0, 0xc(r30)
-/* 801873A4 001822A4  3C 80 80 3C */	lis r4, sStaticPaths__20RPSysResourceManager@ha
-/* 801873A8 001822A8  38 84 98 50 */	addi r4, r4, sStaticPaths__20RPSysResourceManager@l
+/* 801873A4 001822A4  3C 80 80 3C */	lis r4, scStaticPaths__20RPSysResourceManager@ha
+/* 801873A8 001822A8  38 84 98 50 */	addi r4, r4, scStaticPaths__20RPSysResourceManager@l
 /* 801873AC 001822AC  7F A3 EB 78 */	mr r3, r29
 /* 801873B0 001822B0  54 00 10 3A */	slwi r0, r0, 2
 /* 801873B4 001822B4  7C 84 00 2E */	lwzx r4, r4, r0
@@ -436,8 +436,8 @@ GetStaticSoundCommonPath__20RPSysResourceManagerFPcUl:
 /* 80187410 00182310  83 ED A1 60 */	lwz r31, sInstance__17RPSysProjectLocal-_SDA_BASE_(r13)
 /* 80187414 00182314  4B F3 18 21 */	bl strcpy
 /* 80187418 00182318  80 1F 00 0C */	lwz r0, 0xc(r31)
-/* 8018741C 0018231C  3C 80 80 3C */	lis r4, sStaticPaths__20RPSysResourceManager@ha
-/* 80187420 00182320  38 84 98 50 */	addi r4, r4, sStaticPaths__20RPSysResourceManager@l
+/* 8018741C 0018231C  3C 80 80 3C */	lis r4, scStaticPaths__20RPSysResourceManager@ha
+/* 80187420 00182320  38 84 98 50 */	addi r4, r4, scStaticPaths__20RPSysResourceManager@l
 /* 80187424 00182324  7F C3 F3 78 */	mr r3, r30
 /* 80187428 00182328  54 00 10 3A */	slwi r0, r0, 2
 /* 8018742C 0018232C  7C 84 00 2E */	lwzx r4, r4, r0
@@ -578,10 +578,10 @@ LoadCacheArchives__20RPSysResourceManagerFv:
 /* 80187608 00182508  7C 08 02 A6 */	mflr r0
 /* 8018760C 0018250C  90 01 00 24 */	stw r0, 0x24(r1)
 /* 80187610 00182510  BF 41 00 08 */	stmw r26, 8(r1)
-/* 80187614 00182514  3F A0 80 3C */	lis r29, sStaticPaths__20RPSysResourceManager@ha
+/* 80187614 00182514  3F A0 80 3C */	lis r29, scStaticPaths__20RPSysResourceManager@ha
 /* 80187618 00182518  3F 80 80 38 */	lis r28, strings_803825F8@ha
 /* 8018761C 0018251C  7C 7E 1B 78 */	mr r30, r3
-/* 80187620 00182520  3B BD 98 50 */	addi r29, r29, sStaticPaths__20RPSysResourceManager@l
+/* 80187620 00182520  3B BD 98 50 */	addi r29, r29, scStaticPaths__20RPSysResourceManager@l
 /* 80187624 00182524  3B 9C 25 F8 */	addi r28, r28, strings_803825F8@l
 /* 80187628 00182528  83 4D A1 60 */	lwz r26, sInstance__17RPSysProjectLocal-_SDA_BASE_(r13)
 /* 8018762C 0018252C  80 8D A1 38 */	lwz r4, sInstance__11RPSysSystem-_SDA_BASE_(r13)

@@ -1,0 +1,359 @@
+.include "macros.inc"
+
+.section .sdata2, "a"
+.balign 0x8
+.global lbl_804C1550
+lbl_804C1550:
+	.incbin "baserom.dol", 0x3CA190, 0x4
+.global lbl_804C1554
+lbl_804C1554:
+	.incbin "baserom.dol", 0x3CA194, 0x4
+.global lbl_804C1558
+lbl_804C1558:
+	.incbin "baserom.dol", 0x3CA198, 0x4
+.global lbl_804C155C
+lbl_804C155C:
+	.incbin "baserom.dol", 0x3CA19C, 0x4
+.global lbl_804C1560
+lbl_804C1560:
+	.incbin "baserom.dol", 0x3CA1A0, 0x4
+.global lbl_804C1564
+lbl_804C1564:
+	.incbin "baserom.dol", 0x3CA1A4, 0x4
+
+.section .sdata, "wa"
+.balign 0x8
+.global scGameDiskName__14RPSysDvdStatus
+scGameDiskName__14RPSysDvdStatus:
+	.incbin "baserom.dol", 0x3C7800, 0x4
+
+.section .sbss, "wa"
+.balign 0x8
+.global sInstance__14RPSysDvdStatus
+sInstance__14RPSysDvdStatus:
+	.skip 0x4
+
+.section .rodata, "a"
+.balign 0x8
+strings_803826b8:
+	.incbin "baserom.dol", 0x37E7B8, 0x328
+
+.section .data, "wa"
+.balign 0x8
+.global scLanguageEng__14RPSysDvdStatus
+scLanguageEng__14RPSysDvdStatus:
+	.incbin "baserom.dol", 0x3B59A8, 0x10
+.global scLanguageFra__14RPSysDvdStatus
+scLanguageFra__14RPSysDvdStatus:
+	.incbin "baserom.dol", 0x3B59B8, 0x10
+.global scLanguageGer__14RPSysDvdStatus
+scLanguageGer__14RPSysDvdStatus:
+	.incbin "baserom.dol", 0x3B59C8, 0x10
+.global scLanguageIta__14RPSysDvdStatus
+scLanguageIta__14RPSysDvdStatus:
+	.incbin "baserom.dol", 0x3B59D8, 0x10
+.global scLanguageSpa__14RPSysDvdStatus
+scLanguageSpa__14RPSysDvdStatus:
+	.incbin "baserom.dol", 0x3B59E8, 0x10
+.global scLanguageJpn__14RPSysDvdStatus
+scLanguageJpn__14RPSysDvdStatus:
+	.incbin "baserom.dol", 0x3B59F8, 0x10
+.global jtbl_803B9908
+jtbl_803B9908:
+	.incbin "baserom.dol", 0x3B5A08, 0x20
+.global __vt__14RPSysDvdStatus
+__vt__14RPSysDvdStatus:
+	.long 0
+    .long 0
+    .long __dt__14RPSysDvdStatusFv
+
+.section .text, "ax"
+.global __dt__14RPSysDvdStatusFv
+__dt__14RPSysDvdStatusFv:
+/* 80187F64 00182E64  94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 80187F68 00182E68  7C 08 02 A6 */	mflr r0
+/* 80187F6C 00182E6C  2C 03 00 00 */	cmpwi r3, 0
+/* 80187F70 00182E70  90 01 00 14 */	stw r0, 0x14(r1)
+/* 80187F74 00182E74  93 E1 00 0C */	stw r31, 0xc(r1)
+/* 80187F78 00182E78  7C 7F 1B 78 */	mr r31, r3
+/* 80187F7C 00182E7C  41 82 00 10 */	beq lbl_80187F8C
+/* 80187F80 00182E80  2C 04 00 00 */	cmpwi r4, 0
+/* 80187F84 00182E84  40 81 00 08 */	ble lbl_80187F8C
+/* 80187F88 00182E88  4B F1 B2 FD */	bl __dl__FPv
+lbl_80187F8C:
+/* 80187F8C 00182E8C  7F E3 FB 78 */	mr r3, r31
+/* 80187F90 00182E90  83 E1 00 0C */	lwz r31, 0xc(r1)
+/* 80187F94 00182E94  80 01 00 14 */	lwz r0, 0x14(r1)
+/* 80187F98 00182E98  7C 08 03 A6 */	mtlr r0
+/* 80187F9C 00182E9C  38 21 00 10 */	addi r1, r1, 0x10
+/* 80187FA0 00182EA0  4E 80 00 20 */	blr 
+
+.global draw__14RPSysDvdStatusFv
+draw__14RPSysDvdStatusFv:
+/* 80187FA4 00182EA4  94 21 FF E0 */	stwu r1, -0x20(r1)
+/* 80187FA8 00182EA8  7C 08 02 A6 */	mflr r0
+/* 80187FAC 00182EAC  90 01 00 24 */	stw r0, 0x24(r1)
+/* 80187FB0 00182EB0  93 E1 00 1C */	stw r31, 0x1c(r1)
+/* 80187FB4 00182EB4  3F E0 80 3C */	lis r31, scLanguageEng__14RPSysDvdStatus@ha
+/* 80187FB8 00182EB8  3B FF 98 A8 */	addi r31, r31, scLanguageEng__14RPSysDvdStatus@l
+/* 80187FBC 00182EBC  93 C1 00 18 */	stw r30, 0x18(r1)
+/* 80187FC0 00182EC0  7C 7E 1B 78 */	mr r30, r3
+/* 80187FC4 00182EC4  93 A1 00 14 */	stw r29, 0x14(r1)
+/* 80187FC8 00182EC8  80 03 00 08 */	lwz r0, 8(r3)
+/* 80187FCC 00182ECC  2C 00 FF FF */	cmpwi r0, -1
+/* 80187FD0 00182ED0  40 81 01 A0 */	ble lbl_80188170
+/* 80187FD4 00182ED4  38 60 00 00 */	li r3, 0
+/* 80187FD8 00182ED8  4B F7 44 25 */	bl VISetBlack
+/* 80187FDC 00182EDC  80 7E 00 10 */	lwz r3, 0x10(r30)
+/* 80187FE0 00182EE0  81 83 00 00 */	lwz r12, 0(r3)
+/* 80187FE4 00182EE4  81 8C 00 1C */	lwz r12, 0x1c(r12)
+/* 80187FE8 00182EE8  7D 89 03 A6 */	mtctr r12
+/* 80187FEC 00182EEC  4E 80 04 21 */	bctrl 
+/* 80187FF0 00182EF0  80 1E 00 08 */	lwz r0, 8(r30)
+/* 80187FF4 00182EF4  2C 00 00 02 */	cmpwi r0, 2
+/* 80187FF8 00182EF8  40 80 01 78 */	bge lbl_80188170
+/* 80187FFC 00182EFC  80 6D A1 B8 */	lwz r3, lbl_804BF538-_SDA_BASE_(r13)
+/* 80188000 00182F00  4B E8 30 CD */	bl SetupGX__Q34nw4r2ut10CharWriterFv
+/* 80188004 00182F04  38 60 00 00 */	li r3, 0
+/* 80188008 00182F08  38 80 00 07 */	li r4, 7
+/* 8018800C 00182F0C  38 A0 00 00 */	li r5, 0
+/* 80188010 00182F10  4B F5 A1 4D */	bl GXSetZMode
+/* 80188014 00182F14  80 6D A1 B8 */	lwz r3, lbl_804BF538-_SDA_BASE_(r13)
+/* 80188018 00182F18  38 80 01 10 */	li r4, 0x110
+/* 8018801C 00182F1C  C0 02 9B 3C */	lfs f0, lbl_804C155C-_SDA2_BASE_(r2)
+/* 80188020 00182F20  38 00 FF FF */	li r0, -1
+/* 80188024 00182F24  90 83 00 5C */	stw r4, 0x5c(r3)
+/* 80188028 00182F28  38 81 00 08 */	addi r4, r1, 8
+/* 8018802C 00182F2C  80 6D A1 B8 */	lwz r3, lbl_804BF538-_SDA_BASE_(r13)
+/* 80188030 00182F30  D0 03 00 24 */	stfs f0, 0x24(r3)
+/* 80188034 00182F34  D0 03 00 28 */	stfs f0, 0x28(r3)
+/* 80188038 00182F38  90 01 00 08 */	stw r0, 8(r1)
+/* 8018803C 00182F3C  80 6D A1 B8 */	lwz r3, lbl_804BF538-_SDA_BASE_(r13)
+/* 80188040 00182F40  4B E8 2E ED */	bl SetTextColor__Q34nw4r2ut10CharWriterFQ34nw4r2ut5Color
+/* 80188044 00182F44  80 6D A1 B8 */	lwz r3, lbl_804BF538-_SDA_BASE_(r13)
+/* 80188048 00182F48  3B A0 00 00 */	li r29, 0
+/* 8018804C 00182F4C  C0 22 9B 40 */	lfs f1, lbl_804C1560-_SDA2_BASE_(r2)
+/* 80188050 00182F50  C0 02 9B 44 */	lfs f0, lbl_804C1564-_SDA2_BASE_(r2)
+/* 80188054 00182F54  D0 23 00 2C */	stfs f1, 0x2c(r3)
+/* 80188058 00182F58  D0 03 00 30 */	stfs f0, 0x30(r3)
+/* 8018805C 00182F5C  80 6D A1 60 */	lwz r3, sInstance__17RPSysProjectLocal-_SDA_BASE_(r13)
+/* 80188060 00182F60  80 03 00 10 */	lwz r0, 0x10(r3)
+/* 80188064 00182F64  28 00 00 07 */	cmplwi r0, 7
+/* 80188068 00182F68  41 81 00 B8 */	bgt lbl_80188120
+/* 8018806C 00182F6C  3C 60 80 3C */	lis r3, jtbl_803B9908@ha
+/* 80188070 00182F70  54 00 10 3A */	slwi r0, r0, 2
+/* 80188074 00182F74  38 63 99 08 */	addi r3, r3, jtbl_803B9908@l
+/* 80188078 00182F78  7C 63 00 2E */	lwzx r3, r3, r0
+/* 8018807C 00182F7C  7C 69 03 A6 */	mtctr r3
+/* 80188080 00182F80  4E 80 04 20 */	bctr 
+/* 80188084 00182F84  80 7E 00 08 */	lwz r3, 8(r30)
+/* 80188088 00182F88  38 1F 00 00 */	addi r0, r31, 0
+/* 8018808C 00182F8C  54 63 18 38 */	slwi r3, r3, 3
+/* 80188090 00182F90  7F A0 1A 14 */	add r29, r0, r3
+/* 80188094 00182F94  48 00 00 8C */	b lbl_80188120
+/* 80188098 00182F98  80 7E 00 08 */	lwz r3, 8(r30)
+/* 8018809C 00182F9C  38 1F 00 10 */	addi r0, r31, 0x10
+/* 801880A0 00182FA0  54 63 18 38 */	slwi r3, r3, 3
+/* 801880A4 00182FA4  7F A0 1A 14 */	add r29, r0, r3
+/* 801880A8 00182FA8  48 00 00 78 */	b lbl_80188120
+/* 801880AC 00182FAC  80 7E 00 08 */	lwz r3, 8(r30)
+/* 801880B0 00182FB0  38 1F 00 20 */	addi r0, r31, 0x20
+/* 801880B4 00182FB4  54 63 18 38 */	slwi r3, r3, 3
+/* 801880B8 00182FB8  7F A0 1A 14 */	add r29, r0, r3
+/* 801880BC 00182FBC  48 00 00 64 */	b lbl_80188120
+/* 801880C0 00182FC0  80 7E 00 08 */	lwz r3, 8(r30)
+/* 801880C4 00182FC4  38 1F 00 30 */	addi r0, r31, 0x30
+/* 801880C8 00182FC8  54 63 18 38 */	slwi r3, r3, 3
+/* 801880CC 00182FCC  7F A0 1A 14 */	add r29, r0, r3
+/* 801880D0 00182FD0  48 00 00 50 */	b lbl_80188120
+/* 801880D4 00182FD4  80 7E 00 08 */	lwz r3, 8(r30)
+/* 801880D8 00182FD8  38 1F 00 40 */	addi r0, r31, 0x40
+/* 801880DC 00182FDC  54 63 18 38 */	slwi r3, r3, 3
+/* 801880E0 00182FE0  7F A0 1A 14 */	add r29, r0, r3
+/* 801880E4 00182FE4  48 00 00 3C */	b lbl_80188120
+/* 801880E8 00182FE8  80 7E 00 08 */	lwz r3, 8(r30)
+/* 801880EC 00182FEC  38 1F 00 00 */	addi r0, r31, 0
+/* 801880F0 00182FF0  54 63 18 38 */	slwi r3, r3, 3
+/* 801880F4 00182FF4  7F A0 1A 14 */	add r29, r0, r3
+/* 801880F8 00182FF8  48 00 00 28 */	b lbl_80188120
+/* 801880FC 00182FFC  80 7E 00 08 */	lwz r3, 8(r30)
+/* 80188100 00183000  38 1F 00 50 */	addi r0, r31, 0x50
+/* 80188104 00183004  54 63 18 38 */	slwi r3, r3, 3
+/* 80188108 00183008  7F A0 1A 14 */	add r29, r0, r3
+/* 8018810C 0018300C  48 00 00 14 */	b lbl_80188120
+/* 80188110 00183010  80 7E 00 08 */	lwz r3, 8(r30)
+/* 80188114 00183014  38 1F 00 00 */	addi r0, r31, 0
+/* 80188118 00183018  54 63 18 38 */	slwi r3, r3, 3
+/* 8018811C 0018301C  7F A0 1A 14 */	add r29, r0, r3
+lbl_80188120:
+/* 80188120 00183020  80 7E 00 0C */	lwz r3, 0xc(r30)
+/* 80188124 00183024  80 9D 00 00 */	lwz r4, 0(r29)
+/* 80188128 00183028  4B F3 0B 0D */	bl strcpy
+/* 8018812C 0018302C  80 1E 00 08 */	lwz r0, 8(r30)
+/* 80188130 00183030  2C 00 00 00 */	cmpwi r0, 0
+/* 80188134 00183034  41 82 00 08 */	beq lbl_8018813C
+/* 80188138 00183038  40 82 00 1C */	bne lbl_80188154
+lbl_8018813C:
+/* 8018813C 0018303C  80 7E 00 0C */	lwz r3, 0xc(r30)
+/* 80188140 00183040  80 8D 88 00 */	lwz r4, scGameDiskName__14RPSysDvdStatus-_SDA_BASE_(r13)
+/* 80188144 00183044  4B F3 0B F5 */	bl strcat
+/* 80188148 00183048  80 7E 00 0C */	lwz r3, 0xc(r30)
+/* 8018814C 0018304C  80 9D 00 04 */	lwz r4, 4(r29)
+/* 80188150 00183050  4B F3 0B E9 */	bl strcat
+lbl_80188154:
+/* 80188154 00183054  83 DE 00 0C */	lwz r30, 0xc(r30)
+/* 80188158 00183058  7F C3 F3 78 */	mr r3, r30
+/* 8018815C 0018305C  4B F2 95 F5 */	bl strlen
+/* 80188160 00183060  7C 65 1B 78 */	mr r5, r3
+/* 80188164 00183064  80 6D A1 B8 */	lwz r3, lbl_804BF538-_SDA_BASE_(r13)
+/* 80188168 00183068  7F C4 F3 78 */	mr r4, r30
+/* 8018816C 0018306C  4B E8 48 01 */	bl Print__Q34nw4r2ut17TextWriterBase$$0c$$1FPCci
+lbl_80188170:
+/* 80188170 00183070  80 01 00 24 */	lwz r0, 0x24(r1)
+/* 80188174 00183074  83 E1 00 1C */	lwz r31, 0x1c(r1)
+/* 80188178 00183078  83 C1 00 18 */	lwz r30, 0x18(r1)
+/* 8018817C 0018307C  83 A1 00 14 */	lwz r29, 0x14(r1)
+/* 80188180 00183080  7C 08 03 A6 */	mtlr r0
+/* 80188184 00183084  38 21 00 20 */	addi r1, r1, 0x20
+/* 80188188 00183088  4E 80 00 20 */	blr 
+
+.global update__14RPSysDvdStatusFv
+update__14RPSysDvdStatusFv:
+/* 8018818C 0018308C  94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 80188190 00183090  7C 08 02 A6 */	mflr r0
+/* 80188194 00183094  90 01 00 14 */	stw r0, 0x14(r1)
+/* 80188198 00183098  93 E1 00 0C */	stw r31, 0xc(r1)
+/* 8018819C 0018309C  7C 7F 1B 78 */	mr r31, r3
+/* 801881A0 001830A0  4B FB 5B 35 */	bl DVDGetDriveStatus
+/* 801881A4 001830A4  2C 03 FF FF */	cmpwi r3, -1
+/* 801881A8 001830A8  40 82 00 10 */	bne lbl_801881B8
+/* 801881AC 001830AC  38 00 00 02 */	li r0, 2
+/* 801881B0 001830B0  90 1F 00 08 */	stw r0, 8(r31)
+/* 801881B4 001830B4  48 00 00 5C */	b lbl_80188210
+lbl_801881B8:
+/* 801881B8 001830B8  2C 03 00 0B */	cmpwi r3, 0xb
+/* 801881BC 001830BC  40 82 00 10 */	bne lbl_801881CC
+/* 801881C0 001830C0  38 00 00 01 */	li r0, 1
+/* 801881C4 001830C4  90 1F 00 08 */	stw r0, 8(r31)
+/* 801881C8 001830C8  48 00 00 48 */	b lbl_80188210
+lbl_801881CC:
+/* 801881CC 001830CC  2C 03 00 04 */	cmpwi r3, 4
+/* 801881D0 001830D0  40 82 00 10 */	bne lbl_801881E0
+/* 801881D4 001830D4  38 00 00 00 */	li r0, 0
+/* 801881D8 001830D8  90 1F 00 08 */	stw r0, 8(r31)
+/* 801881DC 001830DC  48 00 00 34 */	b lbl_80188210
+lbl_801881E0:
+/* 801881E0 001830E0  2C 03 00 06 */	cmpwi r3, 6
+/* 801881E4 001830E4  40 82 00 10 */	bne lbl_801881F4
+/* 801881E8 001830E8  38 00 00 00 */	li r0, 0
+/* 801881EC 001830EC  90 1F 00 08 */	stw r0, 8(r31)
+/* 801881F0 001830F0  48 00 00 20 */	b lbl_80188210
+lbl_801881F4:
+/* 801881F4 001830F4  2C 03 00 01 */	cmpwi r3, 1
+/* 801881F8 001830F8  40 82 00 10 */	bne lbl_80188208
+/* 801881FC 001830FC  38 00 FF FF */	li r0, -1
+/* 80188200 00183100  90 1F 00 08 */	stw r0, 8(r31)
+/* 80188204 00183104  48 00 00 0C */	b lbl_80188210
+lbl_80188208:
+/* 80188208 00183108  38 00 FF FE */	li r0, -2
+/* 8018820C 0018310C  90 1F 00 08 */	stw r0, 8(r31)
+lbl_80188210:
+/* 80188210 00183110  80 1F 00 08 */	lwz r0, 8(r31)
+/* 80188214 00183114  2C 00 FF FF */	cmpwi r0, -1
+/* 80188218 00183118  40 81 00 30 */	ble lbl_80188248
+/* 8018821C 0018311C  48 01 35 C1 */	bl func_8019B7DC
+/* 80188220 00183120  80 6D A2 28 */	lwz r3, lbl_804BF5A8-_SDA_BASE_(r13)
+/* 80188224 00183124  48 01 C7 5D */	bl func_801A4980
+/* 80188228 00183128  80 6D A1 58 */	lwz r3, sInstance__13RPSysSceneMgr-_SDA_BASE_(r13)
+/* 8018822C 0018312C  4B FF DC D9 */	bl isDvdErrorApplicationEnd__13RPSysSceneMgrFv
+/* 80188230 00183130  2C 03 00 00 */	cmpwi r3, 0
+/* 80188234 00183134  41 82 00 0C */	beq lbl_80188240
+/* 80188238 00183138  80 6D A1 38 */	lwz r3, sInstance__11RPSysSystem-_SDA_BASE_(r13)
+/* 8018823C 0018313C  4B FF AF B5 */	bl systemShutDown__11RPSysSystemFv
+lbl_80188240:
+/* 80188240 00183140  38 60 00 00 */	li r3, 0
+/* 80188244 00183144  48 00 00 08 */	b lbl_8018824C
+lbl_80188248:
+/* 80188248 00183148  38 60 00 01 */	li r3, 1
+lbl_8018824C:
+/* 8018824C 0018314C  80 01 00 14 */	lwz r0, 0x14(r1)
+/* 80188250 00183150  83 E1 00 0C */	lwz r31, 0xc(r1)
+/* 80188254 00183154  7C 08 03 A6 */	mtlr r0
+/* 80188258 00183158  38 21 00 10 */	addi r1, r1, 0x10
+/* 8018825C 0018315C  4E 80 00 20 */	blr 
+
+.global isErrorOccurred__14RPSysDvdStatusFv
+isErrorOccurred__14RPSysDvdStatusFv:
+/* 80188260 00183160  80 83 00 08 */	lwz r4, 8(r3)
+/* 80188264 00183164  38 00 FF FF */	li r0, -1
+/* 80188268 00183168  7C 80 02 78 */	xor r0, r4, r0
+/* 8018826C 0018316C  7C 03 0E 70 */	srawi r3, r0, 1
+/* 80188270 00183170  7C 00 20 38 */	and r0, r0, r4
+/* 80188274 00183174  7C 00 18 50 */	subf r0, r0, r3
+/* 80188278 00183178  54 03 0F FE */	srwi r3, r0, 0x1f
+/* 8018827C 0018317C  4E 80 00 20 */	blr 
+
+.global CreateInstance__14RPSysDvdStatusFPQ23EGG4Heap
+CreateInstance__14RPSysDvdStatusFPQ23EGG4Heap:
+/* 80188280 00183180  94 21 FF E0 */	stwu r1, -0x20(r1)
+/* 80188284 00183184  7C 08 02 A6 */	mflr r0
+/* 80188288 00183188  90 01 00 24 */	stw r0, 0x24(r1)
+/* 8018828C 0018318C  93 E1 00 1C */	stw r31, 0x1c(r1)
+/* 80188290 00183190  93 C1 00 18 */	stw r30, 0x18(r1)
+/* 80188294 00183194  7C 7E 1B 78 */	mr r30, r3
+/* 80188298 00183198  80 0D A1 80 */	lwz r0, sInstance__14RPSysDvdStatus-_SDA_BASE_(r13)
+/* 8018829C 0018319C  2C 00 00 00 */	cmpwi r0, 0
+/* 801882A0 001831A0  40 82 00 AC */	bne lbl_8018834C
+/* 801882A4 001831A4  7F C4 F3 78 */	mr r4, r30
+/* 801882A8 001831A8  38 60 00 14 */	li r3, 0x14
+/* 801882AC 001831AC  38 A0 00 04 */	li r5, 4
+/* 801882B0 001831B0  4B F1 AF A1 */	bl __nw__FUlPQ23EGG4Heapi
+/* 801882B4 001831B4  2C 03 00 00 */	cmpwi r3, 0
+/* 801882B8 001831B8  7C 7F 1B 78 */	mr r31, r3
+/* 801882BC 001831BC  41 82 00 84 */	beq lbl_80188340
+/* 801882C0 001831C0  3C A0 80 3C */	lis r5, __vt__14RPSysDvdStatus@ha
+/* 801882C4 001831C4  38 00 FF FE */	li r0, -2
+/* 801882C8 001831C8  38 A5 99 28 */	addi r5, r5, __vt__14RPSysDvdStatus@l
+/* 801882CC 001831CC  7F C4 F3 78 */	mr r4, r30
+/* 801882D0 001831D0  90 A3 00 00 */	stw r5, 0(r3)
+/* 801882D4 001831D4  38 A0 00 04 */	li r5, 4
+/* 801882D8 001831D8  93 C3 00 04 */	stw r30, 4(r3)
+/* 801882DC 001831DC  90 03 00 08 */	stw r0, 8(r3)
+/* 801882E0 001831E0  38 60 01 00 */	li r3, 0x100
+/* 801882E4 001831E4  4B F1 AF 91 */	bl __nwa__FUlPQ23EGG4Heapi
+/* 801882E8 001831E8  90 7F 00 0C */	stw r3, 0xc(r31)
+/* 801882EC 001831EC  7F C4 F3 78 */	mr r4, r30
+/* 801882F0 001831F0  38 60 00 24 */	li r3, 0x24
+/* 801882F4 001831F4  38 A0 00 04 */	li r5, 4
+/* 801882F8 001831F8  4B F1 AF 59 */	bl __nw__FUlPQ23EGG4Heapi
+/* 801882FC 001831FC  2C 03 00 00 */	cmpwi r3, 0
+/* 80188300 00183200  41 82 00 28 */	beq lbl_80188328
+/* 80188304 00183204  C0 22 9B 30 */	lfs f1, lbl_804C1550-_SDA2_BASE_(r2)
+/* 80188308 00183208  38 00 00 00 */	li r0, 0
+/* 8018830C 0018320C  90 01 00 08 */	stw r0, 8(r1)
+/* 80188310 00183210  38 81 00 08 */	addi r4, r1, 8
+/* 80188314 00183214  FC 40 08 90 */	fmr f2, f1
+/* 80188318 00183218  C0 62 9B 34 */	lfs f3, lbl_804C1554-_SDA2_BASE_(r2)
+/* 8018831C 0018321C  C0 82 9B 38 */	lfs f4, lbl_804C1558-_SDA2_BASE_(r2)
+/* 80188320 00183220  38 A0 00 00 */	li r5, 0
+/* 80188324 00183224  4B F1 C2 19 */	bl __ct__Q23EGG10ColorFaderFffffQ34nw4r2ut5ColorQ33EGG5Fader7EStatus
+lbl_80188328:
+/* 80188328 00183228  90 7F 00 10 */	stw r3, 0x10(r31)
+/* 8018832C 0018322C  38 80 00 00 */	li r4, 0
+/* 80188330 00183230  81 83 00 00 */	lwz r12, 0(r3)
+/* 80188334 00183234  81 8C 00 08 */	lwz r12, 8(r12)
+/* 80188338 00183238  7D 89 03 A6 */	mtctr r12
+/* 8018833C 0018323C  4E 80 04 21 */	bctrl 
+lbl_80188340:
+/* 80188340 00183240  93 ED A1 80 */	stw r31, sInstance__14RPSysDvdStatus-_SDA_BASE_(r13)
+/* 80188344 00183244  7F E3 FB 78 */	mr r3, r31
+/* 80188348 00183248  48 00 00 08 */	b lbl_80188350
+lbl_8018834C:
+/* 8018834C 0018324C  38 60 00 00 */	li r3, 0
+lbl_80188350:
+/* 80188350 00183250  80 01 00 24 */	lwz r0, 0x24(r1)
+/* 80188354 00183254  83 E1 00 1C */	lwz r31, 0x1c(r1)
+/* 80188358 00183258  83 C1 00 18 */	lwz r30, 0x18(r1)
+/* 8018835C 0018325C  7C 08 03 A6 */	mtlr r0
+/* 80188360 00183260  38 21 00 20 */	addi r1, r1, 0x20
+/* 80188364 00183264  4E 80 00 20 */	blr 

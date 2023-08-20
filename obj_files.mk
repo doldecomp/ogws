@@ -599,6 +599,7 @@ RVL_SDK_O_FILES := \
 	build/asm/RP/RPSystem/RPSysResourceManager.o \
 	build/asm/RP/RPSystem/RPSysQueuedScene.o \
 	build/asm/RP/RPSystem/RPSysCommonObject.o \
+	build/asm/RP/RPSystem/RPSysDvdStatus.o \
 
 
 GROUP_1_O_FILES := \
