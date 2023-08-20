@@ -46,7 +46,6 @@ __vt__20RPSysResourceManager:
     .long 0
     .long 0
     .long __dt__20RPSysResourceManagerFv
-    .long 0
 
 .section .text, "ax"
 .global LoadFromDVD__20RPSysResourceManagerFPCcPQ23EGG4HeapiPi

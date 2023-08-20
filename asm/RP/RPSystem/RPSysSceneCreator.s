@@ -28,7 +28,6 @@ jtbl_803B95B8:
     .long create__17RPSysSceneCreatorFl
     .long destroy__17RPSysSceneCreatorFl
     .long __dt__17RPSysSceneCreatorFv
-    .long 0
 
 .section .text, "ax"
 .global __dt__17RPSysSceneCreatorFv

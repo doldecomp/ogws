@@ -28,7 +28,6 @@ __vt__17RPSysProjectLocal:
     .long 0
     .long 0
     .long __dt__17RPSysProjectLocalFv
-    .long 0
 
 .section .text, "ax"
 .global setLanguage__17RPSysProjectLocalFQ217RPSysProjectLocal7ERegion
