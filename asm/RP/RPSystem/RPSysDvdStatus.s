@@ -282,8 +282,8 @@ lbl_8018824C:
 /* 80188258 00183158  38 21 00 10 */	addi r1, r1, 0x10
 /* 8018825C 0018315C  4E 80 00 20 */	blr 
 
-.global isErrorOccurred__14RPSysDvdStatusFv
-isErrorOccurred__14RPSysDvdStatusFv:
+.global isErrorOccured__14RPSysDvdStatusFv
+isErrorOccured__14RPSysDvdStatusFv:
 /* 80188260 00183160  80 83 00 08 */	lwz r4, 8(r3)
 /* 80188264 00183164  38 00 FF FF */	li r0, -1
 /* 80188268 00183168  7C 80 02 78 */	xor r0, r4, r0
