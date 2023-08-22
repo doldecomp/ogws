@@ -2,12 +2,12 @@
 
 .section .sdata, "wa"
 .balign 0x8
-.global lbl_804BDB88
-lbl_804BDB88:
+.global scBannerPaths__16RPSysSaveDataMgr
+scBannerPaths__16RPSysSaveDataMgr:
 	.incbin "baserom.dol", 0x3C7808, 0x8
-.global lbl_804BDB90
-lbl_804BDB90:
-	.incbin "baserom.dol", 0x3C7810, 0x8
+.global scSavePath__16RPSysSaveDataMgr
+scSavePath__16RPSysSaveDataMgr:
+	.incbin "baserom.dol", 0x3C7810, 0x4
 
 .section .sbss, "wa"
 .balign 0x8
@@ -177,7 +177,7 @@ createPackFileFunc__16RPSysSaveDataMgrFPv:
 /* 80188558 00183458  38 A0 00 00 */	li r5, 0
 /* 8018855C 0018345C  54 00 07 B8 */	rlwinm r0, r0, 0, 0x1e, 0x1c
 /* 80188560 00183460  90 1F 00 08 */	stw r0, 8(r31)
-/* 80188564 00183464  80 6D 88 10 */	lwz r3, lbl_804BDB90-_SDA_BASE_(r13)
+/* 80188564 00183464  80 6D 88 10 */	lwz r3, scSavePath__16RPSysSaveDataMgr-_SDA_BASE_(r13)
 /* 80188568 00183468  4B F6 06 D1 */	bl NANDCreate
 /* 8018856C 0018346C  2C 03 00 00 */	cmpwi r3, 0
 /* 80188570 00183470  90 7F 00 0C */	stw r3, 0xc(r31)
@@ -225,7 +225,7 @@ existPackFileFunc__16RPSysSaveDataMgrFPv:
 /* 801885F4 001834F4  38 81 00 09 */	addi r4, r1, 9
 /* 801885F8 001834F8  54 00 07 FA */	rlwinm r0, r0, 0, 0x1f, 0x1d
 /* 801885FC 001834FC  90 1F 00 08 */	stw r0, 8(r31)
-/* 80188600 00183500  80 6D 88 08 */	lwz r3, lbl_804BDB88-_SDA_BASE_(r13)
+/* 80188600 00183500  80 6D 88 08 */	lwz r3, scBannerPaths__16RPSysSaveDataMgr-_SDA_BASE_(r13)
 /* 80188604 00183504  4B F6 31 29 */	bl NANDGetType
 /* 80188608 00183508  2C 03 00 00 */	cmpwi r3, 0
 /* 8018860C 0018350C  90 7F 00 0C */	stw r3, 0xc(r31)
@@ -251,7 +251,7 @@ lbl_80188638:
 /* 80188654 00183554  38 81 00 08 */	addi r4, r1, 8
 /* 80188658 00183558  54 00 07 B8 */	rlwinm r0, r0, 0, 0x1e, 0x1c
 /* 8018865C 0018355C  90 1F 00 08 */	stw r0, 8(r31)
-/* 80188660 00183560  80 6D 88 10 */	lwz r3, lbl_804BDB90-_SDA_BASE_(r13)
+/* 80188660 00183560  80 6D 88 10 */	lwz r3, scSavePath__16RPSysSaveDataMgr-_SDA_BASE_(r13)
 /* 80188664 00183564  4B F6 30 C9 */	bl NANDGetType
 /* 80188668 00183568  2C 03 00 00 */	cmpwi r3, 0
 /* 8018866C 0018356C  90 7F 00 0C */	stw r3, 0xc(r31)
@@ -288,7 +288,7 @@ saveBannerFile__16RPSysSaveDataMgrFQ216RPSysSaveDataMgr17EBannerLocateType:
 /* 801886D4 001835D4  54 A0 04 A5 */	rlwinm. r0, r5, 0, 0x12, 0x12
 /* 801886D8 001835D8  40 82 00 90 */	bne lbl_80188768
 /* 801886DC 001835DC  54 80 10 3A */	slwi r0, r4, 2
-/* 801886E0 001835E0  38 6D 88 08 */	addi r3, r13, lbl_804BDB88-_SDA_BASE_
+/* 801886E0 001835E0  38 6D 88 08 */	addi r3, r13, scBannerPaths__16RPSysSaveDataMgr-_SDA_BASE_
 /* 801886E4 001835E4  7C 63 00 2E */	lwzx r3, r3, r0
 /* 801886E8 001835E8  38 81 00 08 */	addi r4, r1, 8
 /* 801886EC 001835EC  38 A0 00 02 */	li r5, 2
@@ -343,7 +343,7 @@ loadSync__16RPSysSaveDataMgrFv:
 /* 80188798 00183698  40 82 00 BC */	bne lbl_80188854
 /* 8018879C 0018369C  54 80 04 A5 */	rlwinm. r0, r4, 0, 0x12, 0x12
 /* 801887A0 001836A0  40 82 00 B4 */	bne lbl_80188854
-/* 801887A4 001836A4  80 6D 88 10 */	lwz r3, lbl_804BDB90-_SDA_BASE_(r13)
+/* 801887A4 001836A4  80 6D 88 10 */	lwz r3, scSavePath__16RPSysSaveDataMgr-_SDA_BASE_(r13)
 /* 801887A8 001836A8  38 81 00 30 */	addi r4, r1, 0x30
 /* 801887AC 001836AC  38 A0 00 01 */	li r5, 1
 /* 801887B0 001836B0  4B F6 15 65 */	bl NANDOpen
@@ -422,7 +422,7 @@ saveSync__16RPSysSaveDataMgrFv:
 /* 801888B8 001837B8  38 61 00 08 */	addi r3, r1, 8
 /* 801888BC 001837BC  38 80 00 00 */	li r4, 0
 /* 801888C0 001837C0  4B F1 EE 81 */	bl __dt__Q23EGG6StreamFv
-/* 801888C4 001837C4  80 6D 88 10 */	lwz r3, lbl_804BDB90-_SDA_BASE_(r13)
+/* 801888C4 001837C4  80 6D 88 10 */	lwz r3, scSavePath__16RPSysSaveDataMgr-_SDA_BASE_(r13)
 /* 801888C8 001837C8  38 81 00 30 */	addi r4, r1, 0x30
 /* 801888CC 001837CC  38 A0 00 02 */	li r5, 2
 /* 801888D0 001837D0  4B F6 14 45 */	bl NANDOpen
@@ -477,7 +477,7 @@ createBannerFile__16RPSysSaveDataMgrFv:
 /* 8018897C 0018387C  54 80 04 A5 */	rlwinm. r0, r4, 0, 0x12, 0x12
 /* 80188980 00183880  40 82 00 CC */	bne lbl_80188A4C
 /* 80188984 00183884  80 03 00 08 */	lwz r0, 8(r3)
-/* 80188988 00183888  38 CD 88 08 */	addi r6, r13, lbl_804BDB88-_SDA_BASE_
+/* 80188988 00183888  38 CD 88 08 */	addi r6, r13, scBannerPaths__16RPSysSaveDataMgr-_SDA_BASE_
 /* 8018898C 0018388C  38 80 00 34 */	li r4, 0x34
 /* 80188990 00183890  38 A0 00 00 */	li r5, 0
 /* 80188994 00183894  54 00 07 FA */	rlwinm r0, r0, 0, 0x1f, 0x1d
@@ -512,7 +512,7 @@ lbl_801889C8:
 /* 80188A04 00183904  90 1F 00 08 */	stw r0, 8(r31)
 /* 80188A08 00183908  48 00 00 44 */	b lbl_80188A4C
 lbl_80188A0C:
-/* 80188A0C 0018390C  38 6D 88 08 */	addi r3, r13, lbl_804BDB88-_SDA_BASE_
+/* 80188A0C 0018390C  38 6D 88 08 */	addi r3, r13, scBannerPaths__16RPSysSaveDataMgr-_SDA_BASE_
 /* 80188A10 00183910  38 81 00 08 */	addi r4, r1, 8
 /* 80188A14 00183914  80 63 00 04 */	lwz r3, 4(r3)
 /* 80188A18 00183918  4B F6 0C 59 */	bl NANDMove
@@ -1094,7 +1094,7 @@ lbl_80189198:
 lbl_8018919C:
 /* 8018919C 0018409C  2C 03 00 00 */	cmpwi r3, 0
 /* 801891A0 001840A0  41 82 00 7C */	beq lbl_8018921C
-/* 801891A4 001840A4  80 6D 88 08 */	lwz r3, lbl_804BDB88-_SDA_BASE_(r13)
+/* 801891A4 001840A4  80 6D 88 08 */	lwz r3, scBannerPaths__16RPSysSaveDataMgr-_SDA_BASE_(r13)
 /* 801891A8 001840A8  4B F5 FB F1 */	bl NANDDelete
 /* 801891AC 001840AC  2C 03 00 00 */	cmpwi r3, 0
 /* 801891B0 001840B0  90 7F 00 0C */	stw r3, 0xc(r31)
@@ -1111,7 +1111,7 @@ lbl_801891D0:
 /* 801891D4 001840D4  60 00 10 00 */	ori r0, r0, 0x1000
 /* 801891D8 001840D8  90 1F 00 08 */	stw r0, 8(r31)
 lbl_801891DC:
-/* 801891DC 001840DC  80 6D 88 10 */	lwz r3, lbl_804BDB90-_SDA_BASE_(r13)
+/* 801891DC 001840DC  80 6D 88 10 */	lwz r3, scSavePath__16RPSysSaveDataMgr-_SDA_BASE_(r13)
 /* 801891E0 001840E0  4B F5 FB B9 */	bl NANDDelete
 /* 801891E4 001840E4  2C 03 00 00 */	cmpwi r3, 0
 /* 801891E8 001840E8  90 7F 00 0C */	stw r3, 0xc(r31)
@@ -1311,7 +1311,7 @@ lbl_80189454:
 /* 80189474 00184374  38 81 00 09 */	addi r4, r1, 9
 /* 80189478 00184378  54 00 07 FA */	rlwinm r0, r0, 0, 0x1f, 0x1d
 /* 8018947C 0018437C  90 1F 00 08 */	stw r0, 8(r31)
-/* 80189480 00184380  80 6D 88 08 */	lwz r3, lbl_804BDB88-_SDA_BASE_(r13)
+/* 80189480 00184380  80 6D 88 08 */	lwz r3, scBannerPaths__16RPSysSaveDataMgr-_SDA_BASE_(r13)
 /* 80189484 00184384  4B F6 22 A9 */	bl NANDGetType
 /* 80189488 00184388  2C 03 00 00 */	cmpwi r3, 0
 /* 8018948C 0018438C  90 7F 00 0C */	stw r3, 0xc(r31)
@@ -1336,7 +1336,7 @@ lbl_801894B8:
 /* 801894D0 001843D0  38 81 00 08 */	addi r4, r1, 8
 /* 801894D4 001843D4  54 00 07 B8 */	rlwinm r0, r0, 0, 0x1e, 0x1c
 /* 801894D8 001843D8  90 1F 00 08 */	stw r0, 8(r31)
-/* 801894DC 001843DC  80 6D 88 10 */	lwz r3, lbl_804BDB90-_SDA_BASE_(r13)
+/* 801894DC 001843DC  80 6D 88 10 */	lwz r3, scSavePath__16RPSysSaveDataMgr-_SDA_BASE_(r13)
 /* 801894E0 001843E0  4B F6 22 4D */	bl NANDGetType
 /* 801894E4 001843E4  2C 03 00 00 */	cmpwi r3, 0
 /* 801894E8 001843E8  90 7F 00 0C */	stw r3, 0xc(r31)
