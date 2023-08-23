@@ -601,6 +601,7 @@ RVL_SDK_O_FILES := \
 	build/asm/RP/RPSystem/RPSysCommonObject.o \
 	build/asm/RP/RPSystem/RPSysDvdStatus.o \
 	build/asm/RP/RPSystem/RPSysSaveDataMgr.o \
+	build/asm/RP/RPSystem/RPSportsSystemData.o \
 
 
 GROUP_1_O_FILES := \
