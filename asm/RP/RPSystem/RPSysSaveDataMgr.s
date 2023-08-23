@@ -1428,8 +1428,8 @@ getPartyCommonData__16RPSysSaveDataMgrCFv:
 /* 80189624 00184524  38 21 00 10 */	addi r1, r1, 0x10
 /* 80189628 00184528  4E 80 00 20 */	blr 
 
-.global setPartyPlayerData__16RPSysSaveDataMgrFRC17RPPartyPlayerDataUl
-setPartyPlayerData__16RPSysSaveDataMgrFRC17RPPartyPlayerDataUl:
+.global setPartyPlayerData__16RPSysSaveDataMgrFRC17RPPartyPlayerDatai
+setPartyPlayerData__16RPSysSaveDataMgrFRC17RPPartyPlayerDatai:
 /* 8018962C 0018452C  94 21 FF 20 */	stwu r1, -0xe0(r1)
 /* 80189630 00184530  7C 08 02 A6 */	mflr r0
 /* 80189634 00184534  38 E4 00 0C */	addi r7, r4, 0xc
@@ -1493,8 +1493,8 @@ lbl_80189698:
 /* 80189718 00184618  38 21 00 E0 */	addi r1, r1, 0xe0
 /* 8018971C 0018461C  4E 80 00 20 */	blr 
 
-.global getPartyPlayerData__16RPSysSaveDataMgrCFUl
-getPartyPlayerData__16RPSysSaveDataMgrCFUl:
+.global getPartyPlayerData__16RPSysSaveDataMgrCFi
+getPartyPlayerData__16RPSysSaveDataMgrCFi:
 /* 80189720 00184620  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80189724 00184624  7C 08 02 A6 */	mflr r0
 /* 80189728 00184628  90 01 00 14 */	stw r0, 0x14(r1)
@@ -1983,8 +1983,8 @@ getSportsCommonData__16RPSysSaveDataMgrCFv:
 /* 80189E98 00184D98  38 21 00 10 */	addi r1, r1, 0x10
 /* 80189E9C 00184D9C  4E 80 00 20 */	blr 
 
-.global setSportsPlayerData__16RPSysSaveDataMgrFRC18RPSportsPlayerDataUl
-setSportsPlayerData__16RPSysSaveDataMgrFRC18RPSportsPlayerDataUl:
+.global setSportsPlayerData__16RPSysSaveDataMgrFRC18RPSportsPlayerDatai
+setSportsPlayerData__16RPSysSaveDataMgrFRC18RPSportsPlayerDatai:
 /* 80189EA0 00184DA0  94 21 FB 90 */	stwu r1, -0x470(r1)
 /* 80189EA4 00184DA4  7C 08 02 A6 */	mflr r0
 /* 80189EA8 00184DA8  38 E4 00 26 */	addi r7, r4, 0x26
@@ -2308,8 +2308,8 @@ lbl_8018A2E4:
 /* 8018A394 00185294  38 21 04 70 */	addi r1, r1, 0x470
 /* 8018A398 00185298  4E 80 00 20 */	blr 
 
-.global getSportsPlayerData__16RPSysSaveDataMgrCFUl
-getSportsPlayerData__16RPSysSaveDataMgrCFUl:
+.global getSportsPlayerData__16RPSysSaveDataMgrCFi
+getSportsPlayerData__16RPSysSaveDataMgrCFi:
 /* 8018A39C 0018529C  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8018A3A0 001852A0  7C 08 02 A6 */	mflr r0
 /* 8018A3A4 001852A4  90 01 00 14 */	stw r0, 0x14(r1)
