@@ -603,6 +603,7 @@ RVL_SDK_O_FILES := \
 	build/asm/RP/RPSystem/RPSysSaveDataMgr.o \
 	build/asm/RP/RPSystem/RPSportsSystemData.o \
 	build/asm/RP/RPSystem/RPSportsPlayerData.o \
+	build/asm/RP/RPSystem/RPSysFontManager.o \
 
 
 GROUP_1_O_FILES := \
