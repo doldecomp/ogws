@@ -606,6 +606,8 @@ RVL_SDK_O_FILES := \
 	build/asm/RP/RPSystem/RPSysFontManager.o \
 	build/asm/RP/RPSystem/RPSysSaveData.o \
 	build/asm/RP/RPSystem/RPSysPauseMgr.o \
+	build/asm/RP/RPSystem/RPPartySystemData.o \
+	build/asm/RP/RPSystem/RPPartyPlayerData.o \
 
 
 GROUP_1_O_FILES := \
