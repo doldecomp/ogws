@@ -100,10 +100,10 @@ lbl_8018842C:
 /* 8018844C 0018334C  4B F1 AE 05 */	bl __nw__FUlPQ23EGG4Heapi
 /* 80188450 00183350  2C 03 00 00 */	cmpwi r3, 0
 /* 80188454 00183354  41 82 00 08 */	beq lbl_8018845C
-/* 80188458 00183358  48 00 47 39 */	bl func_8018CB90
+/* 80188458 00183358  48 00 47 39 */	bl __ct__13RPSysSaveDataFv
 lbl_8018845C:
 /* 8018845C 0018335C  90 7E 00 2C */	stw r3, 0x2c(r30)
-/* 80188460 00183360  48 00 3A F5 */	bl func_8018BF54
+/* 80188460 00183360  48 00 3A F5 */	bl getSaveFileSize__13RPSysSaveDataFv
 /* 80188464 00183364  38 00 32 A0 */	li r0, 0x32a0
 /* 80188468 00183368  54 65 04 BE */	clrlwi r5, r3, 0x12
 /* 8018846C 0018336C  7C C0 00 D0 */	neg r6, r0
@@ -386,7 +386,7 @@ lbl_80188828:
 /* 80188838 00183738  80 7F 00 2C */	lwz r3, 0x2c(r31)
 /* 8018883C 0018373C  38 81 00 08 */	addi r4, r1, 8
 /* 80188840 00183740  80 BF 00 28 */	lwz r5, 0x28(r31)
-/* 80188844 00183744  48 00 38 9D */	bl func_8018C0E0
+/* 80188844 00183744  48 00 38 9D */	bl read__13RPSysSaveDataFRQ23EGG9RamStreamPCv
 /* 80188848 00183748  38 61 00 08 */	addi r3, r1, 8
 /* 8018884C 0018374C  38 80 00 00 */	li r4, 0
 /* 80188850 00183750  4B F1 EE F1 */	bl __dt__Q23EGG6StreamFv
@@ -418,7 +418,7 @@ saveSync__16RPSysSaveDataMgrFv:
 /* 801888A8 001837A8  80 7F 00 2C */	lwz r3, 0x2c(r31)
 /* 801888AC 001837AC  38 81 00 08 */	addi r4, r1, 8
 /* 801888B0 001837B0  80 BF 00 28 */	lwz r5, 0x28(r31)
-/* 801888B4 001837B4  48 00 36 A9 */	bl func_8018BF5C
+/* 801888B4 001837B4  48 00 36 A9 */	bl write__13RPSysSaveDataCFRQ23EGG9RamStreamPCv
 /* 801888B8 001837B8  38 61 00 08 */	addi r3, r1, 8
 /* 801888BC 001837BC  38 80 00 00 */	li r4, 0
 /* 801888C0 001837C0  4B F1 EE 81 */	bl __dt__Q23EGG6StreamFv
@@ -884,7 +884,7 @@ lbl_80188EEC:
 .global isErrorOccured__16RPSysSaveDataMgrCFv
 isErrorOccured__16RPSysSaveDataMgrCFv:
 /* 80188EFC 00183DFC  80 63 00 2C */	lwz r3, 0x2c(r3)
-/* 80188F00 00183E00  48 00 3C 7C */	b lbl_8018CB7C
+/* 80188F00 00183E00  48 00 3C 7C */	b isErrorOccured__13RPSysSaveDataCFv
 
 .global isNandMemoryExist__16RPSysSaveDataMgrCFv
 isNandMemoryExist__16RPSysSaveDataMgrCFv:
@@ -1363,15 +1363,15 @@ lbl_80189520:
 /* 8018952C 0018442C  38 21 00 20 */	addi r1, r1, 0x20
 /* 80189530 00184430  4E 80 00 20 */	blr 
 
-.global getPartyCommonData__16RPSysSaveDataMgrCFv
-getPartyCommonData__16RPSysSaveDataMgrCFv:
+.global getPartySystemData__16RPSysSaveDataMgrCFv
+getPartySystemData__16RPSysSaveDataMgrCFv:
 /* 80189534 00184434  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80189538 00184438  7C 08 02 A6 */	mflr r0
 /* 8018953C 0018443C  90 01 00 14 */	stw r0, 0x14(r1)
 /* 80189540 00184440  93 E1 00 0C */	stw r31, 0xc(r1)
 /* 80189544 00184444  7C 7F 1B 78 */	mr r31, r3
 /* 80189548 00184448  80 64 00 2C */	lwz r3, 0x2c(r4)
-/* 8018954C 0018444C  48 00 2D E1 */	bl func_8018C32C
+/* 8018954C 0018444C  48 00 2D E1 */	bl getPartySystemData__13RPSysSaveDataCFv
 /* 80189550 00184450  88 03 00 00 */	lbz r0, 0(r3)
 /* 80189554 00184454  98 1F 00 00 */	stb r0, 0(r31)
 /* 80189558 00184458  88 03 00 01 */	lbz r0, 1(r3)
@@ -1487,7 +1487,7 @@ lbl_80189698:
 /* 80189700 00184600  38 81 00 08 */	addi r4, r1, 8
 /* 80189704 00184604  98 01 00 D5 */	stb r0, 0xd5(r1)
 /* 80189708 00184608  80 63 00 2C */	lwz r3, 0x2c(r3)
-/* 8018970C 0018460C  48 00 2C 29 */	bl func_8018C334
+/* 8018970C 0018460C  48 00 2C 29 */	bl setPartyPlayerData__13RPSysSaveDataF17RPPartyPlayerDatai
 /* 80189710 00184610  80 01 00 E4 */	lwz r0, 0xe4(r1)
 /* 80189714 00184614  7C 08 03 A6 */	mtlr r0
 /* 80189718 00184618  38 21 00 E0 */	addi r1, r1, 0xe0
@@ -1502,7 +1502,7 @@ getPartyPlayerData__16RPSysSaveDataMgrCFi:
 /* 80189730 00184630  7C 7F 1B 78 */	mr r31, r3
 /* 80189734 00184634  80 64 00 2C */	lwz r3, 0x2c(r4)
 /* 80189738 00184638  7C A4 2B 78 */	mr r4, r5
-/* 8018973C 0018463C  48 00 2C D1 */	bl func_8018C40C
+/* 8018973C 0018463C  48 00 2C D1 */	bl getPartyPlayerData__13RPSysSaveDataCFi
 /* 80189740 00184640  80 83 00 00 */	lwz r4, 0(r3)
 /* 80189744 00184644  38 00 00 16 */	li r0, 0x16
 /* 80189748 00184648  38 DF 00 0C */	addi r6, r31, 0xc
@@ -1561,8 +1561,8 @@ lbl_801897A0:
 /* 80189818 00184718  38 21 00 10 */	addi r1, r1, 0x10
 /* 8018981C 0018471C  4E 80 00 20 */	blr 
 
-.global setSportsCommonData__16RPSysSaveDataMgrFRC18RPSportsCommonData
-setSportsCommonData__16RPSysSaveDataMgrFRC18RPSportsCommonData:
+.global setSportsSystemData__16RPSysSaveDataMgrFRC18RPSportsSystemData
+setSportsSystemData__16RPSysSaveDataMgrFRC18RPSportsSystemData:
 /* 80189820 00184720  94 21 FE A0 */	stwu r1, -0x160(r1)
 /* 80189824 00184724  7C 08 02 A6 */	mflr r0
 /* 80189828 00184728  90 01 01 64 */	stw r0, 0x164(r1)
@@ -1809,22 +1809,22 @@ setSportsCommonData__16RPSysSaveDataMgrFRC18RPSportsCommonData:
 /* 80189BEC 00184AEC  90 A1 00 58 */	stw r5, 0x58(r1)
 /* 80189BF0 00184AF0  90 01 00 5C */	stw r0, 0x5c(r1)
 /* 80189BF4 00184AF4  80 63 00 2C */	lwz r3, 0x2c(r3)
-/* 80189BF8 00184AF8  48 00 28 25 */	bl func_8018C41C
+/* 80189BF8 00184AF8  48 00 28 25 */	bl setSportsSystemData__13RPSysSaveDataF18RPSportsSystemData
 /* 80189BFC 00184AFC  B9 C1 01 18 */	lmw r14, 0x118(r1)
 /* 80189C00 00184B00  80 01 01 64 */	lwz r0, 0x164(r1)
 /* 80189C04 00184B04  7C 08 03 A6 */	mtlr r0
 /* 80189C08 00184B08  38 21 01 60 */	addi r1, r1, 0x160
 /* 80189C0C 00184B0C  4E 80 00 20 */	blr 
 
-.global getSportsCommonData__16RPSysSaveDataMgrCFv
-getSportsCommonData__16RPSysSaveDataMgrCFv:
+.global getSportsSystemData__16RPSysSaveDataMgrCFv
+getSportsSystemData__16RPSysSaveDataMgrCFv:
 /* 80189C10 00184B10  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80189C14 00184B14  7C 08 02 A6 */	mflr r0
 /* 80189C18 00184B18  90 01 00 14 */	stw r0, 0x14(r1)
 /* 80189C1C 00184B1C  93 E1 00 0C */	stw r31, 0xc(r1)
 /* 80189C20 00184B20  7C 7F 1B 78 */	mr r31, r3
 /* 80189C24 00184B24  80 64 00 2C */	lwz r3, 0x2c(r4)
-/* 80189C28 00184B28  48 00 2A 5D */	bl func_8018C684
+/* 80189C28 00184B28  48 00 2A 5D */	bl getSportsSystemData__13RPSysSaveDataCFv
 /* 80189C2C 00184B2C  88 83 00 00 */	lbz r4, 0(r3)
 /* 80189C30 00184B30  88 03 00 01 */	lbz r0, 1(r3)
 /* 80189C34 00184B34  98 9F 00 00 */	stb r4, 0(r31)
@@ -2302,7 +2302,7 @@ lbl_8018A2E4:
 /* 8018A37C 0018527C  38 81 00 08 */	addi r4, r1, 8
 /* 8018A380 00185280  B0 01 04 62 */	sth r0, 0x462(r1)
 /* 8018A384 00185284  80 63 00 2C */	lwz r3, 0x2c(r3)
-/* 8018A388 00185288  48 00 23 05 */	bl func_8018C68C
+/* 8018A388 00185288  48 00 23 05 */	bl setSportsPlayerData__13RPSysSaveDataF18RPSportsPlayerDatai
 /* 8018A38C 0018528C  80 01 04 74 */	lwz r0, 0x474(r1)
 /* 8018A390 00185290  7C 08 03 A6 */	mtlr r0
 /* 8018A394 00185294  38 21 04 70 */	addi r1, r1, 0x470
@@ -2317,7 +2317,7 @@ getSportsPlayerData__16RPSysSaveDataMgrCFi:
 /* 8018A3AC 001852AC  7C 7F 1B 78 */	mr r31, r3
 /* 8018A3B0 001852B0  80 64 00 2C */	lwz r3, 0x2c(r4)
 /* 8018A3B4 001852B4  7C A4 2B 78 */	mr r4, r5
-/* 8018A3B8 001852B8  48 00 27 B5 */	bl func_8018CB6C
+/* 8018A3B8 001852B8  48 00 27 B5 */	bl getSportsPlayerData__13RPSysSaveDataCFi
 /* 8018A3BC 001852BC  80 83 00 00 */	lwz r4, 0(r3)
 /* 8018A3C0 001852C0  38 00 00 7A */	li r0, 0x7a
 /* 8018A3C4 001852C4  38 DF 00 26 */	addi r6, r31, 0x26
