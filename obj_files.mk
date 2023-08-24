@@ -614,6 +614,7 @@ RVL_SDK_O_FILES := \
 	\
 	build/asm/RP/RPKernel/IRPSysHostIOSocket.o \
 	build/asm/RP/RPKernel/RPSysHostIOSocketManager.o \
+	build/asm/RP/RPKernel/RP_801908C4.o \
 
 
 GROUP_1_O_FILES := \
