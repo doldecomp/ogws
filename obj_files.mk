@@ -588,6 +588,7 @@ RVL_SDK_O_FILES := \
 	\
 	build/asm/RP/RPKernel/RPSysSystem.o \
 	build/asm/main.o \
+	\
 	build/asm/RP/RPSystem/RPSysSceneCreator.o \
 	build/asm/RP/RPSystem/RPSysScene.o \
 	build/asm/RP/RPSystem/RPSysRenderMode.o \
@@ -610,6 +611,8 @@ RVL_SDK_O_FILES := \
 	build/asm/RP/RPSystem/RPPartyPlayerData.o \
 	build/asm/RP/RPSystem/RPSysPlayerMgr.o \
 	build/asm/RP/RPSystem/RPSysPlayer.o \
+	\
+	build/asm/RP/RPKernel/IRPSysHostIOSocket.o \
 
 
 GROUP_1_O_FILES := \

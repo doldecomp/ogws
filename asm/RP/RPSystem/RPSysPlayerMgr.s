@@ -1,6 +1,37 @@
 .include "macros.inc"
 
+.section .sdata2, "a"
+.balign 0x8
+lbl_804C1578:
+	.incbin "baserom.dol", 0x3CA1B8, 0x1
+lbl_804C1579:
+	.incbin "baserom.dol", 0x3CA1B9, 0x1
+lbl_804C157A:
+	.incbin "baserom.dol", 0x3CA1BA, 0x1
+lbl_804C157B:
+	.incbin "baserom.dol", 0x3CA1BB, 0x1
+
+.section .sbss, "wa"
+.balign 0x8
+.global sInstance__14RPSysPlayerMgr
+sInstance__14RPSysPlayerMgr:
+	.skip 0x4
+
+.section .rodata, "a"
+.balign 0x8
+    .incbin "baserom.dol", 0x37EC50, 0x60
+
+.section .data, "wa"
+.balign 0x8
+.global __vt__14RPSysPlayerMgr
+__vt__14RPSysPlayerMgr:
+	.long 0
+    .long 0
+    .long __dt__14RPSysPlayerMgr
+
 .section .text, "ax"
+.global __dt__14RPSysPlayerMgr
+__dt__14RPSysPlayerMgr:
 /* 8018D84C 0018874C  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8018D850 00188750  7C 08 02 A6 */	mflr r0
 /* 8018D854 00188754  2C 03 00 00 */	cmpwi r3, 0
@@ -23,9 +54,9 @@ lbl_8018D874:
 func_8018D88C:
 /* 8018D88C 0018878C  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 8018D890 00188790  7C 08 02 A6 */	mflr r0
-/* 8018D894 00188794  3C A0 80 3C */	lis r5, lbl_803B9988@ha
+/* 8018D894 00188794  3C A0 80 3C */	lis r5, __vt__14RPSysPlayerMgr@ha
 /* 8018D898 00188798  90 01 00 24 */	stw r0, 0x24(r1)
-/* 8018D89C 0018879C  38 A5 99 88 */	addi r5, r5, lbl_803B9988@l
+/* 8018D89C 0018879C  38 A5 99 88 */	addi r5, r5, __vt__14RPSysPlayerMgr@l
 /* 8018D8A0 001887A0  BF 41 00 08 */	stmw r26, 8(r1)
 /* 8018D8A4 001887A4  3B 60 00 00 */	li r27, 0
 /* 8018D8A8 001887A8  7C 7A 1B 78 */	mr r26, r3
@@ -1034,7 +1065,7 @@ func_8018E690:
 /* 8018E698 00189598  90 01 00 14 */	stw r0, 0x14(r1)
 /* 8018E69C 0018959C  93 E1 00 0C */	stw r31, 0xc(r1)
 /* 8018E6A0 001895A0  7C 7F 1B 78 */	mr r31, r3
-/* 8018E6A4 001895A4  80 0D A1 A0 */	lwz r0, lbl_804BF520-_SDA_BASE_(r13)
+/* 8018E6A4 001895A4  80 0D A1 A0 */	lwz r0, sInstance__14RPSysPlayerMgr-_SDA_BASE_(r13)
 /* 8018E6A8 001895A8  2C 00 00 00 */	cmpwi r0, 0
 /* 8018E6AC 001895AC  40 82 00 2C */	bne lbl_8018E6D8
 /* 8018E6B0 001895B0  7F E4 FB 78 */	mr r4, r31
@@ -1046,7 +1077,7 @@ func_8018E690:
 /* 8018E6C8 001895C8  7F E4 FB 78 */	mr r4, r31
 /* 8018E6CC 001895CC  4B FF F1 C1 */	bl func_8018D88C
 lbl_8018E6D0:
-/* 8018E6D0 001895D0  90 6D A1 A0 */	stw r3, lbl_804BF520-_SDA_BASE_(r13)
+/* 8018E6D0 001895D0  90 6D A1 A0 */	stw r3, sInstance__14RPSysPlayerMgr-_SDA_BASE_(r13)
 /* 8018E6D4 001895D4  48 00 00 08 */	b lbl_8018E6DC
 lbl_8018E6D8:
 /* 8018E6D8 001895D8  38 60 00 00 */	li r3, 0
