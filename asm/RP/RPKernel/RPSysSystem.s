@@ -323,7 +323,7 @@ createFromSystemHeap__11RPSysSystemFv:
 /* 80182F28 0017DE28  4B F2 02 A5 */	bl becomeCurrentHeap__Q23EGG4HeapFv
 /* 80182F2C 0017DE2C  80 7F 00 24 */	lwz r3, 0x24(r31)
 /* 80182F30 0017DE30  48 00 37 B1 */	bl CreateInstance__15RPSysGameConfigFPQ23EGG4Heap
-/* 80182F34 0017DE34  48 00 D9 55 */	bl func_80190888
+/* 80182F34 0017DE34  48 00 D9 55 */	bl CreateInstance__24RPSysHostIOSocketManagerFv
 /* 80182F38 0017DE38  48 01 91 C1 */	bl func_8019C0F8
 /* 80182F3C 0017DE3C  80 7F 00 24 */	lwz r3, 0x24(r31)
 /* 80182F40 0017DE40  48 00 31 C9 */	bl CreateInstance__13RPSysSceneMgrFPQ23EGG4Heap
