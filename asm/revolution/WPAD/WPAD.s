@@ -2423,8 +2423,8 @@ WPADGetWorkMemorySize:
 WPADGetStatus:
 /* 800CC34C 000C724C  48 03 44 0C */	b WUDGetStatus
 
-.global WPADGetRadioSensitivity
-WPADGetRadioSensitivity:
+.global WPADGetAddress
+WPADGetAddress:
 /* 800CC350 000C7250  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 800CC354 000C7254  7C 08 02 A6 */	mflr r0
 /* 800CC358 000C7258  3C A0 80 41 */	lis r5, _wpdcb@ha

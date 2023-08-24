@@ -608,6 +608,8 @@ RVL_SDK_O_FILES := \
 	build/asm/RP/RPSystem/RPSysPauseMgr.o \
 	build/asm/RP/RPSystem/RPPartySystemData.o \
 	build/asm/RP/RPSystem/RPPartyPlayerData.o \
+	build/asm/RP/RPSystem/RPSysPlayerMgr.o \
+	build/asm/RP/RPSystem/RPSysPlayer.o \
 
 
 GROUP_1_O_FILES := \
