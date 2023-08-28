@@ -12,10 +12,9 @@
  * the fake inlines.
  */
 #define RFLiGetLoader_() (RFLAvailable() ? &RFLiGetManager()->loader : NULL)
-#define RFLiGetLastReason_()                                                   \
-    (RFLAvailable() ? RFLiGetManager()->lastReason : NAND_RESULT_OK)
+#define RFLiGetLastReason_() (RFLAvailable() ? RFLiGetManager()->lastReason : 0)
 #define RFLGetLastReason_()                                                    \
-    RFLAvailable() ? RFLiGetLastReason_() : sRFLLastReason;
+    (RFLAvailable() ? RFLiGetLastReason_() : sRFLLastReason)
 
 const char* __RFLVersion =
     "<< RVL_SDK - RFL \trelease build: Jun  9 2007 17:25:33 (0x4199_60831) >>";
