@@ -19,7 +19,7 @@ const RFLDrawCoreSetting cDefaultDrawCoreSetting1Tev = {
     1,          GX_TEXCOORD0, GX_TEXMAP0, 1,    GX_TEV_SWAP0,
     GX_KCOLOR0, GX_TEVPREV,   GX_PNMTX0,  FALSE};
 
-static const GXColor cFacelineColor[] = {
+static const GXColor cFacelineColor[RFLi_MAX_FACELINE_COLOR + 1] = {
     // clang-format off
     {240, 216, 196, 255}, 
     {255, 188, 128, 255}, 
@@ -30,7 +30,7 @@ static const GXColor cFacelineColor[] = {
     // clang-format on
 };
 
-static const GXColor cHairColor[] = {
+static const GXColor cHairColor[RFLi_MAX_HAIR_COLOR + 1] = {
     // clang-format off
     {30,  26,  24,  255},    
     {56,  32,  21,  255},    
@@ -43,7 +43,7 @@ static const GXColor cHairColor[] = {
     // clang-format on
 };
 
-static const GXColor cBeardColor[] = {
+static const GXColor cBeardColor[RFLi_MAX_BEARD_COLOR + 1] = {
     // clang-format off
     {30,  26,  24,  255},    
     {56,  32,  21,  255},    
@@ -56,7 +56,7 @@ static const GXColor cBeardColor[] = {
     // clang-format on
 };
 
-static const GXColor cGlassColor[] = {
+static const GXColor cGlassColor[RFLi_MAX_GLASS_COLOR + 1] = {
     // clang-format off
     {16,  16, 16, 255},  
     {96,  56, 16, 255},  
