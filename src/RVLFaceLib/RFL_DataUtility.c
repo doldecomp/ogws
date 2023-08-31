@@ -3,7 +3,7 @@
 
 // For masking out padding when comparing fields
 #define PADMASK(t, size) ((t)(~((1 << size) - 1)))
-// Padding bitmask constants
+// Padding bitmask constants (see RFLiCharInfo structure)
 #define FACELINE_PAD_MASK (PADMASK(u16, 6))
 #define HAIR_PAD_MASK (PADMASK(u16, 5))
 #define EYE_PAD_MASK (PADMASK(u32, 5))
