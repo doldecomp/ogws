@@ -16,7 +16,7 @@ typedef struct RFLiCtrlBuf {
     u32 identifier;                          // at 0x0
     u16 secretFlag;                          // at 0x4
     u16 padding;                             // at 0x6
-    RFLiCharRawData data[RFL_CTRL_CHAR_MAX]; // at 0x8
+    RFLiCharData data[RFL_CTRL_CHAR_MAX]; // at 0x8
     u16 deleted;                             // at 0x2EC
     u16 checksum;                            // at 0x2EE
 } RFLiCtrlBuf;

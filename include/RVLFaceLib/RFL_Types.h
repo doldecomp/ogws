@@ -125,6 +125,17 @@ typedef void (*RFLModelDrawDoneCallback)(void);
 
 typedef u8 RFLCreateID[RFL_CREATEID_LEN];
 
+/**
+ * Common structs
+ */
+typedef struct RFLCharData {
+    u8 dummy[0x4A];
+} RFLCharData;
+
+typedef struct RFLStoreData {
+    u8 dummy[0x4C];
+} RFLStoreData;
+
 #ifdef __cplusplus
 }
 #endif

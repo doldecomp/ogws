@@ -18,13 +18,13 @@ static void loadclosecallback_(void) {
 
 static void loadcallback_(void) {
     RFLiHDBManager* mgr;
-    RFLiCharHRawData* hraw;
+    RFLiHiddenCharData* hraw;
     RFLiCharInfo info;
 
     mgr = RFLiGetHDBManager();
 
     if (RFLGetAsyncStatus() == RFLErrcode_Success) {
-        hraw = (RFLiCharHRawData*)mgr->loadTmp;
+        hraw = (RFLiHiddenCharData*)mgr->loadTmp;
 
         if (RFLiIsSameID(
                 hraw->createID,
@@ -32,7 +32,7 @@ static void loadcallback_(void) {
             RFLiConvertHRaw2Info(hraw, &info);
 
             if (RFLiCheckValidInfo(&info) && RFLiIsValidOnNAND(&info)) {
-                memcpy(mgr->loadDst, hraw, sizeof(RFLiCharHRawData));
+                memcpy(mgr->loadDst, hraw, sizeof(RFLiHiddenCharData));
             } else {
                 RFLiGetManager()->lastErrCode = RFLErrcode_Broken;
             }
@@ -52,11 +52,11 @@ static void loadopencallback_(void) {
     mgr = RFLiGetHDBManager();
 
     if (RFLGetAsyncStatus() == RFLErrcode_Success) {
-        offset = mgr->loadIndex * sizeof(RFLiCharHRawData);
-        mgr->loadTmp = RFLiAlloc32(sizeof(RFLiCharHRawData));
+        offset = mgr->loadIndex * sizeof(RFLiHiddenCharData);
+        mgr->loadTmp = RFLiAlloc32(sizeof(RFLiHiddenCharData));
 
         switch (RFLiReadAsync(RFLiFileType_Database, mgr->loadTmp,
-                              sizeof(RFLiCharHRawData), loadcallback_,
+                              sizeof(RFLiHiddenCharData), loadcallback_,
                               offset + sizeof(RFLiDatabase))) {
         case RFLErrcode_Success:
         case RFLErrcode_Busy:
@@ -74,7 +74,7 @@ static void loadopencallback_(void) {
     }
 }
 
-RFLErrcode RFLiLoadHiddenDataAsync(RFLiCharHRawData* hraw, u16 index,
+RFLErrcode RFLiLoadHiddenDataAsync(RFLiHiddenCharData* hraw, u16 index,
                                    RFLiAsyncCallback cb, u32 arg) {
     RFLiHDBManager* mgr;
 
@@ -104,7 +104,7 @@ RFLErrcode RFLiLoadHiddenDataAsync(RFLiCharHRawData* hraw, u16 index,
                          loadopencallback_);
 }
 
-RFLErrcode RFLiLoadCachedHiddenData(RFLiCharHRawData* hraw, u16 index) {
+RFLErrcode RFLiLoadCachedHiddenData(RFLiHiddenCharData* hraw, u16 index) {
     RFLiHDBManager* mgr;
     RFLiCharInfo info;
 
@@ -131,7 +131,7 @@ RFLErrcode RFLiLoadCachedHiddenData(RFLiCharHRawData* hraw, u16 index) {
             RFLiConvertHRaw2Info(&mgr->cachedDB[index], &info);
 
             if (RFLiCheckValidInfo(&info)) {
-                memcpy(hraw, &mgr->cachedDB[index], sizeof(RFLiCharHRawData));
+                memcpy(hraw, &mgr->cachedDB[index], sizeof(RFLiHiddenCharData));
                 return RFLErrcode_Success;
             } else {
                 return RFLErrcode_Broken;
@@ -260,8 +260,8 @@ BOOL RFLiIsValidHiddenData(u16 index, RFLSex sex) {
     return FALSE;
 }
 
-void RFLiClearCacheHDB(RFLiCharHRawData* cache) {
-    memset(cache, 0, sizeof(RFLiCharHRawData) * RFL_HDB_DATA_MAX);
+void RFLiClearCacheHDB(RFLiHiddenCharData* cache) {
+    memset(cache, 0, sizeof(RFLiHiddenCharData) * RFL_HDB_DATA_MAX);
 }
 
 BOOL RFLiIsCachedHDB(void) {

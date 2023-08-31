@@ -6,7 +6,7 @@
 
 #define TABLE_DATA_STEP 1250
 // TODO: How is this size calculated?
-#define TEMP_BUFFER_SIZE (TABLE_DATA_STEP * sizeof(RFLiCharHRawData) + 0x30E0)
+#define TEMP_BUFFER_SIZE (TABLE_DATA_STEP * sizeof(RFLiHiddenCharData) + 0x30E0)
 
 void RFLiClearTableData(RFLiTableData* data) {
     memset(data, 0, sizeof(RFLiTableData));
@@ -65,11 +65,11 @@ static void formatWriteCallback_(void) {
         }
 
         if (mgr->formatIndex < RFL_HDB_DATA_MAX) {
-            offset = mgr->formatIndex * sizeof(RFLiCharHRawData);
+            offset = mgr->formatIndex * sizeof(RFLiHiddenCharData);
 
             for (i = 0; i < TABLE_DATA_STEP; i++) {
-                memset((RFLiCharHRawData*)mgr->formatTmp + i, 0,
-                       sizeof(RFLiCharHRawData));
+                memset((RFLiHiddenCharData*)mgr->formatTmp + i, 0,
+                       sizeof(RFLiHiddenCharData));
             }
 
             switch (RFLiWriteAsync(RFLiFileType_Database, mgr->formatTmp,

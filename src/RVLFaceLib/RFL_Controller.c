@@ -17,7 +17,7 @@ static void clearDatabase_(RFLiCtrlBuf* buf) {
     buf->checksum = 0;
 
     for (i = 0; i < RFL_CTRL_CHAR_MAX; i++) {
-        memset(&buf->data[i], 0, sizeof(RFLiCharRawData));
+        memset(&buf->data[i], 0, sizeof(RFLiCharData));
     }
 }
 
@@ -84,7 +84,7 @@ static void checkValidate_(RFLiCtrlBuf* buf, s32 chan) {
             RFLiConvertRaw2Info(&mgr->buffer[chan]->data[i], &info);
 
             if (!RFLiCheckValidInfo(&info) || !RFLiIsValidOnNAND(&info)) {
-                memset(&mgr->buffer[chan]->data[i], 0, sizeof(RFLiCharRawData));
+                memset(&mgr->buffer[chan]->data[i], 0, sizeof(RFLiCharData));
             }
         }
     }
@@ -139,7 +139,7 @@ static void clearDeleted_(RFLiCtrlBuf* buf) {
     for (i = 0; i < RFL_CTRL_CHAR_MAX; i++) {
         mask = 1 << i;
         if (buf->deleted & mask) {
-            memset(&buf->data[i], 0, sizeof(RFLiCharRawData));
+            memset(&buf->data[i], 0, sizeof(RFLiCharData));
         }
     }
 }

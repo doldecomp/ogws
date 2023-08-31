@@ -1,6 +1,6 @@
 #include <RVLFaceLib/RVLFaceLibInternal.h>
 
-static const u8 scDefaultData[][sizeof(RFLiCharRawData)] = {
+static const u8 scDefaultData[][sizeof(RFLiCharData)] = {
     // "Guest A"
     {0x00, 0x08, 0x00, 0x6E, 0x00, 0x6F, 0x00, 0x20, 0x00, 0x6E, 0x00,
      0x61, 0x00, 0x6D, 0x00, 0x65, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -51,5 +51,5 @@ static const u8 scDefaultData[][sizeof(RFLiCharRawData)] = {
      0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}};
 
 void RFLiGetDefaultData(RFLiCharInfo* info, u16 index) {
-    RFLiConvertRaw2Info((RFLiCharRawData*)&scDefaultData[index], info);
+    RFLiConvertRaw2Info((RFLiCharData*)&scDefaultData[index], info);
 }

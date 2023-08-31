@@ -11,6 +11,7 @@ extern "C" {
 #include <RVLFaceLib/RFLi_DefaultDatabase.h>
 #include <RVLFaceLib/RFLi_Format.h>
 #include <RVLFaceLib/RFLi_HiddenDatabase.h>
+#include <RVLFaceLib/RFLi_MakeRandomFace.h>
 #include <RVLFaceLib/RFLi_MakeTex.h>
 #include <RVLFaceLib/RFLi_MiddleDatabase.h>
 #include <RVLFaceLib/RFLi_Model.h>

@@ -1168,43 +1168,43 @@ _index_RFLIsAvailableControllerData:
 
 .global _index_updateHDBcallback_
 _index_updateHDBcallback_:
-    .long updateHDBcallback_
+    .long 0x80174884
     .long 0x000001e8
     .long _unwind_updateHDBcallback_
 
 .global _index_loadHiddenDataSync_
 _index_loadHiddenDataSync_:
-    .long loadHiddenDataSync_
+    .long 0x80174A6C
     .long 0x00000174
     .long _unwind_loadHiddenDataSync_
 
 .global _index_updateHiddenOld_
 _index_updateHiddenOld_:
-    .long updateHiddenOld_
+    .long 0x80174BE0
     .long 0x00000154
     .long _unwind_updateHiddenOld_
 
 .global _index_loadHiddenRandomSync_
 _index_loadHiddenRandomSync_:
-    .long loadHiddenRandomSync_
+    .long 0x80174D34
     .long 0x0000013c
     .long _unwind_loadHiddenRandomSync_
 
 .global _index_updateHDBRandcallback_
 _index_updateHDBRandcallback_:
-    .long updateHDBRandcallback_
+    .long 0x80174E70
     .long 0x00000194
     .long _unwind_updateHDBRandcallback_
 
 .global _index_updateHiddenRandom_
 _index_updateHiddenRandom_:
-    .long updateHiddenRandom_
+    .long 0x80175004
     .long 0x000002dc
     .long _unwind_updateHiddenRandom_
 
 .global _index_updateRandom_
 _index_updateRandom_:
-    .long updateRandom_
+    .long 0x801752E0
     .long 0x000000f8
     .long _unwind_updateRandom_
 

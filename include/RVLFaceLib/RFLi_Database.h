@@ -10,8 +10,8 @@ extern "C" {
 #endif
 
 typedef struct RFLiDatabase {
-    u32 identifier;                           // at 0x0
-    RFLiCharRawData rawData[RFL_DB_CHAR_MAX]; // at 0x4
+    u32 identifier;                        // at 0x0
+    RFLiCharData rawData[RFL_DB_CHAR_MAX]; // at 0x4
 
     // at 0x1CEC
     u32 isolation : 1;
@@ -41,7 +41,7 @@ typedef struct RFLiDBManager {
     RFLiCallback formatCb;   // at 0x8
     RFLiCallback bootloadCb; // at 0xC
     RFLiOpenType saveType;   // at 0x10
-    RFLiCharRawData trg;     // at 0x14
+    RFLiCharData trg;        // at 0x14
     RFLiCRCInfo crcInfo;     // at 0x60
 } RFLiDBManager;
 
@@ -49,10 +49,14 @@ void RFLiInitDatabase(MEMiHeapHead*);
 
 RFLErrcode RFLiBootLoadDatabaseAsync(RFLiCallback);
 
+void RFLiSetTemporaryID(RFLiCharInfo*);
 BOOL RFLiIsSameID(const RFLCreateID, const RFLCreateID);
 
-void RFLiConvertRaw2Info(const RFLiCharRawData*, RFLiCharInfo*);
-void RFLiConvertHRaw2Info(const RFLiCharHRawData*, RFLiCharInfo*);
+void RFLiConvertRaw2Info(const RFLiCharData*, RFLiCharInfo*);
+void RFLiConvertHRaw2Info(const RFLiHiddenCharData*, RFLiCharInfo*);
+void RFLiConvertInfo2HRaw(const RFLiCharInfo*, RFLiHiddenCharData*);
+
+void RFLiConvertRaw2HRaw(const RFLiCharData*, RFLiHiddenCharData*);
 
 RFLiHiddenDB* RFLiGetHiddenHeader(void);
 

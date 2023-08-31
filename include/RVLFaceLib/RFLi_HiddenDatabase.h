@@ -22,7 +22,7 @@ typedef struct RFLiHiddenDB {
 } RFLiHiddenDB;
 
 typedef struct RFLiHDBList {
-    RFLiCharHRawData data[RFL_DB_CHAR_MAX]; // at 0x0
+    RFLiHiddenCharData data[RFL_DB_CHAR_MAX]; // at 0x0
     u16 num;                                // at 0x1900
     u8 current;                             // at 0x1901
 } RFLiHDBList;
@@ -36,26 +36,26 @@ typedef struct RFLiHDBManager {
     void* formatTmp;            // at 0x14
     RFLiCallback formatCb;      // at 0x18
     s16 formatIndex;            // at 0x1C
-    RFLiCharHRawData* loadDst;  // at 0x20
+    RFLiHiddenCharData* loadDst;  // at 0x20
     void* loadTmp;              // at 0x24
     u32 loadArg;                // at 0x28
     RFLiAsyncCallback loadCb;   // at 0x2C
     u16 loadIndex;              // at 0x30
-    RFLiCharHRawData* cachedDB; // at 0x34
+    RFLiHiddenCharData* cachedDB; // at 0x34
     BOOL cached;                // at 0x38
     RFLiHDBList list;           // at 0x3C
 } RFLiHDBManager;
 
 void RFLiInitHiddenDatabase(void);
-RFLErrcode RFLiLoadHiddenDataAsync(RFLiCharHRawData* hraw, u16 index,
+RFLErrcode RFLiLoadHiddenDataAsync(RFLiHiddenCharData* hraw, u16 index,
                                    RFLiAsyncCallback cb, u32 arg);
-RFLErrcode RFLiLoadCachedHiddenData(RFLiCharHRawData* hraw, u16 index);
+RFLErrcode RFLiLoadCachedHiddenData(RFLiHiddenCharData* hraw, u16 index);
 void RFLiWriteCtrlToHiddenDB(struct RFLiCtrlBuf* buf, BOOL ch);
 u16 RFLiCountupHiddenDataNum(RFLSex sex);
 s16 RFLiGetHiddenNext(u16 index);
 s16 RFLiGetHiddenPrev(u16 index);
 BOOL RFLiIsValidHiddenData(u16 index, RFLSex sex);
-void RFLiClearCacheHDB(RFLiCharHRawData* hdb);
+void RFLiClearCacheHDB(RFLiHiddenCharData* hdb);
 BOOL RFLiIsCachedHDB(void);
 
 #ifdef __cplusplus

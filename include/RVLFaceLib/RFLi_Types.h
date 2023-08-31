@@ -264,7 +264,7 @@ typedef struct RFLiCharInfo {
     RFLCreateID createID; // at 0x46
 } RFLiCharInfo;
 
-typedef struct RFLiCharRawData {
+typedef struct RFLiCharData {
     // at 0x0
     u16 padding0 : 1;
     u16 sex : 1;
@@ -347,9 +347,14 @@ typedef struct RFLiCharRawData {
     u16 padding8 : 1;
 
     wchar_t creatorName[RFL_CREATOR_LEN]; // at 0x36
-} RFLiCharRawData;
+} RFLiCharData;
 
-typedef struct RFLiCharHRawData {
+typedef struct RFLiStoreData {
+    RFLiCharData data; // at 0x0
+    u16 checksum;      // at 0x4A
+} RFLiStoreData;
+
+typedef struct RFLiHiddenCharData {
     // at 0x0
     u16 padding0 : 1;
     u16 sex : 1;
@@ -431,7 +436,7 @@ typedef struct RFLiCharHRawData {
     u16 padding8 : 1;
 
     char padding9[10]; // at 0x36
-} RFLiCharHRawData;
+} RFLiHiddenCharData;
 
 #ifdef __cplusplus
 }
