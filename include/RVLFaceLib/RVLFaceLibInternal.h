@@ -5,6 +5,7 @@ extern "C" {
 #endif
 
 #include <RVLFaceLib.h>
+#include <RVLFaceLib/RFLi_Config.h>
 #include <RVLFaceLib/RFLi_Controller.h>
 #include <RVLFaceLib/RFLi_DataUtility.h>
 #include <RVLFaceLib/RFLi_Database.h>
