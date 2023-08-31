@@ -73,7 +73,7 @@ static void formatWriteCallback_(void) {
             }
 
             switch (RFLiWriteAsync(RFLiFileType_Database, mgr->formatTmp,
-                                   0x16960, formatWriteCallback_,
+                                   TEMP_BUFFER_SIZE, formatWriteCallback_,
                                    offset + sizeof(RFLiDatabase))) {
             case RFLErrcode_Success:
             case RFLErrcode_Busy:
