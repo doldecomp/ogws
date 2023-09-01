@@ -7,7 +7,7 @@ extern "C" {
 #endif
 
 // Forward declarations
-typedef struct RFLiCharData;
+typedef struct RFLCharData;
 
 typedef struct NWC24MsgObj {
     u32 id; // at 0x0
@@ -23,7 +23,7 @@ typedef struct NWC24MsgObj {
     char _E0[0x100 - 0xE0];
 } NWC24MsgObj;
 
-s32 NWC24SetMsgFaceData(NWC24MsgObj*, const struct RFLiCharData*);
+s32 NWC24SetMsgFaceData(NWC24MsgObj*, const struct RFLCharData*);
 
 #ifdef __cplusplus
 }
