@@ -4,9 +4,11 @@
 extern "C" {
 #endif
 
+#include <revolution/NWC24/NWC24MsgObj.h>
 #include <revolution/NWC24/NWC24Schedule.h>
 #include <revolution/NWC24/NWC24System.h>
 #include <revolution/NWC24/NWC24Time.h>
+#include <revolution/NWC24/NWC24Utils.h>
 
 #ifdef __cplusplus
 }

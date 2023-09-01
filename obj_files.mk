@@ -581,7 +581,7 @@ RVL_SDK_O_FILES := \
 	build/asm/RVLFaceLib/RFL_MakeRandomFace.o \
 	build/RVLFaceLib/RFL_DefaultDatabase.o \
 	build/RVLFaceLib/RFL_DataUtility.o \
-	build/asm/RVLFaceLib/RFL_NWC24.o \
+	build/RVLFaceLib/RFL_NWC24.o \
 	build/RVLFaceLib/RFL_Format.o \
 	\
 	build/asm/homebuttonMiniLib/hbm_unsplit.o \

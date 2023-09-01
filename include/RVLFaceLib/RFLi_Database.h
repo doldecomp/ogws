@@ -68,6 +68,7 @@ BOOL RFLiDBIsLoaded(void);
 
 void RFLiCheckHeaderCRCAsync(RFLiAsyncCallback);
 
+RFLErrcode RFLiGetCharRawData(RFLiCharData*, u16);
 RFLErrcode RFLiGetCharInfo(RFLiCharInfo*, u16);
 
 BOOL RFLiIsTemporaryID(const RFLCreateID);

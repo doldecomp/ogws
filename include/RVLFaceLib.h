@@ -10,6 +10,7 @@ extern "C" {
 #include <RVLFaceLib/RFL_MiddleDatabase.h>
 #include <RVLFaceLib/RFL_Model.h>
 #include <RVLFaceLib/RFL_NANDLoader.h>
+#include <RVLFaceLib/RFL_NWC24.h>
 #include <RVLFaceLib/RFL_System.h>
 #include <RVLFaceLib/RFL_Types.h>
 
