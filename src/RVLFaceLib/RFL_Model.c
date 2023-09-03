@@ -512,7 +512,6 @@ void RFLDrawXluCore(const RFLCharModel* model,
     }
 }
 
-#ifdef __DECOMP_NON_MATCHING
 void RFLiInitCharModelRes(RFLiCharModelRes* res, const RFLiCharInfo* info) {
     Vec noseTrans;
     Vec beardTrans;
@@ -583,6 +582,8 @@ void RFLiInitCharModelRes(RFLiCharModelRes* res, const RFLiCharInfo* info) {
      */
     {
         RFLiShapeRes arg;
+        int temp = 4;
+
         arg.part = RFLiPartsShp_Hair;
         arg.file = info->hair.type;
         arg.vtxPosBuf = res->hairVtxPos;
@@ -612,11 +613,13 @@ void RFLiInitCharModelRes(RFLiCharModelRes* res, const RFLiCharInfo* info) {
 
         res->hairDlSize = arg.dlSize;
 
-        res->foreheadVtxPos = (s16*)((u8*)res->hairVtxPos +
-                                     (arg.numVtxPos * 4 - arg.numVtxPos) * 2);
+        res->foreheadVtxPos =
+            (s16*)((u8*)res->hairVtxPos +
+                   (arg.numVtxPos * temp - arg.numVtxPos) * 2);
 
-        res->foreheadVtxNrm = (s16*)((u8*)res->hairVtxNrm +
-                                     (arg.numVtxNrm * 4 - arg.numVtxNrm) * 2);
+        res->foreheadVtxNrm =
+            (s16*)((u8*)res->hairVtxNrm +
+                   (arg.numVtxNrm * temp - arg.numVtxNrm) * 2);
 
         res->foreheadDl = res->hairDl + ROUND_UP(arg.dlSize, 32);
 
@@ -818,9 +821,6 @@ void RFLiInitCharModelRes(RFLiCharModelRes* res, const RFLiCharInfo* info) {
 
     DCFlushRange(res, sizeof(RFLiCharModelRes));
 }
-#else
-#error This file has not yet been decompiled accurately. Use "RFL_Model.s" instead.
-#endif
 
 #ifdef __DECOMP_NON_MATCHING
 void RFLiInitShapeRes(RFLiShapeRes* shape) {

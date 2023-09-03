@@ -146,7 +146,7 @@ GXColor RFLiGetFacelineColor(const RFLiCharInfo* info);
 void RFLiInitCharModelRes(RFLiCharModelRes* res, const RFLiCharInfo* info);
 void RFLiInitShapeRes(RFLiShapeRes* shape);
 void RFLiInitTexRes(GXTexObj* texObj, RFLiPartsShpTex part, u16 file,
-                    void* buffer);
+                    void* buffer) DONT_INLINE;
 void RFLiTransformCoordinate(s16* to, const s16* from);
 
 #ifdef __cplusplus
