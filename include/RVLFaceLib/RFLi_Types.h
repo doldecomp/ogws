@@ -139,7 +139,7 @@ typedef enum {
  */
 
 typedef void (*RFLiCallback)(void);
-typedef void (*RFLiAsyncCallback)(u32 arg);
+typedef void (*RFLiExCallback)(u32 arg);
 
 /**
  * Common structs

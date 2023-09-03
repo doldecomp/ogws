@@ -26,13 +26,13 @@ typedef struct RFLiDatabase {
 } RFLiDatabase;
 
 typedef struct RFLiCRCInfo {
-    void* head;                 // at 0x0
-    u32 size;                   // at 0x4
-    u8* current;                // at 0x8
-    u32 count;                  // at 0xC
-    u16 crc;                    // at 0x10
-    OSAlarm alarm;              // at 0x18
-    RFLiAsyncCallback callback; // at 0x48
+    void* head;              // at 0x0
+    u32 size;                // at 0x4
+    u8* current;             // at 0x8
+    u32 count;               // at 0xC
+    u16 crc;                 // at 0x10
+    OSAlarm alarm;           // at 0x18
+    RFLiExCallback callback; // at 0x48
 } RFLiCRCInfo;
 
 typedef struct RFLiDBManager {
@@ -45,39 +45,32 @@ typedef struct RFLiDBManager {
     RFLiCRCInfo crcInfo;     // at 0x60
 } RFLiDBManager;
 
-void RFLiInitDatabase(MEMiHeapHead*);
-
-RFLErrcode RFLiBootLoadDatabaseAsync(RFLiCallback);
-
-void RFLiSetTemporaryID(RFLiCharInfo*);
-BOOL RFLiIsSameID(const RFLCreateID, const RFLCreateID);
-
-void RFLiConvertRaw2Info(const RFLiCharData*, RFLiCharInfo*);
-void RFLiConvertHRaw2Info(const RFLiHiddenCharData*, RFLiCharInfo*);
-void RFLiConvertInfo2HRaw(const RFLiCharInfo*, RFLiHiddenCharData*);
-
-void RFLiConvertRaw2HRaw(const RFLiCharData*, RFLiHiddenCharData*);
-
-RFLiHiddenDB* RFLiGetHiddenHeader(void);
-
-BOOL RFLiIsValidID(const RFLCreateID);
-
-BOOL RFLiIsSpecialID(const RFLCreateID);
-
-BOOL RFLiDBIsLoaded(void);
-
-void RFLiCheckHeaderCRCAsync(RFLiAsyncCallback);
-
-RFLErrcode RFLiGetCharRawData(RFLiCharData*, u16);
-RFLErrcode RFLiGetCharInfo(RFLiCharInfo*, u16);
-
-BOOL RFLiIsTemporaryID(const RFLCreateID);
-
-BOOL RFLiIsValidName2(const RFLiCharInfo*);
-
+void RFLiInitDatabase(MEMiHeapHead* heap);
+RFLErrcode RFLiBootLoadDatabaseAsync(RFLiCallback callback);
+RFLErrcode RFLiSaveDatabaseAsync(RFLiCallback callback);
+RFLiCharData* RFLiGetCharData(u16 index);
+void RFLiConvertRaw2Info(const RFLiCharData* data, RFLiCharInfo* out);
+void RFLiConvertHRaw2Info(const RFLiHiddenCharData* data, RFLiCharInfo* out);
+void RFLiConvertInfo2Raw(const RFLiCharInfo* info, RFLiCharData* out);
+void RFLiConvertInfo2HRaw(const RFLiCharInfo* info, RFLiHiddenCharData* out);
+void RFLiConvertRaw2HRaw(const RFLiCharData* data, RFLiHiddenCharData* out);
+RFLErrcode RFLiGetCharRawData(RFLiCharData* out, u16 index);
+RFLErrcode RFLiGetCharInfo(RFLiCharInfo* out, u16 index);
+BOOL RFLIsAvailableOfficialData(u16 index);
+void RFLiSetTemporaryID(RFLiCharInfo* info);
+BOOL RFLiIsSameID(const RFLCreateID* id1, const RFLCreateID* id2);
+BOOL RFLiIsValidID(const RFLCreateID* id);
+BOOL RFLiIsSpecialID(const RFLCreateID* id);
+BOOL RFLiIsTemporaryID(const RFLCreateID* id);
+BOOL RFLSearchOfficialData(const RFLCreateID* id, u16* index);
+BOOL RFLiIsValidName(const RFLiCharData* data);
+BOOL RFLiIsValidName2(const RFLiCharInfo* info);
 BOOL RFLiGetIsolation(void);
-
-u16 RFLiCalculateCRC(const void*, u32);
+RFLiHiddenDB* RFLiGetHiddenHeader(void);
+BOOL RFLiDBIsLoaded(void);
+u16 RFLiCalculateCRC(const void* p, u32 len);
+void RFLiCreateHeaderCRCAsync(RFLiExCallback callback);
+void RFLiCheckHeaderCRCAsync(RFLiExCallback callback);
 
 #ifdef __cplusplus
 }

@@ -939,8 +939,8 @@ _unwind_alarmCreateCb_:
     .long 0x10080000
     .long 0x00000000
 
-.global _unwind_RFLiCheckHeaderCRCAsync
-_unwind_RFLiCheckHeaderCRCAsync:
+.global _unwind_RFLiCreateHeaderCRCAsync
+_unwind_RFLiCreateHeaderCRCAsync:
     .long 0x10080000
     .long 0x00000000
 

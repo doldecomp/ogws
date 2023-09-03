@@ -123,11 +123,13 @@ typedef enum { RFLSex_Male, RFLSex_Female, RFLSex_All } RFLSex;
 typedef void (*RFLIconDrawDoneCallback)(void);
 typedef void (*RFLModelDrawDoneCallback)(void);
 
-typedef u8 RFLCreateID[RFL_CREATEID_LEN];
-
 /**
  * Common structs
  */
+typedef struct RFLCreateID {
+    u8 data[RFL_CREATEID_LEN];
+} RFLCreateID;
+
 typedef struct RFLCharData {
     u8 dummy[0x4A];
 } RFLCharData;

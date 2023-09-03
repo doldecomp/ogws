@@ -165,13 +165,13 @@ static void alarmCallback_(OSAlarm* alarm, OSContext* ctx) {
     userData = (const RFLiFileType*)OSGetAlarmUserData(alarm);
 
     if (RFLAvailable()) {
-        const RFLiAsyncCallback alarmCallback =
+        const RFLiExCallback alarmCallback =
             RFLiGetAccInfo(*userData)->retryCallback;
         alarmCallback(*userData);
     }
 }
 
-static void retry_(u32 arg, u8 retryCount, RFLiAsyncCallback callback) {
+static void retry_(u32 arg, u8 retryCount, RFLiExCallback callback) {
     RFLiAccessInfo* info;
 
     if (retryCount < MAX_RETRY_COUNT) {

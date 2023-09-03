@@ -87,7 +87,7 @@ void RFLInitMiddleDB(RFLMiddleDB* db, RFLMiddleDBType type, void* buffer,
 static BOOL checkHiddenData_(RFLiHiddenCharData* data) {
     RFLiCharInfo info;
 
-    if (!RFLiIsValidID(data->createID)) {
+    if (!RFLiIsValidID(&data->createID)) {
         return FALSE;
     }
 
@@ -545,7 +545,7 @@ BOOL RFLiGetCharInfoMiddleDB(RFLiCharInfo* info, const RFLMiddleDB* db,
     }
 
     data = &idb->data[index];
-    if (!RFLiIsValidID(data->createID)) {
+    if (!RFLiIsValidID(&data->createID)) {
         return FALSE;
     }
 
@@ -609,7 +609,7 @@ RFLErrcode RFLiAddMiddleDBUserData(RFLMiddleDB* db, RFLiCharData* raw) {
         return RFLErrcode_NotAvailable;
     }
 
-    if (!RFLiIsValidID(hraw.createID)) {
+    if (!RFLiIsValidID(&hraw.createID)) {
         return RFLErrcode_Broken;
     }
 

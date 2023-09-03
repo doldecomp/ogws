@@ -7,4 +7,5 @@ tools/*.dll
 tools/old/*.dll
 tools/codewarrior/*
 include/baserom.dol
+objdiff.json
 *.pyc

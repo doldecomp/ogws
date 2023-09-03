@@ -75,7 +75,7 @@ static void loadopencallback_(void) {
 }
 
 RFLErrcode RFLiLoadHiddenDataAsync(RFLiHiddenCharData* hraw, u16 index,
-                                   RFLiAsyncCallback cb, u32 arg) {
+                                   RFLiExCallback cb, u32 arg) {
     RFLiHDBManager* mgr;
 
     if (index >= RFL_HDB_DATA_MAX) {

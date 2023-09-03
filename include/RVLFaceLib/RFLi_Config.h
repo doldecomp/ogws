@@ -6,6 +6,10 @@
 extern "C" {
 #endif
 
+/**
+ * Char data constraints
+ */
+
 #define RFLi_MAX_FACELINE_TYPE 7
 #define RFLi_MAX_FACELINE_COLOR 5
 #define RFLi_MAX_FACELINE_TEXTURE 11
@@ -55,6 +59,13 @@ extern "C" {
 
 #define RFLi_MAX_BODY_HEIGHT 128
 #define RFLi_MAX_BODY_BUILD 128
+
+/**
+ * Create ID
+ */
+
+#define RFLi_CREATE_ID_TEMPORARY 0x20000000
+#define RFLi_CREATE_ID_NOT_SPECIAL 0x80000000
 
 #ifdef __cplusplus
 }

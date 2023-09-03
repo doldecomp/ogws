@@ -68,7 +68,7 @@ BOOL RFLiCheckCtrlBufferCore(RFLiCtrlBuf* buf, u16 index, RFLiHiddenType type) {
         }
     }
 
-    return RFLiIsValidID(buf->data[index].createID);
+    return RFLiIsValidID(&buf->data[index].createID);
 }
 
 static void checkValidate_(RFLiCtrlBuf* buf, s32 chan) {
@@ -80,7 +80,7 @@ static void checkValidate_(RFLiCtrlBuf* buf, s32 chan) {
     memcpy(mgr->buffer[chan], buf, sizeof(RFLiCtrlBuf));
 
     for (i = 0; i < RFL_CTRL_CHAR_MAX; i++) {
-        if (RFLiIsValidID(mgr->buffer[chan]->data[i].createID)) {
+        if (RFLiIsValidID(&mgr->buffer[chan]->data[i].createID)) {
             RFLiConvertRaw2Info(&mgr->buffer[chan]->data[i], &info);
 
             if (!RFLiCheckValidInfo(&info) || !RFLiIsValidOnNAND(&info)) {
@@ -292,7 +292,7 @@ BOOL RFLiGetControllerData(RFLiCharInfo* info, s32 chan, u16 index,
     buf = mgr->buffer[chan];
     mask = 1 << index;
 
-    if (!RFLiIsValidID(buf->data[index].createID)) {
+    if (!RFLiIsValidID(&buf->data[index].createID)) {
         return FALSE;
     }
 
@@ -339,5 +339,5 @@ BOOL RFLIsAvailableControllerData(s32 chan, u16 index) {
         return FALSE;
     }
 
-    return RFLiIsValidID(buf->data[index].createID);
+    return RFLiIsValidID(&buf->data[index].createID);
 }

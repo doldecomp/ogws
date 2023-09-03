@@ -113,7 +113,7 @@ static void formatOpenCallback_(void) {
         mgr = RFLiGetHDBManager();
         mgr->formatIndex = -1;
         mgr->formatTmp = RFLiAlloc32(TEMP_BUFFER_SIZE);
-        RFLiCheckHeaderCRCAsync(formatCalcCRCCb_);
+        RFLiCreateHeaderCRCAsync(formatCalcCRCCb_);
     } else if (status == RFLErrcode_NANDCommandfail) {
         if (RFLiGetLastReason() == NAND_RESULT_MAXFILES) {
             RFLiGetManager()->lastErrCode = RFLErrcode_MaxFiles;

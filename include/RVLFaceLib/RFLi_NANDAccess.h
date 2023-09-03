@@ -49,7 +49,7 @@ typedef struct RFLiAccessInfo {
     RFLiCallbackTag tag;             // at 0x190
     OSAlarm alarm;                   // at 0x198
     RFLiFileType alarmData;          // at 0x1C8
-    RFLiAsyncCallback retryCallback; // at 0x1CC
+    RFLiExCallback retryCallback; // at 0x1CC
     u8 retryCount;                   // at 0x1D0
     void* safeBuffer;                // at 0x1D4
     u8 opened;                       // at 0x1D8

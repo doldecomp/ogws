@@ -162,7 +162,7 @@ BOOL RFLiCheckValidInfo(const RFLiCharInfo* info) {
         return FALSE;
     }
 
-    if (RFLiIsSpecialID(info->createID) && !info->personal.localOnly) {
+    if (RFLiIsSpecialID(&info->createID) && !info->personal.localOnly) {
         return FALSE;
     }
 
@@ -170,7 +170,7 @@ BOOL RFLiCheckValidInfo(const RFLiCharInfo* info) {
 }
 
 BOOL RFLiIsValidOnNAND(const RFLiCharInfo* info) {
-    return !RFLiIsTemporaryID(info->createID);
+    return !RFLiIsTemporaryID(&info->createID);
 }
 
 BOOL RFLiIsSameFaceCore(const RFLiCharInfo* lhs, const RFLiCharInfo* rhs) {
@@ -261,7 +261,7 @@ RFLErrcode RFLiPickupCharInfo(RFLiCharInfo* info, RFLDataSource source,
     }
 
     if (err == RFLErrcode_Success) {
-        if (!RFLiIsValidID(info->createID)) {
+        if (!RFLiIsValidID(&info->createID)) {
             err = RFLErrcode_Broken;
         } else if (!RFLiCheckValidInfo(info)) {
             err = RFLErrcode_Broken;
@@ -311,7 +311,7 @@ static void copyChar2Additional_(RFLAdditionalInfo* dst,
 
     dst->height = height;
     dst->build = build;
-    memcpy(dst->createID, src->createID, sizeof(RFLCreateID));
+    memcpy(&dst->createID, &src->createID, sizeof(RFLCreateID));
     dst->reserved = 0;
     dst->skinColor = RFLiGetFacelineColor(src);
 }

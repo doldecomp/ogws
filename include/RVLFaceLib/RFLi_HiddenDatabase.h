@@ -39,7 +39,7 @@ typedef struct RFLiHDBManager {
     RFLiHiddenCharData* loadDst;  // at 0x20
     void* loadTmp;              // at 0x24
     u32 loadArg;                // at 0x28
-    RFLiAsyncCallback loadCb;   // at 0x2C
+    RFLiExCallback loadCb;   // at 0x2C
     u16 loadIndex;              // at 0x30
     RFLiHiddenCharData* cachedDB; // at 0x34
     BOOL cached;                // at 0x38
@@ -48,7 +48,7 @@ typedef struct RFLiHDBManager {
 
 void RFLiInitHiddenDatabase(void);
 RFLErrcode RFLiLoadHiddenDataAsync(RFLiHiddenCharData* hraw, u16 index,
-                                   RFLiAsyncCallback cb, u32 arg);
+                                   RFLiExCallback cb, u32 arg);
 RFLErrcode RFLiLoadCachedHiddenData(RFLiHiddenCharData* hraw, u16 index);
 void RFLiWriteCtrlToHiddenDB(struct RFLiCtrlBuf* buf, BOOL ch);
 u16 RFLiCountupHiddenDataNum(RFLSex sex);

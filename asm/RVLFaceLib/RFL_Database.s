@@ -398,8 +398,8 @@ lbl_80172A24:
 /* 80172A30 0016D930  38 21 00 10 */	addi r1, r1, 0x10
 /* 80172A34 0016D934  4E 80 00 20 */	blr 
 
-.global RFLiSaveDatabase
-RFLiSaveDatabase:
+.global saveDatabase_
+saveDatabase_:
 /* 80172A38 0016D938  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80172A3C 0016D93C  7C 08 02 A6 */	mflr r0
 /* 80172A40 0016D940  90 01 00 14 */	stw r0, 0x14(r1)
@@ -507,11 +507,11 @@ lbl_80172B9C:
 /* 80172B9C 0016DA9C  80 BF 00 00 */	lwz r5, 0(r31)
 /* 80172BA0 0016DAA0  3C 60 00 02 */	lis r3, 0x0001F1E0@ha
 /* 80172BA4 0016DAA4  38 03 F1 E0 */	addi r0, r3, 0x0001F1E0@l
-/* 80172BA8 0016DAA8  3C 80 80 17 */	lis r4, RFLiSaveDatabase@ha
+/* 80172BA8 0016DAA8  3C 80 80 17 */	lis r4, saveDatabase_@ha
 /* 80172BAC 0016DAAC  38 C0 00 00 */	li r6, 0
 /* 80172BB0 0016DAB0  3C A5 00 02 */	addis r5, r5, 2
 /* 80172BB4 0016DAB4  B0 C5 F1 DE */	sth r6, -0xe22(r5)
-/* 80172BB8 0016DAB8  38 84 2A 38 */	addi r4, r4, RFLiSaveDatabase@l
+/* 80172BB8 0016DAB8  38 84 2A 38 */	addi r4, r4, saveDatabase_@l
 /* 80172BBC 0016DABC  38 7F 00 78 */	addi r3, r31, 0x78
 /* 80172BC0 0016DAC0  80 BF 00 00 */	lwz r5, 0(r31)
 /* 80172BC4 0016DAC4  90 BF 00 60 */	stw r5, 0x60(r31)
@@ -1754,8 +1754,8 @@ lbl_80173BFC:
 /* 80173C0C 0016EB0C  38 21 00 10 */	addi r1, r1, 0x10
 /* 80173C10 0016EB10  4E 80 00 20 */	blr 
 
-.global RFLiCheckHeaderCRCAsync
-RFLiCheckHeaderCRCAsync:
+.global RFLiCreateHeaderCRCAsync
+RFLiCreateHeaderCRCAsync:
 /* 80173C14 0016EB14  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80173C18 0016EB18  7C 08 02 A6 */	mflr r0
 /* 80173C1C 0016EB1C  90 01 00 14 */	stw r0, 0x14(r1)

@@ -964,19 +964,19 @@ _index_RFLiInitDatabase:
 
 .global _index_bootloadCheckCRCCb_
 _index_bootloadCheckCRCCb_:
-    .long bootloadCheckCRCCb_
+    .long 0x80172544
     .long 0x00000070
     .long _unwind_bootloadCheckCRCCb_
 
 .global _index_bootloadDBcallback_
 _index_bootloadDBcallback_:
-    .long bootloadDBcallback_
+    .long 0x801725B4
     .long 0x00000158
     .long _unwind_bootloadDBcallback_
 
 .global _index_bootloadDBopencallback_
 _index_bootloadDBopencallback_:
-    .long bootloadDBopencallback_
+    .long 0x8017270C
     .long 0x00000130
     .long _unwind_bootloadDBopencallback_
 
@@ -988,25 +988,25 @@ _index_RFLiBootLoadDatabaseAsync:
 
 .global _index_saveDBcallback_
 _index_saveDBcallback_:
-    .long saveDBcallback_
+    .long 0x8017291C
     .long 0x00000030
     .long _unwind_saveDBcallback_
 
 .global _index_saveDBopencallback_
 _index_saveDBopencallback_:
-    .long saveDBopencallback_
+    .long 0x8017294C
     .long 0x00000070
     .long _unwind_saveDBopencallback_
 
 .global _index_saveDBmultiopencallback_
 _index_saveDBmultiopencallback_:
-    .long saveDBmultiopencallback_
+    .long 0x801729BC
     .long 0x0000007c
     .long _unwind_saveDBmultiopencallback_
 
 .global _index_RFLiSaveDatabase
 _index_RFLiSaveDatabase:
-    .long RFLiSaveDatabase
+    .long 0x80172A38
     .long 0x000000a8
     .long _unwind_RFLiSaveDatabase
 
@@ -1024,7 +1024,7 @@ _index_RFLiGetCharData:
 
 .global _index_convertRaw2InfoCore_
 _index_convertRaw2InfoCore_:
-    .long convertRaw2InfoCore_
+    .long 0x80172DAC
     .long 0x000001b8
     .long _unwind_convertRaw2InfoCore_
 
@@ -1042,7 +1042,7 @@ _index_RFLiConvertHRaw2Info:
 
 .global _index_convertInfo2RawCore_
 _index_convertInfo2RawCore_:
-    .long convertInfo2RawCore_
+    .long 0x80173004
     .long 0x000001ac
     .long _unwind_convertInfo2RawCore_
 
@@ -1108,19 +1108,19 @@ _index_RFLiDBIsLoaded:
 
 .global _index_alarmCreateCb_
 _index_alarmCreateCb_:
-    .long alarmCreateCb_
+    .long 0x80173A68
     .long 0x000001ac
     .long _unwind_alarmCreateCb_
 
-.global _index_RFLiCheckHeaderCRCAsync
-_index_RFLiCheckHeaderCRCAsync:
-    .long RFLiCheckHeaderCRCAsync
+.global _index_RFLiCreateHeaderCRCAsync
+_index_RFLiCreateHeaderCRCAsync:
+    .long RFLiCreateHeaderCRCAsync
     .long 0x000000c4
-    .long _unwind_RFLiCheckHeaderCRCAsync
+    .long _unwind_RFLiCreateHeaderCRCAsync
 
 .global _index_alarmCheckCb_
 _index_alarmCheckCb_:
-    .long alarmCheckCb_
+    .long 0x80173CD8
     .long 0x000001a0
     .long _unwind_alarmCheckCb_
 
