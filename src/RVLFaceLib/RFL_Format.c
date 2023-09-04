@@ -31,7 +31,7 @@ void RFLiClearDBBuffer(void) {
     header->head = -1;
     header->tail = -1;
 
-    for (i = 0; i < RFL_HDB_DATA_MAX; i++) {
+    for (i = 0; i < RFLi_HDB_DATA_MAX; i++) {
         RFLiClearTableData(&header->data[i]);
     }
 }
@@ -64,7 +64,7 @@ static void formatWriteCallback_(void) {
             mgr->formatIndex += TABLE_DATA_STEP;
         }
 
-        if (mgr->formatIndex < RFL_HDB_DATA_MAX) {
+        if (mgr->formatIndex < RFLi_HDB_DATA_MAX) {
             offset = mgr->formatIndex * sizeof(RFLiHiddenCharData);
 
             for (i = 0; i < TABLE_DATA_STEP; i++) {

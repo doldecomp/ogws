@@ -578,7 +578,7 @@ BOOL RFLSearchOfficialData(const RFLCreateID* id, u16* index) {
         return FALSE;
     }
 
-    head = &mgr->database->rawData[0];
+    head = mgr->database->rawData;
     for (i = 0; i < RFL_DB_CHAR_MAX; i++) {
         if (RFLIsAvailableOfficialData(i) &&
             RFLiIsSameID(&head[i].createID, id)) {

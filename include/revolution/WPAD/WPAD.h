@@ -28,7 +28,7 @@ BOOL WPADCanSendStreamData(s32);
 UNKWORD WPADSendStreamData(s32, UNKTYPE*, UNKWORD);
 
 s32 WPADProbe(s32 chan, u32* type);
-s32 WPADReadGameData(s32 chan, void* dst, u32 size, u32 src, WPADCallback cb);
+s32 WPADReadFaceData(s32 chan, void* dst, u32 size, u32 src, WPADCallback cb);
 
 #ifdef __cplusplus
 }

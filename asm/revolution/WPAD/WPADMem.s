@@ -23,8 +23,8 @@ ResultCallback:
 /* 800D75A4 000D24A4  4E 80 04 20 */	bctr 
 /* 800D75A8 000D24A8  4E 80 00 20 */	blr 
 
-.global WPADReadGameData
-WPADReadGameData:
+.global WPADReadFaceData
+WPADReadFaceData:
 /* 800D75AC 000D24AC  94 21 FF D0 */	stwu r1, -0x30(r1)
 /* 800D75B0 000D24B0  7C 08 02 A6 */	mflr r0
 /* 800D75B4 000D24B4  90 01 00 34 */	stw r0, 0x34(r1)

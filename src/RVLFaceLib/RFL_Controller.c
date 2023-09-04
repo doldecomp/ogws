@@ -6,7 +6,6 @@
 #define READ_RETRY_MAX 3
 
 static void readcallback_(s32 chan, s32 result);
-static void checkValidate_(RFLiCtrlBuf* buf, s32 chan);
 
 static void clearDatabase_(RFLiCtrlBuf* buf) {
     int i;
@@ -53,7 +52,8 @@ void RFLiInitCtrlBuf(MEMiHeapHead* heap) {
                     RFL_CTRL_CHAR_MAX);
 }
 
-BOOL RFLiCheckCtrlBufferCore(RFLiCtrlBuf* buf, u16 index, RFLiHiddenType type) {
+BOOL RFLiCheckCtrlBufferCore(const RFLiCtrlBuf* buf, u8 index,
+                             RFLiHiddenType type) {
     u16 mask;
 
     mask = 1 << index;
@@ -71,7 +71,7 @@ BOOL RFLiCheckCtrlBufferCore(RFLiCtrlBuf* buf, u16 index, RFLiHiddenType type) {
     return RFLiIsValidID(&buf->data[index].createID);
 }
 
-static void checkValidate_(RFLiCtrlBuf* buf, s32 chan) {
+static void validBufferFound_(RFLiCtrlBuf* buf, s32 chan) {
     RFLiCtrlBufManager* mgr;
     RFLiCharInfo info;
     int i;
@@ -119,8 +119,8 @@ static BOOL errorAndReRead_(s32 chan) {
     retried = FALSE;
 
     if (++mgr->retry < READ_RETRY_MAX) {
-        reason = WPADReadGameData(chan, mgr->tempBuffer,
-                                  sizeof(RFLiCtrlBuf) * REPLACE_BUF_NUM,
+        reason = WPADReadFaceData(chan, mgr->tempBuffer,
+                                  sizeof(RFLiCtrlBuf) * RFLi_CTRL_REPLACE_BUF_NUM,
                                   DB_REMOTE_MEM_ADDR, readcallback_);
         if (reason != WPAD_RESULT_SUCCESS) {
             RFLiEndWorkingReason(RFLErrcode_Controllerfail, reason);
@@ -179,7 +179,7 @@ static void readcallback_(s32 chan, s32 result) {
         }
 
         if (validBuf != NULL) {
-            checkValidate_(validBuf, chan);
+            validBufferFound_(validBuf, chan);
         } else if (!errorAndReRead_(chan)) {
             RFLiFree(mgr->tempBuffer);
             mgr->tempBuffer = NULL;
@@ -219,13 +219,13 @@ static void readbuffer_(s32 chan, RFLiCtrlBuf* dst, BOOL ch) {
         return;
     }
 
-    buf = RFLiAlloc32(sizeof(RFLiCtrlBuf) * REPLACE_BUF_NUM);
+    buf = RFLiAlloc32(sizeof(RFLiCtrlBuf) * RFLi_CTRL_REPLACE_BUF_NUM);
     mgr->tempBuffer = buf;
     mgr->readBuffer = dst;
     mgr->readIsChMode = ch;
     mgr->retry = FALSE;
 
-    reason = WPADReadGameData(chan, buf, sizeof(RFLiCtrlBuf) * REPLACE_BUF_NUM,
+    reason = WPADReadFaceData(chan, buf, sizeof(RFLiCtrlBuf) * RFLi_CTRL_REPLACE_BUF_NUM,
                               DB_REMOTE_MEM_ADDR, readcallback_);
     if (reason != WPAD_RESULT_SUCCESS) {
         RFLiFree(mgr->tempBuffer);

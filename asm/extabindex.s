@@ -856,19 +856,19 @@ _index_RFLiInitHiddenDatabase:
 
 .global _index_loadclosecallback_
 _index_loadclosecallback_:
-    .long loadclosecallback_
+    .long 0x8017179C
     .long 0x00000038
     .long _unwind_loadclosecallback_
 
 .global _index_loadcallback_
 _index_loadcallback_:
-    .long loadcallback_
+    .long 0x801717D4
     .long 0x000000d4
     .long _unwind_loadcallback_
 
 .global _index_loadopencallback_
 _index_loadopencallback_:
-    .long loadopencallback_
+    .long 0x801718A8
     .long 0x000000bc
     .long _unwind_loadopencallback_
 
@@ -884,41 +884,41 @@ _index_RFLiLoadCachedHiddenData:
     .long 0x00000140
     .long _unwind_RFLiLoadCachedHiddenData
 
-.global _index_func_80171B68
-_index_func_80171B68:
-    .long func_80171B68
+.global _index_overwrite_
+_index_overwrite_:
+    .long 0x80171B68
     .long 0x000000e4
-    .long _unwind_func_80171B68
+    .long _unwind_overwrite_
 
-.global _index_func_80171C4C
-_index_func_80171C4C:
-    .long func_80171C4C
+.global _index_create_
+_index_create_:
+    .long 0x80171C4C
     .long 0x000000f8
-    .long _unwind_func_80171C4C
+    .long _unwind_create_
 
-.global _index_lbl_80171D44
-_index_lbl_80171D44:
-    .long lbl_80171D44
+.global _index_writeHeader_
+_index_writeHeader_:
+    .long 0x80171D44
     .long 0x00000028
-    .long _unwind_lbl_80171D44
+    .long _unwind_writeHeader_
 
-.global _index_lbl_80171D6C
-_index_lbl_80171D6C:
-    .long lbl_80171D6C
+.global _index_writeCallback_
+_index_writeCallback_:
+    .long 0x80171D6C
     .long 0x00000100
-    .long _unwind_lbl_80171D6C
+    .long _unwind_writeCallback_
 
-.global _index_func_80171E6C
-_index_func_80171E6C:
-    .long func_80171E6C
+.global _index_writeData_
+_index_writeData_:
+    .long 0x80171E6C
     .long 0x00000140
-    .long _unwind_func_80171E6C
+    .long _unwind_writeData_
 
-.global _index_lbl_80171FAC
-_index_lbl_80171FAC:
-    .long lbl_80171FAC
+.global _index_openForWriteCallback_
+_index_openForWriteCallback_:
+    .long 0x80171FAC
     .long 0x00000070
-    .long _unwind_lbl_80171FAC
+    .long _unwind_openForWriteCallback_
 
 .global _index_RFLiWriteCtrlToHiddenDB
 _index_RFLiWriteCtrlToHiddenDB:

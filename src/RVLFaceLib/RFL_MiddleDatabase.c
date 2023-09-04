@@ -67,7 +67,7 @@ void RFLInitMiddleDB(RFLMiddleDB* db, RFLMiddleDBType type, void* buffer,
     case RFLMiddleDBType_HiddenOlder:
         nparam = (HiddenNewOldParam*)&idb->userData1;
 
-        if (size > RFL_HDB_DATA_MAX) {
+        if (size > RFLi_HDB_DATA_MAX) {
             return;
         }
 
@@ -258,7 +258,7 @@ static void loadHiddenRandomSync_(RFLiMiddleDB* db) {
             hparam->dstIdx++;
 
             if (src > 0 && hparam->dstIdx < db->size) {
-                if (src >= RFL_HDB_DATA_MAX) {
+                if (src >= RFLi_HDB_DATA_MAX) {
                     running = FALSE;
                 }
             } else {
@@ -292,7 +292,7 @@ static void updateHDBRandcallback_(u32 arg) {
         src = (u32*)&db->data[hparam->dstIdx];
 
         if (*src > 0 && hparam->dstIdx < db->size) {
-            if (*src < RFL_HDB_DATA_MAX) {
+            if (*src < RFLi_HDB_DATA_MAX) {
                 u16 srcIdx = *src - 1;
                 RFLErrcode err =
                     RFLiLoadHiddenDataAsync(&db->data[db->storedSize], srcIdx,
@@ -361,7 +361,7 @@ static void updateHiddenRandom_(RFLiMiddleDB* db, BOOL cache) {
     }
 
     aidx = 0;
-    for (i = 0; i < RFL_HDB_DATA_MAX; i++) {
+    for (i = 0; i < RFLi_HDB_DATA_MAX; i++) {
         if (RFLiIsValidHiddenData(i, sex)) {
             array[aidx++] = i;
         }

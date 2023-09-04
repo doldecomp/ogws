@@ -749,33 +749,33 @@ _unwind_RFLiLoadCachedHiddenData:
     .long 0x20080000
     .long 0x00000000
 
-.global _unwind_func_80171B68
-_unwind_func_80171B68:
+.global _unwind_overwrite_
+_unwind_overwrite_:
     .long 0x40080000
     .long 0x00000000
 
-.global _unwind_func_80171C4C
-_unwind_func_80171C4C:
+.global _unwind_create_
+_unwind_create_:
     .long 0x20080000
     .long 0x00000000
 
-.global _unwind_lbl_80171D44
-_unwind_lbl_80171D44:
+.global _unwind_writeHeader_
+_unwind_writeHeader_:
     .long 0x00080000
     .long 0x00000000
 
-.global _unwind_lbl_80171D6C
-_unwind_lbl_80171D6C:
+.global _unwind_writeCallback_
+_unwind_writeCallback_:
     .long 0x10080000
     .long 0x00000000
 
-.global _unwind_func_80171E6C
-_unwind_func_80171E6C:
+.global _unwind_writeData_
+_unwind_writeData_:
     .long 0x30080000
     .long 0x00000000
 
-.global _unwind_lbl_80171FAC
-_unwind_lbl_80171FAC:
+.global _unwind_openForWriteCallback_
+_unwind_openForWriteCallback_:
     .long 0x10080000
     .long 0x00000000
 
