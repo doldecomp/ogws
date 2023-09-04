@@ -67,6 +67,19 @@ extern "C" {
 #define RFLi_CREATE_ID_TEMPORARY 0x20000000
 #define RFLi_CREATE_ID_NOT_SPECIAL 0x80000000
 
+/**
+ * Tables
+ */
+
+static const u8 RFLi_EYE_ROT_OFFSET[50] = {
+    29, 28, 28, 28, 29, 28, 28, 28, 29, 28, 28, 28, 28, 29, 29, 28, 28,
+    28, 29, 29, 28, 29, 28, 29, 29, 28, 29, 28, 28, 29, 28, 28, 28, 29,
+    29, 29, 28, 28, 29, 29, 29, 28, 28, 29, 29, 29, 29, 29, 28, 28};
+
+static const u8 RFLi_EYEBROW_ROT_OFFSET[24] = {26, 26, 27, 25, 26, 25, 26, 25,
+                                               28, 25, 26, 24, 27, 27, 26, 26,
+                                               25, 25, 26, 26, 27, 26, 25, 27};
+
 #ifdef __cplusplus
 }
 #endif
