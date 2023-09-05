@@ -86,21 +86,30 @@ static const GXColor cFavoriteColor[RFLFavoriteColor_Max] = {
 
 static const GXColor cWhite = {255, 255, 255, 255};
 
-#ifdef __DECOMP_NON_MATCHING
 void RFLSetCoordinate(RFLCoordinateType u, RFLCoordinateType f) {
     RFLCoordinateType r;
-    u8 bu[3];
-    u8 bf[3];
-    u8 br[3];
 
-    *((RFLCoordinateType*)bu) = u;
-    *((RFLCoordinateType*)bf) = f;
+    union {
+        RFLCoordinateType c;
+        u8 b[4];
+    } uu;
+    union {
+        RFLCoordinateType c;
+        u8 b[4];
+    } uf;
+    union {
+        RFLCoordinateType c;
+        u8 b[4];
+    } ur;
 
-    br[0] = (bu[2] * bf[1]) - (bu[1] * bf[2]);
-    br[1] = (bu[0] * bf[2]) - (bu[2] * bf[0]);
-    br[2] = (bu[1] * bf[0]) - (bu[0] * bf[1]);
+    uu.c = u;
+    uf.c = f;
 
-    r = *((RFLCoordinateType*)br);
+    ur.b[0] = (uu.b[1] * uf.b[2]) - (uu.b[2] * uf.b[1]);
+    ur.b[1] = (uu.b[2] * uf.b[0]) - (uu.b[0] * uf.b[2]);
+    ur.b[2] = (uu.b[0] * uf.b[1]) - (uu.b[1] * uf.b[0]);
+
+    r = ur.c;
 
     if (u & RFLCoordinateType_X) {
         coordinateData.uOff = 0; // U -> X
@@ -130,9 +139,6 @@ void RFLSetCoordinate(RFLCoordinateType u, RFLCoordinateType f) {
     coordinateData.fRev = (f & RFLCoordinateType_RevMask) != 0;
     coordinateData.rRev = (r & RFLCoordinateType_RevMask) != 0;
 }
-#else
-#error This file has not yet been decompiled accurately. Use "RFL_Model.s" instead.
-#endif
 
 u32 RFLiGetExpressionNum(u32 exprFlags) {
     int i;
