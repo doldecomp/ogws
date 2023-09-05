@@ -25,56 +25,7 @@ lbl_803810E0:
 	.incbin "baserom.dol", 0x37D1E0, 0x20
 
 .section .sdata2, "a"
-.balign 0x8
-.global lbl_804C1408
-lbl_804C1408:
-	.incbin "baserom.dol", 0x3CA048, 0x1
-.global lbl_804C1409
-lbl_804C1409:
-	.incbin "baserom.dol", 0x3CA049, 0x1
-.global lbl_804C140A
-lbl_804C140A:
-	.incbin "baserom.dol", 0x3CA04A, 0x1
-.global lbl_804C140B
-lbl_804C140B:
-	.incbin "baserom.dol", 0x3CA04B, 0x1
-.global lbl_804C140C
-lbl_804C140C:
-	.incbin "baserom.dol", 0x3CA04C, 0x4
-.global lbl_804C1410
-lbl_804C1410:
-	.incbin "baserom.dol", 0x3CA050, 0x4
-.global lbl_804C1414
-lbl_804C1414:
-	.incbin "baserom.dol", 0x3CA054, 0x4
-.global lbl_804C1418
-lbl_804C1418:
-	.incbin "baserom.dol", 0x3CA058, 0x4
-.global lbl_804C141C
-lbl_804C141C:
-	.incbin "baserom.dol", 0x3CA05C, 0x4
-.global lbl_804C1420
-lbl_804C1420:
-	.incbin "baserom.dol", 0x3CA060, 0x4
-.global lbl_804C1424
-lbl_804C1424:
-	.incbin "baserom.dol", 0x3CA064, 0x4
-.global lbl_804C1428
-lbl_804C1428:
-	.incbin "baserom.dol", 0x3CA068, 0x4
-.global lbl_804C142C
-lbl_804C142C:
-	.incbin "baserom.dol", 0x3CA06C, 0x4
-.global lbl_804C1430
-lbl_804C1430:
-	.incbin "baserom.dol", 0x3CA070, 0x8
-.global lbl_804C1438
-lbl_804C1438:
-	.incbin "baserom.dol", 0x3CA078, 0x8
-.global lbl_804C1440
-lbl_804C1440:
-	.incbin "baserom.dol", 0x3CA080, 0x8
-	
+.balign 0x8	
 .global lbl_804C1448
 lbl_804C1448:
 	.incbin "baserom.dol", 0x3CA088, 0x1

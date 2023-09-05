@@ -11,6 +11,8 @@
 #define NUM_VTX_TXC(size) ((size) / VTX_TXC_SIZE)
 #define SIZE_VTX_TXC(count) ((count)*VTX_TXC_SIZE)
 
+RFLiCoordinateData coordinateData = {1, 2, 0, FALSE, FALSE, FALSE};
+
 const RFLDrawCoreSetting cDefaultDrawCoreSetting2Tev = {
     1,          GX_TEXCOORD0, GX_TEXMAP0, 2,    GX_TEV_SWAP0,
     GX_KCOLOR0, GX_TEVPREV,   GX_PNMTX0,  FALSE};
@@ -828,24 +830,20 @@ void RFLiInitCharModelRes(RFLiCharModelRes* res, const RFLiCharInfo* info) {
     DCFlushRange(res, sizeof(RFLiCharModelRes));
 }
 
-#ifdef __DECOMP_NON_MATCHING
 void RFLiInitShapeRes(RFLiShapeRes* shape) {
-    // TODO: Keep this from being stripped
     static const u32 csHeader[RFLiPartsShp_Max] = {
         'nose', 'frhd', 'face', 'hair', 'cap_', 'berd', 'nsln', 'mask', 'glas'};
 
     void* res;
     u8* ptr8;
-    BOOL skipTxc;
-    u32 fileSize;
 
-    // Not all shapes have tex coords
-    skipTxc = shape->part == RFLiPartsShp_Forehead ||
-              shape->part == RFLiPartsShp_Hair ||
-              shape->part == RFLiPartsShp_Beard ||
-              shape->part == RFLiPartsShp_Nose;
+    // Not all shapes have texture coordinates
+    BOOL skipTxc = shape->part == RFLiPartsShp_Forehead ||
+                   shape->part == RFLiPartsShp_Hair ||
+                   shape->part == RFLiPartsShp_Beard ||
+                   shape->part == RFLiPartsShp_Nose;
 
-    fileSize = RFLiGetShapeSize(shape->part, shape->file);
+    u32 fileSize = RFLiGetShapeSize(shape->part, shape->file);
     res = RFLiAlloc32(fileSize);
     RFLiLoadShape(shape->part, shape->file, res);
 
@@ -871,7 +869,7 @@ void RFLiInitShapeRes(RFLiShapeRes* shape) {
         shape->numVtxNrm = 0;
         shape->numVtxTxc = 0;
         shape->dlSize = 0;
-        RFLiFree(ptr8);
+        RFLiFree(res);
         return;
     }
 
@@ -879,32 +877,27 @@ void RFLiInitShapeRes(RFLiShapeRes* shape) {
     ptr8 += sizeof(u16);
 
     {
-        u32 byteSize;
-        s16* ptr16;
+        u32 byteSize = SIZE_VTX_POS(shape->numVtxPos);
+        s16* ptr16 = (s16*)ptr8;
         int i;
 
-        ptr16 = (s16*)ptr8;
-        byteSize = SIZE_VTX_POS(shape->numVtxPos);
-
         if (shape->transform) {
-            s32 s, tx, ty, tz;
-
-            s = 256.0f * shape->posScale;
-            tx = 256.0f * shape->posTrans->x;
-            ty = 256.0f * shape->posTrans->y;
-            tz = 256.0f * shape->posTrans->z;
+            s32 s = 256.0f * shape->posScale;
+            s32 tx = 256.0f * shape->posTrans->x;
+            s32 ty = 256.0f * shape->posTrans->y;
+            s32 tz = 256.0f * shape->posTrans->z;
 
             for (i = 0; i < shape->numVtxPos; i++) {
                 s16 temp[3];
 
                 if (shape->flipX) {
-                    temp[0] = ((-ptr16[0] * s) >> 8) + tx;
+                    temp[0] = tx + ((-ptr16[0] * s) >> 8);
                 } else {
-                    temp[0] = ((ptr16[0] * s) >> 8) + tx;
+                    temp[0] = tx + ((ptr16[0] * s) >> 8);
                 }
 
-                temp[1] = ((ptr16[1] * s) >> 8) + ty;
-                temp[2] = ((ptr16[2] * s) >> 8) + tz;
+                temp[1] = ty + ((ptr16[1] * s) >> 8);
+                temp[2] = tz + ((ptr16[2] * s) >> 8);
 
                 RFLiTransformCoordinate(
                     &shape->vtxPosBuf[i * VTX_COORDS_IN_POS], temp);
@@ -942,14 +935,11 @@ void RFLiInitShapeRes(RFLiShapeRes* shape) {
     ptr8 += sizeof(u16);
 
     {
-        int i;
-        u32 byteSize;
-        s16* ptr16;
-
-        ptr16 = (s16*)ptr8;
-        byteSize = SIZE_VTX_NRM(shape->numVtxNrm);
+        s16* ptr16 = (s16*)ptr8;
+        u32 byteSize = SIZE_VTX_NRM(shape->numVtxNrm);
 
         if (shape->flipX != 0) {
+            int i;
             for (i = 0; i < shape->numVtxNrm; i++) {
                 s16 temp[3];
 
@@ -962,6 +952,7 @@ void RFLiInitShapeRes(RFLiShapeRes* shape) {
                 ptr16 += VTX_COORDS_IN_NRM;
             }
         } else {
+            int i;
             for (i = 0; i < shape->numVtxNrm; i++) {
                 RFLiTransformCoordinate(
                     &shape->vtxNrmBuf[i * VTX_COORDS_IN_NRM], ptr16);
@@ -997,21 +988,15 @@ void RFLiInitShapeRes(RFLiShapeRes* shape) {
 
     {
         int i;
-        s32 primitiveNum;
-
-        primitiveNum = *ptr8;
-        ptr8 += sizeof(u8);
+        int j;
+        s32 primitiveNum = *ptr8++;
 
         DCInvalidateRange(shape->dlBuf, shape->dlBufSize);
         GXBeginDisplayList(shape->dlBuf, shape->dlBufSize);
 
         for (i = 0; i < primitiveNum; i++) {
-            int j;
-            u16 vtxNum;
-            GXPrimitive prim;
-
-            vtxNum = *ptr8++;
-            prim = (GXPrimitive)*ptr8++;
+            u16 vtxNum = *ptr8++;
+            GXPrimitive prim = *ptr8++;
 
             GXBegin(prim, 0, vtxNum);
             {
@@ -1029,11 +1014,8 @@ void RFLiInitShapeRes(RFLiShapeRes* shape) {
     }
 
     shape->dlSize = GXEndDisplayList();
-    RFLiFree(ptr8);
+    RFLiFree(res);
 }
-#else
-#error This file has not yet been decompiled accurately. Use "RFL_Model.s" instead.
-#endif
 
 void RFLiInitTexRes(GXTexObj* texObj, RFLiPartsShpTex part, u16 file,
                     void* buffer) {
