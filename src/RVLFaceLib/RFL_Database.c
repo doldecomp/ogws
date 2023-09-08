@@ -472,7 +472,7 @@ BOOL RFLIsAvailableOfficialData(u16 index) {
 
 void RFLiSetTemporaryID(RFLiCharInfo* info) {
     u32* dst = (u32*)&info->createID.data;
-    dst[0] = RFLi_CREATE_ID_TEMPORARY;
+    dst[0] = RFLi_CREATE_ID_MASK_TEMPORARY;
     dst[1] = 0;
 }
 
@@ -540,7 +540,7 @@ BOOL RFLiIsSpecialID(const RFLCreateID* id) {
         return FALSE;
     }
 
-    return (*ptr & RFLi_CREATE_ID_NOT_SPECIAL) == 0 ? TRUE : FALSE;
+    return (*ptr & RFLi_CREATE_ID_MASK_NOT_SPECIAL) == 0 ? TRUE : FALSE;
 }
 
 BOOL RFLiIsTemporaryID(const RFLCreateID* id) {
@@ -554,7 +554,7 @@ BOOL RFLiIsTemporaryID(const RFLCreateID* id) {
         return FALSE;
     }
 
-    return (*ptr & RFLi_CREATE_ID_TEMPORARY) != 0 ? TRUE : FALSE;
+    return (*ptr & RFLi_CREATE_ID_MASK_TEMPORARY) != 0 ? TRUE : FALSE;
 }
 
 BOOL RFLSearchOfficialData(const RFLCreateID* id, u16* index) {

@@ -6,7 +6,7 @@
 extern "C" {
 #endif
 
-void RFLSetIconDrawDoneCallback(RFLIconDrawDoneCallback callback);
+void RFLSetIconDrawDoneCallback(RFLCallback callback);
 
 #ifdef __cplusplus
 }

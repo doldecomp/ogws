@@ -248,11 +248,11 @@ void RFLiInitCharModel(RFLCharModel* model, RFLiCharInfo* info, void* work,
 
             if (mipmap) {
                 GXInitTexObjLOD(imodel->maskTexObj[i], GX_LIN_MIP_LIN,
-                                GX_LINEAR, 0.0f, maxLod, 0.0f, 0, 0,
+                                GX_LINEAR, 0.0f, maxLod, 0.0f, FALSE, FALSE,
                                 GX_ANISO_1);
             } else {
                 GXInitTexObjLOD(imodel->maskTexObj[i], GX_LINEAR, GX_LINEAR,
-                                0.0f, 0.0f, 0.0f, 0, 0, GX_ANISO_1);
+                                0.0f, 0.0f, 0.0f, FALSE, FALSE, GX_ANISO_1);
             }
 
             if (!setExpr) {
@@ -391,7 +391,7 @@ void RFLDrawOpaCore(const RFLCharModel* model,
     GXLoadNrmMtxImm(imodel->nrmMtx, setting->posNrmMtxID);
     GXSetCurrentMtx(setting->posNrmMtxID);
 
-    GXSetTexCoordGen(setting->txcID, GX_TG_MTX2x4, GX_TG_POS, 0x3C);
+    GXSetTexCoordGen(setting->txcID, GX_TG_MTX2x4, GX_TG_POS, GX_TEXMTX_IDENT);
     GXSetVtxDesc(GX_VA_TEX0, GX_VA_PNMTXIDX);
     GXSetTevOrder(GX_TEVSTAGE0, GX_TEXCOORD_NULL, GX_TEXMAP_NULL,
                   GX_COLOR_NULL);
@@ -432,7 +432,7 @@ void RFLDrawOpaCore(const RFLCharModel* model,
 
     GXSetTevOrder(GX_TEVSTAGE0, setting->txcID, setting->texMapID,
                   GX_COLOR_NULL);
-    GXSetTexCoordGen(setting->txcID, GX_TG_MTX2x4, GX_TG_TEX0, 0x3C);
+    GXSetTexCoordGen(setting->txcID, GX_TG_MTX2x4, GX_TG_TEX0, GX_TEXMTX_IDENT);
     GXSetVtxDesc(GX_VA_TEX0, GX_VA_TEX1MTXIDX);
 
     if (res->capDlSize > 0) {
@@ -486,7 +486,7 @@ void RFLDrawXluCore(const RFLCharModel* model,
     GXLoadNrmMtxImm(imodel->nrmMtx, setting->posNrmMtxID);
     GXSetCurrentMtx(setting->posNrmMtxID);
 
-    GXSetTexCoordGen(setting->txcID, GX_TG_MTX2x4, GX_TG_TEX0, 0x3C);
+    GXSetTexCoordGen(setting->txcID, GX_TG_MTX2x4, GX_TG_TEX0, GX_TEXMTX_IDENT);
     GXSetTevColorIn(GX_TEVSTAGE0, GX_CC_ZERO, GX_CC_ZERO, GX_CC_ZERO,
                     GX_CC_TEXC);
     GXSetCullMode(setting->reverseCulling ? GX_CULL_FRONT : GX_CULL_BACK);
@@ -1040,9 +1040,9 @@ void RFLiInitTexRes(GXTexObj* texObj, RFLiPartsShpTex part, u16 file,
 
     memcpy(buffer, RFLiGetTexImage(tex), texSize);
     GXInitTexObj(texObj, buffer, tex->width, tex->height, tex->format,
-                 tex->wrapS, tex->wrapT, 0);
-    GXInitTexObjLOD(texObj, GX_LINEAR, GX_LINEAR, 0.0f, 0.0f, 0.0f, 0, 0,
-                    GX_ANISO_1);
+                 tex->wrapS, tex->wrapT, FALSE);
+    GXInitTexObjLOD(texObj, GX_LINEAR, GX_LINEAR, 0.0f, 0.0f, 0.0f, FALSE,
+                    FALSE, GX_ANISO_1);
     RFLiFree(tex);
 }
 

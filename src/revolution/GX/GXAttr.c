@@ -680,7 +680,7 @@ void GXSetTexCoordGen2(GXTexCoordID id, GXTexGenType type, GXTexGenSrc src,
     gxdt->gxDirtyFlags |= GX_DIRTY_TEX0 << id;
 
     reg = 0;
-    GX_XF_SET_DUALTEX_BASEROW(reg, dualTexMtxIdx - GX_DTEXMTX0);
+    GX_XF_SET_DUALTEX_BASEROW(reg, dualTexMtxIdx - GX_DUALMTX0);
     GX_XF_SET_DUALTEX_NORMALIZE(reg, normalize);
     gxdt->dualTexRegs[id] = reg;
 

@@ -26,10 +26,16 @@ extern GXRenderModeObj GXPal528IntDf;
 extern GXRenderModeObj GXEurgb60Hz480IntDf;
 extern GXRenderModeObj GXMpal480IntDf;
 
+void GXSetTexCopySrc(u16 x, u16 y, u16 w, u16 h);
+void GXSetTexCopyDst(u16 w, u16 h, GXTexFmt fmt, GXBool mipmap);
+
+void GXSetCopyClamp(GXCopyClamp clamp);
+
 void GXSetCopyClear(GXColor color, u32 z);
 void GXSetCopyFilter(GXBool, u8 sample_pattern[12][2], GXBool, u8 vfilter[7]);
 
-void GXCopyDisp(u8*, GXBool);
+void GXCopyDisp(void*, GXBool);
+void GXCopyTex(void*, GXBool);
 
 #ifdef __cplusplus
 }

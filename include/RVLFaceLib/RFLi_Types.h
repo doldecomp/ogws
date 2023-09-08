@@ -89,13 +89,6 @@ typedef enum {
 } RFLiHiddenType;
 
 typedef enum {
-    RFLi_MASKRSL_32 = 32,
-    RFLi_MASKRSL_64 = 64,
-    RFLi_MASKRSL_128 = 128,
-    RFLi_MASKRSL_256 = 256
-} RFLi_MASKRSL;
-
-typedef enum {
     RFLiOpenType_Multi,
     RFLiOpenType_Single,
     RFLiOpenType_Opened

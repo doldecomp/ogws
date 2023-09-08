@@ -14,6 +14,7 @@ void GXResetWriteGatherPipe(void);
 void GXAbortFrame(void);
 
 void GXDrawDone(void);
+void GXPixModeSync(void);
 
 GXDrawDoneCallback GXSetDrawDoneCallback(GXDrawDoneCallback);
 

@@ -1,5 +1,5 @@
 #include <RVLFaceLib/RVLFaceLibInternal.h>
 
-void RFLSetIconDrawDoneCallback(RFLIconDrawDoneCallback callback) {
+void RFLSetIconDrawDoneCallback(RFLCallback callback) {
     RFLiGetManager()->iconDrawCb = callback;
 }

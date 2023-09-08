@@ -105,13 +105,15 @@ typedef enum {
 } RFLRace;
 
 typedef enum {
+    // No mipmap
     RFLResolution_64 = 64,
     RFLResolution_128 = 128,
     RFLResolution_256 = 256,
 
-    RFLResolution_64M = 96,
-    RFLResolution_128M = 224,
-    RFLResolution_256M = 480
+    // Mipmap
+    RFLResolution_64M = 64 | 32,
+    RFLResolution_128M = 128 | 64 | 32,
+    RFLResolution_256M = 256 | 128 | 64 | 32
 } RFLResolution;
 
 typedef enum { RFLSex_Male, RFLSex_Female, RFLSex_All } RFLSex;
@@ -120,8 +122,7 @@ typedef enum { RFLSex_Male, RFLSex_Female, RFLSex_All } RFLSex;
  * Common typedefs
  */
 
-typedef void (*RFLIconDrawDoneCallback)(void);
-typedef void (*RFLModelDrawDoneCallback)(void);
+typedef void (*RFLCallback)(void);
 
 /**
  * Common structs
