@@ -12,7 +12,7 @@
 
 OSExecParams __OSRebootParams;
 static DVDDriveInfo DriveInfo ALIGN(32);
-static DVDDriveBlock DriveBlock;
+static DVDCommandBlock DriveBlock;
 
 s64 __OSStartTime;
 static OSBootInfo* BootInfo;
@@ -323,9 +323,9 @@ static void ClearMEM2Arena(void) DONT_INLINE {
     }
 }
 
-static void InquiryCallback(s32 arg0, DVDDriveBlock* block) {
+static void InquiryCallback(s32 arg0, DVDCommandBlock* block) {
 #pragma unused(arg0)
-    switch (block->WORD_0xC) {
+    switch (block->state) {
     case 0:
         OS_DVD_DEVICE_CODE_ADDR = DriveInfo.deviceCode | 0x8000;
         break;
