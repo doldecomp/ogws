@@ -12,6 +12,13 @@ typedef struct DVDFileInfo;
 typedef struct OSAlarm;
 
 typedef enum {
+    DVD_RESULT_M3 = -3,
+    DVD_RESULT_M2,
+    DVD_RESULT_M1,
+    DVD_RESULT_0,
+} DVDResult;
+
+typedef enum {
     DVD_CMD_NONE,
     DVD_CMD_READ,
     DVD_CMD_SEEK,
@@ -28,21 +35,22 @@ typedef enum {
     DVD_CMD_AUDIO_BUFFER_CONFIG,
     DVD_CMD_INQUIRY,
     DVD_CMD_BS_CHANGE_DISK
-} DVDAsyncCommand;
+} DVDCommand;
 
 typedef enum {
-    DVD_STATE_0,
-    DVD_STATE_1,
-    DVD_STATE_WAITING,
-    DVD_STATE_3,
-    DVD_STATE_4,
-    DVD_STATE_5,
-    DVD_STATE_6,
-    DVD_STATE_7,
-    DVD_STATE_8,
-    DVD_STATE_9,
-    DVD_STATE_CANCELED,
-} DVDAsyncState;
+    DVD_STATUS_M1 = -1,
+    DVD_STATUS_0,
+    DVD_STATUS_1,
+    DVD_STATUS_WAITING,
+    DVD_STATUS_3,
+    DVD_STATUS_4,
+    DVD_STATUS_5,
+    DVD_STATUS_6,
+    DVD_STATUS_7,
+    DVD_STATUS_8,
+    DVD_STATUS_9,
+    DVD_STATUS_CANCELED,
+} DVDStatus;
 
 typedef void (*DVDAsyncCallback)(s32 result, struct DVDFileInfo* info);
 typedef void (*DVDCommandCallback)(s32 result, struct DVDCommandBlock* block);

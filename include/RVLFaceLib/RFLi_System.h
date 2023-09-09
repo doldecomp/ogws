@@ -31,8 +31,8 @@ typedef struct RFLiManager {
     s32 beforeCloseReason;                 // at 0x1B4C
     RFLiAccessInfo info[RFLiFileType_Max]; // at 0x1B50
     RFLiCallback systemCb;                 // at 0x1F10
-    RFLCallback iconDrawCb;    // at 0x1F14
-    RFLCallback modelDrawCb;  // at 0x1F18
+    RFLCallback iconDrawCb;                // at 0x1F14
+    RFLCallback modelDrawCb;               // at 0x1F18
     char UNK_0x1F1C[0x4];
 } RFLiManager;
 

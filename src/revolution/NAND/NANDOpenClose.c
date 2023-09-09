@@ -3,15 +3,14 @@
 #include <stdio.h>
 
 static void nandOpenCallback(s32 result, void* arg);
-static NANDResult nandSafeOpenAsync(const char* path, NANDFileInfo* info,
-                                    u8 access, void* buffer, u32 bufferSize,
-                                    NANDAsyncCallback callback,
-                                    NANDCommandBlock* block, BOOL priv);
+static s32 nandSafeOpenAsync(const char* path, NANDFileInfo* info, u8 access,
+                             void* buffer, u32 bufferSize,
+                             NANDAsyncCallback callback,
+                             NANDCommandBlock* block, BOOL priv);
 static void nandSafeOpenCallback(s32 result, void* arg);
 static void nandReadOpenCallback(s32 result, void* arg);
-static NANDResult nandSafeCloseAsync(NANDFileInfo* info,
-                                     NANDAsyncCallback callback,
-                                     NANDCommandBlock* block);
+static s32 nandSafeCloseAsync(NANDFileInfo* info, NANDAsyncCallback callback,
+                              NANDCommandBlock* block);
 static void nandSafeCloseCallback(s32 result, void* arg);
 static void nandReadCloseCallback(s32 result, void* arg);
 static void nandCloseCallback(s32 result, void* arg);
@@ -49,7 +48,7 @@ static s32 nandOpen(const char* path, u8 mode, NANDCommandBlock* block,
     }
 }
 
-NANDResult NANDOpen(const char* path, NANDFileInfo* info, u8 mode) {
+s32 NANDOpen(const char* path, NANDFileInfo* info, u8 mode) {
     s32 result;
 
     if (!nandIsInitialized()) {
@@ -66,7 +65,7 @@ NANDResult NANDOpen(const char* path, NANDFileInfo* info, u8 mode) {
     return nandConvertErrorCode(result);
 }
 
-NANDResult NANDPrivateOpen(const char* path, NANDFileInfo* info, u8 mode) {
+s32 NANDPrivateOpen(const char* path, NANDFileInfo* info, u8 mode) {
     s32 result;
 
     if (!nandIsInitialized()) {
@@ -83,8 +82,8 @@ NANDResult NANDPrivateOpen(const char* path, NANDFileInfo* info, u8 mode) {
     return nandConvertErrorCode(result);
 }
 
-NANDResult NANDOpenAsync(const char* path, NANDFileInfo* info, u8 mode,
-                         NANDAsyncCallback callback, NANDCommandBlock* block) {
+s32 NANDOpenAsync(const char* path, NANDFileInfo* info, u8 mode,
+                  NANDAsyncCallback callback, NANDCommandBlock* block) {
     if (!nandIsInitialized()) {
         return NAND_RESULT_FATAL_ERROR;
     }
@@ -94,9 +93,8 @@ NANDResult NANDOpenAsync(const char* path, NANDFileInfo* info, u8 mode,
     return nandConvertErrorCode(nandOpen(path, mode, block, TRUE, FALSE));
 }
 
-NANDResult NANDPrivateOpenAsync(const char* path, NANDFileInfo* info, u8 mode,
-                                NANDAsyncCallback callback,
-                                NANDCommandBlock* block) {
+s32 NANDPrivateOpenAsync(const char* path, NANDFileInfo* info, u8 mode,
+                         NANDAsyncCallback callback, NANDCommandBlock* block) {
     if (!nandIsInitialized()) {
         return NAND_RESULT_FATAL_ERROR;
     }
@@ -119,7 +117,7 @@ static void nandOpenCallback(s32 result, void* arg) {
     }
 }
 
-NANDResult NANDClose(NANDFileInfo* info) {
+s32 NANDClose(NANDFileInfo* info) {
     s32 result;
 
     if (!nandIsInitialized()) {
@@ -138,8 +136,8 @@ NANDResult NANDClose(NANDFileInfo* info) {
     return nandConvertErrorCode(result);
 }
 
-NANDResult NANDCloseAsync(NANDFileInfo* info, NANDAsyncCallback callback,
-                          NANDCommandBlock* block) {
+s32 NANDCloseAsync(NANDFileInfo* info, NANDAsyncCallback callback,
+                   NANDCommandBlock* block) {
     if (!nandIsInitialized()) {
         return NAND_RESULT_FATAL_ERROR;
     }
@@ -154,18 +152,18 @@ NANDResult NANDCloseAsync(NANDFileInfo* info, NANDAsyncCallback callback,
         ISFS_CloseAsync(info->fd, nandCloseCallback, block));
 }
 
-NANDResult NANDPrivateSafeOpenAsync(const char* path, NANDFileInfo* info,
-                                    u8 access, void* buffer, u32 bufferSize,
-                                    NANDAsyncCallback callback,
-                                    NANDCommandBlock* block) {
+s32 NANDPrivateSafeOpenAsync(const char* path, NANDFileInfo* info, u8 access,
+                             void* buffer, u32 bufferSize,
+                             NANDAsyncCallback callback,
+                             NANDCommandBlock* block) {
     return nandSafeOpenAsync(path, info, access, buffer, bufferSize, callback,
                              block, TRUE);
 }
 
-static NANDResult nandSafeOpenAsync(const char* path, NANDFileInfo* info,
-                                    u8 access, void* buffer, u32 bufferSize,
-                                    NANDAsyncCallback callback,
-                                    NANDCommandBlock* block, BOOL priv) {
+static s32 nandSafeOpenAsync(const char* path, NANDFileInfo* info, u8 access,
+                             void* buffer, u32 bufferSize,
+                             NANDAsyncCallback callback,
+                             NANDCommandBlock* block, BOOL priv) {
     s32 result;
 
     if (!nandIsInitialized()) {
@@ -312,16 +310,16 @@ static void nandReadOpenCallback(s32 result, void* arg) {
     }
 }
 
-NANDResult NANDSafeCloseAsync(NANDFileInfo* info, NANDAsyncCallback callback,
-                              NANDCommandBlock* block) {
+s32 NANDSafeCloseAsync(NANDFileInfo* info, NANDAsyncCallback callback,
+                       NANDCommandBlock* block) {
     return nandSafeCloseAsync(info, callback, block);
 }
 
 // Not actually weak/inline, but IPA seems to
 // not be aggressive enough to auto inline this.
-static inline NANDResult nandSafeCloseAsync(NANDFileInfo* info,
-                                            NANDAsyncCallback callback,
-                                            NANDCommandBlock* block) {
+static inline s32 nandSafeCloseAsync(NANDFileInfo* info,
+                                     NANDAsyncCallback callback,
+                                     NANDCommandBlock* block) {
     s32 result;
 
     if (!nandIsInitialized()) {

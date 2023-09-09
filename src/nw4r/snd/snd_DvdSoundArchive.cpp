@@ -107,7 +107,7 @@ namespace nw4r
 
 			static const u32 headerAlignSize = RoundUp<u32>(sizeof(SoundArchiveFile::Header), 32);
 			void * alignedHeader = RoundUp<u8 *>(unalignedHeader, 32);
-			u32 bytesRead = DVDReadPrio(&mFileInfo, alignedHeader, headerAlignSize, 0, 2);
+			u32 bytesRead = DVDReadPrio(&mFileInfo, alignedHeader, headerAlignSize, 0, DVD_QUEUE_PRIO_MEDIUM);
 			
 			if (bytesRead != headerAlignSize) return false;
 			
@@ -124,7 +124,7 @@ namespace nw4r
 			
 			if (bufferSize < infoChunkSize) return false;
 			
-			u32 bytesRead = DVDReadPrio(&mFileInfo, pBuffer, infoChunkSize, infoChunkOffset, 2);
+			u32 bytesRead = DVDReadPrio(&mFileInfo, pBuffer, infoChunkSize, infoChunkOffset, DVD_QUEUE_PRIO_MEDIUM);
 			
 			if (bytesRead != infoChunkSize) return false;
 			
@@ -140,7 +140,7 @@ namespace nw4r
 			
 			if (bufferSize < labelStringChunkSize) return false;
 			
-			u32 bytesRead = DVDReadPrio(&mFileInfo, pBuffer, labelStringChunkSize, labelStringChunkOffset, 2);
+			u32 bytesRead = DVDReadPrio(&mFileInfo, pBuffer, labelStringChunkSize, labelStringChunkOffset, DVD_QUEUE_PRIO_MEDIUM);
 			
 			if (bytesRead != labelStringChunkSize) return false;
 			

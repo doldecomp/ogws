@@ -40,7 +40,7 @@ static s32 nandCreate(const char* path, u8 perm, u8 attr,
     }
 }
 
-NANDResult NANDCreate(const char* path, u8 perm, u8 attr) {
+s32 NANDCreate(const char* path, u8 perm, u8 attr) {
     if (!nandIsInitialized()) {
         return NAND_RESULT_FATAL_ERROR;
     }
@@ -49,7 +49,7 @@ NANDResult NANDCreate(const char* path, u8 perm, u8 attr) {
         nandCreate(path, perm, attr, NULL, FALSE, FALSE));
 }
 
-NANDResult NANDPrivateCreate(const char* path, u8 perm, u8 attr) {
+s32 NANDPrivateCreate(const char* path, u8 perm, u8 attr) {
     if (!nandIsInitialized()) {
         return NAND_RESULT_FATAL_ERROR;
     }
@@ -58,9 +58,9 @@ NANDResult NANDPrivateCreate(const char* path, u8 perm, u8 attr) {
         nandCreate(path, perm, attr, NULL, FALSE, TRUE));
 }
 
-NANDResult NANDPrivateCreateAsync(const char* path, u8 perm, u8 attr,
-                                  NANDAsyncCallback callback,
-                                  NANDCommandBlock* block) {
+s32 NANDPrivateCreateAsync(const char* path, u8 perm, u8 attr,
+                           NANDAsyncCallback callback,
+                           NANDCommandBlock* block) {
     if (!nandIsInitialized()) {
         return NAND_RESULT_FATAL_ERROR;
     }
@@ -88,7 +88,7 @@ static s32 nandDelete(const char* path, NANDCommandBlock* block, BOOL async,
     }
 }
 
-NANDResult NANDDelete(const char* path) {
+s32 NANDDelete(const char* path) {
     if (!nandIsInitialized()) {
         return NAND_RESULT_FATAL_ERROR;
     }
@@ -96,7 +96,7 @@ NANDResult NANDDelete(const char* path) {
     return nandConvertErrorCode(nandDelete(path, NULL, FALSE, FALSE));
 }
 
-NANDResult NANDPrivateDelete(const char* path) {
+s32 NANDPrivateDelete(const char* path) {
     if (!nandIsInitialized()) {
         return NAND_RESULT_FATAL_ERROR;
     }
@@ -104,8 +104,8 @@ NANDResult NANDPrivateDelete(const char* path) {
     return nandConvertErrorCode(nandDelete(path, NULL, FALSE, TRUE));
 }
 
-NANDResult NANDPrivateDeleteAsync(const char* path, NANDAsyncCallback callback,
-                                  NANDCommandBlock* block) {
+s32 NANDPrivateDeleteAsync(const char* path, NANDAsyncCallback callback,
+                           NANDCommandBlock* block) {
     if (!nandIsInitialized()) {
         return NAND_RESULT_FATAL_ERROR;
     }
@@ -114,7 +114,7 @@ NANDResult NANDPrivateDeleteAsync(const char* path, NANDAsyncCallback callback,
     return nandConvertErrorCode(nandDelete(path, block, TRUE, TRUE));
 }
 
-NANDResult NANDRead(NANDFileInfo* info, void* buf, u32 len) {
+s32 NANDRead(NANDFileInfo* info, void* buf, u32 len) {
     if (!nandIsInitialized()) {
         return NAND_RESULT_FATAL_ERROR;
     }
@@ -122,8 +122,8 @@ NANDResult NANDRead(NANDFileInfo* info, void* buf, u32 len) {
     return nandConvertErrorCode(ISFS_Read(info->fd, buf, len));
 }
 
-NANDResult NANDReadAsync(NANDFileInfo* info, void* buf, u32 len,
-                         NANDAsyncCallback callback, NANDCommandBlock* block) {
+s32 NANDReadAsync(NANDFileInfo* info, void* buf, u32 len,
+                  NANDAsyncCallback callback, NANDCommandBlock* block) {
     if (!nandIsInitialized()) {
         return NAND_RESULT_FATAL_ERROR;
     }
@@ -133,7 +133,7 @@ NANDResult NANDReadAsync(NANDFileInfo* info, void* buf, u32 len,
         ISFS_ReadAsync(info->fd, buf, len, nandCallback, block));
 }
 
-NANDResult NANDWrite(NANDFileInfo* info, const void* buf, u32 len) {
+s32 NANDWrite(NANDFileInfo* info, const void* buf, u32 len) {
     if (!nandIsInitialized()) {
         return NAND_RESULT_FATAL_ERROR;
     }
@@ -141,8 +141,8 @@ NANDResult NANDWrite(NANDFileInfo* info, const void* buf, u32 len) {
     return nandConvertErrorCode(ISFS_Write(info->fd, buf, len));
 }
 
-NANDResult NANDWriteAsync(NANDFileInfo* info, const void* buf, u32 len,
-                          NANDAsyncCallback callback, NANDCommandBlock* block) {
+s32 NANDWriteAsync(NANDFileInfo* info, const void* buf, u32 len,
+                   NANDAsyncCallback callback, NANDCommandBlock* block) {
     if (!nandIsInitialized()) {
         return NAND_RESULT_FATAL_ERROR;
     }
@@ -175,7 +175,7 @@ static s32 nandSeek(s32 fd, s32 offset, NANDSeekMode whence,
     }
 }
 
-NANDResult NANDSeek(NANDFileInfo* info, s32 offset, NANDSeekMode whence) {
+s32 NANDSeek(NANDFileInfo* info, s32 offset, NANDSeekMode whence) {
     if (!nandIsInitialized()) {
         return NAND_RESULT_FATAL_ERROR;
     }
@@ -184,8 +184,8 @@ NANDResult NANDSeek(NANDFileInfo* info, s32 offset, NANDSeekMode whence) {
         nandSeek(info->fd, offset, whence, NULL, FALSE));
 }
 
-NANDResult NANDSeekAsync(NANDFileInfo* info, s32 offset, NANDSeekMode whence,
-                         NANDAsyncCallback callback, NANDCommandBlock* block) {
+s32 NANDSeekAsync(NANDFileInfo* info, s32 offset, NANDSeekMode whence,
+                  NANDAsyncCallback callback, NANDCommandBlock* block) {
     if (!nandIsInitialized()) {
         return NAND_RESULT_FATAL_ERROR;
     }
@@ -224,7 +224,7 @@ static s32 nandCreateDir(const char* path, u8 perm, u8 attr,
     }
 }
 
-NANDResult NANDPrivateCreateDir(const char* path, u8 perm, u8 attr) {
+s32 NANDPrivateCreateDir(const char* path, u8 perm, u8 attr) {
     if (!nandIsInitialized()) {
         return NAND_RESULT_FATAL_ERROR;
     }
@@ -233,9 +233,9 @@ NANDResult NANDPrivateCreateDir(const char* path, u8 perm, u8 attr) {
         nandCreateDir(path, perm, attr, NULL, FALSE, TRUE));
 }
 
-NANDResult NANDPrivateCreateDirAsync(const char* path, u8 perm, u8 attr,
-                                     NANDAsyncCallback callback,
-                                     NANDCommandBlock* block) {
+s32 NANDPrivateCreateDirAsync(const char* path, u8 perm, u8 attr,
+                              NANDAsyncCallback callback,
+                              NANDCommandBlock* block) {
     if (!nandIsInitialized()) {
         return NAND_RESULT_FATAL_ERROR;
     }
@@ -280,7 +280,7 @@ static s32 nandMove(const char* from, const char* to, NANDCommandBlock* block,
     }
 }
 
-NANDResult NANDMove(const char* from, const char* to) {
+s32 NANDMove(const char* from, const char* to) {
     if (!nandIsInitialized()) {
         return NAND_RESULT_FATAL_ERROR;
     }
@@ -306,7 +306,7 @@ static s32 nandGetFileStatus(s32 fd, u32* lengthOut, u32* positionOut) {
     return result;
 }
 
-NANDResult NANDGetLength(NANDFileInfo* info, u32* length) {
+s32 NANDGetLength(NANDFileInfo* info, u32* length) {
     if (!nandIsInitialized()) {
         return NAND_RESULT_FATAL_ERROR;
     }
@@ -340,9 +340,8 @@ static void nandGetFileStatusAsyncCallback(s32 result, void* arg) {
     block->callback(nandConvertErrorCode(result), arg);
 }
 
-NANDResult NANDGetLengthAsync(NANDFileInfo* info, u32* lengthOut,
-                              NANDAsyncCallback callback,
-                              NANDCommandBlock* block) {
+s32 NANDGetLengthAsync(NANDFileInfo* info, u32* lengthOut,
+                       NANDAsyncCallback callback, NANDCommandBlock* block) {
     if (!nandIsInitialized()) {
         return NAND_RESULT_FATAL_ERROR;
     }
@@ -466,7 +465,7 @@ static void nandGetStatusCallback(s32 result, void* arg) {
     block->callback(nandConvertErrorCode(result), block);
 }
 
-NANDResult NANDGetStatus(const char* path, NANDStatus* status) {
+s32 NANDGetStatus(const char* path, NANDStatus* status) {
     if (!nandIsInitialized()) {
         return NAND_RESULT_FATAL_ERROR;
     }
@@ -475,9 +474,9 @@ NANDResult NANDGetStatus(const char* path, NANDStatus* status) {
         nandGetStatus(path, status, NULL, FALSE, FALSE));
 }
 
-NANDResult NANDPrivateGetStatusAsync(const char* path, NANDStatus* status,
-                                     NANDAsyncCallback callback,
-                                     NANDCommandBlock* block) {
+s32 NANDPrivateGetStatusAsync(const char* path, NANDStatus* status,
+                              NANDAsyncCallback callback,
+                              NANDCommandBlock* block) {
     if (!nandIsInitialized()) {
         return NAND_RESULT_FATAL_ERROR;
     }

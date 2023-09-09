@@ -13,7 +13,7 @@ typedef enum {
     NAND_CHECK_TOO_MANY_USER_FILES = (1 << 3),
 } NANDCheckFlags;
 
-NANDResult NANDCheck(u32 neededBlocks, u32 neededFiles, u32* answer);
+s32 NANDCheck(u32 neededBlocks, u32 neededFiles, u32* answer);
 
 #ifdef __cplusplus
 }

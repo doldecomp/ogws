@@ -23,7 +23,7 @@ namespace nw4r
 				BOOL_0x6D = false;
 				BOOL_0x6E = false;
 				BOOL_0x4 = false;
-				WORD_0x68 = 2;
+				WORD_0x68 = DVD_QUEUE_PRIO_MEDIUM;
 				mIsBusy = false;
 				ASYNC_0xC = NULL;
 				PTR_0x10 = NULL;

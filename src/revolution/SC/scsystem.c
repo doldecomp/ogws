@@ -34,19 +34,17 @@ typedef struct SCConfHeader {
 } SCConfHeader;
 
 static void SetBgJobStatus(SCStatus status);
-static NANDResult SCReloadConfFileAsync(u8* buf, u32 size,
-                                        SCAsyncCallback callback);
-static void OpenCallbackFromReload(NANDResult result, NANDCommandBlock* block);
-static void ReadCallbackFromReload(NANDResult result, NANDCommandBlock* block);
-static void CloseCallbackFromReload(NANDResult result, NANDCommandBlock* block);
+static s32 SCReloadConfFileAsync(u8* buf, u32 size, SCAsyncCallback callback);
+static void OpenCallbackFromReload(s32 result, NANDCommandBlock* block);
+static void ReadCallbackFromReload(s32 result, NANDCommandBlock* block);
+static void CloseCallbackFromReload(s32 result, NANDCommandBlock* block);
 static void FinishFromReload(void);
-static void ErrorFromReload(NANDResult result);
-static void CloseCallbackFromReloadError(NANDResult result,
-                                         NANDCommandBlock* block);
+static void ErrorFromReload(s32 result);
+static void CloseCallbackFromReloadError(s32 result, NANDCommandBlock* block);
 static void ClearConfBuf(u8* conf);
 static s32 ParseConfBuf(u8* conf, u32 size);
 static BOOL UnpackItem(const u8* data, SCItem* item);
-static void MyNandCallback(NANDResult result, NANDCommandBlock* block);
+static void MyNandCallback(s32 result, NANDCommandBlock* block);
 static void FinishFromFlush(void);
 static void ErrorFromFlush(void);
 
@@ -117,8 +115,7 @@ u32 SCCheckStatus(void) {
     return status;
 }
 
-static NANDResult SCReloadConfFileAsync(u8* buf, u32 size,
-                                        SCAsyncCallback callback) {
+static s32 SCReloadConfFileAsync(u8* buf, u32 size, SCAsyncCallback callback) {
     int i;
 
     if (size < __SCGetConfBufSize()) {
@@ -156,7 +153,7 @@ static NANDResult SCReloadConfFileAsync(u8* buf, u32 size,
                                 OpenCallbackFromReload, &Control.commandBlock);
 }
 
-static void OpenCallbackFromReload(NANDResult result, NANDCommandBlock* block) {
+static void OpenCallbackFromReload(s32 result, NANDCommandBlock* block) {
 #pragma unused(block)
 
     if (result == NAND_RESULT_OK) {
@@ -173,7 +170,7 @@ static void OpenCallbackFromReload(NANDResult result, NANDCommandBlock* block) {
     ErrorFromReload(result);
 }
 
-static void ReadCallbackFromReload(NANDResult result, NANDCommandBlock* block) {
+static void ReadCallbackFromReload(s32 result, NANDCommandBlock* block) {
 #pragma unused(block)
 
     if (result == Control.bufferSizes[Control.openFile]) {
@@ -189,8 +186,7 @@ static void ReadCallbackFromReload(NANDResult result, NANDCommandBlock* block) {
                                                : NAND_RESULT_FATAL_ERROR);
 }
 
-static void CloseCallbackFromReload(NANDResult result,
-                                    NANDCommandBlock* block) {
+static void CloseCallbackFromReload(s32 result, NANDCommandBlock* block) {
 #pragma unused(block)
 
     if (result == NAND_RESULT_OK) {
@@ -240,7 +236,7 @@ openFile:
     SetBgJobStatus(status);
 }
 
-static void ErrorFromReload(NANDResult result) {
+static void ErrorFromReload(s32 result) {
     if (Control.openFile == SC_CONF_FILE_SYSTEM) {
         Control.asyncResult = result;
     }
@@ -254,8 +250,7 @@ static void ErrorFromReload(NANDResult result) {
     }
 }
 
-static void CloseCallbackFromReloadError(NANDResult result,
-                                         NANDCommandBlock* block) {
+static void CloseCallbackFromReloadError(s32 result, NANDCommandBlock* block) {
 #pragma unused(result)
 #pragma unused(block)
 
@@ -539,7 +534,7 @@ void SCFlushAsync(SCFlushCallback callback) {
     }
 }
 
-static void MyNandCallback(NANDResult result, NANDCommandBlock* block) {
+static void MyNandCallback(s32 result, NANDCommandBlock* block) {
 #pragma unused(block)
 
     SCControl* ctrl = &Control;
@@ -582,7 +577,8 @@ static void MyNandCallback(NANDResult result, NANDCommandBlock* block) {
             goto case_4_lbl;
         }
         ctrl->nandCbState = 4;
-        if (NANDPrivateCreateDirAsync(ConfDirName, NAND_PERM_RWALL, 0, MyNandCallback,
+        if (NANDPrivateCreateDirAsync(ConfDirName, NAND_PERM_RWALL, 0,
+                                      MyNandCallback,
                                       &ctrl->commandBlock) != NAND_RESULT_OK) {
             goto error;
         }
@@ -590,7 +586,8 @@ static void MyNandCallback(NANDResult result, NANDCommandBlock* block) {
     case 4:
     case_4_lbl:
         ctrl->nandCbState = 5;
-        if (NANDPrivateCreateAsync(ConfFileName, NAND_PERM_RWALL, 0, MyNandCallback,
+        if (NANDPrivateCreateAsync(ConfFileName, NAND_PERM_RWALL, 0,
+                                   MyNandCallback,
                                    &ctrl->commandBlock) != NAND_RESULT_OK) {
             goto error;
         }

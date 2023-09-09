@@ -151,7 +151,7 @@ void nandReportErrorCode(s32 result){
 #pragma unused(result)
 }
 
-NANDResult nandConvertErrorCode(s32 result) {
+s32 nandConvertErrorCode(s32 result) {
     int i;
 
     // clang-format off
@@ -248,7 +248,7 @@ void nandGetParentDirectory(char* dir, const char* path) {
     }
 }
 
-NANDResult NANDInit(void) {
+s32 NANDInit(void) {
     s32 result;
     u64 tid;
     s32 fd;
@@ -330,7 +330,7 @@ static void nandShutdownCallback(s32 result, void* arg) {
     *(BOOL*)arg = TRUE;
 }
 
-NANDResult NANDGetCurrentDir(char* out) {
+s32 NANDGetCurrentDir(char* out) {
     BOOL enabled;
 
     if (!nandIsInitialized()) {
@@ -343,7 +343,7 @@ NANDResult NANDGetCurrentDir(char* out) {
     return NAND_RESULT_OK;
 }
 
-NANDResult NANDGetHomeDir(char* out) {
+s32 NANDGetHomeDir(char* out) {
     if (!nandIsInitialized()) {
         return NAND_RESULT_FATAL_ERROR;
     }
@@ -399,7 +399,7 @@ static s32 nandGetType(const char* path, u8* type, NANDCommandBlock* block,
     }
 }
 
-NANDResult NANDGetType(const char* path, u8* type) {
+s32 NANDGetType(const char* path, u8* type) {
     if (!nandIsInitialized()) {
         return NAND_RESULT_FATAL_ERROR;
     }
@@ -407,9 +407,9 @@ NANDResult NANDGetType(const char* path, u8* type) {
     return nandConvertErrorCode(nandGetType(path, type, NULL, FALSE, FALSE));
 }
 
-NANDResult NANDPrivateGetTypeAsync(const char* path, u8* type,
-                                   NANDAsyncCallback callback,
-                                   NANDCommandBlock* block) {
+s32 NANDPrivateGetTypeAsync(const char* path, u8* type,
+                            NANDAsyncCallback callback,
+                            NANDCommandBlock* block) {
     if (!nandIsInitialized()) {
         return NAND_RESULT_FATAL_ERROR;
     }

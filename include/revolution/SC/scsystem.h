@@ -75,7 +75,7 @@ typedef enum {
     SC_ITEM_BOOL = (7 << 5)
 } SCItemType;
 
-typedef void (*SCAsyncCallback)(NANDResult result);
+typedef void (*SCAsyncCallback)(s32 result);
 typedef void (*SCFlushCallback)(SCStatus status);
 
 typedef struct SCItem {
@@ -99,7 +99,7 @@ typedef struct SCControl {
     u8 openFile; // at 0x156
     u8 BYTE_0x157;
     SCAsyncCallback asyncCallback;           // at 0x158
-    NANDResult asyncResult;                  // at 0x15C
+    s32 asyncResult;                         // at 0x15C
     const char* filePaths[SC_CONF_FILE_MAX]; // at 0x160
     u8* fileBuffers[SC_CONF_FILE_MAX];       // at 0x168
     u32 bufferSizes[SC_CONF_FILE_MAX];       // at 0x170

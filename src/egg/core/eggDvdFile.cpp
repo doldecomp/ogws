@@ -83,7 +83,7 @@ namespace EGG
         
         mThread = OSGetCurrentThread();
         s32 result = -1;
-        u32 success = DVDReadAsyncPrio(&mFileInfo, buf, len, pos, DvdFile::doneProcess, 2);
+        u32 success = DVDReadAsyncPrio(&mFileInfo, buf, len, pos, DvdFile::doneProcess, DVD_QUEUE_PRIO_MEDIUM);
         
         if (success != 0)
         {

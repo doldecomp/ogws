@@ -65,7 +65,7 @@ static u32 nandCheck(u32 neededBlocks, u32 neededFiles, u32 homeDirBlocks,
     return answer;
 }
 
-NANDResult NANDCheck(u32 neededBlocks, u32 neededFiles, u32* answer) {
+s32 NANDCheck(u32 neededBlocks, u32 neededFiles, u32* answer) {
     s32 result;
 
     s32 homeDirBlocks = -1;

@@ -34,7 +34,7 @@ typedef struct OSPlayRecord {
 static OSPlayRecordState PlayRecordState = PLAY_RECORD_STATE_STOPPED;
 
 static s64 PlayRecordLastCloseTime;
-static NANDResult PlayRecordLastError;
+static s32 PlayRecordLastError;
 static BOOL PlayRecordRetry;
 static BOOL PlayRecordTerminated;
 static BOOL PlayRecordTerminate;
@@ -73,8 +73,7 @@ static void PlayRecordAlarmCallback(OSAlarm* alarm, OSContext* ctx) {
 static void PlayRecordCallback(s32 result, NANDCommandBlock* block) {
 #pragma unused(block)
 
-    NANDResult error = NAND_RESULT_OK;
-
+    s32 error = NAND_RESULT_OK;
     PlayRecordLastError = result;
 
     if (PlayRecordTerminate) {
