@@ -496,7 +496,7 @@ RVL_SDK_O_FILES := \
 	\
 	build/asm/revolution/AX/AX.o \
 	build/revolution/AX/AXAlloc.o \
-	build/asm/revolution/AX/AXAux.o \
+	build/revolution/AX/AXAux.o \
 	build/asm/revolution/AX/AXCL.o \
 	build/asm/revolution/AX/AXOut.o \
 	build/asm/revolution/AX/AXSPB.o \

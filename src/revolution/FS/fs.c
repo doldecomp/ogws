@@ -3,12 +3,6 @@
 #include <revolution/OS.h>
 #include <string.h>
 
-/**
- * Ioctl arguments/filesystem specifications adapted from:
- * https://wiibrew.org/wiki//dev/fs
- * https://wiibrew.org/wiki/Hardware/NAND
- */
-
 #define FS_HEAP_SIZE 0x1500
 
 // Longest name obtainable from ReadDir ioctl

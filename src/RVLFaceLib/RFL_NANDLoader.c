@@ -1,9 +1,3 @@
-/**
- * RFL_Res.dat documentation from:
- * https://wiki.tockdom.com/wiki/RFL_Res.dat_(File_Format)
- * DWARF debugging info
- */
-
 #include <RVLFaceLib/RVLFaceLibInternal.h>
 #include <revolution/NAND.h>
 #include <string.h>

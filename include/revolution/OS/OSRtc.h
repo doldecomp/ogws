@@ -5,11 +5,6 @@
 extern "C" {
 #endif
 
-/**
- * Documentation from:
- * https://www.gc-forever.com/yagcd/chap10.html#sec10.5
- */
-
 typedef struct OSSram {
     u16 checksum;    // at 0x0
     u16 invchecksum; // at 0x2

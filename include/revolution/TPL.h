@@ -1,3 +1,7 @@
+/**
+ * References: YAGCD, BrawlBox
+ */
+
 #ifndef RVL_SDK_PUBLIC_TPL_H
 #define RVL_SDK_PUBLIC_TPL_H
 #ifdef __cplusplus

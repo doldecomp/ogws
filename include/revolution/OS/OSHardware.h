@@ -1,3 +1,10 @@
+/**
+ * For more details, see:
+ * https://www.gc-forever.com/yagcd/chap4.html#sec4
+ * https://www.gc-forever.com/yagcd/chap13.html#sec13
+ * https://wiibrew.org/wiki/Memory_map
+ */
+
 #ifndef RVL_SDK_OS_HARDWARE_H
 #define RVL_SDK_OS_HARDWARE_H
 #include <revolution/DVD/dvd.h>
@@ -11,13 +18,6 @@ extern "C" {
 // Forward declarations
 typedef struct OSContext;
 typedef struct OSExecParams;
-
-/**
- * For more details, see:
- * https://www.gc-forever.com/yagcd/chap4.html#sec4
- * https://www.gc-forever.com/yagcd/chap13.html#sec13
- * https://wiibrew.org/wiki/Memory_map
- */
 
 // Derive offsets for use with OSAddress functions
 #define __DEF_ADDR_OFFSETS(name, addr)                                         \
@@ -208,8 +208,7 @@ typedef enum {
 #define PI_INTMR_ACR (1 << 14)
 
 /**
- * MI Hardware Registers
- * https://www.gc-forever.com/yagcd/chap5.html#sec5.5
+ * MI hardware registers
  */
 volatile u16 MI_HW_REGS[] : 0xCC004000;
 typedef enum {

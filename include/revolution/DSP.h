@@ -1,3 +1,7 @@
+/**
+ * References: YAGCD, Dolphin Emulator
+ */
+
 #ifndef RVL_SDK_PUBLIC_DSP_H
 #define RVL_SDK_PUBLIC_DSP_H
 #ifdef __cplusplus

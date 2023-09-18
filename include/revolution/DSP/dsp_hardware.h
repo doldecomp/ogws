@@ -6,8 +6,7 @@ extern "C" {
 #endif
 
 /**
- * DSP Hardware Registers
- * https://www.gc-forever.com/yagcd/chap5.html#sec5.6
+ * DSP hardware registers
  */
 volatile u16 DSP_HW_REGS[] : 0xCC005000;
 

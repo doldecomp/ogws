@@ -6,13 +6,6 @@
 extern "C" {
 #endif
 
-/**
- * Documentation from:
- * https://github.com/soopercool101/BrawlCrate/blob/master/BrawlLib/SSBB/Types/TPL.cs
- * https://wiki.tockdom.com/wiki/TPL_(File_Format)
- * DWARF debugging info
- */
-
 typedef struct TPLHeader {
     u16 height;          // at 0x0
     u16 width;           // at 0x2

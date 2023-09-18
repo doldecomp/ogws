@@ -1,3 +1,7 @@
+/**
+ * References: YAGCD, Dolphin Emulator, publicly available patents
+ */
+
 #ifndef RVL_SDK_PUBLIC_GX_H
 #define RVL_SDK_PUBLIC_GX_H
 #ifdef __cplusplus

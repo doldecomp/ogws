@@ -1,11 +1,10 @@
+/**
+ * Based on ARC decompilation by riidefi
+ */
+
 #include <ctype.h>
 #include <revolution/DVD.h>
 #include <revolution/OS.h>
-
-/**
- * FST documentation: https://www.gc-forever.com/yagcd/chap13.html#sec13.4
- * Based on ARC decompilation by riidefi
- */
 
 typedef struct DVDNode {
     union {

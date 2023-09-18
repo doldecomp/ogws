@@ -6,7 +6,6 @@ extern "C" {
 #endif
 
 typedef void (*AXCallback)(void);
-typedef void (*AXAuxCallback)(void*, void*);
 
 #ifdef __cplusplus
 }

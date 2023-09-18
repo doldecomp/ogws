@@ -6,7 +6,7 @@
 extern "C" {
 #endif
 
-typedef void (*AXVoiceCallback)(void* arg);
+typedef void (*AXVoiceCallback)(void* voice);
 
 typedef struct _AXVPB {
     void* next;               // at 0x0

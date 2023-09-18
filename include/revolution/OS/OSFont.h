@@ -5,11 +5,6 @@
 extern "C" {
 #endif
 
-/**
- * Documentation from:
- * https://www.gc-forever.com/yagcd/chap16.html#sec16.1.3
- */
-
 typedef enum {
     OS_FONT_ENCODE_ANSI,
     OS_FONT_ENCODE_SJIS,

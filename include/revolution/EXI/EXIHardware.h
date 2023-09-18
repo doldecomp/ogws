@@ -6,10 +6,6 @@
 extern "C" {
 #endif
 
-/**
- * Documentation from:
- * https://www.gc-forever.com/yagcd/chap5.html#sec5.9
- */
 typedef struct ExiChannelControl {
     u32 csr;       // at 0x0
     void* dmaAddr; // at 0x4

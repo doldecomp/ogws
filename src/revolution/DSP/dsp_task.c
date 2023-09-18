@@ -10,7 +10,6 @@
 
 /**
  * Commands to the DSP sent via the mailbox.
- * Reference: https://www.gc-forever.com/yagcd/chap5.html#sec5.6.2.4
  */
 typedef enum {
     MAIL_SET_IRAM_MMEM_ADDR = 0x80F3A001,
@@ -22,7 +21,6 @@ typedef enum {
 
 /**
  * DSP microcodes (from Dolphin Emulator)
- * https://github.com/dolphin-emu/dolphin/blob/master/Source/Core/Core/HW/DSPHLE/UCodes/UCodes.h
  */
 typedef enum {
     TASK_MAIL_MASK = 0xFFFF0000,
@@ -336,5 +334,4 @@ void __DSP_remove_task(DSPTask* task) {
     }
 }
 
-CW_FORCE_STRINGS(dsp_task_c,
-    "__DSP_add_task() : Added task    : 0x%08X\n");
+CW_FORCE_STRINGS(dsp_task_c, "__DSP_add_task() : Added task    : 0x%08X\n");

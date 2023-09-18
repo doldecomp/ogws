@@ -1,3 +1,7 @@
+/**
+ * References: YAGCD, WiiBrew, Dolphin Emulator
+ */
+
 #ifndef RVL_SDK_PUBLIC_OS_H
 #define RVL_SDK_PUBLIC_OS_H
 #ifdef __cplusplus

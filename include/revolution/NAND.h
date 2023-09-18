@@ -1,3 +1,7 @@
+/**
+ * References: WiiBrew
+ */
+
 #ifndef RVL_SDK_PUBLIC_NAND_H
 #define RVL_SDK_PUBLIC_NAND_H
 #ifdef __cplusplus

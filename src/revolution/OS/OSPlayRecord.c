@@ -17,10 +17,6 @@ typedef enum {
     PLAY_RECORD_STATE_STOPPED    //!< __OSStopPlayRecord
 } OSPlayRecordState;
 
-/**
- * Documentation from:
- * https://wiibrew.org/wiki//title/00000001/00000002/data/play_rec.dat
- */
 typedef struct OSPlayRecord {
     u32 checksum;          // at 0x0
     wchar_t titleName[40]; // at 0x4

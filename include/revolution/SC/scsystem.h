@@ -8,11 +8,6 @@
 extern "C" {
 #endif
 
-/**
- * SC/SYSCONF documentation from:
- * https://wiibrew.org/wiki//shared2/sys/SYSCONF
- */
-
 typedef enum {
     SC_STATUS_0,
     SC_STATUS_1,

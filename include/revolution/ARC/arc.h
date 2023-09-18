@@ -1,14 +1,13 @@
+/**
+ * Modified from decompilation by riidefi in WiiCore
+ */
+
 #ifndef RVL_SDK_ARC_H
 #define RVL_SDK_ARC_H
 #include <types.h>
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-/**
- * Modified from decompilation by riidefi in WiiCore
- * https://github.com/riidefi/WiiCore/tree/master/source/rx
- */
 
 typedef enum { ARC_ENTRY_FILE, ARC_ENTRY_FOLDER } ARCEntryType;
 

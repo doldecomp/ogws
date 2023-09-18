@@ -1,9 +1,17 @@
-#ifndef REVOSDK_AX_CL_H
-#define REVOSDK_AX_CL_H
+#ifndef RVL_SDK_AX_CL_H
+#define RVL_SDK_AX_CL_H
 #include <types.h>
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+typedef enum {
+    AX_OUTPUT_STEREO,
+    AX_OUTPUT_SURROUND,
+    AX_OUTPUT_DPL2
+} AXOutputMode;
+
+extern u32 __AXClMode;
 
 UNKTYPE AXSetMode(UNKWORD);
 UNKTYPE AXSetMasterVolume(u16);

@@ -15,10 +15,6 @@ typedef struct ESPTicket;
 typedef struct ESPTmd;
 typedef struct OSAlarm;
 
-/**
- * https://wiibrew.org/wiki//dev/di
- * Names adjusted to be closer to those seen in assertions
- */
 typedef enum {
     DVD_INTTYPE_TC = (1 << 0),   // Transaction callback?
     DVD_INTTYPE_DE = (1 << 1),   // Drive error

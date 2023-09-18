@@ -1,13 +1,5 @@
-#ifndef RVL_SDK_GX_HARDWARE_H
-#define RVL_SDK_GX_HARDWARE_H
-#include <revolution/GX/GXTypes.h>
-#include <types.h>
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 /**
- * Documentation from:
+ * For more details, see:
  * https://www.gc-forever.com/yagcd/chap8.html#sec8
  * https://www.gc-forever.com/yagcd/chap5.html#sec5
  * https://github.com/dolphin-emu/dolphin/blob/master/Source/Core/VideoCommon/BPMemory.h
@@ -18,6 +10,14 @@ extern "C" {
  * https://patents.google.com/patent/US7002591
  * https://patents.google.com/patent/US6697074
  */
+
+#ifndef RVL_SDK_GX_HARDWARE_H
+#define RVL_SDK_GX_HARDWARE_H
+#include <revolution/GX/GXTypes.h>
+#include <types.h>
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 /************************************************************
  *

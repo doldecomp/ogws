@@ -4,12 +4,6 @@
 #include <revolution/OS.h>
 #include <string.h>
 
-/**
- * Documentation from:
- * https://wiibrew.org/wiki//dev/di
- * https://www.gc-forever.com/yagcd/chap5.html#sec5.7
- */
-
 #define DVD_LOW_CTX_MAX 4
 #define DVD_LOW_CMD_MAX 4
 #define DVD_LOW_CTX_MAGIC 0xFEEBDAED

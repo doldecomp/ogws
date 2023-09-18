@@ -1,3 +1,7 @@
+/**
+ * References: WiiBrew, YAGCD
+ */
+
 #ifndef RVL_SDK_PUBLIC_DVD_H
 #define RVL_SDK_PUBLIC_DVD_H
 #ifdef __cplusplus

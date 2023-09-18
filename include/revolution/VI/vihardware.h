@@ -6,8 +6,7 @@ extern "C" {
 #endif
 
 /**
- * VI Hardware Registers
- * https://www.gc-forever.com/yagcd/chap5.html#sec5.3
+ * VI hardware registers
  */
 volatile u16 VI_HW_REGS[] : 0xCC002000;
 

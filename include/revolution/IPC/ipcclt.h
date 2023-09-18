@@ -6,13 +6,6 @@
 extern "C" {
 #endif
 
-/**
- * Documentation from:
- * https://wiibrew.org/wiki/IOS
- * https://wiibrew.org/wiki/IOS/Resource_request
- * http://wiibrew.org/wiki/IPC_(SDK)
- */
-
 typedef enum {
     IPC_RESULT_FATAL_ERROR = -119,
     IPC_RESULT_BUSY,

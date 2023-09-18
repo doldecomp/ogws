@@ -3,11 +3,6 @@
 #include <revolution/USB.h>
 #include <stdio.h>
 
-/**
- * Documentation from WiiBrew:
- * https://wiibrew.org/wiki//dev/usb/oh0
- */
-
 #define USB_HEAP_SIZE 0x1000
 
 typedef enum {
@@ -482,10 +477,8 @@ IPCResult IUSB_WriteCtrlMsgAsync(s32 fd, u8 requestType, u8 request, u16 value,
 CW_FORCE_STRINGS(usb_c_3, "GetStrCb returned: %d\n",
                  "GetStrCb: buf = 0x%x buflen = %u\n",
                  "Failed to convert buffer from unicode 2 ascii\n",
-                 "calling cb 0x%x with arg 0x%x\n",
-                 "Failed __CtrlMsg: %d",
-                 "Failed to convert unicode 2 ascii\n",
-                 "GetStr - _GetStrCb\n",
+                 "calling cb 0x%x with arg 0x%x\n", "Failed __CtrlMsg: %d",
+                 "Failed to convert unicode 2 ascii\n", "GetStr - _GetStrCb\n",
                  " GetAsciiStrAsync: Not enough memory\n",
                  "__CtrlMsgInt failed %d\n", "GetDescrCb returned: %d\n",
                  "GetDevDescr\n", "GetDevDescr: Not enough memory\n",
