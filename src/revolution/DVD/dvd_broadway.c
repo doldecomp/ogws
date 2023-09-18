@@ -17,10 +17,6 @@
 // Your guess is as good as mine
 #define DVD_LOW_CTX_IN_USE(ctx) ((u8)((ctx).inUse != FALSE))
 
-// Unpadded sizes
-#define ESP_TICKET_SIZE 0x2A4
-#define ESP_TMD_SIZE 0x49E4
-
 typedef enum {
     DVD_IOCTL_INQUIRY = 0x12,
     DVD_IOCTL_READ_DISK_ID = 0x70,
@@ -92,7 +88,7 @@ static DVDLowRegBuffer registerBuf ALIGN(32);
 static IPCIOVector ioVec[5] ALIGN(32);
 static u8 lastTicketError[32] ALIGN(32);
 
-CW_FORCE_BSS(dvd_broadway_c, dvdContexts);
+CW_FORCE_ORDER(dvd_broadway_c, dvdContexts);
 
 static void nextCommandBuf(void);
 static DVDLowContext* newContext(DVDLowCallback callback, UNKWORD arg2);
@@ -363,7 +359,7 @@ BOOL DVDLowOpenPartition(u32 offset, const ESPTicket* ticket, u32 certsSize,
     if (ticket == NULL) {
         ioVec[1].length = 0;
     } else {
-        ioVec[1].length = ESP_TICKET_SIZE;
+        ioVec[1].length = sizeof(ESPTicket);
     }
 
     // Input vector 3: Shared certs
@@ -376,7 +372,7 @@ BOOL DVDLowOpenPartition(u32 offset, const ESPTicket* ticket, u32 certsSize,
 
     // Output vector 1: TMD
     ioVec[3].base = tmd;
-    ioVec[3].length = ESP_TMD_SIZE;
+    ioVec[3].length = sizeof(ESPTmd);
 
     // Output vector 2: Ticket error
     ioVec[4].base = &lastTicketError;

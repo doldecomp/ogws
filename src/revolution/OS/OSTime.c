@@ -36,7 +36,7 @@ asm s64 OSGetTime(void) {
     // clang-format on
 }
 
-asm s32 OSGetTick(void){
+asm u32 OSGetTick(void){
     // clang-format off
     nofralloc
 

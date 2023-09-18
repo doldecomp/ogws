@@ -16,7 +16,7 @@ typedef enum {
 } DVDQueuePriority;
 
 void __DVDClearWaitingQueue(void);
-BOOL __DVDPushWaitingQueue(DVDQueuePriority prio, DVDCommandBlock* block);
+BOOL __DVDPushWaitingQueue(s32 prio, DVDCommandBlock* block);
 DVDCommandBlock* __DVDPopWaitingQueue(void);
 BOOL __DVDCheckWaitingQueue(void);
 DVDCommandBlock* __DVDGetNextWaitingQueue(void);

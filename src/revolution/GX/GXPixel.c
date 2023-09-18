@@ -99,7 +99,7 @@ void GXInitFogAdjTable(GXFogAdjTable* table, u16 width, const Mtx44 proj) {
 
     f29 = 2.0f / width;
 
-    for (i = 0; i < ARRAY_LENGTH(table->r); i++) {
+    for (i = 0; i < LENGTHOF(table->r); i++) {
         f31 = (i + 1) * 32;
         f31 *= f29;
         f31 *= f28;
@@ -114,7 +114,7 @@ void GXSetFogRangeAdj(GXBool enable, u16 center, const GXFogAdjTable* table) {
     int i;
 
     if (enable) {
-        for (i = 0; i < ARRAY_LENGTH(table->r); i += 2) {
+        for (i = 0; i < LENGTHOF(table->r); i += 2) {
             fogRangeRegK = 0;
             GX_BP_SET_FOGRANGEK_HI(fogRangeRegK, table->r[i]);
             GX_BP_SET_FOGRANGEK_LO(fogRangeRegK, table->r[i + 1]);

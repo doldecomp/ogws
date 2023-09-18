@@ -203,7 +203,7 @@ s32 nandConvertErrorCode(s32 result) {
         return result;
     }
 
-    for (; i < ARRAY_LENGTH(errorMap); i += 2) {
+    for (; i < LENGTHOF(errorMap); i += 2) {
         if (result == errorMap[i]) {
             nandReportErrorCode(result);
             return errorMap[i + 1];

@@ -108,14 +108,15 @@ extern "C" {
  * Tables
  */
 
-static const u8 RFLi_EYE_ROT_OFFSET[50] = {
+// Two unused eye types?
+static const u8 RFLi_EYE_ROT_OFFSET[RFLi_MAX_EYE_TYPE + 2 + 1] = {
     29, 28, 28, 28, 29, 28, 28, 28, 29, 28, 28, 28, 28, 29, 29, 28, 28,
     28, 29, 29, 28, 29, 28, 29, 29, 28, 29, 28, 28, 29, 28, 28, 28, 29,
     29, 29, 28, 28, 29, 29, 29, 28, 28, 29, 29, 29, 29, 29, 28, 28};
 
-static const u8 RFLi_EYEBROW_ROT_OFFSET[24] = {26, 26, 27, 25, 26, 25, 26, 25,
-                                               28, 25, 26, 24, 27, 27, 26, 26,
-                                               25, 25, 26, 26, 27, 26, 25, 27};
+static const u8 RFLi_EYEBROW_ROT_OFFSET[RFLi_MAX_EYEBROW_TYPE + 1] = {
+    26, 26, 27, 25, 26, 25, 26, 25, 28, 25, 26, 24,
+    27, 27, 26, 26, 25, 25, 26, 26, 27, 26, 25, 27};
 
 /**
  * Colors for TEV

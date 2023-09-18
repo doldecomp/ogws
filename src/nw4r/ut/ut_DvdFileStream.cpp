@@ -116,14 +116,14 @@ namespace nw4r
 
         UNKTYPE DvdFileStream::Cancel()
         {
-            DVDCancel(&mFileInfo);
+            DVDCancel(&mFileInfo.block);
         }
 
         bool DvdFileStream::CancelAsync(AsyncFunctor func, void *p)
         {
             ASYNC_0x1C = func;
             PTR_0x20 = p;
-            u32 result = DVDCancelAsync(&mFileInfo, DvdCBAsyncCallback_);
+            u32 result = DVDCancelAsync(&mFileInfo.block, DvdCBAsyncCallback_);
             if (result)
             {
                 BYTE_0x24 = 1;

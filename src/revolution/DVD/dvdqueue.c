@@ -17,7 +17,7 @@ void __DVDClearWaitingQueue(void) {
     }
 }
 
-BOOL __DVDPushWaitingQueue(DVDQueuePriority prio, DVDCommandBlock* block) {
+BOOL __DVDPushWaitingQueue(s32 prio, DVDCommandBlock* block) {
     BOOL enabled = OSDisableInterrupts();
     DVDCommandBlock* head = (DVDCommandBlock*)&WaitingQueue[prio];
 
@@ -30,7 +30,7 @@ BOOL __DVDPushWaitingQueue(DVDQueuePriority prio, DVDCommandBlock* block) {
     return TRUE;
 }
 
-static DVDCommandBlock* PopWaitingQueuePrio(DVDQueuePriority prio) {
+static DVDCommandBlock* PopWaitingQueuePrio(s32 prio) {
     BOOL enabled = OSDisableInterrupts();
 
     DVDCommandBlock* head = (DVDCommandBlock*)&WaitingQueue[prio];

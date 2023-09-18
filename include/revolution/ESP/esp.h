@@ -17,12 +17,10 @@ typedef enum {
 
 typedef struct ESPTicket {
     u8 dummy[0x2A4];
-    char padding[0x2C0 - 0x2A4];
 } ESPTicket;
 
 typedef struct ESPTmd {
     u8 dummy[0x49E4];
-    char padding[0x4A00 - 0x49E4];
 } ESPTmd;
 
 s32 ESP_ReadContentFile(UNKWORD, void*, u32);

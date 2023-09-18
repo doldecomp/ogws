@@ -949,4 +949,4 @@ void OSSleepTicks(s64 ticks) {
     OSRestoreInterrupts(enabled);
 }
 
-CW_FORCE_BSS(OSThread_c, IdleThread);
+CW_FORCE_ORDER(OSThread_c, IdleThread);

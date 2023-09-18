@@ -212,7 +212,7 @@ void PPCMthid4(u32 val);
 // Floating-point fraction inexact
 #define FPSCR_FI (1 << (31 - 14))
 // Floating-point result flags
-#define FPSCR_FPRF (0x1F << (31 - 19))
+#define FPSCR_FPRF (0b11111 << (31 - 19))
 // Unknown
 #define FPSCR_UNK20 (1 << (31 - 20))
 // Floating-point invalid operation exception for software request
@@ -234,7 +234,7 @@ void PPCMthid4(u32 val);
 // Floating-point non-IEEE mode
 #define FPSCR_NI (1 << (31 - 29))
 // Floating-point rounding control
-#define FPSCR_RN (0x3 << (31 - 31))
+#define FPSCR_RN (0b11 << (31 - 31))
 
 /**
  * HID2
@@ -297,7 +297,7 @@ void PPCMthid4(u32 val);
 #define DMAL_DMA_LD (1 << (31 - 27))
 // Low order bits of transfer length, in cache lines. High order bits are in
 // DMAU
-#define DMAL_DMA_LEN_L (0x3 << (31 - 29))
+#define DMAL_DMA_LEN_L (0b11 << (31 - 29))
 // Trigger bit
 #define DMAL_DMA_T (1 << (31 - 30))
 // Flush bit
@@ -320,9 +320,9 @@ void PPCMthid4(u32 val);
 // Unknown
 #define HID4_H4A (1 << (31 - 0))
 // L2 fetch mode
-#define HID4_L2FM (0x3 << (31 - 2))
+#define HID4_L2FM (0b11 << (31 - 2))
 // Bus pipeline depth
-#define HID4_BPD (0x3 << (31 - 4))
+#define HID4_BPD (0b11 << (31 - 4))
 // L2 second castout buffer enable
 #define HID4_BCO (1 << (31 - 5))
 // Secondary BAT enable

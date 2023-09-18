@@ -71,7 +71,7 @@ static void cbForNandCreateDir(s32 result, NANDCommandBlock* block) {
 
 void __DVDStoreErrorCode(u32 error, DVDErrorCallback callback) {
     __ErrorInfo.error = error;
-    __ErrorInfo.time = OS_TICKS_TO_SEC(OSGetTime());
+    __ErrorInfo.sec = OS_TICKS_TO_SEC(OSGetTime());
     Callback = callback;
 
     if (NANDPrivateCreateDirAsync("/shared2/test2", NAND_PERM_RWALL, 0,

@@ -2,8 +2,7 @@
 #include <revolution/OS.h>
 #include <revolution/SC.h>
 
-typedef void (*FatalFuncType)(void);
-static FatalFuncType FatalFunc = NULL;
+static funcptr_t FatalFunc = NULL;
 
 // TODO: How to encode this Shift-JIS text?
 #ifdef __DECOMP_NON_MATCHING

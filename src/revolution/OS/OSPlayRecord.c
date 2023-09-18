@@ -60,8 +60,7 @@ static u32 RecordCheckSum(const OSPlayRecord* playRec) {
     return checksum;
 }
 
-// Likely a result of __OSCreatePlayRecord
-CW_FORCE_BSS(OSPlayRecord_c, PlayRecord);
+CW_FORCE_ORDER(OSPlayRecord_c, PlayRecord);
 
 static void PlayRecordAlarmCallback(OSAlarm* alarm, OSContext* ctx) {
 #pragma unused(alarm)

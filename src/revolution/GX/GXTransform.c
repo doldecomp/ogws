@@ -52,7 +52,7 @@ void __GXSetProjection(void) {
     // Temp required to match
     volatile void* wgpipe = &WGPIPE;
 
-    GX_XF_LOAD_REGS(ARRAY_LENGTH(gxdt->proj), GX_XF_REG_PROJECTIONA);
+    GX_XF_LOAD_REGS(LENGTHOF(gxdt->proj), GX_XF_REG_PROJECTIONA);
     WriteProjPS(wgpipe, gxdt->proj);
     WGPIPE.i = gxdt->projType;
 }

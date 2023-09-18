@@ -46,7 +46,7 @@ void __DBVECTOR(void);
 void __OSEVSetNumber(void);
 void __OSEVEnd(void);
 
-CW_FORCE_BSS(OS_c, __OSRebootParams);
+CW_FORCE_ORDER(OS_c, __OSRebootParams);
 
 asm void __OSFPRInit(void) {
     // clang-format off
@@ -167,8 +167,8 @@ u32 OSGetConsoleType(void) {
 
     hollywood = __OSGetHollywoodRev();
 
-    if (OS_DVD_DEVICE_CODE_ADDR & 0x8000) {
-        switch (OS_DVD_DEVICE_CODE_ADDR & ~0x8000) {
+    if (OS_DVD_DEVICE_CODE & DVD_DEVICE_CODE_READ) {
+        switch (OS_DVD_DEVICE_CODE & ~DVD_DEVICE_CODE_READ) {
         case 0x0002:
         case 0x0003:
         case 0x0203:
@@ -323,14 +323,15 @@ static void ClearMEM2Arena(void) DONT_INLINE {
     }
 }
 
-static void InquiryCallback(s32 arg0, DVDCommandBlock* block) {
-#pragma unused(arg0)
+static void InquiryCallback(s32 result, DVDCommandBlock* block) {
+#pragma unused(result)
+
     switch (block->state) {
-    case 0:
-        OS_DVD_DEVICE_CODE_ADDR = DriveInfo.deviceCode | 0x8000;
+    case DVD_STATE_IDLE:
+        OS_DVD_DEVICE_CODE = DVD_DEVICE_CODE(DriveInfo.deviceCode);
         break;
     default:
-        OS_DVD_DEVICE_CODE_ADDR = 0x0001;
+        OS_DVD_DEVICE_CODE = 0x0001;
         break;
     }
 }
@@ -601,8 +602,8 @@ void OSInit(void) {
             DVDInit();
 
             if (__OSIsGcam) {
-                OS_DVD_DEVICE_CODE_ADDR = 0x9000;
-            } else if (OS_DVD_DEVICE_CODE_ADDR == 0) {
+                OS_DVD_DEVICE_CODE = DVD_DEVICE_CODE(0x1000);
+            } else if (OS_DVD_DEVICE_CODE == 0) {
                 DCInvalidateRange(&DriveInfo, sizeof(DVDDriveInfo));
                 DVDInquiryAsync(&DriveBlock, &DriveInfo, InquiryCallback);
             }

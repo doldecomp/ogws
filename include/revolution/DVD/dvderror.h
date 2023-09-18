@@ -7,16 +7,25 @@ extern "C" {
 
 typedef void (*DVDErrorCallback)(s32 result, s32 arg1);
 
+#define DVD_ERROR_CMD_MAX 5
+
 typedef struct DVDErrorInfo {
     char game[4]; // at 0x0
-    u8 disk;      // at 0x1
-    u8 revision;  // at 0x2
+    u8 disk;      // at 0x4
+    u8 version;   // at 0x5
     u32 error;    // at 0x8
-    s32 time;     // at 0xC
+    s32 sec;      // at 0xC
     u32 disr;     // at 0x10
     u32 dicr;     // at 0x14
     u32 next;     // at 0x18
-    char UNK_1C[0x80 - 0x1C];
+
+    struct {
+        u32 command; // at 0x1C
+        u32 param1;  // at 0x20
+        u32 param2;  // at 0x24
+        u32 intType; // at 0x28
+        u32 tick;    // at 0x2C
+    } info[DVD_ERROR_CMD_MAX];
 } DVDErrorInfo;
 
 extern DVDErrorInfo __ErrorInfo;

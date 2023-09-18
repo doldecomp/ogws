@@ -21,6 +21,9 @@ extern "C" {
 #define OS_USEC_TO_TICKS(x) ((x) * (OS_TIME_SPEED / 125000) / 8)
 #define OS_NSEC_TO_TICKS(x) ((x) * (OS_TIME_SPEED / 125000) / 8000)
 
+// Interpret as signed to find tick delta
+#define OS_TICKS_DELTA(x, y) ((s32)x - (s32)y)
+
 typedef struct OSCalendarTime {
     s32 sec;       // at 0x0
     s32 min;       // at 0x4
@@ -35,7 +38,7 @@ typedef struct OSCalendarTime {
 } OSCalendarTime;
 
 s64 OSGetTime(void);
-s32 OSGetTick(void);
+u32 OSGetTick(void);
 
 s64 __OSGetSystemTime(void);
 s64 __OSTimeToSystemTime(s64 time);

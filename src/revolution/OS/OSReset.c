@@ -119,7 +119,7 @@ void __OSShutdownDevices(u32 event) {
 void __OSGetDiscState(u8* out) {
     u32 flags;
 
-    if (__DVDGetCoverStatus() != 2) {
+    if (__DVDGetCoverStatus() != DVD_COVER_CLOSED) {
         *out = 3;
     } else if (*out == 1) {
         if (!__OSGetRTCFlags(&flags) || flags == 0) {

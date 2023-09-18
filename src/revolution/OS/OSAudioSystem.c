@@ -19,10 +19,10 @@ static u8 DSPInitCode[128] = {
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
 
 static void waitMicroSec(u32 usec) {
-    const s32 start = OSGetTick();
+    const u32 start = OSGetTick();
     do {
         ;
-    } while (OS_TICKS_TO_USEC(OSGetTick() - start) < usec);
+    } while (OS_TICKS_TO_USEC(OS_TICKS_DELTA(OSGetTick(), start)) < usec);
 }
 
 static void __AIClockInit(BOOL arg0) {
@@ -69,7 +69,7 @@ static void __AIClockInit(BOOL arg0) {
 
 void __OSInitAudioSystem(void) {
     u16 cpuMboxHi;
-    s32 start;
+    u32 start;
     u16 ctrl;
 
     if (!__OSInIPL) {
@@ -113,7 +113,7 @@ void __OSInitAudioSystem(void) {
     start = OSGetTick();
     do {
         ;
-    } while (OSGetTick() - start < 0x892);
+    } while (OS_TICKS_DELTA(OSGetTick(), start) < 2194);
 
     *(u32*)&DSP_HW_REGS[DSP_AR_DMA_MMADDR_H] = 0x01000000;
     *(u32*)&DSP_HW_REGS[DSP_AR_DMA_ARADDR_H] = 0x00000000;
@@ -156,7 +156,7 @@ void __OSInitAudioSystem(void) {
 }
 
 void __OSStopAudioSystem(void) {
-    s32 start;
+    u32 start;
     u16 ctrl;
 
     DSP_HW_REGS[DSP_CSR] = DSP_CSR_HALT | DSP_CSR_RES;
@@ -187,7 +187,7 @@ void __OSStopAudioSystem(void) {
     start = OSGetTick();
     do {
         ;
-    } while (OSGetTick() - start < 0x2C);
+    } while (OS_TICKS_DELTA(OSGetTick(), start) < 44);
 
     // Reset DSP
     DSP_HW_REGS[DSP_CSR] |= 0x1;

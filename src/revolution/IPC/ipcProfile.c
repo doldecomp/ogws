@@ -11,8 +11,7 @@ static s32 IpcFdArray[REQUEST_MAX];
 static void AddReqInfo(IPCRequestEx* req, s32 fd);
 static void DelReqInfo(IPCRequestEx* req, s32 fd);
 
-// For ordering, not deadstrip
-CW_FORCE_BSS(ipcProfile_c, IpcFdArray);
+CW_FORCE_ORDER(ipcProfile_c, IpcFdArray);
 
 void IPCiProfInit(void) {
     int i;

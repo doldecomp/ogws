@@ -36,7 +36,7 @@ static s32 __CNTConvertErrorCode(s32 error) {
         return error;
     }
 
-    for (; i < ARRAY_LENGTH(errorMap); i += 2) {
+    for (; i < LENGTHOF(errorMap); i += 2) {
         if (error == errorMap[i]) {
             return errorMap[i + 1];
         }

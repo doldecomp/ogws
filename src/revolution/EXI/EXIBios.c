@@ -1,3 +1,4 @@
+#include <revolution/DVD.h>
 #include <revolution/EXI.h>
 #include <revolution/OS.h>
 #include <string.h>
@@ -163,7 +164,7 @@ BOOL EXISync(EXIChannel chan) {
                     (EXI_CHAN_CTRL[chan].imm != 0x01010000 &&
                      EXI_CHAN_CTRL[chan].imm != 0x05070000 &&
                      EXI_CHAN_CTRL[chan].imm != 0x04220001) ||
-                    OS_DVD_DEVICE_CODE_ADDR == 0x8200) {
+                    OS_DVD_DEVICE_CODE == DVD_DEVICE_CODE(0x0200)) {
                     ret = TRUE;
                 }
             }

@@ -228,7 +228,7 @@ BOOL DVDFastOpen(s32 entrynum, DVDFileInfo* info) {
     info->offset = FstStart[entrynum].offset >> __DVDLayoutFormat;
     info->size = FstStart[entrynum].size;
     info->callback = NULL;
-    info->block.state = DVD_STATUS_0;
+    info->block.state = DVD_STATE_IDLE;
 
     return TRUE;
 }
@@ -253,13 +253,13 @@ BOOL DVDOpen(const char* path, DVDFileInfo* info) {
     info->offset = FstStart[entrynum].offset >> __DVDLayoutFormat;
     info->size = FstStart[entrynum].size;
     info->callback = NULL;
-    info->block.state = DVD_STATUS_0;
+    info->block.state = DVD_STATE_IDLE;
 
     return TRUE;
 }
 
 BOOL DVDClose(DVDFileInfo* info) {
-    DVDCancel(info);
+    DVDCancel(&info->block);
     return TRUE;
 }
 
@@ -362,20 +362,22 @@ s32 DVDReadPrio(DVDFileInfo* info, void* dst, s32 size, s32 offset, s32 prio) {
     block = &info->block;
     if (!DVDReadAbsAsyncPrio(block, dst, size, info->offset + (offset >> 2),
                              cbForReadSync, prio)) {
-        return DVD_RESULT_M1;
+        return DVD_RESULT_FATAL;
     }
 
     enabled = OSDisableInterrupts();
 
     while (TRUE) {
-        if (block->state == DVD_STATUS_0) {
+        s32 state = block->state;
+
+        if (state == DVD_STATE_IDLE) {
             ret = block->transferTotal;
             break;
-        } else if (block->state == DVD_STATUS_M1) {
-            ret = DVD_RESULT_M1;
+        } else if (state == DVD_STATE_FATAL) {
+            ret = DVD_RESULT_FATAL;
             break;
-        } else if (block->state == DVD_STATUS_CANCELED) {
-            ret = DVD_RESULT_M3;
+        } else if (state == DVD_STATE_CANCELED) {
+            ret = DVD_RESULT_CANCELED;
             break;
         }
 

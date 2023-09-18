@@ -288,7 +288,7 @@ GXColor RFLGetFavoriteColor(RFLFavoriteColor color) {
 GXColor RFLiGetFacelineColor(const RFLiCharInfo* info) {
     int color = 0;
 
-    if (info->faceline.color < ARRAY_LENGTH(cFacelineColor)) {
+    if (info->faceline.color < LENGTHOF(cFacelineColor)) {
         color = info->faceline.color;
     }
 

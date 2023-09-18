@@ -1,5 +1,6 @@
 #ifndef RVL_SDK_OS_HARDWARE_H
 #define RVL_SDK_OS_HARDWARE_H
+#include <revolution/DVD/dvd.h>
 #include <revolution/OS/OSAddress.h>
 #include <revolution/OS/OSThread.h>
 #include <types.h>
@@ -7,6 +8,7 @@
 extern "C" {
 #endif
 
+// Forward declarations
 typedef struct OSContext;
 typedef struct OSExecParams;
 
@@ -42,16 +44,13 @@ typedef struct OSExecParams;
     /* Memory-mapped value for direct access */                                \
     type OS_##name : (addr);
 
+typedef enum {
+    OS_BOOT_MAGIC_BOOTROM = 0xD15EA5E,
+    OS_BOOT_MAGIC_JTAG = 0xE5207C22,
+} OSBootMagic;
+
 typedef struct OSBootInfo {
-    u32 appName;    // at 0x0
-    u16 appMaker;   // at 0x4
-    u8 diskID;      // at 0x6
-    u8 diskVer;     // at 0x7
-    u8 strmEnable;  // at 0x8
-    u8 strmBufSize; // at 0x9
-    char UNK_0xA[0x18 - 0xA];
-    u32 rvlDiscMagic; // at 0x18
-    u32 gcDiscMagic;  // at 0x1C
+    DVDDiskID diskID; // at 0x0
     u32 bootMagic;    // at 0x20
     u32 aplVersion;   // at 0x24
     u32 physMemSize;  // at 0x28
@@ -121,7 +120,7 @@ OS_DEF_GLOBAL_VAR(void*, REL_NAME_TABLE,                 0x800030D0);
 OS_DEF_GLOBAL_VAR(u32, DOL_TOTAL_TEXT_DATA,              0x800030D4);
 OS_DEF_GLOBAL_VAR(s64, SYSTEM_TIME,                      0x800030D8);
 OS_DEF_GLOBAL_VAR(u16, GC_PAD_3_BTN,                     0x800030E4);
-OS_DEF_GLOBAL_VAR(volatile u16, DVD_DEVICE_CODE_ADDR,    0x800030E6);
+OS_DEF_GLOBAL_VAR(volatile u16, DVD_DEVICE_CODE,         0x800030E6);
 OS_DEF_GLOBAL_VAR(u8, BI2_DEBUG_FLAG,                    0x800030E8);
 OS_DEF_GLOBAL_VAR(u8, PAD_SPEC,                          0x800030E9);
 OS_DEF_GLOBAL_VAR(struct OSExecParams*, DOL_EXEC_PARAMS, 0x800030F0);
@@ -150,6 +149,8 @@ OS_DEF_GLOBAL_VAR(u8, CURRENT_APP_TYPE,                  0x80003184);
 OS_DEF_GLOBAL_VAR(u32, MINIMUM_IOS_VERSION,              0x80003188);
 OS_DEF_GLOBAL_VAR(u32, NAND_TITLE_LAUNCH_CODE,           0x8000318C);
 OS_DEF_GLOBAL_VAR(u32, NAND_TITLE_RETURN_CODE,           0x80003190);
+OS_DEF_GLOBAL_VAR(u32, BOOT_PARTITION_TYPE,              0x80003194);
+OS_DEF_GLOBAL_VAR(u32, BOOT_PARTITION_OFFSET,            0x80003198);
 OS_DEF_GLOBAL_ARR(u8, SC_PRDINFO, [0x100],               0x80003800);
 // clang-format on
 

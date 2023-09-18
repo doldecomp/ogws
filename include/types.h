@@ -9,6 +9,7 @@
 #include <stddef.h>
 #endif
 
+#include <decomp.h>
 #include <macros.h>
 
 typedef unsigned long long u64;

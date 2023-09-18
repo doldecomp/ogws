@@ -526,7 +526,7 @@ RVL_SDK_O_FILES := \
 	build/revolution/DSP/dsp_task.o \
 	\
 	build/revolution/DVD/dvdfs.o \
-	build/asm/revolution/DVD/dvd.o \
+	build/revolution/DVD/dvd.o \
 	build/revolution/DVD/dvdqueue.o \
 	build/revolution/DVD/dvderror.o \
 	build/revolution/DVD/dvdidutils.o \
