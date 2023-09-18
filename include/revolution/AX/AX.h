@@ -1,11 +1,12 @@
-#ifndef REVOSDK_AX
-#define REVOSDK_AX
+#ifndef RVL_SDK_AX_H
+#define RVL_SDK_AX_H
+#include <types.h>
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-typedef void (* AXCallback)(void);
-typedef void (* AXAuxCallback)(void *, void *);
+typedef void (*AXCallback)(void);
+typedef void (*AXAuxCallback)(void*, void*);
 
 #ifdef __cplusplus
 }
