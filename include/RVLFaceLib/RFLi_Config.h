@@ -1,6 +1,7 @@
 #ifndef RVL_FACE_LIBRARY_INTENRAL_CONFIG_H
 #define RVL_FACE_LIBRARY_INTERNAL_CONFIG_H
 #include <RVLFaceLib/RFLi_Types.h>
+#include <revolution/GX.h>
 #include <types.h>
 #ifdef __cplusplus
 extern "C" {
