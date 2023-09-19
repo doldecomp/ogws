@@ -25,6 +25,7 @@ typedef struct _AXVPB {
 UNKTYPE AXSetMaxDspCycles(UNKWORD);
 UNKWORD AXGetMaxVoices(void);
 
+AXPB* __AXGetPBs(void);
 void __AXSetPBDefault(AXVPB* vpb);
 
 #ifdef __cplusplus

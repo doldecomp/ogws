@@ -3,10 +3,12 @@
 
 // Helper macro to make code less ugly
 #define SEND_TO_DSP_SYNC(x)                                                    \
-    DSPSendMailToDSP((DSPMail)(x));                                            \
-    while (DSPCheckMailToDSP()) {                                              \
-        ;                                                                      \
-    }
+    do {                                                                       \
+        DSPSendMailToDSP((DSPMail)(x));                                        \
+        while (DSPCheckMailToDSP()) {                                          \
+            ;                                                                  \
+        }                                                                      \
+    } while (0)
 
 /**
  * Commands to the DSP sent via the mailbox.

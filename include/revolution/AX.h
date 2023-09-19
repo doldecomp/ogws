@@ -12,7 +12,9 @@ extern "C" {
 #include <revolution/AX/AXAlloc.h>
 #include <revolution/AX/AXAux.h>
 #include <revolution/AX/AXCL.h>
+#include <revolution/AX/AXComp.h>
 #include <revolution/AX/AXPB.h>
+#include <revolution/AX/AXSPB.h>
 #include <revolution/AX/AXVPB.h>
 
 #ifdef __cplusplus
