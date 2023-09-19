@@ -502,7 +502,7 @@ RVL_SDK_O_FILES := \
 	build/asm/revolution/AX/AXSPB.o \
 	build/asm/revolution/AX/AXVPB.o \
 	build/revolution/AX/AXComp.o \
-	build/asm/revolution/AX/DSPCode.o \
+	build/revolution/AX/DSPCode.o \
 	build/asm/revolution/AX/AXProf.o \
 	\
 	build/asm/revolution/AXFX/AXFXReverbHi.o \
