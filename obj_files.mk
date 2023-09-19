@@ -499,7 +499,7 @@ RVL_SDK_O_FILES := \
 	build/revolution/AX/AXAux.o \
 	build/revolution/AX/AXCL.o \
 	build/asm/revolution/AX/AXOut.o \
-	build/asm/revolution/AX/AXSPB.o \
+	build/revolution/AX/AXSPB.o \
 	build/asm/revolution/AX/AXVPB.o \
 	build/revolution/AX/AXComp.o \
 	build/revolution/AX/DSPCode.o \

@@ -5,6 +5,9 @@
 extern "C" {
 #endif
 
+#define AX_SAMPLES_PER_FRAME 96
+#define AX_SAMPLES_PER_FRAME_RMT 18
+
 typedef void (*AXAuxCallback)(void* chans, void* context);
 
 void __AXAuxInit(void);

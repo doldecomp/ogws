@@ -14,8 +14,7 @@
  * 96 samples per frame @ 32-bit depth
  */
 #define AUX_SAMPLE_DEPTH_BYTES sizeof(u32)
-#define AUX_SAMPLE_RATE 96
-#define AUX_CHAN_SIZE (AUX_SAMPLE_DEPTH_BYTES * AUX_SAMPLE_RATE)
+#define AUX_CHAN_SIZE (AUX_SAMPLE_DEPTH_BYTES * AX_SAMPLES_PER_FRAME)
 
 /**
  * Stereo : Left, Right, Surround
