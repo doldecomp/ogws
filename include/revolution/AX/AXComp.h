@@ -5,7 +5,7 @@
 extern "C" {
 #endif
 
-extern u16 __AXCompressorTable[] ALIGN(32);
+extern u16 __AXCompressorTable[];
 
 #ifdef __cplusplus
 }
