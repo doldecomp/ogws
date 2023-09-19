@@ -138,7 +138,7 @@ void GXDrawSphere(u32 stacks, u32 sectors) {
 
                 // Vertex 2 texcoord (S,T)
                 if (tex0_copy != GX_NONE) {
-                    GXTexCoord2f32((float)j / sectors, (float)(i + 1) / stacks);
+                    GXTexCoord2f32((f32)j / sectors, (f32)(i + 1) / stacks);
                 }
 
                 // Vertex 1 position
@@ -149,7 +149,7 @@ void GXDrawSphere(u32 stacks, u32 sectors) {
 
                 // Vertex 1 texcoord (S,T)
                 if (tex0_copy != GX_NONE) {
-                    GXTexCoord2f32((float)j / sectors, (float)i / stacks);
+                    GXTexCoord2f32((f32)j / sectors, (f32)i / stacks);
                 }
             }
         }
