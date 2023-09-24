@@ -255,7 +255,7 @@ inline void StampCommand(u32 command, u32 param1, u32 param2) {
     OSRestoreInterrupts(enabled);
 }
 
-CW_FORCE_ORDER(dvd_c, StampCommand);
+DECOMP_FORCEACTIVE(dvd_c, StampCommand);
 
 inline void StampIntType(u32 intType) {
     BOOL enabled = OSDisableInterrupts();

@@ -1,22 +1,25 @@
 #ifndef DECOMP_H
 #define DECOMP_H
 
+#define __CONCAT(x, y) x##y
+#define CONCAT(x, y) __CONCAT(x, y)
+
 // Codewarrior tricks for matching decomp
 // (Functions are given prototypes for -requireprotos)
 #ifdef __MWERKS__
-// Force BSS order
-#define CW_FORCE_ORDER(module, ...)                                              \
+// Force reference specific data
+#define DECOMP_FORCEACTIVE(module, ...)                                        \
     void fake_function(...);                                                   \
-    void FORCE_BSS##module##x(void);                                           \
-    void FORCE_BSS##module##x(void) { fake_function(__VA_ARGS__); }
-// Force strings into pool
-#define CW_FORCE_STRINGS(module, ...)                                          \
-    void fake_function(...);                                                   \
-    void FORCE_STRINGS##module(void);                                          \
-    void FORCE_STRINGS##module(void) { fake_function(__VA_ARGS__); }
+    void CONCAT(FORCEACTIVE##module, __LINE__)(void);                          \
+    void CONCAT(FORCEACTIVE##module, __LINE__)(void) {                         \
+        fake_function(__VA_ARGS__);                                            \
+    }
+
+// Force literal ordering, such as floats in sdata2
+#define DECOMP_FORCELITERAL(x) (x)
 #else
-#define CW_FORCE_ORDER(module, ...)
-#define CW_FORCE_STRINGS(module, ...)
+#define DECOMP_FORCEACTIVE(module, ...) ((void)0)
+#define DECOMP_FORCELITERAL(x) ((void)0)
 #endif
 
 #endif

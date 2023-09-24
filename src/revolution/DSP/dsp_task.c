@@ -336,4 +336,7 @@ void __DSP_remove_task(DSPTask* task) {
     }
 }
 
-CW_FORCE_STRINGS(dsp_task_c, "__DSP_add_task() : Added task    : 0x%08X\n");
+// clang-format off
+DECOMP_FORCEACTIVE(dsp_task_c,
+                   "__DSP_add_task() : Added task    : 0x%08X\n");
+// clang-format on

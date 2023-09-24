@@ -56,7 +56,7 @@ static u32 RecordCheckSum(const OSPlayRecord* playRec) {
     return checksum;
 }
 
-CW_FORCE_ORDER(OSPlayRecord_c, PlayRecord);
+DECOMP_FORCEACTIVE(OSPlayRecord_c, PlayRecord);
 
 static void PlayRecordAlarmCallback(OSAlarm* alarm, OSContext* ctx) {
 #pragma unused(alarm)

@@ -46,7 +46,7 @@ void __DBVECTOR(void);
 void __OSEVSetNumber(void);
 void __OSEVEnd(void);
 
-CW_FORCE_ORDER(OS_c, __OSRebootParams);
+DECOMP_FORCEACTIVE(OS_c, __OSRebootParams);
 
 asm void __OSFPRInit(void) {
     // clang-format off

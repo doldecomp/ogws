@@ -5,6 +5,31 @@
 extern "C" {
 #endif
 
+typedef enum { AX_VOICE_NORMAL, AX_VOICE_STREAM } AXVOICETYPE;
+
+typedef enum { AX_VOICE_STOP, AX_VOICE_RUN } AXVOICESTATE;
+
+typedef enum {
+    AX_SAMPLE_FORMAT_DSP_ADPCM = 0,
+    AX_SAMPLE_FORMAT_PCM_S16 = 10,
+    AX_SAMPLE_FORMAT_PCM_S8 = 25,
+} AXSAMPLETYPE;
+
+// For rmtIIR union I think? From NW4R asserts, but fits well in __AXSyncPBs
+typedef enum {
+    AX_PB_LPF_ON = 1,
+    AX_PB_BIQUAD_ON,
+};
+
+typedef enum {
+    AX_SRC_TYPE_NONE,
+    AX_SRC_TYPE_LINEAR,
+    AX_SRC_TYPE_4TAP_8K,
+    AX_SRC_TYPE_4TAP_12K,
+    AX_SRC_TYPE_4TAP_16K,
+    AX_SRC_TYPE_4TAP_AUTO
+} AXPBSRCTYPE;
+
 typedef struct _AXPBMIX {
     u16 vL;          // at 0x0
     u16 vDeltaL;     // at 0x2

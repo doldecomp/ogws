@@ -12,7 +12,7 @@ typedef struct _AXPROFILE {
     s64 TIME_0x18;
     s64 timeUserFrameCallback; // at 0x20
     s64 timeAiDma;             // at 0x28
-    u32 maxVoices;             // at 0x30
+    s32 maxVoices;             // at 0x30
     UNKWORD WORD_0x34;
 } AXPROFILE;
 

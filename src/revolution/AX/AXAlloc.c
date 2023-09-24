@@ -13,7 +13,7 @@ void __AXServiceCallbackStack(void) {
     AXVPB* it = __AXPopCallbackStack();
 
     while (it != NULL) {
-        if (it->priority > 0) {
+        if (it->priority > AX_PRIORITY_FREE) {
             if (it->callback != NULL) {
                 it->callback(it);
             }
@@ -129,8 +129,8 @@ void AXFreeVoice(AXVPB* vpb) {
 
     __AXRemoveFromStack(vpb);
 
-    if (vpb->pb.state == 1) {
-        vpb->depop = 1;
+    if (vpb->pb.state == AX_VOICE_RUN) {
+        vpb->depop = TRUE;
     }
 
     __AXSetPBDefault(vpb);
@@ -150,8 +150,8 @@ AXVPB* AXAcquireVoice(u32 prio, AXVoiceCallback callback, u32 userContext) {
             vpb = __AXPopStackFromBottom(i);
 
             if (vpb != NULL) {
-                if (vpb->pb.state == 1) {
-                    vpb->depop = 1;
+                if (vpb->pb.state == AX_VOICE_RUN) {
+                    vpb->depop = TRUE;
                 }
 
                 if (vpb->callback != NULL) {

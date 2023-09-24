@@ -33,7 +33,14 @@ void __OSInitNet(void) {
     }
 }
 
-CW_FORCE_STRINGS(OSNet_c, "NWC24iPrepareShutdown", "/dev/net/kd/request",
-                 "NWC24SuspendScheduler", "NWC24ResumeScheduler",
-                 "NWC24iRequestShutdown", "NWC24Shutdown_: Give up!\n",
-                 "NWC24iSetRtcCounter_", "/dev/net/kd/time");
+// clang-format off
+DECOMP_FORCEACTIVE(OSNet_c,
+                   "NWC24iPrepareShutdown",
+                   "/dev/net/kd/request",
+                   "NWC24SuspendScheduler",
+                   "NWC24ResumeScheduler",
+                   "NWC24iRequestShutdown",
+                   "NWC24Shutdown_: Give up!\n",
+                   "NWC24iSetRtcCounter_",
+                   "/dev/net/kd/time");
+// clang-format on
