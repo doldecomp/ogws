@@ -39,19 +39,7 @@ namespace nw4r
 			detail::AxfxImpl mAxfxImpl; // at 0xc
 			DelayParam mParam; // at 0x18
 			
-			AXFXDelay mAXFXDelay; // at 0x24
-			
-			u32 INT_0x64;
-			u32 INT_0x68;
-			u32 INT_0x6C;
-			
-			u32 INT_0x70;
-			u32 INT_0x74;
-			u32 INT_0x78;
-			
-			u32 INT_0x7C;
-			u32 INT_0x80;
-			u32 INT_0x84;
+			AXFX_DELAY mAXFXDelay; // at 0x24
 		};
 	}
 }

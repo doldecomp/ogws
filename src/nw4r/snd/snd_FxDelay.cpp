@@ -74,9 +74,9 @@ namespace nw4r
 		{
 			mParam = param;
 			
-			INT_0x64 = INT_0x68 = INT_0x6C = Clamp<u32>(1, 5000, param.FLOAT_0x0);
-			INT_0x70 = INT_0x74 = INT_0x78 = Clamp<u32>(0, 99, 100.0f * param.FLOAT_0x4);
-			INT_0x7C = INT_0x80 = INT_0x84 = Clamp<u32>(0, 100, 100.0f * param.FLOAT_0x8);
+			mAXFXDelay.param.INT_0x0 = mAXFXDelay.param.INT_0x4 = mAXFXDelay.param.INT_0x8 = Clamp<u32>(1, 5000, param.FLOAT_0x0);
+			mAXFXDelay.param.INT_0xC = mAXFXDelay.param.INT_0x10 = mAXFXDelay.param.INT_0x14 = Clamp<u32>(0, 99, 100.0f * param.FLOAT_0x4);
+			mAXFXDelay.param.INT_0x18 = mAXFXDelay.param.INT_0x1C = mAXFXDelay.param.INT_0x20 = Clamp<u32>(0, 100, 100.0f * param.FLOAT_0x8);
 			
 			if (!mAxfxImpl.mPoweredFlag) return true;
 			
