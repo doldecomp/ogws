@@ -1,6 +1,10 @@
 #include <revolution/AXFX.h>
 
-s32 __SinTableFixedPoint[] = {
+extern s32 __SinTableFixedPoint[128];
+
+s32* __AXFXGetLfoSinTable(void) { return __SinTableFixedPoint; }
+
+static s32 __SinTableFixedPoint[128] = {
     0,        411733,   823219,   1234208,  1644454,  2053710,  2461728,
     2868264,  3273072,  3675908,  4076531,  4474698,  4870168,  5262706,
     5652074,  6038037,  6420363,  6798821,  7173184,  7543226,  7908725,
@@ -20,5 +24,3 @@ s32 __SinTableFixedPoint[] = {
     6420360,  6038037,  5652073,  5262704,  4870169,  4474697,  4076529,
     3675906,  3273072,  2868263,  2461726,  2053710,  1644454,  1234206,
     823215,   411733};
-
-s32* __AXFXGetLfoSinTable(void) { return __SinTableFixedPoint; }

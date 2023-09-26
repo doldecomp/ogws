@@ -1,15 +1,18 @@
-#ifndef REVOSDK_AX_FX_HOOKS_H
-#define REVOSDK_AX_FX_HOOKS_H
+#ifndef RVL_SDK_AXFX_HOOKS_H
+#define RVL_SDK_AXFX_HOOKS_H
 #include <types.h>
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-typedef void *(*AXFXAllocHook)(u32);
-typedef void (*AXFXFreeHook)(void *);
+typedef void* (*AXFXAllocHook)(size_t size);
+typedef void (*AXFXFreeHook)(void* block);
 
-UNKTYPE AXFXGetHooks(AXFXAllocHook *, AXFXFreeHook *);
-UNKTYPE AXFXSetHooks(AXFXAllocHook, AXFXFreeHook);
+extern AXFXAllocHook __AXFXAlloc;
+extern AXFXFreeHook __AXFXFree;
+
+void AXFXSetHooks(AXFXAllocHook alloc, AXFXFreeHook free);
+void AXFXGetHooks(AXFXAllocHook* alloc, AXFXFreeHook* free);
 
 #ifdef __cplusplus
 }

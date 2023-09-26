@@ -4,7 +4,9 @@
 extern "C" {
 #endif
 
+#include <revolution/AXFX/AXFXHooks.h>
 #include <revolution/AXFX/AXFXLfoTable.h>
+#include <revolution/AXFX/AXFXSrcCoef.h>
 
 #ifdef __cplusplus
 }

@@ -5,8 +5,6 @@
 extern "C" {
 #endif
 
-extern s32 __SinTableFixedPoint[];
-
 s32* __AXFXGetLfoSinTable(void);
 
 #ifdef __cplusplus
