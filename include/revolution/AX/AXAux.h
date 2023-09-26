@@ -6,7 +6,9 @@ extern "C" {
 #endif
 
 #define AX_SAMPLES_PER_FRAME 96
+#define AX_SAMPLE_DEPTH_BYTES sizeof(u32)
 #define AX_SAMPLES_PER_FRAME_RMT 18
+#define AX_FRAME_SIZE (AX_SAMPLES_PER_FRAME * AX_SAMPLE_DEPTH_BYTES)
 
 typedef void (*AXAuxCallback)(void* chans, void* context);
 

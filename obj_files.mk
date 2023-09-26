@@ -494,11 +494,11 @@ RVL_SDK_O_FILES := \
 	\
 	build/revolution/ARC/arc.o \
 	\
-	build/asm/revolution/AX/AX.o \
+	build/revolution/AX/AX.o \
 	build/revolution/AX/AXAlloc.o \
 	build/revolution/AX/AXAux.o \
 	build/revolution/AX/AXCL.o \
-	build/asm/revolution/AX/AXOut.o \
+	build/revolution/AX/AXOut.o \
 	build/revolution/AX/AXSPB.o \
 	build/revolution/AX/AXVPB.o \
 	build/revolution/AX/AXComp.o \

@@ -33,7 +33,7 @@ namespace nw4r
 				struct CallbackListNode
 				{
 					ut::LinkListNode mNode; // at 0x0
-					AXCallback mCallback; // at 0x8
+					AXOutCallback mCallback; // at 0x8
 				};
 				
 				static AxManager * GetInstance();
@@ -55,7 +55,7 @@ namespace nw4r
 				UNKTYPE Update();
 				u8 * GetZeroBufferAddress();
 				
-				void RegisterCallback(CallbackListNode *, AXCallback);
+				void RegisterCallback(CallbackListNode *, AXOutCallback);
 				void UnregisterCallback(CallbackListNode *);
 				
 				UNKTYPE SetOutputMode(OutputMode);
@@ -70,7 +70,7 @@ namespace nw4r
 				u8 * mZeroBufferAddress; // at 0x4
 				
 				ut::LinkList<CallbackListNode, 0> mCallbackList; // from 0x8 to 0x10
-				AXCallback mLastCallback; // at 0x14
+				AXOutCallback mLastCallback; // at 0x14
 				bool mPoweredFlag; // at 0x18
 				bool BYTE_0x19;
 				bool BYTE_0x1A;

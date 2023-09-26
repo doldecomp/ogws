@@ -1,15 +1,6 @@
 #include <revolution/DSP.h>
 #include <revolution/OS.h>
 
-// Helper macro to make code less ugly
-#define SEND_TO_DSP_SYNC(x)                                                    \
-    do {                                                                       \
-        DSPSendMailToDSP((DSPMail)(x));                                        \
-        while (DSPCheckMailToDSP()) {                                          \
-            ;                                                                  \
-        }                                                                      \
-    } while (0)
-
 /**
  * Commands to the DSP sent via the mailbox.
  */
@@ -87,7 +78,7 @@ void __DSPHandler(s16 intr, OSContext* ctx) {
     case DSP_YIELD:
         if (__DSP_rude_task_pending) {
             if (__DSP_curr_task == __DSP_rude_task) {
-                SEND_TO_DSP_SYNC(MAIL_CONTINUE);
+                DSP_SEND_MAIL_SYNC(MAIL_CONTINUE);
 
                 __DSP_rude_task = NULL;
                 __DSP_rude_task_pending = FALSE;
@@ -96,7 +87,7 @@ void __DSPHandler(s16 intr, OSContext* ctx) {
                     __DSP_curr_task->resumeCallback(__DSP_curr_task);
                 }
             } else {
-                SEND_TO_DSP_SYNC(MAIL_NEW_UCODE);
+                DSP_SEND_MAIL_SYNC(MAIL_NEW_UCODE);
 
                 __DSP_exec_task(__DSP_curr_task, __DSP_rude_task);
 
@@ -108,13 +99,13 @@ void __DSPHandler(s16 intr, OSContext* ctx) {
             }
         } else if (__DSP_curr_task->next == NULL) {
             if (__DSP_curr_task == __DSP_first_task) {
-                SEND_TO_DSP_SYNC(MAIL_CONTINUE);
+                DSP_SEND_MAIL_SYNC(MAIL_CONTINUE);
 
                 if (__DSP_curr_task->resumeCallback != NULL) {
                     __DSP_curr_task->resumeCallback(__DSP_curr_task);
                 }
             } else {
-                SEND_TO_DSP_SYNC(MAIL_NEW_UCODE);
+                DSP_SEND_MAIL_SYNC(MAIL_NEW_UCODE);
 
                 __DSP_exec_task(__DSP_curr_task, __DSP_first_task);
 
@@ -122,7 +113,7 @@ void __DSPHandler(s16 intr, OSContext* ctx) {
                 __DSP_curr_task = __DSP_first_task;
             }
         } else {
-            SEND_TO_DSP_SYNC(MAIL_NEW_UCODE);
+            DSP_SEND_MAIL_SYNC(MAIL_NEW_UCODE);
 
             __DSP_exec_task(__DSP_curr_task, __DSP_curr_task->next);
 
@@ -137,7 +128,7 @@ void __DSPHandler(s16 intr, OSContext* ctx) {
                     __DSP_curr_task->doneCallback(__DSP_curr_task);
                 }
 
-                SEND_TO_DSP_SYNC(MAIL_NEW_UCODE);
+                DSP_SEND_MAIL_SYNC(MAIL_NEW_UCODE);
 
                 __DSP_exec_task(NULL, __DSP_rude_task);
                 __DSP_remove_task(__DSP_curr_task);
@@ -158,7 +149,7 @@ void __DSPHandler(s16 intr, OSContext* ctx) {
                     __DSP_curr_task->doneCallback(__DSP_curr_task);
                 }
 
-                SEND_TO_DSP_SYNC(MAIL_RESET);
+                DSP_SEND_MAIL_SYNC(MAIL_RESET);
 
                 __DSP_curr_task->state = DSP_TASK_STATE_3;
                 __DSP_remove_task(__DSP_curr_task);
@@ -168,7 +159,7 @@ void __DSPHandler(s16 intr, OSContext* ctx) {
                     __DSP_curr_task->doneCallback(__DSP_curr_task);
                 }
 
-                SEND_TO_DSP_SYNC(MAIL_NEW_UCODE);
+                DSP_SEND_MAIL_SYNC(MAIL_NEW_UCODE);
 
                 __DSP_curr_task->state = DSP_TASK_STATE_3;
                 __DSP_exec_task(NULL, __DSP_first_task);
@@ -180,7 +171,7 @@ void __DSPHandler(s16 intr, OSContext* ctx) {
                 __DSP_curr_task->doneCallback(__DSP_curr_task);
             }
 
-            SEND_TO_DSP_SYNC(MAIL_NEW_UCODE);
+            DSP_SEND_MAIL_SYNC(MAIL_NEW_UCODE);
 
             __DSP_curr_task->state = DSP_TASK_STATE_3;
             __DSP_exec_task(NULL, __DSP_curr_task->next);
@@ -201,29 +192,29 @@ void __DSPHandler(s16 intr, OSContext* ctx) {
 
 void __DSP_exec_task(DSPTask* task1, DSPTask* task2) {
     if (task1 != NULL) {
-        SEND_TO_DSP_SYNC(task1->iramDspLen);
-        SEND_TO_DSP_SYNC(task1->dramMmemLen);
-        SEND_TO_DSP_SYNC(task1->WORD_0x20);
+        DSP_SEND_MAIL_SYNC(task1->dramMmemAddr);
+        DSP_SEND_MAIL_SYNC(task1->dramMmemLen);
+        DSP_SEND_MAIL_SYNC(task1->dramDspAddr);
     } else {
-        SEND_TO_DSP_SYNC(0);
-        SEND_TO_DSP_SYNC(0);
-        SEND_TO_DSP_SYNC(0);
+        DSP_SEND_MAIL_SYNC(0);
+        DSP_SEND_MAIL_SYNC(0);
+        DSP_SEND_MAIL_SYNC(0);
     }
 
-    SEND_TO_DSP_SYNC(task2->iramMmemAddr);
-    SEND_TO_DSP_SYNC(task2->iramMmemLen);
-    SEND_TO_DSP_SYNC(task2->iramDspAddr);
+    DSP_SEND_MAIL_SYNC(task2->iramMmemAddr);
+    DSP_SEND_MAIL_SYNC(task2->iramMmemLen);
+    DSP_SEND_MAIL_SYNC(task2->iramDspAddr);
 
     if (task2->state == DSP_TASK_STATE_0) {
-        SEND_TO_DSP_SYNC(task2->startVector);
-        SEND_TO_DSP_SYNC(0);
-        SEND_TO_DSP_SYNC(0);
-        SEND_TO_DSP_SYNC(0);
+        DSP_SEND_MAIL_SYNC(task2->startVector);
+        DSP_SEND_MAIL_SYNC(0);
+        DSP_SEND_MAIL_SYNC(0);
+        DSP_SEND_MAIL_SYNC(0);
     } else {
-        SEND_TO_DSP_SYNC(task2->resumeVector);
-        SEND_TO_DSP_SYNC(task2->iramDspLen);
-        SEND_TO_DSP_SYNC(task2->dramMmemLen);
-        SEND_TO_DSP_SYNC(task2->WORD_0x20);
+        DSP_SEND_MAIL_SYNC(task2->resumeVector);
+        DSP_SEND_MAIL_SYNC(task2->dramMmemAddr);
+        DSP_SEND_MAIL_SYNC(task2->dramMmemLen);
+        DSP_SEND_MAIL_SYNC(task2->dramDspAddr);
     }
 }
 
@@ -237,24 +228,24 @@ void __DSP_boot_task(DSPTask* task) {
     mail = DSPReadMailFromDSP();
 
     // Send IRAM MMEM address
-    SEND_TO_DSP_SYNC(MAIL_SET_IRAM_MMEM_ADDR);
-    SEND_TO_DSP_SYNC(task->iramMmemAddr);
+    DSP_SEND_MAIL_SYNC(MAIL_SET_IRAM_MMEM_ADDR);
+    DSP_SEND_MAIL_SYNC(task->iramMmemAddr);
 
     // Send IRAM DSP address
-    SEND_TO_DSP_SYNC(MAIL_SET_IRAM_DSP_ADDR);
-    SEND_TO_DSP_SYNC((uintptr_t)task->iramDspAddr & 0xFFFF);
+    DSP_SEND_MAIL_SYNC(MAIL_SET_IRAM_DSP_ADDR);
+    DSP_SEND_MAIL_SYNC(task->iramDspAddr & 0xFFFF);
 
     // Send IRAM length
-    SEND_TO_DSP_SYNC(MAIL_SET_IRAM_LENGTH);
-    SEND_TO_DSP_SYNC(task->iramMmemLen);
+    DSP_SEND_MAIL_SYNC(MAIL_SET_IRAM_LENGTH);
+    DSP_SEND_MAIL_SYNC(task->iramMmemLen);
 
     // Send ARAM MMEM address(?)
-    SEND_TO_DSP_SYNC(MAIL_SET_ARAM_MMEM_ADDR);
-    SEND_TO_DSP_SYNC(NULL);
+    DSP_SEND_MAIL_SYNC(MAIL_SET_ARAM_MMEM_ADDR);
+    DSP_SEND_MAIL_SYNC(NULL);
 
     // Send start vector
-    SEND_TO_DSP_SYNC(MAIL_SET_START_VECTOR);
-    SEND_TO_DSP_SYNC(task->startVector);
+    DSP_SEND_MAIL_SYNC(MAIL_SET_START_VECTOR);
+    DSP_SEND_MAIL_SYNC(task->startVector);
 
     __DSP_debug_printf("DSP is booting task: 0x%08X\n", task);
     __DSP_debug_printf("__DSP_boot_task()  : IRAM MMEM ADDR: 0x%08X\n",

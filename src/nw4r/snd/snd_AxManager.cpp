@@ -208,7 +208,7 @@ namespace nw4r
 				return mZeroBufferAddress;
 			}
 			
-			void AxManager::RegisterCallback(CallbackListNode * pNode, AXCallback callback)
+			void AxManager::RegisterCallback(CallbackListNode * pNode, AXOutCallback callback)
 			{
 				AutoInterruptLock lock;
 				

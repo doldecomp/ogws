@@ -6,6 +6,10 @@ extern "C" {
 #endif
 
 #define AX_MAX_VOLUME 32768
+// Command list can hold up to 64 commands
+#define AX_CL_MAX_CMD 64
+// Each command takes up two bytes
+#define AX_CL_SIZE (AX_CL_MAX_CMD * sizeof(u16))
 
 typedef enum {
     AX_OUTPUT_STEREO,
@@ -18,7 +22,7 @@ extern u32 __AXClMode;
 u32 __AXGetCommandListCycles(void);
 void* __AXGetCommandListAddress(void);
 void __AXWriteToCommandList(u16 cmd);
-void __AXNextFrame(u32* surround, u32* lr, u32* rmt);
+void __AXNextFrame(void* surround, void* lr, void* rmt);
 void __AXClInit(void);
 void AXSetMode(u32 mode);
 u32 AXGetMode(void);

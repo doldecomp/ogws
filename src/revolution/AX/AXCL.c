@@ -6,10 +6,6 @@
 #define THRESHOLD 32768
 #define RELEASE_FRAMES 10
 
-// Command list can hold up to 64 commands
-#define LIST_MAX_CMD 64
-// Each command takes up two bytes
-#define LIST_SIZE (LIST_MAX_CMD * sizeof(u16))
 // Space is allocated for two commands lists
 #define LIST_MAX 2
 
@@ -51,7 +47,7 @@ static u16* __AXClWrite;
 u32 __AXClMode;
 
 static u32 __AXCommandListCycles;
-static u8 __AXCommandList[LIST_SIZE * LIST_MAX];
+static u8 __AXCommandList[AX_CL_SIZE * LIST_MAX];
 
 static BOOL __AXCompressor;
 
@@ -63,11 +59,12 @@ static u16 __AXAuxCVolume;
 u32 __AXGetCommandListCycles(void) { return __AXCommandListCycles; }
 
 void* __AXGetCommandListAddress(void) {
-    void* list = __AXCommandList + __AXCommandListPosition * LIST_SIZE;
+    void* list = __AXCommandList + __AXCommandListPosition * AX_CL_SIZE;
 
     __AXCommandListPosition++;
     __AXCommandListPosition %= LIST_MAX;
-    __AXClWrite = (u16*)(__AXCommandList + __AXCommandListPosition * LIST_SIZE);
+    __AXClWrite =
+        (u16*)(__AXCommandList + __AXCommandListPosition * AX_CL_SIZE);
 
     return list;
 }
@@ -77,7 +74,7 @@ void __AXWriteToCommandList(u16 cmd) {
     __AXClWrite++;
 }
 
-void __AXNextFrame(u32* surround, u32* lr, u32* rmt) {
+void __AXNextFrame(void* surround, void* lr, void* rmt) {
     void* imm;
     void* backup;
 
@@ -206,10 +203,10 @@ void __AXNextFrame(u32* surround, u32* lr, u32* rmt) {
     }
 
     LIST_WRITE_16(COMMAND_WM_OUTPUT);
-    LIST_WRITE_32(rmt[0]);
-    LIST_WRITE_32(rmt[1]);
-    LIST_WRITE_32(rmt[2]);
-    LIST_WRITE_32(rmt[3]);
+    LIST_WRITE_32(((u32*)rmt)[0]);
+    LIST_WRITE_32(((u32*)rmt)[1]);
+    LIST_WRITE_32(((u32*)rmt)[2]);
+    LIST_WRITE_32(((u32*)rmt)[3]);
     __AXCommandListCycles += 409;
 
     if (__AXClMode == AX_OUTPUT_DPL2) {
@@ -229,7 +226,7 @@ void __AXNextFrame(u32* surround, u32* lr, u32* rmt) {
     LIST_WRITE_16(COMMAND_END);
     __AXCommandListCycles += 30;
 
-    DCFlushRange(backup, LIST_SIZE);
+    DCFlushRange(backup, AX_CL_SIZE);
 }
 
 void __AXClInit(void) {

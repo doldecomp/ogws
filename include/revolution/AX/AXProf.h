@@ -6,13 +6,13 @@ extern "C" {
 #endif
 
 typedef struct _AXPROFILE {
-    s64 timeBegin;       // at 0x0
-    s64 timeMailCmdList; // at 0x8
-    s64 timeProcessAux;  // at 0x10
-    s64 TIME_0x18;
-    s64 timeUserFrameCallback; // at 0x20
-    s64 timeAiDma;             // at 0x28
-    s32 maxVoices;             // at 0x30
+    s64 timeBegin;           // at 0x0
+    s64 timeProcessAuxBegin; // at 0x8
+    s64 timeProcessAuxEnd;   // at 0x10
+    s64 timeUserFrameBegin;  // at 0x18
+    s64 timeUserFrameEnd;    // at 0x20
+    s64 timeEnd;             // at 0x28
+    s32 numVoices;           // at 0x30
     UNKWORD WORD_0x34;
 } AXPROFILE;
 

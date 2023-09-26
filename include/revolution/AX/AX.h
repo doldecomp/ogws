@@ -5,7 +5,8 @@
 extern "C" {
 #endif
 
-typedef void (*AXCallback)(void);
+void AXInit(void);
+void AXInitEx(u32 mode);
 
 #ifdef __cplusplus
 }

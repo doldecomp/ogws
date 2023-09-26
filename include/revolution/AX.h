@@ -13,10 +13,12 @@ extern "C" {
 #include <revolution/AX/AXAux.h>
 #include <revolution/AX/AXCL.h>
 #include <revolution/AX/AXComp.h>
+#include <revolution/AX/AXOut.h>
 #include <revolution/AX/AXPB.h>
 #include <revolution/AX/AXProf.h>
 #include <revolution/AX/AXSPB.h>
 #include <revolution/AX/AXVPB.h>
+#include <revolution/AX/DSPCode.h>
 
 #ifdef __cplusplus
 }

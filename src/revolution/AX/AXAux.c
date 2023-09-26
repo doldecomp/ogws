@@ -13,8 +13,7 @@
 /**
  * 96 samples per frame @ 32-bit depth
  */
-#define AUX_SAMPLE_DEPTH_BYTES sizeof(u32)
-#define AUX_CHAN_SIZE (AUX_SAMPLE_DEPTH_BYTES * AX_SAMPLES_PER_FRAME)
+#define AUX_CHAN_SIZE (AX_SAMPLE_DEPTH_BYTES * AX_SAMPLES_PER_FRAME)
 
 /**
  * Stereo : Left, Right, Surround
@@ -77,9 +76,9 @@ static u32 __AXAuxCpuReadWritePosition;
 
 void __AXAuxInit(void) {
     int i;
-    u32* bufferA = (u32*)__AXBufferAuxA[0];
-    u32* bufferB = (u32*)__AXBufferAuxB[0];
-    u32* bufferC = (u32*)__AXBufferAuxC[0];
+    u32* bufferA = (u32*)__AXBufferAuxA;
+    u32* bufferB = (u32*)__AXBufferAuxB;
+    u32* bufferC = (u32*)__AXBufferAuxC;
 
     __AXCallbackAuxA = NULL;
     __AXCallbackAuxB = NULL;
