@@ -1,0 +1,23 @@
+#ifndef RVL_SDK_AXFX_COMMON_H
+#define RVL_SDK_AXFX_COMMON_H
+#include <types.h>
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+typedef struct AXFX_BUS {
+    s32* left;     // at 0x0
+    s32* right;    // at 0x4
+    s32* surround; // at 0x8
+} AXFX_BUS;
+
+typedef struct AXFX_BUFFERUPDATE {
+    s32* left;     // at 0x0
+    s32* right;    // at 0x4
+    s32* surround; // at 0x8
+} AXFX_BUFFERUPDATE;
+
+#ifdef __cplusplus
+}
+#endif
+#endif

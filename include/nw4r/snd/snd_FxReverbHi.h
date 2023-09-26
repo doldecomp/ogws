@@ -42,14 +42,7 @@ namespace nw4r
 			detail::AxfxImpl mAxfxImpl; // at 0xc
 			ReverbHiParam mParam; // at 0x18
 			
-			AXFXReverbHi mAXFXReverbHi; // at 0x30
-			
-			float FLOAT_0x178;
-			float FLOAT_0x17C;
-			float FLOAT_0x180;
-			float FLOAT_0x184;
-			float FLOAT_0x188;
-			float FLOAT_0x18C;
+			AXFX_REVERBHI mAXFXReverbHi; // at 0x30
 		};
 	}
 }
