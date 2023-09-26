@@ -510,7 +510,7 @@ RVL_SDK_O_FILES := \
 	build/asm/revolution/AXFX/AXFXReverbHiExp.o \
 	build/asm/revolution/AXFX/AXFXReverbHiExpDpl2.o \
 	build/asm/revolution/AXFX/AXFXDelay.o \
-	build/asm/revolution/AXFX/AXFXChorus.o \
+	build/revolution/AXFX/AXFXChorus.o \
 	build/asm/revolution/AXFX/AXFXChorusExp.o \
 	build/revolution/AXFX/AXFXLfoTable.o \
 	build/revolution/AXFX/AXFXSrcCoef.o \

@@ -1,23 +1,5 @@
 .include "macros.inc"
 
-#################################################################
-# !!!!!!!!!!!!!!!!!!!!!!!!!!! HACK !!!!!!!!!!!!!!!!!!!!!!!!!!!! #
-# __ParamConvert is a local function (BBA). Many symbol maps    #
-# show that it is placed at the end of AXFXChorus.o.            #
-# Instead, here it is after AXFXChorusExpGetMemSize. WHY?!?!?!? #
-#                                                               #
-# Can't make it local because of this reason.                   #
-#                                                               #
-# Even if it was part of AXFXChorusExp.o, it still should be    #
-# at the end of the file.                                       #
-#                                                               #
-# AXFXChorusExpGetMemSize is not a weak function in BBA, so I   #
-# believe that is not the case here either.                     #
-#                                                               #
-# I have no idea how this has happened.                         #
-# !!!!!!!!!!!!!!!!!!!!!!!!!!! HACK !!!!!!!!!!!!!!!!!!!!!!!!!!!! #
-#################################################################
-
 .section .sdata2, "a"
 .balign 0x8
 .global lbl_804C1350
@@ -61,8 +43,8 @@ AXFXChorusExpGetMemSize:
 /* 80109F48 00104E48  38 63 96 00 */	addi r3, r3, 0x00009600@l
 /* 80109F4C 00104E4C  4E 80 00 20 */	blr 
 
-.global __ParamConvert
-__ParamConvert:
+.global AXFXChorusExpInit
+AXFXChorusExpInit:
 /* 80109F50 00104E50  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 80109F54 00104E54  7C 08 02 A6 */	mflr r0
 /* 80109F58 00104E58  90 01 00 24 */	stw r0, 0x24(r1)
@@ -268,7 +250,7 @@ lbl_8010A210:
 /* 8010A224 00105124  7F 83 E3 78 */	mr r3, r28
 /* 8010A228 00105128  4B FE 76 C1 */	bl OSRestoreInterrupts
 /* 8010A22C 0010512C  7F E3 FB 78 */	mr r3, r31
-/* 8010A230 00105130  4B FF FD 21 */	bl __ParamConvert
+/* 8010A230 00105130  4B FF FD 21 */	bl AXFXChorusExpInit
 /* 8010A234 00105134  2C 03 00 00 */	cmpwi r3, 0
 /* 8010A238 00105138  7C 7B 1B 78 */	mr r27, r3
 /* 8010A23C 0010513C  40 82 00 64 */	bne lbl_8010A2A0

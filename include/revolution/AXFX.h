@@ -4,6 +4,8 @@
 extern "C" {
 #endif
 
+#include <revolution/AXFX/AXFXChorus.h>
+#include <revolution/AXFX/AXFXChorusExp.h>
 #include <revolution/AXFX/AXFXCommon.h>
 #include <revolution/AXFX/AXFXHooks.h>
 #include <revolution/AXFX/AXFXLfoTable.h>

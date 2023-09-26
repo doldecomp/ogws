@@ -39,11 +39,7 @@ namespace nw4r
 			detail::AxfxImpl mAxfxImpl;
 			
 			ChorusParam mParam; // at 0x18
-			AXFXChorus mAXFXChorus; // 0x24
-			
-			u32 INT_0xC4;
-			u32 INT_0xC8;
-			u32 INT_0xCC;
+			AXFX_CHORUS mAXFXChorus; // 0x24
 		};
 	}
 }
