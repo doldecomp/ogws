@@ -32,14 +32,14 @@ asm void PSMTXMultVec(register const Mtx mtx, register const Vec* vec,
     ps_mul f4, f2, f0        // M2X*VX, M2Y*VY
 
     // ty = M1X*VX + M1Y*VY + M1Z*VZ + M1W
-    psq_st  f12, Vec.y(out), 1, 0
+    psq_st f12, Vec.y(out), 1, 0
 
     // Calculate Z transformation (dot(mtx[2], vec))
     ps_madd f5, f3, f1, f4 // M2Z*VZ+M2X*VX,            M2W+M2Y*VY
     ps_sum0 f6, f5, f6, f5 // M2Z*VZ+M2X*VX+M2W+M2Y*VY, junk
 
     // tz = M2X*VX + M2Y*VY + M2Z*VZ + M2W
-    psq_st  f6, Vec.z(out), 1, 0
+    psq_st f6, Vec.z(out), 1, 0
     
     blr
     // clang-format on
