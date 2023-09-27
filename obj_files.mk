@@ -436,7 +436,7 @@ RVL_SDK_O_FILES := \
 	build/revolution/MEM/mem_list.o \
 	\
 	build/asm/revolution/MTX/mtx.o \
-	build/asm/revolution/MTX/mtxvec.o \
+	build/revolution/MTX/mtxvec.o \
 	build/asm/revolution/MTX/mtx44.o \
 	build/revolution/MTX/vec.o \
 	build/asm/revolution/MTX/quat.o \

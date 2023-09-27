@@ -58,7 +58,7 @@ CFLAGS_NW4R := -lang c99 -enum int -inline auto -Cpp_exceptions off -RTTI off -p
 # Compiler flags for EGG
 CFLAGS_EGG := -lang c99 -enum int -inline auto -Cpp_exceptions off -RTTI off -proc gekko -fp hard -O4,p  -ir include/egg -ir include/nw4r -I- -Iinclude -ir include/MSL -ir include/revolution -nodefaults -rostr -str pool
 # Compiler flags for the RVL SDK
-CFLAGS_RVL := -lang c99 -enum int -O4,p -inline auto -ipa file -volatileasm -Cpp_exceptions off -RTTI off -proc gekko -fp hard -I- -Iinclude -ir include/MSL -ir include/revolution -nodefaults
+CFLAGS_RVL := -lang c99 -enum int -O4,p -inline auto -ipa file -Cpp_exceptions off -RTTI off -proc gekko -fp hard -I- -Iinclude -ir include/MSL -ir include/revolution -nodefaults
 # Compiler flags for the RVL Face Library
 CFLAGS_RFL := -lang c99 -enum int -O4,p -inline auto -ipa file -volatileasm -Cpp_exceptions off -RTTI off -proc gekko -fp hard -I- -Iinclude -ir include/MSL -ir include/revolution -nodefaults
 

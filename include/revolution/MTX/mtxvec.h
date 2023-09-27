@@ -6,7 +6,7 @@
 extern "C" {
 #endif
 
-void PSMTXMultVec(const Mtx, const Vec*, Vec*);
+void PSMTXMultVec(const Mtx mtx, const Vec* vec, Vec* out);
 
 #ifdef __cplusplus
 }
