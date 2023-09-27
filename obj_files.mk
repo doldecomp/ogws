@@ -438,7 +438,7 @@ RVL_SDK_O_FILES := \
 	build/asm/revolution/MTX/mtx.o \
 	build/asm/revolution/MTX/mtxvec.o \
 	build/asm/revolution/MTX/mtx44.o \
-	build/asm/revolution/MTX/vec.o \
+	build/revolution/MTX/vec.o \
 	build/asm/revolution/MTX/quat.o \
 	\
 	build/revolution/NAND/nand.o \
