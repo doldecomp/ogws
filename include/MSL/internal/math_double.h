@@ -11,6 +11,8 @@ static inline float sinf(float x) { return sin(x); }
 static inline float cosf(float x) { return cos(x); }
 static inline float tanf(float x) { return tan(x); }
 
+static inline float acosf(float x) { return acos(x); }
+
 float fabsf(float);
 
 #ifdef __cplusplus

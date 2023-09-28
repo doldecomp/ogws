@@ -16,10 +16,12 @@
     }
 
 // Force literal ordering, such as floats in sdata2
-#define DECOMP_FORCELITERAL(x) (x)
+#define DECOMP_FORCELITERAL(module, ...)                                       \
+    void CONCAT(FORCELITERAL##module, __LINE__)(void);                         \
+    void CONCAT(FORCELITERAL##module, __LINE__)(void) { (__VA_ARGS__); }
 #else
 #define DECOMP_FORCEACTIVE(module, ...) ((void)0)
-#define DECOMP_FORCELITERAL(x) ((void)0)
+#define DECOMP_FORCELITERAL(module, x) ((void)0)
 #endif
 
 #endif

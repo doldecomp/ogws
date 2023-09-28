@@ -108,7 +108,7 @@ f32 PSVECMag(register const Vec* v) {
         ps_madd z2,  z,  z,   xy2 // Z^2+X^2,     junk
         ps_sum0 dot, z2, xy2, xy2 // Z^2+X^2+Y^2, junk
 
-        // Get 0.0f
+        // Get zero
         fsubs c_zero, c_half, c_half
     }
     // clang-format on

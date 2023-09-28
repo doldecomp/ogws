@@ -439,7 +439,7 @@ RVL_SDK_O_FILES := \
 	build/revolution/MTX/mtxvec.o \
 	build/asm/revolution/MTX/mtx44.o \
 	build/revolution/MTX/vec.o \
-	build/asm/revolution/MTX/quat.o \
+	build/revolution/MTX/quat.o \
 	\
 	build/revolution/NAND/nand.o \
 	build/revolution/NAND/NANDOpenClose.o \

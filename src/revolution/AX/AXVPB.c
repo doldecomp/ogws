@@ -3,6 +3,8 @@
 #include <revolution/OS.h>
 #include <string.h>
 
+DECOMP_FORCELITERAL(AXVPB_c, 2.0f);
+
 /**
  * It's really even worse than this: what appears to be manually unrolled
  * copies.
@@ -500,8 +502,6 @@ void AXSetVoiceAddr(AXVPB* vpb, AXPBADDR* addr) {
 }
 
 void AXGetLpfCoefs(u16 freq, u16* a, u16* b) {
-    DECOMP_FORCELITERAL(2.0f);
-
     f32 rf31 = 2.0f - cosf(2 * M_PI * freq / AX_SAMPLE_RATE);
     f32 rf30 = sqrtf(rf31 * rf31 - 1.0f) - rf31;
 

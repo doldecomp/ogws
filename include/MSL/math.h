@@ -28,6 +28,8 @@ extern "C" {
 #define M_PI 3.141592653589793f
 #define M_SQRT3 1.73205f
 
+#define FLT_EPSILON 1e-5f
+
 #define fpclassify(x)                                                          \
     (sizeof(x) == sizeof(float)                                                \
          ? __fpclassifyf(x)                                                    \

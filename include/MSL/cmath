@@ -5,6 +5,7 @@
 
 namespace std {
 using ::acos;
+using ::acosf;
 using ::asin;
 using ::atan;
 using ::atan2;
