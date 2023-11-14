@@ -543,7 +543,7 @@ RVL_SDK_O_FILES := \
 	\
 	build/asm/revolution/CNT/cnt.o \
 	\
-	build/asm/revolution/ESP/esp.o \
+	build/revolution/ESP/esp.o \
 	\
 	build/asm/revolution/NET/nettime.o \
 	build/asm/revolution/NET/NETVersion.o \

@@ -70,13 +70,14 @@ s32 contentConvertPathToEntrynumNAND(CNTHandle* handle, const char* path) {
 
 u32 contentGetLengthNAND(const CNTFileInfo* info) { return info->length; }
 
-s32 contentReadNAND(CNTFileInfo* info, void* dst, s32 len, s32 offset) {
+s32 contentReadNAND(CNTFileInfo* info, void* dst, u32 len, s32 offset) {
     if (info->position + offset > info->length) {
         return -0x1391;
     }
 
     if (ESP_SeekContentFile(info->handle->fd,
-                            info->offset + info->position + offset, 0) < 0) {
+                            info->offset + info->position + offset,
+                            IPC_SEEK_BEG) < 0) {
         return -0x138C;
     }
 
