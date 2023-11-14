@@ -10,11 +10,11 @@ s32 ESP_ReadContentFile(s32 fd, void* dst, u32 len) {
 
     // Cast is necessary
     if (__esFd < 0 || fd < 0 || dst == (void*)NULL || len <= 0) {
-        return -1017;
+        return -0x3F9;
     }
 
     if ((u32)dst % 32 != 0) {
-        return -1017;
+        return -0x3F9;
     }
 
     *fdWork = fd;
@@ -36,7 +36,7 @@ s32 ESP_SeekContentFile(s32 fd, s32 offset, s32 origin) {
     s32* originWork = (s32*)(WORK + 0x40);
 
     if (__esFd < 0) {
-        return -1017;
+        return -0x3F9;
     }
 
     *fdWork = fd;
