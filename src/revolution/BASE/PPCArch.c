@@ -1,6 +1,5 @@
 #include <revolution/BASE.h>
-// #include <revolution/OS.h> (change back after RVL merge)
-#include <revolution/OS/OSError.h>
+#include <revolution/OS.h>
 
 asm u32 PPCMfmsr(void) {
     // clang-format off
