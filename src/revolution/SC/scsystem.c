@@ -57,7 +57,7 @@ void SCInit(void) {
     }
 
     Initialized = TRUE;
-    SetBgJobStatus(SC_STATUS_1);
+    SetBgJobStatus(SC_STATUS_BUSY);
     OSRestoreInterrupts(enabled);
 
     OSRegisterVersion(__SCVersion);
@@ -73,7 +73,7 @@ void SCInit(void) {
         return;
     }
 
-    SetBgJobStatus(SC_STATUS_2);
+    SetBgJobStatus(SC_STATUS_FATAL);
 }
 
 static void SetBgJobStatus(SCStatus status) { BgJobStatus = status; }
@@ -86,7 +86,7 @@ u32 SCCheckStatus(void) {
     status = BgJobStatus;
 
     if (status == SC_STATUS_3) {
-        SetBgJobStatus(SC_STATUS_1);
+        SetBgJobStatus(SC_STATUS_BUSY);
         OSRestoreInterrupts(enabled);
 
         if (ParseConfBuf(Control.fileBuffers[SC_CONF_FILE_SYSTEM],
@@ -122,7 +122,7 @@ static s32 SCReloadConfFileAsync(u8* buf, u32 size, SCAsyncCallback callback) {
         return NAND_RESULT_FATAL_ERROR;
     }
 
-    SetBgJobStatus(SC_STATUS_1);
+    SetBgJobStatus(SC_STATUS_BUSY);
     Control.asyncCallback = callback;
     Control.asyncResult = NAND_RESULT_OK;
     Control.openFile = 0;
@@ -500,7 +500,7 @@ void SCFlushAsync(SCFlushCallback callback) {
     status = BgJobStatus;
 
     if (status == SC_STATUS_0) {
-        SetBgJobStatus(SC_STATUS_1);
+        SetBgJobStatus(SC_STATUS_BUSY);
 
         if (callback == ((void*)NULL)) {
             callback = __SCFlushSyncCallback;
@@ -528,7 +528,7 @@ void SCFlushAsync(SCFlushCallback callback) {
         }
     } else {
         if (callback != NULL) {
-            callback(status == SC_STATUS_1 ? status : SC_STATUS_2);
+            callback(status == SC_STATUS_BUSY ? status : SC_STATUS_FATAL);
         }
         OSRestoreInterrupts(enabled);
     }
@@ -666,7 +666,7 @@ static void ErrorFromFlush(void) {
     SCControl* ctrl;
 
     ctrl = &Control;
-    ctrl->flushStatus = SC_STATUS_2;
+    ctrl->flushStatus = SC_STATUS_FATAL;
 
     if (ctrl->BYTE_0x155 != 0) {
         ctrl->nandCbState = 9;

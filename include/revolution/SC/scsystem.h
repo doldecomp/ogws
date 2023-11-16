@@ -10,8 +10,8 @@ extern "C" {
 
 typedef enum {
     SC_STATUS_0,
-    SC_STATUS_1,
-    SC_STATUS_2,
+    SC_STATUS_BUSY,
+    SC_STATUS_FATAL,
     SC_STATUS_3,
 } SCStatus;
 

@@ -590,7 +590,7 @@ void OSInit(void) {
             __OSInitSTM();
 
             SCInit();
-            while (SCCheckStatus() == SC_STATUS_1) {
+            while (SCCheckStatus() == SC_STATUS_BUSY) {
                 ;
             }
 

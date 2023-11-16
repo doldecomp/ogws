@@ -77,13 +77,13 @@ void __OSShutdownDevices(u32 event) {
 
     switch (event) {
     case 0:
-    case 4:
-    case 5:
-    case 6:
+    case OS_SD_EVENT_RESTART:
+    case OS_SD_EVENT_RETURN_TO_MENU:
+    case OS_SD_EVENT_LAUNCH_APP:
         keepEnable = FALSE;
         break;
     case 1:
-    case 2:
+    case OS_SD_EVENT_SHUTDOWN:
     case 3:
     default:
         keepEnable = TRUE;
@@ -159,7 +159,7 @@ void OSShutdownSystem(void) {
 
     memset(&idleMode, 0, sizeof(SCIdleMode));
     SCInit();
-    while (SCCheckStatus() == SC_STATUS_1) {
+    while (SCCheckStatus() == SC_STATUS_BUSY) {
         ;
     }
     SCGetIdleMode(&idleMode);
@@ -182,12 +182,12 @@ void OSShutdownSystem(void) {
 
     if (idleMode.wc24 == TRUE) {
         OSDisableScheduler();
-        __OSShutdownDevices(5);
+        __OSShutdownDevices(OS_SD_EVENT_RETURN_TO_MENU);
         OSEnableScheduler();
         __OSLaunchMenu();
     } else {
         OSDisableScheduler();
-        __OSShutdownDevices(2);
+        __OSShutdownDevices(OS_SD_EVENT_SHUTDOWN);
         __OSShutdownToSBY();
     }
 }
@@ -206,7 +206,7 @@ void OSReturnToMenu(void) {
     __OSWriteStateFlags(&stateFlags);
 
     OSDisableScheduler();
-    __OSShutdownDevices(5);
+    __OSShutdownDevices(OS_SD_EVENT_RETURN_TO_MENU);
     OSEnableScheduler();
 
     __OSLaunchMenu();
