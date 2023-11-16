@@ -301,7 +301,7 @@ void GXGetVtxDescv(GXVtxDescList* list) {
     list[i].attr = GX_VA_NBT;
     GXGetVtxDesc(GX_VA_NBT, &list[i].type);
 
-    // TODO: Fake match
+    // TODO: Fakematch
     attr = 1;
     i = (*(new_var2 = &i)) + attr;
     list[i].attr = GX_VA_NULL;

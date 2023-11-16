@@ -11,8 +11,6 @@ lbl_803b7890:
 MIMEEncStr:
 	.incbin "baserom.dol", 0x3C7678, 0x4
     .balign 8
-lbl_804bda00:
-	.incbin "baserom.dol", 0x3C7680, 0x40
 
 .section .text, "ax"
 .global Base64Encode

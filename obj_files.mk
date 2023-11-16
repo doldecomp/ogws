@@ -556,7 +556,7 @@ RVL_SDK_O_FILES := \
 	build/asm/revolution/NWC24/NWC24MsgObj.o \
 	build/asm/revolution/NWC24/NWC24MBoxCtrl.o \
 	build/asm/revolution/NWC24/NWC24Mime.o \
-	build/asm/revolution/NWC24/NWC24Parser.o \
+	build/revolution/NWC24/NWC24Parser.o \
 	build/asm/revolution/NWC24/NWC24MsgCommit.o \
 	build/asm/revolution/NWC24/NWC24Schedule.o \
 	build/asm/revolution/NWC24/NWC24DateParser.o \
