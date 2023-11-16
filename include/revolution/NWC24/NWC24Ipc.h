@@ -7,13 +7,15 @@ extern "C" {
 #endif
 
 s32 NWC24iOpenResourceManager(const char* user, const char* name, s32* fdOut,
-                              u32 mode);
+                              IPCOpenMode mode);
 s32 NWC24iCloseResourceManager(const char* user, s32 fd);
+
 s32 NWC24iIoctlResourceManager(const char* user, s32 fd, s32 type, void* in,
                                s32 inSize, void* out, s32 outSize);
 s32 NWC24iIoctlResourceManagerAsync(const char* user, s32 fd, s32 type,
                                     void* in, s32 inSize, void* out,
                                     s32 outSize, void* callbackArg);
+
 BOOL NWC24iIsAsyncRequestPending(void);
 
 /**
