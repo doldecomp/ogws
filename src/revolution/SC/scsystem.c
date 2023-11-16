@@ -85,7 +85,7 @@ u32 SCCheckStatus(void) {
     enabled = OSDisableInterrupts();
     status = BgJobStatus;
 
-    if (status == SC_STATUS_3) {
+    if (status == SC_STATUS_PARSE) {
         SetBgJobStatus(SC_STATUS_BUSY);
         OSRestoreInterrupts(enabled);
 
@@ -106,8 +106,8 @@ u32 SCCheckStatus(void) {
             OSRestoreInterrupts(enabled);
         }
 
-        status = SC_STATUS_0;
-        SetBgJobStatus(SC_STATUS_0);
+        status = SC_STATUS_READY;
+        SetBgJobStatus(SC_STATUS_READY);
     } else {
         OSRestoreInterrupts(enabled);
     }
@@ -215,12 +215,12 @@ openFile:
 
     switch (Control.asyncResult) {
     case NAND_RESULT_OK:
-        status = SC_STATUS_3;
+        status = SC_STATUS_PARSE;
         break;
     case NAND_RESULT_NOEXISTS:
     default:
         ClearConfBuf(Control.fileBuffers[SC_CONF_FILE_SYSTEM]);
-        status = SC_STATUS_3;
+        status = SC_STATUS_PARSE;
         Control.fileSizes[SC_CONF_FILE_SYSTEM] =
             Control.bufferSizes[SC_CONF_FILE_SYSTEM];
         break;
@@ -499,7 +499,7 @@ void SCFlushAsync(SCFlushCallback callback) {
     enabled = OSDisableInterrupts();
     status = BgJobStatus;
 
-    if (status == SC_STATUS_0) {
+    if (status == SC_STATUS_READY) {
         SetBgJobStatus(SC_STATUS_BUSY);
 
         if (callback == ((void*)NULL)) {
@@ -507,7 +507,7 @@ void SCFlushAsync(SCFlushCallback callback) {
         }
 
         ctrl->flushCallback = callback;
-        ctrl->flushStatus = SC_STATUS_0;
+        ctrl->flushStatus = SC_STATUS_READY;
         ctrl->BYTE_0x155 = 0;
         ctrl->flushSize = __SCGetConfBufSize();
 
@@ -645,7 +645,7 @@ static void FinishFromFlush(void) {
     SCFlushCallback callback;
 
     ctrl = &Control;
-    if (ctrl->flushStatus != SC_STATUS_0) {
+    if (ctrl->flushStatus != SC_STATUS_READY) {
         __SCSetDirtyFlag();
     }
 

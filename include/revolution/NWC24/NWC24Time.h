@@ -5,7 +5,10 @@
 extern "C" {
 #endif
 
-s32 NWC24iSynchronizeRtcCounter(void);
+s32 NWC24iGetUniversalTime(s64* timeOut);
+s32 NWC24iGetTimeDifference(s64* diffOut);
+s32 NWC24iSetRtcCounter(u32 rtc, u32 misc);
+s32 NWC24iSynchronizeRtcCounter(BOOL misc);
 
 #ifdef __cplusplus
 }

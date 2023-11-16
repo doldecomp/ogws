@@ -24,16 +24,16 @@ BOOL NWC24iIsAsyncRequestPending(void);
 
 // clang-format off
 #define NWC24_OPEN_DEVICE(name, fdOut, mode) \
-    NWC24iOpenResourceManager(__FUNCTION__, name, fdOut, mode);
+    NWC24iOpenResourceManager(__FUNCTION__, name, fdOut, mode)
 
 #define NWC24_CLOSE_DEVICE(fd) \
-    NWC24iCloseResourceManager(__FUNCTION__, fd);
+    NWC24iCloseResourceManager(__FUNCTION__, fd)
 
 #define NWC24_IOCTL_DEVICE(fd, type, in, inSize, out, outSize) \
-    NWC24iIoctlResouNWC24iIoctlResourceManagerrceManager(__FUNCTION__, fd, type, in, inSize, out, outSize);
+    NWC24iIoctlResourceManager(__FUNCTION__, fd, type, in, inSize, out, outSize)
 
 #define NWC24_IOCTL_DEVICE_ASYNC(fd, type, in, inSize, out, outSize, callbackArg) \
-    NWC24iIoctlResourceManagerAsync(__FUNCTION__, fd, type, in, inSize, out, outSize, callbackArg);
+    NWC24iIoctlResourceManagerAsync(__FUNCTION__, fd, type, in, inSize, out, outSize, callbackArg)
 // clang-format on
 
 #ifdef __cplusplus

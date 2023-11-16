@@ -1,4 +1,3 @@
-#include <revolution/NWC24.h>
 #include <revolution/OS.h>
 
 void __OSInitNet(void) {
@@ -6,7 +5,6 @@ void __OSInitNet(void) {
     OSIOSRev rev;
 
     __OSGetIOSRev(&rev);
-
     if (rev.idLo <= 4 || rev.idLo == 9) {
         return;
     }
@@ -25,6 +23,7 @@ void __OSInitNet(void) {
         }
     }
 
+    // @bug Wrong prototype. Somebody forgot to include the header!!!
     error = NWC24iSynchronizeRtcCounter();
     if (error != 0) {
         OSReport(
