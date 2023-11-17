@@ -560,7 +560,7 @@ RVL_SDK_O_FILES := \
 	build/asm/revolution/NWC24/NWC24MsgCommit.o \
 	build/revolution/NWC24/NWC24Schedule.o \
 	build/asm/revolution/NWC24/NWC24DateParser.o \
-	build/asm/revolution/NWC24/NWC24FriendList.o \
+	build/revolution/NWC24/NWC24FriendList.o \
 	build/asm/revolution/NWC24/NWC24SecretFList.o \
 	build/revolution/NWC24/NWC24Time.o \
 	build/revolution/NWC24/NWC24Ipc.o \

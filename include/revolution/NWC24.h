@@ -10,6 +10,7 @@ extern "C" {
 
 #include <revolution/NWC24/NWC24Config.h>
 #include <revolution/NWC24/NWC24Download.h>
+#include <revolution/NWC24/NWC24FileApi.h>
 #include <revolution/NWC24/NWC24FriendList.h>
 #include <revolution/NWC24/NWC24Ipc.h>
 #include <revolution/NWC24/NWC24MBoxCtrl.h>
@@ -19,6 +20,7 @@ extern "C" {
 #include <revolution/NWC24/NWC24Parser.h>
 #include <revolution/NWC24/NWC24Schedule.h>
 #include <revolution/NWC24/NWC24SecretFList.h>
+#include <revolution/NWC24/NWC24StdApi.h>
 #include <revolution/NWC24/NWC24System.h>
 #include <revolution/NWC24/NWC24Time.h>
 #include <revolution/NWC24/NWC24Types.h>
