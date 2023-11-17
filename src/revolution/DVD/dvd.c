@@ -942,7 +942,7 @@ static void ResetAlarmHandler(OSAlarm* alarm, OSContext* ctx) {
 #pragma unused(alarm)
 #pragma unused(ctx)
 
-    if (OS_DVD_DEVICE_CODE == DVD_DEVICE_CODE(0x0003)) {
+    if (OS_DVD_DEVICE_CODE == MAKE_DVD_DEVICE_CODE(0x0003)) {
         LastState = stateDownRotation;
         stateDownRotation(executing);
     } else {

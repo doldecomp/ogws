@@ -7,7 +7,7 @@ extern "C" {
 
 // OS sets MSB to signal that the device code was successfully read
 #define DVD_DEVICE_CODE_READ (1 << 15)
-#define DVD_DEVICE_CODE(x) (DVD_DEVICE_CODE_READ | (x))
+#define MAKE_DVD_DEVICE_CODE(x) (DVD_DEVICE_CODE_READ | (x))
 
 // Forward declarations
 typedef struct DVDCommandBlock;

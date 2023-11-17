@@ -2,27 +2,27 @@
 #include <revolution/SC.h>
 #include <string.h>
 
+#define CHECK_CALLING_STATUS() CheckCallingStatus(__FUNCTION__)
+
 #define IOCTL_IN ((CommonBuffer*)nwc24TimeCommonBuffer)
 #define IOCTL_OUT ((CommonResult*)nwc24TimeCommonResult)
-
-#define NWC24_CHECK_CALLING_STATUS() CheckCallingStatus(__FUNCTION__)
 
 typedef enum {
     NWC24_IOCTL_SET_RTC_COUNTER = 23,
     NWC24_IOCTL_GET_TIME_DIFFERENCE = 24,
-} Nwc24Ioctl;
+} NWC24Ioctl;
 
 typedef struct CommonBuffer {
     u32 rtc;  // at 0x0
     u32 misc; // at 0x4
 } CommonBuffer;
 
-#pragma pack(1)
+#pragma pack(push, 1)
 typedef struct CommonResult {
     s32 result; // at 0x0
     s64 diff;   // at 0x4
 } CommonResult;
-#pragma pack(off)
+#pragma pack(pop)
 
 static BOOL nwc24TimeInitialized = FALSE;
 static u32 nwc24TimeRtc = 0;
@@ -79,7 +79,7 @@ s32 NWC24iGetTimeDifference(s64* diffOut) {
     s32 result;
     s32 close;
 
-    result = NWC24_CHECK_CALLING_STATUS();
+    result = CHECK_CALLING_STATUS();
     if (result < 0) {
         return result;
     }
@@ -118,7 +118,7 @@ s32 NWC24iSetRtcCounter(u32 rtc, u32 misc) {
     s32 result;
     s32 close;
 
-    result = NWC24_CHECK_CALLING_STATUS();
+    result = CHECK_CALLING_STATUS();
     if (result < 0) {
         return result;
     }
@@ -194,8 +194,10 @@ static void InitMutex(void) {
 
     if (!nwc24TimeInitialized) {
         OSInitMutex(&nwc24TimeCommandMutex);
+
         memset(&nwc24TimeCommonBuffer, 0, sizeof(nwc24TimeCommonBuffer));
         memset(&nwc24TimeCommonResult, 0, sizeof(nwc24TimeCommonResult));
+
         nwc24TimeInitialized = TRUE;
     }
 

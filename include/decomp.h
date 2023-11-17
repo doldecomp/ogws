@@ -20,8 +20,8 @@
     void CONCAT(FORCELITERAL##module, __LINE__)(void);                         \
     void CONCAT(FORCELITERAL##module, __LINE__)(void) { (__VA_ARGS__); }
 #else
-#define DECOMP_FORCEACTIVE(module, ...) ((void)0)
-#define DECOMP_FORCELITERAL(module, x) ((void)0)
+#define DECOMP_FORCEACTIVE(module, ...)
+#define DECOMP_FORCELITERAL(module, x)
 #endif
 
 #endif

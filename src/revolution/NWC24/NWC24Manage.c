@@ -47,8 +47,8 @@ s32 NWC24OpenLib(NWC24Work* work) {
 }
 
 static s32 NWC24OpenLibInternal(NWC24Work* work, NWC24LibState state) {
-    NWC24Err result;
-    NWC24Err failErr;
+    s32 result;
+    s32 failErr;
     u32 failFlag;
 
     NWC24iSetErrorCode(NWC24_OK);
@@ -164,7 +164,7 @@ static s32 NWC24OpenLibInternal(NWC24Work* work, NWC24LibState state) {
 }
 
 s32 NWC24CloseLib(void) {
-    NWC24Err result;
+    s32 result;
 
     if (Opened != NWC24_LIB_OPENED) {
         return NWC24_ERR_LIB_NOT_OPENED;
@@ -198,7 +198,7 @@ BOOL NWC24IsMsgLibOpenedByTool(void) {
 BOOL NWC24IsMsgLibOpenBlocking(void) { return Opened == NWC24_LIB_BLOCKED; }
 
 s32 NWC24BlockOpenMsgLib(BOOL block) {
-    NWC24Err result;
+    s32 result;
     BOOL enabled;
 
     result = NWC24_OK;

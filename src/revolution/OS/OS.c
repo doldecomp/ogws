@@ -328,7 +328,7 @@ static void InquiryCallback(s32 result, DVDCommandBlock* block) {
 
     switch (block->state) {
     case DVD_STATE_IDLE:
-        OS_DVD_DEVICE_CODE = DVD_DEVICE_CODE(DriveInfo.deviceCode);
+        OS_DVD_DEVICE_CODE = MAKE_DVD_DEVICE_CODE(DriveInfo.deviceCode);
         break;
     default:
         OS_DVD_DEVICE_CODE = 0x0001;
@@ -602,7 +602,7 @@ void OSInit(void) {
             DVDInit();
 
             if (__OSIsGcam) {
-                OS_DVD_DEVICE_CODE = DVD_DEVICE_CODE(0x1000);
+                OS_DVD_DEVICE_CODE = MAKE_DVD_DEVICE_CODE(0x1000);
             } else if (OS_DVD_DEVICE_CODE == 0) {
                 DCInvalidateRange(&DriveInfo, sizeof(DVDDriveInfo));
                 DVDInquiryAsync(&DriveBlock, &DriveInfo, InquiryCallback);

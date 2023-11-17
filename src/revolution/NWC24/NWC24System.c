@@ -6,7 +6,7 @@
 
 typedef enum {
     NWC24_IOCTL_SHUTDOWN = 40,
-} Nwc24Ioctl;
+} NWC24Ioctl;
 
 static s32 nwc24ShtFd = -1;
 static s32 nwc24ShtRetryRest = 0;
@@ -36,7 +36,7 @@ s32 NWC24EnableLedNotification(BOOL enable) {
 }
 
 s32 NWC24iPrepareShutdown(void) {
-    NWC24Err err = NWC24_OK;
+    s32 result = NWC24_OK;
 
     NWC24iRegister();
 
@@ -45,14 +45,14 @@ s32 NWC24iPrepareShutdown(void) {
     OSRegisterShutdownFunction(&ShutdownFuncInfo);
 
     if (nwc24ShtFd < 0) {
-        err = NWC24_OPEN_DEVICE("/dev/net/kd/request", &nwc24ShtFd,
-                                IPC_OPEN_READ);
+        result = NWC24_OPEN_DEVICE("/dev/net/kd/request", &nwc24ShtFd,
+                                   IPC_OPEN_READ);
     }
 
     nwc24ShtRetryRest = SHUTDOWN_RETRY_MAX;
     NWC24EnableLedNotification(TRUE);
 
-    return err;
+    return result;
 }
 
 s32 NWC24iRequestShutdown(u32 event, s32* resultOut) {
