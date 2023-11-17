@@ -27810,8 +27810,8 @@ func_80162520:
 /* 8016257C 0015D47C  38 21 00 10 */	addi r1, r1, 0x10
 /* 80162580 0015D480  4E 80 00 20 */	blr 
 
-.global func_80162584
-func_80162584:
+.global VFIsAvailable
+VFIsAvailable:
 /* 80162584 0015D484  80 6D A1 00 */	lwz r3, lbl_804BF480-_SDA_BASE_(r13)
 /* 80162588 0015D488  7C 03 00 D0 */	neg r0, r3
 /* 8016258C 0015D48C  7C 00 1B 78 */	or r0, r0, r3

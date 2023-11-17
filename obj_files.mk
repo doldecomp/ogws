@@ -552,7 +552,7 @@ RVL_SDK_O_FILES := \
 	build/asm/revolution/NWC24/NWC24FileApi.o \
 	build/asm/revolution/NWC24/NWC24Config.o \
 	build/revolution/NWC24/NWC24Utils.o \
-	build/asm/revolution/NWC24/NWC24Manage.o \
+	build/revolution/NWC24/NWC24Manage.o \
 	build/asm/revolution/NWC24/NWC24MsgObj.o \
 	build/asm/revolution/NWC24/NWC24MBoxCtrl.o \
 	build/asm/revolution/NWC24/NWC24Mime.o \

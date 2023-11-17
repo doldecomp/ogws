@@ -7,6 +7,10 @@ extern "C" {
 
 s32 NWC24SuspendScheduler(void);
 
+s32 NWC24iTrySuspendForOpenLib(void);
+
+s32 NWC24iResumeForCloseLib(void);
+
 #ifdef __cplusplus
 }
 #endif
