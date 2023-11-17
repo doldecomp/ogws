@@ -1,6 +1,7 @@
 #ifndef RVL_SDK_NWC24_MANAGE_H
 #define RVL_SDK_NWC24_MANAGE_H
 #include <revolution/NWC24/NWC24FriendList.h>
+#include <revolution/NWC24/NWC24SecretFList.h>
 #include <types.h>
 #ifdef __cplusplus
 extern "C" {
@@ -27,9 +28,13 @@ typedef struct NWC24Work {
     char WORK_0x1280[128];
     u8 base64Work[256]; // at 0x1300
     char WORK_0x1400[0x2400 - 0x1400];
+
     u8 flHeaderWork[ROUND_UP(sizeof(NWC24FLHeader), 0x100)]; // at 0x2800
-    char sflHeaderWork[0x800];                               // at 0x2800
-    char dlHeaderWork[0x800];                                // at 0x3000
+
+    u8 secretFlHeaderWork[ROUND_UP(sizeof(NWC24SecretFLHeader),
+                                   0x100)]; // at 0x2800
+
+    char dlHeaderWork[0x800]; // at 0x3000
     char WORK_0x3800[0x200];
 } NWC24Work;
 
