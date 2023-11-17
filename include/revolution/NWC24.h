@@ -1,5 +1,5 @@
 /**
- * References: WiiBrew
+ * References: WiiBrew, Dolphin Emulator
  */
 
 #ifndef RVL_SDK_PUBLIC_NWC24_H
