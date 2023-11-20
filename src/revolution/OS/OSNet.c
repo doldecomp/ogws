@@ -1,5 +1,10 @@
 #include <revolution/OS.h>
 
+// @bug Wrong prototypes. Somebody forgot to include the header!!!
+int NWC24iPrepareShutdown();
+int NWC24SuspendScheduler();
+int NWC24iSynchronizeRtcCounter();
+
 void __OSInitNet(void) {
     s32 error;
     OSIOSRev rev;
