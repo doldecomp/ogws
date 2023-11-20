@@ -22,10 +22,9 @@ typedef struct NWC24Work {
     char WORK_0x400[0x800 - 0x400];
     char pathWork[128]; // at 0x800
     char WORK_0x880[0x900 - 0x880];
-    u8 readWork[512];  // at 0x900
-    u8 writeWork[512]; // at 0xB00
-    u8 config[512];    // at 0xD00
-    char WORK_0xF00[0x1100 - 0xF00];
+    u8 readWork[512];                  // at 0x900
+    u8 writeWork[512];                 // at 0xB00
+    u8 config[WORK_SIZE(NWC24Config)]; // at 0xD00
     char WORK_0x1100[128];
     char WORK_0x1180[128];
     char WORK_0x1200[128];
