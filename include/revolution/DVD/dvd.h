@@ -103,6 +103,7 @@ void DVDResume(void);
 BOOL DVDCancelAsync(DVDCommandBlock* block, DVDCommandCallback callback);
 s32 DVDCancel(DVDCommandBlock* block);
 BOOL DVDCancelAllAsync(DVDCommandCallback callback);
+const DVDDiskID* DVDGetCurrentDiskID(void);
 u32 __DVDGetCoverStatus(void);
 void __DVDPrepareResetAsync(DVDCommandCallback callback);
 void __DVDPrepareReset(void);

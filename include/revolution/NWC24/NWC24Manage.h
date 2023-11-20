@@ -1,5 +1,6 @@
 #ifndef RVL_SDK_NWC24_MANAGE_H
 #define RVL_SDK_NWC24_MANAGE_H
+#include <revolution/NWC24/NWC24Config.h>
 #include <revolution/NWC24/NWC24Download.h>
 #include <revolution/NWC24/NWC24FriendList.h>
 #include <revolution/NWC24/NWC24SecretFList.h>
@@ -21,9 +22,9 @@ typedef struct NWC24Work {
     char WORK_0x400[0x800 - 0x400];
     char pathWork[128]; // at 0x800
     char WORK_0x880[0x900 - 0x880];
-    u8 readWork[512];   // at 0x900
-    u8 writeWork[512];  // at 0xB00
-    u8 configWork[512]; // at 0xD00
+    u8 readWork[512];  // at 0x900
+    u8 writeWork[512]; // at 0xB00
+    u8 config[512];    // at 0xD00
     char WORK_0xF00[0x1100 - 0xF00];
     char WORK_0x1100[128];
     char WORK_0x1180[128];
@@ -31,7 +32,6 @@ typedef struct NWC24Work {
     char WORK_0x1280[128];
     u8 base64Work[256]; // at 0x1300
     char WORK_0x1400[0x2400 - 0x1400];
-
     u8 flHeader[WORK_SIZE(NWC24FLHeader)];             // at 0x2800
     u8 secretFlHeader[WORK_SIZE(NWC24SecretFLHeader)]; // at 0x2800
     u8 dlHeader[WORK_SIZE(NWC24DlHeader)];             // at 0x3000

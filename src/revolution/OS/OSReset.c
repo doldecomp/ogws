@@ -214,8 +214,10 @@ void OSReturnToMenu(void) {
     __VISetRGBModeImm();
     __OSHotReset();
 
+    // clang-format off
 #line 843
     OSError("OSReturnToMenu(): Falied to boot system menu.\n");
+    // clang-format on
 }
 
 u32 OSGetResetCode(void) {
@@ -231,6 +233,8 @@ void OSResetSystem(u32 arg0, u32 arg1, u32 arg2) {
 #pragma unused(arg1)
 #pragma unused(arg2)
 
+    // clang-format off
 #line 1020
     OSError("OSResetSystem() is obsoleted. It doesn't work any longer.\n");
+    // clang-format on
 }

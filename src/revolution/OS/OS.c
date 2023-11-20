@@ -341,8 +341,10 @@ static void CheckTargets(void) {
     case 0x81:
         OSReport("OS ERROR: boot program is not for RVL target. Please use "
                  "correct boot program.\n");
+        // clang-format off
 #line 1112
         OSError("Failed to run app");
+        // clang-format on
         break;
     case 0x80:
     default:
@@ -353,8 +355,10 @@ static void CheckTargets(void) {
     case 0x81:
         OSReport("OS ERROR: apploader[D].img is not for RVL target. Please use "
                  "correct apploader[D].img.\n");
+        // clang-format off
 #line 1130
         OSError("Failed to run app");
+        // clang-format on
         break;
     case 0x80:
     default:
