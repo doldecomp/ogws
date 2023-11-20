@@ -14,7 +14,7 @@ static s32 nwc24ShtRetryRest = 0;
 static OSShutdownFunctionInfo ShutdownFuncInfo;
 
 NWC24Err NWC24EnableLedNotification(BOOL enable) {
-    SCIdleMode idleMode;
+    SCIdleModeInfo idleMode;
     u32 status;
     u32 led = 0;
 
@@ -65,11 +65,11 @@ NWC24Err NWC24iRequestShutdown(u32 event, NWC24Err* resultOut) {
                                     sizeof(shtResult), resultOut);
 }
 
-BOOL NWC24Shutdown(u32 pass, u32 event) {
+BOOL NWC24Shutdown(BOOL final, u32 event) {
     static BOOL shuttingdown = FALSE;
     static NWC24Err result = NWC24_OK;
 
-    if (pass != OS_SD_PASS_FIRST) {
+    if (final) {
         return TRUE;
     }
 

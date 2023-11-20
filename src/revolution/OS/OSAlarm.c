@@ -2,7 +2,7 @@
 #include <revolution/DVD.h>
 #include <revolution/OS.h>
 
-static BOOL OnReset(u32 pass, u32 event);
+static BOOL OnReset(BOOL final, u32 event);
 static void DecrementerExceptionHandler(u8 type, OSContext* ctx);
 
 static OSAlarmQueue AlarmQueue;
@@ -223,11 +223,11 @@ static asm void DecrementerExceptionHandler(register u8 type,
 
 void OSSetAlarmTag(OSAlarm* alarm, u32 tag) { alarm->tag = tag; }
 
-static BOOL OnReset(u32 pass, u32 event) {
+static BOOL OnReset(BOOL final, u32 event) {
     OSAlarm* iter;
     OSAlarm* next;
 
-    if (pass != OS_SD_PASS_FIRST) {
+    if (final) {
         iter = AlarmQueue.head;
         next = (iter != NULL) ? iter->next : NULL;
 

@@ -15,7 +15,7 @@ typedef enum {
 
 static void nandShutdownCallback(s32 result, void* arg);
 static void nandGetTypeCallback(s32 result, void* arg);
-static BOOL nandOnShutdown(u32 pass, u32 event);
+static BOOL nandOnShutdown(BOOL final, u32 event);
 static s32 _ES_InitLib(s32* fd);
 static s32 _ES_GetDataDir(s32* fd, u64 tid, char* dirOut) DONT_INLINE;
 static s32 _ES_GetTitleId(s32* fd, u64* tidOut);
@@ -304,8 +304,8 @@ s32 NANDInit(void) {
     }
 }
 
-static BOOL nandOnShutdown(u32 pass, u32 event) {
-    if (pass == OS_SD_PASS_FIRST) {
+static BOOL nandOnShutdown(BOOL final, u32 event) {
+    if (!final) {
         if (event == OS_SD_EVENT_SHUTDOWN) {
             volatile BOOL shutdown = FALSE;
             s64 start = OSGetTime();

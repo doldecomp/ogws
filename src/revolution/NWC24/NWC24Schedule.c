@@ -23,7 +23,7 @@ typedef struct CommonResult {
     s32 result; // at 0x0
     union {
         u64 userid;
-        s32 reason;
+        s32 exResult;
     }; // at 0x4
     u32 WORD_0x8;
 } CommonResult;
@@ -58,7 +58,7 @@ static NWC24Err ExecSuspendScheduler(void) DONT_INLINE;
 static NWC24Err ExecTrySuspendScheduler(u32 arg0);
 static NWC24Err ExecResumeScheduler(void) DONT_INLINE;
 static NWC24Err ExecNoParamCommand(const char* user, s32 type,
-                                   NWC24Err* reasonOut);
+                                   NWC24Err* exResultOut);
 
 static void InitScdMutex(void);
 
@@ -235,7 +235,7 @@ static NWC24Err ExecResumeScheduler(void) {
 }
 
 static NWC24Err ExecNoParamCommand(const char* user, s32 type,
-                                   NWC24Err* reasonOut) {
+                                   NWC24Err* exResultOut) {
     s32 fd;
     NWC24Err result;
     NWC24Err close;
@@ -260,8 +260,8 @@ static NWC24Err ExecNoParamCommand(const char* user, s32 type,
                 if (result == NWC24_ERR_FAILED ||
                     result == NWC24_ERR_CONFIG_NETWORK) {
 
-                    if (reasonOut != (void*)NULL) {
-                        *reasonOut = IOCTL_OUT->reason;
+                    if (exResultOut != (void*)NULL) {
+                        *exResultOut = IOCTL_OUT->exResult;
                     }
                 }
             }

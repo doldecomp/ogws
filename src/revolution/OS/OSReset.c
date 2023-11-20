@@ -96,7 +96,7 @@ void __OSShutdownDevices(u32 event) {
         padIntr = __PADDisableRecalibration(TRUE);
     }
 
-    while (!__OSCallShutdownFunctions(OS_SD_PASS_FIRST, event)) {
+    while (!__OSCallShutdownFunctions(FALSE, event)) {
         ;
     }
 
@@ -105,7 +105,7 @@ void __OSShutdownDevices(u32 event) {
     }
 
     osIntr = OSDisableInterrupts();
-    __OSCallShutdownFunctions(OS_SD_PASS_SECOND, event);
+    __OSCallShutdownFunctions(TRUE, event);
     LCDisable();
 
     if (!keepEnable) {
@@ -153,11 +153,11 @@ static void KillThreads(void) {
 }
 
 void OSShutdownSystem(void) {
-    SCIdleMode idleMode;
+    SCIdleModeInfo idleMode;
     OSStateFlags stateFlags;
     OSIOSRev iosRev;
 
-    memset(&idleMode, 0, sizeof(SCIdleMode));
+    memset(&idleMode, 0, sizeof(SCIdleModeInfo));
     SCInit();
     while (SCCheckStatus() == SC_STATUS_BUSY) {
         ;

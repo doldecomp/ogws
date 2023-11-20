@@ -77,7 +77,7 @@ static NWC24Err NWC24OpenLibInternal(NWC24Work* work, NWC24LibState state) {
     if (result == NWC24_OK) {
         NWC24iRegister();
 
-        YouGotMail &= ~NWC24_NEW_MSG;
+        YouGotMail &= ~(1 << NWC24_MSGTYPE_RVL_MENU_SHARED);
         NWC24WorkP = work;
 
         NWC24InitBase64Table(NWC24WorkP->base64Work);

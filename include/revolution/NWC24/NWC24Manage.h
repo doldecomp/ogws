@@ -10,12 +10,6 @@
 extern "C" {
 #endif
 
-typedef enum {
-    NWC24_NEW_MSG = (1 << 0),
-    // TODO: Find NWC24IsNewMsgForMenuArrived and verify
-    NWC24_NEW_MSG_MENU = (1 << 1),
-} NWC24NewMsgArrived;
-
 #define WORK_SIZE(x) (ROUND_UP(sizeof(x), 256))
 typedef struct NWC24Work {
     char stringWork[1024]; // at 0x0

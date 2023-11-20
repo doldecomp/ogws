@@ -35,8 +35,8 @@ NWC24Charset CharsetConv[] = {
     NWC24_UTF_16BE,    NWC24_UTF_32BE,    NWC24_UTF_8,      NWC24_WINDOWS_1252};
 
 const char* EncodingStr[] = {"7bit", "8bit", "base64", "quoted-printable"};
-NWC24Encoding EncodingConv[] = {NWC24_7BIT, NWC24_8BIT, NWC24_BASE64,
-                                NWC24_QUOTED_PRINTABLE};
+NWC24Encoding EncodingConv[] = {NWC24_ENC_7BIT, NWC24_ENC_8BIT,
+                                NWC24_ENC_BASE64, NWC24_ENC_QUOTED_PRINTABLE};
 
 const char* NWC24GetMIMETypeStr(NWC24MIMEType type) {
     NWC24MIMEType* conv;

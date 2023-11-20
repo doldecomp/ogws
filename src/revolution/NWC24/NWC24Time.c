@@ -13,8 +13,8 @@ typedef enum {
 } NWC24Ioctl;
 
 typedef struct CommonBuffer {
-    u32 rtc;  // at 0x0
-    u32 misc; // at 0x4
+    u32 rtc;   // at 0x0
+    u32 flags; // at 0x4
 } CommonBuffer;
 
 #pragma pack(push, 1)
@@ -113,7 +113,7 @@ NWC24Err NWC24iGetTimeDifference(s64* diffOut) {
     return result;
 }
 
-NWC24Err NWC24iSetRtcCounter(u32 rtc, u32 misc) {
+NWC24Err NWC24iSetRtcCounter(u32 rtc, u32 flags) {
     s32 fd;
     NWC24Err result;
     NWC24Err close;
@@ -129,7 +129,7 @@ NWC24Err NWC24iSetRtcCounter(u32 rtc, u32 misc) {
 
         if (result >= 0) {
             IOCTL_IN->rtc = rtc;
-            IOCTL_IN->misc = misc;
+            IOCTL_IN->flags = flags;
 
             result = NWC24_IOCTL_DEVICE(
                 fd, NWC24_IOCTL_SET_RTC_COUNTER, &nwc24TimeCommonBuffer,
@@ -151,7 +151,7 @@ NWC24Err NWC24iSetRtcCounter(u32 rtc, u32 misc) {
     return result;
 }
 
-NWC24Err NWC24iSynchronizeRtcCounter(BOOL misc) {
+NWC24Err NWC24iSynchronizeRtcCounter(BOOL forceSave) {
     u32 rtc;
     NWC24Err result;
 
@@ -160,8 +160,7 @@ NWC24Err NWC24iSynchronizeRtcCounter(BOOL misc) {
         return result;
     }
 
-    // WiiBrew: LSB of the latter affects wc24/misc.bin
-    return NWC24iSetRtcCounter(rtc, misc ? 1 : 0);
+    return NWC24iSetRtcCounter(rtc, forceSave ? 1 : 0);
 }
 
 static NWC24Err GetRTC(u32* rtc) {

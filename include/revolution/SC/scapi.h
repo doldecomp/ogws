@@ -26,10 +26,10 @@ typedef enum { SC_SND_MONO, SC_SND_STEREO, SC_SND_SURROUND } SCSoundMode;
 
 typedef enum { SC_SENSOR_BAR_BOTTOM, SC_SENSOR_BAR_TOP } SCSensorBarPos;
 
-typedef struct SCIdleMode {
+typedef struct SCIdleModeInfo {
     u8 wc24;      // at 0x0
     u8 slotLight; // at 0x1
-} SCIdleMode;
+} SCIdleModeInfo;
 
 typedef struct SCBtDeviceInfo {
     u8 mac[6];     // at 0x0
@@ -45,7 +45,7 @@ typedef struct SCBtDeviceInfoArray {
 u8 SCGetAspectRatio(void);
 s8 SCGetDisplayOffsetH(void);
 u8 SCGetEuRgb60Mode(void);
-void SCGetIdleMode(SCIdleMode* mode);
+void SCGetIdleMode(SCIdleModeInfo* mode);
 u8 SCGetLanguage(void);
 u8 SCGetProgressiveMode(void);
 u8 SCGetScreenSaverMode(void);
