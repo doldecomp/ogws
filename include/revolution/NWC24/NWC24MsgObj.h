@@ -1,5 +1,6 @@
 #ifndef RVL_SDK_NWC24_MSG_OBJ_H
 #define RVL_SDK_NWC24_MSG_OBJ_H
+#include <revolution/NWC24/NWC24Types.h>
 #include <revolution/NWC24/NWC24Utils.h>
 #include <types.h>
 #ifdef __cplusplus
@@ -23,7 +24,7 @@ typedef struct NWC24MsgObj {
     char _E0[0x100 - 0xE0];
 } NWC24MsgObj;
 
-s32 NWC24SetMsgFaceData(NWC24MsgObj*, const struct RFLCharData*);
+NWC24Err NWC24SetMsgFaceData(NWC24MsgObj*, const struct RFLCharData*);
 
 #ifdef __cplusplus
 }

@@ -32,8 +32,8 @@ static u8 nwc24TimeCommonResult[32] ALIGN(32);
 static u8 nwc24TimeCommonBuffer[32] ALIGN(32);
 static OSMutex nwc24TimeCommandMutex ALIGN(32);
 
-static s32 GetRTC(u32* rtc);
-static s32 CheckCallingStatus(const char* user);
+static NWC24Err GetRTC(u32* rtc);
+static NWC24Err CheckCallingStatus(const char* user);
 static void InitMutex(void);
 static void LockRight(void);
 static void UnlockRight(void);
@@ -42,10 +42,10 @@ static void UnlockRight(void);
 static u8 buf[128];
 DECOMP_FORCEACTIVE(NWC24Time_c, buf);
 
-s32 NWC24iGetUniversalTime(s64* timeOut) {
+NWC24Err NWC24iGetUniversalTime(s64* timeOut) {
     static s64 whenCached = 0;
 
-    s32 result;
+    NWC24Err result;
     s64 sysTime;
 
     if (timeOut == NULL) {
@@ -74,10 +74,10 @@ s32 NWC24iGetUniversalTime(s64* timeOut) {
     return NWC24_OK;
 }
 
-s32 NWC24iGetTimeDifference(s64* diffOut) {
+NWC24Err NWC24iGetTimeDifference(s64* diffOut) {
     s32 fd;
-    s32 result;
-    s32 close;
+    NWC24Err result;
+    NWC24Err close;
 
     result = CHECK_CALLING_STATUS();
     if (result < 0) {
@@ -113,10 +113,10 @@ s32 NWC24iGetTimeDifference(s64* diffOut) {
     return result;
 }
 
-s32 NWC24iSetRtcCounter(u32 rtc, u32 misc) {
+NWC24Err NWC24iSetRtcCounter(u32 rtc, u32 misc) {
     s32 fd;
-    s32 result;
-    s32 close;
+    NWC24Err result;
+    NWC24Err close;
 
     result = CHECK_CALLING_STATUS();
     if (result < 0) {
@@ -151,9 +151,9 @@ s32 NWC24iSetRtcCounter(u32 rtc, u32 misc) {
     return result;
 }
 
-s32 NWC24iSynchronizeRtcCounter(BOOL misc) {
+NWC24Err NWC24iSynchronizeRtcCounter(BOOL misc) {
     u32 rtc;
-    s32 result;
+    NWC24Err result;
 
     result = GetRTC(&rtc);
     if (result != NWC24_OK) {
@@ -164,7 +164,7 @@ s32 NWC24iSynchronizeRtcCounter(BOOL misc) {
     return NWC24iSetRtcCounter(rtc, misc ? 1 : 0);
 }
 
-static s32 GetRTC(u32* rtc) {
+static NWC24Err GetRTC(u32* rtc) {
     u32 status;
 
     do {
@@ -179,7 +179,7 @@ static s32 GetRTC(u32* rtc) {
     return NWC24_OK;
 }
 
-static s32 CheckCallingStatus(const char* user) {
+static NWC24Err CheckCallingStatus(const char* user) {
 #pragma unused(user)
 
     if (OSGetCurrentThread() == NULL) {

@@ -564,7 +564,7 @@ RVL_SDK_O_FILES := \
 	build/revolution/NWC24/NWC24SecretFList.o \
 	build/revolution/NWC24/NWC24Time.o \
 	build/revolution/NWC24/NWC24Ipc.o \
-	build/asm/revolution/NWC24/NWC24Download.o \
+	build/revolution/NWC24/NWC24Download.o \
 	build/revolution/NWC24/NWC24System.o \
 	\
 	build/asm/revolution/VF/vf_unsplit.o \

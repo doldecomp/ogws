@@ -5,6 +5,8 @@
 extern "C" {
 #endif
 
+typedef void* VFFile;
+
 s32 VFIsAvailable(void);
 
 #ifdef __cplusplus

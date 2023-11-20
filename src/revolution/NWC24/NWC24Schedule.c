@@ -54,10 +54,11 @@ DECOMP_FORCEACTIVE(NWC24Schedule_c,
 // Pool order
 DECOMP_FORCEACTIVE(NWC24Schedule_c, "/dev/net/kd/request");
 
-static s32 ExecSuspendScheduler(void) DONT_INLINE;
-static s32 ExecTrySuspendScheduler(u32 arg0);
-static s32 ExecResumeScheduler(void) DONT_INLINE;
-static s32 ExecNoParamCommand(const char* user, s32 type, s32* reasonOut);
+static NWC24Err ExecSuspendScheduler(void) DONT_INLINE;
+static NWC24Err ExecTrySuspendScheduler(u32 arg0);
+static NWC24Err ExecResumeScheduler(void) DONT_INLINE;
+static NWC24Err ExecNoParamCommand(const char* user, s32 type,
+                                   NWC24Err* reasonOut);
 
 static void InitScdMutex(void);
 
@@ -69,7 +70,7 @@ static void LockCounters(void);
 static BOOL TryLockCounters(void);
 static void UnlockCounters(void);
 
-static s32 CheckCallingStatus(const char* user, BOOL block);
+static NWC24Err CheckCallingStatus(const char* user, BOOL block);
 
 s32 NWC24SuspendScheduler(void) {
     s32 count;
@@ -108,10 +109,10 @@ s32 NWC24ResumeScheduler(void) {
     return count;
 }
 
-s32 NWC24iRequestGenerateUserId(u64* idOut, u32* arg1) {
+NWC24Err NWC24iRequestGenerateUserId(u64* idOut, u32* arg1) {
     s32 fd;
-    s32 result = NWC24_OK;
-    s32 close = NWC24_OK;
+    NWC24Err result;
+    NWC24Err close;
 
     result = CHECK_CALLING_STATUS(TRUE);
     if (result < 0) {
@@ -154,8 +155,8 @@ s32 NWC24iRequestGenerateUserId(u64* idOut, u32* arg1) {
     return result;
 }
 
-s32 NWC24iTrySuspendForOpenLib(void) {
-    s32 result;
+NWC24Err NWC24iTrySuspendForOpenLib(void) {
+    NWC24Err result;
 
     if (!TryLockCounters()) {
         return NWC24_ERR_MUTEX;
@@ -171,8 +172,8 @@ s32 NWC24iTrySuspendForOpenLib(void) {
     return result;
 }
 
-s32 NWC24iResumeForCloseLib(void) {
-    s32 result;
+NWC24Err NWC24iResumeForCloseLib(void) {
+    NWC24Err result;
 
     LockCounters();
     {
@@ -187,14 +188,14 @@ s32 NWC24iResumeForCloseLib(void) {
     return result;
 }
 
-static s32 ExecSuspendScheduler(void) {
+static NWC24Err ExecSuspendScheduler(void) {
     return ExecNoParamCommand(NULL, NWC24_IOCTL_SUSPEND_SCHEDULER, NULL);
 }
 
-static s32 ExecTrySuspendScheduler(u32 arg0) {
+static NWC24Err ExecTrySuspendScheduler(u32 arg0) {
     s32 fd;
-    s32 result = NWC24_OK;
-    s32 close = NWC24_OK;
+    NWC24Err result;
+    NWC24Err close;
 
     result = CHECK_CALLING_STATUS(TRUE);
     if (result < 0) {
@@ -229,14 +230,15 @@ static s32 ExecTrySuspendScheduler(u32 arg0) {
     return result;
 }
 
-static s32 ExecResumeScheduler(void) {
+static NWC24Err ExecResumeScheduler(void) {
     return ExecNoParamCommand(NULL, NWC24_IOCTL_RESUME_SCHEDULER, NULL);
 }
 
-static s32 ExecNoParamCommand(const char* user, s32 type, s32* reasonOut) {
+static NWC24Err ExecNoParamCommand(const char* user, s32 type,
+                                   NWC24Err* reasonOut) {
     s32 fd;
-    s32 result = NWC24_OK;
-    s32 close = NWC24_OK;
+    NWC24Err result;
+    NWC24Err close;
 
     if (OSGetCurrentThread() == NULL) {
         return NWC24_ERR_FATAL;
@@ -327,7 +329,7 @@ static BOOL TryLockCounters(void) {
 
 static void UnlockCounters(void) { OSUnlockMutex(&nwc24ScdCounterMutex); }
 
-static s32 CheckCallingStatus(const char* user, BOOL block) {
+static NWC24Err CheckCallingStatus(const char* user, BOOL block) {
 #pragma unused(user)
 #pragma unused(block)
 

@@ -5,21 +5,21 @@
 
 static const char* FLFilePath = "/shared2/wc24/nwc24fl.bin";
 
-static s32 GetCachedFLHeader(NWC24FLHeader** header);
+static NWC24Err GetCachedFLHeader(NWC24FLHeader** header);
 
-s32 NWC24iOpenFriendList(void) {
-    NWC24FLHeader* header = (NWC24FLHeader*)NWC24WorkP->flHeaderWork;
+NWC24Err NWC24iOpenFriendList(void) {
+    NWC24FLHeader* header = (NWC24FLHeader*)NWC24WorkP->flHeader;
     Mail_memset(header, 0, sizeof(NWC24FLHeader));
     return GetCachedFLHeader(&header);
 }
 
-static s32 GetCachedFLHeader(NWC24FLHeader** header) {
+static NWC24Err GetCachedFLHeader(NWC24FLHeader** header) {
     NWC24File file;
-    s32 result;
-    s32 read;
-    s32 close;
+    NWC24Err result;
+    NWC24Err read;
+    NWC24Err close;
 
-    *header = (NWC24FLHeader*)NWC24WorkP->flHeaderWork;
+    *header = (NWC24FLHeader*)NWC24WorkP->flHeader;
 
     if ((*header)->magic != FRIEND_LIST_MAGIC) {
         result = NWC24FOpen(&file, FLFilePath, NWC24_OPEN_READ);

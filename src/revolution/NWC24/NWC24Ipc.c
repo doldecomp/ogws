@@ -4,11 +4,11 @@ static BOOL NWC24iIsRequestPending = FALSE;
 
 static s32 CallbackAsyncIpc(s32 result, void* arg);
 
-s32 NWC24iOpenResourceManager(const char* user, const char* name, s32* fdOut,
-                              IPCOpenMode mode) {
+NWC24Err NWC24iOpenResourceManager(const char* user, const char* name,
+                                   s32* fdOut, IPCOpenMode mode) {
 #pragma unused(user)
 
-    s32 result;
+    NWC24Err result;
 
     if (fdOut == NULL) {
         return NWC24_ERR_INVALID_VALUE;
@@ -32,14 +32,15 @@ s32 NWC24iOpenResourceManager(const char* user, const char* name, s32* fdOut,
     return NWC24_OK;
 }
 
-s32 NWC24iCloseResourceManager(const char* user, s32 fd) {
+NWC24Err NWC24iCloseResourceManager(const char* user, s32 fd) {
 #pragma unused(user)
 
     return IOS_Close(fd) < 0 ? NWC24_ERR_INTERNAL_IPC : NWC24_OK;
 }
 
-s32 NWC24iIoctlResourceManager(const char* user, s32 fd, s32 type, void* in,
-                               s32 inSize, void* out, s32 outSize) {
+NWC24Err NWC24iIoctlResourceManager(const char* user, s32 fd, s32 type,
+                                    void* in, s32 inSize, void* out,
+                                    s32 outSize) {
 #pragma unused(user)
 
     return IOS_Ioctl(fd, type, in, inSize, out, outSize) < 0
@@ -47,9 +48,9 @@ s32 NWC24iIoctlResourceManager(const char* user, s32 fd, s32 type, void* in,
                : NWC24_OK;
 }
 
-s32 NWC24iIoctlResourceManagerAsync(const char* user, s32 fd, s32 type,
-                                    void* in, s32 inSize, void* out,
-                                    s32 outSize, void* callbackArg) {
+NWC24Err NWC24iIoctlResourceManagerAsync(const char* user, s32 fd, s32 type,
+                                         void* in, s32 inSize, void* out,
+                                         s32 outSize, void* callbackArg) {
 #pragma unused(user)
 
     if (IOS_IoctlAsync(fd, type, in, inSize, out, outSize, CallbackAsyncIpc,
@@ -69,5 +70,5 @@ static s32 CallbackAsyncIpc(s32 result, void* arg) {
     }
 
     NWC24iIsRequestPending = FALSE;
-    return 0;
+    return IPC_RESULT_OK;
 }

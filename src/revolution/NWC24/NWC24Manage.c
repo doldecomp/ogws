@@ -27,7 +27,7 @@ static u32 YouGotMail = 0;
 static u32 GlobalErrorCode = 0;
 static BOOL Registered = FALSE;
 
-static s32 NWC24OpenLibInternal(NWC24Work* work, NWC24LibState state);
+static NWC24Err NWC24OpenLibInternal(NWC24Work* work, NWC24LibState state);
 
 void NWC24iRegister(void) {
     if (Registered) {
@@ -38,7 +38,7 @@ void NWC24iRegister(void) {
     Registered = TRUE;
 }
 
-s32 NWC24OpenLib(NWC24Work* work) {
+NWC24Err NWC24OpenLib(NWC24Work* work) {
     if (Opened == NWC24_LIB_OPENED_BY_TOOL) {
         return NWC24_ERR_BUSY;
     }
@@ -46,9 +46,9 @@ s32 NWC24OpenLib(NWC24Work* work) {
     return NWC24OpenLibInternal(work, NWC24_LIB_OPENED);
 }
 
-static s32 NWC24OpenLibInternal(NWC24Work* work, NWC24LibState state) {
-    s32 result;
-    s32 failErr;
+static NWC24Err NWC24OpenLibInternal(NWC24Work* work, NWC24LibState state) {
+    NWC24Err result;
+    NWC24Err failErr;
     u32 failFlag;
 
     NWC24iSetErrorCode(NWC24_OK);
@@ -163,7 +163,7 @@ static s32 NWC24OpenLibInternal(NWC24Work* work, NWC24LibState state) {
     return result;
 }
 
-s32 NWC24CloseLib(void) {
+NWC24Err NWC24CloseLib(void) {
     s32 result;
 
     if (Opened != NWC24_LIB_OPENED) {
@@ -197,7 +197,7 @@ BOOL NWC24IsMsgLibOpenedByTool(void) {
 
 BOOL NWC24IsMsgLibOpenBlocking(void) { return Opened == NWC24_LIB_BLOCKED; }
 
-s32 NWC24BlockOpenMsgLib(BOOL block) {
+NWC24Err NWC24BlockOpenMsgLib(BOOL block) {
     s32 result;
     BOOL enabled;
 
@@ -224,7 +224,7 @@ s32 NWC24BlockOpenMsgLib(BOOL block) {
     return result;
 }
 
-s32 NWC24iSetNewMsgArrived(u32 flags) {
+NWC24Err NWC24iSetNewMsgArrived(u32 flags) {
     YouGotMail |= flags;
     return NWC24_OK;
 }

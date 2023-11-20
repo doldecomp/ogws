@@ -1,5 +1,6 @@
 #ifndef RVL_SDK_NWC24_SECRET_FRIEND_LIST_H
 #define RVL_SDK_NWC24_SECRET_FRIEND_LIST_H
+#include <revolution/NWC24/NWC24Types.h>
 #include <types.h>
 #ifdef __cplusplus
 extern "C" {
@@ -11,7 +12,7 @@ typedef struct NWC24SecretFLHeader {
     u8 UNK_0x8[0x800 - 0x8];
 } NWC24SecretFLHeader;
 
-s32 NWC24iOpenSecretFriendList(void);
+NWC24Err NWC24iOpenSecretFriendList(void);
 
 #ifdef __cplusplus
 }

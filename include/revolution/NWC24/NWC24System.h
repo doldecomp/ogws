@@ -1,13 +1,14 @@
 #ifndef RVL_SDK_NWC24_SYSTEM_H
 #define RVL_SDK_NWC24_SYSTEM_H
+#include <revolution/NWC24/NWC24Types.h>
 #include <types.h>
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-s32 NWC24EnableLedNotification(BOOL enable);
-s32 NWC24iPrepareShutdown(void);
-s32 NWC24iRequestShutdown(u32 event, s32* resultOut);
+NWC24Err NWC24EnableLedNotification(BOOL enable);
+NWC24Err NWC24iPrepareShutdown(void);
+NWC24Err NWC24iRequestShutdown(u32 event, NWC24Err* resultOut);
 BOOL NWC24Shutdown(u32 pass, u32 event);
 
 #ifdef __cplusplus
