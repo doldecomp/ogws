@@ -96,6 +96,7 @@ static BOOL checkHiddenData_(RFLiHiddenCharData* data) {
 }
 
 static void updateHDBcallback_(u32 arg) {
+    RFLErrcode err;
     HiddenNewOldParam* nparam;
     RFLiMiddleDB* db;
 
@@ -122,9 +123,9 @@ static void updateHDBcallback_(u32 arg) {
         if (src >= 0 && nparam->dstIdx < db->size) {
             nparam->srcIdx = src;
 
-            RFLErrcode err = RFLiLoadHiddenDataAsync(
-                &db->data[db->storedSize], nparam->srcIdx, updateHDBcallback_,
-                (u32)db);
+            err = RFLiLoadHiddenDataAsync(&db->data[db->storedSize],
+                                          nparam->srcIdx, updateHDBcallback_,
+                                          (u32)db);
 
             if (err != RFLErrcode_Busy) {
                 RFLiEndWorking(err);
@@ -152,8 +153,11 @@ static void updateHDBcallback_(u32 arg) {
 }
 
 static s16 stepOne_(s16 srcIdx, BOOL oldIsHead) {
+    s16 ret;
+
     (void)RFLiGetHDBManager();
-    s16 ret = -1;
+
+    ret = -1;
 
     if (oldIsHead) {
         if (srcIdx < 0) {

@@ -134,12 +134,15 @@ NWC24Err NWC24SetMsgText(NWC24MsgObj* msg, const char* text, u32 len,
 
     // Lines are limited to at most 1000 characters
     if (encoding == NWC24_ENC_7BIT || encoding == NWC24_ENC_8BIT) {
-        u32 lineLength = 0;
+        u32 lineLength;
+        const char* it;
 
-        for (const char* iter = text; iter < text + len; iter++) {
-            if (iter[0] == '\r' && iter[1] == '\n') {
+        lineLength = 0;
+
+        for (it = text; it < text + len; it++) {
+            if (it[0] == '\r' && it[1] == '\n') {
                 lineLength = 0;
-                iter++;
+                it++;
             }
             // Include "\r\n" in line length
             else if (++lineLength > SMTP_LINE_MAX - 2) {

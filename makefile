@@ -50,7 +50,7 @@ LDFLAGS := -map $(MAP) -mapunused -proc gekko -fp hard -nodefaults -nofail
 # Compiler flags for the Metrowerks Target Resident Kernel (MetroTRK)
 CFLAGS_TRK := -lang c -sdata 0 -use_lmw_stmw on -enum int -inline auto,deferred -rostr -Cpp_exceptions off -proc gekko -fp hard -O4,p -ir include/MetroTRK -I- -i include -ir include/MSL -nodefaults
 # Compiler flags for the CodeWarrior runtime library
-CFLAGS_RUNTIME := -use_lmw_stmw on -enum int -inline auto -rostr -Cpp_exceptions off -proc gekko -fp hard -O4,p -ir include/MetroTRK -I- -i include -ir include/MSL -nodefaults
+CFLAGS_RUNTIME := -lang c -use_lmw_stmw on -enum int -inline auto -rostr -Cpp_exceptions off -proc gekko -fp hard -O4,p -ir include/MetroTRK -I- -i include -ir include/MSL -nodefaults
 # Compiler flags for the Metrowerks Standard Library (MSL)
 CFLAGS_MSL := -lang c -use_lmw_stmw on -enum int -inline auto -rostr -D_IEEE_LIBM -Cpp_exceptions off -proc gekko -fp hard -O4,p -ir include/MetroTRK -I- -i include -ir include/MSL -nodefaults
 # Compiler flags for NintendoWare for Revolution
@@ -58,15 +58,15 @@ CFLAGS_NW4R := -lang c99 -enum int -inline auto -Cpp_exceptions off -RTTI off -p
 # Compiler flags for EGG
 CFLAGS_EGG := -lang c99 -enum int -inline auto -Cpp_exceptions off -RTTI off -proc gekko -fp hard -O4,p  -ir include/egg -ir include/nw4r -I- -Iinclude -ir include/MSL -ir include/revolution -nodefaults -rostr -str pool
 # Compiler flags for the RVL SDK
-CFLAGS_RVL := -lang c99 -enum int -O4,p -inline auto -ipa file -Cpp_exceptions off -RTTI off -proc gekko -fp hard -I- -Iinclude -ir include/MSL -ir include/revolution -nodefaults
+CFLAGS_RVL := -lang c -enum int -O4,p -inline auto -ipa file -Cpp_exceptions off -RTTI off -proc gekko -fp hard -I- -Iinclude -ir include/MSL -ir include/revolution -nodefaults
 # Compiler flags for the RVL Face Library
-CFLAGS_RFL := -lang c99 -enum int -O4,p -inline auto -ipa file -volatileasm -Cpp_exceptions off -RTTI off -proc gekko -fp hard -I- -Iinclude -ir include/MSL -ir include/revolution -nodefaults
+CFLAGS_RFL := -lang c -enum int -O4,p -inline auto -ipa file -volatileasm -Cpp_exceptions off -RTTI off -proc gekko -fp hard -I- -Iinclude -ir include/MSL -ir include/revolution -nodefaults
 
 #
 # One-off file flags
 #
 # EXI/EXIBios.c
-CFLAGS_EXIBIOS := -lang c99 -enum int -O3 -inline auto -ipa file -volatileasm -Cpp_exceptions off -RTTI off -proc gekko -fp hard -I- -Iinclude -ir include/MSL -ir include/revolution -nodefaults
+CFLAGS_EXIBIOS := -lang c -enum int -O3 -inline auto -ipa file -volatileasm -Cpp_exceptions off -RTTI off -proc gekko -fp hard -I- -Iinclude -ir include/MSL -ir include/revolution -nodefaults
 
 # elf2dol needs to know these in order to calculate sbss correctly.
 BSS_PDHR := 9
