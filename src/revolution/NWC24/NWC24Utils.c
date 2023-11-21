@@ -5,7 +5,7 @@ void NWC24Data_Init(NWC24Data* data) {
     data->size = 0;
 }
 
-void NWC24Data_SetDataP(NWC24Data* data, void* ptr, u32 size) {
+void NWC24Data_SetDataP(NWC24Data* data, const void* ptr, u32 size) {
     data->ptr = ptr;
     data->size = size;
 }

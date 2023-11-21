@@ -6,8 +6,8 @@ extern "C" {
 #endif
 
 typedef struct NWC24Data {
-    void* ptr; // at 0x0
-    u32 size;  // at 0x4
+    const void* ptr; // at 0x0
+    u32 size;        // at 0x4
 } NWC24Data;
 
 typedef struct NWC24Date {
@@ -21,7 +21,7 @@ typedef struct NWC24Date {
 } NWC24Date;
 
 void NWC24Data_Init(NWC24Data* data);
-void NWC24Data_SetDataP(NWC24Data* data, void* ptr, u32 size);
+void NWC24Data_SetDataP(NWC24Data* data, const void* ptr, u32 size);
 void NWC24Date_Init(NWC24Date* date);
 void NWC24iConvIdToStr(u64 addr, char* out);
 

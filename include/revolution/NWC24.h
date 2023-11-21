@@ -9,6 +9,7 @@ extern "C" {
 #endif
 
 #include <revolution/NWC24/NWC24Config.h>
+#include <revolution/NWC24/NWC24DateParser.h>
 #include <revolution/NWC24/NWC24Download.h>
 #include <revolution/NWC24/NWC24FileApi.h>
 #include <revolution/NWC24/NWC24FriendList.h>
