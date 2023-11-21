@@ -299,7 +299,8 @@ lbl_801468C4:
 /* 80146B74 00141A74  7C 08 03 A6 */	mtlr r0
 /* 80146B78 00141A78  38 21 00 30 */	addi r1, r1, 0x30
 /* 80146B7C 00141A7C  4E 80 00 20 */	blr 
-lbl_80146B80:
+
+QEncode:
 /* 80146B80 00141A80  94 21 FF C0 */	stwu r1, -0x40(r1)
 /* 80146B84 00141A84  7C 08 02 A6 */	mflr r0
 /* 80146B88 00141A88  90 01 00 44 */	stw r0, 0x44(r1)
@@ -530,7 +531,7 @@ lbl_80146E94:
 /* 80146EA4 00141DA4  38 21 00 40 */	addi r1, r1, 0x40
 /* 80146EA8 00141DA8  4E 80 00 20 */	blr 
 
-.global QEncode
-QEncode:
+.global NWC24EncodeQuotedPrintable
+NWC24EncodeQuotedPrintable:
 /* 80146EAC 00141DAC  39 20 00 00 */	li r9, 0
-/* 80146EB0 00141DB0  4B FF FC D0 */	b lbl_80146B80
+/* 80146EB0 00141DB0  4B FF FC D0 */	b QEncode
