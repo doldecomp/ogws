@@ -27942,8 +27942,8 @@ lbl_8016272C:
 /* 80162744 0015D644  38 21 00 20 */	addi r1, r1, 0x20
 /* 80162748 0015D648  4E 80 00 20 */	blr 
 
-.global func_8016274C
-func_8016274C:
+.global VFMountDriveNANDFlashEx
+VFMountDriveNANDFlashEx:
 /* 8016274C 0015D64C  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 80162750 0015D650  7C 08 02 A6 */	mflr r0
 /* 80162754 0015D654  38 A0 FF FF */	li r5, -1
@@ -28053,8 +28053,8 @@ lbl_801628B8:
 /* 801628D0 0015D7D0  38 21 00 20 */	addi r1, r1, 0x20
 /* 801628D4 0015D7D4  4E 80 00 20 */	blr 
 
-.global func_801628D8
-func_801628D8:
+.global VFUnmountDrive
+VFUnmountDrive:
 /* 801628D8 0015D7D8  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 801628DC 0015D7DC  7C 08 02 A6 */	mflr r0
 /* 801628E0 0015D7E0  90 01 00 14 */	stw r0, 0x14(r1)
@@ -28181,8 +28181,8 @@ lbl_80162A6C:
 /* 80162A88 0015D988  38 21 00 20 */	addi r1, r1, 0x20
 /* 80162A8C 0015D98C  4E 80 00 20 */	blr 
 
-.global func_80162A90
-func_80162A90:
+.global VFOpenFile
+VFOpenFile:
 /* 80162A90 0015D990  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 80162A94 0015D994  7C 08 02 A6 */	mflr r0
 /* 80162A98 0015D998  38 A0 FF FF */	li r5, -1
@@ -28246,8 +28246,8 @@ lbl_80162B54:
 /* 80162B64 0015DA64  38 21 00 20 */	addi r1, r1, 0x20
 /* 80162B68 0015DA68  4E 80 00 20 */	blr 
 
-.global func_80162B6C
-func_80162B6C:
+.global VFCloseFile
+VFCloseFile:
 /* 80162B6C 0015DA6C  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80162B70 0015DA70  7C 08 02 A6 */	mflr r0
 /* 80162B74 0015DA74  90 01 00 14 */	stw r0, 0x14(r1)
@@ -28278,8 +28278,8 @@ lbl_80162BC0:
 /* 80162BD0 0015DAD0  38 21 00 10 */	addi r1, r1, 0x10
 /* 80162BD4 0015DAD4  4E 80 00 20 */	blr 
 
-.global func_80162BD8
-func_80162BD8:
+.global VFSeekFile
+VFSeekFile:
 /* 80162BD8 0015DAD8  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 80162BDC 0015DADC  7C 08 02 A6 */	mflr r0
 /* 80162BE0 0015DAE0  90 01 00 24 */	stw r0, 0x24(r1)
@@ -28318,8 +28318,8 @@ lbl_80162C44:
 /* 80162C5C 0015DB5C  38 21 00 20 */	addi r1, r1, 0x20
 /* 80162C60 0015DB60  4E 80 00 20 */	blr 
 
-.global func_80162C64
-func_80162C64:
+.global VFReadFile
+VFReadFile:
 /* 80162C64 0015DB64  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 80162C68 0015DB68  7C 08 02 A6 */	mflr r0
 /* 80162C6C 0015DB6C  90 01 00 24 */	stw r0, 0x24(r1)
@@ -28362,8 +28362,8 @@ lbl_80162CDC:
 /* 80162CF8 0015DBF8  38 21 00 20 */	addi r1, r1, 0x20
 /* 80162CFC 0015DBFC  4E 80 00 20 */	blr 
 
-.global func_80162D00
-func_80162D00:
+.global VFWriteFile
+VFWriteFile:
 /* 80162D00 0015DC00  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 80162D04 0015DC04  7C 08 02 A6 */	mflr r0
 /* 80162D08 0015DC08  90 01 00 24 */	stw r0, 0x24(r1)
@@ -28402,8 +28402,8 @@ lbl_80162D6C:
 /* 80162D84 0015DC84  38 21 00 20 */	addi r1, r1, 0x20
 /* 80162D88 0015DC88  4E 80 00 20 */	blr 
 
-.global func_80162D8C
-func_80162D8C:
+.global VFDeleteFile
+VFDeleteFile:
 /* 80162D8C 0015DC8C  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 80162D90 0015DC90  7C 08 02 A6 */	mflr r0
 /* 80162D94 0015DC94  38 80 FF FF */	li r4, -1
@@ -28464,8 +28464,8 @@ lbl_80162E48:
 /* 80162E54 0015DD54  38 21 00 20 */	addi r1, r1, 0x20
 /* 80162E58 0015DD58  4E 80 00 20 */	blr 
 
-.global func_80162E5C
-func_80162E5C:
+.global VFGetFileSizeByFd
+VFGetFileSizeByFd:
 /* 80162E5C 0015DD5C  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80162E60 0015DD60  7C 08 02 A6 */	mflr r0
 /* 80162E64 0015DD64  7C 64 1B 78 */	mr r4, r3
@@ -28484,12 +28484,12 @@ lbl_80162E88:
 /* 80162E94 0015DD94  38 21 00 10 */	addi r1, r1, 0x10
 /* 80162E98 0015DD98  4E 80 00 20 */	blr 
 
-.global func_80162E9C
-func_80162E9C:
+.global VFGetLastError
+VFGetLastError:
 /* 80162E9C 0015DD9C  48 00 1B 10 */	b lbl_801649AC
 
-.global func_80162EA0
-func_80162EA0:
+.global VFGetLastDeviceError
+VFGetLastDeviceError:
 /* 80162EA0 0015DDA0  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80162EA4 0015DDA4  7C 08 02 A6 */	mflr r0
 /* 80162EA8 0015DDA8  90 01 00 14 */	stw r0, 0x14(r1)
@@ -28529,8 +28529,8 @@ lbl_80162F10:
 /* 80162F20 0015DE20  38 21 00 10 */	addi r1, r1, 0x10
 /* 80162F24 0015DE24  4E 80 00 20 */	blr 
 
-.global func_80162F28
-func_80162F28:
+.global VFGetDriveFreeSize
+VFGetDriveFreeSize:
 /* 80162F28 0015DE28  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80162F2C 0015DE2C  7C 08 02 A6 */	mflr r0
 /* 80162F30 0015DE30  90 01 00 14 */	stw r0, 0x14(r1)
@@ -28569,8 +28569,8 @@ lbl_80162F94:
 /* 80162FA4 0015DEA4  38 21 00 10 */	addi r1, r1, 0x10
 /* 80162FA8 0015DEA8  4E 80 00 20 */	blr 
 
-.global func_80162FAC
-func_80162FAC:
+.global VFSetSyncMode
+VFSetSyncMode:
 /* 80162FAC 0015DEAC  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 80162FB0 0015DEB0  7C 08 02 A6 */	mflr r0
 /* 80162FB4 0015DEB4  90 01 00 14 */	stw r0, 0x14(r1)

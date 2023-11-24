@@ -79,7 +79,7 @@ NWC24Err NWC24iConfigReload(void) {
         return NWC24_ERR_LIB_NOT_OPENED;
     }
 
-    result = NWC24FOpen(&file, ConfigFile, NWC24_OPEN_READ);
+    result = NWC24FOpen(&file, ConfigFile, NWC24_OPEN_NAND_R);
 
     if (result == NWC24_OK) {
         result = NWC24FRead(config, sizeof(NWC24Config), &file);
@@ -96,7 +96,7 @@ NWC24Err NWC24iConfigReload(void) {
         }
     }
 
-    result = NWC24FOpen(&file, CfgBakFile, NWC24_OPEN_READ);
+    result = NWC24FOpen(&file, CfgBakFile, NWC24_OPEN_NAND_R);
 
     if (result == NWC24_OK) {
         result = NWC24FRead(config, sizeof(NWC24Config), &file);
@@ -130,7 +130,7 @@ NWC24Err NWC24iConfigFlush(void) {
 
     config->checksum = GetConfigCheckSum();
 
-    result = NWC24FOpen(&file, ConfigFile, NWC24_OPEN_WRITE);
+    result = NWC24FOpen(&file, ConfigFile, NWC24_OPEN_NAND_W);
 
     if (result == NWC24_OK) {
         result = NWC24FWrite(config, sizeof(NWC24Config), &file);
@@ -144,7 +144,7 @@ NWC24Err NWC24iConfigFlush(void) {
         return result;
     }
 
-    result = NWC24FOpen(&file, CfgBakFile, NWC24_OPEN_WRITE);
+    result = NWC24FOpen(&file, CfgBakFile, NWC24_OPEN_NAND_W);
 
     if (result == NWC24_OK) {
         result = NWC24FWrite(config, sizeof(NWC24Config), &file);

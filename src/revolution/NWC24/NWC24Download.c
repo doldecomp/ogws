@@ -131,7 +131,7 @@ NWC24Err NWC24iLoadDlHeader(void) {
 
     length = 0;
 
-    result = NWC24FOpen(&file, DLFilePath, NWC24_OPEN_READ);
+    result = NWC24FOpen(&file, DLFilePath, NWC24_OPEN_NAND_R);
     if (result < 0) {
         return result;
     }
@@ -266,8 +266,7 @@ static NWC24Err LoadDlTask(NWC24DlTask* task, u16 i) {
     NWC24Err close;
     NWC24Err ret;
 
-    result =
-        NWC24FOpen(&file, DLFilePath, NWC24_OPEN_READ | NWC24_OPEN_NEED_LIB);
+    result = NWC24FOpen(&file, DLFilePath, NWC24_OPEN_NAND_RBUFF);
     if (result < 0) {
         return result;
     }
@@ -290,7 +289,7 @@ static NWC24Err DeleteDlTask(NWC24DlTask* task) {
     NWC24Err close;
     NWC24Err ret;
 
-    result = NWC24FOpen(&file, DLFilePath, NWC24_OPEN_RW);
+    result = NWC24FOpen(&file, DLFilePath, NWC24_OPEN_NAND_RW);
     if (result < 0) {
         return result;
     }

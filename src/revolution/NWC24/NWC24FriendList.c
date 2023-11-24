@@ -22,7 +22,7 @@ static NWC24Err GetCachedFLHeader(NWC24FLHeader** header) {
     *header = (NWC24FLHeader*)NWC24WorkP->flHeader;
 
     if ((*header)->magic != FRIEND_LIST_MAGIC) {
-        result = NWC24FOpen(&file, FLFilePath, NWC24_OPEN_READ);
+        result = NWC24FOpen(&file, FLFilePath, NWC24_OPEN_NAND_R);
         if (result != NWC24_OK) {
             return result;
         }

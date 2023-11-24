@@ -10,15 +10,17 @@
 extern "C" {
 #endif
 
-#define WORK_SIZE(x) (ROUND_UP(sizeof(x), 256))
+#define NWC24_IO_BUFFER_SIZE 512
+
+#define WORK_SIZE(x) (ROUND_UP(sizeof(x), 0x100))
 typedef struct NWC24Work {
     char stringWork[1024]; // at 0x0
     char WORK_0x400[0x800 - 0x400];
     char pathWork[128]; // at 0x800
     char WORK_0x880[0x900 - 0x880];
-    u8 readWork[512];                  // at 0x900
-    u8 writeWork[512];                 // at 0xB00
-    u8 config[WORK_SIZE(NWC24Config)]; // at 0xD00
+    u8 readBuffer[NWC24_IO_BUFFER_SIZE];  // at 0x900
+    u8 writeBuffer[NWC24_IO_BUFFER_SIZE]; // at 0xB00
+    u8 config[WORK_SIZE(NWC24Config)];    // at 0xD00
     char WORK_0x1100[128];
     char WORK_0x1180[128];
     char WORK_0x1200[128];
