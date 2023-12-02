@@ -26,9 +26,9 @@ void AXFXChorusCallback(void* chans, void* context) {
 }
 
 static void __ParamConvert(AXFX_CHORUS* fx) {
-    fx->exp.delayTime = fx->param.delayTime;
-    fx->exp.depth = fx->param.amplitude / fx->exp.delayTime;
-    fx->exp.rate = 1000.0f / fx->param.period;
+    fx->exp.delayTime = fx->baseDelay;
+    fx->exp.depth = fx->variation / fx->exp.delayTime;
+    fx->exp.rate = 1000.0f / fx->period;
     fx->exp.feedback = 0.0f;
     fx->exp.busIn = NULL;
     fx->exp.busOut = NULL;

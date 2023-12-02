@@ -3,7 +3,7 @@
 static void __ParamConvert(AXFX_REVERBHI* fx);
 
 u32 AXFXReverbHiGetMemSize(AXFX_REVERBHI* fx) {
-    fx->exp.preDelayTimeMax = fx->param.preDelayTime;
+    fx->exp.preDelayTimeMax = fx->preDelay;
     return AXFXReverbHiExpGetMemSize(&fx->exp);
 }
 
@@ -29,17 +29,17 @@ void AXFXReverbHiCallback(void* chans, void* context) {
 
 static void __ParamConvert(AXFX_REVERBHI* fx) {
     fx->exp.earlyMode = 5;
-    fx->exp.preDelayTimeMax = fx->param.preDelayTime;
-    fx->exp.preDelayTime = fx->param.preDelayTime;
+    fx->exp.preDelayTimeMax = fx->preDelay;
+    fx->exp.preDelayTime = fx->preDelay;
     fx->exp.fusedMode = 0;
-    fx->exp.fusedTime = fx->param.fusedTime;
-    fx->exp.coloration = fx->param.coloration;
-    fx->exp.damping = fx->param.damping;
-    fx->exp.crosstalk = fx->param.crosstalk;
+    fx->exp.fusedTime = fx->time;
+    fx->exp.coloration = fx->coloration;
+    fx->exp.damping = fx->damping;
+    fx->exp.crosstalk = fx->crosstalk;
     fx->exp.earlyGain = 0.0f;
     fx->exp.fusedGain = 1.0f;
     fx->exp.busIn = NULL;
     fx->exp.busOut = NULL;
-    fx->exp.outGain = fx->param.outGain;
+    fx->exp.outGain = fx->mix;
     fx->exp.sendGain = 0.0f;
 }

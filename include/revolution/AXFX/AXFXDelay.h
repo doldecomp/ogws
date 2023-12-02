@@ -1,28 +1,20 @@
 #ifndef RVL_SDK_AXFX_DELAY_H
 #define RVL_SDK_AXFX_DELAY_H
-#include <revolution/AXFX/AXFXDelayExp.h>
 #include <types.h>
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-typedef struct AXFX_DELAY_PARAM {
-    u32 INT_0x0;
-    u32 INT_0x4;
-    u32 INT_0x8;
-
-    u32 INT_0xC;
-    u32 INT_0x10;
-    u32 INT_0x14;
-
-    u32 INT_0x18;
-    u32 INT_0x1C;
-    u32 INT_0x20;
-} AXFX_DELAY_PARAM;
-
 typedef struct AXFX_DELAY {
-    AXFX_DELAY_EXP exp;     // at 0x0
-    AXFX_DELAY_PARAM param; // at 0x58
+    s32* line[3];        // at 0x0
+    u32 curPos[3];       // at 0xC
+    u32 length[3];       // at 0x18
+    s32 feedbackGain[3]; // at 0x24
+    s32 outGain[3];      // at 0x30
+    u32 active;          // at 0x3C
+    u32 delay[3];        // at 0x40
+    u32 feedback[3];     // at 0x4C
+    u32 output[3];       // at 0x58
 } AXFX_DELAY;
 
 u32 AXFXDelayGetMemSize(const AXFX_DELAY* fx);
