@@ -53,6 +53,13 @@ typedef struct AXFX_REVERBHI_EXP_DPL2 {
     f32 sendGain;            // at 0x174
 } AXFX_REVERBHI_EXP_DPL2;
 
+u32 AXFXReverbHiExpGetMemSizeDpl2(const AXFX_REVERBHI_EXP_DPL2* fx);
+BOOL AXFXReverbHiExpInitDpl2(AXFX_REVERBHI_EXP_DPL2* fx);
+void AXFXReverbHiExpShutdownDpl2(AXFX_REVERBHI_EXP_DPL2* fx);
+BOOL AXFXReverbHiExpSettingsDpl2(AXFX_REVERBHI_EXP_DPL2* fx);
+void AXFXReverbHiExpCallbackDpl2(struct AXFX_BUFFERUPDATE* update,
+                                 AXFX_REVERBHI_EXP_DPL2* fx);
+
 #ifdef __cplusplus
 }
 #endif

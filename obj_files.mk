@@ -506,7 +506,7 @@ RVL_SDK_O_FILES := \
 	build/revolution/AX/AXProf.o \
 	\
 	build/revolution/AXFX/AXFXReverbHi.o \
-	build/asm/revolution/AXFX/AXFXReverbHiDpl2.o \
+	build/revolution/AXFX/AXFXReverbHiDpl2.o \
 	build/asm/revolution/AXFX/AXFXReverbHiExp.o \
 	build/asm/revolution/AXFX/AXFXReverbHiExpDpl2.o \
 	build/asm/revolution/AXFX/AXFXDelay.o \
