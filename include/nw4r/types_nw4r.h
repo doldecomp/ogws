@@ -8,6 +8,7 @@ namespace nw4r
 	{
 		struct BinaryBlockHeader;
 		struct BinaryFileHeader;
+		struct CharStrmReader;
 		template <typename T, int Ofs> struct LinkList;
 		struct List;
 
