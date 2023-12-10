@@ -3,7 +3,7 @@
 #include "types_nw4r.h"
 #include "math_types.h"
 #include "ut_LinkList.h"
-#include "ut_RTTI.h"
+#include "ut_RuntimeTypeInfo.h"
 #include "ut_Color.h"
 #include "ut_algorithm.h"
 #include "lyt_animation.h"
