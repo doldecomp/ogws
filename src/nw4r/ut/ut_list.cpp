@@ -1,160 +1,137 @@
-#include "ut_list.h"
+#include <nw4r/ut/ut_list.h>
 
-namespace nw4r
-{
-	namespace ut
-	{
-		static inline Node * List_GetNode(List * list, void * node)
-		{
-			return (Node *)((int)node + list->offset);
-		}
-		
-		static inline const Node * List_GetConstNode(const List * list, const void * node)
-		{
-			return (Node *)((int)node + list->offset);
-		}
-		
-		inline void SetFirstObject(List * list, void * node)
-		{
-			Node * pNode = List_GetNode(list, node);
-			
-			pNode->next = NULL;
-			pNode->prev = NULL;
-			list->first = node;
-			list->last = node;
-			list->size++;
-		}
-		
-		void List_Init(List * list, unsigned short offset)
-		{
-			list->offset = offset;
-			list->first = NULL;
-			list->last = NULL;
-			list->size = NULL;
-		}
-		
-		void List_Append(List * list, void * node)
-		{
-			
-			if (!list->first)
-			{
-				SetFirstObject(list, node);
-			}
-			else
-			{
-				Node * pNode = List_GetNode(list, node);
-				
-				pNode->prev = list->last;
-				pNode->next = NULL;
-				
-				List_GetNode(list, list->last)->next = node;
-				list->last = node;
-				list->size++;
-			}
-		}
-		
-		inline void List_Prepend(List * list, void * node)
-		{
-			if (!list->first)
-			{
-				SetFirstObject(list, node);
-			}
-			else
-			{
-				Node * pNode = List_GetNode(list, node);
-				
-				pNode->prev = NULL;
-				pNode->next = list->first;
-				
-				List_GetNode(list, list->first)->prev = node;
-				list->first = node;
-				list->size++;
-			}
-		}
-		
-		void List_Insert(List * list, void * pos, void * node)
-		{
-			if (!pos)
-			{
-				List_Append(list, node);
-			}
-			else if (pos == list->first)
-			{
-				List_Prepend(list, node);
-			}
-			else
-			{
-				Node * pPos = List_GetNode(list, pos);
-				Node * pNode = List_GetNode(list, node);
-				Node * r6 = List_GetNode(list, pPos->prev);
-				pNode->prev = pPos->prev;
-				
-				pNode->next = pos;
-				r6->next = node;
-				
-				List_GetNode(list, pos)->prev = node;
-				list->size++;
-			}
-		}
-		
-		void List_Remove(List *list, void *node)
-        {
-            Node * pNode = List_GetNode(list, node);
-            if (!pNode->prev)
-            {
-                list->first = List_GetNode(list, node)->next;
-            }
-            else
-            {
-                List_GetNode(list, pNode->prev)->next = pNode->next;
-            }
+namespace nw4r {
+namespace ut {
 
-            if (!pNode->next)
-            {
-                list->last = pNode->prev;
-            }
-            else
-            {
-                List_GetNode(list, pNode->next)->prev = pNode->prev;
-            }
+#define OBJ_TO_NODE(list, object)                                              \
+    reinterpret_cast<Node*>((std::uintptr_t)object + list->offset)
 
-            pNode->prev = NULL;
-            pNode->next = NULL;
-            list->size--;
-        }
-		
-        void* List_GetNext(const List *list, const void *node)
-		{
-			if (node == NULL)
-            {
-                return list->first;
-            }
-
-            return List_GetConstNode(list, node)->next;
-		}
-
-        void* List_GetPrev(const List *list, const void *node)
-        {
-            if (node == NULL)
-            {
-                return list->last;
-            }
-
-            return List_GetConstNode(list, node)->prev;
-        }
-		
-		
-		void * List_GetNth(const List * list, unsigned short n)
-		{
-			void * node;
-			int i;
-			
-			for (i = 0, node = NULL; node = List_GetNext(list, node); i++)
-			{
-				if (n == i) return node;
-			}
-			
-			return NULL;
-		}
-	}
+void List_Init(List* list, u16 offset) {
+    list->first = NULL;
+    list->last = NULL;
+    list->size = NULL;
+    list->offset = offset;
 }
+
+static void SetFirstObject(List* list, void* object) {
+    Node* node = OBJ_TO_NODE(list, object);
+    node->next = NULL;
+    node->prev = NULL;
+
+    list->first = object;
+    list->last = object;
+
+    list->size++;
+}
+
+void List_Append(List* list, void* object) {
+    if (list->first == NULL) {
+        SetFirstObject(list, object);
+    } else {
+        // Old tail <- New tail relationship
+        Node* node = OBJ_TO_NODE(list, object);
+        node->prev = list->last;
+        node->next = NULL;
+
+        // Old tail -> New tail relationship
+        OBJ_TO_NODE(list, list->last)->next = object;
+        list->last = object;
+
+        list->size++;
+    }
+}
+
+void List_Prepend(List* list, void* object) {
+    if (list->first == NULL) {
+        SetFirstObject(list, object);
+    } else {
+        // New head -> Old head relationship
+        Node* node = OBJ_TO_NODE(list, object);
+        node->prev = NULL;
+        node->next = list->first;
+
+        // New head <- Old head relationship
+        OBJ_TO_NODE(list, list->first)->prev = object;
+        list->first = object;
+
+        list->size++;
+    }
+}
+
+void List_Insert(List* list, void* next, void* object) {
+    if (next == NULL) {
+        List_Append(list, object);
+    } else if (next == list->first) {
+        List_Prepend(list, object);
+    } else {
+        Node* nextNode = OBJ_TO_NODE(list, next);
+        Node* prevNode = OBJ_TO_NODE(list, nextNode->prev);
+        Node* newNode = OBJ_TO_NODE(list, object);
+
+        // prevNode <- newNode
+        newNode->prev = nextNode->prev;
+        // prevNode <- newNode -> nextNode
+        newNode->next = next;
+        // prevNode <-> newNode -> nextNode
+        prevNode->next = object;
+        // prevNode <-> newNode <-> nextNode
+        OBJ_TO_NODE(list, next)->prev = object;
+
+        list->size++;
+    }
+}
+
+void List_Remove(List* list, void* object) {
+    Node* node = OBJ_TO_NODE(list, object);
+
+    // Fix previous node relationship
+    if (node->prev == NULL) {
+        list->first = OBJ_TO_NODE(list, object)->next;
+    } else {
+        OBJ_TO_NODE(list, node->prev)->next = node->next;
+    }
+
+    // Fix next node relationship
+    if (node->next == NULL) {
+        list->last = node->prev;
+    } else {
+        OBJ_TO_NODE(list, node->next)->prev = node->prev;
+    }
+
+    node->prev = NULL;
+    node->next = NULL;
+
+    list->size--;
+}
+
+void* List_GetNext(const List* list, const void* object) {
+    if (object == NULL) {
+        return list->first;
+    }
+
+    return OBJ_TO_NODE(list, object)->next;
+}
+
+void* List_GetPrev(const List* list, const void* object) {
+    if (object == NULL) {
+        return list->last;
+    }
+
+    return OBJ_TO_NODE(list, object)->prev;
+}
+
+void* List_GetNth(const List* list, u16 n) {
+    int i;
+    void* object;
+
+    for (i = 0, object = NULL; object = List_GetNext(list, object); i++) {
+        if (n == i) {
+            return object;
+        }
+    }
+
+    return NULL;
+}
+
+} // namespace ut
+} // namespace nw4r
