@@ -1,196 +1,307 @@
-#ifndef NW4R_UT_LINK_LIST
-#define NW4R_UT_LINK_LIST
-#include "types_nw4r.h"
-#include "ut_NonCopyable.h"
+#ifndef NW4R_UT_LINK_LIST_H
+#define NW4R_UT_LINK_LIST_H
+#include <nw4r/types_nw4r.h>
+#include <nw4r/ut/ut_NonCopyable.h>
 
-namespace nw4r
-{
-    namespace ut
-    {
-        struct LinkListNode : public NonCopyable
-        {            
-            LinkListNode() : mNext(NULL), mPrev(NULL) {}
+namespace nw4r {
+namespace ut {
 
-            LinkListNode *mNext; // at 0x0
-            LinkListNode *mPrev; // at 0x4
-        };
-        
-        namespace detail
-        {
-            class LinkListImpl : public NonCopyable
-            {
-            public:            
-                struct Iterator
-                {
-                    Iterator(LinkListNode *node) : mPointer(node) {}
-                    
-                    Iterator& operator++()
-                    {
-                        mPointer = mPointer->mNext;
-                        return *this;
-                    }
-
-                    Iterator& operator--()
-                    {
-                        mPointer = mPointer->mPrev;
-                        return *this;
-                    }
-                    
-                    LinkListNode * operator->() const
-                    {
-                        return mPointer;
-                    }
-
-                    LinkListNode *mPointer; // at 0x0
-                };
-                                
-                LinkListImpl()
-                {
-                    Initialize_();
-                }
-
-                ~LinkListImpl();
-
-                void Initialize_()
-                {
-                    mSize = 0;
-
-                    LinkListNode *end = &mNode;
-                    mNode.mNext = end;
-                    mNode.mPrev = end;
-                }
-
-                int GetSize() const { return mSize; }
-                bool IsEmpty() const { return (mSize == 0); }
-
-                Iterator GetEndIter()
-                {
-                    return Iterator(&mNode);
-                }
-                
-                Iterator GetBeginIter()
-                {
-                    return Iterator(mNode.mNext);
-                }
-
-                LinkListNode * Erase(Iterator);
-                LinkListNode * Erase(LinkListNode *);
-                LinkListNode * Erase(Iterator, Iterator);
-
-                LinkListNode * Insert(Iterator, LinkListNode *);
-                
-                void Clear();
-
-            private:
-                int mSize; // at 0x0
-                LinkListNode mNode; // at 0x4
-            };
-            
-            inline bool operator ==(LinkListImpl::Iterator iter1, LinkListImpl::Iterator iter2)
-            {
-                return iter1.mPointer == iter2.mPointer;
-            }
-        }
-        
-        template <typename T, int I>
-        class LinkList : public detail::LinkListImpl
-        {
-        public:            
-            struct Iterator
-            {
-                Iterator(LinkListImpl::Iterator iter) : mIterator(iter) {}
-                
-                bool operator==(Iterator other)
-                {
-                    return (mIterator == other.mIterator);
-                }
-                
-                bool operator!=(Iterator other)
-                {
-                    return !(*this == other);
-                }
-                
-                Iterator& operator++()
-                {
-                    mIterator.operator++();
-                    return *this;
-                }
-                
-                Iterator& operator--()
-                {
-                    mIterator.operator--;
-                    return *this;
-                }
-                
-                Iterator operator++(int)
-                {
-                    Iterator ret = *this;
-                    ++*this;
-                    return ret;
-                }
-                
-                T * operator->() const
-                {
-                    return GetPointerFromNode(mIterator.mPointer);
-                }
-                
-                T& operator*() const
-                {
-                    return *GetPointerFromNode(mIterator.mPointer);
-                }
-
-                LinkListImpl::Iterator mIterator; // at 0x0
-            };
-            
-            LinkList() {}
-            ~LinkList() {}
-
-            Iterator GetEndIter()
-            {
-                return Iterator(LinkListImpl::GetEndIter());
-            }
-            
-            Iterator GetBeginIter()
-            {
-                return Iterator(LinkListImpl::GetBeginIter());
-            }
-            
-            Iterator Insert(Iterator iter, T *p)
-            {
-                return Iterator(LinkListImpl::Insert(iter.mIterator, GetNodeFromPointer(p)));
-            }
-            
-            UNKTYPE PushBack(T *p)
-            {
-                Insert(GetEndIter(), p);
-            }
-            
-            Iterator Erase(T *p)
-            {
-                return Iterator(LinkListImpl::Erase(GetNodeFromPointer(p)));
-            }
-
-            Iterator Erase(Iterator iter)
-            {
-                return Iterator(LinkListImpl::Erase(iter.mIterator));
-            }
-            
-            T * GetBack()
-            {
-                return &*--GetEndIter();
-            }
-
-            static inline LinkListNode * GetNodeFromPointer(T *p)
-            {
-                return (LinkListNode *)((char *)p + I);
-            }
-            
-            static inline T * GetPointerFromNode(LinkListNode *node)
-            {
-                return (T *)((char *)node - I);
-            }
-        };
-    }
+// Forward declaration
+namespace detail {
+class LinkListImpl;
 }
+
+class LinkListNode : private NonCopyable {
+    friend class detail::LinkListImpl;
+
+public:
+    LinkListNode() : mNext(NULL), mPrev(NULL) {}
+
+    LinkListNode* GetNext() const { return mNext; }
+    LinkListNode* GetPrev() const { return mPrev; }
+
+private:
+    LinkListNode* mNext; // at 0x0
+    LinkListNode* mPrev; // at 0x4
+};
+
+namespace detail {
+
+class LinkListImpl : private NonCopyable {
+public:
+    // Forward declaration
+    class ConstIterator;
+
+    class Iterator {
+        friend class LinkListImpl;
+        friend class ConstIterator;
+
+    public:
+        Iterator() : mNode(NULL) {}
+        Iterator(LinkListNode* node) : mNode(node) {}
+
+        Iterator& operator++() {
+            mNode = mNode->GetNext();
+            return *this;
+        }
+
+        Iterator& operator--() {
+            mNode = mNode->GetPrev();
+            return *this;
+        }
+
+        LinkListNode* operator->() const { return mNode; }
+
+        friend bool operator==(LinkListImpl::Iterator lhs,
+                               LinkListImpl::Iterator rhs) {
+            return lhs.mNode == rhs.mNode;
+        }
+
+    private:
+        LinkListNode* mNode; // at 0x0
+    };
+
+    class ConstIterator {
+        friend class LinkListImpl;
+
+    public:
+        ConstIterator(Iterator it) : mNode(it.mNode) {}
+
+        ConstIterator& operator++() {
+            mNode = mNode->GetNext();
+            return *this;
+        }
+
+        ConstIterator& operator--() {
+            mNode = mNode->GetPrev();
+            return *this;
+        }
+
+        const LinkListNode* operator->() const { return mNode; }
+
+        friend bool operator==(LinkListImpl::ConstIterator lhs,
+                               LinkListImpl::ConstIterator rhs) {
+            return lhs.mNode == rhs.mNode;
+        }
+
+    private:
+        LinkListNode* mNode; // at 0x0
+    };
+
+protected:
+    static Iterator GetIteratorFromPointer(LinkListNode* node) {
+        return Iterator(node);
+    }
+
+    LinkListImpl() { Initialize_(); }
+    ~LinkListImpl();
+
+    Iterator GetBeginIter() { return Iterator(mNode.GetNext()); }
+    Iterator GetEndIter() { return Iterator(&mNode); }
+
+    Iterator Insert(Iterator it, LinkListNode* node);
+
+    Iterator Erase(Iterator it);
+    Iterator Erase(LinkListNode* node);
+    Iterator Erase(Iterator begin, Iterator end);
+
+public:
+    u32 GetSize() const { return mSize; }
+    bool IsEmpty() const { return mSize == 0; }
+
+    void PopFront() { Erase(GetBeginIter()); }
+    void PopBack() { Erase(GetEndIter()); }
+
+    void Clear();
+
+private:
+    void Initialize_() {
+        mSize = 0;
+        mNode.mNext = &mNode;
+        mNode.mPrev = &mNode;
+    }
+
+private:
+    u32 mSize;          // at 0x0
+    LinkListNode mNode; // at 0x4
+};
+
+template <typename T> class ReverseIterator {
+public:
+    ReverseIterator(T it) : mCurrent(it) {}
+
+    T GetBase() const { return mCurrent; }
+
+    ReverseIterator& operator++() {
+        --mCurrent;
+        return *this;
+    }
+
+    const T* operator->() const { return &this->operator*(); }
+
+    T& operator*() const {
+        T it = mCurrent;
+        --it;
+        return *it;
+    }
+
+    friend bool operator==(const ReverseIterator& lhs,
+                           const ReverseIterator& rhs) {
+        return lhs.mCurrent == rhs.mCurrent;
+    }
+
+    friend bool operator!=(const ReverseIterator& lhs,
+                           const ReverseIterator& rhs) {
+        return !(lhs.mCurrent == rhs.mCurrent);
+    }
+
+private:
+    T mCurrent; // at 0x0
+};
+
+} // namespace detail
+
+template <typename T, int Ofs> class LinkList : public detail::LinkListImpl {
+public:
+    class Iterator {
+        friend class LinkList;
+
+    public:
+        Iterator() : mIterator(NULL) {}
+        Iterator(LinkListImpl::Iterator it) : mIterator(it) {}
+
+        Iterator& operator++() {
+            ++mIterator;
+            return *this;
+        }
+
+        Iterator& operator--() {
+            --mIterator;
+            return *this;
+        }
+
+        Iterator operator++(int) {
+            Iterator ret = *this;
+            ++*this;
+            return ret;
+        }
+
+        T* operator->() const {
+            return GetPointerFromNode(mIterator.operator->());
+        }
+
+        T& operator*() const { return *this->operator->(); }
+
+        friend bool operator==(Iterator lhs, Iterator rhs) {
+            return lhs.mIterator == rhs.mIterator;
+        }
+
+        friend bool operator!=(Iterator lhs, Iterator rhs) {
+            return !(lhs == rhs);
+        }
+
+    private:
+        LinkListImpl::Iterator mIterator; // at 0x0
+    };
+
+    class ConstIterator {
+        friend class LinkList;
+
+    public:
+        ConstIterator(LinkListImpl::Iterator it) : mIterator(it) {}
+
+        ConstIterator& operator++() {
+            ++mIterator;
+            return *this;
+        }
+
+        ConstIterator& operator--() {
+            --mIterator;
+            return *this;
+        }
+
+        ConstIterator operator++(int) {
+            ConstIterator ret = *this;
+            ++*this;
+            return ret;
+        }
+
+        const T* operator->() const {
+            return GetPointerFromNode(mIterator.operator->());
+        }
+
+        const T& operator*() const { return *this->operator->(); }
+
+        friend bool operator==(ConstIterator lhs, ConstIterator rhs) {
+            return lhs.mIterator == rhs.mIterator;
+        }
+
+        friend bool operator!=(ConstIterator lhs, ConstIterator rhs) {
+            return !(lhs == rhs);
+        }
+
+    private:
+        LinkListImpl::ConstIterator mIterator; // at 0x0
+    };
+
+public:
+    LinkList() {}
+    ~LinkList() {}
+
+    Iterator GetBeginIter() { return Iterator(LinkListImpl::GetBeginIter()); }
+    ConstIterator GetBeginIter() const { return ConstIterator(GetBeginIter()); }
+    detail::ReverseIterator<Iterator> GetBeginReverseIter() {
+        return detail::ReverseIterator(GetBeginIter());
+    }
+
+    Iterator GetEndIter() { return Iterator(LinkListImpl::GetEndIter()); }
+    ConstIterator GetEndIter() const { return ConstIterator(GetEndIter()); }
+    detail::ReverseIterator<Iterator> GetEndReverseIter() {
+        return detail::ReverseIterator(GetEndIter());
+    }
+
+    Iterator Insert(Iterator it, T* p) {
+        return Iterator(
+            LinkListImpl::Insert(it.mIterator, GetNodeFromPointer(p)));
+    }
+
+    Iterator Erase(T* p) {
+        return Iterator(LinkListImpl::Erase(GetNodeFromPointer(p)));
+    }
+    Iterator Erase(Iterator it) {
+        return Iterator(LinkListImpl::Erase(it.mIterator));
+    }
+
+    void PushBack(T* p) { Insert(GetEndIter(), p); }
+
+    T& GetFront() { return *GetBeginIter(); }
+    const T& GetFront() const { return *GetBeginIter(); }
+
+    T& GetBack() { return *--GetEndIter(); }
+    const T& GetBack() const { return *--GetEndIter(); }
+
+    static Iterator GetIteratorFromPointer(T* p) {
+        return GetIteratorFromPointer(GetNodeFromPointer(p));
+    }
+
+    static Iterator GetIteratorFromPointer(LinkListNode* node) {
+        return Iterator(LinkListImpl::GetIteratorFromPointer(node));
+    }
+
+    static LinkListNode* GetNodeFromPointer(T* p) {
+        return reinterpret_cast<LinkListNode*>((std::uintptr_t)p + Ofs);
+    }
+
+    static T* GetPointerFromNode(LinkListNode* node) {
+        return reinterpret_cast<T*>((std::uintptr_t)node - Ofs);
+    }
+
+    static const T* GetPointerFromNode(const LinkListNode* node) {
+        return reinterpret_cast<T*>((std::uintptr_t)node - Ofs);
+    }
+};
+
+} // namespace ut
+} // namespace nw4r
 
 #endif

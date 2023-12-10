@@ -25,7 +25,7 @@ namespace nw4r
 			{
 				mPlayableSoundCount = playableSoundCount;
 						
-				while (mSoundList.GetSize() > mPlayableSoundCount)
+				while (GetPlayingSoundCount() > GetPlayableSoundCount())
 				{
 					GetLowestPrioritySound()->Shutdown();
 				}

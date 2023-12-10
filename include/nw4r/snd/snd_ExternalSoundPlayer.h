@@ -16,6 +16,9 @@ namespace nw4r
 				ut::LinkList<struct BasicSound, 0xD0> mSoundList; // at 0x0
 				u16 mPlayableSoundCount; // at 0xc
 				float FLOAT_0x10;
+
+				int GetPlayableSoundCount() const { return mPlayableSoundCount; }
+				int GetPlayingSoundCount() const { return mSoundList.GetSize(); }
 				
 				void SetPlayableSoundCount(int);
 				UNKTYPE InsertSoundList(BasicSound *);
