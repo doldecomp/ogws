@@ -23,9 +23,9 @@ namespace nw4r
 			
 			if (pFile->magic == 'RFNU') //IsManaging?
 			{
-				BinaryBlockHeader * pCurBlock = (BinaryBlockHeader *)((u8 *)pFile + pFile->headerLen);
+				BinaryBlockHeader * pCurBlock = (BinaryBlockHeader *)((u8 *)pFile + pFile->headerSize);
 				
-				for (int i = 0; i < pFile->blockCount; i++)
+				for (int i = 0; i < pFile->numBlocks; i++)
 				{
 					if (pCurBlock->magic == 'FINF')
 					{
@@ -58,10 +58,10 @@ namespace nw4r
 		
 		FontInformation * ResFont::Rebuild(BinaryFileHeader * pFile)
 		{
-			BinaryBlockHeader * pCurBlock = (BinaryBlockHeader *)((u8 *)pFile + pFile->headerLen);
+			BinaryBlockHeader * pCurBlock = (BinaryBlockHeader *)((u8 *)pFile + pFile->headerSize);
 			FontInformation * pFontInfo = NULL;
 			
-			for (int i = 0; i < pFile->blockCount; i++)
+			for (int i = 0; i < pFile->numBlocks; i++)
 			{
 				switch (pCurBlock->magic)
 				{

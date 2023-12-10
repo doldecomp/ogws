@@ -7,9 +7,6 @@
 #include <string.h>
 #include <revolution/GX.h>
 
-#define BOM_BIG_ENDIAN 0xFEFF
-#define BOM_LITTLE_ENDIAN 0xFFFE
-
 namespace nw4r
 {
     using namespace math;
@@ -31,7 +28,7 @@ namespace nw4r
 
             bool TestFileHeader(const res::BinaryFileHeader& header)
             {
-                return ((header.bom == BOM_BIG_ENDIAN) && (header.version == 8));
+                return ((header.byteOrder == NW4R_BYTEORDER_BIG) && (header.version == 8));
             }
 
             bool TestFileHeader(const res::BinaryFileHeader& header, u32 magic)
