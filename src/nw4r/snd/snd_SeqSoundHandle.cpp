@@ -1,5 +1,5 @@
 #include "types_nw4r.h"
-#include "ut_RTTI.h"
+#include "ut_RuntimeTypeInfo.h"
 #include "snd_SeqSound.h"
 #include "snd_SeqSoundHandle.h"
 

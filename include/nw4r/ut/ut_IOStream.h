@@ -1,13 +1,13 @@
 #ifndef NW4R_UT_IO_STREAM
 #define NW4R_UT_IO_STREAM
 #include "types_nw4r.h"
-#include "ut_RTTI.h"
+#include "ut_RuntimeTypeInfo.h"
 
 namespace nw4r
 {
 	namespace ut
 	{
-		struct IOStream : Polymorphic
+		struct IOStream : IPolymorphic
 		{
 			typedef void (* AsyncFunctor)(s32, IOStream *, void *);
 			

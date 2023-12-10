@@ -3,7 +3,7 @@
 #include "types_nw4r.h"
 #include "snd_BasicSound.h"
 #include "snd_WsdPlayer.h"
-#include "ut_RTTI.h"
+#include "ut_RuntimeTypeInfo.h"
 
 namespace nw4r
 {

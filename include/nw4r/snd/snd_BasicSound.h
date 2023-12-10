@@ -4,7 +4,7 @@
 #include "snd_MoveValue.h"
 #include "snd_AxManager.h"
 #include "snd_BasicPlayer.h"
-#include "ut_RTTI.h"
+#include "ut_RuntimeTypeInfo.h"
 #include "ut_algorithm.h"
 
 namespace nw4r
@@ -24,7 +24,7 @@ namespace nw4r
 		
 		namespace detail
 		{
-			struct BasicSound : ut::Polymorphic
+			struct BasicSound : ut::IPolymorphic
 			{
 				struct AmbientParamUpdateCallback
 				{
