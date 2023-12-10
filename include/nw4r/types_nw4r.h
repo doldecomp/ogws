@@ -6,6 +6,11 @@ namespace nw4r
 {
 	namespace ut
 	{
+		struct BinaryBlockHeader;
+		struct BinaryFileHeader;
+		template <typename T, int Ofs> struct LinkList;
+		struct List;
+
 		template <typename T> struct TextWriterBase;
 		template <typename T> struct TagProcessorBase;
 
