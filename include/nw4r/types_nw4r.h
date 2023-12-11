@@ -17,6 +17,7 @@ struct FileStream;
 struct IOStream;
 template <typename T, int Ofs> struct LinkList;
 struct List;
+struct NandFileStream;
 
 } // namespace ut
 } // namespace nw4r
