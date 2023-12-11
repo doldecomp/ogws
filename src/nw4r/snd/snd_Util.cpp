@@ -629,36 +629,36 @@ namespace nw4r
 
                 f32 CalcVolumeRatio(f32 f1)
                 {
-                    f32 f2 = Clamp<f32>(-90.4f, 6.0f, f1);
+                    f32 f2 = Clamp<f32>(f1, -90.4f, 6.0f);
                     return Decibel2RatioTable[(int)(10.0f * f2) + 0x388];
                 }
                 
                 f32 CalcPanRatio(f32 f1, const PanInfo& info)
                 {
-                    f1 = (Clamp<f32>(-1.0f, 1.0f, f1) + 1.0f) / 2.0f;
+                    f1 = (Clamp<f32>(f1, -1.0f, 1.0f) + 1.0f) / 2.0f;
                     const f32 *tbl = PanTableTable[info.mPanTableID];
                     f32 f2 = tbl[(int)(0.5f + 256.0f * f1)];
 
                     if (info.BOOL_0x4) f2 /= tbl[128];
 
-                    return (info.BOOL_0x5) ? Clamp<f32>(0.0f, 1.0f, f2)
-                        : Clamp<f32>(0.0f, 2.0f, f2);
+                    return (info.BOOL_0x5) ? Clamp<f32>(f2, 0.0f, 1.0f)
+                        : Clamp<f32>(f2, 0.0f, 2.0f);
                 }
 
                 f32 CalcSurroundPanRatio(f32 f1, const PanInfo& info)
                 {
-                    f1 = Clamp<f32>(0.0f, 2.0f, f1) / 2.0f;
+                    f1 = Clamp<f32>(f1, 0.0f, 2.0f) / 2.0f;
                     const f32 *tbl = PanTableTable[info.mPanTableID];
 
-                    return Clamp<f32>(0.0f, 2.0f,
-                        tbl[(int)(f1 * 256.0f + 0.5f)]);
+                    return Clamp<f32>(tbl[(int)(f1 * 256.0f + 0.5f)],
+                        0.0f, 2.0f);
                 }
 
                 int CalcLpfFreq(f32 f1)
                 {
                     32000.0l;
                     
-                    f64 f2 = (f64)Clamp<f32>(0.0f, 1.0f, f1);
+                    f64 f2 = (f64)Clamp<f32>(f1, 0.0f, 1.0f);
                     f64 f0 = pow(2.0l, 10.0l * (f2 - 1.0l));
 
                     return (int)(32000.0l * f0);
@@ -666,7 +666,7 @@ namespace nw4r
 
                 void GetRemoteFilterCoefs(int i, u16 *p1, u16 *p2, u16 *p3, u16 *p4, u16 *p5)
                 {
-                    int r0 = Clamp<int>(0, 127, i);
+                    int r0 = Clamp<int>(i, 0, 127);
 
                     *p1 = RemoteFilterCoefTable[r0][0];
                     *p2 = RemoteFilterCoefTable[r0][1];

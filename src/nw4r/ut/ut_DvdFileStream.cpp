@@ -12,11 +12,11 @@ namespace nw4r
             FileInfoStreamPair *pPair = (FileInfoStreamPair *)pInfo;
             DvdFileStream *pStrm = pPair->mStrm;
             pStrm->mIsBusy = false;
-            pStrm->WORD_0x8 = r3;
+            pStrm->mResult = r3;
 
-            if (pStrm->ASYNC_0xC)
+            if (pStrm->mCallback)
             {
-                pStrm->ASYNC_0xC(r3, pStrm, pStrm->PTR_0x10);
+                pStrm->mCallback(r3, pStrm, pStrm->mCallbackArg);
             }
         }
 
@@ -54,14 +54,14 @@ namespace nw4r
 
         void DvdFileStream::Close()
         {
-            if (BOOL_0x6E && BOOL_0x4)
+            if (BOOL_0x6E && mIsOpen)
             {
                 DVDClose(&mFileInfo);
-                BOOL_0x4 = false;
+                mIsOpen = false;
             }
         }
 
-        int DvdFileStream::Read(void *pData, u32 len)
+        s32 DvdFileStream::Read(void *pData, u32 len)
         {
             len = AdjustReadLength_(len);
             u32 pos = mPosition.Tell();
@@ -74,7 +74,7 @@ namespace nw4r
             return bytesRead;
         }
 
-        bool DvdFileStream::ReadAsync(void * pData, u32 len, AsyncFunctor func, void *r7)
+        bool DvdFileStream::ReadAsync(void * pData, u32 len, AsyncCallback func, void *r7)
         {
             len = AdjustReadLength_(len);
             bool result = DvdFileStream::PeekAsync(pData, len, func, r7);
@@ -98,10 +98,10 @@ namespace nw4r
             return DVDReadPrio(&mFileInfo, pData, len, pos, WORD_0x68);
         }
 
-        bool DvdFileStream::PeekAsync(void * pData, u32 len, AsyncFunctor func, void *r7)
+        bool DvdFileStream::PeekAsync(void * pData, u32 len, AsyncCallback func, void *r7)
         {
-            ASYNC_0xC = func;
-            PTR_0x10 = r7;
+            mCallback = func;
+            mCallbackArg = r7;
             mIsBusy = 1;
             len = AdjustReadLength_(len);
             u32 pos = mPosition.Tell();
@@ -119,7 +119,7 @@ namespace nw4r
             DVDCancel(&mFileInfo.block);
         }
 
-        bool DvdFileStream::CancelAsync(AsyncFunctor func, void *p)
+        bool DvdFileStream::CancelAsync(AsyncCallback func, void *p)
         {
             ASYNC_0x1C = func;
             PTR_0x20 = p;

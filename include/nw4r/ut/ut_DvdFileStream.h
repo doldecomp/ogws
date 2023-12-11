@@ -22,12 +22,12 @@ namespace nw4r
 			{
 				BOOL_0x6D = false;
 				BOOL_0x6E = false;
-				BOOL_0x4 = false;
+				mIsOpen = false;
 				WORD_0x68 = DVD_QUEUE_PRIO_MEDIUM;
 				mIsBusy = false;
-				ASYNC_0xC = NULL;
-				PTR_0x10 = NULL;
-				WORD_0x8 = 0;
+				mCallback = NULL;
+				mCallbackArg = NULL;
+				mResult = 0;
 				ASYNC_0x1C = NULL;
 				BYTE_0x24 = 0;
 				PTR_0x20 = NULL;
@@ -47,7 +47,7 @@ namespace nw4r
 					mPosition.Seek(0, 0);
 					BOOL_0x6D = true;
 					BOOL_0x6E = true;
-					BOOL_0x4 = true;
+					mIsOpen = true;
 					return true;
 				}
 				return false;
@@ -65,7 +65,7 @@ namespace nw4r
 				mPosition.Seek(0, 0);
 				BOOL_0x6D = false;
 				BOOL_0x6E = b;
-				BOOL_0x4 = true;
+				mIsOpen = true;
 				return true;
 			}
 
@@ -95,13 +95,13 @@ namespace nw4r
 			DvdFileStream(s32);
 			DvdFileStream(const DVDFileInfo *, bool);
 			void Close();
-			int Read(void *, u32);
-			bool ReadAsync(void *, u32, AsyncFunctor, void *);
+			s32 Read(void *, u32);
+			bool ReadAsync(void *, u32, AsyncCallback, void *);
 			virtual UNKWORD Peek(void *, u32);
-			virtual bool PeekAsync(void *, u32, AsyncFunctor, void *);
+			virtual bool PeekAsync(void *, u32, AsyncCallback, void *);
 			void Seek(s32, u32);
 			UNKTYPE Cancel();
-			bool CancelAsync(AsyncFunctor, void *);
+			bool CancelAsync(AsyncCallback, void *);
 			u32 GetBufferAlign() const;
 			u32 GetSizeAlign() const;
 			u32 GetOffsetAlign() const;
@@ -116,7 +116,7 @@ namespace nw4r
 			const detail::RuntimeTypeInfo * GetRuntimeTypeInfo() const;
 
 			FilePosition mPosition; // at 0x14
-			AsyncFunctor ASYNC_0x1C; // at 0x1C
+			AsyncCallback ASYNC_0x1C; // at 0x1C
 			void * PTR_0x20;
 			volatile bool BYTE_0x24;
 			volatile char UNK_0x25[3];

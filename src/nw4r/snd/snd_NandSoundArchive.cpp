@@ -13,7 +13,7 @@ namespace nw4r
     {
         using namespace detail;
         
-        struct NandSoundArchive::NandFileStream : ut::NandFileStream
+        struct NandSoundArchive::NandFileStream : public ut::NandFileStream
         {
             int mStartOffset; // at 0x16c
             int mSize; // at 0x170
@@ -22,7 +22,7 @@ namespace nw4r
             NandFileStream(const char *, u32, u32); //inlined
             
             virtual ~NandFileStream() {} // at 0xC
-            virtual int Read(void *, u32); // at 0x14
+            virtual s32 Read(void *, u32); // at 0x14
             virtual u32 GetSize() const; // at 0x40
             virtual void Seek(s32, u32); // at 0x44
             virtual u32 Tell() const; // at 0x58
@@ -187,7 +187,7 @@ namespace nw4r
         {
             if (BOOL_0x4)
             {
-                if (!mSize) mSize = mPosition.mFileSize;
+                if (!mSize) mSize = mPosition.GetFileSize();
                 
                 ut::NandFileStream::Seek(mStartOffset, 0);
             }
@@ -198,7 +198,7 @@ namespace nw4r
         {
             if (BOOL_0x4)
             {
-                if (!mSize) mSize = mPosition.mFileSize;
+                if (!mSize) mSize = mPosition.GetFileSize();
                 
                 ut::NandFileStream::Seek(mStartOffset, 0);
             }
@@ -208,7 +208,7 @@ namespace nw4r
         {
             u32 endOffset = mStartOffset + mSize;
             
-            if (mPosition.mFileOffset + count > endOffset) count = RoundUp<u32>(endOffset - mPosition.mFileOffset, 0x20);
+            if (mPosition.Tell() + count > endOffset) count = RoundUp<u32>(endOffset - mPosition.Tell(), 0x20);
             
             int ret = ut::NandFileStream::Read(pBuffer, count);
             
@@ -225,7 +225,7 @@ namespace nw4r
                     offset += mStartOffset;
                     break;
                 case 1:
-                    offset += mPosition.mFileOffset;
+                    offset += mPosition.Tell();
                     break;
                 case 2:
                     offset = mStartOffset + mSize - offset;
@@ -253,7 +253,7 @@ namespace nw4r
         
         u32 NandSoundArchive::NandFileStream::Tell() const
         {
-            return mPosition.mFileOffset - mStartOffset;
+            return mPosition.Tell() - mStartOffset;
         }
         
         const void * NandSoundArchive::detail_GetWaveDataFileAddress(u32) const

@@ -17,13 +17,13 @@ namespace nw4r
 			
 			virtual ~DvdLockedFileStream();
 			
-			int Read(void *, u32);
+			s32 Read(void *, u32);
 			UNKWORD Peek(void *, u32);
 			
 			bool CanAsync() const;
 
-			bool PeekAsync(void *, u32, AsyncFunctor, void *);
-			bool ReadAsync(void *, u32, AsyncFunctor, void *);
+			bool PeekAsync(void *, u32, AsyncCallback, void *);
+			bool ReadAsync(void *, u32, AsyncCallback, void *);
 			
 			const detail::RuntimeTypeInfo * GetRuntimeTypeInfo() const;
 			

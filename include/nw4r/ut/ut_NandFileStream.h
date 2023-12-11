@@ -38,11 +38,11 @@ namespace nw4r
 			
 			UNKTYPE Close();
 			
-			int Read(void *, u32);
-			bool ReadAsync(void *, u32, AsyncFunctor, void *);
+			s32 Read(void *, u32);
+			bool ReadAsync(void *, u32, AsyncCallback, void *);
 			
 			UNKTYPE Write(const void *, u32);
-			bool WriteAsync(const void *, u32, AsyncFunctor, void *);
+			bool WriteAsync(const void *, u32, AsyncCallback, void *);
 			
 			UNKTYPE Seek(s32, u32);
 			
@@ -70,11 +70,11 @@ namespace nw4r
 				mWriteFlag = false;
 				BYTE_0x167 = false;
 				BYTE_0x168 = false;
-				BOOL_0x4 = false;
+				mIsOpen = false;
 				mBusyFlag = false;
-				ASYNC_0xC = NULL;
-				PTR_0x10 = NULL;
-				WORD_0x8 = 0;
+				mCallback = NULL;
+				mCallbackArg = NULL;
+				mResult = 0;
 				mAsyncContext.stream = this;
 			}
 			

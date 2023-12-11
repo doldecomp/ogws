@@ -24,7 +24,7 @@ namespace nw4r
 			
 		}
 		
-		int DvdLockedFileStream::Read(void * buffer, u32 count)
+		s32 DvdLockedFileStream::Read(void * buffer, u32 count)
 		{
 			OSLockMutex(&sMutex);
 			int ret = this->DvdFileStream::Read(buffer, count);
@@ -45,12 +45,12 @@ namespace nw4r
 			return false;
 		}
 		
-		bool DvdLockedFileStream::PeekAsync(void *, u32, AsyncFunctor, void *)
+		bool DvdLockedFileStream::PeekAsync(void *, u32, AsyncCallback, void *)
 		{
 			return false;
 		}
 		
-		bool DvdLockedFileStream::ReadAsync(void *, u32, AsyncFunctor, void *)
+		bool DvdLockedFileStream::ReadAsync(void *, u32, AsyncCallback, void *)
 		{
 			return false;
 		}

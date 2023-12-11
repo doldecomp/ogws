@@ -327,12 +327,12 @@ namespace nw4r
 			
 			UNKTYPE BasicSound::SetInitialVolume(float initVol)
 			{
-				mInitialVolume = Clamp<float>(0.0f, 1.0f, initVol);
+				mInitialVolume = Clamp<float>(initVol, 0.0f, 1.0f);
 			}
 			
 			UNKTYPE BasicSound::SetVolume(float targetVol, int time)
 			{
-				mVolume.SetTarget(Clamp<float>(0.0f, 1.0f, targetVol), time);
+				mVolume.SetTarget(Clamp<float>(targetVol, 0.0f, 1.0f), time);
 			}
 			
 			UNKTYPE BasicSound::SetPitch(float pitch)
@@ -362,12 +362,12 @@ namespace nw4r
 			}
 			UNKTYPE BasicSound::SetMainOutVolume(float mainOutVolume)
 			{
-				mMainOutVolume = Clamp<float>(0.0f, 1.0f, mainOutVolume);
+				mMainOutVolume = Clamp<float>(mainOutVolume, 0.0f, 1.0f);
 			}
 			
 			UNKTYPE BasicSound::SetRemoteOutVolume(int i, float remoteOutVolume)
 			{
-				mRemoteOutVolumes[i] = Clamp<float>(0.0f, 1.0f, remoteOutVolume);
+				mRemoteOutVolumes[i] = Clamp<float>(remoteOutVolume, 0.0f, 1.0f);
 			}
 			
 			UNKTYPE BasicSound::SetFxSend(AuxBus bus, float f)

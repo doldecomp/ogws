@@ -11,7 +11,7 @@ namespace nw4r
 	{
 		using namespace detail;
 		
-		struct MemorySoundArchive::MemoryFileStream : ut::FileStream
+		struct MemorySoundArchive::MemoryFileStream : public ut::FileStream
 		{
 			const void * mMemory; // at 0x14
 			int mSize; // at 0x18
@@ -21,7 +21,7 @@ namespace nw4r
 
 			virtual ~MemoryFileStream();
 			virtual void Close();
-			virtual int Read(void *, u32); // at 0x14
+			virtual s32 Read(void *, u32); // at 0x14
 			virtual void Seek(s32, u32); // at 0x44
 			virtual u32 GetSize() const; // at 0x40
 			virtual u32 Tell() const; // at 0x58
@@ -125,7 +125,7 @@ namespace nw4r
 			mOffset = 0;
 		}
 		
-		int MemorySoundArchive::MemoryFileStream::Read(void * pBuffer, u32 count)
+		s32 MemorySoundArchive::MemoryFileStream::Read(void * pBuffer, u32 count)
 		{
 			u32 bytesRead = Min<u32>(count, mSize - mOffset);
 			

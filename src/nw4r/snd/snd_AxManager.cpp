@@ -159,8 +159,8 @@ namespace nw4r
 					{
 						//800316DC
 						float f4 = 1.0f;
-						f4 *= Clamp<float>(0.0f, 1.0f, ARR_0x84[i].GetValue());
-						f4 *= Clamp<float>(0.0f, 1.0f, ARR_0x54[i].GetValue());
+						f4 *= Clamp<float>(ARR_0x84[i].GetValue(), 0.0f, 1.0f);
+						f4 *= Clamp<float>(ARR_0x54[i].GetValue(), 0.0f, 1.0f);
 						u16 auxRetVolume = f4 * 0x8000;
 						//800317D0
 						switch (i) // loop-switch anti-pattern
@@ -199,7 +199,7 @@ namespace nw4r
 					MV_0x2C.Update();
 				}
 				//80031978
-				AXSetMasterVolume(0x8000 * Clamp<float>(0.0f, 1.0f, MV_0x2C.GetValue() * MV_0x3C.GetValue()));
+				AXSetMasterVolume(0x8000 * Clamp<float>(MV_0x2C.GetValue() * MV_0x3C.GetValue(), 0.0f, 1.0f));
 				//END
 			}
 			
@@ -255,7 +255,7 @@ namespace nw4r
 			UNKTYPE AxManager::SetMasterVolume(float f, int i)
 			{
 				/*
-				float f5 = Clamp<float>(0.0f, 1.0f, f);
+				float f5 = Clamp<float>(f, 0.0f, 1.0f);
 				
 				mOutputVolume.T1_0x0 = mOutputVolume.GetValue();
 				mOutputVolume.T1_0x4 = f5;
@@ -263,7 +263,7 @@ namespace nw4r
 				mOutputVolume.T2_0x8 = i / 3;
 				*/
 				
-				mOutputVolume.SetTarget(Clamp<float>(0.0f, 1.0f, f), (i + 2) / 3);
+				mOutputVolume.SetTarget(Clamp<float>(f, 0.0f, 1.0f), (i + 2) / 3);
 				
 				if (!i) VoiceManager::GetInstance()->UpdateAllVoicesSync(0x8);
 			}

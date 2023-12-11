@@ -1,67 +1,60 @@
-#include "ut_FileStream.h"
-#include "ut_algorithm.h"
+#pragma ipa file // TODO: REMOVE AFTER REFACTOR
 
-namespace nw4r
-{
-	namespace ut
-	{
-		UNKTYPE FileStream::Cancel() {}
-		
-		bool FileStream::CancelAsync(AsyncFunctor, void *)
-		{
-			return true;
-		}
-		
-		u32 FileStream::FilePosition::Skip(s32 offset)
-		{
-			if (offset)
-			{
-				mFileOffset = Clamp<s64>(0, mFileSize, mFileOffset + offset);
-			}
-			
-			return mFileOffset;
-		}
-		
-		u32 FileStream::FilePosition::Append(s32 offset)
-		{
-			s64 r5 = mFileOffset + offset;
-			
-			if (r5 < 0LL)
-			{
-				mFileOffset = 0;
-			}
-			else
-			{
-				mFileOffset = r5;
-				mFileSize = Max<u32>(mFileOffset, mFileSize);
-			}
-			
-			return mFileOffset;
-		}
-		
-		void FileStream::FilePosition::Seek(s32 offset, u32 origin)
-		{
-			switch (origin)
-			{
-				case 0:
-					mFileOffset = 0;
-					break;
-				case 2:
-					mFileOffset = mFileSize;
-					break;
-				case 1:
-				default:
-					break;
-			}
-			
-			Skip(offset);
-		}
-		
-		const detail::RuntimeTypeInfo * FileStream::GetRuntimeTypeInfo() const
-		{
-			return &typeInfo;
-		}
-		
-		detail::RuntimeTypeInfo FileStream::typeInfo(&IOStream::typeInfo);
-	}
+#include <nw4r/ut.h>
+
+namespace nw4r {
+namespace ut {
+
+NW4R_UT_RTTI_DEF_DERIVED(FileStream, IOStream);
+
+void FileStream::Cancel() {}
+
+bool FileStream::CancelAsync(AsyncCallback callback, void* arg) {
+#pragma unused(callback)
+#pragma unused(arg)
+    return true;
 }
+
+u32 FileStream::FilePosition::Skip(s32 offset) {
+    if (offset != 0) {
+        const s64 newOffset = mFileOffset + offset;
+        mFileOffset = Clamp<s64>(newOffset, 0, mFileSize);
+    }
+
+    return mFileOffset;
+}
+
+u32 FileStream::FilePosition::Append(s32 offset) {
+    const s64 newOffset = mFileOffset + offset;
+
+    if (newOffset < 0) {
+        mFileOffset = 0;
+    } else {
+        mFileOffset = newOffset;
+        mFileSize = Max<u32>(mFileOffset, mFileSize);
+    }
+
+    return mFileOffset;
+}
+
+void FileStream::FilePosition::Seek(s32 offset, u32 origin) {
+    switch (origin) {
+    case SEEK_BEG:
+        mFileOffset = 0;
+        break;
+    case SEEK_END:
+        mFileOffset = mFileSize;
+        break;
+    case SEEK_CUR:
+    default:
+        break;
+    }
+
+    Skip(offset);
+}
+
+// TODO: This should not be necessary. Because of nw4r::snd?
+DECOMP_FORCEACTIVE(ut_FileStream_cpp, FileStream::GetRuntimeTypeInfo);
+
+} // namespace ut
+} // namespace nw4r

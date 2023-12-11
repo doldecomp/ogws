@@ -21,7 +21,7 @@ namespace nw4r
 			DvdFileStream(s32, u32, u32); //inlined
 
 			virtual ~DvdFileStream() {} // at 0xC
-			virtual int Read(void *, u32); // at 0x14
+			virtual s32 Read(void *, u32); // at 0x14
 			virtual void Seek(s32, u32); // at 0x44
 			virtual u32 GetSize() const; // at 0x40
 			virtual u32 Tell() const; // at 0x58
@@ -152,7 +152,7 @@ namespace nw4r
 		DvdSoundArchive::DvdFileStream::DvdFileStream(const DVDFileInfo * pFileInfo, u32 startOffset, u32 size)
 			: DvdLockedFileStream(pFileInfo, false), mStartOffset(startOffset), mSize(size)
 		{
-			if (!mSize) mSize = mPosition.mFileSize;
+			if (!mSize) mSize = mPosition.GetFileSize();
 			
 			ut::DvdFileStream::Seek(mStartOffset, 0);
 		}
@@ -160,16 +160,17 @@ namespace nw4r
 		DvdSoundArchive::DvdFileStream::DvdFileStream(s32 entrynum, u32 startOffset, u32 size)
 			: DvdLockedFileStream(entrynum), mStartOffset(startOffset), mSize(size)
 		{
-			if (!mSize) mSize = mPosition.mFileSize;
+			if (!mSize) mSize = mPosition.GetFileSize();
 			
 			ut::DvdFileStream::Seek(mStartOffset, 0);
 		}
 
-		int DvdSoundArchive::DvdFileStream::Read(void * pBuffer, u32 count)
+		s32 DvdSoundArchive::DvdFileStream::Read(void * pBuffer, u32 count)
 		{
 			u32 endOffset = mStartOffset + mSize;
-			
-			if (mPosition.mFileOffset + count > endOffset) count = RoundUp<u32>(endOffset - mPosition.mFileOffset, 0x20);
+			u32 startOffset = mPosition.Tell();
+
+			if (startOffset + count > endOffset) count = RoundUp<u32>(endOffset - mPosition.Tell(), 0x20);
 			
 			return DvdLockedFileStream::Read(pBuffer, count);
 		}
@@ -182,7 +183,7 @@ namespace nw4r
 					offset += mStartOffset;
 					break;
 				case 1:
-					offset += mPosition.mFileOffset;
+					offset += mPosition.Tell();
 					break;
 				case 2:
 					offset = mStartOffset + mSize - offset;
@@ -210,7 +211,7 @@ namespace nw4r
 		
 		u32 DvdSoundArchive::DvdFileStream::Tell() const
 		{
-			return mPosition.mFileOffset - mStartOffset;
+			return mPosition.Tell() - mStartOffset;
 		}
 		
 		const void * DvdSoundArchive::detail_GetWaveDataFileAddress(u32) const

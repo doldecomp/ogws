@@ -24,8 +24,10 @@ namespace nw4r
 		
 		namespace detail
 		{
-			struct BasicSound : ut::IPolymorphic
+			struct BasicSound
 			{
+				NW4R_UT_RTTI_DECL(BasicSound);
+
 				struct AmbientParamUpdateCallback
 				{
 					virtual void detail_Update(SoundParam *, u32, BasicSound *, const void *, u32) = 0;
@@ -50,10 +52,7 @@ namespace nw4r
 					void * PTR_0xC;
 					UNKWORD WORD_0x10;
 				};
-				
-				static ut::detail::RuntimeTypeInfo typeInfo;
-				
-				inline virtual const ut::detail::RuntimeTypeInfo * GetRuntimeTypeInfo() const { return &typeInfo; } // at 0x8
+						
 				inline virtual ~BasicSound() {}; // at 0xc
 				virtual UNKTYPE Update(); // at 0x10
 				virtual UNKTYPE StartPrepared(); // at 0x14
@@ -138,7 +137,7 @@ namespace nw4r
 				
 				inline int CalcCurrentPlayerPriority() const
 				{
-					return ut::Clamp<int>(0, 0x7F, mPlayerPriority + mParam.INT_0x18);
+					return ut::Clamp<int>(mPlayerPriority + mParam.INT_0x18, 0, 127);
 				}
 			};
 		}

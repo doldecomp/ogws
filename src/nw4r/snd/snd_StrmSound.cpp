@@ -48,7 +48,7 @@ namespace nw4r
                 BasicSound::SetPlayerPriority(priority);
                 
                 int prio = mPlayerPriority + mParam.INT_0x18;
-                mManager->UpdatePriority(this, (prio = ut::Clamp(0, 127, prio)));
+                mManager->UpdatePriority(this, (prio = ut::Clamp(prio, 0, 127)));
             }
 
             bool StrmSound::IsAttachedTempSpecialHandle()

@@ -16,7 +16,7 @@
 
 // Define type RTTI (derived type)
 #define NW4R_UT_RTTI_DEF_DERIVED(T, BASE)                                      \
-    nw4r::ut::detail::RuntimeTypeInfo T::typeInfo(BASE::typeInfo)
+    nw4r::ut::detail::RuntimeTypeInfo T::typeInfo(&BASE::typeInfo)
 
 namespace nw4r {
 namespace ut {
@@ -45,18 +45,6 @@ inline const RuntimeTypeInfo* GetTypeInfoFromPtr_(T* ptr) {
 
 } // namespace detail
 
-/**
- * Interface for polymorphic objects
- */
-class IPolymorphic {
-public:
-    virtual const detail::RuntimeTypeInfo*
-    GetRuntimeTypeInfo() const = 0; // at 0x8
-};
-
-/**
- * Attempt to downcast base type object to derived type object
- */
 template <typename TDerived, typename TBase>
 inline TDerived DynamicCast(TBase* ptr) {
     // Derived type info

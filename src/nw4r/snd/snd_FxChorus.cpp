@@ -77,9 +77,9 @@ namespace nw4r
 			u32 r30 = param.FLOAT_0x0 * param.FLOAT_0x4;
 			u32 r3 = 1000.0f / param.FLOAT_0x8;
 			
-			mAXFXChorus.baseDelay = Clamp<u32>(1, 50, r31);
-			mAXFXChorus.variation = Clamp<u32>(0, 50, r30);
-			mAXFXChorus.period = Clamp<u32>(500, 10000, r3);
+			mAXFXChorus.baseDelay = Clamp<u32>(r31, 1, 50);
+			mAXFXChorus.variation = Clamp<u32>(r30, 0, 50);
+			mAXFXChorus.period = Clamp<u32>(r3, 500, 10000);
 			
 			if (!mAxfxImpl.mPoweredFlag) return true;
 			

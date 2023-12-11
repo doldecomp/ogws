@@ -74,9 +74,9 @@ namespace nw4r
 		{
 			mParam = param;
 			
-			mAXFXDelay.delay[0] = mAXFXDelay.delay[1] = mAXFXDelay.delay[2] = Clamp<u32>(1, 5000, param.FLOAT_0x0);
-			mAXFXDelay.feedback[0] = mAXFXDelay.feedback[1] = mAXFXDelay.feedback[2] = Clamp<u32>(0, 99, 100.0f * param.FLOAT_0x4);
-			mAXFXDelay.output[0] = mAXFXDelay.output[1] = mAXFXDelay.output[2] = Clamp<u32>(0, 100, 100.0f * param.FLOAT_0x8);
+			mAXFXDelay.delay[0] = mAXFXDelay.delay[1] = mAXFXDelay.delay[2] = Clamp<u32>(param.FLOAT_0x0, 1, 5000);
+			mAXFXDelay.feedback[0] = mAXFXDelay.feedback[1] = mAXFXDelay.feedback[2] = Clamp<u32>(100.0f * param.FLOAT_0x4, 0, 99);
+			mAXFXDelay.output[0] = mAXFXDelay.output[1] = mAXFXDelay.output[2] = Clamp<u32>(100.0f * param.FLOAT_0x8, 0, 100);
 			
 			if (!mAxfxImpl.mPoweredFlag) return true;
 			

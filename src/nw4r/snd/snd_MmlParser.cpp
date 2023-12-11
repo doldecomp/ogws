@@ -99,7 +99,7 @@ namespace nw4r
 					if (!r31) return 0;
 					
 					//8003B9B0
-					int r5 = Clamp<int>(0, 0x7F, r3);
+					int r5 = Clamp<int>(r3, 0, 0x7F);
 					//8003B9C8
 					if (!pTrack->BOOL_0x5C && r29_5)
 					{

@@ -1,41 +1,36 @@
-#include "ut_IOStream.h"
+#pragma ipa file // TODO: REMOVE AFTER REFACTOR
 
-namespace nw4r
-{
-	namespace ut
-	{
-		bool IOStream::ReadAsync(void *, u32, AsyncFunctor, void *)
-		{
-			return false;
-		}
-		
-		UNKTYPE IOStream::Write(const void *, u32) {}
-		
-		bool IOStream::WriteAsync(const void *, u32, AsyncFunctor, void *)
-		{
-			return false;
-		}
-		
-		bool IOStream::IsBusy() const
-		{
-			return false;
-		}
-		
-		u32 IOStream::GetBufferAlign() const
-		{
-			return 1;
-		}
-		
-		u32 IOStream::GetSizeAlign() const
-		{
-			return 1;
-		}
-		
-		u32 IOStream::GetOffsetAlign() const
-		{
-			return 1;
-		}
-		
-		detail::RuntimeTypeInfo IOStream::typeInfo(NULL);
-	}
+#include <nw4r/ut.h>
+
+namespace nw4r {
+namespace ut {
+
+NW4R_UT_RTTI_DEF_BASE(IOStream);
+
+bool IOStream::ReadAsync(void* dst, u32 size, AsyncCallback callback,
+                         void* arg) {
+#pragma unused(dst)
+#pragma unused(size)
+#pragma unused(callback)
+#pragma unused(arg)
+    return false;
 }
+
+void IOStream::Write(const void* src, u32 size) {
+#pragma unused(src)
+#pragma unused(size)
+}
+
+bool IOStream::WriteAsync(const void* src, u32 size, AsyncCallback callback,
+                          void* arg) {
+#pragma unused(src)
+#pragma unused(size)
+#pragma unused(callback)
+#pragma unused(arg)
+    return false;
+}
+
+bool IOStream::IsBusy() const { return false; }
+
+} // namespace ut
+} // namespace nw4r

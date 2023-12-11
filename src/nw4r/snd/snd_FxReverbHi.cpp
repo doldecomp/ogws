@@ -74,12 +74,12 @@ namespace nw4r
 		{
 			mParam = param;
 			
-			mAXFXReverbHi.preDelay = Clamp<float>(0.0f, 0.1f, param.FLOAT_0x0);
-			mAXFXReverbHi.time = Clamp<float>(0.0f, 10.0f, param.FLOAT_0x4);
-			mAXFXReverbHi.coloration = Clamp<float>(0.0f, 1.0f, param.FLOAT_0x8);
-			mAXFXReverbHi.damping = Clamp<float>(0.0f, 1.0f, param.FLOAT_0xC);
-			mAXFXReverbHi.crosstalk = Clamp<float>(0.0f, 1.0f, param.FLOAT_0x10);
-			mAXFXReverbHi.mix = Clamp<float>(0.0f, 1.0f, param.FLOAT_0x14);
+			mAXFXReverbHi.preDelay = Clamp<float>(param.FLOAT_0x0, 0.0f, 0.1f);
+			mAXFXReverbHi.time = Clamp<float>(param.FLOAT_0x4, 0.0f, 10.0f);
+			mAXFXReverbHi.coloration = Clamp<float>(param.FLOAT_0x8, 0.0f, 1.0f);
+			mAXFXReverbHi.damping = Clamp<float>(param.FLOAT_0xC, 0.0f, 1.0f);
+			mAXFXReverbHi.crosstalk = Clamp<float>(param.FLOAT_0x10, 0.0f, 1.0f);
+			mAXFXReverbHi.mix = Clamp<float>(param.FLOAT_0x14, 0.0f, 1.0f);
 			
 			if (!mAxfxImpl.mPoweredFlag) return true;
 			
