@@ -16,7 +16,7 @@
 
 #define LENGTHOF(x) (sizeof((x)) / sizeof((x)[0]))
 
-#define BZERO(x) __memclr((x), sizeof((x)))
+#define MEMCLR(x) __memclr((x), sizeof(*(x)))
 
 #define ALIGN(x) __attribute__((aligned(x)))
 

@@ -14,7 +14,7 @@ static s32 nandCreate(const char* path, u8 perm, u8 attr,
     char absPath[64];
     u32 ownerPerm, groupPerm, otherPerm;
 
-    BZERO(absPath);
+    MEMCLR(&absPath);
 
     ownerPerm = 0;
     groupPerm = 0;
@@ -74,7 +74,7 @@ static s32 nandDelete(const char* path, NANDCommandBlock* block, BOOL async,
                       BOOL priv) {
     char absPath[64];
 
-    BZERO(absPath);
+    MEMCLR(&absPath);
     nandGenerateAbsPath(absPath, path);
 
     if (!priv && nandIsPrivatePath(absPath)) {
@@ -200,7 +200,7 @@ static s32 nandCreateDir(const char* path, u8 perm, u8 attr,
     char absPath[64];
     u32 ownerPerm, groupPerm, otherPerm;
 
-    BZERO(absPath);
+    MEMCLR(&absPath);
     nandGenerateAbsPath(absPath, path);
 
     if (!priv && nandIsPrivatePath(absPath)) {
@@ -251,9 +251,9 @@ static s32 nandMove(const char* from, const char* to, NANDCommandBlock* block,
     char absPathTo[64];
     char relativeName[13];
 
-    BZERO(absPathFrom);
-    BZERO(absPathTo);
-    BZERO(relativeName);
+    MEMCLR(&absPathFrom);
+    MEMCLR(&absPathTo);
+    MEMCLR(&relativeName);
 
     relativeName[12] = '\0';
 
@@ -421,7 +421,7 @@ static s32 nandGetStatus(const char* path, NANDStatus* status,
     u32 ownerPerm, groupPerm, otherPerm;
     char absPath[64];
 
-    BZERO(absPath);
+    MEMCLR(&absPath);
     nandGenerateAbsPath(absPath, path);
 
     if (!priv && nandIsUnderPrivatePath(absPath)) {
