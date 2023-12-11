@@ -13,7 +13,7 @@ static NWC24Err ClearDlTaskEntry(u16 i, NWC24File* file);
 static NWC24Err ReadDlHeader(NWC24File* file);
 static void InitTaskEntryHeader(u16 i);
 static NWC24Err LoadDlTask(NWC24DlTask* task, u16 i);
-static NWC24Err DeleteDlTask(NWC24DlTask* task) DONT_INLINE;
+static NWC24Err DeleteDlTask(NWC24DlTask* task) DECOMP_DONT_INLINE;
 static NWC24Err CheckHeader(NWC24DlHeader* header);
 
 static BOOL IsPrivateId(u16 i) {

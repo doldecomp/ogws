@@ -27,7 +27,7 @@ void RFLiInitLoader(void) {
     loader->headerBuf2 = NULL;
 }
 
-static void parseOnmemoryRes_(void) DONT_INLINE {
+static void parseOnmemoryRes_(void) DECOMP_DONT_INLINE {
     RFLiLoader* loader;
     int i;
 

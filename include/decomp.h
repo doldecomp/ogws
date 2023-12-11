@@ -19,9 +19,11 @@
 #define DECOMP_FORCELITERAL(module, ...)                                       \
     void CONCAT(FORCELITERAL##module, __LINE__)(void);                         \
     void CONCAT(FORCELITERAL##module, __LINE__)(void) { (__VA_ARGS__); }
+#define DECOMP_DONT_INLINE __attribute__((never_inline))
 #else
 #define DECOMP_FORCEACTIVE(module, ...)
 #define DECOMP_FORCELITERAL(module, x)
+#define DECOMP_DONT_INLINE
 #endif
 
 #endif

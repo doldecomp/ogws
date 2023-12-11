@@ -188,7 +188,7 @@ static void SetRun(OSThread* thread) {
     RunQueueHint = TRUE;
 }
 
-static void UnsetRun(OSThread* thread) DONT_INLINE {
+static void UnsetRun(OSThread* thread) DECOMP_DONT_INLINE {
     OSThreadQueue* queue;
     OSThread* next;
     OSThread* prev;

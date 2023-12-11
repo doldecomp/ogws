@@ -54,9 +54,9 @@ DECOMP_FORCEACTIVE(NWC24Schedule_c,
 // Pool order
 DECOMP_FORCEACTIVE(NWC24Schedule_c, "/dev/net/kd/request");
 
-static NWC24Err ExecSuspendScheduler(void) DONT_INLINE;
+static NWC24Err ExecSuspendScheduler(void) DECOMP_DONT_INLINE;
 static NWC24Err ExecTrySuspendScheduler(u32 arg0);
-static NWC24Err ExecResumeScheduler(void) DONT_INLINE;
+static NWC24Err ExecResumeScheduler(void) DECOMP_DONT_INLINE;
 static NWC24Err ExecNoParamCommand(const char* user, s32 type,
                                    NWC24Err* exResultOut);
 

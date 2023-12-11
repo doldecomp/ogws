@@ -94,7 +94,7 @@ NWC24Err NWC24iOpenDlTaskList(void);
 NWC24Err NWC24iCloseDlTaskList(void);
 NWC24DlHeader* NWC24iGetCachedDlHeader(void);
 NWC24Err NWC24iCheckHeaderConsistency(NWC24DlHeader* header,
-                                      BOOL clear) DONT_INLINE;
+                                      BOOL clear) DECOMP_DONT_INLINE;
 NWC24Err NWC24iLoadDlHeader(void);
 
 #ifdef __cplusplus

@@ -256,7 +256,7 @@ static void MemClear(void* mem, u32 size) {
     DCFlushRange(flush, 0x40000);
 }
 
-static void ClearArena(void) DONT_INLINE {
+static void ClearArena(void) DECOMP_DONT_INLINE {
     // System reset
     if (!((OSGetResetCode() >> 31) & 1)) {
         MemClear(OSGetArenaLo(), (u32)OSGetArenaHi() - (u32)OSGetArenaLo());
@@ -288,7 +288,7 @@ static void ClearArena(void) DONT_INLINE {
     }
 }
 
-static void ClearMEM2Arena(void) DONT_INLINE {
+static void ClearMEM2Arena(void) DECOMP_DONT_INLINE {
     // System reset
     if (!((OSGetResetCode() >> 31) & 1)) {
         MemClear(OSGetMEM2ArenaLo(),

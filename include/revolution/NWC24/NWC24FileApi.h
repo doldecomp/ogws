@@ -58,7 +58,7 @@ NWC24Err NWC24iFOpenNand(NWC24File* file, const char* path, u32 mode);
 NWC24Err NWC24iFOpenVF(NWC24File* file, const char* path, u32 mode);
 
 NWC24Err NWC24FClose(NWC24File* file);
-NWC24Err NWC24iFCloseNand(NWC24File* file) DONT_INLINE;
+NWC24Err NWC24iFCloseNand(NWC24File* file) DECOMP_DONT_INLINE;
 NWC24Err NWC24iFCloseVF(NWC24File* file);
 
 NWC24Err NWC24FSeek(NWC24File* file, s32 offset, NWC24SeekMode whence);

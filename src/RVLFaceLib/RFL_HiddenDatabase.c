@@ -1,7 +1,7 @@
 #include <RVLFaceLib/RVLFaceLibInternal.h>
 #include <string.h>
 
-static void writeData_(RFLiHiddenCharData* data) DONT_INLINE;
+static void writeData_(RFLiHiddenCharData* data) DECOMP_DONT_INLINE;
 
 static void initWritableList_(void) {
     RFLiHDBManager* mgr = RFLiGetHDBManager();

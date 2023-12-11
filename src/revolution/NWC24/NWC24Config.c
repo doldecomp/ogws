@@ -16,7 +16,7 @@ static const char* ConfigFile = "/shared2/wc24/nwc24msg.cfg";
 static const char* CfgBakFile = "/shared2/wc24/nwc24msg.cbk";
 
 static u32 GetConfigCheckSum(void);
-static NWC24Err CheckConfig(void) DONT_INLINE;
+static NWC24Err CheckConfig(void) DECOMP_DONT_INLINE;
 static NWC24Err GenerateUserId(u64* idOut);
 
 NWC24Err NWC24GetMyUserId(u64* idOut) {

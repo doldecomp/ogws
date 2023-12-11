@@ -37,7 +37,7 @@ static void getlengthcallback_(s32 result, NANDCommandBlock* block);
 static void deletecallback_(s32 result, NANDCommandBlock* block);
 static void createdircallback1_(s32 result, NANDCommandBlock* block);
 static void createdircallback2_(s32 result,
-                                NANDCommandBlock* block) DONT_INLINE;
+                                NANDCommandBlock* block) DECOMP_DONT_INLINE;
 
 void RFLiInitAccessInfo(MEMiHeapHead* heap) {
     u16 i;

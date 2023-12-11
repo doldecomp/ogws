@@ -64,7 +64,8 @@ public:
     virtual void Seek(s32 offset, u32 origin); // at 0x44
 
     bool Open(const char* path, u32 access);
-    bool Open(const NANDFileInfo* info, u32 access, bool owns) DONT_INLINE;
+    bool Open(const NANDFileInfo* info, u32 access,
+              bool owns) DECOMP_DONT_INLINE;
 
 private:
     void Initialize_();

@@ -5,7 +5,7 @@
 
 static BOOL __AllocDelayLine(AXFX_DELAY* fx);
 static void __FreeDelayLine(AXFX_DELAY* fx);
-static BOOL __InitParams(AXFX_DELAY* fx) DONT_INLINE;
+static BOOL __InitParams(AXFX_DELAY* fx) DECOMP_DONT_INLINE;
 
 u32 AXFXDelayGetMemSize(const AXFX_DELAY* fx) {
     u32 num = 0;

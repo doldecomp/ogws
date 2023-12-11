@@ -438,7 +438,7 @@ static BOOL SCFindIntegerItem(void* dst, SCItemID id, u8 primType) {
 }
 
 static BOOL SCReplaceIntegerItem(const void* src, SCItemID id,
-                                 u8 primType) DONT_INLINE {
+                                 u8 primType) DECOMP_DONT_INLINE {
     BOOL success;
     BOOL enabled;
     SCItem item;

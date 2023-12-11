@@ -19,7 +19,6 @@
 #define BZERO(x) __memclr((x), sizeof((x)))
 
 #define ALIGN(x) __attribute__((aligned(x)))
-#define DONT_INLINE __attribute__((never_inline))
 
 #define DECL_SECTION(x) __declspec(section x)
 #define DECL_WEAK __declspec(weak)

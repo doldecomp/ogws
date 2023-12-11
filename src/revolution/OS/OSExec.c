@@ -15,7 +15,7 @@ BOOL __OSInReboot;
 
 static s32 _ES_InitLib(s32* fd);
 static s32 _ES_GetTicketViews(s32* fd, u64 tid, void* pViews, u32* count);
-static s32 _ES_LaunchTitle(s32* fd, u64 tid, void* pViews) DONT_INLINE;
+static s32 _ES_LaunchTitle(s32* fd, u64 tid, void* pViews) DECOMP_DONT_INLINE;
 
 void __OSGetExecParams(OSExecParams* out) {
     if (OS_DOL_EXEC_PARAMS >= (void*)0x80000000) {

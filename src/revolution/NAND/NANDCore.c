@@ -17,7 +17,7 @@ static void nandShutdownCallback(s32 result, void* arg);
 static void nandGetTypeCallback(s32 result, void* arg);
 static BOOL nandOnShutdown(BOOL final, u32 event);
 static s32 _ES_InitLib(s32* fd);
-static s32 _ES_GetDataDir(s32* fd, u64 tid, char* dirOut) DONT_INLINE;
+static s32 _ES_GetDataDir(s32* fd, u64 tid, char* dirOut) DECOMP_DONT_INLINE;
 static s32 _ES_GetTitleId(s32* fd, u64* tidOut);
 static s32 _ES_CloseLib(s32* fd);
 
