@@ -17,15 +17,15 @@ void LoadBlocks(void* dst, void* src, u32 size);
 void StoreBlocks(void* dst, void* src, u32 size);
 void StoreData(void* dst, void* src, u32 size);
 
+inline void* GetBase() { return reinterpret_cast<void*>(OS_CACHE_BASE); }
+
+inline void QueueWait(u32 len) { LCQueueWait(len); }
+
 inline void QueueWaitEx(u32 len) {
     while (LCQueueLength() != len) {
         OSYieldThread();
     }
 }
-
-inline void QueueWait(u32 len) { LCQueueWait(len); }
-
-inline void* GetBase() { return reinterpret_cast<void*>(OS_CACHE_BASE); }
 
 } // namespace LC
 } // namespace ut
