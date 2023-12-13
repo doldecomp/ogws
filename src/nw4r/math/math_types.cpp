@@ -102,33 +102,33 @@ asm bool MTX34InvTranspose(register MTX33* out, register const MTX34* in){
      * [g h i X]
      */
 
-    psq_l f0, MTX34._00(in), 1, 0 // (a, 1.0)
-    psq_l f1, MTX34._01(in), 0, 0 // (b, c)
-    psq_l f2, MTX34._10(in), 1, 0 // (d, 1.0)
-    ps_merge10 f6, f1, f0         // (c, a)
-    psq_l f3, MTX34._11(in), 0, 0 // (e, f)
-    psq_l f4, MTX34._20(in), 1, 0 // (g, 1.0)
-    ps_merge10 f7, f3, f2         // (f, d)
-    psq_l f5, MTX34._21(in), 0, 0 // (h, i)
+    psq_l      f0, MTX34._00(in), 1, 0 // (a, 1.0)
+    psq_l      f1, MTX34._01(in), 0, 0 // (b, c)
+    psq_l      f2, MTX34._10(in), 1, 0 // (d, 1.0)
+    ps_merge10 f6, f1, f0              // (c, a)
+    psq_l      f3, MTX34._11(in), 0, 0 // (e, f)
+    psq_l      f4, MTX34._20(in), 1, 0 // (g, 1.0)
+    ps_merge10 f7, f3, f2              // (f, d)
+    psq_l      f5, MTX34._21(in), 0, 0 // (h, i)
 
-    ps_mul f11, f3, f6       // (e*c,       f*a)
-    ps_merge10 f8, f5, f4    // (i,         g)
-    ps_mul f13, f5, f7       // (h*f,       i*d)
-    ps_msub f11, f1, f7, f11 // (b*f - e*c, c*d - f*a)
-    ps_mul f12, f1, f8       // (b*i,       c*g)
+    ps_mul     f11, f3, f6      // (e*c,       f*a)
+    ps_merge10 f8,  f5, f4      // (i,         g)
+    ps_mul     f13, f5, f7      // (h*f,       i*d)
+    ps_msub    f11, f1, f7, f11 // (b*f - e*c, c*d - f*a)
+    ps_mul     f12, f1, f8      // (b*i,       c*g)
 
     ps_msub f13, f3, f8, f13 // (e*i - h*f, f*g - i*d)
     ps_msub f12, f5, f6, f12 // (h*c - b*i, i*a - c*g)
     
     // TODO: Stop being lazy and finish documentation
-    ps_mul f10, f3, f4
-    ps_mul f9, f0, f5
-    ps_mul f8, f1, f2
+    ps_mul  f10, f3, f4
+    ps_mul  f9, f0, f5
+    ps_mul  f8, f1, f2
     ps_msub f10, f2, f5, f10
     ps_msub f9, f1, f4, f9
     ps_msub f8, f0, f3, f8
-    ps_mul f7, f0, f13
-    ps_sub f1, f1, f1        // Set f1 to zero
+    ps_mul  f7, f0, f13
+    ps_sub  f1, f1, f1 // Set f1 to zero
     ps_madd f7, f2, f12, f7
     ps_madd f7, f4, f11, f7
 
@@ -140,25 +140,25 @@ asm bool MTX34InvTranspose(register MTX33* out, register const MTX34* in){
     blr
 
 inverse_exists:
-    fres f0, f7
-    ps_add f6, f0, f0
-    ps_mul f5, f0, f0
+    fres     f0, f7
+    ps_add   f6, f0, f0
+    ps_mul   f5, f0, f0
     ps_nmsub f0, f7, f5, f6
-    ps_add f6, f0, f0
-    ps_mul f5, f0, f0
+    ps_add   f6, f0, f0
+    ps_mul   f5, f0, f0
     ps_nmsub f0, f7, f5, f6
     ps_muls0 f13, f13, f0
     ps_muls0 f12, f12, f0
-    psq_st f13, MTX33._00(out), 0, 0
+    psq_st   f13, MTX33._00(out), 0, 0
     ps_muls0 f11, f11, f0
-    psq_st f12, MTX33._10(out), 0, 0
+    psq_st   f12, MTX33._10(out), 0, 0
     ps_muls0 f10, f10, f0
-    psq_st f11, MTX33._20(out), 0, 0
+    psq_st   f11, MTX33._20(out), 0, 0
     ps_muls0 f9, f9, f0
-    psq_st f10, MTX33._02(out), 1, 0
+    psq_st   f10, MTX33._02(out), 1, 0
     ps_muls0 f8, f8, f0
-    psq_st f9, MTX33._12(out), 1, 0
-    psq_st f8, MTX33._22(out), 1, 0
+    psq_st   f9, MTX33._12(out),  1, 0
+    psq_st   f8, MTX33._22(out),  1, 0
 
     // Inverse matrix exists
     li r3, TRUE
@@ -193,7 +193,7 @@ MTX34* MTX34Scale(register MTX34* out, register const MTX34* in,
     // clang-format off
     asm {
         psq_l xy, VEC3.x(scale), 0, 0 // (XXXX, YYYY)
-        psq_l z, VEC3.z(scale), 1, 0  // (ZZZZ, 1111)
+        psq_l z,  VEC3.z(scale), 1, 0 // (ZZZZ, 1111)
 
         psq_l row0a, MTX34._00(in), 0, 0
         psq_l row0b, MTX34._02(in), 0, 0
@@ -232,7 +232,7 @@ MTX34* MTX34Trans(register MTX34* out, register const MTX34* in,
     // clang-format off
     asm {
         psq_l xy, VEC3.x(trans), 0, 0 // (XXXX, YYYY)
-        psq_l z, VEC3.z(trans), 1, 0  // (ZZZZ, 1111)
+        psq_l z,  VEC3.z(trans), 1, 0 // (ZZZZ, 1111)
 
         /**
          * Copy inner 3x3 matrix
@@ -256,20 +256,20 @@ MTX34* MTX34Trans(register MTX34* out, register const MTX34* in,
          * Perform translation
          */
 
-        ps_mul work0, row0a, xy            // (_00*x, _01*y)
-        ps_madd work1, row0b, z, work0     // (_02*z + _00*x, _03 + _01*y)
+        ps_mul  work0, row0a, xy            // (_00*x, _01*y)
+        ps_madd work1, row0b, z, work0      // (_02*z + _00*x, _03 + _01*y)
         ps_sum0 work2, work1, work2, work1
-        psq_st work2, MTX34._03(out), 1, 0
+        psq_st  work2, MTX34._03(out), 1, 0
 
-        ps_mul work0, row1a, xy            // (_10*x, _11*y)
-        ps_madd work1, row1b, z, work0     // (_12*z + _10*x, _13 + _11*y)
+        ps_mul  work0, row1a, xy            // (_10*x, _11*y)
+        ps_madd work1, row1b, z, work0      // (_12*z + _10*x, _13 + _11*y)
         ps_sum0 work2, work1, work2, work1
-        psq_st work2, MTX34._13(out), 1, 0
+        psq_st  work2, MTX34._13(out), 1, 0
         
-        ps_mul work0, row2a, xy            // (_20*x, _21*y)
-        ps_madd work1, row2b, z, work0     // (_22*z + _20*x, _23 + _21*y)
+        ps_mul  work0, row2a, xy            // (_20*x, _21*y)
+        ps_madd work1, row2b, z, work0      // (_22*z + _20*x, _23 + _21*y)
         ps_sum0 work2, work1, work2, work1
-        psq_st work2, MTX34._23(out), 1, 0
+        psq_st  work2, MTX34._23(out), 1, 0
     }
     // clang-format on
 
