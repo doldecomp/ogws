@@ -53,10 +53,10 @@ namespace nw4r
 			mVertexColor.mBottomLeft = (mTextColor.gradMode != GRADMODE_V) ? mTextColor.start : mTextColor.end;
 			mVertexColor.mBottomRight = (mTextColor.gradMode == GRADMODE_NONE) ? mTextColor.start : mTextColor.end;
 			
-			mVertexColor.mTopLeft.mChannels.a = (mVertexColor.mTopLeft.mChannels.a * BYTE_0x42) / 0xFF,
-			mVertexColor.mTopRight.mChannels.a = (mVertexColor.mTopRight.mChannels.a * BYTE_0x42) / 0xFF;
-			mVertexColor.mBottomLeft.mChannels.a = (mVertexColor.mBottomLeft.mChannels.a * BYTE_0x42) / 0xFF;
-			mVertexColor.mBottomRight.mChannels.a = (mVertexColor.mBottomRight.mChannels.a * BYTE_0x42) / 0xFF;
+			mVertexColor.mTopLeft.a = (mVertexColor.mTopLeft.a * BYTE_0x42) / 0xFF,
+			mVertexColor.mTopRight.a = (mVertexColor.mTopRight.a * BYTE_0x42) / 0xFF;
+			mVertexColor.mBottomLeft.a = (mVertexColor.mBottomLeft.a * BYTE_0x42) / 0xFF;
+			mVertexColor.mBottomRight.a = (mVertexColor.mBottomRight.a * BYTE_0x42) / 0xFF;
 		}
 		CharWriter::~CharWriter() {}
 		
@@ -274,10 +274,10 @@ namespace nw4r
 			mVertexColor.mBottomLeft = (mTextColor.gradMode != GRADMODE_V) ? mTextColor.start : mTextColor.end;
 			mVertexColor.mBottomRight = (mTextColor.gradMode == GRADMODE_NONE) ? mTextColor.start : mTextColor.end;
 			
-			mVertexColor.mTopLeft.mChannels.a = (mVertexColor.mTopLeft.mChannels.a * BYTE_0x42) / 0xFF,
-			mVertexColor.mTopRight.mChannels.a = (mVertexColor.mTopRight.mChannels.a * BYTE_0x42) / 0xFF;
-			mVertexColor.mBottomLeft.mChannels.a = (mVertexColor.mBottomLeft.mChannels.a * BYTE_0x42) / 0xFF;
-			mVertexColor.mBottomRight.mChannels.a = (mVertexColor.mBottomRight.mChannels.a * BYTE_0x42) / 0xFF;
+			mVertexColor.mTopLeft.a = (mVertexColor.mTopLeft.a * BYTE_0x42) / 0xFF,
+			mVertexColor.mTopRight.a = (mVertexColor.mTopRight.a * BYTE_0x42) / 0xFF;
+			mVertexColor.mBottomLeft.a = (mVertexColor.mBottomLeft.a * BYTE_0x42) / 0xFF;
+			mVertexColor.mBottomRight.a = (mVertexColor.mBottomRight.a * BYTE_0x42) / 0xFF;
 		}
 		
 		void CharWriter::SetupGXWithColorMapping(Color color1, Color color2)

@@ -174,7 +174,7 @@ namespace EGG
         GXLoadTexObj(&clear_z_tobj, GX_TEXMAP0);
 
         GXSetNumTevStages(1);
-        GXSetTevColor(GX_TEVREG0, color.mChannels);
+        GXSetTevColor(GX_TEVREG0, color);
         GXSetTevOrder(GX_TEVSTAGE0, GX_TEXCOORD0, GX_TEXMAP0, GX_COLOR_NULL);
         GXSetTevColorIn(GX_TEVSTAGE0, GX_CC_ZERO, GX_CC_ZERO, GX_CC_ZERO, GX_CC_C0);
         GXSetTevColorOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, 1, GX_TEVPREV);
@@ -185,7 +185,7 @@ namespace EGG
         GXSetZCompLoc(0);
         GXSetBlendMode(GX_BM_NONE, GX_BL_ZERO, GX_BL_ZERO, GX_LO_NOOP);
         GXSetAlphaUpdate(1);
-        GXSetDstAlpha(1, color.mChannels.a);
+        GXSetDstAlpha(1, color.a);
         GXSetZMode(1, GX_ALWAYS, 1);
         GXSetCullMode(GX_CULL_BACK);
         
@@ -212,6 +212,6 @@ namespace EGG
 
         GXSetZTexture(0, 22, 0);
         GXSetZCompLoc(1);
-        GXSetDstAlpha(0, color.mChannels.a);
+        GXSetDstAlpha(0, color.a);
     }
 }

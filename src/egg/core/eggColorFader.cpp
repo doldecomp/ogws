@@ -34,9 +34,9 @@ namespace EGG
 
     void ColorFader::setColor(ut::Color color)
     {
-        mColor.mChannels.r = color.mChannels.r;
-        mColor.mChannels.g = color.mChannels.g;
-        mColor.mChannels.b = color.mChannels.b;
+        mColor.r = color.r;
+        mColor.g = color.g;
+        mColor.b = color.b;
     }
 
     void ColorFader::setStatus(Fader::EStatus status)
@@ -44,12 +44,12 @@ namespace EGG
         if (status == STATUS_PREPARE_IN)
         {
             mStatus = STATUS_PREPARE_IN;
-            mColor.mChannels.a = 255;
+            mColor.a = 255;
         }
         else if (status == STATUS_PREPARE_OUT)
         {
             mStatus = STATUS_PREPARE_OUT;
-            mColor.mChannels.a = 0;
+            mColor.a = 0;
         }
     }
 
@@ -83,11 +83,11 @@ namespace EGG
 
         if (mStatus == STATUS_PREPARE_OUT)
         {
-            mColor.mChannels.a = 0;
+            mColor.a = 0;
         }
         else if (mStatus == STATUS_PREPARE_IN)
         {
-            mColor.mChannels.a = 255;
+            mColor.a = 255;
         }
         else if (mStatus == STATUS_FADE_IN)
         {
@@ -98,7 +98,7 @@ namespace EGG
                 success = mFlags.onBit(0);
                 fade = mFrame;
             }
-            mColor.mChannels.a = 255 - (fade * 255) / mFrame;
+            mColor.a = 255 - (fade * 255) / mFrame;
         }
         else if (mStatus == STATUS_FADE_OUT)
         {
@@ -112,7 +112,7 @@ namespace EGG
                 }
                 fade = mFrame;
             }
-            mColor.mChannels.a = (fade * 255) / mFrame;
+            mColor.a = (fade * 255) / mFrame;
         }
 
         return success;
@@ -120,7 +120,7 @@ namespace EGG
 
     void ColorFader::draw()
     {
-        if (mColor.mChannels.a == 0) return;
+        if (mColor.a == 0) return;
 
         math::MTX44 mtx;
         C_MTXOrtho(mtx, mStartY, mEndY, mStartX, mEndX, 0.0f, 1.0f);
@@ -154,7 +154,7 @@ namespace EGG
         GXSetTevOp(GX_TEVSTAGE0, 4);
         GXSetTevOrder(GX_TEVSTAGE0, GX_TEXCOORD_NULL, GX_TEXMAP_NULL, GX_COLOR0A0);
 
-        if (mColor.mChannels.a == 255)
+        if (mColor.a == 255)
         {
             GXSetBlendMode(GX_BM_NONE, GX_BL_ONE, GX_BL_ZERO, GX_LO_SET);
         }

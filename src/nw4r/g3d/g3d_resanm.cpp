@@ -95,10 +95,10 @@ namespace nw4r
 				
 				t = F32ToS16(0x8000 * fractionalPart);
 				
-				int r = LinearInterpColorElem(color0.mChannels.r, color1.mChannels.r, t);
-				int g = LinearInterpColorElem(color0.mChannels.g, color1.mChannels.g, t);
-				int b = LinearInterpColorElem(color0.mChannels.b, color1.mChannels.b, t);
-				int a = LinearInterpColorElem(color0.mChannels.a, color1.mChannels.a, t);
+				int r = LinearInterpColorElem(color0.r, color1.r, t);
+				int g = LinearInterpColorElem(color0.g, color1.g, t);
+				int b = LinearInterpColorElem(color0.b, color1.b, t);
+				int a = LinearInterpColorElem(color0.a, color1.a, t);
 				
 				return Color(r, g, b, a);
 			}

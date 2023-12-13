@@ -19,6 +19,7 @@ struct ResFontBase;
 struct BinaryBlockHeader;
 struct BinaryFileHeader;
 struct CharStrmReader;
+struct Color;
 struct FileStream;
 struct Font;
 struct Glyph;
@@ -37,7 +38,6 @@ namespace ut {
 template <typename T> struct TextWriterBase;
 template <typename T> struct TagProcessorBase;
 
-struct Color;
 } // namespace ut
 
 namespace ef {

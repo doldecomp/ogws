@@ -128,7 +128,7 @@ namespace nw4r
                 Color newCol = col;
                 if (alpha != 255)
                 {
-                    newCol.mChannels.a = (col.mChannels.a * alpha) / 255;
+                    newCol.a = (col.a * alpha) / 255;
                 }
 
                 return newCol;

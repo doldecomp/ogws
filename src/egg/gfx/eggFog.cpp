@@ -62,7 +62,7 @@ namespace EGG
             mFogType = result.mFogType;
             mStartZ = result.mStartZ;
             mEndZ = result.mEndZ;
-            mColor = result.mColor.mChannels;
+            mColor = result.mColor;
 
             mFlags |= BOUND;
         }
