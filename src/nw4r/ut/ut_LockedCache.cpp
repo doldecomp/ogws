@@ -1,121 +1,90 @@
-#include "ut_LockedCache.h"
+#pragma ipa file // TODO: REMOVE AFTER REFACTOR
 
-namespace nw4r
-{
-	namespace ut
-	{
-		namespace
-		{
-			using namespace LC;
-			//sizeof(LCImpl) = 0x1C
-			struct LCImpl
-			{
-				struct Lock_
-				{
-					OSMutex & rMutex;
-					
-					inline Lock_(LCImpl & lc) : rMutex(lc.mLock)
-					{
-						OSLockMutex(&rMutex);
-					}
-					
-					inline ~Lock_()
-					{
-						OSUnlockMutex(&rMutex);
-					}
-				};
-				
-				bool mEnabledFlag;
-				OSMutex mLock;
-				
-				inline LCImpl() : mEnabledFlag(false)
-				{
-					OSInitMutex(&mLock);
-				}
-				
-				inline UNKTYPE Enable()
-				{
-					Lock_ lock(*this);
-					
-					if (!this->mEnabledFlag)
-					{
-						LCEnable();
-						this->mEnabledFlag = true;
-					}
-				}
-				
-				inline UNKTYPE Disable()
-				{
-					Lock_ lock(*this);
-					
-					if (mEnabledFlag)
-					{
-						QueueWaitEx(0);
-						LCDisable();
-						mEnabledFlag = false;
-					}
-				}
-				
-				inline bool Lock()
-				{
-					OSLockMutex(&mLock);
-					
-					if (mEnabledFlag)
-					{
-						QueueWaitEx(0);
-						return true;
-					}
-					
-					OSUnlockMutex(&mLock);
-					return false;
-				}
-				
-				inline UNKTYPE Unlock()
-				{
-					QueueWaitEx(0);
-					OSUnlockMutex(&mLock);
-				}
-			};
-			
-			static LCImpl sLCImpl;
-		}
-		
-		namespace LC
-		{
-			UNKTYPE Enable()
-			{
-				sLCImpl.Enable();
-			}
-			
-			UNKTYPE Disable()
-			{
-				sLCImpl.Disable();
-			}
-			
-			bool Lock()
-			{
-				return sLCImpl.Lock();
-			}
-			
-			UNKTYPE Unlock()
-			{
-				sLCImpl.Unlock();
-			}
-			
-			UNKTYPE LoadBlocks(void * r3, void * r4, u32 r5)
-			{
-				LCLoadBlocks(r3, r4, r5);
-			}
-			
-			UNKTYPE StoreBlocks(void * r3, void * r4, u32 r5)
-			{
-				LCStoreBlocks(r3, r4, r5);
-			}
-			
-			UNKTYPE StoreData(void * r3, void * r4, u32 r5)
-			{
-				LCStoreData(r3, r4, r5);
-			}
-		}
-	}
+#include <nw4r/ut.h>
+
+namespace nw4r {
+namespace ut {
+namespace {
+
+class LCImpl {
+public:
+    class Lock_ {
+    public:
+        Lock_(LCImpl& lc) : mMutex(lc.mMutex) { OSLockMutex(&mMutex); }
+        ~Lock_() { OSUnlockMutex(&mMutex); }
+
+    private:
+        OSMutex& mMutex; // at 0x0
+    };
+
+public:
+    LCImpl() : mIsEnabled(false) { OSInitMutex(&mMutex); }
+
+    void Enable() {
+        Lock_ lock(*this);
+
+        if (!mIsEnabled) {
+            LCEnable();
+            mIsEnabled = true;
+        }
+    }
+
+    void Disable() {
+        Lock_ lock(*this);
+
+        if (mIsEnabled) {
+            LC::QueueWaitEx(0);
+            LCDisable();
+            mIsEnabled = false;
+        }
+    }
+
+    bool Lock() {
+        OSLockMutex(&mMutex);
+
+        if (mIsEnabled) {
+            LC::QueueWaitEx(0);
+            return true;
+        }
+
+        OSUnlockMutex(&mMutex);
+        return false;
+    }
+
+    void Unlock() {
+        LC::QueueWaitEx(0);
+        OSUnlockMutex(&mMutex);
+    }
+
+private:
+    bool mIsEnabled; // at 0x0
+    OSMutex mMutex;  // at 0x4
+};
+
+static LCImpl sLCImpl;
+
+} // namespace
+
+namespace LC {
+
+void Enable() { sLCImpl.Enable(); }
+
+void Disable() { sLCImpl.Disable(); }
+
+bool Lock() { return sLCImpl.Lock(); }
+
+void Unlock() { sLCImpl.Unlock(); }
+
+void LoadBlocks(void* dst, void* src, u32 size) {
+    LCLoadBlocks(dst, src, size);
 }
+
+void StoreBlocks(void* dst, void* src, u32 size) {
+    LCStoreBlocks(dst, src, size);
+}
+
+void StoreData(void* dst, void* src, u32 size) { LCStoreData(dst, src, size); }
+
+} // namespace LC
+} // namespace ut
+} // namespace nw4r
