@@ -1,6 +1,5 @@
 #include "g3d_anmobj.h"
 #include "math_arithmetic.h"
-#include <math.h>
 
 namespace nw4r
 {
@@ -19,11 +18,11 @@ namespace nw4r
 
             if (f3 >= 0.0f)
             {
-                return fmod(f3, diff);
+                return math::FMod(f3, diff);
             }
             else
             {
-                f32 mod = fmod(f3 + diff, diff);
+                f32 mod = math::FMod(f3 + diff, diff);
                 return math::FSelect(mod, 0.0f, diff) + mod;
             }
         }

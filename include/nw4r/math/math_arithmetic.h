@@ -17,15 +17,43 @@ f32 FLog(f32 x);
 
 f32 FrSqrt(f32 x);
 
+inline f32 FAbs(register f32 x) {
+    // clang-format off
+    asm {
+        fabs x, x
+    }
+    // clang-format on
+
+    return x;
+}
+
+inline f32 FCeil(f32 x) { return std::ceilf(x); }
+
 inline f32 FExp(f32 x) { return detail::FExp(x); }
 
-inline f32 FLog(f32 x) {
-    if (x >= 0.0f) {
-        return detail::FLog(x);
-    }
+inline f32 FFloor(f32 x) { return std::floorf(x); }
 
-    return NW4R_MATH_QNAN;
+inline f32 FInv(register f32 x) {
+    register f32 work0, work1, work2, work3;
+
+    // clang-format off
+    asm {
+        fmr  work1, x     // x
+        fres work0, work1 // 1/x
+
+        // Refine estimate
+        ps_add   work2, work0, work0        // 2/x
+        ps_mul   work3, work0, work0        // 1/x^2
+        ps_nmsub work0, work1, work3, work2 // -(x * 1/x^2 - 2/x)
+    }
+    // clang-format on
+
+    return work0;
 }
+
+inline f32 FMod(f32 x, f32 y) { return std::fmodf(x, y); }
+
+inline f32 FModf(f32 x, f32* y) { return std::modff(x, y); }
 
 inline f32 FSqrt(f32 x) {
     if (x < 0.0f) {
@@ -35,14 +63,12 @@ inline f32 FSqrt(f32 x) {
     return x * FrSqrt(x);
 }
 
-inline f32 FAbs(register f32 x) {
-    // clang-format off
-    asm {
-        fabs x, x
+inline f32 FLog(f32 x) {
+    if (x >= 0.0f) {
+        return detail::FLog(x);
     }
-    // clang-format on
 
-    return x;
+    return NW4R_MATH_QNAN;
 }
 
 inline f32 FSelect(register f32 value, register f32 ge_zero,
@@ -57,8 +83,6 @@ inline f32 FSelect(register f32 value, register f32 ge_zero,
 
     return ret;
 }
-
-inline f32 FFloor(f32 x) { return floorf(x); }
 
 inline f32 U16ToF32(u16 arg) {
     f32 ret;
