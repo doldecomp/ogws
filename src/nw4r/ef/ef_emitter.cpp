@@ -132,17 +132,17 @@ namespace nw4r
 			BYTE_0xDC = 1;
 			FLOAT_0x34 = pResource->STRUCT_0x8.SBYTE_0xE / 100.0f;
 			
-			VEC_0x90.mCoords.x = pResource->STRUCT_0x8.FLOAT_0x78;
-			VEC_0x90.mCoords.y = pResource->STRUCT_0x8.FLOAT_0x7C;
-			VEC_0x90.mCoords.z = pResource->STRUCT_0x8.FLOAT_0x80;
+			VEC_0x90.x = pResource->STRUCT_0x8.FLOAT_0x78;
+			VEC_0x90.y = pResource->STRUCT_0x8.FLOAT_0x7C;
+			VEC_0x90.z = pResource->STRUCT_0x8.FLOAT_0x80;
 			
-			VEC_0x9C.mCoords.x = pResource->STRUCT_0x8.FLOAT_0x60;
-			VEC_0x9C.mCoords.y = pResource->STRUCT_0x8.FLOAT_0x64;
-			VEC_0x9C.mCoords.z = pResource->STRUCT_0x8.FLOAT_0x68;
+			VEC_0x9C.x = pResource->STRUCT_0x8.FLOAT_0x60;
+			VEC_0x9C.y = pResource->STRUCT_0x8.FLOAT_0x64;
+			VEC_0x9C.z = pResource->STRUCT_0x8.FLOAT_0x68;
 			
-			VEC_0xA8.mCoords.x = pResource->STRUCT_0x8.FLOAT_0x6C;
-			VEC_0xA8.mCoords.y = pResource->STRUCT_0x8.FLOAT_0x70;
-			VEC_0xA8.mCoords.z = pResource->STRUCT_0x8.FLOAT_0x74;
+			VEC_0xA8.x = pResource->STRUCT_0x8.FLOAT_0x6C;
+			VEC_0xA8.y = pResource->STRUCT_0x8.FLOAT_0x70;
+			VEC_0xA8.z = pResource->STRUCT_0x8.FLOAT_0x74;
 			
 			BYTE_0x64 = 3;
 			BYTE_0x65 = 100;
@@ -231,9 +231,9 @@ namespace nw4r
 			{
 				//80012484
 				VEC3 vec_0x8(VEC_0x90);
-				pChild->VEC_0x90.mCoords.x = 0.0f;
-				pChild->VEC_0x90.mCoords.y = 0.0f;
-				pChild->VEC_0x90.mCoords.z = 0.0f;
+				pChild->VEC_0x90.x = 0.0f;
+				pChild->VEC_0x90.y = 0.0f;
+				pChild->VEC_0x90.z = 0.0f;
 				
 				pChild->SetMtxDirty();
 				
@@ -241,7 +241,7 @@ namespace nw4r
 				
 				MTX34Identity(&mtx_0x48);
 				
-				MTX34RotXYZFIdx(&mtx_0x48, 40.743664f * pChild->VEC_0xA8.mCoords.x, 40.743664f * pChild->VEC_0xA8.mCoords.y, 40.743664f * pChild->VEC_0xA8.mCoords.z);
+				MTX34RotXYZFIdx(&mtx_0x48, 40.743664f * pChild->VEC_0xA8.x, 40.743664f * pChild->VEC_0xA8.y, 40.743664f * pChild->VEC_0xA8.z);
 				MTX34Scale(&mtx_0x48, &mtx_0x48, &pChild->VEC_0x9C);
 				
 				MTX34 mtx_0x18;
@@ -254,14 +254,14 @@ namespace nw4r
 				
 				MTX34Trans(&mtx_0x48, &mtx_0x48, &pParticle->VEC_0xAC);
 				
-				MTX34RotXYZFIdx(&mtx_0x18, 40.743664f * pChild->VEC_0xA8.mCoords.x, 40.743664f * pChild->VEC_0xA8.mCoords.y, 40.743664f * pChild->VEC_0xA8.mCoords.z);
+				MTX34RotXYZFIdx(&mtx_0x18, 40.743664f * pChild->VEC_0xA8.x, 40.743664f * pChild->VEC_0xA8.y, 40.743664f * pChild->VEC_0xA8.z);
 				MTX34Scale(&mtx_0x18, &mtx_0x18, &pChild->VEC_0x9C);
 				MTX34Inv(&mtx_0x18, &mtx_0x18);
 				MTX34Mult(&mtx_0x48, &mtx_0x18, &mtx_0x48);
 				
-				pChild->VEC_0x90.mCoords.x = vec_0x8.mCoords.x + mtx_0x48.mEntries.tbl[0][3];
-				pChild->VEC_0x90.mCoords.y = vec_0x8.mCoords.y + mtx_0x48.mEntries.tbl[1][3];
-				pChild->VEC_0x90.mCoords.z = vec_0x8.mCoords.z + mtx_0x48.mEntries.tbl[2][3];
+				pChild->VEC_0x90.x = vec_0x8.x + mtx_0x48.m[0][3];
+				pChild->VEC_0x90.y = vec_0x8.y + mtx_0x48.m[1][3];
+				pChild->VEC_0x90.z = vec_0x8.z + mtx_0x48.m[2][3];
 				
 				pChild->SetMtxDirty();
 				
@@ -311,16 +311,16 @@ namespace nw4r
 				
 				pParticle->mManager->CalcGlobalMtx(&mtx_0xf0);
 				
-				mtx_0xf0.mEntries.tbl[2][3] = 0.0f;
-				mtx_0xf0.mEntries.tbl[1][3] = 0.0f;
-				mtx_0xf0.mEntries.tbl[0][3] = 0.0f;
+				mtx_0xf0.m[2][3] = 0.0f;
+				mtx_0xf0.m[1][3] = 0.0f;
+				mtx_0xf0.m[0][3] = 0.0f;
 				
 				VEC3 vec_0x20;
 				vec_0x20 = pParticle->VEC_0xAC - pParticle->VEC_0xB8;
 				
 				VEC3Transform(&vec_0x20, &mtx_0xf0, &vec_0x20);
 				
-				if (vec_0x20.mCoords.x || vec_0x20.mCoords.y || vec_0x20.mCoords.z)
+				if (vec_0x20.x || vec_0x20.y || vec_0x20.z)
 				{
 					//80012790
 					VEC3Normalize(&vec_0x20, &vec_0x20);
@@ -331,7 +331,7 @@ namespace nw4r
 					//800127C4
 					MTX34 mtx_0x120;
 					GetDirMtxY(&mtx_0x120, vec_0x20);
-					MTX34RotXYZFIdx(&mtx_0x120, 40.743664f * tmp.VEC_0xA8.mCoords.x, 40.743664f * tmp.VEC_0xA8.mCoords.y, 40.743664f * tmp.VEC_0xA8.mCoords.z);
+					MTX34RotXYZFIdx(&mtx_0x120, 40.743664f * tmp.VEC_0xA8.x, 40.743664f * tmp.VEC_0xA8.y, 40.743664f * tmp.VEC_0xA8.z);
 					MTX34Mult(&mtx_0x120, &mtx_0xf0, &mtx_0x120);
 					MtxGetRotation(mtx_0x120, &tmp.VEC_0xA8);
 					//80012810 (END)
@@ -341,16 +341,16 @@ namespace nw4r
 			//80012810
 			VEC3 vec_0x14(tmp.VEC_0x90);
 			
-			tmp.VEC_0x90.mCoords.x = 0.0f;
-			tmp.VEC_0x90.mCoords.y = 0.0f;
-			tmp.VEC_0x90.mCoords.z = 0.0f;
+			tmp.VEC_0x90.x = 0.0f;
+			tmp.VEC_0x90.y = 0.0f;
+			tmp.VEC_0x90.z = 0.0f;
 			
 			tmp.SetMtxDirty();
 			
 			MTX34 mtx_0xc0;
 			
 			MTX34Identity(&mtx_0xc0);
-			MTX34RotXYZFIdx(&mtx_0xc0, 40.743664f * tmp.VEC_0xA8.mCoords.x, 40.743664f * tmp.VEC_0xA8.mCoords.y, 40.743664f * tmp.VEC_0xA8.mCoords.z);
+			MTX34RotXYZFIdx(&mtx_0xc0, 40.743664f * tmp.VEC_0xA8.x, 40.743664f * tmp.VEC_0xA8.y, 40.743664f * tmp.VEC_0xA8.z);
 			MTX34Scale(&mtx_0xc0, &mtx_0xc0, &tmp.VEC_0x9C);
 			
 			MTX34 mtx_0x90;
@@ -366,15 +366,15 @@ namespace nw4r
 			MTX34Mult(&mtx_0xc0, &mtx_0x90, &mtx_0xc0);
 			MTX34Trans(&mtx_0xc0, &mtx_0xc0, &pParticle->VEC_0xAC);
 			
-			MTX34RotXYZFIdx(&mtx_0x90, 40.743664f * tmp.VEC_0xA8.mCoords.x, 40.743664f * tmp.VEC_0xA8.mCoords.y, 40.743664f * tmp.VEC_0xA8.mCoords.z);
+			MTX34RotXYZFIdx(&mtx_0x90, 40.743664f * tmp.VEC_0xA8.x, 40.743664f * tmp.VEC_0xA8.y, 40.743664f * tmp.VEC_0xA8.z);
 			
 			MTX34Scale(&mtx_0x90, &mtx_0x90, &tmp.VEC_0x9C);
 			MTX34Inv(&mtx_0x90, &mtx_0x90);
 			MTX34Mult(&mtx_0xc0, &mtx_0x90, &mtx_0xc0);
 			
-			tmp.VEC_0x90.mCoords.x = vec_0x14.mCoords.x + mtx_0xc0.mEntries.tbl[0][3];
-			tmp.VEC_0x90.mCoords.y = vec_0x14.mCoords.y + mtx_0xc0.mEntries.tbl[1][3];
-			tmp.VEC_0x90.mCoords.z = vec_0x14.mCoords.z + mtx_0xc0.mEntries.tbl[2][3];
+			tmp.VEC_0x90.x = vec_0x14.x + mtx_0xc0.m[0][3];
+			tmp.VEC_0x90.y = vec_0x14.y + mtx_0xc0.m[1][3];
+			tmp.VEC_0x90.z = vec_0x14.z + mtx_0xc0.m[2][3];
 			
 			tmp.SetMtxDirty();
 			tmp.CalcEmitter();
@@ -706,13 +706,13 @@ namespace nw4r
 						switch (r4)
 						{
 							case 0x41:
-								r4_2 = &VEC_0x9C.mCoords.x;
+								r4_2 = &VEC_0x9C.x;
 								break;
 							case 0x42:
-								r4_2 = &VEC_0xA8.mCoords.x;
+								r4_2 = &VEC_0xA8.x;
 								break;
 							case 0x43:
-								r4_2 = &VEC_0x90.mCoords.x;
+								r4_2 = &VEC_0x90.x;
 								break;
 							default:
 								continue;
@@ -816,9 +816,9 @@ namespace nw4r
 			if ((WORD_0x24 & 0x10000) && (WORD_0x24 & 0x8000)) return;
 			
 			//800136A4
-			VEC_0xA8.mCoords.z = 0.0f;
-			VEC_0xA8.mCoords.y = 0.0f;
-			VEC_0xA8.mCoords.x = 0.0f;
+			VEC_0xA8.z = 0.0f;
+			VEC_0xA8.y = 0.0f;
+			VEC_0xA8.x = 0.0f;
 			
 			mMtxDirtyFlag = true;
 			
@@ -832,35 +832,35 @@ namespace nw4r
 			
 			mtx_0x48 = mtx_0x78;
 			
-			float xxSquared = mtx_0x48.mEntries.tbl[0][0] * mtx_0x48.mEntries.tbl[0][0];
-			float yxSquared = mtx_0x48.mEntries.tbl[1][0] * mtx_0x48.mEntries.tbl[1][0];
-			float zxSquared = mtx_0x48.mEntries.tbl[2][0] * mtx_0x48.mEntries.tbl[2][0];
+			float xxSquared = mtx_0x48.m[0][0] * mtx_0x48.m[0][0];
+			float yxSquared = mtx_0x48.m[1][0] * mtx_0x48.m[1][0];
+			float zxSquared = mtx_0x48.m[2][0] * mtx_0x48.m[2][0];
 			
 			float xSum = xxSquared + yxSquared + zxSquared;
 			
-			mtx_0x48.mEntries.tbl[0][0] = (xSum <= 0.0f) ? 0.0f : FSqrt(xSum);
-			mtx_0x48.mEntries.tbl[0][1] = 0.0f;
-			mtx_0x48.mEntries.tbl[0][2] = 0.0f;
+			mtx_0x48.m[0][0] = (xSum <= 0.0f) ? 0.0f : FSqrt(xSum);
+			mtx_0x48.m[0][1] = 0.0f;
+			mtx_0x48.m[0][2] = 0.0f;
 			
-			float xySquared = mtx_0x48.mEntries.tbl[0][1] * mtx_0x48.mEntries.tbl[0][1];
-			float yySquared = mtx_0x48.mEntries.tbl[1][1] * mtx_0x48.mEntries.tbl[1][1];
-			float zySquared = mtx_0x48.mEntries.tbl[2][1] * mtx_0x48.mEntries.tbl[2][1];
+			float xySquared = mtx_0x48.m[0][1] * mtx_0x48.m[0][1];
+			float yySquared = mtx_0x48.m[1][1] * mtx_0x48.m[1][1];
+			float zySquared = mtx_0x48.m[2][1] * mtx_0x48.m[2][1];
 			
 			float ySum = xySquared + yySquared + zySquared;
 			
-			mtx_0x48.mEntries.tbl[1][1] = (ySum <= 0.0f) ? 0.0f : FSqrt(ySum);
-			mtx_0x48.mEntries.tbl[1][2] = 0.0f;
-			mtx_0x48.mEntries.tbl[1][0] = 0.0f;
+			mtx_0x48.m[1][1] = (ySum <= 0.0f) ? 0.0f : FSqrt(ySum);
+			mtx_0x48.m[1][2] = 0.0f;
+			mtx_0x48.m[1][0] = 0.0f;
 			
-			float xzSquared = mtx_0x48.mEntries.tbl[0][2] * mtx_0x48.mEntries.tbl[0][2];
-			float yzSquared = mtx_0x48.mEntries.tbl[1][2] * mtx_0x48.mEntries.tbl[1][2];
-			float zzSquared = mtx_0x48.mEntries.tbl[2][2] * mtx_0x48.mEntries.tbl[2][2];
+			float xzSquared = mtx_0x48.m[0][2] * mtx_0x48.m[0][2];
+			float yzSquared = mtx_0x48.m[1][2] * mtx_0x48.m[1][2];
+			float zzSquared = mtx_0x48.m[2][2] * mtx_0x48.m[2][2];
 			
 			float zSum = xzSquared + yzSquared + zzSquared;
 			
-			mtx_0x48.mEntries.tbl[2][2] = (zSum <= 0.0f) ? 0.0f : FSqrt(zSum);
-			mtx_0x48.mEntries.tbl[2][1] = 0.0f;
-			mtx_0x48.mEntries.tbl[2][0] = 0.0f;
+			mtx_0x48.m[2][2] = (zSum <= 0.0f) ? 0.0f : FSqrt(zSum);
+			mtx_0x48.m[2][1] = 0.0f;
+			mtx_0x48.m[2][0] = 0.0f;
 			
 			//80013828
 			if (WORD_0x24 & 0x8000)
@@ -874,9 +874,9 @@ namespace nw4r
 			
 			VEC3 vec_0x8;
 			
-			vec_0x8.mCoords.x = 1.0f / VEC_0x9C.mCoords.x;
-			vec_0x8.mCoords.y = 1.0f / VEC_0x9C.mCoords.y;
-			vec_0x8.mCoords.z = 1.0f / VEC_0x9C.mCoords.z;
+			vec_0x8.x = 1.0f / VEC_0x9C.x;
+			vec_0x8.y = 1.0f / VEC_0x9C.y;
+			vec_0x8.z = 1.0f / VEC_0x9C.z;
 			
 			MTX34Scale(&mtx_0x78, &mtx_0x78, &vec_0x8);
 			MTX34Scale(&mtx_0x78, &VEC_0x9C, &mtx_0x78);
@@ -957,7 +957,7 @@ namespace nw4r
 				
 				MTX34 mtx_0x38;
 				
-				MTX34RotXYZFIdx(&mtx_0x38, 40.743664f * VEC_0xA8.mCoords.x, 40.743664f * VEC_0xA8.mCoords.y, 40.743664f * VEC_0xA8.mCoords.z);
+				MTX34RotXYZFIdx(&mtx_0x38, 40.743664f * VEC_0xA8.x, 40.743664f * VEC_0xA8.y, 40.743664f * VEC_0xA8.z);
 				MTX34Mult(&mGlobalMtx, &mGlobalMtx, &mtx_0x38); //PSMTXConcat(&mGlobalMtx, &mtx_0x38, &mGlobalMtx);
 				MTX34Scale(&mGlobalMtx, &mGlobalMtx, &VEC_0x9C);
 				

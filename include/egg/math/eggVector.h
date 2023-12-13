@@ -32,9 +32,9 @@ namespace EGG
 
         f32 squaredLength() const
         {
-            return mCoords.x * mCoords.x
-                + mCoords.y * mCoords.y
-                + mCoords.z * mCoords.z;
+            return x * x
+                + y * y
+                + z * z;
         }
 
         static const Vector3f zero;

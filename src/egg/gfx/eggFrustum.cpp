@@ -80,7 +80,7 @@ namespace EGG
     void Frustum::CopyToG3D_Perspective_(g3d::Camera cam) const
     {
         math::MTX44 mtx;
-        cam.SetPerspective(mFovY, mSize.mCoords.x / mSize.mCoords.y, mNearZ, mFarZ);
+        cam.SetPerspective(mFovY, mSize.x / mSize.y, mNearZ, mFarZ);
         CalcMtxPerspective_(&mtx);
         cam.SetProjectionMtxDirectly(&mtx);
     }
@@ -97,25 +97,25 @@ namespace EGG
         f32 params[7];
         GetPerspectiveParam_(params);
 
-        out->mEntries.tbl[0][3] = 0.0f;
-        out->mEntries.tbl[0][1] = 0.0f;
-        out->mEntries.tbl[0][0] = params[1];
-        out->mEntries.tbl[0][2] = params[2];
+        out->m[0][3] = 0.0f;
+        out->m[0][1] = 0.0f;
+        out->m[0][0] = params[1];
+        out->m[0][2] = params[2];
 
-        out->mEntries.tbl[1][3] = 0.0f;
-        out->mEntries.tbl[1][0] = 0.0f;
-        out->mEntries.tbl[1][1] = params[3];
-        out->mEntries.tbl[1][2] = params[4];
+        out->m[1][3] = 0.0f;
+        out->m[1][0] = 0.0f;
+        out->m[1][1] = params[3];
+        out->m[1][2] = params[4];
 
-        out->mEntries.tbl[2][1] = 0.0f;
-        out->mEntries.tbl[2][0] = 0.0f;
-        out->mEntries.tbl[2][2] = params[5];
-        out->mEntries.tbl[2][3] = params[6];
+        out->m[2][1] = 0.0f;
+        out->m[2][0] = 0.0f;
+        out->m[2][2] = params[5];
+        out->m[2][3] = params[6];
 
-        out->mEntries.tbl[3][3] = 0.0f;
-        out->mEntries.tbl[3][1] = 0.0f;
-        out->mEntries.tbl[3][0] = 0.0f;
-        out->mEntries.tbl[3][2] = -1.0f;
+        out->m[3][3] = 0.0f;
+        out->m[3][1] = 0.0f;
+        out->m[3][0] = 0.0f;
+        out->m[3][2] = -1.0f;
     }
 
     void Frustum::GetOrthographicParam_(math::MTX44 *pMtx) const
@@ -149,7 +149,7 @@ namespace EGG
                 }
                 if ((flags & 0x2) == 0)
                 {
-                    SetSizeX(mSize.mCoords.y * result.FLOAT_0x14);                    
+                    SetSizeX(mSize.y * result.FLOAT_0x14);                    
                     mScale = math::VEC3(1.0f, 1.0f, 1.0f);
                 }
                 break;
@@ -164,7 +164,7 @@ namespace EGG
                     }
 
                     SetSizeY(result.FLOAT_0x30);
-                    SetSizeX(mSize.mCoords.y * result.FLOAT_0x14);
+                    SetSizeX(mSize.y * result.FLOAT_0x14);
                     mScale = math::VEC3(1.0f, 1.0f, 1.0f);
                     mOffset = math::VEC2(0.0f, 0.0f);
                 }
@@ -189,18 +189,18 @@ namespace EGG
 
         const f32 inv = 1.0f / mTanFovY;
         p[0] = 0.0f;
-        p[1] = (inv / (mSize.mCoords.x / mSize.mCoords.y)) / mScale.mCoords.x;
-        p[2] = mOffset.mCoords.x / (0.5f * mSize.mCoords.x);
-        p[3] = inv / mScale.mCoords.y;
-        p[4] = mOffset.mCoords.y / (0.5f * mSize.mCoords.y);
+        p[1] = (inv / (mSize.x / mSize.y)) / mScale.x;
+        p[2] = mOffset.x / (0.5f * mSize.x);
+        p[3] = inv / mScale.y;
+        p[4] = mOffset.y / (0.5f * mSize.y);
         
         const f32 z = -mNearZ / (mFarZ - mNearZ);
         p[5] = z;
         p[6] = mFarZ * z;
 
-        GXUtility::setScaleOffsetPerspective(p, sGlobalScale.mCoords.x, sGlobalScale.mCoords.y,
-            sGlobalOffset.mCoords.x / (0.5f * mSize.mCoords.x),
-            sGlobalOffset.mCoords.y / (0.5f * mSize.mCoords.y));
+        GXUtility::setScaleOffsetPerspective(p, sGlobalScale.x, sGlobalScale.y,
+            sGlobalOffset.x / (0.5f * mSize.x),
+            sGlobalOffset.y / (0.5f * mSize.y));
     }
 
     void Frustum::GetOrthographicParam_(f32 *pT, f32 *pB, f32 *pL, f32 *pR) const
@@ -214,30 +214,30 @@ namespace EGG
         if (mCanvasMode == CANVASMODE_0)
         {
             const math::VEC2 adjScale(
-                mScale.mCoords.x * sGlobalScale.mCoords.x,
-                mScale.mCoords.y * sGlobalScale.mCoords.y
+                mScale.x * sGlobalScale.x,
+                mScale.y * sGlobalScale.y
             );
             
-            *pT = adjScale.mCoords.y * ((0.5f * mSize.mCoords.y) + (mOffset.mCoords.y + sGlobalOffset.mCoords.y));
-            *pB = adjScale.mCoords.y * ((-0.5f * mSize.mCoords.y) + (mOffset.mCoords.y + sGlobalOffset.mCoords.y));
-            *pL = adjScale.mCoords.x * ((-0.5f * mSize.mCoords.x) + (mOffset.mCoords.x + sGlobalOffset.mCoords.x));
-            *pR = adjScale.mCoords.x * ((0.5f * mSize.mCoords.x) + (mOffset.mCoords.x + sGlobalOffset.mCoords.x));
+            *pT = adjScale.y * ((0.5f * mSize.y) + (mOffset.y + sGlobalOffset.y));
+            *pB = adjScale.y * ((-0.5f * mSize.y) + (mOffset.y + sGlobalOffset.y));
+            *pL = adjScale.x * ((-0.5f * mSize.x) + (mOffset.x + sGlobalOffset.x));
+            *pR = adjScale.x * ((0.5f * mSize.x) + (mOffset.x + sGlobalOffset.x));
         }
         else if (mCanvasMode == CANVASMODE_1)
         {
-            *pT = mOffset.mCoords.y + sGlobalOffset.mCoords.y;
-            const f32 new_var = mOffset.mCoords.y + sGlobalOffset.mCoords.y;
-            *pB = new_var + -1.0f * mSize.mCoords.y * mScale.mCoords.y;
-            *pL = mOffset.mCoords.x + sGlobalOffset.mCoords.x;
-            *pR = mOffset.mCoords.x + sGlobalOffset.mCoords.x + mSize.mCoords.x * mScale.mCoords.x;
+            *pT = mOffset.y + sGlobalOffset.y;
+            const f32 new_var = mOffset.y + sGlobalOffset.y;
+            *pB = new_var + -1.0f * mSize.y * mScale.y;
+            *pL = mOffset.x + sGlobalOffset.x;
+            *pR = mOffset.x + sGlobalOffset.x + mSize.x * mScale.x;
             
-            *pT *= -sGlobalScale.mCoords.y;
-            *pB *= -sGlobalScale.mCoords.y;
-            *pL *= sGlobalScale.mCoords.x;
-            *pR *= sGlobalScale.mCoords.x;
+            *pT *= -sGlobalScale.y;
+            *pB *= -sGlobalScale.y;
+            *pL *= sGlobalScale.x;
+            *pR *= sGlobalScale.x;
 
-            const f32 x = -(sGlobalScale.mCoords.x - 1.0f) * (0.5f * mSize.mCoords.x);
-            const f32 y = -(sGlobalScale.mCoords.y - 1.0f) * (0.5f * mSize.mCoords.y);
+            const f32 x = -(sGlobalScale.x - 1.0f) * (0.5f * mSize.x);
+            const f32 y = -(sGlobalScale.y - 1.0f) * (0.5f * mSize.y);
             *pT += y;
             *pB += y;
             *pL += x;
@@ -277,35 +277,35 @@ namespace EGG
         switch(mProjType)
         {
             case PROJ_PERSP:
-                screenY = screenPos.mCoords.y;
-                screenX = screenPos.mCoords.x;
+                screenY = screenPos.y;
+                screenX = screenPos.x;
                 
                 math::VEC2 adjustedPos;
                 if (mCanvasMode == CANVASMODE_1)
                 {
-                    const f32 x = -(mSize.mCoords.x / 2.0f - screenX);
-                    const f32 y = -(mSize.mCoords.y / 2.0f - screenY);
+                    const f32 x = -(mSize.x / 2.0f - screenX);
+                    const f32 y = -(mSize.y / 2.0f - screenY);
                     
-                    adjustedPos.mCoords.x = x;
-                    adjustedPos.mCoords.y = -y;
+                    adjustedPos.x = x;
+                    adjustedPos.y = -y;
                 }
                 else if (mCanvasMode == CANVASMODE_0)
                 {
-                    adjustedPos.mCoords.x = screenX;
-                    adjustedPos.mCoords.y = screenY;
+                    adjustedPos.x = screenX;
+                    adjustedPos.y = screenY;
                 }
 
-                pPosView->mCoords.x = adjustedPos.mCoords.x;
-                pPosView->mCoords.y = adjustedPos.mCoords.y;
-                pPosView->mCoords.z = -(mSize.mCoords.y / 2.0f) / mTanFovY;
+                pPosView->x = adjustedPos.x;
+                pPosView->y = adjustedPos.y;
+                pPosView->z = -(mSize.y / 2.0f) / mTanFovY;
                 break;
             case PROJ_ORTHO:
-                screenY = screenPos.mCoords.y;
-                screenX = screenPos.mCoords.x;
+                screenY = screenPos.y;
+                screenX = screenPos.x;
                 
-                pPosView->mCoords.x = screenX / mScale.mCoords.x;
-                pPosView->mCoords.y = screenY / mScale.mCoords.y;
-                pPosView->mCoords.z = mNearZ;
+                pPosView->x = screenX / mScale.x;
+                pPosView->y = screenY / mScale.y;
+                pPosView->z = mNearZ;
                 break;
         }
     }

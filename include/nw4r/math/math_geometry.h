@@ -1,33 +1,29 @@
 #ifndef NW4R_MATH_GEOMETRY_H
 #define NW4R_MATH_GEOMETRY_H
+#include <nw4r/math/math_types.h>
+#include <nw4r/types_nw4r.h>
 
-namespace nw4r
-{
-    namespace math
-    {
-        struct AABB
-        {
-            AABB() {}
-            
-            inline AABB& operator=(const AABB& other)
-            {
-				struct VEC3i { int coords[3]; };
-				*(VEC3i *)&this->VEC3_0x0 = *(VEC3i *)&other.VEC3_0x0;
-				*(VEC3i *)&this->VEC3_0xC = *(VEC3i *)&other.VEC3_0xC;
-				return *this;
-            }
+namespace nw4r {
+namespace math {
+struct AABB {
+    AABB() {}
 
-            void Set(const AABB *, const MTX34 *);
+    // inline AABB& operator=(const AABB& other)
+    // {
+    // 	struct VEC3i { int coords[3]; };
+    // 	*(VEC3i *)&this->VEC3_0x0 = *(VEC3i *)&other.VEC3_0x0;
+    // 	*(VEC3i *)&this->VEC3_0xC = *(VEC3i *)&other.VEC3_0xC;
+    // 	return *this;
+    // }
 
-            VEC3 VEC3_0x0;
-            VEC3 VEC3_0xC;
-        };
+    void Set(const AABB*, const MTX34*);
 
-        struct FRUSTUM
-        {
-            
-        };
-    }
-}
+    VEC3 VEC3_0x0;
+    VEC3 VEC3_0xC;
+};
+
+struct FRUSTUM {};
+} // namespace math
+} // namespace nw4r
 
 #endif

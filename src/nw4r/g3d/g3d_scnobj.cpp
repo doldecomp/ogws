@@ -340,11 +340,11 @@ namespace nw4r
 
         ScnLeaf::ScaleProperty ScnLeaf::GetScaleProperty() const
         {
-            if (mScale.mCoords.x == mScale.mCoords.y)
+            if (mScale.x == mScale.y)
             {
-                if (mScale.mCoords.y == mScale.mCoords.z)
+                if (mScale.y == mScale.z)
                 {
-                    if (mScale.mCoords.x == 1.0f)
+                    if (mScale.x == 1.0f)
                     {
                         return SCALE_PROPERTY_0;
                     }

@@ -159,44 +159,44 @@ namespace nw4r
             {
                 GXBegin(GX_QUADS, GX_VTXFMT0, 4);
 
-                GXPosition2f32(pos.mCoords.x, pos.mCoords.y);
+                GXPosition2f32(pos.x, pos.y);
                 if (vertexClrs != NULL) 
                 {
                     GXColor1u32(vertexClrs[0]);
                 }
                 for (int i = 0; i < c; i++)
                 {
-                    GXTexCoord2f32(tc[i][0].mCoords.x, tc[i][0].mCoords.y);
+                    GXTexCoord2f32(tc[i][0].x, tc[i][0].y);
                 }
 
-                GXPosition2f32(pos.mCoords.x + size.x, pos.mCoords.y);
+                GXPosition2f32(pos.x + size.x, pos.y);
                 if (vertexClrs != NULL) 
                 {
                     GXColor1u32(vertexClrs[1]);
                 }
                 for (int i = 0; i < c; i++)
                 {
-                    GXTexCoord2f32(tc[i][1].mCoords.x, tc[i][1].mCoords.y);
+                    GXTexCoord2f32(tc[i][1].x, tc[i][1].y);
                 }
 
-                GXPosition2f32(pos.mCoords.x + size.x, pos.mCoords.y + size.y);
+                GXPosition2f32(pos.x + size.x, pos.y + size.y);
                 if (vertexClrs != NULL) 
                 {
                     GXColor1u32(vertexClrs[3]);
                 }
                 for (int i = 0; i < c; i++)
                 {
-                    GXTexCoord2f32(tc[i][3].mCoords.x, tc[i][3].mCoords.y);
+                    GXTexCoord2f32(tc[i][3].x, tc[i][3].y);
                 }
 
-                GXPosition2f32(pos.mCoords.x, pos.mCoords.y + size.y);
+                GXPosition2f32(pos.x, pos.y + size.y);
                 if (vertexClrs != NULL) 
                 {
                     GXColor1u32(vertexClrs[2]);
                 }
                 for (int i = 0; i < c; i++)
                 {
-                    GXTexCoord2f32(tc[i][2].mCoords.x, tc[i][2].mCoords.y);
+                    GXTexCoord2f32(tc[i][2].x, tc[i][2].y);
                 }
 
                 GXEnd();

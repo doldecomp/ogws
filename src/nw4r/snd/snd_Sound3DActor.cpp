@@ -83,7 +83,7 @@ namespace nw4r
 		
 		void Sound3DActor::SetPosition(const math::VEC3 & position)
 		{
-			mPosition.mCoords = position.mCoords;
+			mPosition = position;
 		}
 		
 		void Sound3DActor::detail_Update(void * ptr, const BasicSound * pSound)

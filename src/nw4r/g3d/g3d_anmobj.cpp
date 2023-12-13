@@ -1,5 +1,5 @@
 #include "g3d_anmobj.h"
-#include "math_equation.h"
+#include "math_arithmetic.h"
 #include <math.h>
 
 namespace nw4r

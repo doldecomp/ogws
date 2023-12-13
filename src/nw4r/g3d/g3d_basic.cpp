@@ -16,9 +16,9 @@ namespace nw4r
                     if (anmFlags & 0x8)
                     {
                         newAttr = WorldMtxAttr::AnmScaleOne(worldAttr);
-                        pVec->mCoords.z = 1.0f;
-                        pVec->mCoords.y = 1.0f;
-                        pVec->mCoords.x = 1.0f;
+                        pVec->z = 1.0f;
+                        pVec->y = 1.0f;
+                        pVec->x = 1.0f;
                     }
                     else
                     {

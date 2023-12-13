@@ -38,7 +38,7 @@ namespace nw4r
                     }
                     else
                     {
-                        math::MTX34RotXYZDeg(&pAnm->mMtx, rNode.VEC3_0x2C.mCoords.x, rNode.VEC3_0x2C.mCoords.y, rNode.VEC3_0x2C.mCoords.z);
+                        math::MTX34RotXYZDeg(&pAnm->mMtx, rNode.VEC3_0x2C.x, rNode.VEC3_0x2C.y, rNode.VEC3_0x2C.z);
                         newFlags &= 0x70;
                     }
 
@@ -86,9 +86,9 @@ namespace nw4r
                 {
                     newFlags |= 0x18;
 
-                    pAnm->VEC3_0x4.mCoords.z = 1.0f;
-                    pAnm->VEC3_0x4.mCoords.y = 1.0f;
-                    pAnm->VEC3_0x4.mCoords.x = 1.0f;
+                    pAnm->VEC3_0x4.z = 1.0f;
+                    pAnm->VEC3_0x4.y = 1.0f;
+                    pAnm->VEC3_0x4.x = 1.0f;
                 }
                 else
                 {
@@ -112,7 +112,7 @@ namespace nw4r
                     stack_0x10 = rNode.VEC3_0x2C;
                     pAnm->VEC3_0x10 = rNode.VEC3_0x2C;
                     
-                    math::MTX34RotXYZDeg(&pAnm->mMtx, rNode.VEC3_0x2C.mCoords.x, rNode.VEC3_0x2C.mCoords.y, rNode.VEC3_0x2C.mCoords.z);
+                    math::MTX34RotXYZDeg(&pAnm->mMtx, rNode.VEC3_0x2C.x, rNode.VEC3_0x2C.y, rNode.VEC3_0x2C.z);
                 }
 
                 if (rNode.mFlags & 0x2)

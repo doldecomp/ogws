@@ -78,17 +78,17 @@ namespace EGG
 
     void Matrix34f::makeS(const Vector3f& vec)
     {
-        tbl[0][0] = vec.mCoords.x;
+        tbl[0][0] = vec.x;
         tbl[0][1] = 0.0f;
         tbl[0][2] = 0.0f;
 
         tbl[1][0] = 0.0f;
-        tbl[1][1] = vec.mCoords.y;
+        tbl[1][1] = vec.y;
         tbl[1][2] = 0.0f;
 
         tbl[2][0] = 0.0f;
         tbl[2][1] = 0.0f;
-        tbl[2][2] = vec.mCoords.z;
+        tbl[2][2] = vec.z;
 
         tbl[0][3] = 0.0f;
         tbl[1][3] = 0.0f;

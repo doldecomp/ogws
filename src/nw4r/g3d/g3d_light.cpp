@@ -95,7 +95,7 @@ namespace nw4r
             if (!pOutVec) return;
 
             GXGetLightPos(&mLightObj,
-                &pOutVec->mCoords.x, &pOutVec->mCoords.y, &pOutVec->mCoords.z);
+                &pOutVec->x, &pOutVec->y, &pOutVec->z);
         }
 
         void LightObj::GetLightDir(VEC3 *pOutVec) const
@@ -103,7 +103,7 @@ namespace nw4r
             if (!pOutVec) return;
 
             GXGetLightDir(&mLightObj,
-                &pOutVec->mCoords.x, &pOutVec->mCoords.y, &pOutVec->mCoords.z);
+                &pOutVec->x, &pOutVec->y, &pOutVec->z);
         }
 
         void LightObj::ApplyViewMtx(const MTX34& rMtx)
@@ -115,7 +115,7 @@ namespace nw4r
             if (IsSpecularDir())
             {
                 GXInitSpecularDir(&mLightObj,
-                    lightDir.mCoords.x, lightDir.mCoords.y, lightDir.mCoords.z);
+                    lightDir.x, lightDir.y, lightDir.z);
             }
             else
             {
@@ -124,10 +124,10 @@ namespace nw4r
                 VEC3Transform(&lightPos, &rMtx, &lightPos);
 
                 GXInitLightPos(&mLightObj,
-                    lightPos.mCoords.x, lightPos.mCoords.y, lightPos.mCoords.z);
+                    lightPos.x, lightPos.y, lightPos.z);
 
                 GXInitLightDir(&mLightObj,
-                    lightDir.mCoords.x, lightDir.mCoords.y, lightDir.mCoords.z);
+                    lightDir.x, lightDir.y, lightDir.z);
             }
         }
 

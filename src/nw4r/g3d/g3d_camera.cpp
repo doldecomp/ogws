@@ -26,21 +26,21 @@ namespace nw4r
             {
                 rCamData.mFlags = 0x21;
 
-                rCamData.mPos.mCoords.x = 0.0f;
-                rCamData.mPos.mCoords.y = 0.0f;
-                rCamData.mPos.mCoords.z = 15.0f;
+                rCamData.mPos.x = 0.0f;
+                rCamData.mPos.y = 0.0f;
+                rCamData.mPos.z = 15.0f;
 
-                rCamData.VEC3_0x80.mCoords.x = 0.0f;
-                rCamData.VEC3_0x80.mCoords.y = 1.0f;
-                rCamData.VEC3_0x80.mCoords.z = 0.0f;
+                rCamData.VEC3_0x80.x = 0.0f;
+                rCamData.VEC3_0x80.y = 1.0f;
+                rCamData.VEC3_0x80.z = 0.0f;
 
-                rCamData.VEC3_0x8C.mCoords.x = 0.0f;
-                rCamData.VEC3_0x8C.mCoords.y = 0.0f;
-                rCamData.VEC3_0x8C.mCoords.z = 0.0f;
+                rCamData.VEC3_0x8C.x = 0.0f;
+                rCamData.VEC3_0x8C.y = 0.0f;
+                rCamData.VEC3_0x8C.z = 0.0f;
 
-                rCamData.VEC3_0x98.mCoords.x = 0.0f;
-                rCamData.VEC3_0x98.mCoords.y = 0.0f;
-                rCamData.VEC3_0x98.mCoords.z = 0.0f;
+                rCamData.VEC3_0x98.x = 0.0f;
+                rCamData.VEC3_0x98.y = 0.0f;
+                rCamData.VEC3_0x98.z = 0.0f;
 
                 rCamData.FLOAT_0xA4 = 0.0f;
                 rCamData.INT_0xA8 = 0;
@@ -77,9 +77,9 @@ namespace nw4r
 
             if (mCamData.IsValid())
             {
-                rCamData.mPos.mCoords.x = x;
-                rCamData.mPos.mCoords.y = y;
-                rCamData.mPos.mCoords.z = z;
+                rCamData.mPos.x = x;
+                rCamData.mPos.y = y;
+                rCamData.mPos.z = z;
 
                 rCamData.mFlags &= ~0x8;
             }
@@ -358,12 +358,12 @@ namespace nw4r
                 if (mCamData.IsValid())
                 {
                     math::MTX34Identity(pOutMtx);
-                    pOutMtx->mEntries.tbl[0][0] = rCamData.FLOAT_0xCC;
-                    pOutMtx->mEntries.tbl[0][3] = rCamData.FLOAT_0xD4;
-                    pOutMtx->mEntries.tbl[1][1] = -(rCamData.FLOAT_0xD0);
-                    pOutMtx->mEntries.tbl[1][3] = rCamData.FLOAT_0xD8;
-                    pOutMtx->mEntries.tbl[2][2] = 0.0f;
-                    pOutMtx->mEntries.tbl[2][3] = 1.0f;
+                    pOutMtx->m[0][0] = rCamData.FLOAT_0xCC;
+                    pOutMtx->m[0][3] = rCamData.FLOAT_0xD4;
+                    pOutMtx->m[1][1] = -(rCamData.FLOAT_0xD0);
+                    pOutMtx->m[1][3] = rCamData.FLOAT_0xD8;
+                    pOutMtx->m[2][2] = 0.0f;
+                    pOutMtx->m[2][3] = 1.0f;
                 }
             }
         }
@@ -437,40 +437,40 @@ namespace nw4r
             {
                 if ((rCamData.mFlags & 0x4) != 0)
                 {
-                    math::VEC3 delta(rCamData.mPos.mCoords.x - rCamData.VEC3_0x8C.mCoords.x,
-                        rCamData.mPos.mCoords.y - rCamData.VEC3_0x8C.mCoords.y,
-                        rCamData.mPos.mCoords.z - rCamData.VEC3_0x8C.mCoords.z);
+                    math::VEC3 delta(rCamData.mPos.x - rCamData.VEC3_0x8C.x,
+                        rCamData.mPos.y - rCamData.VEC3_0x8C.y,
+                        rCamData.mPos.z - rCamData.VEC3_0x8C.z);
 
-                    if ((delta.mCoords.x == 0.0f) && (delta.mCoords.z == 0.0f))
+                    if ((delta.x == 0.0f) && (delta.z == 0.0f))
                     {
                         rCamData.mCamMtx[0][0] = 1.0f;
                         rCamData.mCamMtx[0][1] = 0.0f;
                         rCamData.mCamMtx[0][2] = 0.0f;
-                        rCamData.mCamMtx[0][3] = -rCamData.mPos.mCoords.x;
+                        rCamData.mCamMtx[0][3] = -rCamData.mPos.x;
 
                         rCamData.mCamMtx[1][0] = 0.0f;
                         rCamData.mCamMtx[1][1] = 0.0f;
                         rCamData.mCamMtx[2][0] = 0.0f;
                         rCamData.mCamMtx[2][2] = 0.0f;
 
-                        if (delta.mCoords.y <= 0.0f)
+                        if (delta.y <= 0.0f)
                         {
                             rCamData.mCamMtx[1][2] = 1.0f;
-                            rCamData.mCamMtx[1][3] = -rCamData.mPos.mCoords.z;
+                            rCamData.mCamMtx[1][3] = -rCamData.mPos.z;
                             rCamData.mCamMtx[2][1] = -1.0f;
-                            rCamData.mCamMtx[2][3] = rCamData.mPos.mCoords.y;
+                            rCamData.mCamMtx[2][3] = rCamData.mPos.y;
                         }
                         else
                         {
                             rCamData.mCamMtx[1][2] = -1.0f;
-                            rCamData.mCamMtx[1][3] = rCamData.mPos.mCoords.z;
+                            rCamData.mCamMtx[1][3] = rCamData.mPos.z;
                             rCamData.mCamMtx[2][1] = 1.0f;
-                            rCamData.mCamMtx[2][3] = -rCamData.mPos.mCoords.y;
+                            rCamData.mCamMtx[2][3] = -rCamData.mPos.y;
                         }
                     }
                     else
                     {
-                        math::VEC3 stack_0x7C(delta.mCoords.z, 0.0f, -delta.mCoords.x);
+                        math::VEC3 stack_0x7C(delta.z, 0.0f, -delta.x);
 
                         math::VEC3 cross;
                         math::VEC3Normalize(&delta, &delta);
@@ -481,66 +481,66 @@ namespace nw4r
                         math::SinCosDeg(&stack_0x20, &stack_0x24, rCamData.FLOAT_0xA4);
 
                         math::VEC3 stack_0x60;
-                        stack_0x60.mCoords.x = stack_0x20 * cross.mCoords.x + stack_0x24 * stack_0x7C.mCoords.x;
-                        stack_0x60.mCoords.y = stack_0x20 * cross.mCoords.y;
-                        stack_0x60.mCoords.z = stack_0x20 * cross.mCoords.z + stack_0x24 * stack_0x7C.mCoords.z;
+                        stack_0x60.x = stack_0x20 * cross.x + stack_0x24 * stack_0x7C.x;
+                        stack_0x60.y = stack_0x20 * cross.y;
+                        stack_0x60.z = stack_0x20 * cross.z + stack_0x24 * stack_0x7C.z;
                         
                         math::VEC3 stack_0x54;
-                        stack_0x54.mCoords.x = stack_0x24 * cross.mCoords.x - stack_0x20 * stack_0x7C.mCoords.x;
-                        stack_0x54.mCoords.y = stack_0x24 * cross.mCoords.y;
-                        stack_0x54.mCoords.z = stack_0x24 * cross.mCoords.z - stack_0x20 * stack_0x7C.mCoords.z;
+                        stack_0x54.x = stack_0x24 * cross.x - stack_0x20 * stack_0x7C.x;
+                        stack_0x54.y = stack_0x24 * cross.y;
+                        stack_0x54.z = stack_0x24 * cross.z - stack_0x20 * stack_0x7C.z;
 
-                        rCamData.mCamMtx[0][0] = stack_0x60.mCoords.x;
-                        rCamData.mCamMtx[0][1] = stack_0x60.mCoords.y;
-                        rCamData.mCamMtx[0][2] = stack_0x60.mCoords.z;
+                        rCamData.mCamMtx[0][0] = stack_0x60.x;
+                        rCamData.mCamMtx[0][1] = stack_0x60.y;
+                        rCamData.mCamMtx[0][2] = stack_0x60.z;
                         rCamData.mCamMtx[0][3] = -math::VEC3Dot(&rCamData.mPos, &stack_0x60);
 
-                        rCamData.mCamMtx[1][0] = stack_0x54.mCoords.x;
-                        rCamData.mCamMtx[1][1] = stack_0x54.mCoords.y;
-                        rCamData.mCamMtx[1][2] = stack_0x54.mCoords.z;
+                        rCamData.mCamMtx[1][0] = stack_0x54.x;
+                        rCamData.mCamMtx[1][1] = stack_0x54.y;
+                        rCamData.mCamMtx[1][2] = stack_0x54.z;
                         rCamData.mCamMtx[1][3] = -math::VEC3Dot(&rCamData.mPos, &stack_0x54);
 
-                        rCamData.mCamMtx[2][0] = delta.mCoords.x;
-                        rCamData.mCamMtx[2][1] = delta.mCoords.y;
-                        rCamData.mCamMtx[2][2] = delta.mCoords.z;
+                        rCamData.mCamMtx[2][0] = delta.x;
+                        rCamData.mCamMtx[2][1] = delta.y;
+                        rCamData.mCamMtx[2][2] = delta.z;
                         rCamData.mCamMtx[2][3] = -math::VEC3Dot(&rCamData.mPos, &delta);
                     }
                 }
                 else
                 {
                     f32 x1, y1, z1, x2, y2, z2;
-                    math::SinCosDeg(&x1, &x2, rCamData.VEC3_0x98.mCoords.x);
-                    math::SinCosDeg(&y1, &y2, rCamData.VEC3_0x98.mCoords.y);
-                    math::SinCosDeg(&z1, &z2, rCamData.VEC3_0x98.mCoords.z);
+                    math::SinCosDeg(&x1, &x2, rCamData.VEC3_0x98.x);
+                    math::SinCosDeg(&y1, &y2, rCamData.VEC3_0x98.y);
+                    math::SinCosDeg(&z1, &z2, rCamData.VEC3_0x98.z);
 
                     math::VEC3 a;
-                    a.mCoords.x = x1 * y1 * z1 + y2 * z2;
-                    a.mCoords.y = x2 * z1;
-                    a.mCoords.z = x1 * y2 * z1 - y1 * z2;
+                    a.x = x1 * y1 * z1 + y2 * z2;
+                    a.y = x2 * z1;
+                    a.z = x1 * y2 * z1 - y1 * z2;
 
                     math::VEC3 b;
-                    b.mCoords.x = x1 * y1 * z2 - y2 * z1;
-                    b.mCoords.y = x2 * z2;
-                    b.mCoords.z = x1 * y2 * z2 + y1 * z1;
+                    b.x = x1 * y1 * z2 - y2 * z1;
+                    b.y = x2 * z2;
+                    b.z = x1 * y2 * z2 + y1 * z1;
 
                     math::VEC3 c;
-                    c.mCoords.x = x2 * y1;
-                    c.mCoords.y = -x1;
-                    c.mCoords.z = x2 * y2;
+                    c.x = x2 * y1;
+                    c.y = -x1;
+                    c.z = x2 * y2;
 
-                    rCamData.mCamMtx[0][0] = a.mCoords.x; 
-                    rCamData.mCamMtx[0][1] = a.mCoords.y;
-                    rCamData.mCamMtx[0][2] = a.mCoords.z;
+                    rCamData.mCamMtx[0][0] = a.x; 
+                    rCamData.mCamMtx[0][1] = a.y;
+                    rCamData.mCamMtx[0][2] = a.z;
                     rCamData.mCamMtx[0][3] = -math::VEC3Dot(&rCamData.mPos, &a);
 
-                    rCamData.mCamMtx[1][0] = b.mCoords.x;
-                    rCamData.mCamMtx[1][1] = b.mCoords.y;
-                    rCamData.mCamMtx[1][2] = b.mCoords.z;
+                    rCamData.mCamMtx[1][0] = b.x;
+                    rCamData.mCamMtx[1][1] = b.y;
+                    rCamData.mCamMtx[1][2] = b.z;
                     rCamData.mCamMtx[1][3] = -math::VEC3Dot(&rCamData.mPos, &b);
 
-                    rCamData.mCamMtx[2][0] = c.mCoords.x;
-                    rCamData.mCamMtx[2][1] = c.mCoords.y;
-                    rCamData.mCamMtx[2][2] = c.mCoords.z;
+                    rCamData.mCamMtx[2][0] = c.x;
+                    rCamData.mCamMtx[2][1] = c.y;
+                    rCamData.mCamMtx[2][2] = c.z;
                     rCamData.mCamMtx[2][3] = -math::VEC3Dot(&rCamData.mPos, &c);
                 }
             }

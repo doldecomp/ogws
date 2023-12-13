@@ -38,9 +38,9 @@ namespace nw4r
 			WORD_0x4C = 0;
 			mFlags = 0;
 			
-			VEC_0x84.mCoords.x = 0.0f;
-			VEC_0x84.mCoords.y = 0.0f;
-			VEC_0x84.mCoords.z = 0.0f;
+			VEC_0x84.x = 0.0f;
+			VEC_0x84.y = 0.0f;
+			VEC_0x84.z = 0.0f;
 			
 			Emitter * pEmitter = pSystem->GetMemoryManager()->AllocEmitter();
 			

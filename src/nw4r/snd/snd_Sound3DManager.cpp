@@ -4,6 +4,7 @@
 #include "snd_Sound3DManager.h"
 #include "snd_Sound3DListener.h"
 #include "snd_AxManager.h"
+#include "math_triangular.h"
 
 namespace nw4r
 {
@@ -37,9 +38,9 @@ namespace nw4r
 		
 		Sound3DManager::Sound3DManager() :
 			INT_0x10(0x20),
-			FLOAT_0x14(NW4R_PI_F32 / 4),
-			FLOAT_0x18(NW4R_PI_F32 / 6),
-			FLOAT_0x1C(2 * NW4R_PI_F32 / 3),
+			FLOAT_0x14(NW4R_MATH_PI / 4),
+			FLOAT_0x18(NW4R_MATH_PI / 6),
+			FLOAT_0x1C(2 * NW4R_MATH_PI / 3),
 			FLOAT_0x20(0.0f),
 			FLOAT_0x24(0.9f)
 		{
@@ -140,38 +141,38 @@ namespace nw4r
 				VEC3 stack_0x14;
 				if (0.0f == distance)
 				{
-					stack_0x14.mCoords.z = 0.0f;
-					stack_0x14.mCoords.y = 0.0f;
-					stack_0x14.mCoords.x = 0.0f;
+					stack_0x14.z = 0.0f;
+					stack_0x14.y = 0.0f;
+					stack_0x14.x = 0.0f;
 					//goto 80041628
 				}
 				else
 				{
-					VEC3 stack_0x8(stack_0x20.mCoords.x, 0.0f, stack_0x20.mCoords.z);
+					VEC3 stack_0x8(stack_0x20.x, 0.0f, stack_0x20.z);
 					//800415AC
 					/*
-					stack_0x8.mCoords.x = stack_0x20.mCoords.x;
-					stack_0x8.mCoords.y = 0.0f;
-					stack_0x8.mCoords.z = stack_0x20.mCoords.z;
+					stack_0x8.x = stack_0x20.x;
+					stack_0x8.y = 0.0f;
+					stack_0x8.z = stack_0x20.z;
 					*/
 					//800415C4
 					float f1_1 = VEC3Len(&stack_0x8);
 					if (f1_1 > pListener->mInteriorSize)
 					{
-						stack_0x8.mCoords.x *= pListener->mInteriorSize / f1_1;
-						stack_0x8.mCoords.z *= pListener->mInteriorSize / f1_1;
+						stack_0x8.x *= pListener->mInteriorSize / f1_1;
+						stack_0x8.z *= pListener->mInteriorSize / f1_1;
 					}
 					//800415F8
 					float f1_2 = VEC3Len(&stack_0x8);
 					
-					stack_0x14.mCoords.x = stack_0x20.mCoords.x * f1_2 / distance;
-					stack_0x14.mCoords.y = 0.0f;
-					stack_0x14.mCoords.z = stack_0x20.mCoords.z * f1_2 / distance;
+					stack_0x14.x = stack_0x20.x * f1_2 / distance;
+					stack_0x14.y = 0.0f;
+					stack_0x14.z = stack_0x20.z * f1_2 / distance;
 					//80041628
 				}
 				//80041628
 				
-				angle = atan2(stack_0x14.mCoords.x, -stack_0x14.mCoords.z); // at f31
+				angle = atan2(stack_0x14.x, -stack_0x14.z); // at f31
 				
 				f28 = VEC3Len(&stack_0x14) / pListener->mInteriorSize;
 				
@@ -197,23 +198,23 @@ namespace nw4r
 						if (angle < angleRearLeft)
 						{
 							//800416F4
-							f30 = SolveLinerFunction(angle, -NW4R_PI_F32, angleRearLeft, -1.0f, 0.0f);
+							f30 = SolveLinerFunction(angle, -NW4R_MATH_PI, angleRearLeft, -1.0f, 0.0f);
 							//80041730
 							f27 = 1.0f;
 							//goto 800418E8
 						}
-						else if (angle < -NW4R_PI_F32 / 2)
+						else if (angle < -NW4R_MATH_PI / 2)
 						{
 							//80041738
 							f30 = -1.0f;
-							f27 = SolveLinerFunction(angle, angleRearLeft, -NW4R_PI_F32 / 2, 0.0f, 1.0f);
+							f27 = SolveLinerFunction(angle, angleRearLeft, -NW4R_MATH_PI / 2, 0.0f, 1.0f);
 							//goto 800418E8
 						}
 						else if (angle < angleFrontLeft)
 						{
 							//80041780
 							f30 = -1.0f;
-							f27 = SolveLinerFunction(angle, -NW4R_PI_F32 / 2, angleFrontLeft, -1.0f, 0.0f);
+							f27 = SolveLinerFunction(angle, -NW4R_MATH_PI / 2, angleFrontLeft, -1.0f, 0.0f);
 							//goto 800418E8
 						}
 						else if (angle < angleFrontRight)
@@ -224,24 +225,24 @@ namespace nw4r
 							f27 = -1.0f;
 							//goto 800418E8
 						}
-						else if (angle < NW4R_PI_F32 / 2)
+						else if (angle < NW4R_MATH_PI / 2)
 						{
 							//8004181C
 							f30 = 1.0f;
-							f27 = SolveLinerFunction(angle, angleFrontRight, NW4R_PI_F32 / 2, 0.0f, -1.0f);
+							f27 = SolveLinerFunction(angle, angleFrontRight, NW4R_MATH_PI / 2, 0.0f, -1.0f);
 							//goto 800418E8
 						}
 						else if (angle < angleRearRight)
 						{
 							//80041864
 							f30 = 1.0f;
-							f27 = SolveLinerFunction(angle, NW4R_PI_F32 / 2, angleRearRight, 1.0f, 0.0f);
+							f27 = SolveLinerFunction(angle, NW4R_MATH_PI / 2, angleRearRight, 1.0f, 0.0f);
 							//goto 800418E8
 						}
 						else
 						{
 							//800418AC
-							f30 = SolveLinerFunction(angle, angleRearRight, NW4R_PI_F32, 0.0f, 1.0f);
+							f30 = SolveLinerFunction(angle, angleRearRight, NW4R_MATH_PI, 0.0f, 1.0f);
 							//800418E4
 							f27 = 1.0f;
 							//800418E8
@@ -268,15 +269,15 @@ namespace nw4r
 					case OUTPUT_MODE_0:
 					{
 						//8004195C
-						static float angleRearLeft = -NW4R_PI_F32 + FLOAT_0x14; // at 0x804BEAE0
+						static float angleRearLeft = -NW4R_MATH_PI + FLOAT_0x14; // at 0x804BEAE0
 						static float angleFrontLeft = -FLOAT_0x14; // at 0x804BEAE8
 						static float angleFrontRight = FLOAT_0x14; // at 0x804BEAF0
-						static float angleRearRight = NW4R_PI_F32 - FLOAT_0x14; // at 0x804BEAF8
+						static float angleRearRight = NW4R_MATH_PI - FLOAT_0x14; // at 0x804BEAF8
 						//800419E0
 						if (angle < angleRearLeft)
 						{
 							//800419EC
-							f30 = SolveLinerFunction(angle, -NW4R_PI_F32, angleRearLeft, -1.0f, 0.0f);
+							f30 = SolveLinerFunction(angle, -NW4R_MATH_PI, angleRearLeft, -1.0f, 0.0f);
 							f27 = 1.0f;
 							//goto 80041B54
 						}
@@ -304,7 +305,7 @@ namespace nw4r
 						else
 						{
 							//80041B18
-							f30 = SolveLinerFunction(angle, angleRearRight, NW4R_PI_F32, 0.0f, 1.0f);
+							f30 = SolveLinerFunction(angle, angleRearRight, NW4R_MATH_PI, 0.0f, 1.0f);
 							f27 = 1.0f;
 							//80041B54
 						}

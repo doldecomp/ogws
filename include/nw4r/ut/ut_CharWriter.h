@@ -98,12 +98,12 @@ namespace nw4r
 			
 			inline float GetFixedWidth() const { return mFixedWidth; }
 			inline bool IsWidthFixed() const { return mWidthFixedFlag; }
-			inline void SetCursorX(float x) { mCursor.mCoords.x = x; }
-			inline void SetCursorY(float y) { mCursor.mCoords.y = y; }
-			inline void MoveCursorX(float x) { mCursor.mCoords.x += x; }
-			inline void MoveCursorY(float y) { mCursor.mCoords.y += y; }
-			inline float GetCursorX() const { return mCursor.mCoords.x; }
-			inline float GetCursorY() const { return mCursor.mCoords.y; }
+			inline void SetCursorX(float x) { mCursor.x = x; }
+			inline void SetCursorY(float y) { mCursor.y = y; }
+			inline void MoveCursorX(float x) { mCursor.x += x; }
+			inline void MoveCursorY(float y) { mCursor.y += y; }
+			inline float GetCursorX() const { return mCursor.x; }
+			inline float GetCursorY() const { return mCursor.y; }
 			
 			void SetupGX();
 			static void SetupGXWithColorMapping(Color, Color);
@@ -113,20 +113,20 @@ namespace nw4r
 			
 			inline void SetScale(float x, float y)
 			{
-				mScale.mCoords.x = x;
-				mScale.mCoords.y = y;
+				mScale.x = x;
+				mScale.y = y;
 			}
 			
 			inline void SetCursor(float x, float y)
 			{
-				mCursor.mCoords.x = x;
-				mCursor.mCoords.y = y;
+				mCursor.x = x;
+				mCursor.y = y;
 			}
 			inline void SetCursor(float x, float y, float z)
 			{
-				mCursor.mCoords.x = x;
-				mCursor.mCoords.y = y;
-				mCursor.mCoords.z = z;
+				mCursor.x = x;
+				mCursor.y = y;
+				mCursor.z = z;
 			}
 			
 			inline void ResetColorMapping()
