@@ -53,7 +53,7 @@ NW4R_O_FILES := \
 	build/asm/nw4r/nw4r_8002F700.o \
 	\
 	build/nw4r/math/math_arithmetic.o \
-	build/asm/nw4r/math/math_triangular.o \
+	build/nw4r/math/math_triangular.o \
 	build/nw4r/math/math_types.o \
 	build/asm/nw4r/math/math_geometry.o \
 	\
