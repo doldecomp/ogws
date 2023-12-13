@@ -2,9 +2,6 @@
 #define NW4R_UT_BINARY_FILE_FORMAT_H
 #include <nw4r/types_nw4r.h>
 
-#define NW4R_BYTEORDER_BIG 0xFEFF
-#define NW4R_BYTEORDER_LITTLE 0xFFFE
-
 namespace nw4r {
 namespace ut {
 

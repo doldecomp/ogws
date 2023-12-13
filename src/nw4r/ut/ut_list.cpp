@@ -6,7 +6,7 @@ namespace nw4r {
 namespace ut {
 
 #define OBJ_TO_NODE(list, object)                                              \
-    reinterpret_cast<Node*>((std::uintptr_t)object + list->offset)
+    reinterpret_cast<Node*>((char*)object + list->offset)
 
 void List_Init(List* list, u16 offset) {
     list->first = NULL;

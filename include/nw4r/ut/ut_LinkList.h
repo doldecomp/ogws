@@ -289,15 +289,16 @@ public:
     }
 
     static LinkListNode* GetNodeFromPointer(T* p) {
-        return reinterpret_cast<LinkListNode*>((std::uintptr_t)p + Ofs);
+        return reinterpret_cast<LinkListNode*>(reinterpret_cast<char*>(p) +
+                                               Ofs);
     }
 
     static T* GetPointerFromNode(LinkListNode* node) {
-        return reinterpret_cast<T*>((std::uintptr_t)node - Ofs);
+        return reinterpret_cast<T*>(reinterpret_cast<char*>(node) - Ofs);
     }
 
     static const T* GetPointerFromNode(const LinkListNode* node) {
-        return reinterpret_cast<T*>((std::uintptr_t)node - Ofs);
+        return reinterpret_cast<T*>(reinterpret_cast<char*>(node) - Ofs);
     }
 };
 

@@ -99,11 +99,6 @@ namespace nw4r
                 pChild->mParent = this;
             }
 
-            inline bool IsVisible()
-            {
-                return ut::TestBit<u8>(mFlags, VISIBLE);
-            }
-
             Pane(const res::Pane *);
             virtual ~Pane(); // at 0x8
             virtual const ut::detail::RuntimeTypeInfo * GetRuntimeTypeInfo() const; // at 0xC

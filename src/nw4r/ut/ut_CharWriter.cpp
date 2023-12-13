@@ -180,12 +180,12 @@ namespace nw4r
 			if (mWidthFixedFlag)
 			{
 				ret = mFixedWidth;
-				xOfs = (ret - glyph.BYTE_0x6 * mScale.mCoords.x) / 2 + (glyph.BYTE_0x4 * mScale.mCoords.x);
+				xOfs = (ret - glyph.widths.charWidth * mScale.mCoords.x) / 2 + (glyph.widths.leftSpacing * mScale.mCoords.x);
 			}
 			else
 			{
-				ret = glyph.BYTE_0x6 * mScale.mCoords.x;
-				xOfs = glyph.BYTE_0x4 * mScale.mCoords.x;
+				ret = glyph.widths.charWidth * mScale.mCoords.x;
+				xOfs = glyph.widths.leftSpacing * mScale.mCoords.x;
 			}
 			
 			PrintGlyph(mCursor.mCoords.x + xOfs, mCursor.mCoords.y, mCursor.mCoords.z, glyph);
@@ -200,13 +200,13 @@ namespace nw4r
 			LoadingTexture loadingTexture;
 			
 			loadingTexture.slot = GX_TEXMAP0;
-			loadingTexture.texture = glyph.PTR_0x0;//r0
+			loadingTexture.texture = glyph.texture;//r0
 			loadingTexture.filter = mFilter;
 			
 			if (loadingTexture != mLoadingTexture)
 			{
-				GXInitTexObj(&texObj, glyph.PTR_0x0, glyph.SHORT_0xC, glyph.SHORT_0xE,
-					(GXTexFmt)glyph.WORD_0x8, GX_CLAMP, GX_CLAMP, 0);
+				GXInitTexObj(&texObj, glyph.texture, glyph.texWidth, glyph.texHeight,
+					(GXTexFmt)glyph.format, GX_CLAMP, GX_CLAMP, 0);
 				GXInitTexObjLOD(&texObj, mFilter.atSmall, mFilter.atLarge,
 					0.0f, 0.0f, 0.0f, 0, 0, GX_ANISO_1);
 				GXLoadTexObj(&texObj, GX_TEXMAP0);
@@ -229,20 +229,20 @@ namespace nw4r
 			float x2;
 			float y2;
 			
-			x2 = x + (glyph.cellWidth * mScale.mCoords.x);
-			y2 = y + (glyph.cellHeight * mScale.mCoords.y);
+			x2 = x + (glyph.widths.glyphWidth * mScale.mCoords.x);
+			y2 = y + (glyph.height * mScale.mCoords.y);
 			
-			left = glyph.SHORT_0x10;
-			normLeft = 0x8000 * left / glyph.SHORT_0xC;
+			left = glyph.cellX;
+			normLeft = 0x8000 * left / glyph.texWidth;
 			
-			top = glyph.SHORT_0x12;
-			normTop = 0x8000 * top / glyph.SHORT_0xE;
+			top = glyph.cellY;
+			normTop = 0x8000 * top / glyph.texHeight;
 			
-			right = left + glyph.cellWidth;
-			normRight = 0x8000 * right / glyph.SHORT_0xC;
+			right = left + glyph.widths.glyphWidth;
+			normRight = 0x8000 * right / glyph.texWidth;
 			
-			bottom = top + glyph.cellHeight;
-			normBottom = 0x8000 * bottom / glyph.SHORT_0xE;
+			bottom = top + glyph.height;
+			normBottom = 0x8000 * bottom / glyph.texHeight;
 			
 			LoadTexture(glyph);
 			

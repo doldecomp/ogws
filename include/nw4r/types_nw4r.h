@@ -1,12 +1,18 @@
-#ifndef TYPES_NW4R_H
-#define TYPES_NW4R_H
+#ifndef NW4R_TYPES_H
+#define NW4R_TYPES_H
 #include <types.h>
+
+#define NW4R_BYTEORDER_BIG 0xFEFF
+#define NW4R_BYTEORDER_LITTLE 0xFFFE
+
+#define NW4R_VERSION(major, minor) ((major & 0xFF) << 8 | minor & 0xFF)
 
 namespace nw4r {
 namespace ut {
 namespace detail {
 
 struct RuntimeTypeInfo;
+struct ResFontBase;
 
 } // namespace detail
 
@@ -14,10 +20,14 @@ struct BinaryBlockHeader;
 struct BinaryFileHeader;
 struct CharStrmReader;
 struct FileStream;
+struct Font;
+struct Glyph;
 struct IOStream;
 template <typename T, int Ofs> struct LinkList;
 struct List;
 struct NandFileStream;
+struct ResFont;
+struct RomFont;
 
 } // namespace ut
 } // namespace nw4r
