@@ -278,12 +278,12 @@ MTX34* MTX34Trans(register MTX34* out, register const MTX34* in,
     return out;
 }
 
-MTX34* MTX34RotAxisFIdx(MTX34* out, const VEC3* axis, f32 fidx) {
-    PSMTXRotAxisRad(*out, *axis, NW4R_MATH_FIDX_TO_RAD(fidx));
-    return out;
+MTX34* MTX34RotAxisFIdx(MTX34* mtx, const VEC3* axis, f32 fidx) {
+    PSMTXRotAxisRad(*mtx, *axis, NW4R_MATH_FIDX_TO_RAD(fidx));
+    return mtx;
 }
 
-MTX34* MTX34RotXYZFIdx(MTX34* out, f32 fx, f32 fy, f32 fz) {
+MTX34* MTX34RotXYZFIdx(MTX34* mtx, f32 fx, f32 fy, f32 fz) {
     f32 sx, cx;
     SinCosFIdx(&sx, &cx, fx);
     f32 sy, cy;
@@ -291,27 +291,27 @@ MTX34* MTX34RotXYZFIdx(MTX34* out, f32 fx, f32 fy, f32 fz) {
     f32 sz, cz;
     SinCosFIdx(&sz, &cz, fz);
 
-    out->_20 = -sy;
-    out->_00 = cz * cy;
-    out->_10 = sz * cy;
-    out->_21 = cy * sx;
-    out->_22 = cy * cx;
+    mtx->_20 = -sy;
+    mtx->_00 = cz * cy;
+    mtx->_10 = sz * cy;
+    mtx->_21 = cy * sx;
+    mtx->_22 = cy * cx;
 
     const f32 cx_sz = cx * sz;
     const f32 sx_cz = sx * cz;
-    out->_01 = sx_cz * sy - cx_sz;
-    out->_12 = cx_sz * sy - sx_cz;
+    mtx->_01 = sx_cz * sy - cx_sz;
+    mtx->_12 = cx_sz * sy - sx_cz;
 
     const f32 sx_sz = sx * sz;
     const f32 cx_cz = cx * cz;
-    out->_02 = cx_cz * sy + sx_sz;
-    out->_11 = sx_sz * sy + cx_cz;
+    mtx->_02 = cx_cz * sy + sx_sz;
+    mtx->_11 = sx_sz * sy + cx_cz;
 
-    out->_03 = 0.0f;
-    out->_13 = 0.0f;
-    out->_23 = 0.0f;
+    mtx->_03 = 0.0f;
+    mtx->_13 = 0.0f;
+    mtx->_23 = 0.0f;
 
-    return out;
+    return mtx;
 }
 
 VEC3* VEC3TransformNormal(VEC3* out, const MTX34* mtx, const VEC3* vec) {

@@ -1,6 +1,7 @@
 #ifndef NW4R_MATH_TYPES_H
 #define NW4R_MATH_TYPES_H
 #include <nw4r/math/math_arithmetic.h>
+#include <nw4r/math/math_triangular.h>
 #include <nw4r/types_nw4r.h>
 #include <revolution/MTX.h>
 
@@ -261,6 +262,10 @@ inline f32 VEC2Len(const VEC2* vec) {
  * VEC3 functions
  *
  ******************************************************************************/
+VEC3* VEC3Maximize(VEC3* out, const VEC3* a, const VEC3* b);
+VEC3* VEC3Minimize(VEC3* out, const VEC3* a, const VEC3* b);
+VEC3* VEC3TransformNormal(VEC3* out, const MTX34* mtx, const VEC3* vec);
+
 inline VEC3* VEC3Add(register VEC3* out, register const VEC3* a,
                      register const VEC3* b) {
     register f32 work0, work1, work2;
@@ -278,50 +283,6 @@ inline VEC3* VEC3Add(register VEC3* out, register const VEC3* a,
         psq_l  work1, VEC3.z(b),   1, 0
         ps_add work2, work0, work1
         psq_st work2, VEC3.z(out), 1, 0
-    }
-    // clang-format on
-
-    return out;
-}
-
-inline VEC3* VEC3Sub(register VEC3* out, register const VEC3* a,
-                     register const VEC3* b) {
-    register f32 work0, work1, work2;
-
-    // clang-format off
-    asm {
-        // Sub XY
-        psq_l  work0, VEC3.x(a),   0, 0
-        psq_l  work1, VEC3.x(b),   0, 0
-        ps_sub work2, work0, work1
-        psq_st work2, VEC3.x(out), 0, 0
-        
-        // Sub Z
-        psq_l  work0, VEC3.z(a),   1, 0
-        psq_l  work1, VEC3.z(b),   1, 0
-        ps_sub work2, work0, work1
-        psq_st work2, VEC3.z(out), 1, 0
-    }
-    // clang-format on
-
-    return out;
-}
-
-inline VEC3* VEC3Scale(register VEC3* out, register const VEC3* in,
-                       register f32 scale) {
-    register f32 work0, work1;
-
-    // clang-format off
-    asm {
-        // Scale XY
-        psq_l    work0, VEC3.x(in),  0, 0
-        ps_muls0 work1, work0, scale
-        psq_st   work1, VEC3.x(out), 0, 0
-
-        // Scale Z
-        psq_l    work0, VEC3.z(in),  1, 0
-        ps_muls0 work1, work0, scale
-        psq_st   work1, VEC3.z(out), 1, 0
     }
     // clang-format on
 
@@ -400,6 +361,50 @@ inline VEC3* VEC3Lerp(register VEC3* out, register const VEC3* vec1,
     return out;
 }
 
+inline VEC3* VEC3Scale(register VEC3* out, register const VEC3* in,
+                       register f32 scale) {
+    register f32 work0, work1;
+
+    // clang-format off
+    asm {
+        // Scale XY
+        psq_l    work0, VEC3.x(in),  0, 0
+        ps_muls0 work1, work0, scale
+        psq_st   work1, VEC3.x(out), 0, 0
+
+        // Scale Z
+        psq_l    work0, VEC3.z(in),  1, 0
+        ps_muls0 work1, work0, scale
+        psq_st   work1, VEC3.z(out), 1, 0
+    }
+    // clang-format on
+
+    return out;
+}
+
+inline VEC3* VEC3Sub(register VEC3* out, register const VEC3* a,
+                     register const VEC3* b) {
+    register f32 work0, work1, work2;
+
+    // clang-format off
+    asm {
+        // Sub XY
+        psq_l  work0, VEC3.x(a),   0, 0
+        psq_l  work1, VEC3.x(b),   0, 0
+        ps_sub work2, work0, work1
+        psq_st work2, VEC3.x(out), 0, 0
+        
+        // Sub Z
+        psq_l  work0, VEC3.z(a),   1, 0
+        psq_l  work1, VEC3.z(b),   1, 0
+        ps_sub work2, work0, work1
+        psq_st work2, VEC3.z(out), 1, 0
+    }
+    // clang-format on
+
+    return out;
+}
+
 inline VEC3* VEC3Cross(VEC3* out, const VEC3* a, const VEC3* b) {
     PSVECCrossProduct(*a, *b, *out);
     return out;
@@ -426,10 +431,6 @@ inline VEC3* VEC3TransformCoord(VEC3* out, const MTX34* mtx, const VEC3* vec) {
     return out;
 }
 
-VEC3* VEC3Maximize(VEC3* out, const VEC3* a, const VEC3* b);
-VEC3* VEC3Minimize(VEC3* out, const VEC3* a, const VEC3* b);
-VEC3* VEC3TransformNormal(VEC3* out, const MTX34* mtx, const VEC3* vec);
-
 /******************************************************************************
  *
  * MTX33 functions
@@ -442,6 +443,19 @@ MTX33* MTX33Identity(MTX33* mtx);
  * MTX34 functions
  *
  ******************************************************************************/
+MTX33* MTX34ToMTX33(MTX33* out, const MTX34* in);
+bool MTX34InvTranspose(MTX33* out, const MTX34* in);
+MTX34* MTX34Zero(MTX34* mtx);
+MTX34* MTX34Scale(MTX34* out, const MTX34* in, const VEC3* scale);
+MTX34* MTX34Trans(MTX34* out, const MTX34* in, const VEC3* trans);
+MTX34* MTX34RotAxisFIdx(MTX34* mtx, const VEC3* axis, f32 fidx);
+MTX34* MTX34RotXYZFIdx(MTX34* mtx, f32 fx, f32 fy, f32 fz);
+
+inline MTX34* MTX34Copy(MTX34* out, const MTX34* in) {
+    PSMTXCopy(*in, *out);
+    return out;
+}
+
 inline MTX34* MTX34Identity(MTX34* mtx) {
     PSMTXIdentity(*mtx);
     return mtx;
@@ -452,14 +466,37 @@ inline MTX34* MTX34Inv(MTX34* out, const MTX34* in) {
     return out;
 }
 
-inline MTX34* MTX34Copy(MTX34* out, const MTX34* in) {
-    PSMTXCopy(*in, *out);
-    return out;
+inline MTX34* MTX34LookAt(MTX34* mtx, const VEC3* pos, const VEC3* up,
+                          const VEC3* target) {
+    C_MTXLookAt(*mtx, *pos, *up, *target);
+    return mtx;
 }
 
 inline MTX34* MTX34Mult(MTX34* out, const MTX34* a, const MTX34* b) {
     PSMTXConcat(*a, *b, *out);
     return out;
+}
+
+inline MTX34* MTX34MultArray(MTX34* out, const MTX34* p1, const MTX34* src,
+                             u32 len) {
+    PSMTXConcatArray(*p1, *src, *out, len);
+    return out;
+}
+
+inline MTX34* MTX34RotAxisRad(MTX34* out, const VEC3* axis, f32 frad) {
+    return MTX34RotAxisFIdx(out, axis, NW4R_MATH_RAD_TO_FIDX(frad));
+}
+
+inline MTX34* MTX34RotXYZDeg(MTX34* mtx, f32 dx, f32 dy, f32 dz) {
+    return MTX34RotXYZFIdx(mtx, NW4R_MATH_DEG_TO_FIDX(dx),
+                           NW4R_MATH_DEG_TO_FIDX(dy),
+                           NW4R_MATH_DEG_TO_FIDX(dz));
+}
+
+inline MTX34* MTX34RotXYZRad(MTX34* mtx, f32 rx, f32 ry, f32 rz) {
+    return MTX34RotXYZFIdx(mtx, NW4R_MATH_RAD_TO_FIDX(rx),
+                           NW4R_MATH_RAD_TO_FIDX(ry),
+                           NW4R_MATH_RAD_TO_FIDX(rz));
 }
 
 inline MTX34* MTX34Scale(MTX34* out, const VEC3* scale, const MTX34* in) {
@@ -472,13 +509,10 @@ inline QUAT* MTX34ToQUAT(QUAT* quat, const MTX34* mtx) {
     return quat;
 }
 
-MTX33* MTX34ToMTX33(MTX33* out, const MTX34* in);
-bool MTX34InvTranspose(MTX33* out, const MTX34* in);
-MTX34* MTX34Zero(MTX34* mtx);
-MTX34* MTX34Scale(MTX34* out, const MTX34* in, const VEC3* scale);
-MTX34* MTX34Trans(MTX34* out, const MTX34* in, const VEC3* trans);
-MTX34* MTX34RotAxisFIdx(MTX34* out, const VEC3* axis, f32 fidx);
-MTX34* MTX34RotXYZFIdx(MTX34* out, f32 fx, f32 fy, f32 fz);
+inline MTX34* MTX34Trans(MTX34* out, const VEC3* trans, const MTX34* in) {
+    PSMTXTransApply(*in, *out, trans->x, trans->y, trans->z);
+    return out;
+}
 
 /******************************************************************************
  *
