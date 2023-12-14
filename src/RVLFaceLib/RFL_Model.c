@@ -3,13 +3,13 @@
 #include <string.h>
 
 #define NUM_VTX_POS(size) ((size) / VTX_POS_SIZE)
-#define SIZE_VTX_POS(count) ((count)*VTX_POS_SIZE)
+#define SIZE_VTX_POS(count) ((count) * VTX_POS_SIZE)
 
 #define NUM_VTX_NRM(size) ((size) / VTX_NRM_SIZE)
-#define SIZE_VTX_NRM(count) ((count)*VTX_NRM_SIZE)
+#define SIZE_VTX_NRM(count) ((count) * VTX_NRM_SIZE)
 
 #define NUM_VTX_TXC(size) ((size) / VTX_TXC_SIZE)
-#define SIZE_VTX_TXC(count) ((count)*VTX_TXC_SIZE)
+#define SIZE_VTX_TXC(count) ((count) * VTX_TXC_SIZE)
 
 RFLiCoordinateData coordinateData = {1, 2, 0, FALSE, FALSE, FALSE};
 
@@ -323,9 +323,9 @@ void RFLLoadDrawSetting(const RFLDrawSetting* setting) {
         RFLLoadVertexSetting(&cDefaultDrawCoreSetting2Tev);
         GXSetNumChans(1);
 
-        GXSetChanCtrl(GX_COLOR0, 1, GX_SRC_REG, GX_SRC_REG, setting->lightMask,
-                      setting->diffuse, setting->attn);
-        GXSetChanCtrl(GX_ALPHA0, 0, GX_SRC_REG, GX_SRC_REG, GX_LIGHT_NULL,
+        GXSetChanCtrl(GX_COLOR0, TRUE, GX_SRC_REG, GX_SRC_REG,
+                      setting->lightMask, setting->diffuse, setting->attn);
+        GXSetChanCtrl(GX_ALPHA0, FALSE, GX_SRC_REG, GX_SRC_REG, GX_LIGHT_NULL,
                       GX_DF_NONE, GX_AF_NONE);
         GXSetChanAmbColor(GX_COLOR0, setting->ambColor);
         GXSetChanMatColor(GX_COLOR0, cWhite);

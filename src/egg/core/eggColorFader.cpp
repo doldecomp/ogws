@@ -151,7 +151,7 @@ namespace EGG
         __GXSetIndirectMask(0);
 
         GXSetNumTevStages(1);
-        GXSetTevOp(GX_TEVSTAGE0, 4);
+        GXSetTevOp(GX_TEVSTAGE0, GX_BLEND);
         GXSetTevOrder(GX_TEVSTAGE0, GX_TEXCOORD_NULL, GX_TEXMAP_NULL, GX_COLOR0A0);
 
         if (mColor.a == 255)

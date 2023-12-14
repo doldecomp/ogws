@@ -303,7 +303,7 @@ typedef enum _GXFogType {
 
 // Access components of the fog type
 #define GX_FOG_GET_PROJ(x) ((x) >> 3 & 1)
-#define GX_FOG_GET_FSEL(x) ((x)&7)
+#define GX_FOG_GET_FSEL(x) ((x) & 7)
 
 typedef enum _GXIndTexAlphaSel {
     GX_ITBA_OFF,
@@ -674,6 +674,14 @@ typedef enum _GXTevKColorSel {
     GX_TEV_KCSEL_K3_A
 } GXTevKColorSel;
 
+typedef enum _GXTevMode {
+    GX_MODULATE,
+    GX_DECAL,
+    GX_REPLACE,
+    GX_PASSCLR,
+    GX_BLEND
+} GXTevMode;
+
 typedef enum _GXTexCoordID {
     GX_TEXCOORD0,
     GX_TEXCOORD1,
@@ -840,7 +848,7 @@ typedef enum _GXTlutFmt {
 } GXTlutFmt;
 
 typedef enum _GXVtxFmt {
-    GX_VTXFMT0, // from patent
+    GX_VTXFMT0,
     GX_VTXFMT1,
     GX_VTXFMT2,
     GX_VTXFMT3,
@@ -849,15 +857,24 @@ typedef enum _GXVtxFmt {
     GX_VTXFMT6,
     GX_VTXFMT7,
 
-    GX_MAX_VTXFMT,
+    GX_MAX_VTXFMT
 } GXVtxFmt;
 
-typedef enum _GXZFmt {
-    GX_ZC_LINEAR, // from patent
-    GX_ZC_NEAR,   // from Dolphin
-    GX_ZC_MID,    // from Dolphin
-    GX_ZC_FAR,    // from Dolphin
-} GXZFmt;
+typedef enum _GXZFmt16 {
+    GX_ZC_LINEAR,
+    GX_ZC_NEAR,
+    GX_ZC_MID,
+    GX_ZC_FAR,
+} GXZFmt16;
+
+// From patent
+typedef enum _GXZTexOp {
+    GX_ZT_DISABLE,
+    GX_ZT_ADD,
+    GZ_ZT_REPLACE,
+
+    GX_MAX_ZTEXOP
+} GXZTexOp;
 
 #ifdef __cplusplus
 }

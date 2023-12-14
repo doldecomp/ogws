@@ -369,7 +369,7 @@ namespace EGG
             && (s_pixFormatCurrent != fmt || sCurrentPixelFormatArg2 != arg2)
             || ((sStateFlags & VALID_CACHE) == 0))
         {
-            GXSetPixelFmt(fmt, (GXZFmt)arg2);
+            GXSetPixelFmt(fmt, (GXZFmt16)arg2);
             GXSetColorUpdate(sCache.colorUpdate);
             GXSetAlphaUpdate(sCache.alphaUpdate);
         }

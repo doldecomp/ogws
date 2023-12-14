@@ -186,7 +186,7 @@ void GXSetZCompLoc(GXBool beforeTex) {
     gxdt->lastWriteWasXF = FALSE;
 }
 
-void GXSetPixelFmt(GXPixelFmt pixelFmt, GXZFmt zFmt) {
+void GXSetPixelFmt(GXPixelFmt pixelFmt, GXZFmt16 zFmt) {
     static u32 p2f[GX_MAX_PIXELFMT] = {
         GX_PF_RGB8_Z24, GX_PF_RGBA6_Z24, GX_PF_RGBA565_Z16, GX_PF_Z24,
         GX_PF_Y8,       GX_PF_Y8,        GX_PF_Y8,          GX_PF_U8};

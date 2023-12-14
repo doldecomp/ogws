@@ -181,7 +181,7 @@ namespace EGG
         GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_ZERO, GX_CA_ZERO, GX_CA_ZERO, GX_CA_A0);
         GXSetTevAlphaOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, 1, GX_TEVPREV);
         GXSetAlphaCompare(GX_ALWAYS, 0, GX_AOP_OR, GX_ALWAYS, 0);
-        GXSetZTexture(2, 22, 0);
+        GXSetZTexture(GZ_ZT_REPLACE, GX_TF_Z24X8, 0);
         GXSetZCompLoc(0);
         GXSetBlendMode(GX_BM_NONE, GX_BL_ZERO, GX_BL_ZERO, GX_LO_NOOP);
         GXSetAlphaUpdate(1);
@@ -210,7 +210,7 @@ namespace EGG
         GXCmd1u8(1);
         GXEnd();
 
-        GXSetZTexture(0, 22, 0);
+        GXSetZTexture(GX_ZT_DISABLE, GX_TF_Z24X8, 0);
         GXSetZCompLoc(1);
         GXSetDstAlpha(0, color.a);
     }

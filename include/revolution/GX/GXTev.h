@@ -6,14 +6,14 @@
 extern "C" {
 #endif
 
-void GXSetTevOp(GXTevStageID, UNKWORD);
+void GXSetTevOp(GXTevStageID, GXTevMode);
 void GXSetTevColorIn(GXTevStageID, GXTevColorArg, GXTevColorArg, GXTevColorArg,
                      GXTevColorArg);
 void GXSetTevAlphaIn(GXTevStageID, GXTevAlphaArg, GXTevAlphaArg, GXTevAlphaArg,
                      GXTevAlphaArg);
-void GXSetTevColorOp(GXTevStageID, GXTevOp, GXTevBias, GXTevScale, u8,
+void GXSetTevColorOp(GXTevStageID, GXTevOp, GXTevBias, GXTevScale, GXBool,
                      GXTevRegID);
-void GXSetTevAlphaOp(GXTevStageID, GXTevOp, GXTevBias, GXTevScale, u8,
+void GXSetTevAlphaOp(GXTevStageID, GXTevOp, GXTevBias, GXTevScale, GXBool,
                      GXTevRegID);
 
 void GXSetTevColor(GXTevRegID, GXColor);
@@ -26,7 +26,7 @@ void GXSetTevSwapModeTable(GXTevSwapSel, GXTevColorChan, GXTevColorChan,
                            GXTevColorChan, GXTevColorChan);
 
 void GXSetAlphaCompare(GXCompare, u8, GXAlphaOp, GXCompare, u8);
-void GXSetZTexture(UNKWORD, UNKWORD, UNKWORD);
+void GXSetZTexture(GXZTexOp, GXTexFmt, u32);
 void GXSetTevOrder(GXTevStageID, GXTexCoordID, GXTexMapID, GXChannelID);
 void GXSetNumTevStages(u8);
 

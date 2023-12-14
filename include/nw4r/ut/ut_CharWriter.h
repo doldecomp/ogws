@@ -1,155 +1,162 @@
-#ifndef NW4R_UT_CHAR_WRITER_BASE
-#define NW4R_UT_CHAR_WRITER_BASE
-#include "types_nw4r.h"
-#include "math_types.h"
-#include "ut_Color.h"
-#include "ut_Font.h"
+#ifndef NW4R_UT_CHAR_WRITER_H
+#define NW4R_UT_CHAR_WRITER_H
+#include <nw4r/math.h>
+#include <nw4r/types_nw4r.h>
+#include <nw4r/ut/ut_Color.h>
+#include <revolution/GX.h>
 
-namespace nw4r
-{
-	namespace ut
-	{
-		// TODO: Implement the object accurately
-		struct CharWriter
-		{
-			enum GradationMode { GRADMODE_NONE, GRADMODE_H, GRADMODE_V };
+namespace nw4r {
+namespace ut {
 
-			struct ColorMapping
-			{
-				Color COLOR_0x0;
-				Color COLOR_0x4;
-			};
-			
-			struct VertexColor
-			{
-				Color mTopLeft;
-				Color mTopRight;
-				Color mBottomLeft;
-				Color mBottomRight;
-			};
-			
-			struct TextureFilter {
-				GXTexFilter atSmall; // at 0x0
-				GXTexFilter atLarge; // at 0x4
+class CharWriter {
+public:
+    enum GradationMode { GRADMODE_NONE, GRADMODE_H, GRADMODE_V };
 
-				bool operator!=(const TextureFilter& other) const {
-					return atSmall != other.atSmall || atLarge != other.atLarge;
-				}
-			};
-			
-			struct LoadingTexture {
-				GXTexMapID slot; // at 0x0
-				void* texture;   // at 0x4
-				TextureFilter filter;
+    struct ColorMapping {
+        Color min; // at 0x0
+        Color max; // at 0x4
+    };
 
-				bool operator!=(const LoadingTexture& other) const {
-					return slot != other.slot || texture != other.texture ||
-						filter != other.filter;
-				}
+    struct VertexColor {
+        Color tl; // at 0x0
+        Color tr; // at 0x4
+        Color bl; // at 0x8
+        Color br; // at 0xC
+    };
 
-				void Reset() {
-					slot = GX_TEXMAP_NULL;
-					texture = NULL;
-				}
-			};
-			
-			struct TextColor {
-				Color start;            // at 0x0
-				Color end;              // at 0x4
-				GradationMode gradMode; // at 0x8
-			};
-			
-			static LoadingTexture mLoadingTexture;
-			
-			ColorMapping mColorMapping; // at 0x0		
-			VertexColor mVertexColor; // at 0x8
-			TextColor mTextColor; // at 0x18
-			math::VEC2 mScale; // at 0x24
-			math::VEC3 mCursor; // at 0x2c
-			TextureFilter mFilter; // at 0x38
-			u8 BYTE_0x40;
-			u8 BYTE_0x41;
-			u8 BYTE_0x42;
-			bool mWidthFixedFlag;
-			float mFixedWidth;
-			Font * mFont; // at 0x48
-			
-			CharWriter();
-			~CharWriter();
-			
-			void SetColorMapping(Color, Color);
-			void SetTextColor(Color);
-			
-			void UpdateVertexColor();
-			
-			float GetFontWidth() const;
-			float GetFontHeight() const;
-			
-			float GetFontAscent() const;
-			float GetFontDescent() const;
-			
-			void EnableLinearFilter(bool, bool);
-			
-			float Print(u16);
-			
-			void LoadTexture(const Glyph &);//inlined
-			
-			void PrintGlyph(float, float, float, const Glyph &);
-			
-			inline float GetFixedWidth() const { return mFixedWidth; }
-			inline bool IsWidthFixed() const { return mWidthFixedFlag; }
-			inline void SetCursorX(float x) { mCursor.x = x; }
-			inline void SetCursorY(float y) { mCursor.y = y; }
-			inline void MoveCursorX(float x) { mCursor.x += x; }
-			inline void MoveCursorY(float y) { mCursor.y += y; }
-			inline float GetCursorX() const { return mCursor.x; }
-			inline float GetCursorY() const { return mCursor.y; }
-			
-			void SetupGX();
-			static void SetupGXWithColorMapping(Color, Color);
-			void SetupGXDefault(); //inlined
-			
-			void SetFontSize(float, float);
-			
-			inline void SetScale(float x, float y)
-			{
-				mScale.x = x;
-				mScale.y = y;
-			}
-			
-			inline void SetCursor(float x, float y)
-			{
-				mCursor.x = x;
-				mCursor.y = y;
-			}
-			inline void SetCursor(float x, float y, float z)
-			{
-				mCursor.x = x;
-				mCursor.y = y;
-				mCursor.z = z;
-			}
-			
-			inline void ResetColorMapping()
-			{
-				SetColorMapping(Color(0), Color());
-			}
-			
-			inline void SetGradationMode(GradationMode gradationMode)
-			{
-				mTextColor.gradMode = gradationMode;
-				
-				mVertexColor.mTopLeft = mTextColor.start;
-				mVertexColor.mTopRight = (mTextColor.gradMode != GRADMODE_H) ? mTextColor.start : mTextColor.end;
-				mVertexColor.mBottomLeft = (mTextColor.gradMode != GRADMODE_V) ? mTextColor.start : mTextColor.end;
-				mVertexColor.mBottomRight = (mTextColor.gradMode == GRADMODE_NONE) ? mTextColor.start : mTextColor.end;
-				
-				mVertexColor.mTopLeft.a = (mVertexColor.mTopLeft.a * BYTE_0x42) / 0xFF,
-				mVertexColor.mTopRight.a = (mVertexColor.mTopRight.a * BYTE_0x42) / 0xFF;
-				mVertexColor.mBottomLeft.a = (mVertexColor.mBottomLeft.a * BYTE_0x42) / 0xFF;
-				mVertexColor.mBottomRight.a = (mVertexColor.mBottomRight.a * BYTE_0x42) / 0xFF;
-			}
-		};
-	}
-}
+    struct TextColor {
+        Color start;            // at 0x0
+        Color end;              // at 0x4
+        GradationMode gradMode; // at 0x8
+    };
+
+    struct TextureFilter {
+        GXTexFilter atSmall; // at 0x0
+        GXTexFilter atLarge; // at 0x4
+
+        bool operator!=(const TextureFilter& other) const {
+            return atSmall != other.atSmall || atLarge != other.atLarge;
+        }
+    };
+
+    struct LoadingTexture {
+        GXTexMapID slot;      // at 0x0
+        void* texture;        // at 0x4
+        TextureFilter filter; // at 0x8
+
+        bool operator!=(const LoadingTexture& other) const {
+            return slot != other.slot || texture != other.texture ||
+                   filter != other.filter;
+        }
+
+        void Reset() {
+            slot = GX_TEXMAP_NULL;
+            texture = NULL;
+        }
+    };
+
+public:
+    static void SetupVertexFormat();
+    static void SetupGXDefault();
+    static void SetupGXWithColorMapping(Color min, Color max);
+    static void SetupGXForI();
+    static void SetupGXForRGBA();
+
+    CharWriter();
+    ~CharWriter();
+
+    void SetColorMapping(Color min, Color max) {
+        mColorMapping.min = min;
+        mColorMapping.max = max;
+    }
+
+    void ResetColorMapping() {
+        SetColorMapping(Color(0x00000000), Color(0xFFFFFFFF));
+    }
+
+    void SetTextColor(Color start) {
+        mTextColor.start = start;
+        UpdateVertexColor();
+    }
+
+    void SetTextColor(Color start, Color end) {
+        mTextColor.start = start;
+        mTextColor.end = end;
+        UpdateVertexColor();
+    }
+
+    void SetGradationMode(GradationMode mode) {
+        mTextColor.gradMode = mode;
+        UpdateVertexColor();
+    }
+
+    f32 GetScaleH() const { return mScale.x; }
+    f32 GetScaleV() const { return mScale.y; }
+
+    void SetScale(f32 x, f32 y) {
+        mScale.x = x;
+        mScale.y = y;
+    }
+
+    f32 GetCursorX() const { return mCursorPos.x; }
+    void SetCursorX(f32 x) { mCursorPos.x = x; }
+
+    f32 GetCursorY() const { return mCursorPos.y; }
+    void SetCursorY(f32 y) { mCursorPos.y = y; }
+
+    void SetCursor(f32 x, f32 y) {
+        mCursorPos.x = x;
+        mCursorPos.y = y;
+    }
+    void SetCursor(f32 x, f32 y, f32 z) {
+        mCursorPos.x = x;
+        mCursorPos.y = y;
+        mCursorPos.z = z;
+    }
+
+    void MoveCursorX(f32 dx) { mCursorPos.x += dx; }
+    void MoveCursorY(f32 dy) { mCursorPos.y += dy; }
+
+    void EnableFixedWidth(bool enable) { mIsWidthFixed = enable; }
+    bool IsWidthFixed() const { return mIsWidthFixed; }
+
+    void SetFixedWidth(f32 width) { mFixedWidth = width; }
+    f32 GetFixedWidth() const { return mFixedWidth; }
+
+    void SetFont(const Font& font) { mFont = &font; }
+    Font* GetFont() const { return const_cast<Font*>(mFont); }
+
+    void ResetTextureCache() { mLoadingTexture.Reset(); }
+
+    void SetupGX();
+    void SetFontSize(f32 width, f32 height);
+    f32 GetFontWidth() const;
+    f32 GetFontHeight() const;
+    f32 GetFontAscent() const;
+    f32 GetFontDescent() const;
+    void EnableLinearFilter(bool atSmall, bool atLarge);
+    f32 Print(u16 ch);
+    void PrintGlyph(f32 x, f32 y, f32 z, const Glyph& glyph);
+    void LoadTexture(const Glyph& glyph, GXTexMapID slot);
+    void UpdateVertexColor();
+
+private:
+    ColorMapping mColorMapping; // at 0x0
+    VertexColor mVertexColor;   // at 0x8
+    TextColor mTextColor;       // at 0x18
+    math::VEC2 mScale;          // at 0x24
+    math::VEC3 mCursorPos;      // at 0x2C
+    TextureFilter mFilter;      // at 0x38
+    u8 padding[2];              // at 0x40
+    u8 mAlpha;                  // at 0x42
+    bool mIsWidthFixed;         // at 0x43
+    f32 mFixedWidth;            // at 0x44
+    const Font* mFont;          // at 0x48
+
+    static LoadingTexture mLoadingTexture;
+};
+
+} // namespace ut
+} // namespace nw4r
 
 #endif
