@@ -55,10 +55,10 @@ namespace nw4r
             MTX34Identity(&mMatrices[MTX_TYPE_WORLD]);
             MTX34Identity(&mMatrices[MTX_TYPE_VIEW]);
 
-            mBounds[BOUNDING_0].VEC3_0x0 = VEC3(0.0f, 0.0f, 0.0f);
-            mBounds[BOUNDING_0].VEC3_0xC = VEC3(0.0f, 0.0f, 0.0f);
-            mBounds[BOUNDING_1].VEC3_0x0 = VEC3(0.0f, 0.0f, 0.0f);
-            mBounds[BOUNDING_1].VEC3_0xC = VEC3(0.0f, 0.0f, 0.0f);
+            mBounds[BOUNDING_0].min = VEC3(0.0f, 0.0f, 0.0f);
+            mBounds[BOUNDING_0].max = VEC3(0.0f, 0.0f, 0.0f);
+            mBounds[BOUNDING_1].min = VEC3(0.0f, 0.0f, 0.0f);
+            mBounds[BOUNDING_1].max = VEC3(0.0f, 0.0f, 0.0f);
         }
 
         ScnObj::~ScnObj()

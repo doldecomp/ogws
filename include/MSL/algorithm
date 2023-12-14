@@ -2,42 +2,44 @@
 #define MSL_CPP_ALGORITHM_H
 #include <iterator>
 
-namespace std
-{
-    template <typename T>
-    inline const T& max(const T& a, const T& b)
-    {
-        return (a < b) ? b : a;
-    }
+namespace std {
 
-    template <typename T>
-    inline const T& min(const T& a, const T& b)
-    {
-        return (b < a) ? b : a;
-    }
-
-    template <typename TPtr, typename T>
-    inline TPtr find(TPtr first, TPtr last, const T& value)
-    {
-        while (first != last && *first != value) {
-            ++first;
-        }
-        return first;
-    }
-
-    template <typename TPtr>
-    inline long distance(TPtr first, TPtr last)
-    {
-        random_access_iterator_tag tag;
-        return __distance(first, last, tag);
-    }
-
-    template <typename TPtr>
-    inline long __distance(TPtr first, TPtr last, random_access_iterator_tag tag)
-    {
-        long dist = (long)last - (long)first;
-        return dist / (long)sizeof(TPtr);
-    }
+template <typename T> inline const T& max(const T& a, const T& b) {
+    return (a < b) ? b : a;
 }
+
+template <typename T> inline const T& min(const T& a, const T& b) {
+    return (b < a) ? b : a;
+}
+
+template <typename TPtr, typename T>
+inline TPtr find(TPtr first, TPtr last, const T& value) {
+    while (first != last && *first != value) {
+        ++first;
+    }
+
+    return first;
+}
+
+template <typename TPtr> inline long distance(TPtr first, TPtr last) {
+    random_access_iterator_tag tag;
+    return __distance(first, last, tag);
+}
+
+template <typename TPtr>
+inline long __distance(TPtr first, TPtr last, random_access_iterator_tag tag) {
+    long dist = reinterpret_cast<long>(last) - reinterpret_cast<long>(first);
+    return dist / static_cast<long>(sizeof(TPtr));
+}
+
+template <typename T> inline T& move(T& x) { return x; }
+
+template <typename T> inline void swap(T& a, T& b) {
+    T tmp = move(a);
+    a = move(b);
+    b = move(tmp);
+}
+
+} // namespace std
 
 #endif

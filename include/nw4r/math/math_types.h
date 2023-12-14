@@ -17,8 +17,7 @@ struct _VEC2 {
     f32 x, y;
 };
 
-class VEC2 : public _VEC2 {
-public:
+struct VEC2 : _VEC2 {
     VEC2() {}
     VEC2(f32 fx, f32 fy) {
         x = fx;
@@ -61,8 +60,7 @@ struct _VEC3 {
     f32 x, y, z;
 };
 
-class VEC3 : public _VEC3 {
-public:
+struct VEC3 : _VEC3 {
     VEC3() {}
     VEC3(f32 fx, f32 fy, f32 fz) {
         x = fx;
@@ -148,8 +146,7 @@ struct _MTX33 {
     };
 };
 
-class MTX33 : public _MTX33 {
-public:
+struct MTX33 : _MTX33 {
     MTX33() {}
 };
 
@@ -173,11 +170,10 @@ struct _MTX34 {
     };
 };
 
-class MTX34 : public _MTX34 {
+struct MTX34 : _MTX34 {
     typedef f32 (*MtxRef)[4];
     typedef const f32 (*MtxRefConst)[4];
 
-public:
     MTX34() {}
 
     // clang-format off
@@ -215,11 +211,10 @@ struct _MTX44 {
     };
 };
 
-class MTX44 : public _MTX44 {
+struct MTX44 : _MTX44 {
     typedef f32 (*Mtx44Ref)[4];
     typedef const f32 (*Mtx44RefConst)[4];
 
-public:
     MTX44() {}
 
     operator Mtx44Ref() { return mtx; }
@@ -236,8 +231,7 @@ struct _QUAT {
     f32 x, y, z, w;
 };
 
-class QUAT : public _QUAT {
-public:
+struct QUAT : _QUAT {
     QUAT() {}
     QUAT(f32 fx, f32 fy, f32 fz, f32 fw) {
         x = fx;
@@ -451,6 +445,11 @@ MTX33* MTX33Identity(MTX33* mtx);
 inline MTX34* MTX34Identity(MTX34* mtx) {
     PSMTXIdentity(*mtx);
     return mtx;
+}
+
+inline MTX34* MTX34Inv(MTX34* out, const MTX34* in) {
+    PSMTXInverse(*in, *out);
+    return out;
 }
 
 inline MTX34* MTX34Copy(MTX34* out, const MTX34* in) {
