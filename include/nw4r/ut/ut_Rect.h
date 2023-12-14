@@ -1,41 +1,52 @@
-#ifndef NW4R_UT_RECT
-#define NW4R_UT_RECT
+#ifndef NW4R_UT_RECT_H
+#define NW4R_UT_RECT_H
+#include <nw4r/math.h>
+#include <nw4r/types_nw4r.h>
 
-namespace nw4r
-{
-	namespace ut
-	{
-		// TODO: Implement the object properly
-		struct Rect
-		{
-			float FLOAT_0x0;
-			float FLOAT_0x4;
-			float FLOAT_0x8;
-			float FLOAT_0xC;
-			
-			inline Rect(float F_0x0, float F_0x4, float F_0x8, float F_0xC)
-				: FLOAT_0x0(F_0x0), FLOAT_0x4(F_0x4),
-				FLOAT_0x8(F_0x8), FLOAT_0xC(F_0xC)
-			{}
-			
-			inline Rect() : FLOAT_0x0(), FLOAT_0x4(), FLOAT_0x8(), FLOAT_0xC() {}
-			
-			inline Rect & operator=(const Rect & other)
-			{
-				FLOAT_0x0 = other.FLOAT_0x0;
-				FLOAT_0x4 = other.FLOAT_0x4;
-				FLOAT_0x8 = other.FLOAT_0x8;
-				FLOAT_0xC = other.FLOAT_0xC;
-				
-				return *this;
-			}
-			
-			inline float GetWidth() const
-			{
-				return FLOAT_0x8 - FLOAT_0x0;
-			}
-		};
-	}
-}
+namespace nw4r {
+namespace ut {
+
+struct Rect {
+    f32 left;   // at 0x0
+    f32 top;    // at 0x4
+    f32 right;  // at 0x8
+    f32 bottom; // at 0xC
+
+    Rect() : left(0.0f), top(0.0f), right(0.0f), bottom(0.0f) {}
+    Rect(f32 l, f32 t, f32 r, f32 b) : left(l), top(t), right(r), bottom(b) {}
+    ~Rect() {}
+
+    void SetWidth(f32 width) { right = left + width; }
+    f32 GetWidth() const { return bottom - top; }
+
+    void SetHeight(f32 height) { bottom = top + height; }
+    f32 GetHeight() const { return right - left; }
+
+    void Normalize() {
+        const f32 l = left;
+        const f32 t = top;
+        const f32 r = right;
+        const f32 b = bottom;
+
+        // min(r, l)
+        left = math::FSelect(r - l, l, r);
+        // max(r, l)
+        right = math::FSelect(r - l, r, l);
+        // min(b, t)
+        top = math::FSelect(b - t, t, b);
+        // max(b, t)
+        bottom = math::FSelect(b - t, b, t);
+    }
+
+    void MoveTo(f32 x, f32 y) {
+        right = GetWidth() + x;
+        left = x;
+        bottom = GetHeight() + y;
+        top = y;
+    }
+};
+
+} // namespace ut
+} // namespace nw4r
 
 #endif

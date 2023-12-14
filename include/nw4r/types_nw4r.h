@@ -27,14 +27,9 @@ struct IOStream;
 template <typename T, int Ofs> struct LinkList;
 struct List;
 struct NandFileStream;
+struct Rect;
 struct ResFont;
 struct RomFont;
-
-} // namespace ut
-} // namespace nw4r
-
-namespace nw4r {
-namespace ut {
 template <typename T> struct TextWriterBase;
 template <typename T> struct TagProcessorBase;
 
@@ -63,12 +58,17 @@ struct MemoryManagerBase;
 } // namespace ef
 
 namespace math {
+
 struct VEC2;
 struct VEC3;
 struct MTX33;
 struct MTX34;
+struct MTX44;
+struct QUAT;
+struct PLANE;
 struct AABB;
 struct FRUSTUM;
+
 } // namespace math
 
 namespace snd {
