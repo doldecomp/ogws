@@ -20,10 +20,10 @@ bool IsSJISHalfWidthChar(u16 c) {
 }
 
 bool IsSJISFullWidthChar(u16 c) {
-    const u8 hi = BitExtract<u16>(c, 8, 8);
-    const u8 lo = BitExtract<u16>(c, 8, 0);
+    u8 hi = BitExtract<u16>(c, 8, 8);
+    u8 lo = BitExtract<u16>(c, 0, 8);
 
-    return (hi >= 0x81 && hi <= 0x98) && (lo >= 0x40 && lo <= 0xFC);
+    return hi >= 0x81 && hi <= 0x98 && lo >= 0x40 && lo <= 0xFC;
 }
 
 } // namespace
@@ -41,7 +41,7 @@ bool RomFont::Load(void* buffer) {
         return false;
     }
 
-    const BOOL success = OSInitFont(static_cast<OSFontHeader*>(buffer));
+    BOOL success = OSInitFont(static_cast<OSFontHeader*>(buffer));
 
     if (success) {
         mFontEncode = OSGetFontEncode();
@@ -100,23 +100,7 @@ bool RomFont::SetAlternateChar(u16 c) {
     const u16 prev = mAlternateChar;
     mAlternateChar = 0xFFFF;
 
-    // TODO: Manual inline of HandleUndefinedChar (regalloc)
-    u16 undef;
-    {
-        bool valid;
-
-        switch (mFontEncode) {
-        case OS_FONT_ENCODE_ANSI:
-            valid = IsCP1252Char(c);
-            break;
-        case OS_FONT_ENCODE_SJIS:
-            valid = IsSJISHalfWidthChar(c) || IsSJISFullWidthChar(c);
-            break;
-        }
-
-        undef = valid ? c : mAlternateChar;
-    }
-
+    u16 undef = HandleUndefinedChar(c);
     if (undef != 0xFFFF) {
         mAlternateChar = c;
         return true;
@@ -139,7 +123,7 @@ int RomFont::GetCharWidth(u16 c) const {
 }
 
 CharWidths RomFont::GetCharWidths(u16 c) const {
-    const int width = GetCharWidth(c);
+    int width = GetCharWidth(c);
 
     CharWidths widths;
     widths.leftSpacing = 0;

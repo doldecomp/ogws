@@ -57,18 +57,18 @@ template <typename T>
 void TagProcessorBase<T>::ProcessTab(PrintContext<T>* ctx) {
     TextWriterBase<T>& writer = *ctx->writer;
 
-    const int tabWidth = writer.GetTabWidth();
+    int tabWidth = writer.GetTabWidth();
     if (tabWidth <= 0) {
         return;
     }
 
-    const f32 charWidth =
+    f32 charWidth =
         writer.IsWidthFixed() ? writer.GetFixedWidth() : writer.GetFontWidth();
 
-    const f32 dx = writer.GetCursorX() - ctx->x;
-    const f32 tabPixel = tabWidth * charWidth;
-    const int numTab = static_cast<int>(dx / tabPixel) + 1;
-    const f32 x = ctx->x + (tabPixel * numTab);
+    f32 dx = writer.GetCursorX() - ctx->x;
+    f32 tabPixel = tabWidth * charWidth;
+    int numTab = static_cast<int>(dx / tabPixel) + 1;
+    f32 x = ctx->x + (tabPixel * numTab);
 
     writer.SetCursorX(x);
 }
@@ -77,8 +77,8 @@ template <typename T>
 void TagProcessorBase<T>::ProcessLinefeed(PrintContext<T>* ctx) {
     TextWriterBase<T>& writer = *ctx->writer;
 
-    const f32 x = ctx->x;
-    const f32 y = writer.GetCursorY() + writer.GetLineHeight();
+    f32 x = ctx->x;
+    f32 y = writer.GetCursorY() + writer.GetLineHeight();
 
     writer.SetCursorX(x);
     writer.SetCursorY(y);

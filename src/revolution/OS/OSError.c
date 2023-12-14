@@ -106,7 +106,7 @@ OSErrorHandler OSSetErrorHandler(u16 error, OSErrorHandler handler) {
 }
 
 void __OSUnhandledException(u8 error, OSContext* ctx, u32 dsisr, u32 dar) {
-    const s64 tb = OSGetTime();
+    s64 tb = OSGetTime();
 
     if (!(ctx->srr1 & 0x2)) {
         OSReport("Non-recoverable Exception %d", error);

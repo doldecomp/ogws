@@ -23,10 +23,10 @@ struct Rect {
     f32 GetHeight() const { return right - left; }
 
     void Normalize() {
-        const f32 l = left;
-        const f32 t = top;
-        const f32 r = right;
-        const f32 b = bottom;
+        f32 l = left;
+        f32 t = top;
+        f32 r = right;
+        f32 b = bottom;
 
         // min(r, l)
         left = math::FSelect(r - l, l, r);

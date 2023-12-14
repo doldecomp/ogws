@@ -191,7 +191,7 @@ void GXSetPixelFmt(GXPixelFmt pixelFmt, GXZFmt16 zFmt) {
         GX_PF_RGB8_Z24, GX_PF_RGBA6_Z24, GX_PF_RGBA565_Z16, GX_PF_Z24,
         GX_PF_Y8,       GX_PF_Y8,        GX_PF_Y8,          GX_PF_U8};
 
-    const u32 zControlRegOld = gxdt->zControl;
+    u32 zControlRegOld = gxdt->zControl;
 
     GX_BP_SET_ZCONTROL_PIXEL_FMT(gxdt->zControl, p2f[pixelFmt]);
     GX_BP_SET_ZCONTROL_Z_FMT(gxdt->zControl, zFmt);

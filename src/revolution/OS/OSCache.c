@@ -267,7 +267,7 @@ do_load:
 }
 
 void LCEnable(void) {
-    const BOOL enabled = OSDisableInterrupts();
+    BOOL enabled = OSDisableInterrupts();
     __LCEnable();
     OSRestoreInterrupts(enabled);
 }
@@ -330,7 +330,7 @@ asm void LCStoreBlocks(register void* dst, register const void* src,
 
 u32 LCStoreData(void* dst, const void* src, u32 len) {
     u32 blocks = (len + 31) / 32;
-    const u32 ret = (blocks + 127) / 128;
+    u32 ret = (blocks + 127) / 128;
 
     while (blocks > 0) {
         if (blocks < 128) {
@@ -386,7 +386,7 @@ static void L2Init(void) {
 }
 
 void L2Enable(void) {
-    const u32 l2cr = PPCMfl2cr();
+    u32 l2cr = PPCMfl2cr();
     PPCMtl2cr((l2cr | L2CR_L2E) & ~L2CR_L2I);
 }
 
@@ -419,7 +419,7 @@ void L2GlobalInvalidate(void) {
 }
 
 void DMAErrorHandler(u8 error, OSContext* ctx, u32 dsisr, u32 dar, ...) {
-    const u32 hid2 = PPCMfhid2();
+    u32 hid2 = PPCMfhid2();
 
     OSReport("Machine check received\n");
     OSReport("HID2 = 0x%x   SRR1 = 0x%x\n", hid2, ctx->srr1);

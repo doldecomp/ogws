@@ -66,8 +66,8 @@ const char* const __DVDErrorMessage[] = {
 
 void __DVDShowFatalMessage(void) {
     const char* msg;
-    const GXColor bgColor = {0, 0, 0, 0};
-    const GXColor textColor = {255, 255, 255, 0};
+    GXColor bgColor = {0, 0, 0, 0};
+    GXColor textColor = {255, 255, 255, 0};
 
     if (SCGetLanguage() == SC_LANG_JP) {
         OSSetFontEncode(OS_FONT_ENCODE_SJIS);

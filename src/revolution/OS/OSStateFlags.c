@@ -45,8 +45,7 @@ BOOL __OSReadStateFlags(OSStateFlags* state) {
     if (NANDOpen("/title/00000001/00000002/data/state.dat", &file,
                  NAND_ACCESS_READ) == NAND_RESULT_OK) {
 
-        const s32 bytesRead =
-            NANDRead(&file, &StateFlags, sizeof(OSStateFlags));
+        s32 bytesRead = NANDRead(&file, &StateFlags, sizeof(OSStateFlags));
         NANDClose(&file);
 
         if (bytesRead != sizeof(OSStateFlags)) {

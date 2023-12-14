@@ -112,20 +112,20 @@ f32 CharWriter::Print(u16 ch) {
 }
 
 void CharWriter::PrintGlyph(f32 x, f32 y, f32 z, const Glyph& glyph) {
-    const f32 x2 = x + (glyph.widths.glyphWidth * mScale.x);
-    const f32 y2 = y + (glyph.height * mScale.y);
+    f32 x2 = x + (glyph.widths.glyphWidth * mScale.x);
+    f32 y2 = y + (glyph.height * mScale.y);
 
-    const u32 posLeft = glyph.cellX;
-    const u16 texLeft = 0x8000 * posLeft / glyph.texWidth;
+    u32 posLeft = glyph.cellX;
+    u16 texLeft = 0x8000 * posLeft / glyph.texWidth;
 
-    const u32 posTop = glyph.cellY;
-    const u16 texTop = 0x8000 * posTop / glyph.texHeight;
+    u32 posTop = glyph.cellY;
+    u16 texTop = 0x8000 * posTop / glyph.texHeight;
 
-    const u32 posRight = posLeft + glyph.widths.glyphWidth;
-    const u16 texRight = 0x8000 * posRight / glyph.texWidth;
+    u32 posRight = posLeft + glyph.widths.glyphWidth;
+    u16 texRight = 0x8000 * posRight / glyph.texWidth;
 
-    const u32 posBottom = posTop + glyph.height;
-    const u16 texBottom = 0x8000 * posBottom / glyph.texHeight;
+    u32 posBottom = posTop + glyph.height;
+    u16 texBottom = 0x8000 * posBottom / glyph.texHeight;
 
     LoadTexture(glyph, GX_TEXMAP0);
 

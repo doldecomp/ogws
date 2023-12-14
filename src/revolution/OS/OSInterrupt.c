@@ -76,7 +76,7 @@ set_msr:
 
 OSInterruptHandler
     __OSSetInterruptHandler(OSInterruptType type, OSInterruptHandler handler) {
-    const OSInterruptHandler old = InterruptHandlerTable[type];
+    OSInterruptHandler old = InterruptHandlerTable[type];
     InterruptHandlerTable[type] = handler;
     return old;
 }
@@ -325,9 +325,9 @@ static u32 SetInterruptMask(u32 type, u32 mask) {
 }
 
 u32 __OSMaskInterrupts(u32 userMask) {
-    const BOOL enabled = OSDisableInterrupts();
-    const u32 prevMask = *(u32*)OSPhysicalToCached(OS_PHYS_PREV_INTR_MASK);
-    const u32 currMask = *(u32*)OSPhysicalToCached(OS_PHYS_CURRENT_INTR_MASK);
+    BOOL enabled = OSDisableInterrupts();
+    u32 prevMask = *(u32*)OSPhysicalToCached(OS_PHYS_PREV_INTR_MASK);
+    u32 currMask = *(u32*)OSPhysicalToCached(OS_PHYS_CURRENT_INTR_MASK);
 
     u32 workMask = userMask & ~(prevMask | currMask);
     userMask = prevMask | userMask;
@@ -342,9 +342,9 @@ u32 __OSMaskInterrupts(u32 userMask) {
 }
 
 u32 __OSUnmaskInterrupts(u32 userMask) {
-    const BOOL enabled = OSDisableInterrupts();
-    const u32 prevMask = *(u32*)OSPhysicalToCached(OS_PHYS_PREV_INTR_MASK);
-    const u32 currMask = *(u32*)OSPhysicalToCached(OS_PHYS_CURRENT_INTR_MASK);
+    BOOL enabled = OSDisableInterrupts();
+    u32 prevMask = *(u32*)OSPhysicalToCached(OS_PHYS_PREV_INTR_MASK);
+    u32 currMask = *(u32*)OSPhysicalToCached(OS_PHYS_CURRENT_INTR_MASK);
 
     u32 workMask = userMask & (prevMask | currMask);
     userMask = prevMask & ~userMask;

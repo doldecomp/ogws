@@ -24,7 +24,7 @@ inline void __GXSetLightChan(volatile s32 dirtyFlags) {
     u32 addr = GX_XF_REG_COLOR0CNTRL;
 
     if (dirtyFlags & GX_DIRTY_NUM_COLORS) {
-        const u32 colors = GX_BP_GET_GENMODE_NUMCOLORS(gxdt->genMode);
+        u32 colors = GX_BP_GET_GENMODE_NUMCOLORS(gxdt->genMode);
         GX_XF_LOAD_REG(GX_XF_REG_NUMCOLORS, colors);
     }
 
@@ -45,7 +45,7 @@ inline void __GXSetTexGen(volatile s32 dirtyFlags) {
     u32 dtaddr;
 
     if (dirtyFlags & GX_DIRTY_NUM_TEX) {
-        const u32 gens = GX_BP_GET_GENMODE_NUMTEX(gxdt->genMode);
+        u32 gens = GX_BP_GET_GENMODE_NUMTEX(gxdt->genMode);
         GX_XF_LOAD_REG(GX_XF_REG_NUMTEX, gens);
     }
 

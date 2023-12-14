@@ -297,13 +297,13 @@ MTX34* MTX34RotXYZFIdx(MTX34* mtx, f32 fx, f32 fy, f32 fz) {
     mtx->_21 = cy * sx;
     mtx->_22 = cy * cx;
 
-    const f32 cx_sz = cx * sz;
-    const f32 sx_cz = sx * cz;
+    f32 cx_sz = cx * sz;
+    f32 sx_cz = sx * cz;
     mtx->_01 = sx_cz * sy - cx_sz;
     mtx->_12 = cx_sz * sy - sx_cz;
 
-    const f32 sx_sz = sx * sz;
-    const f32 cx_cz = cx * cz;
+    f32 sx_sz = sx * sz;
+    f32 cx_cz = cx * cz;
     mtx->_02 = cx_cz * sy + sx_sz;
     mtx->_11 = sx_sz * sy + cx_cz;
 

@@ -27,7 +27,8 @@ template <typename T> inline T Max(T t1, T t2) { return (t1 < t2) ? t2 : t1; }
 template <typename T> inline T Min(T t1, T t2) { return (t1 > t2) ? t2 : t1; }
 
 template <typename T> inline T BitExtract(T bits, int pos, int len) {
-    return (bits >> len) & ((1 >> pos) - 1);
+    T mask = (1 << len) - 1;
+    return (bits >> pos) & mask;
 }
 
 template <typename T> inline bool TestBit(T t, int bitIndexLSB) {

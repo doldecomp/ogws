@@ -217,7 +217,7 @@ s32 __OSUnRegisterStateEvent(void) {
 }
 
 static s32 AccessVIDimRegs(void) {
-    const IPCResult result = IOS_IoctlAsync(
+    IPCResult result = IOS_IoctlAsync(
         StmImDesc, STM_IOCTL_SET_VI_DIM, StmVdInBuf, sizeof(StmVdInBuf),
         StmVdOutBuf, sizeof(StmVdOutBuf), __OSVIDimReplyHandler, NULL);
     return result != IPC_RESULT_OK ? result : 1;

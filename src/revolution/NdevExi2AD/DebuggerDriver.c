@@ -24,7 +24,7 @@ void __DBIntrHandler(u32 type, OSContext* ctx) {
 }
 
 static void __DBCheckMailBox(void) {
-    const u8 csr = __DBReadUSB_CSR();
+    u8 csr = __DBReadUSB_CSR();
     if (!(csr & 0x8)) {
         u32 mail;
         __DBReadMailbox(&mail);
@@ -43,7 +43,7 @@ static u8 __DBReadUSB_CSR(void) {
 }
 
 void DBInitComm(u8** flagOut, OSInterruptHandler handler) {
-    const BOOL enabled = OSDisableInterrupts();
+    BOOL enabled = OSDisableInterrupts();
 
     *flagOut = &__DBEXIInputFlag;
     __DBMtrCallback = handler;
@@ -69,7 +69,7 @@ u32 DBQueryData(void) {
     __DBEXIInputFlag = FALSE;
 
     if (__DBRecvDataSize == 0) {
-        const BOOL enabled = OSDisableInterrupts();
+        BOOL enabled = OSDisableInterrupts();
         __DBCheckMailBox();
         OSRestoreInterrupts(enabled);
     }
@@ -78,7 +78,7 @@ u32 DBQueryData(void) {
 }
 
 BOOL DBRead(void* dst, u32 size) {
-    const BOOL enabled = OSDisableInterrupts();
+    BOOL enabled = OSDisableInterrupts();
 
     __DBRead(ODEMUGetPc2NngcOffset(__DBRecvMail) + 0x1000, dst,
              ROUND_UP(size, 4));
@@ -92,7 +92,8 @@ BOOL DBRead(void* dst, u32 size) {
 
 BOOL DBWrite(const void* src, u32 size) {
     static u8 l_byOffsetCounter = 128;
-    const BOOL enabled = OSDisableInterrupts();
+
+    BOOL enabled = OSDisableInterrupts();
 
     u32 ofs, mail;
 

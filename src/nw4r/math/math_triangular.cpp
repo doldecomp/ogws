@@ -24,11 +24,10 @@ extern ArcTanSample sArcTanTbl[];
 f32 AtanFIdx_(f32 x) {
     x *= 32.0f;
 
-    const u16 whole = F32ToU16(x);
-    const f32 frac = x - U16ToF32(whole);
+    u16 whole = F32ToU16(x);
+    f32 frac = x - U16ToF32(whole);
 
-    const f32 atan =
-        sArcTanTbl[whole].atan_val + frac * sArcTanTbl[whole].atan_delta;
+    f32 atan = sArcTanTbl[whole].atan_val + frac * sArcTanTbl[whole].atan_delta;
 
     return atan;
 }
@@ -42,11 +41,11 @@ f32 SinFIdx(f32 fidx) {
         abs_fidx -= 65536.0f;
     }
 
-    const u16 whole = F32ToU16(abs_fidx);
-    const f32 frac = abs_fidx - U16ToF32(whole);
+    u16 whole = F32ToU16(abs_fidx);
+    f32 frac = abs_fidx - U16ToF32(whole);
 
-    const f32 sin = sSinCosTbl[whole & 255].sin_val +
-                    frac * sSinCosTbl[whole & 255].sin_delta;
+    f32 sin = sSinCosTbl[whole & 255].sin_val +
+              frac * sSinCosTbl[whole & 255].sin_delta;
 
     return (fidx < 0.0f) ? -sin : sin;
 }
@@ -58,11 +57,11 @@ f32 CosFIdx(f32 fidx) {
         abs_fidx -= 65536.0f;
     }
 
-    const u16 whole = F32ToU16(abs_fidx);
-    const f32 frac = abs_fidx - U16ToF32(whole);
+    u16 whole = F32ToU16(abs_fidx);
+    f32 frac = abs_fidx - U16ToF32(whole);
 
-    const f32 cos = sSinCosTbl[whole & 255].cos_val +
-                    frac * sSinCosTbl[whole & 255].cos_delta;
+    f32 cos = sSinCosTbl[whole & 255].cos_val +
+              frac * sSinCosTbl[whole & 255].cos_delta;
 
     return cos;
 }
@@ -74,14 +73,14 @@ void SinCosFIdx(f32* pSin, f32* pCos, f32 fidx) {
         abs_fidx -= 65536.0f;
     }
 
-    const u16 whole = F32ToU16(abs_fidx);
-    const f32 frac = abs_fidx - U16ToF32(whole);
+    u16 whole = F32ToU16(abs_fidx);
+    f32 frac = abs_fidx - U16ToF32(whole);
 
-    const f32 sin = sSinCosTbl[whole & 255].sin_val +
-                    frac * sSinCosTbl[whole & 255].sin_delta;
+    f32 sin = sSinCosTbl[whole & 255].sin_val +
+              frac * sSinCosTbl[whole & 255].sin_delta;
 
-    const f32 cos = sSinCosTbl[whole & 255].cos_val +
-                    frac * sSinCosTbl[whole & 255].cos_delta;
+    f32 cos = sSinCosTbl[whole & 255].cos_val +
+              frac * sSinCosTbl[whole & 255].cos_delta;
 
     *pSin = (fidx < 0.0f) ? -sin : sin;
     *pCos = cos;

@@ -46,15 +46,15 @@ asm u32 OSGetTick(void){
 }
 
 s64 __OSGetSystemTime(void) {
-    const BOOL enabled = OSDisableInterrupts();
-    const s64 time = OSGetTime() + OS_SYSTEM_TIME;
+    BOOL enabled = OSDisableInterrupts();
+    s64 time = OSGetTime() + OS_SYSTEM_TIME;
     OSRestoreInterrupts(enabled);
     return time;
 }
 
 s64 __OSTimeToSystemTime(s64 time) {
-    const BOOL enabled = OSDisableInterrupts();
-    const s64 sysTime = OS_SYSTEM_TIME + time;
+    BOOL enabled = OSDisableInterrupts();
+    s64 sysTime = OS_SYSTEM_TIME + time;
     OSRestoreInterrupts(enabled);
     return sysTime;
 }

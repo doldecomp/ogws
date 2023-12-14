@@ -31,13 +31,13 @@ u16 CharStrmReader::ReadNextCharUTF8() {
 }
 
 u16 CharStrmReader::ReadNextCharUTF16() {
-    const u16 ret = GetChar<u16>(0);
+    u16 ret = GetChar<u16>(0);
     StepStrm<u16>(1);
     return ret;
 }
 
 u16 CharStrmReader::ReadNextCharCP1252() {
-    const u16 ret = GetChar<u8>(0);
+    u16 ret = GetChar<u8>(0);
     StepStrm<u8>(1);
     return ret;
 }

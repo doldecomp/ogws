@@ -58,7 +58,7 @@ void ResFontBase::SetDefaultCharWidths(const CharWidths& widths) {
 }
 
 bool ResFontBase::SetAlternateChar(u16 ch) {
-    const u16 index = FindGlyphIndex(ch);
+    u16 index = FindGlyphIndex(ch);
 
     if (index != 0xFFFF) {
         mFontInfo->alterCharIndex = index;
@@ -87,7 +87,7 @@ FontEncoding ResFontBase::GetEncoding() const {
 }
 
 u16 ResFontBase::GetGlyphIndex(u16 c) const {
-    const u16 index = FindGlyphIndex(c);
+    u16 index = FindGlyphIndex(c);
     return (index != 0xFFFF) ? index : mFontInfo->alterCharIndex;
 }
 
@@ -165,16 +165,16 @@ const CharWidths& ResFontBase::GetCharWidthsFromIndex(const FontWidth* width,
 void ResFontBase::GetGlyphFromIndex(Glyph* out, u16 index) const {
     const FontTextureGlyph* texGlyph = mFontInfo->fontGlyph;
 
-    const u32 cellsInASheet = texGlyph->sheetRow * texGlyph->sheetLine;
+    u32 cellsInASheet = texGlyph->sheetRow * texGlyph->sheetLine;
 
-    const u32 glyphCell = index % cellsInASheet;
-    const u32 glyphSheet = index / cellsInASheet;
+    u32 glyphCell = index % cellsInASheet;
+    u32 glyphSheet = index / cellsInASheet;
 
-    const u32 unitX = glyphCell % texGlyph->sheetRow;
-    const u32 unitY = glyphCell / texGlyph->sheetRow;
+    u32 unitX = glyphCell % texGlyph->sheetRow;
+    u32 unitY = glyphCell / texGlyph->sheetRow;
 
-    const u32 pixelX = unitX * (texGlyph->cellWidth + 1);
-    const u32 pixelY = unitY * (texGlyph->cellHeight + 1);
+    u32 pixelX = unitX * (texGlyph->cellWidth + 1);
+    u32 pixelY = unitY * (texGlyph->cellHeight + 1);
 
     out->texture = texGlyph->sheetImage + (glyphSheet * texGlyph->sheetSize);
 

@@ -275,7 +275,7 @@ BOOL ARCClose(ARCFileInfo* info) {
 }
 
 BOOL ARCChangeDir(ARCHandle* info, const char* path) {
-    const s32 entrynum = ARCConvertPathToEntrynum(info, path);
+    s32 entrynum = ARCConvertPathToEntrynum(info, path);
     ARCNode* nodes = info->nodes;
 
     if (entrynum < 0 || !ARCNodeIsFolder(nodes[entrynum])) {
@@ -287,7 +287,7 @@ BOOL ARCChangeDir(ARCHandle* info, const char* path) {
 }
 
 BOOL ARCOpenDir(ARCHandle* info, const char* path, ARCDir* dir) {
-    const s32 entrynum = ARCConvertPathToEntrynum(info, path);
+    s32 entrynum = ARCConvertPathToEntrynum(info, path);
     ARCNode* nodes = info->nodes;
 
     if (entrynum < 0 || !ARCNodeIsFolder(nodes[entrynum])) {

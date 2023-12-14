@@ -104,8 +104,8 @@ void DvdFileStream::Close() {
 s32 DvdFileStream::Read(void* dst, u32 size) {
     size = AdjustReadLength_(size);
 
-    const s32 result = DVDReadPrio(&mAsyncContext.info, dst, size,
-                                   mFilePosition.Tell(), mPriority);
+    s32 result = DVDReadPrio(&mAsyncContext.info, dst, size,
+                             mFilePosition.Tell(), mPriority);
 
     if (result > 0) {
         mFilePosition.Skip(result);
@@ -118,7 +118,7 @@ bool DvdFileStream::ReadAsync(void* dst, u32 size, AsyncCallback callback,
                               void* arg) {
     size = AdjustReadLength_(size);
 
-    const bool success = DvdFileStream::PeekAsync(dst, size, callback, arg);
+    bool success = DvdFileStream::PeekAsync(dst, size, callback, arg);
 
     if (success) {
         mFilePosition.Skip(size);
@@ -158,7 +158,7 @@ bool DvdFileStream::CancelAsync(AsyncCallback callback, void* arg) {
     mCancelCallback = callback;
     mCancelCallbackArg = arg;
 
-    const BOOL success =
+    BOOL success =
         DVDCancelAsync(&mAsyncContext.info.block, DvdCBAsyncCallback_);
 
     if (success) {
@@ -169,11 +169,11 @@ bool DvdFileStream::CancelAsync(AsyncCallback callback, void* arg) {
 }
 
 u32 DvdFileStream::AdjustReadLength_(u32 len) {
-    const u32 fileOffset = mFilePosition.Tell();
-    const u32 fileSize = mFilePosition.GetFileSize();
+    u32 fileOffset = mFilePosition.Tell();
+    u32 fileSize = mFilePosition.GetFileSize();
 
-    const u32 alignSize = RoundUp(fileSize, 32);
-    const u32 alignPos = RoundUp(fileOffset + len, 32);
+    u32 alignSize = RoundUp(fileSize, 32);
+    u32 alignPos = RoundUp(fileOffset + len, 32);
 
     if (alignPos > alignSize) {
         len = RoundUp(fileSize - fileOffset, 32);

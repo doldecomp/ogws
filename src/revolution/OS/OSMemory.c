@@ -493,7 +493,7 @@ static void BATConfig(void) {
 }
 
 void __OSInitMemoryProtection(void) {
-    const BOOL enabled = OSDisableInterrupts();
+    BOOL enabled = OSDisableInterrupts();
 
     MI_HW_REGS[MI_REG_0x20] = 0;
     MI_HW_REGS[MI_PROT_MEM0] = 0xFF;

@@ -20,17 +20,17 @@ extern ExpSample sExpTbl[];
 extern LogSample sLogTbl[];
 
 f32 FExpLn2(f32 x) {
-    const f32 fidx = (16 / NW4R_MATH_LN_2) * (NW4R_MATH_LN_2 + x);
-    const u16 whole = F32ToU16(fidx);
-    const f32 frac = fidx - U16ToF32(whole);
+    f32 fidx = (16 / NW4R_MATH_LN_2) * (NW4R_MATH_LN_2 + x);
+    u16 whole = F32ToU16(fidx);
+    f32 frac = fidx - U16ToF32(whole);
 
     return sExpTbl[whole].exp_val + frac * sExpTbl[whole].exp_delta;
 }
 
 f32 FLog1_2(f32 x) {
-    const f32 fidx = 256.0f * (x - 1.0f);
-    const u16 whole = F32ToU16(fidx);
-    const f32 frac = fidx - U16ToF32(whole);
+    f32 fidx = 256.0f * (x - 1.0f);
+    u16 whole = F32ToU16(fidx);
+    f32 frac = fidx - U16ToF32(whole);
 
     return sLogTbl[whole].log_val + frac * sLogTbl[whole].log_delta;
 }
@@ -40,19 +40,19 @@ f32 FLog1_2(f32 x) {
 namespace detail {
 
 f32 FExp(f32 x) {
-    const s16 k = F32ToS16((1 / NW4R_MATH_LN_2) * x);
-    const f32 kf = S16ToF32(k);
-    const f32 expxn = FExpLn2(x - NW4R_MATH_LN_2 * kf);
-    const u32 expx = F32AsU32(expxn);
+    s16 k = F32ToS16((1 / NW4R_MATH_LN_2) * x);
+    f32 kf = S16ToF32(k);
+    f32 expxn = FExpLn2(x - NW4R_MATH_LN_2 * kf);
+    u32 expx = F32AsU32(expxn);
 
     return U32AsF32(((k << 23) + expx) & 0x7FFFFFFF);
 }
 
 f32 FLog(f32 x) {
-    const s32 exp = FGetExpPart(x);
-    const f32 xn = FGetMantPart(x);
-    const f32 kf = S16ToF32(exp);
-    const f32 logxn = FLog1_2(xn);
+    s32 exp = FGetExpPart(x);
+    f32 xn = FGetMantPart(x);
+    f32 kf = S16ToF32(exp);
+    f32 logxn = FLog1_2(xn);
 
     return logxn + NW4R_MATH_LN_2 * kf;
 }

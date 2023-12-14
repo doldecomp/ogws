@@ -119,7 +119,7 @@ void NandFileStream::Close() {
 s32 NandFileStream::Read(void* dst, u32 size) {
     NANDSeek(&mAsyncContext.info, mFilePosition.Tell(), NAND_SEEK_BEG);
 
-    const s32 result = NANDRead(&mAsyncContext.info, dst, size);
+    s32 result = NANDRead(&mAsyncContext.info, dst, size);
     if (result > 0) {
         mFilePosition.Skip(result);
     }
@@ -135,7 +135,7 @@ bool NandFileStream::ReadAsync(void* dst, u32 size, AsyncCallback callback,
 
     NANDSeek(&mAsyncContext.info, mFilePosition.Tell(), NAND_SEEK_BEG);
 
-    const bool success =
+    bool success =
         NANDReadAsync(&mAsyncContext.info, dst, size, NandAsyncCallback_,
                       &mAsyncContext.block) == NAND_RESULT_OK;
 
@@ -150,7 +150,7 @@ bool NandFileStream::ReadAsync(void* dst, u32 size, AsyncCallback callback,
 
 void NandFileStream::Write(const void* src, u32 size) {
     NANDSeek(&mAsyncContext.info, mFilePosition.Tell(), NAND_SEEK_BEG);
-    const s32 result = NANDWrite(&mAsyncContext.info, src, size);
+    s32 result = NANDWrite(&mAsyncContext.info, src, size);
 
     // @bug Error code will be interpreted as a negative size
     mFilePosition.Append(result);
@@ -164,8 +164,8 @@ bool NandFileStream::WriteAsync(const void* src, u32 size,
 
     NANDSeek(&mAsyncContext.info, mFilePosition.Tell(), NAND_SEEK_BEG);
 
-    const s32 result = NANDWriteAsync(&mAsyncContext.info, src, size,
-                                      NandAsyncCallback_, &mAsyncContext.block);
+    s32 result = NANDWriteAsync(&mAsyncContext.info, src, size,
+                                NandAsyncCallback_, &mAsyncContext.block);
 
     if (result == NAND_RESULT_OK) {
         mFilePosition.Append(size);

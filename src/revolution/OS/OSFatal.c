@@ -156,12 +156,11 @@ static void ConfigureVideo(u16 width, u16 height) {
 static GXColor RGB2YUV(GXColor rgb) {
     GXColor yuv;
 
-    const f32 y =
-        (0.257f * rgb.r + 0.504f * rgb.g + 0.098f * rgb.b + 16.0f) + 0.5f;
-    const f32 cb =
-        (-0.148f * rgb.r - 0.291f * rgb.g + 0.439f * rgb.b + 128.0f) + 0.5f;
-    const f32 cr =
-        (0.439f * rgb.r - 0.368f * rgb.g - 0.071f * rgb.b + 128.0f) + 0.5f;
+    // clang-format off
+    f32 y =  ( 0.257f * rgb.r + 0.504f * rgb.g + 0.098f * rgb.b + 16.0f)  + 0.5f;
+    f32 cb = (-0.148f * rgb.r - 0.291f * rgb.g + 0.439f * rgb.b + 128.0f) + 0.5f;
+    f32 cr = ( 0.439f * rgb.r - 0.368f * rgb.g - 0.071f * rgb.b + 128.0f) + 0.5f;
+    // clang-format on
 
     yuv.r = CLAMP(16.0f, 235.0f, y);
     yuv.g = CLAMP(16.0f, 240.0f, cb);

@@ -333,9 +333,9 @@ void GXSetNumChans(u8 num) {
 void GXSetChanCtrl(GXChannelID chan, GXBool enable, GXColorSrc ambSrc,
                    GXColorSrc matSrc, GXLightID lightMask, GXDiffuseFn diffFn,
                    GXAttnFn attnFn) {
-    const u32 regIdx = (u32)chan % 4;
-
+    u32 regIdx = (u32)chan % 4;
     u32 reg = 0;
+
     GX_XF_SET_COLOR0CNTRL_LIGHT(reg, enable);
     GX_XF_SET_COLOR0CNTRL_MATSRC(reg, matSrc);
     GX_XF_SET_COLOR0CNTRL_AMBSRC(reg, ambSrc);

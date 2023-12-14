@@ -23,7 +23,7 @@ static void DefaultSwitchThreadCallback(OSThread* currThread,
 
 OSSwitchThreadCallback OSSetSwitchThreadCallback(OSSwitchThreadCallback newCb) {
     OSSwitchThreadCallback oldCb;
-    const BOOL enabled = OSDisableInterrupts();
+    BOOL enabled = OSDisableInterrupts();
 
     oldCb = SwitchThreadCallback;
     SwitchThreadCallback =
@@ -131,7 +131,7 @@ static BOOL __OSIsThreadActive(OSThread* thread) {
 
 s32 OSDisableScheduler(void) {
     s32 old;
-    const BOOL enabled = OSDisableInterrupts();
+    BOOL enabled = OSDisableInterrupts();
 
     old = Reschedule++;
 
@@ -142,7 +142,7 @@ s32 OSDisableScheduler(void) {
 
 s32 OSEnableScheduler(void) {
     s32 old;
-    const BOOL enabled = OSDisableInterrupts();
+    BOOL enabled = OSDisableInterrupts();
 
     old = Reschedule--;
 
@@ -426,7 +426,7 @@ void __OSReschedule(void) {
 }
 
 void OSYieldThread(void) {
-    const BOOL enabled = OSDisableInterrupts();
+    BOOL enabled = OSDisableInterrupts();
     SelectThread(TRUE);
     OSRestoreInterrupts(enabled);
 }

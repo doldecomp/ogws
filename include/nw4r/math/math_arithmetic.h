@@ -113,12 +113,12 @@ inline u32 F32AsU32(f32 arg) { return *reinterpret_cast<u32*>(&arg); }
 inline f32 U32AsF32(u32 arg) { return *reinterpret_cast<f32*>(&arg); }
 
 inline s32 FGetExpPart(f32 x) {
-    const s32 s = F32AsU32(x);
+    s32 s = F32AsU32(x);
     return ((s >> 23) & 0xFF) - 0x7F;
 }
 
 inline f32 FGetMantPart(f32 x) {
-    const u32 u = F32AsU32(x);
+    u32 u = F32AsU32(x);
     return U32AsF32((u & 0x807FFFFF) | 0x3F800000);
 }
 

@@ -143,8 +143,8 @@ u32 __OSGetHollywoodRev(void) {
 }
 
 void __OSGetIOSRev(OSIOSRev* rev) {
-    const u32 version = *(u32*)OSPhysicalToUncached(OS_PHYS_IOS_VERSION);
-    const u32 builddate = *(u32*)OSPhysicalToUncached(OS_PHYS_IOS_BUILD_DATE);
+    u32 version = *(u32*)OSPhysicalToUncached(OS_PHYS_IOS_VERSION);
+    u32 builddate = *(u32*)OSPhysicalToUncached(OS_PHYS_IOS_BUILD_DATE);
 
     rev->idHi = version >> 24 & 0xFF;
     rev->idLo = version >> 16 & 0xFF;
@@ -737,7 +737,7 @@ static asm void __OSDBJump(void){
 
 OSExceptionHandler
     __OSSetExceptionHandler(u8 type, OSExceptionHandler handler) {
-    const OSExceptionHandler old = OSExceptionTable[type];
+    OSExceptionHandler old = OSExceptionTable[type];
     OSExceptionTable[type] = handler;
     return old;
 }

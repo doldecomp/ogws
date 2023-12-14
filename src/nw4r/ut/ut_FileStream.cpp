@@ -17,7 +17,7 @@ bool FileStream::CancelAsync(AsyncCallback callback, void* arg) {
 
 u32 FileStream::FilePosition::Skip(s32 offset) {
     if (offset != 0) {
-        const s64 newOffset = mFileOffset + offset;
+        s64 newOffset = mFileOffset + offset;
         mFileOffset = Clamp<s64>(newOffset, 0, mFileSize);
     }
 
@@ -25,7 +25,7 @@ u32 FileStream::FilePosition::Skip(s32 offset) {
 }
 
 u32 FileStream::FilePosition::Append(s32 offset) {
-    const s64 newOffset = mFileOffset + offset;
+    s64 newOffset = mFileOffset + offset;
 
     if (newOffset < 0) {
         mFileOffset = 0;

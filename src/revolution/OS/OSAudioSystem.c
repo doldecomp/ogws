@@ -19,7 +19,7 @@ static u8 DSPInitCode[128] = {
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
 
 static void waitMicroSec(u32 usec) {
-    const u32 start = OSGetTick();
+    u32 start = OSGetTick();
     do {
         ;
     } while (OS_TICKS_TO_USEC(OS_TICKS_DELTA(OSGetTick(), start)) < usec);
