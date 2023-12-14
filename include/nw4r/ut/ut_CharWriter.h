@@ -124,7 +124,7 @@ public:
     f32 GetFixedWidth() const { return mFixedWidth; }
 
     void SetFont(const Font& font) { mFont = &font; }
-    Font* GetFont() const { return const_cast<Font*>(mFont); }
+    const Font* GetFont() const { return mFont; }
 
     void ResetTextureCache() { mLoadingTexture.Reset(); }
 

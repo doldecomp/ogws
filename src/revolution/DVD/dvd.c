@@ -1628,7 +1628,7 @@ BOOL DVDInquiryAsync(DVDCommandBlock* block, DVDDriveInfo* info,
     block->transferTotal = 0;
     block->callback = callback;
 
-    return issueCommand(DVD_QUEUE_PRIO_MEDIUM, block);
+    return issueCommand(DVD_PRIO_MEDIUM, block);
 }
 
 s32 DVDGetCommandBlockStatus(const DVDCommandBlock* block) {

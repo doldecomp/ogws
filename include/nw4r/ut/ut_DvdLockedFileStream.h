@@ -18,7 +18,7 @@ namespace nw4r
 			virtual ~DvdLockedFileStream();
 			
 			s32 Read(void *, u32);
-			UNKWORD Peek(void *, u32);
+			s32 Peek(void *, u32);
 			
 			bool CanAsync() const;
 

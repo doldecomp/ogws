@@ -187,7 +187,7 @@ namespace nw4r
         {
             if (BOOL_0x4)
             {
-                if (!mSize) mSize = mPosition.GetFileSize();
+                if (!mSize) mSize = mFilePosition.GetFileSize();
                 
                 ut::NandFileStream::Seek(mStartOffset, 0);
             }
@@ -198,7 +198,7 @@ namespace nw4r
         {
             if (BOOL_0x4)
             {
-                if (!mSize) mSize = mPosition.GetFileSize();
+                if (!mSize) mSize = mFilePosition.GetFileSize();
                 
                 ut::NandFileStream::Seek(mStartOffset, 0);
             }
@@ -208,7 +208,7 @@ namespace nw4r
         {
             u32 endOffset = mStartOffset + mSize;
             
-            if (mPosition.Tell() + count > endOffset) count = RoundUp<u32>(endOffset - mPosition.Tell(), 0x20);
+            if (mFilePosition.Tell() + count > endOffset) count = RoundUp<u32>(endOffset - mFilePosition.Tell(), 0x20);
             
             int ret = ut::NandFileStream::Read(pBuffer, count);
             
@@ -225,7 +225,7 @@ namespace nw4r
                     offset += mStartOffset;
                     break;
                 case 1:
-                    offset += mPosition.Tell();
+                    offset += mFilePosition.Tell();
                     break;
                 case 2:
                     offset = mStartOffset + mSize - offset;
@@ -253,7 +253,7 @@ namespace nw4r
         
         u32 NandSoundArchive::NandFileStream::Tell() const
         {
-            return mPosition.Tell() - mStartOffset;
+            return mFilePosition.Tell() - mStartOffset;
         }
         
         const void * NandSoundArchive::detail_GetWaveDataFileAddress(u32) const

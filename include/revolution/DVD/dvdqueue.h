@@ -7,12 +7,12 @@ extern "C" {
 #endif
 
 typedef enum {
-    DVD_QUEUE_PRIO_HIGHEST,
-    DVD_QUEUE_PRIO_HIGH,
-    DVD_QUEUE_PRIO_MEDIUM,
-    DVD_QUEUE_PRIO_LOW,
+    DVD_PRIO_HIGHEST,
+    DVD_PRIO_HIGH,
+    DVD_PRIO_MEDIUM,
+    DVD_PRIO_LOW,
 
-    DVD_QUEUE_PRIO_MAX,
+    DVD_PRIO_MAX,
 } DVDQueuePriority;
 
 void __DVDClearWaitingQueue(void);

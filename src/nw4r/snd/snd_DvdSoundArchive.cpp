@@ -107,7 +107,7 @@ namespace nw4r
 
 			static const u32 headerAlignSize = RoundUp<u32>(sizeof(SoundArchiveFile::Header), 32);
 			void * alignedHeader = RoundUp<u8 *>(unalignedHeader, 32);
-			u32 bytesRead = DVDReadPrio(&mFileInfo, alignedHeader, headerAlignSize, 0, DVD_QUEUE_PRIO_MEDIUM);
+			u32 bytesRead = DVDReadPrio(&mFileInfo, alignedHeader, headerAlignSize, 0, DVD_PRIO_MEDIUM);
 			
 			if (bytesRead != headerAlignSize) return false;
 			
@@ -124,7 +124,7 @@ namespace nw4r
 			
 			if (bufferSize < infoChunkSize) return false;
 			
-			u32 bytesRead = DVDReadPrio(&mFileInfo, pBuffer, infoChunkSize, infoChunkOffset, DVD_QUEUE_PRIO_MEDIUM);
+			u32 bytesRead = DVDReadPrio(&mFileInfo, pBuffer, infoChunkSize, infoChunkOffset, DVD_PRIO_MEDIUM);
 			
 			if (bytesRead != infoChunkSize) return false;
 			
@@ -140,7 +140,7 @@ namespace nw4r
 			
 			if (bufferSize < labelStringChunkSize) return false;
 			
-			u32 bytesRead = DVDReadPrio(&mFileInfo, pBuffer, labelStringChunkSize, labelStringChunkOffset, DVD_QUEUE_PRIO_MEDIUM);
+			u32 bytesRead = DVDReadPrio(&mFileInfo, pBuffer, labelStringChunkSize, labelStringChunkOffset, DVD_PRIO_MEDIUM);
 			
 			if (bytesRead != labelStringChunkSize) return false;
 			
@@ -152,7 +152,7 @@ namespace nw4r
 		DvdSoundArchive::DvdFileStream::DvdFileStream(const DVDFileInfo * pFileInfo, u32 startOffset, u32 size)
 			: DvdLockedFileStream(pFileInfo, false), mStartOffset(startOffset), mSize(size)
 		{
-			if (!mSize) mSize = mPosition.GetFileSize();
+			if (!mSize) mSize = ut::DvdFileStream::GetSize();
 			
 			ut::DvdFileStream::Seek(mStartOffset, 0);
 		}
@@ -160,7 +160,7 @@ namespace nw4r
 		DvdSoundArchive::DvdFileStream::DvdFileStream(s32 entrynum, u32 startOffset, u32 size)
 			: DvdLockedFileStream(entrynum), mStartOffset(startOffset), mSize(size)
 		{
-			if (!mSize) mSize = mPosition.GetFileSize();
+			if (!mSize) mSize = ut::DvdFileStream::GetSize();
 			
 			ut::DvdFileStream::Seek(mStartOffset, 0);
 		}
@@ -168,9 +168,9 @@ namespace nw4r
 		s32 DvdSoundArchive::DvdFileStream::Read(void * pBuffer, u32 count)
 		{
 			u32 endOffset = mStartOffset + mSize;
-			u32 startOffset = mPosition.Tell();
+			u32 startOffset = ut::DvdFileStream::Tell();
 
-			if (startOffset + count > endOffset) count = RoundUp<u32>(endOffset - mPosition.Tell(), 0x20);
+			if (startOffset + count > endOffset) count = RoundUp<u32>(endOffset - ut::DvdFileStream::Tell(), 0x20);
 			
 			return DvdLockedFileStream::Read(pBuffer, count);
 		}
@@ -183,7 +183,7 @@ namespace nw4r
 					offset += mStartOffset;
 					break;
 				case 1:
-					offset += mPosition.Tell();
+					offset += ut::DvdFileStream::Tell();
 					break;
 				case 2:
 					offset = mStartOffset + mSize - offset;
@@ -211,7 +211,7 @@ namespace nw4r
 		
 		u32 DvdSoundArchive::DvdFileStream::Tell() const
 		{
-			return mPosition.Tell() - mStartOffset;
+			return ut::DvdFileStream::Tell() - mStartOffset;
 		}
 		
 		const void * DvdSoundArchive::detail_GetWaveDataFileAddress(u32) const

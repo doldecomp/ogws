@@ -21,8 +21,8 @@ void NandFileStream::NandAsyncCallback_(s32 result, NANDCommandBlock* block) {
 void NandFileStream::Initialize_() {
     mCanRead = false;
     mCanWrite = false;
-    mOpenedNandFile = false;
-    mOwnsNandFile = false;
+    mCloseOnDestroy = false;
+    mAllowClose = false;
     mIsOpen = false;
     mIsBusy = false;
     mCallback = NULL;
@@ -37,19 +37,19 @@ NandFileStream::NandFileStream(const char* path, u32 access) {
 }
 
 NandFileStream::NandFileStream(const NANDFileInfo* info, u32 access,
-                               bool owns) {
+                               bool close) {
     Initialize_();
-    Open(info, access, owns);
+    Open(info, access, close);
 }
 
 NandFileStream::~NandFileStream() {
-    if (mOpenedNandFile) {
+    if (mCloseOnDestroy) {
         Close();
     }
 }
 
 bool NandFileStream::Open(const char* path, u32 access) {
-    if (mOpenedNandFile) {
+    if (mCloseOnDestroy) {
         Close();
     }
 
@@ -73,15 +73,15 @@ bool NandFileStream::Open(const char* path, u32 access) {
 
     mFilePosition.Seek(0, SEEK_BEG);
 
-    mOpenedNandFile = true;
-    mOwnsNandFile = true;
+    mCloseOnDestroy = true;
+    mAllowClose = true;
     mIsOpen = true;
 
     return true;
 }
 
-bool NandFileStream::Open(const NANDFileInfo* info, u32 access, bool owns) {
-    if (mOpenedNandFile) {
+bool NandFileStream::Open(const NANDFileInfo* info, u32 access, bool close) {
+    if (mCloseOnDestroy) {
         Close();
     }
 
@@ -92,7 +92,7 @@ bool NandFileStream::Open(const NANDFileInfo* info, u32 access, bool owns) {
 
     u32 fileSize;
     if (NANDGetLength(&mAsyncContext.info, &fileSize) != NAND_RESULT_OK) {
-        if (owns) {
+        if (close) {
             NANDClose(&mAsyncContext.info);
         }
 
@@ -102,15 +102,15 @@ bool NandFileStream::Open(const NANDFileInfo* info, u32 access, bool owns) {
     mFilePosition.SetFileSize(fileSize);
     mFilePosition.Seek(0, SEEK_BEG);
 
-    mOpenedNandFile = false;
-    mOwnsNandFile = owns;
+    mCloseOnDestroy = false;
+    mAllowClose = close;
     mIsOpen = true;
 
     return true;
 }
 
 void NandFileStream::Close() {
-    if (mOwnsNandFile && mIsOpen) {
+    if (mAllowClose && mIsOpen) {
         NANDClose(&mAsyncContext.info);
         mIsOpen = false;
     }

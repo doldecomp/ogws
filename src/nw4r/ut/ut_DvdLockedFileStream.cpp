@@ -32,7 +32,7 @@ namespace nw4r
 			return ret;
 		}
 		
-		UNKWORD DvdLockedFileStream::Peek(void * buffer, u32 count)
+		s32 DvdLockedFileStream::Peek(void * buffer, u32 count)
 		{
 			OSLockMutex(&sMutex);
 			UNKWORD ret = this->DvdFileStream::Peek(buffer, count);
