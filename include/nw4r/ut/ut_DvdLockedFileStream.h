@@ -1,5 +1,6 @@
 #ifndef NW4R_UT_DVD_LOCKED_FILE_STREAM_H
 #define NW4R_UT_DVD_LOCKED_FILE_STREAM_H
+#include <nw4r/types_nw4r.h>
 #include <nw4r/ut/ut_DvdFileStream.h>
 #include <revolution/OS.h>
 
