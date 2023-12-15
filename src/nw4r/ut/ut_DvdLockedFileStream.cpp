@@ -1,69 +1,52 @@
-#include "ut_IOStream.h"
-#include "ut_FileStream.h"
-#include "ut_DvdFileStream.h"
-#include <revolution/OS/OSMutex.h>
-#include <revolution/OS/OSInterrupt.h>
-#include "ut_DvdLockedFileStream.h"
+#pragma ipa file // TODO: REMOVE AFTER REFACTOR
 
-namespace nw4r
-{
-	namespace ut
-	{
-		DvdLockedFileStream::DvdLockedFileStream(s32 id) : DvdFileStream(id)
-		{
-			InitMutex_();
-		}
-		
-		DvdLockedFileStream::DvdLockedFileStream(const DVDFileInfo * file, bool b) : DvdFileStream(file, b)
-		{
-			InitMutex_();
-		}
-		
-		DvdLockedFileStream::~DvdLockedFileStream()
-		{
-			
-		}
-		
-		s32 DvdLockedFileStream::Read(void * buffer, u32 count)
-		{
-			OSLockMutex(&sMutex);
-			int ret = this->DvdFileStream::Read(buffer, count);
-			OSUnlockMutex(&sMutex);
-			return ret;
-		}
-		
-		s32 DvdLockedFileStream::Peek(void * buffer, u32 count)
-		{
-			OSLockMutex(&sMutex);
-			UNKWORD ret = this->DvdFileStream::Peek(buffer, count);
-			OSUnlockMutex(&sMutex);
-			return ret;
-		}
-		
-		bool DvdLockedFileStream::CanAsync() const
-		{
-			return false;
-		}
-		
-		bool DvdLockedFileStream::PeekAsync(void *, u32, AsyncCallback, void *)
-		{
-			return false;
-		}
-		
-		bool DvdLockedFileStream::ReadAsync(void *, u32, AsyncCallback, void *)
-		{
-			return false;
-		}
-		
-		const detail::RuntimeTypeInfo * DvdLockedFileStream::GetRuntimeTypeInfo() const
-		{
-			return &typeInfo;
-		}
-		
-		detail::RuntimeTypeInfo DvdLockedFileStream::typeInfo(&DvdFileStream::typeInfo);
-		
-		OSMutex DvdLockedFileStream::sMutex;
-		bool DvdLockedFileStream::sInitialized;
-		
-	}
+#include <nw4r/ut.h>
+#include <revolution/OS.h>
+
+namespace nw4r {
+namespace ut {
+
+NW4R_UT_RTTI_DEF_DERIVED(DvdLockedFileStream, DvdFileStream);
+
+OSMutex DvdLockedFileStream::sMutex;
+bool DvdLockedFileStream::sInitialized = false;
+
+void DvdLockedFileStream::InitMutex_() {
+    BOOL enabled = OSDisableInterrupts();
+
+    if (!sInitialized) {
+        OSInitMutex(&sMutex);
+        sInitialized = true;
+    }
+
+    OSRestoreInterrupts(enabled);
 }
+
+DvdLockedFileStream::DvdLockedFileStream(s32 entrynum)
+    : DvdFileStream(entrynum) {
+    InitMutex_();
+}
+
+DvdLockedFileStream::DvdLockedFileStream(const DVDFileInfo* info, bool close)
+    : DvdFileStream(info, close) {
+    InitMutex_();
+}
+
+DvdLockedFileStream::~DvdLockedFileStream() {}
+
+s32 DvdLockedFileStream::Read(void* dst, u32 size) {
+    OSLockMutex(&sMutex);
+    s32 result = DvdFileStream::Read(dst, size);
+    OSUnlockMutex(&sMutex);
+    return result;
+}
+
+s32 DvdLockedFileStream::Peek(void* dst, u32 size) {
+    OSLockMutex(&sMutex);
+    s32 result = DvdFileStream::Peek(dst, size);
+    OSUnlockMutex(&sMutex);
+    return result;
+}
+
+} // namespace ut
+} // namespace nw4r
