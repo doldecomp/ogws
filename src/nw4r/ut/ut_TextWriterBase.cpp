@@ -94,7 +94,7 @@ bool TextWriterBase<T>::CalcLineRectImpl(Rect* rect, const T** str, int len) {
         if (ch < ' ') {
             Rect r(x, 0.0f, 0.0f, 0.0f);
             context.str = static_cast<const T*>(reader.GetCurrentPos());
-            context.flags = charSpace ? 0 : PrintFlags_CharSpace;
+            context.flags = charSpace ? 0 : PRINTFLAGS_CHARSPACE;
             SetCursorX(x);
 
             if (useLimit && ch != '\n' && prevStream != NULL) {
@@ -231,7 +231,7 @@ template <typename T> f32 TextWriterBase<T>::PrintImpl(const T* str, int len) {
     while (static_cast<const T*>(reader.GetCurrentPos()) - str <= len) {
         if (ch < ' ') {
             context.str = static_cast<const T*>(reader.GetCurrentPos());
-            context.flags = charSpace ? 0 : PrintFlags_CharSpace;
+            context.flags = charSpace ? 0 : PRINTFLAGS_CHARSPACE;
 
             if (useLimit && ch != '\n' && prevStream != prevNewline) {
                 PrintContext<T> context2 = context;

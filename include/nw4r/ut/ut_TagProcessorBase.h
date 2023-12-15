@@ -7,7 +7,7 @@ namespace nw4r {
 namespace ut {
 
 enum PrintFlags {
-    PrintFlags_CharSpace = (1 << 0),
+    PRINTFLAGS_CHARSPACE = (1 << 0),
 };
 
 template <typename T> struct PrintContext {
