@@ -29,7 +29,7 @@ template <typename T> f32 TextWriterBase<T>::GetLineHeight() const {
 }
 
 template <typename T>
-f32 TextWriterBase<T>::VPrintf(const T* str, va_list args) {
+f32 TextWriterBase<T>::VPrintf(const T* str, std::va_list args) {
     T* pBuffer;
 
     if (mFormatBuffer != NULL) {

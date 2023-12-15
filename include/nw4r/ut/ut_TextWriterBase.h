@@ -55,8 +55,8 @@ public:
     f32 CalcStringWidth(const T* str, int len) const;
     void CalcStringRect(Rect* rect, const T* str, int len) const;
 
-    int VSNPrintf(T* buffer, u32 count, const T* fmt, va_list args);
-    f32 VPrintf(const T* str, va_list args);
+    int VSNPrintf(T* buffer, u32 count, const T* fmt, std::va_list args);
+    f32 VPrintf(const T* str, std::va_list args);
     f32 Print(const T* str, int len);
 
     bool CalcLineRectImpl(Rect* rect, const T** str, int len);
@@ -80,14 +80,14 @@ private:
 
 template <>
 inline int TextWriterBase<char>::VSNPrintf(char* buffer, u32 count,
-                                           const char* fmt, va_list args) {
+                                           const char* fmt, std::va_list args) {
     return std::vsnprintf(buffer, count, fmt, args);
 }
 
 template <>
 inline int TextWriterBase<wchar_t>::VSNPrintf(wchar_t* buffer, u32 count,
                                               const wchar_t* fmt,
-                                              va_list args) {
+                                              std::va_list args) {
     return std::vswprintf(buffer, count, fmt, args);
 }
 

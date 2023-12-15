@@ -4,6 +4,12 @@
 #ifdef __cplusplus
 
 namespace std {
+using ::__memrchr;
+using ::memchr;
+using ::memcmp;
+using ::memcpy;
+using ::memmove;
+using ::memset;
 using ::strcat;
 using ::strchr;
 using ::strcmp;
