@@ -1,49 +1,37 @@
 #ifndef NW4R_UT_LOCK_H
 #define NW4R_UT_LOCK_H
-#include <OSMutex.h>
-#include <OSInterrupt.h>
+#include <nw4r/types_nw4r.h>
+#include <nw4r/ut/ut_NonCopyable.h>
+#include <revolution/OS.h>
 
-namespace nw4r
-{
-	namespace ut
-	{
-		namespace detail
-		{
-			inline void Lock(OSMutex & mutex)
-			{
-				OSLockMutex(&mutex);
-			}
-			
-			inline void Unlock(OSMutex & mutex)
-			{
-				OSUnlockMutex(&mutex);
-			}
-			
-			template <typename T>
-			struct AutoLock
-			{
-				T & mMutex;
-				
-				inline AutoLock(T & rMutex) : mMutex(rMutex)
-				{
-					Lock(mMutex);
-				}
-				
-				inline ~AutoLock()
-				{
-					Unlock(mMutex);
-				}
-			};
-		}
-		
-		struct AutoInterruptLock
-		{
-			UNKWORD WORD_0x0;
-			
-			inline AutoInterruptLock() : WORD_0x0(OSDisableInterrupts()) {}
-			inline ~AutoInterruptLock() { OSRestoreInterrupts(WORD_0x0); }
-		};
-	}
-}
+namespace nw4r {
+namespace ut {
+namespace detail {
+
+inline void Lock(OSMutex& mutex) { OSLockMutex(&mutex); }
+inline void Unlock(OSMutex& mutex) { OSUnlockMutex(&mutex); }
+
+template <typename T> class AutoLock : private NonCopyable {
+public:
+    AutoLock(T& obj) : mMutex(obj) { Lock(mMutex); }
+    ~AutoLock() { Unlock(mMutex); }
+
+private:
+    T& mMutex; // at 0x0
+};
+
+} // namespace detail
+
+class AutoInterruptLock : private NonCopyable {
+public:
+    AutoInterruptLock() : mEnabled(OSDisableInterrupts()) {}
+    ~AutoInterruptLock() { OSRestoreInterrupts(mEnabled); }
+
+private:
+    BOOL mEnabled; // at 0x0
+};
+
+} // namespace ut
+} // namespace nw4r
 
 #endif

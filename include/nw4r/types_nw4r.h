@@ -16,10 +16,16 @@ struct ResFontBase;
 
 } // namespace detail
 
+template <typename T> struct AutoLock;
+struct AutoInterruptLock;
 struct BinaryBlockHeader;
 struct BinaryFileHeader;
 struct CharStrmReader;
+struct CharWidths;
+struct CharWriter;
 struct Color;
+struct DvdFileStream;
+struct DvdLockedFileStream;
 struct FileStream;
 struct Font;
 struct Glyph;
@@ -27,11 +33,12 @@ struct IOStream;
 template <typename T, int Ofs> struct LinkList;
 struct List;
 struct NandFileStream;
+template <typename T> struct PrintContext;
 struct Rect;
 struct ResFont;
 struct RomFont;
-template <typename T> struct TextWriterBase;
 template <typename T> struct TagProcessorBase;
+template <typename T> struct TextWriterBase;
 
 } // namespace ut
 
