@@ -6,26 +6,34 @@ namespace nw4r {
 namespace ut {
 namespace {
 
-template <typename T> inline T Clamp(T value, T min, T max) {
-    if (max < value) {
-        return max;
-    }
-
-    return (value < min) ? min : value;
-}
-
-template <> inline f32 Clamp(f32 value, f32 min, f32 max) {
-    if (value > max) {
-        return max;
-    }
-
-    return (value < min) ? min : value;
-}
-
+/**
+ * Value operations
+ */
 template <typename T> inline T Max(T t1, T t2) { return (t1 < t2) ? t2 : t1; }
 
 template <typename T> inline T Min(T t1, T t2) { return (t1 > t2) ? t2 : t1; }
 
+template <typename T> inline T Clamp(T value, T min, T max) {
+    return value > max ? max : (value < min ? min : value);
+}
+
+template <typename T> T Abs(T x) { return x < 0 ? -x : x; }
+
+template <> f32 Abs(register f32 x) {
+    register f32 ax;
+
+    // clang-format off
+    asm {
+        fabs ax, x
+    }
+    // clang-format on
+
+    return ax;
+}
+
+/**
+ * Bit operations
+ */
 template <typename T> inline T BitExtract(T bits, int pos, int len) {
     T mask = (1 << len) - 1;
     return (bits >> pos) & mask;
@@ -35,37 +43,45 @@ template <typename T> inline bool TestBit(T t, int bitIndexLSB) {
     return BitExtract<T>(t, sizeof(T), bitIndexLSB);
 }
 
-template <typename T> inline T RoundUp(T t, unsigned int alignment) {
-    return (t + alignment - 1) & -alignment;
-}
-
-template <> inline void* RoundUp(void* ptr, unsigned int alignment) {
-    return (void*)RoundUp<u32>((u32)ptr, alignment);
-}
-
-template <> inline u8* RoundUp(u8* ptr, unsigned int alignment) {
-    return (u8*)RoundUp<u32>((u32)ptr, alignment);
-}
-
-template <typename T> inline T RoundDown(T t, unsigned int alignment) {
-    return t & -alignment;
-}
-
-template <> inline void* RoundDown(void* ptr, unsigned int alignment) {
-    return (void*)RoundDown<u32>((u32)ptr, alignment);
-}
-
-template <> inline u8* RoundDown(u8* ptr, unsigned int alignment) {
-    return (u8*)RoundDown<u32>((u32)ptr, alignment);
-}
+/**
+ * Pointer operations
+ */
+inline u32 GetIntPtr(const void* ptr) { return reinterpret_cast<u32>(ptr); }
 
 template <typename T>
 inline const void* AddOffsetToPtr(const void* ptr, T offset) {
-    return (const void*)(offset + (T)ptr);
+    return reinterpret_cast<const void*>(GetIntPtr(ptr) + offset);
 }
 
-inline u32 GetOffsetFromPtr(const void* begin, const void* end) {
-    return (u32)end - (u32)begin;
+inline s32 GetOffsetFromPtr(const void* start, const void* end) {
+    return static_cast<s32>(GetIntPtr(end) - GetIntPtr(start));
+}
+
+inline int ComparePtr(const void* p1, const void* p2) {
+    return static_cast<int>(GetIntPtr(p1) - GetIntPtr(p2));
+}
+
+/**
+ * Rounding
+ */
+template <typename T> inline T RoundUp(T t, unsigned int alignment) {
+    return (alignment + t - 1) & ~(alignment - 1);
+}
+
+template <typename T> inline void* RoundUp(T* t, unsigned int alignment) {
+    u32 value = reinterpret_cast<u32>(t);
+    u32 rounded = (alignment + value - 1) & ~(alignment - 1);
+    return reinterpret_cast<void*>(rounded);
+}
+
+template <typename T> inline T RoundDown(T t, unsigned int alignment) {
+    return t & ~(alignment - 1);
+}
+
+template <typename T> inline void* RoundDown(T* t, unsigned int alignment) {
+    u32 value = reinterpret_cast<u32>(t);
+    u32 rounded = value & ~(alignment - 1);
+    return reinterpret_cast<void*>(rounded);
 }
 
 } // namespace

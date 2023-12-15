@@ -106,7 +106,7 @@ namespace nw4r
 			u8 unalignedHeader[0x68];
 
 			static const u32 headerAlignSize = RoundUp<u32>(sizeof(SoundArchiveFile::Header), 32);
-			void * alignedHeader = RoundUp<u8 *>(unalignedHeader, 32);
+			void * alignedHeader = RoundUp<u8>(unalignedHeader, 32);
 			u32 bytesRead = DVDReadPrio(&mFileInfo, alignedHeader, headerAlignSize, 0, DVD_PRIO_MEDIUM);
 			
 			if (bytesRead != headerAlignSize) return false;

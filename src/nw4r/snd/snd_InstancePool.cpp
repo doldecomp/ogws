@@ -14,7 +14,7 @@ namespace nw4r
 			{
 				AutoInterruptLock lock;
 				
-				u8 * r6 = (u8 *)RoundUp<void *>(r28_4, 4);
+				u8 * r6 = (u8 *)RoundUp<void>(r28_4, 4);
 				u32 r4 = RoundUp<u32>(r30_6, 4);
 				u32 count = (r29_5-(r6-(u8*)r28_4))/r4;
 				
