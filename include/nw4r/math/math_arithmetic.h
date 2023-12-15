@@ -5,6 +5,7 @@
 #include <revolution/OS.h>
 
 #define NW4R_MATH_QNAN (-(0.0f / 0.0f))
+#define NW4R_MATH_FLT_MAX 3.402823466e+38f
 
 namespace nw4r {
 namespace math {

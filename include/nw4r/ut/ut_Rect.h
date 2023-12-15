@@ -17,10 +17,10 @@ struct Rect {
     ~Rect() {}
 
     void SetWidth(f32 width) { right = left + width; }
-    f32 GetWidth() const { return bottom - top; }
+    f32 GetWidth() const { return right - left; }
 
     void SetHeight(f32 height) { bottom = top + height; }
-    f32 GetHeight() const { return right - left; }
+    f32 GetHeight() const { return bottom - top; }
 
     void Normalize() {
         f32 l = left;

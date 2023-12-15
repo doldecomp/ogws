@@ -7,6 +7,7 @@ namespace std {
 using ::mbstowcs;
 using ::mbtowc;
 using ::swprintf;
+using ::vswprintf;
 using ::wcscat;
 using ::wcschr;
 using ::wcscmp;

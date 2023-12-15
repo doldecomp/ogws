@@ -6,6 +6,10 @@
 namespace nw4r {
 namespace ut {
 
+enum PrintFlags {
+    PrintFlags_CharSpace = (1 << 0),
+};
+
 template <typename T> struct PrintContext {
     TextWriterBase<T>* writer; // at 0x0
     const T* str;              // at 0x4

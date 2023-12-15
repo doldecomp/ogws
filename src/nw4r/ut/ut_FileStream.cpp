@@ -31,7 +31,7 @@ u32 FileStream::FilePosition::Append(s32 offset) {
         mFileOffset = 0;
     } else {
         mFileOffset = newOffset;
-        mFileSize = Max<u32>(mFileOffset, mFileSize);
+        mFileSize = Max(mFileOffset, mFileSize);
     }
 
     return mFileOffset;
