@@ -28,14 +28,10 @@ struct Rect {
         f32 r = right;
         f32 b = bottom;
 
-        // min(r, l)
-        left = math::FSelect(r - l, l, r);
-        // max(r, l)
-        right = math::FSelect(r - l, r, l);
-        // min(b, t)
-        top = math::FSelect(b - t, t, b);
-        // max(b, t)
-        bottom = math::FSelect(b - t, b, t);
+        left = math::FSelect(r - l, l, r);   // min(r, l)
+        right = math::FSelect(r - l, r, l);  // max(r, l)
+        top = math::FSelect(b - t, t, b);    // min(b, t)
+        bottom = math::FSelect(b - t, b, t); // max(b, t)
     }
 
     void MoveTo(f32 x, f32 y) {
