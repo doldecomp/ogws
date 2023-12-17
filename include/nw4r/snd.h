@@ -4,6 +4,7 @@
 #include <nw4r/snd/snd_AxManager.h>
 #include <nw4r/snd/snd_Common.h>
 #include <nw4r/snd/snd_MoveValue.h>
+#include <nw4r/snd/snd_SoundHandle.h>
 #include <nw4r/snd/snd_VoiceManager.h>
 
 #endif

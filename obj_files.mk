@@ -57,7 +57,7 @@ NW4R_O_FILES := \
 	build/nw4r/math/math_types.o \
 	build/nw4r/math/math_geometry.o \
 	\
-	build/asm/nw4r/snd/snd_AnimSound.o \
+	build/nw4r/snd/snd_AnimSound.o \
 	build/nw4r/snd/snd_AxManager.o \
 	build/asm/nw4r/snd/snd_AxVoice.o \
 	build/asm/nw4r/snd/snd_AxVoiceManager.o \
