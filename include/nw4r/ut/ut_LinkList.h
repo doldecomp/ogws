@@ -3,6 +3,11 @@
 #include <nw4r/types_nw4r.h>
 #include <nw4r/ut/ut_NonCopyable.h>
 
+#define NW4R_UT_LIST_TYPEDEF_DECL(T)                                           \
+    typedef nw4r::ut::LinkList<T, offsetof(T, node)> T##List;                  \
+    typedef nw4r::ut::LinkList<T, offsetof(T, node)>::Iterator T##Iter;        \
+    typedef nw4r::ut::LinkList<T, offsetof(T, node)>::ConstIterator T##ConstIter
+
 namespace nw4r {
 namespace ut {
 

@@ -63,16 +63,16 @@ namespace nw4r
                     it++->OnUpdateVoiceSoundThread();
                 }
 
-                VoiceManager::GetInstance()->NotifyVoiceUpdate();
+                VoiceManager::GetInstance().NotifyVoiceUpdate();
             }
 
             void* SoundThread::SoundThreadFunc(void *data)
             {
                 SoundThread *thisx = (SoundThread *)data;
 
-                AxManager::GetInstance()->RegisterCallback(&thisx->mAxNode, AxCallbackFunc);
+                AxManager::GetInstance().RegisterCallback(&thisx->mAxNode, AxCallbackFunc);
                 thisx->SoundThreadProc();
-                AxManager::GetInstance()->UnregisterCallback(&thisx->mAxNode);
+                AxManager::GetInstance().UnregisterCallback(&thisx->mAxNode);
 
                 return NULL;
             }
@@ -110,9 +110,9 @@ namespace nw4r
                         s32 start = OSGetTick();
 
                         AxVoiceManager::GetInstance()->FreeAllReservedAxVoice();
-                        AxManager::GetInstance()->Update();
+                        AxManager::GetInstance().Update();
 
-                        if (AxManager::GetInstance()->BYTE_0x1A == 0)
+                        if (AxManager::GetInstance().IsDiskError() == 0)
                         {
                             ut::LinkList<PlayerCallback, 0>::Iterator playerCb = mPlayerCbList.GetBeginIter();
                             while (playerCb != mPlayerCbList.GetEndIter())
@@ -124,7 +124,7 @@ namespace nw4r
                         }
 
                         Util::CalcRandom();
-                        VoiceManager::GetInstance()->UpdateAllVoices();
+                        VoiceManager::GetInstance().UpdateAllVoices();
 
                         s32 end = OSGetTick();
                         mLastUpdateTime = end - start;

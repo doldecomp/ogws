@@ -1,8 +1,8 @@
 #ifndef NW4R_SND_FX_BASE_H
 #define NW4R_SND_FX_BASE_H
 #include "types_nw4r.h"
+#include "snd_Common.h"
 #include "ut_LinkList.h"
-#include "snd_AxManager.h"
 
 namespace nw4r
 {
@@ -10,7 +10,10 @@ namespace nw4r
 	{
 		enum SampleFormat
 		{
-			SAMPLE_FORMAT_0
+			SAMPLE_FORMAT_PCM_S32,
+			SAMPLE_FORMAT_PCM_S16,
+			SAMPLE_FORMAT_PCM_S8,
+			SAMPLE_FORMAT_DSP_ADPCM
 		};
 		
 		struct FxBase
@@ -20,8 +23,10 @@ namespace nw4r
 			inline virtual UNKTYPE Shutdown() {} // at 0x10
 			inline virtual UNKTYPE UpdateBuffer(int, void **, u32, SampleFormat, float, OutputMode) {} // at 0x14
 			
-			ut::LinkListNode mNode; // at 0x4
+			ut::LinkListNode node; // at 0x4
 		};
+
+		NW4R_UT_LIST_TYPEDEF_DECL(FxBase);
 	}
 }
 

@@ -28,7 +28,7 @@ BOOL AXFXReverbHiSettingsDpl2(AXFX_REVERBHI_DPL2* fx) {
 }
 
 void AXFXReverbHiCallbackDpl2(void* chans, void* context) {
-    AXFXReverbHiExpCallbackDpl2((AXFX_BUFFERUPDATE*)chans,
+    AXFXReverbHiExpCallbackDpl2((AXFX_BUFFERUPDATE_DPL2*)chans,
                                 (AXFX_REVERBHI_EXP_DPL2*)context);
 }
 

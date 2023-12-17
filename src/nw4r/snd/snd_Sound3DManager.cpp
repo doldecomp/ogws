@@ -1,6 +1,7 @@
 #pragma ipa file
 #include <math.h>
 #include "snd_SoundHandle.h"
+#include "snd_AxManager.h"
 #include "snd_Sound3DManager.h"
 #include "snd_Sound3DListener.h"
 #include "snd_AxManager.h"
@@ -183,10 +184,10 @@ namespace nw4r
 				float f4;
 				float f3;
 				
-				switch (AxManager::GetInstance()->GetOutputMode())
+				switch (AxManager::GetInstance().GetOutputMode())
 				{
-					case OUTPUT_MODE_1:
-					case OUTPUT_MODE_2:
+					case OUTPUT_MODE_SURROUND:
+					case OUTPUT_MODE_DPL2:
 					{	//80041670
 						static float angleRearLeft = -FLOAT_0x1C; // at 0x804BEAC0
 						static float angleFrontLeft = -FLOAT_0x18; // at 0x804BEAC8
@@ -266,7 +267,7 @@ namespace nw4r
 						break;
 						//goto 80041B7C
 					}
-					case OUTPUT_MODE_0:
+					case OUTPUT_MODE_STEREO:
 					{
 						//8004195C
 						static float angleRearLeft = -NW4R_MATH_PI + FLOAT_0x14; // at 0x804BEAE0
@@ -317,7 +318,7 @@ namespace nw4r
 						break;
 						//goto 80041B7C
 					}
-					case OUTPUT_MODE_3:
+					case OUTPUT_MODE_MONO:
 					default:
 						//80041B74
 						f_5 = 0.0f;

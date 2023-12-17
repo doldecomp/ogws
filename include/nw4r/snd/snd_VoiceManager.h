@@ -11,7 +11,7 @@ namespace nw4r
 		{
 			struct VoiceManager
 			{
-				static VoiceManager * GetInstance();
+				static VoiceManager& GetInstance();
 
 				Voice * AllocVoice(int, int, int, Voice::VoiceCallback, void *);
 				void UpdateAllVoices();

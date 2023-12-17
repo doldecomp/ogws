@@ -16,12 +16,12 @@ namespace nw4r
 
             static inline f32 GetMasterVolume()
             {
-                return detail::AxManager::GetInstance()->mOutputVolume.GetValue();
+                return detail::AxManager::GetInstance().GetMasterVolume();
             }
 
             static inline void PrepareReset()
             {
-                detail::AxManager::GetInstance()->PrepareReset();
+                detail::AxManager::GetInstance().PrepareReset();
             }
 
             void InitSoundSystem(s32, s32);

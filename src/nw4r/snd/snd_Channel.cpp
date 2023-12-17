@@ -494,7 +494,7 @@ namespace nw4r
 				//80038488
 				pChannel->BOOL_0x33 = true;
 				
-				Voice * pVoice = VoiceManager::GetInstance()->AllocVoice(r24_3, r25_4, r26_5, VoiceCallbackFunc, pChannel);
+				Voice * pVoice = VoiceManager::GetInstance().AllocVoice(r24_3, r25_4, r26_5, VoiceCallbackFunc, pChannel);
 				
 				if (!pVoice)
 				{

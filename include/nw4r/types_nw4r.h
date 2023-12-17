@@ -93,6 +93,9 @@ struct StrmSoundHandle;
 struct WaveSoundHandle;
 
 namespace detail {
+
+struct AxManager;
+
 struct BasicSound;
 struct BasicPlayer;
 struct ChannelManager;

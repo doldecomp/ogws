@@ -57,7 +57,7 @@ u32 AXFXReverbHiExpGetMemSizeDpl2(const AXFX_REVERBHI_EXP_DPL2* fx);
 BOOL AXFXReverbHiExpInitDpl2(AXFX_REVERBHI_EXP_DPL2* fx);
 void AXFXReverbHiExpShutdownDpl2(AXFX_REVERBHI_EXP_DPL2* fx);
 BOOL AXFXReverbHiExpSettingsDpl2(AXFX_REVERBHI_EXP_DPL2* fx);
-void AXFXReverbHiExpCallbackDpl2(struct AXFX_BUFFERUPDATE* update,
+void AXFXReverbHiExpCallbackDpl2(struct AXFX_BUFFERUPDATE_DPL2* update,
                                  AXFX_REVERBHI_EXP_DPL2* fx);
 
 #ifdef __cplusplus

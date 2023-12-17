@@ -28,9 +28,9 @@ namespace nw4r
 				FLOAT_0x28 = 0.0f;
 				FLOAT_0x24 = 1.0f;
 				
-				ARR_0x2C[AuxBus_A] = 0.0f;
-				ARR_0x2C[AuxBus_B] = 0.0f;
-				ARR_0x2C[AuxBus_C] = 0.0f;
+				ARR_0x2C[AUX_A] = 0.0f;
+				ARR_0x2C[AUX_B] = 0.0f;
+				ARR_0x2C[AUX_C] = 0.0f;
 				
 				mRemoteOutputVolumes[0] = 1.0f;
 				ARR_0x48[0] = 0.0f;

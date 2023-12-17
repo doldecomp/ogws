@@ -1,105 +1,89 @@
-#ifndef NW4R_SND_AXMANAGER_H
-#define NW4R_SND_AXMANAGER_H
-#include <ai.h>
-#include <AX.h>
-#include "types_nw4r.h"
-#include "ut_LinkList.h"
-#include "snd_MoveValue.h"
+#ifndef NW4R_SND_AX_MANAGER_H
+#define NW4R_SND_AX_MANAGER_H
+#include <nw4r/snd/snd_Common.h>
+#include <nw4r/snd/snd_FxBase.h>
+#include <nw4r/snd/snd_MoveValue.h>
+#include <nw4r/types_nw4r.h>
+#include <nw4r/ut.h>
+#include <revolution/AI.h>
+#include <revolution/AX.h>
 
-namespace nw4r
-{
-	namespace snd
-	{
-		enum AuxBus
-		{
-			AuxBus_A,
-			AuxBus_B,
-			AuxBus_C
-		};
-		
-		enum OutputMode
-		{
-			OUTPUT_MODE_0,
-			OUTPUT_MODE_1,
-			OUTPUT_MODE_2,
-			OUTPUT_MODE_3
-		};
-		
-		namespace detail
-		{
-			//sizeof(AxManager) = 0x0000f4?
-			struct AxManager
-			{
-				struct CallbackListNode
-				{
-					ut::LinkListNode mNode; // at 0x0
-					AXOutCallback mCallback; // at 0x8
-				};
-				
-				static AxManager * GetInstance();
-				
-				static void AxCallbackFunc();
-				static void AuxCallbackFunc(void *, void *);
-				static void AiDmaCallbackFunc();
-				
-				static u8 sZeroBuffer[0x100];
-				
-				AxManager();
-				~AxManager();
-				
-				void Init();
-				void Shutdown();
-				
-				float GetOutputVolume() const;
-				
-				UNKTYPE Update();
-				u8 * GetZeroBufferAddress();
-				
-				void RegisterCallback(CallbackListNode *, AXOutCallback);
-				void UnregisterCallback(CallbackListNode *);
-				
-				UNKTYPE SetOutputMode(OutputMode);
-				OutputMode GetOutputMode();
-				UNKTYPE SetMasterVolume(float, int);
-				bool AppendEffect(AuxBus, FxBase *);
-				void ClearEffect(AuxBus, int);
-				void ShutdownEffect(AuxBus);
-				void PrepareReset();
-				
-				OutputMode mOutputMode; // at 0x0
-				u8 * mZeroBufferAddress; // at 0x4
-				
-				ut::LinkList<CallbackListNode, 0> mCallbackList; // from 0x8 to 0x10
-				AXOutCallback mLastCallback; // at 0x14
-				bool mPoweredFlag; // at 0x18
-				bool BYTE_0x19;
-				bool BYTE_0x1A;
-				
-				MoveValue<float, int> mOutputVolume; // at 0x1c
-				MoveValue<float, int> MV_0x2C;
-				MoveValue<float, int> MV_0x3C;
-				
-				AIDMACallback mAIDMACallback; // at 0x4c
-				UNKWORD WORD_0x50;
-				
-				MoveValue<float, int> ARR_0x54[3];
-				MoveValue<float, int> ARR_0x84[3];
-				
-				ut::LinkList<FxBase, 4> LIST_0xB4[3];
-				
-				AXAuxCallback ARR_0xD8[3];
-				
-				UNKWORD ARR_0xE4[3];
-				
-				char ARR_0xF0[3];
-				
-				inline ut::LinkList<FxBase, 4> * GetEffectList(AuxBus bus)
-				{
-					return LIST_0xB4 + bus;
-				}
-			};
-		}
-	}
-}
+namespace nw4r {
+namespace snd {
+
+namespace detail {
+
+class AxManager {
+public:
+    struct CallbackListNode {
+        ut::LinkListNode node;  // at 0x0
+        AXOutCallback callback; // at 0x8
+    };
+
+    NW4R_UT_LIST_TYPEDEF_DECL(CallbackListNode);
+
+public:
+    static AxManager& GetInstance();
+
+    AxManager();
+    ~AxManager();
+
+    bool CheckInit() { return mInitialized; }
+    bool IsDiskError() const { return mDiskError; }
+    s32 GetResetReadyTimer() const { return mResetReadyTimer; }
+    FxBaseList& GetEffectList(AuxBus bus) { return mFxList[bus]; }
+
+    void Init();
+    void Shutdown();
+    f32 GetOutputVolume() const;
+    void Update();
+    void* GetZeroBufferAddress();
+
+    void RegisterCallback(CallbackListNode* node, AXOutCallback callback);
+    void UnregisterCallback(CallbackListNode* node);
+
+    void SetOutputMode(OutputMode mode);
+    OutputMode GetOutputMode();
+
+    f32 GetMasterVolume() const { return mMasterVolume.GetValue(); }
+    void SetMasterVolume(f32 volume, int frame);
+
+    bool AppendEffect(AuxBus bus, FxBase* fx);
+    void ClearEffect(AuxBus bus, int frame);
+    void ShutdownEffect(AuxBus bus);
+
+    void PrepareReset();
+
+private:
+    static void AxCallbackFunc();
+    static void AuxCallbackFunc(void* chans, void* context);
+    static void AiDmaCallbackFunc();
+
+private:
+    static u8 sZeroBuffer[0x100];
+
+    OutputMode mOutputMode;                          // at 0x0
+    void* mZeroBuffer;                               // at 0x4
+    CallbackListNodeList mCallbackList;              // at 0x8
+    AXOutCallback mOldAxCallback;                    // at 0x14
+    bool mInitialized;                               // at 0x18
+    bool mUpdateVoicePrio;                           // at 0x19
+    bool mDiskError;                                 // at 0x1A
+    MoveValue<f32, int> mMasterVolume;               // at 0x1C
+    MoveValue<f32, int> mMainOutVolume;              // at 0x2C
+    MoveValue<f32, int> mVolumeForReset;             // at 0x3C
+    AIDMACallback mOldAiCallback;                    // at 0x4C
+    s32 mResetReadyTimer;                            // at 0x50
+    MoveValue<f32, int> mAuxFadeVolume[AUX_BUS_NUM]; // at 0x54
+    MoveValue<f32, int> mAuxUserVolume[AUX_BUS_NUM]; // at 0x84
+    FxBaseList mFxList[AUX_BUS_NUM];                 // at 0xB4
+    AXAuxCallback mAuxCallback[AUX_BUS_NUM];         // at 0xD8
+    void* mAuxCallbackContext[AUX_BUS_NUM];          // at 0xE4
+    u8 mAuxCallbackWait[AUX_BUS_NUM];                // at 0xF0
+};
+
+} // namespace detail
+} // namespace snd
+} // namespace nw4r
 
 #endif

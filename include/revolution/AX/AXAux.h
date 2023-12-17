@@ -5,6 +5,13 @@
 extern "C" {
 #endif
 
+/**
+ * Stereo: Left, Right, Surround
+ * DPL2:   Left, Right, Left Surround, Right Surround
+ */
+#define AX_STEREO_CHAN_MAX 3
+#define AX_DPL2_CHAN_MAX 4
+
 #define AX_SAMPLES_PER_FRAME 96
 #define AX_SAMPLE_DEPTH_BYTES sizeof(u32)
 #define AX_SAMPLES_PER_FRAME_RMT 18
