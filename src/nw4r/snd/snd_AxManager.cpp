@@ -10,6 +10,8 @@ namespace nw4r {
 namespace snd {
 namespace detail {
 
+NW4R_UT_LIST_TYPEDEF_INST(FxBase);
+
 u8 AxManager::sZeroBuffer[0x100];
 
 AxManager::AxManager()
@@ -37,9 +39,6 @@ AxManager& AxManager::GetInstance() {
     static AxManager instance;
     return instance;
 }
-
-// TODO: This should be weak, but that ruins link order.
-AxManager::~AxManager() {}
 
 void AxManager::Init() {
     if (!mInitialized) {

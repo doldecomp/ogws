@@ -6,7 +6,7 @@
 
 // Codewarrior tricks for matching decomp
 // (Functions are given prototypes for -requireprotos)
-#ifdef __MWERKS__
+#ifndef NON_MATCHING
 // Force reference specific data
 #define DECOMP_FORCEACTIVE(module, ...)                                        \
     void fake_function(...);                                                   \

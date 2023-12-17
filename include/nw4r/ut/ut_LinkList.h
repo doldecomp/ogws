@@ -6,7 +6,16 @@
 #define NW4R_UT_LIST_TYPEDEF_DECL(T)                                           \
     typedef nw4r::ut::LinkList<T, offsetof(T, node)> T##List;                  \
     typedef nw4r::ut::LinkList<T, offsetof(T, node)>::Iterator T##Iter;        \
-    typedef nw4r::ut::LinkList<T, offsetof(T, node)>::ConstIterator T##ConstIter
+    typedef nw4r::ut::LinkList<T, offsetof(T, node)>::ConstIterator            \
+        T##ConstIter;
+
+#ifndef NON_MATCHING
+// Reserved for matching hacks
+#define NW4R_UT_LIST_TYPEDEF_INST(T)                                           \
+    template struct nw4r::ut::LinkList<T, offsetof(T, node)>
+#else
+#define NW4R_UT_LIST_TYPEDEF_INST(T)
+#endif
 
 namespace nw4r {
 namespace ut {
@@ -256,13 +265,13 @@ public:
     Iterator GetBeginIter() { return Iterator(LinkListImpl::GetBeginIter()); }
     ConstIterator GetBeginIter() const { return ConstIterator(GetBeginIter()); }
     detail::ReverseIterator<Iterator> GetBeginReverseIter() {
-        return detail::ReverseIterator(GetBeginIter());
+        return detail::ReverseIterator<Iterator>(GetBeginIter());
     }
 
     Iterator GetEndIter() { return Iterator(LinkListImpl::GetEndIter()); }
     ConstIterator GetEndIter() const { return ConstIterator(GetEndIter()); }
     detail::ReverseIterator<Iterator> GetEndReverseIter() {
-        return detail::ReverseIterator(GetEndIter());
+        return detail::ReverseIterator<Iterator>(GetEndIter());
     }
 
     Iterator Insert(Iterator it, T* p) {
@@ -303,7 +312,8 @@ public:
     }
 
     static const T* GetPointerFromNode(const LinkListNode* node) {
-        return reinterpret_cast<T*>(reinterpret_cast<char*>(node) - Ofs);
+        return reinterpret_cast<const T*>(reinterpret_cast<const char*>(node) -
+                                          Ofs);
     }
 };
 

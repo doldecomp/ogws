@@ -26,7 +26,7 @@ public:
     static AxManager& GetInstance();
 
     AxManager();
-    ~AxManager();
+    ~AxManager() {}
 
     bool CheckInit() { return mInitialized; }
     bool IsDiskError() const { return mDiskError; }
