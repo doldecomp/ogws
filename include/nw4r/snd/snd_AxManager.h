@@ -10,7 +10,6 @@
 
 namespace nw4r {
 namespace snd {
-
 namespace detail {
 
 class AxManager {
