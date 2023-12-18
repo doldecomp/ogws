@@ -213,8 +213,8 @@ u32 AxVoice::GetSampleByByte(u32 addr, Format fmt) {
 
     switch (fmt) {
     case FORMAT_ADPCM:
-        samples = addr / AX_ADPCM_FRAME_SIZE_B * AX_ADPCM_SAMPLES_PER_FRAME;
-        frac = addr % AX_ADPCM_FRAME_SIZE_B;
+        samples = addr / AX_ADPCM_FRAME_SIZE * AX_ADPCM_SAMPLES_PER_FRAME;
+        frac = addr % AX_ADPCM_FRAME_SIZE;
         if (frac != 0) {
             samples += (frac - 1) * sizeof(u16);
         }

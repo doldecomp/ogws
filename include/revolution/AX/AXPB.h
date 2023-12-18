@@ -10,18 +10,18 @@ extern "C" {
  * - One for the header
  * - Seven for the audio samples
  */
-#define AX_ADPCM_FRAME_SIZE_B 8
-#define AX_ADPCM_FRAME_SAMPLE_SIZE_B (AX_ADPCM_FRAME_SIZE_B - 1)
+#define AX_ADPCM_FRAME_SIZE 8
+#define AX_ADPCM_SAMPLE_BYTES_PER_FRAME (AX_ADPCM_FRAME_SIZE - 1)
 
-// Two audio samples per byte (nibbles)
-#define AX_ADPCM_SAMPLE_SIZE_B 2
-
-// Amount of nibbles in a frame
-#define AX_ADPCM_NIBBLES_PER_FRAME (AX_ADPCM_FRAME_SIZE_B * 2)
+// Two audio samples per byte (each nibble)
+#define AX_ADPCM_SAMPLES_PER_BYTE 2
 
 // Amount of audio samples in a frame
 #define AX_ADPCM_SAMPLES_PER_FRAME                                             \
-    (AX_ADPCM_FRAME_SAMPLE_SIZE_B * AX_ADPCM_SAMPLE_SIZE_B)
+    (AX_ADPCM_SAMPLE_BYTES_PER_FRAME * AX_ADPCM_SAMPLES_PER_BYTE)
+
+// Amount of nibbles in a frame
+#define AX_ADPCM_NIBBLES_PER_FRAME (AX_ADPCM_FRAME_SIZE * 2)
 
 typedef enum { AX_VOICE_NORMAL, AX_VOICE_STREAM } AXVOICETYPE;
 
