@@ -5,6 +5,24 @@
 extern "C" {
 #endif
 
+/**
+ * One frame contains eight bytes:
+ * - One for the header
+ * - Seven for the audio samples
+ */
+#define AX_ADPCM_FRAME_SIZE_B 8
+#define AX_ADPCM_FRAME_SAMPLE_SIZE_B (AX_ADPCM_FRAME_SIZE_B - 1)
+
+// Two audio samples per byte (nibbles)
+#define AX_ADPCM_SAMPLE_SIZE_B 2
+
+// Amount of nibbles in a frame
+#define AX_ADPCM_NIBBLES_PER_FRAME (AX_ADPCM_FRAME_SIZE_B * 2)
+
+// Amount of audio samples in a frame
+#define AX_ADPCM_SAMPLES_PER_FRAME                                             \
+    (AX_ADPCM_FRAME_SAMPLE_SIZE_B * AX_ADPCM_SAMPLE_SIZE_B)
+
 typedef enum { AX_VOICE_NORMAL, AX_VOICE_STREAM } AXVOICETYPE;
 
 typedef enum { AX_VOICE_STOP, AX_VOICE_RUN } AXVOICESTATE;
@@ -29,6 +47,54 @@ typedef enum {
     AX_SRC_TYPE_4TAP_16K,
     AX_SRC_TYPE_4TAP_AUTO
 } AXPBSRCTYPE;
+
+typedef enum {
+    AX_MIXER_CTRL_L = (1 << 0),
+    AX_MIXER_CTRL_R = (1 << 1),
+    AX_MIXER_CTRL_DELTA = (1 << 2),
+    AX_MIXER_CTRL_S = (1 << 3),
+    AX_MIXER_CTRL_DELTA_S = (1 << 4),
+
+    AX_MIXER_CTRL_AL = (1 << 16),
+    AX_MIXER_CTRL_AR = (1 << 17),
+    AX_MIXER_CTRL_DELTA_A = (1 << 18),
+    AX_MIXER_CTRL_AS = (1 << 19),
+    AX_MIXER_CTRL_DELTA_AS = (1 << 20),
+
+    AX_MIXER_CTRL_BL = (1 << 21),
+    AX_MIXER_CTRL_BR = (1 << 22),
+    AX_MIXER_CTRL_DELTA_B = (1 << 23),
+    AX_MIXER_CTRL_BS = (1 << 24),
+    AX_MIXER_CTRL_DELTA_BS = (1 << 25),
+
+    AX_MIXER_CTRL_CL = (1 << 26),
+    AX_MIXER_CTRL_CR = (1 << 27),
+    AX_MIXER_CTRL_DELTA_C = (1 << 28),
+    AX_MIXER_CTRL_CS = (1 << 29),
+    AX_MIXER_CTRL_DELTA_CS = (1 << 30)
+};
+
+typedef enum {
+    AX_MIXER_CTRL_RMT_M0 = (1 << 0),
+    AX_MIXER_CTRL_RMT_DELTA_M0 = (1 << 1),
+    AX_MIXER_CTRL_RMT_A0 = (1 << 2),
+    AX_MIXER_CTRL_RMT_DELTA_A0 = (1 << 3),
+
+    AX_MIXER_CTRL_RMT_M1 = (1 << 4),
+    AX_MIXER_CTRL_RMT_DELTA_M1 = (1 << 5),
+    AX_MIXER_CTRL_RMT_A1 = (1 << 6),
+    AX_MIXER_CTRL_RMT_DELTA_A1 = (1 << 7),
+
+    AX_MIXER_CTRL_RMT_M2 = (1 << 8),
+    AX_MIXER_CTRL_RMT_DELTA_M2 = (1 << 9),
+    AX_MIXER_CTRL_RMT_A2 = (1 << 10),
+    AX_MIXER_CTRL_RMT_DELTA_A2 = (1 << 11),
+
+    AX_MIXER_CTRL_RMT_M3 = (1 << 12),
+    AX_MIXER_CTRL_RMT_DELTA_M3 = (1 << 13),
+    AX_MIXER_CTRL_RMT_A3 = (1 << 14),
+    AX_MIXER_CTRL_RMT_DELTA_A3 = (1 << 15)
+};
 
 typedef struct _AXPBMIX {
     u16 vL;          // at 0x0
@@ -99,7 +165,7 @@ typedef struct _AXPBADDR {
 } AXPBADDR;
 
 typedef struct _AXPBADPCM {
-    u16 a[2][8];    // at 0x0
+    u16 a[8][2];    // at 0x0
     u16 gain;       // at 0x20
     u16 pred_scale; // at 0x22
     u16 yn1;        // at 0x24

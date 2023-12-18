@@ -17,7 +17,10 @@ template <typename T> inline T Clamp(T value, T min, T max) {
     return value > max ? max : (value < min ? min : value);
 }
 
-template <typename T> inline T Abs(T x) { return x < 0 ? -x : x; }
+template <typename T> inline T Abs(T x) {
+    // Static cast needed to break abs optimization during instruction selection
+    return x < 0 ? static_cast<T>(-x) : static_cast<T>(x);
+}
 
 template <> f32 inline Abs(register f32 x) {
     register f32 ax;

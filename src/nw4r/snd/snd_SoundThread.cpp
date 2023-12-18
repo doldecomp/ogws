@@ -109,7 +109,7 @@ namespace nw4r
 
                         s32 start = OSGetTick();
 
-                        AxVoiceManager::GetInstance()->FreeAllReservedAxVoice();
+                        AxVoiceManager::GetInstance().FreeAllReservedAxVoice();
                         AxManager::GetInstance().Update();
 
                         if (AxManager::GetInstance().IsDiskError() == 0)

@@ -23,7 +23,7 @@ namespace nw4r
 			inline virtual UNKTYPE Shutdown() {} // at 0x10
 			inline virtual UNKTYPE UpdateBuffer(int, void **, u32, SampleFormat, float, OutputMode) {} // at 0x14
 			
-			ut::LinkListNode node; // at 0x4
+			NW4R_UT_LIST_NODE_DECL(); // at 0x4
 		};
 
 		NW4R_UT_LIST_TYPEDEF_DECL(FxBase);

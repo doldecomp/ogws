@@ -1,6 +1,6 @@
 #include <types.h>
 
-void* __va_arg(va_list argp, _va_arg_type type) {
+void* __va_arg(va_list argp, int type) {
     char* pRegNo = &argp->gpr;
     int regNo = argp->gpr;
     int maxRegNo = 8;

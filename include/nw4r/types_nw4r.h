@@ -79,6 +79,8 @@ struct FRUSTUM;
 } // namespace math
 
 namespace snd {
+
+struct AxVoice;
 struct FxBase;
 struct SoundPlayer;
 struct SoundHandle;

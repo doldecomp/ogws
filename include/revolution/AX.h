@@ -1,5 +1,5 @@
 /**
- * References: Dolphin Emulator
+ * References: Dolphin Emulator, Retro Modding Wiki, vgmstream
  */
 
 #ifndef RVL_SDK_PUBLIC_AX_H

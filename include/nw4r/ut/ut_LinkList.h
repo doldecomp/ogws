@@ -3,14 +3,26 @@
 #include <nw4r/types_nw4r.h>
 #include <nw4r/ut/ut_NonCopyable.h>
 
+/**
+ * Declare typedefs for an object's linked list specialization, and the two
+ * iterator classes.
+ */
 #define NW4R_UT_LIST_TYPEDEF_DECL(T)                                           \
     typedef nw4r::ut::LinkList<T, offsetof(T, node)> T##List;                  \
     typedef nw4r::ut::LinkList<T, offsetof(T, node)>::Iterator T##Iter;        \
     typedef nw4r::ut::LinkList<T, offsetof(T, node)>::ConstIterator            \
         T##ConstIter;
 
+/**
+ * Declare a member LinkListNode for use with the typedef.
+ */
+#define NW4R_UT_LIST_NODE_DECL() nw4r::ut::LinkListNode node
+
+/**
+ * Explicitly instantiate a linked list specialization.
+ * (RESERVED FOR MATCHING DECOMP HACKS)
+ */
 #ifndef NON_MATCHING
-// Reserved for matching hacks
 #define NW4R_UT_LIST_TYPEDEF_INST(T)                                           \
     template struct nw4r::ut::LinkList<T, offsetof(T, node)>
 #else

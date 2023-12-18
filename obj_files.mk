@@ -59,7 +59,7 @@ NW4R_O_FILES := \
 	\
 	build/nw4r/snd/snd_AnimSound.o \
 	build/nw4r/snd/snd_AxManager.o \
-	build/asm/nw4r/snd/snd_AxVoice.o \
+	build/nw4r/snd/snd_AxVoice.o \
 	build/asm/nw4r/snd/snd_AxVoiceManager.o \
 	build/nw4r/snd/snd_AxfxImpl.o \
 	build/nw4r/snd/snd_Bank.o \
@@ -121,7 +121,7 @@ NW4R_O_FILES := \
 	build/nw4r/snd/snd_WaveSoundHandle.o \
 	build/asm/nw4r/snd/snd_WsdFile.o \
 	build/asm/nw4r/snd/snd_WsdPlayer.o \
-	build/asm/nw4r/snd/snd_adpcm.o \
+	build/nw4r/snd/snd_adpcm.o \
 	\
 	build/nw4r/g3d/g3d_rescommon.o \
 	build/nw4r/g3d/g3d_resdict.o \
