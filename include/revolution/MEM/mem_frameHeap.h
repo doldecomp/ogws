@@ -11,7 +11,9 @@ typedef struct MEMiHeapHead;
 // Specify how to free memory
 typedef enum {
     MEM_FRM_HEAP_FREE_TO_HEAD = (1 << 0),
-    MEM_FRM_HEAP_FREE_TO_TAIL = (1 << 1)
+    MEM_FRM_HEAP_FREE_TO_TAIL = (1 << 1),
+    MEM_FRM_HEAP_FREE_ALL =
+        MEM_FRM_HEAP_FREE_TO_HEAD | MEM_FRM_HEAP_FREE_TO_TAIL
 } MEMiFrmFreeFlag;
 
 typedef struct MEMiFrmHeapState {

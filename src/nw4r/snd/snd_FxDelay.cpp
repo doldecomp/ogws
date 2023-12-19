@@ -49,16 +49,16 @@ namespace nw4r
 			
 			AXFXDelayGetMemSize(&mAXFXDelay);
 			
-			mAxfxImpl.mPoweredFlag = true;
+			mAxfxImpl.mActive = true;
 			
 			return ret;
 		}
 		
 		UNKTYPE FxDelay::Shutdown()
 		{
-			if (!mAxfxImpl.mPoweredFlag) return;
+			if (!mAxfxImpl.mActive) return;
 			
-			mAxfxImpl.mPoweredFlag = false;
+			mAxfxImpl.mActive = false;
 			
 			AXFXAllocHook allocHook; // at 0xc
 			AXFXFreeHook freeHook; // at 0x8
@@ -78,7 +78,7 @@ namespace nw4r
 			mAXFXDelay.feedback[0] = mAXFXDelay.feedback[1] = mAXFXDelay.feedback[2] = Clamp<u32>(100.0f * param.FLOAT_0x4, 0, 99);
 			mAXFXDelay.output[0] = mAXFXDelay.output[1] = mAXFXDelay.output[2] = Clamp<u32>(100.0f * param.FLOAT_0x8, 0, 100);
 			
-			if (!mAxfxImpl.mPoweredFlag) return true;
+			if (!mAxfxImpl.mActive) return true;
 			
 			u32 req = GetRequiredMemSize();
 			if (req > mAxfxImpl.GetHeapTotalSize()) return false;
