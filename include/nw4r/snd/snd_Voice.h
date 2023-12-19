@@ -3,7 +3,7 @@
 #include "types_nw4r.h"
 #include "snd_AxManager.h"
 #include "snd_WaveFile.h"
-#include "snd_Pan.h"
+#include "snd_Common.h"
 
 namespace nw4r
 {

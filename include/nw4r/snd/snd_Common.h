@@ -16,6 +16,22 @@ enum OutputMode {
 
 namespace detail {
 
+enum PanMode {
+    PAN_MODE_DUAL,
+    PAN_MODE_BALANCE,
+};
+enum PanCurve {
+    PAN_CURVE_SQRT,
+    PAN_CURVE_SQRT_0DB,
+    PAN_CURVE_SQRT_0DB_CLAMP,
+    PAN_CURVE_SINCOS,
+    PAN_CURVE_SINCOS_0DB,
+    PAN_CURVE_SINCOS_0DB_CLAMP,
+    PAN_CURVE_LINEAR,
+    PAN_CURVE_LINEAR_0DB,
+    PAN_CURVE_LINEAR_0DB_CLAMP,
+};
+
 struct AdpcmParam {
     u16 coef[16];   // at 0x0
     u16 gain;       // at 0x20

@@ -155,8 +155,8 @@ namespace nw4r
 				mEnvGenerator.Init(EnvGenerator::VOLUME_INIT);
 				mLfo.mParam.Init();
 				BYTE_0x30 = 0;
-				mPanMode = PAN_MODE_0;
-				mPanCurve = PAN_CURVE_0;
+				mPanMode = PAN_MODE_DUAL;
+				mPanCurve = PAN_CURVE_SQRT;
 				//END
 			}
 			

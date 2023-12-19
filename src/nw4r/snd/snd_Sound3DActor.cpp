@@ -1,4 +1,4 @@
-#include "snd_Pan.h"
+#include "snd_Common.h"
 #include "snd_SoundArchive.h"
 #include "snd_SoundArchivePlayer.h"
 #include "snd_SoundHandle.h"
@@ -76,7 +76,7 @@ namespace nw4r
 				r8_30,
 				mStartInfo);
 			
-			if (pHandle->mSound) pHandle->mSound->SetPanCurve(PAN_CURVE_3);
+			if (pHandle->mSound) pHandle->mSound->SetPanCurve(PAN_CURVE_SINCOS);
 			
 			return ret;
 		}
