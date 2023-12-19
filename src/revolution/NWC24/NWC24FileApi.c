@@ -279,6 +279,7 @@ NWC24Err NWC24FWrite(const void* src, s32 size, NWC24File* file) {
     case NWC24_OPEN_NAND_WBUFF:
     case NWC24_OPEN_VF_WBUFF:
         return BufferedWrite(src, size, file);
+    // @bug Missing NWC24_OPEN_VF_RBUFF
     case NWC24_OPEN_NAND_R:
     case NWC24_OPEN_NAND_RBUFF:
     case NWC24_OPEN_VF_R:
