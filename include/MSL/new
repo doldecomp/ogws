@@ -1,10 +1,9 @@
-#ifndef MSL_CPP_NEW
-#define MSL_CPP_NEW
+#ifndef MSL_CPP_NEW_H
+#define MSL_CPP_NEW_H
 #include <stddef.h>
+#ifdef __cplusplus
 
-inline void * operator new(size_t, void * ptr)
-{
-	return ptr;
-}
+inline void* operator new(size_t size, void* ptr) { return ptr; }
 
+#endif
 #endif

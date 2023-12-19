@@ -60,7 +60,7 @@ NW4R_O_FILES := \
 	build/nw4r/snd/snd_AnimSound.o \
 	build/nw4r/snd/snd_AxManager.o \
 	build/nw4r/snd/snd_AxVoice.o \
-	build/asm/nw4r/snd/snd_AxVoiceManager.o \
+	build/nw4r/snd/snd_AxVoiceManager.o \
 	build/nw4r/snd/snd_AxfxImpl.o \
 	build/nw4r/snd/snd_Bank.o \
 	build/nw4r/snd/snd_BankFile.o \

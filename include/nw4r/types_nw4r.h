@@ -97,6 +97,7 @@ struct WaveSoundHandle;
 namespace detail {
 
 struct AxManager;
+struct AxVoiceManager;
 
 struct BasicSound;
 struct BasicPlayer;

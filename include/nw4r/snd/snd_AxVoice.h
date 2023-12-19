@@ -117,6 +117,8 @@ private:
 };
 
 class AxVoice {
+    friend class AxVoiceManager;
+
 public:
     enum AxVoiceCallbackStatus {
         CALLBACK_STATUS_CANCEL,
@@ -173,11 +175,9 @@ public:
     };
 
 public:
-    static void VoiceCallback(void* arg);
     static u32 GetDspAddressBySample(const void* base, u32 samples, Format fmt);
     static u32 GetSampleByDspAddress(const void* base, u32 addr, Format fmt);
     static u32 GetSampleByByte(u32 addr, Format fmt);
-
     static void CalcOffsetAdpcmParam(u16* outPredScale, u16* outYn1,
                                      u16* outYn2, u32 offset, const void* data,
                                      const AdpcmParam& param);
@@ -226,6 +226,9 @@ public:
     void SetVe(f32 volume, f32 initVolume);
     void SetLpf(u16 freq);
     void SetRemoteFilter(u8 filter);
+
+private:
+    static void VoiceCallback(void* arg);
 
 private:
     AxVoiceParamBlock mVpb; // at 0x0
