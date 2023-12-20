@@ -18,7 +18,7 @@ namespace nw4r
 			{
 				SoundStartable & mStartable; // at 0x4
 				ExternalSoundPlayer mPlayers[SOUND_PLAYERS_PER_ACTOR]; // at 0x8
-				
+
 				inline SoundActor(SoundStartable & startable) : mStartable(startable)
 				{
 					mPlayers[0].SetPlayableSoundCount(0x7FFFFFFF);
@@ -28,7 +28,20 @@ namespace nw4r
 				{
 					return mStartable.detail_ConvertLabelStringToSoundId(labelString);
 				}
-				
+
+				template <typename TForEachFunc>
+				TForEachFunc ForEachSound(TForEachFunc func, bool reverse) {
+					int i;
+					ExternalSoundPlayer* player = mPlayers;
+
+					for (i = 0; i < SOUND_PLAYERS_PER_ACTOR; i++) {
+						player->ForEachSound(func, reverse);
+						player++;
+					}
+
+					return func;
+				}
+
 				virtual UNKWORD detail_SetupSound(SoundHandle *,
 					u32,
 					detail::BasicSound::AmbientArgInfo *,

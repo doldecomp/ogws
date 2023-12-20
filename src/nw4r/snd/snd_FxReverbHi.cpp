@@ -49,16 +49,16 @@ namespace nw4r
 			
 			AXFXReverbHiGetMemSize(&mAXFXReverbHi);
 			
-			mAxfxImpl.mActive = true;
+			mAxfxImpl.mIsActive = true;
 			
 			return ret;
 		}
 		
 		UNKTYPE FxReverbHi::Shutdown()
 		{
-			if (!mAxfxImpl.mActive) return;
+			if (!mAxfxImpl.mIsActive) return;
 			
-			mAxfxImpl.mActive = false;
+			mAxfxImpl.mIsActive = false;
 			
 			AXFXAllocHook allocHook; // at 0xc
 			AXFXFreeHook freeHook; // at 0x8
@@ -81,7 +81,7 @@ namespace nw4r
 			mAXFXReverbHi.crosstalk = Clamp<float>(param.FLOAT_0x10, 0.0f, 1.0f);
 			mAXFXReverbHi.mix = Clamp<float>(param.FLOAT_0x14, 0.0f, 1.0f);
 			
-			if (!mAxfxImpl.mActive) return true;
+			if (!mAxfxImpl.mIsActive) return true;
 			
 			u32 req = GetRequiredMemSize();
 			if (req > mAxfxImpl.GetHeapTotalSize()) return false;

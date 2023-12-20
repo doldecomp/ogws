@@ -1,3 +1,5 @@
+#pragma ipa file // TODO: REMOVE AFTER REFACTOR
+
 #pragma ipa file
 #include "snd_ExternalSoundPlayer.h"
 #include "snd_BasicSound.h"
@@ -10,14 +12,14 @@ namespace nw4r
 		
 		namespace detail
 		{
-			ExternalSoundPlayer::ExternalSoundPlayer() : mPlayableSoundCount(1), FLOAT_0x10(1.0f) {}
+			ExternalSoundPlayer::ExternalSoundPlayer() : mPlayableSoundCount(1), mVolume(1.0f) {}
 			
 			ExternalSoundPlayer::~ExternalSoundPlayer()
 			{
-				LinkList<BasicSound, 0xD0>::Iterator iter = mSoundList.GetBeginIter();
+				BasicSoundExtPlayList::Iterator iter = mSoundList.GetBeginIter();
 				while (iter != mSoundList.GetEndIter())
 				{
-					iter++->mExternalSoundPlayer = NULL;
+					iter++->SetExternalSoundPlayer(NULL);
 				}
 			}
 			
@@ -34,18 +36,18 @@ namespace nw4r
 			UNKTYPE ExternalSoundPlayer::InsertSoundList(BasicSound * pSound)
 			{
 				mSoundList.PushBack(pSound);
-				pSound->mExternalSoundPlayer = this;
+				pSound->SetExternalSoundPlayer(this);
 			}
 			
 			UNKTYPE ExternalSoundPlayer::RemoveSoundList(BasicSound * pSound)
 			{
 				mSoundList.Erase(pSound);
-				pSound->mExternalSoundPlayer = NULL;
+				pSound->SetExternalSoundPlayer(NULL);
 			}
 			
 			BasicSound * ExternalSoundPlayer::GetLowestPrioritySound()
 			{
-				LinkList<BasicSound, 0xD0>::Iterator iter = mSoundList.GetBeginIter();
+				BasicSoundExtPlayList::Iterator iter = mSoundList.GetBeginIter();
 				int currentPriority;
 				int lowestPriority = 0x80;
 				BasicSound * lowestPrioritySound = NULL;

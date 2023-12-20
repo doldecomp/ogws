@@ -6,20 +6,29 @@ namespace nw4r
 {
 	namespace snd
 	{
-		struct SoundPlayer
+		class SoundPlayer
 		{
-			float FLOAT_0x28;
-			float FLOAT_0x34;
-			
+		public:
+
+			f32 GetVolume() const { return mVolume; }
+			f32 detail_GetMainOutVolume() const { return mMainOutVolume; }
+
 			void StopAllSound(int);
 
 			bool detail_IsEnabledOutputLine() const;
 			int detail_GetOutputLine() const;
-			float detail_GetRemoteOutVolume(int) const;
+			f32 detail_GetRemoteOutVolume(int) const;
 			UNKTYPE detail_FreePlayerHeap(detail::BasicSound *);
 			UNKTYPE detail_InsertPriorityList(detail::BasicSound *);
 			UNKTYPE detail_RemoveSoundList(detail::BasicSound *);
 			UNKTYPE detail_RemovePriorityList(detail::BasicSound *);
+
+		private:
+			char UNK_0x0[0x28];
+			f32 mVolume; // at 0x28
+			bool mEnableOutputLine; // at 0x2C
+			int mOutputLine; // at 0x30
+			f32 mMainOutVolume; // at 0x34
 		};
 	}
 }

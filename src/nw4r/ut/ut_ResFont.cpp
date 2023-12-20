@@ -2,14 +2,14 @@
 
 #include <nw4r/ut.h>
 
-#define MAGIC_RESFONT 'RFNT'
-#define MAGIC_RESFONT_UNPACKED 'RFNU'
+const u32 MAGIC_RESFONT = 'RFNT';
+const u32 MAGIC_UNPACKED = 'RFNU';
 
-#define MAGIC_BLK_FONTINFO 'FINF'
-#define MAGIC_BLK_TEXGLYPH 'TGLP'
-#define MAGIC_BLK_CHARWIDTH 'CWDH'
-#define MAGIC_BLK_CHARMAP 'CMAP'
-#define MAGIC_BLK_GLGR 'GLGR'
+const u32 MAGIC_FONTINFO = 'FINF';
+const u32 MAGIC_TEXGLYPH = 'TGLP';
+const u32 MAGIC_CHARWIDTH = 'CWDH';
+const u32 MAGIC_CHARMAP = 'CMAP';
+const u32 MAGIC_GLGR = 'GLGR';
 
 namespace nw4r {
 namespace ut {
@@ -34,12 +34,12 @@ bool ResFont::SetResource(void* buffer) {
         return false;
     }
 
-    if (header->magic == MAGIC_RESFONT_UNPACKED) {
+    if (header->magic == MAGIC_UNPACKED) {
         BinaryBlockHeader* block = reinterpret_cast<BinaryBlockHeader*>(
             reinterpret_cast<char*>(header) + header->headerSize);
 
         for (int i = 0; i < header->numBlocks; i++) {
-            if (block->magic == MAGIC_BLK_FONTINFO) {
+            if (block->magic == MAGIC_FONTINFO) {
                 info = reinterpret_cast<FontInformation*>(block + 1);
                 break;
             }
@@ -78,7 +78,7 @@ FontInformation* ResFont::Rebuild(BinaryFileHeader* header) {
 
     for (int i = 0; i < header->numBlocks; i++) {
         switch (block->magic) {
-        case MAGIC_BLK_FONTINFO:
+        case MAGIC_FONTINFO:
             info = reinterpret_cast<FontInformation*>(block + 1);
             ResolveOffset<FontTextureGlyph>(info->fontGlyph, header);
 
@@ -90,24 +90,24 @@ FontInformation* ResFont::Rebuild(BinaryFileHeader* header) {
                 ResolveOffset<FontCodeMap>(info->fontMap, header);
             }
             break;
-        case MAGIC_BLK_TEXGLYPH:
+        case MAGIC_TEXGLYPH:
             ResolveOffset<u8>(
                 reinterpret_cast<FontTextureGlyph*>(block + 1)->sheetImage,
                 header);
             break;
-        case MAGIC_BLK_CHARWIDTH:
+        case MAGIC_CHARWIDTH:
             FontWidth* width = reinterpret_cast<FontWidth*>(block + 1);
             if (width->next != 0) {
                 ResolveOffset<FontWidth>(width->next, header);
             }
             break;
-        case MAGIC_BLK_CHARMAP:
+        case MAGIC_CHARMAP:
             FontCodeMap* map = reinterpret_cast<FontCodeMap*>(block + 1);
             if (map->next != 0) {
                 ResolveOffset<FontCodeMap>(map->next, header);
             }
             break;
-        case MAGIC_BLK_GLGR:
+        case MAGIC_GLGR:
             break;
         default:
             return NULL;
@@ -117,7 +117,7 @@ FontInformation* ResFont::Rebuild(BinaryFileHeader* header) {
             reinterpret_cast<char*>(block) + block->length);
     }
 
-    header->magic = MAGIC_RESFONT_UNPACKED;
+    header->magic = MAGIC_UNPACKED;
     return info;
 }
 

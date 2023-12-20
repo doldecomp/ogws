@@ -207,7 +207,9 @@ void AxManager::SetMasterVolume(f32 volume, int frame) {
 }
 
 void AxManager::AxCallbackFunc() {
-    CallbackListNodeIter it = GetInstance().mCallbackList.GetBeginIter();
+    CallbackListNodeList::Iterator it =
+        GetInstance().mCallbackList.GetBeginIter();
+
     while (it != GetInstance().mCallbackList.GetEndIter()) {
         it++->callback();
     }
@@ -281,7 +283,7 @@ void AxManager::ShutdownEffect(AuxBus bus) {
         return;
     }
 
-    for (FxBaseIter it = GetEffectList(bus).GetBeginIter();
+    for (FxBaseList::Iterator it = GetEffectList(bus).GetBeginIter();
          it != GetEffectList(bus).GetEndIter(); ++it) {
         it->Shutdown();
     }
@@ -332,7 +334,8 @@ void AxManager::AuxCallbackFunc(void* chans, void* context) {
             std::memset(buffer[i], 0, AX_FRAME_SIZE);
         }
     } else {
-        for (FxBaseIter it = GetInstance().GetEffectList(bus).GetBeginIter();
+        for (FxBaseList::Iterator it =
+                 GetInstance().GetEffectList(bus).GetBeginIter();
              it != GetInstance().GetEffectList(bus).GetEndIter(); ++it) {
 
             it->UpdateBuffer(num, buffer, AX_FRAME_SIZE, SAMPLE_FORMAT_PCM_S32,

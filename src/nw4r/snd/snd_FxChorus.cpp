@@ -48,16 +48,16 @@ namespace nw4r
 			
 			AXFXChorusGetMemSize(&mAXFXChorus);
 			
-			mAxfxImpl.mActive = true;
+			mAxfxImpl.mIsActive = true;
 			
 			return ret;
 		}
 		
 		UNKTYPE FxChorus::Shutdown()
 		{
-			if (!mAxfxImpl.mActive) return;
+			if (!mAxfxImpl.mIsActive) return;
 			
-			mAxfxImpl.mActive = false;
+			mAxfxImpl.mIsActive = false;
 			
 			AXFXAllocHook allocHook; // at 0xc
 			AXFXFreeHook freeHook; // at 0x8
@@ -81,7 +81,7 @@ namespace nw4r
 			mAXFXChorus.variation = Clamp<u32>(r30, 0, 50);
 			mAXFXChorus.period = Clamp<u32>(r3, 500, 10000);
 			
-			if (!mAxfxImpl.mActive) return true;
+			if (!mAxfxImpl.mIsActive) return true;
 			
 			u32 req = GetRequiredMemSize();
 			if (req > mAxfxImpl.GetHeapTotalSize()) return false;

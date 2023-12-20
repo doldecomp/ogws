@@ -13,11 +13,11 @@ public:
     BasicPlayer();
     virtual ~BasicPlayer() {} // at 0x8
 
-    virtual bool Start() = 0;           // at 0xc
+    virtual bool Start() = 0;           // at 0xC
     virtual void Stop() = 0;            // at 0x10
     virtual void Pause(bool flag) = 0;  // at 0x14
     virtual bool IsActive() const = 0;  // at 0x18
-    virtual bool IsStarted() const = 0; // at 0x1c
+    virtual bool IsStarted() const = 0; // at 0x1C
     virtual bool IsPause() const = 0;   // at 0x20
 
     void InitParam();
@@ -60,13 +60,19 @@ public:
     f32 GetRemoteFxSend(int remote) const;
 
     int GetRemoteFilter() const { return mRemoteFilter; }
-    void SetRemoteFilter(int filter) { mRemoteFilter = filter; }
+    void SetRemoteFilter(int filter) {
+        mRemoteFilter = ut::Clamp(filter, FILTER_MIN, FILTER_MAX);
+    }
 
     PanMode GetPanMode() const { return mPanMode; }
     void SetPanMode(PanMode mode) { mPanMode = mode; }
 
     PanCurve GetPanCurve() const { return mPanCurve; }
     void SetPanCurve(PanCurve curve) { mPanCurve = curve; }
+
+public:
+    static const int FILTER_MIN = 0;
+    static const int FILTER_MAX = 127;
 
 private:
     u32 mId;          // at 0x4
@@ -84,7 +90,7 @@ private:
     f32 mRemoteSend[WPAD_MAX_CONTROLLERS];      // at 0x48
     f32 mRemoteFxSend[WPAD_MAX_CONTROLLERS];    // at 0x58
     u8 mRemoteFilter;                           // at 0x68
-    PanMode mPanMode;                           // at 0x6c
+    PanMode mPanMode;                           // at 0x6C
     PanCurve mPanCurve;                         // at 0x70
 };
 

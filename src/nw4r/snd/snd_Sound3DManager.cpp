@@ -95,7 +95,7 @@ namespace nw4r
 			
 			if (!pListener)
 			{
-				pParam->FLOAT_0x0 = 0.0f;
+				pParam->volume = 0.0f;
 				return;
 			}
 			
@@ -133,7 +133,7 @@ namespace nw4r
 				//80041570
 			}
 			//80041570
-			if (r31_8 & 1 && !(pActorParam->mSound3DParam.WORD_0x0 & 1)) pParam->FLOAT_0x0 = f29;
+			if (r31_8 & 1 && !(pActorParam->mSound3DParam.WORD_0x0 & 1)) pParam->volume = f29;
 			//80041588
 			
 			if (r31_8 & 6)
@@ -328,14 +328,14 @@ namespace nw4r
 				//80041B7C
 			}
 			//80041B7C
-			if (r31_8 & 2 && !(pActorParam->mSound3DParam.WORD_0x0 & 2)) pParam->FLOAT_0x8 = f_5;
+			if (r31_8 & 2 && !(pActorParam->mSound3DParam.WORD_0x0 & 2)) pParam->pan = f_5;
 			//80041B94
-			if (r31_8 & 4 && !(pActorParam->mSound3DParam.WORD_0x0 & 4)) pParam->FLOAT_0xC = f_0;
+			if (r31_8 & 4 && !(pActorParam->mSound3DParam.WORD_0x0 & 4)) pParam->surroundPan = f_0;
 			//80041BAC
 			if (r31_8 & 8 && !(pActorParam->mSound3DParam.WORD_0x0 & 8))
 			{
 				//80041BC0
-				pParam->INT_0x18 = -(int)((1.0f - f29) * INT_0x10);
+				pParam->priority = -(int)((1.0f - f29) * INT_0x10);
 				//80041C00
 			}
 		}

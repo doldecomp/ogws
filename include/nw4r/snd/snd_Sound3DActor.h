@@ -31,6 +31,8 @@ namespace nw4r
 			void SetPosition(const math::VEC3 &);
 			
 			void detail_Update(void *, const detail::BasicSound *);
+
+			static void ClearUpdateCallback(SoundHandle& handle);
 		};
 	}
 }

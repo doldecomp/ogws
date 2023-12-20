@@ -4,19 +4,30 @@
 #include <nw4r/ut/ut_NonCopyable.h>
 
 /**
- * Declare typedefs for an object's linked list specialization, and the two
- * iterator classes.
+ * Declare typedef for linked-list specialization.
  */
 #define NW4R_UT_LIST_TYPEDEF_DECL(T)                                           \
-    typedef nw4r::ut::LinkList<T, offsetof(T, node)> T##List;                  \
-    typedef nw4r::ut::LinkList<T, offsetof(T, node)>::Iterator T##Iter;        \
-    typedef nw4r::ut::LinkList<T, offsetof(T, node)>::ConstIterator            \
-        T##ConstIter;
+    typedef nw4r::ut::LinkList<T, offsetof(T, node)> T##List;
+
+/**
+ * Declare typedef for linked-list specialization.
+ *
+ * Use the specified link node (name suffix) for classes with multiple nodes.
+ */
+#define NW4R_UT_LIST_TYPEDEF_DECL_EX(T, SUFFIX)                                \
+    typedef nw4r::ut::LinkList<T, offsetof(T, node##SUFFIX)> T##SUFFIX##List;
 
 /**
  * Declare a member LinkListNode for use with the typedef.
  */
 #define NW4R_UT_LIST_NODE_DECL() nw4r::ut::LinkListNode node
+
+/**
+ * Declare a member LinkListNode for use with the typedef.
+ *
+ * Use the specified link node (name suffix) for classes with multiple nodes.
+ */
+#define NW4R_UT_LIST_NODE_DECL_EX(SUFFIX) nw4r::ut::LinkListNode node##SUFFIX
 
 /**
  * Explicitly instantiate a linked list specialization.
@@ -152,21 +163,21 @@ private:
     LinkListNode mNode; // at 0x4
 };
 
-template <typename T> class ReverseIterator {
+template <typename TIter> class ReverseIterator {
 public:
-    ReverseIterator(T it) : mCurrent(it) {}
+    ReverseIterator(TIter it) : mCurrent(it) {}
 
-    T GetBase() const { return mCurrent; }
+    TIter GetBase() const { return mCurrent; }
 
     ReverseIterator& operator++() {
         --mCurrent;
         return *this;
     }
 
-    const T* operator->() const { return &this->operator*(); }
+    const TIter::TElem* operator->() const { return &this->operator*(); }
 
-    T& operator*() const {
-        T it = mCurrent;
+    TIter::TElem& operator*() const {
+        TIter it = mCurrent;
         --it;
         return *it;
     }
@@ -182,7 +193,7 @@ public:
     }
 
 private:
-    T mCurrent; // at 0x0
+    TIter mCurrent; // at 0x0
 };
 
 } // namespace detail
@@ -191,6 +202,10 @@ template <typename T, int Ofs> class LinkList : public detail::LinkListImpl {
 public:
     class Iterator {
         friend class LinkList;
+
+    public:
+        // Element type must be visible to ReverseIterator
+        typedef T TElem;
 
     public:
         Iterator() : mIterator(NULL) {}
@@ -234,6 +249,10 @@ public:
         friend class LinkList;
 
     public:
+        // Element type must be visible to ReverseIterator
+        typedef T TElem;
+
+    public:
         ConstIterator(LinkListImpl::Iterator it) : mIterator(it) {}
 
         ConstIterator& operator++() {
@@ -269,6 +288,11 @@ public:
     private:
         LinkListImpl::ConstIterator mIterator; // at 0x0
     };
+
+public:
+    // Shorthand names for reverse iterator types
+    typedef detail::ReverseIterator<Iterator> RevIterator;
+    typedef detail::ReverseIterator<ConstIterator> RevConstIterator;
 
 public:
     LinkList() {}

@@ -51,9 +51,7 @@ namespace nw4r
             void WaveSound::SetPlayerPriority(int priority)
             {
                 BasicSound::SetPlayerPriority(priority);
-                
-                int prio = mPlayerPriority + mParam.INT_0x18;
-                mManager->UpdatePriority(this, (prio = ut::Clamp(prio, 0, 127)));
+                mManager->UpdatePriority(this, CalcCurrentPlayerPriority());
             }
 
             bool WaveSound::IsAttachedTempSpecialHandle()

@@ -99,6 +99,7 @@ namespace detail {
 struct AxfxImpl;
 struct AxManager;
 struct AxVoiceManager;
+struct ExternalSoundPlayer;
 
 struct BasicSound;
 struct BasicPlayer;

@@ -14,6 +14,16 @@ enum OutputMode {
     OUTPUT_MODE_MONO
 };
 
+struct SoundParam {
+    f32 volume;      // at 0x0
+    f32 pitch;       // at 0x4
+    f32 pan;         // at 0x8
+    f32 surroundPan; // at 0xC
+    f32 fxSend;      // at 0x10
+    f32 lpf;         // at 0x14
+    int priority;    // at 0x18
+};
+
 namespace detail {
 
 enum PanMode {

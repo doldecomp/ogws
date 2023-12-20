@@ -52,7 +52,7 @@ namespace nw4r
 			
 			bool SeqSound::LoadData(SeqLoadCallback callback, void * ptr)
 			{
-				PlayerHeap * pPlayerHeap = static_cast<PlayerHeap *>(ptr);
+				PlayerHeap * pPlayerHeap = static_cast<BasicSound *>(ptr)->GetPlayerHeap();
 				mLoadingFlag = true;
 				
 				if (!pPlayerHeap) return false;
@@ -80,7 +80,7 @@ namespace nw4r
 				mOffsetType = offsetType;
 				mOffset = offset;
 				
-				if (!LoadData(NotifyLoadAsyncEndSeqData, mPlayerHeap)) Shutdown();
+				if (!LoadData(NotifyLoadAsyncEndSeqData, this)) Shutdown();
 			}
 			
 			void SeqSound::NotifyLoadAsyncEndSeqData(bool success, const void * pSeqData, void * ptr)

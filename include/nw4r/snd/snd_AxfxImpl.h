@@ -12,7 +12,7 @@ struct AxfxImpl {
     static void* Alloc(u32 size);
     static void Free(void* block);
 
-    AxfxImpl() : mActive(false), mHeap(NULL), mAllocCount(0) {}
+    AxfxImpl() : mIsActive(false), mHeap(NULL), mAllocCount(0) {}
 
     u32 GetHeapTotalSize() {
         if (mHeap == NULL) {
@@ -27,7 +27,7 @@ struct AxfxImpl {
     void HookAlloc(AXFXAllocHook* allocHook, AXFXFreeHook* freeHook);
     void RestoreAlloc(AXFXAllocHook allocHook, AXFXFreeHook freeHook);
 
-    bool mActive;        // at 0x0
+    bool mIsActive;      // at 0x0
     MEMiHeapHead* mHeap; // at 0x4
     u32 mAllocCount;     // at 0x8
 

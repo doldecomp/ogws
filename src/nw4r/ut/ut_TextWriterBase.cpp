@@ -330,8 +330,8 @@ template <typename T> f32 TextWriterBase<T>::PrintImpl(const T* str, int len) {
 
 template <typename T>
 f32 TextWriterBase<T>::AdjustCursor(f32* x1, f32* y1, const T* str, int len) {
-    float textWidth = 0.0f;
-    float textHeight = 0.0f;
+    f32 textWidth = 0.0f;
+    f32 textHeight = 0.0f;
 
     if (!IsDrawFlagSet(0x333, 0x300) && !IsDrawFlagSet(0x333, 0)) {
         Rect rect;
