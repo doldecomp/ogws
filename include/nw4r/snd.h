@@ -8,6 +8,7 @@
 #include <nw4r/snd/snd_BasicPlayer.h>
 #include <nw4r/snd/snd_BasicSound.h>
 #include <nw4r/snd/snd_Common.h>
+#include <nw4r/snd/snd_EnvGenerator.h>
 #include <nw4r/snd/snd_ExternalSoundPlayer.h>
 #include <nw4r/snd/snd_Lfo.h>
 #include <nw4r/snd/snd_MoveValue.h>

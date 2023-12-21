@@ -1,3 +1,5 @@
+#pragma ipa file // TODO: REMOVE AFTER REFACTOR
+
 #include <nw4r/snd.h>
 
 namespace nw4r {
@@ -40,9 +42,11 @@ s8 Lfo::GetSinIdx(int i) {
     if (i < 32) {
         return sinTable[i];
     }
+
     if (i < 64) {
         return sinTable[32 - static_cast<int>(i - 32)];
     }
+
     if (i < 96) {
         return -sinTable[i - 64];
     }

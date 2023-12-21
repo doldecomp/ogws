@@ -188,7 +188,7 @@ namespace nw4r
 				f29 *= CalcVolumeRatio(mEnvGenerator.GetValue());
 				if (BYTE_0x30 == 1) f29 *= CalcVolumeRatio(6.0f * f31);
 				//80037A2C
-				if (mEnvGenerator.GetStatus() == EnvGenerator::Status_Release)
+				if (mEnvGenerator.GetStatus() == EnvGenerator::STATUS_RELEASE)
 				{
 					//80037A38
 					if (mCallback)
@@ -383,10 +383,10 @@ namespace nw4r
 			
 			UNKTYPE Channel::Release()
 			{
-				if (mEnvGenerator.GetStatus() != EnvGenerator::Status_Release)
+				if (mEnvGenerator.GetStatus() != EnvGenerator::STATUS_RELEASE)
 				{
 					if (mVoice && !BOOL_0x35) mVoice->SetPriority(1);
-					mEnvGenerator.SetStatus(EnvGenerator::Status_Release);
+					mEnvGenerator.SetStatus(EnvGenerator::STATUS_RELEASE);
 				}
 				BOOL_0x31 = false;
 			}

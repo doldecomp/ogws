@@ -116,7 +116,7 @@ namespace nw4r
 				SoundThread::GetInstance()->Lock();
 				
 				if (!pChannel->mLength &&
-					pChannel->mEnvGenerator.mStatus != EnvGenerator::Status_Release &&
+					pChannel->mEnvGenerator.mStatus != EnvGenerator::STATUS_RELEASE &&
 					BOOL_0x60) pChannel->Release();
 				
 				SoundThread::GetInstance()->Unlock();
