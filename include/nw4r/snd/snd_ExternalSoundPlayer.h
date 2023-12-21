@@ -1,8 +1,7 @@
 #ifndef NW4R_SND_EXTERNAL_SOUND_PLAYER_H
 #define NW4R_SND_EXTERNAL_SOUND_PLAYER_H
-#include "snd_BasicSound.h"
-#include "types_nw4r.h"
-#include "ut_LinkList.h"
+#include <nw4r/snd/snd_BasicSound.h>
+#include <nw4r/types_nw4r.h>
 
 namespace nw4r {
 namespace snd {
@@ -13,10 +12,16 @@ public:
     ExternalSoundPlayer();
     ~ExternalSoundPlayer();
 
-    f32 detail_GetVolume() const { return mVolume; }
-
     int GetPlayableSoundCount() const { return mPlayableSoundCount; }
+    void SetPlayableSoundCount(int count);
+
     int GetPlayingSoundCount() const { return mSoundList.GetSize(); }
+
+    f32 detail_GetVolume() const { return mVolume; }
+    BasicSound* GetLowestPrioritySound();
+
+    void InsertSoundList(BasicSound* sound);
+    void RemoveSoundList(BasicSound* sound);
 
     template <typename TForEachFunc>
     TForEachFunc ForEachSound(TForEachFunc func, bool reverse) {
@@ -50,14 +55,9 @@ public:
         return func;
     }
 
-    void SetPlayableSoundCount(int);
-    UNKTYPE InsertSoundList(BasicSound*);
-    UNKTYPE RemoveSoundList(BasicSound*);
-    BasicSound* GetLowestPrioritySound();
-
 private:
     BasicSoundExtPlayList mSoundList; // at 0x0
-    u16 mPlayableSoundCount;          // at 0xc
+    u16 mPlayableSoundCount;          // at 0xC
     f32 mVolume;                      // at 0x10
 };
 
