@@ -125,7 +125,7 @@ namespace nw4r
 				
 				inline void SetLfoParam(const LfoParam & lfoParam)
 				{
-					mLfo.mParam = lfoParam;
+					mLfo.SetParam(lfoParam);
 				}
 				
 				inline void SetSilence(bool silentFlag, int time)

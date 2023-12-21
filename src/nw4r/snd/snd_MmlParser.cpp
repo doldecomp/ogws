@@ -326,19 +326,19 @@ namespace nw4r
 							pTrack->BYTE_0x8E = arg;
 							break;
 						case 0xCA: //8003BFE8
-							pTrack->mLfoParam.FLOAT_0x0 = (u8)arg / 128.0f;
+							pTrack->mLfoParam.depth = (u8)arg / 128.0f;
 							break;
 						case 0xCB: //8003C014
-							pTrack->mLfoParam.FLOAT_0x4 = (u8)arg * 0.390625f;
+							pTrack->mLfoParam.speed = (u8)arg * 0.390625f;
 							break;
 						case 0xCC: //8003C040
 							pTrack->BYTE_0x7C = arg;
 							break;
 						case 0xCD: //8003C048
-							pTrack->mLfoParam.BYTE_0xC = arg;
+							pTrack->mLfoParam.range = arg;
 							break;
 						case 0xE0: //8003C050
-							pTrack->mLfoParam.WORD_0x8 = arg * 5;
+							pTrack->mLfoParam.delay = arg * 5;
 							break;
 						case 0xE3: //8003C060
 							pTrack->FLOAT_0x80 = arg / 32.0f;
