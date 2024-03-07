@@ -77,7 +77,7 @@ typedef struct OSBI2 {
     u32 trackSize;        // at 0x14
     u32 countryCode;      // at 0x18
     u32 WORD_0x1C;
-    u32 lastProbeMs;
+    u32 lastInsert;
     u32 padSpec;            // at 0x24
     u32 totalTextDataLimit; // at 0x28
     u32 simulatedMem2Size;  // at 0x2C
@@ -113,7 +113,7 @@ OS_DEF_GLOBAL_VAR(u32, CPU_CLOCK_SPEED,                    0x800000FC);
 // clang-format off
 OS_DEF_GLOBAL_ARR(void*, EXCEPTION_TABLE, [15],          0x80003000);
 OS_DEF_GLOBAL_VAR(void*, INTR_HANDLER_TABLE,             0x80003040);
-OS_DEF_GLOBAL_ARR(volatile s32, EXI_LAST_PROBE_MS, [],   0x800030C0);
+OS_DEF_GLOBAL_ARR(volatile s32, EXI_LAST_INSERT, [],     0x800030C0);
 OS_DEF_GLOBAL_VAR(void*, FIRST_REL,                      0x800030C8);
 OS_DEF_GLOBAL_VAR(void*, LAST_REL,                       0x800030CC);
 OS_DEF_GLOBAL_VAR(void*, REL_NAME_TABLE,                 0x800030D0);

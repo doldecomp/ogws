@@ -44,6 +44,7 @@ typedef enum {
     EXI_ID_USB_ADAPTER = 0x01010000,
     EXI_ID_IS_DOL_VIEWER = 0x05070000,
     EXI_ID_BROADBAND_ADAPTER = 0x04020200,
+    EXI_ID_INVALID = 0xFFFFFFFF
 } EXIDeviceID;
 
 typedef void (*EXICallback)(EXIChannel chan, struct OSContext* ctx);
