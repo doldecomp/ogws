@@ -426,7 +426,7 @@ RVL_SDK_O_FILES := \
 	\
 	build/revolution/IPC/ipcMain.o \
 	build/revolution/IPC/ipcclt.o \
-	build/asm/revolution/IPC/memory.o \
+	build/revolution/IPC/memory.o \
 	build/revolution/IPC/ipcProfile.o \
 	\
 	build/revolution/MEM/mem_heapCommon.o \

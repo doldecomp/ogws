@@ -7,12 +7,12 @@ extern "C" {
 
 u32 IPC_HW_REGS[] : 0xCD000000;
 
-static inline u32 ACRReadReg(u32 reg) {
-    return *(u32*)((char*)IPC_HW_REGS + (reg & ~0x3));
+inline u32 ACRReadReg(u32 reg) {
+    return IPC_HW_REGS[reg / 4];
 }
 
-static inline void ACRWriteReg(u32 reg, u32 val) {
-    *(u32*)((char*)IPC_HW_REGS + (reg & ~0x3)) = val;
+inline void ACRWriteReg(u32 reg, u32 val) {
+    IPC_HW_REGS[reg / 4] = val;
 }
 
 void IPCInit(void);
