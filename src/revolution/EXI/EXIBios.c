@@ -629,7 +629,8 @@ s32 EXIGetID(EXIChannel chan, u32 dev, u32* out) {
     }
 
     enabled = OSDisableInterrupts();
-    ret = !EXILock(chan, dev, (chan < 2 && dev == 0) ? UnlockedHandler : NULL);
+    ret = !EXILock(chan, dev,
+                   (chan < EXI_CHAN_2 && dev == 0) ? UnlockedHandler : NULL);
     if (ret == 0) {
         ret = !EXISelect(chan, dev, EXI_FREQ_1MHZ);
         if (ret == 0) {
