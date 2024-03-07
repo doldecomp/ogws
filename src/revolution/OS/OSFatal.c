@@ -210,13 +210,14 @@ void OSFatal(GXColor textColor, GXColor bgColor, const char* msg) {
 
     EXISetExiCallback(EXI_CHAN_0, NULL);
     EXISetExiCallback(EXI_CHAN_2, NULL);
-    while (!EXILock(EXI_CHAN_0, 1, NULL)) {
+    while (!EXILock(EXI_CHAN_0, EXI_DEV_INT, NULL)) {
         EXISync(EXI_CHAN_0);
         EXIDeselect(EXI_CHAN_0);
         EXIUnlock(EXI_CHAN_0);
     }
     EXIUnlock(EXI_CHAN_0);
-    while ((EXI_CHAN_CTRL[EXI_CHAN_0].cr & 1) == 1) {
+
+    while ((EXI_CHAN_PARAMS[EXI_CHAN_0].cr & EXI_CR_TSTART) == 1) {
         ;
     }
 

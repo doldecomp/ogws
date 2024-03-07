@@ -6,7 +6,7 @@
 extern "C" {
 #endif
 
-void __OSEnableBarnacle(EXIChannel, u32);
+void __OSEnableBarnacle(EXIChannel chan, u32 dev);
 
 #ifdef __cplusplus
 }

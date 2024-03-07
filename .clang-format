@@ -13,4 +13,3 @@ FixNamespaceComments: true
 AccessModifierOffset: -4
 InsertNewlineAtEOF: true
 AllowShortFunctionsOnASingleLine: Empty
-AllowShortCaseLabelsOnASingleLine: true

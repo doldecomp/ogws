@@ -28,11 +28,11 @@ static BOOL ReadSram(OSScb* scb) {
 
     DCInvalidateRange(scb, OS_SRAM_SIZE);
 
-    if (!EXILock(EXI_CHAN_0, 1, NULL)) {
+    if (!EXILock(EXI_CHAN_0, EXI_DEV_INT, NULL)) {
         return FALSE;
     }
 
-    if (!EXISelect(EXI_CHAN_0, 1, EXI_FREQ_8MHZ)) {
+    if (!EXISelect(EXI_CHAN_0, EXI_DEV_INT, EXI_FREQ_8MHZ)) {
         EXIUnlock(EXI_CHAN_0);
         return FALSE;
     }
@@ -62,11 +62,11 @@ static BOOL WriteSram(const void* src, u32 pos, s32 size) {
     u32 imm;
     BOOL error = FALSE;
 
-    if (!EXILock(EXI_CHAN_0, 1, WriteSramCallback)) {
+    if (!EXILock(EXI_CHAN_0, EXI_DEV_INT, WriteSramCallback)) {
         return FALSE;
     }
 
-    if (!EXISelect(EXI_CHAN_0, 1, EXI_FREQ_8MHZ)) {
+    if (!EXISelect(EXI_CHAN_0, EXI_DEV_INT, EXI_FREQ_8MHZ)) {
         EXIUnlock(EXI_CHAN_0);
         return FALSE;
     }
@@ -105,7 +105,9 @@ static void* LockSram(u32 pos) {
     return Scb.block + pos;
 }
 
-OSSramEx* __OSLockSramEx(void) { return (OSSramEx*)LockSram(sizeof(OSSram)); }
+OSSramEx* __OSLockSramEx(void) {
+    return (OSSramEx*)LockSram(sizeof(OSSram));
+}
 
 static BOOL UnlockSram(BOOL save, u32 pos) {
     u16* data;
@@ -152,9 +154,13 @@ static BOOL UnlockSram(BOOL save, u32 pos) {
     return Scb.sync;
 }
 
-BOOL __OSUnlockSramEx(BOOL save) { return UnlockSram(save, sizeof(OSSram)); }
+BOOL __OSUnlockSramEx(BOOL save) {
+    return UnlockSram(save, sizeof(OSSram));
+}
 
-BOOL __OSSyncSram(void) { return Scb.sync; }
+BOOL __OSSyncSram(void) {
+    return Scb.sync;
+}
 
 BOOL __OSReadROM(void* dst, s32 size, const void* src) {
     u32 imm;
@@ -162,11 +168,11 @@ BOOL __OSReadROM(void* dst, s32 size, const void* src) {
 
     DCInvalidateRange(dst, size);
 
-    if (!EXILock(EXI_CHAN_0, 1, NULL)) {
+    if (!EXILock(EXI_CHAN_0, EXI_DEV_INT, NULL)) {
         return FALSE;
     }
 
-    if (!EXISelect(EXI_CHAN_0, 1, EXI_FREQ_8MHZ)) {
+    if (!EXISelect(EXI_CHAN_0, EXI_DEV_INT, EXI_FREQ_8MHZ)) {
         EXIUnlock(EXI_CHAN_0);
         return FALSE;
     }
@@ -236,11 +242,11 @@ BOOL __OSGetRTCFlags(u32* out) {
     u32 imm;
     BOOL error = FALSE;
 
-    if (!EXILock(EXI_CHAN_0, 1, NULL)) {
+    if (!EXILock(EXI_CHAN_0, EXI_DEV_INT, NULL)) {
         return FALSE;
     }
 
-    if (!EXISelect(EXI_CHAN_0, 1, EXI_FREQ_8MHZ)) {
+    if (!EXISelect(EXI_CHAN_0, EXI_DEV_INT, EXI_FREQ_8MHZ)) {
         EXIUnlock(EXI_CHAN_0);
         return FALSE;
     }
@@ -262,11 +268,11 @@ BOOL __OSClearRTCFlags(void) {
     u32 flags = 0;
     BOOL error = FALSE;
 
-    if (!EXILock(EXI_CHAN_0, 1, NULL)) {
+    if (!EXILock(EXI_CHAN_0, EXI_DEV_INT, NULL)) {
         return FALSE;
     }
 
-    if (!EXISelect(EXI_CHAN_0, 1, EXI_FREQ_8MHZ)) {
+    if (!EXISelect(EXI_CHAN_0, EXI_DEV_INT, EXI_FREQ_8MHZ)) {
         EXIUnlock(EXI_CHAN_0);
         return FALSE;
     }

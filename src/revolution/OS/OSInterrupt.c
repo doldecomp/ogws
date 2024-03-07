@@ -198,22 +198,22 @@ static u32 SetInterruptMask(u32 type, u32 mask) {
     case OS_INTR_EXI_0_EXI:
     case OS_INTR_EXI_0_TC:
     case OS_INTR_EXI_0_EXT:
-        exi0Mask = EXI_CHAN_CTRL[EXI_CHAN_0].csr;
-        exi0Mask &= ~(EXI_CSR_EXIINTMASK | EXI_CSR_EXIINT | EXI_CSR_TCINTMASK |
-                      EXI_CSR_TCINT | EXI_CSR_EXTINTMASK | EXI_CSR_EXTINT |
-                      EXI_CSR_ROMDIS);
+        exi0Mask = EXI_CHAN_PARAMS[EXI_CHAN_0].cpr;
+        exi0Mask &= ~(EXI_CPR_EXIINTMASK | EXI_CPR_EXIINT | EXI_CPR_TCINTMASK |
+                      EXI_CPR_TCINT | EXI_CPR_EXTINTMASK | EXI_CPR_EXTINT |
+                      EXI_CPR_ROMDIS);
 
         if (!(mask & OS_INTR_MASK(OS_INTR_EXI_0_EXI))) {
-            exi0Mask |= EXI_CSR_EXIINTMASK;
+            exi0Mask |= EXI_CPR_EXIINTMASK;
         }
         if (!(mask & OS_INTR_MASK(OS_INTR_EXI_0_TC))) {
-            exi0Mask |= EXI_CSR_TCINTMASK;
+            exi0Mask |= EXI_CPR_TCINTMASK;
         }
         if (!(mask & OS_INTR_MASK(OS_INTR_EXI_0_EXT))) {
-            exi0Mask |= EXI_CSR_EXTINTMASK;
+            exi0Mask |= EXI_CPR_EXTINTMASK;
         }
 
-        EXI_CHAN_CTRL[EXI_CHAN_0].csr = exi0Mask;
+        EXI_CHAN_PARAMS[EXI_CHAN_0].cpr = exi0Mask;
         return type & ~(OS_INTR_MASK(OS_INTR_EXI_0_EXI) |
                         OS_INTR_MASK(OS_INTR_EXI_0_TC) |
                         OS_INTR_MASK(OS_INTR_EXI_0_EXT));
@@ -223,21 +223,21 @@ static u32 SetInterruptMask(u32 type, u32 mask) {
     case OS_INTR_EXI_1_EXI:
     case OS_INTR_EXI_1_TC:
     case OS_INTR_EXI_1_EXT:
-        exi1Mask = EXI_CHAN_CTRL[EXI_CHAN_1].csr;
-        exi1Mask &= ~(EXI_CSR_EXIINTMASK | EXI_CSR_EXIINT | EXI_CSR_TCINTMASK |
-                      EXI_CSR_TCINT | EXI_CSR_EXTINTMASK | EXI_CSR_EXTINT);
+        exi1Mask = EXI_CHAN_PARAMS[EXI_CHAN_1].cpr;
+        exi1Mask &= ~(EXI_CPR_EXIINTMASK | EXI_CPR_EXIINT | EXI_CPR_TCINTMASK |
+                      EXI_CPR_TCINT | EXI_CPR_EXTINTMASK | EXI_CPR_EXTINT);
 
         if (!(mask & OS_INTR_MASK(OS_INTR_EXI_1_EXI))) {
-            exi1Mask |= EXI_CSR_EXIINTMASK;
+            exi1Mask |= EXI_CPR_EXIINTMASK;
         }
         if (!(mask & OS_INTR_MASK(OS_INTR_EXI_1_TC))) {
-            exi1Mask |= EXI_CSR_TCINTMASK;
+            exi1Mask |= EXI_CPR_TCINTMASK;
         }
         if (!(mask & OS_INTR_MASK(OS_INTR_EXI_1_EXT))) {
-            exi1Mask |= EXI_CSR_EXTINTMASK;
+            exi1Mask |= EXI_CPR_EXTINTMASK;
         }
 
-        EXI_CHAN_CTRL[EXI_CHAN_1].csr = exi1Mask;
+        EXI_CHAN_PARAMS[EXI_CHAN_1].cpr = exi1Mask;
         return type & ~(OS_INTR_MASK(OS_INTR_EXI_1_EXI) |
                         OS_INTR_MASK(OS_INTR_EXI_1_TC) |
                         OS_INTR_MASK(OS_INTR_EXI_1_EXT));
@@ -246,18 +246,18 @@ static u32 SetInterruptMask(u32 type, u32 mask) {
      */
     case OS_INTR_EXI_2_EXI:
     case OS_INTR_EXI_2_TC:
-        exi2Mask = EXI_CHAN_CTRL[EXI_CHAN_2].csr;
-        exi2Mask &= ~(EXI_CSR_EXIINTMASK | EXI_CSR_EXIINT | EXI_CSR_TCINTMASK |
-                      EXI_CSR_TCINT);
+        exi2Mask = EXI_CHAN_PARAMS[EXI_CHAN_2].cpr;
+        exi2Mask &= ~(EXI_CPR_EXIINTMASK | EXI_CPR_EXIINT | EXI_CPR_TCINTMASK |
+                      EXI_CPR_TCINT);
 
         if (!(mask & OS_INTR_MASK(OS_INTR_EXI_2_EXI))) {
-            exi2Mask |= EXI_CSR_EXIINTMASK;
+            exi2Mask |= EXI_CPR_EXIINTMASK;
         }
         if (!(mask & OS_INTR_MASK(OS_INTR_EXI_2_TC))) {
-            exi2Mask |= EXI_CSR_TCINTMASK;
+            exi2Mask |= EXI_CPR_TCINTMASK;
         }
 
-        EXI_CHAN_CTRL[EXI_CHAN_2].csr = exi2Mask;
+        EXI_CHAN_PARAMS[EXI_CHAN_2].cpr = exi2Mask;
         return type & ~(OS_INTR_MASK(OS_INTR_EXI_2_EXI) |
                         OS_INTR_MASK(OS_INTR_EXI_2_TC));
     /**
@@ -319,8 +319,7 @@ static u32 SetInterruptMask(u32 type, u32 mask) {
                  OS_INTR_MASK(OS_INTR_PI_RSW) | OS_INTR_MASK(OS_INTR_PI_ERROR) |
                  OS_INTR_MASK(OS_INTR_PI_VI) | OS_INTR_MASK(OS_INTR_PI_DEBUG) |
                  OS_INTR_MASK(OS_INTR_PI_HSP) | OS_INTR_MASK(OS_INTR_PI_ACR));
-    default:
-        return type;
+    default: return type;
     }
 }
 
@@ -426,33 +425,33 @@ void __OSDispatchInterrupt(u8 intr, OSContext* ctx) {
      * EXI interrupts
      */
     if (intsr & PI_INTSR_EXI) {
-        exi0Cause = EXI_CHAN_CTRL[EXI_CHAN_0].csr;
-        if (exi0Cause & EXI_CSR_EXIINT) {
+        exi0Cause = EXI_CHAN_PARAMS[EXI_CHAN_0].cpr;
+        if (exi0Cause & EXI_CPR_EXIINT) {
             mask |= OS_INTR_MASK(OS_INTR_EXI_0_EXI);
         }
-        if (exi0Cause & EXI_CSR_TCINT) {
+        if (exi0Cause & EXI_CPR_TCINT) {
             mask |= OS_INTR_MASK(OS_INTR_EXI_0_TC);
         }
-        if (exi0Cause & EXI_CSR_EXTINT) {
+        if (exi0Cause & EXI_CPR_EXTINT) {
             mask |= OS_INTR_MASK(OS_INTR_EXI_0_EXT);
         }
 
-        exi1Cause = EXI_CHAN_CTRL[EXI_CHAN_1].csr;
-        if (exi1Cause & EXI_CSR_EXIINT) {
+        exi1Cause = EXI_CHAN_PARAMS[EXI_CHAN_1].cpr;
+        if (exi1Cause & EXI_CPR_EXIINT) {
             mask |= OS_INTR_MASK(OS_INTR_EXI_1_EXI);
         }
-        if (exi1Cause & EXI_CSR_TCINT) {
+        if (exi1Cause & EXI_CPR_TCINT) {
             mask |= OS_INTR_MASK(OS_INTR_EXI_1_TC);
         }
-        if (exi1Cause & EXI_CSR_EXTINT) {
+        if (exi1Cause & EXI_CPR_EXTINT) {
             mask |= OS_INTR_MASK(OS_INTR_EXI_1_EXT);
         }
 
-        exi2Cause = EXI_CHAN_CTRL[EXI_CHAN_2].csr;
-        if (exi2Cause & EXI_CSR_EXIINT) {
+        exi2Cause = EXI_CHAN_PARAMS[EXI_CHAN_2].cpr;
+        if (exi2Cause & EXI_CPR_EXIINT) {
             mask |= OS_INTR_MASK(OS_INTR_EXI_2_EXI);
         }
-        if (exi2Cause & EXI_CSR_TCINT) {
+        if (exi2Cause & EXI_CPR_TCINT) {
             mask |= OS_INTR_MASK(OS_INTR_EXI_2_TC);
         }
     }

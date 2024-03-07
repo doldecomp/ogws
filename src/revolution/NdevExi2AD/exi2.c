@@ -3,20 +3,30 @@
 #include <revolution/OS.h>
 
 static BOOL __EXI2Select(void) {
-    u32 temp = EXI_CHAN_CTRL[EXI_CHAN_2].csr;
-    EXI_CHAN_CTRL[EXI_CHAN_2].csr = ((temp & 0x405) | 0xC0);
+    u32 cpr = EXI_CHAN_PARAMS[EXI_CHAN_2].cpr;
+
+    // @bug Maybe bug? 0x40 is LSB bit of CLK. Surely meant to be CS1B
+    EXI_CHAN_PARAMS[EXI_CHAN_2].cpr =
+        ((cpr & (EXI_CPR_EXIINTMASK | EXI_CPR_TCINTMASK | EXI_CPR_EXTINTMASK)) |
+         0x40 | EXI_CPR_CS0B);
+
     return TRUE;
 }
 
 static BOOL __EXI2Deselect(void) {
-    u32 temp = EXI_CHAN_CTRL[EXI_CHAN_2].csr;
-    EXI_CHAN_CTRL[EXI_CHAN_2].csr = temp & 0x405;
+    u32 cpr = EXI_CHAN_PARAMS[EXI_CHAN_2].cpr;
+
+    EXI_CHAN_PARAMS[EXI_CHAN_2].cpr =
+        cpr & (EXI_CPR_EXIINTMASK | EXI_CPR_TCINTMASK | EXI_CPR_EXTINTMASK);
+
     return TRUE;
 }
 
 static BOOL __EXI2Sync(void) {
-    while (EXI_CHAN_CTRL[EXI_CHAN_2].cr & 0x1) {
+    while (EXI_CHAN_PARAMS[EXI_CHAN_2].cr & EXI_CR_TSTART) {
+        ;
     }
+
     return TRUE;
 }
 
@@ -31,14 +41,16 @@ BOOL __EXI2Imm(void* mem, s32 size, u32 type) {
             imm |= bmem[i] << (3 - i) * 8;
         }
 
-        EXI_CHAN_CTRL[EXI_CHAN_2].imm = imm;
+        EXI_CHAN_PARAMS[EXI_CHAN_2].data = imm;
     }
 
-    EXI_CHAN_CTRL[EXI_CHAN_2].cr = type << 2 | 1 | (size - 1) * 16;
+    EXI_CHAN_PARAMS[EXI_CHAN_2].cr =
+        type << 2 | EXI_CR_TSTART | (size - 1) * 16;
+
     __EXI2Sync();
 
     if (type == EXI_READ) {
-        u32 imm = EXI_CHAN_CTRL[EXI_CHAN_2].imm;
+        u32 imm = EXI_CHAN_PARAMS[EXI_CHAN_2].data;
 
         u8* bmem = (u8*)mem;
         for (i = 0; i < size; i++, bmem++) {
@@ -54,9 +66,9 @@ void __DBEXIInit(void) {
 
     __OSMaskInterrupts(OS_INTR_MASK(OS_INTR_EXI_2_EXI) |
                        OS_INTR_MASK(OS_INTR_EXI_2_TC));
-    while ((EXI_CHAN_CTRL[EXI_CHAN_2].cr & 1) == 1U) {
+    while ((EXI_CHAN_PARAMS[EXI_CHAN_2].cr & EXI_CR_TSTART) == 1) {
     }
-    EXI_CHAN_CTRL[EXI_CHAN_2].csr = 0;
+    EXI_CHAN_PARAMS[EXI_CHAN_2].cpr = 0;
 
     val0 = 0xB4000000;
     val1 = 0xD4000000;

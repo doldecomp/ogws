@@ -23,14 +23,16 @@ BOOL EUARTInit(void) {
     enabled = OSDisableInterrupts();
 
     data = 0xF2;
-    if (!EXIWriteReg(EXI_CHAN_0, 1, 0xB0000000, &data, sizeof(data))) {
+    if (!EXIWriteReg(EXI_CHAN_0, EXI_DEV_INT, 0xB0000000, &data,
+                     sizeof(data))) {
         __EUARTLastErrorCode = EUART_ERROR_EXI;
         OSRestoreInterrupts(enabled);
         return FALSE;
     }
 
     data = 0xF3;
-    if (!EXIWriteReg(EXI_CHAN_0, 1, 0xB0000000, &data, sizeof(data))) {
+    if (!EXIWriteReg(EXI_CHAN_0, EXI_DEV_INT, 0xB0000000, &data,
+                     sizeof(data))) {
         __EUARTLastErrorCode = EUART_ERROR_EXI;
         OSRestoreInterrupts(enabled);
         return FALSE;
@@ -57,7 +59,7 @@ static s32 QueueLength(void) {
     u32 cmd;
     u32 imm;
 
-    if (!EXISelect(EXI_CHAN_0, 1, __EXIFreq)) {
+    if (!EXISelect(EXI_CHAN_0, EXI_DEV_INT, __EXIFreq)) {
         return -1;
     }
 
@@ -94,7 +96,7 @@ EUARTError WriteUARTN(const char* msg, u32 n) {
         return EUART_ERROR_INVALID;
     }
 
-    if (!EXILock(EXI_CHAN_0, 1, NULL)) {
+    if (!EXILock(EXI_CHAN_0, EXI_DEV_INT, NULL)) {
         return EUART_ERROR_OK;
     }
 
@@ -119,7 +121,7 @@ EUARTError WriteUARTN(const char* msg, u32 n) {
             continue;
         }
 
-        if (!EXISelect(EXI_CHAN_0, 1, __EXIFreq)) {
+        if (!EXISelect(EXI_CHAN_0, EXI_DEV_INT, __EXIFreq)) {
             err = EUART_ERROR_BUSY;
             break;
         }

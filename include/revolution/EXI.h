@@ -1,5 +1,5 @@
 /**
- * References: YAGCD
+ * References: YAGCD, publicly available patents
  */
 
 #ifndef RVL_SDK_PUBLIC_EXI_H
