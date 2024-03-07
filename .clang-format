@@ -1,0 +1,12 @@
+---
+BasedOnStyle: LLVM
+Language: Cpp
+SortIncludes: "true"
+SortUsingDeclarations: "true"
+UseTab: Never
+IndentWidth: 4
+PointerAlignment: Left
+ConstructorInitializerAllOnOneLineOrOnePerLine: true
+FixNamespaceComments: true
+AccessModifierOffset: -4
+InsertNewlineAtEOF: true

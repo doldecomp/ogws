@@ -18,7 +18,8 @@ public:
     void Setup(void* work, u32 size);
     void Shutdown();
 
-    AxVoice* AcquireAxVoice(u32 prio, AxVoice::Callback callback, void* arg);
+    AxVoice* AcquireAxVoice(u32 prio, AxVoice::AxVoiceCallback callback,
+                            void* arg);
     void FreeAxVoice(AxVoice* voice);
     void ReserveForFreeAxVoice(AxVoice* voice);
     void FreeAllReservedAxVoice();

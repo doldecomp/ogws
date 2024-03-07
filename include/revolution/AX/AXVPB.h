@@ -44,7 +44,7 @@ typedef enum {
     AX_PBSYNC_ALL = (1 << 31),
 };
 
-typedef void (*AXVoiceCallback)(void* voice);
+typedef void (*AXVoiceCallback)(void* vpb);
 
 typedef struct _AXVPB {
     void* next;               // at 0x0

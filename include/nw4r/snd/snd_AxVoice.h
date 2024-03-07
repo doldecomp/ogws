@@ -1,5 +1,6 @@
 #ifndef NW4R_SND_AX_VOICE_H
 #define NW4R_SND_AX_VOICE_H
+#include <nw4r/snd/snd_Common.h>
 #include <nw4r/types_nw4r.h>
 #include <nw4r/ut.h>
 #include <revolution/AX.h>
@@ -125,8 +126,8 @@ public:
         CALLBACK_STATUS_DROP_DSP
     };
 
-    typedef void (*Callback)(AxVoice* voice, AxVoiceCallbackStatus status,
-                             void* arg);
+    typedef void (*AxVoiceCallback)(AxVoice* voice,
+                                    AxVoiceCallbackStatus status, void* arg);
 
     enum Format {
         FORMAT_ADPCM = 0,
@@ -231,15 +232,15 @@ private:
     static void VoiceCallback(void* arg);
 
 private:
-    AxVoiceParamBlock mVpb; // at 0x0
-    const void* mWaveData;  // at 0x10
-    Format mFormat;         // at 0x14
-    int mSampleRate;        // at 0x18
-    bool mFirstMixUpdate;   // at 0x1C
-    bool mReserveForFree;   // at 0x1D
-    MixParam mMixPrev;      // at 0x1E
-    Callback mCallback;     // at 0x38
-    void* mCallbackArg;     // at 0x3C
+    AxVoiceParamBlock mVpb;    // at 0x0
+    const void* mWaveData;     // at 0x10
+    Format mFormat;            // at 0x14
+    int mSampleRate;           // at 0x18
+    bool mFirstMixUpdate;      // at 0x1C
+    bool mReserveForFree;      // at 0x1D
+    MixParam mMixPrev;         // at 0x1E
+    AxVoiceCallback mCallback; // at 0x38
+    void* mCallbackArg;        // at 0x3C
 
 public:
     NW4R_UT_LIST_NODE_DECL(); // at 0x40

@@ -15,6 +15,7 @@
 #include <nw4r/snd/snd_SoundHandle.h>
 #include <nw4r/snd/snd_SoundPlayer.h>
 #include <nw4r/snd/snd_Util.h>
+#include <nw4r/snd/snd_Voice.h>
 #include <nw4r/snd/snd_VoiceManager.h>
 #include <nw4r/snd/snd_adpcm.h>
 

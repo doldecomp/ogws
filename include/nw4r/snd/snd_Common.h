@@ -30,6 +30,7 @@ enum PanMode {
     PAN_MODE_DUAL,
     PAN_MODE_BALANCE,
 };
+
 enum PanCurve {
     PAN_CURVE_SQRT,
     PAN_CURVE_SQRT_0DB,

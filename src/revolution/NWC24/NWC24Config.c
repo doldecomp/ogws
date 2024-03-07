@@ -255,6 +255,6 @@ static NWC24Err GenerateUserId(u64* idOut) {
         return NWC24_ERR_INVALID_VALUE;
     }
 
-    *idOut = 0x002386F26FC0FFFF;
+    *idOut = 9999999999999999;
     return NWC24iRequestGenerateUserId(idOut, &sp08);
 }

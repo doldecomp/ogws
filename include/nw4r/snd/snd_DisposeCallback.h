@@ -1,24 +1,29 @@
 #ifndef NW4R_SND_DISPOSE_CALLBACK_H
 #define NW4R_SND_DISPOSE_CALLBACK_H
-#include "types_nw4r.h"
-#include "ut_LinkList.h"
+#include <nw4r/types_nw4r.h>
+#include <nw4r/ut.h>
 
-namespace nw4r
-{
-	namespace snd
-	{
-		namespace detail
-		{
-			struct DisposeCallback
-			{
-				ut::LinkListNode mNode; // at 0x0
-				
-				inline virtual ~DisposeCallback() {} // at 0x8
-				virtual void InvalidateData(const void *, const void *) = 0; // at 0xc
-				virtual void InvalidateWaveData(const void *, const void *) = 0; // at 0x10
-			};
-		}
-	}
-}
+namespace nw4r {
+namespace snd {
+namespace detail {
+
+class DisposeCallback {
+public:
+    NW4R_UT_LIST_NODE_DECL(); // at 0x0
+
+public:
+    virtual ~DisposeCallback() {} // at 0x8
+
+    virtual void InvalidateData(const void* start,
+                                const void* end) = 0; // at 0xC
+    virtual void InvalidateWaveData(const void* start,
+                                    const void* end) = 0; // at 0x10
+};
+
+NW4R_UT_LIST_TYPEDEF_DECL(DisposeCallback);
+
+} // namespace detail
+} // namespace snd
+} // namespace nw4r
 
 #endif

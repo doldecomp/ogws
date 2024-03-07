@@ -122,7 +122,8 @@ void AxVoiceManager::ReserveForFree(AxVoice* voice) {
     mFreeReservedList.PushBack(voice);
 }
 
-AxVoice* AxVoiceManager::AcquireAxVoice(u32 prio, AxVoice::Callback callback,
+AxVoice* AxVoiceManager::AcquireAxVoice(u32 prio,
+                                        AxVoice::AxVoiceCallback callback,
                                         void* arg) {
     ut::AutoInterruptLock lock;
 
