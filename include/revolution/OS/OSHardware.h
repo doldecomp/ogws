@@ -119,6 +119,7 @@ OS_DEF_GLOBAL_VAR(void*, LAST_REL,                       0x800030CC);
 OS_DEF_GLOBAL_VAR(void*, REL_NAME_TABLE,                 0x800030D0);
 OS_DEF_GLOBAL_VAR(u32, DOL_TOTAL_TEXT_DATA,              0x800030D4);
 OS_DEF_GLOBAL_VAR(s64, SYSTEM_TIME,                      0x800030D8);
+OS_DEF_GLOBAL_VAR(u8, PAD_FLAGS,                         0x800030E3);
 OS_DEF_GLOBAL_VAR(u16, GC_PAD_3_BTN,                     0x800030E4);
 OS_DEF_GLOBAL_VAR(volatile u16, DVD_DEVICE_CODE,         0x800030E6);
 OS_DEF_GLOBAL_VAR(u8, BI2_DEBUG_FLAG,                    0x800030E8);

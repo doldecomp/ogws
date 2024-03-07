@@ -392,7 +392,7 @@ RVL_SDK_O_FILES := \
 	\
 	build/asm/revolution/KPAD/KPAD.o \
 	\
-	build/asm/revolution/PAD/Pad.o \
+	build/revolution/PAD/Pad.o \
 	\
 	build/asm/revolution/WPAD/WPAD.o \
 	build/asm/revolution/WPAD/WPADHIDParser.o \
