@@ -535,7 +535,7 @@ RVL_SDK_O_FILES := \
 	build/revolution/DVD/dvd_broadway.o \
 	\
 	build/asm/revolution/SI/SIBios.o \
-	build/asm/revolution/SI/SISamplingRate.o \
+	build/revolution/SI/SISamplingRate.o \
 	\
 	build/revolution/TPL/TPL.o \
 	\

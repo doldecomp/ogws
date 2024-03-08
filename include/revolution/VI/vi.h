@@ -11,7 +11,7 @@ extern "C" {
 // Get TV format from TV info
 #define VI_TV_INFO_FMT(info) ((info) >> 2)
 // Get TV scan mode from TV info
-#define VI_TV_INFO_MODE(info) ((info)&0b00000011)
+#define VI_TV_INFO_MODE(info) ((info) & 0b00000011)
 
 typedef enum {
     VI_TV_FMT_NTSC,
@@ -26,10 +26,9 @@ typedef enum {
 } VITvFormat;
 
 typedef enum VIScanMode {
-    VI_SCAN_MODE_NON_INT,
     VI_SCAN_MODE_INT,
-    VI_SCAN_MODE_PROG,
-    VI_SCAN_MODE_3,
+    VI_SCAN_MODE_DS,
+    VI_SCAN_MODE_PROG
 } VIScanMode;
 
 typedef enum VIXfbMode {

@@ -7,6 +7,8 @@ extern "C" {
 
 void SIInit(void);
 
+void SISetXY(u32 x, u32 y);
+
 #ifdef __cplusplus
 }
 #endif

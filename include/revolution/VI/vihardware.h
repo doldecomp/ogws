@@ -90,8 +90,8 @@ typedef enum {
 #define VI_DI_ENB (1 << 12)
 
 // VICLK - VI Clock Select Register
-#define VI_VICLK_27MHZ 0
-#define VI_VICLK_54MHZ 1
+#define VI_VICLK_SPEED (1 << 0)
+typedef enum { VI_VICLK_27MHZ, VI_VICLK_54MHZ } VIClkSpeed;
 
 // HBE - Border HBE
 #define VI_HBE_BRDR_EN (1 << 15)

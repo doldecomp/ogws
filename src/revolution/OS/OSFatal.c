@@ -124,25 +124,25 @@ static void ConfigureVideo(u16 width, u16 height) {
     switch (VIGetTvFormat()) {
     case VI_TV_FMT_NTSC:
     case VI_TV_FMT_MPAL:
-        if (VI_HW_REGS[VI_REG_VICLK] & VI_VICLK_54MHZ) {
+        if (VI_HW_REGS[VI_REG_VICLK] & VI_VICLK_SPEED /* == VI_VICLK_54MHZ */) {
             // Progressive mode
             rmode.tvInfo = VI_TV_INFO(VI_TV_FMT_NTSC, VI_SCAN_MODE_PROG);
             rmode.viYOrigin = 0;
             rmode.xfbMode = VI_XFB_MODE_SF;
         } else {
             // Non-progressive mode
-            rmode.tvInfo = VI_TV_INFO(VI_TV_FMT_NTSC, VI_SCAN_MODE_NON_INT);
+            rmode.tvInfo = VI_TV_INFO(VI_TV_FMT_NTSC, VI_SCAN_MODE_INT);
             rmode.viYOrigin = 0;
             rmode.xfbMode = VI_XFB_MODE_DF;
         }
         break;
     case VI_TV_FMT_EURGB60:
-        rmode.tvInfo = VI_TV_INFO(VI_TV_FMT_EURGB60, VI_SCAN_MODE_NON_INT);
+        rmode.tvInfo = VI_TV_INFO(VI_TV_FMT_EURGB60, VI_SCAN_MODE_INT);
         rmode.viYOrigin = 0;
         rmode.xfbMode = VI_XFB_MODE_DF;
         break;
     case VI_TV_FMT_PAL:
-        rmode.tvInfo = VI_TV_INFO(VI_TV_FMT_PAL, VI_SCAN_MODE_NON_INT);
+        rmode.tvInfo = VI_TV_INFO(VI_TV_FMT_PAL, VI_SCAN_MODE_INT);
         rmode.viYOrigin = 47;
         rmode.xfbMode = VI_XFB_MODE_DF;
         break;
