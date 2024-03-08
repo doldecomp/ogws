@@ -2,6 +2,7 @@
 #define NW4R_SND_REMOTE_SPEAKER_H
 #include <OS.h>
 #include <OSAlarm.h>
+#include <revolution/WENC.h>
 #include "types_nw4r.h"
 
 namespace nw4r
@@ -33,7 +34,7 @@ namespace nw4r
 			UNKWORD WORD_0xC;
 			SpeakerCommand CMD_0x10;
 			SpeakerCommand CMD_0x14;
-			char UNK_0x18[0x20];
+			WENCInfo UNK_0x18;
 			s32 mChannelIndex; // at 0x38
 			RemoteSpeakerCallback mCallback; // at 0x3c
 			OSAlarm ALARM_0x40;

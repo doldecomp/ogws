@@ -179,7 +179,7 @@ namespace nw4r
 				if (!WPADCanSendStreamData(mChannelIndex)) return;
 				UNKWORD r4 = !BOOL_0x3;
 				BOOL_0x3 = false;
-				WENCGetEncodeData(UNK_0x18, r4, pSample, 40, streamData);
+				WENCGetEncodeData(&UNK_0x18, r4, pSample, 40, streamData);
 				if (WPADSendStreamData(mChannelIndex, streamData, 20))
 				{
 					WORD_0xC = 0;
@@ -234,7 +234,7 @@ namespace nw4r
 			{
 				case 0:
 					pSpeaker->BOOL_0x3 = true;
-					memset(pSpeaker->UNK_0x18, 0, sizeof pSpeaker->UNK_0x18);
+					memset(&pSpeaker->UNK_0x18, 0, sizeof pSpeaker->UNK_0x18);
 					pSpeaker->WORD_0xC = 2;
 					pSpeaker->CMD_0x14 = SpeakerCommand_Play;
 					break;

@@ -539,7 +539,7 @@ RVL_SDK_O_FILES := \
 	\
 	build/revolution/TPL/TPL.o \
 	\
-	build/asm/revolution/WENC/wenc.o \
+	build/revolution/WENC/wenc.o \
 	\
 	build/asm/revolution/CNT/cnt.o \
 	\
