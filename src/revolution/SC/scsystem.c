@@ -253,17 +253,17 @@ static s32 SCReloadConfFileAsync(u8* buf, u32 size, SCAsyncCallback callback) {
     Control.filePaths[SC_CONF_FILE_PRODUCT] = ProductInfoFileName;
 
     Control.fileBuffers[SC_CONF_FILE_SYSTEM] = buf;
-    Control.fileBuffers[SC_CONF_FILE_PRODUCT] =
-        (u8*)OSPhysicalToCached(OS_PHYS_SC_PRDINFO);
+    Control.fileBuffers[SC_CONF_FILE_PRODUCT] = OS_SC_PRDINFO;
 
     Control.bufferSizes[SC_CONF_FILE_SYSTEM] = __SCGetConfBufSize();
-    Control.bufferSizes[SC_CONF_FILE_PRODUCT] = SC_PRDINFO_SIZE;
+    Control.bufferSizes[SC_CONF_FILE_PRODUCT] = LENGTHOF(OS_SC_PRDINFO);
 
     ClearConfBuf(buf);
 
     ItemIDOffsetTblOffset = 0;
     ItemNumTotal = 0;
     ItemRestSize = 0;
+
     Control.isFileOpen = FALSE;
 
     return NANDPrivateOpenAsync(Control.filePaths[Control.openFileType],
@@ -349,7 +349,7 @@ _openFile:
         break;
     }
 
-    OS_SC_PRDINFO[SC_PRDINFO_SIZE - 1] = '\0';
+    OS_SC_PRDINFO[LENGTHOF(OS_SC_PRDINFO) - 1] = '\0';
 
     if (Control.asyncCallback != NULL) {
         Control.asyncCallback(Control.asyncResult);
@@ -1197,7 +1197,7 @@ static void ErrorFromFlush(void) {
 }
 
 BOOL __SCIsDirty(void) {
-    return DirtyFlag != FALSE ? TRUE : FALSE;
+    return DirtyFlag ? TRUE : FALSE;
 }
 
 void __SCSetDirtyFlag(void) {
