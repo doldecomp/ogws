@@ -708,7 +708,9 @@ DECOMP_FORCEACTIVE(dvd_broadway_c,
                    "@@@ (DVDLowGetCoverReg) IOS_Ioctl returned error: %d\n");
 // clang-format on
 
-u32 DVDLowGetCoverRegister(void) { return diRegValCache.dicvr; }
+u32 DVDLowGetCoverRegister(void) {
+    return diRegValCache.dicvr;
+}
 
 BOOL DVDLowPrepareCoverRegister(DVDLowCallback callback) {
     DVDLowContext* ctx;
@@ -737,11 +739,17 @@ BOOL DVDLowPrepareCoverRegister(DVDLowCallback callback) {
     return TRUE;
 }
 
-u32 DVDLowGetImmBufferReg(void) { return diRegValCache.diimmbuf; }
+u32 DVDLowGetImmBufferReg(void) {
+    return diRegValCache.diimmbuf;
+}
 
-BOOL DVDLowUnmaskStatusInterrupts(void) { return TRUE; }
+BOOL DVDLowUnmaskStatusInterrupts(void) {
+    return TRUE;
+}
 
-BOOL DVDLowMaskCoverInterrupt(void) { return TRUE; }
+BOOL DVDLowMaskCoverInterrupt(void) {
+    return TRUE;
+}
 
 BOOL DVDLowClearCoverInterrupt(DVDLowCallback callback) {
     DVDLowContext* ctx;

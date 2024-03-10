@@ -11,8 +11,7 @@ static void GXEnd(void) {}
 
 void GXSetLineWidth(u8 width, u32 offset);
 void GXSetPointSize(u8 size, u32 offset);
-void GXEnableTexOffsets(GXTexCoordID coordId, GXBool lineOfs,
-                        GXBool pointOfs);
+void GXEnableTexOffsets(GXTexCoordID coordId, GXBool lineOfs, GXBool pointOfs);
 void GXSetCullMode(GXCullMode mode);
 void GXGetCullMode(GXCullMode* out);
 void GXSetCoPlanar(GXBool coplanar);

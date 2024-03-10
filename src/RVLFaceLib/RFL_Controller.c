@@ -119,9 +119,10 @@ static BOOL errorAndReRead_(s32 chan) {
     retried = FALSE;
 
     if (++mgr->retry < READ_RETRY_MAX) {
-        reason = WPADReadFaceData(chan, mgr->tempBuffer,
-                                  sizeof(RFLiCtrlBuf) * RFLi_CTRL_REPLACE_BUF_NUM,
-                                  DB_REMOTE_MEM_ADDR, readcallback_);
+        reason =
+            WPADReadFaceData(chan, mgr->tempBuffer,
+                             sizeof(RFLiCtrlBuf) * RFLi_CTRL_REPLACE_BUF_NUM,
+                             DB_REMOTE_MEM_ADDR, readcallback_);
         if (reason != WPAD_RESULT_SUCCESS) {
             RFLiEndWorkingReason(RFLErrcode_Controllerfail, reason);
         }
@@ -225,7 +226,8 @@ static void readbuffer_(s32 chan, RFLiCtrlBuf* dst, BOOL ch) {
     mgr->readIsChMode = ch;
     mgr->retry = FALSE;
 
-    reason = WPADReadFaceData(chan, buf, sizeof(RFLiCtrlBuf) * RFLi_CTRL_REPLACE_BUF_NUM,
+    reason = WPADReadFaceData(chan, buf,
+                              sizeof(RFLiCtrlBuf) * RFLi_CTRL_REPLACE_BUF_NUM,
                               DB_REMOTE_MEM_ADDR, readcallback_);
     if (reason != WPAD_RESULT_SUCCESS) {
         RFLiFree(mgr->tempBuffer);

@@ -490,6 +490,10 @@ void NANDSetUserData(NANDCommandBlock* block, void* data) {
     block->userData = data;
 }
 
-void* NANDGetUserData(NANDCommandBlock* block) { return block->userData; }
+void* NANDGetUserData(NANDCommandBlock* block) {
+    return block->userData;
+}
 
-static BOOL nandInspectPermission(u8 perm) { return perm & NAND_PERM_RUSR; }
+static BOOL nandInspectPermission(u8 perm) {
+    return perm & NAND_PERM_RUSR;
+}

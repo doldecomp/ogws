@@ -211,4 +211,6 @@ static void LockRight(void) {
     OSLockMutex(&nwc24TimeCommandMutex);
 }
 
-static void UnlockRight(void) { OSUnlockMutex(&nwc24TimeCommandMutex); }
+static void UnlockRight(void) {
+    OSUnlockMutex(&nwc24TimeCommandMutex);
+}

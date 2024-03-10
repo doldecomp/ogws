@@ -59,7 +59,9 @@ static f32 __OSu16tof32(register const u16* arg) {
     return ret;
 }
 
-static void OSu16tof32(const u16* in, f32* out) { *out = __OSu16tof32(in); }
+static void OSu16tof32(const u16* in, f32* out) {
+    *out = __OSu16tof32(in);
+}
 
 static u16 __OSf32tou16(register f32 arg) {
     f32 a;
@@ -76,7 +78,9 @@ static u16 __OSf32tou16(register f32 arg) {
     return r;
 }
 
-static void OSf32tou16(const f32* in, u16* out) { *out = __OSf32tou16(*in); }
+static void OSf32tou16(const f32* in, u16* out) {
+    *out = __OSf32tou16(*in);
+}
 
 static f32 __OSs16tof32(register const s16* arg) {
     register f32 ret;
@@ -90,7 +94,9 @@ static f32 __OSs16tof32(register const s16* arg) {
     return ret;
 }
 
-static void OSs16tof32(const s16* in, f32* out) { *out = __OSs16tof32(in); }
+static void OSs16tof32(const s16* in, f32* out) {
+    *out = __OSs16tof32(in);
+}
 
 static s16 __OSf32tos16(register f32 arg) {
     f32 a;
@@ -107,7 +113,9 @@ static s16 __OSf32tos16(register f32 arg) {
     return r;
 }
 
-static void OSf32tos16(const f32* in, s16* out) { *out = __OSf32tos16(*in); }
+static void OSf32tos16(const f32* in, s16* out) {
+    *out = __OSf32tos16(*in);
+}
 
 #ifdef __cplusplus
 }

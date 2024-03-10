@@ -98,7 +98,9 @@ void OSInitThreadQueue(OSThreadQueue* queue) {
     queue->head = NULL;
 }
 
-OSThread* OSGetCurrentThread(void) { return OS_CURRENT_THREAD; }
+OSThread* OSGetCurrentThread(void) {
+    return OS_CURRENT_THREAD;
+}
 
 static void __OSSwitchThread(OSThread* thread) {
     OSSetCurrentThread(thread);

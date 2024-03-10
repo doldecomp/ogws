@@ -264,9 +264,13 @@ void* ARCGetStartAddrInMem(ARCFileInfo* info) {
     return (u8*)info->handle->header + info->offset;
 }
 
-s32 ARCGetStartOffset(ARCFileInfo* info) { return info->offset; }
+s32 ARCGetStartOffset(ARCFileInfo* info) {
+    return info->offset;
+}
 
-u32 ARCGetLength(ARCFileInfo* info) { return info->size; }
+u32 ARCGetLength(ARCFileInfo* info) {
+    return info->size;
+}
 
 BOOL ARCClose(ARCFileInfo* info) {
 #pragma unused(info)

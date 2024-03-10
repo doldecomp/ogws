@@ -60,7 +60,9 @@ void RFLiExitAccessInfo(void) {
     }
 }
 
-BOOL RFLiIsWorking(void) { return RFLiGetWorking(); }
+BOOL RFLiIsWorking(void) {
+    return RFLiGetWorking();
+}
 
 void RFLiStartWorking(void) {
     BOOL enabled;

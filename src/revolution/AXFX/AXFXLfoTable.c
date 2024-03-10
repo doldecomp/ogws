@@ -2,7 +2,9 @@
 
 extern s32 __SinTableFixedPoint[128];
 
-s32* __AXFXGetLfoSinTable(void) { return __SinTableFixedPoint; }
+s32* __AXFXGetLfoSinTable(void) {
+    return __SinTableFixedPoint;
+}
 
 static s32 __SinTableFixedPoint[128] = {
     0,        411733,   823219,   1234208,  1644454,  2053710,  2461728,

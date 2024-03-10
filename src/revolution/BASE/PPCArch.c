@@ -188,7 +188,9 @@ asm void PPCMtwpar(register u32 val) {
     // clang-format on
 }
 
-void PPCDisableSpeculation(void) { PPCMthid0(PPCMfhid0() | HID0_SPD); }
+void PPCDisableSpeculation(void) {
+    PPCMthid0(PPCMfhid0() | HID0_SPD);
+}
 
 asm void PPCSetFpNonIEEEMode(void) {
     // clang-format off

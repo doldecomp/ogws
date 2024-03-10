@@ -56,7 +56,9 @@ static u16 __AXAuxAVolume;
 static u16 __AXAuxBVolume;
 static u16 __AXAuxCVolume;
 
-u32 __AXGetCommandListCycles(void) { return __AXCommandListCycles; }
+u32 __AXGetCommandListCycles(void) {
+    return __AXCommandListCycles;
+}
 
 void* __AXGetCommandListAddress(void) {
     void* list = __AXCommandList + __AXCommandListPosition * AX_CL_SIZE;
@@ -239,15 +241,25 @@ void __AXClInit(void) {
         AX_MAX_VOLUME;
 }
 
-void AXSetMode(u32 mode) { __AXClMode = mode; }
+void AXSetMode(u32 mode) {
+    __AXClMode = mode;
+}
 
-u32 AXGetMode(void) { return __AXClMode; }
+u32 AXGetMode(void) {
+    return __AXClMode;
+}
 
-u16 AXGetAuxAReturnVolume(void) { return __AXAuxAVolume; }
+u16 AXGetAuxAReturnVolume(void) {
+    return __AXAuxAVolume;
+}
 
-u16 AXGetAuxBReturnVolume(void) { return __AXAuxBVolume; }
+u16 AXGetAuxBReturnVolume(void) {
+    return __AXAuxBVolume;
+}
 
-u16 AXGetAuxCReturnVolume(void) { return __AXAuxCVolume; }
+u16 AXGetAuxCReturnVolume(void) {
+    return __AXAuxCVolume;
+}
 
 void AXSetMasterVolume(u16 volume) {
     if (volume > AX_MAX_VOLUME) {
@@ -257,8 +269,14 @@ void AXSetMasterVolume(u16 volume) {
     __AXMasterVolume = volume;
 }
 
-void AXSetAuxAReturnVolume(u16 volume) { __AXAuxAVolume = volume; }
+void AXSetAuxAReturnVolume(u16 volume) {
+    __AXAuxAVolume = volume;
+}
 
-void AXSetAuxBReturnVolume(u16 volume) { __AXAuxBVolume = volume; }
+void AXSetAuxBReturnVolume(u16 volume) {
+    __AXAuxBVolume = volume;
+}
 
-void AXSetAuxCReturnVolume(u16 volume) { __AXAuxCVolume = volume; }
+void AXSetAuxCReturnVolume(u16 volume) {
+    __AXAuxCVolume = volume;
+}

@@ -309,7 +309,9 @@ static BOOL TryLockRight(void) {
     return OSTryLockMutex(&nwc24ScdCommandMutex);
 }
 
-static void UnlockRight(void) { OSUnlockMutex(&nwc24ScdCommandMutex); }
+static void UnlockRight(void) {
+    OSUnlockMutex(&nwc24ScdCommandMutex);
+}
 
 static void LockCounters(void) {
     if (!(nwc24ScdInitialized & 1)) {
@@ -327,7 +329,9 @@ static BOOL TryLockCounters(void) {
     return OSTryLockMutex(&nwc24ScdCounterMutex);
 }
 
-static void UnlockCounters(void) { OSUnlockMutex(&nwc24ScdCounterMutex); }
+static void UnlockCounters(void) {
+    OSUnlockMutex(&nwc24ScdCounterMutex);
+}
 
 static NWC24Err CheckCallingStatus(const char* user, BOOL block) {
 #pragma unused(user)

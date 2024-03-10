@@ -61,7 +61,8 @@ void RFLLoadDrawSetting(const RFLDrawSetting* setting);
 void RFLDrawOpa(const RFLCharModel* model);
 void RFLDrawXlu(const RFLCharModel* model);
 void RFLLoadVertexSetting(const RFLDrawCoreSetting* setting);
-void RFLLoadMaterialSetting(const RFLDrawCoreSetting* setting) DECOMP_DONT_INLINE;
+void RFLLoadMaterialSetting(const RFLDrawCoreSetting* setting)
+    DECOMP_DONT_INLINE;
 void RFLDrawOpaCore(const RFLCharModel* model,
                     const RFLDrawCoreSetting* setting);
 void RFLDrawXluCore(const RFLCharModel* model,

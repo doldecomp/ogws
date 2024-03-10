@@ -72,7 +72,9 @@ void DSPInit(void) {
     OSRestoreInterrupts(enabled);
 }
 
-BOOL DSPCheckInit(void) { return __DSP_init_flag; }
+BOOL DSPCheckInit(void) {
+    return __DSP_init_flag;
+}
 
 DSPTask* DSPAddTask(DSPTask* task) {
     BOOL enabled;

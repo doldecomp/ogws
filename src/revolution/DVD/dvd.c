@@ -1928,7 +1928,9 @@ const DVDDiskID* DVDGetCurrentDiskID(void) {
     return &((OSBootInfo*)OSPhysicalToCached(OS_PHYS_BOOT_INFO))->diskID;
 }
 
-static void __BS2DVDLowCallback(u32 intType) { __BS2DVDLowIntType = intType; }
+static void __BS2DVDLowCallback(u32 intType) {
+    __BS2DVDLowIntType = intType;
+}
 
 u32 __DVDGetCoverStatus(void) {
     u32 dicvr;

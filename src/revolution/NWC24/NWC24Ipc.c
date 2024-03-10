@@ -62,7 +62,9 @@ NWC24Err NWC24iIoctlResourceManagerAsync(const char* user, s32 fd, s32 type,
     return NWC24_OK;
 }
 
-BOOL NWC24iIsAsyncRequestPending(void) { return NWC24iIsRequestPending; }
+BOOL NWC24iIsAsyncRequestPending(void) {
+    return NWC24iIsRequestPending;
+}
 
 static s32 CallbackAsyncIpc(s32 result, void* arg) {
     if (arg != NULL) {

@@ -17,9 +17,13 @@ DECL_SECTION(".init") static void __check_pad3(void) {
     }
 }
 
-DECL_SECTION(".init") static void __set_debug_bba(void) { Debug_BBA = TRUE; }
+DECL_SECTION(".init") static void __set_debug_bba(void) {
+    Debug_BBA = TRUE;
+}
 
-DECL_SECTION(".init") static BOOL __get_debug_bba(void) { return Debug_BBA; }
+DECL_SECTION(".init") static BOOL __get_debug_bba(void) {
+    return Debug_BBA;
+}
 
 DECL_SECTION(".init") DECL_WEAK asm void __start(void) {
     // clang-format off

@@ -432,7 +432,9 @@ static void nandGetTypeCallback(s32 result, void* arg) {
     block->callback(nandConvertErrorCode(result), block);
 }
 
-const char* nandGetHomeDir(void) { return s_homeDir; }
+const char* nandGetHomeDir(void) {
+    return s_homeDir;
+}
 
 void NANDInitBanner(NANDBanner* banner, u32 flags, const wchar_t* title,
                     const wchar_t* subtitle) {

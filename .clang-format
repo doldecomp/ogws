@@ -11,5 +11,4 @@ PointerAlignment: Left
 ConstructorInitializerAllOnOneLineOrOnePerLine: true
 FixNamespaceComments: true
 AccessModifierOffset: -4
-InsertNewlineAtEOF: true
 AllowShortFunctionsOnASingleLine: Empty

@@ -7,7 +7,9 @@ static AXVPB* __AXStackHead[STACK_MAX];
 static AXVPB* __AXStackTail[STACK_MAX];
 static AXVPB* __AXCallbackStack = NULL;
 
-AXVPB* __AXGetStackHead(u32 prio) { return __AXStackHead[prio]; }
+AXVPB* __AXGetStackHead(u32 prio) {
+    return __AXStackHead[prio];
+}
 
 void __AXServiceCallbackStack(void) {
     AXVPB* it = __AXPopCallbackStack();
@@ -36,7 +38,9 @@ void __AXInitVoiceStacks(void) {
     }
 }
 
-void __AXAllocInit(void) { __AXInitVoiceStacks(); }
+void __AXAllocInit(void) {
+    __AXInitVoiceStacks();
+}
 
 void __AXPushFreeStack(AXVPB* vpb) {
     vpb->next = __AXStackHead[AX_PRIORITY_FREE];

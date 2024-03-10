@@ -8,13 +8,13 @@ extern "C" {
 #endif
 
 typedef struct RFLiMiddleDB {
-    RFLMiddleDBType type;   // at 0x0
-    RFLiCallback callback;  // at 0x4
+    RFLMiddleDBType type;     // at 0x0
+    RFLiCallback callback;    // at 0x4
     RFLiHiddenCharData* data; // at 0x8
-    u16 size;               // at 0xC
-    u16 storedSize;         // at 0xE
-    u32 userData1;          // at 0x10
-    u32 userData2;          // at 0x14
+    u16 size;                 // at 0xC
+    u16 storedSize;           // at 0xE
+    u32 userData1;            // at 0x10
+    u32 userData2;            // at 0x14
 } RFLiMiddleDB;
 
 RFLErrcode RFLiUpdateMiddleDBAsync(RFLMiddleDB* db, RFLiCallback cb,

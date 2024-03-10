@@ -92,7 +92,9 @@ static void loadResRead2ndcallback_(void) {
     }
 }
 
-static void errclosecallback_(void) { RFLExit(); }
+static void errclosecallback_(void) {
+    RFLExit();
+}
 
 static void loadResRead1stcallback_(void) {
     RFLiLoader* loader;

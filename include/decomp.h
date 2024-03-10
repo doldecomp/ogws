@@ -30,7 +30,9 @@
 // Force literal ordering, such as floats in sdata2
 #define DECOMP_FORCELITERAL(module, ...)                                       \
     void CONCAT(FORCELITERAL##module, __LINE__)(void);                         \
-    void CONCAT(FORCELITERAL##module, __LINE__)(void) { (__VA_ARGS__); }
+    void CONCAT(FORCELITERAL##module, __LINE__)(void) {                        \
+        (__VA_ARGS__);                                                         \
+    }
 
 // Force reference destructor
 #define DECOMP_FORCEDTOR(module, cls)                                          \

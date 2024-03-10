@@ -4,13 +4,21 @@ static BOOL OnShutdown(BOOL final, u32 event);
 static OSShutdownFunctionInfo ShutdownFunctionInfo = {OnShutdown, 127, NULL,
                                                       NULL};
 
-u32 OSGetPhysicalMem1Size(void) { return OS_PHYSICAL_MEM1_SIZE; }
+u32 OSGetPhysicalMem1Size(void) {
+    return OS_PHYSICAL_MEM1_SIZE;
+}
 
-u32 OSGetPhysicalMem2Size(void) { return OS_PHYSICAL_MEM2_SIZE; }
+u32 OSGetPhysicalMem2Size(void) {
+    return OS_PHYSICAL_MEM2_SIZE;
+}
 
-u32 OSGetConsoleSimulatedMem1Size(void) { return OS_SIMULATED_MEM1_SIZE; }
+u32 OSGetConsoleSimulatedMem1Size(void) {
+    return OS_SIMULATED_MEM1_SIZE;
+}
 
-u32 OSGetConsoleSimulatedMem2Size(void) { return OS_SIMULATED_MEM2_SIZE; }
+u32 OSGetConsoleSimulatedMem2Size(void) {
+    return OS_SIMULATED_MEM2_SIZE;
+}
 
 static BOOL OnShutdown(BOOL final, u32 event) {
 #pragma unused(event)

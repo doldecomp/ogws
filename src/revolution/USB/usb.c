@@ -128,7 +128,9 @@ end:
     return result;
 }
 
-IPCResult IUSB_CloseLib(void) { return IPC_RESULT_OK; }
+IPCResult IUSB_CloseLib(void) {
+    return IPC_RESULT_OK;
+}
 
 static s32 _intBlkCtrlCb(s32 result, void* arg) {
     int i;

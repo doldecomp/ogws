@@ -14,7 +14,9 @@ void RFLiInitDatabase(MEMiHeapHead* heap) {
     RFLiClearDBBuffer();
 }
 
-static void initBrokenDatabase_(void) { RFLiClearDBBuffer(); }
+static void initBrokenDatabase_(void) {
+    RFLiClearDBBuffer();
+}
 
 static void bootloadCheckCRCCb_(u32 crc) {
     RFLiDBManager* mgr = RFLiGetDBManager();

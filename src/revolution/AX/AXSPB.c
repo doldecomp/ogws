@@ -32,7 +32,9 @@ static s32 __AXSpbAS = 0;
 static s32 __AXSpbAR = 0;
 static s32 __AXSpbAL = 0;
 
-AXSTUDIO* __AXGetStudio(void) { return &__AXStudio; }
+AXSTUDIO* __AXGetStudio(void) {
+    return &__AXStudio;
+}
 
 void __AXDepopFadeMain(s32* all, s32* value, s16* depop) {
     if (*all / AX_SAMPLES_PER_FRAME != 0) {

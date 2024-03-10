@@ -189,13 +189,17 @@ NWC24Err NWC24CloseLib(void) {
     Opened = NWC24_LIB_CLOSED;
 }
 
-BOOL NWC24IsMsgLibOpened(void) { return Opened == NWC24_LIB_OPENED; }
+BOOL NWC24IsMsgLibOpened(void) {
+    return Opened == NWC24_LIB_OPENED;
+}
 
 BOOL NWC24IsMsgLibOpenedByTool(void) {
     return Opened == NWC24_LIB_OPENED_BY_TOOL;
 }
 
-BOOL NWC24IsMsgLibOpenBlocking(void) { return Opened == NWC24_LIB_BLOCKED; }
+BOOL NWC24IsMsgLibOpenBlocking(void) {
+    return Opened == NWC24_LIB_BLOCKED;
+}
 
 NWC24Err NWC24BlockOpenMsgLib(BOOL block) {
     s32 result;
@@ -229,4 +233,6 @@ NWC24Err NWC24iSetNewMsgArrived(u32 flags) {
     return NWC24_OK;
 }
 
-void NWC24iSetErrorCode(u32 code) { GlobalErrorCode = code; }
+void NWC24iSetErrorCode(u32 code) {
+    GlobalErrorCode = code;
+}

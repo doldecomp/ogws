@@ -44,15 +44,15 @@ typedef struct RFLiAccessInfo {
             u32* dst; // at 0x4
         } getLengthInfo;
     };
-    NANDFileInfo file;               // at 0x48
-    NANDCommandBlock block;          // at 0xD4
-    RFLiCallbackTag tag;             // at 0x190
-    OSAlarm alarm;                   // at 0x198
-    RFLiFileType alarmData;          // at 0x1C8
+    NANDFileInfo file;            // at 0x48
+    NANDCommandBlock block;       // at 0xD4
+    RFLiCallbackTag tag;          // at 0x190
+    OSAlarm alarm;                // at 0x198
+    RFLiFileType alarmData;       // at 0x1C8
     RFLiExCallback retryCallback; // at 0x1CC
-    u8 retryCount;                   // at 0x1D0
-    void* safeBuffer;                // at 0x1D4
-    u8 opened;                       // at 0x1D8
+    u8 retryCount;                // at 0x1D0
+    void* safeBuffer;             // at 0x1D4
+    u8 opened;                    // at 0x1D8
 } RFLiAccessInfo;
 
 void RFLiInitAccessInfo(MEMiHeapHead* heap);

@@ -2,7 +2,9 @@
 
 extern f32 __SrcTab12khz[128][4];
 
-f32* __AXFXGetSrcCoef(u32 i) { return __SrcTab12khz[i]; }
+f32* __AXFXGetSrcCoef(u32 i) {
+    return __SrcTab12khz[i];
+}
 
 static f32 __SrcTab12khz[128][4] = {
     {0.09750366211f, 0.80221557617f, 0.10159301758f, -0.00097656250f},

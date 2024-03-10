@@ -55,7 +55,9 @@ void AIInitDMA(void* buffer, u32 length) {
     OSRestoreInterrupts(enabled);
 }
 
-void AIStartDMA(void) { DSP_HW_REGS[DSP_AI_DMA_CSR] |= DSP_AI_DMA_CSR_PLAY; }
+void AIStartDMA(void) {
+    DSP_HW_REGS[DSP_AI_DMA_CSR] |= DSP_AI_DMA_CSR_PLAY;
+}
 
 u32 AIGetDMABytesLeft(void) {
     return (DSP_HW_REGS[DSP_AI_DMA_BYTES_LEFT] & 0x7FFF) * 32;

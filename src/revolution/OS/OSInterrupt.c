@@ -319,7 +319,8 @@ static u32 SetInterruptMask(u32 type, u32 mask) {
                  OS_INTR_MASK(OS_INTR_PI_RSW) | OS_INTR_MASK(OS_INTR_PI_ERROR) |
                  OS_INTR_MASK(OS_INTR_PI_VI) | OS_INTR_MASK(OS_INTR_PI_DEBUG) |
                  OS_INTR_MASK(OS_INTR_PI_HSP) | OS_INTR_MASK(OS_INTR_PI_ACR));
-    default: return type;
+    default:
+        return type;
     }
 }
 

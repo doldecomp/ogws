@@ -136,7 +136,9 @@ paired_singles_disabled:
     // clang-format on
 }
 
-static void DisableWriteGatherPipe(void) { PPCMthid2(PPCMfhid2() & ~HID2_WPE); }
+static void DisableWriteGatherPipe(void) {
+    PPCMthid2(PPCMfhid2() & ~HID2_WPE);
+}
 
 u32 __OSGetHollywoodRev(void) {
     return *(u32*)OSPhysicalToCached(OS_PHYS_HOLLYWOOD_REV);
@@ -863,9 +865,13 @@ void __OSPSInit(void) {
     // clang-format on
 }
 
-u32 __OSGetDIConfig(void) { return OS_DI_CONFIG & 0xFF; }
+u32 __OSGetDIConfig(void) {
+    return OS_DI_CONFIG & 0xFF;
+}
 
-void OSRegisterVersion(const char* ver) { OSReport("%s\n", ver); }
+void OSRegisterVersion(const char* ver) {
+    OSReport("%s\n", ver);
+}
 
 // Must be defined down here because of data pooling
 static const char* AppGameNameForSysMenu = "HAEA";

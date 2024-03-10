@@ -92,7 +92,9 @@ NWC24Err NWC24iOpenDlTaskList(void) {
     return result;
 }
 
-NWC24Err NWC24iCloseDlTaskList(void) { return NWC24_OK; }
+NWC24Err NWC24iCloseDlTaskList(void) {
+    return NWC24_OK;
+}
 
 NWC24DlHeader* NWC24iGetCachedDlHeader(void) {
     return (NWC24DlHeader*)NWC24WorkP->dlHeader;

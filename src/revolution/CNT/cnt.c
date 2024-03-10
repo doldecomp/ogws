@@ -68,7 +68,9 @@ s32 contentConvertPathToEntrynumNAND(CNTHandle* handle, const char* path) {
     return ARCConvertPathToEntrynum(&handle->arcHandle, path);
 }
 
-u32 contentGetLengthNAND(const CNTFileInfo* info) { return info->length; }
+u32 contentGetLengthNAND(const CNTFileInfo* info) {
+    return info->length;
+}
 
 s32 contentReadNAND(CNTFileInfo* info, void* dst, u32 len, s32 offset) {
     if (info->position + offset > info->length) {

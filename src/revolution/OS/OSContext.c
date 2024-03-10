@@ -220,7 +220,9 @@ _not_current_fpu_ctx:
     // clang-format on
 }
 
-OSContext* OSGetCurrentContext(void) { return OS_CURRENT_CONTEXT; }
+OSContext* OSGetCurrentContext(void) {
+    return OS_CURRENT_CONTEXT;
+}
 
 asm BOOL OSSaveContext(register OSContext* ctx) {
     // clang-format off

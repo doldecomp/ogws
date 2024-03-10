@@ -249,7 +249,9 @@ void GXSetViewport(f32 ox, f32 oy, f32 sx, f32 sy, f32 near, f32 far) {
     gxdt->gxDirtyFlags |= GX_DIRTY_VIEWPORT;
 }
 
-void GXGetViewportv(f32 view[6]) { Copy6Floats(view, gxdt->view); }
+void GXGetViewportv(f32 view[6]) {
+    Copy6Floats(view, gxdt->view);
+}
 
 void GXSetZScaleOffset(f32 scale, f32 offset) {
     gxdt->offsetZ = (f32)0xFFFFFF * offset;      // ???

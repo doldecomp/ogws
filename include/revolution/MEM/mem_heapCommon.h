@@ -2,8 +2,8 @@
 #define RVL_SDK_MEM_HEAP_COMMON_H
 #include <revolution/MEM/mem_list.h>
 #include <revolution/OS.h>
-#include <types.h>
 #include <string.h>
+#include <types.h>
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -36,7 +36,9 @@ void MEMiInitHeapHead(MEMiHeapHead* heap, u32 magic, void* start, void* end,
 void MEMiFinalizeHeap(MEMiHeapHead* heap);
 MEMiHeapHead* MEMFindContainHeap(const void* memBlock);
 
-static inline uintptr_t GetUIntPtr(const void* p) { return (uintptr_t)p; }
+static inline uintptr_t GetUIntPtr(const void* p) {
+    return (uintptr_t)p;
+}
 
 static inline void* AddU32ToPtr(const void* p, u32 ofs) {
     return (void*)(GetUIntPtr(p) + ofs);
@@ -58,7 +60,9 @@ static inline s32 GetOffsetFromPtr(const void* start, const void* end) {
     return GetUIntPtr(end) - GetUIntPtr(start);
 }
 
-static inline u16 GetOptForHeap(const MEMiHeapHead* heap) { return heap->opt; }
+static inline u16 GetOptForHeap(const MEMiHeapHead* heap) {
+    return heap->opt;
+}
 
 static inline void SetOptForHeap(MEMiHeapHead* heap, u16 opt) {
     heap->opt = (u8)opt;

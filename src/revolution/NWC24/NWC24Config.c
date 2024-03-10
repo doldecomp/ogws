@@ -157,7 +157,9 @@ NWC24Err NWC24iConfigFlush(void) {
     return result;
 }
 
-const char* NWC24GetAccountDomain(void) { return config->acctDomain; }
+const char* NWC24GetAccountDomain(void) {
+    return config->acctDomain;
+}
 
 const char* NWC24GetMBoxDir(void) {
     OSIOSRev rev;

@@ -303,7 +303,7 @@ typedef enum _GXFogType {
 
 // Access components of the fog type
 #define GX_FOG_GET_PROJ(x) ((x) >> 3 & 1)
-#define GX_FOG_GET_FSEL(x) ((x) & 7)
+#define GX_FOG_GET_FSEL(x) ((x)&7)
 
 typedef enum _GXIndTexAlphaSel {
     GX_ITBA_OFF,

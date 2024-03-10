@@ -84,4 +84,6 @@ void exit(void) {
     _ExitProcess();
 }
 
-void _ExitProcess(void) { PPCHalt(); }
+void _ExitProcess(void) {
+    PPCHalt();
+}

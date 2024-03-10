@@ -221,7 +221,9 @@ static asm void DecrementerExceptionHandler(register u8 type,
     // clang-format on
 }
 
-void OSSetAlarmTag(OSAlarm* alarm, u32 tag) { alarm->tag = tag; }
+void OSSetAlarmTag(OSAlarm* alarm, u32 tag) {
+    alarm->tag = tag;
+}
 
 static BOOL OnReset(BOOL final, u32 event) {
     OSAlarm* iter;
@@ -248,4 +250,6 @@ void OSSetAlarmUserData(OSAlarm* alarm, void* userData) {
     alarm->userData = userData;
 }
 
-void* OSGetAlarmUserData(const OSAlarm* alarm) { return alarm->userData; }
+void* OSGetAlarmUserData(const OSAlarm* alarm) {
+    return alarm->userData;
+}

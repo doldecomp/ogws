@@ -569,7 +569,9 @@ void GXSetArray(GXAttr attr, const void* base, u8 stride) {
     GX_CP_LOAD_REG(GX_BP_REG_SETIMAGE2_TEX4 | idx, stride);
 }
 
-void GXInvalidateVtxCache(void) { WGPIPE.c = GX_FIFO_CMD_INVAL_VTX; }
+void GXInvalidateVtxCache(void) {
+    WGPIPE.c = GX_FIFO_CMD_INVAL_VTX;
+}
 
 void GXSetTexCoordGen2(GXTexCoordID id, GXTexGenType type, GXTexGenSrc src,
                        u32 texMtxIdx, GXBool normalize, u32 dualTexMtxIdx) {

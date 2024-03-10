@@ -62,7 +62,9 @@ static u32 __AXRmtMixCycles[] = {4, 86, 151, 151};
 static void __AXVPBInitCommon(void);
 static u32 __AXGetSrcCycles(u16 select, const AXPBSRC* src);
 
-s32 __AXGetNumVoices(void) { return __AXNumVoices; }
+s32 __AXGetNumVoices(void) {
+    return __AXNumVoices;
+}
 
 void __AXServiceVPB(AXVPB* vpb) {
     AXPB* dst;
@@ -333,7 +335,9 @@ void __AXSyncPBs(u32 baseCycles) {
     DCFlushRange(__AXITD, __AXMaxVoices * sizeof(AXITD));
 }
 
-AXPB* __AXGetPBs(void) { return __AXPB; }
+AXPB* __AXGetPBs(void) {
+    return __AXPB;
+}
 
 void __AXSetPBDefault(AXVPB* vpb) {
     vpb->pb.state = AX_VOICE_STOP;
@@ -509,7 +513,9 @@ void AXGetLpfCoefs(u16 freq, u16* a, u16* b) {
     *a = 32767 - *b;
 }
 
-void AXSetMaxDspCycles(u32 num) { __AXMaxDspCycles = num; }
+void AXSetMaxDspCycles(u32 num) {
+    __AXMaxDspCycles = num;
+}
 
 static u32 __AXGetSrcCycles(u16 select, const AXPBSRC* src) {
     u32 ratio = src->ratioHi << 16 | src->ratioLo;
@@ -525,4 +531,6 @@ static u32 __AXGetSrcCycles(u16 select, const AXPBSRC* src) {
     return 605;
 }
 
-s32 AXGetMaxVoices(void) { return __AXMaxVoices; }
+s32 AXGetMaxVoices(void) {
+    return __AXMaxVoices;
+}

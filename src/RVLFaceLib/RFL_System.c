@@ -152,15 +152,21 @@ RFLErrcode RFLiBootLoadAsync(void) {
     return RFLiBootLoadDatabaseAsync(bootloadDB2Res_);
 }
 
-BOOL RFLAvailable(void) { return sRFLiManager != NULL; }
+BOOL RFLAvailable(void) {
+    return sRFLiManager != NULL;
+}
 
 static void* allocal_(u32 size, s32 align) {
     return MEMAllocFromExpHeapEx(RFLiGetManager()->tmpHeap, size, align);
 }
 
-void* RFLiAlloc(u32 size) { return allocal_(size, 8); }
+void* RFLiAlloc(u32 size) {
+    return allocal_(size, 8);
+}
 
-void* RFLiAlloc32(u32 size) { return allocal_(size, 32); }
+void* RFLiAlloc32(u32 size) {
+    return allocal_(size, 32);
+}
 
 void RFLiFree(void* block) {
     MEMFreeToExpHeap(RFLiGetManager()->tmpHeap, block);
@@ -182,9 +188,13 @@ BOOL RFLiGetWorking(void) {
     return !RFLAvailable() ? NULL : RFLiGetManager()->working;
 }
 
-void RFLiSetWorking(BOOL working) { RFLiGetManager()->working = working; }
+void RFLiSetWorking(BOOL working) {
+    RFLiGetManager()->working = working;
+}
 
-RFLiManager* RFLiGetManager(void) { return sRFLiManager; }
+RFLiManager* RFLiGetManager(void) {
+    return sRFLiManager;
+}
 
 RFLErrcode RFLGetAsyncStatus(void) {
     if (!RFLAvailable()) {

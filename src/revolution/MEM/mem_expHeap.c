@@ -26,7 +26,9 @@ static void SetAllocMode_(MEMiExpHeapHead* exp, u16 mode) {
     exp->allocMode = mode;
 }
 
-static u16 GetAllocMode_(const MEMiExpHeapHead* exp) { return exp->allocMode; }
+static u16 GetAllocMode_(const MEMiExpHeapHead* exp) {
+    return exp->allocMode;
+}
 
 static MEMiExpHeapMBlock* GetMBlockHeadPtr_(void* memBlock) {
     return SubU32ToPtr(memBlock, sizeof(MEMiExpHeapMBlock));

@@ -980,7 +980,9 @@ s32 ISFS_WriteAsync(s32 fd, const void* src, s32 len, FSAsyncCallback callback,
     return IOS_WriteAsync(fd, src, len, _isfsFuncCb, block);
 }
 
-s32 ISFS_Close(s32 fd) { return IOS_Close(fd); }
+s32 ISFS_Close(s32 fd) {
+    return IOS_Close(fd);
+}
 
 s32 ISFS_CloseAsync(s32 fd, FSAsyncCallback callback, void* callbackArg) {
     FSCommandBlock* block;

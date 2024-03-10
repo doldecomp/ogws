@@ -211,8 +211,8 @@ u8 RFLi_GetFacelineType(RFLSex sex, RFLAge age, RFLRace race) {
             // clang-format on
         };
 
-    return facelineTypeTable[(sex * 9) + (age * 3) + race][RFLi_GetRandU32(
-        LENGTHOF(facelineTypeTable[0]))];
+    return facelineTypeTable[(sex * 9) + (age * 3) + race]
+                            [RFLi_GetRandU32(LENGTHOF(facelineTypeTable[0]))];
 }
 
 u8 RFLi_GetHairType(RFLSex sex, RFLAge age, RFLRace race) {
@@ -503,4 +503,6 @@ u8 RFLi_GetEyeColor(RFLRace race) {
     return eyeColorTable[race][RFLi_GetRandU32(LENGTHOF(eyeColorTable[0]))];
 }
 
-u32 RFLi_GetRandU32(u32 max) { return OSGetTick() % max; }
+u32 RFLi_GetRandU32(u32 max) {
+    return OSGetTick() % max;
+}

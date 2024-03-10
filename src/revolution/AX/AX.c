@@ -5,7 +5,9 @@ const char* __AXVersion =
 
 static BOOL __init = FALSE;
 
-void AXInit(void) { AXInitEx(0); }
+void AXInit(void) {
+    AXInitEx(0);
+}
 
 void AXInitEx(u32 mode) {
     if (!__init) {
