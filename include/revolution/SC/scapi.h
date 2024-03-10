@@ -37,9 +37,9 @@ typedef struct SCBtDeviceInfo {
 } SCBtDeviceInfo;
 
 typedef struct SCBtDeviceInfoArray {
-    u8 numRemotes;                 // at 0x0
-    SCBtDeviceInfo registered[10]; // at 0x1
-    SCBtDeviceInfo active[6];      // at 0x2BD
+    u8 numRegist;              // at 0x0
+    SCBtDeviceInfo regist[10]; // at 0x1
+    SCBtDeviceInfo active[6];  // at 0x2BD
 } SCBtDeviceInfoArray;
 
 u8 SCGetAspectRatio(void);

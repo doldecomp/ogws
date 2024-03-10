@@ -21,11 +21,6 @@ typedef enum {
     SC_AREA_SAF,
 } SCProductArea;
 
-typedef struct SCRegion {
-    s8 area;      // at 0x0
-    char name[4]; // at 0x1
-} SCRegion;
-
 BOOL __SCF1(const char* type, char* buf, u32 sz);
 BOOL SCGetProductAreaString(char* buf, u32 sz);
 s8 SCGetProductArea(void);

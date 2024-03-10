@@ -360,7 +360,7 @@ RFLErrcode RFLiWriteCtrlToHiddenDB(const RFLiCtrlBuf* buf, BOOL ch) {
 s32 RFLiSearchHiddenData(const RFLCreateID* id) {
     RFLiHDBManager* mgr;
     RFLiTableData* head;
-    s32 i;
+    int i;
     s32 index = -1;
 
     if (!RFLAvailable()) {

@@ -319,7 +319,7 @@ s32 AXRmtGetSamples(s32 chan, s16* out, s32 num) {
     s32 avail = AXRmtGetSamplesLeft();
     s32 actual = num > avail ? avail : num;
     s32 ptr = __AXRmtCpuPtr;
-    s32 i;
+    int i;
 
     for (i = 0; i < actual; i++) {
         *out++ = __AXRmtOutBuffer[chan][ptr];

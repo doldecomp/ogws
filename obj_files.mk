@@ -476,7 +476,7 @@ RVL_SDK_O_FILES := \
 	build/revolution/OS/OSNet.o \
 	build/asm/revolution/OS/__ppc_eabi_init.o \
 	\
-	build/asm/revolution/SC/scsystem.o \
+	build/revolution/SC/scsystem.o \
 	build/revolution/SC/scapi.o \
 	build/revolution/SC/scapi_prdinfo.o \
 	\

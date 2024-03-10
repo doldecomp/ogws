@@ -8,7 +8,7 @@ s32 WENCGetEncodeData(WENCInfo* info, u32 flag, const s16* pcmData, s32 samples,
 
     u8* dst;
     const s16* src;
-    s32 i;
+    int i;
     s32 da;
     s32 l3, l2, l1, l0;
     s32 dlx;
