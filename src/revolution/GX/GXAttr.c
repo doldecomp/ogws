@@ -51,8 +51,7 @@ void GXSetVtxDesc(GXAttr name, GXAttrType type) {
     gxdt->gxDirtyFlags |= GX_DIRTY_VCD;
 }
 
-// Explicit "inline" needed to force inline
-static inline void SETVCDATTR(GXAttr name, GXAttrType type) {
+static DECOMP_INLINE void SETVCDATTR(GXAttr name, GXAttrType type) {
     switch (name) {
     case GX_VA_PNMTXIDX:
         GX_CP_SET_VCD_LO_POSMATIDX(gxdt->vcdLoReg, type);
@@ -332,9 +331,9 @@ void GXSetVtxAttrFmt(GXVtxFmt fmt, GXAttr attr, GXCompCnt compCnt,
     gxdt->vatDirtyFlags |= (u8)(1 << (u8)fmt);
 }
 
-// Explicit "inline" needed to force inline
-static inline void SETVAT(u32* vatA, u32* vatB, u32* vatC, GXAttr attr,
-                          GXCompCnt compCnt, GXCompType compType, u8 shift) {
+static DECOMP_INLINE void SETVAT(u32* vatA, u32* vatB, u32* vatC, GXAttr attr,
+                                 GXCompCnt compCnt, GXCompType compType,
+                                 u8 shift) {
     switch (attr) {
     case GX_VA_POS:
         GX_CP_SET_VAT_GROUP0_POS_CNT(*vatA, compCnt);

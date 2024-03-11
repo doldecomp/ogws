@@ -275,13 +275,14 @@ BOOL DVDLowReadDiskID(DVDDiskID* out, DVDLowCallback callback) {
     return TRUE;
 }
 
-static inline void nextCommandBuf(void) {
+static void nextCommandBuf(void) {
     if (++freeCommandBuf >= DVD_LOW_CMD_MAX) {
         freeCommandBuf = 0;
     }
 }
 
-static inline DVDLowContext* newContext(DVDLowCallback callback, UNKWORD arg2) {
+static DECOMP_INLINE DVDLowContext* newContext(DVDLowCallback callback,
+                                               UNKWORD arg2) {
     s32 id;
 
     // The last operation somehow did not complete

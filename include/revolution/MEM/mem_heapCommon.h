@@ -36,58 +36,57 @@ void MEMiInitHeapHead(MEMiHeapHead* heap, u32 magic, void* start, void* end,
 void MEMiFinalizeHeap(MEMiHeapHead* heap);
 MEMiHeapHead* MEMFindContainHeap(const void* memBlock);
 
-static inline uintptr_t GetUIntPtr(const void* p) {
+static uintptr_t GetUIntPtr(const void* p) {
     return (uintptr_t)p;
 }
 
-static inline void* AddU32ToPtr(const void* p, u32 ofs) {
+static void* AddU32ToPtr(const void* p, u32 ofs) {
     return (void*)(GetUIntPtr(p) + ofs);
 }
 
-static inline void* SubU32ToPtr(const void* p, u32 ofs) {
+static void* SubU32ToPtr(const void* p, u32 ofs) {
     return (void*)(GetUIntPtr(p) - ofs);
 }
 
-static inline const void* AddU32ToCPtr(const void* p, u32 ofs) {
+static const void* AddU32ToCPtr(const void* p, u32 ofs) {
     return (const void*)(GetUIntPtr(p) + ofs);
 }
 
-static inline const void* SubU32ToCPtr(const void* p, u32 ofs) {
+static const void* SubU32ToCPtr(const void* p, u32 ofs) {
     return (const void*)(GetUIntPtr(p) - ofs);
 }
 
-static inline s32 GetOffsetFromPtr(const void* start, const void* end) {
+static s32 GetOffsetFromPtr(const void* start, const void* end) {
     return GetUIntPtr(end) - GetUIntPtr(start);
 }
 
-static inline u16 GetOptForHeap(const MEMiHeapHead* heap) {
+static u16 GetOptForHeap(const MEMiHeapHead* heap) {
     return heap->opt;
 }
 
-static inline void SetOptForHeap(MEMiHeapHead* heap, u16 opt) {
+static void SetOptForHeap(MEMiHeapHead* heap, u16 opt) {
     heap->opt = (u8)opt;
 }
 
-static inline void LockHeap(MEMiHeapHead* heap) {
+static void LockHeap(MEMiHeapHead* heap) {
     if (GetOptForHeap(heap) & MEM_HEAP_OPT_CAN_LOCK) {
         OSLockMutex(&heap->mutex);
     }
 }
 
-static inline void UnlockHeap(MEMiHeapHead* heap) {
+static void UnlockHeap(MEMiHeapHead* heap) {
     if (GetOptForHeap(heap) & MEM_HEAP_OPT_CAN_LOCK) {
         OSUnlockMutex(&heap->mutex);
     }
 }
 
-static inline void FillAllocMemory(MEMiHeapHead* heap, void* memBlock,
-                                   u32 size) {
+static void FillAllocMemory(MEMiHeapHead* heap, void* memBlock, u32 size) {
     if (GetOptForHeap(heap) & MEM_HEAP_OPT_CLEAR_ALLOC) {
         memset(memBlock, 0, size);
     }
 }
 
-static inline ptrdiff_t MEMGetHeapTotalSize(MEMiHeapHead* heap) {
+static s32 MEMGetHeapTotalSize(MEMiHeapHead* heap) {
     return GetOffsetFromPtr(heap, heap->end);
 }
 

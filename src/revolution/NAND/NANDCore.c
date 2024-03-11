@@ -21,7 +21,7 @@ static s32 _ES_GetDataDir(s32* fd, u64 tid, char* dirOut) DECOMP_DONT_INLINE;
 static s32 _ES_GetTitleId(s32* fd, u64* tidOut);
 static s32 _ES_CloseLib(s32* fd);
 
-static const char* __NANDVersion =
+const char* __NANDVersion =
     "<< RVL_SDK - NAND \trelease build: Nov 30 2006 03:32:57 (0x4199_60831) >>";
 
 static NANDLibState s_libState = NAND_LIB_UNINITIALIZED;
@@ -123,18 +123,18 @@ void nandConvertPath(char* abs, const char* dir, const char* rel) {
     }
 }
 
-// IPA won't inline this fsr
-inline BOOL nandIsRelativePath(const char* path) {
+BOOL nandIsRelativePath(const char* path) {
     return *path == '/' ? FALSE : TRUE;
 }
 
 BOOL nandIsPrivatePath(const char* path) {
-    const size_t len = sizeof("/shared2") - 1;
+    size_t len = sizeof("/shared2") - 1;
     return strncmp(path, "/shared2", len) == 0;
 }
 
 BOOL nandIsUnderPrivatePath(const char* path) {
-    const size_t len = sizeof("/shared2/") - 1;
+    size_t len = sizeof("/shared2/") - 1;
+
     if (strncmp(path, "/shared2/", len) == 0 && path[len] != '\0') {
         return TRUE;
     }

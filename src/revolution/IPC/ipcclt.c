@@ -39,7 +39,7 @@ static s32 ipcFree(void* block) {
     return IPC_RESULT_OK;
 }
 
-static inline s32 __ipcQueueRequest(IPCRequestEx* req) {
+static DECOMP_INLINE s32 __ipcQueueRequest(IPCRequestEx* req) {
     s32 ret = IPC_RESULT_OK;
     s32 waiting;
 
@@ -62,7 +62,7 @@ static inline s32 __ipcQueueRequest(IPCRequestEx* req) {
     return ret;
 }
 
-static inline s32 __ipcSendRequest(void) {
+static DECOMP_INLINE s32 __ipcSendRequest(void) {
     s32 ret = IPC_RESULT_OK;
     IPCRequestEx* req;
     s32 waiting;

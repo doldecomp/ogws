@@ -312,14 +312,6 @@ static void nandReadOpenCallback(s32 result, void* arg) {
 
 s32 NANDSafeCloseAsync(NANDFileInfo* info, NANDAsyncCallback callback,
                        NANDCommandBlock* block) {
-    return nandSafeCloseAsync(info, callback, block);
-}
-
-// Not actually weak/inline, but IPA seems to
-// not be aggressive enough to auto inline this.
-static inline s32 nandSafeCloseAsync(NANDFileInfo* info,
-                                     NANDAsyncCallback callback,
-                                     NANDCommandBlock* block) {
     s32 result;
 
     if (!nandIsInitialized()) {
