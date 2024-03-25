@@ -2,16 +2,16 @@
 #include <revolution/SI.h>
 #include <revolution/VI.h>
 
-typedef struct SIDispXY {
+typedef struct SIPollSetting {
     struct {
-        u16 x; // at 0x0
-        u8 y;  // at 0x2
+        u16 lines; // at 0x0
+        u8 times;  // at 0x2
     } params[SI_MAX_SAMPLE_RATE + 1];
-} SIDispXY;
+} SIPollSetting;
 
 static u32 SamplingRate = 0;
 
-static SIDispXY XYNTSC = {
+static SIPollSetting XYNTSC = {
     // clang-format off
     246,  2, // 0 msec
     14,  19, // 1 msec
@@ -28,7 +28,7 @@ static SIDispXY XYNTSC = {
     // clang-format on
 };
 
-static SIDispXY XYPAL = {
+static SIPollSetting XYPAL = {
     // clang-format off
     296,  2, // 0 msec
     15,  21, // 1 msec
@@ -47,7 +47,7 @@ static SIDispXY XYPAL = {
 
 void SISetSamplingRate(u32 msec) {
     BOOL enabled;
-    SIDispXY* xy;
+    SIPollSetting* xy;
     s32 m;
 
     if (msec > SI_MAX_SAMPLE_RATE) {
@@ -74,8 +74,8 @@ void SISetSamplingRate(u32 msec) {
         break;
     }
 
-    m = (VI_HW_REGS[VI_REG_VICLK] & VI_VICLK_SPEED) != VI_VICLK_27MHZ ? 2 : 1;
-    SISetXY(m * xy->params[msec].x, xy->params[msec].y);
+    m = (VI_HW_REGS[VI_VICLK] & VI_VICLK_SPEED) != VI_VICLK_27MHZ ? 2 : 1;
+    SISetXY(m * xy->params[msec].lines, xy->params[msec].times);
 
     OSRestoreInterrupts(enabled);
 }

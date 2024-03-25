@@ -10,7 +10,7 @@ typedef struct OSContext;
 
 #define OSError(...) OSPanic(__FILE__, __LINE__, __VA_ARGS__)
 
-#define OSAssert(exp, ...)                                                     \
+#define OS_ASSERT(exp, ...)                                                    \
     if (!(exp))                                                                \
     OSPanic(__FILE__, __LINE__, __VA_ARGS__)
 

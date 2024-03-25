@@ -14,10 +14,10 @@ volatile u32 AI_HW_REGS[] : 0xCD006C00;
  * Hardware register indexes
  */
 typedef enum {
-    AI_AICR,   //!< 0xCC006C00
-    AI_AIVR,   //!< 0xCC006C04
-    AI_AISCNT, //!< 0xCC006C08
-    AI_AIIT,   //!< 0xCC006C0C
+    AI_AICR,   //!< 0xCD006C00
+    AI_AIVR,   //!< 0xCD006C04
+    AI_AISCNT, //!< 0xCD006C08
+    AI_AIIT,   //!< 0xCD006C0C
 };
 
 // AICR - AI Control Register

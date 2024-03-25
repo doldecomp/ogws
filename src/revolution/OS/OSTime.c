@@ -80,7 +80,7 @@ static void GetDates(s32 days, OSCalendarTime* cal) DECOMP_DONT_INLINE {
     s32* p_days;
     s32 month;
 
-    cal->week_day = (days + 6) % WEEK_DAY_MAX;
+    cal->wday = (days + 6) % WEEK_DAY_MAX;
 
     // WTF??
     for (year = days / YEAR_DAY_MAX;
@@ -89,14 +89,14 @@ static void GetDates(s32 days, OSCalendarTime* cal) DECOMP_DONT_INLINE {
     }
     days -= totalDays;
     cal->year = year;
-    cal->year_day = days;
+    cal->yday = days;
 
     p_days = IsLeapYear(year) ? LeapYearDays : YearDays;
     for (month = MONTH_MAX; days < p_days[--month];) {
         ;
     }
     cal->month = month;
-    cal->month_day = days - p_days[month] + 1;
+    cal->mday = days - p_days[month] + 1;
 }
 
 void OSTicksToCalendarTime(s64 ticks, OSCalendarTime* cal) {
@@ -143,7 +143,7 @@ s64 OSCalendarTimeToTicks(const OSCalendarTime* cal) {
 
     // clang-format off
     seconds = (s64)SECS_IN_YEAR * year +
-              (s64)SECS_IN_DAY * (cal->month_day + GetLeapDays(year) + GetYearDays(year, month) - 1) +
+              (s64)SECS_IN_DAY * (cal->mday + GetLeapDays(year) + GetYearDays(year, month) - 1) +
               (s64)SECS_IN_HOUR * cal->hour +
               (s64)SECS_IN_MIN * cal->min +
               cal->sec -

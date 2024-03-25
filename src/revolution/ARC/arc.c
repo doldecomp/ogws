@@ -69,7 +69,7 @@ BOOL ARCInitHandle(void* bin, ARCHandle* handle) {
 
     // clang-format off
 #line 74
-    OSAssert(header->magic == ARC_FILE_MAGIC, "ARCInitHandle: bad archive format");
+    OS_ASSERT(header->magic == ARC_FILE_MAGIC, "ARCInitHandle: bad archive format");
     // clang-format on
 
     handle->header = header;

@@ -54,9 +54,9 @@ void OSSetArenaLo(void* lo) {
 }
 
 void* OSAllocFromMEM1ArenaLo(size_t size, u32 align) {
-    u8* blk_start = ROUND_UP_PTR(OSGetMEM1ArenaLo(), align);
-    u8* blk_end = blk_start + size;
-    blk_end = ROUND_UP_PTR(blk_end, align);
-    OSSetMEM1ArenaLo(blk_end);
-    return blk_start;
+    u8* begin = ROUND_UP_PTR(OSGetMEM1ArenaLo(), align);
+    u8* end = begin + size;
+    end = ROUND_UP_PTR(end, align);
+    OSSetMEM1ArenaLo(end);
+    return begin;
 }

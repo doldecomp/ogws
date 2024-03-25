@@ -161,7 +161,7 @@ s32 DVDConvertPathToEntrynum(const char* path) {
 
             // clang-format off
 #line 443
-            OSAssert(!illegal_format, "DVDConvertEntrynumToPath(possibly DVDOpen or DVDChangeDir or DVDOpenDir): specified directory or file (%s) doesn't match standard 8.3 format. This is a temporary restriction and will be removed soon\n", backup_path);
+            OS_ASSERT(!illegal_format, "DVDConvertEntrynumToPath(possibly DVDOpen or DVDChangeDir or DVDOpenDir): specified directory or file (%s) doesn't match standard 8.3 format. This is a temporary restriction and will be removed soon\n", backup_path);
             // clang-format on
         } else {
             // We've ensured the directory is not special.
@@ -319,12 +319,12 @@ BOOL DVDReadAsyncPrio(DVDFileInfo* info, void* dst, s32 size, s32 offset,
                       DVDAsyncCallback callback, s32 prio) {
     // clang-format off
 #line 823
-    OSAssert(offset >= 0 && offset <= info->size, "DVDReadAsync(): specified area is out of the file  ");
+    OS_ASSERT(offset >= 0 && offset <= info->size, "DVDReadAsync(): specified area is out of the file  ");
     // clang-format on
 
     // clang-format off
 #line 829
-    OSAssert(offset + size >= 0 && offset + size < info->size + 32, "DVDReadAsync(): specified area is out of the file  ");
+    OS_ASSERT(offset + size >= 0 && offset + size < info->size + 32, "DVDReadAsync(): specified area is out of the file  ");
     // clang-format on
 
     info->callback = callback;
@@ -350,12 +350,12 @@ s32 DVDReadPrio(DVDFileInfo* info, void* dst, s32 size, s32 offset, s32 prio) {
 
     // clang-format off
 #line 893
-    OSAssert(offset >= 0 && offset <= info->size, "DVDRead(): specified area is out of the file  ");
+    OS_ASSERT(offset >= 0 && offset <= info->size, "DVDRead(): specified area is out of the file  ");
     // clang-format on
 
     // clang-format off
 #line 899
-    OSAssert(offset + size >= 0 && offset + size < info->size + 32, "DVDRead(): specified area is out of the file  ");
+    OS_ASSERT(offset + size >= 0 && offset + size < info->size + 32, "DVDRead(): specified area is out of the file  ");
     // clang-format on
 
     block = &info->block;
