@@ -2178,8 +2178,8 @@ WUDRegisterAllocator:
 /* 801005C0 000FB4C0  38 21 00 10 */	addi r1, r1, 0x10
 /* 801005C4 000FB4C4  4E 80 00 20 */	blr 
 
-.global WUDGetWorkMemorySize
-WUDGetWorkMemorySize:
+.global WUDGetAllocatedMemSize
+WUDGetAllocatedMemSize:
 /* 801005C8 000FB4C8  48 00 C8 88 */	b lbl_8010CE50
 
 .global WUDShutdown

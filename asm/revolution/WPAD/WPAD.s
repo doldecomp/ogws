@@ -2417,7 +2417,7 @@ WPADRegisterAllocator:
 
 .global WPADGetWorkMemorySize
 WPADGetWorkMemorySize:
-/* 800CC348 000C7248  48 03 42 80 */	b WUDGetWorkMemorySize
+/* 800CC348 000C7248  48 03 42 80 */	b WUDGetAllocatedMemSize
 
 .global WPADGetStatus
 WPADGetStatus:
