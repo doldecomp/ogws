@@ -41,50 +41,56 @@ AxManager& AxManager::GetInstance() {
 }
 
 void AxManager::Init() {
-    if (!mInitialized) {
-        std::memset(sZeroBuffer, 0, sizeof(sZeroBuffer));
-        DCFlushRange(sZeroBuffer, sizeof(sZeroBuffer));
-        mZeroBuffer = sZeroBuffer;
-
-        ut::AutoInterruptLock lock;
-
-        AXGetAuxACallback(&mAuxCallback[AUX_A], &mAuxCallbackContext[AUX_A]);
-        AXGetAuxBCallback(&mAuxCallback[AUX_B], &mAuxCallbackContext[AUX_B]);
-        AXGetAuxCCallback(&mAuxCallback[AUX_C], &mAuxCallbackContext[AUX_C]);
-
-        AXRegisterAuxACallback(NULL, NULL);
-        AXRegisterAuxBCallback(NULL, NULL);
-        AXRegisterAuxCCallback(NULL, NULL);
-
-        mOldAxCallback = AXRegisterCallback(AxCallbackFunc);
-
-        mInitialized = true;
+    if (mInitialized) {
+        return;
     }
+
+    std::memset(sZeroBuffer, 0, sizeof(sZeroBuffer));
+    DCFlushRange(sZeroBuffer, sizeof(sZeroBuffer));
+    mZeroBuffer = sZeroBuffer;
+
+    ut::AutoInterruptLock lock;
+
+    AXGetAuxACallback(&mAuxCallback[AUX_A], &mAuxCallbackContext[AUX_A]);
+    AXGetAuxBCallback(&mAuxCallback[AUX_B], &mAuxCallbackContext[AUX_B]);
+    AXGetAuxCCallback(&mAuxCallback[AUX_C], &mAuxCallbackContext[AUX_C]);
+
+    AXRegisterAuxACallback(NULL, NULL);
+    AXRegisterAuxBCallback(NULL, NULL);
+    AXRegisterAuxCCallback(NULL, NULL);
+
+    mOldAxCallback = AXRegisterCallback(AxCallbackFunc);
+
+    mInitialized = true;
 }
 
 void AxManager::Shutdown() {
-    if (mInitialized) {
-        AXRegisterCallback(mOldAxCallback);
-
-        ShutdownEffect(AUX_A);
-        ShutdownEffect(AUX_B);
-        ShutdownEffect(AUX_C);
-
-        AXRegisterAuxACallback(mAuxCallback[AUX_A], mAuxCallbackContext[AUX_A]);
-        AXRegisterAuxBCallback(mAuxCallback[AUX_B], mAuxCallbackContext[AUX_B]);
-        AXRegisterAuxCCallback(mAuxCallback[AUX_C], mAuxCallbackContext[AUX_C]);
-
-        for (int i = 0; i < AUX_BUS_NUM; i++) {
-            mAuxCallback[i] = NULL;
-            mAuxCallbackContext[i] = NULL;
-        }
-
-        mZeroBuffer = NULL;
-        mInitialized = false;
+    if (!mInitialized) {
+        return;
     }
+
+    AXRegisterCallback(mOldAxCallback);
+
+    ShutdownEffect(AUX_A);
+    ShutdownEffect(AUX_B);
+    ShutdownEffect(AUX_C);
+
+    AXRegisterAuxACallback(mAuxCallback[AUX_A], mAuxCallbackContext[AUX_A]);
+    AXRegisterAuxBCallback(mAuxCallback[AUX_B], mAuxCallbackContext[AUX_B]);
+    AXRegisterAuxCCallback(mAuxCallback[AUX_C], mAuxCallbackContext[AUX_C]);
+
+    for (int i = 0; i < AUX_BUS_NUM; i++) {
+        mAuxCallback[i] = NULL;
+        mAuxCallbackContext[i] = NULL;
+    }
+
+    mZeroBuffer = NULL;
+    mInitialized = false;
 }
 
-f32 AxManager::GetOutputVolume() const { return mMasterVolume.GetValue(); }
+f32 AxManager::GetOutputVolume() const {
+    return mMasterVolume.GetValue();
+}
 
 void AxManager::Update() {
     s32 status = DVDGetDriveStatus();
@@ -126,7 +132,7 @@ void AxManager::Update() {
             retVolF32 *= ut::Clamp(mAuxUserVolume[i].GetValue(), 0.0f, 1.0f);
             retVolF32 *= ut::Clamp(mAuxFadeVolume[i].GetValue(), 0.0f, 1.0f);
 
-            u16 retVolU16 = 32768 * retVolF32;
+            u16 retVolU16 = static_cast<u16>(32768 * retVolF32);
 
             switch (i) {
             case AUX_A:
@@ -161,7 +167,9 @@ void AxManager::Update() {
     AXSetMasterVolume(32768 * masterVol);
 }
 
-void* AxManager::GetZeroBufferAddress() { return mZeroBuffer; }
+void* AxManager::GetZeroBufferAddress() {
+    return mZeroBuffer;
+}
 
 void AxManager::RegisterCallback(CallbackListNode* node,
                                  AXOutCallback callback) {
@@ -196,7 +204,9 @@ void AxManager::SetOutputMode(OutputMode mode) {
     VoiceManager::GetInstance().UpdateAllVoicesSync(Voice::SYNC_AX_MIX);
 }
 
-OutputMode AxManager::GetOutputMode() { return mOutputMode; }
+OutputMode AxManager::GetOutputMode() {
+    return mOutputMode;
+}
 
 void AxManager::SetMasterVolume(f32 volume, int frame) {
     mMasterVolume.SetTarget(ut::Clamp(volume, 0.0f, 1.0f), (frame + 2) / 3);
