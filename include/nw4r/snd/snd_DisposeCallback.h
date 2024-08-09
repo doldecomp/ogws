@@ -14,10 +14,10 @@ public:
 public:
     virtual ~DisposeCallback() {} // at 0x8
 
-    virtual void InvalidateData(const void* start,
-                                const void* end) = 0; // at 0xC
-    virtual void InvalidateWaveData(const void* start,
-                                    const void* end) = 0; // at 0x10
+    virtual void InvalidateData(const void* pStart,
+                                const void* pEnd) = 0; // at 0xC
+    virtual void InvalidateWaveData(const void* pStart,
+                                    const void* pEnd) = 0; // at 0x10
 };
 
 NW4R_UT_LIST_TYPEDEF_DECL(DisposeCallback);

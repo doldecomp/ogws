@@ -8,7 +8,10 @@ namespace nw4r {
 namespace snd {
 namespace detail {
 
-NW4R_SND_SINGLETON_IMPL(VoiceManager);
+VoiceManager& VoiceManager::GetInstance() {
+    static VoiceManager instance;
+    return instance;
+}
 
 VoiceManager::VoiceManager() : mInitialized(false) {}
 

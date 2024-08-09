@@ -9,9 +9,9 @@ namespace snd {
 namespace detail {
 
 class VoiceManager {
-    NW4R_SND_SINGLETON_DECL(VoiceManager);
-
 public:
+    static VoiceManager& GetInstance();
+
     u32 GetRequiredMemSize();
 
     void Setup(void* pWork, u32 workSize);

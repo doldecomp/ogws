@@ -34,10 +34,10 @@
  * (RESERVED FOR MATCHING DECOMP HACKS)
  */
 #ifndef NON_MATCHING
-#define NW4R_UT_LIST_TYPEDEF_INST(T)                                           \
+#define NW4R_UT_LIST_TYPEDEF_FORCE(T)                                          \
     template struct nw4r::ut::LinkList<T, offsetof(T, node)>
 #else
-#define NW4R_UT_LIST_TYPEDEF_INST(T)
+#define NW4R_UT_LIST_TYPEDEF_FORCE(T)
 #endif
 
 namespace nw4r {

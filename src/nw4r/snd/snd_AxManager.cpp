@@ -10,7 +10,7 @@ namespace nw4r {
 namespace snd {
 namespace detail {
 
-NW4R_UT_LIST_TYPEDEF_INST(FxBase);
+NW4R_UT_LIST_TYPEDEF_FORCE(FxBase);
 
 u8 AxManager::sZeroBuffer[0x100];
 
