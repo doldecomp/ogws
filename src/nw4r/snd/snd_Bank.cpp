@@ -21,7 +21,7 @@ namespace nw4r
 				
 				if (!mFileReader.ReadWaveParam(&waveData, instInfo.WORD_0x0, PTR_0xC)) return NULL;
 				
-				Channel * pChannel = Channel::AllocChannel(Min<int>(waveData.BYTE_0x2, 2), noteOnInfo.INT_0x18, noteOnInfo.INT_0x14, noteOnInfo.mChannelCallback, noteOnInfo.INT_0x20);
+				Channel * pChannel = Channel::AllocChannel(Min<int>(waveData.numChannels, 2), noteOnInfo.INT_0x18, noteOnInfo.INT_0x14, noteOnInfo.mChannelCallback, noteOnInfo.INT_0x20);
 				
 				if (!pChannel) return NULL;
 				

@@ -11,9 +11,15 @@ class VoiceManager {
 public:
     static VoiceManager& GetInstance();
 
-    const VoiceList& GetVoiceList() const { return mPriorityList; }
+    const VoiceList& GetVoiceList() const {
+        return mPriorityList;
+    }
 
     Voice* AllocVoice(int, int, int, Voice::VoiceCallback, void*);
+    void FreeVoice(Voice*);
+
+    void ChangeVoicePriority(Voice*);
+
     void UpdateAllVoices();
     void NotifyVoiceUpdate();
     UNKTYPE UpdateAllVoicesSync(u32);

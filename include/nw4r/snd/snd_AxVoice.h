@@ -9,17 +9,17 @@ namespace nw4r {
 namespace snd {
 namespace detail {
 
-inline int CalcAxvpbDelta(u16 init, u16 target) {
-    return (target - init) / AX_SAMPLES_PER_FRAME;
-}
-
 class AxVoiceParamBlock {
 public:
     AxVoiceParamBlock();
 
-    operator AXVPB*() { return mVpb; }
+    operator AXVPB*() {
+        return mVpb;
+    }
 
-    bool IsAvailable() const { return mVpb != NULL; }
+    bool IsAvailable() const {
+        return mVpb != NULL;
+    }
 
     bool IsRun() const {
         return IsAvailable() && mVpb->pb.state == AX_VOICE_RUN;
@@ -126,8 +126,8 @@ public:
         CALLBACK_STATUS_DROP_DSP
     };
 
-    typedef void (*AxVoiceCallback)(AxVoice* voice,
-                                    AxVoiceCallbackStatus status, void* arg);
+    typedef void (*AxVoiceCallback)(AxVoice* pDropVoice,
+                                    AxVoiceCallbackStatus status, void* pArg);
 
     enum Format {
         FORMAT_ADPCM = 0,
@@ -186,14 +186,26 @@ public:
     AxVoice();
     ~AxVoice();
 
-    bool IsRun() const { return mVpb.IsRun(); }
-    void Run() { mVpb.SetVoiceStateRun(); }
-    void Stop() { mVpb.SetVoiceStateStop(); }
-    void Sync() { mVpb.Sync(); }
+    bool IsRun() const {
+        return mVpb.IsRun();
+    }
+    void Run() {
+        mVpb.SetVoiceStateRun();
+    }
+    void Stop() {
+        mVpb.SetVoiceStateStop();
+    }
+    void Sync() {
+        mVpb.Sync();
+    }
 
-    Format GetFormat() const { return mFormat; }
+    Format GetFormat() const {
+        return mFormat;
+    }
 
-    void SetBaseAddress(const void* base) { mWaveData = base; }
+    void SetBaseAddress(const void* base) {
+        mWaveData = base;
+    }
 
     f32 GetDspRatio(f32 ratio) const {
         return (ratio * mSampleRate) / AX_SAMPLE_RATE;
@@ -247,6 +259,26 @@ public:
 };
 
 NW4R_UT_LIST_TYPEDEF_DECL(AxVoice);
+
+inline int CalcAxvpbDelta(u16 init, u16 target) {
+    return (target - init) / AX_SAMPLES_PER_FRAME;
+}
+
+inline u16 CalcMixVolume(f32 volume) {
+    return ut::Min<u32>(0xFFFF, AX_MAX_VOLUME * volume);
+}
+
+inline AxVoice::Format WaveFormatToAxFormat(u32 format) {
+    if (format == SAMPLE_FORMAT_PCM_S16) {
+        return AxVoice::FORMAT_PCM16;
+    }
+
+    if (format == SAMPLE_FORMAT_PCM_S32) {
+        return AxVoice::FORMAT_PCM8;
+    }
+
+    return AxVoice::FORMAT_ADPCM;
+}
 
 } // namespace detail
 } // namespace snd

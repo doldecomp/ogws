@@ -5,7 +5,24 @@
 namespace nw4r {
 namespace snd {
 
+static const int CHANNEL_MIN = 1;
+static const int CHANNEL_MAX = 2;
+
+static const int REMOTE_FILTER_MAX = 127;
+
+enum OutputLineFlag {
+    OUTPUT_LINE_MAIN = (1 << 0),
+    OUTPUT_LINE_REMOTE_N = (1 << 1),
+};
+
 enum AuxBus { AUX_A, AUX_B, AUX_C, AUX_BUS_NUM };
+
+enum SampleFormat {
+    SAMPLE_FORMAT_PCM_S32,
+    SAMPLE_FORMAT_PCM_S16,
+    SAMPLE_FORMAT_PCM_S8,
+    SAMPLE_FORMAT_DSP_ADPCM
+};
 
 enum OutputMode {
     OUTPUT_MODE_STEREO,
@@ -55,6 +72,20 @@ struct AdpcmLoopParam {
     u16 loop_pred_scale; // at 0x0
     u16 loop_yn1;        // at 0x2
     u16 loop_yn2;        // at 0x4
+};
+
+struct AdpcmInfo {
+    AdpcmParam param;         // at 0x0
+    AdpcmLoopParam loopParam; // at 0x28
+};
+
+struct ChannelParam {
+    void* dataAddr;       // at 0x0
+    u32 volumeFrontLeft;  // at 0x4
+    u32 volumeFrontRight; // at 0x8
+    u32 volumeRearLeft;   // at 0xC
+    u32 volumeRearRight;  // at 0x10
+    AdpcmInfo adpcmInfo;  // at 0x14
 };
 
 } // namespace detail

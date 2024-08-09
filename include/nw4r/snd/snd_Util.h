@@ -1,6 +1,7 @@
 #ifndef NW4R_SND_UTIL_H
 #define NW4R_SND_UTIL_H
 #include "types_nw4r.h"
+#include "snd_Common.h"
 
 namespace nw4r
 {
@@ -31,11 +32,23 @@ namespace nw4r
                     T mEntries[]; // at 0x4
                 };
                 
+                enum PanCurve
+                {
+                    PAN_CURVE_SQRT,
+                    PAN_CURVE_SINCOS,
+                    PAN_CURVE_LINEAR,
+                };
+
                 struct PanInfo
                 {
-                    u32 mPanTableID; // 0x0, (PanTableTable)
-                    bool BOOL_0x4;
-                    bool BOOL_0x5;
+                    PanCurve curve; // at 0x0
+                    bool centerZero; // at 0x4
+                    bool zeroClamp; // at 0x5
+
+                    PanInfo() :
+                        curve(PAN_CURVE_SQRT),
+                        centerZero(false),
+                        zeroClamp(false) {}
                 };
 
                 template <typename T0, typename T1, typename T2, typename T3>

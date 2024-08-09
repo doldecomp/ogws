@@ -636,19 +636,19 @@ namespace nw4r
                 f32 CalcPanRatio(f32 f1, const PanInfo& info)
                 {
                     f1 = (Clamp<f32>(f1, -1.0f, 1.0f) + 1.0f) / 2.0f;
-                    const f32 *tbl = PanTableTable[info.mPanTableID];
+                    const f32 *tbl = PanTableTable[info.curve];
                     f32 f2 = tbl[(int)(0.5f + 256.0f * f1)];
 
-                    if (info.BOOL_0x4) f2 /= tbl[128];
+                    if (info.centerZero) f2 /= tbl[128];
 
-                    return (info.BOOL_0x5) ? Clamp<f32>(f2, 0.0f, 1.0f)
+                    return (info.zeroClamp) ? Clamp<f32>(f2, 0.0f, 1.0f)
                         : Clamp<f32>(f2, 0.0f, 2.0f);
                 }
 
                 f32 CalcSurroundPanRatio(f32 f1, const PanInfo& info)
                 {
                     f1 = Clamp<f32>(f1, 0.0f, 2.0f) / 2.0f;
-                    const f32 *tbl = PanTableTable[info.mPanTableID];
+                    const f32 *tbl = PanTableTable[info.curve];
 
                     return Clamp<f32>(tbl[(int)(f1 * 256.0f + 0.5f)],
                         0.0f, 2.0f);

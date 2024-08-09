@@ -21,8 +21,8 @@ public:
         CALLBACK_STATUS_DROP_DSP,
     };
 
-    typedef void (*VoiceCallback)(Voice* voice, VoiceCallbackStatus status,
-                                  void* arg);
+    typedef void (*VoiceCallback)(Voice* pDropVoice, VoiceCallbackStatus status,
+                                  void* pArg);
 
     enum VoiceSyncFlag {
         SYNC_AX_SRC_INITIAL = (1 << 0),
@@ -38,48 +38,75 @@ public:
 public:
     Voice();
     virtual ~Voice(); // at 0x8
+    virtual void InvalidateData(const void* pStart, const void* pEnd) {
+#pragma unused(pStart)
+#pragma unused(pEnd)
+    } // at 0xC
+    virtual void InvalidateWaveData(const void* pStart,
+                                    const void* pEnd); // at 0x10
 
-    virtual void InvalidateData(const void* start, const void* end) {} // at 0xC
-    virtual void InvalidateWaveData(const void* start,
-                                    const void* end); // at 0x10
+    int GetPriority() const {
+        return mPriority;
+    }
+    int GetAxVoiceCount() const {
+        return mChannelCount * mVoiceOutCount;
+    }
 
-    int GetPriority() const { return mPriority; }
-    int GetAxVoiceCount() const { return mChannelCount * mVoiceOutCount; }
-
-    bool IsActive() const { return mAxVoice[0][0] != NULL; }
+    bool IsActive() const {
+        return mAxVoice[0][0] != NULL;
+    }
     bool IsPlayFinished() const {
         return IsActive() && mAxVoice[0][0]->IsPlayFinished();
     }
 
-    void InitParam(int chans, int voices, VoiceCallback callback, void* arg);
+    void InitParam(int chans, int voices, VoiceCallback pCallback, void* pArg);
     void StopFinished();
+
     void Calc();
     void Update();
-    bool Acquire(int chans, int voices, int prio, VoiceCallback callback,
-                 void* arg);
 
-    void Start();
-    void Setup(const WaveData&, u32);
-    void SetPriority(int);
-    void Stop();
+    bool Acquire(int chans, int voices, int prio, VoiceCallback pCallback,
+                 void* pArg);
     void Free();
-    void SetPanMode(PanMode);
-    void SetPanCurve(PanCurve);
-    void SetVolume(f32);
-    void SetVeVolume(f32, f32);
-    void SetPitch(f32);
-    void SetPan(f32);
-    void SetSurroundPan(f32);
-    void SetLpfFreq(f32);
-    void SetRemoteFilter(int);
-    void SetOutputLine(int);
-    void SetMainOutVolume(f32);
-    void SetMainSend(f32);
+
+    void Setup(const WaveData& rData, u32 offset);
+    void Start();
+    void Stop();
+    void Pause(bool flag);
+
+    AxVoice::Format GetFormat() const;
+
+    void SetVolume(f32 volume);
+    void SetVeVolume(f32 target, f32 init);
+    void SetPitch(f32 pitch);
+
+    void SetPanMode(PanMode mode);
+    void SetPanCurve(PanCurve curve);
+    void SetPan(f32 pan);
+    void SetSurroundPan(f32 pan);
+
+    void SetLpfFreq(f32 freq);
+    void SetRemoteFilter(int filter);
+    void SetOutputLine(int flag);
+
+    void SetMainOutVolume(f32 volume);
+    void SetMainSend(f32 send);
     void SetFxSend(AuxBus bus, f32 send);
-    void SetRemoteOutVolume(int remote, f32 vol);
+
+    void SetRemoteOutVolume(int remote, f32 volume);
     void SetRemoteSend(int remote, f32 send);
     void SetRemoteFxSend(int remote, f32 send);
-    void Pause(bool flag);
+
+    void SetPriority(int prio);
+    void UpdateVoicesPriority();
+
+    void SetAdpcmLoop(int channel, const AdpcmLoopParam* pParam);
+    u32 GetCurrentPlayingSample() const;
+    void SetLoopStart(int channel, const void* pBase, u32 samples);
+    void SetLoopEnd(int channel, const void* pBase, u32 samples);
+    void SetLoopFlag(bool loop);
+    void StopAtPoint(int channel, const void* pBase, u32 samples);
+    void SetVoiceType(AxVoice::VoiceType type);
 
     void CalcAxSrc(bool initial);
     void CalcAxVe();
@@ -88,55 +115,59 @@ public:
     void CalcAxRemoteFilter();
 
     void SyncAxVoice();
+    void ResetDelta();
+
+    static void AxVoiceCallbackFunc(AxVoice* pVoice,
+                                    AxVoice::AxVoiceCallbackStatus status,
+                                    void* pArg);
+
+    void TransformDpl2Pan(f32* pPan, f32* pSurroundPan, f32 pan,
+                          f32 surroundPan);
+    void CalcMixParam(int channel, int voice, AxVoice::MixParam* pMix,
+                      AxVoice::RemoteMixParam* pRmtMix);
 
     void RunAllAxVoice();
     void StopAllAxVoice();
 
-    static void AxVoiceCallbackFunc(AxVoice* voice,
-                                    AxVoice::AxVoiceCallbackStatus status,
-                                    void* arg);
+private:
+    static const int scVoicesOutMin = 1;
+    static const int scVoicesOutMax = 4;
+
+    static const int scPriorityMin = 0;
+    static const int scPriorityMax = 255;
 
 private:
-    static const int CHANNELS_MIN = 1;
-    static const int CHANNELS_MAX = 2;
-
-    static const int VOICES_OUT_MIN = 1;
-    static const int VOICES_OUT_MAX = 4;
-
-    static const int PRIORITY_MIN = 0;
-    static const int PRIORITY_MAX = 255;
-
-    AxVoice* mAxVoice[CHANNELS_MAX][VOICES_OUT_MAX]; // at 0xC
-    SoundParam mVoiceOutParam[VOICES_OUT_MAX];       // at 0x2C
-    int mChannelCount;                               // at 0x9C
-    int mVoiceOutCount;                              // at 0xA0
-    VoiceCallback mCallback;                         // at 0xA4
-    void* mCallbackArg;                              // at 0xA8
-    bool mIsActive;                                  // at 0xAC
-    bool mIsStarting;                                // at 0xAD
-    bool mIsStarted;                                 // at 0xAE
-    bool mIsPause;                                   // at 0xAF
-    bool mIsPausing;                                 // at 0xB0
-    u8 mSyncFlag;                                    // at 0xB1
-    u8 mRemoteFilter;                                // at 0xB2
-    u8 mBiquadType;                                  // at 0xB3
-    int mPriority;                                   // at 0xB4
-    f32 mPan;                                        // at 0xB8
-    f32 mSurroundPan;                                // at 0xBC
-    f32 mLpfFreq;                                    // at 0xC0
-    int mOutputLineFlag;                             // at 0xC4
-    f32 mMainOutVolume;                              // at 0xC8
-    f32 mMainSend;                                   // at 0xCC
-    f32 mFxSend[AUX_BUS_NUM];                        // at 0xD0
-    f32 mRemoteOutVolume[WPAD_MAX_CONTROLLERS];      // at 0xDC
-    f32 mRemoteSend[WPAD_MAX_CONTROLLERS];           // at 0xEC
-    f32 mRemoteFxSend[WPAD_MAX_CONTROLLERS];         // at 0xFC
-    f32 mPitch;                                      // at 0x10C
-    f32 mVolume;                                     // at 0x110
-    f32 mVeInitVolume;                               // at 0x114
-    f32 mVeTargetVolume;                             // at 0x118
-    PanMode mPanMode;                                // at 0x11C
-    PanCurve mPanCurve;                              // at 0x120
+    AxVoice* mAxVoice[CHANNEL_MAX][scVoicesOutMax]; // at 0xC
+    SoundParam mVoiceOutParam[scVoicesOutMax];      // at 0x2C
+    int mChannelCount;                              // at 0x9C
+    int mVoiceOutCount;                             // at 0xA0
+    VoiceCallback mCallback;                        // at 0xA4
+    void* mCallbackArg;                             // at 0xA8
+    bool mIsActive;                                 // at 0xAC
+    bool mIsStarting;                               // at 0xAD
+    bool mIsStarted;                                // at 0xAE
+    bool mIsPause;                                  // at 0xAF
+    bool mIsPausing;                                // at 0xB0
+    u8 mSyncFlag;                                   // at 0xB1
+    u8 mRemoteFilter;                               // at 0xB2
+    u8 mBiquadType;                                 // at 0xB3
+    int mPriority;                                  // at 0xB4
+    f32 mPan;                                       // at 0xB8
+    f32 mSurroundPan;                               // at 0xBC
+    f32 mLpfFreq;                                   // at 0xC0
+    int mOutputLineFlag;                            // at 0xC4
+    f32 mMainOutVolume;                             // at 0xC8
+    f32 mMainSend;                                  // at 0xCC
+    f32 mFxSend[AUX_BUS_NUM];                       // at 0xD0
+    f32 mRemoteOutVolume[WPAD_MAX_CONTROLLERS];     // at 0xDC
+    f32 mRemoteSend[WPAD_MAX_CONTROLLERS];          // at 0xEC
+    f32 mRemoteFxSend[WPAD_MAX_CONTROLLERS];        // at 0xFC
+    f32 mPitch;                                     // at 0x10C
+    f32 mVolume;                                    // at 0x110
+    f32 mVeInitVolume;                              // at 0x114
+    f32 mVeTargetVolume;                            // at 0x118
+    PanMode mPanMode;                               // at 0x11C
+    PanCurve mPanCurve;                             // at 0x120
 
 public:
     NW4R_UT_LIST_NODE_DECL(); // at 0x124
