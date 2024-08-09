@@ -84,8 +84,8 @@ namespace nw4r
 
         void SoundHeap::DisposeCallbackFunc(void *p1, u32 i, void *p2)
         {
-            DisposeCallbackManager::GetInstance()->Dispose(p1, i, p2);
-            DisposeCallbackManager::GetInstance()->DisposeWave(p1, i, p2);
+            DisposeCallbackManager::GetInstance().Dispose(p1, i, p2);
+            DisposeCallbackManager::GetInstance().DisposeWave(p1, i, p2);
         }
     }
 }

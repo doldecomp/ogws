@@ -13,6 +13,8 @@ namespace snd {
 namespace detail {
 
 class Voice : public DisposeCallback {
+    friend class VoiceManager;
+
 public:
     enum VoiceCallbackStatus {
         CALLBACK_STATUS_FINISH_WAVE,
@@ -22,7 +24,7 @@ public:
     };
 
     typedef void (*VoiceCallback)(Voice* pDropVoice, VoiceCallbackStatus status,
-                                  void* pArg);
+                                  void* pCallbackArg);
 
     enum VoiceSyncFlag {
         SYNC_AX_SRC_INITIAL = (1 << 0),
@@ -59,14 +61,15 @@ public:
         return IsActive() && mAxVoice[0][0]->IsPlayFinished();
     }
 
-    void InitParam(int chans, int voices, VoiceCallback pCallback, void* pArg);
+    void InitParam(int channels, int voices, VoiceCallback pCallback,
+                   void* pCallbackArg);
     void StopFinished();
 
     void Calc();
     void Update();
 
-    bool Acquire(int chans, int voices, int prio, VoiceCallback pCallback,
-                 void* pArg);
+    bool Acquire(int channels, int voices, int prio, VoiceCallback pCallback,
+                 void* pCallbackArg);
     void Free();
 
     void Setup(const WaveData& rData, u32 offset);
@@ -119,7 +122,7 @@ public:
 
     static void AxVoiceCallbackFunc(AxVoice* pVoice,
                                     AxVoice::AxVoiceCallbackStatus status,
-                                    void* pArg);
+                                    void* pCallbackArg);
 
     void TransformDpl2Pan(f32* pPan, f32* pSurroundPan, f32 pan,
                           f32 surroundPan);

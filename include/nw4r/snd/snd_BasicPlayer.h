@@ -2,6 +2,7 @@
 #define NW4R_SND_BASIC_PLAYER_H
 #include <nw4r/snd/snd_Common.h>
 #include <nw4r/types_nw4r.h>
+#include <nw4r/ut.h>
 #include <revolution/WPAD.h>
 
 namespace nw4r {
@@ -22,32 +23,68 @@ public:
 
     void InitParam();
 
-    u32 GetId() const { return mId; }
-    void SetId(u32 id) { mId = id; }
+    u32 GetId() const {
+        return mId;
+    }
+    void SetId(u32 id) {
+        mId = id;
+    }
 
-    f32 GetVolume() const { return mVolume; }
-    void SetVolume(f32 volume) { mVolume = volume; }
+    f32 GetVolume() const {
+        return mVolume;
+    }
+    void SetVolume(f32 volume) {
+        mVolume = volume;
+    }
 
-    f32 GetPitch() const { return mPitch; }
-    void SetPitch(f32 pitch) { mPitch = pitch; }
+    f32 GetPitch() const {
+        return mPitch;
+    }
+    void SetPitch(f32 pitch) {
+        mPitch = pitch;
+    }
 
-    f32 GetPan() const { return mPan; }
-    void SetPan(f32 pan) { mPan = pan; }
+    f32 GetPan() const {
+        return mPan;
+    }
+    void SetPan(f32 pan) {
+        mPan = pan;
+    }
 
-    f32 GetSurroundPan() const { return mSurroundPan; }
-    void SetSurroundPan(f32 pan) { mSurroundPan = pan; }
+    f32 GetSurroundPan() const {
+        return mSurroundPan;
+    }
+    void SetSurroundPan(f32 pan) {
+        mSurroundPan = pan;
+    }
 
-    f32 GetLpfFreq() const { return mLpfFreq; }
-    void SetLpfFreq(f32 freq) { mLpfFreq = freq; }
+    f32 GetLpfFreq() const {
+        return mLpfFreq;
+    }
+    void SetLpfFreq(f32 freq) {
+        mLpfFreq = freq;
+    }
 
-    int GetOutputLine() const { return mOutputLine; }
-    void SetOutputLine(int flags) { mOutputLine = flags; }
+    int GetOutputLine() const {
+        return mOutputLine;
+    }
+    void SetOutputLine(int flags) {
+        mOutputLine = flags;
+    }
 
-    f32 GetMainOutVolume() const { return mMainOutVolume; }
-    void SetMainOutVolume(f32 volume) { mMainOutVolume = volume; }
+    f32 GetMainOutVolume() const {
+        return mMainOutVolume;
+    }
+    void SetMainOutVolume(f32 volume) {
+        mMainOutVolume = volume;
+    }
 
-    f32 GetMainSend() const { return mMainSend; }
-    void SetMainSend(f32 send) { mMainSend = send; }
+    f32 GetMainSend() const {
+        return mMainSend;
+    }
+    void SetMainSend(f32 send) {
+        mMainSend = send;
+    }
 
     void SetFxSend(AuxBus bus, f32 send);
     f32 GetFxSend(AuxBus bus) const;
@@ -56,19 +93,28 @@ public:
     f32 GetRemoteOutVolume(int remote) const;
 
     f32 GetRemoteSend(int remote) const;
-
     f32 GetRemoteFxSend(int remote) const;
 
-    int GetRemoteFilter() const { return mRemoteFilter; }
+    int GetRemoteFilter() const {
+        return mRemoteFilter;
+    }
     void SetRemoteFilter(int filter) {
         mRemoteFilter = ut::Clamp(filter, FILTER_MIN, FILTER_MAX);
     }
 
-    PanMode GetPanMode() const { return mPanMode; }
-    void SetPanMode(PanMode mode) { mPanMode = mode; }
+    PanMode GetPanMode() const {
+        return mPanMode;
+    }
+    void SetPanMode(PanMode mode) {
+        mPanMode = mode;
+    }
 
-    PanCurve GetPanCurve() const { return mPanCurve; }
-    void SetPanCurve(PanCurve curve) { mPanCurve = curve; }
+    PanCurve GetPanCurve() const {
+        return mPanCurve;
+    }
+    void SetPanCurve(PanCurve curve) {
+        mPanCurve = curve;
+    }
 
 public:
     static const int FILTER_MIN = 0;

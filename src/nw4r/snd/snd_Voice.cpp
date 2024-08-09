@@ -34,12 +34,12 @@ Voice::~Voice() {
     }
 }
 
-void Voice::InitParam(int chans, int voices, VoiceCallback pCallback,
-                      void* pArg) {
-    mChannelCount = chans;
+void Voice::InitParam(int channels, int voices, VoiceCallback pCallback,
+                      void* pCallbackArg) {
+    mChannelCount = channels;
     mVoiceOutCount = voices;
     mCallback = pCallback;
-    mCallbackArg = pArg;
+    mCallbackArg = pCallbackArg;
 
     mSyncFlag = 0;
     mIsPause = false;
@@ -148,9 +148,9 @@ void Voice::Update() {
     }
 }
 
-bool Voice::Acquire(int chans, int voices, int prio, VoiceCallback pCallback,
-                    void* pArg) {
-    chans = ut::Clamp(chans, CHANNEL_MIN, CHANNEL_MAX);
+bool Voice::Acquire(int channels, int voices, int prio, VoiceCallback pCallback,
+                    void* pCallbackArg) {
+    channels = ut::Clamp(channels, CHANNEL_MIN, CHANNEL_MAX);
     voices = ut::Clamp(voices, scVoicesOutMin, scVoicesOutMax);
 
     ut::AutoInterruptLock lock;
@@ -162,7 +162,7 @@ bool Voice::Acquire(int chans, int voices, int prio, VoiceCallback pCallback,
         axPrio = (AX_PRIORITY_MAX / 2) + 1;
     }
 
-    int required = chans * voices;
+    int required = channels * voices;
     AxVoice* voiceTable[CHANNEL_MAX * scVoicesOutMax];
 
     for (int i = 0; required > i; i++) {
@@ -219,7 +219,7 @@ bool Voice::Acquire(int chans, int voices, int prio, VoiceCallback pCallback,
     }
 
     int idx = 0;
-    for (int i = 0; i < chans; i++) {
+    for (int i = 0; i < channels; i++) {
         for (int j = 0; j < voices; j++) {
             voiceTable[idx]->SetPriority(axPrio);
             mAxVoice[i][j] = voiceTable[idx];
@@ -227,7 +227,7 @@ bool Voice::Acquire(int chans, int voices, int prio, VoiceCallback pCallback,
         }
     }
 
-    InitParam(chans, voices, pCallback, pArg);
+    InitParam(channels, voices, pCallback, pCallbackArg);
     mIsActive = true;
     return true;
 }
@@ -748,8 +748,8 @@ void Voice::ResetDelta() {
 
 void Voice::AxVoiceCallbackFunc(AxVoice* pDropVoice,
                                 AxVoice::AxVoiceCallbackStatus status,
-                                void* pArg) {
-    Voice* pSelf = static_cast<Voice*>(pArg);
+                                void* pCallbackArg) {
+    Voice* pSelf = static_cast<Voice*>(pCallbackArg);
 
     VoiceCallbackStatus voiceStatus;
     bool freeDropVoice = false;

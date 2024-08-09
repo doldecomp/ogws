@@ -2,6 +2,22 @@
 #define NW4R_SND_COMMON_H
 #include <nw4r/types_nw4r.h>
 
+/**
+ * Declare an accessor method for singleton types.
+ */
+#define NW4R_SND_SINGLETON_DECL(T)                                             \
+public:                                                                        \
+    static T& GetInstance();
+
+/**
+ * Implement an accessor method for singleton types.
+ */
+#define NW4R_SND_SINGLETON_IMPL(T)                                             \
+    T& T::GetInstance() {                                                      \
+        static T instance;                                                     \
+        return instance;                                                       \
+    }
+
 namespace nw4r {
 namespace snd {
 

@@ -109,7 +109,7 @@ namespace nw4r
 						}
 					}
 				}
-				DisposeCallbackManager::GetInstance()->RegisterDisposeCallback(this);
+				DisposeCallbackManager::GetInstance().RegisterDisposeCallback(this);
 				
 				mTrackAllocator = pTrackAllocator;
 				mActiveFlag = true;
@@ -167,7 +167,7 @@ namespace nw4r
 				
 				if (mActiveFlag)
 				{
-					DisposeCallbackManager::GetInstance()->UnregisterDisposeCallback(this);
+					DisposeCallbackManager::GetInstance().UnregisterDisposeCallback(this);
 					mActiveFlag = false;
 				}
 				

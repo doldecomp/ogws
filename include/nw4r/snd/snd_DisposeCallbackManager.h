@@ -12,7 +12,7 @@ namespace nw4r
 		{
 			struct DisposeCallbackManager
 			{
-				static DisposeCallbackManager * GetInstance();
+				static DisposeCallbackManager& GetInstance();
 				
 				ut::LinkList<DisposeCallback, 0x0> mList; // at 0x0
 				

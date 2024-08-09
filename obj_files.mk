@@ -114,7 +114,7 @@ NW4R_O_FILES := \
 	build/asm/nw4r/snd/snd_TaskManager.o \
 	build/nw4r/snd/snd_TaskThread.o \
 	build/nw4r/snd/snd_Voice.o \
-	build/asm/nw4r/snd/snd_VoiceManager.o \
+	build/nw4r/snd/snd_VoiceManager.o \
 	build/nw4r/snd/snd_Util.o \
 	build/asm/nw4r/snd/snd_WaveFile.o \
 	build/nw4r/snd/snd_WaveSound.o \

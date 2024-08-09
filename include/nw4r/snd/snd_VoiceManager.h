@@ -1,5 +1,6 @@
 #ifndef NW4R_SND_VOICE_MANAGER_H
 #define NW4R_SND_VOICE_MANAGER_H
+#include <nw4r/snd/snd_Common.h>
 #include <nw4r/snd/snd_Voice.h>
 #include <nw4r/types_nw4r.h>
 
@@ -8,21 +9,37 @@ namespace snd {
 namespace detail {
 
 class VoiceManager {
+    NW4R_SND_SINGLETON_DECL(VoiceManager);
+
 public:
-    static VoiceManager& GetInstance();
+    u32 GetRequiredMemSize();
+
+    void Setup(void* pWork, u32 workSize);
+    void Shutdown();
+    void StopAllVoices();
+
+    Voice* AllocVoice(int channels, int voices, int prio,
+                      Voice::VoiceCallback pCallback, void* pCallbackArg);
+    void FreeVoice(Voice* pVoice);
 
     const VoiceList& GetVoiceList() const {
         return mPriorityList;
     }
 
-    Voice* AllocVoice(int, int, int, Voice::VoiceCallback, void*);
-    void FreeVoice(Voice*);
-
-    void ChangeVoicePriority(Voice*);
-
     void UpdateAllVoices();
     void NotifyVoiceUpdate();
-    UNKTYPE UpdateAllVoicesSync(u32);
+    void AppendVoiceList(Voice* pVoice);
+    void RemoveVoiceList(Voice* pVoice);
+
+    void ChangeVoicePriority(Voice* pVoice);
+    void UpdateEachVoicePriority(const VoiceList::Iterator& rBegin,
+                                 const VoiceList::Iterator& rEnd);
+    void UpdateAllVoicesSync(u32 syncFlag);
+    int DropLowestPriorityVoice(int prio);
+
+private:
+    VoiceManager();
+    ~VoiceManager() {}
 
 private:
     bool mInitialized;       // at 0x0
