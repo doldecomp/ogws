@@ -24,15 +24,15 @@ EXEC_SLICE_GROUPS = [
     SliceGroup("RVLFaceLib", [
         Slice(0x80167B2C, 0x801774DC)  # .text
     ]),
-    # SliceGroup("NW4R", [
-    #     Slice(0x800076E0, 0x800838A8) # .text
-    #     ]),
+    SliceGroup("NW4R", [
+        Slice(0x800076E0, 0x800838A8)  # .text
+    ]),
     # SliceGroup("homeButtonMiniLib", [
     #     Slice(0x801774DC, 0x80182BAC) # .text
     #     ]),
-    # SliceGroup("EGG", [
-    #     Slice(0x800838A8, 0x800B1750) # .text
-    #     ])
+    SliceGroup("EGG", [
+        Slice(0x800838A8, 0x800B1750)  # .text
+    ])
 ]
 
 
