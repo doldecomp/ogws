@@ -10,7 +10,7 @@
 
 namespace
 {
-	const char * NW4R_EF_Version = "<< NW4R    - EF \tfinal   build: Jun  8 2007 11:16:29 (0x4199_60831) >>";
+	const char * NW4R_EF_Version_ = "<< NW4R    - EF \tfinal   build: Jun  8 2007 11:16:29 (0x4199_60831) >>";
 }
 
 inline void * operator new[](size_t size, void *p)
@@ -31,7 +31,7 @@ namespace nw4r
 			if (mDisplayVersion)
 			{
 				mDisplayVersion = false;
-				OSRegisterVersion(NW4R_EF_Version);
+				OSRegisterVersion(NW4R_EF_Version_);
 			}
 			
 			mMemoryManager = NULL;

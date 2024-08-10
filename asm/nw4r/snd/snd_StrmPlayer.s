@@ -15,10 +15,10 @@ __vt__Q44nw4r3snd6detail10StrmPlayer:
 	.long IsPause__Q44nw4r3snd6detail10StrmPlayerCFv
 	.long 0
 	.long 0
-	.long $2116$2__dt__Q44nw4r3snd6detail10StrmPlayerFv
-	.long $2116$2OnUpdateFrameSoundThread__Q44nw4r3snd6detail10StrmPlayerFv
-	.long $2116$2OnUpdateVoiceSoundThread__Q44nw4r3snd6detail10StrmPlayerFv
-	.long $2116$2OnShutdownSoundThread__Q44nw4r3snd6detail10StrmPlayerFv
+	.long "@116@__dt__Q44nw4r3snd6detail10StrmPlayerFv"
+	.long "@116@OnUpdateFrameSoundThread__Q44nw4r3snd6detail10StrmPlayerFv"
+	.long "@116@OnUpdateVoiceSoundThread__Q44nw4r3snd6detail10StrmPlayerFv"
+	.long "@116@OnShutdownSoundThread__Q44nw4r3snd6detail10StrmPlayerFv"
 	.long OnUpdateFrameSoundThread__Q44nw4r3snd6detail10StrmPlayerFv
 	.long OnUpdateVoiceSoundThread__Q44nw4r3snd6detail10StrmPlayerFv
 	.long OnShutdownSoundThread__Q44nw4r3snd6detail10StrmPlayerFv
@@ -2692,22 +2692,22 @@ IsActive__Q44nw4r3snd6detail10StrmPlayerCFv:
 /* 8004AC20 00045B20  88 63 00 B9 */	lbz r3, 0xb9(r3)
 /* 8004AC24 00045B24  4E 80 00 20 */	blr 
 
-.global $2116$2OnShutdownSoundThread__Q44nw4r3snd6detail10StrmPlayerFv
-$2116$2OnShutdownSoundThread__Q44nw4r3snd6detail10StrmPlayerFv:
+.global "@116@OnShutdownSoundThread__Q44nw4r3snd6detail10StrmPlayerFv"
+"@116@OnShutdownSoundThread__Q44nw4r3snd6detail10StrmPlayerFv":
 /* 8004AC28 00045B28  38 63 FF 8C */	addi r3, r3, -116
 /* 8004AC2C 00045B2C  4B FF FF D4 */	b OnShutdownSoundThread__Q44nw4r3snd6detail10StrmPlayerFv
 
-.global $2116$2OnUpdateVoiceSoundThread__Q44nw4r3snd6detail10StrmPlayerFv
-$2116$2OnUpdateVoiceSoundThread__Q44nw4r3snd6detail10StrmPlayerFv:
+.global "@116@OnUpdateVoiceSoundThread__Q44nw4r3snd6detail10StrmPlayerFv"
+"@116@OnUpdateVoiceSoundThread__Q44nw4r3snd6detail10StrmPlayerFv":
 /* 8004AC30 00045B30  38 63 FF 8C */	addi r3, r3, -116
 /* 8004AC34 00045B34  4B FF FF C8 */	b OnUpdateVoiceSoundThread__Q44nw4r3snd6detail10StrmPlayerFv
 
-.global $2116$2OnUpdateFrameSoundThread__Q44nw4r3snd6detail10StrmPlayerFv
-$2116$2OnUpdateFrameSoundThread__Q44nw4r3snd6detail10StrmPlayerFv:
+.global "@116@OnUpdateFrameSoundThread__Q44nw4r3snd6detail10StrmPlayerFv"
+"@116@OnUpdateFrameSoundThread__Q44nw4r3snd6detail10StrmPlayerFv":
 /* 8004AC38 00045B38  38 63 FF 8C */	addi r3, r3, -116
 /* 8004AC3C 00045B3C  4B FF FF BC */	b OnUpdateFrameSoundThread__Q44nw4r3snd6detail10StrmPlayerFv
 
-.global $2116$2__dt__Q44nw4r3snd6detail10StrmPlayerFv
-$2116$2__dt__Q44nw4r3snd6detail10StrmPlayerFv:
+.global "@116@__dt__Q44nw4r3snd6detail10StrmPlayerFv"
+"@116@__dt__Q44nw4r3snd6detail10StrmPlayerFv":
 /* 8004AC40 00045B40  38 63 FF 8C */	addi r3, r3, -116
 /* 8004AC44 00045B44  4B FF DD 20 */	b __dt__Q44nw4r3snd6detail10StrmPlayerFv

@@ -31,18 +31,18 @@ lbl_804C02A8:
 	.balign 8
 
 .section .data, "wa"
-.global ResNameData_LightSet
-ResNameData_LightSet:
+.global "ResNameData_LightSet__Q34nw4r3g3d27@unnamed@g3d_resanmscn_cpp@"
+"ResNameData_LightSet__Q34nw4r3g3d27@unnamed@g3d_resanmscn_cpp@":
 	.long 0xE
 	.string "LightSet(NW4R)"
 	.balign 16
-.global ResNameData_AmbLights
-ResNameData_AmbLights:
+.global "ResNameData_AmbLights__Q34nw4r3g3d27@unnamed@g3d_resanmscn_cpp@"
+"ResNameData_AmbLights__Q34nw4r3g3d27@unnamed@g3d_resanmscn_cpp@":
 	.long 0xF
 	.string "AmbLights(NW4R)"
 	.balign 16
-.global ResNameData_Lights
-ResNameData_Lights:
+.global "ResNameData_Lights__Q34nw4r3g3d27@unnamed@g3d_resanmscn_cpp@"
+"ResNameData_Lights__Q34nw4r3g3d27@unnamed@g3d_resanmscn_cpp@":
 	.long 0xC
 	.string "Lights(NW4R)"
 	.balign 16
@@ -865,9 +865,9 @@ func_8005A488:
 lbl_8005A4AC:
 /* 8005A4AC 000553AC  38 00 00 00 */	li r0, 0
 lbl_8005A4B0:
-/* 8005A4B0 000553B0  3C 60 80 39 */	lis r3, ResNameData_AmbLights@ha
+/* 8005A4B0 000553B0  3C 60 80 39 */	lis r3, "ResNameData_AmbLights__Q34nw4r3g3d27@unnamed@g3d_resanmscn_cpp@"@ha
 /* 8005A4B4 000553B4  90 01 00 0C */	stw r0, 0xc(r1)
-/* 8005A4B8 000553B8  38 63 67 40 */	addi r3, r3, ResNameData_AmbLights@l
+/* 8005A4B8 000553B8  38 63 67 40 */	addi r3, r3, "ResNameData_AmbLights__Q34nw4r3g3d27@unnamed@g3d_resanmscn_cpp@"@l
 /* 8005A4BC 000553BC  38 81 00 08 */	addi r4, r1, 8
 /* 8005A4C0 000553C0  90 61 00 08 */	stw r3, 8(r1)
 /* 8005A4C4 000553C4  38 61 00 0C */	addi r3, r1, 0xc
@@ -894,9 +894,9 @@ func_8005A4E8:
 lbl_8005A50C:
 /* 8005A50C 0005540C  38 00 00 00 */	li r0, 0
 lbl_8005A510:
-/* 8005A510 00055410  3C 60 80 39 */	lis r3, ResNameData_Lights@ha
+/* 8005A510 00055410  3C 60 80 39 */	lis r3, "ResNameData_Lights__Q34nw4r3g3d27@unnamed@g3d_resanmscn_cpp@"@ha
 /* 8005A514 00055414  90 01 00 0C */	stw r0, 0xc(r1)
-/* 8005A518 00055418  38 63 67 60 */	addi r3, r3, ResNameData_Lights@l
+/* 8005A518 00055418  38 63 67 60 */	addi r3, r3, "ResNameData_Lights__Q34nw4r3g3d27@unnamed@g3d_resanmscn_cpp@"@l
 /* 8005A51C 0005541C  38 81 00 08 */	addi r4, r1, 8
 /* 8005A520 00055420  90 61 00 08 */	stw r3, 8(r1)
 /* 8005A524 00055424  38 61 00 0C */	addi r3, r1, 0xc
@@ -925,9 +925,9 @@ func_8005A548:
 lbl_8005A574:
 /* 8005A574 00055474  38 00 00 00 */	li r0, 0
 lbl_8005A578:
-/* 8005A578 00055478  3C 60 80 39 */	lis r3, ResNameData_AmbLights@ha
+/* 8005A578 00055478  3C 60 80 39 */	lis r3, "ResNameData_AmbLights__Q34nw4r3g3d27@unnamed@g3d_resanmscn_cpp@"@ha
 /* 8005A57C 0005547C  90 01 00 14 */	stw r0, 0x14(r1)
-/* 8005A580 00055480  38 63 67 40 */	addi r3, r3, ResNameData_AmbLights@l
+/* 8005A580 00055480  38 63 67 40 */	addi r3, r3, "ResNameData_AmbLights__Q34nw4r3g3d27@unnamed@g3d_resanmscn_cpp@"@l
 /* 8005A584 00055484  38 81 00 10 */	addi r4, r1, 0x10
 /* 8005A588 00055488  90 61 00 10 */	stw r3, 0x10(r1)
 /* 8005A58C 0005548C  38 61 00 14 */	addi r3, r1, 0x14
@@ -966,9 +966,9 @@ func_8005A5D0:
 lbl_8005A5FC:
 /* 8005A5FC 000554FC  38 00 00 00 */	li r0, 0
 lbl_8005A600:
-/* 8005A600 00055500  3C 60 80 39 */	lis r3, ResNameData_AmbLights@ha
+/* 8005A600 00055500  3C 60 80 39 */	lis r3, "ResNameData_AmbLights__Q34nw4r3g3d27@unnamed@g3d_resanmscn_cpp@"@ha
 /* 8005A604 00055504  90 01 00 08 */	stw r0, 8(r1)
-/* 8005A608 00055508  38 63 67 40 */	addi r3, r3, ResNameData_AmbLights@l
+/* 8005A608 00055508  38 63 67 40 */	addi r3, r3, "ResNameData_AmbLights__Q34nw4r3g3d27@unnamed@g3d_resanmscn_cpp@"@l
 /* 8005A60C 0005550C  38 81 00 0C */	addi r4, r1, 0xc
 /* 8005A610 00055510  90 61 00 0C */	stw r3, 0xc(r1)
 /* 8005A614 00055514  38 61 00 08 */	addi r3, r1, 8
@@ -1018,9 +1018,9 @@ func_8005A67C:
 lbl_8005A6A8:
 /* 8005A6A8 000555A8  38 00 00 00 */	li r0, 0
 lbl_8005A6AC:
-/* 8005A6AC 000555AC  3C 60 80 39 */	lis r3, ResNameData_Lights@ha
+/* 8005A6AC 000555AC  3C 60 80 39 */	lis r3, "ResNameData_Lights__Q34nw4r3g3d27@unnamed@g3d_resanmscn_cpp@"@ha
 /* 8005A6B0 000555B0  90 01 00 14 */	stw r0, 0x14(r1)
-/* 8005A6B4 000555B4  38 63 67 60 */	addi r3, r3, ResNameData_Lights@l
+/* 8005A6B4 000555B4  38 63 67 60 */	addi r3, r3, "ResNameData_Lights__Q34nw4r3g3d27@unnamed@g3d_resanmscn_cpp@"@l
 /* 8005A6B8 000555B8  38 81 00 10 */	addi r4, r1, 0x10
 /* 8005A6BC 000555BC  90 61 00 10 */	stw r3, 0x10(r1)
 /* 8005A6C0 000555C0  38 61 00 14 */	addi r3, r1, 0x14
@@ -1059,9 +1059,9 @@ func_8005A704:
 lbl_8005A730:
 /* 8005A730 00055630  38 00 00 00 */	li r0, 0
 lbl_8005A734:
-/* 8005A734 00055634  3C 60 80 39 */	lis r3, ResNameData_Lights@ha
+/* 8005A734 00055634  3C 60 80 39 */	lis r3, "ResNameData_Lights__Q34nw4r3g3d27@unnamed@g3d_resanmscn_cpp@"@ha
 /* 8005A738 00055638  90 01 00 08 */	stw r0, 8(r1)
-/* 8005A73C 0005563C  38 63 67 60 */	addi r3, r3, ResNameData_Lights@l
+/* 8005A73C 0005563C  38 63 67 60 */	addi r3, r3, "ResNameData_Lights__Q34nw4r3g3d27@unnamed@g3d_resanmscn_cpp@"@l
 /* 8005A740 00055640  38 81 00 0C */	addi r4, r1, 0xc
 /* 8005A744 00055644  90 61 00 0C */	stw r3, 0xc(r1)
 /* 8005A748 00055648  38 61 00 08 */	addi r3, r1, 8
@@ -1238,9 +1238,9 @@ func_8005A92C:
 lbl_8005A960:
 /* 8005A960 00055860  38 00 00 00 */	li r0, 0
 lbl_8005A964:
-/* 8005A964 00055864  3C 60 80 39 */	lis r3, ResNameData_LightSet@ha
+/* 8005A964 00055864  3C 60 80 39 */	lis r3, "ResNameData_LightSet__Q34nw4r3g3d27@unnamed@g3d_resanmscn_cpp@"@ha
 /* 8005A968 00055868  90 01 00 10 */	stw r0, 0x10(r1)
-/* 8005A96C 0005586C  38 63 67 20 */	addi r3, r3, ResNameData_LightSet@l
+/* 8005A96C 0005586C  38 63 67 20 */	addi r3, r3, "ResNameData_LightSet__Q34nw4r3g3d27@unnamed@g3d_resanmscn_cpp@"@l
 /* 8005A970 00055870  38 81 00 14 */	addi r4, r1, 0x14
 /* 8005A974 00055874  90 61 00 14 */	stw r3, 0x14(r1)
 /* 8005A978 00055878  38 61 00 10 */	addi r3, r1, 0x10
@@ -1259,9 +1259,9 @@ lbl_8005A9A0:
 lbl_8005A9A8:
 /* 8005A9A8 000558A8  3B 40 00 00 */	li r26, 0
 lbl_8005A9AC:
-/* 8005A9AC 000558AC  3F 60 80 39 */	lis r27, ResNameData_LightSet@ha
+/* 8005A9AC 000558AC  3F 60 80 39 */	lis r27, "ResNameData_LightSet__Q34nw4r3g3d27@unnamed@g3d_resanmscn_cpp@"@ha
 /* 8005A9B0 000558B0  3B E0 00 01 */	li r31, 1
-/* 8005A9B4 000558B4  3B 7B 67 20 */	addi r27, r27, ResNameData_LightSet@l
+/* 8005A9B4 000558B4  3B 7B 67 20 */	addi r27, r27, "ResNameData_LightSet__Q34nw4r3g3d27@unnamed@g3d_resanmscn_cpp@"@l
 /* 8005A9B8 000558B8  3B C0 00 00 */	li r30, 0
 /* 8005A9BC 000558BC  48 00 00 B8 */	b lbl_8005AA74
 lbl_8005A9C0:

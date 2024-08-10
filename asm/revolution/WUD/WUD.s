@@ -2841,8 +2841,8 @@ WUDSetVisibility:
 /* 80100EF8 000FBDF8  38 21 00 10 */	addi r1, r1, 0x10
 /* 80100EFC 000FBDFC  4E 80 00 20 */	blr 
 
-.global WUDiRebootCallback
-WUDiRebootCallback:
+.global WUDiModuleRebootCallback
+WUDiModuleRebootCallback:
 /* 80100F00 000FBE00  48 00 04 80 */	b WUDiInitSub
 
 .global remove_patch_cb
@@ -2852,8 +2852,8 @@ remove_patch_cb:
 /* 80100F0C 000FBE0C  2C 03 00 00 */	cmpwi r3, 0
 /* 80100F10 000FBE10  90 01 01 14 */	stw r0, 0x114(r1)
 /* 80100F14 000FBE14  40 82 00 14 */	bne lbl_80100F28
-/* 80100F18 000FBE18  3C 60 80 10 */	lis r3, WUDiRebootCallback@ha
-/* 80100F1C 000FBE1C  38 63 0F 00 */	addi r3, r3, WUDiRebootCallback@l
+/* 80100F18 000FBE18  3C 60 80 10 */	lis r3, WUDiModuleRebootCallback@ha
+/* 80100F1C 000FBE1C  38 63 0F 00 */	addi r3, r3, WUDiModuleRebootCallback@l
 /* 80100F20 000FBE20  48 01 60 35 */	bl func_80116F54
 /* 80100F24 000FBE24  48 00 01 48 */	b lbl_8010106C
 lbl_80100F28:
@@ -3092,8 +3092,8 @@ lbl_80101254:
 /* 80101280 000FC180  48 01 6C D1 */	bl func_80117F50
 /* 80101284 000FC184  48 00 00 10 */	b lbl_80101294
 lbl_80101288:
-/* 80101288 000FC188  3C 60 80 10 */	lis r3, WUDiRebootCallback@ha
-/* 8010128C 000FC18C  38 63 0F 00 */	addi r3, r3, WUDiRebootCallback@l
+/* 80101288 000FC188  3C 60 80 10 */	lis r3, WUDiModuleRebootCallback@ha
+/* 8010128C 000FC18C  38 63 0F 00 */	addi r3, r3, WUDiModuleRebootCallback@l
 /* 80101290 000FC190  48 01 5C C5 */	bl func_80116F54
 lbl_80101294:
 /* 80101294 000FC194  80 01 02 14 */	lwz r0, 0x214(r1)
@@ -3116,8 +3116,8 @@ install_patch_cb:
 /* 801012CC 000FC1CC  88 0D 9D 8A */	lbz r0, patch_num-_SDA_BASE_(r13)
 /* 801012D0 000FC1D0  7C 00 28 40 */	cmplw r0, r5
 /* 801012D4 000FC1D4  40 82 00 14 */	bne lbl_801012E8
-/* 801012D8 000FC1D8  3C 60 80 10 */	lis r3, WUDiRebootCallback@ha
-/* 801012DC 000FC1DC  38 63 0F 00 */	addi r3, r3, WUDiRebootCallback@l
+/* 801012D8 000FC1D8  3C 60 80 10 */	lis r3, WUDiModuleRebootCallback@ha
+/* 801012DC 000FC1DC  38 63 0F 00 */	addi r3, r3, WUDiModuleRebootCallback@l
 /* 801012E0 000FC1E0  48 01 5C 75 */	bl func_80116F54
 /* 801012E4 000FC1E4  48 00 00 84 */	b lbl_80101368
 lbl_801012E8:
@@ -3152,8 +3152,8 @@ lbl_801012FC:
 /* 80101354 000FC254  48 01 6B FD */	bl func_80117F50
 /* 80101358 000FC258  48 00 00 10 */	b lbl_80101368
 lbl_8010135C:
-/* 8010135C 000FC25C  3C 60 80 10 */	lis r3, WUDiRebootCallback@ha
-/* 80101360 000FC260  38 63 0F 00 */	addi r3, r3, WUDiRebootCallback@l
+/* 8010135C 000FC25C  3C 60 80 10 */	lis r3, WUDiModuleRebootCallback@ha
+/* 80101360 000FC260  38 63 0F 00 */	addi r3, r3, WUDiModuleRebootCallback@l
 /* 80101364 000FC264  48 01 5B F1 */	bl func_80116F54
 lbl_80101368:
 /* 80101368 000FC268  80 01 01 14 */	lwz r0, 0x114(r1)

@@ -7,7 +7,7 @@
 
 namespace
 {
-    const char * NW4R_G3D_Version = "<< NW4R    - G3D \tfinal   build: Jun  8 2007 11:16:25 (0x4199_60831) >>";
+    const char * NW4R_G3D_Version_ = "<< NW4R    - G3D \tfinal   build: Jun  8 2007 11:16:25 (0x4199_60831) >>";
 }
 
 namespace nw4r
@@ -18,7 +18,7 @@ namespace nw4r
 
         void G3dInit(bool doLock)
         {
-            OSRegisterVersion(NW4R_G3D_Version);
+            OSRegisterVersion(NW4R_G3D_Version_);
 
             if (doLock) LC::Enable();
             else LC::Disable();
