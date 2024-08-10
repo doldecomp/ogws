@@ -21,7 +21,9 @@ const s16 EnvGenerator::DecibelSquareTable[128] = {
 
 const volatile f32 EnvGenerator::VOLUME_INIT = -90.4f;
 
-EnvGenerator::EnvGenerator() { Init(VOLUME_INIT); }
+EnvGenerator::EnvGenerator() {
+    Init();
+}
 
 void EnvGenerator::Init(f32 db) {
     SetAttack(127);
@@ -108,11 +110,17 @@ void EnvGenerator::SetAttack(int attack) {
     mAttack = attackTable[attack];
 }
 
-void EnvGenerator::SetDecay(int decay) { mDecay = CalcRelease(decay); }
+void EnvGenerator::SetDecay(int decay) {
+    mDecay = CalcRelease(decay);
+}
 
-void EnvGenerator::SetSustain(int sustain) { mSustain = sustain; }
+void EnvGenerator::SetSustain(int sustain) {
+    mSustain = sustain;
+}
 
-void EnvGenerator::SetRelease(int release) { mRelease = CalcRelease(release); }
+void EnvGenerator::SetRelease(int release) {
+    mRelease = CalcRelease(release);
+}
 
 f32 EnvGenerator::CalcRelease(int release) {
     if (release == 127) {

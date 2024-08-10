@@ -7,7 +7,10 @@
 #include <nw4r/snd/snd_AxfxImpl.h>
 #include <nw4r/snd/snd_BasicPlayer.h>
 #include <nw4r/snd/snd_BasicSound.h>
+#include <nw4r/snd/snd_Channel.h>
+#include <nw4r/snd/snd_ChannelManager.h>
 #include <nw4r/snd/snd_Common.h>
+#include <nw4r/snd/snd_DisposeCallback.h>
 #include <nw4r/snd/snd_DisposeCallbackManager.h>
 #include <nw4r/snd/snd_EnvGenerator.h>
 #include <nw4r/snd/snd_ExternalSoundPlayer.h>

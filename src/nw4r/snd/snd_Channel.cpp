@@ -1,523 +1,417 @@
-#ifdef __DECOMP_NON_MATCHING
-#pragma ipa file
-#include <AXVPB.h>
-#include "snd_Channel.h"
-#include "snd_VoiceManager.h"
-#include "ut_interrupt.h"
-#include "ut_algorithm.h"
+#pragma ipa file // TODO: REMOVE AFTER REFACTOR
 
-namespace nw4r
-{
-	namespace snd
-	{
-		using namespace ut;
-		
-		namespace detail
-		{
-			using namespace Util;
-			//TODO
-			template struct LinkList<Channel, 0xE4>;
-			
-			ChannelManager * ChannelManager::GetInstance()
-			{
-				static ChannelManager instance;
-				
-				return &instance;
-			}
-			
-			ChannelManager::ChannelManager() : BOOL_0x10(), INT_0x14() {}
-			
-			u32 ChannelManager::GetRequiredMemSize()
-			{
-				return (AXGetMaxVoices() + 1) * sizeof(Channel);
-			}
-			
-			void ChannelManager::Setup(void * r29_4, u32 r30_5)
-			{
-				AutoInterruptLock lock;
-				
-				if (BOOL_0x10) return;
-				
-				//POOL_0x0.Create
-				INT_0x14 = mPool.Create(r29_4, r30_5);
-				PTR_0x18 = r29_4;
-				INT_0x1C = r30_5;
-				BOOL_0x10 = true;
-			}
-			
-			void ChannelManager::Free(Channel * pChannel)
-			{
-				ChannelManager * pManager;
-				pManager = GetInstance();
-				
-				pManager->mList.Erase(pChannel);
-				if (pChannel) pManager->mPool.Free(pChannel);
-			}
-			
-			//8004C724: nw4r::snd::detail::Voice::Stop
-			//8004C388: nw4r::snd::detail::Voice::Free
-			//Channel::~Channel()
-			
-			void ChannelManager::Shutdown()
-			{
-				AutoInterruptLock lock;
-				
-				if (!BOOL_0x10) return;
-				
-				LinkList<Channel, 0xE4>::Iterator curIter = mList.GetBeginIter();
-				
-				while (mList.GetEndIter() != curIter)
-				{
-					curIter++->Stop();
-				}
-				
-				mPool.Destroy(PTR_0x18, INT_0x1C);
-				
-				BOOL_0x10 = false;
-			}
-			
-			UNKTYPE ChannelManager::UpdateAllChannel()
-			{
-				LinkList<Channel, 0xE4>::Iterator curIter = mList.GetBeginIter();
-				
-				while (mList.GetEndIter() != curIter)
-				{
-					curIter++->Update(true);
-				}
-			}
-			
-			UNKTYPE Channel::InitParam(ChannelCallback callback, u32 num)
-			{
-				// f0 = 0.0f
-				// f2 = 1.0f
-				// f1 = -90.4f
-				WORD_0xE0 = 0;
-				mCallback = callback;
-				INT_0xD8 = num;
-				BOOL_0x31 = false;
-				mAutoUpdateSweepFlag = true;
-				BOOL_0x35 = false;
-				INT_0xC8 = 0;
-				INT_0xC0 = 60;
-				INT_0xC4 = 60;
-				FLOAT_0xA8 = 1.0f;
-				FLOAT_0xAC = 0.0f;
-				FLOAT_0xB0 = 0.0f;
-				FLOAT_0xB4 = 1.0f;
-				FLOAT_0x38 = 1.0f;
-				FLOAT_0x98 = 0.0f;
-				FLOAT_0x3C = 1.0f;
-				FLOAT_0x40 = 0.0f;
-				FLOAT_0x44 = 0.0f;
-				FLOAT_0x48 = 0.0f;
-				mRemoteFilter = 0;
-				mOutputLine = 1;
-				FLOAT_0x54 = 1.0f;
-				FLOAT_0x58 = 0.0f;
-				/*
-				FLOAT_0x5C = 0.0f;
-				FLOAT_0x60 = 0.0f;
-				FLOAT_0x64 = 0.0f;
-				
-				FLOAT_0x68 = 1.0f;
-				FLOAT_0x78 = 0.0f;
-				FLOAT_0x88 = 0.0f;
-				
-				FLOAT_0x6C = 1.0f;
-				FLOAT_0x7C = 0.0f;
-				FLOAT_0x8C = 0.0f;
-				
-				FLOAT_0x70 = 1.0f;
-				FLOAT_0x80 = 0.0f;
-				FLOAT_0x90 = 0.0f;
-				
-				FLOAT_0x74 = 1.0f;
-				FLOAT_0x84 = 0.0f;
-				FLOAT_0x94 = 0.0f;
-				*/
-				for (int i=0;i<3;i++)
-				{
-					ARR_0x5C[i] = 0.0f;
-				}
-				for (int i=0;i<4;i++)
-				{
-					ARR_0x68[i] = 1.0f;
-					ARR_0x78[i] = 0.0f;
-					ARR_0x88[i] = 0.0f;
-				}
-				
-				MV_0xB8.InitValue(0xFF);
-				
-				FLOAT_0x9C = 0.0f;
-				INT_0xA4 = 0;
-				INT_0xA0 = 0;
-				
-				mEnvGenerator.Init(EnvGenerator::VOLUME_INIT);
-				mLfo.mParam.Init();
-				BYTE_0x30 = 0;
-				mPanMode = PAN_MODE_DUAL;
-				mPanCurve = PAN_CURVE_SQRT;
-				//END
-			}
-			
-			float Channel::GetSweepValue() const
-			{
-				return (0.0f == FLOAT_0x9C) ? 0.0f : (
-					(INT_0xA0 >= INT_0xA4) ? 0.0f : FLOAT_0x9C * (INT_0xA0 - INT_0xA4) / INT_0xA4
-				);
-			}
-			
-			//8004E9CC: nw4r::snd::detail::Util::CalcVolumeRatio
-			//8004E83C: nw4r::snd::detail::Util::CalcPitchRatio
-			UNKTYPE Channel::Update(bool r31_4)
-			{
-				//return; <=> goto lbl_80037F9C;
-				// r30 <- this
-				if (!BOOL_0x32) return;
-				//80037964
-				if (BOOL_0x31) r31_4 = false;
-				//80037974
-				float f31 = mLfo.GetValue();
-				MV_0xB8.Update();
-				//80037998
-				float f30 = 1.0f;
-				f30 *= FLOAT_0xA8;
-				f30 *= FLOAT_0x38;
-				f30 *= MV_0xB8.GetValue() / 255.0f;
-				float f29 = 1.0f;
-				f29 *= CalcVolumeRatio(mEnvGenerator.GetValue());
-				if (BYTE_0x30 == 1) f29 *= CalcVolumeRatio(6.0f * f31);
-				//80037A2C
-				if (mEnvGenerator.GetStatus() == EnvGenerator::STATUS_RELEASE)
-				{
-					//80037A38
-					if (mCallback)
-					{
-						//80037A44
-						if (0.0f != f29)
-						{
-							//80037A50
-							Stop();
-							return;
-						}
-					}
-					//80037B28
-					else if (0.0f != f30 * f29)
-					{
-						Stop();
-						return;
-					}
-				}
-				//80037C10
-				float f4 = 0.0f;
-				f4 += INT_0xC0 - INT_0xC4;
-				f4 += GetSweepValue();
-				f4 += FLOAT_0x98;
-				if (BYTE_0x30 == 0) f4 += f31;
-				//80037CA8
-				float f20 = 1.0f;
-				f20 *= FLOAT_0xB4;
-				f20 *= FLOAT_0x3C;
-				//f0=0x100 * f4
-				float f28 = CalcPitchRatio(256.0f * f4) * f20;
-				float f27 = 0.0f;
-				f27 += FLOAT_0xAC;
-				f27 += FLOAT_0x40;
-				if (BYTE_0x30 == 2) f27 += f31;
-				//80037CFC
-				{
-				/**
-				float flarr_0x38[3];
-				
-				float flarr_0x8[4];
-				float flarr_0x18[4];
-				float flarr_0x28[4];
-				
-				float f31 = 0.0f;
-				float f8 = 0.0f;
-				//f4=1.0f
-				f31 += FLOAT_0xB0;
-				float f26 = 0.0f;
-				float f7 = f8 + FLOAT_0x5C;
-				float f6 = f8 + FLOAT_0x60;
-				float f5 = f8 + FLOAT_0x64;
-				float f21 = f8 + FLOAT_0x7C;
-				float f22 = f8 + FLOAT_0x8C;
-				float f3 = FLOAT_0x68;
-				float f2 = FLOAT_0x78;
-				float f4 = 1.0f;
-				float f25 = 1.0f;
-				float f1 = FLOAT_0x88;
-				float f0 = FLOAT_0x6C;
-				float f23 = FLOAT_0x70;
-				f2 += f8;
-				float f13 = FLOAT_0x80;
-				f1 += f8;
-				float f12 = FLOAT_0x90;
-				float f11 = FLOAT_0x74;
-				float f10 = FLOAT_0x84;
-				f23 *= f4;
-				float f24 = FLOAT_0x48;
-				f13 += f8;
-				float f20 = FLOAT_0x44;
-				f12 += f8;
-				flarr_0x38[0] = f8;
-				f11 *= f4;
-				float f9
-				flarr_0x38[1] = f8;
-				flarr_0x38[2] = f8;
-				f8 += f9;
-				f9 = FLOAT_0x54;
-				f3 *= f4;
-				flarr_0x28[0] = f4;
-				f31 += f20;
-				f4 = FLOAT_0x58;
-				f25 *= f9
-				r29 = mRemoteFilter
-				
-				f24 += f4;
-				
-				flarr_0x38[0] = f7;
-				flarr_0x38[1] = f6;
-				flarr_0x38[2] = f5;
-				
-				flarr_0x28[0] = f3;
-				flarr_0x18[0] = f2;
-				flarr_0x8[0] = f1;
-				
-				flarr_0x28[1] = f0;
-				flarr_0x18[1] = f21;
-				flarr_0x8[1] = f22;
-				
-				flarr_0x28[2] = f23;
-				flarr_0x18[2] = f13;
-				flarr_0x8[2] = f12;
-				
-				flarr_0x28[3] = f11;
-				flarr_0x18[3] = f10;
-				flarr_0x8[3] = f8;
-				**/
-				float flarr_0x38[3] = { 0.0f, 0.0f, 0.0f };
-				
-				float flarr_0x28[4] = { 1.0f, 1.0f, 1.0f, 1.0f };
-				float flarr_0x18[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
-				float flarr_0x8[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
-				
-				float f26 = 1.0f;
-				float f25 = 1.0f;
-				f26 += FLOAT_0x48;
-				f25 *= FLOAT_0x54;
-				float f24 = 0.0f;
-				int r29 = mRemoteFilter;
-				f24 += FLOAT_0x58;
-				for (int i=0;i<3;i++)
-				{
-					flarr_0x38[i]+=ARR_0x5C[i];
-				}
-				
-				for (int i=0;i<4;i++)
-				{
-					flarr_0x28[i]*=ARR_0x68[i];
-					flarr_0x18[i]+=ARR_0x78[i];
-					flarr_0x8[i]+=ARR_0x88[i];
-				}
-				if (r31_4)
-				{
-					//80037E0C
-					if (mAutoUpdateSweepFlag) UpdateSweep(3);
-					mLfo.Update(3);
-					mEnvGenerator.Update(3);
-					//80037E4C
-				}
-				//80037E4C
-				float f23 = mLfo.GetValue();
-				f20 = 1.0f;
-				f20 *= CalcVolumeRatio(mEnvGenerator.GetValue());
-				//80037E70
-				if (BYTE_0x30 == 1) f20 *= CalcVolumeRatio(6.0f * f23);
-				//80037E88
-				if (!mVoice) return;
-				//80037E94
-				mVoice->SetPanMode(mPanMode);
-				mVoice->SetPanCurve(mPanCurve);
-				mVoice->SetVolume(f30);
-				mVoice->SetVeVolume(f20, f29);
-				mVoice->SetPitch(f28);
-				mVoice->SetPan(f27);
-				mVoice->SetSurroundPan(f31);
-				mVoice->SetLpfFreq(f26);
-				mVoice->SetRemoteFilter(r29);
-				mVoice->SetOutputLine(mOutputLine);
-				mVoice->SetMainOutVolume(f25);
-				mVoice->SetMainSend(f24);
-				for (int i = 0; i < 3; i++)
-				{
-					mVoice->SetFxSend((AuxBus)i, flarr_0x38[i]);
-				}
-				for (int i = 0; i < 4; i++)
-				{
-					mVoice->SetRemoteOutVolume(i, flarr_0x28[i]);
-					mVoice->SetRemoteSend(i, flarr_0x18[i]);
-					mVoice->SetRemoteFxSend(i, flarr_0x18[i]);
-				}
-				//80037F9C END
-				}
-			}
-			
-			UNKTYPE Channel::Start(const WaveData & r30_4, int r_5, u32 r31_6)
-			{
-				// r29 <- this
-				
-				INT_0xC8 = r_5;
-				
-				mLfo.Reset();
-				mEnvGenerator.Reset(EnvGenerator::VOLUME_INIT);
-				
-				INT_0xA0 = 0;
-				
-				mVoice->Setup(r30_4, r31_6);
-				mVoice->Start();
-				
-				BOOL_0x32 = true;
-			}
-			
-			UNKTYPE Channel::Release()
-			{
-				if (mEnvGenerator.GetStatus() != EnvGenerator::STATUS_RELEASE)
-				{
-					if (mVoice && !BOOL_0x35) mVoice->SetPriority(1);
-					mEnvGenerator.SetStatus(EnvGenerator::STATUS_RELEASE);
-				}
-				BOOL_0x31 = false;
-			}
-			
-			UNKTYPE Channel::Stop()
-			{
-				if (!mVoice) return;
-				
-				mVoice->Stop();
-				mVoice->Free();
-				mVoice = NULL;
-				
-				BOOL_0x31 = false;
-				BOOL_0x32 = false;
-				
-				if (BOOL_0x33)
-				{
-					//80038154
-					BOOL_0x33 = false;
-					ChannelManager::Free(this);
-				}
-				//800381D4
-				if (mCallback) mCallback(this, CALLBACK_STATUS_0, INT_0xD8);
-			}
-			
-			void Channel::UpdateSweep(int r4)
-			{
-				if ((INT_0xA0 += r4) > INT_0xA4) INT_0xA0 = INT_0xA4;
-			}
-			
-			void Channel::SetSweepParam(float f1, int r4, bool r5)
-			{
-				FLOAT_0x9C = f1;
-				INT_0xA4 = r4;
-				mAutoUpdateSweepFlag = r5;
-				INT_0xA0 = 0;
-			}
-			
-			void Channel::VoiceCallbackFunc(Voice * pVoice, Voice::VoiceCallbackStatus voiceStatus, void * ptr)
-			{
-				//not saved <- pVoice
-				Channel * pChannel = static_cast<Channel *>(ptr); // at r30
-				
-				ChannelCallbackStatus channelStatus;
-				
-				switch (voiceStatus)
-				{
-					case Voice::STATUS_0:
-						channelStatus = CALLBACK_STATUS_2;
-						pVoice->Free();
-						break;
-					case Voice::STATUS_1:
-						channelStatus = CALLBACK_STATUS_3;
-						pVoice->Free();
-						break;
-					case Voice::STATUS_2:
-						channelStatus = CALLBACK_STATUS_1;
-						break;
-					case Voice::STATUS_3:
-						channelStatus = CALLBACK_STATUS_1;
-						break;
-				}
-				//800382A8
-				if (pChannel->mCallback) pChannel->mCallback(pChannel, channelStatus, pChannel->INT_0xD8);
-				pChannel->mVoice = NULL;
-				pChannel->BOOL_0x31 = false;
-				pChannel->BOOL_0x32 = false;
-				pChannel->BOOL_0x33 = false;
-				
-				ChannelManager::Free(pChannel);
-			}
-			
-			//...
-			/*
-			 *
-			 * 8004E358
-			 * AllocVoice__Q44nw4r3snd6detail12VoiceManagerFiiiPFPQ44nw4r3snd6detail5VoiceQ54nw4r3snd6detail5Voice19VoiceCallbackStatusPv_vPv
-			 * nw4r::snd::detail::VoiceManager::AllocVoice(int, int, int, Voice::VoiceCallback, void *)
-			 *
-			 */
-			Channel * ChannelManager::Alloc()
-			{
-				Channel * pChannel = mPool.Alloc();
-				mList.PushBack(pChannel);
-				return pChannel;
-			}
-			
-			Channel::Channel() :
-				BYTE_0x30(),
-				BOOL_0x31(false),
-				BOOL_0x32(false),
-				BOOL_0x33(false),
-				MV_0xB8(),
-				mVoice(NULL),
-				mNode()
-			{}
-			
-			Channel * Channel::AllocChannel(int r24_3, int r25_4, int r26_5, ChannelCallback callback, u32 r28_7)
-			{
-				// r27 <- callback
-				Channel * pChannel = ChannelManager::GetInstance()->Alloc();
-				
-				if (!pChannel) return NULL;
-				
-				//80038488
-				pChannel->BOOL_0x33 = true;
-				
-				Voice * pVoice = VoiceManager::GetInstance().AllocVoice(r24_3, r25_4, r26_5, VoiceCallbackFunc, pChannel);
-				
-				if (!pVoice)
-				{
-					ChannelManager::Free(pChannel);
-					return NULL;
-				}
-				
-				pChannel->mVoice = pVoice;
-				pChannel->InitParam(callback, r28_7);
-				
-				return pChannel;
-			}
-			
-			void Channel::FreeChannel(Channel * pChannel)
-			{
-				if (!pChannel) return;
-				
-				pChannel->mCallback = NULL;
-				pChannel->INT_0xD8 = 0;
-			}
-		}
-	}
+#include <nw4r/snd.h>
+#include <revolution/AX.h>
+
+namespace nw4r {
+namespace snd {
+namespace detail {
+
+ChannelManager& ChannelManager::GetInstance() {
+    static ChannelManager instance;
+    return instance;
 }
-#else
-#error This file has yet to be decompiled accurately. Use "snd_Channel.s" instead.
-#endif
+
+ChannelManager::ChannelManager() : mInitialized(false), mChannelCount(0) {}
+
+u32 ChannelManager::GetRequiredMemSize() {
+    return (AXGetMaxVoices() + 1) * sizeof(Channel);
+}
+
+void ChannelManager::Setup(void* pWork, u32 workSize) {
+    ut::AutoInterruptLock lock;
+
+    if (mInitialized) {
+        return;
+    }
+
+    mChannelCount = mPool.Create(pWork, workSize);
+    mMem = pWork;
+    mMemSize = workSize;
+    mInitialized = true;
+}
+
+void ChannelManager::Shutdown() {
+    ut::AutoInterruptLock lock;
+
+    if (!mInitialized) {
+        return;
+    }
+
+    for (ChannelList::Iterator it = mChannelList.GetBeginIter();
+         it != mChannelList.GetEndIter();) {
+        ChannelList::Iterator curr = it++;
+        curr->Stop();
+    }
+
+    mPool.Destroy(mMem, mMemSize);
+    mInitialized = false;
+}
+
+Channel* ChannelManager::Alloc() {
+    Channel* pChannel = mPool.Alloc();
+    mChannelList.PushBack(pChannel);
+    return pChannel;
+}
+
+void ChannelManager::Free(Channel* pChannel) {
+    mChannelList.Erase(pChannel);
+    mPool.Free(pChannel);
+}
+
+void ChannelManager::UpdateAllChannel() {
+    for (ChannelList::Iterator it = mChannelList.GetBeginIter();
+         it != mChannelList.GetEndIter();) {
+        ChannelList::Iterator curr = it++;
+        curr->Update(true);
+    }
+}
+
+Channel::Channel()
+    : mPauseFlag(false), mActiveFlag(false), mAllocFlag(false), mVoice(NULL) {}
+
+Channel::~Channel() {}
+
+void Channel::InitParam(ChannelCallback pCallback, u32 callbackArg) {
+    mNextLink = NULL;
+
+    mCallback = pCallback;
+    mCallbackArg = callbackArg;
+
+    mPauseFlag = false;
+    mAutoSweep = true;
+    mReleasePriorityFixFlag = false;
+
+    mLength = 0;
+    mKey = 60;
+    mOriginalKey = 60;
+
+    mInitVolume = 1.0f;
+    mInitPan = 0.0f;
+    mInitSurroundPan = 0.0f;
+    mTune = 1.0f;
+
+    mUserVolume = 1.0f;
+    mUserPitch = 0.0f;
+    mUserPitchRatio = 1.0f;
+    mUserPan = 0.0f;
+    mUserSurroundPan = 0.0f;
+    mUserLpfFreq = 0.0f;
+
+    mRemoteFilter = 0;
+    mOutputLineFlag = OUTPUT_LINE_MAIN;
+
+    mMainOutVolume = 1.0f;
+    mMainSend = 0.0f;
+
+    for (int i = 0; i < AUX_BUS_NUM; i++) {
+        mFxSend[i] = 0.0f;
+    }
+
+    for (int i = 0; i < WPAD_MAX_CONTROLLERS; i++) {
+        mRemoteOutVolume[i] = 1.0f;
+        mRemoteSend[i] = 0.0f;
+        mRemoteFxSend[i] = 0.0f;
+    }
+
+    mSilenceVolume.InitValue(255);
+
+    mSweepPitch = 0.0f;
+    mSweepLength = 0;
+    mSweepCounter = 0;
+
+    mEnvelope.Init();
+    mLfo.GetParam().Init();
+
+    mLfoTarget = LFO_TARGET_PITCH;
+    mPanMode = PAN_MODE_DUAL;
+    mPanCurve = PAN_CURVE_SQRT;
+}
+
+void Channel::Update(bool periodic) {
+    if (!mActiveFlag) {
+        return;
+    }
+
+    if (mPauseFlag) {
+        periodic = false;
+    }
+
+    f32 lfoValue = mLfo.GetValue();
+    mSilenceVolume.Update();
+
+    f32 volume = 1.0f;
+    volume *= mInitVolume;
+    volume *= mUserVolume;
+    volume *= mSilenceVolume.GetValue() / 255.0f;
+
+    f32 veInitVolume = 1.0f;
+    veInitVolume *= Util::CalcVolumeRatio(mEnvelope.GetValue());
+    if (mLfoTarget == LFO_TARGET_VOLUME) {
+        veInitVolume *= Util::CalcVolumeRatio(6.0f * lfoValue);
+    }
+
+    if (mEnvelope.GetStatus() == EnvGenerator::STATUS_RELEASE) {
+        if (mCallback != NULL) {
+            if (veInitVolume == 0.0f) {
+                Stop();
+                return;
+            }
+        } else if (volume * veInitVolume == 0.0f) {
+            Stop();
+            return;
+        }
+    }
+
+    f32 cent = 0.0f;
+    cent += mKey - mOriginalKey;
+    cent += GetSweepValue();
+    cent += mUserPitch;
+    if (mLfoTarget == LFO_TARGET_PITCH) {
+        cent += lfoValue;
+    }
+
+    f32 pitchRatio = 1.0f;
+    pitchRatio *= mTune;
+    pitchRatio *= mUserPitchRatio;
+
+    f32 pitch = Util::CalcPitchRatio(256.0f * cent);
+    pitch *= pitchRatio;
+
+    f32 pan = 0.0f;
+    pan += mInitPan;
+    pan += mUserPan;
+    if (mLfoTarget == LFO_TARGET_PAN) {
+        pan += lfoValue;
+    }
+
+    f32 surroundPan = 0.0f;
+    surroundPan += mInitSurroundPan;
+    surroundPan += mUserSurroundPan;
+
+    f32 lpfFreq = 1.0f;
+    lpfFreq += mUserLpfFreq;
+
+    int remoteFilter = 0;
+    remoteFilter += mRemoteFilter;
+
+    f32 mainOutVolume = 1.0f;
+    mainOutVolume *= mMainOutVolume;
+
+    f32 mainSend = 0.0f;
+    mainSend += mMainSend;
+
+    f32 fxSend[AUX_BUS_NUM];
+    for (int i = 0; i < AUX_BUS_NUM; i++) {
+        fxSend[i] = 0.0f;
+        fxSend[i] += mFxSend[i];
+    }
+
+    f32 remoteOutVolume[WPAD_MAX_CONTROLLERS];
+    f32 remoteSend[WPAD_MAX_CONTROLLERS];
+    f32 remoteFxSend[WPAD_MAX_CONTROLLERS];
+    for (int i = 0; i < WPAD_MAX_CONTROLLERS; i++) {
+        remoteOutVolume[i] = 1.0f;
+        remoteOutVolume[i] *= mRemoteOutVolume[i];
+
+        remoteSend[i] = 0.0f;
+        remoteSend[i] += mRemoteSend[i];
+
+        remoteFxSend[i] = 0.0f;
+        remoteFxSend[i] += mRemoteFxSend[i];
+    }
+
+    if (periodic) {
+        if (mAutoSweep) {
+            UpdateSweep(3);
+        }
+
+        mLfo.Update(3);
+        mEnvelope.Update(3);
+    }
+
+    f32 nextLfoValue = mLfo.GetValue();
+
+    f32 veTargetVolume = 1.0f;
+    veTargetVolume *= Util::CalcVolumeRatio(mEnvelope.GetValue());
+    if (mLfoTarget == LFO_TARGET_VOLUME) {
+        veTargetVolume *= Util::CalcVolumeRatio(6.0f * nextLfoValue);
+    }
+
+    if (mVoice != NULL) {
+        mVoice->SetPanMode(mPanMode);
+        mVoice->SetPanCurve(mPanCurve);
+        mVoice->SetVolume(volume);
+        mVoice->SetVeVolume(veTargetVolume, veInitVolume);
+        mVoice->SetPitch(pitch);
+        mVoice->SetPan(pan);
+        mVoice->SetSurroundPan(surroundPan);
+        mVoice->SetLpfFreq(lpfFreq);
+        mVoice->SetRemoteFilter(remoteFilter);
+        mVoice->SetOutputLine(mOutputLineFlag);
+        mVoice->SetMainOutVolume(mainOutVolume);
+        mVoice->SetMainSend(mainSend);
+
+        for (int i = 0; i < AUX_BUS_NUM; i++) {
+            mVoice->SetFxSend(static_cast<AuxBus>(i), fxSend[i]);
+        }
+
+        for (int i = 0; i < WPAD_MAX_CONTROLLERS; i++) {
+            mVoice->SetRemoteOutVolume(i, remoteOutVolume[i]);
+            mVoice->SetRemoteSend(i, remoteSend[i]);
+            // @bug Should use remoteFxSend
+            mVoice->SetRemoteFxSend(i, remoteSend[i]);
+        }
+    }
+}
+
+void Channel::Start(const WaveData& rData, int length, u32 offset) {
+    mLength = length;
+
+    mLfo.Reset();
+    mEnvelope.Reset();
+    mSweepCounter = 0;
+
+    mVoice->Setup(rData, offset);
+    mVoice->Start();
+    mActiveFlag = true;
+}
+
+void Channel::Release() {
+    if (mEnvelope.GetStatus() != EnvGenerator::STATUS_RELEASE) {
+        if (mVoice != NULL && !mReleasePriorityFixFlag) {
+            mVoice->SetPriority(1);
+        }
+
+        mEnvelope.SetStatus(EnvGenerator::STATUS_RELEASE);
+    }
+
+    mPauseFlag = false;
+}
+
+void Channel::Stop() {
+    if (mVoice == NULL) {
+        return;
+    }
+
+    mVoice->Stop();
+    mVoice->Free();
+    mVoice = NULL;
+
+    mPauseFlag = false;
+    mActiveFlag = false;
+
+    if (mAllocFlag) {
+        mAllocFlag = false;
+        ChannelManager::GetInstance().Free(this);
+    }
+
+    if (mCallback != NULL) {
+        mCallback(this, CALLBACK_STATUS_STOPPED, mCallbackArg);
+    }
+}
+
+void Channel::UpdateSweep(int count) {
+    mSweepCounter += count;
+
+    if (mSweepCounter > mSweepLength) {
+        mSweepCounter = mSweepLength;
+    }
+}
+
+void Channel::SetSweepParam(f32 pitch, int time, bool autoUpdate) {
+    mSweepPitch = pitch;
+    mSweepLength = time;
+    mAutoSweep = autoUpdate;
+    mSweepCounter = 0;
+}
+
+f32 Channel::GetSweepValue() const {
+    if (mSweepPitch == 0.0f) {
+        return 0.0f;
+    }
+
+    if (mSweepCounter >= mSweepLength) {
+        return 0.0f;
+    }
+
+    f32 sweep = mSweepPitch;
+    sweep *= mSweepLength - mSweepCounter;
+    sweep /= mSweepLength;
+
+    return sweep;
+}
+
+void Channel::VoiceCallbackFunc(Voice* pDropVoice,
+                                Voice::VoiceCallbackStatus status,
+                                void* pCallbackArg) {
+    ChannelCallbackStatus channelStatus;
+
+    switch (status) {
+    case Voice::CALLBACK_STATUS_FINISH_WAVE:
+        channelStatus = CALLBACK_STATUS_FINISH;
+        pDropVoice->Free();
+        break;
+
+    case Voice::CALLBACK_STATUS_CANCEL:
+        channelStatus = CALLBACK_STATUS_CANCEL;
+        pDropVoice->Free();
+        break;
+
+    case Voice::CALLBACK_STATUS_DROP_VOICE:
+        channelStatus = CALLBACK_STATUS_DROP;
+        break;
+
+    case Voice::CALLBACK_STATUS_DROP_DSP:
+        channelStatus = CALLBACK_STATUS_DROP;
+        break;
+    }
+
+    Channel* pChannel = static_cast<Channel*>(pCallbackArg);
+
+    if (pChannel->mCallback != NULL) {
+        pChannel->mCallback(pChannel, channelStatus, pChannel->mCallbackArg);
+    }
+
+    pChannel->mVoice = NULL;
+    pChannel->mPauseFlag = false;
+    pChannel->mActiveFlag = false;
+    pChannel->mAllocFlag = false;
+
+    ChannelManager::GetInstance().Free(pChannel);
+}
+
+Channel* Channel::AllocChannel(int channels, int voices, int prio,
+                               ChannelCallback pCallback, u32 callbackArg) {
+    Channel* pChannel = ChannelManager::GetInstance().Alloc();
+    if (pChannel == NULL) {
+        return NULL;
+    }
+
+    pChannel->mAllocFlag = true;
+
+    Voice* pVoice = VoiceManager::GetInstance().AllocVoice(
+        channels, voices, prio, VoiceCallbackFunc, pChannel);
+
+    if (pVoice == NULL) {
+        ChannelManager::GetInstance().Free(pChannel);
+        return NULL;
+    }
+
+    pChannel->mVoice = pVoice;
+    pChannel->InitParam(pCallback, callbackArg);
+    return pChannel;
+}
+
+void Channel::FreeChannel(Channel* pChannel) {
+    if (pChannel == NULL) {
+        return;
+    }
+
+    pChannel->mCallback = NULL;
+    pChannel->mCallbackArg = 0;
+}
+
+} // namespace detail
+} // namespace snd
+} // namespace nw4r

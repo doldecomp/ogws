@@ -120,7 +120,7 @@ namespace nw4r
                                 playerCb++->OnUpdateFrameSoundThread();
                             }
 
-                            ChannelManager::GetInstance()->UpdateAllChannel();
+                            ChannelManager::GetInstance().UpdateAllChannel();
                         }
 
                         Util::CalcRandom();

@@ -66,7 +66,7 @@ NW4R_O_FILES := \
 	build/nw4r/snd/snd_BankFile.o \
 	build/nw4r/snd/snd_BasicPlayer.o \
 	build/nw4r/snd/snd_BasicSound.o \
-	build/asm/nw4r/snd/snd_Channel.o \
+	build/nw4r/snd/snd_Channel.o \
 	build/nw4r/snd/snd_DisposeCallbackManager.o \
 	build/nw4r/snd/snd_DvdSoundArchive.o \
 	build/nw4r/snd/snd_EnvGenerator.o \

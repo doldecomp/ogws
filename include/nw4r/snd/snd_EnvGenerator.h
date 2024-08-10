@@ -13,13 +13,17 @@ public:
 public:
     EnvGenerator();
 
-    void Init(f32 db);
-    void Reset(f32 db);
+    void Init(f32 db = VOLUME_INIT);
+    void Reset(f32 db = VOLUME_INIT);
     f32 GetValue() const;
     void Update(int msec);
 
-    Status GetStatus() const { return mStatus; }
-    void SetStatus(Status status) { mStatus = status; }
+    Status GetStatus() const {
+        return mStatus;
+    }
+    void SetStatus(Status status) {
+        mStatus = status;
+    }
 
     void SetAttack(int attack);
     void SetDecay(int decay);

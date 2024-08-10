@@ -365,8 +365,8 @@ namespace nw4r
 				
 				switch (status)
 				{
-					case Channel::CALLBACK_STATUS_0:
-					case Channel::CALLBACK_STATUS_2:
+					case Channel::CALLBACK_STATUS_STOPPED:
+					case Channel::CALLBACK_STATUS_FINISH:
 						Channel::FreeChannel(pChannel);
 						break;
 				}

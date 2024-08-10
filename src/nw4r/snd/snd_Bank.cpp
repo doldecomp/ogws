@@ -25,8 +25,8 @@ namespace nw4r
 				
 				if (!pChannel) return NULL;
 				
-				pChannel->INT_0xC0 = noteOnInfo.INT_0x4;
-				pChannel->INT_0xC4 = instInfo.BYTE_0x8;
+				pChannel->SetKey(noteOnInfo.INT_0x4);
+				pChannel->SetOriginalKey(instInfo.BYTE_0x8);
 				
 				//f3 = noteOnInfo.INT_0x8
 				//f3 = f3 / 127.0f
@@ -36,13 +36,13 @@ namespace nw4r
 				float f3 = noteOnInfo.INT_0x8 / 127.0f;
 				float f0 = instInfo.BYTE_0xA / 127.0f;
 				f3 *= f3;
-				pChannel->FLOAT_0xA8 = f3 *= f0;
-				pChannel->FLOAT_0xB4 = instInfo.FLOAT_0xC;
+				pChannel->SetInitVolume(f3 *= f0);
+				pChannel->SetTune(instInfo.FLOAT_0xC);
 				
-				pChannel->mEnvGenerator.SetAttack(instInfo.mAttack);
-				pChannel->mEnvGenerator.SetDecay(instInfo.mDecay);
-				pChannel->mEnvGenerator.SetSustain(instInfo.mSustain);
-				pChannel->mEnvGenerator.SetRelease(instInfo.mRelease);
+				pChannel->SetAttack(instInfo.mAttack);
+				pChannel->SetDecay(instInfo.mDecay);
+				pChannel->SetSustain(instInfo.mSustain);
+				pChannel->SetRelease(instInfo.mRelease);
 				
 				//r5 = instInfo.BYTE_0x9 -64
 				//r0 = noteOnInfo.WORD_0x10
@@ -54,8 +54,8 @@ namespace nw4r
 				float a = (instInfo.BYTE_0x9 - 64) / 63.0f;
 				float b = noteOnInfo.INT_0x10 / 63.0f;
 				
-				pChannel->FLOAT_0xAC = a += b;
-				pChannel->FLOAT_0xB0 = 0.0f;
+				pChannel->SetInitPan(a += b);
+				pChannel->SetInitSurroundPan(0.0f);
 				pChannel->Start(waveData, noteOnInfo.INT_0xC, 0) ;
 				
 				return pChannel;
