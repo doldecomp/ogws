@@ -134,7 +134,7 @@ namespace nw4r
 			{
 				SoundThread::AutoLock lock;
 				
-				SoundThread::GetInstance()->RegisterPlayerCallback(this);
+				SoundThread::GetInstance().RegisterPlayerCallback(this);
 				mStartedFlag = true;
 				
 				return true;
@@ -161,7 +161,7 @@ namespace nw4r
 				
 				if (mStartedFlag)
 				{
-					SoundThread::GetInstance()->UnregisterPlayerCallback(this);
+					SoundThread::GetInstance().UnregisterPlayerCallback(this);
 					mStartedFlag = false;
 				}
 				

@@ -83,7 +83,7 @@ Voice* VoiceManager::AllocVoice(int channels, int voices, int prio,
         return NULL;
     }
 
-    rVoice.mPriority = prio & Voice::scPriorityMax;
+    rVoice.mPriority = prio & Voice::PRIORITY_MAX;
     AppendVoiceList(&rVoice);
     UpdateEachVoicePriority(mPriorityList.GetIteratorFromPointer(&rVoice),
                             mPriorityList.GetEndIter());
@@ -170,7 +170,7 @@ void VoiceManager::UpdateEachVoicePriority(const VoiceList::Iterator& rBegin,
             return;
         }
 
-        if (it->GetPriority() != Voice::scPriorityMax) {
+        if (it->GetPriority() != Voice::PRIORITY_MAX) {
             it->UpdateVoicesPriority();
         }
     }

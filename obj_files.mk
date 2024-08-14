@@ -107,7 +107,7 @@ NW4R_O_FILES := \
 	build/nw4r/snd/snd_SoundThread.o \
 	build/nw4r/snd/snd_StrmChannel.o \
 	build/asm/nw4r/snd/snd_StrmFile.o \
-	build/asm/nw4r/snd/snd_StrmPlayer.o \
+	build/nw4r/snd/snd_StrmPlayer.o \
 	build/nw4r/snd/snd_StrmSound.o \
 	build/nw4r/snd/snd_StrmSoundHandle.o \
 	build/nw4r/snd/snd_Task.o \

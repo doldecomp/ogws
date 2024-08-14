@@ -18,6 +18,9 @@
 #include <nw4r/snd/snd_MoveValue.h>
 #include <nw4r/snd/snd_SoundHandle.h>
 #include <nw4r/snd/snd_SoundPlayer.h>
+#include <nw4r/snd/snd_StrmPlayer.h>
+#include <nw4r/snd/snd_Task.h>
+#include <nw4r/snd/snd_TaskManager.h>
 #include <nw4r/snd/snd_Util.h>
 #include <nw4r/snd/snd_Voice.h>
 #include <nw4r/snd/snd_VoiceManager.h>

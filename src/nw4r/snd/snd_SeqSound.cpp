@@ -68,7 +68,7 @@ namespace nw4r
 				mLoadTask.mCallback = callback;
 				mLoadTask.mSound = this;
 				
-				TaskManager::GetInstance()->AppendTask(&mLoadTask, TaskManager::PRIORITY_1);
+				TaskManager::GetInstance().AppendTask(&mLoadTask, TaskManager::PRIORITY_MIDDLE);
 				
 				return true;
 			}
@@ -104,7 +104,7 @@ namespace nw4r
 			
 			void SeqSound::Shutdown()
 			{
-				if (mLoadingFlag) TaskManager::GetInstance()->CancelTask(&mLoadTask);
+				if (mLoadingFlag) TaskManager::GetInstance().CancelTask(&mLoadTask);
 				
 				if (mFileStream)
 				{

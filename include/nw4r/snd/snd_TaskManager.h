@@ -16,10 +16,9 @@ namespace nw4r
 			{
 				enum TaskPriority
 				{
-					PRIORITY_0 = 0,
-					PRIORITY_1 = 1,
-					PRIORITY_2 = 2
-					// PRIORITY_MAX = 3
+					PRIORITY_LOW = 0,
+					PRIORITY_MIDDLE = 1,
+					PRIORITY_HIGH = 2
 				};
 				
 				inline TaskManager() : mTaskStacks(), WORD_0x24(0), BYTE_0x28(0)
@@ -28,10 +27,10 @@ namespace nw4r
 					OSInitThreadQueue(&mQueue_0x34);
 				}
 
-				static TaskManager * GetInstance();
+				static TaskManager& GetInstance();
 
 				~TaskManager();
-				void AppendTask(Task *, TaskPriority);
+				void AppendTask(Task *, TaskPriority = PRIORITY_MIDDLE);
 				Task * PopTask();
 				UNKTYPE GetNextTask();
 				UNKTYPE ExecuteTask();

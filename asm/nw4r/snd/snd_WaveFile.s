@@ -148,8 +148,8 @@ lbl_8004EE88:
 /* 8004EEB4 00049DB4  38 21 00 20 */	addi r1, r1, 0x20
 /* 8004EEB8 00049DB8  4E 80 00 20 */	blr 
 
-.global func_8004EEBC
-func_8004EEBC:
+.global GetAxVoiceFormatFromWaveFileFormat__Q44nw4r3snd6detail14WaveFileReaderFUl
+GetAxVoiceFormatFromWaveFileFormat__Q44nw4r3snd6detail14WaveFileReaderFUl:
 /* 8004EEBC 00049DBC  28 03 00 01 */	cmplwi r3, 1
 /* 8004EEC0 00049DC0  40 82 00 0C */	bne lbl_8004EECC
 /* 8004EEC4 00049DC4  38 60 00 0A */	li r3, 0xa

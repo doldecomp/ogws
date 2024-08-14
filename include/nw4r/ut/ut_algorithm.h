@@ -9,9 +9,13 @@ namespace {
 /**
  * Value operations
  */
-template <typename T> inline T Max(T t1, T t2) { return (t1 < t2) ? t2 : t1; }
+template <typename T> inline T Max(T t1, T t2) {
+    return (t1 < t2) ? t2 : t1;
+}
 
-template <typename T> inline T Min(T t1, T t2) { return (t1 > t2) ? t2 : t1; }
+template <typename T> inline T Min(T t1, T t2) {
+    return (t1 > t2) ? t2 : t1;
+}
 
 template <typename T> inline T Clamp(T value, T min, T max) {
     return value > max ? max : (value < min ? min : value);
@@ -49,11 +53,16 @@ template <typename T> inline bool TestBit(T t, int bitIndexLSB) {
 /**
  * Pointer operations
  */
-inline u32 GetIntPtr(const void* ptr) { return reinterpret_cast<u32>(ptr); }
+inline u32 GetIntPtr(const void* ptr) {
+    return reinterpret_cast<u32>(ptr);
+}
 
 template <typename T>
 inline const void* AddOffsetToPtr(const void* ptr, T offset) {
     return reinterpret_cast<const void*>(GetIntPtr(ptr) + offset);
+}
+template <typename T> inline void* AddOffsetToPtr(void* ptr, T offset) {
+    return reinterpret_cast<void*>(GetIntPtr(ptr) + offset);
 }
 
 inline s32 GetOffsetFromPtr(const void* start, const void* end) {

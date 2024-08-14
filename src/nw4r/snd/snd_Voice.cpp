@@ -156,7 +156,7 @@ bool Voice::Acquire(int channels, int voices, int prio, VoiceCallback pCallback,
     ut::AutoInterruptLock lock;
 
     u32 axPrio;
-    if (prio == scPriorityMax) {
+    if (prio == PRIORITY_MAX) {
         axPrio = AX_PRIORITY_MAX;
     } else {
         axPrio = (AX_PRIORITY_MAX / 2) + 1;

@@ -39,8 +39,7 @@ namespace nw4r
                 if (mIsAlive)
                 {
                     mIsExiting = true;
-                    TaskManager *pInstance = TaskManager::GetInstance();
-                    pInstance->CancelWaitTask();
+                    TaskManager::GetInstance().CancelWaitTask();
                     OSJoinThread(&mThread, 0);
                     mIsAlive = false;
                 }
@@ -52,12 +51,10 @@ namespace nw4r
 
                 while (!pThread->mIsExiting)
                 {
-                    TaskManager *pInstance = TaskManager::GetInstance();
-                    pInstance->WaitTask();
+                    TaskManager::GetInstance().WaitTask();
 
                     if (pThread->mIsExiting) break;
-                    pInstance = TaskManager::GetInstance();
-                    pInstance->ExecuteTask();
+                    TaskManager::GetInstance().ExecuteTask();
                 }
 
                 return NULL;

@@ -77,6 +77,7 @@ struct AdpcmLoopParam {
 struct AdpcmInfo {
     AdpcmParam param;         // at 0x0
     AdpcmLoopParam loopParam; // at 0x28
+    u16 padding;
 };
 
 struct ChannelParam {

@@ -37,9 +37,12 @@ public:
         SYNC_AX_BIQUAD = (1 << 8),
     };
 
+    static const int PRIORITY_MAX = 255;
+
 public:
     Voice();
     virtual ~Voice(); // at 0x8
+
     virtual void InvalidateData(const void* pStart, const void* pEnd) {
 #pragma unused(pStart)
 #pragma unused(pEnd)
@@ -135,9 +138,6 @@ public:
 private:
     static const int scVoicesOutMin = 1;
     static const int scVoicesOutMax = 4;
-
-    static const int scPriorityMin = 0;
-    static const int scPriorityMax = 255;
 
 private:
     AxVoice* mAxVoice[CHANNEL_MAX][scVoicesOutMax]; // at 0xC

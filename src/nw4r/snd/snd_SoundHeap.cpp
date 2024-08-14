@@ -55,9 +55,9 @@ namespace nw4r
             OSMutex* mutex = &mMutex;
 
             OSLockMutex(mutex);
-            SoundThread::GetInstance()->Lock();
+            SoundThread::GetInstance().Lock();
             mFrameHeap.Clear();
-            SoundThread::GetInstance()->Unlock();
+            SoundThread::GetInstance().Unlock();
             OSUnlockMutex(mutex);
         }
 
@@ -76,9 +76,9 @@ namespace nw4r
             OSMutex* mutex = &mMutex;
 
             OSLockMutex(mutex);
-            SoundThread::GetInstance()->Lock();
+            SoundThread::GetInstance().Lock();
             mFrameHeap.LoadState(state);
-            SoundThread::GetInstance()->Unlock();
+            SoundThread::GetInstance().Unlock();
             OSUnlockMutex(mutex);
         }
 

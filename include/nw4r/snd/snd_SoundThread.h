@@ -37,12 +37,12 @@ namespace nw4r
 
 				struct AutoLock
 				{
-					inline AutoLock() { GetInstance()->Lock(); }
-					inline ~AutoLock() { GetInstance()->Unlock(); }
+					inline AutoLock() { GetInstance().Lock(); }
+					inline ~AutoLock() { GetInstance().Unlock(); }
 				};
 				
 			public:				
-				static SoundThread * GetInstance();
+				static SoundThread& GetInstance();
 
 				SoundThread();
 				~SoundThread() {}

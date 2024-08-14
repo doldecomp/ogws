@@ -19,10 +19,10 @@ namespace nw4r
                 OSInitMutex(&mMutex);
             }
 
-            SoundThread * SoundThread::GetInstance()
+            SoundThread& SoundThread::GetInstance()
             {
                 static SoundThread instance;
-                return &instance;
+                return instance;
             }
 
             bool SoundThread::Create(s32 r4, void *stack, u32 stackSize)
@@ -31,7 +31,7 @@ namespace nw4r
 
                 mIsCreated = true;
                 mStackEnd = stack;
-                BOOL success = OSCreateThread(&mThread, SoundThreadFunc, GetInstance(),
+                BOOL success = OSCreateThread(&mThread, SoundThreadFunc, &GetInstance(),
                     (u8 *)stack + stackSize, stackSize, r4, 0);
 
                 if (success) OSResumeThread(&mThread);
@@ -43,14 +43,14 @@ namespace nw4r
             {
                 if (!mIsCreated) return;
 
-                OSJamMessage(&GetInstance()->mMesgQueue, (OSMessage)2, 1);
+                OSJamMessage(&GetInstance().mMesgQueue, (OSMessage)2, 1);
                 OSJoinThread(&mThread, 0);
                 mIsCreated = false;
             }
 
             void SoundThread::AxCallbackFunc()
             {
-                GetInstance()->AxCallbackProc();
+                GetInstance().AxCallbackProc();
             }
 
             void SoundThread::AxCallbackProc()

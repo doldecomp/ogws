@@ -101,34 +101,34 @@ namespace nw4r
 			
 			void SeqTrack::Close()
 			{
-				SoundThread::GetInstance()->Lock();
+				SoundThread::GetInstance().Lock();
 				
 				ReleaseAllChannel(-1);
 				FreeAllChannel();
 				
 				mOpenFlag = false;
 				
-				SoundThread::GetInstance()->Unlock();
+				SoundThread::GetInstance().Unlock();
 			}
 			
 			void SeqTrack::UpdateChannelRelease(Channel * pChannel)
 			{
-				SoundThread::GetInstance()->Lock();
+				SoundThread::GetInstance().Lock();
 				
 				if (!pChannel->mLength &&
 					pChannel->mEnvGenerator.mStatus != EnvGenerator::STATUS_RELEASE &&
 					BOOL_0x60) pChannel->Release();
 				
-				SoundThread::GetInstance()->Unlock();
+				SoundThread::GetInstance().Unlock();
 			}
 			
 			void SeqTrack::UpdateChannelLength()
 			{
-				SoundThread::GetInstance()->Lock();
+				SoundThread::GetInstance().Lock();
 				
 				if (!mOpenFlag)
 				{
-					SoundThread::GetInstance()->Unlock();
+					SoundThread::GetInstance().Unlock();
 					return;
 				}
 				
@@ -141,16 +141,16 @@ namespace nw4r
 					if (!pChannel->IsAutoUpdateSweep()) pChannel->UpdateSweep(1);
 				}
 				
-				SoundThread::GetInstance()->Unlock();
+				SoundThread::GetInstance().Unlock();
 			}
 			
 			UNKWORD SeqTrack::ParseNextTick(bool flag)
 			{
-				SoundThread::GetInstance()->Lock();
+				SoundThread::GetInstance().Lock();
 				
 				if (!mOpenFlag)
 				{
-					SoundThread::GetInstance()->Unlock();
+					SoundThread::GetInstance().Unlock();
 					return 0;
 				}
 				
@@ -158,7 +158,7 @@ namespace nw4r
 				{
 					if (mChannel)
 					{
-						SoundThread::GetInstance()->Unlock();
+						SoundThread::GetInstance().Unlock();
 						return 1;
 					}
 					BOOL_0x5E = false;
@@ -166,7 +166,7 @@ namespace nw4r
 				
 				if (TIMER_0x58 > 0 && --TIMER_0x58 > 0)
 				{
-					SoundThread::GetInstance()->Unlock();
+					SoundThread::GetInstance().Unlock();
 					return 1;
 				}
 				
@@ -176,20 +176,20 @@ namespace nw4r
 					{
 						if (Parse(flag) == 1)
 						{
-							SoundThread::GetInstance()->Unlock();
+							SoundThread::GetInstance().Unlock();
 							return -1;
 						}
 					}
 				}
 				
-				SoundThread::GetInstance()->Unlock();
+				SoundThread::GetInstance().Unlock();
 				
 				return 1;
 			}
 			
 			void SeqTrack::ReleaseAllChannel(int release)
 			{
-				SoundThread::GetInstance()->Lock();
+				SoundThread::GetInstance().Lock();
 				
 				UpdateChannelParam();
 				
@@ -198,12 +198,12 @@ namespace nw4r
 					if (pChannel->IsActive()) pChannel->SetRelease(release);
 				}
 				
-				SoundThread::GetInstance()->Unlock();
+				SoundThread::GetInstance().Unlock();
 			}
 			
 			void SeqTrack::PauseAllChannel(bool flag)
 			{
-				SoundThread::GetInstance()->Lock();
+				SoundThread::GetInstance().Lock();
 				
 				UpdateChannelParam();
 				
@@ -212,22 +212,22 @@ namespace nw4r
 					if (pChannel->IsActive() && flag != (pChannel->IsPause() != false)) pChannel->Pause(flag);
 				}
 				
-				SoundThread::GetInstance()->Unlock();
+				SoundThread::GetInstance().Unlock();
 			}
 			
 			void SeqTrack::UpdateChannelParam()
 			{
-				SoundThread::GetInstance()->Lock();
+				SoundThread::GetInstance().Lock();
 				
 				if (!mOpenFlag)
 				{
-					SoundThread::GetInstance()->Unlock();
+					SoundThread::GetInstance().Unlock();
 					return;
 				}
 				//8004047C
 				if (!mChannel)
 				{
-					SoundThread::GetInstance()->Unlock();
+					SoundThread::GetInstance().Unlock();
 					return;
 				}
 				//80040498
@@ -340,12 +340,12 @@ namespace nw4r
 					//80040848
 				}
 				
-				SoundThread::GetInstance()->Unlock();
+				SoundThread::GetInstance().Unlock();
 			}
 			
 			void SeqTrack::FreeAllChannel()
 			{
-				SoundThread::GetInstance()->Lock();
+				SoundThread::GetInstance().Lock();
 				
 				for (Channel * pChannel = mChannel; pChannel; pChannel = pChannel->mNext)
 				{
@@ -354,12 +354,12 @@ namespace nw4r
 				
 				mChannel = NULL;
 				
-				SoundThread::GetInstance()->Unlock();
+				SoundThread::GetInstance().Unlock();
 			}
 			
 			void SeqTrack::ChannelCallbackFunc(Channel * pChannel, Channel::ChannelCallbackStatus status, u32 arg)
 			{
-				SoundThread::GetInstance()->Lock();
+				SoundThread::GetInstance().Lock();
 				
 				SeqTrack * pTrack = (SeqTrack *)arg;
 				
@@ -376,7 +376,7 @@ namespace nw4r
 				if (pTrack->mChannel == pChannel)
 				{
 					pTrack->mChannel = pChannel->mNext;
-					SoundThread::GetInstance()->Unlock();
+					SoundThread::GetInstance().Unlock();
 					return;
 				}
 				
@@ -385,17 +385,17 @@ namespace nw4r
 					if (pCur->mNext == pChannel)
 					{
 						pCur->mNext = pChannel->mNext;
-						SoundThread::GetInstance()->Unlock();
+						SoundThread::GetInstance().Unlock();
 						return;
 					}
 				}
 				
-				SoundThread::GetInstance()->Unlock();
+				SoundThread::GetInstance().Unlock();
 			}
 			
 			void SeqTrack::StopAllChannel()
 			{
-				SoundThread::GetInstance()->Lock();
+				SoundThread::GetInstance().Lock();
 				
 				for (Channel * pChannel = mChannel; pChannel; pChannel = pChannel->mNext)
 				{
@@ -405,12 +405,12 @@ namespace nw4r
 				
 				mChannel = NULL;
 				
-				SoundThread::GetInstance()->Unlock();
+				SoundThread::GetInstance().Unlock();
 			}
 			
 			void SeqTrack::SetMute(SeqMute mute)
 			{
-				SoundThread::GetInstance()->Lock();
+				SoundThread::GetInstance().Lock();
 				
 				switch (mute)
 				{
@@ -431,7 +431,7 @@ namespace nw4r
 						break;
 				}
 				
-				SoundThread::GetInstance()->Unlock();
+				SoundThread::GetInstance().Unlock();
 			}
 			
 			void SeqTrack::SetVolume(float volume)
@@ -453,17 +453,17 @@ namespace nw4r
 			
 			void SeqTrack::AddChannel(Channel * pChannel)
 			{
-				SoundThread::GetInstance()->Lock();
+				SoundThread::GetInstance().Lock();
 				
 				pChannel->mNext = mChannel;
 				mChannel = pChannel;
 				
-				SoundThread::GetInstance()->Unlock();
+				SoundThread::GetInstance().Unlock();
 			}
 			
 			Channel * SeqTrack::NoteOn(int r4_28, int r5_29, s32 r6_30, bool r7_26)
 			{
-				SoundThread::GetInstance()->Lock();
+				SoundThread::GetInstance().Lock();
 				
 				SeqPlayer * pPlayer = mPlayer;
 				Channel * pChannel = NULL;
@@ -489,7 +489,7 @@ namespace nw4r
 					
 					if (!mPlayer->NoteOn(INT_0x64, noteOnInfo))
 					{
-						SoundThread::GetInstance()->Unlock();
+						SoundThread::GetInstance().Unlock();
 						return NULL;
 					}
 					
@@ -529,7 +529,7 @@ namespace nw4r
 				pChannel->mPanMode = mPlayer->mPanMode;
 				pChannel->mPanCurve = mPlayer->mPanCurve;
 				
-				SoundThread::GetInstance()->Unlock();
+				SoundThread::GetInstance().Unlock();
 				return pChannel;
 			}
 		}
