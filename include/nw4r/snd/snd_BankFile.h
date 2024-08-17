@@ -14,16 +14,15 @@ namespace nw4r
 		{
 			struct InstInfo
 			{
-				int WORD_0x0;
-				u8 mAttack; // at 0x4
-				u8 mDecay; // at 0x5
-				u8 mSustain; // at 0x6
-				u8 mRelease; // at 0x7
-				
-				u8 BYTE_0x8;
-				u8 BYTE_0x9;
-				u8 BYTE_0xA;
-				float FLOAT_0xC;
+				long waveIndex; // at 0x0
+				u8 attack; // at 0x4
+				u8 decay; // at 0x5
+				u8 sustain; // at 0x6
+				u8 release; // at 0x7
+				u8 originalKey; // at 0x8
+				u8 pan; // at 0x9
+				u8 volume; // at 0xA
+				float tune; // at 0xC
 			};
 			
 			struct BankFile

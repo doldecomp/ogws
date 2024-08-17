@@ -5,6 +5,7 @@
 #include <nw4r/snd/snd_AxVoice.h>
 #include <nw4r/snd/snd_AxVoiceManager.h>
 #include <nw4r/snd/snd_AxfxImpl.h>
+#include <nw4r/snd/snd_Bank.h>
 #include <nw4r/snd/snd_BasicPlayer.h>
 #include <nw4r/snd/snd_BasicSound.h>
 #include <nw4r/snd/snd_Channel.h>

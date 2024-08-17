@@ -73,23 +73,23 @@ namespace nw4r
 				
 				if (r3->WORD_0x0 < 0) return false;
 				
-				pInfo->WORD_0x0 = r3->WORD_0x0;
-				pInfo->mAttack = r3->mAttack;
-				pInfo->mDecay = r3->mDecay;
-				pInfo->mSustain = r3->mSustain;
-				pInfo->mRelease = r3->mRelease;
-				pInfo->BYTE_0x8 = r3->BYTE_0xC;
-				pInfo->BYTE_0x9 = r3->BYTE_0xE;
+				pInfo->waveIndex = r3->WORD_0x0;
+				pInfo->attack = r3->mAttack;
+				pInfo->decay = r3->mDecay;
+				pInfo->sustain = r3->mSustain;
+				pInfo->release = r3->mRelease;
+				pInfo->originalKey = r3->BYTE_0xC;
+				pInfo->pan = r3->BYTE_0xE;
 				
 				if (mFile->mHeader.version >= 0x0101)
 				{
-					pInfo->BYTE_0xA = r3->BYTE_0xD;
-					pInfo->FLOAT_0xC = r3->FLOAT_0x10;
+					pInfo->volume = r3->BYTE_0xD;
+					pInfo->tune = r3->FLOAT_0x10;
 				}
 				else
 				{
-					pInfo->BYTE_0xA = 0x7F;
-					pInfo->FLOAT_0xC = 1.0f;
+					pInfo->volume = 0x7F;
+					pInfo->tune = 1.0f;
 				}
 				
 				return true;

@@ -11,15 +11,15 @@ namespace nw4r
 		{
 			struct NoteOnInfo
 			{
-				int INT_0x0;
-				int INT_0x4;
-				int INT_0x8;
-				int INT_0xC;
-				int INT_0x10;
-				int INT_0x14;
-				int INT_0x18;
-				Channel::ChannelCallback mChannelCallback; // at 0x1c
-				u32 INT_0x20;
+				int prgNo; // at 0x0
+				int key; // at 0x4
+				int velocity; // at 0x8
+				int length; // at 0xC
+				int initPan; // at 0x10
+				int priority; // at 0x14
+				int voiceOutCount; // at 0x18
+				Channel::ChannelCallback channelCallback; // at 0x1C
+				u32 channelCallbackData; // at 0x20
 			};
 			
 			struct NoteOnCallback
