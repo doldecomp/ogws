@@ -33,10 +33,10 @@ struct Header {
 };
 
 struct HeadBlock {
-    ut::BinaryBlockHeader blockHeader;                             // at 0x0
-    Util::DataRef<StrmDataInfo, void, void, void> refDataHeader;   // at 0x8
-    Util::DataRef<TrackTable, void, void, void> refTrackTable;     // at 0x10
-    Util::DataRef<ChannelTable, void, void, void> refChannelTable; // at 0x18
+    ut::BinaryBlockHeader blockHeader;           // at 0x0
+    Util::DataRef<StrmDataInfo> refDataHeader;   // at 0x8
+    Util::DataRef<TrackTable> refTrackTable;     // at 0x10
+    Util::DataRef<ChannelTable> refChannelTable; // at 0x18
 };
 
 } // namespace StrmFile

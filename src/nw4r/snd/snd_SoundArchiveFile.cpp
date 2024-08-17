@@ -69,13 +69,13 @@ namespace nw4r
 				
 				if (!pTable) return 0;
 				
-				if (index >= pTable->mCount) return 0;
+				if (index >= pTable->count) return 0;
 				
 				u8 type;
 				
 				if (GetVersion() >= 0x0101)
 				{
-					const SoundCommonInfo * pInfo = GetDataRefAddress0(pTable->mEntries[index], mInfoChunk);
+					const SoundCommonInfo * pInfo = GetDataRefAddress0(pTable->items[index], mInfoChunk);
 					
 					if (!pInfo) return 0;
 					
@@ -83,7 +83,7 @@ namespace nw4r
 				}
 				else
 				{
-					type = pTable->mEntries[index].BYTE_0x1;
+					type = pTable->items[index].dataType;
 				}
 				
 				switch (type)
@@ -105,11 +105,11 @@ namespace nw4r
 				
 				if (!pTable) return NULL;
 				
-				if (index >= pTable->mCount) return NULL;
+				if (index >= pTable->count) return NULL;
 				
-				if (GetVersion() >= 0x0101) return GetDataRefAddress0(pTable->mEntries[index], mInfoChunk);
+				if (GetVersion() >= 0x0101) return GetDataRefAddress0(pTable->items[index], mInfoChunk);
 				
-				return static_cast<const SoundCommonInfo *>(AddOffsetToPtr<u32>(mInfoChunk, pTable->mEntries[index].INT_0x4));
+				return static_cast<const SoundCommonInfo *>(AddOffsetToPtr<u32>(mInfoChunk, pTable->items[index].value));
 			}
 			
 			bool SoundArchiveFileReader::ReadSoundInfo(u32 index, SoundArchive::SoundInfo * pSoundInfo) const
@@ -216,9 +216,9 @@ namespace nw4r
 				
 				if (!pTable) return NULL;
 				
-				if (index >= pTable->mCount) return NULL;
+				if (index >= pTable->count) return NULL;
 				
-				return GetDataRefAddress0(pTable->mEntries[index], mInfoChunk);
+				return GetDataRefAddress0(pTable->items[index], mInfoChunk);
 			}
 			
 			bool SoundArchiveFileReader::ReadBankInfo(u32 index, SoundArchive::BankInfo * pBankInfo) const
@@ -238,9 +238,9 @@ namespace nw4r
 				
 				if (!pTable) return NULL;
 				
-				if (index >= pTable->mCount) return NULL;
+				if (index >= pTable->count) return NULL;
 				
-				return GetDataRefAddress0(pTable->mEntries[index], mInfoChunk);
+				return GetDataRefAddress0(pTable->items[index], mInfoChunk);
 			}
 			
 			bool SoundArchiveFileReader::ReadPlayerInfo(u32 index, SoundArchive::PlayerInfo * pPlayerInfo) const
@@ -261,9 +261,9 @@ namespace nw4r
 				
 				if (!pTable) return NULL;
 				
-				if (index >= pTable->mCount) return NULL;
+				if (index >= pTable->count) return NULL;
 				
-				return GetDataRefAddress0(pTable->mEntries[index], mInfoChunk);
+				return GetDataRefAddress0(pTable->items[index], mInfoChunk);
 			}
 			
 			bool SoundArchiveFileReader::ReadGroupInfo(u32 index, SoundArchive::GroupInfo * pGroupInfo) const
@@ -281,7 +281,7 @@ namespace nw4r
 				pGroupInfo->INT_0xC = pInfo->INT_0x14;
 				pGroupInfo->INT_0x10 = pInfo->INT_0x18;
 				pGroupInfo->INT_0x14 = pInfo->INT_0x1C;
-				pGroupInfo->mCount = pItemTable->mCount;
+				pGroupInfo->mCount = pItemTable->count;
 				
 				return true;
 			}
@@ -296,9 +296,9 @@ namespace nw4r
 				
 				if (!pItemTable) return false;
 				
-				if (itemIndex >= pItemTable->mCount) return false;
+				if (itemIndex >= pItemTable->count) return false;
 				
-				const GroupItemInfo * pItemInfo = GetDataRefAddress0(pItemTable->mEntries[itemIndex], mInfoChunk);
+				const GroupItemInfo * pItemInfo = GetDataRefAddress0(pItemTable->items[itemIndex], mInfoChunk);
 				
 				if (!pItemInfo) return false;
 				
@@ -332,14 +332,14 @@ namespace nw4r
 			{
 				const PlayerTable * pTable = GetDataRefAddress0(mInfoChunk->mPlayerTable, mInfoChunk);
 				
-				return !pTable ? 0 : pTable->mCount;
+				return !pTable ? 0 : pTable->count;
 			}
 			
 			u32 SoundArchiveFileReader::GetGroupCount() const
 			{
 				const GroupTable * pTable = GetDataRefAddress0(mInfoChunk->mGroupTable, mInfoChunk);
 				
-				return !pTable ? 0 : pTable->mCount - 1;
+				return !pTable ? 0 : pTable->count - 1;
 			}
 			
 			u32 SoundArchiveFileReader::GetSoundStringId(u32 index) const
@@ -353,7 +353,7 @@ namespace nw4r
 			{
 				if (id == -1) return NULL;
 				
-				return !mStringTable ? NULL : static_cast<const char *>(GetPtrConst(mStringChunk, mStringTable->mEntries[id]));
+				return !mStringTable ? NULL : static_cast<const char *>(GetPtrConst(mStringChunk, mStringTable->items[id]));
 			}
 			
 			const char * SoundArchiveFileReader::GetSoundLabelString(u32 index) const
@@ -374,9 +374,9 @@ namespace nw4r
 				
 				if (!pTable) return false;
 				
-				if (index >= pTable->mCount) return false;
+				if (index >= pTable->count) return false;
 				
-				const FileInfo * pInfo = GetDataRefAddress0(pTable->mEntries[index], mInfoChunk);
+				const FileInfo * pInfo = GetDataRefAddress0(pTable->items[index], mInfoChunk);
 				
 				if (!pInfo) return false;
 				
@@ -387,7 +387,7 @@ namespace nw4r
 				pFileInfo->WORD_0x0 = pInfo->WORD_0x0;
 				pFileInfo->WORD_0x4 = pInfo->WORD_0x4;
 				pFileInfo->mExternalFileName = GetDataRefAddress0(pInfo->mExternalFileName, mInfoChunk);
-				pFileInfo->SIZE_0xC = pPosTable->mCount;
+				pFileInfo->SIZE_0xC = pPosTable->count;
 				
 				return true;
 			}
@@ -398,9 +398,9 @@ namespace nw4r
 				
 				if (!pTable) return false;
 				
-				if (fileIndex >= pTable->mCount) return false;
+				if (fileIndex >= pTable->count) return false;
 				
-				const FileInfo * pInfo = GetDataRefAddress0(pTable->mEntries[fileIndex], mInfoChunk);
+				const FileInfo * pInfo = GetDataRefAddress0(pTable->items[fileIndex], mInfoChunk);
 				
 				if (!pInfo) return false;
 				
@@ -408,9 +408,9 @@ namespace nw4r
 				
 				if (!pPosTable) return false;
 				
-				if (posIndex >= pPosTable->mCount) return false;
+				if (posIndex >= pPosTable->count) return false;
 				
-				const SoundArchive::FilePos * pPos = GetDataRefAddress0(pPosTable->mEntries[posIndex], mInfoChunk);
+				const SoundArchive::FilePos * pPos = GetDataRefAddress0(pPosTable->items[posIndex], mInfoChunk);
 				
 				if (!pPos) return false;
 				
@@ -462,20 +462,20 @@ namespace nw4r
 				
 				if (!pTable) return INVALID_DATA_REF;
 				
-				if (index >= pTable->mCount) return INVALID_DATA_REF;
+				if (index >= pTable->count) return INVALID_DATA_REF;
 				
 				if (GetVersion() >= 0x0101)
 				{
-					const SoundCommonInfo * pInfo = GetDataRefAddress0(pTable->mEntries[index], mInfoChunk);
+					const SoundCommonInfo * pInfo = GetDataRefAddress0(pTable->items[index], mInfoChunk);
 					
 					return !pInfo ? INVALID_DATA_REF : pInfo->mSoundInfoOffset;
 				}
 				
 				SoundInfoOffset soundInfoOffset;
 				
-				soundInfoOffset.mType = pTable->mEntries[index].mType;
-				soundInfoOffset.BYTE_0x1 = pTable->mEntries[index].BYTE_0x1;
-				soundInfoOffset.INT_0x4 = pTable->mEntries[index].INT_0x4 + 0x1C;
+				soundInfoOffset.refType = pTable->items[index].refType;
+				soundInfoOffset.dataType = pTable->items[index].dataType;
+				soundInfoOffset.value = pTable->items[index].value + 0x1C;
 				
 				return soundInfoOffset;
 			}
