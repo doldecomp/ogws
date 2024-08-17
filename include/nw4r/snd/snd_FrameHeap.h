@@ -1,90 +1,91 @@
 #ifndef NW4R_SND_FRAME_HEAP_H
 #define NW4R_SND_FRAME_HEAP_H
-#include "types_nw4r.h"
-#include "ut_LinkList.h"
-#include "ut_algorithm.h"
+#include <nw4r/types_nw4r.h>
+#include <nw4r/ut.h>
+#include <revolution/MEM.h>
 
-namespace nw4r
-{
-	namespace snd
-	{
-		namespace detail
-		{
-			struct FrameHeap
-			{
-				typedef void (* AllocCallback)(void *, u32, void *);
-				
-				struct Block
-				{
-					ut::LinkListNode mNode; // at 0x0
-					u32 mSize; // at 0x8
-					AllocCallback mCallback; // at 0xc
-					void * PTR_0x10;
-					
-					inline Block(u32 size, AllocCallback callback, void * ptr)
-						:
-						mSize(size),
-						mCallback(callback),
-						PTR_0x10(ptr)
-					{}
-					
-					inline void * GetBufferAddr()
-					{
-						return reinterpret_cast<u8 *>(this) + ut::RoundUp<u32>(sizeof(Block), 0x20);
-					}
-					
-					inline ~Block()
-					{
-						if (mCallback) mCallback(PTR_0x10, mSize, GetBufferAddr());
-					}
-				};
-				
-				struct Section
-				{
-					ut::LinkListNode mNode; // at 0x0
-					ut::LinkList<Block, 0x0> mList; // at 0x8
-					
-					inline void AppendBlock(Block * pBlock)
-					{
-						mList.PushBack(pBlock);
-					}
-					
-					inline ~Section()
-					{
-						ut::LinkList<Block, 0x0>::Iterator iter = mList.GetEndIter();
-						
-						while (iter != mList.GetBeginIter())
-						{
-							(--iter)->~Block();
-						}
-					}
-				};
-				
-				bool NewSection(); //inlined
-				UNKTYPE ClearSection(); //inlined
-				
-				FrameHeap();
-				~FrameHeap();
-				
-				bool Create(void *, u32);
-				UNKTYPE Destroy();
-				void Clear();
-				void * Alloc(u32, AllocCallback, void *);
-				int SaveState();
-				void LoadState(int);
-				int GetCurrentLevel() const;
-				u32 GetFreeSize() const;
-				
-				UNKTYPE * PTR_0x0;
-				ut::LinkList<Section, 0x0> mList; // at 0x4
-				
-				inline bool IsValid() const
-				{
-					return mList.GetSize();
-				}
-			};
-		}
-	}
-}
+namespace nw4r {
+namespace snd {
+namespace detail {
+
+class FrameHeap {
+public:
+    typedef void (*AllocCallback)(void* pBuffer, u32 size, void* pCallbackArg);
+
+public:
+    FrameHeap();
+    ~FrameHeap();
+
+    bool IsValid() const {
+        return mHandle != NULL;
+    }
+
+    bool Create(void* pBase, u32 size);
+    void Destroy();
+    void Clear();
+    void* Alloc(u32 size, AllocCallback pCallback, void* pCallbackArg);
+
+    int SaveState();
+    void LoadState(int id);
+
+    int GetCurrentLevel() const;
+    u32 GetFreeSize() const;
+
+    bool NewSection();
+    void ClearSection();
+
+private:
+    struct Block {
+        NW4R_UT_LIST_NODE_DECL(); // at 0x0
+        u32 mSize;                // at 0x8
+        AllocCallback mCallback;  // at 0xc
+        void* mCallbackArg;       // at 0x10
+
+        Block(u32 size, AllocCallback pCallback, void* pCallbackArg)
+            : mSize(size), mCallback(pCallback), mCallbackArg(pCallbackArg) {}
+
+        ~Block() {
+            if (mCallback != NULL) {
+                mCallback(GetBufferAddr(), mSize, mCallbackArg);
+            }
+        }
+
+        void* GetBufferAddr() {
+            return ut::AddOffsetToPtr(this, scBlockBufferSize);
+        }
+    };
+
+    NW4R_UT_LIST_TYPEDEF_DECL(Block);
+
+    struct Section {
+        NW4R_UT_LIST_NODE_DECL(); // at 0x0
+        BlockList mList;          // at 0x8
+
+        Section() {}
+
+        ~Section() {
+            for (BlockList::Iterator it = mList.GetEndIter();
+                 it != mList.GetBeginIter();) {
+                (--it)->~Block();
+            }
+        }
+
+        void AppendBlock(Block* pBlock) {
+            mList.PushBack(pBlock);
+        }
+    };
+
+    NW4R_UT_LIST_TYPEDEF_DECL(Section);
+
+    static const int scBlockBufferSize = ROUND_UP(sizeof(Block), 32);
+
+private:
+    MEMiHeapHead* mHandle;    // at 0x0
+    SectionList mSectionList; // at 0x4
+};
+
+} // namespace detail
+} // namespace snd
+} // namespace nw4r
 
 #endif
