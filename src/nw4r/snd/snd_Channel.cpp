@@ -148,7 +148,7 @@ void Channel::Update(bool periodic) {
     f32 veInitVolume = 1.0f;
     veInitVolume *= Util::CalcVolumeRatio(mEnvelope.GetValue());
     if (mLfoTarget == LFO_TARGET_VOLUME) {
-        veInitVolume *= Util::CalcVolumeRatio(6.0f * lfoValue);
+        veInitVolume *= Util::CalcVolumeRatio(VOLUME_MAX_DB * lfoValue);
     }
 
     if (mEnvelope.GetStatus() == EnvGenerator::STATUS_RELEASE) {
@@ -175,7 +175,7 @@ void Channel::Update(bool periodic) {
     pitchRatio *= mTune;
     pitchRatio *= mUserPitchRatio;
 
-    f32 pitch = Util::CalcPitchRatio(256.0f * cent);
+    f32 pitch = Util::CalcPitchRatio(MICROTONE_MAX * cent);
     pitch *= pitchRatio;
 
     f32 pan = 0.0f;
@@ -235,7 +235,7 @@ void Channel::Update(bool periodic) {
     f32 veTargetVolume = 1.0f;
     veTargetVolume *= Util::CalcVolumeRatio(mEnvelope.GetValue());
     if (mLfoTarget == LFO_TARGET_VOLUME) {
-        veTargetVolume *= Util::CalcVolumeRatio(6.0f * nextLfoValue);
+        veTargetVolume *= Util::CalcVolumeRatio(VOLUME_MAX_DB * nextLfoValue);
     }
 
     if (mVoice != NULL) {

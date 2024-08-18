@@ -19,7 +19,7 @@ const s16 EnvGenerator::DecibelSquareTable[128] = {
     -28,  -27,  -25,  -23,  -22,  -20,  -19,  -17,  -16,  -14,  -13,  -11,
     -10,  -8,   -7,   -6,   -4,   -3,   -1,   0};
 
-const volatile f32 EnvGenerator::VOLUME_INIT = -90.4f;
+const volatile f32 EnvGenerator::VOLUME_INIT = VOLUME_MIN_DB;
 
 EnvGenerator::EnvGenerator() {
     Init();

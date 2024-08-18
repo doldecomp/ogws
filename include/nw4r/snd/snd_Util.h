@@ -77,14 +77,15 @@ inline const T3* GetDataRefAddress3(const DataRef<T0, T1, T2, T3>& rRef,
         static_cast<RefType>(rRef.refType), rRef.value, pBase));
 }
 
-f32 CalcPitchRatio(int);
-f32 CalcVolumeRatio(f32);
-f32 CalcPanRatio(f32, const PanInfo&);
-f32 CalcSurroundPanRatio(f32, const PanInfo&);
-int CalcLpfFreq(f32);
-void GetRemoteFilterCoefs(int, u16*, u16*, u16*, u16*, u16*);
+f32 CalcPitchRatio(int pitch);
+f32 CalcVolumeRatio(f32 db);
+f32 CalcPanRatio(f32 pan, const PanInfo& rInfo);
+f32 CalcSurroundPanRatio(f32 pan, const PanInfo& rInfo);
+int CalcLpfFreq(f32 scale);
+void GetRemoteFilterCoefs(int filter, u16* pB0, u16* pB1, u16* pB2, u16* pA1,
+                          u16* pA2);
 u16 CalcRandom();
-const void* GetDataRefAddressImpl(RefType, u32, const void*);
+const void* GetDataRefAddressImpl(RefType type, u32 value, const void* pBase);
 
 } // namespace Util
 } // namespace detail
