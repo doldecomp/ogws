@@ -83,7 +83,7 @@ namespace EGG
         {
             mIsOpeningArchive = true;
 
-            headerBufSize = dvdSndArchive->mFileReader.mHeader.mInfoChunkSize;
+            headerBufSize = dvdSndArchive->GetHeaderSize();
             void *headerBuf = heap->Alloc(headerBufSize, NULL, NULL);
             if (!dvdSndArchive->LoadHeader(headerBuf, headerBufSize))
             {
@@ -107,7 +107,7 @@ namespace EGG
                 return NULL;
             }
 
-            headerBufSize = dvdSndArchive->mFileReader.mHeader.mLabelStringChunkSize;
+            headerBufSize = dvdSndArchive->GetLabelStringDataSize();
             void *stringDataBuf = heap->Alloc(headerBufSize, NULL, NULL);
             if (!dvdSndArchive->LoadLabelStringData(stringDataBuf, headerBufSize))
             {

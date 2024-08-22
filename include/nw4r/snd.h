@@ -14,6 +14,7 @@
 #include <nw4r/snd/snd_Common.h>
 #include <nw4r/snd/snd_DisposeCallback.h>
 #include <nw4r/snd/snd_DisposeCallbackManager.h>
+#include <nw4r/snd/snd_DvdSoundArchive.h>
 #include <nw4r/snd/snd_EnvGenerator.h>
 #include <nw4r/snd/snd_ExternalSoundPlayer.h>
 #include <nw4r/snd/snd_FrameHeap.h>

@@ -1,6 +1,5 @@
 #pragma ipa file // TODO: REMOVE AFTER REFACTOR
 
-#include <new>
 #include <nw4r/snd.h>
 #include <revolution/MEM.h>
 
