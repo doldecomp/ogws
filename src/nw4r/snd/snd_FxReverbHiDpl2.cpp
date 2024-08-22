@@ -6,25 +6,25 @@
 namespace nw4r {
 namespace snd {
 
-FxReverbHi::FxReverbHi() {
-    ReverbHiParam param = {0.02f, 3.0f, 0.6f, 0.4f, 0.1f, 1.0f};
+FxReverbHiDpl2::FxReverbHiDpl2() {
+    ReverbHiDpl2Param param = {0.02f, 3.0f, 0.6f, 0.4f, 0.1f, 1.0f};
     SetParam(param);
 }
 
-u32 FxReverbHi::GetRequiredMemSize() {
-    u32 memSize = AXFXReverbHiGetMemSize(&mAxfxParam);
+u32 FxReverbHiDpl2::GetRequiredMemSize() {
+    u32 memSize = AXFXReverbHiGetMemSizeDpl2(&mAxfxParam);
     return ut::RoundUp(memSize + detail::AxfxImpl::HEAP_SIZE_MIN, 32);
 }
 
-bool FxReverbHi::AssignWorkBuffer(void* pBuffer, u32 size) {
+bool FxReverbHiDpl2::AssignWorkBuffer(void* pBuffer, u32 size) {
     return mImpl.CreateHeap(pBuffer, size);
 }
 
-void FxReverbHi::ReleaseWorkBuffer() {
+void FxReverbHiDpl2::ReleaseWorkBuffer() {
     mImpl.DestroyHeap();
 }
 
-bool FxReverbHi::StartUp() {
+bool FxReverbHiDpl2::StartUp() {
     u32 memSize = GetRequiredMemSize();
     if (memSize > mImpl.GetHeapTotalSize()) {
         return false;
@@ -35,17 +35,17 @@ bool FxReverbHi::StartUp() {
     mImpl.HookAlloc(&allocHook, &freeHook);
 
     mImpl.mAllocatedSize = 0;
-    BOOL success = AXFXReverbHiInit(&mAxfxParam);
+    BOOL success = AXFXReverbHiInitDpl2(&mAxfxParam);
 
     mImpl.RestoreAlloc(allocHook, freeHook);
 
-    (void)AXFXReverbHiGetMemSize(&mAxfxParam); // debug leftover
+    (void)AXFXReverbHiGetMemSizeDpl2(&mAxfxParam); // debug leftover
     mImpl.mIsActive = true;
 
     return success;
 }
 
-void FxReverbHi::Shutdown() {
+void FxReverbHiDpl2::Shutdown() {
     if (!mImpl.mIsActive) {
         return;
     }
@@ -56,12 +56,12 @@ void FxReverbHi::Shutdown() {
     AXFXFreeHook freeHook;
     mImpl.HookAlloc(&allocHook, &freeHook);
 
-    AXFXReverbHiShutdown(&mAxfxParam);
+    AXFXReverbHiShutdownDpl2(&mAxfxParam);
 
     mImpl.RestoreAlloc(allocHook, freeHook);
 }
 
-bool FxReverbHi::SetParam(const ReverbHiParam& rParam) {
+bool FxReverbHiDpl2::SetParam(const ReverbHiDpl2Param& rParam) {
     mParam = rParam;
 
     mAxfxParam.preDelay = ut::Clamp(rParam.preDelayTime, 0.0f, 0.1f);
@@ -84,22 +84,23 @@ bool FxReverbHi::SetParam(const ReverbHiParam& rParam) {
     AXFXFreeHook freeHook;
     mImpl.HookAlloc(&allocHook, &freeHook);
 
-    BOOL success = AXFXReverbHiSettings(&mAxfxParam);
+    BOOL success = AXFXReverbHiSettingsDpl2(&mAxfxParam);
 
     mImpl.RestoreAlloc(allocHook, freeHook);
 
     return success;
 }
 
-void FxReverbHi::UpdateBuffer(int channels, void** ppBuffer, u32 size,
-                              SampleFormat format, f32 sampleRate,
-                              OutputMode mode) {
-    void* chans[AX_STEREO_MAX];
-    chans[AX_STEREO_L] = ppBuffer[AX_STEREO_L];
-    chans[AX_STEREO_R] = ppBuffer[AX_STEREO_R];
-    chans[AX_STEREO_S] = ppBuffer[AX_STEREO_S];
+void FxReverbHiDpl2::UpdateBuffer(int channels, void** ppBuffer, u32 size,
+                                  SampleFormat format, f32 sampleRate,
+                                  OutputMode mode) {
+    void* chans[AX_DPL2_MAX];
+    chans[AX_DPL2_L] = ppBuffer[AX_DPL2_L];
+    chans[AX_DPL2_R] = ppBuffer[AX_DPL2_R];
+    chans[AX_DPL2_LS] = ppBuffer[AX_DPL2_LS];
+    chans[AX_DPL2_RS] = ppBuffer[AX_DPL2_RS];
 
-    AXFXReverbHiCallback(chans, &mAxfxParam);
+    AXFXReverbHiCallbackDpl2(chans, &mAxfxParam);
 }
 
 } // namespace snd

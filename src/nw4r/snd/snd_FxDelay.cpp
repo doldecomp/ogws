@@ -7,8 +7,8 @@ namespace nw4r {
 namespace snd {
 
 FxDelay::FxDelay() {
-    DelayParam delayParam = {160.0f, 0.4f, 1.0f};
-    SetParam(delayParam);
+    DelayParam param = {160.0f, 0.4f, 1.0f};
+    SetParam(param);
 }
 
 u32 FxDelay::GetRequiredMemSize() {

@@ -75,7 +75,7 @@ NW4R_O_FILES := \
 	build/nw4r/snd/snd_FxChorus.o \
 	build/nw4r/snd/snd_FxDelay.o \
 	build/nw4r/snd/snd_FxReverbHi.o \
-	build/asm/nw4r/snd/snd_FxReverbHiDpl2.o \
+	build/nw4r/snd/snd_FxReverbHiDpl2.o \
 	build/nw4r/snd/snd_InstancePool.o \
 	build/nw4r/snd/snd_Lfo.o \
 	build/nw4r/snd/snd_MemorySoundArchive.o \

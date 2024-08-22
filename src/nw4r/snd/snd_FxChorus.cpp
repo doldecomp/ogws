@@ -7,8 +7,8 @@ namespace nw4r {
 namespace snd {
 
 FxChorus::FxChorus() {
-    ChorusParam chorusParam = {10.0f, 0.5f, 1.0f};
-    SetParam(chorusParam);
+    ChorusParam param = {10.0f, 0.5f, 1.0f};
+    SetParam(param);
 }
 
 u32 FxChorus::GetRequiredMemSize() {
