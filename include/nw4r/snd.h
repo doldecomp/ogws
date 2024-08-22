@@ -23,6 +23,7 @@
 #include <nw4r/snd/snd_FxDelay.h>
 #include <nw4r/snd/snd_FxReverbHi.h>
 #include <nw4r/snd/snd_FxReverbHiDpl2.h>
+#include <nw4r/snd/snd_InstancePool.h>
 #include <nw4r/snd/snd_Lfo.h>
 #include <nw4r/snd/snd_MoveValue.h>
 #include <nw4r/snd/snd_SoundHandle.h>

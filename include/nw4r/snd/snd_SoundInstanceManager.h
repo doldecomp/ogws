@@ -26,6 +26,7 @@ namespace nw4r
 					if (mPriorityList.IsEmpty()) return;
 					
 					mPriorityList.Erase(pInstance);
+					pInstance->~T();
 					mPool.Free(pInstance);
 				}
 				
