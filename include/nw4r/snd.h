@@ -18,6 +18,8 @@
 #include <nw4r/snd/snd_EnvGenerator.h>
 #include <nw4r/snd/snd_ExternalSoundPlayer.h>
 #include <nw4r/snd/snd_FrameHeap.h>
+#include <nw4r/snd/snd_FxBase.h>
+#include <nw4r/snd/snd_FxChorus.h>
 #include <nw4r/snd/snd_Lfo.h>
 #include <nw4r/snd/snd_MoveValue.h>
 #include <nw4r/snd/snd_SoundHandle.h>

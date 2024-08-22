@@ -5,6 +5,10 @@
 extern "C" {
 #endif
 
+#define MEM_EXP_HEAP_MIN_SIZE                                                  \
+    (sizeof(MEMiHeapHead) + sizeof(MEMiExpHeapHead) +                          \
+     sizeof(MEMiExpHeapMBlock) + 4)
+
 // Forward declarations
 typedef struct MEMiHeapHead;
 
@@ -23,7 +27,7 @@ typedef struct MEMiExpHeapMBlock {
             u16 align : 7;
             u16 group : 8;
         };
-    };                              // at 0x2
+    }; // at 0x2
     u32 size;                       // at 0x4
     struct MEMiExpHeapMBlock* prev; // at 0x8
     struct MEMiExpHeapMBlock* next; // at 0xC

@@ -4,13 +4,8 @@
 #define MEM_EXP_HEAP_MBLOCK_FREE 'FR'
 #define MEM_EXP_HEAP_MBLOCK_USED 'UD'
 
-// Base heap must be >= 16 bytes in size
-#define MEM_EXP_HEAP_MIN_SIZE 20
 // Size of base and expandable heap head
 #define MEM_EXP_HEAP_HEAD_SIZE (sizeof(MEMiHeapHead) + sizeof(MEMiExpHeapHead))
-// Minimum buffer size for an expandable heap
-#define MEM_EXP_HEAP_MIN_BUFFER_SIZE                                           \
-    (MEM_EXP_HEAP_HEAD_SIZE + MEM_EXP_HEAP_MIN_SIZE)
 
 static MEMiExpHeapHead*
 GetExpHeapHeadPtrFromHeapHead_(const MEMiHeapHead* heap) {
@@ -230,7 +225,7 @@ MEMiHeapHead* MEMCreateExpHeapEx(void* start, u32 size, u16 opt) {
 
     // Ensure valid heap
     if (GetUIntPtr(start) > GetUIntPtr(end) ||
-        GetOffsetFromPtr(start, end) < MEM_EXP_HEAP_MIN_BUFFER_SIZE) {
+        GetOffsetFromPtr(start, end) < MEM_EXP_HEAP_MIN_SIZE) {
         return NULL;
     }
 

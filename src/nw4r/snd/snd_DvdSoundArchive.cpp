@@ -115,7 +115,7 @@ bool DvdSoundArchive::LoadFileHeader() {
     u8 headerArea[0x68];
 
     static const u32 headerAlignSize =
-        ut::RoundUp<u32>(sizeof(detail::SoundArchiveFile::Header), 32);
+        ut::RoundUp(sizeof(detail::SoundArchiveFile::Header), 32);
 
     void* pFile = ut::RoundUp<u8>(headerArea, 32);
 
@@ -192,7 +192,7 @@ s32 DvdSoundArchive::DvdFileStream::Read(void* pBuffer, u32 count) {
     u32 startOffset = ut::DvdFileStream::Tell();
 
     if (startOffset + count > endOffset) {
-        count = ut::RoundUp<u32>(endOffset - ut::DvdFileStream::Tell(), 32);
+        count = ut::RoundUp(endOffset - ut::DvdFileStream::Tell(), 32);
     }
 
     return DvdLockedFileStream::Read(pBuffer, count);

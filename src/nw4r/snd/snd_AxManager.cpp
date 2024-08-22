@@ -315,22 +315,24 @@ void AxManager::ShutdownEffect(AuxBus bus) {
 
 void AxManager::AuxCallbackFunc(void* chans, void* context) {
     int num;
-    void* buffer[AX_DPL2_CHAN_MAX];
+    void* buffer[AX_DPL2_MAX];
 
     void** p = static_cast<void**>(chans);
     AuxBus bus = static_cast<AuxBus>(reinterpret_cast<u32>(context));
 
     if (GetInstance().GetOutputMode() == OUTPUT_MODE_DPL2) {
-        num = AX_DPL2_CHAN_MAX;
-        buffer[0] = p[0];
-        buffer[1] = p[1];
-        buffer[2] = p[2];
-        buffer[3] = p[3];
+        num = AX_DPL2_MAX;
+
+        buffer[AX_DPL2_L] = p[AX_DPL2_L];
+        buffer[AX_DPL2_R] = p[AX_DPL2_R];
+        buffer[AX_DPL2_LS] = p[AX_DPL2_LS];
+        buffer[AX_DPL2_RS] = p[AX_DPL2_RS];
     } else {
-        num = AX_STEREO_CHAN_MAX;
-        buffer[0] = p[0];
-        buffer[1] = p[1];
-        buffer[2] = p[2];
+        num = AX_STEREO_MAX;
+
+        buffer[AX_STEREO_L] = p[AX_STEREO_L];
+        buffer[AX_STEREO_R] = p[AX_STEREO_R];
+        buffer[AX_STEREO_S] = p[AX_STEREO_S];
     }
 
     if (GetInstance().mAuxCallbackWait[bus] > 0) {

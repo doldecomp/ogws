@@ -19,8 +19,8 @@
  * Stereo buffer size: (96 samples/frame, 3 channels)
  * DPL2 buffer size:   (96 samples/frame, 4 channels)
  */
-#define STEREO_FRAME_SIZE (AUX_CHAN_SIZE * AX_STEREO_CHAN_MAX)
-#define DPL2_FRAME_SIZE (AUX_CHAN_SIZE * AX_DPL2_CHAN_MAX)
+#define STEREO_FRAME_SIZE (AUX_CHAN_SIZE * AX_STEREO_MAX)
+#define DPL2_FRAME_SIZE (AUX_CHAN_SIZE * AX_DPL2_MAX)
 
 /**
  * Sample indices for stereo
@@ -176,23 +176,23 @@ void __AXProcessAux(void) {
 
     if (__AXCallbackAuxA != NULL) {
         if (__AXClMode == AX_OUTPUT_DPL2) {
-            void* chans[AX_DPL2_CHAN_MAX];
+            void* chans[AX_DPL2_MAX];
             // clang-format off
-            chans[0] = &__AXBufferAuxA[__AXAuxCpuReadWritePosition][DPL2_SAMPLE_L_BEGIN];
-            chans[1] = &__AXBufferAuxA[__AXAuxCpuReadWritePosition][DPL2_SAMPLE_R_BEGIN];
-            chans[2] = &__AXBufferAuxA[__AXAuxCpuReadWritePosition][DPL2_SAMPLE_LS_BEGIN];
-            chans[3] = &__AXBufferAuxA[__AXAuxCpuReadWritePosition][DPL2_SAMPLE_RS_BEGIN];
+            chans[AX_DPL2_L]  = &__AXBufferAuxA[__AXAuxCpuReadWritePosition][DPL2_SAMPLE_L_BEGIN];
+            chans[AX_DPL2_R]  = &__AXBufferAuxA[__AXAuxCpuReadWritePosition][DPL2_SAMPLE_R_BEGIN];
+            chans[AX_DPL2_LS] = &__AXBufferAuxA[__AXAuxCpuReadWritePosition][DPL2_SAMPLE_LS_BEGIN];
+            chans[AX_DPL2_RS] = &__AXBufferAuxA[__AXAuxCpuReadWritePosition][DPL2_SAMPLE_RS_BEGIN];
             // clang-format on
 
             DCInvalidateRange(chans[0], DPL2_FRAME_SIZE);
             __AXCallbackAuxA(chans, __AXContextAuxA);
             DCFlushRangeNoSync(chans[0], DPL2_FRAME_SIZE);
         } else {
-            void* chans[AX_STEREO_CHAN_MAX];
+            void* chans[AX_STEREO_MAX];
             // clang-format off
-            chans[0] = &__AXBufferAuxA[__AXAuxCpuReadWritePosition][STEREO_SAMPLE_L_BEGIN];
-            chans[1] = &__AXBufferAuxA[__AXAuxCpuReadWritePosition][STEREO_SAMPLE_R_BEGIN];
-            chans[2] = &__AXBufferAuxA[__AXAuxCpuReadWritePosition][STEREO_SAMPLE_S_BEGIN];
+            chans[AX_STEREO_L] = &__AXBufferAuxA[__AXAuxCpuReadWritePosition][STEREO_SAMPLE_L_BEGIN];
+            chans[AX_STEREO_R] = &__AXBufferAuxA[__AXAuxCpuReadWritePosition][STEREO_SAMPLE_R_BEGIN];
+            chans[AX_STEREO_S] = &__AXBufferAuxA[__AXAuxCpuReadWritePosition][STEREO_SAMPLE_S_BEGIN];
             // clang-format on
 
             DCInvalidateRange(chans[0], STEREO_FRAME_SIZE);
@@ -208,23 +208,23 @@ void __AXProcessAux(void) {
 
     if (__AXCallbackAuxB != NULL) {
         if (__AXClMode == AX_OUTPUT_DPL2) {
-            void* chans[AX_DPL2_CHAN_MAX];
+            void* chans[AX_DPL2_MAX];
             // clang-format off
-            chans[0] = &__AXBufferAuxB[__AXAuxCpuReadWritePosition][DPL2_SAMPLE_L_BEGIN];
-            chans[1] = &__AXBufferAuxB[__AXAuxCpuReadWritePosition][DPL2_SAMPLE_R_BEGIN];
-            chans[2] = &__AXBufferAuxB[__AXAuxCpuReadWritePosition][DPL2_SAMPLE_LS_BEGIN];
-            chans[3] = &__AXBufferAuxB[__AXAuxCpuReadWritePosition][DPL2_SAMPLE_RS_BEGIN];
+            chans[AX_DPL2_L]  = &__AXBufferAuxB[__AXAuxCpuReadWritePosition][DPL2_SAMPLE_L_BEGIN];
+            chans[AX_DPL2_R]  = &__AXBufferAuxB[__AXAuxCpuReadWritePosition][DPL2_SAMPLE_R_BEGIN];
+            chans[AX_DPL2_LS] = &__AXBufferAuxB[__AXAuxCpuReadWritePosition][DPL2_SAMPLE_LS_BEGIN];
+            chans[AX_DPL2_RS] = &__AXBufferAuxB[__AXAuxCpuReadWritePosition][DPL2_SAMPLE_RS_BEGIN];
             // clang-format on
 
             DCInvalidateRange(chans[0], DPL2_FRAME_SIZE);
             __AXCallbackAuxB(chans, __AXContextAuxB);
             DCFlushRangeNoSync(chans[0], DPL2_FRAME_SIZE);
         } else {
-            void* chans[AX_STEREO_CHAN_MAX];
+            void* chans[AX_STEREO_MAX];
             // clang-format off
-            chans[0] = &__AXBufferAuxB[__AXAuxCpuReadWritePosition][STEREO_SAMPLE_L_BEGIN];
-            chans[1] = &__AXBufferAuxB[__AXAuxCpuReadWritePosition][STEREO_SAMPLE_R_BEGIN];
-            chans[2] = &__AXBufferAuxB[__AXAuxCpuReadWritePosition][STEREO_SAMPLE_S_BEGIN];
+            chans[AX_STEREO_L] = &__AXBufferAuxB[__AXAuxCpuReadWritePosition][STEREO_SAMPLE_L_BEGIN];
+            chans[AX_STEREO_R] = &__AXBufferAuxB[__AXAuxCpuReadWritePosition][STEREO_SAMPLE_R_BEGIN];
+            chans[AX_STEREO_S] = &__AXBufferAuxB[__AXAuxCpuReadWritePosition][STEREO_SAMPLE_S_BEGIN];
             // clang-format on
 
             DCInvalidateRange(chans[0], STEREO_FRAME_SIZE);
@@ -240,11 +240,11 @@ void __AXProcessAux(void) {
     }
 
     if (__AXCallbackAuxC != NULL && __AXClMode != AX_OUTPUT_DPL2) {
-        void* chans[AX_STEREO_CHAN_MAX];
+        void* chans[AX_STEREO_MAX];
         // clang-format off
-            chans[0] = &__AXBufferAuxC[__AXAuxCpuReadWritePosition][STEREO_SAMPLE_L_BEGIN];
-            chans[1] = &__AXBufferAuxC[__AXAuxCpuReadWritePosition][STEREO_SAMPLE_R_BEGIN];
-            chans[2] = &__AXBufferAuxC[__AXAuxCpuReadWritePosition][STEREO_SAMPLE_S_BEGIN];
+        chans[AX_STEREO_L] = &__AXBufferAuxC[__AXAuxCpuReadWritePosition][STEREO_SAMPLE_L_BEGIN];
+        chans[AX_STEREO_R] = &__AXBufferAuxC[__AXAuxCpuReadWritePosition][STEREO_SAMPLE_R_BEGIN];
+        chans[AX_STEREO_S] = &__AXBufferAuxC[__AXAuxCpuReadWritePosition][STEREO_SAMPLE_S_BEGIN];
         // clang-format on
 
         DCInvalidateRange(chans[0], STEREO_FRAME_SIZE);
@@ -260,13 +260,13 @@ void __AXProcessAux(void) {
     }
 
     __AXAuxDspWritePosition++;
-    __AXAuxDspWritePosition %= AX_STEREO_CHAN_MAX;
+    __AXAuxDspWritePosition %= AX_STEREO_MAX;
 
     __AXAuxDspReadPosition++;
-    __AXAuxDspReadPosition %= AX_STEREO_CHAN_MAX;
+    __AXAuxDspReadPosition %= AX_STEREO_MAX;
 
     __AXAuxCpuReadWritePosition++;
-    __AXAuxCpuReadWritePosition %= AX_STEREO_CHAN_MAX;
+    __AXAuxCpuReadWritePosition %= AX_STEREO_MAX;
 }
 
 void AXRegisterAuxACallback(AXAuxCallback callback, void* context) {
@@ -276,7 +276,7 @@ void AXRegisterAuxACallback(AXAuxCallback callback, void* context) {
     __AXContextAuxA = context;
 
     if (callback == NULL) {
-        memset(&__clearAuxA, TRUE, AX_STEREO_CHAN_MAX);
+        memset(&__clearAuxA, TRUE, AX_STEREO_MAX);
     }
 
     OSRestoreInterrupts(enabled);
@@ -289,7 +289,7 @@ void AXRegisterAuxBCallback(AXAuxCallback callback, void* context) {
     __AXContextAuxB = context;
 
     if (callback == NULL) {
-        memset(&__clearAuxB, TRUE, AX_STEREO_CHAN_MAX);
+        memset(&__clearAuxB, TRUE, AX_STEREO_MAX);
     }
 
     OSRestoreInterrupts(enabled);
@@ -302,7 +302,7 @@ void AXRegisterAuxCCallback(AXAuxCallback callback, void* context) {
     __AXContextAuxC = context;
 
     if (callback == NULL) {
-        memset(&__clearAuxC, TRUE, AX_STEREO_CHAN_MAX);
+        memset(&__clearAuxC, TRUE, AX_STEREO_MAX);
     }
 
     OSRestoreInterrupts(enabled);

@@ -3,6 +3,7 @@
 
 #define MEM_FRM_HEAP_MAGIC 'FRMH'
 
+// Size of base and frame heap head
 #define MEM_FRM_HEAP_HEAD_SIZE (sizeof(MEMiHeapHead) + sizeof(MEMiFrmHeapHead))
 
 static MEMiFrmHeapHead*
@@ -99,7 +100,7 @@ MEMiHeapHead* MEMCreateFrmHeapEx(void* start, u32 size, u16 opt) {
 
     // Ensure valid heap
     if (GetUIntPtr(start) > GetUIntPtr(end) ||
-        GetOffsetFromPtr(start, end) < MEM_FRM_HEAP_HEAD_SIZE) {
+        GetOffsetFromPtr(start, end) < MEM_FRM_HEAP_MIN_SIZE) {
         return NULL;
     }
 
