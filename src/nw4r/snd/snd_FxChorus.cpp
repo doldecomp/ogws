@@ -64,9 +64,9 @@ void FxChorus::Shutdown() {
 bool FxChorus::SetParam(const ChorusParam& rParam) {
     mParam = rParam;
 
-    u32 baseDelay = rParam.delayTime;
-    u32 variation = rParam.delayTime * rParam.depth;
-    u32 period = 1000.0f / rParam.rate;
+    u32 baseDelay = static_cast<u32>(rParam.delayTime);
+    u32 variation = static_cast<u32>(rParam.delayTime * rParam.depth);
+    u32 period = static_cast<u32>(1000.0f / rParam.rate);
 
     mAxfxParam.baseDelay = ut::Clamp(baseDelay, scBaseDelayMin, scBaseDelayMax);
     mAxfxParam.variation = ut::Clamp(variation, scVariationMin, scVariationMax);
