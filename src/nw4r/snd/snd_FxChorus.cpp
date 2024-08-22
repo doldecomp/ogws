@@ -17,7 +17,7 @@ u32 FxChorus::GetRequiredMemSize() {
 }
 
 bool FxChorus::AssignWorkBuffer(void* pBuffer, u32 size) {
-    mImpl.CreateHeap(pBuffer, size);
+    return mImpl.CreateHeap(pBuffer, size);
 }
 
 void FxChorus::ReleaseWorkBuffer() {
@@ -68,9 +68,9 @@ bool FxChorus::SetParam(const ChorusParam& rParam) {
     u32 variation = static_cast<u32>(rParam.delayTime * rParam.depth);
     u32 period = static_cast<u32>(1000.0f / rParam.rate);
 
-    mAxfxParam.baseDelay = ut::Clamp(baseDelay, scBaseDelayMin, scBaseDelayMax);
-    mAxfxParam.variation = ut::Clamp(variation, scVariationMin, scVariationMax);
-    mAxfxParam.period = ut::Clamp(period, scPeriodMin, scPeriodMax);
+    mAxfxParam.baseDelay = ut::Clamp<u32>(baseDelay, 1, 50);
+    mAxfxParam.variation = ut::Clamp<u32>(variation, 0, 50);
+    mAxfxParam.period = ut::Clamp<u32>(period, 500, 10000);
 
     if (!mImpl.mIsActive) {
         return true;

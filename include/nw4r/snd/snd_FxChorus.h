@@ -38,16 +38,6 @@ public:
     bool SetParam(const ChorusParam& rParam);
 
 private:
-    static const u32 scBaseDelayMin = 1;
-    static const u32 scBaseDelayMax = 50;
-
-    static const u32 scVariationMin = 0;
-    static const u32 scVariationMax = 50;
-
-    static const u32 scPeriodMin = 500;
-    static const u32 scPeriodMax = 10000;
-
-private:
     detail::AxfxImpl mImpl; // at 0xC
     ChorusParam mParam;     // at 0x18
     AXFX_CHORUS mAxfxParam; // at 0x24

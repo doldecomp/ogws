@@ -38,16 +38,6 @@ public:
     bool SetParam(const DelayParam& rParam);
 
 private:
-    static const u32 scDelayMin = 1;
-    static const u32 scDelayMax = 5000;
-
-    static const u32 scFeedbackMin = 0;
-    static const u32 scFeedbackMax = 99;
-
-    static const u32 scOutGainMin = 0;
-    static const u32 scOutGainMax = 100;
-
-private:
     detail::AxfxImpl mImpl; // at 0xC
     DelayParam mParam;      // at 0x18
     AXFX_DELAY mAxfxParam;  // at 0x24

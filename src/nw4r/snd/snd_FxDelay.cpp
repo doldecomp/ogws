@@ -17,7 +17,7 @@ u32 FxDelay::GetRequiredMemSize() {
 }
 
 bool FxDelay::AssignWorkBuffer(void* pBuffer, u32 size) {
-    mImpl.CreateHeap(pBuffer, size);
+    return mImpl.CreateHeap(pBuffer, size);
 }
 
 void FxDelay::ReleaseWorkBuffer() {
@@ -65,13 +65,13 @@ bool FxDelay::SetParam(const DelayParam& rParam) {
     mParam = rParam;
 
     mAxfxParam.delay[0] = mAxfxParam.delay[1] = mAxfxParam.delay[2] =
-        ut::Clamp<u32>(rParam.delay, scDelayMin, scDelayMax);
+        ut::Clamp<u32>(rParam.delay, 1, 5000);
 
     mAxfxParam.feedback[0] = mAxfxParam.feedback[1] = mAxfxParam.feedback[2] =
-        ut::Clamp<u32>(100.0f * rParam.feedback, scFeedbackMin, scFeedbackMax);
+        ut::Clamp<u32>(100.0f * rParam.feedback, 0, 99);
 
     mAxfxParam.output[0] = mAxfxParam.output[1] = mAxfxParam.output[2] =
-        ut::Clamp<u32>(100.0f * rParam.outGain, scOutGainMin, scOutGainMax);
+        ut::Clamp<u32>(100.0f * rParam.outGain, 0, 100);
 
     if (!mImpl.mIsActive) {
         return true;
