@@ -31,7 +31,7 @@ public:
     void Shutdown();
 
 private:
-    const void* mBuffer;                        // at 0x108
+    const void* mData;                          // at 0x108
     detail::SoundArchiveFileReader mFileReader; // at 0x10C
 };
 

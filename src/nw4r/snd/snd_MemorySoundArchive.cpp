@@ -44,12 +44,12 @@ public:
     } // at 0x50
 
 private:
-    const void* mBuffer; // at 0x14
-    u32 mSize;           // at 0x18
-    u32 mOffset;         // at 0x1C
+    const void* mData; // at 0x14
+    u32 mSize;         // at 0x18
+    u32 mOffset;       // at 0x1C
 };
 
-MemorySoundArchive::MemorySoundArchive() : mBuffer(NULL) {}
+MemorySoundArchive::MemorySoundArchive() : mData(NULL) {}
 
 MemorySoundArchive::~MemorySoundArchive() {}
 
@@ -68,12 +68,12 @@ bool MemorySoundArchive::Setup(const void* pBuffer) {
     mFileReader.SetStringChunk(pStringChunk,
                                mFileReader.GetLabelStringChunkSize());
 
-    mBuffer = pBuffer;
+    mData = pBuffer;
     return true;
 }
 
 void MemorySoundArchive::Shutdown() {
-    mBuffer = NULL;
+    mData = NULL;
     SoundArchive::Shutdown();
 }
 
@@ -98,7 +98,7 @@ const void* MemorySoundArchive::detail_GetFileAddress(u32 id) const {
         return NULL;
     }
 
-    return ut::AddOffsetToPtr(mBuffer, groupInfo.offset + groupItemInfo.offset);
+    return ut::AddOffsetToPtr(mData, groupInfo.offset + groupItemInfo.offset);
 }
 
 const void* MemorySoundArchive::detail_GetWaveDataFileAddress(u32 id) const {
@@ -122,17 +122,17 @@ const void* MemorySoundArchive::detail_GetWaveDataFileAddress(u32 id) const {
         return NULL;
     }
 
-    return ut::AddOffsetToPtr(mBuffer, groupInfo.waveDataOffset +
-                                           groupItemInfo.waveDataOffset);
+    return ut::AddOffsetToPtr(mData, groupInfo.waveDataOffset +
+                                         groupItemInfo.waveDataOffset);
 }
 
 MemorySoundArchive::MemoryFileStream::MemoryFileStream(const void* pBuffer,
                                                        u32 size)
-    : mBuffer(pBuffer), mSize(size), mOffset(0) {}
+    : mData(pBuffer), mSize(size), mOffset(0) {}
 
 ut::FileStream* MemorySoundArchive::OpenStream(void* pBuffer, int size,
                                                u32 offset, u32 length) const {
-    if (mBuffer == NULL) {
+    if (mData == NULL) {
         return NULL;
     }
 
@@ -141,7 +141,7 @@ ut::FileStream* MemorySoundArchive::OpenStream(void* pBuffer, int size,
     }
 
     return new (pBuffer)
-        MemoryFileStream(ut::AddOffsetToPtr(mBuffer, offset), length);
+        MemoryFileStream(ut::AddOffsetToPtr(mData, offset), length);
 }
 
 ut::FileStream* MemorySoundArchive::OpenExtStream(void* pBuffer, int size,
@@ -156,14 +156,14 @@ int MemorySoundArchive::detail_GetRequiredStreamBufferSize() const {
 }
 
 void MemorySoundArchive::MemoryFileStream::Close() {
-    mBuffer = NULL;
+    mData = NULL;
     mSize = 0;
     mOffset = 0;
 }
 
 s32 MemorySoundArchive::MemoryFileStream::Read(void* pDst, u32 size) {
     u32 bytesRead = ut::Min(size, mSize - mOffset);
-    memcpy(pDst, ut::AddOffsetToPtr(mBuffer, mOffset), bytesRead);
+    memcpy(pDst, ut::AddOffsetToPtr(mData, mOffset), bytesRead);
 
     return bytesRead;
 }
