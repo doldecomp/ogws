@@ -1,195 +1,202 @@
-#include <string.h>
-#include <new>
-#include "ut_algorithm.h"
-#include "snd_MemorySoundArchive.h"
+#pragma ipa file // TODO: REMOVE AFTER REFACTOR
 
-namespace nw4r
-{
-	using namespace ut;
-	
-	namespace snd
-	{
-		using namespace detail;
-		
-		struct MemorySoundArchive::MemoryFileStream : public ut::FileStream
-		{
-			const void * mMemory; // at 0x14
-			int mSize; // at 0x18
-			int mOffset; // at 0x1c
-			
-			MemoryFileStream(const void *, u32); //inlined
+#include <nw4r/snd.h>
+#include <nw4r/ut.h>
 
-			virtual ~MemoryFileStream();
-			virtual void Close();
-			virtual s32 Read(void *, u32); // at 0x14
-			virtual void Seek(s32, u32); // at 0x44
-			virtual u32 GetSize() const; // at 0x40
-			virtual u32 Tell() const; // at 0x58
-			virtual bool CanWrite() const; // at 0x30
-			virtual bool CanRead() const; // at 0x2c
-			virtual bool CanAsync() const; // at 0x28
-			virtual bool CanCancel() const; // at 0x54
-			virtual bool CanSeek() const; // at 0x50
-		};
+namespace nw4r {
+namespace snd {
 
-		MemorySoundArchive::MemorySoundArchive() : mMemory(NULL) {}
-		
-		MemorySoundArchive::~MemorySoundArchive() {}
-		
-		bool MemorySoundArchive::Setup(const void * pMemory)
-		{
-			mFileReader.Init(pMemory);
-			
-			SoundArchive::Setup(&mFileReader);
-			
-			const void * pInfoChunk = AddOffsetToPtr<u32>(pMemory, mFileReader.GetInfoChunkOffset());
-			
-			mFileReader.SetInfoChunk(pInfoChunk, mFileReader.GetInfoChunkSize());
-			
-			const void * pStringChunk = AddOffsetToPtr<u32>(pMemory, mFileReader.GetLabelStringChunkOffset());
-			
-			mFileReader.SetStringChunk(pStringChunk, mFileReader.GetLabelStringChunkSize());
-			
-			mMemory = pMemory;
-			
-			return true;
-		}
-		
-		void MemorySoundArchive::Shutdown()
-		{
-			mMemory = NULL;
-			SoundArchive::Shutdown();
-		}
-		
-		const void * MemorySoundArchive::detail_GetFileAddress(u32 fileIndex) const
-		{
-			SoundArchive::GroupInfo groupInfo; // at 0x28
-			SoundArchive::GroupItemInfo groupItemInfo; // at 0x10
-			SoundArchive::FilePos filePos; // at 0x8
-			
-			if (!detail_ReadFilePos(fileIndex, 0, &filePos)) return NULL;
-			
-			if (!detail_ReadGroupInfo(filePos.mGroupIndex, &groupInfo)) return NULL;
-			
-			if (!detail_ReadGroupItemInfo(filePos.mGroupIndex, filePos.mGroupItemIndex, &groupItemInfo)) return NULL;
-			
-			if (groupInfo.mExternalFileName) return NULL;
-			
-			return AddOffsetToPtr<u32>(mMemory, groupInfo.INT_0x8 + groupItemInfo.INT_0x4);
-		}
-		
-		const void * MemorySoundArchive::detail_GetWaveDataFileAddress(u32 fileIndex) const
-		{
-			SoundArchive::GroupInfo groupInfo; // at 0x28
-			SoundArchive::GroupItemInfo groupItemInfo; // at 0x10
-			SoundArchive::FilePos filePos; // at 0x8
-			
-			if (!detail_ReadFilePos(fileIndex, 0, &filePos)) return NULL;
-			
-			if (!detail_ReadGroupInfo(filePos.mGroupIndex, &groupInfo)) return NULL;
-			
-			if (!detail_ReadGroupItemInfo(filePos.mGroupIndex, filePos.mGroupItemIndex, &groupItemInfo)) return NULL;
-			
-			if (groupInfo.mExternalFileName) return NULL;
-			
-			return AddOffsetToPtr<u32>(mMemory, groupInfo.INT_0x10 + groupItemInfo.INT_0xC);
-		}
-		
-		MemorySoundArchive::MemoryFileStream::MemoryFileStream(const void * pMemory, u32 size)
-			: mMemory(pMemory), mSize(size), mOffset(0)
-		{}
-		
-		FileStream * MemorySoundArchive::OpenStream(void * pBuffer, int bufferSize, u32 startOffset, u32 streamSize) const
-		{
-			if (!mMemory) return NULL;
-			
-			if (bufferSize < sizeof(MemoryFileStream)) return NULL;
-			
-			return new (pBuffer) MemoryFileStream(AddOffsetToPtr<u32>(mMemory, startOffset), streamSize);
-		}
-		
-		FileStream * MemorySoundArchive::OpenExtStream(void *, int, const char *, u32, u32) const
-		{
-			return NULL;
-		}
-		
-		int MemorySoundArchive::detail_GetRequiredStreamBufferSize() const
-		{
-			return sizeof(MemoryFileStream);
-		}
-		
-		void MemorySoundArchive::MemoryFileStream::Close()
-		{
-			mMemory = NULL;
-			mSize = 0;
-			mOffset = 0;
-		}
-		
-		s32 MemorySoundArchive::MemoryFileStream::Read(void * pBuffer, u32 count)
-		{
-			u32 bytesRead = Min<u32>(count, mSize - mOffset);
-			
-			memcpy(pBuffer, AddOffsetToPtr<u32>(mMemory, mOffset), bytesRead);
-			
-			return bytesRead;
-		}
-		
-		void MemorySoundArchive::MemoryFileStream::Seek(s32 offset, u32 origin)
-		{
-			switch (origin)
-			{
-				case 0:
-					mOffset = offset;
-					break;
-				case 1:
-					mOffset += offset;
-					break;
-				case 2:
-					mOffset = mSize - offset;
-					break;
-				default:
-					return;
-			}
-		}
-		
-		u32 MemorySoundArchive::MemoryFileStream::GetSize() const
-		{
-			return mSize;
-		}
-		
-		u32 MemorySoundArchive::MemoryFileStream::Tell() const
-		{
-			return mOffset;
-		}
-		
-		bool MemorySoundArchive::MemoryFileStream::CanWrite() const
-		{
-			return false;
-		}
-		
-		bool MemorySoundArchive::MemoryFileStream::CanRead() const
-		{
-			return true;
-		}
-		
-		bool MemorySoundArchive::MemoryFileStream::CanAsync() const
-		{
-			return false;
-		}
-		
-		bool MemorySoundArchive::MemoryFileStream::CanCancel() const
-		{
-			return true;
-		}
-		
-		bool MemorySoundArchive::MemoryFileStream::CanSeek() const
-		{
-			return true;
-		}
+class MemorySoundArchive::MemoryFileStream : public ut::FileStream {
+public:
+    MemoryFileStream(const void* pBuffer, u32 size);
+    virtual ~MemoryFileStream() {}
 
-		MemorySoundArchive::MemoryFileStream::~MemoryFileStream()
-		{
-			
-		}
-	}
+    virtual void Close();
+    virtual s32 Read(void* pDst, u32 size);    // at 0x14
+    virtual void Seek(s32 offset, u32 origin); // at 0x44
+
+    virtual u32 GetSize() const {
+        return mSize;
+    } // at 0x40
+
+    virtual u32 Tell() const {
+        return mOffset;
+    } // at 0x58
+
+    virtual bool CanWrite() const {
+        return false;
+    } // at 0x30
+
+    virtual bool CanRead() const {
+        return true;
+    } // at 0x2C
+
+    virtual bool CanAsync() const {
+        return false;
+    } // at 0x28
+
+    virtual bool CanCancel() const {
+        return true;
+    } // at 0x54
+
+    virtual bool CanSeek() const {
+        return true;
+    } // at 0x50
+
+private:
+    const void* mBuffer; // at 0x14
+    u32 mSize;           // at 0x18
+    u32 mOffset;         // at 0x1C
+};
+
+MemorySoundArchive::MemorySoundArchive() : mBuffer(NULL) {}
+
+MemorySoundArchive::~MemorySoundArchive() {}
+
+bool MemorySoundArchive::Setup(const void* pBuffer) {
+    mFileReader.Init(pBuffer);
+    SoundArchive::Setup(&mFileReader);
+
+    const void* pInfoChunk =
+        ut::AddOffsetToPtr(pBuffer, mFileReader.GetInfoChunkOffset());
+
+    mFileReader.SetInfoChunk(pInfoChunk, mFileReader.GetInfoChunkSize());
+
+    const void* pStringChunk =
+        ut::AddOffsetToPtr(pBuffer, mFileReader.GetLabelStringChunkOffset());
+
+    mFileReader.SetStringChunk(pStringChunk,
+                               mFileReader.GetLabelStringChunkSize());
+
+    mBuffer = pBuffer;
+    return true;
 }
+
+void MemorySoundArchive::Shutdown() {
+    mBuffer = NULL;
+    SoundArchive::Shutdown();
+}
+
+const void* MemorySoundArchive::detail_GetFileAddress(u32 id) const {
+    SoundArchive::FilePos filePos;
+    if (!detail_ReadFilePos(id, 0, &filePos)) {
+        return NULL;
+    }
+
+    SoundArchive::GroupInfo groupInfo;
+    if (!detail_ReadGroupInfo(filePos.groupId, &groupInfo)) {
+        return NULL;
+    }
+
+    SoundArchive::GroupItemInfo groupItemInfo;
+    if (!detail_ReadGroupItemInfo(filePos.groupId, filePos.index,
+                                  &groupItemInfo)) {
+        return NULL;
+    }
+
+    if (groupInfo.extFilePath != NULL) {
+        return NULL;
+    }
+
+    return ut::AddOffsetToPtr(mBuffer, groupInfo.offset + groupItemInfo.offset);
+}
+
+const void* MemorySoundArchive::detail_GetWaveDataFileAddress(u32 id) const {
+    SoundArchive::FilePos filePos;
+    if (!detail_ReadFilePos(id, 0, &filePos)) {
+        return NULL;
+    }
+
+    SoundArchive::GroupInfo groupInfo;
+    if (!detail_ReadGroupInfo(filePos.groupId, &groupInfo)) {
+        return NULL;
+    }
+
+    SoundArchive::GroupItemInfo groupItemInfo;
+    if (!detail_ReadGroupItemInfo(filePos.groupId, filePos.index,
+                                  &groupItemInfo)) {
+        return NULL;
+    }
+
+    if (groupInfo.extFilePath != NULL) {
+        return NULL;
+    }
+
+    return ut::AddOffsetToPtr(mBuffer, groupInfo.waveDataOffset +
+                                           groupItemInfo.waveDataOffset);
+}
+
+MemorySoundArchive::MemoryFileStream::MemoryFileStream(const void* pBuffer,
+                                                       u32 size)
+    : mBuffer(pBuffer), mSize(size), mOffset(0) {}
+
+ut::FileStream* MemorySoundArchive::OpenStream(void* pBuffer, int size,
+                                               u32 offset, u32 length) const {
+    if (mBuffer == NULL) {
+        return NULL;
+    }
+
+    if (size < sizeof(MemoryFileStream)) {
+        return NULL;
+    }
+
+    return new (pBuffer)
+        MemoryFileStream(ut::AddOffsetToPtr(mBuffer, offset), length);
+}
+
+ut::FileStream* MemorySoundArchive::OpenExtStream(void* pBuffer, int size,
+                                                  const char* pExtPath,
+                                                  u32 offset,
+                                                  u32 length) const {
+    return NULL;
+}
+
+int MemorySoundArchive::detail_GetRequiredStreamBufferSize() const {
+    return sizeof(MemoryFileStream);
+}
+
+void MemorySoundArchive::MemoryFileStream::Close() {
+    mBuffer = NULL;
+    mSize = 0;
+    mOffset = 0;
+}
+
+s32 MemorySoundArchive::MemoryFileStream::Read(void* pDst, u32 size) {
+    u32 bytesRead = ut::Min(size, mSize - mOffset);
+    memcpy(pDst, ut::AddOffsetToPtr(mBuffer, mOffset), bytesRead);
+
+    return bytesRead;
+}
+
+void MemorySoundArchive::MemoryFileStream::Seek(s32 offset, u32 origin) {
+    switch (origin) {
+    case SEEK_BEG:
+        mOffset = offset;
+        break;
+
+    case SEEK_CUR:
+        mOffset += offset;
+        break;
+
+    case SEEK_END:
+        mOffset = mSize - offset;
+        break;
+
+    default:
+        return;
+    }
+}
+
+// clang-format off
+DECOMP_FORCEACTIVE(snd_MemorySoundArchive_cpp,
+                   MemorySoundArchive::MemoryFileStream::GetSize,
+                   MemorySoundArchive::MemoryFileStream::Tell,
+                   MemorySoundArchive::MemoryFileStream::CanWrite,
+                   MemorySoundArchive::MemoryFileStream::CanRead,
+                   MemorySoundArchive::MemoryFileStream::CanAsync,
+                   MemorySoundArchive::MemoryFileStream::CanCancel,
+                   MemorySoundArchive::MemoryFileStream::CanSeek);
+// clang-format on
+
+} // namespace snd
+} // namespace nw4r

@@ -276,12 +276,12 @@ namespace nw4r
 				
 				if (!pItemTable) return false;
 				
-				pGroupInfo->mExternalFileName = GetDataRefAddress0(pInfo->mExternalFileName, mInfoChunk);
-				pGroupInfo->INT_0x8 = pInfo->INT_0x10;
-				pGroupInfo->INT_0xC = pInfo->INT_0x14;
-				pGroupInfo->INT_0x10 = pInfo->INT_0x18;
-				pGroupInfo->INT_0x14 = pInfo->INT_0x1C;
-				pGroupInfo->mCount = pItemTable->count;
+				pGroupInfo->extFilePath = GetDataRefAddress0(pInfo->mExternalFileName, mInfoChunk);
+				pGroupInfo->offset = pInfo->INT_0x10;
+				pGroupInfo->size = pInfo->INT_0x14;
+				pGroupInfo->waveDataOffset = pInfo->INT_0x18;
+				pGroupInfo->waveDataSize = pInfo->INT_0x1C;
+				pGroupInfo->itemCount = pItemTable->count;
 				
 				return true;
 			}
@@ -302,11 +302,11 @@ namespace nw4r
 				
 				if (!pItemInfo) return false;
 				
-				pGroupItemInfo->WORD_0x0 = pItemInfo->WORD_0x0;
-				pGroupItemInfo->INT_0x4 = pItemInfo->INT_0x4;
-				pGroupItemInfo->INT_0x8 = pItemInfo->INT_0x8;
-				pGroupItemInfo->INT_0xC = pItemInfo->INT_0xC;
-				pGroupItemInfo->WORD_0x10 = pItemInfo->WORD_0x10;
+				pGroupItemInfo->fileId = pItemInfo->WORD_0x0;
+				pGroupItemInfo->offset = pItemInfo->INT_0x4;
+				pGroupItemInfo->size = pItemInfo->INT_0x8;
+				pGroupItemInfo->waveDataOffset = pItemInfo->INT_0xC;
+				pGroupItemInfo->waveDataSize = pItemInfo->WORD_0x10;
 				
 				return true;
 			}

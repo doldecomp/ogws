@@ -72,21 +72,21 @@ namespace nw4r
 			
 			struct GroupInfo
 			{
-				u32 mCount; // at 0x0
-				const char * mExternalFileName; // at 0x4
-				u32 INT_0x8;
-				u32 INT_0xC;
-				u32 INT_0x10;
-				u32 INT_0x14;
+				u32 itemCount; // at 0x0
+				const char * extFilePath; // at 0x4
+				u32 offset; // at 0x8
+				u32 size; // at 0xC
+				u32 waveDataOffset; // at 0x10
+				u32 waveDataSize; // at 0x14
 			};
 			
 			struct GroupItemInfo
 			{
-				UNKWORD WORD_0x0;
-				u32 INT_0x4;
-				u32 INT_0x8;
-				u32 INT_0xC;
-				UNKWORD WORD_0x10;
+				u32 fileId;         // at 0x0
+				u32 offset;         // at 0x4
+				u32 size;           // at 0x8
+				u32 waveDataOffset; // at 0xC
+				u32 waveDataSize;   // at 0x10
 			};
 			
 			struct FileInfo
@@ -99,8 +99,8 @@ namespace nw4r
 			
 			struct FilePos
 			{
-				u32 mGroupIndex; // at 0x0
-				u32 mGroupItemIndex; // at 0x4
+				u32 groupId; // at 0x0
+				u32 index;   // at 0x4
 			};
 			
 			virtual ~SoundArchive(); // at 0x8

@@ -187,15 +187,15 @@ DvdSoundArchive::DvdFileStream::DvdFileStream(s32 entrynum, u32 offset,
     ut::DvdFileStream::Seek(mOffset, SEEK_BEG);
 }
 
-s32 DvdSoundArchive::DvdFileStream::Read(void* pBuffer, u32 count) {
+s32 DvdSoundArchive::DvdFileStream::Read(void* pDst, u32 size) {
     u32 endOffset = mOffset + mSize;
     u32 startOffset = ut::DvdFileStream::Tell();
 
-    if (startOffset + count > endOffset) {
-        count = ut::RoundUp(endOffset - ut::DvdFileStream::Tell(), 32);
+    if (startOffset + size > endOffset) {
+        size = ut::RoundUp(endOffset - ut::DvdFileStream::Tell(), 32);
     }
 
-    return DvdLockedFileStream::Read(pBuffer, count);
+    return DvdLockedFileStream::Read(pDst, size);
 }
 
 void DvdSoundArchive::DvdFileStream::Seek(s32 offset, u32 origin) {
@@ -203,12 +203,15 @@ void DvdSoundArchive::DvdFileStream::Seek(s32 offset, u32 origin) {
     case SEEK_BEG:
         offset += mOffset;
         break;
+
     case SEEK_CUR:
         offset += ut::DvdFileStream::Tell();
         break;
+
     case SEEK_END:
         offset = mOffset + mSize - offset;
         break;
+
     default:
         return;
     }

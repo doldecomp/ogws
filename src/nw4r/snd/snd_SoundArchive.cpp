@@ -174,14 +174,14 @@ namespace nw4r
 			
 			if (!detail_ReadFilePos(index, 0, &filePos)) return NULL;
 			
-			if (!detail_ReadGroupInfo(filePos.mGroupIndex, &groupInfo)) return NULL;
+			if (!detail_ReadGroupInfo(filePos.groupId, &groupInfo)) return NULL;
 			
-			if (!detail_ReadGroupItemInfo(filePos.mGroupIndex, filePos.mGroupItemIndex, &groupItemInfo)) return NULL;
+			if (!detail_ReadGroupItemInfo(filePos.groupId, filePos.index, &groupItemInfo)) return NULL;
 			
-			u32 startOffset = groupInfo.INT_0x8 + groupItemInfo.INT_0x4;
-			u32 streamSize = groupItemInfo.INT_0x8;
+			u32 startOffset = groupInfo.offset + groupItemInfo.offset;
+			u32 streamSize = groupItemInfo.size;
 			
-			if (groupInfo.mExternalFileName) return OpenExtStreamImpl(pBuffer, bufferSize, groupInfo.mExternalFileName, startOffset, streamSize);
+			if (groupInfo.extFilePath) return OpenExtStreamImpl(pBuffer, bufferSize, groupInfo.extFilePath, startOffset, streamSize);
 			
 			return OpenStream(pBuffer, bufferSize, startOffset, streamSize);
 		}
@@ -192,9 +192,9 @@ namespace nw4r
 			
 			if (!detail_ReadGroupInfo(index, &groupInfo)) return NULL;
 			
-			if (groupInfo.mExternalFileName) return OpenExtStreamImpl(pBuffer, bufferSize, groupInfo.mExternalFileName, groupInfo.INT_0x8, groupInfo.INT_0xC);
+			if (groupInfo.extFilePath) return OpenExtStreamImpl(pBuffer, bufferSize, groupInfo.extFilePath, groupInfo.offset, groupInfo.size);
 			
-			return OpenStream(pBuffer, bufferSize, groupInfo.INT_0x8, groupInfo.INT_0xC);
+			return OpenStream(pBuffer, bufferSize, groupInfo.offset, groupInfo.size);
 		}
 		
 		FileStream * SoundArchive::detail_OpenGroupWaveDataStream(u32 index, void * pBuffer, int bufferSize) const
@@ -203,9 +203,9 @@ namespace nw4r
 			
 			if (!detail_ReadGroupInfo(index, &groupInfo)) return NULL;
 			
-			if (groupInfo.mExternalFileName) return OpenExtStreamImpl(pBuffer, bufferSize, groupInfo.mExternalFileName, groupInfo.INT_0x10, groupInfo.INT_0x14);
+			if (groupInfo.extFilePath) return OpenExtStreamImpl(pBuffer, bufferSize, groupInfo.extFilePath, groupInfo.waveDataOffset, groupInfo.waveDataSize);
 			
-			return OpenStream(pBuffer, bufferSize, groupInfo.INT_0x10, groupInfo.INT_0x14);
+			return OpenStream(pBuffer, bufferSize, groupInfo.waveDataOffset, groupInfo.waveDataSize);
 		}
 		
 		UNKTYPE SoundArchive::SetExternalFileRoot(const char * pExternalFileRoot)

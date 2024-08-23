@@ -87,7 +87,7 @@ namespace nw4r
 				if (!mArchive.detail_ReadGroupInfo(index, &groupInfo)) return NULL;
 				
 				//80043744
-				if (groupInfo.INT_0x14)
+				if (groupInfo.waveDataSize)
 				{
 					//80043750
 					FileStreamHandle waveDataHandle(mArchive.detail_OpenGroupWaveDataStream(index, mBuffer, sizeof mBuffer));
