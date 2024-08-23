@@ -2,6 +2,7 @@
 
 #include <nw4r/snd.h>
 #include <nw4r/ut.h>
+#include <revolution/DVD.h>
 
 namespace nw4r {
 namespace snd {
@@ -25,7 +26,7 @@ public:
 
 private:
     s32 mOffset; // at 0x70
-    u32 mSize;   // at 0x74
+    s32 mSize;   // at 0x74
 };
 
 DvdSoundArchive::DvdSoundArchive() : mOpen(false) {}
@@ -112,7 +113,7 @@ int DvdSoundArchive::detail_GetRequiredStreamBufferSize() const {
 
 bool DvdSoundArchive::LoadFileHeader() {
     // TODO: How is this calculated?
-    u8 headerArea[0x68];
+    u8 headerArea[ROUND_UP(sizeof(detail::SoundArchiveFile::Header), 32) + 40];
 
     static const u32 headerAlignSize =
         ut::RoundUp(sizeof(detail::SoundArchiveFile::Header), 32);
@@ -218,7 +219,7 @@ void DvdSoundArchive::DvdFileStream::Seek(s32 offset, u32 origin) {
 
     if (offset < mOffset) {
         offset = mOffset;
-    } else if (offset > static_cast<int>(mOffset + mSize)) {
+    } else if (offset > mOffset + mSize) {
         offset = mOffset + mSize;
     }
 

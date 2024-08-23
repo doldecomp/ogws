@@ -83,7 +83,7 @@ NW4R_O_FILES := \
 	build/nw4r/snd/snd_MmlParser.o \
 	build/nw4r/snd/snd_MmlSeqTrack.o \
 	build/nw4r/snd/snd_MmlSeqTrackAllocator.o \
-	build/asm/nw4r/snd/snd_NandSoundArchive.o \
+	build/nw4r/snd/snd_NandSoundArchive.o \
 	build/nw4r/snd/snd_RemoteSpeaker.o \
 	build/nw4r/snd/snd_RemoteSpeakerManager.o \
 	build/nw4r/snd/snd_SeqFile.o \

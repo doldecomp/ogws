@@ -143,7 +143,7 @@ namespace EGG
         {
             mIsOpeningArchive = true;
 
-            headerBufSize = nandSndArchive->mFileReader.mHeader.mInfoChunkSize;
+            headerBufSize = nandSndArchive->GetHeaderSize();
             void *headerBuf = heap->Alloc(headerBufSize, NULL, NULL);
             if (!nandSndArchive->LoadHeader(headerBuf, headerBufSize))
             {
@@ -167,7 +167,7 @@ namespace EGG
                 return NULL;
             }
 
-            headerBufSize = nandSndArchive->mFileReader.mHeader.mLabelStringChunkSize;
+            headerBufSize = nandSndArchive->GetLabelStringDataSize();
             void *stringDataBuf = heap->Alloc(headerBufSize, NULL, NULL);
             if (!nandSndArchive->LoadLabelStringData(stringDataBuf, headerBufSize))
             {

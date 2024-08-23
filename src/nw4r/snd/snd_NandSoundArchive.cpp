@@ -1,269 +1,274 @@
-#pragma ipa file
-#include <string.h>
-#include <new>
-#include <OSCache.h>
-#include "ut_algorithm.h"
-#include "snd_NandSoundArchive.h"
+#pragma ipa file // TODO: REMOVE AFTER REFACTOR
 
-namespace nw4r
-{
-    using namespace ut;
-    
-    namespace snd
-    {
-        using namespace detail;
-        
-        struct NandSoundArchive::NandFileStream : public ut::NandFileStream
-        {
-            int mStartOffset; // at 0x16c
-            int mSize; // at 0x170
-            
-            NandFileStream(const NANDFileInfo *, u32, u32); //inlined
-            NandFileStream(const char *, u32, u32); //inlined
-            
-            virtual ~NandFileStream() {} // at 0xC
-            virtual s32 Read(void *, u32); // at 0x14
-            virtual u32 GetSize() const; // at 0x40
-            virtual void Seek(s32, u32); // at 0x44
-            virtual u32 Tell() const; // at 0x58
-        };
+#include <nw4r/snd.h>
+#include <nw4r/ut.h>
+#include <revolution/NAND.h>
 
-        NandSoundArchive::NandSoundArchive() : mOpenFlag(false) {}
-        
-        NandSoundArchive::~NandSoundArchive()
-        {
-            Close();
-        }
-        
-        bool NandSoundArchive::Open(const char * pPath)
-        {
-            char currentDir[0x40];
-            char externalFileRoot[0x100];
-            
-            if (mOpenFlag) Close();
-            
-            if (NANDOpen(pPath, &mFileInfo, 1)) return false;
-            
-            mOpenFlag = true;
-            
-            if (!LoadFileHeader()) return false;
-            
-            NANDGetCurrentDir(currentDir);
-            
-            u32 curDirLength = strlen(currentDir);
-            
-            strncpy(externalFileRoot, currentDir, curDirLength);
-            
-            for (int i = strlen(pPath) - 1; i >= 0; i--)
-            {
-                if (pPath[i] == '/' || pPath[i] == '\\')
-                {
-                    strncat(externalFileRoot, pPath, i);
-                    externalFileRoot[curDirLength + i] = '\0';
-                    break;
-                }
-            }
-            
-            SoundArchive::SetExternalFileRoot(externalFileRoot);
-            
-            return true;
-        }
-        
-        void NandSoundArchive::Close()
-        {
-            if (mOpenFlag)
-            {
-                NANDClose(&mFileInfo);
-                mOpenFlag = false;
-            }
-            
-            SoundArchive::Shutdown();
-        }
-        
-        FileStream * NandSoundArchive::OpenStream(void * pBuffer, int bufferSize, u32 startOffset, u32 streamSize) const
-        {
-            if (mOpenFlag) return NULL;
-            
-            if (bufferSize < sizeof(NandFileStream)) return NULL;
-            
-            return new (pBuffer) NandFileStream(&mFileInfo, startOffset, streamSize);
-        }
-        
-        FileStream * NandSoundArchive::OpenExtStream(void * pBuffer, int bufferSize,  const char * pPath, u32 startOffset, u32 streamSize) const
-        {
-            if (mOpenFlag) return NULL;
-            
-            if (bufferSize < sizeof(NandFileStream)) return NULL;
-            
-            NandFileStream * pExtStream = new (pBuffer) NandFileStream(pPath, startOffset, streamSize);
-            
-            if (pExtStream->BOOL_0x4)
-            {
-                pExtStream->~NandFileStream();
-                return NULL;
-            }
-            
-            return pExtStream;
-        }
-        
-        int NandSoundArchive::detail_GetRequiredStreamBufferSize() const
-        {
-            return sizeof(NandFileStream);
-        }
-        
-        #ifdef __DECOMP_NON_MATCHING
-        bool NandSoundArchive::LoadFileHeader()
-        {
-            u8 unalignedHeader[0x68];
+namespace nw4r {
+namespace snd {
 
-            static const u32 headerAlignSize = RoundUp<u32>(sizeof(SoundArchiveFile::Header), 32);
-            void * alignedHeader = RoundUp<u8 *>(unalignedHeader, 32);
-            
-            if (NANDSeek(&mFileInfo, 0, 0)) return false;
-            
-            u32 bytesRead = NANDRead(&mFileInfo, alignedHeader, headerAlignSize);
-            
-            if (bytesRead != headerAlignSize) return false;
-            
-            mFileReader.Init(alignedHeader);
-            SoundArchive::Setup(&mFileReader);
-            
-            return true;
-        }
-        #else
-        #error This file has yet to be decompiled accurately. Use "snd_NandSoundArchive.s" instead.
-        #endif
+class NandSoundArchive::NandFileStream : public ut::NandFileStream {
+public:
+    NandFileStream(const NANDFileInfo* pFileInfo, u32 offset, u32 size);
+    NandFileStream(const char* pPath, u32 offset, u32 size);
+    virtual ~NandFileStream() {} // at 0xC
 
-        #ifdef __DECOMP_NON_MATCHING
-        bool NandSoundArchive::LoadHeader(void * pBuffer, u32 bufferSize)
-        {
-            u32 infoChunkSize = mFileReader.GetInfoChunkSize();
-            s32 infoChunkOffset = mFileReader.GetInfoChunkOffset();
-            
-            if (bufferSize < infoChunkSize) return false;
-            
-            s32 currentOffset = NANDSeek(&mFileInfo, infoChunkOffset, 0);
-            
-            if (currentOffset != infoChunkOffset) return false;
-            
-            u32 bytesRead = NANDRead(&mFileInfo, pBuffer, infoChunkSize);
-            
-            if (bytesRead != infoChunkSize) return false;
-            
-            mFileReader.SetInfoChunk(pBuffer, infoChunkSize);
-            
-            return true;
-        }
-        #else
-        #error This file has yet to be decompiled accurately. Use "snd_NandSoundArchive.s" instead.
-        #endif
-        
-        #ifdef __DECOMP_NON_MATCHING
-        bool NandSoundArchive::LoadLabelStringData(void * pBuffer, u32 bufferSize)
-        {
-            u32 labelStringChunkSize = mFileReader.GetLabelStringChunkSize();
-            s32 labelStringChunkOffset = mFileReader.GetLabelStringChunkOffset();
-            
-            if (bufferSize < labelStringChunkSize) return false;
-            
-            s32 currentOffset = NANDSeek(&mFileInfo, labelStringChunkOffset, 0);
-            
-            if (currentOffset != labelStringChunkOffset) return false;
-            
-            u32 bytesRead = NANDRead(&mFileInfo, pBuffer, labelStringChunkSize);
-            
-            if (bytesRead != labelStringChunkSize) return false;
-            
-            mFileReader.SetStringChunk(pBuffer, labelStringChunkSize);
-            
-            return true;
-        }
-        #else
-        #error This file has yet to be decompiled accurately. Use "snd_NandSoundArchive.s" instead.
-        #endif
+    virtual s32 Read(void* pDst, u32 size); // at 0x14
 
-        NandSoundArchive::NandFileStream::NandFileStream(const NANDFileInfo * pFileInfo, u32 startOffset, u32 size)
-            : ut::NandFileStream(pFileInfo, 1, false), mStartOffset(startOffset), mSize(size)
-        {
-            if (BOOL_0x4)
-            {
-                if (!mSize) mSize = mFilePosition.GetFileSize();
-                
-                ut::NandFileStream::Seek(mStartOffset, 0);
-            }
-        }
+    virtual u32 GetSize() const {
+        return mSize;
+    } // at 0x40
 
-        NandSoundArchive::NandFileStream::NandFileStream(const char * pFileName, u32 startOffset, u32 size)
-            : ut::NandFileStream(pFileName, 1), mStartOffset(startOffset), mSize(size)
-        {
-            if (BOOL_0x4)
-            {
-                if (!mSize) mSize = mFilePosition.GetFileSize();
-                
-                ut::NandFileStream::Seek(mStartOffset, 0);
-            }
-        }
+    virtual void Seek(s32, u32); // at 0x44
 
-        int NandSoundArchive::NandFileStream::Read(void * pBuffer, u32 count)
-        {
-            u32 endOffset = mStartOffset + mSize;
-            
-            if (mFilePosition.Tell() + count > endOffset) count = RoundUp<u32>(endOffset - mFilePosition.Tell(), 0x20);
-            
-            int ret = ut::NandFileStream::Read(pBuffer, count);
-            
-            DCStoreRange(pBuffer, count);
-            
-            return ret;
-        }
-        
-        void NandSoundArchive::NandFileStream::Seek(s32 offset, u32 origin)
-        {
-            switch (origin)
-            {
-                case 0:
-                    offset += mStartOffset;
-                    break;
-                case 1:
-                    offset += mFilePosition.Tell();
-                    break;
-                case 2:
-                    offset = mStartOffset + mSize - offset;
-                    break;
-                default:
-                    return;
-            }
-            
-            if (offset < mStartOffset)
-            {
-                offset = mStartOffset;
-            }
-            else if (offset > mStartOffset + mSize)
-            {
-                offset = mStartOffset + mSize;
-            }
-            
-            ut::NandFileStream::Seek(offset, 0);
-        }
-        
-        u32 NandSoundArchive::NandFileStream::GetSize() const
-        {
-            return mSize;
-        }
-        
-        u32 NandSoundArchive::NandFileStream::Tell() const
-        {
-            return mFilePosition.Tell() - mStartOffset;
-        }
-        
-        const void * NandSoundArchive::detail_GetWaveDataFileAddress(u32) const
-        {
-            return NULL;
-        }
-        
-        const void * NandSoundArchive::detail_GetFileAddress(u32) const
-        {
-            return NULL;
+    virtual u32 Tell() const {
+        return ut::NandFileStream::Tell() - mOffset;
+    } // at 0x58
+
+private:
+    s32 mOffset; // at 0x16C
+    s32 mSize;   // at 0x170
+};
+
+NandSoundArchive::NandSoundArchive() : mOpen(false) {}
+
+NandSoundArchive::~NandSoundArchive() {
+    Close();
+}
+
+bool NandSoundArchive::Open(const char* pPath) {
+    if (mOpen) {
+        Close();
+    }
+
+    if (NANDOpen(pPath, &mFileInfo, 1)) {
+        return false;
+    }
+
+    mOpen = true;
+
+    if (!LoadFileHeader()) {
+        return false;
+    }
+
+    char currentDir[64];
+    NANDGetCurrentDir(currentDir);
+    u32 currDirLen = strlen(currentDir);
+
+    char extRoot[256];
+    strncpy(extRoot, currentDir, currDirLen + 1);
+
+    for (int i = strlen(pPath) - 1; i >= 0; i--) {
+        if (pPath[i] == '/' || pPath[i] == '\\') {
+            // @bug Long path can overflow extRoot buffer
+            strncat(extRoot, pPath, i);
+            extRoot[currDirLen + i] = '\0';
+            break;
         }
     }
+
+    SetExternalFileRoot(extRoot);
+    return true;
 }
+
+void NandSoundArchive::Close() {
+    if (mOpen) {
+        NANDClose(&mFileInfo);
+        mOpen = false;
+    }
+
+    Shutdown();
+}
+
+ut::FileStream* NandSoundArchive::OpenStream(void* pBuffer, int size,
+                                             u32 offset, u32 length) const {
+    if (!mOpen) {
+        return NULL;
+    }
+
+    if (size < sizeof(NandFileStream)) {
+        return NULL;
+    }
+
+    return new (pBuffer) NandFileStream(&mFileInfo, offset, length);
+}
+
+ut::FileStream* NandSoundArchive::OpenExtStream(void* pBuffer, int size,
+                                                const char* pExtPath,
+                                                u32 offset, u32 length) const {
+    if (!mOpen) {
+        return NULL;
+    }
+
+    if (size < sizeof(NandFileStream)) {
+        return NULL;
+    }
+
+    NandFileStream* pExtStream =
+        new (pBuffer) NandFileStream(pExtPath, offset, length);
+
+    if (!pExtStream->IsAvailable()) {
+        pExtStream->~NandFileStream();
+        return NULL;
+    }
+
+    return pExtStream;
+}
+
+int NandSoundArchive::detail_GetRequiredStreamBufferSize() const {
+    return sizeof(NandFileStream);
+}
+
+bool NandSoundArchive::LoadFileHeader() {
+    // TODO: How is this calculated?
+    u8 headerArea[ROUND_UP(sizeof(detail::SoundArchiveFile::Header), 32) + 40];
+
+    static const u32 headerAlignSize =
+        ut::RoundUp(sizeof(detail::SoundArchiveFile::Header), 32);
+
+    void* pFile = ut::RoundUp<u8>(headerArea, 32);
+
+    if (NANDSeek(&mFileInfo, 0, NAND_SEEK_BEG) != NAND_RESULT_OK) {
+        return false;
+    }
+
+    u32 bytesRead = NANDRead(&mFileInfo, pFile, headerAlignSize);
+    if (bytesRead != headerAlignSize) {
+        return false;
+    }
+
+    mFileReader.Init(pFile);
+    Setup(&mFileReader);
+
+    return true;
+}
+
+bool NandSoundArchive::LoadHeader(void* pBuffer, u32 size) {
+    s32* new_var;
+    u32 infoSize = mFileReader.GetInfoChunkSize();
+    s32 infoOffset = mFileReader.GetInfoChunkOffset();
+
+    if (size < infoSize) {
+        return false;
+    }
+
+    // TODO: Fakematch
+    s32 currOffset =
+        NANDSeek(&mFileInfo, *(new_var = &infoOffset), NAND_SEEK_BEG);
+    if (currOffset != (*new_var)) {
+        return false;
+    }
+
+    u32 bytesRead = NANDRead(&mFileInfo, pBuffer, infoSize);
+    if (bytesRead != infoSize) {
+        return false;
+    }
+
+    mFileReader.SetInfoChunk(pBuffer, infoSize);
+    return true;
+}
+
+bool NandSoundArchive::LoadLabelStringData(void* pBuffer, u32 size) {
+    s32* new_var;
+    u32 labelSize = mFileReader.GetLabelStringChunkSize();
+    s32 labelOffset = mFileReader.GetLabelStringChunkOffset();
+
+    if (size < labelSize) {
+        return false;
+    }
+
+    // TODO: Fakematch
+    s32 currOffset =
+        NANDSeek(&mFileInfo, *(new_var = &labelOffset), NAND_SEEK_BEG);
+    if (currOffset != (*new_var)) {
+        return false;
+    }
+
+    u32 bytesRead = NANDRead(&mFileInfo, pBuffer, labelSize);
+    if (bytesRead != labelSize) {
+        return false;
+    }
+
+    mFileReader.SetStringChunk(pBuffer, labelSize);
+    return true;
+}
+
+NandSoundArchive::NandFileStream::NandFileStream(const NANDFileInfo* pFileInfo,
+                                                 u32 offset, u32 size)
+    : ut::NandFileStream(pFileInfo, NAND_ACCESS_READ, false),
+      mOffset(offset),
+      mSize(size) {
+
+    if (IsAvailable()) {
+        if (mSize == 0) {
+            mSize = ut::NandFileStream::GetSize();
+        }
+
+        ut::NandFileStream::Seek(mOffset, SEEK_BEG);
+    }
+}
+
+NandSoundArchive::NandFileStream::NandFileStream(const char* pPath, u32 offset,
+                                                 u32 size)
+    : ut::NandFileStream(pPath, NAND_ACCESS_READ),
+      mOffset(offset),
+      mSize(size) {
+
+    if (IsAvailable()) {
+        if (mSize == 0) {
+            mSize = ut::NandFileStream::GetSize();
+        }
+
+        ut::NandFileStream::Seek(mOffset, SEEK_BEG);
+    }
+}
+
+s32 NandSoundArchive::NandFileStream::Read(void* pDst, u32 size) {
+    u32 endOffset = mOffset + mSize;
+    u32 startOffset = ut::NandFileStream::Tell();
+
+    if (startOffset + size > endOffset) {
+        size = ut::RoundUp(endOffset - ut::NandFileStream::Tell(), 32);
+    }
+
+    s32 bytesRead = ut::NandFileStream::Read(pDst, size);
+    DCStoreRange(pDst, size);
+
+    return bytesRead;
+}
+
+void NandSoundArchive::NandFileStream::Seek(s32 offset, u32 origin) {
+    switch (origin) {
+    case SEEK_BEG:
+        offset += mOffset;
+        break;
+
+    case SEEK_CUR:
+        offset += ut::NandFileStream::Tell();
+        break;
+
+    case SEEK_END:
+        offset = mOffset + mSize - offset;
+        break;
+
+    default:
+        return;
+    }
+
+    if (offset < mOffset) {
+        offset = mOffset;
+    } else if (offset > mOffset + mSize) {
+        offset = mOffset + mSize;
+    }
+
+    ut::NandFileStream::Seek(offset, SEEK_BEG);
+}
+
+// clang-format off
+DECOMP_FORCEACTIVE(snd_NandSoundArchive_cpp,
+                   NandSoundArchive::NandFileStream::GetSize,
+                   NandSoundArchive::NandFileStream::Tell);
+// clang-format on
+
+} // namespace snd
+} // namespace nw4r
