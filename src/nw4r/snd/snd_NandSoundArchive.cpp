@@ -144,18 +144,17 @@ bool NandSoundArchive::LoadFileHeader() {
 }
 
 bool NandSoundArchive::LoadHeader(void* pBuffer, u32 size) {
-    s32* new_var;
     u32 infoSize = mFileReader.GetInfoChunkSize();
     s32 infoOffset = mFileReader.GetInfoChunkOffset();
+    // TODO: Fakematch
+    s32* new_var = &infoOffset;
 
     if (size < infoSize) {
         return false;
     }
 
-    // TODO: Fakematch
-    s32 currOffset =
-        NANDSeek(&mFileInfo, *(new_var = &infoOffset), NAND_SEEK_BEG);
-    if (currOffset != (*new_var)) {
+    s32 currOffset = NANDSeek(&mFileInfo, *new_var, NAND_SEEK_BEG);
+    if (currOffset != infoOffset) {
         return false;
     }
 
@@ -169,18 +168,17 @@ bool NandSoundArchive::LoadHeader(void* pBuffer, u32 size) {
 }
 
 bool NandSoundArchive::LoadLabelStringData(void* pBuffer, u32 size) {
-    s32* new_var;
     u32 labelSize = mFileReader.GetLabelStringChunkSize();
     s32 labelOffset = mFileReader.GetLabelStringChunkOffset();
+    // TODO: Fakematch
+    s32* new_var = &labelOffset;
 
     if (size < labelSize) {
         return false;
     }
 
-    // TODO: Fakematch
-    s32 currOffset =
-        NANDSeek(&mFileInfo, *(new_var = &labelOffset), NAND_SEEK_BEG);
-    if (currOffset != (*new_var)) {
+    s32 currOffset = NANDSeek(&mFileInfo, *new_var, NAND_SEEK_BEG);
+    if (currOffset != labelOffset) {
         return false;
     }
 
