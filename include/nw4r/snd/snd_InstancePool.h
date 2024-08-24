@@ -23,8 +23,6 @@ private:
 
 template <typename T> class InstancePool : private PoolImpl {
 public:
-    InstancePool() {}
-
     u32 Create(void* pBuffer, u32 size) {
         return CreateImpl(pBuffer, size, sizeof(T));
     }
@@ -56,8 +54,6 @@ public:
 
 template <typename T> class MemoryPool : private PoolImpl {
 public:
-    MemoryPool() {}
-
     u32 Create(void* pBuffer, u32 size) {
         return CreateImpl(pBuffer, size, sizeof(T));
     }

@@ -436,7 +436,7 @@ namespace nw4r
 				//END (8003F390)
 			}
 			
-			bool SeqPlayer::NoteOn(int r_4, const NoteOnInfo & noteOnInfo)
+			Channel* SeqPlayer::NoteOn(int r_4, const NoteOnInfo & noteOnInfo)
 			{
 				return mNoteOnCallback->NoteOn(this, r_4, noteOnInfo);
 			}

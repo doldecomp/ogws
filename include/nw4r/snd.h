@@ -28,6 +28,8 @@
 #include <nw4r/snd/snd_MemorySoundArchive.h>
 #include <nw4r/snd/snd_MoveValue.h>
 #include <nw4r/snd/snd_NandSoundArchive.h>
+#include <nw4r/snd/snd_SeqPlayer.h>
+#include <nw4r/snd/snd_SeqTrack.h>
 #include <nw4r/snd/snd_SoundHandle.h>
 #include <nw4r/snd/snd_SoundPlayer.h>
 #include <nw4r/snd/snd_StrmFile.h>

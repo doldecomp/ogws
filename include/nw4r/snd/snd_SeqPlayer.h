@@ -26,6 +26,15 @@ namespace nw4r
 			//sizeof(SeqPlayer) = 0x11C
 			struct SeqPlayer : BasicPlayer, DisposeCallback, SoundThread::PlayerCallback
 			{
+				struct ParserPlayerParam
+				{
+					u8 volume;                // at 0x0
+					u8 priority;              // at 0x1
+					u8 timebase;              // at 0x2
+					u16 tempo;                // at 0x4
+					NoteOnCallback* callback; // at 0x8
+				};
+
 				enum OffsetType
 				{
 					OFFSET_TYPE_0,
@@ -55,12 +64,8 @@ namespace nw4r
 				int OFFSET_0x9C;
 				float OFFSET_0xA0;
 				int INT_0xA4;
-				char BYTE_0xA8;
-				u8 mChannelPriority; // at 0xa9
-				u8 BYTE_0xAA;
-				u16 SHORT_0xAC;
-				
-				NoteOnCallback * mNoteOnCallback; // at 0xb0
+
+				ParserPlayerParam mParserPlayerParam; // at 0xA8
 				SeqTrackAllocator * mTrackAllocator; // at 0xb4
 				SeqTrack * mPlayerTracks[SEQ_TRACKS_PER_PLAYER]; // at 0xb8
 				volatile s16 mLocalVariables[SEQ_VARIABLE_COUNT]; // at 0xf8
@@ -112,7 +117,7 @@ namespace nw4r
 				void Update();
 				void UpdateTick();
 				void UpdateTick(int);
-				bool NoteOn(int, const NoteOnInfo &);
+				Channel* NoteOn(int, const NoteOnInfo &);
 				inline void OnUpdateFrameSoundThread()
 				{
 					Update();
@@ -125,9 +130,30 @@ namespace nw4r
 				
 				inline float GetBaseTempo() const
 				{
-					return mTempoRatio * (BYTE_0xAA * SHORT_0xAC) / 60000.0f;
+					return mTempoRatio *
+						(mParserPlayerParam.timebase * mParserPlayerParam.tempo) / 60000.0f;
 				}
 				
+				bool IsReleasePriorityFix() const
+				{
+					return mReleasePriorityFixFlag;
+				}
+
+				int GetVoiceOutCount() const
+				{
+					return INT_0xA4;
+				}
+
+				ParserPlayerParam& GetParserPlayerParam()
+				{
+					return mParserPlayerParam;
+				}
+
+				f32 GetPanRange() const
+				{
+					return FLOAT_0x90;
+				}
+
 				static volatile s16 mGlobalVariable[SEQ_VARIABLE_COUNT];
 				static bool mGobalVariableInitialized; // typo
 			};

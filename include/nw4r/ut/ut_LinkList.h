@@ -33,7 +33,7 @@
  * Explicitly instantiate a linked list specialization.
  * (RESERVED FOR MATCHING DECOMP HACKS)
  */
-#ifndef NON_MATCHING
+#ifndef __DECOMP_NON_MATCHING
 #define NW4R_UT_LIST_TYPEDEF_FORCE(T)                                          \
     template struct nw4r::ut::LinkList<T, offsetof(T, node)>
 #else
