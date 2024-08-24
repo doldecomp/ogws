@@ -120,14 +120,6 @@ public:
 
     Channel* NoteOn(int key, int velocity, s32 length, bool tie);
 
-    /*
-    Inlines:
-
-    SetTrackParam<SeqMute>
-    SetTrackParam<bool, int>
-    SetTrackParam<f32>
-    */
-
 private:
     static const int scVariableNum = 16;
 
