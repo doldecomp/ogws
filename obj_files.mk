@@ -90,7 +90,7 @@ NW4R_O_FILES := \
 	build/nw4r/snd/snd_SeqPlayer.o \
 	build/nw4r/snd/snd_SeqSound.o \
 	build/nw4r/snd/snd_SeqSoundHandle.o \
-	build/asm/nw4r/snd/snd_SeqTrack.o \
+	build/nw4r/snd/snd_SeqTrack.o \
 	build/nw4r/snd/snd_Sound3DActor.o \
 	build/nw4r/snd/snd_Sound3DListener.o \
 	build/nw4r/snd/snd_Sound3DManager.o \

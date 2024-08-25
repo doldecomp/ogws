@@ -1,10 +1,8 @@
-#pragma ipa file
-#include <OSMutex.h>
-#include "ut_lock.h"
-#include "snd_SoundThread.h"
-#include "snd_SeqPlayer.h"
-#include "snd_SeqTrack.h"
-#include "snd_DisposeCallbackManager.h"
+#pragma ipa file // TODO: REMOVE AFTER REFACTOR
+
+#include <nw4r/snd.h>
+#include <nw4r/ut.h>
+#include <revolution/OS.h>
 
 namespace nw4r
 {
@@ -25,11 +23,11 @@ namespace nw4r
 				FLOAT_0x90 = 1.0f;
 				INT_0x118 = 0;
 				INT_0xA4 = 0;
-				SHORT_0xAC = 120;
-				BYTE_0xAA = 0x30;
-				BYTE_0xA8 = 0x7F;
-				mChannelPriority = 0x40;
-				mNoteOnCallback = NULL;
+				mParserPlayerParam.tempo = 120;
+				mParserPlayerParam.timebase = 0x30;
+				mParserPlayerParam.volume = 0x7F;
+				mParserPlayerParam.priority = 0x40;
+				mParserPlayerParam.callback = NULL;
 				for (int i = 0; i < SEQ_VARIABLE_COUNT; i++)
 				{
 					mLocalVariables[i] = -1;
@@ -60,11 +58,11 @@ namespace nw4r
 				FLOAT_0x90 = 1.0f;
 				INT_0x118 = 0;
 				INT_0xA4 = r4_30;
-				SHORT_0xAC = 120;
-				BYTE_0xAA = 0x30;
-				BYTE_0xA8 = 0x7F;
-				mChannelPriority = 0x40;
-				mNoteOnCallback = pNoteOnCallback;
+				mParserPlayerParam.tempo = 120;
+				mParserPlayerParam.timebase = 0x30;
+				mParserPlayerParam.volume = 0x7F;
+				mParserPlayerParam.priority = 0x40;
+				mParserPlayerParam.callback = pNoteOnCallback;
 				FLOAT_0x98 = 0.0f;
 				for (int i = 0; i < SEQ_VARIABLE_COUNT; i++)
 				{
@@ -222,7 +220,7 @@ namespace nw4r
 			
 			void SeqPlayer::SetChannelPriority(int channelPriority)
 			{
-				mChannelPriority = channelPriority;
+				mParserPlayerParam.priority = channelPriority;
 			}
 			
 			void SeqPlayer::SetReleasePriorityFix(bool releasePriorityFixFlag)
@@ -272,7 +270,8 @@ namespace nw4r
 					{
 						SeqTrack * pTrack = GetPlayerTrack(i);
 						
-						if (pTrack && pStart <= pTrack->PTR_0x50 && pTrack->PTR_0x50 <= pEnd)
+						if (pTrack && pStart <= pTrack->GetParserTrackParam().baseAddr
+							&& pTrack->GetParserTrackParam().baseAddr <= pEnd)
 						{
 							SeqPlayer::Stop();
 							break;
@@ -438,7 +437,7 @@ namespace nw4r
 			
 			Channel* SeqPlayer::NoteOn(int r_4, const NoteOnInfo & noteOnInfo)
 			{
-				return mNoteOnCallback->NoteOn(this, r_4, noteOnInfo);
+				return mParserPlayerParam.callback->NoteOn(this, r_4, noteOnInfo);
 			}
 			
 			bool SeqPlayer::mGobalVariableInitialized; // typo

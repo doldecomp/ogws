@@ -19,8 +19,6 @@ SeqTrack::~SeqTrack() {
     Close();
 }
 
-#ifdef __DECOMP_NON_MATCHING
-// https://decomp.me/scratch/bJtfE
 void SeqTrack::InitParam() {
     mExtVolume = 1.0f;
     mExtPitch = 1.0f;
@@ -84,13 +82,10 @@ void SeqTrack::InitParam() {
     mParserTrackParam.lfoParam.Init();
     mParserTrackParam.lfoTarget = Channel::LFO_TARGET_PITCH;
 
-    for (int i = 0; i < scVariableNum; i++) {
+    for (int i = 0; i < VARIABLE_NUM; i++) {
         mTrackVariable[i] = -1;
     }
 }
-#else
-#error This file has not yet been decompiled accurately. Use "snd_SeqTrack.s" instead.
-#endif
 
 void SeqTrack::SetSeqData(const void* pBase, s32 offset) {
     mParserTrackParam.baseAddr = static_cast<const u8*>(pBase);
@@ -142,7 +137,7 @@ void SeqTrack::UpdateChannelRelease(Channel* pChannel) {
     }
 }
 
-int SeqTrack::ParseNextTick(bool noteOn) {
+int SeqTrack::ParseNextTick(bool doNoteOn) {
     SoundThread::AutoLock lock;
 
     if (!mOpenFlag) {
@@ -165,7 +160,7 @@ int SeqTrack::ParseNextTick(bool noteOn) {
         while (mParserTrackParam.wait == 0 &&
                !mParserTrackParam.noteFinishWait) {
 
-            if (Parse(noteOn) == PARSE_RESULT_FINISH) {
+            if (Parse(doNoteOn) == PARSE_RESULT_FINISH) {
                 return -1;
             }
         }
@@ -400,8 +395,8 @@ void SeqTrack::SetPitch(f32 pitch) {
     mExtPitch = pitch;
 }
 
-s16* SeqTrack::GetVariablePtr(int i) {
-    if (i < scVariableNum) {
+volatile s16* SeqTrack::GetVariablePtr(int i) {
+    if (i < VARIABLE_NUM) {
         return &mTrackVariable[i];
     }
 

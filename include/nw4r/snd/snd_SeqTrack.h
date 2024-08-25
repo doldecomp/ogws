@@ -16,6 +16,9 @@ namespace detail {
 
 class SeqTrack {
 public:
+    static const int VARIABLE_NUM = 16;
+    static const int PRGNO_MAX = 0xFFFF;
+
     struct ParserTrackParam {
         const u8* baseAddr;    // at 0x0
         const u8* currentAddr; // at 0x4
@@ -63,8 +66,8 @@ public:
 
 public:
     SeqTrack();
-    virtual ~SeqTrack();                        // at 0x8
-    virtual ParseResult Parse(bool noteOn) = 0; // at 0xC
+    virtual ~SeqTrack();                          // at 0x8
+    virtual ParseResult Parse(bool doNoteOn) = 0; // at 0xC
 
     bool IsOpened() const {
         return mOpenFlag;
@@ -84,7 +87,7 @@ public:
     void UpdateChannelLength();
     void UpdateChannelRelease(Channel* pChannel);
 
-    int ParseNextTick(bool noteOn);
+    int ParseNextTick(bool doNoteOn);
 
     void StopAllChannel();
     void ReleaseAllChannel(int release);
@@ -105,7 +108,7 @@ public:
         return mParserTrackParam;
     }
 
-    s16* GetVariablePtr(int i);
+    volatile s16* GetVariablePtr(int i);
 
     SeqPlayer* GetSeqPlayer() {
         return mPlayer;
@@ -119,9 +122,6 @@ public:
     }
 
     Channel* NoteOn(int key, int velocity, s32 length, bool tie);
-
-private:
-    static const int scVariableNum = 16;
 
 private:
     u8 mPlayerTrackNo; // at 0x4
@@ -138,17 +138,10 @@ private:
     f32 mExtRemoteSend[WPAD_MAX_CONTROLLERS];   // at 0x30
     f32 mExtRemoteFxSend[WPAD_MAX_CONTROLLERS]; // at 0x40
 
-    ParserTrackParam mParserTrackParam; // at 0x50
-    s16 mTrackVariable[scVariableNum];  // at 0x98
-    SeqPlayer* mPlayer;                 // at 0xB8
-    Channel* mChannelList;              // at 0xBC
-};
-
-class SeqTrackAllocator {
-    virtual ~SeqTrackAllocator() {}                       // at 0x8
-    virtual SeqTrack* AllocTrack(SeqPlayer* pPlayer) = 0; // at 0xC
-    virtual void FreeTrack(SeqTrack* pTrack) = 0;         // at 0x10
-    virtual int GetAllocatableTrackCount() const = 0;     // at 0x14
+    ParserTrackParam mParserTrackParam;        // at 0x50
+    volatile s16 mTrackVariable[VARIABLE_NUM]; // at 0x98
+    SeqPlayer* mPlayer;                        // at 0xB8
+    Channel* mChannelList;                     // at 0xBC
 };
 
 } // namespace detail

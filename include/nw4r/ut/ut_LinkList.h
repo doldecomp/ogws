@@ -43,7 +43,7 @@
 namespace nw4r {
 namespace ut {
 
-// Forward declaration
+// Forward declarations
 namespace detail {
 class LinkListImpl;
 }
@@ -70,7 +70,7 @@ namespace detail {
 
 class LinkListImpl : private NonCopyable {
 public:
-    // Forward declaration
+    // Forward declarations
     class ConstIterator;
 
     class Iterator {
@@ -226,7 +226,7 @@ private:
 
 template <typename T, int Ofs> class LinkList : public detail::LinkListImpl {
 public:
-    // Forward declaration
+    // Forward declarations
     class ConstIterator;
 
     class Iterator {

@@ -22,10 +22,14 @@ namespace nw4r
 				SEQ_TRACKS_PER_PLAYER = 0x10,
 				SEQ_VARIABLE_COUNT = 0x10
 			};
-			
+
 			//sizeof(SeqPlayer) = 0x11C
 			struct SeqPlayer : BasicPlayer, DisposeCallback, SoundThread::PlayerCallback
 			{
+				static const int LOCAL_VARIABLE_NUM = 16;
+				static const int GLOBAL_VARIABLE_NUM = 16;
+				static const int VARIABLE_NUM = LOCAL_VARIABLE_NUM + GLOBAL_VARIABLE_NUM;
+
 				struct ParserPlayerParam
 				{
 					u8 volume;                // at 0x0

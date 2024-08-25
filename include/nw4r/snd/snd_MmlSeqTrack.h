@@ -1,40 +1,48 @@
 #ifndef NW4R_SND_MML_SEQ_TRACK_H
 #define NW4R_SND_MML_SEQ_TRACK_H
-#include "snd_SeqTrack.h"
-#include "types_nw4r.h"
+#include <nw4r/snd/snd_SeqTrack.h>
+#include <nw4r/types_nw4r.h>
 
-namespace nw4r
-{
-	namespace snd
-	{
-		namespace detail
-		{
-			struct MmlSeqTrack : SeqTrack
-			{
-				enum
-				{
-					STACK_FRAME_COUNT = 3
-				};
-				
-				struct MmlParserParam
-				{
-					bool mPredicate; // at 0x0
-					bool BOOL_0x1;
-					bool BOOL_0x2;
-					u8 mLoopCounters[STACK_FRAME_COUNT]; // at 0x3
-					u8 mStackIndex; // at 0x6
-					const u8 * mReturnAddresses[STACK_FRAME_COUNT]; // at 0x8
-				};
-				
-				MmlParser * mParser; // at 0xc0
-				MmlParserParam mMmlParserParam; // at 0xc4
-				
-				MmlSeqTrack();
-				
-				UNKWORD Parse(bool); // at 0xc
-			};
-		}
-	}
-}
+namespace nw4r {
+namespace snd {
+namespace detail {
+
+// Forward declarations
+class MmlParser;
+
+class MmlSeqTrack : public SeqTrack {
+public:
+    static const int CALL_STACK_NUM = 3;
+
+    struct MmlParserParam {
+        bool cmpFlag;                        // at 0x0
+        bool noteWaitFlag;                   // at 0x1
+        bool tieFlag;                        // at 0x2
+        u8 loopCount[CALL_STACK_NUM];        // at 0x3
+        u8 callStackDepth;                   // at 0x6
+        const u8* callStack[CALL_STACK_NUM]; // at 0x8
+    };
+
+public:
+    MmlSeqTrack();
+    virtual ~MmlSeqTrack() {}                 // at 0x8
+    virtual ParseResult Parse(bool doNoteOn); // at 0xC
+
+    void SetMmlParser(const MmlParser* pParser) {
+        mParser = pParser;
+    }
+
+    MmlParserParam& GetMmlParserParam() {
+        return mMmlParserParam;
+    }
+
+private:
+    const MmlParser* mParser;       // at 0xC0
+    MmlParserParam mMmlParserParam; // at 0xC4
+};
+
+} // namespace detail
+} // namespace snd
+} // namespace nw4r
 
 #endif

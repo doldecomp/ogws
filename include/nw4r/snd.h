@@ -26,10 +26,14 @@
 #include <nw4r/snd/snd_InstancePool.h>
 #include <nw4r/snd/snd_Lfo.h>
 #include <nw4r/snd/snd_MemorySoundArchive.h>
+#include <nw4r/snd/snd_MmlParser.h>
+#include <nw4r/snd/snd_MmlSeqTrack.h>
+#include <nw4r/snd/snd_MmlSeqTrackAllocator.h>
 #include <nw4r/snd/snd_MoveValue.h>
 #include <nw4r/snd/snd_NandSoundArchive.h>
 #include <nw4r/snd/snd_SeqPlayer.h>
 #include <nw4r/snd/snd_SeqTrack.h>
+#include <nw4r/snd/snd_SeqTrackAllocator.h>
 #include <nw4r/snd/snd_SoundHandle.h>
 #include <nw4r/snd/snd_SoundPlayer.h>
 #include <nw4r/snd/snd_StrmFile.h>

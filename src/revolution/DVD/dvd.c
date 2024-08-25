@@ -917,7 +917,7 @@ static void stateCoverClosed(void) {
         break;
     case COMMAND_RESET:
         MotorState = MOTOR_STATE_WORKING;
-    // fallthrough
+    // FALLTHROUGH
     case COMMAND_CLOSE_PARTITION:
     case COMMAND_GET_COVER_READY:
     case COMMAND_GET_COVER_STATUS:
@@ -929,7 +929,7 @@ static void stateCoverClosed(void) {
         if (__OSInIPL) {
             break;
         }
-    // fallthrough
+    // FALLTHROUGH
     default:
         MotorState = MOTOR_STATE_WORKING;
         DVDLowSetSpinupFlag(TRUE);
@@ -1778,7 +1778,7 @@ BOOL DVDCancelAsync(DVDCommandBlock* block, DVDCommandCallback callback) {
                 stateReady();
                 break;
             }
-        // fallthrough
+        // FALLTHROUGH
         default:
             if (Canceling) {
                 OSRestoreInterrupts(enabled);
