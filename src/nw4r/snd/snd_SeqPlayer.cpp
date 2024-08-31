@@ -196,11 +196,11 @@ void SeqPlayer::SetGlobalVariable(int i, s16 value) {
 }
 
 void SeqPlayer::SetTrackVolume(u32 trackFlags, f32 volume) {
-    SetTrackParam<f32>(trackFlags, SeqTrack::SetVolume, volume);
+    SetTrackParam<f32>(trackFlags, &SeqTrack::SetVolume, volume);
 }
 
 void SeqPlayer::SetTrackPitch(u32 trackFlags, f32 pitch) {
-    SetTrackParam<f32>(trackFlags, SeqTrack::SetPitch, pitch);
+    SetTrackParam<f32>(trackFlags, &SeqTrack::SetPitch, pitch);
 }
 
 void SeqPlayer::InvalidateData(const void* pStart, const void* pEnd) {

@@ -1,342 +1,362 @@
-#include <OSTime.h>
-#include <WPAD.h>
-#include <wenc.h>
-#include <string.h>
-#include "snd_RemoteSpeaker.h"
-#include "snd_RemoteSpeakerManager.h"
-#include "ut_lock.h"
+#pragma ipa file // TODO: REMOVE AFTER REFACTOR
 
-namespace nw4r
-{
-	using namespace ut;
-	
-	namespace snd
-	{
-		using namespace detail;
-		
-		RemoteSpeaker::RemoteSpeaker()
-		{
-			mPoweredFlag = false;
-			BOOL_0x1 = false;
-			mEnabledOutputFlag = false;
-			BOOL_0x3 = false;
-			BOOL_0x4 = false;
-			BOOL_0x5 = false;
-			BOOL_0x6 = false;
-			WORD_0xC = 0;
-			CMD_0x10 = SpeakerCommand_None;
-			CMD_0x14 = SpeakerCommand_None;
-			mCallback = NULL;
-			
-			OSCreateAlarm(&ALARM_0x40);
-			OSSetAlarmUserData(&ALARM_0x40, this);
-			
-			OSCreateAlarm(&ALARM_0x70);
-			OSSetAlarmUserData(&ALARM_0x70, this);
-		}
-		
-		void RemoteSpeaker::ClearParam()
-		{
-			BOOL_0x1 = false;
-			mEnabledOutputFlag = false;
-			OSCancelAlarm(&ALARM_0x40);
-			
-			BOOL_0x7 = false;
-			OSCancelAlarm(&ALARM_0x70);
-			
-			BOOL_0x8 = false;
-		}
-		
-		void RemoteSpeaker::InitParam()
-		{
-			ClearParam();
-			
-			BOOL_0x6 = false;
-			BOOL_0x7 = false;
-			BOOL_0x1 = false;
-			mEnabledOutputFlag = true;
-			BOOL_0x8 = false;
-		}
-		
-		bool RemoteSpeaker::Setup(RemoteSpeakerCallback callback)
-		{
-			AutoInterruptLock lock;
-			
-			InitParam();
-			
-			if (mCallback)
-			{
-				mCallback(mChannelIndex, 0);
-				BOOL_0x4 = false;
-			}
-			
-			mCallback = callback;
-			CMD_0x10 = SpeakerCommand_On;
-			mPoweredFlag = true;
-			
-			return true;
-		}
-		
-		void RemoteSpeaker::Shutdown(RemoteSpeakerCallback callback)
-		{
-			AutoInterruptLock lock;
-			
-			ClearParam();
-			
-			if (mCallback)
-			{
-				mCallback(mChannelIndex, 0);
-				BOOL_0x4 = false;
-			}
-			
-			CMD_0x10 = SpeakerCommand_Off;
-			mCallback = callback;
-			mPoweredFlag = false;
-		}
-		
-		bool RemoteSpeaker::EnableOutput(bool outputFlag)
-		{
-			if (!mPoweredFlag) return false;
-			mEnabledOutputFlag = outputFlag;
-			return true;
-		}
-		
-		bool RemoteSpeaker::IsEnabledOutput() const
-		{
-			return mPoweredFlag ? mEnabledOutputFlag : false;
-		}
-		
-		void RemoteSpeaker::Update()
-		{
-			if (BOOL_0x5) return;
-			
-			SpeakerCommand command = (CMD_0x10 != SpeakerCommand_None) ? CMD_0x10 : CMD_0x14;
-			
-			CMD_0x10 = SpeakerCommand_None;
-			CMD_0x14 = SpeakerCommand_None;
-			
-			ExecCommand(command);
-		}
-		
-		void RemoteSpeaker::ExecCommand(SpeakerCommand command)
-		{
-			switch (command)
-			{
-				case SpeakerCommand_None:
-					break;
-				case SpeakerCommand_On:
-					BOOL_0x4 = true;
-					BOOL_0x5 = true;
-					WORD_0xC = 1;
-					WPADControlSpeaker(mChannelIndex, 1, SpeakerOnCallback);
-					break;
-				case SpeakerCommand_Play:
-					BOOL_0x4 = true;
-					BOOL_0x5 = true;
-					WORD_0xC = 3;
-					WPADControlSpeaker(mChannelIndex, 4, SpeakerPlayCallback);
-					break;
-				case SpeakerCommand_Off:
-					BOOL_0x4 = true;
-					BOOL_0x5 = true;
-					WORD_0xC = 5;
-					WPADControlSpeaker(mChannelIndex, 0, SpeakerOffCallback);
-					break;
-			}
-		}
-		
-		bool RemoteSpeaker::IsAllSampleZero(const s16 * pSample)
-		{
-			const s32 * pSampleWords = reinterpret_cast<const s32 *>(pSample);
-			bool flag = true;
-			for (int i = 0; i < 20; i++)
-			{
-				if (pSampleWords[i])
-				{
-					flag = false;
-					break;
-				}
-			}
-			return flag;
-		}
-		
-		void RemoteSpeaker::UpdateStreamData(const s16 * pSample)
-		{
-			u8 streamData[20];
-			
-			if (WORD_0xC != 4) return;
-			
-			bool r30 = true;
-			if ((mEnabledOutputFlag ? IsAllSampleZero(pSample) : true) || BOOL_0x6) r30 = false;
-			
-			bool r26 = !BOOL_0x1 && r30;
-			bool r31 = BOOL_0x1 && !r30;
-			
-			if (r30)
-			{
-				AutoInterruptLock lock;
-				
-				if (!WPADCanSendStreamData(mChannelIndex)) return;
-				UNKWORD r4 = !BOOL_0x3;
-				BOOL_0x3 = false;
-				WENCGetEncodeData(&UNK_0x18, r4, pSample, 40, streamData);
-				if (WPADSendStreamData(mChannelIndex, streamData, 20))
-				{
-					WORD_0xC = 0;
-					CMD_0x14 = SpeakerCommand_On;
-					InitParam();
-					return;
-				}
-			}
-			//8003D694
-			if (r26)
-			{
-				AutoInterruptLock lock;
-				if (!BOOL_0x7)
-				{
-					u32 bs = OS_BUS_CLOCK_SPEED;
-					s64 busSpeed = bs / 4;
-					OSSetAlarm(&ALARM_0x40, busSpeed * 480, ContinueAlarmHandler);
-					mTime = OSGetTime();
-					BOOL_0x7 = true;
-				}
-				OSCancelAlarm(&ALARM_0x70);
-				BOOL_0x8 = false;
-			}
-			//8003D710
-			if (r31)
-			{
-				AutoInterruptLock lock;
-				
-				BOOL_0x8 = true;
-				OSCancelAlarm(&ALARM_0x70);
-				u32 busSpeed = OS_BUS_CLOCK_SPEED / 4;
-				OSSetAlarm(&ALARM_0x70, busSpeed, IntervalAlarmHandler);
-			}
-			//8003D758
-			BOOL_0x1 = r30;
-		}
-		
-		void RemoteSpeaker::NotifyCallback(s32 index, s32 arg2)
-		{
-			if (arg2 != -2 && BOOL_0x4 && mCallback)
-			{
-				mCallback(index, arg2);
-				mCallback = NULL;
-			}
-		}
-		
-		void RemoteSpeaker::SpeakerOnCallback(s32 index, s32 r30)
-		{
-			RemoteSpeaker * pSpeaker = RemoteSpeakerManager::GetInstance()->GetRemoteSpeaker(index);
-			
-			switch (r30)
-			{
-				case 0:
-					pSpeaker->BOOL_0x3 = true;
-					memset(&pSpeaker->UNK_0x18, 0, sizeof pSpeaker->UNK_0x18);
-					pSpeaker->WORD_0xC = 2;
-					pSpeaker->CMD_0x14 = SpeakerCommand_Play;
-					break;
-				case -2:
-					pSpeaker->CMD_0x14 = SpeakerCommand_On;
-					break;
-				case -3:
-					pSpeaker->WORD_0xC = 0;
-					break;
-				case -1:
-					pSpeaker->WORD_0xC = 0;
-					break;
-				default:
-					pSpeaker->WORD_0xC = 0;
-					break;
-			}
-			
-			if (r30) pSpeaker->NotifyCallback(index, r30);
-			
-			pSpeaker->BOOL_0x5 = false;
-		}
-		
-		void RemoteSpeaker::SpeakerPlayCallback(s32 index, s32 r30)
-		{
-			RemoteSpeaker * pSpeaker = RemoteSpeakerManager::GetInstance()->GetRemoteSpeaker(index);
-			
-			switch (r30)
-			{
-				case 0:
-					pSpeaker->WORD_0xC = 4;
-					break;
-				case -2:
-					pSpeaker->CMD_0x14 = SpeakerCommand_Play;
-					break;
-				case -3:
-					pSpeaker->WORD_0xC = 0;
-					break;
-				case -1:
-					pSpeaker->WORD_0xC = 0;
-					break;
-				default:
-					pSpeaker->WORD_0xC = 0;
-					break;
-			}
-			
-			pSpeaker->NotifyCallback(index, r30);
-			
-			pSpeaker->BOOL_0x5 = false;
-		}
-		
-		void RemoteSpeaker::SpeakerOffCallback(s32 index, s32 r30)
-		{
-			RemoteSpeaker * pSpeaker = RemoteSpeakerManager::GetInstance()->GetRemoteSpeaker(index);
-			
-			switch (r30)
-			{
-				case 0:
-					pSpeaker->WORD_0xC = 6;
-					break;
-				case -2:
-					pSpeaker->CMD_0x14 = SpeakerCommand_Off;
-					break;
-				case -3:
-					pSpeaker->WORD_0xC = 0;
-					break;
-				case -1:
-					pSpeaker->WORD_0xC = 0;
-					break;
-				default:
-					pSpeaker->WORD_0xC = 0;
-					break;
-			}
-			
-			pSpeaker->NotifyCallback(index, r30);
-			
-			pSpeaker->BOOL_0x5 = false;
-		}
-		
-		void RemoteSpeaker::ContinueAlarmHandler(OSAlarm * pAlarm, OSContext *)
-		{
-			AutoInterruptLock lock;
-			
-			RemoteSpeaker * pSpeaker = static_cast<RemoteSpeaker *>(OSGetAlarmUserData(pAlarm));
-			
-			pSpeaker->BOOL_0x6 = true;
-			pSpeaker->BOOL_0x7 = false;
-		}
-		
-		void RemoteSpeaker::IntervalAlarmHandler(OSAlarm * pAlarm, OSContext *)
-		{
-			AutoInterruptLock lock;
-			
-			RemoteSpeaker * pSpeaker = static_cast<RemoteSpeaker *>(OSGetAlarmUserData(pAlarm));
-			
-			if (pSpeaker->BOOL_0x8)
-			{
-				OSCancelAlarm(&pSpeaker->ALARM_0x40);
-				pSpeaker->BOOL_0x6 = false;
-				pSpeaker->BOOL_0x7 = false;
-			}
-			
-			pSpeaker->BOOL_0x8 = false;
-		}
-	}
+#include <cstring>
+#include <nw4r/snd.h>
+#include <nw4r/ut.h>
+#include <revolution/OS.h>
+#include <revolution/WENC.h>
+#include <revolution/WPAD.h>
+
+namespace nw4r {
+namespace snd {
+
+RemoteSpeaker::RemoteSpeaker()
+    : mInitFlag(false),
+      mPlayFlag(false),
+      mEnableFlag(false),
+      mFirstEncodeFlag(false),
+      mValidCallbackFlag(false),
+      mCommandBusyFlag(false),
+      mForceResumeFlag(false),
+      mState(STATE_INVALID),
+      mUserCommand(COMMAND_NONE),
+      mInternalCommand(COMMAND_NONE),
+      mWpadCallback(NULL) {
+
+    OSCreateAlarm(&mContinueAlarm);
+    OSSetAlarmUserData(&mContinueAlarm, this);
+
+    OSCreateAlarm(&mIntervalAlarm);
+    OSSetAlarmUserData(&mIntervalAlarm, this);
 }
+
+void RemoteSpeaker::InitParam() {
+    ClearParam();
+
+    mForceResumeFlag = false;
+    mContinueFlag = false;
+    mPlayFlag = false;
+    mEnableFlag = true;
+    mIntervalFlag = false;
+}
+
+void RemoteSpeaker::ClearParam() {
+    mPlayFlag = false;
+    mEnableFlag = false;
+
+    OSCancelAlarm(&mContinueAlarm);
+    mContinueFlag = false;
+
+    OSCancelAlarm(&mIntervalAlarm);
+    mIntervalFlag = false;
+}
+
+bool RemoteSpeaker::Setup(WPADCallback pCallback) {
+    ut::AutoInterruptLock lock;
+
+    InitParam();
+
+    if (mWpadCallback != NULL) {
+        mWpadCallback(mChannelIndex, WPAD_ERR_OK);
+        mValidCallbackFlag = false;
+    }
+
+    mWpadCallback = pCallback;
+    mUserCommand = COMMAND_SPEAKER_ON;
+    mInitFlag = true;
+
+    return true;
+}
+
+void RemoteSpeaker::Shutdown(WPADCallback pCallback) {
+    ut::AutoInterruptLock lock;
+
+    ClearParam();
+
+    if (mWpadCallback != NULL) {
+        mWpadCallback(mChannelIndex, WPAD_ERR_OK);
+        mValidCallbackFlag = false;
+    }
+
+    mUserCommand = COMMAND_SPEAKER_OFF;
+    mWpadCallback = pCallback;
+    mInitFlag = false;
+}
+
+bool RemoteSpeaker::EnableOutput(bool enable) {
+    if (!mInitFlag) {
+        return false;
+    }
+
+    mEnableFlag = enable;
+    return true;
+}
+
+bool RemoteSpeaker::IsEnabledOutput() const {
+    if (!mInitFlag) {
+        return false;
+    }
+
+    return mEnableFlag;
+}
+
+void RemoteSpeaker::Update() {
+    if (mCommandBusyFlag) {
+        return;
+    }
+
+    SpeakerCommand command =
+        mUserCommand != COMMAND_NONE ? mUserCommand : mInternalCommand;
+
+    mUserCommand = COMMAND_NONE;
+    mInternalCommand = COMMAND_NONE;
+
+    ExecCommand(command);
+}
+
+void RemoteSpeaker::ExecCommand(SpeakerCommand command) {
+    switch (command) {
+    case COMMAND_NONE:
+        break;
+
+    case COMMAND_SPEAKER_ON:
+        mValidCallbackFlag = true;
+        mCommandBusyFlag = true;
+        mState = STATE_EXEC_SPEAKER_ON;
+        WPADControlSpeaker(mChannelIndex, WPAD_SPEAKER_ON, SpeakerOnCallback);
+        break;
+
+    case COMMAND_SPEAKER_PLAY:
+        mValidCallbackFlag = true;
+        mCommandBusyFlag = true;
+        mState = STATE_EXEC_SPEAKER_PLAY;
+        WPADControlSpeaker(mChannelIndex, WPAD_SPEAKER_PLAY,
+                           SpeakerPlayCallback);
+        break;
+
+    case COMMAND_SPEAKER_OFF:
+        mValidCallbackFlag = true;
+        mCommandBusyFlag = true;
+        mState = STATE_EXEC_SPEAKER_OFF;
+        WPADControlSpeaker(mChannelIndex, WPAD_SPEAKER_OFF, SpeakerOffCallback);
+        break;
+    }
+}
+
+void RemoteSpeaker::UpdateStreamData(const s16* pRmtSamples) {
+    if (!IsAvailable()) {
+        return;
+    }
+
+    bool playFlag = true;
+    bool silentFlag = (mEnableFlag ? IsAllSampleZero(pRmtSamples) : true);
+
+    if (silentFlag || mForceResumeFlag) {
+        playFlag = false;
+    }
+
+    bool firstFlag = !mPlayFlag && playFlag;
+    bool lastFlag = mPlayFlag && !playFlag;
+
+    if (playFlag) {
+        ut::AutoInterruptLock lock;
+
+        if (!WPADCanSendStreamData(mChannelIndex)) {
+            return;
+        }
+
+        u32 wencMode = !mFirstEncodeFlag ? WENC_FLAG_USER_INFO : 0;
+        mFirstEncodeFlag = false;
+
+        u8 adpcmBuffer[SAMPLES_PER_ENCODED_PACKET];
+        WENCGetEncodeData(&mEncodeInfo, wencMode, pRmtSamples,
+                          SAMPLES_PER_AUDIO_PACKET, adpcmBuffer);
+
+        s32 result = WPADSendStreamData(mChannelIndex, adpcmBuffer,
+                                        SAMPLES_PER_ENCODED_PACKET);
+        if (result != WPAD_ERR_OK) {
+            mInternalCommand = COMMAND_SPEAKER_ON;
+            mState = STATE_INVALID;
+            InitParam();
+
+            return;
+        }
+    }
+
+    if (firstFlag) {
+        ut::AutoInterruptLock lock;
+
+        if (!mContinueFlag) {
+            OSSetAlarm(&mContinueAlarm, OS_SEC_TO_TICKS(480LL),
+                       ContinueAlarmHandler);
+
+            mContinueBeginTime = OSGetTime();
+            mContinueFlag = true;
+        }
+
+        OSCancelAlarm(&mIntervalAlarm);
+        mIntervalFlag = false;
+    }
+
+    if (lastFlag) {
+        ut::AutoInterruptLock lock;
+
+        mIntervalFlag = true;
+        OSCancelAlarm(&mIntervalAlarm);
+        OSSetAlarm(&mIntervalAlarm, OS_SEC_TO_TICKS(1LL), IntervalAlarmHandler);
+    }
+
+    mPlayFlag = playFlag;
+}
+
+bool RemoteSpeaker::IsAllSampleZero(const s16* pSample) {
+    const u32* pBuffer = reinterpret_cast<const u32*>(pSample);
+    bool zeroFlag = true;
+
+    for (int i = 0; i < SAMPLES_PER_ENCODED_PACKET; i++) {
+        if (pBuffer[i] != 0) {
+            zeroFlag = false;
+            break;
+        }
+    }
+
+    return zeroFlag;
+}
+
+void RemoteSpeaker::SpeakerOnCallback(s32 chan, s32 result) {
+    RemoteSpeaker& r =
+        detail::RemoteSpeakerManager::GetInstance().GetRemoteSpeaker(chan);
+
+    switch (result) {
+    case WPAD_ERR_OK:
+        r.mFirstEncodeFlag = true;
+        std::memset(&r.mEncodeInfo, 0, sizeof(WENCInfo));
+
+        r.mState = STATE_SPEAKER_ON;
+        r.mInternalCommand = COMMAND_SPEAKER_PLAY;
+        break;
+
+    case WPAD_ERR_BUSY:
+        r.mInternalCommand = COMMAND_SPEAKER_ON;
+        break;
+
+    case WPAD_ERR_TRANSFER:
+        r.mState = STATE_INVALID;
+        break;
+
+    case WPAD_ERR_NO_CONTROLLER:
+        r.mState = STATE_INVALID;
+        break;
+
+    default:
+        r.mState = STATE_INVALID;
+        break;
+    }
+
+    if (result != WPAD_ERR_OK && result != WPAD_ERR_BUSY) {
+        r.NotifyCallback(chan, result);
+    }
+
+    r.mCommandBusyFlag = false;
+}
+
+void RemoteSpeaker::SpeakerPlayCallback(s32 chan, s32 result) {
+    RemoteSpeaker& r =
+        detail::RemoteSpeakerManager::GetInstance().GetRemoteSpeaker(chan);
+
+    switch (result) {
+    case WPAD_ERR_OK:
+        r.mState = STATE_SPEAKER_PLAY;
+        break;
+
+    case WPAD_ERR_BUSY:
+        r.mInternalCommand = COMMAND_SPEAKER_PLAY;
+        break;
+
+    case WPAD_ERR_TRANSFER:
+        r.mState = STATE_INVALID;
+        break;
+
+    case WPAD_ERR_NO_CONTROLLER:
+        r.mState = STATE_INVALID;
+        break;
+
+    default:
+        r.mState = STATE_INVALID;
+        break;
+    }
+
+    if (result != WPAD_ERR_BUSY) {
+        r.NotifyCallback(chan, result);
+    }
+
+    r.mCommandBusyFlag = false;
+}
+
+void RemoteSpeaker::SpeakerOffCallback(s32 chan, s32 result) {
+    RemoteSpeaker& r =
+        detail::RemoteSpeakerManager::GetInstance().GetRemoteSpeaker(chan);
+
+    switch (result) {
+    case WPAD_ERR_OK:
+        r.mState = STATE_SPEAKER_OFF;
+        break;
+
+    case WPAD_ERR_BUSY:
+        r.mInternalCommand = COMMAND_SPEAKER_OFF;
+        break;
+
+    case WPAD_ERR_TRANSFER:
+        r.mState = STATE_INVALID;
+        break;
+
+    case WPAD_ERR_NO_CONTROLLER:
+        r.mState = STATE_INVALID;
+        break;
+
+    default:
+        r.mState = STATE_INVALID;
+        break;
+    }
+
+    if (result != WPAD_ERR_BUSY) {
+        r.NotifyCallback(chan, result);
+    }
+
+    r.mCommandBusyFlag = false;
+}
+
+void RemoteSpeaker::NotifyCallback(s32 chan, s32 result) {
+    if (mValidCallbackFlag && mWpadCallback != NULL) {
+        mWpadCallback(chan, result);
+        mWpadCallback = NULL;
+    }
+}
+
+void RemoteSpeaker::ContinueAlarmHandler(OSAlarm* pAlarm, OSContext* pCtx) {
+#pragma unused(pCtx)
+
+    ut::AutoInterruptLock lock;
+    RemoteSpeaker* p = static_cast<RemoteSpeaker*>(OSGetAlarmUserData(pAlarm));
+
+    p->mForceResumeFlag = true;
+    p->mContinueFlag = false;
+}
+
+void RemoteSpeaker::IntervalAlarmHandler(OSAlarm* pAlarm, OSContext* pCtx) {
+#pragma unused(pCtx)
+
+    ut::AutoInterruptLock lock;
+    RemoteSpeaker* p = static_cast<RemoteSpeaker*>(OSGetAlarmUserData(pAlarm));
+
+    if (p->mIntervalFlag) {
+        OSCancelAlarm(&p->mContinueAlarm);
+        p->mForceResumeFlag = false;
+        p->mContinueFlag = false;
+    }
+
+    p->mIntervalFlag = false;
+}
+
+} // namespace snd
+} // namespace nw4r

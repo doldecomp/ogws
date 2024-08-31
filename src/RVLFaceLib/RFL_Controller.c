@@ -123,7 +123,7 @@ static BOOL errorAndReRead_(s32 chan) {
             WPADReadFaceData(chan, mgr->tempBuffer,
                              sizeof(RFLiCtrlBuf) * RFLi_CTRL_REPLACE_BUF_NUM,
                              DB_REMOTE_MEM_ADDR, readcallback_);
-        if (reason != WPAD_RESULT_SUCCESS) {
+        if (reason != WPAD_ERR_OK) {
             RFLiEndWorkingReason(RFLErrcode_Controllerfail, reason);
         }
 
@@ -153,7 +153,7 @@ static void readcallback_(s32 chan, s32 result) {
     mgr = RFLiGetCtrlBufManager();
 
     switch (result) {
-    case WPAD_RESULT_SUCCESS:
+    case WPAD_ERR_OK:
         validBuf = NULL;
         buf = mgr->tempBuffer;
 
@@ -189,19 +189,19 @@ static void readcallback_(s32 chan, s32 result) {
             mgr->loaded[chan] = FALSE;
         }
         break;
-    case WPAD_RESULT_ERR_3:
+    case WPAD_ERR_TRANSFER:
         if (!errorAndReRead_(chan)) {
             RFLiFree(mgr->tempBuffer);
             mgr->tempBuffer = NULL;
 
-            RFLiEndWorkingReason(RFLErrcode_Controllerfail, WPAD_RESULT_ERR_3);
+            RFLiEndWorkingReason(RFLErrcode_Controllerfail, WPAD_ERR_TRANSFER);
             mgr->loaded[chan] = FALSE;
         }
         break;
     default:
         RFLiFree(mgr->tempBuffer);
         mgr->tempBuffer = NULL;
-        RFLiEndWorkingReason(RFLErrcode_Controllerfail, WPAD_RESULT_ERR_1);
+        RFLiEndWorkingReason(RFLErrcode_Controllerfail, WPAD_ERR_NO_CONTROLLER);
         break;
     }
 }
@@ -215,7 +215,7 @@ static void readbuffer_(s32 chan, RFLiCtrlBuf* dst, BOOL ch) {
     mgr = RFLiGetCtrlBufManager();
 
     reason = WPADProbe(chan, &type);
-    if (reason != WPAD_RESULT_SUCCESS) {
+    if (reason != WPAD_ERR_OK) {
         RFLiEndWorkingReason(RFLErrcode_Controllerfail, reason);
         return;
     }
@@ -229,7 +229,7 @@ static void readbuffer_(s32 chan, RFLiCtrlBuf* dst, BOOL ch) {
     reason = WPADReadFaceData(chan, buf,
                               sizeof(RFLiCtrlBuf) * RFLi_CTRL_REPLACE_BUF_NUM,
                               DB_REMOTE_MEM_ADDR, readcallback_);
-    if (reason != WPAD_RESULT_SUCCESS) {
+    if (reason != WPAD_ERR_OK) {
         RFLiFree(mgr->tempBuffer);
         mgr->tempBuffer = NULL;
         RFLiEndWorkingReason(RFLErrcode_Controllerfail, reason);

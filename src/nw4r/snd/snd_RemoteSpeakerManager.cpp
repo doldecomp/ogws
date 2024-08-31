@@ -1,77 +1,79 @@
-#include <OS.h>
-#include <OSTime.h>
-#include <AXOut.h>
-#include "snd_RemoteSpeakerManager.h"
+#pragma ipa file // TODO: REMOVE AFTER REFACTOR
 
-namespace nw4r
-{
-	namespace snd
-	{
-		namespace detail
-		{
-			RemoteSpeakerManager::RemoteSpeakerManager() : mPoweredFlag(false), mRemoteSpeakers()
-			{
-				for (int i = 0; i < 4; i++)
-				{
-					mRemoteSpeakers[i].SetChannelIndex(i);
-				}
-			}
-			
-			RemoteSpeakerManager * RemoteSpeakerManager::GetInstance()
-			{
-				static RemoteSpeakerManager instance;
-				
-				return &instance;
-			}
-			
-			RemoteSpeaker * RemoteSpeakerManager::GetRemoteSpeaker(int remoteIndex)
-			{
-				return mRemoteSpeakers + remoteIndex;
-			}
-			
-			void RemoteSpeakerManager::Setup()
-			{
-				if (mPoweredFlag) return;
-				
-				OSCreateAlarm(&mAlarm);
-				
-				s64 time = OSGetTime();
-				u32 num = OS_BUS_CLOCK_SPEED / 4 / 125000 * 6666667 / 8000;
-				
-				OSSetPeriodicAlarm(&mAlarm, time, num, RemoteSpeakerAlarmProc);
-				
-				mPoweredFlag = true;
-			}
-			
-			void RemoteSpeakerManager::Shutdown()
-			{
-				if (!mPoweredFlag) return;
-				
-				OSCancelAlarm(&mAlarm);
-				
-				mPoweredFlag = false;
-			}
-			
-			void RemoteSpeakerManager::RemoteSpeakerAlarmProc(OSAlarm *, OSContext *)
-			{
-				RemoteSpeakerManager * pManager = GetInstance();
-				s16 samples[40];
-				
-				if (AXRmtGetSamplesLeft() < 40) return;
-				
-				for (int i = 0; i < 4; i++)
-				{
-					if (pManager->GetRemoteSpeaker(i)->WORD_0xC == 4)
-					{
-						AXRmtGetSamples(i, samples, 40);
-						pManager->GetRemoteSpeaker(i)->UpdateStreamData(samples);
-					}
-					
-					pManager->GetRemoteSpeaker(i)->Update();
-				}
-				
-				AXRmtAdvancePtr(40);
-			}
-		}
-	}
+#include <nw4r/snd.h>
+#include <revolution/AX.h>
+#include <revolution/OS.h>
+
+namespace nw4r {
+namespace snd {
+namespace detail {
+
+RemoteSpeakerManager& RemoteSpeakerManager::GetInstance() {
+    static RemoteSpeakerManager instance;
+    return instance;
 }
+
+RemoteSpeakerManager::RemoteSpeakerManager() : mInitialized(false) {
+    for (int i = 0; i < 4; i++) {
+        mSpeaker[i].SetChannelIndex(i);
+    }
+}
+
+RemoteSpeaker& RemoteSpeakerManager::GetRemoteSpeaker(int i) {
+    // @bug Can access garbage data
+    return mSpeaker[i];
+}
+
+void RemoteSpeakerManager::Setup() {
+    if (mInitialized) {
+        return;
+    }
+
+    OSCreateAlarm(&mRemoteSpeakerAlarm);
+
+    OSSetPeriodicAlarm(&mRemoteSpeakerAlarm, OSGetTime(),
+                       OS_NSEC_TO_TICKS(SPEAKER_ALARM_PERIOD_NSEC),
+                       RemoteSpeakerAlarmProc);
+
+    mInitialized = true;
+}
+
+void RemoteSpeakerManager::Shutdown() {
+    if (!mInitialized) {
+        return;
+    }
+
+    OSCancelAlarm(&mRemoteSpeakerAlarm);
+    mInitialized = false;
+}
+
+void RemoteSpeakerManager::RemoteSpeakerAlarmProc(OSAlarm* pAlarm,
+                                                  OSContext* pCtx) {
+#pragma unused(pAlarm)
+#pragma unused(pCtx)
+
+    RemoteSpeakerManager& r = GetInstance();
+
+    s16 samples[RemoteSpeaker::SAMPLES_PER_AUDIO_PACKET];
+    if (AXRmtGetSamplesLeft() < RemoteSpeaker::SAMPLES_PER_AUDIO_PACKET) {
+        return;
+    }
+
+    for (int i = 0; i < WPAD_MAX_CONTROLLERS; i++) {
+        if (r.mSpeaker[i].IsAvailable()) {
+            (void)AXRmtGetSamples(
+                i, samples,
+                RemoteSpeaker::SAMPLES_PER_AUDIO_PACKET); // debug leftover
+
+            r.mSpeaker[i].UpdateStreamData(samples);
+        }
+
+        r.mSpeaker[i].Update();
+    }
+
+    AXRmtAdvancePtr(RemoteSpeaker::SAMPLES_PER_AUDIO_PACKET);
+}
+
+} // namespace detail
+} // namespace snd
+} // namespace nw4r

@@ -31,6 +31,8 @@
 #include <nw4r/snd/snd_MmlSeqTrackAllocator.h>
 #include <nw4r/snd/snd_MoveValue.h>
 #include <nw4r/snd/snd_NandSoundArchive.h>
+#include <nw4r/snd/snd_RemoteSpeaker.h>
+#include <nw4r/snd/snd_RemoteSpeakerManager.h>
 #include <nw4r/snd/snd_SeqPlayer.h>
 #include <nw4r/snd/snd_SeqTrack.h>
 #include <nw4r/snd/snd_SeqTrackAllocator.h>
