@@ -32,7 +32,8 @@ public:
                                        bool tie) const; // at 0xC
 
     ParseResult Parse(MmlSeqTrack* pTrack, bool doNoteOn) const;
-    volatile s16* GetVariablePtr(SeqPlayer* pPlayer, SeqTrack* pTrack, int i) const;
+    volatile s16* GetVariablePtr(SeqPlayer* pPlayer, SeqTrack* pTrack,
+                                 int i) const;
 
     u8 ReadByte(const u8** ppData) const {
         return *(*ppData)++;

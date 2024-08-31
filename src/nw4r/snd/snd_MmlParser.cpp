@@ -656,7 +656,7 @@ s32 MmlParser::ReadArg(const u8** ppData, SeqPlayer* pPlayer, SeqTrack* pTrack,
 }
 
 volatile s16* MmlParser::GetVariablePtr(SeqPlayer* pPlayer, SeqTrack* pTrack,
-                               int i) const {
+                                        int i) const {
     if (i < SeqPlayer::VARIABLE_NUM) {
         return pPlayer->GetVariablePtr(i);
     }
