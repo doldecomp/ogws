@@ -79,7 +79,7 @@ NW4R_O_FILES := \
 	build/nw4r/snd/snd_InstancePool.o \
 	build/nw4r/snd/snd_Lfo.o \
 	build/nw4r/snd/snd_MemorySoundArchive.o \
-	build/asm/nw4r/snd/snd_MidiSeqPlayer.o \
+	build/nw4r/snd/snd_MidiSeqPlayer.o \
 	build/nw4r/snd/snd_MmlParser.o \
 	build/nw4r/snd/snd_MmlSeqTrack.o \
 	build/nw4r/snd/snd_MmlSeqTrackAllocator.o \

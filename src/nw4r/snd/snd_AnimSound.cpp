@@ -5,7 +5,7 @@
 namespace nw4r {
 namespace snd {
 
-DECOMP_FORCEDTOR(snd_AnimSound_cpp, SoundHandle);
+DECOMP_FORCEACTIVE_DTOR(snd_AnimSound_cpp, SoundHandle);
 
 } // namespace snd
 } // namespace nw4r
