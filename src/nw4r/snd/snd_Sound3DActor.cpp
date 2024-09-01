@@ -1,72 +1,72 @@
-#pragma ipa file
+#pragma ipa file // TODO: REMOVE AFTER REFACTOR
 
-#include "snd_Sound3DActor.h"
-#include "snd_Common.h"
-#include "snd_Sound3DManager.h"
-#include "snd_SoundArchive.h"
-#include "snd_SoundArchivePlayer.h"
-#include "snd_SoundHandle.h"
+#include <nw4r/snd.h>
 
 namespace nw4r {
-using namespace ut;
-
 namespace snd {
-using namespace detail;
 
-Sound3DActor::Sound3DActor(SoundArchivePlayer& archivePlayer,
-                           Sound3DManager& manager)
-    : SoundActor(archivePlayer),
-      mManager(manager),
-      mArchivePlayer(archivePlayer) {}
+Sound3DActor::Sound3DActor(SoundArchivePlayer& rPlayer,
+                           Sound3DManager& rManager)
+    : detail::SoundActor(rPlayer),
+      m3DManager(rManager),
+      mSoundArchivePlayer(rPlayer) {}
 
-Sound3DActor::~Sound3DActor() { ForEachSound(ClearUpdateCallback, false); }
+Sound3DActor::~Sound3DActor() {
+    ForEachSound(ClearUpdateCallback, false);
+}
 
-SoundStartable::StartResult Sound3DActor::detail_SetupSound(
-    SoundHandle* pHandle,                   /* at r4 (r28) */
-    u32 r29_5, BasicSound::AmbientArgInfo*, /* at r6 */
-    ExternalSoundPlayer*,                   /* at r7 */
-    bool r8_30, const SoundStartable::StartInfo* mStartInfo /* at r9 (r31)*/) {
-    // r27 <- this
+SoundStartable::StartResult
+Sound3DActor::detail_SetupSound(SoundHandle* pHandle, u32 id,
+                                detail::BasicSound::AmbientArgInfo* pArgInfo,
+                                detail::ExternalSoundPlayer* pPlayer, bool hold,
+                                const SoundStartable::StartInfo* pStartInfo) {
+#pragma unused(pArgInfo)
+#pragma unused(pPlayer)
 
-    Sound3DManager::Sound3DActorParam actorParam; // at 0x28
+    Sound3DManager::Sound3DActorParam actorParam;
+    actorParam.position = mPosition;
+    actorParam.userParam = mUserParam;
 
-    SoundArchive::Sound3DParam param; // at 0x8
-
-    actorParam.mPosition = mPosition;
-    actorParam.WORD_0x0 = WORD_0xB4;
-
-    if (mArchivePlayer.GetSoundArchive()->detail_ReadSound3DParam(r29_5,
-                                                                  &param)) {
-        actorParam.mSound3DParam = param;
+    SoundArchive::Sound3DParam param;
+    if (mSoundArchivePlayer.GetSoundArchive()->detail_ReadSound3DParam(
+            id, &param)) {
+        actorParam.soundParam = param;
     }
 
-    BasicSound::AmbientArgInfo ambientArgInfo = {&mManager, this, &mManager,
-                                                 &actorParam, 0x18}; // at 0x10
+    detail::BasicSound::AmbientArgInfo argInfo = {
+        &m3DManager,                              // paramUpdateCallback
+        this,                                     // argUpdateCallback
+        &m3DManager,                              // argAllocaterCallback
+        &actorParam,                              // arg
+        sizeof(Sound3DManager::Sound3DActorParam) // argSize
+    };
 
-    StartResult ret = mArchivePlayer.detail_SetupSound(
-        pHandle, r29_5, &ambientArgInfo, detail_GetActorSoundPlayer(0), r8_30, mStartInfo);
+    StartResult result = mSoundArchivePlayer.detail_SetupSound(
+        pHandle, id, &argInfo, detail_GetActorSoundPlayer(0), hold, pStartInfo);
 
-    if (pHandle->IsAttachedSound())
-        pHandle->detail_GetAttachedSound()->SetPanCurve(PAN_CURVE_SINCOS);
+    if (pHandle->IsAttachedSound()) {
+        pHandle->detail_GetAttachedSound()->SetPanCurve(
+            detail::PAN_CURVE_SINCOS);
+    }
 
-    return ret;
+    return result;
 }
 
-void Sound3DActor::SetPosition(const math::VEC3& position) {
-    mPosition = position;
+void Sound3DActor::SetPosition(const math::VEC3& rPosition) {
+    mPosition = rPosition;
 }
 
-void Sound3DActor::detail_Update(void* ptr, const BasicSound* pSound) {
-    Sound3DManager::Sound3DActorParam* pActorParam =
-        static_cast<Sound3DManager::Sound3DActorParam*>(ptr);
+void Sound3DActor::detail_Update(void* pArg, const detail::BasicSound* pSound) {
+    Sound3DManager::Sound3DActorParam* pParam =
+        static_cast<Sound3DManager::Sound3DActorParam*>(pArg);
 
-    pActorParam->mPosition = mPosition;
-    pActorParam->WORD_0x0 = WORD_0xB4;
+    pParam->position = mPosition;
+    pParam->userParam = mUserParam;
 }
 
-void Sound3DActor::ClearUpdateCallback(SoundHandle& handle) {
-    if (handle.IsAttachedSound()) {
-        handle.detail_GetAttachedSound()->ClearAmbientArgUpdateCallback();
+void Sound3DActor::ClearUpdateCallback(SoundHandle& rHandle) {
+    if (rHandle.IsAttachedSound()) {
+        rHandle.detail_GetAttachedSound()->ClearAmbientArgUpdateCallback();
     }
 }
 

@@ -127,7 +127,9 @@ void BasicSound::FadeIn(int frames) {
     mFadeVolume.SetTarget(1.0f, t);
 }
 
-bool BasicSound::IsPause() const { return mIsPause; }
+bool BasicSound::IsPause() const {
+    return mIsPause;
+}
 
 void BasicSound::Update() {
     BasicPlayer* player = GetBasicPlayer();
@@ -324,22 +326,34 @@ void BasicSound::SetVolume(f32 vol, int frames) {
     mExtVolume.SetTarget(target, frames);
 }
 
-void BasicSound::SetPitch(f32 pitch) { mExtPitch = pitch; }
+void BasicSound::SetPitch(f32 pitch) {
+    mExtPitch = pitch;
+}
 
-void BasicSound::SetPan(f32 pan) { mExtPan = pan; }
+void BasicSound::SetPan(f32 pan) {
+    mExtPan = pan;
+}
 
-void BasicSound::SetSurroundPan(f32 pan) { mExtSurroundPan = pan; }
+void BasicSound::SetSurroundPan(f32 pan) {
+    mExtSurroundPan = pan;
+}
 
-void BasicSound::SetLpfFreq(f32 freq) { GetBasicPlayer()->SetLpfFreq(freq); }
+void BasicSound::SetLpfFreq(f32 freq) {
+    GetBasicPlayer()->SetLpfFreq(freq);
+}
 
 void BasicSound::SetOutputLine(int flag) {
     mOutputLine = flag;
     mEnableOutputLine = true;
 }
 
-bool BasicSound::IsEnabledOutputLine() const { return mEnableOutputLine; }
+bool BasicSound::IsEnabledOutputLine() const {
+    return mEnableOutputLine;
+}
 
-int BasicSound::GetOutputLine() const { return mOutputLine; }
+int BasicSound::GetOutputLine() const {
+    return mOutputLine;
+}
 
 void BasicSound::SetMainOutVolume(f32 vol) {
     mMainOutVolume = ut::Clamp(vol, 0.0f, 1.0f);
@@ -365,15 +379,25 @@ void BasicSound::SetPanCurve(PanCurve curve) {
     GetBasicPlayer()->SetPanCurve(curve);
 }
 
-f32 BasicSound::GetInitialVolume() const { return mInitVolume; }
+f32 BasicSound::GetInitialVolume() const {
+    return mInitVolume;
+}
 
-f32 BasicSound::GetPitch() const { return mExtPitch; }
+f32 BasicSound::GetPitch() const {
+    return mExtPitch;
+}
 
-f32 BasicSound::GetPan() const { return mExtPan; }
+f32 BasicSound::GetPan() const {
+    return mExtPan;
+}
 
-f32 BasicSound::GetSurroundPan() const { return mExtSurroundPan; }
+f32 BasicSound::GetSurroundPan() const {
+    return mExtSurroundPan;
+}
 
-f32 BasicSound::GetMainOutVolume() const { return mMainOutVolume; }
+f32 BasicSound::GetMainOutVolume() const {
+    return mMainOutVolume;
+}
 
 f32 BasicSound::GetRemoteOutVolume(int remote) const {
     return mRemoteOutVolumes[remote];
@@ -389,13 +413,17 @@ void BasicSound::SetAmbientParamCallback(
     mCallbackArg = arg;
 }
 
-bool BasicSound::IsAttachedGeneralHandle() { return mGeneralHandle != NULL; }
+bool BasicSound::IsAttachedGeneralHandle() {
+    return mGeneralHandle != NULL;
+}
 
 bool BasicSound::IsAttachedTempGeneralHandle() {
     return mTempGeneralHandle != NULL;
 }
 
-void BasicSound::DetachGeneralHandle() { mGeneralHandle->DetachSound(); }
+void BasicSound::DetachGeneralHandle() {
+    mGeneralHandle->DetachSound();
+}
 
 void BasicSound::DetachTempGeneralHandle() {
     mTempGeneralHandle->DetachSound();

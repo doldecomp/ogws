@@ -11,20 +11,20 @@ namespace nw4r
 		{
 			struct Sound3DParam
 			{
-				UNKWORD WORD_0x0;
-				u8 BYTE_0x4;
-				u8 BYTE_0x5;
+				u32 flags;     // at 0x0
+				u8 decayCurve; // at 0x4
+				u8 decayRatio; // at 0x5
 			};
 			
 			struct SoundArchivePlayerInfo
 			{
-				u32 SIZE_0x0;
-				UNKWORD WORD_0x4;
-				u32 SIZE_0x8;
-				UNKWORD WORD_0xC;
-				UNKWORD WORD_0x10;
-				u32 SIZE_0x14;
-				UNKWORD WORD_0x18;
+				int seqSoundCount;    // at 0x0
+				int seqTrackCount;    // at 0x4
+				int strmSoundCount;   // at 0x8
+				int strmTrackCount;   // at 0xC
+				int strmChannelCount; // at 0x10
+				int waveSoundCount;   // at 0x14
+				int waveTrackCount;   // at 0x18
 			};
 			
 			struct SoundInfo

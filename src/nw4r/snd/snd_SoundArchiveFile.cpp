@@ -148,9 +148,9 @@ namespace nw4r
 				
 				if (!pParam) return false;
 				
-				pSound3DParam->WORD_0x0 = pParam->WORD_0x0;
-				pSound3DParam->BYTE_0x4 = pParam->BYTE_0x4;
-				pSound3DParam->BYTE_0x5 = pParam->BYTE_0x5;
+				pSound3DParam->flags = pParam->WORD_0x0;
+				pSound3DParam->decayCurve = pParam->BYTE_0x4;
+				pSound3DParam->decayRatio = pParam->BYTE_0x5;
 				
 				return true;
 			}
@@ -317,13 +317,13 @@ namespace nw4r
 				
 				if (!pSoundArchivePlayerInfo) return false;
 				
-				pSoundArchivePlayerInfo->SIZE_0x0 = pInfo->SIZE_0x0;
-				pSoundArchivePlayerInfo->WORD_0x4 = pInfo->SHORT_0x2;
-				pSoundArchivePlayerInfo->SIZE_0x8 = pInfo->SIZE_0x4;
-				pSoundArchivePlayerInfo->WORD_0xC = pInfo->SHORT_0x6;
-				pSoundArchivePlayerInfo->WORD_0x10 = pInfo->SHORT_0x8;
-				pSoundArchivePlayerInfo->SIZE_0x14 = pInfo->SIZE_0xA;
-				pSoundArchivePlayerInfo->WORD_0x18 = pInfo->SHORT_0xC;
+				pSoundArchivePlayerInfo->seqSoundCount = pInfo->SIZE_0x0;
+				pSoundArchivePlayerInfo->seqTrackCount = pInfo->SHORT_0x2;
+				pSoundArchivePlayerInfo->strmSoundCount = pInfo->SIZE_0x4;
+				pSoundArchivePlayerInfo->strmTrackCount = pInfo->SHORT_0x6;
+				pSoundArchivePlayerInfo->strmChannelCount = pInfo->SHORT_0x8;
+				pSoundArchivePlayerInfo->waveSoundCount = pInfo->SIZE_0xA;
+				pSoundArchivePlayerInfo->waveTrackCount = pInfo->SHORT_0xC;
 				
 				return true;
 			}

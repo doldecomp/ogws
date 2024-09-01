@@ -36,7 +36,11 @@
 #include <nw4r/snd/snd_SeqPlayer.h>
 #include <nw4r/snd/snd_SeqTrack.h>
 #include <nw4r/snd/snd_SeqTrackAllocator.h>
+#include <nw4r/snd/snd_Sound3DActor.h>
+#include <nw4r/snd/snd_Sound3DListener.h>
+#include <nw4r/snd/snd_Sound3DManager.h>
 #include <nw4r/snd/snd_SoundActor.h>
+#include <nw4r/snd/snd_SoundArchivePlayer.h>
 #include <nw4r/snd/snd_SoundHandle.h>
 #include <nw4r/snd/snd_SoundPlayer.h>
 #include <nw4r/snd/snd_SoundStartable.h>

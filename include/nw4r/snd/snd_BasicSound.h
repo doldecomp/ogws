@@ -17,6 +17,13 @@ public:
     NW4R_UT_RTTI_DECL(BasicSound);
 
     struct AmbientParamUpdateCallback {
+        enum ParamUpdateFlags {
+            PARAM_UPDATE_VOLUME = (1 << 0),
+            PARAM_UPDATE_PAN = (1 << 1),
+            PARAM_UPDATE_SURROUND_PAN = (1 << 2),
+            PARAM_UPDATE_PRIORITY = (1 << 3),
+        };
+
         virtual void detail_Update(SoundParam* param, u32 id, BasicSound* sound,
                                    const void* arg, u32 flags) = 0;
     };
@@ -32,11 +39,11 @@ public:
     };
 
     struct AmbientArgInfo {
-        AmbientParamUpdateCallback* mParamUpdateCallback;   // at 0x0
-        AmbientArgUpdateCallback* mArgUpdateCallback;       // at 0x4
-        AmbientArgAllocaterCallback* mArgAllocaterCallback; // at 0x8
-        void* arg;                                          // at 0xC
-        u32 argSize;                                        // at 0x10
+        AmbientParamUpdateCallback* paramUpdateCallback;   // at 0x0
+        AmbientArgUpdateCallback* argUpdateCallback;       // at 0x4
+        AmbientArgAllocaterCallback* argAllocaterCallback; // at 0x8
+        void* arg;                                         // at 0xC
+        u32 argSize;                                       // at 0x10
     };
 
 public:
@@ -69,8 +76,12 @@ public:
     virtual BasicPlayer* GetBasicPlayer() = 0;             // at 0x68
     virtual const BasicPlayer* GetBasicPlayer() const = 0; // at 0x6C
 
-    PlayerHeap* GetPlayerHeap() { return mPlayerHeap; }
-    void SetPlayerHeap(PlayerHeap* heap) { mPlayerHeap = heap; }
+    PlayerHeap* GetPlayerHeap() {
+        return mPlayerHeap;
+    }
+    void SetPlayerHeap(PlayerHeap* heap) {
+        mPlayerHeap = heap;
+    }
 
     bool IsAttachedGeneralHandle();
     void DetachGeneralHandle();
@@ -78,10 +89,16 @@ public:
     bool IsAttachedTempGeneralHandle();
     void DetachTempGeneralHandle();
 
-    SoundPlayer* GetSoundPlayer() { return mSoundPlayer; }
-    void SetSoundPlayer(SoundPlayer* player) { mSoundPlayer = player; }
+    SoundPlayer* GetSoundPlayer() {
+        return mSoundPlayer;
+    }
+    void SetSoundPlayer(SoundPlayer* player) {
+        mSoundPlayer = player;
+    }
 
-    ExternalSoundPlayer* GetExternalSoundPlayer() { return mExtSoundPlayer; }
+    ExternalSoundPlayer* GetExternalSoundPlayer() {
+        return mExtSoundPlayer;
+    }
     void SetExternalSoundPlayer(ExternalSoundPlayer* player) {
         mExtSoundPlayer = player;
     }
@@ -93,25 +110,35 @@ public:
     AmbientArgUpdateCallback* GetAmbientArgUpdateCallback() {
         return mArgUpdateCallback;
     }
-    void ClearAmbientArgUpdateCallback() { mArgUpdateCallback = NULL; }
+    void ClearAmbientArgUpdateCallback() {
+        mArgUpdateCallback = NULL;
+    }
 
     AmbientArgAllocaterCallback* GetAmbientArgAllocaterCallback() {
         return mArgAllocCallback;
     }
 
-    void* GetAmbientArg() { return mCallbackArg; }
+    void* GetAmbientArg() {
+        return mCallbackArg;
+    }
 
-    SoundParam& GetAmbientParam() { return mAmbientParam; }
+    SoundParam& GetAmbientParam() {
+        return mAmbientParam;
+    }
 
     void SetAmbientParamCallback(AmbientParamUpdateCallback* paramUpdate,
                                  AmbientArgUpdateCallback* argUpdate,
                                  AmbientArgAllocaterCallback* argAlloc,
                                  void* arg);
 
-    u32 GetId() const { return mId; }
+    u32 GetId() const {
+        return mId;
+    }
     void SetId(u32 id);
 
-    f32 GetMoveVolume() { return mExtVolume.GetValue(); }
+    f32 GetMoveVolume() {
+        return mExtVolume.GetValue();
+    }
 
     f32 GetInitialVolume() const;
     f32 GetPan() const;
