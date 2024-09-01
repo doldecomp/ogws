@@ -24,7 +24,7 @@ namespace nw4r
 					mPlayers[0].SetPlayableSoundCount(0x7FFFFFFF);
 				}
 				
-				inline UNKWORD detail_ConvertLabelStringToSoundId(const char * labelString)
+				inline u32 detail_ConvertLabelStringToSoundId(const char * labelString)
 				{
 					return mStartable.detail_ConvertLabelStringToSoundId(labelString);
 				}
@@ -42,7 +42,7 @@ namespace nw4r
 					return func;
 				}
 
-				virtual UNKWORD detail_SetupSound(SoundHandle *,
+				virtual StartResult detail_SetupSound(SoundHandle *,
 					u32,
 					detail::BasicSound::AmbientArgInfo *,
 					detail::ExternalSoundPlayer *,

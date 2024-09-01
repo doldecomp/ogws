@@ -1,48 +1,108 @@
 #ifndef NW4R_SND_SOUND_STARTABLE_H
 #define NW4R_SND_SOUND_STARTABLE_H
-#include "snd_BasicSound.h"
-#include "types_nw4r.h"
+#include <nw4r/snd/snd_BasicSound.h>
+#include <nw4r/types_nw4r.h>
 
-namespace nw4r
-{
-    namespace snd
-    {
-        struct SoundStartable
-        {
-            struct StartInfo
-            {
-                
-            };
-            
-            inline SoundStartable() {}
-            inline virtual ~SoundStartable() {} // at 0x8
-            virtual UNKWORD detail_SetupSound(SoundHandle *,
-                u32,
-                detail::BasicSound::AmbientArgInfo *,
-                detail::ExternalSoundPlayer *,
-                bool,
-                const StartInfo *) = 0; // at 0xc
-            virtual UNKWORD detail_ConvertLabelStringToSoundId(const char *) = 0; // at 0x10
+namespace nw4r {
+namespace snd {
 
-            UNKWORD detail_StartSound(SoundHandle *,
-                u32,
-                detail::BasicSound::AmbientArgInfo *,
-                detail::ExternalSoundPlayer *,
-                const StartInfo *);
-
-            UNKWORD detail_HoldSound(SoundHandle *,
-                u32,
-                detail::BasicSound::AmbientArgInfo *,
-                detail::ExternalSoundPlayer *,
-                const StartInfo *);
-
-            UNKWORD detail_PrepareSound(SoundHandle *,
-                u32,
-                detail::BasicSound::AmbientArgInfo *,
-                detail::ExternalSoundPlayer *,
-                const StartInfo *);
-        };
-    }
+// Forward declarations
+class SoundHandle;
+namespace detail {
+class ExternalSoundPlayer;
 }
+
+class SoundStartable {
+public:
+    enum StartResult {
+        START_SUCCESS,
+        START_ERR_LOW_PRIORITY,
+        START_ERR_INVALID_LABEL_STRING,
+        START_ERR_INVALID_SOUNDID,
+        START_ERR_NOT_DATA_LOADED,
+        START_ERR_NOT_ENOUGH_PLAYER_HEAP,
+        START_ERR_CANNOT_OPEN_FILE,
+        START_ERR_NOT_AVAILABLE,
+        START_ERR_CANNOT_ALLOCATE_TRACK,
+        START_ERR_NOT_ENOUGH_INSTANCE,
+        START_ERR_INVALID_PARAMETER,
+        START_ERR_INVALID_SEQ_START_LOCATION_LABEL,
+
+        START_ERR_USER = 128,
+        START_ERR_UNKNOWN = 255,
+    };
+
+    // TODO: Fill in layout
+    struct StartInfo {};
+
+public:
+    SoundStartable() {}
+    virtual ~SoundStartable() {} // at 0x8
+
+    virtual StartResult
+    detail_SetupSound(SoundHandle* pHandle, u32 id,
+                      detail::BasicSound::AmbientArgInfo* pArgInfo,
+                      detail::ExternalSoundPlayer* pPlayer, bool hold,
+                      const StartInfo* pStartInfo) = 0; // at 0xC
+
+    virtual u32
+    detail_ConvertLabelStringToSoundId(const char* pLabel) = 0; // at 0x10
+
+    bool StartSound(SoundHandle* pHandle, u32 id) {
+        return detail_StartSound(pHandle, id, NULL, NULL, NULL) ==
+               START_SUCCESS;
+    }
+    bool StartSound(SoundHandle* pHandle, unsigned int id) {
+        return detail_StartSound(pHandle, id, NULL, NULL, NULL) ==
+               START_SUCCESS;
+    }
+    bool StartSound(SoundHandle* pHandle, int id) {
+        return detail_StartSound(pHandle, id, NULL, NULL, NULL) ==
+               START_SUCCESS;
+    }
+
+    bool HoldSound(SoundHandle* pHandle, u32 id) {
+        return detail_HoldSound(pHandle, id, NULL, NULL, NULL) == START_SUCCESS;
+    }
+    bool HoldSound(SoundHandle* pHandle, unsigned int id) {
+        return detail_HoldSound(pHandle, id, NULL, NULL, NULL) == START_SUCCESS;
+    }
+    bool HoldSound(SoundHandle* pHandle, int id) {
+        return detail_HoldSound(pHandle, id, NULL, NULL, NULL) == START_SUCCESS;
+    }
+
+    bool PrepareSound(SoundHandle* pHandle, u32 id) {
+        return detail_PrepareSound(pHandle, id, NULL, NULL, NULL) ==
+               START_SUCCESS;
+    }
+    bool PrepareSound(SoundHandle* pHandle, unsigned int id) {
+        return detail_PrepareSound(pHandle, id, NULL, NULL, NULL) ==
+               START_SUCCESS;
+    }
+    bool PrepareSound(SoundHandle* pHandle, int id) {
+        return detail_PrepareSound(pHandle, id, NULL, NULL, NULL) ==
+               START_SUCCESS;
+    }
+
+private:
+    StartResult detail_StartSound(SoundHandle* pHandle, u32 id,
+                                  detail::BasicSound::AmbientArgInfo* pArgInfo,
+                                  detail::ExternalSoundPlayer* pPlayer,
+                                  const StartInfo* pStartInfo);
+
+    StartResult detail_HoldSound(SoundHandle* pHandle, u32 id,
+                                 detail::BasicSound::AmbientArgInfo* pArgInfo,
+                                 detail::ExternalSoundPlayer* pPlayer,
+                                 const StartInfo* pStartInfo);
+
+    StartResult
+    detail_PrepareSound(SoundHandle* pHandle, u32 id,
+                        detail::BasicSound::AmbientArgInfo* pArgInfo,
+                        detail::ExternalSoundPlayer* pPlayer,
+                        const StartInfo* pStartInfo);
+};
+
+} // namespace snd
+} // namespace nw4r
 
 #endif

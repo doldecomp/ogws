@@ -21,7 +21,7 @@ Sound3DActor::Sound3DActor(SoundArchivePlayer& archivePlayer,
 
 Sound3DActor::~Sound3DActor() { ForEachSound(ClearUpdateCallback, false); }
 
-UNKWORD Sound3DActor::detail_SetupSound(
+SoundStartable::StartResult Sound3DActor::detail_SetupSound(
     SoundHandle* pHandle,                   /* at r4 (r28) */
     u32 r29_5, BasicSound::AmbientArgInfo*, /* at r6 */
     ExternalSoundPlayer*,                   /* at r7 */
@@ -43,7 +43,7 @@ UNKWORD Sound3DActor::detail_SetupSound(
     BasicSound::AmbientArgInfo ambientArgInfo = {&mManager, this, &mManager,
                                                  &actorParam, 0x18}; // at 0x10
 
-    UNKWORD ret = mArchivePlayer.detail_SetupSound(
+    StartResult ret = mArchivePlayer.detail_SetupSound(
         pHandle, r29_5, &ambientArgInfo, mPlayers, r8_30, mStartInfo);
 
     if (pHandle->mSound)

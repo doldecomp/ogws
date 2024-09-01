@@ -50,7 +50,7 @@ namespace EGG
 
         virtual bool startSound(nw4r::snd::SoundHandle *handle, u32 id) // at 0x38
         {
-            return (mActiveSndArchivePlayer->detail_StartSound(handle, id, NULL, NULL, NULL) == 0);
+            return mActiveSndArchivePlayer->StartSound(handle, id);
         }
 
         virtual bool startSound(nw4r::snd::SoundHandle *handle, unsigned int id) // at 0x3C
@@ -68,7 +68,7 @@ namespace EGG
 
         virtual bool prepareSound(nw4r::snd::SoundHandle *handle, u32 id) // at 0x44
         {
-            return (mActiveSndArchivePlayer->detail_PrepareSound(handle, id, NULL, NULL, NULL) == 0);
+            return mActiveSndArchivePlayer->PrepareSound(handle, id);
         }
 
         virtual bool prepareSound(nw4r::snd::SoundHandle *handle, unsigned int id) // at 0x48
@@ -86,7 +86,7 @@ namespace EGG
 
         virtual bool holdSound(nw4r::snd::SoundHandle *handle, u32 id) // at 0x50
         {
-            return (mActiveSndArchivePlayer->detail_HoldSound(handle, id, NULL, NULL, NULL) == 0);
+            return mActiveSndArchivePlayer->HoldSound(handle, id);
         }
 
         virtual bool holdSound(nw4r::snd::SoundHandle *handle, unsigned int id) // at 0x54

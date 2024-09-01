@@ -38,6 +38,7 @@
 #include <nw4r/snd/snd_SeqTrackAllocator.h>
 #include <nw4r/snd/snd_SoundHandle.h>
 #include <nw4r/snd/snd_SoundPlayer.h>
+#include <nw4r/snd/snd_SoundStartable.h>
 #include <nw4r/snd/snd_StrmFile.h>
 #include <nw4r/snd/snd_StrmPlayer.h>
 #include <nw4r/snd/snd_Task.h>

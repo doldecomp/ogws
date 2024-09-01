@@ -21,7 +21,7 @@ namespace nw4r
 			
 			~Sound3DActor();
 			
-			UNKWORD detail_SetupSound(SoundHandle *,
+			StartResult detail_SetupSound(SoundHandle *,
 				u32,
 				detail::BasicSound::AmbientArgInfo *,
 				detail::ExternalSoundPlayer *,

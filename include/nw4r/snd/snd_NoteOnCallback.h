@@ -1,12 +1,13 @@
-#ifndef NW4R_SND_NOTE_ON_H
-#define NW4R_SND_NOTE_ON_H
-#include "snd_Channel.h"
-#include "types_nw4r.h"
+#ifndef NW4R_SND_NOTE_ON_CALLBACK_H
+#define NW4R_SND_NOTE_ON_CALLBACK_H
+#include <nw4r/snd/snd_Channel.h>
+#include <nw4r/types_nw4r.h>
 
 namespace nw4r {
 namespace snd {
 namespace detail {
 
+// Forward declarations
 class SeqPlayer;
 
 struct NoteOnInfo {

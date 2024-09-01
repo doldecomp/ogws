@@ -6,7 +6,7 @@
 #include "snd_SeqPlayer.h"
 #include "snd_SoundInstanceManager.h"
 #include "snd_Task.h"
-#include "snd_NoteOn.h"
+#include "snd_NoteOnCallback.h"
 #include "ut_FileStream.h"
 
 namespace nw4r

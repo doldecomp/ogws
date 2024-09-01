@@ -6,7 +6,7 @@ namespace nw4r
 	{
 		namespace detail
 		{
-			UNKWORD SoundActor::detail_SetupSound(SoundHandle * r4,
+			SoundStartable::StartResult SoundActor::detail_SetupSound(SoundHandle * r4,
 				u32 r5,
 				detail::BasicSound::AmbientArgInfo *,
 				detail::ExternalSoundPlayer *,
