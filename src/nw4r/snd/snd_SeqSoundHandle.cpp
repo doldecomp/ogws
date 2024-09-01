@@ -12,9 +12,9 @@ namespace nw4r
 		SeqSoundHandle::SeqSoundHandle(SoundHandle * pHandle) : mSound(NULL)
 		{
 			if (!pHandle) return;
-			if (!pHandle->mSound) return;
+			if (!pHandle->IsAttachedSound()) return;
 			
-			SeqSound * pSound = DynamicCast<SeqSound *, BasicSound>(pHandle->mSound);
+			SeqSound * pSound = DynamicCast<SeqSound *, BasicSound>(pHandle->detail_GetAttachedSound());
 			
 			if (pSound)
 			{	
