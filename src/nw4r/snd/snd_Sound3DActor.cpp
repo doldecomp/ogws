@@ -44,7 +44,7 @@ SoundStartable::StartResult Sound3DActor::detail_SetupSound(
                                                  &actorParam, 0x18}; // at 0x10
 
     StartResult ret = mArchivePlayer.detail_SetupSound(
-        pHandle, r29_5, &ambientArgInfo, mPlayers, r8_30, mStartInfo);
+        pHandle, r29_5, &ambientArgInfo, detail_GetActorSoundPlayer(0), r8_30, mStartInfo);
 
     if (pHandle->IsAttachedSound())
         pHandle->detail_GetAttachedSound()->SetPanCurve(PAN_CURVE_SINCOS);
