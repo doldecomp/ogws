@@ -1,16 +1,19 @@
-#include "snd_WaveSoundHandle.h"
-#include "snd_WaveSound.h"
+#include <nw4r/snd.h>
 
-namespace nw4r
-{
-    namespace snd
-    {
-        void WaveSoundHandle::DetachSound()
-        {
-            if (IsAttachedSound() && mWaveSound->mTempSpecialHandle == this)
-                mWaveSound->mTempSpecialHandle = NULL;
+namespace nw4r {
+namespace snd {
 
-            if (mWaveSound) mWaveSound = NULL;
+void WaveSoundHandle::DetachSound() {
+    if (IsAttachedSound()) {
+        if (mSound->mTempSpecialHandle == this) {
+            mSound->mTempSpecialHandle = NULL;
         }
     }
+
+    if (mSound != NULL) {
+        mSound = NULL;
+    }
 }
+
+} // namespace snd
+} // namespace nw4r

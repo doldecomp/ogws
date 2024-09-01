@@ -7,7 +7,7 @@
 namespace nw4r {
 namespace snd {
 
-class SoundHandle : public ut::NonCopyable {
+class SoundHandle : private ut::NonCopyable {
 public:
     SoundHandle() : mSound(NULL) {}
     ~SoundHandle() {
