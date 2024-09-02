@@ -1,52 +1,54 @@
 #ifndef NW4R_SND_TASK_MANAGER_H
 #define NW4R_SND_TASK_MANAGER_H
-#include "types_nw4r.h"
-#include "snd_Task.h"
-#include "ut_LinkList.h"
-#include "ut_lock.h"
-#include <revolution/OS/OSThread.h>
+#include <nw4r/snd/snd_Task.h>
+#include <nw4r/types_nw4r.h>
+#include <nw4r/ut.h>
+#include <revolution/OS.h>
 
-namespace nw4r
-{
-	namespace snd
-	{
-		namespace detail
-		{
-			struct TaskManager
-			{
-				enum TaskPriority
-				{
-					PRIORITY_LOW = 0,
-					PRIORITY_MIDDLE = 1,
-					PRIORITY_HIGH = 2
-				};
-				
-				inline TaskManager() : mTaskStacks(), WORD_0x24(0), BYTE_0x28(0)
-				{
-					OSInitThreadQueue(&mQueue_0x2C);
-					OSInitThreadQueue(&mQueue_0x34);
-				}
+namespace nw4r {
+namespace snd {
+namespace detail {
 
-				static TaskManager& GetInstance();
+class TaskManager {
+public:
+    enum TaskPriority {
+        PRIORITY_LOW = 0,
+        PRIORITY_MIDDLE = 1,
+        PRIORITY_HIGH = 2,
 
-				~TaskManager();
-				void AppendTask(Task *, TaskPriority = PRIORITY_MIDDLE);
-				Task * PopTask();
-				UNKTYPE GetNextTask();
-				UNKTYPE ExecuteTask();
-				UNKTYPE CancelTask(Task *);
-				UNKTYPE CancelAllTask();
-				UNKTYPE WaitTask();
-				UNKTYPE CancelWaitTask();
+        PRIORITY_MAX
+    };
 
-				ut::LinkList<Task, 4> mTaskStacks[3];
-				u32 WORD_0x24;
-				u8 BYTE_0x28;
-				OSThreadQueue mQueue_0x2C;
-				OSThreadQueue mQueue_0x34;
-			};
-		}
-	}
-}
+public:
+    static TaskManager& GetInstance();
+
+    TaskManager();
+    ~TaskManager() {}
+
+    void AppendTask(Task* pTask, TaskPriority priority = PRIORITY_MIDDLE);
+    Task* PopTask();
+    Task* GetNextTask();
+
+    Task* ExecuteTask();
+    void CancelTask(Task* pTask);
+    void CancelAllTask();
+
+    void WaitTask();
+    void CancelWaitTask();
+
+private:
+    Task* GetNextTask(TaskPriority priority, bool remove);
+
+private:
+    TaskList mTaskList[PRIORITY_MAX]; // at 0x0
+    Task* volatile mCurrentTask;      // at 0x24
+    bool mCancelWaitTaskFlag;         // at 0x28
+    OSThreadQueue mAppendThreadQueue; // at 0x2C
+    OSThreadQueue mDoneThreadQueue;   // at 0x34
+};
+
+} // namespace detail
+} // namespace snd
+} // namespace nw4r
 
 #endif

@@ -57,8 +57,8 @@ void SoundThread::AxCallbackFunc() {
 void SoundThread::AxCallbackProc() {
     OSSendMessage(&mMsgQueue, reinterpret_cast<OSMessage>(MSG_AX_CALLBACK), 0);
 
-    NW4R_UT_LIST_FOREACH(mPlayerCallbackList,
-                         { it->OnUpdateVoiceSoundThread(); });
+    NW4R_UT_LIST_SAFE_FOREACH (mPlayerCallbackList,
+                          { it->OnUpdateVoiceSoundThread(); })
 
     VoiceManager::GetInstance().NotifyVoiceUpdate();
 }
@@ -95,8 +95,9 @@ void SoundThread::SoundThreadProc() {
         if (reinterpret_cast<u32>(msg) == MSG_AX_CALLBACK) {
             ut::detail::AutoLock<OSMutex> lock(mMutex);
 
-            NW4R_UT_LIST_FOREACH(mSoundFrameCallbackList,
-                                 { it->OnBeginSoundFrame(); });
+            NW4R_UT_LIST_SAFE_FOREACH(mSoundFrameCallbackList,
+                it->OnBeginSoundFrame();
+            )
 
             u32 start = OSGetTick();
             {
@@ -104,8 +105,9 @@ void SoundThread::SoundThreadProc() {
                 AxManager::GetInstance().Update();
 
                 if (!AxManager::GetInstance().IsDiskError()) {
-                    NW4R_UT_LIST_FOREACH(mPlayerCallbackList,
-                                         { it->OnUpdateFrameSoundThread(); });
+                    NW4R_UT_LIST_SAFE_FOREACH(mPlayerCallbackList,
+                        it->OnUpdateFrameSoundThread();
+                    )
 
                     ChannelManager::GetInstance().UpdateAllChannel();
                 }
@@ -115,12 +117,14 @@ void SoundThread::SoundThreadProc() {
             }
             mProcessTick = OSGetTick() - start;
 
-            NW4R_UT_LIST_FOREACH(mSoundFrameCallbackList,
-                                 { it->OnEndSoundFrame(); });
+            NW4R_UT_LIST_SAFE_FOREACH(mSoundFrameCallbackList,
+                it->OnEndSoundFrame();
+            )
 
         } else if (reinterpret_cast<u32>(msg) == MSG_SHUTDOWN) {
-            NW4R_UT_LIST_FOREACH(mPlayerCallbackList,
-                                 { it->OnShutdownSoundThread(); });
+            NW4R_UT_LIST_SAFE_FOREACH(mPlayerCallbackList,
+                it->OnShutdownSoundThread();
+            )
 
             break;
         }

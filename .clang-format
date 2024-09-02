@@ -12,3 +12,4 @@ ConstructorInitializerAllOnOneLineOrOnePerLine: true
 FixNamespaceComments: true
 AccessModifierOffset: -4
 AllowShortFunctionsOnASingleLine: Empty
+WhitespaceSensitiveMacros: [NW4R_UT_LIST_SAFE_FOREACH]

@@ -8,6 +8,8 @@ namespace snd {
 namespace detail {
 
 class Task : private ut::NonCopyable {
+    friend class TaskManager;
+
 public:
     Task() : mBusyFlag(false) {}
     virtual ~Task(); // at 0x8

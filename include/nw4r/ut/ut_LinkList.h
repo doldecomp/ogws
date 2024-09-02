@@ -131,7 +131,7 @@ public:
         Erase(GetBeginIter());
     }
     void PopBack() {
-        Erase(GetEndIter());
+        Erase(--GetEndIter());
     }
 
     void Clear();
@@ -414,16 +414,16 @@ public:
  *
  * Access the current element with "it"
  */
-#define NW4R_UT_LIST_FOREACH(LIST, ...)                                        \
-    do {                                                                       \
-        typedef __decltype__(LIST.GetBeginIter()) IterType;                    \
+#define NW4R_UT_LIST_SAFE_FOREACH(LIST, ...)                                   \
+    {                                                                          \
+        typedef DECLTYPE(LIST.GetBeginIter()) IterType;                        \
                                                                                \
-        for (IterType impl = LIST.GetBeginIter();                              \
+        for (DECLTYPE(LIST.GetBeginIter()) impl = LIST.GetBeginIter();         \
              impl != LIST.GetEndIter();) {                                     \
                                                                                \
             IterType it = impl++;                                              \
             __VA_ARGS__                                                        \
         }                                                                      \
-    } while (0)
+    }
 
 #endif
