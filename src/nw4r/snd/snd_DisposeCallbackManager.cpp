@@ -25,6 +25,8 @@ void DisposeCallbackManager::UnregisterDisposeCallback(
 }
 
 void DisposeCallbackManager::Dispose(void* pData, u32 size, void* pArg) {
+#pragma unused(pArg)
+
     const void* start = pData;
     const void* end = static_cast<u8*>(pData) + size;
 
@@ -38,6 +40,8 @@ void DisposeCallbackManager::Dispose(void* pData, u32 size, void* pArg) {
 }
 
 void DisposeCallbackManager::DisposeWave(void* pData, u32 size, void* pArg) {
+#pragma unused(pArg)
+
     const void* start = pData;
     const void* end = static_cast<u8*>(pData) + size;
 

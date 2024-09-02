@@ -17,9 +17,7 @@ public:
     public:
         NW4R_UT_LIST_NODE_DECL(); // at 0x0
 
-        SoundFrameCallback() {}
-        virtual ~SoundFrameCallback() {} // at 0x8
-
+        virtual ~SoundFrameCallback() {}    // at 0x8
         virtual void OnBeginSoundFrame() {} // at 0xC
         virtual void OnEndSoundFrame() {}   // at 0x10
     };
@@ -30,9 +28,7 @@ public:
     public:
         NW4R_UT_LIST_NODE_DECL(); // at 0x0
 
-        PlayerCallback() {}
-        virtual ~PlayerCallback() {} // at 0x8
-
+        virtual ~PlayerCallback() {}               // at 0x8
         virtual void OnUpdateFrameSoundThread() {} // at 0xC
         virtual void OnUpdateVoiceSoundThread() {} // at 0x10
         virtual void OnShutdownSoundThread() {}    // at 0x14

@@ -16,10 +16,6 @@ public:
     FrameHeap();
     ~FrameHeap();
 
-    bool IsValid() const {
-        return mHandle != NULL;
-    }
-
     bool Create(void* pBase, u32 size);
     void Destroy();
     void Clear();
@@ -33,6 +29,10 @@ public:
 
     bool NewSection();
     void ClearSection();
+
+    bool IsValid() const {
+        return mHandle != NULL;
+    }
 
 private:
     struct Block {
