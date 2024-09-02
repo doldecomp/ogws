@@ -47,6 +47,7 @@
 #include <nw4r/snd/snd_SoundPlayer.h>
 #include <nw4r/snd/snd_SoundStartable.h>
 #include <nw4r/snd/snd_SoundThread.h>
+#include <nw4r/snd/snd_StrmChannel.h>
 #include <nw4r/snd/snd_StrmFile.h>
 #include <nw4r/snd/snd_StrmPlayer.h>
 #include <nw4r/snd/snd_StrmSoundHandle.h>
