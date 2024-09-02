@@ -48,13 +48,13 @@ bool ResFont::SetResource(void* buffer) {
                 reinterpret_cast<char*>(block) + block->length);
         }
     } else {
-        if (header->version == NW4R_VERSION(1, 04)) {
-            if (!IsValidBinaryFile(header, MAGIC_RESFONT, NW4R_VERSION(1, 04),
+        if (header->version == NW4R_VERSION(1, 4)) {
+            if (!IsValidBinaryFile(header, MAGIC_RESFONT, NW4R_VERSION(1, 4),
                                    2)) {
                 return false;
             }
-        } else if (!IsValidBinaryFile(header, MAGIC_RESFONT,
-                                      NW4R_VERSION(1, 02), 2)) {
+        } else if (!IsValidBinaryFile(header, MAGIC_RESFONT, NW4R_VERSION(1, 2),
+                                      2)) {
             return false;
         }
 

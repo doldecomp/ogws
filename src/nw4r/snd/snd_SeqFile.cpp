@@ -15,7 +15,7 @@ bool SeqFileReader::IsValidFileHeader(const void* pSeqData) {
         return false;
     }
 
-    if (pFileHeader->version < NW4R_VERSION(1, 00)) {
+    if (pFileHeader->version < NW4R_VERSION(1, 0)) {
         return false;
     }
 
@@ -26,16 +26,16 @@ bool SeqFileReader::IsValidFileHeader(const void* pSeqData) {
     return true;
 }
 
-SeqFileReader::SeqFileReader(const void* pSeqData)
+SeqFileReader::SeqFileReader(const void* pSeqBin)
     : mHeader(NULL), mDataBlock(NULL) {
-    if (!IsValidFileHeader(pSeqData)) {
+    if (!IsValidFileHeader(pSeqBin)) {
         return;
     }
 
-    mHeader = static_cast<const SeqFile::Header*>(pSeqData);
+    mHeader = static_cast<const SeqFile::Header*>(pSeqBin);
 
     mDataBlock = static_cast<const SeqFile::DataBlock*>(
-        ut::AddOffsetToPtr(pSeqData, mHeader->dataBlockOffset));
+        ut::AddOffsetToPtr(mHeader, mHeader->dataBlockOffset));
 }
 
 const void* SeqFileReader::GetBaseAddress() const {

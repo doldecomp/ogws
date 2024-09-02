@@ -11,15 +11,43 @@ namespace detail {
 namespace StrmFile {
 
 struct StrmDataInfo {
-    char dummy[0x34];
+    u8 format;               // at 0x0
+    u8 loopFlag;             // at 0x1
+    u8 numChannels;          // at 0x2
+    u8 sampleRate24;         // at 0x3
+    u16 sampleRate;          // at 0x4
+    u16 blockHeaderOffset;   // at 0x6
+    u32 loopStart;           // at 0x8
+    u32 loopEnd;             // at 0xC
+    u32 dataOffset;          // at 0x10
+    u32 numBlocks;           // at 0x14
+    u32 blockSize;           // at 0x18
+    u32 blockSamples;        // at 0x1C
+    u32 lastBlockSize;       // at 0x20
+    u32 lastBlockSamples;    // at 0x24
+    u32 lastBlockPaddedSize; // at 0x28
+    u32 adpcmDataInterval;   // at 0x2C
+    u32 adpcmDataSize;       // at 0x30
+};
+
+struct TrackInfo {
+    u8 channelCount;        // at 0x0
+    u8 channelIndexTable[]; // at 0x1
 };
 
 struct TrackTable {
-    char dummy[0x4];
+    u8 trackCount;                             // at 0x0
+    u8 trackDataType;                          // at 0x1
+    Util::DataRef<TrackInfo> refTrackHeader[]; // at 0x4
+};
+
+struct ChannelInfo {
+    Util::DataRef<AdpcmInfo> refAdpcmInfo; // at 0x0
 };
 
 struct ChannelTable {
-    char dummy[0x4];
+    u8 channelCount;                               // at 0x0
+    Util::DataRef<ChannelInfo> refChannelHeader[]; // at 0x4
 };
 
 struct Header {
@@ -62,6 +90,9 @@ struct StrmInfo {
 
 class StrmFileReader {
 public:
+    static const u32 SIGNATURE = 'RSTM';
+    static const int VERSION = NW4R_VERSION(1, 0);
+
 public:
     StrmFileReader();
 
@@ -69,8 +100,19 @@ public:
         return mHeader != NULL;
     }
 
+    bool IsValidFileHeader(const void* pStrmBin);
+    void Setup(const void* pStrmBin);
+
     bool ReadStrmInfo(StrmInfo* pStrmInfo) const;
-    bool ReadAdpcmInfo(AdpcmInfo* pAdpcmInfo, int channel) const;
+    bool ReadAdpcmInfo(AdpcmInfo* pAdpcmInfo, int channels) const;
+
+    u32 GetAdpcBlockOffset() const {
+        if (IsAvailable()) {
+            return mHeader->adpcBlockOffset;
+        }
+
+        return 0;
+    }
 
 private:
     const StrmFile::Header* mHeader;       // at 0x0
@@ -80,6 +122,9 @@ private:
 class StrmFileLoader {
 public:
     StrmFileLoader(ut::FileStream& rFileStream) : mStream(rFileStream) {}
+
+    bool LoadFileHeader(void* pStrmBin, u32 size);
+    bool ReadAdpcBlockData(u16* pYN1, u16* pYN2, int block, int channels);
 
     bool ReadStrmInfo(StrmInfo* pStrmInfo) const {
         if (!mReader.IsAvailable()) {
@@ -97,8 +142,9 @@ public:
         return mReader.ReadAdpcmInfo(pAdpcmInfo, channel);
     }
 
-    bool LoadFileHeader(void* pHeader, u32 size);
-    bool ReadAdpcBlockData(u16* pYN1, u16* pYN2, int block, int channels);
+private:
+    static const int HEADER_ALIGNED_SIZE =
+        ROUND_UP(sizeof(StrmFile::Header), 32);
 
 private:
     ut::FileStream& mStream; // at 0x0

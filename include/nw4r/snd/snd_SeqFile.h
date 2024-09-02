@@ -25,16 +25,16 @@ struct DataBlock {
 
 class SeqFileReader {
 public:
-    static const int SIGNATURE = 'RSEQ';
-    static const int VERSION = NW4R_VERSION(1, 00);
+    static const u32 SIGNATURE = 'RSEQ';
+    static const int VERSION = NW4R_VERSION(1, 0);
 
 public:
-    SeqFileReader(const void* pSeqData);
+    SeqFileReader(const void* pSeqBin);
 
     const void* GetBaseAddress() const;
 
 private:
-    bool IsValidFileHeader(const void* pSeqData);
+    bool IsValidFileHeader(const void* pSeqBin);
 
 private:
     const SeqFile::Header* mHeader;       // at 0x0

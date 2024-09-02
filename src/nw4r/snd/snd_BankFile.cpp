@@ -15,15 +15,15 @@ enum {
     DATATYPE_INDEXTABLE = Util::DATATYPE_T3,
 };
 
-bool BankFileReader::IsValidFileHeader(const void* pBankData) {
+bool BankFileReader::IsValidFileHeader(const void* pBankBin) {
     const ut::BinaryFileHeader* pFileHeader =
-        static_cast<const ut::BinaryFileHeader*>(pBankData);
+        static_cast<const ut::BinaryFileHeader*>(pBankBin);
 
     if (pFileHeader->magic != SIGNATURE) {
         return false;
     }
 
-    if (pFileHeader->version < NW4R_VERSION(1, 00)) {
+    if (pFileHeader->version < NW4R_VERSION(1, 0)) {
         return false;
     }
 
@@ -34,13 +34,13 @@ bool BankFileReader::IsValidFileHeader(const void* pBankData) {
     return true;
 }
 
-BankFileReader::BankFileReader(const void* pBankData)
+BankFileReader::BankFileReader(const void* pBankBin)
     : mHeader(NULL), mDataBlock(NULL), mWaveBlock(NULL) {
-    if (!IsValidFileHeader(pBankData)) {
+    if (!IsValidFileHeader(pBankBin)) {
         return;
     }
 
-    mHeader = static_cast<const BankFile::Header*>(pBankData);
+    mHeader = static_cast<const BankFile::Header*>(pBankBin);
 
     mDataBlock = static_cast<const BankFile::DataBlock*>(
         ut::AddOffsetToPtr(mHeader, mHeader->dataBlockOffset));
