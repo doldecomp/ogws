@@ -3,6 +3,7 @@
 #include "snd_SoundThread.h"
 #include "snd_DisposeCallbackManager.h"
 #include <OSMutex.h>
+#include <nw4r/ut.h>
 
 namespace nw4r
 {
@@ -32,54 +33,39 @@ namespace nw4r
 
         void * SoundHeap::Alloc(u32 blockSize)
         {
-            OSMutex *mutex = &mMutex;
+            ut::detail::AutoLock<OSMutex> lock(mMutex);
 
-            OSLockMutex(mutex);
-            void* result = mFrameHeap.Alloc(blockSize, &DisposeCallbackFunc, NULL);
-            OSUnlockMutex(mutex);
-            return result;
+            return mFrameHeap.Alloc(blockSize, &DisposeCallbackFunc, NULL);
         }
 
         void * SoundHeap::Alloc(u32 blockSize, FrameHeap::AllocCallback callback, void *p)
         {
-            OSMutex *mutex = &mMutex;
+            ut::detail::AutoLock<OSMutex> lock(mMutex);
 
-            OSLockMutex(mutex);
-            void* result = mFrameHeap.Alloc(blockSize, callback, p);
-            OSUnlockMutex(mutex);
-            return result;
+            return mFrameHeap.Alloc(blockSize, callback, p);
         }
 
         void SoundHeap::Clear()
         {
-            OSMutex* mutex = &mMutex;
+            ut::detail::AutoLock<OSMutex> lockHeap(mMutex);
+            SoundThread::AutoLock lockThread;
 
-            OSLockMutex(mutex);
-            SoundThread::GetInstance().Lock();
             mFrameHeap.Clear();
-            SoundThread::GetInstance().Unlock();
-            OSUnlockMutex(mutex);
         }
 
         int SoundHeap::SaveState()
         {
-            OSMutex* mutex = &mMutex;
+            ut::detail::AutoLock<OSMutex> lock(mMutex);
 
-            OSLockMutex(mutex);
-            int result = mFrameHeap.SaveState();
-            OSUnlockMutex(mutex);
-            return result;
+            return mFrameHeap.SaveState();
         }
 
         void SoundHeap::LoadState(int state)
         {
-            OSMutex* mutex = &mMutex;
+            ut::detail::AutoLock<OSMutex> lockHeap(mMutex);
+            SoundThread::AutoLock lockThread;
 
-            OSLockMutex(mutex);
-            SoundThread::GetInstance().Lock();
             mFrameHeap.LoadState(state);
-            SoundThread::GetInstance().Unlock();
-            OSUnlockMutex(mutex);
         }
 
         void SoundHeap::DisposeCallbackFunc(void *p1, u32 i, void *p2)

@@ -15,7 +15,7 @@ BOOL OSSendMessage(OSMessageQueue* queue, OSMessage mesg, u32 flags) {
     BOOL enabled = OSDisableInterrupts();
 
     while (queue->capacity <= queue->size) {
-        if (!(flags & OS_MSG_PERSISTENT)) {
+        if (!(flags & OS_MSG_BLOCKING)) {
             OSRestoreInterrupts(enabled);
             return FALSE;
         }
@@ -36,7 +36,7 @@ BOOL OSReceiveMessage(OSMessageQueue* queue, OSMessage* mesg, u32 flags) {
     BOOL enabled = OSDisableInterrupts();
 
     while (queue->size == 0) {
-        if (!(flags & OS_MSG_PERSISTENT)) {
+        if (!(flags & OS_MSG_BLOCKING)) {
             OSRestoreInterrupts(enabled);
             return FALSE;
         }
@@ -61,7 +61,7 @@ BOOL OSJamMessage(OSMessageQueue* queue, OSMessage mesg, u32 flags) {
     BOOL enabled = OSDisableInterrupts();
 
     while (queue->capacity <= queue->size) {
-        if (!(flags & OS_MSG_PERSISTENT)) {
+        if (!(flags & OS_MSG_BLOCKING)) {
             OSRestoreInterrupts(enabled);
             return FALSE;
         }

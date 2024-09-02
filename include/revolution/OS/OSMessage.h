@@ -9,7 +9,7 @@ extern "C" {
 // General-purpose typedef
 typedef void* OSMessage;
 
-typedef enum { OS_MSG_PERSISTENT = (1 << 0) } OSMessageFlags;
+typedef enum { OS_MSG_BLOCKING = (1 << 0) } OSMessageFlags;
 
 typedef struct OSMessageQueue {
     OSThreadQueue sendQueue; // at 0x0
