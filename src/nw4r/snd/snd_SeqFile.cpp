@@ -1,40 +1,47 @@
-#include "snd_SeqFile.h"
-#include "ut_algorithm.h"
+#pragma ipa file // TODO: REMOVE AFTER REFACTOR
 
-namespace nw4r
-{
-	using namespace ut;
-	
-	namespace snd
-	{
-		namespace detail
-		{
-			bool SeqFileReader::IsValidFileHeader(const void * ptr)
-			{
-				const BinaryFileHeader * pFileHeader = static_cast<const BinaryFileHeader *>(ptr);
-				
-				if (pFileHeader->magic != 'RSEQ') return false;
-				
-				if (pFileHeader->version < 0x0100) return false;
-				
-				return pFileHeader->version <= 0x0100;
-			}
-			
-			SeqFileReader::SeqFileReader(const void * ptr) : mFile(), PTR_0x4()
-			{
-				const SeqFile * pFile = static_cast<const SeqFile *>(ptr);
-				
-				if (IsValidFileHeader(ptr))
-				{
-					mFile = pFile;
-					PTR_0x4 = (UNKBLOCK *)AddOffsetToPtr<u32>(ptr, pFile->OFFSET_0x10);
-				}
-			}
-			
-			const void * SeqFileReader::GetBaseAddress() const
-			{
-				return AddOffsetToPtr<u32>(PTR_0x4, PTR_0x4->OFFSET_0x8);
-			}
-		}
-	}
+#include <nw4r/snd.h>
+#include <nw4r/ut.h>
+
+namespace nw4r {
+namespace snd {
+namespace detail {
+
+bool SeqFileReader::IsValidFileHeader(const void* pSeqData) {
+    const ut::BinaryFileHeader* pFileHeader =
+        static_cast<const ut::BinaryFileHeader*>(pSeqData);
+
+    if (pFileHeader->magic != SIGNATURE) {
+        return false;
+    }
+
+    if (pFileHeader->version < NW4R_VERSION(1, 00)) {
+        return false;
+    }
+
+    if (pFileHeader->version > VERSION) {
+        return false;
+    }
+
+    return true;
 }
+
+SeqFileReader::SeqFileReader(const void* pSeqData)
+    : mHeader(NULL), mDataBlock(NULL) {
+    if (!IsValidFileHeader(pSeqData)) {
+        return;
+    }
+
+    mHeader = static_cast<const SeqFile::Header*>(pSeqData);
+
+    mDataBlock = static_cast<const SeqFile::DataBlock*>(
+        ut::AddOffsetToPtr(pSeqData, mHeader->dataBlockOffset));
+}
+
+const void* SeqFileReader::GetBaseAddress() const {
+    return ut::AddOffsetToPtr(mDataBlock, mDataBlock->baseOffset);
+}
+
+} // namespace detail
+} // namespace snd
+} // namespace nw4r

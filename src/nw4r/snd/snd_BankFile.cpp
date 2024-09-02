@@ -43,10 +43,10 @@ BankFileReader::BankFileReader(const void* pBankData)
     mHeader = static_cast<const BankFile::Header*>(pBankData);
 
     mDataBlock = static_cast<const BankFile::DataBlock*>(
-        ut::AddOffsetToPtr<u32>(mHeader, mHeader->dataBlockOffset));
+        ut::AddOffsetToPtr(mHeader, mHeader->dataBlockOffset));
 
     mWaveBlock = static_cast<const BankFile::WaveBlock*>(
-        ut::AddOffsetToPtr<u32>(mHeader, mHeader->waveBlockOffset));
+        ut::AddOffsetToPtr(mHeader, mHeader->waveBlockOffset));
 }
 
 bool BankFileReader::ReadInstInfo(InstInfo* pInfo, int prgNo, int key,
