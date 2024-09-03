@@ -127,7 +127,7 @@ bool SeqSound::WriteGlobalVariable(int i, s16 value) {
 }
 
 bool SeqSound::IsAttachedTempSpecialHandle() {
-    return mTempSpecialHandle;
+    return mTempSpecialHandle != NULL;
 }
 
 void SeqSound::DetachTempSpecialHandle() {

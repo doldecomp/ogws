@@ -1,85 +1,56 @@
-#include "snd_StrmSound.h"
-#include "snd_StrmSoundHandle.h"
-#include "snd_SoundInstanceManager.h"
-#include "ut_algorithm.h"
+#pragma ipa file // TODO: REMOVE AFTER REFACTOR
 
-namespace nw4r
-{
-    namespace snd
-    {
-        namespace detail
-        {
-            StrmSound::StrmSound(SoundInstanceManager<StrmSound> *pManager)
-                : mPlayer(), mManager(pManager), mTempSpecialHandle(NULL)
-            {
+#include <nw4r/snd.h>
+#include <nw4r/ut.h>
 
-            }
+namespace nw4r {
+namespace snd {
+namespace detail {
 
-            bool StrmSound::Prepare(StrmBufferPool *pPool, StrmPlayer::StartOffsetType offset,
-                s32 r6, int r7, ut::FileStream *pStream)
-            {
-                if (pPool == NULL) return false;
+NW4R_UT_RTTI_DEF_DERIVED(StrmSound, BasicSound);
 
-                InitParam();
-                
-                if (!mPlayer.Setup(pPool)) return false;
-                if (!mPlayer.Prepare(pStream, r7, offset, r6))
-                {
-                    mPlayer.Shutdown();
-                    return false;
-                }
+StrmSound::StrmSound(SoundInstanceManager<StrmSound>* pManager)
+    : mManager(pManager), mTempSpecialHandle(NULL) {}
 
-                return true;
-            }
-
-            UNKTYPE StrmSound::Shutdown()
-            {
-                BasicSound::Shutdown();
-                mManager->Free(this);
-            }
-
-            StrmSound::~StrmSound()
-            {
-
-            }
-
-            void StrmSound::SetPlayerPriority(int priority)
-            {
-                BasicSound::SetPlayerPriority(priority);
-                mManager->UpdatePriority(this, CalcCurrentPlayerPriority());
-            }
-
-            bool StrmSound::IsAttachedTempSpecialHandle()
-            {
-                return (mTempSpecialHandle != NULL);
-            }
-
-            UNKTYPE StrmSound::DetachTempSpecialHandle()
-            {
-                mTempSpecialHandle->DetachSound();
-            }
-
-            BasicPlayer& StrmSound::GetBasicPlayer()
-            {
-                return mPlayer;
-            }
-
-            const BasicPlayer& StrmSound::GetBasicPlayer() const
-            {
-                return mPlayer;
-            }
-
-            bool StrmSound::IsPrepared() const
-            {
-                return mPlayer.IsPrepared();
-            }
-
-            const ut::detail::RuntimeTypeInfo * StrmSound::GetRuntimeTypeInfo() const
-            {
-                return &typeInfo;
-            }
-
-            ut::detail::RuntimeTypeInfo StrmSound::typeInfo(&BasicSound::typeInfo);
-        }
+bool StrmSound::Prepare(StrmBufferPool* pPool,
+                        StrmPlayer::StartOffsetType offsetType, s32 offset,
+                        int voices, ut::FileStream* pStream) {
+    if (pPool == NULL) {
+        return false;
     }
+
+    InitParam();
+
+    if (!mStrmPlayer.Setup(pPool)) {
+        return false;
+    }
+
+    if (!mStrmPlayer.Prepare(pStream, voices, offsetType, offset)) {
+        mStrmPlayer.Shutdown();
+        return false;
+    }
+
+    return true;
 }
+
+void StrmSound::Shutdown() {
+    BasicSound::Shutdown();
+    mManager->Free(this);
+}
+
+void StrmSound::SetPlayerPriority(int priority) {
+    BasicSound::SetPlayerPriority(priority);
+    mManager->UpdatePriority(this, CalcCurrentPlayerPriority());
+}
+
+bool StrmSound::IsAttachedTempSpecialHandle() {
+    return mTempSpecialHandle != NULL;
+}
+
+void StrmSound::DetachTempSpecialHandle() {
+    mTempSpecialHandle->DetachSound();
+}
+
+} // namespace detail
+} // namespace snd
+} // namespace nw4r
