@@ -32,8 +32,8 @@ namespace nw4r
                 virtual void SetPlayerPriority(int); // at 0x4c
                 virtual bool IsAttachedTempSpecialHandle(); // at 0x5c
                 virtual UNKTYPE DetachTempSpecialHandle(); // at 0x60
-                virtual BasicPlayer * GetBasicPlayer(); // at 0x68
-                virtual const BasicPlayer * GetBasicPlayer() const; // at 0x6c
+                virtual BasicPlayer& GetBasicPlayer(); // at 0x68
+                virtual const BasicPlayer& GetBasicPlayer() const; // at 0x6c
             };
         }
     }

@@ -128,9 +128,7 @@ bool WsdFileReader::ReadWaveParam(int id, WaveData* pWaveData,
     }
 
     WaveFileReader reader(pWaveInfo);
-    reader.ReadWaveParam(pWaveData, pWaveAddr);
-
-    // @bug Missing return value
+    return reader.ReadWaveParam(pWaveData, pWaveAddr);
 }
 
 } // namespace detail

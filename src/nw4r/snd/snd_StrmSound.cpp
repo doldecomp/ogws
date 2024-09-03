@@ -59,14 +59,14 @@ namespace nw4r
                 mTempSpecialHandle->DetachSound();
             }
 
-            BasicPlayer * StrmSound::GetBasicPlayer()
+            BasicPlayer& StrmSound::GetBasicPlayer()
             {
-                return &mPlayer;
+                return mPlayer;
             }
 
-            const BasicPlayer * StrmSound::GetBasicPlayer() const
+            const BasicPlayer& StrmSound::GetBasicPlayer() const
             {
-                return &mPlayer;
+                return mPlayer;
             }
 
             bool StrmSound::IsPrepared() const

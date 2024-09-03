@@ -31,10 +31,12 @@
 #include <nw4r/snd/snd_MmlSeqTrackAllocator.h>
 #include <nw4r/snd/snd_MoveValue.h>
 #include <nw4r/snd/snd_NandSoundArchive.h>
+#include <nw4r/snd/snd_PlayerHeap.h>
 #include <nw4r/snd/snd_RemoteSpeaker.h>
 #include <nw4r/snd/snd_RemoteSpeakerManager.h>
 #include <nw4r/snd/snd_SeqFile.h>
 #include <nw4r/snd/snd_SeqPlayer.h>
+#include <nw4r/snd/snd_SeqSound.h>
 #include <nw4r/snd/snd_SeqSoundHandle.h>
 #include <nw4r/snd/snd_SeqTrack.h>
 #include <nw4r/snd/snd_SeqTrackAllocator.h>
@@ -45,6 +47,7 @@
 #include <nw4r/snd/snd_SoundArchivePlayer.h>
 #include <nw4r/snd/snd_SoundHandle.h>
 #include <nw4r/snd/snd_SoundHeap.h>
+#include <nw4r/snd/snd_SoundInstanceManager.h>
 #include <nw4r/snd/snd_SoundPlayer.h>
 #include <nw4r/snd/snd_SoundStartable.h>
 #include <nw4r/snd/snd_SoundThread.h>

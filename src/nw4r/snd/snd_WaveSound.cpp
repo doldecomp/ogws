@@ -64,14 +64,14 @@ namespace nw4r
                 mTempSpecialHandle->DetachSound();
             }
 
-            BasicPlayer * WaveSound::GetBasicPlayer()
+            BasicPlayer& WaveSound::GetBasicPlayer()
             {
-                return &mPlayer;
+                return mPlayer;
             }
 
-            const BasicPlayer * WaveSound::GetBasicPlayer() const
+            const BasicPlayer& WaveSound::GetBasicPlayer() const
             {
-                return &mPlayer;
+                return mPlayer;
             }
 
             bool WaveSound::IsPrepared() const

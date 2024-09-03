@@ -73,8 +73,8 @@ public:
     virtual bool IsAttachedTempSpecialHandle() = 0;        // at 0x5C
     virtual void DetachTempSpecialHandle() = 0;            // at 0x60
     virtual void InitParam();                              // at 0x64
-    virtual BasicPlayer* GetBasicPlayer() = 0;             // at 0x68
-    virtual const BasicPlayer* GetBasicPlayer() const = 0; // at 0x6C
+    virtual BasicPlayer& GetBasicPlayer() = 0;             // at 0x68
+    virtual const BasicPlayer& GetBasicPlayer() const = 0; // at 0x6C
 
     PlayerHeap* GetPlayerHeap() {
         return mPlayerHeap;

@@ -65,10 +65,10 @@ void BasicSound::StartPrepared() {
 }
 
 void BasicSound::Stop(int frames) {
-    BasicPlayer* player = GetBasicPlayer();
+    BasicPlayer& player = GetBasicPlayer();
 
-    if (frames == 0 || !player->IsActive() || !player->IsStarted() ||
-        player->IsPause()) {
+    if (frames == 0 || !player.IsActive() || !player.IsStarted() ||
+        player.IsPause()) {
         Shutdown();
         return;
     }
@@ -84,7 +84,7 @@ void BasicSound::Stop(int frames) {
 }
 
 void BasicSound::Pause(bool flag, int frames) {
-    BasicPlayer* player = GetBasicPlayer();
+    BasicPlayer& player = GetBasicPlayer();
 
     if (flag) {
         int t = frames * mPauseFadeVolume.GetValue();
@@ -97,7 +97,7 @@ void BasicSound::Pause(bool flag, int frames) {
         mPauseFadeVolume.SetTarget(0.0f, t);
     } else {
         if (mIsPause != flag) {
-            player->Pause(false);
+            player.Pause(false);
         }
 
         int t = frames * (1.0f - mPauseFadeVolume.GetValue());
@@ -132,9 +132,9 @@ bool BasicSound::IsPause() const {
 }
 
 void BasicSound::Update() {
-    BasicPlayer* player = GetBasicPlayer();
+    BasicPlayer& player = GetBasicPlayer();
 
-    if (mIsAutoStop && player->IsActive()) {
+    if (mIsAutoStop && player.IsActive()) {
         if (mAutoStopCounter == 0) {
             Stop(0);
             return;
@@ -156,16 +156,16 @@ void BasicSound::Update() {
         startPlayer = true;
     }
 
-    if (player->IsStarted() && mUpdateCounter < 0xFFFFFFFF) {
+    if (player.IsStarted() && mUpdateCounter < 0xFFFFFFFF) {
         mUpdateCounter++;
     }
 
-    if (!player->IsActive()) {
+    if (!player.IsActive()) {
         Shutdown();
         return;
     }
 
-    if (player->IsPause()) {
+    if (player.IsPause()) {
         return;
     }
 
@@ -232,15 +232,15 @@ void BasicSound::Update() {
         remoteOutVol[i] *= GetRemoteOutVolume(i);
     }
 
-    player->SetVolume(volume);
-    player->SetPan(pan);
-    player->SetSurroundPan(surroundPan);
-    player->SetPitch(pitch);
-    player->SetOutputLine(outputLine);
-    player->SetMainOutVolume(mainOutVol);
+    player.SetVolume(volume);
+    player.SetPan(pan);
+    player.SetSurroundPan(surroundPan);
+    player.SetPitch(pitch);
+    player.SetOutputLine(outputLine);
+    player.SetMainOutVolume(mainOutVol);
 
     for (int i = 0; i < WPAD_MAX_CONTROLLERS; i++) {
-        player->SetRemoteOutVolume(i, remoteOutVol[i]);
+        player.SetRemoteOutVolume(i, remoteOutVol[i]);
     }
 
     if (mIsFadeOut && mFadeVolume.IsFinished()) {
@@ -253,25 +253,25 @@ void BasicSound::Update() {
         mIsPauseFade = false;
 
         if (mIsPause) {
-            player->Pause(mIsPause);
+            player.Pause(mIsPause);
         }
     }
 
-    if (startPlayer && player->Start()) {
+    if (startPlayer && player.Start()) {
         mIsStarted = true;
         mIsStarting = false;
     }
 }
 
 void BasicSound::Shutdown() {
-    BasicPlayer* player = GetBasicPlayer();
+    BasicPlayer& player = GetBasicPlayer();
 
-    if (player->IsActive()) {
+    if (player.IsActive()) {
         if (mIsFadeOut) {
-            player->SetVolume(0.0f);
+            player.SetVolume(0.0f);
         }
 
-        player->Stop();
+        player.Stop();
     }
 
     SetId(0xFFFFFFFF);
@@ -339,7 +339,7 @@ void BasicSound::SetSurroundPan(f32 pan) {
 }
 
 void BasicSound::SetLpfFreq(f32 freq) {
-    GetBasicPlayer()->SetLpfFreq(freq);
+    GetBasicPlayer().SetLpfFreq(freq);
 }
 
 void BasicSound::SetOutputLine(int flag) {
@@ -364,19 +364,19 @@ void BasicSound::SetRemoteOutVolume(int remote, f32 vol) {
 }
 
 void BasicSound::SetFxSend(AuxBus bus, f32 send) {
-    GetBasicPlayer()->SetFxSend(bus, send);
+    GetBasicPlayer().SetFxSend(bus, send);
 }
 
 void BasicSound::SetRemoteFilter(int filter) {
-    GetBasicPlayer()->SetRemoteFilter(filter);
+    GetBasicPlayer().SetRemoteFilter(filter);
 }
 
 void BasicSound::SetPanMode(PanMode mode) {
-    GetBasicPlayer()->SetPanMode(mode);
+    GetBasicPlayer().SetPanMode(mode);
 }
 
 void BasicSound::SetPanCurve(PanCurve curve) {
-    GetBasicPlayer()->SetPanCurve(curve);
+    GetBasicPlayer().SetPanCurve(curve);
 }
 
 f32 BasicSound::GetInitialVolume() const {
@@ -431,7 +431,7 @@ void BasicSound::DetachTempGeneralHandle() {
 
 void BasicSound::SetId(u32 id) {
     mId = id;
-    GetBasicPlayer()->SetId(id);
+    GetBasicPlayer().SetId(id);
 }
 
 } // namespace detail
