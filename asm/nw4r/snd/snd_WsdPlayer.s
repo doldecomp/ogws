@@ -36,6 +36,7 @@ ______vt__Q44nw4r3snd6detail9WsdPlayer:
 .balign 0x8
 
 .section .sdata2, "a"
+.balign 8
 .global lbl_804C01B0
 lbl_804C01B0:
 	.single 0e1

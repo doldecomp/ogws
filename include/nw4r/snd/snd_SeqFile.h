@@ -31,10 +31,9 @@ public:
 public:
     SeqFileReader(const void* pSeqBin);
 
-    const void* GetBaseAddress() const;
-
-private:
     bool IsValidFileHeader(const void* pSeqBin);
+
+    const void* GetBaseAddress() const;
 
 private:
     const SeqFile::Header* mHeader;       // at 0x0
