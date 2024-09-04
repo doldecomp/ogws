@@ -1,162 +1,139 @@
-#include "snd_SoundArchiveLoader.h"
-#include "snd_SoundArchive.h"
-#include "ut_algorithm.h"
-#include "ut_lock.h"
+#pragma ipa file // TODO: REMOVE AFTER REFACTOR
 
-namespace nw4r
-{
-	using namespace ut;
-	
-	namespace snd
-	{
-		namespace detail
-		{
-			SoundArchiveLoader::SoundArchiveLoader(const SoundArchive & archive) : mArchive(archive), mFileStream(NULL)
-			{
-				OSInitMutex(&mMutex);
-			}
-			
-			SoundArchiveLoader::~SoundArchiveLoader() {}
-			
-			void * SoundArchiveLoader::LoadGroup(u32 index, SoundMemoryAllocatable * pAllocatable, void ** pWaveDataPointer, u32 alignment)
-			{
-				//r31 <- this
-				//r26 <- index
-				//r25 <- pAllocatable
-				//r23 <- pWaveDataPointer
-				//r24 <- alignment
-				ut::detail::AutoLock<OSMutex> lock(mMutex);
-				FileStreamHandle handle(mArchive.detail_OpenGroupStream(index, mBuffer, sizeof mBuffer)); // at r29
-				
-				SoundArchive::GroupInfo groupInfo; // at 0x8
-				
-				if (!handle) return NULL;
-				
-				//80043518
-				if (!handle->CanSeek() || !handle->CanRead()) return NULL;
-				
-				//80043578
-				
-				void * pGroup = pAllocatable->Alloc(handle->GetSize()); // at r27
-				
-				if (!pGroup) return NULL;
-				
-				mFileStream = handle.mFileStream;
-				
-				if (!alignment)
-				{
-					//800435E8
-					int bytesRead = handle->Read(pGroup, handle->GetSize());
-					
-					if (bytesRead < 0)
-					{
-						mFileStream = NULL;
-						return NULL;
-					}
-				}
-				else
-				{
-					//80043654
-					u8 * pBuffer = static_cast<u8 *>(pGroup); // at r28
-					u32 bytesLeft = handle->GetSize(); // at r30
-					
-					while (bytesLeft)
-					{
-						int bytesRead = handle->Read(pBuffer, Min<u32>(alignment, bytesLeft));
-						
-						if (bytesRead < 0)
-						{
-							mFileStream = NULL;
-							return NULL;
-						}
-						
-						if (bytesLeft > bytesRead)
-						{
-							bytesLeft -= bytesRead;
-							pBuffer += bytesRead;
-						}
-						else
-						{
-							bytesLeft = 0;
-						}
-					}
-				}
-				//800436F8
-				mFileStream = NULL;
-				
-				if (!mArchive.detail_ReadGroupInfo(index, &groupInfo)) return NULL;
-				
-				//80043744
-				if (groupInfo.waveDataSize)
-				{
-					//80043750
-					FileStreamHandle waveDataHandle(mArchive.detail_OpenGroupWaveDataStream(index, mBuffer, sizeof mBuffer));
-					
-					if (!waveDataHandle) return NULL;
-					
-					//800437B0
-					if (!waveDataHandle->CanSeek() || !waveDataHandle->CanRead()) return NULL;
-					
-					//8004382C
-					void * pGroupWaveData = pAllocatable->Alloc(waveDataHandle->GetSize()); // at r26
-					
-					if (!pGroupWaveData) return NULL;
-					
-					mFileStream = waveDataHandle.mFileStream;
-					
-					//800438AC
-					if (!alignment)
-					{
-						//800438B8
-						int bytesRead = waveDataHandle->Read(pGroupWaveData, waveDataHandle->GetSize());
-						
-						if (bytesRead < 0)
-						{
-							mFileStream = NULL;
-							return NULL;
-						}
-					}
-					else
-					{
-						//8004393C
-						u8 * pBuffer = static_cast<u8 *>(pGroupWaveData); // at r30
-						u32 bytesLeft = waveDataHandle->GetSize(); // at r25
-						
-						while (bytesLeft)
-						{
-							int bytesRead = waveDataHandle->Read(pBuffer, Min<u32>(alignment, bytesLeft));
-							
-							if (bytesRead < 0)
-							{
-								mFileStream = NULL;
-								return NULL;
-							}
-							
-							if (bytesLeft > bytesRead)
-							{
-								bytesLeft -= bytesRead;
-								pBuffer += bytesRead;
-							}
-							else
-							{
-								bytesLeft = 0;
-							}
-						}
-					}
-					
-					//800439FC
-					mFileStream = NULL;
-					
-					if (pWaveDataPointer) *pWaveDataPointer = pGroupWaveData;
-				}
-				else if (pWaveDataPointer)
-				{
-					//80043A30
-					*pWaveDataPointer = NULL;
-				}
-				
-				return pGroup;
-			}
-		}
-	}
+#include <nw4r/snd.h>
+#include <nw4r/ut.h>
+
+namespace nw4r {
+namespace snd {
+namespace detail {
+
+SoundArchiveLoader::SoundArchiveLoader(const SoundArchive& rArchive)
+    : mArc(rArchive), mStream(NULL) {
+    OSInitMutex(&mMutex);
 }
+
+SoundArchiveLoader::~SoundArchiveLoader() {}
+
+void* SoundArchiveLoader::LoadGroup(u32 id,
+                                    SoundMemoryAllocatable* pAllocatable,
+                                    void** ppWaveBuffer, u32 blockSize) {
+    ut::detail::AutoLock<OSMutex> lock(mMutex);
+
+    FileStreamHandle groupHandle(
+        mArc.detail_OpenGroupStream(id, mStreamArea, sizeof(mStreamArea)));
+
+    if (!groupHandle) {
+        return NULL;
+    }
+
+    if (!groupHandle->CanSeek() || !groupHandle->CanRead()) {
+        return NULL;
+    }
+
+    void* pGroupBuffer = pAllocatable->Alloc(groupHandle->GetSize());
+    if (pGroupBuffer == NULL) {
+        return NULL;
+    }
+
+    mStream = groupHandle.GetFileStream();
+
+    if (blockSize == 0) {
+        s32 bytesRead = groupHandle->Read(pGroupBuffer, groupHandle->GetSize());
+
+        if (bytesRead < 0) {
+            mStream = NULL;
+            return NULL;
+        }
+    } else {
+        u8* pReadPtr = static_cast<u8*>(pGroupBuffer);
+        u32 bytesLeft = groupHandle->GetSize();
+
+        while (bytesLeft) {
+            s32 bytesRead =
+                groupHandle->Read(pReadPtr, ut::Min(blockSize, bytesLeft));
+
+            if (bytesRead < 0) {
+                mStream = NULL;
+                return NULL;
+            }
+
+            if (bytesLeft > bytesRead) {
+                bytesLeft -= bytesRead;
+                pReadPtr += bytesRead;
+            } else {
+                bytesLeft = 0;
+            }
+        }
+    }
+
+    mStream = NULL;
+
+    SoundArchive::GroupInfo groupInfo;
+    if (!mArc.detail_ReadGroupInfo(id, &groupInfo)) {
+        return NULL;
+    }
+
+    if (groupInfo.waveDataSize != 0) {
+        FileStreamHandle waveHandle(mArc.detail_OpenGroupWaveDataStream(
+            id, mStreamArea, sizeof(mStreamArea)));
+
+        if (!waveHandle) {
+            return NULL;
+        }
+
+        if (!waveHandle->CanSeek() || !waveHandle->CanRead()) {
+            return NULL;
+        }
+
+        void* pWaveBuffer = pAllocatable->Alloc(waveHandle->GetSize());
+        if (pWaveBuffer == NULL) {
+            return NULL;
+        }
+
+        mStream = waveHandle.GetFileStream();
+
+        if (blockSize == 0) {
+            s32 bytesRead =
+                waveHandle->Read(pWaveBuffer, waveHandle->GetSize());
+
+            if (bytesRead < 0) {
+                mStream = NULL;
+                return NULL;
+            }
+        } else {
+            u8* pReadPtr = static_cast<u8*>(pWaveBuffer);
+            u32 bytesLeft = waveHandle->GetSize();
+
+            while (bytesLeft) {
+                s32 bytesRead =
+                    waveHandle->Read(pReadPtr, ut::Min(blockSize, bytesLeft));
+
+                if (bytesRead < 0) {
+                    mStream = NULL;
+                    return NULL;
+                }
+
+                if (bytesLeft > bytesRead) {
+                    bytesLeft -= bytesRead;
+                    pReadPtr += bytesRead;
+                } else {
+                    bytesLeft = 0;
+                }
+            }
+        }
+
+        mStream = NULL;
+
+        if (ppWaveBuffer != NULL) {
+            *ppWaveBuffer = pWaveBuffer;
+        }
+    } else if (ppWaveBuffer != NULL) {
+        *ppWaveBuffer = NULL;
+    }
+
+    return pGroupBuffer;
+}
+
+} // namespace detail
+} // namespace snd
+} // namespace nw4r
