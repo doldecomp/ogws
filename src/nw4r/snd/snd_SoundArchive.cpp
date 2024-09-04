@@ -41,18 +41,15 @@ const char* SoundArchive::GetSoundLabelString(u32 id) const {
 }
 
 u32 SoundArchive::ConvertLabelStringToSoundId(const char* pLabel) const {
-    return mFileReader->ConvertLabelStringToId(mFileReader->mSoundStringTree,
-                                               pLabel);
+    return mFileReader->ConvertLabelStringToSoundId(pLabel);
 }
 
 u32 SoundArchive::ConvertLabelStringToPlayerId(const char* pLabel) const {
-    return mFileReader->ConvertLabelStringToId(mFileReader->mPlayerStringTree,
-                                               pLabel);
+    return mFileReader->ConvertLabelStringToPlayerId(pLabel);
 }
 
 u32 SoundArchive::ConvertLabelStringToGroupId(const char* pLabel) const {
-    return mFileReader->ConvertLabelStringToId(mFileReader->mGroupStringTree,
-                                               pLabel);
+    return mFileReader->ConvertLabelStringToGroupId(pLabel);
 }
 
 u32 SoundArchive::GetSoundUserParam(u32 id) const {

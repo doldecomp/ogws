@@ -45,6 +45,7 @@
 #include <nw4r/snd/snd_Sound3DManager.h>
 #include <nw4r/snd/snd_SoundActor.h>
 #include <nw4r/snd/snd_SoundArchive.h>
+#include <nw4r/snd/snd_SoundArchiveFile.h>
 #include <nw4r/snd/snd_SoundArchiveLoader.h>
 #include <nw4r/snd/snd_SoundArchivePlayer.h>
 #include <nw4r/snd/snd_SoundHandle.h>

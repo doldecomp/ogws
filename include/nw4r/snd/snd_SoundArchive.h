@@ -9,6 +9,9 @@ namespace snd {
 
 class SoundArchive {
 public:
+    static const u32 INVALID_ID = 0xFFFFFFFF;
+
+public:
     struct SoundInfo {
         u32 fileId;                // at 0x0
         u32 playerId;              // at 0x4
