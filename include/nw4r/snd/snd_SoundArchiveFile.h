@@ -56,19 +56,18 @@ namespace nw4r
 				
 				struct SoundCommonInfo
 				{
-					u32 mSoundStringId; // at 0x0
-					UNKWORD WORD_0x4;
-					UNKWORD WORD_0x8;
-					Util::DataRef<Sound3DParam, void, void, void> mSound3DParam; // at 0xc
-					u8 BYTE_0x14;
-					u8 BYTE_0x15;
-					u8 mType; // at 0x16
-					u8 BYTE_0x17;
-					SoundInfoOffset mSoundInfoOffset; // at 0x18
-					UNKWORD mSoundUserParam; // at 0x20
-					char UNK_0x24[0x4];
-					u8 BYTE_0x28;
-					u8 BYTE_0x29;
+					u32 stringId; // at 0x0
+					u32 fileId; // at 0x4
+					u32 playerId; // at 0x8
+					Util::DataRef<Sound3DParam> param3dRef; // at 0xc
+					u8 volume; // at 0x14
+					u8 playerPriority; // at 0x15
+					u8 soundType; // at 0x16
+					u8 remoteFilter; // at 0x17
+					SoundInfoOffset soundInfoRef; // at 0x18
+					u32 userParam[2]; // at 0x20
+					u8 panMode; // at 0x28
+					u8 panCurve; // at 0x29
 				};
 				
 				typedef Util::Table<Util::DataRef<SoundCommonInfo, void, void, void> > SoundCommonTable;
@@ -214,7 +213,7 @@ namespace nw4r
 				void SetStringChunk(const void *, u32);
 				void SetInfoChunk(const void *, u32);
 				
-				UNKWORD GetSoundType(u32) const;
+				SoundType GetSoundType(u32) const;
 				
 				const SoundArchiveFile::SoundCommonInfo * impl_GetSoundInfo(u32) const; //inlined
 				bool ReadSoundInfo(u32, SoundArchive::SoundInfo *) const;

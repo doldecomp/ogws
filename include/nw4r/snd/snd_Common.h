@@ -51,6 +51,13 @@ struct SoundParam {
     int priority;    // at 0x18
 };
 
+enum SoundType {
+    SOUND_TYPE_INVALID,
+    SOUND_TYPE_SEQ,
+    SOUND_TYPE_STRM,
+    SOUND_TYPE_WAVE
+};
+
 namespace detail {
 
 enum PanMode {

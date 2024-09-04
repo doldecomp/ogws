@@ -63,13 +63,13 @@ namespace nw4r
 				mInfoChunk = &static_cast<const InfoBlock *>(ptr)->mChunk;
 			}
 			
-			UNKWORD SoundArchiveFileReader::GetSoundType(u32 index) const
+			SoundType SoundArchiveFileReader::GetSoundType(u32 index) const
 			{
 				const SoundCommonTable * pTable = GetDataRefAddress0(mInfoChunk->mSoundCommonTable, mInfoChunk);
 				
-				if (!pTable) return 0;
+				if (!pTable) return SOUND_TYPE_INVALID;
 				
-				if (index >= pTable->count) return 0;
+				if (index >= pTable->count) return SOUND_TYPE_INVALID;
 				
 				u8 type;
 				
@@ -77,9 +77,9 @@ namespace nw4r
 				{
 					const SoundCommonInfo * pInfo = GetDataRefAddress0(pTable->items[index], mInfoChunk);
 					
-					if (!pInfo) return 0;
+					if (!pInfo) return SOUND_TYPE_INVALID;
 					
-					type = pInfo->mType;
+					type = pInfo->soundType;
 				}
 				else
 				{
@@ -89,14 +89,14 @@ namespace nw4r
 				switch (type)
 				{
 					case 1:
-						return 1;
+						return SOUND_TYPE_SEQ;
 					case 2:
-						return 2;
+						return SOUND_TYPE_STRM;
 					case 3:
-						return 3;
+						return SOUND_TYPE_WAVE;
 				}
 				
-				return 0;
+				return SOUND_TYPE_INVALID;
 			}
 			
 			const SoundCommonInfo * SoundArchiveFileReader::impl_GetSoundInfo(u32 index) const
@@ -118,21 +118,21 @@ namespace nw4r
 				
 				if (!pInfo) return false;
 				
-				pSoundInfo->WORD_0x0 = pInfo->WORD_0x4;
-				pSoundInfo->WORD_0x4 = pInfo->WORD_0x8;
-				pSoundInfo->WORD_0x8 = pInfo->BYTE_0x15;
-				pSoundInfo->WORD_0xC = pInfo->BYTE_0x14;
-				pSoundInfo->WORD_0x10 = pInfo->BYTE_0x17;
+				pSoundInfo->fileId = pInfo->fileId;
+				pSoundInfo->playerId = pInfo->playerId;
+				pSoundInfo->playerPriority = pInfo->playerPriority;
+				pSoundInfo->volume = pInfo->volume;
+				pSoundInfo->remoteFilter = pInfo->remoteFilter;
 				
-				if (GetVersion() >= 0x0102)
+				if (GetVersion() >= NW4R_VERSION(1, 2))
 				{
-					pSoundInfo->WORD_0x14 = pInfo->BYTE_0x28;
-					pSoundInfo->WORD_0x18 = pInfo->BYTE_0x29;
+					pSoundInfo->panMode = static_cast<detail::PanMode>(pInfo->panMode);
+					pSoundInfo->panCurve = static_cast<detail::PanCurve>(pInfo->panCurve);
 				}
 				else
 				{
-					pSoundInfo->WORD_0x14 = 1;
-					pSoundInfo->WORD_0x18 = 0;
+					pSoundInfo->panMode = detail::PAN_MODE_BALANCE;
+					pSoundInfo->panCurve = detail::PAN_CURVE_SQRT;
 				}
 				
 				return true;
@@ -144,7 +144,7 @@ namespace nw4r
 				
 				if (!pInfo) return false;
 				
-				const SoundArchiveFile::Sound3DParam * pParam = GetDataRefAddress0(pInfo->mSound3DParam, mInfoChunk);
+				const SoundArchiveFile::Sound3DParam * pParam = GetDataRefAddress0(pInfo->param3dRef, mInfoChunk);
 				
 				if (!pParam) return false;
 				
@@ -163,18 +163,18 @@ namespace nw4r
 				
 				if (!pInfo) return false;
 				
-				pSeqSoundInfo->WORD_0x0 = pInfo->WORD_0x0;
-				pSeqSoundInfo->WORD_0x4 = pInfo->WORD_0x4;
-				pSeqSoundInfo->WORD_0xC = pInfo->BYTE_0xC;
-				pSeqSoundInfo->WORD_0x8 = pInfo->WORD_0x8;
+				pSeqSoundInfo->dataOffset = pInfo->WORD_0x0;
+				pSeqSoundInfo->bankId = pInfo->WORD_0x4;
+				pSeqSoundInfo->channelPriority = pInfo->BYTE_0xC;
+				pSeqSoundInfo->allocTrack = pInfo->WORD_0x8;
 				
 				if (GetVersion() >= 0x0103)
 				{
-					pSeqSoundInfo->BOOL_0x10 = pInfo->BYTE_0xD;
+					pSeqSoundInfo->releasePriorityFixFlag = pInfo->BYTE_0xD;
 				}
 				else
 				{
-					pSeqSoundInfo->BOOL_0x10 = false;
+					pSeqSoundInfo->releasePriorityFixFlag = false;
 				}
 				
 				return true;
@@ -195,16 +195,16 @@ namespace nw4r
 				
 				if (!pInfo) return false;
 				
-				pWaveSoundInfo->WORD_0x0 = pInfo->WORD_0x0;
-				pWaveSoundInfo->WORD_0x4 = pInfo->BYTE_0x8;
+				pWaveSoundInfo->subNo = pInfo->WORD_0x0;
+				pWaveSoundInfo->channelPriority = pInfo->BYTE_0x8;
 				
 				if (GetVersion() >= 0x0103)
 				{
-					pWaveSoundInfo->BOOL_0x8 = pInfo->BYTE_0x9;
+					pWaveSoundInfo->releasePriorityFixFlag = pInfo->BYTE_0x9;
 				}
 				else
 				{
-					pWaveSoundInfo->BOOL_0x8 = false;
+					pWaveSoundInfo->releasePriorityFixFlag = false;
 				}
 				
 				return true;
@@ -227,7 +227,7 @@ namespace nw4r
 				
 				if (!pInfo) return false;
 				
-				pBankInfo->WORD_0x0 = pInfo->WORD_0x4;
+				pBankInfo->fileId = pInfo->WORD_0x4;
 				
 				return true;
 			}
@@ -249,8 +249,8 @@ namespace nw4r
 				
 				if (!pInfo) return false;
 				
-				pPlayerInfo->WORD_0x0 = pInfo->BYTE_0x4;
-				pPlayerInfo->WORD_0x4 = pInfo->WORD_0x8;
+				pPlayerInfo->playableSoundCount = pInfo->BYTE_0x4;
+				pPlayerInfo->heapSize = pInfo->WORD_0x8;
 				
 				return true;
 			}
@@ -346,7 +346,7 @@ namespace nw4r
 			{
 				const SoundCommonInfo * pInfo = impl_GetSoundInfo(index);
 				
-				return !pInfo ? -1 : pInfo->mSoundStringId;
+				return !pInfo ? -1 : pInfo->stringId;
 			}
 			
 			const char * SoundArchiveFileReader::GetString(u32 id) const
@@ -365,7 +365,7 @@ namespace nw4r
 			{
 				const SoundCommonInfo * pInfo = impl_GetSoundInfo(index);
 				
-				return !pInfo ? 0 : pInfo->mSoundUserParam;
+				return !pInfo ? 0 : pInfo->userParam[0];
 			}
 			
 			bool SoundArchiveFileReader::ReadFileInfo(u32 index, SoundArchive::FileInfo * pFileInfo) const
@@ -384,10 +384,10 @@ namespace nw4r
 				
 				if (!pPosTable) return false;
 				
-				pFileInfo->WORD_0x0 = pInfo->WORD_0x0;
-				pFileInfo->WORD_0x4 = pInfo->WORD_0x4;
-				pFileInfo->mExternalFileName = GetDataRefAddress0(pInfo->mExternalFileName, mInfoChunk);
-				pFileInfo->SIZE_0xC = pPosTable->count;
+				pFileInfo->fileSize = pInfo->WORD_0x0;
+				pFileInfo->waveDataFileSize = pInfo->WORD_0x4;
+				pFileInfo->extFilePath = GetDataRefAddress0(pInfo->mExternalFileName, mInfoChunk);
+				pFileInfo->filePosCount = pPosTable->count;
 				
 				return true;
 			}
@@ -468,7 +468,7 @@ namespace nw4r
 				{
 					const SoundCommonInfo * pInfo = GetDataRefAddress0(pTable->items[index], mInfoChunk);
 					
-					return !pInfo ? INVALID_DATA_REF : pInfo->mSoundInfoOffset;
+					return !pInfo ? INVALID_DATA_REF : pInfo->soundInfoRef;
 				}
 				
 				SoundInfoOffset soundInfoOffset;
