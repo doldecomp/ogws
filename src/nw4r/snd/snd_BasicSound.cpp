@@ -76,7 +76,7 @@ void BasicSound::Stop(int frames) {
     int t = frames * mFadeVolume.GetValue();
     mFadeVolume.SetTarget(0.0f, t);
 
-    SetPlayerPriority(PRIORITY_MIN);
+    SetPlayerPriority(0);
     mIsAutoStop = false;
     mIsPause = false;
     mIsPauseFade = false;

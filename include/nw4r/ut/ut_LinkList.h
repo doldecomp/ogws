@@ -418,7 +418,7 @@ public:
     {                                                                          \
         typedef DECLTYPE(LIST.GetBeginIter()) IterType;                        \
                                                                                \
-        for (DECLTYPE(LIST.GetBeginIter()) impl = LIST.GetBeginIter();         \
+        for (IterType impl = LIST.GetBeginIter();                              \
              impl != LIST.GetEndIter();) {                                     \
                                                                                \
             IterType it = impl++;                                              \

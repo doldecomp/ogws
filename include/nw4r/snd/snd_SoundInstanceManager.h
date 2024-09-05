@@ -26,8 +26,6 @@ public:
     }
 
     T* Alloc(int priority) {
-        priority = ut::Clamp(priority, 0, BasicSound::PRIORITY_MAX);
-
         ut::detail::AutoLock<OSMutex> lock(mMutex);
         T* pSound = NULL;
 
@@ -48,7 +46,7 @@ public:
                 }
 
                 OSUnlockMutex(&mMutex);
-                pLowest->Stop();
+                pLowest->Stop(0);
                 OSLockMutex(&mMutex);
             }
         }
@@ -82,7 +80,7 @@ public:
             return NULL;
         }
 
-        return &mPriorityList.GetFront();
+        return static_cast<T*>(&mPriorityList.GetFront());
     }
 
     void InsertPriorityList(T* pSound, int priority) {

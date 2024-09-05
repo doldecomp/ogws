@@ -68,7 +68,7 @@ public:
     }
 
     T* Alloc() {
-        return AllocImpl();
+        return static_cast<T*>(AllocImpl());
     }
 
     void Free(T* pElem) {

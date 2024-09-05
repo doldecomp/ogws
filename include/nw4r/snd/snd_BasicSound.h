@@ -131,6 +131,10 @@ public:
                                  AmbientArgAllocaterCallback* argAlloc,
                                  void* arg);
 
+    void SetPriority(int priority) {
+        mPriority = priority;
+    }
+
     u32 GetId() const {
         return mId;
     }
@@ -158,12 +162,10 @@ public:
     void SetFxSend(AuxBus bus, f32 send);
 
     int CalcCurrentPlayerPriority() const {
-        return ut::Clamp(mPriority + mAmbientParam.priority, PRIORITY_MIN,
-                         PRIORITY_MAX);
+        return ut::Clamp(mPriority + mAmbientParam.priority, 0, PRIORITY_MAX);
     }
 
 public:
-    static const int PRIORITY_MIN = 0;
     static const int PRIORITY_MAX = 127;
 
 private:

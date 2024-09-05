@@ -45,8 +45,8 @@ private:
                                     void* pCallbackArg);
 
 private:
-    mutable OSMutex mMutex;       // 0x0
-    detail::FrameHeap mFrameHeap; // 0x1C
+    mutable OSMutex mMutex;       // at 0x0
+    detail::FrameHeap mFrameHeap; // at 0x1C
 };
 
 } // namespace snd

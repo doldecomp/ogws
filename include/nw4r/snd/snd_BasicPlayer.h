@@ -99,7 +99,7 @@ public:
         return mRemoteFilter;
     }
     void SetRemoteFilter(int filter) {
-        mRemoteFilter = ut::Clamp(filter, FILTER_MIN, FILTER_MAX);
+        mRemoteFilter = ut::Clamp(filter, 0, FILTER_MAX);
     }
 
     PanMode GetPanMode() const {
@@ -117,7 +117,6 @@ public:
     }
 
 public:
-    static const int FILTER_MIN = 0;
     static const int FILTER_MAX = 127;
 
 private:
