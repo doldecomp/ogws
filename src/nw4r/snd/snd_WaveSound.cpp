@@ -12,13 +12,13 @@ NW4R_UT_RTTI_DEF_DERIVED(WaveSound, BasicSound);
 WaveSound::WaveSound(SoundInstanceManager<WaveSound>* pManager)
     : mManager(pManager), mTempSpecialHandle(NULL), mPreparedFlag(false) {}
 
-bool WaveSound::Prepare(const void* pBase, s32 wsdOffset,
+bool WaveSound::Prepare(const void* pWsdData, s32 wsdOffset,
                         WsdPlayer::StartOffsetType startType, s32 startOffset,
                         int voices, const WsdPlayer::WsdCallback* pCallback,
                         u32 callbackArg) {
     InitParam();
 
-    if (!mWsdPlayer.Prepare(pBase, wsdOffset, startType, startOffset, voices,
+    if (!mWsdPlayer.Prepare(pWsdData, wsdOffset, startType, startOffset, voices,
                             pCallback, callbackArg)) {
         return false;
     }

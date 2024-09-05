@@ -206,7 +206,7 @@ void SeqTrack::PauseAllChannel(bool flag) {
     for (Channel* pIt = mChannelList; pIt != NULL;
          pIt = pIt->GetNextTrackChannel()) {
 
-        if (pIt->IsActive() && flag != (pIt->IsPause() != false)) {
+        if (pIt->IsActive() && flag != pIt->IsPause()) {
             pIt->Pause(flag);
         }
     }

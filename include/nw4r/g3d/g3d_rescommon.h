@@ -2,7 +2,7 @@
 #define NW4R_G3D_RESCOMMON_H
 #include "types_nw4r.h"
 
-#define NW4R_G3D_CREATE_RES_NAME_DATA(VAR,VAL) ResNameData ResNameData_##VAR = { sizeof(VAL) - 1, VAL }
+#define NW4R_G3D_CREATE_RES_NAME_DATA(VAR,VAL) ResNameData ResNameData_##VAR ALIGN(32) = { sizeof(VAL) - 1, VAL }
 
 #define FIFO_ACCESS_BP 0x61
 #define FIFO_ACCESS_CP 0x8

@@ -35,7 +35,7 @@ public:
         return mWsdPlayer;
     } // at 0x6C
 
-    bool Prepare(const void* pBase, s32 wsdOffset,
+    bool Prepare(const void* pWsdData, s32 wsdOffset,
                  WsdPlayer::StartOffsetType startType, s32 startOffset,
                  int voices, const WsdPlayer::WsdCallback* pCallback,
                  u32 callbackArg);

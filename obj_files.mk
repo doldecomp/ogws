@@ -120,7 +120,7 @@ NW4R_O_FILES := \
 	build/nw4r/snd/snd_WaveSound.o \
 	build/nw4r/snd/snd_WaveSoundHandle.o \
 	build/nw4r/snd/snd_WsdFile.o \
-	build/asm/nw4r/snd/snd_WsdPlayer.o \
+	build/nw4r/snd/snd_WsdPlayer.o \
 	build/nw4r/snd/snd_adpcm.o \
 	\
 	build/nw4r/g3d/g3d_rescommon.o \

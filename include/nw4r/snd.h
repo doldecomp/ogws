@@ -69,6 +69,7 @@
 #include <nw4r/snd/snd_WaveSound.h>
 #include <nw4r/snd/snd_WaveSoundHandle.h>
 #include <nw4r/snd/snd_WsdFile.h>
+#include <nw4r/snd/snd_WsdPlayer.h>
 #include <nw4r/snd/snd_adpcm.h>
 
 #endif

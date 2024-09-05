@@ -69,7 +69,7 @@ public:
     }
 
     bool IsPause() const {
-        return mPauseFlag;
+        return mPauseFlag != false;
     }
     bool IsActive() const {
         return mActiveFlag;
