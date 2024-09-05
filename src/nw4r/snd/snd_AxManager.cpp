@@ -19,8 +19,8 @@ AxManager::AxManager()
       mZeroBuffer(NULL),
       mInitialized(false),
       mUpdateVoicePrio(true),
-      mOldAiCallback(NULL),
-      mResetReadyTimer(-1),
+      mOldAidCallback(NULL),
+      mResetReadyCounter(-1),
       mDiskError(false) {
 
     mMainOutVolume.InitValue(1.0f);
@@ -357,32 +357,32 @@ void AxManager::AuxCallbackFunc(void* chans, void* context) {
 }
 
 void AxManager::PrepareReset() {
-    if (mOldAiCallback != NULL) {
+    if (mOldAidCallback != NULL) {
         return;
     }
 
     mVolumeForReset.SetTarget(0.0f, 3);
-    mResetReadyTimer = -1;
-    mOldAiCallback = AIRegisterDMACallback(AiDmaCallbackFunc);
+    mResetReadyCounter = -1;
+    mOldAidCallback = AIRegisterDMACallback(AiDmaCallbackFunc);
 }
 
 void AxManager::AiDmaCallbackFunc() {
     static bool finishedFlag = false;
 
     AxManager& r = GetInstance();
-    r.mOldAiCallback();
+    r.mOldAidCallback();
 
     if (finishedFlag) {
-        if (r.GetResetReadyTimer() < 0) {
+        if (r.mResetReadyCounter < 0) {
             AXSetMaxDspCycles(0);
-            r.mResetReadyTimer = 6;
+            r.mResetReadyCounter = 6;
         }
     } else if (r.mVolumeForReset.GetValue() == 0.0f) {
         finishedFlag = true;
     }
 
-    if (r.GetResetReadyTimer() > 0) {
-        r.mResetReadyTimer--;
+    if (r.mResetReadyCounter > 0) {
+        r.mResetReadyCounter--;
     }
 }
 

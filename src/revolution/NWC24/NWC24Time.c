@@ -172,7 +172,7 @@ static NWC24Err GetRTC(u32* rtc) {
         if (status == SC_STATUS_FATAL) {
             return NWC24_ERR_FATAL;
         }
-    } while (status != SC_STATUS_READY);
+    } while (status != SC_STATUS_OK);
 
     *rtc = OS_TICKS_TO_SEC(OSGetTime()) - SCGetCounterBias();
     return NWC24_OK;

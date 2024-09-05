@@ -10,6 +10,11 @@ namespace detail {
 
 class ChannelManager {
 public:
+    static const int VOICE_MARGIN = 1;
+    static const int VOICE_MAX = AX_VOICE_MAX + VOICE_MARGIN;
+    static const int WORK_SIZE_MAX = VOICE_MAX * sizeof(Channel);
+
+public:
     static ChannelManager& GetInstance();
 
     u32 GetRequiredMemSize();

@@ -27,10 +27,21 @@ public:
     AxManager();
     ~AxManager() {}
 
-    bool CheckInit() { return mInitialized; }
-    bool IsDiskError() const { return mDiskError; }
-    s32 GetResetReadyTimer() const { return mResetReadyTimer; }
-    FxBaseList& GetEffectList(AuxBus bus) { return mFxList[bus]; }
+    bool CheckInit() {
+        return mInitialized;
+    }
+
+    bool IsDiskError() const {
+        return mDiskError;
+    }
+
+    bool IsResetReady() const {
+        return mResetReadyCounter == 0;
+    }
+
+    FxBaseList& GetEffectList(AuxBus bus) {
+        return mFxList[bus];
+    }
 
     void Init();
     void Shutdown();
@@ -44,7 +55,9 @@ public:
     void SetOutputMode(OutputMode mode);
     OutputMode GetOutputMode();
 
-    f32 GetMasterVolume() const { return mMasterVolume.GetValue(); }
+    f32 GetMasterVolume() const {
+        return mMasterVolume.GetValue();
+    }
     void SetMasterVolume(f32 volume, int frame);
 
     bool AppendEffect(AuxBus bus, FxBase* fx);
@@ -71,8 +84,8 @@ private:
     MoveValue<f32, int> mMasterVolume;               // at 0x1C
     MoveValue<f32, int> mMainOutVolume;              // at 0x2C
     MoveValue<f32, int> mVolumeForReset;             // at 0x3C
-    AIDMACallback mOldAiCallback;                    // at 0x4C
-    s32 mResetReadyTimer;                            // at 0x50
+    AIDMACallback mOldAidCallback;                   // at 0x4C
+    volatile s32 mResetReadyCounter;                 // at 0x50
     MoveValue<f32, int> mAuxFadeVolume[AUX_BUS_NUM]; // at 0x54
     MoveValue<f32, int> mAuxUserVolume[AUX_BUS_NUM]; // at 0x84
     FxBaseList mFxList[AUX_BUS_NUM];                 // at 0xB4

@@ -10,6 +10,10 @@ namespace detail {
 
 class VoiceManager {
 public:
+    static const int VOICE_MAX = AX_VOICE_MAX;
+    static const int WORK_SIZE_MAX = VOICE_MAX * sizeof(Voice);
+
+public:
     static VoiceManager& GetInstance();
 
     u32 GetRequiredMemSize();

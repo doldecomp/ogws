@@ -64,7 +64,7 @@ typedef struct SCControl {
     union {
         NANDStatus fileAttr;
         u8 fileType;
-    };                                       // at 0x14C
+    }; // at 0x14C
     u8 nandCbState;                          // at 0x154
     u8 isFileOpen;                           // at 0x155
     u8 openFileType;                         // at 0x156
@@ -107,7 +107,7 @@ static const char ConfFileName[] = "/shared2/sys/SYSCONF";
 static const char ProductInfoFileName[] =
     "/title/00000001/00000002/data/setting.txt";
 
-static u8 BgJobStatus = SC_STATUS_READY;
+static u8 BgJobStatus = SC_STATUS_OK;
 
 static u32 ItemRestSize = 0;
 static u32 ItemNumTotal = 0;
@@ -224,8 +224,8 @@ u32 SCCheckStatus(void) {
             OSRestoreInterrupts(enabled);
         }
 
-        status = SC_STATUS_READY;
-        SetBgJobStatus(SC_STATUS_READY);
+        status = SC_STATUS_OK;
+        SetBgJobStatus(SC_STATUS_OK);
     } else {
         OSRestoreInterrupts(enabled);
     }
@@ -548,7 +548,7 @@ static SCStatus ParseConfBuf(u8* conf, u32 size) {
     ItemIDOffsetTblOffset = confLutBegin - confBegin;
     ItemNumTotal = numItems;
     ItemRestSize = itemRest;
-    return SC_STATUS_READY;
+    return SC_STATUS_OK;
 
 _error:
     return SC_STATUS_FATAL;
@@ -932,8 +932,8 @@ static BOOL SCFindIntegerItem(void* dst, SCItemID id, u8 primType) {
     return success;
 }
 
-static BOOL SCReplaceIntegerItem(const void* src, SCItemID id,
-                                 u8 primType) DECOMP_DONT_INLINE {
+static BOOL SCReplaceIntegerItem(const void* src, SCItemID id, u8 primType)
+    DECOMP_DONT_INLINE {
     BOOL success;
     BOOL enabled;
     SCItem item;
@@ -994,7 +994,7 @@ void SCFlushAsync(SCFlushCallback callback) {
     enabled = OSDisableInterrupts();
     status = BgJobStatus;
 
-    if (status == SC_STATUS_READY) {
+    if (status == SC_STATUS_OK) {
         SetBgJobStatus(SC_STATUS_BUSY);
 
         if (callback == ((void*)NULL)) {
@@ -1002,7 +1002,7 @@ void SCFlushAsync(SCFlushCallback callback) {
         }
 
         ctrl->flushCallback = callback;
-        ctrl->flushStatus = SC_STATUS_READY;
+        ctrl->flushStatus = SC_STATUS_OK;
         ctrl->isFileOpen = FALSE;
         ctrl->flushSize = __SCGetConfBufSize();
 
@@ -1161,7 +1161,7 @@ static void FinishFromFlush(void) {
     SCFlushCallback callback;
 
     ctrl = &Control;
-    if (ctrl->flushStatus != SC_STATUS_READY) {
+    if (ctrl->flushStatus != SC_STATUS_OK) {
         __SCSetDirtyFlag();
     }
 

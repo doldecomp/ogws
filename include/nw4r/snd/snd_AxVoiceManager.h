@@ -9,6 +9,11 @@ namespace detail {
 
 class AxVoiceManager {
 public:
+    static const int VOICE_MARGIN = 16;
+    static const int VOICE_MAX = AX_VOICE_MAX + VOICE_MARGIN;
+    static const int WORK_SIZE_MAX = VOICE_MAX * sizeof(AxVoice);
+
+public:
     static AxVoiceManager& GetInstance();
 
     AxVoiceManager();

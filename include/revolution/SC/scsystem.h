@@ -6,7 +6,7 @@ extern "C" {
 #endif
 
 typedef enum {
-    SC_STATUS_READY,
+    SC_STATUS_OK,
     SC_STATUS_BUSY,
     SC_STATUS_FATAL,
     SC_STATUS_PARSE
