@@ -26,7 +26,7 @@ class NoteOnCallback {
 public:
     virtual ~NoteOnCallback() {} // at 0x8
     virtual Channel* NoteOn(SeqPlayer* pPlayer, int bankNo,
-                            const NoteOnInfo& rInfo) = 0; // at 0xc
+                            const NoteOnInfo& rInfo) = 0; // at 0xC
 };
 
 } // namespace detail

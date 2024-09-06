@@ -98,7 +98,7 @@ NW4R_O_FILES := \
 	build/nw4r/snd/snd_SoundArchive.o \
 	build/nw4r/snd/snd_SoundArchiveFile.o \
 	build/nw4r/snd/snd_SoundArchiveLoader.o \
-	build/asm/nw4r/snd/snd_SoundArchivePlayer.o \
+	build/nw4r/snd/snd_SoundArchivePlayer.o \
 	build/nw4r/snd/snd_SoundHandle.o \
 	build/nw4r/snd/snd_SoundHeap.o \
 	build/nw4r/snd/snd_SoundPlayer.o \

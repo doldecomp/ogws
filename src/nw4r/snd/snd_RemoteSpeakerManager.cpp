@@ -20,7 +20,6 @@ RemoteSpeakerManager::RemoteSpeakerManager() : mInitialized(false) {
 }
 
 RemoteSpeaker& RemoteSpeakerManager::GetRemoteSpeaker(int i) {
-    // @bug Can access garbage data
     return mSpeaker[i];
 }
 

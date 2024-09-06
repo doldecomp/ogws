@@ -10,14 +10,17 @@ namespace snd {
 namespace detail {
 
 template <typename T> class SoundInstanceManager {
+private:
+    NW4R_UT_LIST_TYPEDEF_DECL_EX(T, Prio);
+
 public:
     SoundInstanceManager() {
         OSInitMutex(&mMutex);
     }
 
-    void Create(void* pBuffer, u32 size) {
+    u32 Create(void* pBuffer, u32 size) {
         ut::detail::AutoLock<OSMutex> lock(mMutex);
-        mPool.Create(pBuffer, size);
+        return mPool.Create(pBuffer, size);
     }
 
     void Destroy(void* pBuffer, u32 size) {
@@ -84,7 +87,7 @@ public:
     }
 
     void InsertPriorityList(T* pSound, int priority) {
-        BasicSoundPrioList::Iterator it = mPriorityList.GetBeginIter();
+        TPrioList::Iterator it = mPriorityList.GetBeginIter();
 
         for (; it != mPriorityList.GetEndIter(); ++it) {
             if (priority < it->CalcCurrentPlayerPriority()) {
@@ -100,22 +103,18 @@ public:
     }
 
     void SortPriorityList() {
-        if (mPriorityList.GetSize() < 2) {
-            return;
-        }
-
+        TPrioList listsByPrio[T::PRIORITY_MAX + 1];
         ut::detail::AutoLock<OSMutex> lock(mMutex);
-        BasicSoundPrioList listsByPrio[BasicSound::PRIORITY_MAX + 1];
 
         while (!mPriorityList.IsEmpty()) {
-            BasicSound& rSound = mPriorityList.GetFront();
+            T& rSound = mPriorityList.GetFront();
             mPriorityList.PopFront();
             listsByPrio[rSound.CalcCurrentPlayerPriority()].PushBack(&rSound);
         }
 
-        for (int i = 0; i < BasicSound::PRIORITY_MAX + 1; i++) {
+        for (int i = 0; i < T::PRIORITY_MAX + 1; i++) {
             while (!listsByPrio[i].IsEmpty()) {
-                BasicSound& rSound = listsByPrio[i].GetFront();
+                T& rSound = listsByPrio[i].GetFront();
                 listsByPrio[i].PopFront();
                 mPriorityList.PushBack(&rSound);
             }
@@ -130,9 +129,9 @@ public:
     }
 
 private:
-    MemoryPool<T> mPool;              // at 0x0
-    BasicSoundPrioList mPriorityList; // at 0x4
-    OSMutex mMutex;                   // at 0x10
+    MemoryPool<T> mPool;     // at 0x0
+    TPrioList mPriorityList; // at 0x4
+    OSMutex mMutex;          // at 0x10
 };
 
 } // namespace detail

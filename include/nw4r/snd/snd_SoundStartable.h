@@ -32,8 +32,26 @@ public:
         START_ERR_UNKNOWN = 255,
     };
 
-    // TODO: Fill in layout
-    struct StartInfo {};
+    struct StartInfo {
+        enum EnableFlag {
+            ENABLE_START_OFFSET = (1 << 0),
+            ENABLE_PLAYER_ID = (1 << 1),
+            ENABLE_PLAYER_PRIORITY = (1 << 2)
+        };
+
+        enum StartOffsetType {
+            START_OFFSET_TYPE_MILLISEC,
+            START_OFFSET_TYPE_TICK,
+            START_OFFSET_TYPE_SAMPLE
+        };
+
+        u32 enableFlag;                  // at 0x0
+        StartOffsetType startOffsetType; // at 0x4
+        int startOffset;                 // at 0x8
+        u32 playerId;                    // at 0xC
+        int playerPriority;              // at 0x10
+        int voiceOutCount;               // at 0x14
+    };
 
 public:
     SoundStartable() {}

@@ -126,9 +126,9 @@ public:
     SoundType GetSoundType(u32 id) const;
 
     bool ReadSoundInfo(u32 id, SoundInfo* pInfo) const;
-    bool detail_ReadSeqSoundInfo(u32, SeqSoundInfo* pInfo) const;
-    bool detail_ReadStrmSoundInfo(u32, StrmSoundInfo* pInfo) const;
-    bool detail_ReadWaveSoundInfo(u32, WaveSoundInfo* pInfo) const;
+    bool detail_ReadSeqSoundInfo(u32 id, SeqSoundInfo* pInfo) const;
+    bool detail_ReadStrmSoundInfo(u32 id, StrmSoundInfo* pInfo) const;
+    bool detail_ReadWaveSoundInfo(u32 id, WaveSoundInfo* pInfo) const;
 
     bool ReadPlayerInfo(u32 id, PlayerInfo* pInfo) const;
     bool ReadSoundArchivePlayerInfo(SoundArchivePlayerInfo* pInfo) const;

@@ -28,8 +28,8 @@ Sound3DActor::detail_SetupSound(SoundHandle* pHandle, u32 id,
     actorParam.userParam = mUserParam;
 
     SoundArchive::Sound3DParam param;
-    if (mSoundArchivePlayer.GetSoundArchive()->detail_ReadSound3DParam(
-            id, &param)) {
+    if (mSoundArchivePlayer.GetSoundArchive().detail_ReadSound3DParam(id,
+                                                                      &param)) {
         actorParam.soundParam = param;
     }
 

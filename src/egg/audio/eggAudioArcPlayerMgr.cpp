@@ -395,9 +395,9 @@ namespace EGG
 
     void ArcPlayer::stopAllSound() 
     {
-        for (int i = 0; i < mActiveSndArchivePlayer->WORD_0x30; i++)
+        for (int i = 0; i < mActiveSndArchivePlayer->GetSoundPlayerCount(); i++)
         {
-            mActiveSndArchivePlayer->GetSoundPlayer(i)->StopAllSound(0);
+            mActiveSndArchivePlayer->GetSoundPlayer(i).StopAllSound(0);
         }
     }
 }
