@@ -35,7 +35,7 @@ struct NoteInfo {
     u8 volume;                                 // at 0xD
     u8 pan;                                    // at 0xE
     u8 surroundPan;                            // at 0xF
-    float pitch;                               // at 0x10
+    f32 pitch;                                 // at 0x10
     Util::DataRef<UNKTYPE> lfoTableRef;        // at 0x14
     Util::DataRef<UNKTYPE> graphEnvTablevRef;  // at 0x1C
     Util::DataRef<UNKTYPE> randomizerTableRef; // at 0x24
