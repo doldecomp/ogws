@@ -10,7 +10,7 @@ bool WsdFileReader::IsValidFileHeader(const void* pWsdBin) {
     const ut::BinaryFileHeader* pFileHeader =
         static_cast<const ut::BinaryFileHeader*>(pWsdBin);
 
-    if (pFileHeader->magic != SIGNATURE) {
+    if (pFileHeader->signature != SIGNATURE) {
         return false;
     }
 

@@ -11,7 +11,7 @@ bool SeqFileReader::IsValidFileHeader(const void* pSeqData) {
     const ut::BinaryFileHeader* pFileHeader =
         static_cast<const ut::BinaryFileHeader*>(pSeqData);
 
-    if (pFileHeader->magic != SIGNATURE) {
+    if (pFileHeader->signature != SIGNATURE) {
         return false;
     }
 

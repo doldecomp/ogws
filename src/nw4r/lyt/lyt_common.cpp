@@ -33,7 +33,7 @@ namespace nw4r
 
             bool TestFileHeader(const res::BinaryFileHeader& header, u32 magic)
             {
-                return ((magic == header.magic) && TestFileHeader(header));
+                return ((magic == header.signature) && TestFileHeader(header));
             }
 
             TexCoordAry::TexCoordAry() : mCap(0), mSize(0), mTexCoords(NULL) {}

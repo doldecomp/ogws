@@ -11,7 +11,7 @@ bool StrmFileReader::IsValidFileHeader(const void* pStrmBin) {
     const ut::BinaryFileHeader* pFileHeader =
         static_cast<const ut::BinaryFileHeader*>(pStrmBin);
 
-    if (pFileHeader->magic != SIGNATURE) {
+    if (pFileHeader->signature != SIGNATURE) {
         return false;
     }
 

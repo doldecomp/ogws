@@ -34,12 +34,12 @@ bool ResFont::SetResource(void* buffer) {
         return false;
     }
 
-    if (header->magic == MAGIC_UNPACKED) {
+    if (header->signature == MAGIC_UNPACKED) {
         BinaryBlockHeader* block = reinterpret_cast<BinaryBlockHeader*>(
             reinterpret_cast<char*>(header) + header->headerSize);
 
-        for (int i = 0; i < header->numBlocks; i++) {
-            if (block->magic == MAGIC_FONTINFO) {
+        for (int i = 0; i < header->dataBlocks; i++) {
+            if (block->signature == MAGIC_FONTINFO) {
                 info = reinterpret_cast<FontInformation*>(block + 1);
                 break;
             }
@@ -76,8 +76,8 @@ FontInformation* ResFont::Rebuild(BinaryFileHeader* header) {
         reinterpret_cast<char*>(header) + header->headerSize);
     FontInformation* info = NULL;
 
-    for (int i = 0; i < header->numBlocks; i++) {
-        switch (block->magic) {
+    for (int i = 0; i < header->dataBlocks; i++) {
+        switch (block->signature) {
         case MAGIC_FONTINFO:
             info = reinterpret_cast<FontInformation*>(block + 1);
             ResolveOffset<FontTextureGlyph>(info->fontGlyph, header);
@@ -117,7 +117,7 @@ FontInformation* ResFont::Rebuild(BinaryFileHeader* header) {
             reinterpret_cast<char*>(block) + block->length);
     }
 
-    header->magic = MAGIC_UNPACKED;
+    header->signature = MAGIC_UNPACKED;
     return info;
 }
 

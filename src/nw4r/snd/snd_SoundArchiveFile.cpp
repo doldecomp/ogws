@@ -29,7 +29,7 @@ bool SoundArchiveFileReader::IsValidFileHeader(const void* pSoundArchiveBin) {
     const ut::BinaryFileHeader* pFileHeader =
         static_cast<const ut::BinaryFileHeader*>(pSoundArchiveBin);
 
-    if (pFileHeader->magic != SIGNATURE) {
+    if (pFileHeader->signature != SIGNATURE) {
         return false;
     }
 
