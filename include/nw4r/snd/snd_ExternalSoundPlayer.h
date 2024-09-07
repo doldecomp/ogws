@@ -48,15 +48,11 @@ public:
                 }
             }
         } else {
-            BasicSoundExtPlayList::Iterator it = mSoundList.GetBeginIter();
-
-            while (it != mSoundList.GetEndIter()) {
-                BasicSoundExtPlayList::Iterator curr = it++;
-
+            NW4R_UT_LIST_SAFE_FOREACH(mSoundList,
                 SoundHandle handle;
-                handle.detail_AttachSoundAsTempHandle(&*curr);
+                handle.detail_AttachSoundAsTempHandle(&*it);
                 pFunction(handle);
-            }
+            );
         }
 
         return pFunction;

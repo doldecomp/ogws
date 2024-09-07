@@ -231,12 +231,9 @@ void AxManager::SetMasterVolume(f32 volume, int frame) {
 }
 
 void AxManager::AxCallbackFunc() {
-    CallbackListNodeList::Iterator it =
-        GetInstance().mCallbackList.GetBeginIter();
-
-    while (it != GetInstance().mCallbackList.GetEndIter()) {
-        it++->callback();
-    }
+    NW4R_UT_LIST_SAFE_FOREACH(GetInstance().mCallbackList,
+        it->callback();
+    );
 
     if (GetInstance().mOldAxCallback != NULL) {
         GetInstance().mOldAxCallback();

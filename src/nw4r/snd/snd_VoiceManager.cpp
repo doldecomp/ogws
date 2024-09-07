@@ -1,6 +1,7 @@
 #pragma ipa file // TODO: REMOVE AFTER REFACTOR
 
 #include <nw4r/snd.h>
+#include <nw4r/ut.h>
 
 #include <revolution/AX.h>
 
@@ -100,35 +101,27 @@ void VoiceManager::FreeVoice(Voice* pVoice) {
 }
 
 void VoiceManager::UpdateAllVoices() {
-    for (VoiceList::Iterator it = mPriorityList.GetBeginIter();
-         it != mPriorityList.GetEndIter();) {
-        VoiceList::Iterator curr = it++;
-        curr->StopFinished();
-    }
+    NW4R_UT_LIST_SAFE_FOREACH(mPriorityList,
+        it->StopFinished();
+    );
 
-    for (VoiceList::Iterator it = mPriorityList.GetBeginIter();
-         it != mPriorityList.GetEndIter();) {
-        VoiceList::Iterator curr = it++;
-        curr->Calc();
-    }
+    NW4R_UT_LIST_SAFE_FOREACH(mPriorityList,
+        it->Calc();
+    );
 
     ut::AutoInterruptLock lock;
 
-    for (VoiceList::Iterator it = mPriorityList.GetBeginIter();
-         it != mPriorityList.GetEndIter();) {
-        VoiceList::Iterator curr = it++;
-        curr->Update();
-    }
+    NW4R_UT_LIST_SAFE_FOREACH(mPriorityList,
+        it->Update();
+    );
 }
 
 void VoiceManager::NotifyVoiceUpdate() {
     ut::AutoInterruptLock lock;
 
-    for (VoiceList::Iterator it = mPriorityList.GetBeginIter();
-         it != mPriorityList.GetEndIter();) {
-        VoiceList::Iterator curr = it++;
-        curr->ResetDelta();
-    }
+    NW4R_UT_LIST_SAFE_FOREACH(mPriorityList,
+        it->ResetDelta();
+    );
 }
 
 void VoiceManager::AppendVoiceList(Voice* pVoice) {
@@ -179,14 +172,13 @@ void VoiceManager::UpdateEachVoicePriority(const VoiceList::Iterator& rBegin,
 void VoiceManager::UpdateAllVoicesSync(u32 syncFlag) {
     ut::AutoInterruptLock lock;
 
-    for (VoiceList::Iterator it = mPriorityList.GetBeginIter();
-         it != mPriorityList.GetEndIter();) {
-        VoiceList::Iterator curr = it++;
-
-        if (curr->mIsActive) {
-            curr->mSyncFlag |= syncFlag;
+    // clang-format off
+    NW4R_UT_LIST_SAFE_FOREACH(mPriorityList,
+        if (it->mIsActive) {
+            it->mSyncFlag |= syncFlag;
         }
-    }
+    );
+    // clang-format on
 }
 
 int VoiceManager::DropLowestPriorityVoice(int prio) {

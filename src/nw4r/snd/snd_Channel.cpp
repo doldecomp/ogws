@@ -39,11 +39,9 @@ void ChannelManager::Shutdown() {
         return;
     }
 
-    for (ChannelList::Iterator it = mChannelList.GetBeginIter();
-         it != mChannelList.GetEndIter();) {
-        ChannelList::Iterator curr = it++;
-        curr->Stop();
-    }
+    NW4R_UT_LIST_SAFE_FOREACH(mChannelList,
+        it->Stop();
+    );
 
     mPool.Destroy(mMem, mMemSize);
     mInitialized = false;
@@ -61,11 +59,9 @@ void ChannelManager::Free(Channel* pChannel) {
 }
 
 void ChannelManager::UpdateAllChannel() {
-    for (ChannelList::Iterator it = mChannelList.GetBeginIter();
-         it != mChannelList.GetEndIter();) {
-        ChannelList::Iterator curr = it++;
-        curr->Update(true);
-    }
+    NW4R_UT_LIST_SAFE_FOREACH(mChannelList,
+        it->Update(true);
+    );
 }
 
 Channel::Channel()

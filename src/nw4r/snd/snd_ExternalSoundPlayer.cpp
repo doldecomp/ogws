@@ -1,6 +1,7 @@
 #pragma ipa file // TODO: REMOVE AFTER REFACTOR
 
 #include <nw4r/snd.h>
+#include <nw4r/ut.h>
 
 namespace nw4r {
 namespace snd {
@@ -10,10 +11,9 @@ ExternalSoundPlayer::ExternalSoundPlayer()
     : mPlayableSoundCount(1), mVolume(1.0f) {}
 
 ExternalSoundPlayer::~ExternalSoundPlayer() {
-    BasicSoundExtPlayList::Iterator iter = mSoundList.GetBeginIter();
-    while (iter != mSoundList.GetEndIter()) {
-        iter++->SetExternalSoundPlayer(NULL);
-    }
+    NW4R_UT_LIST_SAFE_FOREACH(mSoundList,
+        it->SetExternalSoundPlayer(NULL);
+    );
 }
 
 void ExternalSoundPlayer::SetPlayableSoundCount(int count) {
@@ -38,12 +38,13 @@ BasicSound* ExternalSoundPlayer::GetLowestPrioritySound() {
     int lowestPrio = BasicSound::PRIORITY_MAX + 1;
     BasicSound* pLowest = NULL;
 
-    for (BasicSoundExtPlayList::Iterator iter = mSoundList.GetBeginIter();
-         iter != mSoundList.GetEndIter(); ++iter) {
-        int prio = iter->CalcCurrentPlayerPriority();
+    for (BasicSoundExtPlayList::Iterator it = mSoundList.GetBeginIter();
+         it != mSoundList.GetEndIter(); ++it) {
+
+        int prio = it->CalcCurrentPlayerPriority();
 
         if (lowestPrio > prio) {
-            pLowest = &*iter;
+            pLowest = &*it;
             lowestPrio = prio;
         }
     }

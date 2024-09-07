@@ -27,30 +27,30 @@ void DisposeCallbackManager::UnregisterDisposeCallback(
 void DisposeCallbackManager::Dispose(void* pData, u32 size, void* pArg) {
 #pragma unused(pArg)
 
-    const void* start = pData;
-    const void* end = static_cast<u8*>(pData) + size;
+    const void* pStart = pData;
+    const void* pEnd = static_cast<u8*>(pData) + size;
 
     DisposeCallbackList::Iterator it =
         GetInstance().mCallbackList.GetBeginIter();
 
     while (it != GetInstance().mCallbackList.GetEndIter()) {
         DisposeCallbackList::Iterator curr = it++;
-        curr++->InvalidateData(start, end);
+        curr++->InvalidateData(pStart, pEnd);
     }
 }
 
 void DisposeCallbackManager::DisposeWave(void* pData, u32 size, void* pArg) {
 #pragma unused(pArg)
 
-    const void* start = pData;
-    const void* end = static_cast<u8*>(pData) + size;
+    const void* pStart = pData;
+    const void* pEnd = static_cast<u8*>(pData) + size;
 
     DisposeCallbackList::Iterator it =
         GetInstance().mCallbackList.GetBeginIter();
 
     while (it != GetInstance().mCallbackList.GetEndIter()) {
         DisposeCallbackList::Iterator curr = it++;
-        curr++->InvalidateWaveData(start, end);
+        curr++->InvalidateWaveData(pStart, pEnd);
     }
 }
 
