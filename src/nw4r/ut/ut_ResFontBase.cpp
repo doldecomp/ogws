@@ -104,7 +104,9 @@ u16 ResFontBase::GetGlyphIndex(u16 ch) const {
 }
 
 u16 ResFontBase::FindGlyphIndex(u16 ch) const {
-    for (FontCodeMap* pIt = mFontInfo->fontMap; pIt != NULL; pIt = pIt->next) {
+    for (const FontCodeMap* pIt = mFontInfo->fontMap; pIt != NULL;
+         pIt = pIt->next) {
+
         if (pIt->firstChar <= ch && ch <= pIt->lastChar) {
             return FindGlyphIndex(pIt, ch);
         }

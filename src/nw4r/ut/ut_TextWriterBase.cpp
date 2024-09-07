@@ -67,7 +67,7 @@ bool TextWriterBase<T>::CalcLineRectImpl(Rect* pRect, const T** ppStr,
                                          int len) {
     const T* pStrBegin = *ppStr;
     const T* pStrEnd = pStrBegin + len;
-    const bool useLimit = mWidthLimit < NW4R_MATH_FLT_MAX;
+    bool useLimit = mWidthLimit < NW4R_MATH_FLT_MAX;
 
     PrintContext<T> context = {this, pStrBegin};
 
@@ -307,8 +307,7 @@ template <typename T> f32 TextWriterBase<T>::PrintImpl(const T* pStr, int len) {
 
             charSpace = true;
 
-            const Font* pFont = GetFont();
-            f32 adj = -pFont->GetBaselinePos() * GetScaleV();
+            f32 adj = -GetFont()->GetBaselinePos() * GetScaleV();
             MoveCursorY(adj);
             CharWriter::Print(ch);
             SetCursorY(baseY);

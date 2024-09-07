@@ -20,17 +20,19 @@ u32 AxVoiceManager::GetRequiredMemSize() {
 }
 
 void AxVoiceManager::Setup(void* pBuffer, u32 size) {
-    if (!mInitialized) {
-        mVoiceCount = size / sizeof(AxVoice);
-        u8* pPtr = static_cast<u8*>(pBuffer);
-
-        for (u32 i = 0; i < mVoiceCount; i++) {
-            mFreeList.PushBack(reinterpret_cast<AxVoice*>(pPtr));
-            pPtr += sizeof(AxVoice);
-        }
-
-        mInitialized = true;
+    if (mInitialized) {
+        return;
     }
+
+    mVoiceCount = size / sizeof(AxVoice);
+    u8* pPtr = static_cast<u8*>(pBuffer);
+
+    for (u32 i = 0; i < mVoiceCount; i++) {
+        mFreeList.PushBack(reinterpret_cast<AxVoice*>(pPtr));
+        pPtr += sizeof(AxVoice);
+    }
+
+    mInitialized = true;
 }
 
 void AxVoiceManager::Shutdown() {

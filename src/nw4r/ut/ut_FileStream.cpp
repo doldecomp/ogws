@@ -58,8 +58,10 @@ void FileStream::FilePosition::Seek(s32 offset, u32 origin) {
     Skip(offset);
 }
 
-// TODO: This should not be necessary. Because of nw4r::snd?
-DECOMP_FORCEACTIVE(ut_FileStream_cpp, FileStream::GetRuntimeTypeInfo);
+// clang-format off
+DECOMP_FORCEACTIVE(ut_FileStream_cpp,
+                   FileStream::GetRuntimeTypeInfo);
+// clang-format on
 
 } // namespace ut
 } // namespace nw4r
