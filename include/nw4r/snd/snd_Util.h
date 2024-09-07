@@ -77,6 +77,25 @@ inline const T3* GetDataRefAddress3(const DataRef<T0, T1, T2, T3>& rRef,
         static_cast<RefType>(rRef.refType), rRef.value, pBase));
 }
 
+#ifdef NW4R_LITLE_ENDIAN
+inline u16 ReadBigEndian(u16 x) {
+    return x >> 8 | x << 8;
+}
+
+inline u32 ReadBigEndian(u32 x) {
+    return (x >> 24) & 0x000000FF | (x >> 8) & 0x0000FF00 |
+           (x << 8) & 0x00FF0000 | (x << 24) & 0xFF000000;
+}
+#else
+inline u16 ReadBigEndian(u16 x) {
+    return x;
+}
+
+inline u32 ReadBigEndian(u32 x) {
+    return x;
+}
+#endif
+
 f32 CalcPitchRatio(int pitch);
 f32 CalcVolumeRatio(f32 db);
 f32 CalcPanRatio(f32 pan, const PanInfo& rInfo);

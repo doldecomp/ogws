@@ -125,11 +125,11 @@ u16 CalcRandom() {
 
 const void* GetDataRefAddressImpl(RefType type, u32 value, const void* pBase) {
     if (type == REFTYPE_OFFSET) {
-        return ut::AddOffsetToPtr(pBase, value);
+        return ut::AddOffsetToPtr(pBase, Util::ReadBigEndian(value));
     }
 
     if (type == REFTYPE_ADDRESS) {
-        return reinterpret_cast<void*>(value);
+        return reinterpret_cast<void*>(Util::ReadBigEndian(value));
     }
 
     return NULL;

@@ -11,7 +11,7 @@ bool IsValidBinaryFile(const BinaryFileHeader* header, u32 magic, u16 version,
         return false;
     }
 
-    if (header->byteOrder != NW4R_BYTEORDER_BIG) {
+    if (header->byteOrder != NW4R_BYTEORDER_NATIVE) {
         return false;
     }
 
