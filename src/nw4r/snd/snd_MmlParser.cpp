@@ -130,9 +130,8 @@ ParseResult MmlParser::Parse(MmlSeqTrack* pTrack, bool doNoteOn) const {
         case 0xB0:
         case 0xC0:
         case 0xD0:
-            register u32 arg =
-                ReadArg(&rTrackParam.currentAddr, pPlayer, pTrack,
-                        useArgType ? argType : SEQ_ARG_U8);
+            u8 arg = ReadArg(&rTrackParam.currentAddr, pPlayer, pTrack,
+                             useArgType ? argType : SEQ_ARG_U8);
 
             if (!doExecCommand) {
                 break;
@@ -141,18 +140,10 @@ ParseResult MmlParser::Parse(MmlSeqTrack* pTrack, bool doNoteOn) const {
             switch (cmd) {
             case MML_SET_TRANSPOSE:
             case MML_SET_PITCHBEND:
-                arg &= 0xFF;
-
-                // TODO: Fakematch
-                // clang-format off
-                asm volatile {
-                    extsb arg, arg
-                } // clang-format on
-
-                arg1 = arg;
+                arg1 = *reinterpret_cast<s8*>(&arg);
                 break;
             default:
-                arg1 = arg & 0xFF;
+                arg1 = arg;
                 break;
             }
 
