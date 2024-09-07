@@ -27,13 +27,6 @@ enum OutputLineFlag {
 
 enum AuxBus { AUX_A, AUX_B, AUX_C, AUX_BUS_NUM };
 
-enum SampleFormat {
-    SAMPLE_FORMAT_PCM_S32,
-    SAMPLE_FORMAT_PCM_S16,
-    SAMPLE_FORMAT_PCM_S8,
-    SAMPLE_FORMAT_DSP_ADPCM
-};
-
 enum OutputMode {
     OUTPUT_MODE_STEREO,
     OUTPUT_MODE_SURROUND,
@@ -49,13 +42,6 @@ struct SoundParam {
     f32 fxSend;      // at 0x10
     f32 lpf;         // at 0x14
     int priority;    // at 0x18
-};
-
-enum SoundType {
-    SOUND_TYPE_INVALID,
-    SOUND_TYPE_SEQ,
-    SOUND_TYPE_STRM,
-    SOUND_TYPE_WAVE
 };
 
 namespace detail {
@@ -95,15 +81,6 @@ struct AdpcmInfo {
     AdpcmParam param;         // at 0x0
     AdpcmLoopParam loopParam; // at 0x28
     u16 padding;
-};
-
-struct ChannelParam {
-    void* dataAddr;       // at 0x0
-    u32 volumeFrontLeft;  // at 0x4
-    u32 volumeFrontRight; // at 0x8
-    u32 volumeRearLeft;   // at 0xC
-    u32 volumeRearRight;  // at 0x10
-    AdpcmInfo adpcmInfo;  // at 0x14
 };
 
 } // namespace detail

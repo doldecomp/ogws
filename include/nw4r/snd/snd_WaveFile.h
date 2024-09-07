@@ -41,6 +41,15 @@ struct WaveChannelInfo {
 
 }; // namespace WaveFile
 
+struct ChannelParam {
+    void* dataAddr;       // at 0x0
+    u32 volumeFrontLeft;  // at 0x4
+    u32 volumeFrontRight; // at 0x8
+    u32 volumeRearLeft;   // at 0xC
+    u32 volumeRearRight;  // at 0x10
+    AdpcmInfo adpcmInfo;  // at 0x14
+};
+
 struct WaveData {
     u8 sampleFormat;                        // at 0x0
     u8 loopFlag;                            // at 0x1
@@ -62,6 +71,18 @@ public:
 private:
     const WaveFile::WaveInfo* mWaveInfo; // at 0x0
 };
+
+inline AxVoice::Format WaveFormatToAxFormat(u32 format) {
+    if (format == WaveFile::FORMAT_PCM16) {
+        return AxVoice::FORMAT_PCM16;
+    }
+
+    if (format == WaveFile::FORMAT_PCM8) {
+        return AxVoice::FORMAT_PCM8;
+    }
+
+    return AxVoice::FORMAT_ADPCM;
+}
 
 } // namespace detail
 } // namespace snd

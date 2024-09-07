@@ -9,6 +9,13 @@
 namespace nw4r {
 namespace snd {
 
+enum SoundType {
+    SOUND_TYPE_INVALID,
+    SOUND_TYPE_SEQ,
+    SOUND_TYPE_STRM,
+    SOUND_TYPE_WAVE
+};
+
 class SoundArchive {
 public:
     static const u32 INVALID_ID = 0xFFFFFFFF;

@@ -41,7 +41,7 @@ void BasicSound::InitParam() {
     mExtSurroundPan = 0.0f;
     mExtVolume.InitValue(1.0f);
 
-    mOutputLine = 1;
+    mOutputLine = OUTPUT_LINE_MAIN;
     mEnableOutputLine = false;
 
     mMainOutVolume = 1.0f;
@@ -217,7 +217,7 @@ void BasicSound::Update() {
     mainOutVol *= mSoundPlayer->detail_GetMainOutVolume();
     mainOutVol *= GetMainOutVolume();
 
-    int outputLine = 1;
+    int outputLine = OUTPUT_LINE_MAIN;
     if (mSoundPlayer->detail_IsEnabledOutputLine()) {
         outputLine = mSoundPlayer->detail_GetOutputLine();
     }

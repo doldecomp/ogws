@@ -22,7 +22,7 @@ void BasicPlayer::InitParam() {
     mRemoteFilter = 0;
     mPanMode = PAN_MODE_DUAL;
     mPanCurve = PAN_CURVE_SQRT;
-    mOutputLine = 1;
+    mOutputLine = OUTPUT_LINE_MAIN;
     mMainSend = 0.0f;
     mMainOutVolume = 1.0f;
 

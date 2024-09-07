@@ -272,18 +272,6 @@ inline u16 CalcMixVolume(f32 volume) {
     return ut::Min<u32>(0xFFFF, AX_MAX_VOLUME * volume);
 }
 
-inline AxVoice::Format WaveFormatToAxFormat(u32 format) {
-    if (format == SAMPLE_FORMAT_PCM_S16) {
-        return AxVoice::FORMAT_PCM16;
-    }
-
-    if (format == SAMPLE_FORMAT_PCM_S32) {
-        return AxVoice::FORMAT_PCM8;
-    }
-
-    return AxVoice::FORMAT_ADPCM;
-}
-
 } // namespace detail
 } // namespace snd
 } // namespace nw4r
