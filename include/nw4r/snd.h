@@ -31,6 +31,7 @@
 #include <nw4r/snd/snd_MmlSeqTrackAllocator.h>
 #include <nw4r/snd/snd_MoveValue.h>
 #include <nw4r/snd/snd_NandSoundArchive.h>
+#include <nw4r/snd/snd_NoteOnCallback.h>
 #include <nw4r/snd/snd_PlayerHeap.h>
 #include <nw4r/snd/snd_RemoteSpeaker.h>
 #include <nw4r/snd/snd_RemoteSpeakerManager.h>
@@ -51,6 +52,7 @@
 #include <nw4r/snd/snd_SoundHandle.h>
 #include <nw4r/snd/snd_SoundHeap.h>
 #include <nw4r/snd/snd_SoundInstanceManager.h>
+#include <nw4r/snd/snd_SoundMemoryAllocatable.h>
 #include <nw4r/snd/snd_SoundPlayer.h>
 #include <nw4r/snd/snd_SoundStartable.h>
 #include <nw4r/snd/snd_SoundSystem.h>
@@ -58,6 +60,7 @@
 #include <nw4r/snd/snd_StrmChannel.h>
 #include <nw4r/snd/snd_StrmFile.h>
 #include <nw4r/snd/snd_StrmPlayer.h>
+#include <nw4r/snd/snd_StrmSound.h>
 #include <nw4r/snd/snd_StrmSoundHandle.h>
 #include <nw4r/snd/snd_Task.h>
 #include <nw4r/snd/snd_TaskManager.h>
