@@ -1,7 +1,9 @@
 #ifndef NW4R_UT_DVD_FILE_STREAM_H
 #define NW4R_UT_DVD_FILE_STREAM_H
 #include <nw4r/types_nw4r.h>
+
 #include <nw4r/ut/ut_FileStream.h>
+
 #include <revolution/DVD.h>
 
 namespace nw4r {
@@ -19,55 +21,78 @@ public:
      * functions, so the up-cast is always safe.
      */
     struct AsyncContext {
-        DVDFileInfo info;      // at 0x0
-        DvdFileStream* stream; // at 0x3C
+        DVDFileInfo info;       // at 0x0
+        DvdFileStream* pStream; // at 0x3C
     };
 
 public:
     DvdFileStream(s32 entrynum);
-    DvdFileStream(const DVDFileInfo* info, bool close);
+    DvdFileStream(const DVDFileInfo* pInfo, bool close);
     virtual ~DvdFileStream(); // at 0xC
 
-    virtual bool IsBusy() const { return mIsBusy; } // at 0x24
+    virtual bool IsBusy() const {
+        return mIsBusy;
+    } // at 0x24
 
-    virtual u32 Tell() const { return mFilePosition.Tell(); } // at 0x58
+    virtual u32 Tell() const {
+        return mFilePosition.Tell();
+    } // at 0x58
     virtual u32 GetSize() const {
         return mFilePosition.GetFileSize();
     } // at 0x40
 
-    virtual bool CanAsync() const { return true; }  // at 0x28
-    virtual bool CanSeek() const { return true; }   // at 0x50
-    virtual bool CanRead() const { return true; }   // at 0x2C
-    virtual bool CanWrite() const { return false; } // at 0x30
-    virtual bool CanCancel() const { return true; } // at 0x54
+    virtual bool CanAsync() const {
+        return true;
+    } // at 0x28
+    virtual bool CanSeek() const {
+        return true;
+    } // at 0x50
+    virtual bool CanRead() const {
+        return true;
+    } // at 0x2C
+    virtual bool CanWrite() const {
+        return false;
+    } // at 0x30
+    virtual bool CanCancel() const {
+        return true;
+    } // at 0x54
 
-    virtual u32 GetOffsetAlign() const { return 4; }  // at 0x34
-    virtual u32 GetSizeAlign() const { return 32; }   // at 0x38
-    virtual u32 GetBufferAlign() const { return 32; } // at 0x3C
+    virtual u32 GetOffsetAlign() const {
+        return 4;
+    } // at 0x34
+    virtual u32 GetSizeAlign() const {
+        return 32;
+    } // at 0x38
+    virtual u32 GetBufferAlign() const {
+        return 32;
+    } // at 0x3C
 
     virtual void Close(); // at 0x10
 
-    virtual s32 Read(void* dst, u32 size); // at 0x14
-    virtual bool ReadAsync(void* dst, u32 size, AsyncCallback callback,
-                           void* arg); // at 0x18
+    virtual s32 Read(void* pDst, u32 size); // at 0x14
+    virtual bool ReadAsync(void* pDst, u32 size, AsyncCallback pCallback,
+                           void* pCallbackArg); // at 0x18
 
-    virtual s32 Peek(void* dst, u32 size); // at 0x5C
-    virtual bool PeekAsync(void* dst, u32 size, AsyncCallback callback,
-                           void* arg); // at 0x60
+    virtual s32 Peek(void* pDst, u32 size); // at 0x5C
+    virtual bool PeekAsync(void* pDst, u32 size, AsyncCallback pCallback,
+                           void* pCallbackArg); // at 0x60
 
     virtual void Seek(s32 offset, u32 origin); // at 0x44
 
-    virtual void Cancel();                                       // at 0x48
-    virtual bool CancelAsync(AsyncCallback callback, void* arg); // at 0x4C
+    virtual void Cancel(); // at 0x48
+    virtual bool CancelAsync(AsyncCallback pCallback,
+                             void* pCallbackArg); // at 0x4C
 
-    void SetPriority(s32 priority) { mPriority = priority; }
+    void SetPriority(s32 priority) {
+        mPriority = priority;
+    }
 
     bool Open(s32 entrynum);
-    bool Open(const DVDFileInfo* info, bool close);
+    bool Open(const DVDFileInfo* pInfo, bool close);
 
 private:
-    static void DvdAsyncCallback_(s32 result, DVDFileInfo* info);
-    static void DvdCBAsyncCallback_(s32 result, DVDCommandBlock* block);
+    static void DvdAsyncCallback_(s32 result, DVDFileInfo* pInfo);
+    static void DvdCBAsyncCallback_(s32 result, DVDCommandBlock* pBlock);
 
     void Initialize_();
     u32 AdjustReadLength_(u32 len);

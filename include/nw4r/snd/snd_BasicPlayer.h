@@ -1,8 +1,11 @@
 #ifndef NW4R_SND_BASIC_PLAYER_H
 #define NW4R_SND_BASIC_PLAYER_H
-#include <nw4r/snd/snd_Common.h>
 #include <nw4r/types_nw4r.h>
+
+#include <nw4r/snd/snd_Common.h>
+
 #include <nw4r/ut.h>
+
 #include <revolution/WPAD.h>
 
 namespace nw4r {

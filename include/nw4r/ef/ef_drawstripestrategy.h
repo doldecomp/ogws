@@ -14,7 +14,7 @@ namespace nw4r
             virtual ~DrawStripeStrategy() {} // at 0x8
             virtual UNKTYPE GetCalcAheadFunc(ParticleManager *); // at 0x18
             
-            UNKTYPE Draw(const DrawInfo &, ParticleManager *);
+            virtual UNKTYPE Draw(const DrawInfo &, ParticleManager *);
         };
     }
 }

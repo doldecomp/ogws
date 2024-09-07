@@ -1,6 +1,7 @@
 #pragma ipa file // TODO: REMOVE AFTER REFACTOR
 
 #include <nw4r/ut.h>
+
 #include <revolution/OS.h>
 
 namespace nw4r {
@@ -8,8 +9,8 @@ namespace ut {
 
 NW4R_UT_RTTI_DEF_DERIVED(DvdLockedFileStream, DvdFileStream);
 
-OSMutex DvdLockedFileStream::sMutex;
 bool DvdLockedFileStream::sInitialized = false;
+OSMutex DvdLockedFileStream::sMutex;
 
 void DvdLockedFileStream::InitMutex_() {
     BOOL enabled = OSDisableInterrupts();
@@ -27,23 +28,23 @@ DvdLockedFileStream::DvdLockedFileStream(s32 entrynum)
     InitMutex_();
 }
 
-DvdLockedFileStream::DvdLockedFileStream(const DVDFileInfo* info, bool close)
-    : DvdFileStream(info, close) {
+DvdLockedFileStream::DvdLockedFileStream(const DVDFileInfo* pInfo, bool close)
+    : DvdFileStream(pInfo, close) {
     InitMutex_();
 }
 
 DvdLockedFileStream::~DvdLockedFileStream() {}
 
-s32 DvdLockedFileStream::Read(void* dst, u32 size) {
+s32 DvdLockedFileStream::Read(void* pDst, u32 size) {
     OSLockMutex(&sMutex);
-    s32 result = DvdFileStream::Read(dst, size);
+    s32 result = DvdFileStream::Read(pDst, size);
     OSUnlockMutex(&sMutex);
     return result;
 }
 
-s32 DvdLockedFileStream::Peek(void* dst, u32 size) {
+s32 DvdLockedFileStream::Peek(void* pDst, u32 size) {
     OSLockMutex(&sMutex);
-    s32 result = DvdFileStream::Peek(dst, size);
+    s32 result = DvdFileStream::Peek(pDst, size);
     OSUnlockMutex(&sMutex);
     return result;
 }

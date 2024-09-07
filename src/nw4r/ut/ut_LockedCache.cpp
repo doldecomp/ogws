@@ -10,15 +10,21 @@ class LCImpl {
 public:
     class Lock_ {
     public:
-        Lock_(LCImpl& lc) : mMutex(lc.mMutex) { OSLockMutex(&mMutex); }
-        ~Lock_() { OSUnlockMutex(&mMutex); }
+        Lock_(LCImpl& rImpl) : mMutex(rImpl.mMutex) {
+            OSLockMutex(&mMutex);
+        }
+        ~Lock_() {
+            OSUnlockMutex(&mMutex);
+        }
 
     private:
         OSMutex& mMutex; // at 0x0
     };
 
 public:
-    LCImpl() : mIsEnabled(false) { OSInitMutex(&mMutex); }
+    LCImpl() : mIsEnabled(false) {
+        OSInitMutex(&mMutex);
+    }
 
     void Enable() {
         Lock_ lock(*this);
@@ -67,23 +73,33 @@ static LCImpl sLCImpl;
 
 namespace LC {
 
-void Enable() { sLCImpl.Enable(); }
-
-void Disable() { sLCImpl.Disable(); }
-
-bool Lock() { return sLCImpl.Lock(); }
-
-void Unlock() { sLCImpl.Unlock(); }
-
-void LoadBlocks(void* dst, void* src, u32 size) {
-    LCLoadBlocks(dst, src, size);
+void Enable() {
+    sLCImpl.Enable();
 }
 
-void StoreBlocks(void* dst, void* src, u32 size) {
-    LCStoreBlocks(dst, src, size);
+void Disable() {
+    sLCImpl.Disable();
 }
 
-void StoreData(void* dst, void* src, u32 size) { LCStoreData(dst, src, size); }
+bool Lock() {
+    return sLCImpl.Lock();
+}
+
+void Unlock() {
+    sLCImpl.Unlock();
+}
+
+void LoadBlocks(void* pDst, void* pSrc, u32 size) {
+    LCLoadBlocks(pDst, pSrc, size);
+}
+
+void StoreBlocks(void* pDst, void* pSrc, u32 size) {
+    LCStoreBlocks(pDst, pSrc, size);
+}
+
+void StoreData(void* pDst, void* pSrc, u32 size) {
+    LCStoreData(pDst, pSrc, size);
+}
 
 } // namespace LC
 } // namespace ut

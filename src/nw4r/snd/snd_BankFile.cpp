@@ -121,14 +121,16 @@ BankFileReader::GetReferenceToSubRegion(const BankFile::DataRegion* pRef,
     const BankFile::DataRegion* pSub = NULL;
 
     switch (pRef->dataType) {
-    case DATATYPE_NONE:
+    case DATATYPE_NONE: {
         break;
+    }
 
-    case DATATYPE_INSTPARAM:
+    case DATATYPE_INSTPARAM: {
         pSub = pRef;
         break;
+    }
 
-    case DATATYPE_RANGETABLE:
+    case DATATYPE_RANGETABLE: {
         const BankFile::RangeTable* pRangeTable =
             GetDataRefAddress2(*pRef, &mDataBlock->instTable);
 
@@ -150,8 +152,9 @@ BankFileReader::GetReferenceToSubRegion(const BankFile::DataRegion* pRef,
         pSub = reinterpret_cast<const BankFile::DataRegion*>(pBase + refOffset +
                                                              refStart);
         break;
+    }
 
-    case DATATYPE_INDEXTABLE:
+    case DATATYPE_INDEXTABLE: {
         const BankFile::IndexTable* pIndexTable =
             GetDataRefAddress3(*pRef, &mDataBlock->instTable);
 
@@ -167,6 +170,7 @@ BankFileReader::GetReferenceToSubRegion(const BankFile::DataRegion* pRef,
             pIndexTable->ref +
             (splitKey - pIndexTable->min) * sizeof(BankFile::DataRegion));
         break;
+    }
     }
 
     return pSub;

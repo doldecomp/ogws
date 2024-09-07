@@ -1,6 +1,7 @@
 #pragma ipa file // TODO: REMOVE AFTER REFACTOR
 
 #include <nw4r/snd.h>
+
 #include <revolution/AX.h>
 
 namespace nw4r {
@@ -18,18 +19,18 @@ u32 VoiceManager::GetRequiredMemSize() {
     return AXGetMaxVoices() * sizeof(Voice);
 }
 
-void VoiceManager::Setup(void* pWork, u32 workSize) {
+void VoiceManager::Setup(void* pBuffer, u32 size) {
     if (mInitialized) {
         return;
     }
 
-    u32 voiceCount = workSize / sizeof(Voice);
-    u8* p = static_cast<u8*>(pWork);
+    u32 voiceCount = size / sizeof(Voice);
+    u8* pPtr = static_cast<u8*>(pBuffer);
 
     for (u32 i = 0; i < voiceCount; i++) {
-        Voice* pVoice = new (p) Voice();
+        Voice* pVoice = new (pPtr) Voice();
         mFreeList.PushBack(pVoice);
-        p += sizeof(Voice);
+        pPtr += sizeof(Voice);
     }
 
     mInitialized = true;

@@ -23,11 +23,11 @@ namespace ut {
 namespace detail {
 
 struct RuntimeTypeInfo {
-    RuntimeTypeInfo(const RuntimeTypeInfo* base) : mBase(base) {}
+    RuntimeTypeInfo(const RuntimeTypeInfo* pBase) : mBase(pBase) {}
 
-    bool IsDerivedFrom(const RuntimeTypeInfo* base) const {
-        for (const RuntimeTypeInfo* it = this; it != NULL; it = it->mBase) {
-            if (it == base) {
+    bool IsDerivedFrom(const RuntimeTypeInfo* pBase) const {
+        for (const RuntimeTypeInfo* pIt = this; pIt != NULL; pIt = pIt->mBase) {
+            if (pIt == pBase) {
                 return true;
             }
         }
@@ -39,21 +39,20 @@ struct RuntimeTypeInfo {
 };
 
 template <typename T>
-inline const RuntimeTypeInfo* GetTypeInfoFromPtr_(T* ptr) {
-    return &ptr->typeInfo;
+inline const RuntimeTypeInfo* GetTypeInfoFromPtr_(T* pPtr) {
+    return &pPtr->typeInfo;
 }
 
 } // namespace detail
 
 template <typename TDerived, typename TBase>
-inline TDerived DynamicCast(TBase* ptr) {
-    // Derived type info
-    const detail::RuntimeTypeInfo* derivedTypeInfo =
+inline TDerived DynamicCast(TBase* pPtr) {
+    const detail::RuntimeTypeInfo* pDerivedTypeInfo =
         detail::GetTypeInfoFromPtr_(static_cast<TDerived>(NULL));
 
     // Downcast if possible
-    if (ptr->GetRuntimeTypeInfo()->IsDerivedFrom(derivedTypeInfo)) {
-        return static_cast<TDerived>(ptr);
+    if (pPtr->GetRuntimeTypeInfo()->IsDerivedFrom(pDerivedTypeInfo)) {
+        return static_cast<TDerived>(pPtr);
     }
 
     return NULL;

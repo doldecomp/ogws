@@ -9,6 +9,9 @@ namespace nw4r
 
         f32 PlayPolicy_Onetime(f32 f1, f32 f2, f32 f3)
         {
+        #pragma unused(f1)
+        #pragma unused(f2)
+        
             return f3;
         }
 

@@ -1,8 +1,11 @@
 #ifndef NW4R_SND_SOUND_THREAD_H
 #define NW4R_SND_SOUND_THREAD_H
-#include <nw4r/snd/snd_AxManager.h>
 #include <nw4r/types_nw4r.h>
+
+#include <nw4r/snd/snd_AxManager.h>
+
 #include <nw4r/ut.h>
+
 #include <revolution/OS.h>
 
 namespace nw4r {

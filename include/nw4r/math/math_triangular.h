@@ -1,7 +1,8 @@
 #ifndef NW4R_MATH_TRIANGULAR_H
 #define NW4R_MATH_TRIANGULAR_H
-#include <cmath>
 #include <nw4r/types_nw4r.h>
+
+#include <cmath>
 
 #define NW4R_MATH_PI M_PI
 #define NW4R_MATH_LN_2 0.69314718056f
@@ -29,23 +30,37 @@ inline f32 SinIdx(u16 idx) {
     return SinFIdx(NW4R_MATH_IDX_TO_FIDX(U16ToF32(idx)));
 }
 
-inline f32 SinDeg(f32 deg) { return SinFIdx(NW4R_MATH_DEG_TO_FIDX(deg)); }
-inline f32 SinRad(f32 rad) { return SinFIdx(NW4R_MATH_RAD_TO_FIDX(rad)); }
+inline f32 SinDeg(f32 deg) {
+    return SinFIdx(NW4R_MATH_DEG_TO_FIDX(deg));
+}
+inline f32 SinRad(f32 rad) {
+    return SinFIdx(NW4R_MATH_RAD_TO_FIDX(rad));
+}
 
 /**
  * cos
  */
 f32 CosFIdx(f32 fidx);
 
-inline f32 CosDeg(f32 deg) { return CosFIdx(NW4R_MATH_DEG_TO_FIDX(deg)); }
-inline f32 CosRad(f32 rad) { return CosFIdx(NW4R_MATH_RAD_TO_FIDX(rad)); }
+inline f32 CosDeg(f32 deg) {
+    return CosFIdx(NW4R_MATH_DEG_TO_FIDX(deg));
+}
+inline f32 CosRad(f32 rad) {
+    return CosFIdx(NW4R_MATH_RAD_TO_FIDX(rad));
+}
 
 /**
  * tan
  */
-inline f32 TanFIdx(f32 fidx) { return std::tanf(NW4R_MATH_FIDX_TO_RAD(fidx)); }
-inline f32 TanDeg(f32 deg) { return TanFIdx(NW4R_MATH_DEG_TO_FIDX(deg)); }
-inline f32 TanRad(f32 rad) { return TanFIdx(NW4R_MATH_RAD_TO_FIDX(rad)); }
+inline f32 TanFIdx(f32 fidx) {
+    return std::tanf(NW4R_MATH_FIDX_TO_RAD(fidx));
+}
+inline f32 TanDeg(f32 deg) {
+    return TanFIdx(NW4R_MATH_DEG_TO_FIDX(deg));
+}
+inline f32 TanRad(f32 rad) {
+    return TanFIdx(NW4R_MATH_RAD_TO_FIDX(rad));
+}
 
 /**
  * sin/cos
@@ -65,8 +80,12 @@ inline void SinCosRad(f32* pSin, f32* pCos, f32 rad) {
  */
 f32 AtanFIdx(f32 x);
 
-inline f32 AtanDeg(f32 x) { return NW4R_MATH_FIDX_TO_DEG(AtanFIdx(x)); }
-inline f32 AtanRad(f32 x) { return NW4R_MATH_FIDX_TO_RAD(AtanFIdx(x)); }
+inline f32 AtanDeg(f32 x) {
+    return NW4R_MATH_FIDX_TO_DEG(AtanFIdx(x));
+}
+inline f32 AtanRad(f32 x) {
+    return NW4R_MATH_FIDX_TO_RAD(AtanFIdx(x));
+}
 
 /**
  * atan2

@@ -28,8 +28,11 @@ static void SetupGXCommon() {
 namespace nw4r {
 namespace ut {
 
+CharWriter::LoadingTexture CharWriter::mLoadingTexture;
+
 CharWriter::CharWriter()
     : mAlpha(255), mIsWidthFixed(false), mFixedWidth(0.0f), mFont(NULL) {
+
     mLoadingTexture.Reset();
     ResetColorMapping();
     SetGradationMode(GRADMODE_NONE);
@@ -49,21 +52,28 @@ void CharWriter::SetupGX() {
     } else if (mFont != NULL) {
         switch (mFont->GetTextureFormat()) {
         case GX_TF_I4:
-        case GX_TF_I8:
+        case GX_TF_I8: {
             SetupGXForI();
             break;
+        }
+
         case GX_TF_IA4:
-        case GX_TF_IA8:
+        case GX_TF_IA8: {
             SetupGXDefault();
             break;
+        }
+
         case GX_TF_RGB565:
         case GX_TF_RGB5A3:
-        case GX_TF_RGBA8:
+        case GX_TF_RGBA8: {
             SetupGXForRGBA();
             break;
-        default:
+        }
+
+        default: {
             SetupGXDefault();
             break;
+        }
         }
     } else {
         SetupGXDefault();
@@ -74,11 +84,17 @@ void CharWriter::SetFontSize(f32 width, f32 height) {
     SetScale(width / mFont->GetWidth(), height / mFont->GetHeight());
 }
 
-f32 CharWriter::GetFontWidth() const { return mScale.x * mFont->GetWidth(); }
+f32 CharWriter::GetFontWidth() const {
+    return mScale.x * mFont->GetWidth();
+}
 
-f32 CharWriter::GetFontHeight() const { return mScale.y * mFont->GetHeight(); }
+f32 CharWriter::GetFontHeight() const {
+    return mScale.y * mFont->GetHeight();
+}
 
-f32 CharWriter::GetFontAscent() const { return mScale.y * mFont->GetAscent(); }
+f32 CharWriter::GetFontAscent() const {
+    return mScale.y * mFont->GetAscent();
+}
 
 f32 CharWriter::GetFontDescent() const {
     return mScale.y * mFont->GetDescent();
@@ -111,23 +127,23 @@ f32 CharWriter::Print(u16 ch) {
     return width;
 }
 
-void CharWriter::PrintGlyph(f32 x, f32 y, f32 z, const Glyph& glyph) {
-    f32 x2 = x + (glyph.widths.glyphWidth * mScale.x);
-    f32 y2 = y + (glyph.height * mScale.y);
+void CharWriter::PrintGlyph(f32 x, f32 y, f32 z, const Glyph& rGlyph) {
+    f32 x2 = x + (rGlyph.widths.glyphWidth * mScale.x);
+    f32 y2 = y + (rGlyph.height * mScale.y);
 
-    u32 posLeft = glyph.cellX;
-    u16 texLeft = 0x8000 * posLeft / glyph.texWidth;
+    u32 posLeft = rGlyph.cellX;
+    u16 texLeft = 0x8000 * posLeft / rGlyph.texWidth;
 
-    u32 posTop = glyph.cellY;
-    u16 texTop = 0x8000 * posTop / glyph.texHeight;
+    u32 posTop = rGlyph.cellY;
+    u16 texTop = 0x8000 * posTop / rGlyph.texHeight;
 
-    u32 posRight = posLeft + glyph.widths.glyphWidth;
-    u16 texRight = 0x8000 * posRight / glyph.texWidth;
+    u32 posRight = posLeft + rGlyph.widths.glyphWidth;
+    u16 texRight = 0x8000 * posRight / rGlyph.texWidth;
 
-    u32 posBottom = posTop + glyph.height;
-    u16 texBottom = 0x8000 * posBottom / glyph.texHeight;
+    u32 posBottom = posTop + rGlyph.height;
+    u16 texBottom = 0x8000 * posBottom / rGlyph.texHeight;
 
-    LoadTexture(glyph, GX_TEXMAP0);
+    LoadTexture(rGlyph, GX_TEXMAP0);
 
     GXBegin(GX_QUADS, GX_VTXFMT0, 4);
     {
@@ -150,19 +166,21 @@ void CharWriter::PrintGlyph(f32 x, f32 y, f32 z, const Glyph& glyph) {
     GXEnd();
 }
 
-void CharWriter::LoadTexture(const Glyph& glyph, GXTexMapID slot) {
+void CharWriter::LoadTexture(const Glyph& rGlyph, GXTexMapID slot) {
     LoadingTexture loadingTexture;
 
     loadingTexture.slot = slot;
-    loadingTexture.texture = glyph.texture;
+    loadingTexture.texture = rGlyph.texture;
     loadingTexture.filter = mFilter;
 
     if (loadingTexture != mLoadingTexture) {
         GXTexObj texObj;
-        GXInitTexObj(&texObj, glyph.texture, glyph.texWidth, glyph.texHeight,
-                     glyph.format, GX_CLAMP, GX_CLAMP, FALSE);
+        GXInitTexObj(&texObj, rGlyph.texture, rGlyph.texWidth, rGlyph.texHeight,
+                     rGlyph.format, GX_CLAMP, GX_CLAMP, FALSE);
+
         GXInitTexObjLOD(&texObj, mFilter.atSmall, mFilter.atLarge, 0.0f, 0.0f,
                         0.0f, FALSE, FALSE, GX_ANISO_1);
+
         GXLoadTexObj(&texObj, slot);
 
         mLoadingTexture = loadingTexture;
@@ -259,9 +277,9 @@ void CharWriter::SetupGXForI() {
     SetupVertexFormat();
 }
 
-void CharWriter::SetupGXForRGBA() { SetupGXDefault(); }
-
-CharWriter::LoadingTexture CharWriter::mLoadingTexture;
+void CharWriter::SetupGXForRGBA() {
+    SetupGXDefault();
+}
 
 } // namespace ut
 } // namespace nw4r

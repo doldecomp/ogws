@@ -9,7 +9,7 @@ class CharStrmReader {
 public:
     typedef u16 (CharStrmReader::*ReadFunc)();
 
-    CharStrmReader(ReadFunc func) : mCharStrm(NULL), mReadFunc(func) {}
+    CharStrmReader(ReadFunc pFunc) : mCharStrm(NULL), mReadFunc(pFunc) {}
     ~CharStrmReader() {}
 
     u16 ReadNextCharUTF8();
@@ -17,7 +17,9 @@ public:
     u16 ReadNextCharCP1252();
     u16 ReadNextCharSJIS();
 
-    const void* GetCurrentPos() const { return mCharStrm; }
+    const void* GetCurrentPos() const {
+        return mCharStrm;
+    }
 
     template <typename T> T GetChar(int offset) const {
         return static_cast<const T*>(mCharStrm)[offset];
@@ -27,10 +29,16 @@ public:
         static_cast<const T*>(mCharStrm) += offset;
     }
 
-    u16 Next() { return (this->*mReadFunc)(); }
+    u16 Next() {
+        return (this->*mReadFunc)();
+    }
 
-    void Set(const char* strm) { mCharStrm = strm; }
-    void Set(const wchar_t* strm) { mCharStrm = strm; }
+    void Set(const char* pStrm) {
+        mCharStrm = pStrm;
+    }
+    void Set(const wchar_t* pStrm) {
+        mCharStrm = pStrm;
+    }
 
 private:
     const void* mCharStrm; // at 0x0

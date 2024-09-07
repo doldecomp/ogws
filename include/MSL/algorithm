@@ -27,12 +27,15 @@ template <typename TPtr> inline long distance(TPtr first, TPtr last) {
 }
 
 template <typename TPtr>
-inline long __distance(TPtr first, TPtr last, random_access_iterator_tag tag) {
+inline long __distance(TPtr first, TPtr last,
+                       random_access_iterator_tag /* tag */) {
     long dist = reinterpret_cast<long>(last) - reinterpret_cast<long>(first);
     return dist / static_cast<long>(sizeof(TPtr));
 }
 
-template <typename T> inline T& move(T& x) { return x; }
+template <typename T> inline T& move(T& x) {
+    return x;
+}
 
 template <typename T> inline void swap(T& a, T& b) {
     T tmp = move(a);

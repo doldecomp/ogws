@@ -1,7 +1,9 @@
 #ifndef NW4R_SND_SEQ_SOUND_HANDLE_H
 #define NW4R_SND_SEQ_SOUND_HANDLE_H
-#include <nw4r/snd/snd_SeqSound.h>
 #include <nw4r/types_nw4r.h>
+
+#include <nw4r/snd/snd_SeqSound.h>
+
 #include <nw4r/ut.h>
 
 namespace nw4r {

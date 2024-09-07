@@ -37,6 +37,7 @@ private:
     static const volatile f32 VOLUME_INIT;
     static const s16 DecibelSquareTable[128];
 
+private:
     Status mStatus; // at 0x0
     f32 mValue;     // at 0x4
     f32 mDecay;     // at 0x8

@@ -1,8 +1,9 @@
 #ifndef NW4R_SND_MML_SEQ_TRACK_ALLOCATOR_H
 #define NW4R_SND_MML_SEQ_TRACK_ALLOCATOR_H
+#include <nw4r/types_nw4r.h>
+
 #include <nw4r/snd/snd_InstancePool.h>
 #include <nw4r/snd/snd_SeqTrackAllocator.h>
-#include <nw4r/types_nw4r.h>
 
 namespace nw4r {
 namespace snd {

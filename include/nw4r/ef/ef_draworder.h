@@ -10,9 +10,9 @@ namespace nw4r
 	{
 		struct DrawOrder : DrawOrderBase
 		{
-			void Draw(Effect *, const DrawInfo &);
-			void Add(Effect *, ParticleManager *);
-			void Remove(Effect *, ParticleManager *);
+			virtual void Draw(Effect *, const DrawInfo &);
+			virtual void Add(Effect *, ParticleManager *);
+			virtual void Remove(Effect *, ParticleManager *);
 		};
 	}
 }

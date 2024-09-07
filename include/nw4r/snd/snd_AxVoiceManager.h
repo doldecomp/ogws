@@ -1,7 +1,8 @@
 #ifndef NW4R_SND_AX_VOICE_MANAGER_H
 #define NW4R_SND_AX_VOICE_MANAGER_H
-#include <nw4r/snd/snd_AxVoice.h>
 #include <nw4r/types_nw4r.h>
+
+#include <nw4r/snd/snd_AxVoice.h>
 
 namespace nw4r {
 namespace snd {
@@ -20,19 +21,20 @@ public:
     ~AxVoiceManager() {}
 
     u32 GetRequiredMemSize();
-    void Setup(void* work, u32 size);
+    void Setup(void* pBuffer, u32 size);
     void Shutdown();
 
-    AxVoice* AcquireAxVoice(u32 prio, AxVoice::AxVoiceCallback callback,
-                            void* arg);
-    void FreeAxVoice(AxVoice* voice);
-    void ReserveForFreeAxVoice(AxVoice* voice);
+    AxVoice* AcquireAxVoice(u32 prio, AxVoice::AxVoiceCallback pCallback,
+                            void* pArg);
+    void FreeAxVoice(AxVoice* pVoice);
+
+    void ReserveForFreeAxVoice(AxVoice* pVoice);
     void FreeAllReservedAxVoice();
 
 private:
     AxVoice* Alloc();
-    void Free(AxVoice* voice);
-    void ReserveForFree(AxVoice* voice);
+    void Free(AxVoice* pVoice);
+    void ReserveForFree(AxVoice* pVoice);
 
 private:
     AxVoiceList mActiveList;       // at 0x0

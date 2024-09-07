@@ -6,7 +6,9 @@ namespace nw4r {
 namespace snd {
 namespace detail {
 
-BasicPlayer::BasicPlayer() : mId(-1) { InitParam(); }
+BasicPlayer::BasicPlayer() : mId(-1) {
+    InitParam();
+}
 
 void BasicPlayer::InitParam() {
     // TODO: Fakematch
@@ -35,9 +37,13 @@ void BasicPlayer::InitParam() {
     }
 }
 
-void BasicPlayer::SetFxSend(AuxBus bus, f32 send) { mFxSend[bus] = send; }
+void BasicPlayer::SetFxSend(AuxBus bus, f32 send) {
+    mFxSend[bus] = send;
+}
 
-f32 BasicPlayer::GetFxSend(AuxBus bus) const { return mFxSend[bus]; }
+f32 BasicPlayer::GetFxSend(AuxBus bus) const {
+    return mFxSend[bus];
+}
 
 void BasicPlayer::SetRemoteOutVolume(int remote, f32 vol) {
     mRemoteOutVolume[remote] = vol;
@@ -47,7 +53,9 @@ f32 BasicPlayer::GetRemoteOutVolume(int remote) const {
     return mRemoteOutVolume[remote];
 }
 
-f32 BasicPlayer::GetRemoteSend(int remote) const { return mRemoteSend[remote]; }
+f32 BasicPlayer::GetRemoteSend(int remote) const {
+    return mRemoteSend[remote];
+}
 
 f32 BasicPlayer::GetRemoteFxSend(int remote) const {
     return mRemoteFxSend[remote];

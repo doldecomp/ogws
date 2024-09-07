@@ -7,30 +7,32 @@ namespace ut {
 
 NW4R_UT_RTTI_DEF_BASE(IOStream);
 
-bool IOStream::ReadAsync(void* dst, u32 size, AsyncCallback callback,
-                         void* arg) {
-#pragma unused(dst)
+bool IOStream::ReadAsync(void* pDst, u32 size, AsyncCallback pCallback,
+                         void* pCallbackArg) {
+#pragma unused(pDst)
 #pragma unused(size)
-#pragma unused(callback)
-#pragma unused(arg)
+#pragma unused(pCallback)
+#pragma unused(pCallbackArg)
     return false;
 }
 
-void IOStream::Write(const void* src, u32 size) {
-#pragma unused(src)
+void IOStream::Write(const void* pSrc, u32 size) {
+#pragma unused(pSrc)
 #pragma unused(size)
 }
 
-bool IOStream::WriteAsync(const void* src, u32 size, AsyncCallback callback,
-                          void* arg) {
-#pragma unused(src)
+bool IOStream::WriteAsync(const void* pSrc, u32 size, AsyncCallback pCallback,
+                          void* pCallbackArg) {
+#pragma unused(pSrc)
 #pragma unused(size)
-#pragma unused(callback)
-#pragma unused(arg)
+#pragma unused(pCallback)
+#pragma unused(pCallbackArg)
     return false;
 }
 
-bool IOStream::IsBusy() const { return false; }
+bool IOStream::IsBusy() const {
+    return false;
+}
 
 } // namespace ut
 } // namespace nw4r

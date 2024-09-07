@@ -1,7 +1,8 @@
 #ifndef NW4R_UT_RECT_H
 #define NW4R_UT_RECT_H
-#include <nw4r/math.h>
 #include <nw4r/types_nw4r.h>
+
+#include <nw4r/math.h>
 
 namespace nw4r {
 namespace ut {
@@ -16,11 +17,19 @@ struct Rect {
     Rect(f32 l, f32 t, f32 r, f32 b) : left(l), top(t), right(r), bottom(b) {}
     ~Rect() {}
 
-    void SetWidth(f32 width) { right = left + width; }
-    f32 GetWidth() const { return right - left; }
+    void SetWidth(f32 width) {
+        right = left + width;
+    }
+    f32 GetWidth() const {
+        return right - left;
+    }
 
-    void SetHeight(f32 height) { bottom = top + height; }
-    f32 GetHeight() const { return bottom - top; }
+    void SetHeight(f32 height) {
+        bottom = top + height;
+    }
+    f32 GetHeight() const {
+        return bottom - top;
+    }
 
     void Normalize() {
         f32 l = left;

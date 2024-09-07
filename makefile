@@ -54,7 +54,7 @@ CFLAGS_RUNTIME := -lang c -use_lmw_stmw on -enum int -inline auto -rostr -Cpp_ex
 # Compiler flags for the Metrowerks Standard Library (MSL)
 CFLAGS_MSL := -lang c -use_lmw_stmw on -enum int -inline auto -rostr -D_IEEE_LIBM -Cpp_exceptions off -proc gekko -fp hard -O4,p -ir include/MetroTRK -I- -i include -ir include/MSL -nodefaults
 # Compiler flags for NintendoWare for Revolution
-CFLAGS_NW4R := -lang c99 -enum int -inline auto -Cpp_exceptions off -RTTI off -proc gekko -fp hard -O4,p  -ir include/nw4r -I- -Iinclude -ir include/MSL -ir include/revolution -nodefaults
+CFLAGS_NW4R := -lang c99 -enum int -inline auto -Cpp_exceptions off -RTTI off -proc gekko -fp hard -O4,p  -ir include/nw4r -I- -Iinclude -ir include/MSL -ir include/revolution -nodefaults -w unused -w missingreturn -w hidevirtual -pragma "warn_no_explicit_virtual on" -w err
 # Compiler flags for EGG
 CFLAGS_EGG := -lang c99 -enum int -inline auto -Cpp_exceptions off -RTTI off -proc gekko -fp hard -O4,p  -ir include/egg -ir include/nw4r -I- -Iinclude -ir include/MSL -ir include/revolution -nodefaults -rostr -str pool
 # Compiler flags for the RVL SDK

@@ -1,11 +1,13 @@
 #ifndef NW4R_SND_CHANNEL_H
 #define NW4R_SND_CHANNEL_H
+#include <nw4r/types_nw4r.h>
+
 #include <nw4r/snd/snd_Common.h>
 #include <nw4r/snd/snd_EnvGenerator.h>
 #include <nw4r/snd/snd_Lfo.h>
 #include <nw4r/snd/snd_MoveValue.h>
 #include <nw4r/snd/snd_Voice.h>
-#include <nw4r/types_nw4r.h>
+
 #include <nw4r/ut.h>
 
 namespace nw4r {

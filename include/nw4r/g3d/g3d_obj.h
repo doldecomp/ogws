@@ -120,8 +120,8 @@ namespace nw4r
                 detail::FreeToAllocator(pAllocator, pBlock);
             }
 
-            static inline void * operator new(size_t size, void *pBlock) { return pBlock; }
-            static inline void operator delete(void *pBlock) {}
+            static inline void * operator new(size_t /* size */, void *pBlock) { return pBlock; }
+            static inline void operator delete(void */* pBlock */) {}
 
             template <typename T>
             static T * DynamicCast(G3dObj *obj)

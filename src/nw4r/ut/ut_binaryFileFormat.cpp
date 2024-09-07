@@ -5,26 +5,26 @@
 namespace nw4r {
 namespace ut {
 
-bool IsValidBinaryFile(const BinaryFileHeader* header, u32 signature,
+bool IsValidBinaryFile(const BinaryFileHeader* pHeader, u32 signature,
                        u16 version, u16 dataBlocks) {
-    if (header->signature != signature) {
+    if (pHeader->signature != signature) {
         return false;
     }
 
-    if (header->byteOrder != NW4R_BYTEORDER_NATIVE) {
+    if (pHeader->byteOrder != NW4R_BYTEORDER_NATIVE) {
         return false;
     }
 
-    if (header->version != version) {
+    if (pHeader->version != version) {
         return false;
     }
 
-    if (header->fileSize <
+    if (pHeader->fileSize <
         sizeof(BinaryFileHeader) + (dataBlocks * sizeof(BinaryBlockHeader))) {
         return false;
     }
 
-    if (header->dataBlocks < dataBlocks) {
+    if (pHeader->dataBlocks < dataBlocks) {
         return false;
     }
 

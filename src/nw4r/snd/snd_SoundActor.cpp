@@ -11,6 +11,8 @@ SoundActor::detail_SetupSound(SoundHandle* pHandle, u32 id,
                               detail::BasicSound::AmbientArgInfo* pArgInfo,
                               detail::ExternalSoundPlayer* pPlayer, bool hold,
                               const StartInfo* pStartInfo) {
+#pragma unused(pArgInfo)
+#pragma unused(pPlayer)
 
     return mStartable.detail_SetupSound(
         pHandle, id, NULL, detail_GetActorSoundPlayer(0), hold, pStartInfo);

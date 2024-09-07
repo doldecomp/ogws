@@ -1,7 +1,8 @@
 #ifndef NW4R_MATH_GEOMETRY_H
 #define NW4R_MATH_GEOMETRY_H
-#include <nw4r/math/math_types.h>
 #include <nw4r/types_nw4r.h>
+
+#include <nw4r/math/math_types.h>
 
 namespace nw4r {
 namespace math {
@@ -23,7 +24,10 @@ enum IntersectionResult {
 struct PLANE {
     PLANE() {}
 
-    f32 Test(const VEC3& point) const { return d + VEC3Dot(&n, &point); }
+    f32 Test(const VEC3& rPoint) const {
+        return d + VEC3Dot(&n, &rPoint);
+    }
+
     void Set(const VEC3* p0, const VEC3* p1, const VEC3* p2);
 
     VEC3 n; // at 0x0
@@ -33,8 +37,8 @@ struct PLANE {
 struct AABB {
     AABB() {}
 
-    void Set(const VEC3* points, unsigned int num);
-    void Set(const AABB* box, const MTX34* mtx);
+    void Set(const VEC3* pPoints, unsigned int num);
+    void Set(const AABB* pBox, const MTX34* pMtx);
 
     VEC3 min; // at 0x0
     VEC3 max; // at 0xC
@@ -68,10 +72,10 @@ private:
     };
 
 public:
-    void Set(f32 fovy, f32 aspect, f32 n, f32 f, const MTX34& cam);
-    void Set(f32 t, f32 b, f32 l, f32 r, f32 n, f32 f, const MTX34& cam);
+    void Set(f32 fovy, f32 aspect, f32 n, f32 f, const MTX34& rCamMtx);
+    void Set(f32 t, f32 b, f32 l, f32 r, f32 n, f32 f, const MTX34& rCamMtx);
 
-    IntersectionResult IntersectAABB_Ex(const AABB* box) const;
+    IntersectionResult IntersectAABB_Ex(const AABB* pBox) const;
 
 private:
     MTX34 mCamMtx;            // at 0x0
@@ -85,7 +89,7 @@ private:
     PLANE mPlanes[PLANE_MAX]; // at 0x90
 };
 
-bool IntersectionAABB(const AABB* a, const AABB* b);
+bool IntersectionAABB(const AABB* pA, const AABB* pB);
 
 } // namespace math
 } // namespace nw4r

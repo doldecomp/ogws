@@ -6,34 +6,38 @@ namespace nw4r {
 namespace ut {
 namespace detail {
 
-LinkListImpl::~LinkListImpl() { Clear(); }
+LinkListImpl::~LinkListImpl() {
+    Clear();
+}
 
 LinkListImpl::Iterator LinkListImpl::Erase(LinkListImpl::Iterator it) {
     Iterator copy(it);
     return Erase(it, ++copy);
 }
 
-void LinkListImpl::Clear() { Erase(GetBeginIter(), GetEndIter()); }
+void LinkListImpl::Clear() {
+    Erase(GetBeginIter(), GetEndIter());
+}
 
-LinkListImpl::Iterator LinkListImpl::Insert(Iterator it, LinkListNode* p) {
+LinkListImpl::Iterator LinkListImpl::Insert(Iterator it, LinkListNode* pNode) {
     LinkListNode* next = it.mNode;
     LinkListNode* prev = next->mPrev;
 
-    // prev <- p -> next
-    p->mNext = next;
-    p->mPrev = prev;
-    // prev <-> p <-> next
-    next->mPrev = p;
-    prev->mNext = p;
+    // prev <- pNode -> next
+    pNode->mNext = next;
+    pNode->mPrev = prev;
+    // prev <-> pNode <-> next
+    next->mPrev = pNode;
+    prev->mNext = pNode;
 
     mSize++;
 
-    return Iterator(p);
+    return Iterator(pNode);
 }
 
-LinkListImpl::Iterator LinkListImpl::Erase(LinkListNode* p) {
-    LinkListNode* next = p->mNext;
-    LinkListNode* prev = p->mPrev;
+LinkListImpl::Iterator LinkListImpl::Erase(LinkListNode* pNode) {
+    LinkListNode* next = pNode->mNext;
+    LinkListNode* prev = pNode->mPrev;
 
     // Remove connections to node
     next->mPrev = prev;
@@ -42,22 +46,22 @@ LinkListImpl::Iterator LinkListImpl::Erase(LinkListNode* p) {
     mSize--;
 
     // Isolate node
-    p->mNext = NULL;
-    p->mPrev = NULL;
+    pNode->mNext = NULL;
+    pNode->mPrev = NULL;
 
     return Iterator(next);
 }
 
 LinkListImpl::Iterator LinkListImpl::Erase(Iterator begin, Iterator end) {
-    LinkListNode* pCur = begin.mNode;
+    LinkListNode* pIt = begin.mNode;
     LinkListNode* pEnd = end.mNode;
 
-    while (pCur != pEnd) {
+    while (pIt != pEnd) {
         // Preserve next node before erasing pointers
-        LinkListNode* pNext = pCur->mNext;
+        LinkListNode* pNext = pIt->mNext;
         // Erase current node
-        Erase(pCur);
-        pCur = pNext;
+        Erase(pIt);
+        pIt = pNext;
     }
 
     return Iterator(pEnd);

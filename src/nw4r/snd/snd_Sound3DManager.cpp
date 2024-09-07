@@ -1,8 +1,9 @@
 #pragma ipa file // TODO: REMOVE AFTER REFACTOR
 
-#include <cmath>
 #include <nw4r/math.h>
 #include <nw4r/snd.h>
+
+#include <cmath>
 
 namespace nw4r {
 namespace snd {
@@ -237,9 +238,11 @@ void Sound3DManager::Update(SoundParam* pParam, u32 id, SoundHandle* pHandle,
         }
 
         case OUTPUT_MODE_MONO:
-        default:
+        default: {
             pan = 0.0f;
             surroundPan = 0.0f;
+            break;
+        }
         }
     }
 
@@ -273,12 +276,14 @@ void* Sound3DManager::detail_AllocAmbientArg(u32 size) {
 
 void Sound3DManager::detail_FreeAmbientArg(void* pArg,
                                            const detail::BasicSound* pSound) {
+#pragma unused(pSound)
+
     mParamPool.Free(static_cast<Sound3DActorParam*>(pArg));
 }
 
 Sound3DManager::Sound3DActorParam::Sound3DActorParam() : userParam(-1) {
     soundParam.flags = 0;
-    soundParam.decayCurve = 1;
+    soundParam.decayCurve = DECAY_CURVE_LOGARITHMIC;
     soundParam.decayRatio = 128;
 }
 

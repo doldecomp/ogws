@@ -1,5 +1,7 @@
 #ifndef NW4R_SND_STRM_PLAYER_H
 #define NW4R_SND_STRM_PLAYER_H
+#include <nw4r/types_nw4r.h>
+
 #include <nw4r/snd/snd_BasicPlayer.h>
 #include <nw4r/snd/snd_InstancePool.h>
 #include <nw4r/snd/snd_SoundThread.h>
@@ -7,8 +9,9 @@
 #include <nw4r/snd/snd_StrmFile.h>
 #include <nw4r/snd/snd_Task.h>
 #include <nw4r/snd/snd_Voice.h>
-#include <nw4r/types_nw4r.h>
+
 #include <nw4r/ut.h>
+
 #include <revolution/OS.h>
 
 namespace nw4r {

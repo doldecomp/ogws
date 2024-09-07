@@ -1,8 +1,11 @@
 #ifndef NW4R_SND_SOUND_INSTANCE_MANAGER_H
 #define NW4R_SND_SOUND_INSTANCE_MANAGER_H
-#include <nw4r/snd/snd_InstancePool.h>
 #include <nw4r/types_nw4r.h>
+
+#include <nw4r/snd/snd_InstancePool.h>
+
 #include <nw4r/ut.h>
+
 #include <revolution/OS.h>
 
 namespace nw4r {

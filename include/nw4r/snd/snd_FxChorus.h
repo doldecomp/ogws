@@ -1,8 +1,10 @@
 #ifndef NW4R_SND_FX_CHORUS_H
 #define NW4R_SND_FX_CHORUS_H
+#include <nw4r/types_nw4r.h>
+
 #include <nw4r/snd/snd_AxfxImpl.h>
 #include <nw4r/snd/snd_FxBase.h>
-#include <nw4r/types_nw4r.h>
+
 #include <revolution/AXFX.h>
 
 namespace nw4r {
@@ -19,10 +21,10 @@ public:
 public:
     FxChorus();
 
-    ~FxChorus() {
+    virtual ~FxChorus() {
         Shutdown();
         ReleaseWorkBuffer();
-    }
+    } // at 0x8
 
     virtual bool StartUp();  // at 0xC
     virtual void Shutdown(); // at 0x10

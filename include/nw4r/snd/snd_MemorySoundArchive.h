@@ -1,8 +1,10 @@
 #ifndef NW4R_SND_MEMORY_SOUND_ARCHIVE_H
 #define NW4R_SND_MEMORY_SOUND_ARCHIVE_H
+#include <nw4r/types_nw4r.h>
+
 #include <nw4r/snd/snd_SoundArchive.h>
 #include <nw4r/snd/snd_SoundArchiveFile.h>
-#include <nw4r/types_nw4r.h>
+
 #include <nw4r/ut.h>
 
 namespace nw4r {

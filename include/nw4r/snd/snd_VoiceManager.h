@@ -1,8 +1,9 @@
 #ifndef NW4R_SND_VOICE_MANAGER_H
 #define NW4R_SND_VOICE_MANAGER_H
+#include <nw4r/types_nw4r.h>
+
 #include <nw4r/snd/snd_Common.h>
 #include <nw4r/snd/snd_Voice.h>
-#include <nw4r/types_nw4r.h>
 
 namespace nw4r {
 namespace snd {
@@ -18,7 +19,7 @@ public:
 
     u32 GetRequiredMemSize();
 
-    void Setup(void* pWork, u32 workSize);
+    void Setup(void* pBuffer, u32 size);
     void Shutdown();
     void StopAllVoices();
 

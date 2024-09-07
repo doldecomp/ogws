@@ -1,5 +1,7 @@
 #ifndef NW4R_SND_SOUND_ARCHIVE_PLAYER_H
 #define NW4R_SND_SOUND_ARCHIVE_PLAYER_H
+#include <nw4r/types_nw4r.h>
+
 #include <nw4r/snd/snd_DisposeCallback.h>
 #include <nw4r/snd/snd_MmlParser.h>
 #include <nw4r/snd/snd_MmlSeqTrackAllocator.h>
@@ -14,7 +16,6 @@
 #include <nw4r/snd/snd_Util.h>
 #include <nw4r/snd/snd_WaveSound.h>
 #include <nw4r/snd/snd_WsdPlayer.h>
-#include <nw4r/types_nw4r.h>
 
 namespace nw4r {
 namespace snd {

@@ -1,8 +1,10 @@
 #ifndef NW4R_MATH_ARITHMETIC_H
 #define NW4R_MATH_ARITHMETIC_H
-#include <cmath>
 #include <nw4r/types_nw4r.h>
+
 #include <revolution/OS.h>
+
+#include <cmath>
 
 #define NW4R_MATH_QNAN (-(0.0f / 0.0f))
 #define NW4R_MATH_FLT_MAX 3.402823466e+38f
@@ -28,11 +30,17 @@ inline f32 FAbs(register f32 x) {
     return x;
 }
 
-inline f32 FCeil(f32 x) { return std::ceilf(x); }
+inline f32 FCeil(f32 x) {
+    return std::ceilf(x);
+}
 
-inline f32 FExp(f32 x) { return detail::FExp(x); }
+inline f32 FExp(f32 x) {
+    return detail::FExp(x);
+}
 
-inline f32 FFloor(f32 x) { return std::floorf(x); }
+inline f32 FFloor(f32 x) {
+    return std::floorf(x);
+}
 
 inline f32 FInv(register f32 x) {
     register f32 work0, work1, work2, work3;
@@ -52,9 +60,13 @@ inline f32 FInv(register f32 x) {
     return work0;
 }
 
-inline f32 FMod(f32 x, f32 y) { return std::fmodf(x, y); }
+inline f32 FMod(f32 x, f32 y) {
+    return std::fmodf(x, y);
+}
 
-inline f32 FModf(f32 x, f32* y) { return std::modff(x, y); }
+inline f32 FModf(f32 x, f32* pY) {
+    return std::modff(x, pY);
+}
 
 inline f32 FSqrt(f32 x) {
     if (x < 0.0f) {
@@ -109,9 +121,13 @@ inline s16 F32ToS16(f32 arg) {
     return ret;
 }
 
-inline u32 F32AsU32(f32 arg) { return *reinterpret_cast<u32*>(&arg); }
+inline u32 F32AsU32(f32 arg) {
+    return *reinterpret_cast<u32*>(&arg);
+}
 
-inline f32 U32AsF32(u32 arg) { return *reinterpret_cast<f32*>(&arg); }
+inline f32 U32AsF32(u32 arg) {
+    return *reinterpret_cast<f32*>(&arg);
+}
 
 inline s32 FGetExpPart(f32 x) {
     s32 s = F32AsU32(x);

@@ -13,7 +13,7 @@ namespace nw4r
             DrawFreeStrategy();
             virtual ~DrawFreeStrategy() {} // at 0x8
             
-            UNKTYPE Draw(const DrawInfo &, ParticleManager *);
+            virtual UNKTYPE Draw(const DrawInfo &, ParticleManager *);
         };
     }
 }

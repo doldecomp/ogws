@@ -1,10 +1,13 @@
 #ifndef NW4R_SND_SEQ_SOUND_H
 #define NW4R_SND_SEQ_SOUND_H
+#include <nw4r/types_nw4r.h>
+
 #include <nw4r/snd/snd_BasicSound.h>
 #include <nw4r/snd/snd_SeqPlayer.h>
 #include <nw4r/snd/snd_Task.h>
-#include <nw4r/types_nw4r.h>
+
 #include <nw4r/ut.h>
+
 #include <revolution/OS.h>
 
 namespace nw4r {

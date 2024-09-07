@@ -1,11 +1,13 @@
 #ifndef NW4R_SND_WSD_PLAYER_H
 #define NW4R_SND_WSD_PLAYER_H
+#include <nw4r/types_nw4r.h>
+
 #include <nw4r/snd/snd_BasicPlayer.h>
 #include <nw4r/snd/snd_DisposeCallback.h>
 #include <nw4r/snd/snd_Lfo.h>
 #include <nw4r/snd/snd_SoundThread.h>
 #include <nw4r/snd/snd_WsdFile.h>
-#include <nw4r/types_nw4r.h>
+
 #include <nw4r/ut.h>
 
 namespace nw4r {
@@ -56,10 +58,8 @@ public:
     virtual void InvalidateData(const void* pStart,
                                 const void* pEnd); // at 0x50
 
-    virtual void InvalidateWaveData(const void* pStart, const void* pEnd) {
-#pragma unused(pStart)
-#pragma unused(pEnd)
-    } // at 0x54
+    virtual void InvalidateWaveData(const void* /* pStart */,
+                                    const void* /* pEnd */) {} // at 0x54
 
     virtual void OnUpdateFrameSoundThread() {
         Update();

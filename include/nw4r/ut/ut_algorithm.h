@@ -53,24 +53,24 @@ template <typename T> inline bool TestBit(T t, int bitIndexLSB) {
 /**
  * Pointer operations
  */
-inline u32 GetIntPtr(const void* ptr) {
-    return reinterpret_cast<u32>(ptr);
+inline u32 GetIntPtr(const void* pPtr) {
+    return reinterpret_cast<u32>(pPtr);
 }
 
 template <typename T>
-inline const void* AddOffsetToPtr(const void* ptr, T offset) {
-    return reinterpret_cast<const void*>(GetIntPtr(ptr) + offset);
+inline const void* AddOffsetToPtr(const void* pBase, T offset) {
+    return reinterpret_cast<const void*>(GetIntPtr(pBase) + offset);
 }
-template <typename T> inline void* AddOffsetToPtr(void* ptr, T offset) {
-    return reinterpret_cast<void*>(GetIntPtr(ptr) + offset);
-}
-
-inline s32 GetOffsetFromPtr(const void* start, const void* end) {
-    return static_cast<s32>(GetIntPtr(end) - GetIntPtr(start));
+template <typename T> inline void* AddOffsetToPtr(void* pBase, T offset) {
+    return reinterpret_cast<void*>(GetIntPtr(pBase) + offset);
 }
 
-inline int ComparePtr(const void* p1, const void* p2) {
-    return static_cast<int>(GetIntPtr(p1) - GetIntPtr(p2));
+inline s32 GetOffsetFromPtr(const void* pStart, const void* pEnd) {
+    return static_cast<s32>(GetIntPtr(pEnd) - GetIntPtr(pStart));
+}
+
+inline int ComparePtr(const void* pPtr1, const void* pPtr2) {
+    return static_cast<int>(GetIntPtr(pPtr1) - GetIntPtr(pPtr2));
 }
 
 /**
@@ -80,8 +80,8 @@ template <typename T> inline T RoundUp(T t, unsigned int alignment) {
     return (alignment + t - 1) & ~(alignment - 1);
 }
 
-template <typename T> inline void* RoundUp(T* t, unsigned int alignment) {
-    u32 value = reinterpret_cast<u32>(t);
+template <typename T> inline void* RoundUp(T* pPtr, unsigned int alignment) {
+    u32 value = reinterpret_cast<u32>(pPtr);
     u32 rounded = (alignment + value - 1) & ~(alignment - 1);
     return reinterpret_cast<void*>(rounded);
 }
@@ -90,8 +90,8 @@ template <typename T> inline T RoundDown(T t, unsigned int alignment) {
     return t & ~(alignment - 1);
 }
 
-template <typename T> inline void* RoundDown(T* t, unsigned int alignment) {
-    u32 value = reinterpret_cast<u32>(t);
+template <typename T> inline void* RoundDown(T* pPtr, unsigned int alignment) {
+    u32 value = reinterpret_cast<u32>(pPtr);
     u32 rounded = value & ~(alignment - 1);
     return reinterpret_cast<void*>(rounded);
 }

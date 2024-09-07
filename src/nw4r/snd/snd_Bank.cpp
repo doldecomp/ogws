@@ -7,7 +7,8 @@ namespace nw4r {
 namespace snd {
 namespace detail {
 
-Bank::Bank(const void* pData) : mBankReader(pData), mWaveDataAddress(NULL) {}
+Bank::Bank(const void* pBankBin)
+    : mBankReader(pBankBin), mWaveDataAddress(NULL) {}
 
 Bank::~Bank() {}
 

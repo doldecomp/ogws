@@ -1,8 +1,9 @@
 #pragma ipa file // TODO: REMOVE AFTER REFACTOR
 
-#include <cstring>
 #include <nw4r/snd.h>
 #include <nw4r/ut.h>
+
+#include <cstring>
 
 namespace nw4r {
 namespace snd {

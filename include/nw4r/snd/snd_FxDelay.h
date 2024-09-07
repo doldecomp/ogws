@@ -1,8 +1,10 @@
 #ifndef NW4R_SND_FX_DELAY_H
 #define NW4R_SND_FX_DELAY_H
+#include <nw4r/types_nw4r.h>
+
 #include <nw4r/snd/snd_AxfxImpl.h>
 #include <nw4r/snd/snd_FxBase.h>
-#include <nw4r/types_nw4r.h>
+
 #include <revolution/AXFX.h>
 
 namespace nw4r {
@@ -19,10 +21,10 @@ public:
 public:
     FxDelay();
 
-    ~FxDelay() {
+    virtual ~FxDelay() {
         Shutdown();
         ReleaseWorkBuffer();
-    }
+    } // at 0x8
 
     virtual bool StartUp();  // at 0xC
     virtual void Shutdown(); // at 0x10

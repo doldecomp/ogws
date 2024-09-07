@@ -1,9 +1,11 @@
 #ifndef NW4R_SND_SOUND_PLAYER_H
 #define NW4R_SND_SOUND_PLAYER_H
+#include <nw4r/types_nw4r.h>
+
 #include <nw4r/snd/snd_BasicSound.h>
 #include <nw4r/snd/snd_PlayerHeap.h>
 #include <nw4r/snd/snd_SoundInstanceManager.h>
-#include <nw4r/types_nw4r.h>
+
 #include <revolution/OS.h>
 #include <revolution/WPAD.h>
 

@@ -24,31 +24,31 @@ void ExternalSoundPlayer::SetPlayableSoundCount(int count) {
     }
 }
 
-void ExternalSoundPlayer::InsertSoundList(BasicSound* sound) {
-    mSoundList.PushBack(sound);
-    sound->SetExternalSoundPlayer(this);
+void ExternalSoundPlayer::InsertSoundList(BasicSound* pSound) {
+    mSoundList.PushBack(pSound);
+    pSound->SetExternalSoundPlayer(this);
 }
 
-void ExternalSoundPlayer::RemoveSoundList(BasicSound* sound) {
-    mSoundList.Erase(sound);
-    sound->SetExternalSoundPlayer(NULL);
+void ExternalSoundPlayer::RemoveSoundList(BasicSound* pSound) {
+    mSoundList.Erase(pSound);
+    pSound->SetExternalSoundPlayer(NULL);
 }
 
 BasicSound* ExternalSoundPlayer::GetLowestPrioritySound() {
     int lowestPrio = BasicSound::PRIORITY_MAX + 1;
-    BasicSound* lowestPrioSound = NULL;
+    BasicSound* pLowest = NULL;
 
     for (BasicSoundExtPlayList::Iterator iter = mSoundList.GetBeginIter();
          iter != mSoundList.GetEndIter(); ++iter) {
         int prio = iter->CalcCurrentPlayerPriority();
 
         if (lowestPrio > prio) {
-            lowestPrioSound = &*iter;
+            pLowest = &*iter;
             lowestPrio = prio;
         }
     }
 
-    return lowestPrioSound;
+    return pLowest;
 }
 
 } // namespace detail

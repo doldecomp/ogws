@@ -94,6 +94,12 @@ bool FxReverbHi::SetParam(const ReverbHiParam& rParam) {
 void FxReverbHi::UpdateBuffer(int channels, void** ppBuffer, u32 size,
                               SampleFormat format, f32 sampleRate,
                               OutputMode mode) {
+#pragma unused(channels)
+#pragma unused(size)
+#pragma unused(format)
+#pragma unused(sampleRate)
+#pragma unused(mode)
+
     void* chans[AX_STEREO_MAX];
     chans[AX_STEREO_L] = ppBuffer[AX_STEREO_L];
     chans[AX_STEREO_R] = ppBuffer[AX_STEREO_R];

@@ -9,7 +9,7 @@ namespace {
 class NonCopyable {
 protected:
     NonCopyable() {}
-    NonCopyable(const NonCopyable&) {}
+    NonCopyable(const NonCopyable& /* rOther */) {}
     ~NonCopyable() {}
 };
 

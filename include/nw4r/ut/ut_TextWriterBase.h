@@ -1,69 +1,100 @@
 #ifndef NW4R_UT_TEXT_WRITER_BASE_H
 #define NW4R_UT_TEXT_WRITER_BASE_H
-#include <cstdio>
-#include <cwchar>
-#include <nw4r/math.h>
 #include <nw4r/types_nw4r.h>
+
 #include <nw4r/ut/ut_CharWriter.h>
 #include <nw4r/ut/ut_TagProcessorBase.h>
+
+#include <nw4r/math.h>
+
+#include <cstdio>
+#include <cwchar>
 
 namespace nw4r {
 namespace ut {
 
 template <typename T> class TextWriterBase : public CharWriter {
 public:
-    static T* GetBuffer() { return mFormatBuffer; }
-    static T* SetBuffer(T* buffer, u32 size) {
+    static T* GetBuffer() {
+        return mFormatBuffer;
+    }
+    static T* SetBuffer(T* pBuffer, u32 size) {
         T* old = mFormatBuffer;
-        mFormatBuffer = buffer;
+        mFormatBuffer = pBuffer;
         mFormatBufferSize = size;
         return old;
     }
 
-    static u32 GetBufferSize() { return mFormatBufferSize; }
+    static u32 GetBufferSize() {
+        return mFormatBufferSize;
+    }
 
     TextWriterBase();
     ~TextWriterBase();
 
-    f32 GetWidthLimit() const { return mWidthLimit; }
-    void SetWidthLimit(f32 limit) { mWidthLimit = limit; }
-    void ResetWidthLimit() { mWidthLimit = NW4R_MATH_FLT_MAX; }
+    f32 GetWidthLimit() const {
+        return mWidthLimit;
+    }
+    void SetWidthLimit(f32 limit) {
+        mWidthLimit = limit;
+    }
+    void ResetWidthLimit() {
+        mWidthLimit = NW4R_MATH_FLT_MAX;
+    }
 
-    f32 GetCharSpace() const { return mCharSpace; }
-    void SetCharSpace(f32 space) { mCharSpace = space; }
+    f32 GetCharSpace() const {
+        return mCharSpace;
+    }
+    void SetCharSpace(f32 space) {
+        mCharSpace = space;
+    }
 
-    f32 GetLineSpace() const { return mLineSpace; }
-    void SetLineSpace(f32 space) { mLineSpace = space; }
+    f32 GetLineSpace() const {
+        return mLineSpace;
+    }
+    void SetLineSpace(f32 space) {
+        mLineSpace = space;
+    }
 
-    int GetTabWidth() const { return mTabWidth; }
-    void SetTabWidth(int width) { mTabWidth = width; }
+    int GetTabWidth() const {
+        return mTabWidth;
+    }
+    void SetTabWidth(int width) {
+        mTabWidth = width;
+    }
 
-    void SetDrawFlag(u32 flag) { mDrawFlag = flag; }
+    void SetDrawFlag(u32 flag) {
+        mDrawFlag = flag;
+    }
     bool IsDrawFlagSet(u32 mask, u32 flag) const {
         return (mDrawFlag & mask) == flag;
     }
 
-    TagProcessorBase<T>* GetTagProcessor() const { return mTagProcessor; }
-    void SetTagProcessor(TagProcessorBase<T>* processor) {
-        mTagProcessor = processor;
+    TagProcessorBase<T>* GetTagProcessor() const {
+        return mTagProcessor;
     }
-    void ResetTagProcessor() { mTagProcessor = &mDefaultTagProcessor; }
+    void SetTagProcessor(TagProcessorBase<T>* pProcessor) {
+        mTagProcessor = pProcessor;
+    }
+    void ResetTagProcessor() {
+        mTagProcessor = &mDefaultTagProcessor;
+    }
 
     f32 GetLineHeight() const;
 
-    f32 CalcLineWidth(const T* str, int len);
-    f32 CalcStringWidth(const T* str, int len) const;
-    void CalcStringRect(Rect* rect, const T* str, int len) const;
+    f32 CalcLineWidth(const T* pStr, int len);
+    f32 CalcStringWidth(const T* pStr, int len) const;
+    void CalcStringRect(Rect* pRect, const T* pStr, int len) const;
 
     int VSNPrintf(T* buffer, u32 count, const T* fmt, std::va_list args);
-    f32 VPrintf(const T* str, std::va_list args);
-    f32 Print(const T* str, int len);
+    f32 VPrintf(const T* pStr, std::va_list args);
+    f32 Print(const T* pStr, int len);
 
-    bool CalcLineRectImpl(Rect* rect, const T** str, int len);
-    void CalcStringRectImpl(Rect* rect, const T* str, int len);
+    bool CalcLineRectImpl(Rect* pRect, const T** ppStr, int len);
+    void CalcStringRectImpl(Rect* pRect, const T* pStr, int len);
 
-    f32 PrintImpl(const T* str, int len);
-    f32 AdjustCursor(f32* x1, f32* y1, const T* str, int len);
+    f32 PrintImpl(const T* pStr, int len);
+    f32 AdjustCursor(f32* pX, f32* pY, const T* pStr, int len);
 
 private:
     f32 mWidthLimit;                    // at 0x4C
@@ -79,16 +110,17 @@ private:
 };
 
 template <>
-inline int TextWriterBase<char>::VSNPrintf(char* buffer, u32 count,
-                                           const char* fmt, std::va_list args) {
-    return std::vsnprintf(buffer, count, fmt, args);
+inline int TextWriterBase<char>::VSNPrintf(char* pBuffer, u32 count,
+                                           const char* pFmt,
+                                           std::va_list args) {
+    return std::vsnprintf(pBuffer, count, pFmt, args);
 }
 
 template <>
-inline int TextWriterBase<wchar_t>::VSNPrintf(wchar_t* buffer, u32 count,
-                                              const wchar_t* fmt,
+inline int TextWriterBase<wchar_t>::VSNPrintf(wchar_t* pBuffer, u32 count,
+                                              const wchar_t* pFmt,
                                               std::va_list args) {
-    return std::vswprintf(buffer, count, fmt, args);
+    return std::vswprintf(pBuffer, count, pFmt, args);
 }
 
 } // namespace ut

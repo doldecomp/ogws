@@ -17,9 +17,7 @@ private:
     MidiSeqPlayer();
 
     // Dummy implementation, must prevent instantiating SeqPlayer version
-    virtual void ChannelCallback(Channel* pChannel) {
-#pragma unused(pChannel)
-    }
+    virtual void ChannelCallback(Channel* /* pChannel */) {}
 };
 
 MidiSeqPlayer::MidiSeqPlayer() {}

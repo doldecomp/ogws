@@ -286,6 +286,8 @@ namespace nw4r
 
         ScnObj::ForEachResult ScnLeaf::ForEach(ForEachAction action, void *r5, bool b)
         {
+        #pragma unused(b)
+        
             ForEachResult result = (*action)(this, r5);
             return (result != FOREACH_RESULT_1) ? FOREACH_RESULT_0 : FOREACH_RESULT_1;
         }

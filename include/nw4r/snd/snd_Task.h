@@ -1,6 +1,7 @@
 #ifndef NW4R_SND_TASK_H
 #define NW4R_SND_TASK_H
 #include <nw4r/types_nw4r.h>
+
 #include <nw4r/ut.h>
 
 namespace nw4r {
@@ -19,7 +20,7 @@ public:
     virtual void OnCancel() = 0; // at 0x14
 
 public:
-    NW4R_UT_LIST_NODE_DECL();
+    NW4R_UT_LIST_NODE_DECL(); // at 0x4
 
 private:
     bool mBusyFlag; // at 0xC

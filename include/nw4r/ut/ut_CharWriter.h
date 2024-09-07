@@ -1,8 +1,11 @@
 #ifndef NW4R_UT_CHAR_WRITER_H
 #define NW4R_UT_CHAR_WRITER_H
-#include <nw4r/math.h>
 #include <nw4r/types_nw4r.h>
+
 #include <nw4r/ut/ut_Color.h>
+
+#include <nw4r/math.h>
+
 #include <revolution/GX.h>
 
 namespace nw4r {
@@ -34,8 +37,8 @@ public:
         GXTexFilter atSmall; // at 0x0
         GXTexFilter atLarge; // at 0x4
 
-        bool operator!=(const TextureFilter& other) const {
-            return atSmall != other.atSmall || atLarge != other.atLarge;
+        bool operator!=(const TextureFilter& rOther) const {
+            return atSmall != rOther.atSmall || atLarge != rOther.atLarge;
         }
     };
 
@@ -44,9 +47,9 @@ public:
         void* texture;        // at 0x4
         TextureFilter filter; // at 0x8
 
-        bool operator!=(const LoadingTexture& other) const {
-            return slot != other.slot || texture != other.texture ||
-                   filter != other.filter;
+        bool operator!=(const LoadingTexture& rOther) const {
+            return slot != rOther.slot || texture != rOther.texture ||
+                   filter != rOther.filter;
         }
 
         void Reset() {
@@ -90,19 +93,31 @@ public:
         UpdateVertexColor();
     }
 
-    f32 GetScaleH() const { return mScale.x; }
-    f32 GetScaleV() const { return mScale.y; }
+    f32 GetScaleH() const {
+        return mScale.x;
+    }
+    f32 GetScaleV() const {
+        return mScale.y;
+    }
 
     void SetScale(f32 x, f32 y) {
         mScale.x = x;
         mScale.y = y;
     }
 
-    f32 GetCursorX() const { return mCursorPos.x; }
-    void SetCursorX(f32 x) { mCursorPos.x = x; }
+    f32 GetCursorX() const {
+        return mCursorPos.x;
+    }
+    void SetCursorX(f32 x) {
+        mCursorPos.x = x;
+    }
 
-    f32 GetCursorY() const { return mCursorPos.y; }
-    void SetCursorY(f32 y) { mCursorPos.y = y; }
+    f32 GetCursorY() const {
+        return mCursorPos.y;
+    }
+    void SetCursorY(f32 y) {
+        mCursorPos.y = y;
+    }
 
     void SetCursor(f32 x, f32 y) {
         mCursorPos.x = x;
@@ -114,19 +129,37 @@ public:
         mCursorPos.z = z;
     }
 
-    void MoveCursorX(f32 dx) { mCursorPos.x += dx; }
-    void MoveCursorY(f32 dy) { mCursorPos.y += dy; }
+    void MoveCursorX(f32 dx) {
+        mCursorPos.x += dx;
+    }
+    void MoveCursorY(f32 dy) {
+        mCursorPos.y += dy;
+    }
 
-    void EnableFixedWidth(bool enable) { mIsWidthFixed = enable; }
-    bool IsWidthFixed() const { return mIsWidthFixed; }
+    void EnableFixedWidth(bool enable) {
+        mIsWidthFixed = enable;
+    }
+    bool IsWidthFixed() const {
+        return mIsWidthFixed;
+    }
 
-    void SetFixedWidth(f32 width) { mFixedWidth = width; }
-    f32 GetFixedWidth() const { return mFixedWidth; }
+    void SetFixedWidth(f32 width) {
+        mFixedWidth = width;
+    }
+    f32 GetFixedWidth() const {
+        return mFixedWidth;
+    }
 
-    void SetFont(const Font& font) { mFont = &font; }
-    const Font* GetFont() const { return mFont; }
+    void SetFont(const Font& font) {
+        mFont = &font;
+    }
+    const Font* GetFont() const {
+        return mFont;
+    }
 
-    void ResetTextureCache() { mLoadingTexture.Reset(); }
+    void ResetTextureCache() {
+        mLoadingTexture.Reset();
+    }
 
     void SetupGX();
     void SetFontSize(f32 width, f32 height);
@@ -136,8 +169,8 @@ public:
     f32 GetFontDescent() const;
     void EnableLinearFilter(bool atSmall, bool atLarge);
     f32 Print(u16 ch);
-    void PrintGlyph(f32 x, f32 y, f32 z, const Glyph& glyph);
-    void LoadTexture(const Glyph& glyph, GXTexMapID slot);
+    void PrintGlyph(f32 x, f32 y, f32 z, const Glyph& rGlyph);
+    void LoadTexture(const Glyph& rGlyph, GXTexMapID slot);
     void UpdateVertexColor();
 
 private:

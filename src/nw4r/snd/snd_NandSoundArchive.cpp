@@ -2,6 +2,7 @@
 
 #include <nw4r/snd.h>
 #include <nw4r/ut.h>
+
 #include <revolution/NAND.h>
 
 namespace nw4r {
@@ -145,15 +146,15 @@ bool NandSoundArchive::LoadFileHeader() {
 
 bool NandSoundArchive::LoadHeader(void* pBuffer, u32 size) {
     u32 infoSize = mFileReader.GetInfoChunkSize();
-    s32 infoOffset = mFileReader.GetInfoChunkOffset();
-    // TODO: Fakematch
-    s32* new_var = &infoOffset;
+
+    u32 infoOffsetU = mFileReader.GetInfoChunkOffset();
+    s32 infoOffset = *reinterpret_cast<s32*>(&infoOffsetU);
 
     if (size < infoSize) {
         return false;
     }
 
-    s32 currOffset = NANDSeek(&mFileInfo, *new_var, NAND_SEEK_BEG);
+    s32 currOffset = NANDSeek(&mFileInfo, infoOffset, NAND_SEEK_BEG);
     if (currOffset != infoOffset) {
         return false;
     }
@@ -169,15 +170,15 @@ bool NandSoundArchive::LoadHeader(void* pBuffer, u32 size) {
 
 bool NandSoundArchive::LoadLabelStringData(void* pBuffer, u32 size) {
     u32 labelSize = mFileReader.GetLabelStringChunkSize();
-    s32 labelOffset = mFileReader.GetLabelStringChunkOffset();
-    // TODO: Fakematch
-    s32* new_var = &labelOffset;
+
+    u32 labelOffsetU = mFileReader.GetLabelStringChunkOffset();
+    s32 labelOffset = *reinterpret_cast<s32*>(&labelOffsetU);
 
     if (size < labelSize) {
         return false;
     }
 
-    s32 currOffset = NANDSeek(&mFileInfo, *new_var, NAND_SEEK_BEG);
+    s32 currOffset = NANDSeek(&mFileInfo, labelOffset, NAND_SEEK_BEG);
     if (currOffset != labelOffset) {
         return false;
     }
@@ -237,20 +238,24 @@ s32 NandSoundArchive::NandFileStream::Read(void* pDst, u32 size) {
 
 void NandSoundArchive::NandFileStream::Seek(s32 offset, u32 origin) {
     switch (origin) {
-    case SEEK_BEG:
+    case SEEK_BEG: {
         offset += mOffset;
         break;
+    }
 
-    case SEEK_CUR:
+    case SEEK_CUR: {
         offset += ut::NandFileStream::Tell();
         break;
+    }
 
-    case SEEK_END:
+    case SEEK_END: {
         offset = mOffset + mSize - offset;
         break;
+    }
 
-    default:
+    default: {
         return;
+    }
     }
 
     if (offset < mOffset) {

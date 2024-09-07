@@ -65,10 +65,10 @@ void BasicSound::StartPrepared() {
 }
 
 void BasicSound::Stop(int frames) {
-    BasicPlayer& player = GetBasicPlayer();
+    BasicPlayer& rPlayer = GetBasicPlayer();
 
-    if (frames == 0 || !player.IsActive() || !player.IsStarted() ||
-        player.IsPause()) {
+    if (frames == 0 || !rPlayer.IsActive() || !rPlayer.IsStarted() ||
+        rPlayer.IsPause()) {
         Shutdown();
         return;
     }
@@ -84,7 +84,7 @@ void BasicSound::Stop(int frames) {
 }
 
 void BasicSound::Pause(bool flag, int frames) {
-    BasicPlayer& player = GetBasicPlayer();
+    BasicPlayer& rPlayer = GetBasicPlayer();
 
     if (flag) {
         int t = frames * mPauseFadeVolume.GetValue();
@@ -97,7 +97,7 @@ void BasicSound::Pause(bool flag, int frames) {
         mPauseFadeVolume.SetTarget(0.0f, t);
     } else {
         if (mIsPause != flag) {
-            player.Pause(false);
+            rPlayer.Pause(false);
         }
 
         int t = frames * (1.0f - mPauseFadeVolume.GetValue());
@@ -132,9 +132,9 @@ bool BasicSound::IsPause() const {
 }
 
 void BasicSound::Update() {
-    BasicPlayer& player = GetBasicPlayer();
+    BasicPlayer& rPlayer = GetBasicPlayer();
 
-    if (mIsAutoStop && player.IsActive()) {
+    if (mIsAutoStop && rPlayer.IsActive()) {
         if (mAutoStopCounter == 0) {
             Stop(0);
             return;
@@ -156,16 +156,16 @@ void BasicSound::Update() {
         startPlayer = true;
     }
 
-    if (player.IsStarted() && mUpdateCounter < 0xFFFFFFFF) {
+    if (rPlayer.IsStarted() && mUpdateCounter < 0xFFFFFFFF) {
         mUpdateCounter++;
     }
 
-    if (!player.IsActive()) {
+    if (!rPlayer.IsActive()) {
         Shutdown();
         return;
     }
 
-    if (player.IsPause()) {
+    if (rPlayer.IsPause()) {
         return;
     }
 
@@ -232,15 +232,15 @@ void BasicSound::Update() {
         remoteOutVol[i] *= GetRemoteOutVolume(i);
     }
 
-    player.SetVolume(volume);
-    player.SetPan(pan);
-    player.SetSurroundPan(surroundPan);
-    player.SetPitch(pitch);
-    player.SetOutputLine(outputLine);
-    player.SetMainOutVolume(mainOutVol);
+    rPlayer.SetVolume(volume);
+    rPlayer.SetPan(pan);
+    rPlayer.SetSurroundPan(surroundPan);
+    rPlayer.SetPitch(pitch);
+    rPlayer.SetOutputLine(outputLine);
+    rPlayer.SetMainOutVolume(mainOutVol);
 
     for (int i = 0; i < WPAD_MAX_CONTROLLERS; i++) {
-        player.SetRemoteOutVolume(i, remoteOutVol[i]);
+        rPlayer.SetRemoteOutVolume(i, remoteOutVol[i]);
     }
 
     if (mIsFadeOut && mFadeVolume.IsFinished()) {
@@ -253,25 +253,25 @@ void BasicSound::Update() {
         mIsPauseFade = false;
 
         if (mIsPause) {
-            player.Pause(mIsPause);
+            rPlayer.Pause(mIsPause);
         }
     }
 
-    if (startPlayer && player.Start()) {
+    if (startPlayer && rPlayer.Start()) {
         mIsStarted = true;
         mIsStarting = false;
     }
 }
 
 void BasicSound::Shutdown() {
-    BasicPlayer& player = GetBasicPlayer();
+    BasicPlayer& rPlayer = GetBasicPlayer();
 
-    if (player.IsActive()) {
+    if (rPlayer.IsActive()) {
         if (mIsFadeOut) {
-            player.SetVolume(0.0f);
+            rPlayer.SetVolume(0.0f);
         }
 
-        player.Stop();
+        rPlayer.Stop();
     }
 
     SetId(0xFFFFFFFF);
@@ -404,13 +404,14 @@ f32 BasicSound::GetRemoteOutVolume(int remote) const {
 }
 
 void BasicSound::SetAmbientParamCallback(
-    AmbientParamUpdateCallback* paramUpdate,
-    AmbientArgUpdateCallback* argUpdate, AmbientArgAllocaterCallback* argAlloc,
-    void* arg) {
-    mParamUpdateCallback = paramUpdate;
-    mArgUpdateCallback = argUpdate;
-    mArgAllocCallback = argAlloc;
-    mCallbackArg = arg;
+    AmbientParamUpdateCallback* pParamUpdate,
+    AmbientArgUpdateCallback* pArgUpdate,
+    AmbientArgAllocaterCallback* pArgAlloc, void* pArg) {
+
+    mParamUpdateCallback = pParamUpdate;
+    mArgUpdateCallback = pArgUpdate;
+    mArgAllocCallback = pArgAlloc;
+    mCallbackArg = pArg;
 }
 
 bool BasicSound::IsAttachedGeneralHandle() {

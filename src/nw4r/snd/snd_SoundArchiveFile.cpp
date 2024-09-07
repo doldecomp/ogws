@@ -1,8 +1,9 @@
 #pragma ipa file // TODO: REMOVE AFTER REFACTOR
 
-#include <cstring>
 #include <nw4r/snd.h>
 #include <nw4r/ut.h>
+
+#include <cstring>
 
 namespace nw4r {
 namespace snd {
@@ -108,17 +109,21 @@ SoundType SoundArchiveFileReader::GetSoundType(u32 id) const {
     }
 
     switch (soundType) {
-    case SOUND_TYPE_SEQ:
+    case SOUND_TYPE_SEQ: {
         return SOUND_TYPE_SEQ;
+    }
 
-    case SOUND_TYPE_STRM:
+    case SOUND_TYPE_STRM: {
         return SOUND_TYPE_STRM;
+    }
 
-    case SOUND_TYPE_WAVE:
+    case SOUND_TYPE_WAVE: {
         return SOUND_TYPE_WAVE;
+    }
 
-    default:
+    default: {
         return SOUND_TYPE_INVALID;
+    }
     }
 }
 

@@ -1,7 +1,8 @@
 #ifndef NW4R_SND_SOUND_STARTABLE_H
 #define NW4R_SND_SOUND_STARTABLE_H
-#include <nw4r/snd/snd_BasicSound.h>
 #include <nw4r/types_nw4r.h>
+
+#include <nw4r/snd/snd_BasicSound.h>
 
 namespace nw4r {
 namespace snd {

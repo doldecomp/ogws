@@ -1,7 +1,9 @@
 #ifndef NW4R_SND_REMOTE_SPEAKER_MANAGER_H
 #define NW4R_SND_REMOTE_SPEAKER_MANAGER_H
-#include <nw4r/snd/snd_RemoteSpeaker.h>
 #include <nw4r/types_nw4r.h>
+
+#include <nw4r/snd/snd_RemoteSpeaker.h>
+
 #include <revolution/OS.h>
 #include <revolution/WPAD.h>
 

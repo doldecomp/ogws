@@ -16,6 +16,8 @@ namespace nw4r
 
         ut::Font * ResourceAccessor::GetFont(const char *name)
         {
+        #pragma unused(name)
+        
             return NULL;
         }
     }

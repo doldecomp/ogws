@@ -162,12 +162,15 @@ void SeqPlayer::Skip(OffsetType type, int offset) {
     }
 
     switch (type) {
-    case OFFSET_TYPE_TICK:
+    case OFFSET_TYPE_TICK: {
         mSkipTickCounter += offset;
         break;
-    case OFFSET_TYPE_MILLISEC:
+    }
+
+    case OFFSET_TYPE_MILLISEC: {
         mSkipTimeCounter += offset;
         break;
+    }
     }
 }
 

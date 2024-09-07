@@ -1,7 +1,9 @@
 #ifndef NW4R_UT_FONT_H
 #define NW4R_UT_FONT_H
 #include <nw4r/types_nw4r.h>
+
 #include <nw4r/ut/ut_CharStrmReader.h>
+
 #include <revolution/GX.h>
 
 namespace nw4r {
@@ -39,25 +41,25 @@ public:
     Font() : mReadFunc(&CharStrmReader::ReadNextCharCP1252) {}
     virtual ~Font() {} // at 0x8
 
-    virtual int GetWidth() const = 0;                                // at 0xC
-    virtual int GetHeight() const = 0;                               // at 0x10
-    virtual int GetAscent() const = 0;                               // at 0x14
-    virtual int GetDescent() const = 0;                              // at 0x18
-    virtual int GetBaselinePos() const = 0;                          // at 0x1C
-    virtual int GetCellHeight() const = 0;                           // at 0x20
-    virtual int GetCellWidth() const = 0;                            // at 0x24
-    virtual int GetMaxCharWidth() const = 0;                         // at 0x28
-    virtual Type GetType() const = 0;                                // at 0x2C
-    virtual GXTexFmt GetTextureFormat() const = 0;                   // at 0x30
-    virtual int GetLineFeed() const = 0;                             // at 0x34
-    virtual CharWidths GetDefaultCharWidths() const = 0;             // at 0x38
-    virtual void SetDefaultCharWidths(const CharWidths& widths) = 0; // at 0x3C
-    virtual bool SetAlternateChar(u16 c) = 0;                        // at 0x40
-    virtual void SetLineFeed(int lf) = 0;                            // at 0x44
-    virtual int GetCharWidth(u16 c) const = 0;                       // at 0x48
-    virtual CharWidths GetCharWidths(u16 c) const = 0;               // at 0x4C
-    virtual void GetGlyph(Glyph* out, u16 c) const = 0;              // at 0x50
-    virtual FontEncoding GetEncoding() const = 0;                    // at 0x54
+    virtual int GetWidth() const = 0;                                 // at 0xC
+    virtual int GetHeight() const = 0;                                // at 0x10
+    virtual int GetAscent() const = 0;                                // at 0x14
+    virtual int GetDescent() const = 0;                               // at 0x18
+    virtual int GetBaselinePos() const = 0;                           // at 0x1C
+    virtual int GetCellHeight() const = 0;                            // at 0x20
+    virtual int GetCellWidth() const = 0;                             // at 0x24
+    virtual int GetMaxCharWidth() const = 0;                          // at 0x28
+    virtual Type GetType() const = 0;                                 // at 0x2C
+    virtual GXTexFmt GetTextureFormat() const = 0;                    // at 0x30
+    virtual int GetLineFeed() const = 0;                              // at 0x34
+    virtual CharWidths GetDefaultCharWidths() const = 0;              // at 0x38
+    virtual void SetDefaultCharWidths(const CharWidths& rWidths) = 0; // at 0x3C
+    virtual bool SetAlternateChar(u16 ch) = 0;                        // at 0x40
+    virtual void SetLineFeed(int lf) = 0;                             // at 0x44
+    virtual int GetCharWidth(u16 ch) const = 0;                       // at 0x48
+    virtual CharWidths GetCharWidths(u16 ch) const = 0;               // at 0x4C
+    virtual void GetGlyph(Glyph* pGlyph, u16 ch) const = 0;           // at 0x50
+    virtual FontEncoding GetEncoding() const = 0;                     // at 0x54
 
     void InitReaderFunc(FontEncoding encode);
 

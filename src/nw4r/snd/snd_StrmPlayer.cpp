@@ -1,8 +1,9 @@
 #pragma ipa file // TODO: REMOVE AFTER REFACTOR
 
-#include <climits>
 #include <nw4r/snd.h>
 #include <nw4r/ut.h>
+
+#include <climits>
 
 namespace nw4r {
 namespace snd {
@@ -813,18 +814,21 @@ void StrmPlayer::VoiceCallbackFunc(Voice* pDropVoice,
 
     switch (status) {
     case Voice::CALLBACK_STATUS_FINISH_WAVE:
-    case Voice::CALLBACK_STATUS_CANCEL:
+    case Voice::CALLBACK_STATUS_CANCEL: {
         pDropVoice->Free();
         pStrmPlayer->mVoice = NULL;
         break;
+    }
 
     case Voice::CALLBACK_STATUS_DROP_VOICE:
-    case Voice::CALLBACK_STATUS_DROP_DSP:
+    case Voice::CALLBACK_STATUS_DROP_DSP: {
         pStrmPlayer->mVoice = NULL;
         break;
+    }
 
-    default:
+    default: {
         return;
+    }
     }
 }
 

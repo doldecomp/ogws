@@ -1,11 +1,13 @@
 #pragma ipa file // TODO: REMOVE AFTER REFACTOR
 
-#include <cstring>
 #include <nw4r/snd.h>
 #include <nw4r/ut.h>
+
 #include <revolution/OS.h>
 #include <revolution/WENC.h>
 #include <revolution/WPAD.h>
+
+#include <cstring>
 
 namespace nw4r {
 namespace snd {
@@ -116,30 +118,34 @@ void RemoteSpeaker::Update() {
 
 void RemoteSpeaker::ExecCommand(SpeakerCommand command) {
     switch (command) {
-    case COMMAND_NONE:
+    case COMMAND_NONE: {
         break;
+    }
 
-    case COMMAND_SPEAKER_ON:
+    case COMMAND_SPEAKER_ON: {
         mValidCallbackFlag = true;
         mCommandBusyFlag = true;
         mState = STATE_EXEC_SPEAKER_ON;
         WPADControlSpeaker(mChannelIndex, WPAD_SPEAKER_ON, SpeakerOnCallback);
         break;
+    }
 
-    case COMMAND_SPEAKER_PLAY:
+    case COMMAND_SPEAKER_PLAY: {
         mValidCallbackFlag = true;
         mCommandBusyFlag = true;
         mState = STATE_EXEC_SPEAKER_PLAY;
         WPADControlSpeaker(mChannelIndex, WPAD_SPEAKER_PLAY,
                            SpeakerPlayCallback);
         break;
+    }
 
-    case COMMAND_SPEAKER_OFF:
+    case COMMAND_SPEAKER_OFF: {
         mValidCallbackFlag = true;
         mCommandBusyFlag = true;
         mState = STATE_EXEC_SPEAKER_OFF;
         WPADControlSpeaker(mChannelIndex, WPAD_SPEAKER_OFF, SpeakerOffCallback);
         break;
+    }
     }
 }
 
@@ -149,7 +155,7 @@ void RemoteSpeaker::UpdateStreamData(const s16* pRmtSamples) {
     }
 
     bool playFlag = true;
-    bool silentFlag = (mEnableFlag ? IsAllSampleZero(pRmtSamples) : true);
+    bool silentFlag = mEnableFlag ? IsAllSampleZero(pRmtSamples) : true;
 
     if (silentFlag || mForceResumeFlag) {
         playFlag = false;
@@ -228,29 +234,34 @@ void RemoteSpeaker::SpeakerOnCallback(s32 chan, s32 result) {
         detail::RemoteSpeakerManager::GetInstance().GetRemoteSpeaker(chan);
 
     switch (result) {
-    case WPAD_ERR_OK:
+    case WPAD_ERR_OK: {
         r.mFirstEncodeFlag = true;
         std::memset(&r.mEncodeInfo, 0, sizeof(WENCInfo));
 
         r.mState = STATE_SPEAKER_ON;
         r.mInternalCommand = COMMAND_SPEAKER_PLAY;
         break;
+    }
 
-    case WPAD_ERR_BUSY:
+    case WPAD_ERR_BUSY: {
         r.mInternalCommand = COMMAND_SPEAKER_ON;
         break;
+    }
 
-    case WPAD_ERR_TRANSFER:
+    case WPAD_ERR_TRANSFER: {
         r.mState = STATE_INVALID;
         break;
+    }
 
-    case WPAD_ERR_NO_CONTROLLER:
+    case WPAD_ERR_NO_CONTROLLER: {
         r.mState = STATE_INVALID;
         break;
+    }
 
-    default:
+    default: {
         r.mState = STATE_INVALID;
         break;
+    }
     }
 
     if (result != WPAD_ERR_OK && result != WPAD_ERR_BUSY) {
@@ -265,25 +276,30 @@ void RemoteSpeaker::SpeakerPlayCallback(s32 chan, s32 result) {
         detail::RemoteSpeakerManager::GetInstance().GetRemoteSpeaker(chan);
 
     switch (result) {
-    case WPAD_ERR_OK:
+    case WPAD_ERR_OK: {
         r.mState = STATE_SPEAKER_PLAY;
         break;
+    }
 
-    case WPAD_ERR_BUSY:
+    case WPAD_ERR_BUSY: {
         r.mInternalCommand = COMMAND_SPEAKER_PLAY;
         break;
+    }
 
-    case WPAD_ERR_TRANSFER:
+    case WPAD_ERR_TRANSFER: {
         r.mState = STATE_INVALID;
         break;
+    }
 
-    case WPAD_ERR_NO_CONTROLLER:
+    case WPAD_ERR_NO_CONTROLLER: {
         r.mState = STATE_INVALID;
         break;
+    }
 
-    default:
+    default: {
         r.mState = STATE_INVALID;
         break;
+    }
     }
 
     if (result != WPAD_ERR_BUSY) {
@@ -298,25 +314,30 @@ void RemoteSpeaker::SpeakerOffCallback(s32 chan, s32 result) {
         detail::RemoteSpeakerManager::GetInstance().GetRemoteSpeaker(chan);
 
     switch (result) {
-    case WPAD_ERR_OK:
+    case WPAD_ERR_OK: {
         r.mState = STATE_SPEAKER_OFF;
         break;
+    }
 
-    case WPAD_ERR_BUSY:
+    case WPAD_ERR_BUSY: {
         r.mInternalCommand = COMMAND_SPEAKER_OFF;
         break;
+    }
 
-    case WPAD_ERR_TRANSFER:
+    case WPAD_ERR_TRANSFER: {
         r.mState = STATE_INVALID;
         break;
+    }
 
-    case WPAD_ERR_NO_CONTROLLER:
+    case WPAD_ERR_NO_CONTROLLER: {
         r.mState = STATE_INVALID;
         break;
+    }
 
-    default:
+    default: {
         r.mState = STATE_INVALID;
         break;
+    }
     }
 
     if (result != WPAD_ERR_BUSY) {

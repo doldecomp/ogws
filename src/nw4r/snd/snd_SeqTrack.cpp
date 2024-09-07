@@ -369,21 +369,27 @@ void SeqTrack::SetMute(SeqMute mute) {
     SoundThread::AutoLock lock;
 
     switch (mute) {
-    case MUTE_OFF:
+    case MUTE_OFF: {
         mParserTrackParam.muteFlag = false;
         break;
-    case MUTE_STOP:
+    }
+
+    case MUTE_STOP: {
         StopAllChannel();
         mParserTrackParam.muteFlag = true;
         break;
-    case MUTE_RELEASE:
+    }
+
+    case MUTE_RELEASE: {
         ReleaseAllChannel(-1);
         FreeAllChannel();
         mParserTrackParam.muteFlag = true;
         break;
-    case MUTE_NO_STOP:
+    }
+    case MUTE_NO_STOP: {
         mParserTrackParam.muteFlag = true;
         break;
+    }
     }
 }
 

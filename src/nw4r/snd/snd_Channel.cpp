@@ -1,6 +1,7 @@
 #pragma ipa file // TODO: REMOVE AFTER REFACTOR
 
 #include <nw4r/snd.h>
+
 #include <revolution/AX.h>
 
 namespace nw4r {
@@ -348,23 +349,26 @@ void Channel::VoiceCallbackFunc(Voice* pDropVoice,
     ChannelCallbackStatus channelStatus;
 
     switch (status) {
-    case Voice::CALLBACK_STATUS_FINISH_WAVE:
+    case Voice::CALLBACK_STATUS_FINISH_WAVE: {
         channelStatus = CALLBACK_STATUS_FINISH;
         pDropVoice->Free();
         break;
+    }
 
-    case Voice::CALLBACK_STATUS_CANCEL:
+    case Voice::CALLBACK_STATUS_CANCEL: {
         channelStatus = CALLBACK_STATUS_CANCEL;
         pDropVoice->Free();
         break;
-
-    case Voice::CALLBACK_STATUS_DROP_VOICE:
+    }
+    case Voice::CALLBACK_STATUS_DROP_VOICE: {
         channelStatus = CALLBACK_STATUS_DROP;
         break;
+    }
 
-    case Voice::CALLBACK_STATUS_DROP_DSP:
+    case Voice::CALLBACK_STATUS_DROP_DSP: {
         channelStatus = CALLBACK_STATUS_DROP;
         break;
+    }
     }
 
     Channel* pChannel = static_cast<Channel*>(pCallbackArg);

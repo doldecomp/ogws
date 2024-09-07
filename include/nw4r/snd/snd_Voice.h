@@ -1,11 +1,14 @@
 #ifndef NW4R_SND_VOICE_H
 #define NW4R_SND_VOICE_H
+#include <nw4r/types_nw4r.h>
+
 #include <nw4r/snd/snd_AxVoice.h>
 #include <nw4r/snd/snd_Common.h>
 #include <nw4r/snd/snd_DisposeCallback.h>
 #include <nw4r/snd/snd_WaveFile.h>
-#include <nw4r/types_nw4r.h>
+
 #include <nw4r/ut.h>
+
 #include <revolution/WPAD.h>
 
 namespace nw4r {
@@ -43,10 +46,8 @@ public:
     Voice();
     virtual ~Voice(); // at 0x8
 
-    virtual void InvalidateData(const void* pStart, const void* pEnd) {
-#pragma unused(pStart)
-#pragma unused(pEnd)
-    } // at 0xC
+    virtual void InvalidateData(const void* /* pStart */,
+                                const void* /* pEnd */) {} // at 0xC
     virtual void InvalidateWaveData(const void* pStart,
                                     const void* pEnd); // at 0x10
 

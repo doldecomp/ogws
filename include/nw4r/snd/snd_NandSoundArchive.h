@@ -1,9 +1,12 @@
 #ifndef NW4R_SND_NAND_SOUND_ARCHIVE_H
 #define NW4R_SND_NAND_SOUND_ARCHIVE_H
+#include <nw4r/types_nw4r.h>
+
 #include <nw4r/snd/snd_SoundArchive.h>
 #include <nw4r/snd/snd_SoundArchiveFile.h>
-#include <nw4r/types_nw4r.h>
+
 #include <nw4r/ut.h>
+
 #include <revolution/NAND.h>
 
 namespace nw4r {
@@ -17,13 +20,11 @@ public:
     NandSoundArchive();
     virtual ~NandSoundArchive(); // at 0x8
 
-    virtual const void* detail_GetFileAddress(u32 id) const {
-#pragma unused(id)
+    virtual const void* detail_GetFileAddress(u32 /* id */) const {
         return NULL;
     } // at 0xC
 
-    virtual const void* detail_GetWaveDataFileAddress(u32 id) const {
-#pragma unused(id)
+    virtual const void* detail_GetWaveDataFileAddress(u32 /* id */) const {
         return NULL;
     } // at 0x10
 

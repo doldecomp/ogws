@@ -710,23 +710,27 @@ SoundStartable::StartResult SoundArchivePlayer::PrepareSeqImpl(
     detail::SeqPlayer::OffsetType seqOffsetType;
 
     switch (startType) {
-    case SoundStartable::StartInfo::START_OFFSET_TYPE_MILLISEC:
+    case SoundStartable::StartInfo::START_OFFSET_TYPE_MILLISEC: {
         seqOffsetType = detail::SeqPlayer::OFFSET_TYPE_MILLISEC;
         break;
+    }
 
-    case SoundStartable::StartInfo::START_OFFSET_TYPE_TICK:
+    case SoundStartable::StartInfo::START_OFFSET_TYPE_TICK: {
         seqOffsetType = detail::SeqPlayer::OFFSET_TYPE_TICK;
         break;
+    }
 
-    case SoundStartable::StartInfo::START_OFFSET_TYPE_SAMPLE:
-        seqOffsetType = detail::SeqPlayer::OFFSET_TYPE_TICK;
-        startOffset = 0;
-        break;
-
-    default:
+    case SoundStartable::StartInfo::START_OFFSET_TYPE_SAMPLE: {
         seqOffsetType = detail::SeqPlayer::OFFSET_TYPE_TICK;
         startOffset = 0;
         break;
+    }
+
+    default: {
+        seqOffsetType = detail::SeqPlayer::OFFSET_TYPE_TICK;
+        startOffset = 0;
+        break;
+    }
     }
 
     if (pSeqBin != NULL) {
@@ -747,26 +751,33 @@ SoundStartable::StartResult SoundArchivePlayer::PrepareStrmImpl(
     SoundStartable::StartInfo::StartOffsetType startType, int startOffset,
     int voices) {
 
+    // StrmSoundInfo is empty in this version of NW4R
+#pragma unused(pStrmInfo)
+
     detail::StrmPlayer::StartOffsetType strmOffsetType;
 
     switch (startType) {
-    case SoundStartable::StartInfo::START_OFFSET_TYPE_MILLISEC:
+    case SoundStartable::StartInfo::START_OFFSET_TYPE_MILLISEC: {
         strmOffsetType = detail::StrmPlayer::START_OFFSET_TYPE_MILLISEC;
         break;
+    }
 
-    case SoundStartable::StartInfo::START_OFFSET_TYPE_TICK:
+    case SoundStartable::StartInfo::START_OFFSET_TYPE_TICK: {
         strmOffsetType = detail::StrmPlayer::START_OFFSET_TYPE_SAMPLE;
         startOffset = 0;
         break;
+    }
 
-    case SoundStartable::StartInfo::START_OFFSET_TYPE_SAMPLE:
+    case SoundStartable::StartInfo::START_OFFSET_TYPE_SAMPLE: {
         strmOffsetType = detail::StrmPlayer::START_OFFSET_TYPE_SAMPLE;
         break;
+    }
 
-    default:
+    default: {
         strmOffsetType = detail::StrmPlayer::START_OFFSET_TYPE_SAMPLE;
         startOffset = 0;
         break;
+    }
     }
 
     void* pStreamBuffer = pSound->GetFileStreamBuffer();
@@ -806,23 +817,27 @@ SoundStartable::StartResult SoundArchivePlayer::PrepareWaveSoundImpl(
     detail::WsdPlayer::StartOffsetType wsdOffsetType;
 
     switch (startType) {
-    case SoundStartable::StartInfo::START_OFFSET_TYPE_MILLISEC:
+    case SoundStartable::StartInfo::START_OFFSET_TYPE_MILLISEC: {
         wsdOffsetType = detail::WsdPlayer::START_OFFSET_TYPE_MILLISEC;
         break;
+    }
 
-    case SoundStartable::StartInfo::START_OFFSET_TYPE_TICK:
+    case SoundStartable::StartInfo::START_OFFSET_TYPE_TICK: {
         wsdOffsetType = detail::WsdPlayer::START_OFFSET_TYPE_SAMPLE;
         startOffset = 0;
         break;
+    }
 
-    case SoundStartable::StartInfo::START_OFFSET_TYPE_SAMPLE:
+    case SoundStartable::StartInfo::START_OFFSET_TYPE_SAMPLE: {
         wsdOffsetType = detail::WsdPlayer::START_OFFSET_TYPE_SAMPLE;
         break;
+    }
 
-    default:
+    default: {
         wsdOffsetType = detail::WsdPlayer::START_OFFSET_TYPE_SAMPLE;
         startOffset = 0;
         break;
+    }
     }
 
     if (!pSound->Prepare(pWsdBin, pWsdInfo->subNo, wsdOffsetType, startOffset,

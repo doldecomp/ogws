@@ -1,8 +1,10 @@
 #ifndef NW4R_SND_WAVE_SOUND_H
 #define NW4R_SND_WAVE_SOUND_H
+#include <nw4r/types_nw4r.h>
+
 #include <nw4r/snd/snd_BasicSound.h>
 #include <nw4r/snd/snd_WsdPlayer.h>
-#include <nw4r/types_nw4r.h>
+
 #include <nw4r/ut.h>
 
 namespace nw4r {

@@ -94,6 +94,12 @@ bool FxReverbHiDpl2::SetParam(const ReverbHiDpl2Param& rParam) {
 void FxReverbHiDpl2::UpdateBuffer(int channels, void** ppBuffer, u32 size,
                                   SampleFormat format, f32 sampleRate,
                                   OutputMode mode) {
+#pragma unused(channels)
+#pragma unused(size)
+#pragma unused(format)
+#pragma unused(sampleRate)
+#pragma unused(mode)
+
     void* chans[AX_DPL2_MAX];
     chans[AX_DPL2_L] = ppBuffer[AX_DPL2_L];
     chans[AX_DPL2_R] = ppBuffer[AX_DPL2_R];

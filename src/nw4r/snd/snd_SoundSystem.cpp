@@ -1,6 +1,7 @@
 #pragma ipa file // TODO: REMOVE AFTER REFACTOR
 
 #include <nw4r/snd.h>
+
 #include <revolution/AX.h>
 #include <revolution/OS.h>
 #include <revolution/SC.h>
@@ -35,6 +36,7 @@ void SoundSystem::InitSoundSystem(s32 soundThreadPriority,
     param.soundThreadPriority = soundThreadPriority;
     param.dvdThreadPriority = dvdThreadPriority;
 
+    // @bug This function ignores the specified buffer size
     InitSoundSystem(param, defaultSoundSystemWork,
                     sizeof(defaultSoundSystemWork));
 }
@@ -48,6 +50,8 @@ u32 SoundSystem::GetRequiredMemSize(const SoundSystemParam& rParam) {
 
 void SoundSystem::InitSoundSystem(const SoundSystemParam& rParam, void* pWork,
                                   u32 workSize) {
+#pragma unused(workSize)
+
     if (sInitialized) {
         return;
     }

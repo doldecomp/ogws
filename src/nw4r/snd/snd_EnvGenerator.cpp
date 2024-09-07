@@ -48,7 +48,7 @@ f32 EnvGenerator::GetValue() const {
 
 void EnvGenerator::Update(int msec) {
     switch (mStatus) {
-    case STATUS_ATTACK:
+    case STATUS_ATTACK: {
         while (msec > 0) {
             mValue *= mAttack;
             msec--;
@@ -62,8 +62,11 @@ void EnvGenerator::Update(int msec) {
         if (mStatus != STATUS_DECAY) {
             break;
         }
+
         // FALLTHROUGH
-    case STATUS_DECAY:
+    }
+
+    case STATUS_DECAY: {
         f32 decay = CalcDecibelSquare(mSustain);
         mValue -= mDecay * msec;
 
@@ -74,11 +77,16 @@ void EnvGenerator::Update(int msec) {
         mValue = decay;
         mStatus = STATUS_SUSTAIN;
         break;
-    case STATUS_SUSTAIN:
+    }
+
+    case STATUS_SUSTAIN: {
         break;
-    case STATUS_RELEASE:
+    }
+
+    case STATUS_RELEASE: {
         mValue -= mRelease * msec;
         break;
+    }
     }
 }
 

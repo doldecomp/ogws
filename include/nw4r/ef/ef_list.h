@@ -56,7 +56,7 @@ namespace nw4r
 				ut::List_Append(&mClosing, pNode);
 			}
 			
-			inline void ToWait(void * pNode)
+			inline void ToWait(void * /* pNode */)
 			{
 				mNumActive--;
 			}

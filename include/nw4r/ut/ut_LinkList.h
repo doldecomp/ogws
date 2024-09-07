@@ -1,6 +1,7 @@
 #ifndef NW4R_UT_LINK_LIST_H
 #define NW4R_UT_LINK_LIST_H
 #include <nw4r/types_nw4r.h>
+
 #include <nw4r/ut/ut_NonCopyable.h>
 
 namespace nw4r {
@@ -42,7 +43,7 @@ public:
 
     public:
         Iterator() : mNode(NULL) {}
-        Iterator(LinkListNode* node) : mNode(node) {}
+        Iterator(LinkListNode* pNode) : mNode(pNode) {}
 
         Iterator& operator++() {
             mNode = mNode->GetNext();
@@ -97,8 +98,8 @@ public:
     };
 
 protected:
-    static Iterator GetIteratorFromPointer(LinkListNode* node) {
-        return Iterator(node);
+    static Iterator GetIteratorFromPointer(LinkListNode* pNode) {
+        return Iterator(pNode);
     }
 
     LinkListImpl() {
@@ -113,10 +114,10 @@ protected:
         return Iterator(&mNode);
     }
 
-    Iterator Insert(Iterator it, LinkListNode* node);
+    Iterator Insert(Iterator it, LinkListNode* pNode);
 
     Iterator Erase(Iterator it);
-    Iterator Erase(LinkListNode* node);
+    Iterator Erase(LinkListNode* pNode);
     Iterator Erase(Iterator begin, Iterator end);
 
 public:
@@ -171,14 +172,14 @@ public:
         return *it;
     }
 
-    friend bool operator==(const ReverseIterator& lhs,
-                           const ReverseIterator& rhs) {
-        return lhs.mCurrent == rhs.mCurrent;
+    friend bool operator==(const ReverseIterator& rLhs,
+                           const ReverseIterator& rRhs) {
+        return rLhs.mCurrent == rRhs.mCurrent;
     }
 
-    friend bool operator!=(const ReverseIterator& lhs,
-                           const ReverseIterator& rhs) {
-        return !(lhs.mCurrent == rhs.mCurrent);
+    friend bool operator!=(const ReverseIterator& rLhs,
+                           const ReverseIterator& rRhs) {
+        return !(rLhs.mCurrent == rRhs.mCurrent);
     }
 
 private:
@@ -316,20 +317,20 @@ public:
         return detail::ReverseIterator<Iterator>(GetEndIter());
     }
 
-    Iterator Insert(Iterator it, T* p) {
+    Iterator Insert(Iterator it, T* pElem) {
         return Iterator(
-            LinkListImpl::Insert(it.mIterator, GetNodeFromPointer(p)));
+            LinkListImpl::Insert(it.mIterator, GetNodeFromPointer(pElem)));
     }
 
-    Iterator Erase(T* p) {
-        return Iterator(LinkListImpl::Erase(GetNodeFromPointer(p)));
+    Iterator Erase(T* pElem) {
+        return Iterator(LinkListImpl::Erase(GetNodeFromPointer(pElem)));
     }
     Iterator Erase(Iterator it) {
         return Iterator(LinkListImpl::Erase(it.mIterator));
     }
 
-    void PushBack(T* p) {
-        Insert(GetEndIter(), p);
+    void PushBack(T* pElem) {
+        Insert(GetEndIter(), pElem);
     }
 
     T& GetFront() {
@@ -346,25 +347,25 @@ public:
         return *--GetEndIter();
     }
 
-    static Iterator GetIteratorFromPointer(T* p) {
-        return GetIteratorFromPointer(GetNodeFromPointer(p));
+    static Iterator GetIteratorFromPointer(T* pElem) {
+        return GetIteratorFromPointer(GetNodeFromPointer(pElem));
     }
 
-    static Iterator GetIteratorFromPointer(LinkListNode* node) {
-        return Iterator(LinkListImpl::GetIteratorFromPointer(node));
+    static Iterator GetIteratorFromPointer(LinkListNode* pNode) {
+        return Iterator(LinkListImpl::GetIteratorFromPointer(pNode));
     }
 
-    static LinkListNode* GetNodeFromPointer(T* p) {
-        return reinterpret_cast<LinkListNode*>(reinterpret_cast<char*>(p) +
+    static LinkListNode* GetNodeFromPointer(T* pElem) {
+        return reinterpret_cast<LinkListNode*>(reinterpret_cast<char*>(pElem) +
                                                Ofs);
     }
 
-    static T* GetPointerFromNode(LinkListNode* node) {
-        return reinterpret_cast<T*>(reinterpret_cast<char*>(node) - Ofs);
+    static T* GetPointerFromNode(LinkListNode* pNode) {
+        return reinterpret_cast<T*>(reinterpret_cast<char*>(pNode) - Ofs);
     }
 
-    static const T* GetPointerFromNode(const LinkListNode* node) {
-        return reinterpret_cast<const T*>(reinterpret_cast<const char*>(node) -
+    static const T* GetPointerFromNode(const LinkListNode* pNode) {
+        return reinterpret_cast<const T*>(reinterpret_cast<const char*>(pNode) -
                                           Ofs);
     }
 };

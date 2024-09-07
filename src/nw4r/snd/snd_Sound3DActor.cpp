@@ -57,6 +57,8 @@ void Sound3DActor::SetPosition(const math::VEC3& rPosition) {
 }
 
 void Sound3DActor::detail_Update(void* pArg, const detail::BasicSound* pSound) {
+#pragma unused(pSound)
+
     Sound3DManager::Sound3DActorParam* pParam =
         static_cast<Sound3DManager::Sound3DActorParam*>(pArg);
 

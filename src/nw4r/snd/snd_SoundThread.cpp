@@ -2,6 +2,7 @@
 
 #include <nw4r/snd.h>
 #include <nw4r/ut.h>
+
 #include <revolution/OS.h>
 
 namespace nw4r {

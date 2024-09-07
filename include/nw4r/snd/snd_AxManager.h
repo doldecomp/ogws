@@ -1,10 +1,13 @@
 #ifndef NW4R_SND_AX_MANAGER_H
 #define NW4R_SND_AX_MANAGER_H
+#include <nw4r/types_nw4r.h>
+
 #include <nw4r/snd/snd_Common.h>
 #include <nw4r/snd/snd_FxBase.h>
 #include <nw4r/snd/snd_MoveValue.h>
-#include <nw4r/types_nw4r.h>
+
 #include <nw4r/ut.h>
+
 #include <revolution/AI.h>
 #include <revolution/AX.h>
 
@@ -27,6 +30,8 @@ public:
     AxManager();
     ~AxManager() {}
 
+    void Init();
+
     bool CheckInit() {
         return mInitialized;
     }
@@ -39,18 +44,13 @@ public:
         return mResetReadyCounter == 0;
     }
 
-    FxBaseList& GetEffectList(AuxBus bus) {
-        return mFxList[bus];
-    }
-
-    void Init();
     void Shutdown();
     f32 GetOutputVolume() const;
     void Update();
     void* GetZeroBufferAddress();
 
-    void RegisterCallback(CallbackListNode* node, AXOutCallback callback);
-    void UnregisterCallback(CallbackListNode* node);
+    void RegisterCallback(CallbackListNode* pNode, AXOutCallback pCallback);
+    void UnregisterCallback(CallbackListNode* pNode);
 
     void SetOutputMode(OutputMode mode);
     OutputMode GetOutputMode();
@@ -60,15 +60,19 @@ public:
     }
     void SetMasterVolume(f32 volume, int frame);
 
-    bool AppendEffect(AuxBus bus, FxBase* fx);
+    bool AppendEffect(AuxBus bus, FxBase* pFx);
     void ClearEffect(AuxBus bus, int frame);
     void ShutdownEffect(AuxBus bus);
+
+    FxBaseList& GetEffectList(AuxBus bus) {
+        return mFxList[bus];
+    }
 
     void PrepareReset();
 
 private:
     static void AxCallbackFunc();
-    static void AuxCallbackFunc(void* chans, void* context);
+    static void AuxCallbackFunc(void* pChans, void* pContext);
     static void AiDmaCallbackFunc();
 
 private:

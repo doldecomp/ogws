@@ -2,6 +2,7 @@
 
 #include <nw4r/snd.h>
 #include <nw4r/ut.h>
+
 #include <revolution/DVD.h>
 
 namespace nw4r {
@@ -201,20 +202,24 @@ s32 DvdSoundArchive::DvdFileStream::Read(void* pDst, u32 size) {
 
 void DvdSoundArchive::DvdFileStream::Seek(s32 offset, u32 origin) {
     switch (origin) {
-    case SEEK_BEG:
+    case SEEK_BEG: {
         offset += mOffset;
         break;
+    }
 
-    case SEEK_CUR:
+    case SEEK_CUR: {
         offset += ut::DvdFileStream::Tell();
         break;
+    }
 
-    case SEEK_END:
+    case SEEK_END: {
         offset = mOffset + mSize - offset;
         break;
+    }
 
-    default:
+    default: {
         return;
+    }
     }
 
     if (offset < mOffset) {

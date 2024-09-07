@@ -1,8 +1,9 @@
 #pragma ipa file // TODO: REMOVE AFTER REFACTOR
 
-#include <cstring>
 #include <nw4r/snd.h>
 #include <nw4r/ut.h>
+
+#include <cstring>
 
 namespace nw4r {
 namespace snd {
@@ -17,10 +18,10 @@ AxVoice::AxVoice()
 
 AxVoice::~AxVoice() {}
 
-void AxVoice::Setup(const void* wave, Format fmt, int rate) {
+void AxVoice::Setup(const void* pWave, Format fmt, int rate) {
     ut::AutoInterruptLock lock;
 
-    mWaveData = wave;
+    mWaveData = pWave;
     mFormat = fmt;
     mSampleRate = rate;
 
@@ -36,21 +37,26 @@ bool AxVoice::IsPlayFinished() const {
     }
 
     u32 dspAddr = GetCurrentPlayingDspAddress();
-    const void* buffer = AxManager::GetInstance().GetZeroBufferAddress();
-    u32 samples = GetDspAddressBySample(buffer, 0, mFormat);
+    const void* pBuffer = AxManager::GetInstance().GetZeroBufferAddress();
+    u32 samples = GetDspAddressBySample(pBuffer, 0, mFormat);
 
     u32 addr = samples;
 
     switch (mFormat) {
-    case FORMAT_ADPCM:
+    case FORMAT_ADPCM: {
         addr += 0x200;
         break;
-    case FORMAT_PCM8:
+    }
+
+    case FORMAT_PCM8: {
         addr += 0x100;
         break;
-    case FORMAT_PCM16:
+    }
+
+    case FORMAT_PCM16: {
         addr += 0x80;
         break;
+    }
     }
 
     if (samples <= dspAddr && dspAddr < addr) {
@@ -60,25 +66,25 @@ bool AxVoice::IsPlayFinished() const {
     return false;
 }
 
-void AxVoice::SetLoopStart(const void* base, u32 samples) {
+void AxVoice::SetLoopStart(const void* pBase, u32 samples) {
     ut::AutoInterruptLock lock;
 
     if (!mVpb.IsAvailable()) {
         return;
     }
 
-    u32 addr = GetDspAddressBySample(base, samples, mFormat);
+    u32 addr = GetDspAddressBySample(pBase, samples, mFormat);
     mVpb.SetVoiceLoopAddr(addr);
 }
 
-void AxVoice::SetLoopEnd(const void* base, u32 samples) {
+void AxVoice::SetLoopEnd(const void* pBase, u32 samples) {
     ut::AutoInterruptLock lock;
 
     if (!mVpb.IsAvailable()) {
         return;
     }
 
-    u32 addr = GetDspAddressBySample(base, samples - 1, mFormat);
+    u32 addr = GetDspAddressBySample(pBase, samples - 1, mFormat);
     mVpb.SetVoiceEndAddr(addr);
 }
 
@@ -92,30 +98,30 @@ void AxVoice::SetLoopFlag(bool loop) {
     mVpb.SetVoiceLoop(loop);
 }
 
-void AxVoice::StopAtPoint(const void* base, u32 samples) {
+void AxVoice::StopAtPoint(const void* pBase, u32 samples) {
     ut::AutoInterruptLock lock;
 
     if (!mVpb.IsAvailable()) {
         return;
     }
 
-    const void* buffer = AxManager::GetInstance().GetZeroBufferAddress();
-    u32 begin = GetDspAddressBySample(buffer, 0, mFormat);
-    u32 end = GetDspAddressBySample(base, samples - 1, mFormat);
+    const void* pBuffer = AxManager::GetInstance().GetZeroBufferAddress();
+    u32 begin = GetDspAddressBySample(pBuffer, 0, mFormat);
+    u32 end = GetDspAddressBySample(pBase, samples - 1, mFormat);
 
     mVpb.SetVoiceLoopAddr(begin);
     mVpb.SetVoiceEndAddr(end);
     mVpb.SetVoiceLoop(false);
 }
 
-bool AxVoice::IsDataAddressCoverd(const void* begin, const void* end) const {
+bool AxVoice::IsDataAddressCoverd(const void* pBegin, const void* pEnd) const {
     ut::AutoInterruptLock lock;
 
     if (!mVpb.IsAvailable()) {
         return false;
     }
 
-    return mWaveData != NULL && (begin <= mWaveData && mWaveData <= end);
+    return mWaveData != NULL && (pBegin <= mWaveData && mWaveData <= pEnd);
 }
 
 u32 AxVoice::GetCurrentPlayingSample() const {
@@ -144,64 +150,76 @@ u32 AxVoice::GetCurrentPlayingDspAddress() const {
     return mVpb.GetCurrentAddress();
 }
 
-u32 AxVoice::GetLoopEndDspAddress() const { return mVpb.GetEndAddress(); }
-
-void AxVoice::VoiceCallback(void* arg) {
-    ut::AutoInterruptLock lock;
-
-    AXVPB* vpb = static_cast<AXVPB*>(arg);
-    AxVoice* self = reinterpret_cast<AxVoice*>(vpb->userContext);
-
-    self->mVpb.Clear();
-    AxVoiceManager::GetInstance().ReserveForFreeAxVoice(self);
+u32 AxVoice::GetLoopEndDspAddress() const {
+    return mVpb.GetEndAddress();
 }
 
-u32 AxVoice::GetDspAddressBySample(const void* base, u32 samples, Format fmt) {
-    if (base != NULL) {
-        base = OSCachedToPhysical(base);
+void AxVoice::VoiceCallback(void* pArg) {
+    ut::AutoInterruptLock lock;
+
+    AXVPB* pVpb = static_cast<AXVPB*>(pArg);
+    AxVoice* p = reinterpret_cast<AxVoice*>(pVpb->userContext);
+
+    p->mVpb.Clear();
+    AxVoiceManager::GetInstance().ReserveForFreeAxVoice(p);
+}
+
+u32 AxVoice::GetDspAddressBySample(const void* pBase, u32 samples, Format fmt) {
+    if (pBase != NULL) {
+        pBase = OSCachedToPhysical(pBase);
     }
 
     u32 addr = 0;
 
     switch (fmt) {
-    case FORMAT_ADPCM:
+    case FORMAT_ADPCM: {
         addr =
             samples / AX_ADPCM_SAMPLES_PER_FRAME * AX_ADPCM_NIBBLES_PER_FRAME +
             samples % AX_ADPCM_SAMPLES_PER_FRAME +
-            reinterpret_cast<u32>(base) * sizeof(u16) + sizeof(u16);
+            reinterpret_cast<u32>(pBase) * sizeof(u16) + sizeof(u16);
         break;
-    case FORMAT_PCM8:
-        addr = reinterpret_cast<u32>(base) + samples;
+    }
+
+    case FORMAT_PCM8: {
+        addr = reinterpret_cast<u32>(pBase) + samples;
+
         break;
-    case FORMAT_PCM16:
-        addr = reinterpret_cast<u32>(base) / sizeof(u16) + samples;
+    }
+    case FORMAT_PCM16: {
+        addr = reinterpret_cast<u32>(pBase) / sizeof(u16) + samples;
         break;
+    }
     }
 
     return addr;
 }
 
-u32 AxVoice::GetSampleByDspAddress(const void* base, u32 addr, Format fmt) {
-    if (base != NULL) {
-        base = OSCachedToPhysical(base);
+u32 AxVoice::GetSampleByDspAddress(const void* pBase, u32 addr, Format fmt) {
+    if (pBase != NULL) {
+        pBase = OSCachedToPhysical(pBase);
     }
 
     u32 samples = 0;
 
     switch (fmt) {
-    case FORMAT_ADPCM:
-        samples = addr - reinterpret_cast<u32>(base) * sizeof(u16);
+    case FORMAT_ADPCM: {
+        samples = addr - reinterpret_cast<u32>(pBase) * sizeof(u16);
         samples =
             samples % AX_ADPCM_NIBBLES_PER_FRAME +
             samples / AX_ADPCM_NIBBLES_PER_FRAME * AX_ADPCM_SAMPLES_PER_FRAME -
             sizeof(u16);
         break;
-    case FORMAT_PCM8:
-        samples = addr - reinterpret_cast<u32>(base);
+    }
+
+    case FORMAT_PCM8: {
+        samples = addr - reinterpret_cast<u32>(pBase);
         break;
-    case FORMAT_PCM16:
-        samples = addr - reinterpret_cast<u32>(base) / sizeof(u16);
+    }
+
+    case FORMAT_PCM16: {
+        samples = addr - reinterpret_cast<u32>(pBase) / sizeof(u16);
         break;
+    }
     }
 
     return samples;
@@ -212,29 +230,40 @@ u32 AxVoice::GetSampleByByte(u32 addr, Format fmt) {
     u32 frac;
 
     switch (fmt) {
-    case FORMAT_ADPCM:
+    case FORMAT_ADPCM: {
         samples = addr / AX_ADPCM_FRAME_SIZE * AX_ADPCM_SAMPLES_PER_FRAME;
         frac = addr % AX_ADPCM_FRAME_SIZE;
         if (frac != 0) {
             samples += (frac - 1) * sizeof(u16);
         }
         break;
-    case FORMAT_PCM8:
+    }
+
+    case FORMAT_PCM8: {
         samples = addr;
         break;
-    case FORMAT_PCM16:
+    }
+
+    case FORMAT_PCM16: {
         samples = addr / sizeof(u16);
         break;
+    }
     }
 
     return samples;
 }
 
-void AxVoice::SetPriority(u32 prio) { mVpb.SetVoicePriority(prio); }
+void AxVoice::SetPriority(u32 prio) {
+    mVpb.SetVoicePriority(prio);
+}
 
-void AxVoice::SetVoiceType(VoiceType type) { mVpb.SetVoiceType(type); }
+void AxVoice::SetVoiceType(VoiceType type) {
+    mVpb.SetVoiceType(type);
+}
 
-void AxVoice::EnableRemote(bool enable) { mVpb.SetVoiceRmtOn(enable); }
+void AxVoice::EnableRemote(bool enable) {
+    mVpb.SetVoiceRmtOn(enable);
+}
 
 void AxVoice::ResetDelta() {
     ut::AutoInterruptLock lock;
@@ -286,36 +315,36 @@ void AxVoice::ResetDelta() {
     mVpb.SetVoiceMix(mix, true);
 }
 
-void AxVoice::SetAddr(bool loop, const void* wave, u32 offset, u32 loopStart,
+void AxVoice::SetAddr(bool loop, const void* pWave, u32 offset, u32 loopStart,
                       u32 loopEnd) {
     ut::AutoInterruptLock lock;
 
     u32 startAddr;
     u32 endAddr;
     u32 loopAddr;
-    const void* buffer;
+    const void* pBuffer;
 
     if (!mVpb.IsAvailable()) {
         return;
     }
 
     if (offset > loopEnd) {
-        buffer = AxManager::GetInstance().GetZeroBufferAddress();
+        pBuffer = AxManager::GetInstance().GetZeroBufferAddress();
         loop = false;
 
-        startAddr = GetDspAddressBySample(buffer, 0, mFormat);
-        loopAddr = GetDspAddressBySample(buffer, 0, mFormat);
-        endAddr = GetDspAddressBySample(buffer, 1, mFormat);
+        startAddr = GetDspAddressBySample(pBuffer, 0, mFormat);
+        loopAddr = GetDspAddressBySample(pBuffer, 0, mFormat);
+        endAddr = GetDspAddressBySample(pBuffer, 1, mFormat);
     } else {
         if (loop) {
-            loopAddr = GetDspAddressBySample(wave, loopStart, mFormat);
+            loopAddr = GetDspAddressBySample(pWave, loopStart, mFormat);
         } else {
-            buffer = AxManager::GetInstance().GetZeroBufferAddress();
-            loopAddr = GetDspAddressBySample(buffer, 0, mFormat);
+            pBuffer = AxManager::GetInstance().GetZeroBufferAddress();
+            loopAddr = GetDspAddressBySample(pBuffer, 0, mFormat);
         }
 
-        startAddr = GetDspAddressBySample(wave, offset, mFormat);
-        endAddr = GetDspAddressBySample(wave, loopEnd - 1, mFormat);
+        startAddr = GetDspAddressBySample(pWave, offset, mFormat);
+        endAddr = GetDspAddressBySample(pWave, loopEnd - 1, mFormat);
     }
 
     AXPBADDR addr;
@@ -357,7 +386,7 @@ void AxVoice::SetSrcType(SrcType type, f32 pitch) {
     mVpb.SetVoiceSrcType(type);
 }
 
-void AxVoice::SetAdpcm(const AdpcmParam* param) {
+void AxVoice::SetAdpcm(const AdpcmParam* pParam) {
     ut::AutoInterruptLock lock;
     AXPBADPCM adpcm;
 
@@ -366,21 +395,25 @@ void AxVoice::SetAdpcm(const AdpcmParam* param) {
     }
 
     switch (mFormat) {
-    case FORMAT_ADPCM:
-        std::memcpy(adpcm.a, param->coef, sizeof(adpcm.a));
-        adpcm.gain = param->gain;
-        adpcm.pred_scale = param->pred_scale;
-        adpcm.yn1 = param->yn1;
-        adpcm.yn2 = param->yn2;
+    case FORMAT_ADPCM: {
+        std::memcpy(adpcm.a, pParam->coef, sizeof(adpcm.a));
+        adpcm.gain = pParam->gain;
+        adpcm.pred_scale = pParam->pred_scale;
+        adpcm.yn1 = pParam->yn1;
+        adpcm.yn2 = pParam->yn2;
         break;
-    case FORMAT_PCM16:
+    }
+
+    case FORMAT_PCM16: {
         std::memset(adpcm.a, 0, sizeof(adpcm.a));
         adpcm.gain = 0x800;
         adpcm.pred_scale = 0;
         adpcm.yn1 = 0;
         adpcm.yn2 = 0;
         break;
-    case FORMAT_PCM8:
+    }
+
+    case FORMAT_PCM8: {
         std::memset(adpcm.a, 0, sizeof(adpcm.a));
         adpcm.gain = 0x100;
         adpcm.pred_scale = 0;
@@ -388,11 +421,12 @@ void AxVoice::SetAdpcm(const AdpcmParam* param) {
         adpcm.yn2 = 0;
         break;
     }
+    }
 
     mVpb.SetVoiceAdpcm(adpcm);
 }
 
-void AxVoice::SetAdpcmLoop(const AdpcmLoopParam* param) {
+void AxVoice::SetAdpcmLoop(const AdpcmLoopParam* pParam) {
     ut::AutoInterruptLock lock;
     AXPBADPCMLOOP loop;
 
@@ -401,9 +435,9 @@ void AxVoice::SetAdpcmLoop(const AdpcmLoopParam* param) {
     }
 
     if (mFormat == FORMAT_ADPCM) {
-        loop.loop_pred_scale = param->loop_pred_scale;
-        loop.loop_yn1 = param->loop_yn1;
-        loop.loop_yn2 = param->loop_yn2;
+        loop.loop_pred_scale = pParam->loop_pred_scale;
+        loop.loop_yn1 = pParam->loop_yn1;
+        loop.loop_yn2 = pParam->loop_yn2;
     } else {
         loop.loop_pred_scale = 0;
         loop.loop_yn1 = 0;
@@ -413,7 +447,7 @@ void AxVoice::SetAdpcmLoop(const AdpcmLoopParam* param) {
     mVpb.SetVoiceAdpcmLoop(loop);
 }
 
-bool AxVoice::SetMix(const MixParam& param) {
+bool AxVoice::SetMix(const MixParam& rParam) {
     ut::AutoInterruptLock lock;
 
     if (!mVpb.IsAvailable()) {
@@ -421,57 +455,57 @@ bool AxVoice::SetMix(const MixParam& param) {
     }
 
     if (mFirstMixUpdate || !IsRun()) {
-        mMixPrev = param;
+        mMixPrev = rParam;
         mFirstMixUpdate = false;
     }
 
     bool needUpdate = false;
 
-    if (mMixPrev.vL != param.vL) {
+    if (mMixPrev.vL != rParam.vL) {
         needUpdate = true;
     }
 
-    if (mMixPrev.vR != param.vR) {
+    if (mMixPrev.vR != rParam.vR) {
         needUpdate = true;
     }
 
-    if (mMixPrev.vS != param.vS) {
+    if (mMixPrev.vS != rParam.vS) {
         needUpdate = true;
     }
 
-    if (mMixPrev.vAuxAL != param.vAuxAL) {
+    if (mMixPrev.vAuxAL != rParam.vAuxAL) {
         needUpdate = true;
     }
 
-    if (mMixPrev.vAuxAR != param.vAuxAR) {
+    if (mMixPrev.vAuxAR != rParam.vAuxAR) {
         needUpdate = true;
     }
 
-    if (mMixPrev.vAuxAS != param.vAuxAS) {
+    if (mMixPrev.vAuxAS != rParam.vAuxAS) {
         needUpdate = true;
     }
 
-    if (mMixPrev.vAuxBL != param.vAuxBL) {
+    if (mMixPrev.vAuxBL != rParam.vAuxBL) {
         needUpdate = true;
     }
 
-    if (mMixPrev.vAuxBR != param.vAuxBR) {
+    if (mMixPrev.vAuxBR != rParam.vAuxBR) {
         needUpdate = true;
     }
 
-    if (mMixPrev.vAuxBS != param.vAuxBS) {
+    if (mMixPrev.vAuxBS != rParam.vAuxBS) {
         needUpdate = true;
     }
 
-    if (mMixPrev.vAuxCL != param.vAuxCL) {
+    if (mMixPrev.vAuxCL != rParam.vAuxCL) {
         needUpdate = true;
     }
 
-    if (mMixPrev.vAuxCR != param.vAuxCR) {
+    if (mMixPrev.vAuxCR != rParam.vAuxCR) {
         needUpdate = true;
     }
 
-    if (mMixPrev.vAuxCS != param.vAuxCS) {
+    if (mMixPrev.vAuxCS != rParam.vAuxCS) {
         needUpdate = true;
     }
 
@@ -493,21 +527,21 @@ bool AxVoice::SetMix(const MixParam& param) {
     mix.vAuxCR = mMixPrev.vAuxCR;
     mix.vAuxCS = mMixPrev.vAuxCS;
 
-    int vDeltaL = CalcAxvpbDelta(mMixPrev.vL, param.vL);
-    int vDeltaR = CalcAxvpbDelta(mMixPrev.vR, param.vR);
-    int vDeltaS = CalcAxvpbDelta(mMixPrev.vS, param.vS);
+    int vDeltaL = CalcAxvpbDelta(mMixPrev.vL, rParam.vL);
+    int vDeltaR = CalcAxvpbDelta(mMixPrev.vR, rParam.vR);
+    int vDeltaS = CalcAxvpbDelta(mMixPrev.vS, rParam.vS);
 
-    int vDeltaAuxAL = CalcAxvpbDelta(mMixPrev.vAuxAL, param.vAuxAL);
-    int vDeltaAuxAR = CalcAxvpbDelta(mMixPrev.vAuxAR, param.vAuxAR);
-    int vDeltaAuxAS = CalcAxvpbDelta(mMixPrev.vAuxAS, param.vAuxAS);
+    int vDeltaAuxAL = CalcAxvpbDelta(mMixPrev.vAuxAL, rParam.vAuxAL);
+    int vDeltaAuxAR = CalcAxvpbDelta(mMixPrev.vAuxAR, rParam.vAuxAR);
+    int vDeltaAuxAS = CalcAxvpbDelta(mMixPrev.vAuxAS, rParam.vAuxAS);
 
-    int vDeltaAuxBL = CalcAxvpbDelta(mMixPrev.vAuxBL, param.vAuxBL);
-    int vDeltaAuxBR = CalcAxvpbDelta(mMixPrev.vAuxBR, param.vAuxBR);
-    int vDeltaAuxBS = CalcAxvpbDelta(mMixPrev.vAuxBS, param.vAuxBS);
+    int vDeltaAuxBL = CalcAxvpbDelta(mMixPrev.vAuxBL, rParam.vAuxBL);
+    int vDeltaAuxBR = CalcAxvpbDelta(mMixPrev.vAuxBR, rParam.vAuxBR);
+    int vDeltaAuxBS = CalcAxvpbDelta(mMixPrev.vAuxBS, rParam.vAuxBS);
 
-    int vDeltaAuxCL = CalcAxvpbDelta(mMixPrev.vAuxCL, param.vAuxCL);
-    int vDeltaAuxCR = CalcAxvpbDelta(mMixPrev.vAuxCR, param.vAuxCR);
-    int vDeltaAuxCS = CalcAxvpbDelta(mMixPrev.vAuxCS, param.vAuxCS);
+    int vDeltaAuxCL = CalcAxvpbDelta(mMixPrev.vAuxCL, rParam.vAuxCL);
+    int vDeltaAuxCR = CalcAxvpbDelta(mMixPrev.vAuxCR, rParam.vAuxCR);
+    int vDeltaAuxCS = CalcAxvpbDelta(mMixPrev.vAuxCS, rParam.vAuxCS);
 
     mix.vDeltaL = vDeltaL;
     mix.vDeltaR = vDeltaR;
@@ -527,74 +561,74 @@ bool AxVoice::SetMix(const MixParam& param) {
 
     mVpb.SetVoiceMix(mix, false);
 
-    if (param.vL == 0 || vDeltaL == 0) {
-        mMixPrev.vL = param.vL;
+    if (rParam.vL == 0 || vDeltaL == 0) {
+        mMixPrev.vL = rParam.vL;
     } else {
         mMixPrev.vL += vDeltaL * AX_SAMPLES_PER_FRAME;
     }
 
-    if (param.vR == 0 || vDeltaR == 0) {
-        mMixPrev.vR = param.vR;
+    if (rParam.vR == 0 || vDeltaR == 0) {
+        mMixPrev.vR = rParam.vR;
     } else {
         mMixPrev.vR += vDeltaR * AX_SAMPLES_PER_FRAME;
     }
 
-    if (param.vS == 0 || vDeltaS == 0) {
-        mMixPrev.vS = param.vS;
+    if (rParam.vS == 0 || vDeltaS == 0) {
+        mMixPrev.vS = rParam.vS;
     } else {
         mMixPrev.vS += vDeltaS * AX_SAMPLES_PER_FRAME;
     }
 
-    if (param.vAuxAL == 0 || vDeltaAuxAL == 0) {
-        mMixPrev.vAuxAL = param.vAuxAL;
+    if (rParam.vAuxAL == 0 || vDeltaAuxAL == 0) {
+        mMixPrev.vAuxAL = rParam.vAuxAL;
     } else {
         mMixPrev.vAuxAL += vDeltaAuxAL * AX_SAMPLES_PER_FRAME;
     }
 
-    if (param.vAuxAR == 0 || vDeltaAuxAR == 0) {
-        mMixPrev.vAuxAR = param.vAuxAR;
+    if (rParam.vAuxAR == 0 || vDeltaAuxAR == 0) {
+        mMixPrev.vAuxAR = rParam.vAuxAR;
     } else {
         mMixPrev.vAuxAR += vDeltaAuxAR * AX_SAMPLES_PER_FRAME;
     }
 
-    if (param.vAuxAS == 0 || vDeltaAuxAS == 0) {
-        mMixPrev.vAuxAS = param.vAuxAS;
+    if (rParam.vAuxAS == 0 || vDeltaAuxAS == 0) {
+        mMixPrev.vAuxAS = rParam.vAuxAS;
     } else {
         mMixPrev.vAuxAS += vDeltaAuxAS * AX_SAMPLES_PER_FRAME;
     }
 
-    if (param.vAuxBL == 0 || vDeltaAuxBL == 0) {
-        mMixPrev.vAuxBL = param.vAuxBL;
+    if (rParam.vAuxBL == 0 || vDeltaAuxBL == 0) {
+        mMixPrev.vAuxBL = rParam.vAuxBL;
     } else {
         mMixPrev.vAuxBL += vDeltaAuxBL * AX_SAMPLES_PER_FRAME;
     }
 
-    if (param.vAuxBR == 0 || vDeltaAuxBR == 0) {
-        mMixPrev.vAuxBR = param.vAuxBR;
+    if (rParam.vAuxBR == 0 || vDeltaAuxBR == 0) {
+        mMixPrev.vAuxBR = rParam.vAuxBR;
     } else {
         mMixPrev.vAuxBR += vDeltaAuxBR * AX_SAMPLES_PER_FRAME;
     }
 
-    if (param.vAuxBS == 0 || vDeltaAuxBS == 0) {
-        mMixPrev.vAuxBS = param.vAuxBS;
+    if (rParam.vAuxBS == 0 || vDeltaAuxBS == 0) {
+        mMixPrev.vAuxBS = rParam.vAuxBS;
     } else {
         mMixPrev.vAuxBS += vDeltaAuxBS * AX_SAMPLES_PER_FRAME;
     }
 
-    if (param.vAuxCL == 0 || vDeltaAuxCL == 0) {
-        mMixPrev.vAuxCL = param.vAuxCL;
+    if (rParam.vAuxCL == 0 || vDeltaAuxCL == 0) {
+        mMixPrev.vAuxCL = rParam.vAuxCL;
     } else {
         mMixPrev.vAuxCL += vDeltaAuxCL * AX_SAMPLES_PER_FRAME;
     }
 
-    if (param.vAuxCR == 0 || vDeltaAuxCR == 0) {
-        mMixPrev.vAuxCR = param.vAuxCR;
+    if (rParam.vAuxCR == 0 || vDeltaAuxCR == 0) {
+        mMixPrev.vAuxCR = rParam.vAuxCR;
     } else {
         mMixPrev.vAuxCR += vDeltaAuxCR * AX_SAMPLES_PER_FRAME;
     }
 
-    if (param.vAuxCS == 0 || vDeltaAuxCS == 0) {
-        mMixPrev.vAuxCS = param.vAuxCS;
+    if (rParam.vAuxCS == 0 || vDeltaAuxCS == 0) {
+        mMixPrev.vAuxCS = rParam.vAuxCS;
     } else {
         mMixPrev.vAuxCS += vDeltaAuxCS * AX_SAMPLES_PER_FRAME;
     }
@@ -602,31 +636,31 @@ bool AxVoice::SetMix(const MixParam& param) {
     return needUpdate;
 }
 
-void AxVoice::SetRmtMix(const RemoteMixParam& param) {
+void AxVoice::SetRmtMix(const RemoteMixParam& rParam) {
     AXPBRMTMIX mix;
 
-    mix.vMain0 = param.vMain0;
+    mix.vMain0 = rParam.vMain0;
     mix.vDeltaMain0 = 0;
 
-    mix.vAux0 = param.vAux0;
+    mix.vAux0 = rParam.vAux0;
     mix.vDeltaAux0 = 0;
 
-    mix.vMain1 = param.vMain1;
+    mix.vMain1 = rParam.vMain1;
     mix.vDeltaMain1 = 0;
 
-    mix.vAux1 = param.vAux1;
+    mix.vAux1 = rParam.vAux1;
     mix.vDeltaAux1 = 0;
 
-    mix.vMain2 = param.vMain2;
+    mix.vMain2 = rParam.vMain2;
     mix.vDeltaMain2 = 0;
 
-    mix.vAux2 = param.vAux2;
+    mix.vAux2 = rParam.vAux2;
     mix.vDeltaAux2 = 0;
 
-    mix.vMain3 = param.vMain3;
+    mix.vMain3 = rParam.vMain3;
     mix.vDeltaMain3 = 0;
 
-    mix.vAux3 = param.vAux3;
+    mix.vAux3 = rParam.vAux3;
     mix.vDeltaAux3 = 0;
 
     mVpb.SetVoiceRmtMix(mix);
@@ -729,18 +763,18 @@ void AxVoice::SetRemoteFilter(u8 filter) {
     }
 }
 
-void AxVoice::CalcOffsetAdpcmParam(u16* outPredScale, u16* outYn1, u16* outYn2,
-                                   u32 offset, const void* data,
-                                   const AdpcmParam& param) {
+void AxVoice::CalcOffsetAdpcmParam(u16* pPredScale, u16* pYN1, u16* pYN2,
+                                   u32 offset, const void* pData,
+                                   const AdpcmParam& rParam) {
     AXPBADPCM adpcm;
-    std::memcpy(adpcm.a, param.coef, sizeof(adpcm.a));
-    adpcm.gain = param.gain;
-    adpcm.pred_scale = param.pred_scale;
-    adpcm.yn1 = param.yn1;
-    adpcm.yn2 = param.yn2;
+    std::memcpy(adpcm.a, rParam.coef, sizeof(adpcm.a));
+    adpcm.gain = rParam.gain;
+    adpcm.pred_scale = rParam.pred_scale;
+    adpcm.yn1 = rParam.yn1;
+    adpcm.yn2 = rParam.yn2;
 
-    u32 addr = GetDspAddressBySample(data, 0, FORMAT_ADPCM);
-    u32 end = GetDspAddressBySample(data, offset, FORMAT_ADPCM);
+    u32 addr = GetDspAddressBySample(pData, 0, FORMAT_ADPCM);
+    u32 end = GetDspAddressBySample(pData, offset, FORMAT_ADPCM);
 
     while (addr < end) {
         if (addr % AX_ADPCM_NIBBLES_PER_FRAME == 0) {
@@ -763,9 +797,9 @@ void AxVoice::CalcOffsetAdpcmParam(u16* outPredScale, u16* outYn1, u16* outYn2,
         addr++;
     }
 
-    *outPredScale = adpcm.pred_scale;
-    *outYn1 = adpcm.yn1;
-    *outYn2 = adpcm.yn2;
+    *pPredScale = adpcm.pred_scale;
+    *pYN1 = adpcm.yn1;
+    *pYN2 = adpcm.yn2;
 }
 
 void AxVoiceParamBlock::Sync() {
@@ -824,8 +858,8 @@ AxVoiceParamBlock::AxVoiceParamBlock()
     mVePrev.currentDelta = 0;
 }
 
-void AxVoiceParamBlock::Set(AXVPB* vpb) {
-    mVpb = vpb;
+void AxVoiceParamBlock::Set(AXVPB* pVpb) {
+    mVpb = pVpb;
     mSync = 0;
     mFirstVeUpdate = true;
     mVolume = 32768;
@@ -864,119 +898,119 @@ void AxVoiceParamBlock::SetVoiceVe(u16 volume, u16 initVolume) {
     mVolume = volume;
 }
 
-void AxVoiceParamBlock::SetVoiceMix(const AXPBMIX& mix, bool syncNow) {
+void AxVoiceParamBlock::SetVoiceMix(const AXPBMIX& rMix, bool syncNow) {
     ut::AutoInterruptLock lock;
 
     if (!IsAvailable()) {
         return;
     }
 
-    const u16* src = reinterpret_cast<const u16*>(&mix);
-    u16* dst = reinterpret_cast<u16*>(&mVpb->pb.mix);
+    const u16* pSrc = reinterpret_cast<const u16*>(&rMix);
+    u16* pDst = reinterpret_cast<u16*>(&mVpb->pb.mix);
 
     u32 ctrl = 0;
 
     // vL
-    if ((*dst++ = *src++) != 0) {
+    if ((*pDst++ = *pSrc++) != 0) {
         ctrl |= AX_MIXER_CTRL_L;
     }
     // vDeltaL
-    if ((*dst++ = *src++) != 0) {
+    if ((*pDst++ = *pSrc++) != 0) {
         ctrl |= AX_MIXER_CTRL_DELTA | AX_MIXER_CTRL_L;
     }
     // vR
-    if ((*dst++ = *src++) != 0) {
+    if ((*pDst++ = *pSrc++) != 0) {
         ctrl |= AX_MIXER_CTRL_R;
     }
     // vDeltaR
-    if ((*dst++ = *src++) != 0) {
+    if ((*pDst++ = *pSrc++) != 0) {
         ctrl |= AX_MIXER_CTRL_DELTA | AX_MIXER_CTRL_R;
     }
 
     // vAuxAL
-    if ((*dst++ = *src++) != 0) {
+    if ((*pDst++ = *pSrc++) != 0) {
         ctrl |= AX_MIXER_CTRL_AL;
     }
     // vDeltaAuxAL
-    if ((*dst++ = *src++) != 0) {
+    if ((*pDst++ = *pSrc++) != 0) {
         ctrl |= AX_MIXER_CTRL_DELTA_A | AX_MIXER_CTRL_AL;
     }
     // vAuxAR
-    if ((*dst++ = *src++) != 0) {
+    if ((*pDst++ = *pSrc++) != 0) {
         ctrl |= AX_MIXER_CTRL_AR;
     }
     // vDeltaAuxAR
-    if ((*dst++ = *src++) != 0) {
+    if ((*pDst++ = *pSrc++) != 0) {
         ctrl |= AX_MIXER_CTRL_DELTA_A | AX_MIXER_CTRL_AR;
     }
 
     // vAuxBL
-    if ((*dst++ = *src++) != 0) {
+    if ((*pDst++ = *pSrc++) != 0) {
         ctrl |= AX_MIXER_CTRL_BL;
     }
     // vDeltaAuxBL
-    if ((*dst++ = *src++) != 0) {
+    if ((*pDst++ = *pSrc++) != 0) {
         ctrl |= AX_MIXER_CTRL_DELTA_B | AX_MIXER_CTRL_BL;
     }
     // vAuxBR
-    if ((*dst++ = *src++) != 0) {
+    if ((*pDst++ = *pSrc++) != 0) {
         ctrl |= AX_MIXER_CTRL_BR;
     }
     // vDeltaAuxBR
-    if ((*dst++ = *src++) != 0) {
+    if ((*pDst++ = *pSrc++) != 0) {
         ctrl |= AX_MIXER_CTRL_DELTA_B | AX_MIXER_CTRL_BR;
     }
 
     // vAuxCL
-    if ((*dst++ = *src++) != 0) {
+    if ((*pDst++ = *pSrc++) != 0) {
         ctrl |= AX_MIXER_CTRL_CL;
     }
     // vDeltaAuxCL
-    if ((*dst++ = *src++) != 0) {
+    if ((*pDst++ = *pSrc++) != 0) {
         ctrl |= AX_MIXER_CTRL_DELTA_C | AX_MIXER_CTRL_CL;
     }
     // vAuxCR
-    if ((*dst++ = *src++) != 0) {
+    if ((*pDst++ = *pSrc++) != 0) {
         ctrl |= AX_MIXER_CTRL_CR;
     }
     // vDeltaAuxCR
-    if ((*dst++ = *src++) != 0) {
+    if ((*pDst++ = *pSrc++) != 0) {
         ctrl |= AX_MIXER_CTRL_DELTA_C | AX_MIXER_CTRL_CR;
     }
 
     // vS
-    if ((*dst++ = *src++) != 0) {
+    if ((*pDst++ = *pSrc++) != 0) {
         ctrl |= AX_MIXER_CTRL_S;
     }
     // vDeltaS
-    if ((*dst++ = *src++) != 0) {
+    if ((*pDst++ = *pSrc++) != 0) {
         ctrl |= AX_MIXER_CTRL_DELTA_S | AX_MIXER_CTRL_S;
     }
 
     // vAuxAS
-    if ((*dst++ = *src++) != 0) {
+    if ((*pDst++ = *pSrc++) != 0) {
         ctrl |= AX_MIXER_CTRL_AS;
     }
     // vDeltaAuxAS
-    if ((*dst++ = *src++) != 0) {
+    if ((*pDst++ = *pSrc++) != 0) {
         ctrl |= AX_MIXER_CTRL_DELTA_AS | AX_MIXER_CTRL_AS;
     }
 
     // vAuxBS
-    if ((*dst++ = *src++) != 0) {
+    if ((*pDst++ = *pSrc++) != 0) {
         ctrl |= AX_MIXER_CTRL_BS;
     }
     // vDeltaAuxBS
-    if ((*dst++ = *src++) != 0) {
+    if ((*pDst++ = *pSrc++) != 0) {
         ctrl |= AX_MIXER_CTRL_DELTA_BS | AX_MIXER_CTRL_BS;
     }
 
     // vAuxCS
-    if ((*dst++ = *src++) != 0) {
+    if ((*pDst++ = *pSrc++) != 0) {
         ctrl |= AX_MIXER_CTRL_CS;
     }
     // vDeltaAuxCS
-    if ((*dst++ = *src++) != 0) {
+    if ((*pDst++ = *pSrc++) != 0) {
         ctrl |= AX_MIXER_CTRL_DELTA_CS | AX_MIXER_CTRL_CS;
     }
 
@@ -1033,14 +1067,14 @@ void AxVoiceParamBlock::SetVoiceEndAddr(u32 addr) {
     }
 }
 
-void AxVoiceParamBlock::SetVoiceAdpcm(const AXPBADPCM& adpcm) {
+void AxVoiceParamBlock::SetVoiceAdpcm(const AXPBADPCM& rAdpcm) {
     ut::AutoInterruptLock lock;
 
     if (!IsAvailable()) {
         return;
     }
 
-    std::memcpy(&mVpb->pb.adpcm, &adpcm, sizeof(AXPBADPCM));
+    std::memcpy(&mVpb->pb.adpcm, &rAdpcm, sizeof(AXPBADPCM));
     mSync |= AX_PBSYNC_ADPCM;
 }
 
@@ -1052,37 +1086,46 @@ void AxVoiceParamBlock::SetVoiceSrcType(u32 type) {
     }
 
     switch (type) {
-    case AxVoice::SRC_NONE:
+    case AxVoice::SRC_NONE: {
         mVpb->pb.srcSelect = 2;
         break;
-    case AxVoice::SRC_LINEAR:
+    }
+
+    case AxVoice::SRC_LINEAR: {
         mVpb->pb.srcSelect = 1;
         break;
-    case AxVoice::SRC_4TAP_8K:
+    }
+
+    case AxVoice::SRC_4TAP_8K: {
         mVpb->pb.srcSelect = 0;
         mVpb->pb.coefSelect = 0;
         break;
-    case AxVoice::SRC_4TAP_12K:
+    }
+
+    case AxVoice::SRC_4TAP_12K: {
         mVpb->pb.srcSelect = 0;
         mVpb->pb.coefSelect = 1;
         break;
-    case AxVoice::SRC_4TAP_16K:
+    }
+
+    case AxVoice::SRC_4TAP_16K: {
         mVpb->pb.srcSelect = 0;
         mVpb->pb.coefSelect = 2;
         break;
+    }
     }
 
     mSync |= AX_PBSYNC_SELECT;
 }
 
-void AxVoiceParamBlock::SetVoiceSrc(const AXPBSRC& src) {
+void AxVoiceParamBlock::SetVoiceSrc(const AXPBSRC& rSrc) {
     ut::AutoInterruptLock lock;
 
     if (!IsAvailable()) {
         return;
     }
 
-    std::memcpy(&mVpb->pb.src, &src, sizeof(AXPBSRC));
+    std::memcpy(&mVpb->pb.src, &rSrc, sizeof(AXPBSRC));
     mSync &= ~AX_PBSYNC_SRC_RATIO;
     mSync |= AX_PBSYNC_SRC;
 }
@@ -1103,25 +1146,25 @@ void AxVoiceParamBlock::SetVoiceSrcRatio(f32 ratio) {
     }
 }
 
-void AxVoiceParamBlock::SetVoiceAdpcmLoop(const AXPBADPCMLOOP& loop) {
+void AxVoiceParamBlock::SetVoiceAdpcmLoop(const AXPBADPCMLOOP& rLoop) {
     ut::AutoInterruptLock lock;
 
     if (!IsAvailable()) {
         return;
     }
 
-    std::memcpy(&mVpb->pb.adpcmLoop, &loop, sizeof(AXPBADPCMLOOP));
+    std::memcpy(&mVpb->pb.adpcmLoop, &rLoop, sizeof(AXPBADPCMLOOP));
     mSync |= AX_PBSYNC_ADPCM_LOOP;
 }
 
-void AxVoiceParamBlock::SetVoiceLpf(const AXPBLPF& lpf) {
+void AxVoiceParamBlock::SetVoiceLpf(const AXPBLPF& rLpf) {
     ut::AutoInterruptLock lock;
 
     if (!IsAvailable()) {
         return;
     }
 
-    std::memcpy(&mVpb->pb.lpf, &lpf, sizeof(AXPBLPF));
+    std::memcpy(&mVpb->pb.lpf, &rLpf, sizeof(AXPBLPF));
     mSync |= AX_PBSYNC_LPF;
 }
 
@@ -1148,83 +1191,83 @@ void AxVoiceParamBlock::SetVoiceRmtOn(u16 on) {
     mSync |= AX_PBSYNC_REMOTE;
 }
 
-void AxVoiceParamBlock::SetVoiceRmtMix(const AXPBRMTMIX& mix) {
+void AxVoiceParamBlock::SetVoiceRmtMix(const AXPBRMTMIX& rMix) {
     ut::AutoInterruptLock lock;
 
     if (!IsAvailable()) {
         return;
     }
 
-    u16* dst = reinterpret_cast<u16*>(&mVpb->pb.rmtMix);
-    const u16* src = reinterpret_cast<const u16*>(&mix);
+    u16* pDst = reinterpret_cast<u16*>(&mVpb->pb.rmtMix);
+    const u16* pSrc = reinterpret_cast<const u16*>(&rMix);
 
     u16 ctrl = 0;
 
     // vMain0
-    if ((*dst++ = *src++) != 0) {
+    if ((*pDst++ = *pSrc++) != 0) {
         ctrl |= AX_MIXER_CTRL_RMT_M0;
     }
     // vDeltaMain0
-    if ((*dst++ = *src++) != 0) {
+    if ((*pDst++ = *pSrc++) != 0) {
         ctrl |= AX_MIXER_CTRL_RMT_DELTA_M0;
     }
     // vAux0
-    if ((*dst++ = *src++) != 0) {
+    if ((*pDst++ = *pSrc++) != 0) {
         ctrl |= AX_MIXER_CTRL_RMT_A0;
     }
     // vDeltaAux0
-    if ((*dst++ = *src++) != 0) {
+    if ((*pDst++ = *pSrc++) != 0) {
         ctrl |= AX_MIXER_CTRL_RMT_DELTA_A0;
     }
 
     // vMain1
-    if ((*dst++ = *src++) != 0) {
+    if ((*pDst++ = *pSrc++) != 0) {
         ctrl |= AX_MIXER_CTRL_RMT_M1;
     }
     // vDeltaMain1
-    if ((*dst++ = *src++) != 0) {
+    if ((*pDst++ = *pSrc++) != 0) {
         ctrl |= AX_MIXER_CTRL_RMT_DELTA_M1;
     }
     // vAux1
-    if ((*dst++ = *src++) != 0) {
+    if ((*pDst++ = *pSrc++) != 0) {
         ctrl |= AX_MIXER_CTRL_RMT_A1;
     }
     // vDeltaAux1
-    if ((*dst++ = *src++) != 0) {
+    if ((*pDst++ = *pSrc++) != 0) {
         ctrl |= AX_MIXER_CTRL_RMT_DELTA_A1;
     }
 
     // vMain2
-    if ((*dst++ = *src++) != 0) {
+    if ((*pDst++ = *pSrc++) != 0) {
         ctrl |= AX_MIXER_CTRL_RMT_M2;
     }
     // vDeltaMain2
-    if ((*dst++ = *src++) != 0) {
+    if ((*pDst++ = *pSrc++) != 0) {
         ctrl |= AX_MIXER_CTRL_RMT_DELTA_M2;
     }
     // vAux2
-    if ((*dst++ = *src++) != 0) {
+    if ((*pDst++ = *pSrc++) != 0) {
         ctrl |= AX_MIXER_CTRL_RMT_A2;
     }
     // vDeltaAux2
-    if ((*dst++ = *src++) != 0) {
+    if ((*pDst++ = *pSrc++) != 0) {
         ctrl |= AX_MIXER_CTRL_RMT_DELTA_A2;
     }
 
     // vMain3
-    if ((*dst++ = *src++) != 0) {
+    if ((*pDst++ = *pSrc++) != 0) {
         ctrl |= AX_MIXER_CTRL_RMT_M3;
     }
     // vDeltaMain3
-    if ((*dst++ = *src++) != 0) {
+    if ((*pDst++ = *pSrc++) != 0) {
         ctrl |= AX_MIXER_CTRL_RMT_DELTA_M3;
     }
     // vAux3
-    if ((*dst++ = *src++) != 0) {
+    if ((*pDst++ = *pSrc++) != 0) {
         ctrl |= AX_MIXER_CTRL_RMT_A3;
     }
     // vDeltaAux3
-    if ((*dst++ = *src++) != 0) {
+    if ((*pDst++ = *pSrc++) != 0) {
         ctrl |= AX_MIXER_CTRL_RMT_DELTA_A3;
     }
 
@@ -1232,14 +1275,14 @@ void AxVoiceParamBlock::SetVoiceRmtMix(const AXPBRMTMIX& mix) {
     mSync |= AX_PBSYNC_RMT_MIXER_CTRL | AX_PBSYNC_RMTMIX;
 }
 
-void AxVoiceParamBlock::SetVoiceRmtIIR(const AXPBRMTIIR& iir) {
+void AxVoiceParamBlock::SetVoiceRmtIIR(const AXPBRMTIIR& rIIR) {
     ut::AutoInterruptLock lock;
 
     if (!IsAvailable()) {
         return;
     }
 
-    std::memcpy(&mVpb->pb.rmtIIR, &iir, sizeof(AXPBRMTIIR));
+    std::memcpy(&mVpb->pb.rmtIIR, &rIIR, sizeof(AXPBRMTIIR));
     mSync |= AX_PBSYNC_RMTIIR;
 }
 

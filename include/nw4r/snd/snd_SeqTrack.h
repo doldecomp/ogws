@@ -1,8 +1,10 @@
 #ifndef NW4R_SND_SEQ_TRACK_H
 #define NW4R_SND_SEQ_TRACK_H
+#include <nw4r/types_nw4r.h>
+
 #include <nw4r/snd/snd_Channel.h>
 #include <nw4r/snd/snd_Lfo.h>
-#include <nw4r/types_nw4r.h>
+
 #include <revolution/WPAD.h>
 
 namespace nw4r {

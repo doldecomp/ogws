@@ -224,8 +224,8 @@ namespace nw4r
 			~Emitter();
 			
 			u16 RetireParticleAll();
-			bool SendClosing();
-			void DestroyFunc();
+			virtual bool SendClosing();
+			virtual void DestroyFunc();
 			bool Closing(ParticleManager *);
 			bool RetireParticleManager(ParticleManager *);
 			u16 RetireParticleManagerAll();

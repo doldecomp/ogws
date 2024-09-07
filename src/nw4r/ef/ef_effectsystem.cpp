@@ -15,6 +15,7 @@ namespace
 
 inline void * operator new[](size_t size, void *p)
 {
+#pragma unused(size)
 	return p;
 }
 

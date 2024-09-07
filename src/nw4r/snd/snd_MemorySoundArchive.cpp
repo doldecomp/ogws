@@ -78,19 +78,18 @@ void MemorySoundArchive::Shutdown() {
 }
 
 const void* MemorySoundArchive::detail_GetFileAddress(u32 id) const {
-    SoundArchive::FilePos filePos;
-    if (!detail_ReadFilePos(id, 0, &filePos)) {
+    SoundArchive::FilePos pos;
+    if (!detail_ReadFilePos(id, 0, &pos)) {
         return NULL;
     }
 
     SoundArchive::GroupInfo groupInfo;
-    if (!detail_ReadGroupInfo(filePos.groupId, &groupInfo)) {
+    if (!detail_ReadGroupInfo(pos.groupId, &groupInfo)) {
         return NULL;
     }
 
-    SoundArchive::GroupItemInfo groupItemInfo;
-    if (!detail_ReadGroupItemInfo(filePos.groupId, filePos.index,
-                                  &groupItemInfo)) {
+    SoundArchive::GroupItemInfo itemInfo;
+    if (!detail_ReadGroupItemInfo(pos.groupId, pos.index, &itemInfo)) {
         return NULL;
     }
 
@@ -98,23 +97,22 @@ const void* MemorySoundArchive::detail_GetFileAddress(u32 id) const {
         return NULL;
     }
 
-    return ut::AddOffsetToPtr(mData, groupInfo.offset + groupItemInfo.offset);
+    return ut::AddOffsetToPtr(mData, groupInfo.offset + itemInfo.offset);
 }
 
 const void* MemorySoundArchive::detail_GetWaveDataFileAddress(u32 id) const {
-    SoundArchive::FilePos filePos;
-    if (!detail_ReadFilePos(id, 0, &filePos)) {
+    SoundArchive::FilePos pos;
+    if (!detail_ReadFilePos(id, 0, &pos)) {
         return NULL;
     }
 
     SoundArchive::GroupInfo groupInfo;
-    if (!detail_ReadGroupInfo(filePos.groupId, &groupInfo)) {
+    if (!detail_ReadGroupInfo(pos.groupId, &groupInfo)) {
         return NULL;
     }
 
-    SoundArchive::GroupItemInfo groupItemInfo;
-    if (!detail_ReadGroupItemInfo(filePos.groupId, filePos.index,
-                                  &groupItemInfo)) {
+    SoundArchive::GroupItemInfo itemInfo;
+    if (!detail_ReadGroupItemInfo(pos.groupId, pos.index, &itemInfo)) {
         return NULL;
     }
 
@@ -123,7 +121,7 @@ const void* MemorySoundArchive::detail_GetWaveDataFileAddress(u32 id) const {
     }
 
     return ut::AddOffsetToPtr(mData, groupInfo.waveDataOffset +
-                                         groupItemInfo.waveDataOffset);
+                                         itemInfo.waveDataOffset);
 }
 
 MemorySoundArchive::MemoryFileStream::MemoryFileStream(const void* pBuffer,
@@ -148,6 +146,12 @@ ut::FileStream* MemorySoundArchive::OpenExtStream(void* pBuffer, int size,
                                                   const char* pExtPath,
                                                   u32 offset,
                                                   u32 length) const {
+#pragma unused(pBuffer)
+#pragma unused(size)
+#pragma unused(pExtPath)
+#pragma unused(offset)
+#pragma unused(length)
+
     return NULL;
 }
 
@@ -170,20 +174,24 @@ s32 MemorySoundArchive::MemoryFileStream::Read(void* pDst, u32 size) {
 
 void MemorySoundArchive::MemoryFileStream::Seek(s32 offset, u32 origin) {
     switch (origin) {
-    case SEEK_BEG:
+    case SEEK_BEG: {
         mOffset = offset;
         break;
+    }
 
-    case SEEK_CUR:
+    case SEEK_CUR: {
         mOffset += offset;
         break;
+    }
 
-    case SEEK_END:
+    case SEEK_END: {
         mOffset = mSize - offset;
         break;
+    }
 
-    default:
+    default: {
         return;
+    }
     }
 }
 

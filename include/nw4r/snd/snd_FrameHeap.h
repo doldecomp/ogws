@@ -1,7 +1,9 @@
 #ifndef NW4R_SND_FRAME_HEAP_H
 #define NW4R_SND_FRAME_HEAP_H
 #include <nw4r/types_nw4r.h>
+
 #include <nw4r/ut.h>
+
 #include <revolution/MEM.h>
 
 namespace nw4r {

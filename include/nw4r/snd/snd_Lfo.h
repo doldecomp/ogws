@@ -28,8 +28,8 @@ public:
     LfoParam& GetParam() {
         return mParam;
     }
-    void SetParam(const LfoParam& param) {
-        mParam = param;
+    void SetParam(const LfoParam& rParam) {
+        mParam = rParam;
     }
 
     void Reset();
