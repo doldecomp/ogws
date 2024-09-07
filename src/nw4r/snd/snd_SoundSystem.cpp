@@ -8,8 +8,7 @@
 
 namespace {
 
-const char* NW4R_SND_Version_ =
-    "<< NW4R    - SND \tfinal   build: Jun  8 2007 11:17:15 (0x4199_60831) >>";
+NW4R_LIB_VERSION(SND, "Jun  8 2007", "11:17:15", "0x4199_60831");
 
 static bool sInitialized = false;
 

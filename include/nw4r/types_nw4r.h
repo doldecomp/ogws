@@ -13,6 +13,11 @@
 #define NW4R_BYTEORDER_NATIVE NW4R_BYTEORDER_BIG
 #endif
 
+#define NW4R_LIB_VERSION(NAME, ORIGINAL_DATE, ORIGINAL_TIME, ORIGINAL_CWCC)    \
+    const char* NW4R_##NAME##_Version_ =                                       \
+        "<< NW4R    - " #NAME " \tfinal   build: " ORIGINAL_DATE               \
+        " " ORIGINAL_TIME " (" ORIGINAL_CWCC ") >>"
+
 namespace nw4r {
 namespace ut {
 namespace detail {
