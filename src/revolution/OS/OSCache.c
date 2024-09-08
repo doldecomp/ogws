@@ -293,15 +293,15 @@ do_invalidate:
 }
 
 asm void LCLoadBlocks(register void* dst, register const void* src,
-                      register u32 len) {
+                      register u32 blocks) {
     // clang-format off
     nofralloc
 
-    rlwinm r6, len, 30, 27, 31
+    rlwinm r6, blocks, 30, 27, 31
     clrlwi src, src, 3
     or r6, r6, src
     mtspr DMA_U, r6
-    rlwinm r6, len, 2, 28, 29
+    rlwinm r6, blocks, 2, 28, 29
     or r6, r6, dst
     ori r6, r6, 0x12
     mtspr DMA_L, r6
@@ -311,15 +311,15 @@ asm void LCLoadBlocks(register void* dst, register const void* src,
 }
 
 asm void LCStoreBlocks(register void* dst, register const void* src,
-                       register u32 len){
+                       register u32 blocks){
     // clang-format off
     nofralloc
 
-    rlwinm r6, len, 30, 27, 31
+    rlwinm r6, blocks, 30, 27, 31
     clrlwi dst, dst, 3
     or r6, r6, dst
     mtspr DMA_U, r6
-    rlwinm r6, len, 2, 28, 29
+    rlwinm r6, blocks, 2, 28, 29
     or r6, r6, src
     ori r6, r6, 0x2
     mtspr DMA_L, r6

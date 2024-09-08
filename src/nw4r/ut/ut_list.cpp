@@ -5,126 +5,131 @@
 namespace nw4r {
 namespace ut {
 
-#define OBJ_TO_NODE(LIST, OBJECT)                                              \
-    reinterpret_cast<Node*>((char*)OBJECT + LIST->offset)
+#define OBJ_TO_LINK(LIST, OBJECT)                                              \
+    reinterpret_cast<Link*>((char*)OBJECT + LIST->offset)
 
 void List_Init(List* pList, u16 offset) {
-    pList->first = NULL;
-    pList->last = NULL;
-    pList->size = NULL;
+    pList->headObject = NULL;
+    pList->tailObject = NULL;
+    pList->numObjects = 0;
     pList->offset = offset;
 }
 
 static void SetFirstObject(List* pList, void* pObject) {
-    Node* node = OBJ_TO_NODE(pList, pObject);
-    node->next = NULL;
-    node->prev = NULL;
+    Link* pLink = OBJ_TO_LINK(pList, pObject);
+    pLink->nextObject = NULL;
+    pLink->prevObject = NULL;
 
-    pList->first = pObject;
-    pList->last = pObject;
-
-    pList->size++;
+    pList->headObject = pObject;
+    pList->tailObject = pObject;
+    pList->numObjects++;
 }
 
 void List_Append(List* pList, void* pObject) {
-    if (pList->first == NULL) {
+    if (pList->headObject == NULL) {
         SetFirstObject(pList, pObject);
-    } else {
-        // Old tail <- New tail relationship
-        Node* node = OBJ_TO_NODE(pList, pObject);
-        node->prev = pList->last;
-        node->next = NULL;
-
-        // Old tail -> New tail relationship
-        OBJ_TO_NODE(pList, pList->last)->next = pObject;
-        pList->last = pObject;
-
-        pList->size++;
+        return;
     }
+
+    // Old tail <- New tail relationship
+    Link* pLink = OBJ_TO_LINK(pList, pObject);
+    pLink->prevObject = pList->tailObject;
+    pLink->nextObject = NULL;
+
+    // Old tail -> New tail relationship
+    OBJ_TO_LINK(pList, pList->tailObject)->nextObject = pObject;
+    pList->tailObject = pObject;
+
+    pList->numObjects++;
 }
 
 void List_Prepend(List* pList, void* pObject) {
-    if (pList->first == NULL) {
+    if (pList->headObject == NULL) {
         SetFirstObject(pList, pObject);
-    } else {
-        // New head -> Old head relationship
-        Node* node = OBJ_TO_NODE(pList, pObject);
-        node->prev = NULL;
-        node->next = pList->first;
-
-        // New head <- Old head relationship
-        OBJ_TO_NODE(pList, pList->first)->prev = pObject;
-        pList->first = pObject;
-
-        pList->size++;
+        return;
     }
+
+    // New head -> Old head relationship
+    Link* pLink = OBJ_TO_LINK(pList, pObject);
+    pLink->prevObject = NULL;
+    pLink->nextObject = pList->headObject;
+
+    // New head <- Old head relationship
+    OBJ_TO_LINK(pList, pList->headObject)->prevObject = pObject;
+    pList->headObject = pObject;
+
+    pList->numObjects++;
 }
 
-void List_Insert(List* pList, void* pNext, void* pObject) {
-    if (pNext == NULL) {
+void List_Insert(List* pList, void* pTarget, void* pObject) {
+    if (pTarget == NULL) {
         List_Append(pList, pObject);
-    } else if (pNext == pList->first) {
-        List_Prepend(pList, pObject);
-    } else {
-        Node* nextNode = OBJ_TO_NODE(pList, pNext);
-        Node* prevNode = OBJ_TO_NODE(pList, nextNode->prev);
-        Node* newNode = OBJ_TO_NODE(pList, pObject);
-
-        // prevNode <- newNode
-        newNode->prev = nextNode->prev;
-        // prevNode <- newNode -> nextNode
-        newNode->next = pNext;
-        // prevNode <-> newNode -> nextNode
-        prevNode->next = pObject;
-        // prevNode <-> newNode <-> nextNode
-        OBJ_TO_NODE(pList, pNext)->prev = pObject;
-
-        pList->size++;
+        return;
     }
+
+    if (pTarget == pList->headObject) {
+        List_Prepend(pList, pObject);
+        return;
+    }
+
+    Link* pLink = OBJ_TO_LINK(pList, pObject);
+    void* pPrev = OBJ_TO_LINK(pList, pTarget)->prevObject;
+    Link* pPrevLink = OBJ_TO_LINK(pList, pPrev);
+
+    // pPrev <- pObject
+    pLink->prevObject = pPrev;
+    // pPrev <- pObject -> pTarget
+    pLink->nextObject = pTarget;
+    // pPrev <-> pObject -> pTarget
+    pPrevLink->nextObject = pObject;
+    // pPrev <-> pObject <-> pTarget
+    OBJ_TO_LINK(pList, pTarget)->prevObject = pObject;
+
+    pList->numObjects++;
 }
 
 void List_Remove(List* pList, void* pObject) {
-    Node* node = OBJ_TO_NODE(pList, pObject);
+    Link* pLink = OBJ_TO_LINK(pList, pObject);
 
     // Fix previous node relationship
-    if (node->prev == NULL) {
-        pList->first = OBJ_TO_NODE(pList, pObject)->next;
+    if (pLink->prevObject == NULL) {
+        pList->headObject = OBJ_TO_LINK(pList, pObject)->nextObject;
     } else {
-        OBJ_TO_NODE(pList, node->prev)->next = node->next;
+        OBJ_TO_LINK(pList, pLink->prevObject)->nextObject = pLink->nextObject;
     }
 
     // Fix next node relationship
-    if (node->next == NULL) {
-        pList->last = node->prev;
+    if (pLink->nextObject == NULL) {
+        pList->tailObject = pLink->prevObject;
     } else {
-        OBJ_TO_NODE(pList, node->next)->prev = node->prev;
+        OBJ_TO_LINK(pList, pLink->nextObject)->prevObject = pLink->prevObject;
     }
 
-    node->prev = NULL;
-    node->next = NULL;
+    pLink->prevObject = NULL;
+    pLink->nextObject = NULL;
 
-    pList->size--;
+    pList->numObjects--;
 }
 
 void* List_GetNext(const List* pList, const void* pObject) {
     if (pObject == NULL) {
-        return pList->first;
+        return pList->headObject;
     }
 
-    return OBJ_TO_NODE(pList, pObject)->next;
+    return OBJ_TO_LINK(pList, pObject)->nextObject;
 }
 
 void* List_GetPrev(const List* pList, const void* pObject) {
     if (pObject == NULL) {
-        return pList->last;
+        return pList->tailObject;
     }
 
-    return OBJ_TO_NODE(pList, pObject)->prev;
+    return OBJ_TO_LINK(pList, pObject)->prevObject;
 }
 
 void* List_GetNth(const List* pList, u16 n) {
     int i;
-    void* pIt;
+    void* pIt = NULL;
 
     for (i = 0, pIt = NULL; pIt = List_GetNext(pList, pIt); i++) {
         if (n == i) {

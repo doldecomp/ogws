@@ -32,19 +32,19 @@ int ResFontBase::GetDescent() const {
 }
 
 int ResFontBase::GetBaselinePos() const {
-    return mFontInfo->fontGlyph->baselinePos;
+    return mFontInfo->pGlyph->baselinePos;
 }
 
 int ResFontBase::GetCellHeight() const {
-    return mFontInfo->fontGlyph->cellHeight;
+    return mFontInfo->pGlyph->cellHeight;
 }
 
 int ResFontBase::GetCellWidth() const {
-    return mFontInfo->fontGlyph->cellWidth;
+    return mFontInfo->pGlyph->cellWidth;
 }
 
 int ResFontBase::GetMaxCharWidth() const {
-    return mFontInfo->fontGlyph->maxCharWidth;
+    return mFontInfo->pGlyph->maxCharWidth;
 }
 
 Font::Type ResFontBase::GetType() const {
@@ -52,11 +52,11 @@ Font::Type ResFontBase::GetType() const {
 }
 
 GXTexFmt ResFontBase::GetTextureFormat() const {
-    return static_cast<GXTexFmt>(mFontInfo->fontGlyph->sheetFormat);
+    return static_cast<GXTexFmt>(mFontInfo->pGlyph->sheetFormat);
 }
 
 int ResFontBase::GetLineFeed() const {
-    return mFontInfo->lineFeed;
+    return mFontInfo->linefeed;
 }
 
 CharWidths ResFontBase::GetDefaultCharWidths() const {
@@ -70,7 +70,7 @@ void ResFontBase::SetDefaultCharWidths(const CharWidths& rWidths) {
 bool ResFontBase::SetAlternateChar(u16 ch) {
     u16 index = FindGlyphIndex(ch);
 
-    if (index != 0xFFFF) {
+    if (index != GLYPH_INDEX_NOT_FOUND) {
         mFontInfo->alterCharIndex = index;
         return true;
     }
@@ -79,7 +79,7 @@ bool ResFontBase::SetAlternateChar(u16 ch) {
 }
 
 void ResFontBase::SetLineFeed(int lf) {
-    mFontInfo->lineFeed = lf;
+    mFontInfo->linefeed = lf;
 }
 
 int ResFontBase::GetCharWidth(u16 ch) const {
@@ -100,46 +100,45 @@ FontEncoding ResFontBase::GetEncoding() const {
 
 u16 ResFontBase::GetGlyphIndex(u16 ch) const {
     u16 index = FindGlyphIndex(ch);
-    return (index != 0xFFFF) ? index : mFontInfo->alterCharIndex;
+    return index != GLYPH_INDEX_NOT_FOUND ? index : mFontInfo->alterCharIndex;
 }
 
 u16 ResFontBase::FindGlyphIndex(u16 ch) const {
-    for (const FontCodeMap* pIt = mFontInfo->fontMap; pIt != NULL;
-         pIt = pIt->next) {
+    for (const FontCodeMap* pIt = mFontInfo->pMap; pIt != NULL;
+         pIt = pIt->pNext) {
 
-        if (pIt->firstChar <= ch && ch <= pIt->lastChar) {
+        if (pIt->ccodeBegin <= ch && ch <= pIt->ccodeEnd) {
             return FindGlyphIndex(pIt, ch);
         }
     }
 
-    return 0xFFFF;
+    return GLYPH_INDEX_NOT_FOUND;
 }
 
 u16 ResFontBase::FindGlyphIndex(const FontCodeMap* pMap, u16 ch) const {
-    struct CMapScanEntry {
-        u16 code;  // at 0x0
-        u16 index; // at 0x2
-    };
-
-    struct CMapInfoScan {
-        u16 num;                 // at 0x0
-        CMapScanEntry entries[]; // at 0x2
-    };
-
-    u16 index = 0xFFFF;
+    u16 index = GLYPH_INDEX_NOT_FOUND;
 
     switch (pMap->mappingMethod) {
-    case FONT_MAPMETHOD_LINEAR: {
-        index = pMap->mapInfo[0] + (ch - pMap->firstChar);
+    case FONT_MAPMETHOD_DIRECT: {
+        index = pMap->mapInfo[0] + (ch - pMap->ccodeBegin);
         break;
     }
 
-    case FONT_MAPMETHOD_ARRAY: {
-        index = pMap->mapInfo[ch - pMap->firstChar];
+    case FONT_MAPMETHOD_TABLE: {
+        index = pMap->mapInfo[ch - pMap->ccodeBegin];
         break;
     }
 
     case FONT_MAPMETHOD_SCAN: {
+        struct CMapScanEntry {
+            u16 ccode; // at 0x0
+            u16 index; // at 0x2
+        };
+        struct CMapInfoScan {
+            u16 num;                 // at 0x0
+            CMapScanEntry entries[]; // at 0x2
+        };
+
         const CMapInfoScan* pInfo =
             reinterpret_cast<const CMapInfoScan*>(pMap->mapInfo);
 
@@ -149,9 +148,9 @@ u16 ResFontBase::FindGlyphIndex(const FontCodeMap* pMap, u16 ch) const {
         while (pStart <= pEnd) {
             const CMapScanEntry* pMiddle = pStart + (pEnd - pStart) / 2;
 
-            if (pMiddle->code < ch) {
+            if (pMiddle->ccode < ch) {
                 pStart = pMiddle + 1;
-            } else if (ch < pMiddle->code) {
+            } else if (ch < pMiddle->ccode) {
                 pEnd = pMiddle - 1;
             } else {
                 return pMiddle->index;
@@ -166,10 +165,10 @@ u16 ResFontBase::FindGlyphIndex(const FontCodeMap* pMap, u16 ch) const {
 }
 
 const CharWidths& ResFontBase::GetCharWidthsFromIndex(u16 index) const {
-    for (const FontWidth* pIt = mFontInfo->fontWidth; pIt != NULL;
-         pIt = pIt->next) {
+    for (const FontWidth* pIt = mFontInfo->pWidth; pIt != NULL;
+         pIt = pIt->pNext) {
 
-        if (pIt->firstChar <= index && index <= pIt->lastChar) {
+        if (pIt->indexBegin <= index && index <= pIt->indexEnd) {
             return GetCharWidthsFromIndex(pIt, index);
         }
     }
@@ -179,11 +178,11 @@ const CharWidths& ResFontBase::GetCharWidthsFromIndex(u16 index) const {
 
 const CharWidths& ResFontBase::GetCharWidthsFromIndex(const FontWidth* pWidth,
                                                       u16 index) const {
-    return pWidth->widthTable[index - pWidth->firstChar];
+    return pWidth->widthTable[index - pWidth->indexBegin];
 }
 
 void ResFontBase::GetGlyphFromIndex(Glyph* pGlyph, u16 index) const {
-    const FontTextureGlyph* pTexGlyph = mFontInfo->fontGlyph;
+    const FontTextureGlyph* pTexGlyph = mFontInfo->pGlyph;
 
     u32 cellsInASheet = pTexGlyph->sheetRow * pTexGlyph->sheetLine;
 
@@ -196,13 +195,13 @@ void ResFontBase::GetGlyphFromIndex(Glyph* pGlyph, u16 index) const {
     u32 pixelX = unitX * (pTexGlyph->cellWidth + 1);
     u32 pixelY = unitY * (pTexGlyph->cellHeight + 1);
 
-    pGlyph->texture =
+    pGlyph->pTexture =
         pTexGlyph->sheetImage + (glyphSheet * pTexGlyph->sheetSize);
 
     pGlyph->widths = GetCharWidthsFromIndex(index);
     pGlyph->height = pTexGlyph->cellHeight;
 
-    pGlyph->format = static_cast<GXTexFmt>(pTexGlyph->sheetFormat);
+    pGlyph->texFormat = static_cast<GXTexFmt>(pTexGlyph->sheetFormat);
 
     pGlyph->texWidth = pTexGlyph->sheetWidth;
     pGlyph->texHeight = pTexGlyph->sheetHeight;

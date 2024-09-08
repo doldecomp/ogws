@@ -122,7 +122,7 @@ namespace nw4r
 			u16 counter = 0;
 			Emitter * emitters[0x400];
 			
-			u16 len = UtlistToArray(&mEmitters.mActive, (void **)emitters, mEmitters.mActive.size);
+			u16 len = UtlistToArray(&mEmitters.mActive, (void **)emitters, mEmitters.mActive.numObjects);
 			
 			for (u16 i = 0; i < len; i++)
 			{
@@ -138,7 +138,7 @@ namespace nw4r
 			u16 counter = 0;
 			Emitter * emitters[0x400];
 			
-			u16 len = UtlistToArray(&mEmitters.mActive, (void **)emitters, mEmitters.mActive.size);
+			u16 len = UtlistToArray(&mEmitters.mActive, (void **)emitters, mEmitters.mActive.numObjects);
 			
 			for (u16 i = 0; i < len; i++)
 			{
@@ -198,7 +198,7 @@ namespace nw4r
 					do
 					{
 						//80010EF0
-						u16 len1 = UtlistToArray(&mEmitters.mActive, (void **)emitters, mEmitters.mActive.size);
+						u16 len1 = UtlistToArray(&mEmitters.mActive, (void **)emitters, mEmitters.mActive.numObjects);
 						
 						for (u16 i = 0; i < len1; i++)
 						{
@@ -220,7 +220,7 @@ namespace nw4r
 						}
 						
 						//80010F8C
-						u16 len2 = UtlistToArray(&mEmitters.mActive, (void **)emitters, mEmitters.mActive.size);
+						u16 len2 = UtlistToArray(&mEmitters.mActive, (void **)emitters, mEmitters.mActive.numObjects);
 						
 						for (u16 i = 0; i < len2; i++) //80010FF8
 						{
@@ -235,7 +235,7 @@ namespace nw4r
 						}
 						
 						//80011004
-						u16 len3 = UtlistToArray(&mEmitters.mActive, (void **)emitters, mEmitters.mActive.size);
+						u16 len3 = UtlistToArray(&mEmitters.mActive, (void **)emitters, mEmitters.mActive.numObjects);
 						
 						for (u16 i = 0; i < len3; i++) //8001103C
 						{
@@ -244,7 +244,7 @@ namespace nw4r
 						}
 						
 						//80011048
-						u16 len = UtlistToArray(&mEmitters.mActive, (void **)emitters, mEmitters.mActive.size);
+						u16 len = UtlistToArray(&mEmitters.mActive, (void **)emitters, mEmitters.mActive.numObjects);
 						
 						for (u16 i = 0; i < len; i++) //80011080
 						{
@@ -314,7 +314,7 @@ namespace nw4r
 		
 		u16 Effect::GetNumEmitter() const
 		{
-			return mEmitters.mActive.size;
+			return mEmitters.mActive.numObjects;
 		}
 		
 		Emitter * Effect::GetEmitter(u16 i)

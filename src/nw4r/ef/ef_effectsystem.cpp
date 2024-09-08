@@ -125,7 +125,7 @@ namespace nw4r
 			Effect * effects[0x400];
 			
 			u16 counter = 0;
-			u16 len = UtlistToArray(&ARR_0x5018[index].mActive, (void **)effects, ARR_0x5018[index].mActive.size);
+			u16 len = UtlistToArray(&ARR_0x5018[index].mActive, (void **)effects, ARR_0x5018[index].mActive.numObjects);
 			
 			for (u16 i = 0; i < len; i++)
 			{
@@ -142,7 +142,7 @@ namespace nw4r
 			Effect * effects[0x400];
 			
 			u16 counter = 0;
-			u16 len = UtlistToArray(&ARR_0x5018[index].mActive, (void **)effects, ARR_0x5018[index].mActive.size);
+			u16 len = UtlistToArray(&ARR_0x5018[index].mActive, (void **)effects, ARR_0x5018[index].mActive.numObjects);
 			
 			for (u16 i = 0; i < len; i++)
 			{
@@ -157,7 +157,7 @@ namespace nw4r
 			Effect * effects[0x400];
 			
 			u16 counter = 0;
-			u16 len = UtlistToArray(&ARR_0x5018[index].mActive, (void **)effects, ARR_0x5018[index].mActive.size);
+			u16 len = UtlistToArray(&ARR_0x5018[index].mActive, (void **)effects, ARR_0x5018[index].mActive.numObjects);
 			
 			for (u16 i = 0; i < len; i++)
 			{
@@ -171,7 +171,7 @@ namespace nw4r
 		{
 			Effect * effects[0x400];
 			
-			u16 len = UtlistToArray(&ARR_0x5018[index].mActive, (void **)effects, ARR_0x5018[index].mActive.size);
+			u16 len = UtlistToArray(&ARR_0x5018[index].mActive, (void **)effects, ARR_0x5018[index].mActive.numObjects);
 			
 			for (u16 i = 0; i < len; i++)
 			{

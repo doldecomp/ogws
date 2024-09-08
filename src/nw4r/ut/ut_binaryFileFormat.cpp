@@ -6,7 +6,7 @@ namespace nw4r {
 namespace ut {
 
 bool IsValidBinaryFile(const BinaryFileHeader* pHeader, u32 signature,
-                       u16 version, u16 dataBlocks) {
+                       u16 version, u16 minBlocks) {
     if (pHeader->signature != signature) {
         return false;
     }
@@ -20,11 +20,11 @@ bool IsValidBinaryFile(const BinaryFileHeader* pHeader, u32 signature,
     }
 
     if (pHeader->fileSize <
-        sizeof(BinaryFileHeader) + (dataBlocks * sizeof(BinaryBlockHeader))) {
+        sizeof(BinaryFileHeader) + (minBlocks * sizeof(BinaryBlockHeader))) {
         return false;
     }
 
-    if (pHeader->dataBlocks < dataBlocks) {
+    if (pHeader->dataBlocks < minBlocks) {
         return false;
     }
 

@@ -5,8 +5,10 @@
 namespace nw4r {
 namespace ut {
 
-template <typename T> T* TextWriterBase<T>::mFormatBuffer;
-template <typename T> u32 TextWriterBase<T>::mFormatBufferSize = 0x100;
+template <typename T> T* TextWriterBase<T>::mFormatBuffer = NULL;
+
+template <typename T>
+u32 TextWriterBase<T>::mFormatBufferSize = DEFAULT_FORMAT_BUFFER_SIZE;
 
 template <typename T>
 TagProcessorBase<T> TextWriterBase<T>::mDefaultTagProcessor;
@@ -69,7 +71,10 @@ bool TextWriterBase<T>::CalcLineRectImpl(Rect* pRect, const T** ppStr,
     const T* pStrEnd = pStrBegin + len;
     bool useLimit = mWidthLimit < NW4R_MATH_FLT_MAX;
 
-    PrintContext<T> context = {this, pStrBegin};
+    PrintContext<T> context = {
+        this,     // writer
+        pStrBegin // str
+    };
 
     f32 x = 0.0f;
     bool charSpace = false;
@@ -222,7 +227,12 @@ template <typename T> f32 TextWriterBase<T>::PrintImpl(const T* pStr, int len) {
     cursorXAdj = orgCursorX - GetCursorX();
     cursorYAdj = orgCursorY - GetCursorY();
 
-    PrintContext<T> context = {this, pStr, cursorX, cursorY};
+    PrintContext<T> context = {
+        this,    // writer
+        pStr,    // str
+        cursorX, // x
+        cursorY  /// y
+    };
 
     CharStrmReader reader = GetFont()->GetCharStrmReader();
     reader.Set(pStr);
@@ -253,14 +263,20 @@ template <typename T> f32 TextWriterBase<T>::PrintImpl(const T* pStr, int len) {
 
             oper = mTagProcessor->Process(ch, &context);
             if (oper == OPERATION_NEXT_LINE) {
-                if (IsDrawFlagSet(0x3, 0x1)) {
+                if (IsDrawFlagSet(DRAWFLAG_MASK_TEXT,
+                                  DRAWFLAG_ALIGN_TEXT_CENTER)) {
+
                     int remain = len - (context.str - pStr);
                     f32 width = CalcLineWidth(context.str, remain);
+
                     f32 offset = (textWidth - width) / 2.0f;
                     SetCursorX(context.x + offset);
-                } else if (IsDrawFlagSet(0x3, 0x2)) {
+                } else if (IsDrawFlagSet(DRAWFLAG_MASK_TEXT,
+                                         DRAWFLAG_ALIGN_TEXT_RIGHT)) {
+
                     int remain = len - (context.str - pStr);
                     f32 width = CalcLineWidth(context.str, remain);
+
                     f32 offset = textWidth - width;
                     SetCursorX(context.x + offset);
                 } else {
@@ -323,7 +339,8 @@ template <typename T> f32 TextWriterBase<T>::PrintImpl(const T* pStr, int len) {
     f32 width = GetCursorX() - context.x;
     textWidth = Max(textWidth, width);
 
-    if (IsDrawFlagSet(0x300, 0x100) || IsDrawFlagSet(0x300, 0x200)) {
+    if (IsDrawFlagSet(DRAWFLAG_MASK_V, DRAWFLAG_ALIGN_V_CENTER) ||
+        IsDrawFlagSet(DRAWFLAG_MASK_V, DRAWFLAG_ALIGN_V_TOP)) {
         SetCursorY(orgCursorY);
     } else {
         MoveCursorY(cursorYAdj);
@@ -337,7 +354,8 @@ f32 TextWriterBase<T>::AdjustCursor(f32* pX, f32* pY, const T* pStr, int len) {
     f32 textWidth = 0.0f;
     f32 textHeight = 0.0f;
 
-    if (!IsDrawFlagSet(0x333, 0x300) && !IsDrawFlagSet(0x333, 0)) {
+    if (!IsDrawFlagSet(DRAWFLAG_MASK_ALL, DRAWFLAG_MASK_V) &&
+        !IsDrawFlagSet(DRAWFLAG_MASK_ALL, 0)) {
         Rect rect;
         CalcStringRect(&rect, pStr, len);
 
@@ -349,27 +367,28 @@ f32 TextWriterBase<T>::AdjustCursor(f32* pX, f32* pY, const T* pStr, int len) {
         }
     }
 
-    if (IsDrawFlagSet(0x30, 0x10)) {
+    if (IsDrawFlagSet(DRAWFLAG_MASK_H, DRAWFLAG_ALIGN_H_CENTER)) {
         *pX -= textWidth / 2;
-    } else if (IsDrawFlagSet(0x30, 0x20)) {
+    } else if (IsDrawFlagSet(DRAWFLAG_MASK_H, DRAWFLAG_ALIGN_H_RIGHT)) {
         *pX -= textWidth;
     }
 
-    if (IsDrawFlagSet(0x300, 0x100)) {
+    if (IsDrawFlagSet(DRAWFLAG_MASK_V, DRAWFLAG_ALIGN_V_CENTER)) {
         *pY -= textHeight / 2;
-    } else if (IsDrawFlagSet(0x300, 0x200)) {
+    } else if (IsDrawFlagSet(DRAWFLAG_MASK_V, DRAWFLAG_ALIGN_V_TOP)) {
         *pY -= textHeight;
     }
 
-    if (IsDrawFlagSet(0x3, 0x1)) {
+    if (IsDrawFlagSet(DRAWFLAG_MASK_TEXT, DRAWFLAG_ALIGN_TEXT_CENTER)) {
         SetCursorX(*pX + (textWidth - CalcLineWidth(pStr, len)) / 2);
-    } else if (IsDrawFlagSet(0x3, 0x2)) {
+    } else if (IsDrawFlagSet(DRAWFLAG_MASK_TEXT, DRAWFLAG_ALIGN_TEXT_RIGHT)) {
         SetCursorX(*pX + (textWidth - CalcLineWidth(pStr, len)));
     } else {
         SetCursorX(*pX);
     }
 
-    if (IsDrawFlagSet(0x300, 0x300)) {
+    if (IsDrawFlagSet(DRAWFLAG_MASK_V,
+                      DRAWFLAG_ALIGN_V_CENTER | DRAWFLAG_ALIGN_V_TOP)) {
         SetCursorY(*pY);
     } else {
         SetCursorY(*pY + GetFontAscent());

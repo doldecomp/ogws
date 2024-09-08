@@ -295,7 +295,6 @@ public:
 
 public:
     LinkList() {}
-    ~LinkList() {}
 
     Iterator GetBeginIter() {
         return Iterator(LinkListImpl::GetBeginIter());

@@ -6,8 +6,8 @@ namespace nw4r {
 namespace ut {
 
 struct BinaryBlockHeader {
-    u32 signature; // at 0x0
-    u32 length;    // at 0x4
+    u32 kind; // at 0x0
+    u32 size; // at 0x4
 };
 
 struct BinaryFileHeader {
@@ -20,7 +20,7 @@ struct BinaryFileHeader {
 };
 
 bool IsValidBinaryFile(const BinaryFileHeader* pHeader, u32 signature,
-                       u16 version, u16 dataBlocks);
+                       u16 version, u16 minBlocks);
 
 } // namespace ut
 } // namespace nw4r

@@ -10,7 +10,7 @@ namespace ut {
 struct Color : public GXColor {
 public:
     Color() {
-        *this = 0xFFFFFFFF;
+        *this = WHITE;
     }
     Color(u32 color) {
         *this = color;
@@ -18,7 +18,6 @@ public:
     Color(int red, int green, int blue, int alpha) {
         Set(red, green, blue, alpha);
     }
-
     ~Color() {}
 
     void Set(int red, int green, int blue, int alpha) {
@@ -54,6 +53,20 @@ public:
     operator u32() const {
         return ToU32ref();
     }
+
+    // clang-format off
+    static const u32 RED   = 0xFF0000FF;
+    static const u32 GREEN = 0x00FF00FF;
+    static const u32 BLUE  = 0x0000FFFF;
+
+    static const u32 CYAN    = 0x00FFFFFF;
+    static const u32 MAGENTA = 0xFF00FFFF;
+    static const u32 YELLOW  = 0xFFFF00FF;
+
+    static const u32 BLACK = 0x000000FF;
+    static const u32 GRAY  = 0x808080FF;
+    static const u32 WHITE = 0xFFFFFFFF;
+    // clang-format on
 };
 
 } // namespace ut

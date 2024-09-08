@@ -11,8 +11,8 @@ LinkListImpl::~LinkListImpl() {
 }
 
 LinkListImpl::Iterator LinkListImpl::Erase(LinkListImpl::Iterator it) {
-    Iterator copy(it);
-    return Erase(it, ++copy);
+    Iterator clone(it);
+    return Erase(it, ++clone);
 }
 
 void LinkListImpl::Clear() {
@@ -20,15 +20,16 @@ void LinkListImpl::Clear() {
 }
 
 LinkListImpl::Iterator LinkListImpl::Insert(Iterator it, LinkListNode* pNode) {
-    LinkListNode* next = it.mNode;
-    LinkListNode* prev = next->mPrev;
+    LinkListNode* pNext = it.mNode;
+    LinkListNode* pPrev = pNext->mPrev;
 
-    // prev <- pNode -> next
-    pNode->mNext = next;
-    pNode->mPrev = prev;
-    // prev <-> pNode <-> next
-    next->mPrev = pNode;
-    prev->mNext = pNode;
+    // pPrev <- pNode -> pNext
+    pNode->mNext = pNext;
+    pNode->mPrev = pPrev;
+
+    // pPrev <-> pNode <-> pNext
+    pNext->mPrev = pNode;
+    pPrev->mNext = pNode;
 
     mSize++;
 
@@ -36,12 +37,12 @@ LinkListImpl::Iterator LinkListImpl::Insert(Iterator it, LinkListNode* pNode) {
 }
 
 LinkListImpl::Iterator LinkListImpl::Erase(LinkListNode* pNode) {
-    LinkListNode* next = pNode->mNext;
-    LinkListNode* prev = pNode->mPrev;
+    LinkListNode* pNext = pNode->mNext;
+    LinkListNode* pPrev = pNode->mPrev;
 
     // Remove connections to node
-    next->mPrev = prev;
-    prev->mNext = next;
+    pNext->mPrev = pPrev;
+    pPrev->mNext = pNext;
 
     mSize--;
 
@@ -49,7 +50,7 @@ LinkListImpl::Iterator LinkListImpl::Erase(LinkListNode* pNode) {
     pNode->mNext = NULL;
     pNode->mPrev = NULL;
 
-    return Iterator(next);
+    return Iterator(pNext);
 }
 
 LinkListImpl::Iterator LinkListImpl::Erase(Iterator begin, Iterator end) {
@@ -59,6 +60,7 @@ LinkListImpl::Iterator LinkListImpl::Erase(Iterator begin, Iterator end) {
     while (pIt != pEnd) {
         // Preserve next node before erasing pointers
         LinkListNode* pNext = pIt->mNext;
+
         // Erase current node
         Erase(pIt);
         pIt = pNext;

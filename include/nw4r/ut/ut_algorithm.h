@@ -46,8 +46,8 @@ template <typename T> inline T BitExtract(T bits, int pos, int len) {
     return (bits >> pos) & mask;
 }
 
-template <typename T> inline bool TestBit(T t, int bitIndexLSB) {
-    return BitExtract<T>(t, sizeof(T), bitIndexLSB);
+template <typename T> inline bool TestBit(T t, int pos) {
+    return BitExtract<T>(t, sizeof(T), pos);
 }
 
 /**

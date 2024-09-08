@@ -14,8 +14,8 @@ void Disable();
 bool Lock();
 void Unlock();
 
-void LoadBlocks(void* pDst, void* pSrc, u32 size);
-void StoreBlocks(void* pDst, void* pSrc, u32 size);
+void LoadBlocks(void* pDst, void* pSrc, u32 blocks);
+void StoreBlocks(void* pDst, void* pSrc, u32 blocks);
 void StoreData(void* pDst, void* pSrc, u32 size);
 
 inline void* GetBase() {

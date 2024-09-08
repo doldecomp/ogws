@@ -28,7 +28,7 @@ namespace EGG
         UNKWORD mMesgCount; // at 0x30
         void * mStackMemory; // at 0x34
         u32 mStackSize; // at 0x38
-        nw4r::ut::Node mNode; // at 0x3C
+        nw4r::ut::Link mNode; // at 0x3C
 
         static nw4r::ut::List sThreadList;
 		

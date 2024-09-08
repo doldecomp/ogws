@@ -31,7 +31,7 @@ bool IsSJISFullWidthChar(u16 ch) {
 } // namespace
 
 RomFont::RomFont() : mFontHeader(NULL), mAlternateChar('?') {
-    mDefaultWidths.leftSpacing = 0;
+    mDefaultWidths.left = 0;
     mDefaultWidths.glyphWidth = 0;
     mDefaultWidths.charWidth = 0;
 }
@@ -49,7 +49,7 @@ bool RomFont::Load(void* pBuffer) {
         mFontEncode = OSGetFontEncode();
         mFontHeader = static_cast<OSFontHeader*>(pBuffer);
 
-        mDefaultWidths.leftSpacing = 0;
+        mDefaultWidths.left = 0;
         mDefaultWidths.glyphWidth = GetCellWidth();
         mDefaultWidths.charWidth = GetMaxCharWidth();
 
@@ -146,7 +146,7 @@ void RomFont::SetLineFeed(int lf) {
 
 int RomFont::GetCharWidth(u16 ch) const {
     u32 width;
-    char buffer[4];
+    char buffer[CHAR_PTR_BUFFER_SIZE];
 
     MakeCharPtr(buffer, ch);
     OSGetFontWidth(buffer, &width);
@@ -158,7 +158,7 @@ CharWidths RomFont::GetCharWidths(u16 ch) const {
     int width = GetCharWidth(ch);
 
     CharWidths widths;
-    widths.leftSpacing = 0;
+    widths.left = 0;
     widths.glyphWidth = width;
     widths.charWidth = width;
 
@@ -168,19 +168,19 @@ CharWidths RomFont::GetCharWidths(u16 ch) const {
 void RomFont::GetGlyph(Glyph* pGlyph, u16 ch) const {
     void* pTexture;
     u32 x, y, width;
-    char buffer[4];
+    char buffer[CHAR_PTR_BUFFER_SIZE];
 
     MakeCharPtr(buffer, ch);
     OSGetFontTexture(buffer, &pTexture, &x, &y, &width);
 
-    pGlyph->texture = pTexture;
+    pGlyph->pTexture = pTexture;
 
-    pGlyph->widths.leftSpacing = 0;
+    pGlyph->widths.left = 0;
     pGlyph->widths.glyphWidth = width;
     pGlyph->widths.charWidth = width;
 
     pGlyph->height = mFontHeader->cellHeight;
-    pGlyph->format = GX_TF_I4;
+    pGlyph->texFormat = GX_TF_I4;
 
     pGlyph->texWidth = mFontHeader->sheetWidth;
     pGlyph->texHeight = mFontHeader->sheetHeight;
@@ -192,15 +192,15 @@ void RomFont::GetGlyph(Glyph* pGlyph, u16 ch) const {
 FontEncoding RomFont::GetEncoding() const {
     switch (mFontEncode) {
     case OS_FONT_ENCODE_ANSI: {
-        return FONT_ENCODE_CP1252;
+        return FONT_ENCODING_CP1252;
     }
 
     case OS_FONT_ENCODE_SJIS: {
-        return FONT_ENCODE_SJIS;
+        return FONT_ENCODING_SJIS;
     }
     }
 
-    return FONT_ENCODE_CP1252;
+    return FONT_ENCODING_CP1252;
 }
 
 void RomFont::MakeCharPtr(char* pBuffer, u16 ch) const {

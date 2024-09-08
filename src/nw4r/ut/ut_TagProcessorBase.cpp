@@ -12,12 +12,15 @@ template <typename T> TagProcessorBase<T>::~TagProcessorBase() {}
 template <typename T>
 Operation TagProcessorBase<T>::Process(u16 ch, PrintContext<T>* pCtx) {
     switch (ch) {
-    case '\n':
+    case '\n': {
         ProcessLinefeed(pCtx);
         return OPERATION_NEXT_LINE;
-    case '\t':
+    }
+
+    case '\t': {
         ProcessTab(pCtx);
         return OPERATION_NO_CHAR_SPACE;
+    }
     }
 
     return OPERATION_DEFAULT;

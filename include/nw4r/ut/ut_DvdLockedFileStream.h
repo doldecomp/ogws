@@ -21,7 +21,7 @@ public:
     virtual s32 Read(void* pDst, u32 size); // at 0x14
 
     virtual bool ReadAsync(void* /* pDst */, u32 /* size */,
-                           AsyncCallback /* pCallback */,
+                           StreamCallback /* pCallback */,
                            void* /* pCallbackArg */) {
         return false;
     } // at 0x18
@@ -29,7 +29,7 @@ public:
     virtual s32 Peek(void* pDst, u32 size); // at 0x5C
 
     virtual bool PeekAsync(void* /* pDst */, u32 /* size */,
-                           AsyncCallback /* pCallback */,
+                           StreamCallback /* pCallback */,
                            void* /* pCallbackArg */) {
         return false;
     } // at 0x60
@@ -44,6 +44,8 @@ private:
 private:
     static bool sInitialized;
     static OSMutex sMutex;
+
+    bool mCancelFlag; // at 0x6F
 };
 
 } // namespace ut

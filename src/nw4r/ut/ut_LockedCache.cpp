@@ -89,12 +89,12 @@ void Unlock() {
     sLCImpl.Unlock();
 }
 
-void LoadBlocks(void* pDst, void* pSrc, u32 size) {
-    LCLoadBlocks(pDst, pSrc, size);
+void LoadBlocks(void* pDst, void* pSrc, u32 blocks) {
+    LCLoadBlocks(pDst, pSrc, blocks);
 }
 
-void StoreBlocks(void* pDst, void* pSrc, u32 size) {
-    LCStoreBlocks(pDst, pSrc, size);
+void StoreBlocks(void* pDst, void* pSrc, u32 blocks) {
+    LCStoreBlocks(pDst, pSrc, blocks);
 }
 
 void StoreData(void* pDst, void* pSrc, u32 size) {

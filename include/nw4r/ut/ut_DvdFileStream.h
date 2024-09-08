@@ -13,22 +13,33 @@ class DvdFileStream : public FileStream {
 public:
     NW4R_UT_RTTI_DECL(DvdFileStream);
 
-    /**
-     * DVD callbacks need a reference to the NW4R stream. This structure is
-     * used to up-cast the DVDFileInfo given to the async callback.
-     *
-     * This structure's DVDFileInfo is always used in calls to async DVD
-     * functions, so the up-cast is always safe.
-     */
-    struct AsyncContext {
-        DVDFileInfo info;       // at 0x0
-        DvdFileStream* pStream; // at 0x3C
-    };
-
 public:
     DvdFileStream(s32 entrynum);
     DvdFileStream(const DVDFileInfo* pInfo, bool close);
     virtual ~DvdFileStream(); // at 0xC
+
+    bool Open(s32 entrynum);
+    bool Open(const DVDFileInfo* pInfo, bool close);
+
+    void SetPriority(s32 priority) {
+        mPriority = priority;
+    }
+
+    virtual void Close(); // at 0x10
+
+    virtual s32 Read(void* pDst, u32 size); // at 0x14
+    virtual bool ReadAsync(void* pDst, u32 size, StreamCallback pCallback,
+                           void* pCallbackArg); // at 0x18
+
+    virtual s32 Peek(void* pDst, u32 size); // at 0x5C
+    virtual bool PeekAsync(void* pDst, u32 size, StreamCallback pCallback,
+                           void* pCallbackArg); // at 0x60
+
+    virtual void Seek(s32 offset, u32 origin); // at 0x44
+
+    virtual void Cancel(); // at 0x48
+    virtual bool CancelAsync(StreamCallback pCallback,
+                             void* pCallbackArg); // at 0x4C
 
     virtual bool IsBusy() const {
         return mIsBusy;
@@ -67,28 +78,11 @@ public:
         return 32;
     } // at 0x3C
 
-    virtual void Close(); // at 0x10
-
-    virtual s32 Read(void* pDst, u32 size); // at 0x14
-    virtual bool ReadAsync(void* pDst, u32 size, AsyncCallback pCallback,
-                           void* pCallbackArg); // at 0x18
-
-    virtual s32 Peek(void* pDst, u32 size); // at 0x5C
-    virtual bool PeekAsync(void* pDst, u32 size, AsyncCallback pCallback,
-                           void* pCallbackArg); // at 0x60
-
-    virtual void Seek(s32 offset, u32 origin); // at 0x44
-
-    virtual void Cancel(); // at 0x48
-    virtual bool CancelAsync(AsyncCallback pCallback,
-                             void* pCallbackArg); // at 0x4C
-
-    void SetPriority(s32 priority) {
-        mPriority = priority;
-    }
-
-    bool Open(s32 entrynum);
-    bool Open(const DVDFileInfo* pInfo, bool close);
+private:
+    struct DvdFileStreamInfo {
+        DVDFileInfo dvdInfo;   // at 0x0
+        DvdFileStream* stream; // at 0x3C
+    };
 
 private:
     static void DvdAsyncCallback_(s32 result, DVDFileInfo* pInfo);
@@ -98,15 +92,15 @@ private:
     u32 AdjustReadLength_(u32 len);
 
 private:
-    FilePosition mFilePosition;    // at 0x14
-    AsyncCallback mCancelCallback; // at 0x1C
-    void* mCancelCallbackArg;      // at 0x20
-    volatile bool mIsCancelling;   // at 0x24
-    AsyncContext mAsyncContext;    // at 0x28
-    s32 mPriority;                 // at 0x68
-    volatile bool mIsBusy;         // at 0x6C
-    bool mCloseOnDestroy;          // at 0x6D
-    bool mAllowClose;              // at 0x6E
+    FilePosition mFilePosition;     // at 0x14
+    StreamCallback mCancelCallback; // at 0x1C
+    void* mCancelArg;               // at 0x20
+    volatile bool mIsCanceling;     // at 0x24
+    DvdFileStreamInfo mFileInfo;    // at 0x28
+    s32 mPriority;                  // at 0x68
+    volatile bool mIsBusy;          // at 0x6C
+    bool mCloseOnDestroyFlg;        // at 0x6D
+    bool mCloseEnableFlg;           // at 0x6E
 };
 
 } // namespace ut

@@ -23,10 +23,12 @@ namespace ut {
 namespace detail {
 
 struct RuntimeTypeInfo {
-    RuntimeTypeInfo(const RuntimeTypeInfo* pBase) : mBase(pBase) {}
+    RuntimeTypeInfo(const RuntimeTypeInfo* pBase) : mParentTypeInfo(pBase) {}
 
     bool IsDerivedFrom(const RuntimeTypeInfo* pBase) const {
-        for (const RuntimeTypeInfo* pIt = this; pIt != NULL; pIt = pIt->mBase) {
+        for (const RuntimeTypeInfo* pIt = this; pIt != NULL;
+             pIt = pIt->mParentTypeInfo) {
+
             if (pIt == pBase) {
                 return true;
             }
@@ -35,7 +37,7 @@ struct RuntimeTypeInfo {
         return false;
     }
 
-    const RuntimeTypeInfo* mBase; // at 0x0
+    const RuntimeTypeInfo* mParentTypeInfo; // at 0x0
 };
 
 template <typename T>

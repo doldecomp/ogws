@@ -13,23 +13,27 @@ class NandFileStream : public FileStream {
 public:
     NW4R_UT_RTTI_DECL(NandFileStream);
 
-    /**
-     * NAND callbacks need a reference to the NW4R stream. This structure is
-     * used to up-cast the NANDCommandBlock given to the async callback.
-     *
-     * This structure's NANDCommandBlock is always used in calls to async NAND
-     * functions, so the up-cast is always safe.
-     */
-    struct AsyncContext {
-        NANDCommandBlock block;  // at 0x0
-        NANDFileInfo info;       // at 0xB8
-        NandFileStream* pStream; // at 0x144
-    };
-
 public:
-    NandFileStream(const char* pPath, u32 access);
-    NandFileStream(const NANDFileInfo* pInfo, u32 access, bool close);
+    NandFileStream(const char* pPath, u32 mode);
+    NandFileStream(const NANDFileInfo* pInfo, u32 mode, bool enableClose);
     virtual ~NandFileStream(); // at 0xC
+
+    bool Open(const char* pPath, u32 mode);
+    bool Open(const NANDFileInfo* pInfo, u32 mode, bool enableClose)
+        DECOMP_DONT_INLINE;
+
+    virtual void Close(); // at 0x10
+
+    virtual s32 Read(void* pDst, u32 size); // at 0x14
+    virtual bool ReadAsync(void* pDst, u32 size, StreamCallback pCallback,
+                           void* pCallbackArg); // at 0x18
+
+    virtual void Write(const void* pSrc, u32 size); // at 0x1C
+    virtual bool WriteAsync(const void* pSrc, u32 size,
+                            StreamCallback pCallback,
+                            void* pCallbackArg); // at 0x20
+
+    virtual void Seek(s32 offset, u32 origin); // at 0x44
 
     virtual bool IsBusy() const {
         return mIsBusy;
@@ -68,21 +72,12 @@ public:
         return 32;
     } // at 0x3C
 
-    virtual void Close(); // at 0x10
-
-    virtual s32 Read(void* pDst, u32 size); // at 0x14
-    virtual bool ReadAsync(void* pDst, u32 size, AsyncCallback pCallback,
-                           void* pCallbackArg); // at 0x18
-
-    virtual void Write(const void* src, u32 size); // at 0x1C
-    virtual bool WriteAsync(const void* src, u32 size, AsyncCallback pCallback,
-                            void* pCallbackArg); // at 0x20
-
-    virtual void Seek(s32 offset, u32 origin); // at 0x44
-
-    bool Open(const char* pPath, u32 access);
-    bool Open(const NANDFileInfo* pInfo, u32 access, bool close)
-        DECOMP_DONT_INLINE;
+private:
+    struct NandFileStreamInfo {
+        NANDCommandBlock nandBlock; // at 0x0
+        NANDFileInfo nandInfo;      // at 0xB8
+        NandFileStream* stream;     // at 0x144
+    };
 
 private:
     static void NandAsyncCallback_(s32 result, NANDCommandBlock* pBlock);
@@ -90,13 +85,13 @@ private:
     void Initialize_();
 
 private:
-    FilePosition mFilePosition; // at 0x14
-    AsyncContext mAsyncContext; // at 0x1C
-    bool mCanRead;              // at 0x164
-    bool mCanWrite;             // at 0x165
-    volatile bool mIsBusy;      // at 0x166
-    bool mCloseOnDestroy;       // at 0x167
-    bool mAllowClose;           // at 0x168
+    FilePosition mFilePosition;   // at 0x14
+    NandFileStreamInfo mFileInfo; // at 0x1C
+    bool mCanRead;                // at 0x164
+    bool mCanWrite;               // at 0x165
+    volatile bool mIsBusy;        // at 0x166
+    bool mCloseOnDestroyFlg;      // at 0x167
+    bool mCloseEnableFlg;         // at 0x168
 };
 
 } // namespace ut

@@ -36,6 +36,7 @@ public:
     virtual Operation CalcRect(Rect* pRect, u16 ch,
                                PrintContext<T>* pCtx); // at 0x10
 
+private:
     void ProcessTab(PrintContext<T>* pCtx);
     void ProcessLinefeed(PrintContext<T>* pCtx);
 };

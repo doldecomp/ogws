@@ -30,13 +30,13 @@ bool ResFont::SetResource(void* pBuffer) {
             reinterpret_cast<char*>(pHeader) + pHeader->headerSize);
 
         for (int i = 0; i < pHeader->dataBlocks; i++) {
-            if (pBlock->signature == SIGNATURE_FONTINFO) {
+            if (pBlock->kind == SIGNATURE_FONTINFO) {
                 pInfo = reinterpret_cast<FontInformation*>(pBlock + 1);
                 break;
             }
 
             pBlock = reinterpret_cast<BinaryBlockHeader*>(
-                reinterpret_cast<char*>(pBlock) + pBlock->length);
+                reinterpret_cast<char*>(pBlock) + pBlock->size);
         }
     } else {
         if (pHeader->version == NW4R_VERSION(1, 4)) {
@@ -68,17 +68,17 @@ FontInformation* ResFont::Rebuild(BinaryFileHeader* pHeader) {
     FontInformation* pInfo = NULL;
 
     for (int i = 0; i < pHeader->dataBlocks; i++) {
-        switch (pBlock->signature) {
+        switch (pBlock->kind) {
         case SIGNATURE_FONTINFO: {
             pInfo = reinterpret_cast<FontInformation*>(pBlock + 1);
-            ResolveOffset<FontTextureGlyph>(pInfo->fontGlyph, pHeader);
+            ResolveOffset<FontTextureGlyph>(pInfo->pGlyph, pHeader);
 
-            if (pInfo->fontWidth != 0) {
-                ResolveOffset<FontWidth>(pInfo->fontWidth, pHeader);
+            if (pInfo->pWidth != 0) {
+                ResolveOffset<FontWidth>(pInfo->pWidth, pHeader);
             }
 
-            if (pInfo->fontMap != 0) {
-                ResolveOffset<FontCodeMap>(pInfo->fontMap, pHeader);
+            if (pInfo->pMap != 0) {
+                ResolveOffset<FontCodeMap>(pInfo->pMap, pHeader);
             }
             break;
         }
@@ -91,17 +91,17 @@ FontInformation* ResFont::Rebuild(BinaryFileHeader* pHeader) {
         }
 
         case SIGNATURE_CHARWIDTH: {
-            FontWidth* width = reinterpret_cast<FontWidth*>(pBlock + 1);
-            if (width->next != 0) {
-                ResolveOffset<FontWidth>(width->next, pHeader);
+            FontWidth* pWidth = reinterpret_cast<FontWidth*>(pBlock + 1);
+            if (pWidth->pNext != 0) {
+                ResolveOffset<FontWidth>(pWidth->pNext, pHeader);
             }
             break;
         }
 
         case SIGNATURE_CHARMAP: {
-            FontCodeMap* map = reinterpret_cast<FontCodeMap*>(pBlock + 1);
-            if (map->next != 0) {
-                ResolveOffset<FontCodeMap>(map->next, pHeader);
+            FontCodeMap* pMap = reinterpret_cast<FontCodeMap*>(pBlock + 1);
+            if (pMap->pNext != 0) {
+                ResolveOffset<FontCodeMap>(pMap->pNext, pHeader);
             }
             break;
         }
@@ -116,7 +116,7 @@ FontInformation* ResFont::Rebuild(BinaryFileHeader* pHeader) {
         }
 
         pBlock = reinterpret_cast<BinaryBlockHeader*>(
-            reinterpret_cast<char*>(pBlock) + pBlock->length);
+            reinterpret_cast<char*>(pBlock) + pBlock->size);
     }
 
     pHeader->signature = SIGNATURE_UNPACKED;

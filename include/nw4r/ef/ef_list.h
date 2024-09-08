@@ -33,13 +33,13 @@ namespace nw4r
 			
 			inline void Initialize()
 			{
-				mActive.first = NULL;
-				mActive.size = 0;
-				mActive.last = NULL;
+				mActive.headObject = NULL;
+				mActive.numObjects = 0;
+				mActive.tailObject = NULL;
 				
-				mClosing.first = NULL;
-				mClosing.size = 0;
-				mClosing.last = NULL;
+				mClosing.headObject = NULL;
+				mClosing.numObjects = 0;
+				mClosing.tailObject = NULL;
 				
 				mNumActive = 0;
 			}

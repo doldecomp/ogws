@@ -11,21 +11,22 @@ class IOStream {
 public:
     NW4R_UT_RTTI_DECL(IOStream);
 
-    typedef void (*AsyncCallback)(s32 result, IOStream* pStream,
-                                  void* pCallbackArg);
+    typedef void (*StreamCallback)(s32 result, IOStream* pStream,
+                                   void* pCallbackArg);
 
 public:
-    IOStream() : mIsOpen(false), mCallback(NULL), mCallbackArg(NULL) {}
+    IOStream() : mAvailable(false), mCallback(NULL), mArg(NULL) {}
     virtual ~IOStream() {} // at 0xC
 
     virtual void Close() = 0; // at 0x10
 
     virtual s32 Read(void* pDst, u32 size) = 0; // at 0x14
-    virtual bool ReadAsync(void* pDst, u32 size, AsyncCallback pCallback,
+    virtual bool ReadAsync(void* pDst, u32 size, StreamCallback pCallback,
                            void* pCallbackArg); // at 0x18
 
     virtual void Write(const void* pSrc, u32 size); // at 0x1C
-    virtual bool WriteAsync(const void* pSrc, u32 size, AsyncCallback pCallback,
+    virtual bool WriteAsync(const void* pSrc, u32 size,
+                            StreamCallback pCallback,
                             void* pCallbackArg); // at 0x20
 
     virtual bool IsBusy() const; // at 0x24
@@ -45,14 +46,14 @@ public:
     } // at 0x3C
 
     bool IsAvailable() const {
-        return mIsOpen;
+        return mAvailable;
     }
 
 protected:
-    bool mIsOpen;            // at 0x4
-    s32 mResult;             // at 0x8
-    AsyncCallback mCallback; // at 0xC
-    void* mCallbackArg;      // at 0x10
+    bool mAvailable;          // at 0x4
+    s32 mAsyncResult;         // at 0x8
+    StreamCallback mCallback; // at 0xC
+    void* mArg;               // at 0x10
 };
 
 } // namespace ut

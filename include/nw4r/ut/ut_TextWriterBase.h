@@ -15,20 +15,19 @@ namespace ut {
 
 template <typename T> class TextWriterBase : public CharWriter {
 public:
-    static T* GetBuffer() {
-        return mFormatBuffer;
-    }
-    static T* SetBuffer(T* pBuffer, u32 size) {
-        T* old = mFormatBuffer;
-        mFormatBuffer = pBuffer;
-        mFormatBufferSize = size;
-        return old;
-    }
+    enum DrawFlags {
+        // Align text lines
+        DRAWFLAG_ALIGN_TEXT_CENTER = (1 << 0),
+        DRAWFLAG_ALIGN_TEXT_RIGHT = (1 << 1),
 
-    static u32 GetBufferSize() {
-        return mFormatBufferSize;
-    }
+        // Align text block
+        DRAWFLAG_ALIGN_H_CENTER = (1 << 4),
+        DRAWFLAG_ALIGN_H_RIGHT = (1 << 5),
+        DRAWFLAG_ALIGN_V_CENTER = (1 << 8),
+        DRAWFLAG_ALIGN_V_TOP = (1 << 9),
+    };
 
+public:
     TextWriterBase();
     ~TextWriterBase();
 
@@ -63,11 +62,11 @@ public:
         mTabWidth = width;
     }
 
+    u32 GetDrawFlag() const {
+        return mDrawFlag;
+    }
     void SetDrawFlag(u32 flag) {
         mDrawFlag = flag;
-    }
-    bool IsDrawFlagSet(u32 mask, u32 flag) const {
-        return (mDrawFlag & mask) == flag;
     }
 
     TagProcessorBase<T>* GetTagProcessor() const {
@@ -86,9 +85,43 @@ public:
     f32 CalcStringWidth(const T* pStr, int len) const;
     void CalcStringRect(Rect* pRect, const T* pStr, int len) const;
 
-    int VSNPrintf(T* buffer, u32 count, const T* fmt, std::va_list args);
+    int VSNPrintf(T* buffer, u32 count, const T* pStr, std::va_list args);
     f32 VPrintf(const T* pStr, std::va_list args);
     f32 Print(const T* pStr, int len);
+
+    static T* GetBuffer() {
+        return mFormatBuffer;
+    }
+    static T* SetBuffer(T* pBuffer, u32 size) {
+        T* pOldBuffer = mFormatBuffer;
+        mFormatBuffer = pBuffer;
+        mFormatBufferSize = size;
+        return pOldBuffer;
+    }
+
+    static u32 GetBufferSize() {
+        return mFormatBufferSize;
+    }
+
+private:
+    static const int DEFAULT_FORMAT_BUFFER_SIZE = 256;
+
+    static const u32 DRAWFLAG_MASK_TEXT =
+        DRAWFLAG_ALIGN_TEXT_RIGHT | DRAWFLAG_ALIGN_TEXT_CENTER;
+
+    static const u32 DRAWFLAG_MASK_H =
+        DRAWFLAG_ALIGN_H_CENTER | DRAWFLAG_ALIGN_H_RIGHT;
+
+    static const u32 DRAWFLAG_MASK_V =
+        DRAWFLAG_ALIGN_V_CENTER | DRAWFLAG_ALIGN_V_TOP;
+
+    static const u32 DRAWFLAG_MASK_ALL =
+        DRAWFLAG_MASK_TEXT | DRAWFLAG_MASK_H | DRAWFLAG_MASK_V;
+
+private:
+    bool IsDrawFlagSet(u32 mask, u32 flag) const {
+        return (mDrawFlag & mask) == flag;
+    }
 
     bool CalcLineRectImpl(Rect* pRect, const T** ppStr, int len);
     void CalcStringRectImpl(Rect* pRect, const T* pStr, int len);
@@ -97,30 +130,30 @@ public:
     f32 AdjustCursor(f32* pX, f32* pY, const T* pStr, int len);
 
 private:
+    static T* mFormatBuffer;
+    static u32 mFormatBufferSize;
+    static TagProcessorBase<T> mDefaultTagProcessor;
+
     f32 mWidthLimit;                    // at 0x4C
     f32 mCharSpace;                     // at 0x50
     f32 mLineSpace;                     // at 0x54
     int mTabWidth;                      // at 0x58
     u32 mDrawFlag;                      // at 0x5C
     TagProcessorBase<T>* mTagProcessor; // at 0x60
-
-    static T* mFormatBuffer;
-    static u32 mFormatBufferSize;
-    static TagProcessorBase<T> mDefaultTagProcessor;
 };
 
 template <>
 inline int TextWriterBase<char>::VSNPrintf(char* pBuffer, u32 count,
-                                           const char* pFmt,
+                                           const char* pStr,
                                            std::va_list args) {
-    return std::vsnprintf(pBuffer, count, pFmt, args);
+    return std::vsnprintf(pBuffer, count, pStr, args);
 }
 
 template <>
 inline int TextWriterBase<wchar_t>::VSNPrintf(wchar_t* pBuffer, u32 count,
-                                              const wchar_t* pFmt,
+                                              const wchar_t* pStr,
                                               std::va_list args) {
-    return std::vswprintf(pBuffer, count, pFmt, args);
+    return std::vswprintf(pBuffer, count, pStr, args);
 }
 
 } // namespace ut
