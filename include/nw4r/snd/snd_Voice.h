@@ -5,7 +5,6 @@
 #include <nw4r/snd/snd_AxVoice.h>
 #include <nw4r/snd/snd_Common.h>
 #include <nw4r/snd/snd_DisposeCallback.h>
-#include <nw4r/snd/snd_WaveFile.h>
 
 #include <nw4r/ut.h>
 
@@ -14,6 +13,9 @@
 namespace nw4r {
 namespace snd {
 namespace detail {
+
+// Forward declarations
+class WaveData;
 
 class Voice : public DisposeCallback {
     friend class VoiceManager;

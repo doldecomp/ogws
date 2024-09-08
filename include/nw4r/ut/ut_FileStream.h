@@ -41,13 +41,14 @@ public:
     FileStream() {}
     virtual ~FileStream() {} // at 0xC
 
-    virtual u32 GetSize() const = 0;                               // at 0x40
-    virtual void Seek(s32 offset, u32 origin);                     // at 0x44
-    virtual void Cancel();                                         // at 0x48
-    virtual bool CancelAsync(AsyncCallback pCallback, void* pArg); // at 0x4C
-    virtual bool CanSeek() const = 0;                              // at 0x50
-    virtual bool CanCancel() const = 0;                            // at 0x54
-    virtual u32 Tell() const = 0;                                  // at 0x58
+    virtual u32 GetSize() const = 0;           // at 0x40
+    virtual void Seek(s32 offset, u32 origin); // at 0x44
+    virtual void Cancel();                     // at 0x48
+    virtual bool CancelAsync(AsyncCallback pCallback,
+                             void* pCallbackArg); // at 0x4C
+    virtual bool CanSeek() const = 0;             // at 0x50
+    virtual bool CanCancel() const = 0;           // at 0x54
+    virtual u32 Tell() const = 0;                 // at 0x58
 };
 
 } // namespace ut

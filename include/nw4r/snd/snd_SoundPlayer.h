@@ -4,7 +4,6 @@
 
 #include <nw4r/snd/snd_BasicSound.h>
 #include <nw4r/snd/snd_PlayerHeap.h>
-#include <nw4r/snd/snd_SoundInstanceManager.h>
 
 #include <revolution/OS.h>
 #include <revolution/WPAD.h>
@@ -18,6 +17,7 @@ class ExternalSoundPlayer;
 class SeqSound;
 class StrmSound;
 class WaveSound;
+template <typename T> class SoundInstanceManager;
 } // namespace detail
 
 class SoundPlayer {

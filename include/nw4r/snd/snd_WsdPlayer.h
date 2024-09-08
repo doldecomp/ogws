@@ -3,6 +3,7 @@
 #include <nw4r/types_nw4r.h>
 
 #include <nw4r/snd/snd_BasicPlayer.h>
+#include <nw4r/snd/snd_Channel.h>
 #include <nw4r/snd/snd_DisposeCallback.h>
 #include <nw4r/snd/snd_Lfo.h>
 #include <nw4r/snd/snd_SoundThread.h>

@@ -12,7 +12,14 @@
 
 namespace nw4r {
 namespace snd {
+
+// Forward declarations
+class SeqSoundHandle;
+
 namespace detail {
+
+// Forward declarations
+template <typename T> class SoundInstanceManager;
 
 class SeqSound : public BasicSound {
     friend class SeqSoundHandle;

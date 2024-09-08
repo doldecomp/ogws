@@ -9,7 +9,14 @@
 
 namespace nw4r {
 namespace snd {
+
+// Forward declarations
+class StrmSoundHandle;
+
 namespace detail {
+
+// Forward declarations
+template <typename T> class SoundInstanceManager;
 
 class StrmSound : public BasicSound {
     friend class StrmSoundHandle;

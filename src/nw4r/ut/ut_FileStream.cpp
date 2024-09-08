@@ -9,9 +9,9 @@ NW4R_UT_RTTI_DEF_DERIVED(FileStream, IOStream);
 
 void FileStream::Cancel() {}
 
-bool FileStream::CancelAsync(AsyncCallback pCallback, void* pArg) {
+bool FileStream::CancelAsync(AsyncCallback pCallback, void* pCallbackArg) {
 #pragma unused(pCallback)
-#pragma unused(pArg)
+#pragma unused(pCallbackArg)
     return true;
 }
 

@@ -8,7 +8,6 @@
 #include <nw4r/snd/snd_NoteOnCallback.h>
 #include <nw4r/snd/snd_SeqSound.h>
 #include <nw4r/snd/snd_SoundArchive.h>
-#include <nw4r/snd/snd_SoundHandle.h>
 #include <nw4r/snd/snd_SoundInstanceManager.h>
 #include <nw4r/snd/snd_SoundStartable.h>
 #include <nw4r/snd/snd_StrmChannel.h>

@@ -150,8 +150,8 @@ public:
         return mFixedWidth;
     }
 
-    void SetFont(const Font& font) {
-        mFont = &font;
+    void SetFont(const Font& rFont) {
+        mFont = &rFont;
     }
     const Font* GetFont() const {
         return mFont;

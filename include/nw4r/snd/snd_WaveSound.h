@@ -9,7 +9,14 @@
 
 namespace nw4r {
 namespace snd {
+
+// Forward declarations
+class WaveSoundHandle;
+
 namespace detail {
+
+// Forward declarations
+template <typename T> class SoundInstanceManager;
 
 class WaveSound : public BasicSound {
     friend class WaveSoundHandle;

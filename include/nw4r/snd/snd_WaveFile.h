@@ -4,7 +4,6 @@
 
 #include <nw4r/snd/snd_AxVoice.h>
 #include <nw4r/snd/snd_Common.h>
-#include <nw4r/snd/snd_Util.h>
 
 #include <nw4r/ut.h>
 

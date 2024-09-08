@@ -2,7 +2,6 @@
 #define NW4R_SND_VOICE_MANAGER_H
 #include <nw4r/types_nw4r.h>
 
-#include <nw4r/snd/snd_Common.h>
 #include <nw4r/snd/snd_Voice.h>
 
 namespace nw4r {
