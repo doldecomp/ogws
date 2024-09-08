@@ -2,6 +2,8 @@
 #define NW4R_MATH_TRIANGULAR_H
 #include <nw4r/types_nw4r.h>
 
+#include <nw4r/math/math_arithmetic.h>
+
 #include <cmath>
 
 #define NW4R_MATH_PI M_PI
@@ -29,7 +31,6 @@ f32 SinFIdx(f32 fidx);
 inline f32 SinIdx(u16 idx) {
     return SinFIdx(NW4R_MATH_IDX_TO_FIDX(U16ToF32(idx)));
 }
-
 inline f32 SinDeg(f32 deg) {
     return SinFIdx(NW4R_MATH_DEG_TO_FIDX(deg));
 }
@@ -70,7 +71,6 @@ void SinCosFIdx(f32* pSin, f32* pCos, f32 fidx);
 inline void SinCosDeg(f32* pSin, f32* pCos, f32 deg) {
     return SinCosFIdx(pSin, pCos, NW4R_MATH_DEG_TO_FIDX(deg));
 }
-
 inline void SinCosRad(f32* pSin, f32* pCos, f32 rad) {
     return SinCosFIdx(pSin, pCos, NW4R_MATH_RAD_TO_FIDX(rad));
 }
@@ -95,7 +95,6 @@ f32 Atan2FIdx(f32 y, f32 x);
 inline f32 Atan2Deg(f32 y, f32 x) {
     return NW4R_MATH_FIDX_TO_DEG(Atan2FIdx(y, x));
 }
-
 inline f32 Atan2Rad(f32 y, f32 x) {
     return NW4R_MATH_FIDX_TO_RAD(Atan2FIdx(y, x));
 }
