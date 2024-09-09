@@ -10,7 +10,9 @@ public:
     typedef u16 (CharStrmReader::*ReadFunc)();
 
 public:
-    CharStrmReader(ReadFunc pFunc) : mCharStrm(NULL), mReadFunc(pFunc) {}
+    explicit CharStrmReader(ReadFunc pFunc)
+        : mCharStrm(NULL), mReadFunc(pFunc) {}
+
     ~CharStrmReader() {}
 
     u16 ReadNextCharUTF8();

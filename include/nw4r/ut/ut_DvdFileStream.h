@@ -14,7 +14,7 @@ public:
     NW4R_UT_RTTI_DECL(DvdFileStream);
 
 public:
-    DvdFileStream(s32 entrynum);
+    explicit DvdFileStream(s32 entrynum);
     DvdFileStream(const DVDFileInfo* pInfo, bool close);
     virtual ~DvdFileStream(); // at 0xC
 

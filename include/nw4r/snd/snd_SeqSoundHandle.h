@@ -14,22 +14,23 @@ class SoundHandle;
 
 class SeqSoundHandle : private ut::NonCopyable {
 public:
-    SeqSoundHandle(SoundHandle* pHandle);
+    explicit SeqSoundHandle(SoundHandle* pHandle);
     ~SeqSoundHandle() {
         DetachSound();
     }
 
-    void DetachSound();
-
     bool IsAttachedSound() const {
         return mSound != NULL;
     }
+
+    void DetachSound();
 
     void SetTempoRatio(f32 tempo) {
         if (IsAttachedSound()) {
             mSound->SetTempoRatio(tempo);
         }
     }
+
     void SetTrackVolume(u32 trackFlags, f32 volume) {
         if (IsAttachedSound()) {
             mSound->SetTrackVolume(trackFlags, volume);

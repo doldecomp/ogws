@@ -27,7 +27,7 @@ void* SoundHeap::Alloc(u32 size) {
     return mFrameHeap.Alloc(size, DisposeCallbackFunc, NULL);
 }
 
-void* SoundHeap::Alloc(u32 size, detail::FrameHeap::AllocCallback pCallback,
+void* SoundHeap::Alloc(u32 size, detail::FrameHeap::FreeCallback pCallback,
                        void* pCallbackArg) {
     ut::detail::AutoLock<OSMutex> lock(mMutex);
     return mFrameHeap.Alloc(size, pCallback, pCallbackArg);

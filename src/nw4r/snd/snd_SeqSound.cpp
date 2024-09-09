@@ -79,7 +79,7 @@ void SeqSound::Skip(SeqPlayer::OffsetType offsetType, int offset) {
 
 void SeqSound::Shutdown() {
     if (mLoadingFlag) {
-        TaskManager::GetInstance().CancelTask(&mLoadTask);
+        TaskManager::GetInstance().CancelTask(&mSeqLoadTask);
     }
 
     if (mFileStream) {
@@ -149,13 +149,13 @@ bool SeqSound::LoadData(SeqLoadCallback pCalllback, void* pCallbackArg) {
         return false;
     }
 
-    mLoadTask.fileStream = mFileStream;
-    mLoadTask.buffer = pData;
-    mLoadTask.bufferSize = size;
-    mLoadTask.callback = pCalllback;
-    mLoadTask.callbackData = this;
+    mSeqLoadTask.fileStream = mFileStream;
+    mSeqLoadTask.buffer = pData;
+    mSeqLoadTask.bufferSize = size;
+    mSeqLoadTask.callback = pCalllback;
+    mSeqLoadTask.callbackData = this;
 
-    TaskManager::GetInstance().AppendTask(&mLoadTask);
+    TaskManager::GetInstance().AppendTask(&mSeqLoadTask);
     return true;
 }
 

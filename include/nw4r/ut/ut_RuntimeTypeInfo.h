@@ -2,7 +2,9 @@
 #define NW4R_UT_RUNTIME_TYPE_INFO_H
 #include <nw4r/types_nw4r.h>
 
-// Declare type RTTI and accessor function
+/**
+ * Declare type RTTI and accessor function.
+ */
 #define NW4R_UT_RTTI_DECL(T)                                                   \
     static nw4r::ut::detail::RuntimeTypeInfo typeInfo;                         \
     virtual const nw4r::ut::detail::RuntimeTypeInfo* GetRuntimeTypeInfo()      \
@@ -10,11 +12,15 @@
         return &typeInfo;                                                      \
     }
 
-// Define type RTTI (base type)
+/**
+ * Define type RTTI (base type).
+ */
 #define NW4R_UT_RTTI_DEF_BASE(T)                                               \
     nw4r::ut::detail::RuntimeTypeInfo T::typeInfo(NULL)
 
-// Define type RTTI (derived type)
+/**
+ * Define type RTTI (derived type).
+ */
 #define NW4R_UT_RTTI_DEF_DERIVED(T, BASE)                                      \
     nw4r::ut::detail::RuntimeTypeInfo T::typeInfo(&BASE::typeInfo)
 

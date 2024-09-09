@@ -88,6 +88,7 @@ bool BankFileReader::ReadInstInfo(InstInfo* pInfo, int prgNo, int key,
 
     const BankFile::InstParam* pParam =
         Util::GetDataRefAddress1(*pRef, &mDataBlock->instTable);
+
     if (pParam == NULL) {
         return false;
     }

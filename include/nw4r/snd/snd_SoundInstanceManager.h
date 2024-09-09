@@ -134,7 +134,7 @@ public:
 private:
     MemoryPool<T> mPool;     // at 0x0
     TPrioList mPriorityList; // at 0x4
-    OSMutex mMutex;          // at 0x10
+    mutable OSMutex mMutex;  // at 0x10
 };
 
 } // namespace detail

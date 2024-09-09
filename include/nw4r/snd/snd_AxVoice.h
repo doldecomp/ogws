@@ -69,9 +69,9 @@ public:
         }
     }
 
-    void SetVoicePriority(u32 prio) {
+    void SetVoicePriority(u32 priority) {
         if (IsAvailable()) {
-            AXSetVoicePriority(mVpb, prio);
+            AXSetVoicePriority(mVpb, priority);
         }
     }
 
@@ -108,16 +108,19 @@ public:
     void SetVoiceLpfCoefs(u16 a0, u16 b0);
     void SetVoiceRmtOn(u16 on);
     void SetVoiceRmtMix(const AXPBRMTMIX& rMix);
-    void SetVoiceRmtIIR(const AXPBRMTIIR& rIIR);
+    void SetVoiceRmtIIR(const AXPBRMTIIR& rIir);
     void SetVoiceRmtIIRCoefs(u16 type, ...);
     void UpdateDelta();
 
 private:
-    AXVPB* mVpb;             // at 0x0
-    u32 mSync;               // at 0x4
-    volatile AXPBVE mVePrev; // at 0x8
-    bool mFirstVeUpdate;     // at 0xC
-    u16 mVolume;             // at 0xE
+    static const u16 DEFAULT_VOLUME = AX_MAX_VOLUME;
+
+private:
+    AXVPB* mVpb;                    // at 0x0
+    u32 mSync;                      // at 0x4
+    volatile AXPBVE mPrevVeSetting; // at 0x8
+    bool mFirstVeUpdateFlag;        // at 0xC
+    u16 mVolume;                    // at 0xE
 };
 
 class AxVoice {
@@ -179,14 +182,6 @@ public:
     };
 
 public:
-    static u32 GetDspAddressBySample(const void* pBase, u32 samples,
-                                     Format fmt);
-    static u32 GetSampleByDspAddress(const void* pBase, u32 addr, Format fmt);
-    static u32 GetSampleByByte(u32 addr, Format fmt);
-    static void CalcOffsetAdpcmParam(u16* pPredScale, u16* pYN1, u16* pYN2,
-                                     u32 offset, const void* pData,
-                                     const AdpcmParam& rParam);
-
     AxVoice();
     ~AxVoice();
 
@@ -228,7 +223,7 @@ public:
     u32 GetCurrentPlayingDspAddress() const;
     u32 GetLoopEndDspAddress() const;
 
-    void SetPriority(u32 prio);
+    void SetPriority(u32 priority);
     void SetVoiceType(VoiceType type);
     void EnableRemote(bool enable);
     void ResetDelta();
@@ -244,6 +239,15 @@ public:
     void SetLpf(u16 freq);
     void SetRemoteFilter(u8 filter);
 
+    static u32 GetDspAddressBySample(const void* pBase, u32 samples,
+                                     Format fmt);
+    static u32 GetSampleByDspAddress(const void* pBase, u32 addr, Format fmt);
+    static u32 GetSampleByByte(u32 addr, Format fmt);
+
+    static void CalcOffsetAdpcmParam(u16* pPredScale, u16* pYN1, u16* pYN2,
+                                     u32 offset, const void* pData,
+                                     const AdpcmParam& rParam);
+
 private:
     static void VoiceCallback(void* pArg);
 
@@ -252,11 +256,11 @@ private:
     const void* mWaveData;     // at 0x10
     Format mFormat;            // at 0x14
     int mSampleRate;           // at 0x18
-    bool mFirstMixUpdate;      // at 0x1C
-    bool mReserveForFree;      // at 0x1D
+    bool mFirstMixUpdateFlag;  // at 0x1C
+    bool mReserveForFreeFlag;  // at 0x1D
     MixParam mMixPrev;         // at 0x1E
     AxVoiceCallback mCallback; // at 0x38
-    void* mCallbackArg;        // at 0x3C
+    void* mCallbackData;       // at 0x3C
 
 public:
     NW4R_UT_LIST_NODE_DECL(); // at 0x40

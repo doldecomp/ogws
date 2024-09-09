@@ -100,19 +100,9 @@ public:
     void SetTrackPitch(u32 trackFlags, f32 pitch);
 
     SeqTrack* GetPlayerTrack(int i);
-    void CloseTrack(int i);
-    void SetPlayerTrack(int i, SeqTrack* pTrack);
-
-    void FinishPlayer();
-    void UpdateChannelParam();
-    int ParseNextTick(bool doNoteOn);
     volatile s16* GetVariablePtr(int i);
-
     void Update();
-    void UpdateTick(int msec);
-    void SkipTick();
 
-    static void InitGlobalVariable();
     Channel* NoteOn(int bankNo, const NoteOnInfo& rInfo);
 
     template <typename T>
@@ -156,9 +146,23 @@ public:
 private:
     static const int DEFAULT_TEMPO = 120;
     static const int DEFAULT_TIMEBASE = 48;
+    static const int DEFAULT_PRIORITY = 64;
     static const int DEFAULT_VARIABLE_VALUE = -1;
 
     static const int MAX_SKIP_TICK_PER_FRAME = 768;
+
+private:
+    void CloseTrack(int i);
+    void SetPlayerTrack(int i, SeqTrack* pTrack);
+
+    void FinishPlayer();
+    void UpdateChannelParam();
+    int ParseNextTick(bool doNoteOn);
+
+    void UpdateTick(int msec);
+    void SkipTick();
+
+    static void InitGlobalVariable();
 
 private:
     bool mActiveFlag;             // at 0x8C

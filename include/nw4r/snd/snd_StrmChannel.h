@@ -18,6 +18,7 @@ class StrmBufferPool {
 public:
     void Setup(void* pBase, u32 size, int count);
     void Shutdown();
+
     void* Alloc();
     void Free(void* pBuffer);
 

@@ -188,8 +188,6 @@ private:
     }
 
 private:
-    static LoadingTexture mLoadingTexture;
-
     ColorMapping mColorMapping; // at 0x0
     VertexColor mVertexColor;   // at 0x8
     TextColor mTextColor;       // at 0x18
@@ -201,6 +199,8 @@ private:
     bool mIsWidthFixed;         // at 0x43
     f32 mFixedWidth;            // at 0x44
     const Font* mFont;          // at 0x48
+
+    static LoadingTexture mLoadingTexture;
 };
 
 } // namespace ut

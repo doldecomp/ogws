@@ -14,7 +14,7 @@ public:
     NW4R_UT_RTTI_DECL(DvdLockedFileStream);
 
 public:
-    DvdLockedFileStream(s32 entrynum);
+    explicit DvdLockedFileStream(s32 entrynum);
     DvdLockedFileStream(const DVDFileInfo* pInfo, bool close);
     virtual ~DvdLockedFileStream(); // at 0xC
 
@@ -42,10 +42,10 @@ private:
     static void InitMutex_();
 
 private:
+    bool mCancelFlag; // at 0x6F
+
     static bool sInitialized;
     static OSMutex sMutex;
-
-    bool mCancelFlag; // at 0x6F
 };
 
 } // namespace ut

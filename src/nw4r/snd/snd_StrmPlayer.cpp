@@ -9,20 +9,21 @@ namespace nw4r {
 namespace snd {
 namespace detail {
 
-u8 StrmPlayer::sLoadBuffer[0x4000 + 32] ALIGN(32);
+u8 StrmPlayer::sLoadBuffer[LOAD_BUFFER_SIZE] ALIGN(32);
 OSMutex StrmPlayer::sLoadBufferMutex;
 
 bool StrmPlayer::sStaticInitFlag = false;
 
 StrmPlayer::StrmPlayer()
     : mSetupFlag(false), mActiveFlag(false), mFileStream(NULL), mVoice(NULL) {
+
     if (!sStaticInitFlag) {
         OSInitMutex(&sLoadBufferMutex);
         sStaticInitFlag = true;
     }
 
-    mStrmDataLoadTaskPool.Create(mStrmDataLoadTaskArea,
-                                 scMaxBlocks * sizeof(StrmDataLoadTask));
+    mStrmDataLoadTaskPool.Create(
+        mStrmDataLoadTaskArea, DATA_BLOCK_COUNT_MAX * sizeof(StrmDataLoadTask));
 }
 
 StrmPlayer::~StrmPlayer() {
@@ -53,8 +54,8 @@ void StrmPlayer::Shutdown() {
     }
 
     mBufferPool = NULL;
-    mStrmDataLoadTaskPool.Destroy(mStrmDataLoadTaskArea,
-                                  scMaxBlocks * sizeof(StrmDataLoadTask));
+    mStrmDataLoadTaskPool.Destroy(
+        mStrmDataLoadTaskArea, DATA_BLOCK_COUNT_MAX * sizeof(StrmDataLoadTask));
 
     mSetupFlag = false;
 }
@@ -233,7 +234,8 @@ bool StrmPlayer::LoadHeader(ut::FileStream* pFileStream,
     ut::detail::AutoLock<OSMutex> lock(sLoadBufferMutex);
 
     StrmFileLoader loader(*pFileStream);
-    if (!loader.LoadFileHeader(sLoadBuffer, scHeaderLoadSize)) {
+    if (!loader.LoadFileHeader(sLoadBuffer,
+                               ut::RoundUp(sizeof(StrmHeader), 64))) {
         return false;
     }
 
@@ -292,6 +294,7 @@ bool StrmPlayer::LoadStreamData(ut::FileStream* pFileStream, int offset,
                                 bool needUpdateAdpcmLoop) {
     ut::DvdFileStream* pDvdStream =
         ut::DynamicCast<ut::DvdFileStream*>(pFileStream);
+
     if (pDvdStream != NULL) {
         pDvdStream->SetPriority(DVD_PRIO_HIGH);
     }
@@ -359,15 +362,15 @@ bool StrmPlayer::SetupPlayer(const StrmHeader* pStrmHeader) {
     mLastBlockIndex = mStrmInfo.numBlocks - 1;
 
     mDataBlockSize = mStrmInfo.blockSize;
-    if (mDataBlockSize > scMaxBlockSize) {
+    if (mDataBlockSize > DATA_BLOCK_SIZE_MAX) {
         return false;
     }
 
     mBufferBlockCount = poolBlockSize / mDataBlockSize;
-    if (mBufferBlockCount < scMinBlocks) {
+    if (mBufferBlockCount < DATA_BLOCK_COUNT_MIN) {
         return false;
-    } else if (mBufferBlockCount > scMaxBlocks) {
-        mBufferBlockCount = scMaxBlocks;
+    } else if (mBufferBlockCount > DATA_BLOCK_COUNT_MAX) {
+        mBufferBlockCount = DATA_BLOCK_COUNT_MAX;
     }
 
     mBufferBlockCountBase = mBufferBlockCount - 1;

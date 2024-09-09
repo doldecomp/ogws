@@ -22,33 +22,34 @@ public:
     void Shutdown();
     void StopAllVoices();
 
-    Voice* AllocVoice(int channels, int voices, int prio,
+    Voice* AllocVoice(int channels, int voices, int priority,
                       Voice::VoiceCallback pCallback, void* pCallbackArg);
     void FreeVoice(Voice* pVoice);
 
-    const VoiceList& GetVoiceList() const {
-        return mPriorityList;
-    }
-
     void UpdateAllVoices();
     void NotifyVoiceUpdate();
-    void AppendVoiceList(Voice* pVoice);
-    void RemoveVoiceList(Voice* pVoice);
-
     void ChangeVoicePriority(Voice* pVoice);
-    void UpdateEachVoicePriority(const VoiceList::Iterator& rBegin,
-                                 const VoiceList::Iterator& rEnd);
     void UpdateAllVoicesSync(u32 syncFlag);
-    int DropLowestPriorityVoice(int prio);
+
+    const VoiceList& GetVoiceList() const {
+        return mPrioVoiceList;
+    }
 
 private:
     VoiceManager();
-    ~VoiceManager() {}
+
+    void AppendVoiceList(Voice* pVoice);
+    void RemoveVoiceList(Voice* pVoice);
+
+    void UpdateEachVoicePriority(const VoiceList::Iterator& rBegin,
+                                 const VoiceList::Iterator& rEnd);
+
+    int DropLowestPriorityVoice(int priority);
 
 private:
-    bool mInitialized;       // at 0x0
-    VoiceList mPriorityList; // at 0x4
-    VoiceList mFreeList;     // at 0x10
+    bool mInitialized;        // at 0x0
+    VoiceList mPrioVoiceList; // at 0x4
+    VoiceList mFreeVoiceList; // at 0x10
 };
 
 } // namespace detail

@@ -92,7 +92,7 @@ public:
     void SetFxSend(AuxBus bus, f32 send);
     f32 GetFxSend(AuxBus bus) const;
 
-    void SetRemoteOutVolume(int remote, f32 vol);
+    void SetRemoteOutVolume(int remote, f32 volume);
     f32 GetRemoteOutVolume(int remote) const;
 
     f32 GetRemoteSend(int remote) const;
@@ -102,7 +102,7 @@ public:
         return mRemoteFilter;
     }
     void SetRemoteFilter(int filter) {
-        mRemoteFilter = ut::Clamp(filter, 0, FILTER_MAX);
+        mRemoteFilter = ut::Clamp(filter, 0, REMOTE_FILTER_MAX);
     }
 
     PanMode GetPanMode() const {
@@ -119,17 +119,16 @@ public:
         mPanCurve = curve;
     }
 
-public:
-    static const int FILTER_MAX = 127;
-
 private:
-    u32 mId;          // at 0x4
+    u32 mId; // at 0x4
+
     f32 mVolume;      // at 0x8
     f32 mPitch;       // at 0xC
     f32 mPan;         // at 0x10
     f32 mSurroundPan; // at 0x14
     f32 mLpfFreq;     // at 0x18
     char UNK_0x1C[0x4];
+
     int mOutputLine;                            // at 0x20
     f32 mMainOutVolume;                         // at 0x24
     f32 mMainSend;                              // at 0x28

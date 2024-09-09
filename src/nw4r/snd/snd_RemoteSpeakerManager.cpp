@@ -15,7 +15,7 @@ RemoteSpeakerManager& RemoteSpeakerManager::GetInstance() {
 }
 
 RemoteSpeakerManager::RemoteSpeakerManager() : mInitialized(false) {
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < WPAD_MAX_CONTROLLERS; i++) {
         mSpeaker[i].SetChannelIndex(i);
     }
 }
@@ -61,9 +61,8 @@ void RemoteSpeakerManager::RemoteSpeakerAlarmProc(OSAlarm* pAlarm,
 
     for (int i = 0; i < WPAD_MAX_CONTROLLERS; i++) {
         if (r.mSpeaker[i].IsAvailable()) {
-            (void)AXRmtGetSamples(
-                i, samples,
-                RemoteSpeaker::SAMPLES_PER_AUDIO_PACKET); // debug leftover
+            AXRmtGetSamples(i, samples,
+                            RemoteSpeaker::SAMPLES_PER_AUDIO_PACKET);
 
             r.mSpeaker[i].UpdateStreamData(samples);
         }

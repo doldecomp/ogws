@@ -16,7 +16,7 @@ Voice::Voice()
       mSyncFlag(0) {
 
     for (int i = 0; i < CHANNEL_MAX; i++) {
-        for (int j = 0; j < scVoicesOutMax; j++) {
+        for (int j = 0; j < VOICES_MAX; j++) {
             mAxVoice[i][j] = NULL;
         }
     }
@@ -24,7 +24,7 @@ Voice::Voice()
 
 Voice::~Voice() {
     for (int i = 0; i < CHANNEL_MAX; i++) {
-        for (int j = 0; j < scVoicesOutMax; j++) {
+        for (int j = 0; j < VOICES_MAX; j++) {
             AxVoice* pVoice = mAxVoice[i][j];
 
             if (pVoice != NULL) {
@@ -148,22 +148,22 @@ void Voice::Update() {
     }
 }
 
-bool Voice::Acquire(int channels, int voices, int prio, VoiceCallback pCallback,
-                    void* pCallbackArg) {
+bool Voice::Acquire(int channels, int voices, int priority,
+                    VoiceCallback pCallback, void* pCallbackArg) {
     channels = ut::Clamp(channels, CHANNEL_MIN, CHANNEL_MAX);
-    voices = ut::Clamp(voices, scVoicesOutMin, scVoicesOutMax);
+    voices = ut::Clamp(voices, VOICES_MIN, VOICES_MAX);
 
     ut::AutoInterruptLock lock;
 
     u32 axPrio;
-    if (prio == PRIORITY_MAX) {
+    if (priority == PRIORITY_MAX) {
         axPrio = AX_PRIORITY_MAX;
     } else {
         axPrio = (AX_PRIORITY_MAX / 2) + 1;
     }
 
     int required = channels * voices;
-    AxVoice* voiceTable[CHANNEL_MAX * scVoicesOutMax];
+    AxVoice* voiceTable[CHANNEL_MAX * VOICES_MAX];
 
     for (int i = 0; required > i; i++) {
         AxVoice* pAxVoice = AxVoiceManager::GetInstance().AcquireAxVoice(
@@ -178,7 +178,7 @@ bool Voice::Acquire(int channels, int voices, int prio, VoiceCallback pCallback,
             for (VoiceList::ConstIterator it = rVoiceList.GetBeginIter();
                  it != rVoiceList.GetEndIter(); ++it) {
 
-                if (prio < it->GetPriority()) {
+                if (priority < it->GetPriority()) {
                     break;
                 }
 
@@ -525,8 +525,8 @@ void Voice::SetRemoteFxSend(int remote, f32 send) {
     mSyncFlag |= SYNC_AX_MIX;
 }
 
-void Voice::SetPriority(int prio) {
-    mPriority = prio;
+void Voice::SetPriority(int priority) {
+    mPriority = priority;
     VoiceManager::GetInstance().ChangeVoicePriority(this);
 
     if (mPriority != 1) {
@@ -749,7 +749,7 @@ void Voice::ResetDelta() {
 void Voice::AxVoiceCallbackFunc(AxVoice* pDropVoice,
                                 AxVoice::AxVoiceCallbackStatus status,
                                 void* pCallbackArg) {
-    Voice* pSelf = static_cast<Voice*>(pCallbackArg);
+    Voice* p = static_cast<Voice*>(pCallbackArg);
 
     VoiceCallbackStatus voiceStatus;
     bool freeDropVoice = false;
@@ -767,9 +767,9 @@ void Voice::AxVoiceCallbackFunc(AxVoice* pDropVoice,
     }
     }
 
-    for (int i = 0; i < pSelf->mChannelCount; i++) {
-        for (int j = 0; j < pSelf->mVoiceOutCount; j++) {
-            AxVoice* pAxVoice = pSelf->mAxVoice[i][j];
+    for (int i = 0; i < p->mChannelCount; i++) {
+        for (int j = 0; j < p->mVoiceOutCount; j++) {
+            AxVoice* pAxVoice = p->mAxVoice[i][j];
 
             if (pAxVoice != NULL) {
                 if (pAxVoice == pDropVoice) {
@@ -781,21 +781,21 @@ void Voice::AxVoiceCallbackFunc(AxVoice* pDropVoice,
                     AxVoiceManager::GetInstance().FreeAxVoice(pAxVoice);
                 }
 
-                pSelf->mAxVoice[i][j] = NULL;
+                p->mAxVoice[i][j] = NULL;
             }
         }
     }
 
-    pSelf->mIsPause = false;
-    pSelf->mIsStarting = false;
-    pSelf->mChannelCount = 0;
+    p->mIsPause = false;
+    p->mIsStarting = false;
+    p->mChannelCount = 0;
 
     if (freeDropVoice) {
-        pSelf->Free();
+        p->Free();
     }
 
-    if (pSelf->mCallback != NULL) {
-        pSelf->mCallback(pSelf, voiceStatus, pSelf->mCallbackArg);
+    if (p->mCallback != NULL) {
+        p->mCallback(p, voiceStatus, p->mCallbackArg);
     }
 }
 

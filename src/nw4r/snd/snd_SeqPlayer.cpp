@@ -27,7 +27,7 @@ SeqPlayer::SeqPlayer() {
     mParserParam.tempo = DEFAULT_TEMPO;
     mParserParam.timebase = DEFAULT_TIMEBASE;
     mParserParam.volume = 127;
-    mParserParam.priority = 64;
+    mParserParam.priority = DEFAULT_PRIORITY;
     mParserParam.callback = NULL;
 
     for (int i = 0; i < LOCAL_VARIABLE_NUM; i++) {

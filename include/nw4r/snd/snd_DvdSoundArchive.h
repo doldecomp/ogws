@@ -42,7 +42,6 @@ public:
 
     void Close();
 
-    bool LoadFileHeader();
     bool LoadHeader(void* pBuffer, u32 size);
     bool LoadLabelStringData(void* pBuffer, u32 size);
 
@@ -52,6 +51,9 @@ public:
     u32 GetLabelStringDataSize() const {
         return mFileReader.GetLabelStringChunkSize();
     }
+
+private:
+    bool LoadFileHeader();
 
 private:
     detail::SoundArchiveFileReader mFileReader; // at 0x108

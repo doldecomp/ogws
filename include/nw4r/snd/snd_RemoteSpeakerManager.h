@@ -15,8 +15,6 @@ class RemoteSpeakerManager {
 public:
     static RemoteSpeakerManager& GetInstance();
 
-    RemoteSpeakerManager();
-
     RemoteSpeaker& GetRemoteSpeaker(int i);
 
     void Setup();
@@ -29,6 +27,8 @@ private:
         static_cast<int>(1.0f / SPEAKER_ALARM_HZ * 1000 * 1000 * 1000);
 
 private:
+    RemoteSpeakerManager();
+
     static void RemoteSpeakerAlarmProc(OSAlarm* pAlarm, OSContext* pCtx);
 
 private:

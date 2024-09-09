@@ -20,7 +20,6 @@ public:
 
 private:
     DisposeCallbackManager();
-    ~DisposeCallbackManager() {}
 
 private:
     DisposeCallbackList mCallbackList; // at 0x0

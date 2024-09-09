@@ -21,7 +21,6 @@ class WsdPlayer : public BasicPlayer,
 public:
     class WsdCallback {
     public:
-        WsdCallback() {}
         virtual ~WsdCallback() {} // at 0x8
 
         virtual bool GetWaveSoundData(WaveSoundInfo* pSoundInfo,
@@ -38,7 +37,6 @@ public:
 
 public:
     WsdPlayer();
-    virtual ~WsdPlayer() {} // at 0x8
 
     virtual bool Start();          // at 0xC
     virtual void Stop();           // at 0x10

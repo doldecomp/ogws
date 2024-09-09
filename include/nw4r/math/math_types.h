@@ -557,7 +557,7 @@ inline MTX34* MTX34Trans(MTX34* pOut, const VEC3* pTrans, const MTX34* pIn) {
  *
  ******************************************************************************/
 MTX44* MTX44Identity(MTX44* pMtx);
-MTX44* MTX44Copy(MTX44* dst, const MTX44* src);
+MTX44* MTX44Copy(MTX44* pDst, const MTX44* pSrc);
 
 /******************************************************************************
  *

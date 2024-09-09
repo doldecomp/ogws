@@ -82,7 +82,7 @@ public:
     static const int VERSION = NW4R_VERSION(1, 1);
 
 public:
-    BankFileReader(const void* pBankBin);
+    explicit BankFileReader(const void* pBankBin);
 
     bool IsValidFileHeader(const void* pBankBin);
 

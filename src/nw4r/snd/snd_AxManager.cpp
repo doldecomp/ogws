@@ -14,13 +14,13 @@ namespace detail {
 
 NW4R_UT_LIST_TYPEDEF_FORCE(FxBase);
 
-u8 AxManager::sZeroBuffer[0x100];
+u8 AxManager::sZeroBuffer[AxManager::ZERO_BUFFER_SIZE];
 
 AxManager::AxManager()
     : mOutputMode(OUTPUT_MODE_STEREO),
-      mZeroBuffer(NULL),
+      mZeroBufferAddress(NULL),
       mInitialized(false),
-      mUpdateVoicePrio(true),
+      mUpdateVoicePrioFlag(true),
       mOldAidCallback(NULL),
       mResetReadyCounter(-1),
       mDiskError(false) {
@@ -49,7 +49,7 @@ void AxManager::Init() {
 
     std::memset(sZeroBuffer, 0, sizeof(sZeroBuffer));
     DCFlushRange(sZeroBuffer, sizeof(sZeroBuffer));
-    mZeroBuffer = sZeroBuffer;
+    mZeroBufferAddress = sZeroBuffer;
 
     ut::AutoInterruptLock lock;
 
@@ -61,7 +61,7 @@ void AxManager::Init() {
     AXRegisterAuxBCallback(NULL, NULL);
     AXRegisterAuxCCallback(NULL, NULL);
 
-    mOldAxCallback = AXRegisterCallback(AxCallbackFunc);
+    mNextAxRegisterCallback = AXRegisterCallback(AxCallbackFunc);
 
     mInitialized = true;
 }
@@ -71,7 +71,7 @@ void AxManager::Shutdown() {
         return;
     }
 
-    AXRegisterCallback(mOldAxCallback);
+    AXRegisterCallback(mNextAxRegisterCallback);
 
     ShutdownEffect(AUX_A);
     ShutdownEffect(AUX_B);
@@ -86,7 +86,8 @@ void AxManager::Shutdown() {
         mAuxCallbackContext[i] = NULL;
     }
 
-    mZeroBuffer = NULL;
+    mZeroBufferAddress = NULL;
+
     mInitialized = false;
 }
 
@@ -130,25 +131,24 @@ void AxManager::Update() {
         }
 
         if (update) {
-            f32 retVolF32 = 1.0f;
-            retVolF32 *= ut::Clamp(mAuxUserVolume[i].GetValue(), 0.0f, 1.0f);
-            retVolF32 *= ut::Clamp(mAuxFadeVolume[i].GetValue(), 0.0f, 1.0f);
-
-            u16 retVolU16 = static_cast<u16>(32768 * retVolF32);
+            f32 ratio = 1.0f;
+            ratio *= ut::Clamp(mAuxUserVolume[i].GetValue(), 0.0f, 1.0f);
+            ratio *= ut::Clamp(mAuxFadeVolume[i].GetValue(), 0.0f, 1.0f);
+            u16 volume = static_cast<u16>(AX_MAX_VOLUME * ratio);
 
             switch (i) {
             case AUX_A: {
-                AXSetAuxAReturnVolume(retVolU16);
+                AXSetAuxAReturnVolume(volume);
                 break;
             }
 
             case AUX_B: {
-                AXSetAuxBReturnVolume(retVolU16);
+                AXSetAuxBReturnVolume(volume);
                 break;
             }
 
             case AUX_C: {
-                AXSetAuxCReturnVolume(retVolU16);
+                AXSetAuxCReturnVolume(volume);
                 break;
             }
             }
@@ -168,14 +168,14 @@ void AxManager::Update() {
         mMainOutVolume.Update();
     }
 
-    f32 masterVol = mMainOutVolume.GetValue();
-    masterVol *= mVolumeForReset.GetValue();
-    masterVol = ut::Clamp(masterVol, 0.0f, 1.0f);
-    AXSetMasterVolume(32768 * masterVol);
+    f32 masterRatio = mMainOutVolume.GetValue();
+    masterRatio *= mVolumeForReset.GetValue();
+    masterRatio = ut::Clamp(masterRatio, 0.0f, 1.0f);
+    AXSetMasterVolume(static_cast<u16>(AX_MAX_VOLUME * masterRatio));
 }
 
 void* AxManager::GetZeroBufferAddress() {
-    return mZeroBuffer;
+    return mZeroBufferAddress;
 }
 
 void AxManager::RegisterCallback(CallbackListNode* pNode,
@@ -235,8 +235,8 @@ void AxManager::AxCallbackFunc() {
         it->callback();
     );
 
-    if (GetInstance().mOldAxCallback != NULL) {
-        GetInstance().mOldAxCallback();
+    if (GetInstance().mNextAxRegisterCallback != NULL) {
+        GetInstance().mNextAxRegisterCallback();
     }
 }
 
@@ -291,7 +291,7 @@ bool AxManager::AppendEffect(AuxBus bus, FxBase* pFx) {
         }
         }
 
-        mAuxCallbackWait[bus] = 2;
+        mAuxCallbackWaitCounter[bus] = 2;
     }
 
     GetEffectList(bus).PushBack(pFx);
@@ -361,23 +361,23 @@ void AxManager::AuxCallbackFunc(void* pChans, void* pContext) {
         buffer[AX_STEREO_S] = ppChans[AX_STEREO_S];
     }
 
-    if (GetInstance().mAuxCallbackWait[bus] > 0) {
-        GetInstance().mAuxCallbackWait[bus]--;
+    if (GetInstance().mAuxCallbackWaitCounter[bus] > 0) {
+        GetInstance().mAuxCallbackWaitCounter[bus]--;
 
         for (int i = 0; i < num; i++) {
-            std::memset(buffer[i], 0, AX_FRAME_SIZE);
+            std::memset(buffer[i], 0, FX_BUFFER_SIZE);
         }
     } else if (GetInstance().GetEffectList(bus).IsEmpty()) {
         for (int i = 0; i < num; i++) {
-            std::memset(buffer[i], 0, AX_FRAME_SIZE);
+            std::memset(buffer[i], 0, FX_BUFFER_SIZE);
         }
     } else {
         for (FxBaseList::Iterator it =
                  GetInstance().GetEffectList(bus).GetBeginIter();
              it != GetInstance().GetEffectList(bus).GetEndIter(); ++it) {
 
-            it->UpdateBuffer(num, buffer, AX_FRAME_SIZE, SAMPLE_FORMAT_PCM_S32,
-                             AX_SAMPLE_RATE, GetInstance().GetOutputMode());
+            it->UpdateBuffer(num, buffer, FX_BUFFER_SIZE, FX_SAMPLE_FORMAT,
+                             FX_SAMPLE_RATE, GetInstance().GetOutputMode());
         }
     }
 }
@@ -401,7 +401,7 @@ void AxManager::AiDmaCallbackFunc() {
     if (finishedFlag) {
         if (r.mResetReadyCounter < 0) {
             AXSetMaxDspCycles(0);
-            r.mResetReadyCounter = 6;
+            r.mResetReadyCounter = AUX_CALLBACK_WAIT_FRAME;
         }
     } else if (r.mVolumeForReset.GetValue() == 0.0f) {
         finishedFlag = true;

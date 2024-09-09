@@ -43,7 +43,7 @@ public:
 
     public:
         Iterator() : mNode(NULL) {}
-        Iterator(LinkListNode* pNode) : mNode(pNode) {}
+        explicit Iterator(LinkListNode* pNode) : mNode(pNode) {}
 
         Iterator& operator++() {
             mNode = mNode->GetNext();
@@ -72,7 +72,7 @@ public:
         friend class LinkListImpl;
 
     public:
-        ConstIterator(Iterator it) : mNode(it.mNode) {}
+        explicit ConstIterator(Iterator it) : mNode(it.mNode) {}
 
         ConstIterator& operator++() {
             mNode = mNode->GetNext();
@@ -151,7 +151,7 @@ private:
 
 template <typename TIter> class ReverseIterator {
 public:
-    ReverseIterator(TIter it) : mCurrent(it) {}
+    explicit ReverseIterator(TIter it) : mCurrent(it) {}
 
     TIter GetBase() const {
         return mCurrent;
@@ -203,7 +203,7 @@ public:
 
     public:
         Iterator() : mIterator(NULL) {}
-        Iterator(LinkListImpl::Iterator it) : mIterator(it) {}
+        explicit Iterator(LinkListImpl::Iterator it) : mIterator(it) {}
 
         Iterator& operator++() {
             ++mIterator;
@@ -249,8 +249,8 @@ public:
         typedef T TElem;
 
     public:
-        ConstIterator(LinkListImpl::Iterator it) : mIterator(it) {}
-        ConstIterator(Iterator it) : mIterator(it.mIterator) {}
+        explicit ConstIterator(LinkListImpl::Iterator it) : mIterator(it) {}
+        explicit ConstIterator(Iterator it) : mIterator(it.mIterator) {}
 
         ConstIterator& operator++() {
             ++mIterator;

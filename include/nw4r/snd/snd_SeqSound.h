@@ -27,27 +27,8 @@ class SeqSound : public BasicSound {
 public:
     NW4R_UT_RTTI_DECL(SeqSound);
 
-    typedef void (*SeqLoadCallback)(bool success, const void* pBase,
-                                    void* pCallbackArg);
-
-    struct SeqLoadTask : public Task {
-        SeqLoadTask();
-        virtual ~SeqLoadTask() {} // at 0x8
-
-        virtual void Execute();  // at 0xC
-        virtual void Cancel();   // at 0x10
-        virtual void OnCancel(); // at 0x14
-
-        ut::FileStream* fileStream; // at 0x10
-        void* buffer;               // at 0x14
-        int bufferSize;             // at 0x18
-        SeqLoadCallback callback;   // at 0x1C
-        SeqSound* callbackData;     // at 0x20
-    };
-
 public:
-    SeqSound(SoundInstanceManager<SeqSound>* pManager);
-    virtual ~SeqSound() {} // at 0x8
+    explicit SeqSound(SoundInstanceManager<SeqSound>* pManager);
 
     virtual void Shutdown(); // at 0x28
     virtual bool IsPrepared() const {
@@ -55,9 +36,11 @@ public:
     } // at 0x2C
 
     virtual void SetPlayerPriority(int priority); // at 0x4C
-    virtual bool IsAttachedTempSpecialHandle();   // at 0x5C
-    virtual void DetachTempSpecialHandle();       // at 0x60
-    virtual void InitParam();                     // at 0x64
+
+    virtual bool IsAttachedTempSpecialHandle(); // at 0x5C
+    virtual void DetachTempSpecialHandle();     // at 0x60
+
+    virtual void InitParam(); // at 0x64
 
     virtual BasicPlayer& GetBasicPlayer() {
         return mSeqPlayer;
@@ -88,8 +71,6 @@ public:
     bool WriteVariable(int i, s16 value);
     static bool WriteGlobalVariable(int i, s16 value);
 
-    bool LoadData(SeqLoadCallback pCalllback, void* pCallbackArg);
-
     void* GetFileStreamBuffer() {
         return mFileStreamBuffer;
     }
@@ -98,6 +79,28 @@ public:
     }
 
 private:
+    typedef void (*SeqLoadCallback)(bool success, const void* pBase,
+                                    void* pCallbackArg);
+
+    struct SeqLoadTask : public Task {
+        SeqLoadTask();
+
+        virtual void Execute();  // at 0xC
+        virtual void Cancel();   // at 0x10
+        virtual void OnCancel(); // at 0x14
+
+        ut::FileStream* fileStream; // at 0x10
+        void* buffer;               // at 0x14
+        int bufferSize;             // at 0x18
+        SeqLoadCallback callback;   // at 0x1C
+        SeqSound* callbackData;     // at 0x20
+    };
+
+    static const int FILE_STREAM_BUFFER_SIZE = 512;
+
+private:
+    bool LoadData(SeqLoadCallback pCalllback, void* pCallbackArg);
+
     static void NotifyLoadAsyncEndSeqData(bool success, const void* pBase,
                                           void* pCallbackArg);
 
@@ -113,11 +116,11 @@ private:
     bool mLoadingFlag;           // at 0x208
     volatile bool mPreparedFlag; // at 0x209
 
-    ut::FileStream* mFileStream; // at 0x20C
-    char mFileStreamBuffer[512]; // at 0x210
+    ut::FileStream* mFileStream;                     // at 0x20C
+    char mFileStreamBuffer[FILE_STREAM_BUFFER_SIZE]; // at 0x210
 
-    SeqLoadTask mLoadTask; // at 0x410
-    OSMutex mMutex;        // at 0x434
+    SeqLoadTask mSeqLoadTask; // at 0x410
+    mutable OSMutex mMutex;   // at 0x434
 };
 
 } // namespace detail

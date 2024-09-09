@@ -63,8 +63,8 @@ public:
     }
 
 private:
-    bool mIsEnabled; // at 0x0
-    OSMutex mMutex;  // at 0x4
+    bool mIsEnabled;        // at 0x0
+    mutable OSMutex mMutex; // at 0x4
 };
 
 static LCImpl sLCImpl;

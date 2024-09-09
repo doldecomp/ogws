@@ -19,21 +19,22 @@ public:
     void detail_AttachSound(detail::BasicSound* pSound);
     void detail_AttachSoundAsTempHandle(detail::BasicSound* pSound);
 
-    void DetachSound();
-
     bool IsAttachedSound() const {
         return mSound != NULL;
     }
+
+    detail::BasicSound* detail_GetAttachedSound() {
+        return mSound;
+    }
+
+    void DetachSound();
+
     bool IsPrepared() const {
         if (IsAttachedSound()) {
             return mSound->IsPrepared();
         }
 
         return false;
-    }
-
-    detail::BasicSound* detail_GetAttachedSound() {
-        return mSound;
     }
 
     u32 GetId() const {

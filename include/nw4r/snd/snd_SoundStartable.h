@@ -55,7 +55,6 @@ public:
     };
 
 public:
-    SoundStartable() {}
     virtual ~SoundStartable() {} // at 0x8
 
     virtual StartResult

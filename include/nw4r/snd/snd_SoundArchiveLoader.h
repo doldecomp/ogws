@@ -42,14 +42,14 @@ private:
 
 class SoundArchiveLoader {
 public:
-    SoundArchiveLoader(const SoundArchive& rArchive);
+    explicit SoundArchiveLoader(const SoundArchive& rArchive);
     ~SoundArchiveLoader();
 
     void* LoadGroup(u32 id, SoundMemoryAllocatable* pAllocatable,
                     void** ppWaveBuffer, u32 blockSize);
 
 private:
-    OSMutex mMutex;           // at 0x0
+    mutable OSMutex mMutex;   // at 0x0
     const SoundArchive& mArc; // at 0x18
     u8 mStreamArea[512];      // at 0x1C
     ut::FileStream* mStream;  // at 0x21C

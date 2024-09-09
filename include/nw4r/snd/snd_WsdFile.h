@@ -110,7 +110,7 @@ public:
     static const int VERSION = NW4R_VERSION(1, 2);
 
 public:
-    WsdFileReader(const void* pWsdBin);
+    explicit WsdFileReader(const void* pWsdBin);
 
     bool IsValidFileHeader(const void* pWsdBin);
 

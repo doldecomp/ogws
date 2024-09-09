@@ -73,15 +73,15 @@ void Channel::InitParam(ChannelCallback pCallback, u32 callbackArg) {
     mNextLink = NULL;
 
     mCallback = pCallback;
-    mCallbackArg = callbackArg;
+    mCallbackData = callbackArg;
 
     mPauseFlag = false;
     mAutoSweep = true;
     mReleasePriorityFixFlag = false;
 
     mLength = 0;
-    mKey = 60;
-    mOriginalKey = 60;
+    mKey = KEY_INIT;
+    mOriginalKey = ORIGINAL_KEY_INIT;
 
     mInitVolume = 1.0f;
     mInitPan = 0.0f;
@@ -111,7 +111,7 @@ void Channel::InitParam(ChannelCallback pCallback, u32 callbackArg) {
         mRemoteFxSend[i] = 0.0f;
     }
 
-    mSilenceVolume.InitValue(255);
+    mSilenceVolume.InitValue(SILENCE_VOLUME_MAX);
 
     mSweepPitch = 0.0f;
     mSweepLength = 0;
@@ -140,7 +140,7 @@ void Channel::Update(bool periodic) {
     f32 volume = 1.0f;
     volume *= mInitVolume;
     volume *= mUserVolume;
-    volume *= mSilenceVolume.GetValue() / 255.0f;
+    volume *= mSilenceVolume.GetValue() / static_cast<f32>(SILENCE_VOLUME_MAX);
 
     f32 veInitVolume = 1.0f;
     veInitVolume *= Util::CalcVolumeRatio(mEnvelope.GetValue());
@@ -277,7 +277,7 @@ void Channel::Start(const WaveData& rData, int length, u32 offset) {
 void Channel::Release() {
     if (mEnvelope.GetStatus() != EnvGenerator::STATUS_RELEASE) {
         if (mVoice != NULL && !mReleasePriorityFixFlag) {
-            mVoice->SetPriority(1);
+            mVoice->SetPriority(PRIORITY_RELEASE);
         }
 
         mEnvelope.SetStatus(EnvGenerator::STATUS_RELEASE);
@@ -304,7 +304,7 @@ void Channel::Stop() {
     }
 
     if (mCallback != NULL) {
-        mCallback(this, CALLBACK_STATUS_STOPPED, mCallbackArg);
+        mCallback(this, CALLBACK_STATUS_STOPPED, mCallbackData);
     }
 }
 
@@ -370,7 +370,7 @@ void Channel::VoiceCallbackFunc(Voice* pDropVoice,
     Channel* pChannel = static_cast<Channel*>(pCallbackArg);
 
     if (pChannel->mCallback != NULL) {
-        pChannel->mCallback(pChannel, channelStatus, pChannel->mCallbackArg);
+        pChannel->mCallback(pChannel, channelStatus, pChannel->mCallbackData);
     }
 
     pChannel->mVoice = NULL;
@@ -381,7 +381,7 @@ void Channel::VoiceCallbackFunc(Voice* pDropVoice,
     ChannelManager::GetInstance().Free(pChannel);
 }
 
-Channel* Channel::AllocChannel(int channels, int voices, int prio,
+Channel* Channel::AllocChannel(int channels, int voices, int priority,
                                ChannelCallback pCallback, u32 callbackArg) {
     Channel* pChannel = ChannelManager::GetInstance().Alloc();
     if (pChannel == NULL) {
@@ -391,7 +391,7 @@ Channel* Channel::AllocChannel(int channels, int voices, int prio,
     pChannel->mAllocFlag = true;
 
     Voice* pVoice = VoiceManager::GetInstance().AllocVoice(
-        channels, voices, prio, VoiceCallbackFunc, pChannel);
+        channels, voices, priority, VoiceCallbackFunc, pChannel);
 
     if (pVoice == NULL) {
         ChannelManager::GetInstance().Free(pChannel);
@@ -409,7 +409,7 @@ void Channel::FreeChannel(Channel* pChannel) {
     }
 
     pChannel->mCallback = NULL;
-    pChannel->mCallbackArg = 0;
+    pChannel->mCallbackData = 0;
 }
 
 } // namespace detail

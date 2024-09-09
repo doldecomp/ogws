@@ -12,7 +12,7 @@ namespace detail {
 
 class FrameHeap {
 public:
-    typedef void (*AllocCallback)(void* pBuffer, u32 size, void* pCallbackArg);
+    typedef void (*FreeCallback)(void* pBuffer, u32 size, void* pCallbackArg);
 
 public:
     FrameHeap();
@@ -21,16 +21,13 @@ public:
     bool Create(void* pBase, u32 size);
     void Destroy();
     void Clear();
-    void* Alloc(u32 size, AllocCallback pCallback, void* pCallbackArg);
+    void* Alloc(u32 size, FreeCallback pCallback, void* pCallbackArg);
 
     int SaveState();
     void LoadState(int id);
 
     int GetCurrentLevel() const;
     u32 GetFreeSize() const;
-
-    bool NewSection();
-    void ClearSection();
 
     bool IsValid() const {
         return mHandle != NULL;
@@ -40,10 +37,10 @@ private:
     struct Block {
         NW4R_UT_LIST_NODE_DECL(); // at 0x0
         u32 mSize;                // at 0x8
-        AllocCallback mCallback;  // at 0xc
+        FreeCallback mCallback;   // at 0xc
         void* mCallbackArg;       // at 0x10
 
-        Block(u32 size, AllocCallback pCallback, void* pCallbackArg)
+        Block(u32 size, FreeCallback pCallback, void* pCallbackArg)
             : mSize(size), mCallback(pCallback), mCallbackArg(pCallbackArg) {}
 
         ~Block() {
@@ -53,7 +50,7 @@ private:
         }
 
         void* GetBufferAddr() {
-            return ut::AddOffsetToPtr(this, scBlockBufferSize);
+            return ut::AddOffsetToPtr(this, BLOCK_BUFFER_SIZE);
         }
     };
 
@@ -61,25 +58,29 @@ private:
 
     struct Section {
         NW4R_UT_LIST_NODE_DECL(); // at 0x0
-        BlockList mList;          // at 0x8
-
-        Section() {}
+        BlockList mBlockList;     // at 0x8
 
         ~Section() {
-            for (BlockList::Iterator it = mList.GetEndIter();
-                 it != mList.GetBeginIter();) {
+            for (BlockList::Iterator it = mBlockList.GetEndIter();
+                 it != mBlockList.GetBeginIter();) {
+
                 (--it)->~Block();
             }
         }
 
         void AppendBlock(Block* pBlock) {
-            mList.PushBack(pBlock);
+            mBlockList.PushBack(pBlock);
         }
     };
 
     NW4R_UT_LIST_TYPEDEF_DECL(Section);
 
-    static const int scBlockBufferSize = ROUND_UP(sizeof(Block), 32);
+    static const int BLOCK_BUFFER_SIZE = ROUND_UP(sizeof(Block), 32);
+    static const int HEAP_ALIGN = 32;
+
+private:
+    bool NewSection();
+    void ClearSection();
 
 private:
     MEMiHeapHead* mHandle;    // at 0x0

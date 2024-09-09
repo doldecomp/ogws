@@ -25,12 +25,7 @@ public:
 public:
     static TaskManager& GetInstance();
 
-    TaskManager();
-    ~TaskManager() {}
-
     void AppendTask(Task* pTask, TaskPriority priority = PRIORITY_MIDDLE);
-    Task* PopTask();
-    Task* GetNextTask();
 
     Task* ExecuteTask();
     void CancelTask(Task* pTask);
@@ -40,6 +35,10 @@ public:
     void CancelWaitTask();
 
 private:
+    TaskManager();
+
+    Task* PopTask();
+    Task* GetNextTask();
     Task* GetNextTask(TaskPriority priority, bool remove);
 
 private:

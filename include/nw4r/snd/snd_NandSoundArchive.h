@@ -40,7 +40,6 @@ public:
     bool Open(const char* pPath);
     void Close();
 
-    bool LoadFileHeader() DECOMP_DONT_INLINE;
     bool LoadHeader(void* pBuffer, u32 size);
     bool LoadLabelStringData(void* pBuffer, u32 size);
 
@@ -50,6 +49,9 @@ public:
     u32 GetLabelStringDataSize() const {
         return mFileReader.GetLabelStringChunkSize();
     }
+
+private:
+    bool LoadFileHeader() DECOMP_DONT_INLINE;
 
 private:
     detail::SoundArchiveFileReader mFileReader; // at 0x108

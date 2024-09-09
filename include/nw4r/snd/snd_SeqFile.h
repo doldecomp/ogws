@@ -30,7 +30,7 @@ public:
     static const int VERSION = NW4R_VERSION(1, 0);
 
 public:
-    SeqFileReader(const void* pSeqBin);
+    explicit SeqFileReader(const void* pSeqBin);
 
     bool IsValidFileHeader(const void* pSeqBin);
 

@@ -30,15 +30,10 @@ public:
 
     static const int SAMPLES_PER_AUDIO_PACKET = 40;
 
-    static const int SAMPLES_PER_ENCODED_PACKET =
-        (SAMPLES_PER_AUDIO_PACKET + 1) / 2;
-
 public:
     RemoteSpeaker();
 
     void InitParam();
-    void ClearParam();
-
     bool Setup(WPADCallback pCallback);
     void Shutdown(WPADCallback pCallback);
 
@@ -46,7 +41,6 @@ public:
     bool IsEnabledOutput() const;
 
     void Update();
-    void ExecCommand(SpeakerCommand command);
     void UpdateStreamData(const s16* pRmtSamples);
 
     bool IsAvailable() const {
@@ -58,12 +52,21 @@ public:
     }
 
 private:
+    static const int SAMPLES_PER_ENCODED_PACKET =
+        (SAMPLES_PER_AUDIO_PACKET + 1) / 2;
+
+    static const int CONTINUOUS_PLAY_INTERVAL_MINUTES = 8;
+
+private:
+    void ClearParam();
+    void ExecCommand(SpeakerCommand command);
+
     bool IsAllSampleZero(const s16* pRmtSamples);
+    void NotifyCallback(s32 chan, s32 result);
 
     static void SpeakerOnCallback(s32 chan, s32 result);
     static void SpeakerPlayCallback(s32 chan, s32 result);
     static void SpeakerOffCallback(s32 chan, s32 result);
-    void NotifyCallback(s32 chan, s32 result);
 
     static void ContinueAlarmHandler(OSAlarm* pAlarm, OSContext* pCtx);
     static void IntervalAlarmHandler(OSAlarm* pAlarm, OSContext* pCtx);

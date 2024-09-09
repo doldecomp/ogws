@@ -7,8 +7,7 @@ namespace nw4r {
 namespace snd {
 namespace detail {
 
-ExternalSoundPlayer::ExternalSoundPlayer()
-    : mPlayableSoundCount(1), mVolume(1.0f) {}
+ExternalSoundPlayer::ExternalSoundPlayer() : mPlayableCount(1), mVolume(1.0f) {}
 
 ExternalSoundPlayer::~ExternalSoundPlayer() {
     NW4R_UT_LIST_SAFE_FOREACH(mSoundList,
@@ -17,7 +16,7 @@ ExternalSoundPlayer::~ExternalSoundPlayer() {
 }
 
 void ExternalSoundPlayer::SetPlayableSoundCount(int count) {
-    mPlayableSoundCount = count;
+    mPlayableCount = count;
 
     while (GetPlayingSoundCount() > GetPlayableSoundCount()) {
         GetLowestPrioritySound()->Shutdown();
@@ -41,11 +40,11 @@ BasicSound* ExternalSoundPlayer::GetLowestPrioritySound() {
     for (BasicSoundExtPlayList::Iterator it = mSoundList.GetBeginIter();
          it != mSoundList.GetEndIter(); ++it) {
 
-        int prio = it->CalcCurrentPlayerPriority();
+        int priority = it->CalcCurrentPlayerPriority();
 
-        if (lowestPrio > prio) {
+        if (lowestPrio > priority) {
             pLowest = &*it;
-            lowestPrio = prio;
+            lowestPrio = priority;
         }
     }
 

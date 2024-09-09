@@ -25,8 +25,7 @@ public:
     NW4R_UT_RTTI_DECL(WaveSound);
 
 public:
-    WaveSound(SoundInstanceManager<WaveSound>* pManager);
-    virtual ~WaveSound() {} // at 0xC
+    explicit WaveSound(SoundInstanceManager<WaveSound>* pManager);
 
     virtual void Shutdown(); // at 0x28
     virtual bool IsPrepared() const {

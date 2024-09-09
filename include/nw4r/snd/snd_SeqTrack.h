@@ -68,7 +68,8 @@ public:
 
 public:
     SeqTrack();
-    virtual ~SeqTrack();                          // at 0x8
+    virtual ~SeqTrack(); // at 0x8
+
     virtual ParseResult Parse(bool doNoteOn) = 0; // at 0xC
 
     bool IsOpened() const {
@@ -98,10 +99,6 @@ public:
     void UpdateChannelParam();
     void FreeAllChannel();
 
-    static void ChannelCallbackFunc(Channel* pDropChannel,
-                                    Channel::ChannelCallbackStatus status,
-                                    u32 callbackArg);
-
     void SetMute(SeqMute mute);
     void SetVolume(f32 volume);
     void SetPitch(f32 pitch);
@@ -124,6 +121,17 @@ public:
     }
 
     Channel* NoteOn(int key, int velocity, s32 length, bool tie);
+
+private:
+    static const int DEFAULT_PRIORITY = 64;
+    static const int DEFAULT_BENDRANGE = 2;
+    static const int DEFAULT_PORTA_KEY = 60;
+    static const int DEFAULT_VARIABLE_VALUE = -1;
+
+private:
+    static void ChannelCallbackFunc(Channel* pDropChannel,
+                                    Channel::ChannelCallbackStatus status,
+                                    u32 callbackArg);
 
 private:
     u8 mPlayerTrackNo; // at 0x4

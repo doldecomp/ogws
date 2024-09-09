@@ -42,7 +42,7 @@ void SeqTrack::InitParam() {
     mParserTrackParam.bankNo = 0;
     mParserTrackParam.prgNo = 0;
 
-    mParserTrackParam.priority = 64;
+    mParserTrackParam.priority = DEFAULT_PRIORITY;
     mParserTrackParam.wait = 0;
 
     mParserTrackParam.muteFlag = false;
@@ -71,9 +71,9 @@ void SeqTrack::InitParam() {
     }
 
     mParserTrackParam.lpfFreq = 64;
-    mParserTrackParam.bendRange = 2;
+    mParserTrackParam.bendRange = DEFAULT_BENDRANGE;
 
-    mParserTrackParam.portaKey = 60;
+    mParserTrackParam.portaKey = DEFAULT_PORTA_KEY;
     mParserTrackParam.portaTime = 0;
 
     mParserTrackParam.sweepPitch = 0.0f;
@@ -83,7 +83,7 @@ void SeqTrack::InitParam() {
     mParserTrackParam.lfoTarget = Channel::LFO_TARGET_PITCH;
 
     for (int i = 0; i < VARIABLE_NUM; i++) {
-        mTrackVariable[i] = -1;
+        mTrackVariable[i] = DEFAULT_VARIABLE_VALUE;
     }
 }
 
@@ -337,7 +337,7 @@ void SeqTrack::ChannelCallbackFunc(Channel* pDropChannel,
                                    Channel::ChannelCallbackStatus status,
                                    u32 callbackArg) {
     SoundThread::AutoLock lock;
-    SeqTrack* pSelf = reinterpret_cast<SeqTrack*>(callbackArg);
+    SeqTrack* p = reinterpret_cast<SeqTrack*>(callbackArg);
 
     switch (status) {
     case Channel::CALLBACK_STATUS_STOPPED:
@@ -346,16 +346,16 @@ void SeqTrack::ChannelCallbackFunc(Channel* pDropChannel,
         break;
     }
 
-    if (pSelf->mPlayer != NULL) {
-        pSelf->mPlayer->ChannelCallback(pDropChannel);
+    if (p->mPlayer != NULL) {
+        p->mPlayer->ChannelCallback(pDropChannel);
     }
 
-    if (pSelf->mChannelList == pDropChannel) {
-        pSelf->mChannelList = pDropChannel->GetNextTrackChannel();
+    if (p->mChannelList == pDropChannel) {
+        p->mChannelList = pDropChannel->GetNextTrackChannel();
         return;
     }
 
-    for (Channel* pIt = pSelf->mChannelList; pIt->GetNextTrackChannel() != NULL;
+    for (Channel* pIt = p->mChannelList; pIt->GetNextTrackChannel() != NULL;
          pIt = pIt->GetNextTrackChannel()) {
 
         if (pIt->GetNextTrackChannel() == pDropChannel) {
@@ -386,6 +386,7 @@ void SeqTrack::SetMute(SeqMute mute) {
         mParserTrackParam.muteFlag = true;
         break;
     }
+
     case MUTE_NO_STOP: {
         mParserTrackParam.muteFlag = true;
         break;

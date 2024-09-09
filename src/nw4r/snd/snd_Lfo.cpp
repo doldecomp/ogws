@@ -14,8 +14,8 @@ void LfoParam::Init() {
 }
 
 void Lfo::Reset() {
-    mDelayCounter = 0;
     mCounter = 0.0f;
+    mDelayCounter = 0;
 }
 
 void Lfo::Update(int msec) {
@@ -34,24 +34,24 @@ void Lfo::Update(int msec) {
 }
 
 s8 Lfo::GetSinIdx(int i) {
-    static const u8 sinTable[32 + 1] = {
+    static const u8 sinTable[TABLE_SIZE + 1] = {
         0,   6,   12,  19,  25,  31,  37,  43,  49,  54,  60,
         65,  71,  76,  81,  85,  90,  94,  98,  102, 106, 109,
         112, 115, 117, 120, 122, 123, 125, 126, 126, 127, 127};
 
-    if (i < 32) {
+    if (i < TABLE_SIZE) {
         return sinTable[i];
     }
 
-    if (i < 64) {
-        return sinTable[32 - static_cast<int>(i - 32)];
+    if (i < TABLE_SIZE * 2) {
+        return sinTable[TABLE_SIZE - (i - TABLE_SIZE)];
     }
 
-    if (i < 96) {
-        return -sinTable[i - 64];
+    if (i < TABLE_SIZE * 3) {
+        return -sinTable[i - TABLE_SIZE * 2];
     }
 
-    return -sinTable[32 - (i - 96)];
+    return -sinTable[TABLE_SIZE - (i - TABLE_SIZE * 3)];
 }
 
 f32 Lfo::GetValue() const {
@@ -63,7 +63,9 @@ f32 Lfo::GetValue() const {
         return 0.0f;
     }
 
-    f32 value = GetSinIdx(4.0f * (32.0f * mCounter)) / 127.0f;
+    f32 value = GetSinIdx(4 * (TABLE_SIZE * mCounter)) /
+                static_cast<float>(TABLE_SIZE * 4 - 1);
+
     value *= mParam.depth;
     value *= mParam.range;
 

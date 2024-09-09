@@ -130,16 +130,16 @@ private:
     f32 AdjustCursor(f32* pX, f32* pY, const T* pStr, int len);
 
 private:
-    static T* mFormatBuffer;
-    static u32 mFormatBufferSize;
-    static TagProcessorBase<T> mDefaultTagProcessor;
-
     f32 mWidthLimit;                    // at 0x4C
     f32 mCharSpace;                     // at 0x50
     f32 mLineSpace;                     // at 0x54
     int mTabWidth;                      // at 0x58
     u32 mDrawFlag;                      // at 0x5C
     TagProcessorBase<T>* mTagProcessor; // at 0x60
+
+    static T* mFormatBuffer;
+    static u32 mFormatBufferSize;
+    static TagProcessorBase<T> mDefaultTagProcessor;
 };
 
 template <>

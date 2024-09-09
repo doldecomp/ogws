@@ -11,10 +11,10 @@ namespace detail {
 
 AxVoice::AxVoice()
     : mWaveData(NULL),
-      mFirstMixUpdate(false),
-      mReserveForFree(false),
+      mFirstMixUpdateFlag(false),
+      mReserveForFreeFlag(false),
       mCallback(NULL),
-      mCallbackArg(NULL) {}
+      mCallbackData(NULL) {}
 
 AxVoice::~AxVoice() {}
 
@@ -26,7 +26,7 @@ void AxVoice::Setup(const void* pWave, Format fmt, int rate) {
     mSampleRate = rate;
 
     std::memset(&mMixPrev, 0, sizeof(MixParam));
-    mFirstMixUpdate = true;
+    mFirstMixUpdateFlag = true;
 }
 
 bool AxVoice::IsPlayFinished() const {
@@ -173,10 +173,12 @@ u32 AxVoice::GetDspAddressBySample(const void* pBase, u32 samples, Format fmt) {
 
     switch (fmt) {
     case FORMAT_ADPCM: {
-        addr =
-            samples / AX_ADPCM_SAMPLES_PER_FRAME * AX_ADPCM_NIBBLES_PER_FRAME +
-            samples % AX_ADPCM_SAMPLES_PER_FRAME +
-            reinterpret_cast<u32>(pBase) * sizeof(u16) + sizeof(u16);
+        // clang-format off
+        addr = (samples / AX_ADPCM_SAMPLES_PER_FRAME * AX_ADPCM_NIBBLES_PER_FRAME) +
+               (samples % AX_ADPCM_SAMPLES_PER_FRAME) +
+               (reinterpret_cast<u32>(pBase) * sizeof(u16)) +
+               sizeof(u16);
+        // clang-format on
         break;
     }
 
@@ -204,10 +206,11 @@ u32 AxVoice::GetSampleByDspAddress(const void* pBase, u32 addr, Format fmt) {
     switch (fmt) {
     case FORMAT_ADPCM: {
         samples = addr - reinterpret_cast<u32>(pBase) * sizeof(u16);
-        samples =
-            samples % AX_ADPCM_NIBBLES_PER_FRAME +
-            samples / AX_ADPCM_NIBBLES_PER_FRAME * AX_ADPCM_SAMPLES_PER_FRAME -
-            sizeof(u16);
+        // clang-format off
+        samples = (samples % AX_ADPCM_NIBBLES_PER_FRAME) +
+                  (samples / AX_ADPCM_NIBBLES_PER_FRAME * AX_ADPCM_SAMPLES_PER_FRAME) -
+                  sizeof(u16);
+        // clang-format on
         break;
     }
 
@@ -253,8 +256,8 @@ u32 AxVoice::GetSampleByByte(u32 addr, Format fmt) {
     return samples;
 }
 
-void AxVoice::SetPriority(u32 prio) {
-    mVpb.SetVoicePriority(prio);
+void AxVoice::SetPriority(u32 priority) {
+    mVpb.SetVoicePriority(priority);
 }
 
 void AxVoice::SetVoiceType(VoiceType type) {
@@ -454,9 +457,9 @@ bool AxVoice::SetMix(const MixParam& rParam) {
         return false;
     }
 
-    if (mFirstMixUpdate || !IsRun()) {
+    if (mFirstMixUpdateFlag || !IsRun()) {
         mMixPrev = rParam;
-        mFirstMixUpdate = false;
+        mFirstMixUpdateFlag = false;
     }
 
     bool needUpdate = false;
@@ -809,13 +812,16 @@ void AxVoiceParamBlock::Sync() {
         return;
     }
 
-    mVpb->pb.ve.currentVolume = mVePrev.currentVolume;
+    mVpb->pb.ve.currentVolume = mPrevVeSetting.currentVolume;
 
-    s16 deltaIn = (mVolume - mVePrev.currentVolume) / AX_SAMPLES_PER_FRAME;
+    s16 deltaIn =
+        (mVolume - mPrevVeSetting.currentVolume) / AX_SAMPLES_PER_FRAME;
     s16 deltaOut = (deltaIn + (deltaIn > 0 ? 1 : 0) != 0) ? 1 : -1;
 
-    int predIn = mVePrev.currentVolume + (deltaIn * AX_SAMPLES_PER_FRAME);
-    int predOut = mVePrev.currentVolume + (deltaOut * AX_SAMPLES_PER_FRAME);
+    int predIn =
+        mPrevVeSetting.currentVolume + (deltaIn * AX_SAMPLES_PER_FRAME);
+    int predOut =
+        mPrevVeSetting.currentVolume + (deltaOut * AX_SAMPLES_PER_FRAME);
 
     if (ut::Abs(mVolume - predIn) < ut::Abs(mVolume - predOut)) {
         mVpb->pb.ve.currentDelta = deltaIn;
@@ -823,26 +829,26 @@ void AxVoiceParamBlock::Sync() {
         mVpb->pb.ve.currentDelta = deltaOut;
     }
 
-    if (mVpb->pb.ve.currentDelta == 0 && mVePrev.currentDelta == 0) {
+    if (mVpb->pb.ve.currentDelta == 0 && mPrevVeSetting.currentDelta == 0) {
         mVpb->pb.ve.currentVolume = mVolume;
     }
 
-    int nextVolume = mVePrev.currentVolume +
+    int nextVolume = mPrevVeSetting.currentVolume +
                      (mVpb->pb.ve.currentDelta * AX_SAMPLES_PER_FRAME);
 
     if (nextVolume < 0) {
         mVpb->pb.ve.currentDelta =
-            -mVePrev.currentVolume / AX_SAMPLES_PER_FRAME;
+            -mPrevVeSetting.currentVolume / AX_SAMPLES_PER_FRAME;
     } else if (nextVolume > 32767) {
         mVpb->pb.ve.currentDelta =
-            (32767 - mVePrev.currentVolume) / AX_SAMPLES_PER_FRAME;
+            (32767 - mPrevVeSetting.currentVolume) / AX_SAMPLES_PER_FRAME;
     }
 
     mSync &= ~AX_PBSYNC_VE_DELTA;
     mSync |= AX_PBSYNC_VE;
 
-    mVePrev.currentVolume = mVpb->pb.ve.currentVolume;
-    mVePrev.currentDelta = mVpb->pb.ve.currentDelta;
+    mPrevVeSetting.currentVolume = mVpb->pb.ve.currentVolume;
+    mPrevVeSetting.currentDelta = mVpb->pb.ve.currentDelta;
 
     mVpb->sync |= mSync;
     mSync = 0;
@@ -853,18 +859,22 @@ bool AxVoiceParamBlock::IsRmtIirEnable() const {
 }
 
 AxVoiceParamBlock::AxVoiceParamBlock()
-    : mVpb(NULL), mSync(0), mVePrev(), mFirstVeUpdate(false), mVolume(32768) {
-    mVePrev.currentVolume = 32768;
-    mVePrev.currentDelta = 0;
+    : mVpb(NULL),
+      mSync(0),
+      mPrevVeSetting(),
+      mFirstVeUpdateFlag(false),
+      mVolume(DEFAULT_VOLUME) {
+    mPrevVeSetting.currentVolume = DEFAULT_VOLUME;
+    mPrevVeSetting.currentDelta = 0;
 }
 
 void AxVoiceParamBlock::Set(AXVPB* pVpb) {
     mVpb = pVpb;
     mSync = 0;
-    mFirstVeUpdate = true;
-    mVolume = 32768;
-    mVePrev.currentVolume = 32768;
-    mVePrev.currentDelta = 0;
+    mFirstVeUpdateFlag = true;
+    mVolume = DEFAULT_VOLUME;
+    mPrevVeSetting.currentVolume = DEFAULT_VOLUME;
+    mPrevVeSetting.currentDelta = 0;
 }
 
 void AxVoiceParamBlock::Clear() {
@@ -890,9 +900,9 @@ void AxVoiceParamBlock::SetVoiceVe(u16 volume, u16 initVolume) {
         return;
     }
 
-    if (mFirstVeUpdate) {
-        mVePrev.currentVolume = initVolume;
-        mFirstVeUpdate = false;
+    if (mFirstVeUpdateFlag) {
+        mPrevVeSetting.currentVolume = initVolume;
+        mFirstVeUpdateFlag = false;
     }
 
     mVolume = volume;
@@ -1275,14 +1285,14 @@ void AxVoiceParamBlock::SetVoiceRmtMix(const AXPBRMTMIX& rMix) {
     mSync |= AX_PBSYNC_RMT_MIXER_CTRL | AX_PBSYNC_RMTMIX;
 }
 
-void AxVoiceParamBlock::SetVoiceRmtIIR(const AXPBRMTIIR& rIIR) {
+void AxVoiceParamBlock::SetVoiceRmtIIR(const AXPBRMTIIR& rIir) {
     ut::AutoInterruptLock lock;
 
     if (!IsAvailable()) {
         return;
     }
 
-    std::memcpy(&mVpb->pb.rmtIIR, &rIIR, sizeof(AXPBRMTIIR));
+    std::memcpy(&mVpb->pb.rmtIIR, &rIir, sizeof(AXPBRMTIIR));
     mSync |= AX_PBSYNC_RMTIIR;
 }
 
@@ -1334,9 +1344,10 @@ void AxVoiceParamBlock::UpdateDelta() {
         return;
     }
 
-    mVePrev.currentVolume += mVpb->pb.ve.currentDelta * AX_SAMPLES_PER_FRAME;
+    mPrevVeSetting.currentVolume +=
+        mVpb->pb.ve.currentDelta * AX_SAMPLES_PER_FRAME;
 
-    mVpb->pb.ve.currentVolume = mVePrev.currentVolume;
+    mVpb->pb.ve.currentVolume = mPrevVeSetting.currentVolume;
     mVpb->pb.ve.currentDelta = 0;
 
     mVpb->sync |= AX_PBSYNC_VE;

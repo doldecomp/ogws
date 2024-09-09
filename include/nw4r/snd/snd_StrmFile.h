@@ -123,7 +123,8 @@ private:
 
 class StrmFileLoader {
 public:
-    StrmFileLoader(ut::FileStream& rFileStream) : mStream(rFileStream) {}
+    explicit StrmFileLoader(ut::FileStream& rFileStream)
+        : mStream(rFileStream) {}
 
     bool LoadFileHeader(void* pStrmBin, u32 size);
     bool ReadAdpcBlockData(u16* pYN1, u16* pYN2, int block, int channels);

@@ -13,7 +13,7 @@ public:
     TaskThread();
     ~TaskThread();
 
-    bool Create(s32 prio, void* pStack, u32 stackSize);
+    bool Create(s32 priority, void* pStack, u32 stackSize);
     void Destroy();
 
 private:
@@ -22,10 +22,10 @@ private:
 
 private:
     OSThread mThread; // at 0x0
-    void* mStackEnd;  // at 0x318
+    u32* mStackEnd;   // at 0x318
 
-    bool mFinishFlag; // at 0x31C
-    bool mCreateFlag; // at 0x31D
+    volatile bool mFinishFlag; // at 0x31C
+    bool mCreateFlag;          // at 0x31D
 };
 
 } // namespace detail

@@ -193,7 +193,8 @@ void RemoteSpeaker::UpdateStreamData(const s16* pRmtSamples) {
         ut::AutoInterruptLock lock;
 
         if (!mContinueFlag) {
-            OSSetAlarm(&mContinueAlarm, OS_SEC_TO_TICKS(480LL),
+            OSSetAlarm(&mContinueAlarm,
+                       OS_SEC_TO_TICKS(CONTINUOUS_PLAY_INTERVAL_MINUTES * 60LL),
                        ContinueAlarmHandler);
 
             mContinueBeginTime = OSGetTime();

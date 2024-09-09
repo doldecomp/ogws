@@ -13,10 +13,9 @@ namespace detail {
 
 class SoundActor : public SoundStartable {
 public:
-    SoundActor(SoundStartable& rStartable) : mStartable(rStartable) {
+    explicit SoundActor(SoundStartable& rStartable) : mStartable(rStartable) {
         detail_GetActorSoundPlayer(0)->SetPlayableSoundCount(INT_MAX);
     }
-    virtual ~SoundActor() {} // at 0x8
 
     virtual StartResult
     detail_SetupSound(SoundHandle* pHandle, u32 id,
@@ -29,7 +28,7 @@ public:
     } // at 0x10
 
     ExternalSoundPlayer* detail_GetActorSoundPlayer(int i) {
-        if (i < 0 || i >= ACTOR_PLAYER_NUM) {
+        if (i < 0 || i >= ACTOR_PLAYER_COUNT) {
             return NULL;
         }
 
@@ -41,7 +40,7 @@ public:
         int i;
         ExternalSoundPlayer* pPlayer = detail_GetActorSoundPlayer(0);
 
-        for (i = 0; i < ACTOR_PLAYER_NUM; i++) {
+        for (i = 0; i < ACTOR_PLAYER_COUNT; i++) {
             pPlayer->ForEachSound(pFunction, reverse);
             pPlayer++;
         }
@@ -50,11 +49,11 @@ public:
     }
 
 private:
-    static const int ACTOR_PLAYER_NUM = 8;
+    static const int ACTOR_PLAYER_COUNT = 8;
 
 private:
-    SoundStartable& mStartable;                         // at 0x4
-    ExternalSoundPlayer mActorPlayer[ACTOR_PLAYER_NUM]; // at 0x8
+    SoundStartable& mStartable;                           // at 0x4
+    ExternalSoundPlayer mActorPlayer[ACTOR_PLAYER_COUNT]; // at 0x8
 };
 
 } // namespace detail

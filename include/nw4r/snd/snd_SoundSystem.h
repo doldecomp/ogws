@@ -27,6 +27,7 @@ public:
 public:
     static void InitSoundSystem(s32 soundThreadPrio, s32 dvdThreadPriority);
     static u32 GetRequiredMemSize(const SoundSystemParam& rParam);
+
     static void InitSoundSystem(const SoundSystemParam& rParam, void* pWork,
                                 u32 workSize);
 

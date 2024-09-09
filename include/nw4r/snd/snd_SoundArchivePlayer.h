@@ -64,27 +64,6 @@ public:
     u32 GetRequiredMemSize(const SoundArchive* pArchive);
     u32 GetRequiredStrmBufferSize(const SoundArchive* pArchive);
 
-    bool SetupMram(const SoundArchive* pArchive, void* pBuffer, u32 bufferSize);
-
-    detail::PlayerHeap* CreatePlayerHeap(void* pBuffer, u32 bufferSize);
-
-    bool SetupSoundPlayer(const SoundArchive* pArchive, void** ppBuffer,
-                          void* pEnd);
-
-    bool CreateGroupAddressTable(const SoundArchive* pArchive, void** ppBuffer,
-                                 void* pEnd);
-
-    bool SetupSeqSound(const SoundArchive* pArchive, int sounds,
-                       void** ppBuffer, void* pEnd);
-    bool SetupWaveSound(const SoundArchive* pArchive, int sounds,
-                        void** ppBuffer, void* pEnd);
-    bool SetupStrmSound(const SoundArchive* pArchive, int sounds,
-                        void** ppBuffer, void* pEnd);
-    bool SetupSeqTrack(const SoundArchive* pArchive, int tracks,
-                       void** ppBuffer, void* pEnd);
-    bool SetupStrmBuffer(const SoundArchive* pArchive, void* pBuffer,
-                         u32 bufferSize);
-
     void Update();
 
     const SoundArchive& GetSoundArchive() const;
@@ -102,27 +81,6 @@ public:
 
     const void* GetGroupWaveDataAddress(u32 id) const;
     void SetGroupWaveDataAddress(u32 id, const void* pAddr);
-
-    StartResult
-    PrepareSeqImpl(detail::SeqSound* pSound,
-                   const SoundArchive::SoundInfo* pSndInfo,
-                   const SoundArchive::SeqSoundInfo* pSeqInfo,
-                   SoundStartable::StartInfo::StartOffsetType startType,
-                   int startOffset, int voices);
-
-    StartResult
-    PrepareStrmImpl(detail::StrmSound* pSound,
-                    const SoundArchive::SoundInfo* pSndInfo,
-                    const SoundArchive::StrmSoundInfo* pStrmInfo,
-                    SoundStartable::StartInfo::StartOffsetType startType,
-                    int startOffset, int voices);
-
-    StartResult
-    PrepareWaveSoundImpl(detail::WaveSound* pSound,
-                         const SoundArchive::SoundInfo* pSndInfo,
-                         const SoundArchive::WaveSoundInfo* pWsdInfo,
-                         SoundStartable::StartInfo::StartOffsetType startType,
-                         int startOffset, int voices);
 
     bool LoadGroup(u32 id, SoundMemoryAllocatable* pAllocatable, u32 blockSize);
     bool LoadGroup(const char* pLabel, SoundMemoryAllocatable* pAllocatable,
@@ -161,10 +119,8 @@ private:
 
     class SeqNoteOnCallback : public detail::NoteOnCallback {
     public:
-        SeqNoteOnCallback(const SoundArchivePlayer& rPlayer)
+        explicit SeqNoteOnCallback(const SoundArchivePlayer& rPlayer)
             : mSoundArchivePlayer(rPlayer) {}
-
-        virtual ~SeqNoteOnCallback() {} // at 0x8
 
         virtual detail::Channel*
         NoteOn(detail::SeqPlayer* pPlayer, int bankNo,
@@ -176,10 +132,8 @@ private:
 
     class WsdCallback : public detail::WsdPlayer::WsdCallback {
     public:
-        WsdCallback(const SoundArchivePlayer& rPlayer)
+        explicit WsdCallback(const SoundArchivePlayer& rPlayer)
             : mSoundArchivePlayer(rPlayer) {}
-
-        virtual ~WsdCallback() {} // at 0x8
 
         virtual bool GetWaveSoundData(detail::WaveSoundInfo* pSoundInfo,
                                       detail::WaveSoundNoteInfo* pNoteInfo,
@@ -191,6 +145,49 @@ private:
     private:
         const SoundArchivePlayer& mSoundArchivePlayer; // at 0x0
     };
+
+private:
+    bool SetupMram(const SoundArchive* pArchive, void* pBuffer, u32 bufferSize);
+
+    detail::PlayerHeap* CreatePlayerHeap(void* pBuffer, u32 bufferSize);
+
+    bool SetupSoundPlayer(const SoundArchive* pArchive, void** ppBuffer,
+                          void* pEnd);
+
+    bool CreateGroupAddressTable(const SoundArchive* pArchive, void** ppBuffer,
+                                 void* pEnd);
+
+    bool SetupSeqSound(const SoundArchive* pArchive, int sounds,
+                       void** ppBuffer, void* pEnd);
+    bool SetupWaveSound(const SoundArchive* pArchive, int sounds,
+                        void** ppBuffer, void* pEnd);
+    bool SetupStrmSound(const SoundArchive* pArchive, int sounds,
+                        void** ppBuffer, void* pEnd);
+    bool SetupSeqTrack(const SoundArchive* pArchive, int tracks,
+                       void** ppBuffer, void* pEnd);
+    bool SetupStrmBuffer(const SoundArchive* pArchive, void* pBuffer,
+                         u32 bufferSize);
+
+    StartResult
+    PrepareSeqImpl(detail::SeqSound* pSound,
+                   const SoundArchive::SoundInfo* pSndInfo,
+                   const SoundArchive::SeqSoundInfo* pSeqInfo,
+                   SoundStartable::StartInfo::StartOffsetType startType,
+                   int startOffset, int voices);
+
+    StartResult
+    PrepareStrmImpl(detail::StrmSound* pSound,
+                    const SoundArchive::SoundInfo* pSndInfo,
+                    const SoundArchive::StrmSoundInfo* pStrmInfo,
+                    SoundStartable::StartInfo::StartOffsetType startType,
+                    int startOffset, int voices);
+
+    StartResult
+    PrepareWaveSoundImpl(detail::WaveSound* pSound,
+                         const SoundArchive::SoundInfo* pSndInfo,
+                         const SoundArchive::WaveSoundInfo* pWsdInfo,
+                         SoundStartable::StartInfo::StartOffsetType startType,
+                         int startOffset, int voices);
 
 private:
     const SoundArchive* mSoundArchive;            // at 0x10

@@ -61,11 +61,11 @@ struct WaveData {
 
 class WaveFileReader {
 public:
-    static AxVoice::Format GetAxVoiceFormatFromWaveFileFormat(u32 format);
-
-    WaveFileReader(const WaveFile::WaveInfo* pWaveInfo);
+    explicit WaveFileReader(const WaveFile::WaveInfo* pWaveInfo);
 
     bool ReadWaveParam(WaveData* pWaveData, const void* pWaveAddr) const;
+
+    static AxVoice::Format GetAxVoiceFormatFromWaveFileFormat(u32 format);
 
 private:
     const WaveFile::WaveInfo* mWaveInfo; // at 0x0

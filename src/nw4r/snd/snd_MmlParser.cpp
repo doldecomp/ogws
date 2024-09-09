@@ -455,7 +455,7 @@ void MmlParser::CommandProc(MmlSeqTrack* pTrack, u32 command, s32 arg1,
         }
 
         case MML_CALL: {
-            if (rMmlParam.callStackDepth >= MmlSeqTrack::CALL_STACK_NUM) {
+            if (rMmlParam.callStackDepth >= CALL_STACK_MAX_DEPTH) {
                 break;
             }
 
@@ -480,7 +480,7 @@ void MmlParser::CommandProc(MmlSeqTrack* pTrack, u32 command, s32 arg1,
         }
 
         case MML_LOOP_START: {
-            if (rMmlParam.callStackDepth >= MmlSeqTrack::CALL_STACK_NUM) {
+            if (rMmlParam.callStackDepth >= CALL_STACK_MAX_DEPTH) {
                 break;
             }
 

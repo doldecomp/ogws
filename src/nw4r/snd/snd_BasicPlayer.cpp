@@ -2,11 +2,13 @@
 
 #include <nw4r/snd.h>
 
+#include <climits>
+
 namespace nw4r {
 namespace snd {
 namespace detail {
 
-BasicPlayer::BasicPlayer() : mId(-1) {
+BasicPlayer::BasicPlayer() : mId(BasicSound::INVALID_ID) {
     InitParam();
 }
 
@@ -45,8 +47,8 @@ f32 BasicPlayer::GetFxSend(AuxBus bus) const {
     return mFxSend[bus];
 }
 
-void BasicPlayer::SetRemoteOutVolume(int remote, f32 vol) {
-    mRemoteOutVolume[remote] = vol;
+void BasicPlayer::SetRemoteOutVolume(int remote, f32 volume) {
+    mRemoteOutVolume[remote] = volume;
 }
 
 f32 BasicPlayer::GetRemoteOutVolume(int remote) const {

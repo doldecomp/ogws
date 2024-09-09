@@ -15,18 +15,18 @@ TaskThread::~TaskThread() {
     }
 }
 
-bool TaskThread::Create(s32 prio, void* pStack, u32 stackSize) {
+bool TaskThread::Create(s32 priority, void* pStack, u32 stackSize) {
     if (mCreateFlag) {
         Destroy();
     }
 
     if (!OSCreateThread(&mThread, ThreadFunc, &mThread,
-                        static_cast<u8*>(pStack) + stackSize, stackSize, prio,
-                        0)) {
+                        static_cast<u8*>(pStack) + stackSize, stackSize,
+                        priority, 0)) {
         return false;
     }
 
-    mStackEnd = pStack;
+    mStackEnd = static_cast<u32*>(pStack);
     mFinishFlag = false;
     mCreateFlag = true;
 
@@ -46,8 +46,8 @@ void TaskThread::Destroy() {
 }
 
 void* TaskThread::ThreadFunc(void* pArg) {
-    TaskThread* pSelf = static_cast<TaskThread*>(pArg);
-    pSelf->ThreadProc();
+    TaskThread* p = static_cast<TaskThread*>(pArg);
+    p->ThreadProc();
 
     return NULL;
 }

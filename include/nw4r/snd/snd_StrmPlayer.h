@@ -79,49 +79,16 @@ public:
 
     bool Setup(StrmBufferPool* pBufferPool);
     void Shutdown();
+
     bool Prepare(ut::FileStream* pFileStream, int voices,
                  StartOffsetType offsetType, int offset);
     void InitParam();
 
-    bool LoadHeader(ut::FileStream* pFileStream, StartOffsetType offsetType,
-                    int offset);
-    bool LoadStreamData(ut::FileStream* pFileStream, int offset, u32 size,
-                        u32 blockSize, int blockIndex,
-                        bool needUpdateAdpcmLoop);
-    bool SetupPlayer(const StrmHeader* pStrmHeader);
-
-    bool AllocChannels(int channels, int voices);
-    void FreeChannels();
-
     void Update();
-    void UpdateBuffer();
-    void UpdateLoopAddress(u32 startSample, u32 endSample);
-    void UpdatePlayingBlockIndex();
-    void UpdateDataLoopAddress(s32 endBlock);
-    void SetLoopEndToZeroBuffer(int endBlock);
-    void UpdateLoadingBlockIndex();
-    void UpdatePauseStatus();
-
-    int CalcLoadingBufferBlockCount() const;
-    bool CalcStartOffset(s32* pBlockIndex, u32* pBlockOffset, s32* pLoopCount);
-
-    static void VoiceCallbackFunc(Voice* pDropVoice,
-                                  Voice::VoiceCallbackStatus status,
-                                  void* pCallbackArg);
-
-    void SetAdpcmLoopContext(int channels, u16* pPredScale);
 
 private:
-    static const int scMinBlocks = 4;
-    static const int scMaxBlocks = 32;
-    static const int scMaxBlockSize = 0x2000;
-
-    // TODO: Unsure if this is correct
-    static const int scHeaderLoadSize = ROUND_UP(sizeof(StrmHeader), 64);
-
     struct StrmHeaderLoadTask : public Task {
         StrmHeaderLoadTask();
-        virtual ~StrmHeaderLoadTask() {} // at 0x8
 
         virtual void Execute();  // at 0xC
         virtual void Cancel();   // at 0x10
@@ -135,7 +102,6 @@ private:
 
     struct StrmDataLoadTask : public Task {
         StrmDataLoadTask();
-        virtual ~StrmDataLoadTask() {} // at 0x8
 
         virtual void Execute();  // at 0xC
         virtual void Cancel();   // at 0x10
@@ -153,6 +119,42 @@ private:
     };
 
     NW4R_UT_LIST_TYPEDEF_DECL(StrmDataLoadTask);
+
+    static const int DATA_BLOCK_COUNT_MIN = 4;
+    static const int DATA_BLOCK_COUNT_MAX = 32;
+    static const int DATA_BLOCK_SIZE_MAX = 0x2000;
+
+    // TODO: How is this calculated?
+    static const int LOAD_BUFFER_SIZE = 0x4000 + 32;
+
+private:
+    bool LoadHeader(ut::FileStream* pFileStream, StartOffsetType offsetType,
+                    int offset);
+    bool LoadStreamData(ut::FileStream* pFileStream, int offset, u32 size,
+                        u32 blockSize, int blockIndex,
+                        bool needUpdateAdpcmLoop);
+
+    bool SetupPlayer(const StrmHeader* pStrmHeader);
+
+    bool AllocChannels(int channels, int voices);
+    void FreeChannels();
+
+    void UpdateBuffer();
+    void UpdateLoopAddress(u32 startSample, u32 endSample);
+    void UpdatePlayingBlockIndex();
+    void UpdateDataLoopAddress(s32 endBlock);
+    void SetLoopEndToZeroBuffer(int endBlock);
+    void UpdateLoadingBlockIndex();
+    void UpdatePauseStatus();
+
+    int CalcLoadingBufferBlockCount() const;
+    bool CalcStartOffset(s32* pBlockIndex, u32* pBlockOffset, s32* pLoopCount);
+
+    static void VoiceCallbackFunc(Voice* pDropVoice,
+                                  Voice::VoiceCallbackStatus status,
+                                  void* pCallbackArg);
+
+    void SetAdpcmLoopContext(int channels, u16* pPredScale);
 
 private:
     StrmInfo mStrmInfo; // at 0x80
@@ -194,10 +196,10 @@ private:
     StartOffsetType mStartOffsetType; // at 0x100
     int mStartOffset;                 // at 0x104
 
-    StrmHeaderLoadTask mStrmHeaderLoadTask;               // at 0x108
-    StrmDataLoadTaskList mStrmDataLoadTaskList;           // at 0x128
-    InstancePool<StrmDataLoadTask> mStrmDataLoadTaskPool; // at 0x134
-    StrmDataLoadTask mStrmDataLoadTaskArea[scMaxBlocks];  // at 0x138
+    StrmHeaderLoadTask mStrmHeaderLoadTask;                       // at 0x108
+    StrmDataLoadTaskList mStrmDataLoadTaskList;                   // at 0x128
+    InstancePool<StrmDataLoadTask> mStrmDataLoadTaskPool;         // at 0x134
+    StrmDataLoadTask mStrmDataLoadTaskArea[DATA_BLOCK_COUNT_MAX]; // at 0x138
 
     StrmBufferPool* mBufferPool; // at 0x7B8
     ut::FileStream* mFileStream; // at 0x7BC
@@ -210,7 +212,7 @@ private:
     u16 mAdpcmLoopYn1[CHANNEL_MAX];       // at 0x840
     u16 mAdpcmLoopYn2[CHANNEL_MAX];       // at 0x844
 
-    static u8 sLoadBuffer[0x4000 + 32] ALIGN(32);
+    static u8 sLoadBuffer[LOAD_BUFFER_SIZE] ALIGN(32);
     static OSMutex sLoadBufferMutex;
 
     static bool sStaticInitFlag;

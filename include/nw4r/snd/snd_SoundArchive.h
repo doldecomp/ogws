@@ -18,9 +18,6 @@ enum SoundType {
 
 class SoundArchive {
 public:
-    static const u32 INVALID_ID = 0xFFFFFFFF;
-
-public:
     struct SoundInfo {
         u32 fileId;                // at 0x0
         u32 playerId;              // at 0x4
@@ -99,6 +96,8 @@ public:
         int waveTrackCount;   // at 0x18
     };
 
+    static const u32 INVALID_ID = 0xFFFFFFFF;
+
 public:
     SoundArchive();
     virtual ~SoundArchive(); // at 0x8
@@ -158,13 +157,15 @@ public:
     ut::FileStream* detail_OpenGroupWaveDataStream(u32 id, void* pBuffer,
                                                    int bufferSize) const;
 
+    void SetExternalFileRoot(const char* pExtFileRoot);
+
+protected:
+    static const int FILE_PATH_MAX = 256;
+
+private:
     ut::FileStream* OpenExtStreamImpl(void* pBuffer, int bufferSize,
                                       const char* pExtPath, u32 offset,
                                       u32 size) const;
-    void SetExternalFileRoot(const char* pExtFileRoot);
-
-private:
-    static const int FILE_PATH_MAX = 256;
 
 private:
     detail::SoundArchiveFileReader* mFileReader; // at 0x4

@@ -27,10 +27,10 @@ public:
 public:
     static AxManager& GetInstance();
 
-    AxManager();
-    ~AxManager() {}
-
     void Init();
+    void Shutdown();
+    void Update();
+    void PrepareReset();
 
     bool CheckInit() {
         return mInitialized;
@@ -44,9 +44,7 @@ public:
         return mResetReadyCounter == 0;
     }
 
-    void Shutdown();
     f32 GetOutputVolume() const;
-    void Update();
     void* GetZeroBufferAddress();
 
     void RegisterCallback(CallbackListNode* pNode, AXOutCallback pCallback);
@@ -68,22 +66,29 @@ public:
         return mFxList[bus];
     }
 
-    void PrepareReset();
+private:
+    static const u8 AUX_CALLBACK_WAIT_FRAME = 6;
+
+    static const int FX_SAMPLE_RATE = AX_SAMPLE_RATE;
+    static const SampleFormat FX_SAMPLE_FORMAT = SAMPLE_FORMAT_PCM_S32;
+    static const int FX_BUFFER_SIZE = AX_FRAME_SIZE;
+
+    static const int ZERO_BUFFER_SIZE = 256;
 
 private:
+    AxManager();
+
     static void AxCallbackFunc();
     static void AuxCallbackFunc(void* pChans, void* pContext);
     static void AiDmaCallbackFunc();
 
 private:
-    static u8 sZeroBuffer[0x100];
-
     OutputMode mOutputMode;                          // at 0x0
-    void* mZeroBuffer;                               // at 0x4
+    void* mZeroBufferAddress;                        // at 0x4
     CallbackListNodeList mCallbackList;              // at 0x8
-    AXOutCallback mOldAxCallback;                    // at 0x14
+    AXOutCallback mNextAxRegisterCallback;           // at 0x14
     bool mInitialized;                               // at 0x18
-    bool mUpdateVoicePrio;                           // at 0x19
+    bool mUpdateVoicePrioFlag;                       // at 0x19
     bool mDiskError;                                 // at 0x1A
     MoveValue<f32, int> mMasterVolume;               // at 0x1C
     MoveValue<f32, int> mMainOutVolume;              // at 0x2C
@@ -95,7 +100,9 @@ private:
     FxBaseList mFxList[AUX_BUS_NUM];                 // at 0xB4
     AXAuxCallback mAuxCallback[AUX_BUS_NUM];         // at 0xD8
     void* mAuxCallbackContext[AUX_BUS_NUM];          // at 0xE4
-    u8 mAuxCallbackWait[AUX_BUS_NUM];                // at 0xF0
+    u8 mAuxCallbackWaitCounter[AUX_BUS_NUM];         // at 0xF0
+
+    static u8 sZeroBuffer[ZERO_BUFFER_SIZE];
 };
 
 } // namespace detail

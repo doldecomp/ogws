@@ -14,7 +14,7 @@ class Channel;
 
 class Bank {
 public:
-    Bank(const void* pBankBin);
+    explicit Bank(const void* pBankBin);
     ~Bank();
 
     Channel* NoteOn(const NoteOnInfo& rInfo) const;

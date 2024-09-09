@@ -58,9 +58,10 @@ void FrameHeap::Clear() {
     NewSection();
 }
 
-void* FrameHeap::Alloc(u32 size, AllocCallback pCallback, void* pCallbackArg) {
+void* FrameHeap::Alloc(u32 size, FreeCallback pCallback, void* pCallbackArg) {
     void* pBuffer = MEMAllocFromFrmHeapEx(
-        mHandle, scBlockBufferSize + ut::RoundUp(size, 32), 32);
+        mHandle, BLOCK_BUFFER_SIZE + ut::RoundUp(size, HEAP_ALIGN), HEAP_ALIGN);
+
     if (pBuffer == NULL) {
         return NULL;
     }
@@ -107,12 +108,12 @@ int FrameHeap::GetCurrentLevel() const {
 }
 
 u32 FrameHeap::GetFreeSize() const {
-    u32 freeSize = MEMGetAllocatableSizeForFrmHeapEx(mHandle, 32);
-    if (freeSize < scBlockBufferSize) {
+    u32 freeSize = MEMGetAllocatableSizeForFrmHeapEx(mHandle, HEAP_ALIGN);
+    if (freeSize < BLOCK_BUFFER_SIZE) {
         return 0;
     }
 
-    return ut::RoundDown(freeSize - scBlockBufferSize, 32);
+    return ut::RoundDown(freeSize - BLOCK_BUFFER_SIZE, HEAP_ALIGN);
 }
 
 bool FrameHeap::NewSection() {

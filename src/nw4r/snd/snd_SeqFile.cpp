@@ -7,9 +7,9 @@ namespace nw4r {
 namespace snd {
 namespace detail {
 
-bool SeqFileReader::IsValidFileHeader(const void* pSeqData) {
+bool SeqFileReader::IsValidFileHeader(const void* pSeqBin) {
     const ut::BinaryFileHeader* pFileHeader =
-        static_cast<const ut::BinaryFileHeader*>(pSeqData);
+        static_cast<const ut::BinaryFileHeader*>(pSeqBin);
 
     if (pFileHeader->signature != SIGNATURE) {
         return false;

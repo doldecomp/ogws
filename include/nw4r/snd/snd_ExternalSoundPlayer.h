@@ -14,7 +14,7 @@ public:
     ~ExternalSoundPlayer();
 
     int GetPlayableSoundCount() const {
-        return mPlayableSoundCount;
+        return mPlayableCount;
     }
     void SetPlayableSoundCount(int count);
 
@@ -60,7 +60,7 @@ public:
 
 private:
     BasicSoundExtPlayList mSoundList; // at 0x0
-    u16 mPlayableSoundCount;          // at 0xC
+    u16 mPlayableCount;               // at 0xC
     f32 mVolume;                      // at 0x10
 };
 

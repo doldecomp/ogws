@@ -53,9 +53,6 @@ public:
 public:
     static SoundThread& GetInstance();
 
-    SoundThread();
-    ~SoundThread() {}
-
     bool Create(s32 priority, void* pStack, u32 stackSize);
     void Shutdown();
 
@@ -71,13 +68,8 @@ private:
 
     static const int MSG_QUEUE_CAPACITY = 4;
 
-public:
-    void Lock() {
-        OSLockMutex(&mMutex);
-    }
-    void Unlock() {
-        OSUnlockMutex(&mMutex);
-    }
+private:
+    SoundThread();
 
     static void AxCallbackFunc();
     void AxCallbackProc();
@@ -85,13 +77,20 @@ public:
     static void* SoundThreadFunc(void* pArg);
     void SoundThreadProc();
 
+    void Lock() {
+        OSLockMutex(&mMutex);
+    }
+    void Unlock() {
+        OSUnlockMutex(&mMutex);
+    }
+
 private:
     OSThread mThread;                         // at 0x0
     OSThreadQueue mThreadQueue;               // at 0x318
     OSMessageQueue mMsgQueue;                 // at 0x320
     OSMessage mMsgBuffer[MSG_QUEUE_CAPACITY]; // at 0x340
     void* mStackEnd;                          // at 0x350
-    OSMutex mMutex;                           // at 0x354
+    mutable OSMutex mMutex;                   // at 0x354
 
     AxManager::CallbackListNode mAxCallbackNode;    // at 0x36C
     SoundFrameCallbackList mSoundFrameCallbackList; // at 0x378

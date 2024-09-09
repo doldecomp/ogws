@@ -10,6 +10,8 @@ namespace snd {
 namespace detail {
 
 class ChannelManager {
+    friend class Channel; // Alloc/Free intended through Channel only
+
 public:
     static const int VOICE_MARGIN = 1;
     static const int VOICE_MAX = AX_VOICE_MAX + VOICE_MARGIN;
@@ -22,15 +24,13 @@ public:
 
     void Setup(void* pWork, u32 workSize);
     void Shutdown();
-
-    Channel* Alloc();
-    void Free(Channel* pChannel);
-
     void UpdateAllChannel();
 
 private:
     ChannelManager();
-    ~ChannelManager() {}
+
+    Channel* Alloc();
+    void Free(Channel* pChannel);
 
 private:
     InstancePool<Channel> mPool; // at 0x0

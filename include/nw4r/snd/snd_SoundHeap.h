@@ -19,11 +19,12 @@ public:
 
     virtual void* Alloc(u32 size); // at 0xC
 
+    void* Alloc(u32 size, detail::FrameHeap::FreeCallback pCallback,
+                void* pCallbackArg);
+
     bool Create(void* pBase, u32 size);
     void Destroy();
 
-    void* Alloc(u32 size, detail::FrameHeap::AllocCallback pCallback,
-                void* pCallbackArg);
     void Clear();
 
     int SaveState();

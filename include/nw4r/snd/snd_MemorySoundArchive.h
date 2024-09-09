@@ -20,7 +20,8 @@ public:
 
     virtual const void* detail_GetFileAddress(u32 id) const;         // at 0xC
     virtual const void* detail_GetWaveDataFileAddress(u32 id) const; // at 0x10
-    virtual int detail_GetRequiredStreamBufferSize() const;          // at 0x14
+
+    virtual int detail_GetRequiredStreamBufferSize() const; // at 0x14
 
     virtual ut::FileStream* OpenStream(void* pBuffer, int size, u32 offset,
                                        u32 length) const; // at 0x18

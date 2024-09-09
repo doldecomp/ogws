@@ -9,44 +9,43 @@ namespace snd {
 class MemorySoundArchive::MemoryFileStream : public ut::FileStream {
 public:
     MemoryFileStream(const void* pBuffer, u32 size);
-    virtual ~MemoryFileStream() {}
 
-    virtual void Close();
+    virtual void Close();                      // at 0x10
     virtual s32 Read(void* pDst, u32 size);    // at 0x14
     virtual void Seek(s32 offset, u32 origin); // at 0x44
-
-    virtual u32 GetSize() const {
-        return mSize;
-    } // at 0x40
-
-    virtual u32 Tell() const {
-        return mOffset;
-    } // at 0x58
-
-    virtual bool CanWrite() const {
-        return false;
-    } // at 0x30
-
-    virtual bool CanRead() const {
-        return true;
-    } // at 0x2C
-
-    virtual bool CanAsync() const {
-        return false;
-    } // at 0x28
-
-    virtual bool CanCancel() const {
-        return true;
-    } // at 0x54
 
     virtual bool CanSeek() const {
         return true;
     } // at 0x50
 
+    virtual bool CanCancel() const {
+        return true;
+    } // at 0x54
+
+    virtual bool CanAsync() const {
+        return false;
+    } // at 0x28
+
+    virtual bool CanRead() const {
+        return true;
+    } // at 0x2C
+
+    virtual bool CanWrite() const {
+        return false;
+    } // at 0x30
+
+    virtual u32 Tell() const {
+        return mOffset;
+    } // at 0x58
+
+    virtual u32 GetSize() const {
+        return mSize;
+    } // at 0x40
+
 private:
     const void* mData; // at 0x14
-    u32 mSize;         // at 0x18
-    u32 mOffset;       // at 0x1C
+    s32 mSize;         // at 0x18
+    s32 mOffset;       // at 0x1C
 };
 
 MemorySoundArchive::MemorySoundArchive() : mData(NULL) {}
@@ -166,7 +165,7 @@ void MemorySoundArchive::MemoryFileStream::Close() {
 }
 
 s32 MemorySoundArchive::MemoryFileStream::Read(void* pDst, u32 size) {
-    u32 bytesRead = ut::Min(size, mSize - mOffset);
+    u32 bytesRead = ut::Min<u32>(size, mSize - mOffset);
     memcpy(pDst, ut::AddOffsetToPtr(mData, mOffset), bytesRead);
 
     return bytesRead;
@@ -194,17 +193,6 @@ void MemorySoundArchive::MemoryFileStream::Seek(s32 offset, u32 origin) {
     }
     }
 }
-
-// clang-format off
-DECOMP_FORCEACTIVE(snd_MemorySoundArchive_cpp,
-                   MemorySoundArchive::MemoryFileStream::GetSize,
-                   MemorySoundArchive::MemoryFileStream::Tell,
-                   MemorySoundArchive::MemoryFileStream::CanWrite,
-                   MemorySoundArchive::MemoryFileStream::CanRead,
-                   MemorySoundArchive::MemoryFileStream::CanAsync,
-                   MemorySoundArchive::MemoryFileStream::CanCancel,
-                   MemorySoundArchive::MemoryFileStream::CanSeek);
-// clang-format on
 
 } // namespace snd
 } // namespace nw4r
