@@ -1,110 +1,103 @@
-#include <string.h>
-#include "g3d_resdict.h"
+#pragma ipa file // TODO: REMOVE AFTER REFACTOR
 
-namespace nw4r
-{
-    namespace g3d
-    {
-        ResDicEntry * ResDic::Get(ResName rn) const
-        {
-            u32 len = rn.GetLength();
-            const char *name = rn.GetName();
-            ResDicData &dict = this->mDict.ref();
-            ResDicEntry *r5 = &dict.mEntries[0];
-            ResDicEntry *r31 = &dict.mEntries[r5->unk_index];
+#include <nw4r/g3d.h>
 
-            while (r5->INT_0x0 > r31->INT_0x0)
-            {
-                r5 = r31;
+#include <cstring>
 
-                u32 val = r31->INT_0x0 & 7;
-                
-                if (r31->INT_0x0 >> 3 < len && (name[r31->INT_0x0 >> 3] >> val) & 1)
-                {
-                    r31 = mDict.ref().mEntries + r31->unk_index2;
-                }
-                else
-                {
-                    r31 = mDict.ref().mEntries + r31->unk_index;
-                }
-            }
+namespace nw4r {
+namespace g3d {
 
-            const void *resPtr = (const char *)mDict.ptr() + r31->INT_0x8 - 4;
-            
-            if (rn == ResName(resPtr))
-            {
-                return r31;
-            }
+ResDicNodeData* ResDic::Get(const ResName name) const {
+    u32 len = name.GetLength();
+    const char* pName = name.GetName();
+    const ResDicData& r = ref();
 
-            return NULL;
-        }
+    const ResDicNodeData* c = &r.data[0];
+    const ResDicNodeData* x = &r.data[c->idxLeft];
 
-        ResDicEntry * ResDic::Get(const char* name, u32 len) const
-        {
-            ResDicData &dict = this->mDict.ref();
-            ResDicEntry *r7 = &dict.mEntries[0];
-            ResDicEntry *r31 = &dict.mEntries[r7->unk_index];
+    while (c->ref > x->ref) {
+        c = x;
 
-            while (r7->INT_0x0 > r31->INT_0x0)
-            {
-                r7 = r31;
+        u32 wd = x->ref >> 3;
+        u32 pos = x->ref & 7;
 
-                u32 val = r31->INT_0x0 & 7;
-                
-                if ((r31->INT_0x0 >> 3 < len) && (name[r31->INT_0x0 >> 3] >> val) & 1)
-                {
-                    r31 = mDict.ref().mEntries + r31->unk_index2;
-                }
-                else
-                {
-                    r31 = mDict.ref().mEntries + r31->unk_index;
-                }
-            }
-
-            if (r31->INT_0x8)
-            {
-				const char *cmp = r31->INT_0x8 ? (const char *)mDict.ptr() + r31->INT_0x8 : NULL;
-                
-                if (strcmp(name, cmp) == 0) return r31;
-            }
-
-            return NULL;
-        }
-
-        void * ResDic::operator[](const char *key) const
-        {
-            if (mDict.IsValid() && key)
-            {
-                ResDicEntry *entry = Get(key, strlen(key));
-                
-				if (entry) return (void *)mDict.ofs_to_ptr_raw<void>(entry->INT_0xC);
-            }
-
-            return NULL;
-        }
-
-        void * ResDic::operator[](ResName rn) const
-        {
-			if (mDict.IsValid() && rn.mRes.IsValid())
-            {
-				ResDicEntry *entry = Get(rn.mRes.ptr());
-                
-				if (entry) return (void *)mDict.ofs_to_ptr_raw<void>(entry->INT_0xC);
-            }
-			
-            return NULL;
-        }
-		
-		s32 ResDic::GetIndex(ResName rn) const
-        {
-            if (mDict.IsValid() && rn.mRes.IsValid())
-            {
-                ResDicEntry *entry = Get(rn.mRes.ptr());
-				
-                if (entry) return entry - (mDict.ref().mEntries + 1);
-            }
-
-            return -1;
+        if (wd < len && (pName[wd] >> pos) & 1) {
+            x = &r.data[x->idxRight];
+        } else {
+            x = &r.data[x->idxLeft];
         }
     }
+
+    // Subtract 4 for the start of the Pascal string
+    if (name == ResName(reinterpret_cast<const char*>(&r) + x->ofsString - 4)) {
+        return const_cast<ResDicNodeData*>(x);
+    }
+
+    return NULL;
 }
+
+ResDicNodeData* ResDic::Get(const char* pName, u32 len) const {
+    const ResDicData& r = ref();
+
+    const ResDicNodeData* c = &r.data[0];
+    const ResDicNodeData* x = &r.data[c->idxLeft];
+
+    while (c->ref > x->ref) {
+        c = x;
+
+        u32 wd = x->ref >> 3;
+        u32 pos = x->ref & 7;
+
+        if (wd < len && (pName[wd] >> pos) & 1) {
+            x = &r.data[x->idxRight];
+        } else {
+            x = &r.data[x->idxLeft];
+        }
+    }
+
+    if (x->ofsString != 0 &&
+        std::strcmp(pName, ofs_to_ptr<char>(x->ofsString)) == 0) {
+        return const_cast<ResDicNodeData*>(x);
+    }
+
+    return NULL;
+}
+
+void* ResDic::operator[](const char* pName) const {
+    if (IsValid() && pName != NULL) {
+        ResDicNodeData* pNode = Get(pName, std::strlen(pName));
+
+        if (pNode != NULL) {
+            return const_cast<void*>(ofs_to_ptr_raw<void>(pNode->ofsData));
+        }
+    }
+
+    return NULL;
+}
+
+void* ResDic::operator[](const ResName name) const {
+    if (IsValid() && name.IsValid()) {
+        ResDicNodeData* pNode = Get(name.ptr());
+
+        if (pNode != NULL) {
+            return const_cast<void*>(ofs_to_ptr_raw<void>(pNode->ofsData));
+        }
+    }
+
+    return NULL;
+}
+
+s32 ResDic::GetIndex(const ResName name) const {
+    if (IsValid() && name.IsValid()) {
+        ResDicNodeData* pNode = Get(name);
+
+        if (pNode != NULL) {
+            return pNode - (ref().data + 1);
+        }
+    }
+
+    return NOT_FOUND;
+}
+
+} // namespace g3d
+} // namespace nw4r
