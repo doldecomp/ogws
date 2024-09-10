@@ -20,17 +20,17 @@ namespace nw4r
 	{
 		namespace
 		{
-			NW4R_G3D_CREATE_RES_NAME_DATA(Models, "3DModels(NW4R)");
-			NW4R_G3D_CREATE_RES_NAME_DATA(Pltts, "Palettes(NW4R)");
-			NW4R_G3D_CREATE_RES_NAME_DATA(Textures, "Textures(NW4R)");
-			NW4R_G3D_CREATE_RES_NAME_DATA(AnmChr, "AnmChr(NW4R)");
-			NW4R_G3D_CREATE_RES_NAME_DATA(AnmVis, "AnmVis(NW4R)");
-			NW4R_G3D_CREATE_RES_NAME_DATA(AnmClr, "AnmClr(NW4R)");
-			NW4R_G3D_CREATE_RES_NAME_DATA(AnmTexPat, "AnmTexPat(NW4R)");
-			NW4R_G3D_CREATE_RES_NAME_DATA(AnmTexSrt, "AnmTexSrt(NW4R)");
-			NW4R_G3D_CREATE_RES_NAME_DATA(AnmShp, "AnmShp(NW4R)");
-			NW4R_G3D_CREATE_RES_NAME_DATA(AnmScn, "AnmScn(NW4R)");
-			NW4R_G3D_CREATE_RES_NAME_DATA(Ext, "External");
+			NW4R_G3D_RESNAME_DEF(Models, "3DModels(NW4R)");
+			NW4R_G3D_RESNAME_DEF(Pltts, "Palettes(NW4R)");
+			NW4R_G3D_RESNAME_DEF(Textures, "Textures(NW4R)");
+			NW4R_G3D_RESNAME_DEF(AnmChr, "AnmChr(NW4R)");
+			NW4R_G3D_RESNAME_DEF(AnmVis, "AnmVis(NW4R)");
+			NW4R_G3D_RESNAME_DEF(AnmClr, "AnmClr(NW4R)");
+			NW4R_G3D_RESNAME_DEF(AnmTexPat, "AnmTexPat(NW4R)");
+			NW4R_G3D_RESNAME_DEF(AnmTexSrt, "AnmTexSrt(NW4R)");
+			NW4R_G3D_RESNAME_DEF(AnmShp, "AnmShp(NW4R)");
+			NW4R_G3D_RESNAME_DEF(AnmScn, "AnmScn(NW4R)");
+			NW4R_G3D_RESNAME_DEF(Ext, "External");
 		}
 		
 		ResMdl ResFile::GetResMdl(const char * pName) const

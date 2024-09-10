@@ -1,141 +1,176 @@
-#ifndef NW4R_G3D_RESCOMMON_H
-#define NW4R_G3D_RESCOMMON_H
-#include "types_nw4r.h"
+#ifndef NW4R_G3D_RES_COMMON_H
+#define NW4R_G3D_RES_COMMON_H
+#include <nw4r/types_nw4r.h>
 
-#define NW4R_G3D_CREATE_RES_NAME_DATA(VAR,VAL) ResNameData ResNameData_##VAR ALIGN(32) = { sizeof(VAL) - 1, VAL }
+#include <revolution/GX.h>
 
-#define FIFO_ACCESS_BP 0x61
-#define FIFO_ACCESS_CP 0x8
-#define FIFO_ACCESS_XF 0x10
+/**
+ * Define ResName pascal string.
+ */
+#define NW4R_G3D_RESNAME_DEF(VAR, STR)                                         \
+    ResNameData ResNameData_##VAR ALIGN(32) = {sizeof(STR) - 1, STR}
 
-namespace nw4r
-{
-	namespace g3d
-	{
-		template <typename T>
-		class ResCommon
-		{
-			T * mPtr;
-			
-		public:
-			inline ResCommon(void * vptr) : mPtr(static_cast<T *>(vptr)) {}
-			inline ResCommon(const void * vptr) : mPtr(static_cast<T *>(vptr)) {}
-			
-			inline T & ref() const { return *mPtr; }
-			inline T * ptr() const { return mPtr; }
-			inline bool IsValid() const { return mPtr != NULL; }
+namespace nw4r {
+namespace g3d {
 
-			template <typename TPtr>
-			inline const TPtr * ofs_to_ptr_raw(s32 ofs) const
-			{
-				return (const TPtr *)((u8 *)mPtr + ofs);
-			}
-			
-			template <typename TPtr>
-			inline TPtr * ofs_to_ptr(s32 ofs)
-			{
-				if (ofs) return (TPtr *)((u8 *)mPtr + ofs);
-				
-				return NULL;
-			}
-			
-			template <typename TPtr>
-			inline const TPtr * ofs_to_ptr(s32 ofs) const
-			{
-				if (ofs) return (const TPtr *)((u8 *)mPtr + ofs);
-				
-				return NULL;
-			}
-			
-			template <typename TObj>
-			inline TObj ofs_to_obj(s32 ofs) const
-			{
-				if (ofs) return (u8 *)mPtr + ofs;
-				
-				return NULL;
-			}
-		};
-		
-		struct ResNameData
-		{
-			u32 mLength;
-			char mName[0x1C];
-		};
+template <typename T> class ResCommon {
+public:
+    ResCommon(void* pData) : mpData(static_cast<T*>(pData)) {}
+    ResCommon(const void* pData) : mpData(static_cast<const T*>(pData)) {}
 
-		struct ResName
-		{
-			ResCommon<const ResNameData> mRes;
-			
-			inline ResName(const void *vptr) : mRes(vptr) {}
+    bool IsValid() const {
+        return mpData != NULL;
+    }
 
-			inline u32 GetLength() const
-			{
-				return mRes.ref().mLength;
-			}
-			
-			inline const char * GetName() const
-			{
-				return mRes.ref().mName;
-			}
-			
-			bool operator==(ResName) const;
-		};
+    T* ptr() {
+        return mpData;
+    }
+    const T* ptr() const {
+        return mpData;
+    }
 
-		namespace detail
-		{
-			typedef u8 CPCmd[6];
-			typedef u8 BPCmd[5];
-			
-			inline void ResWrite_u8(u8 *res, u8 arg)
-			{
-				*res = arg;
-			}
+    T& ref() {
+        return *mpData;
+    }
+    const T& ref() const {
+        return *mpData;
+    }
 
-			inline void ResWrite_u16(u8 *res, u16 arg)
-			{
-				ResWrite_u8(res + 0, arg >> 8);
-				ResWrite_u8(res + 1, arg >> 0);
-			}
+    template <typename T> T* ofs_to_ptr_raw(s32 ofs) {
+        return reinterpret_cast<T*>((char*)mpData + ofs);
+    }
+    template <typename T> const T* ofs_to_ptr_raw(s32 ofs) const {
+        return reinterpret_cast<const T*>((char*)mpData + ofs);
+    }
 
-			inline void ResWrite_u32(u8 *res, u32 arg)
-			{
-				ResWrite_u8(res + 0, arg >> 24);
-				ResWrite_u8(res + 1, arg >> 16);
-				ResWrite_u8(res + 2, arg >> 8);
-				ResWrite_u8(res + 3, arg >> 0);
-			}
+    template <typename T> T* ofs_to_ptr(s32 ofs) {
+        if (ofs != 0) {
+            return reinterpret_cast<T*>((char*)mpData + ofs);
+        }
 
-			inline u8 ResRead_u8(const u8 *res)
-			{
-				return *res;
-			}
+        return NULL;
+    }
+    template <typename T> const T* ofs_to_ptr(s32 ofs) const {
+        if (ofs != 0) {
+            return reinterpret_cast<const T*>((char*)mpData + ofs);
+        }
 
-			inline u32 ResRead_u32(const u8 *res)
-			{
-				int ret = ResRead_u8(res) << 24;
-				ret |= ResRead_u8(res + 1) << 16;
-				ret |= ResRead_u8(res + 2) << 8;
-				ret |= ResRead_u8(res + 3);
-				return ret;
-			}
-			
-			inline void ResReadBPCmd(const u8 *res, u32 *out)
-			{
-				*out = ResRead_u32(res + 1);
-			}
-			
-			inline void ResReadCPCmd(const u8 *res, u32 *out)
-			{
-				*out = ResRead_u32(res + 2);
-			}
-			
-			void ResWriteBPCmd(u8 *, u32);
-			void ResWriteBPCmd(u8 *, u32, u32);
-			void ResWriteCPCmd(u8 *, u8, u32);
-			void ResWriteXFCmd(u8 *, u16, u32);
-			void ResWriteSSMask(u8 *, u32);
-		}
-	}
+        return NULL;
+    }
+
+    template <typename T> T ofs_to_obj(s32 ofs) {
+        if (ofs != 0) {
+            return T((char*)mpData + ofs);
+        }
+
+        return T(NULL);
+    }
+    template <typename T> T ofs_to_obj(s32 ofs) const {
+        if (ofs != 0) {
+            return T((char*)mpData + ofs);
+        }
+
+        return T(NULL);
+    }
+
+private:
+    T* mpData;
+};
+
+struct ResNameData {
+    u32 len;     // at 0x0
+    char str[4]; // at 0x4
+};
+
+class ResName : public ResCommon<const ResNameData> {
+public:
+    ResName(const void* pData) : ResCommon(pData) {}
+
+    u32 GetLength() const {
+        return ref().len;
+    }
+
+    const char* GetName() const {
+        return ref().str;
+    }
+
+    bool operator==(ResName rhs) const;
+};
+
+namespace detail {
+
+// TODO: Remove
+typedef u8 CPCmd[6];
+typedef u8 BPCmd[5];
+
+/******************************************************************************
+ *
+ * Primitive read/write
+ *
+ ******************************************************************************/
+inline u8 ResRead_u8(const u8* pPtr) {
+    return *pPtr;
 }
+
+inline u32 ResRead_u32(const u8* pPtr) {
+    u32 value = ResRead_u8(pPtr++) << 24;
+    value |= ResRead_u8(pPtr++) << 16;
+    value |= ResRead_u8(pPtr++) << 8;
+    value |= ResRead_u8(pPtr++) << 0;
+    return value;
+}
+
+inline void ResWrite_u8(u8* pPtr, u8 data) {
+    *pPtr = data;
+}
+
+inline void ResWrite_u16(u8* pPtr, u16 data) {
+    ResWrite_u8(pPtr++, data >> 8);
+    ResWrite_u8(pPtr++, data >> 0);
+}
+
+inline void ResWrite_u32(u8* pPtr, u32 data) {
+    ResWrite_u8(pPtr++, data >> 24);
+    ResWrite_u8(pPtr++, data >> 16);
+    ResWrite_u8(pPtr++, data >> 8);
+    ResWrite_u8(pPtr++, data >> 0);
+}
+
+/******************************************************************************
+ *
+ * GX Blitting Processor (BP)
+ *
+ ******************************************************************************/
+inline void ResReadBPCmd(const u8* pPtr, u32* pOut) {
+    // Skip over FIFO command byte
+    *pOut = ResRead_u32(pPtr + 1);
+}
+
+void ResWriteBPCmd(u8* pPtr, u32 reg);
+void ResWriteBPCmd(u8* pPtr, u32 reg, u32 mask);
+void ResWriteSSMask(u8* pPtr, u32 value);
+
+/******************************************************************************
+ *
+ * GX Command Processor (CP)
+ *
+ ******************************************************************************/
+inline void ResReadCPCmd(const u8* pPtr, u32* pOut) {
+    // Skip over FIFO command byte + addr byte
+    *pOut = ResRead_u32(pPtr + 2);
+}
+
+void ResWriteCPCmd(u8* pPtr, u8 addr, u32 value);
+
+/******************************************************************************
+ *
+ * GX Transform Unit (XF)
+ *
+ ******************************************************************************/
+void ResWriteXFCmd(u8* pPtr, u16 addr, u32 value);
+
+} // namespace detail
+} // namespace g3d
+} // namespace nw4r
 
 #endif

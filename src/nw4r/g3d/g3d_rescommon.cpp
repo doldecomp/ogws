@@ -1,57 +1,65 @@
-#include "g3d_rescommon.h"
-#include "string.h"
+#pragma ipa file // TODO: REMOVE AFTER REFACTOR
 
-namespace nw4r
-{
-    namespace g3d
-    {
+#include <nw4r/g3d.h>
 
-        bool ResName::operator==(ResName other) const
-        {
-            if (this->GetLength() == other.GetLength())
-            {
-                return strcmp(this->GetName(), other.GetName()) == 0;
-            }
-            return false;
-        }
+#include <revolution/GX.h>
 
-        namespace detail
-        {
-            void ResWriteBPCmd(u8 *res, u32 arg)
-            {
-                ResWrite_u8(res, FIFO_ACCESS_BP);
-                ResWrite_u32(res + 1, arg);
-            }
+#include <cstring>
 
-            void ResWriteBPCmd(u8 *res, u32 arg, u32 writeMask)
-            {
-                arg &= writeMask;
-                
-                ResWrite_u8(res, FIFO_ACCESS_BP);
-                ResWrite_u32(res + 1, arg | (ResRead_u32(res + 1) & ~writeMask));
-            }
+namespace nw4r {
+namespace g3d {
 
-            void ResWriteCPCmd(u8 *res, u8 arg1, u32 arg2)
-            {
-                ResWrite_u8(res, FIFO_ACCESS_CP);
-                ResWrite_u8(res + 1, arg1);
-                ResWrite_u32(res + 2, arg2);
-            }
-
-            void ResWriteXFCmd(u8 *res, u16 arg1, u32 arg2)
-            {
-                ResWrite_u8(res, FIFO_ACCESS_XF);
-                ResWrite_u16(res + 1, 0x0000);
-                ResWrite_u16(res + 3, arg1);
-                ResWrite_u32(res + 5, arg2);
-            }
-
-            void ResWriteSSMask(u8 *res, u32 arg)
-            {
-                u32 arg2 = ResRead_u32(res + 1);
-                arg2 |= arg;
-                ResWriteBPCmd(res, arg2 | (0xFE << 24));
-            }
-        }
+bool ResName::operator==(ResName rhs) const {
+    if (GetLength() == rhs.GetLength()) {
+        return std::strcmp(GetName(), rhs.GetName()) == 0;
     }
+
+    return false;
 }
+
+namespace detail {
+
+void ResWriteBPCmd(u8* pPtr, u32 reg) {
+    ResWrite_u8(pPtr + 0, GX_FIFO_CMD_LOAD_BP_REG);
+    ResWrite_u32(pPtr + 1, reg);
+}
+
+void ResWriteBPCmd(u8* pPtr, u32 reg, u32 mask) {
+    ResWrite_u8(pPtr + 0, GX_FIFO_CMD_LOAD_BP_REG);
+
+    u32 orig;
+    ResReadBPCmd(pPtr + 0, &orig);
+
+    // Insert register value into the original command using the mask
+    orig &= ~mask;
+    reg &= mask;
+
+    ResWrite_u32(pPtr + 1, reg | orig);
+}
+
+void ResWriteCPCmd(u8* pPtr, u8 addr, u32 value) {
+    ResWrite_u8(pPtr + 0, GX_FIFO_CMD_LOAD_CP_REG);
+    ResWrite_u8(pPtr + 1, addr);
+    ResWrite_u32(pPtr + 2, value);
+}
+
+void ResWriteXFCmd(u8* pPtr, u16 addr, u32 value) {
+    ResWrite_u8(pPtr + 0, GX_FIFO_CMD_LOAD_XF_REG);
+    ResWrite_u16(pPtr + 1, 0x0000); // No size, single write
+    ResWrite_u16(pPtr + 3, addr);
+    ResWrite_u32(pPtr + 5, value);
+}
+
+void ResWriteSSMask(u8* pPtr, u32 value) {
+    u32 orig = ResRead_u32(pPtr + 1);
+
+    // Overwrite BP register ID
+    orig |= value;
+    orig |= GX_BP_REG_SSMASK << 24;
+
+    ResWriteBPCmd(pPtr + 0, orig);
+}
+
+} // namespace detail
+} // namespace g3d
+} // namespace nw4r
