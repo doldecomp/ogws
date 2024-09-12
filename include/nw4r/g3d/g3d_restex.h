@@ -37,14 +37,43 @@ public:
 public:
     ResTex(void* pData) : ResCommon(pData) {}
 
-    bool CheckRevision() const {
-        return ref().revision == REVISION;
+    void Init();
+
+    bool GetTexObjParam(void** ppTexData, u16* pWidth, u16* pHeight,
+                        GXTexFmt* pFormat, f32* pMinLod, f32* pMaxLod,
+                        GXBool* pMipMap) const;
+
+    bool GetTexObjCIParam(void** ppTexData, u16* pWidth, u16* pHeight,
+                          GXCITexFmt* pFormatCI, f32* pMinLod, f32* pMaxLod,
+                          GXBool* pMipMap) const;
+
+    u32 GetRevision() const {
+        return ref().revision;
     }
 
-    bool GetTexObjParam(void**, u16*, u16*, GXTexFmt*, f32*, f32*, u8*) const;
-    bool GetTexObjCIParam(void**, u16*, u16*, GXCITexFmt*, f32*, f32*,
-                          u8*) const;
-    void Init();
+    bool CheckRevision() const {
+        return GetRevision() == REVISION;
+    }
+
+    bool IsCIFmt() const {
+        return ref().flag & FLAG_CI_FMT;
+    }
+
+    u16 GetWidth() const {
+        return ref().width;
+    }
+    u16 GetHeight() const {
+        return ref().height;
+    }
+
+    const void* GetTexData() const {
+        return ofs_to_ptr<void>(ref().toTexData);
+    }
+
+private:
+    enum Flag {
+        FLAG_CI_FMT = (1 << 0),
+    };
 };
 
 } // namespace g3d

@@ -1,85 +1,105 @@
-#include "g3d_restex.h"
-#include <revolution/OS/OSCache.h>
+#include <nw4r/g3d.h>
 
-namespace nw4r
-{
-    namespace g3d
-    {
-        void ResPltt::DCStore(bool bSync)
-        {
-            ResPlttData& rPltt = mPltt.ref();
-            int len = rPltt.mLength;
+#include <revolution/OS.h>
 
-            if (bSync)
-            {
-                DCStoreRange(&rPltt, len);
-            }
-            else
-            {
-                DCStoreRangeNoSync(&rPltt, len);
-            }
-        }
+namespace nw4r {
+namespace g3d {
 
-        bool ResTex::GetTexObjParam(void **r4, u16 *r5, u16 *r6, GXTexFmt *pFmt,
-        f32 *r8, f32 *r9, u8 *r10) const
-        {
-            if (mTex.ref().mFlags & 1) return false;
+void ResPltt::DCStore(bool sync) {
+    const ResPlttData& r = ref();
+    u32 size = r.header.size;
 
-            ResTexData& rTex = mTex.ref();
-
-            if (r4) *r4 = mTex.ofs_to_obj<void *>(mTex.ref().INT_0x10);
-            
-            if (r5) *r5 = mTex.ref().SHORT_0x1C;
-
-            if (r6) *r6 = mTex.ref().SHORT_0x1E;
-            
-            if (pFmt) *pFmt = rTex.mFormat;
-            
-            if (r8) *r8 = rTex.FLOAT_0x28;
-            
-            if (r9) *r9 = rTex.FLOAT_0x2C;
-
-            if (r10)
-            {
-                *r10 = (rTex.WORD_0x24 > 1);
-            }
-
-            return true;
-        }
-
-        bool ResTex::GetTexObjCIParam(void **r4, u16 *r5, u16 *r6, GXCITexFmt *pFmt,
-        f32 *r8, f32 *r9, u8 *r10) const
-        {
-            if ((mTex.ref().mFlags & 1) == 0) return false;
-
-            ResTexData& rTex = mTex.ref();
-
-            if (r4) *r4 = mTex.ofs_to_obj<void *>(mTex.ref().INT_0x10);
-            
-            if (r5) *r5 = mTex.ref().SHORT_0x1C;
-
-            if (r6) *r6 = mTex.ref().SHORT_0x1E;
-            
-            if (pFmt) *pFmt = rTex.mCiFormat;
-            
-            if (r8) *r8 = rTex.FLOAT_0x28;
-            
-            if (r9) *r9 = rTex.FLOAT_0x2C;
-
-            if (r10)
-            {
-                *r10 = (rTex.WORD_0x24 > 1);
-            }
-
-            return true;
-        }
-
-        void ResTex::Init()
-        {
-            ResTexData& rTex = mTex.ref();
-            int len = rTex.mLength;
-            
-            DCFlushRangeNoSync(&rTex, len);
-        }
+    if (sync) {
+        DCStoreRange(&r, size);
+    } else {
+        DCStoreRangeNoSync(&r, size);
     }
 }
+
+bool ResTex::GetTexObjParam(void** ppTexData, u16* pWidth, u16* pHeight,
+                            GXTexFmt* pFormat, f32* pMinLod, f32* pMaxLod,
+                            GXBool* pMipMap) const {
+    const ResTexData& r = ref();
+
+    if (IsCIFmt()) {
+        return false;
+    }
+
+    if (ppTexData != NULL) {
+        *ppTexData = const_cast<void*>(GetTexData());
+    }
+
+    if (pWidth != NULL) {
+        *pWidth = GetWidth();
+    }
+
+    if (pHeight != NULL) {
+        *pHeight = GetHeight();
+    }
+
+    if (pFormat != NULL) {
+        *pFormat = r.fmt;
+    }
+
+    if (pMinLod != NULL) {
+        *pMinLod = r.min_lod;
+    }
+
+    if (pMaxLod != NULL) {
+        *pMaxLod = r.max_lod;
+    }
+
+    if (pMipMap != NULL) {
+        *pMipMap = r.mipmap_level > 1;
+    }
+
+    return true;
+}
+
+bool ResTex::GetTexObjCIParam(void** ppTexData, u16* pWidth, u16* pHeight,
+                              GXCITexFmt* pFormatCI, f32* pMinLod, f32* pMaxLod,
+                              GXBool* pMipMap) const {
+    const ResTexData& r = ref();
+
+    if (!IsCIFmt()) {
+        return false;
+    }
+
+    if (ppTexData != NULL) {
+        *ppTexData = const_cast<void*>(GetTexData());
+    }
+
+    if (pWidth != NULL) {
+        *pWidth = GetWidth();
+    }
+
+    if (pHeight != NULL) {
+        *pHeight = GetHeight();
+    }
+
+    if (pFormatCI != NULL) {
+        *pFormatCI = r.cifmt;
+    }
+
+    if (pMinLod != NULL) {
+        *pMinLod = r.min_lod;
+    }
+
+    if (pMaxLod != NULL) {
+        *pMaxLod = r.max_lod;
+    }
+
+    if (pMipMap != NULL) {
+        *pMipMap = r.mipmap_level > 1;
+    }
+
+    return true;
+}
+
+void ResTex::Init() {
+    const ResTexData& r = ref();
+    DCFlushRangeNoSync(&r, r.header.size);
+}
+
+} // namespace g3d
+} // namespace nw4r

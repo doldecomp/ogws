@@ -34,7 +34,7 @@ public:
         return ref().revision == REVISION;
     }
 
-    void DCStore(bool);
+    void DCStore(bool sync);
 };
 
 } // namespace g3d

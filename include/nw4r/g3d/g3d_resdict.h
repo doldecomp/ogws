@@ -1,5 +1,5 @@
-#ifndef NW4R_G3D_RES_DICT_H
-#define NW4R_G3D_RES_DICT_H
+#ifndef NW4R_G3D_RESDICT_H
+#define NW4R_G3D_RESDICT_H
 #include <nw4r/types_nw4r.h>
 
 #include <nw4r/g3d/g3d_rescommon.h>
