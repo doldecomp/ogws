@@ -1,84 +1,53 @@
 #ifndef NW4R_G3D_RESTEX_H
 #define NW4R_G3D_RESTEX_H
-#include "types_nw4r.h"
-#include "g3d_rescommon.h"
+#include <nw4r/types_nw4r.h>
+
+#include <nw4r/g3d/g3d_rescommon.h>
+
 #include <revolution/GX.h>
 
-namespace nw4r
-{
-	namespace g3d
-	{
-		struct ResTexData
-		{
-			char mMagic[4]; // "TEX0"; at 0x0
-			u32 mLength; // at 0x4
-			u32 mRevision; // at 0x8
-			s16 SHORT_0xC;
-			u16 SHORT_0xE;
-			u32 INT_0x10;
-			UNKWORD WORD_0x14;
-			u32 mFlags; // at 0x18
-			u16 SHORT_0x1C;
-			u16 SHORT_0x1E;
-			union // at 0x20
-			{
-				GXTexFmt mFormat;
-				GXCITexFmt mCiFormat;
-			};
-			u32 WORD_0x24;
-			f32 FLOAT_0x28;
-			f32 FLOAT_0x2C;
-		};
-		
-		struct ResPlttData
-		{
-			char mMagic[4]; // "PLT0"; at 0x0
-			u32 mLength; // at 0x4
-			u32 mRevision; // at 0x8
-		};
-		
-		struct ResTex
-		{
-			enum
-			{
-				REVISION = 1
-			};
-			
-			ResCommon<ResTexData> mTex; // at 0x0
-			
-			inline ResTex(void * vptr) : mTex(vptr) {}
-			
-			inline bool CheckRevision() const
-			{
-				return mTex.ref().mRevision == REVISION;
-			}
+namespace nw4r {
+namespace g3d {
 
-			bool GetTexObjParam(void **, u16 *, u16 *, GXTexFmt *, f32 *, f32 *, u8 *) const;
-			bool GetTexObjCIParam(void **, u16 *, u16 *, GXCITexFmt *, f32 *, f32 *, u8 *) const;
-			void Init();
+struct ResTexData {
+    ResBlockHeaderData header; // at 0x0
+    u32 revision;              // at 0x8
+    s32 toResFileData;         // at 0xC
+    s32 toTexData;             // at 0x10
+    s32 name;                  // at 0x14
+    u32 flag;                  // at 0x18
+    u16 width;                 // at 0x1C
+    u16 height;                // at 0x1E
+    union {
+        GXTexFmt fmt;
+        GXCITexFmt cifmt;
+    }; // at 0x20
+    u32 mipmap_level;  // at 0x24
+    f32 min_lod;       // at 0x28
+    f32 max_lod;       // at 0x2C
+    s32 original_path; // at 0x30
+    s32 toResUserData; // at 0x34
+};
 
-			bool IsValid() const { return mTex.IsValid(); }
-		};
-		
-		struct ResPltt
-		{
-			enum
-			{
-				REVISION = 1
-			};
-			
-			ResCommon<ResPlttData> mPltt; // at 0x0
-			
-			inline ResPltt(void * vptr) : mPltt(vptr) {}
-			
-			inline bool CheckRevision() const
-			{
-				return mPltt.ref().mRevision == REVISION;
-			}
+class ResTex : public ResCommon<ResTexData> {
+public:
+    static const u32 SIGNATURE = 'TEX0';
+    static const int REVISION = 1;
 
-			void DCStore(bool);
-		};
-	}
-}
+public:
+    ResTex(void* pData) : ResCommon(pData) {}
+
+    bool CheckRevision() const {
+        return ref().revision == REVISION;
+    }
+
+    bool GetTexObjParam(void**, u16*, u16*, GXTexFmt*, f32*, f32*, u8*) const;
+    bool GetTexObjCIParam(void**, u16*, u16*, GXCITexFmt*, f32*, f32*,
+                          u8*) const;
+    void Init();
+};
+
+} // namespace g3d
+} // namespace nw4r
 
 #endif

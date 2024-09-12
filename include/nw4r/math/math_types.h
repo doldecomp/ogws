@@ -82,10 +82,15 @@ struct VEC3 : _VEC3 {
         y = fy;
         z = fz;
     }
-    VEC3(const Vec& vec) {
-        x = vec.x;
-        y = vec.y;
-        z = vec.z;
+    VEC3(const _VEC3& rVec) {
+        x = rVec.x;
+        y = rVec.y;
+        z = rVec.z;
+    }
+    VEC3(const Vec& rVec) {
+        x = rVec.x;
+        y = rVec.y;
+        z = rVec.z;
     }
     VEC3(const f32* pData) {
         x = pData[0];

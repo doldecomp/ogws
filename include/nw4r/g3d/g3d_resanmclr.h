@@ -45,7 +45,7 @@ namespace nw4r
 			
 			inline ResAnmClr(void * vptr) : mAnmClr(vptr) {}
 			
-			inline ResAnmClrData & ref() const
+			const inline ResAnmClrData & ref() const
 			{
 				return mAnmClr.ref();
 			}

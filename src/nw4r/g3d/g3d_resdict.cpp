@@ -28,8 +28,7 @@ ResDicNodeData* ResDic::Get(const ResName name) const {
         }
     }
 
-    // Subtract 4 for the start of the Pascal string
-    if (name == ResName(reinterpret_cast<const char*>(&r) + x->ofsString - 4)) {
+    if (name == NW4R_G3D_OFS_TO_RESNAME(&r, x->ofsString)) {
         return const_cast<ResDicNodeData*>(x);
     }
 

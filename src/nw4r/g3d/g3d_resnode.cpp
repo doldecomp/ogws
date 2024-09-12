@@ -1,162 +1,128 @@
-#ifdef __DECOMP_NON_MATCHING
-#include "g3d_resnode.h"
-#include "math_triangular.h"
+#pragma ipa file // TODO: REMOVE AFTER REFACTOR
 
-namespace nw4r
-{
-    namespace g3d
-    {
-        void ResNode::PatchChrAnmResult(ChrAnmResult *pAnm) const
-        {
-            ResNodeData& rNode = mNode.ref();
-            
-            if (mNode.IsValid())
-            {
-                u32 newFlags = pAnm->mFlags;
-                if (pAnm->mFlags & 0x80)
-                {
-                    if (rNode.mFlags & 0x8)
-                    {
-                        newFlags |= 0x18;
-                    }
-                    else
-                    {
-                        if (rNode.mFlags & 0x10)
-                        {
-                            newFlags |= 0x10;
-                        }
+#include <nw4r/g3d.h>
 
-                        pAnm->VEC3_0x4 = rNode.VEC3_0x20;
-                    }
-                }
+#include <nw4r/math.h>
 
-                if (newFlags & 0x100)
-                {
-                    if (rNode.mFlags & 0x4)
-                    {
-                        newFlags |= 0x20;
-                    }
-                    else
-                    {
-                        math::MTX34RotXYZDeg(&pAnm->mMtx, rNode.VEC3_0x2C.x, rNode.VEC3_0x2C.y, rNode.VEC3_0x2C.z);
-                        newFlags &= 0x70;
-                    }
+namespace nw4r {
+namespace g3d {
 
-                    newFlags |= 0x80000000;
-                }
+void ResNode::PatchChrAnmResult(ChrAnmResult* pResult) const {
+    if (!IsValid()) {
+        return;
+    }
 
-                if (newFlags & 0x200)
-                {
-                    if (rNode.mFlags & 0x2)
-                    {
-                        newFlags |= 0x40;
-                    }
-                    else
-                    {
-                        newFlags &= 0xE0;
+    const ResNodeData& r = ref();
+    u32 flags = pResult->flags;
 
-                        pAnm->mMtx[0][3] = rNode.FLOAT_0x38;
-                        pAnm->mMtx[1][3] = rNode.FLOAT_0x3C;
-                        pAnm->mMtx[2][3] = rNode.FLOAT_0x40;
-                    }
-                }
-
-                if ((newFlags & 0x20) && (newFlags & 0x40))
-                {
-                    newFlags |= 0x4;
-
-                    if (newFlags & 0x8)
-                    {
-                        newFlags |= 0x2;
-                    }
-                }
-
-                pAnm->mFlags = newFlags & 0x7C0;
+    if (flags & ChrAnmResult::FLAG_7) {
+        if (r.flags & FLAG_SCALE_ONE) {
+            flags |= ChrAnmResult::FLAG_3 | ChrAnmResult::FLAG_4;
+        } else {
+            if (r.flags & FLAG_SCALE_UNIFORM) {
+                flags |= ChrAnmResult::FLAG_4;
             }
+
+            pResult->s = static_cast<math::VEC3&>(r.scale);
+        }
+    }
+
+    if (flags & ChrAnmResult::FLAG_8) {
+        if (r.flags & FLAG_ROT_ZERO) {
+            flags |= ChrAnmResult::FLAG_5;
+        } else {
+            math::MTX34RotXYZDeg(&pResult->rt, r.rot.x, r.rot.y, r.rot.z);
+            flags &= ~ChrAnmResult::FLAG_5;
         }
 
-        void ResNode::CalcChrAnmResult(ChrAnmResult *pAnm) const
-        {
-            ResNodeData& rNode = mNode.ref();
+        flags |= ChrAnmResult::FLAG_31;
+    }
 
-            if (mNode.IsValid())
-            {
-                u32 newFlags = 0;
-                if (rNode.mFlags & 0x8)
-                {
-                    newFlags |= 0x18;
+    if (flags & ChrAnmResult::FLAG_9) {
+        if (r.flags & FLAG_TRANS_ZERO) {
+            flags |= ChrAnmResult::FLAG_6;
+        } else {
+            flags &= ~ChrAnmResult::FLAG_6;
 
-                    pAnm->VEC3_0x4.z = 1.0f;
-                    pAnm->VEC3_0x4.y = 1.0f;
-                    pAnm->VEC3_0x4.x = 1.0f;
-                }
-                else
-                {
-                    if (rNode.mFlags & 0x10)
-                    {
-                        newFlags |= 0x10;
-                    }
+            pResult->rt[0][3] = r.translate.x;
+            pResult->rt[1][3] = r.translate.y;
+            pResult->rt[2][3] = r.translate.z;
+        }
+    }
 
-                    pAnm->VEC3_0x4 = rNode.VEC3_0x20;
-                }
+    if ((flags & ChrAnmResult::FLAG_5) && (flags & ChrAnmResult::FLAG_6)) {
+        flags |= ChrAnmResult::FLAG_2;
 
-                if (rNode.mFlags & 0x4)
-                {
-                    PSMTXIdentity(pAnm->mMtx);
-                    newFlags |= 0x20;
-                }
-                else
-                {
-                    // Can't get these instructions to order properly
-                    math::VEC3 stack_0x10;
-                    stack_0x10 = rNode.VEC3_0x2C;
-                    pAnm->VEC3_0x10 = rNode.VEC3_0x2C;
-                    
-                    math::MTX34RotXYZDeg(&pAnm->mMtx, rNode.VEC3_0x2C.x, rNode.VEC3_0x2C.y, rNode.VEC3_0x2C.z);
-                }
+        if (flags & ChrAnmResult::FLAG_3) {
+            flags |= ChrAnmResult::FLAG_1;
+        }
+    }
 
-                if (rNode.mFlags & 0x2)
-                {
-                    newFlags |= 0x40;
-                }
-                else
-                {
-                    pAnm->mMtx[0][3] = rNode.FLOAT_0x38;
-                    pAnm->mMtx[1][3] = rNode.FLOAT_0x3C;
-                    pAnm->mMtx[2][3] = rNode.FLOAT_0x40;
-                }
+    pResult->flags = flags & ~(ChrAnmResult::FLAG_7 | ChrAnmResult::FLAG_8 |
+                               ChrAnmResult::FLAG_9);
+}
 
-                if (newFlags & 0x20)
-                {
-                    if (newFlags & 0x40)
-                    {
-                        newFlags |= 0x4;
+void ResNode::CalcChrAnmResult(ChrAnmResult* pResult) const {
+    if (!IsValid()) {
+        return;
+    }
 
-                        if (newFlags & 0x8)
-                        {
-                            newFlags |= 0x2;
-                        }
-                    }
-                }
+    const ResNodeData& r = ref();
+    u32 flags = 0;
 
-                newFlags |= 0x80000000;
-                newFlags |= 0x1;
+    if (r.flags & FLAG_SCALE_ONE) {
+        flags |= ChrAnmResult::FLAG_3 | ChrAnmResult::FLAG_4;
 
-                if (rNode.mFlags & 0x20)
-                {
-                    newFlags |= 0x400;
-                }
+        pResult->s.z = 1.0f;
+        pResult->s.y = 1.0f;
+        pResult->s.x = 1.0f;
+    } else {
+        if (r.flags & FLAG_SCALE_UNIFORM) {
+            flags |= ChrAnmResult::FLAG_4;
+        }
 
-                if (rNode.mFlags & 0x40)
-                {
-                    newFlags |= 0x800;
-                }
+        pResult->s = static_cast<math::VEC3&>(r.scale);
+    }
 
-                pAnm->mFlags = newFlags;
+    if (r.flags & FLAG_ROT_ZERO) {
+        PSMTXIdentity(pResult->rt);
+        flags |= ChrAnmResult::FLAG_5;
+    } else {
+        pResult->rawR = math::VEC3(r.rot);
+        math::MTX34RotXYZDeg(&pResult->rt, r.rot.x, r.rot.y, r.rot.z);
+    }
+
+    if (r.flags & FLAG_TRANS_ZERO) {
+        flags |= ChrAnmResult::FLAG_6;
+    } else {
+        pResult->rt[0][3] = r.translate.x;
+        pResult->rt[1][3] = r.translate.y;
+        pResult->rt[2][3] = r.translate.z;
+    }
+
+    if (flags & ChrAnmResult::FLAG_5) {
+        if (flags & ChrAnmResult::FLAG_6) {
+            flags |= ChrAnmResult::FLAG_2;
+
+            if (flags & ChrAnmResult::FLAG_3) {
+                flags |= ChrAnmResult::FLAG_1;
             }
         }
     }
+
+    flags |= ChrAnmResult::FLAG_31;
+    flags |= ChrAnmResult::FLAG_ANM_EXISTS;
+
+    if (r.flags & FLAG_COMP_SCALE) {
+        flags |= ChrAnmResult::FLAG_10;
+    }
+
+    if (r.flags & FLAG_COMP_CHILD_SCALE) {
+        flags |= ChrAnmResult::FLAG_11;
+    }
+
+    pResult->flags = flags;
 }
-#else
-#error This file has yet to be decompiled accurately. Use "g3d_resnode.s" instead.
-#endif
+
+} // namespace g3d
+} // namespace nw4r

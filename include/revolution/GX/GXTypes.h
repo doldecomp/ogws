@@ -11,7 +11,8 @@ extern "C" {
  * (Bit indices are LSB)
  */
 #define GX_BITSET(field, pos, size, value)                                     \
-    __rlwimi((field), (value), 31 - (pos) - (size) + 1, (pos), (pos) + (size)-1)
+    __rlwimi((field), (value), 31 - (pos) - (size) + 1, (pos),                 \
+             (pos) + (size) - 1)
 
 /**
  * Compose value from bitfield.
@@ -27,7 +28,7 @@ extern "C" {
  * (Bit indices are LSB)
  */
 #define GX_BITSET_TRUNC(field, pos, size, value)                               \
-    __rlwimi((field), (value), 0, (pos), (pos) + (size)-1)
+    __rlwimi((field), (value), 0, (pos), (pos) + (size) - 1)
 
 /**
  * Compose value from bitfield.
@@ -303,7 +304,7 @@ typedef enum _GXFogType {
 
 // Access components of the fog type
 #define GX_FOG_GET_PROJ(x) ((x) >> 3 & 1)
-#define GX_FOG_GET_FSEL(x) ((x)&7)
+#define GX_FOG_GET_FSEL(x) ((x) & 7)
 
 typedef enum _GXIndTexAlphaSel {
     GX_ITBA_OFF,
@@ -838,6 +839,30 @@ typedef enum _GXTexWrapMode {
 
     GX_MAX_TEXWRAPMODE
 } GXTexWrapMode;
+
+typedef enum _GXTlut {
+    GX_TLUT0,
+    GX_TLUT1,
+    GX_TLUT2,
+    GX_TLUT3,
+    GX_TLUT4,
+    GX_TLUT5,
+    GX_TLUT6,
+    GX_TLUT7,
+    GX_TLUT8,
+    GX_TLUT9,
+    GX_TLUT10,
+    GX_TLUT11,
+    GX_TLUT12,
+    GX_TLUT13,
+    GX_TLUT14,
+    GX_TLUT15,
+
+    GX_BIGTLUT0,
+    GX_BIGTLUT1,
+    GX_BIGTLUT2,
+    GX_BIGTLUT3,
+} GXTlut;
 
 typedef enum _GXTlutFmt {
     GX_TL_IA8,

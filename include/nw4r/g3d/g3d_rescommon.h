@@ -5,18 +5,46 @@
 #include <revolution/GX.h>
 
 /**
- * Define ResName pascal string.
+ * Define ResName pascal string for file resource groups.
  */
-#define NW4R_G3D_RESNAME_DEF(VAR, STR)                                         \
-    ResNameData ResNameData_##VAR ALIGN(32) = {sizeof(STR) - 1, STR}
+#define NW4R_G3D_RESFILE_NAME_DEF(VAR, STR)                                    \
+    ResNameData27 ResNameData_##VAR ALIGN(32) = {sizeof(STR) - 1, STR}
+
+/**
+ * Similar to "ofs_to_obj" but accounting for the additional -4 offset.
+ * Debug builds show this behavior was not through an function.
+ */
+#define NW4R_G3D_OFS_TO_RESNAME(BASE, OFS)                                     \
+    nw4r::g3d::ResName((char*)(BASE) + (OFS) - sizeof(u32))
 
 namespace nw4r {
 namespace g3d {
 
+/**
+ * Name for file resource groups.
+ */
+struct ResNameData27 {
+    u32 len;                    // at 0x0
+    char str[32 - sizeof(u32)]; // at 0x4
+};
+
+/**
+ * Header for resource data structures.
+ */
+struct ResBlockHeaderData {
+    char kind[4]; // at 0x0
+    u32 size;     // at 0x4
+};
+
+/**
+ * Common resource wrapper class.
+ */
 template <typename T> class ResCommon {
 public:
-    ResCommon(void* pData) : mpData(static_cast<T*>(pData)) {}
-    ResCommon(const void* pData) : mpData(static_cast<const T*>(pData)) {}
+    explicit ResCommon(void* pData) : mpData(static_cast<T*>(pData)) {}
+
+    explicit ResCommon(const void* pData)
+        : mpData(static_cast<const T*>(pData)) {}
 
     bool IsValid() const {
         return mpData != NULL;
@@ -84,7 +112,7 @@ struct ResNameData {
 
 class ResName : public ResCommon<const ResNameData> {
 public:
-    ResName(const void* pData) : ResCommon(pData) {}
+    explicit ResName(const void* pData) : ResCommon(pData) {}
 
     u32 GetLength() const {
         return ref().len;

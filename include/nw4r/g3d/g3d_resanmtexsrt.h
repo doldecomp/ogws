@@ -40,7 +40,7 @@ namespace nw4r
 			
 			inline ResAnmTexSrt(void * vptr) : mAnmTexSrt(vptr) {}
 			
-			inline ResAnmTexSrtData & ref() const
+			inline const ResAnmTexSrtData & ref() const
 			{
 				return mAnmTexSrt.ref();
 			}

@@ -64,7 +64,7 @@ namespace nw4r
 			
 			inline ResAnmTexPat(void * vptr) : mAnmTexPat(vptr) {}
 			
-			inline ResAnmTexPatData & ref() const
+			inline const ResAnmTexPatData & ref() const
 			{
 				return mAnmTexPat.ref();
 			}

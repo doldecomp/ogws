@@ -44,7 +44,7 @@ namespace nw4r
 			inline ResAnmVis(void * vptr) : mAnmVis(vptr) {}
 			bool IsValid() const { return mAnmVis.IsValid(); }
 
-			inline ResAnmVisData & ref() const
+			inline const ResAnmVisData & ref() const
 			{
 				return mAnmVis.ref();
 			}

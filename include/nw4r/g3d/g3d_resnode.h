@@ -1,68 +1,163 @@
 #ifndef NW4R_G3D_RESNODE_H
 #define NW4R_G3D_RESNODE_H
-#include "types_nw4r.h"
-#include "g3d_rescommon.h"
-#include "g3d_anmchr.h"
-#include "math_types.h"
+#include <nw4r/types_nw4r.h>
 
-namespace nw4r
-{
-    namespace g3d
-    {
-        struct ResNodeData
-        {
-            u32 INT_0x0;
-            s32 INT_0x4;
-            u16 SHORT_0x8;
-            u16 SHORT_0xA;
-            UNKWORD WORD_0xC;
-            UNKWORD WORD_0x10;
-            u32 mFlags; // at 0x14
-            UNKWORD WORD_0x18;
-            UNKWORD WORD_0x1C;
-            math::VEC3 VEC3_0x20;
-            math::VEC3 VEC3_0x2C;
-            f32 FLOAT_0x38;
-            f32 FLOAT_0x3C;
-            f32 FLOAT_0x40;
-            // . . .
-        };
+#include <nw4r/g3d/g3d_rescommon.h>
 
-        struct ResNode
-        {
-            enum ResNodeFlags
-            {
-                NODE_IS_VISIBLE = 0x100
-            };
+#include <nw4r/math.h>
 
-            ResCommon<ResNodeData> mNode;
+namespace nw4r {
+namespace g3d {
 
-            inline ResNode(void * vptr) : mNode(vptr) {}
-            
-            bool IsValid() const { return mNode.IsValid(); }
+// Forward declarations
+struct ChrAnmResult;
 
-            UNKWORD GetID() const
-            {
-                if (IsValid())
-                    return mNode.ptr()->WORD_0xC;
-                return 0;
-            }
+struct ResNodeDataTypedef {
+    enum Billboard {
+        BILLBOARD_OFF,
+        BILLBOARD_STD,
+        BILLBOARD_PERSP_STD,
+        BILLBOARD_ROT,
+        BILLBOARD_PERSP_ROT,
+        BILLBOARD_Y_OFF,
+        BILLBOARD_PERSP_Y,
 
-            void SetVisibility(bool visible)
-            {
-                if (IsValid())
-                {
-                    if (visible)
-                        mNode.ptr()->mFlags |= NODE_IS_VISIBLE;
-                    else
-                        mNode.ptr()->mFlags &= ~NODE_IS_VISIBLE;
-                }
-            }
+        BILLBOARD_MAX,
+    };
 
-            void PatchChrAnmResult(ChrAnmResult *) const;
-            void CalcChrAnmResult(ChrAnmResult *) const;
-        };
+    enum Flag {
+        FLAG_IDENTITY = (1 << 0),
+        FLAG_TRANS_ZERO = (1 << 1),
+        FLAG_ROT_ZERO = (1 << 2),
+        FLAG_SCALE_ONE = (1 << 3),
+        FLAG_SCALE_UNIFORM = (1 << 4),
+        FLAG_COMP_SCALE = (1 << 5),
+        FLAG_COMP_CHILD_SCALE = (1 << 6),
+        FLAG_NO_CLASSIC_SCALE = (1 << 7),
+        FLAG_VISIBLE = (1 << 8),
+        FLAG_HAS_GEOMETRY = (1 << 9),
+        FLAG_BILLBOARD_PARENT = (1 << 10)
+    };
+};
+
+struct ResNodeData : ResNodeDataTypedef {
+    u32 size;                 // at 0x0
+    s32 toResMdlData;         // at 0x4
+    s32 name;                 // at 0x8
+    u32 id;                   // at 0xC
+    u32 mtxID;                // at 0x10
+    u32 flags;                // at 0x14
+    Billboard bbmode;         // at 0x18
+    u32 bbref_nodeid;         // at 0x1C
+    math::_VEC3 scale;        // at 0x20
+    math::_VEC3 rot;          // at 0x2C
+    math::_VEC3 translate;    // at 0x38
+    math::_VEC3 volume_min;   // at 0x44
+    math::_VEC3 volume_max;   // at 0x50
+    s32 toParentNode;         // at 0x5C
+    s32 toChildNode;          // at 0x60
+    s32 toNextSibling;        // at 0x64
+    s32 toPrevSibling;        // at 0x68
+    s32 toResUserData;        // at 0x6C
+    math::_MTX34 modelMtx;    // at 0x70
+    math::_MTX34 invModelMtx; // at 0xA0
+};
+
+class ResNode : public ResCommon<ResNodeData>, public ResNodeDataTypedef {
+public:
+    ResNode(void* vptr) : ResCommon(vptr) {}
+
+    void PatchChrAnmResult(ChrAnmResult* pResult) const;
+    void CalcChrAnmResult(ChrAnmResult* pResult) const;
+
+    ResName GetResName() const {
+        const ResNodeData& r = ref();
+
+        if (r.name != 0) {
+            return NW4R_G3D_OFS_TO_RESNAME(&r, r.name);
+        }
+
+        return ResName(NULL);
     }
-}
+
+    u32 GetID() const {
+        if (IsValid()) {
+            return ptr()->id;
+        }
+
+        return 0;
+    }
+
+    u32 GetMtxID() const {
+        if (IsValid()) {
+            return ptr()->mtxID;
+        }
+
+        return 0;
+    }
+
+    bool IsVisible() const {
+        if (IsValid()) {
+            return ptr()->flags & FLAG_VISIBLE;
+        }
+
+        return false;
+    }
+
+    void SetVisibility(bool visible) {
+        if (!IsValid()) {
+            return;
+        }
+
+        if (visible) {
+            ptr()->flags |= FLAG_VISIBLE;
+        } else {
+            ptr()->flags &= ~FLAG_VISIBLE;
+        }
+    }
+
+    Billboard GetBillboardMode() const {
+        if (IsValid()) {
+            return ptr()->bbmode;
+        }
+
+        return BILLBOARD_OFF;
+    }
+
+    const math::VEC3& GetTranslate() const {
+        return ref().translate;
+    }
+
+    ResNode GetParentNode() {
+        return ofs_to_obj<ResNode>(ref().toParentNode);
+    }
+    ResNode GetParentNode() const {
+        return ofs_to_obj<ResNode>(ref().toParentNode);
+    }
+
+    ResNode GetChildNode() {
+        return ofs_to_obj<ResNode>(ref().toChildNode);
+    }
+    ResNode GetChildNode() const {
+        return ofs_to_obj<ResNode>(ref().toChildNode);
+    }
+
+    ResNode GetNextSibling() {
+        return ofs_to_obj<ResNode>(ref().toNextSibling);
+    }
+    ResNode GetNextSibling() const {
+        return ofs_to_obj<ResNode>(ref().toNextSibling);
+    }
+
+    ResNode GetPrevSibling() {
+        return ofs_to_obj<ResNode>(ref().toPrevSibling);
+    }
+    ResNode GetPrevSibling() const {
+        return ofs_to_obj<ResNode>(ref().toPrevSibling);
+    }
+};
+
+} // namespace g3d
+} // namespace nw4r
 
 #endif
