@@ -81,6 +81,9 @@ class ResShp : public ResCommon<ResShpData> {
 public:
     explicit ResShp(void* pData) : ResCommon(pData) {}
 
+    void Init();
+    void Terminate();
+
     ResMdl GetParent() const;
 
     bool GXGetVtxDescv(GXVtxDescList* pList) const;
@@ -92,9 +95,6 @@ public:
     ResVtxNrm GetResVtxNrm() const;
     ResVtxClr GetResVtxClr(u32 i) const;
     ResVtxTexCoord GetResVtxTexCoord(u32 i) const;
-
-    void Init();
-    void Terminate();
 
     void CallPrePrimitiveDisplayList(bool sync, bool cacheIsSame) const;
     void CallPrimitiveDisplayList(bool sync) const;

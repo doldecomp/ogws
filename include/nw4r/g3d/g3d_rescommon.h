@@ -36,6 +36,10 @@ public:
         return mpData != NULL;
     }
 
+    bool operator==(const ResCommon& rOther) const {
+        return ptr() == rOther.ptr();
+    }
+
     T* ptr() {
         return mpData;
     }
@@ -158,8 +162,8 @@ public:
     u8* GetDL() {
         return const_cast<u8*>(ofs_to_ptr<u8>(ref().toDL));
     }
-    u8* GetDL() const {
-        return const_cast<u8*>(ofs_to_ptr<u8>(ref().toDL));
+    const u8* GetDL() const {
+        return ofs_to_ptr<u8>(ref().toDL);
     }
 };
 

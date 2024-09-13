@@ -1,134 +1,226 @@
 #ifndef NW4R_G3D_RESVTX_H
 #define NW4R_G3D_RESVTX_H
-#include <GXAttr.h>
-#include "g3d_rescommon.h"
+#include <nw4r/types_nw4r.h>
 
-namespace nw4r
-{
-	namespace g3d
-	{
-		struct ResVtxPosData
-		{
-			u32 SIZE_0x0;
-			char UNK_0x4[0x4];
-			u32 mDataOffset; // at 0x8
-			char UNK_0xC[0x11];
-			u8 BYTE_0x1D;
-		};
-		
-		struct ResVtxNrmData
-		{
-			u32 SIZE_0x0;
-			char UNK_0x4[0x4];
-			u32 mDataOffset; // at 0x8
-			char UNK_0xC[0x11];
-			u8 BYTE_0x1D;
-		};
-		
-		struct ResVtxClrData
-		{
-			u32 SIZE_0x0;
-			char UNK_0x4[0x4];
-			u32 mDataOffset; // at 0x8
-			char UNK_0xC[0x10];
-			u8 BYTE_0x1C;
-		};
-		
-		struct ResVtxTexCoordData
-		{
-			u32 SIZE_0x0;
-			char UNK_0x4[0x4];
-			u32 mDataOffset; // at 0x8
-			char UNK_0xC[0x11];
-			u8 BYTE_0x1D;
-		};
-		
-		class ResVtxPos : public ResCommon<ResVtxPosData>
-		{
-		public:
-			inline explicit ResVtxPos(void * pData) : ResCommon(pData) {}
-			
-			inline const void * GetData() const
-			{
-				return ofs_to_ptr<void>(ref().mDataOffset);
-			}
-			
-			inline UNKTYPE Init()
-			{
-				DCStore(false);
-			}
+#include <nw4r/g3d/g3d_rescommon.h>
 
-			void SetArray();
-			void GetArray(const void **, u8 *) const;
-			UNKTYPE CopyTo(void *) const;
-			
-			UNKTYPE DCStore(bool);
-		};
-		
-		class ResVtxNrm : public ResCommon<ResVtxNrmData>
-		{
-		public:
-			inline explicit ResVtxNrm(void * pData) : ResCommon(pData) {}
-			
-			inline const void * GetData() const
-			{
-				return ofs_to_ptr<void>(ref().mDataOffset);
-			}
-			
-			inline UNKTYPE Init()
-			{
-				DCStore(false);
-			}
-	
-			void SetArray();
-			void GetArray(const void **, u8 *) const;
-			UNKTYPE CopyTo(void *) const;
-			
-			UNKTYPE DCStore(bool);
-		};
-		
-		class ResVtxClr : public ResCommon<ResVtxClrData>
-		{
-		public:
-			inline explicit ResVtxClr(void * pData) : ResCommon(pData) {}
-	
-			inline const void * GetData() const
-			{
-				return ofs_to_ptr<void>(ref().mDataOffset);
-			}
+#include <nw4r/math.h>
 
-			inline UNKTYPE Init()
-			{
-				DCStore(false);
-			}
+#include <revolution/GX.h>
 
-			void SetArray(GXAttr);
-			void GetArray(const void **, u8 *) const;
-			UNKTYPE CopyTo(void *) const;
-			
-			UNKTYPE DCStore(bool);
-		};
-		
-		class ResVtxTexCoord : public ResCommon<ResVtxTexCoordData>
-		{
-		public:
-			inline explicit ResVtxTexCoord(void * pData) : ResCommon(pData) {}
-			
-			inline const void * GetData() const
-			{
-				return ofs_to_ptr<void>(ref().mDataOffset);
-			}
-			
-			inline UNKTYPE Init()
-			{
-				DCStore(false);
-			}
+namespace nw4r {
+namespace g3d {
 
-			void GetArray(const void **, u8 *) const;
-			
-			UNKTYPE DCStore(bool);
-		};
-	}
-}
+/******************************************************************************
+ *
+ * ResVtxPos
+ *
+ ******************************************************************************/
+struct ResVtxPosData {
+    u32 size;          // at 0x0
+    s32 toResMdlData;  // at 0x4
+    s32 toVtxPosArray; // at 0x8
+    s32 name;          // at 0xC
+    u32 id;            // at 0x10
+    GXCompCnt cmpcnt;  // at 0x14
+    GXCompType tp;     // at 0x18
+    u8 frac;           // at 0x1C
+    u8 stride;         // at 0x1D
+    u16 numPos;        // at 0x1E
+    math::_VEC3 min;   // at 0x20
+    math::_VEC3 max;   // at 0x2C
+};
+
+class ResVtxPos : public ResCommon<ResVtxPosData> {
+public:
+    explicit ResVtxPos(void* pData) : ResCommon(pData) {}
+
+    void Init() {
+        DCStore(false);
+    }
+
+    void SetArray();
+    void GetArray(const void** ppBase, u8* pStride) const;
+
+    void CopyTo(void* pDst) const;
+    void DCStore(bool sync);
+
+    u32 GetSize() const {
+        return ref().size;
+    }
+
+    void* GetData() {
+        return ofs_to_ptr<void>(ref().toVtxPosArray);
+    }
+    const void* GetData() const {
+        return ofs_to_ptr<void>(ref().toVtxPosArray);
+    }
+
+    u32 GetID() const {
+        return ref().id;
+    }
+
+    u16 GetNumVtxPos() const {
+        return ref().numPos;
+    }
+};
+
+/******************************************************************************
+ *
+ * ResVtxNrm
+ *
+ ******************************************************************************/
+struct ResVtxNrmData {
+    u32 size;          // at 0x0
+    s32 toResMdlData;  // at 0x4
+    s32 toVtxNrmArray; // at 0x8
+    s32 name;          // at 0xC
+    u32 id;            // at 0x10
+    GXCompCnt cmpcnt;  // at 0x14
+    GXCompType tp;     // at 0x18
+    u8 frac;           // at 0x1C
+    u8 stride;         // at 0x1D
+    u16 numNrm;        // at 0x1E
+};
+
+class ResVtxNrm : public ResCommon<ResVtxNrmData> {
+public:
+    explicit ResVtxNrm(void* pData) : ResCommon(pData) {}
+
+    void Init() {
+        DCStore(false);
+    }
+
+    void SetArray();
+    void GetArray(const void** ppBase, u8* pStride) const;
+
+    void CopyTo(void* pDst) const;
+    void DCStore(bool);
+
+    u32 GetSize() const {
+        return ref().size;
+    }
+
+    void* GetData() {
+        return ofs_to_ptr<void>(ref().toVtxNrmArray);
+    }
+    const void* GetData() const {
+        return ofs_to_ptr<void>(ref().toVtxNrmArray);
+    }
+
+    u32 GetID() const {
+        return ref().id;
+    }
+
+    u16 GetNumVtxNrm() const {
+        return ref().numNrm;
+    }
+};
+
+/******************************************************************************
+ *
+ * ResVtxClr
+ *
+ ******************************************************************************/
+struct ResVtxClrData {
+    u32 size;          // at 0x0
+    s32 toResMdlData;  // at 0x4
+    s32 toVtxClrArray; // at 0x8
+    s32 name;          // at 0xC
+    u32 id;            // at 0x10
+    GXCompCnt cmpcnt;  // at 0x14
+    GXCompType tp;     // at 0x18
+    u8 stride;         // at 0x1C
+    u8 dummy_;         // at 0x1D
+    u16 numClr;        // at 0x1E
+};
+
+class ResVtxClr : public ResCommon<ResVtxClrData> {
+public:
+    explicit ResVtxClr(void* pData) : ResCommon(pData) {}
+
+    void Init() {
+        DCStore(false);
+    }
+
+    void SetArray(GXAttr attr);
+    void GetArray(const void** ppBase, u8* pStride) const;
+
+    void CopyTo(void* pDst) const;
+    void DCStore(bool sync);
+
+    u32 GetSize() const {
+        return ref().size;
+    }
+
+    void* GetData() {
+        return ofs_to_ptr<void>(ref().toVtxClrArray);
+    }
+    const void* GetData() const {
+        return ofs_to_ptr<void>(ref().toVtxClrArray);
+    }
+
+    u32 GetID() const {
+        return ref().id;
+    }
+
+    u16 GetNumVtxClr() const {
+        return ref().numClr;
+    }
+};
+
+/******************************************************************************
+ *
+ * ResVtxTexCoord
+ *
+ ******************************************************************************/
+struct ResVtxTexCoordData {
+    u32 size;            // at 0x0
+    s32 toResMdlData;    // at 0x4
+    s32 toTexCoordArray; // at 0x8
+    s32 name;            // at 0xC
+    u32 id;              // at 0x10
+    GXCompCnt cmpcnt;    // at 0x14
+    GXCompType tp;       // at 0x18
+    u8 frac;             // at 0x1C
+    u8 stride;           // at 0x1D
+    u16 numTexCoord;     // at 0x1E
+    math::_VEC2 min;     // at 0x20
+    math::_VEC2 max;     // at 0x2C
+};
+
+class ResVtxTexCoord : public ResCommon<ResVtxTexCoordData> {
+public:
+    explicit ResVtxTexCoord(void* pData) : ResCommon(pData) {}
+
+    void Init() {
+        DCStore(false);
+    }
+
+    void GetArray(const void** ppBase, u8* pStride) const;
+    void DCStore(bool sync);
+
+    u32 GetSize() const {
+        return ref().size;
+    }
+
+    void* GetData() {
+        return ofs_to_ptr<void>(ref().toTexCoordArray);
+    }
+    const void* GetData() const {
+        return ofs_to_ptr<void>(ref().toTexCoordArray);
+    }
+
+    u32 GetID() const {
+        return ref().id;
+    }
+
+    u16 GetNumTexCoord() const {
+        return ref().numTexCoord;
+    }
+};
+
+} // namespace g3d
+} // namespace nw4r
 
 #endif

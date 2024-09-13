@@ -3,7 +3,6 @@
 #include <nw4r/g3d.h>
 
 #include <revolution/GX.h>
-#include <revolution/OS.h>
 
 #include <cstring>
 
@@ -254,28 +253,36 @@ void ResShp::Terminate() {
 }
 
 void ResShp::CallPrePrimitiveDisplayList(bool sync, bool cacheIsSame) const {
-    const ResTagDL& tag = GetPrePrimDLTag();
+    // TODO: Should be non-const, and initialized by value
+    const ResTagDL& rTag = GetPrePrimDLTag();
 
     if (cacheIsSame) {
         if (sync) {
-            GXCallDisplayList(tag.GetDL() + 32, tag.GetCmdSize() - 32);
+            GXCallDisplayList(const_cast<u8*>(rTag.GetDL() + 32),
+                              rTag.GetCmdSize() - 32);
         } else {
-            GXFastCallDisplayList(tag.GetDL() + 32, tag.GetCmdSize() - 32);
+            GXFastCallDisplayList(const_cast<u8*>(rTag.GetDL() + 32),
+                                  rTag.GetCmdSize() - 32);
         }
-    } else if (sync) {
-        GXCallDisplayList(tag.GetDL(), tag.GetCmdSize());
+
+        return;
+    }
+
+    if (sync) {
+        GXCallDisplayList(const_cast<u8*>(rTag.GetDL()), rTag.GetCmdSize());
     } else {
-        GXFastCallDisplayList(tag.GetDL(), tag.GetCmdSize());
+        GXFastCallDisplayList(const_cast<u8*>(rTag.GetDL()), rTag.GetCmdSize());
     }
 }
 
 void ResShp::CallPrimitiveDisplayList(bool sync) const {
-    const ResTagDL& tag = GetPrimDLTag();
+    // TODO: Should be non-const, and initialized by value
+    const ResTagDL& rTag = GetPrimDLTag();
 
     if (sync) {
-        GXCallDisplayList(tag.GetDL(), tag.GetCmdSize());
+        GXCallDisplayList(const_cast<u8*>(rTag.GetDL()), rTag.GetCmdSize());
     } else {
-        GXFastCallDisplayList(tag.GetDL(), tag.GetCmdSize());
+        GXFastCallDisplayList(const_cast<u8*>(rTag.GetDL()), rTag.GetCmdSize());
     }
 }
 
