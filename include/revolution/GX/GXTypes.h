@@ -120,10 +120,10 @@ typedef enum _GXAttr {
 } GXAttr;
 
 typedef enum _GXAttrType {
-    GX_NONE,   //! No data sent
-    GX_DIRECT, //! Data sent directly to FIFO
-    GX_INDEX8, //! 8-bit index sent to FIFO
-    GX_INDEX16 //! 16-bit index sent to FIFO
+    GX_NONE,   // No data sent
+    GX_DIRECT, // Data sent directly to FIFO
+    GX_INDEX8, // 8-bit index sent to FIFO
+    GX_INDEX16 // 16-bit index sent to FIFO
 } GXAttrType;
 
 typedef enum _GXBlendFactor {

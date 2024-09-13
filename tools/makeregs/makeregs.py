@@ -93,11 +93,11 @@ def write_regs_header(args, res, regs):
 
             # Include dependencies
             for dep in res.get("deps", []):
-                if dep != "revolution/types.h":
+                if dep != "types.h":
                     f.write(f"#include <{dep}>\n")
 
             # Main RVL types header
-            f.write("#include <revolution/types.h>\n")
+            f.write("#include <types.h>\n")
 
             # C++ guard
             f.write("#ifdef __cplusplus\n")
@@ -146,7 +146,8 @@ def write_regs_header(args, res, regs):
 
                 cased_reg = enum_case(reg.name)
 
-                f.write("/**\n")
+                f.write(
+                    "/******************************************************************************\n")
 
                 if reg.id != -1:
                     f.write(
@@ -155,7 +156,8 @@ def write_regs_header(args, res, regs):
                     f.write(
                         f" * {name} structure - {reg.name}\n")
 
-                f.write(" */\n")
+                f.write(
+                    " *****************************************************************************/\n")
 
                 for field in reg.fields:
                     cased_field = enum_case(field.name)
@@ -169,29 +171,41 @@ def write_regs_header(args, res, regs):
 
                     macro_prefix = f"{module.upper()}_{name.upper()}"
 
-                    # Start/end/size macros for manual use
+                    # Begin/End/Size macros for manual use
                     f.write(
-                        f"#define {macro_prefix}_{cased_reg}_{cased_field}_ST {field.start}\n")
+                        f"        /* start bit  */ #define {macro_prefix}_{cased_reg}_{cased_field}_B {field.start}\n")
                     f.write(
-                        f"#define {macro_prefix}_{cased_reg}_{cased_field}_END {field.end}\n")
+                        f"        /* end bit    */ #define {macro_prefix}_{cased_reg}_{cased_field}_E {field.end}\n")
                     f.write(
-                        f"#define {macro_prefix}_{cased_reg}_{cased_field}_SZ {field.size}\n")
+                        f"        /* bit size   */ #define {macro_prefix}_{cased_reg}_{cased_field}_SZ {field.size}\n")
 
-                    # Mask macro for manual use
-                    f.write(
-                        f"#define {macro_prefix}_{cased_reg}_{cased_field}_MASK (((1 << {field.size}) - 1) << 31 - {field.end})\n")
+                    f.write("\n")
 
-                    # Field GET macro
+                    # Mask macros for manual use
                     f.write(
-                        f"#define {macro_prefix}_GET_{cased_reg}_{cased_field}(reg) ")
+                        f"        /* raw mask   */ #define {macro_prefix}_{cased_reg}_{cased_field}_MASK (((1 << {field.size}) - 1) << 31 - {field.end})\n")
                     f.write(
-                        f"GX_BITGET(reg, {field.start}, {field.size})\n")
+                        f"        /* local mask */ #define {macro_prefix}_{cased_reg}_{cased_field}_LMASK ((1 << {field.size}) - 1)\n")
 
-                    # Field SET macro
+                    # Left-right shift macro for manual use
                     f.write(
-                        f"#define {macro_prefix}_SET_{cased_reg}_{cased_field}(reg, x) ")
+                        f"        /* bit shift  */ #define {macro_prefix}_{cased_reg}_{cased_field}_SHIFT {31 - field.end}\n")
+
+                    f.write("\n")
+
+                    # Fast (intrinsic) GET macro
                     f.write(
-                        f"((reg) = GX_BITSET(reg, {field.start}, {field.size}, x))\n")
+                        f"        /* get value  */ #define {macro_prefix}_GET_{cased_reg}_{cased_field}(reg) ")
+                    f.write(
+                        f"GX_BITGET((reg), {field.start}, {field.size})\n")
+
+                    # Fast (intrinsic) SET macro
+                    f.write(
+                        f"        /* set value  */ #define {macro_prefix}_SET_{cased_reg}_{cased_field}(reg, x) ")
+                    f.write(
+                        f"((reg) = GX_BITSET((reg), {field.start}, {field.size}, x))\n")
+
+                    f.write("\n")
 
                 f.write("\n")
             f.write("\n")

@@ -45,7 +45,7 @@ void ResWriteCPCmd(u8* pPtr, u8 addr, u32 value) {
 
 void ResWriteXFCmd(u8* pPtr, u16 addr, u32 value) {
     ResWrite_u8(pPtr + 0, GX_FIFO_CMD_LOAD_XF_REG);
-    ResWrite_u16(pPtr + 1, 0x0000); // No size, single write
+    ResWrite_u16(pPtr + 1, 0x0000); // No size (single write)
     ResWrite_u16(pPtr + 3, addr);
     ResWrite_u32(pPtr + 5, value);
 }
@@ -55,7 +55,7 @@ void ResWriteSSMask(u8* pPtr, u32 value) {
 
     // Overwrite BP register ID
     orig |= value;
-    orig |= GX_BP_REG_SSMASK << 24;
+    orig |= GX_BP_REG_SSMASK << GX_BP_OPCODE_SHIFT;
 
     ResWriteBPCmd(pPtr + 0, orig);
 }

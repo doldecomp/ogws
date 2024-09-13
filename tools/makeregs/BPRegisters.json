@@ -496,6 +496,51 @@
             ]
         },
         {
+            "name": "ras1_tref",
+            "fields": [
+                {
+                    "name": "texmap_even",
+                    "start": 29,
+                    "end": 31
+                },
+                {
+                    "name": "texcoord_even",
+                    "start": 26,
+                    "end": 28
+                },
+                {
+                    "name": "enable_tex_even",
+                    "start": 25,
+                    "end": 25
+                },
+                {
+                    "name": "colorchan_even",
+                    "start": 22,
+                    "end": 24
+                },
+                {
+                    "name": "texmap_odd",
+                    "start": 17,
+                    "end": 19
+                },
+                {
+                    "name": "texcoord_odd",
+                    "start": 14,
+                    "end": 16
+                },
+                {
+                    "name": "enable_tex_odd",
+                    "start": 13,
+                    "end": 13
+                },
+                {
+                    "name": "colorchan_odd",
+                    "start": 10,
+                    "end": 12
+                }
+            ]
+        },
+        {
             "name": "ras1_tref0",
             "id": "0x28"
         },
@@ -1084,6 +1129,59 @@
             "id": "0xBB"
         },
         {
+            "name": "TevColorCombiner",
+            "fields": [
+                {
+                    "name": "d",
+                    "start": 28,
+                    "end": 31
+                },
+                {
+                    "name": "c",
+                    "start": 24,
+                    "end": 27
+                },
+                {
+                    "name": "b",
+                    "start": 20,
+                    "end": 23
+                },
+                {
+                    "name": "a",
+                    "start": 16,
+                    "end": 19
+                },
+                {
+                    "name": "bias",
+                    "start": 14,
+                    "end": 15
+                },
+                {
+                    "name": "op_or_comparison",
+                    "start": 13,
+                    "end": 13
+                },
+                {
+                    "name": "clamp",
+                    "start": 12,
+                    "end": 12
+                },
+                {
+                    "name": "scale_or_compare_mode",
+                    "start": 10,
+                    "end": 11
+                },
+                {
+                    "name": "dest",
+                    "start": 8,
+                    "end": 9
+                }
+            ]
+        },
+        {
+            "name": "TevAlphaCombiner"
+        },
+        {
             "name": "TevColorCombiner0",
             "id": "0xC0"
         },
@@ -1390,6 +1488,43 @@
         {
             "name": "ZTexture1",
             "id": "0xF5"
+        },
+        {
+            "name": "TevKSel",
+            "fields": [
+                {
+                    "name": "swap_rb",
+                    "desc": "Odd ksel number: red; even: blue",
+                    "start": 30,
+                    "end": 31
+                },
+                {
+                    "name": "swap_ga",
+                    "desc": "Odd ksel number: green; even: alpha",
+                    "start": 28,
+                    "end": 29
+                },
+                {
+                    "name": "kcsel_even",
+                    "start": 23,
+                    "end": 27
+                },
+                {
+                    "name": "kasel_even",
+                    "start": 18,
+                    "end": 22
+                },
+                {
+                    "name": "kcsel_odd",
+                    "start": 13,
+                    "end": 17
+                },
+                {
+                    "name": "kasel_odd",
+                    "start": 8,
+                    "end": 12
+                }
+            ]
         },
         {
             "name": "TevKSel0",

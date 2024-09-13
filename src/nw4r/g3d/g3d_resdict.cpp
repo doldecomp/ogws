@@ -76,7 +76,7 @@ void* ResDic::operator[](const char* pName) const {
 
 void* ResDic::operator[](const ResName name) const {
     if (IsValid() && name.IsValid()) {
-        ResDicNodeData* pNode = Get(name.ptr());
+        ResDicNodeData* pNode = Get(name);
 
         if (pNode != NULL) {
             return const_cast<void*>(ofs_to_ptr_raw<void>(pNode->ofsData));
