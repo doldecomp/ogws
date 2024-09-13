@@ -31,7 +31,7 @@ struct ResFileData {
 
 class ResFile : public ResCommon<ResFileData> {
 public:
-    ResFile(void* pData) : ResCommon(pData) {}
+    explicit ResFile(void* pData) : ResCommon(pData) {}
 
     void Init();
     void Terminate();
@@ -41,7 +41,7 @@ public:
     void Release();
 
     bool Bind() {
-        return Bind(this);
+        return Bind(*this);
     }
 
     ResMdl GetResMdl(const char* pName) const;

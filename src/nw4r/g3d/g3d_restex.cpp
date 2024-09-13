@@ -2,8 +2,6 @@
 
 #include <nw4r/g3d.h>
 
-#include <revolution/OS.h>
-
 namespace nw4r {
 namespace g3d {
 
@@ -12,9 +10,9 @@ void ResPltt::DCStore(bool sync) {
     u32 size = r.header.size;
 
     if (sync) {
-        DCStoreRange(&r, size);
+        DC::StoreRange(&r, size);
     } else {
-        DCStoreRangeNoSync(&r, size);
+        DC::StoreRangeNoSync(&r, size);
     }
 }
 
@@ -100,7 +98,7 @@ bool ResTex::GetTexObjCIParam(void** ppTexData, u16* pWidth, u16* pHeight,
 
 void ResTex::Init() {
     const ResTexData& r = ref();
-    DCFlushRangeNoSync(&r, r.header.size);
+    DC::FlushRangeNoSync(&r, r.header.size);
 }
 
 } // namespace g3d

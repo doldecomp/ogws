@@ -43,20 +43,14 @@ namespace nw4r
 			u8 BYTE_0x1D;
 		};
 		
-		struct ResVtxPos
+		class ResVtxPos : public ResCommon<ResVtxPosData>
 		{
-			ResCommon<ResVtxPosData> mPos;
-			
-			inline ResVtxPos(void * vptr) : mPos(vptr) {}
-			
-			inline ResVtxPosData & ref() const
-			{
-				return mPos.ref();
-			}
+		public:
+			inline explicit ResVtxPos(void * pData) : ResCommon(pData) {}
 			
 			inline const void * GetData() const
 			{
-				return mPos.ofs_to_ptr<void>(ref().mDataOffset);
+				return ofs_to_ptr<void>(ref().mDataOffset);
 			}
 			
 			inline UNKTYPE Init()
@@ -71,20 +65,14 @@ namespace nw4r
 			UNKTYPE DCStore(bool);
 		};
 		
-		struct ResVtxNrm
+		class ResVtxNrm : public ResCommon<ResVtxNrmData>
 		{
-			ResCommon<ResVtxNrmData> mNrm;
-			
-			inline ResVtxNrm(void * vptr) : mNrm(vptr) {}
-			
-			inline ResVtxNrmData & ref() const
-			{
-				return mNrm.ref();
-			}
+		public:
+			inline explicit ResVtxNrm(void * pData) : ResCommon(pData) {}
 			
 			inline const void * GetData() const
 			{
-				return mNrm.ofs_to_ptr<void>(ref().mDataOffset);
+				return ofs_to_ptr<void>(ref().mDataOffset);
 			}
 			
 			inline UNKTYPE Init()
@@ -99,20 +87,14 @@ namespace nw4r
 			UNKTYPE DCStore(bool);
 		};
 		
-		struct ResVtxClr
+		class ResVtxClr : public ResCommon<ResVtxClrData>
 		{
-			ResCommon<ResVtxClrData> mClr;
-			
-			inline ResVtxClr(void * vptr) : mClr(vptr) {}
-			
-			inline ResVtxClrData & ref() const
-			{
-				return mClr.ref();
-			}
-			
+		public:
+			inline explicit ResVtxClr(void * pData) : ResCommon(pData) {}
+	
 			inline const void * GetData() const
 			{
-				return mClr.ofs_to_ptr<void>(ref().mDataOffset);
+				return ofs_to_ptr<void>(ref().mDataOffset);
 			}
 
 			inline UNKTYPE Init()
@@ -127,20 +109,14 @@ namespace nw4r
 			UNKTYPE DCStore(bool);
 		};
 		
-		struct ResVtxTexCoord
+		class ResVtxTexCoord : public ResCommon<ResVtxTexCoordData>
 		{
-			ResCommon<ResVtxTexCoordData> mTexCoord;
-			
-			inline ResVtxTexCoord(void * vptr) : mTexCoord(vptr) {}
-			
-			inline ResVtxTexCoordData & ref() const
-			{
-				return mTexCoord.ref();
-			}
+		public:
+			inline explicit ResVtxTexCoord(void * pData) : ResCommon(pData) {}
 			
 			inline const void * GetData() const
 			{
-				return mTexCoord.ofs_to_ptr<void>(ref().mDataOffset);
+				return ofs_to_ptr<void>(ref().mDataOffset);
 			}
 			
 			inline UNKTYPE Init()

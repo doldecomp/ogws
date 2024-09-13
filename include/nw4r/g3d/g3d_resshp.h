@@ -1,122 +1,140 @@
 #ifndef NW4R_G3D_RESSHP_H
 #define NW4R_G3D_RESSHP_H
-#include <GXAttr.h>
-#include "types_nw4r.h"
-#include "g3d_rescommon.h"
-#include "g3d_resmdl.h"
-#include "g3d_resvtx.h"
 
-namespace nw4r
-{
-	namespace g3d
-	{
-		struct ResTagDLData
-		{
-			u32 mBufSize; // at 0x0
-			u32 mCmdSize; // at 0x4
-			u32 mOffset; // at 0x8
-		};
-		
-		struct ResPrePrimDL
-		{
-			char UNK_0x0[0xA];
-			detail::CPCmd CP_CMD_0xA;
-			detail::CPCmd CP_CMD_0x10;
-			char UNK_0x16[0xA];
-			detail::CPCmd CP_CMD_0x20;
-			detail::CPCmd CP_CMD_0x26;
-			detail::CPCmd CP_CMD_0x2C;
-			detail::CPCmd CP_CMD_PAIRS_0x32[GX_POS_MTX_ARRAY - GX_VA_POS][2];
-			char UNK_0xC2[0x1E];
-		};
-		
-		struct ResShpData
-		{
-			char UNK_0x0[0x4];
-			u32 mParentOffset; // at 0x4
-			char UNK_0x8[0x10];
-			ResTagDLData mPrePrimDLTag; // at 0x18
-			ResTagDLData mPrimDLTag; // at 0x24
-			char UNK_0x30[0x18];
-			
-			s16 mVtxPosIndex; // at 0x48
-			s16 mVtxNrmIndex; // at 0x4a
-			s16 mVtxClrIndices[GX_VA_TEX0 - GX_VA_CLR0]; // at 0x4c
-			s16 mVtxTexCoordIndices[GX_POS_MTX_ARRAY - GX_VA_TEX0]; // at 0x50
-		};
-		
-		struct ResTagDL
-		{
-			ResCommon<ResTagDLData> mData;
-			
-			inline ResTagDL(void * vptr) : mData(vptr) {}
-			
-			inline u8 * GetDL() const
-			{
-				return const_cast<u8 *>(mData.ofs_to_ptr<u8>(mData.ref().mOffset));
-			}
-			
-			inline u32 GetBufSize() const
-			{
-				return mData.ref().mBufSize;
-			}
-			
-			inline u32 GetCmdSize() const
-			{
-				return mData.ref().mCmdSize;
-			}
-		};
-		
-		struct ResShpPrePrim
-		{
-			ResCommon<ResPrePrimDL> mDL;
-			
-			inline ResShpPrePrim(void * vptr) : mDL(vptr) {}
-			
-			inline ResPrePrimDL & ref() const
-			{
-				return mDL.ref();
-			}
-		};
-		
-		struct ResShp
-		{
-			ResCommon<ResShpData> mShp;
-			
-			inline ResShp(void * vptr) : mShp(vptr) {}
-			bool IsValid() const { return mShp.IsValid(); }
+#include <nw4r/types_nw4r.h>
 
-			inline ResShpData & ref() const
-			{
-				return mShp.ref();
-			}
-			
-			inline ResShpPrePrim GetResShpPrePrim() const
-			{
-				return ResTagDL(&ref().mPrePrimDLTag).GetDL();
-			}
-			
-			bool GXGetVtxDescv(GXVtxDescList*) const;
-			bool GXGetVtxAttrFmtv(GXVtxAttrFmtList*) const;
-			
-			ResMdl GetParent() const; //inlined
-			
-			ResVtxPos GetResVtxPos() const;
-			ResVtxNrm GetResVtxNrm() const;
-			ResVtxClr GetResVtxClr(u32) const;
-			ResVtxTexCoord GetResVtxTexCoord(u32) const; //inlined
-			
-			void GXSetArray(GXAttr, const void *, u8); //inlined
-			
-			void Init();
-			
-			void DisableSetArray(GXAttr); //inlined
-			void Terminate();
-			
-			void CallPrePrimitiveDisplayList(bool, bool) const;
-			void CallPrimitiveDisplayList(bool) const;
-		};
-	}
-}
+#include <nw4r/g3d/g3d_rescommon.h>
+#include <nw4r/g3d/g3d_resmdl.h>
+#include <nw4r/g3d/g3d_resvtx.h>
+
+#include <revolution/GX.h>
+
+namespace nw4r {
+namespace g3d {
+
+/******************************************************************************
+ *
+ * ResShpPrePrim
+ *
+ ******************************************************************************/
+struct ResPrePrimDL {
+    union {
+        struct {
+            u8 cullMode[10];                                          // at 0x0
+            u8 vtxDescv[21];                                          // at 0xA
+            u8 _1;                                                    // at 0x1F
+            u8 vtxFmtv[GX_CP_CMD_SZ * 3];                             // at 0x20
+            u8 array[GX_POS_MTX_ARRAY - GX_VA_POS][GX_CP_CMD_SZ * 2]; // at 0x32
+            u8 _[0xE0 - 0xC2];                                        // at 0xC2
+        } dl;
+
+        u8 data[0xE0]; // at 0x0
+    };
+};
+
+class ResShpPrePrim : public ResCommon<ResPrePrimDL> {
+public:
+    explicit ResShpPrePrim(void* pData) : ResCommon(pData) {}
+
+    void DCStore(bool sync);
+};
+
+/******************************************************************************
+ *
+ * ResShp
+ *
+ ******************************************************************************/
+struct ResCacheVtxDescv {
+    union {
+        u32 data_u32[0xC / sizeof(u32)];
+        u8 data[0xC / sizeof(u8)];
+    }; // at 0x0
+};
+
+struct ResMtxSetUsed {
+    u32 numMtxID;    // at 0x0
+    u16 vecMtxID[2]; // at 0x4
+};
+
+struct ResShpData {
+    u32 size;                                         // at 0x0
+    s32 toResMdlData;                                 // at 0x4
+    s32 curMtxIdx;                                    // at 0x8
+    ResCacheVtxDescv cache;                           // at 0xC
+    ResTagDLData tagPrePrimDL;                        // at 0x18
+    ResTagDLData tagPrimDL;                           // at 0x24
+    u32 vcdBitmap;                                    // at 0x30
+    u32 flag;                                         // at 0x34
+    s32 name;                                         // at 0x38
+    u32 id;                                           // at 0x3C
+    u32 numVtx;                                       // at 0x40
+    u32 numPolygon;                                   // at 0x44
+    s16 idVtxPosition;                                // at 0x48
+    s16 idVtxNormal;                                  // at 0x4A
+    s16 idVtxColor[GX_VA_TEX0 - GX_VA_CLR0];          // at 0x4C
+    s16 idVtxTexCoord[GX_POS_MTX_ARRAY - GX_VA_TEX0]; // at 0x50
+    s32 toMtxSetUsed;                                 // at 0x60
+    ResMtxSetUsed msu;                                // at 0x64
+};
+
+class ResShp : public ResCommon<ResShpData> {
+public:
+    explicit ResShp(void* pData) : ResCommon(pData) {}
+
+    ResMdl GetParent() const;
+
+    bool GXGetVtxDescv(GXVtxDescList* pList) const;
+    bool GXGetVtxAttrFmtv(GXVtxAttrFmtList* pList) const;
+    void GXSetArray(GXAttr attr, const void* pBase, u8 stride);
+    void DisableSetArray(GXAttr attr);
+
+    ResVtxPos GetResVtxPos() const;
+    ResVtxNrm GetResVtxNrm() const;
+    ResVtxClr GetResVtxClr(u32 i) const;
+    ResVtxTexCoord GetResVtxTexCoord(u32 i) const;
+
+    void Init();
+    void Terminate();
+
+    void CallPrePrimitiveDisplayList(bool sync, bool cacheIsSame) const;
+    void CallPrimitiveDisplayList(bool sync) const;
+
+    ResTagDL GetPrePrimDLTag() {
+        return ResTagDL(&ref().tagPrePrimDL);
+    }
+    ResTagDL GetPrePrimDLTag() const {
+        return ResTagDL(const_cast<ResTagDLData*>(&ref().tagPrePrimDL));
+    }
+
+    ResTagDL GetPrimDLTag() {
+        return ResTagDL(&ref().tagPrimDL);
+    }
+    ResTagDL GetPrimDLTag() const {
+        return ResTagDL(const_cast<ResTagDLData*>(&ref().tagPrimDL));
+    }
+
+    ResShpPrePrim GetResShpPrePrim() {
+        return ResShpPrePrim(GetPrePrimDLTag().GetDL());
+    }
+    ResShpPrePrim GetResShpPrePrim() const {
+        return ResShpPrePrim(GetPrePrimDLTag().GetDL());
+    }
+
+    bool ExistVtxDesc(GXAttr attr) const {
+        return ref().vcdBitmap & (1 << attr);
+    }
+
+    bool IsVisible() const {
+        return ref().flag & FLAG_VISIBLE;
+    }
+
+private:
+    enum Flag {
+        FLAG_VISIBLE = (1 << 1),
+    };
+};
+
+} // namespace g3d
+} // namespace nw4r
 
 #endif

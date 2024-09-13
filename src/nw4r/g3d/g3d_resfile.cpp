@@ -514,7 +514,7 @@ void ResFile::Init() {
 
     u32 plttNum = GetResPlttNumEntries();
     for (i = 0; i < plttNum; i++) {
-        GetResPltt(i).DCStore(false);
+        GetResPltt(i).Init();
     }
 }
 

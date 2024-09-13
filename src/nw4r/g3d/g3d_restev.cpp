@@ -4,7 +4,6 @@
 
 #include <revolution/BASE.h>
 #include <revolution/GX.h>
-#include <revolution/OS.h>
 
 namespace nw4r {
 namespace g3d {
@@ -155,11 +154,11 @@ void ResTev::GXSetTevColorIn(GXTevStageID stage, GXTevColorArg a,
     // clang-format off
     detail::ResWriteBPCmd(pCmd,
         (d << GX_BP_TEVCOLORCOMBINER_D_SHIFT) |
-		(c << GX_BP_TEVCOLORCOMBINER_C_SHIFT) |
-		(b << GX_BP_TEVCOLORCOMBINER_B_SHIFT) |
-		(a << GX_BP_TEVCOLORCOMBINER_A_SHIFT) |
-		((GX_BP_REG_TEVCOLORCOMBINER0 + stage * 2)
-			<< GX_BP_OPCODE_SHIFT),
+        (c << GX_BP_TEVCOLORCOMBINER_C_SHIFT) |
+        (b << GX_BP_TEVCOLORCOMBINER_B_SHIFT) |
+        (a << GX_BP_TEVCOLORCOMBINER_A_SHIFT) |
+        ((GX_BP_REG_TEVCOLORCOMBINER0 + stage * 2)
+            << GX_BP_OPCODE_SHIFT),
 
         ~(GX_BP_TEVCOLORCOMBINER_DEST_MASK |
           GX_BP_TEVCOLORCOMBINER_SCALE_OR_COMPARE_MODE_MASK |
@@ -214,9 +213,9 @@ void ResTev::DCStore(bool sync) {
     u32 size = ref().size;
 
     if (sync) {
-        DCStoreRange(&r, size);
+        DC::StoreRange(&r, size);
     } else {
-        DCStoreRangeNoSync(&r, size);
+        DC::StoreRangeNoSync(&r, size);
     }
 }
 

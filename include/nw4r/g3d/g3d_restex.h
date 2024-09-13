@@ -35,17 +35,9 @@ public:
     static const int REVISION = 1;
 
 public:
-    ResTex(void* pData) : ResCommon(pData) {}
+    explicit ResTex(void* pData) : ResCommon(pData) {}
 
     void Init();
-
-    bool GetTexObjParam(void** ppTexData, u16* pWidth, u16* pHeight,
-                        GXTexFmt* pFormat, f32* pMinLod, f32* pMaxLod,
-                        GXBool* pMipMap) const;
-
-    bool GetTexObjCIParam(void** ppTexData, u16* pWidth, u16* pHeight,
-                          GXCITexFmt* pFormatCI, f32* pMinLod, f32* pMaxLod,
-                          GXBool* pMipMap) const;
 
     u32 GetRevision() const {
         return ref().revision;
@@ -54,6 +46,14 @@ public:
     bool CheckRevision() const {
         return GetRevision() == REVISION;
     }
+
+    bool GetTexObjParam(void** ppTexData, u16* pWidth, u16* pHeight,
+                        GXTexFmt* pFormat, f32* pMinLod, f32* pMaxLod,
+                        GXBool* pMipMap) const;
+
+    bool GetTexObjCIParam(void** ppTexData, u16* pWidth, u16* pHeight,
+                          GXCITexFmt* pFormatCI, f32* pMinLod, f32* pMaxLod,
+                          GXBool* pMipMap) const;
 
     bool IsCIFmt() const {
         return ref().flag & FLAG_CI_FMT;

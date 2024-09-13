@@ -20,25 +20,11 @@
 namespace nw4r {
 namespace g3d {
 
-/**
- * Name for file resource groups.
- */
-struct ResNameData27 {
-    u32 len;                    // at 0x0
-    char str[32 - sizeof(u32)]; // at 0x4
-};
-
-/**
- * Header for resource data structures.
- */
-struct ResBlockHeaderData {
-    char kind[4]; // at 0x0
-    u32 size;     // at 0x4
-};
-
-/**
- * Common resource wrapper class.
- */
+/******************************************************************************
+ *
+ * Common resource wrapper
+ *
+ ******************************************************************************/
 template <typename T> class ResCommon {
 public:
     explicit ResCommon(void* pData) : mpData(static_cast<T*>(pData)) {}
@@ -105,6 +91,27 @@ private:
     T* mpData;
 };
 
+/**
+ * Header for resource data structures.
+ */
+struct ResBlockHeaderData {
+    char kind[4]; // at 0x0
+    u32 size;     // at 0x4
+};
+
+/**
+ * Name for file resource groups.
+ */
+struct ResNameData27 {
+    u32 len;                    // at 0x0
+    char str[32 - sizeof(u32)]; // at 0x4
+};
+
+/******************************************************************************
+ *
+ * Named resource
+ *
+ ******************************************************************************/
 struct ResNameData {
     u32 len;     // at 0x0
     char str[4]; // at 0x4
@@ -123,6 +130,37 @@ public:
     }
 
     bool operator==(ResName rhs) const;
+};
+
+/******************************************************************************
+ *
+ * Generic display list
+ *
+ ******************************************************************************/
+struct ResTagDLData {
+    u32 bufSize; // at 0x0
+    u32 cmdSize; // at 0x4
+    s32 toDL;    // at 0x8
+};
+
+class ResTagDL : public ResCommon<ResTagDLData> {
+public:
+    explicit ResTagDL(void* pData) : ResCommon(pData) {}
+
+    u32 GetBufSize() const {
+        return ref().bufSize;
+    }
+
+    u32 GetCmdSize() const {
+        return ref().cmdSize;
+    }
+
+    u8* GetDL() {
+        return const_cast<u8*>(ofs_to_ptr<u8>(ref().toDL));
+    }
+    u8* GetDL() const {
+        return const_cast<u8*>(ofs_to_ptr<u8>(ref().toDL));
+    }
 };
 
 namespace detail {

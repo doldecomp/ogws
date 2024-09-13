@@ -65,7 +65,7 @@ struct ResNodeData : ResNodeDataTypedef {
 
 class ResNode : public ResCommon<ResNodeData>, public ResNodeDataTypedef {
 public:
-    ResNode(void* vptr) : ResCommon(vptr) {}
+    explicit ResNode(void* pData) : ResCommon(pData) {}
 
     void PatchChrAnmResult(ChrAnmResult* pResult) const;
     void CalcChrAnmResult(ChrAnmResult* pResult) const;

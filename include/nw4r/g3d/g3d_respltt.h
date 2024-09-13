@@ -30,11 +30,34 @@ public:
 public:
     ResPltt(void* pData) : ResCommon(pData) {}
 
+    void Init() {
+        DCStore(false);
+    }
+
+    u32 GetRevision() const {
+        return ref().revision;
+    }
+
     bool CheckRevision() const {
-        return ref().revision == REVISION;
+        return GetRevision() == REVISION;
     }
 
     void DCStore(bool sync);
+
+    u16* GetPlttData() {
+        return ofs_to_ptr<u16>(ref().toPlttData);
+    }
+    const u16* GetPlttData() const {
+        return ofs_to_ptr<u16>(ref().toPlttData);
+    }
+
+    GXTlutFmt GetFmt() const {
+        return ref().fmt;
+    }
+
+    u32 GetNumEntries() const {
+        return ref().numEntries;
+    }
 };
 
 } // namespace g3d

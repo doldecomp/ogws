@@ -88,31 +88,36 @@ typedef enum _GXAttnFn {
 } GXAttnFn;
 
 typedef enum _GXAttr {
-    GX_VA_PNMTXIDX,
-    GX_VA_TEX0MTXIDX,
-    GX_VA_TEX1MTXIDX,
-    GX_VA_TEX2MTXIDX,
-    GX_VA_TEX3MTXIDX,
-    GX_VA_TEX4MTXIDX,
-    GX_VA_TEX5MTXIDX,
-    GX_VA_TEX6MTXIDX,
-    GX_VA_TEX7MTXIDX,
-    GX_VA_POS,
-    GX_VA_NRM,
-    GX_VA_CLR0,
-    GX_VA_CLR1,
-    GX_VA_TEX0,
-    GX_VA_TEX1,
-    GX_VA_TEX2,
-    GX_VA_TEX3,
-    GX_VA_TEX4,
-    GX_VA_TEX5,
-    GX_VA_TEX6,
-    GX_VA_TEX7,
+    GX_VA_PNMTXIDX,   // Position/Normal matrix index
+    GX_VA_TEX0MTXIDX, // GX_TEXCOORD0 matrix index
+    GX_VA_TEX1MTXIDX, // GX_TEXCOORD1 matrix index
+    GX_VA_TEX2MTXIDX, // GX_TEXCOORD2 matrix index
+    GX_VA_TEX3MTXIDX, // GX_TEXCOORD3 matrix index
+    GX_VA_TEX4MTXIDX, // GX_TEXCOORD4 matrix index
+    GX_VA_TEX5MTXIDX, // GX_TEXCOORD5 matrix index
+    GX_VA_TEX6MTXIDX, // GX_TEXCOORD6 matrix index
+    GX_VA_TEX7MTXIDX, // GX_TEXCOORD7 matrix index
+
+    GX_VA_POS, // Position
+    GX_VA_NRM, // Normal
+
+    GX_VA_CLR0, // Color 0
+    GX_VA_CLR1, // Color 1
+
+    GX_VA_TEX0, // Texture Coordinate 0
+    GX_VA_TEX1, // Texture Coordinate 1
+    GX_VA_TEX2, // Texture Coordinate 2
+    GX_VA_TEX3, // Texture Coordinate 3
+    GX_VA_TEX4, // Texture Coordinate 4
+    GX_VA_TEX5, // Texture Coordinate 5
+    GX_VA_TEX6, // Texture Coordinate 6
+    GX_VA_TEX7, // Texture Coordinate 7
+
     GX_POS_MTX_ARRAY,
     GX_NRM_MTX_ARRAY,
     GX_TEX_MTX_ARRAY,
     GX_LIGHT_ARRAY,
+
     GX_VA_NBT, // All three normal elements (normal/binormal/tangent)
 
     GX_VA_MAX_ATTR,

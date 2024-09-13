@@ -8,6 +8,7 @@
 #include <nw4r/g3d/g3d_resfile.h>
 #include <nw4r/g3d/g3d_resmdl.h>
 #include <nw4r/g3d/g3d_resnode.h>
+#include <nw4r/g3d/g3d_resshp.h>
 #include <nw4r/g3d/g3d_restev.h>
 #include <nw4r/g3d/g3d_restex.h>
 

@@ -27,7 +27,7 @@ public:
     static const s32 NOT_FOUND = -1;
 
 public:
-    ResDic(void* pData) : ResCommon(pData) {}
+    explicit ResDic(void* pData) : ResCommon(pData) {}
 
     void* operator[](const char* pName) const;
     void* operator[](const ResName name) const;
