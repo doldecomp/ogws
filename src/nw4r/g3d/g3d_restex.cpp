@@ -6,13 +6,13 @@ namespace nw4r {
 namespace g3d {
 
 void ResPltt::DCStore(bool sync) {
-    const ResPlttData& r = ref();
-    u32 size = r.header.size;
+    void* pBase = &ref();
+    u32 size = ref().header.size;
 
     if (sync) {
-        DC::StoreRange(&r, size);
+        DC::StoreRange(pBase, size);
     } else {
-        DC::StoreRangeNoSync(&r, size);
+        DC::StoreRangeNoSync(pBase, size);
     }
 }
 
@@ -97,7 +97,7 @@ bool ResTex::GetTexObjCIParam(void** ppTexData, u16* pWidth, u16* pHeight,
 }
 
 void ResTex::Init() {
-    const ResTexData& r = ref();
+    ResTexData& r = ref();
     DC::FlushRangeNoSync(&r, r.header.size);
 }
 

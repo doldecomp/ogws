@@ -28,7 +28,7 @@ public:
     static const int REVISION = 1;
 
 public:
-    ResPltt(void* pData) : ResCommon(pData) {}
+    explicit ResPltt(void* pData) : ResCommon(pData) {}
 
     void Init() {
         DCStore(false);

@@ -39,6 +39,9 @@ public:
     bool operator==(const ResCommon& rOther) const {
         return ptr() == rOther.ptr();
     }
+    bool operator!=(const ResCommon& rOther) const {
+        return ptr() != rOther.ptr();
+    }
 
     T* ptr() {
         return mpData;

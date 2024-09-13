@@ -209,13 +209,13 @@ ResTev ResTev::CopyTo(void* pDst) {
 }
 
 void ResTev::DCStore(bool sync) {
-    const ResTevData& r = ref();
+    void* pBase = &ref();
     u32 size = ref().size;
 
     if (sync) {
-        DC::StoreRange(&r, size);
+        DC::StoreRange(pBase, size);
     } else {
-        DC::StoreRangeNoSync(&r, size);
+        DC::StoreRangeNoSync(pBase, size);
     }
 }
 

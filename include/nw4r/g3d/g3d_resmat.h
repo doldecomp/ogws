@@ -3,6 +3,7 @@
 #include <nw4r/types_nw4r.h>
 
 #include <nw4r/g3d/g3d_rescommon.h>
+#include <nw4r/g3d/g3d_respltt.h>
 #include <nw4r/g3d/g3d_restex.h>
 
 #include <nw4r/math.h>
@@ -27,7 +28,7 @@ struct ResGenModeData {
 
 class ResGenMode : public ResCommon<ResGenModeData> {
 public:
-    ResGenMode(void* pData) : ResCommon(pData) {}
+    explicit ResGenMode(void* pData) : ResCommon(pData) {}
 };
 
 /******************************************************************************
@@ -46,7 +47,7 @@ struct ResMatMiscData {
 
 class ResMatMisc : public ResCommon<ResMatMiscData> {
 public:
-    ResMatMisc(void* pData) : ResCommon(pData) {}
+    explicit ResMatMisc(void* pData) : ResCommon(pData) {}
 };
 
 /******************************************************************************
@@ -75,7 +76,7 @@ struct ResTexPlttInfoData {
 
 class ResTexPlttInfo : public ResCommon<ResTexPlttInfoData> {
 public:
-    ResTexPlttInfo(void* pData) : ResCommon(pData) {}
+    explicit ResTexPlttInfo(void* pData) : ResCommon(pData) {}
 };
 
 /******************************************************************************
@@ -87,7 +88,7 @@ struct ResMatTexCoordGenData {};
 
 class ResMatTexCoordGen : public ResCommon<ResMatTexCoordGenData> {
 public:
-    ResMatTexCoordGen(void* pData) : ResCommon(pData) {}
+    explicit ResMatTexCoordGen(void* pData) : ResCommon(pData) {}
 
     bool GXGetTexCoordGen2(GXTexCoordID, GXTexGenType*, GXTexGenSrc*, u8*,
                            u32*);
@@ -114,7 +115,7 @@ struct ResTexObjData {};
 
 class ResTexObj : public ResCommon<ResTexObjData> {
 public:
-    ResTexObj(void* pData) : ResCommon(pData) {}
+    explicit ResTexObj(void* pData) : ResCommon(pData) {}
 };
 
 /******************************************************************************
@@ -126,7 +127,7 @@ struct ResTlutObjData {};
 
 class ResTlutObj : public ResCommon<ResTlutObjData> {
 public:
-    ResTlutObj(void* pData) : ResCommon(pData) {}
+    explicit ResTlutObj(void* pData) : ResCommon(pData) {}
 };
 
 /******************************************************************************
@@ -138,7 +139,7 @@ struct ResTexSrtData {};
 
 class ResTexSrt : public ResCommon<ResTexSrtData> {
 public:
-    ResTexSrt(void* pData) : ResCommon(pData) {}
+    explicit ResTexSrt(void* pData) : ResCommon(pData) {}
 
     void SetMapMode(u32, u32, int, int);
 };
@@ -157,12 +158,12 @@ struct Chan {
 };
 
 struct ResChanData {
-    ResChan chan[2]; // at 0x0
+    Chan chan[2]; // at 0x0
 };
 
 class ResMatChan : public ResCommon<ResChanData> {
 public:
-    ResMatChan(void* pData) : ResCommon(pData) {}
+    explicit ResMatChan(void* pData) : ResCommon(pData) {}
 };
 
 /******************************************************************************
@@ -191,14 +192,14 @@ struct ResMatData {
 
 class ResMat : public ResCommon<ResMatData> {
 public:
-    ResMat(void* pData) : ResCommon(pData) {}
+    explicit ResMat(void* pData) : ResCommon(pData) {}
 
     ResTexSrt GetResTexSrt() {
         return ResTexSrt(&ref().texSrtData);
     }
 
     ResMatTexCoordGen GetResMatTexCoordGen() {
-        ResMatDLData* dlData = ofs_to_ptr<ResMatDLData>(ref().resMatDLOfs);
+        ResMatDLData* dlData = ofs_to_ptr<ResMatDLData>(ref().toResMatDLData);
         return ResMatTexCoordGen(&dlData->texCoordGenData);
     }
 
