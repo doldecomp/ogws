@@ -3,19 +3,13 @@
 #include "types_nw4r.h"
 #include "g3d_rescommon.h"
 #include "g3d_resmdl.h"
+#include "g3d_resanm.h"
 #include "g3d_obj.h"
 
 namespace nw4r
 {
     namespace g3d
     {
-        enum AnmPolicy
-        {
-            ANM_POLICY_ONETIME,
-            ANM_POLICY_LOOP,
-            ANM_POLICY_MAX
-        };
-
         typedef f32 (* PlayPolicyFunc)(f32, f32, f32);
         f32 PlayPolicy_Onetime(f32, f32, f32);
         f32 PlayPolicy_Loop(f32, f32, f32);

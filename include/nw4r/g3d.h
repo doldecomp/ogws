@@ -5,6 +5,7 @@
 #include <nw4r/g3d/g3d_camera.h>
 #include <nw4r/g3d/g3d_cpu.h>
 #include <nw4r/g3d/g3d_fog.h>
+#include <nw4r/g3d/g3d_resanm.h>
 #include <nw4r/g3d/g3d_rescommon.h>
 #include <nw4r/g3d/g3d_resdict.h>
 #include <nw4r/g3d/g3d_resfile.h>

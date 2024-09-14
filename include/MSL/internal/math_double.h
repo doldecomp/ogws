@@ -1,7 +1,8 @@
 #ifndef MSL_MATH_DOUBLE_H
 #define MSL_MATH_DOUBLE_H
-#include <internal/fdlibm_public.h>
 #include <types.h>
+
+#include <internal/fdlibm_public.h>
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -35,7 +36,6 @@ inline float modff(float x, float* iptr) {
     float frac;
     double intg;
 
-    x = (double)x;
     frac = modf(x, &intg);
     *iptr = intg;
 

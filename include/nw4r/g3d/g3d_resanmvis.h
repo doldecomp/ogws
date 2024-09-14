@@ -10,10 +10,9 @@ namespace nw4r
 	{
 		struct ResAnmVisInfoData
 		{
-			char UNK_0x0[0x8];
-			u16 mNumFrames; // at 0x1C
-			u16 mNumNodes;
-			AnmPolicy mAnmPolicy; // at 0x20
+			u16 numFrame; // at 0x0
+			u16 numNode; // at 0x2
+			AnmPolicy policy; // at 0x4
 		};
 		
 		struct ResAnmVisNodeData
@@ -29,6 +28,7 @@ namespace nw4r
 			u32 mRevision; // at 0x8
 			char UNK_0xC[0x4];
 			s32 mNodeDictOffset; // at 0x10
+			char UNK_0x14[0x8];
 			ResAnmVisInfoData mInfo; // at 0x14
 		};
 		
@@ -61,17 +61,17 @@ namespace nw4r
 
 			AnmPolicy GetAnmPolicy() const
 			{
-				return ref().mInfo.mAnmPolicy;
+				return ref().mInfo.policy;
 			}
 
 			int GetNumFrame() const
 			{
-				return ref().mInfo.mNumFrames;
+				return ref().mInfo.numFrame;
 			}
 
 			int GetNumNode() const
 			{
-				return ref().mInfo.mNumNodes;
+				return ref().mInfo.numNode;
 			}
 			
 			bool GetAnmResult(u32, float) const;

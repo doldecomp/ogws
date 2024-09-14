@@ -1,88 +1,135 @@
 #ifndef NW4R_G3D_RESANM_H
 #define NW4R_G3D_RESANM_H
-#include "types_nw4r.h"
+#include <nw4r/types_nw4r.h>
 
-namespace nw4r
-{
-	namespace g3d
-	{
-		struct ResKeyFrameAnmFramesData
-		{
-			float mTime; // at 0x0
-			float mValue; // at 0x4
-			float mDerivative; // at 0x8
-		};
-		
-		struct ResKeyFrameAnmData
-		{
-			u16 mCount; // at 0x0
-			float FLOAT_0x4;
-			ResKeyFrameAnmFramesData mFrames[]; // at 0x8
-		};
-		
-		struct ResColorAnmFramesData
-		{
-			u32 mColor; // at 0x0
-		};
-		
-		union ResColorAnmData
-		{
-			u32 mColor;
-			s32 mOffset;
-		};
-		
-		struct ResBoolAnmFramesData
-		{
-			u32 mFlags; // at 0x0
-		};
-		
-		union ResAnmData
-		{
-			float mValue;
-			s32 mOffset;
-		};
-		
-		namespace detail
-		{
-			float GetResKeyFrameAnmResult(const ResKeyFrameAnmData *, float);
-			
-			u32 GetResColorAnmResult(const ResColorAnmFramesData *, float);
-			
-			inline u32 GetResColorAnmResult(const ResColorAnmData * pData, float time, bool b)
-			{
-				if (b) return pData->mColor;
-				
-				return GetResColorAnmResult((const ResColorAnmFramesData *)((u8 *)pData + pData->mOffset), time);
-			}
-			
-			inline bool GetResBoolAnmFramesResult(const ResBoolAnmFramesData * pData, int i)
-			{
-				u32 index = i;
-				
-				u32 mask = 0x80000000 >> (index % 32);
-				u32 flags = pData[index / 32].mFlags;
-				
-				return flags & mask;
-			}
-			
-			template <typename T>
-			inline float ClipFrame(T & info, float time)
-			{
-				if (time <= 0.0f) return 0.0f;
-				
-				if (info.mNumFrames <= time) return info.mNumFrames;
-				
-				return time;
-			}
-			
-			inline float GetResAnmResult(const ResAnmData * pData, float time, bool b)
-			{
-				if (b) return pData->mValue;
-				
-				return GetResKeyFrameAnmResult((const ResKeyFrameAnmData *)((u8 *)pData + pData->mOffset), time);
-			}
-		}
-	}
+namespace nw4r {
+namespace g3d {
+
+/******************************************************************************
+ *
+ * ResKeyFrame
+ *
+ ******************************************************************************/
+struct ResKeyFrameData {
+    f32 frame; // at 0x0
+    f32 value; // at 0x4
+    f32 slope; // at 0x8
+};
+
+struct ResKeyFrameAnmData {
+    u16 numKeyFrame;              // at 0x0
+    u8 padding_[2];               // at 0x2
+    f32 invKeyFrameRange;         // at 0x4
+    ResKeyFrameData keyFrames[1]; // at 0x8
+};
+
+namespace detail {
+
+f32 GetResKeyFrameAnmResult(const ResKeyFrameAnmData* pData, f32 frame);
+
+} // namespace detail
+
+/******************************************************************************
+ *
+ * ResAnm
+ *
+ ******************************************************************************/
+union ResAnmData {
+    f32 constValue;
+    s32 toResKeyFrameAnmData;
+};
+
+enum AnmPolicy { ANM_POLICY_ONETIME, ANM_POLICY_LOOP, ANM_POLICY_MAX };
+
+namespace detail {
+
+inline f32 GetResAnmResult(const ResAnmData* pData, f32 frame, bool constant) {
+    if (constant) {
+        return pData->constValue;
+    }
+
+    const ResKeyFrameAnmData* pFrameData =
+        reinterpret_cast<const ResKeyFrameAnmData*>(
+            reinterpret_cast<const char*>(pData) + pData->toResKeyFrameAnmData);
+
+    return GetResKeyFrameAnmResult(pFrameData, frame);
 }
+
+template <typename T> inline f32 ClipFrame(T& rInfo, f32 frame) {
+    if (frame <= 0.0f) {
+        return 0.0f;
+    }
+
+    if (rInfo.numFrame <= frame) {
+        return rInfo.numFrame;
+    }
+
+    return frame;
+}
+
+} // namespace detail
+
+/******************************************************************************
+ *
+ * ResColorAnm
+ *
+ ******************************************************************************/
+union ResColorAnmData {
+    u32 constValue;
+    s32 toResColorAnmFramesData;
+};
+struct ResColorAnmFramesData {
+    u32 frameColors[1]; // at 0x0
+};
+
+namespace detail {
+
+u32 GetResColorAnmResult(const ResColorAnmFramesData* pData, f32 frame);
+
+inline u32 GetResColorAnmResult(const ResColorAnmData* pData, f32 frame,
+                                bool constant) {
+    if (constant) {
+        return pData->constValue;
+    }
+
+    const ResColorAnmFramesData* pFrameData =
+        reinterpret_cast<const ResColorAnmFramesData*>(
+            reinterpret_cast<const char*>(pData) +
+            pData->toResColorAnmFramesData);
+
+    return GetResColorAnmResult(pFrameData, frame);
+}
+
+} // namespace detail
+
+/******************************************************************************
+ *
+ * ResBoolAnm
+ *
+ ******************************************************************************/
+struct ResBoolAnmFramesData {
+    u32 boolBits[1]; // at 0x0
+};
+
+namespace detail {
+
+inline bool GetResBoolAnmFramesResult(const ResBoolAnmFramesData* pData,
+                                      int frame) {
+    const u32* pBits = pData->boolBits;
+    u32 index = static_cast<u32>(frame);
+
+    u32 wordIdx = index / 32;
+    u32 bitIdx = index % 32;
+
+    u32 targetBit = (1U << 31) >> bitIdx;
+    u32 bitWord = pBits[wordIdx];
+
+    return bitWord & targetBit;
+}
+
+} // namespace detail
+
+} // namespace g3d
+} // namespace nw4r
 
 #endif

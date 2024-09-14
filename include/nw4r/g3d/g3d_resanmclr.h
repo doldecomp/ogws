@@ -9,8 +9,9 @@ namespace nw4r
 	{
 		struct ResAnmClrInfoData
 		{
-			char UNK_0x0[0x8];
-			u16 mNumFrames;
+			u16 numFrame; // at 0x0
+			u16 numMaterial; // at 0x2
+			AnmPolicy policy; // at 0x4
 		};
 		
 		struct ResAnmClrMatData
@@ -31,7 +32,8 @@ namespace nw4r
 			u32 mRevision; // at 0x8
 			char UNK_0xC[0x4];
 			s32 mMatDictOffset; // at 0x10
-			ResAnmClrInfoData mInfo; // at 0x14
+			char UNK_0x14[0x8];
+			ResAnmClrInfoData mInfo; // at 0x20
 		};
 		
 		struct ResAnmClr

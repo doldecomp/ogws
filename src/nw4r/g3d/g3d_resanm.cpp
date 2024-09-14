@@ -1,107 +1,114 @@
-#include "g3d_resanm.h"
-#include "math_arithmetic.h"
-#include "ut_Color.h"
+#pragma ipa file // TODO: REMOVE AFTER REFACTOR
 
-namespace nw4r
-{
-	using namespace ut;
-	using namespace math;
-	
-	namespace g3d
-	{
-		namespace detail
-		{
-			namespace
-			{
-				/*
-				The Hermite interpolating polynomial f satisfies the following conditions:
-					f(0)	= y0
-					f(x1)	= y1
-					f'(0)	= d0
-					f'(x1)	= d1
-				The value returned is f(x).
-				*/
-				float HermiteInterpolation(float y0, float d0, float y1, float d1, float x, float x1)
-				{
-					// Linear factors
-					float lf0 = x * FInv(x1); // x / x1
-					float lf1 = lf0 - 1.0f; // (x - x1) / x1
-					
-					return y0 + lf0 * (lf0 * ((2.0f * lf0 - 3.0f) * (y0 - y1))) + x * lf1 * (lf1 * d0 + lf0 * d1);
-				}
-				
-				/*
-				The linear interpolating function f satisfies the following conditions:
-					f(0)		= y0
-					f(0x8000)	= y1
-				The value returned is f(x).
-				*/
-				int LinearInterpColorElem(u8 y0, u8 y1, s16 x)
-				{
-					return y0 + ((y1 - y0) * x >> 15);
-				}
-			}
-			
-			float GetResKeyFrameAnmResult(const ResKeyFrameAnmData * pData, float time)
-			{
-				const ResKeyFrameAnmFramesData * pLast = pData->mFrames + (pData->mCount - 1);
-				
-				if (time <= pData->mFrames[0].mTime) return pData->mFrames[0].mValue;
-				
-				if (pLast->mTime <= time) return pLast->mValue;
-				
-				float t = time - pData->mFrames[0].mTime;
-				
-				const ResKeyFrameAnmFramesData * pCur = pData->mFrames + F32ToU16(pData->FLOAT_0x4 * (t * U16ToF32(pData->mCount)));
-				
-				if (time < pCur->mTime)
-				{
-					do
-					{
-						pCur--;
-					} while (time < pCur->mTime);
-				}
-				else
-				{
-					do
-					{
-						pCur++;
-					} while (pCur->mTime <= time);
-					
-					pCur--;
-				}
-				
-				if (pCur->mTime == time) return pCur->mValue;
-				
-				float x = time - pCur[0].mTime;
-				float x1 = pCur[1].mTime - pCur[0].mTime;
-				
-				return HermiteInterpolation(pCur[0].mValue, pCur[0].mDerivative, pCur[1].mValue, pCur[1].mDerivative, x, x1);
-			}
-			
-			u32 GetResColorAnmResult(const ResColorAnmFramesData * pData, float time)
-			{
-				float integralPart;
-				int i;
-				s16 t;
-				float fractionalPart = FModf(time, &integralPart);
-				
-				i = integralPart;
-				
-				if (0.0f == fractionalPart) return pData[i].mColor;
-				
-				Color color0(pData[i].mColor); // at 0x14
-				Color color1(pData[i + 1].mColor); // at 0x10
-				
-				t = F32ToS16(0x8000 * fractionalPart);
-				
-				int r = LinearInterpColorElem(color0.r, color1.r, t);
-				int g = LinearInterpColorElem(color0.g, color1.g, t);
-				int b = LinearInterpColorElem(color0.b, color1.b, t);
-				int a = LinearInterpColorElem(color0.a, color1.a, t);
-				
-				return Color(r, g, b, a);
-			}
-		}
-	}
+#include <nw4r/g3d.h>
+
+#include <nw4r/math.h>
+#include <nw4r/ut.h>
+
+namespace nw4r {
+namespace g3d {
+namespace detail {
+namespace {
+
+/**
+ * The Hermite interpolating polynomial f satisfies the following conditions:
+ *        f(0)	    = v0
+ *        f(d)	    = v1
+ *        f'(0)	= t0
+ *        f'(d)	= t1
+ *
+ * The value returned is f(p).
+ */
+f32 HermiteInterpolation(f32 v0, f32 t0, f32 v1, f32 t1, f32 p, f32 d) {
+    f32 invd = math::FInv(d);
+
+    // Linear factors
+    f32 s = p * invd;   // p / d
+    f32 s_1 = s - 1.0f; // (p - d) / d
+
+    return v0 + s * (s * ((2.0f * s - 3.0f) * (v0 - v1))) +
+           p * s_1 * (s_1 * t0 + s * t1);
 }
+
+/**
+ * The linear interpolating function f satisfies the following conditions:
+ *        f(0)		= a
+ *        f(0x8000)	= b
+ * The value returned is f(ratio).
+ */
+u8 LinearInterpColorElem(u8 a, u8 b, s16 ratio) {
+    return a + ((b - a) * ratio >> 15);
+}
+
+} // namespace
+
+f32 GetResKeyFrameAnmResult(const ResKeyFrameAnmData* pData, f32 frame) {
+    const ResKeyFrameData& rFirst = pData->keyFrames[0];
+    const ResKeyFrameData& rLast = pData->keyFrames[pData->numKeyFrame - 1];
+
+    if (frame <= rFirst.frame) {
+        return rFirst.value;
+    }
+
+    if (rLast.frame <= frame) {
+        return rLast.value;
+    }
+
+    f32 frameOffset = frame - rFirst.frame;
+    f32 numKeyFrame = math::U16ToF32(pData->numKeyFrame);
+
+    f32 fEstimate = frameOffset * numKeyFrame * pData->invKeyFrameRange;
+    u16 iEstimate = math::F32ToU16(fEstimate);
+
+    const ResKeyFrameData* pLeft = &pData->keyFrames[iEstimate];
+
+    if (frame < pLeft->frame) {
+        do {
+            pLeft--;
+        } while (frame < pLeft->frame);
+    } else {
+        do {
+            pLeft++;
+        } while (pLeft->frame <= frame);
+
+        pLeft--;
+    }
+
+    if (pLeft->frame == frame) {
+        return pLeft->value;
+    }
+
+    const ResKeyFrameData* pRight = pLeft + 1;
+    f32 curFrameDelta = frame - pLeft->frame;
+    f32 keyFrameDelta = pRight->frame - pLeft->frame;
+
+    return HermiteInterpolation(pLeft->value, pLeft->slope, pRight->value,
+                                pRight->slope, curFrameDelta, keyFrameDelta);
+}
+
+u32 GetResColorAnmResult(const ResColorAnmFramesData* pData, f32 frame) {
+    const u32* pColorArray = pData->frameColors;
+
+    f32 intPart;
+    f32 fracPart = math::FModf(frame, &intPart);
+    int intFrame = static_cast<int>(intPart);
+
+    if (fracPart == 0.0f) {
+        return pColorArray[intFrame];
+    }
+
+    ut::Color left(pColorArray[intFrame]);
+    ut::Color right(pColorArray[intFrame + 1]);
+
+    f32 biasedRatio = 32768 * fracPart;
+    s16 fpRatio = math::F32ToS16(biasedRatio);
+
+    return ut::Color(LinearInterpColorElem(left.r, right.r, fpRatio),
+                     LinearInterpColorElem(left.g, right.g, fpRatio),
+                     LinearInterpColorElem(left.b, right.b, fpRatio),
+                     LinearInterpColorElem(left.a, right.a, fpRatio));
+}
+
+} // namespace detail
+} // namespace g3d
+} // namespace nw4r
