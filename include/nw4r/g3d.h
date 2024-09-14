@@ -12,5 +12,6 @@
 #include <nw4r/g3d/g3d_resshp.h>
 #include <nw4r/g3d/g3d_restev.h>
 #include <nw4r/g3d/g3d_restex.h>
+#include <nw4r/g3d/g3d_workmem.h>
 
 #endif
