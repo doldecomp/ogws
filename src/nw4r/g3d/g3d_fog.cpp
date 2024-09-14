@@ -40,7 +40,7 @@ namespace nw4r
         {
             if (pFog)
             {
-                register FogData& src = mFogData.ref();
+                register const FogData& src = mFogData.ref();
                 register void * dest = pFog;
 
                 if (mFogData.IsValid())
@@ -86,7 +86,7 @@ namespace nw4r
 
         void Fog::SetGP() const
         {
-            FogData& rFogData = mFogData.ref();
+            const FogData& rFogData = mFogData.ref();
             
             if (mFogData.IsValid())
             {

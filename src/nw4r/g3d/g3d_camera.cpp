@@ -268,7 +268,7 @@ namespace nw4r
 
         void Camera::GetViewport(f32 *r4, f32 *r5, f32 *r6, f32 *r7, f32 *r8, f32 *r9) const
         {
-            CameraData& rCamData = mCamData.ref();
+            const CameraData& rCamData = mCamData.ref();
 
             if (mCamData.IsValid())
             {
@@ -285,7 +285,7 @@ namespace nw4r
         {
             if (pOutMtx)
             {
-                CameraData& rCamData = mCamData.ref();
+                const CameraData& rCamData = mCamData.ref();
 
                 if (mCamData.IsValid())
                 {
@@ -321,7 +321,7 @@ namespace nw4r
         {
             if (pOutMtx)
             {
-                CameraData& rCamData = mCamData.ref();
+                const CameraData& rCamData = mCamData.ref();
 
                 if (mCamData.IsValid())
                 {
@@ -353,7 +353,7 @@ namespace nw4r
         {
             if (pOutMtx)
             {
-                CameraData& rCamData = mCamData.ref();
+                const CameraData& rCamData = mCamData.ref();
 
                 if (mCamData.IsValid())
                 {
@@ -370,7 +370,7 @@ namespace nw4r
 
         void Camera::GXSetViewport() const
         {
-            CameraData& rCamData = mCamData.ref();
+            const CameraData& rCamData = mCamData.ref();
 
             if (mCamData.IsValid())
             {
@@ -406,7 +406,7 @@ namespace nw4r
 
         void Camera::GXSetScissor() const
         {
-            CameraData& rCamData = mCamData.ref();
+            const CameraData& rCamData = mCamData.ref();
 
             if (mCamData.IsValid())
             {
@@ -417,7 +417,7 @@ namespace nw4r
 
         void Camera::GXSetScissorBoxOffset() const
         {
-            CameraData& rCamData = mCamData.ref();
+            const CameraData& rCamData = mCamData.ref();
 
             if (mCamData.IsValid())
             {
@@ -427,7 +427,7 @@ namespace nw4r
 
         void Camera::UpdateCameraMtx() const
         {
-            CameraData& rCamData = mCamData.ref();
+            CameraData& rCamData = const_cast<CameraData&>(mCamData.ref());
 
             if ((rCamData.mFlags & 0x1) != 0)
             {

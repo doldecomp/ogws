@@ -63,7 +63,7 @@ namespace nw4r
             inline Camera(void * vptr) : mCamData(vptr) {}
             inline void UpdateProjectionMtx() const
             {
-                CameraData& rCamData = mCamData.ref();
+                CameraData& rCamData = const_cast<CameraData&>(mCamData.ref());
 
                 if (rCamData.mFlags & 0x40)
                 {

@@ -11,7 +11,7 @@ namespace nw4r
                 u32 CalcWorldMtx_Basic(math::MTX34 *pMtx, math::VEC3 *pVec, const math::MTX34 *pcMtx,
                 const math::VEC3 *pcVec, u32 worldAttr, const ChrAnmResult *pcAnm)
                 {
-                    u32 anmFlags = pcAnm->mFlags;
+                    u32 anmFlags = pcAnm->flags;
                     u32 newAttr;
                     if (anmFlags & 0x8)
                     {
@@ -23,7 +23,7 @@ namespace nw4r
                     else
                     {
                         newAttr = WorldMtxAttr::AnmNotScaleOne(worldAttr);
-                        *pVec = pcAnm->VEC3_0x4;
+                        *pVec = pcAnm->s;
                     }
 
                     if ((anmFlags & 0x2) || (anmFlags & 0x4))
@@ -41,24 +41,24 @@ namespace nw4r
                     {
                         if (WorldMtxAttr::IsScaleOne(worldAttr))
                         {
-                            const math::VEC3 stack_0x8(pcAnm->mMtx[0][3], pcAnm->mMtx[1][3], pcAnm->mMtx[2][3]);
+                            const math::VEC3 stack_0x8(pcAnm->rt[0][3], pcAnm->rt[1][3], pcAnm->rt[2][3]);
                             math::MTX34Trans(pMtx, pcMtx, &stack_0x8);
                         }
                         else
                         {
                             math::MTX34 stack_0x18;
-                            math::MTX34Scale(&stack_0x18, pcVec, &pcAnm->mMtx);
+                            math::MTX34Scale(&stack_0x18, pcVec, &pcAnm->rt);
                             math::MTX34Mult(pMtx, pcMtx, &stack_0x18);
                         }
                     }
                     else if (WorldMtxAttr::IsScaleOne(worldAttr))
                     {
-                        math::MTX34Mult(pMtx, pcMtx, &pcAnm->mMtx);
+                        math::MTX34Mult(pMtx, pcMtx, &pcAnm->rt);
                     }                        
                     else
                     {
                         math::MTX34Scale(pMtx, pcMtx, pcVec);
-                        math::MTX34Mult(pMtx, pMtx, &pcAnm->mMtx);
+                        math::MTX34Mult(pMtx, pMtx, &pcAnm->rt);
                     }
 
                     u32 result = WorldMtxAttr::AnmNotScaleUniform(newAttr);

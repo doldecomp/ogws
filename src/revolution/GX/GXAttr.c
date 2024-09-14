@@ -16,18 +16,19 @@ static void __GXXfVtxSpecs(void) {
 
     nrm = gxdt->binormal ? 2 : (gxdt->normal ? 1 : 0);
 
+    // clang-format off
+
     // Both fields in one access
     clr = 32 -
-          __cntlzw(GX_BITGET(gxdt->vcdLoReg, GX_CP_VCD_LO_COLORSPECULAR_ST,
-                             GX_CP_VCD_LO_COLORSPECULAR_SZ +
-                                 GX_CP_VCD_LO_COLORDIFFUSED_SZ)) +
-          1;
+          __cntlzw(GX_BITGET(gxdt->vcdLoReg, GX_CP_VCD_LO_COLORSPECULAR_B,
+                             GX_CP_VCD_LO_COLORSPECULAR_SZ + GX_CP_VCD_LO_COLORDIFFUSED_SZ)) + 1;
 
     // All 16 bits in VCD_Hi
     txc = 32 -
-          __cntlzw(GX_BITGET(gxdt->vcdHiReg, GX_CP_VCD_HI_TEX7COORD_ST,
-                             sizeof(u16) * 8)) +
-          1;
+          __cntlzw(GX_BITGET(gxdt->vcdHiReg, GX_CP_VCD_HI_TEX7COORD_B,
+                             GX_CP_VCD_HI_TEX7COORD_SZ * 8)) + 1;
+
+    // clang-format on
 
     // TODO: Fakematch? Bitset macros don't work here
     GX_XF_LOAD_REG_HDR(GX_XF_REG_INVERTEXSPEC);

@@ -13,7 +13,7 @@ namespace nw4r
 			
 			const ResAnmClrMatData::AnmData * pAnm = pMatAnm->mAnms;
 			u32 flags = pMatAnm->mFlags;
-			ResAnmClrData & anmClr = ref();
+			const ResAnmClrData & anmClr = ref();
 			
 			pResult->mFlags = 0;
 			
