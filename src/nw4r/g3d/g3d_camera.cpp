@@ -1,551 +1,548 @@
-#include "g3d_camera.h"
-#include "g3d_state.h"
-#include "math_types.h"
-#include "math_triangular.h"
-#include <revolution/MTX.h>
+#pragma ipa file // TODO: REMOVE AFTER REFACTOR
+
+#include <nw4r/g3d.h>
+
+#include <nw4r/math.h>
+
 #include <revolution/GX.h>
+#include <revolution/MTX.h>
 
-namespace nw4r
-{
-    namespace g3d
-    {
-        Camera::Camera(CameraData * pCamData) : mCamData(pCamData) {}
+namespace nw4r {
+namespace g3d {
 
-        void Camera::Init()
-        {
-            GXRenderModeObj& rRenderMode = G3DState::GetRenderModeObj();
-            Init(rRenderMode.fbWidth, rRenderMode.efbHeight, rRenderMode.fbWidth,
-                rRenderMode.xfbHeight, rRenderMode.viWidth, rRenderMode.viHeight);
-        }
+Camera::Camera(CameraData* pData) : ResCommon(pData) {}
 
-        void Camera::Init(u16 r4, u16 r5, u16 r6, u16 r7, u16 r8, u16 r9)
-        {
-            CameraData& rCamData = mCamData.ref();
+void Camera::Init() {
+    const GXRenderModeObj* pObj = G3DState::GetRenderModeObj();
 
-            if (mCamData.IsValid())
-            {
-                rCamData.mFlags = 0x21;
+    Init(pObj->fbWidth, pObj->efbHeight, pObj->fbWidth, pObj->xfbHeight,
+         pObj->viWidth, pObj->viHeight);
+}
 
-                rCamData.mPos.x = 0.0f;
-                rCamData.mPos.y = 0.0f;
-                rCamData.mPos.z = 15.0f;
+void Camera::Init(u16 efbWidth, u16 efbHeight, u16 xfbWidth, u16 xfbHeight,
+                  u16 viWidth, u16 viHeight) {
+    if (!IsValid()) {
+        return;
+    }
 
-                rCamData.VEC3_0x80.x = 0.0f;
-                rCamData.VEC3_0x80.y = 1.0f;
-                rCamData.VEC3_0x80.z = 0.0f;
+    CameraData& r = ref();
 
-                rCamData.VEC3_0x8C.x = 0.0f;
-                rCamData.VEC3_0x8C.y = 0.0f;
-                rCamData.VEC3_0x8C.z = 0.0f;
+    r.flags = FLAG_CAM_LOOKAT | FLAG_PROJ_PERSP;
 
-                rCamData.VEC3_0x98.x = 0.0f;
-                rCamData.VEC3_0x98.y = 0.0f;
-                rCamData.VEC3_0x98.z = 0.0f;
+    r.cameraPos.x = 0.0f;
+    r.cameraPos.y = 0.0f;
+    r.cameraPos.z = 15.0f;
+    r.cameraUp.x = 0.0f;
+    r.cameraUp.y = 1.0f;
+    r.cameraUp.z = 0.0f;
+    r.cameraTarget.x = 0.0f;
+    r.cameraTarget.y = 0.0f;
+    r.cameraTarget.z = 0.0f;
+    r.cameraRotate.x = 0.0f;
+    r.cameraRotate.y = 0.0f;
+    r.cameraRotate.z = 0.0f;
+    r.cameraTwist = 0.0f;
 
-                rCamData.FLOAT_0xA4 = 0.0f;
-                rCamData.INT_0xA8 = 0;
-                rCamData.FLOAT_0xAC = 60.0f;
-                rCamData.FLOAT_0xB0 = (4.0f / 3.0f);
-                rCamData.FLOAT_0xB4 = 0.1f;
-                rCamData.FLOAT_0xB8 = 1000.f;
-                rCamData.FLOAT_0xBC = 0.0f;
-                rCamData.FLOAT_0xC0 = (float)r9;
-                rCamData.FLOAT_0xC4 = 0.0f;
-                rCamData.FLOAT_0xC8 = (float)r8;
-                rCamData.FLOAT_0xCC = 0.5f;
-                rCamData.FLOAT_0xD0 = 0.5f;
-                rCamData.FLOAT_0xD4 = 0.5f;
-                rCamData.FLOAT_0xD8 = 0.5f;
-                rCamData.FLOAT_0xDC = 0.0f;
-                rCamData.FLOAT_0xE0 = 0.0f;
-                rCamData.FLOAT_0xE4 = (float)r6;
-                rCamData.FLOAT_0xE8 = (float)r7;
-                rCamData.FLOAT_0xEC = 0.0;
-                rCamData.FLOAT_0xF0 = 1.0f;
-                rCamData.INT_0xF4 = 0;
-                rCamData.INT_0xF8 = 0;
-                rCamData.INT_0xFC = r4;
-                rCamData.INT_0x100 = r5;
-                rCamData.INT_0x104 = 0;
-                rCamData.INT_0x108 = 0;
+    r.projType = GX_PERSPECTIVE;
+    r.projFovy = 60.0f;
+    r.projAspect = 4.0f / 3.0f;
+    r.projNear = 0.1f;
+    r.projFar = 1000.f;
+    r.projTop = 0.0f;
+    r.projBottom = static_cast<f32>(viHeight);
+    r.projLeft = 0.0f;
+    r.projRight = static_cast<f32>(viWidth);
+
+    r.lightScaleS = 0.5f;
+    r.lightScaleT = 0.5f;
+    r.lightTransS = 0.5f;
+    r.lightTransT = 0.5f;
+
+    r.viewportOrigin.x = 0.0f;
+    r.viewportOrigin.y = 0.0f;
+    r.viewportSize.x = static_cast<f32>(xfbWidth);
+    r.viewportSize.y = static_cast<f32>(xfbHeight);
+    r.viewportNear = 0.0f;
+    r.viewportFar = 1.0f;
+
+    r.scissorX = 0;
+    r.scissorY = 0;
+    r.scissorWidth = efbWidth;
+    r.scissorHeight = efbHeight;
+    r.scissorOffsetX = 0;
+    r.scissorOffsetY = 0;
+}
+
+void Camera::SetPosition(f32 x, f32 y, f32 z) {
+    if (!IsValid()) {
+        return;
+    }
+
+    CameraData& r = ref();
+
+    r.cameraPos.x = x;
+    r.cameraPos.y = y;
+    r.cameraPos.z = z;
+    r.flags &= ~FLAG_CAM_MTX_READY;
+}
+
+void Camera::SetPosition(const math::VEC3& rPos) {
+    if (!IsValid()) {
+        return;
+    }
+
+    CameraData& r = ref();
+
+    r.cameraPos = rPos;
+    r.flags &= ~FLAG_CAM_MTX_READY;
+}
+
+void Camera::SetPosture(const PostureInfo& rInfo) {
+    if (!IsValid()) {
+        return;
+    }
+
+    CameraData& r = ref();
+
+    switch (rInfo.tp) {
+    case POSTURE_LOOKAT: {
+        if (r.flags & FLAG_CAM_LOOKAT) {
+            if (!(rInfo.cameraUp != r.cameraUp) &&
+                !(rInfo.cameraTarget != r.cameraTarget)) {
+                return;
             }
         }
 
-        void Camera::SetPosition(f32 x, f32 y, f32 z)
-        {
-            CameraData& rCamData = mCamData.ref();
+        r.flags &= ~(FLAG_CAM_LOOKAT | FLAG_CAM_ROTATE | FLAG_CAM_AIM);
+        r.flags |= FLAG_CAM_LOOKAT;
 
-            if (mCamData.IsValid())
-            {
-                rCamData.mPos.x = x;
-                rCamData.mPos.y = y;
-                rCamData.mPos.z = z;
+        r.cameraUp = rInfo.cameraUp;
+        r.cameraTarget = rInfo.cameraTarget;
 
-                rCamData.mFlags &= ~0x8;
+        r.flags &= ~FLAG_CAM_MTX_READY;
+        break;
+    }
+
+    case POSTURE_ROTATE: {
+        if (r.flags & FLAG_CAM_ROTATE) {
+            if (!(rInfo.cameraRotate != r.cameraRotate)) {
+                return;
             }
         }
 
-        void Camera::SetPosition(const math::VEC3& rPos)
-        {
-            CameraData& rCamData = mCamData.ref();
+        r.flags &= ~(FLAG_CAM_LOOKAT | FLAG_CAM_ROTATE | FLAG_CAM_AIM);
+        r.flags |= FLAG_CAM_ROTATE;
 
-            if (mCamData.IsValid())
-            {
-                rCamData.mPos = rPos;
-                rCamData.mFlags &= ~0x8;
+        r.cameraRotate = rInfo.cameraRotate;
+
+        r.flags &= ~FLAG_CAM_MTX_READY;
+        break;
+    }
+
+    case POSTURE_AIM: {
+        if (r.flags & FLAG_CAM_AIM) {
+            if (!(rInfo.cameraTarget != r.cameraTarget) &&
+                rInfo.cameraTwist == r.cameraTwist) {
+                return;
             }
         }
 
-        void Camera::SetPosture(const PostureInfo& rPosture)
-        {
-            CameraData& rCamData = mCamData.ref();
+        r.flags &= ~(FLAG_CAM_LOOKAT | FLAG_CAM_ROTATE | FLAG_CAM_AIM);
+        r.flags |= FLAG_CAM_AIM;
 
-            if (mCamData.IsValid())
-            {
-                switch (rPosture.INT_0x0)
-                {
-                    case 0:
-                        if (rCamData.mFlags & 0x1)
-                        {
-                            bool b = (rPosture.VEC3_0x04 != rCamData.VEC3_0x80);
-                            if (!b)
-                            {
-                                b = (rPosture.VEC3_0x10 != rCamData.VEC3_0x8C);
-                                if (!b) return;
-                            }
-                        }
-                        rCamData.mFlags &= ~0x7;
-                        rCamData.mFlags |= 0x1;
-                        rCamData.VEC3_0x80 = rPosture.VEC3_0x04;
-                        rCamData.VEC3_0x8C = rPosture.VEC3_0x10;
-                        rCamData.mFlags &= ~0x8;
-                        break;
+        r.cameraTarget = rInfo.cameraTarget;
+        r.cameraTwist = rInfo.cameraTwist;
 
-                    case 1:
-                        if (rCamData.mFlags & 0x2)
-                        {
-                            bool b = (rPosture.VEC3_0x1C != rCamData.VEC3_0x98);
-                            if (!b) return;
-                        }
-                        rCamData.mFlags &= ~0x7;
-                        rCamData.mFlags |= 0x2;
-                        rCamData.VEC3_0x98 = rPosture.VEC3_0x1C;
-                        rCamData.mFlags &= ~0x8;
-                        break;
+        r.flags &= ~FLAG_CAM_MTX_READY;
+        break;
+    }
 
-                    case 2:
-                        if (rCamData.mFlags & 0x4)
-                        {
-                            bool b = (rPosture.VEC3_0x10 != rCamData.VEC3_0x8C);
-                            if (!b && rPosture.FLOAT_0x28 == rCamData.FLOAT_0xA4) return;
-                        }
-                        rCamData.mFlags &= ~0x7;
-                        rCamData.mFlags |= 0x4;
-                        rCamData.VEC3_0x8C = rPosture.VEC3_0x10;
-                        rCamData.FLOAT_0xA4 = rPosture.FLOAT_0x28;
-                        rCamData.mFlags &= ~0x8;
-                        break;
+    default: {
+        break;
+    }
+    }
+}
 
-                    default:
-                        break;
-                }
-            }
+void Camera::SetCameraMtxDirectly(const math::MTX34& rMtx) {
+    if (!IsValid()) {
+        return;
+    }
+
+    CameraData& r = ref();
+
+    math::MTX34Copy(&r.cameraMtx, &rMtx);
+    r.flags |= FLAG_CAM_MTX_READY;
+}
+
+void Camera::SetPerspective(f32 fovy, f32 aspect, f32 near, f32 far) {
+    if (!IsValid()) {
+        return;
+    }
+
+    CameraData& r = ref();
+
+    r.projType = GX_PERSPECTIVE;
+
+    r.projFovy = fovy;
+    r.projAspect = aspect;
+    r.projNear = near;
+    r.projFar = far;
+
+    r.flags &= ~(FLAG_PROJ_FRUSTUM | FLAG_PROJ_PERSP | FLAG_PROJ_ORTHO |
+                 FLAG_PROJ_MTX_READY);
+    r.flags |= FLAG_PROJ_PERSP;
+}
+
+void Camera::SetOrtho(f32 top, f32 bottom, f32 left, f32 right, f32 near,
+                      f32 far) {
+    if (!IsValid()) {
+        return;
+    }
+
+    CameraData& r = ref();
+
+    r.projType = GX_ORTHOGRAPHIC;
+
+    r.projTop = top;
+    r.projBottom = bottom;
+    r.projLeft = left;
+    r.projRight = right;
+    r.projNear = near;
+    r.projFar = far;
+
+    r.flags &= ~(FLAG_PROJ_FRUSTUM | FLAG_PROJ_PERSP | FLAG_PROJ_ORTHO |
+                 FLAG_PROJ_MTX_READY);
+    r.flags |= FLAG_PROJ_ORTHO;
+}
+
+void Camera::SetProjectionMtxDirectly(const math::MTX44* pMtx) {
+    if (pMtx && IsValid()) {
+        CameraData& r = ref();
+
+        math::MTX44Copy(&r.projMtx, pMtx);
+        r.flags |= FLAG_PROJ_MTX_READY;
+    }
+}
+
+void Camera::SetScissor(u32 x, u32 y, u32 width, u32 height) {
+    if (!IsValid()) {
+        return;
+    }
+
+    CameraData& r = ref();
+
+    r.scissorX = x;
+    r.scissorY = y;
+    r.scissorWidth = width;
+    r.scissorHeight = height;
+}
+
+void Camera::SetScissorBoxOffset(s32 ox, s32 oy) {
+    if (!IsValid()) {
+        return;
+    }
+
+    CameraData& r = ref();
+
+    r.scissorOffsetX = ox;
+    r.scissorOffsetY = oy;
+}
+
+void Camera::SetViewport(f32 x, f32 y, f32 width, f32 height) {
+    if (!IsValid()) {
+        return;
+    }
+
+    CameraData& r = ref();
+
+    r.viewportOrigin.x = x;
+    r.viewportOrigin.y = y;
+    r.viewportSize.x = width;
+    r.viewportSize.y = height;
+
+    SetScissor(static_cast<u32>(x), static_cast<u32>(y),
+               static_cast<u32>(width), static_cast<u32>(height));
+}
+
+void Camera::SetViewportZRange(f32 near, f32 far) {
+    if (!IsValid()) {
+        return;
+    }
+
+    CameraData& r = ref();
+
+    r.viewportNear = near;
+    r.viewportFar = far;
+}
+
+void Camera::GetViewport(f32* pX, f32* pY, f32* pWidth, f32* pHeight,
+                         f32* pNear, f32* pFar) const {
+    if (!IsValid()) {
+        return;
+    }
+
+    const CameraData& r = ref();
+
+    if (pX != NULL) {
+        *pX = r.viewportOrigin.x;
+    }
+    if (pY != NULL) {
+        *pY = r.viewportOrigin.y;
+    }
+
+    if (pWidth != NULL) {
+        *pWidth = r.viewportSize.x;
+    }
+    if (pHeight != NULL) {
+        *pHeight = r.viewportSize.y;
+    }
+
+    if (pNear != NULL) {
+        *pNear = r.viewportNear;
+    }
+    if (pFar != NULL) {
+        *pFar = r.viewportFar;
+    }
+}
+
+void Camera::GetCameraMtx(math::MTX34* pMtx) const {
+    if (pMtx && IsValid()) {
+        const CameraData& r = ref();
+
+        if (!(r.flags & FLAG_CAM_MTX_READY)) {
+            UpdateCameraMtx();
         }
 
-        void Camera::SetCameraMtxDirectly(const math::MTX34& rMtx)
-        {
-            CameraData& rCamData = mCamData.ref();
+        math::MTX34Copy(pMtx, &r.cameraMtx);
+    }
+}
 
-            if (mCamData.IsValid())
-            {
-                math::MTX34Copy(&rCamData.mCamMtx, &rMtx);
-                rCamData.mFlags |= 0x8;
-            }
+void Camera::GetProjectionMtx(math::MTX44* pMtx) const {
+    if (pMtx && IsValid()) {
+        const CameraData& r = ref();
+
+        if (!(r.flags & FLAG_PROJ_MTX_READY)) {
+            UpdateProjectionMtx();
         }
 
-        void Camera::SetPerspective(f32 f1, f32 f2, f32 f3, f32 f4)
-        {
-            CameraData& rCamData = mCamData.ref();
+        math::MTX44Copy(pMtx, &r.projMtx);
+    }
+}
 
-            if (mCamData.IsValid())
-            {
-                rCamData.INT_0xA8 = 0;
+void Camera::GetProjectionTexMtx(math::MTX34* pMtx) const {
+    if (pMtx && IsValid()) {
+        const CameraData& r = ref();
 
-                rCamData.FLOAT_0xAC = f1;
-                rCamData.FLOAT_0xB0 = f2;
-                rCamData.FLOAT_0xB4 = f3;
-                rCamData.FLOAT_0xB8 = f4;
-                
-                rCamData.mFlags &= ~0xF0;
-                rCamData.mFlags |= 0x20;
-            }
-        }
-
-        void Camera::SetOrtho(f32 f1, f32 f2, f32 f3, f32 f4, f32 f5, f32 f6)
-        {
-            CameraData& rCamData = mCamData.ref();
-
-            if (mCamData.IsValid())
-            {
-                rCamData.INT_0xA8 = 1;
-
-                rCamData.FLOAT_0xBC = f1;
-                rCamData.FLOAT_0xC0 = f2;
-                rCamData.FLOAT_0xC4 = f3;
-                rCamData.FLOAT_0xC8 = f4;
-                rCamData.FLOAT_0xB4 = f5;
-                rCamData.FLOAT_0xB8 = f6;
-
-                rCamData.mFlags &= ~0xF0;
-                rCamData.mFlags |= 0x40;
-            }
-        }
-        
-        void Camera::SetProjectionMtxDirectly(const math::MTX44 *pMtx)
-        {
-            if (pMtx)
-            {
-                CameraData& rCamData = mCamData.ref();
-                
-                if (mCamData.IsValid())
-                {
-                    math::MTX44Copy(&rCamData.mProjMtx, pMtx);
-                    rCamData.mFlags |= 0x80;
-                }
-            }
-        }
-
-        void Camera::SetScissor(u32 r4, u32 r5, u32 r6, u32 r7)
-        {
-            CameraData& rCamData = mCamData.ref();
-
-            if (mCamData.IsValid())
-            {
-                rCamData.INT_0xF4 = r4;
-                rCamData.INT_0xF8 = r5;
-                rCamData.INT_0xFC = r6;
-                rCamData.INT_0x100 = r7;
-            }
-        }
-
-        void Camera::SetScissorBoxOffset(s32 x, s32 y)
-        {
-            CameraData& rCamData = mCamData.ref();
-
-            if (mCamData.IsValid())
-            {
-                rCamData.INT_0x104 = x;
-                rCamData.INT_0x108 = y;
-            }
-        }
-
-        void Camera::SetViewport(f32 f1, f32 f2, f32 f3, f32 f4)
-        {
-            CameraData& rCamData = mCamData.ref();
-
-            if (mCamData.IsValid())
-            {
-                rCamData.FLOAT_0xDC = f1;
-                rCamData.FLOAT_0xE0 = f2;
-                rCamData.FLOAT_0xE4 = f3;
-                rCamData.FLOAT_0xE8 = f4;
-
-                // inlined
-                SetScissor((u32)f1, (u32)f2, (u32)f3, (u32)f4);
-            }
-        }
-
-        void Camera::SetViewportZRange(f32 f1, f32 f2)
-        {
-            CameraData& rCamData = mCamData.ref();
-
-            if (mCamData.IsValid())
-            {
-                rCamData.FLOAT_0xEC = f1;
-                rCamData.FLOAT_0xF0 = f2;
-            }
-        }
-
-        void Camera::GetViewport(f32 *r4, f32 *r5, f32 *r6, f32 *r7, f32 *r8, f32 *r9) const
-        {
-            const CameraData& rCamData = mCamData.ref();
-
-            if (mCamData.IsValid())
-            {
-                if (r4) *r4 = rCamData.FLOAT_0xDC;
-                if (r5) *r5 = rCamData.FLOAT_0xE0;
-                if (r6) *r6 = rCamData.FLOAT_0xE4;
-                if (r7) *r7 = rCamData.FLOAT_0xE8;
-                if (r8) *r8 = rCamData.FLOAT_0xEC;
-                if (r9) *r9 = rCamData.FLOAT_0xF0;
-            }
-        }
-
-        void Camera::GetCameraMtx(math::MTX34 *pOutMtx) const
-        {
-            if (pOutMtx)
-            {
-                const CameraData& rCamData = mCamData.ref();
-
-                if (mCamData.IsValid())
-                {
-                    if ((rCamData.mFlags & 0x8) == 0)
-                    {
-                        UpdateCameraMtx();
-                    }
-                    
-                    math::MTX34Copy(pOutMtx, &rCamData.mCamMtx);
-                }
-            }
-        }
-
-        void Camera::GetProjectionMtx(math::MTX44 *pOutMtx) const
-        {
-            if (pOutMtx)
-            {
-                const CameraData& rCamData = mCamData.ref();
-
-                if (mCamData.IsValid())
-                {
-                    if ((rCamData.mFlags & 0x80) == 0)
-                    {
-                        UpdateProjectionMtx();
-                    }
-
-                    math::MTX44Copy(pOutMtx, &rCamData.mProjMtx);
-                }
-            }
-        }
-
-        void Camera::GetProjectionTexMtx(math::MTX34 *pOutMtx) const
-        {
-            if (pOutMtx)
-            {
-                const CameraData& rCamData = mCamData.ref();
-
-                if (mCamData.IsValid())
-                {
-                    if ((rCamData.mFlags & 0x40) != 0)
-                    {
-                        C_MTXLightOrtho(*pOutMtx, rCamData.FLOAT_0xBC, rCamData.FLOAT_0xC0, rCamData.FLOAT_0xC4,
-                            rCamData.FLOAT_0xC8, rCamData.FLOAT_0xCC, -(rCamData.FLOAT_0xD0),
-                            rCamData.FLOAT_0xD4, rCamData.FLOAT_0xD8);
-                    }
-                    else
-                    {
-                        if ((rCamData.mFlags & 0x10) != 0)
-                        {
-                            C_MTXLightFrustum(*pOutMtx, rCamData.FLOAT_0xBC, rCamData.FLOAT_0xC0, rCamData.FLOAT_0xC4,
-                                rCamData.FLOAT_0xC8, rCamData.FLOAT_0xB4, rCamData.FLOAT_0xCC,
-                                -(rCamData.FLOAT_0xD0), rCamData.FLOAT_0xD4, rCamData.FLOAT_0xD8);
-                        }
-                        else
-                        {
-                            C_MTXLightPerspective(*pOutMtx, rCamData.FLOAT_0xAC, rCamData.FLOAT_0xB0, rCamData.FLOAT_0xCC,
-                                -(rCamData.FLOAT_0xD0), rCamData.FLOAT_0xD4, rCamData.FLOAT_0xD8);
-                        }
-                    }
-                }
-            }
-        }
-
-        void Camera::GetEnvironmentTexMtx(math::MTX34 *pOutMtx) const
-        {
-            if (pOutMtx)
-            {
-                const CameraData& rCamData = mCamData.ref();
-
-                if (mCamData.IsValid())
-                {
-                    math::MTX34Identity(pOutMtx);
-                    pOutMtx->m[0][0] = rCamData.FLOAT_0xCC;
-                    pOutMtx->m[0][3] = rCamData.FLOAT_0xD4;
-                    pOutMtx->m[1][1] = -(rCamData.FLOAT_0xD0);
-                    pOutMtx->m[1][3] = rCamData.FLOAT_0xD8;
-                    pOutMtx->m[2][2] = 0.0f;
-                    pOutMtx->m[2][3] = 1.0f;
-                }
-            }
-        }
-
-        void Camera::GXSetViewport() const
-        {
-            const CameraData& rCamData = mCamData.ref();
-
-            if (mCamData.IsValid())
-            {
-                GXRenderModeObj& rRenderMode = G3DState::GetRenderModeObj();
-                if (rRenderMode.field_rendering)
-                {
-                    ::GXSetViewportJitter(rCamData.FLOAT_0xDC, rCamData.FLOAT_0xE0, rCamData.FLOAT_0xE4,
-                        rCamData.FLOAT_0xE8, rCamData.FLOAT_0xEC, rCamData.FLOAT_0xF0, rCamData.mFlags >> 8 & 1);
-                }
-                else
-                {
-                    ::GXSetViewport(rCamData.FLOAT_0xDC, rCamData.FLOAT_0xE0, rCamData.FLOAT_0xE4,
-                        rCamData.FLOAT_0xE8, rCamData.FLOAT_0xEC, rCamData.FLOAT_0xF0);
-                }
-            }
-        }
-
-        void Camera::GXSetProjection() const
-        {
-            const CameraData& rCamData = mCamData.ref();
-
-            if (mCamData.IsValid())
-            {
-                if ((rCamData.mFlags & 0x80) == 0)
-                {
-                    UpdateProjectionMtx();
-                }
-
-                ::GXSetProjection(const_cast<math::MTX44&>(rCamData.mProjMtx),
-                    (GXProjectionType)rCamData.INT_0xA8);
-            }
-        }
-
-        void Camera::GXSetScissor() const
-        {
-            const CameraData& rCamData = mCamData.ref();
-
-            if (mCamData.IsValid())
-            {
-                ::GXSetScissor(rCamData.INT_0xF4, rCamData.INT_0xF8,
-                    rCamData.INT_0xFC, rCamData.INT_0x100);
-            }
-        }
-
-        void Camera::GXSetScissorBoxOffset() const
-        {
-            const CameraData& rCamData = mCamData.ref();
-
-            if (mCamData.IsValid())
-            {
-                ::GXSetScissorBoxOffset(rCamData.INT_0x104, rCamData.INT_0x108);
-            }
-        }
-
-        void Camera::UpdateCameraMtx() const
-        {
-            CameraData& rCamData = const_cast<CameraData&>(mCamData.ref());
-
-            if ((rCamData.mFlags & 0x1) != 0)
-            {
-                C_MTXLookAt(rCamData.mCamMtx, rCamData.mPos, rCamData.VEC3_0x80, rCamData.VEC3_0x8C);
-            }
-            else
-            {
-                if ((rCamData.mFlags & 0x4) != 0)
-                {
-                    math::VEC3 delta(rCamData.mPos.x - rCamData.VEC3_0x8C.x,
-                        rCamData.mPos.y - rCamData.VEC3_0x8C.y,
-                        rCamData.mPos.z - rCamData.VEC3_0x8C.z);
-
-                    if ((delta.x == 0.0f) && (delta.z == 0.0f))
-                    {
-                        rCamData.mCamMtx[0][0] = 1.0f;
-                        rCamData.mCamMtx[0][1] = 0.0f;
-                        rCamData.mCamMtx[0][2] = 0.0f;
-                        rCamData.mCamMtx[0][3] = -rCamData.mPos.x;
-
-                        rCamData.mCamMtx[1][0] = 0.0f;
-                        rCamData.mCamMtx[1][1] = 0.0f;
-                        rCamData.mCamMtx[2][0] = 0.0f;
-                        rCamData.mCamMtx[2][2] = 0.0f;
-
-                        if (delta.y <= 0.0f)
-                        {
-                            rCamData.mCamMtx[1][2] = 1.0f;
-                            rCamData.mCamMtx[1][3] = -rCamData.mPos.z;
-                            rCamData.mCamMtx[2][1] = -1.0f;
-                            rCamData.mCamMtx[2][3] = rCamData.mPos.y;
-                        }
-                        else
-                        {
-                            rCamData.mCamMtx[1][2] = -1.0f;
-                            rCamData.mCamMtx[1][3] = rCamData.mPos.z;
-                            rCamData.mCamMtx[2][1] = 1.0f;
-                            rCamData.mCamMtx[2][3] = -rCamData.mPos.y;
-                        }
-                    }
-                    else
-                    {
-                        math::VEC3 stack_0x7C(delta.z, 0.0f, -delta.x);
-
-                        math::VEC3 cross;
-                        math::VEC3Normalize(&delta, &delta);
-                        math::VEC3Normalize(&stack_0x7C, &stack_0x7C);
-                        math::VEC3Cross(&cross, &delta, &stack_0x7C);
-
-                        f32 stack_0x20, stack_0x24;
-                        math::SinCosDeg(&stack_0x20, &stack_0x24, rCamData.FLOAT_0xA4);
-
-                        math::VEC3 stack_0x60;
-                        stack_0x60.x = stack_0x20 * cross.x + stack_0x24 * stack_0x7C.x;
-                        stack_0x60.y = stack_0x20 * cross.y;
-                        stack_0x60.z = stack_0x20 * cross.z + stack_0x24 * stack_0x7C.z;
-                        
-                        math::VEC3 stack_0x54;
-                        stack_0x54.x = stack_0x24 * cross.x - stack_0x20 * stack_0x7C.x;
-                        stack_0x54.y = stack_0x24 * cross.y;
-                        stack_0x54.z = stack_0x24 * cross.z - stack_0x20 * stack_0x7C.z;
-
-                        rCamData.mCamMtx[0][0] = stack_0x60.x;
-                        rCamData.mCamMtx[0][1] = stack_0x60.y;
-                        rCamData.mCamMtx[0][2] = stack_0x60.z;
-                        rCamData.mCamMtx[0][3] = -math::VEC3Dot(&rCamData.mPos, &stack_0x60);
-
-                        rCamData.mCamMtx[1][0] = stack_0x54.x;
-                        rCamData.mCamMtx[1][1] = stack_0x54.y;
-                        rCamData.mCamMtx[1][2] = stack_0x54.z;
-                        rCamData.mCamMtx[1][3] = -math::VEC3Dot(&rCamData.mPos, &stack_0x54);
-
-                        rCamData.mCamMtx[2][0] = delta.x;
-                        rCamData.mCamMtx[2][1] = delta.y;
-                        rCamData.mCamMtx[2][2] = delta.z;
-                        rCamData.mCamMtx[2][3] = -math::VEC3Dot(&rCamData.mPos, &delta);
-                    }
-                }
-                else
-                {
-                    f32 x1, y1, z1, x2, y2, z2;
-                    math::SinCosDeg(&x1, &x2, rCamData.VEC3_0x98.x);
-                    math::SinCosDeg(&y1, &y2, rCamData.VEC3_0x98.y);
-                    math::SinCosDeg(&z1, &z2, rCamData.VEC3_0x98.z);
-
-                    math::VEC3 a;
-                    a.x = x1 * y1 * z1 + y2 * z2;
-                    a.y = x2 * z1;
-                    a.z = x1 * y2 * z1 - y1 * z2;
-
-                    math::VEC3 b;
-                    b.x = x1 * y1 * z2 - y2 * z1;
-                    b.y = x2 * z2;
-                    b.z = x1 * y2 * z2 + y1 * z1;
-
-                    math::VEC3 c;
-                    c.x = x2 * y1;
-                    c.y = -x1;
-                    c.z = x2 * y2;
-
-                    rCamData.mCamMtx[0][0] = a.x; 
-                    rCamData.mCamMtx[0][1] = a.y;
-                    rCamData.mCamMtx[0][2] = a.z;
-                    rCamData.mCamMtx[0][3] = -math::VEC3Dot(&rCamData.mPos, &a);
-
-                    rCamData.mCamMtx[1][0] = b.x;
-                    rCamData.mCamMtx[1][1] = b.y;
-                    rCamData.mCamMtx[1][2] = b.z;
-                    rCamData.mCamMtx[1][3] = -math::VEC3Dot(&rCamData.mPos, &b);
-
-                    rCamData.mCamMtx[2][0] = c.x;
-                    rCamData.mCamMtx[2][1] = c.y;
-                    rCamData.mCamMtx[2][2] = c.z;
-                    rCamData.mCamMtx[2][3] = -math::VEC3Dot(&rCamData.mPos, &c);
-                }
-            }
-
-            rCamData.mFlags |= 0x8;
+        if (r.flags & FLAG_PROJ_ORTHO) {
+            C_MTXLightOrtho(*pMtx, r.projTop, r.projBottom, r.projLeft,
+                            r.projRight, r.lightScaleS, -r.lightScaleT,
+                            r.lightTransS, r.lightTransT);
+        } else if (r.flags & FLAG_PROJ_FRUSTUM) {
+            C_MTXLightFrustum(*pMtx, r.projTop, r.projBottom, r.projLeft,
+                              r.projRight, r.projNear, r.lightScaleS,
+                              -r.lightScaleT, r.lightTransS, r.lightTransT);
+        } else /* FLAG_PROJ_PERSP */ {
+            C_MTXLightPerspective(*pMtx, r.projFovy, r.projAspect,
+                                  r.lightScaleS, -r.lightScaleT, r.lightTransS,
+                                  r.lightTransT);
         }
     }
 }
+
+void Camera::GetEnvironmentTexMtx(math::MTX34* pMtx) const {
+    if (pMtx && IsValid()) {
+        const CameraData& r = ref();
+
+        math::MTX34Identity(pMtx);
+        pMtx->m[0][0] = r.lightScaleS;
+        pMtx->m[0][3] = r.lightTransS;
+        pMtx->m[1][1] = -r.lightScaleT;
+        pMtx->m[1][3] = r.lightTransT;
+        pMtx->m[2][2] = 0.0f;
+        pMtx->m[2][3] = 1.0f;
+    }
+}
+
+void Camera::GXSetViewport() const {
+    if (!IsValid()) {
+        return;
+    }
+
+    const CameraData& r = ref();
+    const GXRenderModeObj* pObj = G3DState::GetRenderModeObj();
+
+    if (pObj->field_rendering) {
+        ::GXSetViewportJitter(
+            r.viewportOrigin.x, r.viewportOrigin.y, r.viewportSize.x,
+            r.viewportSize.y, r.viewportNear, r.viewportFar,
+            r.flags & FLAG_VI_ODD_FIELD ? GX_FIELD_ODD : GX_FIELD_EVEN);
+    } else {
+        ::GXSetViewport(r.viewportOrigin.x, r.viewportOrigin.y,
+                        r.viewportSize.x, r.viewportSize.y, r.viewportNear,
+                        r.viewportFar);
+    }
+}
+
+void Camera::GXSetProjection() const {
+    if (!IsValid()) {
+        return;
+    }
+
+    const CameraData& r = ref();
+
+    if (!(r.flags & FLAG_PROJ_MTX_READY)) {
+        UpdateProjectionMtx();
+    }
+
+    ::GXSetProjection(r.projMtx, r.projType);
+}
+
+void Camera::GXSetScissor() const {
+    if (!IsValid()) {
+        return;
+    }
+
+    const CameraData& r = ref();
+    ::GXSetScissor(r.scissorX, r.scissorY, r.scissorWidth, r.scissorHeight);
+}
+
+void Camera::GXSetScissorBoxOffset() const {
+    if (!IsValid()) {
+        return;
+    }
+
+    const CameraData& r = ref();
+    ::GXSetScissorBoxOffset(r.scissorOffsetX, r.scissorOffsetY);
+}
+
+void Camera::UpdateCameraMtx() const {
+    CameraData& r = const_cast<CameraData&>(ref());
+
+    if (r.flags & FLAG_CAM_LOOKAT) {
+        C_MTXLookAt(r.cameraMtx, r.cameraPos, r.cameraUp, r.cameraTarget);
+    } else if (r.flags & FLAG_CAM_AIM) {
+        math::MTX34& rMtx = r.cameraMtx;
+        math::VEC3& rPos = r.cameraPos;
+        math::VEC3& rTarget = r.cameraTarget;
+
+        math::VEC3 back(rPos.x - rTarget.x, rPos.y - rTarget.y,
+                        rPos.z - rTarget.z);
+
+        if (back.x == 0.0f && back.z == 0.0f) {
+            rMtx[0][0] = 1.0f;
+            rMtx[0][1] = 0.0f;
+            rMtx[0][2] = 0.0f;
+            rMtx[0][3] = -rPos.x;
+
+            rMtx[1][0] = 0.0f;
+            rMtx[1][1] = 0.0f;
+            rMtx[2][0] = 0.0f;
+            rMtx[2][2] = 0.0f;
+
+            if (back.y <= 0.0f) {
+                rMtx[1][2] = 1.0f;
+                rMtx[1][3] = -rPos.z;
+                rMtx[2][1] = -1.0f;
+                rMtx[2][3] = rPos.y;
+            } else {
+                rMtx[1][2] = -1.0f;
+                rMtx[1][3] = rPos.z;
+                rMtx[2][1] = 1.0f;
+                rMtx[2][3] = -rPos.y;
+            }
+        } else {
+            math::VEC3 _r(back.z, 0.0f, -back.x);
+
+            math::VEC3 u;
+            math::VEC3Normalize(&back, &back);
+            math::VEC3Normalize(&_r, &_r);
+            math::VEC3Cross(&u, &back, &_r);
+
+            f32 st, ct;
+            math::SinCosDeg(&st, &ct, r.cameraTwist);
+
+            math::VEC3 right, up;
+            right.x = st * u.x + ct * _r.x;
+            right.y = st * u.y;
+            right.z = st * u.z + ct * _r.z;
+
+            up.x = ct * u.x - st * _r.x;
+            up.y = ct * u.y;
+            up.z = ct * u.z - st * _r.z;
+
+            rMtx[0][0] = right.x;
+            rMtx[0][1] = right.y;
+            rMtx[0][2] = right.z;
+            rMtx[0][3] = -math::VEC3Dot(&rPos, &right);
+
+            rMtx[1][0] = up.x;
+            rMtx[1][1] = up.y;
+            rMtx[1][2] = up.z;
+            rMtx[1][3] = -math::VEC3Dot(&rPos, &up);
+
+            rMtx[2][0] = back.x;
+            rMtx[2][1] = back.y;
+            rMtx[2][2] = back.z;
+            rMtx[2][3] = -math::VEC3Dot(&rPos, &back);
+        }
+    } else /* FLAG_CAM_ROTATE */ {
+        math::MTX34& rMtx = r.cameraMtx;
+        math::VEC3& rPos = r.cameraPos;
+
+        f32 sx, sy, sz, cx, cy, cz;
+        math::SinCosDeg(&sx, &cx, r.cameraRotate.x);
+        math::SinCosDeg(&sy, &cy, r.cameraRotate.y);
+        math::SinCosDeg(&sz, &cz, r.cameraRotate.z);
+
+        math::VEC3 right, up, back;
+
+        right.x = sx * sy * sz + cy * cz;
+        right.y = cx * sz;
+        right.z = sx * cy * sz - sy * cz;
+
+        up.x = sx * sy * cz - cy * sz;
+        up.y = cx * cz;
+        up.z = sx * cy * cz + sy * sz;
+
+        back.x = cx * sy;
+        back.y = -sx;
+        back.z = cx * cy;
+
+        rMtx[0][0] = right.x;
+        rMtx[0][1] = right.y;
+        rMtx[0][2] = right.z;
+        rMtx[0][3] = -math::VEC3Dot(&rPos, &right);
+
+        rMtx[1][0] = up.x;
+        rMtx[1][1] = up.y;
+        rMtx[1][2] = up.z;
+        rMtx[1][3] = -math::VEC3Dot(&rPos, &up);
+
+        rMtx[2][0] = back.x;
+        rMtx[2][1] = back.y;
+        rMtx[2][2] = back.z;
+        rMtx[2][3] = -math::VEC3Dot(&rPos, &back);
+    }
+
+    r.flags |= FLAG_CAM_MTX_READY;
+}
+
+void Camera::UpdateProjectionMtx() const {
+    CameraData& r = const_cast<CameraData&>(ref());
+
+    if (r.flags & FLAG_PROJ_ORTHO) {
+        C_MTXOrtho(r.projMtx, r.projTop, r.projBottom, r.projLeft, r.projRight,
+                   r.projNear, r.projFar);
+    } else if (r.flags & FLAG_PROJ_FRUSTUM) {
+        C_MTXFrustum(r.projMtx, r.projTop, r.projBottom, r.projLeft,
+                     r.projRight, r.projNear, r.projFar);
+    } else /* FLAG_PROJ_PERSP */ {
+        C_MTXPerspective(r.projMtx, r.projFovy, r.projAspect, r.projNear,
+                         r.projFar);
+    }
+
+    r.flags |= FLAG_PROJ_MTX_READY;
+}
+
+} // namespace g3d
+} // namespace nw4r

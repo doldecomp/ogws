@@ -223,10 +223,7 @@ void __GXSetViewport(void) {
 
 void GXSetViewportJitter(f32 ox, f32 oy, f32 sx, f32 sy, f32 near, f32 far,
                          u32 nextField) {
-    // "Field" as in VI field
-    // TODO: Is this an enum? I don't know anything about the return value other
-    // than that it is a u32 (NW4R signature)
-    if (nextField == 0) {
+    if (nextField == GX_FIELD_EVEN) {
         oy -= 0.5f;
     }
 

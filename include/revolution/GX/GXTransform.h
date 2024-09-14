@@ -1,11 +1,18 @@
 #ifndef RVL_SDK_GX_TRANSFORM_H
 #define RVL_SDK_GX_TRANSFORM_H
-#include <revolution/GX/GXTypes.h>
-#include <revolution/MTX.h>
 #include <types.h>
+
+#include <revolution/GX/GXTypes.h>
+
+#include <revolution/MTX.h>
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+typedef enum {
+    GX_FIELD_EVEN,
+    GX_FIELD_ODD,
+} GXInterlaceField;
 
 void GXSetProjection(const Mtx44 proj, GXProjectionType type);
 void GXSetProjectionv(const f32 proj[7]);

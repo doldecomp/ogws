@@ -17,7 +17,7 @@ namespace nw4r
                 const math::MTX34 *);
 
             void SetRenderModeObj(const GXRenderModeObj&);
-            GXRenderModeObj& GetRenderModeObj();
+            GXRenderModeObj* GetRenderModeObj();
             void Invalidate(u32);
         }
     }
