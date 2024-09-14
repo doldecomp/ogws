@@ -34,6 +34,7 @@ f32 HermiteInterpolation(f32 v0, f32 t0, f32 v1, f32 t1, f32 p, f32 d) {
  * The linear interpolating function f satisfies the following conditions:
  *        f(0)		= a
  *        f(0x8000)	= b
+ *
  * The value returned is f(ratio).
  */
 u8 LinearInterpColorElem(u8 a, u8 b, s16 ratio) {
