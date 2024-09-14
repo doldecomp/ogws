@@ -58,7 +58,6 @@ public:
     };
 
 public:
-    Camera(void* pData) : ResCommon(pData) {}
     Camera(CameraData* pData);
 
     void Init();

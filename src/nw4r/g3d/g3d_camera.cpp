@@ -216,7 +216,7 @@ void Camera::SetOrtho(f32 top, f32 bottom, f32 left, f32 right, f32 near,
 }
 
 void Camera::SetProjectionMtxDirectly(const math::MTX44* pMtx) {
-    if (pMtx && IsValid()) {
+    if (pMtx != NULL && IsValid()) {
         CameraData& r = ref();
 
         math::MTX44Copy(&r.projMtx, pMtx);
@@ -306,7 +306,7 @@ void Camera::GetViewport(f32* pX, f32* pY, f32* pWidth, f32* pHeight,
 }
 
 void Camera::GetCameraMtx(math::MTX34* pMtx) const {
-    if (pMtx && IsValid()) {
+    if (pMtx != NULL && IsValid()) {
         const CameraData& r = ref();
 
         if (!(r.flags & FLAG_CAM_MTX_READY)) {
@@ -318,7 +318,7 @@ void Camera::GetCameraMtx(math::MTX34* pMtx) const {
 }
 
 void Camera::GetProjectionMtx(math::MTX44* pMtx) const {
-    if (pMtx && IsValid()) {
+    if (pMtx != NULL && IsValid()) {
         const CameraData& r = ref();
 
         if (!(r.flags & FLAG_PROJ_MTX_READY)) {
@@ -330,7 +330,7 @@ void Camera::GetProjectionMtx(math::MTX44* pMtx) const {
 }
 
 void Camera::GetProjectionTexMtx(math::MTX34* pMtx) const {
-    if (pMtx && IsValid()) {
+    if (pMtx != NULL && IsValid()) {
         const CameraData& r = ref();
 
         if (r.flags & FLAG_PROJ_ORTHO) {
@@ -350,7 +350,7 @@ void Camera::GetProjectionTexMtx(math::MTX34* pMtx) const {
 }
 
 void Camera::GetEnvironmentTexMtx(math::MTX34* pMtx) const {
-    if (pMtx && IsValid()) {
+    if (pMtx != NULL && IsValid()) {
         const CameraData& r = ref();
 
         math::MTX34Identity(pMtx);

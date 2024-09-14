@@ -1,8 +1,10 @@
 #ifndef RVL_SDK_GX_PIXEL_H
 #define RVL_SDK_GX_PIXEL_H
-#include <revolution/GX/GXTypes.h>
-#include <revolution/MTX.h>
 #include <types.h>
+
+#include <revolution/GX/GXTypes.h>
+
+#include <revolution/MTX.h>
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -10,6 +12,8 @@ extern "C" {
 typedef struct _GXFogAdjTable {
     u16 r[10]; // at 0x0
 } GXFogAdjTable;
+
+#define GX_FOG_ADJ_TABLE_SZ 10
 
 void GXSetFog(GXFogType type, GXColor color, f32 start, f32 end, f32 near,
               f32 far);
