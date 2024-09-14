@@ -1,25 +1,24 @@
-#include "g3d_resanmvis.h"
-#include "math_arithmetic.h"
+#pragma ipa file // TODO: REMOVE AFTER REFACTOR
 
-namespace nw4r
-{
-	using namespace math;
-	
-	namespace g3d
-	{
-		using namespace detail;
-		
-		bool ResAnmVis::GetAnmResult(u32 i, float time) const
-		{
-			const ResAnmVisNodeData * pNodeAnm = GetNodeAnm(i);
-			
-			const ResAnmVisData & anmVis = ref();
-			
-			if (pNodeAnm->mFlags & 0x2) return pNodeAnm->mFlags & 0x1;
-			
-			float t = ClipFrame<const ResAnmVisInfoData>(anmVis.mInfo, time);
-			
-			return GetResBoolAnmFramesResult(pNodeAnm->mBoolFrames, FFloor(t));
-		}
-	}
+#include <nw4r/g3d.h>
+
+namespace nw4r {
+namespace g3d {
+
+bool ResAnmVis::GetAnmResult(u32 id, f32 frame) const {
+    const ResAnmVisAnmData* pAnmData = GetNodeAnm(id);
+    const ResAnmVisInfoData& rInfoData = ref().info;
+
+    if (pAnmData->flags & ResAnmVisAnmData::FLAG_ANM_IS_CONSTANT) {
+        return pAnmData->flags & ResAnmVisAnmData::FLAG_ANM_CONSTANT_VALUE;
+    }
+
+    f32 fClippedFrame = detail::ClipFrame(rInfoData, frame);
+    int iClippedFrame = static_cast<int>(math::FFloor(fClippedFrame));
+
+    return detail::GetResBoolAnmFramesResult(&pAnmData->visibility,
+                                             iClippedFrame);
 }
+
+} // namespace g3d
+} // namespace nw4r

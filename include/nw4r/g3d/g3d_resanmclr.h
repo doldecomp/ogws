@@ -9,12 +9,6 @@
 namespace nw4r {
 namespace g3d {
 
-struct ResAnmClrInfoData {
-    u16 numFrame;     // at 0x0
-    u16 numMaterial;  // at 0x2
-    AnmPolicy policy; // at 0x4
-};
-
 struct ResAnmClrAnmData {
     u32 mask;              // at 0x0
     ResColorAnmData color; // at 0x4
@@ -29,6 +23,12 @@ struct ResAnmClrMatData {
 
     // Two bits in 'flags' for each animation
     enum Flag { FLAG_ANM_EXISTS = (1 << 0), FLAG_ANM_CONSTANT = (1 << 1) };
+};
+
+struct ResAnmClrInfoData {
+    u16 numFrame;     // at 0x0
+    u16 numMaterial;  // at 0x2
+    AnmPolicy policy; // at 0x4
 };
 
 struct ResAnmClrData {
@@ -59,13 +59,13 @@ public:
 
     void GetAnmResult(ClrAnmResult* pResult, u32 id, f32 frame) const;
 
-    const ResAnmClrMatData* GetMatAnm(int id) const {
+    const ResAnmClrMatData* GetMatAnm(int i) const {
         return static_cast<ResAnmClrMatData*>(
-            ofs_to_obj<ResDic>(ref().toClrDataDic)[id]);
+            ofs_to_obj<ResDic>(ref().toClrDataDic)[i]);
     }
-    const ResAnmClrMatData* GetMatAnm(u32 id) const {
+    const ResAnmClrMatData* GetMatAnm(u32 i) const {
         return static_cast<ResAnmClrMatData*>(
-            ofs_to_obj<ResDic>(ref().toClrDataDic)[id]);
+            ofs_to_obj<ResDic>(ref().toClrDataDic)[i]);
     }
 
     int GetNumFrame() const {

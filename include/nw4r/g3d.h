@@ -8,6 +8,7 @@
 #include <nw4r/g3d/g3d_fog.h>
 #include <nw4r/g3d/g3d_resanm.h>
 #include <nw4r/g3d/g3d_resanmclr.h>
+#include <nw4r/g3d/g3d_resanmvis.h>
 #include <nw4r/g3d/g3d_rescommon.h>
 #include <nw4r/g3d/g3d_resdict.h>
 #include <nw4r/g3d/g3d_resfile.h>
