@@ -22,7 +22,12 @@ struct ResAnmClrMatData {
     static const int NUM_OF_CLA_COLOR = 11;
 
     // Two bits in 'flags' for each animation
-    enum Flag { FLAG_ANM_EXISTS = (1 << 0), FLAG_ANM_CONSTANT = (1 << 1) };
+    enum Flag {
+        FLAG_ANM_EXISTS = (1 << 0),
+        FLAG_ANM_CONSTANT = (1 << 1),
+
+        NUM_OF_FLAGS = 2
+    };
 };
 
 struct ResAnmClrInfoData {
