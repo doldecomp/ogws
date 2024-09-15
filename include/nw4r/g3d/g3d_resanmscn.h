@@ -50,7 +50,7 @@ public:
     }
 
     bool CheckRevision() const {
-        return ref().revision == REVISION;
+        return GetRevision() == REVISION;
     }
 
     ResAnmFog GetResAnmFogByRefNumber(u32 ref) const;

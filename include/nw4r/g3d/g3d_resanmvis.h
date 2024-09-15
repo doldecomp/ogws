@@ -49,7 +49,7 @@ public:
     }
 
     bool CheckRevision() const {
-        return ref().revision == REVISION;
+        return GetRevision() == REVISION;
     }
 
     bool GetAnmResult(u32 id, f32 frame) const;

@@ -13,11 +13,11 @@ namespace nw4r
         {
             bool identity;
 
-            if (mode == TexSrtTypedef::TEX_MTX_MAYA)
+            if (mode == TexSrtTypedef::TEXMATRIXMODE_MAYA)
             {
                 identity = !detail::dcc::CalcTexMtx_Maya(pMtx, set, srt, flag);
             }
-            else if (mode == TexSrtTypedef::TEX_MTX_XSI)
+            else if (mode == TexSrtTypedef::TEXMATRIXMODE_XSI)
             {
                 identity = !detail::dcc::CalcTexMtx_Xsi(pMtx, set, srt, flag);
             }

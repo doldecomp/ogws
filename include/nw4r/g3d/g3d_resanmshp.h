@@ -38,7 +38,7 @@ public:
     }
 
     bool CheckRevision() const {
-        return ref().revision == REVISION;
+        return GetRevision() == REVISION;
     }
 };
 

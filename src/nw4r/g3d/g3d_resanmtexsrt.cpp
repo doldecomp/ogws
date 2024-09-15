@@ -1,111 +1,120 @@
-#ifdef __DECOMP_NON_MATCHING
-#include "ut_algorithm.h"
-#include "math_arithmetic.h"
-#include "g3d_anmtexsrt.h"
-#include "g3d_resanmtexsrt.h"
-#include "g3d_restex.h"
+#pragma ipa file // TODO: REMOVE AFTER REFACTOR
 
-namespace nw4r
-{
-	using namespace ut;
-	using namespace math;
-	
-	namespace g3d
-	{
-		using namespace detail;
-		
-		namespace
-		{
-			inline u32 MakeResult(TexSrt * pSrt, const ResAnmTexSrtTexData * pData, float time)
-			{
-				// register/address information is for the first loop in GetAnmResult
-				u32 flags = pData->mFlags; // for the first loop: r31
-				u32 i = 0; // for the first loop: r29
-				
-				if (!(flags & 0x2))
-				{
-					//80057990
-					pSrt->mScaleX = GetResAnmResult(pData->mAnms + i++, time, flags & 0x20);
-					
-					if (flags & 0x10)
-					{
-						pSrt->mScaleY = pSrt->mScaleX;
-					}
-					else
-					{
-						pSrt->mScaleY = GetResAnmResult(pData->mAnms + i++, time, flags & 0x40);
-					}
-				}
-				else
-				{
-					//80057A00
-					pSrt->mScaleX = 1.0f;
-					pSrt->mScaleY = 1.0f;
-				}
-				//80057A08
-				if (!(flags & 0x4))
-				{
-					//80057A10
-					pSrt->mRotation = GetResAnmResult(pData->mAnms + i++, time, flags & 0x80);
-				}
-				else
-				{
-					//80057A48
-					pSrt->mRotation = 0.0f;
-				}
-				//80057A4C
-				if (!(flags & 0x8))
-				{
-					//80057A54
-					bool r0 = flags & 0x100;
-					bool r21 = flags & 0x200;
-					
-					pSrt->mTranslationX = GetResAnmResult(pData->mAnms + i++, time, r0);
-					pSrt->mTranslationY = GetResAnmResult(pData->mAnms + i++, time, r21);
-				}
-				else
-				{
-					//80057AC0
-					pSrt->mTranslationX = 0.0f;
-					pSrt->mTranslationY = 0.0f;
-				}
-				
-				return flags & 0xF;
-			}
-		}
-		
-		void ResAnmTexSrt::GetAnmResult(TexSrtAnmResult * pResult, u32 i, float time) const
-		{
-			const ResAnmTexSrtMatData * pMatAnm = GetMatAnm(i); // at r30
-			//80057934
-			u32 r26 = pMatAnm->FLAGS_0x4;
-			u32 r24 = pMatAnm->FLAGS_0x8;
-			
-			const s32 * pOffset = pMatAnm->mTexOffsets; // at r25
-			
-			for (int i = 0; r26; i++, r26 >>= 1)
-			{
-				if (r26 & 1)
-				{
-					const ResAnmTexSrtTexData * pData = static_cast<const ResAnmTexSrtTexData *>(AddOffsetToPtr<s32>(pMatAnm, *pOffset++));
-					
-					pResult->FLAGS_0x0 |= MakeResult(pResult->mSrts + i, pData, time) << (i * 4);
-				}
-			}
-			//80057AF0
-			for (int i = 0; r24; i++, r24 >>= 1)
-			{
-				if (r24 & 1)
-				{
-					const ResAnmTexSrtTexData * pData = static_cast<const ResAnmTexSrtTexData *>(AddOffsetToPtr<s32>(pMatAnm, *pOffset++));
-					
-					pResult->FLAGS_0x4 |= MakeResult(pResult->mSrts + (i + 8), pData, time) << (i * 4);
-				}
-			}
-			//80057C90
-		}
-	}
+#include <nw4r/g3d.h>
+
+#include <nw4r/math.h>
+#include <nw4r/ut.h>
+
+namespace nw4r {
+namespace g3d {
+namespace {
+
+DECOMP_INLINE u32 MakeResult(TexSrt* pSrt, const ResAnmTexSrtTexData* pTexData,
+                             f32 frame) {
+    int anmIdx = 0;
+    u32 flags = pTexData->flags;
+    TexSrt& rSrt = *pSrt;
+
+    if (!(flags & ResAnmTexSrtTexData::FLAG_SCALE_ONE)) {
+        bool suConstant = flags & ResAnmTexSrtTexData::FLAG_SCALE_CONSTANT_U;
+
+        rSrt.Su = detail::GetResAnmResult(&pTexData->anms[anmIdx++], frame,
+                                          suConstant);
+
+        if (flags & ResAnmTexSrtTexData::FLAG_SCALE_UNIFORM) {
+            rSrt.Sv = rSrt.Su;
+        } else {
+            bool svConstant =
+                flags & ResAnmTexSrtTexData::FLAG_SCALE_CONSTANT_V;
+
+            rSrt.Sv = detail::GetResAnmResult(&pTexData->anms[anmIdx++], frame,
+                                              svConstant);
+        }
+    } else {
+        rSrt.Su = 1.0f;
+        rSrt.Sv = 1.0f;
+    }
+
+    if (!(flags & ResAnmTexSrtTexData::FLAG_ROT_ZERO)) {
+        bool rConstant = flags & ResAnmTexSrtTexData::FLAG_ROT_CONSTANT;
+
+        rSrt.R = detail::GetResAnmResult(&pTexData->anms[anmIdx++], frame,
+                                         rConstant);
+    } else {
+        rSrt.R = 0.0f;
+    }
+
+    if (!(flags & ResAnmTexSrtTexData::FLAG_TRANS_ZERO)) {
+        bool tuConstant = flags & ResAnmTexSrtTexData::FLAG_TRANS_CONSTANT_U;
+        bool tvConstant = flags & ResAnmTexSrtTexData::FLAG_TRANS_CONSTANT_V;
+
+        rSrt.Tu = detail::GetResAnmResult(&pTexData->anms[anmIdx++], frame,
+                                          tuConstant);
+        rSrt.Tv = detail::GetResAnmResult(&pTexData->anms[anmIdx++], frame,
+                                          tvConstant);
+    } else {
+        rSrt.Tu = 0.0f;
+        rSrt.Tv = 0.0f;
+    }
+
+    return flags &
+           (ResAnmTexSrtTexData::FLAG_0 | ResAnmTexSrtTexData::FLAG_SCALE_ONE |
+            ResAnmTexSrtTexData::FLAG_ROT_ZERO |
+            ResAnmTexSrtTexData::FLAG_TRANS_ZERO);
 }
-#else
-#error This file has yet to be decompiled accurately. Use "g3d_resanmtexsrt.s" instead.
-#endif
+
+} // namespace
+
+/**
+ * https://decomp.me/scratch/BBMON
+ */
+void ResAnmTexSrt::GetAnmResult(TexSrtAnmResult* pResult, u32 id,
+                                f32 frame) const {
+    const ResAnmTexSrtMatData* pMatData = GetMatAnm(id);
+    const s32* pToTexData = pMatData->toResAnmTexSrtTexData;
+    u32 flags = pMatData->flags;
+    u32 indFlags = pMatData->indFlags;
+
+    pResult->flags = 0;
+    pResult->indFlags = 0;
+    pResult->texMtxMode = ref().info.texMtxMode;
+
+    int index;
+
+    for (index = 0; flags != 0;
+         flags >>= ResAnmTexSrtMatData::NUM_OF_FLAGS, index++) {
+
+        if (!(flags & ResAnmTexSrtMatData::FLAG_ANM_EXISTS)) {
+            continue;
+        }
+
+        int srtIndex = index;
+
+        const ResAnmTexSrtTexData* pTexData =
+            static_cast<const ResAnmTexSrtTexData*>(
+                ut::AddOffsetToPtr(pMatData, *pToTexData++));
+
+        u32 result = MakeResult(&pResult->srt[srtIndex], pTexData, frame);
+        pResult->flags |= result << (index * TexSrtAnmResult::NUM_OF_FLAGS);
+    }
+
+    for (index = 0; indFlags != 0;
+         indFlags >>= ResAnmTexSrtMatData::NUM_OF_FLAGS, index++) {
+
+        if (!(indFlags & ResAnmTexSrtMatData::FLAG_ANM_EXISTS)) {
+            continue;
+        }
+
+        int srtIndex = index + TexSrtAnmResult::NUM_OF_MAT_TEX_MTX;
+
+        const ResAnmTexSrtTexData* pTexData =
+            static_cast<const ResAnmTexSrtTexData*>(
+                ut::AddOffsetToPtr(pMatData, *pToTexData++));
+
+        u32 result = MakeResult(&pResult->srt[srtIndex], pTexData, frame);
+        pResult->indFlags |= result << (index * TexSrtAnmResult::NUM_OF_FLAGS);
+    }
+}
+
+} // namespace g3d
+} // namespace nw4r

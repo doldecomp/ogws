@@ -59,7 +59,7 @@ public:
     }
 
     bool CheckRevision() const {
-        return ref().revision == REVISION;
+        return GetRevision() == REVISION;
     }
 
     void GetAnmResult(ClrAnmResult* pResult, u32 id, f32 frame) const;
