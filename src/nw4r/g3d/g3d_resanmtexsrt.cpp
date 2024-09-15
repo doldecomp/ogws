@@ -65,9 +65,6 @@ DECOMP_INLINE u32 MakeResult(TexSrt* pSrt, const ResAnmTexSrtTexData* pTexData,
 
 } // namespace
 
-/**
- * https://decomp.me/scratch/BBMON
- */
 void ResAnmTexSrt::GetAnmResult(TexSrtAnmResult* pResult, u32 id,
                                 f32 frame) const {
     const ResAnmTexSrtMatData* pMatData = GetMatAnm(id);
@@ -91,7 +88,7 @@ void ResAnmTexSrt::GetAnmResult(TexSrtAnmResult* pResult, u32 id,
         int srtIndex = index;
 
         const ResAnmTexSrtTexData* pTexData =
-            static_cast<const ResAnmTexSrtTexData*>(
+            reinterpret_cast<const ResAnmTexSrtTexData*>(
                 ut::AddOffsetToPtr(pMatData, *pToTexData++));
 
         u32 result = MakeResult(&pResult->srt[srtIndex], pTexData, frame);
@@ -108,7 +105,7 @@ void ResAnmTexSrt::GetAnmResult(TexSrtAnmResult* pResult, u32 id,
         int srtIndex = index + TexSrtAnmResult::NUM_OF_MAT_TEX_MTX;
 
         const ResAnmTexSrtTexData* pTexData =
-            static_cast<const ResAnmTexSrtTexData*>(
+            reinterpret_cast<const ResAnmTexSrtTexData*>(
                 ut::AddOffsetToPtr(pMatData, *pToTexData++));
 
         u32 result = MakeResult(&pResult->srt[srtIndex], pTexData, frame);
