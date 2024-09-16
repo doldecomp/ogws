@@ -140,6 +140,12 @@ NW4R_O_FILES := \
 	build/nw4r/g3d/g3d_resanmtexsrt.o \
 	build/asm/nw4r/g3d/g3d_resanmchr.o \
 	build/asm/nw4r/g3d/g3d_reslightset.o \
+	build/asm/nw4r/g3d/g3d_resanmamblight.o \
+	build/asm/nw4r/g3d/g3d_resanmlight.o \
+	build/asm/nw4r/g3d/g3d_resanmfog.o \
+	build/asm/nw4r/g3d/g3d_resanmcamera.o \
+	build/asm/nw4r/g3d/g3d_resanmscn.o \
+	build/asm/nw4r/g3d/g3d_resanmshp.o \
 	build/asm/nw4r/g3d/g3d_anmvis.o \
 	build/asm/nw4r/g3d/g3d_anmclr.o \
 	build/asm/nw4r/g3d/g3d_anmtexpat.o \
