@@ -8,12 +8,16 @@
 #include <nw4r/g3d/g3d_cpu.h>
 #include <nw4r/g3d/g3d_fog.h>
 #include <nw4r/g3d/g3d_resanm.h>
+#include <nw4r/g3d/g3d_resanmamblight.h>
 #include <nw4r/g3d/g3d_resanmclr.h>
+#include <nw4r/g3d/g3d_resanmlight.h>
+#include <nw4r/g3d/g3d_resanmscn.h>
 #include <nw4r/g3d/g3d_resanmtexpat.h>
 #include <nw4r/g3d/g3d_resanmvis.h>
 #include <nw4r/g3d/g3d_rescommon.h>
 #include <nw4r/g3d/g3d_resdict.h>
 #include <nw4r/g3d/g3d_resfile.h>
+#include <nw4r/g3d/g3d_reslightset.h>
 #include <nw4r/g3d/g3d_resmat.h>
 #include <nw4r/g3d/g3d_resmdl.h>
 #include <nw4r/g3d/g3d_resnode.h>

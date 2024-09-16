@@ -3,9 +3,12 @@
 #include <nw4r/types_nw4r.h>
 
 #include <nw4r/g3d/g3d_resanm.h>
+#include <nw4r/g3d/g3d_resanmamblight.h>
 #include <nw4r/g3d/g3d_resanmcamera.h>
 #include <nw4r/g3d/g3d_resanmfog.h>
+#include <nw4r/g3d/g3d_resanmlight.h>
 #include <nw4r/g3d/g3d_rescommon.h>
+#include <nw4r/g3d/g3d_reslightset.h>
 
 namespace nw4r {
 namespace g3d {
@@ -45,6 +48,8 @@ public:
 public:
     ResAnmScn(void* pData) : ResCommon(pData) {}
 
+    bool Bind(ResAnmScn scene);
+
     u32 GetRevision() const {
         return ref().revision;
     }
@@ -53,6 +58,18 @@ public:
         return GetRevision() == REVISION;
     }
 
+    bool HasResAnmAmbLight() const;
+    bool HasResAnmLight() const;
+
+    ResAnmAmbLight GetResAnmAmbLight(ResName name) const;
+    ResAnmAmbLight GetResAnmAmbLight(int i) const;
+
+    ResAnmLight GetResAnmLight(ResName name) const;
+    ResAnmLight GetResAnmLight(int i) const;
+
+    ResLightSet GetResLightSetByRefNumber(u32 ref) const;
+    ResAnmAmbLight GetResAnmAmbLightByRefNumber(u32 ref) const;
+    ResAnmLight GetResAnmLightByRefNumber(u32 ref) const;
     ResAnmFog GetResAnmFogByRefNumber(u32 ref) const;
     ResAnmCamera GetResAnmCameraByRefNumber(u32 ref) const;
 

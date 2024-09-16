@@ -35,8 +35,8 @@ f32 GetResKeyFrameAnmResult(const ResKeyFrameAnmData* pData, f32 frame);
  *
  ******************************************************************************/
 union ResAnmData {
-    f32 constValue;
-    s32 toResKeyFrameAnmData;
+    f32 constValue;           // at 0x0
+    s32 toResKeyFrameAnmData; // at 0x0
 };
 
 enum AnmPolicy { ANM_POLICY_ONETIME, ANM_POLICY_LOOP, ANM_POLICY_MAX };
@@ -75,8 +75,8 @@ template <typename T> inline f32 ClipFrame(T& rInfo, f32 frame) {
  *
  ******************************************************************************/
 union ResColorAnmData {
-    u32 constValue;
-    s32 toResColorAnmFramesData;
+    u32 constValue;              // at 0x0
+    s32 toResColorAnmFramesData; // at 0x0
 };
 struct ResColorAnmFramesData {
     u32 frameColors[1]; // at 0x0
@@ -107,6 +107,9 @@ inline u32 GetResColorAnmResult(const ResColorAnmData* pData, f32 frame,
  * ResBoolAnm
  *
  ******************************************************************************/
+union ResBoolAnmData {
+    s32 toResBoolAnmFramesData; // at 0x0
+};
 struct ResBoolAnmFramesData {
     u32 boolBits[1]; // at 0x0
 };
