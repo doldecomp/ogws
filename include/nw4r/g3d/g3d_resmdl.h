@@ -60,7 +60,7 @@ struct ResMdlInfoData : ResMdlInfoDataTypedef {
 class ResMdlInfo : public ResCommon<ResMdlInfoData>,
                    public ResMdlInfoDataTypedef {
 public:
-    explicit ResMdlInfo(void* pData) : ResCommon(pData) {}
+    NW4R_G3D_RESOURCE_FUNC_DEF(ResMdlInfo);
 };
 
 /******************************************************************************
@@ -93,7 +93,7 @@ public:
     static const int REVISION = 9;
 
 public:
-    explicit ResMdl(void* pData) : ResCommon(pData) {}
+    NW4R_G3D_RESOURCE_FUNC_DEF(ResMdl);
 
     void Init();
     void Terminate();

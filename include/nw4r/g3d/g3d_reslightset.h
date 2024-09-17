@@ -27,7 +27,7 @@ struct ResLightSetData {
 
 class ResLightSet : public ResCommon<ResLightSetData> {
 public:
-    explicit ResLightSet(void* pData) : ResCommon(pData) {}
+    NW4R_G3D_RESOURCE_FUNC_DEF(ResLightSet);
 
     bool Bind(ResAnmScn scene);
 

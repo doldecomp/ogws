@@ -28,7 +28,7 @@ struct ResGenModeData {
 
 class ResGenMode : public ResCommon<ResGenModeData> {
 public:
-    explicit ResGenMode(void* pData) : ResCommon(pData) {}
+    NW4R_G3D_RESOURCE_FUNC_DEF(ResGenMode);
 };
 
 /******************************************************************************
@@ -47,7 +47,7 @@ struct ResMatMiscData {
 
 class ResMatMisc : public ResCommon<ResMatMiscData> {
 public:
-    explicit ResMatMisc(void* pData) : ResCommon(pData) {}
+    NW4R_G3D_RESOURCE_FUNC_DEF(ResMatMisc);
 };
 
 /******************************************************************************
@@ -76,7 +76,7 @@ struct ResTexPlttInfoData {
 
 class ResTexPlttInfo : public ResCommon<ResTexPlttInfoData> {
 public:
-    explicit ResTexPlttInfo(void* pData) : ResCommon(pData) {}
+    NW4R_G3D_RESOURCE_FUNC_DEF(ResTexPlttInfo);
 };
 
 /******************************************************************************
@@ -88,7 +88,7 @@ struct ResMatTexCoordGenData {};
 
 class ResMatTexCoordGen : public ResCommon<ResMatTexCoordGenData> {
 public:
-    explicit ResMatTexCoordGen(void* pData) : ResCommon(pData) {}
+    NW4R_G3D_RESOURCE_FUNC_DEF(ResMatTexCoordGen);
 
     bool GXGetTexCoordGen2(GXTexCoordID, GXTexGenType*, GXTexGenSrc*, u8*,
                            u32*);
@@ -115,7 +115,7 @@ struct ResTexObjData {};
 
 class ResTexObj : public ResCommon<ResTexObjData> {
 public:
-    explicit ResTexObj(void* pData) : ResCommon(pData) {}
+    NW4R_G3D_RESOURCE_FUNC_DEF(ResTexObj);
 };
 
 /******************************************************************************
@@ -127,7 +127,7 @@ struct ResTlutObjData {};
 
 class ResTlutObj : public ResCommon<ResTlutObjData> {
 public:
-    explicit ResTlutObj(void* pData) : ResCommon(pData) {}
+    NW4R_G3D_RESOURCE_FUNC_DEF(ResTlutObj);
 };
 
 /******************************************************************************
@@ -139,7 +139,7 @@ struct ResTexSrtData {};
 
 class ResTexSrt : public ResCommon<ResTexSrtData> {
 public:
-    explicit ResTexSrt(void* pData) : ResCommon(pData) {}
+    NW4R_G3D_RESOURCE_FUNC_DEF(ResTexSrt);
 
     void SetMapMode(u32, u32, int, int);
 };
@@ -163,7 +163,7 @@ struct ResChanData {
 
 class ResMatChan : public ResCommon<ResChanData> {
 public:
-    explicit ResMatChan(void* pData) : ResCommon(pData) {}
+    NW4R_G3D_RESOURCE_FUNC_DEF_EX(ResMatChan, ResChanData);
 };
 
 /******************************************************************************
@@ -192,7 +192,7 @@ struct ResMatData {
 
 class ResMat : public ResCommon<ResMatData> {
 public:
-    explicit ResMat(void* pData) : ResCommon(pData) {}
+    NW4R_G3D_RESOURCE_FUNC_DEF(ResMat);
 
     ResTexSrt GetResTexSrt() {
         return ResTexSrt(&ref().texSrtData);

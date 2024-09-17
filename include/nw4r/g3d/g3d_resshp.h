@@ -34,7 +34,7 @@ struct ResPrePrimDL {
 
 class ResShpPrePrim : public ResCommon<ResPrePrimDL> {
 public:
-    explicit ResShpPrePrim(void* pData) : ResCommon(pData) {}
+    NW4R_G3D_RESOURCE_FUNC_DEF_EX(ResShpPrePrim, ResPrePrimDL);
 
     void DCStore(bool sync);
 };
@@ -79,7 +79,7 @@ struct ResShpData {
 
 class ResShp : public ResCommon<ResShpData> {
 public:
-    explicit ResShp(void* pData) : ResCommon(pData) {}
+    NW4R_G3D_RESOURCE_FUNC_DEF(ResShp);
 
     void Init();
     void Terminate();

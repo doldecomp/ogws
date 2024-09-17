@@ -33,7 +33,7 @@ struct ResVtxPosData {
 
 class ResVtxPos : public ResCommon<ResVtxPosData> {
 public:
-    explicit ResVtxPos(void* pData) : ResCommon(pData) {}
+    NW4R_G3D_RESOURCE_FUNC_DEF(ResVtxPos);
 
     void Init() {
         DCStore(false);
@@ -85,7 +85,7 @@ struct ResVtxNrmData {
 
 class ResVtxNrm : public ResCommon<ResVtxNrmData> {
 public:
-    explicit ResVtxNrm(void* pData) : ResCommon(pData) {}
+    NW4R_G3D_RESOURCE_FUNC_DEF(ResVtxNrm);
 
     void Init() {
         DCStore(false);
@@ -137,7 +137,7 @@ struct ResVtxClrData {
 
 class ResVtxClr : public ResCommon<ResVtxClrData> {
 public:
-    explicit ResVtxClr(void* pData) : ResCommon(pData) {}
+    NW4R_G3D_RESOURCE_FUNC_DEF(ResVtxClr);
 
     void Init() {
         DCStore(false);
@@ -191,7 +191,7 @@ struct ResVtxTexCoordData {
 
 class ResVtxTexCoord : public ResCommon<ResVtxTexCoordData> {
 public:
-    explicit ResVtxTexCoord(void* pData) : ResCommon(pData) {}
+    NW4R_G3D_RESOURCE_FUNC_DEF(ResVtxTexCoord);
 
     void Init() {
         DCStore(false);

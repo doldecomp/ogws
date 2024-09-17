@@ -31,7 +31,7 @@ struct ResFileData {
 
 class ResFile : public ResCommon<ResFileData> {
 public:
-    explicit ResFile(void* pData) : ResCommon(pData) {}
+    NW4R_G3D_RESOURCE_FUNC_DEF(ResFile);
 
     void Init();
     void Terminate();

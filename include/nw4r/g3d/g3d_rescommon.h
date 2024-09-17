@@ -8,7 +8,8 @@
  * Define ResName pascal string for file resource groups.
  */
 #define NW4R_G3D_RESFILE_NAME_DEF(VAR, STR)                                    \
-    ResNameData27 ResNameData_##VAR ALIGN(32) = {sizeof(STR) - 1, STR}
+    nw4r::g3d::ResNameData27 ResNameData_##VAR ALIGN(32) = {sizeof(STR) - 1,   \
+                                                            STR}
 
 /**
  * Similar to "ofs_to_obj" but accounting for the additional -4 offset.
@@ -16,6 +17,26 @@
  */
 #define NW4R_G3D_OFS_TO_RESNAME(BASE, OFS)                                     \
     nw4r::g3d::ResName((char*)(BASE) + (OFS) - sizeof(u32))
+
+/**
+ * Define constructor and ref functions for resource classes.
+ * NOTE: Hides ResCommon::ref, why did they do this???
+ */
+#define NW4R_G3D_RESOURCE_FUNC_DEF(T)                                          \
+    NW4R_G3D_RESOURCE_FUNC_DEF_IMPL(T, T##Data)
+#define NW4R_G3D_RESOURCE_FUNC_DEF_EX(TCLS, TDATA)                             \
+    NW4R_G3D_RESOURCE_FUNC_DEF_IMPL(TCLS, TDATA)
+
+#define NW4R_G3D_RESOURCE_FUNC_DEF_IMPL(TCLS, TDATA)                           \
+    explicit TCLS(void* pData) : nw4r::g3d::ResCommon<TDATA>(pData) {}         \
+                                                                               \
+    TDATA& ref() {                                                             \
+        return *ptr();                                                         \
+    }                                                                          \
+                                                                               \
+    const TDATA& ref() const {                                                 \
+        return *ptr();                                                         \
+    }
 
 namespace nw4r {
 namespace g3d {
@@ -65,30 +86,38 @@ public:
     }
 
     template <typename T> T* ofs_to_ptr(s32 ofs) {
+        u8* pPtr = reinterpret_cast<u8*>(mpData);
+
         if (ofs != 0) {
-            return reinterpret_cast<T*>((char*)mpData + ofs);
+            return reinterpret_cast<T*>(pPtr + ofs);
         }
 
         return NULL;
     }
     template <typename T> const T* ofs_to_ptr(s32 ofs) const {
+        const u8* pPtr = reinterpret_cast<const u8*>(mpData);
+
         if (ofs != 0) {
-            return reinterpret_cast<const T*>((char*)mpData + ofs);
+            return reinterpret_cast<const T*>(pPtr + ofs);
         }
 
         return NULL;
     }
 
     template <typename T> T ofs_to_obj(s32 ofs) {
+        u8* pPtr = reinterpret_cast<u8*>(mpData);
+
         if (ofs != 0) {
-            return T((char*)mpData + ofs);
+            return T(pPtr + ofs);
         }
 
         return T(NULL);
     }
-    template <typename T> T ofs_to_obj(s32 ofs) const {
+    template <typename T> const T ofs_to_obj(s32 ofs) const {
+        const u8* pPtr = reinterpret_cast<const u8*>(mpData);
+
         if (ofs != 0) {
-            return T((char*)mpData + ofs);
+            return T(const_cast<u8*>(pPtr + ofs));
         }
 
         return T(NULL);
@@ -152,7 +181,7 @@ struct ResTagDLData {
 
 class ResTagDL : public ResCommon<ResTagDLData> {
 public:
-    explicit ResTagDL(void* pData) : ResCommon(pData) {}
+    NW4R_G3D_RESOURCE_FUNC_DEF(ResTagDL);
 
     u32 GetBufSize() const {
         return ref().bufSize;

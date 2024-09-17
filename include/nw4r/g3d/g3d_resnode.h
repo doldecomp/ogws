@@ -65,7 +65,7 @@ struct ResNodeData : ResNodeDataTypedef {
 
 class ResNode : public ResCommon<ResNodeData>, public ResNodeDataTypedef {
 public:
-    explicit ResNode(void* pData) : ResCommon(pData) {}
+    NW4R_G3D_RESOURCE_FUNC_DEF(ResNode);
 
     void PatchChrAnmResult(ChrAnmResult* pResult) const;
     void CalcChrAnmResult(ChrAnmResult* pResult) const;

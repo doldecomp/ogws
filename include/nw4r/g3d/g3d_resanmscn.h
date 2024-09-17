@@ -46,9 +46,13 @@ public:
     static const int REVISION = 4;
 
 public:
-    explicit ResAnmScn(void* pData) : ResCommon(pData) {}
+    NW4R_G3D_RESOURCE_FUNC_DEF(ResAnmScn);
 
     bool Bind(ResAnmScn scene);
+
+    bool Bind() {
+        return Bind(*this);
+    }
 
     u32 GetRevision() const {
         return ref().revision;
@@ -61,17 +65,21 @@ public:
     bool HasResAnmAmbLight() const;
     bool HasResAnmLight() const;
 
+    ResLightSet GetResLightSet(int i) const;
+    ResLightSet GetResLightSet(u32 i) const;
+    u32 GetResLightSetNumEntries() const;
+
     ResAnmAmbLight GetResAnmAmbLight(ResName name) const;
     ResAnmAmbLight GetResAnmAmbLight(int i) const;
 
     ResAnmLight GetResAnmLight(ResName name) const;
     ResAnmLight GetResAnmLight(int i) const;
 
-    ResLightSet GetResLightSetByRefNumber(u32 ref) const;
-    ResAnmAmbLight GetResAnmAmbLightByRefNumber(u32 ref) const;
-    ResAnmLight GetResAnmLightByRefNumber(u32 ref) const;
-    ResAnmFog GetResAnmFogByRefNumber(u32 ref) const;
-    ResAnmCamera GetResAnmCameraByRefNumber(u32 ref) const;
+    ResLightSet GetResLightSetByRefNumber(u32 refNumber) const;
+    ResAnmAmbLight GetResAnmAmbLightByRefNumber(u32 refNumber) const;
+    ResAnmLight GetResAnmLightByRefNumber(u32 refNumber) const;
+    ResAnmFog GetResAnmFogByRefNumber(u32 refNumber) const;
+    ResAnmCamera GetResAnmCameraByRefNumber(u32 refNumber) const;
 
     u16 GetResAnmFogMaxRefNumber() const {
         return ref().info.numResAnmFogData;

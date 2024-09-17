@@ -64,7 +64,7 @@ struct ResTevData {
 
 class ResTev : public ResCommon<ResTevData> {
 public:
-    explicit ResTev(void* pData) : ResCommon(pData) {}
+    NW4R_G3D_RESOURCE_FUNC_DEF(ResTev);
 
     bool GXGetTevSwapModeTable(GXTevSwapSel swap, GXTevColorChan* pR,
                                GXTevColorChan* pG, GXTevColorChan* pB,

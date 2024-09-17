@@ -78,7 +78,7 @@ struct ResAnmCameraData : ResAnmCameraDataTypedef {
 class ResAnmCamera : public ResCommon<ResAnmCameraData>,
                      public ResAnmCameraDataTypedef {
 public:
-    explicit ResAnmCamera(void* pData) : ResCommon(pData) {}
+    NW4R_G3D_RESOURCE_FUNC_DEF(ResAnmCamera);
 
     void GetAnmResult(CameraAnmResult* pResult, f32 frame) const;
 

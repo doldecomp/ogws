@@ -83,7 +83,7 @@ struct ResAnmLightData : ResAnmLightDataTypedef {
 class ResAnmLight : public ResCommon<ResAnmLightData>,
                     public ResAnmLightDataTypedef {
 public:
-    explicit ResAnmLight(void* pData) : ResCommon(pData) {}
+    NW4R_G3D_RESOURCE_FUNC_DEF(ResAnmLight);
 
     void GetAnmResult(LightAnmResult* pResult, f32 frame) const;
 

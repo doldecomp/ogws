@@ -28,7 +28,7 @@ public:
     static const int REVISION = 1;
 
 public:
-    explicit ResPltt(void* pData) : ResCommon(pData) {}
+    NW4R_G3D_RESOURCE_FUNC_DEF(ResPltt);
 
     void Init() {
         DCStore(false);

@@ -42,7 +42,7 @@ public:
     static const int REVISION = 3;
 
 public:
-    explicit ResAnmVis(void* pData) : ResCommon(pData) {}
+    NW4R_G3D_RESOURCE_FUNC_DEF(ResAnmVis);
 
     u32 GetRevision() const {
         return ref().revision;

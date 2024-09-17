@@ -81,7 +81,7 @@ public:
     static const int REVISION = 3;
 
 public:
-    explicit ResAnmTexPat(void* pData) : ResCommon(pData) {}
+    NW4R_G3D_RESOURCE_FUNC_DEF(ResAnmTexPat);
 
     bool Bind(ResFile file);
     void Release();

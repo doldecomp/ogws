@@ -27,7 +27,7 @@ public:
     static const s32 NOT_FOUND = -1;
 
 public:
-    explicit ResDic(void* pData) : ResCommon(pData) {}
+    NW4R_G3D_RESOURCE_FUNC_DEF(ResDic);
 
     void* operator[](const char* pName) const;
     void* operator[](const ResName name) const;

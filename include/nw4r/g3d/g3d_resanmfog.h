@@ -34,7 +34,7 @@ struct ResAnmFogData {
 
 class ResAnmFog : public ResCommon<ResAnmFogData> {
 public:
-    explicit ResAnmFog(void* pData) : ResCommon(pData) {}
+    NW4R_G3D_RESOURCE_FUNC_DEF(ResAnmFog);
 
     void GetAnmResult(FogAnmResult* pResult, f32 frame) const;
 

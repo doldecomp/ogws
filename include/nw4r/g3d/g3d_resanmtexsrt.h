@@ -69,7 +69,7 @@ public:
     static const int REVISION = 4;
 
 public:
-    explicit ResAnmTexSrt(void* pData) : ResCommon(pData) {}
+    NW4R_G3D_RESOURCE_FUNC_DEF(ResAnmTexSrt);
 
     u32 GetRevision() const {
         return ref().revision;

@@ -34,7 +34,7 @@ struct ResAnmAmbLightData {
 
 class ResAnmAmbLight : public ResCommon<ResAnmAmbLightData> {
 public:
-    explicit ResAnmAmbLight(void* pData) : ResCommon(pData) {}
+    NW4R_G3D_RESOURCE_FUNC_DEF(ResAnmAmbLight);
 
     void GetAnmResult(AmbLightAnmResult* pResult, f32 frame) const;
 

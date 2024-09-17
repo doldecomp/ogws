@@ -35,7 +35,7 @@ public:
     static const int REVISION = 1;
 
 public:
-    explicit ResTex(void* pData) : ResCommon(pData) {}
+    NW4R_G3D_RESOURCE_FUNC_DEF(ResTex);
 
     void Init();
 
