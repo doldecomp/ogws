@@ -2,6 +2,7 @@
 #define NW4R_PUBLIC_G3D_H
 
 #include <nw4r/g3d/g3d_anmamblight.h>
+#include <nw4r/g3d/g3d_anmcamera.h>
 #include <nw4r/g3d/g3d_anmchr.h>
 #include <nw4r/g3d/g3d_anmclr.h>
 #include <nw4r/g3d/g3d_anmfog.h>
@@ -12,6 +13,7 @@
 #include <nw4r/g3d/g3d_fog.h>
 #include <nw4r/g3d/g3d_resanm.h>
 #include <nw4r/g3d/g3d_resanmamblight.h>
+#include <nw4r/g3d/g3d_resanmcamera.h>
 #include <nw4r/g3d/g3d_resanmclr.h>
 #include <nw4r/g3d/g3d_resanmfog.h>
 #include <nw4r/g3d/g3d_resanmlight.h>

@@ -90,6 +90,18 @@ public:
     u32 GetID() const {
         return ref().id;
     }
+
+    u32 GetRefNumber() const {
+        return ref().refNumber;
+    }
+
+    u32 GetSpecularLightIdx() const {
+        return ref().specLightObjIdx;
+    }
+
+    bool HasSpecularLight() const {
+        return ref().flags & FLAG_SPECULAR;
+    }
 };
 
 } // namespace g3d

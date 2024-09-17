@@ -41,6 +41,10 @@ public:
     u32 GetID() const {
         return ref().id;
     }
+
+    u32 GetRefNumber() const {
+        return ref().refNumber;
+    }
 };
 
 } // namespace g3d
