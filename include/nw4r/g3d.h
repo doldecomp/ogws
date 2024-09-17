@@ -7,6 +7,7 @@
 #include <nw4r/g3d/g3d_anmclr.h>
 #include <nw4r/g3d/g3d_anmfog.h>
 #include <nw4r/g3d/g3d_anmlight.h>
+#include <nw4r/g3d/g3d_anmshp.h>
 #include <nw4r/g3d/g3d_anmtexpat.h>
 #include <nw4r/g3d/g3d_camera.h>
 #include <nw4r/g3d/g3d_cpu.h>
@@ -18,6 +19,7 @@
 #include <nw4r/g3d/g3d_resanmfog.h>
 #include <nw4r/g3d/g3d_resanmlight.h>
 #include <nw4r/g3d/g3d_resanmscn.h>
+#include <nw4r/g3d/g3d_resanmshp.h>
 #include <nw4r/g3d/g3d_resanmtexpat.h>
 #include <nw4r/g3d/g3d_resanmvis.h>
 #include <nw4r/g3d/g3d_rescommon.h>

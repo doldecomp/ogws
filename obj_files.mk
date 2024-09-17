@@ -145,7 +145,7 @@ NW4R_O_FILES := \
 	build/nw4r/g3d/g3d_resanmfog.o \
 	build/nw4r/g3d/g3d_resanmcamera.o \
 	build/asm/nw4r/g3d/g3d_resanmscn.o \
-	build/asm/nw4r/g3d/g3d_resanmshp.o \
+	build/nw4r/g3d/g3d_resanmshp.o \
 	build/asm/nw4r/g3d/g3d_anmvis.o \
 	build/asm/nw4r/g3d/g3d_anmclr.o \
 	build/asm/nw4r/g3d/g3d_anmtexpat.o \

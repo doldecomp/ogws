@@ -1,6 +1,7 @@
 .include "macros.inc"
 
 .section .sdata2, "a"
+.balign 8
 .global $$26718
 $$26718:
 	.single 0e0
