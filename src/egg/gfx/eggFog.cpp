@@ -59,10 +59,10 @@ namespace EGG
             nw4r::g3d::FogAnmResult result;
             res.GetAnmResult(&result, f1);
 
-            mFogType = result.mFogType;
-            mStartZ = result.mStartZ;
-            mEndZ = result.mEndZ;
-            mColor = result.mColor;
+            mFogType = result.type;
+            mStartZ = result.startz;
+            mEndZ = result.endz;
+            mColor = result.color;
 
             mFlags |= BOUND;
         }

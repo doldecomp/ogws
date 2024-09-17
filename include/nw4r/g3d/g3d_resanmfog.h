@@ -24,6 +24,12 @@ struct ResAnmFogData {
     ResAnmData startz;     // at 0x1C
     ResAnmData endz;       // at 0x20
     ResColorAnmData color; // at 0x24
+
+    enum Flag {
+        FLAG_STARTZ_CONSTANT = (1 << 29),
+        FLAG_ENDZ_CONSTANT = (1 << 30),
+        FLAG_COLOR_CONSTANT = (1 << 31),
+    };
 };
 
 class ResAnmFog : public ResCommon<ResAnmFogData> {
