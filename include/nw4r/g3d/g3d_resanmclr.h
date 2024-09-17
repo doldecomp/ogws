@@ -52,7 +52,7 @@ public:
     static const int REVISION = 3;
 
 public:
-    ResAnmClr(void* pData) : ResCommon(pData) {}
+    explicit ResAnmClr(void* pData) : ResCommon(pData) {}
 
     u32 GetRevision() const {
         return ref().revision;

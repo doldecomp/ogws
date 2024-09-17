@@ -12,7 +12,7 @@
 
 /**
  * Similar to "ofs_to_obj" but accounting for the additional -4 offset.
- * Debug builds show this behavior was not through an function.
+ * Debug builds show this behavior was not achieved through a function.
  */
 #define NW4R_G3D_OFS_TO_RESNAME(BASE, OFS)                                     \
     nw4r::g3d::ResName((char*)(BASE) + (OFS) - sizeof(u32))
@@ -171,10 +171,6 @@ public:
 };
 
 namespace detail {
-
-// TODO: Remove
-typedef u8 CPCmd[6];
-typedef u8 BPCmd[5];
 
 /******************************************************************************
  *

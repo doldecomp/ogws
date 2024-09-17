@@ -20,7 +20,7 @@ struct ResAnmAmbLightData {
 
 class ResAnmAmbLight : public ResCommon<ResAnmAmbLightData> {
 public:
-    ResAnmAmbLight(void* pData) : ResCommon(pData) {}
+    explicit ResAnmAmbLight(void* pData) : ResCommon(pData) {}
 
     u32 GetID() const {
         return ref().id;

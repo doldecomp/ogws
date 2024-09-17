@@ -55,7 +55,7 @@ inline f32 GetResAnmResult(const ResAnmData* pData, f32 frame, bool constant) {
     return GetResKeyFrameAnmResult(pFrameData, frame);
 }
 
-template <typename T> inline f32 ClipFrame(T& rInfo, f32 frame) {
+template <typename T> inline f32 ClipFrame(const T& rInfo, f32 frame) {
     if (frame <= 0.0f) {
         return 0.0f;
     }
@@ -128,6 +128,15 @@ inline bool GetResBoolAnmFramesResult(const ResBoolAnmFramesData* pData,
     u32 bitWord = pBits[wordIdx];
 
     return bitWord & targetBit;
+}
+
+inline bool GetResBoolAnmResult(const ResBoolAnmData* pData, int frame) {
+    const ResBoolAnmFramesData* pFrameData =
+        reinterpret_cast<const ResBoolAnmFramesData*>(
+            reinterpret_cast<const char*>(pData) +
+            pData->toResBoolAnmFramesData);
+
+    return GetResBoolAnmFramesResult(pFrameData, frame);
 }
 
 } // namespace detail

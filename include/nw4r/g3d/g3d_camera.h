@@ -58,7 +58,7 @@ public:
     };
 
 public:
-    Camera(CameraData* pData);
+    explicit Camera(CameraData* pData);
 
     void Init();
     void Init(u16 efbWidth, u16 efbHeight, u16 xfbWidth, u16 xfbHeight,

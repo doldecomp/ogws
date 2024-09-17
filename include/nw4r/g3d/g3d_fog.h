@@ -27,7 +27,7 @@ struct FogData {
 
 class Fog : public ResCommon<FogData> {
 public:
-    Fog(FogData* pData);
+    explicit Fog(FogData* pData);
 
     void Init();
     Fog CopyTo(void* pDst) const;

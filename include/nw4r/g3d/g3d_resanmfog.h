@@ -28,7 +28,7 @@ struct ResAnmFogData {
 
 class ResAnmFog : public ResCommon<ResAnmFogData> {
 public:
-    ResAnmFog(void* pData) : ResCommon(pData) {}
+    explicit ResAnmFog(void* pData) : ResCommon(pData) {}
 
     void GetAnmResult(FogAnmResult* pResult, f32 frame) const;
 

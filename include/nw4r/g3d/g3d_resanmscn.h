@@ -46,7 +46,7 @@ public:
     static const int REVISION = 4;
 
 public:
-    ResAnmScn(void* pData) : ResCommon(pData) {}
+    explicit ResAnmScn(void* pData) : ResCommon(pData) {}
 
     bool Bind(ResAnmScn scene);
 

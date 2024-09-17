@@ -69,7 +69,7 @@ public:
     static const int REVISION = 4;
 
 public:
-    ResAnmTexSrt(void* pData) : ResCommon(pData) {}
+    explicit ResAnmTexSrt(void* pData) : ResCommon(pData) {}
 
     u32 GetRevision() const {
         return ref().revision;

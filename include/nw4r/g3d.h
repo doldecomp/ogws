@@ -3,6 +3,7 @@
 
 #include <nw4r/g3d/g3d_anmchr.h>
 #include <nw4r/g3d/g3d_anmclr.h>
+#include <nw4r/g3d/g3d_anmlight.h>
 #include <nw4r/g3d/g3d_anmtexpat.h>
 #include <nw4r/g3d/g3d_camera.h>
 #include <nw4r/g3d/g3d_cpu.h>

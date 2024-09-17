@@ -31,7 +31,7 @@ public:
     static const int REVISION = 3;
 
 public:
-    ResAnmShp(void* pData) : ResCommon(pData) {}
+    explicit ResAnmShp(void* pData) : ResCommon(pData) {}
 
     u32 GetRevision() const {
         return ref().revision;

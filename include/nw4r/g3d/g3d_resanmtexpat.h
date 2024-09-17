@@ -81,7 +81,7 @@ public:
     static const int REVISION = 3;
 
 public:
-    ResAnmTexPat(void* pData) : ResCommon(pData) {}
+    explicit ResAnmTexPat(void* pData) : ResCommon(pData) {}
 
     bool Bind(ResFile file);
     void Release();

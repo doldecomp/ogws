@@ -42,7 +42,7 @@ struct ResAnmCameraData : ResAnmCameraDataTypedef {
 class ResAnmCamera : public ResCommon<ResAnmCameraData>,
                      public ResAnmCameraDataTypedef {
 public:
-    ResAnmCamera(void* pData) : ResCommon(pData) {}
+    explicit ResAnmCamera(void* pData) : ResCommon(pData) {}
 
     void GetAnmResult(CameraAnmResult* pResult, f32 frame) const;
 };
