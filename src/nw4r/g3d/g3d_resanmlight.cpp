@@ -16,7 +16,7 @@ void ResAnmLight::GetAnmResult(LightAnmResult* pResult, f32 frame) const {
 
     pResult->flags = flags & FLAG_ANM_RESULT_MASK;
 
-    bool enableConstant = flags & FLAG_ENABLE_CONSTANT;
+    bool enableConstant = (flags & FLAG_ENABLE_CONSTANT) != 0;
     if (!enableConstant) {
         int iClippedFrame = static_cast<int>(math::FFloor(clippedFrame));
 
@@ -29,13 +29,13 @@ void ResAnmLight::GetAnmResult(LightAnmResult* pResult, f32 frame) const {
     if (pResult->flags & FLAG_ENABLE) {
         LightType type = static_cast<LightType>(flags & FLAG_LIGHT_TYPE_MASK);
 
-        bool hasSpecular = flags & FLAG_SPECULAR;
+        bool hasSpecular = (flags & FLAG_SPECULAR) != 0;
         bool hasAim = type != LIGHTTYPE_POINT || hasSpecular;
 
-        bool constantPosX = flags & FLAG_POS_X_CONSTANT;
-        bool constantPosY = flags & FLAG_POS_Y_CONSTANT;
-        bool constantPosZ = flags & FLAG_POS_Z_CONSTANT;
-        bool constantColor = flags & FLAG_COLOR_CONSTANT;
+        bool constantPosX = (flags & FLAG_POS_X_CONSTANT) != 0;
+        bool constantPosY = (flags & FLAG_POS_Y_CONSTANT) != 0;
+        bool constantPosZ = (flags & FLAG_POS_Z_CONSTANT) != 0;
+        bool constantColor = (flags & FLAG_COLOR_CONSTANT) != 0;
 
         pResult->pos.x = detail::GetResAnmResult(&r.posX, frame, constantPosX);
         pResult->pos.y = detail::GetResAnmResult(&r.posY, frame, constantPosY);
@@ -44,9 +44,9 @@ void ResAnmLight::GetAnmResult(LightAnmResult* pResult, f32 frame) const {
             detail::GetResColorAnmResult(&r.color, clippedFrame, constantColor);
 
         if (hasAim) {
-            bool constantAimX = flags & FLAG_AIM_X_CONSTANT;
-            bool constantAimY = flags & FLAG_AIM_Y_CONSTANT;
-            bool constantAimZ = flags & FLAG_AIM_Z_CONSTANT;
+            bool constantAimX = (flags & FLAG_AIM_X_CONSTANT) != 0;
+            bool constantAimY = (flags & FLAG_AIM_Y_CONSTANT) != 0;
+            bool constantAimZ = (flags & FLAG_AIM_Z_CONSTANT) != 0;
 
             pResult->aim.x =
                 detail::GetResAnmResult(&r.aimX, frame, constantAimX);
@@ -58,8 +58,10 @@ void ResAnmLight::GetAnmResult(LightAnmResult* pResult, f32 frame) const {
 
         switch (type) {
         case LIGHTTYPE_POINT: {
-            bool refDistanceConstant = flags & FLAG_REF_DISTANCE_CONSTANT;
-            bool refBrightnessConstant = flags & FLAG_REF_BRIGHTNESS_CONSTANT;
+            bool refDistanceConstant =
+                (flags & FLAG_REF_DISTANCE_CONSTANT) != 0;
+            bool refBrightnessConstant =
+                (flags & FLAG_REF_BRIGHTNESS_CONSTANT) != 0;
 
             pResult->distFunc = r.distFunc;
 
@@ -76,9 +78,11 @@ void ResAnmLight::GetAnmResult(LightAnmResult* pResult, f32 frame) const {
         }
 
         case LIGHTTYPE_SPOT: {
-            bool cutoffConstant = flags & FLAG_CUTOFF_CONSTANT;
-            bool refDistanceConstant = flags & FLAG_REF_DISTANCE_CONSTANT;
-            bool refBrightnessConstant = flags & FLAG_REF_BRIGHTNESS_CONSTANT;
+            bool cutoffConstant = (flags & FLAG_CUTOFF_CONSTANT) != 0;
+            bool refDistanceConstant =
+                (flags & FLAG_REF_DISTANCE_CONSTANT) != 0;
+            bool refBrightnessConstant =
+                (flags & FLAG_REF_BRIGHTNESS_CONSTANT) != 0;
 
             pResult->distFunc = r.distFunc;
             pResult->spotFunc = r.spotFunc;
@@ -96,8 +100,8 @@ void ResAnmLight::GetAnmResult(LightAnmResult* pResult, f32 frame) const {
         }
 
         if (hasSpecular) {
-            bool specColorConstant = flags & FLAG_SPEC_COLOR_CONSTANT;
-            bool shininessConstant = flags & FLAG_SHININESS_CONSTANT;
+            bool specColorConstant = (flags & FLAG_SPEC_COLOR_CONSTANT) != 0;
+            bool shininessConstant = (flags & FLAG_SHININESS_CONSTANT) != 0;
 
             pResult->specColor = detail::GetResColorAnmResult(
                 &r.specColor, clippedFrame, specColorConstant);

@@ -9,7 +9,7 @@ void ResAnmAmbLight::GetAnmResult(AmbLightAnmResult* pResult, f32 frame) const {
     const ResAnmAmbLightData& r = ref();
 
     u32 flags = r.flags;
-    bool constant = flags & ResAnmAmbLightData::FLAG_CONSTANT;
+    bool constant = (flags & ResAnmAmbLightData::FLAG_CONSTANT) != 0;
 
     const ResAnmScnInfoData& rInfoData =
         ofs_to_ptr<ResAnmScnData>(r.toResAnmScnData)->info;
