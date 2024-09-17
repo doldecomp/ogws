@@ -6,12 +6,21 @@
 #include <nw4r/g3d/g3d_rescommon.h>
 #include <nw4r/g3d/g3d_resdict.h>
 #include <nw4r/g3d/g3d_resfile.h>
+#include <nw4r/g3d/g3d_respltt.h>
+#include <nw4r/g3d/g3d_restex.h>
 
 namespace nw4r {
 namespace g3d {
 
-// Forward declarations
-class TexPatAnmResult;
+struct TexPatAnmResult {
+    static const int NUM_OF_ANMS = 8;
+
+    u8 bTexExist;              // at 0x0
+    u8 bPlttExist;             // at 0x1
+    u8 padding_[2];            // at 0x2
+    ResTex tex[NUM_OF_ANMS];   // at 0x4
+    ResPltt pltt[NUM_OF_ANMS]; // at 0x24
+};
 
 struct ResAnmTexPatFrmData {
     f32 frame;     // at 0x0
@@ -39,8 +48,6 @@ struct ResAnmTexPatMatData {
     s32 name;        // at 0x0
     u32 flags;       // at 0x4
     AnmData anms[1]; // at 0x8
-
-    static const int NUM_OF_ANMS = 8;
 
     // Four bits in 'flags' for each animation
     enum Flag {

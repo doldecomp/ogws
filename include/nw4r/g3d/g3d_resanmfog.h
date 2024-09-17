@@ -5,13 +5,19 @@
 #include <nw4r/g3d/g3d_resanm.h>
 #include <nw4r/g3d/g3d_rescommon.h>
 
+#include <nw4r/ut.h>
+
 #include <revolution/GX.h>
 
 namespace nw4r {
 namespace g3d {
 
-// Forward declarations
-struct FogAnmResult;
+struct FogAnmResult {
+    GXFogType type;  // at 0x0
+    f32 startz;      // at 0x4
+    f32 endz;        // at 0x8
+    ut::Color color; // at 0xC
+};
 
 struct ResAnmFogData {
     u32 size;              // at 0x0

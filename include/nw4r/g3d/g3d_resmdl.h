@@ -20,12 +20,6 @@ namespace g3d {
  *
  ******************************************************************************/
 struct ResMdlInfoDataTypedef {
-    enum ScalingRule {
-        SCALINGRULE_STANDARD,
-        SCALINGRULE_SOFTIMAGE,
-        SCALINGRULE_MAYA
-    };
-
     enum TexMatrixMode {
         TEXMATRIXMODE_MAYA,
         TEXMATRIXMODE_XSI,
@@ -37,6 +31,12 @@ struct ResMdlInfoDataTypedef {
         EVPMATRIXMODE_APPROX,
         EVPMATRIXMODE_EXACT
     };
+};
+
+enum ScalingRule {
+    SCALINGRULE_STANDARD,
+    SCALINGRULE_SOFTIMAGE,
+    SCALINGRULE_MAYA
 };
 
 struct ResMdlInfoData : ResMdlInfoDataTypedef {

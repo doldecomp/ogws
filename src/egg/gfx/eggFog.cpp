@@ -1,7 +1,6 @@
 #include "eggFog.h"
 #include "eggDrawGX.h"
 #include "g3d_resanmfog.h"
-#include "g3d_anmfog.h"
 
 namespace EGG
 {

@@ -1,14 +1,7 @@
 #ifndef NW4R_PUBLIC_G3D_H
 #define NW4R_PUBLIC_G3D_H
 
-#include <nw4r/g3d/g3d_anmamblight.h>
-#include <nw4r/g3d/g3d_anmcamera.h>
 #include <nw4r/g3d/g3d_anmchr.h>
-#include <nw4r/g3d/g3d_anmclr.h>
-#include <nw4r/g3d/g3d_anmfog.h>
-#include <nw4r/g3d/g3d_anmlight.h>
-#include <nw4r/g3d/g3d_anmshp.h>
-#include <nw4r/g3d/g3d_anmtexpat.h>
 #include <nw4r/g3d/g3d_camera.h>
 #include <nw4r/g3d/g3d_cpu.h>
 #include <nw4r/g3d/g3d_fog.h>

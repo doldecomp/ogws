@@ -73,7 +73,7 @@ void ResAnmTexPat::GetAnmResult(TexPatAnmResult* pResult, u32 id,
     pResult->bTexExist = 0;
     pResult->bPlttExist = 0;
 
-    for (int i = 0; i < ResAnmTexPatMatData::NUM_OF_ANMS;
+    for (int i = 0; i < TexPatAnmResult::NUM_OF_ANMS;
          flags >>= ResAnmTexPatMatData::NUM_OF_FLAGS, i++) {
 
         if (!(flags & ResAnmTexPatMatData::FLAG_ANM_EXISTS)) {

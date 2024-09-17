@@ -9,6 +9,14 @@
 namespace nw4r {
 namespace g3d {
 
+struct ClrAnmResult {
+    static const int NUM_OF_CLA_COLOR = 11;
+
+    u32 bRgbaExist;                 // at 0x0
+    u32 rgba[NUM_OF_CLA_COLOR];     // at 0x4
+    u32 rgbaMask[NUM_OF_CLA_COLOR]; // at 0x30
+};
+
 struct ResAnmClrAnmData {
     u32 mask;              // at 0x0
     ResColorAnmData color; // at 0x4
@@ -18,8 +26,6 @@ struct ResAnmClrMatData {
     s32 name;                 // at 0x0
     u32 flags;                // at 0x4
     ResAnmClrAnmData anms[1]; // at 0x8
-
-    static const int NUM_OF_CLA_COLOR = 11;
 
     // Two bits in 'flags' for each animation
     enum Flag {
