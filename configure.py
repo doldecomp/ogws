@@ -897,9 +897,9 @@ config.progress_all = False
 config.progress_each_module = args.verbose
 config.progress_use_fancy = True
 config.progress_code_fancy_frac = 2500
-config.progress_code_fancy_item = "Skill Level"
-config.progress_data_fancy_frac = 60
-config.progress_data_fancy_item = "CPUs"
+config.progress_code_fancy_item = "skill points"
+config.progress_data_fancy_frac = 100
+config.progress_data_fancy_item = "stamps"
 
 if args.mode == "configure":
     # Write build.ninja and objdiff.json
