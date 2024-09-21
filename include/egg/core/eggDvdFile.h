@@ -12,6 +12,8 @@ namespace EGG
 {
     class DvdFile : File
     {
+        friend class DvdRipper;
+
         struct FileInfoPair
         {
             DVDFileInfo mFileInfo; // at 0x0

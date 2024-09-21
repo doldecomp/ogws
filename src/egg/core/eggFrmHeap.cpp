@@ -20,7 +20,6 @@ namespace EGG
         MEMDestroyFrmHeap(mHeapHandle);
     }
 
-    #ifdef __DECOMP_NON_MATCHING
     FrmHeap * FrmHeap::create(void *memBlock, u32 size, u16 r5)
     {
         FrmHeap *newHeap = NULL;
@@ -51,9 +50,6 @@ namespace EGG
 
         return newHeap;
     }
-    #else
-    #error This file has not yet been decompiled accurately. Use "eggFrmHeap.s" instead.
-    #endif
 
     FrmHeap * FrmHeap::create(u32 size, Heap *pHeap, u16 r5)
     {

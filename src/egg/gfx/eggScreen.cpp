@@ -1,5 +1,3 @@
-#pragma fp_contract on
-
 #include "eggScreen.h"
 #include "eggStateGX.h"
 #include "eggDrawGX.h"
@@ -277,7 +275,6 @@ namespace EGG
             mtx->m[1][3] = y;
     }
 
-    #ifdef __DECOMP_NON_MATCHING
     // https://decomp.me/scratch/vufIs
     // 1. Bools for ClearEfb are not evaluated in the correct order.
     // 2. The NullSub_0 when constructing the clone must inline
@@ -303,9 +300,7 @@ namespace EGG
             DrawGX::ClearEfb(drawMtx, (flags & 1), (flags & 2), (flags & 4), color, true);
         }
     }
-    #endif
 
-    #ifdef __DECOMP_NON_MATCHING
     // https://decomp.me/scratch/WmO2A
     // 1. Recursion is incorrect (lots of extra stack storage)
     // 2. Seems like -ipa file must be off, despite other functions
@@ -333,7 +328,6 @@ namespace EGG
             *oy = mPosition.y;
         }
     }
-    #endif
 
     void Screen::SetTVMode(TVMode tvMode)
     {
@@ -351,7 +345,7 @@ namespace EGG
 
     void Screen::SetTVModeDefault()
     {
-        SetTVMode(SCGetAspectRatio() == SC_ASPECT_4_3
+        SetTVMode(SCGetAspectRatio() == SC_ASPECT_STD
             ? TV_MODE_4_3 : TV_MODE_16_9);
     }
 

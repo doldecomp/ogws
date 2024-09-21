@@ -117,19 +117,13 @@ static MEMiHeapHead* InitExpHeap_(MEMiHeapHead* heap, void* end, u16 opt) {
     return heap;
 }
 
-#ifdef __DECOMP_NON_MATCHING
+// Non-matching
 static void* AllocUsedBlockFromFreeBlock_(MEMiExpHeapHead* exp,
                                           MEMiExpHeapMBlock* mblock,
                                           void* memPtr, u32 size,
                                           u16 allocDir) {
-    ;
-    ;
 }
-#else
-#error This file has not yet been decompiled accurately. Use "mem_expHeap.s" instead.
-#endif
 
-#ifdef __DECOMP_NON_MATCHING
 static void* AllocFromHead_(MEMiHeapHead* heap, u32 size, s32 align) {
     MEMiExpHeapMBlock* it;
     MEMiExpHeapHead* exp;
@@ -164,11 +158,8 @@ static void* AllocFromHead_(MEMiHeapHead* heap, u32 size, s32 align) {
                                  exp, bestBlk, bestBlkMemPtr, size, 0)
                            : NULL;
 }
-#else
-#error This file has not yet been decompiled accurately. Use "mem_expHeap.s" instead.
-#endif
 
-#ifdef __DECOMP_NON_MATCHING
+// Non-matching
 static void* AllocFromTail_(MEMiHeapHead* heap, u32 size, s32 align) {
     MEMiExpHeapMBlock* it;
     MEMiExpHeapHead* exp;
@@ -203,18 +194,10 @@ static void* AllocFromTail_(MEMiHeapHead* heap, u32 size, s32 align) {
                                  exp, bestBlk, bestBlkMemPtr, size, 1)
                            : NULL;
 }
-#else
-#error This file has not yet been decompiled accurately. Use "mem_expHeap.s" instead.
-#endif
 
-#ifdef __DECOMP_NON_MATCHING
+// Non-matching
 static void RecycleRegion_(MEMiExpHeapHead* exp, void** region) {
-    ;
-    ;
 }
-#else
-#error This file has not yet been decompiled accurately. Use "mem_expHeap.s" instead.
-#endif
 
 MEMiHeapHead* MEMCreateExpHeapEx(void* start, u32 size, u16 opt) {
     void* end = AddU32ToPtr(start, size);
@@ -259,14 +242,9 @@ void* MEMAllocFromExpHeapEx(MEMiHeapHead* heap, u32 size, s32 align) {
     return memBlock;
 }
 
-#ifdef __DECOMP_NON_MATCHING
+// Non-matching
 u32 MEMResizeForMBlockExpHeap(MEMiHeapHead* heap, void* memBlock, u32 size) {
-    ;
-    ;
 }
-#else
-#error This file has not yet been decompiled accurately. Use "mem_expHeap.s" instead.
-#endif
 
 void MEMFreeToExpHeap(MEMiHeapHead* heap, void* memBlock) {
     MEMiExpHeapMBlock* mblock;

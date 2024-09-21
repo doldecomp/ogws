@@ -1,0 +1,11 @@
+object: orig/RSPE01_01/sys/main.dol
+hash: 8bb422971b88b5551a37de98db69557df7b46637
+symbols: config/RSPE01_01/symbols.txt
+splits: config/RSPE01_01/splits.txt
+mw_comment_version: 14 # GC 3.0a5 linker
+quick_analysis: true
+
+block_relocations:
+# OSInit
+- source: 0x800EC914
+- source: 0x800EC98C

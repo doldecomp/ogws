@@ -1,5 +1,3 @@
-#pragma use_lmw_stmw on
-
 #include "eggAssert.h"
 #include "eggLightTextureManager.h"
 #include "eggLightManager.h"
@@ -66,7 +64,6 @@ namespace EGG
     }
 
     // https://decomp.me/scratch/JMHpy
-    #ifdef __DECOMP_NON_MATCHING
     int LightTextureManager::replaceModelTexture(int index, ModelEx *pMdl) const
     {
         #line 121
@@ -75,15 +72,16 @@ namespace EGG
 
         TextureReplaceResult result;
         GXTexObj texObj;
-        
+
         mppLightTextures[index]->getTexObj(&texObj);
-        int ret = pMdl->replaceTexture(mppLightTextures[index]->getName(), texObj.mFlags, false, &result, 0xFF, false);
-        pMdl->replaceTexture(mppLightTextures[index]->getName(), texObj.mFlags, false, NULL, 0, true);
+        int TODO;
+        int ret = pMdl->replaceTexture(mppLightTextures[index]->getName(), TODO, false, &result, 0xFF, false);
+        pMdl->replaceTexture(mppLightTextures[index]->getName(), TODO, false, NULL, 0, true);
 
         for (int i = 0; i < (u16)ret; i++)
         {
-            u16 matIndex = result.data[i].s[0];
-            u8 texCoordId = result.data[i].b[3];
+            u16 matIndex = result.data[i].s;
+            u8 texCoordId = result.data[i].b;
             
             g3d::ResTexSrt srt = pMdl->getResMat(matIndex).GetResTexSrt();
             #line 138
@@ -100,15 +98,12 @@ namespace EGG
             u32 l;
 
             gen.GXGetTexCoordGen2((GXTexCoordID)texCoordId, &type, &src, &b, &l);
-            gen.GXSetTexCoordGen2((GXTexCoordID)texCoordId, GX_TEX_GEN_TYPE_0, GX_TEX_GEN_SRC_1, 1, l);
+            gen.GXSetTexCoordGen2((GXTexCoordID)texCoordId, GX_TG_MTX3x4, GX_TG_NRM, 1, l);
             gen.DCStore(false);
         }
         
         return ret;
     }
-    #else
-    #error This file has yet to be decompiled accurately. Use "eggLightTextureManager.s" instead.
-    #endif
 
     int LightTextureManager::getTextureIndex(const char *name) const
     {
@@ -152,7 +147,6 @@ namespace EGG
     }
 
     // https://decomp.me/scratch/rqOkd
-    #ifdef __DECOMP_NON_MATCHING
     void LightTextureManager::draw(LightManager *pManager, const Screen::DataEfb &efb, f32 x1, f32 y1, f32 x2, f32 y2)
     {
         u8 view = 1 << pManager->GetCurrentView();
@@ -185,21 +179,21 @@ namespace EGG
 
         if (!(mFlags & 0x40) && (mFlags & 0x4))
         {
-            texBuf = TextureBuffer::alloc(w, h, GX_TEX_FMT_6);
+            texBuf = TextureBuffer::alloc(w, h, GX_TF_RGBA8);
             texBuf->capture(x, y, false, -1);
         }
 
-        if (setPixelFmt) StateGX::GXSetPixelFmt_(GX_PIXEL_FMT_0, 0);
+        if (setPixelFmt) StateGX::GXSetPixelFmt_(GX_PF_RGB8_Z24, 0);
 
         for (int i = 0; i < mTexNum; i++)
         {
-            mpLightTextures[i]->draw();
+            mppLightTextures[i]->draw();
         }
 
         for (int i = 0; i < mTexNum; i++)
         {
             bool b = setPixelFmt && (mFlags & 0x8);
-            mpLightTextures[i]->capture(b);
+            // mppLightTextures[i]->capture(b);
         }
 
         if (setPixelFmt)
@@ -229,7 +223,7 @@ namespace EGG
                 {
                     DrawGX::BeginDrawScreen(true, true, false);
                     DrawGX::SetBlendMode(DrawGX::BLEND_9);
-                    GXSetBlendMode(0, 4, 5, 0);
+                    GXSetBlendMode(GX_BM_NONE, GX_BL_SRCALPHA, GX_BL_INVSRCALPHA, GX_LO_CLEAR);
                     texBuf->load(GX_TEXMAP0);
                     DrawGX::DrawDL(DrawGX::DL_16, forDL, DrawGX::scColorWhite);
                     texBuf->free();
@@ -250,30 +244,19 @@ namespace EGG
         }
         GXInvalidateTexAll();
     }
-    #else
-    #error This file has yet to be decompiled accurately. Use "eggLightTextureManager.s" instead.
-    #endif
 
     const char *LightTextureManager::GetBinaryType() const
     {
         return "LMAP";
     }
 
-    #ifdef __DECOMP_NON_MATCHING
     void LightTextureManager::SetBinaryInner(const IBinary::Bin& bin)
     {
     }
-    #else
-    #error This file has yet to be decompiled accurately. Use "eggLightTextureManager.s" instead.
-    #endif
 
-    #ifdef __DECOMP_NON_MATCHING
     void LightTextureManager::GetBinaryInner(IBinary::Bin *bin) const
     {
     }
-    #else
-    #error This file has yet to be decompiled accurately. Use "eggLightTextureManager.s" instead.
-    #endif
 
     u8 LightTextureManager::GetVersion() const
     {

@@ -1,9 +1,8 @@
 #ifndef NW4R_G3D_SCNRFL_H
 #define NW4R_G3D_SCNRFL_H
 #include "types_nw4r.h"
-#include "g3d_scnleaf.h"
-#include <RFL/RFL_Model.h>
-#include <RFL/RFL_MiddleDatabase.h>
+#include <RVLFaceLib/RFL_Model.h>
+#include <RVLFaceLib/RFL_MiddleDatabase.h>
 
 namespace nw4r
 {

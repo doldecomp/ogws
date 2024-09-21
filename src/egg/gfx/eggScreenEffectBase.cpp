@@ -28,7 +28,6 @@ namespace EGG
         mScreen.CopyFromAnother(screen);
     }
 
-    #ifdef __DECOMP_NON_MATCHING
     // https://decomp.me/scratch/w13Yi
     // - There seems to be some BSS pooling(?) regarding
     //   the workspace views
@@ -55,9 +54,7 @@ namespace EGG
         sWorkSpaceV.FLOAT_0x10 = sWorkSpaceHideV.FLOAT_0x10 = 0.0f;
         sWorkSpaceV.FLOAT_0x14 = sWorkSpaceHideV.FLOAT_0x14 = 0.0f;
     }
-    #endif
 
-    #ifdef __DECOMP_NON_MATCHING
     // https://decomp.me/scratch/RYUOH
     // - Despite the setBuffer inline being used, it seems like
     //   there is a temp variable for &spBufferSet[type]
@@ -109,7 +106,7 @@ namespace EGG
                     }
                     
                     buffer = TextureBuffer::alloc(sWorkSpaceHideV.x2,
-                        sWorkSpaceHideV.y2, GX_TEX_FMT_6);
+                        sWorkSpaceHideV.y2, GX_TF_RGBA8);
                     setBuffer(type, buffer);
                     
                     if (buffer != NULL)
@@ -117,13 +114,13 @@ namespace EGG
                     break;
                 case cBufferType_2:
                     buffer = TextureBuffer::alloc(efb.vp.x2, efb.vp.y2,
-                        GX_TEX_FMT_6);
+                        GX_TF_RGBA8);
                     setBuffer(type, buffer);
                     buffer->clearFlag(0x80);
                     break;
                 case cBufferType_3:
                     buffer = TextureBuffer::alloc(efb.vp.x2 / 2.0f,
-                        efb.vp.y2 / 2.0f, GX_TEX_FMT_6);
+                        efb.vp.y2 / 2.0f, GX_TF_RGBA8);
                     setBuffer(type, buffer);
                     upscale = true;
                     buffer->setFlag(0x40);
@@ -155,7 +152,6 @@ namespace EGG
 
         return getBuffer(type);
     }
-    #endif
 
     bool ScreenEffectBase::release(BufferType type) const
     {

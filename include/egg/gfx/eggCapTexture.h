@@ -28,7 +28,7 @@ namespace EGG
         u32 mClearZ; // at 0x20
         u8 mCopyFilterArg1[7]; // at 0x24
 
-        static const u8 scCopyFilterArg0[24];
+        static const u8 scCopyFilterArg0[12][2];
         static u8 sCopyFilterArg1_0[7];
         static u8 sCopyFilterArg1_1[7];
     };

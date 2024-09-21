@@ -10,14 +10,14 @@ static OSInterruptHandler __DBMtrCallback;
 static u8 __DBReadUSB_CSR(void);
 static void __DBWaitForSendMail(void);
 
-void __DBMtrHandler(u32 type, OSContext* ctx) {
+void __DBMtrHandler(s16 type, OSContext* ctx) {
     __DBEXIInputFlag = TRUE;
 
     if (__DBMtrCallback != NULL)
         __DBMtrCallback(0, ctx);
 }
 
-void __DBIntrHandler(u32 type, OSContext* ctx) {
+void __DBIntrHandler(s16 type, OSContext* ctx) {
     PI_HW_REGS[PI_INTSR] = PI_INTSR_DEBUG;
     if (__DBDbgCallback != NULL)
         __DBDbgCallback(type, ctx);
@@ -52,7 +52,7 @@ void DBInitComm(u8** flagOut, OSInterruptHandler handler) {
     OSRestoreInterrupts(enabled);
 }
 
-#ifdef __DECOMP_NON_MATCHING
+// Non-matching
 void DBInitInterrupts(void) {
     __OSMaskInterrupts(OS_INTR_MASK(OS_INTR_EXI_2_EXI) |
                        OS_INTR_MASK(OS_INTR_EXI_2_TC));
@@ -61,9 +61,6 @@ void DBInitInterrupts(void) {
     __OSSetInterruptHandler(OS_INTR_PI_DEBUG, __DBIntrHandler);
     __OSUnmaskInterrupts(OS_INTR_MASK(OS_INTR_PI_DEBUG));
 }
-#else
-#error This file has not yet been decompiled accurately. Use "DebuggerDriver.s" instead.
-#endif
 
 u32 DBQueryData(void) {
     __DBEXIInputFlag = FALSE;

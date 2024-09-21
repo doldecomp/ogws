@@ -5,7 +5,6 @@ namespace nw4r
 {
     namespace g3d
     {
-        #ifdef __DECOMP_NON_MATCHING
         // https://decomp.me/scratch/FjaQH
         void AnmScn::GetLightSetting(LightSetting *pSetting)
         {
@@ -68,8 +67,5 @@ namespace nw4r
                 }
             }
         }
-        #else
-        #error This file has yet to be decompiled accurately. Use "g3d_anmscn.s" instead.
-        #endif
     }
 }

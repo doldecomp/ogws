@@ -130,12 +130,9 @@ namespace EGG
     }
 
     // https://decomp.me/scratch/zesmA
-    #ifdef __DECOMP_NON_MATCHING
     void ModelEx::getShapeMinMax(u16 shapeIndex, math::VEC3 *pMin, math::VEC3 *pMax, bool doCalcWorld)
     {
     }
-    #else
-    #endif
 
     void ModelEx::setVisible(bool vis)
     {
@@ -181,8 +178,8 @@ namespace EGG
     {
         void UNUSED_ASSERTS_MODELEX(ModelBoundingInfo *bounding)
         {
-            bounding->UNKNOWN_INLINE_0(bounding);
-            bounding->UNKNOWN_INLINE_1(bounding);
+            bounding->UNKNOWN_INLINE_0(NULL);
+            bounding->UNKNOWN_INLINE_1(NULL);
         }
     }
 
@@ -275,13 +272,10 @@ namespace EGG
     }
 
     // https://decomp.me/scratch/0xxAL
-    #ifdef __DECOMP_NON_MATCHING
     u16 ModelEx::replaceTexture(const char *name, const int& r5, bool r6,
         TextureReplaceResult *result, u16 r8, bool matAccess)
     {
     }
-    #else
-    #endif
 
     void ModelEx::attachBoundingInfo(ModelBoundingInfo *bounding)
     {

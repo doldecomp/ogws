@@ -1,5 +1,3 @@
-#pragma use_lmw_stmw on
-
 #include "eggIScnProc.h"
 #include "eggHeap.h"
 #include "eggG3DUtility.h"

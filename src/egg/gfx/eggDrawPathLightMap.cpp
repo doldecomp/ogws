@@ -32,43 +32,42 @@ namespace EGG
     }
 
     // https://decomp.me/scratch/53SOd
-    #ifdef __DECOMP_NON_MATCHING
     void DrawPathLightMap::draw(u16 idx)
     {
-        const Screen::DataEfb* efb = GXUtility::getScreen().GetDataEfb();
+        const Screen::DataEfb& efb = GXUtility::getScreen().GetDataEfb();
         
         switch(idx)
         {
             case 0:
                 if (BYTE_0x7C & 1)
                 {
-                    BUF_0x8C = TextureBuffer::alloc(efb->FLOAT_0x8, efb->FLOAT_0xC, GX_TEX_FMT_6);
+                    BUF_0x8C = TextureBuffer::alloc(efb.vp.x2, efb.vp.y2, GX_TF_RGBA8);
                     BUF_0x8C->setFlag(0x8);
                     BUF_0x8C->setFlag(0x10);
-                    BUF_0x8C->capture(efb->FLOAT_0x0, efb->FLOAT_0x4, false, -1);
+                    BUF_0x8C->capture(efb.vp.x1, efb.vp.y1, false, -1);
                 }
                 break;
             case 1:
                 if (WORD_0x80 == 2)
                 {
-                    BUF_0x84 = TextureBuffer::alloc(efb->FLOAT_0x8, efb->FLOAT_0xC, GX_TEX_FMT_4);
+                    BUF_0x84 = TextureBuffer::alloc(efb.vp.x2, efb.vp.y2, GX_TF_RGB565);
                 }
                 else
                 {
-                    BUF_0x84 = TextureBuffer::alloc(efb->FLOAT_0x8, efb->FLOAT_0xC, GX_TEX_FMT_6);
+                    BUF_0x84 = TextureBuffer::alloc(efb.vp.x2, efb.vp.y2, GX_TF_RGBA8);
                 }
 
                 BUF_0x84->setFlag(0x8);
                 BUF_0x84->setFlag(0x10);
                 if (!(BYTE_0x7C & 2)) BUF_0x84->setFlag(0x20);
 
-                int capW = efb->FLOAT_0x0;
-                int capH = efb->FLOAT_0x4;
+                int capW = efb.vp.x1;
+                int capH = efb.vp.y1;
                 BUF_0x84->capture(capW, capH, false, -1);
 
                 if (BUF_0x8C)
                 {
-                    math::MTX34 forDL;
+                    nw4r::math::MTX34 forDL;
                     PostEffectBase::setProjection(GetScreen());
 
                     u16 screenH = GetScreen().GetHeight();
@@ -77,7 +76,7 @@ namespace EGG
                     
                     BUF_0x8C->load(GX_TEXMAP0);
                     DrawGX::BeginDrawScreen(true, true, false);
-                    GXSetBlendMode(0, 4, 5, 0);
+                    GXSetBlendMode(GX_BM_NONE, GX_BL_SRCALPHA, GX_BL_INVSRCALPHA, GX_LO_CLEAR);
 
                     StateGX::ScopedColor color(true);
                     StateGX::ScopedAlpha alpha(true);
@@ -89,7 +88,7 @@ namespace EGG
 
                 if (BYTE_0x7C & 2)
                 {
-                    BUF_0x88 = TextureBuffer::alloc(efb->FLOAT_0x8, efb->FLOAT_0xC, GX_TEX_FMT_22);
+                    BUF_0x88 = TextureBuffer::alloc(efb.vp.x2, efb.vp.y2, GX_TF_Z24X8);
                     BUF_0x88->setFlag(0x20);
                     
                     if (isFlag0x2())
@@ -112,7 +111,7 @@ namespace EGG
                     BUF_0x84->setMagFilt(0);
                     BUF_0x84->load(GX_TEXMAP0);
                     
-                    math::MTX34 forDL;
+                    nw4r::math::MTX34 forDL;
                     PostEffectBase::setProjection(GetScreen());
                     PSMTXScale(forDL, GetScreen().GetWidth(), GetScreen().GetHeight(), 1.0f);
                     
@@ -134,55 +133,55 @@ namespace EGG
 
                         GXSetTevKColor(GX_KCOLOR0, (GXColor){0, 0, 0, 0});
 
-                        GXSetTevSwapModeTable(GX_TEV_SWAP0, 0, 1, 2, 3);
+                        GXSetTevSwapModeTable(GX_TEV_SWAP0, GX_CH_RED, GX_CH_GREEN, GX_CH_BLUE, GX_CH_ALPHA);
                         GXSetNumTevStages(2);
-                        GXSetTevDirect(0);
-                        GXSetTevDirect(1);
-                        GXSetTevSwapMode(GX_TEVSTAGE0, 0, 0);
-                        GXSetTevSwapMode(GX_TEV_STAGE_ID_1, 0, 0);
+                        GXSetTevDirect(GX_TEVSTAGE0);
+                        GXSetTevDirect(GX_TEVSTAGE1);
+                        GXSetTevSwapMode(GX_TEVSTAGE0, GX_TEV_SWAP0, GX_TEV_SWAP0);
+                        GXSetTevSwapMode(GX_TEVSTAGE1, GX_TEV_SWAP0, GX_TEV_SWAP0);
 
                         if (WORD_0x80 == 0)
                         {
-                            GXSetTevKAlphaSel(GX_TEVSTAGE0, 28);
-                            GXSetTevOrder(GX_TEVSTAGE0, GX_TEXCOORD0, GX_TEXMAP0, 4);
-                            GXSetTevColorIn(GX_TEVSTAGE0, 15, 8, 10, 15);
-                            GXSetTevColorOp(GX_TEVSTAGE0, 0, 0, 0, 1, 0);
-                            GXSetTevAlphaIn(GX_TEVSTAGE0, 4, 6, 5, 7);
-                            GXSetTevAlphaOp(GX_TEVSTAGE0, 14, 0, 0, 1, 0);
+                            GXSetTevKAlphaSel(GX_TEVSTAGE0, GX_TEV_KASEL_K0_A);
+                            GXSetTevOrder(GX_TEVSTAGE0, GX_TEXCOORD0, GX_TEXMAP0, GX_COLOR0A0);
+                            GXSetTevColorIn(GX_TEVSTAGE0, GX_CC_ZERO, GX_CC_TEXC, GX_CC_RASC, GX_CC_ZERO);
+                            GXSetTevColorOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, 1, GX_TEVPREV);
+                            GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_TEXA, GX_CA_KONST, GX_CA_RASA, GX_CA_ZERO);
+                            GXSetTevAlphaOp(GX_TEVSTAGE0, GX_TEV_COMP_A8_GT, GX_TB_ZERO, GX_CS_SCALE_1, 1, GX_TEVPREV);
                         }
                         else
                         {
-                            GXSetTevKAlphaSel(GX_TEVSTAGE0, 28);
-                            GXSetTevOrder(GX_TEVSTAGE0, GX_TEXCOORD0, GX_TEXMAP0, 4);
-                            GXSetTevColorIn(GX_TEVSTAGE0, 15, 15, 15, 8);
-                            GXSetTevColorOp(GX_TEVSTAGE0, 0, 0, 0, 1, 0);
-                            GXSetTevAlphaIn(GX_TEVSTAGE0, 7, 7, 7, 5);
-                            GXSetTevAlphaOp(GX_TEVSTAGE0, 0, 0, 0, 1, 0);
+                            GXSetTevKAlphaSel(GX_TEVSTAGE0, GX_TEV_KASEL_K0_A);
+                            GXSetTevOrder(GX_TEVSTAGE0, GX_TEXCOORD0, GX_TEXMAP0, GX_COLOR0A0);
+                            GXSetTevColorIn(GX_TEVSTAGE0, GX_CC_ZERO, GX_CC_ZERO, GX_CC_ZERO, GX_CC_TEXC);
+                            GXSetTevColorOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, 1, GX_TEVPREV);
+                            GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_ZERO, GX_CA_ZERO, GX_CA_ZERO, GX_CA_RASA);
+                            GXSetTevAlphaOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, 1, GX_TEVPREV);
                         }
 
-                        GXSetTevSwapMode(GX_TEV_STAGE_ID_1, 0, 0);
-                        GXSetTevOrder(GX_TEV_STAGE_ID_1, GX_TEXCOORD0, GX_TEXMAP1, 0xFF);
-                        GXSetTevColorIn(GX_TEV_STAGE_ID_1, 15, 15,15, 0);
-                        GXSetTevColorOp(GX_TEV_STAGE_ID_1, 0, 0, 0, 1, 0);
-                        GXSetTevAlphaIn(GX_TEV_STAGE_ID_1, 7, 7, 7, 0);
-                        GXSetTevAlphaOp(GX_TEV_STAGE_ID_1, 0, 0, 0, 1, 0);
-                        GXSetZTexture(2, 22, 0);
+                        GXSetTevSwapMode(GX_TEVSTAGE1, GX_TEV_SWAP0, GX_TEV_SWAP0);
+                        GXSetTevOrder(GX_TEVSTAGE1, GX_TEXCOORD0, GX_TEXMAP1, GX_COLOR_NULL);
+                        GXSetTevColorIn(GX_TEVSTAGE1, GX_CC_ZERO, GX_CC_ZERO, GX_CC_ZERO, GX_CC_CPREV);
+                        GXSetTevColorOp(GX_TEVSTAGE1, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, 1, GX_TEVPREV);
+                        GXSetTevAlphaIn(GX_TEVSTAGE1, GX_CA_ZERO, GX_CA_ZERO, GX_CA_ZERO, GX_CA_APREV);
+                        GXSetTevAlphaOp(GX_TEVSTAGE1, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, 1, GX_TEVPREV);
+                        GXSetZTexture(GZ_ZT_REPLACE, GX_TF_Z24X8, 0);
                         DrawGX::SetZMode(DrawGX::ZMODE_1);
                         GXSetZCompLoc(0);
-                        GXSetAlphaCompare(7, 0, 1, 7, 0);
+                        GXSetAlphaCompare(GX_ALWAYS, 0, GX_AOP_OR, GX_ALWAYS, 0);
                         DrawGX::SetBlendMode(DrawGX::BLEND_0);
                         DrawGX::SetVtxState(DrawGX::VTX_TYPE_11);
                     }
                     else
                     {
                         DrawGX::BeginDrawScreen(true, true, false);
-                        GXSetTevKAlphaSel(GX_TEVSTAGE0, 0x1C);
-                        GXSetTevAlphaIn(GX_TEVSTAGE0, 4, 7, 5, 7);
-                        GXSetTevAlphaOp(GX_TEVSTAGE0, 14, 0, 0, 1, 0);
+                        GXSetTevKAlphaSel(GX_TEVSTAGE0, GX_TEV_KASEL_K0_A);
+                        GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_TEXA, GX_CA_ZERO, GX_CA_RASA, GX_CA_ZERO);
+                        GXSetTevAlphaOp(GX_TEVSTAGE0, GX_TEV_COMP_A8_GT, GX_TB_ZERO, GX_CS_SCALE_1, 1, GX_TEVPREV);
                     }
 
                     DrawGX::DrawDL(DrawGX::DL_16, forDL, tevColor);
-                    GXSetZTexture(0, 22, 0);
+                    GXSetZTexture(GX_ZT_DISABLE, GX_TF_Z24X8, 0);
                 }
 
                 if (BUF_0x88 != NULL)
@@ -196,9 +195,6 @@ namespace EGG
                 break;
         }
     }
-    #else
-    #error "This file has yet to be decompiled accurately. Use "eggDrawPathLightMap.s" instead."
-    #endif
 
     int DrawPathLightMap::getNumScnProc() const
     {

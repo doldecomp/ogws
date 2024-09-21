@@ -1,4 +1,3 @@
-#ifdef __DECOMP_NON_MATCHING
 #include "math_types.h"
 #include "ef_rand.h"
 #include "ef_emitter.h"
@@ -86,6 +85,3 @@ namespace nw4r
 		}
 	}
 }
-#else
-#error This file has yet to be decompiled accurately. Use "ef_point.s" instead.
-#endif

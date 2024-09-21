@@ -1,5 +1,3 @@
-#pragma fp_contract on
-
 #include "eggModelSnapshot.h"
 #include "eggModelEx.h"
 #include "eggModelBoundingInfo.h"
