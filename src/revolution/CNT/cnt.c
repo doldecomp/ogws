@@ -2,7 +2,6 @@
 #include <revolution/ESP.h>
 #include <revolution/OS.h>
 
-#ifdef __DECOMP_NON_MATCHING
 static s32 __CNTConvertErrorCode(s32 error) {
     int i;
 
@@ -45,9 +44,6 @@ static s32 __CNTConvertErrorCode(s32 error) {
     OSReport("CAUTION!  Unexpected error code [%d] was found.\n", error);
     return -0x13C7;
 }
-#else
-#error This file has not yet been decompiled accurately. Use "cnt.s" instead.
-#endif
 
 s32 contentFastOpenNAND(CNTHandle* handle, s32 entrynum, CNTFileInfo* info) {
     ARCFileInfo arcInfo;

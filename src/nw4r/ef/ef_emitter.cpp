@@ -1,4 +1,3 @@
-#ifdef __DECOMP_NON_MATCHING
 #include "types_nw4r.h"
 #include "ef_emitter.h"
 #include "ef_emform.h"
@@ -76,7 +75,7 @@ namespace nw4r
 		bool Emitter::Closing(ParticleManager * pManager)
 		{
 			mEffect->mDrawOrder->Remove(mEffect, pManager);
-			pManager->REF_0x20->UnRef();
+			pManager->mEmitter->UnRef();
 			mManagers.ToClosing(pManager);
 			pManager->WORD_0xC = 3;
 			
@@ -1064,6 +1063,3 @@ namespace nw4r
 		}
 	}
 }
-#else
-#error This file has yet to be decompiled accurately. Use "ef_emitter.s" instead.
-#endif

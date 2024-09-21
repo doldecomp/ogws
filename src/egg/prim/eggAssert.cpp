@@ -1,5 +1,3 @@
-#pragma use_lmw_stmw on
-
 #include "eggAssert.h"
 #include <revolution/OS/OSError.h>
 #include <string.h>

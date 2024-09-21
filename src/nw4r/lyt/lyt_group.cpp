@@ -13,7 +13,6 @@ namespace nw4r
         using namespace ut;
         using namespace detail;
 
-        #ifdef __DECOMP_NON_MATCHING
         Group::Group(const res::Group *res, Pane *pane) : mNode(), mPaneList()
         {
             Init();
@@ -27,9 +26,6 @@ namespace nw4r
                 if (p) AppendPane(p);
             }
         }
-        #else
-        #error This file has yet to be decompiled accurately. Use "lyt_group.s" instead.
-        #endif
 
         // Inlined
         void Group::Init()
@@ -49,17 +45,13 @@ namespace nw4r
         }
 
         // Inlined
-        #ifdef __DECOMP_NON_MATCHING
         void Group::AppendPane(Pane *pane)
         {
             PaneLink *link = Layout::NewObj<PaneLink>();
             link->PANE_0x8 = pane;
             mPaneList.PushBack(link);
         }
-        #else
-        #endif
 
-        #ifdef __DECOMP_NON_MATCHING
         GroupContainer::~GroupContainer()
         {
             LinkList<Group, 4>::Iterator it = mGroups.GetBeginIter();
@@ -70,8 +62,6 @@ namespace nw4r
                 if (!temp->mIsUserAllocated) Layout::DeleteObj<Group>(&*temp);
             }
         }
-        #else
-        #endif
 
         // Inlined
         void GroupContainer::AppendGroup(Group *g)

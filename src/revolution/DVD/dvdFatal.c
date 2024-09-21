@@ -4,8 +4,6 @@
 
 static funcptr_t FatalFunc = NULL;
 
-// TODO: How to encode this Shift-JIS text?
-#ifdef __DECOMP_NON_MATCHING
 const char* const __DVDErrorMessage[] = {
     // clang-format off
 
@@ -24,7 +22,7 @@ const char* const __DVDErrorMessage[] = {
 
     // SC_LANG_DE
     "\n\n\nEin Fehler ist aufgetreten.\n"
-    "Drücke den Ausgabeknopf, entnimm die\n"
+    "Dr\xFC""cke den Ausgabeknopf, entnimm die\n"
     "Game Disc und schalte die Wii-Konsole\n"
     "aus. Bitte lies die Bedienungsanleitung der\n"
     "Wii-Konsole, um weitere Informationen zu\n"
@@ -33,20 +31,20 @@ const char* const __DVDErrorMessage[] = {
     // SC_LANG_FR
     "\n\n\nUne erreur est survenue.\n"
     "Appuyez sur le bouton EJECT, retirez\n"
-    "le disque de jeu et éteignez la console.\n"
-    "Veuillez vous référer au mode d'emploi\n"
+    "le disque de jeu et \xE9teignez la console.\n"
+    "Veuillez vous r\xE9""f\xE9rer au mode d'emploi\n"
     "de la console pour de plus amples\n"
     "informations.",
-    
+
     // SC_LANG_SP
     "\n\n\nSe ha producido un error.\n"
-    "Pulsa el Botón EJECT, saca el disco y\n"
+    "Pulsa el Bot\xF3n EJECT, saca el disco y\n"
     "apaga la consola. Consulta el manual de\n"
     "instrucciones de la consola Wii para\n"
-    "obtener más información.",
+    "obtener m\xE1s informaci\xF3n.",
     
     // SC_LANG_IT
-    "\n\n\nSi è verificato un errore.\n"
+    "\n\n\nSi \xE8 verificato un errore.\n"
     "Premi il pulsante EJECT, estrai il disco\n"
     "di gioco e spegni la console. Per maggiori\n"
     "informazioni consulta il manuale di\n"
@@ -60,9 +58,6 @@ const char* const __DVDErrorMessage[] = {
 
     // clang-format on
 };
-#else
-#error This file has not yet been decompiled accurately. Use "dvdFatal.s" instead.
-#endif
 
 void __DVDShowFatalMessage(void) {
     const char* msg;

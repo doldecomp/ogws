@@ -16,7 +16,6 @@ namespace EGG
         return (!d.open(path)) ? NULL : loadToMainRAM(&d, dest, heap, allocDir, pos, r8, pSize);
     }
 
-    #ifdef __DECOMP_NON_MATCHING
     void * DvdRipper::loadToMainRAM(DvdFile *dvdFile, u8 *dest, Heap *heap,
         EAllocDirection allocDir, u32 pos, u32 *r8, u32 *pSize)
     {
@@ -24,7 +23,7 @@ namespace EGG
         bool allocSuccess = false; // Steals r29 from fileSize, should be in r30
         fileSize = dvdFile->getFileSize();
         if (pSize) *pSize = fileSize;
-        u32 alignedSize = ut::RoundUp<u32>(fileSize, 32);
+        u32 alignedSize = nw4r::ut::RoundUp<u32>(fileSize, 32);
 
         if (!dest)
         {
@@ -48,7 +47,7 @@ namespace EGG
             u8 buf[32];
             while (true)
             {
-                result = DVDReadPrio(&dvdFile->mFileInfo, ut::RoundUp<void *>(buf, 32), 32, pos, DVD_PRIO_MEDIUM);
+                result = DVDReadPrio(&dvdFile->mFileInfo, (void *)nw4r::ut::RoundUp((uintptr_t)buf, 32), 32, pos, DVD_PRIO_MEDIUM);
 
                 if (result >= 0) break;
 
@@ -64,7 +63,7 @@ namespace EGG
                 VIWaitForRetrace();
             }
 
-            DCInvalidateRange(ut::RoundUp<void *>(buf, 32), 32);
+            DCInvalidateRange((void *)nw4r::ut::RoundUp((uintptr_t)buf, 32), 32);
         }
 
         while (true)
@@ -94,9 +93,6 @@ namespace EGG
 
         return dest;
     }
-    #else
-    #error This file has yet to be decompiled accurately. Use "eggDvdRipper.s" instead.
-    #endif
 
     bool DvdRipper::sErrorRetry = true;
 }

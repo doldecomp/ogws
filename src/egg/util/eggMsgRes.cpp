@@ -10,7 +10,6 @@ namespace EGG
     /*
         This can't really be matched until analyzeDataBlkKind can be auto inlined.
     */
-    #ifdef __DECOMP_NON_MATCHING
     MsgRes::MsgRes(const void *data)
     {
         #line 53
@@ -35,7 +34,7 @@ namespace EGG
             EGG_ASSERT(( u32 )data + mMsgHeader->mDataSize > ( u32 )current);
 
             u32 kind = getDataBlkKind(current);
-            void *block = current;
+            const void *block = current;
             switch(analyzeDataBlkKind(kind))
             {
                 case BLOCK_MSGID:
@@ -68,9 +67,6 @@ namespace EGG
             current = (void *)((u32)current + blkSize);
         }
     }
-    #else
-    #error This file has yet to be decompiled accurately. Use "eggMsgRes.s" instead.
-    #endif
 
     MsgRes::~MsgRes()
     {
@@ -174,7 +170,6 @@ namespace EGG
         There must be something else at play here because pool_data doesn't touch const data,
         only global/static.
     */
-    #ifdef __DECOMP_NON_MATCHING
     MsgRes::EDataBlkKind MsgRes::analyzeDataBlkKind(unsigned int kind)
     {
         if (kind == cMsgSectionMagic[BLOCK_MSGINFO]) return BLOCK_MSGINFO;
@@ -190,9 +185,6 @@ namespace EGG
             return BLOCK_ILLEGAL;
         }
     }
-    #else
-    // #error
-    #endif
 
     /*
         Masks aren't being loaded properly.
@@ -200,7 +192,6 @@ namespace EGG
 
         This is probably because I haven't gotten the const data pooling to work yet.
     */
-    #ifdef __DECOMP_NON_MATCHING
     MsgRes::MsgInfoBlockEntry * MsgRes::getMsgEntry(unsigned int r4 , unsigned int r5)
     {
         #line 380
@@ -225,9 +216,6 @@ namespace EGG
 
         return NULL;
     }
-    #else
-    // #error
-    #endif
 
     u32 MsgRes::getMsgID(u16 i)
     {

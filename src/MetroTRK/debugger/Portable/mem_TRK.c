@@ -21,7 +21,6 @@ DECL_SECTION(".init") void* TRK_memset(void* dest, int val, size_t count) {
     return dest;
 }
 
-#ifdef __DECOMP_NON_MATCHING
 // https://decomp.me/scratch/xJC0Q
 void TRK_fill_mem(void* dst, int c, size_t count) {
     int work;
@@ -85,6 +84,3 @@ void TRK_fill_mem(void* dst, int c, size_t count) {
         } while (--count);
     }
 }
-#else
-#error This file has not yet been decompiled accurately. Use "mem_TRK.s" instead.
-#endif

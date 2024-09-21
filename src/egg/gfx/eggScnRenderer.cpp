@@ -1,5 +1,3 @@
-#pragma use_lmw_stmw on
-
 #include "eggScnRenderer.h"
 #include "eggDrawPathBase.h"
 #include "eggDrawPathLightMap.h"

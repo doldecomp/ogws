@@ -38,7 +38,6 @@ namespace EGG
         TextureBuffer::initialize(w * h * 0xC, heap);
     }
 
-    #ifdef __DECOMP_NON_MATCHING
     void GfxEngine::beginDraw()
     {
         StateGX::frameInit();
@@ -49,9 +48,6 @@ namespace EGG
 
         G3DUtility::clearTempMem();
     }
-    #else
-    #error This file has yet to be decompiled accurately. Use "eggGfxEngine.s" instead.
-    #endif
 
     GfxEngine::GfxEngine() :
         PTR_0x4(NULL)

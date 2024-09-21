@@ -28,6 +28,8 @@ void GXInitTlutObj(GXTlutObj*, void*, GXTlutFmt, u16);
 
 void GXInvalidateTexAll(void);
 
+u32 GXGetTexBufferSize(u16 width, u16 height, u32 format, GXBool mipmap, u8 max_lod);
+
 // TODO
 UNKTYPE GXSetTexCoordScaleManually(UNKWORD, UNKWORD, UNKWORD, UNKWORD);
 UNKTYPE GXSetTexCoordCylWrap(UNKWORD, UNKWORD, UNKWORD);

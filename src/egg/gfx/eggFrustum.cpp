@@ -1,5 +1,4 @@
 #pragma ipa file
-#pragma fp_contract on
 
 #include "eggFrustum.h"
 #include "eggAssert.h"
@@ -141,7 +140,7 @@ namespace EGG
 
         switch(result.projType)
         {
-            case GX_PROJECTION_PERSP:
+            case GX_PERSPECTIVE:
                 mProjType = PROJ_PERSP;
                 if ((flags & 0x1) == 0)
                 {
@@ -153,7 +152,7 @@ namespace EGG
                     mScale = math::VEC3(1.0f, 1.0f, 1.0f);
                 }
                 break;
-            case GX_PROJECTION_ORTHO:
+            case GX_ORTHOGRAPHIC:
                 mProjType = PROJ_ORTHO;
                 if ((flags & 0x2) == 0)
                 {
@@ -250,23 +249,15 @@ namespace EGG
         *this = other;
     }
 
-    #ifdef __DECOMP_NON_MATCHING
     // https://decomp.me/scratch/XO2Aa
     void Frustum::GetViewToScreen(nw4r::math::VEC3 *pScreenPos, const nw4r::math::VEC3& viewPos) const
     {
     }
-    #else
-    #error This file has yet to be decompiled accurately. Use "eggFrustum.s" instead.
-    #endif
 
-    #ifdef __DECOMP_NON_MATCHING
     // https://decomp.me/scratch/r9gD9
     void Frustum::GetScreenToView(nw4r::math::VEC3 *pViewPos, const nw4r::math::VEC3& screenPos) const
     {
     }
-    #else
-    #error This file has yet to be decompiled accurately. Use "eggFrustum.s" instead.
-    #endif
 
     void Frustum::GetScreenToView(math::VEC3 *pPosView, const math::VEC2& screenPos) const
     {
