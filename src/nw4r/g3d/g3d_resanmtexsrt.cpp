@@ -15,13 +15,13 @@ DECOMP_INLINE u32 MakeResult(TexSrt* pSrt, const ResAnmTexSrtTexData* pTexData,
     u32 flags = pTexData->flags;
     TexSrt& rSrt = *pSrt;
 
-    if (!(flags & ResAnmTexSrtTexData::FLAG_SCALE_ONE)) {
+    if (!(flags & ResAnmTexSrtTexData::FLAG_S_ONE)) {
         bool suConstant = flags & ResAnmTexSrtTexData::FLAG_SCALE_CONSTANT_U;
 
         rSrt.Su = detail::GetResAnmResult(&pTexData->anms[anmIdx++], frame,
                                           suConstant);
 
-        if (flags & ResAnmTexSrtTexData::FLAG_SCALE_UNIFORM) {
+        if (flags & ResAnmTexSrtTexData::FLAG_S_UNIFORM) {
             rSrt.Sv = rSrt.Su;
         } else {
             bool svConstant =
@@ -35,7 +35,7 @@ DECOMP_INLINE u32 MakeResult(TexSrt* pSrt, const ResAnmTexSrtTexData* pTexData,
         rSrt.Sv = 1.0f;
     }
 
-    if (!(flags & ResAnmTexSrtTexData::FLAG_ROT_ZERO)) {
+    if (!(flags & ResAnmTexSrtTexData::FLAG_R_ZERO)) {
         bool rConstant = flags & ResAnmTexSrtTexData::FLAG_ROT_CONSTANT;
 
         rSrt.R = detail::GetResAnmResult(&pTexData->anms[anmIdx++], frame,
@@ -44,7 +44,7 @@ DECOMP_INLINE u32 MakeResult(TexSrt* pSrt, const ResAnmTexSrtTexData* pTexData,
         rSrt.R = 0.0f;
     }
 
-    if (!(flags & ResAnmTexSrtTexData::FLAG_TRANS_ZERO)) {
+    if (!(flags & ResAnmTexSrtTexData::FLAG_T_ZERO)) {
         bool tuConstant = flags & ResAnmTexSrtTexData::FLAG_TRANS_CONSTANT_U;
         bool tvConstant = flags & ResAnmTexSrtTexData::FLAG_TRANS_CONSTANT_V;
 
@@ -58,9 +58,9 @@ DECOMP_INLINE u32 MakeResult(TexSrt* pSrt, const ResAnmTexSrtTexData* pTexData,
     }
 
     return flags &
-           (ResAnmTexSrtTexData::FLAG_0 | ResAnmTexSrtTexData::FLAG_SCALE_ONE |
-            ResAnmTexSrtTexData::FLAG_ROT_ZERO |
-            ResAnmTexSrtTexData::FLAG_TRANS_ZERO);
+           (ResAnmTexSrtTexData::FLAG_0 | ResAnmTexSrtTexData::FLAG_S_ONE |
+            ResAnmTexSrtTexData::FLAG_R_ZERO |
+            ResAnmTexSrtTexData::FLAG_T_ZERO);
 }
 
 } // namespace

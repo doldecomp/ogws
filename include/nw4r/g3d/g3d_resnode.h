@@ -27,10 +27,10 @@ struct ResNodeDataTypedef {
 
     enum Flag {
         FLAG_IDENTITY = (1 << 0),
-        FLAG_TRANS_ZERO = (1 << 1),
-        FLAG_ROT_ZERO = (1 << 2),
-        FLAG_SCALE_ONE = (1 << 3),
-        FLAG_SCALE_UNIFORM = (1 << 4),
+        FLAG_T_ZERO = (1 << 1),
+        FLAG_R_ZERO = (1 << 2),
+        FLAG_S_ONE = (1 << 3),
+        FLAG_S_UNIFORM = (1 << 4),
         FLAG_COMP_SCALE = (1 << 5),
         FLAG_COMP_CHILD_SCALE = (1 << 6),
         FLAG_NO_CLASSIC_SCALE = (1 << 7),

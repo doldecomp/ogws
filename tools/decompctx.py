@@ -20,6 +20,11 @@ root_dir = os.path.abspath(os.path.join(script_dir, ".."))
 src_dir = os.path.join(root_dir, "src")
 include_dirs = [
     os.path.join(root_dir, "include"),
+    os.path.join(root_dir, "include/MSL"),
+    os.path.join(root_dir, "include/MetroTRK"),
+    os.path.join(root_dir, "include/revolution"),
+    os.path.join(root_dir, "include/nw4r"),
+    os.path.join(root_dir, "include/egg"),
     # Add additional include directories here
 ]
 
@@ -69,7 +74,8 @@ def process_file(in_file: str, lines: List[str], deps: List[str]) -> str:
         include_match = include_pattern.match(line.strip())
         if include_match and not include_match[1].endswith(".s"):
             out_text += f'/* "{in_file}" line {idx} "{include_match[1]}" */\n'
-            out_text += import_h_file(include_match[1], os.path.dirname(in_file), deps)
+            out_text += import_h_file(include_match[1],
+                                      os.path.dirname(in_file), deps)
             out_text += f'/* end "{include_match[1]}" */\n'
         else:
             out_text += line

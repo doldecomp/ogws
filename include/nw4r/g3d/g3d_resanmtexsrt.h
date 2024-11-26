@@ -44,9 +44,9 @@ struct TexSrtAnmResult : ResAnmTexSrtDataTypedef, TexSrtTypedef {
     enum Flag {
         // TODO: Naming
         FLAG_0 = (1 << 0),
-        FLAG_SCALE_ONE = (1 << 1),
-        FLAG_ROT_ZERO = (1 << 2),
-        FLAG_TRANS_ZERO = (1 << 3),
+        FLAG_S_ONE = (1 << 1),
+        FLAG_R_ZERO = (1 << 2),
+        FLAG_T_ZERO = (1 << 3),
 
         NUM_OF_FLAGS = 4
     };
@@ -60,11 +60,11 @@ struct ResAnmTexSrtTexData {
         // TODO: Naming
         FLAG_0 = (1 << 0),
 
-        FLAG_SCALE_ONE = (1 << 1),
-        FLAG_ROT_ZERO = (1 << 2),
-        FLAG_TRANS_ZERO = (1 << 3),
+        FLAG_S_ONE = (1 << 1),
+        FLAG_R_ZERO = (1 << 2),
+        FLAG_T_ZERO = (1 << 3),
 
-        FLAG_SCALE_UNIFORM = (1 << 4),
+        FLAG_S_UNIFORM = (1 << 4),
         FLAG_SCALE_CONSTANT_U = (1 << 5),
         FLAG_SCALE_CONSTANT_V = (1 << 6),
 

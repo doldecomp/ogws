@@ -85,6 +85,7 @@ public:
         return ref().info.numResAnmFogData;
     }
 };
+
 } // namespace g3d
 } // namespace nw4r
 

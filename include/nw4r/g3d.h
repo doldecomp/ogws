@@ -8,6 +8,7 @@
 #include <nw4r/g3d/g3d_resanm.h>
 #include <nw4r/g3d/g3d_resanmamblight.h>
 #include <nw4r/g3d/g3d_resanmcamera.h>
+#include <nw4r/g3d/g3d_resanmchr.h>
 #include <nw4r/g3d/g3d_resanmclr.h>
 #include <nw4r/g3d/g3d_resanmfog.h>
 #include <nw4r/g3d/g3d_resanmlight.h>
