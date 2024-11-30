@@ -1,14 +1,15 @@
 #ifndef RVL_SDK_GX_TEXTURE_H
 #define RVL_SDK_GX_TEXTURE_H
+#include <types.h>
+
 #include <revolution/GX/GXInternal.h>
 #include <revolution/GX/GXTypes.h>
-#include <types.h>
 #ifdef __cplusplus
 extern "C" {
 #endif
 
 GX_DECL_PUBLIC_STRUCT(GXTexObj, 32);
-GX_DECL_PUBLIC_STRUCT(GXTlutObj, 32);
+GX_DECL_PUBLIC_STRUCT(GXTlutObj, 0x0C);
 
 void __GXSetSUTexRegs(void);
 
@@ -28,7 +29,8 @@ void GXInitTlutObj(GXTlutObj*, void*, GXTlutFmt, u16);
 
 void GXInvalidateTexAll(void);
 
-u32 GXGetTexBufferSize(u16 width, u16 height, u32 format, GXBool mipmap, u8 max_lod);
+u32 GXGetTexBufferSize(u16 width, u16 height, u32 format, GXBool mipmap,
+                       u8 max_lod);
 
 // TODO
 UNKTYPE GXSetTexCoordScaleManually(UNKWORD, UNKWORD, UNKWORD, UNKWORD);

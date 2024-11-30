@@ -27,7 +27,7 @@ struct ResTevCommonDL {
 struct ResTevVariableDL {
     union {
         struct {
-            u8 tevKonstantSel[10];                                // at 0x0
+            u8 tevKonstantSel[GX_BP_CMD_SZ * 2];                  // at 0x0
             u8 tevOrder[GX_BP_CMD_SZ];                            // at 0xA
             u8 tevColorCalc[TEV_STAGES_PER_DL][GX_BP_CMD_SZ];     // at 0xF
             u8 alphaCalcAndSwap[TEV_STAGES_PER_DL][GX_BP_CMD_SZ]; // at 0x19

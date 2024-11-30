@@ -265,7 +265,24 @@ void ResWriteCPCmd(u8* pPtr, u8 addr, u32 value);
  * GX Transform Unit (XF)
  *
  ******************************************************************************/
+inline void ResReadXFCmd(const u8* pPtr, u32* pOut) {
+    // Skip over FIFO command byte + size short + addr short
+    *pOut = ResRead_u32(pPtr + 5);
+}
+
 void ResWriteXFCmd(u8* pPtr, u16 addr, u32 value);
+
+/******************************************************************************
+ *
+ * Utility functions
+ *
+ ******************************************************************************/
+inline GXColor GetRGBA(u8 r, u8 g, u8 b, u8 a) {
+    return (GXColor){r, g, b, a};
+}
+inline GXColorS10 GetRGBAS10(s16 r, s16 g, s16 b, s16 a) {
+    return (GXColorS10){r, g, b, a};
+}
 
 } // namespace detail
 } // namespace g3d

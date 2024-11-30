@@ -122,7 +122,7 @@
                     "end": 30
                 },
                 {
-                    "name": "lmaskHi",
+                    "name": "lmaskLo",
                     "start": 26,
                     "end": 29
                 },
@@ -147,7 +147,7 @@
                     "end": 21
                 },
                 {
-                    "name": "lmaskLo",
+                    "name": "lmaskHi",
                     "start": 17,
                     "end": 20
                 }

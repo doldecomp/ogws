@@ -467,7 +467,7 @@ u32 ResFile::GetResAnmScnNumEntries() const {
     return 0;
 }
 
-bool ResFile::Bind(ResFile file) {
+bool ResFile::Bind(const ResFile file) {
     u32 i;
     bool success = true;
 

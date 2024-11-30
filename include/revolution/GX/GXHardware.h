@@ -156,14 +156,14 @@ typedef enum {
     WGPIPE.c = GX_FIFO_CMD_LOAD_XF_REG;                                        \
     WGPIPE.i = (addr);
 
-#define GX_XF_CMD_SZ (sizeof(u8) + sizeof(u32))
-
 /**
  * Load immediate value into XF register
  */
 #define GX_XF_LOAD_REG(addr, data)                                             \
     GX_XF_LOAD_REG_HDR(addr);                                                  \
     WGPIPE.i = (data);
+
+#define GX_XF_CMD_SZ (sizeof(u8) + sizeof(u32) + sizeof(u32))
 
 /**
  * Load immediate values into multiple XF registers
@@ -212,6 +212,11 @@ typedef enum {
 
     GX_RAS_MAX_CHANNEL
 } GXRasChannelID;
+
+typedef enum {
+    GX_TEVREG_COLOR,
+    GX_TEVREG_KONST,
+} GXTevRegType;
 
 #ifdef __cplusplus
 }

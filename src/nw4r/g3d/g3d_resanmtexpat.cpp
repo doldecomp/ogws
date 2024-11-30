@@ -118,7 +118,7 @@ void ResAnmTexPat::GetAnmResult(TexPatAnmResult* pResult, u32 id,
     }
 }
 
-bool ResAnmTexPat::Bind(ResFile file) {
+bool ResAnmTexPat::Bind(const ResFile file) {
     const ResAnmTexPatInfoData& rInfoData = ref().info;
     int numTexture = rInfoData.numTexture;
     int numPalette = rInfoData.numPalette;

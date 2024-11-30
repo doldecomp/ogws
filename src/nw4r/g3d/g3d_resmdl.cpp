@@ -180,7 +180,7 @@ u32 ResMdl::GetResTexPlttInfoOffsetFromTexNameNumEntries() const {
  * ResMdl
  *
  ******************************************************************************/
-bool ResMdl::Bind(ResFile file) {
+bool ResMdl::Bind(const ResFile file) {
     u32 i;
     bool success = true;
 

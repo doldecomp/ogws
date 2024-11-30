@@ -98,7 +98,7 @@ public:
     void Init();
     void Terminate();
 
-    bool Bind(ResFile file);
+    bool Bind(const ResFile file);
     void Release();
 
     u32 GetRevision() const {

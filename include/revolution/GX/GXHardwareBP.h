@@ -1425,6 +1425,86 @@ typedef enum {
 
 
 /******************************************************************************
+ * BP structure - TevRegLo
+ *****************************************************************************/
+// RED [21:31] (11)
+        /* start bit  */ #define GX_BP_TEVREGLO_RED_B 21
+        /* end bit    */ #define GX_BP_TEVREGLO_RED_E 31
+        /* bit size   */ #define GX_BP_TEVREGLO_RED_SZ 11
+
+        /* raw mask   */ #define GX_BP_TEVREGLO_RED_MASK (((1 << 11) - 1) << 31 - 31)
+        /* local mask */ #define GX_BP_TEVREGLO_RED_LMASK ((1 << 11) - 1)
+        /* bit shift  */ #define GX_BP_TEVREGLO_RED_SHIFT 0
+
+        /* get value  */ #define GX_BP_GET_TEVREGLO_RED(reg) GX_BITGET((reg), 21, 11)
+        /* set value  */ #define GX_BP_SET_TEVREGLO_RED(reg, x) ((reg) = GX_BITSET((reg), 21, 11, x))
+
+// ALPHA [9:19] (11)
+        /* start bit  */ #define GX_BP_TEVREGLO_ALPHA_B 9
+        /* end bit    */ #define GX_BP_TEVREGLO_ALPHA_E 19
+        /* bit size   */ #define GX_BP_TEVREGLO_ALPHA_SZ 11
+
+        /* raw mask   */ #define GX_BP_TEVREGLO_ALPHA_MASK (((1 << 11) - 1) << 31 - 19)
+        /* local mask */ #define GX_BP_TEVREGLO_ALPHA_LMASK ((1 << 11) - 1)
+        /* bit shift  */ #define GX_BP_TEVREGLO_ALPHA_SHIFT 12
+
+        /* get value  */ #define GX_BP_GET_TEVREGLO_ALPHA(reg) GX_BITGET((reg), 9, 11)
+        /* set value  */ #define GX_BP_SET_TEVREGLO_ALPHA(reg, x) ((reg) = GX_BITSET((reg), 9, 11, x))
+
+// TYPE [8:8] (1)
+        /* start bit  */ #define GX_BP_TEVREGLO_TYPE_B 8
+        /* end bit    */ #define GX_BP_TEVREGLO_TYPE_E 8
+        /* bit size   */ #define GX_BP_TEVREGLO_TYPE_SZ 1
+
+        /* raw mask   */ #define GX_BP_TEVREGLO_TYPE_MASK (((1 << 1) - 1) << 31 - 8)
+        /* local mask */ #define GX_BP_TEVREGLO_TYPE_LMASK ((1 << 1) - 1)
+        /* bit shift  */ #define GX_BP_TEVREGLO_TYPE_SHIFT 23
+
+        /* get value  */ #define GX_BP_GET_TEVREGLO_TYPE(reg) GX_BITGET((reg), 8, 1)
+        /* set value  */ #define GX_BP_SET_TEVREGLO_TYPE(reg, x) ((reg) = GX_BITSET((reg), 8, 1, x))
+
+
+/******************************************************************************
+ * BP structure - TevRegHi
+ *****************************************************************************/
+// BLUE [21:31] (11)
+        /* start bit  */ #define GX_BP_TEVREGHI_BLUE_B 21
+        /* end bit    */ #define GX_BP_TEVREGHI_BLUE_E 31
+        /* bit size   */ #define GX_BP_TEVREGHI_BLUE_SZ 11
+
+        /* raw mask   */ #define GX_BP_TEVREGHI_BLUE_MASK (((1 << 11) - 1) << 31 - 31)
+        /* local mask */ #define GX_BP_TEVREGHI_BLUE_LMASK ((1 << 11) - 1)
+        /* bit shift  */ #define GX_BP_TEVREGHI_BLUE_SHIFT 0
+
+        /* get value  */ #define GX_BP_GET_TEVREGHI_BLUE(reg) GX_BITGET((reg), 21, 11)
+        /* set value  */ #define GX_BP_SET_TEVREGHI_BLUE(reg, x) ((reg) = GX_BITSET((reg), 21, 11, x))
+
+// GREEN [9:19] (11)
+        /* start bit  */ #define GX_BP_TEVREGHI_GREEN_B 9
+        /* end bit    */ #define GX_BP_TEVREGHI_GREEN_E 19
+        /* bit size   */ #define GX_BP_TEVREGHI_GREEN_SZ 11
+
+        /* raw mask   */ #define GX_BP_TEVREGHI_GREEN_MASK (((1 << 11) - 1) << 31 - 19)
+        /* local mask */ #define GX_BP_TEVREGHI_GREEN_LMASK ((1 << 11) - 1)
+        /* bit shift  */ #define GX_BP_TEVREGHI_GREEN_SHIFT 12
+
+        /* get value  */ #define GX_BP_GET_TEVREGHI_GREEN(reg) GX_BITGET((reg), 9, 11)
+        /* set value  */ #define GX_BP_SET_TEVREGHI_GREEN(reg, x) ((reg) = GX_BITSET((reg), 9, 11, x))
+
+// TYPE [8:8] (1)
+        /* start bit  */ #define GX_BP_TEVREGHI_TYPE_B 8
+        /* end bit    */ #define GX_BP_TEVREGHI_TYPE_E 8
+        /* bit size   */ #define GX_BP_TEVREGHI_TYPE_SZ 1
+
+        /* raw mask   */ #define GX_BP_TEVREGHI_TYPE_MASK (((1 << 1) - 1) << 31 - 8)
+        /* local mask */ #define GX_BP_TEVREGHI_TYPE_LMASK ((1 << 1) - 1)
+        /* bit shift  */ #define GX_BP_TEVREGHI_TYPE_SHIFT 23
+
+        /* get value  */ #define GX_BP_GET_TEVREGHI_TYPE(reg) GX_BITGET((reg), 8, 1)
+        /* set value  */ #define GX_BP_SET_TEVREGHI_TYPE(reg, x) ((reg) = GX_BITSET((reg), 8, 1, x))
+
+
+/******************************************************************************
  * BP register 0xE8 - FogRange
  *****************************************************************************/
 // CENTER [22:31] (10)
@@ -1630,6 +1710,70 @@ typedef enum {
 
         /* get value  */ #define GX_BP_GET_FOGCOLOR_RGB(reg) GX_BITGET((reg), 8, 24)
         /* set value  */ #define GX_BP_SET_FOGCOLOR_RGB(reg, x) ((reg) = GX_BITSET((reg), 8, 24, x))
+
+
+/******************************************************************************
+ * BP register 0xF3 - AlphaCompare
+ *****************************************************************************/
+// REF0 [24:31] (8)
+        /* start bit  */ #define GX_BP_ALPHACOMPARE_REF0_B 24
+        /* end bit    */ #define GX_BP_ALPHACOMPARE_REF0_E 31
+        /* bit size   */ #define GX_BP_ALPHACOMPARE_REF0_SZ 8
+
+        /* raw mask   */ #define GX_BP_ALPHACOMPARE_REF0_MASK (((1 << 8) - 1) << 31 - 31)
+        /* local mask */ #define GX_BP_ALPHACOMPARE_REF0_LMASK ((1 << 8) - 1)
+        /* bit shift  */ #define GX_BP_ALPHACOMPARE_REF0_SHIFT 0
+
+        /* get value  */ #define GX_BP_GET_ALPHACOMPARE_REF0(reg) GX_BITGET((reg), 24, 8)
+        /* set value  */ #define GX_BP_SET_ALPHACOMPARE_REF0(reg, x) ((reg) = GX_BITSET((reg), 24, 8, x))
+
+// REF1 [16:23] (8)
+        /* start bit  */ #define GX_BP_ALPHACOMPARE_REF1_B 16
+        /* end bit    */ #define GX_BP_ALPHACOMPARE_REF1_E 23
+        /* bit size   */ #define GX_BP_ALPHACOMPARE_REF1_SZ 8
+
+        /* raw mask   */ #define GX_BP_ALPHACOMPARE_REF1_MASK (((1 << 8) - 1) << 31 - 23)
+        /* local mask */ #define GX_BP_ALPHACOMPARE_REF1_LMASK ((1 << 8) - 1)
+        /* bit shift  */ #define GX_BP_ALPHACOMPARE_REF1_SHIFT 8
+
+        /* get value  */ #define GX_BP_GET_ALPHACOMPARE_REF1(reg) GX_BITGET((reg), 16, 8)
+        /* set value  */ #define GX_BP_SET_ALPHACOMPARE_REF1(reg, x) ((reg) = GX_BITSET((reg), 16, 8, x))
+
+// COMP0 [13:15] (3)
+        /* start bit  */ #define GX_BP_ALPHACOMPARE_COMP0_B 13
+        /* end bit    */ #define GX_BP_ALPHACOMPARE_COMP0_E 15
+        /* bit size   */ #define GX_BP_ALPHACOMPARE_COMP0_SZ 3
+
+        /* raw mask   */ #define GX_BP_ALPHACOMPARE_COMP0_MASK (((1 << 3) - 1) << 31 - 15)
+        /* local mask */ #define GX_BP_ALPHACOMPARE_COMP0_LMASK ((1 << 3) - 1)
+        /* bit shift  */ #define GX_BP_ALPHACOMPARE_COMP0_SHIFT 16
+
+        /* get value  */ #define GX_BP_GET_ALPHACOMPARE_COMP0(reg) GX_BITGET((reg), 13, 3)
+        /* set value  */ #define GX_BP_SET_ALPHACOMPARE_COMP0(reg, x) ((reg) = GX_BITSET((reg), 13, 3, x))
+
+// COMP1 [10:12] (3)
+        /* start bit  */ #define GX_BP_ALPHACOMPARE_COMP1_B 10
+        /* end bit    */ #define GX_BP_ALPHACOMPARE_COMP1_E 12
+        /* bit size   */ #define GX_BP_ALPHACOMPARE_COMP1_SZ 3
+
+        /* raw mask   */ #define GX_BP_ALPHACOMPARE_COMP1_MASK (((1 << 3) - 1) << 31 - 12)
+        /* local mask */ #define GX_BP_ALPHACOMPARE_COMP1_LMASK ((1 << 3) - 1)
+        /* bit shift  */ #define GX_BP_ALPHACOMPARE_COMP1_SHIFT 19
+
+        /* get value  */ #define GX_BP_GET_ALPHACOMPARE_COMP1(reg) GX_BITGET((reg), 10, 3)
+        /* set value  */ #define GX_BP_SET_ALPHACOMPARE_COMP1(reg, x) ((reg) = GX_BITSET((reg), 10, 3, x))
+
+// LOGIC [8:9] (2)
+        /* start bit  */ #define GX_BP_ALPHACOMPARE_LOGIC_B 8
+        /* end bit    */ #define GX_BP_ALPHACOMPARE_LOGIC_E 9
+        /* bit size   */ #define GX_BP_ALPHACOMPARE_LOGIC_SZ 2
+
+        /* raw mask   */ #define GX_BP_ALPHACOMPARE_LOGIC_MASK (((1 << 2) - 1) << 31 - 9)
+        /* local mask */ #define GX_BP_ALPHACOMPARE_LOGIC_LMASK ((1 << 2) - 1)
+        /* bit shift  */ #define GX_BP_ALPHACOMPARE_LOGIC_SHIFT 22
+
+        /* get value  */ #define GX_BP_GET_ALPHACOMPARE_LOGIC(reg) GX_BITGET((reg), 8, 2)
+        /* set value  */ #define GX_BP_SET_ALPHACOMPARE_LOGIC(reg, x) ((reg) = GX_BITSET((reg), 8, 2, x))
 
 
 /******************************************************************************

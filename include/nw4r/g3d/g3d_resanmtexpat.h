@@ -90,7 +90,7 @@ public:
 public:
     NW4R_G3D_RESOURCE_FUNC_DEF(ResAnmTexPat);
 
-    bool Bind(ResFile file);
+    bool Bind(const ResFile file);
     void Release();
 
     ResFile GetParent() const;

@@ -37,7 +37,7 @@ public:
     void Terminate();
     bool CheckRevision() const;
 
-    bool Bind(ResFile file);
+    bool Bind(const ResFile file);
     void Release();
 
     bool Bind() {

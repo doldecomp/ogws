@@ -45,10 +45,23 @@ public:
     void DCStore(bool sync);
 
     u16* GetPlttData() {
-        return ofs_to_ptr<u16>(ref().toPlttData);
+        ResPlttData& r = ref();
+
+        // clang-format off
+        return r.toPlttData != 0
+            ? reinterpret_cast<u16*>(reinterpret_cast<u8*>(&r) + r.toPlttData)
+            : NULL;
+        // clang-format on
     }
+
     const u16* GetPlttData() const {
-        return ofs_to_ptr<u16>(ref().toPlttData);
+        const ResPlttData& r = ref();
+
+        // clang-format off
+        return r.toPlttData != 0
+            ? reinterpret_cast<const u16*>(reinterpret_cast<const u8*>(&r) + r.toPlttData)
+            : NULL;
+        // clang-format on
     }
 
     GXTlutFmt GetFmt() const {

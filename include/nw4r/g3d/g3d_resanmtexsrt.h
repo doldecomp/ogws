@@ -5,7 +5,6 @@
 #include <nw4r/g3d/g3d_resanm.h>
 #include <nw4r/g3d/g3d_rescommon.h>
 #include <nw4r/g3d/g3d_resdict.h>
-#include <nw4r/g3d/g3d_resfile.h>
 
 namespace nw4r {
 namespace g3d {
@@ -32,7 +31,15 @@ struct TexSrt : TexSrtTypedef {
     f32 Tu; // at 0xc
     f32 Tv; // at 0x10
 
-    enum Flag {};
+    enum Flag {
+        FLAG_ANM_EXISTS = (1 << 0),
+        FLAG_SCALE_ONE = (1 << 1),
+        FLAG_ROT_ZERO = (1 << 2),
+        FLAG_TRANS_ZERO = (1 << 3),
+
+        FLAGSET_IDENTITY = (1 << 0) | (1 << 1) | (1 << 2) | (1 << 3),
+        NUM_OF_FLAGS = 4
+    };
 };
 
 struct TexSrtAnmResult : ResAnmTexSrtDataTypedef, TexSrtTypedef {

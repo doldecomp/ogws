@@ -258,9 +258,10 @@ config.linker_version = "GC/3.0a5.2"
 
 Matching = True                   # Object matches and should be linked
 NonMatching = False               # Object does not match and should not be linked
-Equivalent = config.non_matching  # Object should be linked when configured with --non-matching
+# Object should be linked when configured with --non-matching
+Equivalent = config.non_matching
 
-config.warn_missing_config = False # TODO enable
+config.warn_missing_config = False  # TODO enable
 config.warn_missing_source = False
 config.libs = [
     {
@@ -390,7 +391,7 @@ config.libs = [
             Object(Matching, "nw4r/g3d/g3d_resmdl.cpp"),
             Object(Matching, "nw4r/g3d/g3d_resshp.cpp"),
             Object(Matching, "nw4r/g3d/g3d_restev.cpp"),
-            Object(NonMatching, "nw4r/g3d/g3d_resmat.cpp"),
+            Object(Matching, "nw4r/g3d/g3d_resmat.cpp"),
             Object(Matching, "nw4r/g3d/g3d_resvtx.cpp"),
             Object(Matching, "nw4r/g3d/g3d_restex.cpp"),
             Object(Matching, "nw4r/g3d/g3d_resnode.cpp"),
@@ -505,11 +506,16 @@ config.libs = [
             Object(NonMatching, "egg/gfx/eggFrustum.cpp"),
             Object(Matching, "egg/gfx/eggGXUtility.cpp"),
             Object(NonMatching, "egg/gfx/eggDrawHelper.cpp"),
-            Object(Matching, "egg/prim/eggAssert.cpp", extra_cflags=["-Cpp_exceptions on"]),
-            Object(Matching, "egg/math/eggMath.cpp", extra_cflags=["-Cpp_exceptions on"]),
-            Object(Matching, "egg/math/eggMatrix.cpp", extra_cflags=["-Cpp_exceptions on"]),
-            Object(Matching, "egg/math/eggQuat.cpp", extra_cflags=["-Cpp_exceptions on"]),
-            Object(Matching, "egg/math/eggVector.cpp", extra_cflags=["-Cpp_exceptions on"]),
+            Object(Matching, "egg/prim/eggAssert.cpp",
+                   extra_cflags=["-Cpp_exceptions on"]),
+            Object(Matching, "egg/math/eggMath.cpp",
+                   extra_cflags=["-Cpp_exceptions on"]),
+            Object(Matching, "egg/math/eggMatrix.cpp",
+                   extra_cflags=["-Cpp_exceptions on"]),
+            Object(Matching, "egg/math/eggQuat.cpp",
+                   extra_cflags=["-Cpp_exceptions on"]),
+            Object(Matching, "egg/math/eggVector.cpp",
+                   extra_cflags=["-Cpp_exceptions on"]),
             Object(NonMatching, "egg/core/eggExpHeap.cpp"),
             Object(NonMatching, "egg/core/eggFrmHeap.cpp"),
             Object(Matching, "egg/core/eggHeap.cpp"),
@@ -684,7 +690,8 @@ config.libs = [
             Object(NonMatching, "revolution/WPAD/WPADMem.c"),
             Object(NonMatching, "revolution/WPAD/debug_msg.c"),
             Object(Matching, "revolution/EUART/euart.c"),
-            Object(Matching, "revolution/EXI/EXIBios.c", extra_cflags=["-schedule off"]),
+            Object(Matching, "revolution/EXI/EXIBios.c",
+                   extra_cflags=["-schedule off"]),
             Object(Matching, "revolution/EXI/EXIUart.c"),
             Object(Matching, "revolution/EXI/EXICommon.c"),
             Object(Matching, "revolution/FS/fs.c"),

@@ -1310,6 +1310,46 @@
             "id": "0xDF"
         },
         {
+            "name": "TevRegLo",
+            "fields": [
+                {
+                    "name": "red",
+                    "start": 21,
+                    "end": 31
+                },
+                {
+                    "name": "alpha",
+                    "start": 9,
+                    "end": 19
+                },
+                {
+                    "name": "type",
+                    "start": 8,
+                    "end": 8
+                }
+            ]
+        },
+        {
+            "name": "TevRegHi",
+            "fields": [
+                {
+                    "name": "blue",
+                    "start": 21,
+                    "end": 31
+                },
+                {
+                    "name": "green",
+                    "start": 9,
+                    "end": 19
+                },
+                {
+                    "name": "type",
+                    "start": 8,
+                    "end": 8
+                }
+            ]
+        },
+        {
             "name": "TevReg0Lo",
             "id": "0xE0"
         },
@@ -1479,7 +1519,34 @@
         },
         {
             "name": "AlphaCompare",
-            "id": "0xF3"
+            "id": "0xF3",
+            "fields": [
+                {
+                    "name": "ref0",
+                    "start": 24,
+                    "end": 31
+                },
+                {
+                    "name": "ref1",
+                    "start": 16,
+                    "end": 23
+                },
+                {
+                    "name": "comp0",
+                    "start": 13,
+                    "end": 15
+                },
+                {
+                    "name": "comp1",
+                    "start": 10,
+                    "end": 12
+                },
+                {
+                    "name": "logic",
+                    "start": 8,
+                    "end": 9
+                }
+            ]
         },
         {
             "name": "ZTexture0",
