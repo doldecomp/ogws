@@ -2,8 +2,10 @@
 #define NW4R_PUBLIC_G3D_H
 
 #include <nw4r/g3d/g3d_anmchr.h>
+#include <nw4r/g3d/g3d_basic.h>
 #include <nw4r/g3d/g3d_camera.h>
 #include <nw4r/g3d/g3d_cpu.h>
+#include <nw4r/g3d/g3d_dcc.h>
 #include <nw4r/g3d/g3d_fog.h>
 #include <nw4r/g3d/g3d_resanm.h>
 #include <nw4r/g3d/g3d_resanmamblight.h>

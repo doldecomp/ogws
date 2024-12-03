@@ -1,41 +1,23 @@
 #ifndef NW4R_G3D_BASIC_H
 #define NW4R_G3D_BASIC_H
-#include "g3d_resanmchr.h"
-#include "math_types.h"
+#include <nw4r/types_nw4r.h>
+
+#include <nw4r/math.h>
 
 namespace nw4r {
 namespace g3d {
+
+// Forward declarations
+struct ChrAnmResult;
+
 namespace detail {
-namespace WorldMtxAttr {
-
-inline bool IsScaleOne(u32 flags) {
-    return (flags & 0x40000000);
-}
-
-inline u32 AnmScaleOne(u32 flags) {
-    return (flags | 0x40000000);
-}
-
-inline u32 AnmNotScaleOne(u32 flags) {
-    return (flags & 0x3fffffff);
-}
-
-inline u32 AnmScaleUniform(u32 flags) {
-    return (flags | 0x10000000);
-}
-
-inline u32 AnmNotScaleUniform(u32 flags) {
-    return (flags & 0x0fffffff);
-}
-
-} // namespace WorldMtxAttr
-
 namespace dcc {
 
-u32 CalcWorldMtx_Basic(math::MTX34*, math::VEC3*, const math::MTX34*,
-                       const math::VEC3*, u32, const ChrAnmResult*);
-}
+u32 CalcWorldMtx_Basic(math::MTX34* pW, math::VEC3* pS, const math::MTX34* pW1,
+                       const math::VEC3* pS1, u32 attr,
+                       const ChrAnmResult* pResult);
 
+} // namespace dcc
 } // namespace detail
 } // namespace g3d
 } // namespace nw4r
