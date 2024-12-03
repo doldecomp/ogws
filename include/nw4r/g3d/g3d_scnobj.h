@@ -93,25 +93,13 @@ namespace nw4r
             }
             virtual void G3dProc(u32, u32, void *) = 0; // at 0xC
             virtual ~ScnObj(); // at 0x10
-            virtual const TypeObj GetTypeObj() const // at 0x14
-            {
-                return TypeObj(TYPE_NAME);
-            }
-            virtual const char * GetTypeName() const // at 0x18
-            {
-                return GetTypeObj().GetTypeName();
-            }
+
             virtual ForEachResult ForEach(ForEachAction, void *, bool) = 0; // at 0x1C
             virtual bool SetScnObjOption(u32, u32); // at 0x20
             virtual bool GetScnObjOption(u32, u32 *) const; // at 0x24
             virtual f32 GetValueForSortOpa() const; // at 0x28
             virtual f32 GetValueForSortXlu() const; // at 0x2C
             virtual void CalcWorldMtx(const math::MTX34 *, u32 *); // at 0x30
-
-            static const G3dObj::TypeObj GetTypeObjStatic()
-            {
-                return TypeObj(TYPE_NAME);
-            }
 
             void CalcViewMtx(const math::MTX34 *);
             bool SetMtx(ScnObjMtxType, const math::MTX34 *);
@@ -168,6 +156,7 @@ namespace nw4r
             u8 BYTE_0xD9;
             u16 mExecOp; // at 0xDA
 
+        public:
             NW4R_G3D_TYPE_OBJ_DECL(ScnObj);
         };
 
@@ -234,23 +223,11 @@ namespace nw4r
             }
             virtual void G3dProc(u32, u32, void *) = 0; // at 0xC
             virtual ~ScnLeaf() {} // at 0x10
-            virtual const TypeObj GetTypeObj() const // at 0x14
-            {
-                return TypeObj(TYPE_NAME);
-            }
-            virtual const char * GetTypeName() const // at 0x18
-            {
-                return GetTypeObj().GetTypeName();
-            }
+
             virtual ForEachResult ForEach(ForEachAction, void *, bool); // at 0x1C
             virtual bool SetScnObjOption(u32, u32); // at 0x20
             virtual bool GetScnObjOption(u32, u32 *) const; // at 0x24
             virtual void CalcWorldMtx(const math::MTX34 *, u32 *); // at 0x30
-
-            static const G3dObj::TypeObj GetTypeObjStatic()
-            {
-                return TypeObj(TYPE_NAME);
-            }
 
             ScaleProperty GetScaleProperty() const;
             void DefG3dProcScnLeaf(u32, u32, void *);
@@ -258,6 +235,7 @@ namespace nw4r
         private:
             math::VEC3 mScale;
 
+        public:
             NW4R_G3D_TYPE_OBJ_DECL(ScnLeaf);
         };
 
@@ -273,23 +251,11 @@ namespace nw4r
             }
             virtual void G3dProc(u32, u32, void *); // at 0xC
             virtual ~ScnGroup(); // at 0x10
-            virtual const TypeObj GetTypeObj() const // at 0x14
-            {
-                return TypeObj(TYPE_NAME);
-            }
-            virtual const char * GetTypeName() const // at 0x18
-            {
-                return GetTypeObj().GetTypeName();
-            }
+
             virtual ForEachResult ForEach(ForEachAction, void *, bool); // at 0x1C
             virtual bool Insert(u32, ScnObj *); // at 0x34
             virtual ScnObj * Remove(u32); // at 0x38
             virtual bool Remove(ScnObj *); // at 0x3C
-
-            static const G3dObj::TypeObj GetTypeObjStatic()
-            {
-                return TypeObj(TYPE_NAME);
-            }
 
             bool Empty() const
             {
@@ -331,7 +297,7 @@ namespace nw4r
             u32 mCapacity; // at 0xE0
             u32 mSize; // at 0xE4
 
-        private:
+        public:
             NW4R_G3D_TYPE_OBJ_DECL(ScnGroup);
         };
     }

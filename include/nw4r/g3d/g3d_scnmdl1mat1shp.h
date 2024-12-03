@@ -12,11 +12,6 @@ namespace nw4r
         class ScnMdl1Mat1Shp : public ScnLeaf
         {
         public:
-            static const G3dObj::TypeObj GetTypeObjStatic()
-            {
-                return TypeObj(TYPE_NAME);
-            }
-
             ResMat GetResMat() { return mResMat; }
             ResShp GetResShp() { return mResShp; }
 
@@ -24,6 +19,7 @@ namespace nw4r
             ResMat mResMat; // at 0xE8
             ResShp mResShp; // at 0xEC
 
+        public:
             NW4R_G3D_TYPE_OBJ_DECL(ScnMdl1Mat1Shp);
         };
     }

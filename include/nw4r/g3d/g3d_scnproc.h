@@ -28,16 +28,6 @@ namespace nw4r
             };
             virtual void G3dProc(u32, u32, void *); // at 0xC
             virtual ~ScnProc() {} // at 0x10
-            virtual const TypeObj GetTypeObj() const // at 0x14
-            {
-                return TypeObj(TYPE_NAME);
-            }
-            virtual const char * GetTypeName() const // at 0x18
-            {
-                return GetTypeObj().GetTypeName();
-            }
-            
-            static const G3dObj::TypeObj GetTypeObjStatic() { return TypeObj(TYPE_NAME); }
 
             void * GetUserData() { return mUserData; }
             void SetUserData(void *data) { mUserData = data; }
@@ -70,6 +60,7 @@ namespace nw4r
             DrawProc mDrawProc; // at 0xEC
             void *mUserData; // at 0xF0
 
+        public:
             NW4R_G3D_TYPE_OBJ_DECL(ScnProc);
         };
     }

@@ -26,14 +26,6 @@ namespace nw4r
             }
             virtual void G3dProc(u32, u32, void *); // at 0xC
             virtual ~ScnRfl(); // at 0x10
-            virtual const TypeObj GetTypeObj() const // at 0x14
-            {
-                return TypeObj(TYPE_NAME);
-            }
-            virtual const char * GetTypeName() const // at 0x18
-            {
-                return GetTypeObj().GetTypeName();
-            }
 
             bool GetExpression(RFLExpression *);
             bool SetExpression(RFLExpression);
@@ -41,12 +33,7 @@ namespace nw4r
             void SetFogIdx(int);
             void SetLightSetIdx(int);
 
-            static const nw4r::g3d::G3dObj::TypeObj GetTypeObjStatic()
-            {
-                return TypeObj(TYPE_NAME);
-            }
-
-        private:
+        public:
             NW4R_G3D_TYPE_OBJ_DECL(ScnRfl);
         };
     }

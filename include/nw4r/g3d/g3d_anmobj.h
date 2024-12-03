@@ -88,14 +88,7 @@ namespace nw4r
             }
             virtual void G3dProc(u32, u32, void *) = 0; // at 0xC
             virtual ~AnmObj() {} // at 0x10
-            virtual const TypeObj GetTypeObj() const // at 0x14
-            {
-                return TypeObj(TYPE_NAME);
-            }
-            virtual const char * GetTypeName() const // at 0x18
-            {
-                return GetTypeObj().GetTypeName();
-            }
+
             virtual void SetFrame(f32) = 0; // at 0x1C
             virtual f32 GetFrame() const = 0; // at 0x20
             virtual void UpdateFrame() = 0; // at 0x24
@@ -104,17 +97,13 @@ namespace nw4r
             virtual bool Bind(ResMdl) = 0; // at 0x30
             virtual void Release(); // at 0x34
 
-            static const TypeObj GetTypeObjStatic()
-            {
-                return TypeObj(TYPE_NAME);
-            }
-
             void SetAnmFlag(AnmFlag, bool);
             bool TestAnmFlag(AnmFlag) const;
 
         private:
             u32 mFlags; // at 0x4
 
+        public:
             NW4R_G3D_TYPE_OBJ_DECL(AnmObj);
         };
     }

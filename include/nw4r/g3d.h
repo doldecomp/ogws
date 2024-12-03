@@ -9,6 +9,7 @@
 #include <nw4r/g3d/g3d_dcc.h>
 #include <nw4r/g3d/g3d_fog.h>
 #include <nw4r/g3d/g3d_maya.h>
+#include <nw4r/g3d/g3d_obj.h>
 #include <nw4r/g3d/g3d_resanm.h>
 #include <nw4r/g3d/g3d_resanmamblight.h>
 #include <nw4r/g3d/g3d_resanmcamera.h>

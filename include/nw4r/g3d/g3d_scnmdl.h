@@ -23,10 +23,6 @@ namespace nw4r
             };
 
         public:
-            static const G3dObj::TypeObj GetTypeObjStatic()
-            {
-                return TypeObj(TYPE_NAME);
-            }
 
             DrawResMdlReplacement * GetDrawResMdlReplacement() { return &mDrawMdlReplace; }
 
@@ -34,6 +30,7 @@ namespace nw4r
             char UNK_0x118[0x144 - 0x118];
             DrawResMdlReplacement mDrawMdlReplace; // at 0x144
 
+        public:
             NW4R_G3D_TYPE_OBJ_DECL(ScnMdl);
         };
     }

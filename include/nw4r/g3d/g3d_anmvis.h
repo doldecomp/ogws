@@ -22,14 +22,7 @@ namespace nw4r
             }
             virtual void G3dProc(u32, u32, void *); // at 0xC
             virtual ~AnmObjVis() {} // at 0x10
-            virtual const TypeObj GetTypeObj() const // at 0x14
-            {
-                return TypeObj(TYPE_NAME);
-            }
-            virtual const char * GetTypeName() const // at 0x18
-            {
-                return GetTypeObj().GetTypeName();
-            }
+
             virtual void SetFrame(f32) = 0; // at 0x1C
             virtual f32 GetFrame() const = 0; // at 0x20
             virtual void UpdateFrame() = 0; // at 0x24
@@ -41,11 +34,6 @@ namespace nw4r
             virtual AnmObjVisRes * Attach(int, AnmObjVisRes *); // at 0x3C
             virtual AnmObjVisRes * Detach(int); // at 0x40
 
-            static const TypeObj GetTypeObjStatic()
-            {
-                return TypeObj(TYPE_NAME);
-            }
-
             bool TestDefined(u32 idx) const;
             bool TestExistence(u32 idx) const;
             void DetachAll();
@@ -56,6 +44,7 @@ namespace nw4r
             int mNumBinds; // at 0x10
             u16 *mBinds; // at 0x14
 
+        public:
             NW4R_G3D_TYPE_OBJ_DECL(AnmObjVis);
         };
 
@@ -78,14 +67,7 @@ namespace nw4r
             }
             virtual void G3dProc(u32, u32, void *); // at 0xC
             virtual ~AnmObjVisNode(); // at 0x10
-            virtual const TypeObj GetTypeObj() const // at 0x14
-            {
-                return TypeObj(TYPE_NAME);
-            }
-            virtual const char * GetTypeName() const // at 0x18
-            {
-                return GetTypeObj().GetTypeName();
-            }
+
             virtual void SetFrame(f32); // at 0x1C
             virtual f32 GetFrame() const; // at 0x20
             virtual void UpdateFrame(); // at 0x24
@@ -97,14 +79,10 @@ namespace nw4r
             virtual AnmObjVisRes * Attach(int, AnmObjVisRes *); // at 0x3C
             virtual AnmObjVisRes * Detach(int); // at 0x40
 
-            static const TypeObj GetTypeObjStatic()
-            {
-                return TypeObj(TYPE_NAME);
-            }
-
         protected:
             AnmObjVisRes *mResources[MAX_RESOURCES]; // at 0x18
 
+        public:
             NW4R_G3D_TYPE_OBJ_DECL(AnmObjVisNode);
         };
 
@@ -122,24 +100,12 @@ namespace nw4r
                     : AnmObjVisNode::IsDerivedFrom(other);
             }
             virtual ~AnmObjVisOR() {} // at 0x10
-            virtual const TypeObj GetTypeObj() const // at 0x14
-            {
-                return TypeObj(TYPE_NAME);
-            }
-            virtual const char * GetTypeName() const // at 0x18
-            {
-                return GetTypeObj().GetTypeName();
-            }
-            virtual bool GetResult(u32); // at 0x38
 
-            static const TypeObj GetTypeObjStatic()
-            {
-                return TypeObj(TYPE_NAME);
-            }
+            virtual bool GetResult(u32); // at 0x38
 
             static AnmObjVisOR * Construct(MEMAllocator *, u32 *, ResMdl);
 
-        private:
+        public:
             NW4R_G3D_TYPE_OBJ_DECL(AnmObjVisOR);
         };
 
@@ -154,14 +120,7 @@ namespace nw4r
                     : AnmObjVis::IsDerivedFrom(other);
             }
             virtual ~AnmObjVisRes() {} // at 0x10
-            virtual const TypeObj GetTypeObj() const // at 0x14
-            {
-                return TypeObj(TYPE_NAME);
-            }
-            virtual const char * GetTypeName() const // at 0x18
-            {
-                return GetTypeObj().GetTypeName();
-            }
+
             virtual void SetFrame(f32); // at 0x1C
             virtual f32 GetFrame() const; // at 0x20
             virtual void UpdateFrame(); // at 0x24
@@ -170,16 +129,12 @@ namespace nw4r
             virtual bool Bind(ResMdl); // at 0x30
             virtual bool GetResult(u32); // at 0x38
 
-            static const TypeObj GetTypeObjStatic()
-            {
-                return TypeObj(TYPE_NAME);
-            }
-
             static AnmObjVisRes * Construct(MEMAllocator *, u32 *, ResAnmVis, ResMdl);
 
         private:
             ResAnmVis mResAnmVis; // at 0x2C
 
+        public:
             NW4R_G3D_TYPE_OBJ_DECL(AnmObjVisRes);
         };
     }

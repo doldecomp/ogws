@@ -30,14 +30,6 @@ namespace nw4r
             }
             virtual void G3dProc(u32, u32, void *); // at 0xC
             virtual ~ScnMdlSimple(); // at 0x10
-            virtual const TypeObj GetTypeObj() const // at 0x14
-            {
-                return TypeObj(TYPE_NAME);
-            }
-            virtual const char * GetTypeName() const // at 0x18
-            {
-                return GetTypeObj().GetTypeName();
-            }
 
             const u8 * GetByteCode(ByteCodeType) const;
 
@@ -65,6 +57,7 @@ namespace nw4r
             void *mByteCodeDrawOpa; // at 0x110
             void *mByteCodeDrawXlu; // at 0x114
 
+        public:
             NW4R_G3D_TYPE_OBJ_DECL(ScnMdlSimple);
         };
     }
