@@ -5,6 +5,11 @@
 extern "C" {
 #endif
 
+#define OS_GQR_TYPE_U8 4
+#define OS_GQR_TYPE_U16 5
+#define OS_GQR_TYPE_S8 6
+#define OS_GQR_TYPE_S16 7
+
 static void OSInitFastCast(void) {
     // clang-format off
     asm {

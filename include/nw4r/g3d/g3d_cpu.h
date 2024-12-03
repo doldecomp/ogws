@@ -6,6 +6,12 @@
 
 namespace nw4r {
 namespace g3d {
+
+/******************************************************************************
+ *
+ * Fastcast
+ *
+ ******************************************************************************/
 namespace fastcast {
 
 /******************************************************************************
@@ -83,8 +89,39 @@ inline s16 F32ToS10_5(register f32 f) {
     return x;
 }
 
+/******************************************************************************
+ *
+ * GQR
+ *
+ ******************************************************************************/
+inline void SetGQR6_S10_5() {
+    OSSetGQR6(OS_GQR_TYPE_S16, 5);
+}
+inline void SetGQR7_S7_8() {
+    OSSetGQR7(OS_GQR_TYPE_S16, 8);
+}
+
+/******************************************************************************
+ *
+ * Initialization
+ *
+ ******************************************************************************/
+namespace detail {
+
+inline void Init() {
+    OSInitFastCast();
+    SetGQR6_S10_5();
+    SetGQR7_S7_8();
+}
+
+} // namespace detail
 } // namespace fastcast
 
+/******************************************************************************
+ *
+ * Cache
+ *
+ ******************************************************************************/
 namespace DC {
 
 inline void StoreRange(void* pBase, u32 size) {
@@ -105,12 +142,27 @@ inline void InvalidateRange(void* pBase, u32 size) {
 
 } // namespace DC
 
+/******************************************************************************
+ *
+ * Memory
+ *
+ ******************************************************************************/
 namespace detail {
 
-void Copy32ByteBlocks(void*, const void*, u32);
-void ZeroMemory32ByteBlocks(void*, u32);
+void Copy32ByteBlocks(void* pDst, const void* pSrc, u32 size);
+void ZeroMemory32ByteBlocks(void* pDst, u32 size);
 
 } // namespace detail
+
+/******************************************************************************
+ *
+ * Initialize fastcast
+ *
+ ******************************************************************************/
+inline void InitFastCast() {
+    fastcast::detail::Init();
+}
+
 } // namespace g3d
 } // namespace nw4r
 
