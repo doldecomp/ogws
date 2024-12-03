@@ -1,12 +1,14 @@
 #ifndef NW4R_PUBLIC_G3D_H
 #define NW4R_PUBLIC_G3D_H
 
+#include <nw4r/g3d/g3d_3dsmax.h>
 #include <nw4r/g3d/g3d_anmchr.h>
 #include <nw4r/g3d/g3d_basic.h>
 #include <nw4r/g3d/g3d_camera.h>
 #include <nw4r/g3d/g3d_cpu.h>
 #include <nw4r/g3d/g3d_dcc.h>
 #include <nw4r/g3d/g3d_fog.h>
+#include <nw4r/g3d/g3d_maya.h>
 #include <nw4r/g3d/g3d_resanm.h>
 #include <nw4r/g3d/g3d_resanmamblight.h>
 #include <nw4r/g3d/g3d_resanmcamera.h>
@@ -30,5 +32,6 @@
 #include <nw4r/g3d/g3d_restex.h>
 #include <nw4r/g3d/g3d_state.h>
 #include <nw4r/g3d/g3d_workmem.h>
+#include <nw4r/g3d/g3d_xsi.h>
 
 #endif

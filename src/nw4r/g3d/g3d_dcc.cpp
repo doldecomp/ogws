@@ -1,35 +1,28 @@
-#include "g3d_dcc.h"
-#include "math_types.h"
-#include "g3d_maya.h"
-#include "g3d_xsi.h"
-#include "g3d_3dsmax.h"
+#pragma ipa file // TODO: REMOVE AFTER REFACTOR
 
-namespace nw4r
-{
-    namespace g3d
-    {
-        void CalcTexMtx(math::MTX34 *pMtx, bool set, const TexSrt &srt, TexSrt::Flag flag,
-            TexSrtTypedef::TexMatrixMode mode)
-        {
-            bool identity;
+#include <nw4r/g3d.h>
 
-            if (mode == TexSrtTypedef::TEXMATRIXMODE_MAYA)
-            {
-                identity = !detail::dcc::CalcTexMtx_Maya(pMtx, set, srt, flag);
-            }
-            else if (mode == TexSrtTypedef::TEXMATRIXMODE_XSI)
-            {
-                identity = !detail::dcc::CalcTexMtx_Xsi(pMtx, set, srt, flag);
-            }
-            else
-            {
-                identity = !detail::dcc::CalcTexMtx_3dsmax(pMtx, set, srt, flag);
-            }
+#include <nw4r/math.h>
 
-            if (identity && set)
-            {
-                math::MTX34Identity(pMtx);
-            }
-        }
+namespace nw4r {
+namespace g3d {
+
+void CalcTexMtx(math::MTX34* pMtx, bool set, const TexSrt& rSrt,
+                TexSrt::Flag flag, TexSrtTypedef::TexMatrixMode mode) {
+    bool ident = true;
+
+    if (mode == TexSrtTypedef::TEXMATRIXMODE_MAYA) {
+        ident = !detail::dcc::CalcTexMtx_Maya(pMtx, set, rSrt, flag);
+    } else if (mode == TexSrtTypedef::TEXMATRIXMODE_XSI) {
+        ident = !detail::dcc::CalcTexMtx_Xsi(pMtx, set, rSrt, flag);
+    } else /* TexSrtTypedef::TEXMATRIXMODE_3DSMAX */ {
+        ident = !detail::dcc::CalcTexMtx_3dsmax(pMtx, set, rSrt, flag);
+    }
+
+    if (ident && set) {
+        math::MTX34Identity(pMtx);
     }
 }
+
+} // namespace g3d
+} // namespace nw4r
