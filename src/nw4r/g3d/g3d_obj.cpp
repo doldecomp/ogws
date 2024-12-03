@@ -5,7 +5,7 @@
 namespace nw4r {
 namespace g3d {
 
-NW4R_G3D_TYPE_OBJ_DEF(G3dObj);
+NW4R_G3D_RTTI_DEF(G3dObj);
 
 G3dObj::~G3dObj() {
     Dealloc(mpHeap, this);

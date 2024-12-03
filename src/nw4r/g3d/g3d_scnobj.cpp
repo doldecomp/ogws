@@ -620,8 +620,8 @@ namespace nw4r
             }
         }
 
-        NW4R_G3D_TYPE_OBJ_DEF(ScnObj);
-        NW4R_G3D_TYPE_OBJ_DEF(ScnLeaf);
-        NW4R_G3D_TYPE_OBJ_DEF(ScnGroup);
+        NW4R_G3D_RTTI_DEF(ScnObj);
+        NW4R_G3D_RTTI_DEF(ScnLeaf);
+        NW4R_G3D_RTTI_DEF(ScnGroup);
     }
 }

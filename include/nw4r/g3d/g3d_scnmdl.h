@@ -31,7 +31,7 @@ namespace nw4r
             DrawResMdlReplacement mDrawMdlReplace; // at 0x144
 
         public:
-            NW4R_G3D_TYPE_OBJ_DECL(ScnMdl);
+            NW4R_G3D_RTTI_DECL_DERIVED(ScnMdl, ScnMdlSimple);
         };
     }
 }

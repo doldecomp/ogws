@@ -20,7 +20,7 @@ namespace nw4r
             ResShp mResShp; // at 0xEC
 
         public:
-            NW4R_G3D_TYPE_OBJ_DECL(ScnMdl1Mat1Shp);
+            NW4R_G3D_RTTI_DECL_DERIVED(ScnMdl1Mat1Shp, ScnLeaf);
         };
     }
 }

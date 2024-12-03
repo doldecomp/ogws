@@ -20,10 +20,6 @@ namespace nw4r
             static ScnRfl * Construct(MEMAllocator *, u32 *, RFLResolution, u32, u32);
             ScnRfl(MEMAllocator *, ScnRfl *, RflData *, void *, u32);
 
-            virtual bool IsDerivedFrom(TypeObj other) const // at 0x8
-            {
-                return (other == GetTypeObjStatic());
-            }
             virtual void G3dProc(u32, u32, void *); // at 0xC
             virtual ~ScnRfl(); // at 0x10
 
@@ -34,7 +30,7 @@ namespace nw4r
             void SetLightSetIdx(int);
 
         public:
-            NW4R_G3D_TYPE_OBJ_DECL(ScnRfl);
+            NW4R_G3D_RTTI_DECL_DERIVED(ScnRfl, ScnLeaf);
         };
     }
 }

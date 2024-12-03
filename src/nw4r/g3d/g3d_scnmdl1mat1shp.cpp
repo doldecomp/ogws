@@ -4,6 +4,6 @@ namespace nw4r
 {
     namespace g3d
     {
-        NW4R_G3D_TYPE_OBJ_DEF(ScnMdl1Mat1Shp);
+        NW4R_G3D_RTTI_DEF(ScnMdl1Mat1Shp);
     }
 }

@@ -15,11 +15,6 @@ namespace nw4r
         {
         public:
             AnmObjVis(MEMAllocator *, u16 *, int);
-            virtual bool IsDerivedFrom(TypeObj other) const // at 0x8
-            {
-                return (other == GetTypeObjStatic()) ? true
-                    : AnmObj::IsDerivedFrom(other);
-            }
             virtual void G3dProc(u32, u32, void *); // at 0xC
             virtual ~AnmObjVis() {} // at 0x10
 
@@ -45,7 +40,7 @@ namespace nw4r
             u16 *mBinds; // at 0x14
 
         public:
-            NW4R_G3D_TYPE_OBJ_DECL(AnmObjVis);
+            NW4R_G3D_RTTI_DECL_DERIVED(AnmObjVis, AnmObj);
         };
 
         class AnmObjVisNode : public AnmObjVis
@@ -60,11 +55,6 @@ namespace nw4r
                 mResources[3] = NULL;
             }
 
-            virtual bool IsDerivedFrom(TypeObj other) const // at 0x8
-            {
-                return (other == GetTypeObjStatic()) ? true
-                    : AnmObjVis::IsDerivedFrom(other);
-            }
             virtual void G3dProc(u32, u32, void *); // at 0xC
             virtual ~AnmObjVisNode(); // at 0x10
 
@@ -83,7 +73,7 @@ namespace nw4r
             AnmObjVisRes *mResources[MAX_RESOURCES]; // at 0x18
 
         public:
-            NW4R_G3D_TYPE_OBJ_DECL(AnmObjVisNode);
+            NW4R_G3D_RTTI_DECL_DERIVED(AnmObjVisNode, AnmObjVis);
         };
 
         class AnmObjVisOR : public AnmObjVisNode
@@ -94,11 +84,6 @@ namespace nw4r
             {
             }
 
-            virtual bool IsDerivedFrom(TypeObj other) const // at 0x8
-            {
-                return (other == GetTypeObjStatic()) ? true
-                    : AnmObjVisNode::IsDerivedFrom(other);
-            }
             virtual ~AnmObjVisOR() {} // at 0x10
 
             virtual bool GetResult(u32); // at 0x38
@@ -106,7 +91,7 @@ namespace nw4r
             static AnmObjVisOR * Construct(MEMAllocator *, u32 *, ResMdl);
 
         public:
-            NW4R_G3D_TYPE_OBJ_DECL(AnmObjVisOR);
+            NW4R_G3D_RTTI_DECL_DERIVED(AnmObjVisOR, AnmObjVisNode);
         };
 
         class AnmObjVisRes : public AnmObjVis, public FrameCtrl
@@ -114,11 +99,6 @@ namespace nw4r
         public:
             AnmObjVisRes(MEMAllocator *, ResAnmVis, u16 *, int);
 
-            virtual bool IsDerivedFrom(TypeObj other) const // at 0x8
-            {
-                return (other == GetTypeObjStatic()) ? true
-                    : AnmObjVis::IsDerivedFrom(other);
-            }
             virtual ~AnmObjVisRes() {} // at 0x10
 
             virtual void SetFrame(f32); // at 0x1C
@@ -135,7 +115,7 @@ namespace nw4r
             ResAnmVis mResAnmVis; // at 0x2C
 
         public:
-            NW4R_G3D_TYPE_OBJ_DECL(AnmObjVisRes);
+            NW4R_G3D_RTTI_DECL_DERIVED(AnmObjVisRes, AnmObjVis);
         };
     }
 }

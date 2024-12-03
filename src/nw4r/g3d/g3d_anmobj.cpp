@@ -1,52 +1,45 @@
-#include "g3d_anmobj.h"
-#include "math_arithmetic.h"
+#pragma ipa file // TODO: REMOVE AFTER REFACTOR
 
-namespace nw4r
-{
-    namespace g3d
-    {
-        f32 FrameCtrl::smBaseUpdateRate = 1.0f;
+#include <nw4r/g3d.h>
 
-        f32 PlayPolicy_Onetime(f32 f1, f32 f2, f32 f3)
-        {
-        #pragma unused(f1)
-        #pragma unused(f2)
-        
-            return f3;
-        }
+#include <nw4r/math.h>
 
-        f32 PlayPolicy_Loop(f32 f1, f32 f2, f32 f3)
-        {
-            f32 diff = f2 - f1;
+namespace nw4r {
+namespace g3d {
 
-            if (f3 >= 0.0f)
-            {
-                return math::FMod(f3, diff);
-            }
-            else
-            {
-                f32 mod = math::FMod(f3 + diff, diff);
-                return math::FSelect(mod, 0.0f, diff) + mod;
-            }
-        }
+NW4R_G3D_RTTI_DEF(AnmObj);
 
-        void AnmObj::SetAnmFlag(AnmFlag flag, bool value)
-        {
-            if (value)
-            {
-                this->mFlags |= flag;
-            }
-            else
-            {
-                this->mFlags &= ~flag;
-            }
-        }
+f32 FrameCtrl::smBaseUpdateRate = 1.0f;
 
-        bool AnmObj::TestAnmFlag(AnmFlag flag) const
-        {
-            return this->mFlags & flag;
-        }
+f32 PlayPolicy_Onetime(f32 start, f32 end, f32 frame) {
+#pragma unused(start)
+#pragma unused(end)
 
-        NW4R_G3D_TYPE_OBJ_DEF(AnmObj);
+    return frame;
+}
+
+f32 PlayPolicy_Loop(f32 start, f32 end, f32 frame) {
+    f32 length = end - start;
+
+    if (frame >= 0.0f) {
+        return math::FMod(frame, length);
+    }
+
+    f32 offset = math::FMod(frame + length, length);
+    return offset + math::FSelect(offset, 0.0f, length);
+}
+
+void AnmObj::SetAnmFlag(AnmFlag flag, bool value) {
+    if (value) {
+        mFlags |= flag;
+    } else {
+        mFlags &= ~flag;
     }
 }
+
+bool AnmObj::TestAnmFlag(AnmFlag flag) const {
+    return mFlags & flag;
+}
+
+} // namespace g3d
+} // namespace nw4r

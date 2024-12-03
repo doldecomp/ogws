@@ -23,11 +23,6 @@ namespace nw4r
             ScnMdlSimple(MEMAllocator *, ResMdl, math::MTX34 *, u32 *,
                 math::MTX34 *, math::MTX33 *, math::MTX34 *, int, int);
 
-            virtual bool IsDerivedFrom(TypeObj other) const // at 0x8
-            {
-                return (other == GetTypeObjStatic()) ? true
-                    : ScnLeaf::IsDerivedFrom(other);
-            }
             virtual void G3dProc(u32, u32, void *); // at 0xC
             virtual ~ScnMdlSimple(); // at 0x10
 
@@ -58,7 +53,7 @@ namespace nw4r
             void *mByteCodeDrawXlu; // at 0x114
 
         public:
-            NW4R_G3D_TYPE_OBJ_DECL(ScnMdlSimple);
+            NW4R_G3D_RTTI_DECL_DERIVED(ScnMdlSimple, ScnLeaf);
         };
     }
 }

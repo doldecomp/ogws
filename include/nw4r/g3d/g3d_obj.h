@@ -2,33 +2,9 @@
 #define NW4R_G3D_OBJ_H
 #include <nw4r/types_nw4r.h>
 
+#include <nw4r/g3d/g3d_rtti.h>
+
 #include <revolution/MEM.h>
-
-/**
- * Declare necessary data and methods for a G3D object class's TypeObj.
- */
-#define NW4R_G3D_TYPE_OBJ_DECL(CLS)                                            \
-public:                                                                        \
-    virtual const TypeObj GetTypeObj() const {                                 \
-        return TypeObj(TYPE_NAME);                                             \
-    } /* at 0x14 */                                                            \
-                                                                               \
-    static const G3dObj::TypeObj GetTypeObjStatic() {                          \
-        return TypeObj(TYPE_NAME);                                             \
-    }                                                                          \
-                                                                               \
-    virtual const char* GetTypeName() const {                                  \
-        return GetTypeObj().GetTypeName();                                     \
-    } /* at 0x18 */                                                            \
-                                                                               \
-    static const nw4r::g3d::G3dObj::ResNameDataT<sizeof(#CLS)> TYPE_NAME;
-
-/**
- * Define necessary data and methods for a G3D object class's TypeObj.
- */
-#define NW4R_G3D_TYPE_OBJ_DEF(VAL)                                             \
-    const nw4r::g3d::G3dObj::ResNameDataT<sizeof(#VAL)> VAL::TYPE_NAME = {     \
-        sizeof(#VAL), #VAL}
 
 namespace nw4r {
 namespace g3d {
@@ -51,6 +27,8 @@ public:
         // @bug 'N' already includes the null terminator
         char str[ROUND_UP(N + 1, 4)]; // at 0x4
     };
+
+    __NW4R_G3D_TYPEOBJ_DECL(G3dObj);
 
     class TypeObj {
     public:
@@ -105,7 +83,15 @@ public:
     virtual void G3dProc(u32 task, u32 param, void* pInfo) = 0; // at 0xC
     virtual ~G3dObj();                                          // at 0x10
 
-    NW4R_G3D_TYPE_OBJ_DECL(G3dObj);
+    virtual const TypeObj GetTypeObj() const {
+        return TypeObj(TYPE_NAME);
+    } // at 0x14
+    static const G3dObj::TypeObj GetTypeObjStatic() {
+        return TypeObj(TYPE_NAME);
+    }
+    virtual const char* GetTypeName() const {
+        return GetTypeObj().GetTypeName();
+    } // at 0x18
 
     G3dObj(MEMAllocator* pAllocator, G3dObj* pParent)
         : mpHeap(pAllocator), mpParent(pParent) {}

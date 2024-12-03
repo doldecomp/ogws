@@ -3,6 +3,7 @@
 
 #include <nw4r/g3d/g3d_3dsmax.h>
 #include <nw4r/g3d/g3d_anmchr.h>
+#include <nw4r/g3d/g3d_anmobj.h>
 #include <nw4r/g3d/g3d_basic.h>
 #include <nw4r/g3d/g3d_camera.h>
 #include <nw4r/g3d/g3d_cpu.h>
@@ -31,6 +32,7 @@
 #include <nw4r/g3d/g3d_resshp.h>
 #include <nw4r/g3d/g3d_restev.h>
 #include <nw4r/g3d/g3d_restex.h>
+#include <nw4r/g3d/g3d_rtti.h>
 #include <nw4r/g3d/g3d_state.h>
 #include <nw4r/g3d/g3d_workmem.h>
 #include <nw4r/g3d/g3d_xsi.h>

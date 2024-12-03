@@ -86,11 +86,6 @@ namespace nw4r
         public:
             ScnObj(MEMAllocator *);
 
-            virtual bool IsDerivedFrom(TypeObj other) const // at 0x8
-            {
-                return (other == GetTypeObjStatic()) ? true
-                    : G3dObj::IsDerivedFrom(other);
-            }
             virtual void G3dProc(u32, u32, void *) = 0; // at 0xC
             virtual ~ScnObj(); // at 0x10
 
@@ -157,7 +152,7 @@ namespace nw4r
             u16 mExecOp; // at 0xDA
 
         public:
-            NW4R_G3D_TYPE_OBJ_DECL(ScnObj);
+            NW4R_G3D_RTTI_DECL_DERIVED(ScnObj, G3dObj);
         };
 
         struct IScnObjCallback
@@ -216,11 +211,6 @@ namespace nw4r
         public:
             ScnLeaf(MEMAllocator *allocator) : ScnObj(allocator), mScale(1.0f, 1.0f, 1.0f) {}
 
-            virtual bool IsDerivedFrom(TypeObj other) const // at 0x8
-            {
-                return (other == GetTypeObjStatic()) ? true
-                    : ScnObj::IsDerivedFrom(other);
-            }
             virtual void G3dProc(u32, u32, void *) = 0; // at 0xC
             virtual ~ScnLeaf() {} // at 0x10
 
@@ -236,7 +226,7 @@ namespace nw4r
             math::VEC3 mScale;
 
         public:
-            NW4R_G3D_TYPE_OBJ_DECL(ScnLeaf);
+            NW4R_G3D_RTTI_DECL_DERIVED(ScnLeaf, ScnObj);
         };
 
         class ScnGroup : public ScnObj
@@ -244,11 +234,6 @@ namespace nw4r
         public:
             ScnGroup(MEMAllocator *, ScnObj **, u32);
 
-            virtual bool IsDerivedFrom(TypeObj other) const // at 0x8
-            {
-                return (other == GetTypeObjStatic()) ? true
-                    : ScnObj::IsDerivedFrom(other);
-            }
             virtual void G3dProc(u32, u32, void *); // at 0xC
             virtual ~ScnGroup(); // at 0x10
 
@@ -298,7 +283,7 @@ namespace nw4r
             u32 mSize; // at 0xE4
 
         public:
-            NW4R_G3D_TYPE_OBJ_DECL(ScnGroup);
+            NW4R_G3D_RTTI_DECL_DERIVED(ScnGroup, ScnObj);
         };
     }
 }

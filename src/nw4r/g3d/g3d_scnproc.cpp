@@ -72,6 +72,6 @@ namespace nw4r
             }
         }
 
-        NW4R_G3D_TYPE_OBJ_DEF(ScnProc);
+        NW4R_G3D_RTTI_DEF(ScnProc);
     }
 }

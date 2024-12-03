@@ -21,11 +21,6 @@ namespace nw4r
 
             static ScnProc * Construct(MEMAllocator *, u32 *, DrawProc, bool, bool, u32);
 
-            virtual bool IsDerivedFrom(TypeObj other) const // at 0x8
-            {
-                return other == GetTypeObjStatic() ? true
-                    : ScnLeaf::IsDerivedFrom(other);
-            };
             virtual void G3dProc(u32, u32, void *); // at 0xC
             virtual ~ScnProc() {} // at 0x10
 
@@ -61,7 +56,7 @@ namespace nw4r
             void *mUserData; // at 0xF0
 
         public:
-            NW4R_G3D_TYPE_OBJ_DECL(ScnProc);
+            NW4R_G3D_RTTI_DECL_DERIVED(ScnProc, ScnLeaf);
         };
     }
 }
