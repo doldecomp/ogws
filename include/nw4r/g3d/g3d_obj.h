@@ -60,6 +60,8 @@ public:
     };
 
     enum G3dProcTask {
+        G3DPROC_NONE = 0x00000,
+
         G3DPROC_CALC_WORLD = 0x00001,
         G3DPROC_CALC_MAT = 0x00002,
         G3DPROC_CALC_VTX = 0x00003,
@@ -69,9 +71,13 @@ public:
         G3DPROC_DRAW_XLU = 0x00007,
         G3DPROC_UPDATEFRAME = 0x00008,
 
+        // Tasks below cannot be disabled
+        __G3DPROC_OPTIONAL_END,
+
         G3DPROC_CHILD_DETACHED = 0x10001,
         G3DPROC_ATTACH_PARENT = 0x10002,
         G3DPROC_DETACH_PARENT = 0x10003,
+
         G3DPROC_0x10004 = 0x10004
     };
 

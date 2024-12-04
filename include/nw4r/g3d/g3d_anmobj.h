@@ -32,13 +32,15 @@ public:
     virtual void G3dProc(u32 task, u32 param, void* pInfo) = 0; // at 0xC
     virtual ~AnmObj() {}                                        // at 0x10
 
-    virtual void SetFrame(f32 frame) = 0;     // at 0x1C
-    virtual f32 GetFrame() const = 0;         // at 0x20
-    virtual void UpdateFrame() = 0;           // at 0x24
+    virtual void SetFrame(f32 frame) = 0; // at 0x1C
+    virtual f32 GetFrame() const = 0;     // at 0x20
+    virtual void UpdateFrame() = 0;       // at 0x24
+
     virtual void SetUpdateRate(f32 rate) = 0; // at 0x28
     virtual f32 GetUpdateRate() const = 0;    // at 0x2C
-    virtual bool Bind(const ResMdl mdl) = 0;  // at 0x30
-    virtual void Release();                   // at 0x34
+
+    virtual bool Bind(const ResMdl mdl) = 0; // at 0x30
+    virtual void Release();                  // at 0x34
 
     void SetAnmFlag(AnmFlag flag, bool value);
     bool TestAnmFlag(AnmFlag flag) const;

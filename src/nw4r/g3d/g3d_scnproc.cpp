@@ -5,6 +5,11 @@ namespace nw4r
 {
     namespace g3d
     {
+        namespace
+        {
+            inline u32 align4(u32 x) { return x + 3 & ~3; }
+        }
+        
         ScnProc * ScnProc::Construct(MEMAllocator *allocator, u32 *pSize,
             DrawProc proc, bool r6, bool r7, u32 r8)
         {

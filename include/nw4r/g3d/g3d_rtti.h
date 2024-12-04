@@ -38,21 +38,23 @@ private:                                                                       \
  * Define type RTTI (base type).
  */
 #define NW4R_G3D_RTTI_DECL_BASE(T)                                             \
+    __NW4R_G3D_RTTI_DECL(T);                                                   \
+                                                                               \
 public:                                                                        \
     virtual bool IsDerivedFrom(nw4r::g3d::G3dObj::TypeObj other) const {       \
         return other == GetTypeObjStatic();                                    \
-    } /* at 0x8 */                                                             \
-    __NW4R_G3D_RTTI_DECL(T);
+    } /* at 0x8 */
 
 /**
  * Define type RTTI (derived type).
  */
 #define NW4R_G3D_RTTI_DECL_DERIVED(T, BASE)                                    \
+    __NW4R_G3D_RTTI_DECL(T);                                                   \
+                                                                               \
 public:                                                                        \
     virtual bool IsDerivedFrom(nw4r::g3d::G3dObj::TypeObj other) const {       \
         return other == GetTypeObjStatic() ? true                              \
                                            : BASE::IsDerivedFrom(other);       \
-    } /* at 0x8 */                                                             \
-    __NW4R_G3D_RTTI_DECL(T);
+    } /* at 0x8 */
 
 #endif
