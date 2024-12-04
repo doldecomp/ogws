@@ -13,12 +13,17 @@ namespace nw4r
             {
             };
 
+            // TODO
+            enum InvalidateFlag {
+                INVALIDATE_ALL = 0x7FF
+            };
+
             void SetViewPosNrmMtxArray(const math::MTX34 *, const math::MTX33 *,
                 const math::MTX34 *);
 
             void SetRenderModeObj(const GXRenderModeObj&);
             GXRenderModeObj* GetRenderModeObj();
-            void Invalidate(u32);
+            void Invalidate(u32 = INVALIDATE_ALL);
         }
     }
 }

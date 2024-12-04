@@ -10,16 +10,41 @@ namespace nw4r {
 namespace g3d {
 namespace detail {
 
+/******************************************************************************
+ *
+ * Memory
+ *
+ ******************************************************************************/
 inline void* AllocFromAllocator(MEMAllocator* pAllocator, u32 size) {
     return MEMAllocFromAllocator(pAllocator, size);
 }
-
 inline void FreeToAllocator(MEMAllocator* pAllocator, void* pBlock) {
     return MEMFreeToAllocator(pAllocator, pBlock);
 }
 
 } // namespace detail
 
+namespace {
+
+/******************************************************************************
+ *
+ * Alignment
+ *
+ ******************************************************************************/
+inline u32 align4(u32 x) {
+    return ROUND_UP(x, 4);
+}
+inline u32 align32(u32 x) {
+    return ROUND_UP(x, 32);
+}
+
+} // namespace
+
+/******************************************************************************
+ *
+ * G3dObj
+ *
+ ******************************************************************************/
 class G3dObj {
 public:
     template <u32 N> struct ResNameDataT {
@@ -27,8 +52,6 @@ public:
         // @bug 'N' already includes the null terminator
         char str[ROUND_UP(N + 1, 4)]; // at 0x4
     };
-
-    __NW4R_G3D_TYPEOBJ_DECL(G3dObj);
 
     class TypeObj {
     public:
@@ -132,6 +155,8 @@ public:
 private:
     G3dObj* mpParent;     // at 0x4
     MEMAllocator* mpHeap; // at 0x8
+
+    __NW4R_G3D_TYPEOBJ_DECL(G3dObj);
 };
 
 } // namespace g3d

@@ -18,8 +18,6 @@ class IScnObjCallback;
  *
  ******************************************************************************/
 class ScnObj : public G3dObj {
-    NW4R_G3D_RTTI_DECL_DERIVED(ScnObj, G3dObj);
-
 public:
     enum ForEachResult {
         FOREACHRESULT_OK,
@@ -173,6 +171,8 @@ protected:
     u8 mCallbackTiming;                   // at 0xD8
     u8 mCallbackDeleteOption;             // at 0xD9
     u16 mCallbackExecOpMask;              // at 0xDA
+
+    NW4R_G3D_RTTI_DECL_DERIVED(ScnObj, G3dObj);
 };
 
 /******************************************************************************
@@ -350,8 +350,6 @@ void ScnObj::CheckCallback_DRAW_XLU(Timing timing, u32 param, void* pInfo) {
  *
  ******************************************************************************/
 class ScnLeaf : public ScnObj {
-    NW4R_G3D_RTTI_DECL_DERIVED(ScnLeaf, ScnObj);
-
 public:
     enum ScaleProperty {
         NOT_SCALED,
@@ -389,6 +387,8 @@ protected:
 
 private:
     math::VEC3 mScale; // at 0xDC
+
+    NW4R_G3D_RTTI_DECL_DERIVED(ScnLeaf, ScnObj);
 };
 
 /******************************************************************************
@@ -397,8 +397,6 @@ private:
  *
  ******************************************************************************/
 class ScnGroup : public ScnObj {
-    NW4R_G3D_RTTI_DECL_DERIVED(ScnGroup, ScnObj);
-
 public:
     ScnGroup(MEMAllocator* pAllocator, ScnObj** ppObj, u32 capacity);
 
@@ -460,6 +458,8 @@ private:
     ScnObj** mpScnObjArray; // at 0xDC
     u32 mSizeScnObj;        // at 0xE0
     u32 mNumScnObj;         // at 0xE4
+
+    NW4R_G3D_RTTI_DECL_DERIVED(ScnGroup, ScnObj);
 };
 
 } // namespace g3d

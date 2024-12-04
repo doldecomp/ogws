@@ -35,6 +35,7 @@
 #include <nw4r/g3d/g3d_rtti.h>
 #include <nw4r/g3d/g3d_scnmdl1mat1shp.h>
 #include <nw4r/g3d/g3d_scnobj.h>
+#include <nw4r/g3d/g3d_scnproc.h>
 #include <nw4r/g3d/g3d_state.h>
 #include <nw4r/g3d/g3d_workmem.h>
 #include <nw4r/g3d/g3d_xsi.h>
