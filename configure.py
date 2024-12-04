@@ -443,6 +443,7 @@ config.libs = [
             Object(Matching, "nw4r/g3d/g3d_fog.cpp"),
             Object(Matching, "nw4r/g3d/g3d_light.cpp"),
             Object(NonMatching, "nw4r/g3d/g3d_calcvtx.cpp"),
+            Object(NonMatching, "nw4r/g3d/g3d_scnrfl.cpp"),
             Object(NonMatching, "nw4r/lyt/lyt_pane.cpp"),
             Object(NonMatching, "nw4r/lyt/lyt_group.cpp"),
             Object(NonMatching, "nw4r/lyt/lyt_layout.cpp"),
