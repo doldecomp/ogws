@@ -33,6 +33,7 @@
 #include <nw4r/g3d/g3d_restev.h>
 #include <nw4r/g3d/g3d_restex.h>
 #include <nw4r/g3d/g3d_rtti.h>
+#include <nw4r/g3d/g3d_scnmdl1mat1shp.h>
 #include <nw4r/g3d/g3d_scnobj.h>
 #include <nw4r/g3d/g3d_state.h>
 #include <nw4r/g3d/g3d_workmem.h>
