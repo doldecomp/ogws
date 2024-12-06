@@ -22,10 +22,6 @@ namespace nw4r
             u8 r, g, b, a;
         };
 
-        struct AmbLightAnmResult
-        {
-        };
-
         class LightObj
         {
         private:
@@ -75,10 +71,6 @@ namespace nw4r
         private:
             u32 mFlags; // at 0x0
             GXLightObj mLightObj; // at 0x4
-        };
-
-        struct LightAnmResult
-        {
         };
 
         struct LightSet

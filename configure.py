@@ -186,6 +186,14 @@ if args.debug:
 else:
     cflags_base.append("-DNDEBUG=1")
 
+cflags_pedantic = [
+    "-w unused",
+    "-w missingreturn",
+    "-w hidevirtual",
+    '-pragma "warn_no_explicit_virtual on"',
+    "-w err",
+]
+
 # Metrowerks library flags
 cflags_runtime = [
     *cflags_base,
@@ -207,15 +215,11 @@ cflags_trk = [
 # NW4R flags
 cflags_nw4r = [
     *cflags_base,
+    *cflags_pedantic,
     "-enc SJIS",
     "-fp_contract off",
     "-ir include/revolution",
     "-ir include/nw4r",
-    "-w unused",
-    "-w missingreturn",
-    "-w hidevirtual",
-    '-pragma "warn_no_explicit_virtual on"',
-    "-w err",
 ]
 
 # EGG flags
@@ -250,8 +254,16 @@ cflags_rfl = [
 
 # RP flags
 cflags_rp = [
-    *cflags_base,
+    *cflags_nw4r,
+    *cflags_pedantic,
     "-enc SJIS",
+    "-inline deferred",
+    "-fp_contract on",
+    "-use_lmw_stmw on",
+    "-str reuse,pool,readonly",
+    "-ir include/revolution",
+    "-ir include/nw4r",
+    "-ir include/egg",
 ]
 
 config.linker_version = "GC/3.0a5.2"
@@ -443,7 +455,8 @@ config.libs = [
             Object(Matching, "nw4r/g3d/g3d_fog.cpp"),
             Object(Matching, "nw4r/g3d/g3d_light.cpp"),
             Object(NonMatching, "nw4r/g3d/g3d_calcvtx.cpp"),
-            Object(NonMatching, "nw4r/g3d/g3d_scnrfl.cpp"),
+            Object(Matching, "nw4r/g3d/g3d_scnrfl.cpp",
+                   extra_cflags=cflags_rp),
             Object(NonMatching, "nw4r/lyt/lyt_pane.cpp"),
             Object(NonMatching, "nw4r/lyt/lyt_group.cpp"),
             Object(NonMatching, "nw4r/lyt/lyt_layout.cpp"),

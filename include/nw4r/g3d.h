@@ -9,6 +9,7 @@
 #include <nw4r/g3d/g3d_cpu.h>
 #include <nw4r/g3d/g3d_dcc.h>
 #include <nw4r/g3d/g3d_fog.h>
+#include <nw4r/g3d/g3d_light.h>
 #include <nw4r/g3d/g3d_maya.h>
 #include <nw4r/g3d/g3d_obj.h>
 #include <nw4r/g3d/g3d_resanm.h>
@@ -36,6 +37,7 @@
 #include <nw4r/g3d/g3d_scnmdl1mat1shp.h>
 #include <nw4r/g3d/g3d_scnobj.h>
 #include <nw4r/g3d/g3d_scnproc.h>
+#include <nw4r/g3d/g3d_scnrfl.h>
 #include <nw4r/g3d/g3d_state.h>
 #include <nw4r/g3d/g3d_workmem.h>
 #include <nw4r/g3d/g3d_xsi.h>
