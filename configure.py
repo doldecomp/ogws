@@ -212,12 +212,77 @@ cflags_trk = [
     "-sdata 0",
 ]
 
-# NW4R flags
-cflags_nw4r = [
+# NW4R utility library flags
+cflags_libnw4r_ut = [
     *cflags_base,
     *cflags_pedantic,
     "-enc SJIS",
     "-fp_contract off",
+    "-ipa file",
+    "-ir include/revolution",
+    "-ir include/nw4r",
+]
+
+# NW4R effect library flags
+cflags_libnw4r_ef = [
+    *cflags_base,
+    *cflags_pedantic,
+    "-enc SJIS",
+    "-fp_contract off",
+    "-ir include/revolution",
+    "-ir include/nw4r",
+]
+
+# NW4R math library flags
+cflags_libnw4r_math = [
+    *cflags_base,
+    *cflags_pedantic,
+    "-enc SJIS",
+    "-fp_contract off",
+    "-ipa file",
+    "-ir include/revolution",
+    "-ir include/nw4r",
+]
+
+# NW4R sound library flags
+cflags_libnw4r_snd = [
+    *cflags_base,
+    *cflags_pedantic,
+    "-enc SJIS",
+    "-fp_contract off",
+    "-ipa file",
+    "-ir include/revolution",
+    "-ir include/nw4r",
+]
+
+# NW4R 3D graphics library flags
+cflags_libnw4r_g3d = [
+    *cflags_base,
+    *cflags_pedantic,
+    "-enc SJIS",
+    "-fp_contract off",
+    "-ir include/revolution",
+    "-ir include/nw4r",
+]
+
+# NW4R layout library flags
+cflags_libnw4r_lyt = [
+    *cflags_base,
+    *cflags_pedantic,
+    "-enc SJIS",
+    "-fp_contract off",
+    "-ir include/revolution",
+    "-ir include/nw4r",
+]
+
+# NW4R RFL extension flags
+cflags_libnw4r_g3d_scnrfl = [
+    *cflags_base,
+    *cflags_pedantic,
+    "-enc SJIS",
+    "-fp_contract on",
+    "-use_lmw_stmw on",
+    "-inline deferred",
     "-ir include/revolution",
     "-ir include/nw4r",
 ]
@@ -252,9 +317,10 @@ cflags_rfl = [
     "-ir include/revolution",
 ]
 
+
 # RP flags
 cflags_rp = [
-    *cflags_nw4r,
+    *cflags_base,
     *cflags_pedantic,
     "-enc SJIS",
     "-inline deferred",
@@ -277,9 +343,9 @@ config.warn_missing_config = False  # TODO enable
 config.warn_missing_source = False
 config.libs = [
     {
-        "lib": "nw4r",
+        "lib": "libnw4r_ut",
         "mw_version": config.linker_version,
-        "cflags": cflags_nw4r,
+        "cflags": cflags_libnw4r_ut,
         "progress_category": "nw4r",
         "objects": [
             Object(Matching, "nw4r/ut/ut_list.cpp"),
@@ -299,6 +365,14 @@ config.libs = [
             Object(Matching, "nw4r/ut/ut_ResFont.cpp"),
             Object(Matching, "nw4r/ut/ut_CharWriter.cpp"),
             Object(Matching, "nw4r/ut/ut_TextWriterBase.cpp"),
+        ]
+    },
+    {
+        "lib": "libnw4r_ef",
+        "mw_version": config.linker_version,
+        "cflags": cflags_libnw4r_ef,
+        "progress_category": "nw4r",
+        "objects": [
             Object(Matching, "nw4r/ef/ef_draworder.cpp"),
             Object(Matching, "nw4r/ef/ef_effect.cpp"),
             Object(Matching, "nw4r/ef/ef_effectsystem.cpp"),
@@ -328,10 +402,27 @@ config.libs = [
             Object(NonMatching, "nw4r/ef/ef_drawpointstrategy.cpp"),
             Object(NonMatching, "nw4r/ef/ef_drawstripestrategy.cpp"),
             Object(NonMatching, "nw4r/ef/ef_drawsmoothstripestrategy.cpp"),
+        ]
+    },
+    {
+        "lib": "libnw4r_math",
+        "mw_version": config.linker_version,
+        "cflags": cflags_libnw4r_math,
+        "progress_category": "nw4r",
+        "objects": [
             Object(Matching, "nw4r/math/math_arithmetic.cpp"),
             Object(Matching, "nw4r/math/math_triangular.cpp"),
             Object(Matching, "nw4r/math/math_types.cpp"),
             Object(Matching, "nw4r/math/math_geometry.cpp"),
+        ]
+    },
+
+    {
+        "lib": "libnw4r_snd",
+        "mw_version": config.linker_version,
+        "cflags": cflags_libnw4r_snd,
+        "progress_category": "nw4r",
+        "objects": [
             Object(Matching, "nw4r/snd/snd_AnimSound.cpp"),
             Object(Matching, "nw4r/snd/snd_AxManager.cpp"),
             Object(Matching, "nw4r/snd/snd_AxVoice.cpp"),
@@ -397,6 +488,14 @@ config.libs = [
             Object(Matching, "nw4r/snd/snd_WsdFile.cpp"),
             Object(Matching, "nw4r/snd/snd_WsdPlayer.cpp"),
             Object(Matching, "nw4r/snd/snd_adpcm.cpp"),
+        ]
+    },
+    {
+        "lib": "libnw4r_g3d",
+        "mw_version": config.linker_version,
+        "cflags": cflags_libnw4r_g3d,
+        "progress_category": "nw4r",
+        "objects": [
             Object(Matching, "nw4r/g3d/g3d_rescommon.cpp"),
             Object(Matching, "nw4r/g3d/g3d_resdict.cpp"),
             Object(Matching, "nw4r/g3d/g3d_resfile.cpp"),
@@ -455,8 +554,14 @@ config.libs = [
             Object(Matching, "nw4r/g3d/g3d_fog.cpp"),
             Object(Matching, "nw4r/g3d/g3d_light.cpp"),
             Object(NonMatching, "nw4r/g3d/g3d_calcvtx.cpp"),
-            Object(Matching, "nw4r/g3d/g3d_scnrfl.cpp",
-                   extra_cflags=cflags_rp),
+        ]
+    },
+    {
+        "lib": "libnw4r_lyt",
+        "mw_version": config.linker_version,
+        "cflags": cflags_libnw4r_lyt,
+        "progress_category": "nw4r",
+        "objects": [
             Object(NonMatching, "nw4r/lyt/lyt_pane.cpp"),
             Object(NonMatching, "nw4r/lyt/lyt_group.cpp"),
             Object(NonMatching, "nw4r/lyt/lyt_layout.cpp"),
@@ -471,6 +576,15 @@ config.libs = [
             Object(Matching, "nw4r/lyt/lyt_resourceAccessor.cpp"),
             Object(Matching, "nw4r/lyt/lyt_arcResourceAccessor.cpp"),
             Object(Matching, "nw4r/lyt/lyt_common.cpp"),
+        ]
+    },
+    {
+        "lib": "libnw4r_g3d_scnrfl",
+        "mw_version": config.linker_version,
+        "cflags": cflags_libnw4r_g3d_scnrfl,
+        "progress_category": "nw4r",
+        "objects": [
+            Object(Matching, "nw4r/g3d/g3d_scnrfl.cpp"),
         ],
     },
     {
