@@ -1,56 +1,67 @@
-#include "g3d_init.h"
-#include "g3d_state.h"
-#include "ut_LockedCache.h"
-#include <revolution/OS/OS.h>
-#include <revolution/VI/vi.h>
+#pragma ipa file // TODO: REMOVE AFTER REFACTOR
+
+#include <nw4r/g3d.h>
+
+#include <nw4r/ut.h>
+
 #include <revolution/GX.h>
+#include <revolution/OS.h>
+#include <revolution/VI.h>
 
-namespace
-{
-    const char * NW4R_G3D_Version_ = "<< NW4R    - G3D \tfinal   build: Jun  8 2007 11:16:25 (0x4199_60831) >>";
-}
+namespace {
 
-namespace nw4r
-{
-    namespace g3d
-    {
-        using namespace ut;
+NW4R_LIB_VERSION(G3D, "Jun  8 2007", "11:16:25", "0x4199_60831");
 
-        void G3dInit(bool doLock)
-        {
-            OSRegisterVersion(NW4R_G3D_Version_);
+} // namespace
 
-            if (doLock) LC::Enable();
-            else LC::Disable();
+namespace nw4r {
+namespace g3d {
 
-            InitFastCast();
+void G3dInit(bool enableLockedCache) {
+    OSRegisterVersion(NW4R_G3D_Version_);
 
-            GXRenderModeObj* rmo;
-            switch(VIGetTvFormat())
-            {
-                case VI_TV_FMT_NTSC:
-                    rmo = &GXNtsc480IntDf;
-                    break;
-                case VI_TV_FMT_PAL:
-                    rmo = &GXPal528IntDf;
-                    break;
-                case VI_TV_FMT_EURGB60:
-                    rmo = &GXEurgb60Hz480IntDf;
-                    break;
-                case VI_TV_FMT_MPAL:
-                    rmo = &GXMpal480IntDf;
-                    break;
-                default:
-                    rmo = &GXNtsc480IntDf;
-                    break;
-            }
-
-            G3DState::SetRenderModeObj(*rmo);
-        }
-
-        void G3dReset()
-        {
-            G3DState::Invalidate(0x7ff);
-        }
+    if (enableLockedCache) {
+        ut::LC::Enable();
+    } else {
+        ut::LC::Disable();
     }
+
+    InitFastCast();
+
+    GXRenderModeObj* pMode;
+    switch (VIGetTvFormat()) {
+    case VI_TV_FMT_NTSC: {
+        pMode = &GXNtsc480IntDf;
+        break;
+    }
+
+    case VI_TV_FMT_PAL: {
+        pMode = &GXPal528IntDf;
+        break;
+    }
+
+    case VI_TV_FMT_EURGB60: {
+        pMode = &GXEurgb60Hz480IntDf;
+        break;
+    }
+
+    case VI_TV_FMT_MPAL: {
+        pMode = &GXMpal480IntDf;
+        break;
+    }
+
+    default: {
+        pMode = &GXNtsc480IntDf;
+        break;
+    }
+    }
+
+    G3DState::SetRenderModeObj(*pMode);
 }
+
+void G3dReset() {
+    G3DState::Invalidate();
+}
+
+} // namespace g3d
+} // namespace nw4r
