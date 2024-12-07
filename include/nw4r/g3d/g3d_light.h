@@ -1,122 +1,177 @@
 #ifndef NW4R_G3D_LIGHT_H
 #define NW4R_G3D_LIGHT_H
-#include "types_nw4r.h"
-#include "g3d_rescommon.h"
+#include <nw4r/types_nw4r.h>
+
+#include <nw4r/g3d/g3d_rescommon.h>
+
 #include <revolution/GX.h>
 
-namespace nw4r
-{
-    namespace g3d
-    {
-        struct LightSetData
-        {
-            static const int NUM_LIGHTS = 8;
+namespace nw4r {
+namespace g3d {
 
-            s8 mLights[NUM_LIGHTS]; // at 0x0
-            s8 mAmbient; // at 0x8
-            char UNK_0x8[3]; // at 0x9
-        };
+/******************************************************************************
+ *
+ * LightObj
+ *
+ ******************************************************************************/
+class LightObj {
+public:
+    LightObj() : mFlag(0) {}
+    ~LightObj() {}
 
-        struct AmbLightObj
-        {
-            u8 r, g, b, a;
-        };
+    LightObj& operator=(const LightObj& rOther);
 
-        class LightObj
-        {
-        private:
-            enum LightObjFlag
-            {
-                SPOT_LIGHT = 0x1,
-                SPECULAR_LIGHT = 0x2,
-                ENABLED = 0x4,
-                SPECULAR_DIR = 0x8,
-                COLOR_ENABLE = 0x10,
-                ALPHA_ENABLE = 0x20
-            };
-
-        public:
-            LightObj() : mFlags() {}
-
-            operator GXLightObj *() { return &mLightObj; }
-            operator const GXLightObj *() const { return &mLightObj; }
-
-            LightObj& operator=(const LightObj& rhs);
-
-            bool IsSpotLight() const { return mFlags & SPOT_LIGHT; }
-            bool IsSpecularLight() const { return mFlags & SPECULAR_LIGHT; }
-            bool IsEnable() const { return mFlags & ENABLED; }
-            bool IsSpecularDir() const { return mFlags & SPECULAR_DIR; }
-            bool IsColorEnable() const { return mFlags & COLOR_ENABLE; }
-            bool IsAlphaEnable() const { return mFlags & ALPHA_ENABLE; }
-            bool IsDiffuseLight() const { return !IsSpotLight() && !IsSpecularLight(); }
-            
-            void Enable() { mFlags |= ENABLED; }
-            void Disable() { mFlags &= ~ENABLED; }
-
-            void Clear();
-            void InitLightColor(GXColor);
-            void InitLightPos(f32, f32, f32);
-            void InitLightDir(f32, f32, f32);
-            void InitSpecularDir(f32, f32, f32);
-            void InitLightSpot(f32, GXSpotFn);
-            void InitLightAttnA(f32, f32, f32);
-            void InitLightDistAttn(f32, f32, GXDistAttnFn);
-            void InitLightAttnK(f32, f32, f32);
-            void InitLightShininess(f32);
-            void GetLightPos(math::VEC3 *) const;
-            void GetLightDir(math::VEC3 *) const;
-            void ApplyViewMtx(const math::MTX34& rMtx);
-
-        private:
-            u32 mFlags; // at 0x0
-            GXLightObj mLightObj; // at 0x4
-        };
-
-        struct LightSet
-        {
-            LightSet(LightSetting *setting, LightSetData *data) : mSetting(setting), mLightSetData(data) {}
-            
-            bool IsValid() const { return mSetting != NULL && mLightSetData != NULL; }
-
-            bool SelectLightObj(u32, int);
-            bool SelectAmbLightObj(int);
-
-            LightSetting* mSetting; // at 0x0
-            LightSetData* mLightSetData; // at 0x4
-        };
-
-        class LightSetting
-        {
-        public:
-            LightSetting(LightObj *, AmbLightObj *, u32, LightSetData *, u32);
-            bool Import(const LightSetting&);
-            void ApplyViewMtx(const math::MTX34&, u32);  
-
-            u16 GetNumLightObj() const { return mNumLightObj; }
-            u16 GetNumLightSet() const { return mNumLightSet; }
-            LightObj * GetLightObjArray() const { return mLightObjArray; }
-            AmbLightObj * GetAmbLightObjArray() const { return mAmbLightObjArray; }
-            LightSetData * GetLightSetDataArray() const { return mLightSetDataArray; }
-
-            LightSet GetLightSet(int i)
-            {
-                if (i < mNumLightSet && i > 0)
-                {
-                    return LightSet(this, &mLightSetDataArray[i]);
-                }
-
-                return LightSet(this, NULL);
-            }
-
-        private:
-            u16 mNumLightObj; // at 0x0
-            u16 mNumLightSet; // at 0x2
-            LightObj *mLightObjArray; // at 0x4
-            AmbLightObj *mAmbLightObjArray; // at 0x8
-            LightSetData *mLightSetDataArray; // at 0xC
-        };
+    operator GXLightObj*() {
+        return &mObj;
     }
-}
+    operator const GXLightObj*() const {
+        return &mObj;
+    }
+
+    void Clear();
+
+    void InitLightColor(GXColor color);
+    void InitLightPos(f32 x, f32 y, f32 z);
+    void InitLightDir(f32 nx, f32 ny, f32 nz);
+    void InitSpecularDir(f32 nx, f32 ny, f32 nz);
+    void InitLightSpot(f32 cutoff, GXSpotFn spotFn);
+    void InitLightAttnA(f32 aa, f32 ab, f32 ac);
+    void InitLightDistAttn(f32 distance, f32 brightness,
+                           GXDistAttnFn distAttnFn);
+    void InitLightAttnK(f32 ka, f32 kb, f32 kc);
+    void InitLightShininess(f32 shininess);
+
+    void GetLightPos(math::VEC3* pPos) const;
+    void GetLightDir(math::VEC3* pDir) const;
+
+    void ApplyViewMtx(const math::MTX34& rCamera);
+
+    void Enable() {
+        mFlag |= FLAG_ENABLE_LIGHT;
+    }
+    void Disable() {
+        mFlag &= ~FLAG_ENABLE_LIGHT;
+    }
+
+    bool IsEnable() const {
+        return mFlag & FLAG_ENABLE_LIGHT;
+    }
+
+    bool IsSpotLight() const {
+        return mFlag & FLAG_SPOT;
+    }
+    bool IsSpecularLight() const {
+        return mFlag & FLAG_SPECULAR;
+    }
+    bool IsSpecularDir() const {
+        return mFlag & FLAG_SPECULAR_DIR;
+    }
+    bool IsColorEnable() const {
+        return mFlag & FLAG_ENABLE_COLOR;
+    }
+    bool IsAlphaEnable() const {
+        return mFlag & FLAG_ENABLE_ALPHA;
+    }
+    bool IsDiffuseLight() const {
+        return !IsSpotLight() && !IsSpecularLight();
+    }
+
+private:
+    enum LightObjFlag {
+        FLAG_SPOT = (1 << 0),
+        FLAG_SPECULAR = (1 << 1),
+        FLAG_ENABLE_LIGHT = (1 << 2),
+        FLAG_SPECULAR_DIR = (1 << 3),
+        FLAG_ENABLE_COLOR = (1 << 4),
+        FLAG_ENABLE_ALPHA = (1 << 5)
+    };
+
+private:
+    u32 mFlag;       // at 0x0
+    GXLightObj mObj; // at 0x4
+};
+
+/******************************************************************************
+ *
+ * LightSet
+ *
+ ******************************************************************************/
+struct LightSetData {
+    static const int NUM_LIGHT_IDX = 8;
+
+    s8 idxLight[NUM_LIGHT_IDX]; // at 0x0
+    s8 idxAmbLight;             // at 0x8
+    u8 _[0xC - 0X9];            // at 0x9
+};
+
+class LightSet {
+public:
+    LightSet(LightSetting* pSetting, LightSetData* pData)
+        : mpSetting(pSetting), mpLightSetData(pData) {}
+    ~LightSet() {}
+
+    bool IsValid() const {
+        return mpSetting != NULL && mpLightSetData != NULL;
+    }
+
+    bool SelectLightObj(u32 lightIdx, int lightObjIdx);
+    bool SelectAmbLightObj(int lightObjIdx);
+
+private:
+    LightSetting* mpSetting;      // at 0x0
+    LightSetData* mpLightSetData; // at 0x4
+};
+
+/******************************************************************************
+ *
+ * LightSetting
+ *
+ ******************************************************************************/
+struct AmbLightObj {
+    u8 r, g, b, a;
+};
+
+class LightSetting {
+public:
+    LightSetting(LightObj* pLightObjArray, AmbLightObj* pAmbLightObjArray,
+                 u32 numLight, LightSetData* pLightSetDataArray,
+                 u32 numLightSet);
+    ~LightSetting() {}
+
+    bool Import(const LightSetting& rSetting);
+    void ApplyViewMtx(const math::MTX34& rCamera, u32 numLight);
+
+    u32 GetNumLightObj() const {
+        return mNumLight;
+    }
+    u32 GetNumLightSet() const {
+        return mNumLightSet;
+    }
+
+    LightObj* GetLightObjArray() const {
+        return mpLightObjArray;
+    }
+    AmbLightObj* GetAmbLightObjArray() const {
+        return mpAmbLightObjArray;
+    }
+
+    LightSet GetLightSet(int i) {
+        if (i < mNumLightSet && i > 0) {
+            return LightSet(this, &mpLightSetDataArray[i]);
+        }
+
+        return LightSet(this, NULL);
+    }
+
+private:
+    u16 mNumLight;                     // at 0x0
+    u16 mNumLightSet;                  // at 0x2
+    LightObj* mpLightObjArray;         // at 0x4
+    AmbLightObj* mpAmbLightObjArray;   // at 0x8
+    LightSetData* mpLightSetDataArray; // at 0xC
+};
+
+} // namespace g3d
+} // namespace nw4r
 
 #endif

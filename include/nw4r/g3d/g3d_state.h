@@ -8,6 +8,13 @@ namespace nw4r {
 namespace g3d {
 namespace G3DState {
 
+static const int NUM_LIGHT = 128;
+static const int NUM_LIGHT_SET = 128;
+
+static const int NUM_SCNDEPENDENT_TEXMTX_FUNCTYPE = 256;
+
+static const int NUM_CAMERA = 32;
+
 struct IndMtxOp {};
 
 enum InvalidateFlag {
