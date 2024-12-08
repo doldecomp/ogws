@@ -9,14 +9,33 @@
 namespace nw4r {
 namespace g3d {
 
-// Forward declarations
-class IScnObjCallback;
+extern const math::FRUSTUM* gpCullingFrustum;
+
+enum ResMdlDrawMode {
+    RESMDL_DRAWMODE_SORT_OPA_NONE = 0,
+    RESMDL_DRAWMODE_SORT_OPA_Z = (1 << 0),
+
+    RESMDL_DRAWMODE_SORT_XLU_NONE = 0,
+    RESMDL_DRAWMODE_SORT_XLU_Z = (1 << 1),
+
+    RESMDL_DRAWMODE_IGNORE_MATERIAL = (1 << 2),
+    RESMDL_DRAWMODE_FORCE_LIGHTOFF = (1 << 3),
+    RESMDL_DRAWMODE_NOPPCSYNC = (1 << 4),
+
+    RESMDL_DRAWMODE_DEFAULT = RESMDL_DRAWMODE_SORT_XLU_Z,
+    REDMDL_DRAWMODE_SORT_NONE = 0,
+    RESMDL_DRAWMODE_SORT_Z =
+        RESMDL_DRAWMODE_SORT_OPA_Z | RESMDL_DRAWMODE_SORT_XLU_Z,
+};
 
 /******************************************************************************
  *
  * ScnObj
  *
  ******************************************************************************/
+// Forward declarations
+class IScnObjCallback;
+
 class ScnObj : public G3dObj {
 public:
     enum ForEachResult {
@@ -162,15 +181,17 @@ protected:
 protected:
     math::MTX34 mMtxArray[MTX_TYPE_MAX];  // at 0xC
     math::AABB mAABB[BOUNDINGVOLUME_MAX]; // at 0x9C
-    u32 mScnObjFlags;                     // at 0xCC
-    u8 mPriorityDrawOpa;                  // at 0xD0
-    u8 mPriorityDrawXlu;                  // at 0xD1
-    u8 _0;                                // at 0xD2
-    u8 _1;                                // at 0xD3
-    IScnObjCallback* mpFuncObjExec;       // at 0xD4
-    u8 mCallbackTiming;                   // at 0xD8
-    u8 mCallbackDeleteOption;             // at 0xD9
-    u16 mCallbackExecOpMask;              // at 0xDA
+
+private:
+    u32 mScnObjFlags;               // at 0xCC
+    u8 mPriorityDrawOpa;            // at 0xD0
+    u8 mPriorityDrawXlu;            // at 0xD1
+    u8 _0;                          // at 0xD2
+    u8 _1;                          // at 0xD3
+    IScnObjCallback* mpFuncObjExec; // at 0xD4
+    u8 mCallbackTiming;             // at 0xD8
+    u8 mCallbackDeleteOption;       // at 0xD9
+    u16 mCallbackExecOpMask;        // at 0xDA
 
     NW4R_G3D_RTTI_DECL_DERIVED(ScnObj, G3dObj);
 };
@@ -184,30 +205,11 @@ class IScnObjGather {
 public:
     typedef bool (*LessThanFunc)(const ScnObj* pLhs, const ScnObj* pRhs);
 
-    enum CheckStatus { CHECKSTATUS_GATHER_SCNOBJ, CHECKSTATUS_IGNORE_SCNOBJ };
-
     enum CullingStatus {
         CULLINGSTATUS_INTERSECT,
         CULLINGSTATUS_INSIDE,
         CULLINGSTATUS_OUTSIDE,
         CULLINGSTATUS_NOTEST
-    };
-
-    enum ResMdlDrawMode {
-        RESMDL_DRAWMODE_SORT_OPA_NONE = 0,
-        RESMDL_DRAWMODE_SORT_OPA_Z = (1 << 0),
-
-        RESMDL_DRAWMODE_SORT_XLU_NONE = 0,
-        RESMDL_DRAWMODE_SORT_XLU_Z = (1 << 1),
-
-        RESMDL_DRAWMODE_IGNORE_MATERIAL = (1 << 2),
-        RESMDL_DRAWMODE_FORCE_LIGHTOFF = (1 << 3),
-        RESMDL_DRAWMODE_NOPPCSYNC = (1 << 4),
-
-        RESMDL_DRAWMODE_DEFAULT = RESMDL_DRAWMODE_SORT_XLU_Z,
-        REDMDL_DRAWMODE_SORT_NONE = 0,
-        RESMDL_DRAWMODE_SORT_Z =
-            RESMDL_DRAWMODE_SORT_OPA_Z | RESMDL_DRAWMODE_SORT_XLU_Z,
     };
 
 public:
@@ -221,12 +223,8 @@ public:
     virtual void Sort(LessThanFunc pOpaFunc,
                       LessThanFunc pXluFunc) = 0; // at 0x1C
 
-    virtual void DrawOpa(ResMdlDrawMode mode) = 0; // at 0x20
-    virtual void DrawXlu(ResMdlDrawMode mode) = 0; // at 0x24
-
-    virtual CheckStatus CheckScnObj(ScnObj* /* pObj */) {
-        return CHECKSTATUS_GATHER_SCNOBJ;
-    } // at 0x28
+    virtual void DrawOpa(ResMdlDrawMode* pForceMode) = 0; // at 0x20
+    virtual void DrawXlu(ResMdlDrawMode* pForceMode) = 0; // at 0x24
 };
 
 /******************************************************************************

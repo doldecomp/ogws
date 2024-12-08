@@ -419,7 +419,7 @@ void ScnLeaf::DefG3dProcScnLeaf(u32 task, u32 param, void* pInfo) {
     case G3DPROC_DRAW_XLU:
     case G3DPROC_UPDATEFRAME:
     case G3DPROC_CHILD_DETACHED:
-    case G3DPROC_0x10004: {
+    case G3DPROC_ZSORT: {
         break;
     }
     }
@@ -591,7 +591,7 @@ void ScnGroup::DefG3dProcScnGroup(u32 task, u32 param, void* pInfo) {
     }
 
     case G3DPROC_UPDATEFRAME:
-    case G3DPROC_0x10004:
+    case G3DPROC_ZSORT:
     default: {
         for (u32 i = 0; i < mNumScnObj; i++) {
             mpScnObjArray[i]->G3dProc(task, param, pInfo);

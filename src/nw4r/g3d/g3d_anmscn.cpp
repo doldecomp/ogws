@@ -1,71 +1,71 @@
-#include "g3d_anmscn.h"
+#pragma ipa file // TODO: REMOVE AFTER REFACTOR
+
+#include <nw4r/g3d.h>
+
 #include <algorithm>
 
-namespace nw4r
-{
-    namespace g3d
-    {
-        // https://decomp.me/scratch/FjaQH
-        void AnmScn::GetLightSetting(LightSetting *pSetting)
-        {
-            u32 myNumLightSet = GetLightSetMaxRefNumber();
-            u32 myNumAmb = GetAmbLightMaxRefNumber();
-            u32 myNumDiffuse = GetDiffuseLightMaxRefNumber();
-           
-            if (myNumLightSet > 0)
-            {
-                u32 capacity = pSetting->GetNumLightSet();
-                u32 numLightSet = std::min(myNumLightSet, capacity);
+namespace nw4r {
+namespace g3d {
 
-                for (u32 i = 0; i < numLightSet; i++)
-                {
-                    GetLightSet(pSetting->GetLightSet(i), i);
+void AnmScn::GetLightSetting(LightSetting* pSetting) {
+    const u32 numLightSet = GetLightSetMaxRefNumber();
+    const u32 numAmbLight = GetAmbLightMaxRefNumber();
+    const u32 numDiffLight = GetDiffuseLightMaxRefNumber();
+
+    if (numLightSet > 0) {
+        const u32 numLightSetObj = pSetting->GetNumLightSet();
+        const u32 numLoadableSet = std::min(numLightSet, numLightSetObj);
+
+        for (u32 i = 0; i < numLoadableSet; i++) {
+            LightSet set = pSetting->GetLightSet(i);
+            GetLightSet(set, i);
+        }
+    }
+
+    if (numAmbLight > 0) {
+        AmbLightObj* pAmbObjArray = pSetting->GetAmbLightObjArray();
+        const u32 numAmbObj = pSetting->GetNumLightObj();
+        const u32 numLoadableAmb = std::min(numAmbLight, numAmbObj);
+
+        for (u32 i = 0; i < numLoadableAmb; i++) {
+            AmbLightObj* pAmbObj = &pAmbObjArray[i];
+            *reinterpret_cast<u32*>(&pAmbObj->r) = GetAmbLightColor(i);
+        }
+    }
+
+    if (numDiffLight > 0) {
+        LightObj* pLightObjArray = pSetting->GetLightObjArray();
+        const u32 numLightObj = pSetting->GetNumLightObj();
+        const u32 numSpecLight = GetNumSpecularLight();
+
+        const u32 numLight = numDiffLight + numSpecLight;
+        const u32 numLoadableDiffLight = std::min(numDiffLight, numLightObj);
+        const u32 numLoadableLight = std::min(numLight, numLightObj);
+
+        for (u32 i = 0; i < numLoadableDiffLight; i++) {
+            LightObj* pObj = &pLightObjArray[i];
+            pObj->Disable();
+        }
+
+        for (u32 i = 0; i < numLoadableDiffLight; i++) {
+            LightObj* pDiffObj = &pLightObjArray[i];
+            LightObj* pSpecObj = NULL;
+
+            if (pDiffObj->IsEnable()) {
+                continue;
+            }
+
+            if (HasSpecularLight(i)) {
+                const u32 specId = GetSpecularLightID(i);
+                if (specId < numLoadableLight) {
+                    pSpecObj = &pLightObjArray[specId];
                 }
             }
 
-            if (myNumAmb > 0)
-            {
-                AmbLightObj *ambLights = pSetting->GetAmbLightObjArray();
-                u32 capacity = pSetting->GetNumLightObj();
-                u32 numAmb = std::min(myNumAmb, capacity);
-
-                for (u32 i = 0; i < numAmb; i++)
-                {
-                    AmbLightObj *obj = &ambLights[i];
-                    *(u32 *)&obj->r = GetAmbLightColor(i);
-                }
-            }
-
-            if (myNumDiffuse > 0)
-            {
-                LightObj *lights = pSetting->GetLightObjArray();
-                u32 capacity = pSetting->GetNumLightObj();
-                u32 myNumAll = myNumDiffuse + GetNumSpecularLight();
-                u32 numDiffuse = std::min(myNumDiffuse, capacity);
-                u32 numAll = std::min(myNumAll, capacity);
-
-                for (u32 i = 0; i < numDiffuse; i++)
-                {
-                    lights[i].Disable();
-                }
-
-                for (u32 i = 0; i < numDiffuse; i++)
-                {
-                    LightObj *diff = &lights[i];
-                    LightObj *spec = NULL;
-                    
-                    if (!diff->IsEnable())
-                    {
-                        if (HasSpecularLight(i))
-                        {
-                            u32 id = GetSpecularLightID(i);
-                            if (id < numAll) spec = &lights[id];
-                        }
-
-                        GetLight(diff, spec, i);
-                    }
-                }
-            }
+            GetLight(pDiffObj, pSpecObj, i);
         }
     }
 }
+
+} // namespace g3d
+} // namespace nw4r

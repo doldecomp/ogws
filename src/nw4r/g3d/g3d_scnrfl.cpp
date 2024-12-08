@@ -85,12 +85,12 @@ ScnRfl* ScnRfl::Construct(MEMAllocator* pAllocator, u32* pSize,
         }
 
         // clang-format off
-        pScnRfl = new (pBuffer)
-            ScnRfl(pAllocator,
-                   pBuffer + nglOffset,
-                   userDataSize != 0 ? pBuffer + userOffset : NULL,
-                   resolution,
-                   exprFlags);
+        pScnRfl = new (pBuffer) ScnRfl(
+            pAllocator,
+            pBuffer + nglOffset,
+            userDataSize != 0 ? pBuffer + userOffset : NULL,
+            resolution,
+            exprFlags);
         // clang-format on
     }
 

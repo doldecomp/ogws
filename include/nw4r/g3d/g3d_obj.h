@@ -100,8 +100,7 @@ public:
         G3DPROC_CHILD_DETACHED = 0x10001,
         G3DPROC_ATTACH_PARENT = 0x10002,
         G3DPROC_DETACH_PARENT = 0x10003,
-
-        G3DPROC_0x10004 = 0x10004
+        G3DPROC_ZSORT = 0x10004
     };
 
 public:

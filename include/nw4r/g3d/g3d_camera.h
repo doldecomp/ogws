@@ -12,6 +12,20 @@ namespace nw4r {
 namespace g3d {
 
 struct CameraData {
+    enum Flag {
+        FLAG_CAM_LOOKAT = (1 << 0),
+        FLAG_CAM_ROTATE = (1 << 1),
+        FLAG_CAM_AIM = (1 << 2),
+        FLAG_CAM_MTX_READY = (1 << 3),
+
+        FLAG_PROJ_FRUSTUM = (1 << 4),
+        FLAG_PROJ_PERSP = (1 << 5),
+        FLAG_PROJ_ORTHO = (1 << 6),
+        FLAG_PROJ_MTX_READY = (1 << 7),
+
+        FLAG_VI_ODD_FIELD = (1 << 8),
+    };
+
     math::MTX34 cameraMtx;     // at 0x0
     math::MTX44 projMtx;       // at 0x30
     u32 flags;                 // at 0x70
@@ -94,21 +108,6 @@ public:
     GXProjectionType GetProjectionType() const {
         return ref().projType;
     }
-
-private:
-    enum Flag {
-        FLAG_CAM_LOOKAT = (1 << 0),
-        FLAG_CAM_ROTATE = (1 << 1),
-        FLAG_CAM_AIM = (1 << 2),
-        FLAG_CAM_MTX_READY = (1 << 3),
-
-        FLAG_PROJ_FRUSTUM = (1 << 4),
-        FLAG_PROJ_PERSP = (1 << 5),
-        FLAG_PROJ_ORTHO = (1 << 6),
-        FLAG_PROJ_MTX_READY = (1 << 7),
-
-        FLAG_VI_ODD_FIELD = (1 << 8),
-    };
 
 private:
     void UpdateCameraMtx() const;

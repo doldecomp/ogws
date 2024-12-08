@@ -156,7 +156,7 @@ public:
     }
 
     LightSet GetLightSet(int i) {
-        if (i < mNumLightSet && i > 0) {
+        if (i < mNumLightSet && i >= 0) {
             return LightSet(this, &mpLightSetDataArray[i]);
         }
 
