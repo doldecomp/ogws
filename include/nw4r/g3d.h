@@ -5,6 +5,7 @@
 #include <nw4r/g3d/g3d_anmchr.h>
 #include <nw4r/g3d/g3d_anmobj.h>
 #include <nw4r/g3d/g3d_anmscn.h>
+#include <nw4r/g3d/g3d_anmvis.h>
 #include <nw4r/g3d/g3d_basic.h>
 #include <nw4r/g3d/g3d_camera.h>
 #include <nw4r/g3d/g3d_cpu.h>

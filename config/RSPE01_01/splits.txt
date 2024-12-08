@@ -660,6 +660,7 @@ nw4r/g3d/g3d_anmvis.cpp:
 	.text       start:0x8005AC00 end:0x8005BDB8
 	.rodata     start:0x803780C8 end:0x80378118
 	.data       start:0x80396780 end:0x80396890
+	.sdata      start:0x804BD418 end:0x804BD420
 	.sdata2     start:0x804C02B0 end:0x804C02C0
 
 nw4r/g3d/g3d_anmclr.cpp:
@@ -703,6 +704,7 @@ nw4r/g3d/g3d_obj.cpp:
 nw4r/g3d/g3d_anmobj.cpp:
 	.text       start:0x80063604 end:0x800636BC
 	.rodata     start:0x80378300 end:0x80378310
+	.sdata      start:0x804BD420 end:0x804BD428
 	.sdata2     start:0x804C0328 end:0x804C0330
 
 nw4r/g3d/g3d_gpu.cpp:
@@ -725,7 +727,7 @@ nw4r/g3d/g3d_state.cpp:
 	.rodata     start:0x80378A90 end:0x80378AC0
 	.data       start:0x80396EB0 end:0x80396EC8
 	.bss        start:0x803EC120 end:0x803F1700
-	.sdata      start:0x804BD418 end:0x804BD430
+	.sdata      start:0x804BD428 end:0x804BD430
 	.sbss       start:0x804BEB50 end:0x804BEB70
 	.sdata2     start:0x804C0350 end:0x804C0378
 
