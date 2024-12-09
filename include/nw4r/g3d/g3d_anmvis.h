@@ -16,6 +16,9 @@ void ApplyVisAnmResult(u8* pByteVec, ResMdl mdl, AnmObjVis* pObj);
  * AnmObjVis
  *
  ******************************************************************************/
+// Forward declarations
+class AnmObjVisRes;
+
 class AnmObjVis : public AnmObj {
 public:
     AnmObjVis(MEMAllocator* pAllocator, u16* pBindingBuf, int numBinding);

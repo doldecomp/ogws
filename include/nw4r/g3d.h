@@ -3,6 +3,7 @@
 
 #include <nw4r/g3d/g3d_3dsmax.h>
 #include <nw4r/g3d/g3d_anmchr.h>
+#include <nw4r/g3d/g3d_anmclr.h>
 #include <nw4r/g3d/g3d_anmobj.h>
 #include <nw4r/g3d/g3d_anmscn.h>
 #include <nw4r/g3d/g3d_anmvis.h>

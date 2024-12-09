@@ -12,6 +12,22 @@ namespace g3d {
 struct ClrAnmResult {
     static const int NUM_OF_CLA_COLOR = 11;
 
+    enum Element {
+        ELEMENT_CLR0,
+        ELEMENT_CLR1,
+        ELEMENT_AMB0,
+        ELEMENT_AMB1,
+
+        ELEMENT_TEV0,
+        ELEMENT_TEV1,
+        ELEMENT_TEV2,
+
+        ELEMENT_TEVK0,
+        ELEMENT_TEVK1,
+        ELEMENT_TEVK2,
+        ELEMENT_TEVK3
+    };
+
     u32 bRgbaExist;                 // at 0x0
     u32 rgba[NUM_OF_CLA_COLOR];     // at 0x4
     u32 rgbaMask[NUM_OF_CLA_COLOR]; // at 0x30
