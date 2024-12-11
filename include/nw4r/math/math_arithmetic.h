@@ -21,13 +21,15 @@ f32 FLog(f32 x);
 f32 FrSqrt(f32 x);
 
 inline f32 FAbs(register f32 x) {
+    register f32 absx;
+
     // clang-format off
     asm {
-        fabs x, x
+        fabs absx, x
     }
     // clang-format on
 
-    return x;
+    return absx;
 }
 
 inline f32 FCeil(f32 x) {

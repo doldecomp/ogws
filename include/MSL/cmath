@@ -21,6 +21,7 @@ using ::fmod;
 using ::fmodf;
 using ::frexp;
 using ::ldexp;
+using ::ldexpf;
 using ::modf;
 using ::modff;
 using ::nan;
