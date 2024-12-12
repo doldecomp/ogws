@@ -137,6 +137,14 @@ public:
 
     virtual bool GetResult(u32 i); // at 0x38
 
+    ResAnmVis GetResAnm() {
+        return mRes;
+    }
+
+    void SetPlayPolicy(PlayPolicyFunc pFunc) {
+        FrameCtrl::SetPlayPolicy(pFunc);
+    }
+
 private:
     ResAnmVis mRes; // at 0x2C
 

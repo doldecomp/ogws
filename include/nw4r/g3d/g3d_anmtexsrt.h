@@ -149,6 +149,14 @@ public:
 
     void UpdateCache();
 
+    ResAnmTexSrt GetResAnm() {
+        return mRes;
+    }
+
+    void SetPlayPolicy(PlayPolicyFunc pFunc) {
+        FrameCtrl::SetPlayPolicy(pFunc);
+    }
+
 private:
     ResAnmTexSrt mRes;                    // at 0x2C
     TexSrtAnmResult* const mpResultCache; // at 0x30

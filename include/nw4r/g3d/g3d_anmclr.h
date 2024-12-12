@@ -147,6 +147,14 @@ public:
 
     void UpdateCache();
 
+    ResAnmClr GetResAnm() {
+        return mRes;
+    }
+
+    void SetPlayPolicy(PlayPolicyFunc pFunc) {
+        FrameCtrl::SetPlayPolicy(pFunc);
+    }
+
 private:
     ResAnmClr mRes;                    // at 0x2C
     ClrAnmResult* const mpResultCache; // at 0x30

@@ -100,7 +100,7 @@ public:
         mUpdateRate = rate;
     }
 
-    void SetPolicy(PlayPolicyFunc func) {
+    void SetPlayPolicy(PlayPolicyFunc func) {
         mpPlayPolicy = func;
     }
 

@@ -321,13 +321,13 @@ const TexSrtAnmResult* AnmObjTexSrtOverride::GetResult(TexSrtAnmResult* pResult,
  *
  ******************************************************************************/
 AnmObjTexSrtRes* AnmObjTexSrtRes::Construct(MEMAllocator* pAllocator,
-                                            u32* pSize, ResAnmTexSrt clr,
+                                            u32* pSize, ResAnmTexSrt srt,
                                             ResMdl mdl, bool cache) {
-    if (!clr.IsValid() || !mdl.IsValid()) {
+    if (!srt.IsValid() || !mdl.IsValid()) {
         return NULL;
     }
 
-    int numAnim = clr.GetNumMaterial();
+    int numAnim = srt.GetNumMaterial();
     int numMat = mdl.GetResMatNumEntries();
 
     int bindNum = numMat;
@@ -358,15 +358,15 @@ AnmObjTexSrtRes* AnmObjTexSrtRes::Construct(MEMAllocator* pAllocator,
         reinterpret_cast<u16*>(cacheSize + (pBuffer + sizeof(AnmObjTexSrtRes)));
 
     return new (pBuffer)
-        AnmObjTexSrtRes(pAllocator, clr, pBindingBuf, bindNum, pCacheBuf);
+        AnmObjTexSrtRes(pAllocator, srt, pBindingBuf, bindNum, pCacheBuf);
 }
 
-AnmObjTexSrtRes::AnmObjTexSrtRes(MEMAllocator* pAllocator, ResAnmTexSrt clr,
+AnmObjTexSrtRes::AnmObjTexSrtRes(MEMAllocator* pAllocator, ResAnmTexSrt srt,
                                  u16* pBindingBuf, int numBinding,
                                  TexSrtAnmResult* pCacheBuf)
     : AnmObjTexSrt(pAllocator, pBindingBuf, numBinding),
-      FrameCtrl(0.0f, clr.GetNumFrame(), GetAnmPlayPolicy(clr.GetAnmPolicy())),
-      mRes(clr),
+      FrameCtrl(0.0f, srt.GetNumFrame(), GetAnmPlayPolicy(srt.GetAnmPolicy())),
+      mRes(srt),
       mpResultCache(pCacheBuf) {
 
     if (mpResultCache != NULL) {

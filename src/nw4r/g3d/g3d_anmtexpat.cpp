@@ -320,13 +320,13 @@ const TexPatAnmResult* AnmObjTexPatOverride::GetResult(TexPatAnmResult* pResult,
  *
  ******************************************************************************/
 AnmObjTexPatRes* AnmObjTexPatRes::Construct(MEMAllocator* pAllocator,
-                                            u32* pSize, ResAnmTexPat clr,
+                                            u32* pSize, ResAnmTexPat pat,
                                             ResMdl mdl, bool cache) {
-    if (!clr.IsValid() || !mdl.IsValid()) {
+    if (!pat.IsValid() || !mdl.IsValid()) {
         return NULL;
     }
 
-    int numAnim = clr.GetNumMaterial();
+    int numAnim = pat.GetNumMaterial();
     int numMat = mdl.GetResMatNumEntries();
 
     int bindNum = numMat;
@@ -357,15 +357,15 @@ AnmObjTexPatRes* AnmObjTexPatRes::Construct(MEMAllocator* pAllocator,
         reinterpret_cast<u16*>(cacheSize + (pBuffer + sizeof(AnmObjTexPatRes)));
 
     return new (pBuffer)
-        AnmObjTexPatRes(pAllocator, clr, pBindingBuf, bindNum, pCacheBuf);
+        AnmObjTexPatRes(pAllocator, pat, pBindingBuf, bindNum, pCacheBuf);
 }
 
-AnmObjTexPatRes::AnmObjTexPatRes(MEMAllocator* pAllocator, ResAnmTexPat clr,
+AnmObjTexPatRes::AnmObjTexPatRes(MEMAllocator* pAllocator, ResAnmTexPat pat,
                                  u16* pBindingBuf, int numBinding,
                                  TexPatAnmResult* pCacheBuf)
     : AnmObjTexPat(pAllocator, pBindingBuf, numBinding),
-      FrameCtrl(0.0f, clr.GetNumFrame(), GetAnmPlayPolicy(clr.GetAnmPolicy())),
-      mRes(clr),
+      FrameCtrl(0.0f, pat.GetNumFrame(), GetAnmPlayPolicy(pat.GetAnmPolicy())),
+      mRes(pat),
       mpResultCache(pCacheBuf) {
 
     if (mpResultCache != NULL) {

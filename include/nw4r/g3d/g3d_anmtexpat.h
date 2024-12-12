@@ -147,6 +147,14 @@ public:
 
     void UpdateCache();
 
+    ResAnmTexPat GetResAnm() {
+        return mRes;
+    }
+
+    void SetPlayPolicy(PlayPolicyFunc pFunc) {
+        FrameCtrl::SetPlayPolicy(pFunc);
+    }
+
 private:
     ResAnmTexPat mRes;                    // at 0x2C
     TexPatAnmResult* const mpResultCache; // at 0x30
