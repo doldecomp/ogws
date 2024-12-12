@@ -125,9 +125,9 @@ class AnmObjTexPatOverride : public AnmObjTexPatNode {
 class AnmObjTexPatRes : public AnmObjTexPat, protected FrameCtrl {
 public:
     static AnmObjTexPatRes* Construct(MEMAllocator* pAllocator, u32* pSize,
-                                      ResAnmTexPat clr, ResMdl mdl, bool cache);
+                                      ResAnmTexPat pat, ResMdl mdl, bool cache);
 
-    AnmObjTexPatRes(MEMAllocator* pAllocator, ResAnmTexPat clr,
+    AnmObjTexPatRes(MEMAllocator* pAllocator, ResAnmTexPat pat,
                     u16* pBindingBuf, int numBinding,
                     TexPatAnmResult* pCacheBuf);
     virtual void G3dProc(u32 task, u32 param, void* pInfo); // at 0xC

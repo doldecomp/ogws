@@ -127,9 +127,9 @@ class AnmObjTexSrtOverride : public AnmObjTexSrtNode {
 class AnmObjTexSrtRes : public AnmObjTexSrt, protected FrameCtrl {
 public:
     static AnmObjTexSrtRes* Construct(MEMAllocator* pAllocator, u32* pSize,
-                                      ResAnmTexSrt clr, ResMdl mdl, bool cache);
+                                      ResAnmTexSrt srt, ResMdl mdl, bool cache);
 
-    AnmObjTexSrtRes(MEMAllocator* pAllocator, ResAnmTexSrt clr,
+    AnmObjTexSrtRes(MEMAllocator* pAllocator, ResAnmTexSrt srt,
                     u16* pBindingBuf, int numBinding,
                     TexSrtAnmResult* pCacheBuf);
     virtual void G3dProc(u32 task, u32 param, void* pInfo); // at 0xC

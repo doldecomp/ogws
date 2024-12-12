@@ -13,7 +13,14 @@ struct ShpAnmVtxSet {
     ResVtxPos resVtxPos; // at 0x0
     ResVtxNrm resVtxNrm; // at 0x4
     ResVtxClr resVtxClr; // at 0x8
+
+    friend bool operator==(const ShpAnmVtxSet& rLhs, const ShpAnmVtxSet& rRhs);
 };
+
+inline bool operator==(const ShpAnmVtxSet& rLhs, const ShpAnmVtxSet& rRhs) {
+    return rLhs.resVtxPos == rRhs.resVtxPos &&
+           rLhs.resVtxNrm == rRhs.resVtxNrm && rLhs.resVtxClr == rRhs.resVtxClr;
+}
 
 struct BlendVtx {
     ShpAnmVtxSet vtxSet; // at 0x0

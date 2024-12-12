@@ -247,9 +247,6 @@ bool AnmObjChrNode::Bind(ResMdl mdl) {
 }
 
 bool AnmObjChrNode::Bind(ResMdl mdl, u32 target, BindOption option) {
-#pragma unused(target)
-#pragma unused(option)
-
     bool success = false;
 
     for (int i = 0; i < mChildrenArraySize; i++) {
@@ -344,10 +341,6 @@ AnmObjChrBlend* AnmObjChrBlend::Construct(MEMAllocator* pAllocator, u32* pSize,
     if (!mdl.IsValid()) {
         return NULL;
     }
-
-    ////////////////////////////////
-    ////////////////////////////////
-    ////////////////////////////////
 
     int bindNum = mdl.GetResNodeNumEntries();
 

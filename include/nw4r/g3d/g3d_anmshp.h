@@ -1,29 +1,26 @@
-#ifndef NW4R_G3D_ANMCHR_H
-#define NW4R_G3D_ANMCHR_H
+#ifndef NW4R_G3D_ANMSHP_H
+#define NW4R_G3D_ANMSHP_H
 #include <nw4r/types_nw4r.h>
 
 #include <nw4r/g3d/g3d_anmobj.h>
-#include <nw4r/g3d/g3d_resanmchr.h>
+#include <nw4r/g3d/g3d_resanmshp.h>
 
 namespace nw4r {
 namespace g3d {
 
 /******************************************************************************
  *
- * AnmObjChr
+ * AnmObjShp
  *
  ******************************************************************************/
 // Forward declarations
-class AnmObjChrRes;
+class AnmObjShpRes;
 
-class AnmObjChr : public AnmObj {
+class AnmObjShp : public AnmObj {
 public:
-    enum BindOption { BIND_ONE, BIND_PARTIAL, NUM_OF_BIND_OPTION };
-
-public:
-    AnmObjChr(MEMAllocator* pAllocator, u16* pBindingBuf, int numBinding);
+    AnmObjShp(MEMAllocator* pAllocator, u16* pBindingBuf, int numBinding);
     virtual void G3dProc(u32 task, u32 param, void* pInfo) = 0; // at 0xC
-    virtual ~AnmObjChr() {}                                     // at 0x10
+    virtual ~AnmObjShp() {}                                     // at 0x10
 
     virtual void SetFrame(f32 frame) = 0; // at 0x1C
     virtual f32 GetFrame() const = 0;     // at 0x20
@@ -35,30 +32,18 @@ public:
     virtual bool Bind(ResMdl mdl) = 0; // at 0x30
     virtual void Release();            // at 0x34
 
-    virtual const ChrAnmResult* GetResult(ChrAnmResult* pResult,
+    virtual const ShpAnmResult* GetResult(ShpAnmResult* pResult,
                                           u32 i) = 0; // at 0x38
 
-    virtual AnmObjChrRes* Attach(int i, AnmObjChrRes* pRes); // at 0x3C
-    virtual AnmObjChrRes* Detach(int i);                     // at 0x40
+    virtual AnmObjShpRes* Attach(int i, AnmObjShpRes* pRes); // at 0x3C
+    virtual AnmObjShpRes* Detach(int i);                     // at 0x40
     virtual void DetachAll();                                // at 0x44
 
     virtual void SetWeight(int i, f32 weight); // at 0x48
     virtual f32 GetWeight(int i) const;        // at 0x4C
 
-    virtual bool Bind(ResMdl mdl, u32 target, BindOption option) = 0; // at 0x50
-    virtual void Release(const ResMdl mdl, u32 target,
-                         BindOption option) = 0; // at 0x54
-
     bool TestExistence(u32 i) const;
     bool TestDefined(u32 i) const;
-
-    void UseQuaternionBlend(bool enable) {
-        SetAnmFlag(FLAG_USE_QUATERNION_ROTATION_BLEND, enable);
-    }
-
-    void UseAccurateScaleBlend(bool enable) {
-        SetAnmFlag(FLAG_USE_ACCURATE_SCALE_BLEND, enable);
-    }
 
 protected:
     enum BindingFlag {
@@ -73,20 +58,20 @@ protected:
     int mNumBinding;      // at 0x10
     u16* const mpBinding; // at 0x14
 
-    NW4R_G3D_RTTI_DECL_DERIVED(AnmObjChr, AnmObj);
+    NW4R_G3D_RTTI_DECL_DERIVED(AnmObjShp, AnmObj);
 };
 
 /******************************************************************************
  *
- * AnmObjChrNode
+ * AnmObjShpNode
  *
  ******************************************************************************/
-class AnmObjChrNode : public AnmObjChr {
+class AnmObjShpNode : public AnmObjShp {
 public:
-    AnmObjChrNode(MEMAllocator* pAllocator, u16* pBindingBuf, int numBinding,
-                  AnmObjChrRes** ppChildrenBuf, int numChildren);
+    AnmObjShpNode(MEMAllocator* pAllocator, u16* pBindingBuf, int numBinding,
+                  AnmObjShpRes** ppChildrenBuf, int numChildren);
     virtual void G3dProc(u32 task, u32 param, void* pInfo); // at 0xC
-    virtual ~AnmObjChrNode();                               // at 0x10
+    virtual ~AnmObjShpNode();                               // at 0x10
 
     virtual void SetFrame(f32 frame); // at 0x1C
     virtual f32 GetFrame() const;     // at 0x20
@@ -98,37 +83,33 @@ public:
     virtual bool Bind(ResMdl mdl); // at 0x30
     virtual void Release();        // at 0x34
 
-    virtual AnmObjChrRes* Attach(int i, AnmObjChrRes* pRes); // at 0x3C
-    virtual AnmObjChrRes* Detach(int i);                     // at 0x40
+    virtual AnmObjShpRes* Attach(int i, AnmObjShpRes* pRes); // at 0x3C
+    virtual AnmObjShpRes* Detach(int i);                     // at 0x40
     virtual void DetachAll();                                // at 0x44
-
-    virtual bool Bind(ResMdl mdl, u32 target, BindOption option); // at 0x50
-    virtual void Release(const ResMdl mdl, u32 target,
-                         BindOption option); // at 0x54
 
 protected:
     int mChildrenArraySize;         // at 0x18
-    AnmObjChrRes** mpChildrenArray; // at 0x1C
+    AnmObjShpRes** mpChildrenArray; // at 0x1C
 
-    NW4R_G3D_RTTI_DECL_DERIVED(AnmObjChrNode, AnmObjChr);
+    NW4R_G3D_RTTI_DECL_DERIVED(AnmObjShpNode, AnmObjShp);
 };
 
 /******************************************************************************
  *
- * AnmObjChrBlend
+ * AnmObjShpBlend
  *
  ******************************************************************************/
-class AnmObjChrBlend : public AnmObjChrNode {
-    static AnmObjChrBlend* Construct(MEMAllocator* pAllocator, u32* pSize,
+class AnmObjShpBlend : public AnmObjShpNode {
+    static AnmObjShpBlend* Construct(MEMAllocator* pAllocator, u32* pSize,
                                      ResMdl mdl, int numChildren);
 
-    AnmObjChrBlend(MEMAllocator* pAllocator, u16* pBindingBuf, int numBinding,
-                   AnmObjChrRes** ppChildrenBuf, int numChildren,
+    AnmObjShpBlend(MEMAllocator* pAllocator, u16* pBindingBuf, int numBinding,
+                   AnmObjShpRes** ppChildrenBuf, int numChildren,
                    f32* pWeightBuf);
 
-    virtual ~AnmObjChrBlend() {} // at 0x10
+    virtual ~AnmObjShpBlend() {} // at 0x10
 
-    virtual const ChrAnmResult* GetResult(ChrAnmResult* pResult,
+    virtual const ShpAnmResult* GetResult(ShpAnmResult* pResult,
                                           u32 i); // at 0x38
 
     virtual void SetWeight(int i, f32 weight); // at 0x48
@@ -137,23 +118,24 @@ class AnmObjChrBlend : public AnmObjChrNode {
 private:
     f32* mpWeightArray; // at 0x20
 
-    NW4R_G3D_RTTI_DECL_DERIVED(AnmObjChrBlend, AnmObjChrNode);
+    NW4R_G3D_RTTI_DECL_DERIVED(AnmObjShpBlend, AnmObjShpNode);
 };
 
 /******************************************************************************
  *
- * AnmObjChrRes
+ * AnmObjShpRes
  *
  ******************************************************************************/
-class AnmObjChrRes : public AnmObjChr, protected FrameCtrl {
+class AnmObjShpRes : public AnmObjShp, protected FrameCtrl {
 public:
-    static AnmObjChrRes* Construct(MEMAllocator* pAllocator, u32* pSize,
-                                   ResAnmChr chr, ResMdl mdl, bool cache);
+    static AnmObjShpRes* Construct(MEMAllocator* pAllocator, u32* pSize,
+                                   ResAnmShp shp, ResMdl mdl, bool cache);
 
-    AnmObjChrRes(MEMAllocator* pAllocator, ResAnmChr chr, u16* pBindingBuf,
-                 int numBinding, ChrAnmResult* pCacheBuf);
+    AnmObjShpRes(MEMAllocator* pAllocator, ResAnmShp shp, u16* pBindingBuf,
+                 ShpAnmVtxSet* pVtxSetBuf, int numBinding,
+                 ShpAnmResult* pCacheBuf);
     virtual void G3dProc(u32 task, u32 param, void* pInfo); // at 0xC
-    virtual ~AnmObjChrRes() {}                              // at 0x10
+    virtual ~AnmObjShpRes() {}                              // at 0x10
 
     virtual void SetFrame(f32 frame); // at 0x1C
     virtual f32 GetFrame() const;     // at 0x20
@@ -163,18 +145,13 @@ public:
     virtual f32 GetUpdateRate() const;    // at 0x2C
 
     virtual bool Bind(ResMdl mdl); // at 0x30
-    using AnmObjChr::Release;      // at 0x40
 
-    virtual const ChrAnmResult* GetResult(ChrAnmResult* pResult,
+    virtual const ShpAnmResult* GetResult(ShpAnmResult* pResult,
                                           u32 i); // at 0x38
-
-    virtual bool Bind(ResMdl mdl, u32 target, BindOption option); // at 0x50
-    virtual void Release(const ResMdl mdl, u32 target,
-                         BindOption option); // at 0x54
 
     void UpdateCache();
 
-    ResAnmChr GetResAnm() {
+    ResAnmShp GetResAnm() {
         return mRes;
     }
 
@@ -183,10 +160,11 @@ public:
     }
 
 private:
-    ResAnmChr mRes;                    // at 0x2C
-    ChrAnmResult* const mpResultCache; // at 0x30
+    ResAnmShp mRes;                    // at 0x2C
+    ShpAnmVtxSet* const mpVtxSetArray; // at 0x30
+    ShpAnmResult* const mpResultCache; // at 0x34
 
-    NW4R_G3D_RTTI_DECL_DERIVED(AnmObjChrRes, AnmObjChr);
+    NW4R_G3D_RTTI_DECL_DERIVED(AnmObjShpRes, AnmObjShp);
 };
 
 } // namespace g3d
