@@ -2,8 +2,6 @@
 
 #include <nw4r/g3d.h>
 
-#include <cmath>
-
 namespace nw4r {
 namespace g3d {
 

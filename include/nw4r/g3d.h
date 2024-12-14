@@ -11,9 +11,13 @@
 #include <nw4r/g3d/g3d_anmtexsrt.h>
 #include <nw4r/g3d/g3d_anmvis.h>
 #include <nw4r/g3d/g3d_basic.h>
+#include <nw4r/g3d/g3d_calcmaterial.h>
+#include <nw4r/g3d/g3d_calcview.h>
+#include <nw4r/g3d/g3d_calcworld.h>
 #include <nw4r/g3d/g3d_camera.h>
 #include <nw4r/g3d/g3d_cpu.h>
 #include <nw4r/g3d/g3d_dcc.h>
+#include <nw4r/g3d/g3d_draw.h>
 #include <nw4r/g3d/g3d_fog.h>
 #include <nw4r/g3d/g3d_light.h>
 #include <nw4r/g3d/g3d_maya.h>
@@ -41,6 +45,7 @@
 #include <nw4r/g3d/g3d_restex.h>
 #include <nw4r/g3d/g3d_rtti.h>
 #include <nw4r/g3d/g3d_scnmdl1mat1shp.h>
+#include <nw4r/g3d/g3d_scnmdlsmpl.h>
 #include <nw4r/g3d/g3d_scnobj.h>
 #include <nw4r/g3d/g3d_scnproc.h>
 #include <nw4r/g3d/g3d_scnrfl.h>

@@ -545,7 +545,7 @@ config.libs = [
             Object(NonMatching, "nw4r/g3d/g3d_3dsmax.cpp"),
             Object(Matching, "nw4r/g3d/g3d_scnobj.cpp"),
             Object(Matching, "nw4r/g3d/g3d_scnroot.cpp"),
-            Object(NonMatching, "nw4r/g3d/g3d_scnmdlsmpl.cpp"),
+            Object(Matching, "nw4r/g3d/g3d_scnmdlsmpl.cpp"),
             Object(NonMatching, "nw4r/g3d/g3d_scnmdl.cpp"),
             Object(NonMatching, "nw4r/g3d/g3d_calcmaterial.cpp"),
             Object(Matching, "nw4r/g3d/g3d_init.cpp"),

@@ -39,6 +39,11 @@ enum ScalingRule {
     SCALINGRULE_MAYA
 };
 
+struct ResMtxIDToNodeIDData {
+    u32 numMtxID; // at 0x0
+    s32 table[1]; // at 0x4
+};
+
 struct ResMdlInfoData : ResMdlInfoDataTypedef {
     u32 size;                   // at 0x0
     s32 toResMdlData;           // at 0x4
@@ -61,6 +66,35 @@ class ResMdlInfo : public ResCommon<ResMdlInfoData>,
                    public ResMdlInfoDataTypedef {
 public:
     NW4R_G3D_RESOURCE_FUNC_DEF(ResMdlInfo);
+
+    ScalingRule GetScalingRule() const {
+        return ref().scaling_rule;
+    }
+
+    u32 GetNumViewMtx() const {
+        return ref().numViewMtx;
+    }
+
+    EnvelopeMatrixMode GetEnvelopeMatrixMode() const {
+        return static_cast<EnvelopeMatrixMode>(ref().envelope_mtx_mode);
+    }
+
+    u32 GetNumPosNrmMtx() const {
+        const ResMtxIDToNodeIDData* pData =
+            reinterpret_cast<const ResMtxIDToNodeIDData*>(
+                reinterpret_cast<const u8*>(&ref()) + ref().toMtxIDToNodeID);
+
+        return pData->numMtxID;
+    }
+
+    s32 GetNodeIDFromMtxID(u32 id) const {
+        const s32* pArray =
+            reinterpret_cast<const ResMtxIDToNodeIDData*>(
+                reinterpret_cast<const u8*>(&ref()) + ref().toMtxIDToNodeID)
+                ->table;
+
+        return pArray[id];
+    }
 };
 
 /******************************************************************************
@@ -109,7 +143,7 @@ public:
         return GetRevision() == REVISION;
     }
 
-    u8* GetResByteCode(const char* pName) const;
+    const u8* GetResByteCode(const char* pName) const;
 
     ResNode GetResNode(const char* pName) const;
     ResNode GetResNode(ResName name) const;

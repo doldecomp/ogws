@@ -80,8 +80,8 @@ public:
         EXECOP_CALC_WORLD = (1 << 0),
         EXECOP_CALC_MAT = (1 << 1),
         EXECOP_CALC_VIEW = (1 << 2),
-        EXECOP_DRAW_OPA = (1 << 3),
-        EXECOP_DRAW_XLU = (1 << 4)
+        EXECOP_DRAW_OPA = (1 << 4),
+        EXECOP_DRAW_XLU = (1 << 5)
     };
 
 public:
@@ -127,6 +127,10 @@ public:
                            const math::AABB* pAABB);
     bool GetBoundingVolume(ScnObjBoundingVolumeType type,
                            math::AABB* pAABB) const;
+
+    bool SetBoundingVolume(const math::AABB* pAABB) {
+        return SetBoundingVolume(BOUNDINGVOLUME_AABB_LOCAL, pAABB);
+    }
 
 protected:
     enum ScnObjFlag {
@@ -263,83 +267,43 @@ public:
  *
  ******************************************************************************/
 void ScnObj::CheckCallback_CALC_VIEW(Timing timing, u32 param, void* pInfo) {
-    if (mpFuncObjExec == NULL) {
-        return;
-    }
+    if (mpFuncObjExec != NULL && (mCallbackExecOpMask & EXECOP_CALC_VIEW) &&
+        (mCallbackTiming & timing)) {
 
-    if (!(mCallbackExecOpMask & EXECOP_CALC_VIEW)) {
-        return;
+        mpFuncObjExec->ExecCallback_CALC_VIEW(timing, this, param, pInfo);
     }
-
-    if (!(mCallbackTiming & timing)) {
-        return;
-    }
-
-    mpFuncObjExec->ExecCallback_CALC_VIEW(timing, this, param, pInfo);
 }
 
 void ScnObj::CheckCallback_CALC_MAT(Timing timing, u32 param, void* pInfo) {
-    if (mpFuncObjExec == NULL) {
-        return;
-    }
+    if (mpFuncObjExec != NULL && (mCallbackExecOpMask & EXECOP_CALC_MAT) &&
+        (mCallbackTiming & timing)) {
 
-    if (!(mCallbackExecOpMask & EXECOP_CALC_MAT)) {
-        return;
+        mpFuncObjExec->ExecCallback_CALC_MAT(timing, this, param, pInfo);
     }
-
-    if (!(mCallbackTiming & timing)) {
-        return;
-    }
-
-    mpFuncObjExec->ExecCallback_CALC_MAT(timing, this, param, pInfo);
 }
 
 void ScnObj::CheckCallback_CALC_WORLD(Timing timing, u32 param, void* pInfo) {
-    if (mpFuncObjExec == NULL) {
-        return;
-    }
+    if (mpFuncObjExec != NULL && (mCallbackExecOpMask & EXECOP_CALC_WORLD) &&
+        (mCallbackTiming & timing)) {
 
-    if (!(mCallbackExecOpMask & EXECOP_CALC_WORLD)) {
-        return;
+        mpFuncObjExec->ExecCallback_CALC_WORLD(timing, this, param, pInfo);
     }
-
-    if (!(mCallbackTiming & timing)) {
-        return;
-    }
-
-    mpFuncObjExec->ExecCallback_CALC_WORLD(timing, this, param, pInfo);
 }
 
 void ScnObj::CheckCallback_DRAW_OPA(Timing timing, u32 param, void* pInfo) {
-    if (mpFuncObjExec == NULL) {
-        return;
-    }
+    if (mpFuncObjExec != NULL && (mCallbackExecOpMask & EXECOP_DRAW_OPA) &&
+        (mCallbackTiming & timing)) {
 
-    if (!(mCallbackExecOpMask & EXECOP_DRAW_OPA)) {
-        return;
+        mpFuncObjExec->ExecCallback_DRAW_OPA(timing, this, param, pInfo);
     }
-
-    if (!(mCallbackTiming & timing)) {
-        return;
-    }
-
-    mpFuncObjExec->ExecCallback_DRAW_OPA(timing, this, param, pInfo);
 }
 
 void ScnObj::CheckCallback_DRAW_XLU(Timing timing, u32 param, void* pInfo) {
-    if (mpFuncObjExec == NULL) {
-        return;
-    }
+    if (mpFuncObjExec != NULL && (mCallbackExecOpMask & EXECOP_DRAW_XLU) &&
+        (mCallbackTiming & timing)) {
 
-    if (!(mCallbackExecOpMask & EXECOP_DRAW_XLU)) {
-        return;
+        mpFuncObjExec->ExecCallback_DRAW_XLU(timing, this, param, pInfo);
     }
-
-    if (!(mCallbackTiming & timing)) {
-        return;
-    }
-
-    mpFuncObjExec->ExecCallback_DRAW_XLU(timing, this, param, pInfo);
 }
 
 /******************************************************************************

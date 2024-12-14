@@ -10,7 +10,7 @@ namespace g3d {
  * ResByteCode
  *
  ******************************************************************************/
-u8* ResMdl::GetResByteCode(const char* pName) const {
+const u8* ResMdl::GetResByteCode(const char* pName) const {
     return static_cast<u8*>(ofs_to_obj<ResDic>(ref().toResByteCodeDic)[pName]);
 }
 

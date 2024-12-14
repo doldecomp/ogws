@@ -10,8 +10,6 @@ namespace nw4r {
 namespace g3d {
 
 class ScnMdl1Mat1Shp : public ScnLeaf {
-    NW4R_G3D_RTTI_DECL_DERIVED(ScnMdl1Mat1Shp, ScnLeaf);
-
 public:
     ResMat GetResMat() {
         return mResMat;
@@ -23,6 +21,8 @@ public:
 private:
     ResMat mResMat; // at 0xE8
     ResShp mResShp; // at 0xEC
+
+    NW4R_G3D_RTTI_DECL_DERIVED(ScnMdl1Mat1Shp, ScnLeaf);
 };
 
 } // namespace g3d

@@ -503,9 +503,8 @@ inline MTX34* MTX34Identity(MTX34* pMtx) {
     return pMtx;
 }
 
-inline MTX34* MTX34Inv(MTX34* pOut, const MTX34* pIn) {
-    PSMTXInverse(*pIn, *pOut);
-    return pOut;
+inline u32 MTX34Inv(MTX34* pOut, const MTX34* pIn) {
+    return PSMTXInverse(*pIn, *pOut);
 }
 
 inline MTX34* MTX34LookAt(MTX34* pMtx, const VEC3* pPos, const VEC3* pUp,

@@ -46,7 +46,7 @@ public:
     bool TestAnmFlag(AnmFlag flag) const;
 
     bool IsBound() const {
-        return mFlags & FLAG_ANM_BOUND;
+        return TestAnmFlag(FLAG_ANM_BOUND);
     }
 
 private:
