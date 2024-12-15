@@ -24,10 +24,8 @@ ScnMdlSimple* ScnMdlSimple::Construct(MEMAllocator* pAllocator, u32* pSize,
     ScnMdlSimple* pSimple = NULL;
     u32 simpleSize = sizeof(ScnMdlSimple);
 
-    const ResMdlInfo info = mdl.GetResMdlInfo();
-
-    u32 posNrmMtxNum = info.GetNumPosNrmMtx();
-    u32 viewMtxNum = info.GetNumViewMtx();
+    u32 posNrmMtxNum = mdl.GetResMdlInfo().GetNumPosNrmMtx();
+    u32 viewMtxNum = mdl.GetResMdlInfo().GetNumViewMtx();
 
     u32 worldMtxSize = posNrmMtxNum * sizeof(math::MTX34);
     u32 worldAttrSize = posNrmMtxNum * sizeof(u32);
@@ -37,7 +35,7 @@ ScnMdlSimple* ScnMdlSimple::Construct(MEMAllocator* pAllocator, u32* pSize,
 
     u32 viewPosMtxSize = numView * align32(viewPosTexMtxSizeUnit);
 
-    u32 viewNrmMtxSize = info.ref().need_nrm_mtx_array
+    u32 viewNrmMtxSize = mdl.GetResMdlInfo().ref().need_nrm_mtx_array
                              ? numView * align32(viewNrmMtxSizeUnit)
                              : 0;
 
