@@ -160,6 +160,11 @@ protected:
         SCNMDLSMPLFLAG_LC_DMA = (1 << 0),
     };
 
+    static const int VIEW_MAX = 16;
+
+    static const int MTX_CACHE_MIN = 8;
+    static const int MTX_CACHE_MAX = (0x4000 / sizeof(math::MTX34)) + 1;
+
 protected:
     void ScnMdlSmpl_CalcPosture(u32 param, const math::MTX34* pParent);
 
@@ -174,12 +179,6 @@ protected:
     void ScnMdlSmpl_G3DPROC_UPDATEFRAME(u32 /* param */, void* /* pInfo */) {
         UpdateFrame();
     }
-
-private:
-    static const int VIEW_MAX = 16;
-
-    static const int MTX_CACHE_MIN = 8;
-    static const int MTX_CACHE_MAX = (0x4000 / sizeof(math::MTX34)) + 1;
 
 private:
     ResMdl mResMdl;                 // at 0xE8

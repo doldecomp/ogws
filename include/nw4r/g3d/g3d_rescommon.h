@@ -28,7 +28,7 @@
     NW4R_G3D_RESOURCE_FUNC_DEF_IMPL(TCLS, TDATA)
 
 #define NW4R_G3D_RESOURCE_FUNC_DEF_IMPL(TCLS, TDATA)                           \
-    explicit TCLS(void* pData) : nw4r::g3d::ResCommon<TDATA>(pData) {}         \
+    explicit TCLS(void* pData = NULL) : nw4r::g3d::ResCommon<TDATA>(pData) {}  \
                                                                                \
     TDATA& ref() {                                                             \
         return *ptr();                                                         \

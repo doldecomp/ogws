@@ -139,6 +139,10 @@ public:
                            u32* pPostMtx) const;
     void GXSetTexCoordGen2(GXTexCoordID id, GXTexGenType func,
                            GXTexGenSrc param, GXBool normalize, u32 postMtx);
+
+    void EndEdit() {
+        DCStore(false);
+    }
 };
 
 /******************************************************************************
@@ -299,6 +303,8 @@ public:
     void GXSetChanCtrl(GXChannelID id, GXBool enable, GXColorSrc ambSrc,
                        GXColorSrc matSrc, GXLightID lightMask,
                        GXDiffuseFn diffuseFn, GXAttnFn attnFn);
+
+    void EndEdit() {}
 };
 
 /******************************************************************************

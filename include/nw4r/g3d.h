@@ -13,6 +13,7 @@
 #include <nw4r/g3d/g3d_basic.h>
 #include <nw4r/g3d/g3d_calcmaterial.h>
 #include <nw4r/g3d/g3d_calcview.h>
+#include <nw4r/g3d/g3d_calcvtx.h>
 #include <nw4r/g3d/g3d_calcworld.h>
 #include <nw4r/g3d/g3d_camera.h>
 #include <nw4r/g3d/g3d_cpu.h>
@@ -44,6 +45,7 @@
 #include <nw4r/g3d/g3d_restev.h>
 #include <nw4r/g3d/g3d_restex.h>
 #include <nw4r/g3d/g3d_rtti.h>
+#include <nw4r/g3d/g3d_scnmdl.h>
 #include <nw4r/g3d/g3d_scnmdl1mat1shp.h>
 #include <nw4r/g3d/g3d_scnmdlsmpl.h>
 #include <nw4r/g3d/g3d_scnobj.h>
