@@ -271,6 +271,18 @@ typedef enum {
         /* get value  */ #define GX_BP_GET_GENMODE_MULTISAMPLE(reg) GX_BITGET((reg), 22, 1)
         /* set value  */ #define GX_BP_SET_GENMODE_MULTISAMPLE(reg, x) ((reg) = GX_BITSET((reg), 22, 1, x))
 
+// NUMTEVSTAGES [18:21] (4)
+        /* start bit  */ #define GX_BP_GENMODE_NUMTEVSTAGES_B 18
+        /* end bit    */ #define GX_BP_GENMODE_NUMTEVSTAGES_E 21
+        /* bit size   */ #define GX_BP_GENMODE_NUMTEVSTAGES_SZ 4
+
+        /* raw mask   */ #define GX_BP_GENMODE_NUMTEVSTAGES_MASK (((1 << 4) - 1) << 31 - 21)
+        /* local mask */ #define GX_BP_GENMODE_NUMTEVSTAGES_LMASK ((1 << 4) - 1)
+        /* bit shift  */ #define GX_BP_GENMODE_NUMTEVSTAGES_SHIFT 10
+
+        /* get value  */ #define GX_BP_GET_GENMODE_NUMTEVSTAGES(reg) GX_BITGET((reg), 18, 4)
+        /* set value  */ #define GX_BP_SET_GENMODE_NUMTEVSTAGES(reg, x) ((reg) = GX_BITSET((reg), 18, 4, x))
+
 // CULLMODE [16:17] (2)
         /* start bit  */ #define GX_BP_GENMODE_CULLMODE_B 16
         /* end bit    */ #define GX_BP_GENMODE_CULLMODE_E 17
@@ -981,31 +993,67 @@ typedef enum {
 
 
 /******************************************************************************
- * BP structure - su_ssize
+ * BP structure - su_size
  *****************************************************************************/
+// SCALE [16:31] (16)
+        /* start bit  */ #define GX_BP_SU_SIZE_SCALE_B 16
+        /* end bit    */ #define GX_BP_SU_SIZE_SCALE_E 31
+        /* bit size   */ #define GX_BP_SU_SIZE_SCALE_SZ 16
+
+        /* raw mask   */ #define GX_BP_SU_SIZE_SCALE_MASK (((1 << 16) - 1) << 31 - 31)
+        /* local mask */ #define GX_BP_SU_SIZE_SCALE_LMASK ((1 << 16) - 1)
+        /* bit shift  */ #define GX_BP_SU_SIZE_SCALE_SHIFT 0
+
+        /* get value  */ #define GX_BP_GET_SU_SIZE_SCALE(reg) GX_BITGET((reg), 16, 16)
+        /* set value  */ #define GX_BP_SET_SU_SIZE_SCALE(reg, x) ((reg) = GX_BITSET((reg), 16, 16, x))
+
+// RANGEBIAS [15:15] (1)
+        /* start bit  */ #define GX_BP_SU_SIZE_RANGEBIAS_B 15
+        /* end bit    */ #define GX_BP_SU_SIZE_RANGEBIAS_E 15
+        /* bit size   */ #define GX_BP_SU_SIZE_RANGEBIAS_SZ 1
+
+        /* raw mask   */ #define GX_BP_SU_SIZE_RANGEBIAS_MASK (((1 << 1) - 1) << 31 - 15)
+        /* local mask */ #define GX_BP_SU_SIZE_RANGEBIAS_LMASK ((1 << 1) - 1)
+        /* bit shift  */ #define GX_BP_SU_SIZE_RANGEBIAS_SHIFT 16
+
+        /* get value  */ #define GX_BP_GET_SU_SIZE_RANGEBIAS(reg) GX_BITGET((reg), 15, 1)
+        /* set value  */ #define GX_BP_SET_SU_SIZE_RANGEBIAS(reg, x) ((reg) = GX_BITSET((reg), 15, 1, x))
+
+// CYLINDRICWRAP [14:14] (1)
+        /* start bit  */ #define GX_BP_SU_SIZE_CYLINDRICWRAP_B 14
+        /* end bit    */ #define GX_BP_SU_SIZE_CYLINDRICWRAP_E 14
+        /* bit size   */ #define GX_BP_SU_SIZE_CYLINDRICWRAP_SZ 1
+
+        /* raw mask   */ #define GX_BP_SU_SIZE_CYLINDRICWRAP_MASK (((1 << 1) - 1) << 31 - 14)
+        /* local mask */ #define GX_BP_SU_SIZE_CYLINDRICWRAP_LMASK ((1 << 1) - 1)
+        /* bit shift  */ #define GX_BP_SU_SIZE_CYLINDRICWRAP_SHIFT 17
+
+        /* get value  */ #define GX_BP_GET_SU_SIZE_CYLINDRICWRAP(reg) GX_BITGET((reg), 14, 1)
+        /* set value  */ #define GX_BP_SET_SU_SIZE_CYLINDRICWRAP(reg, x) ((reg) = GX_BITSET((reg), 14, 1, x))
+
 // USELINEOFS [13:13] (1)
-        /* start bit  */ #define GX_BP_SU_SSIZE_USELINEOFS_B 13
-        /* end bit    */ #define GX_BP_SU_SSIZE_USELINEOFS_E 13
-        /* bit size   */ #define GX_BP_SU_SSIZE_USELINEOFS_SZ 1
+        /* start bit  */ #define GX_BP_SU_SIZE_USELINEOFS_B 13
+        /* end bit    */ #define GX_BP_SU_SIZE_USELINEOFS_E 13
+        /* bit size   */ #define GX_BP_SU_SIZE_USELINEOFS_SZ 1
 
-        /* raw mask   */ #define GX_BP_SU_SSIZE_USELINEOFS_MASK (((1 << 1) - 1) << 31 - 13)
-        /* local mask */ #define GX_BP_SU_SSIZE_USELINEOFS_LMASK ((1 << 1) - 1)
-        /* bit shift  */ #define GX_BP_SU_SSIZE_USELINEOFS_SHIFT 18
+        /* raw mask   */ #define GX_BP_SU_SIZE_USELINEOFS_MASK (((1 << 1) - 1) << 31 - 13)
+        /* local mask */ #define GX_BP_SU_SIZE_USELINEOFS_LMASK ((1 << 1) - 1)
+        /* bit shift  */ #define GX_BP_SU_SIZE_USELINEOFS_SHIFT 18
 
-        /* get value  */ #define GX_BP_GET_SU_SSIZE_USELINEOFS(reg) GX_BITGET((reg), 13, 1)
-        /* set value  */ #define GX_BP_SET_SU_SSIZE_USELINEOFS(reg, x) ((reg) = GX_BITSET((reg), 13, 1, x))
+        /* get value  */ #define GX_BP_GET_SU_SIZE_USELINEOFS(reg) GX_BITGET((reg), 13, 1)
+        /* set value  */ #define GX_BP_SET_SU_SIZE_USELINEOFS(reg, x) ((reg) = GX_BITSET((reg), 13, 1, x))
 
 // USEPOINTOFS [12:12] (1)
-        /* start bit  */ #define GX_BP_SU_SSIZE_USEPOINTOFS_B 12
-        /* end bit    */ #define GX_BP_SU_SSIZE_USEPOINTOFS_E 12
-        /* bit size   */ #define GX_BP_SU_SSIZE_USEPOINTOFS_SZ 1
+        /* start bit  */ #define GX_BP_SU_SIZE_USEPOINTOFS_B 12
+        /* end bit    */ #define GX_BP_SU_SIZE_USEPOINTOFS_E 12
+        /* bit size   */ #define GX_BP_SU_SIZE_USEPOINTOFS_SZ 1
 
-        /* raw mask   */ #define GX_BP_SU_SSIZE_USEPOINTOFS_MASK (((1 << 1) - 1) << 31 - 12)
-        /* local mask */ #define GX_BP_SU_SSIZE_USEPOINTOFS_LMASK ((1 << 1) - 1)
-        /* bit shift  */ #define GX_BP_SU_SSIZE_USEPOINTOFS_SHIFT 19
+        /* raw mask   */ #define GX_BP_SU_SIZE_USEPOINTOFS_MASK (((1 << 1) - 1) << 31 - 12)
+        /* local mask */ #define GX_BP_SU_SIZE_USEPOINTOFS_LMASK ((1 << 1) - 1)
+        /* bit shift  */ #define GX_BP_SU_SIZE_USEPOINTOFS_SHIFT 19
 
-        /* get value  */ #define GX_BP_GET_SU_SSIZE_USEPOINTOFS(reg) GX_BITGET((reg), 12, 1)
-        /* set value  */ #define GX_BP_SET_SU_SSIZE_USEPOINTOFS(reg, x) ((reg) = GX_BITSET((reg), 12, 1, x))
+        /* get value  */ #define GX_BP_GET_SU_SIZE_USEPOINTOFS(reg) GX_BITGET((reg), 12, 1)
+        /* set value  */ #define GX_BP_SET_SU_SIZE_USEPOINTOFS(reg, x) ((reg) = GX_BITSET((reg), 12, 1, x))
 
 
 /******************************************************************************

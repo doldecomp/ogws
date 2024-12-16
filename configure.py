@@ -528,7 +528,7 @@ config.libs = [
             Object(Matching, "nw4r/g3d/g3d_anmscn.cpp"),
             Object(Matching, "nw4r/g3d/g3d_obj.cpp"),
             Object(Matching, "nw4r/g3d/g3d_anmobj.cpp"),
-            Object(NonMatching, "nw4r/g3d/g3d_gpu.cpp"),
+            Object(Matching, "nw4r/g3d/g3d_gpu.cpp"),
             Object(NonMatching, "nw4r/g3d/g3d_tmem.cpp"),
             Object(Matching, "nw4r/g3d/g3d_cpu.cpp"),
             Object(NonMatching, "nw4r/g3d/g3d_state.cpp"),

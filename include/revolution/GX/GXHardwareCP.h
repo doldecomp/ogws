@@ -32,41 +32,17 @@ typedef enum {
 /******************************************************************************
  * CP register 0x30 - MatrixIndexA
  *****************************************************************************/
-// GEOM [26:31] (6)
-        /* start bit  */ #define GX_CP_MATRIXINDEXA_GEOM_B 26
-        /* end bit    */ #define GX_CP_MATRIXINDEXA_GEOM_E 31
-        /* bit size   */ #define GX_CP_MATRIXINDEXA_GEOM_SZ 6
+// TEX3 [2:7] (6)
+        /* start bit  */ #define GX_CP_MATRIXINDEXA_TEX3_B 2
+        /* end bit    */ #define GX_CP_MATRIXINDEXA_TEX3_E 7
+        /* bit size   */ #define GX_CP_MATRIXINDEXA_TEX3_SZ 6
 
-        /* raw mask   */ #define GX_CP_MATRIXINDEXA_GEOM_MASK (((1 << 6) - 1) << 31 - 31)
-        /* local mask */ #define GX_CP_MATRIXINDEXA_GEOM_LMASK ((1 << 6) - 1)
-        /* bit shift  */ #define GX_CP_MATRIXINDEXA_GEOM_SHIFT 0
+        /* raw mask   */ #define GX_CP_MATRIXINDEXA_TEX3_MASK (((1 << 6) - 1) << 31 - 7)
+        /* local mask */ #define GX_CP_MATRIXINDEXA_TEX3_LMASK ((1 << 6) - 1)
+        /* bit shift  */ #define GX_CP_MATRIXINDEXA_TEX3_SHIFT 24
 
-        /* get value  */ #define GX_CP_GET_MATRIXINDEXA_GEOM(reg) GX_BITGET((reg), 26, 6)
-        /* set value  */ #define GX_CP_SET_MATRIXINDEXA_GEOM(reg, x) ((reg) = GX_BITSET((reg), 26, 6, x))
-
-// TEX0 [20:25] (6)
-        /* start bit  */ #define GX_CP_MATRIXINDEXA_TEX0_B 20
-        /* end bit    */ #define GX_CP_MATRIXINDEXA_TEX0_E 25
-        /* bit size   */ #define GX_CP_MATRIXINDEXA_TEX0_SZ 6
-
-        /* raw mask   */ #define GX_CP_MATRIXINDEXA_TEX0_MASK (((1 << 6) - 1) << 31 - 25)
-        /* local mask */ #define GX_CP_MATRIXINDEXA_TEX0_LMASK ((1 << 6) - 1)
-        /* bit shift  */ #define GX_CP_MATRIXINDEXA_TEX0_SHIFT 6
-
-        /* get value  */ #define GX_CP_GET_MATRIXINDEXA_TEX0(reg) GX_BITGET((reg), 20, 6)
-        /* set value  */ #define GX_CP_SET_MATRIXINDEXA_TEX0(reg, x) ((reg) = GX_BITSET((reg), 20, 6, x))
-
-// TEX1 [14:19] (6)
-        /* start bit  */ #define GX_CP_MATRIXINDEXA_TEX1_B 14
-        /* end bit    */ #define GX_CP_MATRIXINDEXA_TEX1_E 19
-        /* bit size   */ #define GX_CP_MATRIXINDEXA_TEX1_SZ 6
-
-        /* raw mask   */ #define GX_CP_MATRIXINDEXA_TEX1_MASK (((1 << 6) - 1) << 31 - 19)
-        /* local mask */ #define GX_CP_MATRIXINDEXA_TEX1_LMASK ((1 << 6) - 1)
-        /* bit shift  */ #define GX_CP_MATRIXINDEXA_TEX1_SHIFT 12
-
-        /* get value  */ #define GX_CP_GET_MATRIXINDEXA_TEX1(reg) GX_BITGET((reg), 14, 6)
-        /* set value  */ #define GX_CP_SET_MATRIXINDEXA_TEX1(reg, x) ((reg) = GX_BITSET((reg), 14, 6, x))
+        /* get value  */ #define GX_CP_GET_MATRIXINDEXA_TEX3(reg) GX_BITGET((reg), 2, 6)
+        /* set value  */ #define GX_CP_SET_MATRIXINDEXA_TEX3(reg, x) ((reg) = GX_BITSET((reg), 2, 6, x))
 
 // TEX2 [8:13] (6)
         /* start bit  */ #define GX_CP_MATRIXINDEXA_TEX2_B 8
@@ -80,45 +56,57 @@ typedef enum {
         /* get value  */ #define GX_CP_GET_MATRIXINDEXA_TEX2(reg) GX_BITGET((reg), 8, 6)
         /* set value  */ #define GX_CP_SET_MATRIXINDEXA_TEX2(reg, x) ((reg) = GX_BITSET((reg), 8, 6, x))
 
-// TEX3 [2:7] (6)
-        /* start bit  */ #define GX_CP_MATRIXINDEXA_TEX3_B 2
-        /* end bit    */ #define GX_CP_MATRIXINDEXA_TEX3_E 7
-        /* bit size   */ #define GX_CP_MATRIXINDEXA_TEX3_SZ 6
+// TEX1 [14:19] (6)
+        /* start bit  */ #define GX_CP_MATRIXINDEXA_TEX1_B 14
+        /* end bit    */ #define GX_CP_MATRIXINDEXA_TEX1_E 19
+        /* bit size   */ #define GX_CP_MATRIXINDEXA_TEX1_SZ 6
 
-        /* raw mask   */ #define GX_CP_MATRIXINDEXA_TEX3_MASK (((1 << 6) - 1) << 31 - 7)
-        /* local mask */ #define GX_CP_MATRIXINDEXA_TEX3_LMASK ((1 << 6) - 1)
-        /* bit shift  */ #define GX_CP_MATRIXINDEXA_TEX3_SHIFT 24
+        /* raw mask   */ #define GX_CP_MATRIXINDEXA_TEX1_MASK (((1 << 6) - 1) << 31 - 19)
+        /* local mask */ #define GX_CP_MATRIXINDEXA_TEX1_LMASK ((1 << 6) - 1)
+        /* bit shift  */ #define GX_CP_MATRIXINDEXA_TEX1_SHIFT 12
 
-        /* get value  */ #define GX_CP_GET_MATRIXINDEXA_TEX3(reg) GX_BITGET((reg), 2, 6)
-        /* set value  */ #define GX_CP_SET_MATRIXINDEXA_TEX3(reg, x) ((reg) = GX_BITSET((reg), 2, 6, x))
+        /* get value  */ #define GX_CP_GET_MATRIXINDEXA_TEX1(reg) GX_BITGET((reg), 14, 6)
+        /* set value  */ #define GX_CP_SET_MATRIXINDEXA_TEX1(reg, x) ((reg) = GX_BITSET((reg), 14, 6, x))
+
+// TEX0 [20:25] (6)
+        /* start bit  */ #define GX_CP_MATRIXINDEXA_TEX0_B 20
+        /* end bit    */ #define GX_CP_MATRIXINDEXA_TEX0_E 25
+        /* bit size   */ #define GX_CP_MATRIXINDEXA_TEX0_SZ 6
+
+        /* raw mask   */ #define GX_CP_MATRIXINDEXA_TEX0_MASK (((1 << 6) - 1) << 31 - 25)
+        /* local mask */ #define GX_CP_MATRIXINDEXA_TEX0_LMASK ((1 << 6) - 1)
+        /* bit shift  */ #define GX_CP_MATRIXINDEXA_TEX0_SHIFT 6
+
+        /* get value  */ #define GX_CP_GET_MATRIXINDEXA_TEX0(reg) GX_BITGET((reg), 20, 6)
+        /* set value  */ #define GX_CP_SET_MATRIXINDEXA_TEX0(reg, x) ((reg) = GX_BITSET((reg), 20, 6, x))
+
+// POSNRM [26:31] (6)
+        /* start bit  */ #define GX_CP_MATRIXINDEXA_POSNRM_B 26
+        /* end bit    */ #define GX_CP_MATRIXINDEXA_POSNRM_E 31
+        /* bit size   */ #define GX_CP_MATRIXINDEXA_POSNRM_SZ 6
+
+        /* raw mask   */ #define GX_CP_MATRIXINDEXA_POSNRM_MASK (((1 << 6) - 1) << 31 - 31)
+        /* local mask */ #define GX_CP_MATRIXINDEXA_POSNRM_LMASK ((1 << 6) - 1)
+        /* bit shift  */ #define GX_CP_MATRIXINDEXA_POSNRM_SHIFT 0
+
+        /* get value  */ #define GX_CP_GET_MATRIXINDEXA_POSNRM(reg) GX_BITGET((reg), 26, 6)
+        /* set value  */ #define GX_CP_SET_MATRIXINDEXA_POSNRM(reg, x) ((reg) = GX_BITSET((reg), 26, 6, x))
 
 
 /******************************************************************************
  * CP register 0x40 - MatrixIndexB
  *****************************************************************************/
-// TEX4 [26:31] (6)
-        /* start bit  */ #define GX_CP_MATRIXINDEXB_TEX4_B 26
-        /* end bit    */ #define GX_CP_MATRIXINDEXB_TEX4_E 31
-        /* bit size   */ #define GX_CP_MATRIXINDEXB_TEX4_SZ 6
+// TEX7 [8:13] (6)
+        /* start bit  */ #define GX_CP_MATRIXINDEXB_TEX7_B 8
+        /* end bit    */ #define GX_CP_MATRIXINDEXB_TEX7_E 13
+        /* bit size   */ #define GX_CP_MATRIXINDEXB_TEX7_SZ 6
 
-        /* raw mask   */ #define GX_CP_MATRIXINDEXB_TEX4_MASK (((1 << 6) - 1) << 31 - 31)
-        /* local mask */ #define GX_CP_MATRIXINDEXB_TEX4_LMASK ((1 << 6) - 1)
-        /* bit shift  */ #define GX_CP_MATRIXINDEXB_TEX4_SHIFT 0
+        /* raw mask   */ #define GX_CP_MATRIXINDEXB_TEX7_MASK (((1 << 6) - 1) << 31 - 13)
+        /* local mask */ #define GX_CP_MATRIXINDEXB_TEX7_LMASK ((1 << 6) - 1)
+        /* bit shift  */ #define GX_CP_MATRIXINDEXB_TEX7_SHIFT 18
 
-        /* get value  */ #define GX_CP_GET_MATRIXINDEXB_TEX4(reg) GX_BITGET((reg), 26, 6)
-        /* set value  */ #define GX_CP_SET_MATRIXINDEXB_TEX4(reg, x) ((reg) = GX_BITSET((reg), 26, 6, x))
-
-// TEX5 [20:25] (6)
-        /* start bit  */ #define GX_CP_MATRIXINDEXB_TEX5_B 20
-        /* end bit    */ #define GX_CP_MATRIXINDEXB_TEX5_E 25
-        /* bit size   */ #define GX_CP_MATRIXINDEXB_TEX5_SZ 6
-
-        /* raw mask   */ #define GX_CP_MATRIXINDEXB_TEX5_MASK (((1 << 6) - 1) << 31 - 25)
-        /* local mask */ #define GX_CP_MATRIXINDEXB_TEX5_LMASK ((1 << 6) - 1)
-        /* bit shift  */ #define GX_CP_MATRIXINDEXB_TEX5_SHIFT 6
-
-        /* get value  */ #define GX_CP_GET_MATRIXINDEXB_TEX5(reg) GX_BITGET((reg), 20, 6)
-        /* set value  */ #define GX_CP_SET_MATRIXINDEXB_TEX5(reg, x) ((reg) = GX_BITSET((reg), 20, 6, x))
+        /* get value  */ #define GX_CP_GET_MATRIXINDEXB_TEX7(reg) GX_BITGET((reg), 8, 6)
+        /* set value  */ #define GX_CP_SET_MATRIXINDEXB_TEX7(reg, x) ((reg) = GX_BITSET((reg), 8, 6, x))
 
 // TEX6 [14:19] (6)
         /* start bit  */ #define GX_CP_MATRIXINDEXB_TEX6_B 14
@@ -132,17 +120,29 @@ typedef enum {
         /* get value  */ #define GX_CP_GET_MATRIXINDEXB_TEX6(reg) GX_BITGET((reg), 14, 6)
         /* set value  */ #define GX_CP_SET_MATRIXINDEXB_TEX6(reg, x) ((reg) = GX_BITSET((reg), 14, 6, x))
 
-// TEX7 [8:13] (6)
-        /* start bit  */ #define GX_CP_MATRIXINDEXB_TEX7_B 8
-        /* end bit    */ #define GX_CP_MATRIXINDEXB_TEX7_E 13
-        /* bit size   */ #define GX_CP_MATRIXINDEXB_TEX7_SZ 6
+// TEX5 [20:25] (6)
+        /* start bit  */ #define GX_CP_MATRIXINDEXB_TEX5_B 20
+        /* end bit    */ #define GX_CP_MATRIXINDEXB_TEX5_E 25
+        /* bit size   */ #define GX_CP_MATRIXINDEXB_TEX5_SZ 6
 
-        /* raw mask   */ #define GX_CP_MATRIXINDEXB_TEX7_MASK (((1 << 6) - 1) << 31 - 13)
-        /* local mask */ #define GX_CP_MATRIXINDEXB_TEX7_LMASK ((1 << 6) - 1)
-        /* bit shift  */ #define GX_CP_MATRIXINDEXB_TEX7_SHIFT 18
+        /* raw mask   */ #define GX_CP_MATRIXINDEXB_TEX5_MASK (((1 << 6) - 1) << 31 - 25)
+        /* local mask */ #define GX_CP_MATRIXINDEXB_TEX5_LMASK ((1 << 6) - 1)
+        /* bit shift  */ #define GX_CP_MATRIXINDEXB_TEX5_SHIFT 6
 
-        /* get value  */ #define GX_CP_GET_MATRIXINDEXB_TEX7(reg) GX_BITGET((reg), 8, 6)
-        /* set value  */ #define GX_CP_SET_MATRIXINDEXB_TEX7(reg, x) ((reg) = GX_BITSET((reg), 8, 6, x))
+        /* get value  */ #define GX_CP_GET_MATRIXINDEXB_TEX5(reg) GX_BITGET((reg), 20, 6)
+        /* set value  */ #define GX_CP_SET_MATRIXINDEXB_TEX5(reg, x) ((reg) = GX_BITSET((reg), 20, 6, x))
+
+// TEX4 [26:31] (6)
+        /* start bit  */ #define GX_CP_MATRIXINDEXB_TEX4_B 26
+        /* end bit    */ #define GX_CP_MATRIXINDEXB_TEX4_E 31
+        /* bit size   */ #define GX_CP_MATRIXINDEXB_TEX4_SZ 6
+
+        /* raw mask   */ #define GX_CP_MATRIXINDEXB_TEX4_MASK (((1 << 6) - 1) << 31 - 31)
+        /* local mask */ #define GX_CP_MATRIXINDEXB_TEX4_LMASK ((1 << 6) - 1)
+        /* bit shift  */ #define GX_CP_MATRIXINDEXB_TEX4_SHIFT 0
+
+        /* get value  */ #define GX_CP_GET_MATRIXINDEXB_TEX4(reg) GX_BITGET((reg), 26, 6)
+        /* set value  */ #define GX_CP_SET_MATRIXINDEXB_TEX4(reg, x) ((reg) = GX_BITSET((reg), 26, 6, x))
 
 
 /******************************************************************************

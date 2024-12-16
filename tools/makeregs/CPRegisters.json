@@ -11,19 +11,9 @@
             "id": "0x30",
             "fields": [
                 {
-                    "name": "geom",
-                    "start": 26,
-                    "end": 31
-                },
-                {
-                    "name": "tex0",
-                    "start": 20,
-                    "end": 25
-                },
-                {
-                    "name": "tex1",
-                    "start": 14,
-                    "end": 19
+                    "name": "tex3",
+                    "start": 2,
+                    "end": 7
                 },
                 {
                     "name": "tex2",
@@ -31,9 +21,19 @@
                     "end": 13
                 },
                 {
-                    "name": "tex3",
-                    "start": 2,
-                    "end": 7
+                    "name": "tex1",
+                    "start": 14,
+                    "end": 19
+                },
+                {
+                    "name": "tex0",
+                    "start": 20,
+                    "end": 25
+                },
+                {
+                    "name": "posNrm",
+                    "start": 26,
+                    "end": 31
                 }
             ]
         },
@@ -42,14 +42,9 @@
             "id": "0x40",
             "fields": [
                 {
-                    "name": "tex4",
-                    "start": 26,
-                    "end": 31
-                },
-                {
-                    "name": "tex5",
-                    "start": 20,
-                    "end": 25
+                    "name": "tex7",
+                    "start": 8,
+                    "end": 13
                 },
                 {
                     "name": "tex6",
@@ -57,9 +52,14 @@
                     "end": 19
                 },
                 {
-                    "name": "tex7",
-                    "start": 8,
-                    "end": 13
+                    "name": "tex5",
+                    "start": 20,
+                    "end": 25
+                },
+                {
+                    "name": "tex4",
+                    "start": 26,
+                    "end": 31
                 }
             ]
         },

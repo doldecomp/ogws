@@ -1,57 +1,61 @@
 #ifndef NW4R_G3D_GPU_H
 #define NW4R_G3D_GPU_H
-#include "types_nw4r.h"
-#include "g3d_rescommon.h"
-#include "math_types.h"
+#include <nw4r/types_nw4r.h>
+
+#include <nw4r/g3d/g3d_rescommon.h>
+
+#include <nw4r/math.h>
+
 #include <revolution/GX.h>
 
-namespace nw4r
-{
-    namespace g3d
-    {
-        namespace fifo
-        {
-            const u8 cm2hw[] = {
-                0x00, 0x02, 0x01, 0x03
-            };
+namespace nw4r {
+namespace g3d {
+namespace fifo {
 
-            inline void LoadXFCmd(u16 us, u32 ul)
-            {
-                GXCmd1u8(FIFO_ACCESS_XF);
-                GXCmd1u16(0);
-                GXCmd1u16(us);
-                GXCmd1u32(ul);
-            }
+// Swap bits to get hardware representation
+static const u8 cm2hw[] = {0b0000, 0b0010, 0b0001, 0b0011};
 
-            inline void LoadBPCmd(u32 ul)
-            {
-                GXCmd1u8(FIFO_ACCESS_BP);
-                GXCmd1u32(ul);
-            }
-
-            inline void LoadXFCmdHdr(u16 us, u8 uc)
-            {
-                GXCmd1u8(FIFO_ACCESS_XF);
-                GXCmd1u16((u16)(uc - 1));
-                GXCmd1u16(us);
-            }
-
-            inline void LoadCPCmd(u8 uc, u32 ul)
-            {
-                GXCmd1u8(FIFO_ACCESS_CP);
-                GXCmd1u8(uc);
-                GXCmd1u32(ul);
-            }
-
-            void GDSetGenMode2(u8, u8, u8, u8, GXCullMode);
-            void GDSetCullMode(GXCullMode);
-            void GDSetTexCoordScale2(GXTexCoordID, u16, u8, u8, u16, u8, u8);
-            void GDSetIndTexMtx(u32, const math::MTX34&);
-            void GDResetCurrentMtx();
-            void GDSetCurrentMtx(const u32 *);
-            void GDLoadTexMtxImm3x3(const math::MTX33&, u32);
-        }
-    }
+inline void LoadBPCmd(u32 reg) {
+    GXCmd1u8(GX_FIFO_CMD_LOAD_BP_REG);
+    GXCmd1u32(reg);
 }
+
+inline void LoadCPCmd(u8 addr, u32 value) {
+    GXCmd1u8(GX_FIFO_CMD_LOAD_CP_REG);
+    GXCmd1u8(addr);
+    GXCmd1u32(value);
+}
+
+inline void LoadXFCmd(u16 addr, u32 value) {
+    GXCmd1u8(GX_FIFO_CMD_LOAD_XF_REG);
+    GXCmd1u16(0); // No size (single write)
+    GXCmd1u16(addr);
+    GXCmd1u32(value);
+}
+
+inline void LoadXFCmdHdr(u16 addr, u8 len) {
+    GXCmd1u8(GX_FIFO_CMD_LOAD_XF_REG);
+    GXCmd1u16(len - 1);
+    GXCmd1u16(addr);
+}
+
+void GDSetGenMode2(u8 numTexGens, u8 numChans, u8 numTevs, u8 numInds,
+                   GXCullMode cullMode);
+
+void GDSetCullMode(GXCullMode cullMode);
+
+void GDSetTexCoordScale2(GXTexCoordID coord, u16 scaleS, u8 biasS, u8 wrapS,
+                         u16 scaleT, u8 biasT, u8 wrapT);
+
+void GDSetIndTexMtx(u32 id, const math::MTX34& rMtx);
+
+void GDResetCurrentMtx();
+void GDSetCurrentMtx(const u32* pIdArray);
+
+void GDLoadTexMtxImm3x3(const math::MTX33& rMtx, u32 id);
+
+} // namespace fifo
+} // namespace g3d
+} // namespace nw4r
 
 #endif
