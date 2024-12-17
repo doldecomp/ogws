@@ -269,15 +269,11 @@ void ProductTexSrtMtx_SRT(math::MTX34* pMtx, const TexSrt& rSrt) {
     pMtx->_02 = _0x;
     pMtx->_12 = _1x;
 
-    // clang-format off
-    _0x = sucr * (pMtx->_03 - 0.5f)
-        + susr * (pMtx->_13 - 0.5f)
-        + (0.5f - rSrt.Tu) * rSrt.Su;
+    _0x = sucr * (pMtx->_03 - 0.5f) + susr * (pMtx->_13 - 0.5f) +
+          (0.5f - rSrt.Tu) * rSrt.Su;
 
-    _1x = -svsr * (0.5f + pMtx->_03)
-        +  svcr * (pMtx->_13 - 0.5f)
-        -  (0.5f - rSrt.Tv) * rSrt.Sv + 1.0f;
-    // clang-format on
+    _1x = -svsr * (0.5f + pMtx->_03) + svcr * (pMtx->_13 - 0.5f) -
+          (0.5f - rSrt.Tv) * rSrt.Sv + 1.0f;
 
     pMtx->_03 = _0x;
     pMtx->_13 = _1x;

@@ -12,12 +12,12 @@ void MakeTexSrtMtx_S(math::MTX34* pMtx, const TexSrt& rSrt) {
     pMtx->_00 = rSrt.Su;
     pMtx->_01 = 0.0f;
     pMtx->_02 = 0.0f;
-    pMtx->_03 = 0.5f * (1.0f - rSrt.Su);
+    pMtx->_03 = 0.0f;
 
     pMtx->_10 = 0.0f;
     pMtx->_11 = rSrt.Sv;
     pMtx->_12 = 0.0f;
-    pMtx->_13 = 0.5f * (1.0f - rSrt.Sv);
+    pMtx->_13 = 1.0f - rSrt.Sv;
 }
 
 void MakeTexSrtMtx_R(math::MTX34* pMtx, const TexSrt& rSrt) {
@@ -25,14 +25,14 @@ void MakeTexSrtMtx_R(math::MTX34* pMtx, const TexSrt& rSrt) {
     math::SinCosDeg(&sinR, &cosR, rSrt.R);
 
     pMtx->_00 = cosR;
-    pMtx->_01 = sinR;
+    pMtx->_01 = -sinR;
     pMtx->_02 = 0.0f;
-    pMtx->_03 = -0.5f * (cosR + sinR - 1.0f);
+    pMtx->_03 = sinR;
 
-    pMtx->_10 = -sinR;
+    pMtx->_10 = sinR;
     pMtx->_11 = cosR;
     pMtx->_12 = 0.0f;
-    pMtx->_13 = -0.5f * (-sinR + cosR - 1.0f);
+    pMtx->_13 = 1.0f - cosR;
 }
 
 void MakeTexSrtMtx_T(math::MTX34* pMtx, const TexSrt& rSrt) {
@@ -57,14 +57,14 @@ void MakeTexSrtMtx_SR(math::MTX34* pMtx, const TexSrt& rSrt) {
     f32 svsr = rSrt.Sv * sinR;
 
     pMtx->_00 = sucr;
-    pMtx->_01 = susr;
+    pMtx->_01 = -susr;
     pMtx->_02 = 0.0f;
-    pMtx->_03 = -0.5f * (sucr + susr - 1.0f);
+    pMtx->_03 = susr;
 
-    pMtx->_10 = -svsr;
+    pMtx->_10 = svsr;
     pMtx->_11 = svcr;
     pMtx->_12 = 0.0f;
-    pMtx->_13 = -0.5f * (-svsr + svcr - 1.0f);
+    pMtx->_13 = -svcr + 1.0f;
 }
 
 void MakeTexSrtMtx_RT(math::MTX34* pMtx, const TexSrt& rSrt) {
@@ -72,26 +72,26 @@ void MakeTexSrtMtx_RT(math::MTX34* pMtx, const TexSrt& rSrt) {
     math::SinCosDeg(&sinR, &cosR, rSrt.R);
 
     pMtx->_00 = cosR;
-    pMtx->_01 = sinR;
+    pMtx->_01 = -sinR;
     pMtx->_02 = 0.0f;
-    pMtx->_03 = -cosR * (0.5f + rSrt.Tu) + sinR * (rSrt.Tv - 0.5f) + 0.5f;
+    pMtx->_03 = (sinR - cosR * rSrt.Tu) - sinR * rSrt.Tv;
 
-    pMtx->_10 = -sinR;
+    pMtx->_10 = sinR;
     pMtx->_11 = cosR;
     pMtx->_12 = 0.0f;
-    pMtx->_13 = sinR * (0.5f + rSrt.Tu) + cosR * (rSrt.Tv - 0.5f) + 0.5f;
+    pMtx->_13 = (-cosR - sinR * rSrt.Tu) + cosR * rSrt.Tv + 1.0f;
 }
 
 void MakeTexSrtMtx_ST(math::MTX34* pMtx, const TexSrt& rSrt) {
     pMtx->_00 = rSrt.Su;
     pMtx->_01 = 0.0f;
     pMtx->_02 = 0.0f;
-    pMtx->_03 = -rSrt.Su * (0.5f + rSrt.Tu) + 0.5f;
+    pMtx->_03 = -rSrt.Su * rSrt.Tu;
 
     pMtx->_10 = 0.0f;
     pMtx->_11 = rSrt.Sv;
     pMtx->_12 = 0.0f;
-    pMtx->_13 = rSrt.Sv * (rSrt.Tv - 0.5f) + 0.5f;
+    pMtx->_13 = rSrt.Sv * (rSrt.Tv - 1.0f) + 1.0f;
 }
 
 void MakeTexSrtMtx_SRT(math::MTX34* pMtx, const TexSrt& rSrt) {
@@ -104,26 +104,26 @@ void MakeTexSrtMtx_SRT(math::MTX34* pMtx, const TexSrt& rSrt) {
     f32 svsr = rSrt.Sv * sinR;
 
     pMtx->_00 = sucr;
-    pMtx->_01 = susr;
+    pMtx->_01 = -susr;
     pMtx->_02 = 0.0f;
-    pMtx->_03 = -sucr * (0.5f + rSrt.Tu) + susr * (rSrt.Tv - 0.5f) + 0.5f;
+    pMtx->_03 = (susr - sucr * rSrt.Tu) - susr * rSrt.Tv;
 
-    pMtx->_10 = -svsr;
+    pMtx->_10 = svsr;
     pMtx->_11 = svcr;
     pMtx->_12 = 0.0f;
-    pMtx->_13 = svsr * (0.5f + rSrt.Tu) + svcr * (rSrt.Tv - 0.5f) + 0.5f;
+    pMtx->_13 = (-svcr - svsr * rSrt.Tu) + svcr * rSrt.Tv + 1.0f;
 }
 
 void ProductTexSrtMtx_S(math::MTX34* pMtx, const TexSrt& rSrt) {
     pMtx->_00 *= rSrt.Su;
     pMtx->_01 *= rSrt.Su;
     pMtx->_02 *= rSrt.Su;
-    pMtx->_03 = rSrt.Su * (pMtx->_03 - 0.5f) + 0.5f;
+    pMtx->_03 *= rSrt.Su;
 
     pMtx->_10 *= rSrt.Sv;
     pMtx->_11 *= rSrt.Sv;
     pMtx->_12 *= rSrt.Sv;
-    pMtx->_13 = rSrt.Sv * (pMtx->_13 - 0.5f) + 0.5f;
+    pMtx->_13 = rSrt.Sv * (pMtx->_13 - 1.0f) + 1.0f;
 }
 
 void ProductTexSrtMtx_R(math::MTX34* pMtx, const TexSrt& rSrt) {
@@ -131,23 +131,23 @@ void ProductTexSrtMtx_R(math::MTX34* pMtx, const TexSrt& rSrt) {
     f32 _0x, _1x;
     math::SinCosDeg(&sinR, &cosR, rSrt.R);
 
-    _0x = cosR * pMtx->_00 + sinR * pMtx->_10;
-    _1x = -sinR * pMtx->_00 + cosR * pMtx->_10;
+    _0x = cosR * pMtx->_00 - sinR * pMtx->_10;
+    _1x = sinR * pMtx->_00 + cosR * pMtx->_10;
     pMtx->_00 = _0x;
     pMtx->_10 = _1x;
 
-    _0x = cosR * pMtx->_01 + sinR * pMtx->_11;
-    _1x = -sinR * pMtx->_01 + cosR * pMtx->_11;
+    _0x = cosR * pMtx->_01 - sinR * pMtx->_11;
+    _1x = sinR * pMtx->_01 + cosR * pMtx->_11;
     pMtx->_01 = _0x;
     pMtx->_11 = _1x;
 
-    _0x = cosR * pMtx->_02 + sinR * pMtx->_12;
-    _1x = -sinR * pMtx->_02 + cosR * pMtx->_12;
+    _0x = cosR * pMtx->_02 - sinR * pMtx->_12;
+    _1x = sinR * pMtx->_02 + cosR * pMtx->_12;
     pMtx->_02 = _0x;
     pMtx->_12 = _1x;
 
-    _0x = cosR * (pMtx->_03 - 0.5f) + sinR * (pMtx->_13 - 0.5f) + 0.5f;
-    _1x = -sinR * (pMtx->_03 - 0.5f) + cosR * (pMtx->_13 - 0.5f) + 0.5f;
+    _0x = cosR * pMtx->_03 - sinR * pMtx->_13 + sinR;
+    _1x = sinR * pMtx->_03 + cosR * pMtx->_13 - cosR + 1.0f;
     pMtx->_03 = _0x;
     pMtx->_13 = _1x;
 }
@@ -167,23 +167,23 @@ void ProductTexSrtMtx_SR(math::MTX34* pMtx, const TexSrt& rSrt) {
     f32 svcr = rSrt.Sv * cosR;
     f32 svsr = rSrt.Sv * sinR;
 
-    _0x = sucr * pMtx->_00 + susr * pMtx->_10;
-    _1x = -svsr * pMtx->_00 + svcr * pMtx->_10;
+    _0x = sucr * pMtx->_00 - susr * pMtx->_10;
+    _1x = svsr * pMtx->_00 + svcr * pMtx->_10;
     pMtx->_00 = _0x;
     pMtx->_10 = _1x;
 
-    _0x = sucr * pMtx->_01 + susr * pMtx->_11;
-    _1x = -svsr * pMtx->_01 + svcr * pMtx->_11;
+    _0x = sucr * pMtx->_01 - susr * pMtx->_11;
+    _1x = svsr * pMtx->_01 + svcr * pMtx->_11;
     pMtx->_01 = _0x;
     pMtx->_11 = _1x;
 
-    _0x = sucr * pMtx->_02 + susr * pMtx->_12;
-    _1x = -svsr * pMtx->_02 + svcr * pMtx->_12;
+    _0x = sucr * pMtx->_02 - susr * pMtx->_12;
+    _1x = svsr * pMtx->_02 + svcr * pMtx->_12;
     pMtx->_02 = _0x;
     pMtx->_12 = _1x;
 
-    _0x = sucr * (pMtx->_03 - 0.5f) + susr * (pMtx->_13 - 0.5f) + 0.5f;
-    _1x = -svsr * (pMtx->_03 - 0.5f) + svcr * (pMtx->_13 - 0.5f) + 0.5f;
+    _0x = sucr * pMtx->_03 - susr * pMtx->_13 + susr;
+    _1x = svsr * pMtx->_03 + svcr * pMtx->_13 - svcr + 1.0f;
 
     pMtx->_03 = _0x;
     pMtx->_13 = _1x;
@@ -194,26 +194,30 @@ void ProductTexSrtMtx_RT(math::MTX34* pMtx, const TexSrt& rSrt) {
     f32 _0x, _1x;
     math::SinCosDeg(&sinR, &cosR, rSrt.R);
 
-    _0x = cosR * pMtx->_00 + sinR * pMtx->_10;
-    _1x = -sinR * pMtx->_00 + cosR * pMtx->_10;
+    _0x = cosR * pMtx->_00 - sinR * pMtx->_10;
+    _1x = sinR * pMtx->_00 + cosR * pMtx->_10;
     pMtx->_00 = _0x;
     pMtx->_10 = _1x;
 
-    _0x = cosR * pMtx->_01 + sinR * pMtx->_11;
-    _1x = -sinR * pMtx->_01 + cosR * pMtx->_11;
+    _0x = cosR * pMtx->_01 - sinR * pMtx->_11;
+    _1x = sinR * pMtx->_01 + cosR * pMtx->_11;
     pMtx->_01 = _0x;
     pMtx->_11 = _1x;
 
-    _0x = cosR * pMtx->_02 + sinR * pMtx->_12;
-    _1x = -sinR * pMtx->_02 + cosR * pMtx->_12;
+    _0x = cosR * pMtx->_02 - sinR * pMtx->_12;
+    _1x = sinR * pMtx->_02 + cosR * pMtx->_12;
     pMtx->_02 = _0x;
     pMtx->_12 = _1x;
 
-    _0x = cosR * (pMtx->_03 - rSrt.Tu - 0.5f) +
-          sinR * (pMtx->_13 + rSrt.Tv - 0.5f) + 0.5f;
+    // clang-format off
+    _0x = cosR * (pMtx->_03 - rSrt.Tu)
+        - sinR * (pMtx->_13 + rSrt.Tv)
+        + sinR;
 
-    _1x = -sinR * (pMtx->_03 - rSrt.Tu - 0.5f) +
-          cosR * (pMtx->_13 + rSrt.Tv - 0.5f) + 0.5f;
+    _1x = sinR * (pMtx->_03 - rSrt.Tu)
+        + cosR * (pMtx->_13 + rSrt.Tv)
+        - cosR + 1.0f;
+    // clang-format on
 
     pMtx->_03 = _0x;
     pMtx->_13 = _1x;
@@ -223,12 +227,12 @@ void ProductTexSrtMtx_ST(math::MTX34* pMtx, const TexSrt& rSrt) {
     pMtx->_00 *= rSrt.Su;
     pMtx->_01 *= rSrt.Su;
     pMtx->_02 *= rSrt.Su;
-    pMtx->_03 = rSrt.Su * (pMtx->_03 - rSrt.Tu - 0.5f) + 0.5f;
+    pMtx->_03 = (pMtx->_03 - rSrt.Tu) * rSrt.Su;
 
     pMtx->_10 *= rSrt.Sv;
     pMtx->_11 *= rSrt.Sv;
     pMtx->_12 *= rSrt.Sv;
-    pMtx->_13 *= rSrt.Sv * (pMtx->_13 + rSrt.Tv - 0.5f) + 0.5f;
+    pMtx->_13 = (pMtx->_13 + rSrt.Tv - 1.0f) * rSrt.Sv + 1.0f;
 }
 
 void ProductTexSrtMtx_SRT(math::MTX34* pMtx, const TexSrt& rSrt) {
@@ -241,26 +245,30 @@ void ProductTexSrtMtx_SRT(math::MTX34* pMtx, const TexSrt& rSrt) {
     f32 svcr = rSrt.Sv * cosR;
     f32 svsr = rSrt.Sv * sinR;
 
-    _0x = sucr * pMtx->_00 + susr * pMtx->_10;
-    _1x = -svsr * pMtx->_00 + svcr * pMtx->_10;
+    _0x = sucr * pMtx->_00 - susr * pMtx->_10;
+    _1x = svsr * pMtx->_00 + svcr * pMtx->_10;
     pMtx->_00 = _0x;
     pMtx->_10 = _1x;
 
-    _0x = sucr * pMtx->_01 + susr * pMtx->_11;
-    _1x = -svsr * pMtx->_01 + svcr * pMtx->_11;
+    _0x = sucr * pMtx->_01 - susr * pMtx->_11;
+    _1x = svsr * pMtx->_01 + svcr * pMtx->_11;
     pMtx->_01 = _0x;
     pMtx->_11 = _1x;
 
-    _0x = sucr * pMtx->_02 + susr * pMtx->_12;
-    _1x = -svsr * pMtx->_02 + svcr * pMtx->_12;
+    _0x = sucr * pMtx->_02 - susr * pMtx->_12;
+    _1x = svsr * pMtx->_02 + svcr * pMtx->_12;
     pMtx->_02 = _0x;
     pMtx->_12 = _1x;
 
-    _0x = sucr * (pMtx->_03 - rSrt.Tu - 0.5f) +
-          susr * (pMtx->_13 + rSrt.Tv - 0.5f) + 0.5f;
+    // clang-format off
+    _0x = sucr * (pMtx->_03 - rSrt.Tu)
+        - susr * (pMtx->_13 + rSrt.Tv)
+        + susr;
 
-    _1x = -svsr * (pMtx->_03 - rSrt.Tu - 0.5f) +
-          svcr * (pMtx->_13 + rSrt.Tv - 0.5f) + 0.5f;
+    _1x = svsr * (pMtx->_03 - rSrt.Tu)
+        + svcr * (pMtx->_13 + rSrt.Tv)
+        - svcr + 1.0f;
+    // clang-format on
 
     pMtx->_03 = _0x;
     pMtx->_13 = _1x;
@@ -270,8 +278,8 @@ void ProductTexSrtMtx_SRT(math::MTX34* pMtx, const TexSrt& rSrt) {
 
 typedef void (*CalcTexMtxFunc)(math::MTX34* pMtx, const TexSrt& rSrt);
 
-bool CalcTexMtx_3dsmax(math::MTX34* pMtx, bool set, const TexSrt& rSrt,
-                       TexSrt::Flag flag) {
+bool CalcTexMtx_Xsi(math::MTX34* pMtx, bool set, const TexSrt& rSrt,
+                    TexSrt::Flag flag) {
     // Extract S/R/T flags
     u32 index = flag >> 1 & 0b111;
 
@@ -312,6 +320,61 @@ bool CalcTexMtx_3dsmax(math::MTX34* pMtx, bool set, const TexSrt& rSrt,
     pMtx->_23 = 0.0f;
 
     return true;
+}
+
+u32 CalcWorldMtx_Xsi(math::MTX34* pW, math::VEC3* pS, const math::MTX34* pW1,
+                     const math::VEC3* pS1, u32 attr,
+                     const ChrAnmResult* pResult) {
+    u32 flag = pResult->flags;
+    u32 newAttr = attr;
+
+    if (flag & ChrAnmResult::FLAG_S_ONE) {
+        newAttr = WorldMtxAttr::AnmScaleOne(newAttr);
+        *pS = *pS1;
+    } else {
+        newAttr = WorldMtxAttr::AnmNotScaleOne(newAttr);
+        pS->x = pS1->x * pResult->s.x;
+        pS->y = pS1->y * pResult->s.y;
+        pS->z = pS1->z * pResult->s.z;
+    }
+
+    if ((flag & ChrAnmResult::FLAG_MTX_IDENT) ||
+        (flag & ChrAnmResult::FLAG_RT_ZERO)) {
+
+        math::MTX34Copy(pW, pW1);
+    } else if (flag & ChrAnmResult::FLAG_R_ZERO) {
+
+        if (WorldMtxAttr::IsAllScaleOne(attr)) {
+            math::VEC3 trans(pResult->rt[0][3], pResult->rt[1][3],
+                             pResult->rt[2][3]);
+
+            math::MTX34Trans(pW, pW1, &trans);
+        } else {
+            math::VEC3 trans(pS1->x * pResult->rt[0][3],
+                             pS1->y * pResult->rt[1][3],
+                             pS1->z * pResult->rt[2][3]);
+
+            math::MTX34Trans(pW, pW1, &trans);
+        }
+    } else if (WorldMtxAttr::IsAllScaleOne(attr)) {
+        math::MTX34Mult(pW, pW1, &pResult->rt);
+    } else {
+        math::MTX34Copy(pW, &pResult->rt);
+
+        pW->_03 *= pS1->x;
+        pW->_13 *= pS1->y;
+        pW->_23 *= pS1->z;
+
+        math::MTX34Mult(pW, pW1, pW);
+    }
+
+    if (flag & ChrAnmResult::FLAG_S_UNIFORM) {
+        newAttr = WorldMtxAttr::AnmScaleUniform(newAttr);
+    } else {
+        newAttr = WorldMtxAttr::AnmNotScaleUniform(newAttr);
+    }
+
+    return newAttr;
 }
 
 } // namespace dcc
