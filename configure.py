@@ -261,6 +261,7 @@ cflags_libnw4r_g3d = [
     *cflags_pedantic,
     "-enc SJIS",
     "-fp_contract off",
+    "-ipa file",
     "-ir include/revolution",
     "-ir include/nw4r",
 ]
@@ -531,7 +532,7 @@ config.libs = [
             Object(Matching, "nw4r/g3d/g3d_gpu.cpp"),
             Object(NonMatching, "nw4r/g3d/g3d_tmem.cpp"),
             Object(Matching, "nw4r/g3d/g3d_cpu.cpp"),
-            Object(NonMatching, "nw4r/g3d/g3d_state.cpp"),
+            Object(Matching, "nw4r/g3d/g3d_state.cpp"),
             Object(NonMatching, "nw4r/g3d/g3d_draw1mat1shp.cpp"),
             Object(NonMatching, "nw4r/g3d/g3d_calcview.cpp"),
             Object(Matching, "nw4r/g3d/g3d_dcc.cpp"),

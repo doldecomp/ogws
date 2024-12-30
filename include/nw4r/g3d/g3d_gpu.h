@@ -42,10 +42,34 @@ inline void LoadXFCmdHdr(u16 addr, u8 len) {
 void GDSetGenMode2(u8 numTexGens, u8 numChans, u8 numTevs, u8 numInds,
                    GXCullMode cullMode);
 
+inline void GDSetGenMode2Ex_BP(u8 numTexGens, u8 numChans, u8 numTevs,
+                               u8 numInds, GXCullMode cullMode) {
+
+    // clang-format off
+    // @note NUMCOLORS is actually three bits
+    LoadBPCmd(GX_BP_REG_SSMASK << GX_BP_OPCODE_SHIFT |
+        GX_BP_GENMODE_NUMTEX_MASK                    |
+        0b11 << GX_BP_GENMODE_NUMCOLORS_SHIFT        |
+        GX_BP_GENMODE_NUMTEVSTAGES_MASK              |
+        GX_BP_GENMODE_CULLMODE_MASK                  |
+        GX_BP_GENMODE_NUMINDSTAGES_MASK);
+    // clang-format on
+
+    // clang-format off
+    LoadBPCmd(
+        numTexGens        << GX_BP_GENMODE_NUMTEX_SHIFT       |
+        numChans          << GX_BP_GENMODE_NUMCOLORS_SHIFT    |
+        numTevs - 1       << GX_BP_GENMODE_NUMTEVSTAGES_SHIFT |
+        cm2hw[cullMode]   << GX_BP_GENMODE_CULLMODE_SHIFT     |
+        numInds           << GX_BP_GENMODE_NUMINDSTAGES_SHIFT |
+        GX_BP_REG_GENMODE << GX_BP_OPCODE_SHIFT);
+    // clang-format on
+}
+
 void GDSetCullMode(GXCullMode cullMode);
 
-void GDSetTexCoordScale2(GXTexCoordID coord, u16 scaleS, u8 biasS, u8 wrapS,
-                         u16 scaleT, u8 biasT, u8 wrapT);
+void GDSetTexCoordScale2(GXTexCoordID coord, u16 scaleS, GXBool biasS,
+                         GXBool wrapS, u16 scaleT, GXBool biasT, GXBool wrapT);
 
 void GDSetIndTexMtx(u32 id, const math::MTX34& rMtx);
 
@@ -53,6 +77,33 @@ void GDResetCurrentMtx();
 void GDSetCurrentMtx(const u32* pIdArray);
 
 void GDLoadTexMtxImm3x3(const math::MTX33& rMtx, u32 id);
+
+inline void GDSetChanCtrl(GXChannelID chan, u32 param, u32 lightMask) {
+    param &= ~(GX_XF_COLOR0CNTRL_LMASKLO_MASK | GX_XF_COLOR0CNTRL_LMASKHI_MASK);
+
+    param |= (lightMask & 0b1111) << GX_XF_COLOR0CNTRL_LMASKLO_SHIFT |
+             ((lightMask >> 4) & 0b1111) << GX_XF_COLOR0CNTRL_LMASKHI_SHIFT;
+
+    LoadXFCmd(GX_XF_REG_COLOR0CNTRL + (chan & 3), param);
+}
+
+inline void GDSetChanCtrlLightOff(GXChannelID chan, u32 param, u32 lightMask) {
+    param &= ~(GX_XF_COLOR0CNTRL_LMASKLO_MASK | GX_XF_COLOR0CNTRL_LMASKHI_MASK |
+               GX_XF_COLOR0CNTRL_LIGHT_MASK);
+
+    param |= (lightMask & 0b1111) << GX_XF_COLOR0CNTRL_LMASKLO_SHIFT |
+             ((lightMask >> 4) & 0b1111) << GX_XF_COLOR0CNTRL_LMASKHI_SHIFT;
+
+    LoadXFCmd(GX_XF_REG_COLOR0CNTRL + (chan & 3), param);
+}
+
+inline void GDSetChanAmbColor(GXChannelID chan, GXColor color) {
+    LoadXFCmd(GX_XF_REG_AMBIENT0 + chan, *reinterpret_cast<u32*>(&color));
+}
+
+inline void GDSetChanMatColor(GXChannelID chan, GXColor color) {
+    LoadXFCmd(GX_XF_REG_MATERIAL0 + chan, *reinterpret_cast<u32*>(&color));
+}
 
 } // namespace fifo
 } // namespace g3d

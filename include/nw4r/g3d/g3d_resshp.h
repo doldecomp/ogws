@@ -49,6 +49,16 @@ struct ResCacheVtxDescv {
         u32 data_u32[0xC / sizeof(u32)];
         u8 data[0xC / sizeof(u8)];
     }; // at 0x0
+
+    void Clear() {
+        data_u32[0] = data_u32[1] = data_u32[2] = 0;
+    }
+
+    bool operator==(const ResCacheVtxDescv& rRhs) const {
+        return data_u32[0] == rRhs.data_u32[0] &&
+               data_u32[1] == rRhs.data_u32[1] &&
+               data_u32[2] == rRhs.data_u32[2];
+    }
 };
 
 struct ResMtxSetUsed {
@@ -57,6 +67,10 @@ struct ResMtxSetUsed {
 };
 
 struct ResShpData {
+    enum IDFlag {
+        ID_FLAG_ENVELOPE = (1 << 31),
+    };
+
     u32 size;                                         // at 0x0
     s32 toResMdlData;                                 // at 0x4
     s32 curMtxIdx;                                    // at 0x8

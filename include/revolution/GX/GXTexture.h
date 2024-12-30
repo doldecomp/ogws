@@ -29,11 +29,16 @@ void GXGetTexObjLODAll(GXTexObj* obj, GXTexFilter* min_filt,
 GXTexWrapMode GXGetTexObjWrapS(GXTexObj* obj);
 GXTexWrapMode GXGetTexObjWrapT(GXTexObj* obj);
 
-void GXLoadTexObj(GXTexObj*, GXTexMapID);
+u16 GXGetTexObjWidth(const GXTexObj* obj);
+u16 GXGetTexObjHeight(const GXTexObj* obj);
+
+void GXLoadTexObj(const GXTexObj*, GXTexMapID);
 
 u32 GXGetTexObjTlut(GXTexObj*);
 
 void GXInitTlutObj(GXTlutObj*, void*, GXTlutFmt, u16);
+
+void GXLoadTlut(GXTlutObj*, GXTlut);
 
 void GXInvalidateTexAll(void);
 

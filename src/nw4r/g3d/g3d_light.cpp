@@ -1,5 +1,3 @@
-#pragma ipa file // TODO: REMOVE AFTER REFACTOR
-
 #include <nw4r/g3d.h>
 
 #include <nw4r/math.h>
@@ -133,7 +131,7 @@ LightSetting::LightSetting(LightObj* pLightObjArray,
         LightSetData& rData = mpLightSetDataArray[i];
         rData.idxAmbLight = -1;
 
-        for (u32 j = 0; j < LightSetData::NUM_LIGHT_IDX; j++) {
+        for (u32 j = 0; j < G3DState::NUM_LIGHT_IN_LIGHT_SET; j++) {
             rData.idxLight[j] = -1;
         }
     }
@@ -229,7 +227,7 @@ void LightSetting::ApplyViewMtx(const math::MTX34& rCamera, u32 numLight) {
  *
  ******************************************************************************/
 bool LightSet::SelectLightObj(u32 lightIdx, int lightObjIdx) {
-    if (IsValid() && lightIdx < LightSetData::NUM_LIGHT_IDX) {
+    if (IsValid() && lightIdx < G3DState::NUM_LIGHT_IN_LIGHT_SET) {
         if (lightObjIdx < 0) {
             mpLightSetData->idxLight[lightIdx] = -1;
             return true;

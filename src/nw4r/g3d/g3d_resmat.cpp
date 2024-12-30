@@ -1,5 +1,3 @@
-#pragma ipa file // TODO: REMOVE AFTER REFACTOR
-
 #include <nw4r/g3d.h>
 
 namespace nw4r {
@@ -278,8 +276,8 @@ ResTexSrt ResTexSrt::CopyTo(void* pDst) const {
         rToEffect.misc_flag = rFromEffect.misc_flag;
 
         math::MTX34Copy(
-            reinterpret_cast<math::MTX34*>(&rToEffect.effectMtx),
-            reinterpret_cast<const math::MTX34*>(&rFromEffect.effectMtx));
+            static_cast<math::MTX34*>(&rToEffect.effectMtx),
+            static_cast<const math::MTX34*>(&rFromEffect.effectMtx));
     }
 
     return ResTexSrt(pData);
@@ -312,8 +310,8 @@ bool ResTexSrt::GetEffectMtx(u32 id, math::MTX34* pMtx) const {
     if (pMtx != NULL && id < ResTexSrtData::NUM_OF_TEXTURE) {
         const TexMtxEffect& rEffect = ref().effect[id];
 
-        math::MTX34Copy(
-            pMtx, reinterpret_cast<const math::MTX34*>(&rEffect.effectMtx));
+        math::MTX34Copy(pMtx,
+                        static_cast<const math::MTX34*>(&rEffect.effectMtx));
 
         return true;
     }

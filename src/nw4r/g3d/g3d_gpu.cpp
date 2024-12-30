@@ -1,5 +1,3 @@
-#pragma ipa file // TODO: REMOVE AFTER REFACTOR
-
 #include <nw4r/g3d.h>
 
 namespace nw4r {
@@ -42,8 +40,8 @@ void GDSetCullMode(GXCullMode cullMode) {
     LoadBPCmd(cm2hw[cullMode] << GX_BP_GENMODE_CULLMODE_SHIFT);
 }
 
-void GDSetTexCoordScale2(GXTexCoordID coord, u16 scaleS, u8 biasS, u8 wrapS,
-                         u16 scaleT, u8 biasT, u8 wrapT) {
+void GDSetTexCoordScale2(GXTexCoordID coord, u16 scaleS, GXBool biasS,
+                         GXBool wrapS, u16 scaleT, GXBool biasT, GXBool wrapT) {
     // clang-format off
     LoadBPCmd(GX_BP_REG_SSMASK << GX_BP_OPCODE_SHIFT |
         GX_BP_SU_SIZE_SCALE_MASK                     |

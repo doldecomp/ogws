@@ -241,10 +241,11 @@ public:
     bool GetMapMode(u32 id, u32* pMode, int* pCamRef, int* pLightRef) const;
     bool SetMapMode(u32 id, u32 mode, int camRef, int lightRef);
 
-    u32 GetTexSrtFlag(u32 id) const {
-        return (ref().flag >> id * TexSrt::NUM_OF_FLAGS) &
-               (TexSrt::FLAG_ANM_EXISTS | TexSrt::FLAG_SCALE_ONE |
-                TexSrt::FLAG_ROT_ZERO | TexSrt::FLAG_TRANS_ZERO);
+    TexSrt::Flag GetTexSrtFlag(u32 id) const {
+        return static_cast<TexSrt::Flag>(
+            (ref().flag >> id * TexSrt::NUM_OF_FLAGS) &
+            (TexSrt::FLAG_ANM_EXISTS | TexSrt::FLAG_SCALE_ONE |
+             TexSrt::FLAG_ROT_ZERO | TexSrt::FLAG_TRANS_ZERO));
     }
 
     bool IsExist(u32 id) const {
@@ -258,7 +259,7 @@ public:
     bool IsIdentity(u32 id) const {
         return (((ref().flag >> id * TexSrt::NUM_OF_FLAGS) &
                  TexSrt::FLAGSET_IDENTITY) == TexSrt::FLAGSET_IDENTITY) &&
-               (ref().effect[id].misc_flag & 1);
+               (ref().effect[id].misc_flag & TexMtxEffect::FLAG_IDENTITY);
     }
 
     TexSrtTypedef::TexMatrixMode GetTexMtxMode() const {
@@ -274,6 +275,17 @@ public:
  *
  ******************************************************************************/
 struct Chan {
+    enum Flag {
+        FLAG_MAT_COLOR = (1 << 0),
+        FLAG_MAT_ALPHA = (1 << 1),
+
+        FLAG_AMB_COLOR = (1 << 2),
+        FLAG_AMB_ALPHA = (1 << 3),
+
+        FLAG_CTRL_COLOR = (1 << 4),
+        FLAG_CTRL_ALPHA = (1 << 5),
+    };
+
     u32 flag;           // at 0x0
     GXColor matColor;   // at 0x4
     GXColor ambColor;   // at 0x8

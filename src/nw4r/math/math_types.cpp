@@ -105,10 +105,10 @@ asm bool MTX34InvTranspose(register MTX33* pOut, register const MTX34* pIn){
     psq_l      f0, MTX34._00(pIn), 1, 0 // (a, 1.0)
     psq_l      f1, MTX34._01(pIn), 0, 0 // (b, c)
     psq_l      f2, MTX34._10(pIn), 1, 0 // (d, 1.0)
-    ps_merge10 f6, f1, f0              // (c, a)
+    ps_merge10 f6, f1, f0               // (c, a)
     psq_l      f3, MTX34._11(pIn), 0, 0 // (e, f)
     psq_l      f4, MTX34._20(pIn), 1, 0 // (g, 1.0)
-    ps_merge10 f7, f3, f2              // (f, d)
+    ps_merge10 f7, f3, f2               // (f, d)
     psq_l      f5, MTX34._21(pIn), 0, 0 // (h, i)
 
     ps_mul     f11, f3, f6      // (e*c,       f*a)

@@ -29,8 +29,7 @@ template <typename TPtr> inline long distance(TPtr first, TPtr last) {
 template <typename TPtr>
 inline long __distance(TPtr first, TPtr last,
                        random_access_iterator_tag /* tag */) {
-    long dist = reinterpret_cast<long>(last) - reinterpret_cast<long>(first);
-    return dist / static_cast<long>(sizeof(TPtr));
+    return static_cast<long>(last - first);
 }
 
 template <typename T> inline T& move(T& x) {

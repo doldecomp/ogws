@@ -6,7 +6,7 @@ namespace g3d {
 NW4R_G3D_RTTI_DEF(ScnRfl);
 
 void ScnRfl::SetLightSetIdx(int idx) {
-    if (idx < 0 || idx > 127) {
+    if (idx < 0 || idx > G3DState::NUM_LIGHT_SET - 1) {
         mIdxLightSet = -1;
         return;
     }
@@ -15,6 +15,7 @@ void ScnRfl::SetLightSetIdx(int idx) {
 }
 
 void ScnRfl::SetFogIdx(int idx) {
+    // @bug G3DState only allows 32 fog entries
     if (idx < 0 || idx > 127) {
         mIdxFog = -1;
         return;
@@ -173,10 +174,10 @@ void ScnRfl::CallDrawProc(bool opa) {
     G3DState::LoadLightSet(GetLightSetIdx(), &diffMask, &specMask, &lobj);
 
     GXColor ambColor;
-    ambColor.r = 0.5f + ((lobj.r * mAmbientColor.r) * (1.0f / 255.0f));
-    ambColor.g = 0.5f + ((lobj.g * mAmbientColor.g) * (1.0f / 255.0f));
-    ambColor.b = 0.5f + ((lobj.b * mAmbientColor.b) * (1.0f / 255.0f));
-    ambColor.a = 0.5f + ((lobj.a * mAmbientColor.a) * (1.0f / 255.0f));
+    ambColor.r = 0.5f + (lobj.r * mAmbientColor.r) * (1.0f / 255.0f);
+    ambColor.g = 0.5f + (lobj.g * mAmbientColor.g) * (1.0f / 255.0f);
+    ambColor.b = 0.5f + (lobj.b * mAmbientColor.b) * (1.0f / 255.0f);
+    ambColor.a = 0.5f + (lobj.a * mAmbientColor.a) * (1.0f / 255.0f);
 
     G3DState::Invalidate(
         G3DState::INVALIDATE_ALL &
