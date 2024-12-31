@@ -55,17 +55,17 @@ public:
     }
 
     bool IsEnable() const {
-        return mFlag & FLAG_ENABLE_LIGHT;
+        return (mFlag & FLAG_ENABLE_LIGHT) ? true : false;
     }
 
     bool IsSpotLight() const {
-        return mFlag & FLAG_SPOT;
+        return (mFlag & FLAG_SPOT) ? true : false;
     }
     bool IsSpecularLight() const {
-        return mFlag & FLAG_SPECULAR;
+        return (mFlag & FLAG_SPECULAR) ? true : false;
     }
     bool IsSpecularDir() const {
-        return mFlag & FLAG_SPECULAR_DIR;
+        return (mFlag & FLAG_SPECULAR_DIR) ? true : false;
     }
 
     bool IsColorEnable() const {

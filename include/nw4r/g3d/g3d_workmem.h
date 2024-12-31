@@ -25,6 +25,17 @@ struct ShpAnmResultBuf {
     f32 weight;                  // at 0x21C
 };
 
+static const int WORKMEM_SIZE = 0x18000;
+
+static const int WORKMEM_NUMTMPSCALE = 2048;
+static const int WORKMEM_NUMMTXID = 2048;
+static const int WORKMEM_NUMBYTECODE = WORKMEM_SIZE;
+static const int WORKMEM_NUMMDLZ = 2048;
+static const int WORKMEM_NUMSKINNINGMTX = 2048;
+static const int WORKMEM_NUMBBMTX = 2048;
+static const int WORKMEM_NUMSHPANMRESULT =
+    WORKMEM_SIZE / sizeof(ShpAnmResultBuf);
+
 math::VEC3* GetScaleTemporary();
 u32* GetMtxIDTemporary();
 MdlZ* GetMdlZTemporary();

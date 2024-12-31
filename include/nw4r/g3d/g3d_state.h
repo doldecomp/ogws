@@ -108,7 +108,7 @@ public:
     virtual void Reset() = 0; // at 0x10
 
     virtual void
-    SetNrmMapMtx(GXIndTexMtxID id, const math::VEC3* pLVec,
+    SetNrmMapMtx(GXIndTexMtxID id, const math::VEC3* pLightVec,
                  const math::MTX34* pNrmMtx,
                  ResMatMiscData::IndirectMethod method) = 0; // at 0x14
 };
@@ -127,7 +127,7 @@ public:
     virtual ~IndMtxOpStd() {} // at 0xC
     virtual void Reset();     // at 0x10
 
-    virtual void SetNrmMapMtx(GXIndTexMtxID id, const math::VEC3* pLVec,
+    virtual void SetNrmMapMtx(GXIndTexMtxID id, const math::VEC3* pLightVec,
                               const math::MTX34* pNrmMtx,
                               ResMatMiscData::IndirectMethod method); // at 0x14
 

@@ -19,6 +19,7 @@
 #include <nw4r/g3d/g3d_cpu.h>
 #include <nw4r/g3d/g3d_dcc.h>
 #include <nw4r/g3d/g3d_draw.h>
+#include <nw4r/g3d/g3d_draw1mat1shp.h>
 #include <nw4r/g3d/g3d_fog.h>
 #include <nw4r/g3d/g3d_gpu.h>
 #include <nw4r/g3d/g3d_light.h>

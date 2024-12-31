@@ -14,6 +14,7 @@ AccessModifierOffset: -4
 AllowShortFunctionsOnASingleLine: Empty
 WhitespaceSensitiveMacros: [NW4R_UT_LIST_SAFE_FOREACH]
 AttributeMacros: [DECOMP_INLINE, DECOMP_DONT_INLINE]
+InsertNewlineAtEOF: true
 
 IncludeCategories:
   - Regex:           '^<(nw4r|egg|Pack)?(\/)?types'     # "Types" headers

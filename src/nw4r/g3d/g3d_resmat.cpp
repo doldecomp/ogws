@@ -288,14 +288,13 @@ bool ResTexSrt::SetEffectMtx(u32 id, const math::MTX34* pMtx) {
         TexMtxEffect& rEffect = ref().effect[id];
 
         if (pMtx != NULL) {
-            math::MTX34Copy(reinterpret_cast<math::MTX34*>(&rEffect.effectMtx),
+            math::MTX34Copy(static_cast<math::MTX34*>(&rEffect.effectMtx),
                             pMtx);
 
             rEffect.misc_flag &= ~TexMtxEffect::FLAG_IDENTITY;
 
         } else {
-            math::MTX34Identity(
-                reinterpret_cast<math::MTX34*>(&rEffect.effectMtx));
+            math::MTX34Identity(static_cast<math::MTX34*>(&rEffect.effectMtx));
 
             rEffect.misc_flag |= TexMtxEffect::FLAG_IDENTITY;
         }

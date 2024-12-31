@@ -1,10 +1,27 @@
 #ifndef NW4R_G3D_DRAW_H
 #define NW4R_G3D_DRAW_H
-#include "g3d_resmdl.h"
-#include "types_nw4r.h"
+#include <nw4r/types_nw4r.h>
+
+#include <nw4r/g3d/g3d_resmat.h>
+#include <nw4r/g3d/g3d_resmdl.h>
+#include <nw4r/g3d/g3d_resnode.h>
+#include <nw4r/g3d/g3d_resshp.h>
+
+#include <nw4r/math.h>
 
 namespace nw4r {
 namespace g3d {
+
+// Forward declarations
+namespace G3DState {
+class IndMtxOp;
+}
+
+namespace detail {
+
+G3DState::IndMtxOp* GetIndMtxOp(ResMat mat, ResNode node, ResShp shp);
+
+} // namespace detail
 
 struct DrawResMdlReplacement {
     u8* visArray;                               // at 0x0
@@ -24,9 +41,11 @@ struct DrawResMdlReplacement {
     ResVtxClrData** vtxClrTable;                // at 0x38
 };
 
-void DrawResMdlDirectly(ResMdl, const math::MTX34*, const math::MTX33*,
-                        const math::MTX34*, const u8*, const u8*,
-                        DrawResMdlReplacement*, u32);
+void DrawResMdlDirectly(const ResMdl mdl, const math::MTX34* pViewPosMtxArray,
+                        const math::MTX33* pViewNrmMtxArray,
+                        const math::MTX34* pViewEnvMtxArray,
+                        const u8* pByteCodeOpa, const u8* pByteCodeXlu,
+                        DrawResMdlReplacement* pReplacement, u32 drawMode);
 
 } // namespace g3d
 } // namespace nw4r

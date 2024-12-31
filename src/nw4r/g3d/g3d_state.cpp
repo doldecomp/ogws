@@ -1969,7 +1969,7 @@ IndMtxOpStd::IndMtxOpStd() {
     _ = 0;
 }
 
-void IndMtxOpStd::SetNrmMapMtx(GXIndTexMtxID id, const math::VEC3* pLVec,
+void IndMtxOpStd::SetNrmMapMtx(GXIndTexMtxID id, const math::VEC3* pLightVec,
                                const math::MTX34* pNrmMtx,
                                ResMatMiscData::IndirectMethod method) {
 
@@ -1977,13 +1977,13 @@ void IndMtxOpStd::SetNrmMapMtx(GXIndTexMtxID id, const math::VEC3* pLVec,
         u32 i = id - GX_ITM_0;
         mIsValidMtx[i] = true;
 
-        if (pLVec != NULL) {
-            mIndMtx[i]._00 = 0.5f * -pLVec->x;
-            mIndMtx[i]._01 = 0.5f * -pLVec->y;
-            mIndMtx[i]._02 = 0.5f * -pLVec->z;
+        if (pLightVec != NULL) {
+            mIndMtx[i]._00 = 0.5f * -pLightVec->x;
+            mIndMtx[i]._01 = 0.5f * -pLightVec->y;
+            mIndMtx[i]._02 = 0.5f * -pLightVec->z;
 
             if (method == ResMatMiscData::NORMAL_MAP_SPECULAR) {
-                math::VEC3 H(pLVec->x, pLVec->y, pLVec->z - 1.0f);
+                math::VEC3 H(pLightVec->x, pLightVec->y, pLightVec->z - 1.0f);
                 math::VEC3Normalize(&H, &H);
 
                 mIndMtx[i]._10 = 0.5f * -H.x;

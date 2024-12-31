@@ -41,7 +41,6 @@ enum ScalingRule {
 
 struct ResMtxIDToNodeIDData {
     u32 numMtxID; // at 0x0
-    s32 table[1]; // at 0x4
 };
 
 struct ResMdlInfoData : ResMdlInfoDataTypedef {
@@ -88,10 +87,9 @@ public:
     }
 
     s32 GetNodeIDFromMtxID(u32 id) const {
-        const s32* pArray =
-            reinterpret_cast<const ResMtxIDToNodeIDData*>(
-                reinterpret_cast<const u8*>(&ref()) + ref().toMtxIDToNodeID)
-                ->table;
+        const s32* pArray = reinterpret_cast<const s32*>(
+            reinterpret_cast<const u8*>(&ref()) + ref().toMtxIDToNodeID +
+            sizeof(ResMtxIDToNodeIDData));
 
         return pArray[id];
     }

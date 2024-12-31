@@ -19,8 +19,8 @@
     nw4r::g3d::ResName((char*)(BASE) + (OFS) - sizeof(u32))
 
 /**
- * Define constructor and ref functions for resource classes.
- * NOTE: Hides ResCommon::ref, why did they do this???
+ * Define common functions for resource classes.
+ * @note Hides ResCommon::ref, why did they do this???
  */
 #define NW4R_G3D_RESOURCE_FUNC_DEF(T)                                          \
     NW4R_G3D_RESOURCE_FUNC_DEF_IMPL(T, T##Data)
@@ -36,6 +36,14 @@
                                                                                \
     const TDATA& ref() const {                                                 \
         return *ptr();                                                         \
+    }                                                                          \
+                                                                               \
+    bool operator==(const TCLS& rOther) const {                                \
+        return ptr() == rOther.ptr();                                          \
+    }                                                                          \
+                                                                               \
+    bool operator!=(const TCLS& rOther) const {                                \
+        return ptr() != rOther.ptr();                                          \
     }
 
 namespace nw4r {
@@ -55,13 +63,6 @@ public:
 
     bool IsValid() const {
         return mpData != NULL;
-    }
-
-    bool operator==(const ResCommon& rOther) const {
-        return ptr() == rOther.ptr();
-    }
-    bool operator!=(const ResCommon& rOther) const {
-        return ptr() != rOther.ptr();
     }
 
     T* ptr() {
@@ -198,6 +199,37 @@ public:
         return ofs_to_ptr<u8>(ref().toDL);
     }
 };
+
+/******************************************************************************
+ *
+ * Bytecode
+ *
+ ******************************************************************************/
+namespace ResByteCodeData {
+
+enum OpCode {
+    NOOP,         // No operation
+    END,          // End of bytecode
+    NODE_MAPPING, //
+    WEIGHTING,    //
+    DRAW,         // Draw polygon
+    EVPMTX,       // Envelope matrix
+    MTXDUP        // Duplicate matrix
+};
+
+// DRAW opcode layout
+struct DrawParams {
+    u8 opcode;   // at 0x0
+    u8 matIdHi;  // at 0x3
+    u8 matIdLo;  // at 0x4
+    u8 shpIdHi;  // at 0x1
+    u8 shpIdLo;  // at 0x2
+    u8 nodeIdHi; // at 0x5
+    u8 nodeIdLo; // at 0x6
+    u8 priority; // at 0x7
+};
+
+} // namespace ResByteCodeData
 
 namespace detail {
 
