@@ -91,7 +91,7 @@ MTX33* MTX34ToMTX33(register MTX33* pOut, register const MTX34* pIn) {
     return pOut;
 }
 
-asm bool MTX34InvTranspose(register MTX33* pOut, register const MTX34* pIn){
+asm u32 MTX34InvTranspose(register MTX33* pOut, register const MTX34* pIn){
     // clang-format off
     nofralloc
 

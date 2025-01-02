@@ -7,9 +7,7 @@
 
 namespace nw4r {
 namespace g3d {
-
-void CalcTexMtx(math::MTX34* pMtx, bool set, const TexSrt& rSrt,
-                TexSrt::Flag flag, TexSrtTypedef::TexMatrixMode mode);
+namespace detail {
 
 class WorldMtxAttr {
 public:
@@ -23,16 +21,15 @@ public:
         ATTR_ALL_S_ONE = (1 << 31),
     };
 
-    static ResNodeDataTypedef::Billboard GetBillboard(u32 attr) {
-        return static_cast<ResNodeDataTypedef::Billboard>(attr &
-                                                          ATTR_BILLBOARD_MASK);
+    static ResNodeData::Billboard GetBillboard(u32 attr) {
+        return static_cast<ResNodeData::Billboard>(attr & ATTR_BILLBOARD_MASK);
     }
-    static u32 SetBillboard(u32 attr, ResNodeDataTypedef::Billboard billboard) {
+    static u32 SetBillboard(u32 attr, ResNodeData::Billboard billboard) {
         return (attr & ~ATTR_BILLBOARD_MASK) | billboard;
     }
 
     static bool IsIgnoreTrans(u32 attr) {
-        return attr & ATTR_T_IGNORE;
+        return (attr & ATTR_T_IGNORE) ? true : false;
     }
     static u32 AnmIgnoreTrans(u32 attr) {
         return attr | ATTR_T_IGNORE;
@@ -42,7 +39,7 @@ public:
     }
 
     static bool IsScaleUniform(u32 attr) {
-        return attr & ATTR_S_UNIFORM;
+        return (attr & ATTR_S_UNIFORM) ? true : false;
     }
     static u32 AnmScaleUniform(u32 attr) {
         return attr | ATTR_S_UNIFORM;
@@ -53,7 +50,7 @@ public:
     }
 
     static bool IsAllScaleUniform(u32 attr) {
-        return attr & ATTR_ALL_S_UNIFORM;
+        return (attr & ATTR_ALL_S_UNIFORM) ? true : false;
     }
     static u32 AnmAllScaleUniform(u32 attr) {
         return attr | ATTR_ALL_S_UNIFORM;
@@ -63,7 +60,7 @@ public:
     }
 
     static bool IsScaleOne(u32 attr) {
-        return attr & ATTR_S_ONE;
+        return (attr & ATTR_S_ONE) ? true : false;
     }
     static u32 AnmScaleOne(u32 attr) {
         return attr | ATTR_S_ONE;
@@ -73,7 +70,7 @@ public:
     }
 
     static bool IsAllScaleOne(u32 attr) {
-        return attr & ATTR_ALL_S_ONE;
+        return (attr & ATTR_ALL_S_ONE) ? true : false;
     }
     static u32 AnmAllScaleOne(u32 attr) {
         return attr | ATTR_ALL_S_ONE;
@@ -87,6 +84,11 @@ public:
                ATTR_ALL_S_ONE;
     }
 };
+
+} // namespace detail
+
+void CalcTexMtx(math::MTX34* pMtx, bool set, const TexSrt& rSrt,
+                TexSrt::Flag flag, TexSrtTypedef::TexMatrixMode mode);
 
 } // namespace g3d
 } // namespace nw4r

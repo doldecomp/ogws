@@ -102,19 +102,19 @@ void ScnMdlSimple::ScnMdlSmpl_CalcPosture(u32 param,
     }
 
     ScaleProperty property = GetScaleProperty();
-    u32 rootAttr = WorldMtxAttr::GetRootMtxAttr();
+    u32 rootAttr = detail::WorldMtxAttr::GetRootMtxAttr();
 
     u32 ignoreTrans;
     GetScnObjOption(OPTION_IGNORE_ANMCHR_TRANS, &ignoreTrans);
 
     if (property == UNIFORM_SCALED) {
-        rootAttr = WorldMtxAttr::AnmNotScaleOne(rootAttr);
+        rootAttr = detail::WorldMtxAttr::AnmNotScaleOne(rootAttr);
     } else if (property == NONUNIFORM_SCALED) {
-        rootAttr = WorldMtxAttr::AnmNotScaleUniform(rootAttr);
+        rootAttr = detail::WorldMtxAttr::AnmNotScaleUniform(rootAttr);
     }
 
     if (ignoreTrans) {
-        rootAttr = WorldMtxAttr::AnmIgnoreTrans(rootAttr);
+        rootAttr = detail::WorldMtxAttr::AnmIgnoreTrans(rootAttr);
     }
 
     if (GetScnMdlCallback() != NULL) {
@@ -353,7 +353,7 @@ bool ScnMdlSimple::GetScnMtxPos(math::MTX34* pMtx, ScnObjMtxType type,
                 math::MTX34 work0;
                 math::MTX34 work1;
 
-                if (math::MTX34Inv(&work0, pWorld)) {
+                if (math::MTX34Inv(&work0, pWorld) != FALSE) {
                     math::MTX34Mult(&work1, pView, &work0);
                     math::MTX34Mult(pMtx, &work1, &mpWorldMtxArray[id]);
                     return true;

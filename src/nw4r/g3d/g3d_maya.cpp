@@ -332,10 +332,10 @@ u32 CalcWorldMtx_Maya_SSC_Apply(math::MTX34* pW, math::VEC3* pS,
     u32 newAttr = attr;
 
     if (flag & ChrAnmResult::FLAG_S_ONE) {
-        newAttr = WorldMtxAttr::AnmScaleOne(newAttr);
+        newAttr = detail::WorldMtxAttr::AnmScaleOne(newAttr);
         pS->x = pS->y = pS->z = 1.0f;
     } else {
-        newAttr = WorldMtxAttr::AnmNotScaleOne(newAttr);
+        newAttr = detail::WorldMtxAttr::AnmNotScaleOne(newAttr);
         *pS = pResult->s;
     }
 
@@ -345,7 +345,7 @@ u32 CalcWorldMtx_Maya_SSC_Apply(math::MTX34* pW, math::VEC3* pS,
         math::MTX34Copy(pW, pW1);
     } else if (flag & ChrAnmResult::FLAG_R_ZERO) {
 
-        if (WorldMtxAttr::IsScaleOne(attr)) {
+        if (detail::WorldMtxAttr::IsScaleOne(attr)) {
             math::VEC3 trans(pResult->rt[0][3], pResult->rt[1][3],
                              pResult->rt[2][3]);
 
@@ -357,7 +357,7 @@ u32 CalcWorldMtx_Maya_SSC_Apply(math::MTX34* pW, math::VEC3* pS,
 
             math::MTX34Trans(pW, pW1, &trans);
         }
-    } else if (WorldMtxAttr::IsScaleOne(attr)) {
+    } else if (detail::WorldMtxAttr::IsScaleOne(attr)) {
         math::MTX34Mult(pW, pW1, &pResult->rt);
     } else {
         math::MTX34Copy(pW, &pResult->rt);
@@ -370,9 +370,9 @@ u32 CalcWorldMtx_Maya_SSC_Apply(math::MTX34* pW, math::VEC3* pS,
     }
 
     if (flag & ChrAnmResult::FLAG_S_UNIFORM) {
-        newAttr = WorldMtxAttr::AnmScaleUniform(newAttr);
+        newAttr = detail::WorldMtxAttr::AnmScaleUniform(newAttr);
     } else {
-        newAttr = WorldMtxAttr::AnmNotScaleUniform(newAttr);
+        newAttr = detail::WorldMtxAttr::AnmNotScaleUniform(newAttr);
     }
 
     return newAttr;

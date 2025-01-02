@@ -13,23 +13,23 @@ u32 CalcWorldMtx_Basic(math::MTX34* pW, math::VEC3* pS, const math::MTX34* pW1,
     u32 newAttr = attr;
 
     if (flag & ChrAnmResult::FLAG_S_ONE) {
-        newAttr = WorldMtxAttr::AnmScaleOne(newAttr);
+        newAttr = detail::WorldMtxAttr::AnmScaleOne(newAttr);
         pS->x = pS->y = pS->z = 1.0f;
     } else {
-        newAttr = WorldMtxAttr::AnmNotScaleOne(newAttr);
+        newAttr = detail::WorldMtxAttr::AnmNotScaleOne(newAttr);
         *pS = pResult->s;
     }
 
     if ((flag & ChrAnmResult::FLAG_MTX_IDENT) ||
         (flag & ChrAnmResult::FLAG_RT_ZERO)) {
 
-        if (WorldMtxAttr::IsScaleOne(attr)) {
+        if (detail::WorldMtxAttr::IsScaleOne(attr)) {
             math::MTX34Copy(pW, pW1);
         } else {
             math::MTX34Scale(pW, pW1, pS1);
         }
     } else if (flag & ChrAnmResult::FLAG_R_ZERO) {
-        if (WorldMtxAttr::IsScaleOne(attr)) {
+        if (detail::WorldMtxAttr::IsScaleOne(attr)) {
             math::VEC3 trans(pResult->rt.m[0][3], pResult->rt.m[1][3],
                              pResult->rt.m[2][3]);
 
@@ -40,7 +40,7 @@ u32 CalcWorldMtx_Basic(math::MTX34* pW, math::VEC3* pS, const math::MTX34* pW1,
             math::MTX34Scale(&temp, pS1, &pResult->rt);
             math::MTX34Mult(pW, pW1, &temp);
         }
-    } else if (WorldMtxAttr::IsScaleOne(attr)) {
+    } else if (detail::WorldMtxAttr::IsScaleOne(attr)) {
         math::MTX34Mult(pW, pW1, &pResult->rt);
     } else {
         math::MTX34Scale(pW, pW1, pS1);
@@ -48,9 +48,9 @@ u32 CalcWorldMtx_Basic(math::MTX34* pW, math::VEC3* pS, const math::MTX34* pW1,
     }
 
     if (flag & ChrAnmResult::FLAG_S_UNIFORM) {
-        newAttr = WorldMtxAttr::AnmScaleUniform(newAttr);
+        newAttr = detail::WorldMtxAttr::AnmScaleUniform(newAttr);
     } else {
-        newAttr = WorldMtxAttr::AnmNotScaleUniform(newAttr);
+        newAttr = detail::WorldMtxAttr::AnmNotScaleUniform(newAttr);
     }
 
     return newAttr;

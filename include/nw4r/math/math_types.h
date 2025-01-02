@@ -486,7 +486,7 @@ MTX33* MTX33Identity(MTX33* pMtx);
  *
  ******************************************************************************/
 MTX33* MTX34ToMTX33(MTX33* pOut, const MTX34* pIn);
-bool MTX34InvTranspose(MTX33* pOut, const MTX34* pIn);
+u32 MTX34InvTranspose(MTX33* pOut, const MTX34* pIn);
 MTX34* MTX34Zero(MTX34* pMtx);
 MTX34* MTX34Scale(MTX34* pOut, const MTX34* pIn, const VEC3* pScale);
 MTX34* MTX34Trans(MTX34* pOut, const MTX34* pIn, const VEC3* pTrans);
@@ -505,6 +505,10 @@ inline MTX34* MTX34Identity(MTX34* pMtx) {
 
 inline u32 MTX34Inv(MTX34* pOut, const MTX34* pIn) {
     return PSMTXInverse(*pIn, *pOut);
+}
+
+inline u32 MTX34InvTranspose(MTX34* pOut, const MTX34* pIn) {
+    return PSMTXInvXpose(*pIn, *pOut);
 }
 
 inline MTX34* MTX34LookAt(MTX34* pMtx, const VEC3* pPos, const VEC3* pUp,

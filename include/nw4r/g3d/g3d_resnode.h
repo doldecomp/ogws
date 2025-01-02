@@ -22,7 +22,7 @@ struct ResNodeDataTypedef {
         BILLBOARD_Y_OFF,
         BILLBOARD_PERSP_Y,
 
-        BILLBOARD_MAX,
+        NUM_BILLBOARD,
     };
 
     enum Flag {
