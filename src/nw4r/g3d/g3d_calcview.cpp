@@ -490,16 +490,16 @@ void CalcView(math::MTX34* pViewPosArray, math::MTX33* pViewNrmArray,
     math::MTX34* pBbMtxArray = detail::workmem::GetBillboardMtxTemporary();
 
     for (u32 i = 0; i < numMtx; i++) {
-        u32 attrib = pModelMtxAttribArray[i];
+        u32 attr = pModelMtxAttribArray[i];
 
         ResNodeData::Billboard bbType =
-            detail::WorldMtxAttr::GetBillboard(attrib);
+            detail::WorldMtxAttr::GetBillboard(attr);
 
         if (bbType != ResNodeData::BILLBOARD_OFF) {
             math::MTX34& rVMtx = pVArray[i];
 
             bbFunc[bbType](&rVMtx, pModelMtxArray,
-                           detail::WorldMtxAttr::IsAllScaleUniform(attrib),
+                           detail::WorldMtxAttr::IsAllScaleUniform(attr),
                            pViewMtx, mdl, i);
 
             s32 nodeID = mdl.GetResMdlInfo().GetNodeIDFromMtxID(i);
@@ -544,9 +544,9 @@ void CalcView(math::MTX34* pViewPosArray, math::MTX33* pViewNrmArray,
         for (u32 i = 0; i < numMtx; i++) {
             math::MTX34& rVMtx = pVArray[i];
             math::MTX33& rNMtx = pNArray[i];
-            u32 attrib = pModelMtxAttribArray[i];
+            u32 attr = pModelMtxAttribArray[i];
 
-            if (detail::WorldMtxAttr::IsAllScaleUniform(attrib)) {
+            if (detail::WorldMtxAttr::IsAllScaleUniform(attr)) {
                 if (pCurTArray != NULL) {
                     math::MTX34Copy(&pCurTArray[i], &rVMtx);
                     pCurTArray[i]._03 = pCurTArray[i]._13 = pCurTArray[i]._23 =
@@ -651,16 +651,16 @@ void CalcView_LC(math::MTX34* pViewPosArray, math::MTX33* pViewNrmArray,
         }
 
         for (u32 i = 0; i < remain; i++) {
-            u32 attrib = pModelMtxAttribArray[baseMtx + i];
+            u32 attr = pModelMtxAttribArray[baseMtx + i];
 
             ResNodeData::Billboard bbType =
-                detail::WorldMtxAttr::GetBillboard(attrib);
+                detail::WorldMtxAttr::GetBillboard(attr);
 
             if (bbType != ResNodeData::BILLBOARD_OFF) {
                 math::MTX34& rVMtx = pCurVArray[i];
 
                 bbFunc[bbType](&rVMtx, pModelMtxArray,
-                               detail::WorldMtxAttr::IsAllScaleUniform(attrib),
+                               detail::WorldMtxAttr::IsAllScaleUniform(attr),
                                pViewMtx, mdl, baseMtx + i);
 
                 s32 nodeID =
@@ -711,9 +711,9 @@ void CalcView_LC(math::MTX34* pViewPosArray, math::MTX33* pViewNrmArray,
             for (u32 i = 0; i < remain; i++) {
                 math::MTX34& rVMtx = pCurVArray[i];
                 math::MTX33& rNMtx = pCurNArray[i];
-                u32 attrib = pModelMtxAttribArray[baseMtx + i];
+                u32 attr = pModelMtxAttribArray[baseMtx + i];
 
-                if (detail::WorldMtxAttr::IsAllScaleUniform(attrib)) {
+                if (detail::WorldMtxAttr::IsAllScaleUniform(attr)) {
                     if (pViewTexMtxArray != NULL) {
                         math::MTX34Copy(&pCurTArray[i], &rVMtx);
 
@@ -860,16 +860,16 @@ void CalcView_LC_DMA_ModelMtx(math::MTX34* pViewPosArray,
         }
 
         for (u32 i = 0; i < remain; i++) {
-            u32 attrib = pModelMtxAttribArray[baseMtx + i];
+            u32 attr = pModelMtxAttribArray[baseMtx + i];
 
             ResNodeData::Billboard bbType =
-                detail::WorldMtxAttr::GetBillboard(attrib);
+                detail::WorldMtxAttr::GetBillboard(attr);
 
             if (bbType != ResNodeData::BILLBOARD_OFF) {
                 math::MTX34& rVMtx = pCurVArray[i];
 
                 bbFunc[bbType](&rVMtx, pModelMtxArray,
-                               detail::WorldMtxAttr::IsAllScaleUniform(attrib),
+                               detail::WorldMtxAttr::IsAllScaleUniform(attr),
                                pViewMtx, mdl, baseMtx + i);
 
                 s32 nodeID =
@@ -920,9 +920,9 @@ void CalcView_LC_DMA_ModelMtx(math::MTX34* pViewPosArray,
             for (u32 i = 0; i < remain; i++) {
                 math::MTX34& rVMtx = pCurVArray[i];
                 math::MTX33& rNMtx = pCurNArray[i];
-                u32 attrib = pModelMtxAttribArray[baseMtx + i];
+                u32 attr = pModelMtxAttribArray[baseMtx + i];
 
-                if (detail::WorldMtxAttr::IsAllScaleUniform(attrib)) {
+                if (detail::WorldMtxAttr::IsAllScaleUniform(attr)) {
                     if (pViewTexMtxArray != NULL) {
                         math::MTX34Copy(&pCurTArray[i], &rVMtx);
 

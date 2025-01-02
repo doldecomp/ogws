@@ -14,18 +14,29 @@ namespace g3d {
 class AnmObjChr;
 struct ChrAnmResult;
 class FuncObjCalcWorld;
+class WorldMtxManip;
 
-class WorldMtxManip {
-public:
-    WorldMtxManip(math::MTX34* pM, math::VEC3* pS, u32* pWMAttr)
-        : mpM(pM), mpS(pS), mpWMAttr(pWMAttr) {}
+/******************************************************************************
+ *
+ * Functions
+ *
+ ******************************************************************************/
+void CalcWorld(math::MTX34* pModelMtxArray, u32* pModelMtxAttribArray,
+               const u8* pByteCode, const math::MTX34* pBaseMtx, ResMdl mdl,
+               AnmObjChr* pAnmChr, FuncObjCalcWorld* pFuncObj, u32 rootAttrib);
 
-private:
-    math::MTX34* mpM; // at 0x0
-    math::VEC3* mpS;  // at 0x4
-    u32* mpWMAttr;    // at 0x8
-};
+void CalcWorld(math::MTX34* pModelMtxArray, u32* pModelMtxAttribArray,
+               const u8* pByteCode, const math::MTX34* pBaseMtx, ResMdl mdl,
+               AnmObjChr* pAnmChr, FuncObjCalcWorld* pFuncObj);
 
+void CalcSkinning(math::MTX34* pModelMtxArray, u32* pModelMtxAttribArray,
+                  const ResMdl mdl, const u8* pByteCode);
+
+/******************************************************************************
+ *
+ * ICalcWorldCallback
+ *
+ ******************************************************************************/
 class ICalcWorldCallback {
 public:
     virtual ~ICalcWorldCallback() = 0; // at 0x8
@@ -40,10 +51,32 @@ public:
                                FuncObjCalcWorld* pFuncObj) = 0; // at 0x14
 };
 
+/******************************************************************************
+ *
+ * WorldMtxManip
+ *
+ ******************************************************************************/
+class WorldMtxManip {
+public:
+    WorldMtxManip(math::MTX34* pM, math::VEC3* pS, u32* pWMAttr)
+        : mpM(pM), mpS(pS), mpWMAttr(pWMAttr) {}
+
+private:
+    math::MTX34* mpM; // at 0x0
+    math::VEC3* mpS;  // at 0x4
+    u32* mpWMAttr;    // at 0x8
+};
+
+/******************************************************************************
+ *
+ * FuncObjCalcWorld
+ *
+ ******************************************************************************/
 class FuncObjCalcWorld {
 public:
     FuncObjCalcWorld(ICalcWorldCallback* pCallback, u32 timing, u32 nodeID)
         : mpCallback(pCallback), mTiming(timing), mNodeID(nodeID) {}
+
     ~FuncObjCalcWorld() {}
 
     void CheckCallbackA(u32 nodeID, ChrAnmResult* pResult, ResMdl mdl) {
@@ -73,14 +106,6 @@ private:
     u8 _;                           // at 0x5
     u16 mNodeID;                    // at 0x6
 };
-
-void CalcWorld(math::MTX34*, u32*, const u8*, const math::MTX34*, ResMdl,
-               AnmObjChr*, FuncObjCalcWorld*, u32);
-
-void CalcWorld(math::MTX34*, u32*, const u8*, const math::MTX34*, ResMdl,
-               AnmObjChr*, FuncObjCalcWorld*);
-
-void CalcSkinning(math::MTX34*, u32*, ResMdl, const u8*);
 
 } // namespace g3d
 } // namespace nw4r

@@ -208,13 +208,39 @@ public:
 namespace ResByteCodeData {
 
 enum OpCode {
-    NOOP,         // No operation
-    END,          // End of bytecode
-    NODE_MAPPING, //
-    WEIGHTING,    //
-    DRAW,         // Draw polygon
-    EVPMTX,       // Envelope matrix
-    MTXDUP        // Duplicate matrix
+    NOOP,    // No operation
+    END,     // End of bytecode
+    NODEMAP, //
+    WEIGHT,  // Apply weighting
+    DRAW,    // Draw polygon
+    EVPMTX,  // Envelope matrix
+    MTXDUP   // Duplicate matrix
+};
+
+// NODEMAP opcode layout
+struct NodeMapParams {
+    u8 opcode;        // at 0x0
+    u8 nodeIdHi;      // at 0x1
+    u8 nodeIdLo;      // at 0x2
+    u8 parentMtxIdHi; // at 0x1
+    u8 parentMtxIdLo; // at 0x2
+};
+
+// WEIGHT opcode layout
+struct WeightParams {
+    u8 opcode;      // at 0x0
+    u8 tgtIdHi;     // at 0x1
+    u8 tgtIdLo;     // at 0x2
+    u8 numBlendMtx; // at 0x3
+};
+// WEIGHT opcode layout - weighting entry
+struct WeightEntry {
+    u8 mtxIdHi;  // at 0x0
+    u8 mtxIdLo;  // at 0x1
+    u8 fWeight0; // at 0x2
+    u8 fWeight1; // at 0x3
+    u8 fWeight2; // at 0x4
+    u8 fWeight3; // at 0x5
 };
 
 // DRAW opcode layout
@@ -227,6 +253,24 @@ struct DrawParams {
     u8 nodeIdHi; // at 0x5
     u8 nodeIdLo; // at 0x6
     u8 priority; // at 0x7
+};
+
+// EVPMTX opcode layout
+struct EvpMtxParams {
+    u8 opcode;   // at 0x0
+    u8 mtxIdHi;  // at 0x1
+    u8 mtxIdLo;  // at 0x2
+    u8 nodeIdHi; // at 0x1
+    u8 nodeIdLo; // at 0x2
+};
+
+// MTXDUP opcode layout
+struct MtxDupParams {
+    u8 opcode;      // at 0x0
+    u8 toMtxIdHi;   // at 0x1
+    u8 toMtxIdLo;   // at 0x2
+    u8 fromMtxIdHi; // at 0x1
+    u8 fromMtxIdLo; // at 0x2
 };
 
 } // namespace ResByteCodeData

@@ -13,7 +13,7 @@ void ResNode::PatchChrAnmResult(ChrAnmResult* pResult) const {
     const ResNodeData& r = ref();
     u32 flags = pResult->flags;
 
-    if (flags & ChrAnmResult::FLAG_7) {
+    if (flags & ChrAnmResult::FLAG_PATCH_S) {
         if (r.flags & FLAG_S_ONE) {
             flags |= ChrAnmResult::FLAG_S_ONE | ChrAnmResult::FLAG_S_UNIFORM;
         } else {
@@ -25,7 +25,7 @@ void ResNode::PatchChrAnmResult(ChrAnmResult* pResult) const {
         }
     }
 
-    if (flags & ChrAnmResult::FLAG_8) {
+    if (flags & ChrAnmResult::FLAG_PATCH_R) {
         if (r.flags & FLAG_R_ZERO) {
             flags |= ChrAnmResult::FLAG_R_ZERO;
         } else {
@@ -36,7 +36,7 @@ void ResNode::PatchChrAnmResult(ChrAnmResult* pResult) const {
         flags |= ChrAnmResult::FLAG_R_RAW_FMT;
     }
 
-    if (flags & ChrAnmResult::FLAG_9) {
+    if (flags & ChrAnmResult::FLAG_PATCH_T) {
         if (r.flags & FLAG_T_ZERO) {
             flags |= ChrAnmResult::FLAG_T_ZERO;
         } else {
@@ -57,8 +57,9 @@ void ResNode::PatchChrAnmResult(ChrAnmResult* pResult) const {
         }
     }
 
-    pResult->flags = flags & ~(ChrAnmResult::FLAG_7 | ChrAnmResult::FLAG_8 |
-                               ChrAnmResult::FLAG_9);
+    pResult->flags =
+        flags & ~(ChrAnmResult::FLAG_PATCH_S | ChrAnmResult::FLAG_PATCH_R |
+                  ChrAnmResult::FLAG_PATCH_T);
 }
 
 void ResNode::CalcChrAnmResult(ChrAnmResult* pResult) const {
@@ -113,7 +114,7 @@ void ResNode::CalcChrAnmResult(ChrAnmResult* pResult) const {
     flags |= ChrAnmResult::FLAG_ANM_EXISTS;
 
     if (r.flags & FLAG_COMP_SCALE) {
-        flags |= ChrAnmResult::FLAG_10;
+        flags |= ChrAnmResult::FLAG_COMP_SCALE;
     }
 
     if (r.flags & FLAG_COMP_CHILD_SCALE) {

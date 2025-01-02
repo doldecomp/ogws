@@ -279,6 +279,9 @@ inline bool BackToFront(const detail::workmem::MdlZ& rLhs,
 }
 
 void DrawResMdlLoop(const ResMdl mdl, const u8* pByteCode, u32 drawMode) {
+
+#define pDrawCmd reinterpret_cast<const ResByteCodeData::DrawParams*>(pByteCode)
+
     u8 c;
 
     ResMat mat;
@@ -294,18 +297,16 @@ void DrawResMdlLoop(const ResMdl mdl, const u8* pByteCode, u32 drawMode) {
         ctrl |= DRAW1MAT1SHP_CTRL_FORCE_LIGHTOFF;
     }
 
-#define args (reinterpret_cast<const ResByteCodeData::DrawParams*>(pByteCode))
-
     for (; (c = *pByteCode) != ResByteCodeData::END;
          pByteCode += sizeof(ResByteCodeData::DrawParams)) {
 
-        node = mdl.GetResNode(args->nodeIdHi << 8 | args->nodeIdLo);
+        node = mdl.GetResNode(pDrawCmd->nodeIdHi << 8 | pDrawCmd->nodeIdLo);
         if (!node.IsVisible()) {
             continue;
         }
 
-        mat = mdl.GetResMat(args->matIdHi << 8 | args->matIdLo);
-        shp = mdl.GetResShp(args->shpIdHi << 8 | args->shpIdLo);
+        mat = mdl.GetResMat(pDrawCmd->matIdHi << 8 | pDrawCmd->matIdLo);
+        shp = mdl.GetResShp(pDrawCmd->shpIdHi << 8 | pDrawCmd->shpIdLo);
 
         Draw1Mat1ShpDirectly(ignoreMat || mat == prevMat ? ResMat(NULL) : mat,
                              shp, NULL, NULL, ctrl, NULL,
@@ -314,11 +315,14 @@ void DrawResMdlLoop(const ResMdl mdl, const u8* pByteCode, u32 drawMode) {
         prevMat = mat;
     }
 
-#undef args
+#undef pDrawCmd
 }
 
 void DrawResMdlLoop(const ResMdl mdl, const u8* pByteCode,
                     DrawResMdlReplacement* pReplacement, u32 drawMode) {
+
+#define pDrawCmd reinterpret_cast<const ResByteCodeData::DrawParams*>(pByteCode)
+
     u8 c;
 
     ResMat mat;
@@ -336,12 +340,10 @@ void DrawResMdlLoop(const ResMdl mdl, const u8* pByteCode,
         ctrl |= DRAW1MAT1SHP_CTRL_FORCE_LIGHTOFF;
     }
 
-#define args (reinterpret_cast<const ResByteCodeData::DrawParams*>(pByteCode))
-
     for (; (c = *pByteCode) != ResByteCodeData::END;
          pByteCode += sizeof(ResByteCodeData::DrawParams)) {
 
-        node = mdl.GetResNode(args->nodeIdHi << 8 | args->nodeIdLo);
+        node = mdl.GetResNode(pDrawCmd->nodeIdHi << 8 | pDrawCmd->nodeIdLo);
 
         bool visible;
         // @bug Replacement pointer not validated
@@ -355,8 +357,8 @@ void DrawResMdlLoop(const ResMdl mdl, const u8* pByteCode,
             continue;
         }
 
-        mat = mdl.GetResMat(args->matIdHi << 8 | args->matIdLo);
-        shp = mdl.GetResShp(args->shpIdHi << 8 | args->shpIdLo);
+        mat = mdl.GetResMat(pDrawCmd->matIdHi << 8 | pDrawCmd->matIdLo);
+        shp = mdl.GetResShp(pDrawCmd->shpIdHi << 8 | pDrawCmd->shpIdLo);
 
         SetupDraw1Mat1ShpSwap(&swap, pReplacement, mat.GetID());
 
@@ -367,7 +369,7 @@ void DrawResMdlLoop(const ResMdl mdl, const u8* pByteCode,
         prevMat = mat;
     }
 
-#undef args
+#undef pDrawCmd
 }
 
 void DrawResMdlLoop(const ResMdl mdl, const detail::workmem::MdlZ* pMdlZArray,
@@ -443,6 +445,9 @@ detail::workmem::MdlZ* SetUpMdlZ(u32* pNumMdlZ, const ResMdl mdl,
                                  const math::MTX34* pViewPosMtxArray,
                                  const u8* pByteCode,
                                  DrawResMdlReplacement* pReplacement) {
+
+#define pDrawCmd reinterpret_cast<const ResByteCodeData::DrawParams*>(pByteCode)
+
     u16 nodeID;
     u8 c;
     u32 mdlZNum = 0;
@@ -452,12 +457,10 @@ detail::workmem::MdlZ* SetUpMdlZ(u32* pNumMdlZ, const ResMdl mdl,
     u32 viewMtxNum = mdl.GetResMdlInfo().GetNumViewMtx();
     detail::workmem::MdlZ* pMdlZArray = detail::workmem::GetMdlZTemporary();
 
-#define args (reinterpret_cast<const ResByteCodeData::DrawParams*>(pByteCode))
-
     for (; (c = *pByteCode) != ResByteCodeData::END;
          pByteCode += sizeof(ResByteCodeData::DrawParams)) {
 
-        nodeID = args->nodeIdHi << 8 | args->nodeIdLo;
+        nodeID = pDrawCmd->nodeIdHi << 8 | pDrawCmd->nodeIdLo;
         node = mdl.GetResNode(nodeID);
 
         bool visible;
@@ -474,22 +477,22 @@ detail::workmem::MdlZ* SetUpMdlZ(u32* pNumMdlZ, const ResMdl mdl,
         detail::workmem::MdlZ& rMdlZ = pMdlZArray[mdlZNum];
 
         rMdlZ.nodeID = nodeID;
-        rMdlZ.matID = args->matIdHi << 8 | args->matIdLo;
-        rMdlZ.shpID = args->shpIdHi << 8 | args->shpIdLo;
+        rMdlZ.matID = pDrawCmd->matIdHi << 8 | pDrawCmd->matIdLo;
+        rMdlZ.shpID = pDrawCmd->shpIdHi << 8 | pDrawCmd->shpIdLo;
 
         // @bug Matrix ID not validated
         mtxID = node.GetMtxID();
         rMdlZ.Z = pViewPosMtxArray[mtxID]._23;
 
-        rMdlZ.priority = args->priority;
+        rMdlZ.priority = pDrawCmd->priority;
 
         mdlZNum++;
     }
 
-#undef args
-
     *pNumMdlZ = mdlZNum;
     return pMdlZArray;
+
+#undef pDrawCmd
 }
 
 } // namespace
