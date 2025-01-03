@@ -1,13 +1,14 @@
 #ifndef RVL_SDK_GX_LIGHT_H
 #define RVL_SDK_GX_LIGHT_H
+#include <types.h>
+
 #include <revolution/GX/GXInternal.h>
 #include <revolution/GX/GXTypes.h>
-#include <types.h>
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-GX_DECL_PUBLIC_STRUCT(GXLightObj, 64);
+GX_PUBLIC_STRUCT_DECL(GXLightObj, 64);
 
 void GXInitLightAttn(GXLightObj* light, f32 aa, f32 ab, f32 ac, f32 ka, f32 kb,
                      f32 kc);

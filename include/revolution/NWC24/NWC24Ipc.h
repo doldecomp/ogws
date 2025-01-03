@@ -1,8 +1,10 @@
 #ifndef RVL_SDK_NWC24_IPC_H
 #define RVL_SDK_NWC24_IPC_H
-#include <revolution/IPC.h>
-#include <revolution/NWC24/NWC24Types.h>
 #include <types.h>
+
+#include <revolution/NWC24/NWC24Types.h>
+
+#include <revolution/IPC.h>
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -21,7 +23,7 @@ NWC24Err NWC24iIoctlResourceManagerAsync(const char* user, s32 fd, s32 type,
 BOOL NWC24iIsAsyncRequestPending(void);
 
 /**
- * @brief Macros to supply name of caller
+ * Macros to supply name of caller
  */
 
 // clang-format off
