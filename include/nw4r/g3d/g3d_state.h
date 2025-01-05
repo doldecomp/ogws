@@ -89,7 +89,7 @@ struct IndTexMtxInfo {
     math::MTX34 offset_mtx[GX_ITM_2 - GX_ITM_0 + 1]; // at 0x4
 
     IndTexMtxInfo() : flag(0) {}
-    IndTexMtxInfo(const ResMatIndMtxAndScale ind);
+    explicit IndTexMtxInfo(const ResMatIndMtxAndScale ind);
 
     void FifoSend() const;
     void SetMtx(GXIndTexMtxID id, const math::MTX34& rMtx);

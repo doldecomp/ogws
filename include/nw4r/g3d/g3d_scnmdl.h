@@ -1,5 +1,5 @@
-#ifndef NW4R_G3D_SCNMDL_H
-#define NW4R_G3D_SCNMDL_H
+#ifndef NW4R_G3D_SCN_MDL_H
+#define NW4R_G3D_SCN_MDL_H
 
 #include <nw4r/types_nw4r.h>
 

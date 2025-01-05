@@ -1,5 +1,5 @@
-#ifndef NW4R_G3D_RESVTX_H
-#define NW4R_G3D_RESVTX_H
+#ifndef NW4R_G3D_RES_RES_VTX_H
+#define NW4R_G3D_RES_RES_VTX_H
 #include <nw4r/types_nw4r.h>
 
 #include <nw4r/g3d/res/g3d_rescommon.h>
@@ -131,7 +131,7 @@ struct ResVtxClrData {
     GXCompCnt cmpcnt;  // at 0x14
     GXCompType tp;     // at 0x18
     u8 stride;         // at 0x1C
-    u8 dummy_;         // at 0x1D
+    u8 PADDING_0x1D;   // at 0x1D
     u16 numClr;        // at 0x1E
 };
 

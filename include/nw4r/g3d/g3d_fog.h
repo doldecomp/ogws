@@ -20,7 +20,7 @@ struct FogData {
     f32 farz;               // at 0x10
     GXColor color;          // at 0x14
     GXBool adjEnable;       // at 0x18
-    u8 _0;                  // at 0x19
+    u8 PADDING_0x19;        // at 0x19
     u16 adjCenter;          // at 0x1A
     GXFogAdjTable adjTable; // at 0x1C
 };

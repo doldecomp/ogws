@@ -1,5 +1,5 @@
-#ifndef NW4R_G3D_RESLIGHTSET_H
-#define NW4R_G3D_RESLIGHTSET_H
+#ifndef NW4R_G3D_RES_RES_LIGHT_SET_H
+#define NW4R_G3D_RES_RES_LIGHT_SET_H
 #include <nw4r/types_nw4r.h>
 
 #include <nw4r/g3d/res/g3d_resanmscn.h>
@@ -12,17 +12,17 @@ struct ResLightSetData {
     static const int MAX_LIGHT = 8;
     static const u32 INVALID_ID = 0xFFFF;
 
-    u32 size;                  // at 0x0
-    s32 toResAnmScnData;       // at 0x4
-    s32 name;                  // at 0x8
-    u32 id;                    // at 0xC
-    u32 refNumber;             // at 0x10
-    s32 ambLightName;          // at 0x14
-    u16 ambLightId;            // at 0x18
-    u8 numLight;               // at 0x1A
-    u8 padding_[1];            // at 0x1B
-    s32 lightNames[MAX_LIGHT]; // at 0x1C
-    u16 lightId[MAX_LIGHT];    // at 0x3C
+    u32 size;                     // at 0x0
+    s32 toResAnmScnData;          // at 0x4
+    s32 name;                     // at 0x8
+    u32 id;                       // at 0xC
+    u32 refNumber;                // at 0x10
+    s32 ambLightName;             // at 0x14
+    u16 ambLightId;               // at 0x18
+    u8 numLight;                  // at 0x1A
+    u8 PADDING_0x1B[0x1C - 0x1B]; // at 0x1B
+    s32 lightNames[MAX_LIGHT];    // at 0x1C
+    u16 lightId[MAX_LIGHT];       // at 0x3C
 };
 
 class ResLightSet : public ResCommon<ResLightSetData> {

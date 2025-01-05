@@ -1,5 +1,5 @@
-#ifndef NW4R_G3D_SCNRFL_H
-#define NW4R_G3D_SCNRFL_H
+#ifndef NW4R_G3D_SCN_RFL_H
+#define NW4R_G3D_SCN_RFL_H
 #include <nw4r/types_nw4r.h>
 
 #include <nw4r/g3d/g3d_scnobj.h>

@@ -19,7 +19,7 @@ inline void Unlock(OSMutex& rMutex) {
 
 template <typename T> class AutoLock : private NonCopyable {
 public:
-    AutoLock(T& rLockObj) : mLockObj(rLockObj) {
+    explicit AutoLock(T& rLockObj) : mLockObj(rLockObj) {
         Lock(mLockObj);
     }
     ~AutoLock() {

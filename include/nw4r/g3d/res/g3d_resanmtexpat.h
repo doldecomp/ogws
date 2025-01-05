@@ -1,5 +1,5 @@
-#ifndef NW4R_G3D_RESANMTEXPAT_H
-#define NW4R_G3D_RESANMTEXPAT_H
+#ifndef NW4R_G3D_RES_RES_ANM_TEX_PAT_H
+#define NW4R_G3D_RES_RES_ANM_TEX_PAT_H
 #include <nw4r/types_nw4r.h>
 
 #include <nw4r/g3d/res/g3d_resanm.h>
@@ -17,7 +17,7 @@ struct TexPatAnmResult {
 
     u8 bTexExist;              // at 0x0
     u8 bPlttExist;             // at 0x1
-    u8 padding_[2];            // at 0x2
+    u8 PADDING_0x2[0x4 - 0x2]; // at 0x2
     ResTex tex[NUM_OF_ANMS];   // at 0x4
     ResPltt pltt[NUM_OF_ANMS]; // at 0x24
 };
@@ -30,7 +30,7 @@ struct ResAnmTexPatFrmData {
 
 struct ResAnmTexPatAnmData {
     u16 numFrameValues;                 // at 0x0
-    u8 padding_[2];                     // at 0x2
+    u8 PADDING_0x2[0x4 - 0x2];          // at 0x2
     f32 invKeyFrameRange;               // at 0x4
     ResAnmTexPatFrmData frameValues[1]; // at 0x8
 };

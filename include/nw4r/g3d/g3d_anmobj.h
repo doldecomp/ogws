@@ -1,5 +1,5 @@
-#ifndef NW4R_G3D_ANMOBJ_H
-#define NW4R_G3D_ANMOBJ_H
+#ifndef NW4R_G3D_ANM_OBJ_H
+#define NW4R_G3D_ANM_OBJ_H
 #include <nw4r/types_nw4r.h>
 
 #include <nw4r/g3d/g3d_obj.h>

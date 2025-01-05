@@ -1,5 +1,5 @@
-#ifndef NW4R_G3D_ANMTEXPAT_H
-#define NW4R_G3D_ANMTEXPAT_H
+#ifndef NW4R_G3D_ANM_TEX_PAT_H
+#define NW4R_G3D_ANM_TEX_PAT_H
 #include <nw4r/types_nw4r.h>
 
 #include <nw4r/g3d/g3d_anmobj.h>
@@ -55,6 +55,7 @@ protected:
 protected:
     static const int MAX_CHILD = 4;
 
+protected:
     int mNumBinding;      // at 0x10
     u16* const mpBinding; // at 0x14
 

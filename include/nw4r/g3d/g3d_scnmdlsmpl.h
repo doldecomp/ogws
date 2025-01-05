@@ -1,5 +1,5 @@
-#ifndef NW4R_G3D_SCNMDLSMPL_H
-#define NW4R_G3D_SCNMDLSMPL_H
+#ifndef NW4R_G3D_SCN_MDL_SMPL_H
+#define NW4R_G3D_SCN_MDL_SMPL_H
 #include <nw4r/types_nw4r.h>
 
 #include <nw4r/g3d/g3d_calcview.h>

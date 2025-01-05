@@ -109,7 +109,7 @@ private:
 struct LightSetData {
     s8 idxLight[G3DState::NUM_LIGHT_IN_LIGHT_SET]; // at 0x0
     s8 idxAmbLight;                                // at 0x8
-    u8 _[0xC - 0X9];                               // at 0x9
+    u8 PADDING_0x9[0xC - 0X9];                     // at 0x9
 };
 
 class LightSet {

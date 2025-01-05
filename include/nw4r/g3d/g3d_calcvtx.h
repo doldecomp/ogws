@@ -1,5 +1,5 @@
-#ifndef NW4R_G3D_CALCVTX_H
-#define NW4R_G3D_CALCVTX_H
+#ifndef NW4R_G3D_CALC_VTX_H
+#define NW4R_G3D_CALC_VTX_H
 #include <nw4r/types_nw4r.h>
 
 #include <nw4r/g3d/res/g3d_resmdl.h>

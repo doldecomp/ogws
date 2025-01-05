@@ -13,11 +13,11 @@ struct LfoParam {
 
     void Init();
 
-    f32 depth;     // at 0x0
-    f32 speed;     // at 0x4
-    u32 delay;     // at 0x8
-    u8 range;      // at 0xC
-    u8 padding[3]; // at 0xD
+    f32 depth;                  // at 0x0
+    f32 speed;                  // at 0x4
+    u32 delay;                  // at 0x8
+    u8 range;                   // at 0xC
+    u8 PADDING_0xD[0x10 - 0xD]; // at 0xD
 };
 
 class Lfo {

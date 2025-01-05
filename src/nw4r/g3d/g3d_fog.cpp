@@ -24,7 +24,7 @@ void Fog::Init() {
     r.color.r = r.color.g = r.color.b = r.color.a = 0;
 
     r.adjEnable = FALSE;
-    r._0 = 0;
+    r.PADDING_0x19 = 0;
 
     r.adjCenter = 0;
     for (int i = 0; i < GX_FOG_ADJ_TABLE_SZ; i++) {

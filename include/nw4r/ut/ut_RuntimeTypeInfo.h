@@ -7,7 +7,8 @@ namespace ut {
 namespace detail {
 
 struct RuntimeTypeInfo {
-    RuntimeTypeInfo(const RuntimeTypeInfo* pBase) : mParentTypeInfo(pBase) {}
+    explicit RuntimeTypeInfo(const RuntimeTypeInfo* pBase)
+        : mParentTypeInfo(pBase) {}
 
     bool IsDerivedFrom(const RuntimeTypeInfo* pBase) const {
         for (const RuntimeTypeInfo* pIt = this; pIt != NULL;

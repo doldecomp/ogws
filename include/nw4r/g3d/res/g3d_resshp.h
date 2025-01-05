@@ -1,5 +1,5 @@
-#ifndef NW4R_G3D_RESSHP_H
-#define NW4R_G3D_RESSHP_H
+#ifndef NW4R_G3D_RES_RES_SHP_H
+#define NW4R_G3D_RES_RES_SHP_H
 
 #include <nw4r/types_nw4r.h>
 
@@ -22,10 +22,10 @@ struct ResPrePrimDL {
         struct {
             u8 cullMode[10];                                          // at 0x0
             u8 vtxDescv[21];                                          // at 0xA
-            u8 _1;                                                    // at 0x1F
+            u8 PADDING_0x1F;                                          // at 0x1F
             u8 vtxFmtv[GX_CP_CMD_SZ * 3];                             // at 0x20
             u8 array[GX_POS_MTX_ARRAY - GX_VA_POS][GX_CP_CMD_SZ * 2]; // at 0x32
-            u8 _[0xE0 - 0xC2];                                        // at 0xC2
+            u8 PADDING_0xC2[0xE0 - 0xC2];                             // at 0xC2
         } dl;
 
         u8 data[0xE0]; // at 0x0

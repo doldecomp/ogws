@@ -1,5 +1,5 @@
-#ifndef NW4R_G3D_RESPLTT_H
-#define NW4R_G3D_RESPLTT_H
+#ifndef NW4R_G3D_RES_RES_PLTT_H
+#define NW4R_G3D_RES_RES_PLTT_H
 #include <nw4r/types_nw4r.h>
 
 #include <nw4r/g3d/res/g3d_rescommon.h>
@@ -17,7 +17,7 @@ struct ResPlttData {
     s32 name;                  // at 0x14
     GXTlutFmt fmt;             // at 0x18
     u16 numEntries;            // at 0x1C
-    u16 dummy_;                // at 0x1E
+    u16 PADDING_0x1E;          // at 0x1E
     s32 original_path;         // at 0x20
     s32 toResUserData;         // at 0x24
 };

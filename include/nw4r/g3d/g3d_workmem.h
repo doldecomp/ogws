@@ -1,5 +1,5 @@
-#ifndef NW4R_G3D_WORKMEM_H
-#define NW4R_G3D_WORKMEM_H
+#ifndef NW4R_G3D_WORK_MEM_H
+#define NW4R_G3D_WORK_MEM_H
 #include <nw4r/types_nw4r.h>
 
 #include <nw4r/g3d/res/g3d_resanmshp.h>
@@ -11,6 +11,11 @@ namespace g3d {
 namespace detail {
 namespace workmem {
 
+/******************************************************************************
+ *
+ * MdlZ
+ *
+ ******************************************************************************/
 struct MdlZ {
     f32 Z;        // at 0x0
     u16 priority; // at 0x4
@@ -19,12 +24,22 @@ struct MdlZ {
     u16 shpID;    // at 0xA
 };
 
+/******************************************************************************
+ *
+ * ShpAnmResultBuf
+ *
+ ******************************************************************************/
 struct ShpAnmResultBuf {
     ShpAnmResult resultBuf;      // at 0x0
     const ShpAnmResult* pResult; // at 0x218
     f32 weight;                  // at 0x21C
 };
 
+/******************************************************************************
+ *
+ * Work memory size constants
+ *
+ ******************************************************************************/
 static const int WORKMEM_SIZE = 0x18000;
 
 static const int WORKMEM_NUMTMPSCALE = 2048;
@@ -36,6 +51,11 @@ static const int WORKMEM_NUMBBMTX = 2048;
 static const int WORKMEM_NUMSHPANMRESULT =
     WORKMEM_SIZE / sizeof(ShpAnmResultBuf);
 
+/******************************************************************************
+ *
+ * Work memory accessor functions
+ *
+ ******************************************************************************/
 math::VEC3* GetScaleTemporary();
 u32* GetMtxIDTemporary();
 MdlZ* GetMdlZTemporary();

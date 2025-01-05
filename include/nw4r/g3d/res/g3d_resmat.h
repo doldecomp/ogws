@@ -1,5 +1,5 @@
-#ifndef NW4R_G3D_RESMAT_H
-#define NW4R_G3D_RESMAT_H
+#ifndef NW4R_G3D_RES_RES_MAT_H
+#define NW4R_G3D_RES_RES_MAT_H
 #include <nw4r/types_nw4r.h>
 
 #include <nw4r/g3d/res/g3d_resanmtexsrt.h>
@@ -87,7 +87,7 @@ struct ResMatMiscData {
     GXBool zCompLoc;                       // at 0x0
     s8 light_set_idx;                      // at 0x1
     s8 fog_idx;                            // at 0x2
-    u8 _;                                  // at 0x3
+    u8 PADDING_0x3;                        // at 0x3
     u8 indirect_method[GX_ITM_2 + 1];      // at 0x4
     s8 normal_map_ref_light[GX_ITM_2 + 1]; // at 0x8
 };
@@ -118,7 +118,7 @@ struct ResTexCoordGenDL {
     union {
         struct {
             u8 texCoordGen[GX_MAX_TEXCOORD][GX_XF_CMD_SZ * 2]; // at 0x0
-            u8 _[0xA0 - 0x90];                                 // at 0x90
+            u8 PADDING_0x90[0xA0 - 0x90];                      // at 0x90
         } dl;
 
         u8 data[0xA0];
@@ -331,7 +331,7 @@ struct ResPixDL {
             u8 zMode[GX_BP_CMD_SZ];         // at 0x5
             u8 blendMode[GX_BP_CMD_SZ * 2]; // at 0xA
             u8 setDstAlpha[GX_BP_CMD_SZ];   // at 0x14
-            u8 _[32 - 0x19];                // at 0x19
+            u8 PADDING_0x19[32 - 0x19];     // at 0x19
         } dl;
 
         u8 data[32]; // at 0x0
@@ -377,9 +377,9 @@ struct ResTevColorDL {
     union {
         struct {
             u8 tevColor[GX_MAX_TEVREG - GX_TEVREG0][GX_BP_CMD_SZ * 4]; // at 0x0
-            u8 _0[64 - 0x3C];                              // at 0x3C
+            u8 PADDING_0x3C[64 - 0x3C];                    // at 0x3C
             u8 tevKColor[GX_MAX_KCOLOR][GX_BP_CMD_SZ * 2]; // at 0x40
-            u8 _1[128 - 0x68];                             // at 0x68
+            u8 PADDING_0x68[128 - 0x68];                   // at 0x68
         } dl;
 
         u8 data[128];
@@ -419,10 +419,10 @@ struct ResIndMtxAndScaleDL {
         struct {
             u8 indTexCoordScale[2][GX_BP_CMD_SZ]; // at 0x0
             u8 indTexMtx0[GX_BP_CMD_SZ * 3];      // at 0xA
-            u8 _0[32 - 0x19];                     // at 0x19
+            u8 PADDING_0x19[32 - 0x19];           // at 0x19
             u8 indTexMtx1[GX_BP_CMD_SZ * 3];      // at 0x20
             u8 indTexMtx2[GX_BP_CMD_SZ * 3];      // at 0x2F
-            u8 _1[64 - 0x3E];                     // at 0x3E
+            u8 PADDING_0x3E[64 - 0x3E];           // at 0x3E
         } dl;
 
         u8 data[64]; // at 0x0
@@ -466,8 +466,8 @@ struct ResTexPlttInfoData {
     GXAnisotropy max_aniso; // at 0x2C
     bool bias_clamp;        // at 0x30
     bool do_edge_lod;       // at 0x31
-    u8 _0;                  // at 0x32
-    u8 _1;                  // at 0x33
+    u8 PADDING_0x32;        // at 0x32
+    u8 PADDING_0x33;        // at 0x33
 };
 
 class ResTexPlttInfo : public ResCommon<ResTexPlttInfoData> {

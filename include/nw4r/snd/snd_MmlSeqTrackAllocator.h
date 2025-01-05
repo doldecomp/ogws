@@ -16,7 +16,7 @@ class SeqTrack;
 
 class MmlSeqTrackAllocator : public SeqTrackAllocator {
 public:
-    MmlSeqTrackAllocator(MmlParser* pParser) : mParser(pParser) {}
+    explicit MmlSeqTrackAllocator(MmlParser* pParser) : mParser(pParser) {}
 
     virtual SeqTrack* AllocTrack(SeqPlayer* pPlayer); // at 0xC
     virtual void FreeTrack(SeqTrack* pTrack);         // at 0x10

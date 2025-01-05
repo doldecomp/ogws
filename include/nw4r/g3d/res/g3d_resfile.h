@@ -1,5 +1,5 @@
-#ifndef NW4R_G3D_RESFILE_H
-#define NW4R_G3D_RESFILE_H
+#ifndef NW4R_G3D_RES_RES_FILE_H
+#define NW4R_G3D_RES_RES_FILE_H
 #include <nw4r/types_nw4r.h>
 
 #include <nw4r/g3d/res/g3d_resanmchr.h>

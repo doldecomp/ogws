@@ -1,5 +1,5 @@
-#ifndef NW4R_G3D_RESANMLIGHT_H
-#define NW4R_G3D_RESANMLIGHT_H
+#ifndef NW4R_G3D_RES_RES_ANM_LIGHT_H
+#define NW4R_G3D_RES_RES_ANM_LIGHT_H
 #include <nw4r/types_nw4r.h>
 
 #include <nw4r/g3d/res/g3d_resanm.h>

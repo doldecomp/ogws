@@ -45,7 +45,7 @@ public:
 
     public:
         template <u32 N>
-        TypeObj(const ResNameDataT<N>& rName)
+        explicit TypeObj(const ResNameDataT<N>& rName)
             : mName(reinterpret_cast<const ResNameDataPT*>(&rName)) {}
 
         u32 GetTypeID() const {

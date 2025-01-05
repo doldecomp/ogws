@@ -1,8 +1,14 @@
-#ifndef NW4R_G3D_RES_COMMON_H
-#define NW4R_G3D_RES_COMMON_H
+#ifndef NW4R_G3D_RES_RES_COMMON_H
+#define NW4R_G3D_RES_RES_COMMON_H
 #include <nw4r/types_nw4r.h>
 
 #include <revolution/GX.h>
+
+/******************************************************************************
+ *
+ * Macros
+ *
+ ******************************************************************************/
 
 /**
  * Define ResName pascal string for file resource groups.
@@ -208,17 +214,17 @@ public:
 namespace ResByteCodeData {
 
 enum OpCode {
-    NOOP,    // No operation
-    END,     // End of bytecode
-    NODEMAP, //
-    WEIGHT,  // Apply weighting
-    DRAW,    // Draw polygon
-    EVPMTX,  // Envelope matrix
-    MTXDUP   // Duplicate matrix
+    NOOP,   // No operation
+    END,    // End of bytecode
+    CALC,   //
+    WEIGHT, // Apply weighting
+    DRAW,   // Draw polygon
+    EVPMTX, // Envelope matrix
+    MTXDUP  // Duplicate matrix
 };
 
-// NODEMAP opcode layout
-struct NodeMapParams {
+// CALC opcode layout
+struct CalcParams {
     u8 opcode;        // at 0x0
     u8 nodeIdHi;      // at 0x1
     u8 nodeIdLo;      // at 0x2

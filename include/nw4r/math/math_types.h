@@ -15,7 +15,8 @@ namespace math {
  * VEC2 structure
  *
  ******************************************************************************/
-// Optimization: Forces copy by lwz/stw
+// Provides a POD type that can be upcasted to the real structure.
+// (Has the added benefit of forcing struct copies to use lwz/stw.)
 struct _VEC2 {
     f32 x, y;
 };
@@ -70,7 +71,8 @@ VEC3* VEC3Add(VEC3* pOut, const VEC3* pA, const VEC3* pB);
 VEC3* VEC3Sub(VEC3* pOut, const VEC3* pA, const VEC3* pB);
 VEC3* VEC3Scale(VEC3* pOut, const VEC3* pIn, f32 scale);
 
-// Optimization: Forces copy by lwz/stw
+// Provides a POD type that can be upcasted to the real structure.
+// (Has the added benefit of forcing struct copies to use lwz/stw.)
 struct _VEC3 {
     f32 x, y, z;
 };
@@ -162,7 +164,8 @@ struct VEC3 : _VEC3 {
  * MTX33 structure
  *
  ******************************************************************************/
-// Optimization: Forces copy by lwz/stw
+// Provides a POD type that can be upcasted to the real structure.
+// (Has the added benefit of forcing struct copies to use lwz/stw.)
 struct _MTX33 {
     union {
         struct {
@@ -185,7 +188,8 @@ struct MTX33 : _MTX33 {
  * MTX34 structure
  *
  ******************************************************************************/
-// Optimization: Forces copy by lwz/stw
+// Provides a POD type that can be upcasted to the real structure.
+// (Has the added benefit of forcing struct copies to use lwz/stw.)
 struct _MTX34 {
     union {
         struct {
@@ -229,7 +233,8 @@ struct MTX34 : _MTX34 {
  * MTX44 structure
  *
  ******************************************************************************/
-// Optimization: Forces copy by lwz/stw
+// Provides a POD type that can be upcasted to the real structure.
+// (Has the added benefit of forcing struct copies to use lwz/stw.)
 struct _MTX44 {
     union {
         struct {
@@ -264,7 +269,8 @@ struct MTX44 : _MTX44 {
  * QUAT structure
  *
  ******************************************************************************/
-// Optimization: Forces copy by lwz/stw
+// Provides a POD type that can be upcasted to the real structure.
+// (Has the added benefit of forcing struct copies to use lwz/stw.)
 struct _QUAT {
     f32 x, y, z, w;
 };

@@ -1,5 +1,5 @@
-#ifndef NW4R_G3D_CALCWORLD_H
-#define NW4R_G3D_CALCWORLD_H
+#ifndef NW4R_G3D_CALC_WORLD_H
+#define NW4R_G3D_CALC_WORLD_H
 #include <nw4r/types_nw4r.h>
 
 #include <nw4r/g3d/g3d_scnobj.h>
@@ -103,7 +103,7 @@ public:
 private:
     ICalcWorldCallback* mpCallback; // at 0x0
     u8 mTiming;                     // at 0x4
-    u8 _;                           // at 0x5
+    u8 PADDING_0x5;                 // at 0x5
     u16 mNodeID;                    // at 0x6
 };
 

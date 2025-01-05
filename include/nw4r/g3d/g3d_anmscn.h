@@ -1,5 +1,5 @@
-#ifndef NW4R_G3D_ANMSCN_H
-#define NW4R_G3D_ANMSCN_H
+#ifndef NW4R_G3D_ANM_SCN_H
+#define NW4R_G3D_ANM_SCN_H
 #include <nw4r/types_nw4r.h>
 
 #include <nw4r/g3d/g3d_anmobj.h>
@@ -62,9 +62,6 @@ public:
                                              u32 refNumber) = 0; // at 0x8C
 
     void GetLightSetting(LightSetting* pSetting);
-
-private:
-    // static const int MAX_CHILD =
 
 private:
     NW4R_G3D_RTTI_DECL_DERIVED(AnmScn, G3dObj);

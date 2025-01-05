@@ -1,5 +1,5 @@
-#ifndef NW4R_G3D_SCNOBJ_H
-#define NW4R_G3D_SCNOBJ_H
+#ifndef NW4R_G3D_SCN_OBJ_H
+#define NW4R_G3D_SCN_OBJ_H
 #include <nw4r/types_nw4r.h>
 
 #include <nw4r/g3d/g3d_obj.h>
@@ -85,7 +85,7 @@ public:
     };
 
 public:
-    ScnObj(MEMAllocator* pAllocator);
+    explicit ScnObj(MEMAllocator* pAllocator);
 
     virtual void G3dProc(u32 task, u32 param, void* pInfo) = 0; // at 0xC
     virtual ~ScnObj();                                          // at 0x10
@@ -327,7 +327,7 @@ public:
 #undef OPT
 
 public:
-    ScnLeaf(MEMAllocator* pAllocator)
+    explicit ScnLeaf(MEMAllocator* pAllocator)
         : ScnObj(pAllocator), mScale(1.0f, 1.0f, 1.0f) {}
 
     virtual void G3dProc(u32 task, u32 param, void* pInfo) = 0; // at 0xC
