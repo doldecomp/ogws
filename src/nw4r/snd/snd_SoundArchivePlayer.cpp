@@ -91,8 +91,10 @@ u32 SoundArchivePlayer::GetRequiredMemSize(const SoundArchive* pArchive) {
         }
     }
 
+    // clang-format off
     size += ut::RoundUp(
-        pArchive->GetGroupCount() * sizeof(Group) + sizeof(GroupTable), 4);
+        pArchive->GetGroupCount() * sizeof(Group) + (sizeof(GroupTable) - sizeof(Group)), 4);
+    // clang-format on
 
     SoundArchive::SoundArchivePlayerInfo info;
     if (pArchive->ReadSoundArchivePlayerInfo(&info)) {
@@ -236,8 +238,10 @@ bool SoundArchivePlayer::SetupSoundPlayer(const SoundArchive* pArchive,
 
 bool SoundArchivePlayer::CreateGroupAddressTable(const SoundArchive* pArchive,
                                                  void** ppBuffer, void* pEnd) {
-    u32 requireSize =
-        pArchive->GetGroupCount() * sizeof(Group) + sizeof(GroupTable);
+    // clang-format off
+    u32 requireSize = 
+        pArchive->GetGroupCount() * sizeof(Group) + (sizeof(GroupTable) - sizeof(Group));
+    // clang-format on
 
     void* pTableEnd =
         ut::RoundUp(ut::AddOffsetToPtr(*ppBuffer, requireSize), 4);
