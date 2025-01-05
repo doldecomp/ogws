@@ -687,9 +687,9 @@ void GetAnmResult_T(ChrAnmResult* pResult, const ResAnmChrInfoData& rInfoData,
     math::MTX34Identity(&pResult->rt);
 
     GetAnmTranslation(&t, pNodeData, pAnmData, frame);
-    pResult->rt[0][3] = t.x;
-    pResult->rt[1][3] = t.y;
-    pResult->rt[2][3] = t.z;
+    pResult->rt._03 = t.x;
+    pResult->rt._13 = t.y;
+    pResult->rt._23 = t.z;
 }
 
 void GetAnmResult_R(ChrAnmResult* pResult, const ResAnmChrInfoData& rInfoData,
@@ -706,9 +706,9 @@ void GetAnmResult_R(ChrAnmResult* pResult, const ResAnmChrInfoData& rInfoData,
 
     pResult->flags |= ChrAnmResult::FLAG_R_RAW_FMT;
 
-    pResult->rt[0][3] = 0.0f;
-    pResult->rt[1][3] = 0.0f;
-    pResult->rt[2][3] = 0.0f;
+    pResult->rt._03 = 0.0f;
+    pResult->rt._13 = 0.0f;
+    pResult->rt._23 = 0.0f;
 }
 
 void GetAnmResult_S(ChrAnmResult* pResult, const ResAnmChrInfoData& rInfoData,
@@ -737,9 +737,9 @@ void GetAnmResult_RT(ChrAnmResult* pResult, const ResAnmChrInfoData& rInfoData,
     pResult->flags |= ChrAnmResult::FLAG_R_RAW_FMT;
 
     GetAnmTranslation(&t, pNodeData, pAnmData, frame);
-    pResult->rt[0][3] = t.x;
-    pResult->rt[1][3] = t.y;
-    pResult->rt[2][3] = t.z;
+    pResult->rt._03 = t.x;
+    pResult->rt._13 = t.y;
+    pResult->rt._23 = t.z;
 }
 
 void GetAnmResult_SR(ChrAnmResult* pResult, const ResAnmChrInfoData& rInfoData,
@@ -754,9 +754,9 @@ void GetAnmResult_SR(ChrAnmResult* pResult, const ResAnmChrInfoData& rInfoData,
 
     pResult->flags |= ChrAnmResult::FLAG_R_RAW_FMT;
 
-    pResult->rt[0][3] = 0.0f;
-    pResult->rt[1][3] = 0.0f;
-    pResult->rt[2][3] = 0.0f;
+    pResult->rt._03 = 0.0f;
+    pResult->rt._13 = 0.0f;
+    pResult->rt._23 = 0.0f;
 }
 
 void GetAnmResult_ST(ChrAnmResult* pResult, const ResAnmChrInfoData& rInfoData,
@@ -770,9 +770,9 @@ void GetAnmResult_ST(ChrAnmResult* pResult, const ResAnmChrInfoData& rInfoData,
     math::MTX34Identity(&pResult->rt);
 
     GetAnmTranslation(&t, pNodeData, pAnmData, frame);
-    pResult->rt[0][3] = t.x;
-    pResult->rt[1][3] = t.y;
-    pResult->rt[2][3] = t.z;
+    pResult->rt._03 = t.x;
+    pResult->rt._13 = t.y;
+    pResult->rt._23 = t.z;
 }
 
 void GetAnmResult_SRT(ChrAnmResult* pResult, const ResAnmChrInfoData& rInfoData,
@@ -788,9 +788,9 @@ void GetAnmResult_SRT(ChrAnmResult* pResult, const ResAnmChrInfoData& rInfoData,
 
     pResult->flags |= ChrAnmResult::FLAG_R_RAW_FMT;
 
-    pResult->rt[0][3] = t.x;
-    pResult->rt[1][3] = t.y;
-    pResult->rt[2][3] = t.z;
+    pResult->rt._03 = t.x;
+    pResult->rt._13 = t.y;
+    pResult->rt._23 = t.z;
 }
 
 } // namespace
@@ -843,16 +843,16 @@ bool ChrAnmResult::GetRotateDeg(math::VEC3* pRotate) const {
     }
 
     // FSqrt returns 0 when -sin(y) <= -1 or -sin(y) >= 1
-    f32 y = math::FSqrt(-(rt[2][0] * rt[2][0] - 1.0f));
+    f32 y = math::FSqrt(-(rt._20 * rt._20 - 1.0f));
 
     if (y == 0.0f) {
-        pRotate->x = math::Atan2Deg(rt[0][2] + rt[1][1], rt[1][2] + rt[0][1]);
-        pRotate->y = math::FSelect(rt[2][0], -90, 90);
-        pRotate->z = math::Atan2Deg(rt[0][2] + rt[1][1], rt[1][2] - rt[0][1]);
+        pRotate->x = math::Atan2Deg(rt._02 + rt._11, rt._12 + rt._01);
+        pRotate->y = math::FSelect(rt._20, -90, 90);
+        pRotate->z = math::Atan2Deg(rt._02 + rt._11, rt._12 - rt._01);
     } else {
-        pRotate->x = math::Atan2Deg(rt[2][1], rt[2][2]);
-        pRotate->y = math::Atan2Deg(-rt[2][0], y);
-        pRotate->z = math::Atan2Deg(rt[1][0], rt[0][0]);
+        pRotate->x = math::Atan2Deg(rt._21, rt._22);
+        pRotate->y = math::Atan2Deg(-rt._20, y);
+        pRotate->z = math::Atan2Deg(rt._10, rt._00);
     }
 
     return false;
@@ -864,9 +864,9 @@ void ChrAnmResult::GetTranslate(math::VEC3* pTrans) const {
         pTrans->y = 0.0f;
         pTrans->z = 0.0f;
     } else {
-        pTrans->x = rt[0][3];
-        pTrans->y = rt[1][3];
-        pTrans->z = rt[2][3];
+        pTrans->x = rt._03;
+        pTrans->y = rt._13;
+        pTrans->z = rt._23;
     }
 }
 
@@ -876,15 +876,15 @@ void ChrAnmResult::GetRotTrans(math::MTX34* pRotTrans) const {
             math::MTX34Identity(pRotTrans);
         } else {
             math::MTX34Identity(pRotTrans);
-            pRotTrans->m[0][3] = rt[0][3];
-            pRotTrans->m[1][3] = rt[1][3];
-            pRotTrans->m[2][3] = rt[2][3];
+            pRotTrans->_03 = rt._03;
+            pRotTrans->_13 = rt._13;
+            pRotTrans->_23 = rt._23;
         }
     } else if (flags & FLAG_T_ZERO) {
         math::MTX34Copy(pRotTrans, &rt);
-        pRotTrans->m[0][3] = 0.0f;
-        pRotTrans->m[1][3] = 0.0f;
-        pRotTrans->m[2][3] = 0.0f;
+        pRotTrans->_03 = 0.0f;
+        pRotTrans->_13 = 0.0f;
+        pRotTrans->_23 = 0.0f;
     } else {
         math::MTX34Copy(pRotTrans, &rt);
     }
@@ -909,14 +909,14 @@ void ChrAnmResult::SetScale(const math::VEC3* pScale) {
 }
 
 void ChrAnmResult::SetRotTrans(const math::MTX34* pRotTrans) {
-    bool rotZero = pRotTrans->m[0][0] == 1.0f && pRotTrans->m[0][1] == 0.0f &&
-                   pRotTrans->m[0][2] == 0.0f && pRotTrans->m[1][0] == 0.0f &&
-                   pRotTrans->m[1][1] == 1.0f && pRotTrans->m[1][2] == 0.0f &&
-                   pRotTrans->m[2][0] == 0.0f && pRotTrans->m[2][1] == 0.0f &&
-                   pRotTrans->m[2][2] == 1.0f;
+    bool rotZero = pRotTrans->_00 == 1.0f && pRotTrans->_01 == 0.0f &&
+                   pRotTrans->_02 == 0.0f && pRotTrans->_10 == 0.0f &&
+                   pRotTrans->_11 == 1.0f && pRotTrans->_12 == 0.0f &&
+                   pRotTrans->_20 == 0.0f && pRotTrans->_21 == 0.0f &&
+                   pRotTrans->_22 == 1.0f;
 
-    bool transZero = pRotTrans->m[0][3] == 0.0f && pRotTrans->m[1][3] == 0.0f &&
-                     pRotTrans->m[2][3] == 0.0f;
+    bool transZero = pRotTrans->_03 == 0.0f && pRotTrans->_13 == 0.0f &&
+                     pRotTrans->_23 == 0.0f;
 
     if (rotZero) {
         if (transZero) {

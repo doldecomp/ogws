@@ -360,12 +360,12 @@ void Camera::GetEnvironmentTexMtx(math::MTX34* pMtx) const {
         const CameraData& r = ref();
 
         math::MTX34Identity(pMtx);
-        pMtx->m[0][0] = r.lightScaleS;
-        pMtx->m[0][3] = r.lightTransS;
-        pMtx->m[1][1] = -r.lightScaleT;
-        pMtx->m[1][3] = r.lightTransT;
-        pMtx->m[2][2] = 0.0f;
-        pMtx->m[2][3] = 1.0f;
+        pMtx->_00 = r.lightScaleS;
+        pMtx->_03 = r.lightTransS;
+        pMtx->_11 = -r.lightScaleT;
+        pMtx->_13 = r.lightTransT;
+        pMtx->_22 = 0.0f;
+        pMtx->_23 = 1.0f;
     }
 }
 
@@ -436,26 +436,26 @@ void Camera::UpdateCameraMtx() const {
                         rPos.z - rTarget.z);
 
         if (back.x == 0.0f && back.z == 0.0f) {
-            rMtx[0][0] = 1.0f;
-            rMtx[0][1] = 0.0f;
-            rMtx[0][2] = 0.0f;
-            rMtx[0][3] = -rPos.x;
+            rMtx._00 = 1.0f;
+            rMtx._01 = 0.0f;
+            rMtx._02 = 0.0f;
+            rMtx._03 = -rPos.x;
 
-            rMtx[1][0] = 0.0f;
-            rMtx[1][1] = 0.0f;
-            rMtx[2][0] = 0.0f;
-            rMtx[2][2] = 0.0f;
+            rMtx._10 = 0.0f;
+            rMtx._11 = 0.0f;
+            rMtx._20 = 0.0f;
+            rMtx._22 = 0.0f;
 
             if (back.y <= 0.0f) {
-                rMtx[1][2] = 1.0f;
-                rMtx[1][3] = -rPos.z;
-                rMtx[2][1] = -1.0f;
-                rMtx[2][3] = rPos.y;
+                rMtx._12 = 1.0f;
+                rMtx._13 = -rPos.z;
+                rMtx._21 = -1.0f;
+                rMtx._23 = rPos.y;
             } else {
-                rMtx[1][2] = -1.0f;
-                rMtx[1][3] = rPos.z;
-                rMtx[2][1] = 1.0f;
-                rMtx[2][3] = -rPos.y;
+                rMtx._12 = -1.0f;
+                rMtx._13 = rPos.z;
+                rMtx._21 = 1.0f;
+                rMtx._23 = -rPos.y;
             }
         } else {
             math::VEC3 _r(back.z, 0.0f, -back.x);
@@ -477,20 +477,20 @@ void Camera::UpdateCameraMtx() const {
             up.y = ct * u.y;
             up.z = ct * u.z - st * _r.z;
 
-            rMtx[0][0] = right.x;
-            rMtx[0][1] = right.y;
-            rMtx[0][2] = right.z;
-            rMtx[0][3] = -math::VEC3Dot(&rPos, &right);
+            rMtx._00 = right.x;
+            rMtx._01 = right.y;
+            rMtx._02 = right.z;
+            rMtx._03 = -math::VEC3Dot(&rPos, &right);
 
-            rMtx[1][0] = up.x;
-            rMtx[1][1] = up.y;
-            rMtx[1][2] = up.z;
-            rMtx[1][3] = -math::VEC3Dot(&rPos, &up);
+            rMtx._10 = up.x;
+            rMtx._11 = up.y;
+            rMtx._12 = up.z;
+            rMtx._13 = -math::VEC3Dot(&rPos, &up);
 
-            rMtx[2][0] = back.x;
-            rMtx[2][1] = back.y;
-            rMtx[2][2] = back.z;
-            rMtx[2][3] = -math::VEC3Dot(&rPos, &back);
+            rMtx._20 = back.x;
+            rMtx._21 = back.y;
+            rMtx._22 = back.z;
+            rMtx._23 = -math::VEC3Dot(&rPos, &back);
         }
     } else /* FLAG_CAM_ROTATE */ {
         math::MTX34& rMtx = r.cameraMtx;
@@ -515,20 +515,20 @@ void Camera::UpdateCameraMtx() const {
         back.y = -sx;
         back.z = cx * cy;
 
-        rMtx[0][0] = right.x;
-        rMtx[0][1] = right.y;
-        rMtx[0][2] = right.z;
-        rMtx[0][3] = -math::VEC3Dot(&rPos, &right);
+        rMtx._00 = right.x;
+        rMtx._01 = right.y;
+        rMtx._02 = right.z;
+        rMtx._03 = -math::VEC3Dot(&rPos, &right);
 
-        rMtx[1][0] = up.x;
-        rMtx[1][1] = up.y;
-        rMtx[1][2] = up.z;
-        rMtx[1][3] = -math::VEC3Dot(&rPos, &up);
+        rMtx._10 = up.x;
+        rMtx._11 = up.y;
+        rMtx._12 = up.z;
+        rMtx._13 = -math::VEC3Dot(&rPos, &up);
 
-        rMtx[2][0] = back.x;
-        rMtx[2][1] = back.y;
-        rMtx[2][2] = back.z;
-        rMtx[2][3] = -math::VEC3Dot(&rPos, &back);
+        rMtx._20 = back.x;
+        rMtx._21 = back.y;
+        rMtx._22 = back.z;
+        rMtx._23 = -math::VEC3Dot(&rPos, &back);
     }
 
     r.flags |= CameraData::FLAG_CAM_MTX_READY;

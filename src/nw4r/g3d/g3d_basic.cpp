@@ -30,8 +30,7 @@ u32 CalcWorldMtx_Basic(math::MTX34* pW, math::VEC3* pS, const math::MTX34* pW1,
         }
     } else if (flag & ChrAnmResult::FLAG_R_ZERO) {
         if (detail::WorldMtxAttr::IsScaleOne(attr)) {
-            math::VEC3 trans(pResult->rt.m[0][3], pResult->rt.m[1][3],
-                             pResult->rt.m[2][3]);
+            math::VEC3 trans(pResult->rt._03, pResult->rt._13, pResult->rt._23);
 
             math::MTX34Trans(pW, pW1, &trans);
         } else {

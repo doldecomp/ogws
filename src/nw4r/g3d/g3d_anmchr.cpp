@@ -488,22 +488,22 @@ const ChrAnmResult* AnmObjChrBlend::GetResult(ChrAnmResult* pResult, u32 i) {
             f32 t = weight * invAddedWeight;
             math::C_QUATSlerp(&rot, &rot, &q, t);
         } else if (!(flags & ChrAnmResult::FLAG_R_ZERO)) {
-            pResult->rt.m[0][0] += pMyResult->rt.m[0][0] * ratio;
-            pResult->rt.m[0][1] += pMyResult->rt.m[0][1] * ratio;
-            pResult->rt.m[0][2] += pMyResult->rt.m[0][2] * ratio;
+            pResult->rt._00 += pMyResult->rt._00 * ratio;
+            pResult->rt._01 += pMyResult->rt._01 * ratio;
+            pResult->rt._02 += pMyResult->rt._02 * ratio;
 
-            pResult->rt.m[1][0] += pMyResult->rt.m[1][0] * ratio;
-            pResult->rt.m[1][1] += pMyResult->rt.m[1][1] * ratio;
-            pResult->rt.m[1][2] += pMyResult->rt.m[1][2] * ratio;
+            pResult->rt._10 += pMyResult->rt._10 * ratio;
+            pResult->rt._11 += pMyResult->rt._11 * ratio;
+            pResult->rt._12 += pMyResult->rt._12 * ratio;
         } else {
-            pResult->rt.m[0][0] += ratio;
-            pResult->rt.m[1][1] += ratio;
+            pResult->rt._00 += ratio;
+            pResult->rt._11 += ratio;
         }
 
         if (!(flags & ChrAnmResult::FLAG_T_ZERO)) {
-            pResult->rt.m[0][3] += pMyResult->rt.m[0][3] * ratio;
-            pResult->rt.m[1][3] += pMyResult->rt.m[1][3] * ratio;
-            pResult->rt.m[2][3] += pMyResult->rt.m[2][3] * ratio;
+            pResult->rt._03 += pMyResult->rt._03 * ratio;
+            pResult->rt._13 += pMyResult->rt._13 * ratio;
+            pResult->rt._23 += pMyResult->rt._23 * ratio;
         }
 
         pResult->flags &= flags;
@@ -517,19 +517,19 @@ const ChrAnmResult* AnmObjChrBlend::GetResult(ChrAnmResult* pResult, u32 i) {
 
     if (useQuat) {
         Vec t;
-        t.x = pResult->rt.m[0][3];
-        t.y = pResult->rt.m[1][3];
-        t.z = pResult->rt.m[2][3];
+        t.x = pResult->rt._03;
+        t.y = pResult->rt._13;
+        t.z = pResult->rt._23;
 
         math::QUATToMTX34(&pResult->rt, &rot);
 
-        pResult->rt.m[0][3] = t.x;
-        pResult->rt.m[1][3] = t.y;
-        pResult->rt.m[2][3] = t.z;
+        pResult->rt._03 = t.x;
+        pResult->rt._13 = t.y;
+        pResult->rt._23 = t.z;
     } else {
-        math::VEC3* pV0 = reinterpret_cast<math::VEC3*>(&pResult->rt.m[0][0]);
-        math::VEC3* pV1 = reinterpret_cast<math::VEC3*>(&pResult->rt.m[1][0]);
-        math::VEC3* pV2 = reinterpret_cast<math::VEC3*>(&pResult->rt.m[2][0]);
+        math::VEC3* pV0 = reinterpret_cast<math::VEC3*>(&pResult->rt._00);
+        math::VEC3* pV1 = reinterpret_cast<math::VEC3*>(&pResult->rt._10);
+        math::VEC3* pV2 = reinterpret_cast<math::VEC3*>(&pResult->rt._20);
         math::VEC3Cross(pV2, pV0, pV1);
 
         math::VEC3Normalize(pV0, pV0);

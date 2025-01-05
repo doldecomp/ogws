@@ -343,14 +343,12 @@ u32 CalcWorldMtx_Xsi(math::MTX34* pW, math::VEC3* pS, const math::MTX34* pW1,
     } else if (flag & ChrAnmResult::FLAG_R_ZERO) {
 
         if (detail::WorldMtxAttr::IsAllScaleOne(attr)) {
-            math::VEC3 trans(pResult->rt[0][3], pResult->rt[1][3],
-                             pResult->rt[2][3]);
+            math::VEC3 trans(pResult->rt._03, pResult->rt._13, pResult->rt._23);
 
             math::MTX34Trans(pW, pW1, &trans);
         } else {
-            math::VEC3 trans(pS1->x * pResult->rt[0][3],
-                             pS1->y * pResult->rt[1][3],
-                             pS1->z * pResult->rt[2][3]);
+            math::VEC3 trans(pS1->x * pResult->rt._03, pS1->y * pResult->rt._13,
+                             pS1->z * pResult->rt._23);
 
             math::MTX34Trans(pW, pW1, &trans);
         }

@@ -886,20 +886,20 @@ bool ResMatIndMtxAndScale::GXGetIndTexMtx(GXIndTexMtxID id,
 
     if (pMtx != NULL) {
         // clang-format off
-        pMtx->m[0][0] = scale * static_cast<f32>(static_cast<int>((regA >> GX_BP_INDMTXA_M00_SHIFT & GX_BP_INDMTXA_M00_LMASK) << (32 - GX_BP_INDMTXA_M00_SZ)) >> (32 - GX_BP_INDMTXA_M00_SZ)) * (1.0f / 1024.0f);
-        pMtx->m[0][1] = scale * static_cast<f32>(static_cast<int>((regB >> GX_BP_INDMTXB_M01_SHIFT & GX_BP_INDMTXB_M01_LMASK) << (32 - GX_BP_INDMTXB_M01_SZ)) >> (32 - GX_BP_INDMTXB_M01_SZ)) * (1.0f / 1024.0f);
-        pMtx->m[0][2] = scale * static_cast<f32>(static_cast<int>((regC >> GX_BP_INDMTXC_M02_SHIFT & GX_BP_INDMTXC_M02_LMASK) << (32 - GX_BP_INDMTXC_M02_SZ)) >> (32 - GX_BP_INDMTXC_M02_SZ)) * (1.0f / 1024.0f);
-        pMtx->m[0][3] = 0.0f;
+        pMtx->_00 = scale * static_cast<f32>(static_cast<int>((regA >> GX_BP_INDMTXA_M00_SHIFT & GX_BP_INDMTXA_M00_LMASK) << (32 - GX_BP_INDMTXA_M00_SZ)) >> (32 - GX_BP_INDMTXA_M00_SZ)) * (1.0f / 1024.0f);
+        pMtx->_01 = scale * static_cast<f32>(static_cast<int>((regB >> GX_BP_INDMTXB_M01_SHIFT & GX_BP_INDMTXB_M01_LMASK) << (32 - GX_BP_INDMTXB_M01_SZ)) >> (32 - GX_BP_INDMTXB_M01_SZ)) * (1.0f / 1024.0f);
+        pMtx->_02 = scale * static_cast<f32>(static_cast<int>((regC >> GX_BP_INDMTXC_M02_SHIFT & GX_BP_INDMTXC_M02_LMASK) << (32 - GX_BP_INDMTXC_M02_SZ)) >> (32 - GX_BP_INDMTXC_M02_SZ)) * (1.0f / 1024.0f);
+        pMtx->_03 = 0.0f;
 
-        pMtx->m[1][0] = scale * static_cast<f32>(static_cast<int>((regA >> GX_BP_INDMTXA_M10_SHIFT & GX_BP_INDMTXA_M10_LMASK) << (32 - GX_BP_INDMTXA_M10_SZ)) >> (32 - GX_BP_INDMTXA_M00_SZ)) * (1.0f / 1024.0f);
-        pMtx->m[1][1] = scale * static_cast<f32>(static_cast<int>((regB >> GX_BP_INDMTXB_M11_SHIFT & GX_BP_INDMTXB_M11_LMASK) << (32 - GX_BP_INDMTXB_M11_SZ)) >> (32 - GX_BP_INDMTXB_M11_SZ)) * (1.0f / 1024.0f);
-        pMtx->m[1][2] = scale * static_cast<f32>(static_cast<int>((regC >> GX_BP_INDMTXC_M12_SHIFT & GX_BP_INDMTXC_M12_LMASK) << (32 - GX_BP_INDMTXC_M12_SZ)) >> (32 - GX_BP_INDMTXC_M12_SZ)) * (1.0f / 1024.0f);
-        pMtx->m[1][3] = 0.0f;
+        pMtx->_10 = scale * static_cast<f32>(static_cast<int>((regA >> GX_BP_INDMTXA_M10_SHIFT & GX_BP_INDMTXA_M10_LMASK) << (32 - GX_BP_INDMTXA_M10_SZ)) >> (32 - GX_BP_INDMTXA_M00_SZ)) * (1.0f / 1024.0f);
+        pMtx->_11 = scale * static_cast<f32>(static_cast<int>((regB >> GX_BP_INDMTXB_M11_SHIFT & GX_BP_INDMTXB_M11_LMASK) << (32 - GX_BP_INDMTXB_M11_SZ)) >> (32 - GX_BP_INDMTXB_M11_SZ)) * (1.0f / 1024.0f);
+        pMtx->_12 = scale * static_cast<f32>(static_cast<int>((regC >> GX_BP_INDMTXC_M12_SHIFT & GX_BP_INDMTXC_M12_LMASK) << (32 - GX_BP_INDMTXC_M12_SZ)) >> (32 - GX_BP_INDMTXC_M12_SZ)) * (1.0f / 1024.0f);
+        pMtx->_13 = 0.0f;
 
-        pMtx->m[2][0] = 0.0f;
-        pMtx->m[2][1] = 0.0f;
-        pMtx->m[2][2] = 1.0f;
-        pMtx->m[2][3] = 0.0f;
+        pMtx->_20 = 0.0f;
+        pMtx->_21 = 0.0f;
+        pMtx->_22 = 1.0f;
+        pMtx->_23 = 0.0f;
         // clang-format on
     }
 
@@ -942,20 +942,20 @@ void ResMatIndMtxAndScale::GXSetIndTexMtx(GXIndTexMtxID id,
 
     // clang-format off
     detail::ResWriteBPCmd(&pCmd[GX_BP_CMD_SZ * 0],
-        static_cast<u32>((static_cast<int>(1024.0f * rMtx[0][0]) & GX_BP_INDMTXA_M00_LMASK) << GX_BP_INDMTXA_M00_SHIFT) |
-        static_cast<u32>((static_cast<int>(1024.0f * rMtx[1][0]) & GX_BP_INDMTXA_M10_LMASK) << GX_BP_INDMTXA_M10_SHIFT) |
+        static_cast<u32>((static_cast<int>(1024.0f * rMtx._00) & GX_BP_INDMTXA_M00_LMASK) << GX_BP_INDMTXA_M00_SHIFT) |
+        static_cast<u32>((static_cast<int>(1024.0f * rMtx._10) & GX_BP_INDMTXA_M10_LMASK) << GX_BP_INDMTXA_M10_SHIFT) |
         static_cast<u32>((scaleExp >> 0 & GX_BP_INDMTXA_EXP_LMASK) << GX_BP_INDMTXA_EXP_SHIFT) |
         static_cast<u32>(offset + GX_BP_REG_INDMTX0A << GX_BP_OPCODE_SHIFT));
 
     detail::ResWriteBPCmd(&pCmd[GX_BP_CMD_SZ * 1],
-        static_cast<u32>((static_cast<int>(1024.0f * rMtx[0][1]) & GX_BP_INDMTXB_M01_LMASK) << GX_BP_INDMTXB_M01_SHIFT) |
-        static_cast<u32>((static_cast<int>(1024.0f * rMtx[1][1]) & GX_BP_INDMTXB_M11_LMASK) << GX_BP_INDMTXB_M11_SHIFT) |
+        static_cast<u32>((static_cast<int>(1024.0f * rMtx._01) & GX_BP_INDMTXB_M01_LMASK) << GX_BP_INDMTXB_M01_SHIFT) |
+        static_cast<u32>((static_cast<int>(1024.0f * rMtx._11) & GX_BP_INDMTXB_M11_LMASK) << GX_BP_INDMTXB_M11_SHIFT) |
         static_cast<u32>((scaleExp >> 2 & GX_BP_INDMTXB_EXP_LMASK) << GX_BP_INDMTXB_EXP_SHIFT) |
         static_cast<u32>((offset + GX_BP_REG_INDMTX0B << GX_BP_OPCODE_SHIFT)));
 
     detail::ResWriteBPCmd(&pCmd[GX_BP_CMD_SZ * 2],
-        static_cast<u32>((static_cast<int>(1024.0f * rMtx[0][2]) & GX_BP_INDMTXC_M02_LMASK) << GX_BP_INDMTXC_M02_SHIFT) |
-        static_cast<u32>((static_cast<int>(1024.0f * rMtx[1][2]) & GX_BP_INDMTXC_M12_LMASK) << GX_BP_INDMTXC_M12_SHIFT) |
+        static_cast<u32>((static_cast<int>(1024.0f * rMtx._02) & GX_BP_INDMTXC_M02_LMASK) << GX_BP_INDMTXC_M02_SHIFT) |
+        static_cast<u32>((static_cast<int>(1024.0f * rMtx._12) & GX_BP_INDMTXC_M12_LMASK) << GX_BP_INDMTXC_M12_SHIFT) |
         static_cast<u32>((scaleExp >> 4 & GX_BP_INDMTXC_EXP_LMASK) << GX_BP_INDMTXC_EXP_SHIFT) |
         static_cast<u32>(offset + GX_BP_REG_INDMTX0C << GX_BP_OPCODE_SHIFT));
     // clang-format on

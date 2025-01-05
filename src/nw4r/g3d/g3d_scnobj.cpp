@@ -228,11 +228,11 @@ bool ScnObj::GetMtx(ScnObjMtxType type, math::MTX34* pMtx) const {
 }
 
 f32 ScnObj::GetValueForSortOpa() const {
-    return -mMtxArray[MTX_VIEW].m[2][3];
+    return -mMtxArray[MTX_VIEW]._23;
 }
 
 f32 ScnObj::GetValueForSortXlu() const {
-    return mMtxArray[MTX_VIEW].m[2][3];
+    return mMtxArray[MTX_VIEW]._23;
 }
 
 void ScnObj::SetPriorityDrawOpa(int prio) {

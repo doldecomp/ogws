@@ -72,12 +72,12 @@ void GDSetIndTexMtx(u32 id, const math::MTX34& rMtx) {
 
     s8 scaleExp = 0;
 
-    m00 = rMtx.m[0][0];
-    m01 = rMtx.m[0][1];
-    m02 = rMtx.m[0][2];
-    m10 = rMtx.m[1][0];
-    m11 = rMtx.m[1][1];
-    m12 = rMtx.m[1][2];
+    m00 = rMtx._00;
+    m01 = rMtx._01;
+    m02 = rMtx._02;
+    m10 = rMtx._10;
+    m11 = rMtx._11;
+    m12 = rMtx._12;
 
     a00 = math::FAbs(m00);
     a01 = math::FAbs(m01);
@@ -204,20 +204,20 @@ void GDLoadTexMtxImm3x3(const math::MTX33& rMtx, u32 id) {
     math::MTX34 mtx;
     const math::MTX33* pMtx = &rMtx;
 
-    mtx.m[0][0] = pMtx->m[0][0];
-    mtx.m[0][1] = pMtx->m[0][1];
-    mtx.m[0][2] = pMtx->m[0][2];
-    mtx.m[0][3] = 0.0f;
+    mtx._00 = pMtx->_00;
+    mtx._01 = pMtx->_01;
+    mtx._02 = pMtx->_02;
+    mtx._03 = 0.0f;
 
-    mtx.m[1][0] = pMtx->m[1][0];
-    mtx.m[1][1] = pMtx->m[1][1];
-    mtx.m[1][2] = pMtx->m[1][2];
-    mtx.m[1][3] = 0.0f;
+    mtx._10 = pMtx->_10;
+    mtx._11 = pMtx->_11;
+    mtx._12 = pMtx->_12;
+    mtx._13 = 0.0f;
 
-    mtx.m[2][0] = pMtx->m[2][0];
-    mtx.m[2][1] = pMtx->m[2][1];
-    mtx.m[2][2] = pMtx->m[2][2];
-    mtx.m[2][3] = 0.0f;
+    mtx._20 = pMtx->_20;
+    mtx._21 = pMtx->_21;
+    mtx._22 = pMtx->_22;
+    mtx._23 = 0.0f;
 
     GXLoadTexMtxImm(mtx, id, GX_MTX_3x4);
 }

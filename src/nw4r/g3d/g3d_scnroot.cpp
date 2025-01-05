@@ -394,8 +394,8 @@ inline bool LessZSortOpa(const ScnObj* pLhs, const ScnObj* pRhs) {
     int rhsPrio = pRhs->GetPriorityDrawOpa();
 
     if (lhsPrio == rhsPrio) {
-        return pLhs->GetMtxPtr(ScnObj::MTX_VIEW)->m[2][3] >
-               pRhs->GetMtxPtr(ScnObj::MTX_VIEW)->m[2][3];
+        return pLhs->GetMtxPtr(ScnObj::MTX_VIEW)->_23 >
+               pRhs->GetMtxPtr(ScnObj::MTX_VIEW)->_23;
     }
 
     return lhsPrio < rhsPrio;
@@ -406,8 +406,8 @@ inline bool LessZSortXlu(const ScnObj* pLhs, const ScnObj* pRhs) {
     int rhsPrio = pRhs->GetPriorityDrawXlu();
 
     if (lhsPrio == rhsPrio) {
-        return pLhs->GetMtxPtr(ScnObj::MTX_VIEW)->m[2][3] <
-               pRhs->GetMtxPtr(ScnObj::MTX_VIEW)->m[2][3];
+        return pLhs->GetMtxPtr(ScnObj::MTX_VIEW)->_23 <
+               pRhs->GetMtxPtr(ScnObj::MTX_VIEW)->_23;
     }
 
     return lhsPrio < rhsPrio;

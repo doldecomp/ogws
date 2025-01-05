@@ -42,9 +42,9 @@ void ResNode::PatchChrAnmResult(ChrAnmResult* pResult) const {
         } else {
             flags &= ~ChrAnmResult::FLAG_T_ZERO;
 
-            pResult->rt[0][3] = r.translate.x;
-            pResult->rt[1][3] = r.translate.y;
-            pResult->rt[2][3] = r.translate.z;
+            pResult->rt._03 = r.translate.x;
+            pResult->rt._13 = r.translate.y;
+            pResult->rt._23 = r.translate.z;
         }
     }
 
@@ -95,9 +95,9 @@ void ResNode::CalcChrAnmResult(ChrAnmResult* pResult) const {
     if (r.flags & FLAG_T_ZERO) {
         flags |= ChrAnmResult::FLAG_T_ZERO;
     } else {
-        pResult->rt[0][3] = r.translate.x;
-        pResult->rt[1][3] = r.translate.y;
-        pResult->rt[2][3] = r.translate.z;
+        pResult->rt._03 = r.translate.x;
+        pResult->rt._13 = r.translate.y;
+        pResult->rt._23 = r.translate.z;
     }
 
     if (flags & ChrAnmResult::FLAG_R_ZERO) {

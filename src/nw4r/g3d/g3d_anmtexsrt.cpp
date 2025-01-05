@@ -519,22 +519,22 @@ void ApplyTexSrtAnmResult(ResTexSrt srt, ResMatIndMtxAndScale ind,
         s8 scaleExp;
 
         f32 maxElem = 0.000000000000000001f;
-        maxElem = ut::Max(maxElem, math::FAbs(mtx.m[0][0]));
-        maxElem = ut::Max(maxElem, math::FAbs(mtx.m[0][1]));
-        maxElem = ut::Max(maxElem, math::FAbs(mtx.m[0][3]));
-        maxElem = ut::Max(maxElem, math::FAbs(mtx.m[1][0]));
-        maxElem = ut::Max(maxElem, math::FAbs(mtx.m[1][1]));
-        maxElem = ut::Max(maxElem, math::FAbs(mtx.m[1][3]));
+        maxElem = ut::Max(maxElem, math::FAbs(mtx._00));
+        maxElem = ut::Max(maxElem, math::FAbs(mtx._01));
+        maxElem = ut::Max(maxElem, math::FAbs(mtx._03));
+        maxElem = ut::Max(maxElem, math::FAbs(mtx._10));
+        maxElem = ut::Max(maxElem, math::FAbs(mtx._11));
+        maxElem = ut::Max(maxElem, math::FAbs(mtx._13));
 
         scaleExp = static_cast<s8>(math::FGetExpPart(maxElem) + 1);
         f32 invScale = std::ldexpf(1.0f, -scaleExp);
 
-        mtx.m[0][0] *= invScale;
-        mtx.m[0][1] *= invScale;
-        mtx.m[0][2] = mtx.m[0][3] * invScale;
-        mtx.m[1][0] *= invScale;
-        mtx.m[1][1] *= invScale;
-        mtx.m[1][2] = mtx.m[1][3] * invScale;
+        mtx._00 *= invScale;
+        mtx._01 *= invScale;
+        mtx._02 = mtx._03 * invScale;
+        mtx._10 *= invScale;
+        mtx._11 *= invScale;
+        mtx._12 = mtx._13 * invScale;
 
         GXIndTexMtxID id = static_cast<GXIndTexMtxID>(
             i - TexSrtAnmResult::NUM_OF_MAT_TEX_MTX + 1);
