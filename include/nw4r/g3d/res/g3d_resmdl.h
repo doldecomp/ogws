@@ -2,12 +2,12 @@
 #define NW4R_G3D_RESMDL_H
 #include <nw4r/types_nw4r.h>
 
-#include <nw4r/g3d/g3d_rescommon.h>
-#include <nw4r/g3d/g3d_resdict.h>
-#include <nw4r/g3d/g3d_resmat.h>
-#include <nw4r/g3d/g3d_resnode.h>
-#include <nw4r/g3d/g3d_resshp.h>
-#include <nw4r/g3d/g3d_resvtx.h>
+#include <nw4r/g3d/res/g3d_rescommon.h>
+#include <nw4r/g3d/res/g3d_resdict.h>
+#include <nw4r/g3d/res/g3d_resmat.h>
+#include <nw4r/g3d/res/g3d_resnode.h>
+#include <nw4r/g3d/res/g3d_resshp.h>
+#include <nw4r/g3d/res/g3d_resvtx.h>
 
 #include <nw4r/math.h>
 

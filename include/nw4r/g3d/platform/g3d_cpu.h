@@ -1,5 +1,5 @@
-#ifndef NW4R_G3D_CPU_H
-#define NW4R_G3D_CPU_H
+#ifndef NW4R_G3D_PLATFORM_CPU_H
+#define NW4R_G3D_PLATFORM_CPU_H
 #include <nw4r/types_nw4r.h>
 
 #include <revolution/OS.h>

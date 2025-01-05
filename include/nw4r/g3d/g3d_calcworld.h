@@ -2,8 +2,8 @@
 #define NW4R_G3D_CALCWORLD_H
 #include <nw4r/types_nw4r.h>
 
-#include <nw4r/g3d/g3d_resmdl.h>
 #include <nw4r/g3d/g3d_scnobj.h>
+#include <nw4r/g3d/res/g3d_resmdl.h>
 
 #include <nw4r/math.h>
 

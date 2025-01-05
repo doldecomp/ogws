@@ -4,7 +4,7 @@
 
 #include <nw4r/g3d/g3d_camera.h>
 #include <nw4r/g3d/g3d_fog.h>
-#include <nw4r/g3d/g3d_resmat.h>
+#include <nw4r/g3d/res/g3d_resmat.h>
 
 #include <nw4r/math.h>
 

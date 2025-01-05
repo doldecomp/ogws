@@ -2,17 +2,17 @@
 #define NW4R_G3D_RESFILE_H
 #include <nw4r/types_nw4r.h>
 
-#include <nw4r/g3d/g3d_resanmchr.h>
-#include <nw4r/g3d/g3d_resanmclr.h>
-#include <nw4r/g3d/g3d_resanmscn.h>
-#include <nw4r/g3d/g3d_resanmshp.h>
-#include <nw4r/g3d/g3d_resanmtexpat.h>
-#include <nw4r/g3d/g3d_resanmtexsrt.h>
-#include <nw4r/g3d/g3d_resanmvis.h>
-#include <nw4r/g3d/g3d_rescommon.h>
-#include <nw4r/g3d/g3d_resmdl.h>
-#include <nw4r/g3d/g3d_respltt.h>
-#include <nw4r/g3d/g3d_restex.h>
+#include <nw4r/g3d/res/g3d_resanmchr.h>
+#include <nw4r/g3d/res/g3d_resanmclr.h>
+#include <nw4r/g3d/res/g3d_resanmscn.h>
+#include <nw4r/g3d/res/g3d_resanmshp.h>
+#include <nw4r/g3d/res/g3d_resanmtexpat.h>
+#include <nw4r/g3d/res/g3d_resanmtexsrt.h>
+#include <nw4r/g3d/res/g3d_resanmvis.h>
+#include <nw4r/g3d/res/g3d_rescommon.h>
+#include <nw4r/g3d/res/g3d_resmdl.h>
+#include <nw4r/g3d/res/g3d_respltt.h>
+#include <nw4r/g3d/res/g3d_restex.h>
 
 #include <nw4r/ut.h>
 

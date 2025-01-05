@@ -3,27 +3,10 @@
 #include <nw4r/types_nw4r.h>
 
 #include <nw4r/g3d/g3d_rtti.h>
-
-#include <revolution/MEM.h>
+#include <nw4r/g3d/platform/g3d_allocator.h>
 
 namespace nw4r {
 namespace g3d {
-namespace detail {
-
-/******************************************************************************
- *
- * Memory
- *
- ******************************************************************************/
-inline void* AllocFromAllocator(MEMAllocator* pAllocator, u32 size) {
-    return MEMAllocFromAllocator(pAllocator, size);
-}
-inline void FreeToAllocator(MEMAllocator* pAllocator, void* pBlock) {
-    return MEMFreeToAllocator(pAllocator, pBlock);
-}
-
-} // namespace detail
-
 namespace {
 
 /******************************************************************************

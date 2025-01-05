@@ -3,7 +3,7 @@
 #include <nw4r/types_nw4r.h>
 
 #include <nw4r/g3d/g3d_anmobj.h>
-#include <nw4r/g3d/g3d_resanmchr.h>
+#include <nw4r/g3d/res/g3d_resanmchr.h>
 
 namespace nw4r {
 namespace g3d {

@@ -571,88 +571,88 @@ nw4r/snd/snd_WsdPlayer.cpp:
 nw4r/snd/snd_adpcm.cpp:
 	.text       start:0x800505C0 end:0x8005064C
 
-nw4r/g3d/g3d_rescommon.cpp:
+nw4r/g3d/res/g3d_rescommon.cpp:
 	.text       start:0x8005064C end:0x800507DC
 
-nw4r/g3d/g3d_resdict.cpp:
+nw4r/g3d/res/g3d_resdict.cpp:
 	.text       start:0x800507DC end:0x80050ADC
 
-nw4r/g3d/g3d_resfile.cpp:
+nw4r/g3d/res/g3d_resfile.cpp:
 	.text       start:0x80050ADC end:0x800527BC
 	.data       start:0x80396560 end:0x803966C0
 
-nw4r/g3d/g3d_resmdl.cpp:
+nw4r/g3d/res/g3d_resmdl.cpp:
 	.text       start:0x800527BC end:0x8005377C
 
-nw4r/g3d/g3d_resshp.cpp:
+nw4r/g3d/res/g3d_resshp.cpp:
 	.text       start:0x8005377C end:0x80054424
 
-nw4r/g3d/g3d_restev.cpp:
+nw4r/g3d/res/g3d_restev.cpp:
 	.text       start:0x80054424 end:0x800547B0
 	.rodata     start:0x80378048 end:0x803780A8
 
-nw4r/g3d/g3d_resmat.cpp:
+nw4r/g3d/res/g3d_resmat.cpp:
 	.text       start:0x800547B0 end:0x8005676C
 	.data       start:0x803966C0 end:0x80396720
 	.sdata2     start:0x804C01D8 end:0x804C0200
 
-nw4r/g3d/g3d_resvtx.cpp:
+nw4r/g3d/res/g3d_resvtx.cpp:
 	.text       start:0x8005676C end:0x80056A88
 
-nw4r/g3d/g3d_restex.cpp:
+nw4r/g3d/res/g3d_restex.cpp:
 	.text       start:0x80056A88 end:0x80056C24
 
-nw4r/g3d/g3d_resnode.cpp:
+nw4r/g3d/res/g3d_resnode.cpp:
 	.text       start:0x80056C24 end:0x80056EBC
 	.sdata2     start:0x804C0200 end:0x804C0208
 
-nw4r/g3d/g3d_resanm.cpp:
+nw4r/g3d/res/g3d_resanm.cpp:
 	.text       start:0x80056EBC end:0x800570E8
 	.sdata2     start:0x804C0208 end:0x804C0220
 
-nw4r/g3d/g3d_resanmvis.cpp:
+nw4r/g3d/res/g3d_resanmvis.cpp:
 	.text       start:0x800570E8 end:0x80057208
 	.sdata2     start:0x804C0220 end:0x804C0230
 
-nw4r/g3d/g3d_resanmclr.cpp:
+nw4r/g3d/res/g3d_resanmclr.cpp:
 	.text       start:0x80057208 end:0x80057374
 	.sdata2     start:0x804C0230 end:0x804C0240
 
-nw4r/g3d/g3d_resanmtexpat.cpp:
+nw4r/g3d/res/g3d_resanmtexpat.cpp:
 	.text       start:0x80057374 end:0x800578B0
 
-nw4r/g3d/g3d_resanmtexsrt.cpp:
+nw4r/g3d/res/g3d_resanmtexsrt.cpp:
 	.text       start:0x800578B0 end:0x80057CC4
 	.sdata2     start:0x804C0240 end:0x804C0248
 
-nw4r/g3d/g3d_resanmchr.cpp:
+nw4r/g3d/res/g3d_resanmchr.cpp:
 	.text       start:0x80057CC4 end:0x800599DC
 	.rodata     start:0x803780A8 end:0x803780C8
 	.sdata2     start:0x804C0248 end:0x804C0278
 
-nw4r/g3d/g3d_reslightset.cpp:
+nw4r/g3d/res/g3d_reslightset.cpp:
 	.text       start:0x800599DC end:0x80059B48
 
-nw4r/g3d/g3d_resanmamblight.cpp:
+nw4r/g3d/res/g3d_resanmamblight.cpp:
 	.text       start:0x80059B48 end:0x80059C18
 	.sdata2     start:0x804C0278 end:0x804C0288
 
-nw4r/g3d/g3d_resanmlight.cpp:
+nw4r/g3d/res/g3d_resanmlight.cpp:
 	.text       start:0x80059C18 end:0x8005A010
 	.sdata2     start:0x804C0288 end:0x804C0298
 
-nw4r/g3d/g3d_resanmfog.cpp:
+nw4r/g3d/res/g3d_resanmfog.cpp:
 	.text       start:0x8005A010 end:0x8005A170
 	.sdata2     start:0x804C0298 end:0x804C02A8
 
-nw4r/g3d/g3d_resanmcamera.cpp:
+nw4r/g3d/res/g3d_resanmcamera.cpp:
 	.text       start:0x8005A170 end:0x8005A488
 
-nw4r/g3d/g3d_resanmscn.cpp:
+nw4r/g3d/res/g3d_resanmscn.cpp:
 	.text       start:0x8005A488 end:0x8005AA98
 	.data       start:0x80396720 end:0x80396780
 
-nw4r/g3d/g3d_resanmshp.cpp:
+nw4r/g3d/res/g3d_resanmshp.cpp:
 	.text       start:0x8005AA98 end:0x8005AC00
 	.sdata2     start:0x804C02A8 end:0x804C02B0
 
@@ -707,17 +707,17 @@ nw4r/g3d/g3d_anmobj.cpp:
 	.sdata      start:0x804BD420 end:0x804BD428
 	.sdata2     start:0x804C0328 end:0x804C0330
 
-nw4r/g3d/g3d_gpu.cpp:
+nw4r/g3d/platform/g3d_gpu.cpp:
 	.text       start:0x800636BC end:0x80063BCC
 	.sdata2     start:0x804C0330 end:0x804C0348
 
-nw4r/g3d/g3d_tmem.cpp:
+nw4r/g3d/platform/g3d_tmem.cpp:
 	.text       start:0x80063BCC end:0x80063F24
 	.rodata     start:0x80378310 end:0x80378A90
 	.bss        start:0x803EBCC8 end:0x803EC120
 	.sbss       start:0x804BEB40 end:0x804BEB50
 
-nw4r/g3d/g3d_cpu.cpp:
+nw4r/g3d/platform/g3d_cpu.cpp:
 	.text       start:0x80063F24 end:0x800640C8
 	.sdata2     start:0x804C0348 end:0x804C0350
 
