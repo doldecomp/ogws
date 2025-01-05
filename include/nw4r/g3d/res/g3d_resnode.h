@@ -155,6 +155,8 @@ public:
     ResNode GetPrevSibling() const {
         return ofs_to_obj<ResNode>(ref().toPrevSibling);
     }
+
+    void EndEdit() {}
 };
 
 } // namespace g3d
