@@ -71,6 +71,10 @@ struct ResShpData {
         ID_FLAG_ENVELOPE = (1 << 31),
     };
 
+    enum Flag {
+        FLAG_INVISIBLE = (1 << 1),
+    };
+
     u32 size;                                         // at 0x0
     s32 toResMdlData;                                 // at 0x4
     s32 curMtxIdx;                                    // at 0x8
@@ -139,13 +143,8 @@ public:
     }
 
     bool IsVisible() const {
-        return !(ref().flag & FLAG_INVISIBLE);
+        return !(ref().flag & ResShpData::FLAG_INVISIBLE);
     }
-
-private:
-    enum Flag {
-        FLAG_INVISIBLE = (1 << 1),
-    };
 };
 
 } // namespace g3d

@@ -46,6 +46,16 @@ struct ResAnmTexPatAnmData {
 };
 
 struct ResAnmTexPatMatData {
+    enum Flag {
+        FLAG_ANM_EXISTS = (1 << 0),
+        FLAG_ANM_CONST = (1 << 1),
+        FLAG_ANM_TEX = (1 << 2),
+        FLAG_ANM_PLTT = (1 << 3),
+
+        // Four bits in 'flags' for each animation
+        NUM_OF_FLAGS = 4
+    };
+
     union AnmData {
         s32 toResAnmTexPatAnmData; // at 0x0
 
@@ -58,16 +68,6 @@ struct ResAnmTexPatMatData {
     s32 name;        // at 0x0
     u32 flags;       // at 0x4
     AnmData anms[1]; // at 0x8
-
-    // Four bits in 'flags' for each animation
-    enum Flag {
-        FLAG_ANM_EXISTS = (1 << 0),
-        FLAG_ANM_CONSTANT = (1 << 1),
-        FLAG_ANM_TEXTURE = (1 << 2),
-        FLAG_ANM_PALETTE = (1 << 3),
-
-        NUM_OF_FLAGS = 4
-    };
 };
 
 struct ResAnmTexPatInfoData {

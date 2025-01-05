@@ -26,7 +26,7 @@ void CalcVtx(ResMdl mdl, AnmObjShp* pAnmShp, ResVtxPosData** ppVtxPosTable,
             continue;
         }
 
-        if (pResult->flags & ShpAnmResult::FLAG_ANM_VTX_POS) {
+        if (pResult->flags & ShpAnmResult::FLAG_ANM_VTXPOS) {
             struct KeyShape {
                 const math::VEC3* pVtx; // at 0x0
                 f32 weight;             // at 0x4
@@ -119,7 +119,7 @@ void CalcVtx(ResMdl mdl, AnmObjShp* pAnmShp, ResVtxPosData** ppVtxPosTable,
             DC::StoreRange(vtxPos.GetData(), numVtx * sizeof(math::VEC3));
         }
 
-        if ((pResult->flags & ShpAnmResult::FLAG_ANM_VTX_NRM) &&
+        if ((pResult->flags & ShpAnmResult::FLAG_ANM_VTXNRM) &&
             ppVtxNrmTable != NULL) {
 
             struct KeyShape {
@@ -214,7 +214,7 @@ void CalcVtx(ResMdl mdl, AnmObjShp* pAnmShp, ResVtxPosData** ppVtxPosTable,
             DC::StoreRange(vtxNrm.GetData(), numVtx * sizeof(math::VEC3));
         }
 
-        if ((pResult->flags & ShpAnmResult::FLAG_ANM_VTX_CLR) &&
+        if ((pResult->flags & ShpAnmResult::FLAG_ANM_VTXCLR) &&
             ppVtxClrTable != NULL) {
 
             struct KeyShape {

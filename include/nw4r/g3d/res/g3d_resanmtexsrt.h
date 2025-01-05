@@ -11,7 +11,7 @@ namespace g3d {
 
 /******************************************************************************
  *
- * Common typedefs
+ * Common types
  *
  ******************************************************************************/
 struct ResAnmTexSrtDataTypedef {
@@ -34,12 +34,6 @@ struct TexSrtTypedef {
  *
  ******************************************************************************/
 struct TexSrt : TexSrtTypedef {
-    f32 Su; // at 0x0
-    f32 Sv; // at 0x4
-    f32 R;  // at 0x8
-    f32 Tu; // at 0xc
-    f32 Tv; // at 0x10
-
     enum Flag {
         FLAG_ANM_EXISTS = (1 << 0),
         FLAG_SCALE_ONE = (1 << 1),
@@ -49,23 +43,29 @@ struct TexSrt : TexSrtTypedef {
         FLAGSET_IDENTITY = (1 << 0) | (1 << 1) | (1 << 2) | (1 << 3),
         NUM_OF_FLAGS = 4
     };
+
+    f32 Su; // at 0x0
+    f32 Sv; // at 0x4
+    f32 R;  // at 0x8
+    f32 Tu; // at 0xc
+    f32 Tv; // at 0x10
 };
 
 struct TexSrtAnmResult : ResAnmTexSrtDataTypedef, TexSrtTypedef {
+    enum Flag {
+        FLAG_ANM_EXISTS = (1 << 0),
+        FLAG_SCALE_ONE = (1 << 1),
+        FLAG_ROT_ZERO = (1 << 2),
+        FLAG_TRANS_ZERO = (1 << 3),
+
+        // Four bits in 'flags' for each animation
+        NUM_OF_FLAGS = 4
+    };
+
     u32 flags;                  // at 0x0
     u32 indFlags;               // at 0x4
     TexMatrixMode texMtxMode;   // at 0x8
     TexSrt srt[NUM_OF_TEX_MTX]; // at 0xC
-
-    enum Flag {
-        // TODO: Naming
-        FLAG_0 = (1 << 0),
-        FLAG_S_ONE = (1 << 1),
-        FLAG_R_ZERO = (1 << 2),
-        FLAG_T_ZERO = (1 << 3),
-
-        NUM_OF_FLAGS = 4
-    };
 };
 
 /******************************************************************************
@@ -74,38 +74,36 @@ struct TexSrtAnmResult : ResAnmTexSrtDataTypedef, TexSrtTypedef {
  *
  ******************************************************************************/
 struct ResAnmTexSrtTexData {
+    enum Flag {
+        FLAG_ANM_EXISTS = (1 << 0),
+        FLAG_SCALE_ONE = (1 << 1),
+        FLAG_ROT_ZERO = (1 << 2),
+        FLAG_TRANS_ZERO = (1 << 3),
+
+        FLAG_SCALE_UNIFORM = (1 << 4),
+        FLAG_SCALE_U_CONST = (1 << 5),
+        FLAG_SCALE_V_CONST = (1 << 6),
+
+        FLAG_ROT_CONST = (1 << 7),
+        FLAG_TRANS_U_CONST = (1 << 8),
+        FLAG_TRANS_V_CONST = (1 << 9),
+    };
+
     u32 flags;          // at 0x0
     ResAnmData anms[1]; // at 0x4
-
-    enum Flag {
-        // TODO: Naming
-        FLAG_0 = (1 << 0),
-
-        FLAG_S_ONE = (1 << 1),
-        FLAG_R_ZERO = (1 << 2),
-        FLAG_T_ZERO = (1 << 3),
-
-        FLAG_S_UNIFORM = (1 << 4),
-        FLAG_SCALE_CONSTANT_U = (1 << 5),
-        FLAG_SCALE_CONSTANT_V = (1 << 6),
-
-        FLAG_ROT_CONSTANT = (1 << 7),
-        FLAG_TRANS_CONSTANT_U = (1 << 8),
-        FLAG_TRANS_CONSTANT_V = (1 << 9),
-    };
 };
 
 struct ResAnmTexSrtMatData : ResAnmTexSrtDataTypedef {
-    s32 name;                     // at 0x0
-    u32 flags;                    // at 0x4
-    u32 indFlags;                 // at 0x8
-    s32 toResAnmTexSrtTexData[1]; // at 0xC
-
     enum Flag {
         FLAG_ANM_EXISTS = (1 << 0),
 
         NUM_OF_FLAGS = 1
     };
+
+    s32 name;                     // at 0x0
+    u32 flags;                    // at 0x4
+    u32 indFlags;                 // at 0x8
+    s32 toResAnmTexSrtTexData[1]; // at 0xC
 };
 
 struct ResAnmTexSrtInfoData : TexSrtTypedef {

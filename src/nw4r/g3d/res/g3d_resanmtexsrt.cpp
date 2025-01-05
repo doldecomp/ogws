@@ -13,17 +13,16 @@ inline u32 MakeResult(TexSrt* pSrt, const ResAnmTexSrtTexData* pTexData,
     u32 flags = pTexData->flags;
     TexSrt& rSrt = *pSrt;
 
-    if (!(flags & ResAnmTexSrtTexData::FLAG_S_ONE)) {
-        bool suConstant = flags & ResAnmTexSrtTexData::FLAG_SCALE_CONSTANT_U;
+    if (!(flags & ResAnmTexSrtTexData::FLAG_SCALE_ONE)) {
+        bool suConstant = flags & ResAnmTexSrtTexData::FLAG_SCALE_U_CONST;
 
         rSrt.Su = detail::GetResAnmResult(&pTexData->anms[anmIdx++], frame,
                                           suConstant);
 
-        if (flags & ResAnmTexSrtTexData::FLAG_S_UNIFORM) {
+        if (flags & ResAnmTexSrtTexData::FLAG_SCALE_UNIFORM) {
             rSrt.Sv = rSrt.Su;
         } else {
-            bool svConstant =
-                flags & ResAnmTexSrtTexData::FLAG_SCALE_CONSTANT_V;
+            bool svConstant = flags & ResAnmTexSrtTexData::FLAG_SCALE_V_CONST;
 
             rSrt.Sv = detail::GetResAnmResult(&pTexData->anms[anmIdx++], frame,
                                               svConstant);
@@ -33,8 +32,8 @@ inline u32 MakeResult(TexSrt* pSrt, const ResAnmTexSrtTexData* pTexData,
         rSrt.Sv = 1.0f;
     }
 
-    if (!(flags & ResAnmTexSrtTexData::FLAG_R_ZERO)) {
-        bool rConstant = flags & ResAnmTexSrtTexData::FLAG_ROT_CONSTANT;
+    if (!(flags & ResAnmTexSrtTexData::FLAG_ROT_ZERO)) {
+        bool rConstant = flags & ResAnmTexSrtTexData::FLAG_ROT_CONST;
 
         rSrt.R = detail::GetResAnmResult(&pTexData->anms[anmIdx++], frame,
                                          rConstant);
@@ -42,9 +41,9 @@ inline u32 MakeResult(TexSrt* pSrt, const ResAnmTexSrtTexData* pTexData,
         rSrt.R = 0.0f;
     }
 
-    if (!(flags & ResAnmTexSrtTexData::FLAG_T_ZERO)) {
-        bool tuConstant = flags & ResAnmTexSrtTexData::FLAG_TRANS_CONSTANT_U;
-        bool tvConstant = flags & ResAnmTexSrtTexData::FLAG_TRANS_CONSTANT_V;
+    if (!(flags & ResAnmTexSrtTexData::FLAG_TRANS_ZERO)) {
+        bool tuConstant = flags & ResAnmTexSrtTexData::FLAG_TRANS_U_CONST;
+        bool tvConstant = flags & ResAnmTexSrtTexData::FLAG_TRANS_V_CONST;
 
         rSrt.Tu = detail::GetResAnmResult(&pTexData->anms[anmIdx++], frame,
                                           tuConstant);
@@ -55,10 +54,10 @@ inline u32 MakeResult(TexSrt* pSrt, const ResAnmTexSrtTexData* pTexData,
         rSrt.Tv = 0.0f;
     }
 
-    return flags &
-           (ResAnmTexSrtTexData::FLAG_0 | ResAnmTexSrtTexData::FLAG_S_ONE |
-            ResAnmTexSrtTexData::FLAG_R_ZERO |
-            ResAnmTexSrtTexData::FLAG_T_ZERO);
+    return flags & (ResAnmTexSrtTexData::FLAG_ANM_EXISTS |
+                    ResAnmTexSrtTexData::FLAG_SCALE_ONE |
+                    ResAnmTexSrtTexData::FLAG_ROT_ZERO |
+                    ResAnmTexSrtTexData::FLAG_TRANS_ZERO);
 }
 
 } // namespace

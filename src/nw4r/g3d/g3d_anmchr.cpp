@@ -455,12 +455,12 @@ const ChrAnmResult* AnmObjChrBlend::GetResult(ChrAnmResult* pResult, u32 idx) {
         u32 flags = pMyResult->flags;
 
         if (useAccScale) {
-            if (!(flags & ChrAnmResult::FLAG_S_ONE)) {
+            if (!(flags & ChrAnmResult::FLAG_SCALE_ONE)) {
                 esx += ratio * math::FLog(pMyResult->s.x);
                 esy += ratio * math::FLog(pMyResult->s.y);
                 esz += ratio * math::FLog(pMyResult->s.z);
             }
-        } else if (!(flags & ChrAnmResult::FLAG_S_ONE)) {
+        } else if (!(flags & ChrAnmResult::FLAG_SCALE_ONE)) {
             pResult->s.x += pMyResult->s.x * ratio;
             pResult->s.y += pMyResult->s.y * ratio;
             pResult->s.z += pMyResult->s.z * ratio;
@@ -473,7 +473,7 @@ const ChrAnmResult* AnmObjChrBlend::GetResult(ChrAnmResult* pResult, u32 idx) {
         if (useQuat) {
             math::QUAT q;
 
-            if (!(flags & ChrAnmResult::FLAG_R_ZERO)) {
+            if (!(flags & ChrAnmResult::FLAG_ROT_ZERO)) {
                 math::MTX34ToQUAT(&q, &pMyResult->rt);
             } else {
                 q.x = 0.0f;
@@ -487,7 +487,7 @@ const ChrAnmResult* AnmObjChrBlend::GetResult(ChrAnmResult* pResult, u32 idx) {
 
             f32 t = weight * invAddedWeight;
             math::C_QUATSlerp(&rot, &rot, &q, t);
-        } else if (!(flags & ChrAnmResult::FLAG_R_ZERO)) {
+        } else if (!(flags & ChrAnmResult::FLAG_ROT_ZERO)) {
             pResult->rt._00 += pMyResult->rt._00 * ratio;
             pResult->rt._01 += pMyResult->rt._01 * ratio;
             pResult->rt._02 += pMyResult->rt._02 * ratio;
@@ -500,7 +500,7 @@ const ChrAnmResult* AnmObjChrBlend::GetResult(ChrAnmResult* pResult, u32 idx) {
             pResult->rt._11 += ratio;
         }
 
-        if (!(flags & ChrAnmResult::FLAG_T_ZERO)) {
+        if (!(flags & ChrAnmResult::FLAG_TRANS_ZERO)) {
             pResult->rt._03 += pMyResult->rt._03 * ratio;
             pResult->rt._13 += pMyResult->rt._13 * ratio;
             pResult->rt._23 += pMyResult->rt._23 * ratio;
@@ -537,7 +537,7 @@ const ChrAnmResult* AnmObjChrBlend::GetResult(ChrAnmResult* pResult, u32 idx) {
         math::VEC3Cross(pV1, pV2, pV0);
     }
 
-    pResult->flags &= ~ChrAnmResult::FLAG_R_RAW_FMT;
+    pResult->flags &= ~ChrAnmResult::FLAG_ROT_RAW_FMT;
     return pResult;
 }
 

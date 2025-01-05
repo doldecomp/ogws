@@ -15,27 +15,27 @@ namespace g3d {
  *
  ******************************************************************************/
 struct ClrAnmResult {
-    static const int NUM_OF_CLA_COLOR = 11;
+    enum ColorAnim {
+        CLA_CLR0,
+        CLA_CLR1,
+        CLA_AMB0,
+        CLA_AMB1,
 
-    enum Element {
-        ELEMENT_CLR0,
-        ELEMENT_CLR1,
-        ELEMENT_AMB0,
-        ELEMENT_AMB1,
+        CLA_TEV0,
+        CLA_TEV1,
+        CLA_TEV2,
 
-        ELEMENT_TEV0,
-        ELEMENT_TEV1,
-        ELEMENT_TEV2,
+        CLA_TEVK0,
+        CLA_TEVK1,
+        CLA_TEVK2,
+        CLA_TEVK3,
 
-        ELEMENT_TEVK0,
-        ELEMENT_TEVK1,
-        ELEMENT_TEVK2,
-        ELEMENT_TEVK3
+        CLA_MAX
     };
 
-    u32 bRgbaExist;                 // at 0x0
-    u32 rgba[NUM_OF_CLA_COLOR];     // at 0x4
-    u32 rgbaMask[NUM_OF_CLA_COLOR]; // at 0x30
+    u32 bRgbaExist;        // at 0x0
+    u32 rgba[CLA_MAX];     // at 0x4
+    u32 rgbaMask[CLA_MAX]; // at 0x30
 };
 
 /******************************************************************************
@@ -49,17 +49,17 @@ struct ResAnmClrAnmData {
 };
 
 struct ResAnmClrMatData {
-    s32 name;                 // at 0x0
-    u32 flags;                // at 0x4
-    ResAnmClrAnmData anms[1]; // at 0x8
-
-    // Two bits in 'flags' for each animation
     enum Flag {
         FLAG_ANM_EXISTS = (1 << 0),
         FLAG_ANM_CONSTANT = (1 << 1),
 
+        // Two bits in 'flags' for each animation
         NUM_OF_FLAGS = 2
     };
+
+    s32 name;                 // at 0x0
+    u32 flags;                // at 0x4
+    ResAnmClrAnmData anms[1]; // at 0x8
 };
 
 struct ResAnmClrInfoData {

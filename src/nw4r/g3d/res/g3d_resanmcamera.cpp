@@ -7,17 +7,20 @@ void ResAnmCamera::GetAnmResult(CameraAnmResult* pResult, f32 frame) const {
     const ResAnmCameraData& r = ref();
     u32 flags = r.flags;
 
-    bool constantPosX = (flags & FLAG_POS_X_CONSTANT) != 0;
-    bool constantPosY = (flags & FLAG_POS_Y_CONSTANT) != 0;
-    bool constantPosZ = (flags & FLAG_POS_Z_CONSTANT) != 0;
+    bool constantPosX = (flags & ResAnmCameraData::FLAG_POS_X_CONST) != 0;
+    bool constantPosY = (flags & ResAnmCameraData::FLAG_POS_Y_CONST) != 0;
+    bool constantPosZ = (flags & ResAnmCameraData::FLAG_POS_Z_CONST) != 0;
 
-    bool constantAspect = (flags & FLAG_ASPECT_CONSTANT) != 0;
-    bool constantNear = (flags & FLAG_NEAR_CONSTANT) != 0;
-    bool constantFar = (flags & FLAG_FAR_CONSTANT) != 0;
+    bool constantAspect = (flags & ResAnmCameraData::FLAG_ASPECT_CONST) != 0;
+    bool constantNear = (flags & ResAnmCameraData::FLAG_NEAR_CONST) != 0;
+    bool constantFar = (flags & ResAnmCameraData::FLAG_FAR_CONST) != 0;
 
-    CameraType type = static_cast<CameraType>(flags & FLAG_CAMERA_TYPE_MASK);
+    CameraType type = static_cast<CameraType>(
+        flags & ResAnmCameraData::FLAG_CAMERA_TYPE_MASK);
 
-    pResult->flags = flags & FLAG_ANM_RESULT_MASK;
+    pResult->flags = flags & (CameraAnmResult::FLAG_CAMERA_TYPE_MASK |
+                              CameraAnmResult::FLAG_ANM_EXISTS);
+
     pResult->projType = r.projType;
 
     pResult->pos.x = detail::GetResAnmResult(&r.posX, frame, constantPosX);
@@ -30,9 +33,9 @@ void ResAnmCamera::GetAnmResult(CameraAnmResult* pResult, f32 frame) const {
 
     switch (type) {
     case CAMERATYPE_ROTATE: {
-        bool constantRotX = (flags & FLAG_ROT_X_CONSTANT) != 0;
-        bool constantRotY = (flags & FLAG_ROT_Y_CONSTANT) != 0;
-        bool constantRotZ = (flags & FLAG_ROT_Z_CONSTANT) != 0;
+        bool constantRotX = (flags & ResAnmCameraData::FLAG_ROT_X_CONST) != 0;
+        bool constantRotY = (flags & ResAnmCameraData::FLAG_ROT_Y_CONST) != 0;
+        bool constantRotZ = (flags & ResAnmCameraData::FLAG_ROT_Z_CONST) != 0;
 
         pResult->rotate.rot.x =
             detail::GetResAnmResult(&r.rotX, frame, constantRotX);
@@ -44,10 +47,10 @@ void ResAnmCamera::GetAnmResult(CameraAnmResult* pResult, f32 frame) const {
     }
 
     case CAMERATYPE_AIM: {
-        bool constantAimX = (flags & FLAG_AIM_X_CONSTANT) != 0;
-        bool constantAimY = (flags & FLAG_AIM_Y_CONSTANT) != 0;
-        bool constantAimZ = (flags & FLAG_AIM_Z_CONSTANT) != 0;
-        bool constantTwist = (flags & FLAG_TWIST_CONSTANT) != 0;
+        bool constantAimX = (flags & ResAnmCameraData::FLAG_AIM_X_CONST) != 0;
+        bool constantAimY = (flags & ResAnmCameraData::FLAG_AIM_Y_CONST) != 0;
+        bool constantAimZ = (flags & ResAnmCameraData::FLAG_AIM_Z_CONST) != 0;
+        bool constantTwist = (flags & ResAnmCameraData::FLAG_TWIST_CONST) != 0;
 
         pResult->aim.aim.x =
             detail::GetResAnmResult(&r.aimX, frame, constantAimX);
@@ -67,7 +70,8 @@ void ResAnmCamera::GetAnmResult(CameraAnmResult* pResult, f32 frame) const {
 
     switch (r.projType) {
     case GX_PERSPECTIVE: {
-        bool constantFovy = (flags & FLAG_PERSP_FOVY_CONSTANT) != 0;
+        bool constantFovy =
+            (flags & ResAnmCameraData::FLAG_PERSP_FOVY_CONST) != 0;
 
         pResult->perspFovy =
             detail::GetResAnmResult(&r.perspFovy, frame, constantFovy);
@@ -75,7 +79,8 @@ void ResAnmCamera::GetAnmResult(CameraAnmResult* pResult, f32 frame) const {
     }
 
     case GX_ORTHOGRAPHIC: {
-        bool constantHeight = (flags & FLAG_ORTHO_HEIGHT_CONSTANT) != 0;
+        bool constantHeight =
+            (flags & ResAnmCameraData::FLAG_ORTHO_HEIGHT_CONST) != 0;
 
         pResult->orthoHeight =
             detail::GetResAnmResult(&r.orthoHeight, frame, constantHeight);

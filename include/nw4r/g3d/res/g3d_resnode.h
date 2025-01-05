@@ -14,7 +14,7 @@ struct ChrAnmResult;
 
 /******************************************************************************
  *
- * Common typedefs
+ * Common types
  *
  ******************************************************************************/
 struct ResNodeDataTypedef {
@@ -29,20 +29,6 @@ struct ResNodeDataTypedef {
 
         NUM_BILLBOARD,
     };
-
-    enum Flag {
-        FLAG_IDENTITY = (1 << 0),
-        FLAG_T_ZERO = (1 << 1),
-        FLAG_R_ZERO = (1 << 2),
-        FLAG_S_ONE = (1 << 3),
-        FLAG_S_UNIFORM = (1 << 4),
-        FLAG_COMP_SCALE = (1 << 5),
-        FLAG_COMP_CHILD_SCALE = (1 << 6),
-        FLAG_NO_CLASSIC_SCALE = (1 << 7),
-        FLAG_VISIBLE = (1 << 8),
-        FLAG_HAS_GEOMETRY = (1 << 9),
-        FLAG_BILLBOARD_PARENT = (1 << 10)
-    };
 };
 
 /******************************************************************************
@@ -51,6 +37,25 @@ struct ResNodeDataTypedef {
  *
  ******************************************************************************/
 struct ResNodeData : ResNodeDataTypedef {
+    enum Flag {
+        FLAG_IDENTITY = (1 << 0),
+        FLAG_TRANS_ZERO = (1 << 1),
+        FLAG_ROT_ZERO = (1 << 2),
+        FLAG_SCALE_ONE = (1 << 3),
+        FLAG_SCALE_UNIFORM = (1 << 4),
+
+        // Maya Scale Compensation
+        FLAG_SSC_APPLY = (1 << 5),
+        FLAG_SSC_PARENT = (1 << 6),
+
+        // Softimage Hierarchical Scaling
+        FLAG_XSI_SCALING = (1 << 7),
+
+        FLAG_VISIBLE = (1 << 8),
+        FLAG_GEOMETRY = (1 << 9),
+        FLAG_BILLBOARD_PARENT = (1 << 10)
+    };
+
     u32 size;                 // at 0x0
     s32 toResMdlData;         // at 0x4
     s32 name;                 // at 0x8
@@ -108,7 +113,7 @@ public:
 
     bool IsVisible() const {
         if (IsValid()) {
-            return ptr()->flags & FLAG_VISIBLE;
+            return ptr()->flags & ResNodeData::FLAG_VISIBLE;
         }
 
         return false;
@@ -120,9 +125,9 @@ public:
         }
 
         if (visible) {
-            ptr()->flags |= FLAG_VISIBLE;
+            ptr()->flags |= ResNodeData::FLAG_VISIBLE;
         } else {
-            ptr()->flags &= ~FLAG_VISIBLE;
+            ptr()->flags &= ~ResNodeData::FLAG_VISIBLE;
         }
     }
 

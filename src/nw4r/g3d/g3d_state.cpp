@@ -1552,14 +1552,14 @@ void LoadResMatChan(const ResMatChan chan, u32 maskDiffColor, u32 maskDiffAlpha,
     {
         const Chan& r = chan.ref().chan[0];
 
-        if (r.flag & Chan::FLAG_MAT_COLOR) {
-            if (r.flag & Chan::FLAG_MAT_ALPHA) {
+        if (r.flag & Chan::FLAG_MAT_COLOR_ENABLE) {
+            if (r.flag & Chan::FLAG_MAT_ALPHA_ENABLE) {
                 // @bug Color+Alpha channel is GX_COLOR0A0
                 fifo::GDSetChanMatColor(GX_COLOR0, r.matColor);
             } else {
                 fifo::GDSetChanMatColor(GX_COLOR0, r.matColor);
             }
-        } else if (r.flag & Chan::FLAG_MAT_ALPHA) {
+        } else if (r.flag & Chan::FLAG_MAT_ALPHA_ENABLE) {
             // @bug Alpha channel is GX_ALPHA0
             fifo::GDSetChanMatColor(GX_COLOR0, r.matColor);
         }
@@ -1570,34 +1570,34 @@ void LoadResMatChan(const ResMatChan chan, u32 maskDiffColor, u32 maskDiffAlpha,
         ambColor.b = 0.5f + (amb.b * r.ambColor.b) * (1.0f / 255.0f);
         ambColor.a = 0.5f + (amb.a * r.ambColor.a) * (1.0f / 255.0f);
 
-        if (r.flag & Chan::FLAG_AMB_COLOR) {
-            if (r.flag & Chan::FLAG_AMB_ALPHA) {
+        if (r.flag & Chan::FLAG_AMB_COLOR_ENABLE) {
+            if (r.flag & Chan::FLAG_AMB_ALPHA_ENABLE) {
                 // @bug Color+Alpha channel is GX_COLOR0A0
                 fifo::GDSetChanAmbColor(GX_COLOR0, ambColor);
             } else {
                 fifo::GDSetChanAmbColor(GX_COLOR0, ambColor);
             }
-        } else if (r.flag & Chan::FLAG_AMB_ALPHA) {
+        } else if (r.flag & Chan::FLAG_AMB_ALPHA_ENABLE) {
             // @bug Alpha channel is GX_ALPHA0
             fifo::GDSetChanAmbColor(GX_COLOR0, ambColor);
         }
 
         if (lightOff) {
-            if (r.flag & Chan::FLAG_CTRL_COLOR) {
+            if (r.flag & Chan::FLAG_CTRL_COLOR_ENABLE) {
                 fifo::GDSetChanCtrlLightOff(GX_COLOR0, r.paramChanCtrlC,
                                             maskDiffColor);
             }
 
-            if (r.flag & Chan::FLAG_CTRL_ALPHA) {
+            if (r.flag & Chan::FLAG_CTRL_ALPHA_ENABLE) {
                 fifo::GDSetChanCtrlLightOff(GX_ALPHA0, r.paramChanCtrlA,
                                             maskDiffAlpha);
             }
         } else {
-            if (r.flag & Chan::FLAG_CTRL_COLOR) {
+            if (r.flag & Chan::FLAG_CTRL_COLOR_ENABLE) {
                 fifo::GDSetChanCtrl(GX_COLOR0, r.paramChanCtrlC, maskDiffColor);
             }
 
-            if (r.flag & Chan::FLAG_CTRL_ALPHA) {
+            if (r.flag & Chan::FLAG_CTRL_ALPHA_ENABLE) {
                 fifo::GDSetChanCtrl(GX_ALPHA0, r.paramChanCtrlA, maskDiffAlpha);
             }
         }
@@ -1607,47 +1607,47 @@ void LoadResMatChan(const ResMatChan chan, u32 maskDiffColor, u32 maskDiffAlpha,
         if (sGenMode2.GXGetNumChans() == 2) {
             const Chan& r = chan.ref().chan[1];
 
-            if (r.flag & Chan::FLAG_MAT_COLOR) {
-                if (r.flag & Chan::FLAG_MAT_ALPHA) {
+            if (r.flag & Chan::FLAG_MAT_COLOR_ENABLE) {
+                if (r.flag & Chan::FLAG_MAT_ALPHA_ENABLE) {
                     // @bug Color+Alpha channel is GX_COLOR1A1
                     fifo::GDSetChanMatColor(GX_COLOR1, r.matColor);
                 } else {
                     fifo::GDSetChanMatColor(GX_COLOR1, r.matColor);
                 }
-            } else if (r.flag & Chan::FLAG_MAT_ALPHA) {
+            } else if (r.flag & Chan::FLAG_MAT_ALPHA_ENABLE) {
                 // @bug Alpha channel is GX_ALPHA1
                 fifo::GDSetChanMatColor(GX_COLOR1, r.matColor);
             }
 
-            if (r.flag & Chan::FLAG_AMB_COLOR) {
-                if (r.flag & Chan::FLAG_AMB_ALPHA) {
+            if (r.flag & Chan::FLAG_AMB_COLOR_ENABLE) {
+                if (r.flag & Chan::FLAG_AMB_ALPHA_ENABLE) {
                     // @bug Color+Alpha channel is GX_COLOR1A1
                     fifo::GDSetChanAmbColor(GX_COLOR1, r.ambColor);
                 } else {
                     fifo::GDSetChanAmbColor(GX_COLOR1, r.ambColor);
                 }
-            } else if (r.flag & Chan::FLAG_AMB_ALPHA) {
+            } else if (r.flag & Chan::FLAG_AMB_ALPHA_ENABLE) {
                 // @bug Alpha channel is GX_ALPHA1
                 fifo::GDSetChanAmbColor(GX_COLOR1, r.ambColor);
             }
 
             if (lightOff) {
-                if (r.flag & Chan::FLAG_CTRL_COLOR) {
+                if (r.flag & Chan::FLAG_CTRL_COLOR_ENABLE) {
                     fifo::GDSetChanCtrlLightOff(GX_COLOR1, r.paramChanCtrlC,
                                                 maskSpecColor);
                 }
 
-                if (r.flag & Chan::FLAG_CTRL_ALPHA) {
+                if (r.flag & Chan::FLAG_CTRL_ALPHA_ENABLE) {
                     fifo::GDSetChanCtrlLightOff(GX_ALPHA1, r.paramChanCtrlA,
                                                 maskSpecAlpha);
                 }
             } else {
-                if (r.flag & Chan::FLAG_CTRL_COLOR) {
+                if (r.flag & Chan::FLAG_CTRL_COLOR_ENABLE) {
                     fifo::GDSetChanCtrl(GX_COLOR1, r.paramChanCtrlC,
                                         maskSpecColor);
                 }
 
-                if (r.flag & Chan::FLAG_CTRL_ALPHA) {
+                if (r.flag & Chan::FLAG_CTRL_ALPHA_ENABLE) {
                     fifo::GDSetChanCtrl(GX_ALPHA1, r.paramChanCtrlA,
                                         maskSpecAlpha);
                 }
@@ -1697,7 +1697,7 @@ void LoadResTexSrt(const ResTexSrt srt) {
 
             if (!srt.IsIdentity(i)) {
                 if (ident) {
-                    if (!(rEffect.misc_flag & TexMtxEffect::FLAG_IDENTITY)) {
+                    if (!(rEffect.misc_flag & TexMtxEffect::FLAG_IDENT)) {
                         ident = false;
 
                         math::MTX34Copy(&mtx, static_cast<const math::MTX34*>(

@@ -38,14 +38,14 @@ struct BlendVtx {
  *
  ******************************************************************************/
 struct ShpAnmResult {
-    static const int MAX_KEY_SHAPE = 32;
-
     enum Flag {
         FLAG_ANM_EXISTS = (1 << 0),
-        FLAG_ANM_VTX_POS = (1 << 1),
-        FLAG_ANM_VTX_NRM = (1 << 2),
-        FLAG_ANM_VTX_CLR = (1 << 3),
+        FLAG_ANM_VTXPOS = (1 << 1),
+        FLAG_ANM_VTXNRM = (1 << 2),
+        FLAG_ANM_VTXCLR = (1 << 3),
     };
+
+    static const int MAX_KEY_SHAPE = 32;
 
     u32 flags;                        // at 0x0
     u32 numKeyShape;                  // at 0x4
@@ -60,6 +60,13 @@ struct ShpAnmResult {
  *
  ******************************************************************************/
 struct ResAnmShpAnmData {
+    enum Flag {
+        FLAG_ANM_EXISTS = (1 << 0),
+        FLAG_ANM_VTXPOS = (1 << 1),
+        FLAG_ANM_VTXNRM = (1 << 2),
+        FLAG_ANM_VTXCLR = (1 << 3),
+    };
+
     u32 flags;                 // at 0x0
     s32 name;                  // at 0x4
     u16 baseShapeVtxIdx;       // at 0x8

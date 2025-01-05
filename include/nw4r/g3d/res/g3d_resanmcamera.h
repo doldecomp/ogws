@@ -14,7 +14,7 @@ namespace g3d {
 
 /******************************************************************************
  *
- * Common typedefs
+ * Common types
  *
  ******************************************************************************/
 struct ResAnmCameraDataTypedef {
@@ -24,35 +24,6 @@ struct ResAnmCameraDataTypedef {
 
         CAMERATYPE_MAX
     };
-
-    enum Flag {
-        FLAG_CAMERA_TYPE_MASK = (1 << 0),
-        // TODO: Naming
-        FLAG_1 = (1 << 1),
-
-        FLAG_POS_X_CONSTANT = (1 << 17),
-        FLAG_POS_Y_CONSTANT = (1 << 18),
-        FLAG_POS_Z_CONSTANT = (1 << 19),
-
-        FLAG_ASPECT_CONSTANT = (1 << 20),
-        FLAG_NEAR_CONSTANT = (1 << 21),
-        FLAG_FAR_CONSTANT = (1 << 22),
-
-        FLAG_PERSP_FOVY_CONSTANT = (1 << 23),
-        FLAG_ORTHO_HEIGHT_CONSTANT = (1 << 24),
-
-        FLAG_AIM_X_CONSTANT = (1 << 25),
-        FLAG_AIM_Y_CONSTANT = (1 << 26),
-        FLAG_AIM_Z_CONSTANT = (1 << 27),
-        FLAG_TWIST_CONSTANT = (1 << 28),
-
-        FLAG_ROT_X_CONSTANT = (1 << 29),
-        FLAG_ROT_Y_CONSTANT = (1 << 30),
-        FLAG_ROT_Z_CONSTANT = (1 << 31),
-
-        // Flags accessible from CameraAnmResult
-        FLAG_ANM_RESULT_MASK = FLAG_CAMERA_TYPE_MASK | FLAG_1
-    };
 };
 
 /******************************************************************************
@@ -61,6 +32,8 @@ struct ResAnmCameraDataTypedef {
  *
  ******************************************************************************/
 struct CameraAnmResult : ResAnmCameraDataTypedef {
+    enum Flag { FLAG_CAMERA_TYPE_MASK = (1 << 0), FLAG_ANM_EXISTS = (1 << 1) };
+
     u32 flags;                 // at 0x0
     GXProjectionType projType; // at 0x4
     math::VEC3 pos;            // at 0x8
@@ -91,6 +64,31 @@ struct CameraAnmResult : ResAnmCameraDataTypedef {
  *
  ******************************************************************************/
 struct ResAnmCameraData : ResAnmCameraDataTypedef {
+    enum Flag {
+        FLAG_CAMERA_TYPE_MASK = (1 << 0),
+        FLAG_ANM_EXISTS = (1 << 1),
+
+        FLAG_POS_X_CONST = (1 << 17),
+        FLAG_POS_Y_CONST = (1 << 18),
+        FLAG_POS_Z_CONST = (1 << 19),
+
+        FLAG_ASPECT_CONST = (1 << 20),
+        FLAG_NEAR_CONST = (1 << 21),
+        FLAG_FAR_CONST = (1 << 22),
+
+        FLAG_PERSP_FOVY_CONST = (1 << 23),
+        FLAG_ORTHO_HEIGHT_CONST = (1 << 24),
+
+        FLAG_AIM_X_CONST = (1 << 25),
+        FLAG_AIM_Y_CONST = (1 << 26),
+        FLAG_AIM_Z_CONST = (1 << 27),
+        FLAG_TWIST_CONST = (1 << 28),
+
+        FLAG_ROT_X_CONST = (1 << 29),
+        FLAG_ROT_Y_CONST = (1 << 30),
+        FLAG_ROT_Z_CONST = (1 << 31)
+    };
+
     u32 size;                  // at 0x0
     s32 toResAnmScnData;       // at 0x4
     s32 name;                  // at 0x8

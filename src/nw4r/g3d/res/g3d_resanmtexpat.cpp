@@ -79,7 +79,7 @@ void ResAnmTexPat::GetAnmResult(TexPatAnmResult* pResult, u32 idx,
         }
 
         int texIndex, plttIndex;
-        if (flags & ResAnmTexPatMatData::FLAG_ANM_CONSTANT) {
+        if (flags & ResAnmTexPatMatData::FLAG_ANM_CONST) {
             texIndex = pAnmDataImpl->constValue.texIndex;
             plttIndex = pAnmDataImpl->constValue.plttIndex;
         } else {
@@ -94,7 +94,7 @@ void ResAnmTexPat::GetAnmResult(TexPatAnmResult* pResult, u32 idx,
 
         u32 targetBit = 1 << i;
 
-        if (flags & ResAnmTexPatMatData::FLAG_ANM_TEXTURE) {
+        if (flags & ResAnmTexPatMatData::FLAG_ANM_TEX) {
             ResTex tex(pResTexArray[texIndex]);
 
             if (tex.IsValid()) {
@@ -103,7 +103,7 @@ void ResAnmTexPat::GetAnmResult(TexPatAnmResult* pResult, u32 idx,
             }
         }
 
-        if (flags & ResAnmTexPatMatData::FLAG_ANM_PALETTE) {
+        if (flags & ResAnmTexPatMatData::FLAG_ANM_PLTT) {
             ResPltt pltt(pResPlttArray[plttIndex]);
 
             if (pltt.IsValid()) {

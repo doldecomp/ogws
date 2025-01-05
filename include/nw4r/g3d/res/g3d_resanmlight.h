@@ -18,7 +18,7 @@ struct LightAnmResult;
 
 /******************************************************************************
  *
- * Common typedefs
+ * Common types
  *
  ******************************************************************************/
 struct ResAnmLightDataTypedef {
@@ -29,37 +29,6 @@ struct ResAnmLightDataTypedef {
 
         LIGHTTYPE_MAX
     };
-
-    enum Flag {
-        FLAG_LIGHT_TYPE_MASK = (1 << 0) | (1 << 1),
-        FLAG_ENABLE = (1 << 2),
-        FLAG_SPECULAR = (1 << 3),
-
-        // TODO: Naming
-        FLAG_4 = (1 << 4),
-        FLAG_5 = (1 << 5),
-
-        FLAG_POS_X_CONSTANT = (1 << 19),
-        FLAG_POS_Y_CONSTANT = (1 << 20),
-        FLAG_POS_Z_CONSTANT = (1 << 21),
-
-        FLAG_COLOR_CONSTANT = (1 << 22),
-        FLAG_ENABLE_CONSTANT = (1 << 23),
-
-        FLAG_AIM_X_CONSTANT = (1 << 24),
-        FLAG_AIM_Y_CONSTANT = (1 << 25),
-        FLAG_AIM_Z_CONSTANT = (1 << 26),
-
-        FLAG_CUTOFF_CONSTANT = (1 << 27),
-        FLAG_REF_DISTANCE_CONSTANT = (1 << 28),
-        FLAG_REF_BRIGHTNESS_CONSTANT = (1 << 29),
-        FLAG_SPEC_COLOR_CONSTANT = (1 << 30),
-        FLAG_SHININESS_CONSTANT = (1 << 31),
-
-        // Flags accessible from LightAnmResult
-        FLAG_ANM_RESULT_MASK =
-            FLAG_LIGHT_TYPE_MASK | FLAG_ENABLE | FLAG_SPECULAR | FLAG_4 | FLAG_5
-    };
 };
 
 /******************************************************************************
@@ -68,6 +37,14 @@ struct ResAnmLightDataTypedef {
  *
  ******************************************************************************/
 struct LightAnmResult : ResAnmLightDataTypedef {
+    enum Flag {
+        FLAG_LIGHT_TYPE_MASK = (1 << 0) | (1 << 1),
+        FLAG_LIGHT_ENABLE = (1 << 2),
+        FLAG_SPECULAR_ENABLE = (1 << 3),
+        FLAG_COLOR_ENABLE = (1 << 4),
+        FLAG_ALPHA_ENABLE = (1 << 5)
+    };
+
     u32 specIdx;           // at 0x0
     u32 flags;             // at 0x4
     math::VEC3 pos;        // at 0x8
@@ -88,6 +65,31 @@ struct LightAnmResult : ResAnmLightDataTypedef {
  *
  ******************************************************************************/
 struct ResAnmLightData : ResAnmLightDataTypedef {
+    enum Flag {
+        FLAG_LIGHT_TYPE_MASK = (1 << 0) | (1 << 1),
+        FLAG_LIGHT_ENABLE = (1 << 2),
+        FLAG_SPECULAR_ENABLE = (1 << 3),
+        FLAG_COLOR_ENABLE = (1 << 4),
+        FLAG_ALPHA_ENABLE = (1 << 5),
+
+        FLAG_POS_X_CONST = (1 << 19),
+        FLAG_POS_Y_CONST = (1 << 20),
+        FLAG_POS_Z_CONST = (1 << 21),
+
+        FLAG_COLOR_CONST = (1 << 22),
+        FLAG_ENABLE_CONST = (1 << 23),
+
+        FLAG_AIM_X_CONST = (1 << 24),
+        FLAG_AIM_Y_CONST = (1 << 25),
+        FLAG_AIM_Z_CONST = (1 << 26),
+
+        FLAG_CUTOFF_CONST = (1 << 27),
+        FLAG_REF_DISTANCE_CONST = (1 << 28),
+        FLAG_REF_BRIGHTNESS_CONST = (1 << 29),
+        FLAG_SPEC_COLOR_CONST = (1 << 30),
+        FLAG_SHININESS_CONST = (1 << 31)
+    };
+
     u32 size;                  // at 0x0
     s32 toResAnmScnData;       // at 0x4
     s32 name;                  // at 0x8
@@ -133,7 +135,7 @@ public:
     }
 
     bool HasSpecularLight() const {
-        return ref().flags & FLAG_SPECULAR;
+        return ref().flags & ResAnmLightData::FLAG_SPECULAR_ENABLE;
     }
 };
 

@@ -1,5 +1,4 @@
-#pragma ipa file       // TODO: REMOVE AFTER REFACTOR
-#pragma fp_contract on // TODO: REMOVE AFTER REFACTOR
+#pragma fp_contract on
 
 #include <nw4r/g3d.h>
 
@@ -392,11 +391,11 @@ GetAnmScale(math::VEC3* pResult, const ResAnmChrNodeData* pNodeData,
     u32 flags = pNodeData->flags;
     f32 x, y, z;
 
-    switch (flags & ResAnmChrNodeData::FLAG_S_FMT_MASK) {
+    switch (flags & ResAnmChrNodeData::FLAG_SCALE_FMT_MASK) {
     case 0: {
         x = pAnmData++->constValue;
 
-        if (flags & ResAnmChrNodeData::FLAG_S_UNIFORM) {
+        if (flags & ResAnmChrNodeData::FLAG_SCALE_UNIFORM) {
             y = x;
             z = x;
         } else {
@@ -407,52 +406,52 @@ GetAnmScale(math::VEC3* pResult, const ResAnmChrNodeData* pNodeData,
         break;
     }
 
-    case ResAnmChrNodeData::FLAG_S_FVS32_FMT: {
+    case ResAnmChrNodeData::FLAG_SCALE_FVS32_FMT: {
         x = CalcResult32(pNodeData, pAnmData++, frame,
-                         flags & ResAnmChrNodeData::FLAG_S_X_CONST);
+                         flags & ResAnmChrNodeData::FLAG_SCALE_X_CONST);
 
-        if (flags & ResAnmChrNodeData::FLAG_S_UNIFORM) {
+        if (flags & ResAnmChrNodeData::FLAG_SCALE_UNIFORM) {
             y = x;
             z = x;
         } else {
             y = CalcResult32(pNodeData, pAnmData++, frame,
-                             flags & ResAnmChrNodeData::FLAG_S_Y_CONST);
+                             flags & ResAnmChrNodeData::FLAG_SCALE_Y_CONST);
             z = CalcResult32(pNodeData, pAnmData++, frame,
-                             flags & ResAnmChrNodeData::FLAG_S_Z_CONST);
+                             flags & ResAnmChrNodeData::FLAG_SCALE_Z_CONST);
         }
 
         break;
     }
 
-    case ResAnmChrNodeData::FLAG_S_FVS48_FMT: {
+    case ResAnmChrNodeData::FLAG_SCALE_FVS48_FMT: {
         x = CalcResult48(pNodeData, pAnmData++, frame,
-                         flags & ResAnmChrNodeData::FLAG_S_X_CONST);
+                         flags & ResAnmChrNodeData::FLAG_SCALE_X_CONST);
 
-        if (flags & ResAnmChrNodeData::FLAG_S_UNIFORM) {
+        if (flags & ResAnmChrNodeData::FLAG_SCALE_UNIFORM) {
             y = x;
             z = x;
         } else {
             y = CalcResult48(pNodeData, pAnmData++, frame,
-                             flags & ResAnmChrNodeData::FLAG_S_Y_CONST);
+                             flags & ResAnmChrNodeData::FLAG_SCALE_Y_CONST);
             z = CalcResult48(pNodeData, pAnmData++, frame,
-                             flags & ResAnmChrNodeData::FLAG_S_Z_CONST);
+                             flags & ResAnmChrNodeData::FLAG_SCALE_Z_CONST);
         }
 
         break;
     }
 
-    case ResAnmChrNodeData::FLAG_S_FVS96_FMT: {
+    case ResAnmChrNodeData::FLAG_SCALE_FVS96_FMT: {
         x = CalcResult96(pNodeData, pAnmData++, frame,
-                         flags & ResAnmChrNodeData::FLAG_S_X_CONST);
+                         flags & ResAnmChrNodeData::FLAG_SCALE_X_CONST);
 
-        if (flags & ResAnmChrNodeData::FLAG_S_UNIFORM) {
+        if (flags & ResAnmChrNodeData::FLAG_SCALE_UNIFORM) {
             y = x;
             z = x;
         } else {
             y = CalcResult96(pNodeData, pAnmData++, frame,
-                             flags & ResAnmChrNodeData::FLAG_S_Y_CONST);
+                             flags & ResAnmChrNodeData::FLAG_SCALE_Y_CONST);
             z = CalcResult96(pNodeData, pAnmData++, frame,
-                             flags & ResAnmChrNodeData::FLAG_S_Z_CONST);
+                             flags & ResAnmChrNodeData::FLAG_SCALE_Z_CONST);
         }
 
         break;
@@ -482,7 +481,7 @@ GetAnmRotation(math::MTX34* pResult, math::VEC3* pRawResult,
     u32 flags = pNodeData->flags;
     f32 x, y, z;
 
-    switch (flags & ResAnmChrNodeData::FLAG_R_FMT_MASK) {
+    switch (flags & ResAnmChrNodeData::FLAG_ROT_FMT_MASK) {
     case 0: {
         x = pAnmData++->constValue;
         y = pAnmData++->constValue;
@@ -490,63 +489,63 @@ GetAnmRotation(math::MTX34* pResult, math::VEC3* pRawResult,
         break;
     }
 
-    case ResAnmChrNodeData::FLAG_R_FVS32_FMT: {
+    case ResAnmChrNodeData::FLAG_ROT_FVS32_FMT: {
         x = CalcResult32(pNodeData, pAnmData++, frame,
-                         flags & ResAnmChrNodeData::FLAG_R_X_CONST);
+                         flags & ResAnmChrNodeData::FLAG_ROT_X_CONST);
         y = CalcResult32(pNodeData, pAnmData++, frame,
-                         flags & ResAnmChrNodeData::FLAG_R_Y_CONST);
+                         flags & ResAnmChrNodeData::FLAG_ROT_Y_CONST);
         z = CalcResult32(pNodeData, pAnmData++, frame,
-                         flags & ResAnmChrNodeData::FLAG_R_Z_CONST);
+                         flags & ResAnmChrNodeData::FLAG_ROT_Z_CONST);
         break;
     }
 
-    case ResAnmChrNodeData::FLAG_R_FVS48_FMT: {
+    case ResAnmChrNodeData::FLAG_ROT_FVS48_FMT: {
         x = CalcResult48(pNodeData, pAnmData++, frame,
-                         flags & ResAnmChrNodeData::FLAG_R_X_CONST);
+                         flags & ResAnmChrNodeData::FLAG_ROT_X_CONST);
         y = CalcResult48(pNodeData, pAnmData++, frame,
-                         flags & ResAnmChrNodeData::FLAG_R_Y_CONST);
+                         flags & ResAnmChrNodeData::FLAG_ROT_Y_CONST);
         z = CalcResult48(pNodeData, pAnmData++, frame,
-                         flags & ResAnmChrNodeData::FLAG_R_Z_CONST);
+                         flags & ResAnmChrNodeData::FLAG_ROT_Z_CONST);
         break;
     }
 
-    case ResAnmChrNodeData::FLAG_R_FVS96_FMT: {
+    case ResAnmChrNodeData::FLAG_ROT_FVS96_FMT: {
         x = CalcResult96(pNodeData, pAnmData++, frame,
-                         flags & ResAnmChrNodeData::FLAG_R_X_CONST);
+                         flags & ResAnmChrNodeData::FLAG_ROT_X_CONST);
         y = CalcResult96(pNodeData, pAnmData++, frame,
-                         flags & ResAnmChrNodeData::FLAG_R_Y_CONST);
+                         flags & ResAnmChrNodeData::FLAG_ROT_Y_CONST);
         z = CalcResult96(pNodeData, pAnmData++, frame,
-                         flags & ResAnmChrNodeData::FLAG_R_Z_CONST);
+                         flags & ResAnmChrNodeData::FLAG_ROT_Z_CONST);
         break;
     }
 
-    case ResAnmChrNodeData::FLAG_R_CV8_FMT: {
+    case ResAnmChrNodeData::FLAG_ROT_CV8_FMT: {
         x = CalcResultFrm8(pNodeData, pAnmData++, rInfoData.numFrame, frame,
-                           flags & ResAnmChrNodeData::FLAG_R_X_CONST);
+                           flags & ResAnmChrNodeData::FLAG_ROT_X_CONST);
         y = CalcResultFrm8(pNodeData, pAnmData++, rInfoData.numFrame, frame,
-                           flags & ResAnmChrNodeData::FLAG_R_Y_CONST);
+                           flags & ResAnmChrNodeData::FLAG_ROT_Y_CONST);
         z = CalcResultFrm8(pNodeData, pAnmData++, rInfoData.numFrame, frame,
-                           flags & ResAnmChrNodeData::FLAG_R_Z_CONST);
+                           flags & ResAnmChrNodeData::FLAG_ROT_Z_CONST);
         break;
     }
 
-    case ResAnmChrNodeData::FLAG_R_CV16_FMT: {
+    case ResAnmChrNodeData::FLAG_ROT_CV16_FMT: {
         x = CalcResultFrm16(pNodeData, pAnmData++, rInfoData.numFrame, frame,
-                            flags & ResAnmChrNodeData::FLAG_R_X_CONST);
+                            flags & ResAnmChrNodeData::FLAG_ROT_X_CONST);
         y = CalcResultFrm16(pNodeData, pAnmData++, rInfoData.numFrame, frame,
-                            flags & ResAnmChrNodeData::FLAG_R_Y_CONST);
+                            flags & ResAnmChrNodeData::FLAG_ROT_Y_CONST);
         z = CalcResultFrm16(pNodeData, pAnmData++, rInfoData.numFrame, frame,
-                            flags & ResAnmChrNodeData::FLAG_R_Z_CONST);
+                            flags & ResAnmChrNodeData::FLAG_ROT_Z_CONST);
         break;
     }
 
-    case ResAnmChrNodeData::FLAG_R_CV32_FMT: {
+    case ResAnmChrNodeData::FLAG_ROT_CV32_FMT: {
         x = CalcResultFrm32(pNodeData, pAnmData++, rInfoData.numFrame, frame,
-                            flags & ResAnmChrNodeData::FLAG_R_X_CONST);
+                            flags & ResAnmChrNodeData::FLAG_ROT_X_CONST);
         y = CalcResultFrm32(pNodeData, pAnmData++, rInfoData.numFrame, frame,
-                            flags & ResAnmChrNodeData::FLAG_R_Y_CONST);
+                            flags & ResAnmChrNodeData::FLAG_ROT_Y_CONST);
         z = CalcResultFrm32(pNodeData, pAnmData++, rInfoData.numFrame, frame,
-                            flags & ResAnmChrNodeData::FLAG_R_Z_CONST);
+                            flags & ResAnmChrNodeData::FLAG_ROT_Z_CONST);
         break;
     }
 
@@ -573,7 +572,7 @@ GetAnmTranslation(math::VEC3* pTrans, const ResAnmChrNodeData* pNodeData,
     u32 flags = pNodeData->flags;
     f32 x, y, z;
 
-    switch (flags & ResAnmChrNodeData::FLAG_T_FMT_MASK) {
+    switch (flags & ResAnmChrNodeData::FLAG_TRANS_FMT_MASK) {
     case 0: {
         x = pAnmData++->constValue;
         y = pAnmData++->constValue;
@@ -581,33 +580,33 @@ GetAnmTranslation(math::VEC3* pTrans, const ResAnmChrNodeData* pNodeData,
         break;
     }
 
-    case ResAnmChrNodeData::FLAG_T_FVS32_FMT: {
+    case ResAnmChrNodeData::FLAG_TRANS_FVS32_FMT: {
         x = CalcResult32(pNodeData, pAnmData++, frame,
-                         flags & ResAnmChrNodeData::FLAG_T_X_CONST);
+                         flags & ResAnmChrNodeData::FLAG_TRANS_X_CONST);
         y = CalcResult32(pNodeData, pAnmData++, frame,
-                         flags & ResAnmChrNodeData::FLAG_T_Y_CONST);
+                         flags & ResAnmChrNodeData::FLAG_TRANS_Y_CONST);
         z = CalcResult32(pNodeData, pAnmData++, frame,
-                         flags & ResAnmChrNodeData::FLAG_T_Z_CONST);
+                         flags & ResAnmChrNodeData::FLAG_TRANS_Z_CONST);
         break;
     }
 
-    case ResAnmChrNodeData::FLAG_T_FVS48_FMT: {
+    case ResAnmChrNodeData::FLAG_TRANS_FVS48_FMT: {
         x = CalcResult48(pNodeData, pAnmData++, frame,
-                         flags & ResAnmChrNodeData::FLAG_T_X_CONST);
+                         flags & ResAnmChrNodeData::FLAG_TRANS_X_CONST);
         y = CalcResult48(pNodeData, pAnmData++, frame,
-                         flags & ResAnmChrNodeData::FLAG_T_Y_CONST);
+                         flags & ResAnmChrNodeData::FLAG_TRANS_Y_CONST);
         z = CalcResult48(pNodeData, pAnmData++, frame,
-                         flags & ResAnmChrNodeData::FLAG_T_Z_CONST);
+                         flags & ResAnmChrNodeData::FLAG_TRANS_Z_CONST);
         break;
     }
 
-    case ResAnmChrNodeData::FLAG_T_FVS96_FMT: {
+    case ResAnmChrNodeData::FLAG_TRANS_FVS96_FMT: {
         x = CalcResult96(pNodeData, pAnmData++, frame,
-                         flags & ResAnmChrNodeData::FLAG_T_X_CONST);
+                         flags & ResAnmChrNodeData::FLAG_TRANS_X_CONST);
         y = CalcResult96(pNodeData, pAnmData++, frame,
-                         flags & ResAnmChrNodeData::FLAG_T_Y_CONST);
+                         flags & ResAnmChrNodeData::FLAG_TRANS_Y_CONST);
         z = CalcResult96(pNodeData, pAnmData++, frame,
-                         flags & ResAnmChrNodeData::FLAG_T_Z_CONST);
+                         flags & ResAnmChrNodeData::FLAG_TRANS_Z_CONST);
         break;
     }
 
@@ -704,7 +703,7 @@ void GetAnmResult_R(ChrAnmResult* pResult, const ResAnmChrInfoData& rInfoData,
     GetAnmRotation(&pResult->rt, &pResult->rawR, rInfoData, pNodeData, pAnmData,
                    frame);
 
-    pResult->flags |= ChrAnmResult::FLAG_R_RAW_FMT;
+    pResult->flags |= ChrAnmResult::FLAG_ROT_RAW_FMT;
 
     pResult->rt._03 = 0.0f;
     pResult->rt._13 = 0.0f;
@@ -734,7 +733,7 @@ void GetAnmResult_RT(ChrAnmResult* pResult, const ResAnmChrInfoData& rInfoData,
     pAnmData = GetAnmRotation(&pResult->rt, &pResult->rawR, rInfoData,
                               pNodeData, pAnmData, frame);
 
-    pResult->flags |= ChrAnmResult::FLAG_R_RAW_FMT;
+    pResult->flags |= ChrAnmResult::FLAG_ROT_RAW_FMT;
 
     GetAnmTranslation(&t, pNodeData, pAnmData, frame);
     pResult->rt._03 = t.x;
@@ -752,7 +751,7 @@ void GetAnmResult_SR(ChrAnmResult* pResult, const ResAnmChrInfoData& rInfoData,
     GetAnmRotation(&pResult->rt, &pResult->rawR, rInfoData, pNodeData, pAnmData,
                    frame);
 
-    pResult->flags |= ChrAnmResult::FLAG_R_RAW_FMT;
+    pResult->flags |= ChrAnmResult::FLAG_ROT_RAW_FMT;
 
     pResult->rt._03 = 0.0f;
     pResult->rt._13 = 0.0f;
@@ -786,7 +785,7 @@ void GetAnmResult_SRT(ChrAnmResult* pResult, const ResAnmChrInfoData& rInfoData,
                               pNodeData, pAnmData, frame);
     pAnmData = GetAnmTranslation(&t, pNodeData, pAnmData, frame);
 
-    pResult->flags |= ChrAnmResult::FLAG_R_RAW_FMT;
+    pResult->flags |= ChrAnmResult::FLAG_ROT_RAW_FMT;
 
     pResult->rt._03 = t.x;
     pResult->rt._13 = t.y;
@@ -804,7 +803,16 @@ void ResAnmChr::GetAnmResult(ChrAnmResult* pResult, u32 idx, f32 frame) const {
     const ResAnmChrNodeData* pNodeData = GetNodeAnm(idx);
 
     u32 flags = pNodeData->flags;
-    pResult->flags = flags & ResAnmChrNodeData::FLAG_ANM_RESULT_MASK;
+
+    pResult->flags =
+        flags &
+        (ChrAnmResult::FLAG_ANM_EXISTS | ChrAnmResult::FLAG_MTX_IDENT |
+         ChrAnmResult::FLAG_ROT_TRANS_ZERO | ChrAnmResult::FLAG_SCALE_ONE |
+         ChrAnmResult::FLAG_SCALE_UNIFORM | ChrAnmResult::FLAG_ROT_ZERO |
+         ChrAnmResult::FLAG_TRANS_ZERO | ChrAnmResult::FLAG_PATCH_SCALE |
+         ChrAnmResult::FLAG_PATCH_ROT | ChrAnmResult::FLAG_PATCH_TRANS |
+         ChrAnmResult::FLAG_SSC_APPLY | ChrAnmResult::FLAG_SSC_PARENT |
+         ChrAnmResult::FLAG_XSI_SCALING);
 
     u32 index = (flags & ResAnmChrNodeData::FLAG_HAS_SRT_MASK) >> 22;
     gGetAnmResultTable[index](pResult, ref().info, pNodeData, frame);
@@ -816,7 +824,7 @@ void ResAnmChr::GetAnmResult(ChrAnmResult* pResult, u32 idx, f32 frame) const {
  *
  ******************************************************************************/
 void ChrAnmResult::GetScale(math::VEC3* pScale) const {
-    if (flags & FLAG_S_ONE) {
+    if (flags & FLAG_SCALE_ONE) {
         pScale->x = 1.0f;
         pScale->y = 1.0f;
         pScale->z = 1.0f;
@@ -828,14 +836,14 @@ void ChrAnmResult::GetScale(math::VEC3* pScale) const {
 }
 
 bool ChrAnmResult::GetRotateDeg(math::VEC3* pRotate) const {
-    if (flags & FLAG_R_ZERO) {
+    if (flags & FLAG_ROT_ZERO) {
         pRotate->x = 0.0f;
         pRotate->y = 0.0f;
         pRotate->z = 0.0f;
         return true;
     }
 
-    if (flags & FLAG_R_RAW_FMT) {
+    if (flags & FLAG_ROT_RAW_FMT) {
         pRotate->x = rawR.x;
         pRotate->y = rawR.y;
         pRotate->z = rawR.z;
@@ -859,7 +867,7 @@ bool ChrAnmResult::GetRotateDeg(math::VEC3* pRotate) const {
 }
 
 void ChrAnmResult::GetTranslate(math::VEC3* pTrans) const {
-    if (flags & FLAG_T_ZERO) {
+    if (flags & FLAG_TRANS_ZERO) {
         pTrans->x = 0.0f;
         pTrans->y = 0.0f;
         pTrans->z = 0.0f;
@@ -871,8 +879,8 @@ void ChrAnmResult::GetTranslate(math::VEC3* pTrans) const {
 }
 
 void ChrAnmResult::GetRotTrans(math::MTX34* pRotTrans) const {
-    if (flags & FLAG_R_ZERO) {
-        if (flags & FLAG_T_ZERO) {
+    if (flags & FLAG_ROT_ZERO) {
+        if (flags & FLAG_TRANS_ZERO) {
             math::MTX34Identity(pRotTrans);
         } else {
             math::MTX34Identity(pRotTrans);
@@ -880,7 +888,7 @@ void ChrAnmResult::GetRotTrans(math::MTX34* pRotTrans) const {
             pRotTrans->_13 = rt._13;
             pRotTrans->_23 = rt._23;
         }
-    } else if (flags & FLAG_T_ZERO) {
+    } else if (flags & FLAG_TRANS_ZERO) {
         math::MTX34Copy(pRotTrans, &rt);
         pRotTrans->_03 = 0.0f;
         pRotTrans->_13 = 0.0f;
@@ -892,16 +900,16 @@ void ChrAnmResult::GetRotTrans(math::MTX34* pRotTrans) const {
 
 void ChrAnmResult::SetScale(const math::VEC3* pScale) {
     if (pScale->x == 1.0f && pScale->y == 1.0f && pScale->z == 1.0f) {
-        flags |= FLAG_S_ONE | FLAG_S_UNIFORM;
+        flags |= FLAG_SCALE_ONE | FLAG_SCALE_UNIFORM;
 
-        if (flags & FLAG_RT_ZERO) {
+        if (flags & FLAG_ROT_TRANS_ZERO) {
             flags |= FLAG_MTX_IDENT;
         }
     } else {
-        flags &= ~(FLAG_MTX_IDENT | FLAG_S_ONE | FLAG_S_UNIFORM);
+        flags &= ~(FLAG_MTX_IDENT | FLAG_SCALE_ONE | FLAG_SCALE_UNIFORM);
 
         if (pScale->x == pScale->y && pScale->y == pScale->z) {
-            flags |= FLAG_S_UNIFORM;
+            flags |= FLAG_SCALE_UNIFORM;
         }
     }
 
@@ -920,24 +928,25 @@ void ChrAnmResult::SetRotTrans(const math::MTX34* pRotTrans) {
 
     if (rotZero) {
         if (transZero) {
-            flags |= FLAG_RT_ZERO | FLAG_R_ZERO | FLAG_T_ZERO;
+            flags |= FLAG_ROT_TRANS_ZERO | FLAG_ROT_ZERO | FLAG_TRANS_ZERO;
 
-            if (flags & FLAG_S_ONE) {
+            if (flags & FLAG_SCALE_ONE) {
                 flags |= FLAG_MTX_IDENT;
             }
         } else {
-            flags |= FLAG_R_ZERO;
-            flags &= ~(FLAG_MTX_IDENT | FLAG_RT_ZERO | FLAG_T_ZERO);
+            flags |= FLAG_ROT_ZERO;
+            flags &= ~(FLAG_MTX_IDENT | FLAG_ROT_TRANS_ZERO | FLAG_TRANS_ZERO);
         }
     } else if (transZero) {
-        flags |= FLAG_T_ZERO;
-        flags &= ~(FLAG_MTX_IDENT | FLAG_RT_ZERO | FLAG_R_ZERO);
+        flags |= FLAG_TRANS_ZERO;
+        flags &= ~(FLAG_MTX_IDENT | FLAG_ROT_TRANS_ZERO | FLAG_ROT_ZERO);
     } else {
-        flags &= ~(FLAG_MTX_IDENT | FLAG_RT_ZERO | FLAG_R_ZERO | FLAG_T_ZERO);
+        flags &= ~(FLAG_MTX_IDENT | FLAG_ROT_TRANS_ZERO | FLAG_ROT_ZERO |
+                   FLAG_TRANS_ZERO);
     }
 
     math::MTX34Copy(&rt, pRotTrans);
-    flags &= ~FLAG_R_RAW_FMT;
+    flags &= ~FLAG_ROT_RAW_FMT;
 }
 
 } // namespace g3d

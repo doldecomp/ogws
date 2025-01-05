@@ -34,12 +34,12 @@ f32 GetResKeyFrameAnmResult(const ResKeyFrameAnmData* pData, f32 frame);
  * ResAnm
  *
  ******************************************************************************/
+enum AnmPolicy { ANM_POLICY_ONETIME, ANM_POLICY_LOOP, ANM_POLICY_MAX };
+
 union ResAnmData {
     f32 constValue;           // at 0x0
     s32 toResKeyFrameAnmData; // at 0x0
 };
-
-enum AnmPolicy { ANM_POLICY_ONETIME, ANM_POLICY_LOOP, ANM_POLICY_MAX };
 
 namespace detail {
 

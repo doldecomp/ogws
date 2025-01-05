@@ -10,14 +10,11 @@ namespace nw4r {
 namespace g3d {
 
 struct ResAnmVisAnmData {
+    enum Flag { FLAG_ENABLE = (1 << 0), FLAG_CONST = (1 << 1) };
+
     s32 name;                        // at 0x0
     u32 flags;                       // at 0x4
     ResBoolAnmFramesData visibility; // at 0x8
-
-    enum Flag {
-        FLAG_ANM_CONSTANT_VALUE = (1 << 0),
-        FLAG_ANM_IS_CONSTANT = (1 << 1)
-    };
 };
 
 struct ResAnmVisInfoData {

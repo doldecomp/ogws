@@ -480,116 +480,116 @@ void ApplyClrAnmResult(ResMatChan chan, ResMatTevColor tev,
     ut::Color c;
 
     if (pResult->bRgbaExist &
-        (1 << ClrAnmResult::ELEMENT_CLR0 | 1 << ClrAnmResult::ELEMENT_CLR1 |
-         1 << ClrAnmResult::ELEMENT_AMB0 | 1 << ClrAnmResult::ELEMENT_AMB1)) {
+        (1 << ClrAnmResult::CLA_CLR0 | 1 << ClrAnmResult::CLA_CLR1 |
+         1 << ClrAnmResult::CLA_AMB0 | 1 << ClrAnmResult::CLA_AMB1)) {
 
-        if (pResult->bRgbaExist & (1 << ClrAnmResult::ELEMENT_CLR0)) {
+        if (pResult->bRgbaExist & (1 << ClrAnmResult::CLA_CLR0)) {
             GXColor& rMatColor = chan.ref().chan[0].matColor;
             c = rMatColor;
 
-            rMatColor = (c & pResult->rgbaMask[ClrAnmResult::ELEMENT_CLR0]) |
-                        pResult->rgba[ClrAnmResult::ELEMENT_CLR0];
+            rMatColor = (c & pResult->rgbaMask[ClrAnmResult::CLA_CLR0]) |
+                        pResult->rgba[ClrAnmResult::CLA_CLR0];
         }
 
-        if (pResult->bRgbaExist & (1 << ClrAnmResult::ELEMENT_AMB0)) {
+        if (pResult->bRgbaExist & (1 << ClrAnmResult::CLA_AMB0)) {
             GXColor& rMatColor = chan.ref().chan[0].ambColor;
             c = rMatColor;
 
-            rMatColor = (c & pResult->rgbaMask[ClrAnmResult::ELEMENT_AMB0]) |
-                        pResult->rgba[ClrAnmResult::ELEMENT_AMB0];
+            rMatColor = (c & pResult->rgbaMask[ClrAnmResult::CLA_AMB0]) |
+                        pResult->rgba[ClrAnmResult::CLA_AMB0];
         }
 
-        if (pResult->bRgbaExist & (1 << ClrAnmResult::ELEMENT_CLR1)) {
+        if (pResult->bRgbaExist & (1 << ClrAnmResult::CLA_CLR1)) {
             GXColor& rMatColor = chan.ref().chan[1].matColor;
             c = rMatColor;
 
-            rMatColor = (c & pResult->rgbaMask[ClrAnmResult::ELEMENT_CLR1]) |
-                        pResult->rgba[ClrAnmResult::ELEMENT_CLR1];
+            rMatColor = (c & pResult->rgbaMask[ClrAnmResult::CLA_CLR1]) |
+                        pResult->rgba[ClrAnmResult::CLA_CLR1];
         }
 
-        if (pResult->bRgbaExist & (1 << ClrAnmResult::ELEMENT_AMB1)) {
+        if (pResult->bRgbaExist & (1 << ClrAnmResult::CLA_AMB1)) {
             GXColor& rMatColor = chan.ref().chan[1].ambColor;
             c = rMatColor;
 
-            rMatColor = (c & pResult->rgbaMask[ClrAnmResult::ELEMENT_AMB1]) |
-                        pResult->rgba[ClrAnmResult::ELEMENT_AMB1];
+            rMatColor = (c & pResult->rgbaMask[ClrAnmResult::CLA_AMB1]) |
+                        pResult->rgba[ClrAnmResult::CLA_AMB1];
         }
     }
 
     if (pResult->bRgbaExist &
-        (1 << ClrAnmResult::ELEMENT_TEV0 | 1 << ClrAnmResult::ELEMENT_TEV1 |
-         1 << ClrAnmResult::ELEMENT_TEV2 | 1 << ClrAnmResult::ELEMENT_TEVK0 |
-         1 << ClrAnmResult::ELEMENT_TEVK1 | 1 << ClrAnmResult::ELEMENT_TEVK2 |
-         1 << ClrAnmResult::ELEMENT_TEVK3)) {
+        (1 << ClrAnmResult::CLA_TEV0 | 1 << ClrAnmResult::CLA_TEV1 |
+         1 << ClrAnmResult::CLA_TEV2 | 1 << ClrAnmResult::CLA_TEVK0 |
+         1 << ClrAnmResult::CLA_TEVK1 | 1 << ClrAnmResult::CLA_TEVK2 |
+         1 << ClrAnmResult::CLA_TEVK3)) {
 
-        if (pResult->bRgbaExist & (1 << ClrAnmResult::ELEMENT_TEV0)) {
+        if (pResult->bRgbaExist & (1 << ClrAnmResult::CLA_TEV0)) {
             if (!tev.GXGetTevColor(GX_TEVREG0, &c)) {
                 c = ut::Color::BLACK;
             }
 
-            tev.GXSetTevColor(
-                GX_TEVREG0, c & pResult->rgbaMask[ClrAnmResult::ELEMENT_TEV0] |
-                                pResult->rgba[ClrAnmResult::ELEMENT_TEV0]);
+            tev.GXSetTevColor(GX_TEVREG0,
+                              c & pResult->rgbaMask[ClrAnmResult::CLA_TEV0] |
+                                  pResult->rgba[ClrAnmResult::CLA_TEV0]);
         }
 
-        if (pResult->bRgbaExist & (1 << ClrAnmResult::ELEMENT_TEV1)) {
+        if (pResult->bRgbaExist & (1 << ClrAnmResult::CLA_TEV1)) {
             if (!tev.GXGetTevColor(GX_TEVREG1, &c)) {
                 c = ut::Color::BLACK;
             }
 
-            tev.GXSetTevColor(
-                GX_TEVREG1, c & pResult->rgbaMask[ClrAnmResult::ELEMENT_TEV1] |
-                                pResult->rgba[ClrAnmResult::ELEMENT_TEV1]);
+            tev.GXSetTevColor(GX_TEVREG1,
+                              c & pResult->rgbaMask[ClrAnmResult::CLA_TEV1] |
+                                  pResult->rgba[ClrAnmResult::CLA_TEV1]);
         }
 
-        if (pResult->bRgbaExist & (1 << ClrAnmResult::ELEMENT_TEV2)) {
+        if (pResult->bRgbaExist & (1 << ClrAnmResult::CLA_TEV2)) {
             if (!tev.GXGetTevColor(GX_TEVREG2, &c)) {
                 c = ut::Color::BLACK;
             }
 
-            tev.GXSetTevColor(
-                GX_TEVREG2, c & pResult->rgbaMask[ClrAnmResult::ELEMENT_TEV2] |
-                                pResult->rgba[ClrAnmResult::ELEMENT_TEV2]);
+            tev.GXSetTevColor(GX_TEVREG2,
+                              c & pResult->rgbaMask[ClrAnmResult::CLA_TEV2] |
+                                  pResult->rgba[ClrAnmResult::CLA_TEV2]);
         }
 
-        if (pResult->bRgbaExist & (1 << ClrAnmResult::ELEMENT_TEVK0)) {
+        if (pResult->bRgbaExist & (1 << ClrAnmResult::CLA_TEVK0)) {
             if (!tev.GXGetTevKColor(GX_KCOLOR0, &c)) {
                 c = ut::Color::BLACK;
             }
 
-            tev.GXSetTevKColor(
-                GX_KCOLOR0, c & pResult->rgbaMask[ClrAnmResult::ELEMENT_TEVK0] |
-                                pResult->rgba[ClrAnmResult::ELEMENT_TEVK0]);
+            tev.GXSetTevKColor(GX_KCOLOR0,
+                               c & pResult->rgbaMask[ClrAnmResult::CLA_TEVK0] |
+                                   pResult->rgba[ClrAnmResult::CLA_TEVK0]);
         }
 
-        if (pResult->bRgbaExist & (1 << ClrAnmResult::ELEMENT_TEVK1)) {
+        if (pResult->bRgbaExist & (1 << ClrAnmResult::CLA_TEVK1)) {
             if (!tev.GXGetTevKColor(GX_KCOLOR1, &c)) {
                 c = ut::Color::BLACK;
             }
 
-            tev.GXSetTevKColor(
-                GX_KCOLOR1, c & pResult->rgbaMask[ClrAnmResult::ELEMENT_TEVK1] |
-                                pResult->rgba[ClrAnmResult::ELEMENT_TEVK1]);
+            tev.GXSetTevKColor(GX_KCOLOR1,
+                               c & pResult->rgbaMask[ClrAnmResult::CLA_TEVK1] |
+                                   pResult->rgba[ClrAnmResult::CLA_TEVK1]);
         }
 
-        if (pResult->bRgbaExist & (1 << ClrAnmResult::ELEMENT_TEVK2)) {
+        if (pResult->bRgbaExist & (1 << ClrAnmResult::CLA_TEVK2)) {
             if (!tev.GXGetTevKColor(GX_KCOLOR2, &c)) {
                 c = ut::Color::BLACK;
             }
 
-            tev.GXSetTevKColor(
-                GX_KCOLOR2, c & pResult->rgbaMask[ClrAnmResult::ELEMENT_TEVK2] |
-                                pResult->rgba[ClrAnmResult::ELEMENT_TEVK2]);
+            tev.GXSetTevKColor(GX_KCOLOR2,
+                               c & pResult->rgbaMask[ClrAnmResult::CLA_TEVK2] |
+                                   pResult->rgba[ClrAnmResult::CLA_TEVK2]);
         }
 
-        if (pResult->bRgbaExist & (1 << ClrAnmResult::ELEMENT_TEVK3)) {
+        if (pResult->bRgbaExist & (1 << ClrAnmResult::CLA_TEVK3)) {
             if (!tev.GXGetTevKColor(GX_KCOLOR3, &c)) {
                 c = ut::Color::BLACK;
             }
 
-            tev.GXSetTevKColor(
-                GX_KCOLOR3, c & pResult->rgbaMask[ClrAnmResult::ELEMENT_TEVK3] |
-                                pResult->rgba[ClrAnmResult::ELEMENT_TEVK3]);
+            tev.GXSetTevKColor(GX_KCOLOR3,
+                               c & pResult->rgbaMask[ClrAnmResult::CLA_TEVK3] |
+                                   pResult->rgba[ClrAnmResult::CLA_TEVK3]);
         }
 
         tev.DCStore(false);

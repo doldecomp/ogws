@@ -30,6 +30,12 @@ struct FogAnmResult {
  *
  ******************************************************************************/
 struct ResAnmFogData {
+    enum Flag {
+        FLAG_START_CONST = (1 << 29),
+        FLAG_END_CONST = (1 << 30),
+        FLAG_COLOR_CONST = (1 << 31)
+    };
+
     u32 size;              // at 0x0
     s32 toResAnmScnData;   // at 0x4
     s32 name;              // at 0x8
@@ -40,12 +46,6 @@ struct ResAnmFogData {
     ResAnmData startz;     // at 0x1C
     ResAnmData endz;       // at 0x20
     ResColorAnmData color; // at 0x24
-
-    enum Flag {
-        FLAG_STARTZ_CONSTANT = (1 << 29),
-        FLAG_ENDZ_CONSTANT = (1 << 30),
-        FLAG_COLOR_CONSTANT = (1 << 31),
-    };
 };
 
 class ResAnmFog : public ResCommon<ResAnmFogData> {

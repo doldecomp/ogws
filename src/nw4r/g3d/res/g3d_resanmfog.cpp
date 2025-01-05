@@ -12,9 +12,9 @@ void ResAnmFog::GetAnmResult(FogAnmResult* pResult, f32 frame) const {
 
     f32 clippedFrame = detail::ClipFrame(rInfoData, frame);
 
-    bool startZConstant = (flags & ResAnmFogData::FLAG_STARTZ_CONSTANT) != 0;
-    bool endZConstant = (flags & ResAnmFogData::FLAG_ENDZ_CONSTANT) != 0;
-    bool colorConstant = (flags & ResAnmFogData::FLAG_COLOR_CONSTANT) != 0;
+    bool startZConstant = (flags & ResAnmFogData::FLAG_START_CONST) != 0;
+    bool endZConstant = (flags & ResAnmFogData::FLAG_END_CONST) != 0;
+    bool colorConstant = (flags & ResAnmFogData::FLAG_COLOR_CONST) != 0;
 
     pResult->type = r.type;
     pResult->startz = detail::GetResAnmResult(&r.startz, frame, startZConstant);

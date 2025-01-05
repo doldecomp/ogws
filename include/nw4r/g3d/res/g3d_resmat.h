@@ -206,7 +206,7 @@ public:
  ******************************************************************************/
 struct TexMtxEffect : TexSrtTypedef {
     enum Flag {
-        FLAG_IDENTITY = (1 << 0),
+        FLAG_IDENT = (1 << 0),
     };
 
     s8 ref_camera;          // at 0x0
@@ -255,7 +255,7 @@ public:
     bool IsIdentity(u32 id) const {
         return (((ref().flag >> id * TexSrt::NUM_OF_FLAGS) &
                  TexSrt::FLAGSET_IDENTITY) == TexSrt::FLAGSET_IDENTITY) &&
-               (ref().effect[id].misc_flag & TexMtxEffect::FLAG_IDENTITY);
+               (ref().effect[id].misc_flag & TexMtxEffect::FLAG_IDENT);
     }
 
     TexSrtTypedef::TexMatrixMode GetTexMtxMode() const {
@@ -272,14 +272,14 @@ public:
  ******************************************************************************/
 struct Chan {
     enum Flag {
-        FLAG_MAT_COLOR = (1 << 0),
-        FLAG_MAT_ALPHA = (1 << 1),
+        FLAG_MAT_COLOR_ENABLE = (1 << 0),
+        FLAG_MAT_ALPHA_ENABLE = (1 << 1),
 
-        FLAG_AMB_COLOR = (1 << 2),
-        FLAG_AMB_ALPHA = (1 << 3),
+        FLAG_AMB_COLOR_ENABLE = (1 << 2),
+        FLAG_AMB_ALPHA_ENABLE = (1 << 3),
 
-        FLAG_CTRL_COLOR = (1 << 4),
-        FLAG_CTRL_ALPHA = (1 << 5),
+        FLAG_CTRL_COLOR_ENABLE = (1 << 4),
+        FLAG_CTRL_ALPHA_ENABLE = (1 << 5),
     };
 
     u32 flag;           // at 0x0

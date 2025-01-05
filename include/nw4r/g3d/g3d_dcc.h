@@ -25,6 +25,7 @@ public:
         ATTR_ALL_S_ONE = (1 << 31),
     };
 
+public:
     static ResNodeData::Billboard GetBillboard(u32 attr) {
         return static_cast<ResNodeData::Billboard>(attr & ATTR_BILLBOARD_MASK);
     }

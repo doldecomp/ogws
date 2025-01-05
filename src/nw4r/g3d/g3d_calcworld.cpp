@@ -73,7 +73,7 @@ void CalcWorld(math::MTX34* pModelMtxArray, u32* pModelMtxAttribArray,
                     pResult = &result;
                 }
 
-                result.flags |= ChrAnmResult::FLAG_PATCH_T;
+                result.flags |= ChrAnmResult::FLAG_PATCH_TRANS;
                 node.PatchChrAnmResult(&result);
             }
 
@@ -90,7 +90,7 @@ void CalcWorld(math::MTX34* pModelMtxArray, u32* pModelMtxAttribArray,
                 pModelMtxAttribArray[mtxID] = detail::dcc::CalcWorldMtx_Xsi(
                     pModelMtx, pScale, pParentModelMtx, pParentScale,
                     parentAttr, pResult);
-            } else if (pResult->flags & ChrAnmResult::FLAG_COMP_SCALE) {
+            } else if (pResult->flags & ChrAnmResult::FLAG_SSC_APPLY) {
                 pModelMtxAttribArray[mtxID] =
                     detail::dcc::CalcWorldMtx_Maya_SSC_Apply(
                         pModelMtx, pScale, pParentModelMtx, pParentScale,

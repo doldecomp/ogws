@@ -10,6 +10,10 @@ namespace nw4r {
 namespace g3d {
 
 struct ResTexData {
+    enum Flag {
+        FLAG_CIFMT = (1 << 0),
+    };
+
     ResBlockHeaderData header; // at 0x0
     u32 revision;              // at 0x8
     s32 toResFileData;         // at 0xC
@@ -56,7 +60,7 @@ public:
                           GXBool* pMipMap) const;
 
     bool IsCIFmt() const {
-        return ref().flag & FLAG_CI_FMT;
+        return ref().flag & ResTexData::FLAG_CIFMT;
     }
 
     u16 GetWidth() const {
@@ -69,11 +73,6 @@ public:
     const void* GetTexData() const {
         return ofs_to_ptr<void>(ref().toTexData);
     }
-
-private:
-    enum Flag {
-        FLAG_CI_FMT = (1 << 0),
-    };
 };
 
 } // namespace g3d

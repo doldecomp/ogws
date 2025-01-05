@@ -15,6 +15,13 @@ namespace G3DState {
 class IndMtxOp;
 }
 
+enum Draw1Mat1ShpCtrl {
+    DRAW1MAT1SHP_CTRL_NOPPCSYNC = (1 << 0),
+    DRAW1MAT1SHP_CTRL_NOSWAPSHP = (1 << 1),
+    DRAW1MAT1SHP_CTRL_CULL_FRONT = (1 << 2),
+    DRAW1MAT1SHP_CTRL_FORCE_LIGHTOFF = (1 << 3),
+};
+
 struct Draw1Mat1ShpSwap {
     ResTexObj texObj;                    // at 0x0
     ResTlutObj tlutObj;                  // at 0x4
@@ -33,13 +40,6 @@ struct Draw1Mat1ShpSwap {
 
     Draw1Mat1ShpSwap()
         : vtxPosTable(NULL), vtxNrmTable(NULL), vtxClrTable(NULL) {}
-};
-
-enum Draw1Mat1ShpCtrl {
-    DRAW1MAT1SHP_CTRL_NOPPCSYNC = (1 << 0),
-    DRAW1MAT1SHP_CTRL_NOSWAPSHP = (1 << 1),
-    DRAW1MAT1SHP_CTRL_CULL_FRONT = (1 << 2),
-    DRAW1MAT1SHP_CTRL_FORCE_LIGHTOFF = (1 << 3),
 };
 
 void Draw1Mat1ShpDirectly(ResMat mat, ResShp shp, const math::MTX34* pViewPos,
