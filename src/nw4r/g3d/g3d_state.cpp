@@ -585,9 +585,9 @@ public:
 private:
     GXTexObj mTexObj[GX_MAX_TEXMAP]; // at 0x0
     u8 mValidFlag;                   // at 0x100
-    u8 _0;                           // at 0x101
-    u8 _1;                           // at 0x102
-    u8 _2;                           // at 0x103
+    u8 PADDING_0x101;                // at 0x101
+    u8 PADDING_0x102;                // at 0x102
+    u8 PADDING_0x103;                // at 0x103
 };
 
 TexState sTex ALIGN(32);
@@ -629,7 +629,7 @@ public:
 private:
     GXTlutObj mTlutObj[GX_TLUT7 - GX_TLUT0 + 1]; // at 0x0
     u16 mFlag;                                   // at 0x60
-    u16 _;                                       // at 0x62
+    u16 PADDING_0x62;                            // at 0x62
 };
 
 TlutState sTlut ALIGN(32);
@@ -1969,7 +1969,7 @@ IndMtxOpStd::IndMtxOpStd() {
     mIsValidMtx[GX_ITM_0 - 1] = mIsValidMtx[GX_ITM_1 - 1] =
         mIsValidMtx[GX_ITM_2 - 1] = false;
 
-    _ = 0;
+    PADDING_0x7 = 0;
 }
 
 void IndMtxOpStd::SetNrmMapMtx(GXIndTexMtxID id, const math::VEC3* pLightVec,

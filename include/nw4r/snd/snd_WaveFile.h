@@ -26,7 +26,7 @@ struct WaveInfo {
     u8 numChannels;             // at 0x2
     u8 sampleRate24;            // at 0x3
     u16 sampleRate;             // at 0x4
-    u16 padding2;               // at 0x6
+    u16 PADDING_0x6;            // at 0x6
     u32 loopStart;              // at 0x8
     u32 loopEnd;                // at 0xC
     u32 channelInfoTableOffset; // at 0x10

@@ -80,7 +80,7 @@ struct AdpcmLoopParam {
 struct AdpcmInfo {
     AdpcmParam param;         // at 0x0
     AdpcmLoopParam loopParam; // at 0x28
-    u16 padding;
+    u16 PADDING_0x2E;         // at 0x2E
 };
 
 } // namespace detail
