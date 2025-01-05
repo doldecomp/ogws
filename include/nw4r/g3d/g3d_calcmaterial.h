@@ -12,7 +12,8 @@ class AnmObjTexPat;
 class AnmObjTexSrt;
 class AnmObjMatClr;
 
-void CalcMaterialDirectly(ResMdl, AnmObjTexPat*, AnmObjTexSrt*, AnmObjMatClr*);
+void CalcMaterialDirectly(ResMdl mdl, AnmObjTexPat* pAnmTexPat,
+                          AnmObjTexSrt* pAnmTexSrt, AnmObjMatClr* pAnmMatClr);
 
 } // namespace g3d
 } // namespace nw4r
