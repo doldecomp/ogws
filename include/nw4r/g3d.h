@@ -20,6 +20,7 @@
 #include <nw4r/g3d/g3d_draw.h>
 #include <nw4r/g3d/g3d_draw1mat1shp.h>
 #include <nw4r/g3d/g3d_fog.h>
+#include <nw4r/g3d/g3d_init.h>
 #include <nw4r/g3d/g3d_light.h>
 #include <nw4r/g3d/g3d_maya.h>
 #include <nw4r/g3d/g3d_obj.h>
@@ -51,6 +52,7 @@
 #include <nw4r/g3d/res/g3d_resanmscn.h>
 #include <nw4r/g3d/res/g3d_resanmshp.h>
 #include <nw4r/g3d/res/g3d_resanmtexpat.h>
+#include <nw4r/g3d/res/g3d_resanmtexsrt.h>
 #include <nw4r/g3d/res/g3d_resanmvis.h>
 #include <nw4r/g3d/res/g3d_rescommon.h>
 #include <nw4r/g3d/res/g3d_resdict.h>
@@ -59,9 +61,11 @@
 #include <nw4r/g3d/res/g3d_resmat.h>
 #include <nw4r/g3d/res/g3d_resmdl.h>
 #include <nw4r/g3d/res/g3d_resnode.h>
+#include <nw4r/g3d/res/g3d_respltt.h>
 #include <nw4r/g3d/res/g3d_resshp.h>
 #include <nw4r/g3d/res/g3d_restev.h>
 #include <nw4r/g3d/res/g3d_restex.h>
+#include <nw4r/g3d/res/g3d_resvtx.h>
 
 /******************************************************************************
  *
