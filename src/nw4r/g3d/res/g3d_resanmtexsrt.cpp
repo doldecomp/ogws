@@ -7,8 +7,8 @@ namespace nw4r {
 namespace g3d {
 namespace {
 
-DECOMP_INLINE u32 MakeResult(TexSrt* pSrt, const ResAnmTexSrtTexData* pTexData,
-                             f32 frame) {
+inline u32 MakeResult(TexSrt* pSrt, const ResAnmTexSrtTexData* pTexData,
+                      f32 frame) {
     int anmIdx = 0;
     u32 flags = pTexData->flags;
     TexSrt& rSrt = *pSrt;

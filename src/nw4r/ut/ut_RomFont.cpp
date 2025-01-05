@@ -7,11 +7,11 @@ u16 RomFont::mFontEncode = 0xFFFF;
 
 namespace {
 
-bool IsCP1252Char(u16 ch) {
+inline bool IsCP1252Char(u16 ch) {
     return ch >= 0x20 && ch <= 0xFF;
 }
 
-bool IsSJISHalfWidthChar(u16 ch) {
+inline bool IsSJISHalfWidthChar(u16 ch) {
     if (ch > 0xFF) {
         return false;
     }
@@ -19,7 +19,7 @@ bool IsSJISHalfWidthChar(u16 ch) {
     return (ch >= 0x20 && ch <= 0x7E) || (ch >= 0xA1 && ch <= 0xDF);
 }
 
-bool IsSJISFullWidthChar(u16 ch) {
+inline bool IsSJISFullWidthChar(u16 ch) {
     u8 hi = BitExtract<u16>(ch, 8, 8);
     u8 lo = BitExtract<u16>(ch, 0, 8);
 

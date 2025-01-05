@@ -49,7 +49,7 @@ const ResAnmTexPatFrmData* SearchFrame(const ResAnmTexPatAnmData* pAnmData,
     return pFrmData;
 }
 
-ResName GetResNameFromOffsetArray(s32* pStringArray, int i) {
+inline ResName GetResNameFromOffsetArray(s32* pStringArray, int i) {
     s32 offset = pStringArray[i];
     return NW4R_G3D_OFS_TO_RESNAME(pStringArray, offset);
 }

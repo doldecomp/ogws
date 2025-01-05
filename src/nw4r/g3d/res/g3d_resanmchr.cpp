@@ -12,7 +12,7 @@ namespace {
  * Utility functions
  *
  ******************************************************************************/
-f32 HermiteInterpolation(f32 v0, f32 t0, f32 v1, f32 t1, f32 s, f32 d) {
+inline f32 HermiteInterpolation(f32 v0, f32 t0, f32 v1, f32 t1, f32 s, f32 d) {
     f32 s_1 = s - 1.0f;
 
     return v0 + s * (s * ((2.0f * s - 3.0f) * (v0 - v1))) +

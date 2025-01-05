@@ -331,19 +331,64 @@ ScnRoot::~ScnRoot() {
 
 /******************************************************************************
  *
- * ScnObjGather
+ * Sorting functions
  *
  ******************************************************************************/
 namespace {
 
-bool LessZSortOpa(const ScnObj* pLhs, const ScnObj* pRhs);
-bool LessByGetValueForSortOpa(const ScnObj* pLhs, const ScnObj* pRhs);
+inline bool LessZSortOpa(const ScnObj* pLhs, const ScnObj* pRhs) {
+    int lhsPrio = pLhs->GetPriorityDrawOpa();
+    int rhsPrio = pRhs->GetPriorityDrawOpa();
 
-bool LessZSortXlu(const ScnObj* pLhs, const ScnObj* pRhs);
-bool LessByGetValueForSortXlu(const ScnObj* pLhs, const ScnObj* pRhs);
+    if (lhsPrio == rhsPrio) {
+        return pLhs->GetMtxPtr(ScnObj::MTX_VIEW)->_23 >
+               pRhs->GetMtxPtr(ScnObj::MTX_VIEW)->_23;
+    }
+
+    return lhsPrio < rhsPrio;
+}
+
+inline bool LessZSortXlu(const ScnObj* pLhs, const ScnObj* pRhs) {
+    int lhsPrio = pLhs->GetPriorityDrawXlu();
+    int rhsPrio = pRhs->GetPriorityDrawXlu();
+
+    if (lhsPrio == rhsPrio) {
+        return pLhs->GetMtxPtr(ScnObj::MTX_VIEW)->_23 <
+               pRhs->GetMtxPtr(ScnObj::MTX_VIEW)->_23;
+    }
+
+    return lhsPrio < rhsPrio;
+}
+
+inline bool LessByGetValueForSortOpa(const ScnObj* pLhs, const ScnObj* pRhs) {
+    int lhsPrio = pLhs->GetPriorityDrawOpa();
+    int rhsPrio = pRhs->GetPriorityDrawOpa();
+
+    if (lhsPrio == rhsPrio) {
+        return pLhs->GetValueForSortOpa() < pRhs->GetValueForSortOpa();
+    }
+
+    return lhsPrio < rhsPrio;
+}
+
+inline bool LessByGetValueForSortXlu(const ScnObj* pLhs, const ScnObj* pRhs) {
+    int lhsPrio = pLhs->GetPriorityDrawXlu();
+    int rhsPrio = pRhs->GetPriorityDrawXlu();
+
+    if (lhsPrio == rhsPrio) {
+        return pLhs->GetValueForSortXlu() < pRhs->GetValueForSortXlu();
+    }
+
+    return lhsPrio < rhsPrio;
+}
 
 } // namespace
 
+/******************************************************************************
+ *
+ * ScnObjGather
+ *
+ ******************************************************************************/
 IScnObjGather::CullingStatus ScnObjGather::Add(ScnObj* pObj, bool opa,
                                                bool xlu) {
     IScnObjGather::CullingStatus status =
@@ -387,64 +432,10 @@ IScnObjGather::CullingStatus ScnObjGather::Add(ScnObj* pObj, bool opa,
     return status;
 }
 
-namespace {
-
-inline bool LessZSortOpa(const ScnObj* pLhs, const ScnObj* pRhs) {
-    int lhsPrio = pLhs->GetPriorityDrawOpa();
-    int rhsPrio = pRhs->GetPriorityDrawOpa();
-
-    if (lhsPrio == rhsPrio) {
-        return pLhs->GetMtxPtr(ScnObj::MTX_VIEW)->_23 >
-               pRhs->GetMtxPtr(ScnObj::MTX_VIEW)->_23;
-    }
-
-    return lhsPrio < rhsPrio;
-}
-
-inline bool LessZSortXlu(const ScnObj* pLhs, const ScnObj* pRhs) {
-    int lhsPrio = pLhs->GetPriorityDrawXlu();
-    int rhsPrio = pRhs->GetPriorityDrawXlu();
-
-    if (lhsPrio == rhsPrio) {
-        return pLhs->GetMtxPtr(ScnObj::MTX_VIEW)->_23 <
-               pRhs->GetMtxPtr(ScnObj::MTX_VIEW)->_23;
-    }
-
-    return lhsPrio < rhsPrio;
-}
-
-} // namespace
-
 void ScnObjGather::ZSort() {
     std::sort(mpArrayOpa, mpArrayOpa + mNumScnObjOpa, LessZSortOpa);
     std::sort(mpArrayXlu, mpArrayXlu + mNumScnObjXlu, LessZSortXlu);
 }
-
-namespace {
-
-inline bool LessByGetValueForSortOpa(const ScnObj* pLhs, const ScnObj* pRhs) {
-    int lhsPrio = pLhs->GetPriorityDrawOpa();
-    int rhsPrio = pRhs->GetPriorityDrawOpa();
-
-    if (lhsPrio == rhsPrio) {
-        return pLhs->GetValueForSortOpa() < pRhs->GetValueForSortOpa();
-    }
-
-    return lhsPrio < rhsPrio;
-}
-
-inline bool LessByGetValueForSortXlu(const ScnObj* pLhs, const ScnObj* pRhs) {
-    int lhsPrio = pLhs->GetPriorityDrawXlu();
-    int rhsPrio = pRhs->GetPriorityDrawXlu();
-
-    if (lhsPrio == rhsPrio) {
-        return pLhs->GetValueForSortXlu() < pRhs->GetValueForSortXlu();
-    }
-
-    return lhsPrio < rhsPrio;
-}
-
-} // namespace
 
 void ScnObjGather::Sort() {
     std::sort(mpArrayOpa, mpArrayOpa + mNumScnObjOpa, LessByGetValueForSortOpa);

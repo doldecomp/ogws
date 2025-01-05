@@ -4,7 +4,7 @@ namespace nw4r {
 namespace ut {
 namespace {
 
-bool IsSJISLeadByte(u8 ch) {
+inline bool IsSJISLeadByte(u8 ch) {
     return (ch >= 0x81 && ch < 0xA0) || ch >= 0xE0;
 }
 

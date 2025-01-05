@@ -4,11 +4,11 @@ namespace nw4r {
 namespace g3d {
 namespace {
 
-void SetBind(u16* pId, u32 id) {
+inline void SetBind(u16* pId, u32 id) {
     *pId = id;
 }
 
-bool IsBound(const u16* pId) {
+inline bool IsBound(const u16* pId) {
     return *pId != ResLightSetData::INVALID_ID;
 }
 

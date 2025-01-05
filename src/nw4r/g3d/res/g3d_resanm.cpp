@@ -17,7 +17,7 @@ namespace {
  *
  * The value returned is f(p).
  */
-f32 HermiteInterpolation(f32 v0, f32 t0, f32 v1, f32 t1, f32 p, f32 d) {
+inline f32 HermiteInterpolation(f32 v0, f32 t0, f32 v1, f32 t1, f32 p, f32 d) {
     f32 invd = math::FInv(d);
 
     // Linear factors
@@ -35,7 +35,7 @@ f32 HermiteInterpolation(f32 v0, f32 t0, f32 v1, f32 t1, f32 p, f32 d) {
  *
  * The value returned is f(ratio).
  */
-u8 LinearInterpColorElem(u8 a, u8 b, s16 ratio) {
+inline u8 LinearInterpColorElem(u8 a, u8 b, s16 ratio) {
     return a + ((b - a) * ratio >> 15);
 }
 

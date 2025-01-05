@@ -4,7 +4,7 @@ namespace nw4r {
 namespace ut {
 namespace {
 
-template <typename T> void ResolveOffset(T*& rpPtr, void* pBase) {
+template <typename T> inline void ResolveOffset(T*& rpPtr, void* pBase) {
     rpPtr = reinterpret_cast<T*>(static_cast<char*>(pBase) +
                                  reinterpret_cast<s32>(rpPtr));
 }

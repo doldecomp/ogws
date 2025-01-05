@@ -233,6 +233,26 @@ void DefaultMapping(math::MTX34* pMtx, s8 camRef, s8 lightRef) {
 } // namespace detail
 
 namespace G3DState {
+namespace {
+/******************************************************************************
+ *
+ * Utility functions
+ *
+ ******************************************************************************/
+inline bool IsEqualTexObj(const GXTexObj& rLhs, const GXTexObj& rRhs) {
+    return rLhs.dummy[0] == rRhs.dummy[0] && rLhs.dummy[1] == rRhs.dummy[1] &&
+           rLhs.dummy[2] == rRhs.dummy[2] && rLhs.dummy[3] == rRhs.dummy[3] &&
+           rLhs.dummy[4] == rRhs.dummy[4] && rLhs.dummy[5] == rRhs.dummy[5] &&
+           rLhs.dummy[6] == rRhs.dummy[6] && rLhs.dummy[7] == rRhs.dummy[7];
+}
+
+inline bool IsEqualTlutObj(const GXTlutObj& rLhs, const GXTlutObj& rRhs) {
+    return rLhs.dummy[0] == rRhs.dummy[0] && rLhs.dummy[1] == rRhs.dummy[1] &&
+           rLhs.dummy[2] == rRhs.dummy[2];
+}
+
+} // namespace
+
 /******************************************************************************
  *
  * IndMtxTexInfo
@@ -282,23 +302,6 @@ void IndTexMtxInfo::SetMtx(GXIndTexMtxID id, const math::MTX34& rMtx) {
 }
 
 namespace {
-/******************************************************************************
- *
- * Utility functions
- *
- ******************************************************************************/
-bool IsEqualTexObj(const GXTexObj& rLhs, const GXTexObj& rRhs) {
-    return rLhs.dummy[0] == rRhs.dummy[0] && rLhs.dummy[1] == rRhs.dummy[1] &&
-           rLhs.dummy[2] == rRhs.dummy[2] && rLhs.dummy[3] == rRhs.dummy[3] &&
-           rLhs.dummy[4] == rRhs.dummy[4] && rLhs.dummy[5] == rRhs.dummy[5] &&
-           rLhs.dummy[6] == rRhs.dummy[6] && rLhs.dummy[7] == rRhs.dummy[7];
-}
-
-bool IsEqualTlutObj(const GXTlutObj& rLhs, const GXTlutObj& rRhs) {
-    return rLhs.dummy[0] == rRhs.dummy[0] && rLhs.dummy[1] == rRhs.dummy[1] &&
-           rLhs.dummy[2] == rRhs.dummy[2];
-}
-
 /******************************************************************************
  *
  * SyncGX

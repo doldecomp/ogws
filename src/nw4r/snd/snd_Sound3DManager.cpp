@@ -17,8 +17,8 @@ namespace {
  *         c = cAngle * cFactor
  *         d = dAngle * dFactor
  */
-f32 SolveLinerFunction(f32 x, f32 dAngle, f32 cAngle, f32 dFactor, // TYPO
-                       f32 cFactor) {
+inline f32 SolveLinerFunction(f32 x, f32 dAngle, f32 cAngle, f32 dFactor,
+                              f32 cFactor) { // TYPO
     if (dAngle == cAngle) {
         return (dFactor + cFactor) / 2;
     }
