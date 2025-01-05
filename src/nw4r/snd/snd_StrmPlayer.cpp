@@ -2,6 +2,7 @@
 #include <nw4r/ut.h>
 
 #include <climits>
+#include <cstring>
 
 namespace nw4r {
 namespace snd {
@@ -322,7 +323,7 @@ bool StrmPlayer::LoadStreamData(ut::FileStream* pFileStream, int offset,
                                         mDataBlockSize * blockIndex);
 
         u32 len = ut::RoundUp(blockSize, 32);
-        memcpy(pDst, pSrc, len);
+        std::memcpy(pDst, pSrc, len);
         DCFlushRange(pDst, len);
     }
 

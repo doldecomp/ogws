@@ -3,6 +3,8 @@
 
 #include <revolution/NAND.h>
 
+#include <cstring>
+
 namespace nw4r {
 namespace snd {
 
@@ -50,15 +52,15 @@ bool NandSoundArchive::Open(const char* pPath) {
 
     char currentDir[64];
     NANDGetCurrentDir(currentDir);
-    u32 currDirLen = strlen(currentDir);
+    u32 currDirLen = std::strlen(currentDir);
 
     char extRoot[FILE_PATH_MAX];
-    strncpy(extRoot, currentDir, currDirLen + 1);
+    std::strncpy(extRoot, currentDir, currDirLen + 1);
 
-    for (int i = strlen(pPath) - 1; i >= 0; i--) {
+    for (int i = std::strlen(pPath) - 1; i >= 0; i--) {
         if (pPath[i] == '/' || pPath[i] == '\\') {
             // @bug Long path can overflow extRoot buffer
-            strncat(extRoot, pPath, i);
+            std::strncat(extRoot, pPath, i);
             extRoot[currDirLen + i] = '\0';
             break;
         }

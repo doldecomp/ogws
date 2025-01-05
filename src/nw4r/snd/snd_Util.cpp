@@ -2,6 +2,8 @@
 #include <nw4r/snd.h>
 #include <nw4r/ut.h>
 
+#include <cmath>
+
 namespace nw4r {
 namespace snd {
 namespace detail {
@@ -101,7 +103,7 @@ f32 CalcSurroundPanRatio(f32 pan, const PanInfo& rInfo) {
 
 int CalcLpfFreq(f32 scale) {
     scale = ut::Clamp(scale, 0.0f, 1.0f);
-    return static_cast<int>(32000 * pow(2.0, 10.0 * (scale - 1.0)));
+    return static_cast<int>(32000 * std::pow(2.0, 10.0 * (scale - 1.0)));
 }
 
 void GetRemoteFilterCoefs(int filter, u16* pB0, u16* pB1, u16* pB2, u16* pA1,

@@ -3,6 +3,8 @@
 
 #include <revolution/DVD.h>
 
+#include <cstring>
+
 namespace nw4r {
 namespace snd {
 
@@ -53,10 +55,10 @@ bool DvdSoundArchive::Open(const char* pPath) {
     }
 
     char extRoot[FILE_PATH_MAX];
-    for (int i = strlen(pPath) - 1; i >= 0; i--) {
+    for (int i = std::strlen(pPath) - 1; i >= 0; i--) {
         if (pPath[i] == '/' || pPath[i] == '\\') {
             // @bug Long path can overflow extRoot buffer
-            strncpy(extRoot, pPath, i);
+            std::strncpy(extRoot, pPath, i);
             extRoot[i] = '\0';
 
             SetExternalFileRoot(extRoot);

@@ -104,7 +104,8 @@ void Sound3DManager::Update(SoundParam* pParam, u32 id, SoundHandle* pHandle,
             f32 units = (distance - pListener->GetMaxVolumeDistance()) /
                         pListener->GetUnitDistance();
 
-            volume = pow(pActorParam->soundParam.decayRatio / 256.0f, units);
+            volume =
+                std::pow(pActorParam->soundParam.decayRatio / 256.0f, units);
             break;
         }
 
