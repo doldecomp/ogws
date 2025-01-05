@@ -216,7 +216,7 @@ namespace ResByteCodeData {
 enum OpCode {
     NOOP,   // No operation
     END,    // End of bytecode
-    CALC,   //
+    CALC,   // Calculate matrix
     WEIGHT, // Apply weighting
     DRAW,   // Draw polygon
     EVPMTX, // Envelope matrix

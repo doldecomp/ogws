@@ -7,8 +7,7 @@ void CalcWorld(math::MTX34* pModelMtxArray, u32* pModelMtxAttribArray,
                const u8* pByteCode, const math::MTX34* pBaseMtx, ResMdl mdl,
                AnmObjChr* pAnmChr, FuncObjCalcWorld* pFuncObj, u32 rootAttrib) {
 
-#define pNodeMapCmd                                                            \
-    reinterpret_cast<const ResByteCodeData::NodeMapParams*>(pByteCode)
+#define pCalcCmd reinterpret_cast<const ResByteCodeData::CalcParams*>(pByteCode)
 #define pMtxDupCmd                                                             \
     reinterpret_cast<const ResByteCodeData::MtxDupParams*>(pByteCode)
 
@@ -40,11 +39,11 @@ void CalcWorld(math::MTX34* pModelMtxArray, u32* pModelMtxAttribArray,
     pModelMtxAttribArray[0] = rootAttrib;
 
     while ((c = *pByteCode) != ResByteCodeData::END) {
-        if (c == ResByteCodeData::NODEMAP) {
-            u32 nodeID = (pNodeMapCmd->nodeIdHi << 8) + pNodeMapCmd->nodeIdLo;
+        if (c == ResByteCodeData::CALC) {
+            u32 nodeID = (pCalcCmd->nodeIdHi << 8) + pCalcCmd->nodeIdLo;
 
             u32 parentMtxID =
-                (pNodeMapCmd->parentMtxIdHi << 8) + pNodeMapCmd->parentMtxIdLo;
+                (pCalcCmd->parentMtxIdHi << 8) + pCalcCmd->parentMtxIdLo;
 
             ResNode node = mdl.GetResNode(nodeID);
 
@@ -110,7 +109,7 @@ void CalcWorld(math::MTX34* pModelMtxArray, u32* pModelMtxAttribArray,
                                          &pModelMtxAttribArray[mtxID], mdl);
             }
 
-            pByteCode += sizeof(ResByteCodeData::NodeMapParams);
+            pByteCode += sizeof(ResByteCodeData::CalcParams);
 
         } else /* Assume MTXDUP */ {
             u32 toMtxID = (pMtxDupCmd->toMtxIdHi << 8) + pMtxDupCmd->toMtxIdLo;
@@ -146,7 +145,7 @@ void CalcWorld(math::MTX34* pModelMtxArray, u32* pModelMtxAttribArray,
         pFuncObj->CheckCallbackC(pModelMtxArray, mdl);
     }
 
-#undef pNodeMapCmd
+#undef pCalcCmd
 #undef pMtxDupCmd
 }
 
