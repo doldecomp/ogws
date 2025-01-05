@@ -87,6 +87,9 @@ public:
     void Update();
 
 private:
+    /******************************************************************************
+     * StrmHeaderLoadTask
+     ******************************************************************************/
     struct StrmHeaderLoadTask : public Task {
         StrmHeaderLoadTask();
 
@@ -100,6 +103,9 @@ private:
         s32 startOffset;                 // at 0x1C
     };
 
+    /******************************************************************************
+     * StrmDataLoadTask
+     ******************************************************************************/
     struct StrmDataLoadTask : public Task {
         StrmDataLoadTask();
 

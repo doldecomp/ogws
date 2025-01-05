@@ -10,6 +10,12 @@
 namespace nw4r {
 namespace snd {
 namespace detail {
+
+/******************************************************************************
+ *
+ * RWAV binary layout
+ *
+ ******************************************************************************/
 namespace WaveFile {
 
 enum Format { FORMAT_PCM8, FORMAT_PCM16, FORMAT_ADPCM };
@@ -40,6 +46,11 @@ struct WaveChannelInfo {
 
 }; // namespace WaveFile
 
+/******************************************************************************
+ *
+ * WaveFileReader
+ *
+ ******************************************************************************/
 struct ChannelParam {
     void* dataAddr;       // at 0x0
     u32 volumeFrontLeft;  // at 0x4

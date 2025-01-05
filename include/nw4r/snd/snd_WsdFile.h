@@ -7,6 +7,12 @@
 namespace nw4r {
 namespace snd {
 namespace detail {
+
+/******************************************************************************
+ *
+ * RWSD binary layout
+ *
+ ******************************************************************************/
 namespace WsdFile {
 
 struct WsdInfo {
@@ -81,6 +87,11 @@ struct WaveBlockOld {
 
 }; // namespace WsdFile
 
+/******************************************************************************
+ *
+ * WsdFileReader
+ *
+ ******************************************************************************/
 struct WaveSoundInfo {
     f32 pitch;      // at 0x0
     u8 pan;         // at 0x4

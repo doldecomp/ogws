@@ -95,6 +95,11 @@ inline f32 FSelect(register f32 value, register f32 ge_zero,
     return ret;
 }
 
+/******************************************************************************
+ *
+ * Fastcast functions
+ *
+ ******************************************************************************/
 inline f32 U16ToF32(u16 arg) {
     f32 ret;
     OSu16tof32(&arg, &ret);

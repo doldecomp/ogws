@@ -7,6 +7,12 @@
 namespace nw4r {
 namespace snd {
 namespace detail {
+
+/******************************************************************************
+ *
+ * RSEQ binary layout
+ *
+ ******************************************************************************/
 namespace SeqFile {
 
 struct Header {
@@ -24,6 +30,11 @@ struct DataBlock {
 
 } // namespace SeqFile
 
+/******************************************************************************
+ *
+ * SeqFileReader
+ *
+ ******************************************************************************/
 class SeqFileReader {
 public:
     static const u32 SIGNATURE = 'RSEQ';

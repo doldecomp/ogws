@@ -14,6 +14,11 @@ class SoundMemoryAllocatable;
 
 namespace detail {
 
+/******************************************************************************
+ *
+ * FileStreamHandle
+ *
+ ******************************************************************************/
 class FileStreamHandle {
 public:
     FileStreamHandle(ut::FileStream* pFileStream) : mStream(pFileStream) {}
@@ -40,6 +45,11 @@ private:
     ut::FileStream* mStream; // at 0x0
 };
 
+/******************************************************************************
+ *
+ * SoundArchiveLoader
+ *
+ ******************************************************************************/
 class SoundArchiveLoader {
 public:
     explicit SoundArchiveLoader(const SoundArchive& rArchive);

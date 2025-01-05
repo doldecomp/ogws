@@ -10,6 +10,12 @@
 namespace nw4r {
 namespace snd {
 namespace detail {
+
+/******************************************************************************
+ *
+ * RSTM binary layout
+ *
+ ******************************************************************************/
 namespace StrmFile {
 
 struct StrmDataInfo {
@@ -71,6 +77,11 @@ struct HeadBlock {
 
 } // namespace StrmFile
 
+/******************************************************************************
+ *
+ * StrmFileReader
+ *
+ ******************************************************************************/
 struct StrmInfo {
     u8 format;               // at 0x0
     u8 loopFlag;             // at 0x1
@@ -121,6 +132,11 @@ private:
     const StrmFile::HeadBlock* mHeadBlock; // at 0x4
 };
 
+/******************************************************************************
+ *
+ * StrmFileLoader
+ *
+ ******************************************************************************/
 class StrmFileLoader {
 public:
     explicit StrmFileLoader(ut::FileStream& rFileStream)

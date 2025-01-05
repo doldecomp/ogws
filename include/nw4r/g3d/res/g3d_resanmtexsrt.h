@@ -9,7 +9,11 @@
 namespace nw4r {
 namespace g3d {
 
-// TODO: Moved to this file to resolve circular dependency
+/******************************************************************************
+ *
+ * Common typedefs
+ *
+ ******************************************************************************/
 struct ResAnmTexSrtDataTypedef {
     static const int NUM_OF_MAT_TEX_MTX = 8;
     static const int NUM_OF_IND_TEX_MTX = 3;
@@ -24,6 +28,11 @@ struct TexSrtTypedef {
     };
 };
 
+/******************************************************************************
+ *
+ * TexSrtAnmResult
+ *
+ ******************************************************************************/
 struct TexSrt : TexSrtTypedef {
     f32 Su; // at 0x0
     f32 Sv; // at 0x4
@@ -59,6 +68,11 @@ struct TexSrtAnmResult : ResAnmTexSrtDataTypedef, TexSrtTypedef {
     };
 };
 
+/******************************************************************************
+ *
+ * ResAnmTexSrt
+ *
+ ******************************************************************************/
 struct ResAnmTexSrtTexData {
     u32 flags;          // at 0x0
     ResAnmData anms[1]; // at 0x4

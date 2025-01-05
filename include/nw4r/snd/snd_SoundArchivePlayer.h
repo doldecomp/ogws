@@ -26,12 +26,22 @@ class SeqTrackAllocator;
 class SoundMemoryAllocatable;
 class SoundPlayer;
 
+/******************************************************************************
+ *
+ * SoundArchivePlayer_FileManager
+ *
+ ******************************************************************************/
 class SoundArchivePlayer_FileManager {
 public:
     virtual const void* GetFileAddress(u32 id) = 0;         // at 0x8
     virtual const void* GetFileWaveDataAddress(u32 id) = 0; // at 0x8
 };
 
+/******************************************************************************
+ *
+ * SoundArchivePlayer
+ *
+ ******************************************************************************/
 class SoundArchivePlayer : public detail::DisposeCallback,
                            public SoundStartable {
 public:
@@ -117,6 +127,9 @@ private:
 
     typedef detail::Util::Table<Group> GroupTable;
 
+    /******************************************************************************
+     * SeqNoteOnCallback
+     ******************************************************************************/
     class SeqNoteOnCallback : public detail::NoteOnCallback {
     public:
         explicit SeqNoteOnCallback(const SoundArchivePlayer& rPlayer)
@@ -130,6 +143,9 @@ private:
         const SoundArchivePlayer& mSoundArchivePlayer; // at 0x0
     };
 
+    /******************************************************************************
+     * WsdCallback
+     ******************************************************************************/
     class WsdCallback : public detail::WsdPlayer::WsdCallback {
     public:
         explicit WsdCallback(const SoundArchivePlayer& rPlayer)

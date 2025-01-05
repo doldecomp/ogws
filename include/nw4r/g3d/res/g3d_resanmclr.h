@@ -9,6 +9,11 @@
 namespace nw4r {
 namespace g3d {
 
+/******************************************************************************
+ *
+ * ClrAnmResult
+ *
+ ******************************************************************************/
 struct ClrAnmResult {
     static const int NUM_OF_CLA_COLOR = 11;
 
@@ -33,6 +38,11 @@ struct ClrAnmResult {
     u32 rgbaMask[NUM_OF_CLA_COLOR]; // at 0x30
 };
 
+/******************************************************************************
+ *
+ * ResAnmClr
+ *
+ ******************************************************************************/
 struct ResAnmClrAnmData {
     u32 mask;              // at 0x0
     ResColorAnmData color; // at 0x4

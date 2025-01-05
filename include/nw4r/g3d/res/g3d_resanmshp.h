@@ -9,6 +9,11 @@
 namespace nw4r {
 namespace g3d {
 
+/******************************************************************************
+ *
+ * BlendVtx
+ *
+ ******************************************************************************/
 struct ShpAnmVtxSet {
     ResVtxPos resVtxPos; // at 0x0
     ResVtxNrm resVtxNrm; // at 0x4
@@ -27,6 +32,11 @@ struct BlendVtx {
     f32 weight;          // at 0xC
 };
 
+/******************************************************************************
+ *
+ * ShpAnmResult
+ *
+ ******************************************************************************/
 struct ShpAnmResult {
     static const int MAX_KEY_SHAPE = 32;
 
@@ -44,6 +54,11 @@ struct ShpAnmResult {
     BlendVtx keyShape[MAX_KEY_SHAPE]; // at 0x18
 };
 
+/******************************************************************************
+ *
+ * ResAnmShp
+ *
+ ******************************************************************************/
 struct ResAnmShpAnmData {
     u32 flags;                 // at 0x0
     s32 name;                  // at 0x4

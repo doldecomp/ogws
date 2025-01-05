@@ -6,6 +6,11 @@ namespace nw4r {
 namespace snd {
 namespace detail {
 
+/******************************************************************************
+ *
+ * PoolImpl
+ *
+ ******************************************************************************/
 class PoolImpl {
 public:
     PoolImpl() : mNext(NULL) {}
@@ -22,6 +27,11 @@ private:
     PoolImpl* mNext; // at 0x0
 };
 
+/******************************************************************************
+ *
+ * InstancePool
+ *
+ ******************************************************************************/
 template <typename T> class InstancePool : private PoolImpl {
 public:
     u32 Create(void* pBuffer, u32 size) {
@@ -53,6 +63,11 @@ public:
     }
 };
 
+/******************************************************************************
+ *
+ * MemoryPool
+ *
+ ******************************************************************************/
 template <typename T> class MemoryPool : private PoolImpl {
 public:
     u32 Create(void* pBuffer, u32 size) {

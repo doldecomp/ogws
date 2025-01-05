@@ -7,6 +7,11 @@
 namespace nw4r {
 namespace ut {
 
+/******************************************************************************
+ *
+ * Font binary structures
+ *
+ ******************************************************************************/
 enum FontMapMethod {
     FONT_MAPMETHOD_DIRECT,
     FONT_MAPMETHOD_TABLE,
@@ -60,6 +65,11 @@ struct FontInformation {
 
 namespace detail {
 
+/******************************************************************************
+ *
+ * ResFontBase
+ *
+ ******************************************************************************/
 class ResFontBase : public Font {
 public:
     static const u16 GLYPH_INDEX_NOT_FOUND = 0xFFFF;

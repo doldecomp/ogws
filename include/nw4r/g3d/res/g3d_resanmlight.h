@@ -16,6 +16,11 @@ namespace g3d {
 // Forward declarations
 struct LightAnmResult;
 
+/******************************************************************************
+ *
+ * Common typedefs
+ *
+ ******************************************************************************/
 struct ResAnmLightDataTypedef {
     enum LightType {
         LIGHTTYPE_POINT,
@@ -57,6 +62,11 @@ struct ResAnmLightDataTypedef {
     };
 };
 
+/******************************************************************************
+ *
+ * LightAnmResult
+ *
+ ******************************************************************************/
 struct LightAnmResult : ResAnmLightDataTypedef {
     u32 specIdx;           // at 0x0
     u32 flags;             // at 0x4
@@ -72,6 +82,11 @@ struct LightAnmResult : ResAnmLightDataTypedef {
     f32 shininess;         // at 0x3C
 };
 
+/******************************************************************************
+ *
+ * ResAnmLight
+ *
+ ******************************************************************************/
 struct ResAnmLightData : ResAnmLightDataTypedef {
     u32 size;                  // at 0x0
     s32 toResAnmScnData;       // at 0x4

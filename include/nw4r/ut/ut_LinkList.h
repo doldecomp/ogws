@@ -12,6 +12,11 @@ namespace detail {
 class LinkListImpl;
 }
 
+/******************************************************************************
+ *
+ * Linked list node
+ *
+ ******************************************************************************/
 class LinkListNode : private NonCopyable {
     friend class detail::LinkListImpl;
 
@@ -32,11 +37,19 @@ private:
 
 namespace detail {
 
+/******************************************************************************
+ *
+ * Linked list implementation
+ *
+ ******************************************************************************/
 class LinkListImpl : private NonCopyable {
 public:
     // Forward declarations
     class ConstIterator;
 
+    /******************************************************************************
+     * Iterator implementation
+     ******************************************************************************/
     class Iterator {
         friend class LinkListImpl;
         friend class ConstIterator;
@@ -68,6 +81,9 @@ public:
         LinkListNode* mNode; // at 0x0
     };
 
+    /******************************************************************************
+     * Iterator implementation (const-view)
+     ******************************************************************************/
     class ConstIterator {
         friend class LinkListImpl;
 
@@ -149,6 +165,11 @@ private:
     LinkListNode mNode; // at 0x4
 };
 
+/******************************************************************************
+ *
+ * Reverse iterator
+ *
+ ******************************************************************************/
 template <typename TIter> class ReverseIterator {
 public:
     explicit ReverseIterator(TIter it) : mCurrent(it) {}
@@ -188,11 +209,19 @@ private:
 
 } // namespace detail
 
+/******************************************************************************
+ *
+ * Templated linked list
+ *
+ ******************************************************************************/
 template <typename T, int Ofs> class LinkList : public detail::LinkListImpl {
 public:
     // Forward declarations
     class ConstIterator;
 
+    /******************************************************************************
+     * Templated iterator
+     ******************************************************************************/
     class Iterator {
         friend class LinkList;
         friend class ConstIterator;
@@ -241,6 +270,9 @@ public:
         LinkListImpl::Iterator mIterator; // at 0x0
     };
 
+    /******************************************************************************
+     * Templated iterator (const-view)
+     ******************************************************************************/
     class ConstIterator {
         friend class LinkList;
 
@@ -372,6 +404,11 @@ public:
 } // namespace ut
 } // namespace nw4r
 
+/******************************************************************************
+ *
+ * Macros
+ *
+ ******************************************************************************/
 /**
  * Declare typedef for linked-list specialization.
  */

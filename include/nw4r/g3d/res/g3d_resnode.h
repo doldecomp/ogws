@@ -12,6 +12,11 @@ namespace g3d {
 // Forward declarations
 struct ChrAnmResult;
 
+/******************************************************************************
+ *
+ * Common typedefs
+ *
+ ******************************************************************************/
 struct ResNodeDataTypedef {
     enum Billboard {
         BILLBOARD_OFF,
@@ -40,6 +45,11 @@ struct ResNodeDataTypedef {
     };
 };
 
+/******************************************************************************
+ *
+ * ResNode
+ *
+ ******************************************************************************/
 struct ResNodeData : ResNodeDataTypedef {
     u32 size;                 // at 0x0
     s32 toResMdlData;         // at 0x4

@@ -12,6 +12,11 @@
 namespace nw4r {
 namespace g3d {
 
+/******************************************************************************
+ *
+ * TexPatAnmResult
+ *
+ ******************************************************************************/
 struct TexPatAnmResult {
     static const int NUM_OF_ANMS = 8;
 
@@ -22,6 +27,11 @@ struct TexPatAnmResult {
     ResPltt pltt[NUM_OF_ANMS]; // at 0x24
 };
 
+/******************************************************************************
+ *
+ * ResAnmTexPat
+ *
+ ******************************************************************************/
 struct ResAnmTexPatFrmData {
     f32 frame;     // at 0x0
     u16 texIndex;  // at 0x4

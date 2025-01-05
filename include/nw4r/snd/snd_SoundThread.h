@@ -16,6 +16,9 @@ class SoundThread {
     friend class AutoLock; // Prevent locking without AutoLock
 
 public:
+    /******************************************************************************
+     * SoundFrameCallback
+     ******************************************************************************/
     class SoundFrameCallback {
     public:
         NW4R_UT_LIST_NODE_DECL(); // at 0x0
@@ -27,6 +30,9 @@ public:
 
     NW4R_UT_LIST_TYPEDEF_DECL(SoundFrameCallback);
 
+    /******************************************************************************
+     * PlayerCallback
+     ******************************************************************************/
     class PlayerCallback {
     public:
         NW4R_UT_LIST_NODE_DECL(); // at 0x0
@@ -39,6 +45,9 @@ public:
 
     NW4R_UT_LIST_TYPEDEF_DECL(PlayerCallback);
 
+    /******************************************************************************
+     * AutoLock
+     ******************************************************************************/
     class AutoLock : private ut::NonCopyable {
     public:
         AutoLock() {

@@ -82,6 +82,9 @@ private:
     typedef void (*SeqLoadCallback)(bool success, const void* pBase,
                                     void* pCallbackArg);
 
+    /******************************************************************************
+     * SeqLoadTask
+     ******************************************************************************/
     struct SeqLoadTask : public Task {
         SeqLoadTask();
 

@@ -12,6 +12,11 @@
 namespace nw4r {
 namespace g3d {
 
+/******************************************************************************
+ *
+ * Common typedefs
+ *
+ ******************************************************************************/
 struct ResAnmCameraDataTypedef {
     enum CameraType {
         CAMERATYPE_ROTATE,
@@ -50,6 +55,11 @@ struct ResAnmCameraDataTypedef {
     };
 };
 
+/******************************************************************************
+ *
+ * CameraAnmResult
+ *
+ ******************************************************************************/
 struct CameraAnmResult : ResAnmCameraDataTypedef {
     u32 flags;                 // at 0x0
     GXProjectionType projType; // at 0x4
@@ -75,6 +85,11 @@ struct CameraAnmResult : ResAnmCameraDataTypedef {
     };
 };
 
+/******************************************************************************
+ *
+ * ResAnmCamera
+ *
+ ******************************************************************************/
 struct ResAnmCameraData : ResAnmCameraDataTypedef {
     u32 size;                  // at 0x0
     s32 toResAnmScnData;       // at 0x4

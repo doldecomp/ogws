@@ -190,6 +190,11 @@ static const int HEADER_AREA_SIZE = ROUND_UP(sizeof(Header), 32) + 40;
 
 } // namespace SoundArchiveFile
 
+/******************************************************************************
+ *
+ * SoundArchiveFileReader
+ *
+ ******************************************************************************/
 class SoundArchiveFileReader {
 public:
     static const u32 SIGNATURE = 'RSAR';

@@ -13,6 +13,7 @@
 namespace nw4r {
 namespace g3d {
 namespace detail {
+
 /******************************************************************************
  *
  * ScnDependentMtxFunc

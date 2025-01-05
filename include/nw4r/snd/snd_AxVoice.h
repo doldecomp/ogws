@@ -12,6 +12,19 @@ namespace nw4r {
 namespace snd {
 namespace detail {
 
+inline int CalcAxvpbDelta(u16 init, u16 target) {
+    return (target - init) / AX_SAMPLES_PER_FRAME;
+}
+
+inline u16 CalcMixVolume(f32 volume) {
+    return ut::Min<u32>(0xFFFF, AX_MAX_VOLUME * volume);
+}
+
+/******************************************************************************
+ *
+ * AxVoiceParamBlock
+ *
+ ******************************************************************************/
 class AxVoiceParamBlock {
 public:
     AxVoiceParamBlock();
@@ -123,6 +136,11 @@ private:
     u16 mVolume;                    // at 0xE
 };
 
+/******************************************************************************
+ *
+ * AxVoice
+ *
+ ******************************************************************************/
 class AxVoice {
     friend class AxVoiceManager;
 
@@ -267,14 +285,6 @@ public:
 };
 
 NW4R_UT_LIST_TYPEDEF_DECL(AxVoice);
-
-inline int CalcAxvpbDelta(u16 init, u16 target) {
-    return (target - init) / AX_SAMPLES_PER_FRAME;
-}
-
-inline u16 CalcMixVolume(f32 volume) {
-    return ut::Min<u32>(0xFFFF, AX_MAX_VOLUME * volume);
-}
 
 } // namespace detail
 } // namespace snd
