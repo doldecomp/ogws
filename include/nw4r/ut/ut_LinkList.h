@@ -162,11 +162,11 @@ public:
         return *this;
     }
 
-    const TIter::TElem* operator->() const {
+    const typename TIter::TElem* operator->() const {
         return &this->operator*();
     }
 
-    TIter::TElem& operator*() const {
+    typename TIter::TElem& operator*() const {
         TIter it = mCurrent;
         --it;
         return *it;
