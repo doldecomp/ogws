@@ -47,7 +47,7 @@ u32 ResAnmScn::GetResLightSetNumEntries() const {
     return 0;
 }
 
-ResAnmAmbLight ResAnmScn::GetResAnmAmbLight(ResName name) const {
+ResAnmAmbLight ResAnmScn::GetResAnmAmbLight(const ResName name) const {
     void* pResAnmAmbLightDicData = ResDic(ofs_to_obj<ResDic>(
         ref().toScnTopLevelDic))[ResName(&ResNameData_AmbLights)];
 
@@ -69,7 +69,7 @@ ResAnmAmbLight ResAnmScn::GetResAnmAmbLight(int i) const {
     return ResAnmAmbLight(NULL);
 }
 
-ResAnmLight ResAnmScn::GetResAnmLight(ResName name) const {
+ResAnmLight ResAnmScn::GetResAnmLight(const ResName name) const {
     void* pResAnmLightDicData = ResDic(ofs_to_obj<ResDic>(
         ref().toScnTopLevelDic))[ResName(&ResNameData_Lights)];
 
@@ -172,7 +172,7 @@ ResAnmCamera ResAnmScn::GetResAnmCameraByRefNumber(u32 refNumber) const {
                                                                     : NULL);
 }
 
-bool ResAnmScn::Bind(ResAnmScn scene) {
+bool ResAnmScn::Bind(const ResAnmScn scene) {
     u32 lightSetNum = GetResLightSetNumEntries();
     bool success = true;
 

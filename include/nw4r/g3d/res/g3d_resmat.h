@@ -205,10 +205,6 @@ public:
  *
  ******************************************************************************/
 struct TexMtxEffect : TexSrtTypedef {
-    static const int MAP_MODE_MAX = 256;
-    static const int CAMERA_REF_MAX = 32;
-    static const int LIGHT_REF_MAX = 128;
-
     enum Flag {
         FLAG_IDENTITY = (1 << 0),
     };

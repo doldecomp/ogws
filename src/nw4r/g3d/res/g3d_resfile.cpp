@@ -65,7 +65,7 @@ ResPltt ResFile::GetResPltt(const char* pName) const {
     return ResPltt(NULL);
 }
 
-ResPltt ResFile::GetResPltt(ResName name) const {
+ResPltt ResFile::GetResPltt(const ResName name) const {
     void* pResPlttDicData = ResDic(const_cast<ResDicData*>(
         &ref().dict.topLevel))[ResName(&ResNameData_Pltts)];
 
@@ -107,7 +107,7 @@ ResTex ResFile::GetResTex(const char* pName) const {
     return ResTex(NULL);
 }
 
-ResTex ResFile::GetResTex(ResName name) const {
+ResTex ResFile::GetResTex(const ResName name) const {
     void* pResTexDicData = ResDic(const_cast<ResDicData*>(
         &ref().dict.topLevel))[ResName(&ResNameData_Textures)];
 

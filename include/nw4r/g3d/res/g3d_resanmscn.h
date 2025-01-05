@@ -48,7 +48,7 @@ public:
 public:
     NW4R_G3D_RESOURCE_FUNC_DEF(ResAnmScn);
 
-    bool Bind(ResAnmScn scene);
+    bool Bind(const ResAnmScn scene);
 
     bool Bind() {
         return Bind(*this);
@@ -69,10 +69,10 @@ public:
     ResLightSet GetResLightSet(u32 i) const;
     u32 GetResLightSetNumEntries() const;
 
-    ResAnmAmbLight GetResAnmAmbLight(ResName name) const;
+    ResAnmAmbLight GetResAnmAmbLight(const ResName name) const;
     ResAnmAmbLight GetResAnmAmbLight(int i) const;
 
-    ResAnmLight GetResAnmLight(ResName name) const;
+    ResAnmLight GetResAnmLight(const ResName name) const;
     ResAnmLight GetResAnmLight(int i) const;
 
     ResLightSet GetResLightSetByRefNumber(u32 refNumber) const;

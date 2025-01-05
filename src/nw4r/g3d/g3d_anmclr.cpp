@@ -183,7 +183,7 @@ f32 AnmObjMatClrNode::GetUpdateRate() const {
     return 1.0f;
 }
 
-bool AnmObjMatClrNode::Bind(ResMdl mdl) {
+bool AnmObjMatClrNode::Bind(const ResMdl mdl) {
     bool success = false;
 
     for (int i = 0; i < mChildrenArraySize; i++) {
@@ -397,7 +397,7 @@ void AnmObjMatClrRes::UpdateFrame() {
     }
 }
 
-bool AnmObjMatClrRes::Bind(ResMdl mdl) {
+bool AnmObjMatClrRes::Bind(const ResMdl mdl) {
     int numAnim = mRes.GetNumMaterial();
     bool success = false;
 

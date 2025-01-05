@@ -21,7 +21,7 @@ ResNode ResMdl::GetResNode(const char* pName) const {
     return ResNode(ofs_to_obj<ResDic>(ref().toResNodeDic)[pName]);
 }
 
-ResNode ResMdl::GetResNode(ResName name) const {
+ResNode ResMdl::GetResNode(const ResName name) const {
     return ResNode(ofs_to_obj<ResDic>(ref().toResNodeDic)[name]);
 }
 
@@ -42,7 +42,7 @@ u32 ResMdl::GetResNodeNumEntries() const {
  * RexVtxPos
  *
  ******************************************************************************/
-ResVtxPos ResMdl::GetResVtxPos(ResName name) const {
+ResVtxPos ResMdl::GetResVtxPos(const ResName name) const {
     return ResVtxPos(ofs_to_obj<ResDic>(ref().toResVtxPosDic)[name]);
 }
 
@@ -63,7 +63,7 @@ u32 ResMdl::GetResVtxPosNumEntries() const {
  * ResVtxNrm
  *
  ******************************************************************************/
-ResVtxNrm ResMdl::GetResVtxNrm(ResName name) const {
+ResVtxNrm ResMdl::GetResVtxNrm(const ResName name) const {
     return ResVtxNrm(ofs_to_obj<ResDic>(ref().toResVtxNrmDic)[name]);
 }
 
@@ -84,7 +84,7 @@ u32 ResMdl::GetResVtxNrmNumEntries() const {
  * ResVtxClr
  *
  ******************************************************************************/
-ResVtxClr ResMdl::GetResVtxClr(ResName name) const {
+ResVtxClr ResMdl::GetResVtxClr(const ResName name) const {
     return ResVtxClr(ofs_to_obj<ResDic>(ref().toResVtxClrDic)[name]);
 }
 
@@ -122,7 +122,7 @@ ResMat ResMdl::GetResMat(const char* pName) const {
     return ResMat(ofs_to_obj<ResDic>(ref().toResMatDic)[pName]);
 }
 
-ResMat ResMdl::GetResMat(ResName name) const {
+ResMat ResMdl::GetResMat(const ResName name) const {
     return ResMat(ofs_to_obj<ResDic>(ref().toResMatDic)[name]);
 }
 

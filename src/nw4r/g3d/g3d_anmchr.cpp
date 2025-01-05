@@ -221,7 +221,7 @@ f32 AnmObjChrNode::GetUpdateRate() const {
     return 1.0f;
 }
 
-bool AnmObjChrNode::Bind(ResMdl mdl) {
+bool AnmObjChrNode::Bind(const ResMdl mdl) {
     bool success = false;
 
     for (int i = 0; i < mChildrenArraySize; i++) {
@@ -244,7 +244,7 @@ bool AnmObjChrNode::Bind(ResMdl mdl) {
     return success;
 }
 
-bool AnmObjChrNode::Bind(ResMdl mdl, u32 target, BindOption option) {
+bool AnmObjChrNode::Bind(const ResMdl mdl, u32 target, BindOption option) {
     bool success = false;
 
     for (int i = 0; i < mChildrenArraySize; i++) {
@@ -635,7 +635,7 @@ void AnmObjChrRes::UpdateFrame() {
     }
 }
 
-bool AnmObjChrRes::Bind(ResMdl mdl) {
+bool AnmObjChrRes::Bind(const ResMdl mdl) {
     int numAnim = mRes.GetNumNode();
     bool success = false;
 
@@ -658,7 +658,7 @@ bool AnmObjChrRes::Bind(ResMdl mdl) {
     return success;
 }
 
-bool AnmObjChrRes::Bind(ResMdl mdl, u32 target, BindOption option) {
+bool AnmObjChrRes::Bind(const ResMdl mdl, u32 target, BindOption option) {
     bool success = false;
 
     switch (option) {

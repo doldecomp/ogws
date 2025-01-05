@@ -187,7 +187,7 @@ f32 AnmObjTexSrtNode::GetUpdateRate() const {
     return 1.0f;
 }
 
-bool AnmObjTexSrtNode::Bind(ResMdl mdl) {
+bool AnmObjTexSrtNode::Bind(const ResMdl mdl) {
     bool success = false;
 
     for (int i = 0; i < mChildrenArraySize; i++) {
@@ -400,7 +400,7 @@ void AnmObjTexSrtRes::UpdateFrame() {
     }
 }
 
-bool AnmObjTexSrtRes::Bind(ResMdl mdl) {
+bool AnmObjTexSrtRes::Bind(const ResMdl mdl) {
     int numAnim = mRes.GetNumMaterial();
     bool success = false;
 

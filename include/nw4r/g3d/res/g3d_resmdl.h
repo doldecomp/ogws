@@ -144,22 +144,22 @@ public:
     const u8* GetResByteCode(const char* pName) const;
 
     ResNode GetResNode(const char* pName) const;
-    ResNode GetResNode(ResName name) const;
+    ResNode GetResNode(const ResName name) const;
     ResNode GetResNode(int i) const;
     ResNode GetResNode(u32 i) const;
     u32 GetResNodeNumEntries() const;
 
-    ResVtxPos GetResVtxPos(ResName name) const;
+    ResVtxPos GetResVtxPos(const ResName name) const;
     ResVtxPos GetResVtxPos(int i) const;
     ResVtxPos GetResVtxPos(u32 i) const;
     u32 GetResVtxPosNumEntries() const;
 
-    ResVtxNrm GetResVtxNrm(ResName name) const;
+    ResVtxNrm GetResVtxNrm(const ResName name) const;
     ResVtxNrm GetResVtxNrm(int i) const;
     ResVtxNrm GetResVtxNrm(u32 i) const;
     u32 GetResVtxNrmNumEntries() const;
 
-    ResVtxClr GetResVtxClr(ResName name) const;
+    ResVtxClr GetResVtxClr(const ResName name) const;
     ResVtxClr GetResVtxClr(int i) const;
     ResVtxClr GetResVtxClr(u32 i) const;
     u32 GetResVtxClrNumEntries() const;
@@ -168,7 +168,7 @@ public:
     u32 GetResVtxTexCoordNumEntries() const;
 
     ResMat GetResMat(const char* pName) const;
-    ResMat GetResMat(ResName name) const;
+    ResMat GetResMat(const ResName name) const;
     ResMat GetResMat(int i) const;
     ResMat GetResMat(u32 i) const;
     u32 GetResMatNumEntries() const;

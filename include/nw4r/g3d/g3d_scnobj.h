@@ -190,8 +190,8 @@ private:
     u32 mScnObjFlags;               // at 0xCC
     u8 mPriorityDrawOpa;            // at 0xD0
     u8 mPriorityDrawXlu;            // at 0xD1
-    u8 _0;                          // at 0xD2
-    u8 _1;                          // at 0xD3
+    u8 PADDING_0xD2;                // at 0xD2
+    u8 PADDING_0xD3;                // at 0xD3
     IScnObjCallback* mpFuncObjExec; // at 0xD4
     u8 mCallbackTiming;             // at 0xD8
     u8 mCallbackDeleteOption;       // at 0xD9

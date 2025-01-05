@@ -16,7 +16,7 @@ class AnmScnRes;
 
 class AnmScn : public G3dObj {
 public:
-    AnmScn(MEMAllocator* pAllocator);
+    explicit AnmScn(MEMAllocator* pAllocator);
     virtual ~AnmScn(); // at 0x10
 
     virtual void SetFrame(f32 frame) = 0; // at 0x1C

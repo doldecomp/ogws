@@ -185,7 +185,7 @@ f32 AnmObjTexPatNode::GetUpdateRate() const {
     return 1.0f;
 }
 
-bool AnmObjTexPatNode::Bind(ResMdl mdl) {
+bool AnmObjTexPatNode::Bind(const ResMdl mdl) {
     bool success = false;
 
     for (int i = 0; i < mChildrenArraySize; i++) {
@@ -399,7 +399,7 @@ void AnmObjTexPatRes::UpdateFrame() {
     }
 }
 
-bool AnmObjTexPatRes::Bind(ResMdl mdl) {
+bool AnmObjTexPatRes::Bind(const ResMdl mdl) {
     int numAnim = mRes.GetNumMaterial();
     bool success = false;
 

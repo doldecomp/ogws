@@ -248,7 +248,7 @@ public:
             ofs_to_obj<ResDic>(ref().toChrDataDic)[i]);
     }
 
-    s32 GetNodeAnmIndex(ResName name) const {
+    s32 GetNodeAnmIndex(const ResName name) const {
         return ofs_to_obj<ResDic>(ref().toChrDataDic).GetIndex(name);
     }
 

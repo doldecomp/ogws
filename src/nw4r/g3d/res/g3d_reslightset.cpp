@@ -14,7 +14,7 @@ inline bool IsBound(const u16* pId) {
 
 } // namespace
 
-bool ResLightSet::Bind(ResAnmScn scene) {
+bool ResLightSet::Bind(const ResAnmScn scene) {
     ResLightSetData& r = ref();
 
     int numAllLight = 0;

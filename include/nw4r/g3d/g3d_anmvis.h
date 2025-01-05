@@ -32,8 +32,8 @@ public:
     virtual void SetUpdateRate(f32 rate) = 0; // at 0x28
     virtual f32 GetUpdateRate() const = 0;    // at 0x2C
 
-    virtual bool Bind(ResMdl mdl) = 0; // at 0x30
-    virtual void Release();            // at 0x34
+    virtual bool Bind(const ResMdl mdl) = 0; // at 0x30
+    virtual void Release();                  // at 0x34
 
     virtual bool GetResult(u32 i) = 0; // at 0x38
 
@@ -79,8 +79,8 @@ public:
     virtual void SetUpdateRate(f32 rate); // at 0x28
     virtual f32 GetUpdateRate() const;    // at 0x2C
 
-    virtual bool Bind(ResMdl mdl); // at 0x30
-    virtual void Release();        // at 0x34
+    virtual bool Bind(const ResMdl mdl); // at 0x30
+    virtual void Release();              // at 0x34
 
     virtual bool GetResult(u32 i) = 0; // at 0x38
 
@@ -134,7 +134,7 @@ public:
     virtual void SetUpdateRate(f32 rate); // at 0x28
     virtual f32 GetUpdateRate() const;    // at 0x2C
 
-    virtual bool Bind(ResMdl mdl); // at 0x30
+    virtual bool Bind(const ResMdl mdl); // at 0x30
 
     virtual bool GetResult(u32 i); // at 0x38
 

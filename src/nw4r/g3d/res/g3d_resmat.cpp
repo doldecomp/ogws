@@ -320,22 +320,20 @@ bool ResTexSrt::GetEffectMtx(u32 id, math::MTX34* pMtx) const {
 
 bool ResTexSrt::SetMapMode(u32 id, u32 mode, int camRef, int lightRef) {
     if (id < ResTexSrtData::NUM_OF_TEXTURE &&
-        mode < TexMtxEffect::MAP_MODE_MAX) {
+        mode < G3DState::NUM_SCNDEPENDENT_TEXMTX_FUNCTYPE) {
 
         ResTexSrtData& r = ref();
         TexMtxEffect& rEffect = r.effect[id];
 
         rEffect.map_mode = mode;
 
-        rEffect.ref_camera =
-            camRef >= 0 && camRef < TexMtxEffect::CAMERA_REF_MAX
-                ? static_cast<s8>(camRef)
-                : -1;
+        rEffect.ref_camera = camRef >= 0 && camRef < G3DState::NUM_CAMERA
+                                 ? static_cast<s8>(camRef)
+                                 : -1;
 
-        rEffect.ref_light =
-            lightRef >= 0 && lightRef < TexMtxEffect::LIGHT_REF_MAX
-                ? static_cast<s8>(lightRef)
-                : -1;
+        rEffect.ref_light = lightRef >= 0 && lightRef < G3DState::NUM_LIGHT
+                                ? static_cast<s8>(lightRef)
+                                : -1;
 
         return true;
     }

@@ -190,7 +190,7 @@ f32 AnmObjShpNode::GetUpdateRate() const {
     return 1.0f;
 }
 
-bool AnmObjShpNode::Bind(ResMdl mdl) {
+bool AnmObjShpNode::Bind(const ResMdl mdl) {
     bool success = false;
 
     for (int i = 0; i < mChildrenArraySize; i++) {
@@ -499,7 +499,7 @@ void AnmObjShpRes::UpdateFrame() {
     }
 }
 
-bool AnmObjShpRes::Bind(ResMdl mdl) {
+bool AnmObjShpRes::Bind(const ResMdl mdl) {
     bool success = false;
     u32 numAnim = mRes.GetShapeAnmNumEntries();
 

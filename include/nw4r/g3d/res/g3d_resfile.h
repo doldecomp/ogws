@@ -49,12 +49,12 @@ public:
     ResMdl GetResMdl(u32 i) const;
 
     ResPltt GetResPltt(const char* pName) const;
-    ResPltt GetResPltt(ResName name) const;
+    ResPltt GetResPltt(const ResName name) const;
     ResPltt GetResPltt(int i) const;
     ResPltt GetResPltt(u32 i) const;
 
     ResTex GetResTex(const char* pName) const;
-    ResTex GetResTex(ResName name) const;
+    ResTex GetResTex(const ResName name) const;
     ResTex GetResTex(int i) const;
     ResTex GetResTex(u32 i) const;
 
