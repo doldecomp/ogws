@@ -30,6 +30,13 @@ struct BlendVtx {
 struct ShpAnmResult {
     static const int MAX_KEY_SHAPE = 32;
 
+    enum Flag {
+        FLAG_ANM_EXISTS = (1 << 0),
+        FLAG_ANM_VTX_POS = (1 << 1),
+        FLAG_ANM_VTX_NRM = (1 << 2),
+        FLAG_ANM_VTX_CLR = (1 << 3),
+    };
+
     u32 flags;                        // at 0x0
     u32 numKeyShape;                  // at 0x4
     ShpAnmVtxSet baseShapeVtxSet;     // at 0x8

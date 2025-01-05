@@ -7,6 +7,10 @@
 
 namespace nw4r {
 namespace g3d {
+
+void CalcTexMtx(math::MTX34* pMtx, bool set, const TexSrt& rSrt,
+                TexSrt::Flag flag, TexSrtTypedef::TexMatrixMode mode);
+
 namespace detail {
 
 class WorldMtxAttr {
@@ -86,10 +90,6 @@ public:
 };
 
 } // namespace detail
-
-void CalcTexMtx(math::MTX34* pMtx, bool set, const TexSrt& rSrt,
-                TexSrt::Flag flag, TexSrtTypedef::TexMatrixMode mode);
-
 } // namespace g3d
 } // namespace nw4r
 

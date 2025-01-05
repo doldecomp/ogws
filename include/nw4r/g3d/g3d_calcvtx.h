@@ -13,8 +13,8 @@ struct ResVtxPosData;
 struct ResVtxNrmData;
 struct ResVtxClrData;
 
-void CalcVtx(ResMdl, AnmObjShp*, ResVtxPosData**, ResVtxNrmData**,
-             ResVtxClrData**);
+void CalcVtx(ResMdl mdl, AnmObjShp* pAnmShp, ResVtxPosData** ppVtxPosTable,
+             ResVtxNrmData** ppVtxNrmTable, ResVtxClrData** ppVtxClrTable);
 
 } // namespace g3d
 } // namespace nw4r
