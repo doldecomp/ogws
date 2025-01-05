@@ -141,15 +141,15 @@ public:
         return GetRevision() == REVISION;
     }
 
-    void GetAnmResult(TexSrtAnmResult* pResult, u32 id, f32 frame) const;
+    void GetAnmResult(TexSrtAnmResult* pResult, u32 idx, f32 frame) const;
 
-    const ResAnmTexSrtMatData* GetMatAnm(int i) const {
+    const ResAnmTexSrtMatData* GetMatAnm(int idx) const {
         return static_cast<ResAnmTexSrtMatData*>(
-            ofs_to_obj<ResDic>(ref().toTexSrtDataDic)[i]);
+            ofs_to_obj<ResDic>(ref().toTexSrtDataDic)[idx]);
     }
-    const ResAnmTexSrtMatData* GetMatAnm(u32 i) const {
+    const ResAnmTexSrtMatData* GetMatAnm(u32 idx) const {
         return static_cast<ResAnmTexSrtMatData*>(
-            ofs_to_obj<ResDic>(ref().toTexSrtDataDic)[i]);
+            ofs_to_obj<ResDic>(ref().toTexSrtDataDic)[idx]);
     }
 
     int GetNumFrame() const {

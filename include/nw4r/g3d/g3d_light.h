@@ -163,9 +163,9 @@ public:
         return mpAmbLightObjArray;
     }
 
-    LightSet GetLightSet(int i) {
-        if (i < mNumLightSet && i >= 0) {
-            return LightSet(this, &mpLightSetDataArray[i]);
+    LightSet GetLightSet(int idx) {
+        if (idx < mNumLightSet && idx >= 0) {
+            return LightSet(this, &mpLightSetDataArray[idx]);
         }
 
         return LightSet(this, NULL);

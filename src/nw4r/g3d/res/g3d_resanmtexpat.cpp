@@ -49,18 +49,18 @@ const ResAnmTexPatFrmData* SearchFrame(const ResAnmTexPatAnmData* pAnmData,
     return pFrmData;
 }
 
-inline ResName GetResNameFromOffsetArray(s32* pStringArray, int i) {
-    s32 offset = pStringArray[i];
+inline ResName GetResNameFromOffsetArray(s32* pStringArray, int idx) {
+    s32 offset = pStringArray[idx];
     return NW4R_G3D_OFS_TO_RESNAME(pStringArray, offset);
 }
 
 } // namespace
 
-void ResAnmTexPat::GetAnmResult(TexPatAnmResult* pResult, u32 id,
+void ResAnmTexPat::GetAnmResult(TexPatAnmResult* pResult, u32 idx,
                                 f32 frame) const {
     ResFile file = GetParent(); // unused
 
-    const ResAnmTexPatMatData* pMatData = GetMatAnm(id);
+    const ResAnmTexPatMatData* pMatData = GetMatAnm(idx);
     const ResAnmTexPatMatData::AnmData* pAnmDataImpl = pMatData->anms;
     u32 flags = pMatData->flags;
 

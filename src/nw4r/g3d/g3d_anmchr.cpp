@@ -52,12 +52,12 @@ AnmObjChr::AnmObjChr(MEMAllocator* pAllocator, u16* pBindingBuf, int numBinding)
     Release();
 }
 
-bool AnmObjChr::TestExistence(u32 i) const {
-    return !(mpBinding[i] & (BINDING_UNDEFINED | BINDING_INVALID));
+bool AnmObjChr::TestExistence(u32 idx) const {
+    return !(mpBinding[idx] & (BINDING_UNDEFINED | BINDING_INVALID));
 }
 
-bool AnmObjChr::TestDefined(u32 i) const {
-    return !(mpBinding[i] & BINDING_UNDEFINED);
+bool AnmObjChr::TestDefined(u32 idx) const {
+    return !(mpBinding[idx] & BINDING_UNDEFINED);
 }
 
 void AnmObjChr::Release() {
@@ -68,26 +68,26 @@ void AnmObjChr::Release() {
     SetAnmFlag(FLAG_ANM_BOUND, false);
 }
 
-AnmObjChrRes* AnmObjChr::Attach(int i, AnmObjChrRes* pRes) {
-#pragma unused(i)
+AnmObjChrRes* AnmObjChr::Attach(int idx, AnmObjChrRes* pRes) {
+#pragma unused(idx)
 #pragma unused(pRes)
 
     return NULL;
 }
 
-AnmObjChrRes* AnmObjChr::Detach(int i) {
-#pragma unused(i)
+AnmObjChrRes* AnmObjChr::Detach(int idx) {
+#pragma unused(idx)
 
     return NULL;
 }
 
-void AnmObjChr::SetWeight(int i, f32 weight) {
-#pragma unused(i)
+void AnmObjChr::SetWeight(int idx, f32 weight) {
+#pragma unused(idx)
 #pragma unused(weight)
 }
 
-f32 AnmObjChr::GetWeight(int i) const {
-#pragma unused(i)
+f32 AnmObjChr::GetWeight(int idx) const {
+#pragma unused(idx)
 
     return 0.0f;
 }
@@ -115,8 +115,8 @@ AnmObjChrNode::~AnmObjChrNode() {
     DetachAll();
 }
 
-AnmObjChrRes* AnmObjChrNode::Attach(int i, AnmObjChrRes* pRes) {
-    AnmObjChrRes* pOld = Detach(i);
+AnmObjChrRes* AnmObjChrNode::Attach(int idx, AnmObjChrRes* pRes) {
+    AnmObjChrRes* pOld = Detach(idx);
     bool hasAnm = false;
 
     for (u32 i = 0; i < mNumBinding; i++) {
@@ -132,17 +132,17 @@ AnmObjChrRes* AnmObjChrNode::Attach(int i, AnmObjChrRes* pRes) {
         SetAnmFlag(FLAG_ANM_BOUND, true);
     }
 
-    mpChildrenArray[i] = pRes;
+    mpChildrenArray[idx] = pRes;
     pRes->G3dProc(G3DPROC_ATTACH_PARENT, 0, this);
     return pOld;
 }
 
-AnmObjChrRes* AnmObjChrNode::Detach(int i) {
-    AnmObjChrRes* pOld = mpChildrenArray[i];
+AnmObjChrRes* AnmObjChrNode::Detach(int idx) {
+    AnmObjChrRes* pOld = mpChildrenArray[idx];
 
     if (pOld != NULL) {
         pOld->G3dProc(G3DPROC_DETACH_PARENT, 0, this);
-        mpChildrenArray[i] = NULL;
+        mpChildrenArray[idx] = NULL;
 
         bool hasAnm = false;
         for (u32 i = 0; i < mNumBinding; i++) {
@@ -387,20 +387,20 @@ AnmObjChrBlend::AnmObjChrBlend(MEMAllocator* pAllocator, u16* pBindingBuf,
     }
 }
 
-const ChrAnmResult* AnmObjChrBlend::GetResult(ChrAnmResult* pResult, u32 i) {
+const ChrAnmResult* AnmObjChrBlend::GetResult(ChrAnmResult* pResult, u32 idx) {
     AnmObjChrRes* pFirstChild = NULL;
     int blendNum = 0;
     f32 weightSum = 0.0f;
 
-    for (u32 j = 0; static_cast<int>(j) < mChildrenArraySize; j++) {
-        f32 weight = mpWeightArray[j];
-        AnmObjChrRes* pChild = mpChildrenArray[j];
+    for (u32 i = 0; static_cast<int>(i) < mChildrenArraySize; i++) {
+        f32 weight = mpWeightArray[i];
+        AnmObjChrRes* pChild = mpChildrenArray[i];
 
         if (pChild == NULL) {
             continue;
         }
 
-        if (weight == 0.0f || !pChild->TestExistence(i)) {
+        if (weight == 0.0f || !pChild->TestExistence(idx)) {
             continue;
         }
 
@@ -418,7 +418,7 @@ const ChrAnmResult* AnmObjChrBlend::GetResult(ChrAnmResult* pResult, u32 i) {
     }
 
     if (blendNum == 1) {
-        return pFirstChild->GetResult(pResult, i);
+        return pFirstChild->GetResult(pResult, idx);
     }
 
     bool useQuat = TestAnmFlag(FLAG_USE_QUATERNION_ROTATION_BLEND);
@@ -439,17 +439,17 @@ const ChrAnmResult* AnmObjChrBlend::GetResult(ChrAnmResult* pResult, u32 i) {
     pResult->s.z = 0.0f;
     math::MTX34Zero(&pResult->rt);
 
-    for (int j = 0; j < mChildrenArraySize; j++) {
+    for (int i = 0; i < mChildrenArraySize; i++) {
         ChrAnmResult resultBuf;
 
-        AnmObjChrRes* pChild = mpChildrenArray[j];
-        f32 weight = mpWeightArray[j];
+        AnmObjChrRes* pChild = mpChildrenArray[i];
+        f32 weight = mpWeightArray[i];
 
-        if (pChild == NULL || weight == 0.0f || !pChild->TestExistence(i)) {
+        if (pChild == NULL || weight == 0.0f || !pChild->TestExistence(idx)) {
             continue;
         }
 
-        const ChrAnmResult* pMyResult = pChild->GetResult(&resultBuf, i);
+        const ChrAnmResult* pMyResult = pChild->GetResult(&resultBuf, idx);
 
         f32 ratio = weight * invWeightSum;
         u32 flags = pMyResult->flags;
@@ -541,12 +541,12 @@ const ChrAnmResult* AnmObjChrBlend::GetResult(ChrAnmResult* pResult, u32 i) {
     return pResult;
 }
 
-void AnmObjChrBlend::SetWeight(int i, f32 weight) {
-    mpWeightArray[i] = weight;
+void AnmObjChrBlend::SetWeight(int idx, f32 weight) {
+    mpWeightArray[idx] = weight;
 }
 
-f32 AnmObjChrBlend::GetWeight(int i) const {
-    return mpWeightArray[i];
+f32 AnmObjChrBlend::GetWeight(int idx) const {
+    return mpWeightArray[idx];
 }
 
 /******************************************************************************
@@ -725,8 +725,8 @@ void AnmObjChrRes::Release(const ResMdl mdl, u32 target, BindOption option) {
     }
 }
 
-const ChrAnmResult* AnmObjChrRes::GetResult(ChrAnmResult* pResult, u32 i) {
-    u32 id = mpBinding[i];
+const ChrAnmResult* AnmObjChrRes::GetResult(ChrAnmResult* pResult, u32 idx) {
+    u32 id = mpBinding[idx];
 
     if (id & (BINDING_UNDEFINED | BINDING_INVALID)) {
         pResult->flags = 0;

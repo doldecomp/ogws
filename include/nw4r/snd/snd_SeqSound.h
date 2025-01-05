@@ -68,8 +68,8 @@ public:
     void SetTrackVolume(u32 trackFlags, f32 volume);
     void SetTrackPitch(u32 trackFlags, f32 pitch);
 
-    bool WriteVariable(int i, s16 value);
-    static bool WriteGlobalVariable(int i, s16 value);
+    bool WriteVariable(int idx, s16 value);
+    static bool WriteGlobalVariable(int idx, s16 value);
 
     void* GetFileStreamBuffer() {
         return mFileStreamBuffer;

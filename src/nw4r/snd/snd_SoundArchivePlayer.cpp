@@ -372,8 +372,8 @@ const SoundArchive& SoundArchivePlayer::GetSoundArchive() const {
     return *mSoundArchive;
 }
 
-SoundPlayer& SoundArchivePlayer::GetSoundPlayer(u32 i) {
-    return mSoundPlayers[i];
+SoundPlayer& SoundArchivePlayer::GetSoundPlayer(u32 idx) {
+    return mSoundPlayers[idx];
 }
 
 const void* SoundArchivePlayer::detail_GetFileAddress(u32 id) const {

@@ -3,8 +3,8 @@
 namespace nw4r {
 namespace g3d {
 
-bool ResAnmVis::GetAnmResult(u32 id, f32 frame) const {
-    const ResAnmVisAnmData* pAnmData = GetNodeAnm(id);
+bool ResAnmVis::GetAnmResult(u32 idx, f32 frame) const {
+    const ResAnmVisAnmData* pAnmData = GetNodeAnm(idx);
     const ResAnmVisInfoData& rInfoData = ref().info;
 
     if (pAnmData->flags & ResAnmVisAnmData::FLAG_ANM_IS_CONSTANT) {

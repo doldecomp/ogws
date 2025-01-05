@@ -40,7 +40,7 @@ private:
     static const int TABLE_SIZE = 32;
 
 private:
-    static s8 GetSinIdx(int i);
+    static s8 GetSinIdx(int idx);
 
 private:
     LfoParam mParam;   // at 0x0

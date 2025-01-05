@@ -37,9 +37,9 @@ public:
         }
     }
 
-    void WriteVariable(int i, s16 value) {
+    void WriteVariable(int idx, s16 value) {
         if (IsAttachedSound()) {
-            mSound->WriteVariable(i, value);
+            mSound->WriteVariable(idx, value);
         }
     }
 

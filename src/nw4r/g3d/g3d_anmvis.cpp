@@ -23,12 +23,12 @@ AnmObjVis::AnmObjVis(MEMAllocator* pAllocator, u16* pBindingBuf, int numBinding)
     Release();
 }
 
-bool AnmObjVis::TestExistence(u32 i) const {
-    return !(mpBinding[i] & (BINDING_UNDEFINED | BINDING_INVALID));
+bool AnmObjVis::TestExistence(u32 idx) const {
+    return !(mpBinding[idx] & (BINDING_UNDEFINED | BINDING_INVALID));
 }
 
-bool AnmObjVis::TestDefined(u32 i) const {
-    return !(mpBinding[i] & BINDING_UNDEFINED);
+bool AnmObjVis::TestDefined(u32 idx) const {
+    return !(mpBinding[idx] & BINDING_UNDEFINED);
 }
 
 void AnmObjVis::Release() {
@@ -39,15 +39,15 @@ void AnmObjVis::Release() {
     SetAnmFlag(FLAG_ANM_BOUND, false);
 }
 
-AnmObjVisRes* AnmObjVis::Attach(int i, AnmObjVisRes* pRes) {
-#pragma unused(i)
+AnmObjVisRes* AnmObjVis::Attach(int idx, AnmObjVisRes* pRes) {
+#pragma unused(idx)
 #pragma unused(pRes)
 
     return NULL;
 }
 
-AnmObjVisRes* AnmObjVis::Detach(int i) {
-#pragma unused(i)
+AnmObjVisRes* AnmObjVis::Detach(int idx) {
+#pragma unused(idx)
 
     return NULL;
 }
@@ -97,8 +97,8 @@ AnmObjVisNode::~AnmObjVisNode() {
     DetachAll();
 }
 
-AnmObjVisRes* AnmObjVisNode::Attach(int i, AnmObjVisRes* pRes) {
-    AnmObjVisRes* pOld = Detach(i);
+AnmObjVisRes* AnmObjVisNode::Attach(int idx, AnmObjVisRes* pRes) {
+    AnmObjVisRes* pOld = Detach(idx);
     bool hasAnm = false;
 
     for (u32 i = 0; i < mNumBinding; i++) {
@@ -114,17 +114,17 @@ AnmObjVisRes* AnmObjVisNode::Attach(int i, AnmObjVisRes* pRes) {
         SetAnmFlag(FLAG_ANM_BOUND, true);
     }
 
-    mpChildren[i] = pRes;
+    mpChildren[idx] = pRes;
     pRes->G3dProc(G3DPROC_ATTACH_PARENT, 0, this);
     return pOld;
 }
 
-AnmObjVisRes* AnmObjVisNode::Detach(int i) {
-    AnmObjVisRes* pOld = mpChildren[i];
+AnmObjVisRes* AnmObjVisNode::Detach(int idx) {
+    AnmObjVisRes* pOld = mpChildren[idx];
 
     if (pOld != NULL) {
         pOld->G3dProc(G3DPROC_DETACH_PARENT, 0, this);
-        mpChildren[i] = NULL;
+        mpChildren[idx] = NULL;
 
         bool hasAnm = false;
         for (u32 i = 0; i < mNumBinding; i++) {
@@ -295,15 +295,15 @@ AnmObjVisOR* AnmObjVisOR::Construct(MEMAllocator* pAllocator, u32* pSize,
     return pObjVis;
 }
 
-bool AnmObjVisOR::GetResult(u32 i) {
-    for (int j = 0; j < MAX_CHILD; j++) {
-        AnmObjVisRes* pChild = mpChildren[j];
+bool AnmObjVisOR::GetResult(u32 idx) {
+    for (int i = 0; i < MAX_CHILD; i++) {
+        AnmObjVisRes* pChild = mpChildren[i];
 
-        if (pChild == NULL || !pChild->TestExistence(i)) {
+        if (pChild == NULL || !pChild->TestExistence(idx)) {
             continue;
         }
 
-        if (!pChild->GetResult(i)) {
+        if (!pChild->GetResult(idx)) {
             return false;
         }
     }
@@ -400,8 +400,8 @@ bool AnmObjVisRes::Bind(ResMdl mdl) {
     return success;
 }
 
-bool AnmObjVisRes::GetResult(u32 i) {
-    u32 id = mpBinding[i];
+bool AnmObjVisRes::GetResult(u32 idx) {
+    u32 id = mpBinding[idx];
 
     if ((id & BINDING_INVALID) || (id & BINDING_UNDEFINED)) {
         return true;

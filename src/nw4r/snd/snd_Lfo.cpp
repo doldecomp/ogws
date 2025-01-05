@@ -31,25 +31,25 @@ void Lfo::Update(int msec) {
     mCounter -= static_cast<int>(mCounter);
 }
 
-s8 Lfo::GetSinIdx(int i) {
+s8 Lfo::GetSinIdx(int idx) {
     static const u8 sinTable[TABLE_SIZE + 1] = {
         0,   6,   12,  19,  25,  31,  37,  43,  49,  54,  60,
         65,  71,  76,  81,  85,  90,  94,  98,  102, 106, 109,
         112, 115, 117, 120, 122, 123, 125, 126, 126, 127, 127};
 
-    if (i < TABLE_SIZE) {
-        return sinTable[i];
+    if (idx < TABLE_SIZE) {
+        return sinTable[idx];
     }
 
-    if (i < TABLE_SIZE * 2) {
-        return sinTable[TABLE_SIZE - (i - TABLE_SIZE)];
+    if (idx < TABLE_SIZE * 2) {
+        return sinTable[TABLE_SIZE - (idx - TABLE_SIZE)];
     }
 
-    if (i < TABLE_SIZE * 3) {
-        return -sinTable[i - TABLE_SIZE * 2];
+    if (idx < TABLE_SIZE * 3) {
+        return -sinTable[idx - TABLE_SIZE * 2];
     }
 
-    return -sinTable[TABLE_SIZE - (i - TABLE_SIZE * 3)];
+    return -sinTable[TABLE_SIZE - (idx - TABLE_SIZE * 3)];
 }
 
 f32 Lfo::GetValue() const {

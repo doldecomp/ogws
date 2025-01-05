@@ -63,9 +63,9 @@ inline u32 MakeResult(TexSrt* pSrt, const ResAnmTexSrtTexData* pTexData,
 
 } // namespace
 
-void ResAnmTexSrt::GetAnmResult(TexSrtAnmResult* pResult, u32 id,
+void ResAnmTexSrt::GetAnmResult(TexSrtAnmResult* pResult, u32 idx,
                                 f32 frame) const {
-    const ResAnmTexSrtMatData* pMatData = GetMatAnm(id);
+    const ResAnmTexSrtMatData* pMatData = GetMatAnm(idx);
     const s32* pToTexData = pMatData->toResAnmTexSrtTexData;
     u32 flags = pMatData->flags;
     u32 indFlags = pMatData->indFlags;

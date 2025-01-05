@@ -57,11 +57,11 @@ public:
         return !HasAmbLight() || GetAmbLightID() != ResLightSetData::INVALID_ID;
     }
 
-    ResName GetLightResName(u32 i) const {
+    ResName GetLightResName(u32 idx) const {
         const ResLightSetData& r = ref();
 
         const s32* pNames = r.lightNames;
-        return NW4R_G3D_OFS_TO_RESNAME(pNames, pNames[i]);
+        return NW4R_G3D_OFS_TO_RESNAME(pNames, pNames[idx]);
     }
 };
 

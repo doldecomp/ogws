@@ -368,9 +368,9 @@ public:
     virtual ForEachResult ForEach(ForEachFunc pFunc, void* pInfo,
                                   bool postOrder); // at 0x1C
 
-    virtual bool Insert(u32 i, ScnObj* pObj); // at 0x34
-    virtual ScnObj* Remove(u32 i);            // at 0x38
-    virtual bool Remove(ScnObj* pObj);        // at 0x3C
+    virtual bool Insert(u32 idx, ScnObj* pObj); // at 0x34
+    virtual ScnObj* Remove(u32 idx);            // at 0x38
+    virtual bool Remove(ScnObj* pObj);          // at 0x3C
 
     ScnObj** Begin() {
         return mpScnObjArray;
@@ -379,8 +379,8 @@ public:
         return mpScnObjArray + mNumScnObj;
     }
 
-    ScnObj* operator[](u32 i) {
-        return mpScnObjArray[i];
+    ScnObj* operator[](u32 idx) {
+        return mpScnObjArray[idx];
     }
 
     u32 Size() const {

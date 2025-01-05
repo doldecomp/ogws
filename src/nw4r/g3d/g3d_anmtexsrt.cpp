@@ -28,12 +28,12 @@ AnmObjTexSrt::AnmObjTexSrt(MEMAllocator* pAllocator, u16* pBindingBuf,
     Release();
 }
 
-bool AnmObjTexSrt::TestExistence(u32 i) const {
-    return !(mpBinding[i] & (BINDING_UNDEFINED | BINDING_INVALID));
+bool AnmObjTexSrt::TestExistence(u32 idx) const {
+    return !(mpBinding[idx] & (BINDING_UNDEFINED | BINDING_INVALID));
 }
 
-bool AnmObjTexSrt::TestDefined(u32 i) const {
-    return !(mpBinding[i] & BINDING_UNDEFINED);
+bool AnmObjTexSrt::TestDefined(u32 idx) const {
+    return !(mpBinding[idx] & BINDING_UNDEFINED);
 }
 
 void AnmObjTexSrt::Release() {
@@ -44,15 +44,15 @@ void AnmObjTexSrt::Release() {
     SetAnmFlag(FLAG_ANM_BOUND, false);
 }
 
-AnmObjTexSrtRes* AnmObjTexSrt::Attach(int i, AnmObjTexSrtRes* pRes) {
-#pragma unused(i)
+AnmObjTexSrtRes* AnmObjTexSrt::Attach(int idx, AnmObjTexSrtRes* pRes) {
+#pragma unused(idx)
 #pragma unused(pRes)
 
     return NULL;
 }
 
-AnmObjTexSrtRes* AnmObjTexSrt::Detach(int i) {
-#pragma unused(i)
+AnmObjTexSrtRes* AnmObjTexSrt::Detach(int idx) {
+#pragma unused(idx)
 
     return NULL;
 }
@@ -81,8 +81,8 @@ AnmObjTexSrtNode::~AnmObjTexSrtNode() {
     DetachAll();
 }
 
-AnmObjTexSrtRes* AnmObjTexSrtNode::Attach(int i, AnmObjTexSrtRes* pRes) {
-    AnmObjTexSrtRes* pOld = Detach(i);
+AnmObjTexSrtRes* AnmObjTexSrtNode::Attach(int idx, AnmObjTexSrtRes* pRes) {
+    AnmObjTexSrtRes* pOld = Detach(idx);
     bool hasAnm = false;
 
     for (u32 i = 0; i < mNumBinding; i++) {
@@ -98,17 +98,17 @@ AnmObjTexSrtRes* AnmObjTexSrtNode::Attach(int i, AnmObjTexSrtRes* pRes) {
         SetAnmFlag(FLAG_ANM_BOUND, true);
     }
 
-    mpChildrenArray[i] = pRes;
+    mpChildrenArray[idx] = pRes;
     pRes->G3dProc(G3DPROC_ATTACH_PARENT, 0, this);
     return pOld;
 }
 
-AnmObjTexSrtRes* AnmObjTexSrtNode::Detach(int i) {
-    AnmObjTexSrtRes* pOld = mpChildrenArray[i];
+AnmObjTexSrtRes* AnmObjTexSrtNode::Detach(int idx) {
+    AnmObjTexSrtRes* pOld = mpChildrenArray[idx];
 
     if (pOld != NULL) {
         pOld->G3dProc(G3DPROC_DETACH_PARENT, 0, this);
-        mpChildrenArray[i] = NULL;
+        mpChildrenArray[idx] = NULL;
 
         bool hasAnm = false;
         for (u32 i = 0; i < mNumBinding; i++) {
@@ -294,15 +294,15 @@ AnmObjTexSrtOverride* AnmObjTexSrtOverride::Construct(MEMAllocator* pAllocator,
 }
 
 const TexSrtAnmResult* AnmObjTexSrtOverride::GetResult(TexSrtAnmResult* pResult,
-                                                       u32 i) {
-    for (int j = mChildrenArraySize - 1; j >= 0; j--) {
-        AnmObjTexSrtRes* pChild = mpChildrenArray[j];
+                                                       u32 idx) {
+    for (int i = mChildrenArraySize - 1; i >= 0; i--) {
+        AnmObjTexSrtRes* pChild = mpChildrenArray[i];
 
-        if (pChild == NULL || !pChild->TestExistence(i)) {
+        if (pChild == NULL || !pChild->TestExistence(idx)) {
             continue;
         }
 
-        const TexSrtAnmResult* pChildResult = pChild->GetResult(pResult, i);
+        const TexSrtAnmResult* pChildResult = pChild->GetResult(pResult, idx);
 
         if (pChildResult->flags != 0) {
             return pChildResult;
@@ -424,8 +424,8 @@ bool AnmObjTexSrtRes::Bind(const ResMdl mdl) {
 }
 
 const TexSrtAnmResult* AnmObjTexSrtRes::GetResult(TexSrtAnmResult* pResult,
-                                                  u32 i) {
-    u32 id = mpBinding[i];
+                                                  u32 idx) {
+    u32 id = mpBinding[idx];
 
     if (id & (BINDING_UNDEFINED | BINDING_INVALID)) {
         pResult->flags = 0;

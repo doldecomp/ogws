@@ -31,10 +31,10 @@ public:
 
     void* operator[](const char* pName) const;
     void* operator[](const ResName name) const;
-    void* operator[](int i) const {
+    void* operator[](int idx) const {
         if (IsValid()) {
             return const_cast<void*>(
-                ofs_to_ptr<void>(ref().data[i + 1].ofsData));
+                ofs_to_ptr<void>(ref().data[idx + 1].ofsData));
         }
 
         return NULL;

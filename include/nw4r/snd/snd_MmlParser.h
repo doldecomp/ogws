@@ -35,7 +35,7 @@ public:
     ParseResult Parse(MmlSeqTrack* pTrack, bool doNoteOn) const;
 
     volatile s16* GetVariablePtr(SeqPlayer* pPlayer, SeqTrack* pTrack,
-                                 int i) const;
+                                 int idx) const;
 
     static void EnablePrintVar(bool enable) {
         mPrintVarEnabledFlag = enable;

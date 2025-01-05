@@ -26,12 +26,12 @@ AnmObjTexPat::AnmObjTexPat(MEMAllocator* pAllocator, u16* pBindingBuf,
     Release();
 }
 
-bool AnmObjTexPat::TestExistence(u32 i) const {
-    return !(mpBinding[i] & (BINDING_UNDEFINED | BINDING_INVALID));
+bool AnmObjTexPat::TestExistence(u32 idx) const {
+    return !(mpBinding[idx] & (BINDING_UNDEFINED | BINDING_INVALID));
 }
 
-bool AnmObjTexPat::TestDefined(u32 i) const {
-    return !(mpBinding[i] & BINDING_UNDEFINED);
+bool AnmObjTexPat::TestDefined(u32 idx) const {
+    return !(mpBinding[idx] & BINDING_UNDEFINED);
 }
 
 void AnmObjTexPat::Release() {
@@ -42,15 +42,15 @@ void AnmObjTexPat::Release() {
     SetAnmFlag(FLAG_ANM_BOUND, false);
 }
 
-AnmObjTexPatRes* AnmObjTexPat::Attach(int i, AnmObjTexPatRes* pRes) {
-#pragma unused(i)
+AnmObjTexPatRes* AnmObjTexPat::Attach(int idx, AnmObjTexPatRes* pRes) {
+#pragma unused(idx)
 #pragma unused(pRes)
 
     return NULL;
 }
 
-AnmObjTexPatRes* AnmObjTexPat::Detach(int i) {
-#pragma unused(i)
+AnmObjTexPatRes* AnmObjTexPat::Detach(int idx) {
+#pragma unused(idx)
 
     return NULL;
 }
@@ -79,8 +79,8 @@ AnmObjTexPatNode::~AnmObjTexPatNode() {
     DetachAll();
 }
 
-AnmObjTexPatRes* AnmObjTexPatNode::Attach(int i, AnmObjTexPatRes* pRes) {
-    AnmObjTexPatRes* pOld = Detach(i);
+AnmObjTexPatRes* AnmObjTexPatNode::Attach(int idx, AnmObjTexPatRes* pRes) {
+    AnmObjTexPatRes* pOld = Detach(idx);
     bool hasAnm = false;
 
     for (u32 i = 0; i < mNumBinding; i++) {
@@ -96,17 +96,17 @@ AnmObjTexPatRes* AnmObjTexPatNode::Attach(int i, AnmObjTexPatRes* pRes) {
         SetAnmFlag(FLAG_ANM_BOUND, true);
     }
 
-    mpChildrenArray[i] = pRes;
+    mpChildrenArray[idx] = pRes;
     pRes->G3dProc(G3DPROC_ATTACH_PARENT, 0, this);
     return pOld;
 }
 
-AnmObjTexPatRes* AnmObjTexPatNode::Detach(int i) {
-    AnmObjTexPatRes* pOld = mpChildrenArray[i];
+AnmObjTexPatRes* AnmObjTexPatNode::Detach(int idx) {
+    AnmObjTexPatRes* pOld = mpChildrenArray[idx];
 
     if (pOld != NULL) {
         pOld->G3dProc(G3DPROC_DETACH_PARENT, 0, this);
-        mpChildrenArray[i] = NULL;
+        mpChildrenArray[idx] = NULL;
 
         bool hasAnm = false;
         for (u32 i = 0; i < mNumBinding; i++) {
@@ -292,15 +292,15 @@ AnmObjTexPatOverride* AnmObjTexPatOverride::Construct(MEMAllocator* pAllocator,
 }
 
 const TexPatAnmResult* AnmObjTexPatOverride::GetResult(TexPatAnmResult* pResult,
-                                                       u32 i) {
-    for (int j = mChildrenArraySize - 1; j >= 0; j--) {
-        AnmObjTexPatRes* pChild = mpChildrenArray[j];
+                                                       u32 idx) {
+    for (int i = mChildrenArraySize - 1; i >= 0; i--) {
+        AnmObjTexPatRes* pChild = mpChildrenArray[i];
 
-        if (pChild == NULL || !pChild->TestExistence(i)) {
+        if (pChild == NULL || !pChild->TestExistence(idx)) {
             continue;
         }
 
-        const TexPatAnmResult* pChildResult = pChild->GetResult(pResult, i);
+        const TexPatAnmResult* pChildResult = pChild->GetResult(pResult, idx);
 
         if (pChildResult->bTexExist != 0 || pChildResult->bPlttExist) {
             return pChildResult;

@@ -145,40 +145,40 @@ public:
 
     ResNode GetResNode(const char* pName) const;
     ResNode GetResNode(const ResName name) const;
-    ResNode GetResNode(int i) const;
-    ResNode GetResNode(u32 i) const;
+    ResNode GetResNode(int idx) const;
+    ResNode GetResNode(u32 idx) const;
     u32 GetResNodeNumEntries() const;
 
     ResVtxPos GetResVtxPos(const ResName name) const;
-    ResVtxPos GetResVtxPos(int i) const;
-    ResVtxPos GetResVtxPos(u32 i) const;
+    ResVtxPos GetResVtxPos(int idx) const;
+    ResVtxPos GetResVtxPos(u32 idx) const;
     u32 GetResVtxPosNumEntries() const;
 
     ResVtxNrm GetResVtxNrm(const ResName name) const;
-    ResVtxNrm GetResVtxNrm(int i) const;
-    ResVtxNrm GetResVtxNrm(u32 i) const;
+    ResVtxNrm GetResVtxNrm(int idx) const;
+    ResVtxNrm GetResVtxNrm(u32 idx) const;
     u32 GetResVtxNrmNumEntries() const;
 
     ResVtxClr GetResVtxClr(const ResName name) const;
-    ResVtxClr GetResVtxClr(int i) const;
-    ResVtxClr GetResVtxClr(u32 i) const;
+    ResVtxClr GetResVtxClr(int idx) const;
+    ResVtxClr GetResVtxClr(u32 idx) const;
     u32 GetResVtxClrNumEntries() const;
 
-    ResVtxTexCoord GetResVtxTexCoord(int i) const;
+    ResVtxTexCoord GetResVtxTexCoord(int idx) const;
     u32 GetResVtxTexCoordNumEntries() const;
 
     ResMat GetResMat(const char* pName) const;
     ResMat GetResMat(const ResName name) const;
-    ResMat GetResMat(int i) const;
-    ResMat GetResMat(u32 i) const;
+    ResMat GetResMat(int idx) const;
+    ResMat GetResMat(u32 idx) const;
     u32 GetResMatNumEntries() const;
 
     ResShp GetResShp(const char* pName) const;
-    ResShp GetResShp(int i) const;
-    ResShp GetResShp(u32 i) const;
+    ResShp GetResShp(int idx) const;
+    ResShp GetResShp(u32 idx) const;
     u32 GetResShpNumEntries() const;
 
-    ResTexPlttInfo GetResTexPlttInfoOffsetFromTexName(int i) const;
+    ResTexPlttInfo GetResTexPlttInfoOffsetFromTexName(int idx) const;
     u32 GetResTexPlttInfoOffsetFromTexNameNumEntries() const;
 
     ResMdlInfo GetResMdlInfo() {

@@ -21,19 +21,19 @@ bool ResAnmScn::HasResAnmLight() const {
                ref().toScnTopLevelDic))[ResName(&ResNameData_Lights)] != NULL;
 }
 
-ResLightSet ResAnmScn::GetResLightSet(int i) const {
+ResLightSet ResAnmScn::GetResLightSet(int idx) const {
     void* pResLightSetDicData = ResDic(ofs_to_obj<ResDic>(
         ref().toScnTopLevelDic))[ResName(&ResNameData_LightSet)];
 
     if (pResLightSetDicData != NULL) {
-        return ResLightSet(ResDic(pResLightSetDicData)[i]);
+        return ResLightSet(ResDic(pResLightSetDicData)[idx]);
     }
 
     return ResLightSet(NULL);
 }
 
-ResLightSet ResAnmScn::GetResLightSet(u32 i) const {
-    return GetResLightSet(static_cast<int>(i));
+ResLightSet ResAnmScn::GetResLightSet(u32 idx) const {
+    return GetResLightSet(static_cast<int>(idx));
 }
 
 u32 ResAnmScn::GetResLightSetNumEntries() const {
@@ -58,12 +58,12 @@ ResAnmAmbLight ResAnmScn::GetResAnmAmbLight(const ResName name) const {
     return ResAnmAmbLight(NULL);
 }
 
-ResAnmAmbLight ResAnmScn::GetResAnmAmbLight(int i) const {
+ResAnmAmbLight ResAnmScn::GetResAnmAmbLight(int idx) const {
     void* pResAnmAmbLightDicData = ResDic(ofs_to_obj<ResDic>(
         ref().toScnTopLevelDic))[ResName(&ResNameData_AmbLights)];
 
     if (pResAnmAmbLightDicData != NULL) {
-        return ResAnmAmbLight(ResDic(pResAnmAmbLightDicData)[i]);
+        return ResAnmAmbLight(ResDic(pResAnmAmbLightDicData)[idx]);
     }
 
     return ResAnmAmbLight(NULL);
@@ -80,12 +80,12 @@ ResAnmLight ResAnmScn::GetResAnmLight(const ResName name) const {
     return ResAnmLight(NULL);
 }
 
-ResAnmLight ResAnmScn::GetResAnmLight(int i) const {
+ResAnmLight ResAnmScn::GetResAnmLight(int idx) const {
     void* pResAnmLightDicData = ResDic(ofs_to_obj<ResDic>(
         ref().toScnTopLevelDic))[ResName(&ResNameData_Lights)];
 
     if (pResAnmLightDicData != NULL) {
-        return ResAnmLight(ResDic(pResAnmLightDicData)[i]);
+        return ResAnmLight(ResDic(pResAnmLightDicData)[idx]);
     }
 
     return ResAnmLight(NULL);

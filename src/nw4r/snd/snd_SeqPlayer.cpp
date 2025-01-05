@@ -184,16 +184,16 @@ void SeqPlayer::SetReleasePriorityFix(bool flag) {
     mReleasePriorityFixFlag = flag;
 }
 
-void SeqPlayer::SetLocalVariable(int i, s16 value) {
-    mLocalVariable[i] = value;
+void SeqPlayer::SetLocalVariable(int idx, s16 value) {
+    mLocalVariable[idx] = value;
 }
 
-void SeqPlayer::SetGlobalVariable(int i, s16 value) {
+void SeqPlayer::SetGlobalVariable(int idx, s16 value) {
     if (!mGobalVariableInitialized) {
         InitGlobalVariable();
     }
 
-    mGlobalVariable[i] = value;
+    mGlobalVariable[idx] = value;
 }
 
 void SeqPlayer::SetTrackVolume(u32 trackFlags, f32 volume) {
@@ -223,37 +223,37 @@ void SeqPlayer::InvalidateData(const void* pStart, const void* pEnd) {
     }
 }
 
-SeqTrack* SeqPlayer::GetPlayerTrack(int i) {
-    if (i > TRACK_NUM - 1) {
+SeqTrack* SeqPlayer::GetPlayerTrack(int idx) {
+    if (idx > TRACK_NUM - 1) {
         return NULL;
     }
 
-    return mTracks[i];
+    return mTracks[idx];
 }
 
-void SeqPlayer::CloseTrack(int i) {
+void SeqPlayer::CloseTrack(int idx) {
     SoundThread::AutoLock lock;
 
-    SeqTrack* pTrack = GetPlayerTrack(i);
+    SeqTrack* pTrack = GetPlayerTrack(idx);
     if (pTrack == NULL) {
         return;
     }
 
     pTrack->Close();
 
-    mSeqTrackAllocator->FreeTrack(mTracks[i]);
-    mTracks[i] = NULL;
+    mSeqTrackAllocator->FreeTrack(mTracks[idx]);
+    mTracks[idx] = NULL;
 }
 
-void SeqPlayer::SetPlayerTrack(int i, SeqTrack* pTrack) {
+void SeqPlayer::SetPlayerTrack(int idx, SeqTrack* pTrack) {
     SoundThread::AutoLock lock;
 
-    if (i > TRACK_NUM - 1) {
+    if (idx > TRACK_NUM - 1) {
         return;
     }
 
-    mTracks[i] = pTrack;
-    pTrack->SetPlayerTrackNo(i);
+    mTracks[idx] = pTrack;
+    pTrack->SetPlayerTrackNo(idx);
 }
 
 void SeqPlayer::FinishPlayer() {
@@ -315,13 +315,13 @@ int SeqPlayer::ParseNextTick(bool doNoteOn) {
     return 0;
 }
 
-volatile s16* SeqPlayer::GetVariablePtr(int i) {
-    if (i < LOCAL_VARIABLE_NUM) {
-        return &mLocalVariable[i];
+volatile s16* SeqPlayer::GetVariablePtr(int idx) {
+    if (idx < LOCAL_VARIABLE_NUM) {
+        return &mLocalVariable[idx];
     }
 
-    if (i < VARIABLE_NUM) {
-        return &mGlobalVariable[i - LOCAL_VARIABLE_NUM];
+    if (idx < VARIABLE_NUM) {
+        return &mGlobalVariable[idx - LOCAL_VARIABLE_NUM];
     }
 
     return NULL;

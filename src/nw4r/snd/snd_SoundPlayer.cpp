@@ -66,8 +66,8 @@ bool SoundPlayer::detail_IsEnabledOutputLine() const {
     return mOutputLineFlagEnable;
 }
 
-f32 SoundPlayer::detail_GetRemoteOutVolume(int i) const {
-    return mRemoteOutVolume[i];
+f32 SoundPlayer::detail_GetRemoteOutVolume(int idx) const {
+    return mRemoteOutVolume[idx];
 }
 
 void SoundPlayer::detail_InsertSoundList(detail::BasicSound* pSound) {

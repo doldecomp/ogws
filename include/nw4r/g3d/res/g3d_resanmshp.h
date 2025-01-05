@@ -102,16 +102,16 @@ public:
         return GetRevision() == REVISION;
     }
 
-    void GetAnmResult(ShpAnmResult* pResult, u32 id, f32 frame,
+    void GetAnmResult(ShpAnmResult* pResult, u32 idx, f32 frame,
                       const ShpAnmVtxSet* pShapeArray) const;
 
-    const ResAnmShpAnmData* GetShapeAnm(int i) const {
+    const ResAnmShpAnmData* GetShapeAnm(int idx) const {
         return static_cast<ResAnmShpAnmData*>(
-            ofs_to_obj<ResDic>(ref().toShpDataDic)[i]);
+            ofs_to_obj<ResDic>(ref().toShpDataDic)[idx]);
     }
-    const ResAnmShpAnmData* GetShapeAnm(u32 i) const {
+    const ResAnmShpAnmData* GetShapeAnm(u32 idx) const {
         return static_cast<ResAnmShpAnmData*>(
-            ofs_to_obj<ResDic>(ref().toShpDataDic)[i]);
+            ofs_to_obj<ResDic>(ref().toShpDataDic)[idx]);
     }
 
     u32 GetShapeAnmNumEntries() const {

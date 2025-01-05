@@ -34,19 +34,19 @@ ResMdl ResFile::GetResMdl(const char* pName) const {
     return ResMdl(NULL);
 }
 
-ResMdl ResFile::GetResMdl(int i) const {
+ResMdl ResFile::GetResMdl(int idx) const {
     void* pResMdlDicData = ResDic(const_cast<ResDicData*>(
         &ref().dict.topLevel))[ResName(&ResNameData_Models)];
 
     if (pResMdlDicData != NULL) {
-        return ResMdl(ResDic(pResMdlDicData)[i]);
+        return ResMdl(ResDic(pResMdlDicData)[idx]);
     }
 
     return ResMdl(NULL);
 }
 
-ResMdl ResFile::GetResMdl(u32 i) const {
-    return GetResMdl(static_cast<int>(i));
+ResMdl ResFile::GetResMdl(u32 idx) const {
+    return GetResMdl(static_cast<int>(idx));
 }
 
 /******************************************************************************
@@ -76,19 +76,19 @@ ResPltt ResFile::GetResPltt(const ResName name) const {
     return ResPltt(NULL);
 }
 
-ResPltt ResFile::GetResPltt(int i) const {
+ResPltt ResFile::GetResPltt(int idx) const {
     void* pResPlttDicData = ResDic(const_cast<ResDicData*>(
         &ref().dict.topLevel))[ResName(&ResNameData_Pltts)];
 
     if (pResPlttDicData != NULL) {
-        return ResPltt(ResDic(pResPlttDicData)[i]);
+        return ResPltt(ResDic(pResPlttDicData)[idx]);
     }
 
     return ResPltt(NULL);
 }
 
-ResPltt ResFile::GetResPltt(u32 i) const {
-    return GetResPltt(static_cast<int>(i));
+ResPltt ResFile::GetResPltt(u32 idx) const {
+    return GetResPltt(static_cast<int>(idx));
 }
 
 /******************************************************************************
@@ -118,19 +118,19 @@ ResTex ResFile::GetResTex(const ResName name) const {
     return ResTex(NULL);
 }
 
-ResTex ResFile::GetResTex(int i) const {
+ResTex ResFile::GetResTex(int idx) const {
     void* pResTexDicData = ResDic(const_cast<ResDicData*>(
         &ref().dict.topLevel))[ResName(&ResNameData_Textures)];
 
     if (pResTexDicData != NULL) {
-        return ResTex(ResDic(pResTexDicData)[i]);
+        return ResTex(ResDic(pResTexDicData)[idx]);
     }
 
     return ResTex(NULL);
 }
 
-ResTex ResFile::GetResTex(u32 i) const {
-    return GetResTex(static_cast<int>(i));
+ResTex ResFile::GetResTex(u32 idx) const {
+    return GetResTex(static_cast<int>(idx));
 }
 
 /******************************************************************************
@@ -149,19 +149,19 @@ ResAnmChr ResFile::GetResAnmChr(const char* pName) const {
     return ResAnmChr(NULL);
 }
 
-ResAnmChr ResFile::GetResAnmChr(int i) const {
+ResAnmChr ResFile::GetResAnmChr(int idx) const {
     void* pResAnmChrDicData = ResDic(const_cast<ResDicData*>(
         &ref().dict.topLevel))[ResName(&ResNameData_AnmChr)];
 
     if (pResAnmChrDicData != NULL) {
-        return ResAnmChr(ResDic(pResAnmChrDicData)[i]);
+        return ResAnmChr(ResDic(pResAnmChrDicData)[idx]);
     }
 
     return ResAnmChr(NULL);
 }
 
-ResAnmChr ResFile::GetResAnmChr(u32 i) const {
-    return GetResAnmChr(static_cast<int>(i));
+ResAnmChr ResFile::GetResAnmChr(u32 idx) const {
+    return GetResAnmChr(static_cast<int>(idx));
 }
 
 /******************************************************************************
@@ -180,19 +180,19 @@ ResAnmVis ResFile::GetResAnmVis(const char* pName) const {
     return ResAnmVis(NULL);
 }
 
-ResAnmVis ResFile::GetResAnmVis(int i) const {
+ResAnmVis ResFile::GetResAnmVis(int idx) const {
     void* pResAnmVisDicData = ResDic(const_cast<ResDicData*>(
         &ref().dict.topLevel))[ResName(&ResNameData_AnmVis)];
 
     if (pResAnmVisDicData != NULL) {
-        return ResAnmVis(ResDic(pResAnmVisDicData)[i]);
+        return ResAnmVis(ResDic(pResAnmVisDicData)[idx]);
     }
 
     return ResAnmVis(NULL);
 }
 
-ResAnmVis ResFile::GetResAnmVis(u32 i) const {
-    return GetResAnmVis(static_cast<int>(i));
+ResAnmVis ResFile::GetResAnmVis(u32 idx) const {
+    return GetResAnmVis(static_cast<int>(idx));
 }
 
 /******************************************************************************
@@ -211,19 +211,19 @@ ResAnmClr ResFile::GetResAnmClr(const char* pName) const {
     return ResAnmClr(NULL);
 }
 
-ResAnmClr ResFile::GetResAnmClr(int i) const {
+ResAnmClr ResFile::GetResAnmClr(int idx) const {
     void* pResAnmClrDicData = ResDic(const_cast<ResDicData*>(
         &ref().dict.topLevel))[ResName(&ResNameData_AnmClr)];
 
     if (pResAnmClrDicData != NULL) {
-        return ResAnmClr(ResDic(pResAnmClrDicData)[i]);
+        return ResAnmClr(ResDic(pResAnmClrDicData)[idx]);
     }
 
     return ResAnmClr(NULL);
 }
 
-ResAnmClr ResFile::GetResAnmClr(u32 i) const {
-    return GetResAnmClr(static_cast<int>(i));
+ResAnmClr ResFile::GetResAnmClr(u32 idx) const {
+    return GetResAnmClr(static_cast<int>(idx));
 }
 
 /******************************************************************************
@@ -242,19 +242,19 @@ ResAnmTexPat ResFile::GetResAnmTexPat(const char* pName) const {
     return ResAnmTexPat(NULL);
 }
 
-ResAnmTexPat ResFile::GetResAnmTexPat(int i) const {
+ResAnmTexPat ResFile::GetResAnmTexPat(int idx) const {
     void* pResAnmTexPatDicData = ResDic(const_cast<ResDicData*>(
         &ref().dict.topLevel))[ResName(&ResNameData_AnmTexPat)];
 
     if (pResAnmTexPatDicData != NULL) {
-        return ResAnmTexPat(ResDic(pResAnmTexPatDicData)[i]);
+        return ResAnmTexPat(ResDic(pResAnmTexPatDicData)[idx]);
     }
 
     return ResAnmTexPat(NULL);
 }
 
-ResAnmTexPat ResFile::GetResAnmTexPat(u32 i) const {
-    return GetResAnmTexPat(static_cast<int>(i));
+ResAnmTexPat ResFile::GetResAnmTexPat(u32 idx) const {
+    return GetResAnmTexPat(static_cast<int>(idx));
 }
 
 /******************************************************************************
@@ -273,19 +273,19 @@ ResAnmTexSrt ResFile::GetResAnmTexSrt(const char* pName) const {
     return ResAnmTexSrt(NULL);
 }
 
-ResAnmTexSrt ResFile::GetResAnmTexSrt(int i) const {
+ResAnmTexSrt ResFile::GetResAnmTexSrt(int idx) const {
     void* pResAnmTexSrtDicData = ResDic(const_cast<ResDicData*>(
         &ref().dict.topLevel))[ResName(&ResNameData_AnmTexSrt)];
 
     if (pResAnmTexSrtDicData != NULL) {
-        return ResAnmTexSrt(ResDic(pResAnmTexSrtDicData)[i]);
+        return ResAnmTexSrt(ResDic(pResAnmTexSrtDicData)[idx]);
     }
 
     return ResAnmTexSrt(NULL);
 }
 
-ResAnmTexSrt ResFile::GetResAnmTexSrt(u32 i) const {
-    return GetResAnmTexSrt(static_cast<int>(i));
+ResAnmTexSrt ResFile::GetResAnmTexSrt(u32 idx) const {
+    return GetResAnmTexSrt(static_cast<int>(idx));
 }
 
 /******************************************************************************
@@ -304,19 +304,19 @@ ResAnmShp ResFile::GetResAnmShp(const char* pName) const {
     return ResAnmShp(NULL);
 }
 
-ResAnmShp ResFile::GetResAnmShp(int i) const {
+ResAnmShp ResFile::GetResAnmShp(int idx) const {
     void* pResAnmShpDicData = ResDic(const_cast<ResDicData*>(
         &ref().dict.topLevel))[ResName(&ResNameData_AnmShp)];
 
     if (pResAnmShpDicData != NULL) {
-        return ResAnmShp(ResDic(pResAnmShpDicData)[i]);
+        return ResAnmShp(ResDic(pResAnmShpDicData)[idx]);
     }
 
     return ResAnmShp(NULL);
 }
 
-ResAnmShp ResFile::GetResAnmShp(u32 i) const {
-    return GetResAnmShp(static_cast<int>(i));
+ResAnmShp ResFile::GetResAnmShp(u32 idx) const {
+    return GetResAnmShp(static_cast<int>(idx));
 }
 
 /******************************************************************************
@@ -335,19 +335,19 @@ ResAnmScn ResFile::GetResAnmScn(const char* pName) const {
     return ResAnmScn(NULL);
 }
 
-ResAnmScn ResFile::GetResAnmScn(int i) const {
+ResAnmScn ResFile::GetResAnmScn(int idx) const {
     void* pResAnmScnDicData = ResDic(const_cast<ResDicData*>(
         &ref().dict.topLevel))[ResName(&ResNameData_AnmScn)];
 
     if (pResAnmScnDicData != NULL) {
-        return ResAnmScn(ResDic(pResAnmScnDicData)[i]);
+        return ResAnmScn(ResDic(pResAnmScnDicData)[idx]);
     }
 
     return ResAnmScn(NULL);
 }
 
-ResAnmScn ResFile::GetResAnmScn(u32 i) const {
-    return GetResAnmScn(static_cast<int>(i));
+ResAnmScn ResFile::GetResAnmScn(u32 idx) const {
+    return GetResAnmScn(static_cast<int>(idx));
 }
 
 /******************************************************************************

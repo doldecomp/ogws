@@ -3,8 +3,8 @@
 namespace nw4r {
 namespace g3d {
 
-void ResAnmClr::GetAnmResult(ClrAnmResult* pResult, u32 id, f32 frame) const {
-    const ResAnmClrMatData* pMatData = GetMatAnm(id);
+void ResAnmClr::GetAnmResult(ClrAnmResult* pResult, u32 idx, f32 frame) const {
+    const ResAnmClrMatData* pMatData = GetMatAnm(idx);
     const ResAnmClrAnmData* pAnmData = pMatData->anms;
     const ResAnmClrInfoData& rInfoData = ref().info;
 

@@ -24,12 +24,12 @@ AnmObjMatClr::AnmObjMatClr(MEMAllocator* pAllocator, u16* pBindingBuf,
     Release();
 }
 
-bool AnmObjMatClr::TestExistence(u32 i) const {
-    return !(mpBinding[i] & (BINDING_UNDEFINED | BINDING_INVALID));
+bool AnmObjMatClr::TestExistence(u32 idx) const {
+    return !(mpBinding[idx] & (BINDING_UNDEFINED | BINDING_INVALID));
 }
 
-bool AnmObjMatClr::TestDefined(u32 i) const {
-    return !(mpBinding[i] & BINDING_UNDEFINED);
+bool AnmObjMatClr::TestDefined(u32 idx) const {
+    return !(mpBinding[idx] & BINDING_UNDEFINED);
 }
 
 void AnmObjMatClr::Release() {
@@ -40,15 +40,15 @@ void AnmObjMatClr::Release() {
     SetAnmFlag(FLAG_ANM_BOUND, false);
 }
 
-AnmObjMatClrRes* AnmObjMatClr::Attach(int i, AnmObjMatClrRes* pRes) {
-#pragma unused(i)
+AnmObjMatClrRes* AnmObjMatClr::Attach(int idx, AnmObjMatClrRes* pRes) {
+#pragma unused(idx)
 #pragma unused(pRes)
 
     return NULL;
 }
 
-AnmObjMatClrRes* AnmObjMatClr::Detach(int i) {
-#pragma unused(i)
+AnmObjMatClrRes* AnmObjMatClr::Detach(int idx) {
+#pragma unused(idx)
 
     return NULL;
 }
@@ -77,8 +77,8 @@ AnmObjMatClrNode::~AnmObjMatClrNode() {
     DetachAll();
 }
 
-AnmObjMatClrRes* AnmObjMatClrNode::Attach(int i, AnmObjMatClrRes* pRes) {
-    AnmObjMatClrRes* pOld = Detach(i);
+AnmObjMatClrRes* AnmObjMatClrNode::Attach(int idx, AnmObjMatClrRes* pRes) {
+    AnmObjMatClrRes* pOld = Detach(idx);
     bool hasAnm = false;
 
     for (u32 i = 0; i < mNumBinding; i++) {
@@ -94,17 +94,17 @@ AnmObjMatClrRes* AnmObjMatClrNode::Attach(int i, AnmObjMatClrRes* pRes) {
         SetAnmFlag(FLAG_ANM_BOUND, true);
     }
 
-    mpChildrenArray[i] = pRes;
+    mpChildrenArray[idx] = pRes;
     pRes->G3dProc(G3DPROC_ATTACH_PARENT, 0, this);
     return pOld;
 }
 
-AnmObjMatClrRes* AnmObjMatClrNode::Detach(int i) {
-    AnmObjMatClrRes* pOld = mpChildrenArray[i];
+AnmObjMatClrRes* AnmObjMatClrNode::Detach(int idx) {
+    AnmObjMatClrRes* pOld = mpChildrenArray[idx];
 
     if (pOld != NULL) {
         pOld->G3dProc(G3DPROC_DETACH_PARENT, 0, this);
-        mpChildrenArray[i] = NULL;
+        mpChildrenArray[idx] = NULL;
 
         bool hasAnm = false;
         for (u32 i = 0; i < mNumBinding; i++) {
@@ -290,15 +290,15 @@ AnmObjMatClrOverride* AnmObjMatClrOverride::Construct(MEMAllocator* pAllocator,
 }
 
 const ClrAnmResult* AnmObjMatClrOverride::GetResult(ClrAnmResult* pResult,
-                                                    u32 i) {
-    for (int j = mChildrenArraySize - 1; j >= 0; j--) {
-        AnmObjMatClrRes* pChild = mpChildrenArray[j];
+                                                    u32 idx) {
+    for (int i = mChildrenArraySize - 1; i >= 0; i--) {
+        AnmObjMatClrRes* pChild = mpChildrenArray[i];
 
-        if (pChild == NULL || !pChild->TestExistence(i)) {
+        if (pChild == NULL || !pChild->TestExistence(idx)) {
             continue;
         }
 
-        const ClrAnmResult* pChildResult = pChild->GetResult(pResult, i);
+        const ClrAnmResult* pChildResult = pChild->GetResult(pResult, idx);
 
         if (pChildResult->bRgbaExist != 0) {
             return pChildResult;
@@ -420,8 +420,8 @@ bool AnmObjMatClrRes::Bind(const ResMdl mdl) {
     return success;
 }
 
-const ClrAnmResult* AnmObjMatClrRes::GetResult(ClrAnmResult* pResult, u32 i) {
-    u32 id = mpBinding[i];
+const ClrAnmResult* AnmObjMatClrRes::GetResult(ClrAnmResult* pResult, u32 idx) {
+    u32 id = mpBinding[idx];
 
     if (id & (BINDING_UNDEFINED | BINDING_INVALID)) {
         pResult->bRgbaExist = 0;

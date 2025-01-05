@@ -94,15 +94,15 @@ public:
         return GetRevision() == REVISION;
     }
 
-    void GetAnmResult(ClrAnmResult* pResult, u32 id, f32 frame) const;
+    void GetAnmResult(ClrAnmResult* pResult, u32 idx, f32 frame) const;
 
-    const ResAnmClrMatData* GetMatAnm(int i) const {
+    const ResAnmClrMatData* GetMatAnm(int idx) const {
         return static_cast<ResAnmClrMatData*>(
-            ofs_to_obj<ResDic>(ref().toClrDataDic)[i]);
+            ofs_to_obj<ResDic>(ref().toClrDataDic)[idx]);
     }
-    const ResAnmClrMatData* GetMatAnm(u32 i) const {
+    const ResAnmClrMatData* GetMatAnm(u32 idx) const {
         return static_cast<ResAnmClrMatData*>(
-            ofs_to_obj<ResDic>(ref().toClrDataDic)[i]);
+            ofs_to_obj<ResDic>(ref().toClrDataDic)[idx]);
     }
 
     int GetNumFrame() const {

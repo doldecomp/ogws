@@ -242,15 +242,15 @@ public:
         return GetRevision() == REVISION;
     }
 
-    void GetAnmResult(ChrAnmResult* pResult, u32 id, f32 frame) const;
+    void GetAnmResult(ChrAnmResult* pResult, u32 idx, f32 frame) const;
 
-    const ResAnmChrNodeData* GetNodeAnm(int i) const {
+    const ResAnmChrNodeData* GetNodeAnm(int idx) const {
         return static_cast<ResAnmChrNodeData*>(
-            ofs_to_obj<ResDic>(ref().toChrDataDic)[i]);
+            ofs_to_obj<ResDic>(ref().toChrDataDic)[idx]);
     }
-    const ResAnmChrNodeData* GetNodeAnm(u32 i) const {
+    const ResAnmChrNodeData* GetNodeAnm(u32 idx) const {
         return static_cast<ResAnmChrNodeData*>(
-            ofs_to_obj<ResDic>(ref().toChrDataDic)[i]);
+            ofs_to_obj<ResDic>(ref().toChrDataDic)[idx]);
     }
 
     s32 GetNodeAnmIndex(const ResName name) const {

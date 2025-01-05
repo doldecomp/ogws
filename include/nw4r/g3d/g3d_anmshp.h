@@ -33,17 +33,17 @@ public:
     virtual void Release();                  // at 0x34
 
     virtual const ShpAnmResult* GetResult(ShpAnmResult* pResult,
-                                          u32 i) = 0; // at 0x38
+                                          u32 idx) = 0; // at 0x38
 
-    virtual AnmObjShpRes* Attach(int i, AnmObjShpRes* pRes); // at 0x3C
-    virtual AnmObjShpRes* Detach(int i);                     // at 0x40
-    virtual void DetachAll();                                // at 0x44
+    virtual AnmObjShpRes* Attach(int idx, AnmObjShpRes* pRes); // at 0x3C
+    virtual AnmObjShpRes* Detach(int idx);                     // at 0x40
+    virtual void DetachAll();                                  // at 0x44
 
-    virtual void SetWeight(int i, f32 weight); // at 0x48
-    virtual f32 GetWeight(int i) const;        // at 0x4C
+    virtual void SetWeight(int idx, f32 weight); // at 0x48
+    virtual f32 GetWeight(int idx) const;        // at 0x4C
 
-    bool TestExistence(u32 i) const;
-    bool TestDefined(u32 i) const;
+    bool TestExistence(u32 idx) const;
+    bool TestDefined(u32 idx) const;
 
 protected:
     enum BindingFlag {
@@ -84,9 +84,9 @@ public:
     virtual bool Bind(const ResMdl mdl); // at 0x30
     virtual void Release();              // at 0x34
 
-    virtual AnmObjShpRes* Attach(int i, AnmObjShpRes* pRes); // at 0x3C
-    virtual AnmObjShpRes* Detach(int i);                     // at 0x40
-    virtual void DetachAll();                                // at 0x44
+    virtual AnmObjShpRes* Attach(int idx, AnmObjShpRes* pRes); // at 0x3C
+    virtual AnmObjShpRes* Detach(int idx);                     // at 0x40
+    virtual void DetachAll();                                  // at 0x44
 
 protected:
     int mChildrenArraySize;         // at 0x18
@@ -111,10 +111,10 @@ class AnmObjShpBlend : public AnmObjShpNode {
     virtual ~AnmObjShpBlend() {} // at 0x10
 
     virtual const ShpAnmResult* GetResult(ShpAnmResult* pResult,
-                                          u32 i); // at 0x38
+                                          u32 idx); // at 0x38
 
-    virtual void SetWeight(int i, f32 weight); // at 0x48
-    virtual f32 GetWeight(int i) const;        // at 0x4C
+    virtual void SetWeight(int idx, f32 weight); // at 0x48
+    virtual f32 GetWeight(int idx) const;        // at 0x4C
 
 private:
     f32* mpWeightArray; // at 0x20
@@ -148,7 +148,7 @@ public:
     virtual bool Bind(const ResMdl mdl); // at 0x30
 
     virtual const ShpAnmResult* GetResult(ShpAnmResult* pResult,
-                                          u32 i); // at 0x38
+                                          u32 idx); // at 0x38
 
     void UpdateCache();
 

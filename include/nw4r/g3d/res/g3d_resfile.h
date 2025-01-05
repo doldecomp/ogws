@@ -45,46 +45,46 @@ public:
     }
 
     ResMdl GetResMdl(const char* pName) const;
-    ResMdl GetResMdl(int i) const;
-    ResMdl GetResMdl(u32 i) const;
+    ResMdl GetResMdl(int idx) const;
+    ResMdl GetResMdl(u32 idx) const;
 
     ResPltt GetResPltt(const char* pName) const;
     ResPltt GetResPltt(const ResName name) const;
-    ResPltt GetResPltt(int i) const;
-    ResPltt GetResPltt(u32 i) const;
+    ResPltt GetResPltt(int idx) const;
+    ResPltt GetResPltt(u32 idx) const;
 
     ResTex GetResTex(const char* pName) const;
     ResTex GetResTex(const ResName name) const;
-    ResTex GetResTex(int i) const;
-    ResTex GetResTex(u32 i) const;
+    ResTex GetResTex(int idx) const;
+    ResTex GetResTex(u32 idx) const;
 
     ResAnmChr GetResAnmChr(const char* pName) const;
-    ResAnmChr GetResAnmChr(int i) const;
-    ResAnmChr GetResAnmChr(u32 i) const;
+    ResAnmChr GetResAnmChr(int idx) const;
+    ResAnmChr GetResAnmChr(u32 idx) const;
 
     ResAnmVis GetResAnmVis(const char* pName) const;
-    ResAnmVis GetResAnmVis(int i) const;
-    ResAnmVis GetResAnmVis(u32 i) const;
+    ResAnmVis GetResAnmVis(int idx) const;
+    ResAnmVis GetResAnmVis(u32 idx) const;
 
     ResAnmClr GetResAnmClr(const char* pName) const;
-    ResAnmClr GetResAnmClr(int i) const;
-    ResAnmClr GetResAnmClr(u32 i) const;
+    ResAnmClr GetResAnmClr(int idx) const;
+    ResAnmClr GetResAnmClr(u32 idx) const;
 
     ResAnmTexPat GetResAnmTexPat(const char* pName) const;
-    ResAnmTexPat GetResAnmTexPat(int i) const;
-    ResAnmTexPat GetResAnmTexPat(u32 i) const;
+    ResAnmTexPat GetResAnmTexPat(int idx) const;
+    ResAnmTexPat GetResAnmTexPat(u32 idx) const;
 
     ResAnmTexSrt GetResAnmTexSrt(const char* pName) const;
-    ResAnmTexSrt GetResAnmTexSrt(int i) const;
-    ResAnmTexSrt GetResAnmTexSrt(u32 i) const;
+    ResAnmTexSrt GetResAnmTexSrt(int idx) const;
+    ResAnmTexSrt GetResAnmTexSrt(u32 idx) const;
 
     ResAnmShp GetResAnmShp(const char* pName) const;
-    ResAnmShp GetResAnmShp(int i) const;
-    ResAnmShp GetResAnmShp(u32 i) const;
+    ResAnmShp GetResAnmShp(int idx) const;
+    ResAnmShp GetResAnmShp(u32 idx) const;
 
     ResAnmScn GetResAnmScn(const char* pName) const;
-    ResAnmScn GetResAnmScn(int i) const;
-    ResAnmScn GetResAnmScn(u32 i) const;
+    ResAnmScn GetResAnmScn(int idx) const;
+    ResAnmScn GetResAnmScn(u32 idx) const;
 
     u32 GetResMdlNumEntries() const;
     u32 GetResPlttNumEntries() const;

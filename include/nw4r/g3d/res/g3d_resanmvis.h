@@ -52,15 +52,15 @@ public:
         return GetRevision() == REVISION;
     }
 
-    bool GetAnmResult(u32 id, f32 frame) const;
+    bool GetAnmResult(u32 idx, f32 frame) const;
 
-    const ResAnmVisAnmData* GetNodeAnm(int i) const {
+    const ResAnmVisAnmData* GetNodeAnm(int idx) const {
         return static_cast<ResAnmVisAnmData*>(
-            ofs_to_obj<ResDic>(ref().toVisDataDic)[i]);
+            ofs_to_obj<ResDic>(ref().toVisDataDic)[idx]);
     }
-    const ResAnmVisAnmData* GetNodeAnm(u32 i) const {
+    const ResAnmVisAnmData* GetNodeAnm(u32 idx) const {
         return static_cast<ResAnmVisAnmData*>(
-            ofs_to_obj<ResDic>(ref().toVisDataDic)[i]);
+            ofs_to_obj<ResDic>(ref().toVisDataDic)[idx]);
     }
 
     int GetNumFrame() const {

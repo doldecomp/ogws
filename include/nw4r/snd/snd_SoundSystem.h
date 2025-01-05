@@ -49,8 +49,9 @@ public:
         detail::AxManager::GetInstance().SetMasterVolume(volume, frame);
     }
 
-    static RemoteSpeaker& GetRemoteSpeaker(int i) {
-        return detail::RemoteSpeakerManager::GetInstance().GetRemoteSpeaker(i);
+    static RemoteSpeaker& GetRemoteSpeaker(int idx) {
+        return detail::RemoteSpeakerManager::GetInstance().GetRemoteSpeaker(
+            idx);
     }
 
     static void AppendEffect(AuxBus bus, FxBase* pFx) {

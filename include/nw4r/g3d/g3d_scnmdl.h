@@ -88,7 +88,7 @@ public:
     virtual const AnmObj* GetAnmObj(AnmObjType type) const; // at 0x44
 
     void InitBuffer();
-    void CleanMatBuffer(u32 i, u32 option);
+    void CleanMatBuffer(u32 idx, u32 option);
     void CleanVisBuffer();
 
     AnmObjShp* GetAnmObjShp() {
@@ -141,11 +141,11 @@ private:
         mFlagVisBuffer |= VISBUFFER_DIRTY;
     }
 
-    bool IsMatBufferDirty(u32 i, u32 option) const {
-        return option & mpMatBufferDirtyFlag[i];
+    bool IsMatBufferDirty(u32 idx, u32 option) const {
+        return option & mpMatBufferDirtyFlag[idx];
     }
-    void MatBufferDirty(u32 i, u32 option) {
-        mpMatBufferDirtyFlag[i] |= option;
+    void MatBufferDirty(u32 idx, u32 option) {
+        mpMatBufferDirtyFlag[idx] |= option;
     }
 
 private:

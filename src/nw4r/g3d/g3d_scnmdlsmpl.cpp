@@ -328,9 +328,9 @@ bool ScnMdlSimple::GetScnObjOption(u32 option, u32* pValue) const {
 }
 
 bool ScnMdlSimple::GetScnMtxPos(math::MTX34* pMtx, ScnObjMtxType type,
-                                u32 i) const {
+                                u32 idx) const {
     if (pMtx != NULL) {
-        ResNode node = GetResMdl().GetResNode(i);
+        ResNode node = GetResMdl().GetResNode(idx);
 
         if (node.IsValid()) {
             s32 id = node.GetMtxID();

@@ -21,12 +21,12 @@ AnmObjShp::AnmObjShp(MEMAllocator* pAllocator, u16* pBindingBuf, int numBinding)
     Release();
 }
 
-bool AnmObjShp::TestExistence(u32 i) const {
-    return !(mpBinding[i] & (BINDING_UNDEFINED | BINDING_INVALID));
+bool AnmObjShp::TestExistence(u32 idx) const {
+    return !(mpBinding[idx] & (BINDING_UNDEFINED | BINDING_INVALID));
 }
 
-bool AnmObjShp::TestDefined(u32 i) const {
-    return !(mpBinding[i] & BINDING_UNDEFINED);
+bool AnmObjShp::TestDefined(u32 idx) const {
+    return !(mpBinding[idx] & BINDING_UNDEFINED);
 }
 
 void AnmObjShp::Release() {
@@ -37,26 +37,26 @@ void AnmObjShp::Release() {
     SetAnmFlag(FLAG_ANM_BOUND, false);
 }
 
-AnmObjShpRes* AnmObjShp::Attach(int i, AnmObjShpRes* pRes) {
-#pragma unused(i)
+AnmObjShpRes* AnmObjShp::Attach(int idx, AnmObjShpRes* pRes) {
+#pragma unused(idx)
 #pragma unused(pRes)
 
     return NULL;
 }
 
-AnmObjShpRes* AnmObjShp::Detach(int i) {
-#pragma unused(i)
+AnmObjShpRes* AnmObjShp::Detach(int idx) {
+#pragma unused(idx)
 
     return NULL;
 }
 
-void AnmObjShp::SetWeight(int i, f32 weight) {
-#pragma unused(i)
+void AnmObjShp::SetWeight(int idx, f32 weight) {
+#pragma unused(idx)
 #pragma unused(weight)
 }
 
-f32 AnmObjShp::GetWeight(int i) const {
-#pragma unused(i)
+f32 AnmObjShp::GetWeight(int idx) const {
+#pragma unused(idx)
 
     return 0.0f;
 }
@@ -84,8 +84,8 @@ AnmObjShpNode::~AnmObjShpNode() {
     DetachAll();
 }
 
-AnmObjShpRes* AnmObjShpNode::Attach(int i, AnmObjShpRes* pRes) {
-    AnmObjShpRes* pOld = Detach(i);
+AnmObjShpRes* AnmObjShpNode::Attach(int idx, AnmObjShpRes* pRes) {
+    AnmObjShpRes* pOld = Detach(idx);
     bool hasAnm = false;
 
     for (u32 i = 0; i < mNumBinding; i++) {
@@ -101,17 +101,17 @@ AnmObjShpRes* AnmObjShpNode::Attach(int i, AnmObjShpRes* pRes) {
         SetAnmFlag(FLAG_ANM_BOUND, true);
     }
 
-    mpChildrenArray[i] = pRes;
+    mpChildrenArray[idx] = pRes;
     pRes->G3dProc(G3DPROC_ATTACH_PARENT, 0, this);
     return pOld;
 }
 
-AnmObjShpRes* AnmObjShpNode::Detach(int i) {
-    AnmObjShpRes* pOld = mpChildrenArray[i];
+AnmObjShpRes* AnmObjShpNode::Detach(int idx) {
+    AnmObjShpRes* pOld = mpChildrenArray[idx];
 
     if (pOld != NULL) {
         pOld->G3dProc(G3DPROC_DETACH_PARENT, 0, this);
-        mpChildrenArray[i] = NULL;
+        mpChildrenArray[idx] = NULL;
 
         bool hasAnm = false;
         for (u32 i = 0; i < mNumBinding; i++) {
@@ -308,30 +308,30 @@ AnmObjShpBlend::AnmObjShpBlend(MEMAllocator* pAllocator, u16* pBindingBuf,
     }
 }
 
-const ShpAnmResult* AnmObjShpBlend::GetResult(ShpAnmResult* pResult, u32 i) {
+const ShpAnmResult* AnmObjShpBlend::GetResult(ShpAnmResult* pResult, u32 idx) {
     detail::workmem::ShpAnmResultBuf* pWorkBuffer =
         detail::workmem::GetShpAnmResultBufTemporary();
 
     int blendNum = 0;
     f32 weightSum = 0.0f;
 
-    for (int j = 0; j < mChildrenArraySize; j++) {
-        f32 weight = mpWeightArray[j];
-        AnmObjShpRes* pChild = mpChildrenArray[j];
+    for (int i = 0; i < mChildrenArraySize; i++) {
+        f32 weight = mpWeightArray[i];
+        AnmObjShpRes* pChild = mpChildrenArray[i];
 
         // @note Bitwise AND
         if (!(pChild != NULL & weight != 0.0f)) {
             continue;
         }
 
-        if (!pChild->TestExistence(i)) {
+        if (!pChild->TestExistence(idx)) {
             continue;
         }
 
         detail::workmem::ShpAnmResultBuf& rAnmBuf = pWorkBuffer[blendNum];
 
         const ShpAnmResult* pMyResult =
-            pChild->GetResult(&rAnmBuf.resultBuf, i);
+            pChild->GetResult(&rAnmBuf.resultBuf, idx);
 
         if (!(pMyResult->flags & 1)) {
             continue;
@@ -367,9 +367,9 @@ const ShpAnmResult* AnmObjShpBlend::GetResult(ShpAnmResult* pResult, u32 i) {
     pResult->baseShapeVtxSet = pWorkBuffer->pResult->baseShapeVtxSet;
     pResult->baseShapeWeight = 0.0f;
 
-    for (int j = 0; j < blendNum; j++) {
-        const ShpAnmResult* pMyResult = pWorkBuffer[j].pResult;
-        f32 weight = pWorkBuffer[j].weight;
+    for (int i = 0; i < blendNum; i++) {
+        const ShpAnmResult* pMyResult = pWorkBuffer[i].pResult;
+        f32 weight = pWorkBuffer[i].weight;
         f32 ratio = weight * invWeightSum;
 
         pResult->baseShapeWeight += pMyResult->baseShapeWeight * ratio;
@@ -397,12 +397,12 @@ const ShpAnmResult* AnmObjShpBlend::GetResult(ShpAnmResult* pResult, u32 i) {
     return pResult;
 }
 
-void AnmObjShpBlend::SetWeight(int i, f32 weight) {
-    mpWeightArray[i] = weight;
+void AnmObjShpBlend::SetWeight(int idx, f32 weight) {
+    mpWeightArray[idx] = weight;
 }
 
-f32 AnmObjShpBlend::GetWeight(int i) const {
-    return mpWeightArray[i];
+f32 AnmObjShpBlend::GetWeight(int idx) const {
+    return mpWeightArray[idx];
 }
 
 /******************************************************************************
@@ -537,8 +537,8 @@ bool AnmObjShpRes::Bind(const ResMdl mdl) {
     return success;
 }
 
-const ShpAnmResult* AnmObjShpRes::GetResult(ShpAnmResult* pResult, u32 i) {
-    u32 id = mpBinding[i];
+const ShpAnmResult* AnmObjShpRes::GetResult(ShpAnmResult* pResult, u32 idx) {
+    u32 id = mpBinding[idx];
 
     if (id & (BINDING_UNDEFINED | BINDING_INVALID)) {
         pResult->flags = 0;

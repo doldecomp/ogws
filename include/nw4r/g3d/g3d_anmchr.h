@@ -36,22 +36,22 @@ public:
     virtual void Release();                  // at 0x34
 
     virtual const ChrAnmResult* GetResult(ChrAnmResult* pResult,
-                                          u32 i) = 0; // at 0x38
+                                          u32 idx) = 0; // at 0x38
 
-    virtual AnmObjChrRes* Attach(int i, AnmObjChrRes* pRes); // at 0x3C
-    virtual AnmObjChrRes* Detach(int i);                     // at 0x40
-    virtual void DetachAll();                                // at 0x44
+    virtual AnmObjChrRes* Attach(int idx, AnmObjChrRes* pRes); // at 0x3C
+    virtual AnmObjChrRes* Detach(int idx);                     // at 0x40
+    virtual void DetachAll();                                  // at 0x44
 
-    virtual void SetWeight(int i, f32 weight); // at 0x48
-    virtual f32 GetWeight(int i) const;        // at 0x4C
+    virtual void SetWeight(int idx, f32 weight); // at 0x48
+    virtual f32 GetWeight(int idx) const;        // at 0x4C
 
     virtual bool Bind(const ResMdl mdl, u32 target,
                       BindOption option) = 0; // at 0x50
     virtual void Release(const ResMdl mdl, u32 target,
                          BindOption option) = 0; // at 0x54
 
-    bool TestExistence(u32 i) const;
-    bool TestDefined(u32 i) const;
+    bool TestExistence(u32 idx) const;
+    bool TestDefined(u32 idx) const;
 
     void UseQuaternionBlend(bool enable) {
         SetAnmFlag(FLAG_USE_QUATERNION_ROTATION_BLEND, enable);
@@ -100,9 +100,9 @@ public:
     virtual bool Bind(const ResMdl mdl); // at 0x30
     virtual void Release();              // at 0x34
 
-    virtual AnmObjChrRes* Attach(int i, AnmObjChrRes* pRes); // at 0x3C
-    virtual AnmObjChrRes* Detach(int i);                     // at 0x40
-    virtual void DetachAll();                                // at 0x44
+    virtual AnmObjChrRes* Attach(int idx, AnmObjChrRes* pRes); // at 0x3C
+    virtual AnmObjChrRes* Detach(int idx);                     // at 0x40
+    virtual void DetachAll();                                  // at 0x44
 
     virtual bool Bind(const ResMdl mdl, u32 target,
                       BindOption option); // at 0x50
@@ -132,10 +132,10 @@ class AnmObjChrBlend : public AnmObjChrNode {
     virtual ~AnmObjChrBlend() {} // at 0x10
 
     virtual const ChrAnmResult* GetResult(ChrAnmResult* pResult,
-                                          u32 i); // at 0x38
+                                          u32 idx); // at 0x38
 
-    virtual void SetWeight(int i, f32 weight); // at 0x48
-    virtual f32 GetWeight(int i) const;        // at 0x4C
+    virtual void SetWeight(int idx, f32 weight); // at 0x48
+    virtual f32 GetWeight(int idx) const;        // at 0x4C
 
 private:
     f32* mpWeightArray; // at 0x20
@@ -169,7 +169,7 @@ public:
     using AnmObjChr::Release;            // at 0x40
 
     virtual const ChrAnmResult* GetResult(ChrAnmResult* pResult,
-                                          u32 i); // at 0x38
+                                          u32 idx); // at 0x38
 
     virtual bool Bind(const ResMdl mdl, u32 target,
                       BindOption option); // at 0x50

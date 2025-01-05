@@ -102,9 +102,9 @@ void ScnRoot::G3dProc(u32 task, u32 param, void* pInfo) {
     }
 }
 
-Camera ScnRoot::GetCamera(int i) {
-    if (i >= 0 && i < G3DState::NUM_CAMERA) {
-        return Camera(&mCamera[i]);
+Camera ScnRoot::GetCamera(int idx) {
+    if (idx >= 0 && idx < G3DState::NUM_CAMERA) {
+        return Camera(&mCamera[idx]);
     }
 
     return Camera(NULL);
@@ -114,20 +114,20 @@ Camera ScnRoot::GetCurrentCamera() {
     return Camera(&mCamera[mCurrentCameraID]);
 }
 
-void ScnRoot::SetCurrentCamera(int i) {
-    mCurrentCameraID = static_cast<u8>(i);
+void ScnRoot::SetCurrentCamera(int idx) {
+    mCurrentCameraID = static_cast<u8>(idx);
 }
 
-Fog ScnRoot::GetFog(int i) {
-    if (i >= 0 && i < G3DState::NUM_FOG) {
-        return Fog(&mFog[i]);
+Fog ScnRoot::GetFog(int idx) {
+    if (idx >= 0 && idx < G3DState::NUM_FOG) {
+        return Fog(&mFog[idx]);
     }
 
     return Fog(NULL);
 }
 
-LightSet ScnRoot::GetLightSet(int i) {
-    return mLightSetting.GetLightSet(i);
+LightSet ScnRoot::GetLightSet(int idx) {
+    return mLightSetting.GetLightSet(idx);
 }
 
 void ScnRoot::UpdateFrame() {

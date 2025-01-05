@@ -27,12 +27,12 @@ public:
         return mStartable.detail_ConvertLabelStringToSoundId(pLabel);
     } // at 0x10
 
-    ExternalSoundPlayer* detail_GetActorSoundPlayer(int i) {
-        if (i < 0 || i >= ACTOR_PLAYER_COUNT) {
+    ExternalSoundPlayer* detail_GetActorSoundPlayer(int idx) {
+        if (idx < 0 || idx >= ACTOR_PLAYER_COUNT) {
             return NULL;
         }
 
-        return &mActorPlayer[i];
+        return &mActorPlayer[idx];
     }
 
     template <typename TForEachFunc>

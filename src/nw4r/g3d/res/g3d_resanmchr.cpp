@@ -800,8 +800,8 @@ void GetAnmResult_SRT(ChrAnmResult* pResult, const ResAnmChrInfoData& rInfoData,
  * ResAnmChr
  *
  ******************************************************************************/
-void ResAnmChr::GetAnmResult(ChrAnmResult* pResult, u32 id, f32 frame) const {
-    const ResAnmChrNodeData* pNodeData = GetNodeAnm(id);
+void ResAnmChr::GetAnmResult(ChrAnmResult* pResult, u32 idx, f32 frame) const {
+    const ResAnmChrNodeData* pNodeData = GetNodeAnm(idx);
 
     u32 flags = pNodeData->flags;
     pResult->flags = flags & ResAnmChrNodeData::FLAG_ANM_RESULT_MASK;

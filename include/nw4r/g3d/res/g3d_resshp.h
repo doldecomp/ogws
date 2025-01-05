@@ -107,8 +107,8 @@ public:
 
     ResVtxPos GetResVtxPos() const;
     ResVtxNrm GetResVtxNrm() const;
-    ResVtxClr GetResVtxClr(u32 i) const;
-    ResVtxTexCoord GetResVtxTexCoord(u32 i) const;
+    ResVtxClr GetResVtxClr(u32 idx) const;
+    ResVtxTexCoord GetResVtxTexCoord(u32 idx) const;
 
     void CallPrePrimitiveDisplayList(bool sync, bool cacheIsSame) const;
     void CallPrimitiveDisplayList(bool sync) const;

@@ -35,14 +35,14 @@ public:
     virtual bool Bind(const ResMdl mdl) = 0; // at 0x30
     virtual void Release();                  // at 0x34
 
-    virtual bool GetResult(u32 i) = 0; // at 0x38
+    virtual bool GetResult(u32 idx) = 0; // at 0x38
 
-    virtual AnmObjVisRes* Attach(int i, AnmObjVisRes* pRes); // at 0x3C
-    virtual AnmObjVisRes* Detach(int i);                     // at 0x40
+    virtual AnmObjVisRes* Attach(int idx, AnmObjVisRes* pRes); // at 0x3C
+    virtual AnmObjVisRes* Detach(int idx);                     // at 0x40
     void DetachAll();
 
-    bool TestExistence(u32 i) const;
-    bool TestDefined(u32 i) const;
+    bool TestExistence(u32 idx) const;
+    bool TestDefined(u32 idx) const;
 
 protected:
     enum BindingFlag {
@@ -82,10 +82,10 @@ public:
     virtual bool Bind(const ResMdl mdl); // at 0x30
     virtual void Release();              // at 0x34
 
-    virtual bool GetResult(u32 i) = 0; // at 0x38
+    virtual bool GetResult(u32 idx) = 0; // at 0x38
 
-    virtual AnmObjVisRes* Attach(int i, AnmObjVisRes* pRes); // at 0x3C
-    virtual AnmObjVisRes* Detach(int i);                     // at 0x40
+    virtual AnmObjVisRes* Attach(int idx, AnmObjVisRes* pRes); // at 0x3C
+    virtual AnmObjVisRes* Detach(int idx);                     // at 0x40
 
 protected:
     AnmObjVisRes* mpChildren[MAX_CHILD]; // at 0x18
@@ -108,7 +108,7 @@ public:
 
     virtual ~AnmObjVisOR() {} // at 0x10
 
-    virtual bool GetResult(u32 i); // at 0x38
+    virtual bool GetResult(u32 idx); // at 0x38
 
     NW4R_G3D_RTTI_DECL_DERIVED(AnmObjVisOR, AnmObjVisNode);
 };
@@ -136,7 +136,7 @@ public:
 
     virtual bool Bind(const ResMdl mdl); // at 0x30
 
-    virtual bool GetResult(u32 i); // at 0x38
+    virtual bool GetResult(u32 idx); // at 0x38
 
     ResAnmVis GetResAnm() {
         return mRes;

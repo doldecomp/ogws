@@ -65,15 +65,15 @@ public:
     bool HasResAnmAmbLight() const;
     bool HasResAnmLight() const;
 
-    ResLightSet GetResLightSet(int i) const;
-    ResLightSet GetResLightSet(u32 i) const;
+    ResLightSet GetResLightSet(int idx) const;
+    ResLightSet GetResLightSet(u32 idx) const;
     u32 GetResLightSetNumEntries() const;
 
     ResAnmAmbLight GetResAnmAmbLight(const ResName name) const;
-    ResAnmAmbLight GetResAnmAmbLight(int i) const;
+    ResAnmAmbLight GetResAnmAmbLight(int idx) const;
 
     ResAnmLight GetResAnmLight(const ResName name) const;
-    ResAnmLight GetResAnmLight(int i) const;
+    ResAnmLight GetResAnmLight(int idx) const;
 
     ResLightSet GetResLightSetByRefNumber(u32 refNumber) const;
     ResAnmAmbLight GetResAnmAmbLightByRefNumber(u32 refNumber) const;

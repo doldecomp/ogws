@@ -93,14 +93,14 @@ public:
     void SetChannelPriority(int priority);
     void SetReleasePriorityFix(bool flag);
 
-    void SetLocalVariable(int i, s16 value);
-    static void SetGlobalVariable(int i, s16 value);
+    void SetLocalVariable(int idx, s16 value);
+    static void SetGlobalVariable(int idx, s16 value);
 
     void SetTrackVolume(u32 trackFlags, f32 volume);
     void SetTrackPitch(u32 trackFlags, f32 pitch);
 
-    SeqTrack* GetPlayerTrack(int i);
-    volatile s16* GetVariablePtr(int i);
+    SeqTrack* GetPlayerTrack(int idx);
+    volatile s16* GetVariablePtr(int idx);
     void Update();
 
     Channel* NoteOn(int bankNo, const NoteOnInfo& rInfo);
@@ -152,8 +152,8 @@ private:
     static const int MAX_SKIP_TICK_PER_FRAME = 768;
 
 private:
-    void CloseTrack(int i);
-    void SetPlayerTrack(int i, SeqTrack* pTrack);
+    void CloseTrack(int idx);
+    void SetPlayerTrack(int idx, SeqTrack* pTrack);
 
     void FinishPlayer();
     void UpdateChannelParam();

@@ -173,21 +173,21 @@ ResVtxNrm ResShp::GetResVtxNrm() const {
     return ResVtxNrm(NULL);
 }
 
-ResVtxClr ResShp::GetResVtxClr(u32 i) const {
+ResVtxClr ResShp::GetResVtxClr(u32 idx) const {
     const ResShpData& r = ref();
 
-    if (r.idVtxColor[i] != -1) {
-        return GetParent().GetResVtxClr(r.idVtxColor[i]);
+    if (r.idVtxColor[idx] != -1) {
+        return GetParent().GetResVtxClr(r.idVtxColor[idx]);
     }
 
     return ResVtxClr(NULL);
 }
 
-ResVtxTexCoord ResShp::GetResVtxTexCoord(u32 i) const {
+ResVtxTexCoord ResShp::GetResVtxTexCoord(u32 idx) const {
     const ResShpData& r = ref();
 
-    if (r.idVtxTexCoord[i] != -1) {
-        return GetParent().GetResVtxTexCoord(r.idVtxTexCoord[i]);
+    if (r.idVtxTexCoord[idx] != -1) {
+        return GetParent().GetResVtxTexCoord(r.idVtxTexCoord[idx]);
     }
 
     return ResVtxTexCoord(NULL);

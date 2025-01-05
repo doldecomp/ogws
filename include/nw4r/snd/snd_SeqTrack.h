@@ -107,7 +107,7 @@ public:
         return mParserTrackParam;
     }
 
-    volatile s16* GetVariablePtr(int i);
+    volatile s16* GetVariablePtr(int idx);
 
     SeqPlayer* GetSeqPlayer() {
         return mPlayer;

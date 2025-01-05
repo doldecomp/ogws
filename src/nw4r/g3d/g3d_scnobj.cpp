@@ -599,19 +599,19 @@ void ScnGroup::DefG3dProcScnGroup(u32 task, u32 param, void* pInfo) {
     }
 }
 
-bool ScnGroup::Insert(u32 i, ScnObj* pObj) {
-    if (i <= mNumScnObj && mNumScnObj < mSizeScnObj && pObj != NULL &&
+bool ScnGroup::Insert(u32 idx, ScnObj* pObj) {
+    if (idx <= mNumScnObj && mNumScnObj < mSizeScnObj && pObj != NULL &&
         pObj->GetParent() == NULL) {
 
         ScnObj** ppObj =
             std::find(mpScnObjArray, mpScnObjArray + mNumScnObj, pObj);
 
         if (ppObj == mpScnObjArray + mNumScnObj) {
-            for (u32 idx = mNumScnObj; idx > i; idx--) {
-                mpScnObjArray[idx] = mpScnObjArray[idx - 1];
+            for (u32 i = mNumScnObj; i > idx; i--) {
+                mpScnObjArray[i] = mpScnObjArray[i - 1];
             }
 
-            mpScnObjArray[i] = pObj;
+            mpScnObjArray[idx] = pObj;
             pObj->G3dProc(G3DPROC_ATTACH_PARENT, 0, this);
 
             mNumScnObj++;
@@ -622,13 +622,13 @@ bool ScnGroup::Insert(u32 i, ScnObj* pObj) {
     return false;
 }
 
-ScnObj* ScnGroup::Remove(u32 i) {
-    if (i < mNumScnObj) {
-        ScnObj* pObj = mpScnObjArray[i];
+ScnObj* ScnGroup::Remove(u32 idx) {
+    if (idx < mNumScnObj) {
+        ScnObj* pObj = mpScnObjArray[idx];
         pObj->G3dProc(G3DPROC_DETACH_PARENT, 0, this);
 
-        for (u32 idx = i; idx < mNumScnObj - 1; idx++) {
-            mpScnObjArray[idx] = mpScnObjArray[idx + 1];
+        for (u32 i = idx; i < mNumScnObj - 1; i++) {
+            mpScnObjArray[i] = mpScnObjArray[i + 1];
         }
 
         mNumScnObj--;

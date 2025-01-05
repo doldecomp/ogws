@@ -15,7 +15,7 @@ class RemoteSpeakerManager {
 public:
     static RemoteSpeakerManager& GetInstance();
 
-    RemoteSpeaker& GetRemoteSpeaker(int i);
+    RemoteSpeaker& GetRemoteSpeaker(int idx);
 
     void Setup();
     void Shutdown();

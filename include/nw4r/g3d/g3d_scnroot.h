@@ -42,12 +42,12 @@ public:
     virtual void G3dProc(u32 task, u32 param, void* pInfo); // at 0xC
     virtual ~ScnRoot();                                     // at 0x10
 
-    Camera GetCamera(int i);
+    Camera GetCamera(int idx);
     Camera GetCurrentCamera();
-    void SetCurrentCamera(int i);
+    void SetCurrentCamera(int idx);
 
-    Fog GetFog(int i);
-    LightSet GetLightSet(int i);
+    Fog GetFog(int idx);
+    LightSet GetLightSet(int idx);
 
     void UpdateFrame();
     void SetGlbSettings();

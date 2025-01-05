@@ -78,9 +78,9 @@ public:
 
     const SoundArchive& GetSoundArchive() const;
 
-    SoundPlayer& GetSoundPlayer(u32 i);
-    SoundPlayer& GetSoundPlayer(int i) {
-        return GetSoundPlayer(static_cast<u32>(i));
+    SoundPlayer& GetSoundPlayer(u32 idx);
+    SoundPlayer& GetSoundPlayer(int idx) {
+        return GetSoundPlayer(static_cast<u32>(idx));
     }
 
     const void* detail_GetFileAddress(u32 id) const;

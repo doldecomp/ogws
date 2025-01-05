@@ -114,13 +114,13 @@ void SeqSound::SetTrackPitch(u32 trackFlags, f32 pitch) {
     mSeqPlayer.SetTrackPitch(trackFlags, pitch);
 }
 
-bool SeqSound::WriteVariable(int i, s16 value) {
-    mSeqPlayer.SetLocalVariable(i, value);
+bool SeqSound::WriteVariable(int idx, s16 value) {
+    mSeqPlayer.SetLocalVariable(idx, value);
     return true;
 }
 
-bool SeqSound::WriteGlobalVariable(int i, s16 value) {
-    SeqPlayer::SetGlobalVariable(i, value);
+bool SeqSound::WriteGlobalVariable(int idx, s16 value) {
+    SeqPlayer::SetGlobalVariable(idx, value);
     return true;
 }
 

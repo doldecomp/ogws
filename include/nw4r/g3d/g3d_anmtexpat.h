@@ -36,14 +36,14 @@ public:
     virtual void Release();                  // at 0x34
 
     virtual const TexPatAnmResult* GetResult(TexPatAnmResult* pResult,
-                                             u32 i) = 0; // at 0x38
+                                             u32 idx) = 0; // at 0x38
 
-    virtual AnmObjTexPatRes* Attach(int i, AnmObjTexPatRes* pRes); // at 0x3C
-    virtual AnmObjTexPatRes* Detach(int i);                        // at 0x40
-    virtual void DetachAll();                                      // at 0x44
+    virtual AnmObjTexPatRes* Attach(int idx, AnmObjTexPatRes* pRes); // at 0x3C
+    virtual AnmObjTexPatRes* Detach(int idx);                        // at 0x40
+    virtual void DetachAll();                                        // at 0x44
 
-    bool TestExistence(u32 i) const;
-    bool TestDefined(u32 i) const;
+    bool TestExistence(u32 idx) const;
+    bool TestDefined(u32 idx) const;
 
 protected:
     enum BindingFlag {
@@ -84,9 +84,9 @@ public:
     virtual bool Bind(const ResMdl mdl); // at 0x30
     virtual void Release();              // at 0x34
 
-    virtual AnmObjTexPatRes* Attach(int i, AnmObjTexPatRes* pRes); // at 0x3C
-    virtual AnmObjTexPatRes* Detach(int i);                        // at 0x40
-    virtual void DetachAll();                                      // at 0x44
+    virtual AnmObjTexPatRes* Attach(int idx, AnmObjTexPatRes* pRes); // at 0x3C
+    virtual AnmObjTexPatRes* Detach(int idx);                        // at 0x40
+    virtual void DetachAll();                                        // at 0x44
 
 protected:
     int mChildrenArraySize;            // at 0x18
@@ -113,7 +113,7 @@ class AnmObjTexPatOverride : public AnmObjTexPatNode {
     virtual ~AnmObjTexPatOverride() {} // at 0x10
 
     virtual const TexPatAnmResult* GetResult(TexPatAnmResult* pResult,
-                                             u32 i); // at 0x38
+                                             u32 idx); // at 0x38
 
     NW4R_G3D_RTTI_DECL_DERIVED(AnmObjTexPatOverride, AnmObjTexPatNode);
 };
@@ -144,7 +144,7 @@ public:
     virtual bool Bind(const ResMdl mdl); // at 0x30
 
     virtual const TexPatAnmResult* GetResult(TexPatAnmResult* pResult,
-                                             u32 i); // at 0x38
+                                             u32 idx); // at 0x38
 
     void UpdateCache();
 

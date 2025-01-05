@@ -69,7 +69,7 @@ public:
     virtual AnmObj* GetAnmObj(AnmObjType type);             // at 0x40
     virtual const AnmObj* GetAnmObj(AnmObjType type) const; // at 0x44
 
-    bool GetScnMtxPos(math::MTX34* pMtx, ScnObjMtxType type, u32 i) const;
+    bool GetScnMtxPos(math::MTX34* pMtx, ScnObjMtxType type, u32 idx) const;
 
     void UpdateFrame();
 
