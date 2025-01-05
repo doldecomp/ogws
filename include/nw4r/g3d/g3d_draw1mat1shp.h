@@ -37,6 +37,8 @@ struct Draw1Mat1ShpSwap {
 
 enum Draw1Mat1ShpCtrl {
     DRAW1MAT1SHP_CTRL_NOPPCSYNC = (1 << 0),
+    DRAW1MAT1SHP_CTRL_NOSWAPSHP = (1 << 1),
+    DRAW1MAT1SHP_CTRL_CULL_FRONT = (1 << 2),
     DRAW1MAT1SHP_CTRL_FORCE_LIGHTOFF = (1 << 3),
 };
 

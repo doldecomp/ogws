@@ -139,12 +139,12 @@ public:
     }
 
     bool IsVisible() const {
-        return ref().flag & FLAG_VISIBLE;
+        return !(ref().flag & FLAG_INVISIBLE);
     }
 
 private:
     enum Flag {
-        FLAG_VISIBLE = (1 << 1),
+        FLAG_INVISIBLE = (1 << 1),
     };
 };
 
