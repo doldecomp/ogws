@@ -7,6 +7,8 @@ namespace g3d {
 
 void CalcVtx(ResMdl mdl, AnmObjShp* pAnmShp, ResVtxPosData** ppVtxPosTable,
              ResVtxNrmData** ppVtxNrmTable, ResVtxClrData** ppVtxClrTable) {
+    static const size_t VEC_SIZE = sizeof(math::VEC3);
+    static const size_t COLOR_SIZE = sizeof(ut::Color);
 
     // Allows struct offsets inside assembly
     using nw4r::math::VEC3;
@@ -68,7 +70,10 @@ void CalcVtx(ResMdl mdl, AnmObjShp* pAnmShp, ResVtxPosData** ppVtxPosTable,
 
             u32 numVtx = basePos.GetNumVtxPos();
 
-            const math::VEC3* const pVtxPosBufEnd = pVtxPosBuf + numVtx;
+            const math::VEC3* const pVtxPosBufEnd =
+                reinterpret_cast<const math::VEC3*>(
+                    reinterpret_cast<const u8*>(pVtxPosBuf) +
+                    numVtx * VEC_SIZE);
             const KeyShape* const pKeyEnd = keyShape + numKeyShape;
 
             for (; pVtxPosBuf < pVtxPosBufEnd; pVtxPosBuf++) {
@@ -87,7 +92,8 @@ void CalcVtx(ResMdl mdl, AnmObjShp* pAnmShp, ResVtxPosData** ppVtxPosTable,
                 }
                 // clang-format on
 
-                rFirst.pVtx++;
+                rFirst.pVtx = reinterpret_cast<const math::VEC3*>(
+                    reinterpret_cast<const u8*>(rFirst.pVtx) + VEC_SIZE);
 
                 for (KeyShape* pKey = &keyShape[1]; pKey < pKeyEnd; pKey++) {
                     register f32 keyWeight = pKey->weight;
@@ -103,7 +109,8 @@ void CalcVtx(ResMdl mdl, AnmObjShp* pAnmShp, ResVtxPosData** ppVtxPosTable,
                     }
                     // clang-format on
 
-                    pKey->pVtx++;
+                    pKey->pVtx = reinterpret_cast<const math::VEC3*>(
+                        reinterpret_cast<const u8*>(pKey->pVtx) + VEC_SIZE);
                 }
 
                 register void* pDst = pVtxPosBuf;
@@ -116,7 +123,7 @@ void CalcVtx(ResMdl mdl, AnmObjShp* pAnmShp, ResVtxPosData** ppVtxPosTable,
                 // clang-format on
             }
 
-            DC::StoreRange(vtxPos.GetData(), numVtx * sizeof(math::VEC3));
+            DC::StoreRange(vtxPos.GetData(), numVtx * VEC_SIZE);
         }
 
         if ((pResult->flags & ShpAnmResult::FLAG_ANM_VTXNRM) &&
@@ -163,7 +170,10 @@ void CalcVtx(ResMdl mdl, AnmObjShp* pAnmShp, ResVtxPosData** ppVtxPosTable,
 
             u32 numVtx = baseNrm.GetNumVtxNrm();
 
-            const math::VEC3* const pVtxNrmBufEnd = pVtxNrmBuf + numVtx;
+            const math::VEC3* const pVtxNrmBufEnd =
+                reinterpret_cast<const math::VEC3*>(
+                    reinterpret_cast<const u8*>(pVtxNrmBuf) +
+                    numVtx * VEC_SIZE);
             const KeyShape* const pKeyEnd = keyShape + numKeyShape;
 
             for (; pVtxNrmBuf < pVtxNrmBufEnd; pVtxNrmBuf++) {
@@ -182,7 +192,8 @@ void CalcVtx(ResMdl mdl, AnmObjShp* pAnmShp, ResVtxPosData** ppVtxPosTable,
                 }
                 // clang-format on
 
-                rFirst.pVtx++;
+                rFirst.pVtx = reinterpret_cast<const math::VEC3*>(
+                    reinterpret_cast<const u8*>(rFirst.pVtx) + VEC_SIZE);
 
                 for (KeyShape* pKey = &keyShape[1]; pKey < pKeyEnd; pKey++) {
                     register f32 keyWeight = pKey->weight;
@@ -198,7 +209,8 @@ void CalcVtx(ResMdl mdl, AnmObjShp* pAnmShp, ResVtxPosData** ppVtxPosTable,
                     }
                     // clang-format on
 
-                    pKey->pVtx++;
+                    pKey->pVtx = reinterpret_cast<const math::VEC3*>(
+                        reinterpret_cast<const u8*>(pKey->pVtx) + VEC_SIZE);
                 }
 
                 register void* pDst = pVtxNrmBuf;
@@ -211,7 +223,7 @@ void CalcVtx(ResMdl mdl, AnmObjShp* pAnmShp, ResVtxPosData** ppVtxPosTable,
                 // clang-format on
             }
 
-            DC::StoreRange(vtxNrm.GetData(), numVtx * sizeof(math::VEC3));
+            DC::StoreRange(vtxNrm.GetData(), numVtx * VEC_SIZE);
         }
 
         if ((pResult->flags & ShpAnmResult::FLAG_ANM_VTXCLR) &&
@@ -258,7 +270,10 @@ void CalcVtx(ResMdl mdl, AnmObjShp* pAnmShp, ResVtxPosData** ppVtxPosTable,
 
             u32 numVtx = baseClr.GetNumVtxClr();
 
-            const ut::Color* const pVtxClrBufEnd = pVtxClrBuf + numVtx;
+            const ut::Color* const pVtxClrBufEnd =
+                reinterpret_cast<const ut::Color*>(
+                    reinterpret_cast<const u8*>(pVtxClrBuf) +
+                    numVtx * COLOR_SIZE);
             const KeyShape* const pKeyEnd = keyShape + numKeyShape;
 
             for (; pVtxClrBuf < pVtxClrBufEnd; pVtxClrBuf++) {
@@ -277,7 +292,8 @@ void CalcVtx(ResMdl mdl, AnmObjShp* pAnmShp, ResVtxPosData** ppVtxPosTable,
                 }
                 // clang-format on
 
-                rFirst.pVtx++;
+                rFirst.pVtx = reinterpret_cast<const ut::Color*>(
+                    reinterpret_cast<const u8*>(rFirst.pVtx) + COLOR_SIZE);
 
                 for (KeyShape* pKey = &keyShape[1]; pKey < pKeyEnd; pKey++) {
                     register f32 keyWeight = pKey->weight;
@@ -293,7 +309,8 @@ void CalcVtx(ResMdl mdl, AnmObjShp* pAnmShp, ResVtxPosData** ppVtxPosTable,
                     }
                     // clang-format on
 
-                    pKey->pVtx++;
+                    pKey->pVtx = reinterpret_cast<const ut::Color*>(
+                        reinterpret_cast<const u8*>(pKey->pVtx) + COLOR_SIZE);
                 }
 
                 register void* pDst = pVtxClrBuf;
@@ -306,7 +323,7 @@ void CalcVtx(ResMdl mdl, AnmObjShp* pAnmShp, ResVtxPosData** ppVtxPosTable,
                 // clang-format on
             }
 
-            DC::StoreRange(vtxClr.GetData(), numVtx * sizeof(ut::Color));
+            DC::StoreRange(vtxClr.GetData(), numVtx * COLOR_SIZE);
         }
     }
 }
