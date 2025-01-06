@@ -172,7 +172,7 @@ public:
         return ref().str;
     }
 
-    bool operator==(ResName rhs) const;
+    bool operator==(const ResName rhs) const;
 };
 
 /******************************************************************************

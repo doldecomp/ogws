@@ -7,7 +7,7 @@
 namespace nw4r {
 namespace g3d {
 
-bool ResName::operator==(ResName rhs) const {
+bool ResName::operator==(const ResName rhs) const {
     if (GetLength() == rhs.GetLength()) {
         return std::strcmp(GetName(), rhs.GetName()) == 0;
     }
