@@ -69,6 +69,10 @@ ResAnmAmbLight ResAnmScn::GetResAnmAmbLight(int idx) const {
     return ResAnmAmbLight(NULL);
 }
 
+ResAnmAmbLight ResAnmScn::GetResAnmAmbLight(u32 idx) const {
+    return GetResAnmAmbLight(static_cast<int>(idx));
+}
+
 ResAnmLight ResAnmScn::GetResAnmLight(const ResName name) const {
     void* pResAnmLightDicData = ResDic(ofs_to_obj<ResDic>(
         ref().toScnTopLevelDic))[ResName(&ResNameData_Lights)];
@@ -89,6 +93,10 @@ ResAnmLight ResAnmScn::GetResAnmLight(int idx) const {
     }
 
     return ResAnmLight(NULL);
+}
+
+ResAnmLight ResAnmScn::GetResAnmLight(u32 idx) const {
+    return GetResAnmLight(static_cast<int>(idx));
 }
 
 ResLightSet ResAnmScn::GetResLightSetByRefNumber(u32 refNumber) const {

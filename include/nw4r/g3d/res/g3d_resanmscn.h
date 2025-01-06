@@ -71,9 +71,11 @@ public:
 
     ResAnmAmbLight GetResAnmAmbLight(const ResName name) const;
     ResAnmAmbLight GetResAnmAmbLight(int idx) const;
+    ResAnmAmbLight GetResAnmAmbLight(u32 idx) const;
 
     ResAnmLight GetResAnmLight(const ResName name) const;
     ResAnmLight GetResAnmLight(int idx) const;
+    ResAnmLight GetResAnmLight(u32 idx) const;
 
     ResLightSet GetResLightSetByRefNumber(u32 refNumber) const;
     ResAnmAmbLight GetResAnmAmbLightByRefNumber(u32 refNumber) const;
