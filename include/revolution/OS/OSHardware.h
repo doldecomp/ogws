@@ -7,21 +7,22 @@
 
 #ifndef RVL_SDK_OS_HARDWARE_H
 #define RVL_SDK_OS_HARDWARE_H
+#include <types.h>
+
 #include <revolution/DVD/dvd.h>
 #include <revolution/OS/OSAddress.h>
 #include <revolution/OS/OSThread.h>
-#include <types.h>
 #ifdef __cplusplus
 extern "C" {
 #endif
 
 // Forward declarations
-typedef struct OSContext;
-typedef struct OSExecParams;
+typedef struct OSContext OSContext;
+typedef struct OSExecParams OSExecParams;
 
 // Derive offsets for use with OSAddress functions
 #define __DEF_ADDR_OFFSETS(name, addr)                                         \
-    static const u32 OS_PHYS_##name = (addr)-0x80000000;                       \
+    static const u32 OS_PHYS_##name = (addr) - 0x80000000;                     \
     static const u32 OS_CACHED_##name = (addr);                                \
     static const u32 OS_UNCACHED_##name = (addr) + (0xC0000000 - 0x80000000);
 
@@ -90,13 +91,13 @@ typedef struct OSBI2 {
 OS_DEF_GLOBAL_VAR(OSBootInfo, BOOT_INFO,                   0x80000000);
 OS_DEF_GLOBAL_VAR(OSDebugInterface, DEBUG_INTERFACE,       0x80000040);
 OS_DEF_GLOBAL_ARR(u8, DB_INTEGRATOR_HOOK, [0x24],          0x80000060);
-OS_DEF_GLOBAL_VAR(struct OSContext*, CURRENT_CONTEXT_PHYS, 0x800000C0);
+OS_DEF_GLOBAL_VAR(OSContext*, CURRENT_CONTEXT_PHYS,        0x800000C0);
 OS_DEF_GLOBAL_VAR(u32, PREV_INTR_MASK,                     0x800000C4);
 OS_DEF_GLOBAL_VAR(u32, CURRENT_INTR_MASK,                  0x800000C8);
 OS_DEF_GLOBAL_VAR(u32, TV_FORMAT,                          0x800000CC);
 OS_DEF_GLOBAL_VAR(u32, ARAM_SIZE,                          0x800000D0);
-OS_DEF_GLOBAL_VAR(struct OSContext*, CURRENT_CONTEXT,      0x800000D4);
-OS_DEF_GLOBAL_VAR(struct OSContext*, CURRENT_FPU_CONTEXT,  0x800000D8);
+OS_DEF_GLOBAL_VAR(OSContext*, CURRENT_CONTEXT,             0x800000D4);
+OS_DEF_GLOBAL_VAR(OSContext*, CURRENT_FPU_CONTEXT,         0x800000D8);
 OS_DEF_GLOBAL_VAR(OSThreadQueue, THREAD_QUEUE,             0x800000DC);
 OS_DEF_GLOBAL_VAR(OSThread*, CURRENT_THREAD,               0x800000E4);
 OS_DEF_GLOBAL_VAR(u32, DEBUG_MONITOR_SIZE,                 0x800000E8);
@@ -124,7 +125,7 @@ OS_DEF_GLOBAL_VAR(u16, GC_PAD_3_BTN,                     0x800030E4);
 OS_DEF_GLOBAL_VAR(volatile u16, DVD_DEVICE_CODE,         0x800030E6);
 OS_DEF_GLOBAL_VAR(u8, BI2_DEBUG_FLAG,                    0x800030E8);
 OS_DEF_GLOBAL_VAR(u8, PAD_SPEC,                          0x800030E9);
-OS_DEF_GLOBAL_VAR(struct OSExecParams*, DOL_EXEC_PARAMS, 0x800030F0);
+OS_DEF_GLOBAL_VAR(OSExecParams*, DOL_EXEC_PARAMS,        0x800030F0);
 OS_DEF_GLOBAL_VAR(u32, PHYSICAL_MEM1_SIZE,               0x80003100);
 OS_DEF_GLOBAL_VAR(u32, SIMULATED_MEM1_SIZE,              0x80003104);
 OS_DEF_GLOBAL_VAR(void*, USABLE_MEM1_START,              0x8000310C);

@@ -5,6 +5,10 @@
 extern "C" {
 #endif
 
+// Forward declarations
+typedef struct AXFX_BUS AXFX_BUS;
+typedef struct AXFX_BUFFERUPDATE AXFX_BUFFERUPDATE;
+
 typedef struct AXFX_REVERBHI_EXP_DPL2 {
     f32* earlyLine[4];  // at 0x0
     u32 earlyPos[3];    // at 0x10
@@ -33,31 +37,31 @@ typedef struct AXFX_REVERBHI_EXP_DPL2 {
     u32 lastAllpassLength[4];    // at 0x104
     u32 lastAllpassMaxLength[4]; // at 0x114
 
-    f32 allpassCoef;         // at 0x124
-    f32 lastLpfOut[4];       // at 0x128
-    f32 lpfCoef;             // at 0x138
-    u32 active;              // at 0x13C
-    u32 earlyMode;           // at 0x140
-    f32 preDelayTimeMax;     // at 0x144
-    f32 preDelayTime;        // at 0x148
-    u32 fusedMode;           // at 0x14C
-    f32 fusedTime;           // at 0x150
-    f32 coloration;          // at 0x154
-    f32 damping;             // at 0x158
-    f32 crosstalk;           // at 0x15C
-    f32 earlyGain;           // at 0x160
-    f32 fusedGain;           // at 0x164
-    struct AXFX_BUS* busIn;  // at 0x168
-    struct AXFX_BUS* busOut; // at 0x16C
-    f32 outGain;             // at 0x170
-    f32 sendGain;            // at 0x174
+    f32 allpassCoef;     // at 0x124
+    f32 lastLpfOut[4];   // at 0x128
+    f32 lpfCoef;         // at 0x138
+    u32 active;          // at 0x13C
+    u32 earlyMode;       // at 0x140
+    f32 preDelayTimeMax; // at 0x144
+    f32 preDelayTime;    // at 0x148
+    u32 fusedMode;       // at 0x14C
+    f32 fusedTime;       // at 0x150
+    f32 coloration;      // at 0x154
+    f32 damping;         // at 0x158
+    f32 crosstalk;       // at 0x15C
+    f32 earlyGain;       // at 0x160
+    f32 fusedGain;       // at 0x164
+    AXFX_BUS* busIn;     // at 0x168
+    AXFX_BUS* busOut;    // at 0x16C
+    f32 outGain;         // at 0x170
+    f32 sendGain;        // at 0x174
 } AXFX_REVERBHI_EXP_DPL2;
 
 u32 AXFXReverbHiExpGetMemSizeDpl2(const AXFX_REVERBHI_EXP_DPL2* fx);
 BOOL AXFXReverbHiExpInitDpl2(AXFX_REVERBHI_EXP_DPL2* fx);
 void AXFXReverbHiExpShutdownDpl2(AXFX_REVERBHI_EXP_DPL2* fx);
 BOOL AXFXReverbHiExpSettingsDpl2(AXFX_REVERBHI_EXP_DPL2* fx);
-void AXFXReverbHiExpCallbackDpl2(struct AXFX_BUFFERUPDATE_DPL2* update,
+void AXFXReverbHiExpCallbackDpl2(AXFX_BUFFERUPDATE_DPL2* update,
                                  AXFX_REVERBHI_EXP_DPL2* fx);
 
 #ifdef __cplusplus

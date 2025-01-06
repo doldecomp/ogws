@@ -6,7 +6,7 @@ extern "C" {
 #endif
 
 // Forward declarations
-typedef struct OSContext;
+typedef struct OSContext OSContext;
 
 typedef enum {
     EXI_STATE_DMA_ACCESS = (1 << 0),
@@ -47,7 +47,7 @@ typedef enum {
     EXI_ID_INVALID = 0xFFFFFFFF
 } EXIDeviceID;
 
-typedef void (*EXICallback)(EXIChannel chan, struct OSContext* ctx);
+typedef void (*EXICallback)(EXIChannel chan, OSContext* ctx);
 
 extern const u32 __EXIFreq;
 

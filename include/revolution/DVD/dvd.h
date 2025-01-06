@@ -10,9 +10,9 @@ extern "C" {
 #define MAKE_DVD_DEVICE_CODE(x) (DVD_DEVICE_CODE_READ | (x))
 
 // Forward declarations
-typedef struct DVDCommandBlock;
-typedef struct DVDFileInfo;
-typedef struct OSAlarm;
+typedef struct DVDCommandBlock DVDCommandBlock;
+typedef struct DVDFileInfo DVDFileInfo;
+typedef struct OSAlarm OSAlarm;
 
 typedef enum {
     DVD_RESULT_COVER_CLOSED = -4,
@@ -45,8 +45,8 @@ typedef enum {
     DVD_COVER_CLOSED,
 } DVDCoverState;
 
-typedef void (*DVDAsyncCallback)(s32 result, struct DVDFileInfo* info);
-typedef void (*DVDCommandCallback)(s32 result, struct DVDCommandBlock* block);
+typedef void (*DVDAsyncCallback)(s32 result, DVDFileInfo* info);
+typedef void (*DVDCommandCallback)(s32 result, DVDCommandBlock* block);
 
 typedef struct DVDDiskID {
     char game[4];    // at 0x0
@@ -61,18 +61,18 @@ typedef struct DVDDiskID {
 } DVDDiskID;
 
 typedef struct DVDCommandBlock {
-    struct DVDCommandBlock* next; // at 0x0
-    struct DVDCommandBlock* prev; // at 0x4
-    u32 command;                  // at 0x8
-    volatile s32 state;           // at 0xC
-    u32 offset;                   // at 0x10
-    u32 length;                   // at 0x14
-    void* addr;                   // at 0x18
-    u32 transferSize;             // at 0x1C
-    u32 transferTotal;            // at 0x20
-    DVDDiskID* id;                // at 0x24
-    DVDCommandCallback callback;  // at 0x28
-    void* userData;               // at 0x2C
+    DVDCommandBlock* next;       // at 0x0
+    DVDCommandBlock* prev;       // at 0x4
+    u32 command;                 // at 0x8
+    volatile s32 state;          // at 0xC
+    u32 offset;                  // at 0x10
+    u32 length;                  // at 0x14
+    void* addr;                  // at 0x18
+    u32 transferSize;            // at 0x1C
+    u32 transferTotal;           // at 0x20
+    DVDDiskID* id;               // at 0x24
+    DVDCommandCallback callback; // at 0x28
+    void* userData;              // at 0x2C
 } DVDCommandBlock;
 
 typedef struct DVDDriveInfo {
@@ -107,7 +107,7 @@ const DVDDiskID* DVDGetCurrentDiskID(void);
 u32 __DVDGetCoverStatus(void);
 void __DVDPrepareResetAsync(DVDCommandCallback callback);
 void __DVDPrepareReset(void);
-BOOL __DVDTestAlarm(const struct OSAlarm* alarm);
+BOOL __DVDTestAlarm(const OSAlarm* alarm);
 BOOL __DVDLowBreak(void);
 BOOL __DVDStopMotorAsync(DVDCommandBlock* block, DVDCommandCallback callback);
 void __DVDRestartMotor(void);

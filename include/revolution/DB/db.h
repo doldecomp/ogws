@@ -5,9 +5,6 @@
 extern "C" {
 #endif
 
-// Forward declarations
-typedef struct OSDebugInterface;
-
 void DBInit(void);
 void __DBExceptionDestinationAux(void);
 void __DBExceptionDestination(void);

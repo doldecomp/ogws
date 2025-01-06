@@ -6,7 +6,7 @@ extern "C" {
 #endif
 
 // Forward declarations
-typedef struct DSPTask;
+typedef struct DSPTask DSPTask;
 
 // General-purpose typedef
 typedef void* DSPMail;
@@ -18,8 +18,8 @@ void DSPSendMailToDSP(DSPMail mail);
 void DSPAssertInt(void);
 void DSPInit(void);
 BOOL DSPCheckInit(void);
-struct DSPTask* DSPAddTask(struct DSPTask* task);
-struct DSPTask* DSPAssertTask(struct DSPTask* task);
+DSPTask* DSPAddTask(DSPTask* task);
+DSPTask* DSPAssertTask(DSPTask* task);
 
 #ifdef __cplusplus
 }

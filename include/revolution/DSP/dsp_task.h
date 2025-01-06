@@ -14,8 +14,8 @@ extern "C" {
     } while (0)
 
 // Forward declarations
-typedef struct DSPTask;
-typedef struct OSContext;
+typedef struct DSPTask DSPTask;
+typedef struct OSContext OSContext;
 
 typedef enum {
     DSP_TASK_ACTIVE = (1 << 0),
@@ -29,7 +29,7 @@ typedef enum {
     DSP_TASK_STATE_3,
 } DSPTaskState;
 
-typedef void (*DSPTaskCallback)(struct DSPTask* task);
+typedef void (*DSPTaskCallback)(DSPTask* task);
 
 typedef struct DSPTask {
     u32 state;                       // at 0x0
@@ -47,8 +47,8 @@ typedef struct DSPTask {
     DSPTaskCallback resumeCallback;  // at 0x2C
     DSPTaskCallback doneCallback;    // at 0x30
     DSPTaskCallback requestCallback; // at 0x34
-    struct DSPTask* next;            // at 0x38
-    struct DSPTask* prev;            // at 0x3C
+    DSPTask* next;                   // at 0x38
+    DSPTask* prev;                   // at 0x3C
     char UNK_0x40[0x50 - 0x40];
 } DSPTask;
 
@@ -59,7 +59,7 @@ extern DSPTask* __DSP_last_task;
 extern DSPTask* __DSP_first_task;
 extern DSPTask* __DSP_curr_task;
 
-void __DSPHandler(s16 intr, struct OSContext* ctx);
+void __DSPHandler(s16 intr, OSContext* ctx);
 void __DSP_exec_task(DSPTask* task1, DSPTask* task2);
 void __DSP_boot_task(DSPTask* task);
 void __DSP_insert_task(DSPTask* task);

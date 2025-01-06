@@ -6,7 +6,7 @@ extern "C" {
 #endif
 
 // Forward declarations
-typedef struct OSContext;
+typedef struct OSContext OSContext;
 
 typedef void (*AIDMACallback)(void);
 
@@ -22,7 +22,7 @@ u32 AIGetDMABytesLeft(void);
 void AISetDSPSampleRate(u32 rate);
 u32 AIGetDSPSampleRate(void);
 void AIInit(void* stack);
-void __AIDHandler(s16 intr, struct OSContext* ctx);
+void __AIDHandler(s16 intr, OSContext* ctx);
 
 #ifdef __cplusplus
 }

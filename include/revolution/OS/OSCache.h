@@ -8,7 +8,7 @@ extern "C" {
 #define OS_CACHE_BASE 0xE0000000
 
 // Forward declarations
-typedef struct OSContext;
+typedef struct OSContext OSContext;
 
 void DCEnable(void);
 void DCInvalidateRange(const void* buf, u32 len);

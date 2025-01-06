@@ -6,8 +6,8 @@ extern "C" {
 #endif
 
 // Forward declarations
-typedef struct AXFX_BUS;
-typedef struct AXFX_BUFFERUPDATE;
+typedef struct AXFX_BUS AXFX_BUS;
+typedef struct AXFX_BUFFERUPDATE AXFX_BUFFERUPDATE;
 
 typedef struct AXFX_CHORUS_EXP_DELAY {
     f32* line[3]; // at 0x0
@@ -41,8 +41,8 @@ typedef struct AXFX_CHORUS_EXP {
     f32 depth;                   // at 0x84
     f32 rate;                    // at 0x88
     f32 feedback;                // at 0x8C
-    struct AXFX_BUS* busIn;      // at 0x90
-    struct AXFX_BUS* busOut;     // at 0x94
+    AXFX_BUS* busIn;             // at 0x90
+    AXFX_BUS* busOut;            // at 0x94
     f32 outGain;                 // at 0x98
     f32 sendGain;                // at 0x9C
 } AXFX_CHORUS_EXP;
@@ -51,8 +51,7 @@ u32 AXFXChorusExpGetMemSize(const AXFX_CHORUS_EXP* fx);
 BOOL AXFXChorusExpInit(AXFX_CHORUS_EXP* fx);
 void AXFXChorusExpShutdown(AXFX_CHORUS_EXP* fx);
 BOOL AXFXChorusExpSettings(AXFX_CHORUS_EXP* fx);
-void AXFXChorusExpCallback(struct AXFX_BUFFERUPDATE* update,
-                           AXFX_CHORUS_EXP* fx);
+void AXFXChorusExpCallback(AXFX_BUFFERUPDATE* update, AXFX_CHORUS_EXP* fx);
 
 #ifdef __cplusplus
 }

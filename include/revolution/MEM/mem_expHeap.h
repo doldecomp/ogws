@@ -10,7 +10,7 @@ extern "C" {
      sizeof(MEMiExpHeapMBlock) + 4)
 
 // Forward declarations
-typedef struct MEMiHeapHead;
+typedef struct MEMiHeapHead MEMiHeapHead;
 
 typedef enum {
     MEM_EXP_HEAP_ALLOC_FAST, //!< When allocating memory blocks, take the first
@@ -52,24 +52,23 @@ typedef struct MEMiExpHeapHead {
     }; // at 0x12
 } MEMiExpHeapHead;
 
-struct MEMiHeapHead* MEMCreateExpHeapEx(void* start, u32 size, u16 opt);
-struct MEMiHeapHead* MEMDestroyExpHeap(struct MEMiHeapHead* heap);
-void* MEMAllocFromExpHeapEx(struct MEMiHeapHead* heap, u32 size, s32 align);
-u32 MEMResizeForMBlockExpHeap(struct MEMiHeapHead* heap, void* memBlock,
-                              u32 size);
-void MEMFreeToExpHeap(struct MEMiHeapHead* heap, void* memBlock);
-u32 MEMGetAllocatableSizeForExpHeapEx(struct MEMiHeapHead* heap, s32 align);
-u32 MEMAdjustExpHeap(struct MEMiHeapHead* heap);
+MEMiHeapHead* MEMCreateExpHeapEx(void* start, u32 size, u16 opt);
+MEMiHeapHead* MEMDestroyExpHeap(MEMiHeapHead* heap);
+void* MEMAllocFromExpHeapEx(MEMiHeapHead* heap, u32 size, s32 align);
+u32 MEMResizeForMBlockExpHeap(MEMiHeapHead* heap, void* memBlock, u32 size);
+void MEMFreeToExpHeap(MEMiHeapHead* heap, void* memBlock);
+u32 MEMGetAllocatableSizeForExpHeapEx(MEMiHeapHead* heap, s32 align);
+u32 MEMAdjustExpHeap(MEMiHeapHead* heap);
 
-static struct MEMiHeapHead* MEMCreateExpHeap(void* start, u32 size) {
+static MEMiHeapHead* MEMCreateExpHeap(void* start, u32 size) {
     return MEMCreateExpHeapEx(start, size, 0);
 }
 
-static void* MEMAllocFromExpHeap(struct MEMiHeapHead* heap, u32 size) {
+static void* MEMAllocFromExpHeap(MEMiHeapHead* heap, u32 size) {
     return MEMAllocFromExpHeapEx(heap, size, 4);
 }
 
-static u32 MEMGetAllocatableSizeForExpHeap(struct MEMiHeapHead* heap) {
+static u32 MEMGetAllocatableSizeForExpHeap(MEMiHeapHead* heap) {
     return MEMGetAllocatableSizeForExpHeapEx(heap, 4);
 }
 
