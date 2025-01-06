@@ -1,5 +1,7 @@
 #include <revolution/NWC24.h>
+
 #include <revolution/SC.h>
+
 #include <string.h>
 
 #define CHECK_CALLING_STATUS() CheckCallingStatus(__FUNCTION__)
@@ -46,7 +48,6 @@ NWC24Err NWC24iGetUniversalTime(s64* timeOut) {
     static s64 whenCached = 0;
 
     NWC24Err result;
-    s64 sysTime;
 
     if (timeOut == NULL) {
         nwc24TimeDifference = 0;

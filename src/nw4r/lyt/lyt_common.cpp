@@ -2,7 +2,7 @@
 #include "lyt_layout.h"
 #include "lyt_pane.h"
 #include "ut_algorithm.h"
-#include "ut_color.h"
+#include "ut_Color.h"
 #include "math_types.h"
 #include <string.h>
 #include <revolution/GX.h>

@@ -1,5 +1,6 @@
-#include <revolution/DVD.h>
 #include <revolution/NWC24.h>
+
+#include <revolution/DVD.h>
 #include <revolution/OS.h>
 
 #define CONFIG_MAGIC 'WcCf'
@@ -51,7 +52,6 @@ NWC24Err NWC24GetMyUserId(u64* idOut) {
 NWC24Err NWC24GenerateNewUserId(u64* idOut) {
     NWC24Err open;
     NWC24Err close;
-    NWC24Err result;
 
     open = NWC24BlockOpenMsgLib(TRUE);
     if (open < 0) {

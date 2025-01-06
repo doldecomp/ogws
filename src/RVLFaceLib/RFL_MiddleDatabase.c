@@ -282,7 +282,6 @@ static void updateHDBRandcallback_(u32 arg) {
     RFLiMiddleDB* db = (RFLiMiddleDB*)arg;
     HiddenRandomParam* hparam = (HiddenRandomParam*)&db->userData1;
     u32* src;
-    u16 srcIdx;
 
     if (RFLGetAsyncStatus() == RFLErrcode_Success ||
         RFLGetAsyncStatus() == RFLErrcode_Broken) {

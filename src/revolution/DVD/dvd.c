@@ -2,6 +2,8 @@
 #include <revolution/ESP.h>
 #include <revolution/OS.h>
 
+#include <string.h>
+
 #define DISK_TOC_OFFSET 0x40000
 #define DISK_TOC_SIZE ROUND_UP(sizeof(DVDGameToc), 32)
 
@@ -1074,6 +1076,8 @@ static void stateMotorStopped(DVDCommandBlock* block) {
 }
 
 static void cbForStateMotorStopped(u32 intType) {
+#pragma unused(intType)
+
     WaitingForCoverClose = FALSE;
 
     if (CurrCommand == COMMAND_CHANGE_DISK) {

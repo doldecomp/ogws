@@ -164,7 +164,6 @@ cflags_base = [
     "-enum int",
     "-fp hardware",
     "-Cpp_exceptions off",
-    # "-W all",
     "-O4,p",
     "-inline auto",
     '-pragma "cats off"',
@@ -190,6 +189,10 @@ cflags_pedantic = [
     "-w unused",
     "-w missingreturn",
     "-w hidevirtual",
+    "-w filecaps",
+    "-w sysfilecaps",
+    "-w tokenpasting",
+    "-w impl_float2int",
     '-pragma "warn_no_explicit_virtual on"',
     "-w err",
 ]

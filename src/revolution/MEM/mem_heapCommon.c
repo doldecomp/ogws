@@ -8,7 +8,7 @@ static OSMutex sRootMutex;
 static MEMiHeapHead* FindContainHeap_(MEMList* list, const void* memBlock) {
     MEMiHeapHead* heap = NULL;
 
-    while (heap = (MEMiHeapHead*)MEMGetNextListObject(list, heap)) {
+    while ((heap = (MEMiHeapHead*)MEMGetNextListObject(list, heap)) != NULL) {
         if (GetUIntPtr(heap->start) <= GetUIntPtr(memBlock) &&
             GetUIntPtr(memBlock) < GetUIntPtr(heap->end)) {
             MEMiHeapHead* recursive = FindContainHeap_(&heap->list, memBlock);

@@ -9,7 +9,7 @@ extern "C" {
 #endif
 
 #include <revolution/DVD/dvd.h>
-#include <revolution/DVD/dvdFatal.h>
+#include <revolution/DVD/dvdfatal.h>
 #include <revolution/DVD/dvd_broadway.h>
 #include <revolution/DVD/dvderror.h>
 #include <revolution/DVD/dvdfs.h>

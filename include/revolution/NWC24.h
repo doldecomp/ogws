@@ -17,6 +17,7 @@ extern "C" {
 #include <revolution/NWC24/NWC24MBoxCtrl.h>
 #include <revolution/NWC24/NWC24Manage.h>
 #include <revolution/NWC24/NWC24Mime.h>
+#include <revolution/NWC24/NWC24MsgCommit.h>
 #include <revolution/NWC24/NWC24MsgObj.h>
 #include <revolution/NWC24/NWC24Parser.h>
 #include <revolution/NWC24/NWC24Schedule.h>

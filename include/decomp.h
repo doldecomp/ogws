@@ -36,6 +36,7 @@
 
 // Force reference destructor
 #define DECOMP_FORCEACTIVE_DTOR(module, cls)                                   \
+    void CONCAT(FORCEDTOR##module##cls, __LINE__)(void);                          \
     void CONCAT(FORCEDTOR##module##cls, __LINE__)(void) {                      \
         cls dummy;                                                             \
         dummy.~cls();                                                          \

@@ -1,4 +1,5 @@
 #include <RVLFaceLib/RVLFaceLibInternal.h>
+
 #include <math.h>
 
 void RFLiSetupCopyTex(GXTexFmt fmt, u16 width, u16 height, void* buffer,
@@ -493,7 +494,7 @@ void RFLiSetup2DCameraAndParam(void) {
     GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_TEX0, GX_TEX_ST, GX_S16, 8);
     GXSetNumChans(1);
     GXSetChanCtrl(GX_COLOR0A0, FALSE, GX_SRC_REG, GX_SRC_VTX, GX_LIGHT_NULL,
-                  GX_DF_NONE, GX_DA_MEDIUM);
+                  GX_DF_NONE, GX_AF_NONE);
     GXSetNumTexGens(1);
     GXSetTexCoordGen(GX_TEXCOORD0, GX_TG_MTX2x4, GX_TG_TEX0, GX_TEXMTX_IDENT);
     GXSetTevSwapModeTable(GX_TEV_SWAP0, GX_CH_RED, GX_CH_GREEN, GX_CH_BLUE,

@@ -108,8 +108,8 @@ void __GXSetDirtyState(void) {
 
         tempFlags = dirtyFlags & GX_DIRTY_MTX_IDX;
         if (tempFlags != 0) {
-            __GXSetMatrixIndex(0);
-            __GXSetMatrixIndex(5);
+            __GXSetMatrixIndex(GX_VA_PNMTXIDX);
+            __GXSetMatrixIndex(GX_VA_TEX4MTXIDX);
         }
 
         tempFlags = dirtyFlags & GX_DIRTY_VIEWPORT;

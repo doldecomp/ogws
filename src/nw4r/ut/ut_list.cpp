@@ -129,7 +129,7 @@ void* List_GetNth(const List* pList, u16 n) {
     int i;
     void* pIt = NULL;
 
-    for (i = 0, pIt = NULL; pIt = List_GetNext(pList, pIt); i++) {
+    for (i = 0, pIt = NULL; (pIt = List_GetNext(pList, pIt)) != NULL; i++) {
         if (n == i) {
             return pIt;
         }

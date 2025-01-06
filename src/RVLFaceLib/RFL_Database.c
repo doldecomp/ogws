@@ -185,6 +185,8 @@ static void saveDBmultiopencallback_(void) {
 }
 
 static void saveDatabase_(u32 arg) {
+#pragma unused(arg)
+
     switch (RFLiGetDBManager()->saveType) {
     case RFLiOpenType_Multi:
         RFLiOpenAsync(RFLiFileType_Database, NAND_ACCESS_WRITE,

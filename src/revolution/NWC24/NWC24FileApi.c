@@ -1,5 +1,7 @@
-#include <revolution/NAND.h>
 #include <revolution/NWC24.h>
+
+#include <revolution/NAND.h>
+
 #include <string.h>
 
 #define WC24_DRIVE "@24"
@@ -105,7 +107,6 @@ NWC24Err NWC24iFOpenNand(NWC24File* file, const char* path, u32 mode) {
 NWC24Err NWC24iFOpenVF(NWC24File* file, const char* path, u32 mode) {
     s32 result;
     const char* access;
-    u32 i;
 
     switch (mode) {
     case NWC24_OPEN_VF_W:

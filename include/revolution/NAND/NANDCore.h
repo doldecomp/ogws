@@ -1,7 +1,8 @@
 #ifndef RVL_SDK_NAND_CORE_H
 #define RVL_SDK_NAND_CORE_H
-#include <revolution/NAND/nand.h>
 #include <types.h>
+
+#include <revolution/NAND/nand.h>
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -10,6 +11,7 @@ void nandRemoveTailToken(char* newp, const char* oldp);
 void nandGetHeadToken(char* head, char* rest, const char* path);
 void nandGetRelativeName(char* name, const char* path);
 void nandConvertPath(char* abs, const char* dir, const char* rel);
+BOOL nandIsRelativePath(const char* path);
 BOOL nandIsPrivatePath(const char* path);
 BOOL nandIsUnderPrivatePath(const char* path);
 BOOL nandIsInitialized(void);

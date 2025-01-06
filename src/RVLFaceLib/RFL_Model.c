@@ -1,5 +1,7 @@
 #include <RVLFaceLib/RVLFaceLibInternal.h>
+
 #include <revolution/OS.h>
+
 #include <string.h>
 
 #define NUM_VTX_POS(size) ((size) / VTX_POS_SIZE)
@@ -312,12 +314,12 @@ void RFLLoadDrawSetting(const RFLDrawSetting* setting) {
                       GX_COLOR0A0);
         GXSetTevColorIn(GX_TEVSTAGE1, GX_CC_ZERO, GX_CC_CPREV, GX_CC_RASC,
                         GX_CC_ZERO);
-        GXSetTevColorOp(GX_TEVSTAGE1, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, 1,
-                        GX_TEVPREV);
+        GXSetTevColorOp(GX_TEVSTAGE1, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1,
+                        TRUE, GX_TEVPREV);
         GXSetTevAlphaIn(GX_TEVSTAGE1, GX_CA_ZERO, GX_CA_ZERO, GX_CA_ZERO,
                         GX_CA_APREV);
-        GXSetTevAlphaOp(GX_TEVSTAGE1, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, 1,
-                        GX_TEVPREV);
+        GXSetTevAlphaOp(GX_TEVSTAGE1, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1,
+                        TRUE, GX_TEVPREV);
 
         RFLLoadMaterialSetting(&cDefaultDrawCoreSetting2Tev);
         RFLLoadVertexSetting(&cDefaultDrawCoreSetting2Tev);
@@ -346,12 +348,12 @@ void RFLDrawXlu(const RFLCharModel* model) {
 
 void RFLLoadVertexSetting(const RFLDrawCoreSetting* setting) {
     GXClearVtxDesc();
-    GXSetVtxDesc(GX_VA_POS, GX_VA_TEX1MTXIDX);
-    GXSetVtxDesc(GX_VA_NRM, GX_VA_TEX1MTXIDX);
-    GXSetVtxDesc(GX_VA_TEX0, GX_VA_TEX1MTXIDX);
-    GXSetVtxAttrFmt(0, GX_VA_POS, 1, 3, 8);
-    GXSetVtxAttrFmt(0, GX_VA_NRM, 0, 3, 14);
-    GXSetVtxAttrFmt(0, GX_VA_TEX0, 1, 3, 13);
+    GXSetVtxDesc(GX_VA_POS, GX_INDEX8);
+    GXSetVtxDesc(GX_VA_NRM, GX_INDEX8);
+    GXSetVtxDesc(GX_VA_TEX0, GX_INDEX8);
+    GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_POS, GX_POS_XYZ, GX_S16, 8);
+    GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_NRM, GX_NRM_XYZ, GX_S16, 14);
+    GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_TEX0, GX_TEX_ST, GX_S16, 13);
     GXSetNumTexGens(setting->txcGenNum);
 }
 
@@ -362,9 +364,9 @@ void RFLLoadMaterialSetting(const RFLDrawCoreSetting* setting) {
                           GX_CH_BLUE, GX_CH_GREEN);
     GXSetNumTevStages(setting->tevStageNum);
     GXSetTevDirect(GX_TEVSTAGE0);
-    GXSetTevAlphaOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, 1,
+    GXSetTevAlphaOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, TRUE,
                     setting->tevOutRegID);
-    GXSetTevColorOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, 1,
+    GXSetTevColorOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, TRUE,
                     setting->tevOutRegID);
     GXSetTevKColorSel(GX_TEVSTAGE0,
                       (GXTevKColorSel)(setting->tevKColorID + GX_TEV_KCSEL_K0));
@@ -392,7 +394,7 @@ void RFLDrawOpaCore(const RFLCharModel* model,
     GXSetCurrentMtx(setting->posNrmMtxID);
 
     GXSetTexCoordGen(setting->txcID, GX_TG_MTX2x4, GX_TG_POS, GX_TEXMTX_IDENT);
-    GXSetVtxDesc(GX_VA_TEX0, GX_VA_PNMTXIDX);
+    GXSetVtxDesc(GX_VA_TEX0, GX_NONE);
     GXSetTevOrder(GX_TEVSTAGE0, GX_TEXCOORD_NULL, GX_TEXMAP_NULL,
                   GX_COLOR_NULL);
     GXSetTevColorIn(GX_TEVSTAGE0, GX_CC_ZERO, GX_CC_ZERO, GX_CC_ZERO,
@@ -433,13 +435,13 @@ void RFLDrawOpaCore(const RFLCharModel* model,
     GXSetTevOrder(GX_TEVSTAGE0, setting->txcID, setting->texMapID,
                   GX_COLOR_NULL);
     GXSetTexCoordGen(setting->txcID, GX_TG_MTX2x4, GX_TG_TEX0, GX_TEXMTX_IDENT);
-    GXSetVtxDesc(GX_VA_TEX0, GX_VA_TEX1MTXIDX);
+    GXSetVtxDesc(GX_VA_TEX0, GX_INDEX8);
 
     if (res->capDlSize > 0) {
         GXSetTevColorIn(GX_TEVSTAGE0, GX_CC_ZERO, GX_CC_KONST, GX_CC_TEXC,
                         GX_CC_KONST);
-        GXSetTevColorOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_DIVIDE_2, 1,
-                        setting->tevOutRegID);
+        GXSetTevColorOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_DIVIDE_2,
+                        TRUE, setting->tevOutRegID);
         GXSetTevKColor(setting->tevKColorID,
                        cFavoriteColor[res->favoriteColor]);
 
@@ -449,8 +451,8 @@ void RFLDrawOpaCore(const RFLCharModel* model,
         GXSetArray(GX_VA_TEX0, res->capVtxTxc, 4);
         GXCallDisplayList(res->capDl, res->capDlSize);
 
-        GXSetTevColorOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, 1,
-                        setting->tevOutRegID);
+        GXSetTevColorOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1,
+                        TRUE, setting->tevOutRegID);
     }
 
     GXSetTevColorIn(GX_TEVSTAGE0, GX_CC_KONST, GX_CC_TEXC, GX_CC_TEXA,
@@ -998,7 +1000,7 @@ void RFLiInitShapeRes(RFLiShapeRes* shape) {
             u16 vtxNum = *ptr8++;
             GXPrimitive prim = *ptr8++;
 
-            GXBegin(prim, 0, vtxNum);
+            GXBegin(prim, GX_VTXFMT0, vtxNum);
             {
                 for (j = 0; j < vtxNum; j++) {
                     GXPosition1x8(*ptr8++);
@@ -1058,15 +1060,16 @@ void RFLDrawShape(const RFLCharModel* model) {
     RFLiCharModelRes* res = imodel->res;
 
     GXClearVtxDesc();
-    GXSetVtxDesc(GX_VA_POS, GX_VA_TEX1MTXIDX);
-    GXSetVtxDesc(GX_VA_NRM, GX_VA_TEX1MTXIDX);
-    GXSetVtxAttrFmt(0, GX_VA_POS, 1, 3, 8);
-    GXSetVtxAttrFmt(0, GX_VA_NRM, 0, 3, 14);
-    GXSetVtxAttrFmt(0, GX_VA_TEX0, 1, 3, 13);
+    GXSetVtxDesc(GX_VA_POS, GX_INDEX8);
+    GXSetVtxDesc(GX_VA_NRM, GX_INDEX8);
 
-    GXLoadPosMtxImm(imodel->posMtx, 0);
-    GXLoadNrmMtxImm(imodel->nrmMtx, 0);
-    GXSetCurrentMtx(0);
+    GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_POS, GX_POS_XYZ, GX_S16, 8);
+    GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_NRM, GX_NRM_XYZ, GX_S16, 14);
+    GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_TEX0, GX_TEX_ST, GX_S16, 13);
+
+    GXLoadPosMtxImm(imodel->posMtx, GX_PNMTX0);
+    GXLoadNrmMtxImm(imodel->nrmMtx, GX_PNMTX0);
+    GXSetCurrentMtx(GX_PNMTX0);
 
     if (res->beardDlSize > 0) {
         GXSetArray(GX_VA_POS, res->beardVtxPos, 6);
@@ -1104,7 +1107,7 @@ void RFLDrawShape(const RFLCharModel* model) {
         GXCallDisplayList(res->hairDl, res->hairDlSize);
     }
 
-    GXSetVtxDesc(GX_VA_TEX0, GX_VA_TEX1MTXIDX);
+    GXSetVtxDesc(GX_VA_TEX0, GX_INDEX8);
     if (res->capDlSize > 0) {
         GXSetArray(GX_VA_POS, res->capVtxPos, 6);
         GXSetArray(GX_VA_NRM, res->capVtxNrm, 6);

@@ -1,4 +1,5 @@
 #include <revolution/AX.h>
+#include <revolution/OS.h>
 
 const char* __AXVersion =
     "<< RVL_SDK - AX \trelease build: Dec 18 2006 15:43:48 (0x4199_60831) >>";

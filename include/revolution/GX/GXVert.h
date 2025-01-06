@@ -7,7 +7,7 @@ extern "C" {
 #endif
 
 static inline void GXCmd1u8(u8 uc) {
-    WGPIPE.c = uc;
+    WGPIPE.uc = uc;
 }
 
 static inline void GXCmd1u16(u16 us) {
@@ -15,7 +15,7 @@ static inline void GXCmd1u16(u16 us) {
 }
 
 static inline void GXCmd1u32(u32 ul) {
-    WGPIPE.i = ul;
+    WGPIPE.ui = ul;
 }
 
 static inline void GXPosition3f32(f32 x, f32 y, f32 z) {
@@ -25,9 +25,9 @@ static inline void GXPosition3f32(f32 x, f32 y, f32 z) {
 }
 
 static inline void GXPosition3u8(u8 x, u8 y, u8 z) {
-    WGPIPE.c = x;
-    WGPIPE.c = y;
-    WGPIPE.c = z;
+    WGPIPE.uc = x;
+    WGPIPE.uc = y;
+    WGPIPE.uc = z;
 }
 
 static inline void GXPosition3s8(s8 x, s8 y, s8 z) {
@@ -54,8 +54,8 @@ static inline void GXPosition2f32(f32 x, f32 y) {
 }
 
 static inline void GXPosition2u8(u8 x, u8 y) {
-    WGPIPE.c = x;
-    WGPIPE.c = y;
+    WGPIPE.uc = x;
+    WGPIPE.uc = y;
 }
 
 static inline void GXPosition2s8(s8 x, s8 y) {
@@ -78,7 +78,7 @@ static inline void GXPosition1x16(u16 us) {
 }
 
 static inline void GXPosition1x8(u8 uc) {
-    WGPIPE.c = uc;
+    WGPIPE.uc = uc;
 }
 
 static inline void GXNormal3f32(f32 x, f32 y, f32 z) {
@@ -104,24 +104,24 @@ static inline void GXNormal1x16(u16 us) {
 }
 
 static inline void GXNormal1x8(u8 uc) {
-    WGPIPE.c = uc;
+    WGPIPE.uc = uc;
 }
 
 static inline void GXColor4u8(u8 r, u8 g, u8 b, u8 a) {
-    WGPIPE.c = r;
-    WGPIPE.c = g;
-    WGPIPE.c = b;
-    WGPIPE.c = a;
+    WGPIPE.uc = r;
+    WGPIPE.uc = g;
+    WGPIPE.uc = b;
+    WGPIPE.uc = a;
 }
 
 static inline void GXColor1u32(u32 color) {
-    WGPIPE.i = color;
+    WGPIPE.ui = color;
 }
 
 static inline void GXColor3u8(u8 r, u8 g, u8 b) {
-    WGPIPE.c = r;
-    WGPIPE.c = g;
-    WGPIPE.c = b;
+    WGPIPE.uc = r;
+    WGPIPE.uc = g;
+    WGPIPE.uc = b;
 }
 
 static inline void GXColor1u16(u16 us) {
@@ -133,7 +133,7 @@ static inline void GXColor1x16(u16 us) {
 }
 
 static inline void GXColor1x8(u8 uc) {
-    WGPIPE.c = uc;
+    WGPIPE.uc = uc;
 }
 
 static inline void GXTexCoord2f32(f32 x, f32 y) {
@@ -157,8 +157,8 @@ static inline void GXTexCoord2s8(s8 x, s8 y) {
 }
 
 static inline void GXTexCoord2u8(u8 x, u8 y) {
-    WGPIPE.c = x;
-    WGPIPE.c = y;
+    WGPIPE.uc = x;
+    WGPIPE.uc = y;
 }
 
 static inline void GXTexCoord1f32(f32 f) {
@@ -178,7 +178,7 @@ static inline void GXTexCoord1s8(s8 c) {
 }
 
 static inline void GXTexCoord1u8(u8 uc) {
-    WGPIPE.c = uc;
+    WGPIPE.uc = uc;
 }
 
 static inline void GXTexCoord1x16(u16 us) {
@@ -186,7 +186,7 @@ static inline void GXTexCoord1x16(u16 us) {
 }
 
 static inline void GXTexCoord1x8(u8 uc) {
-    WGPIPE.c = uc;
+    WGPIPE.uc = uc;
 }
 
 #ifdef __cplusplus

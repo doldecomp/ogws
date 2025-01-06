@@ -1,4 +1,5 @@
 #include <revolution/NWC24.h>
+
 #include <revolution/OS.h>
 #include <revolution/VF.h>
 
@@ -187,6 +188,7 @@ NWC24Err NWC24CloseLib(void) {
 
     NWC24WorkP = NULL;
     Opened = NWC24_LIB_CLOSED;
+    return result;
 }
 
 BOOL NWC24IsMsgLibOpened(void) {

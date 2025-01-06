@@ -1,4 +1,5 @@
 #include <RVLFaceLib/RVLFaceLibInternal.h>
+
 #include <string.h>
 
 #define MAGIC_OFFICIAL_DB 'RNOD'
@@ -160,5 +161,5 @@ RFLErrcode RFLiFormatAsync(RFLiCallback cb) {
         RFLiGetManager()->brokenType & (1 << RFLiFileBrokenType_DBBroken);
 
     mgr->formatCb = cb;
-    RFLiCreateSaveDirAsync(formatCreateDirCallback_);
+    return RFLiCreateSaveDirAsync(formatCreateDirCallback_);
 }
