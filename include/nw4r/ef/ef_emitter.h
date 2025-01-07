@@ -6,7 +6,6 @@
 #include "ut_list.h"
 #include "ef_list.h"
 #include "ef_rand.h"
-#include "ef_util.h"
 #include "ef_animcurve.h"
 
 namespace nw4r
@@ -136,6 +135,8 @@ namespace nw4r
 		
 		struct Emitter : ReferencedObject
 		{
+			typedef void (* Action)(void *, u32);
+
 			virtual bool Initialize(Effect *, EmitterResource *, u8); // at 0x10
 			virtual Emitter * CreateEmitter(EmitterResource *, EmitterInheritSetting *, Particle *, u16); // at 0x14
 			virtual void CalcEmitter(); // at 0x18

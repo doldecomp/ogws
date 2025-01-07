@@ -7,7 +7,11 @@
 #include <cmath>
 
 #define NW4R_MATH_QNAN (-(0.0f / 0.0f))
+
+#define NW4R_MATH_FLT_MIN 1.175494350e-38f
 #define NW4R_MATH_FLT_MAX 3.402823466e+38f
+
+#define NW4R_MATH_FLT_EPSILON 1.192092895e-7f
 
 namespace nw4r {
 namespace math {

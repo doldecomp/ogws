@@ -5,7 +5,6 @@
 #include "ef_ref.h"
 #include "ut_list.h"
 #include "ef_list.h"
-#include "ef_util.h"
 
 namespace nw4r
 {
@@ -13,6 +12,8 @@ namespace nw4r
 	{
 		struct Effect : ReferencedObject
 		{
+			typedef void (* Action)(void *, u32);
+
 			EffectSystem * mSystem; // at 0x20
 			ActivityList mEmitters; // at 0x24
 			u32 INDEX_0x40;

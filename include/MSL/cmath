@@ -7,8 +7,10 @@ namespace std {
 using ::acos;
 using ::acosf;
 using ::asin;
+using ::asinf;
 using ::atan;
 using ::atan2;
+using ::atan2f;
 using ::ceil;
 using ::ceilf;
 using ::copysign;

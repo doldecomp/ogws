@@ -1,7 +1,10 @@
-#include <math.h>
 #include <revolution/MTX.h>
 
-DECOMP_FORCELITERAL(quat_c, FLT_EPSILON, 1.0f, 0.0f);
+#include <math.h>
+
+#define MY_EPSILON 1e-5f
+
+DECOMP_FORCELITERAL(quat_c, MY_EPSILON, 1.0f, 0.0f);
 
 void PSQUATMultiply(register const Quaternion* a, register const Quaternion* b,
                     register Quaternion* prod) {
@@ -54,7 +57,7 @@ void PSQUATNormalize(register const Quaternion* in, register Quaternion* out) {
     register f32 work0, work1, work2, work3;
     register f32 c_epsilon, c_half, c_three;
 
-    c_epsilon = FLT_EPSILON;
+    c_epsilon = MY_EPSILON;
     c_half = 0.5f;
     c_three = 3.0f;
 
@@ -158,7 +161,7 @@ void C_QUATSlerp(const Quaternion* a, const Quaternion* b, Quaternion* out,
         coeffb = -coeffb;
     }
 
-    if (dot <= 1.0f - FLT_EPSILON) {
+    if (dot <= 1.0f - MY_EPSILON) {
         theta = acosf(dot);
         sintheta = sinf(theta);
 

@@ -10,6 +10,12 @@ extern "C" {
 inline float acosf(float x) {
     return acos(x);
 }
+inline float asinf(float x) {
+    return asin(x);
+}
+inline float atan2f(float x, float y) {
+    return atan2(x, y);
+}
 inline float ceilf(float x) {
     return ceil(x);
 }
