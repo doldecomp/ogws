@@ -1,91 +1,89 @@
-#ifndef NW4R_EF_PARTICLEMANAGER
-#define NW4R_EF_PARTICLEMANAGER
-#include "types_nw4r.h"
-#include "math_types.h"
-#include "ef_list.h"
-#include "ef_ref.h"
-#include "ut_Color.h"
+#ifndef NW4R_EF_PARTICLE_MANAGER_H
+#define NW4R_EF_PARTICLE_MANAGER_H
+#include <nw4r/types_nw4r.h>
 
-namespace nw4r
-{
-    namespace ef
-    {
-        struct ParticleManager : ReferencedObject
-        {
-            struct ParticleModifier
-            {
-                math::VEC2 mScale; // at 0x0
-                math::VEC3 mRotate; // at 0x8
+#include <nw4r/ef/ef_activitylist.h>
+#include <nw4r/ef/ef_referencedobject.h>
 
-                struct SimpleLight
-                {
-                    u8 mType; // at 0x0
-                    ut::Color mAmbColor; // at 0x1
-                } mLight;
-            };
+#include <nw4r/math.h>
+#include <nw4r/ut.h>
 
-            UNKTYPE BeginDraw();
-            UNKTYPE EndDraw();
-            UNKTYPE BeginCalc(bool);
-            UNKTYPE EndCalc();
-            
-            virtual bool SendClosing();
-            virtual UNKTYPE DestroyFunc();
-            virtual bool Initialize(Emitter *, EmitterResource *);
-            virtual UNKTYPE CreateParticle(u16, math::VEC3, math::VEC3, const math::MTX34 *, float, const EmitterInheritSetting *, Particle *, u16);
-            virtual UNKTYPE Calc();
-            virtual UNKTYPE Draw(const DrawInfo &);
-            
-            Emitter * mEmitter; // at 0x20
-            EmitterResource * mResource; // at 0x24
-            UNKWORD FLAGS_0x28;
-            char UNK_0x2C[0xC];
-            ActivityList EFLIST_0x38;
-            char UNK_0x54[0x4];
+namespace nw4r {
+namespace ef {
 
-            ParticleModifier mMod; // at 0x58
+// Forward declarations
+class Emitter;
+struct EmitterResource;
+class DrawStrategy;
+class Particle;
 
-            char UNK_0x74[0x14];
-
-            s8 BYTE_0x88;
-            u8 BYTE_0x89;
-            bool BOOL_0x8A;
-
-            UNKWORD FLAGS_0xB4;
-            
-            u16 RetireParticleAll();
-            
-            UNKTYPE CalcGlobalMtx(math::MTX34 *);
-
-            static void ModifierTravFunc_SetSimpleLightType(void *p, u32 payload)
-            {
-                ParticleManager *mgr = (ParticleManager *)p;
-                u8 type = (u8)payload;
-                mgr->mMod.mLight.mType = type;
-            }
-
-            static void ModifierTravFunc_SetSimpleLightAmbient(void *p, u32 payload)
-            {
-                ParticleManager *mgr = (ParticleManager *)p;
-                ut::Color *color = (ut::Color *)payload;
-                mgr->mMod.mLight.mAmbColor = *color;
-            }
-
-            static void ModifierTravFunc_SetScale(void *p, u32 payload)
-            {
-                ParticleManager *mgr = (ParticleManager *)p;
-                math::VEC2 *scale = (math::VEC2 *)payload;
-                mgr->mMod.mScale = *scale;
-            }
-
-            static void ModifierTravFunc_SetRotate(void *p, u32 payload)
-            {
-                ParticleManager *mgr = (ParticleManager *)p;
-                math::VEC3 *rot = (math::VEC3 *)payload;
-                mgr->mMod.mRotate = *rot;
-            }
+class ParticleManager : public ReferencedObject {
+public:
+    struct ParticleModifier {
+        struct SimpleLight {
+            u8 mType;             // at 0x0
+            ut::Color mAmbient;   // at 0x1
+            ut::Color mDiffuse;   // at 0x5
+            f32 mRadius;          // at 0xC
+            math::VEC3 mPosition; // at 0x10
         };
+
+        math::VEC2 mScale;  // at 0x0
+        math::VEC3 mRotate; // at 0x8
+        SimpleLight mLight; // at 0x14
+    };
+
+public:
+    Emitter* mManagerEM;         // at 0x20
+    EmitterResource* mResource;  // at 0x24
+    u32 mFlag;                   // at 0x28
+    DrawStrategy* mDrawStrategy; // at 0x2C
+    ut::Link mDrawOrderLink;     // at 0x30
+    ActivityList mActivityList;  // at 0x38
+    Particle* mLastCalced;       // at 0x54
+    ParticleModifier mModifier;  // at 0x58
+    s8 mInheritTranslate;        // at 0x88
+    u8 mWeight;                  // at 0x89
+
+protected:
+    u8 mMtxDirty; // at 0x8A
+
+public:
+    math::MTX34 mMtx; // at 0x8C
+
+    static math::MTX34 smDrawMtxPMtoEM;
+    static math::MTX34 smMtxInv;
+    static s32 smMtxInvId;
+
+public:
+    virtual void SendClosing();
+    virtual void DestroyFunc();
+    // virtual bool Initialize(Emitter*, EmitterResource*);
+    // virtual UNKTYPE CreateParticle(u16, math::VEC3, math::VEC3,
+    //                                const math::MTX34*, float,
+    //                                const EmitterInheritSetting*, Particle*,
+    //                                u16);
+    // virtual UNKTYPE Calc();
+    // virtual UNKTYPE Draw(const DrawInfo&);
+
+    math::MTX34* CalcGlobalMtx(math::MTX34*);
+
+    bool Closing(Particle*);
+
+    void Draw_ModifyRotate(Particle*, math::VEC3*);
+
+    void Draw_ModifyColor(Particle*, GXColor*, GXColor*);
+
+    f32 Draw_ModifyScaleX(Particle* /* pParticle */, f32 sx) {
+        return sx * mModifier.mScale.x;
     }
-}
+
+    f32 Draw_ModifyScaleY(Particle* /* pParticle */, f32 sy) {
+        return sy * mModifier.mScale.y;
+    }
+};
+
+} // namespace ef
+} // namespace nw4r
 
 #endif

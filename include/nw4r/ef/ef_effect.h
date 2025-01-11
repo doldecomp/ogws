@@ -2,9 +2,9 @@
 #define NW4R_EF_EFFECT
 #include "types_nw4r.h"
 #include "math_types.h"
-#include "ef_ref.h"
+#include "ef_referencedobject.h"
 #include "ut_list.h"
-#include "ef_list.h"
+#include "ef_activitylist.h"
 
 namespace nw4r
 {
@@ -24,20 +24,20 @@ namespace nw4r
 			UNKWORD WORD_0x4C;
 			u32 mFlags; // at 0x50
 			math::MTX34 mRootMtx; // at 0x54
-			math::VEC3 VEC_0x84;
+			math::VEC3 mVelocity;
 			ut::List UTLIST_0x90;
 			DrawOrder * mDrawOrder; // at 0x9c
 			
 			Effect();
 			~Effect();
 			
-			virtual bool Initialize(EffectSystem *, EmitterResource *, u16);
-			virtual Emitter * CreateEmitter(ResEmitter, u8, u16);
-			virtual void Calc(bool);
-			virtual void Draw(const DrawInfo &);
+			// virtual bool Initialize(EffectSystem *, EmitterResource *, u16);
+			// virtual Emitter * CreateEmitter(ResEmitter, u8, u16);
+			// virtual void Calc(bool);
+			// virtual void Draw(const DrawInfo &);
 			
-			virtual bool SendClosing();
-			virtual UNKTYPE DestroyFunc();
+			// virtual bool SendClosing();
+			// virtual UNKTYPE DestroyFunc();
 			bool Closing(Emitter *);
 			Emitter * CreateEmitter(EmitterResource *, u8, u16);
 			bool RetireEmitter(Emitter *);
@@ -49,6 +49,10 @@ namespace nw4r
 			u16 ForeachEmitterFrom(Action, u32, bool, Emitter *);
 			UNKTYPE SetRootMtx(const math::MTX34 &);
 			
+			const math::VEC3* GetVelocity() const {
+				return &mVelocity;
+			}
+
 			inline bool GetFlagDisableDraw()
 			{
 				return mFlags & 2;

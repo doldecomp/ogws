@@ -58,7 +58,7 @@ inline ResName GetResNameFromOffsetArray(s32* pStringArray, int idx) {
 
 void ResAnmTexPat::GetAnmResult(TexPatAnmResult* pResult, u32 idx,
                                 f32 frame) const {
-    ResFile file = GetParent(); // unused
+    (void)GetParent(); // unused
 
     const ResAnmTexPatMatData* pMatData = GetMatAnm(idx);
     const ResAnmTexPatMatData::AnmData* pAnmDataImpl = pMatData->anms;

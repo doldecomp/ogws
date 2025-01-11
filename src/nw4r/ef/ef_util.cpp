@@ -1,5 +1,3 @@
-#pragma ipa file // TODO: Remove after refactor
-
 #include <nw4r/ef.h>
 #include <nw4r/math.h>
 #include <nw4r/ut.h>
