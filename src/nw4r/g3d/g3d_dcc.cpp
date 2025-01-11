@@ -13,7 +13,7 @@ void CalcTexMtx(math::MTX34* pMtx, bool set, const TexSrt& rSrt,
         ident = !detail::dcc::CalcTexMtx_Maya(pMtx, set, rSrt, flag);
     } else if (mode == TexSrtTypedef::TEXMATRIXMODE_XSI) {
         ident = !detail::dcc::CalcTexMtx_Xsi(pMtx, set, rSrt, flag);
-    } else /* TexSrtTypedef::TEXMATRIXMODE_3DSMAX */ {
+    } else /* TEXMATRIXMODE_3DSMAX */ {
         ident = !detail::dcc::CalcTexMtx_3dsmax(pMtx, set, rSrt, flag);
     }
 
