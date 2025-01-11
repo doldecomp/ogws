@@ -231,7 +231,7 @@ void Particle::Draw_GetColor(int layer, GXColor* pColorPri,
         alpha = 0;
 
         switch (rSetting.mAlphaFlickType) {
-        case ALPHA_FLICK_1: {
+        case ALPHA_FLICK_TRIANGLE: {
             if (pos * 2 <= cycle) {
                 alpha = 128 - rSetting.mAlphaFlickAmplitude +
                         rSetting.mAlphaFlickAmplitude * (pos * 4) / cycle;
@@ -242,19 +242,19 @@ void Particle::Draw_GetColor(int layer, GXColor* pColorPri,
             break;
         }
 
-        case ALPHA_FLICK_2: {
+        case ALPHA_FLICK_SAWTOOTH_INV: {
             alpha = 128 + rSetting.mAlphaFlickAmplitude +
                     -(rSetting.mAlphaFlickAmplitude * pos * 2) / cycle;
             break;
         }
 
-        case ALPHA_FLICK_3: {
+        case ALPHA_FLICK_SAWTOOTH: {
             alpha = 128 - rSetting.mAlphaFlickAmplitude +
                     rSetting.mAlphaFlickAmplitude * (pos * 2) / cycle;
             break;
         }
 
-        case ALPHA_FLICK_4: {
+        case ALPHA_FLICK_SQUARE: {
             if (pos * 2 <= cycle) {
                 alpha = 128 + rSetting.mAlphaFlickAmplitude;
             } else {
@@ -263,7 +263,7 @@ void Particle::Draw_GetColor(int layer, GXColor* pColorPri,
             break;
         }
 
-        case ALPHA_FLICK_5: {
+        case ALPHA_FLICK_SINE: {
             alpha = 128 + rSetting.mAlphaFlickAmplitude *
                               std::sinf(2 * NW4R_MATH_PI * pos / cycle);
             break;

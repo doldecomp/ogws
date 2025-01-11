@@ -92,11 +92,11 @@ private:
 
     enum AlphaFlickType {
         ALPHA_FLICK_NONE,
-        ALPHA_FLICK_1,
-        ALPHA_FLICK_2,
-        ALPHA_FLICK_3,
-        ALPHA_FLICK_4,
-        ALPHA_FLICK_5
+        ALPHA_FLICK_TRIANGLE,
+        ALPHA_FLICK_SAWTOOTH_INV,
+        ALPHA_FLICK_SAWTOOTH,
+        ALPHA_FLICK_SQUARE,
+        ALPHA_FLICK_SINE
     };
 
 public:
