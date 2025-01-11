@@ -1,5 +1,5 @@
-#ifndef NW4R_SND_COMMON_H
-#define NW4R_SND_COMMON_H
+#ifndef NW4R_SND_TYPES_H
+#define NW4R_SND_TYPES_H
 #include <nw4r/types_nw4r.h>
 
 namespace nw4r {

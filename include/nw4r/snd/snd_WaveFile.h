@@ -3,7 +3,7 @@
 #include <nw4r/types_nw4r.h>
 
 #include <nw4r/snd/snd_AxVoice.h>
-#include <nw4r/snd/snd_Common.h>
+#include <nw4r/snd/snd_Types.h>
 
 #include <nw4r/ut.h>
 

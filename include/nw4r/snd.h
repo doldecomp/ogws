@@ -11,7 +11,6 @@
 #include <nw4r/snd/snd_BasicSound.h>
 #include <nw4r/snd/snd_Channel.h>
 #include <nw4r/snd/snd_ChannelManager.h>
-#include <nw4r/snd/snd_Common.h>
 #include <nw4r/snd/snd_DisposeCallback.h>
 #include <nw4r/snd/snd_DisposeCallbackManager.h>
 #include <nw4r/snd/snd_DvdSoundArchive.h>
@@ -65,6 +64,7 @@
 #include <nw4r/snd/snd_Task.h>
 #include <nw4r/snd/snd_TaskManager.h>
 #include <nw4r/snd/snd_TaskThread.h>
+#include <nw4r/snd/snd_Types.h>
 #include <nw4r/snd/snd_Util.h>
 #include <nw4r/snd/snd_Voice.h>
 #include <nw4r/snd/snd_VoiceManager.h>
