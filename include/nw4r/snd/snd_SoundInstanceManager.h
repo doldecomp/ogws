@@ -14,7 +14,7 @@ namespace detail {
 
 template <typename T> class SoundInstanceManager {
 private:
-    NW4R_UT_LIST_TYPEDEF_DECL_EX(T, Prio);
+    NW4R_UT_LINKLIST_TYPEDEF_DECL_EX(T, Prio);
 
 public:
     SoundInstanceManager() {

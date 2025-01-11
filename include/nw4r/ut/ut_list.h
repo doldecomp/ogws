@@ -1,5 +1,5 @@
-#ifndef NW4R_UT_LIST_H
-#define NW4R_UT_LIST_H
+#ifndef NW4R_UT_LINKLIST_H
+#define NW4R_UT_LINKLIST_H
 #include <nw4r/types_nw4r.h>
 
 namespace nw4r {

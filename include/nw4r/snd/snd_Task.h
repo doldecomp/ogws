@@ -20,13 +20,13 @@ public:
     virtual void OnCancel() = 0; // at 0x14
 
 public:
-    NW4R_UT_LIST_NODE_DECL(); // at 0x4
+    NW4R_UT_LINKLIST_NODE_DECL(); // at 0x4
 
 private:
     bool mBusyFlag; // at 0xC
 };
 
-NW4R_UT_LIST_TYPEDEF_DECL(Task);
+NW4R_UT_LINKLIST_TYPEDEF_DECL(Task);
 
 } // namespace detail
 } // namespace snd

@@ -48,11 +48,11 @@ public:
                 }
             }
         } else {
-            NW4R_UT_LIST_SAFE_FOREACH(mSoundList,
+            NW4R_UT_LINKLIST_FOREACH_SAFE(mSoundList, {
                 SoundHandle handle;
                 handle.detail_AttachSoundAsTempHandle(&*it);
                 pFunction(handle);
-            );
+            });
         }
 
         return pFunction;

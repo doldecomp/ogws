@@ -31,9 +31,7 @@ void SoundPlayer::InitParam() {
 void SoundPlayer::Update() {
     ut::detail::AutoLock<OSMutex> lock(mMutex);
 
-    NW4R_UT_LIST_SAFE_FOREACH(mSoundList,
-        it->Update();
-    )
+    NW4R_UT_LINKLIST_FOREACH_SAFE(mSoundList, it->Update());
 
     detail_SortPriorityList();
 }
@@ -41,17 +39,13 @@ void SoundPlayer::Update() {
 void SoundPlayer::StopAllSound(int frames) {
     ut::detail::AutoLock<OSMutex> lock(mMutex);
 
-    NW4R_UT_LIST_SAFE_FOREACH(mSoundList,
-        it->Stop(frames);
-    )
+    NW4R_UT_LINKLIST_FOREACH_SAFE(mSoundList, it->Stop(frames));
 }
 
 void SoundPlayer::PauseAllSound(bool flag, int frames) {
     ut::detail::AutoLock<OSMutex> lock(mMutex);
 
-    NW4R_UT_LIST_SAFE_FOREACH(mSoundList,
-        it->Pause(flag, frames);
-    )
+    NW4R_UT_LINKLIST_FOREACH_SAFE(mSoundList, it->Pause(flag, frames));
 }
 
 void SoundPlayer::SetVolume(f32 volume) {

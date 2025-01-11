@@ -18,11 +18,11 @@ namespace detail {
 class AxManager {
 public:
     struct CallbackListNode {
-        NW4R_UT_LIST_NODE_DECL(); // at 0x0
-        AXOutCallback callback;   // at 0x8
+        NW4R_UT_LINKLIST_NODE_DECL(); // at 0x0
+        AXOutCallback callback;       // at 0x8
     };
 
-    NW4R_UT_LIST_TYPEDEF_DECL(CallbackListNode);
+    NW4R_UT_LINKLIST_TYPEDEF_DECL(CallbackListNode);
 
 public:
     static AxManager& GetInstance();

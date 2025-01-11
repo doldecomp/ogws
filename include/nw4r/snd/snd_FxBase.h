@@ -32,10 +32,10 @@ public:
     } // at 0x14
 
 public:
-    NW4R_UT_LIST_NODE_DECL(); // at 0x4
+    NW4R_UT_LINKLIST_NODE_DECL(); // at 0x4
 };
 
-NW4R_UT_LIST_TYPEDEF_DECL(FxBase);
+NW4R_UT_LINKLIST_TYPEDEF_DECL(FxBase);
 
 } // namespace snd
 } // namespace nw4r

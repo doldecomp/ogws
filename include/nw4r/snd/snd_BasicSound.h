@@ -216,16 +216,16 @@ private:
     f32 mRemoteOutVolume[WPAD_MAX_CONTROLLERS]; // at 0xA8
 
 public:
-    NW4R_UT_LIST_NODE_DECL_EX(Prio);       // at 0xB8
-    NW4R_UT_LIST_NODE_DECL_EX(PlayerPlay); // at 0xC0
-    NW4R_UT_LIST_NODE_DECL_EX(PlayerPrio); // at 0xC8
-    NW4R_UT_LIST_NODE_DECL_EX(ExtPlay);    // at 0xD0
+    NW4R_UT_LINKLIST_NODE_DECL_EX(Prio);       // at 0xB8
+    NW4R_UT_LINKLIST_NODE_DECL_EX(PlayerPlay); // at 0xC0
+    NW4R_UT_LINKLIST_NODE_DECL_EX(PlayerPrio); // at 0xC8
+    NW4R_UT_LINKLIST_NODE_DECL_EX(ExtPlay);    // at 0xD0
 };
 
-NW4R_UT_LIST_TYPEDEF_DECL_EX(BasicSound, Prio);
-NW4R_UT_LIST_TYPEDEF_DECL_EX(BasicSound, PlayerPlay);
-NW4R_UT_LIST_TYPEDEF_DECL_EX(BasicSound, PlayerPrio);
-NW4R_UT_LIST_TYPEDEF_DECL_EX(BasicSound, ExtPlay);
+NW4R_UT_LINKLIST_TYPEDEF_DECL_EX(BasicSound, Prio);
+NW4R_UT_LINKLIST_TYPEDEF_DECL_EX(BasicSound, PlayerPlay);
+NW4R_UT_LINKLIST_TYPEDEF_DECL_EX(BasicSound, PlayerPrio);
+NW4R_UT_LINKLIST_TYPEDEF_DECL_EX(BasicSound, ExtPlay);
 
 } // namespace detail
 } // namespace snd

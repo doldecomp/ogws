@@ -182,10 +182,10 @@ private:
     PanCurve mPanCurve;                         // at 0x120
 
 public:
-    NW4R_UT_LIST_NODE_DECL(); // at 0x124
+    NW4R_UT_LINKLIST_NODE_DECL(); // at 0x124
 };
 
-NW4R_UT_LIST_TYPEDEF_DECL(Voice);
+NW4R_UT_LINKLIST_TYPEDEF_DECL(Voice);
 
 } // namespace detail
 } // namespace snd

@@ -21,21 +21,21 @@ public:
      ******************************************************************************/
     class SoundFrameCallback {
     public:
-        NW4R_UT_LIST_NODE_DECL(); // at 0x0
+        NW4R_UT_LINKLIST_NODE_DECL(); // at 0x0
 
         virtual ~SoundFrameCallback() {}    // at 0x8
         virtual void OnBeginSoundFrame() {} // at 0xC
         virtual void OnEndSoundFrame() {}   // at 0x10
     };
 
-    NW4R_UT_LIST_TYPEDEF_DECL(SoundFrameCallback);
+    NW4R_UT_LINKLIST_TYPEDEF_DECL(SoundFrameCallback);
 
     /******************************************************************************
      * PlayerCallback
      ******************************************************************************/
     class PlayerCallback {
     public:
-        NW4R_UT_LIST_NODE_DECL(); // at 0x0
+        NW4R_UT_LINKLIST_NODE_DECL(); // at 0x0
 
         virtual ~PlayerCallback() {}               // at 0x8
         virtual void OnUpdateFrameSoundThread() {} // at 0xC
@@ -43,7 +43,7 @@ public:
         virtual void OnShutdownSoundThread() {}    // at 0x14
     };
 
-    NW4R_UT_LIST_TYPEDEF_DECL(PlayerCallback);
+    NW4R_UT_LINKLIST_TYPEDEF_DECL(PlayerCallback);
 
     /******************************************************************************
      * AutoLock

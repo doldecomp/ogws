@@ -281,10 +281,10 @@ private:
     void* mCallbackData;       // at 0x3C
 
 public:
-    NW4R_UT_LIST_NODE_DECL(); // at 0x40
+    NW4R_UT_LINKLIST_NODE_DECL(); // at 0x40
 };
 
-NW4R_UT_LIST_TYPEDEF_DECL(AxVoice);
+NW4R_UT_LINKLIST_TYPEDEF_DECL(AxVoice);
 
 } // namespace detail
 } // namespace snd

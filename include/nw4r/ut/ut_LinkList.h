@@ -412,7 +412,7 @@ public:
 /**
  * Declare typedef for linked-list specialization.
  */
-#define NW4R_UT_LIST_TYPEDEF_DECL(T)                                           \
+#define NW4R_UT_LINKLIST_TYPEDEF_DECL(T)                                       \
     typedef nw4r::ut::LinkList<T, offsetof(T, node)> T##List;
 
 /**
@@ -420,30 +420,31 @@ public:
  *
  * Use the specified link node (name suffix) for classes with multiple nodes.
  */
-#define NW4R_UT_LIST_TYPEDEF_DECL_EX(T, SUFFIX)                                \
+#define NW4R_UT_LINKLIST_TYPEDEF_DECL_EX(T, SUFFIX)                            \
     typedef nw4r::ut::LinkList<T, offsetof(T, node##SUFFIX)> T##SUFFIX##List;
 
 /**
  * Declare a member LinkListNode for use with the typedef.
  */
-#define NW4R_UT_LIST_NODE_DECL() nw4r::ut::LinkListNode node
+#define NW4R_UT_LINKLIST_NODE_DECL() nw4r::ut::LinkListNode node
 
 /**
  * Declare a member LinkListNode for use with the typedef.
  *
  * Use the specified link node (name suffix) for classes with multiple nodes.
  */
-#define NW4R_UT_LIST_NODE_DECL_EX(SUFFIX) nw4r::ut::LinkListNode node##SUFFIX
+#define NW4R_UT_LINKLIST_NODE_DECL_EX(SUFFIX)                                  \
+    nw4r::ut::LinkListNode node##SUFFIX
 
 /**
  * Explicitly instantiate a linked list specialization.
  * (RESERVED FOR MATCHING DECOMP HACKS)
  */
 #ifndef __DECOMP_NON_MATCHING
-#define NW4R_UT_LIST_TYPEDEF_FORCE(T)                                          \
+#define NW4R_UT_LINKLIST_TYPEDEF_FORCE(T)                                      \
     template struct nw4r::ut::LinkList<T, offsetof(T, node)>
 #else
-#define NW4R_UT_LIST_TYPEDEF_FORCE(T)
+#define NW4R_UT_LINKLIST_TYPEDEF_FORCE(T)
 #endif
 
 /**
@@ -451,7 +452,7 @@ public:
  *
  * Access the current element with "it"
  */
-#define NW4R_UT_LIST_SAFE_FOREACH(LIST, ...)                                   \
+#define NW4R_UT_LINKLIST_FOREACH_SAFE(LIST, ...)                               \
     {                                                                          \
         typedef DECLTYPE(LIST.GetBeginIter()) IterType;                        \
                                                                                \
@@ -459,7 +460,7 @@ public:
              impl != LIST.GetEndIter();) {                                     \
                                                                                \
             IterType it = impl++;                                              \
-            __VA_ARGS__                                                        \
+            __VA_ARGS__;                                                       \
         }                                                                      \
     }
 

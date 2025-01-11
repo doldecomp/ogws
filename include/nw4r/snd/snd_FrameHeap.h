@@ -38,10 +38,10 @@ private:
      * Block
      ******************************************************************************/
     struct Block {
-        NW4R_UT_LIST_NODE_DECL(); // at 0x0
-        u32 mSize;                // at 0x8
-        FreeCallback mCallback;   // at 0xc
-        void* mCallbackArg;       // at 0x10
+        NW4R_UT_LINKLIST_NODE_DECL(); // at 0x0
+        u32 mSize;                    // at 0x8
+        FreeCallback mCallback;       // at 0xc
+        void* mCallbackArg;           // at 0x10
 
         Block(u32 size, FreeCallback pCallback, void* pCallbackArg)
             : mSize(size), mCallback(pCallback), mCallbackArg(pCallbackArg) {}
@@ -57,14 +57,14 @@ private:
         }
     };
 
-    NW4R_UT_LIST_TYPEDEF_DECL(Block);
+    NW4R_UT_LINKLIST_TYPEDEF_DECL(Block);
 
     /******************************************************************************
      * Section
      ******************************************************************************/
     struct Section {
-        NW4R_UT_LIST_NODE_DECL(); // at 0x0
-        BlockList mBlockList;     // at 0x8
+        NW4R_UT_LINKLIST_NODE_DECL(); // at 0x0
+        BlockList mBlockList;         // at 0x8
 
         ~Section() {
             for (BlockList::Iterator it = mBlockList.GetEndIter();
@@ -79,7 +79,7 @@ private:
         }
     };
 
-    NW4R_UT_LIST_TYPEDEF_DECL(Section);
+    NW4R_UT_LINKLIST_TYPEDEF_DECL(Section);
 
     static const int BLOCK_BUFFER_SIZE = ROUND_UP(sizeof(Block), 32);
     static const int HEAP_ALIGN = 32;

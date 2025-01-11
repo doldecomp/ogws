@@ -121,10 +121,10 @@ private:
         s32 bufferBlockIndex;       // at 0x24
         bool needUpdateAdpcmLoop;   // at 0x28
 
-        NW4R_UT_LIST_NODE_DECL(); // at 0x2C
+        NW4R_UT_LINKLIST_NODE_DECL(); // at 0x2C
     };
 
-    NW4R_UT_LIST_TYPEDEF_DECL(StrmDataLoadTask);
+    NW4R_UT_LINKLIST_TYPEDEF_DECL(StrmDataLoadTask);
 
     static const int DATA_BLOCK_COUNT_MIN = 4;
     static const int DATA_BLOCK_COUNT_MAX = 32;

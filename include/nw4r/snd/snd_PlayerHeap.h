@@ -29,14 +29,14 @@ public:
     }
 
 public:
-    NW4R_UT_LIST_NODE_DECL(); // at 0x2C
+    NW4R_UT_LINKLIST_NODE_DECL(); // at 0x2C
 
 private:
     BasicSound* mSound;   // at 0x34
     SoundPlayer* mPlayer; // at 0x38
 };
 
-NW4R_UT_LIST_TYPEDEF_DECL(PlayerHeap);
+NW4R_UT_LINKLIST_TYPEDEF_DECL(PlayerHeap);
 
 } // namespace detail
 } // namespace snd

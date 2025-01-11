@@ -244,10 +244,10 @@ private:
     Channel* mNextLink; // at 0xE0
 
 public:
-    NW4R_UT_LIST_NODE_DECL(); // at 0xE4
+    NW4R_UT_LINKLIST_NODE_DECL(); // at 0xE4
 };
 
-NW4R_UT_LIST_TYPEDEF_DECL(Channel);
+NW4R_UT_LINKLIST_TYPEDEF_DECL(Channel);
 
 } // namespace detail
 } // namespace snd

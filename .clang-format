@@ -12,7 +12,7 @@ ConstructorInitializerAllOnOneLineOrOnePerLine: true
 FixNamespaceComments: true
 AccessModifierOffset: -4
 AllowShortFunctionsOnASingleLine: Empty
-WhitespaceSensitiveMacros: [NW4R_UT_LIST_SAFE_FOREACH]
+WhitespaceSensitiveMacros: [NW4R_UT_LINKLIST_FOREACH_SAFE]
 AttributeMacros: [DECOMP_INLINE, DECOMP_DONT_INLINE]
 InsertNewlineAtEOF: true
 
