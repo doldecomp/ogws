@@ -3,9 +3,6 @@
 namespace nw4r {
 namespace ut {
 
-#define OBJ_TO_LINK(LIST, OBJECT)                                              \
-    reinterpret_cast<Link*>((char*)OBJECT + LIST->offset)
-
 void List_Init(List* pList, u16 offset) {
     pList->headObject = NULL;
     pList->tailObject = NULL;
@@ -14,7 +11,7 @@ void List_Init(List* pList, u16 offset) {
 }
 
 static void SetFirstObject(List* pList, void* pObject) {
-    Link* pLink = OBJ_TO_LINK(pList, pObject);
+    Link* pLink = NW4R_UT_LIST_GET_LINK(*pList, pObject);
     pLink->nextObject = NULL;
     pLink->prevObject = NULL;
 
@@ -30,12 +27,12 @@ void List_Append(List* pList, void* pObject) {
     }
 
     // Old tail <- New tail relationship
-    Link* pLink = OBJ_TO_LINK(pList, pObject);
+    Link* pLink = NW4R_UT_LIST_GET_LINK(*pList, pObject);
     pLink->prevObject = pList->tailObject;
     pLink->nextObject = NULL;
 
     // Old tail -> New tail relationship
-    OBJ_TO_LINK(pList, pList->tailObject)->nextObject = pObject;
+    NW4R_UT_LIST_GET_LINK(*pList, pList->tailObject)->nextObject = pObject;
     pList->tailObject = pObject;
 
     pList->numObjects++;
@@ -48,12 +45,12 @@ void List_Prepend(List* pList, void* pObject) {
     }
 
     // New head -> Old head relationship
-    Link* pLink = OBJ_TO_LINK(pList, pObject);
+    Link* pLink = NW4R_UT_LIST_GET_LINK(*pList, pObject);
     pLink->prevObject = NULL;
     pLink->nextObject = pList->headObject;
 
     // New head <- Old head relationship
-    OBJ_TO_LINK(pList, pList->headObject)->prevObject = pObject;
+    NW4R_UT_LIST_GET_LINK(*pList, pList->headObject)->prevObject = pObject;
     pList->headObject = pObject;
 
     pList->numObjects++;
@@ -70,9 +67,9 @@ void List_Insert(List* pList, void* pTarget, void* pObject) {
         return;
     }
 
-    Link* pLink = OBJ_TO_LINK(pList, pObject);
-    void* pPrev = OBJ_TO_LINK(pList, pTarget)->prevObject;
-    Link* pPrevLink = OBJ_TO_LINK(pList, pPrev);
+    Link* pLink = NW4R_UT_LIST_GET_LINK(*pList, pObject);
+    void* pPrev = NW4R_UT_LIST_GET_LINK(*pList, pTarget)->prevObject;
+    Link* pPrevLink = NW4R_UT_LIST_GET_LINK(*pList, pPrev);
 
     // pPrev <- pObject
     pLink->prevObject = pPrev;
@@ -81,26 +78,28 @@ void List_Insert(List* pList, void* pTarget, void* pObject) {
     // pPrev <-> pObject -> pTarget
     pPrevLink->nextObject = pObject;
     // pPrev <-> pObject <-> pTarget
-    OBJ_TO_LINK(pList, pTarget)->prevObject = pObject;
+    NW4R_UT_LIST_GET_LINK(*pList, pTarget)->prevObject = pObject;
 
     pList->numObjects++;
 }
 
 void List_Remove(List* pList, void* pObject) {
-    Link* pLink = OBJ_TO_LINK(pList, pObject);
+    Link* pLink = NW4R_UT_LIST_GET_LINK(*pList, pObject);
 
     // Fix previous node relationship
     if (pLink->prevObject == NULL) {
-        pList->headObject = OBJ_TO_LINK(pList, pObject)->nextObject;
+        pList->headObject = NW4R_UT_LIST_GET_LINK(*pList, pObject)->nextObject;
     } else {
-        OBJ_TO_LINK(pList, pLink->prevObject)->nextObject = pLink->nextObject;
+        NW4R_UT_LIST_GET_LINK(*pList, pLink->prevObject)->nextObject =
+            pLink->nextObject;
     }
 
     // Fix next node relationship
     if (pLink->nextObject == NULL) {
         pList->tailObject = pLink->prevObject;
     } else {
-        OBJ_TO_LINK(pList, pLink->nextObject)->prevObject = pLink->prevObject;
+        NW4R_UT_LIST_GET_LINK(*pList, pLink->nextObject)->prevObject =
+            pLink->prevObject;
     }
 
     pLink->prevObject = NULL;
@@ -114,7 +113,7 @@ void* List_GetNext(const List* pList, const void* pObject) {
         return pList->headObject;
     }
 
-    return OBJ_TO_LINK(pList, pObject)->nextObject;
+    return NW4R_UT_LIST_GET_LINK(*pList, pObject)->nextObject;
 }
 
 void* List_GetPrev(const List* pList, const void* pObject) {
@@ -122,7 +121,7 @@ void* List_GetPrev(const List* pList, const void* pObject) {
         return pList->tailObject;
     }
 
-    return OBJ_TO_LINK(pList, pObject)->prevObject;
+    return NW4R_UT_LIST_GET_LINK(*pList, pObject)->prevObject;
 }
 
 void* List_GetNth(const List* pList, u16 n) {

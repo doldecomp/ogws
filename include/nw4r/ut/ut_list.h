@@ -58,6 +58,12 @@ inline u16 List_GetSize(const List* pList) {
     return pList->numObjects;
 }
 
+/**
+ * @brief Gets the underlying Link within the specified object.
+ */
+#define NW4R_UT_LIST_GET_LINK(LIST, OBJ)                                       \
+    reinterpret_cast<nw4r::ut::Link*>((u8*)(OBJ) + (LIST).offset)
+
 } // namespace ut
 } // namespace nw4r
 
