@@ -179,7 +179,7 @@ bool Particle::Initialize(u16 life, math::VEC3 pos, math::VEC3 vel,
             }
         }
 
-        if (pSetting->flag & EmitterInheritSetting::FLAG_1) {
+        if (pSetting->flag & EmitterInheritSetting::FLAG_INHERIT_ROT) {
             f32 rad;
 
             rad = pReferencePtcl->mParameter.mRotate.x;

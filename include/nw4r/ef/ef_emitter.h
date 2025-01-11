@@ -18,7 +18,7 @@ namespace ef {
 
 struct EmitterInheritSetting {
     enum Flag {
-        FLAG_1 = (1 << 1),
+        FLAG_INHERIT_ROT = (1 << 1),
     };
 
     s16 speed;       // at 0x0
