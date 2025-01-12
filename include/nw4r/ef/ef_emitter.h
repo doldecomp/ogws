@@ -2,13 +2,12 @@
 #define NW4R_EF_EMITTER_H
 #include <nw4r/types_nw4r.h>
 
-//
-#include "ef_animcurve.h"
-//
-
 #include <nw4r/ef/ef_activitylist.h>
+#include <nw4r/ef/ef_animcurve.h>
+#include <nw4r/ef/ef_emitter.h>
 #include <nw4r/ef/ef_random.h>
 #include <nw4r/ef/ef_referencedobject.h>
+#include <nw4r/ef/ef_types.h>
 
 #include <nw4r/math.h>
 #include <nw4r/ut.h>
@@ -16,172 +15,125 @@
 namespace nw4r {
 namespace ef {
 
+// Forward declarations
+class ParticleManager;
+struct EmitterResource;
+class Effect;
+class EmitterForm;
+class Emitter;
+class Particle;
+
 struct EmitterInheritSetting {
     enum Flag {
         FLAG_INHERIT_ROT = (1 << 1),
     };
 
-    s16 speed;       // at 0x0
-    u8 scale;        // at 0x2
-    u8 alpha;        // at 0x3
-    u8 color;        // at 0x4
-    u8 weight;       // at 0x5
-    u8 type;         // at 0x6
-    u8 flag;         // at 0x7
-    u8 alphaFuncPri; // at 0x8
-    u8 alphaFuncSec; // at 0x9
+    s16 speed; // at 0x0
+    u8 scale;  // at 0x2
+    u8 alpha;  // at 0x3
+    u8 color;  // at 0x4
+    u8 weight; // at 0x5
+    u8 type;   // at 0x6
+    u8 flag;   // at 0x7
 };
 
-// struct EmitterDesc {
-//     UNKWORD FLAGS_0x0;      // at 0x0/0x8
-//     UNKWORD EMFORMTYPE_0x4; // at 0x4/0xc
-//     u16 SHORT_0x8;          // at 0x8/0x10
-//     u16 SHORT_0xA;          // at 0xa/0x12
-//     s8 SBYTE_0xC;           // at 0xc/0x14
-//     s8 SBYTE_0xD;           // at 0xd/0x15
-//     s8 SBYTE_0xE;           // at 0xe/0x16
-//     s8 SBYTE_0xF;           // at 0xf/0x17
-//     float FLOAT_0x10;       // at 0x10/0x18
-//     u16 SHORT_0x14;         // at 0x14/0x1c
-//     u16 SHORT_0x16;         // at 0x16/0x1e
-//     u16 SHORT_0x18;         // at 0x18/0x20
-//     s8 BYTE_0x1A;           // at 0x1a/0x22
-//     s8 BYTE_0x1B;           // at 0x1b/0x23
-//     float FLOAT_0x1C;
-//     float FLOAT_0x20;
-//     float FLOAT_0x24;
-//     float FLOAT_0x28;
-//     float FLOAT_0x2C;
-//     float FLOAT_0x30;
-//     u16 SHORT_0x34;
-//     u8 BYTE_0x36;
-//     u8 BYTE_0x37;
-//     float FLOAT_0x38;
-//     float FLOAT_0x3C;
-//     float FLOAT_0x40;
-//     float FLOAT_0x44;
-//     float FLOAT_0x48;
-//     float FLOAT_0x4C;
-//     float FLOAT_0x50;
-//     float FLOAT_0x54;
-//     float FLOAT_0x58;
-//     float FLOAT_0x5C;
+class EmitterParameter {
+public:
+    enum CommonFlag {
+        CMN_FLAG_DISABLE_DRAW = (1 << 1),
+        CMN_FLAG_DISABLE_CALC = (1 << 9),
+    };
 
-//     float FLOAT_0x60;
-//     float FLOAT_0x64;
-//     float FLOAT_0x68;
-//     float FLOAT_0x6C;
-//     float FLOAT_0x70;
-//     float FLOAT_0x74;
-
-//     float FLOAT_0x78;
-//     float FLOAT_0x7C;
-//     float FLOAT_0x80;
-
-//     u8 BYTE_0x84; // at 0x84/0x8c
-//     u8 BYTE_0x85; // at 0x85/0x8d
-//     u8 BYTE_0x86; // at 0x86/0x8e
-//     UNKWORD WORD_0x88;
-// };
-
-struct EmitTrack {
-    u8 BYTE_0x0;
-    u8 BYTE_0x1;
-    u16 SHORT_0x2;
-
-    u8 BYTE_0x4;
+public:
+    u32 mComFlags;                  // at 0x0
+    u32 mEmitFlags;                 // at 0x4
+    f32 mEmitRatio;                 // at 0x8
+    f32 mEmitRandom;                // at 0xC
+    u16 mEmitInterval;              // at 0x10
+    u16 mEmitEmitDiv;               // at 0x12
+    f32 mEmitIntervalRandom;        // at 0x14
+    f32 mEmitCount;                 // at 0x18
+    u16 mEmitSpan;                  // at 0x1C
+    f32 mLODNear;                   // at 0x20
+    f32 mLODFar;                    // at 0x24
+    f32 mLODMinEmit;                // at 0x28
+    f32 mParams[6];                 // at 0x2C
+    u8 mInherit;                    // at 0x44
+    s8 mInheritTranslate;           // at 0x45
+    s8 mVelInitVelocityRandom;      // at 0x46
+    s8 mVelMomentumRandom;          // at 0x47
+    f32 mVelPowerRadiationDir;      // at 0x48
+    f32 mVelPowerYAxis;             // at 0x4C
+    f32 mVelPowerRandomDir;         // at 0x50
+    f32 mVelPowerNormalDir;         // at 0x54
+    f32 mVelDiffusionEmitterNormal; // at 0x58
+    f32 mVelPowerSpecDir;           // at 0x5C
+    f32 mVelDiffusionSpecDir;       // at 0x60
+    math::VEC3 mVelSpecDir;         // at 0x64
+    math::VEC3 mTranslate;          // at 0x70
+    math::VEC3 mScale;              // at 0x7C
+    math::VEC3 mRotate;             // at 0x88
 };
 
-struct Emitter : ReferencedObject {
-    typedef void (*Action)(void*, u32);
+class Emitter : public ReferencedObject {
+public:
+    EmitterParameter mParameter;           // at 0x20
+    EvaluateStatus mEvalStatus;            // at 0xB4
+    EmitterResource* mResource;            // at 0xB8
+    Effect* mManagerEF;                    // at 0xBC
+    ActivityList mActivityList;            // at 0xC0
+    bool mIsFirstEmission;                 // at 0xDC
+    u16 mWaitTime;                         // at 0xDE
+    u16 mEmitIntervalWait;                 // at 0xE0
+    u32 mTick;                             // at 0xE4
+    u16 mCalcRemain;                       // at 0xE8
+    u16 mRandSeed;                         // at 0xEA
+    Random mRandom;                        // at 0xEC
+    EmitterForm* mForm;                    // at 0xF0
+    Emitter* mParent;                      // at 0xF4
+    Particle* mpReferenceParticle;         // at 0xF8
+    EmitterInheritSetting mInheritSetting; // at 0xFC
+    math::VEC3 mGlobalPosition;            // at 0x108
+    math::VEC3 mPrevGlobalPosition;        // at 0x114
 
-    virtual bool Initialize(Effect*, EmitterResource*, u8); // at 0x10
-    virtual Emitter* CreateEmitter(EmitterResource*, EmitterInheritSetting*,
-                                   Particle*, u16); // at 0x14
-    virtual void CalcEmitter();                     // at 0x18
-    virtual void CalcParticle();                    // at 0x1c
-    virtual void CalcEmission();                    // at 0x20
-    virtual void CalcBillboard();                   // at 0x24
+protected:
+    bool mMtxDirty; // at 0x120
 
-    u32 mFlags;
-    UNKWORD WORD_0x24;
+public:
+    math::MTX34 mMtx; // at 0x124
 
-    // char UNK_0x28[0x8C];
-    float FLOAT_0x28;
-    float FLOAT_0x2C;
-    short SHORT_0x30;
-    short SHORT_0x32;
-    float FLOAT_0x34;
-    float FLOAT_0x38;
-    short SHORT_0x3C;
-    float FLOAT_0x40;
-    float FLOAT_0x44;
-    float FLOAT_0x48;
-    float FLOAT_0x4C;
-    float FLOAT_0x50;
-    float FLOAT_0x54;
-    float FLOAT_0x58;
-    float FLOAT_0x5C;
-    float FLOAT_0x60;
+public:
+    Emitter();
+    ~Emitter();
 
-    u8 BYTE_0x64;
-    s8 BYTE_0x65;
-    u8 BYTE_0x66;
-    s8 BYTE_0x67;
+    virtual void SendClosing(); // at 0x8
+    virtual void DestroyFunc(); // at 0xC
 
-    float FLOAT_0x68;
-    float FLOAT_0x6C;
-    float FLOAT_0x70;
-    float FLOAT_0x74;
-    float FLOAT_0x78;
-    float FLOAT_0x7C;
-    float FLOAT_0x80;
-    float FLOAT_0x84;
-    float FLOAT_0x88;
-    float FLOAT_0x8C;
-    /*
-    float FLOAT_0x90;
-    float FLOAT_0x94;
-    float FLOAT_0x98;
-    */
-    math::VEC3 VEC_0x90;
-    /*
-    float FLOAT_0x9C;
-    float FLOAT_0xA0;
-    float FLOAT_0xA4;
-    */
-    math::VEC3 VEC_0x9C;
-    /*
-    float FLOAT_0xA8;
-    float FLOAT_0xAC;
-    float FLOAT_0xB0;
-    */
-    math::VEC3 VEC_0xA8;
+    virtual bool Initialize(Effect* pParent, EmitterResource* pResource,
+                            u8 drawWeight); // at 0x10
 
-    UNKWORD WORD_0xB4;
-    EmitterResource* mResource; // at 0xb8
-    Effect* mManagerEF;         // at 0xbc
-    ActivityList mManagers;     // at 0xc0
-    char UNK_0xDA[0x2];
-    u8 BYTE_0xDC;
-    u16 SHORT_0xDE;
-    u16 SHORT_0xE0;
-    UNKWORD WORD_0xE4;
-    u16 SHORT_0xE8;
-    u16 SHORT_0xEA;
-    Random mRandom;     // at 0xec
-    EmitterForm* mForm; // at 0xf0
-    Emitter* mParent;   // at 0xf4
-    Particle* REF_0xF8; // at 0xf8
+    virtual Emitter* CreateEmitter(EmitterResource* pResource,
+                                   EmitterInheritSetting* pSetting,
+                                   Particle* pParticle,
+                                   u16 calcRemain); // at 0x14
 
-    EmitterInheritSetting mInheritSettings; // at 0xfc
+    virtual void CalcEmitter();   // at 0x18
+    virtual void CalcParticle();  // at 0x1c
+    virtual void CalcEmission();  // at 0x20
+    virtual void CalcBillboard(); // at 0x24
 
-    bool mMtxDirtyFlag; // at 0x104
+    bool GetFlagDisableCalc() const {
+        return mParameter.mComFlags & EmitterParameter::CMN_FLAG_DISABLE_CALC;
+    }
 
-    math::MTX34 mGlobalMtx; // at 0x108
+    void SetTranslate(const math::VEC3& rTrans) {
+        mParameter.mTranslate = rTrans;
+    }
+    void SetScale(const math::VEC3& rScale) {
+        mParameter.mScale = rScale;
+    }
 
-    // Emitter();
-    // ~Emitter();
+    //////////////////////////////////////////////!
 
     // u16 RetireParticleAll();
     // virtual bool SendClosing();
@@ -195,18 +147,21 @@ struct Emitter : ReferencedObject {
     // u8); UNKTYPE CreateEmitterTmp(EmitterResource*, EmitterInheritSetting*,
     //                          Particle*, u16);
 
-    // float GetLODratio(math::VEC3&, math::VEC3&, float, float, float, float);
+    // f32 GetLODratio(math::VEC3&, math::VEC3&, f32, f32, f32, f32);
 
     // u16 ForeachParticleManager(Action, u32, bool, bool);
 
     // UNKTYPE Emission(ParticleManager*, const math::MTX34*);
 
     math::MTX34* CalcGlobalMtx(math::MTX34*);
+
+    void Closing(ParticleManager*);
+
     // UNKTYPE SetMtxDirty();
 
-    // static math::MTX34* RestructMatrix(math::MTX34*, math::MTX34*, bool,
-    // bool,
-    //                                    s8);
+    static math::MTX34* RestructMatrix(math::MTX34* pResult, math::MTX34* pOrig,
+                                       bool isInheritS, bool isInheritR,
+                                       s8 inheritT);
 
     // u16 GetNumParticleManager() const;
     // ParticleManager* GetParticleManager(u16);
@@ -215,6 +170,7 @@ struct Emitter : ReferencedObject {
     //     return mFlags & 0x200;
     // }
 };
+
 } // namespace ef
 } // namespace nw4r
 

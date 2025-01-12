@@ -1,20 +1,34 @@
-#ifndef NW4R_EF_DRAWORDER
-#define NW4R_EF_DRAWORDER
-#include "types_nw4r.h"
-#include "ef_particlemanager.h"
-#include "ef_draworderbase.h"
+#ifndef NW4R_EF_DRAW_ORDER_H
+#define NW4R_EF_DRAW_ORDER_H
+#include <nw4r/types_nw4r.h>
 
-namespace nw4r
-{
-	namespace ef
-	{
-		struct DrawOrder : DrawOrderBase
-		{
-			virtual void Draw(Effect *, const DrawInfo &);
-			virtual void Add(Effect *, ParticleManager *);
-			virtual void Remove(Effect *, ParticleManager *);
-		};
-	}
-}
+namespace nw4r {
+namespace ef {
+
+// Forward declarations
+class Effect;
+class ParticleManager;
+class DrawInfo;
+
+class DrawOrderBase {
+public:
+    DrawOrderBase() {}
+
+    virtual void Add(Effect* pEffect, ParticleManager* pManager) = 0; // at 0x8
+    virtual void Remove(Effect* pEffect,
+                        ParticleManager* pManager) = 0;            // at 0xC
+    virtual void Draw(Effect* pEffect, const DrawInfo& rInfo) = 0; // at 0x10
+};
+
+class DrawOrder : public DrawOrderBase {
+public:
+    virtual void Add(Effect* pEffect, ParticleManager* pManager) = 0; // at 0x8
+    virtual void Remove(Effect* pEffect,
+                        ParticleManager* pManager) = 0;            // at 0xC
+    virtual void Draw(Effect* pEffect, const DrawInfo& rInfo) = 0; // at 0x10
+};
+
+} // namespace ef
+} // namespace nw4r
 
 #endif

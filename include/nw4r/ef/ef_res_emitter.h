@@ -56,8 +56,19 @@ struct Lighting {
 
 struct EmitterDrawSetting {
     enum Flag {
+        FLAG_10 = (1 << 10),
+
         FLAG_XY_SAME_SIZE = (1 << 13),
         FLAG_XY_SAME_SCALE = (1 << 14),
+    };
+
+    enum AlphaFlickType {
+        ALPHAFLICK_NONE,
+        ALPHAFLICK_TRIANGLE,
+        ALPHAFLICK_SAWTOOTH1, // Inverse sawtooth wave
+        ALPHAFLICK_SAWTOOTH2,
+        ALPHAFLICK_SQUARE,
+        ALPHAFLICK_SINE
     };
 
     u16 mFlags;                     // at 0x0
@@ -67,34 +78,34 @@ struct EmitterDrawSetting {
     u8 mNumTevs;                    // at 0x5
     u8 mFlagClamp;                  // at 0x6
     u8 mIndirectTargetStage;        // at 0x7
-    TevStageColor mTevColor[4];     // at 0xC
-    TevStageColorOp mTevColorOp[4]; // at 0x1C
-    TevStageAlpha mTevAlpha[4];     // at 0x30
-    TevStageColorOp mTevAlphaOp[4]; // at 0x40
-    u8 mTevKColorSel[4];            // at 0x54
-    u8 mTevKAlphaSel[4];            // at 0x58
-    BlendMode mBlendMode;           // at 0x5C
-    ColorInput mColorInput;         // at 0x60
-    u8 mZCompareFunc;               // at 0x70
-    u8 mAlphaFlickType;             // at 0x71
-    u16 mAlphaFlickCycle;           // at 0x72
-    u8 mAlphaFlickRandom;           // at 0x74
-    u8 mAlphaFlickAmplitude;        // at 0x75
-    Lighting mLighting;             // at 0x76
-    f32 mIndTexOffsetMtx[2][3];     // at 0x90
-    s8 mIndTexScaleExp;             // at 0xA8
-    s8 pivotX;                      // at 0xA9
-    s8 pivotY;                      // at 0xAA
+    TevStageColor mTevColor[4];     // at 0x8
+    TevStageColorOp mTevColorOp[4]; // at 0x18
+    TevStageAlpha mTevAlpha[4];     // at 0x2C
+    TevStageColorOp mTevAlphaOp[4]; // at 0x3C
+    u8 mTevKColorSel[4];            // at 0x50
+    u8 mTevKAlphaSel[4];            // at 0x54
+    BlendMode mBlendMode;           // at 0x58
+    ColorInput mColorInput;         // at 0x6C
+    u8 mZCompareFunc;               // at 0x64
+    u8 mAlphaFlickType;             // at 0x65
+    u16 mAlphaFlickCycle;           // at 0x66
+    u8 mAlphaFlickRandom;           // at 0x68
+    u8 mAlphaFlickAmplitude;        // at 0x69
+    Lighting mLighting;             // at 0x6C
+    f32 mIndTexOffsetMtx[2][3];     // at 0x88
+    s8 mIndTexScaleExp;             // at 0xA0
+    s8 pivotX;                      // at 0xA1
+    s8 pivotY;                      // at 0xA2
+    u8 PADDING_0xA3;                // at 0xA3
+    u8 ptcltype;                    // at 0xA4
+    u8 typeOption;                  // at 0xA5
+    u8 typeDir;                     // at 0xA6
+    u8 typeAxis;                    // at 0xA7
+    u8 typeOption0;                 // at 0xA8
+    u8 typeOption1;                 // at 0xA9
+    u8 typeOption2;                 // at 0xAA
     u8 PADDING_0xAB;                // at 0xAB
-    u8 ptcltype;                    // at 0xAC
-    u8 typeOption;                  // at 0xAD
-    u8 typeDir;                     // at 0xAE
-    u8 typeAxis;                    // at 0xAF
-    u8 typeOption0;                 // at 0xB0
-    u8 typeOption1;                 // at 0xB1
-    u8 typeOption2;                 // at 0xB2
-    u8 PADDING_0xB3;                // at 0xB3
-    f32 zOffset;                    // at 0xB4
+    f32 zOffset;                    // at 0xAC
 };
 
 struct EmitterDesc {

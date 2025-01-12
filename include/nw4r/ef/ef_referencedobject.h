@@ -49,6 +49,10 @@ public:
     void Destroy() {
         DestroyFunc();
         mLifeStatus = NW4R_EF_LS_WAIT;
+
+        if (mRefCount == 0) {
+            SendClosing();
+        }
     }
 
     u32 Ref() {

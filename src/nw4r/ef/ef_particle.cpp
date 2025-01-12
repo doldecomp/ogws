@@ -216,7 +216,7 @@ void Particle::Draw_GetColor(int layer, GXColor* pColorPri,
     u16 pos;
     s16 alpha;
 
-    if (rSetting.mAlphaFlickType != ALPHA_FLICK_NONE) {
+    if (rSetting.mAlphaFlickType != EmitterDrawSetting::ALPHAFLICK_NONE) {
         cycleL = rSetting.mAlphaFlickCycle +
                  rSetting.mAlphaFlickCycle * mParameter.mAlphaFlickRnd *
                      rSetting.mAlphaFlickRandom / 12700;
@@ -231,7 +231,7 @@ void Particle::Draw_GetColor(int layer, GXColor* pColorPri,
         alpha = 0;
 
         switch (rSetting.mAlphaFlickType) {
-        case ALPHA_FLICK_TRIANGLE: {
+        case EmitterDrawSetting::ALPHAFLICK_TRIANGLE: {
             if (pos * 2 <= cycle) {
                 alpha = 128 - rSetting.mAlphaFlickAmplitude +
                         rSetting.mAlphaFlickAmplitude * (pos * 4) / cycle;
@@ -242,19 +242,19 @@ void Particle::Draw_GetColor(int layer, GXColor* pColorPri,
             break;
         }
 
-        case ALPHA_FLICK_SAWTOOTH_INV: {
+        case EmitterDrawSetting::ALPHAFLICK_SAWTOOTH1: {
             alpha = 128 + rSetting.mAlphaFlickAmplitude +
                     -(rSetting.mAlphaFlickAmplitude * pos * 2) / cycle;
             break;
         }
 
-        case ALPHA_FLICK_SAWTOOTH: {
+        case EmitterDrawSetting::ALPHAFLICK_SAWTOOTH2: {
             alpha = 128 - rSetting.mAlphaFlickAmplitude +
                     rSetting.mAlphaFlickAmplitude * (pos * 2) / cycle;
             break;
         }
 
-        case ALPHA_FLICK_SQUARE: {
+        case EmitterDrawSetting::ALPHAFLICK_SQUARE: {
             if (pos * 2 <= cycle) {
                 alpha = 128 + rSetting.mAlphaFlickAmplitude;
             } else {
@@ -263,7 +263,7 @@ void Particle::Draw_GetColor(int layer, GXColor* pColorPri,
             break;
         }
 
-        case ALPHA_FLICK_SINE: {
+        case EmitterDrawSetting::ALPHAFLICK_SINE: {
             alpha = 128 + rSetting.mAlphaFlickAmplitude *
                               std::sinf(2 * NW4R_MATH_PI * pos / cycle);
             break;

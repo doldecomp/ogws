@@ -37,6 +37,15 @@ enum TextureLayer {
     TEX_LAYER_MAX
 };
 
+enum EvaluateStatus {
+    NW4R_EF_ES_WAIT,
+    NW4R_EF_ES_DONE,
+    NW4R_EF_ES_STOP,
+    NW4R_EF_ES_SKIP,
+};
+
+typedef void (*ModifierTravFunc)(void* pObject, u32 arg);
+
 inline u8 ConvertF32RadToU8(f32 rad) {
     rad = math::FCeil(rad / NW4R_MATH_PI * 128.0f - 0.5f);
     return static_cast<int>(rad) % 256;

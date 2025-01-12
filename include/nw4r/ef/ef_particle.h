@@ -18,13 +18,6 @@ namespace ef {
 struct EmitterInheritSetting;
 struct TextureData;
 
-enum EvaluateStatus {
-    NW4R_EF_ES_WAIT,
-    NW4R_EF_ES_DONE,
-    NW4R_EF_ES_STOP,
-    NW4R_EF_ES_SKIP,
-};
-
 struct ParticleParameterDesc {
     GXColor mColor[COLOR_LAYER_MAX][COLOR_IDX_MAX]; // at 0x0
     math::VEC2 size;                                // at 0x10
@@ -70,34 +63,7 @@ public:
 };
 
 class Particle : public ReferencedObject {
-private:
-    enum TextureReverseFlag {
-        TEX_REVERSE_S = (1 << 0),
-        TEX_REVERSE_T = (1 << 1),
-        TEX_REVERSE_ST = TEX_REVERSE_S | TEX_REVERSE_T,
-
-        // 1 bit for each S/T
-        NUM_OF_TEX_REVERSE = 2
-    };
-
-    enum TextureWrapFlag {
-        TEX_WRAP_MASK = (1 << 0) | (1 << 1),
-
-        // 2 bits for each S/T
-        NUM_OF_TEX_WRAP_S = 2,
-        NUM_OF_TEX_WRAP_T = 2,
-
-        NUM_OF_TEX_WRAP_ST = 4
-    };
-
-    enum AlphaFlickType {
-        ALPHA_FLICK_NONE,
-        ALPHA_FLICK_TRIANGLE,
-        ALPHA_FLICK_SAWTOOTH_INV,
-        ALPHA_FLICK_SAWTOOTH,
-        ALPHA_FLICK_SQUARE,
-        ALPHA_FLICK_SINE
-    };
+    friend class ParticleManager;
 
 public:
     ParticleParameter mParameter;      // at 0x20
@@ -278,6 +244,26 @@ public:
         mParameter.mPosition.z += pDelta->z * mParameter.mMomentum;
         return mParameter.mPosition;
     }
+
+private:
+    enum TextureReverseFlag {
+        TEX_REVERSE_S = (1 << 0),
+        TEX_REVERSE_T = (1 << 1),
+        TEX_REVERSE_ST = TEX_REVERSE_S | TEX_REVERSE_T,
+
+        // 1 bit for each S/T
+        NUM_OF_TEX_REVERSE = 2
+    };
+
+    enum TextureWrapFlag {
+        TEX_WRAP_MASK = (1 << 0) | (1 << 1),
+
+        // 2 bits for each S/T
+        NUM_OF_TEX_WRAP_S = 2,
+        NUM_OF_TEX_WRAP_T = 2,
+
+        NUM_OF_TEX_WRAP_ST = 4
+    };
 };
 
 } // namespace ef
