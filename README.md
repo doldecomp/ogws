@@ -69,17 +69,16 @@ Building
   git clone https://github.com/doldecomp/ogws.git
   ```
 
-- Using [Dolphin Emulator](https://dolphin-emu.org/), navigate to `Data Partition` -> `Extract System Data...` and extract to `orig/RSPE01_01`.
-![](assets/dolphin-extract.png)
-  - To save space, the only necessary files are the following. Any others can be deleted.
-    - `sys/main.dol`
+- Copy your game's disc image to `orig/RSPE01_01`.
+  - Supported formats: ISO (GCM), RVZ, WIA, WBFS, CISO, NFS, GCZ, TGC
+  - After the initial build, the disc image can be deleted to save space.
+
 - Configure:
 
   ```sh
   python configure.py
   ```
 
-  To use a version other than `RSPE01_01` (USA Rev 1), specify it with `--version`.
 - Build:
 
   ```sh

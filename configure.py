@@ -15,7 +15,15 @@
 import argparse
 import sys
 from pathlib import Path
-from tools.project import *
+
+from tools.project import (
+    Object,
+    ProgressCategory,
+    ProjectConfig,
+    calculate_progress,
+    generate_build,
+    is_windows,
+)
 
 # Game versions
 DEFAULT_VERSION = 0
@@ -104,6 +112,12 @@ parser.add_argument(
     action="store_true",
     help="builds equivalent (but non-matching) or modded objects",
 )
+parser.add_argument(
+    "--no-progress",
+    dest="progress",
+    action="store_false",
+    help="disable progress calculation",
+)
 args = parser.parse_args()
 
 config = ProjectConfig()
@@ -119,6 +133,7 @@ config.compilers_path = args.compilers
 config.generate_map = args.map
 config.non_matching = args.non_matching
 config.sjiswrap_path = args.sjiswrap
+config.progress = args.progress
 if not is_windows():
     config.wrapper = args.wrapper
 # Don't build asm unless we're --non-matching
@@ -128,9 +143,9 @@ if not config.non_matching:
 # Tool versions
 config.binutils_tag = "2.42-1"
 config.compilers_tag = "20240706"
-config.dtk_tag = "v0.9.6"
-config.objdiff_tag = "v2.0.0-beta.6"
-config.sjiswrap_tag = "v1.1.1"
+config.dtk_tag = "v1.3.0"
+config.objdiff_tag = "v2.6.0"
+config.sjiswrap_tag = "v1.2.0"
 config.wibo_tag = "0.6.11"
 
 # Project
@@ -141,7 +156,7 @@ config.asflags = [
     "--strip-local-absolute",
     "-I include",
     f"-I build/{config.version}/include",
-    f"--defsym version={version_num}",
+    f"--defsym BUILD_VERSION={version_num}",
 ]
 config.ldflags = [
     "-fp hardware",
@@ -152,8 +167,13 @@ if args.debug:
 if args.map:
     config.ldflags.append("-mapunused")
     config.ldflags.append("-listclosure")
+
 # Use for any additional files that should cause a re-configure when modified
 config.reconfig_deps = []
+
+# Optional numeric ID for decomp.me preset
+# Can be overridden in libraries or objects
+config.scratch_preset_id = None
 
 # Base flags, common to most GC/Wii games.
 # Generally leave untouched, with overrides added below.
@@ -341,8 +361,13 @@ config.linker_version = "GC/3.0a5.2"
 
 Matching = True                   # Object matches and should be linked
 NonMatching = False               # Object does not match and should not be linked
-# Object should be linked when configured with --non-matching
-Equivalent = config.non_matching
+Equivalent = config.non_matching  # Object should be linked when configured with --non-matching
+
+
+# Object is only matching for specific versions
+def MatchingFor(*versions):
+    return config.version in versions
+
 
 config.warn_missing_config = False  # TODO enable
 config.warn_missing_source = False
@@ -990,7 +1015,7 @@ config.libs = [
         "lib": "RP",
         "mw_version": config.linker_version,
         "cflags": cflags_rp,
-        "progress_category": "game",
+        # "progress_category": "game",
         "objects": [
             Object(NonMatching, "RP/RPKernel/RPSysSystem.c"),
             Object(NonMatching, "main.c"),
