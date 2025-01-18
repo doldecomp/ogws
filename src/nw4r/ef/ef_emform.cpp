@@ -1,3 +1,5 @@
+// clang-format off
+/*
 #include "ef_emform.h"
 #include "ef_emitterform.h"
 #include "ef_disc.h"
@@ -44,3 +46,4 @@ namespace nw4r
 		}
 	}
 }
+*/

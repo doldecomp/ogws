@@ -1,3 +1,5 @@
+// clang-format off
+/*
 #pragma ipa file
 
 #include "ef_drawstrategybuilder.h"
@@ -46,3 +48,4 @@ namespace nw4r
 		}		
 	}
 }
+*/

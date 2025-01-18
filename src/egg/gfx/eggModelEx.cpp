@@ -115,7 +115,8 @@ void ModelEx::getShapeMinMax(u16 shapeIndex, math::VEC3* pMin, math::VEC3* pMax,
 
 void ModelEx::setVisible(bool vis) {
     if (mScnObj != NULL)
-        mScnObj->SetScnObjOption(g3d::ScnObj::OPTION_VISIBLE, !vis);
+        mScnObj->SetScnObjOption(g3d::ScnObj::OPTION_DISABLE_GATHER_SCNOBJ,
+                                 !vis);
 }
 
 void ModelEx::calcWorld(math::MTX34* pWorldMtxArray) const {
@@ -209,7 +210,7 @@ void ModelEx::drawShapeDirectly(u32 drawFlag, bool drawOpa, bool drawXlu,
         } else {
             g3d::DrawResMdlReplacement* replacement =
                 (getScnMdl() == NULL) ? NULL
-                                      : getScnMdl()->GetDrawResMdlReplacement();
+                                      : &getScnMdl()->GetDrawResMdlReplacement();
             const u8* byteCodeXlu =
                 (drawXlu) ? getScnMdlSimple()->GetByteCode(
                                 g3d::ScnMdlSimple::BYTE_CODE_DRAW_XLU)
