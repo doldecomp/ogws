@@ -1,3 +1,5 @@
+// clang-format off
+/*
 #include "ef_draworder.h"
 #include "ef_effect.h"
 
@@ -38,3 +40,4 @@ namespace nw4r
 		}
 	}
 }
+*/

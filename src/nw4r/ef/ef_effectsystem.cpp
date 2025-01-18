@@ -1,3 +1,5 @@
+// clang-format off
+/*
 #include <revolution/OS/OS.h>
 #include "ef_effectsystem.h"
 #include "ef_effect.h"
@@ -195,3 +197,4 @@ namespace nw4r
 		EffectSystem EffectSystem::instance;
 	}
 }
+*/

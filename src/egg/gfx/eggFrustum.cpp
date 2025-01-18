@@ -144,11 +144,11 @@ namespace EGG
                 mProjType = PROJ_PERSP;
                 if ((flags & 0x1) == 0)
                 {
-                    SetFovY(result.FLOAT_0x30);
+                    SetFovY(result.perspFovy);
                 }
                 if ((flags & 0x2) == 0)
                 {
-                    SetSizeX(mSize.y * result.FLOAT_0x14);                    
+                    SetSizeX(mSize.y * result.aspect);                    
                     mScale = math::VEC3(1.0f, 1.0f, 1.0f);
                 }
                 break;
@@ -162,8 +162,8 @@ namespace EGG
                         mFlags |= 0x1;
                     }
 
-                    SetSizeY(result.FLOAT_0x30);
-                    SetSizeX(mSize.y * result.FLOAT_0x14);
+                    SetSizeY(result.perspFovy);
+                    SetSizeX(mSize.y * result.aspect);
                     mScale = math::VEC3(1.0f, 1.0f, 1.0f);
                     mOffset = math::VEC2(0.0f, 0.0f);
                 }
@@ -176,8 +176,8 @@ namespace EGG
 
         if ((flags & 0x4) == 0)
         {
-            mNearZ = result.FLOAT_0x18;
-            mFarZ = result.FLOAT_0x1C;
+            mNearZ = result.near;
+            mFarZ = result.far;
         }
     }
 

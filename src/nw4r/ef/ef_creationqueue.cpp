@@ -1,3 +1,5 @@
+// clang-format off
+/*
 #include "ef_creationqueue.h"
 #include "ef_emitter.h"
 #include "ef_particle.h"
@@ -65,3 +67,4 @@ namespace nw4r
 		}
 	}
 }
+*/

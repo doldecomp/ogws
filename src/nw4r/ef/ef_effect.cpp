@@ -1,3 +1,5 @@
+// clang-format off
+/*
 #include "types_nw4r.h"
 #include "ef_effect.h"
 #include "ef_effectsystem.h"
@@ -388,3 +390,4 @@ namespace nw4r
 		}
 	}
 }
+*/

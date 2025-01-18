@@ -1,3 +1,5 @@
+// clang-format off
+/*
 #include "ef_handle.h"
 
 namespace nw4r
@@ -39,3 +41,4 @@ namespace nw4r
 		}
 	}
 }
+*/

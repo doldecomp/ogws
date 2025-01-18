@@ -6,7 +6,7 @@
 
 namespace EGG
 {
-    static const nw4r::ef::HandleBase cInvalidHandle;
+    static const nw4r::ef::HandleBase cInvalidHandle(NULL);
 }
 
 #endif
