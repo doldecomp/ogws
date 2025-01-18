@@ -2,6 +2,8 @@
 #define NW4R_EF_RES_EMITTER_H
 #include <nw4r/types_nw4r.h>
 
+#include <nw4r/ef/ef_emform.h>
+
 #include <nw4r/math.h>
 
 namespace nw4r {
@@ -145,6 +147,10 @@ struct EmitterDesc {
     u32 randomSeed;                 // at 0x88
     u8 userdata[8];                 // at 0x8C
     EmitterDrawSetting drawSetting; // at 0x94
+
+    EmitFormType GetFormType() {
+        return static_cast<EmitFormType>(static_cast<u8>(emitFlag));
+    }
 };
 
 struct EmitterResource {
@@ -159,17 +165,56 @@ public:
         return reinterpret_cast<EmitterDesc*>(reinterpret_cast<u8*>(this) +
                                               sizeof(EmitterResource));
     }
-    u8* SkipEmitterDesc() {
-        u8* pPtr = reinterpret_cast<u8*>(this) +
-                   (sizeof(EmitterResource) + headersize);
 
+    u8* SkipEmitterDesc() {
+        u8* pPtr = reinterpret_cast<u8*>(this);
+        pPtr += headersize + sizeof(EmitterResource);
         return pPtr;
     }
 
     ParticleParameterDesc* GetParticleParameterDesc() {
         u8* pPtr = SkipEmitterDesc();
-        pPtr += 4; // TODO: 4???
+        pPtr += sizeof(u32); // Skip the section size
         return reinterpret_cast<ParticleParameterDesc*>(pPtr);
+    }
+
+    u8* SkipParticleParameterDesc() {
+        u8* pPtr = SkipEmitterDesc();
+        pPtr += *reinterpret_cast<u32*>(pPtr) + sizeof(u32);
+        return pPtr;
+    }
+
+    u8** GetEmitTrackTbl() {
+        u8* pPtr = SkipParticleParameterDesc();
+        u16 numPtclTrack = *reinterpret_cast<const u16*>(pPtr);
+        pPtr += 4 + numPtclTrack * 8;
+        u8** tbl = reinterpret_cast<u8**>(pPtr + sizeof(u16) * 2);
+        return tbl;
+    }
+
+    u8* GetEmitTrack(u16 num) {
+        u8** tbl = GetEmitTrackTbl();
+        // "num < NumEmitTrack()"
+        return tbl[num];
+    }
+
+    u16 NumEmitTrack() {
+        const u8* pPtr = SkipParticleParameterDesc();
+        u16 numPtclTrack = *reinterpret_cast<const u16*>(pPtr);
+        // TODO magic constants
+        pPtr += 4 + numPtclTrack * 8;
+        u16 numEmitTrack = *reinterpret_cast<const u16*>(pPtr);
+        return numEmitTrack;
+    }
+
+    u16 NumEmitInitTrack() {
+        const u8* pPtr = SkipParticleParameterDesc();
+        u16 numPtclTrack = *reinterpret_cast<const u16*>(pPtr);
+        // TODO magic constants
+        pPtr += 4 + numPtclTrack * 8;
+        // Skip the total count, see NumEmitTrack
+        u16 numEmitTrack = *reinterpret_cast<const u16*>(pPtr + sizeof(u16));
+        return numEmitTrack;
     }
 
     EmitterDrawSetting* GetEmitterDrawSetting() {

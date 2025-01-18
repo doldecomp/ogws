@@ -234,7 +234,7 @@ public:
     }
 
     math::VEC3& GetMoveDir(math::VEC3* pDir) {
-        *pDir = -mParameter.mPosition;
+        *pDir = mParameter.mPosition - mParameter.mPrevPosition;
         return *pDir;
     }
 

@@ -32,4 +32,8 @@
 #define __declspec(x)
 #endif
 
+#ifdef __cplusplus
+#define static_assert(cond) __static_assert(cond, #cond)
+#endif
+
 #endif

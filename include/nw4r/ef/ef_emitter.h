@@ -15,6 +15,10 @@
 namespace nw4r {
 namespace ef {
 
+// For now
+#define NW4R_EF_MAX_EMITTER 1024
+#define NW4R_EF_MAX_PARTICLEMANAGER 1024
+
 // Forward declarations
 class ParticleManager;
 struct EmitterResource;
@@ -93,14 +97,12 @@ public:
     Emitter* mParent;                      // at 0xF4
     Particle* mpReferenceParticle;         // at 0xF8
     EmitterInheritSetting mInheritSetting; // at 0xFC
-    math::VEC3 mGlobalPosition;            // at 0x108
-    math::VEC3 mPrevGlobalPosition;        // at 0x114
 
 protected:
-    bool mMtxDirty; // at 0x120
+    bool mMtxDirty; // at 0x104
 
 public:
-    math::MTX34 mMtx; // at 0x124
+    math::MTX34 mMtx; // at 0x108
 
 public:
     Emitter();
@@ -135,41 +137,30 @@ public:
 
     //////////////////////////////////////////////!
 
-    // u16 RetireParticleAll();
-    // virtual bool SendClosing();
-    // virtual void DestroyFunc();
-    // bool Closing(ParticleManager*);
-    // bool RetireParticleManager(ParticleManager*);
-    // u16 RetireParticleManagerAll();
-    // bool InitializeDatas(EmitterResource*, Effect*);
+    u32 RetireParticleAll();
+    bool Closing(ParticleManager*);
+    u32 RetireParticleManager(ParticleManager*);
+    u32 RetireParticleManagerAll();
+    void UpdateDatas(EmitterResource*);
+    bool InitializeDatas(EmitterResource*, Effect*);
 
-    // ParticleManager* FindParticleManager(EmitterResource*, bool, bool, s8,
-    // u8); UNKTYPE CreateEmitterTmp(EmitterResource*, EmitterInheritSetting*,
-    //                          Particle*, u16);
-
-    // f32 GetLODratio(math::VEC3&, math::VEC3&, f32, f32, f32, f32);
-
-    // u16 ForeachParticleManager(Action, u32, bool, bool);
-
-    // UNKTYPE Emission(ParticleManager*, const math::MTX34*);
+    void CreateEmitterTmp(EmitterResource*, EmitterInheritSetting*, Particle*,
+                          u16);
+    ParticleManager* FindParticleManager(EmitterResource*, bool, bool, s8, u8);
+    void Emission(nw4r::ef::ParticleManager*, const nw4r::math::MTX34*);
 
     math::MTX34* CalcGlobalMtx(math::MTX34*);
+    void SetMtxDirty();
+    u32 ForeachEmitter(void (*)(void*, u32), u32, bool);
+    u32 ForeachParticleManager(void (*)(void*, u32), u32, bool, bool);
 
-    void Closing(ParticleManager*);
+    static math::MTX34* RestructMatrix(math::MTX34*, math::MTX34*, bool, bool,
+                                       s8);
 
-    // UNKTYPE SetMtxDirty();
-
-    static math::MTX34* RestructMatrix(math::MTX34* pResult, math::MTX34* pOrig,
-                                       bool isInheritS, bool isInheritR,
-                                       s8 inheritT);
-
-    // u16 GetNumParticleManager() const;
-    // ParticleManager* GetParticleManager(u16);
-
-    // inline bool GetFlagDisableCalc() const {
-    //     return mFlags & 0x200;
-    // }
+    u16 GetNumParticleManager() const;
+    ParticleManager* GetParticleManager(u16);
 };
+static_assert(sizeof(Emitter) == 0x138);
 
 } // namespace ef
 } // namespace nw4r

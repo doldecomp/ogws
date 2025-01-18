@@ -8,6 +8,9 @@ namespace nw4r {
 namespace ef {
 
 u16 UtlistToArray(const ut::List* pList, void** ppArray, int maxlen);
+inline u16 UtlistSize(const ut::List* pList) {
+    return pList->numObjects;
+}
 
 math::VEC3& Rotation2VecY(const math::VEC3& rRot, math::VEC3* pVec);
 void GetDirMtxY(math::MTX34* pMtx, const math::VEC3& rVec);
