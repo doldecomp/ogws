@@ -31,11 +31,14 @@ private:
     };
 
     struct CallBack {
-        // TODO: Name the parameters
-        typedef void (*PrevEmissionFunc)(Emitter*, ParticleManager*, int*, u32*,
-                                         f32 (*)[6], u16*, f32*, math::MTX34*);
+        typedef void (*PrevEmissionFunc)(Emitter* pEmitter,
+                                         ParticleManager* pManager, int* pCount,
+                                         u32* pFlags,
+                                         f32 (*pParams)[NUM_PARAMS], u16* pLife,
+                                         f32* pLifeRnd, math::MTX34* pSpace);
 
-        typedef void (*PtclCalcFunc)(ParticleManager*, ut::List*, Particle*);
+        typedef void (*PtclCalcFunc)(ParticleManager* pManager, ut::List* pList,
+                                     Particle* pParticle);
 
         PrevEmissionFunc mPrevEmission; // at 0x0
         PtclCalcFunc mPrevPtclCalc;     // at 0x4
@@ -154,8 +157,8 @@ public:
     u16 RetireParticleAll();
     u16 GetNumEmitter() const;
     Emitter* GetEmitter(u16);
-    u16 ForeachParticleManager(ModifierTravFunc, u32, bool);
-    u16 ForeachEmitterFrom(ModifierTravFunc, u32, bool, Emitter*);
+    u16 ForeachParticleManager(ForEachFunc, u32, bool);
+    u16 ForeachEmitterFrom(ForEachFunc, u32, bool, Emitter*);
     UNKTYPE SetRootMtx(const math::MTX34&);
 };
 

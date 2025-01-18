@@ -59,10 +59,44 @@ inline u16 List_GetSize(const List* pList) {
 }
 
 /**
- * @brief Gets the underlying Link within the specified object.
+ * Gets the underlying Link within the specified object.
  */
 #define NW4R_UT_LIST_GET_LINK(LIST, OBJ)                                       \
     reinterpret_cast<nw4r::ut::Link*>((u8*)(OBJ) + (LIST).offset)
+
+/**
+ * List for-each macro.
+ *
+ * Access the current element with "it"
+ */
+#define NW4R_UT_LIST_FOREACH(T, LIST, ...)                                     \
+    {                                                                          \
+        for (T* it = static_cast<T*>(nw4r::ut::List_GetFirst(&(LIST)));        \
+             it != NULL;                                                       \
+             it = static_cast<T*>(nw4r::ut::List_GetNext(&(LIST), it))) {      \
+                                                                               \
+            __VA_ARGS__;                                                       \
+        }                                                                      \
+    }
+
+/**
+ * List for-each macro, with robust iteration.
+ *
+ * Access the current element with "it"
+ */
+#define NW4R_UT_LIST_FOREACH_SAFE(T, LIST, ...)                                \
+    {                                                                          \
+        T* it;                                                                 \
+        T* impl;                                                               \
+                                                                               \
+        for (it = static_cast<T*>(nw4r::ut::List_GetFirst(&(LIST)));           \
+             it != NULL; it = impl) {                                          \
+                                                                               \
+            impl = static_cast<T*>(nw4r::ut::List_GetNext(&(LIST), it));       \
+                                                                               \
+            __VA_ARGS__;                                                       \
+        }                                                                      \
+    }
 
 } // namespace ut
 } // namespace nw4r

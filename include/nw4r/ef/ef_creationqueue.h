@@ -3,6 +3,7 @@
 #include <nw4r/types_nw4r.h>
 
 #include <nw4r/ef/ef_emitter.h>
+#include <nw4r/ef/ef_types.h>
 
 namespace nw4r {
 namespace ef {
@@ -20,11 +21,9 @@ private:
         EmitterResource* mEmitterResource;     // at 0x10
     };
 
-    static const int QUEUE_SIZE = 1024;
-
 private:
-    int mNumItem;                             // at 0x0
-    CreationQueueData mQueueData[QUEUE_SIZE]; // at 0x4
+    int mNumItem;                                      // at 0x0
+    CreationQueueData mQueueData[NW4R_EF_MAX_EMITTER]; // at 0x4
 
 public:
     CreationQueue();

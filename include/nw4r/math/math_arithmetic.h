@@ -13,6 +13,8 @@
 
 #define NW4R_MATH_FLT_EPSILON 1.192092895e-7f
 
+#define NW4R_MATH_INVSQRT3 0.577350258f
+
 namespace nw4r {
 namespace math {
 namespace detail {

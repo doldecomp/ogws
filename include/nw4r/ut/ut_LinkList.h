@@ -448,16 +448,32 @@ public:
 #endif
 
 /**
- * Linked-list for-each iteration macro, with robust iteration.
+ * Linked-list for-each macro.
+ *
+ * Access the current element with "it"
+ */
+#define NW4R_UT_LINKLIST_FOREACH(LIST, ...)                                    \
+    {                                                                          \
+        typedef DECLTYPE((LIST).GetBeginIter()) IterType;                      \
+                                                                               \
+        for (IterType it = (LIST).GetBeginIter(); it != (LIST).GetEndIter();   \
+             ++it) {                                                           \
+                                                                               \
+            __VA_ARGS__;                                                       \
+        }                                                                      \
+    }
+
+/**
+ * Linked-list for-each macro, with robust iteration.
  *
  * Access the current element with "it"
  */
 #define NW4R_UT_LINKLIST_FOREACH_SAFE(LIST, ...)                               \
     {                                                                          \
-        typedef DECLTYPE(LIST.GetBeginIter()) IterType;                        \
+        typedef DECLTYPE((LIST).GetBeginIter()) IterType;                      \
                                                                                \
-        for (IterType impl = LIST.GetBeginIter();                              \
-             impl != LIST.GetEndIter();) {                                     \
+        for (IterType impl = (LIST).GetBeginIter();                            \
+             impl != (LIST).GetEndIter();) {                                   \
                                                                                \
             IterType it = impl++;                                              \
             __VA_ARGS__;                                                       \

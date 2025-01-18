@@ -7,6 +7,10 @@
 namespace nw4r {
 namespace ef {
 
+inline u16 UtlistSize(const ut::List* pList) {
+    return pList->numObjects;
+}
+
 class ActivityList {
 public:
     ut::List mActiveList;  // at 0x0
@@ -40,6 +44,10 @@ public:
         mNumActive = 0;
     }
 
+    u32 GetNumActive() const {
+        return mActiveList.numObjects;
+    }
+
     void ToActive(void* pObject) {
         ut::List_Append(&mActiveList, pObject);
         mNumActive++;
@@ -52,6 +60,10 @@ public:
 
     void ToWait(void* /* pObject */) {
         mNumActive--;
+    }
+
+    void ToFree(void* pObject) {
+        ut::List_Remove(&mClosingList, pObject);
     }
 };
 

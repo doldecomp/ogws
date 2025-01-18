@@ -19,13 +19,19 @@ class DrawStrategy;
 class Particle;
 
 class ParticleManager : public ReferencedObject {
-private:
+public:
     enum Flag {
-        FLAG_MTX_INHERIT_S = (1 << 0),
-        FLAG_MTX_INHERIT_T = (1 << 1),
+        FLAG_MTX_INHERIT_SCALE = (1 << 0),
+        FLAG_MTX_INHERIT_ROT = (1 << 1),
     };
 
     struct ParticleModifier {
+        enum SimpleLightType {
+            SIMPLELIGHT_OFF,
+            SIMPLELIGHT_AMBIENT,
+            SIMPLELIGHT_DIFFUSE
+        };
+
         struct SimpleLight {
             u8 mType;             // at 0x0
             GXColor mAmbient;     // at 0x1
@@ -93,10 +99,16 @@ public:
     void BeginDraw();
     void EndDraw();
 
+    const math::MTX34* Draw_GetMtxPMtoEM() const;
+
     void Draw_ModifyColor(Particle* pParticle, GXColor* pColorPri,
                           GXColor* pColorSec);
 
-    //////////! WEAK FUNCTIONS BELOW
+    //////////! WEAK FUNCTIONS BELOW (TODO:)
+
+    void ParticleToFree(Particle* pParticle) {
+        mActivityList.ToFree(pParticle);
+    }
 
     f32 Draw_ModifyScaleX(Particle* /* pParticle */, f32 sx) {
         return sx * mModifier.mScale.x;
@@ -124,28 +136,38 @@ public:
         mModifier.mLight.mPosition = rPos;
     }
 
+    ActivityList* GetParticleList() {
+        return &mActivityList;
+    }
+
     void SetMtxDirty() {
         mMtxDirty = true;
     }
 
-    static void ModifierTravFunc_SetSimpleLightType(void* pObject, u32 arg) {
+    static void ModifierTravFunc_SetSimpleLightType(void* pObject,
+                                                    ForEachParam param) {
+
         static_cast<ParticleManager*>(pObject)->mModifier.mLight.mType =
-            static_cast<u8>(arg);
+            static_cast<u8>(param);
     }
 
-    static void ModifierTravFunc_SetSimpleLightAmbient(void* pObject, u32 arg) {
+    static void ModifierTravFunc_SetSimpleLightAmbient(void* pObject,
+                                                       ForEachParam param) {
+
         static_cast<ParticleManager*>(pObject)->mModifier.mLight.mAmbient =
-            *reinterpret_cast<GXColor*>(arg);
+            *reinterpret_cast<GXColor*>(param);
     }
 
-    static void ModifierTravFunc_SetScale(void* pObject, u32 arg) {
+    static void ModifierTravFunc_SetScale(void* pObject, ForEachParam param) {
+
         static_cast<ParticleManager*>(pObject)->mModifier.mScale =
-            *reinterpret_cast<math::VEC2*>(arg);
+            *reinterpret_cast<math::VEC2*>(param);
     }
 
-    static void ModifierTravFunc_SetRotate(void* pObject, u32 arg) {
+    static void ModifierTravFunc_SetRotate(void* pObject, ForEachParam param) {
+
         static_cast<ParticleManager*>(pObject)->mModifier.mRotate =
-            *reinterpret_cast<math::VEC3*>(arg);
+            *reinterpret_cast<math::VEC3*>(param);
     }
 };
 
