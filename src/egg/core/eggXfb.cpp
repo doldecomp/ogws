@@ -45,7 +45,7 @@ namespace EGG
         #line 77
         EGG_ASSERT(rm != NULL);
 
-        init(rm->mFbWidth, rm->mFbHeight, heap);
+        init(rm->fbWidth, rm->xfbHeight, heap);
     }
 
     u32 Xfb::calcBufferSize(u16 width, u16 height)

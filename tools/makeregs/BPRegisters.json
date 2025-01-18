@@ -1,0 +1,1653 @@
+{
+    "module": "GX",
+    "name": "BP",
+    "long_name": "Blitting Processor",
+    "deps": [
+        "revolution/GX/GXTypes.h"
+    ],
+    "regs": [
+        {
+            "name": "GenMode",
+            "id": "0x00",
+            "fields": [
+                {
+                    "name": "numTex",
+                    "desc": "Active texture count",
+                    "start": 28,
+                    "end": 31
+                },
+                {
+                    "name": "numColors",
+                    "desc": "Color/channel count",
+                    "start": 25,
+                    "end": 27
+                },
+                {
+                    "name": "multisample",
+                    "start": 22,
+                    "end": 22
+                },
+                {
+                    "name": "numTevStages",
+                    "start": 18,
+                    "end": 21
+                },
+                {
+                    "name": "cullMode",
+                    "start": 16,
+                    "end": 17
+                },
+                {
+                    "name": "numIndStages",
+                    "start": 13,
+                    "end": 15
+                },
+                {
+                    "name": "coPlanar",
+                    "desc": "Toggle co-planar (\"Z freeze\" according to Dolphin)",
+                    "start": 12,
+                    "end": 12
+                }
+            ]
+        },
+        {
+            "name": "DispCopyFilter0",
+            "id": "0x01"
+        },
+        {
+            "name": "DispCopyFilter1",
+            "id": "0x02"
+        },
+        {
+            "name": "DispCopyFilter2",
+            "id": "0x03"
+        },
+        {
+            "name": "DispCopyFilter3",
+            "id": "0x04"
+        },
+        {
+            "name": "IndMtxA",
+            "fields": [
+                {
+                    "name": "m00",
+                    "desc": "Texture offset matrix #0 [0][0]",
+                    "start": 21,
+                    "end": 31
+                },
+                {
+                    "name": "m10",
+                    "desc": "Texture offset matrix #0 [1][0]",
+                    "start": 10,
+                    "end": 20
+                },
+                {
+                    "name": "exp",
+                    "desc": "Bits 0-1 of scaling exponent #0 (2^x)",
+                    "start": 8,
+                    "end": 9
+                }
+            ]
+        },
+        {
+            "name": "IndMtxB",
+            "fields": [
+                {
+                    "name": "m01",
+                    "desc": "Texture offset matrix #0 [0][1]",
+                    "start": 21,
+                    "end": 31
+                },
+                {
+                    "name": "m11",
+                    "desc": "Texture offset matrix #0 [1][1]",
+                    "start": 10,
+                    "end": 20
+                },
+                {
+                    "name": "exp",
+                    "desc": "Bits 2-3 of scaling exponent #0 (2^x)",
+                    "start": 8,
+                    "end": 9
+                }
+            ]
+        },
+        {
+            "name": "IndMtxC",
+            "fields": [
+                {
+                    "name": "m02",
+                    "desc": "Texture offset matrix #0 [0][2]",
+                    "start": 21,
+                    "end": 31
+                },
+                {
+                    "name": "m12",
+                    "desc": "Texture offset matrix #0 [1][2]",
+                    "start": 10,
+                    "end": 20
+                },
+                {
+                    "name": "exp",
+                    "desc": "Bit 4 of scaling exponent #0 (2^x)",
+                    "start": 8,
+                    "end": 9
+                }
+            ]
+        },
+        {
+            "name": "IndMtx0A",
+            "id": "0x06"
+        },
+        {
+            "name": "IndMtx0B",
+            "id": "0x07"
+        },
+        {
+            "name": "IndMtx0C",
+            "id": "0x08"
+        },
+        {
+            "name": "IndMtx1A",
+            "id": "0x09"
+        },
+        {
+            "name": "IndMtx1B",
+            "id": "0x0A"
+        },
+        {
+            "name": "IndMtx1C",
+            "id": "0x0B"
+        },
+        {
+            "name": "IndMtx2A",
+            "id": "0x0C"
+        },
+        {
+            "name": "IndMtx2B",
+            "id": "0x0D"
+        },
+        {
+            "name": "IndMtx2C",
+            "id": "0x0E"
+        },
+        {
+            "name": "IndIMask",
+            "id": "0x0F",
+            "fields": [
+                {
+                    "name": "imask",
+                    "desc": "Indirect mask for textures",
+                    "start": 24,
+                    "end": 31
+                }
+            ]
+        },
+        {
+            "name": "IndTevStage",
+            "fields": [
+                {
+                    "name": "stage",
+                    "desc": "Indirect texture stage ID",
+                    "start": 30,
+                    "end": 31
+                },
+                {
+                    "name": "format",
+                    "desc": "Indirect texture format",
+                    "start": 28,
+                    "end": 29
+                },
+                {
+                    "name": "bias",
+                    "desc": "Indirect texture bias",
+                    "start": 25,
+                    "end": 27
+                },
+                {
+                    "name": "alpha",
+                    "desc": "Indirect texture alpha",
+                    "start": 23,
+                    "end": 24
+                },
+                {
+                    "name": "mtx",
+                    "desc": "Indirect texture matrix",
+                    "start": 19,
+                    "end": 22
+                },
+                {
+                    "name": "wrapS",
+                    "desc": "S component wrap factor",
+                    "start": 16,
+                    "end": 18
+                },
+                {
+                    "name": "wrapT",
+                    "desc": "T component wrap factor",
+                    "start": 13,
+                    "end": 15
+                },
+                {
+                    "name": "utcLod",
+                    "desc": "Whether to use unmodified texcoords for mipmaps",
+                    "start": 12,
+                    "end": 12
+                },
+                {
+                    "name": "addPrev",
+                    "desc": "Whether to add in results from previous tev stage",
+                    "start": 11,
+                    "end": 11
+                }
+            ]
+        },
+        {
+            "name": "IndTevStage0",
+            "id": "0x10"
+        },
+        {
+            "name": "IndTevStage1",
+            "id": "0x11"
+        },
+        {
+            "name": "IndTevStage2",
+            "id": "0x12"
+        },
+        {
+            "name": "IndTevStage3",
+            "id": "0x13"
+        },
+        {
+            "name": "IndTevStage4",
+            "id": "0x14"
+        },
+        {
+            "name": "IndTevStage5",
+            "id": "0x15"
+        },
+        {
+            "name": "IndTevStage6",
+            "id": "0x16"
+        },
+        {
+            "name": "IndTevStage7",
+            "id": "0x17"
+        },
+        {
+            "name": "IndTevStage8",
+            "id": "0x18"
+        },
+        {
+            "name": "IndTevStage9",
+            "id": "0x19"
+        },
+        {
+            "name": "IndTevStage10",
+            "id": "0x1A"
+        },
+        {
+            "name": "IndTevStage11",
+            "id": "0x1B"
+        },
+        {
+            "name": "IndTevStage12",
+            "id": "0x1C"
+        },
+        {
+            "name": "IndTevStage13",
+            "id": "0x1D"
+        },
+        {
+            "name": "IndTevStage14",
+            "id": "0x1E"
+        },
+        {
+            "name": "IndTevStage15",
+            "id": "0x1F"
+        },
+        {
+            "name": "scissorTL",
+            "id": "0x20",
+            "fields": [
+                {
+                    "name": "top",
+                    "desc": "Top component",
+                    "start": 21,
+                    "end": 31
+                },
+                {
+                    "name": "left",
+                    "desc": "Left component",
+                    "start": 9,
+                    "end": 19
+                }
+            ]
+        },
+        {
+            "name": "scissorBR",
+            "id": "0x21",
+            "fields": [
+                {
+                    "name": "bot",
+                    "desc": "Bottom component",
+                    "start": 21,
+                    "end": 31
+                },
+                {
+                    "name": "right",
+                    "desc": "Right component",
+                    "start": 9,
+                    "end": 19
+                }
+            ]
+        },
+        {
+            "name": "linePtWidth",
+            "id": "0x22",
+            "fields": [
+                {
+                    "name": "lineSz",
+                    "desc": "Line size/width",
+                    "start": 24,
+                    "end": 31
+                },
+                {
+                    "name": "pointSz",
+                    "desc": "Point size",
+                    "start": 16,
+                    "end": 23
+                },
+                {
+                    "name": "lineOfs",
+                    "desc": "Line offset",
+                    "start": 13,
+                    "end": 15
+                },
+                {
+                    "name": "pointOfs",
+                    "desc": "Point offset",
+                    "start": 10,
+                    "end": 12
+                },
+                {
+                    "name": "adjust_ar",
+                    "desc": "Interlacing: adjust for pixels having aspect ratio of 1/2",
+                    "start": 9,
+                    "end": 9
+                }
+            ]
+        },
+        {
+            "name": "perf0Tri",
+            "id": "0x23"
+        },
+        {
+            "name": "perf0Quad",
+            "id": "0x24"
+        },
+        {
+            "name": "ras1_ss0",
+            "id": "0x25",
+            "fields": [
+                {
+                    "name": "s0",
+                    "desc": "S-component scale (stage 0)",
+                    "start": 28,
+                    "end": 31
+                },
+                {
+                    "name": "t0",
+                    "desc": "T-component scale (stage 0)",
+                    "start": 24,
+                    "end": 27
+                },
+                {
+                    "name": "s1",
+                    "desc": "S-component scale (stage 1)",
+                    "start": 20,
+                    "end": 23
+                },
+                {
+                    "name": "t1",
+                    "desc": "T-component scale (stage 1)",
+                    "start": 16,
+                    "end": 19
+                }
+            ]
+        },
+        {
+            "name": "ras1_ss1",
+            "id": "0x26",
+            "fields": [
+                {
+                    "name": "s2",
+                    "desc": "S-component scale (stage 2)",
+                    "start": 28,
+                    "end": 31
+                },
+                {
+                    "name": "t2",
+                    "desc": "T-component scale (stage 2)",
+                    "start": 24,
+                    "end": 27
+                },
+                {
+                    "name": "s3",
+                    "desc": "S-component scale (stage 3)",
+                    "start": 20,
+                    "end": 23
+                },
+                {
+                    "name": "t3",
+                    "desc": "T-component scale (stage 3)",
+                    "start": 16,
+                    "end": 19
+                }
+            ]
+        },
+        {
+            "name": "ras1_iref",
+            "id": "0x27",
+            "fields": [
+                {
+                    "name": "map0",
+                    "desc": "Texmap id (stage 0)",
+                    "start": 29,
+                    "end": 31
+                },
+                {
+                    "name": "txc0",
+                    "desc": "Texcoord ID (stage 0)",
+                    "start": 26,
+                    "end": 28
+                },
+                {
+                    "name": "map1",
+                    "desc": "Texmap id (stage 1)",
+                    "start": 23,
+                    "end": 25
+                },
+                {
+                    "name": "txc1",
+                    "desc": "Texcoord ID (stage 1)",
+                    "start": 20,
+                    "end": 22
+                },
+                {
+                    "name": "map2",
+                    "desc": "Texmap id (stage 2)",
+                    "start": 17,
+                    "end": 19
+                },
+                {
+                    "name": "txc2",
+                    "desc": "Texcoord ID (stage 2)",
+                    "start": 14,
+                    "end": 16
+                },
+                {
+                    "name": "map3",
+                    "desc": "Texmap id (stage 3)",
+                    "start": 11,
+                    "end": 13
+                },
+                {
+                    "name": "txc3",
+                    "desc": "Texcoord ID (stage 3)",
+                    "start": 8,
+                    "end": 10
+                }
+            ]
+        },
+        {
+            "name": "ras1_tref",
+            "fields": [
+                {
+                    "name": "texmap_even",
+                    "start": 29,
+                    "end": 31
+                },
+                {
+                    "name": "texcoord_even",
+                    "start": 26,
+                    "end": 28
+                },
+                {
+                    "name": "enable_tex_even",
+                    "start": 25,
+                    "end": 25
+                },
+                {
+                    "name": "colorchan_even",
+                    "start": 22,
+                    "end": 24
+                },
+                {
+                    "name": "texmap_odd",
+                    "start": 17,
+                    "end": 19
+                },
+                {
+                    "name": "texcoord_odd",
+                    "start": 14,
+                    "end": 16
+                },
+                {
+                    "name": "enable_tex_odd",
+                    "start": 13,
+                    "end": 13
+                },
+                {
+                    "name": "colorchan_odd",
+                    "start": 10,
+                    "end": 12
+                }
+            ]
+        },
+        {
+            "name": "ras1_tref0",
+            "id": "0x28"
+        },
+        {
+            "name": "ras1_tref1",
+            "id": "0x29"
+        },
+        {
+            "name": "ras1_tref2",
+            "id": "0x2A"
+        },
+        {
+            "name": "ras1_tref3",
+            "id": "0x2B"
+        },
+        {
+            "name": "ras1_tref4",
+            "id": "0x2C"
+        },
+        {
+            "name": "ras1_tref5",
+            "id": "0x2D"
+        },
+        {
+            "name": "ras1_tref6",
+            "id": "0x2E"
+        },
+        {
+            "name": "ras1_tref7",
+            "id": "0x2F"
+        },
+        {
+            "name": "su_size",
+            "fields": [
+                {
+                    "name": "scale",
+                    "start": 16,
+                    "end": 31
+                },
+                {
+                    "name": "rangeBias",
+                    "start": 15,
+                    "end": 15
+                },
+                {
+                    "name": "cylindricWrap",
+                    "start": 14,
+                    "end": 14
+                },
+                {
+                    "name": "useLineOfs",
+                    "start": 13,
+                    "end": 13
+                },
+                {
+                    "name": "usePointOfs",
+                    "start": 12,
+                    "end": 12
+                }
+            ]
+        },
+        {
+            "name": "su_ssize0",
+            "id": "0x30"
+        },
+        {
+            "name": "su_tsize0",
+            "id": "0x31"
+        },
+        {
+            "name": "su_ssize1",
+            "id": "0x32"
+        },
+        {
+            "name": "su_tsize1",
+            "id": "0x33"
+        },
+        {
+            "name": "su_ssize2",
+            "id": "0x34"
+        },
+        {
+            "name": "su_tsize2",
+            "id": "0x35"
+        },
+        {
+            "name": "su_ssize3",
+            "id": "0x36"
+        },
+        {
+            "name": "su_tsize3",
+            "id": "0x37"
+        },
+        {
+            "name": "su_ssize4",
+            "id": "0x38"
+        },
+        {
+            "name": "su_tsize4",
+            "id": "0x39"
+        },
+        {
+            "name": "su_ssize5",
+            "id": "0x3A"
+        },
+        {
+            "name": "su_tsize5",
+            "id": "0x3B"
+        },
+        {
+            "name": "su_ssize6",
+            "id": "0x3C"
+        },
+        {
+            "name": "su_tsize6",
+            "id": "0x3D"
+        },
+        {
+            "name": "su_ssize7",
+            "id": "0x3E"
+        },
+        {
+            "name": "su_tsize7",
+            "id": "0x3F"
+        },
+        {
+            "name": "ZMode",
+            "id": "0x40",
+            "fields": [
+                {
+                    "name": "test_enable",
+                    "start": 31,
+                    "end": 31
+                },
+                {
+                    "name": "compare",
+                    "start": 28,
+                    "end": 30
+                },
+                {
+                    "name": "update_enable",
+                    "start": 27,
+                    "end": 27
+                }
+            ]
+        },
+        {
+            "name": "BlendMode",
+            "id": "0x41",
+            "fields": [
+                {
+                    "name": "blend_enable",
+                    "start": 31,
+                    "end": 31
+                },
+                {
+                    "name": "logic_op_enable",
+                    "start": 30,
+                    "end": 30
+                },
+                {
+                    "name": "dither",
+                    "start": 29,
+                    "end": 29
+                },
+                {
+                    "name": "color_update",
+                    "start": 28,
+                    "end": 28
+                },
+                {
+                    "name": "alpha_update",
+                    "start": 27,
+                    "end": 27
+                },
+                {
+                    "name": "dst_factor",
+                    "start": 24,
+                    "end": 26
+                },
+                {
+                    "name": "src_factor",
+                    "start": 21,
+                    "end": 23
+                },
+                {
+                    "name": "subtract",
+                    "start": 20,
+                    "end": 20
+                },
+                {
+                    "name": "logic_mode",
+                    "start": 16,
+                    "end": 19
+                }
+            ]
+        },
+        {
+            "name": "DstAlpha",
+            "id": "0x42",
+            "fields": [
+                {
+                    "name": "alpha",
+                    "start": 24,
+                    "end": 31
+                },
+                {
+                    "name": "enable",
+                    "start": 23,
+                    "end": 23
+                },
+                {
+                    "name": "yuv_fmt",
+                    "start": 21,
+                    "end": 22
+                }
+            ]
+        },
+        {
+            "name": "ZControl",
+            "id": "0x43",
+            "fields": [
+                {
+                    "name": "pixel_fmt",
+                    "start": 29,
+                    "end": 31
+                },
+                {
+                    "name": "z_fmt",
+                    "start": 26,
+                    "end": 28
+                },
+                {
+                    "name": "before_tex",
+                    "desc": "Determines whether Z-buffering occurs before or after texturing",
+                    "start": 25,
+                    "end": 25
+                }
+            ]
+        },
+        {
+            "name": "FieldMask",
+            "id": "0x44",
+            "fields": [
+                {
+                    "name": "odd",
+                    "desc": "Whether to write odd fields to the EFB",
+                    "start": 31,
+                    "end": 31
+                },
+                {
+                    "name": "even",
+                    "desc": "Whether to write even fields to the EFB",
+                    "start": 30,
+                    "end": 30
+                }
+            ]
+        },
+        {
+            "name": "DrawDone",
+            "id": "0x45"
+        },
+        {
+            "name": "PEToken",
+            "id": "0x47"
+        },
+        {
+            "name": "PETokenInt",
+            "id": "0x48"
+        },
+        {
+            "name": "TexCopySrcXY",
+            "id": "0x49"
+        },
+        {
+            "name": "TexCopySrcWH",
+            "id": "0x4A"
+        },
+        {
+            "name": "TexCopyDst",
+            "id": "0x4B"
+        },
+        {
+            "name": "DispCopyStride",
+            "id": "0x4D"
+        },
+        {
+            "name": "DispCopyScaleY",
+            "id": "0x4E"
+        },
+        {
+            "name": "CopyClearAR",
+            "id": "0x4F"
+        },
+        {
+            "name": "CopyClearGB",
+            "id": "0x50"
+        },
+        {
+            "name": "CopyClearZ",
+            "id": "0x51"
+        },
+        {
+            "name": "CopyFilter0",
+            "id": "0x53"
+        },
+        {
+            "name": "CopyFilter1",
+            "id": "0x54"
+        },
+        {
+            "name": "BoundingBox0",
+            "id": "0x55"
+        },
+        {
+            "name": "BoundingBox1",
+            "id": "0x56"
+        },
+        {
+            "name": "ScissorOffset",
+            "id": "0x59",
+            "fields": [
+                {
+                    "name": "ox",
+                    "start": 22,
+                    "end": 31
+                },
+                {
+                    "name": "oy",
+                    "start": 12,
+                    "end": 21
+                }
+            ]
+        },
+        {
+            "name": "TMemPreloadAddr",
+            "id": "0x60"
+        },
+        {
+            "name": "TMemPreloadEven",
+            "id": "0x61"
+        },
+        {
+            "name": "TMemPreloadOdd",
+            "id": "0x62"
+        },
+        {
+            "name": "TMemPreloadMode",
+            "id": "0x63"
+        },
+        {
+            "name": "TMemTlutSrc",
+            "id": "0x64"
+        },
+        {
+            "name": "TMemTlutDst",
+            "id": "0x65"
+        },
+        {
+            "name": "TMemTexInvalidate",
+            "id": "0x66"
+        },
+        {
+            "name": "Perf1",
+            "id": "0x67"
+        },
+        {
+            "name": "FieldMode",
+            "id": "0x68",
+            "fields": [
+                {
+                    "name": "tex_lod",
+                    "desc": "Adjust vertex tex LOD computation to account for interlacing",
+                    "start": 31,
+                    "end": 31
+                }
+            ]
+        },
+        {
+            "name": "SetMode0_Tex0",
+            "id": "0x80"
+        },
+        {
+            "name": "SetMode0_Tex1",
+            "id": "0x81"
+        },
+        {
+            "name": "SetMode0_Tex2",
+            "id": "0x82"
+        },
+        {
+            "name": "SetMode0_Tex3",
+            "id": "0x83"
+        },
+        {
+            "name": "SetMode1_Tex0",
+            "id": "0x84"
+        },
+        {
+            "name": "SetMode1_Tex1",
+            "id": "0x85"
+        },
+        {
+            "name": "SetMode1_Tex2",
+            "id": "0x86"
+        },
+        {
+            "name": "SetMode1_Tex3",
+            "id": "0x87"
+        },
+        {
+            "name": "SetImage0_Tex0",
+            "id": "0x88"
+        },
+        {
+            "name": "SetImage0_Tex1",
+            "id": "0x89"
+        },
+        {
+            "name": "SetImage0_Tex2",
+            "id": "0x8A"
+        },
+        {
+            "name": "SetImage0_Tex3",
+            "id": "0x8B"
+        },
+        {
+            "name": "SetImage1_Tex0",
+            "id": "0x8C"
+        },
+        {
+            "name": "SetImage1_Tex1",
+            "id": "0x8D"
+        },
+        {
+            "name": "SetImage1_Tex2",
+            "id": "0x8E"
+        },
+        {
+            "name": "SetImage1_Tex3",
+            "id": "0x8F"
+        },
+        {
+            "name": "SetImage2_Tex0",
+            "id": "0x90"
+        },
+        {
+            "name": "SetImage2_Tex1",
+            "id": "0x91"
+        },
+        {
+            "name": "SetImage2_Tex2",
+            "id": "0x92"
+        },
+        {
+            "name": "SetImage2_Tex3",
+            "id": "0x93"
+        },
+        {
+            "name": "SetImage3_Tex0",
+            "id": "0x94"
+        },
+        {
+            "name": "SetImage3_Tex1",
+            "id": "0x95"
+        },
+        {
+            "name": "SetImage3_Tex2",
+            "id": "0x96"
+        },
+        {
+            "name": "SetImage3_Tex3",
+            "id": "0x97"
+        },
+        {
+            "name": "SetTlut_Tex0",
+            "id": "0x98"
+        },
+        {
+            "name": "SetTlut_Tex1",
+            "id": "0x99"
+        },
+        {
+            "name": "SetTlut_Tex2",
+            "id": "0x9A"
+        },
+        {
+            "name": "SetTlut_Tex3",
+            "id": "0x9B"
+        },
+        {
+            "name": "SetMode0_Tex4",
+            "id": "0xA0"
+        },
+        {
+            "name": "SetMode0_Tex5",
+            "id": "0xA1"
+        },
+        {
+            "name": "SetMode0_Tex6",
+            "id": "0xA2"
+        },
+        {
+            "name": "SetMode0_Tex7",
+            "id": "0xA3"
+        },
+        {
+            "name": "SetMode1_Tex4",
+            "id": "0xA4"
+        },
+        {
+            "name": "SetMode1_Tex5",
+            "id": "0xA5"
+        },
+        {
+            "name": "SetMode1_Tex6",
+            "id": "0xA6"
+        },
+        {
+            "name": "SetMode1_Tex7",
+            "id": "0xA7"
+        },
+        {
+            "name": "SetImage0_Tex4",
+            "id": "0xA8"
+        },
+        {
+            "name": "SetImage0_Tex5",
+            "id": "0xA9"
+        },
+        {
+            "name": "SetImage0_Tex6",
+            "id": "0xAA"
+        },
+        {
+            "name": "SetImage0_Tex7",
+            "id": "0xAB"
+        },
+        {
+            "name": "SetImage1_Tex4",
+            "id": "0xAC"
+        },
+        {
+            "name": "SetImage1_Tex5",
+            "id": "0xAD"
+        },
+        {
+            "name": "SetImage1_Tex6",
+            "id": "0xAE"
+        },
+        {
+            "name": "SetImage1_Tex7",
+            "id": "0xAF"
+        },
+        {
+            "name": "SetImage2_Tex4",
+            "id": "0xB0"
+        },
+        {
+            "name": "SetImage2_Tex5",
+            "id": "0xB1"
+        },
+        {
+            "name": "SetImage2_Tex6",
+            "id": "0xB2"
+        },
+        {
+            "name": "SetImage2_Tex7",
+            "id": "0xB3"
+        },
+        {
+            "name": "SetImage3_Tex4",
+            "id": "0xB4"
+        },
+        {
+            "name": "SetImage3_Tex5",
+            "id": "0xB5"
+        },
+        {
+            "name": "SetImage3_Tex6",
+            "id": "0xB6"
+        },
+        {
+            "name": "SetImage3_Tex7",
+            "id": "0xB7"
+        },
+        {
+            "name": "SetTlut_Tex4",
+            "id": "0xB8"
+        },
+        {
+            "name": "SetTlut_Tex5",
+            "id": "0xB9"
+        },
+        {
+            "name": "SetTlut_Tex6",
+            "id": "0xBA"
+        },
+        {
+            "name": "SetTlut_Tex7",
+            "id": "0xBB"
+        },
+        {
+            "name": "TevColorCombiner",
+            "fields": [
+                {
+                    "name": "d",
+                    "start": 28,
+                    "end": 31
+                },
+                {
+                    "name": "c",
+                    "start": 24,
+                    "end": 27
+                },
+                {
+                    "name": "b",
+                    "start": 20,
+                    "end": 23
+                },
+                {
+                    "name": "a",
+                    "start": 16,
+                    "end": 19
+                },
+                {
+                    "name": "bias",
+                    "start": 14,
+                    "end": 15
+                },
+                {
+                    "name": "op_or_comparison",
+                    "start": 13,
+                    "end": 13
+                },
+                {
+                    "name": "clamp",
+                    "start": 12,
+                    "end": 12
+                },
+                {
+                    "name": "scale_or_compare_mode",
+                    "start": 10,
+                    "end": 11
+                },
+                {
+                    "name": "dest",
+                    "start": 8,
+                    "end": 9
+                }
+            ]
+        },
+        {
+            "name": "TevAlphaCombiner"
+        },
+        {
+            "name": "TevColorCombiner0",
+            "id": "0xC0"
+        },
+        {
+            "name": "TevAlphaCombiner0",
+            "id": "0xC1"
+        },
+        {
+            "name": "TevColorCombiner1",
+            "id": "0xC2"
+        },
+        {
+            "name": "TevAlphaCombiner1",
+            "id": "0xC3"
+        },
+        {
+            "name": "TevColorCombiner2",
+            "id": "0xC4"
+        },
+        {
+            "name": "TevAlphaCombiner2",
+            "id": "0xC5"
+        },
+        {
+            "name": "TevColorCombiner3",
+            "id": "0xC6"
+        },
+        {
+            "name": "TevAlphaCombiner3",
+            "id": "0xC7"
+        },
+        {
+            "name": "TevColorCombiner4",
+            "id": "0xC8"
+        },
+        {
+            "name": "TevAlphaCombiner4",
+            "id": "0xC9"
+        },
+        {
+            "name": "TevColorCombiner5",
+            "id": "0xCA"
+        },
+        {
+            "name": "TevAlphaCombiner5",
+            "id": "0xCB"
+        },
+        {
+            "name": "TevColorCombiner6",
+            "id": "0xCC"
+        },
+        {
+            "name": "TevAlphaCombiner6",
+            "id": "0xCD"
+        },
+        {
+            "name": "TevColorCombiner7",
+            "id": "0xCE"
+        },
+        {
+            "name": "TevAlphaCombiner7",
+            "id": "0xCF"
+        },
+        {
+            "name": "TevColorCombiner8",
+            "id": "0xD0"
+        },
+        {
+            "name": "TevAlphaCombiner8",
+            "id": "0xD1"
+        },
+        {
+            "name": "TevColorCombiner9",
+            "id": "0xD2"
+        },
+        {
+            "name": "TevAlphaCombiner9",
+            "id": "0xD3"
+        },
+        {
+            "name": "TevColorCombiner10",
+            "id": "0xD4"
+        },
+        {
+            "name": "TevAlphaCombiner10",
+            "id": "0xD5"
+        },
+        {
+            "name": "TevColorCombiner11",
+            "id": "0xD6"
+        },
+        {
+            "name": "TevAlphaCombiner11",
+            "id": "0xD7"
+        },
+        {
+            "name": "TevColorCombiner12",
+            "id": "0xD8"
+        },
+        {
+            "name": "TevAlphaCombiner12",
+            "id": "0xD9"
+        },
+        {
+            "name": "TevColorCombiner13",
+            "id": "0xDA"
+        },
+        {
+            "name": "TevAlphaCombiner13",
+            "id": "0xDB"
+        },
+        {
+            "name": "TevColorCombiner14",
+            "id": "0xDC"
+        },
+        {
+            "name": "TevAlphaCombiner14",
+            "id": "0xDD"
+        },
+        {
+            "name": "TevColorCombiner15",
+            "id": "0xDE"
+        },
+        {
+            "name": "TevAlphaCombiner15",
+            "id": "0xDF"
+        },
+        {
+            "name": "TevRegLo",
+            "fields": [
+                {
+                    "name": "red",
+                    "start": 21,
+                    "end": 31
+                },
+                {
+                    "name": "alpha",
+                    "start": 9,
+                    "end": 19
+                },
+                {
+                    "name": "type",
+                    "start": 8,
+                    "end": 8
+                }
+            ]
+        },
+        {
+            "name": "TevRegHi",
+            "fields": [
+                {
+                    "name": "blue",
+                    "start": 21,
+                    "end": 31
+                },
+                {
+                    "name": "green",
+                    "start": 9,
+                    "end": 19
+                },
+                {
+                    "name": "type",
+                    "start": 8,
+                    "end": 8
+                }
+            ]
+        },
+        {
+            "name": "TevReg0Lo",
+            "id": "0xE0"
+        },
+        {
+            "name": "TevReg0Hi",
+            "id": "0xE1"
+        },
+        {
+            "name": "TevReg1Lo",
+            "id": "0xE2"
+        },
+        {
+            "name": "TevReg1Hi",
+            "id": "0xE3"
+        },
+        {
+            "name": "TevReg2Lo",
+            "id": "0xE4"
+        },
+        {
+            "name": "TevReg2Hi",
+            "id": "0xE5"
+        },
+        {
+            "name": "TevReg3Lo",
+            "id": "0xE6"
+        },
+        {
+            "name": "TevReg3Hi",
+            "id": "0xE7"
+        },
+        {
+            "name": "FogRange",
+            "id": "0xE8",
+            "fields": [
+                {
+                    "name": "center",
+                    "start": 22,
+                    "end": 31
+                },
+                {
+                    "name": "enabled",
+                    "start": 21,
+                    "end": 21
+                }
+            ]
+        },
+        {
+            "name": "FogRangeK",
+            "fields": [
+                {
+                    "name": "hi",
+                    "start": 20,
+                    "end": 31
+                },
+                {
+                    "name": "lo",
+                    "start": 8,
+                    "end": 19
+                }
+            ]
+        },
+        {
+            "name": "FogRangeK0",
+            "id": "0xE9"
+        },
+        {
+            "name": "FogRangeK1",
+            "id": "0xEA"
+        },
+        {
+            "name": "FogRangeK2",
+            "id": "0xEB"
+        },
+        {
+            "name": "FogRangeK3",
+            "id": "0xEC"
+        },
+        {
+            "name": "FogRangeK4",
+            "id": "0xED"
+        },
+        {
+            "name": "FogParam0",
+            "id": "0xEE",
+            "fields": [
+                {
+                    "name": "a_mant",
+                    "start": 21,
+                    "end": 31
+                },
+                {
+                    "name": "a_exp",
+                    "start": 13,
+                    "end": 20
+                },
+                {
+                    "name": "a_sign",
+                    "start": 12,
+                    "end": 12
+                }
+            ]
+        },
+        {
+            "name": "FogParam1",
+            "id": "0xEF",
+            "fields": [
+                {
+                    "name": "b_mag",
+                    "start": 8,
+                    "end": 31
+                }
+            ]
+        },
+        {
+            "name": "FogParam2",
+            "id": "0xF0",
+            "fields": [
+                {
+                    "name": "b_shift",
+                    "start": 27,
+                    "end": 31
+                }
+            ]
+        },
+        {
+            "name": "FogParam3",
+            "id": "0xF1",
+            "fields": [
+                {
+                    "name": "c_mant",
+                    "start": 21,
+                    "end": 31
+                },
+                {
+                    "name": "c_exp",
+                    "start": 13,
+                    "end": 20
+                },
+                {
+                    "name": "c_sign",
+                    "start": 12,
+                    "end": 12
+                },
+                {
+                    "name": "proj",
+                    "start": 11,
+                    "end": 11
+                },
+                {
+                    "name": "fsel",
+                    "start": 8,
+                    "end": 10
+                }
+            ]
+        },
+        {
+            "name": "FogColor",
+            "id": "0xF2",
+            "fields": [
+                {
+                    "name": "rgb",
+                    "start": 8,
+                    "end": 31
+                }
+            ]
+        },
+        {
+            "name": "AlphaCompare",
+            "id": "0xF3",
+            "fields": [
+                {
+                    "name": "ref0",
+                    "start": 24,
+                    "end": 31
+                },
+                {
+                    "name": "ref1",
+                    "start": 16,
+                    "end": 23
+                },
+                {
+                    "name": "comp0",
+                    "start": 13,
+                    "end": 15
+                },
+                {
+                    "name": "comp1",
+                    "start": 10,
+                    "end": 12
+                },
+                {
+                    "name": "logic",
+                    "start": 8,
+                    "end": 9
+                }
+            ]
+        },
+        {
+            "name": "ZTexture0",
+            "id": "0xF4"
+        },
+        {
+            "name": "ZTexture1",
+            "id": "0xF5"
+        },
+        {
+            "name": "TevKSel",
+            "fields": [
+                {
+                    "name": "swap_rb",
+                    "desc": "Odd ksel number: red; even: blue",
+                    "start": 30,
+                    "end": 31
+                },
+                {
+                    "name": "swap_ga",
+                    "desc": "Odd ksel number: green; even: alpha",
+                    "start": 28,
+                    "end": 29
+                },
+                {
+                    "name": "kcsel_even",
+                    "start": 23,
+                    "end": 27
+                },
+                {
+                    "name": "kasel_even",
+                    "start": 18,
+                    "end": 22
+                },
+                {
+                    "name": "kcsel_odd",
+                    "start": 13,
+                    "end": 17
+                },
+                {
+                    "name": "kasel_odd",
+                    "start": 8,
+                    "end": 12
+                }
+            ]
+        },
+        {
+            "name": "TevKSel0",
+            "id": "0xF6"
+        },
+        {
+            "name": "TevKSel1",
+            "id": "0xF7"
+        },
+        {
+            "name": "TevKSel2",
+            "id": "0xF8"
+        },
+        {
+            "name": "TevKSel3",
+            "id": "0xF9"
+        },
+        {
+            "name": "TevKSel4",
+            "id": "0xFA"
+        },
+        {
+            "name": "TevKSel5",
+            "id": "0xFB"
+        },
+        {
+            "name": "TevKSel6",
+            "id": "0xFC"
+        },
+        {
+            "name": "TevKSel7",
+            "id": "0xFD"
+        },
+        {
+            "name": "SSMask",
+            "id": "0xFE"
+        }
+    ]
+}

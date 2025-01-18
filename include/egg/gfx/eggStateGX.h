@@ -2,9 +2,8 @@
 #define EGG_GFX_STATE_GX_H
 #include "types_egg.h"
 #include "g3d_tmem.h"
-#include <RevoSDK/GX/GX.h>
-#include <RevoSDK/GX/GXPixel.h>
-#include <RevoSDK/math/mtx44.h>
+#include <revolution/GX.h>
+#include <revolution/MTX.h>
 
 namespace EGG
 {
@@ -122,7 +121,7 @@ namespace EGG
         static CachedState sCache;
         static u8 sDefaultTexObjImage[4 * 4] __attribute__ ((aligned (32)));
 
-        static const f32 lbl_80378C68[];
+        static const f32 lbl_80378C68[2][3];
         static const f32 lbl_80378C80[];
 
         static u16 s_widthFb;

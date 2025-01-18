@@ -1,68 +1,52 @@
-#pragma ipa file
-#include "snd_ExternalSoundPlayer.h"
-#include "snd_BasicSound.h"
+#include <nw4r/snd.h>
+#include <nw4r/ut.h>
 
-namespace nw4r
-{
-	namespace snd
-	{
-		using namespace ut;
-		
-		namespace detail
-		{
-			ExternalSoundPlayer::ExternalSoundPlayer() : mPlayableSoundCount(1), FLOAT_0x10(1.0f) {}
-			
-			ExternalSoundPlayer::~ExternalSoundPlayer()
-			{
-				LinkList<BasicSound, 0xD0>::Iterator iter = mSoundList.GetBeginIter();
-				while (iter != mSoundList.GetEndIter())
-				{
-					iter++->mExternalSoundPlayer = NULL;
-				}
-			}
-			
-			void ExternalSoundPlayer::SetPlayableSoundCount(int playableSoundCount)
-			{
-				mPlayableSoundCount = playableSoundCount;
-						
-				while (mSoundList.GetSize() > mPlayableSoundCount)
-				{
-					GetLowestPrioritySound()->Shutdown();
-				}
-			}
-			
-			UNKTYPE ExternalSoundPlayer::InsertSoundList(BasicSound * pSound)
-			{
-				mSoundList.PushBack(pSound);
-				pSound->mExternalSoundPlayer = this;
-			}
-			
-			UNKTYPE ExternalSoundPlayer::RemoveSoundList(BasicSound * pSound)
-			{
-				mSoundList.Erase(pSound);
-				pSound->mExternalSoundPlayer = NULL;
-			}
-			
-			BasicSound * ExternalSoundPlayer::GetLowestPrioritySound()
-			{
-				LinkList<BasicSound, 0xD0>::Iterator iter = mSoundList.GetBeginIter();
-				int currentPriority;
-				int lowestPriority = 0x80;
-				BasicSound * lowestPrioritySound = NULL;
-				
-				while (iter != mSoundList.GetEndIter())
-				{
-					currentPriority = iter->CalcCurrentPlayerPriority();
-					if (lowestPriority > currentPriority)
-					{
-						lowestPrioritySound = &*iter;
-						lowestPriority = currentPriority;
-					}
-					++iter;
-				}
-				
-				return lowestPrioritySound;
-			}
-		}
-	}
+namespace nw4r {
+namespace snd {
+namespace detail {
+
+ExternalSoundPlayer::ExternalSoundPlayer() : mPlayableCount(1), mVolume(1.0f) {}
+
+ExternalSoundPlayer::~ExternalSoundPlayer() {
+    NW4R_UT_LINKLIST_FOREACH_SAFE(mSoundList, it->SetExternalSoundPlayer(NULL));
 }
+
+void ExternalSoundPlayer::SetPlayableSoundCount(int count) {
+    mPlayableCount = count;
+
+    while (GetPlayingSoundCount() > GetPlayableSoundCount()) {
+        GetLowestPrioritySound()->Shutdown();
+    }
+}
+
+void ExternalSoundPlayer::InsertSoundList(BasicSound* pSound) {
+    mSoundList.PushBack(pSound);
+    pSound->SetExternalSoundPlayer(this);
+}
+
+void ExternalSoundPlayer::RemoveSoundList(BasicSound* pSound) {
+    mSoundList.Erase(pSound);
+    pSound->SetExternalSoundPlayer(NULL);
+}
+
+BasicSound* ExternalSoundPlayer::GetLowestPrioritySound() {
+    int lowestPrio = BasicSound::PRIORITY_MAX + 1;
+    BasicSound* pLowest = NULL;
+
+    for (BasicSoundExtPlayList::Iterator it = mSoundList.GetBeginIter();
+         it != mSoundList.GetEndIter(); ++it) {
+
+        int priority = it->CalcCurrentPlayerPriority();
+
+        if (lowestPrio > priority) {
+            pLowest = &*it;
+            lowestPrio = priority;
+        }
+    }
+
+    return pLowest;
+}
+
+} // namespace detail
+} // namespace snd
+} // namespace nw4r

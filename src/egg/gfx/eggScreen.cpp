@@ -1,5 +1,3 @@
-#pragma fp_contract on
-
 #include "eggScreen.h"
 #include "eggStateGX.h"
 #include "eggDrawGX.h"
@@ -59,8 +57,8 @@ namespace EGG
         Frustum(PROJ_PERSP, math::VEC2(sTVModeWidths[sTVMode], sTVModeHeights[sTVMode]),
             10.0f, 10000.0f, CANVASMODE_1)
     {
-        mPosition.mCoords.x = 0.0f;
-        mPosition.mCoords.y = 0.0f;
+        mPosition.x = 0.0f;
+        mPosition.y = 0.0f;
         SetParent(NULL);
         NullSub_0();
     }
@@ -69,8 +67,8 @@ namespace EGG
                    const Screen* userRoot, CanvasMode canvasMode) :
         Frustum(PROJ_PERSP, math::VEC2(w, h), 10.0f, 10000.0f, canvasMode)
     {
-        mPosition.mCoords.x = x;
-        mPosition.mCoords.y = y;
+        mPosition.x = x;
+        mPosition.y = y;
         SetParent(userRoot);
         NullSub_0();
     }
@@ -96,8 +94,8 @@ namespace EGG
             f32 sx, sy, ox, oy;
             GetGlobalScaleOffset(&sx, &sy, &ox, &oy);
 
-            SetGlobalScaleOffset(sCanvasScale.mCoords.x, sCanvasScale.mCoords.y,
-                sCanvasOffset.mCoords.x, sCanvasOffset.mCoords.y);
+            SetGlobalScaleOffset(sCanvasScale.x, sCanvasScale.y,
+                sCanvasOffset.x, sCanvasOffset.y);
             Frustum::SetProjectionGX();
 
             SetGlobalScaleOffset(sx, sy, ox, oy);
@@ -117,8 +115,8 @@ namespace EGG
             f32 sx, sy, ox, oy;
             GetGlobalScaleOffset(&sx, &sy, &ox, &oy);
 
-            SetGlobalScaleOffset(sCanvasScale.mCoords.x, sCanvasScale.mCoords.y,
-                sCanvasOffset.mCoords.x, sCanvasOffset.mCoords.y);
+            SetGlobalScaleOffset(sCanvasScale.x, sCanvasScale.y,
+                sCanvasOffset.x, sCanvasOffset.y);
             Frustum::CopyToG3D(cam);
 
             SetGlobalScaleOffset(sx, sy, ox, oy);
@@ -181,8 +179,8 @@ namespace EGG
         f32* py = &mDataEfb.vp.y1;
         GetGlobalPos(px, py);
 
-        *px = sCanvasScale.mCoords.x * *px;
-        *py = sCanvasScale.mCoords.y * *py;
+        *px = sCanvasScale.x * *px;
+        *py = sCanvasScale.y * *py;
 
         *px *= tvRatio.w_ratio;
         *py *= tvRatio.h_ratio;
@@ -217,13 +215,13 @@ namespace EGG
         *px = static_cast<s32>(*px);
         *py = static_cast<s32>(*py);
         
-        mDataEfb.vp.x2 = mSize.mCoords.x;
-        mDataEfb.vp.y2 = mSize.mCoords.y;
+        mDataEfb.vp.x2 = mSize.x;
+        mDataEfb.vp.y2 = mSize.y;
 
         if (!(mFlags & 0x8))
         {
-            mDataEfb.vp.x2 = mSize.mCoords.x * tvRatio.w_ratio;
-            mDataEfb.vp.y2 = mSize.mCoords.y * tvRatio.h_ratio;
+            mDataEfb.vp.x2 = mSize.x * tvRatio.w_ratio;
+            mDataEfb.vp.y2 = mSize.y * tvRatio.h_ratio;
         }
 
         if (mFlags & 0x4)
@@ -268,16 +266,15 @@ namespace EGG
     {
         PSMTXScale(*mtx, sx, sy, 1.0f);
 
-        mtx->mEntries.tbl[0][3] = x;
-        mtx->mEntries.tbl[2][3] = 0.0f;
+        mtx->m[0][3] = x;
+        mtx->m[2][3] = 0.0f;
 
         if (mCanvasMode == CANVASMODE_0)
-            mtx->mEntries.tbl[1][3] = y - sy;
+            mtx->m[1][3] = y - sy;
         else
-            mtx->mEntries.tbl[1][3] = y;
+            mtx->m[1][3] = y;
     }
 
-    #ifdef __DECOMP_NON_MATCHING
     // https://decomp.me/scratch/vufIs
     // 1. Bools for ClearEfb are not evaluated in the correct order.
     // 2. The NullSub_0 when constructing the clone must inline
@@ -298,14 +295,12 @@ namespace EGG
 
             clone.SetProjectionGX();
             clone.CalcMatrixForDrawQuad(&drawMtx, 0.0f, 0.0f,
-                mSize.mCoords.x * mScale.mCoords.x, mSize.mCoords.y * mScale.mCoords.y);
+                mSize.x * mScale.x, mSize.y * mScale.y);
 
             DrawGX::ClearEfb(drawMtx, (flags & 1), (flags & 2), (flags & 4), color, true);
         }
     }
-    #endif
 
-    #ifdef __DECOMP_NON_MATCHING
     // https://decomp.me/scratch/WmO2A
     // 1. Recursion is incorrect (lots of extra stack storage)
     // 2. Seems like -ipa file must be off, despite other functions
@@ -318,8 +313,8 @@ namespace EGG
         if (parent != NULL)
         {
             parent->GetGlobalPos(&px, &py);
-            parent->ConvertToCanvasLU(mPosition.mCoords.x,
-                mPosition.mCoords.y, ox, oy);
+            parent->ConvertToCanvasLU(mPosition.x,
+                mPosition.y, ox, oy);
             
             *ox += px;
             *oy += py;
@@ -329,11 +324,10 @@ namespace EGG
             #line 485
             EGG_ASSERT(spRoot == NULL || ( spRoot != NULL && spRoot == this ));
 
-            *ox = mPosition.mCoords.x;
-            *oy = mPosition.mCoords.y;
+            *ox = mPosition.x;
+            *oy = mPosition.y;
         }
     }
-    #endif
 
     void Screen::SetTVMode(TVMode tvMode)
     {
@@ -351,7 +345,7 @@ namespace EGG
 
     void Screen::SetTVModeDefault()
     {
-        SetTVMode(SCGetAspectRatio() == SC_ASPECT_4_3
+        SetTVMode(SCGetAspectRatio() == SC_ASPECT_STD
             ? TV_MODE_4_3 : TV_MODE_16_9);
     }
 

@@ -1,56 +1,106 @@
-#ifndef NW4R_G3D_SCNRFL_H
-#define NW4R_G3D_SCNRFL_H
-#include "types_nw4r.h"
-#include "g3d_scnleaf.h"
-#include <RFL/RFL_Model.h>
-#include <RFL/RFL_MiddleDatabase.h>
+#ifndef NW4R_G3D_SCN_RFL_H
+#define NW4R_G3D_SCN_RFL_H
+#include <nw4r/types_nw4r.h>
 
-namespace nw4r
-{
-    namespace g3d
-    {
-        class ScnRfl : public ScnLeaf
-        {
-        public:
-            struct RflData
-            {
-                bool SetupCharModel(RFLDataSource, u16, RFLMiddleDB *);
-            };
+#include <nw4r/g3d/g3d_scnobj.h>
 
-        public:
-            static ScnRfl * Construct(MEMAllocator *, u32 *, RFLResolution, u32, u32);
-            ScnRfl(MEMAllocator *, ScnRfl *, RflData *, void *, u32);
+#include <RVLFaceLib.h>
 
-            virtual bool IsDerivedFrom(TypeObj other) const // at 0x8
-            {
-                return (other == GetTypeObjStatic());
-            }
-            virtual void G3dProc(u32, u32, void *); // at 0xC
-            virtual ~ScnRfl(); // at 0x10
-            virtual const TypeObj GetTypeObj() const // at 0x14
-            {
-                return TypeObj(TYPE_NAME);
-            }
-            virtual const char * GetTypeName() const // at 0x18
-            {
-                return GetTypeObj().GetTypeName();
-            }
+namespace nw4r {
+namespace g3d {
 
-            bool GetExpression(RFLExpression *);
-            bool SetExpression(RFLExpression);
+class ScnRfl : public ScnLeaf {
+public:
+    typedef void (*DrawProc)(ScnRfl* pScnRfl, const RFLCharModel* pModel,
+                             u32 diffMask, u32 specMask, GXColor ambColor,
+                             bool opa);
 
-            void SetFogIdx(int);
-            void SetLightSetIdx(int);
+public:
+    static ScnRfl* Construct(MEMAllocator* pAllocator, u32* pSize,
+                             RFLResolution resolution, u32 exprFlags,
+                             u32 userDataSize);
 
-            static const nw4r::g3d::G3dObj::TypeObj GetTypeObjStatic()
-            {
-                return TypeObj(TYPE_NAME);
-            }
+    ScnRfl(MEMAllocator* pAllocator, void* pNglBuffer, void* pUserData,
+           RFLResolution resolution, u32 exprFlag);
 
-        private:
-            NW4R_G3D_TYPE_OBJ_DECL(ScnRfl);
-        };
+    virtual void G3dProc(u32 task, u32 param, void* pInfo); // at 0xC
+
+    virtual ~ScnRfl() {
+        ReleaseCharModel();
+    } // at 0x10
+
+    bool SetupCharModel(RFLDataSource src, u16 index, RFLMiddleDB* pMiddleDB);
+    void ReleaseCharModel();
+
+    bool SetExpression(RFLExpression expression);
+    bool GetExpression(RFLExpression* pExpression);
+
+    void SetLightSetIdx(int idx);
+    s8 GetLightSetIdx() const {
+        return mIdxLightSet;
     }
-}
+
+    void SetFogIdx(int idx);
+    s8 GetFogIdx() const {
+        return mIdxFog;
+    }
+
+    void GXSetZCompLoc(GXBool beforeTex) {
+        mZCompLoc = beforeTex;
+    }
+    GXBool GXGetZCompLoc() const {
+        return mZCompLoc;
+    }
+
+    bool IsCharModelReady() const {
+        return mCharModelReady != FALSE;
+    }
+
+    void SetAmbientColor(GXColor color) {
+        mAmbientColor = color;
+    }
+    GXColor GetAmbientColor() const {
+        return mAmbientColor;
+    }
+
+    GXDiffuseFn GetDiffuseFunc() const {
+        return mDiffuseFn;
+    }
+    GXAttnFn GetAttnFunc() const {
+        return mAttnFn;
+    }
+
+    void SetDrawProc(DrawProc pProc) {
+        mpDrawProc = pProc;
+    }
+    DrawProc GetDrawProc() const {
+        return mpDrawProc;
+    }
+
+private:
+    void CallDrawProc(bool opa);
+    void LoadDrawSetting();
+
+private:
+    RFLResolution mResolution; // at 0xE8
+    u32 mExpressionFlag;       // at 0xEC
+    s8 mIdxLightSet;           // at 0xF0
+    s8 mIdxFog;                // at 0xF1
+    GXBool mZCompLoc;          // at 0xF2
+    s8 mCharModelReady;        // at 0xF3
+    GXColor mAmbientColor;     // at 0xF4
+    GXDiffuseFn mDiffuseFn;    // at 0xF8
+    GXAttnFn mAttnFn;          // at 0xFC
+    void* mpNglBuffer;         // at 0x100
+    RFLErrcode mRFLErrCode;    // at 0x104
+    DrawProc mpDrawProc;       // at 0x108
+    void* mpUserData;          // at 0x10C
+    RFLCharModel mCharModel;   // at 0x110
+
+    NW4R_G3D_RTTI_DECL_DERIVED(ScnRfl, ScnLeaf);
+};
+
+} // namespace g3d
+} // namespace nw4r
 
 #endif

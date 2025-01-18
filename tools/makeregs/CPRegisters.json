@@ -1,0 +1,400 @@
+{
+    "module": "GX",
+    "name": "CP",
+    "long_name": "Command Processor",
+    "deps": [
+        "revolution/GX/GXTypes.h"
+    ],
+    "regs": [
+        {
+            "name": "MatrixIndexA",
+            "id": "0x30",
+            "fields": [
+                {
+                    "name": "tex3",
+                    "start": 2,
+                    "end": 7
+                },
+                {
+                    "name": "tex2",
+                    "start": 8,
+                    "end": 13
+                },
+                {
+                    "name": "tex1",
+                    "start": 14,
+                    "end": 19
+                },
+                {
+                    "name": "tex0",
+                    "start": 20,
+                    "end": 25
+                },
+                {
+                    "name": "posNrm",
+                    "start": 26,
+                    "end": 31
+                }
+            ]
+        },
+        {
+            "name": "MatrixIndexB",
+            "id": "0x40",
+            "fields": [
+                {
+                    "name": "tex7",
+                    "start": 8,
+                    "end": 13
+                },
+                {
+                    "name": "tex6",
+                    "start": 14,
+                    "end": 19
+                },
+                {
+                    "name": "tex5",
+                    "start": 20,
+                    "end": 25
+                },
+                {
+                    "name": "tex4",
+                    "start": 26,
+                    "end": 31
+                }
+            ]
+        },
+        {
+            "name": "VCD_Lo",
+            "id": "0x50",
+            "fields": [
+                {
+                    "name": "posMatIdx",
+                    "start": 31,
+                    "end": 31
+                },
+                {
+                    "name": "tex0MatIdx",
+                    "start": 30,
+                    "end": 30
+                },
+                {
+                    "name": "tex1MatIdx",
+                    "start": 29,
+                    "end": 29
+                },
+                {
+                    "name": "tex2MatIdx",
+                    "start": 28,
+                    "end": 28
+                },
+                {
+                    "name": "tex3MatIdx",
+                    "start": 27,
+                    "end": 27
+                },
+                {
+                    "name": "tex4MatIdx",
+                    "start": 26,
+                    "end": 26
+                },
+                {
+                    "name": "tex5MatIdx",
+                    "start": 25,
+                    "end": 25
+                },
+                {
+                    "name": "tex6MatIdx",
+                    "start": 24,
+                    "end": 24
+                },
+                {
+                    "name": "tex7MatIdx",
+                    "start": 23,
+                    "end": 23
+                },
+                {
+                    "name": "position",
+                    "start": 21,
+                    "end": 22
+                },
+                {
+                    "name": "normal",
+                    "start": 19,
+                    "end": 20
+                },
+                {
+                    "name": "colorDiffused",
+                    "start": 17,
+                    "end": 18
+                },
+                {
+                    "name": "colorSpecular",
+                    "start": 15,
+                    "end": 16
+                }
+            ]
+        },
+        {
+            "name": "VCD_Hi",
+            "id": "0x60",
+            "fields": [
+                {
+                    "name": "tex0Coord",
+                    "start": 30,
+                    "end": 31
+                },
+                {
+                    "name": "tex1Coord",
+                    "start": 28,
+                    "end": 29
+                },
+                {
+                    "name": "tex2Coord",
+                    "start": 26,
+                    "end": 27
+                },
+                {
+                    "name": "tex3Coord",
+                    "start": 24,
+                    "end": 25
+                },
+                {
+                    "name": "tex4Coord",
+                    "start": 22,
+                    "end": 23
+                },
+                {
+                    "name": "tex5Coord",
+                    "start": 20,
+                    "end": 21
+                },
+                {
+                    "name": "tex6Coord",
+                    "start": 18,
+                    "end": 19
+                },
+                {
+                    "name": "tex7Coord",
+                    "start": 16,
+                    "end": 17
+                }
+            ]
+        },
+        {
+            "name": "VAT_group0",
+            "id": "0x70",
+            "fields": [
+                {
+                    "name": "pos_cnt",
+                    "start": 31,
+                    "end": 31
+                },
+                {
+                    "name": "pos_type",
+                    "start": 28,
+                    "end": 30
+                },
+                {
+                    "name": "pos_shift",
+                    "start": 23,
+                    "end": 27
+                },
+                {
+                    "name": "nrm_cnt",
+                    "start": 22,
+                    "end": 22
+                },
+                {
+                    "name": "nrm_type",
+                    "start": 19,
+                    "end": 21
+                },
+                {
+                    "name": "colordiff_cnt",
+                    "start": 18,
+                    "end": 18
+                },
+                {
+                    "name": "colordiff_type",
+                    "start": 15,
+                    "end": 17
+                },
+                {
+                    "name": "colorspec_cnt",
+                    "start": 14,
+                    "end": 14
+                },
+                {
+                    "name": "colorspec_type",
+                    "start": 11,
+                    "end": 13
+                },
+                {
+                    "name": "txc0_cnt",
+                    "start": 10,
+                    "end": 10
+                },
+                {
+                    "name": "txc0_type",
+                    "start": 7,
+                    "end": 9
+                },
+                {
+                    "name": "txc0_shift",
+                    "start": 2,
+                    "end": 6
+                },
+                {
+                    "name": "byteDequant",
+                    "start": 1,
+                    "end": 1
+                },
+                {
+                    "name": "normalIndex3",
+                    "desc": "Input will be treated as three staggered indices (one per triple biased by component size) into normal table",
+                    "start": 0,
+                    "end": 0
+                }
+            ]
+        },
+        {
+            "name": "VAT_group1",
+            "id": "0x80",
+            "fields": [
+                {
+                    "name": "txc1_cnt",
+                    "start": 31,
+                    "end": 31
+                },
+                {
+                    "name": "txc1_type",
+                    "start": 28,
+                    "end": 30
+                },
+                {
+                    "name": "txc1_shift",
+                    "start": 23,
+                    "end": 27
+                },
+                {
+                    "name": "txc2_cnt",
+                    "start": 22,
+                    "end": 22
+                },
+                {
+                    "name": "txc2_type",
+                    "start": 19,
+                    "end": 21
+                },
+                {
+                    "name": "txc2_shift",
+                    "start": 14,
+                    "end": 18
+                },
+                {
+                    "name": "txc3_cnt",
+                    "start": 13,
+                    "end": 13
+                },
+                {
+                    "name": "txc3_type",
+                    "start": 10,
+                    "end": 12
+                },
+                {
+                    "name": "txc3_shift",
+                    "start": 5,
+                    "end": 9
+                },
+                {
+                    "name": "txc4_cnt",
+                    "start": 4,
+                    "end": 4
+                },
+                {
+                    "name": "txc4_type",
+                    "start": 1,
+                    "end": 3
+                }
+            ]
+        },
+        {
+            "name": "VAT_group2",
+            "id": "0x90",
+            "fields": [
+                {
+                    "name": "txc4_shift",
+                    "start": 27,
+                    "end": 31
+                },
+                {
+                    "name": "txc5_cnt",
+                    "start": 26,
+                    "end": 26
+                },
+                {
+                    "name": "txc5_type",
+                    "start": 23,
+                    "end": 25
+                },
+                {
+                    "name": "txc5_shift",
+                    "start": 18,
+                    "end": 22
+                },
+                {
+                    "name": "txc6_cnt",
+                    "start": 17,
+                    "end": 17
+                },
+                {
+                    "name": "txc6_type",
+                    "start": 14,
+                    "end": 16
+                },
+                {
+                    "name": "txc6_shift",
+                    "start": 9,
+                    "end": 13
+                },
+                {
+                    "name": "txc7_cnt",
+                    "start": 8,
+                    "end": 8
+                },
+                {
+                    "name": "txc7_type",
+                    "start": 5,
+                    "end": 7
+                },
+                {
+                    "name": "txc7_shift",
+                    "start": 0,
+                    "end": 4
+                }
+            ]
+        },
+        {
+            "name": "ArrayBase",
+            "id": "0xA0",
+            "fields": [
+                {
+                    "name": "base",
+                    "start": 6,
+                    "end": 31
+                }
+            ]
+        },
+        {
+            "name": "ArrayStride",
+            "id": "0xB0",
+            "fields": [
+                {
+                    "name": "stride",
+                    "start": 24,
+                    "end": 31
+                }
+            ]
+        }
+    ]
+}

@@ -1,21 +1,15 @@
-#pragma use_lmw_stmw on
-
 #include "eggCpuTexture.h"
 #include "eggHeap.h"
 #include <OS/OSCache.h>
 
 namespace EGG
 {
-    #ifdef __DECOMP_NON_MATCHING
     void CpuTexture::makeGradient()
     {
 
     }
-    #else
-    #error This file has yet to be decompiled accurately. Use "eggCpuTexture.s" instead.
-    #endif
 
-    CpuTexture::CpuTexture() : mWidth(0), mHeight(0), mTexFormat(GX_TEX_FMT_6),
+    CpuTexture::CpuTexture() : mWidth(0), mHeight(0), mTexFormat(GX_TF_RGBA8),
         mWrapS(0), mWrapT(0), mMinFilt(1), mMagFilt(1), mpBuffer(NULL) {}
 
     CpuTexture::CpuTexture(u16 width, u16 height, GXTexFmt format) : mWidth(width), mHeight(height), mTexFormat(format),
@@ -33,8 +27,11 @@ namespace EGG
         EGG_ASSERT(pObj);
         EGG_ASSERT(mpBuffer);
 
-        GXInitTexObj(pObj, mpBuffer, mWidth, mHeight, mTexFormat, mWrapS, mWrapT, false);
-        GXInitTexObjLOD(pObj, mMinFilt, mMagFilt, 0, 0, 0, 0.0f, 0.0f, 0.0f);
+        GXInitTexObj(pObj, mpBuffer, mWidth, mHeight,
+            static_cast<GXTexFmt>(mTexFormat), static_cast<GXTexWrapMode>(mWrapS),
+            static_cast<GXTexWrapMode>(mWrapT), FALSE);
+        GXInitTexObjLOD(pObj, static_cast<GXTexFilter>(mMinFilt),
+            static_cast<GXTexFilter>(mMagFilt), 0.0f, 0.0f, 0.0f, FALSE, FALSE, GX_ANISO_1);
     }
 
     void CpuTexture::load(GXTexMapID id) const
@@ -107,19 +104,15 @@ namespace EGG
         return getHeader();
     }
 
-    #ifdef __DECOMP_NON_MATCHING
+    // Non-matching
     void CpuTexture::fillNormalMapSphere()
     {
-
     }
-    #endif
 
-    #ifdef __DECOMP_NON_MATCHING
+    // Non-matching
     UNKTYPE CpuTexture::func_80086C8C(UNKTYPE)
     {
-
     }
-    #endif
 
     void CpuTexture::allocTexBuffer()
     {
@@ -147,7 +140,6 @@ namespace EGG
         initHeader();
     }
 
-    #ifdef __DECOMP_NON_MATCHING
     void CpuTexture::setColor(u16 x, u16 y, GXColor c)
     {
         #line 497
@@ -158,12 +150,11 @@ namespace EGG
         // TO-DO
         switch(getFormat())
         {
-            case GX_TEX_FMT_6:
+            case GX_TF_RGBA8:
                 break;
 
-            case GX_TEX_FMT_1:
+            case GX_TF_I8:
                 break;
         }
     }
-    #endif
 }

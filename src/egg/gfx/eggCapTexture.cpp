@@ -1,15 +1,10 @@
-#pragma use_lmw_stmw on
-
 #include "eggCapTexture.h"
 #include "eggStateGX.h"
 
-#include <GX/GXFrameBuf.h>
-#include <GX/GXPixel.h>
-#include <GX/GXMisc.h>
+#include <revolution/GX.h>
 
 namespace EGG
 {
-    #ifdef __DECOMP_NON_MATCHING
     // https://decomp.me/scratch/SrABn
     // - Copy filter argument copies incorrectly
     void CapTexture::configure()
@@ -18,13 +13,12 @@ namespace EGG
 
         CpuTexture::configure();
 
-        mLoadMap = GX_TEX_MAP_ID_0;
+        mLoadMap = GX_TEXMAP0;
         mClearZ = 0x00FFFFFF;
         setClearColor(scDefaultClearColor);
         // setCopyFilterArg1(sCopyFilterArg1_1);
         setFlag(0x80);
     }
-    #endif
 
     void CapTexture::load(GXTexMapID map) const
     {
@@ -35,7 +29,6 @@ namespace EGG
         CpuTexture::load(map);
     }
 
-    #ifdef __DECOMP_NON_MATCHING
     // https://decomp.me/scratch/awE6M
     // - Issue with ternary for GXSetCopyFilter
     void CapTexture::capture(u16 x, u16 y, bool upscale, int format)
@@ -67,17 +60,17 @@ namespace EGG
         EGG_ASSERT(w > 0 && h > 0);
 
         GXSetTexCopySrc(x, y, w + (w & 1), h + (h & 1));
-        GXSetTexCopyDst(getWidth(), getHeight(), format, upscale);
+        GXSetTexCopyDst(getWidth(), getHeight(), static_cast<GXTexFmt>(format), upscale);
 
-        GXSetCopyFilter(0, const_cast<u8(*)[24]>(&scCopyFilterArg0), mFlags & 0x40,
-            mFlags & 0x40 ? &mCopyFilterArg1 : &sCopyFilterArg1_1);
+        GXSetCopyFilter(0, const_cast<u8(*)[2]>(scCopyFilterArg0), mFlags & 0x40,
+            mFlags & 0x40 ? mCopyFilterArg1 : sCopyFilterArg1_1);
 
         if ((mFlags & 0x8) || (mFlags & 0x10) || (mFlags & 0x20))
         {
             StateGX::ScopedColor color(mFlags & 0x8);
             StateGX::ScopedAlpha alpha(mFlags & 0x10);
 
-            GXSetZMode(1, 7, (mFlags & 0x20) != 0);
+            GXSetZMode(1, GX_ALWAYS, (mFlags & 0x20) != 0);
             GXSetCopyClear(mClearColor, mClearZ);
             GXCopyTex(getBuffer(), 1);
         }
@@ -86,11 +79,10 @@ namespace EGG
             GXCopyTex(getBuffer(), 0);
         }
 
-        GXSetCopyFilter(0, const_cast<u8(*)[24]>(&scCopyFilterArg0),
-            0, &sCopyFilterArg1_1);
+        GXSetCopyFilter(0, const_cast<u8(*)[2]>(scCopyFilterArg0),
+            0, sCopyFilterArg1_1);
 
         if (mFlags & 0x80)
             GXPixModeSync();
     }
-    #endif
 }

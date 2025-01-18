@@ -1,67 +1,65 @@
-#include "ut_FileStream.h"
-#include "ut_algorithm.h"
+#include <nw4r/ut.h>
 
-namespace nw4r
-{
-	namespace ut
-	{
-		UNKTYPE FileStream::Cancel() {}
-		
-		bool FileStream::CancelAsync(AsyncFunctor, void *)
-		{
-			return true;
-		}
-		
-		u32 FileStream::FilePosition::Skip(s32 offset)
-		{
-			if (offset)
-			{
-				mFileOffset = Clamp<s64>(0, mFileSize, mFileOffset + offset);
-			}
-			
-			return mFileOffset;
-		}
-		
-		u32 FileStream::FilePosition::Append(s32 offset)
-		{
-			s64 r5 = mFileOffset + offset;
-			
-			if (r5 < 0LL)
-			{
-				mFileOffset = 0;
-			}
-			else
-			{
-				mFileOffset = r5;
-				mFileSize = Max<u32>(mFileOffset, mFileSize);
-			}
-			
-			return mFileOffset;
-		}
-		
-		void FileStream::FilePosition::Seek(s32 offset, u32 origin)
-		{
-			switch (origin)
-			{
-				case 0:
-					mFileOffset = 0;
-					break;
-				case 2:
-					mFileOffset = mFileSize;
-					break;
-				case 1:
-				default:
-					break;
-			}
-			
-			Skip(offset);
-		}
-		
-		const detail::RuntimeTypeInfo * FileStream::GetRuntimeTypeInfo() const
-		{
-			return &typeInfo;
-		}
-		
-		detail::RuntimeTypeInfo FileStream::typeInfo(&IOStream::typeInfo);
-	}
+namespace nw4r {
+namespace ut {
+
+NW4R_UT_RTTI_DEF_DERIVED(FileStream, IOStream);
+
+void FileStream::Cancel() {}
+
+bool FileStream::CancelAsync(StreamCallback pCallback, void* pCallbackArg) {
+#pragma unused(pCallback)
+#pragma unused(pCallbackArg)
+    return true;
 }
+
+u32 FileStream::FilePosition::Skip(s32 offset) {
+    if (offset != 0) {
+        s64 newOffset = mPosition + offset;
+        mPosition = Clamp<s64>(newOffset, 0, mFileSize);
+    }
+
+    return mPosition;
+}
+
+u32 FileStream::FilePosition::Append(s32 offset) {
+    s64 newOffset = mPosition + offset;
+
+    if (newOffset < 0) {
+        mPosition = 0;
+    } else {
+        mPosition = newOffset;
+        mFileSize = Max(mPosition, mFileSize);
+    }
+
+    return mPosition;
+}
+
+void FileStream::FilePosition::Seek(s32 offset, u32 origin) {
+    switch (origin) {
+    case SEEK_BEG: {
+        mPosition = 0;
+        break;
+    }
+
+    case SEEK_END: {
+        mPosition = mFileSize;
+        break;
+    }
+
+    case SEEK_CUR:
+    default: {
+        break;
+    }
+    }
+
+    Skip(offset);
+}
+
+// clang-format off
+DECOMP_FORCEACTIVE(ut_FileStream_cpp,
+                   FileStream::GetRuntimeTypeInfo);
+// clang-format on
+
+} // namespace ut
+} // namespace nw4r

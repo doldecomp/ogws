@@ -1,0 +1,403 @@
+{
+    "module": "GX",
+    "name": "XF",
+    "long_name": "Transform Unit",
+    "deps": [
+        "revolution/GX/GXTypes.h"
+    ],
+    "regs": [
+        {
+            "name": "Error",
+            "id": "0x1000"
+        },
+        {
+            "name": "Diagnostics",
+            "id": "0x1001"
+        },
+        {
+            "name": "State0",
+            "id": "0x1002"
+        },
+        {
+            "name": "State1",
+            "id": "0x1003"
+        },
+        {
+            "name": "Clock",
+            "id": "0x1004"
+        },
+        {
+            "name": "ClipDisable",
+            "id": "0x1005",
+            "fields": [
+                {
+                    "name": "detect",
+                    "desc": "Disable clipping detection",
+                    "start": 31,
+                    "end": 31
+                },
+                {
+                    "name": "reject",
+                    "desc": "Disable trivial rejection",
+                    "start": 30,
+                    "end": 30
+                },
+                {
+                    "name": "accel",
+                    "desc": "Disable cpoly clipping acceleration",
+                    "start": 29,
+                    "end": 29
+                }
+            ]
+        },
+        {
+            "name": "Perf0",
+            "id": "0x1006"
+        },
+        {
+            "name": "Perf1",
+            "id": "0x1007",
+            "fields": [
+                {
+                    "name": "target",
+                    "desc": "Target performance (Cycles/vertex)",
+                    "start": 25,
+                    "end": 31
+                }
+            ]
+        },
+        {
+            "name": "InVertexSpec",
+            "id": "0x1008",
+            "fields": [
+                {
+                    "name": "clr",
+                    "start": 30,
+                    "end": 31
+                },
+                {
+                    "name": "nrm",
+                    "start": 28,
+                    "end": 29
+                },
+                {
+                    "name": "txc",
+                    "start": 24,
+                    "end": 27
+                }
+            ]
+        },
+        {
+            "name": "NumColors",
+            "id": "0x1009"
+        },
+        {
+            "name": "Ambient0",
+            "id": "0x100A"
+        },
+        {
+            "name": "Ambient1",
+            "id": "0x100B"
+        },
+        {
+            "name": "Material0",
+            "id": "0x100C"
+        },
+        {
+            "name": "Material1",
+            "id": "0x100D"
+        },
+        {
+            "name": "Color0Cntrl",
+            "id": "0x100E",
+            "fields": [
+                {
+                    "name": "matSrc",
+                    "start": 31,
+                    "end": 31
+                },
+                {
+                    "name": "light",
+                    "start": 30,
+                    "end": 30
+                },
+                {
+                    "name": "lmaskLo",
+                    "start": 26,
+                    "end": 29
+                },
+                {
+                    "name": "ambSrc",
+                    "start": 25,
+                    "end": 25
+                },
+                {
+                    "name": "diffuseAttn",
+                    "start": 23,
+                    "end": 24
+                },
+                {
+                    "name": "attnEnable",
+                    "start": 22,
+                    "end": 22
+                },
+                {
+                    "name": "attnSelect",
+                    "start": 21,
+                    "end": 21
+                },
+                {
+                    "name": "lmaskHi",
+                    "start": 17,
+                    "end": 20
+                }
+            ]
+        },
+        {
+            "name": "Color1Cntrl",
+            "id": "0x100F"
+        },
+        {
+            "name": "Alpha0Cntrl",
+            "id": "0x1010"
+        },
+        {
+            "name": "Alpha1Cntrl",
+            "id": "0x1011"
+        },
+        {
+            "name": "DualTexTran",
+            "id": "0x1012"
+        },
+        {
+            "name": "MatrixIndex0",
+            "id": "0x1018",
+            "fields": [
+                {
+                    "name": "geom",
+                    "start": 26,
+                    "end": 31
+                },
+                {
+                    "name": "tex0",
+                    "start": 20,
+                    "end": 25
+                },
+                {
+                    "name": "tex1",
+                    "start": 14,
+                    "end": 19
+                },
+                {
+                    "name": "tex2",
+                    "start": 8,
+                    "end": 13
+                },
+                {
+                    "name": "tex3",
+                    "start": 2,
+                    "end": 7
+                }
+            ]
+        },
+        {
+            "name": "MatrixIndex1",
+            "id": "0x1019",
+            "fields": [
+                {
+                    "name": "tex4",
+                    "start": 26,
+                    "end": 31
+                },
+                {
+                    "name": "tex5",
+                    "start": 20,
+                    "end": 25
+                },
+                {
+                    "name": "tex6",
+                    "start": 14,
+                    "end": 19
+                },
+                {
+                    "name": "tex7",
+                    "start": 8,
+                    "end": 13
+                }
+            ]
+        },
+        {
+            "name": "ScaleX",
+            "id": "0x101A"
+        },
+        {
+            "name": "ScaleY",
+            "id": "0x101B"
+        },
+        {
+            "name": "ScaleZ",
+            "id": "0x101C"
+        },
+        {
+            "name": "OffsetX",
+            "id": "0x101D"
+        },
+        {
+            "name": "OffsetY",
+            "id": "0x101E"
+        },
+        {
+            "name": "OffsetZ",
+            "id": "0x101F"
+        },
+        {
+            "name": "ProjectionA",
+            "id": "0x1020"
+        },
+        {
+            "name": "ProjectionB",
+            "id": "0x1021"
+        },
+        {
+            "name": "ProjectionC",
+            "id": "0x1022"
+        },
+        {
+            "name": "ProjectionD",
+            "id": "0x1023"
+        },
+        {
+            "name": "ProjectionE",
+            "id": "0x1024"
+        },
+        {
+            "name": "ProjectionF",
+            "id": "0x1025"
+        },
+        {
+            "name": "ProjectOrtho",
+            "desc": "If set selects orthographic otherwise non-orthographic (Zh or 1.0 select)",
+            "id": "0x1026"
+        },
+        {
+            "name": "NumTex",
+            "id": "0x103F"
+        },
+        {
+            "name": "Tex",
+            "fields": [
+                {
+                    "name": "projType",
+                    "start": 30,
+                    "end": 30
+                },
+                {
+                    "name": "inputForm",
+                    "start": 29,
+                    "end": 29
+                },
+                {
+                    "name": "texgenType",
+                    "start": 25,
+                    "end": 27
+                },
+                {
+                    "name": "srcRow",
+                    "start": 20,
+                    "end": 24
+                },
+                {
+                    "name": "bumpSrcTex",
+                    "start": 17,
+                    "end": 19
+                },
+                {
+                    "name": "bumpSrcLight",
+                    "start": 14,
+                    "end": 16
+                }
+            ]
+        },
+        {
+            "name": "Tex0",
+            "id": "0x1040"
+        },
+        {
+            "name": "Tex1",
+            "id": "0x1041"
+        },
+        {
+            "name": "Tex2",
+            "id": "0x1042"
+        },
+        {
+            "name": "Tex3",
+            "id": "0x1043"
+        },
+        {
+            "name": "Tex4",
+            "id": "0x1044"
+        },
+        {
+            "name": "Tex5",
+            "id": "0x1045"
+        },
+        {
+            "name": "Tex6",
+            "id": "0x1046"
+        },
+        {
+            "name": "Tex7",
+            "id": "0x1047"
+        },
+        {
+            "name": "DualTex",
+            "fields": [
+                {
+                    "name": "baseRow",
+                    "desc": "Indicates which is the base row of the transform matrix",
+                    "start": 26,
+                    "end": 31
+                },
+                {
+                    "name": "normalize",
+                    "desc": "Normalize texcoord before sending transform",
+                    "start": 23,
+                    "end": 23
+                }
+            ]
+        },
+        {
+            "name": "DualTex0",
+            "id": "0x1050"
+        },
+        {
+            "name": "DualTex1",
+            "id": "0x1051"
+        },
+        {
+            "name": "DualTex2",
+            "id": "0x1052"
+        },
+        {
+            "name": "DualTex3",
+            "id": "0x1053"
+        },
+        {
+            "name": "DualTex4",
+            "id": "0x1054"
+        },
+        {
+            "name": "DualTex5",
+            "id": "0x1055"
+        },
+        {
+            "name": "DualTex6",
+            "id": "0x1056"
+        },
+        {
+            "name": "DualTex7",
+            "id": "0x1057"
+        }
+    ]
+}

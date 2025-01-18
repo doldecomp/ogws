@@ -1,55 +1,55 @@
-#ifndef NW4R_UT_CHAR_STRM_READER
-#define NW4R_UT_CHAR_STRM_READER
-#include "types_nw4r.h"
+#ifndef NW4R_UT_CHAR_STRM_READER_H
+#define NW4R_UT_CHAR_STRM_READER_H
+#include <nw4r/types_nw4r.h>
 
-namespace nw4r
-{
-	namespace ut
-	{
-		struct CharStrmReader
-		{
-			const char * mStrm;
-			u16 (CharStrmReader::* mFunc)();
-			
-			inline CharStrmReader(u16 (CharStrmReader::* func)()) : mStrm(NULL), mFunc(func)
-			{
-				
-			}
-			
-			u16 ReadNextCharUTF8();
-			u16 ReadNextCharUTF16();
-			u16 ReadNextCharCP1252();
-			u16 ReadNextCharSJIS();
-			
-			template <typename T>
-			inline T GetChar(int offset) const
-			{
-				const T * strm = reinterpret_cast<const T *>(mStrm);
-				return strm[offset];
-			}
-			
-			template <typename T>
-			inline void StepStrm(int offset) volatile
-			{
-				mStrm += sizeof(T) * offset;
-			}
-			
-			inline u16 Next()
-			{
-				return (this->*mFunc)();
-			}
-			
-			inline void Set(const char * pStrm)
-			{
-				mStrm = pStrm;
-			}
-			
-			inline void Set(const wchar_t * pStrm)
-			{
-				mStrm = reinterpret_cast<const char *>(pStrm);
-			}
-		};
-	}
-}
+namespace nw4r {
+namespace ut {
+
+class CharStrmReader {
+public:
+    typedef u16 (CharStrmReader::*ReadFunc)();
+
+public:
+    explicit CharStrmReader(ReadFunc pFunc)
+        : mCharStrm(NULL), mReadFunc(pFunc) {}
+
+    ~CharStrmReader() {}
+
+    u16 ReadNextCharUTF8();
+    u16 ReadNextCharUTF16();
+    u16 ReadNextCharCP1252();
+    u16 ReadNextCharSJIS();
+
+    u16 Next() {
+        return (this->*mReadFunc)();
+    }
+
+    const void* GetCurrentPos() const {
+        return mCharStrm;
+    }
+
+    void Set(const char* pStrm) {
+        mCharStrm = pStrm;
+    }
+    void Set(const wchar_t* pStrm) {
+        mCharStrm = pStrm;
+    }
+
+private:
+    template <typename T> T GetChar(int offset) const {
+        return static_cast<const T*>(mCharStrm)[offset];
+    }
+
+    template <typename T> void StepStrm(int offset) {
+        static_cast<const T*>(mCharStrm) += offset;
+    }
+
+private:
+    const void* mCharStrm; // at 0x0
+    ReadFunc mReadFunc;    // at 0x4
+};
+
+} // namespace ut
+} // namespace nw4r
 
 #endif

@@ -1,84 +1,100 @@
-#ifndef NW4R_UT_NAND_FILE_STREAM
-#define NW4R_UT_NAND_FILE_STREAM
-#include <types.h>
-#include "ut_IOStream.h"
-#include "ut_FileStream.h"
-#include <RevoSDK/NAND/nand.h>
+#ifndef NW4R_UT_NAND_FILE_STREAM_H
+#define NW4R_UT_NAND_FILE_STREAM_H
+#include <nw4r/types_nw4r.h>
 
-namespace nw4r
-{
-	namespace ut
-	{
-		struct NandFileStream : FileStream
-		{
-			FilePosition mPosition; // at 0x14
-			char UNK_0x1C[0xB8];
-			
-			NANDFileInfo mFileInfo; // at 0xd4 (ends in 0x160)
-			
-			NandFileStream * THIS_0x160;
-			
-			bool mReadFlag; // at 0x164
-			bool mWriteFlag; // at 0x165
-			bool mBusyFlag; // at 0x166
-			bool BYTE_0x167; // at 0x167
-			bool BYTE_0x168; // at 0x168
-			
-			static UNKTYPE NandAsyncCallback_(s32, NANDCommandBlock *);
-			
-			NandFileStream(const char *, u32);
-			NandFileStream(const NANDFileInfo *, u32, bool);
-			
-			~NandFileStream();
-			
-			bool Open(const char *, u32);
-			bool Open(const NANDFileInfo *, u32, bool);
-			
-			UNKTYPE Close();
-			
-			int Read(void *, u32);
-			bool ReadAsync(void *, u32, AsyncFunctor, void *);
-			
-			UNKTYPE Write(const void *, u32);
-			bool WriteAsync(const void *, u32, AsyncFunctor, void *);
-			
-			UNKTYPE Seek(s32, u32);
-			
-			u32 GetBufferAlign() const;
-			u32 GetSizeAlign() const;
-			u32 GetOffsetAlign() const;
-			
-			bool CanCancel() const;
-			bool CanWrite() const;
-			bool CanRead() const;
-			bool CanSeek() const;
-			bool CanAsync() const;
-			
-			u32 GetSize() const;
-			
-			u32 Tell() const;
-			
-			bool IsBusy() const;
-			
-			const detail::RuntimeTypeInfo * GetRuntimeTypeInfo() const;
-			
-			inline void Initialize_()
-			{
-				mReadFlag = false;
-				mWriteFlag = false;
-				BYTE_0x167 = false;
-				BYTE_0x168 = false;
-				BOOL_0x4 = false;
-				mBusyFlag = false;
-				ASYNC_0xC = NULL;
-				PTR_0x10 = NULL;
-				WORD_0x8 = 0;
-				THIS_0x160 = this;
-			}
-			
-			static detail::RuntimeTypeInfo typeInfo;
-		};
-	}
-}
+#include <nw4r/ut/ut_FileStream.h>
+
+#include <revolution/NAND.h>
+
+namespace nw4r {
+namespace ut {
+
+class NandFileStream : public FileStream {
+public:
+    NW4R_UT_RTTI_DECL(NandFileStream);
+
+public:
+    NandFileStream(const char* pPath, u32 mode);
+    NandFileStream(const NANDFileInfo* pInfo, u32 mode, bool enableClose);
+    virtual ~NandFileStream(); // at 0xC
+
+    bool Open(const char* pPath, u32 mode);
+    bool Open(const NANDFileInfo* pInfo, u32 mode, bool enableClose)
+        DECOMP_DONT_INLINE;
+
+    virtual void Close(); // at 0x10
+
+    virtual s32 Read(void* pDst, u32 size); // at 0x14
+    virtual bool ReadAsync(void* pDst, u32 size, StreamCallback pCallback,
+                           void* pCallbackArg); // at 0x18
+
+    virtual void Write(const void* pSrc, u32 size); // at 0x1C
+    virtual bool WriteAsync(const void* pSrc, u32 size,
+                            StreamCallback pCallback,
+                            void* pCallbackArg); // at 0x20
+
+    virtual void Seek(s32 offset, u32 origin); // at 0x44
+
+    virtual bool IsBusy() const {
+        return mIsBusy;
+    } // at 0x24
+
+    virtual u32 Tell() const {
+        return mFilePosition.Tell();
+    } // at 0x58
+    virtual u32 GetSize() const {
+        return mFilePosition.GetFileSize();
+    } // at 0x40
+
+    virtual bool CanAsync() const {
+        return true;
+    } // at 0x28
+    virtual bool CanSeek() const {
+        return true;
+    } // at 0x50
+    virtual bool CanRead() const {
+        return mCanRead;
+    } // at 0x2C
+    virtual bool CanWrite() const {
+        return mCanWrite;
+    } // at 0x30
+    virtual bool CanCancel() const {
+        return false;
+    } // at 0x54
+
+    virtual u32 GetOffsetAlign() const {
+        return 1;
+    } // at 0x34
+    virtual u32 GetSizeAlign() const {
+        return 32;
+    } // at 0x38
+    virtual u32 GetBufferAlign() const {
+        return 32;
+    } // at 0x3C
+
+private:
+    struct NandFileStreamInfo {
+        NANDCommandBlock nandBlock; // at 0x0
+        NANDFileInfo nandInfo;      // at 0xB8
+        NandFileStream* stream;     // at 0x144
+    };
+
+private:
+    static void NandAsyncCallback_(s32 result, NANDCommandBlock* pBlock);
+
+    void Initialize_();
+
+private:
+    FilePosition mFilePosition;   // at 0x14
+    NandFileStreamInfo mFileInfo; // at 0x1C
+    bool mCanRead;                // at 0x164
+    bool mCanWrite;               // at 0x165
+    volatile bool mIsBusy;        // at 0x166
+    bool mCloseOnDestroyFlg;      // at 0x167
+    bool mCloseEnableFlg;         // at 0x168
+};
+
+} // namespace ut
+} // namespace nw4r
 
 #endif

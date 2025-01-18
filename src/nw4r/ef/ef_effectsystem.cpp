@@ -1,4 +1,4 @@
-#include <RevoSDK/OS/OS.h>
+#include <revolution/OS/OS.h>
 #include "ef_effectsystem.h"
 #include "ef_effect.h"
 #include "ef_draworder.h"
@@ -10,11 +10,12 @@
 
 namespace
 {
-	const char * NW4R_EF_Version = "<< NW4R    - EF \tfinal   build: Jun  8 2007 11:16:29 (0x4199_60831) >>";
+	const char * NW4R_EF_Version_ = "<< NW4R    - EF \tfinal   build: Jun  8 2007 11:16:29 (0x4199_60831) >>";
 }
 
 inline void * operator new[](size_t size, void *p)
 {
+#pragma unused(size)
 	return p;
 }
 
@@ -31,7 +32,7 @@ namespace nw4r
 			if (mDisplayVersion)
 			{
 				mDisplayVersion = false;
-				OSRegisterVersion(NW4R_EF_Version);
+				OSRegisterVersion(NW4R_EF_Version_);
 			}
 			
 			mMemoryManager = NULL;
@@ -124,7 +125,7 @@ namespace nw4r
 			Effect * effects[0x400];
 			
 			u16 counter = 0;
-			u16 len = UtlistToArray(&ARR_0x5018[index].mActive, (void **)effects, ARR_0x5018[index].mActive.size);
+			u16 len = UtlistToArray(&ARR_0x5018[index].mActive, (void **)effects, ARR_0x5018[index].mActive.numObjects);
 			
 			for (u16 i = 0; i < len; i++)
 			{
@@ -141,7 +142,7 @@ namespace nw4r
 			Effect * effects[0x400];
 			
 			u16 counter = 0;
-			u16 len = UtlistToArray(&ARR_0x5018[index].mActive, (void **)effects, ARR_0x5018[index].mActive.size);
+			u16 len = UtlistToArray(&ARR_0x5018[index].mActive, (void **)effects, ARR_0x5018[index].mActive.numObjects);
 			
 			for (u16 i = 0; i < len; i++)
 			{
@@ -156,7 +157,7 @@ namespace nw4r
 			Effect * effects[0x400];
 			
 			u16 counter = 0;
-			u16 len = UtlistToArray(&ARR_0x5018[index].mActive, (void **)effects, ARR_0x5018[index].mActive.size);
+			u16 len = UtlistToArray(&ARR_0x5018[index].mActive, (void **)effects, ARR_0x5018[index].mActive.numObjects);
 			
 			for (u16 i = 0; i < len; i++)
 			{
@@ -170,7 +171,7 @@ namespace nw4r
 		{
 			Effect * effects[0x400];
 			
-			u16 len = UtlistToArray(&ARR_0x5018[index].mActive, (void **)effects, ARR_0x5018[index].mActive.size);
+			u16 len = UtlistToArray(&ARR_0x5018[index].mActive, (void **)effects, ARR_0x5018[index].mActive.numObjects);
 			
 			for (u16 i = 0; i < len; i++)
 			{

@@ -2,7 +2,7 @@
 #define NW4R_LYT_LAYOUT_H
 #include "types_nw4r.h"
 #include <new>
-#include <RevoSDK/MEM/mem_allocator.h>
+#include <revolution/MEM/mem_allocator.h>
 
 namespace nw4r
 {

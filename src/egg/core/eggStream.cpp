@@ -329,7 +329,6 @@ namespace EGG
         }
     }
 
-    #ifdef __DECOMP_NON_MATCHING
     // Missing stringbase load at 800A90EC/+0x570
     // https://decomp.me/scratch/lpaK6
     const char * Stream::readString(char *buf, int bufSize)
@@ -473,9 +472,6 @@ namespace EGG
 
         return buf;
     }
-    #else
-    #error "This file has not yet been decompiled. Use 'eggStream.s' instead."
-    #endif
 
     void UNUSED_STRINGS_EGGSTREAM_2()
     {
@@ -558,7 +554,7 @@ namespace EGG
     {
         va_list list;
         char buf[0x400];
-        va_start(str, list);
+        va_start(list, str);
         vsprintf(buf, str, list);
         va_end(list);
 

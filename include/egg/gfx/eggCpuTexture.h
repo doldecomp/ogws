@@ -2,7 +2,7 @@
 #define EGG_GFX_CPU_TEXTURE_H
 #include "types_egg.h"
 #include "eggAssert.h"
-#include <GX/GXTexture.h>
+#include <revolution/GX.h>
 
 namespace EGG
 {

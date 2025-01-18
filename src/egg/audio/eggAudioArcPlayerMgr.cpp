@@ -4,7 +4,7 @@
 #include "eggAssert.h"
 #include "eggCntFile.h"
 #include "snd_SoundPlayer.h"
-#include <RevoSDK/OS/OSCache.h>
+#include <revolution/OS/OSCache.h>
 
 namespace EGG
 {
@@ -36,7 +36,7 @@ namespace EGG
     }
     
     UNKTYPE * ArcPlayer::openArchive(const char *name, snd::SoundHeap *heap,
-        SARC_STORAGE storage, struct ARCHandle *handle) 
+        SARC_STORAGE storage, CNTHandle *handle) 
     {
         UNKTYPE *ret = NULL;
 
@@ -83,7 +83,7 @@ namespace EGG
         {
             mIsOpeningArchive = true;
 
-            headerBufSize = dvdSndArchive->mFileReader.mHeader.mInfoChunkSize;
+            headerBufSize = dvdSndArchive->GetHeaderSize();
             void *headerBuf = heap->Alloc(headerBufSize, NULL, NULL);
             if (!dvdSndArchive->LoadHeader(headerBuf, headerBufSize))
             {
@@ -107,7 +107,7 @@ namespace EGG
                 return NULL;
             }
 
-            headerBufSize = dvdSndArchive->mFileReader.mHeader.mLabelStringChunkSize;
+            headerBufSize = dvdSndArchive->GetLabelStringDataSize();
             void *stringDataBuf = heap->Alloc(headerBufSize, NULL, NULL);
             if (!dvdSndArchive->LoadLabelStringData(stringDataBuf, headerBufSize))
             {
@@ -143,7 +143,7 @@ namespace EGG
         {
             mIsOpeningArchive = true;
 
-            headerBufSize = nandSndArchive->mFileReader.mHeader.mInfoChunkSize;
+            headerBufSize = nandSndArchive->GetHeaderSize();
             void *headerBuf = heap->Alloc(headerBufSize, NULL, NULL);
             if (!nandSndArchive->LoadHeader(headerBuf, headerBufSize))
             {
@@ -167,7 +167,7 @@ namespace EGG
                 return NULL;
             }
 
-            headerBufSize = nandSndArchive->mFileReader.mHeader.mLabelStringChunkSize;
+            headerBufSize = nandSndArchive->GetLabelStringDataSize();
             void *stringDataBuf = heap->Alloc(headerBufSize, NULL, NULL);
             if (!nandSndArchive->LoadLabelStringData(stringDataBuf, headerBufSize))
             {
@@ -182,7 +182,7 @@ namespace EGG
         return NULL;
     }
     
-    UNKTYPE * ArcPlayer::openCntArchive(const char *name, struct ARCHandle *handle, snd::SoundHeap *heap) 
+    UNKTYPE * ArcPlayer::openCntArchive(const char *name, CNTHandle *handle, snd::SoundHeap *heap) 
     {
         if (!heap) heap = mSoundHeap;
         #line 282
@@ -395,9 +395,9 @@ namespace EGG
 
     void ArcPlayer::stopAllSound() 
     {
-        for (int i = 0; i < mActiveSndArchivePlayer->WORD_0x30; i++)
+        for (int i = 0; i < mActiveSndArchivePlayer->GetSoundPlayerCount(); i++)
         {
-            mActiveSndArchivePlayer->GetSoundPlayer(i)->StopAllSound(0);
+            mActiveSndArchivePlayer->GetSoundPlayer(i).StopAllSound(0);
         }
     }
 }

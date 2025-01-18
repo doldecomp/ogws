@@ -1,80 +1,116 @@
 #ifndef NW4R_SND_SOUND_THREAD_H
 #define NW4R_SND_SOUND_THREAD_H
-#include <RevoSDK/OS/OSMessage.h>
-#include <RevoSDK/OS/OSThread.h>
-#include <RevoSDK/OS/OSMutex.h>
-#include "types_nw4r.h"
-#include "ut_LinkList.h"
-#include "snd_AxManager.h"
+#include <nw4r/types_nw4r.h>
 
-namespace nw4r
-{
-	namespace snd
-	{
-		namespace detail
-		{
-			class SoundThread
-			{
-			public:
-				struct SoundThreadCallback
-				{
-					ut::LinkListNode mNode; // at 0x0
+#include <nw4r/snd/snd_AxManager.h>
 
-					inline virtual ~SoundThreadCallback() {} // at 0x8
-					inline virtual void VF_0xC() {} // at 0xC
-					inline virtual void VF_0x10() {} // at 0x10
-				};
+#include <nw4r/ut.h>
 
-				struct PlayerCallback
-				{
-					ut::LinkListNode mNode; // at 0x0
-					
-					inline virtual ~PlayerCallback() {} // at 0x8
-					inline virtual void OnUpdateFrameSoundThread() {} // at 0xc
-					inline virtual void OnUpdateVoiceSoundThread() {} // at 0x10
-					inline virtual void OnShutdownSoundThread() {} // at 0x14
-				};
+#include <revolution/OS.h>
 
-				struct AutoLock
-				{
-					inline AutoLock() { GetInstance()->Lock(); }
-					inline ~AutoLock() { GetInstance()->Unlock(); }
-				};
-				
-			public:				
-				static SoundThread * GetInstance();
+namespace nw4r {
+namespace snd {
+namespace detail {
 
-				SoundThread();
-				~SoundThread() {}
+class SoundThread {
+    friend class AutoLock; // Prevent locking without AutoLock
 
-				void Lock() { OSLockMutex(&mMutex); }
-				void Unlock() { OSUnlockMutex(&mMutex); }
+public:
+    /******************************************************************************
+     * SoundFrameCallback
+     ******************************************************************************/
+    class SoundFrameCallback {
+    public:
+        NW4R_UT_LINKLIST_NODE_DECL(); // at 0x0
 
-				bool Create(s32, void *, u32);
-				void Shutdown();
-				static void AxCallbackFunc();
-				void AxCallbackProc();
-				static UNKWORD SoundThreadFunc(void *);
-				void RegisterPlayerCallback(PlayerCallback *);
-				void UnregisterPlayerCallback(PlayerCallback *);
-				void SoundThreadProc();
+        virtual ~SoundFrameCallback() {}    // at 0x8
+        virtual void OnBeginSoundFrame() {} // at 0xC
+        virtual void OnEndSoundFrame() {}   // at 0x10
+    };
 
-			private:
-				OSThread mThread; // at 0x0
-				OSThreadQueue mThreadQueue; // at 0x318
-				OSMessageQueue mMesgQueue; // at 0x320
-				OSMessage mMesgBuffer; // at 0x340
-				char UNK_0x344[0x350 - 0x344];
-				void *mStackEnd; // at 0x350
-				OSMutex mMutex; // at 0x354
-				AxManager::CallbackListNode mAxNode; // at 0x36C
-				ut::LinkList<SoundThreadCallback, 0> mThreadCbList; // at 0x378
-				ut::LinkList<PlayerCallback, 0> mPlayerCbList; // at 0x384
-				s32 mLastUpdateTime; // at 0x390
-				bool mIsCreated; // at 0x394
-			};
-		}
-	}
-}
+    NW4R_UT_LINKLIST_TYPEDEF_DECL(SoundFrameCallback);
+
+    /******************************************************************************
+     * PlayerCallback
+     ******************************************************************************/
+    class PlayerCallback {
+    public:
+        NW4R_UT_LINKLIST_NODE_DECL(); // at 0x0
+
+        virtual ~PlayerCallback() {}               // at 0x8
+        virtual void OnUpdateFrameSoundThread() {} // at 0xC
+        virtual void OnUpdateVoiceSoundThread() {} // at 0x10
+        virtual void OnShutdownSoundThread() {}    // at 0x14
+    };
+
+    NW4R_UT_LINKLIST_TYPEDEF_DECL(PlayerCallback);
+
+    /******************************************************************************
+     * AutoLock
+     ******************************************************************************/
+    class AutoLock : private ut::NonCopyable {
+    public:
+        AutoLock() {
+            SoundThread::GetInstance().Lock();
+        }
+
+        ~AutoLock() {
+            SoundThread::GetInstance().Unlock();
+        }
+    };
+
+public:
+    static SoundThread& GetInstance();
+
+    bool Create(s32 priority, void* pStack, u32 stackSize);
+    void Shutdown();
+
+    void RegisterPlayerCallback(PlayerCallback* pCallback);
+    void UnregisterPlayerCallback(PlayerCallback* pCallback);
+
+private:
+    enum ThreadMessage {
+        MSG_NONE,
+        MSG_AX_CALLBACK,
+        MSG_SHUTDOWN,
+    };
+
+    static const int MSG_QUEUE_CAPACITY = 4;
+
+private:
+    SoundThread();
+
+    static void AxCallbackFunc();
+    void AxCallbackProc();
+
+    static void* SoundThreadFunc(void* pArg);
+    void SoundThreadProc();
+
+    void Lock() {
+        OSLockMutex(&mMutex);
+    }
+    void Unlock() {
+        OSUnlockMutex(&mMutex);
+    }
+
+private:
+    OSThread mThread;                         // at 0x0
+    OSThreadQueue mThreadQueue;               // at 0x318
+    OSMessageQueue mMsgQueue;                 // at 0x320
+    OSMessage mMsgBuffer[MSG_QUEUE_CAPACITY]; // at 0x340
+    void* mStackEnd;                          // at 0x350
+    mutable OSMutex mMutex;                   // at 0x354
+
+    AxManager::CallbackListNode mAxCallbackNode;    // at 0x36C
+    SoundFrameCallbackList mSoundFrameCallbackList; // at 0x378
+    PlayerCallbackList mPlayerCallbackList;         // at 0x384
+
+    u32 mProcessTick; // at 0x390
+    bool mCreateFlag; // at 0x394
+};
+
+} // namespace detail
+} // namespace snd
+} // namespace nw4r
 
 #endif

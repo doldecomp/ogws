@@ -1,75 +1,72 @@
-#pragma ipa file
-#include "ut_LinkList.h"
+#include <nw4r/ut.h>
 
-namespace nw4r
-{
-    namespace ut
-    {
-        namespace detail
-        {
-            LinkListImpl::~LinkListImpl()
-            {
-                Erase(GetBeginIter(), GetEndIter());
-            }
-            
-            LinkListNode * LinkListImpl::Erase(LinkListImpl::Iterator it)
-            {
-                Iterator begin(it.mPointer);
-                return Erase(begin, begin->mNext);
-            }
-            
-            void LinkListImpl::Clear()
-            {
-                Erase(GetBeginIter(), GetEndIter());
-            }
-            
-            LinkListNode * LinkListImpl::Insert(Iterator it, LinkListNode *p)
-            {
-                LinkListNode *pIt = it.mPointer;
-                LinkListNode *pItPrev = pIt->mPrev;
+namespace nw4r {
+namespace ut {
+namespace detail {
 
-                p->mNext = pIt;
-                p->mPrev = pItPrev;
-                pIt->mPrev = p;
-                pItPrev->mNext = p;
-                mSize++;
-
-                return p;
-            }
-            
-            LinkListNode * LinkListImpl::Erase(LinkListNode *p)
-            {
-                LinkListNode *pPrev;
-                LinkListNode *pNext;
-
-                pNext = p->mNext;
-                pPrev = p->mPrev;
-                pNext->mPrev = pPrev;
-                pPrev->mNext = pNext;
-                mSize--;
-
-                p->mNext = NULL;
-                p->mPrev = NULL;
-
-                return pNext;
-            }
-
-            LinkListNode * LinkListImpl::Erase(Iterator begin, Iterator end)
-            {
-                LinkListNode *pCur = begin.mPointer;
-                LinkListNode *pEnd = end.mPointer;
-
-                LinkListNode *pNext;
-                while (pCur != pEnd)
-                {
-                    pNext = pCur->mNext;
-                    Erase(pCur);
-
-                    pCur = pNext;
-                }
-
-                return pEnd;
-            }
-        }
-    }
+LinkListImpl::~LinkListImpl() {
+    Clear();
 }
+
+LinkListImpl::Iterator LinkListImpl::Erase(LinkListImpl::Iterator it) {
+    Iterator clone(it);
+    return Erase(it, ++clone);
+}
+
+void LinkListImpl::Clear() {
+    Erase(GetBeginIter(), GetEndIter());
+}
+
+LinkListImpl::Iterator LinkListImpl::Insert(Iterator it, LinkListNode* pNode) {
+    LinkListNode* pNext = it.mNode;
+    LinkListNode* pPrev = pNext->mPrev;
+
+    // pPrev <- pNode -> pNext
+    pNode->mNext = pNext;
+    pNode->mPrev = pPrev;
+
+    // pPrev <-> pNode <-> pNext
+    pNext->mPrev = pNode;
+    pPrev->mNext = pNode;
+
+    mSize++;
+
+    return Iterator(pNode);
+}
+
+LinkListImpl::Iterator LinkListImpl::Erase(LinkListNode* pNode) {
+    LinkListNode* pNext = pNode->mNext;
+    LinkListNode* pPrev = pNode->mPrev;
+
+    // Remove connections to node
+    pNext->mPrev = pPrev;
+    pPrev->mNext = pNext;
+
+    mSize--;
+
+    // Isolate node
+    pNode->mNext = NULL;
+    pNode->mPrev = NULL;
+
+    return Iterator(pNext);
+}
+
+LinkListImpl::Iterator LinkListImpl::Erase(Iterator begin, Iterator end) {
+    LinkListNode* pIt = begin.mNode;
+    LinkListNode* pEnd = end.mNode;
+
+    while (pIt != pEnd) {
+        // Preserve next node before erasing pointers
+        LinkListNode* pNext = pIt->mNext;
+
+        // Erase current node
+        Erase(pIt);
+        pIt = pNext;
+    }
+
+    return Iterator(pEnd);
+}
+
+} // namespace detail
+} // namespace ut
+} // namespace nw4r

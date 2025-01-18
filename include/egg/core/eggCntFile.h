@@ -4,11 +4,11 @@
 #include "eggAssert.h"
 #include "ut_list.h"
 #include "eggFile.h"
-#include <RevoSDK/CNT/cnt.h>
-#include <RevoSDK/ARC/arc.h>
-#include <RevoSDK/OS/OSMutex.h>
-#include <RevoSDK/OS/OSMessage.h>
-#include <RevoSDK/OS/OSThread.h>
+#include <revolution/CNT/cnt.h>
+#include <revolution/ARC/arc.h>
+#include <revolution/OS/OSMutex.h>
+#include <revolution/OS/OSMessage.h>
+#include <revolution/OS/OSThread.h>
 
 namespace EGG
 {
@@ -29,8 +29,7 @@ namespace EGG
         virtual UNKWORD getFileSize() const { return contentGetLengthNAND(&mFileInfo); }; // at 0x1C
 
         void initiate();
-        // Unofficial symbol
-        bool open(const char *, struct ARCHandle *);
+        bool open(const char *, CNTHandle *);
 
     private:
         bool mIsOpen; // at 0x4
@@ -38,14 +37,14 @@ namespace EGG
         OSMutex mMutex_0x20; // at 0x20
         UNKWORD WORD_0x38;
         CNTFileInfo mFileInfo; // at 0x3C
-        struct ARCHandle *mOpenFile; // at 0x4C
+        CNTHandle *mOpenFile; // at 0x4C
         CntFile *PTR_0x50;
         OSMessageQueue mMesgQueue_0x54;
         OSMessage mMesgBuffer_0x74;
         OSMessageQueue mMesgQueue_0x78;
         OSMessage mMesgBuffer_0x98;
         OSThread *mThread; // at 0x9C
-        nw4r::ut::Node mNode; // at 0xA0
+        nw4r::ut::Link mNode; // at 0xA0
 
         // Unofficial symbol
         static nw4r::ut::List sCntList;

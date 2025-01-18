@@ -2,15 +2,10 @@
 #include "lyt_layout.h"
 #include "lyt_pane.h"
 #include "ut_algorithm.h"
-#include "ut_color.h"
+#include "ut_Color.h"
 #include "math_types.h"
 #include <string.h>
-#include <RevoSDK/GX/GXVert.h>
-#include <RevoSDK/GX/GXAttr.h>
-#include <RevoSDK/GX/GXGeometry.h>
-
-#define BOM_BIG_ENDIAN 0xFEFF
-#define BOM_LITTLE_ENDIAN 0xFFFE
+#include <revolution/GX.h>
 
 namespace nw4r
 {
@@ -33,12 +28,12 @@ namespace nw4r
 
             bool TestFileHeader(const res::BinaryFileHeader& header)
             {
-                return ((header.bom == BOM_BIG_ENDIAN) && (header.version == 8));
+                return ((header.byteOrder == NW4R_BYTEORDER_BIG) && (header.version == 8));
             }
 
             bool TestFileHeader(const res::BinaryFileHeader& header, u32 magic)
             {
-                return ((magic == header.magic) && TestFileHeader(header));
+                return ((magic == header.signature) && TestFileHeader(header));
             }
 
             TexCoordAry::TexCoordAry() : mCap(0), mSize(0), mTexCoords(NULL) {}
@@ -133,7 +128,7 @@ namespace nw4r
                 Color newCol = col;
                 if (alpha != 255)
                 {
-                    newCol.mChannels.a = (col.mChannels.a * alpha) / 255;
+                    newCol.a = (col.a * alpha) / 255;
                 }
 
                 return newCol;
@@ -143,65 +138,65 @@ namespace nw4r
             {
                 GXClearVtxDesc();
 
-                GXSetVtxDesc(GX_ATTR_VTX, 1);
-                if (bColor) GXSetVtxDesc(GX_ATTR_VTX_CLR, 1);
+                GXSetVtxDesc(GX_VA_POS, GX_DIRECT);
+                if (bColor) GXSetVtxDesc(GX_VA_CLR0, GX_DIRECT);
 
                 for (int i = 0; i < n; i++)
                 {
-                    GXSetVtxDesc((GXAttr)(GX_ATTR_VTX_TEX_COORD + i), 1);
+                    GXSetVtxDesc((GXAttr)(GX_VA_TEX0 + i), GX_DIRECT);
                 }
 
-                GXSetVtxAttrFmt(0, GX_ATTR_VTX, 0, 4, 0);
-                if (bColor) GXSetVtxAttrFmt(0, GX_ATTR_VTX_CLR, 1, 5, 0);
+                GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_POS, GX_POS_XY, GX_F32, 0);
+                if (bColor) GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_CLR0, GX_CLR_RGBA, GX_RGBA8, 0);
 
                 for (int i = 0; i < n; i++)
                 {
-                    GXSetVtxAttrFmt(0, (GXAttr)(GX_ATTR_VTX_TEX_COORD + i), 1, 4, 0);
+                    GXSetVtxAttrFmt(GX_VTXFMT0, (GXAttr)(GX_VA_TEX0 + i), GX_TEX_ST, GX_F32, 0);
                 }
             }
 
             void DrawQuad(const VEC2 &pos, const Size &size, u8 c, const TexCoordData *tc, const Color *vertexClrs)
             {
-                GXBegin(0x80, 0, 4);
+                GXBegin(GX_QUADS, GX_VTXFMT0, 4);
 
-                GXPosition2f32(pos.mCoords.x, pos.mCoords.y);
+                GXPosition2f32(pos.x, pos.y);
                 if (vertexClrs != NULL) 
                 {
                     GXColor1u32(vertexClrs[0]);
                 }
                 for (int i = 0; i < c; i++)
                 {
-                    GXTexCoord2f32(tc[i][0].mCoords.x, tc[i][0].mCoords.y);
+                    GXTexCoord2f32(tc[i][0].x, tc[i][0].y);
                 }
 
-                GXPosition2f32(pos.mCoords.x + size.x, pos.mCoords.y);
+                GXPosition2f32(pos.x + size.x, pos.y);
                 if (vertexClrs != NULL) 
                 {
                     GXColor1u32(vertexClrs[1]);
                 }
                 for (int i = 0; i < c; i++)
                 {
-                    GXTexCoord2f32(tc[i][1].mCoords.x, tc[i][1].mCoords.y);
+                    GXTexCoord2f32(tc[i][1].x, tc[i][1].y);
                 }
 
-                GXPosition2f32(pos.mCoords.x + size.x, pos.mCoords.y + size.y);
+                GXPosition2f32(pos.x + size.x, pos.y + size.y);
                 if (vertexClrs != NULL) 
                 {
                     GXColor1u32(vertexClrs[3]);
                 }
                 for (int i = 0; i < c; i++)
                 {
-                    GXTexCoord2f32(tc[i][3].mCoords.x, tc[i][3].mCoords.y);
+                    GXTexCoord2f32(tc[i][3].x, tc[i][3].y);
                 }
 
-                GXPosition2f32(pos.mCoords.x, pos.mCoords.y + size.y);
+                GXPosition2f32(pos.x, pos.y + size.y);
                 if (vertexClrs != NULL) 
                 {
                     GXColor1u32(vertexClrs[2]);
                 }
                 for (int i = 0; i < c; i++)
                 {
-                    GXTexCoord2f32(tc[i][2].mCoords.x, tc[i][2].mCoords.y);
+                    GXTexCoord2f32(tc[i][2].x, tc[i][2].y);
                 }
 
                 GXEnd();

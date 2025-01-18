@@ -1,161 +1,137 @@
-#ifdef __DECOMP_NON_MATCHING
-#pragma ipa file
-#include <new>
-#include <mem_frameHeap.h>
-#include "snd_FrameHeap.h"
+#include <nw4r/snd.h>
 
-namespace nw4r
-{
-	namespace snd
-	{
-		using namespace ut;
-		
-		namespace detail
-		{
-			FrameHeap::FrameHeap() : PTR_0x0() {}
-			
-			FrameHeap::~FrameHeap()
-			{
-				Destroy();
-			}
-			
-			bool FrameHeap::NewSection()
-			{
-				void * ptr = MEMAllocFromFrmHeapEx(PTR_0x0, sizeof(Section), 4);
-				
-				if (!ptr) return false;
-				
-				mList.PushBack(new (ptr) Section());
-				
-				return true;
-			}
-			
-			UNKTYPE FrameHeap::ClearSection()
-			{
-				Section * pSection = mList.GetBack();
-				
-				pSection->~Section();
-				
-				mList.Erase(pSection);
-			}
-			
-			bool FrameHeap::Create(void * r4_27, u32 r5_28)
-			{
-				// r26 <- this
-				Destroy();
-				
-				u8 * r3 = (u8 *)RoundUp<void *>(r4_27, 4);
-				u8 * r4 = static_cast<u8 *>(r4_27) + r5_28;
-				
-				if (r3 > r4) return false;
-				
-				PTR_0x0 = MEMCreateFrmHeapEx(r3, r4 - r3, 0);
-				
-				if (!PTR_0x0) return false;
-				
-				if (!NewSection()) return false;
-				
-				return true;
-			}
-			
-			UNKTYPE FrameHeap::Destroy()
-			{
-				if (IsValid())
-				{
-					while (mList.mCount)
-					{
-						ClearSection();
-					}
-				}
-				
-				MEMFreeToFrmHeap(PTR_0x0, 3);
-				MEMDestroyFrmHeap(PTR_0x0);
-				
-				PTR_0x0 = NULL;
-			}
-			
-			void FrameHeap::Clear()
-			{
-				if (IsValid())
-				{
-					while (mList.mCount)
-					{
-						ClearSection();
-					}
-				}
-				
-				MEMFreeToFrmHeap(PTR_0x0, 3);
-				
-				NewSection();
-			}
-			
-			void * FrameHeap::Alloc(u32 r28_4, AllocCallback r29_5, void * r30_6)
-			{
-				//r27 <- this
-				
-				void * ptr = MEMAllocFromFrmHeapEx(PTR_0x0, RoundUp<u32>(r28_4, 0x20) + RoundUp<u32>(sizeof(Block), 0x20), 0x20);
-				
-				if (!ptr) return NULL;
-				
-				Block * pBlock = new (ptr) Block(r28_4, r29_5, r30_6);
-				
-				mList.GetBack()->AppendBlock(pBlock);
-				
-				return pBlock->GetBufferAddr();
-			}
-			
-			int FrameHeap::SaveState()
-			{
-				if (!MEMRecordStateForFrmHeap(PTR_0x0, mList.mCount)) return -1;
-				
-				if (!NewSection())
-				{
-					MEMFreeByStateToFrmHeap(PTR_0x0, 0);
-					return -1;
-				}
-				
-				return GetCurrentLevel();
-			}
-			
-			void FrameHeap::LoadState(int state)
-			{
-				// r31 <- this
-				// r27 <- state
-				if (!state)
-				{
-					Clear();
-				}
-				else
-				{
-					if (state < mList.mCount)
-					{
-						while (state < mList.mCount)
-						{
-							ClearSection();
-						}
-					}
-					
-					MEMFreeByStateToFrmHeap(PTR_0x0, state);
-					MEMRecordStateForFrmHeap(PTR_0x0, mList.mCount);
-					
-					NewSection();
-				}
-			}
-			
-			int FrameHeap::GetCurrentLevel() const
-			{
-				return mList.mCount - 1;
-			}
-			
-			u32 FrameHeap::GetFreeSize() const
-			{
-				u32 r3 = MEMGetAllocatableSizeForFrmHeapEx(PTR_0x0, 0x20);
-				
-				return (r3 < 0x20) ? 0 : RoundUp<u32>(r3 - 0x3F, 0x20);
-			}
-		}
-	}
+#include <revolution/MEM.h>
+
+namespace nw4r {
+namespace snd {
+namespace detail {
+
+FrameHeap::FrameHeap() : mHandle(NULL) {}
+
+FrameHeap::~FrameHeap() {
+    if (IsValid()) {
+        Destroy();
+    }
 }
-#else
-#error This file has yet to be decompiled accurately. Use "snd_FrameHeap.s" instead.
-#endif
+
+bool FrameHeap::Create(void* pBase, u32 size) {
+    if (IsValid()) {
+        Destroy();
+    }
+
+    void* pEnd = static_cast<u8*>(pBase) + size;
+    pBase = ut::RoundUp(pBase, 4);
+    if (pBase > pEnd) {
+        return false;
+    }
+
+    mHandle = MEMCreateFrmHeap(pBase, ut::GetOffsetFromPtr(pBase, pEnd));
+    if (mHandle == NULL) {
+        return false;
+    }
+
+    if (!NewSection()) {
+        return false;
+    }
+
+    return true;
+}
+
+void FrameHeap::Destroy() {
+    if (!IsValid()) {
+        return;
+    }
+
+    ClearSection();
+    MEMFreeToFrmHeap(mHandle, MEM_FRM_HEAP_FREE_ALL);
+
+    MEMDestroyFrmHeap(mHandle);
+    mHandle = NULL;
+}
+
+void FrameHeap::Clear() {
+    ClearSection();
+    MEMFreeToFrmHeap(mHandle, MEM_FRM_HEAP_FREE_ALL);
+
+    NewSection();
+}
+
+void* FrameHeap::Alloc(u32 size, FreeCallback pCallback, void* pCallbackArg) {
+    void* pBuffer = MEMAllocFromFrmHeapEx(
+        mHandle, BLOCK_BUFFER_SIZE + ut::RoundUp(size, HEAP_ALIGN), HEAP_ALIGN);
+
+    if (pBuffer == NULL) {
+        return NULL;
+    }
+
+    Block* pBlock = new (pBuffer) Block(size, pCallback, pCallbackArg);
+    mSectionList.GetBack().AppendBlock(pBlock);
+
+    return pBlock->GetBufferAddr();
+}
+
+int FrameHeap::SaveState() {
+    if (!MEMRecordStateForFrmHeap(mHandle, mSectionList.GetSize())) {
+        return -1;
+    }
+
+    if (!NewSection()) {
+        MEMFreeByStateToFrmHeap(mHandle, 0);
+        return -1;
+    }
+
+    return GetCurrentLevel();
+}
+
+void FrameHeap::LoadState(int id) {
+    if (id == 0) {
+        Clear();
+        return;
+    }
+
+    while (id < static_cast<int>(mSectionList.GetSize())) {
+        Section& rSection = mSectionList.GetBack();
+        rSection.~Section();
+        mSectionList.Erase(&rSection);
+    }
+
+    MEMFreeByStateToFrmHeap(mHandle, id);
+    MEMRecordStateForFrmHeap(mHandle, mSectionList.GetSize());
+
+    NewSection();
+}
+
+int FrameHeap::GetCurrentLevel() const {
+    return mSectionList.GetSize() - 1;
+}
+
+u32 FrameHeap::GetFreeSize() const {
+    u32 freeSize = MEMGetAllocatableSizeForFrmHeapEx(mHandle, HEAP_ALIGN);
+    if (freeSize < BLOCK_BUFFER_SIZE) {
+        return 0;
+    }
+
+    return ut::RoundDown(freeSize - BLOCK_BUFFER_SIZE, HEAP_ALIGN);
+}
+
+bool FrameHeap::NewSection() {
+    void* pSection = MEMAllocFromFrmHeap(mHandle, sizeof(Section));
+    if (pSection == NULL) {
+        return false;
+    }
+
+    mSectionList.PushBack(new (pSection) Section());
+    return true;
+}
+
+void FrameHeap::ClearSection() {
+    while (!mSectionList.IsEmpty()) {
+        Section& rSection = mSectionList.GetBack();
+        rSection.~Section();
+        mSectionList.Erase(&rSection);
+    }
+}
+
+} // namespace detail
+} // namespace snd
+} // namespace nw4r

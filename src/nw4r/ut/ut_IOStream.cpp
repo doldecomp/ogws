@@ -1,41 +1,36 @@
-#include "ut_IOStream.h"
+#include <nw4r/ut.h>
 
-namespace nw4r
-{
-	namespace ut
-	{
-		bool IOStream::ReadAsync(void *, u32, AsyncFunctor, void *)
-		{
-			return false;
-		}
-		
-		UNKTYPE IOStream::Write(const void *, u32) {}
-		
-		bool IOStream::WriteAsync(const void *, u32, AsyncFunctor, void *)
-		{
-			return false;
-		}
-		
-		bool IOStream::IsBusy() const
-		{
-			return false;
-		}
-		
-		u32 IOStream::GetBufferAlign() const
-		{
-			return 1;
-		}
-		
-		u32 IOStream::GetSizeAlign() const
-		{
-			return 1;
-		}
-		
-		u32 IOStream::GetOffsetAlign() const
-		{
-			return 1;
-		}
-		
-		detail::RuntimeTypeInfo IOStream::typeInfo(NULL);
-	}
+namespace nw4r {
+namespace ut {
+
+NW4R_UT_RTTI_DEF_BASE(IOStream);
+
+bool IOStream::ReadAsync(void* pDst, u32 size, StreamCallback pCallback,
+                         void* pCallbackArg) {
+#pragma unused(pDst)
+#pragma unused(size)
+#pragma unused(pCallback)
+#pragma unused(pCallbackArg)
+    return false;
 }
+
+void IOStream::Write(const void* pSrc, u32 size) {
+#pragma unused(pSrc)
+#pragma unused(size)
+}
+
+bool IOStream::WriteAsync(const void* pSrc, u32 size, StreamCallback pCallback,
+                          void* pCallbackArg) {
+#pragma unused(pSrc)
+#pragma unused(size)
+#pragma unused(pCallback)
+#pragma unused(pCallbackArg)
+    return false;
+}
+
+bool IOStream::IsBusy() const {
+    return false;
+}
+
+} // namespace ut
+} // namespace nw4r

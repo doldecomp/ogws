@@ -1,45 +1,33 @@
-#include "snd_MmlSeqTrackAllocator.h"
+#include <nw4r/snd.h>
 
-namespace nw4r
-{
-	namespace snd
-	{
-		namespace detail
-		{
-			SeqTrack * MmlSeqTrackAllocator::AllocTrack(SeqPlayer * pPlayer)
-			{
-				MmlSeqTrack * pTrack = mPool.Alloc();
-				
-				if (pTrack)
-				{
-					pTrack->mPlayer = pPlayer;
-					pTrack->mParser = mParser;
-				}
-				
-				return pTrack;
-			}
-			
-			void MmlSeqTrackAllocator::FreeTrack(SeqTrack * pTrack)
-			{
-				pTrack->mPlayer = NULL;
-				
-				mPool.Free(static_cast<MmlSeqTrack *>(pTrack));
-			}
-			
-			u32 MmlSeqTrackAllocator::Create(void * r_4, u32 r_5)
-			{
-				return mPool.Create(r_4, r_5);
-			}
-			
-			void MmlSeqTrackAllocator::Destroy(void * r_4, u32 r_5)
-			{
-				mPool.Destroy(r_4, r_5);
-			}
-			
-			int MmlSeqTrackAllocator::GetAllocatableTrackCount() const
-			{
-				return mPool.Count();
-			}
-		}
-	}
+namespace nw4r {
+namespace snd {
+namespace detail {
+
+SeqTrack* MmlSeqTrackAllocator::AllocTrack(SeqPlayer* pPlayer) {
+    MmlSeqTrack* pTrack = mTrackPool.Alloc();
+
+    if (pTrack != NULL) {
+        pTrack->SetSeqPlayer(pPlayer);
+        pTrack->SetMmlParser(mParser);
+    }
+
+    return pTrack;
 }
+
+void MmlSeqTrackAllocator::FreeTrack(SeqTrack* pTrack) {
+    pTrack->SetSeqPlayer(NULL);
+    mTrackPool.Free(static_cast<MmlSeqTrack*>(pTrack));
+}
+
+u32 MmlSeqTrackAllocator::Create(void* pBuffer, u32 size) {
+    return mTrackPool.Create(pBuffer, size);
+}
+
+void MmlSeqTrackAllocator::Destroy(void* pBuffer, u32 size) {
+    mTrackPool.Destroy(pBuffer, size);
+}
+
+} // namespace detail
+} // namespace snd
+} // namespace nw4r

@@ -1,4 +1,3 @@
-#ifdef __DECOMP_NON_MATCHING
 #include "math_types.h"
 #include "ef_rand.h"
 #include "ef_emitter.h"
@@ -46,25 +45,25 @@ namespace nw4r
 				VEC3 vec_0x38;
 				//f1 = d1;
 				
-				vec_0x38.mCoords.x = (f1 >= 0.0f) ?
+				vec_0x38.x = (f1 >= 0.0f) ?
 					((0.66f + 0.34f * f1) * f1) :
 					((0.66f - 0.34f * f1) * f1);
 				
-				float diagLen = (float)sqrt(1.0f - vec_0x38.mCoords.x * vec_0x38.mCoords.x); // at f20
-				float angle = 2.0f * (pEmitter->mRandom.RandFloat() * NW4R_PI_F32); // at f19
+				float diagLen = (float)sqrt(1.0f - vec_0x38.x * vec_0x38.x); // at f20
+				float angle = 2.0f * (pEmitter->mRandom.RandFloat() * NW4R_MATH_PI); // at f19
 				
-				vec_0x38.mCoords.y = diagLen * (float)cos(angle);
-				vec_0x38.mCoords.z = diagLen * (float)sin(angle);
+				vec_0x38.y = diagLen * (float)cos(angle);
+				vec_0x38.z = diagLen * (float)sin(angle);
 				
-				VEC3 vec_0x2c(vec_0x38.mCoords.x, 0.0f, vec_0x38.mCoords.z);
+				VEC3 vec_0x2c(vec_0x38.x, 0.0f, vec_0x38.z);
 				
 				/*
-				vec_0x2c.mCoords.x = vec_0x38.mCoords.x;
-				vec_0x2c.mCoords.y = 0.0f;
-				vec_0x2c.mCoords.z = vec_0x38.mCoords.z;
+				vec_0x2c.x = vec_0x38.x;
+				vec_0x2c.y = 0.0f;
+				vec_0x2c.z = vec_0x38.z;
 				*/
 				
-				if (0.0f != vec_0x2c.mCoords.x || 0.0f != vec_0x2c.mCoords.z)
+				if (0.0f != vec_0x2c.x || 0.0f != vec_0x2c.z)
 				{
 					VEC3Normalize(&vec_0x2c, &vec_0x2c);
 				}
@@ -86,6 +85,3 @@ namespace nw4r
 		}
 	}
 }
-#else
-#error This file has yet to be decompiled accurately. Use "ef_point.s" instead.
-#endif

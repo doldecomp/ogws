@@ -45,7 +45,7 @@ namespace EGG
 		void onEnter();
 		void onExit();
 		
-		UNKWORD run();
+		void* run();
 		
 		TJob * findBlank();
 		

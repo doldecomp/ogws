@@ -1,40 +1,46 @@
-#include "snd_SeqFile.h"
-#include "ut_algorithm.h"
+#include <nw4r/snd.h>
+#include <nw4r/ut.h>
 
-namespace nw4r
-{
-	using namespace ut;
-	
-	namespace snd
-	{
-		namespace detail
-		{
-			bool SeqFileReader::IsValidFileHeader(const void * ptr)
-			{
-				const BinaryFileHeader * pFileHeader = static_cast<const BinaryFileHeader *>(ptr);
-				
-				if (pFileHeader->magic != 'RSEQ') return false;
-				
-				if (pFileHeader->version < 0x0100) return false;
-				
-				return pFileHeader->version <= 0x0100;
-			}
-			
-			SeqFileReader::SeqFileReader(const void * ptr) : mFile(), PTR_0x4()
-			{
-				const SeqFile * pFile = static_cast<const SeqFile *>(ptr);
-				
-				if (IsValidFileHeader(ptr))
-				{
-					mFile = pFile;
-					PTR_0x4 = (UNKBLOCK *)AddOffsetToPtr<u32>(ptr, pFile->OFFSET_0x10);
-				}
-			}
-			
-			const void * SeqFileReader::GetBaseAddress() const
-			{
-				return AddOffsetToPtr<u32>(PTR_0x4, PTR_0x4->OFFSET_0x8);
-			}
-		}
-	}
+namespace nw4r {
+namespace snd {
+namespace detail {
+
+bool SeqFileReader::IsValidFileHeader(const void* pSeqBin) {
+    const ut::BinaryFileHeader* pFileHeader =
+        static_cast<const ut::BinaryFileHeader*>(pSeqBin);
+
+    if (pFileHeader->signature != SIGNATURE) {
+        return false;
+    }
+
+    if (Util::ReadBigEndian(pFileHeader->version) < NW4R_VERSION(1, 0)) {
+        return false;
+    }
+
+    if (Util::ReadBigEndian(pFileHeader->version) > VERSION) {
+        return false;
+    }
+
+    return true;
 }
+
+SeqFileReader::SeqFileReader(const void* pSeqBin)
+    : mHeader(NULL), mDataBlock(NULL) {
+    if (!IsValidFileHeader(pSeqBin)) {
+        return;
+    }
+
+    mHeader = static_cast<const SeqFile::Header*>(pSeqBin);
+
+    mDataBlock = static_cast<const SeqFile::DataBlock*>(ut::AddOffsetToPtr(
+        mHeader, Util::ReadBigEndian(mHeader->dataBlockOffset)));
+}
+
+const void* SeqFileReader::GetBaseAddress() const {
+    return ut::AddOffsetToPtr(mDataBlock,
+                              Util::ReadBigEndian(mDataBlock->baseOffset));
+}
+
+} // namespace detail
+} // namespace snd
+} // namespace nw4r

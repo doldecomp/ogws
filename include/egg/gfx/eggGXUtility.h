@@ -3,8 +3,8 @@
 #include "types_egg.h"
 #include "eggIDrawGX.h"
 #include "math_types.h"
-#include <GX/GXTexture.h>
-#include <math/mtx.h>
+#include <revolution/GX.h>
+#include <revolution/MTX.h>
 
 namespace EGG
 {

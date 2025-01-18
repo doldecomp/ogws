@@ -1,1069 +1,1132 @@
-#ifdef __DECOMP_NON_MATCHING
-#include "types_nw4r.h"
-#include "ef_emitter.h"
-#include "ef_emform.h"
-#include "ef_emitterform.h"
-#include "ef_effect.h"
-#include "ef_effectsystem.h"
-#include "ef_memorymanager.h"
-#include "ef_draworder.h"
-#include "ef_particle.h"
-#include "ef_particlemanager.h"
-#include "ef_util.h"
-#include "ef_resource.h"
+#include <nw4r/ef.h>
 
-namespace nw4r
-{
-	using namespace math;
-	using namespace ut;
-	
-	namespace ef
-	{
-		Emitter::Emitter() : mManagers(0x14) {}
-		Emitter::~Emitter() {}
-		
-		u16 Emitter::RetireParticleAll()
-		{
-			u16 counter = 0;
-			ParticleManager * managers[0x400];
-			
-			u16 len = UtlistToArray(&mManagers.mActive, (void **)managers, mManagers.mActive.size);
-			
-			for (u16 i = 0; i < len; i++)
-			{
-				counter += managers[i]->RetireParticleAll();
-			}
-			
-			return counter;
-		}
-		
-		bool Emitter::SendClosing()
-		{
-			return mEffect->Closing(this);
-		}
-		
-		UNKTYPE Emitter::DestroyFunc()
-		{
-			if (mForm) mForm = NULL;
-			
-			if (mFlags & 1) RetireParticleAll();
-			
-			RetireParticleManagerAll();
-			
-			if (mFlags & 1)
-			{
-				Emitter * emitters[0x400];
-				
-				u16 len = UtlistToArray(&mEffect->mEmitters.mActive, (void **)emitters, mEffect->mEmitters.mActive.size);
-				
-				for (u16 i = 0; i < len; i++)
-				{
-					Emitter * emitter = emitters[i];
-					
-					for (Emitter * curEmitter = emitter->mParent; curEmitter; curEmitter = curEmitter->mParent)
-					{
-						if (curEmitter == this)
-						{
-							emitter->RetireParticleAll();
-							if (emitter->WORD_0xC == 1) mEffect->RetireEmitter(emitter);
-							break;
-						}
-					}
-				}
-			}
-		}
-		
-		bool Emitter::Closing(ParticleManager * pManager)
-		{
-			mEffect->mDrawOrder->Remove(mEffect, pManager);
-			pManager->REF_0x20->UnRef();
-			mManagers.ToClosing(pManager);
-			pManager->WORD_0xC = 3;
-			
-			return true;
-		}
-		
-		bool Emitter::RetireParticleManager(ParticleManager * pManager)
-		{
-			if (pManager->WORD_0xC != 1) return false;
-			
-			mManagers.ToWait(pManager);
-			pManager->Destroy();
-			
-			return true;
-		}
-		
-		u16 Emitter::RetireParticleManagerAll()
-		{
-			u16 counter = 0;
-			ParticleManager * managers[0x400];
-			
-			u16 len = UtlistToArray(&mManagers.mActive, (void **)managers, mManagers.mActive.size);
-			
-			for (u16 i = 0; i < len; i++)
-			{
-				ParticleManager * pManager = managers[i];
-				if (pManager->WORD_0xC == 1) counter += RetireParticleManager(pManager);
-			}
-			
-			return counter;
-		}
-		
-		bool Emitter::InitializeDatas(EmitterResource * pResource, Effect * pEffect)
-		{
-			WORD_0xE4 = 0;
-			WORD_0xC = 1;
-			mResource = pResource;
-			WORD_0xB4 = 0;
-			SHORT_0xE8 = pResource->STRUCT_0x8.SHORT_0x16;
-			mFlags = pResource->STRUCT_0x8.FLAGS_0x0;
-			WORD_0x24 = pResource->STRUCT_0x8.EMFORMTYPE_0x4;
-			SHORT_0x3C = pResource->STRUCT_0x8.SHORT_0x8;
-			SHORT_0xDE = pResource->STRUCT_0x8.SHORT_0x14;
-			SHORT_0xE0 = 0;
-			FLOAT_0x44 = pResource->STRUCT_0x8.BYTE_0x85 / 100.0f;
-			FLOAT_0x40 = pResource->STRUCT_0x8.BYTE_0x84 / 100.0f;
-			FLOAT_0x48 = pResource->STRUCT_0x8.BYTE_0x86 / 100.0f;
-			FLOAT_0x28 = pResource->STRUCT_0x8.FLOAT_0x10;
-			FLOAT_0x2C = pResource->STRUCT_0x8.SBYTE_0xF / 100.0f;
-			SHORT_0x30 = pResource->STRUCT_0x8.SHORT_0x18;
-			SHORT_0x32 = pResource->STRUCT_0x8.SHORT_0x34;
-			FLOAT_0x38 = 0.0f;
-			BYTE_0xDC = 1;
-			FLOAT_0x34 = pResource->STRUCT_0x8.SBYTE_0xE / 100.0f;
-			
-			VEC_0x90.mCoords.x = pResource->STRUCT_0x8.FLOAT_0x78;
-			VEC_0x90.mCoords.y = pResource->STRUCT_0x8.FLOAT_0x7C;
-			VEC_0x90.mCoords.z = pResource->STRUCT_0x8.FLOAT_0x80;
-			
-			VEC_0x9C.mCoords.x = pResource->STRUCT_0x8.FLOAT_0x60;
-			VEC_0x9C.mCoords.y = pResource->STRUCT_0x8.FLOAT_0x64;
-			VEC_0x9C.mCoords.z = pResource->STRUCT_0x8.FLOAT_0x68;
-			
-			VEC_0xA8.mCoords.x = pResource->STRUCT_0x8.FLOAT_0x6C;
-			VEC_0xA8.mCoords.y = pResource->STRUCT_0x8.FLOAT_0x70;
-			VEC_0xA8.mCoords.z = pResource->STRUCT_0x8.FLOAT_0x74;
-			
-			BYTE_0x64 = 3;
-			BYTE_0x65 = 100;
-			BYTE_0x66 = pResource->STRUCT_0x8.BYTE_0x36;
-			BYTE_0x67 = pResource->STRUCT_0x8.BYTE_0x37;
-			
-			FLOAT_0x68 = pResource->STRUCT_0x8.FLOAT_0x38;
-			FLOAT_0x6C = pResource->STRUCT_0x8.FLOAT_0x3C;
-			FLOAT_0x70 = pResource->STRUCT_0x8.FLOAT_0x40;
-			FLOAT_0x74 = pResource->STRUCT_0x8.FLOAT_0x44;
-			FLOAT_0x78 = pResource->STRUCT_0x8.FLOAT_0x48;
-			FLOAT_0x7C = pResource->STRUCT_0x8.FLOAT_0x4C;
-			FLOAT_0x80 = pResource->STRUCT_0x8.FLOAT_0x50;
-			FLOAT_0x84 = pResource->STRUCT_0x8.FLOAT_0x54;
-			FLOAT_0x88 = pResource->STRUCT_0x8.FLOAT_0x58;
-			FLOAT_0x8C = pResource->STRUCT_0x8.FLOAT_0x5C;
-			
-			Resource::GetInstance();
-			
-			SHORT_0xEA = pResource->STRUCT_0x8.WORD_0x88;
-			
-			if (!SHORT_0xEA)
-			{
-				SHORT_0xEA = pEffect->mSystem->mRandom.Rand();
-			}
-			
-			mRandom.Srand(SHORT_0xEA);
-			
-			FLOAT_0x4C = pResource->STRUCT_0x8.FLOAT_0x1C;
-			FLOAT_0x50 = pResource->STRUCT_0x8.FLOAT_0x20;
-			FLOAT_0x54 = pResource->STRUCT_0x8.FLOAT_0x24;
-			FLOAT_0x58 = pResource->STRUCT_0x8.FLOAT_0x28;
-			FLOAT_0x5C = pResource->STRUCT_0x8.FLOAT_0x2C;
-			FLOAT_0x60 = pResource->STRUCT_0x8.FLOAT_0x30;
-			
-			mMtxDirtyFlag = true;
-			REF_0xF8 = NULL;
-			
-			mForm = pEffect->mSystem->mEmitFormBuilder->Create((EmitFormType)(pResource->STRUCT_0x8.EMFORMTYPE_0x4 & 0xFF));
-			mParent = NULL;
-			mEffect = NULL;
-			
-			return true;
-		}
-		
-		bool Emitter::Initialize(Effect * pEffect, EmitterResource * pResource, u8 byte)
-		{
-			WORD_0xC = 1;
-			mManagers.Initialize();
-			InitializeDatas(pResource, pEffect);
-			
-			ParticleManager * pManager = mEffect->mSystem->GetMemoryManager()->AllocParticleManager();
-			
-			if (!pManager) return false;
-			
-			if (!pManager->Initialize(this, pResource)) return false; //memory leak?
-			
-			mEffect->Ref();
-			mManagers.ToActive(pManager);
-			
-			pManager->WORD_0xC = 1;
-			pManager->FLAGS_0x28 = 0;
-			
-			if (pResource->STRUCT_0x8.FLAGS_0x0 & 0x20) pManager->FLAGS_0x28 |= 1;
-			if (pResource->STRUCT_0x8.FLAGS_0x0 & 0x40) pManager->FLAGS_0x28 |= 2;
-			
-			mEffect->mDrawOrder->Add(mEffect, pManager);
-			
-			return true;
-		}
-		
-		Emitter * Emitter::CreateEmitter(EmitterResource * pRes, EmitterInheritSetting * pInherit, Particle * pParticle, u16 snum)
-		{
-			Emitter * pChild = mEffect->CreateEmitter(pRes, pInherit->BYTE_0x5, 0);
-			
-			if (!pChild) return NULL;
-			
-			pChild->SHORT_0xE8 += snum;
-			pChild->mParent = this;
-			ReferencedObject::Ref();
-			pChild->BYTE_0x64 = 0;
-			if (mResource->STRUCT_0x8.FLAGS_0x0 & 0x80) pChild->BYTE_0x64 |= 0x1;
-			if (mResource->STRUCT_0x8.FLAGS_0x0 & 0x100) pChild->BYTE_0x64 |= 0x2;
-			pChild->BYTE_0x65 = mResource->STRUCT_0x8.BYTE_0x1B;
-			if (pParticle)
-			{
-				//80012484
-				VEC3 vec_0x8(VEC_0x90);
-				pChild->VEC_0x90.mCoords.x = 0.0f;
-				pChild->VEC_0x90.mCoords.y = 0.0f;
-				pChild->VEC_0x90.mCoords.z = 0.0f;
-				
-				pChild->SetMtxDirty();
-				
-				MTX34 mtx_0x48; // at 0x48
-				
-				MTX34Identity(&mtx_0x48);
-				
-				MTX34RotXYZFIdx(&mtx_0x48, 40.743664f * pChild->VEC_0xA8.mCoords.x, 40.743664f * pChild->VEC_0xA8.mCoords.y, 40.743664f * pChild->VEC_0xA8.mCoords.z);
-				MTX34Scale(&mtx_0x48, &mtx_0x48, &pChild->VEC_0x9C);
-				
-				MTX34 mtx_0x18;
-				
-				pChild->CalcGlobalMtx(&mtx_0x18);
-				MTX34Inv(&mtx_0x18, &mtx_0x18);
-				MTX34Mult(&mtx_0x48, &mtx_0x18, &mtx_0x48);
-				pParticle->mManager->CalcGlobalMtx(&mtx_0x18);
-				MTX34Mult(&mtx_0x48, &mtx_0x18, &mtx_0x48);
-				
-				MTX34Trans(&mtx_0x48, &mtx_0x48, &pParticle->VEC_0xAC);
-				
-				MTX34RotXYZFIdx(&mtx_0x18, 40.743664f * pChild->VEC_0xA8.mCoords.x, 40.743664f * pChild->VEC_0xA8.mCoords.y, 40.743664f * pChild->VEC_0xA8.mCoords.z);
-				MTX34Scale(&mtx_0x18, &mtx_0x18, &pChild->VEC_0x9C);
-				MTX34Inv(&mtx_0x18, &mtx_0x18);
-				MTX34Mult(&mtx_0x48, &mtx_0x18, &mtx_0x48);
-				
-				pChild->VEC_0x90.mCoords.x = vec_0x8.mCoords.x + mtx_0x48.mEntries.tbl[0][3];
-				pChild->VEC_0x90.mCoords.y = vec_0x8.mCoords.y + mtx_0x48.mEntries.tbl[1][3];
-				pChild->VEC_0x90.mCoords.z = vec_0x8.mCoords.z + mtx_0x48.mEntries.tbl[2][3];
-				
-				pChild->SetMtxDirty();
-				
-				if (pInherit->SHORT_0x0 || pInherit->BYTE_0x2 || pInherit->BYTE_0x3 || pInherit->BYTE_0x4 || pInherit->BYTE_0x7)
-				{
-					pChild->REF_0xF8 = pParticle;
-					pParticle->Ref();
-					pChild->mInheritSettings = *pInherit;
-				}
-			}
-			//80012650
-			return pChild;
-		}
-		ParticleManager * Emitter::FindParticleManager(EmitterResource * pRes, bool b1, bool b2, s8 sbyte, u8 ubyte)
-		{
-			ParticleManager * curMgr;
-			
-			for (curMgr = (ParticleManager *)List_GetFirst(&mManagers.mActive); curMgr; curMgr = (ParticleManager *)List_GetNext(&mManagers.mActive, curMgr))
-			{
-				if (curMgr->mResource == pRes &&
-				(bool)(curMgr->FLAGS_0xB4 & 1) == b1 &&
-				(bool)(curMgr->FLAGS_0xB4 & 2) == b2 &&
-				curMgr->BYTE_0x88 == sbyte &&
-				curMgr->BYTE_0x89 == ubyte) return curMgr;
-			}
-			
-			return NULL;
-		}
-		
-		UNKTYPE Emitter::CreateEmitterTmp(EmitterResource * pRes, EmitterInheritSetting * pInherit, register Particle * pParticle, u16 snum)
-		{
-			//r27 <- r6 (pParticle)
-			
-			Emitter tmp; // at 0x150
-			
-			tmp.InitializeDatas(pRes, mEffect);
-			
-			SHORT_0xE8 += snum;
-			
-			tmp.mEffect = mEffect;
-			tmp.mParent = this;
-			
-			if ((pInherit->BYTE_0x7 & 1) && pInherit->SHORT_0x0)
-			{
-				//80012704
-				MTX34 mtx_0xf0;
-				
-				pParticle->mManager->CalcGlobalMtx(&mtx_0xf0);
-				
-				mtx_0xf0.mEntries.tbl[2][3] = 0.0f;
-				mtx_0xf0.mEntries.tbl[1][3] = 0.0f;
-				mtx_0xf0.mEntries.tbl[0][3] = 0.0f;
-				
-				VEC3 vec_0x20;
-				vec_0x20 = pParticle->VEC_0xAC - pParticle->VEC_0xB8;
-				
-				VEC3Transform(&vec_0x20, &mtx_0xf0, &vec_0x20);
-				
-				if (vec_0x20.mCoords.x || vec_0x20.mCoords.y || vec_0x20.mCoords.z)
-				{
-					//80012790
-					VEC3Normalize(&vec_0x20, &vec_0x20);
-					if (pInherit->SHORT_0x0 < 0)
-					{
-						VEC3Scale(&vec_0x20, &vec_0x20, -1);
-					}
-					//800127C4
-					MTX34 mtx_0x120;
-					GetDirMtxY(&mtx_0x120, vec_0x20);
-					MTX34RotXYZFIdx(&mtx_0x120, 40.743664f * tmp.VEC_0xA8.mCoords.x, 40.743664f * tmp.VEC_0xA8.mCoords.y, 40.743664f * tmp.VEC_0xA8.mCoords.z);
-					MTX34Mult(&mtx_0x120, &mtx_0xf0, &mtx_0x120);
-					MtxGetRotation(mtx_0x120, &tmp.VEC_0xA8);
-					//80012810 (END)
-				}
-				//80012810 (END)
-			}
-			//80012810
-			VEC3 vec_0x14(tmp.VEC_0x90);
-			
-			tmp.VEC_0x90.mCoords.x = 0.0f;
-			tmp.VEC_0x90.mCoords.y = 0.0f;
-			tmp.VEC_0x90.mCoords.z = 0.0f;
-			
-			tmp.SetMtxDirty();
-			
-			MTX34 mtx_0xc0;
-			
-			MTX34Identity(&mtx_0xc0);
-			MTX34RotXYZFIdx(&mtx_0xc0, 40.743664f * tmp.VEC_0xA8.mCoords.x, 40.743664f * tmp.VEC_0xA8.mCoords.y, 40.743664f * tmp.VEC_0xA8.mCoords.z);
-			MTX34Scale(&mtx_0xc0, &mtx_0xc0, &tmp.VEC_0x9C);
-			
-			MTX34 mtx_0x90;
-			
-			tmp.CalcGlobalMtx(&mtx_0x90);
-			
-			MTX34Inv(&mtx_0x90, &mtx_0x90);
-			
-			MTX34Mult(&mtx_0xc0, &mtx_0x90, &mtx_0xc0);
-			
-			pParticle->mManager->CalcGlobalMtx(&mtx_0x90);
-			
-			MTX34Mult(&mtx_0xc0, &mtx_0x90, &mtx_0xc0);
-			MTX34Trans(&mtx_0xc0, &mtx_0xc0, &pParticle->VEC_0xAC);
-			
-			MTX34RotXYZFIdx(&mtx_0x90, 40.743664f * tmp.VEC_0xA8.mCoords.x, 40.743664f * tmp.VEC_0xA8.mCoords.y, 40.743664f * tmp.VEC_0xA8.mCoords.z);
-			
-			MTX34Scale(&mtx_0x90, &mtx_0x90, &tmp.VEC_0x9C);
-			MTX34Inv(&mtx_0x90, &mtx_0x90);
-			MTX34Mult(&mtx_0xc0, &mtx_0x90, &mtx_0xc0);
-			
-			tmp.VEC_0x90.mCoords.x = vec_0x14.mCoords.x + mtx_0xc0.mEntries.tbl[0][3];
-			tmp.VEC_0x90.mCoords.y = vec_0x14.mCoords.y + mtx_0xc0.mEntries.tbl[1][3];
-			tmp.VEC_0x90.mCoords.z = vec_0x14.mCoords.z + mtx_0xc0.mEntries.tbl[2][3];
-			
-			tmp.SetMtxDirty();
-			tmp.CalcEmitter();
-			tmp.CalcBillboard();
-			
-			bool r31 = ((this->mFlags & 0x80) && (this->mFlags & 0x20));
-			bool r30 = ((this->mFlags & 0x100) && (this->mFlags & 0x40));
-			
-			s8 r29 = this->mResource->STRUCT_0x8.BYTE_0x1A;
-			s8 r0 = this->mResource->STRUCT_0x8.BYTE_0x1B;
-			
-			if (r0 == 0 || r29 == 0)
-			{
-				r29 = 0;
-			}
-			else if (r0 == 100) //lbl_800129CC
-			{
-				r29 = r29;
-			}
-			else if (r29 == 100)
-			{
-				r29 = r0;
-			}
-			else
-			{
-				r29 = r0 * r29 / 100;
-			}
-			//80012A08
-			ParticleManager * pParticleMgr = FindParticleManager(pRes, r31, r30, r29, pInherit->BYTE_0x5); // saved to r28
-			//80012A80
-			if (!pParticleMgr)
-			{
-				pParticleMgr = mEffect->mSystem->GetMemoryManager()->AllocParticleManager();
-				
-				if (!pParticleMgr) return;
-				//80012AB4
-				if (!pParticleMgr->Initialize(this, pRes)) return;
-				//80012AD4
-				mManagers.ToActive(pParticleMgr);
-				//80012AF8
-				pParticleMgr->WORD_0xC = 1;
-				pParticleMgr->FLAGS_0x28 = 0;
-				//80012B00
-				if (r31) pParticleMgr->FLAGS_0x28 |= 1;
-				//80012B10
-				if (r30) pParticleMgr->FLAGS_0x28 |= 2;
-				pParticleMgr->BYTE_0x88 = r29;
-				pParticleMgr->BYTE_0x89 = pInherit->BYTE_0x5;
-				mEffect->mDrawOrder->Add(mEffect, pParticleMgr);
-				//80012B4C
-			}
-			//80012B4C
-			if (pInherit->SHORT_0x0 || pInherit->BYTE_0x2 || pInherit->BYTE_0x3 || pInherit->BYTE_0x4 || (pInherit->BYTE_0x7 & 2))
-			{
-				tmp.REF_0xF8 = pParticle;
-				pParticle->Ref();
-				tmp.mInheritSettings = *pInherit;
-			}
-			else
-			{
-				tmp.REF_0xF8 = NULL;
-			}
-			//80012BDC
-			MTX34 mtx_0x60;
-			MTX34 mtx_0x30;
-			pParticleMgr->CalcGlobalMtx(&mtx_0x30);
-			MTX34Inv(&mtx_0x30, &mtx_0x30);
-			tmp.CalcGlobalMtx(&mtx_0x60);
-			MTX34Mult(&mtx_0x30, &mtx_0x60, &mtx_0x60);
-			tmp.Emission(pParticleMgr, &mtx_0x60);
-			
-			tmp.mParent = NULL;
-			tmp.mEffect = NULL;
-			//80012C30
-			if (REF_0xF8)
-			{
-				pParticle->UnRef();
-				REF_0xF8 = NULL;
-			}
-			//80012C70
-			if (this->WORD_0xC == 1 || pParticleMgr->WORD_0xC == 1) return;
-			
-			RetireParticleManager(pParticleMgr);
-		}
-		
-		float Emitter::GetLODratio(VEC3 & vec1, VEC3 & vec2, float flt1, float flt2, float flt3, float flt4)
-		{
-			float f31 = flt1 - flt2;
-			
-			float f1;
-			float f2;
-			float f0;
-			
-			f0 = (float)sqrt(VEC3DistSq(&vec1, &vec2)) - flt2;
-			f2 = f31 * flt4;
-			f1 = f31 * flt3;
-			
-			if (f2 > f0) return 1.0f;
-			
-			if (f1 < f0) return 0.0f;
-			
-			float f3 = f1 - f2;
-			
-			if (0.0f == f3) return 0.0f;
-			
-			return 1.0f - (f0 - f2) / f3;
-		}
-		
-		void Emitter::Emission(ParticleManager * pManager, const math::MTX34 * pMtx)
-		{
-			//r29 <- this
-			//r30 <- pManager
-			//r31 <- pMtx
-			if (SHORT_0xE0)
-			{
-				SHORT_0xE0--; //SHORT_0xE0 is probably a timer
-				return;
-			}
-			//80012E0C
-			SHORT_0xE0 = SHORT_0x30;
-			//80012E20
-			if (0.0f != FLOAT_0x34)
-			{
-				//80012E24
-				SHORT_0xE0 += ceil((SHORT_0x30 * FLOAT_0x34 - 1.0f) * mRandom.RandFloat());
-				//80012E98 (END)
-			}
-			//80012E98
-			if (WORD_0x24 & 0x00020000)
-			{
-				//80012EA4
-				FLOAT_0x38 = SHORT_0x32;
-			}
-			//80012EC0
-			else
-			{
-				float f31;
-				
-				//80012ECC
-				if (0.0f == FLOAT_0x2C)
-				{
-					//80012ED0
-					f31 = FLOAT_0x28;
-				}
-				//80012ED8
-				else
-				{
-					f31 = FLOAT_0x28 + (FLOAT_0x2C * FLOAT_0x28 * (2.0f * mRandom.RandFloat() - 1.0f));
-				}
-				//80012F30
-				if (WORD_0x24 & 0x100) //80012F38
-				{
-					//80012F3C
-					float ratio = GetLODratio(VEC_0x90, mEffect->mSystem->VEC_0x5020, mEffect->mSystem->FLOAT_0x505C, mEffect->mSystem->FLOAT_0x5060, FLOAT_0x44, FLOAT_0x40);
-					
-					f31 *= FLOAT_0x48 + (1.0f - FLOAT_0x48) * ratio;
-				}
-				//80012F78
-				FLOAT_0x38 += f31;
-				//80012F88
-				if (BYTE_0xDC && 0.0f != FLOAT_0x28 && FLOAT_0x38 < 1.0f)
-				{
-					FLOAT_0x38 = 1.0f;
-				}
-				//80012FB0 (END)
-			}
-			//80012FB0
-			if (FLOAT_0x38 >= 1.0f)
-			{
-				//80012FC4
-				Resource::GetInstance();
-				//80012FC8
-				EmitterResource * r11 = mResource;
-				if (mForm)
-				{
-					//80012FD8
-					if (mEffect->mEmissionPrologue)
-					{
-						//80012FE8
-						//r3 <- this (r29)
-						//r4 <- pManager (r30)
-						//r5 <- stack_0x14
-						//r6 <- stack_0x10
-						//r7 <- stack_0x18
-						//r8 <- stack_0x8
-						//r9 <- stack_0xc
-						//r10 <- stack_0x30
-						
-						int int_0x14 = (int)FLOAT_0x38;
-						u32 word_0x10 = WORD_0x24;
-						
-						float arr_0x18[6];
-						
-						arr_0x18[0] = FLOAT_0x4C;
-						arr_0x18[1] = FLOAT_0x50;
-						arr_0x18[2] = FLOAT_0x54;
-						arr_0x18[3] = FLOAT_0x58;
-						arr_0x18[4] = FLOAT_0x5C;
-						arr_0x18[5] = FLOAT_0x60;
-						//8001308C
-						u16 short_0x8 = r11->STRUCT_0x8.SHORT_0xA;
-						
-						float float_0xc = r11->STRUCT_0x8.SBYTE_0xC / 100.0f;
-						
-						MTX34 mtx(*pMtx); // at 0x30
-						
-						mEffect->mEmissionPrologue(this, pManager, &int_0x14,
-						&word_0x10, arr_0x18, &short_0x8,
-						&float_0xc, &mtx);
-						//800130F4
-						mForm->Emission(this, pManager, int_0x14,
-						word_0x10, arr_0x18, short_0x8,
-						float_0xc, &mtx);
-						//goto 80013188 (END)
-					}
-					else //8001312C
-					{
-						//r0=r11->STRUCT_0x8.SBYTE_0xC
-						//f0=FLOAT_0x38
-						//r5 <- pManager
-						mForm->Emission(this, pManager, (int)FLOAT_0x38,
-						WORD_0x24, &FLOAT_0x4C, r11->STRUCT_0x8.SHORT_0xA,
-						r11->STRUCT_0x8.SBYTE_0xC / 100.0f, pMtx);
-						//80013188
-					}
-					//80013188 (END)
-				}
-				//80013188
-				FLOAT_0x38 -= (s32)FLOAT_0x38;
-				//800131B4 (END)
-			}
-			//800131B4
-			if (BYTE_0xDC) BYTE_0xDC = 0;
-			//800131C8 (END)
-		}
-		
-		void Emitter::CalcEmitter()
-		{
-			if (GetFlagDisableCalc()) return;
-			//8001320C
-			if (WORD_0xC != 1) return;
-			//80013218
-			if (WORD_0xB4) return;
-			//80013224
-			if (SHORT_0xDE) return;
-			//80013230
-			u32 r31;
-			
-			if (!(mFlags & 0x4))
-			{
-				//8001323C
-				r31 = WORD_0xE4;
-				
-				if (r31 >= SHORT_0x3C)
-				{
-					mEffect->RetireEmitter(this);
-					return;
-				}
-			}
-			else
-			{
-				//8001325C
-				r31 = WORD_0xE4;
-				
-				if (r31 == 0xFFFF)
-				{
-					mEffect->RetireEmitter(this);
-					return;
-				}
-			}
-			//8001327C
-			u32 r30 = (mFlags & 0x4) ? -1 : SHORT_0x3C;
-			//80013290
-			bool r29 = 0;
-			//80013298
-			
-			for (u16 i = (!r31) ? 0 : mResource->NumEmitInitTrack(); i < mResource->NumEmitTrack(); i++) //80013468
-			{
-				//r5 <- mResource
-				//r6 <- mResource->SkipEmitterDesc - mResource
-				
-				/*r3 <- len of particle desc*/				/**lwzx r3, r5, r6**/
-				/*r4 <- GetParticleParameterDesc*/			/**add r4, r5, r6**/
-				//r0 (for indexing) <- r28
-				//r3 <- SkipParticleParameterDesc; add r3, r3, r4
-				//GetEmitTrackTbl(); addi r3, r3, 4
-				//GetEmitTrack(i); lwz r3, 4(r3)
-				EmitTrack * pTrack = mResource->GetEmitTrack(i);
-				
-				if ((pTrack->BYTE_0x4 & 0x8) || (pTrack->BYTE_0x0 != 0xAC)) continue;
-				//80013310
-				u8 r4 = pTrack->BYTE_0x4;
-				float * r4_2;
-				switch (pTrack->SHORT_0x2)
-				{
-					case 0x0001:
-						break;
-					case 0x0007:
-						break;
-					case 0x0301:
-						switch (r4)
-						{
-							case 0x44:
-								r4_2 = &FLOAT_0x68;
-								break;
-							case 0x45:
-								r4_2 = &FLOAT_0x6C;
-								break;
-							case 0x46:
-								r4_2 = &FLOAT_0x70;
-								break;
-							case 0x49:
-								r4_2 = &FLOAT_0x28;
-								break;
-							default:
-								continue;
-						}
-						AnimCurveExecuteF32((u8 *)&pTrack, r4_2, r31, SHORT_0xEA, r30);
-						break;
-					case 0x0303:
-						switch (r4)
-						{
-							case 0x47:
-								AnimCurveExecuteF32((u8 *)&pTrack, &FLOAT_0x74, r31, SHORT_0xEA, r30);
-								break;
-						}
-						break;
-					case 0x0307:
-						switch (r4)
-						{
-							case 0x41:
-								r4_2 = &VEC_0x9C.mCoords.x;
-								break;
-							case 0x42:
-								r4_2 = &VEC_0xA8.mCoords.x;
-								break;
-							case 0x43:
-								r4_2 = &VEC_0x90.mCoords.x;
-								break;
-							default:
-								continue;
-						}
-						AnimCurveExecuteF32((u8 *)&pTrack, r4_2, r31, SHORT_0xEA, r30);
-						r29 = true;
-						break;
-					default:
-						if ((pTrack->SHORT_0x2 & 0xFF00) != 0x300)
-						{
-							// empty
-						}
-						else
-						{
-							switch (r4)
-							{
-								case 0x48:
-									r4_2 = &FLOAT_0x7C;
-									break;
-								case 0x40:
-									r4_2 = &FLOAT_0x4C;
-									break;
-								default:
-									continue;
-							}
-							AnimCurveExecuteF32((u8 *)&pTrack, r4_2, r31, SHORT_0xEA, r30);
-						}
-						break;
-				}
-			}
-			//8001349C
-			if (r29) this->SetMtxDirty();
-			//800134AC (END)
-		}
-		
-		void Emitter::CalcParticle()
-		{
-			if (GetFlagDisableCalc()) return;
-			
-			ParticleManager * managers[0x400];
-			
-			u16 len = UtlistToArray(&mManagers.mActive, (void **)managers, mManagers.mActive.size);
-			
-			for (u16 i = 0; i < len; i++)
-			{
-				managers[i]->Calc();
-			}
-		}
-		
-		void Emitter::CalcEmission()
-		{
-			if (GetFlagDisableCalc() || WORD_0xB4) return;
-			//8001357C
-			
-			WORD_0xB4 = 1;
-			
-			if (SHORT_0xE8) mEffect->mFlags |= 0x10000;
-			//800135A0
-			if (WORD_0xC == 1)
-			{
-				//800135AC
-				MTX34 mtx_0x38;
-				MTX34 mtx_0x8;
-				
-				ParticleManager * pManager = (ParticleManager *)List_GetFirst(&mManagers.mActive);
-				
-				pManager->CalcGlobalMtx(&mtx_0x8);
-				
-				MTX34Inv(&mtx_0x8, &mtx_0x8);
-				
-				CalcGlobalMtx(&mtx_0x38);
-				MTX34Mult(&mtx_0x8, &mtx_0x38, &mtx_0x38);
-				
-				if (SHORT_0xDE)
-				{
-					SHORT_0xDE--; // also probably a timer
-				}
-				else
-				{
-					Emission(pManager, &mtx_0x38);
-					WORD_0xE4++;
-				}
-			}
-			else //80013624
-			{
-				if (SHORT_0xDE)
-				{
-					SHORT_0xDE--;
-				}
-				else
-				{
-					WORD_0xE4++;
-				}
-			}
-		}
-		
-		void Emitter::CalcBillboard()
-		{
-			if (WORD_0xC != 1 && WORD_0xC != 2) return;
-			
-			if ((WORD_0x24 & 0x10000) && (WORD_0x24 & 0x8000)) return;
-			
-			//800136A4
-			VEC_0xA8.mCoords.z = 0.0f;
-			VEC_0xA8.mCoords.y = 0.0f;
-			VEC_0xA8.mCoords.x = 0.0f;
-			
-			mMtxDirtyFlag = true;
-			
-			MTX34 mtx_0xa8;
-			MTX34 mtx_0x78;
-			MTX34 mtx_0x48;
-			MTX34 mtx_0x18;
-			
-			CalcGlobalMtx(&mtx_0xa8);
-			MTX34Mult(&mEffect->mSystem->MTX_0x502C, &mtx_0x78, &mtx_0xa8);
-			
-			mtx_0x48 = mtx_0x78;
-			
-			float xxSquared = mtx_0x48.mEntries.tbl[0][0] * mtx_0x48.mEntries.tbl[0][0];
-			float yxSquared = mtx_0x48.mEntries.tbl[1][0] * mtx_0x48.mEntries.tbl[1][0];
-			float zxSquared = mtx_0x48.mEntries.tbl[2][0] * mtx_0x48.mEntries.tbl[2][0];
-			
-			float xSum = xxSquared + yxSquared + zxSquared;
-			
-			mtx_0x48.mEntries.tbl[0][0] = (xSum <= 0.0f) ? 0.0f : FSqrt(xSum);
-			mtx_0x48.mEntries.tbl[0][1] = 0.0f;
-			mtx_0x48.mEntries.tbl[0][2] = 0.0f;
-			
-			float xySquared = mtx_0x48.mEntries.tbl[0][1] * mtx_0x48.mEntries.tbl[0][1];
-			float yySquared = mtx_0x48.mEntries.tbl[1][1] * mtx_0x48.mEntries.tbl[1][1];
-			float zySquared = mtx_0x48.mEntries.tbl[2][1] * mtx_0x48.mEntries.tbl[2][1];
-			
-			float ySum = xySquared + yySquared + zySquared;
-			
-			mtx_0x48.mEntries.tbl[1][1] = (ySum <= 0.0f) ? 0.0f : FSqrt(ySum);
-			mtx_0x48.mEntries.tbl[1][2] = 0.0f;
-			mtx_0x48.mEntries.tbl[1][0] = 0.0f;
-			
-			float xzSquared = mtx_0x48.mEntries.tbl[0][2] * mtx_0x48.mEntries.tbl[0][2];
-			float yzSquared = mtx_0x48.mEntries.tbl[1][2] * mtx_0x48.mEntries.tbl[1][2];
-			float zzSquared = mtx_0x48.mEntries.tbl[2][2] * mtx_0x48.mEntries.tbl[2][2];
-			
-			float zSum = xzSquared + yzSquared + zzSquared;
-			
-			mtx_0x48.mEntries.tbl[2][2] = (zSum <= 0.0f) ? 0.0f : FSqrt(zSum);
-			mtx_0x48.mEntries.tbl[2][1] = 0.0f;
-			mtx_0x48.mEntries.tbl[2][0] = 0.0f;
-			
-			//80013828
-			if (WORD_0x24 & 0x8000)
-			{
-				MTX34RotXYZFIdx(&mtx_0x18, 64.0f, 0.0f, 0.0f);
-				MTX34Mult(&mtx_0x48, &mtx_0x18, &mtx_0x48);
-			}
-			//80013854
-			MTX34Inv(&mtx_0x78, &mtx_0x78);
-			MTX34Mult(&mtx_0x78, &mtx_0x48, &mtx_0x78);
-			
-			VEC3 vec_0x8;
-			
-			vec_0x8.mCoords.x = 1.0f / VEC_0x9C.mCoords.x;
-			vec_0x8.mCoords.y = 1.0f / VEC_0x9C.mCoords.y;
-			vec_0x8.mCoords.z = 1.0f / VEC_0x9C.mCoords.z;
-			
-			MTX34Scale(&mtx_0x78, &mtx_0x78, &vec_0x8);
-			MTX34Scale(&mtx_0x78, &VEC_0x9C, &mtx_0x78);
-			MtxGetRotation(mtx_0x78, &VEC_0xA8);
-			SetMtxDirty();
-		}
-		
-		MTX34 * Emitter::RestructMatrix(MTX34 * pMtx1, MTX34 * pMtx2, bool b1, bool b2, s8 sbyte)
-		{
-			if (b1 && b2 && sbyte == 100)
-			{
-				*pMtx1 = *pMtx2;
-				return pMtx1;
-			}
-			
-			if (!b1 && !b2 && sbyte == 0)
-			{
-				MTX34Identity(pMtx1);
-				return pMtx1;
-			}
-			
-			MTX34Identity(pMtx1);
-			
-			if (sbyte)
-			{
-				//800139D0
-				VEC3 vec_0x14;
-				
-				MtxGetTranslate(*pMtx2, &vec_0x14);
-				VEC3Scale(&vec_0x14, &vec_0x14, sbyte / 100.0f);
-				MTX34Trans(pMtx1, pMtx2, &vec_0x14);
-				//80013A2C
-			}
-			//80013A2C
-			if (b2)
-			{
-				//80013A34
-				MTX34 mtx_0x20;
-				
-				MtxGetRotationMtx(*pMtx2, &mtx_0x20);
-				MTX34Mult(pMtx1, pMtx1, &mtx_0x20); //PSMTXConcat(*pMtx1, mtx_0x20, *pMtx1)
-				//80013A50
-			}
-			//80013A50
-			if (b1)
-			{
-				//80013A58
-				VEC3 vec_0x8;
-				
-				MtxGetScale(*pMtx2, &vec_0x8);
-				MTX34Scale(pMtx1, pMtx1, &vec_0x8);
-				//80013A74
-			}
-			//80013A74
-			return pMtx1;
-		}
-		
-		MTX34 * Emitter::CalcGlobalMtx(MTX34 * pMtx)
-		{
-			//r31 <- pMtx
-			//r30 <- this
-			
-			if (mMtxDirtyFlag)
-			{
-				if (!mParent)
-				{
-					MTX34Copy(&mGlobalMtx, &mEffect->mRootMtx);
-				}
-				else
-				{
-					MTX34 mtx_0x8;
-					
-					mParent->CalcGlobalMtx(&mtx_0x8);
-					RestructMatrix(&mGlobalMtx, &mtx_0x8, BYTE_0x64 & 1, BYTE_0x64 & 2, BYTE_0x65);
-				}
-				
-				MTX34Trans(&mGlobalMtx, &mGlobalMtx, &VEC_0x90);
-				
-				MTX34 mtx_0x38;
-				
-				MTX34RotXYZFIdx(&mtx_0x38, 40.743664f * VEC_0xA8.mCoords.x, 40.743664f * VEC_0xA8.mCoords.y, 40.743664f * VEC_0xA8.mCoords.z);
-				MTX34Mult(&mGlobalMtx, &mGlobalMtx, &mtx_0x38); //PSMTXConcat(&mGlobalMtx, &mtx_0x38, &mGlobalMtx);
-				MTX34Scale(&mGlobalMtx, &mGlobalMtx, &VEC_0x9C);
-				
-				mMtxDirtyFlag = false;
-			}
-			
-			if (pMtx)
-			{
-				*pMtx = mGlobalMtx;
-				
-				return pMtx;
-			}
-			
-			return &mGlobalMtx;
-		}
-		
-		void Emitter::SetMtxDirty()
-		{
-			mMtxDirtyFlag = true;
-			ParticleManager * curMgr = NULL;
-			
-			while (curMgr = (ParticleManager *)List_GetNext(&mManagers.mActive, curMgr))
-			{
-				curMgr->BOOL_0x8A = true;
-			}
-			//80013C34
-			if (!mEffect) return;
-			
-			Emitter * curEmitter = NULL;
-			
-			while (curEmitter = (Emitter *)List_GetNext(&mEffect->mEmitters.mActive, curEmitter))
-			{
-				if (curEmitter->mMtxDirtyFlag) continue;
-				
-				for (Emitter * curParent = curEmitter->mParent; curParent; curParent = curParent->mParent)
-				{
-					if (curParent == this)
-					{
-						curEmitter->mMtxDirtyFlag = true;
-						ParticleManager * curMgr = NULL;
-						
-						while (curMgr = (ParticleManager *)List_GetNext(&curEmitter->mManagers.mActive, curMgr))
-						{
-							curMgr->BOOL_0x8A = true;
-						}
-					}
-				}
-			}
-		}
-		
-		u16 Emitter::GetNumParticleManager() const
-		{
-			return mManagers.mActive.size;
-		}
-		
-		ParticleManager * Emitter::GetParticleManager(u16 i)
-		{
-			return (ParticleManager *)List_GetNth(&mManagers.mActive, i);
-		}
-		
-		struct ParticleManagerIterationContext
-		{
-			u32 mCounter;
-			Action mAction;
-			u32 mArgument;
-			bool BOOL_0xC;
-		};
-		
-		static void foreachParticleManagerSub(void * thisEm, u32 arg)
-		{
-			ParticleManagerIterationContext * context = reinterpret_cast<ParticleManagerIterationContext *>(arg);
-			
-			context->mCounter += static_cast<Emitter *>(thisEm)->ForeachParticleManager(context->mAction, context->mArgument, context->BOOL_0xC, false);
-		}
-		
-		u16 Emitter::ForeachParticleManager(Action action, u32 arg, bool b1, bool b2)
-		{
-			ParticleManager * nextMgr;
-			ParticleManager * curMgr;
-			
-			u32 counter = 0;
-			
-			for (curMgr = (ParticleManager *)List_GetFirst(&mManagers.mActive); curMgr; curMgr = nextMgr)
-			{
-				nextMgr = (ParticleManager *)List_GetNext(&mManagers.mActive, curMgr);
-				
-				if (b1 || curMgr->WORD_0xC != 1)
-				{
-					action(curMgr, arg);
-					counter++;
-				}
-			}
-			
-			if (b2)
-			{
-				ParticleManagerIterationContext context = { 0, action, arg, b1 };
-				
-				mEffect->ForeachEmitterFrom(foreachParticleManagerSub, (u32)&context, true, this);
-				
-				counter += context.mCounter;
-			}
-			
-			return counter;
-		}
-	}
+#include <revolution/MTX.h>
+
+namespace nw4r {
+namespace ef {
+
+Emitter::Emitter() : mActivityList(offsetof(ParticleManager, mActivityLink)) {}
+
+Emitter::~Emitter() {}
+
+u32 Emitter::RetireParticleAll() {
+    u32 num = 0;
+    void* pArray[NW4R_EF_MAX_PARTICLEMANAGER];
+
+    u16 size = UtlistToArray(&mActivityList.mActiveList, pArray,
+                             UtlistSize(&mActivityList.mActiveList));
+
+    for (u16 i = 0; i < size; i++) {
+        ParticleManager* pManager =
+            reinterpret_cast<ParticleManager*>(pArray[i]);
+
+        num += pManager->RetireParticleAll();
+    }
+
+    return num;
 }
-#else
-#error This file has yet to be decompiled accurately. Use "ef_emitter.s" instead.
-#endif
+
+void Emitter::SendClosing() {
+    mManagerEF->Closing(this);
+}
+
+void Emitter::DestroyFunc() {
+    void* pArray[NW4R_EF_MAX_EMITTER];
+
+    if (mForm != NULL) {
+        mForm = NULL;
+    }
+
+    if (mParameter.mComFlags & EmitterDesc::CMN_FLAG_SYNC_LIFE) {
+        RetireParticleAll();
+    }
+
+    RetireParticleManagerAll();
+
+    if (mParameter.mComFlags & EmitterDesc::CMN_FLAG_SYNC_LIFE) {
+        u16 size =
+            UtlistToArray(&mManagerEF->mActivityList.mActiveList, pArray,
+                          UtlistSize(&mManagerEF->mActivityList.mActiveList));
+
+        for (u16 i = 0; i < size; i++) {
+            Emitter* pEmitter = reinterpret_cast<Emitter*>(pArray[i]);
+
+            for (Emitter* pIt = pEmitter->mParent; pIt != NULL;
+                 pIt = pIt->mParent) {
+
+                if (pIt != this) {
+                    continue;
+                }
+
+                pEmitter->RetireParticleAll();
+
+                if (pEmitter->mLifeStatus == NW4R_EF_LS_ACTIVE) {
+                    mManagerEF->RetireEmitter(pEmitter);
+                }
+
+                break;
+            }
+        }
+    }
+}
+
+bool Emitter::Closing(ParticleManager* pManager) {
+    mManagerEF->ParticleManagerRemove(pManager);
+    pManager->mManagerEM->UnRef();
+
+    mActivityList.ToClosing(pManager);
+    pManager->ChangeLifeStatus(NW4R_EF_LS_CLOSING);
+
+    return true;
+}
+
+u32 Emitter::RetireParticleManager(ParticleManager* pManager) {
+    if (pManager->GetLifeStatus() != NW4R_EF_LS_ACTIVE) {
+        return 0;
+    }
+
+    mActivityList.ToWait(pManager);
+    pManager->Destroy();
+    return 1;
+}
+
+u32 Emitter::RetireParticleManagerAll() {
+    u32 num = 0;
+    void* pArray[NW4R_EF_MAX_PARTICLEMANAGER];
+
+    u16 size = UtlistToArray(&mActivityList.mActiveList, pArray,
+                             UtlistSize(&mActivityList.mActiveList));
+
+    for (u16 i = 0; i < size; i++) {
+        ParticleManager* pManager =
+            reinterpret_cast<ParticleManager*>(pArray[i]);
+
+        if (pManager->GetLifeStatus() != NW4R_EF_LS_ACTIVE) {
+            continue;
+        }
+
+        num += RetireParticleManager(pManager);
+    }
+
+    return num;
+}
+
+/******************************************************************************
+ * Dummy function required to match float literal order
+ ******************************************************************************/
+void Emitter::UpdateDatas(EmitterResource* pResource) {
+    const EmitterDesc* pDesc = pResource->GetEmitterDesc();
+
+    (void)(pDesc->lodMinEmit / 100.0f);
+    (void)(pDesc->emitEmitRandom / 100.0f);
+}
+
+bool Emitter::InitializeDatas(EmitterResource* pResource, Effect* pEffect) {
+    mTick = 0;
+    mLifeStatus = NW4R_EF_LS_ACTIVE;
+    mResource = pResource;
+
+    EmitterDesc* pDesc = pResource->GetEmitterDesc();
+
+    mEvalStatus = NW4R_EF_ES_WAIT;
+    mCalcRemain = pDesc->emitEmitPast;
+    mParameter.mComFlags = pDesc->commonFlag;
+    mParameter.mEmitFlags = pDesc->emitFlag;
+    mParameter.mEmitSpan = pDesc->emitLife;
+    mWaitTime = pDesc->emitEmitStart;
+    mEmitIntervalWait = 0;
+
+    mParameter.mLODFar = pDesc->lodFar / 100.0f;
+    mParameter.mLODNear = pDesc->lodNear / 100.0f;
+    mParameter.mLODMinEmit = pDesc->lodMinEmit / 100.0f;
+    mParameter.mEmitRatio = pDesc->emitEmit;
+    mParameter.mEmitRandom = pDesc->emitEmitRandom / 100.0f;
+    mParameter.mEmitInterval = pDesc->emitEmitInterval;
+    mParameter.mEmitEmitDiv = pDesc->emitEmitDiv;
+    mParameter.mEmitIntervalRandom = pDesc->emitEmitIntarvalRandom / 100.0f;
+    mParameter.mEmitCount = 0.0f;
+
+    mIsFirstEmission = true;
+
+    mParameter.mTranslate = pDesc->translate;
+    mParameter.mScale = pDesc->scale;
+    mParameter.mRotate = pDesc->rotate;
+
+    mParameter.mInherit = EmitterParameter::INHERIT_FLAG_SCALE |
+                          EmitterParameter::INHERIT_FLAG_ROT;
+
+    mParameter.mInheritTranslate = 100;
+
+    mParameter.mVelInitVelocityRandom = pDesc->velInitVelocityRandom;
+    mParameter.mVelMomentumRandom = pDesc->velMomentumRandom;
+    mParameter.mVelPowerRadiationDir = pDesc->velPowerRadiationDir;
+    mParameter.mVelPowerYAxis = pDesc->velPowerYAxis;
+    mParameter.mVelPowerRandomDir = pDesc->velPowerRandomDir;
+    mParameter.mVelPowerNormalDir = pDesc->velPowerNormalDir;
+    mParameter.mVelDiffusionEmitterNormal = pDesc->velDiffusionEmitterNormal;
+    mParameter.mVelPowerSpecDir = pDesc->velPowerSpecDir;
+    mParameter.mVelDiffusionSpecDir = pDesc->velDiffusionSpecDir;
+    mParameter.mVelSpecDir = pDesc->velSpecDir;
+
+    (void)Resource::GetInstance(); // unused
+
+    mRandSeed = pDesc->randomSeed;
+    if (mRandSeed == 0) {
+        mRandSeed = pEffect->mManagerES->mRandom.Rand();
+    }
+
+    mRandom.Srand(mRandSeed);
+
+    for (int i = 0; i < NUM_PARAMS; i++) {
+        mParameter.mParams[i] = pDesc->commonParam[i];
+    }
+
+    mMtxDirty = true;
+    mpReferenceParticle = NULL;
+    mForm = pEffect->mManagerES->mEmitFormBuilder->Create(pDesc->GetFormType());
+    mParent = NULL;
+    mManagerEF = NULL;
+
+    return true;
+}
+
+bool Emitter::Initialize(Effect* pParent, EmitterResource* pResource,
+                         u8 drawWeight) {
+
+    (void)pResource->GetEmitterDesc(); // unused
+
+    ReferencedObject::Initialize();
+
+    mActivityList.Initialize();
+
+    InitializeDatas(pResource, pParent);
+    mManagerEF = pParent;
+
+    ParticleManager* pManager =
+        pParent->mManagerES->GetMemoryManager()->AllocParticleManager();
+
+    if (pManager == NULL) {
+        return false;
+    }
+    if (!pManager->Initialize(this, pResource)) {
+        return false;
+    }
+
+    mManagerEF->Ref();
+    mActivityList.ToActive(pManager);
+    pManager->ChangeLifeStatus(NW4R_EF_LS_ACTIVE);
+
+    pManager->mFlag = 0;
+
+    if (pResource->GetEmitterDesc()->commonFlag &
+        EmitterDesc::CMN_FLAG_INHERIT_PTCL_SCALE) {
+
+        pManager->mFlag |= ParticleManager::FLAG_MTX_INHERIT_SCALE;
+    }
+
+    if (pResource->GetEmitterDesc()->commonFlag &
+        EmitterDesc::CMN_FLAG_INHERIT_PTCL_ROT) {
+
+        pManager->mFlag |= ParticleManager::FLAG_MTX_INHERIT_ROT;
+    }
+
+    pManager->mInheritTranslate =
+        pResource->GetEmitterDesc()->inheritPtclTranslate;
+
+    pManager->mWeight = drawWeight;
+    mManagerEF->ParticleManagerAdd(pManager);
+
+    return true;
+}
+
+Emitter* Emitter::CreateEmitter(EmitterResource* pResource,
+                                EmitterInheritSetting* pSetting,
+                                Particle* pParticle, u16 calcRemain) {
+
+    Emitter* pEmitter =
+        mManagerEF->CreateEmitter(pResource, pSetting->weight, 0);
+
+    if (pEmitter == NULL) {
+        return NULL;
+    }
+
+    pEmitter->mCalcRemain += calcRemain;
+    pEmitter->mParent = this;
+    pEmitter->mParent->Ref();
+    pEmitter->mParameter.mInherit = 0;
+
+    if (mResource->GetEmitterDesc()->commonFlag &
+        EmitterDesc::CMN_FLAG_EMIT_INHERIT_SCALE) {
+
+        pEmitter->mParameter.mInherit |= EmitterParameter::INHERIT_FLAG_SCALE;
+    }
+
+    if (mResource->GetEmitterDesc()->commonFlag &
+        EmitterDesc::CMN_FLAG_EMIT_INHERIT_ROT) {
+
+        pEmitter->mParameter.mInherit |= EmitterParameter::INHERIT_FLAG_ROT;
+    }
+
+    pEmitter->mParameter.mInheritTranslate =
+        mResource->GetEmitterDesc()->inheritChildEmitTranslate;
+
+    if (pParticle != NULL) {
+        math::VEC3 transSave = pEmitter->mParameter.mTranslate;
+
+        pEmitter->mParameter.mTranslate.x = 0.0f;
+        pEmitter->mParameter.mTranslate.y = 0.0f;
+        pEmitter->mParameter.mTranslate.z = 0.0f;
+        pEmitter->SetMtxDirty();
+
+        math::MTX34 mtx;
+        math::MTX34 tmp;
+
+        math::MTX34Identity(&mtx);
+        math::MTX34RotXYZRad(&mtx, pEmitter->mParameter.mRotate.x,
+                             pEmitter->mParameter.mRotate.y,
+                             pEmitter->mParameter.mRotate.z);
+        math::MTX34Scale(&mtx, &mtx, &pEmitter->mParameter.mScale);
+
+        pEmitter->CalcGlobalMtx(&tmp);
+        math::MTX34Inv(&tmp, &tmp);
+        math::MTX34Mult(&mtx, &mtx, &tmp);
+
+        pParticle->mParticleManager->CalcGlobalMtx(&tmp);
+        math::MTX34Mult(&mtx, &mtx, &tmp);
+
+        math::MTX34Trans(&mtx, &mtx, &pParticle->mParameter.mPosition);
+        math::MTX34RotXYZRad(&tmp, pEmitter->mParameter.mRotate.x,
+                             pEmitter->mParameter.mRotate.y,
+                             pEmitter->mParameter.mRotate.z);
+        math::MTX34Scale(&tmp, &tmp, &pEmitter->mParameter.mScale);
+
+        math::MTX34Inv(&tmp, &tmp);
+        math::MTX34Mult(&mtx, &mtx, &tmp);
+
+        pEmitter->mParameter.mTranslate.x = transSave.x + mtx._03;
+        pEmitter->mParameter.mTranslate.y = transSave.y + mtx._13;
+        pEmitter->mParameter.mTranslate.z = transSave.z + mtx._23;
+        pEmitter->SetMtxDirty();
+
+        if (pSetting->speed != 0 || pSetting->scale != 0 ||
+            pSetting->alpha != 0 || pSetting->color != 0 ||
+            (pSetting->flag & EmitterInheritSetting::FLAG_INHERIT_ROT)) {
+
+            pEmitter->mpReferenceParticle = pParticle;
+            pParticle->Ref();
+
+            pEmitter->mInheritSetting = *pSetting;
+        }
+    }
+
+    return pEmitter;
+}
+
+void Emitter::CreateEmitterTmp(EmitterResource* pResource,
+                               EmitterInheritSetting* pSetting,
+                               Particle* pParticle, u16 calcRemain) {
+
+    Emitter tempEmitter;
+
+    (void)pResource->GetEmitterDesc(); // unused
+
+    tempEmitter.InitializeDatas(pResource, mManagerEF);
+    tempEmitter.mCalcRemain += calcRemain;
+    tempEmitter.mManagerEF = mManagerEF;
+    tempEmitter.mParent = this;
+
+    Emitter* pEmitter = &tempEmitter;
+
+    if ((pSetting->flag & EmitterInheritSetting::FLAG_FOLLOW_EMIT) &&
+        pSetting->speed != 0) {
+
+        math::VEC3 dir;
+        math::MTX34 dirMtx;
+        math::MTX34 tmpMtx;
+
+        pParticle->mParticleManager->CalcGlobalMtx(&tmpMtx);
+        tmpMtx._23 = 0.0f;
+        tmpMtx._13 = 0.0f;
+        tmpMtx._03 = 0.0f;
+
+        pParticle->GetMoveDir(&dir);
+        math::VEC3Transform(&dir, &tmpMtx, &dir);
+
+        if (dir.x != 0.0f || dir.y != 0.0f || dir.z != 0.0f) {
+            math::VEC3Normalize(&dir, &dir);
+
+            if (pSetting->speed < 0) {
+                math::VEC3Scale(&dir, &dir, -1.0f);
+            }
+
+            GetDirMtxY(&dirMtx, dir);
+            math::MTX34RotXYZRad(&tmpMtx, pEmitter->mParameter.mRotate.x,
+                                 pEmitter->mParameter.mRotate.y,
+                                 pEmitter->mParameter.mRotate.z);
+
+            math::MTX34Mult(&dirMtx, &dirMtx, &tmpMtx);
+            MtxGetRotation(dirMtx, &pEmitter->mParameter.mRotate);
+        }
+    }
+
+    math::VEC3 transSave = pEmitter->mParameter.mTranslate;
+
+    pEmitter->mParameter.mTranslate.x = 0.0f;
+    pEmitter->mParameter.mTranslate.y = 0.0f;
+    pEmitter->mParameter.mTranslate.z = 0.0f;
+    pEmitter->SetMtxDirty();
+
+    math::MTX34 mtx;
+    math::MTX34 tmp;
+
+    math::MTX34Identity(&mtx);
+    math::MTX34RotXYZRad(&mtx, pEmitter->mParameter.mRotate.x,
+                         pEmitter->mParameter.mRotate.y,
+                         pEmitter->mParameter.mRotate.z);
+    math::MTX34Scale(&mtx, &mtx, &pEmitter->mParameter.mScale);
+
+    pEmitter->CalcGlobalMtx(&tmp);
+    math::MTX34Inv(&tmp, &tmp);
+    math::MTX34Mult(&mtx, &mtx, &tmp);
+
+    pParticle->mParticleManager->CalcGlobalMtx(&tmp);
+    math::MTX34Mult(&mtx, &mtx, &tmp);
+
+    math::MTX34Trans(&mtx, &mtx, &pParticle->mParameter.mPosition);
+    math::MTX34RotXYZRad(&tmp, pEmitter->mParameter.mRotate.x,
+                         pEmitter->mParameter.mRotate.y,
+                         pEmitter->mParameter.mRotate.z);
+    math::MTX34Scale(&tmp, &tmp, &pEmitter->mParameter.mScale);
+
+    math::MTX34Inv(&tmp, &tmp);
+    math::MTX34Mult(&mtx, &mtx, &tmp);
+
+    pEmitter->mParameter.mTranslate.x = transSave.x + mtx._03;
+    pEmitter->mParameter.mTranslate.y = transSave.y + mtx._13;
+    pEmitter->mParameter.mTranslate.z = transSave.z + mtx._23;
+    pEmitter->SetMtxDirty();
+
+    tempEmitter.CalcEmitter();
+    tempEmitter.CalcBillboard();
+
+    // clang-format off
+    bool inheritS = (mParameter.mComFlags & EmitterDesc::CMN_FLAG_EMIT_INHERIT_SCALE) &&
+        (pResource->GetEmitterDesc()->commonFlag & EmitterDesc::CMN_FLAG_INHERIT_PTCL_SCALE);
+
+    bool inheritR = (mParameter.mComFlags & EmitterDesc::CMN_FLAG_EMIT_INHERIT_ROT) &&
+        (pResource->GetEmitterDesc()->commonFlag & EmitterDesc::CMN_FLAG_INHERIT_PTCL_ROT);
+    // clang-format on
+
+    s8 inheritT;
+
+    const s8 parentChildT =
+        mResource->GetEmitterDesc()->inheritChildEmitTranslate;
+
+    const s8 myPtclT = pResource->GetEmitterDesc()->inheritPtclTranslate;
+
+    if (parentChildT == 0 || myPtclT == 0) {
+        inheritT = 0;
+    } else if (parentChildT == 100) {
+        inheritT = myPtclT;
+    } else if (myPtclT == 100) {
+        inheritT = parentChildT;
+    } else {
+        inheritT = mResource->GetEmitterDesc()->inheritChildEmitTranslate *
+                   pResource->GetEmitterDesc()->inheritPtclTranslate / 100;
+    }
+
+    ParticleManager* pManager = FindParticleManager(
+        pResource, inheritS, inheritR, inheritT, pSetting->weight);
+
+    if (pManager == NULL) {
+        pManager =
+            mManagerEF->mManagerES->GetMemoryManager()->AllocParticleManager();
+
+        if (pManager == NULL) {
+            return;
+        }
+        if (!pManager->Initialize(this, pResource)) {
+            return;
+        }
+
+        mActivityList.ToActive(pManager);
+        pManager->ChangeLifeStatus(NW4R_EF_LS_ACTIVE);
+        pManager->mFlag = 0;
+
+        if (inheritS) {
+            pManager->mFlag |= ParticleManager::FLAG_MTX_INHERIT_SCALE;
+        }
+        if (inheritR) {
+            pManager->mFlag |= ParticleManager::FLAG_MTX_INHERIT_ROT;
+        }
+
+        pManager->mInheritTranslate = inheritT;
+        pManager->mWeight = pSetting->weight;
+        mManagerEF->ParticleManagerAdd(pManager);
+    }
+
+    if (pSetting->speed != 0 || pSetting->scale != 0 || pSetting->alpha != 0 ||
+        pSetting->color != 0 ||
+        (pSetting->flag & EmitterParameter::INHERIT_FLAG_ROT)) {
+
+        tempEmitter.mpReferenceParticle = pParticle;
+        pParticle->Ref();
+
+        tempEmitter.mInheritSetting = *pSetting;
+    } else {
+        tempEmitter.mpReferenceParticle = NULL;
+    }
+
+    math::MTX34 space;
+    math::MTX34 pmMtx;
+
+    pManager->CalcGlobalMtx(&pmMtx);
+    math::MTX34Inv(&pmMtx, &pmMtx);
+
+    tempEmitter.CalcGlobalMtx(&space);
+    math::MTX34Mult(&space, &pmMtx, &space);
+
+    tempEmitter.Emission(pManager, &space);
+    tempEmitter.mParent = NULL;
+    tempEmitter.mManagerEF = NULL;
+
+    if (tempEmitter.mpReferenceParticle != NULL) {
+        pParticle->UnRef();
+        tempEmitter.mpReferenceParticle = NULL;
+    }
+
+    if (mLifeStatus != NW4R_EF_LS_ACTIVE &&
+        pManager->GetLifeStatus() == NW4R_EF_LS_ACTIVE) {
+
+        RetireParticleManager(pManager);
+    }
+}
+
+ParticleManager* Emitter::FindParticleManager(EmitterResource* pResource,
+                                              bool inheritS, bool inheritR,
+                                              s8 inheritT, u8 weight) {
+
+    NW4R_UT_LIST_FOREACH (ParticleManager, mActivityList.mActiveList, {
+        if (it->mResource != pResource) {
+            continue;
+        }
+
+        if (((it->mFlag & EmitterParameter::INHERIT_FLAG_SCALE) != 0) != inheritS ||
+            ((it->mFlag & EmitterParameter::INHERIT_FLAG_ROT) != 0) != inheritR) {
+            continue;
+        }
+
+        if (it->mInheritTranslate != inheritT) {
+            continue;
+        }
+
+        if (it->mWeight != weight) {
+            continue;
+        }
+
+        return it;
+    });
+
+    return NULL;
+}
+
+static f32 GetLODratio(math::VEC3& rEmitPos, math::VEC3& rCamPos, f32 cameraFar,
+                       f32 cameraNear, f32 lodFar, f32 lodNear) {
+
+    f32 Gl, Vl, Nl, Fl;
+    f32 LODratio;
+    f32 Fl_Nl;
+
+    Vl = cameraFar - cameraNear;
+    Gl = std::sqrtf(VEC3DistSq(&rCamPos, &rEmitPos)) - cameraNear;
+    Nl = Vl * lodNear;
+    Fl = Vl * lodFar;
+
+    if (Nl > Gl) {
+        LODratio = 1.0f;
+    } else if (Fl < Gl) {
+        LODratio = 0.0f;
+    } else {
+        Fl_Nl = Fl - Nl;
+
+        if (Fl_Nl == 0.0f) {
+            LODratio = 0.0f;
+        } else {
+            LODratio = 1.0f - (Gl - Nl) / Fl_Nl;
+        }
+    }
+
+    return LODratio;
+}
+
+void Emitter::Emission(ParticleManager* pManager, const math::MTX34* pSpace) {
+    if (mEmitIntervalWait > 0) {
+        mEmitIntervalWait--;
+        return;
+    }
+
+    mEmitIntervalWait = mParameter.mEmitInterval;
+
+    if (mParameter.mEmitIntervalRandom != 0.0f) {
+        mEmitIntervalWait += static_cast<u16>(math::FCeil(
+            (mParameter.mEmitInterval * mParameter.mEmitIntervalRandom - 1.0f) *
+            mRandom.RandFloat()));
+    }
+
+    if (mParameter.mEmitFlags & EmitterDesc::EMIT_FLAG_17) {
+        mParameter.mEmitCount = mParameter.mEmitEmitDiv;
+    } else {
+        f32 count;
+        if (mParameter.mEmitRandom == 0.0f) {
+            count = mParameter.mEmitRatio;
+        } else {
+            count = mParameter.mEmitRatio +
+                    mParameter.mEmitRatio * mParameter.mEmitRandom *
+                        (2.0f * mRandom.RandFloat() - 1.0f);
+        }
+
+        if (mParameter.mEmitFlags & EmitterDesc::EMIT_FLAG_8) {
+            EffectSystem* pSystem = mManagerEF->mManagerES;
+
+            // clang-format off
+            f32 ratio = GetLODratio(
+                mParameter.mTranslate,
+                pSystem->mProcessCameraPos,
+                pSystem->mProcessCameraFar,
+                pSystem->mProcessCameraNear,
+                mParameter.mLODFar,
+                mParameter.mLODNear);
+            // clang-format on
+
+            count *= mParameter.mLODMinEmit +
+                     (1.0f - mParameter.mLODMinEmit) * ratio;
+        }
+
+        mParameter.mEmitCount += count;
+
+        if (mIsFirstEmission && mParameter.mEmitRatio != 0.0f &&
+            mParameter.mEmitCount < 1.0f) {
+
+            mParameter.mEmitCount = 1.0f;
+        }
+    }
+
+    if (mParameter.mEmitCount >= 1.0f) {
+        (void)Resource::GetInstance(); // unused
+
+        EmitterDesc* pDesc = mResource->GetEmitterDesc();
+
+        if (mForm != NULL) {
+            if (mManagerEF->mCallBack.mPrevEmission != NULL) {
+                int count = static_cast<int>(mParameter.mEmitCount);
+                u32 flags = mParameter.mEmitFlags;
+
+                f32 params[NUM_PARAMS];
+                for (int i = 0; i < NUM_PARAMS; i++) {
+                    params[i] = mParameter.mParams[i];
+                }
+
+                u16 life = pDesc->ptclLife;
+                f32 lifeRnd = pDesc->ptclLifeRandom / 100.0f;
+                math::MTX34 newSpace = *pSpace;
+
+                mManagerEF->mCallBack.mPrevEmission(this, pManager, &count,
+                                                    &flags, &params, &life,
+                                                    &lifeRnd, &newSpace);
+
+                mForm->Emission(this, pManager, count, flags, params, life,
+                                lifeRnd, &newSpace);
+            } else {
+                mForm->Emission(
+                    this, pManager, static_cast<int>(mParameter.mEmitCount),
+                    mParameter.mEmitFlags, mParameter.mParams, pDesc->ptclLife,
+                    pDesc->ptclLifeRandom / 100.0f, pSpace);
+            }
+        }
+
+        mParameter.mEmitCount -= static_cast<int>(mParameter.mEmitCount);
+    }
+
+    if (mIsFirstEmission) {
+        mIsFirstEmission = false;
+    }
+}
+
+void Emitter::CalcEmitter() {
+    if (GetFlagDisableCalc()) {
+        return;
+    }
+
+    if (mLifeStatus != NW4R_EF_LS_ACTIVE) {
+        return;
+    }
+
+    if (mEvalStatus != NW4R_EF_ES_WAIT) {
+        return;
+    }
+
+    if (mWaitTime > 0) {
+        return;
+    }
+
+    if (!(mParameter.mComFlags & EmitterDesc::CMN_FLAG_MAX_LIFE)) {
+        if (mTick >= mParameter.mEmitSpan) {
+            mManagerEF->RetireEmitter(this);
+            return;
+        }
+    } else if (mTick == 0xFFFFFFFF) {
+        mManagerEF->RetireEmitter(this);
+        return;
+    }
+
+    u32 animTime = mTick;
+    u32 animSpan = (mParameter.mComFlags & EmitterDesc::CMN_FLAG_MAX_LIFE)
+                       ? 0xFFFFFFFF
+                       : mParameter.mEmitSpan;
+
+    bool mtxDirty = false;
+
+    for (u16 i = mTick == 0 ? 0 : mResource->NumEmitInitTrack();
+         i < mResource->NumEmitTrack(); i++) {
+
+        u8* pEmitTrack = mResource->GetEmitTrack(i);
+
+#define pTrackAsHeader reinterpret_cast<AnimCurveHeader*>(pEmitTrack)
+
+        if (pTrackAsHeader->processFlag & AnimCurveHeader::PROC_FLAG_STOP) {
+            continue;
+        }
+
+        if (pTrackAsHeader->magic != NW4R_EF_MAGIC_ANIMCURVE) {
+            continue;
+        }
+
+        // Load curveFlag and kindEnable
+        u16 ctrl = *reinterpret_cast<u16*>(&pTrackAsHeader->curveFlag);
+        u8 kind = pTrackAsHeader->kindType;
+
+        switch (ctrl) {
+        case (AC_TYPE_PARTICLE_U8 << 8 | 0b001):
+        case (AC_TYPE_PARTICLE_U8 << 8 | 0b111): {
+            continue;
+        }
+
+        case (AC_TYPE_PARTICLE_F32 << 8 | 0b001): {
+            f32* pTarget;
+
+            switch (kind) {
+            case AC_TARGET_EMIT_SPEED_ORIG: {
+                pTarget = &mParameter.mVelPowerRadiationDir;
+                break;
+            }
+
+            case AC_TARGET_EMIT_SPEED_YAXIS: {
+                pTarget = &mParameter.mVelPowerYAxis;
+                break;
+            }
+
+            case AC_TARGET_EMIT_SPEED_RANDOM: {
+                pTarget = &mParameter.mVelPowerRandomDir;
+                break;
+            }
+
+            case AC_TARGET_EMIT_EMISSION: {
+                pTarget = &mParameter.mEmitRatio;
+                break;
+            }
+
+            default: {
+                continue;
+            }
+            }
+
+            AnimCurveExecuteF32(pEmitTrack, pTarget, animTime, mRandSeed,
+                                animSpan);
+            continue;
+        }
+
+        case (AC_TYPE_PARTICLE_F32 << 8 | 0b011): {
+            switch (kind) {
+            case AC_TARGET_EMIT_SPEED_NORMAL: {
+                AnimCurveExecuteF32(pEmitTrack, &mParameter.mVelPowerNormalDir,
+                                    animTime, mRandSeed, animSpan);
+            }
+
+            default: {
+                continue;
+            }
+            }
+        }
+
+        case (AC_TYPE_PARTICLE_F32 << 8 | 0b111): {
+            f32* pTarget;
+
+            switch (kind) {
+            case AC_TARGET_EMIT_SCALE: {
+                pTarget = reinterpret_cast<f32*>(&mParameter.mScale);
+                break;
+            }
+
+            case AC_TARGET_EMIT_ROTATE: {
+                pTarget = reinterpret_cast<f32*>(&mParameter.mRotate);
+                break;
+            }
+
+            case AC_TARGET_EMIT_TRANSLATE: {
+                pTarget = reinterpret_cast<f32*>(&mParameter.mTranslate);
+                break;
+            }
+
+            default: {
+                continue;
+            }
+            }
+
+            AnimCurveExecuteF32(pEmitTrack, pTarget, animTime, mRandSeed,
+                                animSpan);
+
+            mtxDirty = true;
+            continue;
+        }
+
+        default: {
+            break;
+        }
+        }
+
+        switch (ctrl & 0xFF00) {
+        case (AC_TYPE_PARTICLE_F32 << 8): {
+            f32* pTarget;
+
+            switch (kind) {
+            case AC_TARGET_EMIT_SPEED_SPECDIR: {
+                pTarget = &mParameter.mVelPowerSpecDir;
+                break;
+            }
+
+            case AC_TARGET_EMIT_COMMONPARAM: {
+                pTarget = mParameter.mParams;
+                break;
+            }
+
+            default: {
+                continue;
+            }
+            }
+
+            AnimCurveExecuteF32(pEmitTrack, pTarget, animTime, mRandSeed,
+                                animSpan);
+            continue;
+        }
+
+        default: {
+            break;
+        }
+        }
+
+#undef pTrackAsHeader
+    }
+
+    if (mtxDirty) {
+        SetMtxDirty();
+    }
+}
+
+void Emitter::CalcParticle() {
+    void* pArray[NW4R_EF_MAX_PARTICLEMANAGER];
+
+    if (GetFlagDisableCalc()) {
+        return;
+    }
+
+    u16 size = UtlistToArray(&mActivityList.mActiveList, pArray,
+                             UtlistSize(&mActivityList.mActiveList));
+
+    for (u16 i = 0; i < size; i++) {
+        ParticleManager* pManager =
+            reinterpret_cast<ParticleManager*>(pArray[i]);
+
+        pManager->Calc();
+    }
+}
+
+void Emitter::CalcEmission() {
+    if (GetFlagDisableCalc()) {
+        return;
+    }
+
+    if (mEvalStatus != NW4R_EF_ES_WAIT) {
+        return;
+    }
+
+    mEvalStatus = NW4R_EF_ES_DONE;
+
+    if (mCalcRemain > 0) {
+        mManagerEF->SetFlagExistCalcRemain(true);
+    }
+
+    if (mLifeStatus == NW4R_EF_LS_ACTIVE) {
+        ParticleManager* pManager = reinterpret_cast<ParticleManager*>(
+            ut::List_GetFirst(&mActivityList.mActiveList));
+
+        math::MTX34 space;
+        math::MTX34 pmMtx;
+
+        pManager->CalcGlobalMtx(&pmMtx);
+        math::MTX34Inv(&pmMtx, &pmMtx);
+
+        CalcGlobalMtx(&space);
+        math::MTX34Mult(&space, &pmMtx, &space);
+
+        if (mWaitTime > 0) {
+            mWaitTime--;
+        } else {
+            Emission(pManager, &space);
+            mTick++;
+        }
+    } else {
+        if (mWaitTime > 0) {
+            mWaitTime--;
+        } else {
+            mTick++;
+        }
+    }
+}
+
+void Emitter::CalcBillboard() {
+    if (mLifeStatus != NW4R_EF_LS_ACTIVE && mLifeStatus != NW4R_EF_LS_WAIT) {
+        return;
+    }
+
+    if (!(mParameter.mEmitFlags & EmitterDesc::EMIT_FLAG_16) &&
+        !(mParameter.mEmitFlags & EmitterDesc::EMIT_FLAG_15)) {
+        return;
+    }
+
+    math::MTX34 glbMtx;
+    mParameter.mRotate.z = 0.0f;
+    mParameter.mRotate.y = 0.0f;
+    mParameter.mRotate.x = 0.0f;
+
+    mMtxDirty = true;
+    CalcGlobalMtx(&glbMtx);
+
+    math::MTX34 mtx;
+    math::MTX34Mult(&mtx, &mManagerEF->mManagerES->mProcessCameraMtx, &glbMtx);
+
+    // clang-format off
+    math::MTX34 tmp = mtx;
+    tmp._00 = math::FSqrt(tmp._00 * tmp._00 + tmp._10 * tmp._10 + tmp._20 * tmp._20);
+    tmp._10 = tmp._20 = 0.0f;
+
+    tmp._11 = math::FSqrt(tmp._01 * tmp._01 + tmp._11 * tmp._11 + tmp._21 * tmp._21);
+    tmp._01 = tmp._21 = 0.0f;
+
+    tmp._22 = math::FSqrt(tmp._02 * tmp._02 + tmp._12 * tmp._12 + tmp._22 * tmp._22);
+    tmp._02 = tmp._12 = 0.0f;
+    // clang-format on
+
+    if ((mParameter.mEmitFlags & EmitterDesc::EMIT_FLAG_15)) {
+        math::MTX34 base;
+        math::MTX34RotXYZRad(&base, NW4R_MATH_PI / 2.0f, 0.0f, 0.0f);
+        math::MTX34Mult(&tmp, &tmp, &base);
+    }
+
+    math::MTX34Inv(&mtx, &mtx);
+    math::MTX34Mult(&mtx, &mtx, &tmp);
+
+    math::VEC3 vec;
+    vec.x = 1.0f / mParameter.mScale.x;
+    vec.y = 1.0f / mParameter.mScale.y;
+    vec.z = 1.0f / mParameter.mScale.z;
+
+    math::MTX34Scale(&mtx, &mtx, &vec);
+    math::MTX34Scale(&mtx, &mParameter.mScale, &mtx);
+    MtxGetRotation(mtx, &mParameter.mRotate);
+
+    SetMtxDirty();
+}
+
+math::MTX34* Emitter::RestructMatrix(math::MTX34* pResult, math::MTX34* pOrig,
+                                     bool inheritS, bool inheritR,
+                                     s8 inheritT) {
+
+    if (inheritS && inheritR && inheritT == 100) {
+        *pResult = *pOrig;
+        return pResult;
+    }
+
+    if (!inheritS && !inheritR && inheritT == 0) {
+        math::MTX34Identity(pResult);
+        return pResult;
+    }
+
+    math::MTX34Identity(pResult);
+
+    if (inheritT != 0) {
+        math::VEC3 trans;
+        MtxGetTranslate(*pOrig, &trans);
+
+        math::VEC3Scale(&trans, &trans, static_cast<f32>(inheritT) / 100.0f);
+        math::MTX34Trans(pResult, pResult, &trans);
+    }
+
+    if (inheritR) {
+        math::MTX34 rot;
+        MtxGetRotationMtx(*pOrig, &rot);
+
+        math::MTX34Mult(pResult, pResult, &rot);
+    }
+
+    if (inheritS) {
+        math::VEC3 scale;
+        MtxGetScale(*pOrig, &scale);
+
+        math::MTX34Scale(pResult, pResult, &scale);
+    }
+
+    return pResult;
+}
+
+math::MTX34* Emitter::CalcGlobalMtx(math::MTX34* pResult) {
+    if (mMtxDirty) {
+        math::MTX34 tmp;
+
+        if (!mParent) {
+            math::MTX34Copy(&mMtx, mManagerEF->GetRootMtx());
+        } else {
+            math::MTX34 orig;
+            mParent->CalcGlobalMtx(&orig);
+
+            RestructMatrix(
+                &mMtx, &orig,
+                mParameter.mInherit & EmitterParameter::INHERIT_FLAG_SCALE,
+                mParameter.mInherit & EmitterParameter::INHERIT_FLAG_ROT,
+                mParameter.mInheritTranslate);
+        }
+
+        math::MTX34Trans(&mMtx, &mMtx, &mParameter.mTranslate);
+        math::MTX34RotXYZRad(&tmp, mParameter.mRotate.x, mParameter.mRotate.y,
+                             mParameter.mRotate.z);
+
+        math::MTX34Mult(&mMtx, &mMtx, &tmp);
+        math::MTX34Scale(&mMtx, &mMtx, &mParameter.mScale);
+
+        mMtxDirty = false;
+    }
+
+    if (pResult != NULL) {
+        *pResult = mMtx;
+        return pResult;
+    }
+
+    return &mMtx;
+}
+
+void Emitter::SetMtxDirty() {
+    mMtxDirty = true;
+
+    ParticleManager* pManager = NULL;
+    while ((pManager = reinterpret_cast<ParticleManager*>(ut::List_GetNext(
+                &mActivityList.mActiveList, pManager))) != NULL) {
+
+        pManager->SetMtxDirty();
+    }
+
+    if (mManagerEF == NULL) {
+        return;
+    }
+
+    Emitter* pEmitter = NULL;
+    while ((pEmitter = reinterpret_cast<Emitter*>(ut::List_GetNext(
+                &mManagerEF->mActivityList.mActiveList, pEmitter))) != NULL) {
+
+        if (pEmitter->mMtxDirty) {
+            continue;
+        }
+
+        for (Emitter* pSearch = pEmitter->mParent; pSearch;
+             pSearch = pSearch->mParent) {
+
+            if (pSearch != this) {
+                continue;
+            }
+
+            pEmitter->mMtxDirty = true;
+
+            ParticleManager* pManager = NULL;
+            while ((pManager = reinterpret_cast<ParticleManager*>(
+                        ut::List_GetNext(&pEmitter->mActivityList.mActiveList,
+                                         pManager))) != NULL) {
+
+                pManager->SetMtxDirty();
+            }
+        }
+    }
+}
+
+u16 Emitter::GetNumParticleManager() const {
+    return mActivityList.mActiveList.numObjects;
+}
+
+ParticleManager* Emitter::GetParticleManager(u16 idx) {
+    return reinterpret_cast<ParticleManager*>(
+        ut::List_GetNth(&mActivityList.mActiveList, idx));
+}
+
+/******************************************************************************
+ *
+ * For-each implementation
+ *
+ ******************************************************************************/
+struct ForEachContext {
+    u32 calls;             // at 0x0
+    ForEachFunc pFunc;     // at 0x4
+    ForEachParam param;    // at 0x8
+    bool ignoreLifeStatus; // at 0xC
+};
+
+u32 Emitter::ForeachEmitter(ForEachFunc pFunc, ForEachParam param,
+                            bool ignoreLifeStatus) {
+
+    return mManagerEF->ForeachEmitterFrom(pFunc, param, ignoreLifeStatus, this);
+}
+
+static void foreachParticleManagerSub(void* pObject, ForEachParam param) {
+    Emitter* pEmitter = reinterpret_cast<Emitter*>(pObject);
+    ForEachContext* pCtx = reinterpret_cast<ForEachContext*>(param);
+
+    pCtx->calls += pEmitter->ForeachParticleManager(
+        pCtx->pFunc, pCtx->param, pCtx->ignoreLifeStatus, false);
+}
+
+u32 Emitter::ForeachParticleManager(ForEachFunc pFunc, ForEachParam param,
+                                    bool ignoreLifeStatus, bool propogate) {
+    u32 calls = 0;
+
+    NW4R_UT_LIST_FOREACH_SAFE (ParticleManager, mActivityList.mActiveList, {
+        if (ignoreLifeStatus || it->GetLifeStatus() == NW4R_EF_LS_ACTIVE) {
+            pFunc(it, param);
+            calls++;
+        }
+    })
+
+    // TODO: I think this is doing the same for all sibling emitters?
+    if (propogate) {
+        ForEachContext data;
+        data.calls = 0;
+        data.pFunc = pFunc;
+        data.param = param;
+        data.ignoreLifeStatus = ignoreLifeStatus;
+
+        ForeachEmitter(foreachParticleManagerSub,
+                       reinterpret_cast<ForEachParam>(&data), true);
+
+        calls += data.calls;
+    }
+
+    return calls;
+}
+
+} // namespace ef
+} // namespace nw4r

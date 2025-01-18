@@ -3,15 +3,17 @@
 #include "types_egg.h"
 #include "eggFile.h"
 #include "ut_list.h"
-#include <RevoSDK/DVD/dvd.h>
-#include <RevoSDK/OS/OSMutex.h>
-#include <RevoSDK/OS/OSMessage.h>
-#include <RevoSDK/OS/OSThread.h>
+#include <revolution/DVD.h>
+#include <revolution/OS/OSMutex.h>
+#include <revolution/OS/OSMessage.h>
+#include <revolution/OS/OSThread.h>
 
 namespace EGG
 {
     class DvdFile : File
     {
+        friend class DvdRipper;
+
         struct FileInfoPair
         {
             DVDFileInfo mFileInfo; // at 0x0
@@ -29,7 +31,7 @@ namespace EGG
         virtual void close(); // at 0x10
         virtual s32 readData(void *, s32, s32); // at 0x14
         virtual s32 writeData(const void *, s32, s32); // at 0x18
-        virtual UNKWORD getFileSize() const { return mFileInfo.mFileSize; }; // at 0x1C
+        virtual UNKWORD getFileSize() const { return mFileInfo.size; }; // at 0x1C
         virtual bool open(int); // at 0x20
         virtual bool open(const char *, void *); // at 0x24
 
@@ -49,7 +51,7 @@ namespace EGG
         OSMessageQueue mMesgQueue_0xA0;
         OSMessage mMesg_0xC0;
         OSThread *mThread; // at 0xC4
-        nw4r::ut::Node mNode; // at 0xC8
+        nw4r::ut::Link mNode; // at 0xC8
 
         static nw4r::ut::List sDvdList;
         static bool sIsInitialized;

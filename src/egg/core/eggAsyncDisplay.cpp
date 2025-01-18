@@ -8,16 +8,8 @@
 
 #include <OS/OSTime.h>
 #include <VI/vi.h>
-#include <GX/GXMisc.h>
-#include <GX/GXTransform.h>
-#include <GX/GXAttr.h>
-#include <GX/GXTev.h>
-#include <GX/GXLight.h>
-#include <GX/GXGeometry.h>
-#include <GX/GXBump.h>
-#include <GX/GXPixel.h>
-#include <GX/GXVert.h>
-#include <math/mtx44.h>
+#include <revolution/GX.h>
+#include <revolution/MTX.h>
 
 namespace
 {
@@ -36,7 +28,7 @@ namespace
 
 using namespace EGG;
 
-void PostRetraceCallback()
+void PostRetraceCallback(u32 retraceCount)
 {
     AsyncDisplay *disp = spSelector;
     BaseSystem::getXfbManager()->postVRetrace();
@@ -117,8 +109,8 @@ namespace EGG
         {
             GXRenderModeObj *pObj = BaseSystem::getVideo()->mRenderMode;
 
-            clearEFB(pObj->mFbWidth, pObj->mEfbHeight, 0, 0,
-                pObj->mFbWidth, pObj->mEfbHeight, mClearColor);
+            clearEFB(pObj->fbWidth, pObj->efbHeight, 0, 0,
+                pObj->fbWidth, pObj->efbHeight, mClearColor);
         }
 
         if (isBlack())
@@ -149,7 +141,7 @@ namespace EGG
     {
         if (WORD_0x60 == 1)
         {
-            return Video::getTickPerVRetrace(VI_NTSC);
+            return Video::getTickPerVRetrace(VI_TV_FMT_NTSC);
         }
 
         return Video::getTickPerVRetrace();
@@ -157,47 +149,47 @@ namespace EGG
 
     void AsyncDisplay::clearEFB(u16 width, u16 height, u16 r6, u16 r7, u16 r8, u16 r9, ut::Color color)
     {
-        GXInitTexObj(&clear_z_tobj, clear_z_TX, 4, 4, 22, 1, 1, 0);
-        GXInitTexObjLOD(&clear_z_tobj, 0, 0, 0, 0, 0, 0.0f, 0.0f, 0.0f);
+        GXInitTexObj(&clear_z_tobj, clear_z_TX, 4, 4, GX_TF_Z24X8, GX_REPEAT, GX_REPEAT, 0);
+        GXInitTexObjLOD(&clear_z_tobj, GX_NEAR, GX_NEAR, 0.0f, 0.0f, 0.0f, 0, 0, GX_ANISO_1);
 
         Mtx44 mtx44;
         C_MTXOrtho(mtx44, 0.0f, (f32)height, 0.0f, (f32)width, 0.0f, 1.0f);
-        GXSetProjection(mtx44, 1);
+        GXSetProjection(mtx44, GX_ORTHOGRAPHIC);
         GXSetViewport(0.0f, 0.0f, (f32)width, (f32)height, 0.0f, 1.0f);
         GXSetScissor(0, 0, width, height);
         Matrix34f::ident.loadPosMtx(0);
         GXSetCurrentMtx(0);
 
         GXClearVtxDesc();
-        GXSetVtxDesc(GX_ATTR_VTX, 1);
-        GXSetVtxDesc(GX_ATTR_VTX_TEX_COORD, 1);
-        GXSetVtxAttrFmt(0, GX_ATTR_VTX, 0, 2, 0);
-        GXSetVtxAttrFmt(0, GX_ATTR_VTX_TEX_COORD, 1, 0, 0);
+        GXSetVtxDesc(GX_VA_POS, GX_DIRECT);
+        GXSetVtxDesc(GX_VA_TEX0, GX_DIRECT);
+        GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_POS, GX_POS_XY, GX_U16, 0);
+        GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_TEX0, GX_TEX_ST, GX_U8, 0);
         GXSetNumChans(0);
-        GXSetChanCtrl(GX_CHANNEL_ID_4, 0, 0, 0, 0, 0, 2);
-        GXSetChanCtrl(GX_CHANNEL_ID_5, 0, 0, 0, 0, 0, 2);
+        GXSetChanCtrl(GX_COLOR0A0, 0, GX_SRC_REG, GX_SRC_REG, GX_LIGHT_NULL, GX_DF_NONE, GX_AF_NONE);
+        GXSetChanCtrl(GX_COLOR1A1, 0, GX_SRC_REG, GX_SRC_REG, GX_LIGHT_NULL, GX_DF_NONE, GX_AF_NONE);
 
         GXSetNumTexGens(1);
-        GXSetTexCoordGen2(GX_TEX_COORD_ID_0, GX_TEX_GEN_TYPE_1, GX_TEX_GEN_SRC_4, 60, 0, 125);
-        GXLoadTexObj(&clear_z_tobj, GX_TEX_MAP_ID_0);
+        GXSetTexCoordGen2(GX_TEXCOORD0, GX_TG_MTX2x4, GX_TG_TEX0, 60, 0, 125);
+        GXLoadTexObj(&clear_z_tobj, GX_TEXMAP0);
 
         GXSetNumTevStages(1);
-        GXSetTevColor(GX_TEV_REG_ID_1, color.mChannels);
-        GXSetTevOrder(GX_TEV_STAGE_ID_0, GX_TEX_COORD_ID_0, GX_TEX_MAP_ID_0, 0xff);
-        GXSetTevColorIn(GX_TEV_STAGE_ID_0, 15, 15, 15, 2);
-        GXSetTevColorOp(GX_TEV_STAGE_ID_0, 0, 0, 0, 1, 0);
-        GXSetTevAlphaIn(GX_TEV_STAGE_ID_0, 7, 7, 7, 1);
-        GXSetTevAlphaOp(GX_TEV_STAGE_ID_0, 0, 0, 0, 1, 0);
-        GXSetAlphaCompare(7, 0, 1, 7, 0);
-        GXSetZTexture(2, 22, 0);
+        GXSetTevColor(GX_TEVREG0, color);
+        GXSetTevOrder(GX_TEVSTAGE0, GX_TEXCOORD0, GX_TEXMAP0, GX_COLOR_NULL);
+        GXSetTevColorIn(GX_TEVSTAGE0, GX_CC_ZERO, GX_CC_ZERO, GX_CC_ZERO, GX_CC_C0);
+        GXSetTevColorOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, 1, GX_TEVPREV);
+        GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_ZERO, GX_CA_ZERO, GX_CA_ZERO, GX_CA_A0);
+        GXSetTevAlphaOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, 1, GX_TEVPREV);
+        GXSetAlphaCompare(GX_ALWAYS, 0, GX_AOP_OR, GX_ALWAYS, 0);
+        GXSetZTexture(GZ_ZT_REPLACE, GX_TF_Z24X8, 0);
         GXSetZCompLoc(0);
-        GXSetBlendMode(0, 0, 0, 5);
+        GXSetBlendMode(GX_BM_NONE, GX_BL_ZERO, GX_BL_ZERO, GX_LO_NOOP);
         GXSetAlphaUpdate(1);
-        GXSetDstAlpha(1, color.mChannels.a);
-        GXSetZMode(1, 7, 1);
-        GXSetCullMode(2);
+        GXSetDstAlpha(1, color.a);
+        GXSetZMode(1, GX_ALWAYS, 1);
+        GXSetCullMode(GX_CULL_BACK);
         
-        GXBegin(0x80, 0, 4);
+        GXBegin(GX_QUADS, GX_VTXFMT0, 4);
         GXCmd1u16(r6);
         GXCmd1u16(r7);
         GXCmd1u8(0);
@@ -218,8 +210,8 @@ namespace EGG
         GXCmd1u8(1);
         GXEnd();
 
-        GXSetZTexture(0, 22, 0);
+        GXSetZTexture(GX_ZT_DISABLE, GX_TF_Z24X8, 0);
         GXSetZCompLoc(1);
-        GXSetDstAlpha(0, color.mChannels.a);
+        GXSetDstAlpha(0, color.a);
     }
 }

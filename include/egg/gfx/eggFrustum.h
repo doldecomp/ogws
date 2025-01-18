@@ -7,7 +7,7 @@
 #include "g3d_camera.h"
 #include "g3d_resanmscn.h"
 #include "math_triangular.h"
-#include <GX/GXTransform.h>
+#include <revolution/GX.h>
 
 namespace EGG
 {
@@ -46,18 +46,18 @@ namespace EGG
     public:
         static void GetGlobalScaleOffset(f32* sx, f32* sy, f32* ox, f32* oy)
         {
-            *sx = sGlobalScale.mCoords.x;
-            *sy = sGlobalScale.mCoords.y;
-            *ox = sGlobalOffset.mCoords.x;
-            *oy = sGlobalOffset.mCoords.y;
+            *sx = sGlobalScale.x;
+            *sy = sGlobalScale.y;
+            *ox = sGlobalOffset.x;
+            *oy = sGlobalOffset.y;
         }
 
         static void SetGlobalScaleOffset(f32 sx, f32 sy, f32 ox, f32 oy)
         {
-            sGlobalScale.mCoords.x = sx;
-            sGlobalScale.mCoords.y = sy;
-            sGlobalOffset.mCoords.x = ox;
-            sGlobalOffset.mCoords.y = oy;
+            sGlobalScale.x = sx;
+            sGlobalScale.y = sy;
+            sGlobalOffset.x = ox;
+            sGlobalOffset.y = oy;
         }
 
         Frustum(ProjectionType, const nw4r::math::VEC2&, f32, f32, CanvasMode);
@@ -98,10 +98,10 @@ namespace EGG
 
         void ConvertToCanvasLU_Inline_0(f32 ix, f32 iy, f32* ox, f32* oy) const
         {
-            const f32 sx = GetSize().mCoords.x;
+            const f32 sx = GetSize().x;
             *ox = ix + (sx / 2.0f);
 
-            const f32 sy = GetSize().mCoords.y;
+            const f32 sy = GetSize().y;
             *oy = -(iy - (sy / 2.0f));
         }        
 
@@ -120,24 +120,24 @@ namespace EGG
 
         const nw4r::math::VEC2& GetSize() const { return mSize; }
 
-        u16 GetWidth() const { return mSize.mCoords.x; }
-        f32 GetSizeX() const { return mSize.mCoords.x; }
+        u16 GetWidth() const { return mSize.x; }
+        f32 GetSizeX() const { return mSize.x; }
         void SetSizeX(f32 sizeX)
         {
             #line 117
             EGG_ASSERT(sizeX >= 0.f);
             SetDirty(true);
-            mSize.mCoords.x = sizeX;
+            mSize.x = sizeX;
         }
 
-        u16 GetHeight() const { return mSize.mCoords.y; }
-        f32 GetSizeY() const { return mSize.mCoords.y; }
+        u16 GetHeight() const { return mSize.y; }
+        f32 GetSizeY() const { return mSize.y; }
         void SetSizeY(f32 sizeY)
         {
             #line 123
             EGG_ASSERT(sizeY >= 0.f);
             SetDirty(true);
-            mSize.mCoords.y = sizeY;
+            mSize.y = sizeY;
         }
 
         void SetFovY(f32 fovy)

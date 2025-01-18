@@ -11,9 +11,9 @@ namespace EGG
         f32 angleSin = Math<f32>::sin(angleHalf);
 
         w = angleCos;
-        z = angleSin * axis.mCoords.z;
-        f32 _y = angleSin * axis.mCoords.y;
-        x = angleSin * axis.mCoords.x;
+        z = angleSin * axis.z;
+        f32 _y = angleSin * axis.y;
+        x = angleSin * axis.x;
         y = _y;
     }
 }

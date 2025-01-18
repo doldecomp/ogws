@@ -1,19 +1,26 @@
-#ifndef NW4R_EF_EMITTERFORM_H
-#define NW4R_EF_EMITTERFORM_H
-#include "types_nw4r.h"
+#ifndef NW4R_EF_EMITTER_FORM_H
+#define NW4R_EF_EMITTER_FORM_H
+#include <nw4r/types_nw4r.h>
 
-namespace nw4r
-{
-	namespace ef
-	{
-		struct EmitterForm
-		{
-			virtual UNKTYPE Emission(Emitter *, ParticleManager *, int, u32, float *, u16, float, const math::MTX34 *) = 0;
-			
-			UNKTYPE CalcVelocity(math::VEC3 *, Emitter *, const math::VEC3 &, const math::VEC3 &, const math::VEC3 &, const math::VEC3 &) const;
-			u16 CalcLife(u16, float, Emitter *);
-		};
-	}
-}
+namespace nw4r {
+namespace ef {
+
+class EmitterForm {
+public:
+    EmitterForm() {}
+
+    virtual void Emission(Emitter* pEmitter, ParticleManager* pManager,
+                          int count, u32 optionFlag, f32* pParams, u16 life,
+                          f32 lifeRnd, const math::MTX34* pSpace) = 0; // at 0x8
+
+    void CalcVelocity(math::VEC3* pVel, Emitter* pEmitter, const math::VEC3& rP,
+                      const math::VEC3& rNormal, const math::VEC3& rFromOrigin,
+                      const math::VEC3& rFromYAxis) const;
+
+    u16 CalcLife(u16 life, f32 lifeRnd, Emitter* pEmitter);
+};
+
+} // namespace ef
+} // namespace nw4r
 
 #endif

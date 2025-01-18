@@ -1,77 +1,72 @@
-#include "g3d_scnproc.h"
-#include "g3d_state.h"
+#include <nw4r/g3d.h>
 
-namespace nw4r
-{
-    namespace g3d
-    {
-        ScnProc * ScnProc::Construct(MEMAllocator *allocator, u32 *pSize,
-            DrawProc proc, bool r6, bool r7, u32 r8)
-        {
-            ScnProc *scnProc = NULL;
+namespace nw4r {
+namespace g3d {
 
-            u32 size1 = align4(r8);
-            u32 scnProcSize = align4(sizeof(ScnProc));
-            u32 size = align4(size1 + scnProcSize);
+NW4R_G3D_RTTI_DEF(ScnProc);
 
-            if (pSize != NULL) *pSize = size;
+ScnProc* ScnProc::Construct(MEMAllocator* pAllocator, u32* pSize,
+                            DrawProc pProc, bool opa, bool xlu,
+                            u32 userDataSize) {
+    ScnProc* pScnProc = NULL;
+    u32 scnProcSize = sizeof(ScnProc);
 
-            if (allocator != NULL)
-            {
-                u8 *start = (u8 *)Alloc(allocator, size);
-                if (start != NULL)
-                {
-                    u8 *end = (size1 != 0) ? (start + scnProcSize) : NULL;
-                    scnProc = new (start) ScnProc(allocator, proc, end, r6, r7);
-                }
-            }
+    userDataSize = align4(userDataSize);
+    u32 userDataOfs = align4(scnProcSize);
 
-            return scnProc;
+    u32 size = align4(userDataOfs + userDataSize);
+    if (pSize != NULL) {
+        *pSize = size;
+    }
+
+    if (pAllocator != NULL) {
+        u8* pBuffer = reinterpret_cast<u8*>(Alloc(pAllocator, size));
+
+        if (pBuffer != NULL) {
+            void* pUserData = userDataSize != 0 ? pBuffer + userDataOfs : NULL;
+
+            pScnProc =
+                new (pBuffer) ScnProc(pAllocator, pProc, pUserData, opa, xlu);
         }
+    }
 
-        void ScnProc::G3dProc(u32 task, u32 taskArg1, void *taskArg2)
-        {
-            if (!IsG3dProcDisabled(task))
-            {
-                switch(task)
-                {
-                    case G3DPROC_GATHER_SCNOBJ:
-                        IScnObjGather *gather = (IScnObjGather *)taskArg2;
-                        bool b2 = (mFlags & 0x2) ? true : false;
-                        bool b1 = (mFlags & 0x1) ? true : false;
-                        gather->Add(this, b1, b2);
-                        break;
-                    case G3DPROC_DRAW_OPA:
-                        if (mDrawProc != NULL)
-                        {
-                            G3DState::Invalidate(0x7FF);
-                            mDrawProc(this, true);
-                        }
-                        break;
-                    case G3DPROC_DRAW_XLU:
-                        if (mDrawProc != NULL)
-                        {
-                            G3DState::Invalidate(0x7FF);
-                            mDrawProc(this, false);
-                        }
-                        break;
-                    default:
-                        DefG3dProcScnLeaf(task, taskArg1, taskArg2);
-                }
-            }
+    return pScnProc;
+}
+
+void ScnProc::G3dProc(u32 task, u32 param, void* pInfo) {
+    if (IsG3dProcDisabled(task)) {
+        return;
+    }
+
+    switch (task) {
+    case G3DPROC_GATHER_SCNOBJ: {
+        IScnObjGather* pCollection = static_cast<IScnObjGather*>(pInfo);
+        pCollection->Add(this, (mFlag & SCNPROCFLAG_DRAW_OPA) ? true : false,
+                         (mFlag & SCNPROCFLAG_DRAW_XLU) ? true : false);
+        break;
+    }
+
+    case G3DPROC_DRAW_OPA: {
+        if (mpDrawProc != NULL) {
+            G3DState::Invalidate();
+            mpDrawProc(this, true);
         }
+        break;
+    }
 
-        namespace
-        {
-            void UNUSED_FUNC_ORDER_SCNPROC(ScnProc *proc)
-            {
-                proc->~ScnProc();
-                (void)proc->GetTypeObj();
-                (void)proc->GetTypeName();
-                (void)proc->IsDerivedFrom(proc->GetTypeObjStatic());
-            }
+    case G3DPROC_DRAW_XLU: {
+        if (mpDrawProc != NULL) {
+            G3DState::Invalidate();
+            mpDrawProc(this, false);
         }
+        break;
+    }
 
-        NW4R_G3D_TYPE_OBJ_DEF(ScnProc);
+    default: {
+        DefG3dProcScnLeaf(task, param, pInfo);
+    }
     }
 }
+
+} // namespace g3d
+} // namespace nw4r

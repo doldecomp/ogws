@@ -1,24 +1,122 @@
 #ifndef NW4R_MATH_TRIANGULAR_H
 #define NW4R_MATH_TRIANGULAR_H
-#include "types_nw4r.h"
-#include "math_types.h"
+#include <nw4r/types_nw4r.h>
 
-namespace nw4r
-{
-    namespace math
-    {
-        void SinCosFIdx(f32 *, f32 *, f32);
+#include <nw4r/math/math_arithmetic.h>
 
-        inline void SinCosDeg(f32 *pf1, f32 *pf2, f32 f3)
-        {
-            SinCosFIdx(pf1, pf2, NW4R_DEG_TO_FIDX * f3);
-        }
+#include <cmath>
 
-		inline void MTX34RotXYZDeg(MTX34 *pMtx, float x, float y, float z)
-		{
-			MTX34RotXYZFIdx(pMtx, NW4R_DEG_TO_FIDX * x, NW4R_DEG_TO_FIDX * y, NW4R_DEG_TO_FIDX * z);
-		}
-    }
+#define NW4R_MATH_PI M_PI
+#define NW4R_MATH_LN_2 0.69314718056f
+
+/******************************************************************************
+ *
+ * Macros to convert between units
+ *
+ ******************************************************************************/
+// [0, 65535] -> [0.0, 256.0f]
+#define NW4R_MATH_IDX_TO_FIDX(x) ((x) * (1.0f / 256.0f))
+
+// Convert degrees <-> lookup-table index
+#define NW4R_MATH_DEG_TO_FIDX(x) ((x) * (256.0f / 360.0f))
+#define NW4R_MATH_FIDX_TO_DEG(x) ((x) * (360.0f / 256.0f))
+
+// Convert radians <-> lookup-table index
+#define NW4R_MATH_RAD_TO_FIDX(x) ((x) * (128.0f / NW4R_MATH_PI))
+#define NW4R_MATH_FIDX_TO_RAD(x) ((x) * (NW4R_MATH_PI / 128.0f))
+
+namespace nw4r {
+namespace math {
+
+/******************************************************************************
+ *
+ * Sin functions
+ *
+ ******************************************************************************/
+f32 SinFIdx(f32 fidx);
+
+inline f32 SinIdx(u16 idx) {
+    return SinFIdx(NW4R_MATH_IDX_TO_FIDX(U16ToF32(idx)));
 }
+inline f32 SinDeg(f32 deg) {
+    return SinFIdx(NW4R_MATH_DEG_TO_FIDX(deg));
+}
+inline f32 SinRad(f32 rad) {
+    return SinFIdx(NW4R_MATH_RAD_TO_FIDX(rad));
+}
+
+/******************************************************************************
+ *
+ * Cosine functions
+ *
+ ******************************************************************************/
+f32 CosFIdx(f32 fidx);
+
+inline f32 CosDeg(f32 deg) {
+    return CosFIdx(NW4R_MATH_DEG_TO_FIDX(deg));
+}
+inline f32 CosRad(f32 rad) {
+    return CosFIdx(NW4R_MATH_RAD_TO_FIDX(rad));
+}
+
+/******************************************************************************
+ *
+ * Tangent functions
+ *
+ ******************************************************************************/
+inline f32 TanFIdx(f32 fidx) {
+    return std::tanf(NW4R_MATH_FIDX_TO_RAD(fidx));
+}
+inline f32 TanDeg(f32 deg) {
+    return TanFIdx(NW4R_MATH_DEG_TO_FIDX(deg));
+}
+inline f32 TanRad(f32 rad) {
+    return TanFIdx(NW4R_MATH_RAD_TO_FIDX(rad));
+}
+
+/******************************************************************************
+ *
+ * Sin & cosine functions
+ *
+ ******************************************************************************/
+void SinCosFIdx(f32* pSin, f32* pCos, f32 fidx);
+
+inline void SinCosDeg(f32* pSin, f32* pCos, f32 deg) {
+    return SinCosFIdx(pSin, pCos, NW4R_MATH_DEG_TO_FIDX(deg));
+}
+inline void SinCosRad(f32* pSin, f32* pCos, f32 rad) {
+    return SinCosFIdx(pSin, pCos, NW4R_MATH_RAD_TO_FIDX(rad));
+}
+
+/******************************************************************************
+ *
+ * Arc-tangent functions
+ *
+ ******************************************************************************/
+f32 AtanFIdx(f32 x);
+
+inline f32 AtanDeg(f32 x) {
+    return NW4R_MATH_FIDX_TO_DEG(AtanFIdx(x));
+}
+inline f32 AtanRad(f32 x) {
+    return NW4R_MATH_FIDX_TO_RAD(AtanFIdx(x));
+}
+
+/******************************************************************************
+ *
+ * Arc-tangent (2-argument) functions
+ *
+ ******************************************************************************/
+f32 Atan2FIdx(f32 y, f32 x);
+
+inline f32 Atan2Deg(f32 y, f32 x) {
+    return NW4R_MATH_FIDX_TO_DEG(Atan2FIdx(y, x));
+}
+inline f32 Atan2Rad(f32 y, f32 x) {
+    return NW4R_MATH_FIDX_TO_RAD(Atan2FIdx(y, x));
+}
+
+} // namespace math
+} // namespace nw4r
 
 #endif

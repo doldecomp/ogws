@@ -1,110 +1,154 @@
 #ifndef NW4R_MATH_ARITHMETIC_H
 #define NW4R_MATH_ARITHMETIC_H
-#include "types_nw4r.h"
-#include <OS.h>
-#include <math.h>
+#include <nw4r/types_nw4r.h>
 
-namespace nw4r
-{
-    namespace math
-    {
-		namespace detail
-		{
-			f32 FExp(f32);
-			f32 FLog(f32);
-		}
+#include <revolution/OS.h>
 
-		f32 FrSqrt(register f32);
+#include <cmath>
 
-		inline u32 F32AsU32(f32 x)
-		{
-			return *(u32 *)&x;
-		}
+#define NW4R_MATH_QNAN (-(0.0f / 0.0f))
 
-		inline f32 U32AsF32(u32 x)
-		{
-			return *(f32 *)&x;
-		}
+#define NW4R_MATH_FLT_MIN 1.175494350e-38f
+#define NW4R_MATH_FLT_MAX 3.402823466e+38f
 
-	    inline s32 FGetExpPart(f32 x)
-        {
-            u32 ul = F32AsU32(x);
-            return ((ul >> 23) & 0xFF) - 127;
-        }
+#define NW4R_MATH_FLT_EPSILON 1.192092895e-7f
 
-		inline f32 FGetMantPart(f32 x)
-        {
-            u32 ul = F32AsU32(x);
-            return U32AsF32((ul & 0x807FFFFF) | 0x3F800000);
-        }
+#define NW4R_MATH_INVSQRT3 0.577350258f
 
-		inline float FFloor(float arg)
-		{
-			return floor(arg);
-		}
-		
-		inline float FModf(float arg, float * pIntegralPart)
-		{
-			double integralPart;
-			float fractionalPart = modf(arg, &integralPart);
-			
-			*pIntegralPart = integralPart;
-			
-			return fractionalPart;
-		}
-		
-		inline float FInv(register float arg)
-		{
-			register float tmp;
-			register float ret;
-			
-			asm
-			{
-				fres ret, arg
-				ps_add tmp, ret, ret
-				ps_mul ret, ret, ret
-				ps_nmsub ret, arg, ret, tmp
-			}
-			
-			return ret;
-		}
-		
-		inline f32 U16ToF32(u16 arg)
-		{
-			f32 ret;
-			
-			OSu16tof32(&arg, &ret);
-			
-			return ret;
-		}
-		
-		inline u16 F32ToU16(f32 arg)
-		{
-			u16 ret;
-			
-			OSf32tou16(&arg, &ret);
-			
-			return ret;
-		}
-		
-		inline f32 S16ToF32(s16 arg)
-		{
-			f32 ret;
+namespace nw4r {
+namespace math {
+namespace detail {
 
-			OSs16tof32(&arg, &ret);
+f32 FExp(f32 x);
+f32 FLog(f32 x);
 
-			return ret;
-		}
+} // namespace detail
 
-		inline s16 F32ToS16(f32 arg)
-		{
-			s16 ret;
-			
-			OSf32tos16(&arg, &ret);
-			
-			return ret;
-		}
+f32 FrSqrt(f32 x);
+
+inline f32 FAbs(register f32 x) {
+    register f32 absx;
+
+    // clang-format off
+    asm {
+        fabs absx, x
     }
+    // clang-format on
+
+    return absx;
 }
+
+inline f32 FCeil(f32 x) {
+    return std::ceilf(x);
+}
+
+inline f32 FExp(f32 x) {
+    return detail::FExp(x);
+}
+
+inline f32 FFloor(f32 x) {
+    return std::floorf(x);
+}
+
+inline f32 FInv(register f32 x) {
+    register f32 work0, work1, work2, work3;
+
+    // clang-format off
+    asm {
+        fmr  work1, x     // x
+        fres work0, work1 // 1/x
+
+        // Refine estimate
+        ps_add   work2, work0, work0        // 2/x
+        ps_mul   work3, work0, work0        // 1/x^2
+        ps_nmsub work0, work1, work3, work2 // -(x * 1/x^2 - 2/x)
+    }
+    // clang-format on
+
+    return work0;
+}
+
+inline f32 FMod(f32 x, f32 y) {
+    return std::fmodf(x, y);
+}
+
+inline f32 FModf(f32 x, f32* pY) {
+    return std::modff(x, pY);
+}
+
+inline f32 FSqrt(f32 x) {
+    return x <= 0.0f ? 0.0f : x * FrSqrt(x);
+}
+
+inline f32 FLog(f32 x) {
+    if (x > 0.0f) {
+        return detail::FLog(x);
+    }
+
+    return NW4R_MATH_QNAN;
+}
+
+inline f32 FSelect(register f32 value, register f32 ge_zero,
+                   register f32 lt_zero) {
+    register f32 ret;
+
+    // clang-format off
+    asm {
+        fsel ret, value, ge_zero, lt_zero
+    }
+    // clang-format on
+
+    return ret;
+}
+
+/******************************************************************************
+ *
+ * Fastcast functions
+ *
+ ******************************************************************************/
+inline f32 U16ToF32(u16 arg) {
+    f32 ret;
+    OSu16tof32(&arg, &ret);
+    return ret;
+}
+
+inline u16 F32ToU16(f32 arg) {
+    u16 ret;
+    OSf32tou16(&arg, &ret);
+    return ret;
+}
+
+inline f32 S16ToF32(s16 arg) {
+    f32 ret;
+    OSs16tof32(&arg, &ret);
+    return ret;
+}
+
+inline s16 F32ToS16(f32 arg) {
+    s16 ret;
+    OSf32tos16(&arg, &ret);
+    return ret;
+}
+
+inline u32 F32AsU32(f32 arg) {
+    return *reinterpret_cast<u32*>(&arg);
+}
+
+inline f32 U32AsF32(u32 arg) {
+    return *reinterpret_cast<f32*>(&arg);
+}
+
+inline s32 FGetExpPart(f32 x) {
+    s32 s = F32AsU32(x);
+    return ((s >> 23) & 0xFF) - 0x7F;
+}
+
+inline f32 FGetMantPart(f32 x) {
+    u32 u = F32AsU32(x);
+    return U32AsF32((u & 0x807FFFFF) | 0x3F800000);
+}
+
+} // namespace math
+} // namespace nw4r
 
 #endif

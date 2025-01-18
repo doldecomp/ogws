@@ -1,74 +1,75 @@
-#include "snd_Lfo.h"
+#include <nw4r/snd.h>
 
-namespace nw4r
-{
-	namespace snd
-	{
-		namespace detail
-		{
-			UNKTYPE LfoParam::Init()
-			{
-				FLOAT_0x0 = 0.0f;
-				BYTE_0xC = 1;
-				FLOAT_0x4 = 6.25f;
-				WORD_0x8 = 0;
-			}
-			
-			UNKTYPE Lfo::Reset()
-			{
-				WORD_0x10 = 0;
-				FLOAT_0x14 = 0.0f;
-			}
-			
-			UNKTYPE Lfo::Update(int r4)
-			{
-				if (WORD_0x10 < mParam.WORD_0x8)
-				{
-					//u32 r0 = WORD_0x10 + r4;
-					if (WORD_0x10 + r4 <= mParam.WORD_0x8)
-					{
-						WORD_0x10 += r4;
-						return;
-					}
-					//r0 = mParam.WORD_0x8 - WORD_0x10;
-					r4 -= mParam.WORD_0x8 - WORD_0x10;
-					WORD_0x10 = mParam.WORD_0x8;
-				}
-				//8003B2B4
-				FLOAT_0x14 += mParam.FLOAT_0x4 * r4 / 1000.0f;
-				FLOAT_0x14 -= (int)FLOAT_0x14;
-			}
-			
-			int Lfo::GetSinIdx(int i)
-			{
-				static const u8 sinTable[0x21] = {
-					0, 6, 12,
-					19, 25, 31,
-					37, 43, 49,
-					54, 60, 65,
-					71, 76, 81,
-					85, 90, 94,
-					98, 102, 106,
-					109, 112, 115,
-					117, 120, 122,
-					123, 125, 126,
-					126, 127, 127
-				};
-				
-				if (i < 0x20) return (s8)sinTable[i];
-				if (i < 0x40) return (s8)sinTable[0x20 - (int)(i - 0x20)];
-				if (i < 0x60) return (s8)-sinTable[i - 0x40];
-				return (s8)-sinTable[0x20 - (i - 0x60)];
-			}
-			
-			float Lfo::GetValue() const
-			{
-				if (0.0f == mParam.FLOAT_0x0) return 0.0f;
-				if (WORD_0x10 < mParam.WORD_0x8) return 0.0f;
-				
-				float fSin = GetSinIdx(4.0f * (32.0f * FLOAT_0x14)) / 127.0f;
-				return (fSin *= mParam.FLOAT_0x0) *= mParam.BYTE_0xC;
-			}
-		}
-	}
+namespace nw4r {
+namespace snd {
+namespace detail {
+
+void LfoParam::Init() {
+    depth = 0.0f;
+    range = 1;
+    speed = 6.25f;
+    delay = 0;
 }
+
+void Lfo::Reset() {
+    mCounter = 0.0f;
+    mDelayCounter = 0;
+}
+
+void Lfo::Update(int msec) {
+    if (mDelayCounter < mParam.delay) {
+        if (mDelayCounter + msec <= mParam.delay) {
+            mDelayCounter += msec;
+            return;
+        }
+
+        msec -= mParam.delay - mDelayCounter;
+        mDelayCounter = mParam.delay;
+    }
+
+    mCounter += mParam.speed * msec / 1000.0f;
+    mCounter -= static_cast<int>(mCounter);
+}
+
+s8 Lfo::GetSinIdx(int idx) {
+    static const u8 sinTable[TABLE_SIZE + 1] = {
+        0,   6,   12,  19,  25,  31,  37,  43,  49,  54,  60,
+        65,  71,  76,  81,  85,  90,  94,  98,  102, 106, 109,
+        112, 115, 117, 120, 122, 123, 125, 126, 126, 127, 127};
+
+    if (idx < TABLE_SIZE) {
+        return sinTable[idx];
+    }
+
+    if (idx < TABLE_SIZE * 2) {
+        return sinTable[TABLE_SIZE - (idx - TABLE_SIZE)];
+    }
+
+    if (idx < TABLE_SIZE * 3) {
+        return -sinTable[idx - TABLE_SIZE * 2];
+    }
+
+    return -sinTable[TABLE_SIZE - (idx - TABLE_SIZE * 3)];
+}
+
+f32 Lfo::GetValue() const {
+    if (mParam.depth == 0.0f) {
+        return 0.0f;
+    }
+
+    if (mDelayCounter < mParam.delay) {
+        return 0.0f;
+    }
+
+    f32 value = GetSinIdx(4 * (TABLE_SIZE * mCounter)) /
+                static_cast<float>(TABLE_SIZE * 4 - 1);
+
+    value *= mParam.depth;
+    value *= mParam.range;
+
+    return value;
+}
+
+} // namespace detail
+} // namespace snd
+} // namespace nw4r

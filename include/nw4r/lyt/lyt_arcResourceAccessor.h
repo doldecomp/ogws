@@ -4,7 +4,7 @@
 #include "ut_LinkList.h"
 #include "ut_Font.h"
 #include "lyt_resourceAccessor.h"
-#include <RevoSDK/ARC/arc.h>
+#include <revolution/ARC/arc.h>
 #include <string.h>
 
 #define FONTNAMEBUF_MAX 127

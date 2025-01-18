@@ -1,78 +1,77 @@
-#ifndef NW4R_G3D_SCNPROC_H
-#define NW4R_G3D_SCNPROC_H
-#include "types_nw4r.h"
-#include "g3d_scnobj.h"
+#ifndef NW4R_G3D_SCN_PROC_H
+#define NW4R_G3D_SCN_PROC_H
+#include <nw4r/types_nw4r.h>
 
-namespace nw4r
-{
-    namespace g3d
-    {
-        class ScnProc : public ScnLeaf
-        {
-        public:
-            typedef void (* DrawProc)(ScnProc *, bool opa);
+#include <nw4r/g3d/g3d_scnobj.h>
 
-            ScnProc(MEMAllocator *allocator, DrawProc proc, void *userdata, bool set1, bool set2)
-                : ScnLeaf(allocator), mFlags(0), mDrawProc(proc), mUserData(userdata)
-            {
-                if (set1) mFlags |= 0x1;
-                if (set2) mFlags |= 0x2;
-            }
+namespace nw4r {
+namespace g3d {
 
-            static ScnProc * Construct(MEMAllocator *, u32 *, DrawProc, bool, bool, u32);
+class ScnProc : public ScnLeaf {
+public:
+    typedef void (*DrawProc)(ScnProc* pProc, bool opa);
 
-            virtual bool IsDerivedFrom(TypeObj other) const // at 0x8
-            {
-                return other == GetTypeObjStatic() ? true
-                    : ScnLeaf::IsDerivedFrom(other);
-            };
-            virtual void G3dProc(u32, u32, void *); // at 0xC
-            virtual ~ScnProc() {} // at 0x10
-            virtual const TypeObj GetTypeObj() const // at 0x14
-            {
-                return TypeObj(TYPE_NAME);
-            }
-            virtual const char * GetTypeName() const // at 0x18
-            {
-                return GetTypeObj().GetTypeName();
-            }
-            
-            static const G3dObj::TypeObj GetTypeObjStatic() { return TypeObj(TYPE_NAME); }
+public:
+    static ScnProc* Construct(MEMAllocator* pAllocator, u32* pSize,
+                              DrawProc pProc, bool opa, bool xlu, u32 userData);
 
-            void * GetUserData() { return mUserData; }
-            void SetUserData(void *data) { mUserData = data; }
+    ScnProc(MEMAllocator* pAllocator, DrawProc pProc, void* pUserData, bool opa,
+            bool xlu)
+        : ScnLeaf(pAllocator),
+          mFlag(0),
+          mpDrawProc(pProc),
+          mpUserData(pUserData) {
 
-            void SetDrawProc(DrawProc proc, bool r5, bool r6)
-            {
-                mDrawProc = proc;
+        if (opa) {
+            mFlag |= SCNPROCFLAG_DRAW_OPA;
+        }
 
-                if (r5)
-                {
-                    mFlags |= 0x1;
-                }
-                else
-                {
-                    mFlags &= ~0x1;
-                }
-
-                if (r6)
-                {
-                    mFlags |= 0x2;
-                }
-                else
-                {
-                    mFlags &= ~0x2;
-                }
-            }
-
-        private:
-            u32 mFlags; // at 0xE8
-            DrawProc mDrawProc; // at 0xEC
-            void *mUserData; // at 0xF0
-
-            NW4R_G3D_TYPE_OBJ_DECL(ScnProc);
-        };
+        if (xlu) {
+            mFlag |= SCNPROCFLAG_DRAW_XLU;
+        }
     }
-}
+
+    virtual void G3dProc(u32 task, u32 param, void* pInfo); // at 0xC
+    virtual ~ScnProc() {}                                   // at 0x10
+
+    void SetDrawProc(DrawProc pProc, bool opa, bool xlu) {
+        mpDrawProc = pProc;
+
+        if (opa) {
+            mFlag |= SCNPROCFLAG_DRAW_OPA;
+        } else {
+            mFlag &= ~SCNPROCFLAG_DRAW_OPA;
+        }
+
+        if (xlu) {
+            mFlag |= SCNPROCFLAG_DRAW_XLU;
+        } else {
+            mFlag &= ~SCNPROCFLAG_DRAW_XLU;
+        }
+    }
+
+    void SetUserData(void* pData) {
+        mpUserData = pData;
+    }
+    void* GetUserData() {
+        return mpUserData;
+    }
+
+private:
+    enum ScnProcFlag {
+        SCNPROCFLAG_DRAW_OPA = (1 << 0),
+        SCNPROCFLAG_DRAW_XLU = (1 << 1)
+    };
+
+private:
+    u32 mFlag;           // at 0xE8
+    DrawProc mpDrawProc; // at 0xEC
+    void* mpUserData;    // at 0xF0
+
+    NW4R_G3D_RTTI_DECL_DERIVED(ScnProc, ScnLeaf);
+};
+
+} // namespace g3d
+} // namespace nw4r
 
 #endif

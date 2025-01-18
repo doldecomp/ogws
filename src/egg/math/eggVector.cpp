@@ -15,9 +15,9 @@ namespace EGG
         if (mag > 0.0f)
         {
             f32 inv_mag = 1.0f / mag;
-            mCoords.x *= inv_mag;
-            mCoords.y *= inv_mag;
-            mCoords.z *= inv_mag;
+            x *= inv_mag;
+            y *= inv_mag;
+            z *= inv_mag;
         }
 
         return mag;

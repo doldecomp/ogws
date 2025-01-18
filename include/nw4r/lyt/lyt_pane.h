@@ -3,7 +3,7 @@
 #include "types_nw4r.h"
 #include "math_types.h"
 #include "ut_LinkList.h"
-#include "ut_RTTI.h"
+#include "ut_RuntimeTypeInfo.h"
 #include "ut_Color.h"
 #include "ut_algorithm.h"
 #include "lyt_animation.h"
@@ -95,13 +95,8 @@ namespace nw4r
 
             inline void InsertChild(ut::LinkList<lyt::Pane, 4>::Iterator iter, lyt::Pane *pChild)
             {
-                mChildren.Insert(iter.mIterator, pChild);
+                mChildren.Insert(iter, pChild);
                 pChild->mParent = this;
-            }
-
-            inline bool IsVisible()
-            {
-                return ut::TestBit<u8>(mFlags, VISIBLE);
             }
 
             Pane(const res::Pane *);

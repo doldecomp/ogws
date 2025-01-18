@@ -1,75 +1,61 @@
-#include "g3d_basic.h"
+#include <nw4r/g3d.h>
 
-namespace nw4r
-{
-    namespace g3d
-    {
-        namespace detail
-        {
-            namespace dcc
-            {
-                u32 CalcWorldMtx_Basic(math::MTX34 *pMtx, math::VEC3 *pVec, const math::MTX34 *pcMtx,
-                const math::VEC3 *pcVec, u32 worldAttr, const ChrAnmResult *pcAnm)
-                {
-                    u32 anmFlags = pcAnm->mFlags;
-                    u32 newAttr;
-                    if (anmFlags & 0x8)
-                    {
-                        newAttr = WorldMtxAttr::AnmScaleOne(worldAttr);
-                        pVec->mCoords.z = 1.0f;
-                        pVec->mCoords.y = 1.0f;
-                        pVec->mCoords.x = 1.0f;
-                    }
-                    else
-                    {
-                        newAttr = WorldMtxAttr::AnmNotScaleOne(worldAttr);
-                        *pVec = pcAnm->VEC3_0x4;
-                    }
+namespace nw4r {
+namespace g3d {
+namespace detail {
+namespace dcc {
 
-                    if ((anmFlags & 0x2) || (anmFlags & 0x4))
-                    {
-                        if (WorldMtxAttr::IsScaleOne(worldAttr))
-                        {
-                            math::MTX34Copy(pMtx, pcMtx);
-                        }
-                        else
-                        {
-                            math::MTX34Scale(pMtx, pcMtx, pcVec);
-                        }
-                    }
-                    else if (anmFlags & 0x20)
-                    {
-                        if (WorldMtxAttr::IsScaleOne(worldAttr))
-                        {
-                            const math::VEC3 stack_0x8(pcAnm->mMtx[0][3], pcAnm->mMtx[1][3], pcAnm->mMtx[2][3]);
-                            math::MTX34Trans(pMtx, pcMtx, &stack_0x8);
-                        }
-                        else
-                        {
-                            math::MTX34 stack_0x18;
-                            math::MTX34Scale(&stack_0x18, pcVec, &pcAnm->mMtx);
-                            math::MTX34Mult(pMtx, pcMtx, &stack_0x18);
-                        }
-                    }
-                    else if (WorldMtxAttr::IsScaleOne(worldAttr))
-                    {
-                        math::MTX34Mult(pMtx, pcMtx, &pcAnm->mMtx);
-                    }                        
-                    else
-                    {
-                        math::MTX34Scale(pMtx, pcMtx, pcVec);
-                        math::MTX34Mult(pMtx, pMtx, &pcAnm->mMtx);
-                    }
+u32 CalcWorldMtx_Basic(math::MTX34* pW, math::VEC3* pS, const math::MTX34* pW1,
+                       const math::VEC3* pS1, u32 attr,
+                       const ChrAnmResult* pResult) {
 
-                    u32 result = WorldMtxAttr::AnmNotScaleUniform(newAttr);
-                    if (anmFlags & 0x10)
-                    {
-                        result = WorldMtxAttr::AnmScaleUniform(newAttr);
-                    }
+    u32 flag = pResult->flags;
+    u32 newAttr = attr;
 
-                    return result;
-                }
-            }
-        }
+    if (flag & ChrAnmResult::FLAG_SCALE_ONE) {
+        newAttr = detail::WorldMtxAttr::AnmScaleOne(newAttr);
+        pS->x = pS->y = pS->z = 1.0f;
+    } else {
+        newAttr = detail::WorldMtxAttr::AnmNotScaleOne(newAttr);
+        *pS = pResult->s;
     }
+
+    if ((flag & ChrAnmResult::FLAG_MTX_IDENT) ||
+        (flag & ChrAnmResult::FLAG_ROT_TRANS_ZERO)) {
+
+        if (detail::WorldMtxAttr::IsScaleOne(attr)) {
+            math::MTX34Copy(pW, pW1);
+        } else {
+            math::MTX34Scale(pW, pW1, pS1);
+        }
+    } else if (flag & ChrAnmResult::FLAG_ROT_ZERO) {
+        if (detail::WorldMtxAttr::IsScaleOne(attr)) {
+            math::VEC3 trans(pResult->rt._03, pResult->rt._13, pResult->rt._23);
+
+            math::MTX34Trans(pW, pW1, &trans);
+        } else {
+            math::MTX34 temp;
+
+            math::MTX34Scale(&temp, pS1, &pResult->rt);
+            math::MTX34Mult(pW, pW1, &temp);
+        }
+    } else if (detail::WorldMtxAttr::IsScaleOne(attr)) {
+        math::MTX34Mult(pW, pW1, &pResult->rt);
+    } else {
+        math::MTX34Scale(pW, pW1, pS1);
+        math::MTX34Mult(pW, pW, &pResult->rt);
+    }
+
+    if (flag & ChrAnmResult::FLAG_SCALE_UNIFORM) {
+        newAttr = detail::WorldMtxAttr::AnmScaleUniform(newAttr);
+    } else {
+        newAttr = detail::WorldMtxAttr::AnmNotScaleUniform(newAttr);
+    }
+
+    return newAttr;
 }
+
+} // namespace dcc
+} // namespace detail
+} // namespace g3d
+} // namespace nw4r

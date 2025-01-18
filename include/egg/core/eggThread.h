@@ -2,8 +2,8 @@
 #define EGG_CORE_THREAD_H
 #include "types_egg.h"
 #include "ut_list.h"
-#include <RevoSDK/OS/OSThread.h>
-#include <RevoSDK/OS/OSMessage.h>
+#include <revolution/OS/OSThread.h>
+#include <revolution/OS/OSMessage.h>
 
 namespace EGG
 {
@@ -15,9 +15,9 @@ namespace EGG
         void initialize();
         static UNKTYPE switchThreadCallback(OSThread *, OSThread *);
         void setCommonMesgQueue(int, Heap *); // inlined
-        static UNKWORD start(void *);
+        static void* start(void *);
         virtual ~Thread(); // at 0x8
-        virtual UNKWORD run(); // at 0xC
+        virtual void* run(); // at 0xC
         virtual void onEnter(); // at 0x10
         virtual void onExit(); // at 0x14
 
@@ -28,7 +28,7 @@ namespace EGG
         UNKWORD mMesgCount; // at 0x30
         void * mStackMemory; // at 0x34
         u32 mStackSize; // at 0x38
-        nw4r::ut::Node mNode; // at 0x3C
+        nw4r::ut::Link mNode; // at 0x3C
 
         static nw4r::ut::List sThreadList;
 		

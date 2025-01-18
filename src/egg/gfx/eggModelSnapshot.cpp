@@ -1,9 +1,7 @@
-#pragma fp_contract on
-
 #include "eggModelSnapshot.h"
 #include "eggModelEx.h"
 #include "eggModelBoundingInfo.h"
-#include <RevoSDK/math/vec.h>
+#include <revolution/MTX.h>
 
 namespace EGG
 {

@@ -1,55 +1,52 @@
-#include "snd_SoundStartable.h"
-#include "snd_SoundHandle.h"
+#include <nw4r/snd.h>
 
-namespace nw4r
-{
-    namespace snd
-    {
-        UNKWORD SoundStartable::detail_StartSound(SoundHandle *handle,
-            u32 targetID,
-            detail::BasicSound::AmbientArgInfo *argInfo,
-            detail::ExternalSoundPlayer *player,
-            const StartInfo *startInfo)
-        {
-            UNKWORD ret = detail_SetupSound(handle, targetID, argInfo, player, false, startInfo);
-            if (ret != 0) return ret;
+namespace nw4r {
+namespace snd {
 
-            handle->StartPrepared();
-            
-            return 0;
-        }
+SoundStartable::StartResult SoundStartable::detail_StartSound(
+    SoundHandle* pHandle, u32 id, detail::BasicSound::AmbientArgInfo* pArgInfo,
+    detail::ExternalSoundPlayer* pPlayer, const StartInfo* pStartInfo) {
 
-        UNKWORD SoundStartable::detail_HoldSound(SoundHandle *handle,
-            u32 targetID,
-            detail::BasicSound::AmbientArgInfo *argInfo,
-            detail::ExternalSoundPlayer *player,
-            const StartInfo *startInfo)
-        {
-            if (handle->IsAttachedSound())
-            {
-                if (targetID == handle->GetId())
-                {
-                    handle->detail_GetAttachedSound()->SetAutoStopCounter(1);
-                    return 0;
-                }
-            }
+    StartResult result =
+        detail_SetupSound(pHandle, id, pArgInfo, pPlayer, false, pStartInfo);
 
-            UNKWORD ret = detail_SetupSound(handle, targetID, argInfo, player, true, startInfo);
-            if (ret != 0) return ret;
-
-            handle->StartPrepared();
-            handle->detail_GetAttachedSound()->SetAutoStopCounter(1);
-
-            return 0;
-        }
-
-        UNKWORD SoundStartable::detail_PrepareSound(SoundHandle *handle,
-            u32 targetID,
-            detail::BasicSound::AmbientArgInfo *argInfo,
-            detail::ExternalSoundPlayer *player,
-            const StartInfo *startInfo)
-        {
-            return detail_SetupSound(handle, targetID, argInfo, player, false, startInfo);
-        }
+    if (result != START_SUCCESS) {
+        return result;
     }
+
+    pHandle->StartPrepared();
+    return START_SUCCESS;
 }
+
+SoundStartable::StartResult SoundStartable::detail_HoldSound(
+    SoundHandle* pHandle, u32 id, detail::BasicSound::AmbientArgInfo* pArgInfo,
+    detail::ExternalSoundPlayer* pPlayer, const StartInfo* pStartInfo) {
+
+    if (pHandle->IsAttachedSound() && id == pHandle->GetId()) {
+        pHandle->detail_GetAttachedSound()->SetAutoStopCounter(1);
+        return START_SUCCESS;
+    }
+
+    StartResult result =
+        detail_SetupSound(pHandle, id, pArgInfo, pPlayer, true, pStartInfo);
+
+    if (result != START_SUCCESS) {
+        return result;
+    }
+
+    pHandle->StartPrepared();
+    pHandle->detail_GetAttachedSound()->SetAutoStopCounter(1);
+    return START_SUCCESS;
+}
+
+SoundStartable::StartResult
+SoundStartable::detail_PrepareSound(SoundHandle* handle, u32 targetID,
+                                    detail::BasicSound::AmbientArgInfo* argInfo,
+                                    detail::ExternalSoundPlayer* player,
+                                    const StartInfo* startInfo) {
+    return detail_SetupSound(handle, targetID, argInfo, player, false,
+                             startInfo);
+}
+
+} // namespace snd
+} // namespace nw4r

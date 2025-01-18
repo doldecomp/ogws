@@ -1,59 +1,56 @@
-#include <mem_frameHeap.h>
-#include "ut_algorithm.h"
-#include "snd_AxfxImpl.h"
+#include <nw4r/snd.h>
+#include <nw4r/ut.h>
 
-namespace nw4r
-{
-	using namespace ut;
-	
-	namespace snd
-	{
-		namespace detail
-		{
-			bool AxfxImpl::CreateHeap(void * ptr, u32 num)
-			{
-				return mHeap = (MEMiHeapHead *)MEMCreateFrmHeapEx(ptr, num, 0);
-			}
-			
-			UNKTYPE AxfxImpl::DestroyHeap()
-			{
-				if (mHeap) MEMDestroyFrmHeap(mHeap);
-			}
-			
-			UNKTYPE AxfxImpl::HookAlloc(AXFXAllocHook * allocHook, AXFXFreeHook * freeHook)
-			{
-				AXFXGetHooks(allocHook, freeHook);
-				AXFXSetHooks(Alloc, Free);
-				
-				mCurrentFx = this;
-			}
-			
-			UNKTYPE AxfxImpl::RestoreAlloc(AXFXAllocHook allocHook, AXFXFreeHook freeHook)
-			{
-				AXFXSetHooks(allocHook, freeHook);
-				
-				mCurrentFx = NULL;
-			}
-			
-			void * AxfxImpl::Alloc(u32 size)
-			{
-				void * ret = MEMAllocFromFrmHeapEx(mCurrentFx->mHeap, size, 4);
-				
-				mCurrentFx->mAllocCount++;
-				mAllocatedSize += RoundUp<u32>(size, 4);
-				
-				return ret;
-			}
-			
-			void AxfxImpl::Free(void * ptr)
-			{
-				if (mCurrentFx->mAllocCount) mCurrentFx->mAllocCount--;
-				
-				if (!mCurrentFx->mAllocCount) MEMFreeToFrmHeap(mCurrentFx->mHeap, 3);
-			}
-			
-			AxfxImpl * AxfxImpl::mCurrentFx;
-			u32 AxfxImpl::mAllocatedSize;
-		}
-	}
+namespace nw4r {
+namespace snd {
+namespace detail {
+
+AxfxImpl* AxfxImpl::mCurrentFx = NULL;
+u32 AxfxImpl::mAllocatedSize = 0;
+
+bool AxfxImpl::CreateHeap(void* pBuffer, u32 size) {
+    mHeap = MEMCreateFrmHeap(pBuffer, size);
+    return mHeap != NULL;
 }
+
+void AxfxImpl::DestroyHeap() {
+    if (mHeap != NULL) {
+        MEMDestroyFrmHeap(mHeap);
+    }
+}
+
+void AxfxImpl::HookAlloc(AXFXAllocHook* pAllocHook, AXFXFreeHook* pFreeHook) {
+    AXFXGetHooks(pAllocHook, pFreeHook);
+    AXFXSetHooks(Alloc, Free);
+    mCurrentFx = this;
+}
+
+void AxfxImpl::RestoreAlloc(AXFXAllocHook allocHook, AXFXFreeHook freeHook) {
+    AXFXSetHooks(allocHook, freeHook);
+    mCurrentFx = NULL;
+}
+
+void* AxfxImpl::Alloc(u32 size) {
+    void* pBlock = MEMAllocFromFrmHeap(mCurrentFx->mHeap, size);
+
+    mCurrentFx->mAllocCount++;
+    mAllocatedSize += ut::RoundUp(size, 4);
+
+    return pBlock;
+}
+
+void AxfxImpl::Free(void* pBlock) {
+#pragma unused(pBlock)
+
+    if (mCurrentFx->mAllocCount != 0) {
+        mCurrentFx->mAllocCount--;
+    }
+
+    if (mCurrentFx->mAllocCount == 0) {
+        MEMFreeToFrmHeap(mCurrentFx->mHeap, MEM_FRM_HEAP_FREE_ALL);
+    }
+}
+
+} // namespace detail
+} // namespace snd
+} // namespace nw4r

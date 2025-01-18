@@ -1,7 +1,7 @@
 #pragma ipa file
 #include "eggCntFile.h"
 #include "eggAssert.h"
-#include <RevoSDK/ARC/arc.h>
+#include <revolution/ARC/arc.h>
 
 namespace
 {
@@ -39,7 +39,7 @@ namespace EGG
         WORD_0x38 = 0;
     }
 
-    bool CntFile::open(const char *name, struct ARCHandle *handle)
+    bool CntFile::open(const char *name, CNTHandle *handle)
     {
         s32 entry = contentConvertPathToEntrynumNAND(handle, name);
         if (!mIsOpen && entry != -1)

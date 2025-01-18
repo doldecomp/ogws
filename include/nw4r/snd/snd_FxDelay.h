@@ -1,59 +1,51 @@
 #ifndef NW4R_SND_FX_DELAY_H
 #define NW4R_SND_FX_DELAY_H
-#include <AXFXDelay.h>
-#include "snd_FxBase.h"
-#include "snd_AxfxImpl.h"
-#include "types_nw4r.h"
+#include <nw4r/types_nw4r.h>
 
-namespace nw4r
-{
-	namespace snd
-	{
-		struct FxDelay : FxBase
-		{
-			//sizeof(FxDelayParam) = 0xc
-			struct DelayParam
-			{
-				float FLOAT_0x0;
-				float FLOAT_0x4;
-				float FLOAT_0x8;
-			};
-			
-			FxDelay();
-			
-			inline ~FxDelay()
-			{
-				Shutdown();
-				ReleaseWorkBuffer();
-			}
-			
-			u32 GetRequiredMemSize();
-			virtual UNKTYPE AssignWorkBuffer(void *, u32); // at 0x18
-			virtual UNKTYPE ReleaseWorkBuffer(); // at 0x1c
-			
-			bool StartUp(); // at 0xc
-			UNKTYPE Shutdown(); // at 0x10
-			bool SetParam(const DelayParam &);
-			UNKTYPE UpdateBuffer(int, void **, u32, SampleFormat, float, OutputMode); // at 0x14
-			
-			detail::AxfxImpl mAxfxImpl; // at 0xc
-			DelayParam mParam; // at 0x18
-			
-			AXFXDelay mAXFXDelay; // at 0x24
-			
-			u32 INT_0x64;
-			u32 INT_0x68;
-			u32 INT_0x6C;
-			
-			u32 INT_0x70;
-			u32 INT_0x74;
-			u32 INT_0x78;
-			
-			u32 INT_0x7C;
-			u32 INT_0x80;
-			u32 INT_0x84;
-		};
-	}
-}
+#include <nw4r/snd/snd_AxfxImpl.h>
+#include <nw4r/snd/snd_FxBase.h>
+
+#include <revolution/AXFX.h>
+
+namespace nw4r {
+namespace snd {
+
+class FxDelay : public FxBase {
+public:
+    struct DelayParam {
+        f32 delay;    // at 0x0
+        f32 feedback; // at 0x4
+        f32 outGain;  // at 0x8
+    };
+
+public:
+    FxDelay();
+
+    virtual ~FxDelay() {
+        Shutdown();
+        ReleaseWorkBuffer();
+    } // at 0x8
+
+    virtual bool StartUp();  // at 0xC
+    virtual void Shutdown(); // at 0x10
+
+    virtual void UpdateBuffer(int channels, void** ppBuffer, u32 size,
+                              SampleFormat format, f32 sampleRate,
+                              OutputMode mode); // at 0x14
+
+    virtual bool AssignWorkBuffer(void* pBuffer, u32 size); // at 0x18
+    virtual void ReleaseWorkBuffer();                       // at 0x1C
+
+    u32 GetRequiredMemSize();
+    bool SetParam(const DelayParam& rParam);
+
+private:
+    detail::AxfxImpl mImpl; // at 0xC
+    DelayParam mParam;      // at 0x18
+    AXFX_DELAY mAxfxParam;  // at 0x24
+};
+
+} // namespace snd
+} // namespace nw4r
 
 #endif

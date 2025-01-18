@@ -1,6 +1,17 @@
 #ifndef TYPES_H
 #define TYPES_H
+
+#ifdef __cplusplus
+#include <cstdarg>
+#include <cstddef>
+#include <new>
+#else
+#include <stdarg.h>
 #include <stddef.h>
+#endif
+
+#include <decomp.h>
+#include <macros.h>
 
 typedef unsigned long long u64;
 typedef signed long long s64;
@@ -22,5 +33,7 @@ typedef void UNKTYPE;
 
 enum { FALSE, TRUE };
 typedef int BOOL;
+
+typedef void (*funcptr_t)(void);
 
 #endif

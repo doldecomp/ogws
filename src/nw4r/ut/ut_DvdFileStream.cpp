@@ -1,197 +1,188 @@
-#pragma ipa file
+#include <nw4r/ut.h>
 
-#include "ut_DvdFileStream.h"
-#include "ut_IOStream.h"
+namespace nw4r {
+namespace ut {
 
-namespace nw4r
-{
-    namespace ut
-    {
-        void DvdFileStream::DvdAsyncCallback_(s32 r3, DVDFileInfo *pInfo)
-        {
-            FileInfoStreamPair *pPair = (FileInfoStreamPair *)pInfo;
-            DvdFileStream *pStrm = pPair->mStrm;
-            pStrm->mIsBusy = false;
-            pStrm->WORD_0x8 = r3;
+NW4R_UT_RTTI_DEF_DERIVED(DvdFileStream, FileStream);
 
-            if (pStrm->ASYNC_0xC)
-            {
-                pStrm->ASYNC_0xC(r3, pStrm, pStrm->PTR_0x10);
-            }
-        }
+void DvdFileStream::DvdAsyncCallback_(s32 result, DVDFileInfo* pInfo) {
+    DvdFileStream* p = reinterpret_cast<DvdFileStreamInfo*>(pInfo)->stream;
 
-        void DvdFileStream::DvdCBAsyncCallback_(s32 r3, DVDCommandBlock *pCmd)
-        {
-            FileInfoStreamPair *pPair = (FileInfoStreamPair *)pCmd;
-            DvdFileStream *pStrm = pPair->mStrm;
-            pStrm->BYTE_0x24 = 0;
+    p->mIsBusy = false;
+    p->mAsyncResult = result;
 
-            if (pStrm->ASYNC_0x1C)
-            {
-                pStrm->ASYNC_0x1C(r3, pStrm, pStrm->PTR_0x20);
-            }
-        }
-
-        DvdFileStream::DvdFileStream(s32 r3)
-        {
-            Initialize_();
-            Open(r3);
-        }
-
-        DvdFileStream::DvdFileStream(const DVDFileInfo *pInfo, bool b)
-        {
-            Initialize_();
-            Open(pInfo, b);
-        }
-
-        DvdFileStream::~DvdFileStream()
-        {
-            if (BOOL_0x6D)
-            {
-                Close();
-            }
-        }
-
-        void DvdFileStream::Close()
-        {
-            if (BOOL_0x6E && BOOL_0x4)
-            {
-                DVDClose(&mFileInfo);
-                BOOL_0x4 = false;
-            }
-        }
-
-        int DvdFileStream::Read(void *pData, u32 len)
-        {
-            len = AdjustReadLength_(len);
-            u32 pos = mPosition.Tell();
-            s32 bytesRead = DVDReadPrio(&mFileInfo, pData, len, mPosition.Tell(), WORD_0x68);
-            if (bytesRead > 0)
-            {
-                mPosition.Skip(bytesRead);
-            }
-            
-            return bytesRead;
-        }
-
-        bool DvdFileStream::ReadAsync(void * pData, u32 len, AsyncFunctor func, void *r7)
-        {
-            len = AdjustReadLength_(len);
-            bool result = DvdFileStream::PeekAsync(pData, len, func, r7);
-            if (result)
-            {
-                mPosition.Skip(len);
-            }
-            else
-            {
-                mIsBusy = false;
-            }
-            
-            return result;
-        }
-
-        UNKWORD DvdFileStream::Peek(void *pData, u32 len)
-        {
-            len = AdjustReadLength_(len);
-            u32 pos = mPosition.Tell();
-            
-            return DVDReadPrio(&mFileInfo, pData, len, pos, WORD_0x68);
-        }
-
-        bool DvdFileStream::PeekAsync(void * pData, u32 len, AsyncFunctor func, void *r7)
-        {
-            ASYNC_0xC = func;
-            PTR_0x10 = r7;
-            mIsBusy = 1;
-            len = AdjustReadLength_(len);
-            u32 pos = mPosition.Tell();
-
-            return (DVDReadAsyncPrio(&mFileInfo, pData, len, pos, DvdAsyncCallback_, WORD_0x68) != 0);
-        }
-
-        void DvdFileStream::Seek(s32 offset, u32 origin)
-        {
-            mPosition.Seek(offset, origin);
-        }
-
-        UNKTYPE DvdFileStream::Cancel()
-        {
-            DVDCancel(&mFileInfo);
-        }
-
-        bool DvdFileStream::CancelAsync(AsyncFunctor func, void *p)
-        {
-            ASYNC_0x1C = func;
-            PTR_0x20 = p;
-            u32 result = DVDCancelAsync(&mFileInfo, DvdCBAsyncCallback_);
-            if (result)
-            {
-                BYTE_0x24 = 1;
-            }
-
-            return (result != 0);
-        }
-
-        u32 DvdFileStream::GetBufferAlign() const
-        {
-            return 32;
-        }
-
-        u32 DvdFileStream::GetSizeAlign() const
-        {
-            return 32;
-        }
-
-        u32 DvdFileStream::GetOffsetAlign() const
-        {
-            return 4;
-        }
-
-        bool DvdFileStream::CanCancel() const
-        {
-            return true;
-        }
-
-        bool DvdFileStream::CanWrite() const
-        {
-            return false;
-        }
-
-        bool DvdFileStream::CanRead() const
-        {
-            return true;
-        }
-
-        bool DvdFileStream::CanSeek() const
-        {
-            return true;
-        }
-
-        bool DvdFileStream::CanAsync() const
-        {
-            return true;
-        }
-
-        u32 DvdFileStream::GetSize() const
-        {
-            return mPosition.GetFileSize();
-        }
-
-        u32 DvdFileStream::Tell() const
-        {
-            return mPosition.Tell();
-        }
-
-        bool DvdFileStream::IsBusy() const
-        {
-            return mIsBusy;
-        }
-
-        const detail::RuntimeTypeInfo * DvdFileStream::GetRuntimeTypeInfo() const
-        {
-            return &typeInfo;
-        }
-
-        detail::RuntimeTypeInfo DvdFileStream::typeInfo(&FileStream::typeInfo);
+    if (p->mCallback != NULL) {
+        p->mCallback(result, p, p->mArg);
     }
 }
+
+void DvdFileStream::DvdCBAsyncCallback_(s32 result, DVDCommandBlock* pBlock) {
+    DvdFileStream* p = reinterpret_cast<DvdFileStreamInfo*>(pBlock)->stream;
+
+    p->mIsCanceling = false;
+
+    if (p->mCancelCallback != NULL) {
+        p->mCancelCallback(result, p, p->mCancelArg);
+    }
+}
+
+void DvdFileStream::Initialize_() {
+    mCloseOnDestroyFlg = false;
+    mCloseEnableFlg = false;
+
+    mAvailable = false;
+    mPriority = DVD_PRIO_MEDIUM;
+    mIsBusy = false;
+
+    mCallback = NULL;
+    mArg = NULL;
+    mAsyncResult = DVD_RESULT_OK;
+
+    mCancelCallback = NULL;
+    mIsCanceling = false;
+    mCancelArg = NULL;
+
+    mFileInfo.stream = this;
+}
+
+DvdFileStream::DvdFileStream(s32 entrynum) {
+    Initialize_();
+    Open(entrynum);
+}
+
+DvdFileStream::DvdFileStream(const DVDFileInfo* pInfo, bool close) {
+    Initialize_();
+    Open(pInfo, close);
+}
+
+DvdFileStream::~DvdFileStream() {
+    if (mCloseOnDestroyFlg) {
+        Close();
+    }
+}
+
+bool DvdFileStream::Open(s32 entrynum) {
+    if (mCloseOnDestroyFlg) {
+        Close();
+    }
+
+    if (DVDFastOpen(entrynum, &mFileInfo.dvdInfo)) {
+        mFilePosition.SetFileSize(mFileInfo.dvdInfo.size);
+        mFilePosition.Seek(0, SEEK_BEG);
+
+        mCloseOnDestroyFlg = true;
+        mCloseEnableFlg = true;
+        mAvailable = true;
+
+        return true;
+    }
+
+    return false;
+}
+
+bool DvdFileStream::Open(const DVDFileInfo* pInfo, bool close) {
+    if (mCloseOnDestroyFlg) {
+        Close();
+    }
+
+    mFileInfo.dvdInfo = *pInfo;
+    mFilePosition.SetFileSize(mFileInfo.dvdInfo.size);
+    mFilePosition.Seek(0, SEEK_BEG);
+
+    mCloseOnDestroyFlg = false;
+    mCloseEnableFlg = close;
+    mAvailable = true;
+
+    return true;
+}
+
+void DvdFileStream::Close() {
+    if (mCloseEnableFlg && mAvailable) {
+        DVDClose(&mFileInfo.dvdInfo);
+        mAvailable = false;
+    }
+}
+
+s32 DvdFileStream::Read(void* pDst, u32 size) {
+    size = AdjustReadLength_(size);
+
+    s32 result = DVDReadPrio(&mFileInfo.dvdInfo, pDst, size,
+                             mFilePosition.Tell(), mPriority);
+
+    if (result > 0) {
+        mFilePosition.Skip(result);
+    }
+
+    return result;
+}
+
+bool DvdFileStream::ReadAsync(void* pDst, u32 size, StreamCallback pCallback,
+                              void* pCallbackArg) {
+    size = AdjustReadLength_(size);
+
+    bool success =
+        DvdFileStream::PeekAsync(pDst, size, pCallback, pCallbackArg);
+
+    if (success) {
+        mFilePosition.Skip(size);
+    } else {
+        mIsBusy = false;
+    }
+
+    return success;
+}
+
+s32 DvdFileStream::Peek(void* pDst, u32 size) {
+    size = AdjustReadLength_(size);
+
+    return DVDReadPrio(&mFileInfo.dvdInfo, pDst, size, mFilePosition.Tell(),
+                       mPriority);
+}
+
+bool DvdFileStream::PeekAsync(void* pDst, u32 size, StreamCallback pCallback,
+                              void* pCallbackArg) {
+    mCallback = pCallback;
+    mArg = pCallbackArg;
+    mIsBusy = true;
+
+    size = AdjustReadLength_(size);
+
+    return DVDReadAsyncPrio(&mFileInfo.dvdInfo, pDst, size,
+                            mFilePosition.Tell(), DvdAsyncCallback_, mPriority);
+}
+
+void DvdFileStream::Seek(s32 offset, u32 origin) {
+    mFilePosition.Seek(offset, origin);
+}
+
+void DvdFileStream::Cancel() {
+    DVDCancel(&mFileInfo.dvdInfo.block);
+}
+
+bool DvdFileStream::CancelAsync(StreamCallback pCallback, void* pCallbackArg) {
+    mCancelCallback = pCallback;
+    mCancelArg = pCallbackArg;
+
+    BOOL success =
+        DVDCancelAsync(&mFileInfo.dvdInfo.block, DvdCBAsyncCallback_);
+
+    if (success) {
+        mIsCanceling = true;
+    }
+
+    return success;
+}
+
+u32 DvdFileStream::AdjustReadLength_(u32 len) {
+    u32 currOffset = mFilePosition.Tell();
+    u32 fileSize = mFilePosition.GetFileSize();
+
+    if (RoundUp(currOffset + len, 32) > RoundUp(fileSize, 32)) {
+        len = RoundUp(fileSize - currOffset, 32);
+    }
+
+    return len;
+}
+
+} // namespace ut
+} // namespace nw4r

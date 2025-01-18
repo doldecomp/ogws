@@ -1,79 +1,85 @@
 #ifndef NW4R_G3D_FOG_H
 #define NW4R_G3D_FOG_H
-#include "types_nw4r.h"
-#include "g3d_rescommon.h"
-#include "math_types.h"
-#include "ut_Color.h"
-#include <GX/GXPixel.h>
+#include <nw4r/types_nw4r.h>
 
-namespace nw4r
-{
-    namespace g3d
-    {
-        struct FogData
-        {
-            GXFogType mFogType; // at 0x0
-            f32 mStartZ; // at 0x4
-            f32 mEndZ; // at 0x8
-            f32 mNear; // at 0xC
-            f32 mFar; // at 0x10
-            GXColor mColor; // at 0x14
-            u8 mFogRangeAdjEnable; // at 0x18
-            u8 BYTE_0x19;
-            u16 mAdjTableWidth; // at 0x1A
-            u16 mAdjTable[10]; // at 0x1C
-        };
+#include <nw4r/g3d/res/g3d_rescommon.h>
 
-        struct Fog
-        {			
-            ResCommon<FogData> mFogData;
-            
-            inline Fog(void * vptr) : mFogData(vptr) {}
+#include <nw4r/math.h>
+#include <nw4r/ut.h>
 
-            Fog(FogData *);
-            void Init();
-            void * CopyTo(void *) const;
-            void SetFogRangeAdjParam(u16, u16, const math::MTX44&);
-            void SetGP() const;
+#include <revolution/GX.h>
 
-            bool IsValid() const { return mFogData.IsValid(); }
+namespace nw4r {
+namespace g3d {
 
-            bool IsFogRangeAdjEnable() const
-            {
-                return (IsValid() && mFogData.ref().mFogRangeAdjEnable != 1) ? true : false;
-            }
+struct FogData {
+    GXFogType type;         // at 0x0
+    f32 startz;             // at 0x4
+    f32 endz;               // at 0x8
+    f32 nearz;              // at 0xC
+    f32 farz;               // at 0x10
+    GXColor color;          // at 0x14
+    GXBool adjEnable;       // at 0x18
+    u8 PADDING_0x19;        // at 0x19
+    u16 adjCenter;          // at 0x1A
+    GXFogAdjTable adjTable; // at 0x1C
+};
 
-            void SetFogColor(GXColor c)
-            {
-                if (IsValid()) mFogData.ref().mColor = c;
-            }
+class Fog : public ResCommon<FogData> {
+public:
+    explicit Fog(FogData* pData);
 
-            void SetFogType(GXFogType fog)
-            {
-                if (IsValid()) mFogData.ref().mFogType = fog;
-            }
+    void Init();
+    Fog CopyTo(void* pDst) const;
 
-            void SetNearFar(f32 near, f32 far)
-            {
-                if (IsValid())
-                {
-                    FogData& ref = mFogData.ref();
-                    ref.mNear = near;
-                    ref.mFar = far;
-                }
-            }
+    void SetFogRangeAdjParam(u16 width, u16 center,
+                             const math::MTX44& rProjMtx);
+    void SetGP() const;
 
-            void SetZ(f32 start, f32 end)
-            {
-                if (IsValid())
-                {
-                    FogData& ref = mFogData.ref();
-                    ref.mStartZ = start;
-                    ref.mEndZ = end;
-                }
-            } 
-        };
+    void SetFogType(GXFogType type) {
+        if (!IsValid()) {
+            return;
+        }
+
+        ref().type = type;
     }
-}
+
+    void SetZ(f32 startZ, f32 endZ) {
+        if (!IsValid()) {
+            return;
+        }
+
+        FogData& r = ref();
+
+        r.startz = startZ;
+        r.endz = endZ;
+    }
+
+    void SetNearFar(f32 nearZ, f32 farZ) {
+        if (!IsValid()) {
+            return;
+        }
+
+        FogData& r = ref();
+
+        r.nearz = nearZ;
+        r.farz = farZ;
+    }
+
+    void SetFogColor(GXColor color) {
+        if (!IsValid()) {
+            return;
+        }
+
+        ref().color = color;
+    }
+
+    bool IsFogRangeAdjEnable() const {
+        return IsValid() && ref().adjEnable == TRUE;
+    }
+};
+
+} // namespace g3d
+} // namespace nw4r
 
 #endif

@@ -2,9 +2,8 @@
 #include "eggGraphicsFifo.h"
 #include "eggHeap.h"
 #include "eggAssert.h"
-#include <RevoSDK/OS/OS.h>
-#include <RevoSDK/GX/GXFifo.h>
-#include <RevoSDK/GX/GXInit.h>
+#include <revolution/OS.h>
+#include <revolution/GX.h>
 
 namespace EGG
 {
@@ -34,9 +33,9 @@ namespace EGG
 
     GraphicsFifo::GraphicsFifo(u32 size, Heap *heap)
     {
-        mBufSize = nw4r::ut::RoundUp<u32>(size, 32);
+        mBufSize = nw4r::ut::RoundUp(size, 32);
         void *buf = Heap::alloc(mBufSize + 0xA0, 32, heap);
-        mBufBase = nw4r::ut::RoundUp<void *>(buf, 32);
+        mBufBase = nw4r::ut::RoundUp(buf, 32);
         #line 145
         EGG_ASSERT(mBufBase);
 

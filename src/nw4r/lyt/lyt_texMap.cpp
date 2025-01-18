@@ -12,7 +12,7 @@ namespace nw4r
         {
             if (IsCITexelFormat(GetTexelFormat()))
             {
-                UNKWORD tlut = GXGetTexObjTlut(pTexObj);
+                u32 tlut = GXGetTexObjTlut(pTexObj);
                 GXInitTexObjCI(pTexObj, GetImage(), GetWidth(), GetHeight(),
                     GetTexelFormat(), GetWrapModeS(), GetWrapModeT(), IsMipMap(), tlut);
             }
@@ -22,8 +22,8 @@ namespace nw4r
                     GetTexelFormat(), GetWrapModeS(), GetWrapModeT(), IsMipMap());
             }
 
-            GXInitTexObjLOD(pTexObj, GetMinFilter(), GetMagFilter(), IsBiasClampEnable(),
-                IsEdgeLODEnable(), GetAnisotropy(), GetMinLOD(), GetMaxLOD(), GetLODBias());
+            GXInitTexObjLOD(pTexObj, GetMinFilter(), GetMagFilter(), GetMinLOD(),
+                GetMaxLOD(), GetLODBias(), IsBiasClampEnable(), IsEdgeLODEnable(), GetAnisotropy());
         }
 
         void TexMap::Get(GXTlutObj *pTLUTObj) const
@@ -33,8 +33,8 @@ namespace nw4r
 
         void TexMap::Set(TPLPalette *pPalette, u32 tplID)
         {
-            // Is this pointer validation?
-            if (pPalette->WORD_0x8 < 0x80000000)
+            // Not yet converted from offset to pointer (unbound)
+            if ((uintptr_t)pPalette->descriptors < 0x80000000)
             {
                 TPLBind(pPalette);
             }
@@ -42,11 +42,10 @@ namespace nw4r
             Set(TPLGet(pPalette, tplID));
         }
 
-        // Inlined
         void TexMap::Set(const TPLDescriptor *pDescriptor)
         {
             SetNoWrap(pDescriptor);
-            SetWrapMode(pDescriptor->PTR_0x0->mWrapModeS, pDescriptor->PTR_0x0->mWrapModeT);
+            SetWrapMode(pDescriptor->texHeader->wrapS, pDescriptor->texHeader->wrapT);
         }
 
         void TexMap::SetNoWrap(const TexMap& map)
@@ -60,30 +59,30 @@ namespace nw4r
 
         void TexMap::SetNoWrap(const TPLDescriptor *pDescriptor)
         {
-            TPLDescriptorUnk0 *unk0 = pDescriptor->PTR_0x0;
-            SetImage(unk0->mImage);
-            SetSize(unk0->mWidth, unk0->mHeight);
-            SetTexelFormat(unk0->mTexFmt);
+            TPLHeader *tex = pDescriptor->texHeader;
+            SetImage(tex->data);
+            SetSize(tex->width, tex->height);
+            SetTexelFormat(static_cast<GXTexFmt>(tex->format));
 
-            bool bMipMap = (unk0->mMinLOD != unk0->mMaxLOD);
+            bool bMipMap = (tex->minLod != tex->maxLod);
             SetMipMap(bMipMap);
 
-            SetFilter(unk0->mMinFilter, unk0->mMagFilter);
-            SetLOD(unk0->mMinLOD, unk0->mMaxLOD);
-            SetLODBias(unk0->mLODBias);
-            SetEdgeLODEnable(unk0->mEdgeLODEnable);
+            SetFilter(tex->minFilt, tex->magFilt);
+            SetLOD(tex->minLod, tex->maxLod);
+            SetLODBias(tex->lodBias);
+            SetEdgeLODEnable(tex->edgeLodEnable);
 
-            TPLDescriptorUnk1 *unk1 = pDescriptor->PTR_0x4;
-            if (unk1 != NULL)
+            TPLClutHeader *clut = pDescriptor->clutHeader;
+            if (clut != NULL)
             {
-                SetPalette(unk1->mPalette);
-                SetPaletteFormat(unk1->mPaletteFmt);
-                SetPaletteEntryNum(unk1->mPalEntryNum);
+                SetPalette(clut->data);
+                SetPaletteFormat(clut->format);
+                SetPaletteEntryNum(clut->numEntries);
             }
             else
             {
                 SetPalette(NULL);
-                SetPaletteFormat(GX_TLUT_FORMAT_0);
+                SetPaletteFormat(GX_TL_IA8);
                 SetPaletteEntryNum(0);
             }
         }

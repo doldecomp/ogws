@@ -7,7 +7,7 @@
 #include "snd_NandSoundArchive.h"
 #include "snd_MemorySoundArchive.h"
 #include "snd_SoundArchivePlayer.h"
-#include <RevoSDK/CNT/cnt.h>
+#include <revolution/CNT/cnt.h>
 
 namespace EGG
 {
@@ -31,11 +31,10 @@ namespace EGG
         u32 changeNameToId(const char *name) { return mOpenSndArchive->ConvertLabelStringToSoundId(name); }
         nw4r::snd::SoundArchivePlayer * getPlayer() { return mActiveSndArchivePlayer; }
 
-        virtual UNKTYPE * openArchive(const char *, nw4r::snd::SoundHeap *, SARC_STORAGE, struct ARCHandle *); // at 0xC
+        virtual UNKTYPE * openArchive(const char *, nw4r::snd::SoundHeap *, SARC_STORAGE, CNTHandle *); // at 0xC
         virtual UNKTYPE * openDvdArchive(const char *, nw4r::snd::SoundHeap *); // at 0x10
         virtual UNKTYPE * openNandArchive(const char *, nw4r::snd::SoundHeap *); // at 0x14
-        // openCntArchive: Unofficial arguments
-        virtual UNKTYPE * openCntArchive(const char *, struct ARCHandle *, nw4r::snd::SoundHeap *); // at 0x18
+        virtual UNKTYPE * openCntArchive(const char *, CNTHandle *, nw4r::snd::SoundHeap *); // at 0x18
         virtual UNKTYPE * setupMemoryArchive(const void *, nw4r::snd::SoundHeap *); // at 0x1C
 
         virtual UNKTYPE * setupMemoryArchive(const void *p, nw4r::snd::SoundHeap *heap, s32) // at 0x20
@@ -51,7 +50,7 @@ namespace EGG
 
         virtual bool startSound(nw4r::snd::SoundHandle *handle, u32 id) // at 0x38
         {
-            return (mActiveSndArchivePlayer->detail_StartSound(handle, id, NULL, NULL, NULL) == 0);
+            return mActiveSndArchivePlayer->StartSound(handle, id);
         }
 
         virtual bool startSound(nw4r::snd::SoundHandle *handle, unsigned int id) // at 0x3C
@@ -69,7 +68,7 @@ namespace EGG
 
         virtual bool prepareSound(nw4r::snd::SoundHandle *handle, u32 id) // at 0x44
         {
-            return (mActiveSndArchivePlayer->detail_PrepareSound(handle, id, NULL, NULL, NULL) == 0);
+            return mActiveSndArchivePlayer->PrepareSound(handle, id);
         }
 
         virtual bool prepareSound(nw4r::snd::SoundHandle *handle, unsigned int id) // at 0x48
@@ -87,7 +86,7 @@ namespace EGG
 
         virtual bool holdSound(nw4r::snd::SoundHandle *handle, u32 id) // at 0x50
         {
-            return (mActiveSndArchivePlayer->detail_HoldSound(handle, id, NULL, NULL, NULL) == 0);
+            return mActiveSndArchivePlayer->HoldSound(handle, id);
         }
 
         virtual bool holdSound(nw4r::snd::SoundHandle *handle, unsigned int id) // at 0x54

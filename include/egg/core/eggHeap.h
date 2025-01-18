@@ -43,7 +43,7 @@ namespace EGG
         virtual u32 adjust() = 0; // at 0x28
 
         u8 * getStartAddress() { return (u8 *)this; }
-        u8 * getEndAddress() { return mHeapHandle->mEndAddress; }
+        u8 * getEndAddress() { return mHeapHandle->end; }
         int getTotalSize() { return getEndAddress() - getStartAddress(); }
 
         bool tstDisableAllocation() { return mFlags.onBit(0); }
@@ -68,7 +68,7 @@ namespace EGG
         void * mMemBlock; // at 0x14
         Heap * mParentHeap; // at 0x18
         TBitFlag<u16> mFlags; // at 0x1C
-        nw4r::ut::Node mNode; // at 0x20
+        nw4r::ut::Link mNode; // at 0x20
         nw4r::ut::List mChildren; // at 0x28
 
         static nw4r::ut::List sHeapList;
