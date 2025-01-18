@@ -1,19 +1,35 @@
-﻿__pycache__/
+﻿# IDE folders
 .idea/
-.mypy_cache
-.ninja_*
 .vs/
-.vscode/
-*.pyc
-build.ninja
-build/
-ctx.c
-include/baserom.dol
-objdiff.json
+
+# Caches
+__pycache__
+.mypy_cache
+.cache/
+
+# Original files
 orig/*/*
 !orig/*/.gitkeep
-tools/*.dll
-tools/*.exe
-tools/codewarrior/*
-tools/old/*.dll
-tools/old/*.exe
+*.dol
+*.rel
+*.elf
+*.o
+*.map
+*.MAP
+
+# Build files
+build/
+.ninja_*
+build.ninja
+
+# decompctx output
+ctx.*
+*.ctx
+
+# Generated configs
+objdiff.json
+compile_commands.json
+
+# Miscellaneous
+/*.txt
+*.exe
