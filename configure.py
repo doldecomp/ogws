@@ -1015,7 +1015,7 @@ config.libs = [
         "lib": "RP",
         "mw_version": config.linker_version,
         "cflags": cflags_rp,
-        "progress_category": "game",
+        # "progress_category": "game",
         "objects": [
             Object(NonMatching, "RP/RPKernel/RPSysSystem.c"),
             Object(NonMatching, "main.c"),
