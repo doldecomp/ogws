@@ -9,6 +9,7 @@
 #include <nw4r/ef/ef_emform.h>
 #include <nw4r/ef/ef_emitter.h>
 #include <nw4r/ef/ef_emitterform.h>
+#include <nw4r/ef/ef_handle.h>
 #include <nw4r/ef/ef_memorymanager.h>
 #include <nw4r/ef/ef_particle.h>
 #include <nw4r/ef/ef_particlemanager.h>
