@@ -23,6 +23,8 @@ class EffectSystem;
 class DrawOrderBase;
 
 class Effect : public ReferencedObject {
+    friend class DrawOrderBase;
+
 private:
     enum Flag {
         FLAG_DISABLE_CALC = (1 << 0),

@@ -361,7 +361,8 @@ config.linker_version = "GC/3.0a5.2"
 
 Matching = True                   # Object matches and should be linked
 NonMatching = False               # Object does not match and should not be linked
-Equivalent = config.non_matching  # Object should be linked when configured with --non-matching
+# Object should be linked when configured with --non-matching
+Equivalent = config.non_matching
 
 
 # Object is only matching for specific versions
@@ -403,7 +404,7 @@ config.libs = [
         "cflags": cflags_libnw4r_ef,
         "progress_category": "nw4r",
         "objects": [
-            Object(NonMatching, "nw4r/ef/ef_draworder.cpp"),
+            Object(Matching, "nw4r/ef/ef_draworder.cpp"),
             Object(NonMatching, "nw4r/ef/ef_effect.cpp"),
             Object(NonMatching, "nw4r/ef/ef_effectsystem.cpp"),
             Object(Matching, "nw4r/ef/ef_emitter.cpp"),
