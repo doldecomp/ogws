@@ -1,6 +1,7 @@
 #include <revolution/ESP.h>
 #include <revolution/NAND.h>
 #include <revolution/OS.h>
+
 #include <stdio.h>
 #include <string.h>
 #include <wchar.h>
@@ -147,7 +148,7 @@ BOOL nandIsInitialized(void) {
 }
 
 // Stubbed for release
-void nandReportErrorCode(s32 result){
+void nandReportErrorCode(s32 result) {
 #pragma unused(result)
 }
 
@@ -203,7 +204,7 @@ s32 nandConvertErrorCode(s32 result) {
         return result;
     }
 
-    for (; i < LENGTHOF(errorMap); i += 2) {
+    for (; i < ARRAY_SIZE(errorMap); i += 2) {
         if (result == errorMap[i]) {
             nandReportErrorCode(result);
             return errorMap[i + 1];

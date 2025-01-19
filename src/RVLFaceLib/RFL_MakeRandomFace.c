@@ -1,4 +1,5 @@
 #include <RVLFaceLib/RVLFaceLibInternal.h>
+
 #include <wchar.h>
 
 void RFLi_MakeRandomFace(RFLiCharInfo* info, RFLSex sex, RFLAge age,
@@ -212,7 +213,7 @@ u8 RFLi_GetFacelineType(RFLSex sex, RFLAge age, RFLRace race) {
         };
 
     return facelineTypeTable[(sex * 9) + (age * 3) + race]
-                            [RFLi_GetRandU32(LENGTHOF(facelineTypeTable[0]))];
+                            [RFLi_GetRandU32(ARRAY_SIZE(facelineTypeTable[0]))];
 }
 
 u8 RFLi_GetHairType(RFLSex sex, RFLAge age, RFLRace race) {
@@ -396,7 +397,7 @@ u8 RFLi_GetFaceTexType(RFLSex sex, RFLAge age, RFLRace race) {
         };
 
     return faceTexTypeTable[(sex * 9) + (age * 3) + race]
-                           [RFLi_GetRandU32(LENGTHOF(faceTexTypeTable[0]))];
+                           [RFLi_GetRandU32(ARRAY_SIZE(faceTexTypeTable[0]))];
 }
 
 u8 RFLi_GetGlassType(RFLAge age) {
@@ -469,7 +470,7 @@ u8 RFLi_GetFaceColor(RFLSex sex, RFLRace race) {
     };
 
     return faceColorTable[(sex * 3) + race]
-                         [RFLi_GetRandU32(LENGTHOF(faceColorTable[0]))];
+                         [RFLi_GetRandU32(ARRAY_SIZE(faceColorTable[0]))];
 }
 
 u8 RFLi_GetHairColor(RFLAge age, RFLRace race) {
@@ -488,7 +489,7 @@ u8 RFLi_GetHairColor(RFLAge age, RFLRace race) {
     };
 
     return hairColorTable[(race * 4 - race) + age]
-                         [RFLi_GetRandU32(LENGTHOF(hairColorTable[0]))];
+                         [RFLi_GetRandU32(ARRAY_SIZE(hairColorTable[0]))];
 }
 
 u8 RFLi_GetEyeColor(RFLRace race) {
@@ -500,7 +501,7 @@ u8 RFLi_GetEyeColor(RFLRace race) {
         // clang-format on
     };
 
-    return eyeColorTable[race][RFLi_GetRandU32(LENGTHOF(eyeColorTable[0]))];
+    return eyeColorTable[race][RFLi_GetRandU32(ARRAY_SIZE(eyeColorTable[0]))];
 }
 
 u32 RFLi_GetRandU32(u32 max) {

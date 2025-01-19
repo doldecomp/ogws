@@ -1335,7 +1335,7 @@ static BOOL IsImmCommandWithResult(u32 command) {
         return TRUE;
     }
 
-    for (i = 0; i < LENGTHOF(ImmCommand); i++) {
+    for (i = 0; i < ARRAY_SIZE(ImmCommand); i++) {
         if (command == ImmCommand[i]) {
             return TRUE;
         }
@@ -1354,7 +1354,7 @@ static BOOL IsDmaCommand(u32 command) {
         return TRUE;
     }
 
-    for (i = 0; i < LENGTHOF(DmaCommand); i++) {
+    for (i = 0; i < ARRAY_SIZE(DmaCommand); i++) {
         if (command == DmaCommand[i]) {
             return TRUE;
         }

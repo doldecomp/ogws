@@ -2,6 +2,7 @@
 #include <revolution/NAND.h>
 #include <revolution/OS.h>
 #include <revolution/SC.h>
+
 #include <string.h>
 
 #define SC_CONF_MIN_SIZE (sizeof(SCConfHeader) + sizeof(u32))
@@ -256,7 +257,7 @@ static s32 SCReloadConfFileAsync(u8* buf, u32 size, SCAsyncCallback callback) {
     Control.fileBuffers[SC_CONF_FILE_PRODUCT] = OS_SC_PRDINFO;
 
     Control.bufferSizes[SC_CONF_FILE_SYSTEM] = __SCGetConfBufSize();
-    Control.bufferSizes[SC_CONF_FILE_PRODUCT] = LENGTHOF(OS_SC_PRDINFO);
+    Control.bufferSizes[SC_CONF_FILE_PRODUCT] = ARRAY_SIZE(OS_SC_PRDINFO);
 
     ClearConfBuf(buf);
 
@@ -349,7 +350,7 @@ _openFile:
         break;
     }
 
-    OS_SC_PRDINFO[LENGTHOF(OS_SC_PRDINFO) - 1] = '\0';
+    OS_SC_PRDINFO[ARRAY_SIZE(OS_SC_PRDINFO) - 1] = '\0';
 
     if (Control.asyncCallback != NULL) {
         Control.asyncCallback(Control.asyncResult);

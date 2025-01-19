@@ -104,7 +104,7 @@ u8 OSUTF32toANSI(u32 utf32) {
     }
 
     if (utf32 >= 0x152 && utf32 <= 0x2122) {
-        for (i = 0; i < LENGTHOF(UcsAnsiTable); i++) {
+        for (i = 0; i < ARRAY_SIZE(UcsAnsiTable); i++) {
             if (UcsAnsiTable[i] == utf32) {
                 return i + 0x80 & 0xFF;
             }
