@@ -12,7 +12,9 @@ void DrawOrder::Draw(Effect* pEffect, const DrawInfo& rInfo) {
     ut::List* pList = GetPMList(pEffect);
     ParticleManager* pIt = NULL;
 
-    while (pIt = static_cast<ParticleManager*>(ut::List_GetNext(pList, pIt))) {
+    while ((pIt = static_cast<ParticleManager*>(
+                ut::List_GetNext(pList, pIt))) != NULL) {
+
         pIt->BeginDraw();
         pIt->Draw(rInfo);
         pIt->EndDraw();

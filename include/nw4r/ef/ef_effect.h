@@ -23,6 +23,7 @@ class EffectSystem;
 class DrawOrderBase;
 
 class Effect : public ReferencedObject {
+    friend class EffectSystem;
     friend class DrawOrderBase;
 
 private:
@@ -74,9 +75,8 @@ public:
         return CreateEmitter(res.ptr(), drawWeight, calcRemain);
     } // at 0x14
 
-    // TODO: Before CalcOption existed
-    virtual void Calc(bool UNKNOWN);                     // at 0x18
-    virtual void Draw(const DrawInfo& rInfo, u32 group); // at 0x1C
+    virtual void Calc(bool onlyBillboard);    // at 0x18
+    virtual void Draw(const DrawInfo& rInfo); // at 0x1C
 
     void ParticleManagerAdd(ParticleManager* pManager) {
         mDrawOrderFunc->Add(this, pManager);
@@ -155,8 +155,8 @@ public:
     bool Closing(Emitter*);
     Emitter* CreateEmitter(EmitterResource*, u8, u16);
     bool RetireEmitter(Emitter*);
-    u16 RetireEmitterAll();
-    u16 RetireParticleAll();
+    u32 RetireEmitterAll();
+    u32 RetireParticleAll();
     u16 GetNumEmitter() const;
     Emitter* GetEmitter(u16);
     u16 ForeachParticleManager(ForEachFunc, u32, bool);
