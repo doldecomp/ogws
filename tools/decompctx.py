@@ -18,7 +18,15 @@ from typing import List
 script_dir = os.path.dirname(os.path.realpath(__file__))
 root_dir = os.path.abspath(os.path.join(script_dir, ".."))
 src_dir = os.path.join(root_dir, "src")
-include_dirs: List[str] = []  # Set with -I flag
+include_dirs: List[str] = [
+    os.path.join(root_dir, "include"),
+    os.path.join(root_dir, "include/MSL"),
+    os.path.join(root_dir, "include/MetroTRK"),
+    os.path.join(root_dir, "include/revolution"),
+    os.path.join(root_dir, "include/nw4r"),
+    os.path.join(root_dir, "include/egg"),
+    # Add additional include directories here
+]
 
 include_pattern = re.compile(r'^#\s*include\s*[<"](.+?)[>"]')
 guard_pattern = re.compile(r"^#\s*ifndef\s+(.*)$")
@@ -74,7 +82,8 @@ def process_file(in_file: str, lines: List[str]) -> str:
         include_match = include_pattern.match(line.strip())
         if include_match and not include_match[1].endswith(".s"):
             out_text += f'/* "{in_file}" line {idx} "{include_match[1]}" */\n'
-            out_text += import_h_file(include_match[1], os.path.dirname(in_file))
+            out_text += import_h_file(include_match[1],
+                                      os.path.dirname(in_file))
             out_text += f'/* end "{include_match[1]}" */\n'
         else:
             out_text += line
@@ -113,10 +122,10 @@ def main():
     )
     args = parser.parse_args()
 
-    if args.include is None:
-        exit("No include directories specified")
-    global include_dirs
-    include_dirs = args.include
+    if args.include is not None:
+        global include_dirs
+        include_dirs = args.include
+
     output = import_c_file(args.c_file)
 
     with open(os.path.join(root_dir, args.output), "w", encoding="utf-8") as f:
