@@ -63,6 +63,8 @@ struct ColorInput {
     u8 mTevKColor[4]; // at 0x4
 };
 
+// TODO: Why?
+#pragma pack(push, 1)
 struct Lighting {
     enum Mode {
         LIGHTING_MODE_OFF,
@@ -83,6 +85,7 @@ struct Lighting {
     f32 mRadius;          // at 0xA
     math::VEC3 mPosition; // at 0xE
 };
+#pragma pack(pop)
 
 struct EmitterDrawSetting {
     enum Flag {
@@ -121,21 +124,21 @@ struct EmitterDrawSetting {
     u16 mAlphaFlickCycle;           // at 0x66
     u8 mAlphaFlickRandom;           // at 0x68
     u8 mAlphaFlickAmplitude;        // at 0x69
-    Lighting mLighting;             // at 0x6C
-    f32 mIndTexOffsetMtx[2][3];     // at 0x88
-    s8 mIndTexScaleExp;             // at 0xA0
-    s8 pivotX;                      // at 0xA1
-    s8 pivotY;                      // at 0xA2
-    u8 PADDING_0xA3;                // at 0xA3
-    u8 ptcltype;                    // at 0xA4
-    u8 typeOption;                  // at 0xA5
-    u8 typeDir;                     // at 0xA6
-    u8 typeAxis;                    // at 0xA7
-    u8 typeOption0;                 // at 0xA8
-    u8 typeOption1;                 // at 0xA9
-    u8 typeOption2;                 // at 0xAA
-    u8 PADDING_0xAB;                // at 0xAB
-    f32 zOffset;                    // at 0xAC
+    Lighting mLighting;             // at 0x6A
+    f32 mIndTexOffsetMtx[2][3];     // at 0x84
+    s8 mIndTexScaleExp;             // at 0x9C
+    s8 pivotX;                      // at 0x9D
+    s8 pivotY;                      // at 0x9E
+    u8 PADDING_0xA3;                // at 0x9F
+    u8 ptcltype;                    // at 0xA0
+    u8 typeOption;                  // at 0xA1
+    u8 typeDir;                     // at 0xA2
+    u8 typeAxis;                    // at 0xA3
+    u8 typeOption0;                 // at 0xA4
+    u8 typeOption1;                 // at 0xA5
+    u8 typeOption2;                 // at 0xA6
+    u8 PADDING_0xAB;                // at 0xA7
+    f32 zOffset;                    // at 0xA8
 };
 
 struct EmitterDesc {

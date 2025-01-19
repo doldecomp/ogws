@@ -104,12 +104,6 @@ public:
     void Draw_ModifyColor(Particle* pParticle, GXColor* pColorPri,
                           GXColor* pColorSec);
 
-    //////////! WEAK FUNCTIONS BELOW (TODO:)
-
-    void ParticleToFree(Particle* pParticle) {
-        mActivityList.ToFree(pParticle);
-    }
-
     f32 Draw_ModifyScaleX(Particle* /* pParticle */, f32 sx) {
         return sx * mModifier.mScale.x;
     }
@@ -117,7 +111,11 @@ public:
         return sy * mModifier.mScale.y;
     }
 
-    void Draw_ModifyRotate(Particle*, math::VEC3*);
+    void Draw_ModifyRotate(Particle* /* pParticle */, math::VEC3* pRot) {
+        pRot->x += mModifier.mRotate.x;
+        pRot->y += mModifier.mRotate.y;
+        pRot->z += mModifier.mRotate.z;
+    }
 
     void Modifier_SetSimpleLightParameter(const EmitterDrawSetting& rSetting) {
         Modifier_SetSimpleLightParameter(
@@ -138,6 +136,10 @@ public:
 
     ActivityList* GetParticleList() {
         return &mActivityList;
+    }
+
+    void ParticleToFree(Particle* pParticle) {
+        mActivityList.ToFree(pParticle);
     }
 
     void SetMtxDirty() {
