@@ -506,26 +506,35 @@ ParticleManager* Emitter::FindParticleManager(EmitterResource* pResource,
                                               bool inheritS, bool inheritR,
                                               s8 inheritT, u8 weight) {
 
-    NW4R_UT_LIST_FOREACH (ParticleManager, mActivityList.mActiveList, {
-        if (it->mResource != pResource) {
+    ParticleManager* pIt = static_cast<ParticleManager*>(
+        ut::List_GetFirst(&mActivityList.mActiveList));
+
+    // clang-format off
+    for (; pIt != NULL; pIt = static_cast<ParticleManager*>(
+            ut::List_GetNext(&mActivityList.mActiveList, pIt)))
+    // clang-format on
+    {
+        if (pIt->mResource != pResource) {
             continue;
         }
 
-        if (((it->mFlag & EmitterParameter::INHERIT_FLAG_SCALE) != 0) != inheritS ||
-            ((it->mFlag & EmitterParameter::INHERIT_FLAG_ROT) != 0) != inheritR) {
+        // clang-format off
+        if (((pIt->mFlag & EmitterParameter::INHERIT_FLAG_SCALE) != 0) != inheritS ||
+            ((pIt->mFlag & EmitterParameter::INHERIT_FLAG_ROT) != 0) != inheritR) {
+            continue;
+        }
+        // clang-format on
+
+        if (pIt->mInheritTranslate != inheritT) {
             continue;
         }
 
-        if (it->mInheritTranslate != inheritT) {
+        if (pIt->mWeight != weight) {
             continue;
         }
 
-        if (it->mWeight != weight) {
-            continue;
-        }
-
-        return it;
-    });
+        return pIt;
+    }
 
     return NULL;
 }
@@ -1104,11 +1113,13 @@ u32 Emitter::ForeachParticleManager(ForEachFunc pFunc, ForEachParam param,
                                     bool ignoreLifeStatus, bool propogate) {
     u32 calls = 0;
 
-    NW4R_UT_LIST_FOREACH_SAFE (ParticleManager, mActivityList.mActiveList, {
-        if (ignoreLifeStatus || it->GetLifeStatus() == NW4R_EF_LS_ACTIVE) {
-            pFunc(it, param);
-            calls++;
+    NW4R_UT_LIST_FOREACH_SAFE (ParticleManager, it, mActivityList.mActiveList, {
+        if (!ignoreLifeStatus && it->GetLifeStatus() != NW4R_EF_LS_ACTIVE) {
+            continue;
         }
+
+        pFunc(it, param);
+        calls++;
     })
 
     // TODO: I think this is doing the same for all sibling emitters?

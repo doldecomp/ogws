@@ -10,15 +10,12 @@ ut::List* DrawOrderBase::GetPMList(Effect* pEffect) {
 
 void DrawOrder::Draw(Effect* pEffect, const DrawInfo& rInfo) {
     ut::List* pList = GetPMList(pEffect);
-    ParticleManager* pIt = NULL;
 
-    while ((pIt = static_cast<ParticleManager*>(
-                ut::List_GetNext(pList, pIt))) != NULL) {
-
-        pIt->BeginDraw();
-        pIt->Draw(rInfo);
-        pIt->EndDraw();
-    }
+    NW4R_UT_LIST_FOREACH (ParticleManager, it, *pList, {
+        it->BeginDraw();
+        it->Draw(rInfo);
+        it->EndDraw();
+    })
 }
 
 void DrawOrder::Add(Effect* pEffect, ParticleManager* pManager) {

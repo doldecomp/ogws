@@ -91,7 +91,7 @@ bool ResShp::GXGetVtxAttrFmtv(GXVtxAttrFmtList* pList) const {
     pList[GX_VA_POS - GX_VA_POS].compCnt  = static_cast<GXCompCnt>(vat0 >> GX_CP_VAT_GROUP0_POS_CNT_SHIFT & GX_CP_VAT_GROUP0_POS_CNT_LMASK);
     pList[GX_VA_POS - GX_VA_POS].shift    = vat0 >> GX_CP_VAT_GROUP0_POS_SHIFT_SHIFT & GX_CP_VAT_GROUP0_POS_SHIFT_LMASK;
     
-	pList[GX_VA_NRM - GX_VA_POS].compType = static_cast<GXCompType>(vat0 >> GX_CP_VAT_GROUP0_NRM_TYPE_SHIFT & GX_CP_VAT_GROUP0_NRM_TYPE_LMASK);
+    pList[GX_VA_NRM - GX_VA_POS].compType = static_cast<GXCompType>(vat0 >> GX_CP_VAT_GROUP0_NRM_TYPE_SHIFT & GX_CP_VAT_GROUP0_NRM_TYPE_LMASK);
     
     pList[GX_VA_NRM - GX_VA_POS].compCnt  = static_cast<GXCompCnt>(vat0 >> GX_CP_VAT_GROUP0_NORMALINDEX3_SHIFT & GX_CP_VAT_GROUP0_NORMALINDEX3_LMASK
                                                                     ? i - GX_VA_NRM

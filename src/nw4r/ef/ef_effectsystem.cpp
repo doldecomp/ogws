@@ -106,7 +106,6 @@ u32 EffectSystem::RetireEffect(Effect* pEffect) {
 
     mActivityList[pEffect->mGroupID].ToWait(pEffect);
     pEffect->Destroy();
-
     return 1;
 }
 
@@ -173,13 +172,11 @@ void EffectSystem::Calc(u32 groupID, bool onlyBillboard) {
 }
 
 void EffectSystem::Draw(const DrawInfo& rInfo, u32 groupID) {
-    Effect* pIt = NULL;
-
-    while ((pIt = static_cast<Effect*>(ut::List_GetNext(
-                &mActivityList[groupID].mActiveList, pIt))) != NULL) {
-
-        pIt->Draw(rInfo);
-    }
+    // clang-format off
+    NW4R_UT_LIST_FOREACH (Effect, it, mActivityList[groupID].mActiveList, {
+        it->Draw(rInfo);
+    })
+    // clang-format on
 }
 
 } // namespace ef
