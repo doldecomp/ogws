@@ -7,6 +7,9 @@
 namespace nw4r {
 namespace ef {
 
+// Forward declarations
+struct EmitterResource;
+
 struct TextureProject {
     u32 headersize;       // at 0x0
     ut::Link projectlink; // at 0x4
@@ -32,6 +35,9 @@ public:
 
 public:
     static Resource* GetInstance();
+
+    EmitterResource* _FindEmitter(const char* pName,
+                                  EffectProject* pEffProject) const;
 };
 
 } // namespace ef

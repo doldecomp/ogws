@@ -22,24 +22,29 @@ private:
     };
 
 private:
-    int mNumItem;                                      // at 0x0
-    CreationQueueData mQueueData[NW4R_EF_MAX_EMITTER]; // at 0x4
+    static const int QUEUE_SIZE =
+        MAX(NW4R_EF_MAX_PARTICLE, NW4R_EF_MAX_EMITTER);
+
+private:
+    int mNumItem;                             // at 0x0
+    CreationQueueData mQueueData[QUEUE_SIZE]; // at 0x4
 
 public:
     CreationQueue();
 
+    void AddParticleCreation(const EmitterInheritSetting* pSetting,
+                             Particle* pParticle, EmitterResource* pResource,
+                             u16 calcRemain);
+
+    void AddEmitterCreation(const EmitterInheritSetting* pSetting,
+                            Particle* pParticle, EmitterResource* pResource,
+                            u16 calcRemain);
+
+    void Execute();
+
     bool IsEmpty() {
         return mNumItem == 0;
     }
-
-    //////////////////////////////////////////////!
-
-    void AddParticleCreation(const EmitterInheritSetting*, Particle*,
-                             EmitterResource*, u16);
-    void AddEmitterCreation(const EmitterInheritSetting*, Particle*,
-                            EmitterResource*, u16);
-
-    void Execute();
 };
 
 } // namespace ef

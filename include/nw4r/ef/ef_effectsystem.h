@@ -26,20 +26,33 @@ public:
     DrawStrategyBuilder* mDrawStrategyBuilder; // at 0x8
     EmitFormBuilder* mEmitFormBuilder;         // at 0xC
     CreationQueue mCreationQueue;              // at 0x10
-    u32 mMaxGroupID;                           // at 0xC014
-    ActivityList* mActivityList;               // at 0xC018
-    Random mRandom;                            // at 0xC01C
-    math::VEC3 mProcessCameraPos;              // at 0xC020
-    math::MTX34 mProcessCameraMtx;             // at 0xC02C
-    f32 mProcessCameraFar;                     // at 0xC05C
-    f32 mProcessCameraNear;                    // at 0xC060
-    bool mXFFlushSafe;                         // at 0xC064
+    u32 mMaxGroupID;                           // at 0x5014
+    ActivityList* mActivityList;               // at 0x5018
+    Random mRandom;                            // at 0x501C
+    math::VEC3 mProcessCameraPos;              // at 0x5020
+    math::MTX34 mProcessCameraMtx;             // at 0x502C
+    f32 mProcessCameraFar;                     // at 0x505C
+    f32 mProcessCameraNear;                    // at 0x5060
+    bool mXFFlushSafe;                         // at 0x5064
 
-    static BOOL mDisplayVersion;
+    static bool mDisplayVersion;
     static EffectSystem instance;
 
 public:
     static EffectSystem* GetInstance();
+
+    bool Initialize(u32 maxGroupID);
+    bool Closing(Effect* pEffect);
+
+    Effect* CreateEffect(const char* pName, u32 groupID, u16 calcRemain);
+    u32 RetireEffect(Effect* pEffect);
+
+    u32 RetireEffectAll(u32 groupID);
+    u32 RetireEmitterAll(u32 groupID);
+    u32 RetireParticleAll(u32 groupID);
+
+    void Calc(u32 groupID, bool onlyBillboard);
+    void Draw(const DrawInfo& rInfo, u32 groupID);
 
     MemoryManagerBase* GetMemoryManager() const {
         return mMemoryManager;
@@ -58,19 +71,6 @@ public:
     void SetXFFlushSafe(bool safe) {
         mXFFlushSafe = safe;
     }
-
-    //////////////////////////////////////////////!
-
-    bool Initialize(u32);
-    bool Closing(Effect*);
-    Effect* CreateEffect(const char*, u32, u16);
-    bool RetireEffect(Effect*);
-    u16 RetireEffectAll(u32);
-    u16 RetireEmitterAll(u32);
-    u16 RetireParticleAll(u32);
-
-    void Calc(u32, bool);
-    void Draw(const DrawInfo&, u32);
 
 private:
     EffectSystem();

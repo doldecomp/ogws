@@ -10,10 +10,10 @@ namespace {
 
 /**
  * The Hermite interpolating polynomial f satisfies the following conditions:
- *        f(0)	    = v0
- *        f(d)	    = v1
- *        f'(0)	= t0
- *        f'(d)	= t1
+ *        f(0)  = v0
+ *        f(d)  = v1
+ *        f'(0) = t0
+ *        f'(d) = t1
  *
  * The value returned is f(p).
  */
@@ -30,8 +30,8 @@ inline f32 HermiteInterpolation(f32 v0, f32 t0, f32 v1, f32 t1, f32 p, f32 d) {
 
 /**
  * The linear interpolating function f satisfies the following conditions:
- *        f(0)		= a
- *        f(0x8000)	= b
+ *        f(0)      = a
+ *        f(0x8000) = b
  *
  * The value returned is f(ratio).
  */

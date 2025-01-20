@@ -687,4 +687,4 @@ u8 axDspSlave[] = {
 
 u16 axDspInitVector = 0x0010;
 u16 axDspResumeVector = 0x0037;
-u16 axDspSlaveLength = LENGTHOF(axDspSlave);
+u16 axDspSlaveLength = ARRAY_SIZE(axDspSlave);

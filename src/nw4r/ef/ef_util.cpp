@@ -9,15 +9,14 @@ namespace ef {
 
 u16 UtlistToArray(const ut::List* pList, void** ppArray, int maxlen) {
     u16 num = 0;
-    void* pElem = NULL;
 
-    while ((pElem = ut::List_GetNext(pList, pElem)) != NULL) {
-        ppArray[num++] = pElem;
+    NW4R_UT_LIST_FOREACH (void, it, *pList, {
+        ppArray[num++] = it;
 
         if (num >= maxlen) {
             break;
         }
-    }
+    })
 
     return num;
 }

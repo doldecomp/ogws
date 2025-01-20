@@ -450,32 +450,36 @@ public:
 /**
  * Linked-list for-each macro.
  *
- * Access the current element with "it"
+ * @param NAME Element name
+ * @param LIST Reference to list
+ * @param ... Statement(s) to execute
  */
-#define NW4R_UT_LINKLIST_FOREACH(LIST, ...)                                    \
+#define NW4R_UT_LINKLIST_FOREACH(NAME, LIST, ...)                              \
     {                                                                          \
         typedef DECLTYPE((LIST).GetBeginIter()) IterType;                      \
                                                                                \
-        for (IterType it = (LIST).GetBeginIter(); it != (LIST).GetEndIter();   \
-             ++it) {                                                           \
+        for (IterType NAME = (LIST).GetBeginIter();                            \
+             NAME != (LIST).GetEndIter(); ++NAME) {                            \
                                                                                \
             __VA_ARGS__;                                                       \
         }                                                                      \
     }
 
 /**
- * Linked-list for-each macro, with robust iteration.
+ * List for-each macro, with robust iteration.
  *
- * Access the current element with "it"
+ * @param NAME Element name
+ * @param LIST Reference to list
+ * @param ... Statement(s) to execute
  */
-#define NW4R_UT_LINKLIST_FOREACH_SAFE(LIST, ...)                               \
+#define NW4R_UT_LINKLIST_FOREACH_SAFE(NAME, LIST, ...)                         \
     {                                                                          \
         typedef DECLTYPE((LIST).GetBeginIter()) IterType;                      \
                                                                                \
-        for (IterType impl = (LIST).GetBeginIter();                            \
-             impl != (LIST).GetEndIter();) {                                   \
+        for (IterType __impl__ = (LIST).GetBeginIter();                        \
+             __impl__ != (LIST).GetEndIter();) {                               \
                                                                                \
-            IterType it = impl++;                                              \
+            IterType NAME = __impl__++;                                        \
             __VA_ARGS__;                                                       \
         }                                                                      \
     }

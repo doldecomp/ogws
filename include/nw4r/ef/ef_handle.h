@@ -13,11 +13,12 @@ private:
     LinkedObject* mObject; // at 0x4
 
 public:
-    HandleBase(LinkedObject* pObject);
+    HandleBase();
     HandleBase(const HandleBase& rOther);
+    HandleBase(LinkedObject* pObject);
 
-    HandleBase& operator=(LinkedObject* pObject);
     HandleBase& operator=(const HandleBase& rOther);
+    HandleBase& operator=(LinkedObject* pObject);
 
     bool IsValid() const;
     LinkedObject* GetPtr() const;
@@ -25,8 +26,8 @@ public:
 
 template <typename T> class Handle : public HandleBase {
 public:
-    Handle(T* pObject) : HandleBase(static_cast<LinkedObject*>(pObject)) {}
     Handle(const Handle& rOther) : HandleBase(rOther) {}
+    Handle(T* pObject) : HandleBase(static_cast<LinkedObject*>(pObject)) {}
 
     Handle& operator=(T* pObject) {
         *this = static_cast<LinkedObject*>(pObject);

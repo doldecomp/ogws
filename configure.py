@@ -361,7 +361,8 @@ config.linker_version = "GC/3.0a5.2"
 
 Matching = True                   # Object matches and should be linked
 NonMatching = False               # Object does not match and should not be linked
-Equivalent = config.non_matching  # Object should be linked when configured with --non-matching
+# Object should be linked when configured with --non-matching
+Equivalent = config.non_matching
 
 
 # Object is only matching for specific versions
@@ -403,19 +404,19 @@ config.libs = [
         "cflags": cflags_libnw4r_ef,
         "progress_category": "nw4r",
         "objects": [
-            Object(NonMatching, "nw4r/ef/ef_draworder.cpp"),
-            Object(NonMatching, "nw4r/ef/ef_effect.cpp"),
-            Object(NonMatching, "nw4r/ef/ef_effectsystem.cpp"),
+            Object(Matching, "nw4r/ef/ef_draworder.cpp"),
+            Object(Matching, "nw4r/ef/ef_effect.cpp"),
+            Object(Matching, "nw4r/ef/ef_effectsystem.cpp"),
             Object(Matching, "nw4r/ef/ef_emitter.cpp"),
             Object(NonMatching, "nw4r/ef/ef_animcurve.cpp"),
             Object(Matching, "nw4r/ef/ef_particle.cpp"),
             Object(NonMatching, "nw4r/ef/ef_particlemanager.cpp"),
             Object(NonMatching, "nw4r/ef/ef_resource.cpp"),
             Object(Matching, "nw4r/ef/ef_util.cpp"),
-            Object(NonMatching, "nw4r/ef/ef_handle.cpp"),
+            Object(Matching, "nw4r/ef/ef_handle.cpp"),
             Object(NonMatching, "nw4r/ef/ef_emitterform.cpp"),
-            Object(NonMatching, "nw4r/ef/ef_creationqueue.cpp"),
-            Object(NonMatching, "nw4r/ef/ef_emform.cpp"),
+            Object(Matching, "nw4r/ef/ef_creationqueue.cpp"),
+            Object(Matching, "nw4r/ef/ef_emform.cpp"),
             Object(NonMatching, "nw4r/ef/ef_point.cpp"),
             Object(NonMatching, "nw4r/ef/ef_line.cpp"),
             Object(NonMatching, "nw4r/ef/ef_disc.cpp"),
@@ -423,7 +424,7 @@ config.libs = [
             Object(NonMatching, "nw4r/ef/ef_cylinder.cpp"),
             Object(NonMatching, "nw4r/ef/ef_torus.cpp"),
             Object(NonMatching, "nw4r/ef/ef_cube.cpp"),
-            Object(NonMatching, "nw4r/ef/ef_drawstrategybuilder.cpp"),
+            Object(Matching, "nw4r/ef/ef_drawstrategybuilder.cpp"),
             Object(NonMatching, "nw4r/ef/ef_drawstrategyimpl.cpp"),
             Object(NonMatching, "nw4r/ef/ef_drawbillboardstrategy.cpp"),
             Object(NonMatching, "nw4r/ef/ef_drawdirectionalstrategy.cpp"),

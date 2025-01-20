@@ -42,7 +42,7 @@ const char* NWC24GetMIMETypeStr(NWC24MIMEType type) {
     NWC24MIMEType* conv;
     int i;
 
-    for (i = 0; i < LENGTHOF(MIMETypeConv); i++) {
+    for (i = 0; i < ARRAY_SIZE(MIMETypeConv); i++) {
         // TODO: Fakematch
         conv = MIMETypeConv;
         conv && !conv;
@@ -58,7 +58,7 @@ const char* NWC24GetMIMETypeStr(NWC24MIMEType type) {
 const char* NWC24iGetMIMETypeSuffix(NWC24MIMEType type) {
     int i;
 
-    for (i = 0; i < LENGTHOF(MIMETypeConv); i++) {
+    for (i = 0; i < ARRAY_SIZE(MIMETypeConv); i++) {
         if (type == MIMETypeConv[i]) {
             return MIMETypeSuffix[i];
         }
@@ -70,7 +70,7 @@ const char* NWC24iGetMIMETypeSuffix(NWC24MIMEType type) {
 const char* NWC24GetCharsetStr(NWC24Charset set) {
     int i;
 
-    for (i = 0; i < LENGTHOF(CharsetConv); i++) {
+    for (i = 0; i < ARRAY_SIZE(CharsetConv); i++) {
         if (set == CharsetConv[i]) {
             return CharsetStr[i];
         }
@@ -82,7 +82,7 @@ const char* NWC24GetCharsetStr(NWC24Charset set) {
 const char* NWC24GetEncodingStr(NWC24Encoding enc) {
     int i;
 
-    for (i = 0; i < LENGTHOF(EncodingConv); i++) {
+    for (i = 0; i < ARRAY_SIZE(EncodingConv); i++) {
         if (enc == EncodingConv[i]) {
             return EncodingStr[i];
         }

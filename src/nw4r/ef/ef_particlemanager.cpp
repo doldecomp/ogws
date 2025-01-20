@@ -114,7 +114,7 @@ ParticleManager::CreateParticle(u16 life, math::VEC3 pos, math::VEC3 vel,
 
     pParticle->mCalcRemain += calcRemain;
     mActivityList.ToActive(pParticle);
-    pParticle->mLifeStatus = ReferencedObject::NW4R_EF_LS_ACTIVE;
+    pParticle->mLifeStatus = NW4R_EF_LS_ACTIVE;
 
     return pParticle;
 }
@@ -505,10 +505,11 @@ math::MTX34* ParticleManager::CalcGlobalMtx(math::MTX34* pResult) {
 void ParticleManager::BeginCalc(bool onlyIfRemain) {
     mLastCalced = NULL;
 
+    Particle* pIt =
+        static_cast<Particle*>(mActivityList.mActiveList.headObject);
+
     // clang-format off
-    for (Particle* pIt = static_cast<Particle*>(mActivityList.mActiveList.headObject);
-         pIt != NULL; 
-         pIt = static_cast<Particle*>(
+    for (; pIt != NULL; pIt = static_cast<Particle*>(
             NW4R_UT_LIST_GET_LINK(mActivityList.mActiveList, pIt)->nextObject))
     // clang-format on
     {
@@ -517,7 +518,7 @@ void ParticleManager::BeginCalc(bool onlyIfRemain) {
                 pIt->mCalcRemain--;
             }
 
-            if (pIt->GetLifeStatus() == ReferencedObject::NW4R_EF_LS_ACTIVE &&
+            if (pIt->GetLifeStatus() == NW4R_EF_LS_ACTIVE &&
                 pIt->mEvalStatus == NW4R_EF_ES_DONE) {
 
                 pIt->mEvalStatus = NW4R_EF_ES_WAIT;
@@ -527,14 +528,15 @@ void ParticleManager::BeginCalc(bool onlyIfRemain) {
 }
 
 void ParticleManager::EndCalc() {
+    Particle* pIt =
+        static_cast<Particle*>(mActivityList.mActiveList.headObject);
+
     // clang-format off
-    for (Particle* pIt = static_cast<Particle*>(mActivityList.mActiveList.headObject);
-         pIt != NULL; 
-         pIt = static_cast<Particle*>(
+    for (; pIt != NULL; pIt = static_cast<Particle*>(
             NW4R_UT_LIST_GET_LINK(mActivityList.mActiveList, pIt)->nextObject))
     // clang-format on
     {
-        if (pIt->GetLifeStatus() == ReferencedObject::NW4R_EF_LS_ACTIVE &&
+        if (pIt->GetLifeStatus() == NW4R_EF_LS_ACTIVE &&
             pIt->mEvalStatus == NW4R_EF_ES_SKIP) {
 
             pIt->mEvalStatus = NW4R_EF_ES_DONE;

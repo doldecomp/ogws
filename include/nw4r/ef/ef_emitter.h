@@ -77,6 +77,8 @@ public:
 };
 
 class Emitter : public ReferencedObject {
+    friend class Effect;
+
 public:
     EmitterParameter mParameter;           // at 0x20
     EvaluateStatus mEvalStatus;            // at 0xB4
