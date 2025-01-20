@@ -108,7 +108,7 @@ struct AnimCurveHeader {
     u8 loopCount;    // at 0x5
     u16 randomSeed;  // at 0x6
     u16 frameLength; // at 0x8
-    u16 padding;     // at 0xA
+    u16 PADDING_0xA; // at 0xA
     u32 keyTable;    // at 0xC
     u32 rangeTable;  // at 0x10
     u32 randomTable; // at 0x14
@@ -117,21 +117,21 @@ struct AnimCurveHeader {
 };
 
 struct AnimCurveKey {
-    u16 count;   // at 0x0
-    u16 padding; // at 0x2
-    u8 datas[1]; // at 0x4
+    u16 count;       // at 0x0
+    u16 PADDING_0x2; // at 0x2
+    u8 datas[1];     // at 0x4
 };
 
 struct AnimCurveRandom {
-    u16 count;   // at 0x0
-    u16 padding; // at 0x2
-    u8 datas[1]; // at 0x4
+    u16 count;       // at 0x0
+    u16 PADDING_0x2; // at 0x2
+    u8 datas[1];     // at 0x4
 };
 
 struct AnimCurveRandomTable {
-    u16 count;   // at 0x0
-    u16 padding; // at 0x2
-    u8 datas[1]; // at 0x4
+    u16 count;       // at 0x0
+    u16 PADDING_0x2; // at 0x2
+    u8 datas[1];     // at 0x4
 };
 
 struct AnimCurveNameTable {
@@ -139,9 +139,9 @@ struct AnimCurveNameTable {
         u32 work; // at 0x0
     };
 
-    u16 count;            // at 0x0
-    u16 padding;          // at 0x2
-    struct Name datas[1]; // at 0x4
+    u16 count;       // at 0x0
+    u16 PADDING_0x2; // at 0x2
+    Name datas[1];   // at 0x4
 };
 
 class ResAnimCurve {
