@@ -114,7 +114,7 @@ void TaskManager::CancelTask(Task* pTask) {
             TaskPriority priority = static_cast<TaskPriority>(i);
             TaskList& rList = mTaskList[priority];
 
-            NW4R_UT_LINKLIST_FOREACH_SAFE(rList, {
+            NW4R_UT_LINKLIST_FOREACH_SAFE(it, rList, {
                 if (&*it == pTask) {
                     rList.Erase(it);
 

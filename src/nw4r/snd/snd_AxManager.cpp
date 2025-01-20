@@ -229,7 +229,8 @@ void AxManager::SetMasterVolume(f32 volume, int frame) {
 }
 
 void AxManager::AxCallbackFunc() {
-    NW4R_UT_LINKLIST_FOREACH_SAFE(GetInstance().mCallbackList, it->callback());
+    NW4R_UT_LINKLIST_FOREACH_SAFE(it, GetInstance().mCallbackList,
+                                  { it->callback(); });
 
     if (GetInstance().mNextAxRegisterCallback != NULL) {
         GetInstance().mNextAxRegisterCallback();

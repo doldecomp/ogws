@@ -48,7 +48,7 @@ public:
                 }
             }
         } else {
-            NW4R_UT_LINKLIST_FOREACH_SAFE(mSoundList, {
+            NW4R_UT_LINKLIST_FOREACH_SAFE(it, mSoundList, {
                 SoundHandle handle;
                 handle.detail_AttachSoundAsTempHandle(&*it);
                 pFunction(handle);
