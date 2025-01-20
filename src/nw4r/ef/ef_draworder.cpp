@@ -15,7 +15,7 @@ void DrawOrder::Draw(Effect* pEffect, const DrawInfo& rInfo) {
         it->BeginDraw();
         it->Draw(rInfo);
         it->EndDraw();
-    })
+    });
 }
 
 void DrawOrder::Add(Effect* pEffect, ParticleManager* pManager) {

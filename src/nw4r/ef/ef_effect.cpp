@@ -153,7 +153,7 @@ void Effect::Calc(bool onlyBillboard) {
 
                 it->CalcBillboard();
             }
-        })
+        });
 
         return;
     }
@@ -171,10 +171,9 @@ void Effect::Calc(bool onlyBillboard) {
             }
         }
 
-        NW4R_UT_LIST_FOREACH (ParticleManager, pManager, pEmitter->mActivityList.mActiveList, {
-            pManager->BeginCalc(false);
-        })
-    })
+        NW4R_UT_LIST_FOREACH (ParticleManager, pManager, pEmitter->mActivityList.mActiveList,
+                              { pManager->BeginCalc(false); });
+    });
 
     SetFlagExistCalcRemain(true);
 
@@ -207,7 +206,7 @@ void Effect::Calc(bool onlyBillboard) {
 
                     it->CalcBillboard();
                 }
-            })
+            });
 
             {
                 u16 size =
@@ -272,12 +271,9 @@ void Effect::Calc(bool onlyBillboard) {
                     }
                 }
 
-                // clang-format off
-                NW4R_UT_LIST_FOREACH (ParticleManager, pManager, pEmitter->mActivityList.mActiveList, {
-                    pManager->BeginCalc(true);
-                })
-                // clang-format on
-            })
+                NW4R_UT_LIST_FOREACH (ParticleManager, pManager, pEmitter->mActivityList.mActiveList,
+                                      { pManager->BeginCalc(true); });
+            });
         }
     }
 
@@ -290,12 +286,9 @@ void Effect::Calc(bool onlyBillboard) {
             }
         }
 
-        // clang-format off
-        NW4R_UT_LIST_FOREACH (ParticleManager, pManager, pEmitter->mActivityList.mActiveList, {
-            pManager->EndCalc();
-        })
-        // clang-format on
-    })
+        NW4R_UT_LIST_FOREACH (ParticleManager, pManager, pEmitter->mActivityList.mActiveList,
+                              { pManager->EndCalc(); });
+    });
 }
 
 void Effect::Draw(const DrawInfo& rInfo) {
@@ -326,7 +319,7 @@ u32 Effect::ForeachParticleManager(ForEachFunc pFunc, ForEachParam param,
 
     NW4R_UT_LIST_FOREACH_SAFE (Emitter, it, mActivityList.mActiveList, {
         calls += it->ForeachParticleManager(pFunc, param, ignoreLifeStatus, false);
-    })
+    });
 
     return calls;
 }
@@ -354,7 +347,7 @@ u32 Effect::ForeachEmitterFrom(ForEachFunc pFunc, ForEachParam param,
             pFunc(it, param);
             calls++;
         }
-    })
+    });
 
     return calls;
 }
@@ -366,7 +359,7 @@ void Effect::SetRootMtx(const math::MTX34& rMtx) {
         if (it->mParent == NULL) {
             it->SetMtxDirty();
         }
-    })
+    });
 }
 
 } // namespace ef
