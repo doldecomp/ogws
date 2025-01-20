@@ -410,7 +410,8 @@ u32 Resource::relocateCurveTexture(u8* pCmdList) {
         reinterpret_cast<u8*>(pRandomTable) + pHeader->randomTable);
 
     u8* pName = reinterpret_cast<u8*>(pNameTable) +
-                offsetof(AnimCurveNameTable, datas) + pNameTable->count * 4;
+                offsetof(AnimCurveNameTable, datas) +
+                pNameTable->count * sizeof(AnimCurveNameTable::Name);
 
     for (int i = 0; i < pNameTable->count; i++) {
         int size = *reinterpret_cast<u16*>(pName);
@@ -448,7 +449,8 @@ u32 Resource::relocateCurveChild(u8* pCmdList) {
         reinterpret_cast<u8*>(pRandomTable) + pHeader->randomTable);
 
     u8* pName = reinterpret_cast<u8*>(pNameTable) +
-                offsetof(AnimCurveNameTable, datas) + pNameTable->count * 4;
+                offsetof(AnimCurveNameTable, datas) +
+                pNameTable->count * sizeof(AnimCurveNameTable::Name);
 
     for (int i = 0; i < pNameTable->count; i++) {
         int size = *reinterpret_cast<u16*>(pName);
