@@ -154,6 +154,8 @@ struct EmitterDesc {
         CMN_FLAG_EMIT_INHERIT_ROT = (1 << 8),
 
         CMN_FLAG_DISABLE_CALC = (1 << 9),
+
+        CMN_FLAG_RELOCATED = (1 << 30),
     };
 
     enum EmitFlag {
@@ -333,6 +335,13 @@ private:
     EmitterResource* mData; // at 0x0
 
 public:
+    ResEmitter(EmitterResource* pData) : mData(pData) {}
+    ResEmitter(const ResEmitter& rOther) : mData(rOther.mData) {}
+
+    bool IsValid() const {
+        return mData != NULL;
+    }
+
     EmitterResource* ptr() {
         return mData;
     }

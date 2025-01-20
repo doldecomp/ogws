@@ -182,7 +182,6 @@ void Effect::Calc(bool onlyBillboard) {
 
         SetFlagExistCalcRemain(false);
 
-        // 80211918
         while (true) {
             {
                 u16 size =
