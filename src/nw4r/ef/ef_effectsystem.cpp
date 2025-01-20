@@ -172,11 +172,8 @@ void EffectSystem::Calc(u32 groupID, bool onlyBillboard) {
 }
 
 void EffectSystem::Draw(const DrawInfo& rInfo, u32 groupID) {
-    // clang-format off
-    NW4R_UT_LIST_FOREACH (Effect, it, mActivityList[groupID].mActiveList, {
-        it->Draw(rInfo);
-    })
-    // clang-format on
+    NW4R_UT_LIST_FOREACH (Effect, it, mActivityList[groupID].mActiveList,
+                          { it->Draw(rInfo); });
 }
 
 } // namespace ef
