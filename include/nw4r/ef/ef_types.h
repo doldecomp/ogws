@@ -9,6 +9,11 @@
 #define NW4R_EF_MAX_PARTICLEMANAGER 1024
 #define NW4R_EF_MAX_PARTICLE 1024
 
+// Epsilon... but not actually epsilon???
+#define NW4R_EF_EMIT_ANGLE_MIN (1.917476e-4f)
+// 2 * PI... but not actually PI???
+#define NW4R_EF_EMIT_ANGLE_MAX (2 * 3.1414969f)
+
 namespace nw4r {
 namespace ef {
 

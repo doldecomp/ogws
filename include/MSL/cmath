@@ -3,6 +3,9 @@
 #include <math.h>
 #ifdef __cplusplus
 
+// Remove C macro
+#undef fabs
+
 namespace std {
 using ::acos;
 using ::acosf;
@@ -35,6 +38,11 @@ using ::sqrt;
 using ::sqrtf;
 using ::tan;
 using ::tanf;
+
+inline float fabs(float x) {
+    return __fabs(x);
+}
+
 } // namespace std
 
 #endif

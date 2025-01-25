@@ -10,11 +10,12 @@ public:
     EmitterForm() {}
 
     virtual void Emission(Emitter* pEmitter, ParticleManager* pManager,
-                          int count, u32 optionFlag, f32* pParams, u16 life,
+                          int count, u32 flags, f32* pParams, u16 life,
                           f32 lifeRnd, const math::MTX34* pSpace) = 0; // at 0x8
 
-    void CalcVelocity(math::VEC3* pVel, Emitter* pEmitter, const math::VEC3& rP,
-                      const math::VEC3& rNormal, const math::VEC3& rFromOrigin,
+    void CalcVelocity(math::VEC3* pVel, Emitter* pEmitter,
+                      const math::VEC3& rPos, const math::VEC3& rNormal,
+                      const math::VEC3& rFromOrigin,
                       const math::VEC3& rFromYAxis) const;
 
     u16 CalcLife(u16 life, f32 lifeRnd, Emitter* pEmitter);

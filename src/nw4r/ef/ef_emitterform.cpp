@@ -6,11 +6,12 @@ namespace nw4r {
 namespace ef {
 
 void EmitterForm::CalcVelocity(math::VEC3* pVel, Emitter* pEmitter,
-                               const math::VEC3& rP, const math::VEC3& rNormal,
+                               const math::VEC3& rPos,
+                               const math::VEC3& rNormal,
                                const math::VEC3& rFromOrigin,
                                const math::VEC3& rFromYAxis) const {
 
-#pragma unused(rP)
+#pragma unused(rPos)
 
     math::VEC3 vecWork;
     f32 fltWork;

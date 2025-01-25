@@ -52,7 +52,7 @@ inline float modff(float x, float* iptr) {
     return frac;
 }
 
-float fabsf(float);
+float fabsf(float x);
 
 #ifdef __cplusplus
 }

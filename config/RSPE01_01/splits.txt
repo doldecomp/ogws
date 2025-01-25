@@ -153,98 +153,98 @@ nw4r/ef/ef_emitterform.cpp:
 nw4r/ef/ef_creationqueue.cpp:
 	.text       start:0x8001D174 end:0x8001D42C
 
-nw4r/ef/ef_emform.cpp:
+nw4r/ef/emform/ef_emform.cpp:
 	.text       start:0x8001D42C end:0x8001D4E4
 	.ctors      start:0x803550AC end:0x803550B0
 	.data       start:0x80393F08 end:0x80393F40
 	.sbss       start:0x804BEA30 end:0x804BEA50
 
-nw4r/ef/ef_point.cpp:
+nw4r/ef/emform/ef_point.cpp:
 	.text       start:0x8001D4E4 end:0x8001D838
 	.data       start:0x80393F40 end:0x80393F50
 	.sdata2     start:0x804BFBA8 end:0x804BFBD8
 
-nw4r/ef/ef_line.cpp:
+nw4r/ef/emform/ef_line.cpp:
 	.text       start:0x8001D838 end:0x8001DBD4
 	.data       start:0x80393F50 end:0x80393F60
 	.sdata2     start:0x804BFBD8 end:0x804BFC00
 
-nw4r/ef/ef_disc.cpp:
+nw4r/ef/emform/ef_disc.cpp:
 	.text       start:0x8001DBD4 end:0x8001E0FC
 	.data       start:0x80393F60 end:0x80393F70
 	.sdata2     start:0x804BFC00 end:0x804BFC48
 
-nw4r/ef/ef_sphere.cpp:
+nw4r/ef/emform/ef_sphere.cpp:
 	.text       start:0x8001E0FC end:0x8001E9F0
 	.data       start:0x80393F70 end:0x80393F80
 	.sdata2     start:0x804BFC48 end:0x804BFC90
 
-nw4r/ef/ef_cylinder.cpp:
+nw4r/ef/emform/ef_cylinder.cpp:
 	.text       start:0x8001E9F0 end:0x8001F1A4
 	.data       start:0x80393F80 end:0x80393F90
 	.sdata2     start:0x804BFC90 end:0x804BFCD8
 
-nw4r/ef/ef_torus.cpp:
+nw4r/ef/emform/ef_torus.cpp:
 	.text       start:0x8001F1A4 end:0x8001F844
 	.data       start:0x80393F90 end:0x80393FA0
 	.sdata2     start:0x804BFCD8 end:0x804BFD20
 
-nw4r/ef/ef_cube.cpp:
+nw4r/ef/emform/ef_cube.cpp:
 	.text       start:0x8001F844 end:0x80021384
 	.data       start:0x80393FA0 end:0x80393FB0
 	.sdata2     start:0x804BFD20 end:0x804BFD58
 
-nw4r/ef/ef_drawstrategybuilder.cpp:
+nw4r/ef/drawstrategy/ef_drawstrategybuilder.cpp:
 	.text       start:0x80021384 end:0x80021728
 	.data       start:0x80393FB0 end:0x80393FD8
 	.bss        start:0x803D0038 end:0x803D05B0
 	.sbss       start:0x804BEA50 end:0x804BEA58
 
-nw4r/ef/ef_drawstrategyimpl.cpp:
+nw4r/ef/drawstrategy/ef_drawstrategyimpl.cpp:
 	.text       start:0x80021728 end:0x80023394
 	.ctors      start:0x803550B0 end:0x803550B4
 	.data       start:0x80393FD8 end:0x80393FF0
 	.bss        start:0x803D05B0 end:0x803D0610
 	.sdata2     start:0x804BFD58 end:0x804BFD88
 
-nw4r/ef/ef_drawbillboardstrategy.cpp:
+nw4r/ef/drawstrategy/ef_drawbillboardstrategy.cpp:
 	.text       start:0x80023394 end:0x80025340
 	.data       start:0x80393FF0 end:0x80394010
 	.sdata      start:0x804BD3A0 end:0x804BD3C0
 	.sdata2     start:0x804BFD88 end:0x804BFDB8
 
-nw4r/ef/ef_drawdirectionalstrategy.cpp:
+nw4r/ef/drawstrategy/ef_drawdirectionalstrategy.cpp:
 	.text       start:0x80025340 end:0x80027444
 	.rodata     start:0x80375780 end:0x803757E0
 	.data       start:0x80394010 end:0x80394048
 	.sdata      start:0x804BD3C0 end:0x804BD3E0
 	.sdata2     start:0x804BFDB8 end:0x804BFDE8
 
-nw4r/ef/ef_drawfreestrategy.cpp:
+nw4r/ef/drawstrategy/ef_drawfreestrategy.cpp:
 	.text       start:0x80027444 end:0x80027BD0
 	.rodata     start:0x803757E0 end:0x80375840
 	.data       start:0x80394048 end:0x80394060
 	.sdata      start:0x804BD3E0 end:0x804BD3E8
 	.sdata2     start:0x804BFDE8 end:0x804BFE10
 
-nw4r/ef/ef_drawlinestrategy.cpp:
+nw4r/ef/drawstrategy/ef_drawlinestrategy.cpp:
 	.text       start:0x80027BD0 end:0x800280AC
 	.data       start:0x80394060 end:0x80394078
 	.sdata      start:0x804BD3E8 end:0x804BD3F0
 	.sdata2     start:0x804BFE10 end:0x804BFE20
 
-nw4r/ef/ef_drawpointstrategy.cpp:
+nw4r/ef/drawstrategy/ef_drawpointstrategy.cpp:
 	.text       start:0x800280AC end:0x800283A0
 	.data       start:0x80394078 end:0x80394090
 	.sdata      start:0x804BD3F0 end:0x804BD3F8
 	.sdata2     start:0x804BFE20 end:0x804BFE30
 
-nw4r/ef/ef_drawstripestrategy.cpp:
+nw4r/ef/drawstrategy/ef_drawstripestrategy.cpp:
 	.text       start:0x800283A0 end:0x8002B1EC
 	.data       start:0x80394090 end:0x80394130
 	.sdata2     start:0x804BFE30 end:0x804BFE68
 
-nw4r/ef/ef_drawsmoothstripestrategy.cpp:
+nw4r/ef/drawstrategy/ef_drawsmoothstripestrategy.cpp:
 	.text       start:0x8002B1EC end:0x8002F700
 	.data       start:0x80394130 end:0x803941CC
 	.bss        start:0x803D0610 end:0x803D0640

@@ -2,8 +2,8 @@
 #define NW4R_EF_RES_EMITTER_H
 #include <nw4r/types_nw4r.h>
 
-#include <nw4r/ef/ef_emform.h>
 #include <nw4r/ef/ef_types.h>
+#include <nw4r/ef/emform/ef_emform.h>
 
 #include <nw4r/math.h>
 
@@ -163,6 +163,10 @@ struct EmitterDesc {
         EMIT_FLAG_15 = (1 << 15),
         EMIT_FLAG_16 = (1 << 16),
         EMIT_FLAG_17 = (1 << 17),
+        EMIT_FLAG_18 = (1 << 18),
+        EMIT_FLAG_24 = (1 << 24),
+        EMIT_FLAG_XYZ_SAME_SIZE = (1 << 25),
+        EMIT_FLAG_26 = (1 << 26),
     };
 
     u32 commonFlag;                 // at 0x0
