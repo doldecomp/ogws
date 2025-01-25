@@ -20,7 +20,6 @@ void EmitterFormPoint::Emission(Emitter* pEmitter, ParticleManager* pManager,
         math::VEC3 pos(0.0f, 0.0f, 0.0f);
         math::VEC3 normal;
 
-        // @bug Should also multiply by NW4R_MATH_PI
         f32 rx = pEmitter->mRandom.RandFloat() * 2 - 1.0f;
         if (rx >= 0.0f) {
             normal.x = (0.66f + 0.34f * rx) * rx;
