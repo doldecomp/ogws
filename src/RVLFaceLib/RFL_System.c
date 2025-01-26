@@ -1,20 +1,12 @@
 #include <RVLFaceLib/RVLFaceLibInternal.h>
+
 #include <revolution/MEM.h>
+
 #include <string.h>
 
 #define RFL_SYSTEM_HEAP_SIZE 0x24800
 #define RFL_WORK_SIZE 0x4B000
 #define RFL_DELUXE_WORK_SIZE 0x64000
-
-/**
- * These functions are inlined, but with their conditions inverted(?) from the
- * actual functions. To avoid manually inlining them, these defines will hide
- * the fake inlines.
- */
-#define RFLiGetLoader_() (RFLAvailable() ? &RFLiGetManager()->loader : NULL)
-#define RFLiGetLastReason_() (RFLAvailable() ? RFLiGetManager()->lastReason : 0)
-#define RFLGetLastReason_()                                                    \
-    (RFLAvailable() ? RFLiGetLastReason_() : sRFLLastReason)
 
 const char* __RFLVersion =
     "<< RVL_SDK - RFL \trelease build: Jun  9 2007 17:25:33 (0x4199_60831) >>";
@@ -88,7 +80,7 @@ RFLErrcode RFLInitResAsync(void* workBuffer, void* resBuffer, u32 resSize,
         RFLiSetCoordinateData(&scCoordinate);
 
         if (resBuffer != NULL) {
-            RFLiLoader* loader = RFLiGetLoader_();
+            RFLiLoader* loader = RFLiGetLoader();
             loader->cached = TRUE;
             loader->cacheSize = resSize;
             loader->cache = resBuffer;
@@ -119,7 +111,7 @@ void RFLExit(void) {
     RFLWaitAsync();
 
     sRFLLastErrCode = RFLGetAsyncStatus();
-    sRFLLastReason = RFLGetLastReason_();
+    sRFLLastReason = RFLGetLastReason();
     sRFLBrokenType = RFLiGetManager()->brokenType;
 
     if (RFLIsResourceCached()) {
@@ -153,7 +145,7 @@ RFLErrcode RFLiBootLoadAsync(void) {
 }
 
 BOOL RFLAvailable(void) {
-    return sRFLManager != NULL;
+    return sRFLManager != NULL ? TRUE : FALSE;
 }
 
 static void* allocal_(u32 size, s32 align) {
@@ -173,19 +165,35 @@ void RFLiFree(void* block) {
 }
 
 RFLiDBManager* RFLiGetDBManager(void) {
-    return !RFLAvailable() ? NULL : &RFLiGetManager()->dbMgr;
+    if (!RFLAvailable()) {
+        return NULL;
+    }
+
+    return &RFLiGetManager()->dbMgr;
 }
 
 RFLiHDBManager* RFLiGetHDBManager(void) {
-    return !RFLAvailable() ? NULL : &RFLiGetManager()->hdbMgr;
+    if (!RFLAvailable()) {
+        return NULL;
+    }
+
+    return &RFLiGetManager()->hdbMgr;
 }
 
 RFLiLoader* RFLiGetLoader(void) {
-    return !RFLAvailable() ? NULL : &RFLiGetManager()->loader;
+    if (!RFLAvailable()) {
+        return NULL;
+    }
+
+    return &RFLiGetManager()->loader;
 }
 
 BOOL RFLiGetWorking(void) {
-    return !RFLAvailable() ? NULL : RFLiGetManager()->working;
+    if (!RFLAvailable()) {
+        return FALSE;
+    }
+
+    return RFLiGetManager()->working;
 }
 
 void RFLiSetWorking(BOOL working) {
@@ -213,7 +221,11 @@ RFLErrcode RFLGetAsyncStatus(void) {
 }
 
 s32 RFLGetLastReason(void) {
-    return !RFLAvailable() ? sRFLLastReason : RFLiGetLastReason_();
+    if (!RFLAvailable()) {
+        return sRFLLastReason;
+    }
+
+    return RFLiGetLastReason();
 }
 
 RFLErrcode RFLWaitAsync(void) {
@@ -235,7 +247,11 @@ RFLiCtrlBufManager* RFLiGetCtrlBufManager(void) {
 }
 
 s32 RFLiGetLastReason(void) {
-    return !RFLAvailable() ? 0 : RFLiGetManager()->lastReason;
+    if (!RFLAvailable()) {
+        return 0;
+    }
+
+    return RFLiGetManager()->lastReason;
 }
 
 void RFLiSetFileBroken(RFLiFileBrokenType type) {
