@@ -168,7 +168,7 @@ void EmitterFormSphere::Emission(Emitter* pEmitter, ParticleManager* pManager,
                 normal.x = normal.y = normal.z = 0.0f;
             }
 
-            math::VEC3 fromYAxis(pos);
+            math::VEC3 fromYAxis = pos;
             fromYAxis.y = 0.0f;
 
             if (fromYAxis.x != 0.0f || fromYAxis.z != 0.0f) {
