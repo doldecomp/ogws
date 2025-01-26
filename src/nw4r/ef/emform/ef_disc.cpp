@@ -58,9 +58,10 @@ void EmitterFormDisc::Emission(Emitter* pEmitter, ParticleManager* pManager,
         f32 inner = pParams[1] / 100.0f;
 
         if (flags & EmitterDesc::EMIT_FLAG_24) {
-            dist = std::sqrtf(dist + inner * inner * (1.0f - dist));
+            dist = dist + inner * inner * (1.0f - dist);
+            dist = std::sqrtf(dist);
         } else {
-            dist = dist + (inner * (1.0f - dist));
+            dist = dist + inner * (1.0f - dist);
         }
 
         if (!(flags & EmitterDesc::EMIT_FLAG_17)) {
