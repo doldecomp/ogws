@@ -89,8 +89,10 @@ void EmitterFormCube::Emission(Emitter* pEmitter, ParticleManager* pManager,
     f32 innerRev = 1.0f - inner;
 
     f32 diffuseNrm = pEmitter->mParameter.mVelDiffusionEmitterNormal;
-    if (std::fabs(diffuseNrm - NW4R_MATH_PI) < 3.7450703e-07f) {
-        diffuseNrm -= 3.7450703e-07f;
+    if (std::fabs(diffuseNrm - NW4R_MATH_PI) <
+        NW4R_MATH_PI * NW4R_MATH_FLT_EPSILON) {
+
+        diffuseNrm -= NW4R_MATH_PI * NW4R_MATH_FLT_EPSILON;
     }
 
     if (flags & EmitterDesc::EMIT_FLAG_17) {
