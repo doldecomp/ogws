@@ -39,8 +39,17 @@ using ::sqrtf;
 using ::tan;
 using ::tanf;
 
-inline float fabs(float x) {
+inline float sqrt(float x) {
+    return ::sqrtf(x);
+}
+
+// TODO: Very fake!
+inline double fabs_wrapper(double x) {
     return __fabs(x);
+}
+
+inline float fabs(float x) {
+    return fabs_wrapper(x);
 }
 
 } // namespace std
