@@ -22,7 +22,7 @@ public:
         SetOffset(0);
     }
 
-    ActivityList(u16 offset) {
+    explicit ActivityList(u16 offset) {
         SetOffset(offset);
     }
 

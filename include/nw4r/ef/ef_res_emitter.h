@@ -7,6 +7,8 @@
 
 #include <nw4r/math.h>
 
+#include <revolution/GX.h>
+
 namespace nw4r {
 namespace ef {
 
@@ -36,10 +38,10 @@ struct TevStageAlpha {
 };
 
 struct BlendMode {
-    u8 mType;      // at 0x0,
-    u8 mSrcFactor; // at 0x1,
-    u8 mDstFactor; // at 0x2,
-    u8 mOp;        // at 0x3,
+    u8 mType;      // at 0x0
+    u8 mSrcFactor; // at 0x1
+    u8 mDstFactor; // at 0x2
+    u8 mOp;        // at 0x3
 };
 
 struct ColorInput {
@@ -58,9 +60,9 @@ struct ColorInput {
         RASCOLOR_LIGHTING,
     };
 
-    u8 mRasColor;     // at 0x0
-    u8 mTevColor[3];  // at 0x1
-    u8 mTevKColor[4]; // at 0x4
+    u8 mRasColor;                    // at 0x0
+    u8 mTevColor[GX_MAX_TEVREG - 1]; // at 0x1
+    u8 mTevKColor[GX_MAX_KCOLOR];    // at 0x4
 };
 
 // TODO: Why?
@@ -89,8 +91,19 @@ struct Lighting {
 
 struct EmitterDrawSetting {
     enum Flag {
+        FLAG_ZCOMP_ENABLE_TEST = (1 << 0),
+        FLAG_ZCOMP_ENABLE_UPDATE = (1 << 1),
+        FLAG_ZCOMP_BEFORE_TEX = (1 << 2),
+        FLAG_CLIP_DISABLE = (1 << 3),
+        FLAG_TEX1_ENABLE = (1 << 4),
+        FLAG_TEX2_ENABLE = (1 << 5),
+        FLAG_TEXIND_ENABLE = (1 << 6),
+        FLAG_TEX1_PROJ = (1 << 7),
+        FLAG_TEX2_PROJ = (1 << 8),
+        FLAG_TEXIND_PROJ = (1 << 9),
         FLAG_HIDDEN = (1 << 10),
 
+        FLAG_FOG_ENABLE = (1 << 12),
         FLAG_XY_SAME_SIZE = (1 << 13),
         FLAG_XY_SAME_SCALE = (1 << 14),
     };
@@ -102,6 +115,10 @@ struct EmitterDrawSetting {
         ALPHAFLICK_SAWTOOTH2,
         ALPHAFLICK_SQUARE,
         ALPHAFLICK_SINE
+    };
+
+    enum DirType {
+        DIR_NO_DESIGN = 5,
     };
 
     u16 mFlags;                     // at 0x0
@@ -118,7 +135,7 @@ struct EmitterDrawSetting {
     u8 mTevKColorSel[4];            // at 0x50
     u8 mTevKAlphaSel[4];            // at 0x54
     BlendMode mBlendMode;           // at 0x58
-    ColorInput mColorInput;         // at 0x6C
+    ColorInput mColorInput;         // at 0x5C
     u8 mZCompareFunc;               // at 0x64
     u8 mAlphaFlickType;             // at 0x65
     u16 mAlphaFlickCycle;           // at 0x66
@@ -339,8 +356,8 @@ private:
     EmitterResource* mData; // at 0x0
 
 public:
-    ResEmitter(EmitterResource* pData) : mData(pData) {}
-    ResEmitter(const ResEmitter& rOther) : mData(rOther.mData) {}
+    explicit ResEmitter(EmitterResource* pData = NULL) : mData(pData) {}
+    explicit ResEmitter(const ResEmitter& rOther) : mData(rOther.mData) {}
 
     bool IsValid() const {
         return mData != NULL;

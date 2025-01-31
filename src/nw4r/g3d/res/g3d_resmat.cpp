@@ -967,7 +967,7 @@ void ResMatIndMtxAndScale::GXSetIndTexMtx(GXIndTexMtxID id,
 void ResMatChan::GXSetChanMatColor(GXChannelID id, GXColor color) {
     GXColor& rMatColor = ref().chan[id & 1].matColor;
 
-    if (!(id & 2)) {
+    if ((id & 2) == 0) {
         rMatColor.r = color.r;
         rMatColor.g = color.g;
         rMatColor.b = color.b;
@@ -983,7 +983,7 @@ void ResMatChan::GXSetChanMatColor(GXChannelID id, GXColor color) {
 void ResMatChan::GXSetChanAmbColor(GXChannelID id, GXColor color) {
     GXColor& rAmbColor = ref().chan[id & 1].ambColor;
 
-    if (!(id & 2)) {
+    if ((id & 2) == 0) {
         rAmbColor.r = color.r;
         rAmbColor.g = color.g;
         rAmbColor.b = color.b;

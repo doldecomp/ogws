@@ -31,8 +31,8 @@ private:
     TextureData* mData; // at 0x0
 
 public:
-    ResTexture(TextureData* pData) : mData(pData) {}
-    ResTexture(const ResTexture& rOther) : mData(rOther.mData) {}
+    explicit ResTexture(TextureData* pData = NULL) : mData(pData) {}
+    explicit ResTexture(const ResTexture& rOther) : mData(rOther.mData) {}
 
     bool IsValid() const {
         return mData != NULL;
