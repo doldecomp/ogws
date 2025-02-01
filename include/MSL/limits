@@ -1,0 +1,26 @@
+#ifndef MSL_CPP_LIMITS_H
+#define MSL_CPP_LIMITS_H
+#include <cmath>
+#include <limits.h>
+#ifdef __cplusplus
+
+namespace std {
+
+template <typename T> class numeric_limits {
+public:
+    static const T epsilon() {
+        return T();
+    }
+};
+
+template <> class numeric_limits<float> {
+public:
+    static const float epsilon() {
+        return FLT_EPSILON;
+    }
+};
+
+} // namespace std
+
+#endif
+#endif

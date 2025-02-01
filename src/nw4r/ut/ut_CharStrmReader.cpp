@@ -13,7 +13,7 @@ inline bool IsSJISLeadByte(u8 ch) {
 u16 CharStrmReader::ReadNextCharUTF8() {
     u16 ch;
 
-    if ((GetChar<u8>(0) & 0x80) == 0) {
+    if (!(GetChar<u8>(0) & 0x80)) {
         ch = GetChar<u8>(0);
         StepStrm<u8>(1);
     } else if ((GetChar<u8>(0) & 0xE0) == 0xC0) {

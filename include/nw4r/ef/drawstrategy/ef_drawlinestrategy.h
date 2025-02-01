@@ -11,7 +11,6 @@ namespace nw4r
         {
         public:
             DrawLineStrategy();
-            virtual ~DrawLineStrategy() {} // at 0x8
             
             virtual UNKTYPE Draw(const DrawInfo &, ParticleManager *);
         };

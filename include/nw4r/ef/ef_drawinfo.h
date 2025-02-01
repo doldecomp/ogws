@@ -11,28 +11,26 @@ namespace ef {
 
 class DrawInfo {
 private:
-    math::MTX34 mViewMtx;      // at 0x0
-    math::MTX34 mProjMtx;      // at 0x30
-    bool mLightEnable;         // at 0x60
-    GXLightID mLightMask;      // at 0x64
-    GXLightID mLightAlphaMask; // at 0x68
-    bool mIsSpotLight;         // at 0x6C
-    GXFogType mFogType;        // at 0x70
-    f32 mFogStartz;            // at 0x74
-    f32 mFogEndz;              // at 0x78
-    f32 mFogNearz;             // at 0x7C
-    f32 mFogFarz;              // at 0x80
-    GXColor mFogColor;         // at 0x84
-    f32 mZOffset;              // at 0x88
-    math::VEC3 mZOffsetOrig;   // at 0x8C
-    GXColor mChanMatColor;     // at 0x98
-    GXColor mChanAmbColor;     // at 0x9C
+    math::MTX34 mViewMtx;    // at 0x0
+    math::MTX34 mProjMtx;    // at 0x30
+    bool mLightEnable;       // at 0x60
+    GXLightID mLightMask;    // at 0x64
+    bool mIsSpotLight;       // at 0x6C
+    GXFogType mFogType;      // at 0x70
+    f32 mFogStartz;          // at 0x74
+    f32 mFogEndz;            // at 0x78
+    f32 mFogNearz;           // at 0x7C
+    f32 mFogFarz;            // at 0x80
+    GXColor mFogColor;       // at 0x84
+    f32 mZOffset;            // at 0x88
+    math::VEC3 mZOffsetOrig; // at 0x8C
+    GXColor mChanMatColor;   // at 0x98
+    GXColor mChanAmbColor;   // at 0x9C
 
 public:
     DrawInfo()
         : mLightEnable(false),
           mLightMask(GX_LIGHT_NULL),
-          mLightAlphaMask(GX_LIGHT_NULL),
           mIsSpotLight(true),
           mFogType(GX_FOG_NONE),
           mFogStartz(0.0f),
@@ -72,9 +70,6 @@ public:
 
     GXLightID GetLightMask() const {
         return mLightMask;
-    }
-    GXLightID GetLightAlphaMask() const {
-        return mLightAlphaMask;
     }
 
     bool IsSpotLight() const {
