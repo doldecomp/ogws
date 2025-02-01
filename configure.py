@@ -429,7 +429,7 @@ config.libs = [
             Object(NonMatching, "nw4r/ef/drawstrategy/ef_drawbillboardstrategy.cpp"),
             Object(NonMatching, "nw4r/ef/drawstrategy/ef_drawdirectionalstrategy.cpp"),
             Object(NonMatching, "nw4r/ef/drawstrategy/ef_drawfreestrategy.cpp"),
-            Object(NonMatching, "nw4r/ef/drawstrategy/ef_drawlinestrategy.cpp"),
+            Object(Matching, "nw4r/ef/drawstrategy/ef_drawlinestrategy.cpp"),
             Object(Matching, "nw4r/ef/drawstrategy/ef_drawpointstrategy.cpp"),
             Object(NonMatching, "nw4r/ef/drawstrategy/ef_drawstripestrategy.cpp"),
             Object(NonMatching, "nw4r/ef/drawstrategy/ef_drawsmoothstripestrategy.cpp"),
