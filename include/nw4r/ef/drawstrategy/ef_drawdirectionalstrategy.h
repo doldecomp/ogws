@@ -11,7 +11,6 @@ namespace nw4r
         {
         public:
             DrawDirectionalStrategy();
-            virtual ~DrawDirectionalStrategy() {} // at 0x8
             virtual UNKTYPE GetCalcAheadFunc(ParticleManager *); // at 0x18
             
             virtual void Draw(const DrawInfo &, ParticleManager *);

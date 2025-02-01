@@ -45,6 +45,9 @@ public:
         AheadContext(const math::MTX34& rViewMtx, ParticleManager* pManager);
     };
 
+    typedef void (*CalcAheadFunc)(math::VEC3* pAxisY, AheadContext* pContext,
+                                  Particle* pParticle);
+
     struct PrevTexture {
         const TextureData* data; // at 0x0
         f32 scaleS;              // at 0x4
@@ -112,10 +115,10 @@ public:
     DrawStrategyImpl();
 
     virtual GetFirstDrawParticleFunc
-    GetGetFirstDrawParticleFunc(int drawOrder); // at 0x8
+    GetGetFirstDrawParticleFunc(int drawOrder); // at 0x10
 
     virtual GetNextDrawParticleFunc
-    GetGetNextDrawParticleFunc(int drawOrder); // at 0xC
+    GetGetNextDrawParticleFunc(int drawOrder); // at 0x14
 
 protected:
     void InitTexture(const EmitterDrawSetting& rSetting);
@@ -338,7 +341,7 @@ private:
     GetNextDrawParticle_YoungersFirst(ParticleManager* pManager,
                                       Particle* pParticle);
 
-private:
+protected:
     PrevTexture mPrevTexture[TEX_LAYER_MAX];            // at 0x4
     GXColor mPrevColor[COLOR_LAYER_MAX][COLOR_IDX_MAX]; // at 0x94
     int mPrevARef0;                                     // at 0xA4

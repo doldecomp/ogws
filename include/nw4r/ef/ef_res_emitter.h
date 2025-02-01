@@ -102,7 +102,7 @@ struct EmitterDrawSetting {
         FLAG_TEX2_PROJ = (1 << 8),
         FLAG_TEXIND_PROJ = (1 << 9),
         FLAG_HIDDEN = (1 << 10),
-
+        FLAG_DRAW_ORDER = (1 << 11),
         FLAG_FOG_ENABLE = (1 << 12),
         FLAG_XY_SAME_SIZE = (1 << 13),
         FLAG_XY_SAME_SCALE = (1 << 14),
