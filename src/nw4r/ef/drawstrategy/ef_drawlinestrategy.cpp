@@ -113,13 +113,11 @@ static void DrawPolygon(const nw4r::math::VEC3& rP0,
     GXBegin(GX_LINES, GX_VTXFMT0, 2);
     {
         GXPosition(rP0);
-
         if (texCoord) {
             GXTexCoord2f32(0.0f, 0.0f);
         }
 
         GXPosition(rP1);
-
         if (texCoord) {
             GXTexCoord2f32(0.0f, 1.0f);
         }
