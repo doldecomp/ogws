@@ -117,6 +117,8 @@ struct EmitterDrawSetting {
         ALPHAFLICK_SINE
     };
 
+    enum OptionTypeCommon { TYPE_CMN_NORMAL, TYPE_CMN_CROSS };
+
     enum DirType {
         DIR_NO_DESIGN = 5,
     };
