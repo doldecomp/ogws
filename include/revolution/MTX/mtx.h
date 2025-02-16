@@ -23,7 +23,7 @@ void PSMTXConcatArray(const Mtx, const Mtx, Mtx, u32);
 void PSMTXTranspose(const Mtx, Mtx);
 u32 PSMTXInverse(const Mtx, Mtx);
 u32 PSMTXInvXpose(const Mtx, Mtx);
-void PSMTXRotRad(Mtx, f32, char);
+void PSMTXRotRad(Mtx, char, f32);
 void PSMTXRotTrig(Mtx, f32, f32, char);
 void PSMTXRotAxisRad(Mtx, const Vec*, f32);
 void PSMTXTrans(Mtx, f32, f32, f32);

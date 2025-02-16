@@ -1,64 +1,93 @@
 #ifndef NW4R_LYT_LAYOUT_H
 #define NW4R_LYT_LAYOUT_H
-#include "types_nw4r.h"
-#include <new>
-#include <revolution/MEM/mem_allocator.h>
+#include <nw4r/types_nw4r.h>
 
-namespace nw4r
-{
-    namespace lyt
-    {
-        struct Layout
-        {
-            // TO-DO: Class members
+#include <nw4r/lyt/lyt_animation.h>
+#include <nw4r/lyt/lyt_types.h>
 
-            static void FreeMemory(void *p)
-            {
-                MEMFreeToAllocator(mspAllocator, p);
-            }
+#include <revolution/MEM.h>
 
-            static void * AllocMemory(size_t n)
-            {
-                return MEMAllocFromAllocator(mspAllocator, n);
-            }
+namespace nw4r {
+namespace lyt {
 
-            template <typename T>
-            static void DeleteArray(T *p, size_t n)
-            {
-                for (size_t i = 0; i < n; i++)
-                    p[i].~T();
+// Forward declarations
+class GroupContainer;
+class Pane;
 
-                FreeMemory(p);
-            }
-
-            template <typename T>
-            static T * NewArray(size_t n)
-            {
-                T *array = (T *)AllocMemory(n * sizeof(T));
-
-                for (size_t i = 0; i < n; i++)
-                    new (&array[i]) T();
-
-                return array;
-            }
-
-            template <typename T>
-            static void DeleteObj(T *t)
-            {
-                t->~T();
-                FreeMemory(t);
-            }
-
-            template <typename T>
-            static T * NewObj()
-            {
-                T *obj = (T *)AllocMemory(sizeof(T));
-                return new (obj) T();
-            }
-
-            static MEMAllocator *mspAllocator;
-        };
+/******************************************************************************
+ *
+ * Layout
+ *
+ ******************************************************************************/
+class Layout {
+public:
+    static void* AllocMemory(u32 size) {
+        return MEMAllocFromAllocator(mspAllocator, size);
     }
+    static void FreeMemory(void* pBlock) {
+        MEMFreeToAllocator(mspAllocator, pBlock);
+    }
+
+    Pane* GetRootPane() const {
+        return mpRootPane;
+    }
+
+    GroupContainer* GetGroupContainer() const {
+        return mpGroupContainer;
+    }
+
+    static MEMAllocator* GetAllocator() {
+        return mspAllocator;
+    }
+    static void SetAllocator(MEMAllocator* pAllocator) {
+        mspAllocator = pAllocator;
+    }
+
+protected:
+    AnimTransformList mAnimTransList; // at 0x4
+    Pane* mpRootPane;                 // at 0x10
+    GroupContainer* mpGroupContainer; // at 0x14
+    Size mLayoutSize;                 // at 0x18
+
+private:
+    static MEMAllocator* mspAllocator;
+};
+
+/******************************************************************************
+ *
+ * CreateObject
+ *
+ ******************************************************************************/
+template <typename TObj> TObj* CreateObject() {
+    void* pBuffer = Layout::AllocMemory(sizeof(TObj));
+    if (pBuffer == NULL) {
+        return NULL;
+    }
+
+    return new (pBuffer) TObj();
 }
+
+template <typename TObj, typename TParam> TObj* CreateObject(TParam param) {
+    void* pBuffer = Layout::AllocMemory(sizeof(TObj));
+    if (pBuffer == NULL) {
+        return NULL;
+    }
+
+    return new (pBuffer) TObj(param);
+}
+
+template <typename TObj, typename TParam1, typename TParam2>
+TObj* CreateObject(TParam1 param1, TParam2 param2) {
+
+    void* pBuffer = Layout::AllocMemory(sizeof(TObj));
+    if (pBuffer == NULL) {
+        return NULL;
+    }
+
+    return new (pBuffer) TObj(param1, param2);
+}
+
+} // namespace lyt
+} // namespace nw4r
 
 #endif

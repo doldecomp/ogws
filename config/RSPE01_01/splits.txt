@@ -835,11 +835,15 @@ nw4r/g3d/g3d_calcvtx.cpp:
 	.text       start:0x80078AD0 end:0x800792C8
 	.sdata2     start:0x804C0468 end:0x804C0470
 
-nw4r/lyt/lyt_pane.cpp:
-	.text       start:0x800792C8 end:0x8007A22C
-	.ctors      start:0x803550CC end:0x803550D0
-	.data       start:0x80397140 end:0x803971F0
+nw4r/lyt/lyt_init.cpp:
+	.text       start:0x800792C8 end:0x8007931C
+	.data       start:0x80397140 end:0x80397188
 	.sdata      start:0x804BD470 end:0x804BD478
+
+nw4r/lyt/lyt_pane.cpp:
+	.text       start:0x8007931C end:0x8007A22C
+	.ctors      start:0x803550CC end:0x803550D0
+	.data       start:0x80397188 end:0x803971F0
 	.sbss       start:0x804BEB78 end:0x804BEB80
 	.sdata2     start:0x804C0470 end:0x804C0490
 

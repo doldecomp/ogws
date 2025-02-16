@@ -1,60 +1,106 @@
 #ifndef NW4R_LYT_COMMON_H
 #define NW4R_LYT_COMMON_H
-#include "types_nw4r.h"
-#include "math_types.h"
-#include "ut_binaryFileFormat.h"
+#include <nw4r/types_nw4r.h>
 
-#define NW4R_RES_NAME_SIZE 16
-#define NW4R_MAT_NAME_SIZE 20
+#include <nw4r/ut.h>
 
-#define TEXCOORD_VTX_COUNT 4
+#include <revolution/GX.h>
 
-namespace nw4r
-{
-    namespace lyt
-    {
-        namespace res
-        {
-            struct BinaryFileHeader : ut::BinaryFileHeader
-            {
+namespace nw4r {
+namespace lyt {
 
-            };
+// Forward declarations
+class ResourceAccessor;
 
-            struct DataBlockHeader {
-                u32 kind; // at 0x0
-                u32 size; // at 0x4
-            };
-        }
+/******************************************************************************
+ *
+ * Implementation details
+ *
+ ******************************************************************************/
+namespace detail {
 
-        namespace detail
-        {
-            typedef math::VEC2 TexCoordData[TEXCOORD_VTX_COUNT];
-             
-            struct TexCoordAry
-            {
-                TexCoordAry();
-                void Free();
-                void Reserve(u8);
-                void SetSize(u8);
-                void Copy(const void *, u8);
+/******************************************************************************
+ * Utility functions
+ ******************************************************************************/
+bool EqualsResName(const char* pLhs, const char* pRhs);
+bool EqualsMaterialName(const char* pLhs, const char* pRhs);
 
-                u8 mCap; // at 0x0
-                u8 mSize; // at 0x1
-                TexCoordData *mTexCoords; // at 0x4
-            };
+/******************************************************************************
+ * Positioning
+ ******************************************************************************/
+enum HorizontalPosition {
+    HORIZONTALPOSITION_LEFT,
+    HORIZONTALPOSITION_CENTER,
+    HORIZONTALPOSITION_RIGHT,
+    HORIZONTALPOSITION_MAX
+};
+enum VerticalPosition {
+    VERTICALPOSITION_TOP,
+    VERTICALPOSITION_CENTER,
+    VERTICALPOSITION_BOTTOM,
+    VERTICALPOSITION_MAX
+};
 
-            bool EqualsResName(const char *, const char *);
-            bool EqualsMaterialName(const char *, const char *);
-            bool TestFileHeader(const res::BinaryFileHeader&);
-            bool TestFileHeader(const res::BinaryFileHeader&, u32);
-            bool IsModulateVertexColor(ut::Color *, u8);
-            void MultipleAlpha(ut::Color *, const ut::Color *, u8); // Inlined
-            ut::Color MultipleAlpha(ut::Color, u8);
-            void SetVertexFormat(bool, u8);
-            void DrawQuad(const math::VEC2&, const Size&, u8, const TexCoordData *, const ut::Color *);
-            void DrawQuad(const math::VEC2&, const Size&, u8, const TexCoordData *, const ut::Color *, u8);
-        }
-    }
+inline u8 GetHorizontalPosition(u8 packed) {
+    return packed % HORIZONTALPOSITION_MAX;
 }
+inline u8 GetVerticalPosition(u8 packed) {
+    return packed / HORIZONTALPOSITION_MAX;
+}
+
+inline void SetHorizontalPosition(u8* pPacked, u8 value) {
+    *pPacked = GetVerticalPosition(*pPacked) * HORIZONTALPOSITION_MAX + value;
+}
+inline void SetVerticalPosition(u8* pPacked, u8 value) {
+    *pPacked = value * HORIZONTALPOSITION_MAX + GetHorizontalPosition(*pPacked);
+}
+
+} // namespace detail
+
+/******************************************************************************
+ *
+ * Binary resources
+ *
+ ******************************************************************************/
+namespace res {
+
+/******************************************************************************
+ * DataBlockHeader
+ ******************************************************************************/
+struct DataBlockHeader {
+    char kind[4]; // at 0x0
+    u32 size;     // at 0x4
+};
+
+} // namespace res
+
+/******************************************************************************
+ * Resource blocks
+ ******************************************************************************/
+struct TextureList {
+    res::DataBlockHeader blockHeader; // at 0x0
+    u16 texNum;                       // at 0x8
+    u8 PADDING_0xA[0xC - 0xA];        // at 0xA
+};
+struct FontList {
+    res::DataBlockHeader blockHeader; // at 0x0
+    u16 fontNum;                      // at 0x8
+    u8 PADDING_0xA[0xC - 0xA];        // at 0xA
+};
+struct MaterialList {
+    res::DataBlockHeader blockHeader; // at 0x0
+    u16 materialNum;                  // at 0x8
+    u8 PADDING_0xA[0xC - 0xA];        // at 0xA
+};
+
+struct ResBlockSet {
+    const TextureList* pTextureList;   // at 0x0
+    const FontList* pFontList;         // at 0x4
+    const MaterialList* pMaterialList; // at 0x8
+    ResourceAccessor* pResAccessor;    // at 0xC
+};
+
+} // namespace lyt
+} // namespace nw4r
 
 #endif
