@@ -1,5 +1,5 @@
-#ifndef NW4R_LYT_TEX_MAP_H
-#define NW4R_LYT_TEX_MAP_H
+#ifndef NW4R_LYT_BOUNDING_H
+#define NW4R_LYT_BOUNDING_H
 #include <nw4r/types_nw4r.h>
 
 #include <nw4r/lyt/lyt_pane.h>
