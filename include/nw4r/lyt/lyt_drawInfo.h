@@ -46,32 +46,32 @@ public:
     }
 
     bool IsMultipleViewMtxOnDraw() const {
-        return mFlag.mulViewDraw != 0;
+        return mFlag.mulViewDraw;
     }
 
     bool IsInfluencedAlpha() const {
-        return mFlag.influencedAlpha != 0;
+        return mFlag.influencedAlpha;
     }
     void SetInfluencedAlpha(bool influenced) {
         mFlag.influencedAlpha = influenced;
     }
 
     bool IsLocationAdjust() const {
-        return mFlag.locationAdjust != 0;
+        return mFlag.locationAdjust;
     }
     void SetLocationAdjust(bool adjust) {
         mFlag.locationAdjust = adjust;
     }
 
     bool IsInvisiblePaneCalculateMtx() const {
-        return mFlag.invisiblePaneCalculateMtx != 0;
+        return mFlag.invisiblePaneCalculateMtx;
     }
     void SetInvisiblePaneCalculateMtx(bool calc) {
         mFlag.invisiblePaneCalculateMtx = calc;
     }
 
     bool IsDebugDrawMode() const {
-        return mFlag.debugDrawMode != 0;
+        return mFlag.debugDrawMode;
     }
 
 protected:
