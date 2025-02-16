@@ -32,7 +32,7 @@ namespace EGG
 
             while (node = (Archive *)ut::List_GetNext(&sArchiveList, node))
             {
-                if (node->mHandle.header == (ARCHeader *)arcBinary)
+                if (node->mHandle.archiveStartAddr == arcBinary)
                 {
                     archive = node;
                     break;
