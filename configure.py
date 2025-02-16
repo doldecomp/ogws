@@ -296,6 +296,7 @@ cflags_libnw4r_lyt = [
     *cflags_pedantic,
     "-enc SJIS",
     "-fp_contract off",
+    "-ipa file",
     "-ir include/revolution",
     "-ir include/nw4r",
 ]
@@ -425,12 +426,12 @@ config.libs = [
             Object(Matching, "nw4r/ef/emform/ef_torus.cpp"),
             Object(Matching, "nw4r/ef/emform/ef_cube.cpp"),
             Object(Matching, "nw4r/ef/drawstrategy/ef_drawstrategybuilder.cpp"),
-            Object(NonMatching, "nw4r/ef/drawstrategy/ef_drawstrategyimpl.cpp"),
+            Object(Matching, "nw4r/ef/drawstrategy/ef_drawstrategyimpl.cpp"),
             Object(NonMatching, "nw4r/ef/drawstrategy/ef_drawbillboardstrategy.cpp"),
             Object(NonMatching, "nw4r/ef/drawstrategy/ef_drawdirectionalstrategy.cpp"),
             Object(NonMatching, "nw4r/ef/drawstrategy/ef_drawfreestrategy.cpp"),
-            Object(NonMatching, "nw4r/ef/drawstrategy/ef_drawlinestrategy.cpp"),
-            Object(NonMatching, "nw4r/ef/drawstrategy/ef_drawpointstrategy.cpp"),
+            Object(Matching, "nw4r/ef/drawstrategy/ef_drawlinestrategy.cpp"),
+            Object(Matching, "nw4r/ef/drawstrategy/ef_drawpointstrategy.cpp"),
             Object(NonMatching, "nw4r/ef/drawstrategy/ef_drawstripestrategy.cpp"),
             Object(NonMatching, "nw4r/ef/drawstrategy/ef_drawsmoothstripestrategy.cpp"),
         ]
