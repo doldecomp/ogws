@@ -33,7 +33,7 @@ static BOOL OnShutdown(BOOL final, u32 event) {
     return TRUE;
 }
 
-// TYPO
+// @typo
 static void MEMIntrruptHandler(s16 intr, OSContext* ctx) {
 #pragma unused(intr)
 

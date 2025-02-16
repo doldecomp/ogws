@@ -12,6 +12,7 @@
 #include <nw4r/lyt/lyt_material.h>
 #include <nw4r/lyt/lyt_pane.h>
 #include <nw4r/lyt/lyt_resourceAccessor.h>
+#include <nw4r/lyt/lyt_texMap.h>
 #include <nw4r/lyt/lyt_types.h>
 
 #endif

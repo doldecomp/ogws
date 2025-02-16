@@ -25,6 +25,10 @@ namespace detail {
 bool EqualsResName(const char* pLhs, const char* pRhs);
 bool EqualsMaterialName(const char* pLhs, const char* pRhs);
 
+inline bool IsCITexelFormat(GXTexFmt format) {
+    return format == GX_TF_C4 || format == GX_TF_C8 || format == GX_TF_C14X2;
+}
+
 /******************************************************************************
  * Positioning
  ******************************************************************************/
