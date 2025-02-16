@@ -55,9 +55,11 @@ private:
 
 /******************************************************************************
  *
- * CreateObject
+ * Utility functions
  *
  ******************************************************************************/
+namespace {
+
 template <typename TObj> TObj* CreateObject() {
     void* pBuffer = Layout::AllocMemory(sizeof(TObj));
     if (pBuffer == NULL) {
@@ -87,6 +89,7 @@ TObj* CreateObject(TParam1 param1, TParam2 param2) {
     return new (pBuffer) TObj(param1, param2);
 }
 
+} // namespace
 } // namespace lyt
 } // namespace nw4r
 

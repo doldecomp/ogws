@@ -5,6 +5,7 @@
 #include <nw4r/lyt/lyt_arcResourceAccessor.h>
 #include <nw4r/lyt/lyt_common.h>
 #include <nw4r/lyt/lyt_drawInfo.h>
+#include <nw4r/lyt/lyt_group.h>
 #include <nw4r/lyt/lyt_init.h>
 #include <nw4r/lyt/lyt_layout.h>
 #include <nw4r/lyt/lyt_material.h>

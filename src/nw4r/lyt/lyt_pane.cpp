@@ -88,8 +88,8 @@ Pane::~Pane() {
 }
 
 void Pane::SetName(const char* pName) {
-    std::strncpy(mName, pName, NW4R_LYT_PANE_NAME_LEN);
-    mName[NW4R_LYT_PANE_NAME_LEN] = '\0';
+    std::strncpy(mName, pName, NW4R_LYT_RES_NAME_LEN);
+    mName[NW4R_LYT_RES_NAME_LEN] = '\0';
 }
 
 void Pane::SetUserData(const char* pUserData) {
