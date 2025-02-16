@@ -4,7 +4,7 @@
 
 #include <nw4r/ut.h>
 
-#define NW4R_LYT_PANE_NAME_LEN 16
+#define NW4R_LYT_RES_NAME_LEN 16
 #define NW4R_LYT_PANE_USERDATA_LEN 8
 
 #define NW4R_LYT_MATERIAL_NAME_LEN 20
@@ -23,10 +23,11 @@ namespace detail {
  *
  ******************************************************************************/
 template <typename T> T* ConvertOffsToPtr(void* pBase, u32 offset) {
-    return static_cast<T*>(reinterpret_cast<u8*>(pBase) + offset);
+    return reinterpret_cast<T*>(reinterpret_cast<u8*>(pBase) + offset);
 }
 template <typename T> const T* ConvertOffsToPtr(const void* pBase, u32 offset) {
-    return static_cast<const T*>(reinterpret_cast<const u8*>(pBase) + offset);
+    return reinterpret_cast<const T*>(reinterpret_cast<const u8*>(pBase) +
+                                      offset);
 }
 
 /******************************************************************************

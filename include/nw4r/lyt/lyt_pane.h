@@ -84,7 +84,7 @@ struct Pane {
     u8 basePosition;                           // at 0x9
     u8 alpha;                                  // at 0xA
     u8 padding;                                // at 0xB
-    char name[NW4R_LYT_PANE_NAME_LEN];         // at 0xC
+    char name[NW4R_LYT_RES_NAME_LEN];          // at 0xC
     char userData[NW4R_LYT_PANE_USERDATA_LEN]; // at 0x1C
     math::VEC3 translate;                      // at 0x24
     math::VEC3 rotate;                         // at 0x30
@@ -299,7 +299,7 @@ protected:
     u8 mBasePosition; // at 0xB6
     u8 mFlag;         // at 0xB7
 
-    char mName[NW4R_LYT_PANE_NAME_LEN + 1];         // at 0xB8
+    char mName[NW4R_LYT_RES_NAME_LEN + 1];          // at 0xB8
     char mUserData[NW4R_LYT_PANE_USERDATA_LEN + 1]; // at 0xC9
 
     bool mbUserAllocated; // at 0xD2
