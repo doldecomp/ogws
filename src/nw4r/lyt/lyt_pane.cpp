@@ -7,6 +7,21 @@
 
 #include <cstring>
 
+/******************************************************************************
+ *
+ * Utility functions
+ *
+ ******************************************************************************/
+namespace {
+
+void ReverseYAxis(nw4r::math::MTX34* pMtx) {
+    pMtx->m[0][1] = -pMtx->m[0][1];
+    pMtx->m[1][1] = -pMtx->m[1][1];
+    pMtx->m[2][1] = -pMtx->m[2][1];
+}
+
+} // namespace
+
 namespace nw4r {
 namespace lyt {
 
@@ -383,9 +398,7 @@ void Pane::LoadMtx(const DrawInfo& rInfo) {
         math::MTX34Mult(&mtx, &rInfo.GetViewMtx(), &mGlbMtx);
 
         if (rInfo.IsYAxisUp()) {
-            mtx._01 = -mtx._01;
-            mtx._11 = -mtx._11;
-            mtx._21 = -mtx._21;
+            ReverseYAxis(&mtx);
         }
 
         pMtx = &mtx;
@@ -393,9 +406,7 @@ void Pane::LoadMtx(const DrawInfo& rInfo) {
         math::MTX34Copy(&mtx, &mGlbMtx);
         pMtx = &mtx;
 
-        mtx._01 = -mtx._01;
-        mtx._11 = -mtx._11;
-        mtx._21 = -mtx._21;
+        ReverseYAxis(&mtx);
     } else {
         pMtx = &mGlbMtx;
     }
