@@ -11,8 +11,7 @@ namespace lyt {
 class DrawInfo {
 public:
     DrawInfo();
-    virtual ~DrawInfo();                 // at 0x8
-    virtual UNKTYPE VF_0xC(UNKTYPE) = 0; // at 0xC
+    virtual ~DrawInfo(); // at 0x8
 
     bool IsYAxisUp() const {
         return mViewRect.bottom - mViewRect.top < 0.0f;
