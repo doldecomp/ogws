@@ -3,6 +3,7 @@
 
 #include <nw4r/lyt/lyt_animation.h>
 #include <nw4r/lyt/lyt_arcResourceAccessor.h>
+#include <nw4r/lyt/lyt_bounding.h>
 #include <nw4r/lyt/lyt_common.h>
 #include <nw4r/lyt/lyt_drawInfo.h>
 #include <nw4r/lyt/lyt_group.h>
