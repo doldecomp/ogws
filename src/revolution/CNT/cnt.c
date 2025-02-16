@@ -53,8 +53,8 @@ s32 contentFastOpenNAND(CNTHandle* handle, s32 entrynum, CNTFileInfo* info) {
     }
 
     info->handle = handle;
-    info->offset = arcInfo.offset;
-    info->length = arcInfo.size;
+    info->offset = arcInfo.startOffset;
+    info->length = arcInfo.length;
     info->position = 0;
 
     return 0;
