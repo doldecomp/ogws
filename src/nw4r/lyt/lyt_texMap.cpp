@@ -1,5 +1,8 @@
 #include <nw4r/lyt.h>
 
+#include <revolution/GX.h>
+#include <revolution/TPL.h>
+
 namespace nw4r {
 namespace lyt {
 

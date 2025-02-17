@@ -1177,7 +1177,7 @@ bool ResMatTexCoordGen::GXGetTexCoordGen2(GXTexCoordID id, GXTexGenType* pFunc,
     if (pPostMtx != NULL) {
         // @note BASEROW is actually only six bits
         *pPostMtx =
-            (regDualTex >> GX_XF_DUALTEX_BASEROW_SHIFT & 0xFF) + GX_DUALMTX0;
+            (regDualTex >> GX_XF_DUALTEX_BASEROW_SHIFT & 0xFF) + GX_PTTEXMTX0;
     }
 
     u32 row;
@@ -1451,7 +1451,7 @@ void ResMatTexCoordGen::GXSetTexCoordGen2(GXTexCoordID id, GXTexGenType func,
         embossLit << GX_XF_TEX_BUMPSRCLIGHT_SHIFT);
 
     detail::ResWriteXFCmd(&pCmd[GX_XF_CMD_SZ * 1], id + GX_XF_REG_DUALTEX0,
-        postMtx - GX_DUALMTX0 << GX_XF_DUALTEX_BASEROW_SHIFT |
+        postMtx - GX_PTTEXMTX0 << GX_XF_DUALTEX_BASEROW_SHIFT |
         normalize             << GX_XF_DUALTEX_NORMALIZE_SHIFT);
     // clang-format on
 }

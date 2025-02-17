@@ -3,6 +3,7 @@
 #include <nw4r/types_nw4r.h>
 
 #include <nw4r/lyt/lyt_common.h>
+#include <nw4r/lyt/lyt_resources.h>
 #include <nw4r/lyt/lyt_types.h>
 
 #include <nw4r/ut.h>

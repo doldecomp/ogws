@@ -810,32 +810,34 @@ typedef enum _GXTexMtx {
     GX_TEXMTX7 = 51,
     GX_TEXMTX8 = 54,
     GX_TEXMTX9 = 57,
-    GX_TEXMTX_IDENT = 60,
-
-    // 3x4 matrices (in dual-tex XF matrix memory)
-    // Enum represents base row of matrix
-    GX_DUALMTX0 = 64,
-    GX_DUALMTX1 = 67,
-    GX_DUALMTX2 = 70,
-    GX_DUALMTX3 = 73,
-    GX_DUALMTX4 = 76,
-    GX_DUALMTX5 = 79,
-    GX_DUALMTX6 = 82,
-    GX_DUALMTX7 = 85,
-    GX_DUALMTX8 = 88,
-    GX_DUALMTX9 = 91,
-    GX_DUALMTX10 = 94,
-    GX_DUALMTX11 = 97,
-    GX_DUALMTX12 = 100,
-    GX_DUALMTX13 = 103,
-    GX_DUALMTX14 = 106,
-    GX_DUALMTX15 = 109,
-    GX_DUALMTX16 = 112,
-    GX_DUALMTX17 = 115,
-    GX_DUALMTX18 = 118,
-    GX_DUALMTX19 = 121,
-    GX_DUALMTX_IDENT = 125,
+    GX_IDENTITY = 60,
 } GXTexMtx;
+
+typedef enum _GXPTTexMtx {
+    // 3x4 matrices (in dual-tex / "post-matrix" XF matrix memory)
+    // Enum represents base row of matrix
+    GX_PTTEXMTX0 = 64,
+    GX_PTTEXMTX1 = 67,
+    GX_PTTEXMTX2 = 70,
+    GX_PTTEXMTX3 = 73,
+    GX_PTTEXMTX4 = 76,
+    GX_PTTEXMTX5 = 79,
+    GX_PTTEXMTX6 = 82,
+    GX_PTTEXMTX7 = 85,
+    GX_PTTEXMTX8 = 88,
+    GX_PTTEXMTX9 = 91,
+    GX_PTTEXMTX10 = 94,
+    GX_PTTEXMTX11 = 97,
+    GX_PTTEXMTX12 = 100,
+    GX_PTTEXMTX13 = 103,
+    GX_PTTEXMTX14 = 106,
+    GX_PTTEXMTX15 = 109,
+    GX_PTTEXMTX16 = 112,
+    GX_PTTEXMTX17 = 115,
+    GX_PTTEXMTX18 = 118,
+    GX_PTTEXMTX19 = 121,
+    GX_PTIDENTITY = 125
+} GXPTTexMtx;
 
 typedef enum _GXTexWrapMode {
     GX_CLAMP,
