@@ -834,12 +834,12 @@ bool DrawStrategyImpl::_SetupTexture(Particle* pParticle,
             } else {
                 math::MTX34Mult(&mtx, rInfo.GetProjMtx(), &mtx);
 
-                GXLoadTexMtxImm(mtx, GX_DUALMTX0 + mTexmapMap[i] * 3,
+                GXLoadTexMtxImm(mtx, GX_PTTEXMTX0 + mTexmapMap[i] * 3,
                                 GX_MTX_3x4);
 
                 GXSetTexCoordGen2(static_cast<GXTexCoordID>(mTexmapMap[i]),
                                   GX_TG_MTX3x4, GX_TG_POS, GX_PNMTX0, FALSE,
-                                  GX_DUALMTX0 + mTexmapMap[i] * 3);
+                                  GX_PTTEXMTX0 + mTexmapMap[i] * 3);
             }
         }
     }

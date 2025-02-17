@@ -181,8 +181,8 @@ void GXLoadTexMtxImm(const Mtx mtx, u32 id, GXMtxType type) {
     u32 num;
 
     // Base row address in XF memory
-    addr = id >= GX_DUALMTX0
-               ? (id - GX_DUALMTX0) * sizeof(f32) + GX_XF_MEM_DUALTEXMTX
+    addr = id >= GX_PTTEXMTX0
+               ? (id - GX_PTTEXMTX0) * sizeof(f32) + GX_XF_MEM_DUALTEXMTX
                : id * 4 + (u64)GX_XF_MEM_POSMTX;
 
     // Number of elements in matrix

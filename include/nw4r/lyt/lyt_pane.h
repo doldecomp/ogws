@@ -4,6 +4,7 @@
 
 #include <nw4r/lyt/lyt_animation.h>
 #include <nw4r/lyt/lyt_common.h>
+#include <nw4r/lyt/lyt_resources.h>
 #include <nw4r/lyt/lyt_types.h>
 
 #include <nw4r/math.h>
@@ -18,10 +19,10 @@ class Material;
 
 /******************************************************************************
  *
- * AnimTarget
+ * AnimTargetPane
  *
  ******************************************************************************/
-enum AnimTarget {
+enum AnimTargetPane {
     ANIMTARGET_PANE_TRANSX,
     ANIMTARGET_PANE_TRANSY,
     ANIMTARGET_PANE_TRANSZ,
@@ -38,9 +39,7 @@ enum AnimTarget {
 
     ANIMTARGET_PANE_MAX,
 
-    ANIMTARGET_VERTEXCOLOR_MAX = 15,
-
-    ANIMTARGET_PANE_COLOR_ALPHA,
+    ANIMTARGET_PANE_COLOR_ALPHA = 16,
     ANIMTARGET_PANE_COLOR_MAX,
 };
 
@@ -303,6 +302,7 @@ protected:
     char mUserData[NW4R_LYT_PANE_USERDATA_LEN + 1]; // at 0xC9
 
     bool mbUserAllocated; // at 0xD2
+    u8 PADDING_0xD3;      // at 0xD3
 
 private:
     void Init();
