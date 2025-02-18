@@ -5,6 +5,8 @@
 #include <nw4r/math.h>
 #include <nw4r/ut.h>
 
+#define NW4R_LYT_LIBRARY_VERSION 8
+
 #define NW4R_LYT_RES_NAME_LEN 16
 #define NW4R_LYT_PANE_USERDATA_LEN 8
 #define NW4R_LYT_MATERIAL_NAME_LEN 20
