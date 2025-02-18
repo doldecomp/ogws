@@ -14,6 +14,9 @@ namespace lyt {
 
 // Forward declarations
 class ResourceAccessor;
+namespace res {
+struct BinaryFileHeader;
+}
 
 /******************************************************************************
  *
@@ -146,7 +149,7 @@ public:
     void Free();
     void Reserve(u8 num);
     void SetSize(u8 num);
-    void Copy(const void* pDst, u8 num);
+    void Copy(const void* pSrc, u8 num);
 
     bool IsEmpty() const {
         return mCap == 0;
@@ -175,6 +178,13 @@ inline bool IsCITexelFormat(GXTexFmt format) {
     return format == GX_TF_C4 || format == GX_TF_C8 || format == GX_TF_C14X2;
 }
 
+inline s32 GetSignatureInt(const char* pSignature) {
+    return *reinterpret_cast<const s32*>(pSignature);
+}
+
+bool TestFileHeader(const res::BinaryFileHeader& rHeader);
+bool TestFileHeader(const res::BinaryFileHeader& rHeader, u32 signature);
+
 bool EqualsResName(const char* pLhs, const char* pRhs);
 bool EqualsMaterialName(const char* pLhs, const char* pRhs);
 
@@ -185,9 +195,9 @@ void MultipleAlpha(ut::Color* pDst, const ut::Color* pSrc, u8 alpha);
 
 void SetVertexFormat(bool modulate, u8 numCoord);
 
-void DrawQuad(const math::VEC2& rBase, const Size& rSize, u8 numCoord,
+void DrawQuad(const math::VEC2& rBase, const Size& rSize, u8 num,
               const TexCoord* pCoords, const ut::Color* pColors);
-void DrawQuad(const math::VEC2& rBase, const Size& rSize, u8 numCoord,
+void DrawQuad(const math::VEC2& rBase, const Size& rSize, u8 num,
               const TexCoord* pCoords, const ut::Color* pColors, u8 alpha);
 
 } // namespace detail
