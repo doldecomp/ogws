@@ -46,6 +46,11 @@ NW4R_UT_LINKLIST_TYPEDEF_DECL(FontRefLink);
  ******************************************************************************/
 class ArcResourceAccessor : public ResourceAccessor {
 public:
+    static const u32 RES_TYPE_ANIMATION = 'anim';
+    static const u32 RES_TYPE_LAYOUT = 'blyt';
+    static const u32 RES_TYPE_TEXTURE = 'timg';
+
+public:
     ArcResourceAccessor();
 
     virtual void* GetResource(u32 type, const char* pName,

@@ -14,7 +14,10 @@
  ******************************************************************************/
 namespace {
 
-void ReverseYAxis(nw4r::math::MTX34* pMtx) {
+using namespace nw4r;
+using namespace nw4r::lyt;
+
+void ReverseYAxis(math::MTX34* pMtx) {
     pMtx->m[0][1] = -pMtx->m[0][1];
     pMtx->m[1][1] = -pMtx->m[1][1];
     pMtx->m[2][1] = -pMtx->m[2][1];

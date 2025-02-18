@@ -54,13 +54,9 @@ public:
     virtual void Animate(u32 idx, Pane* pPane) = 0;         // at 0x18
     virtual void Animate(u32 idx, Material* pMaterial) = 0; // at 0x1C
 
-    u16 GetFrameSize() const {
-        return mpRes->frameSize;
-    }
+    u16 GetFrameSize() const;
 
-    bool IsLoopData() const {
-        return mpRes->loop != 0;
-    }
+    bool IsLoopData() const;
 
     f32 GetFrame() const {
         return mFrame;
@@ -95,18 +91,15 @@ public:
 
     virtual void SetResource(const res::AnimationBlock* pBlock,
                              ResourceAccessor* pAccessor); // at 0xC
-    virtual void SetResource(const res::AnimationBlock* pBlock,
-                             ResourceAccessor* pAccessor,
-                             u16 animNum); // at 0x10
 
-    virtual void Bind(Pane* pPane, bool recursive); // at 0x14
-    virtual void Bind(Material* pMaterial);         // at 0x18
+    virtual void Bind(Pane* pPane, bool recursive); // at 0x10
+    virtual void Bind(Material* pMaterial);         // at 0x14
 
-    virtual void Animate(u32 idx, Pane* pPane);         // at 0x1C
-    virtual void Animate(u32 idx, Material* pMaterial); // at 0x20
+    virtual void Animate(u32 idx, Pane* pPane);         // at 0x18
+    virtual void Animate(u32 idx, Material* pMaterial); // at 0x1C
 
 protected:
-    void* mpFileResAry;          // at 0x14
+    void** mpFileResAry;         // at 0x14
     AnimationLink* mAnimLinkAry; // at 0x18
     u16 mAnimLinkNum;            // at 0x1C
 };
@@ -122,6 +115,139 @@ AnimationLink* FindAnimationLink(AnimationLinkList* pAnimList,
                                  AnimTransform* pAnimTrans);
 
 } // namespace detail
+
+/******************************************************************************
+ *
+ * AnimTargetPane
+ *
+ ******************************************************************************/
+enum AnimTargetPane {
+    ANIMTARGET_PANE_TRANSX,
+    ANIMTARGET_PANE_TRANSY,
+    ANIMTARGET_PANE_TRANSZ,
+
+    ANIMTARGET_PANE_ROTX,
+    ANIMTARGET_PANE_ROTY,
+    ANIMTARGET_PANE_ROTZ,
+
+    ANIMTARGET_PANE_SCALEX,
+    ANIMTARGET_PANE_SCALEY,
+
+    ANIMTARGET_PANE_SIZEX,
+    ANIMTARGET_PANE_SIZEY,
+
+    ANIMTARGET_PANE_MAX,
+
+    ANIMTARGET_PANE_COLOR_ALPHA = 16,
+    ANIMTARGET_PANE_COLOR_MAX,
+};
+
+/******************************************************************************
+ *
+ * AnimTargetVtxColor
+ *
+ ******************************************************************************/
+enum AnimTargetVtxColor {
+    ANIMTARGET_VERTEXCOLOR_TL_RED,
+    ANIMTARGET_VERTEXCOLOR_TL_GREEN,
+    ANIMTARGET_VERTEXCOLOR_TL_BLUE,
+    ANIMTARGET_VERTEXCOLOR_TL_ALPHA,
+
+    ANIMTARGET_VERTEXCOLOR_TR_RED,
+    ANIMTARGET_VERTEXCOLOR_TR_GREEN,
+    ANIMTARGET_VERTEXCOLOR_TR_BLUE,
+    ANIMTARGET_VERTEXCOLOR_TR_ALPHA,
+
+    ANIMTARGET_VERTEXCOLOR_BL_RED,
+    ANIMTARGET_VERTEXCOLOR_BL_GREEN,
+    ANIMTARGET_VERTEXCOLOR_BL_BLUE,
+    ANIMTARGET_VERTEXCOLOR_BL_ALPHA,
+
+    ANIMTARGET_VERTEXCOLOR_BR_RED,
+    ANIMTARGET_VERTEXCOLOR_BR_GREEN,
+    ANIMTARGET_VERTEXCOLOR_BR_BLUE,
+    ANIMTARGET_VERTEXCOLOR_BR_ALPHA,
+
+    ANIMTARGET_VERTEXCOLOR_MAX
+};
+
+/******************************************************************************
+ *
+ * AnimTargetMatColor
+ *
+ ******************************************************************************/
+enum AnimTargetMatColor {
+    ANIMTARGET_MATCOLOR_MATR,
+    ANIMTARGET_MATCOLOR_MATG,
+    ANIMTARGET_MATCOLOR_MATB,
+    ANIMTARGET_MATCOLOR_MATA,
+
+    ANIMTARGET_MATCOLOR_TEV0R,
+    ANIMTARGET_MATCOLOR_TEV0G,
+    ANIMTARGET_MATCOLOR_TEV0B,
+    ANIMTARGET_MATCOLOR_TEV0A,
+
+    ANIMTARGET_MATCOLOR_TEV1R,
+    ANIMTARGET_MATCOLOR_TEV1G,
+    ANIMTARGET_MATCOLOR_TEV1B,
+    ANIMTARGET_MATCOLOR_TEV1A,
+
+    ANIMTARGET_MATCOLOR_TEV2R,
+    ANIMTARGET_MATCOLOR_TEV2G,
+    ANIMTARGET_MATCOLOR_TEV2B,
+    ANIMTARGET_MATCOLOR_TEV2A,
+
+    ANIMTARGET_MATCOLOR_TEVK0R,
+    ANIMTARGET_MATCOLOR_TEVK0G,
+    ANIMTARGET_MATCOLOR_TEVK0B,
+    ANIMTARGET_MATCOLOR_TEVK0A,
+
+    ANIMTARGET_MATCOLOR_TEVK1R,
+    ANIMTARGET_MATCOLOR_TEVK1G,
+    ANIMTARGET_MATCOLOR_TEVK1B,
+    ANIMTARGET_MATCOLOR_TEVK1A,
+
+    ANIMTARGET_MATCOLOR_TEVK2R,
+    ANIMTARGET_MATCOLOR_TEVK2G,
+    ANIMTARGET_MATCOLOR_TEVK2B,
+    ANIMTARGET_MATCOLOR_TEVK2A,
+
+    ANIMTARGET_MATCOLOR_TEVK3R,
+    ANIMTARGET_MATCOLOR_TEVK3G,
+    ANIMTARGET_MATCOLOR_TEVK3B,
+    ANIMTARGET_MATCOLOR_TEVK3A,
+
+    ANIMTARGET_MATCOLOR_MAX
+};
+
+/******************************************************************************
+ *
+ * AnimTargetTexSRT
+ *
+ ******************************************************************************/
+enum AnimTargetTexSRT {
+    ANIMTARGET_TEXSRT_TRANSX,
+    ANIMTARGET_TEXSRT_TRANSY,
+
+    ANIMTARGET_TEXSRT_ROT,
+
+    ANIMTARGET_TEXSRT_SCALEX,
+    ANIMTARGET_TEXSRT_SCALEY,
+
+    ANIMTARGET_TEXSRT_MAX
+};
+
+/******************************************************************************
+ *
+ * AnimTargetTexPat
+ *
+ ******************************************************************************/
+enum AnimTargetTexPat {
+    ANIMTARGET_TEXPATTURN_IMAGE,
+
+    ANIMTARGET_TEXPATTURN_MAX
+};
+
 } // namespace lyt
 } // namespace nw4r
 

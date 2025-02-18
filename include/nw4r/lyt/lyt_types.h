@@ -80,7 +80,7 @@ struct Size {
  ******************************************************************************/
 class AnimationLink {
 public:
-    AnimationLink() {
+    AnimationLink() : mbDisable(false) {
         Reset();
     }
 
