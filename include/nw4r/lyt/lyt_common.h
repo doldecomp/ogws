@@ -59,35 +59,6 @@ enum TevKColor {
     TEVKCOLOR_MAX
 };
 
-/******************************************************************************
- *
- * AnimTargetColor
- *
- ******************************************************************************/
-enum AnimTargetColor {
-    ANIMTARGET_VERTEXCOLOR_TL_RED,
-    ANIMTARGET_VERTEXCOLOR_TL_GREEN,
-    ANIMTARGET_VERTEXCOLOR_TL_BLUE,
-    ANIMTARGET_VERTEXCOLOR_TL_ALPHA,
-
-    ANIMTARGET_VERTEXCOLOR_TR_RED,
-    ANIMTARGET_VERTEXCOLOR_TR_GREEN,
-    ANIMTARGET_VERTEXCOLOR_TR_BLUE,
-    ANIMTARGET_VERTEXCOLOR_TR_ALPHA,
-
-    ANIMTARGET_VERTEXCOLOR_BL_RED,
-    ANIMTARGET_VERTEXCOLOR_BL_GREEN,
-    ANIMTARGET_VERTEXCOLOR_BL_BLUE,
-    ANIMTARGET_VERTEXCOLOR_BL_ALPHA,
-
-    ANIMTARGET_VERTEXCOLOR_BR_RED,
-    ANIMTARGET_VERTEXCOLOR_BR_GREEN,
-    ANIMTARGET_VERTEXCOLOR_BR_BLUE,
-    ANIMTARGET_VERTEXCOLOR_BR_ALPHA,
-
-    ANIMTARGET_VERTEXCOLOR_MAX
-};
-
 namespace detail {
 
 /******************************************************************************
@@ -180,6 +151,12 @@ inline bool IsCITexelFormat(GXTexFmt format) {
 
 inline s32 GetSignatureInt(const char* pSignature) {
     return *reinterpret_cast<const s32*>(pSignature);
+}
+
+inline const char* GetStrTableStr(const void* pTable, int index) {
+    const u32* pOffsetTbl = static_cast<const u32*>(pTable);
+    const char* pStringPool = static_cast<const char*>(pTable);
+    return pStringPool + pOffsetTbl[index];
 }
 
 bool TestFileHeader(const res::BinaryFileHeader& rHeader);

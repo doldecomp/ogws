@@ -32,6 +32,8 @@ public:
 
     TexMap(TPLPalette* pPalette, u32 id) {
         Set(pPalette, id);
+        SetBiasClampEnable(false);
+        SetAnisotropy(GX_ANISO_1);
     }
 
     void Get(GXTexObj* pTexObj) const;

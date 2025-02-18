@@ -18,23 +18,6 @@ namespace lyt {
 // Forward declarations
 class AnimTransform;
 
-/******************************************************************************
- *
- * AnimTargetMat
- *
- ******************************************************************************/
-enum AnimTargetMat {
-    ANIMTARGET_MATERIAL_TRANSX,
-    ANIMTARGET_MATERIAL_TRANSY,
-
-    ANIMTARGET_MATERIAL_ROT,
-
-    ANIMTARGET_MATERIAL_SCALEX,
-    ANIMTARGET_MATERIAL_SCALEY,
-
-    ANIMTARGET_MATERIAL_MAX
-};
-
 namespace detail {
 
 /******************************************************************************
@@ -102,6 +85,8 @@ public:
     virtual void SetAnimationEnable(AnimTransform* pAnimTrans,
                                     bool enable); // at 0x24
 
+    void AddAnimationLink(AnimationLink* pAnimLink);
+
     GXColorS10 GetTevColor(u32 idx) {
         return mTevCols[idx];
     }
@@ -143,6 +128,8 @@ public:
     void SetTevStageNum(u8 num);
 
     void SetIndStageNum(u8 num);
+
+    void SetColorElement(u32 idx, s16 value);
 
     bool IsTevSwapCap() const {
         return mGXMemCap.tevSwap;

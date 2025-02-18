@@ -19,32 +19,6 @@ class Material;
 
 /******************************************************************************
  *
- * AnimTargetPane
- *
- ******************************************************************************/
-enum AnimTargetPane {
-    ANIMTARGET_PANE_TRANSX,
-    ANIMTARGET_PANE_TRANSY,
-    ANIMTARGET_PANE_TRANSZ,
-
-    ANIMTARGET_PANE_ROTX,
-    ANIMTARGET_PANE_ROTY,
-    ANIMTARGET_PANE_ROTZ,
-
-    ANIMTARGET_PANE_SCALEX,
-    ANIMTARGET_PANE_SCALEY,
-
-    ANIMTARGET_PANE_SIZEX,
-    ANIMTARGET_PANE_SIZEY,
-
-    ANIMTARGET_PANE_MAX,
-
-    ANIMTARGET_PANE_COLOR_ALPHA = 16,
-    ANIMTARGET_PANE_COLOR_MAX,
-};
-
-/******************************************************************************
- *
  * AnimOption
  *
  ******************************************************************************/
