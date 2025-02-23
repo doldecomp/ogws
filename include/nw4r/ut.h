@@ -18,8 +18,12 @@
 #include <nw4r/ut/ut_ResFontBase.h>
 #include <nw4r/ut/ut_RomFont.h>
 #include <nw4r/ut/ut_RuntimeTypeInfo.h>
+#include <nw4r/ut/ut_TagProcessor.h>
 #include <nw4r/ut/ut_TagProcessorBase.h>
+#include <nw4r/ut/ut_TextWriter.h>
 #include <nw4r/ut/ut_TextWriterBase.h>
+#include <nw4r/ut/ut_WideTagProcessor.h>
+#include <nw4r/ut/ut_WideTextWriter.h>
 #include <nw4r/ut/ut_algorithm.h>
 #include <nw4r/ut/ut_binaryFileFormat.h>
 #include <nw4r/ut/ut_list.h>

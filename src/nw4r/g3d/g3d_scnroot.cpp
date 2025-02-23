@@ -398,7 +398,7 @@ IScnObjGather::CullingStatus ScnObjGather::Add(ScnObj* pObj, bool opa,
 
     if (gpCullingFrustum != NULL) {
         u32 value;
-        pObj->GetScnObjOption(ScnObj::OPTION_ENABLE_CULLING, &value);
+        pObj->GetScnObjOption(ScnObj::OPTID_ENABLE_CULLING, &value);
 
         if (value) {
             math::AABB aabb;

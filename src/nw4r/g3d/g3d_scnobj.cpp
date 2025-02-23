@@ -84,47 +84,47 @@ ScnObj::~ScnObj() {
 
 bool ScnObj::SetScnObjOption(u32 option, u32 value) {
     switch (option) {
-    case OPTION_DISABLE_GATHER_SCNOBJ: {
+    case OPTID_DISABLE_GATHER_SCNOBJ: {
         SetScnObjFlag(SCNOBJFLAG_DISABLE_GATHER_SCNOBJ, value);
         break;
     }
 
-    case OPTION_DISABLE_CALC_WORLD: {
+    case OPTID_DISABLE_CALC_WORLD: {
         SetScnObjFlag(SCNOBJFLAG_DISABLE_CALC_WORLD, value);
         break;
     }
 
-    case OPTION_DISABLE_CALC_MAT: {
+    case OPTID_DISABLE_CALC_MAT: {
         SetScnObjFlag(SCNOBJFLAG_DISABLE_CALC_MAT, value);
         break;
     }
 
-    case OPTION_DISABLE_CALC_VTX: {
+    case OPTID_DISABLE_CALC_VTX: {
         SetScnObjFlag(SCNOBJFLAG_DISABLE_CALC_VTX, value);
         break;
     }
 
-    case OPTION_DISABLE_CALC_VIEW: {
+    case OPTID_DISABLE_CALC_VIEW: {
         SetScnObjFlag(SCNOBJFLAG_DISABLE_CALC_VIEW, value);
         break;
     }
 
-    case OPTION_DISABLE_DRAW_OPA: {
+    case OPTID_DISABLE_DRAW_OPA: {
         SetScnObjFlag(SCNOBJFLAG_DISABLE_DRAW_OPA, value);
         break;
     }
 
-    case OPTION_DISABLE_DRAW_XLU: {
+    case OPTID_DISABLE_DRAW_XLU: {
         SetScnObjFlag(SCNOBJFLAG_DISABLE_DRAW_XLU, value);
         break;
     }
 
-    case OPTION_DISABLE_UPDATEFRAME: {
+    case OPTID_DISABLE_UPDATEFRAME: {
         SetScnObjFlag(SCNOBJFLAG_DISABLE_UPDATEFRAME, value);
         break;
     }
 
-    case OPTION_ENABLE_CULLING: {
+    case OPTID_ENABLE_CULLING: {
         SetScnObjFlag(SCNOBJFLAG_ENABLE_CULLING, value);
         break;
     }
@@ -143,47 +143,47 @@ bool ScnObj::GetScnObjOption(u32 option, u32* pValue) const {
     }
 
     switch (option) {
-    case OPTION_DISABLE_GATHER_SCNOBJ: {
+    case OPTID_DISABLE_GATHER_SCNOBJ: {
         *pValue = TestScnObjFlag(SCNOBJFLAG_DISABLE_GATHER_SCNOBJ);
         break;
     }
 
-    case OPTION_DISABLE_CALC_WORLD: {
+    case OPTID_DISABLE_CALC_WORLD: {
         *pValue = TestScnObjFlag(SCNOBJFLAG_DISABLE_CALC_WORLD);
         break;
     }
 
-    case OPTION_DISABLE_CALC_MAT: {
+    case OPTID_DISABLE_CALC_MAT: {
         *pValue = TestScnObjFlag(SCNOBJFLAG_DISABLE_CALC_MAT);
         break;
     }
 
-    case OPTION_DISABLE_CALC_VTX: {
+    case OPTID_DISABLE_CALC_VTX: {
         *pValue = TestScnObjFlag(SCNOBJFLAG_DISABLE_CALC_VTX);
         break;
     }
 
-    case OPTION_DISABLE_CALC_VIEW: {
+    case OPTID_DISABLE_CALC_VIEW: {
         *pValue = TestScnObjFlag(SCNOBJFLAG_DISABLE_CALC_VIEW);
         break;
     }
 
-    case OPTION_DISABLE_DRAW_OPA: {
+    case OPTID_DISABLE_DRAW_OPA: {
         *pValue = TestScnObjFlag(SCNOBJFLAG_DISABLE_DRAW_OPA);
         break;
     }
 
-    case OPTION_DISABLE_DRAW_XLU: {
+    case OPTID_DISABLE_DRAW_XLU: {
         *pValue = TestScnObjFlag(SCNOBJFLAG_DISABLE_DRAW_XLU);
         break;
     }
 
-    case OPTION_DISABLE_UPDATEFRAME: {
+    case OPTID_DISABLE_UPDATEFRAME: {
         *pValue = TestScnObjFlag(SCNOBJFLAG_DISABLE_UPDATEFRAME);
         break;
     }
 
-    case OPTION_ENABLE_CULLING: {
+    case OPTID_ENABLE_CULLING: {
         *pValue = TestScnObjFlag(SCNOBJFLAG_ENABLE_CULLING);
         break;
     }
@@ -278,13 +278,13 @@ bool ScnObj::SetBoundingVolume(ScnObjBoundingVolumeType type,
     if (pAABB != NULL) {
         if (type < BOUNDINGVOLUME_MAX) {
             mAABB[type] = *pAABB;
-            return SetScnObjOption(OPTION_ENABLE_CULLING, TRUE);
+            return SetScnObjOption(OPTID_ENABLE_CULLING, TRUE);
         }
 
         return false;
     }
 
-    return SetScnObjOption(OPTION_ENABLE_CULLING, FALSE);
+    return SetScnObjOption(OPTID_ENABLE_CULLING, FALSE);
 }
 
 bool ScnObj::GetBoundingVolume(ScnObjBoundingVolumeType type,
@@ -317,7 +317,7 @@ ScnObj::ForEachResult ScnLeaf::ForEach(ForEachFunc pFunc, void* pInfo,
 
 bool ScnLeaf::SetScnObjOption(u32 option, u32 value) {
     switch (option) {
-    case OPTION_DISABLE_DRAW_ALL: {
+    case OPTID_DISABLE_DRAW_ALL: {
         SetScnObjFlag(SCNOBJFLAG_DISABLE_DRAW, value);
         break;
     }
@@ -336,7 +336,7 @@ bool ScnLeaf::GetScnObjOption(u32 option, u32* pValue) const {
     }
 
     switch (option) {
-    case OPTION_DISABLE_DRAW_ALL: {
+    case OPTID_DISABLE_DRAW_ALL: {
         *pValue = TestScnObjFlag(SCNOBJFLAG_DISABLE_DRAW);
         break;
     }

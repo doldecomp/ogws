@@ -741,7 +741,7 @@ void RFLiSetFaceParts(const RFLiCharInfo* info, RFLiFaceParts* face,
 
 void RFLiCapture(u8* buffer, const RFLiCharInfo* info, RFLiFaceParts* face,
                  RFLi_MASKRSL resolution) {
-    f32 vp[6];
+    f32 vp[GX_VIEWPORT_SZ];
 
     GXInvalidateTexAll();
     GXGetViewportv(vp);

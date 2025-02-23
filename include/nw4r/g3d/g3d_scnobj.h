@@ -55,7 +55,7 @@ public:
         BOUNDINGVOLUME_MAX
     };
 
-#define OPT(KEY, VALUE) OPTION_##KEY = (0x00000 | (VALUE))
+#define OPT(KEY, VALUE) OPTID_##KEY = (0x00000 | (VALUE))
     enum ScnObjOption {
         OPT(NONE, 0),
         OPT(DISABLE_GATHER_SCNOBJ, 1),
@@ -319,7 +319,7 @@ public:
         NONUNIFORM_SCALED,
     };
 
-#define OPT(KEY, VALUE) OPTION_##KEY = (0x10000 | (VALUE))
+#define OPT(KEY, VALUE) OPTID_##KEY = (0x10000 | (VALUE))
     enum ScnLeafOption {
         OPT(NONE, 0),
         OPT(DISABLE_DRAW_ALL, 1),

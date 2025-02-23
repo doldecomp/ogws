@@ -41,7 +41,7 @@ public:
         BYTE_CODE_DRAW_XLU,
     };
 
-#define OPT(KEY, VALUE) OPTION_##KEY = (0x20000 | (VALUE))
+#define OPT(KEY, VALUE) OPTID_##KEY = (0x20000 | (VALUE))
     enum ScnMdlSimpleOption {
         OPT(NONE, 0),
         OPT(IGNORE_ANMCHR_TRANS, 1),
