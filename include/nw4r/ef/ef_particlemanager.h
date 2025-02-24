@@ -13,9 +13,11 @@ namespace nw4r {
 namespace ef {
 
 // Forward declarations
-class Emitter;
-struct EmitterResource;
+class DrawInfo;
 class DrawStrategy;
+class Emitter;
+struct EmitterInheritSetting;
+struct EmitterResource;
 class Particle;
 
 class ParticleManager : public ReferencedObject {

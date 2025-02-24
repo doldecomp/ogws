@@ -7,6 +7,8 @@
 namespace nw4r {
 namespace ut {
 
+struct BinaryFileHeader;
+
 class ResFont : public detail::ResFontBase {
 public:
     ResFont();

@@ -12,6 +12,13 @@
 
 namespace nw4r {
 namespace g3d {
+
+// Forward declarations
+struct AmbLightObj;
+class LightObj;
+class LightSetting;
+class ResShp;
+
 namespace detail {
 
 /******************************************************************************

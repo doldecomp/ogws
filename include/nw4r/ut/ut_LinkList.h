@@ -10,7 +10,7 @@ namespace ut {
 // Forward declarations
 namespace detail {
 class LinkListImpl;
-}
+} // namespace detail
 
 /******************************************************************************
  *

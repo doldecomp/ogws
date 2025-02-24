@@ -15,6 +15,10 @@
 namespace nw4r {
 namespace g3d {
 
+// Forward declarations
+class ResFile;
+class ResMdl;
+
 /******************************************************************************
  *
  * ResGenMode

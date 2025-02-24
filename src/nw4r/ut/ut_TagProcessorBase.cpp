@@ -8,8 +8,8 @@ template <typename T> TagProcessorBase<T>::TagProcessorBase() {}
 template <typename T> TagProcessorBase<T>::~TagProcessorBase() {}
 
 template <typename T>
-TagProcessorBase<T>::Operation TagProcessorBase<T>::Process(u16 ch,
-                                                            ContextType* pCtx) {
+typename TagProcessorBase<T>::Operation
+TagProcessorBase<T>::Process(u16 ch, ContextType* pCtx) {
 
     switch (ch) {
     case '\n': {
@@ -27,7 +27,7 @@ TagProcessorBase<T>::Operation TagProcessorBase<T>::Process(u16 ch,
 }
 
 template <typename T>
-TagProcessorBase<T>::Operation
+typename TagProcessorBase<T>::Operation
 TagProcessorBase<T>::CalcRect(Rect* pRect, u16 ch, ContextType* pCtx) {
 
     switch (ch) {

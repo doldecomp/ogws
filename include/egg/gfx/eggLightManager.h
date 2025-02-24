@@ -2,7 +2,7 @@
 #define EGG_GFX_LIGHT_MANAGER_H
 #include "types_egg.h"
 #include "eggIBinary.h"
-#include "types_nw4r.h"
+#include <nw4r/g3d.h>
 
 namespace EGG
 {

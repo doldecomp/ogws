@@ -19,6 +19,9 @@
 namespace nw4r {
 namespace g3d {
 
+// Forward declarations
+class ResAnmTexPat;
+
 struct ResTopLevelDictData {
     ut::BinaryBlockHeader header; // at 0x0
     ResDicData topLevel;          // at 0x8

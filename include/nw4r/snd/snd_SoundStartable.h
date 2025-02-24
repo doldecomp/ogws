@@ -11,7 +11,7 @@ namespace snd {
 class SoundHandle;
 namespace detail {
 class ExternalSoundPlayer;
-}
+} // namespace detail
 
 class SoundStartable {
 public:

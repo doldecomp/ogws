@@ -11,6 +11,10 @@
 namespace nw4r {
 namespace ut {
 
+// Forward declarations
+class Font;
+struct Glyph;
+
 class CharWriter {
 public:
     enum GradationMode {

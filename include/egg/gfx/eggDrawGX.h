@@ -1,9 +1,8 @@
 #ifndef EGG_GFX_DRAWGX_H
 #define EGG_GFX_DRAWGX_H
 #include "types_egg.h"
-#include "types_nw4r.h"
 #include <revolution/GX.h>
-
+#include <nw4r/math.h>
 
 namespace EGG
 {

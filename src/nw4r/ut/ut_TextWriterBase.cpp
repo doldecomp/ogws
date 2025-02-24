@@ -119,7 +119,7 @@ bool TextWriterBase<T>::CalcLineRectImpl(Rect* pRect, const T** ppStr,
                 }
             }
 
-            TagProcessor::Operation oper =
+            TagProcessorBase<T>::Operation oper =
                 mTagProcessor->CalcRect(&r, ch, &context);
 
             reader.Set(context.str);
@@ -238,7 +238,7 @@ template <typename T> f32 TextWriterBase<T>::PrintImpl(const T* pStr, int len) {
     CharStrmReader reader = GetFont()->GetCharStrmReader();
     reader.Set(pStr);
 
-    TagProcessor::Operation oper;
+    TagProcessorBase<T>::Operation oper;
     u16 ch = reader.Next();
 
     while (static_cast<const T*>(reader.GetCurrentPos()) - pStr <= len) {

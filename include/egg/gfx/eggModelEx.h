@@ -1,11 +1,7 @@
 #ifndef EGG_GFX_MODEL_EX_H
 #define EGG_GFX_MODEL_EX_H
 #include "eggAssert.h"
-#include "g3d_resmat.h"
-#include "g3d_resmdl.h"
-#include "g3d_resshp.h"
-#include "g3d_scnobj.h"
-#include "g3d_scnproc.h"
+#include <nw4r/g3d.h>
 #include "math_types.h"
 #include "types_egg.h"
 namespace EGG {

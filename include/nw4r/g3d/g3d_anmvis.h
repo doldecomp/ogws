@@ -8,6 +8,11 @@
 namespace nw4r {
 namespace g3d {
 
+// Forward declarations
+class AnmObjVisRes;
+class AnmObjVis;
+class ResMdl;
+
 void ApplyVisAnmResult(ResMdl mdl, AnmObjVis* pObj);
 void ApplyVisAnmResult(u8* pByteVec, ResMdl mdl, AnmObjVis* pObj);
 
@@ -16,9 +21,6 @@ void ApplyVisAnmResult(u8* pByteVec, ResMdl mdl, AnmObjVis* pObj);
  * AnmObjVis
  *
  ******************************************************************************/
-// Forward declarations
-class AnmObjVisRes;
-
 class AnmObjVis : public AnmObj {
 public:
     AnmObjVis(MEMAllocator* pAllocator, u16* pBindingBuf, int numBinding);

@@ -15,7 +15,7 @@ namespace g3d {
 // Forward declarations
 namespace G3DState {
 class IndMtxOp;
-}
+} // namespace G3DState
 
 namespace detail {
 
