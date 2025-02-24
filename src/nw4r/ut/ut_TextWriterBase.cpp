@@ -98,7 +98,8 @@ bool TextWriterBase<T>::CalcLineRectImpl(Rect* pRect, const T** ppStr,
         if (ch < ' ') {
             Rect r(x, 0.0f, 0.0f, 0.0f);
             context.str = static_cast<const T*>(reader.GetCurrentPos());
-            context.flags = charSpace ? 0 : PRINTFLAGS_CHARSPACE;
+            context.flags = charSpace ? 0 : PrintContext<T>::FLAGS_CHARSPACE;
+
             SetCursorX(x);
 
             if (useLimit && ch != '\n' && pPrevStream != NULL) {
@@ -118,7 +119,9 @@ bool TextWriterBase<T>::CalcLineRectImpl(Rect* pRect, const T** ppStr,
                 }
             }
 
-            Operation oper = mTagProcessor->CalcRect(&r, ch, &context);
+            TagProcessor::Operation oper =
+                mTagProcessor->CalcRect(&r, ch, &context);
+
             reader.Set(context.str);
 
             pRect->left = Min(pRect->left, r.left);
@@ -128,16 +131,16 @@ bool TextWriterBase<T>::CalcLineRectImpl(Rect* pRect, const T** ppStr,
 
             x = GetCursorX();
 
-            if (oper == OPERATION_END_DRAW) {
+            if (oper == TagProcessor::OPERATION_END_DRAW) {
                 *ppStr += len;
                 return false;
             }
 
-            if (oper == OPERATION_NO_CHAR_SPACE) {
+            if (oper == TagProcessor::OPERATION_NO_CHAR_SPACE) {
                 charSpace = false;
-            } else if (oper == OPERATION_CHAR_SPACE) {
+            } else if (oper == TagProcessor::OPERATION_CHAR_SPACE) {
                 charSpace = true;
-            } else if (oper == OPERATION_NEXT_LINE) {
+            } else if (oper == TagProcessor::OPERATION_NEXT_LINE) {
                 break;
             }
         } else {
@@ -229,19 +232,19 @@ template <typename T> f32 TextWriterBase<T>::PrintImpl(const T* pStr, int len) {
         this,    // writer
         pStr,    // str
         cursorX, // x
-        cursorY  /// y
+        cursorY  // y
     };
 
     CharStrmReader reader = GetFont()->GetCharStrmReader();
     reader.Set(pStr);
 
-    Operation oper;
+    TagProcessor::Operation oper;
     u16 ch = reader.Next();
 
     while (static_cast<const T*>(reader.GetCurrentPos()) - pStr <= len) {
         if (ch < ' ') {
             context.str = static_cast<const T*>(reader.GetCurrentPos());
-            context.flags = charSpace ? 0 : PRINTFLAGS_CHARSPACE;
+            context.flags = charSpace ? 0 : PrintContext<T>::FLAGS_CHARSPACE;
 
             if (useLimit && ch != '\n' && pPrevStream != pPrevNewLine) {
                 PrintContext<T> context2 = context;
@@ -260,7 +263,7 @@ template <typename T> f32 TextWriterBase<T>::PrintImpl(const T* pStr, int len) {
             }
 
             oper = mTagProcessor->Process(ch, &context);
-            if (oper == OPERATION_NEXT_LINE) {
+            if (oper == TagProcessor::OPERATION_NEXT_LINE) {
                 if (IsDrawFlagSet(DRAWFLAG_MASK_TEXT,
                                   DRAWFLAG_ALIGN_TEXT_CENTER)) {
 
@@ -289,11 +292,11 @@ template <typename T> f32 TextWriterBase<T>::PrintImpl(const T* pStr, int len) {
                 }
 
                 charSpace = false;
-            } else if (oper == OPERATION_NO_CHAR_SPACE) {
+            } else if (oper == TagProcessor::OPERATION_NO_CHAR_SPACE) {
                 charSpace = false;
-            } else if (oper == OPERATION_CHAR_SPACE) {
+            } else if (oper == TagProcessor::OPERATION_CHAR_SPACE) {
                 charSpace = true;
-            } else if (oper == OPERATION_END_DRAW) {
+            } else if (oper == TagProcessor::OPERATION_END_DRAW) {
                 break;
             }
 
