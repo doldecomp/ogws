@@ -24,12 +24,12 @@ Picture::Picture(const res::Picture* pRes, const ResBlockSet& rBlockSet)
     void* pMaterialBuf = Layout::AllocMemory(sizeof(Material));
 
     if (pMaterialBuf != NULL) {
-        const u32* const pMaterialOfsTbl = detail::ConvertOffsToPtr<u32>(
-            rBlockSet.pMaterialList, sizeof(MaterialList));
+        const u32* const pMatOffsetTbl = detail::ConvertOffsToPtr<u32>(
+            rBlockSet.pMaterialList, sizeof(res::MaterialList));
 
         const res::Material* const pResMaterial =
             detail::ConvertOffsToPtr<res::Material>(
-                rBlockSet.pMaterialList, pMaterialOfsTbl[pRes->materialIdx]);
+                rBlockSet.pMaterialList, pMatOffsetTbl[pRes->materialIdx]);
 
         Material* pMaterial =
             new (pMaterialBuf) Material(pResMaterial, rBlockSet);

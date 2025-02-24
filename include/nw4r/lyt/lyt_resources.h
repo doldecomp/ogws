@@ -30,11 +30,20 @@ struct DataBlockHeader {
     u32 size;     // at 0x4
 };
 
-} // namespace res
+/******************************************************************************
+ *
+ * Font
+ *
+ ******************************************************************************/
+struct Font {
+    u32 nameStrOffset;         // at 0x0
+    u8 type;                   // at 0x4
+    u8 PADDING_0x5[0x8 - 0x5]; // at 0x5
+};
 
 /******************************************************************************
  *
- * ResBlockSet
+ * TextureList
  *
  ******************************************************************************/
 struct TextureList {
@@ -42,22 +51,41 @@ struct TextureList {
     u16 texNum;                       // at 0x8
     u8 PADDING_0xA[0xC - 0xA];        // at 0xA
 };
+
+/******************************************************************************
+ *
+ * FontList
+ *
+ ******************************************************************************/
 struct FontList {
     res::DataBlockHeader blockHeader; // at 0x0
     u16 fontNum;                      // at 0x8
     u8 PADDING_0xA[0xC - 0xA];        // at 0xA
 };
+
+/******************************************************************************
+ *
+ * MaterialList
+ *
+ ******************************************************************************/
 struct MaterialList {
     res::DataBlockHeader blockHeader; // at 0x0
     u16 materialNum;                  // at 0x8
     u8 PADDING_0xA[0xC - 0xA];        // at 0xA
 };
 
+} // namespace res
+
+/******************************************************************************
+ *
+ * ResBlockSet
+ *
+ ******************************************************************************/
 struct ResBlockSet {
-    const TextureList* pTextureList;   // at 0x0
-    const FontList* pFontList;         // at 0x4
-    const MaterialList* pMaterialList; // at 0x8
-    ResourceAccessor* pResAccessor;    // at 0xC
+    const res::TextureList* pTextureList;   // at 0x0
+    const res::FontList* pFontList;         // at 0x4
+    const res::MaterialList* pMaterialList; // at 0x8
+    ResourceAccessor* pResAccessor;         // at 0xC
 };
 
 } // namespace lyt
