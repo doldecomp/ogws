@@ -105,7 +105,7 @@ void ScnMdlSimple::ScnMdlSmpl_CalcPosture(u32 param,
     u32 rootAttr = detail::WorldMtxAttr::GetRootMtxAttr();
 
     u32 ignoreTrans;
-    GetScnObjOption(OPTION_IGNORE_ANMCHR_TRANS, &ignoreTrans);
+    GetScnObjOption(OPTID_IGNORE_ANMCHR_TRANS, &ignoreTrans);
 
     if (property == UNIFORM_SCALED) {
         rootAttr = detail::WorldMtxAttr::AnmNotScaleOne(rootAttr);
@@ -295,7 +295,7 @@ void ScnMdlSimple::G3dProc(u32 task, u32 param, void* pInfo) {
 
 bool ScnMdlSimple::SetScnObjOption(u32 option, u32 value) {
     switch (option) {
-    case OPTION_IGNORE_ANMCHR_TRANS: {
+    case OPTID_IGNORE_ANMCHR_TRANS: {
         SetScnObjFlag(SCNOBJFLAG_IGNORE_ANMCHR_TRANS, value);
         break;
     }
@@ -314,7 +314,7 @@ bool ScnMdlSimple::GetScnObjOption(u32 option, u32* pValue) const {
     }
 
     switch (option) {
-    case OPTION_IGNORE_ANMCHR_TRANS: {
+    case OPTID_IGNORE_ANMCHR_TRANS: {
         *pValue = TestScnObjFlag(SCNOBJFLAG_IGNORE_ANMCHR_TRANS);
         break;
     }

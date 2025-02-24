@@ -58,12 +58,36 @@ public:
         u8* mpVis;        // at 0x8
     };
 
-#define OPT(KEY, VALUE) OPTION_##KEY = (0x30000 | (VALUE))
+#define OPT(KEY, VALUE) OPTID_##KEY = (0x30000 | (VALUE))
     enum ScnMdlOption {
         OPT(NONE, 0),
         OPT(VISBUFFER_REFRESH_NEEDED, 1),
     };
 #undef OPT
+
+    enum BufferOption {
+        BUFFER_RESTEXOBJ = (1 << 0),
+        BUFFER_RESTLUTOBJ = (1 << 1),
+        BUFFER_RESTEXSRT = (1 << 2),
+        BUFFER_RESCHAN = (1 << 3),
+        BUFFER_RESGENMODE = (1 << 4),
+        BUFFER_RESMATMISC = (1 << 5),
+        BUFFER_RESANMVIS = (1 << 6),
+        BUFFER_RESMATPIX = (1 << 7),
+        BUFFER_RESTEVCOLOR = (1 << 8),
+        BUFFER_RESMATINDMTXSCALE = (1 << 9),
+        BUFFER_RESMATTEXCOORDGEN = (1 << 10),
+        BUFFER_RESTEV = (1 << 11),
+        BUFFER_RESVTXPOS = (1 << 12),
+        BUFFER_RESVTXNRM = (1 << 13),
+        BUFFER_RESVTXCLR = (1 << 14),
+
+        ANM_VIS = BUFFER_RESANMVIS,
+        ANM_TEXPAT = BUFFER_RESTEXOBJ | BUFFER_RESTLUTOBJ,
+        ANM_TEXSRT = BUFFER_RESTEXSRT | BUFFER_RESMATINDMTXSCALE,
+        ANM_MATCLR = BUFFER_RESCHAN | BUFFER_RESTEVCOLOR,
+        ANM_SHP = BUFFER_RESVTXPOS | BUFFER_RESVTXNRM | BUFFER_RESVTXCLR
+    };
 
 public:
     static ScnMdl* Construct(MEMAllocator* pAllocator, u32* pSize, ResMdl mdl,
@@ -110,24 +134,6 @@ private:
     enum VisBufferFlag {
         VISBUFFER_DIRTY = (1 << 0),
         VISBUFFER_NOT_REFRESH_NEEDED = (1 << 1),
-    };
-
-    enum MatBufferOption {
-        BUFOPTION_TEXOBJ = (1 << 0),
-        BUFOPTION_TLUTOBJ = (1 << 1),
-        BUFOPTION_TEXSRT = (1 << 2),
-        BUFOPTION_MATCHAN = (1 << 3),
-        BUFOPTION_GENMODE = (1 << 4),
-        BUFOPTION_MATMISC = (1 << 5),
-        BUFOPTION_VIS = (1 << 6),
-        BUFOPTION_MATPIX = (1 << 7),
-        BUFOPTION_MATTEVCOLOR = (1 << 8),
-        BUFOPTION_MATINDMTXSCALE = (1 << 9),
-        BUFOPTION_MATTEXCOORDGEN = (1 << 10),
-        BUFOPTION_TEV = (1 << 11),
-        BUFOPTION_VTXPOS = (1 << 12),
-        BUFOPTION_VTXNRM = (1 << 13),
-        BUFOPTION_VTXCLR = (1 << 14),
     };
 
 private:

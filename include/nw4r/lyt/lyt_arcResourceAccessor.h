@@ -48,6 +48,7 @@ class ArcResourceAccessor : public ResourceAccessor {
 public:
     static const u32 RES_TYPE_ANIMATION = 'anim';
     static const u32 RES_TYPE_LAYOUT = 'blyt';
+    static const u32 RES_TYPE_FONT = 'font';
     static const u32 RES_TYPE_TEXTURE = 'timg';
 
 public:

@@ -126,8 +126,6 @@ private:
 private:
     void* mResource;            // at 0x10
     FontInformation* mFontInfo; // at 0x14
-    u16 mLastCharCode;          // at 0x18
-    u16 mLastGlyphIndex;        // at 0x18
 };
 
 } // namespace detail

@@ -76,13 +76,13 @@ void GXSetProjection(const Mtx44 proj, GXProjectionType type) {
     gxdt->gxDirtyFlags |= GX_DIRTY_PROJECTION;
 }
 
-void GXSetProjectionv(const f32 proj[7]) {
+void GXSetProjectionv(const f32 proj[GX_PROJECTION_SZ]) {
     gxdt->projType = proj[0] == 0.0f ? GX_PERSPECTIVE : GX_ORTHOGRAPHIC;
     Copy6Floats(gxdt->proj, proj + 1);
     gxdt->gxDirtyFlags |= GX_DIRTY_PROJECTION;
 }
 
-void GXGetProjectionv(f32 proj[7]) {
+void GXGetProjectionv(f32 proj[GX_PROJECTION_SZ]) {
     proj[0] = gxdt->projType != GX_PERSPECTIVE ? 1.0f : 0.0f;
     LoadProjPS(proj + 1);
 }
@@ -246,7 +246,7 @@ void GXSetViewport(f32 ox, f32 oy, f32 sx, f32 sy, f32 near, f32 far) {
     gxdt->gxDirtyFlags |= GX_DIRTY_VIEWPORT;
 }
 
-void GXGetViewportv(f32 view[6]) {
+void GXGetViewportv(f32 view[GX_VIEWPORT_SZ]) {
     Copy6Floats(view, gxdt->view);
 }
 

@@ -421,37 +421,37 @@ void Pane::LoadMtx(const DrawInfo& rInfo) {
 math::VEC2 Pane::GetVtxPos() const {
     math::VEC2 base(0.0f, 0.0f);
 
-    switch (mBasePosition % detail::HORIZONTALPOSITION_MAX) {
+    switch (mBasePosition % HORIZONTALPOSITION_MAX) {
     default:
-    case detail::HORIZONTALPOSITION_LEFT: {
+    case HORIZONTALPOSITION_LEFT: {
         base.x = 0.0f;
         break;
     }
 
-    case detail::HORIZONTALPOSITION_CENTER: {
+    case HORIZONTALPOSITION_CENTER: {
         base.x = -mSize.width / 2;
         break;
     }
 
-    case detail::HORIZONTALPOSITION_RIGHT: {
+    case HORIZONTALPOSITION_RIGHT: {
         base.x = -mSize.width;
         break;
     }
     }
 
-    switch (mBasePosition / detail::HORIZONTALPOSITION_MAX) {
+    switch (mBasePosition / HORIZONTALPOSITION_MAX) {
     default:
-    case detail::VERTICALPOSITION_TOP: {
+    case VERTICALPOSITION_TOP: {
         base.y = 0.0f;
         break;
     }
 
-    case detail::HORIZONTALPOSITION_CENTER: {
+    case HORIZONTALPOSITION_CENTER: {
         base.y = -mSize.height / 2;
         break;
     }
 
-    case detail::HORIZONTALPOSITION_RIGHT: {
+    case HORIZONTALPOSITION_RIGHT: {
         base.y = -mSize.height;
         break;
     }

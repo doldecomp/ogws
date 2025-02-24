@@ -115,7 +115,7 @@ void ModelEx::getShapeMinMax(u16 shapeIndex, math::VEC3* pMin, math::VEC3* pMax,
 
 void ModelEx::setVisible(bool vis) {
     if (mScnObj != NULL)
-        mScnObj->SetScnObjOption(g3d::ScnObj::OPTION_DISABLE_GATHER_SCNOBJ,
+        mScnObj->SetScnObjOption(g3d::ScnObj::OPTID_DISABLE_GATHER_SCNOBJ,
                                  !vis);
 }
 

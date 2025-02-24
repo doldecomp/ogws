@@ -129,16 +129,16 @@ LightSetting::LightSetting(LightObj* pLightObjArray,
 
     for (u32 i = 0; i < mNumLightSet; i++) {
         LightSetData& rData = mpLightSetDataArray[i];
-        rData.idxAmbLight = -1;
+        rData.idxAmbLight = LightSetData::IDX_INVALID_LIGHT;
 
         for (u32 j = 0; j < G3DState::NUM_LIGHT_IN_LIGHT_SET; j++) {
-            rData.idxLight[j] = -1;
+            rData.idxLight[j] = LightSetData::IDX_INVALID_LIGHT;
         }
     }
 
     mpLightSetDataArray[0].idxLight[0] = 0;
     mpLightSetDataArray[0].idxLight[1] = 2;
-    mpLightSetDataArray[0].idxAmbLight = -1;
+    mpLightSetDataArray[0].idxAmbLight = LightSetData::IDX_INVALID_LIGHT;
 
     GXColor white = {255, 255, 255, 255};
     AmbLightObj ambWhite = {255, 255, 255, 255};
@@ -229,7 +229,9 @@ void LightSetting::ApplyViewMtx(const math::MTX34& rCamera, u32 numLight) {
 bool LightSet::SelectLightObj(u32 lightIdx, int lightObjIdx) {
     if (IsValid() && lightIdx < G3DState::NUM_LIGHT_IN_LIGHT_SET) {
         if (lightObjIdx < 0) {
-            mpLightSetData->idxLight[lightIdx] = -1;
+            mpLightSetData->idxLight[lightIdx] =
+                LightSetData::IDX_INVALID_LIGHT;
+
             return true;
         }
 
@@ -245,7 +247,7 @@ bool LightSet::SelectLightObj(u32 lightIdx, int lightObjIdx) {
 bool LightSet::SelectAmbLightObj(int lightObjIdx) {
     if (IsValid()) {
         if (lightObjIdx < 0) {
-            mpLightSetData->idxAmbLight = -1;
+            mpLightSetData->idxAmbLight = LightSetData::IDX_INVALID_LIGHT;
             return true;
         }
 

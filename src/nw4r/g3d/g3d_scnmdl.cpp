@@ -13,7 +13,7 @@ NW4R_G3D_RTTI_DEF(ScnMdl);
 ResTexObj ScnMdl::CopiedMatAccess::GetResTexObj(bool markDirty) {
     if (mpScnMdl != NULL && mTexObj.IsValid()) {
         if (markDirty) {
-            mpScnMdl->MatBufferDirty(mMatID, ScnMdl::BUFOPTION_TEXOBJ);
+            mpScnMdl->MatBufferDirty(mMatID, ScnMdl::BUFFER_RESTEXOBJ);
         }
 
         return mTexObj;
@@ -25,7 +25,7 @@ ResTexObj ScnMdl::CopiedMatAccess::GetResTexObj(bool markDirty) {
 ResTexSrt ScnMdl::CopiedMatAccess::GetResTexSrt(bool markDirty) {
     if (mpScnMdl != NULL && mTexSrt.IsValid()) {
         if (markDirty) {
-            mpScnMdl->MatBufferDirty(mMatID, ScnMdl::BUFOPTION_TEXSRT);
+            mpScnMdl->MatBufferDirty(mMatID, ScnMdl::BUFFER_RESTEXSRT);
         }
 
         return mTexSrt;
@@ -37,7 +37,7 @@ ResTexSrt ScnMdl::CopiedMatAccess::GetResTexSrt(bool markDirty) {
 ResMatChan ScnMdl::CopiedMatAccess::GetResMatChan(bool markDirty) {
     if (mpScnMdl != NULL && mChan.IsValid()) {
         if (markDirty) {
-            mpScnMdl->MatBufferDirty(mMatID, ScnMdl::BUFOPTION_MATCHAN);
+            mpScnMdl->MatBufferDirty(mMatID, ScnMdl::BUFFER_RESCHAN);
         }
 
         return mChan;
@@ -49,7 +49,7 @@ ResMatChan ScnMdl::CopiedMatAccess::GetResMatChan(bool markDirty) {
 ResGenMode ScnMdl::CopiedMatAccess::GetResGenMode(bool markDirty) {
     if (mpScnMdl != NULL && mGenMode.IsValid()) {
         if (markDirty) {
-            mpScnMdl->MatBufferDirty(mMatID, ScnMdl::BUFOPTION_GENMODE);
+            mpScnMdl->MatBufferDirty(mMatID, ScnMdl::BUFFER_RESGENMODE);
         }
 
         return mGenMode;
@@ -61,7 +61,7 @@ ResGenMode ScnMdl::CopiedMatAccess::GetResGenMode(bool markDirty) {
 ResMatPix ScnMdl::CopiedMatAccess::GetResMatPix(bool markDirty) {
     if (mpScnMdl != NULL && mPix.IsValid()) {
         if (markDirty) {
-            mpScnMdl->MatBufferDirty(mMatID, ScnMdl::BUFOPTION_MATPIX);
+            mpScnMdl->MatBufferDirty(mMatID, ScnMdl::BUFFER_RESMATPIX);
         }
 
         return mPix;
@@ -73,7 +73,7 @@ ResMatPix ScnMdl::CopiedMatAccess::GetResMatPix(bool markDirty) {
 ResMatTevColor ScnMdl::CopiedMatAccess::GetResMatTevColor(bool markDirty) {
     if (mpScnMdl != NULL && mTevColor.IsValid()) {
         if (markDirty) {
-            mpScnMdl->MatBufferDirty(mMatID, ScnMdl::BUFOPTION_MATTEVCOLOR);
+            mpScnMdl->MatBufferDirty(mMatID, ScnMdl::BUFFER_RESTEVCOLOR);
         }
 
         return mTevColor;
@@ -85,7 +85,7 @@ ResMatTevColor ScnMdl::CopiedMatAccess::GetResMatTevColor(bool markDirty) {
 ResTev ScnMdl::CopiedMatAccess::GetResTev(bool markDirty) {
     if (mpScnMdl != NULL && mTev.IsValid()) {
         if (markDirty) {
-            mpScnMdl->MatBufferDirty(mMatID, ScnMdl::BUFOPTION_TEV);
+            mpScnMdl->MatBufferDirty(mMatID, ScnMdl::BUFFER_RESTEV);
         }
 
         return mTev;
@@ -310,24 +310,24 @@ ScnMdl* ScnMdl::Construct(MEMAllocator* pAllocator, u32* pSize, ResMdl mdl,
     u32 matBufferDirtyFlagSize = matNum * sizeof(u32);
 
     // clang-format off
-    u32 resTexObjSize         = (bufferOption & BUFOPTION_TEXOBJ)         ? matNum  * sizeof(ResTexObjData)        : 0;
-    u32 resTlutObjSize        = (bufferOption & BUFOPTION_TLUTOBJ)        ? matNum  * sizeof(ResTlutObjData)       : 0;
-    u32 resTexSrtSize         = (bufferOption & BUFOPTION_TEXSRT)         ? matNum  * sizeof(ResTexSrtData)        : 0;
-    u32 resChanSize           = (bufferOption & BUFOPTION_MATCHAN)        ? matNum  * sizeof(ResChanData)          : 0;
-    u32 resGenModeSize        = (bufferOption & BUFOPTION_GENMODE)        ? matNum  * sizeof(ResGenModeData)       : 0;
-    u32 resMatMiscSize        = (bufferOption & BUFOPTION_MATMISC)        ? matNum  * sizeof(ResMatMiscData)       : 0;
-    u32 visSize               = (bufferOption & BUFOPTION_VIS)            ? nodeNum * sizeof(u8)                   : 0;
-    u32 resPixSize            = (bufferOption & BUFOPTION_MATPIX)         ? matNum  * sizeof(ResPixDL)             : 0;
-    u32 resTevColorSize       = (bufferOption & BUFOPTION_MATTEVCOLOR)    ? matNum  * sizeof(ResTevColorDL)        : 0;
-    u32 resIndMtxAndScaleSize = (bufferOption & BUFOPTION_MATINDMTXSCALE) ? matNum  * sizeof(ResIndMtxAndScaleDL)  : 0;
-    u32 resTexCoordGenSize    = (bufferOption & BUFOPTION_MATTEXCOORDGEN) ? matNum  * sizeof(ResTexCoordGenDL)     : 0;
-    u32 resTevSize            = (bufferOption & BUFOPTION_TEV)            ? matNum  * sizeof(ResTevData)           : 0;
+    u32 resTexObjSize         = (bufferOption & BUFFER_RESTEXOBJ)         ? matNum  * sizeof(ResTexObjData)        : 0;
+    u32 resTlutObjSize        = (bufferOption & BUFFER_RESTLUTOBJ)        ? matNum  * sizeof(ResTlutObjData)       : 0;
+    u32 resTexSrtSize         = (bufferOption & BUFFER_RESTEXSRT)         ? matNum  * sizeof(ResTexSrtData)        : 0;
+    u32 resChanSize           = (bufferOption & BUFFER_RESCHAN)           ? matNum  * sizeof(ResChanData)          : 0;
+    u32 resGenModeSize        = (bufferOption & BUFFER_RESGENMODE)        ? matNum  * sizeof(ResGenModeData)       : 0;
+    u32 resMatMiscSize        = (bufferOption & BUFFER_RESMATMISC)        ? matNum  * sizeof(ResMatMiscData)       : 0;
+    u32 visSize               = (bufferOption & BUFFER_RESANMVIS)         ? nodeNum * sizeof(u8)                   : 0;
+    u32 resPixSize            = (bufferOption & BUFFER_RESMATPIX)         ? matNum  * sizeof(ResPixDL)             : 0;
+    u32 resTevColorSize       = (bufferOption & BUFFER_RESTEVCOLOR)       ? matNum  * sizeof(ResTevColorDL)        : 0;
+    u32 resIndMtxAndScaleSize = (bufferOption & BUFFER_RESMATINDMTXSCALE) ? matNum  * sizeof(ResIndMtxAndScaleDL)  : 0;
+    u32 resTexCoordGenSize    = (bufferOption & BUFFER_RESMATTEXCOORDGEN) ? matNum  * sizeof(ResTexCoordGenDL)     : 0;
+    u32 resTevSize            = (bufferOption & BUFFER_RESTEV)            ? matNum  * sizeof(ResTevData)           : 0;
     // clang-format on
 
     u32 vtxPosTableSize = 0;
     u32 vtxPosBufferSize = 0;
 
-    if (bufferOption & BUFOPTION_VTXPOS) {
+    if (bufferOption & BUFFER_RESVTXPOS) {
         u32 vtxPosNum = mdl.GetResVtxPosNumEntries();
         u32 shpNum = mdl.GetResShpNumEntries();
 
@@ -354,7 +354,7 @@ ScnMdl* ScnMdl::Construct(MEMAllocator* pAllocator, u32* pSize, ResMdl mdl,
     u32 vtxNrmTableSize = 0;
     u32 vtxNrmBufferSize = 0;
 
-    if (bufferOption & BUFOPTION_VTXNRM) {
+    if (bufferOption & BUFFER_RESVTXNRM) {
         u32 vtxNrmNum = mdl.GetResVtxNrmNumEntries();
         u32 shpNum = mdl.GetResShpNumEntries();
 
@@ -381,7 +381,7 @@ ScnMdl* ScnMdl::Construct(MEMAllocator* pAllocator, u32* pSize, ResMdl mdl,
     u32 vtxClrTableSize = 0;
     u32 vtxClrBufferSize = 0;
 
-    if (bufferOption & BUFOPTION_VTXCLR) {
+    if (bufferOption & BUFFER_RESVTXCLR) {
         u32 vtxClrNum = mdl.GetResVtxClrNumEntries();
         u32 shpNum = mdl.GetResShpNumEntries();
 
@@ -609,28 +609,28 @@ void ScnMdl::ScnMdl_G3DPROC_CALC_MAT(u32 param, void* pInfo) {
     for (u32 i = 0; i < matNum; i++) {
         ResMat mat = mdl.GetResMat(i);
 
-        if (IsMatBufferDirty(i, BUFOPTION_TEXOBJ)) {
-            CleanMatBuffer(i, BUFOPTION_TEXOBJ);
+        if (IsMatBufferDirty(i, BUFFER_RESTEXOBJ)) {
+            CleanMatBuffer(i, BUFFER_RESTEXOBJ);
         }
 
-        if (IsMatBufferDirty(i, BUFOPTION_TLUTOBJ)) {
-            CleanMatBuffer(i, BUFOPTION_TLUTOBJ);
+        if (IsMatBufferDirty(i, BUFFER_RESTLUTOBJ)) {
+            CleanMatBuffer(i, BUFFER_RESTLUTOBJ);
         }
 
-        if (IsMatBufferDirty(i, BUFOPTION_MATINDMTXSCALE)) {
-            CleanMatBuffer(i, BUFOPTION_MATINDMTXSCALE);
+        if (IsMatBufferDirty(i, BUFFER_RESMATINDMTXSCALE)) {
+            CleanMatBuffer(i, BUFFER_RESMATINDMTXSCALE);
         }
 
-        if (IsMatBufferDirty(i, BUFOPTION_TEXSRT)) {
-            CleanMatBuffer(i, BUFOPTION_TEXSRT);
+        if (IsMatBufferDirty(i, BUFFER_RESTEXSRT)) {
+            CleanMatBuffer(i, BUFFER_RESTEXSRT);
         }
 
-        if (IsMatBufferDirty(i, BUFOPTION_MATCHAN)) {
-            CleanMatBuffer(i, BUFOPTION_MATCHAN);
+        if (IsMatBufferDirty(i, BUFFER_RESCHAN)) {
+            CleanMatBuffer(i, BUFFER_RESCHAN);
         }
 
-        if (IsMatBufferDirty(i, BUFOPTION_MATTEVCOLOR)) {
-            CleanMatBuffer(i, BUFOPTION_MATTEVCOLOR);
+        if (IsMatBufferDirty(i, BUFFER_RESTEVCOLOR)) {
+            CleanMatBuffer(i, BUFFER_RESTEVCOLOR);
         }
 
         if (GetAnmObjTexPat() != NULL && GetAnmObjTexPat()->TestExistence(i)) {
@@ -653,7 +653,7 @@ void ScnMdl::ScnMdl_G3DPROC_CALC_MAT(u32 param, void* pInfo) {
             texObj.EndEdit();
             tlutObj.EndEdit();
 
-            MatBufferDirty(i, BUFOPTION_TEXOBJ | BUFOPTION_TLUTOBJ);
+            MatBufferDirty(i, BUFFER_RESTEXOBJ | BUFFER_RESTLUTOBJ);
         }
 
         if (GetAnmObjTexSrt() != NULL && GetAnmObjTexSrt()->TestExistence(i)) {
@@ -677,7 +677,7 @@ void ScnMdl::ScnMdl_G3DPROC_CALC_MAT(u32 param, void* pInfo) {
             ind.EndEdit();
             srt.EndEdit();
 
-            MatBufferDirty(i, BUFOPTION_TEXSRT | BUFOPTION_MATINDMTXSCALE);
+            MatBufferDirty(i, BUFFER_RESTEXSRT | BUFFER_RESMATINDMTXSCALE);
         }
 
         if (GetAnmObjMatClr() != NULL && GetAnmObjMatClr()->TestExistence(i)) {
@@ -700,7 +700,7 @@ void ScnMdl::ScnMdl_G3DPROC_CALC_MAT(u32 param, void* pInfo) {
             chan.EndEdit();
             tevColor.EndEdit();
 
-            MatBufferDirty(i, BUFOPTION_MATTEVCOLOR | BUFOPTION_MATCHAN);
+            MatBufferDirty(i, BUFFER_RESTEVCOLOR | BUFFER_RESCHAN);
         }
     }
 
@@ -808,7 +808,7 @@ void ScnMdl::G3dProc(u32 task, u32 param, void* pInfo) {
 
 bool ScnMdl::SetScnObjOption(u32 option, u32 value) {
     switch (option) {
-    case OPTION_VISBUFFER_REFRESH_NEEDED: {
+    case OPTID_VISBUFFER_REFRESH_NEEDED: {
         if (value) {
             mFlagVisBuffer &= ~VISBUFFER_NOT_REFRESH_NEEDED;
         } else {
@@ -831,7 +831,7 @@ bool ScnMdl::GetScnObjOption(u32 option, u32* pValue) const {
     }
 
     switch (option) {
-    case OPTION_VISBUFFER_REFRESH_NEEDED: {
+    case OPTID_VISBUFFER_REFRESH_NEEDED: {
         *pValue = !(mFlagVisBuffer & VISBUFFER_NOT_REFRESH_NEEDED);
         break;
     }
@@ -933,35 +933,35 @@ void ScnMdl::InitBuffer() {
 void ScnMdl::CleanMatBuffer(u32 idx, u32 option) {
     ResMat mat = GetResMdl().GetResMat(idx);
 
-    if ((option & BUFOPTION_TEXOBJ) && mReplacement.texObjDataArray != NULL) {
+    if ((option & BUFFER_RESTEXOBJ) && mReplacement.texObjDataArray != NULL) {
         mat.GetResTexObj().CopyTo(&mReplacement.texObjDataArray[idx]).EndEdit();
     }
 
-    if ((option & BUFOPTION_TLUTOBJ) && mReplacement.tlutObjDataArray != NULL) {
+    if ((option & BUFFER_RESTLUTOBJ) && mReplacement.tlutObjDataArray != NULL) {
         mat.GetResTlutObj().CopyTo(&mReplacement.tlutObjDataArray[idx]).EndEdit();
     }
 
-    if ((option & BUFOPTION_TEXSRT) && mReplacement.texSrtDataArray != NULL) {
+    if ((option & BUFFER_RESTEXSRT) && mReplacement.texSrtDataArray != NULL) {
         mat.GetResTexSrt().CopyTo(&mReplacement.texSrtDataArray[idx]).EndEdit();
     }
 
-    if ((option & BUFOPTION_MATCHAN) && mReplacement.chanDataArray != NULL) {
+    if ((option & BUFFER_RESCHAN) && mReplacement.chanDataArray != NULL) {
         mat.GetResMatChan().CopyTo(&mReplacement.chanDataArray[idx]).EndEdit();
     }
 
-    if ((option & BUFOPTION_GENMODE) && mReplacement.genModeDataArray != NULL) {
+    if ((option & BUFFER_RESGENMODE) && mReplacement.genModeDataArray != NULL) {
         mat.GetResGenMode().CopyTo(&mReplacement.genModeDataArray[idx]).EndEdit();
     }
 
-    if ((option & BUFOPTION_MATMISC) && mReplacement.matMiscDataArray != NULL) {
+    if ((option & BUFFER_RESMATMISC) && mReplacement.matMiscDataArray != NULL) {
         mat.GetResMatMisc().CopyTo(&mReplacement.matMiscDataArray[idx]).EndEdit();
     }
 
-    if ((option & BUFOPTION_MATPIX) && mReplacement.pixDLArray != NULL) {
+    if ((option & BUFFER_RESMATPIX) && mReplacement.pixDLArray != NULL) {
         mat.GetResMatPix().CopyTo(&mReplacement.pixDLArray[idx]).EndEdit();
     }
 
-    if ((option & BUFOPTION_MATTEVCOLOR) &&
+    if ((option & BUFFER_RESTEVCOLOR) &&
         mReplacement.tevColorDLArray != NULL) {
 
         mat.GetResMatTevColor()
@@ -969,7 +969,7 @@ void ScnMdl::CleanMatBuffer(u32 idx, u32 option) {
             .EndEdit();
     }
 
-    if ((option & BUFOPTION_MATINDMTXSCALE) &&
+    if ((option & BUFFER_RESMATINDMTXSCALE) &&
         mReplacement.indMtxAndScaleDLArray != NULL) {
 
         mat.GetResMatIndMtxAndScale()
@@ -977,7 +977,7 @@ void ScnMdl::CleanMatBuffer(u32 idx, u32 option) {
             .EndEdit();
     }
 
-    if ((option & BUFOPTION_MATTEXCOORDGEN) &&
+    if ((option & BUFFER_RESMATTEXCOORDGEN) &&
         mReplacement.texCoordGenDLArray != NULL) {
 
         mat.GetResMatTexCoordGen()
@@ -985,7 +985,7 @@ void ScnMdl::CleanMatBuffer(u32 idx, u32 option) {
             .EndEdit();
     }
 
-    if ((option & BUFOPTION_TEV) && mReplacement.tevDataArray != NULL) {
+    if ((option & BUFFER_RESTEV) && mReplacement.tevDataArray != NULL) {
         mat.GetResTev().CopyTo(&mReplacement.tevDataArray[idx]).EndEdit();
     }
 

@@ -48,6 +48,12 @@ extern "C" {
 // Real name! (from patent)
 typedef unsigned char GXBool;
 
+#define GX_TRUE ((GXBool)TRUE)
+#define GX_FALSE ((GXBool)FALSE)
+
+#define GX_ENABLE GX_TRUE
+#define GX_DISABLE GX_FALSE
+
 /**
  * Common structs
  */
@@ -431,14 +437,14 @@ typedef enum _GXMtxType {
 } GXMtxType;
 
 typedef enum _GXPixelFmt {
-    GX_PF_RGB8_Z24,    // from Dolphin
-    GX_PF_RGBA6_Z24,   // from EGG
-    GX_PF_RGBA565_Z16, // from Dolphin
-    GX_PF_Z24,         // from Dolphin
-    GX_PF_Y8,          // from Dolphin
-    GX_PF_U8,          // from Dolphin
-    GX_PF_V8,          // from Dolphin
-    GX_PF_YUV420,      // from Dolphin
+    GX_PF_RGB8_Z24,
+    GX_PF_RGBA6_Z24,
+    GX_PF_RGBA565_Z16,
+    GX_PF_Z24,
+    GX_PF_Y8,
+    GX_PF_U8,
+    GX_PF_V8,
+    GX_PF_YUV420,
 
     GX_MAX_PIXELFMT
 } GXPixelFmt;

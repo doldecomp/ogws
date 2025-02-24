@@ -34,6 +34,18 @@ enum VertexColor {
 
 /******************************************************************************
  *
+ * TextColor
+ *
+ ******************************************************************************/
+enum TextColor {
+    TEXTCOLOR_TOP,
+    TEXTCOLOR_BOTTOM,
+
+    TEXTCOLOR_MAX
+};
+
+/******************************************************************************
+ *
  * TevColor
  *
  ******************************************************************************/
@@ -59,24 +71,9 @@ enum TevKColor {
     TEVKCOLOR_MAX
 };
 
-namespace detail {
-
 /******************************************************************************
  *
- * Vertex colors
- *
- ******************************************************************************/
-inline u8 GetVtxColorElement(const ut::Color* pColors, u32 idx) {
-    return reinterpret_cast<const u8*>(
-        &pColors[idx / VERTEXCOLOR_MAX])[idx % 4];
-}
-inline void SetVtxColorElement(ut::Color* pColors, u32 idx, u8 value) {
-    reinterpret_cast<u8*>(&pColors[idx / VERTEXCOLOR_MAX])[idx % 4] = value;
-}
-
-/******************************************************************************
- *
- * Positioning
+ * Text position
  *
  ******************************************************************************/
 enum HorizontalPosition {
@@ -92,6 +89,25 @@ enum VerticalPosition {
     VERTICALPOSITION_MAX
 };
 
+namespace detail {
+
+/******************************************************************************
+ *
+ * Vertex colors
+ *
+ ******************************************************************************/
+inline u8 GetVtxColorElement(const ut::Color* pColors, u32 idx) {
+    return reinterpret_cast<const u8*>(&pColors[idx / 4])[idx % 4];
+}
+inline void SetVtxColorElement(ut::Color* pColors, u32 idx, u8 value) {
+    reinterpret_cast<u8*>(&pColors[idx / 4])[idx % 4] = value;
+}
+
+/******************************************************************************
+ *
+ * Positioning
+ *
+ ******************************************************************************/
 inline u8 GetHorizontalPosition(u8 packed) {
     return packed % HORIZONTALPOSITION_MAX;
 }

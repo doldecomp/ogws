@@ -583,6 +583,7 @@ inline MTX34* QUATToMTX34(MTX34* pMtx, const QUAT* pQuat) {
     return pMtx;
 }
 
+// @bug QUATSlerp macro changes this function name!
 inline QUAT* C_QUATSlerp(QUAT* pOut, const QUAT* p1, const QUAT* p2, f32 t) {
     ::C_QUATSlerp(*p1, *p2, *pOut, t);
     return pOut;

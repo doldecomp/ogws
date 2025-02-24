@@ -44,9 +44,9 @@ struct Rect {
     }
 
     void MoveTo(f32 x, f32 y) {
-        right = GetWidth() + x;
+        right = x + GetWidth();
         left = x;
-        bottom = GetHeight() + y;
+        bottom = y + GetHeight();
         top = y;
     }
 };

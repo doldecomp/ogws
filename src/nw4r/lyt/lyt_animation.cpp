@@ -214,7 +214,8 @@ void AnimateVisibility(Pane* pPane, const res::AnimationInfo* pAnimInfo,
         const res::StepKey* pKeys = detail::ConvertOffsToPtr<res::StepKey>(
             pTarget, pTarget->keysOffset);
 
-        pPane->SetVisible(GetStepCurveValue(frame, pKeys, pTarget->keyNum) > 0);
+        pPane->SetVisible(GetStepCurveValue(frame, pKeys, pTarget->keyNum) !=
+                          0);
     }
 }
 
