@@ -15,6 +15,7 @@ namespace snd {
 // Forward declarations
 class SoundHandle;
 class SoundPlayer;
+
 namespace detail {
 class BasicPlayer;
 class ExternalSoundPlayer;

@@ -15,16 +15,33 @@ namespace ut {
 
 template <typename T> class TextWriterBase : public CharWriter {
 public:
-    enum DrawFlags {
+    enum DrawFlag {
         // Align text lines
+        DRAWFLAG_ALIGN_TEXT_BASELINE = 0,
         DRAWFLAG_ALIGN_TEXT_CENTER = (1 << 0),
         DRAWFLAG_ALIGN_TEXT_RIGHT = (1 << 1),
 
-        // Align text block
+        // Align text block (horizontal)
+        DRAWFLAG_ALIGN_H_BASELINE = 0,
         DRAWFLAG_ALIGN_H_CENTER = (1 << 4),
         DRAWFLAG_ALIGN_H_RIGHT = (1 << 5),
+
+        // Align text block (vertical)
+        DRAWFLAG_ALIGN_V_BASELINE = 0,
         DRAWFLAG_ALIGN_V_CENTER = (1 << 8),
         DRAWFLAG_ALIGN_V_TOP = (1 << 9),
+
+        // Mask constants
+        DRAWFLAG_MASK_ALIGN_TEXT = DRAWFLAG_ALIGN_TEXT_BASELINE |
+                                   DRAWFLAG_ALIGN_TEXT_CENTER |
+                                   DRAWFLAG_ALIGN_TEXT_RIGHT,
+
+        DRAWFLAG_MASK_ALIGN_H = DRAWFLAG_ALIGN_H_BASELINE |
+                                DRAWFLAG_ALIGN_H_CENTER |
+                                DRAWFLAG_ALIGN_H_RIGHT,
+
+        DRAWFLAG_MASK_ALIGN_V = DRAWFLAG_ALIGN_V_BASELINE |
+                                DRAWFLAG_ALIGN_V_CENTER | DRAWFLAG_ALIGN_V_TOP,
     };
 
 public:
@@ -106,17 +123,9 @@ public:
 private:
     static const int DEFAULT_FORMAT_BUFFER_SIZE = 256;
 
-    static const u32 DRAWFLAG_MASK_TEXT =
-        DRAWFLAG_ALIGN_TEXT_RIGHT | DRAWFLAG_ALIGN_TEXT_CENTER;
-
-    static const u32 DRAWFLAG_MASK_H =
-        DRAWFLAG_ALIGN_H_CENTER | DRAWFLAG_ALIGN_H_RIGHT;
-
-    static const u32 DRAWFLAG_MASK_V =
-        DRAWFLAG_ALIGN_V_CENTER | DRAWFLAG_ALIGN_V_TOP;
-
-    static const u32 DRAWFLAG_MASK_ALL =
-        DRAWFLAG_MASK_TEXT | DRAWFLAG_MASK_H | DRAWFLAG_MASK_V;
+    static const u32 DRAWFLAG_MASK_ALL = DRAWFLAG_MASK_ALIGN_TEXT |
+                                         DRAWFLAG_MASK_ALIGN_H |
+                                         DRAWFLAG_MASK_ALIGN_V;
 
 private:
     bool IsDrawFlagSet(u32 mask, u32 flag) const {
@@ -146,6 +155,7 @@ template <>
 inline int TextWriterBase<char>::VSNPrintf(char* pBuffer, u32 count,
                                            const char* pStr,
                                            std::va_list args) {
+
     return std::vsnprintf(pBuffer, count, pStr, args);
 }
 
@@ -153,6 +163,7 @@ template <>
 inline int TextWriterBase<wchar_t>::VSNPrintf(wchar_t* pBuffer, u32 count,
                                               const wchar_t* pStr,
                                               std::va_list args) {
+
     return std::vswprintf(pBuffer, count, pStr, args);
 }
 

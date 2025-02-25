@@ -47,7 +47,7 @@ struct TexSrt : TexSrtTypedef {
     f32 Su; // at 0x0
     f32 Sv; // at 0x4
     f32 R;  // at 0x8
-    f32 Tu; // at 0xc
+    f32 Tu; // at 0xC
     f32 Tv; // at 0x10
 };
 

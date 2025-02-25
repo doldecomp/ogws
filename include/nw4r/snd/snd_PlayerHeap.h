@@ -11,9 +11,10 @@ namespace snd {
 class SoundPlayer;
 
 namespace detail {
-
-// Forward declarations
 class BasicSound;
+} // namespace detail
+
+namespace detail {
 
 class PlayerHeap : public SoundHeap {
 public:

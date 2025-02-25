@@ -2,14 +2,18 @@
 #define NW4R_UT_TAG_PROCESSOR_BASE_H
 #include <nw4r/types_nw4r.h>
 
-#include <nw4r/ut/ut_Rect.h>
-
 namespace nw4r {
 namespace ut {
 
 // Forward declarations
+struct Rect;
 template <typename T> class TextWriterBase;
 
+/******************************************************************************
+ *
+ * PrintContext
+ *
+ ******************************************************************************/
 template <typename T> struct PrintContext {
     enum Flags {
         FLAGS_CHARSPACE = (1 << 0),
@@ -22,6 +26,11 @@ template <typename T> struct PrintContext {
     u32 flags;                 // at 0x10
 };
 
+/******************************************************************************
+ *
+ * TagProcessorBase
+ *
+ ******************************************************************************/
 template <typename T> class TagProcessorBase {
 public:
     typedef PrintContext<T> ContextType;

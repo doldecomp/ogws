@@ -13,9 +13,6 @@ namespace snd {
 namespace detail {
 
 template <typename T> class SoundInstanceManager {
-private:
-    NW4R_UT_LINKLIST_TYPEDEF_DECL_EX(T, Prio);
-
 public:
     SoundInstanceManager() {
         OSInitMutex(&mMutex);
@@ -130,6 +127,9 @@ public:
         RemovePriorityList(pSound);
         InsertPriorityList(pSound, priority);
     }
+
+private:
+    NW4R_UT_LINKLIST_TYPEDEF_DECL_EX(T, Prio);
 
 private:
     MemoryPool<T> mPool;     // at 0x0

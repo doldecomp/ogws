@@ -24,7 +24,7 @@ template <typename T> inline T Clamp(T value, T min, T max) {
 }
 
 template <typename T> inline T Abs(T x) {
-    // Static cast needed to break abs optimization during instruction selection
+    // Static cast needed to break abs optimization
     return x < 0 ? static_cast<T>(-x) : static_cast<T>(x);
 }
 

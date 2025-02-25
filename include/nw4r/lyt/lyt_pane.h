@@ -80,7 +80,7 @@ private:
     enum FlagBit { BIT_VISIBLE, BIT_INFLUENCED_ALPHA, BIT_LOCATION_ADJUST };
 
     // Need the typedef before the class definition is complete
-    typedef ut::LinkList<Pane, offsetof(PaneBase, node)> PaneList_;
+    typedef ut::LinkList<Pane, offsetof(PaneBase, node)> PaneList;
 
 public:
     explicit Pane(const res::Pane* pRes);
@@ -136,7 +136,7 @@ public:
         return mpParent;
     }
 
-    PaneList_ GetChildList() {
+    PaneList GetChildList() {
         return mChildList;
     }
 
@@ -255,7 +255,7 @@ public:
 
 protected:
     Pane* mpParent;              // at 0xC
-    PaneList_ mChildList;        // at 0x10
+    PaneList mChildList;         // at 0x10
     AnimationLinkList mAnimList; // at 0x1C
     Material* mpMaterial;        // at 0x28
 
@@ -280,7 +280,7 @@ protected:
 
 private:
     void Init();
-    void InsertChild(PaneList_::Iterator next, Pane* pChild);
+    void InsertChild(PaneList::Iterator next, Pane* pChild);
 };
 
 NW4R_UT_LINKLIST_TYPEDEF_DECL(Pane);

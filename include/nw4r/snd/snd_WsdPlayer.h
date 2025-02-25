@@ -15,6 +15,9 @@ namespace nw4r {
 namespace snd {
 namespace detail {
 
+// Forward declarations
+struct WaveData;
+
 class WsdPlayer : public BasicPlayer,
                   public DisposeCallback,
                   public SoundThread::PlayerCallback {

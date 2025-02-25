@@ -40,7 +40,7 @@ private:
     struct Block {
         NW4R_UT_LINKLIST_NODE_DECL(); // at 0x0
         u32 mSize;                    // at 0x8
-        FreeCallback mCallback;       // at 0xc
+        FreeCallback mCallback;       // at 0xC
         void* mCallbackArg;           // at 0x10
 
         Block(u32 size, FreeCallback pCallback, void* pCallbackArg)

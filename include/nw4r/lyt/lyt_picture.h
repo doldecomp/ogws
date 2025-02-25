@@ -4,10 +4,14 @@
 
 #include <nw4r/lyt/lyt_common.h>
 #include <nw4r/lyt/lyt_pane.h>
-#include <nw4r/lyt/lyt_types.h>
 
 namespace nw4r {
 namespace lyt {
+
+// Forward declarations
+struct ResBlockSet;
+class TexMap;
+
 namespace res {
 
 /******************************************************************************

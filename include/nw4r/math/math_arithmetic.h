@@ -2,21 +2,20 @@
 #define NW4R_MATH_ARITHMETIC_H
 #include <nw4r/types_nw4r.h>
 
+#include <nw4r/math/math_constant.h>
+
 #include <revolution/OS.h>
 
 #include <cmath>
 
-#define NW4R_MATH_QNAN (-(0.0f / 0.0f))
-
-#define NW4R_MATH_FLT_MIN 1.175494350e-38f
-#define NW4R_MATH_FLT_MAX 3.402823466e+38f
-
-#define NW4R_MATH_FLT_EPSILON 1.192092895e-7f
-
-#define NW4R_MATH_INVSQRT3 0.577350258f
-
 namespace nw4r {
 namespace math {
+
+/******************************************************************************
+ *
+ * Implementation details
+ *
+ ******************************************************************************/
 namespace detail {
 
 f32 FExp(f32 x);
@@ -24,18 +23,23 @@ f32 FLog(f32 x);
 
 } // namespace detail
 
+/******************************************************************************
+ *
+ * Arithmetic functions
+ *
+ ******************************************************************************/
 f32 FrSqrt(f32 x);
 
 inline f32 FAbs(register f32 x) {
-    register f32 absx;
+    register f32 ax;
 
     // clang-format off
     asm {
-        fabs absx, x
+        fabs ax, x
     }
     // clang-format on
 
-    return absx;
+    return ax;
 }
 
 inline f32 FCeil(f32 x) {
@@ -111,7 +115,6 @@ inline f32 U16ToF32(u16 arg) {
     OSu16tof32(&arg, &ret);
     return ret;
 }
-
 inline u16 F32ToU16(f32 arg) {
     u16 ret;
     OSf32tou16(&arg, &ret);
@@ -123,7 +126,6 @@ inline f32 S16ToF32(s16 arg) {
     OSs16tof32(&arg, &ret);
     return ret;
 }
-
 inline s16 F32ToS16(f32 arg) {
     s16 ret;
     OSf32tos16(&arg, &ret);
@@ -133,16 +135,14 @@ inline s16 F32ToS16(f32 arg) {
 inline u32 F32AsU32(f32 arg) {
     return *reinterpret_cast<u32*>(&arg);
 }
-
 inline f32 U32AsF32(u32 arg) {
     return *reinterpret_cast<f32*>(&arg);
 }
 
 inline s32 FGetExpPart(f32 x) {
     s32 s = F32AsU32(x);
-    return ((s >> 23) & 0xFF) - 0x7F;
+    return ((s >> 23) & 0xFF) - 127;
 }
-
 inline f32 FGetMantPart(f32 x) {
     u32 u = F32AsU32(x);
     return U32AsF32((u & 0x807FFFFF) | 0x3F800000);

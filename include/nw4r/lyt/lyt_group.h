@@ -2,6 +2,8 @@
 #define NW4R_LYT_GROUP_H
 #include <nw4r/types_nw4r.h>
 
+#include <nw4r/lyt/lyt_resources.h>
+
 #include <nw4r/ut.h>
 
 namespace nw4r {

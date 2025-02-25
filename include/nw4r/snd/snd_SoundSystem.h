@@ -9,6 +9,9 @@
 namespace nw4r {
 namespace snd {
 
+// Forward declarations
+class FxBase;
+
 class SoundSystem {
 public:
     struct SoundSystemParam {

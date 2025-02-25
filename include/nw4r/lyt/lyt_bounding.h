@@ -4,11 +4,13 @@
 
 #include <nw4r/lyt/lyt_pane.h>
 
-#include <nw4r/math.h>
 #include <nw4r/ut.h>
 
 namespace nw4r {
 namespace lyt {
+
+// Forward declarations
+struct ResBlockSet;
 
 namespace res {
 

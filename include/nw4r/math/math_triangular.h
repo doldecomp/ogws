@@ -3,11 +3,7 @@
 #include <nw4r/types_nw4r.h>
 
 #include <nw4r/math/math_arithmetic.h>
-
-#include <cmath>
-
-#define NW4R_MATH_PI M_PI
-#define NW4R_MATH_LN_2 0.69314718056f
+#include <nw4r/math/math_constant.h>
 
 /******************************************************************************
  *

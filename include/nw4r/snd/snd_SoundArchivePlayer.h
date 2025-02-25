@@ -22,6 +22,7 @@ namespace snd {
 // Forward declarations
 class SoundMemoryAllocatable;
 class SoundPlayer;
+
 namespace detail {
 class SeqTrackAllocator;
 } // namespace detail

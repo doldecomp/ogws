@@ -7,6 +7,7 @@
 namespace nw4r {
 namespace ut {
 
+// Forward declarations
 struct BinaryFileHeader;
 
 class ResFont : public detail::ResFontBase {

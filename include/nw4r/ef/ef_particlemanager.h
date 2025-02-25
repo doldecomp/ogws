@@ -163,13 +163,11 @@ public:
     }
 
     static void ModifierTravFunc_SetScale(void* pObject, ForEachParam param) {
-
         static_cast<ParticleManager*>(pObject)->mModifier.mScale =
             *reinterpret_cast<math::VEC2*>(param);
     }
 
     static void ModifierTravFunc_SetRotate(void* pObject, ForEachParam param) {
-
         static_cast<ParticleManager*>(pObject)->mModifier.mRotate =
             *reinterpret_cast<math::VEC3*>(param);
     }

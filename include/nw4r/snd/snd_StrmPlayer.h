@@ -42,7 +42,7 @@ public:
     StrmPlayer();
     virtual ~StrmPlayer(); // at 0x8
 
-    virtual bool Start();          // at 0xc
+    virtual bool Start();          // at 0xC
     virtual void Stop();           // at 0x10
     virtual void Pause(bool flag); // at 0x14
 
@@ -51,14 +51,14 @@ public:
     } // at 0x18
     virtual bool IsStarted() const {
         return mStartedFlag;
-    } // at 0x1c
+    } // at 0x1C
     virtual bool IsPause() const {
         return mPauseFlag;
     }; // at 0x20
 
     virtual void OnUpdateFrameSoundThread() {
         Update();
-    } // at 0xc
+    } // at 0xC
     virtual void OnUpdateVoiceSoundThread() {
         UpdateBuffer();
     } // at 0x10
