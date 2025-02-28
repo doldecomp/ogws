@@ -2,7 +2,7 @@
 #define EGG_GFX_I_SCN_PROC_H
 #include "types_egg.h"
 #include "eggAssert.h"
-#include "types_nw4r.h"
+#include <nw4r/g3d.h>
 #include <revolution/MEM/mem_allocator.h>
 
 namespace EGG

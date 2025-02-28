@@ -10,6 +10,9 @@
 namespace nw4r {
 namespace snd {
 
+// Forward declarations
+class SeqPlayer;
+
 enum SeqMute { MUTE_OFF, MUTE_NO_STOP, MUTE_RELEASE, MUTE_STOP };
 
 enum ParseResult { PARSE_RESULT_CONTINUE, PARSE_RESULT_FINISH };

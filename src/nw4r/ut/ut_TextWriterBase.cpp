@@ -98,7 +98,8 @@ bool TextWriterBase<T>::CalcLineRectImpl(Rect* pRect, const T** ppStr,
         if (ch < ' ') {
             Rect r(x, 0.0f, 0.0f, 0.0f);
             context.str = static_cast<const T*>(reader.GetCurrentPos());
-            context.flags = charSpace ? 0 : PRINTFLAGS_CHARSPACE;
+            context.flags = charSpace ? 0 : PrintContext<T>::FLAGS_CHARSPACE;
+
             SetCursorX(x);
 
             if (useLimit && ch != '\n' && pPrevStream != NULL) {
@@ -118,7 +119,9 @@ bool TextWriterBase<T>::CalcLineRectImpl(Rect* pRect, const T** ppStr,
                 }
             }
 
-            Operation oper = mTagProcessor->CalcRect(&r, ch, &context);
+            TagProcessorBase<T>::Operation oper =
+                mTagProcessor->CalcRect(&r, ch, &context);
+
             reader.Set(context.str);
 
             pRect->left = Min(pRect->left, r.left);
@@ -128,16 +131,16 @@ bool TextWriterBase<T>::CalcLineRectImpl(Rect* pRect, const T** ppStr,
 
             x = GetCursorX();
 
-            if (oper == OPERATION_END_DRAW) {
+            if (oper == TagProcessor::OPERATION_END_DRAW) {
                 *ppStr += len;
                 return false;
             }
 
-            if (oper == OPERATION_NO_CHAR_SPACE) {
+            if (oper == TagProcessor::OPERATION_NO_CHAR_SPACE) {
                 charSpace = false;
-            } else if (oper == OPERATION_CHAR_SPACE) {
+            } else if (oper == TagProcessor::OPERATION_CHAR_SPACE) {
                 charSpace = true;
-            } else if (oper == OPERATION_NEXT_LINE) {
+            } else if (oper == TagProcessor::OPERATION_NEXT_LINE) {
                 break;
             }
         } else {
@@ -229,19 +232,19 @@ template <typename T> f32 TextWriterBase<T>::PrintImpl(const T* pStr, int len) {
         this,    // writer
         pStr,    // str
         cursorX, // x
-        cursorY  /// y
+        cursorY  // y
     };
 
     CharStrmReader reader = GetFont()->GetCharStrmReader();
     reader.Set(pStr);
 
-    Operation oper;
+    TagProcessorBase<T>::Operation oper;
     u16 ch = reader.Next();
 
     while (static_cast<const T*>(reader.GetCurrentPos()) - pStr <= len) {
         if (ch < ' ') {
             context.str = static_cast<const T*>(reader.GetCurrentPos());
-            context.flags = charSpace ? 0 : PRINTFLAGS_CHARSPACE;
+            context.flags = charSpace ? 0 : PrintContext<T>::FLAGS_CHARSPACE;
 
             if (useLimit && ch != '\n' && pPrevStream != pPrevNewLine) {
                 PrintContext<T> context2 = context;
@@ -260,8 +263,8 @@ template <typename T> f32 TextWriterBase<T>::PrintImpl(const T* pStr, int len) {
             }
 
             oper = mTagProcessor->Process(ch, &context);
-            if (oper == OPERATION_NEXT_LINE) {
-                if (IsDrawFlagSet(DRAWFLAG_MASK_TEXT,
+            if (oper == TagProcessor::OPERATION_NEXT_LINE) {
+                if (IsDrawFlagSet(DRAWFLAG_MASK_ALIGN_TEXT,
                                   DRAWFLAG_ALIGN_TEXT_CENTER)) {
 
                     int remain = len - (context.str - pStr);
@@ -269,7 +272,7 @@ template <typename T> f32 TextWriterBase<T>::PrintImpl(const T* pStr, int len) {
 
                     f32 offset = (textWidth - width) / 2.0f;
                     SetCursorX(context.x + offset);
-                } else if (IsDrawFlagSet(DRAWFLAG_MASK_TEXT,
+                } else if (IsDrawFlagSet(DRAWFLAG_MASK_ALIGN_TEXT,
                                          DRAWFLAG_ALIGN_TEXT_RIGHT)) {
 
                     int remain = len - (context.str - pStr);
@@ -289,11 +292,11 @@ template <typename T> f32 TextWriterBase<T>::PrintImpl(const T* pStr, int len) {
                 }
 
                 charSpace = false;
-            } else if (oper == OPERATION_NO_CHAR_SPACE) {
+            } else if (oper == TagProcessor::OPERATION_NO_CHAR_SPACE) {
                 charSpace = false;
-            } else if (oper == OPERATION_CHAR_SPACE) {
+            } else if (oper == TagProcessor::OPERATION_CHAR_SPACE) {
                 charSpace = true;
-            } else if (oper == OPERATION_END_DRAW) {
+            } else if (oper == TagProcessor::OPERATION_END_DRAW) {
                 break;
             }
 
@@ -337,8 +340,8 @@ template <typename T> f32 TextWriterBase<T>::PrintImpl(const T* pStr, int len) {
     f32 width = GetCursorX() - context.x;
     textWidth = Max(textWidth, width);
 
-    if (IsDrawFlagSet(DRAWFLAG_MASK_V, DRAWFLAG_ALIGN_V_CENTER) ||
-        IsDrawFlagSet(DRAWFLAG_MASK_V, DRAWFLAG_ALIGN_V_TOP)) {
+    if (IsDrawFlagSet(DRAWFLAG_MASK_ALIGN_V, DRAWFLAG_ALIGN_V_CENTER) ||
+        IsDrawFlagSet(DRAWFLAG_MASK_ALIGN_V, DRAWFLAG_ALIGN_V_TOP)) {
         SetCursorY(orgCursorY);
     } else {
         MoveCursorY(cursorYAdj);
@@ -352,8 +355,9 @@ f32 TextWriterBase<T>::AdjustCursor(f32* pX, f32* pY, const T* pStr, int len) {
     f32 textWidth = 0.0f;
     f32 textHeight = 0.0f;
 
-    if (!IsDrawFlagSet(DRAWFLAG_MASK_ALL, DRAWFLAG_MASK_V) &&
+    if (!IsDrawFlagSet(DRAWFLAG_MASK_ALL, DRAWFLAG_MASK_ALIGN_V) &&
         !IsDrawFlagSet(DRAWFLAG_MASK_ALL, 0)) {
+
         Rect rect;
         CalcStringRect(&rect, pStr, len);
 
@@ -365,27 +369,28 @@ f32 TextWriterBase<T>::AdjustCursor(f32* pX, f32* pY, const T* pStr, int len) {
         }
     }
 
-    if (IsDrawFlagSet(DRAWFLAG_MASK_H, DRAWFLAG_ALIGN_H_CENTER)) {
+    if (IsDrawFlagSet(DRAWFLAG_MASK_ALIGN_H, DRAWFLAG_ALIGN_H_CENTER)) {
         *pX -= textWidth / 2;
-    } else if (IsDrawFlagSet(DRAWFLAG_MASK_H, DRAWFLAG_ALIGN_H_RIGHT)) {
+    } else if (IsDrawFlagSet(DRAWFLAG_MASK_ALIGN_H, DRAWFLAG_ALIGN_H_RIGHT)) {
         *pX -= textWidth;
     }
 
-    if (IsDrawFlagSet(DRAWFLAG_MASK_V, DRAWFLAG_ALIGN_V_CENTER)) {
+    if (IsDrawFlagSet(DRAWFLAG_MASK_ALIGN_V, DRAWFLAG_ALIGN_V_CENTER)) {
         *pY -= textHeight / 2;
-    } else if (IsDrawFlagSet(DRAWFLAG_MASK_V, DRAWFLAG_ALIGN_V_TOP)) {
+    } else if (IsDrawFlagSet(DRAWFLAG_MASK_ALIGN_V, DRAWFLAG_ALIGN_V_TOP)) {
         *pY -= textHeight;
     }
 
-    if (IsDrawFlagSet(DRAWFLAG_MASK_TEXT, DRAWFLAG_ALIGN_TEXT_CENTER)) {
+    if (IsDrawFlagSet(DRAWFLAG_MASK_ALIGN_TEXT, DRAWFLAG_ALIGN_TEXT_CENTER)) {
         SetCursorX(*pX + (textWidth - CalcLineWidth(pStr, len)) / 2);
-    } else if (IsDrawFlagSet(DRAWFLAG_MASK_TEXT, DRAWFLAG_ALIGN_TEXT_RIGHT)) {
+    } else if (IsDrawFlagSet(DRAWFLAG_MASK_ALIGN_TEXT,
+                             DRAWFLAG_ALIGN_TEXT_RIGHT)) {
         SetCursorX(*pX + (textWidth - CalcLineWidth(pStr, len)));
     } else {
         SetCursorX(*pX);
     }
 
-    if (IsDrawFlagSet(DRAWFLAG_MASK_V,
+    if (IsDrawFlagSet(DRAWFLAG_MASK_ALIGN_V,
                       DRAWFLAG_ALIGN_V_CENTER | DRAWFLAG_ALIGN_V_TOP)) {
         SetCursorY(*pY);
     } else {

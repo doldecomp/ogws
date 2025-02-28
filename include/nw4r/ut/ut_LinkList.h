@@ -10,7 +10,7 @@ namespace ut {
 // Forward declarations
 namespace detail {
 class LinkListImpl;
-}
+} // namespace detail
 
 /******************************************************************************
  *
@@ -189,8 +189,7 @@ public:
 
     typename TIter::TElem& operator*() const {
         TIter it = mCurrent;
-        --it;
-        return *it;
+        return *--it;
     }
 
     friend bool operator==(const ReverseIterator& rLhs,
@@ -323,7 +322,7 @@ public:
 public:
     // Shorthand names for reverse iterator types
     typedef detail::ReverseIterator<Iterator> RevIterator;
-    typedef detail::ReverseIterator<ConstIterator> RevConstIterator;
+    typedef detail::ReverseIterator<ConstIterator> ConstRevIterator;
 
 public:
     LinkList() {}
@@ -334,8 +333,11 @@ public:
     ConstIterator GetBeginIter() const {
         return ConstIterator(const_cast<LinkList*>(this)->GetBeginIter());
     }
-    detail::ReverseIterator<Iterator> GetBeginReverseIter() {
-        return detail::ReverseIterator<Iterator>(GetBeginIter());
+    RevIterator GetBeginReverseIter() {
+        return RevIterator(GetBeginIter());
+    }
+    ConstRevIterator GetBeginReverseIter() const {
+        return ConstRevIterator(GetBeginIter());
     }
 
     Iterator GetEndIter() {
@@ -344,8 +346,11 @@ public:
     ConstIterator GetEndIter() const {
         return ConstIterator(const_cast<LinkList*>(this)->GetEndIter());
     }
-    detail::ReverseIterator<Iterator> GetEndReverseIter() {
-        return detail::ReverseIterator<Iterator>(GetEndIter());
+    RevIterator GetEndReverseIter() {
+        return RevIterator(GetEndIter());
+    }
+    ConstRevIterator GetEndReverseIter() const {
+        return ConstRevIterator(GetEndIter());
     }
 
     Iterator Insert(Iterator it, T* pElem) {

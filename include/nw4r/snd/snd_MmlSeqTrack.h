@@ -9,9 +9,6 @@ namespace nw4r {
 namespace snd {
 namespace detail {
 
-// Forward declarations
-class MmlParser;
-
 class MmlSeqTrack : public SeqTrack {
 public:
     struct MmlParserParam {

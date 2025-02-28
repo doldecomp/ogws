@@ -3,11 +3,9 @@
 #include <nw4r/types_nw4r.h>
 
 #include <nw4r/lyt/lyt_common.h>
-#include <nw4r/lyt/lyt_pane.h>
 #include <nw4r/lyt/lyt_texMap.h>
 #include <nw4r/lyt/lyt_types.h>
 
-#include <nw4r/math.h>
 #include <nw4r/ut.h>
 
 #include <revolution/GX.h>
@@ -17,6 +15,7 @@ namespace lyt {
 
 // Forward declarations
 class AnimTransform;
+struct ResBlockSet;
 
 namespace detail {
 

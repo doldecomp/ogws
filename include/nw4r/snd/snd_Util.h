@@ -2,8 +2,6 @@
 #define NW4R_SND_UTIL_H
 #include <nw4r/types_nw4r.h>
 
-#include <nw4r/snd/snd_Types.h>
-
 namespace nw4r {
 namespace snd {
 namespace detail {

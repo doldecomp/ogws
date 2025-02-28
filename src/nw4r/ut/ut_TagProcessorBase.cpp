@@ -8,7 +8,9 @@ template <typename T> TagProcessorBase<T>::TagProcessorBase() {}
 template <typename T> TagProcessorBase<T>::~TagProcessorBase() {}
 
 template <typename T>
-Operation TagProcessorBase<T>::Process(u16 ch, PrintContext<T>* pCtx) {
+typename TagProcessorBase<T>::Operation
+TagProcessorBase<T>::Process(u16 ch, ContextType* pCtx) {
+
     switch (ch) {
     case '\n': {
         ProcessLinefeed(pCtx);
@@ -25,8 +27,8 @@ Operation TagProcessorBase<T>::Process(u16 ch, PrintContext<T>* pCtx) {
 }
 
 template <typename T>
-Operation TagProcessorBase<T>::CalcRect(Rect* pRect, u16 ch,
-                                        PrintContext<T>* pCtx) {
+typename TagProcessorBase<T>::Operation
+TagProcessorBase<T>::CalcRect(Rect* pRect, u16 ch, ContextType* pCtx) {
 
     switch (ch) {
     case '\n': {
@@ -55,8 +57,7 @@ Operation TagProcessorBase<T>::CalcRect(Rect* pRect, u16 ch,
     return OPERATION_DEFAULT;
 }
 
-template <typename T>
-void TagProcessorBase<T>::ProcessTab(PrintContext<T>* pCtx) {
+template <typename T> void TagProcessorBase<T>::ProcessTab(ContextType* pCtx) {
     TextWriterBase<T>& rWriter = *pCtx->writer;
 
     int tabWidth = rWriter.GetTabWidth();
@@ -76,7 +77,7 @@ void TagProcessorBase<T>::ProcessTab(PrintContext<T>* pCtx) {
 }
 
 template <typename T>
-void TagProcessorBase<T>::ProcessLinefeed(PrintContext<T>* pCtx) {
+void TagProcessorBase<T>::ProcessLinefeed(ContextType* pCtx) {
     TextWriterBase<T>& rWriter = *pCtx->writer;
 
     f32 x = pCtx->x;

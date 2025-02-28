@@ -10,6 +10,10 @@
 
 namespace nw4r {
 namespace lyt {
+
+// Forward declarations
+struct ResBlockSet;
+
 namespace res {
 
 /******************************************************************************

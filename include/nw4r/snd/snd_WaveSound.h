@@ -14,9 +14,10 @@ namespace snd {
 class WaveSoundHandle;
 
 namespace detail {
-
-// Forward declarations
 template <typename T> class SoundInstanceManager;
+} // namespace detail
+
+namespace detail {
 
 class WaveSound : public BasicSound {
     friend class WaveSoundHandle;

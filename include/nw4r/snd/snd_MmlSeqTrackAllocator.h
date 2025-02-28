@@ -11,6 +11,7 @@ namespace detail {
 
 // Forward declarations
 class MmlParser;
+class MmlSeqTrack;
 class SeqPlayer;
 class SeqTrack;
 

@@ -5,6 +5,9 @@
 namespace nw4r {
 namespace ef {
 
+// Forward declarations
+class EmitterForm;
+
 enum EmitFormType {
     EMITFORMTYPE_DISC,
     EMITFORMTYPE_LINE,

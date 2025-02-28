@@ -20,11 +20,12 @@ namespace nw4r {
 namespace snd {
 
 // Forward declarations
-namespace detail {
-class SeqTrackAllocator;
-}
 class SoundMemoryAllocatable;
 class SoundPlayer;
+
+namespace detail {
+class SeqTrackAllocator;
+} // namespace detail
 
 /******************************************************************************
  *

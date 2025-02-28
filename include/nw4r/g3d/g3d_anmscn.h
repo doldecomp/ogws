@@ -12,7 +12,12 @@ namespace nw4r {
 namespace g3d {
 
 // Forward declarations
+struct AmbLightAnmResult;
 class AnmScnRes;
+struct CameraAnmResult;
+struct FogAnmResult;
+struct LightAnmResult;
+class LightSetting;
 
 class AnmScn : public G3dObj {
 public:

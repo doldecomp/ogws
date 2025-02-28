@@ -2,8 +2,6 @@
 #define NW4R_LYT_COMMON_H
 #include <nw4r/types_nw4r.h>
 
-#include <nw4r/lyt/lyt_types.h>
-
 #include <nw4r/math.h>
 #include <nw4r/ut.h>
 
@@ -14,9 +12,11 @@ namespace lyt {
 
 // Forward declarations
 class ResourceAccessor;
+struct Size;
+
 namespace res {
 struct BinaryFileHeader;
-}
+} // namespace res
 
 /******************************************************************************
  *

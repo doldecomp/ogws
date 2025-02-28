@@ -3,8 +3,8 @@
 #include "types_egg.h"
 #include "eggMatrix.h"
 #include "eggAssert.h"
-#include "types_nw4r.h"
-#include "math_types.h"
+#include <nw4r/g3d.h>
+#include <nw4r/math.h>
 
 #define CALC_BEFORE_FUNC(x) void calc_before_##x()
 #define CALC_AFTER_FUNC(x) void calc_after_##x()

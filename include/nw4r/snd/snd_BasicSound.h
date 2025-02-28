@@ -11,6 +11,17 @@
 
 namespace nw4r {
 namespace snd {
+
+// Forward declarations
+class SoundHandle;
+class SoundPlayer;
+
+namespace detail {
+class BasicPlayer;
+class ExternalSoundPlayer;
+class PlayerHeap;
+} // namespace detail
+
 namespace detail {
 
 class BasicSound {

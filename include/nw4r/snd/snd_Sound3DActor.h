@@ -10,6 +10,11 @@
 namespace nw4r {
 namespace snd {
 
+// Forward declarations
+class Sound3DManager;
+class SoundArchivePlayer;
+class SoundHandle;
+
 class Sound3DActor : public detail::SoundActor,
                      public detail::BasicSound::AmbientArgUpdateCallback {
 public:

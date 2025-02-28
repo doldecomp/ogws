@@ -67,6 +67,7 @@ struct VEC2 : _VEC2 {
  *
  ******************************************************************************/
 // Forward declarations
+struct VEC3;
 VEC3* VEC3Add(VEC3* pOut, const VEC3* pA, const VEC3* pB);
 VEC3* VEC3Sub(VEC3* pOut, const VEC3* pA, const VEC3* pB);
 VEC3* VEC3Scale(VEC3* pOut, const VEC3* pIn, f32 scale);

@@ -13,7 +13,7 @@ namespace g3d {
 // Forward declarations
 namespace G3DState {
 class IndMtxOp;
-}
+} // namespace G3DState
 
 enum Draw1Mat1ShpCtrl {
     DRAW1MAT1SHP_CTRL_NOPPCSYNC = (1 << 0),

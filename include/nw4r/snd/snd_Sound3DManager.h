@@ -11,6 +11,11 @@
 namespace nw4r {
 namespace snd {
 
+// Forward declarations
+class Sound3DListener;
+class SoundHandle;
+struct SoundParam;
+
 class Sound3DManager : public detail::BasicSound::AmbientParamUpdateCallback,
                        public detail::BasicSound::AmbientArgAllocaterCallback {
 public:

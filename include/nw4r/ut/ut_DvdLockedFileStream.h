@@ -23,6 +23,7 @@ public:
     virtual bool ReadAsync(void* /* pDst */, u32 /* size */,
                            StreamCallback /* pCallback */,
                            void* /* pCallbackArg */) {
+
         return false;
     } // at 0x18
 
@@ -31,6 +32,7 @@ public:
     virtual bool PeekAsync(void* /* pDst */, u32 /* size */,
                            StreamCallback /* pCallback */,
                            void* /* pCallbackArg */) {
+
         return false;
     } // at 0x60
 

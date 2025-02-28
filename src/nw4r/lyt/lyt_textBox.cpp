@@ -310,43 +310,51 @@ ut::Rect TextBox::GetTextDrawRect(ut::WideTextWriter* pWriter) const {
 }
 
 f32 TextBox::GetTextMagH() const {
+    f32 mag = 0.0f;
+
     switch (GetTextPositionH()) {
     default:
     case HORIZONTALPOSITION_LEFT: {
-        return 0.0f;
+        mag = 0.0f;
         break;
     }
 
     case HORIZONTALPOSITION_CENTER: {
-        return 0.5f;
+        mag = 0.5f;
         break;
     }
 
     case HORIZONTALPOSITION_RIGHT: {
-        return 1.0f;
+        mag = 1.0f;
         break;
     }
     }
+
+    return mag;
 }
 
 f32 TextBox::GetTextMagV() const {
+    f32 mag = 0.0f;
+
     switch (GetTextPositionV()) {
     default:
     case VERTICALPOSITION_TOP: {
-        return 0.0f;
+        mag = 0.0f;
         break;
     }
 
     case VERTICALPOSITION_CENTER: {
-        return 0.5f;
+        mag = 0.5f;
         break;
     }
 
     case VERTICALPOSITION_BOTTOM: {
-        return 1.0f;
+        mag = 1.0f;
         break;
     }
     }
+
+    return mag;
 }
 
 u32 TextBox::MakeDrawFlag() const {

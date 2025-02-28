@@ -17,9 +17,12 @@ namespace snd {
 class SeqSoundHandle;
 
 namespace detail {
-
-// Forward declarations
+class NoteOnCallback;
+class SeqTrackAllocator;
 template <typename T> class SoundInstanceManager;
+} // namespace detail
+
+namespace detail {
 
 class SeqSound : public BasicSound {
     friend class SeqSoundHandle;

@@ -14,7 +14,7 @@ namespace detail {
 
 // Forward declarations
 class Channel;
-class NoteOnInfo;
+struct NoteOnInfo;
 class NoteOnCallback;
 class SeqTrack;
 class SeqTrackAllocator;

@@ -11,6 +11,11 @@ namespace detail {
 // Forward declarations
 class SeqPlayer;
 
+/******************************************************************************
+ *
+ * NoteOnInfo
+ *
+ ******************************************************************************/
 struct NoteOnInfo {
     int prgNo;                                // at 0x0
     int key;                                  // at 0x4
@@ -23,6 +28,11 @@ struct NoteOnInfo {
     u32 channelCallbackData;                  // at 0x20
 };
 
+/******************************************************************************
+ *
+ * NoteOnCallback
+ *
+ ******************************************************************************/
 class NoteOnCallback {
 public:
     virtual ~NoteOnCallback() {} // at 0x8

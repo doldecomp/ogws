@@ -7,11 +7,6 @@
 namespace nw4r {
 namespace ut {
 
-/******************************************************************************
- *
- * Font binary structures
- *
- ******************************************************************************/
 enum FontMapMethod {
     FONT_MAPMETHOD_DIRECT,
     FONT_MAPMETHOD_TABLE,
@@ -46,7 +41,7 @@ struct FontCodeMap {
     u16 mappingMethod;  // at 0x4
     u16 reserved;       // at 0x6
     FontCodeMap* pNext; // at 0x8
-    u16 mapInfo[];      // at 0xc
+    u16 mapInfo[];      // at 0xC
 };
 
 struct FontInformation {

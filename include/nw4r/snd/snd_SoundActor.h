@@ -9,6 +9,10 @@
 
 namespace nw4r {
 namespace snd {
+
+// Forward declarations
+class SoundHandle;
+
 namespace detail {
 
 class SoundActor : public SoundStartable {
@@ -36,16 +40,16 @@ public:
     }
 
     template <typename TForEachFunc>
-    TForEachFunc ForEachSound(TForEachFunc pFunction, bool reverse) {
+    TForEachFunc ForEachSound(TForEachFunc pFunc, bool reverse) {
         int i;
         ExternalSoundPlayer* pPlayer = detail_GetActorSoundPlayer(0);
 
         for (i = 0; i < ACTOR_PLAYER_COUNT; i++) {
-            pPlayer->ForEachSound(pFunction, reverse);
+            pPlayer->ForEachSound(pFunc, reverse);
             pPlayer++;
         }
 
-        return pFunction;
+        return pFunc;
     }
 
 private:

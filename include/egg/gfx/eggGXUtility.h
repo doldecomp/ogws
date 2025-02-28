@@ -2,9 +2,10 @@
 #define EGG_GFX_GX_UTILITY_H
 #include "types_egg.h"
 #include "eggIDrawGX.h"
-#include "math_types.h"
 #include <revolution/GX.h>
 #include <revolution/MTX.h>
+#include <nw4r/g3d.h>
+#include <nw4r/math.h>
 
 namespace EGG
 {

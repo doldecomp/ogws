@@ -14,6 +14,9 @@ namespace nw4r {
 namespace snd {
 namespace detail {
 
+// Forward declarations
+struct WaveData;
+
 class Channel {
 public:
     enum ChannelCallbackStatus {

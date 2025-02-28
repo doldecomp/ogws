@@ -21,6 +21,7 @@ public:
     Color(const GXColor& rColor) {
         *this = rColor;
     }
+
     ~Color() {}
 
     void Set(int red, int green, int blue, int alpha) {

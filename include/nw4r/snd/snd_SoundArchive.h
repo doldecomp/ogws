@@ -9,6 +9,11 @@
 namespace nw4r {
 namespace snd {
 
+// Forward declarations
+namespace detail {
+class SoundArchiveFileReader;
+} // namespace detail
+
 enum SoundType {
     SOUND_TYPE_INVALID,
     SOUND_TYPE_SEQ,

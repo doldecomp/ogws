@@ -9,6 +9,9 @@
 namespace nw4r {
 namespace g3d {
 
+// Forward declarations
+class ResAnmScn;
+
 struct ResLightSetData {
     static const u32 INVALID_ID = 0xFFFF;
 

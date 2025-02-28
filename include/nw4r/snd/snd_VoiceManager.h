@@ -4,6 +4,8 @@
 
 #include <nw4r/snd/snd_Voice.h>
 
+#include <revolution/AX.h>
+
 namespace nw4r {
 namespace snd {
 namespace detail {

@@ -15,9 +15,9 @@ namespace snd {
 namespace detail {
 class ExternalSoundPlayer;
 class SeqSound;
+template <typename T> class SoundInstanceManager;
 class StrmSound;
 class WaveSound;
-template <typename T> class SoundInstanceManager;
 } // namespace detail
 
 class SoundPlayer {

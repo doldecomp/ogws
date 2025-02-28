@@ -8,6 +8,9 @@
 namespace nw4r {
 namespace g3d {
 
+// Forward declarations
+class ResMdl;
+
 /******************************************************************************
  *
  * AnmObj

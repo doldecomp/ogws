@@ -2,16 +2,23 @@
 #define NW4R_UT_TAG_PROCESSOR_BASE_H
 #include <nw4r/types_nw4r.h>
 
-#include <nw4r/ut/ut_Rect.h>
-
 namespace nw4r {
 namespace ut {
 
-enum PrintFlags {
-    PRINTFLAGS_CHARSPACE = (1 << 0),
-};
+// Forward declarations
+struct Rect;
+template <typename T> class TextWriterBase;
 
+/******************************************************************************
+ *
+ * PrintContext
+ *
+ ******************************************************************************/
 template <typename T> struct PrintContext {
+    enum Flags {
+        FLAGS_CHARSPACE = (1 << 0),
+    };
+
     TextWriterBase<T>* writer; // at 0x0
     const T* str;              // at 0x4
     f32 x;                     // at 0x8
@@ -19,26 +26,34 @@ template <typename T> struct PrintContext {
     u32 flags;                 // at 0x10
 };
 
-enum Operation {
-    OPERATION_DEFAULT,
-    OPERATION_NO_CHAR_SPACE,
-    OPERATION_CHAR_SPACE,
-    OPERATION_NEXT_LINE,
-    OPERATION_END_DRAW
-};
-
+/******************************************************************************
+ *
+ * TagProcessorBase
+ *
+ ******************************************************************************/
 template <typename T> class TagProcessorBase {
+public:
+    typedef PrintContext<T> ContextType;
+
+    enum Operation {
+        OPERATION_DEFAULT,
+        OPERATION_NO_CHAR_SPACE,
+        OPERATION_CHAR_SPACE,
+        OPERATION_NEXT_LINE,
+        OPERATION_END_DRAW
+    };
+
 public:
     TagProcessorBase();
     virtual ~TagProcessorBase(); // at 0x8
 
-    virtual Operation Process(u16 ch, PrintContext<T>* pCtx); // at 0xC
+    virtual Operation Process(u16 ch, ContextType* pCtx); // at 0xC
     virtual Operation CalcRect(Rect* pRect, u16 ch,
-                               PrintContext<T>* pCtx); // at 0x10
+                               ContextType* pCtx); // at 0x10
 
 private:
-    void ProcessTab(PrintContext<T>* pCtx);
-    void ProcessLinefeed(PrintContext<T>* pCtx);
+    void ProcessTab(ContextType* pCtx);
+    void ProcessLinefeed(ContextType* pCtx);
 };
 
 } // namespace ut

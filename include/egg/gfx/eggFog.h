@@ -1,7 +1,7 @@
 #ifndef EGG_GFX_FOG_H
 #define EGG_GFX_FOG_H
 #include "types_egg.h"
-#include "g3d_fog.h"
+#include <nw4r/g3d.h>
 
 namespace EGG
 {

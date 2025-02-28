@@ -4,6 +4,8 @@
 
 #include <nw4r/g3d/res/g3d_resanmtexsrt.h>
 
+#include <nw4r/math.h>
+
 namespace nw4r {
 namespace g3d {
 namespace detail {

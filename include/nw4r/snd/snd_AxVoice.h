@@ -8,6 +8,8 @@
 
 #include <revolution/AX.h>
 
+#include <climits>
+
 namespace nw4r {
 namespace snd {
 namespace detail {
@@ -17,7 +19,7 @@ inline int CalcAxvpbDelta(u16 init, u16 target) {
 }
 
 inline u16 CalcMixVolume(f32 volume) {
-    return ut::Min<u32>(0xFFFF, AX_MAX_VOLUME * volume);
+    return ut::Min<u32>(USHRT_MAX, AX_MAX_VOLUME * volume);
 }
 
 /******************************************************************************
