@@ -22,13 +22,11 @@ inline TPtr find(TPtr first, TPtr last, const T& value) {
 }
 
 template <typename TPtr> inline long distance(TPtr first, TPtr last) {
-    random_access_iterator_tag tag;
-    return __distance(first, last, tag);
+    return __distance(first, last, random_access_iterator_tag());
 }
 
 template <typename TPtr>
-inline long __distance(TPtr first, TPtr last,
-                       random_access_iterator_tag /* tag */) {
+inline long __distance(TPtr first, TPtr last, random_access_iterator_tag) {
     return static_cast<long>(last - first);
 }
 
