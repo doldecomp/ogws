@@ -231,21 +231,13 @@ f32 CalcAnimationFVS(const ResAnmChrFVSData* pFVSData, f32 frame) {
     const TTraits::TFrame quantized = TTraits::QuantizeFrame(frame);
 
     if (quantized < left.GetFrame()) {
-        while (true) {
+        do {
             left--;
-
-            if (!(quantized < left.GetFrame())) {
-                break;
-            }
-        }
+        } while (quantized < left.GetFrame());
     } else {
-        while (true) {
+        do {
             left++;
-
-            if (!(left.GetFrame() <= quantized)) {
-                break;
-            }
-        }
+        } while (left.GetFrame() <= quantized);
 
         left--;
     }
