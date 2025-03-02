@@ -17,5 +17,6 @@
 #include <nw4r/lyt/lyt_texMap.h>
 #include <nw4r/lyt/lyt_textBox.h>
 #include <nw4r/lyt/lyt_types.h>
+#include <nw4r/lyt/lyt_window.h>
 
 #endif

@@ -15,11 +15,11 @@ struct RuntimeTypeInfo {
     explicit RuntimeTypeInfo(const RuntimeTypeInfo* pBase)
         : mParentTypeInfo(pBase) {}
 
-    bool IsDerivedFrom(const RuntimeTypeInfo* pBase) const {
+    bool IsDerivedFrom(const RuntimeTypeInfo* pInfo) const {
         for (const RuntimeTypeInfo* pIt = this; pIt != NULL;
              pIt = pIt->mParentTypeInfo) {
 
-            if (pIt == pBase) {
+            if (pIt == pInfo) {
                 return true;
             }
         }
@@ -31,8 +31,8 @@ struct RuntimeTypeInfo {
 };
 
 template <typename T>
-inline const RuntimeTypeInfo* GetTypeInfoFromPtr_(T* pPtr) {
-    return &pPtr->typeInfo;
+inline const RuntimeTypeInfo* GetTypeInfoFromPtr_(T* /* pPtr */) {
+    return &T::typeInfo;
 }
 
 } // namespace detail

@@ -22,6 +22,8 @@ namespace res {
  *
  ******************************************************************************/
 struct TextBox : Pane {
+    static const u32 SIGNATURE = 'txt1';
+
     u16 textBufBytes;             // at 0x4C
     u16 textStrBytes;             // at 0x4E
     u16 materialIdx;              // at 0x50

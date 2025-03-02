@@ -6,6 +6,12 @@ namespace lyt {
 
 NW4R_UT_RTTI_DEF_DERIVED(Picture, Pane);
 
+// TODO: Don't know what this actually looks like...
+Picture::Picture(u8 num) : Pane(NULL) {
+    num = ut::Min<u8>(num, NW4R_LYT_MAX_TEXCOORD);
+    Init(num);
+}
+
 Picture::Picture(const res::Picture* pRes, const ResBlockSet& rBlockSet)
     : Pane(pRes) {
 

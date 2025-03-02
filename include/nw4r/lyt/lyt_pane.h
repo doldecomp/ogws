@@ -52,6 +52,8 @@ namespace res {
  *
  ******************************************************************************/
 struct Pane {
+    static const u32 SIGNATURE = 'pan1';
+
     DataBlockHeader blockHeader;               // at 0x0
     u8 flag;                                   // at 0x8
     u8 basePosition;                           // at 0x9
@@ -136,7 +138,7 @@ public:
         return mpParent;
     }
 
-    PaneList GetChildList() {
+    PaneList& GetChildList() {
         return mChildList;
     }
 
