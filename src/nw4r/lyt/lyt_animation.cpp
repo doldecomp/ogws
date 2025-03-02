@@ -13,23 +13,6 @@ namespace lyt {
 namespace res {
 
 /******************************************************************************
- * AnimationInfo
- ******************************************************************************/
-struct AnimationInfo {
-    u32 kind;                  // at 0x0
-    u8 num;                    // at 0x4
-    u8 PADDING_0x5[0x8 - 0x5]; // at 0x5
-
-    static const u32 SIGNATURE_ANMPANESRT = 'RLPA';
-    static const u32 SIGNATURE_ANMPANEVIS = 'RLVI';
-    static const u32 SIGNATURE_ANMVTXCLR = 'RLVC';
-
-    static const u32 SIGNATURE_ANMMATCLR = 'RLMC';
-    static const u32 SIGNATURE_ANMTEXSRT = 'RLTS';
-    static const u32 SIGNATURE_ANMTEXPAT = 'RLTP';
-    static const u32 SIGNATURE_ANMINDTEXSRT = 'RLIM';
-};
-/******************************************************************************
  * AnimationContent
  ******************************************************************************/
 struct AnimationContent {

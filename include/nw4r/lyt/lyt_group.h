@@ -36,6 +36,8 @@ namespace res {
  *
  ******************************************************************************/
 struct Group {
+    static const u32 SIGNATURE = 'grp1';
+
     DataBlockHeader blockHeader;      // at 0x0
     char name[NW4R_LYT_RES_NAME_LEN]; // at 0x8
     u16 paneNum;                      // at 0x18

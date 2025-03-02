@@ -20,6 +20,8 @@ namespace res {
  *
  ******************************************************************************/
 struct Picture : Pane {
+    static const u32 SIGNATURE = 'pic1';
+
     u32 vtxCols[VERTEXCOLOR_MAX]; // at 0x4C
     u16 materialIdx;              // at 0x5C
     u8 texCoordNum;               // at 0x5E
@@ -38,6 +40,7 @@ public:
     NW4R_UT_RTTI_DECL(Picture);
 
 public:
+    Picture(u8 num);
     Picture(const res::Picture* pRes, const ResBlockSet& rBlockSet);
     virtual ~Picture(); // at 0x8
 

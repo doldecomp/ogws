@@ -19,7 +19,9 @@ namespace res {
  * BND1 binary layout
  *
  ******************************************************************************/
-struct Bounding : Pane {};
+struct Bounding : Pane {
+    static const u32 SIGNATURE = 'bnd1';
+};
 
 } // namespace res
 

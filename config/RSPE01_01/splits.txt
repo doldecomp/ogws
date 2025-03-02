@@ -852,13 +852,13 @@ nw4r/lyt/lyt_group.cpp:
 	.data       start:0x803971F0 end:0x80397200
 
 nw4r/lyt/lyt_layout.cpp:
-	.text       start:0x8007A550 end:0x8007B1CC
+	.text       start:0x8007A550 end:0x8007B1C0
 	.data       start:0x80397200 end:0x80397238
 	.sbss       start:0x804BEB80 end:0x804BEB88
 	.sdata2     start:0x804C0490 end:0x804C0498
 
 nw4r/lyt/lyt_picture.cpp:
-	.text       start:0x8007B1CC end:0x8007B6E8
+	.text       start:0x8007B1C0 end:0x8007B6E8
 	.ctors      start:0x803550D0 end:0x803550D4
 	.data       start:0x80397238 end:0x803972A0
 	.sbss       start:0x804BEB88 end:0x804BEB90
