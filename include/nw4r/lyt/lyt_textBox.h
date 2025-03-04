@@ -14,6 +14,18 @@ namespace lyt {
 // Forward declarations
 struct ResBlockSet;
 
+/******************************************************************************
+ *
+ * TextColor
+ *
+ ******************************************************************************/
+enum TextColor {
+    TEXTCOLOR_TOP,
+    TEXTCOLOR_BOTTOM,
+
+    TEXTCOLOR_MAX
+};
+
 namespace res {
 
 /******************************************************************************

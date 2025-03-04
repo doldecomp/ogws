@@ -26,12 +26,13 @@ void SetTagProcessorImpl(Pane* pPane, ut::WideTagProcessor* pProcessor) {
 namespace nw4r {
 namespace lyt {
 
+MEMAllocator* Layout::mspAllocator = NULL;
+
 /******************************************************************************
  *
  * Layout
  *
  ******************************************************************************/
-MEMAllocator* Layout::mspAllocator = NULL;
 
 Layout::Layout()
     : mpRootPane(NULL),

@@ -111,10 +111,10 @@ bool IsModulateVertexColor(ut::Color* pColors, u8 glbAlpha) {
         return true;
     }
 
-    if (pColors != NULL && (pColors[VERTEXCOLOR_TL] != 0xFFFFFFFF ||
-                            pColors[VERTEXCOLOR_TR] != 0xFFFFFFFF ||
-                            pColors[VERTEXCOLOR_BL] != 0xFFFFFFFF ||
-                            pColors[VERTEXCOLOR_BR] != 0xFFFFFFFF)) {
+    if (pColors != NULL && (pColors[VERTEXCOLOR_LT] != 0xFFFFFFFF ||
+                            pColors[VERTEXCOLOR_RT] != 0xFFFFFFFF ||
+                            pColors[VERTEXCOLOR_LB] != 0xFFFFFFFF ||
+                            pColors[VERTEXCOLOR_RB] != 0xFFFFFFFF)) {
         return true;
     }
 
@@ -169,38 +169,38 @@ void DrawQuad(const math::VEC2& rBase, const Size& rSize, u8 num,
     {
         GXPosition2f32(rBase.x, rBase.y);
         if (pColors != NULL) {
-            GXColor1u32(pColors[VERTEXCOLOR_TL]);
+            GXColor1u32(pColors[VERTEXCOLOR_LT]);
         }
         for (int i = 0; i < num; i++) {
-            GXTexCoord2f32(pCoords[i][VERTEXCOLOR_TL].x,
-                           pCoords[i][VERTEXCOLOR_TL].y);
+            GXTexCoord2f32(pCoords[i][VERTEXCOLOR_LT].x,
+                           pCoords[i][VERTEXCOLOR_LT].y);
         }
 
         GXPosition2f32(rBase.x + rSize.width, rBase.y);
         if (pColors != NULL) {
-            GXColor1u32(pColors[VERTEXCOLOR_TR]);
+            GXColor1u32(pColors[VERTEXCOLOR_RT]);
         }
         for (int i = 0; i < num; i++) {
-            GXTexCoord2f32(pCoords[i][VERTEXCOLOR_TR].x,
-                           pCoords[i][VERTEXCOLOR_TR].y);
+            GXTexCoord2f32(pCoords[i][VERTEXCOLOR_RT].x,
+                           pCoords[i][VERTEXCOLOR_RT].y);
         }
 
         GXPosition2f32(rBase.x + rSize.width, rBase.y + rSize.height);
         if (pColors != NULL) {
-            GXColor1u32(pColors[VERTEXCOLOR_BR]);
+            GXColor1u32(pColors[VERTEXCOLOR_RB]);
         }
         for (int i = 0; i < num; i++) {
-            GXTexCoord2f32(pCoords[i][VERTEXCOLOR_BR].x,
-                           pCoords[i][VERTEXCOLOR_BR].y);
+            GXTexCoord2f32(pCoords[i][VERTEXCOLOR_RB].x,
+                           pCoords[i][VERTEXCOLOR_RB].y);
         }
 
         GXPosition2f32(rBase.x, rBase.y + rSize.height);
         if (pColors != NULL) {
-            GXColor1u32(pColors[VERTEXCOLOR_BL]);
+            GXColor1u32(pColors[VERTEXCOLOR_LB]);
         }
         for (int i = 0; i < num; i++) {
-            GXTexCoord2f32(pCoords[i][VERTEXCOLOR_BL].x,
-                           pCoords[i][VERTEXCOLOR_BL].y);
+            GXTexCoord2f32(pCoords[i][VERTEXCOLOR_LB].x,
+                           pCoords[i][VERTEXCOLOR_LB].y);
         }
     }
     GXEnd();

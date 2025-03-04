@@ -112,13 +112,13 @@ void Picture::DrawSelf(const DrawInfo& rInfo) {
 
     LoadMtx(rInfo);
 
-    bool vtxColor = mpMaterial->SetupGX(
+    bool useVtxColor = mpMaterial->SetupGX(
         detail::IsModulateVertexColor(mVtxColors, mGlbAlpha), mGlbAlpha);
 
-    detail::SetVertexFormat(vtxColor, mTexCoordAry.GetSize());
+    detail::SetVertexFormat(useVtxColor, mTexCoordAry.GetSize());
 
     detail::DrawQuad(GetVtxPos(), mSize, mTexCoordAry.GetSize(),
-                     mTexCoordAry.GetArray(), vtxColor ? mVtxColors : NULL,
+                     mTexCoordAry.GetArray(), useVtxColor ? mVtxColors : NULL,
                      mGlbAlpha);
 }
 

@@ -280,9 +280,11 @@ protected:
     bool mbUserAllocated; // at 0xD2
     u8 PADDING_0xD3;      // at 0xD3
 
+protected:
+    void InsertChild(PaneList::Iterator next, Pane* pChild);
+
 private:
     void Init();
-    void InsertChild(PaneList::Iterator next, Pane* pChild);
 };
 
 NW4R_UT_LINKLIST_TYPEDEF_DECL(Pane);

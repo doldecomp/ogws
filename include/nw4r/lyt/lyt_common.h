@@ -24,24 +24,12 @@ struct BinaryFileHeader;
  *
  ******************************************************************************/
 enum VertexColor {
-    VERTEXCOLOR_TL,
-    VERTEXCOLOR_TR,
-    VERTEXCOLOR_BL,
-    VERTEXCOLOR_BR,
+    VERTEXCOLOR_LT,
+    VERTEXCOLOR_RT,
+    VERTEXCOLOR_LB,
+    VERTEXCOLOR_RB,
 
     VERTEXCOLOR_MAX
-};
-
-/******************************************************************************
- *
- * TextColor
- *
- ******************************************************************************/
-enum TextColor {
-    TEXTCOLOR_TOP,
-    TEXTCOLOR_BOTTOM,
-
-    TEXTCOLOR_MAX
 };
 
 /******************************************************************************
