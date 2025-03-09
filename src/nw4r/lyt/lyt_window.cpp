@@ -245,7 +245,7 @@ Window::Window(const res::Window* pRes, const ResBlockSet& rBlockSet)
     }
 
     if (pResContent->texCoordNum > 0) {
-        u8 num = ut::Min<u8>(pResContent->texCoordNum, NW4R_LYT_MAX_TEXCOORD);
+        u8 num = ut::Min<u8>(pResContent->texCoordNum, GX_MAX_TEXCOORD);
         mContent.texCoordAry.Reserve(num);
 
         if (!mContent.texCoordAry.IsEmpty()) {
@@ -456,6 +456,7 @@ void Window::DrawContent(const math::VEC2& rBase,
 
         mContent.texCoordAry.GetSize(),
         mContent.texCoordAry.GetArray(),
+        
         useVtxColor ? mContent.vtxColors : NULL,
         alpha);
     // clang-format on

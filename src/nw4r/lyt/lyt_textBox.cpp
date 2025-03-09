@@ -192,8 +192,8 @@ void TextBox::DrawSelf(const DrawInfo& rInfo) {
                                           : ut::CharWriter::GRADMODE_NONE);
     writer.SetTextColor(top, bottom);
 
-    ut::Color min = GetColor(mpMaterial->GetTevColor(TEVCOLOR_1));
-    ut::Color max = GetColor(mpMaterial->GetTevColor(TEVCOLOR_2));
+    ut::Color min = GetColor(mpMaterial->GetTevColor(TEVCOLOR_REG0));
+    ut::Color max = GetColor(mpMaterial->GetTevColor(TEVCOLOR_REG1));
 
     writer.SetColorMapping(min, max);
     writer.SetupGX();

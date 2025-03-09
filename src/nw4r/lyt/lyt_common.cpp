@@ -111,10 +111,10 @@ bool IsModulateVertexColor(ut::Color* pColors, u8 glbAlpha) {
         return true;
     }
 
-    if (pColors != NULL && (pColors[VERTEXCOLOR_LT] != 0xFFFFFFFF ||
-                            pColors[VERTEXCOLOR_RT] != 0xFFFFFFFF ||
-                            pColors[VERTEXCOLOR_LB] != 0xFFFFFFFF ||
-                            pColors[VERTEXCOLOR_RB] != 0xFFFFFFFF)) {
+    if (pColors != NULL && (pColors[VERTEXCOLOR_LT] != ut::Color::WHITE ||
+                            pColors[VERTEXCOLOR_RT] != ut::Color::WHITE ||
+                            pColors[VERTEXCOLOR_LB] != ut::Color::WHITE ||
+                            pColors[VERTEXCOLOR_RB] != ut::Color::WHITE)) {
         return true;
     }
 
