@@ -115,7 +115,7 @@ void SetColorComponentValue(ut::Color* pColor, u32 idx, s16 value) {
 /******************************************************************************
  * SetIndTexMtx
  ******************************************************************************/
-void SetIndTexMtx(GXIndTexMtxID id, const f32 (*mtx)[3]) {
+void SetIndTexMtx(GXIndTexMtxID id, const f32 mtx[2][3]) {
     f32 m00, m01, m02, m10, m11, m12;
     f32 a00, a01, a02, a10, a11, a12;
 
