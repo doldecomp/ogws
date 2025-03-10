@@ -1,0 +1,5 @@
+All modifications to BTE source code are documented at the top of their respective source files in accordance with Broadcom's use of the Apache 2.0 license.
+
+These changes are only enabled when compiling with 'REVOLUTION' defined.
+
+To find all listed changes, please search the repository for the following string: "NOTICE OF CHANGES".
