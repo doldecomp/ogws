@@ -58,10 +58,12 @@ protected:
     ut::Color mVtxColors[VERTEXCOLOR_MAX]; // at 0xD4
     detail::TexCoordAry mTexCoordAry;      // at 0xE4
 
-private:
-    void Init(u8 num);
+protected:
     void ReserveTexCoord(u8 num);
     void SetTexCoordNum(u8 num);
+
+private:
+    void Init(u8 num);
 };
 
 } // namespace lyt

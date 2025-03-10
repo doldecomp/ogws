@@ -24,24 +24,12 @@ struct BinaryFileHeader;
  *
  ******************************************************************************/
 enum VertexColor {
-    VERTEXCOLOR_TL,
-    VERTEXCOLOR_TR,
-    VERTEXCOLOR_BL,
-    VERTEXCOLOR_BR,
+    VERTEXCOLOR_LT,
+    VERTEXCOLOR_RT,
+    VERTEXCOLOR_LB,
+    VERTEXCOLOR_RB,
 
     VERTEXCOLOR_MAX
-};
-
-/******************************************************************************
- *
- * TextColor
- *
- ******************************************************************************/
-enum TextColor {
-    TEXTCOLOR_TOP,
-    TEXTCOLOR_BOTTOM,
-
-    TEXTCOLOR_MAX
 };
 
 /******************************************************************************
@@ -50,25 +38,11 @@ enum TextColor {
  *
  ******************************************************************************/
 enum TevColor {
-    TEVCOLOR_1,
-    TEVCOLOR_2,
-    TEVCOLOR_3,
+    TEVCOLOR_REG0,
+    TEVCOLOR_REG1,
+    TEVCOLOR_REG2,
 
     TEVCOLOR_MAX
-};
-
-/******************************************************************************
- *
- * TevKColor
- *
- ******************************************************************************/
-enum TevKColor {
-    TEVKCOLOR_1,
-    TEVKCOLOR_2,
-    TEVKCOLOR_3,
-    TEVKCOLOR_4,
-
-    TEVKCOLOR_MAX
 };
 
 /******************************************************************************

@@ -1,7 +1,8 @@
 #ifndef RVL_SDK_GX_TEV_H
 #define RVL_SDK_GX_TEV_H
-#include <revolution/GX/GXTypes.h>
 #include <types.h>
+
+#include <revolution/GX/GXTypes.h>
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -17,6 +18,7 @@ void GXSetTevAlphaOp(GXTevStageID, GXTevOp, GXTevBias, GXTevScale, GXBool,
                      GXTevRegID);
 
 void GXSetTevColor(GXTevRegID, GXColor);
+void GXSetTevColorS10(GXTevRegID, GXColorS10);
 
 void GXSetTevKColor(GXTevKColorID, GXColor);
 void GXSetTevKColorSel(GXTevStageID, GXTevKColorSel);

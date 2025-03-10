@@ -47,14 +47,10 @@ namespace res {
  * MAT1 binary layout
  *
  ******************************************************************************/
-struct MaterialResourceNum {
-    u32 bits;
-};
-
 struct Material {
     char name[NW4R_LYT_MATERIAL_NAME_LEN]; // at 0x0
     GXColorS10 tevCols[TEVCOLOR_MAX];      // at 0x14
-    GXColor tevKCols[TEVKCOLOR_MAX];       // at 0x2C
+    GXColor tevKCols[GX_MAX_KCOLOR];       // at 0x2C
     MaterialResourceNum resNum;            // at 0x3C
 };
 
@@ -217,6 +213,7 @@ public:
         pArray[idx] = value;
     }
 
+    void SetName(const char* pName);
     const char* GetName() const {
         return mName;
     }
@@ -225,11 +222,15 @@ public:
         return mbUserAllocated;
     }
 
-private:
+protected:
+    static const int MAX_TEX_SRT = (GX_TEXMTX9 - GX_TEXMTX0) / 3 + 1;
+    static const int MAX_IND_SRT = (GX_ITM_2 - GX_ITM_0) + 1;
+
+protected:
     AnimationLinkList mAnimList; // at 0x4
 
     GXColorS10 mTevCols[TEVCOLOR_MAX];  // at 0x10
-    ut::Color mTevKCols[TEVKCOLOR_MAX]; // at 0x28
+    ut::Color mTevKCols[GX_MAX_KCOLOR]; // at 0x28
 
     detail::BitGXNums mGXMemCap; // at 0x38
     detail::BitGXNums mGXMemNum; // at 0x3C
@@ -239,6 +240,15 @@ private:
     bool mbUserAllocated;                       // at 0x59
 
     u8 PADDING_0x5A[0x5C - 0x5A]; // at 0x5A
+
+private:
+    void Init();
+    void InitBitGXNums(detail::BitGXNums* pNums);
+
+    void ReserveGXMem(u8 texMapNum, u8 texSrtNum, u8 texCoordGenNum,
+                      u8 tevStageNum, bool allocTevSwap, u8 indStageNum,
+                      u8 indSrtNum, bool allocChanCtrl, bool allocMatCol,
+                      bool allocAlpComp, bool allocBlendMode);
 };
 
 /******************************************************************************

@@ -8,14 +8,14 @@ NW4R_UT_RTTI_DEF_DERIVED(Picture, Pane);
 
 // TODO: Don't know what this actually looks like...
 Picture::Picture(u8 num) : Pane(NULL) {
-    num = ut::Min<u8>(num, NW4R_LYT_MAX_TEXCOORD);
+    num = ut::Min<u8>(num, GX_MAX_TEXCOORD);
     Init(num);
 }
 
 Picture::Picture(const res::Picture* pRes, const ResBlockSet& rBlockSet)
     : Pane(pRes) {
 
-    u8 num = ut::Min<u8>(pRes->texCoordNum, NW4R_LYT_MAX_TEXCOORD);
+    u8 num = ut::Min<u8>(pRes->texCoordNum, GX_MAX_TEXCOORD);
     Init(num);
 
     for (int i = 0; i < VERTEXCOLOR_MAX; i++) {
@@ -112,13 +112,13 @@ void Picture::DrawSelf(const DrawInfo& rInfo) {
 
     LoadMtx(rInfo);
 
-    bool vtxColor = mpMaterial->SetupGX(
+    bool useVtxColor = mpMaterial->SetupGX(
         detail::IsModulateVertexColor(mVtxColors, mGlbAlpha), mGlbAlpha);
 
-    detail::SetVertexFormat(vtxColor, mTexCoordAry.GetSize());
+    detail::SetVertexFormat(useVtxColor, mTexCoordAry.GetSize());
 
     detail::DrawQuad(GetVtxPos(), mSize, mTexCoordAry.GetSize(),
-                     mTexCoordAry.GetArray(), vtxColor ? mVtxColors : NULL,
+                     mTexCoordAry.GetArray(), useVtxColor ? mVtxColors : NULL,
                      mGlbAlpha);
 }
 

@@ -131,13 +131,8 @@ void GDSetIndTexMtx(u32 id, const math::MTX34& rMtx) {
             a10 *= 2.0f;
             a11 *= 2.0f;
             a12 *= 2.0f;
-
-            if (!(a00 < 0.5f) || !(a01 < 0.5f) || !(a02 < 0.5f) ||
-                !(a10 < 0.5f) || !(a11 < 0.5f) || !(a12 < 0.5f)) {
-                break;
-            }
-
-        } while (scaleExp > -17);
+        } while (a00 < 0.5f && a01 < 0.5f && a02 < 0.5f && a10 < 0.5f &&
+                 a11 < 0.5f && a12 < 0.5f && scaleExp > -17);
     }
 
     // Hardware stores as -17
