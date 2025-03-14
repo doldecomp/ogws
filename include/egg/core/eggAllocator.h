@@ -1,7 +1,7 @@
 #ifndef EGG_CORE_ALLOCATOR_H
 #define EGG_CORE_ALLOCATOR_H
 #include "types_egg.h"
-#include <revolution/MEM/mem_allocator.h>
+#include <revolution/MEM.h>
 
 namespace EGG
 {

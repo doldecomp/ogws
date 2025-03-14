@@ -2,7 +2,7 @@
 #include "eggStateGX.h"
 #include "eggDrawGX.h"
 
-#include <SC/scapi.h>
+#include <revolution/SC.h>
 
 using namespace nw4r;
 

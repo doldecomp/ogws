@@ -5,7 +5,7 @@
 #include "eggAssert.h"
 #include "ut_list.h"
 #include <string.h>
-#include <revolution/ARC/arc.h>
+#include <revolution/ARC.h>
 
 namespace EGG
 {

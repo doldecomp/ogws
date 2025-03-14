@@ -5,6 +5,8 @@
 extern "C" {
 #endif
 
+extern u8 _scFlush;
+
 typedef void (*WPADCallback)(s32 chan, s32 result);
 
 typedef enum {

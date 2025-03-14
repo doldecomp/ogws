@@ -1,7 +1,7 @@
 #pragma ipa file
 #include "eggCntFile.h"
 #include "eggAssert.h"
-#include <revolution/ARC/arc.h>
+#include <revolution/ARC.h>
 
 namespace
 {

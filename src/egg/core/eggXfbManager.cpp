@@ -1,9 +1,9 @@
 #include "eggXfbManager.h"
 #include "eggXfb.h"
 
-#include <VI/vi.h>
-#include <OS/OSInterrupt.h>
 #include <revolution/GX.h>
+#include <revolution/OS.h>
+#include <revolution/VI.h>
 
 namespace EGG
 {

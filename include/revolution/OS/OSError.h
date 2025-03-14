@@ -8,7 +8,7 @@ extern "C" {
 // Forward declarations
 typedef struct OSContext OSContext;
 
-#define OSError(...) OSPanic(__FILE__, __LINE__, __VA_ARGS__)
+#define OS_ERROR(...) OSPanic(__FILE__, __LINE__, __VA_ARGS__)
 
 #define OS_ASSERT(exp, ...)                                                    \
     if (!(exp))                                                                \

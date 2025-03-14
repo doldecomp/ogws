@@ -7,8 +7,8 @@
 
 #include "ut_list.h"
 
-#include <MEM/mem_heapCommon.h>
-#include <OS/OSMutex.h>
+#include <revolution/MEM.h>
+#include <revolution/OS.h>
 
 namespace EGG
 {
