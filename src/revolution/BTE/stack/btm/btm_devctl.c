@@ -1,5 +1,17 @@
 /******************************************************************************
  *
+ *  NOTICE OF CHANGES
+ *  2025/03/13:
+ *      - Restore old function signatures
+ * 
+ *  Compile with REVOLUTION defined to include these changes.
+ * 
+ ******************************************************************************/
+
+
+
+/******************************************************************************
+ *
  *  Copyright (C) 1999-2012 Broadcom Corporation
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
@@ -1458,7 +1470,11 @@ void btm_vsc_complete (UINT8 *p, UINT16 opcode, UINT16 evt_len,
 **                           registered.
 **
 *******************************************************************************/
+#ifdef REVOLUTION
+tBTM_STATUS BTM_RegisterForVSEvents (tBTM_VS_EVT_CB *p_cb)
+#else
 tBTM_STATUS BTM_RegisterForVSEvents (tBTM_VS_EVT_CB *p_cb, BOOLEAN is_register)
+#endif
 {
     tBTM_STATUS retval = BTM_SUCCESS;
     UINT8 i, free_idx = BTM_MAX_VSE_CALLBACKS;
@@ -1949,5 +1965,3 @@ void btm_report_device_status (tBTM_DEV_STATUS status)
     if (p_cb)
         (*p_cb)(status);
 }
-
-

@@ -1,5 +1,5 @@
 #include "eggAssert.h"
-#include <revolution/OS/OSError.h>
+#include <revolution/OS.h>
 #include <string.h>
 #include <stdio.h>
 
@@ -55,5 +55,5 @@ void system_halt(char *file, int line, char *msg, ...)
     OSReport("%s\n", msg_buf);
 
     #line 190
-    OSError("Program Halt");
+    OS_ERROR("Program Halt");
 }

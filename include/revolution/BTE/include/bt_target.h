@@ -36,6 +36,8 @@
  */
 #ifdef REVOLUTION
 
+#define HAS_NO_BDROID_BUILDCFG
+
 #define RFCOMM_INCLUDED         TRUE
 #define GAP_INCLUDED            TRUE
 #define HID_DEV_INCLUDED        TRUE
@@ -3860,4 +3862,3 @@ The maximum number of payload octets that the local device can receive in a sing
 #include "bt_trace.h"
 
 #endif /* BT_TARGET_H */
-

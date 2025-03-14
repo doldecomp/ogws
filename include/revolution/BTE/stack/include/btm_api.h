@@ -1,5 +1,17 @@
 /******************************************************************************
  *
+ *  NOTICE OF CHANGES
+ *  2025/03/13:
+ *      - Restore old function signatures
+ * 
+ *  Compile with REVOLUTION defined to include these changes.
+ * 
+ ******************************************************************************/
+
+
+
+/******************************************************************************
+ *
  *  Copyright (C) 1999-2012 Broadcom Corporation
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
@@ -2181,8 +2193,11 @@ extern "C" {
 **                           registered.
 **
 *******************************************************************************/
+#ifdef REVOLUTION
+    BTM_API extern tBTM_STATUS BTM_RegisterForVSEvents (tBTM_VS_EVT_CB *p_cb);
+#else
     BTM_API extern tBTM_STATUS BTM_RegisterForVSEvents (tBTM_VS_EVT_CB *p_cb, BOOLEAN is_register);
-
+#endif
 
 /*******************************************************************************
 **

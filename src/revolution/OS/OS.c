@@ -1,4 +1,3 @@
-#include <MetroTRK.h>
 #include <revolution/BASE.h>
 #include <revolution/DB.h>
 #include <revolution/DVD.h>
@@ -8,6 +7,8 @@
 #include <revolution/PAD.h>
 #include <revolution/SC.h>
 #include <revolution/SI.h>
+
+#include <MetroTRK.h>
 #include <string.h>
 
 OSExecParams __OSRebootParams;
@@ -345,7 +346,7 @@ static void CheckTargets(void) {
                  "correct boot program.\n");
         // clang-format off
 #line 1112
-        OSError("Failed to run app");
+        OS_ERROR("Failed to run app");
         // clang-format on
         break;
     case 0x80:
@@ -359,7 +360,7 @@ static void CheckTargets(void) {
                  "correct apploader[D].img.\n");
         // clang-format off
 #line 1130
-        OSError("Failed to run app");
+        OS_ERROR("Failed to run app");
         // clang-format on
         break;
     case 0x80:

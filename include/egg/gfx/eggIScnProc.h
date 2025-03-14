@@ -3,7 +3,7 @@
 #include "types_egg.h"
 #include "eggAssert.h"
 #include <nw4r/g3d.h>
-#include <revolution/MEM/mem_allocator.h>
+#include <revolution/MEM.h>
 
 namespace EGG
 {

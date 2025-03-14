@@ -36,12 +36,14 @@
 #include <types.h>
 #endif
 
+#ifndef REVOLUTION
 #ifndef NULL
 #define NULL     0
 #endif
 
 #ifndef FALSE
 #define FALSE  0
+#endif
 #endif
 
 typedef unsigned char   UINT8;
@@ -85,4 +87,3 @@ typedef unsigned char   UBYTE;
 
 
 #endif
-

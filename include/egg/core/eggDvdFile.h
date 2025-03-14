@@ -4,9 +4,7 @@
 #include "eggFile.h"
 #include "ut_list.h"
 #include <revolution/DVD.h>
-#include <revolution/OS/OSMutex.h>
-#include <revolution/OS/OSMessage.h>
-#include <revolution/OS/OSThread.h>
+#include <revolution/OS.h>
 
 namespace EGG
 {

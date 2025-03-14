@@ -6,9 +6,8 @@
 #include "eggXfbManager.h"
 
 #include <revolution/GX.h>
-#include <OS/OS.h>
-#include <OS/OSTime.h>
-#include <VI/vi.h>
+#include <revolution/OS.h>
+#include <revolution/VI.h>
 
 namespace EGG
 {

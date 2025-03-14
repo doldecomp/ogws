@@ -1,5 +1,17 @@
 /******************************************************************************
  *
+ *  NOTICE OF CHANGES
+ *  2025/03/11:
+ *      - Restore old function signatures
+ * 
+ *  Compile with REVOLUTION defined to include these changes.
+ * 
+ ******************************************************************************/
+
+
+
+/******************************************************************************
+ *
  *  Copyright (C) 2002-2012 Broadcom Corporation
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
@@ -291,7 +303,11 @@ extern "C"
 ** Returns          void
 **
 *******************************************************************************/
+#ifdef REVOLUTION
+BTA_API extern void BTA_HhEnable(tBTA_SEC sec_mask, tBTA_HH_CBACK *p_cback);
+#else
 BTA_API extern void BTA_HhEnable(tBTA_SEC sec_mask, BOOLEAN ucd_enabled, tBTA_HH_CBACK *p_cback);
+#endif
 
 /*******************************************************************************
 **
@@ -442,9 +458,15 @@ BTA_API extern void BTA_HhGetDscpInfo(UINT8 dev_handle);
 ** Returns          void
 **
 *******************************************************************************/
+#ifdef REVOLUTION
+BTA_API extern void BTA_HhAddDev(BD_ADDR bda, tBTA_HH_ATTR_MASK attr_mask,
+                                 UINT8 sub_class, UINT8 app_id,
+                                 tBTA_HH_DEV_DESCR dscp_info);
+#else
 BTA_API extern void BTA_HhAddDev(BD_ADDR bda, tBTA_HH_ATTR_MASK attr_mask,
                                  UINT8 sub_class, UINT8 app_id,
                                  tBTA_HH_DEV_DSCP_INFO dscp_info);
+#endif
 /*******************************************************************************
 **
 ** Function         BTA_HhRemoveDev

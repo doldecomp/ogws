@@ -197,6 +197,8 @@ cflags_base = [
     "-ir include/MSL",
     f"-i build/{config.version}/include",
     f"-DBUILD_VERSION={version_num}",
+    "-ir include/revolution/BTE",  # thanks broadcom...
+    "-DREVOLUTION",  # BTE changes
 ]
 
 # Debug flags
@@ -242,7 +244,6 @@ cflags_libnw4r_ut = [
     "-enc SJIS",
     "-fp_contract off",
     "-ipa file",
-    "-ir include/revolution",
     "-ir include/nw4r",
 ]
 
@@ -253,7 +254,6 @@ cflags_libnw4r_ef = [
     "-enc SJIS",
     "-fp_contract off",
     "-ipa file",
-    "-ir include/revolution",
     "-ir include/nw4r",
 ]
 
@@ -264,7 +264,6 @@ cflags_libnw4r_math = [
     "-enc SJIS",
     "-fp_contract off",
     "-ipa file",
-    "-ir include/revolution",
     "-ir include/nw4r",
 ]
 
@@ -275,7 +274,6 @@ cflags_libnw4r_snd = [
     "-enc SJIS",
     "-fp_contract off",
     "-ipa file",
-    "-ir include/revolution",
     "-ir include/nw4r",
 ]
 
@@ -286,7 +284,6 @@ cflags_libnw4r_g3d = [
     "-enc SJIS",
     "-fp_contract off",
     "-ipa file",
-    "-ir include/revolution",
     "-ir include/nw4r",
 ]
 
@@ -297,7 +294,6 @@ cflags_libnw4r_lyt = [
     "-enc SJIS",
     "-fp_contract off",
     "-ipa file",
-    "-ir include/revolution",
     "-ir include/nw4r",
 ]
 
@@ -309,7 +305,6 @@ cflags_libnw4r_g3d_scnrfl = [
     "-fp_contract on",
     "-use_lmw_stmw on",
     "-inline deferred",
-    "-ir include/revolution",
     "-ir include/nw4r",
 ]
 
@@ -319,7 +314,6 @@ cflags_egg = [
     "-enc SJIS",
     "-use_lmw_stmw on",
     "-str reuse,pool,readonly",
-    "-ir include/revolution",
     "-ir include/nw4r",
     "-ir include/egg",
 ]
@@ -330,7 +324,6 @@ cflags_rvl = [
     "-enc SJIS",
     "-fp_contract off",
     "-ipa file",
-    "-ir include/revolution",
 ]
 
 # RVLFaceLib flags
@@ -340,7 +333,6 @@ cflags_rfl = [
     "-fp_contract off",
     "-Cpp_exceptions on",
     "-ipa file",
-    "-ir include/revolution",
 ]
 
 
@@ -353,7 +345,6 @@ cflags_rp = [
     "-fp_contract on",
     "-use_lmw_stmw on",
     "-str reuse,pool,readonly",
-    "-ir include/revolution",
     "-ir include/nw4r",
     "-ir include/egg",
 ]
@@ -925,9 +916,9 @@ config.libs = [
             Object(NonMatching, "revolution/VI/vi.c"),
             Object(NonMatching, "revolution/VI/i2c.c"),
             Object(NonMatching, "revolution/VI/vi3in1.c"),
-            Object(NonMatching, "revolution/WUD/WUD.c"),
-            Object(NonMatching, "revolution/WUD/WUDHidHost.c"),
-            Object(NonMatching, "revolution/WUD/debug_msg.c"),
+            Object(Matching, "revolution/WUD/WUD.c"),
+            Object(Matching, "revolution/WUD/WUDHidHost.c"),
+            Object(Matching, "revolution/WUD/debug_msg.c"),
             Object(Matching, "revolution/AI/ai.c"),
             Object(Matching, "revolution/ARC/arc.c"),
             Object(Matching, "revolution/AX/AX.c"),

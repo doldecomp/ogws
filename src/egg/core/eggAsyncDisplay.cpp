@@ -6,8 +6,8 @@
 
 #include "ut_algorithm.h"
 
-#include <OS/OSTime.h>
-#include <VI/vi.h>
+#include <revolution/VI.h>
+#include <revolution/OS.h>
 #include <revolution/GX.h>
 #include <revolution/MTX.h>
 

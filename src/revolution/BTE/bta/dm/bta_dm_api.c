@@ -1,5 +1,17 @@
 /******************************************************************************
  *
+ *  NOTICE OF CHANGES
+ *  2025/03/11:
+ *      - Restore old function signatures
+ * 
+ *  Compile with REVOLUTION defined to include these changes.
+ * 
+ ******************************************************************************/
+
+
+
+/******************************************************************************
+ *
  *  Copyright (C) 2003-2012 Broadcom Corporation
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
@@ -227,7 +239,11 @@ void BTA_DmSetDeviceName(char *p_name)
 ** Returns          void
 **
 *******************************************************************************/
+#ifdef REVOLUTION
+void BTA_DmSetVisibility(tBTA_DM_DISC disc_mode, tBTA_DM_CONN conn_mode)
+#else
 void BTA_DmSetVisibility(tBTA_DM_DISC disc_mode, tBTA_DM_CONN conn_mode, UINT8 pairable_mode, UINT8 conn_filter )
+#endif
 {
 
     tBTA_DM_API_SET_VISIBILITY    *p_msg;
@@ -237,8 +253,10 @@ void BTA_DmSetVisibility(tBTA_DM_DISC disc_mode, tBTA_DM_CONN conn_mode, UINT8 p
         p_msg->hdr.event = BTA_DM_API_SET_VISIBILITY_EVT;
         p_msg->disc_mode = disc_mode;
         p_msg->conn_mode = conn_mode;
+#ifndef REVOLUTION
         p_msg->pair_mode = pairable_mode;
         p_msg->conn_paired_only = conn_filter;
+#endif
 
 
         bta_sys_sendmsg(p_msg);
@@ -694,9 +712,14 @@ void BTA_DmPasskeyCancel(BD_ADDR bd_addr)
 ** Returns          void
 **
 *******************************************************************************/
+#ifdef REVOLUTION
+tBTA_STATUS BTA_DmAddDevice(BD_ADDR bd_addr, LINK_KEY link_key,
+    tBTA_SERVICE_MASK trusted_mask, BOOLEAN is_trusted);
+#else
 void BTA_DmAddDevice(BD_ADDR bd_addr, DEV_CLASS dev_class, LINK_KEY link_key,
-                     tBTA_SERVICE_MASK trusted_mask, BOOLEAN is_trusted,
-                     UINT8 key_type, tBTA_IO_CAP io_cap)
+    tBTA_SERVICE_MASK trusted_mask, BOOLEAN is_trusted,
+    UINT8 key_type, tBTA_IO_CAP io_cap)
+#endif
 {
 
     tBTA_DM_API_ADD_DEVICE *p_msg;
@@ -1613,4 +1636,3 @@ void BTA_DmSetEncryption(BD_ADDR bd_addr, tBTA_DM_ENCRYPT_CBACK *p_callback,
         bta_sys_sendmsg(p_msg);
     }
 }
-

@@ -1,6 +1,6 @@
 #pragma ipa file
 #pragma use_lmw_stmw on
-#include <GXMisc.h>
+#include <revolution/GX.h>
 #include "eggAssert.h"
 #include "eggScene.h"
 #include "eggSceneManager.h"

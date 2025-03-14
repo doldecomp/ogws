@@ -170,7 +170,7 @@ const char* NWC24GetMBoxDir(void) {
         (rev.verMajor == 7 && rev.verMinor == 0 || rev.verMajor < 7)) {
         // clang-format off
 #line 666
-    OSError("stopped.");
+    OS_ERROR("stopped.");
         // clang-format on
     }
 

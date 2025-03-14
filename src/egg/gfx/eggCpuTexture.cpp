@@ -1,6 +1,6 @@
 #include "eggCpuTexture.h"
 #include "eggHeap.h"
-#include <OS/OSCache.h>
+#include <revolution/OS.h>
 
 namespace EGG
 {

@@ -3,7 +3,7 @@
 #include "types_egg.h"
 #include "eggBitFlag.h"
 #include <revolution/GX.h>
-#include <revolution/VI/vi.h>
+#include <revolution/VI.h>
 
 #define FRAMERATE_50HZ 50.0f
 #define FRAMERATE_60HZ 59.94f

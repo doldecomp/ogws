@@ -1,15 +1,5 @@
 /******************************************************************************
  *
- *  NOTICE OF CHANGES
- *  2024/03/25:
- *      - Move from ulinux/ to platform/
- * 
- ******************************************************************************/
-
-
-
-/******************************************************************************
- *
  *  Copyright (C) 2009-2012 Broadcom Corporation
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
@@ -1520,5 +1510,3 @@ void GKI_sched_unlock(void)
 {
     GKI_TRACE("GKI_sched_unlock");
 }
-
-

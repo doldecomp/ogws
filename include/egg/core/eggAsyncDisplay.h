@@ -4,7 +4,7 @@
 #include "eggDisplay.h"
 #include "types_nw4r.h"
 #include <revolution/GX.h>
-#include <revolution/OS/OSThread.h>
+#include <revolution/OS.h>
 
 namespace EGG
 {

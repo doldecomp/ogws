@@ -3,6 +3,7 @@
 #include <revolution/PAD.h>
 #include <revolution/SC.h>
 #include <revolution/VI.h>
+
 #include <string.h>
 
 static OSShutdownFunctionQueue ShutdownFunctionQueue;
@@ -216,7 +217,7 @@ void OSReturnToMenu(void) {
 
     // clang-format off
 #line 843
-    OSError("OSReturnToMenu(): Falied to boot system menu.\n");
+    OS_ERROR("OSReturnToMenu(): Falied to boot system menu.\n");
     // clang-format on
 }
 
@@ -235,6 +236,6 @@ void OSResetSystem(u32 arg0, u32 arg1, u32 arg2) {
 
     // clang-format off
 #line 1020
-    OSError("OSResetSystem() is obsoleted. It doesn't work any longer.\n");
+    OS_ERROR("OSResetSystem() is obsoleted. It doesn't work any longer.\n");
     // clang-format on
 }

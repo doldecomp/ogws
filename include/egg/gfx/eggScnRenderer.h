@@ -3,7 +3,7 @@
 #include "types_egg.h"
 #include "eggScnRootEx.h"
 #include "types_nw4r.h"
-#include <revolution/MEM/mem_allocator.h>
+#include <revolution/MEM.h>
 
 namespace EGG
 {

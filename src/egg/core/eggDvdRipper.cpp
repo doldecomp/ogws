@@ -4,8 +4,8 @@
 #include "eggHeap.h"
 #include "eggAssert.h"
 #include "ut_algorithm.h"
-#include <revolution/VI/vi.h>
-#include <revolution/OS/OSCache.h>
+#include <revolution/VI.h>
+#include <revolution/OS.h>
 
 namespace EGG
 {

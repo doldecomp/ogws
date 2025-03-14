@@ -1,5 +1,17 @@
 /******************************************************************************
  *
+ *  NOTICE OF CHANGES
+ *  2025/03/11:
+ *      - Restore old function signatures
+ * 
+ *  Compile with REVOLUTION defined to include these changes.
+ * 
+ ******************************************************************************/
+
+
+
+/******************************************************************************
+ *
  *  Copyright (C) 2005-2012 Broadcom Corporation
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
@@ -57,7 +69,11 @@ static const tBTA_SYS_REG bta_hh_reg =
 ** Returns          void
 **
 *******************************************************************************/
+#ifdef REVOLUTION
+void BTA_HhEnable(tBTA_SEC sec_mask, tBTA_HH_CBACK *p_cback)
+#else
 void BTA_HhEnable(tBTA_SEC sec_mask, BOOLEAN ucd_enabled, tBTA_HH_CBACK *p_cback)
+#endif
 {
     tBTA_HH_API_ENABLE *p_buf;
 
@@ -334,8 +350,13 @@ void BTA_HhGetDscpInfo(UINT8 dev_handle)
 ** Returns          void
 **
 *******************************************************************************/
+#ifdef REVOLUTION
+void BTA_HhAddDev(BD_ADDR bda, tBTA_HH_ATTR_MASK attr_mask, UINT8 sub_class,
+                  UINT8 app_id, tBTA_HH_DEV_DESCR dscp_info)
+#else
 void BTA_HhAddDev(BD_ADDR bda, tBTA_HH_ATTR_MASK attr_mask, UINT8 sub_class,
                   UINT8 app_id, tBTA_HH_DEV_DSCP_INFO dscp_info)
+#endif
 {
     tBTA_HH_MAINT_DEV    *p_buf;
     UINT16  len = sizeof(tBTA_HH_MAINT_DEV) + dscp_info.descriptor.dl_len;

@@ -4,6 +4,9 @@
  *  2024/03/25:
  *      - Move from ulinux/ to platform/
  * 
+ *  2025/03/11:
+ *      - Add declarations for "App" allocator hooks
+ * 
  *  Compile with REVOLUTION defined to include these changes.
  * 
  ******************************************************************************/
@@ -35,6 +38,14 @@
 #include "gki_int.h"
 #include <revolution/OS.h>
 #include <revolution/WUD.h>
+
+#ifdef REVOLUTION
+/*****************************************************************************
+**  Function prototypes
+*****************************************************************************/
+extern void *App_MEMalloc(UINT32 size);
+extern int App_MEMfree(void* p_mem);
+#endif
 
 /*****************************************************************************
 **  Static variables
