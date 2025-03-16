@@ -2,7 +2,9 @@
 #include <revolution/BASE.h>
 #include <revolution/DSP.h>
 #include <revolution/EXI.h>
+#include <revolution/IPC.h>
 #include <revolution/OS.h>
+
 #include <string.h>
 
 static OSInterruptHandler* InterruptHandlerTable;
@@ -95,7 +97,8 @@ void __OSInterruptInit(void) {
 
     PI_HW_REGS[PI_INTMR] =
         PI_INTMR_EXI | PI_INTMR_AI | PI_INTMR_DSP | PI_INTMR_MEM;
-    OS_UNK_CD000034 = 0x40000000;
+
+    IPC_HW_REGS_PPC[IPC_PPCIRQMASK] = 0x40000000;
 
     __OSMaskInterrupts(
         OS_INTR_MASK(OS_INTR_MEM_0) | OS_INTR_MASK(OS_INTR_MEM_1) |

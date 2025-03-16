@@ -1,4 +1,5 @@
 #include <RVLFaceLib/RVLFaceLibInternal.h>
+
 #include <revolution/WPAD.h>
 
 #define MAGIC_CONTROLLER_DATA 'RNCD'
@@ -239,7 +240,7 @@ static void readbuffer_(s32 chan, RFLiCtrlBuf* dst, BOOL ch) {
 RFLErrcode RFLiLoadControllerAsync(s32 chan, BOOL ch) {
     RFLiCtrlBufManager* mgr;
 
-    if (chan < WPAD_CHAN_0 || chan >= WPAD_MAX_CONTROLLERS) {
+    if (chan < WPAD_CHAN0 || chan >= WPAD_MAX_CONTROLLERS) {
         return RFLErrcode_WrongParam;
     }
 
@@ -274,7 +275,7 @@ BOOL RFLiGetControllerData(RFLiCharInfo* info, s32 chan, u16 index,
     RFLiCtrlBuf* buf;
     u16 mask;
 
-    if (chan < WPAD_CHAN_0 || chan >= WPAD_MAX_CONTROLLERS) {
+    if (chan < WPAD_CHAN0 || chan >= WPAD_MAX_CONTROLLERS) {
         return FALSE;
     }
 
@@ -311,7 +312,7 @@ BOOL RFLIsAvailableControllerData(s32 chan, u16 index) {
     RFLiCtrlBuf* buf;
     u16 mask;
 
-    if (chan < WPAD_CHAN_0 || chan >= WPAD_MAX_CONTROLLERS) {
+    if (chan < WPAD_CHAN0 || chan >= WPAD_MAX_CONTROLLERS) {
         // @bug Will be interpreted as TRUE
         return RFLErrcode_WrongParam;
     }

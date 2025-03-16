@@ -310,7 +310,11 @@ void BTA_HhSendCtrl(UINT8 dev_handle, tBTA_HH_TRANS_CTRL_TYPE c_type)
 ** Returns          void
 **
 *******************************************************************************/
+#ifdef REVOLUTION
+void BTA_HhSendData(UINT8 dev_handle, BT_HDR  *p_data)
+#else
 void BTA_HhSendData(UINT8 dev_handle, BD_ADDR dev_bda, BT_HDR  *p_data)
+#endif
 {
     bta_hh_snd_write_dev(dev_handle, HID_TRANS_DATA, BTA_HH_RPTT_OUTPUT, 0, 0, p_data);
 }

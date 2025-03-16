@@ -8,10 +8,13 @@ extern "C" {
 typedef BOOL (*OSShutdownFunction)(BOOL final, u32 event);
 
 typedef enum {
-    OS_SD_EVENT_SHUTDOWN = 2,
-    OS_SD_EVENT_RESTART = 4,
-    OS_SD_EVENT_RETURN_TO_MENU = 5,
-    OS_SD_EVENT_LAUNCH_APP = 6,
+    OS_SD_EVENT_FATAL,
+    OS_SD_EVENT_1,
+    OS_SD_EVENT_SHUTDOWN,
+    OS_SD_EVENT_3,
+    OS_SD_EVENT_RESTART,
+    OS_SD_EVENT_RETURN_TO_MENU,
+    OS_SD_EVENT_LAUNCH_APP,
 } OSShutdownEvent;
 
 typedef struct OSShutdownFunctionInfo {

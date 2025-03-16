@@ -77,7 +77,7 @@ void __OSShutdownDevices(u32 event) {
     BOOL keepEnable;
 
     switch (event) {
-    case 0:
+    case OS_SD_EVENT_FATAL:
     case OS_SD_EVENT_RESTART:
     case OS_SD_EVENT_RETURN_TO_MENU:
     case OS_SD_EVENT_LAUNCH_APP:

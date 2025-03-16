@@ -1,5 +1,7 @@
 #include <revolution/DSP.h>
+#include <revolution/IPC.h>
 #include <revolution/OS.h>
+
 #include <string.h>
 
 #define DSP_CODE_WORK_MEM ((void*)0x81000000)
@@ -28,42 +30,44 @@ static void waitMicroSec(u32 usec) {
 static void __AIClockInit(BOOL arg0) {
     u32 tmp;
 
-    tmp = OS_UNK_CD800180;
+    tmp = IPC_HW_REGS[IPC_DIFLAGS];
     tmp &= ~0x100;
     tmp |= (arg0 << 8);
     tmp &= ~0x80;
-    OS_UNK_CD800180 = tmp;
+    IPC_HW_REGS[IPC_DIFLAGS] = tmp;
 
-    OS_UNK_CD8001D0 &= ~0xC0000000;
+    IPC_HW_REGS[IPC_GPIO2IN] &= ~0xC0000000;
     waitMicroSec(100);
 
     if (!arg0) {
-        tmp = OS_UNK_CD8001CC;
+        tmp = IPC_HW_REGS[IPC_GPIO2DIR];
         tmp &= ~0x3FFC0;
         tmp |= 0xFC0;
         tmp &= ~0x3F;
         tmp &= ~0x7FC0000;
         tmp |= 0x4640000;
-        OS_UNK_CD8001CC = tmp;
+        IPC_HW_REGS[IPC_GPIO2DIR] = tmp;
     } else {
-        tmp = OS_UNK_CD8001CC;
+        tmp = IPC_HW_REGS[IPC_GPIO2DIR];
         tmp &= ~0x3FFC0;
         tmp |= 0xFFC0;
         tmp &= ~0x3F;
         tmp |= 0xE;
         tmp &= ~0x7FC0000;
         tmp |= 0x4B00000;
-        OS_UNK_CD8001CC = tmp;
+        IPC_HW_REGS[IPC_GPIO2DIR] = tmp;
     }
     waitMicroSec(100);
 
-    OS_UNK_CD8001D0 &= ~0x10000000;
+    IPC_HW_REGS[IPC_GPIO2IN] &= ~0x10000000;
     waitMicroSec(1000);
 
-    OS_UNK_CD8001D0 = (OS_UNK_CD8001D0 & ~0x40000000) | 0x40000000;
+    IPC_HW_REGS[IPC_GPIO2IN] =
+        (IPC_HW_REGS[IPC_GPIO2IN] & ~0x40000000) | 0x40000000;
     waitMicroSec(1000);
 
-    OS_UNK_CD8001D0 = (OS_UNK_CD8001D0 & ~0x80000000) | 0x80000000;
+    IPC_HW_REGS[IPC_GPIO2IN] =
+        (IPC_HW_REGS[IPC_GPIO2IN] & ~0x80000000) | 0x80000000;
     waitMicroSec(1000);
 }
 

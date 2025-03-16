@@ -433,7 +433,11 @@ BTA_API extern void BTA_HhGetIdle(UINT8 dev_handle);
 ** Returns          void
 **
 *******************************************************************************/
+#ifdef REVOLUTION
+BTA_API extern void BTA_HhSendData(UINT8 dev_handle, BT_HDR  *p_buf);
+#else
 BTA_API extern void BTA_HhSendData(UINT8 dev_handle, BD_ADDR dev_bda, BT_HDR  *p_buf);
+#endif
 
 /*******************************************************************************
 **

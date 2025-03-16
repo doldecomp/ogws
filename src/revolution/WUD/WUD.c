@@ -420,7 +420,7 @@ static u8 WUDiUnknownDevice(void) {
     pWork->UNK_0x5B = _wcb.syncType == WUD_SYNC_TYPE_STANDARD ? 0 : 1;
 
     WUD_BDCPY(pWork->devAddr, _discResp.devAddr);
-    memcpy(pWork->small.devName, _discResp.devName, sizeof(_discResp.devName));
+    memcpy(pWork->conf.devName, _discResp.devName, sizeof(_discResp.devName));
     memset(pWork->linkKey, 0, LINK_KEY_LEN);
 
     return WUD_STATE_SYNC_TRY_CONNECT;
@@ -482,8 +482,8 @@ static u8 WUDiSaveDeviceToNand(void) {
     for (pIt = _wcb.stdListHead, i = 0; pIt != NULL; i++, pIt = pIt->next) {
         WUD_BDCPY(_scArray.regist[i].addr, pIt->devInfo->devAddr);
 
-        memcpy(&_scArray.regist[i].info, &pIt->devInfo->small,
-               sizeof(WUDSmallDevInfo));
+        memcpy(&_scArray.regist[i].info, &pIt->devInfo->conf,
+               sizeof(SCDevInfo));
     }
 
     DEBUGPrint("%d devices is stored into SC.\n", i);
@@ -1059,14 +1059,13 @@ static WUDInitState WUDiGetRegisteredDevice(void) {
 
         WUD_BDCPY(pInfo->devAddr, _scArray.regist[i].addr);
 
-        memcpy(&pInfo->small, &_scArray.regist[i].info,
-               sizeof(WUDSmallDevInfo));
+        memcpy(&pInfo->conf, &_scArray.regist[i].info, sizeof(SCDevInfo));
 
         pInfo->status = 1;
         pInfo->UNK_0x5B = 0;
         pInfo->UNK_0x5C = 2;
 
-        if (WUD_DEV_NAME_IS_CNT_01(pInfo->small.devName)) {
+        if (WUD_DEV_NAME_IS_CNT_01(pInfo->conf.devName)) {
             pInfo->subclass = 2; // subclass 2 is marked as reserved
 
             pInfo->hhAttrMask = BTA_HH_SEC_REQUIRED | BTA_HH_BATTERY_POWER |
@@ -1080,7 +1079,7 @@ static WUDInitState WUDiGetRegisteredDevice(void) {
                    pInfo->devAddr[1], pInfo->devAddr[2], pInfo->devAddr[3],
                    pInfo->devAddr[4], pInfo->devAddr[5]);
 
-        DEBUGPrint("name : %s\n", pInfo->small.devName);
+        DEBUGPrint("name : %s\n", pInfo->conf.devName);
     }
 
     return WUD_STATE_INIT_DONE;
@@ -1290,8 +1289,8 @@ void WUDShutdown(void) {
     for (i = 0, pIt = _wcb.stdListHead; pIt != NULL; pIt = pIt->next, i++) {
         WUD_BDCPY(_scArray.devices[i].addr, pIt->devInfo->devAddr);
 
-        memcpy(&_scArray.devices[i].info, &pIt->devInfo->small,
-               sizeof(WUDSmallDevInfo));
+        memcpy(&_scArray.devices[i].info, &pIt->devInfo->conf,
+               sizeof(SCDevInfo));
     }
 
     p->shutdownState = WUD_STATE_SHUTDOWN_STORE_SETTINGS;
@@ -1964,7 +1963,7 @@ void WUDiRegisterDevice(BD_ADDR addr) {
     status = BTA_DmAddDevice(pInfo->devAddr, pInfo->linkKey, 0, FALSE);
     DEBUGPrint("BTA_DmAddDevice(): %d\n", status);
 
-    if (WUD_DEV_NAME_IS_CNT(pInfo->small.devName)) {
+    if (WUD_DEV_NAME_IS_CNT(pInfo->conf.devName)) {
         tBTA_HH_DEV_DESCR desc;
         desc.dl_len = sizeof(descriptor);
         desc.dsc_list = descriptor;
@@ -2005,7 +2004,7 @@ void WUDiRemoveDevice(BD_ADDR addr) {
 
         DEBUGPrint("remove device info from database.\n");
 
-        if (WUD_DEV_NAME_IS_CNT(pInfo->small.devName)) {
+        if (WUD_DEV_NAME_IS_CNT(pInfo->conf.devName)) {
             DEBUGPrint("BTA_HhRemoveDev()\n");
             DEBUGPrint(" handle : %d\n", pInfo->devHandle);
             BTA_HhRemoveDev(pInfo->devHandle);
