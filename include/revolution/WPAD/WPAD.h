@@ -2,6 +2,7 @@
 #define RVL_SDK_WPAD_H
 #include <types.h>
 
+#include <revolution/SC.h>
 #include <revolution/WUD.h>
 #ifdef __cplusplus
 extern "C" {
@@ -24,14 +25,15 @@ typedef void (*WPADSamplingCallback)(s32 chan);
 typedef void (*WPADConnectCallback)(s32 chan, s32 result);
 typedef void (*WPADExtensionCallback)(s32 chan, s32 dev);
 
-typedef WUDSyncDeviceCallback WPADSimpleSyncCallback;
+typedef WUDSyncDeviceCallback WPADSyncDeviceCallback;
+typedef WUDClearDeviceCallback WPADClearDeviceCallback;
 
 typedef enum {
-    WPAD_LIB_STATUS_0,
-    WPAD_LIB_STATUS_1,
-    WPAD_LIB_STATUS_2,
-    WPAD_LIB_STATUS_3,
-    WPAD_LIB_STATUS_4,
+    WPAD_LIB_STATUS_0 = WUD_LIB_STATUS_0,
+    WPAD_LIB_STATUS_1 = WUD_LIB_STATUS_1,
+    WPAD_LIB_STATUS_2 = WUD_LIB_STATUS_2,
+    WPAD_LIB_STATUS_3 = WUD_LIB_STATUS_3,
+    WPAD_LIB_STATUS_4 = WUD_LIB_STATUS_4,
 } WPADLibStatus;
 
 typedef enum {
@@ -153,6 +155,11 @@ typedef enum {
 } WPADDpdCommand;
 
 typedef enum {
+    WPAD_SENSOR_BAR_BOTTOM = SC_SENSOR_BAR_BOTTOM,
+    WPAD_SENSOR_BAR_TOP = SC_SENSOR_BAR_TOP
+} WPADSensorBarPos;
+
+typedef enum {
     WPAD_ACC_GRAVITY_UNIT_CORE,
     WPAD_ACC_GRAVITY_UNIT_FS,
 } WPADAccGravityUnitType;
@@ -253,6 +260,24 @@ void WPADShutdown(void);
 BOOL WPADStopSimpleSync(void);
 
 //! /////////////////////////////////
+
+BOOL WPADStartSimpleSync(void);
+BOOL WPADStartFastSimpleSync(void);
+BOOL WPADStopSimpleSync(void);
+BOOL WPADStartClearDevice(void);
+
+WPADSyncDeviceCallback
+WPADSetSimpleSyncCallback(WPADSyncDeviceCallback pCallback);
+
+WPADClearDeviceCallback
+WPADSetClearDeviceCallback(WPADClearDeviceCallback pCallback);
+
+void WPADRegisterAllocator(WPADAllocFunc pAllocFunc, WPADFreeFunc pFreeFunc);
+u32 WPADGetWorkMemorySize(void);
+
+WPADLibStatus WPADGetStatus(void);
+void WPADGetAddress(s32 chan, BD_ADDR_PTR pAddr);
+u8 WPADGetSensorBarPosition(void);
 
 void WPADGetAccGravityUnit(s32 chan, u32 type, WPADAccGravityUnit* pAcc);
 

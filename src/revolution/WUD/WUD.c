@@ -1644,14 +1644,14 @@ u8 WUDGetConnectable(void) {
     return connectable;
 }
 
-void WUDiRebootCallback(void* p1) {
+void reset_again_cb(void* p1) {
 #pragma unused(p1)
 
     WUDiInitSub();
 }
 
-void WUDiReboot(void) {
-    BTM_DeviceReset(WUDiRebootCallback);
+void reset_again(void) {
+    BTM_DeviceReset(reset_again_cb);
 }
 
 // clang-format off
@@ -1734,7 +1734,7 @@ static u32 size = 0;
 
 static void remove_patch_cb(tBTM_VSC_CMPL* p1) {
     if (p1 == NULL) {
-        WUDiReboot();
+        reset_again();
     } else {
         offset = 0;
         WUDiWritePatch();
@@ -1757,7 +1757,7 @@ static void write_patch_cb(tBTM_VSC_CMPL* p1) {
             WUDiWritePatch();
         }
     } else {
-        WUDiReboot();
+        reset_again();
     }
 }
 
@@ -1785,12 +1785,12 @@ static void WUDiWritePatch(void) {
 static void install_patch_cb(tBTM_VSC_CMPL* p1) {
     if (p1 != NULL) {
         if (patch_num == install_num) {
-            WUDiReboot();
+            reset_again();
         } else {
             WUDiInstallPatch();
         }
     } else {
-        WUDiReboot();
+        reset_again();
     }
 }
 

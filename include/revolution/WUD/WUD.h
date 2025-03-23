@@ -60,7 +60,7 @@ typedef struct WUDDevInfo {
     s8 UNK_0x5A;      // at 0x5A
     u8 UNK_0x5B;      // at 0x5B
     u8 UNK_0x5C;      // at 0x5C
-    u8 unk_0x5d[1];
+    u8 UNK_0x5D[1];
     tBTA_HH_ATTR_MASK hhAttrMask; // at 0x5E
 } WUDDevInfo;
 

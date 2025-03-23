@@ -36,6 +36,8 @@ typedef struct WPADGameInfo {
     u8 UNK_0x30[8];
 } WPADGameInfo;
 
+extern WPADMemBlock _wmb[WPAD_MAX_CONTROLLERS];
+
 #ifdef __cplusplus
 }
 #endif
