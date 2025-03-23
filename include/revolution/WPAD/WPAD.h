@@ -160,6 +160,11 @@ typedef enum {
 } WPADSensorBarPos;
 
 typedef enum {
+    WPAD_MOTOR_OFF = SC_MOTOR_OFF,
+    WPAD_MOTOR_ON = SC_MOTOR_ON
+} WPADMotorMode;
+
+typedef enum {
     WPAD_ACC_GRAVITY_UNIT_CORE,
     WPAD_ACC_GRAVITY_UNIT_FS,
 } WPADAccGravityUnitType;

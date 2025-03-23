@@ -10,17 +10,8 @@
 
 #include <string.h>
 
-//! /////////////////////////////////
-//! /////////////////////////////////
-//! /////////////////////////////////
-#define static
-//! /////////////////////////////////
-//! /////////////////////////////////
-//! /////////////////////////////////
-
 #define DPD_CONFIG1_SIZE 9
 #define DPD_CONFIG2_SIZE 2
-
 #define SPK_CONFIG_SIZE 7
 
 RVL_LIB_VERSION(WPAD, "May 17 2007", "01:52:03", "0x4199_60831");
@@ -72,7 +63,11 @@ BOOL __CanPushCmdQueue(const WPADCommandQueue* pQueue, s8 num);
 u32 __GetCmdNumber(const WPADCommandQueue* pQueue);
 
 static void __SetScreenSaverFlag(BOOL disable);
+static u8 __GetDpdSensitivity(void);
+static u8 __GetSensorBarPosition(void);
+static u32 __GetMotorMode(void);
 static u8 __ClampSpeakerVolume(u8 volume);
+static u8 __GetSpeakerVolume(void);
 
 u16 _WPADGetStackBufferStatus(s32 chan);
 u16 _WPADGetModuleBufferStatus(s32 chan);
@@ -498,9 +493,13 @@ static void CheckButtonCombination(s32 chan) {
     }
 }
 
-// ! ////////////////////////////////////////////////////////
-// ! ////////////////////////////////////////////////////////
-// ! ////////////////////////////////////////////////////////
+static void WPADiManageHandler(OSAlarm*, OSContext*) {}
+
+static void WPADiManageHandler0(OSAlarm* pAlarm, OSContext* pContext) {
+    OSSwitchFiberEx((u32)pAlarm, (u32)pContext, 0, 0, WPADiManageHandler,
+                    __WPADiManageHandlerStack +
+                        sizeof(__WPADiManageHandlerStack));
+}
 
 static void __ClearControlBlock(s32 chan) {
     WPADCB* p = _wpdcb[chan];
@@ -563,17 +562,17 @@ static void __ClearControlBlock(s32 chan) {
     p->getInfoBusy = FALSE;
     p->getInfoCB = NULL;
 
-    memset(&p->wpInfo, 0, sizeof p->wpInfo);
-    memset(&p->wmReadDataBuf, 0, sizeof p->wmReadDataBuf);
+    memset(&p->wpInfo, 0, sizeof(p->wpInfo));
+    memset(&p->wmReadDataBuf, 0, sizeof(p->wmReadDataBuf));
 
     memset(p->rxBufs, 0, sizeof(p->rxBufs));
     memset(p->rxBufMain, 0, RX_BUFFER_SIZE);
 
     memset(&p->devConfig, 0, sizeof(WPADDevConfig));
     memset(&p->extConfig, 0, sizeof(WPADExtConfig));
-    memset(&p->encryptionKey, 0, sizeof p->encryptionKey);
-    memset(&p->decryptAddTable, 0, sizeof p->decryptAddTable);
-    memset(&p->decryptXorTable, 0, sizeof p->decryptXorTable);
+    memset(&p->encryptionKey, 0, sizeof(p->encryptionKey));
+    memset(&p->decryptAddTable, 0, sizeof(p->decryptAddTable));
+    memset(&p->decryptXorTable, 0, sizeof(p->decryptXorTable));
     memset(&p->gameInfo, 0, sizeof(WPADGameInfo));
 
     p->UNK_0x38[0] = -1;
@@ -598,10 +597,51 @@ static void __ClearControlBlock(s32 chan) {
     _rumbleCnt[chan] = 0;
 }
 
-// ! ////////////////////////////////////////////////////////
-
 void WPADiInitSub(void) {
-    ;
+    BOOL enabled;
+    s32 chan;
+    int i;
+
+    WPADSetSensorBarPower(TRUE);
+
+    for (i = 0; i < WUD_MAX_DEV_ENTRY; i++) {
+        _dev_handle_index[i] = WUD_DEV_HANDLE_INVALID;
+    }
+
+    DEBUGPrint("WPADInit()\n");
+
+    for (chan = 0; chan < WPAD_MAX_CONTROLLERS; chan++) {
+        _wpdcb[chan] = &_wpd[chan];
+        _chan_active_state[chan] = FALSE;
+
+        _wpdcb[chan]->connectCB = NULL;
+        __ClearControlBlock(chan);
+        OSInitThreadQueue(&_wpdcb[chan]->threadQueue);
+
+        _extCnt[chan] = 0;
+        _rumbleCnt[chan] = 0;
+    }
+
+    _sleepTime = 5;
+    _gamecode = OSGetAppGamename();
+    _gametype = OSGetAppType();
+    _dpdSensitivity = __GetDpdSensitivity();
+    _sensorBarPos = __GetSensorBarPosition();
+    _rumble = __GetMotorMode();
+    _speakerVolume = __GetSpeakerVolume();
+    _senseCnt = 0;
+    _checkCnt = 0;
+    _afhCnt = 0;
+    _shutdown = FALSE;
+    _scFlush = FALSE;
+    _scSetting = TRUE;
+    _afhChannel = -1;
+
+    OSCreateAlarm(&_managerAlarm);
+    OSSetPeriodicAlarm(&_managerAlarm, OSGetTime(), OS_MSEC_TO_TICKS(1),
+                       WPADiManageHandler0);
+
+    OSRegisterVersion(__WPADVersion);
 }
 
 void WPADInit(void) {
@@ -2294,6 +2334,30 @@ static void __SetScreenSaverFlag(BOOL disable) {
     }
 }
 
+static u8 __GetDpdSensitivity(void) {
+    u8 result = SCGetBtDpdSensibility();
+
+    if (result < WPAD_MIN_DPD_SENS) {
+        result = WPAD_MIN_DPD_SENS;
+    }
+
+    if (result > WPAD_MAX_DPD_SENS) {
+        result = WPAD_MAX_DPD_SENS;
+    }
+
+    return result;
+}
+
+static u8 __GetSensorBarPosition(void) {
+    return SCGetWpadSensorBarPosition() == SC_SENSOR_BAR_TOP
+               ? WPAD_SENSOR_BAR_TOP
+               : WPAD_SENSOR_BAR_BOTTOM;
+}
+
+static u32 __GetMotorMode(void) {
+    return SCGetWpadMotorMode() == SC_MOTOR_ON ? WPAD_MOTOR_ON : WPAD_MOTOR_OFF;
+}
+
 static u8 __ClampSpeakerVolume(u8 volume) {
     u8 result = volume;
 
@@ -2306,6 +2370,11 @@ static u8 __ClampSpeakerVolume(u8 volume) {
     }
 
     return result;
+}
+
+static u8 __GetSpeakerVolume(void) {
+    u8 volume = SCGetWpadSpeakerVolume();
+    return __ClampSpeakerVolume(volume);
 }
 
 u16 _WPADGetStackBufferStatus(s32 chan) {
