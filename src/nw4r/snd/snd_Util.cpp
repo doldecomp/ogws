@@ -7,35 +7,8 @@
 namespace nw4r {
 namespace snd {
 namespace detail {
-namespace Util {
 
-// Chromatic scale (tbl[idx] / tbl[idx-1] == ~1.06)
-extern const f32 NoteTable[SEMITONE_MAX];
-// Each note contains 256 microtones
-extern const f32 PitchTable[MICROTONE_MAX];
-
-// Table index is the millibel / hundredth-of-a-decibel
-// dB(idx) = VOLUME_MIN_DB + (idx / 10)
-// tbl[idx] = 10 ^ (dB(idx) / 20)
-extern const f32 Decibel2RatioTable[VOLUME_RANGE_MB + 1];
-
-// 1/256 step
-static const int PAN_CURVE_MAX = 256;
-// tbl[idx] = sqrt(1 - (idx / PAN_CURVE_MAX))
-extern const f32 Pan2RatioTableSqrt[PAN_CURVE_MAX + 1];
-// tbl[idx] = cos(idx * (PI / (2 * PAN_CURVE_MAX)))
-extern const f32 Pan2RatioTableSinCos[PAN_CURVE_MAX + 1];
-// tbl[idx] = 1 - (idx * (1 / PAN_CURVE_MAX))
-extern const f32 Pan2RatioTableLinear[PAN_CURVE_MAX + 1];
-
-// Pan curve tables
-const f32* PanTableTable[] = {Pan2RatioTableSqrt, Pan2RatioTableSinCos,
-                              Pan2RatioTableLinear};
-
-// Biquad filter coefficients (b0, b1, b2, a1, a2)
-extern const u16 RemoteFilterCoefTable[REMOTE_FILTER_MAX + 1][5];
-
-f32 CalcPitchRatio(int pitch) {
+f32 Util::CalcPitchRatio(int pitch) {
     int octave = 0;
     f32 octaveFloat = 1.0f;
 
@@ -74,41 +47,40 @@ f32 CalcPitchRatio(int pitch) {
     return ratio;
 }
 
-f32 CalcVolumeRatio(f32 db) {
+f32 Util::CalcVolumeRatio(f32 db) {
     db = ut::Clamp(db, VOLUME_MIN_DB, VOLUME_MAX_DB);
-    return Decibel2RatioTable[-static_cast<int>(10.0f * VOLUME_MIN_DB) +
-                              static_cast<int>(10.0f * db)];
+    return Decibel2RatioTable[-VOLUME_MIN + static_cast<int>(10 * db)];
 }
 
-f32 CalcPanRatio(f32 pan, const PanInfo& rInfo) {
+f32 Util::CalcPanRatio(f32 pan, const PanInfo& rInfo) {
     pan = (ut::Clamp(pan, -1.0f, 1.0f) + 1.0f) / 2.0f;
     const f32* pTable = PanTableTable[rInfo.curve];
 
-    f32 ratio = pTable[static_cast<int>(pan * PAN_CURVE_MAX + 0.5f)];
+    f32 ratio = pTable[static_cast<int>(pan * PAN_TABLE_MAX + 0.5f)];
     if (rInfo.centerZero) {
-        ratio /= pTable[PAN_CURVE_MAX / 2];
+        ratio /= pTable[PAN_TABLE_CENTER];
     }
 
     return rInfo.zeroClamp ? ut::Clamp(ratio, 0.0f, 1.0f)
                            : ut::Clamp(ratio, 0.0f, 2.0f);
 }
 
-f32 CalcSurroundPanRatio(f32 pan, const PanInfo& rInfo) {
+f32 Util::CalcSurroundPanRatio(f32 pan, const PanInfo& rInfo) {
     pan = ut::Clamp(pan, 0.0f, 2.0f) / 2.0f;
     const f32* pTable = PanTableTable[rInfo.curve];
 
-    f32 ratio = pTable[static_cast<int>(pan * PAN_CURVE_MAX + 0.5f)];
+    f32 ratio = pTable[static_cast<int>(pan * PAN_TABLE_MAX + 0.5f)];
     return ut::Clamp(ratio, 0.0f, 2.0f);
 }
 
-int CalcLpfFreq(f32 scale) {
+int Util::CalcLpfFreq(f32 scale) {
     scale = ut::Clamp(scale, 0.0f, 1.0f);
     return static_cast<int>(32000 * std::pow(2.0, 10.0 * (scale - 1.0)));
 }
 
-void GetRemoteFilterCoefs(int filter, u16* pB0, u16* pB1, u16* pB2, u16* pA1,
-                          u16* pA2) {
-    filter = ut::Clamp(filter, 0, REMOTE_FILTER_MAX);
+void Util::GetRemoteFilterCoefs(int filter, u16* pB0, u16* pB1, u16* pB2,
+                                u16* pA1, u16* pA2) {
+    filter = ut::Clamp(filter, COEF_TABLE_MIN, COEF_TABLE_MAX);
 
     *pB0 = RemoteFilterCoefTable[filter][0];
     *pB1 = RemoteFilterCoefTable[filter][1];
@@ -117,13 +89,14 @@ void GetRemoteFilterCoefs(int filter, u16* pB0, u16* pB1, u16* pB2, u16* pA1,
     *pA2 = RemoteFilterCoefTable[filter][4];
 }
 
-u16 CalcRandom() {
+u16 Util::CalcRandom() {
     static int u = 0x12345678;
     u = u * 0x19660D + 0x3C6EF35F; // randq1 :D
     return u >> 16;
 }
 
-const void* GetDataRefAddressImpl(RefType type, u32 value, const void* pBase) {
+const void* Util::GetDataRefAddressImpl(RefType type, u32 value,
+                                        const void* pBase) {
     if (type == REFTYPE_OFFSET) {
         return ut::AddOffsetToPtr(pBase, Util::ReadBigEndian(value));
     }
@@ -135,11 +108,17 @@ const void* GetDataRefAddressImpl(RefType type, u32 value, const void* pBase) {
     return NULL;
 }
 
-const f32 NoteTable[SEMITONE_MAX] = {
+const f32* Util::PanTableTable[PAN_CURVE_NUM] = {
+    Pan2RatioTableSqrt,   // PAN_CURVE_SQRT
+    Pan2RatioTableSinCos, // PAN_CURVE_SINCOS
+    Pan2RatioTableLinear  // PAN_CURVE_LINEAR
+};
+
+const f32 Util::NoteTable[SEMITONE_MAX] = {
     1.0000000f, 1.0594631f, 1.1224620f, 1.1892071f, 1.2599211f, 1.3348398f,
     1.4142135f, 1.4983071f, 1.5874010f, 1.6817929f, 1.7817974f, 1.8877486f};
 
-const f32 PitchTable[MICROTONE_MAX] = {
+const f32 Util::PitchTable[MICROTONE_MAX] = {
     1.00000000f, 1.00022566f, 1.00045133f, 1.00067711f, 1.00090289f,
     1.00112879f, 1.00135469f, 1.00158072f, 1.00180674f, 1.00203276f,
     1.00225890f, 1.00248504f, 1.00271130f, 1.00293756f, 1.00316381f,
@@ -193,7 +172,7 @@ const f32 PitchTable[MICROTONE_MAX] = {
     1.05802977f, 1.05826855f, 1.05850732f, 1.05874622f, 1.05898511f,
     1.05922413f};
 
-const f32 Decibel2RatioTable[VOLUME_RANGE_MB + 1] = {
+const f32 Util::Decibel2RatioTable[VOLUME_TABLE_SIZE] = {
     0.0000000000f, 0.0000305492f, 0.0000309030f, 0.0000312608f, 0.0000316228f,
     0.0000319890f, 0.0000323594f, 0.0000327341f, 0.0000331131f, 0.0000334965f,
     0.0000338844f, 0.0000342768f, 0.0000346737f, 0.0000350752f, 0.0000354813f,
@@ -388,7 +367,7 @@ const f32 Decibel2RatioTable[VOLUME_RANGE_MB + 1] = {
     1.7988709211f, 1.8197008371f, 1.8407720327f, 1.8620871305f, 1.8836491108f,
     1.9054607153f, 1.9275249243f, 1.9498445988f, 1.9724227190f, 1.9952622652f};
 
-const f32 Pan2RatioTableSqrt[PAN_CURVE_MAX + 1] = {
+const f32 Util::Pan2RatioTableSqrt[PAN_TABLE_SIZE] = {
     1.0000000000f, 0.9980449677f, 0.9960861206f, 0.9941233397f, 0.9921567440f,
     0.9901862144f, 0.9882117510f, 0.9862333536f, 0.9842509627f, 0.9822645783f,
     0.9802742004f, 0.9782797694f, 0.9762812257f, 0.9742785692f, 0.9722718000f,
@@ -442,7 +421,7 @@ const f32 Pan2RatioTableSqrt[PAN_CURVE_MAX + 1] = {
     0.1530931145f, 0.1397542506f, 0.1250000000f, 0.1082531735f, 0.0883883461f,
     0.0625000000f, 0.0000000000f};
 
-const f32 Pan2RatioTableSinCos[PAN_CURVE_MAX + 1] = {
+const f32 Util::Pan2RatioTableSinCos[PAN_TABLE_SIZE] = {
     1.0000000000f, 0.9999811649f, 0.9999247193f, 0.9998306036f, 0.9996988177f,
     0.9995294213f, 0.9993224144f, 0.9990777373f, 0.9987954497f, 0.9984755516f,
     0.9981181026f, 0.9977230430f, 0.9972904325f, 0.9968202710f, 0.9963126183f,
@@ -496,7 +475,7 @@ const f32 Pan2RatioTableSinCos[PAN_CURVE_MAX + 1] = {
     0.0368072242f, 0.0306748021f, 0.0245412290f, 0.0184067301f, 0.0122715384f,
     0.0061358851f, 0.0000000000f};
 
-const f32 Pan2RatioTableLinear[PAN_CURVE_MAX + 1] = {
+const f32 Util::Pan2RatioTableLinear[PAN_TABLE_SIZE] = {
     1.0000000000f, 0.9960937500f, 0.9921875000f, 0.9882812500f, 0.9843750000f,
     0.9804687500f, 0.9765625000f, 0.9726562500f, 0.9687500000f, 0.9648437500f,
     0.9609375000f, 0.9570312500f, 0.9531250000f, 0.9492187500f, 0.9453125000f,
@@ -550,7 +529,7 @@ const f32 Pan2RatioTableLinear[PAN_CURVE_MAX + 1] = {
     0.0234375000f, 0.0195312500f, 0.0156250000f, 0.0117187500f, 0.0078125000f,
     0.0039062500f, 0.0000000000f};
 
-const u16 RemoteFilterCoefTable[REMOTE_FILTER_MAX + 1][5] = {
+const u16 Util::RemoteFilterCoefTable[COEF_TABLE_SIZE][IIR_COEF_COUNT] = {
     // clang-format off
     {14460, 28919,  14460,  33092,  49470},
     {13641, 27283,  13641,  35049,  51186},
@@ -683,7 +662,6 @@ const u16 RemoteFilterCoefTable[REMOTE_FILTER_MAX + 1][5] = {
     // clang-format on
 };
 
-} // namespace Util
 } // namespace detail
 } // namespace snd
 } // namespace nw4r
