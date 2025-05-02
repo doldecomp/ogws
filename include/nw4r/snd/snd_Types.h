@@ -10,10 +10,6 @@ static const int CHANNEL_MAX = 2;
 
 static const int REMOTE_FILTER_MAX = 127;
 
-// 12 notes each with 256 microtones
-static const int SEMITONE_MAX = 12;
-static const int MICROTONE_MAX = 256;
-
 // Volume in range [-90.4db, 6.0db]
 static const f32 VOLUME_MIN_DB = -90.4f;
 static const f32 VOLUME_MAX_DB = 6.0f;

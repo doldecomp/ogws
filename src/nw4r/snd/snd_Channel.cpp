@@ -166,7 +166,7 @@ void Channel::Update(bool periodic) {
     pitchRatio *= mTune;
     pitchRatio *= mUserPitchRatio;
 
-    f32 pitch = Util::CalcPitchRatio(MICROTONE_MAX * cent);
+    f32 pitch = Util::CalcPitchRatio(Util::MICROTONE_MAX * cent);
     pitch *= pitchRatio;
 
     f32 pan = 0.0f;

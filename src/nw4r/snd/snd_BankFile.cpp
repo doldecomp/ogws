@@ -131,7 +131,7 @@ BankFileReader::GetReferenceToSubRegion(const BankFile::DataRegion* pRef,
 
     case DATATYPE_RANGETABLE: {
         const BankFile::RangeTable* pRangeTable =
-            GetDataRefAddress2(*pRef, &mDataBlock->instTable);
+            Util::GetDataRefAddress2(*pRef, &mDataBlock->instTable);
 
         if (pRangeTable == NULL) {
             return NULL;
@@ -155,7 +155,7 @@ BankFileReader::GetReferenceToSubRegion(const BankFile::DataRegion* pRef,
 
     case DATATYPE_INDEXTABLE: {
         const BankFile::IndexTable* pIndexTable =
-            GetDataRefAddress3(*pRef, &mDataBlock->instTable);
+            Util::GetDataRefAddress3(*pRef, &mDataBlock->instTable);
 
         if (pIndexTable == NULL) {
             return NULL;
