@@ -194,20 +194,20 @@ typedef struct WPADExtConfig {
 typedef struct WPADCB {
     WPADGameInfo gameInfo; // at 0x0
     s32 UNK_0x38[2];
-    u8 rxBufMain[RX_BUFFER_SIZE]; // at 0x40
-    u8 rxBufs[2][RX_BUFFER_SIZE]; // at 0xA0
-    WPADCommandQueue stdCmdQueue;
-    WPADCommand stdCmdQueueList[24];
-    WPADCommandQueue extCmdQueue;
-    WPADCommand extCmdQueueList[12];
-    WPADInfo wpInfo;
-    WPADInfo* wpInfoOut;     // at 0x850
-    WPADDevConfig devConfig; // at 0x854
-    WPADExtConfig extConfig; // at 0x882
-    WPADCallback cmdBlkCB;
-    WPADExtensionCallback extensionCB;
-    WPADConnectCallback connectCB;
-    WPADSamplingCallback samplingCB;
+    u8 rxBufMain[RX_BUFFER_SIZE];      // at 0x40
+    u8 rxBufs[2][RX_BUFFER_SIZE];      // at 0xA0
+    WPADCommandQueue stdCmdQueue;      // at 0x160
+    WPADCommand stdCmdQueueList[24];   // at 0x16C
+    WPADCommandQueue extCmdQueue;      // at 0x5EC
+    WPADCommand extCmdQueueList[12];   // at 0x5F8
+    WPADInfo wpInfo;                   // at 0x838
+    WPADInfo* wpInfoOut;               // at 0x850
+    WPADDevConfig devConfig;           // at 0x854
+    WPADExtConfig extConfig;           // at 0x882
+    WPADCallback cmdBlkCB;             // at 0x89C
+    WPADExtensionCallback extensionCB; // at 0x8A0
+    WPADConnectCallback connectCB;     // at 0x8A4
+    WPADSamplingCallback samplingCB;   // at 0x8A8
     union {
         WPADStatus* samplingBuf;
         WPADStatusEx* samplingBufEx;
@@ -225,41 +225,18 @@ typedef struct WPADCB {
     s32 UNK_0x8C4;
     u8 rxBufIndex; // at 0x8C8
     s8 UNK_0x8C9;
-    u8 defaultDpdSize;         // at 0x8CA
-    u8 currentDpdCommand;      // at 0x8CB
-    u8 pendingDpdCommand;      // at 0x8CC
-    u8 radioQuality;           // at 0x8CD
-    u8 radioQualityOkMs;       // at 0x8CE
-    u8 audioFrames;            // at 0x8CF
-    u32 motorBusy;             // at 0x8D0
-    BOOL motorRunning;         // at 0x8D4
-    BOOL used;                 // at 0x8D8
-    BOOL handshakeFinished;    // at 0x8DC
-    s32 configIndex;           // at 0x8E0
-    OSThreadQueue threadQueue; // at 0x8E4
-    // u8 __pad0[4];
-    // u8 controlMplsBusy;
-    // u8 mplsCBReadBuf[2];
-    // u8 mplsCBCounter;
-    // u8 pendingMplsCommand;
-    // u8 noParseMplsCount;
-    // u8 isInitingMpls;
-    // u8 hasReadExtType2;
-    // u8 unk_0x93c;
-    // u8 parseMPState;
-    // u8 wmParamOffset;
-    // u8 certWorkCounter;
-    // u16 certWorkMs;
-    // s16 certStateWorkMs;
-    // s8 certChallengeRandomBit;
-    // u8 certWorkBusy;
-    // s8 certValidityStatus;
-    // s8 certState;
-    // u32* certParamPtr;
-    // u32 certBuf0[16 + 2];
-    // u32 certBuf1[16 + 2];
-    // u32 certBufBig[64 + 2];
-    // int unk_0xae4;
+    u8 defaultDpdSize;            // at 0x8CA
+    u8 currentDpdCommand;         // at 0x8CB
+    u8 pendingDpdCommand;         // at 0x8CC
+    u8 radioQuality;              // at 0x8CD
+    u8 radioQualityOkMs;          // at 0x8CE
+    u8 audioFrames;               // at 0x8CF
+    u32 motorBusy;                // at 0x8D0
+    BOOL motorRunning;            // at 0x8D4
+    BOOL used;                    // at 0x8D8
+    BOOL handshakeFinished;       // at 0x8DC
+    s32 configIndex;              // at 0x8E0
+    OSThreadQueue threadQueue;    // at 0x8E4
     s64 lastControllerDataUpdate; // at 0x8F0
     u16 filterDiffDpd;            // at 0x8F8
     u16 filterSameDpd;            // at 0x8FA
@@ -275,47 +252,21 @@ typedef struct WPADCB {
     u8 decryptAddTable[8]; // at 0x924
     u8 decryptXorTable[8]; // at 0x92C
     u8 wmReadDataBuf[64];  // at 0x934
-    u8* wmReadDataPtr;
-    u32 wmReadAddress;
-    int wmReadHadError;
-    u16 wmReadLength;
-    s8 unk_0xb7a;
-    u8 radioSensitivity;
-    u16 copyOutCount;
-    u8 sleeping;
-    u8 lastReportID;
-    WPADCallback getInfoCB;
-    u8 getInfoBusy;
-    // u8 extState;
-    // u8 disableContReport;
-    // u8 blcBattery;
-    // u8 savedDevType;
-    // u8 extWasDisconnected;
-    // s16 reconnectExtMs;
-    WPADMemBlock memBlock;
-    // WPADCallback* controlMplsCB;               // at 0xBA0
-    // u8 parseMPBuf;                             // at 0xBA4
-    // u8 certProbeByte;                          // at 0xBA5
-    // u8 dpdBusy; // at 0xBA6
-    // u8 interleaveFlags;                        // at 0xBA7
-    // u32 mplsCBReadAddress;                     // at 0xBA8
-    // WPADMplsCBState mplsCBState;               // at 0xBAC
-    // u8 mplsUptimeMs;                           // at 0xBAD
-    // s8 certMayVerifyByCalibBlock;              // at 0xBAE
-    // u8 __pad1[2];
-    // u8 certProbeStartingValue; // at 0xBB1
-    // u16 lastMplsCalibID;       // at 0xBB2
-    // u32 lastMplsCalibCRC;      // at 0xBB4
-    u8 noParseExtCount;
-    s8 extErr;
-    u8 extDataLength;
-    u8 extDevType;
-    u8 unk_0xbbc;
-    u8 __pad2[3];
-    u8 extDataBuf[32];
+    u8* wmReadDataPtr;     // at 0x974
+    u32 wmReadAddress;     // at 0x978
+    int wmReadHadError;    // at 0x97C
+    u16 wmReadLength;      // at 0x980
+    s8 UNK_0x982;
+    u8 radioSensitivity;    // at 0x983
+    u16 copyOutCount;       // at 0x984
+    u8 sleeping;            // at 0x986
+    u8 lastReportID;        // at 0x987
+    WPADCallback getInfoCB; // at 0x988
+    u8 getInfoBusy;         // at 0x98C
+    u8 UNK_0x98D[0x9A0 - 0x990];
 } WPADCB;
 
-extern WPADCB _wpd[WPAD_MAX_CONTROLLERS] ALIGN(32);
+extern WPADCB _wpd[WPAD_MAX_CONTROLLERS];
 extern WPADCB* _wpdcb[WPAD_MAX_CONTROLLERS];
 
 void WPADiInitSub(void);
@@ -347,6 +298,14 @@ BOOL WPADiSendDPDCSB(WPADCommandQueue* pQueue, BOOL enable,
 
 void WPADiClearQueue(WPADCommandQueue* pQueue);
 BOOL WPADiPushCommand(WPADCommandQueue* pQueue, WPADCommand command);
+BOOL WPADiGetCommand(const WPADCommandQueue* pQueue, WPADCommand* pCommand);
+BOOL WPADiPopCommand(WPADCommandQueue* pQueue);
+
+u16 _WPADGetStackBufferStatus(s32 chan);
+u16 _WPADGetModuleBufferStatus(s32 chan);
+
+void __WPADShutdown(void);
+void __WPADReconnect(void);
 
 #ifdef __cplusplus
 }

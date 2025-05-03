@@ -211,7 +211,7 @@ static void readbuffer_(s32 chan, RFLiCtrlBuf* dst, BOOL ch) {
     RFLiCtrlBufManager* mgr;
     RFLiCtrlBuf* buf;
     s32 reason;
-    u32 type;
+    s32 type;
 
     mgr = RFLiGetCtrlBufManager();
 

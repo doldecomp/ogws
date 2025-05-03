@@ -27,6 +27,7 @@ typedef void (*WPADExtensionCallback)(s32 chan, s32 dev);
 
 typedef WUDSyncDeviceCallback WPADSyncDeviceCallback;
 typedef WUDClearDeviceCallback WPADClearDeviceCallback;
+typedef SCFlushCallback WPADSaveCallback;
 
 typedef enum {
     WPAD_LIB_STATUS_0 = WUD_LIB_STATUS_0,
@@ -262,10 +263,6 @@ typedef struct WPADAccGravityUnit {
 void WPADInit(void);
 void WPADShutdown(void);
 
-BOOL WPADStopSimpleSync(void);
-
-//! /////////////////////////////////
-
 BOOL WPADStartSimpleSync(void);
 BOOL WPADStartFastSimpleSync(void);
 BOOL WPADStopSimpleSync(void);
@@ -299,7 +296,7 @@ WPADExtensionCallback WPADSetExtensionCallback(s32 chan,
 u32 WPADGetDataFormat(s32 chan);
 s32 WPADSetDataFormat(s32 chan, u32 format);
 
-WPADResult WPADGetInfoAsync(s32 chan, WPADInfo* pInfo, WPADCallback pCallback);
+s32 WPADGetInfoAsync(s32 chan, WPADInfo* pInfo, WPADCallback pCallback);
 
 void WPADControlMotor(s32 chan, u32 command);
 void WPADEnableMotor(BOOL enable);
@@ -307,7 +304,7 @@ BOOL WPADIsMotorEnabled(void);
 
 s32 WPADControlLed(s32 chan, u8 flags, WPADCallback pCallback);
 
-BOOL WPADSaveConfig(SCFlushCallback pCallback);
+BOOL WPADSaveConfig(WPADSaveCallback pCallback);
 
 void WPADRead(s32 chan, WPADStatus* pStatus);
 void WPADSetAutoSamplingBuf(s32 chan, void* pBuffer, u32 len);
@@ -332,8 +329,6 @@ void WPADRecalibrate(s32 chan);
 s32 WPADReadFaceData(s32 chan, void* dst, u32 size, u32 src, WPADCallback cb);
 
 //! /////////////////////////////////
-
-void __WPADShutdown(void);
 
 #ifdef __cplusplus
 }
