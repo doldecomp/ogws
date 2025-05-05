@@ -3,6 +3,8 @@
  *  NOTICE OF CHANGES
  *  2025/03/11:
  *      - Restore old function signatures
+ *  2025/05/02:
+ *      - Add BTA_DmSendHciReset
  * 
  *  Compile with REVOLUTION defined to include these changes.
  * 
@@ -1636,3 +1638,16 @@ void BTA_DmSetEncryption(BD_ADDR bd_addr, tBTA_DM_ENCRYPT_CBACK *p_callback,
         bta_sys_sendmsg(p_msg);
     }
 }
+
+#ifdef REVOLUTION
+/*******************************************************************************
+**
+** Function         BTA_DmSendHciReset
+**
+** Returns          void
+**
+*******************************************************************************/
+void BTA_DmSendHciReset(void) {
+    ;
+}
+#endif

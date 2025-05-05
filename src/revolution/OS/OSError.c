@@ -1,6 +1,7 @@
 #include <revolution/BASE.h>
 #include <revolution/DSP.h>
 #include <revolution/OS.h>
+
 #include <stdio.h>
 
 OSErrorHandler __OSErrorTable[OS_ERR_MAX];
@@ -197,7 +198,7 @@ void __OSUnhandledException(u8 error, OSContext* ctx, u32 dsisr, u32 dar) {
         OSReport("ARAM DMA Address = 0x%04x%04x\n",
                  DSP_HW_REGS[DSP_AR_DMA_MMADDR_H],
                  DSP_HW_REGS[DSP_AR_DMA_MMADDR_L]);
-        OSReport("DI DMA Address =   0x%08x\n", OS_DI_DMA_ADDR);
+        OSReport("DI DMA Address =   0x%08x\n", DI_HW_REGS[DI_DMA_ADDR]);
         break;
     }
 

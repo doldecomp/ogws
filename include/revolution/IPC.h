@@ -1,5 +1,5 @@
 /**
- * References: WiiBrew, Dolphin Emulator
+ * References: WiiBrew, Dolphin Emulator, fail0verflow
  */
 
 #ifndef RVL_SDK_PUBLIC_IPC_H

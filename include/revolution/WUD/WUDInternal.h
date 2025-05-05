@@ -7,6 +7,7 @@
 
 #include <revolution/BTE.h>
 #include <revolution/OS.h>
+#include <revolution/SC.h>
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -195,6 +196,8 @@ typedef struct WUDCB {
 
 extern WUDCB _wcb;
 extern WUDDevInfo _work;
+
+extern SCBtDeviceInfoArray _scArray;
 
 extern BD_ADDR_PTR _dev_handle_to_bda[WUD_MAX_DEV_ENTRY];
 extern u16 _dev_handle_queue_size[WUD_MAX_DEV_ENTRY];

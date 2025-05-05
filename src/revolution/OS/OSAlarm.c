@@ -6,8 +6,7 @@ static BOOL OnReset(BOOL final, u32 event);
 static void DecrementerExceptionHandler(u8 type, OSContext* ctx);
 
 static OSAlarmQueue AlarmQueue;
-static OSShutdownFunctionInfo ShutdownFunctionInfo = {OnReset, 0xFFFFFFFF, 0,
-                                                      0};
+static OSShutdownFunctionInfo ShutdownFunctionInfo = {OnReset, 0xFFFFFFFF};
 
 static void SetTimer(const OSAlarm* alarm) {
     s64 timeLeft = alarm->end - __OSGetSystemTime();

@@ -3,6 +3,7 @@
 #include <revolution/GX.h>
 #include <revolution/OS.h>
 #include <revolution/VI.h>
+
 #include <string.h>
 
 /**
@@ -200,13 +201,13 @@ void OSFatal(GXColor textColor, GXColor bgColor, const char* msg) {
 
     start = OSGetTime();
     do {
-        if (__OSCallShutdownFunctions(0, 0)) {
+        if (__OSCallShutdownFunctions(FALSE, OS_SD_EVENT_FATAL)) {
             break;
         }
     } while (OSGetTime() - start < OS_MSEC_TO_TICKS(1000));
 
     OSDisableInterrupts();
-    __OSCallShutdownFunctions(1, 0);
+    __OSCallShutdownFunctions(TRUE, OS_SD_EVENT_FATAL);
 
     EXISetExiCallback(EXI_CHAN_0, NULL);
     EXISetExiCallback(EXI_CHAN_2, NULL);

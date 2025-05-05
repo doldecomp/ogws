@@ -87,11 +87,11 @@ static DECOMP_INLINE s32 __ipcSendRequest(void) {
             __mailboxAck--;
         }
 
-        IPCWriteReg(0, (u32)OSCachedToPhysical(req));
+        IPCWriteReg(IPC_IPC_PPCMSG, (u32)OSCachedToPhysical(req));
         __responses.front = (__responses.front + 1) % IPC_QUEUE_CAPACITY;
         __responses.sent++;
         __mailboxAck--;
-        IPCWriteReg(1, (IPCReadReg(1) & 0x30) | 1);
+        IPCWriteReg(IPC_IPC_PPCCTRL, (IPCReadReg(IPC_IPC_PPCCTRL) & 0x30) | 1);
     }
 
 exit:
@@ -107,12 +107,12 @@ static void IpcReplyHandler(s16 intr, OSContext* ctx) {
     OSContext temp;
     int i;
 
-    reg = IPCReadReg(2);
+    reg = IPCReadReg(IPC_IPC_ARMMSG);
     if (reg != 0) {
         req = (IPCRequestEx*)OSPhysicalToCached(reg);
 
-        IPCWriteReg(1, (IPCReadReg(1) & 0x30) | 4);
-        ACRWriteReg(0x30, 0x40000000);
+        IPCWriteReg(IPC_IPC_PPCCTRL, (IPCReadReg(IPC_IPC_PPCCTRL) & 0x30) | 4);
+        ACRWriteReg(ACR_PPCIRQFLAG, 0x40000000);
         DCInvalidateRange(&req->base, sizeof(IPCRequest));
 
         // Not type??
@@ -180,7 +180,7 @@ static void IpcReplyHandler(s16 intr, OSContext* ctx) {
             OSWakeupThread(&req->queue);
         }
 
-        IPCWriteReg(1, (IPCReadReg(1) & 0x30) | 8);
+        IPCWriteReg(IPC_IPC_PPCCTRL, (IPCReadReg(IPC_IPC_PPCCTRL) & 0x30) | 8);
         IPCiProfReply(req, req->base.fd);
     }
 }
@@ -189,8 +189,8 @@ static void IpcAckHandler(u8 intr, OSContext* ctx) {
 #pragma unused(intr)
 #pragma unused(ctx)
 
-    IPCWriteReg(1, (IPCReadReg(1) & 0x30) | 2);
-    ACRWriteReg(0x30, 0x40000000);
+    IPCWriteReg(IPC_IPC_PPCCTRL, (IPCReadReg(IPC_IPC_PPCCTRL) & 0x30) | 2);
+    ACRWriteReg(ACR_PPCIRQFLAG, 0x40000000);
 
     if (__mailboxAck < 1) {
         __mailboxAck++;
@@ -202,18 +202,19 @@ static void IpcAckHandler(u8 intr, OSContext* ctx) {
             __relnchRpc->base.ret = IPC_RESULT_OK;
             __relnchFl = FALSE;
             OSWakeupThread(&__relnchRpc->queue);
-            IPCWriteReg(1, (IPCReadReg(1) & 0x30) | 8);
+            IPCWriteReg(IPC_IPC_PPCCTRL,
+                        (IPCReadReg(IPC_IPC_PPCCTRL) & 0x30) | 8);
         }
         __ipcSendRequest();
     }
 }
 
 static void IPCInterruptHandler(s16 intr, OSContext* ctx) {
-    if ((IPCReadReg(1) & 0x14) == 0x14) {
+    if ((IPCReadReg(IPC_IPC_PPCCTRL) & 0x14) == 0x14) {
         IpcReplyHandler(intr, ctx);
     }
 
-    if ((IPCReadReg(1) & 0x22) == 0x22) {
+    if ((IPCReadReg(IPC_IPC_PPCCTRL) & 0x22) == 0x22) {
         IpcAckHandler(intr, ctx);
     }
 }
@@ -236,7 +237,7 @@ s32 IPCCltInit(void) {
             IPCSetBufferLo((char*)lo + IPC_HEAP_SIZE);
             __OSSetInterruptHandler(OS_INTR_PI_ACR, IPCInterruptHandler);
             __OSUnmaskInterrupts(OS_INTR_MASK(OS_INTR_PI_ACR));
-            IPCWriteReg(1, 0x38);
+            IPCWriteReg(IPC_IPC_PPCCTRL, 0x38);
             IPCiProfInit();
         }
     }

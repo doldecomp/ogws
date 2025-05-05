@@ -840,7 +840,7 @@ config.libs = [
             Object(NonMatching, "revolution/WPAD/WPADHIDParser.c"),
             Object(NonMatching, "revolution/WPAD/WPADEncrypt.c"),
             Object(NonMatching, "revolution/WPAD/WPADMem.c"),
-            Object(NonMatching, "revolution/WPAD/debug_msg.c"),
+            Object(Matching, "revolution/WPAD/debug_msg.c"),
             Object(Matching, "revolution/EUART/euart.c"),
             Object(Matching, "revolution/EXI/EXIBios.c",
                    extra_cflags=["-schedule off"]),

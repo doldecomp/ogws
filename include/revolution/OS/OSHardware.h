@@ -153,6 +153,7 @@ OS_DEF_GLOBAL_VAR(u32, NAND_TITLE_LAUNCH_CODE,           0x8000318C);
 OS_DEF_GLOBAL_VAR(u32, NAND_TITLE_RETURN_CODE,           0x80003190);
 OS_DEF_GLOBAL_VAR(u32, BOOT_PARTITION_TYPE,              0x80003194);
 OS_DEF_GLOBAL_VAR(u32, BOOT_PARTITION_OFFSET,            0x80003198);
+OS_DEF_GLOBAL_VAR(s8, WIFI_AFH_CHANNEL,                  0x800031A2);
 OS_DEF_GLOBAL_ARR(u8, NWC24_USER_ID_BUFFER, [32],        0x800031C0);
 OS_DEF_GLOBAL_VAR(u64, NWC24_USER_ID,                    0x800031C0);
 OS_DEF_GLOBAL_ARR(u8, SC_PRDINFO, [0x100],               0x80003800);
@@ -255,22 +256,13 @@ typedef enum {
 #define MI_INTSR_ADDR (1 << 4)
 
 /**
- * DI hardware globals
+ * DI hardware registers
  */
-// clang-format off
-OS_DEF_HW_REG(volatile u32, DI_DMA_ADDR, 0xCD006014);
-OS_DEF_HW_REG(volatile u32, DI_CONFIG,   0xCD006024);
-// clang-format on
-
-/**
- * Misc/unknown globals
- */
-// clang-format off
-OS_DEF_HW_REG(volatile u32, UNK_CD000034, 0xCD000034);
-OS_DEF_HW_REG(volatile u32, UNK_CD800180, 0xCD800180);
-OS_DEF_HW_REG(volatile u32, UNK_CD8001CC, 0xCD8001CC);
-OS_DEF_HW_REG(volatile u32, UNK_CD8001D0, 0xCD8001D0);
-// clang-format on
+volatile u32 DI_HW_REGS[] : 0xCD006000;
+typedef enum {
+    DI_DMA_ADDR = 5, // !< 0xCD006014
+    DI_CONFIG = 9,   // !< 0xCD006024
+} DIHwReg;
 
 #ifdef __cplusplus
 }

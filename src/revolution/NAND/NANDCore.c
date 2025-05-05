@@ -27,8 +27,7 @@ const char* __NANDVersion =
 
 static NANDLibState s_libState = NAND_LIB_UNINITIALIZED;
 static char s_currentDir[64] ALIGN(32) = "/";
-static OSShutdownFunctionInfo s_shutdownFuncInfo = {nandOnShutdown, 255, NULL,
-                                                    NULL};
+static OSShutdownFunctionInfo s_shutdownFuncInfo = {nandOnShutdown, 255};
 
 static char s_homeDir[64] ALIGN(32);
 

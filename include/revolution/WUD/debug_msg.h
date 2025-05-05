@@ -5,7 +5,7 @@
 extern "C" {
 #endif
 
-void WUD_DEBUGPrint(const char* pMsg, ...);
+void WUD_DEBUGPrint(const char* pFmt, ...);
 
 #ifdef __cplusplus
 }

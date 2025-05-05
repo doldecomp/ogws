@@ -9,6 +9,9 @@
  *      - Change search callback event IDs
  *      - Change tBTA_DM_INQ_RES structure
  * 
+ * 2025/05/02:
+ *      - Add BTA_DmSendHciReset
+ * 
  *  Compile with REVOLUTION defined to include these changes.
  * 
  ******************************************************************************/
@@ -1350,6 +1353,17 @@ BTA_API extern void BTA_DmAuthorizeReply(BD_ADDR bd_addr, tBTA_SERVICE_ID servic
 **
 *******************************************************************************/
 BTA_API extern void BTA_DmSignalStrength(tBTA_SIG_STRENGTH_MASK mask, UINT16 period, BOOLEAN start);
+
+#ifdef REVOLUTION
+/*******************************************************************************
+**
+** Function         BTA_DmSendHciReset
+**
+** Returns          void
+**
+*******************************************************************************/
+void BTA_DmSendHciReset(void);
+#endif
 
 /*******************************************************************************
 **

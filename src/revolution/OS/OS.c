@@ -867,7 +867,7 @@ void __OSPSInit(void) {
 }
 
 u32 __OSGetDIConfig(void) {
-    return OS_DI_CONFIG & 0xFF;
+    return DI_HW_REGS[DI_CONFIG] & 0xFF;
 }
 
 void OSRegisterVersion(const char* ver) {
