@@ -13,6 +13,9 @@ extern "C" {
 #define WPAD_MIN_DPD_SENS 1
 #define WPAD_MAX_DPD_SENS 5
 
+#define WPAD_MAX_DPD_X 1023
+#define WPAD_MAX_DPD_Y 767
+
 #define WPAD_MAX_SPEAKER_VOLUME 127
 
 extern u8 _scFlush;
