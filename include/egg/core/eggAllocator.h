@@ -1,17 +1,20 @@
 #ifndef EGG_CORE_ALLOCATOR_H
 #define EGG_CORE_ALLOCATOR_H
-#include "types_egg.h"
+#include <egg/types_egg.h>
+
 #include <revolution/MEM.h>
 
-namespace EGG
-{
-    struct Allocator : MEMAllocator
-    {
-        Allocator(Heap *, s32);
-        virtual ~Allocator();
-        virtual void * alloc(u32);
-        virtual void free(void *);
-    };
-}
+namespace EGG {
+
+class Allocator : private MEMAllocator {
+public:
+    Allocator(Heap* pHeap, s32 align);
+    virtual ~Allocator();
+
+    virtual void* alloc(u32 size);
+    virtual void free(void* pBlock);
+};
+
+} // namespace EGG
 
 #endif
