@@ -1,9 +1,12 @@
 #ifndef RVL_SDK_MEM_HEAP_COMMON_H
 #define RVL_SDK_MEM_HEAP_COMMON_H
-#include <revolution/MEM/mem_list.h>
-#include <revolution/OS.h>
-#include <string.h>
 #include <types.h>
+
+#include <revolution/MEM/mem_list.h>
+
+#include <revolution/OS.h>
+
+#include <string.h>
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -86,8 +89,12 @@ static void FillAllocMemory(MEMiHeapHead* heap, void* memBlock, u32 size) {
     }
 }
 
-static s32 MEMGetHeapTotalSize(MEMiHeapHead* heap) {
+static s32 MEMGetHeapTotalSize(const MEMiHeapHead* heap) {
     return GetOffsetFromPtr(heap, heap->end);
+}
+
+static void* MEMGetHeapEndAddress(const MEMiHeapHead* heap) {
+    return heap->end;
 }
 
 #ifdef __cplusplus

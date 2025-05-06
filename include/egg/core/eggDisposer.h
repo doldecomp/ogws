@@ -3,16 +3,14 @@
 #include "types_egg.h"
 #include "ut_list.h"
 
-namespace EGG
-{
-    struct Disposer
-    {
-        Disposer();
-        virtual ~Disposer();
+namespace EGG {
+struct Disposer {
+    Disposer();
+    virtual ~Disposer();
 
-        Heap *mHeap; // at 0x0
-        nw4r::ut::Link mNode; // at 0x4
-    };
-}
+    Heap* mHeap;          // at 0x0
+    nw4r::ut::Link mLink; // at 0x4
+};
+} // namespace EGG
 
 #endif

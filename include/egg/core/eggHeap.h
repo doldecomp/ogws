@@ -1,90 +1,153 @@
 #ifndef EGG_CORE_HEAP_H
 #define EGG_CORE_HEAP_H
+#include <egg/types_egg.h>
 
-#include "types_egg.h"
-#include "eggDisposer.h"
-#include "eggBitFlag.h"
+#include <egg/core/eggBitFlag.h>
+#include <egg/core/eggDisposer.h>
 
-#include "ut_list.h"
+#include <nw4r/ut.h>
 
 #include <revolution/MEM.h>
 #include <revolution/OS.h>
 
-namespace EGG
-{
-    class Heap : Disposer
-    {
-    public:
-        enum EHeapKind
-        {
-            HEAP_EXPANDED = 1,
-            HEAP_FRAME = 2
-        };
+namespace EGG {
 
-    public:
-        static void * addOffset(void *p, u32 ofs) { return (char *)p + ofs;}
-        static Heap* getCurrentHeap() { return sCurrentHeap; }
+// Forward declarations
+class ExpHeap;
 
-        static void initialize();
-        static Heap * findHeap(MEMiHeapHead *);
-        static Heap * findContainHeap(const void *);
-        static void * alloc(u32, int, Heap *);
-        static void free(void *, Heap *);
-
-        Heap(MEMiHeapHead *);
-        virtual ~Heap(); // at 0x8
-        virtual EHeapKind getHeapKind() const = 0; // at 0xC
-        virtual void initAllocator(Allocator *, s32) = 0; // at 0x10
-        virtual void * alloc(u32, s32) = 0; // at 0x14
-        virtual void free(void *) = 0; // at 0x18
-        virtual void destroy() = 0; // at 0x1C
-        virtual u32 resizeForMBlock(void *, u32) = 0; // at 0x20
-        virtual u32 getAllocatableSize(s32) = 0; // at 0x24
-        virtual u32 adjust() = 0; // at 0x28
-
-        u8 * getStartAddress() { return (u8 *)this; }
-        u8 * getEndAddress() { return mHeapHandle->end; }
-        int getTotalSize() { return getEndAddress() - getStartAddress(); }
-
-        bool tstDisableAllocation() { return mFlags.onBit(0); }
-        void disableAllocation() { mFlags.setBit(0); }
-        void enableAllocation() { mFlags.resetBit(0); }
-
-        void appendDisposer(Disposer* disposer)
-        {
-            nw4r::ut::List_Append(&mChildren, disposer);
-        }
-        void removeDisposer(Disposer* disposer)
-        {
-            nw4r::ut::List_Remove(&mChildren, disposer);
-        }
-
-        Heap * findParentHeap();
-        void dispose();
-        Heap * becomeCurrentHeap();
-
-    protected:
-        MEMiHeapHead * mHeapHandle; // at 0x10
-        void * mMemBlock; // at 0x14
-        Heap * mParentHeap; // at 0x18
-        TBitFlag<u16> mFlags; // at 0x1C
-        nw4r::ut::Link mNode; // at 0x20
-        nw4r::ut::List mChildren; // at 0x28
-
-        static nw4r::ut::List sHeapList;
-        static OSMutex sRootMutex;
-        static Heap *sCurrentHeap;
-        static BOOL sIsHeapListInitialized;
-        static Heap *sAllocatableHeap;
+class Heap : public Disposer {
+public:
+    enum EHeapKind {
+        HEAP_KIND_NONE,
+        HEAP_KIND_EXPAND,
+        HEAP_KIND_FRAME,
+        HEAP_KIND_UNIT,
+        HEAP_KIND_ASSERT
     };
-}
 
-void * operator new(size_t);
-void * operator new(size_t, EGG::Heap *, int);
-void * operator new[](size_t);
-void * operator new[](size_t, int);
-void * operator new[](size_t, EGG::Heap *, int);
-void operator delete(void *);
-void operator delete[](void *);
+public:
+    static void initialize();
+
+    static void* alloc(u32 size, int align, Heap* pHeap);
+    static void free(void* pBlock, Heap* pHeap);
+
+    Heap(MEMiHeapHead* pHeapHandle);
+    virtual ~Heap(); // at 0x8
+
+    virtual EHeapKind getHeapKind() const = 0; // at 0xC
+
+    virtual void initAllocator(Allocator* pAllocator,
+                               s32 align = 4) = 0; // at 0x10
+
+    virtual void* alloc(u32 size, s32 align = 4) = 0; // at 0x14
+    virtual void free(void* pBlock) = 0;              // at 0x18
+    virtual void destroy() = 0;                       // at 0x1C
+
+    virtual u32 resizeForMBlock(void* pBlock, u32 size) = 0; // at 0x20
+    virtual u32 getAllocatableSize(s32 align = 4) = 0;       // at 0x24
+    virtual u32 adjust() = 0;                                // at 0x28
+
+    static Heap* findHeap(MEMiHeapHead* pHeapHandle);
+    Heap* findParentHeap();
+    static Heap* findContainHeap(const void* pBlock);
+
+    void dispose();
+    Heap* becomeCurrentHeap();
+
+    void* getStartAddress() {
+        return this;
+    }
+    void* getEndAddress() {
+        return MEMGetHeapEndAddress(mHeapHandle);
+    }
+    s32 getTotalSize() {
+        return static_cast<u8*>(getEndAddress()) -
+               static_cast<u8*>(getStartAddress());
+    }
+
+    bool isHeapPointer(void* pBlock) {
+        return pBlock >= getStartAddress() && pBlock < getEndAddress();
+    }
+
+    void disableAllocation() {
+        mFlags.setBit(BIT_DISABLE_ALLOC);
+    }
+    void enableAllocation() {
+        mFlags.resetBit(BIT_DISABLE_ALLOC);
+    }
+    bool tstDisableAllocation() {
+        return mFlags.onBit(BIT_DISABLE_ALLOC);
+    }
+
+    void appendDisposer(Disposer* pDisposer) {
+        nw4r::ut::List_Append(&mDisposerList, pDisposer);
+    }
+    void removeDisposer(Disposer* pDisposer) {
+        nw4r::ut::List_Remove(&mDisposerList, pDisposer);
+    }
+
+    static const nw4r::ut::List& getHeapList() {
+        return sHeapList;
+    }
+    static Heap* getCurrentHeap() {
+        return sCurrentHeap;
+    }
+
+    static ExpHeap* dynamicCastToExp(Heap* pHeap) {
+        if (pHeap->getHeapKind() == HEAP_KIND_EXPAND) {
+            return reinterpret_cast<ExpHeap*>(pHeap);
+        }
+
+        return NULL;
+    }
+
+    static void disableAllocationAllBut(Heap* pHeap) {
+        sAllocatableHeap = NULL;
+    }
+
+protected:
+    static void* addOffset(void* pBase, u32 offset) {
+        return static_cast<u8*>(pBase) + offset;
+    }
+
+    void registerHeapBuffer(void* pBuffer) {
+        mHeapBuffer = pBuffer;
+    }
+
+protected:
+    MEMiHeapHead* mHeapHandle; // at 0x10
+    void* mHeapBuffer;         // at 0x14
+    Heap* mParentHeap;         // at 0x18
+
+private:
+    enum EFlagBit {
+        BIT_DISABLE_ALLOC,
+    };
+
+private:
+    TBitFlag<u16> mFlags;         // at 0x1C
+    nw4r::ut::Link mLink;         // at 0x20
+    nw4r::ut::List mDisposerList; // at 0x28
+
+    static Heap* sCurrentHeap;
+
+    static nw4r::ut::List sHeapList;
+    static BOOL sIsHeapListInitialized;
+    static OSMutex sRootMutex;
+
+    static Heap* sAllocatableHeap;
+};
+
+} // namespace EGG
+
+void* operator new(size_t size);
+void* operator new(size_t size, EGG::Heap* pHeap, int align);
+
+void* operator new[](size_t size);
+void* operator new[](size_t size, int align);
+void* operator new[](size_t size, EGG::Heap* pHeap, int align);
+
+void operator delete(void* pBlock);
+void operator delete[](void* pBlock);
 
 #endif

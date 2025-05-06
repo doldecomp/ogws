@@ -362,6 +362,8 @@ def MatchingFor(*versions):
     return config.version in versions
 
 
+# fmt: off
+
 config.warn_missing_config = False  # TODO enable
 config.warn_missing_source = False
 config.libs = [
@@ -668,8 +670,8 @@ config.libs = [
                    extra_cflags=["-Cpp_exceptions on"]),
             Object(Matching, "egg/math/eggVector.cpp",
                    extra_cflags=["-Cpp_exceptions on"]),
-            Object(NonMatching, "egg/core/eggExpHeap.cpp"),
-            Object(NonMatching, "egg/core/eggFrmHeap.cpp"),
+            Object(Matching, "egg/core/eggExpHeap.cpp"),
+            Object(Matching, "egg/core/eggFrmHeap.cpp"),
             Object(Matching, "egg/core/eggHeap.cpp"),
             Object(Matching, "egg/core/eggAllocator.cpp"),
             Object(Matching, "egg/core/eggThread.cpp"),
@@ -1042,6 +1044,9 @@ config.libs = [
         ],
     },
 ]
+
+# fmt: on
+
 
 # Optional extra categories for progress tracking
 config.progress_categories = [

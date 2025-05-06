@@ -6,7 +6,7 @@
 
 namespace EGG {
 
-class Allocator : private MEMAllocator {
+class Allocator : public MEMAllocator {
 public:
     Allocator(Heap* pHeap, s32 align);
     virtual ~Allocator();

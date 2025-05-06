@@ -1,127 +1,113 @@
-#pragma use_lmw_stmw on
-#include "eggFrmHeap.h"
-#include "ut_algorithm.h"
+// TODO: REMOVE AFTER REFACTOR
+#pragma ipa file
+
+#include <egg/core.h>
+
+#include <nw4r/ut.h>
+
 #include <revolution/MEM.h>
-#include <new>
 
-namespace EGG
-{
-    using namespace nw4r;
+namespace EGG {
 
-    FrmHeap::FrmHeap(MEMiHeapHead *handle) : Heap(handle)
-    {
+FrmHeap::FrmHeap(MEMiHeapHead* pHeapHandle) : Heap(pHeapHandle) {}
 
+FrmHeap::~FrmHeap() {
+    dispose();
+    MEMDestroyFrmHeap(mHeapHandle);
+}
+
+FrmHeap* FrmHeap::create(void* pHeapStart, u32 size, u16 opt) {
+    FrmHeap* pHeap = NULL;
+
+    void* pHeapBuffer = pHeapStart;
+    void* pHeapEnd = ROUND_DOWN_PTR(addOffset(pHeapStart, size), 4);
+
+    pHeapStart = ROUND_UP_PTR(pHeapStart, 4);
+
+    if (pHeapStart > pHeapEnd ||
+        PTR_DISTANCE(pHeapStart, pHeapEnd) < sizeof(FrmHeap) + 4) {
+
+        return NULL;
     }
 
-    FrmHeap::~FrmHeap()
-    {
-        dispose();
-        MEMDestroyFrmHeap(mHeapHandle);
+    MEMiHeapHead* pHeapHandle = MEMCreateFrmHeapEx(
+        addOffset(pHeapStart, sizeof(FrmHeap)),
+        PTR_DISTANCE(pHeapStart, pHeapEnd) - sizeof(FrmHeap), opt);
+
+    if (pHeapHandle != NULL) {
+        Heap* pContainHeap = findContainHeap(pHeapStart);
+
+        pHeap = new (pHeapStart) FrmHeap(pHeapHandle);
+        pHeap->registerHeapBuffer(pHeapBuffer);
+        pHeap->mParentHeap = pContainHeap;
     }
 
-    FrmHeap * FrmHeap::create(void *memBlock, u32 size, u16 r5)
-    {
-        FrmHeap *newHeap = NULL;
-        u32 heapSize;
-        void *heapEnd = ut::RoundDown(addOffset(memBlock, size), 4);
-        void *heapStart = ut::RoundUp(memBlock, 4);
+    return pHeap;
+}
 
-        // 1. Heap size must be positive (end > start)
-        // 2. Heap size must be bigger than heap object size + 4 (Smallest reasonable heap size?)
-        if (heapEnd > heapStart ||
-            (heapSize = ut::GetOffsetFromPtr(heapStart, heapEnd)) < sizeof(FrmHeap) + 4)
-        {
-            return NULL;
+FrmHeap* FrmHeap::create(u32 size, Heap* pParentHeap, u16 opt) {
+    FrmHeap* pHeap = NULL;
+
+    if (pParentHeap == NULL) {
+        pParentHeap = getCurrentHeap();
+    }
+
+    if (size == 0xFFFFFFFF) {
+        size = pParentHeap->getAllocatableSize();
+    }
+
+    void* pHeapStart = pParentHeap->alloc(size);
+    if (pHeapStart != NULL) {
+
+        pHeap = create(pHeapStart, size, opt);
+        if (pHeap != NULL) {
+            pHeap->mParentHeap = pParentHeap;
+        } else {
+            pParentHeap->free(pHeapStart);
         }
-
-        // Beginning of mem block is reserved for FrmHeap object
-        // As a result, max heap size is (Mem block size - sizeof(FrmHeap))
-        MEMiHeapHead *handle = MEMCreateFrmHeapEx(addOffset(heapStart, sizeof(FrmHeap)),
-            heapSize - sizeof(FrmHeap), r5);
-
-        if (handle)
-        {
-            Heap *containHeap = findContainHeap(heapStart);
-            newHeap = new (heapStart) FrmHeap(handle);
-            newHeap->mMemBlock = memBlock;
-            newHeap->mParentHeap = containHeap;
-        }
-
-        return newHeap;
     }
 
-    FrmHeap * FrmHeap::create(u32 size, Heap *pHeap, u16 r5)
-    {
-        FrmHeap *newHeap = NULL;
+    return pHeap;
+}
 
-        if (!pHeap) pHeap = getCurrentHeap();
-        if (size == -1) size = pHeap->getAllocatableSize(4);
+void FrmHeap::destroy() {
+    Heap* pParentHeap = findParentHeap();
 
-        void *memBlock = pHeap->alloc(size, 4);
-        if (memBlock)
-        {
-            newHeap = create(memBlock, size, r5);
-            if (newHeap)
-            {
-                newHeap->mParentHeap = pHeap;
-            }
-            else
-            {
-                pHeap->free(memBlock);
-            }
-        }
-
-        return newHeap;
-    }
-
-    void FrmHeap::destroy()
-    {
-        Heap *pParent = findParentHeap();
-        this->~FrmHeap();
-
-        if (pParent) pParent->free(this);
-    }
-
-    void * FrmHeap::alloc(u32 size, s32 align)
-    {
-        return MEMAllocFromFrmHeapEx(mHeapHandle, size, align);
-    }
-
-    void FrmHeap::free(void *p)
-    {
-
-    }
-
-    u32 FrmHeap::resizeForMBlock(void *memBlock, u32 size)
-    {
-        return MEMResizeForMBlockFrmHeap(mHeapHandle, memBlock, size);
-    }
-
-    u32 FrmHeap::getAllocatableSize(s32 align)
-    {
-        return MEMGetAllocatableSizeForFrmHeapEx(mHeapHandle, align);
-    }
-
-    u32 FrmHeap::adjust()
-    {
-        u32 newSize = MEMAdjustFrmHeap(mHeapHandle) + sizeof(FrmHeap);
-
-        if (newSize > sizeof(FrmHeap) && mParentHeap)
-        {
-            mParentHeap->resizeForMBlock(mMemBlock, newSize);
-            return newSize;
-        }
-
-        return 0;
-    }
-
-    void FrmHeap::initAllocator(Allocator *pAllocator, s32 r5)
-    {
-        MEMInitAllocatorForFrmHeap((MEMAllocator *)pAllocator, mHeapHandle, r5);
-    }
-
-    Heap::EHeapKind FrmHeap::getHeapKind() const
-    {
-        return HEAP_FRAME;
+    this->~FrmHeap();
+    if (pParentHeap != NULL) {
+        pParentHeap->free(this);
     }
 }
+
+void* FrmHeap::alloc(u32 size, s32 align) {
+    return MEMAllocFromFrmHeapEx(mHeapHandle, size, align);
+}
+
+void FrmHeap::free(void* pBlock) {
+#pragma unused(pBlock)
+}
+
+u32 FrmHeap::resizeForMBlock(void* pBlock, u32 size) {
+    return MEMResizeForMBlockFrmHeap(mHeapHandle, pBlock, size);
+}
+
+u32 FrmHeap::getAllocatableSize(s32 align) {
+    return MEMGetAllocatableSizeForFrmHeapEx(mHeapHandle, align);
+}
+
+u32 FrmHeap::adjust() {
+    u32 adjustSize = MEMAdjustFrmHeap(mHeapHandle) + sizeof(FrmHeap);
+
+    if (adjustSize > sizeof(FrmHeap) && mParentHeap != NULL) {
+        mParentHeap->resizeForMBlock(mHeapBuffer, adjustSize);
+        return adjustSize;
+    }
+
+    return 0;
+}
+
+void FrmHeap::initAllocator(Allocator* pAllocator, s32 r5) {
+    MEMInitAllocatorForFrmHeap((MEMAllocator*)pAllocator, mHeapHandle, r5);
+}
+
+} // namespace EGG
