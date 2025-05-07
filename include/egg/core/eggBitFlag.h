@@ -4,39 +4,28 @@
 
 namespace EGG {
 
-namespace detail {
-
-// There's no chance this existed in the original library.
-// One QoL improvement to TBitFlag is constraining T to u8, u16, and u32.
-//
-// Because we don't have C++20 constraints, or even C++11 type traits,
-// we instead define these manually in a detail namespace.
-
-template <typename T> struct TBitFlagValid {
-    enum { value = false };
+template <typename T> struct is_flag_type {
+    static const bool value = false;
 };
 
-template <> struct TBitFlagValid<u8> {
-    enum { value = true };
+template <> struct is_flag_type<u8> {
+    static const bool value = true;
 };
-template <> struct TBitFlagValid<u16> {
-    enum { value = true };
+template <> struct is_flag_type<u16> {
+    static const bool value = true;
 };
-template <> struct TBitFlagValid<u32> {
-    enum { value = true };
+template <> struct is_flag_type<u32> {
+    static const bool value = true;
+};
+template <> struct is_flag_type<u64> {
+    static const bool value = true;
 };
 
-template <bool> struct TTypeTrap;
-
-template <> struct TTypeTrap<true> {};
-
-} // namespace detail
+template <bool> struct flag_type_chk;
+template <> struct flag_type_chk<true> {};
 
 template <typename T> class TBitFlag {
 public:
-    typedef TBitFlag<T> self_type;
-    typedef T value_type;
-
     TBitFlag() {
         makeAllZero();
     }
@@ -64,13 +53,11 @@ public:
     /******************************************************************************
      * Bit mask operations
      ******************************************************************************/
-    self_type& set(T mask) {
+    void set(T mask) {
         mValue |= mask;
-        return *this;
     }
-    self_type& reset(T mask) {
+    void reset(T mask) {
         mValue &= ~mask;
-        return *this;
     }
 
     void change(T mask, bool on) {
@@ -91,13 +78,11 @@ public:
     /******************************************************************************
      * Bit index operations
      ******************************************************************************/
-    self_type& setBit(u8 bit) {
+    void setBit(u8 bit) {
         set(makeMask(bit));
-        return *this;
     }
-    self_type& resetBit(u8 bit) {
+    void resetBit(u8 bit) {
         reset(makeMask(bit));
-        return *this;
     }
 
     void changeBit(u8 bit, bool on) {
@@ -122,12 +107,7 @@ private:
 private:
     union {
         T mValue; // at 0x0
-
-        // We require a union because, despite being an empty struct,
-        // this still has a size of 1. This struct being a static member of
-        // TBitFlag doesn't work either. Fortunately, sizeof(T) is always >= 1,
-        // so we can safely union this and still get the compile time checks.
-        detail::TTypeTrap<detail::TBitFlagValid<T>::value> trap;
+        flag_type_chk<is_flag_type<T>::value> _;
     };
 };
 
