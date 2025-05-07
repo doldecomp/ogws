@@ -102,7 +102,7 @@ public:
     }
 
     static void disableAllocationAllBut(Heap* pHeap) {
-        sAllocatableHeap = NULL;
+        sAllocatableHeap = pHeap;
     }
 
 protected:
