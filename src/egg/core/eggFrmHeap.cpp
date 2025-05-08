@@ -25,14 +25,16 @@ FrmHeap* FrmHeap::create(void* pHeapStart, u32 size, u16 opt) {
     pHeapStart = ROUND_UP_PTR(pHeapStart, 4);
 
     if (pHeapStart > pHeapEnd ||
-        PTR_DISTANCE(pHeapStart, pHeapEnd) < sizeof(FrmHeap) + 4) {
+        nw4r::ut::GetOffsetFromPtr(pHeapStart, pHeapEnd) <
+            sizeof(FrmHeap) + 4) {
 
         return NULL;
     }
 
     MEMiHeapHead* pHeapHandle = MEMCreateFrmHeapEx(
         addOffset(pHeapStart, sizeof(FrmHeap)),
-        PTR_DISTANCE(pHeapStart, pHeapEnd) - sizeof(FrmHeap), opt);
+        nw4r::ut::GetOffsetFromPtr(pHeapStart, pHeapEnd) - sizeof(FrmHeap),
+        opt);
 
     if (pHeapHandle != NULL) {
         Heap* pContainHeap = findContainHeap(pHeapStart);

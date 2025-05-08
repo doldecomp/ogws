@@ -1,122 +1,118 @@
+// TODO: REMOVE AFTER REFACTOR
 #pragma ipa file
-#include "eggThread.h"
-#include "eggHeap.h"
-#include "eggAssert.h"
-#include "ut_list.h"
-#include "ut_algorithm.h"
 
-namespace EGG
-{
-    using namespace nw4r;
+#include <egg/core.h>
+#include <egg/prim.h>
 
-    Thread::Thread(u32 stackSize, int mesgCount, int r6, Heap *pHeap)
-    {
-        if (!pHeap) pHeap = Heap::getCurrentHeap();
-        mHeap = pHeap;
+#include <nw4r/ut.h>
 
-        mStackSize = ut::RoundDown<u32>(stackSize, 32);
-        mStackMemory = Heap::alloc(mStackSize, 32, pHeap);
-        #line 70
-        EGG_ASSERT(mStackMemory);
+#include <revolution/OS.h>
 
-        mOSThread = static_cast<OSThread *>(Heap::alloc(sizeof(OSThread), 32, mHeap));
-        #line 80
-        EGG_ASSERT(mOSThread);
+namespace EGG {
 
-        OSCreateThread(mOSThread, Thread::start, this, (u8 *)mStackMemory + mStackSize, mStackSize, r6, 1);
+nw4r::ut::List Thread::sThreadList;
 
-        setCommonMesgQueue(mesgCount, mHeap);
+Thread::Thread(u32 stackSize, int capacity, int priority, Heap* pHeap) {
+    if (pHeap == NULL) {
+        pHeap = Heap::getCurrentHeap();
     }
 
-    Thread::Thread(OSThread *pThread, int mesgCount)
-    {
-        mHeap = NULL;
-        mOSThread = pThread;
-        mStackSize = ut::GetOffsetFromPtr(pThread->stackBegin, pThread->stackEnd);
-        mStackMemory = pThread->stackBegin;
-        
-        setCommonMesgQueue(mesgCount, Heap::getCurrentHeap());
-    }
+    mContainHeap = pHeap;
+    mStackSize = nw4r::ut::RoundDown(stackSize, 32);
 
-    Thread::~Thread()
-    {
-        ut::List_Remove(&sThreadList, this);
-        if (mHeap)
-        {
-            if (!OSIsThreadTerminated(mOSThread))
-            {
-                OSDetachThread(mOSThread);
-                OSCancelThread(mOSThread);
-            }
+    mStackMemory = Heap::alloc(mStackSize, 32, mContainHeap);
+#line 70
+    EGG_ASSERT(mStackMemory);
 
-            Heap::free(mStackMemory, mHeap);
-            Heap::free(mOSThread, mHeap);
-        }
+    mOSThread =
+        static_cast<OSThread*>(Heap::alloc(sizeof(OSThread), 32, mContainHeap));
+#line 80
+    EGG_ASSERT(mOSThread);
 
-        Heap::free(mMesgBuffer, NULL);
-    }
+    OSCreateThread(mOSThread, Thread::start, this,
+                   reinterpret_cast<u8*>(mStackMemory) + mStackSize, mStackSize,
+                   priority, OS_THREAD_DETACHED);
 
-    Thread * Thread::findThread(OSThread *pThread)
-    {
-        Thread *node = NULL;
-        while (node = (Thread *)ut::List_GetNext(&sThreadList, node))
-        {
-            if (node->mOSThread == pThread) return node;
-        }
-
-        return NULL;
-    }
-
-    void Thread::initialize()
-    {
-        ut::List_Init(&sThreadList, offsetof(Thread, mNode));
-        OSSetSwitchThreadCallback(Thread::switchThreadCallback);
-    }
-
-    void Thread::switchThreadCallback(OSThread *r3, OSThread *r4)
-    {
-        Thread * oldThread;
-        if (r3) oldThread = findThread(r3);
-        else oldThread = NULL;
-
-        Thread * newThread;
-        if (r4) newThread = findThread(r4);
-        else newThread = NULL;
-
-        if (oldThread) oldThread->onExit();
-        if (newThread) newThread->onEnter();
-    }
-
-    void Thread::setCommonMesgQueue(int mesgCount, Heap *pHeap)
-    {
-        mMesgCount = mesgCount;
-        mMesgBuffer = static_cast<OSMessage *>(Heap::alloc(mesgCount * sizeof(OSMessage), 4, pHeap));
-        #line 262
-        EGG_ASSERT(mMesgBuffer);
-
-        OSInitMessageQueue(&mMesgQueue, mMesgBuffer, mMesgCount);
-        ut::List_Append(&sThreadList, this);
-    }
-
-    void Thread::onExit()
-    {
-
-    }
-
-    void Thread::onEnter()
-    {
-
-    }
-
-    void* Thread::start(void *pThread)
-    {
-        return static_cast<Thread *>(pThread)->run();
-    }
-
-    void* Thread::run()
-    {
-        return NULL;
-    }
-
-    ut::List Thread::sThreadList;
+    setCommonMesgQueue(capacity, mContainHeap);
+    nw4r::ut::List_Append(&sThreadList, this);
 }
+
+Thread::Thread(OSThread* pOSThread, int capacity) {
+    mContainHeap = NULL;
+    mOSThread = pOSThread;
+
+    mStackSize =
+        nw4r::ut::GetOffsetFromPtr(pOSThread->stackBegin, pOSThread->stackEnd);
+
+    mStackMemory = pOSThread->stackBegin;
+
+    setCommonMesgQueue(capacity, Heap::getCurrentHeap());
+    nw4r::ut::List_Append(&sThreadList, this);
+}
+
+Thread::~Thread() {
+    nw4r::ut::List_Remove(&sThreadList, this);
+
+    if (mContainHeap != NULL) {
+        if (!OSIsThreadTerminated(mOSThread)) {
+            OSDetachThread(mOSThread);
+            OSCancelThread(mOSThread);
+        }
+
+        Heap::free(mStackMemory, mContainHeap);
+        Heap::free(mOSThread, mContainHeap);
+    }
+
+    Heap::free(mMesgBuffer, NULL);
+}
+
+Thread* Thread::findThread(OSThread* pOSThread) {
+    NW4R_UT_LIST_FOREACH(Thread, it, sThreadList, {
+        if (it->mOSThread == pOSThread) {
+            return it;
+        }
+    })
+
+    return NULL;
+}
+
+void Thread::initialize() {
+    nw4r::ut::List_Init(&sThreadList, offsetof(Thread, mLink));
+    OSSetSwitchThreadCallback(Thread::switchThreadCallback);
+}
+
+void Thread::switchThreadCallback(OSThread* pCurrOSThread,
+                                  OSThread* pNewOSThread) {
+
+    Thread* pCurrThread =
+        pCurrOSThread != NULL ? findThread(pCurrOSThread) : NULL;
+
+    // clang-format off
+    Thread* pNewThread =
+        pNewOSThread != NULL ? findThread(pNewOSThread) : NULL;
+    // clang-format on
+
+    if (pCurrThread != NULL) {
+        pCurrThread->onExit();
+    }
+    if (pNewThread != NULL) {
+        pNewThread->onEnter();
+    }
+}
+
+void Thread::setCommonMesgQueue(int capacity, Heap* pHeap) {
+    mMesgCapacity = capacity;
+
+    mMesgBuffer = static_cast<OSMessage*>(
+        Heap::alloc(capacity * sizeof(OSMessage), 4, pHeap));
+#line 262
+    EGG_ASSERT(mMesgBuffer);
+
+    OSInitMessageQueue(&mMesgQueue, mMesgBuffer, mMesgCapacity);
+}
+
+void* Thread::start(void* pArg) {
+    return static_cast<Thread*>(pArg)->run();
+}
+
+} // namespace EGG
