@@ -4,6 +4,7 @@
 #include <egg/core/eggAllocator.h>
 #include <egg/core/eggBitFlag.h>
 #include <egg/core/eggColorFader.h>
+#include <egg/core/eggDecomp.h>
 #include <egg/core/eggDisposer.h>
 #include <egg/core/eggExpHeap.h>
 #include <egg/core/eggFader.h>

@@ -1,3 +1,6 @@
+// TODO: REMOVE AFTER REFACTOR
+#pragma ipa file
+
 #include <egg/core.h>
 #include <egg/prim.h>
 
