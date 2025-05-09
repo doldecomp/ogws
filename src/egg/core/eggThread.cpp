@@ -34,7 +34,6 @@ Thread::Thread(u32 stackSize, int capacity, int priority, Heap* pHeap) {
                    priority, OS_THREAD_DETACHED);
 
     setCommonMesgQueue(capacity, mContainHeap);
-    nw4r::ut::List_Append(&sThreadList, this);
 }
 
 Thread::Thread(OSThread* pOSThread, int capacity) {
@@ -47,7 +46,6 @@ Thread::Thread(OSThread* pOSThread, int capacity) {
     mStackMemory = pOSThread->stackBegin;
 
     setCommonMesgQueue(capacity, Heap::getCurrentHeap());
-    nw4r::ut::List_Append(&sThreadList, this);
 }
 
 Thread::~Thread() {
@@ -101,14 +99,15 @@ void Thread::switchThreadCallback(OSThread* pCurrOSThread,
 }
 
 void Thread::setCommonMesgQueue(int capacity, Heap* pHeap) {
-    mMesgCapacity = capacity;
+    mMesgNum = capacity;
 
     mMesgBuffer = static_cast<OSMessage*>(
         Heap::alloc(capacity * sizeof(OSMessage), 4, pHeap));
 #line 262
     EGG_ASSERT(mMesgBuffer);
 
-    OSInitMessageQueue(&mMesgQueue, mMesgBuffer, mMesgCapacity);
+    OSInitMessageQueue(&mMesgQueue, mMesgBuffer, mMesgNum);
+    nw4r::ut::List_Append(&sThreadList, this);
 }
 
 void* Thread::start(void* pArg) {

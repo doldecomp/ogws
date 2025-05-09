@@ -6,6 +6,9 @@
 
 namespace EGG {
 
+// Forward declarations
+class Heap;
+
 class Disposer {
     friend class Heap;
 

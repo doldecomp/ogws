@@ -311,6 +311,7 @@ cflags_libnw4r_g3d_scnrfl = [
 # EGG flags
 cflags_egg = [
     *cflags_base,
+    # *cflags_pedantic,
     "-enc SJIS",
     "-use_lmw_stmw on",
     "-str reuse,pool,readonly",

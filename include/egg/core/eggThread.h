@@ -8,6 +8,9 @@
 
 namespace EGG {
 
+// Forward declarations
+class Heap;
+
 class Thread {
 public:
     static void initialize();
@@ -35,9 +38,9 @@ public:
         return OSJamMessage(&mMesgQueue, msg, 0);
     }
 
-    OSMessage waitMessage(BOOL* pWouldBlock) {
+    OSMessage waitMessage(BOOL* pSuccess) {
         OSMessage msg;
-        *pWouldBlock = OSReceiveMessage(&mMesgQueue, &msg, 0);
+        *pSuccess = OSReceiveMessage(&mMesgQueue, &msg, 0);
         return msg;
     }
     OSMessage waitMessageBlock() {
@@ -73,7 +76,7 @@ private:
     OSThread* mOSThread;       // at 0x8
     OSMessageQueue mMesgQueue; // at 0xC
     OSMessage* mMesgBuffer;    // at 0x2C
-    int mMesgCapacity;         // at 0x30
+    int mMesgNum;              // at 0x30
     void* mStackMemory;        // at 0x34
     u32 mStackSize;            // at 0x38
     nw4r::ut::Link mLink;      // at 0x3C

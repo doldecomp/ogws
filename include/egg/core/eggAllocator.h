@@ -6,6 +6,9 @@
 
 namespace EGG {
 
+// Forward declarations
+class Heap;
+
 class Allocator : public MEMAllocator {
 public:
     Allocator(Heap* pHeap, s32 align);

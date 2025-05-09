@@ -7,6 +7,9 @@
 
 namespace EGG {
 
+// Forward declarations
+class Allocator;
+
 class ExpHeap : public Heap {
 public:
     static ExpHeap* create(void* pHeapStart, u32 size, u16 opt)

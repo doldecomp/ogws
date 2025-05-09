@@ -13,6 +13,7 @@
 namespace EGG {
 
 // Forward declarations
+class Allocator;
 class ExpHeap;
 
 class Heap : public Disposer {
@@ -141,11 +142,11 @@ private:
 } // namespace EGG
 
 void* operator new(size_t size);
-void* operator new(size_t size, EGG::Heap* pHeap, int align);
+void* operator new(size_t size, EGG::Heap* pHeap, int align = 4);
 
 void* operator new[](size_t size);
 void* operator new[](size_t size, int align);
-void* operator new[](size_t size, EGG::Heap* pHeap, int align);
+void* operator new[](size_t size, EGG::Heap* pHeap, int align = 4);
 
 void operator delete(void* pBlock);
 void operator delete[](void* pBlock);

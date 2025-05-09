@@ -7,6 +7,7 @@
 #include <egg/core/eggExpHeap.h>
 #include <egg/core/eggFrmHeap.h>
 #include <egg/core/eggHeap.h>
+#include <egg/core/eggTaskThread.h>
 #include <egg/core/eggThread.h>
 
 #endif
