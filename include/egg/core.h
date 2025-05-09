@@ -3,8 +3,10 @@
 
 #include <egg/core/eggAllocator.h>
 #include <egg/core/eggBitFlag.h>
+#include <egg/core/eggColorFader.h>
 #include <egg/core/eggDisposer.h>
 #include <egg/core/eggExpHeap.h>
+#include <egg/core/eggFader.h>
 #include <egg/core/eggFrmHeap.h>
 #include <egg/core/eggGraphicsFifo.h>
 #include <egg/core/eggHeap.h>
