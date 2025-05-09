@@ -18,7 +18,7 @@ Thread::Thread(u32 stackSize, int capacity, int priority, Heap* pHeap) {
     }
 
     mContainHeap = pHeap;
-    mStackSize = nw4r::ut::RoundDown(stackSize, 32);
+    mStackSize = ROUND_DOWN(stackSize, 32);
 
     mStackMemory = Heap::alloc(mStackSize, 32, mContainHeap);
 #line 70
