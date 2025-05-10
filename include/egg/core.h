@@ -4,6 +4,7 @@
 #include <egg/core/eggAllocator.h>
 #include <egg/core/eggBitFlag.h>
 #include <egg/core/eggColorFader.h>
+#include <egg/core/eggController.h>
 #include <egg/core/eggDecomp.h>
 #include <egg/core/eggDisplay.h>
 #include <egg/core/eggDisposer.h>
@@ -12,6 +13,7 @@
 #include <egg/core/eggFrmHeap.h>
 #include <egg/core/eggGraphicsFifo.h>
 #include <egg/core/eggHeap.h>
+#include <egg/core/eggPerformanceView.h>
 #include <egg/core/eggScene.h>
 #include <egg/core/eggSceneCreator.h>
 #include <egg/core/eggSceneManager.h>

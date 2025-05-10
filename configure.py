@@ -676,7 +676,7 @@ config.libs = [
             Object(Matching, "egg/core/eggHeap.cpp"),
             Object(Matching, "egg/core/eggAllocator.cpp"),
             Object(Matching, "egg/core/eggThread.cpp"),
-            Object(NonMatching, "egg/core/eggSystem.cpp"),
+            Object(Matching, "egg/core/eggSystem.cpp"),
             Object(Matching, "egg/core/eggTaskThread.cpp"),
             Object(Matching, "egg/core/eggGraphicsFifo.cpp"),
             Object(Matching, "egg/core/eggColorFader.cpp"),

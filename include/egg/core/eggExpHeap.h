@@ -12,9 +12,9 @@ class Allocator;
 
 class ExpHeap : public Heap {
 public:
-    static ExpHeap* create(void* pHeapStart, u32 size, u16 opt)
+    static ExpHeap* create(void* pHeapStart, u32 size, u16 opt = 0)
         DECOMP_DONT_INLINE;
-    static ExpHeap* create(u32 size, Heap* pParentHeap, u16 opt);
+    static ExpHeap* create(u32 size, Heap* pParentHeap, u16 opt = 0);
 
     ExpHeap(MEMiHeapHead* pHeapHandle);
     virtual ~ExpHeap(); // at 0x8

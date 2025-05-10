@@ -12,9 +12,9 @@ class Allocator;
 
 class FrmHeap : public Heap {
 public:
-    static FrmHeap* create(void* pHeapStart, u32 size, u16 opt)
+    static FrmHeap* create(void* pHeapStart, u32 size, u16 opt = 0)
         DECOMP_DONT_INLINE;
-    static FrmHeap* create(u32 size, Heap* pParentHeap, u16 opt);
+    static FrmHeap* create(u32 size, Heap* pParentHeap, u16 opt = 0);
 
     FrmHeap(MEMiHeapHead* pHeapHandle);
     virtual ~FrmHeap(); // at 0x8
