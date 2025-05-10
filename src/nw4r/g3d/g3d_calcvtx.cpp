@@ -83,12 +83,12 @@ void CalcVtx(ResMdl mdl, AnmObjShp* pAnmShp, ResVtxPosData** ppVtxPosTable,
                 register const void* pVtx = rFirst.pVtx;
 
                 // clang-format off
-                asm {
+                PPC_ASM (
                     psq_l  xy, VEC3.x(pVtx), 0, 0
                     psq_l  z_, VEC3.z(pVtx), 1, 0
                     ps_mul xy, xy, firstWeight
                     ps_mul z_, z_, firstWeight
-                }
+                )
                 // clang-format on
 
                 // clang-format off
@@ -102,12 +102,12 @@ void CalcVtx(ResMdl mdl, AnmObjShp* pAnmShp, ResVtxPosData** ppVtxPosTable,
                     register f32 key_xy, key_z_;
 
                     // clang-format off
-                    asm {
+                    PPC_ASM (
                         psq_l   key_xy, VEC3.x(pKeyVtx), 0, 0
                         psq_l   key_z_, VEC3.z(pKeyVtx), 1, 0
                         ps_madd xy, key_xy, keyWeight, xy
                         ps_madd z_, key_z_, keyWeight, z_
-                    }
+                    )
                     // clang-format on
 
                     // clang-format off
@@ -119,10 +119,10 @@ void CalcVtx(ResMdl mdl, AnmObjShp* pAnmShp, ResVtxPosData** ppVtxPosTable,
                 register void* pDst = pVtxPosBuf;
 
                 // clang-format off
-                asm {
+                PPC_ASM (
                     psq_st xy, VEC3.x(pDst), 0, 0
                     psq_st z_, VEC3.z(pDst), 1, 0
-                }
+                )
                 // clang-format on
             }
 
@@ -188,12 +188,12 @@ void CalcVtx(ResMdl mdl, AnmObjShp* pAnmShp, ResVtxPosData** ppVtxPosTable,
                 register const void* pVtx = rFirst.pVtx;
 
                 // clang-format off
-                asm {
+                PPC_ASM (
                     psq_l  xy, VEC3.x(pVtx), 0, 0
                     psq_l  z_, VEC3.z(pVtx), 1, 0
                     ps_mul xy, xy, firstWeight
                     ps_mul z_, z_, firstWeight
-                }
+                )
                 // clang-format on
 
                 // clang-format off
@@ -207,12 +207,12 @@ void CalcVtx(ResMdl mdl, AnmObjShp* pAnmShp, ResVtxPosData** ppVtxPosTable,
                     register f32 key_xy, key_z_;
 
                     // clang-format off
-                    asm {
+                    PPC_ASM (
                         psq_l   key_xy, VEC3.x(pKeyVtx), 0, 0
                         psq_l   key_z_, VEC3.z(pKeyVtx), 1, 0
                         ps_madd xy, key_xy, keyWeight, xy
                         ps_madd z_, key_z_, keyWeight, z_
-                    }
+                    )
                     // clang-format on
 
                     // clang-format off
@@ -224,10 +224,10 @@ void CalcVtx(ResMdl mdl, AnmObjShp* pAnmShp, ResVtxPosData** ppVtxPosTable,
                 register void* pDst = pVtxNrmBuf;
 
                 // clang-format off
-                asm {
+                PPC_ASM (
                     psq_st xy, VEC3.x(pDst), 0, 0
                     psq_st z_, VEC3.z(pDst), 1, 0
-                }
+                )
                 // clang-format on
             }
 
@@ -293,12 +293,12 @@ void CalcVtx(ResMdl mdl, AnmObjShp* pAnmShp, ResVtxPosData** ppVtxPosTable,
                 register const void* pVtx = rFirst.pVtx;
 
                 // clang-format off
-                asm {
+                PPC_ASM (
                     psq_l  rg, Color.r(pVtx), 0, 2
                     psq_l  ba, Color.b(pVtx), 0, 2
                     ps_mul rg, rg, firstWeight
                     ps_mul ba, ba, firstWeight
-                }
+                )
                 // clang-format on
 
                 // clang-format off
@@ -312,12 +312,12 @@ void CalcVtx(ResMdl mdl, AnmObjShp* pAnmShp, ResVtxPosData** ppVtxPosTable,
                     register f32 key_rg, key_ba;
 
                     // clang-format off
-                    asm {
+                    PPC_ASM (
                         psq_l   key_rg, Color.r(pKeyVtx), 0, 2
                         psq_l   key_ba, Color.b(pKeyVtx), 0, 2
                         ps_madd rg, key_rg, keyWeight, rg
                         ps_madd ba, key_ba, keyWeight, ba
-                    }
+                    )
                     // clang-format on
 
                     // clang-format off
@@ -329,10 +329,10 @@ void CalcVtx(ResMdl mdl, AnmObjShp* pAnmShp, ResVtxPosData** ppVtxPosTable,
                 register void* pDst = pVtxClrBuf;
 
                 // clang-format off
-                asm {
+                PPC_ASM (
                     psq_st rg, Color.r(pDst), 0, 2
                     psq_st ba, Color.b(pDst), 0, 2
-                }
+                )
                 // clang-format on
             }
 

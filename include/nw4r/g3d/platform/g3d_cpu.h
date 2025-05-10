@@ -45,9 +45,9 @@ inline f32 S7_8ToF32(register const s16* pPtr) {
     register f32 f;
 
     // clang-format off
-    asm {
+    PPC_ASM (
         psq_l f, 0(pPtr), 1, 7
-    }
+    )
     // clang-format on
 
     return f;
@@ -57,9 +57,9 @@ inline f32 S10_5ToF32(register const s16* pPtr) {
     register f32 f;
 
     // clang-format off
-    asm {
+    PPC_ASM (
         psq_l f, 0(pPtr), 1, 6
-    }
+    )
     // clang-format on
 
     return f;
@@ -81,9 +81,9 @@ inline s16 F32ToS10_5(register f32 f) {
     register s16* pPtr = &x;
 
     // clang-format off
-    asm {
+    PPC_ASM (
         psq_st f, 0(pPtr), 1, 6
-    }
+    )
     // clang-format on
 
     return x;

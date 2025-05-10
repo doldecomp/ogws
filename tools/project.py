@@ -1556,13 +1556,19 @@ def generate_compile_commands(
         "-i-",
     }
     CFLAG_IGNORE_PREFIX: Tuple[str, ...] = (
-        # Recursive includes are not supported by modern compilers
-        "-ir ",
+        # Recursive includes are not supported by modern compilers.
+        # Temporarily disabled, see `CFLAG_REPLACE_PREFIX` below.
+        # "-ir ",
     )
 
     # Flags to replace
     CFLAG_REPLACE: Dict[str, str] = {}
     CFLAG_REPLACE_PREFIX: Tuple[Tuple[str, str], ...] = (
+        # Recursive includes are not supported by modern compilers.
+        # This is a temporary workaround until recursive includes are phased out.
+        # Most headers will accept this, but some still rely on recursive headers. 
+        # Those will display flase errors.
+        ("-ir ", "-I"),
         # Includes
         ("-i ", "-I"),
         ("-I ", "-I"),

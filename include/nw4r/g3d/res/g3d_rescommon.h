@@ -85,49 +85,49 @@ public:
         return *mpData;
     }
 
-    template <typename T> T* ofs_to_ptr_raw(s32 ofs) {
-        return reinterpret_cast<T*>((char*)mpData + ofs);
+    template <typename U> U* ofs_to_ptr_raw(s32 ofs) {
+        return reinterpret_cast<U*>((char*)mpData + ofs);
     }
-    template <typename T> const T* ofs_to_ptr_raw(s32 ofs) const {
-        return reinterpret_cast<const T*>((char*)mpData + ofs);
+    template <typename U> const U* ofs_to_ptr_raw(s32 ofs) const {
+        return reinterpret_cast<const U*>((char*)mpData + ofs);
     }
 
-    template <typename T> T* ofs_to_ptr(s32 ofs) {
+    template <typename U> U* ofs_to_ptr(s32 ofs) {
         u8* pPtr = reinterpret_cast<u8*>(mpData);
 
         if (ofs != 0) {
-            return reinterpret_cast<T*>(pPtr + ofs);
+            return reinterpret_cast<U*>(pPtr + ofs);
         }
 
         return NULL;
     }
-    template <typename T> const T* ofs_to_ptr(s32 ofs) const {
+    template <typename U> const U* ofs_to_ptr(s32 ofs) const {
         const u8* pPtr = reinterpret_cast<const u8*>(mpData);
 
         if (ofs != 0) {
-            return reinterpret_cast<const T*>(pPtr + ofs);
+            return reinterpret_cast<const U*>(pPtr + ofs);
         }
 
         return NULL;
     }
 
-    template <typename T> T ofs_to_obj(s32 ofs) {
+    template <typename U> U ofs_to_obj(s32 ofs) {
         u8* pPtr = reinterpret_cast<u8*>(mpData);
 
         if (ofs != 0) {
-            return T(pPtr + ofs);
+            return U(pPtr + ofs);
         }
 
-        return T(NULL);
+        return U(NULL);
     }
-    template <typename T> const T ofs_to_obj(s32 ofs) const {
+    template <typename U> const U ofs_to_obj(s32 ofs) const {
         const u8* pPtr = reinterpret_cast<const u8*>(mpData);
 
         if (ofs != 0) {
-            return T(const_cast<u8*>(pPtr + ofs));
+            return U(const_cast<u8*>(pPtr + ofs));
         }
 
-        return T(NULL);
+        return U(NULL);
     }
 
 private:

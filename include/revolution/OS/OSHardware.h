@@ -9,6 +9,7 @@
 #define RVL_SDK_OS_HARDWARE_H
 #include <types.h>
 
+#include "macros.h"
 #include <revolution/DVD/dvd.h>
 #include <revolution/OS/OSAddress.h>
 #include <revolution/OS/OSThread.h>
@@ -30,20 +31,28 @@ typedef struct OSExecParams OSExecParams;
 // Can be accessed directly or with OSAddress functions.
 #define OS_DEF_GLOBAL_VAR(type, name, addr)                                    \
     /* Memory-mapped value for direct access */                                \
-    type OS_##name : (addr);                                                   \
+    type OS_##name AT_ADDRESS(addr);                                           \
     __DEF_ADDR_OFFSETS(name, addr)
 
 // Define a global array in *CACHED* MEM1.
 // Can be accessed directly or with OSAddress functions.
 #define OS_DEF_GLOBAL_ARR(type, name, arr, addr)                               \
     /* Memory-mapped value for direct access */                                \
-    type OS_##name arr : (addr);                                               \
+    type OS_##name arr AT_ADDRESS(addr);                                       \
     __DEF_ADDR_OFFSETS(name, addr)
+
+// 'Zero Size Array' hack to avoid incomplete type like `u8 foo[];`. 
+// the real fix is to make the AT_ADDRESS macro work in clang.
+#ifdef __MWERKS__
+#define OS_DEF_GLOBAL_ZSA(type, name, arr, addr) OS_DEF_GLOBAL_ARR(type, name, arr, addr)
+#else
+#define OS_DEF_GLOBAL_ZSA(type, name, arr, addr) OS_DEF_GLOBAL_ARR(type, name, [0], addr)
+#endif
 
 // Define an global variable in the hardware-register range.
 #define OS_DEF_HW_REG(type, name, addr)                                        \
     /* Memory-mapped value for direct access */                                \
-    type OS_##name : (addr);
+    type OS_##name AT_ADDRESS(addr);
 
 typedef enum {
     OS_BOOT_MAGIC_BOOTROM = 0xD15EA5E,
@@ -114,7 +123,7 @@ OS_DEF_GLOBAL_VAR(u32, CPU_CLOCK_SPEED,                    0x800000FC);
 // clang-format off
 OS_DEF_GLOBAL_ARR(void*, EXCEPTION_TABLE, [15],          0x80003000);
 OS_DEF_GLOBAL_VAR(void*, INTR_HANDLER_TABLE,             0x80003040);
-OS_DEF_GLOBAL_ARR(volatile s32, EXI_LAST_INSERT, [],     0x800030C0);
+OS_DEF_GLOBAL_ZSA(volatile s32, EXI_LAST_INSERT, [],     0x800030C0);
 OS_DEF_GLOBAL_VAR(void*, FIRST_REL,                      0x800030C8);
 OS_DEF_GLOBAL_VAR(void*, LAST_REL,                       0x800030CC);
 OS_DEF_GLOBAL_VAR(void*, REL_NAME_TABLE,                 0x800030D0);
@@ -162,7 +171,7 @@ OS_DEF_GLOBAL_ARR(u8, SC_PRDINFO, [0x100],               0x80003800);
 /**
  * PI hardware globals
  */
-volatile u32 PI_HW_REGS[] : 0xCC003000;
+volatile u32 PI_HW_REGS ARRAY_AT_ADDRESS(0xCC003000);
 typedef enum {
     PI_INTSR,    //!< 0xCC003000
     PI_INTMR,    //!< 0xCC003004
@@ -215,7 +224,7 @@ typedef enum {
 /**
  * MI hardware registers
  */
-volatile u16 MI_HW_REGS[] : 0xCC004000;
+volatile u16 MI_HW_REGS ARRAY_AT_ADDRESS(0xCC004000);
 typedef enum {
     MI_PAGE_MEM0_H, //!< 0xCC004000
     MI_PAGE_MEM0_L, //!< 0xCC004002
@@ -258,7 +267,7 @@ typedef enum {
 /**
  * DI hardware registers
  */
-volatile u32 DI_HW_REGS[] : 0xCD006000;
+volatile u32 DI_HW_REGS ARRAY_AT_ADDRESS(0xCD006000);
 typedef enum {
     DI_DMA_ADDR = 5, // !< 0xCD006014
     DI_CONFIG = 9,   // !< 0xCD006024

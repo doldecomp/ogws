@@ -851,7 +851,7 @@ void __OSPSInit(void) {
     ICFlashInvalidate();
 
     // clang-format off
-    asm {
+    PPC_ASM (
         sync
         li r3, 0
         mtgqr0 r3
@@ -862,7 +862,7 @@ void __OSPSInit(void) {
         mtgqr5 r3
         mtgqr6 r3
         mtgqr7 r3
-    }
+    )
     // clang-format on
 }
 
