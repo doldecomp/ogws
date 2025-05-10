@@ -70,7 +70,7 @@ bool ColorFader::fadeOut() {
 }
 
 bool ColorFader::calc() {
-    bool success = false;
+    bool finished = false;
 
     if (mStatus == STATUS_PREPARE_OUT) {
         mColor.a = 0;
@@ -81,7 +81,7 @@ bool ColorFader::calc() {
 
         if (mFrame++ > mFadeFrame) {
             mStatus = STATUS_PREPARE_OUT;
-            success = mFlags.onBit(BIT_0);
+            finished = mFlags.onBit(BIT_FINISH_AFTER_IN);
             frame = mFadeFrame;
         }
 
@@ -92,7 +92,7 @@ bool ColorFader::calc() {
         if (frame > mFadeFrame) {
             if (frame > mFadeFrame + 1) {
                 mStatus = STATUS_PREPARE_IN;
-                success = mFlags.onBit(BIT_1);
+                finished = mFlags.onBit(BIT_FINISH_AFTER_OUT);
             }
 
             frame = mFadeFrame;
@@ -101,7 +101,7 @@ bool ColorFader::calc() {
         mColor.a = frame * 255 / mFadeFrame;
     }
 
-    return success;
+    return finished;
 }
 
 void ColorFader::draw() {

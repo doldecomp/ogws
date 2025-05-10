@@ -12,8 +12,10 @@ namespace EGG {
 class ColorFader : public Fader {
 public:
     ColorFader(f32 x, f32 y, f32 width, f32 height,
-               nw4r::ut::Color color = nw4r::ut::Color::BLACK,
+               nw4r::ut::Color color = 0x00000000,
                EStatus status = STATUS_PREPARE_IN);
+
+    virtual ~ColorFader() {} // at 0x20
 
     virtual void setStatus(EStatus status); // at 0x8
     virtual EStatus getStatus() const {
@@ -26,13 +28,11 @@ public:
     virtual bool calc(); // at 0x18
     virtual void draw(); // at 0x1C
 
-    virtual ~ColorFader() {} // at 0x20
-
     void setFrame(u16 frame);
     void setColor(nw4r::ut::Color color);
 
 private:
-    enum FlagBit { BIT_0, BIT_1, BIT_2 };
+    enum FlagBit { BIT_FINISH_AFTER_IN, BIT_FINISH_AFTER_OUT, BIT_2 };
 
     static const u16 DEFAULT_FRAME = 20;
 

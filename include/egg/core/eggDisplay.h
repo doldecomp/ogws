@@ -2,6 +2,8 @@
 #define EGG_CORE_DISPLAY_H
 #include "types_egg.h"
 #include "eggBitFlag.h"
+#include "eggSystem.h"
+#include "eggVideo.h"
 
 #include "ut_Color.h"
 
@@ -23,6 +25,16 @@ namespace EGG
 
 		bool isBlack() { return BYTE_0x9 & 0x1; }
 		void setBlack(bool b)
+		{
+			if (BaseSystem::getVideo()->isBlack() && !isBlack()) {
+				if (b)
+					BYTE_0x9 &= (u8)~0x1;
+				else
+					BYTE_0x9 |= 0x1;
+			}
+		}
+
+		void setBlack_2(bool b)
 		{
 			if (b)
 				BYTE_0x9 |= 0x1;

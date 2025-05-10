@@ -116,7 +116,7 @@ namespace EGG
         if (isBlack())
         {
             BaseSystem::getVideo()->changeBlack();
-            setBlack(false);
+            setBlack_2(false);
         }
 
         mFrameCount++;
