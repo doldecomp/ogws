@@ -16,17 +16,32 @@
 
 #define ARRAY_SIZE(x) (sizeof((x)) / sizeof((x)[0]))
 
-#define MEMCLR(x) __memclr((x), sizeof(*(x)))
-
 #define ALIGN(x) __attribute__((aligned(x)))
 
 #define DECL_SECTION(x) __declspec(section x)
 #define DECL_WEAK __declspec(weak)
 
+#ifdef __MWERKS__
+
 #define DECLTYPE(x) __decltype__(x)
+#define MEMCLR(x) __memclr((x), sizeof(*(x)))
+#define ARRAY_AT_ADDRESS(addr) [] : (addr)
+#define AT_ADDRESS(addr) : (addr)
+#define PPC_ASM asm
 
 // For VSCode
-#ifdef __INTELLISENSE__
+#elif defined(__INTELLISENSE__)
+#ifdef __clang__ 
+    #define MEMCLR(x) __builtin_memset((x), 0, sizeof(*(x)));
+    #define DECLTYPE(x) __decltype(x)
+#endif
+// 'Zero Size Array' hack to avoid incomplete type like `u8 foo[];`. 
+// the real fix is to make the AT_ADDRESS macro work in clang.
+#define ARRAY_AT_ADDRESS(addr) [0]
+#define AT_ADDRESS(addr)
+// this macro was created with the following regex:
+// search `asm \{([^{}]*\n?)*\}` replace `PPC_ASM ($1)`
+#define PPC_ASM(...)
 #define asm
 #define __attribute__(x)
 #define __declspec(x)

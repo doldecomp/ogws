@@ -17,9 +17,9 @@ static void* GetTOC(void) {
     register void* toc;
 
     // clang-format off
-    asm {
+    PPC_ASM (
         mr toc, r2
-    };
+    );
     // clang-format on
 
     return toc;
