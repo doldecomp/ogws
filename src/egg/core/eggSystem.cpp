@@ -123,9 +123,7 @@ void ConfigurationData::run() {
     }
 }
 
-// clang-format off
 DECOMP_FORCEACTIVE(eggSystem_cpp,
                   "mem == 0 || mem == 1");
-// clang-format on
 
 } // namespace EGG
