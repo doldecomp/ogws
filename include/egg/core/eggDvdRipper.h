@@ -1,22 +1,26 @@
-#ifndef EGG_CORE_DVDRIPPER_H
-#define EGG_CORE_DVDRIPPER_H
-#include "types_egg.h"
+#ifndef EGG_CORE_DVD_RIPPER_H
+#define EGG_CORE_DVD_RIPPER_H
+#include <egg/types_egg.h>
 
-namespace EGG
-{
-    struct DvdRipper
-    {
-        enum EAllocDirection
-        {
-            ALLOC_0,
-            ALLOC_FORWARD,
-        };
+namespace EGG {
 
-        static void * loadToMainRAM(const char *, u8 *, Heap *, EAllocDirection, u32, u32 *, u32 *);
-        static void * loadToMainRAM(DvdFile *, u8 *, Heap *, EAllocDirection, u32, u32 *, u32 *);
+class DvdRipper {
+public:
+    enum EAllocDirection { ALLOC_DIR_TAIL, ALLOC_DIR_HEAD };
 
-        static bool sErrorRetry;
-    };
-}
+public:
+    static u8* loadToMainRAM(const char* pPath, u8* pBuffer, Heap* pHeap,
+                             EAllocDirection allocDir, u32 offset, u32* pRead,
+                             u32* pSize);
+
+    static u8* loadToMainRAM(DvdFile* pFile, u8* pBuffer, Heap* pHeap,
+                             EAllocDirection allocDir, u32 offset, u32* pRead,
+                             u32* pSize);
+
+private:
+    static bool sErrorRetry;
+};
+
+} // namespace EGG
 
 #endif

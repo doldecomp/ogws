@@ -303,7 +303,7 @@ void* ARCGetStartAddrInMem(ARCFileInfo* info) {
     return (u8*)info->handle->archiveStartAddr + info->startOffset;
 }
 
-s32 ARCGetStartOffset(ARCFileInfo* info) {
+u32 ARCGetStartOffset(ARCFileInfo* info) {
     return info->startOffset;
 }
 

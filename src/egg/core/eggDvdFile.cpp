@@ -1,119 +1,128 @@
+// TODO: REMOVE AFTER REFACTOR
 #pragma ipa file
-#include "eggDvdFile.h"
 
-namespace EGG
-{
-    using namespace nw4r;
+#include <egg/core.h>
+#include <egg/prim.h>
 
-    void DvdFile::initialize()
-    {
-        if (!sIsInitialized)
-        {
-            ut::List_Init(&sDvdList, offsetof(DvdFile, mNode));
-            sIsInitialized = true;
+#include <nw4r/ut.h>
+
+#include <revolution/DVD.h>
+#include <revolution/OS.h>
+
+namespace EGG {
+
+nw4r::ut::List DvdFile::sDvdList;
+bool DvdFile::sIsInitialized = false;
+
+void DvdFile::initialize() {
+    if (sIsInitialized) {
+        return;
+    }
+
+    nw4r::ut::List_Init(&sDvdList, offsetof(DvdFile, mLink));
+    sIsInitialized = true;
+}
+
+DvdFile::DvdFile() {
+    initiate();
+}
+
+DvdFile::~DvdFile() {
+    close();
+}
+
+void DvdFile::initiate() {
+    mAsyncContext.pFile = this;
+
+    OSInitMutex(&mSyncMutex);
+    OSInitMutex(&mAsyncMutex);
+
+    OSInitMessageQueue(&mSyncQueue, mSyncBuffer, ARRAY_SIZE(mSyncBuffer));
+    OSInitMessageQueue(&mAsyncQueue, mAsyncBuffer, ARRAY_SIZE(mAsyncBuffer));
+
+    mSyncThread = NULL;
+    mAsyncThread = NULL;
+}
+
+bool DvdFile::open(s32 entryNum) {
+    if (!mIsOpen && entryNum != -1) {
+        mIsOpen = DVDFastOpen(entryNum, &mAsyncContext.fileInfo);
+
+        if (mIsOpen) {
+            nw4r::ut::List_Append(&sDvdList, this);
+            (void)getStatus();
         }
     }
 
-    DvdFile::DvdFile() : mIsOpen(false)
-    {
-        initiate();
+    return mIsOpen;
+}
+
+bool DvdFile::open(const char* pPath) {
+    s32 entryNum = DVDConvertPathToEntrynum(pPath);
+    return open(entryNum);
+}
+
+bool DvdFile::open(const char* pPath, void* pMultiHandle) {
+#pragma unused(pMultiHandle)
+
+    return open(pPath);
+}
+
+void DvdFile::close() {
+    if (mIsOpen && DVDClose(&mAsyncContext.fileInfo)) {
+        mIsOpen = false;
+        nw4r::ut::List_Remove(&sDvdList, this);
     }
+}
 
-    DvdFile::~DvdFile()
-    {
-        close();
-    }
+s32 DvdFile::readData(void* pDst, s32 size, s32 offset) {
+    OSLockMutex(&mSyncMutex);
 
-    void DvdFile::initiate()
-    {
-        PTR_0x78 = this;
-
-        OSInitMutex(&mMutex_0x8);
-        OSInitMutex(&mMutex_0x20);
-        OSInitMessageQueue(&mMesgQueue_0xA0, &mMesg_0xC0, 1);
-        OSInitMessageQueue(&mMesgQueue_0x7C, &mMesg_0x9C, 1);
-
-        mThread = NULL;
-        WORD_0x38 = 0;
-    }
-
-    bool DvdFile::open(int id)
-    {
-        if (!mIsOpen && id != -1)
-        {
-            mIsOpen = (DVDFastOpen(id, &mFileInfo) != 0);
-            if (mIsOpen)
-            {
-                ut::List_Append(&sDvdList, this);
-                (void)DVDGetCommandBlockStatus(&mCmdBlock);
-            }
-        }
-
-        return mIsOpen;
-    }
-
-    bool DvdFile::open(const char *name)
-    {
-        s32 entry = DVDConvertPathToEntrynum(name);
-        return open(entry);
-    }
-
-    bool DvdFile::open(const char *name, void *buf)
-    {
-        return open(name);
-    }
-
-    void DvdFile::close()
-    {
-        if (mIsOpen && DVDClose(&mFileInfo))
-        {
-            mIsOpen = false;
-            ut::List_Remove(&sDvdList, this);
-        }
-    }
-
-    s32 DvdFile::readData(void *buf, s32 len, s32 pos)
-    {
-        OSLockMutex(&mMutex_0x8);
-        if (mThread)
-        {
-            OSUnlockMutex(&mMutex_0x8);
-            return -1;
-        }
-        
-        mThread = OSGetCurrentThread();
-        s32 result = -1;
-        u32 success = DVDReadAsyncPrio(&mFileInfo, buf, len, pos, DvdFile::doneProcess, DVD_PRIO_MEDIUM);
-        
-        if (success != 0)
-        {
-            OSLockMutex(&mMutex_0x8);
-
-            OSMessage mesg;
-            OSReceiveMessage(&mMesgQueue_0xA0, &mesg, 1);
-
-            mThread = NULL;
-            OSUnlockMutex(&mMutex_0x8);
-            result = (s32)mesg;
-        }
-
-        mThread = NULL;
-        OSUnlockMutex(&mMutex_0x8);
-
-        return result;
-    }
-
-    s32 DvdFile::writeData(const void *, s32, s32)
-    {
+    if (mSyncThread != NULL) {
+        OSUnlockMutex(&mSyncMutex);
         return -1;
     }
 
-    void DvdFile::doneProcess(s32 mesg, DVDFileInfo *pInfo)
-    {
-        FileInfoPair *pPair = (FileInfoPair *)pInfo;
-        OSSendMessage(&pPair->pDvdFile->mMesgQueue_0xA0, (OSMessage)mesg, 0);
+    mSyncThread = OSGetCurrentThread();
+
+    s32 result = -1;
+    if (DVDReadAsyncPrio(&mAsyncContext.fileInfo, pDst, size, offset,
+                         DvdFile::doneProcess, DVD_PRIO_MEDIUM)) {
+
+        result = sync();
     }
 
-    ut::List DvdFile::sDvdList;
-    bool DvdFile::sIsInitialized;
+    mSyncThread = NULL;
+
+    OSUnlockMutex(&mSyncMutex);
+    return result;
 }
+
+s32 DvdFile::writeData(const void* pSrc, s32 size, s32 offset) {
+#pragma(pSrc)
+#pragma(size)
+#pragma(offset)
+
+    return -1;
+}
+
+s32 DvdFile::sync() {
+    OSLockMutex(&mSyncMutex);
+
+    OSMessage buffer[1];
+    OSReceiveMessage(&mSyncQueue, buffer, ARRAY_SIZE(buffer));
+
+    mSyncThread = NULL;
+    OSUnlockMutex(&mSyncMutex);
+
+    return reinterpret_cast<s32>(buffer[0]);
+}
+
+void DvdFile::doneProcess(s32 result, DVDFileInfo* pFileInfo) {
+    AsyncContext* pContext = reinterpret_cast<AsyncContext*>(pFileInfo);
+
+    OSSendMessage(&pContext->pFile->mSyncQueue,
+                  reinterpret_cast<OSMessage>(result), 0);
+}
+
+} // namespace EGG

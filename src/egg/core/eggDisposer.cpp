@@ -1,22 +1,22 @@
-#include "eggDisposer.h"
-#include "eggHeap.h"
-#include "ut_list.h"
+// TODO: REMOVE AFTER REFACTOR
+#pragma ipa file
 
-namespace EGG
-{
-    using namespace nw4r;
+#include <egg/core.h>
 
-    Disposer::Disposer()
-    {
-        mHeap = Heap::findContainHeap(this);
+namespace EGG {
 
-        if (mHeap != NULL)
-            mHeap->appendDisposer(this);
-    }
+Disposer::Disposer() {
+    mContainHeap = Heap::findContainHeap(this);
 
-    Disposer::~Disposer()
-    {
-        if (mHeap != NULL)
-            mHeap->removeDisposer(this);
+    if (mContainHeap != NULL) {
+        mContainHeap->appendDisposer(this);
     }
 }
+
+Disposer::~Disposer() {
+    if (mContainHeap != NULL) {
+        mContainHeap->removeDisposer(this);
+    }
+}
+
+} // namespace EGG

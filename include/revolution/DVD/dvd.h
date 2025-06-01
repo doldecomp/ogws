@@ -17,9 +17,9 @@ typedef struct OSAlarm OSAlarm;
 typedef enum {
     DVD_RESULT_COVER_CLOSED = -4,
     DVD_RESULT_CANCELED,
-    DVD_RESULT_M2,
-    DVD_RESULT_FATAL,
-    DVD_RESULT_OK,
+    DVD_RESULT_IGNORED,
+    DVD_RESULT_FATAL_ERROR,
+    DVD_RESULT_GOOD,
 } DVDResult;
 
 typedef enum {

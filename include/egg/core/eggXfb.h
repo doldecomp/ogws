@@ -1,36 +1,43 @@
 #ifndef EGG_CORE_XFB_H
 #define EGG_CORE_XFB_H
-#include "types_egg.h"
+#include <egg/types_egg.h>
 
-namespace EGG
-{
-    class Xfb
-    {
-    public:
-        static u32 calcBufferSize(u16, u16);
+namespace EGG {
 
-        Xfb(Heap *);
-        void init(u16, u16, Heap *);
+// Forward declarations
+class XfbManager;
 
-        u16 getWidth() const { return mWidth; }
-        u16 getHeight() const { return mHeight; }
+class Xfb {
+    friend class XfbManager;
 
-        u8* getBuffer() const { return mBuffer; }
+public:
+    Xfb(Heap* pHeap = NULL);
 
-        Xfb* getPrev() const { return mPrev; }
-        void setPrev(Xfb* xfb) { mPrev = xfb; }
+    u16 getWidth() {
+        return mWidth;
+    }
+    u16 getHeight() {
+        return mHeight;
+    }
 
-        Xfb* getNext() const { return mNext; }
-        void setNext(Xfb* xfb) { mNext = xfb; }
+    u8* getBuffer() {
+        return mBuffer;
+    }
 
-    private:
-        u16 mWidth; // at 0x0
-        u16 mHeight; // at 0x2
-        u8 *mBuffer; // at 0x4
+private:
+    void init(u16 width, u16 height, Heap* pHeap);
 
-        Xfb *mPrev; // at 0x8
-        Xfb *mNext; // at 0xC
-    };
-}
+    static u32 calcBufferSize(u16 width, u16 height);
+
+private:
+    u16 mWidth;  // at 0x0
+    u16 mHeight; // at 0x2
+    u8* mBuffer; // at 0x4
+
+    Xfb* mPrev; // at 0x8
+    Xfb* mNext; // at 0xC
+};
+
+} // namespace EGG
 
 #endif

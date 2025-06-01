@@ -14,6 +14,8 @@
 #define ROUND_DOWN(x, align) ((x) & (-(align)))
 #define ROUND_DOWN_PTR(x, align) ((void*)(((u32)(x)) & (~((align) - 1))))
 
+#define PTR_DISTANCE(start, end) ((u8*)(end) - (u8*)(start))
+
 #define ARRAY_SIZE(x) (sizeof((x)) / sizeof((x)[0]))
 
 #define MEMCLR(x) __memclr((x), sizeof(*(x)))

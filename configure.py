@@ -311,6 +311,7 @@ cflags_libnw4r_g3d_scnrfl = [
 # EGG flags
 cflags_egg = [
     *cflags_base,
+    # *cflags_pedantic,
     "-enc SJIS",
     "-use_lmw_stmw on",
     "-str reuse,pool,readonly",
@@ -361,6 +362,8 @@ Equivalent = config.non_matching
 def MatchingFor(*versions):
     return config.version in versions
 
+
+# fmt: off
 
 config.warn_missing_config = False  # TODO enable
 config.warn_missing_source = False
@@ -668,12 +671,12 @@ config.libs = [
                    extra_cflags=["-Cpp_exceptions on"]),
             Object(Matching, "egg/math/eggVector.cpp",
                    extra_cflags=["-Cpp_exceptions on"]),
-            Object(NonMatching, "egg/core/eggExpHeap.cpp"),
-            Object(NonMatching, "egg/core/eggFrmHeap.cpp"),
+            Object(Matching, "egg/core/eggExpHeap.cpp"),
+            Object(Matching, "egg/core/eggFrmHeap.cpp"),
             Object(Matching, "egg/core/eggHeap.cpp"),
             Object(Matching, "egg/core/eggAllocator.cpp"),
             Object(Matching, "egg/core/eggThread.cpp"),
-            Object(NonMatching, "egg/core/eggSystem.cpp"),
+            Object(Matching, "egg/core/eggSystem.cpp"),
             Object(Matching, "egg/core/eggTaskThread.cpp"),
             Object(Matching, "egg/core/eggGraphicsFifo.cpp"),
             Object(Matching, "egg/core/eggColorFader.cpp"),
@@ -684,7 +687,7 @@ config.libs = [
             Object(NonMatching, "egg/core/eggVideo.cpp"),
             Object(Matching, "egg/core/eggXfb.cpp"),
             Object(Matching, "egg/core/eggXfbManager.cpp"),
-            Object(NonMatching, "egg/core/eggDvdRipper.cpp"),
+            Object(Matching, "egg/core/eggDvdRipper.cpp"),
             Object(Matching, "egg/core/eggDvdFile.cpp"),
             Object(Matching, "egg/core/eggScene.cpp"),
             Object(NonMatching, "egg/core/eggProcessMeter.cpp"),
@@ -1042,6 +1045,9 @@ config.libs = [
         ],
     },
 ]
+
+# fmt: on
+
 
 # Optional extra categories for progress tracking
 config.progress_categories = [

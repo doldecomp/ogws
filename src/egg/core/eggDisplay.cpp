@@ -1,98 +1,89 @@
+// TODO: REMOVE AFTER REFACTOR
 #pragma ipa file
-#include "eggDisplay.h"
-#include "eggVideo.h"
-#include "eggSystem.h"
-#include "eggAssert.h"
-#include "eggXfbManager.h"
+
+#include <egg/core.h>
+#include <egg/prim.h>
 
 #include <revolution/GX.h>
 #include <revolution/OS.h>
 #include <revolution/VI.h>
 
-namespace EGG
-{
-    Display::Display(u8 wait) :
-        BYTE_0x9(0),
-        mRetraceWait(wait),
-        mRetraceCount(0),
-        mFrameCount(0),
-        mClearColor(0x808080ff),
-        mClearZ(0x00ffffff),
-        mBeginTick(0)
-    {
-        FLAG_0x0.setBit(0);
-    }
+namespace EGG {
 
-    u32 Display::getTickPerFrame()
-    {
-        return Video::getTickPerVRetrace();
-    }
+Display::Display(u8 frameRate)
+    : mFrameRate(frameRate),
+      mRetraceCount(0),
+      mFrameCount(0),
+      mClearColor(nw4r::ut::Color::GRAY),
+      mClearZ(GX_CLEAR_Z_MAX),
+      mPrevFrameTick(0) {
 
-    void Display::beginFrame()
-    {
-        const u8 wait = mRetraceWait;
-        u32 retraceDiff = VIGetRetraceCount() - mRetraceCount;
-        const u32 maxDiff = wait - 1;
-    
-        do
-        {
-            if (retraceDiff >= maxDiff)
-            {
-                if (isBlack())
-                {
-                    BaseSystem::getVideo()->changeBlack();
-                    setBlack(false);
-                }
-    
-                BaseSystem::getXfbManager()->setNextFrameBuffer();
+    mEfbFlags.setBit(BIT_EFB_COPY_CLEAR);
+}
+
+void Display::syncVRetrace(u8 frameRate) {
+    // Retraces waited so far for the next frame
+    u32 waitForFrame = VIGetRetraceCount() - mRetraceCount;
+
+    do {
+        // Show the next XFB when the frame is ready
+        if (waitForFrame >= frameRate - 1) {
+            if (mXfbFlags.onBit(BIT_XFB_CHANGE_BLACK)) {
+                BaseSystem::getVideo()->changeBlack();
+                mXfbFlags.resetBit(BIT_XFB_CHANGE_BLACK);
             }
-    
-            VIWaitForRetrace();
-        } while(++retraceDiff < wait);
-    
-        calcFrequency();
-        mRetraceCount = VIGetRetraceCount();
-        mFrameCount++;
-    }
 
-    void Display::beginRender()
-    {
-
-    }
-
-    void Display::endRender()
-    {
-        copyEFBtoXFB();
-    }
-
-    void Display::endFrame()
-    {
-        GXDrawDone();
-    }
-
-    void Display::copyEFBtoXFB()
-    {
-        if (FLAG_0x0.onBit(0))
-        {
-            GXSetCopyClear(mClearColor, mClearZ);
+            BaseSystem::getXfbManager()->setNextFrameBuffer();
         }
 
-        GXRenderModeObj *pObj = BaseSystem::getVideo()->mRenderMode;
-        #line 150
-        EGG_ASSERT(pObj != NULL);
+        VIWaitForRetrace();
+    } while (++waitForFrame < frameRate);
 
-        bool b = (pObj->aa == 0);
-        GXSetCopyFilter(pObj->aa, pObj->sample_pattern, b, pObj->vfilter);
-        
-        bool efbFlag = FLAG_0x0.onBit(0);
-        BaseSystem::getXfbManager()->copyEFB(efbFlag);
-    }
+    calcFrequency();
 
-	void Display::calcFrequency()
-    {
-        const s32 endTick = OSGetTick();
-        mDeltaTick = endTick - mBeginTick;
-        mFrequency = 1000000.0f / ((mDeltaTick * 8) / ((OS_BUS_CLOCK_SPEED >> 2) / 125000));
-        mBeginTick = endTick;
-    }
+    mRetraceCount = VIGetRetraceCount();
+    mFrameCount++;
 }
+
+u32 Display::getTickPerFrame() {
+    return Video::getTickPerVRetrace();
+}
+
+void Display::beginFrame() {
+    syncVRetrace(mFrameRate);
+}
+
+void Display::beginRender() {}
+
+void Display::endRender() {
+    copyEFBtoXFB();
+}
+
+void Display::endFrame() {
+    GXDrawDone();
+}
+
+void Display::copyEFBtoXFB() {
+    if (mEfbFlags.onBit(BIT_EFB_COPY_CLEAR)) {
+        GXSetCopyClear(mClearColor, mClearZ);
+    }
+
+    const GXRenderModeObj* pObj = BaseSystem::getVideo()->getRenderModeObj();
+#line 150
+    EGG_ASSERT(pObj != NULL);
+
+    GXSetCopyFilter(pObj->aa, pObj->sample_pattern, !pObj->aa, pObj->vfilter);
+
+    bool clearEfb = mEfbFlags.onBit(BIT_EFB_COPY_CLEAR);
+    BaseSystem::getXfbManager()->copyEFB(clearEfb);
+}
+
+void Display::calcFrequency() {
+    s32 nowFrameTick = OSGetTick();
+    mFrameCostTick = nowFrameTick - mPrevFrameTick;
+
+    mFrequency = 1000000.0f / OS_TICKS_TO_USEC(mFrameCostTick);
+    mPrevFrameTick = nowFrameTick;
+}
+
+} // namespace EGG

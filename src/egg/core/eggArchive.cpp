@@ -1,105 +1,126 @@
-#pragma use_lmw_stmw on
-#include "eggArchive.h"
-#include "eggAssert.h"
-#include "eggHeap.h"
+// TODO: REMOVE AFTER REFACTOR
+#pragma ipa file
 
-namespace EGG
-{
-    using namespace nw4r;
+#include <egg/core.h>
+#include <egg/prim.h>
 
-    bool Archive::initHandle(void *arcBinary)
-    {
-        #line 61
-        EGG_ASSERT(arcBinary != NULL);
+#include <cstring>
 
-        return ARCInitHandle(arcBinary, &this->mHandle);
-    }
+namespace EGG {
 
-    Archive::~Archive()
-    {
-        removeList(this);
-    }
+nw4r::ut::List Archive::sArchiveList;
+bool Archive::sIsArchiveListInitialized = false;
 
-    Archive * Archive::mount(void *arcBinary, Heap *pHeap, int align)
-    {
-        #line 147
-        EGG_ASSERT(arcBinary != NULL);
-        
-        Archive *archive = NULL;
-        if (sIsArchiveListInitialized)
-        {
-            Archive *node = NULL;
-
-            while (node = (Archive *)ut::List_GetNext(&sArchiveList, node))
-            {
-                if (node->mHandle.archiveStartAddr == arcBinary)
-                {
-                    archive = node;
-                    break;
-                }
-            }
-        }
-
-        if (!archive)
-        {
-            archive = new (pHeap, align) Archive();
-            
-            #line 159
-            EGG_ASSERT(archive != NULL);
-
-            bool success = archive->initHandle(arcBinary);
-            if (success)
-            {
-                archive->INT_0x10 = 1;
-            }
-            else
-            {
-                archive->INT_0x10 = 0;
-            }
-
-            if (!success)
-            {
-                #line 166
-                EGG_ASSERT(false);
-
-                delete archive;
-                archive = NULL;
-            }
-        }
-        else
-        {
-            archive->INT_0x14++;
-        }
-
-        return archive;
-    }
-
-    void * Archive::getFile(const char *name, FileInfo *fileInfo)
-    {
-        void *startAddr = NULL;
-        ARCFileInfo info;
-        
-        bool openResult = ARCOpen(&mHandle, name, &info);
-        if (openResult)
-        {
-            if (INT_0x10 == 1)
-            {
-                startAddr = ARCGetStartAddrInMem(&info);
-            }
-            if (fileInfo)
-            {
-                fileInfo->mArcStartOffset = ARCGetStartOffset(&info);
-                fileInfo->mArcLength = ARCGetLength(&info);
-            }
-        }
-
-        ARCClose(&info);
-        return startAddr;
-    }
-
-    ut::List Archive::sArchiveList;
-    bool Archive::sIsArchiveListInitialized;
+Archive::Archive() {
+    mRefCount = 1;
+    mMountType = MOUNT_TYPE_NONE;
+    std::memset(&mHandle, 0, sizeof(ARCHandle));
+    appendList(this);
 }
 
-const char * eggArchive_asserts[] = {"not mount this archive", "openResult", "param", "/",
-    "(totalArray - 1) >= *numFiles_p", "RestSizePathBuf >= NextDirNameLength", "file", "fileInfo"};
+Archive::~Archive() {
+    removeList(this);
+}
+
+bool Archive::initHandle(void* arcBinary) {
+#line 61
+    EGG_ASSERT(arcBinary != NULL);
+
+    return ARCInitHandle(arcBinary, &mHandle);
+}
+
+Archive* Archive::findArchive(void* pArcBinary) {
+    Archive* pArchive = NULL;
+
+    if (sIsArchiveListInitialized) {
+        NW4R_UT_LIST_FOREACH(Archive, it, sArchiveList, {
+            if (it->mHandle.archiveStartAddr == pArcBinary) {
+                pArchive = it;
+                break;
+            }
+        });
+    }
+
+    return pArchive;
+}
+
+void Archive::appendList(Archive* pArchive) {
+    if (!sIsArchiveListInitialized) {
+        nw4r::ut::List_Init(&sArchiveList, offsetof(Archive, mLink));
+        sIsArchiveListInitialized = true;
+    }
+
+    nw4r::ut::List_Append(&sArchiveList, pArchive);
+}
+
+void Archive::removeList(Archive* pArchive) {
+    nw4r::ut::List_Remove(&sArchiveList, pArchive);
+}
+
+Archive* Archive::mount(void* arcBinary, Heap* pHeap, int align) {
+#line 147
+    EGG_ASSERT(arcBinary != NULL);
+
+    Archive* archive = findArchive(arcBinary);
+
+    if (archive == NULL) {
+        archive = new (pHeap, align) Archive();
+
+#line 159
+        EGG_ASSERT(archive != NULL);
+
+        bool success = archive->initHandle(arcBinary);
+
+        if (success) {
+            archive->mMountType = MOUNT_TYPE_MEM;
+        } else {
+            archive->mMountType = MOUNT_TYPE_NONE;
+        }
+
+        if (!success) {
+#line 166
+            EGG_ASSERT(false);
+
+            delete archive;
+            archive = NULL;
+        }
+
+    } else {
+        archive->mRefCount++;
+    }
+
+    return archive;
+}
+
+void* Archive::getFile(const char* pPath, FileInfo* pInfo) {
+    void* pStartAddr = NULL;
+
+    ARCFileInfo info;
+    bool success = ARCOpen(&mHandle, pPath, &info);
+
+    if (success) {
+        if (mMountType == MOUNT_TYPE_MEM) {
+            pStartAddr = ARCGetStartAddrInMem(&info);
+        }
+
+        if (pInfo != NULL) {
+            pInfo->mStartOffset = ARCGetStartOffset(&info);
+            pInfo->mLength = ARCGetLength(&info);
+        }
+    }
+
+    ARCClose(&info);
+    return pStartAddr;
+}
+
+DECOMP_FORCEACTIVE(eggArchive_cpp,
+                  "not mount this archive",
+                  "openResult",
+                  "param",
+                  "/",
+                  "(totalArray - 1) >= *numFiles_p",
+                  "RestSizePathBuf >= NextDirNameLength",
+                  "file",
+                  "fileInfo");
+
+} // namespace EGG

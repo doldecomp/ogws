@@ -1,46 +1,56 @@
 #ifndef EGG_CORE_ASYNC_DISPLAY_H
 #define EGG_CORE_ASYNC_DISPLAY_H
-#include "types_egg.h"
-#include "eggDisplay.h"
-#include "types_nw4r.h"
-#include <revolution/GX.h>
+#include <egg/types_egg.h>
+
+#include <egg/core/eggDisplay.h>
+
+#include <nw4r/ut.h>
+
 #include <revolution/OS.h>
 
-namespace EGG
-{
-    struct AsyncDisplay : Display
-    {
-        AsyncDisplay(u8);
-        void syncTick();
-        void clearEFB(u16, u16, u16, u16, u16, u16, nw4r::ut::Color);
-        virtual void beginFrame();
-        virtual void beginRender();
-        virtual void endRender();
-        virtual u32 getTickPerFrame();
+namespace EGG {
 
-        char UNK_0x28[0x30];
-        OSThreadQueue mThreadQueue; // at 0x58
-        UNKWORD WORD_0x60;
-        f32 FLOAT_0x64;
-        UNKWORD WORD_0x68;
-        UNKWORD WORD_0x6C;
-        u8 BYTE_0x70;
-        char UNK_0x71[3];
-        u32 WORD_0x74;
-        UNKWORD WORD_0x78;
-        s32 OSTICK_0x7C;
-        s32 OSTICK_0x80;
+class AsyncDisplay : public Display {
+public:
+    AsyncDisplay(u8 frameRate);
+
+    virtual void beginFrame();  // at 0x8
+    virtual void beginRender(); // at 0xC
+    virtual void endRender();   // at 0x10
+
+    virtual u32 getTickPerFrame(); // at 0x18
+
+    void postVRetrace();
+    void clearEFB();
+
+private:
+    enum SyncMode {
+        SYNC_MODE_NONE,
+        SYNC_MODE_NTSC,
     };
-}
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-    void PostRetraceCallback(u32 retraceCount);
-    void DrawDoneCallback(void);
-    static EGG::AsyncDisplay *spSelector;
-#ifdef __cplusplus
-}
-#endif
+private:
+    void calcS();
+    void syncTick();
+
+    void clearEFB(u16 fbWidth, u16 fbHeight, u16 x, u16 y, u16 width,
+                  u16 height, nw4r::ut::Color color);
+
+private:
+    OSAlarm mSyncAlarm;       // at 0x28
+    OSThreadQueue mSyncQueue; // at 0x58
+    SyncMode mSyncMode;       // at 0x60
+
+    f32 mTimeScale;          // at 0x64
+    u32 mPrevTickCount;      // at 0x68
+    u32 mTickCount;          // at 0x6C
+    u8 mFrameRateNTSC;       // at 0x70
+    u32 mTickPerRetraceNTSC; // at 0x74
+    u32 mTickPerRetrace;     // at 0x78
+    s32 mTickCostTick;       // at 0x7C
+    s32 mPrevTickTick;       // at 0x80
+};
+
+} // namespace EGG
 
 #endif

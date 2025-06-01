@@ -689,9 +689,9 @@ typedef enum _GXTevKColorSel {
 typedef enum _GXTevMode {
     GX_MODULATE,
     GX_DECAL,
+    GX_BLEND,
     GX_REPLACE,
-    GX_PASSCLR,
-    GX_BLEND
+    GX_PASSCLR
 } GXTevMode;
 
 typedef enum _GXTexCoordID {

@@ -1,25 +1,22 @@
-#include "eggAllocator.h"
-#include "eggHeap.h"
+// TODO: REMOVE AFTER REFACTOR
+#pragma ipa file
 
-namespace EGG
-{
-    Allocator::Allocator(Heap *pHeap, s32 r5)
-    {
-        pHeap->initAllocator(this, r5);
-    }
+#include <egg/core.h>
 
-    Allocator::~Allocator()
-    {
+namespace EGG {
 
-    }
-
-    void * Allocator::alloc(u32 size)
-    {
-        return MEMAllocFromAllocator(this, size);
-    }
-
-    void Allocator::free(void *pBlock)
-    {
-        MEMFreeToAllocator(this, pBlock);
-    }
+Allocator::Allocator(Heap* pHeap, s32 align) {
+    pHeap->initAllocator(this, align);
 }
+
+Allocator::~Allocator() {}
+
+void* Allocator::alloc(u32 size) {
+    return MEMAllocFromAllocator(this, size);
+}
+
+void Allocator::free(void* pBlock) {
+    MEMFreeToAllocator(this, pBlock);
+}
+
+} // namespace EGG

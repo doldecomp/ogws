@@ -9,15 +9,15 @@
 
 namespace EGG {
 
-FrmHeap::FrmHeap(MEMiHeapHead* pHeapHandle) : Heap(pHeapHandle) {}
+ExpHeap::ExpHeap(MEMiHeapHead* pHeapHandle) : Heap(pHeapHandle) {}
 
-FrmHeap::~FrmHeap() {
+ExpHeap::~ExpHeap() {
     dispose();
-    MEMDestroyFrmHeap(mHeapHandle);
+    MEMDestroyExpHeap(mHeapHandle);
 }
 
-FrmHeap* FrmHeap::create(void* pHeapStart, u32 size, u16 opt) {
-    FrmHeap* pHeap = NULL;
+ExpHeap* ExpHeap::create(void* pHeapStart, u32 size, u16 opt) {
+    ExpHeap* pHeap = NULL;
 
     void* pHeapBuffer = pHeapStart;
     void* pHeapEnd = ROUND_DOWN_PTR(addOffset(pHeapStart, size), 4);
@@ -26,20 +26,20 @@ FrmHeap* FrmHeap::create(void* pHeapStart, u32 size, u16 opt) {
 
     if (pHeapStart > pHeapEnd ||
         nw4r::ut::GetOffsetFromPtr(pHeapStart, pHeapEnd) <
-            sizeof(FrmHeap) + 4) {
+            sizeof(ExpHeap) + 4) {
 
         return NULL;
     }
 
-    MEMiHeapHead* pHeapHandle = MEMCreateFrmHeapEx(
-        addOffset(pHeapStart, sizeof(FrmHeap)),
-        nw4r::ut::GetOffsetFromPtr(pHeapStart, pHeapEnd) - sizeof(FrmHeap),
+    MEMiHeapHead* pHeapHandle = MEMCreateExpHeapEx(
+        addOffset(pHeapStart, sizeof(ExpHeap)),
+        nw4r::ut::GetOffsetFromPtr(pHeapStart, pHeapEnd) - sizeof(ExpHeap),
         opt);
 
     if (pHeapHandle != NULL) {
         Heap* pContainHeap = findContainHeap(pHeapStart);
 
-        pHeap = new (pHeapStart) FrmHeap(pHeapHandle);
+        pHeap = new (pHeapStart) ExpHeap(pHeapHandle);
         pHeap->registerHeapBuffer(pHeapBuffer);
         pHeap->mParentHeap = pContainHeap;
     }
@@ -47,8 +47,8 @@ FrmHeap* FrmHeap::create(void* pHeapStart, u32 size, u16 opt) {
     return pHeap;
 }
 
-FrmHeap* FrmHeap::create(u32 size, Heap* pParentHeap, u16 opt) {
-    FrmHeap* pHeap = NULL;
+ExpHeap* ExpHeap::create(u32 size, Heap* pParentHeap, u16 opt) {
+    ExpHeap* pHeap = NULL;
 
     if (pParentHeap == NULL) {
         pParentHeap = getCurrentHeap();
@@ -72,35 +72,35 @@ FrmHeap* FrmHeap::create(u32 size, Heap* pParentHeap, u16 opt) {
     return pHeap;
 }
 
-void FrmHeap::destroy() {
+void ExpHeap::destroy() {
     Heap* pParentHeap = findParentHeap();
 
-    this->~FrmHeap();
+    this->~ExpHeap();
     if (pParentHeap != NULL) {
         pParentHeap->free(this);
     }
 }
 
-void* FrmHeap::alloc(u32 size, s32 align) {
-    return MEMAllocFromFrmHeapEx(mHeapHandle, size, align);
+void* ExpHeap::alloc(u32 size, s32 align) {
+    return MEMAllocFromExpHeapEx(mHeapHandle, size, align);
 }
 
-void FrmHeap::free(void* pBlock) {
-#pragma unused(pBlock)
+void ExpHeap::free(void* pBlock) {
+    MEMFreeToExpHeap(mHeapHandle, pBlock);
 }
 
-u32 FrmHeap::resizeForMBlock(void* pBlock, u32 size) {
-    return MEMResizeForMBlockFrmHeap(mHeapHandle, pBlock, size);
+u32 ExpHeap::resizeForMBlock(void* pBlock, u32 size) {
+    return MEMResizeForMBlockExpHeap(mHeapHandle, pBlock, size);
 }
 
-u32 FrmHeap::getAllocatableSize(s32 align) {
-    return MEMGetAllocatableSizeForFrmHeapEx(mHeapHandle, align);
+u32 ExpHeap::getAllocatableSize(s32 align) {
+    return MEMGetAllocatableSizeForExpHeapEx(mHeapHandle, align);
 }
 
-u32 FrmHeap::adjust() {
-    u32 adjustSize = MEMAdjustFrmHeap(mHeapHandle) + sizeof(FrmHeap);
+u32 ExpHeap::adjust() {
+    u32 adjustSize = MEMAdjustExpHeap(mHeapHandle) + sizeof(ExpHeap);
 
-    if (adjustSize > sizeof(FrmHeap) && mParentHeap != NULL) {
+    if (adjustSize > sizeof(ExpHeap) && mParentHeap != NULL) {
         mParentHeap->resizeForMBlock(mHeapBuffer, adjustSize);
         return adjustSize;
     }
@@ -108,8 +108,8 @@ u32 FrmHeap::adjust() {
     return 0;
 }
 
-void FrmHeap::initAllocator(Allocator* pAllocator, s32 r5) {
-    MEMInitAllocatorForFrmHeap((MEMAllocator*)pAllocator, mHeapHandle, r5);
+void ExpHeap::initAllocator(Allocator* pAllocator, s32 r5) {
+    MEMInitAllocatorForExpHeap((MEMAllocator*)pAllocator, mHeapHandle, r5);
 }
 
 } // namespace EGG

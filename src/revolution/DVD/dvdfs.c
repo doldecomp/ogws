@@ -2,9 +2,10 @@
  * Based on ARC decompilation by riidefi
  */
 
-#include <ctype.h>
 #include <revolution/DVD.h>
 #include <revolution/OS.h>
+
+#include <ctype.h>
 
 typedef struct DVDNode {
     union {
@@ -361,7 +362,7 @@ s32 DVDReadPrio(DVDFileInfo* info, void* dst, s32 size, s32 offset, s32 prio) {
     block = &info->block;
     if (!DVDReadAbsAsyncPrio(block, dst, size, info->offset + (offset >> 2),
                              cbForReadSync, prio)) {
-        return DVD_RESULT_FATAL;
+        return DVD_RESULT_FATAL_ERROR;
     }
 
     enabled = OSDisableInterrupts();
@@ -373,7 +374,7 @@ s32 DVDReadPrio(DVDFileInfo* info, void* dst, s32 size, s32 offset, s32 prio) {
             ret = block->transferTotal;
             break;
         } else if (state == DVD_STATE_FATAL) {
-            ret = DVD_RESULT_FATAL;
+            ret = DVD_RESULT_FATAL_ERROR;
             break;
         } else if (state == DVD_STATE_CANCELED) {
             ret = DVD_RESULT_CANCELED;
