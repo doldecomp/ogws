@@ -47,7 +47,7 @@ namespace EGG
             u8 buf[32];
             while (true)
             {
-                result = DVDReadPrio(&dvdFile->mFileInfo, (void *)nw4r::ut::RoundUp((uintptr_t)buf, 32), 32, pos, DVD_PRIO_MEDIUM);
+                result = DVDReadPrio(&dvdFile->getFileInfo(), (void *)nw4r::ut::RoundUp((uintptr_t)buf, 32), 32, pos, DVD_PRIO_MEDIUM);
 
                 if (result >= 0) break;
 
@@ -68,7 +68,7 @@ namespace EGG
 
         while (true)
         {
-            result = DVDReadPrio(&dvdFile->mFileInfo, dest, alignedSize - pos, pos, DVD_PRIO_MEDIUM);
+            result = DVDReadPrio(&dvdFile->getFileInfo(), dest, alignedSize - pos, pos, DVD_PRIO_MEDIUM);
 
             if (result >= 0) break;
 

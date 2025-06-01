@@ -10,6 +10,7 @@
 #include <egg/core/eggDecomp.h>
 #include <egg/core/eggDisplay.h>
 #include <egg/core/eggDisposer.h>
+#include <egg/core/eggDvdFile.h>
 #include <egg/core/eggExpHeap.h>
 #include <egg/core/eggFader.h>
 #include <egg/core/eggFrmHeap.h>

@@ -84,17 +84,16 @@ s32 CntFile::readData(void* pDst, s32 size, s32 offset) {
     if (mSyncThread != NULL) {
         OSUnlockMutex(&mSyncMutex);
         return -1;
-    } else {
-        mSyncThread = OSGetCurrentThread();
-
-        s32 result =
-            contentReadNAND(&mAsyncContext.fileInfo, pDst, size, offset);
-
-        mSyncThread = NULL;
-
-        OSUnlockMutex(&mSyncMutex);
-        return result;
     }
+
+    mSyncThread = OSGetCurrentThread();
+
+    s32 result = contentReadNAND(&mAsyncContext.fileInfo, pDst, size, offset);
+
+    mSyncThread = NULL;
+
+    OSUnlockMutex(&mSyncMutex);
+    return result;
 }
 
 s32 CntFile::writeData(const void* pSrc, s32 size, s32 offset) {
