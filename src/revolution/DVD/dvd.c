@@ -350,7 +350,7 @@ static void cbForStateReadingFST(u32 intType) {
 
         block->state = DVD_STATE_IDLE;
         if (block->callback != NULL) {
-            block->callback(DVD_RESULT_OK, block);
+            block->callback(DVD_RESULT_GOOD, block);
         }
 
         stateReady();
@@ -388,14 +388,14 @@ static void cbForStateError(u32 intType) {
         executing = &DummyCommandBlock;
 
         if (block->callback != NULL) {
-            block->callback(DVD_RESULT_FATAL, block);
+            block->callback(DVD_RESULT_FATAL_ERROR, block);
         }
 
         if (Canceling) {
             Canceling = FALSE;
 
             if (CancelCallback != NULL) {
-                CancelCallback(DVD_RESULT_OK, block);
+                CancelCallback(DVD_RESULT_GOOD, block);
             }
         }
 
@@ -497,7 +497,7 @@ static BOOL CheckCancel(u32 resume) {
         }
 
         if (CancelCallback != NULL) {
-            CancelCallback(DVD_RESULT_OK, block);
+            CancelCallback(DVD_RESULT_GOOD, block);
         }
 
         stateReady();
@@ -1123,7 +1123,7 @@ static void stateReady(void) {
         executing = &DummyCommandBlock;
 
         if (block->callback != NULL) {
-            block->callback(DVD_RESULT_FATAL, block);
+            block->callback(DVD_RESULT_FATAL_ERROR, block);
         }
 
         stateReady();
@@ -1221,7 +1221,7 @@ static void stateBusy(DVDCommandBlock* block) {
 
             current->state = DVD_STATE_IDLE;
             if (current->callback != NULL) {
-                current->callback(DVD_RESULT_OK, current);
+                current->callback(DVD_RESULT_GOOD, current);
             }
 
             stateReady();
@@ -1277,7 +1277,7 @@ static void stateBusy(DVDCommandBlock* block) {
 
             current->state = DVD_STATE_IDLE;
             if (current->callback != NULL) {
-                current->callback(DVD_RESULT_OK, current);
+                current->callback(DVD_RESULT_GOOD, current);
             }
 
             stateReady();
@@ -1418,7 +1418,7 @@ static void cbForStateBusy(u32 intType) {
         }
 
         if (CancelCallback != NULL) {
-            CancelCallback(DVD_RESULT_OK, block);
+            CancelCallback(DVD_RESULT_GOOD, block);
         }
 
         stateReady();
@@ -1440,7 +1440,7 @@ static void cbForStateBusy(u32 intType) {
 
             block->state = DVD_STATE_IDLE;
             if (block->callback != NULL) {
-                block->callback(DVD_RESULT_OK, block);
+                block->callback(DVD_RESULT_GOOD, block);
             }
 
             stateReady();
@@ -1454,7 +1454,7 @@ static void cbForStateBusy(u32 intType) {
 
             block->state = DVD_STATE_IDLE;
             if (block->callback != NULL) {
-                block->callback(DVD_RESULT_OK, block);
+                block->callback(DVD_RESULT_GOOD, block);
             }
 
             stateReady();
@@ -1549,7 +1549,7 @@ static void cbForStateBusy(u32 intType) {
 
             block->state = DVD_STATE_IDLE;
             if (block->callback != NULL) {
-                block->callback(DVD_RESULT_OK, block);
+                block->callback(DVD_RESULT_GOOD, block);
             }
 
             stateReady();
@@ -1721,7 +1721,7 @@ BOOL DVDCancelAsync(DVDCommandBlock* block, DVDCommandCallback callback) {
     case DVD_STATE_IDLE:
     case DVD_STATE_CANCELED:
         if (callback != NULL) {
-            callback(DVD_RESULT_OK, block);
+            callback(DVD_RESULT_GOOD, block);
         }
         break;
     case DVD_STATE_BUSY:
@@ -1749,7 +1749,7 @@ BOOL DVDCancelAsync(DVDCommandBlock* block, DVDCommandCallback callback) {
         }
 
         if (callback != NULL) {
-            callback(DVD_RESULT_OK, block);
+            callback(DVD_RESULT_GOOD, block);
         }
         break;
     case DVD_STATE_COVER_CLOSED:
@@ -1762,7 +1762,7 @@ BOOL DVDCancelAsync(DVDCommandBlock* block, DVDCommandCallback callback) {
         case COMMAND_OPEN_PARTITION:
         case COMMAND_SET_MAX_ROTATION:
             if (callback != NULL) {
-                callback(DVD_RESULT_OK, block);
+                callback(DVD_RESULT_GOOD, block);
             }
             break;
         case COMMAND_READ:
@@ -1776,7 +1776,7 @@ BOOL DVDCancelAsync(DVDCommandBlock* block, DVDCommandCallback callback) {
                 }
 
                 if (callback != NULL) {
-                    callback(DVD_RESULT_OK, block);
+                    callback(DVD_RESULT_GOOD, block);
                 }
 
                 stateReady();
@@ -1837,7 +1837,7 @@ BOOL DVDCancelAsync(DVDCommandBlock* block, DVDCommandCallback callback) {
         }
 
         if (callback != NULL) {
-            callback(DVD_RESULT_OK, block);
+            callback(DVD_RESULT_GOOD, block);
         }
 
         stateReady();
@@ -1851,7 +1851,7 @@ BOOL DVDCancelAsync(DVDCommandBlock* block, DVDCommandCallback callback) {
         }
 
         if (callback != NULL) {
-            callback(DVD_RESULT_OK, block);
+            callback(DVD_RESULT_GOOD, block);
         }
 
         stateReady();
@@ -1866,7 +1866,7 @@ s32 DVDCancel(DVDCommandBlock* block) {
     BOOL enabled;
 
     if (!DVDCancelAsync(block, cbForCancelSync)) {
-        return DVD_RESULT_FATAL;
+        return DVD_RESULT_FATAL_ERROR;
     }
 
     enabled = OSDisableInterrupts();
@@ -1894,7 +1894,7 @@ s32 DVDCancel(DVDCommandBlock* block) {
     }
 
     OSRestoreInterrupts(enabled);
-    return DVD_RESULT_OK;
+    return DVD_RESULT_GOOD;
 }
 
 static void cbForCancelSync(s32 result, DVDCommandBlock* block) {
@@ -1919,7 +1919,7 @@ BOOL DVDCancelAllAsync(DVDCommandCallback callback) {
     } else {
         success = TRUE;
         if (callback != NULL) {
-            callback(DVD_RESULT_OK, NULL);
+            callback(DVD_RESULT_GOOD, NULL);
         }
     }
 

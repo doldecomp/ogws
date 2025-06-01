@@ -687,7 +687,7 @@ config.libs = [
             Object(NonMatching, "egg/core/eggVideo.cpp"),
             Object(Matching, "egg/core/eggXfb.cpp"),
             Object(Matching, "egg/core/eggXfbManager.cpp"),
-            Object(NonMatching, "egg/core/eggDvdRipper.cpp"),
+            Object(Matching, "egg/core/eggDvdRipper.cpp"),
             Object(Matching, "egg/core/eggDvdFile.cpp"),
             Object(Matching, "egg/core/eggScene.cpp"),
             Object(NonMatching, "egg/core/eggProcessMeter.cpp"),

@@ -1,100 +1,112 @@
-#pragma use_lmw_stmw on
-#include "eggDvdRipper.h"
-#include "eggDvdFile.h"
-#include "eggHeap.h"
-#include "eggAssert.h"
-#include "ut_algorithm.h"
-#include <revolution/VI.h>
-#include <revolution/OS.h>
+// TODO: REMOVE AFTER REFACTOR
+#pragma ipa file
 
-namespace EGG
-{
-    void * DvdRipper::loadToMainRAM(const char *path, u8 *dest, Heap *heap,
-        EAllocDirection allocDir, u32 pos, u32 *r8, u32 *pSize)
-    {
-        DvdFile d;
-        return (!d.open(path)) ? NULL : loadToMainRAM(&d, dest, heap, allocDir, pos, r8, pSize);
+#include <egg/core.h>
+#include <egg/prim.h>
+
+#include <revolution/OS.h>
+#include <revolution/VI.h>
+
+namespace EGG {
+
+bool DvdRipper::sErrorRetry = true;
+
+u8* DvdRipper::loadToMainRAM(const char* pPath, u8* pBuffer, Heap* pHeap,
+                             EAllocDirection allocDir, u32 offset, u32* pRead,
+                             u32* pSize) {
+
+    DvdFile file;
+
+    if (!file.open(pPath)) {
+        return NULL;
     }
 
-    void * DvdRipper::loadToMainRAM(DvdFile *dvdFile, u8 *dest, Heap *heap,
-        EAllocDirection allocDir, u32 pos, u32 *r8, u32 *pSize)
-    {
-        u32 fileSize;
-        bool allocSuccess = false; // Steals r29 from fileSize, should be in r30
-        fileSize = dvdFile->getFileSize();
-        if (pSize) *pSize = fileSize;
-        u32 alignedSize = nw4r::ut::RoundUp<u32>(fileSize, 32);
+    return loadToMainRAM(&file, pBuffer, pHeap, allocDir, offset, pRead, pSize);
+}
 
-        if (!dest)
-        {
-            u32 dist = alignedSize - pos;
-            u32 align = -32;
-            if (allocDir == ALLOC_FORWARD) align = 32;
+u8* DvdRipper::loadToMainRAM(DvdFile* pFile, u8* pBuffer, Heap* pHeap,
+                             EAllocDirection allocDir, u32 offset, u32* pRead,
+                             u32* pSize) {
 
-            dest = static_cast<u8 *>(Heap::alloc(dist, align, heap));
-            allocSuccess = true;
-        }
+    bool allocedBuffer = false;
+    u32 fileSize = pFile->getFileSize();
 
-        if (!dest)
-        {
-            EGG_PRINT("heap allocation Failed: %d (heap %p)\n", alignedSize - pos, heap);
-            return NULL;
-        }
+    if (pSize != NULL) {
+        *pSize = fileSize;
+    }
 
-        s32 result;
-        if (pos)
-        {
-            u8 buf[32];
-            while (true)
-            {
-                result = DVDReadPrio(&dvdFile->getFileInfo(), (void *)nw4r::ut::RoundUp((uintptr_t)buf, 32), 32, pos, DVD_PRIO_MEDIUM);
+    fileSize = ROUND_UP(fileSize, 32);
 
-                if (result >= 0) break;
+    if (pBuffer == NULL) {
+        pBuffer = static_cast<u8*>(Heap::alloc(
+            fileSize - offset, allocDir == ALLOC_DIR_HEAD ? 32 : -32, pHeap));
 
-                if ((result == -3) || (sErrorRetry == false))
-                {
-                    if (allocSuccess)
-                    {
-                        Heap::free(dest, NULL);
-                    }
-                    return NULL;
-                }
+        allocedBuffer = true;
+    }
 
-                VIWaitForRetrace();
+    if (pBuffer == NULL) {
+        EGG_PRINT("heap allocation Failed: %d (heap %p)\n", fileSize - offset,
+                  pHeap);
+
+        return NULL;
+    }
+
+    if (offset > 0) {
+        u8 chunk[32 + 31];
+        void* const pChunk = ROUND_UP_PTR(chunk, 32);
+
+        while (true) {
+            s32 readFailed = DVDReadPrio(&pFile->getFileInfo(), pChunk, 32,
+                                         offset, DVD_PRIO_MEDIUM);
+
+            if (readFailed >= 0) {
+                break;
             }
 
-            DCInvalidateRange((void *)nw4r::ut::RoundUp((uintptr_t)buf, 32), 32);
-        }
-
-        while (true)
-        {
-            result = DVDReadPrio(&dvdFile->getFileInfo(), dest, alignedSize - pos, pos, DVD_PRIO_MEDIUM);
-
-            if (result >= 0) break;
-
-            if ((result == -3) || (sErrorRetry == false))
-            {
-                EGG_PRINT("readFailed : %d\n", result);
-
-                if (allocSuccess)
-                {
-                    Heap::free(dest, NULL);
+            if (readFailed == DVD_RESULT_CANCELED || !sErrorRetry) {
+                if (allocedBuffer) {
+                    Heap::free(pBuffer, NULL);
                 }
+
                 return NULL;
             }
 
             VIWaitForRetrace();
         }
 
-        if (r8)
-        {
-            *r8 = alignedSize - pos;
-        }
-
-        return dest;
+        DCInvalidateRange(pChunk, 32);
     }
 
-    bool DvdRipper::sErrorRetry = true;
+    while (true) {
+        s32 readFailed =
+            DVDReadPrio(&pFile->getFileInfo(), pBuffer, fileSize - offset,
+                        offset, DVD_PRIO_MEDIUM);
+
+        if (readFailed >= 0) {
+            break;
+        }
+
+        if (readFailed == DVD_RESULT_CANCELED || !sErrorRetry) {
+            EGG_PRINT("readFailed : %d\n", readFailed);
+
+            if (allocedBuffer) {
+                Heap::free(pBuffer, NULL);
+            }
+
+            return NULL;
+        }
+
+        VIWaitForRetrace();
+    }
+
+    if (pRead != NULL) {
+        *pRead = fileSize - offset;
+    }
+
+    return pBuffer;
 }
 
-const char *eggDvdRipper_asserts = "read Header Failed\n";
+DECOMP_FORCEACTIVE(eggDvdRipper_cpp,
+                  "read Header Failed\n");
+
+} // namespace EGG
