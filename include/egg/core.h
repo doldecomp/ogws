@@ -2,6 +2,7 @@
 #define EGG_PUBLIC_CORE_H
 
 #include <egg/core/eggAllocator.h>
+#include <egg/core/eggArchive.h>
 #include <egg/core/eggBitFlag.h>
 #include <egg/core/eggColorFader.h>
 #include <egg/core/eggController.h>
