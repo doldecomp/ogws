@@ -25,5 +25,7 @@
 #include <egg/core/eggTaskThread.h>
 #include <egg/core/eggThread.h>
 #include <egg/core/eggVideo.h>
+#include <egg/core/eggXfb.h>
+#include <egg/core/eggXfbManager.h>
 
 #endif

@@ -33,8 +33,8 @@ public:
 
     void initiate();
 
-    DVDFileInfo& getFileInfo() {
-        return mAsyncContext.fileInfo;
+    DVDFileInfo* getFileInfo() {
+        return &mAsyncContext.fileInfo;
     }
     s32 getStatus() const {
         return DVDGetCommandBlockStatus(&mAsyncContext.cmdBlock);

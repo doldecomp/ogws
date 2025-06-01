@@ -1,56 +1,49 @@
+// TODO: REMOVE AFTER REFACTOR
 #pragma ipa file
 
-#include "eggXfb.h"
-#include "eggSystem.h"
-#include "eggVideo.h"
-#include "eggHeap.h"
-#include "eggAssert.h"
+#include <egg/core.h>
+#include <egg/prim.h>
 
-#include "ut_algorithm.h"
+#include <revolution/GX.h>
 
-using namespace nw4r;
+namespace EGG {
 
-namespace EGG
-{
-    void Xfb::init(u16 width, u16 height, Heap *heap)
-    {
-        mWidth = width;
-        mHeight = height;
+void Xfb::init(u16 width, u16 height, Heap* pHeap) {
+    mWidth = width;
+    mHeight = height;
 
-        const u32 bufferSize = calcBufferSize(width, height);
-        
-        if (!heap)
-            heap = Heap::getCurrentHeap();
+    u32 bufferSize = calcBufferSize(width, height);
 
-        mBuffer = new (heap, 32) u8[bufferSize];
-        #line 40
-        EGG_ASSERT(mBuffer);
-
-        mNext = NULL;
-        mPrev = NULL;
+    if (pHeap == NULL) {
+        pHeap = Heap::getCurrentHeap();
     }
 
-    void UNUSED_ASSERTS_EGGXFB()
-    {
-        EGG_ASSERT_MSG(false, "rm != NULL");
-    }
+    mBuffer = new (pHeap, 32) u8[bufferSize];
+#line 40
+    EGG_ASSERT(mBuffer);
 
-    Xfb::Xfb(Heap *heap)
-    {
-        Video *video = BaseSystem::getVideo();
-        #line 75
-        EGG_ASSERT(video != NULL);
-
-        GXRenderModeObj *rm = video->mRenderMode;
-        #line 77
-        EGG_ASSERT(rm != NULL);
-
-        init(rm->fbWidth, rm->xfbHeight, heap);
-    }
-
-    u32 Xfb::calcBufferSize(u16 width, u16 height)
-    {
-        const u16 new_w = ut::RoundUp(width, 16);
-        return (new_w * height * 2);
-    }
+    mNext = NULL;
+    mPrev = NULL;
 }
+
+DECOMP_FORCEACTIVE(eggXfb_cpp,
+                  "rm != NULL");
+
+Xfb::Xfb(Heap* pHeap) {
+    Video* video = BaseSystem::getVideo();
+#line 75
+    EGG_ASSERT(video != NULL);
+
+    GXRenderModeObj* rm = video->getRenderModeObj();
+#line 77
+    EGG_ASSERT(rm != NULL);
+
+    init(rm->fbWidth, rm->xfbHeight, pHeap);
+}
+
+u32 Xfb::calcBufferSize(u16 width, u16 height) {
+    width = ROUND_UP(width, 16);
+    return width * height * sizeof(u16);
+}
+
+} // namespace EGG

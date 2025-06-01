@@ -30,6 +30,8 @@ namespace EGG
 		static u32 getTickPerVRetrace();
 		static GXRenderModeObj * getStandardRenderModeObj();
 
+		GXRenderModeObj* getRenderModeObj() { return mRenderMode; }
+
 		GXRenderModeObj *mRenderMode; // at 0x0
 		TBitFlag<u8> mFlags;
 		s32 mOSTick; // at 0x8

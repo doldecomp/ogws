@@ -56,7 +56,7 @@ u8* DvdRipper::loadToMainRAM(DvdFile* pFile, u8* pBuffer, Heap* pHeap,
         void* const pChunk = ROUND_UP_PTR(chunk, 32);
 
         while (true) {
-            s32 readFailed = DVDReadPrio(&pFile->getFileInfo(), pChunk, 32,
+            s32 readFailed = DVDReadPrio(pFile->getFileInfo(), pChunk, 32,
                                          offset, DVD_PRIO_MEDIUM);
 
             if (readFailed >= 0) {
@@ -79,7 +79,7 @@ u8* DvdRipper::loadToMainRAM(DvdFile* pFile, u8* pBuffer, Heap* pHeap,
 
     while (true) {
         s32 readFailed =
-            DVDReadPrio(&pFile->getFileInfo(), pBuffer, fileSize - offset,
+            DVDReadPrio(pFile->getFileInfo(), pBuffer, fileSize - offset,
                         offset, DVD_PRIO_MEDIUM);
 
         if (readFailed >= 0) {

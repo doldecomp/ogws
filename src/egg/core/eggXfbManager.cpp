@@ -1,85 +1,77 @@
-#include "eggXfbManager.h"
-#include "eggXfb.h"
+// TODO: REMOVE AFTER REFACTOR
+#pragma ipa file
+
+#include <egg/core.h>
+#include <egg/prim.h>
 
 #include <revolution/GX.h>
 #include <revolution/OS.h>
 #include <revolution/VI.h>
 
-namespace EGG
-{
-    bool XfbManager::attach(Xfb *xfb)
-    {
-        bool success = false;
+namespace EGG {
 
-        if (xfb != NULL)
-        {
-            if (mListHead == NULL)
-            {
-                // Circular linked list
-                mListHead = xfb;
-                mListTail = xfb;
-                xfb->setPrev(xfb);
-                xfb->setNext(xfb);
-            }
-            else
-            {
-                // Attach as next XFB after list head
-                mListHead->getNext()->setPrev(xfb);
-                xfb->setNext(mListHead->getNext());
-                // Link to list head
-                mListHead->setNext(xfb);
-                xfb->setPrev(mListHead);
-                // Fix tail (redundant?)
-                mListTail = mListHead->getPrev();
-            }
+bool XfbManager::attach(Xfb* pXfb) {
+    bool success = false;
 
-            success = true;
+    if (pXfb != NULL) {
+        if (mQueueFront == NULL) {
+            mQueueFront = pXfb;
+            mQueueEnd = pXfb;
+            pXfb->mPrev = pXfb;
+            pXfb->mNext = pXfb;
+        } else {
+            mQueueFront->mNext->mPrev = pXfb;
+            pXfb->mNext = mQueueFront->mNext;
+
+            mQueueFront->mNext = pXfb;
+            pXfb->mPrev = mQueueFront;
+
+            mQueueEnd = mQueueFront->mPrev;
         }
 
-        return success;
+        success = true;
     }
 
-    void XfbManager::copyEFB(bool bUpdate)
-    {
-        if (bUpdate)
-        {
-            GXSetZMode(1, GX_ALWAYS, 1);
-            GXSetAlphaUpdate(1);
-            GXSetColorUpdate(1);
-        }
+    return success;
+}
 
-        GXCopyDisp(mListTail->getBuffer(), bUpdate);
-        GXFlush();
-
-        mCopiedXfb = mListTail;
-        mListTail = mListTail->getPrev();
+void XfbManager::copyEFB(bool clearEfb) {
+    if (clearEfb) {
+        GXSetZMode(GX_TRUE, GX_ALWAYS, GX_TRUE);
+        GXSetAlphaUpdate(GX_TRUE);
+        GXSetColorUpdate(GX_TRUE);
     }
 
-    void XfbManager::setNextFrameBuffer()
-    {
-        UNKWORD intr = OSDisableInterrupts();
+    GXCopyDisp(mQueueEnd->getBuffer(), clearEfb);
+    GXFlush();
 
-        if (mCopiedXfb != NULL)
-        {
-            VISetNextFrameBuffer(mCopiedXfb->getBuffer());
-            VIFlush();
+    mShowXfb = mQueueEnd;
+    mQueueEnd = mQueueEnd->mPrev;
+}
 
-            mShowXfb = mCopiedXfb;
-            mCopiedXfb = NULL;
-        }
+void XfbManager::setNextFrameBuffer() {
+    BOOL enabled = OSDisableInterrupts();
 
-        OSRestoreInterrupts(intr);
+    if (mShowXfb != NULL) {
+        VISetNextFrameBuffer(mShowXfb->getBuffer());
+        VIFlush();
+
+        mCopiedXfb = mShowXfb;
+        mShowXfb = NULL;
     }
 
-    void XfbManager::postVRetrace()
-    {
-        if (mShowXfb != NULL)
-        {
-            if (mShowXfb->getBuffer() == VIGetCurrentFrameBuffer())
-            {
-                mListHead = mShowXfb;
-                mShowXfb = NULL;
-            }
-        }
+    OSRestoreInterrupts(enabled);
+}
+
+void XfbManager::postVRetrace() {
+    if (mCopiedXfb == NULL) {
+        return;
+    }
+
+    if (mCopiedXfb->getBuffer() == VIGetCurrentFrameBuffer()) {
+        mQueueFront = mCopiedXfb;
+        mCopiedXfb = NULL;
     }
 }
+
+} // namespace EGG
