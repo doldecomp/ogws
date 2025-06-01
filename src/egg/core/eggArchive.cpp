@@ -72,7 +72,7 @@ Archive* Archive::mount(void* arcBinary, Heap* pHeap, int align) {
         bool success = archive->initHandle(arcBinary);
 
         if (success) {
-            archive->mMountType = MOUNT_TYPE_MEMORY;
+            archive->mMountType = MOUNT_TYPE_MEM;
         } else {
             archive->mMountType = MOUNT_TYPE_NONE;
         }
@@ -99,7 +99,7 @@ void* Archive::getFile(const char* pPath, FileInfo* pInfo) {
     bool success = ARCOpen(&mHandle, pPath, &info);
 
     if (success) {
-        if (mMountType == MOUNT_TYPE_MEMORY) {
+        if (mMountType == MOUNT_TYPE_MEM) {
             pStartAddr = ARCGetStartAddrInMem(&info);
         }
 

@@ -15,7 +15,7 @@ class Heap;
 
 class Archive : public Disposer {
 public:
-    enum MountType { MOUNT_TYPE_NONE, MOUNT_TYPE_MEMORY, MOUNT_TYPE_FST };
+    enum MountType { MOUNT_TYPE_NONE, MOUNT_TYPE_MEM, MOUNT_TYPE_FST };
 
     class FileInfo {
         friend class Archive;

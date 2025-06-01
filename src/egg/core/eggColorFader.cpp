@@ -109,7 +109,7 @@ void ColorFader::draw() {
         return;
     }
 
-    nw4r::math::MTX44 projMtx;
+    Mtx44 projMtx;
     C_MTXOrtho(projMtx, mSpace.top, mSpace.bottom, mSpace.left, mSpace.right,
                0.0f, 1.0f);
     GXSetProjection(projMtx, GX_ORTHOGRAPHIC);
@@ -119,7 +119,7 @@ void ColorFader::draw() {
     GXSetScissor(mSpace.left, mSpace.top, mSpace.GetWidth(),
                  mSpace.GetHeight());
 
-    nw4r::math::MTX34 posMtx;
+    Mtx posMtx;
     PSMTXIdentity(posMtx);
     GXLoadPosMtxImm(posMtx, GX_PNMTX0);
     GXSetCurrentMtx(GX_PNMTX0);
@@ -141,7 +141,7 @@ void ColorFader::draw() {
     __GXSetIndirectMask(0);
 
     GXSetNumTevStages(1);
-    GXSetTevOp(GX_TEVSTAGE0, GX_BLEND);
+    GXSetTevOp(GX_TEVSTAGE0, GX_PASSCLR);
     GXSetTevOrder(GX_TEVSTAGE0, GX_TEXCOORD_NULL, GX_TEXMAP_NULL, GX_COLOR0A0);
 
     if (mColor.a == 255) {

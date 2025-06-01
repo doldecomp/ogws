@@ -29,12 +29,11 @@ namespace EGG
         virtual void close(); // at 0x10
         virtual s32 readData(void *, s32, s32); // at 0x14
         virtual s32 writeData(const void *, s32, s32); // at 0x18
-        virtual UNKWORD getFileSize() const { return mFileInfo.size; }; // at 0x1C
+        virtual u32 getFileSize() const { return mFileInfo.size; }; // at 0x1C
         virtual bool open(int); // at 0x20
         virtual bool open(const char *, void *); // at 0x24
 
     private:
-        bool mIsOpen; // at 0x4
         OSMutex mMutex_0x8;
         OSMutex mMutex_0x20;
         UNKWORD WORD_0x38;

@@ -14,7 +14,7 @@ namespace EGG
         }
     }
 
-    DvdFile::DvdFile() : mIsOpen(false)
+    DvdFile::DvdFile()
     {
         initiate();
     }

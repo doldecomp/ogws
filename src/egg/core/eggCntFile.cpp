@@ -1,107 +1,108 @@
+// TODO: REMOVE AFTER REFACTOR
 #pragma ipa file
-#include "eggCntFile.h"
-#include "eggAssert.h"
-#include <revolution/ARC.h>
 
-namespace
-{
-    UNKTYPE INSTANTIATE_WEAK(EGG::CntFile *f)
-    {
-        f->getFileSize();
+#include <egg/core.h>
+#include <egg/prim.h>
+
+#include <nw4r/ut.h>
+
+#include <revolution/CNT.h>
+#include <revolution/OS.h>
+
+namespace EGG {
+
+nw4r::ut::List CntFile::sCntList;
+bool CntFile::sIsInitialized = false;
+
+DECOMP_FORCEACTIVE(eggCntFile_cpp,
+                   CntFile::getFileSize);
+
+CntFile::CntFile() {
+    initiate();
+}
+
+CntFile::~CntFile() {
+    close();
+}
+
+void CntFile::initiate() {
+    mAsyncContext.pFile = this;
+    mAsyncContext.pHandle = NULL;
+
+    OSInitMutex(&mSyncMutex);
+    OSInitMutex(&mAsyncMutex);
+
+    OSInitMessageQueue(&mSyncQueue, mSyncBuffer, ARRAY_SIZE(mAsyncBuffer));
+    OSInitMessageQueue(&mAsyncQueue, mAsyncBuffer, ARRAY_SIZE(mAsyncBuffer));
+
+    mSyncThread = NULL;
+    mAsyncThread = NULL;
+}
+
+bool CntFile::open(const char* pPath, CNTHandle* pHandle) {
+    s32 entryNum = contentConvertPathToEntrynumNAND(pHandle, pPath);
+
+    if (!mIsOpen && entryNum != -1) {
+        s32 result =
+            contentFastOpenNAND(pHandle, entryNum, &mAsyncContext.fileInfo);
+
+        if (result == CNT_RESULT_OK) {
+            mIsOpen = true;
+
+#line 109
+            EGG_ASSERT(sIsInitialized);
+
+            nw4r::ut::List_Append(&sCntList, this);
+            mAsyncContext.pHandle = pHandle;
+
+        } else {
+            mIsOpen = false;
+            mAsyncContext.pHandle = NULL;
+        }
+    }
+
+    return mIsOpen;
+}
+
+void CntFile::close() {
+    if (!mIsOpen) {
+        return;
+    }
+
+    s32 result = contentCloseNAND(&mAsyncContext.fileInfo);
+    mAsyncContext.pHandle = NULL;
+
+    if (result == CNT_RESULT_OK) {
+        mIsOpen = false;
+        nw4r::ut::List_Remove(&sCntList, this);
     }
 }
 
-namespace EGG
-{
-    using namespace nw4r;
+s32 CntFile::readData(void* pDst, s32 size, s32 offset) {
+    OSLockMutex(&mSyncMutex);
 
-    CntFile::CntFile() : mIsOpen(false)
-    {
-        initiate();
-    }
-
-    CntFile::~CntFile()
-    {
-        close();
-    }
-
-    void CntFile::initiate()
-    {
-        PTR_0x50 = this;
-        mOpenFile = NULL;
-
-        OSInitMutex(&mMutex_0x8);
-        OSInitMutex(&mMutex_0x20);
-        OSInitMessageQueue(&mMesgQueue_0x78, &mMesgBuffer_0x98, 1);
-        OSInitMessageQueue(&mMesgQueue_0x54, &mMesgBuffer_0x74, 1);
-
-        mThread = NULL;
-        WORD_0x38 = 0;
-    }
-
-    bool CntFile::open(const char *name, CNTHandle *handle)
-    {
-        s32 entry = contentConvertPathToEntrynumNAND(handle, name);
-        if (!mIsOpen && entry != -1)
-        {
-            if (contentFastOpenNAND(handle, entry, &mFileInfo) == 0)
-            {
-                mIsOpen = true;
-                #line 109
-                EGG_ASSERT(sIsInitialized);
-
-                ut::List_Append(&sCntList, this);
-                mOpenFile = handle;
-            }
-            else
-            {
-                mIsOpen = false;
-                mOpenFile = NULL;
-            }
-        }
-
-        return mIsOpen;
-    }
-
-    void CntFile::close()
-    {
-        if (mIsOpen)
-        {
-            UNKWORD result = contentCloseNAND(&mFileInfo);
-            mOpenFile = NULL;
-
-            if (result == 0)
-            {
-                mIsOpen = false;
-                ut::List_Remove(&sCntList, this);
-            }
-        }
-    }
-
-    s32 CntFile::readData(void *buf, s32 len, s32 pos)
-    {
-        OSLockMutex(&mMutex_0x8);
-        if (mThread)
-        {
-            OSUnlockMutex(&mMutex_0x8);
-            return -1;
-        }
-        else
-        {
-            mThread = OSGetCurrentThread();
-            s32 ret = contentReadNAND(&mFileInfo, buf, len, pos);
-            mThread = NULL;
-
-            OSUnlockMutex(&mMutex_0x8);
-            return ret;
-        }
-    }
-
-    s32 CntFile::writeData(const void *, s32, s32)
-    {
+    if (mSyncThread != NULL) {
+        OSUnlockMutex(&mSyncMutex);
         return -1;
-    }
+    } else {
+        mSyncThread = OSGetCurrentThread();
 
-    ut::List CntFile::sCntList;
-    bool CntFile::sIsInitialized;
+        s32 result =
+            contentReadNAND(&mAsyncContext.fileInfo, pDst, size, offset);
+
+        mSyncThread = NULL;
+
+        OSUnlockMutex(&mSyncMutex);
+        return result;
+    }
 }
+
+s32 CntFile::writeData(const void* pSrc, s32 size, s32 offset) {
+#pragma unused(pSrc)
+#pragma unused(size)
+#pragma unused(offset)
+
+    return -1;
+}
+
+} // namespace EGG
