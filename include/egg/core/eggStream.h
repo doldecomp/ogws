@@ -1,82 +1,131 @@
 #ifndef EGG_CORE_STREAM_H
 #define EGG_CORE_STREAM_H
-#include "types_egg.h"
-#include "eggBitFlag.h"
+#include <egg/types_egg.h>
 
-namespace EGG
-{
-    class Stream
-    {
-    public:
-        Stream();
-        virtual ~Stream(); // at 0x8
-        virtual void read(u8 *, u32) = 0; // at 0xC
-        virtual void write(u8 *, u32) = 0; // at 0x10
-        virtual bool eof() = 0; // at 0x14
+#include <egg/core/eggBitFlag.h>
 
-        u8 read_u8();
-        void write_u8(u8);
-        s8 read_s8();
-        void write_s8(s8);
-        u16 read_u16();
-        void write_u16(u16);
-        s16 read_s16();
-        void write_s16(s16);
-        u32 read_u32();
-        void write_u32(u32);
-        s32 read_s32();
-        void write_s32(s32);
-        f32 read_float();
-        void write_float(f32);
-        const char * readString(char *, int);
-        void writeString(char *);
+namespace EGG {
 
-        void copyToTextBuffer();
-        char skipSpace();
-        void printf(char *, ...);
-        void skipUntilCRLF();
-        const char * getNextToken();
-        bool isSpace(char);
-        bool isCRLF(char);
-        bool isUpperSJIS(char);
+/******************************************************************************
+ *
+ * Stream
+ *
+ ******************************************************************************/
 
-        void setTextMode() { mFlags.setBit(0); }
-        bool isTextMode() { return mFlags.onBit(0); }
-        void setBinMode() { mFlags.resetBit(0); }
-        bool isBinMode() { return !mFlags.onBit(0); }
+class Stream {
+public:
+    Stream();
+    virtual ~Stream(); // at 0x8
 
-    protected:
-        void _read(void *, u32);
-        void _write(void *, u32);
-        u8 _readByte();
-        void _writeByte(u8);
+    virtual void read(u8* pDst, u32 size) = 0;  // at 0xC
+    virtual void write(u8* pSrc, u32 size) = 0; // at 0x10
+    virtual bool eof() = 0;                     // at 0x14
 
-    protected:
-        bool mIsTokenReady; // at 0x4
-        u32 mPosition; // at 0x8
-        TBitFlag<u16> mFlags; // at 0xC
-        char *mTextBuffer; // at 0x10
-        u32 mTextBufferSize; // at 0x14
-        UNKWORD WORD_0x18;
-        bool mAllowComments; // at 0x1C
+/**
+ * @brief Helper for declaring stream functions for primitive types
+ */
+#define TYPE_FUNC_DECL(T)                                                      \
+    T read_##T();                                                              \
+    void write_##T(T value);                                                   \
+    void read_##T(T& rValue) {                                                 \
+        rValue = read_##T();                                                   \
+    }
 
-        static const int sTextBufferSize = 1024;
-        static char sTextBuffer[sTextBufferSize];
+    TYPE_FUNC_DECL(u8);
+    TYPE_FUNC_DECL(s8);
+    TYPE_FUNC_DECL(u16);
+    TYPE_FUNC_DECL(s16);
+    TYPE_FUNC_DECL(u32);
+    TYPE_FUNC_DECL(s32);
+    TYPE_FUNC_DECL(float);
+
+#undef TYPE_FUNC_DECL
+
+    f32 read_f32() {
+        return read_float();
+    }
+    void write_f32(f32 value) {
+        write_float(value);
+    }
+    void read_f32(f32& rValue) {
+        rValue = read_f32();
+    }
+
+    const char* readString(char* pDst, int maxlen);
+    void writeString(char* pStr);
+
+    bool isSpace(char ch);
+    bool isCRLF(char ch);
+    bool isUpperSJIS(char ch);
+
+    void setTextMode() {
+        mFlags.setBit(BIT_TEXT_MODE);
+    }
+    bool isTextMode() {
+        return mFlags.onBit(BIT_TEXT_MODE);
+    }
+    void setBinMode() {
+        mFlags.resetBit(BIT_TEXT_MODE);
+    }
+    bool isBinMode() {
+        return !isTextMode();
+    }
+
+    s32 getPosition() const {
+        return mPosition;
+    }
+
+protected:
+    bool mIsTokenReady;    // at 0x4
+    s32 mPosition;         // at 0x8
+    TBitFlag<u16> mFlags;  // at 0xC
+    char* mTextBuffer;     // at 0x10
+    s32 mTextBufferSize;   // at 0x14
+    u32 mGroupIndentLevel; // at 0x18
+    bool mAllowComments;   // at 0x1C
+
+    static const int TEXT_BUFFER_SIZE = 1024;
+    static char sTextBuffer[TEXT_BUFFER_SIZE];
+
+private:
+    enum {
+        BIT_TEXT_MODE,
     };
 
-    class RamStream : public Stream
-    {
-    public:
-        RamStream(u8 *, u32);
-        ~RamStream(); // at 0x8
-        virtual void read(u8 *, u32); // at 0xC
-        virtual void write(u8 *, u32); // at 0x10
-        virtual bool eof(); // at 0x14
+private:
+    void skipUntilCRLF();
+    void copyToTextBuffer();
+    const char* getNextToken();
 
-    private:
-        u8 *mDataBlk; // at 0x20
-        u32 mDataSize; // at 0x24
-    };
-}
+    char skipSpace();
+    void printf(char* pFmt, ...);
+
+    void _read(void* pDst, u32 size);
+    void _write(void* pSrc, u32 size);
+
+    u8 _readByte();
+    void _writeByte(u8 value);
+};
+
+/******************************************************************************
+ *
+ * RamStream
+ *
+ ******************************************************************************/
+
+class RamStream : public Stream {
+public:
+    RamStream(u8* pBuffer, u32 size);
+
+    virtual void read(u8* pDst, u32 size);  // at 0xC
+    virtual void write(u8* pSrc, u32 size); // at 0x10
+    virtual bool eof();                     // at 0x14
+
+private:
+    u8* mBuffer;     // at 0x20
+    u32 mBufferSize; // at 0x24
+};
+
+} // namespace EGG
 
 #endif

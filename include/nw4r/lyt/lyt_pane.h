@@ -79,7 +79,11 @@ public:
     NW4R_UT_RTTI_DECL(Pane);
 
 private:
-    enum FlagBit { BIT_VISIBLE, BIT_INFLUENCED_ALPHA, BIT_LOCATION_ADJUST };
+    enum {
+        BIT_VISIBLE,
+        BIT_INFLUENCED_ALPHA,
+        BIT_LOCATION_ADJUST,
+    };
 
     // Need the typedef before the class definition is complete
     typedef ut::LinkList<Pane, offsetof(PaneBase, node)> PaneList;
