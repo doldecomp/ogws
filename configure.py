@@ -175,6 +175,8 @@ config.reconfig_deps = []
 # Can be overridden in libraries or objects
 config.scratch_preset_id = None
 
+config.extra_clang_flags = ["-D__INTELLISENSE__"]
+
 # Base flags, common to most GC/Wii games.
 # Generally leave untouched, with overrides added below.
 cflags_base = [
