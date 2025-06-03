@@ -32,7 +32,11 @@ public:
     void setColor(nw4r::ut::Color color);
 
 private:
-    enum FlagBit { BIT_FINISH_AFTER_IN, BIT_FINISH_AFTER_OUT, BIT_2 };
+    enum {
+        BIT_FINISH_AFTER_IN,
+        BIT_FINISH_AFTER_OUT,
+        BIT_2,
+    };
 
     static const u16 DEFAULT_FRAME = 20;
 

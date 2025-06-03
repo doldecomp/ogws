@@ -121,7 +121,7 @@ protected:
     Heap* mParentHeap;         // at 0x18
 
 private:
-    enum EFlagBit {
+    enum {
         BIT_DISABLE_ALLOC,
     };
 
