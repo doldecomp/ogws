@@ -308,13 +308,11 @@ const char* Stream::readString(char* pDst, int maxLen) {
 #line 453
                     EGG_ASSERT_MSG(_readByte() == '\"', "Yen error\n");
                     buffer[size++] = '\"';
+                } else if (isUpperSJIS(byte)) {
+                    buffer[size++] = byte;
+                    buffer[size++] = _readByte();
                 } else {
-                    if (isUpperSJIS(byte)) {
-                        buffer[size++] = byte;
-                        buffer[size++] = _readByte();
-                    } else {
-                        buffer[size++] = byte;
-                    }
+                    buffer[size++] = byte;
                 }
             }
 
@@ -378,14 +376,16 @@ const char* Stream::readString(char* pDst, int maxLen) {
     // Binary mode
     for (int i = 0; i < TEXT_BUFFER_SIZE; i++) {
         u8 byte = _readByte();
-        buffer[i] = byte;
+        u32 idx = static_cast<u32>(i);
+
+        buffer[idx] = byte;
 
         if (byte == '\0') {
             break;
         }
     }
 
-    int textLen = strlen(buffer);
+    int textLen = std::strlen(buffer);
     if (pDst != NULL) {
 #line 542
         EGG_ASSERT_MSG(textLen + 1 < maxLen, "readString(%x,%d) overflow\n", pDst, maxLen);
