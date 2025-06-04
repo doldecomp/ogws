@@ -1,226 +1,223 @@
-#pragma pool_data on
+// TODO: REMOVE AFTER REFACTOR
 #pragma ipa file
-#pragma use_lmw_stmw on
-#pragma opt_strength_reduction off
-#include "eggMsgRes.h"
-#include "eggAssert.h"
 
-namespace EGG
-{
-    /*
-        This can't really be matched until analyzeDataBlkKind can be auto inlined.
-    */
-    MsgRes::MsgRes(const void *data)
-    {
-        #line 53
-        EGG_ASSERT(data);
-        mMsgHeader = NULL;
-        mMsgInfoDataBlk = NULL;
-        mMsgDataBlk = NULL;
-        mMsgStrDataBlk = NULL;
-        mMsgIDDataBlk = NULL;
-        mMsgFlowChartBlk = NULL;
-        mMsgFlowLabelBlk = NULL;
+#include <egg/prim.h>
+#include <egg/util.h>
 
-        extractMsgHeader(data);
+namespace EGG {
 
-        // Skip over header
-        void *current = (void *)((u32)data + sizeof(MsgHeaderBlock));
-        // Extract all sections ("blocks")
-        u32 numBlocks = mMsgHeader->mNumBlocks;
-        for (int i = 0; i < numBlocks; i++)
-        {
-            // BMG file size > current block ptr
-            EGG_ASSERT(( u32 )data + mMsgHeader->mDataSize > ( u32 )current);
+const u32 MsgRes::cDataBlkKindCodeSet[DATABLK_MAX] = {
+    'INF1', // DATABLK_MSGINFO
+    'DAT1', // DATABLK_MSGDATA
+    'STR1', // DATABLK_STRATTR
+    'MID1', // DATABLK_MSGID
+    'FLW1', // DATABLK_FLOWCHART
+    'FLI1'  // DATABLK_FLOWLABEL
+};
 
-            u32 kind = getDataBlkKind(current);
-            const void *block = current;
-            switch(analyzeDataBlkKind(kind))
-            {
-                case BLOCK_MSGID:
-                    block = extractMsgIDDataBlk(current);
-                    break;
-                case BLOCK_MSGDATA:
-                    block = extractMsgDataBlk(current);
-                    break;
-                case BLOCK_MSGINFO:
-                    block = extractMsgInfoDataBlk(current);
-                    break;
-                case BLOCK_STRATTR:
-                    block = extractStrAttrDataBlk(current);
-                    break;
-                case BLOCK_FLOWLABEL:
-                    block = extractFlowLabelInfoDataBlk(current);
-                    break;
-                case BLOCK_FLOWCHART:
-                    block = extractFlowChartInfoDataBlk(current);
-                    break;
-                default:
-                    #line 125
-                    EGG_ASSERT_MSG(false, "Illegal data block.");
-                    block = NULL;
-                    break;
-            }
+const u32 MsgRes::cMainMsgIdBitNumSet[cFormSupplementMax] = {
+    32, 24, 16, 8, 0,
+};
 
-            // Skip pointer to end of current block.
-            u32 blkSize = getBlkSize(block);
-            current = (void *)((u32)current + blkSize);
-        }
-    }
+const MsgRes::MsgIDMask MsgRes::cMsgIdMaskSet[cFormSupplementMax] = {
+    {0xFFFFFFFF, 0x00000000}, {0xFFFFFF00, 0x000000FF},
+    {0xFFFF0000, 0x0000FFFF}, {0xFF000000, 0x00FFFFFF},
+    {0x00000000, 0xFFFFFFFF},
+};
 
-    MsgRes::~MsgRes()
-    {
+MsgRes::MsgRes(const void* data) {
+#line 53
+    EGG_ASSERT(data);
 
-    }
+    mMsgHeader = NULL;
+    mMsgInfoDataBlk = NULL;
+    mMsgDataBlk = NULL;
+    mMsgStrDataBlk = NULL;
+    mMsgIDDataBlk = NULL;
+    mMsgFlowChartBlk = NULL;
+    mMsgFlowLabelBlk = NULL;
 
-    void MsgRes::analyzeTag(u16 code, const wchar_t *tag, u8 *tagLength,
-        unsigned int *tagID, void **param)
-    {
-        #line 159
-        EGG_ASSERT(tag);
-        EGG_ASSERT(tagLength);
-        EGG_ASSERT(tagID);
-        EGG_ASSERT(param);
-        EGG_ASSERT(cTagMark == code);
+    extractMsgHeader(data);
 
-        *tagLength = *tag - 2;
-        *tagID = *(u32 *)tag & 0x00FFFFFF;
-        
-        if (*tagLength > 4)
-        {
-            *param = (wchar_t *)tag + 2;
-        }
-        else
-        {
-            *param = NULL;
-        }
-    }
+    const void* current = static_cast<const u8*>(data) + sizeof(MessageHeader);
+    u32 numBlocks = mMsgHeader->mNumBlocks;
 
-    const wchar_t * MsgRes::getMsg(unsigned int r4, unsigned int r5)
-    {
-        #line 189
-        EGG_ASSERT(mMsgDataBlk);
+    for (int i = 0; i < numBlocks; i++) {
+#line 77
+        EGG_ASSERT(( u32 )data + mMsgHeader->mDataSize > ( u32 )current);
 
-        MsgInfoBlockEntry *pEntry = getMsgEntry(r4, r5);
-        EGG_ASSERT_MSG(pEntry, "Not found message %d, %d.", r4, r5);
+        EDataBlkKind kind = analyzeDataBlkKind(getDataBlkKind(current));
+        const DataBlock* pDataBlk = NULL;
 
-        return (wchar_t *)((u32)mMsgDataBlk->mStringPool + pEntry->mDataBlkOfs);
-    }
-
-    const void * MsgRes::extractMsgHeader(const void *data)
-    {
-        #line 223
-        EGG_ASSERT(data);
-        mMsgHeader = (MsgHeaderBlock *)data;
-        return data;
-    }
-
-    const void * MsgRes::extractMsgInfoDataBlk(const void *data)
-    {
-        #line 251
-        EGG_ASSERT(data);
-        mMsgInfoDataBlk = (MsgInfoBlock *)data;
-        return data;
-    }
-
-    const void * MsgRes::extractMsgDataBlk(const void *data)
-    {
-        #line 277
-        EGG_ASSERT(data);
-        mMsgDataBlk = (MsgDataBlock *)data;
-        return data;
-    }   
-
-    const void * MsgRes::extractStrAttrDataBlk(const void *data)
-    {
-        #line 298
-        EGG_ASSERT(data);
-        mMsgStrDataBlk = (MsgStrAttrBlock *)data;
-        return data;
-    }
-
-    const void * MsgRes::extractMsgIDDataBlk(const void *data)
-    {
-        #line 309
-        EGG_ASSERT(data);
-        mMsgIDDataBlk = (MsgIdBlock *)data;
-        return data;
-    }
-
-    const void * MsgRes::extractFlowChartInfoDataBlk(const void *data)
-    {
-        #line 334
-        EGG_ASSERT(data);
-        mMsgFlowChartBlk = (MsgFlowChartBlock *)data;
-        return data;
-    }
-
-    const void * MsgRes::extractFlowLabelInfoDataBlk(const void *data)
-    {
-        #line 345
-        EGG_ASSERT(data);
-        mMsgFlowLabelBlk = (MsgFlowLabelBlock *)data;
-        return data;
-    }
-
-    /*
-        cMsgSectionMagic needs to be pooled for this code to match (and also stay under inline_auto_max),
-        however it also needs to be in .rodata.
-
-        There must be something else at play here because pool_data doesn't touch const data,
-        only global/static.
-    */
-    MsgRes::EDataBlkKind MsgRes::analyzeDataBlkKind(unsigned int kind)
-    {
-        if (kind == cMsgSectionMagic[BLOCK_MSGINFO]) return BLOCK_MSGINFO;
-        else if (kind == cMsgSectionMagic[BLOCK_MSGDATA]) return BLOCK_MSGDATA;
-        else if (kind == cMsgSectionMagic[BLOCK_STRATTR]) return BLOCK_STRATTR;
-        else if (kind == cMsgSectionMagic[BLOCK_MSGID]) return BLOCK_MSGID;
-        else if (kind == cMsgSectionMagic[BLOCK_FLOWCHART]) return BLOCK_FLOWCHART;
-        else if (kind == cMsgSectionMagic[BLOCK_FLOWLABEL]) return BLOCK_FLOWLABEL;
-        else
-        {
-            #line 366
-            EGG_ASSERT_MSG(false, "Illegal data block.");
-            return BLOCK_ILLEGAL;
-        }
-    }
-
-    /*
-        Masks aren't being loaded properly.
-        The first one uses lwzx rather than lwz 0(r3).
-
-        This is probably because I haven't gotten the const data pooling to work yet.
-    */
-    MsgRes::MsgInfoBlockEntry * MsgRes::getMsgEntry(unsigned int r4 , unsigned int r5)
-    {
-        #line 380
-        EGG_ASSERT(mMsgInfoDataBlk);
-        EGG_ASSERT(mMsgIDDataBlk);
-
-        MsgIdBlock *pMidBlk = mMsgIDDataBlk;
-        u32 shift = cShifts[pMidBlk->UNK_0xB];
-        u32 mask = cMasks[pMidBlk->UNK_0xB].INT_0x0;
-        u32 mask2 = cMasks[pMidBlk->UNK_0xB].INT_0x4;
-        for (u16 i = 0; i < mMsgIDDataBlk->mNumEntries; i++)
-        {
-            u32 msgId = getMsgID(i);
-            if (r4 == (msgId & mask) >> (32 - shift) && r5 == (msgId & mask2))
-            {
-                #line 402
-                EGG_ASSERT(mMsgInfoDataBlk->mNumEntries > i);
-
-                return (MsgInfoBlockEntry *)((u32)mMsgInfoDataBlk->mMsgInfo + (i * mMsgInfoDataBlk->mItemSize));
-            }
+        switch (kind) {
+        case DATABLK_MSGINFO: {
+            extractMsgInfoDataBlk(current);
+            pDataBlk = static_cast<const MessageInfoDataBlock*>(current);
+            break;
         }
 
-        return NULL;
-    }
+        case DATABLK_MSGDATA: {
+            extractMsgDataBlk(current);
+            pDataBlk = static_cast<const MessageDataBlock*>(current);
+            break;
+        }
 
-    u32 MsgRes::getMsgID(u16 i)
-    {
-        #line 425
-        EGG_ASSERT(mMsgIDDataBlk);
-        return mMsgIDDataBlk->mMsgIds[i];
+        case DATABLK_STRATTR: {
+            extractStrAttrDataBlk(current);
+            pDataBlk = static_cast<const StringAttributeDataBlock*>(current);
+            break;
+        }
+
+        case DATABLK_MSGID: {
+            extractMsgIDDataBlk(current);
+            pDataBlk = static_cast<const MessageIDDataBlock*>(current);
+            break;
+        }
+
+        case DATABLK_FLOWCHART: {
+            extractFlowChartInfoDataBlk(current);
+            pDataBlk = static_cast<const FlowChartInfoDataBlock*>(current);
+            break;
+        }
+
+        case DATABLK_FLOWLABEL: {
+            extractFlowLabelInfoDataBlk(current);
+            pDataBlk = static_cast<const FlowLabelInfoDataBlock*>(current);
+            break;
+        }
+
+        default: {
+#line 125
+            EGG_ASSERT_MSG(false, "Illegal data block.\n");
+            break;
+        }
+        }
+
+        current = static_cast<const u8*>(current) + getDataBlkSize(pDataBlk);
     }
 }
+
+MsgRes::~MsgRes() {}
+
+void MsgRes::analyzeTag(u16 code, const wchar_t* tag, u8* tagLength, u32* tagID,
+                        void** param) {
+#line 159
+    EGG_ASSERT(tag);
+    EGG_ASSERT(tagLength);
+    EGG_ASSERT(tagID);
+    EGG_ASSERT(param);
+
+#line 164
+    EGG_ASSERT(cTagMark == code);
+
+    *tagLength = *reinterpret_cast<const u8*>(tag) - 2;
+    *tagID = *reinterpret_cast<const u32*>(tag) & 0x00FFFFFF;
+
+    if (*tagLength > 4) {
+        *param = const_cast<wchar_t*>(tag + 2);
+    } else {
+        *param = NULL;
+    }
+}
+
+const wchar_t* MsgRes::getMsg(u32 group, u32 idx) {
+#line 189
+    EGG_ASSERT(mMsgDataBlk);
+
+    const MessageInfoDataBlock::Entry* pEntry = getMsgEntry(group, idx);
+#line 193
+    EGG_ASSERT_MSG(pEntry != NULL, "Not found message %d, %d.\n", group, idx);
+
+    return reinterpret_cast<const wchar_t*>(
+        reinterpret_cast<const u8*>(mMsgDataBlk->mContent) +
+        pEntry->mDataOffset);
+}
+
+void MsgRes::extractMsgHeader(const void* data) {
+#line 223
+    EGG_ASSERT(data);
+    mMsgHeader = static_cast<const MessageHeader*>(data);
+}
+
+void MsgRes::extractMsgInfoDataBlk(const void* data) {
+#line 251
+    EGG_ASSERT(data);
+    mMsgInfoDataBlk = static_cast<const MessageInfoDataBlock*>(data);
+}
+
+void MsgRes::extractMsgDataBlk(const void* data) {
+#line 277
+    EGG_ASSERT(data);
+    mMsgDataBlk = static_cast<const MessageDataBlock*>(data);
+}
+
+void MsgRes::extractStrAttrDataBlk(const void* data) {
+#line 298
+    EGG_ASSERT(data);
+    mMsgStrDataBlk = static_cast<const StringAttributeDataBlock*>(data);
+}
+
+void MsgRes::extractMsgIDDataBlk(const void* data) {
+#line 309
+    EGG_ASSERT(data);
+    mMsgIDDataBlk = static_cast<const MessageIDDataBlock*>(data);
+}
+
+void MsgRes::extractFlowChartInfoDataBlk(const void* data) {
+#line 334
+    EGG_ASSERT(data);
+    mMsgFlowChartBlk = static_cast<const FlowChartInfoDataBlock*>(data);
+}
+
+void MsgRes::extractFlowLabelInfoDataBlk(const void* data) {
+#line 345
+    EGG_ASSERT(data);
+    mMsgFlowLabelBlk = static_cast<const FlowLabelInfoDataBlock*>(data);
+}
+
+MsgRes::EDataBlkKind MsgRes::analyzeDataBlkKind(u32 kind) {
+    for (int i = 0; i < DATABLK_MAX; i++) {
+        if (kind == cDataBlkKindCodeSet[i]) {
+            return static_cast<EDataBlkKind>(i);
+        }
+    }
+
+#line 366
+    EGG_ASSERT_MSG(false, "Illegal data block.\n");
+    return DATABLK_MAX;
+}
+
+const MsgRes::MessageInfoDataBlock::Entry* MsgRes::getMsgEntry(u32 group,
+                                                               u32 idx) {
+#line 380
+    EGG_ASSERT(mMsgInfoDataBlk);
+    EGG_ASSERT(mMsgIDDataBlk);
+
+    u32 idBitNum = 32 - cMainMsgIdBitNumSet[mMsgIDDataBlk->mFormSupplement];
+    const MsgIDMask& rMask = cMsgIdMaskSet[mMsgIDDataBlk->mFormSupplement];
+
+    for (u16 i = 0; i < mMsgIDDataBlk->mNumEntries; i++) {
+        u32 msgId = getMsgID(i);
+
+        if (group == (msgId & rMask.groupMask) >> idBitNum &&
+            idx == (msgId & rMask.indexMask)) {
+
+#line 402
+            EGG_ASSERT(mMsgInfoDataBlk->mNumEntries > i);
+
+            return reinterpret_cast<const MessageInfoDataBlock::Entry*>(
+                reinterpret_cast<const u8*>(mMsgInfoDataBlk->mContent) +
+                mMsgInfoDataBlk->mEntrySize * i);
+        }
+    }
+
+    return NULL;
+}
+
+u32 MsgRes::getMsgID(u16 idx) {
+#line 425
+    EGG_ASSERT(mMsgIDDataBlk);
+    return mMsgIDDataBlk->mContent[idx];
+}
+
+} // namespace EGG

@@ -26,6 +26,7 @@ public:
 
 template <typename T> class Handle : public HandleBase {
 public:
+    Handle() {}
     Handle(const Handle& rOther) : HandleBase(rOther) {}
     Handle(T* pObject) : HandleBase(static_cast<LinkedObject*>(pObject)) {}
 

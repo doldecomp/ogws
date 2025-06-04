@@ -1,17 +1,15 @@
 #ifndef EGG_UTIL_EXCEPTION_H
 #define EGG_UTIL_EXCEPTION_H
-#include "types_egg.h"
-#include <revolution/KPAD.h>
+#include <egg/types_egg.h>
 
-namespace EGG
-{
-    struct Exception
-    {
-        typedef void (*UserCallback)(KPADStatus *);
+namespace EGG {
 
-        static Exception * create(u16, u16, u16, Heap *);
-        static UNKTYPE setUserCallBack(UserCallback);
-    };
-}
+class Exception {
+public:
+    static Exception* create(u16 width, u16 height, u16 attr, Heap* pHeap);
+    static void setPadInfo(const u16* pPadInfo);
+};
+
+} // namespace EGG
 
 #endif
