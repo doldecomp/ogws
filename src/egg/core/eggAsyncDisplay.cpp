@@ -144,7 +144,7 @@ void AsyncDisplay::clearEFB() {
 
 u32 AsyncDisplay::getTickPerFrame() {
     if (mSyncMode == SYNC_MODE_NTSC) {
-        return Video::getTickPerVRetrace(VI_TV_FMT_NTSC);
+        return Video::getTickPerVRetrace(VI_TVFORMAT_NTSC);
     }
 
     return Video::getTickPerVRetrace();

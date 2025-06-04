@@ -151,15 +151,15 @@ u16 OSGetFontEncode(void) {
     }
 
     switch (*(u32*)OSPhysicalToCached(OS_PHYS_TV_FORMAT)) {
-    case VI_TV_FMT_NTSC:
+    case VI_TVFORMAT_NTSC:
         FontEncode = ((VI_HW_REGS[VI_VISEL] & 2) != 0) ? OS_FONT_ENCODE_SJIS
                                                        : OS_FONT_ENCODE_ANSI;
         break;
-    case VI_TV_FMT_PAL:
-    case VI_TV_FMT_MPAL:
-    case VI_TV_FMT_DEBUG:
-    case VI_TV_FMT_DEBUG_PAL:
-    case VI_TV_FMT_EURGB60:
+    case VI_TVFORMAT_PAL:
+    case VI_TVFORMAT_MPAL:
+    case VI_TVFORMAT_DEBUG:
+    case VI_TVFORMAT_DEBUG_PAL:
+    case VI_TVFORMAT_EURGB60:
     default:
         FontEncode = OS_FONT_ENCODE_ANSI;
     }
