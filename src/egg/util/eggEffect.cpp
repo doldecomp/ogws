@@ -1,32 +1,18 @@
-#include "eggEffect.h"
-#include "ef_particlemanager.h"
-#include "ef_effect.h"
+// TODO: REMOVE AFTER REFACTOR
+#pragma ipa file
 
-namespace
-{
-    using namespace nw4r;
+#include <egg/util.h>
 
-    // Create weak function instances
-    UNKTYPE INSTANTIATE_WEAK(ef::Effect *e)
-    {
-        e->ForeachParticleManager(
-            ef::ParticleManager::ModifierTravFunc_SetRotate,
-            0,
-            false);
+#include <nw4r/ef.h>
 
-        e->ForeachParticleManager(
-            ef::ParticleManager::ModifierTravFunc_SetScale,
-            0,
-            false);
+namespace EGG {
 
-        e->ForeachParticleManager(
-            ef::ParticleManager::ModifierTravFunc_SetSimpleLightAmbient,
-            0,
-            false);
+static const nw4r::ef::Handle<nw4r::ef::Effect> cInvalidHandle;
 
-        e->ForeachParticleManager(
-            ef::ParticleManager::ModifierTravFunc_SetSimpleLightType,
-            0,
-            false);
-    }
-}
+DECOMP_FORCEACTIVE(eggEffect_cpp,
+                   nw4r::ef::ParticleManager::ModifierTravFunc_SetSimpleLightType,
+                   nw4r::ef::ParticleManager::ModifierTravFunc_SetSimpleLightAmbient,
+                   nw4r::ef::ParticleManager::ModifierTravFunc_SetScale,
+                   nw4r::ef::ParticleManager::ModifierTravFunc_SetRotate);
+
+} // namespace EGG
