@@ -93,6 +93,9 @@ typedef enum {
 #define VI_VICLK_SPEED (1 << 0)
 typedef enum { VI_VICLK_27MHZ, VI_VICLK_54MHZ } VIClkSpeed;
 
+// VISEL - VI DTV Status Register
+#define VI_VISEL_COMPONENT (1 << 0)
+
 // HBE - Border HBE
 #define VI_HBE_BRDR_EN (1 << 15)
 

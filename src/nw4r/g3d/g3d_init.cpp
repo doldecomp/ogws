@@ -28,22 +28,22 @@ void G3dInit(bool enableLockedCache) {
 
     GXRenderModeObj* pMode;
     switch (VIGetTvFormat()) {
-    case VI_TV_FMT_NTSC: {
+    case VI_TVFORMAT_NTSC: {
         pMode = &GXNtsc480IntDf;
         break;
     }
 
-    case VI_TV_FMT_PAL: {
+    case VI_TVFORMAT_PAL: {
         pMode = &GXPal528IntDf;
         break;
     }
 
-    case VI_TV_FMT_EURGB60: {
+    case VI_TVFORMAT_EURGB60: {
         pMode = &GXEurgb60Hz480IntDf;
         break;
     }
 
-    case VI_TV_FMT_MPAL: {
+    case VI_TVFORMAT_MPAL: {
         pMode = &GXMpal480IntDf;
         break;
     }

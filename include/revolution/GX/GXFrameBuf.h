@@ -15,8 +15,8 @@ typedef struct _GXRenderModeObj {
     u16 viWidth;              // at 0xE
     u16 viHeight;             // at 0x10
     u32 xfbMode;              // at 0x14
-    u8 field_rendering;       // at 0x18
-    u8 aa;                    // at 0x19
+    GXBool field_rendering;   // at 0x18
+    GXBool aa;                // at 0x19
     u8 sample_pattern[12][2]; // at 0x1A
     u8 vfilter[7];            // at 0x32
 } GXRenderModeObj;
@@ -26,10 +26,17 @@ extern GXRenderModeObj GXPal528IntDf;
 extern GXRenderModeObj GXEurgb60Hz480IntDf;
 extern GXRenderModeObj GXMpal480IntDf;
 
+void GXSetDispCopySrc(u16 x, u16 y, u16 w, u16 h);
 void GXSetTexCopySrc(u16 x, u16 y, u16 w, u16 h);
+
+void GXSetDispCopyDst(u16 w, u16 numXfbLines);
 void GXSetTexCopyDst(u16 w, u16 h, GXTexFmt fmt, GXBool mipmap);
 
 void GXSetCopyClamp(GXCopyClamp clamp);
+
+u32 GXGetNumXfbLines(u16 efbHeight, f32 scaleY);
+f32 GXGetYScaleFactor(u16 efbHeight, u16 xfbHeight);
+void GXSetDispCopyYScale(f32 scaleY);
 
 void GXSetCopyClear(GXColor color, u32 z);
 void GXSetCopyFilter(GXBool, const u8 sample_pattern[12][2], GXBool,

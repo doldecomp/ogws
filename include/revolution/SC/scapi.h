@@ -28,6 +28,8 @@ typedef enum {
     SC_LANG_KR,
 } SCLanguage;
 
+typedef enum { SC_INTERLACED, SC_PROGRESSIVE } SCProgressiveMode;
+
 typedef enum { SC_MOTOR_OFF, SC_MOTOR_ON } SCMotorMode;
 
 typedef enum { SC_SND_MONO, SC_SND_STEREO, SC_SND_SURROUND } SCSoundMode;
