@@ -1,16 +1,17 @@
 #ifndef EGG_MATH_MATH_H
 #define EGG_MATH_MATH_H
-#include "types_egg.h"
+#include <egg/types_egg.h>
 
-namespace EGG
-{
-    template <typename T> struct Math
-    {
-        static T sqrt(T);
-        static T sin(T);
-        static T cos(T);
-        static T atan2(T, T);
-    };
-}
+namespace EGG {
+
+template <typename T> class Math {
+public:
+    static T sqrt(T t);
+    static T sin(T t);
+    static T cos(T t);
+    static T atan2(T t1, T t2);
+};
+
+} // namespace EGG
 
 #endif
