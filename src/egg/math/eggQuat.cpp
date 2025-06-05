@@ -1,19 +1,22 @@
-#include "eggQuat.h"
-#include "eggMath.h"
-#include "eggVector.h"
+// TODO: REMOVE AFTER REFACTOR
+#pragma ipa file
 
-namespace EGG
-{
-    void Quatf::setAxisRotation(const Vector3f &axis, f32 angle)
-    {
-        f32 angleHalf = angle * 0.5f;
-        f32 angleCos = Math<f32>::cos(angleHalf);
-        f32 angleSin = Math<f32>::sin(angleHalf);
+#include <egg/math.h>
 
-        w = angleCos;
-        z = angleSin * axis.z;
-        f32 _y = angleSin * axis.y;
-        x = angleSin * axis.x;
-        y = _y;
-    }
+namespace EGG {
+
+void Quatf::set(f32 fw, f32 fx, f32 fy, f32 fz) {
+    w = fw;
+    v.x = fx;
+    v.y = fy;
+    v.z = fz;
 }
+
+void Quatf::setAxisRotation(const Vector3f& rAxis, f32 angle) {
+    f32 half = angle * 0.5f;
+    f32 cosa = Math<f32>::cos(half);
+    f32 sina = Math<f32>::sin(half);
+    set(cosa, sina * rAxis.x, sina * rAxis.y, sina * rAxis.z);
+}
+
+} // namespace EGG

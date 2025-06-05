@@ -1,34 +1,33 @@
-#pragma fp_contract on
+// TODO: REMOVE AFTER REFACTOR
+#pragma ipa file
 
-#include "eggMath.h"
-#include "eggVector.h"
+#include <egg/math.h>
 
-namespace EGG
-{
-    f32 Vector3f::normalise()
-    {
-        // Force sdata2 ordering (1.0f, 0.0f)
-        1.0f;
+namespace EGG {
 
-        f32 mag = length();
+const Vector2f Vector2f::zero(0.0f, 0.0f);
+const Vector2f Vector2f::ex(1.0f, 0.0f);
+const Vector2f Vector2f::ey(0.0f, 1.0f);
 
-        if (mag > 0.0f)
-        {
-            f32 inv_mag = 1.0f / mag;
-            x *= inv_mag;
-            y *= inv_mag;
-            z *= inv_mag;
-        }
+const Vector3f Vector3f::zero(0.0f, 0.0f, 0.0f);
+const Vector3f Vector3f::ex(1.0f, 0.0f, 0.0f);
+const Vector3f Vector3f::ey(0.0f, 1.0f, 0.0f);
+const Vector3f Vector3f::ez(0.0f, 0.0f, 1.0f);
 
-        return mag;
+f32 Vector3f::normalise() {
+    // Force sdata2 ordering (1.0f, 0.0f)
+    1.0f;
+
+    f32 mag = length();
+
+    if (mag > 0.0f) {
+        f32 inv_mag = 1.0f / mag;
+        x *= inv_mag;
+        y *= inv_mag;
+        z *= inv_mag;
     }
 
-    const Vector2f Vector2f::zero(0.0f, 0.0f);
-    const Vector2f Vector2f::ex(1.0f, 0.0f);
-    const Vector2f Vector2f::ey(0.0f, 1.0f);
-
-    const Vector3f Vector3f::zero(0.0f, 0.0f, 0.0f);
-    const Vector3f Vector3f::ex(1.0f, 0.0f, 0.0f);
-    const Vector3f Vector3f::ey(0.0f, 1.0f, 0.0f);
-    const Vector3f Vector3f::ez(0.0f, 0.0f, 1.0f);
+    return mag;
 }
+
+} // namespace EGG
