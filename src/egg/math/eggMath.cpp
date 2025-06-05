@@ -1,36 +1,33 @@
-#include "eggMath.h"
-#include "eggAssert.h"
-#include <math.h>
+// TODO: REMOVE AFTER REFACTOR
+#pragma ipa file
 
-namespace EGG
-{
-    template <typename T>
-    T Math<T>::sqrt(T t)
-    {
-        #line 14
-        EGG_ASSERT(t >= 0);
-        return ::sqrt(t);
-    }
+#include <egg/math.h>
+#include <egg/prim.h>
 
-    template <typename T>
-    T Math<T>::sin(T t)
-    {
-        return ::sin(t);
-    }
+#include <cmath>
 
-    template <typename T>
-    T Math<T>::cos(T t)
-    {
-        return ::cos(t);
-    }
+namespace EGG {
 
-    template <typename T>
-    T Math<T>::atan2(T t1, T t2)
-    {
-        return ::atan2(t1, t2);
-    }
-
-    template struct Math<f32>;
+template <typename T> T Math<T>::sqrt(T t) {
+#line 14
+    EGG_ASSERT(t >= 0);
+    return std::sqrt(t);
 }
 
-const char * eggMath_asserts[] = {"-1 <= t && t <= 1", "gcd(%d,%d)\n"};
+template <typename T> T Math<T>::sin(T t) {
+    return std::sin(t);
+}
+
+template <typename T> T Math<T>::cos(T t) {
+    return std::cos(t);
+}
+
+template <typename T> T Math<T>::atan2(T t1, T t2) {
+    return std::atan2(t1, t2);
+}
+
+template class Math<f32>;
+
+DECOMP_FORCEACTIVE(eggMath_cpp, "-1 <= t && t <= 1", "gcd(%d,%d)\n");
+
+} // namespace EGG
