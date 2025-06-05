@@ -14,17 +14,15 @@ const Vector3f Vector3f::ex(1.0f, 0.0f, 0.0f);
 const Vector3f Vector3f::ey(0.0f, 1.0f, 0.0f);
 const Vector3f Vector3f::ez(0.0f, 0.0f, 1.0f);
 
+DECOMP_FORCELITERAL(eggVector_cpp, 1.0f);
+
 f32 Vector3f::normalise() {
-    // Force sdata2 ordering (1.0f, 0.0f)
-    1.0f;
-
     f32 mag = length();
-
     if (mag > 0.0f) {
-        f32 inv_mag = 1.0f / mag;
-        x *= inv_mag;
-        y *= inv_mag;
-        z *= inv_mag;
+        f32 invMag = 1.0f / mag;
+        x *= invMag;
+        y *= invMag;
+        z *= invMag;
     }
 
     return mag;
