@@ -9,7 +9,7 @@ public:
     static T sqrt(T t);
     static T sin(T t);
     static T cos(T t);
-    static T atan2(T t1, T t2);
+    static T atan2(T ty, T tx);
 };
 
 } // namespace EGG
