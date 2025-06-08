@@ -729,7 +729,7 @@ static void __ClearControlBlock(s32 chan) {
 
     p->dataFormat = WPAD_FMT_CORE_BTN;
     p->status = WPAD_ERR_NO_CONTROLLER;
-    p->devType = WPAD_DEV_NONE;
+    p->devType = WPAD_DEV_NOT_FOUND;
     p->devMode = WPAD_DEV_MODE_NORMAL;
 
     p->calibrated = FALSE;
@@ -1276,7 +1276,7 @@ s32 WPADProbe(s32 chan, s32* pDevType) {
     status = p->status;
 
     if (status != WPAD_ERR_NO_CONTROLLER) {
-        if (p->devType == WPAD_DEV_NONE) {
+        if (p->devType == WPAD_DEV_NOT_FOUND) {
             status = WPAD_ERR_NO_CONTROLLER;
         } else if (!p->handshakeFinished) {
             status = WPAD_ERR_COMMUNICATION_ERROR;
@@ -1964,8 +1964,7 @@ static BOOL IsBusyStream(s32 chan) {
 
     if (radioQuality != WPAD_RADIO_QUALITY_GOOD || btmBufferStatus > 3 ||
         bufferStatus == 10 || bufferStatus >= linkNumber * 2 + 2 ||
-        devType == WPAD_DEV_INITIALIZING || queueSize >= 21 ||
-        audioFrames >= 1) {
+        devType == WPAD_DEV_UNKNOWN || queueSize >= 21 || audioFrames >= 1) {
 
         return TRUE;
     } else {

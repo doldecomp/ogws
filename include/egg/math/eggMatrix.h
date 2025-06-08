@@ -2,6 +2,8 @@
 #define EGG_MATH_MATRIX_H
 #include <egg/types_egg.h>
 
+#include <egg/math/eggVector.h>
+
 #include <nw4r/math.h>
 
 namespace EGG {
@@ -25,38 +27,55 @@ public:
         _23 = _22 = _21 = _20 = 0.0f;
     }
 
+    Matrix34f& operator=(const Matrix34f& rOther) {
+        copyFrom(rOther);
+        return *this;
+    }
+
     f32& operator()(int i) {
         return a[i];
     }
-    const f32& operator()(int i) const {
+    const f32 operator()(int i) const {
         return a[i];
     }
 
     f32& operator()(int i, int j) {
         return m[i][j];
     }
-    const f32& operator()(int i, int j) const {
+    const f32 operator()(int i, int j) const {
         return m[i][j];
     }
 
     void copyFrom(const Matrix34f& rOther) {
-        for (int i = 0; i < ARRAY_SIZE(a); i++) {
+        for (int i = 0; i < 3 * 4; i++) {
             (*this)(i) = rOther(i);
         }
     }
 
-    /*
-    getBase__Q23EGG9Matrix34fCFiRQ23EGG8Vector3f
-    setBase__Q23EGG9Matrix34fFiRCQ23EGG8Vector3f
+    void getBase(int index, Vector3f& rBase) const {
+        rBase.x = (*this)(0, index);
+        rBase.y = (*this)(1, index);
+        rBase.z = (*this)(2, index);
+    }
+    void setBase(int index, const Vector3f& rBase) {
+        (*this)(0, index) = rBase.x;
+        (*this)(1, index) = rBase.y;
+        (*this)(2, index) = rBase.z;
+    }
 
-    getTranslation__Q23EGG9Matrix34fCFRQ23EGG8Vector3f
-    setTranslation__Q23EGG9Matrix34fFRCQ23EGG8Vector3f
+    void getTranslation(Vector3f& rTrans) const {
+        getBase(3, rTrans);
+    }
+    void setTranslation(const Vector3f& rTrans) {
+        setBase(3, rTrans);
+    }
 
-    multVectorTo__Q23EGG9Matrix34fCFRCQ23EGG8Vector3fRQ23EGG8Vector3f
-
-    concat__Q23EGG9Matrix34fCFRCQ23EGG9Matrix34fRQ23EGG9Matrix34f
-    rotate__Q23EGG9Matrix34fCFRCQ23EGG8Vector3f
-    */
+    Vector3f rotate(const Vector3f& rVec) const {
+        f32 x = _00 * rVec.x + _01 * rVec.y + _02 * rVec.z;
+        f32 y = _10 * rVec.x + _11 * rVec.y + _12 * rVec.z;
+        f32 z = _20 * rVec.x + _21 * rVec.y + _22 * rVec.z;
+        return Vector3f(x, y, z);
+    }
 
     void makeIdentity();
 

@@ -127,7 +127,7 @@ private:
 
 private:
     TBitFlag<u16> mFlags;         // at 0x1C
-    nw4r::ut::Link mLink;         // at 0x20
+    NW4R_UT_LIST_LINK_DECL();     // at 0x20
     nw4r::ut::List mDisposerList; // at 0x28
 
     static Heap* sCurrentHeap;
@@ -148,7 +148,7 @@ void* operator new[](size_t size);
 void* operator new[](size_t size, int align);
 void* operator new[](size_t size, EGG::Heap* pHeap, int align = 4);
 
-void operator delete(void* pBlock);
-void operator delete[](void* pBlock);
+void operator delete(void* pBlock) noexcept;
+void operator delete[](void* pBlock) noexcept;
 
 #endif

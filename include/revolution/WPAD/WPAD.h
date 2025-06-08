@@ -104,14 +104,14 @@ typedef enum {
 
 typedef enum {
     WPAD_DEV_CORE,
-    WPAD_DEV_FS,
+    WPAD_DEV_FREESTYLE,
     WPAD_DEV_CLASSIC,
 
-    WPAD_DEV_251 = 251,
-    WPAD_DEV_252 = 252,
-    WPAD_DEV_NONE = 253,
-
-    WPAD_DEV_INITIALIZING = 255,
+    WPAD_DEV_FUTURE = 251,
+    WPAD_DEV_NOT_SUPPORTED = 252,
+    WPAD_DEV_NOT_FOUND = 253,
+    WPAD_DEV_NULL = 254,
+    WPAD_DEV_UNKNOWN = 255,
 } WPADDeviceType;
 
 typedef enum {

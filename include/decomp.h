@@ -6,8 +6,7 @@
 #ifndef DECOMP_H
 #define DECOMP_H
 
-#define __CONCAT(x, y) x##y
-#define CONCAT(x, y) __CONCAT(x, y)
+#include <macros.h>
 
 // Compile without matching hacks.
 #ifdef __DECOMP_NON_MATCHING
@@ -36,7 +35,7 @@
 
 // Force reference destructor
 #define DECOMP_FORCEACTIVE_DTOR(module, cls)                                   \
-    void CONCAT(FORCEDTOR##module##cls, __LINE__)(void);                          \
+    void CONCAT(FORCEDTOR##module##cls, __LINE__)(void);                       \
     void CONCAT(FORCEDTOR##module##cls, __LINE__)(void) {                      \
         cls dummy;                                                             \
         dummy.~cls();                                                          \

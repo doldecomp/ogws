@@ -17,8 +17,10 @@ public:
     virtual ~Disposer(); // at 0x8
 
 private:
-    Heap* mContainHeap;   // at 0x4
-    nw4r::ut::Link mLink; // at 0x8
+    Heap* mContainHeap; // at 0x4
+
+public:
+    NW4R_UT_LIST_LINK_DECL(); // at 0x8
 };
 
 } // namespace EGG

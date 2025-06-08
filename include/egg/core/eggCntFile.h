@@ -18,12 +18,11 @@ public:
     CntFile();
     virtual ~CntFile(); // at 0x8
 
-    virtual bool open(const char* /* pPath */) // at 0xC
-    {
+    virtual bool open(const char* /* pPath */) {
 #line 57
         EGG_ASSERT(false);
         return false;
-    }
+    } // at 0xC
 
     bool open(const char* pPath, CNTHandle* pHandle);
 

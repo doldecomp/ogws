@@ -58,6 +58,25 @@ inline u16 List_GetSize(const List* pList) {
     return pList->numObjects;
 }
 
+/******************************************************************************
+ *
+ * Macros
+ *
+ ******************************************************************************/
+/**
+ * Declares a member Link.
+ */
+#define NW4R_UT_LIST_LINK_DECL() nw4r::ut::Link link
+
+/**
+ * Initializes a List object for use with the specified type.
+ *
+ * @param LIST Reference to list
+ * @param T List element type
+ */
+#define NW4R_UT_LIST_INIT(LIST, T)                                             \
+    nw4r::ut::List_Init(&(LIST), offsetof(T, link))
+
 /**
  * Gets the underlying Link within the specified object.
  *
