@@ -22,6 +22,7 @@
 #include <egg/core/eggScene.h>
 #include <egg/core/eggSceneCreator.h>
 #include <egg/core/eggSceneManager.h>
+#include <egg/core/eggSingleton.h>
 #include <egg/core/eggStream.h>
 #include <egg/core/eggSystem.h>
 #include <egg/core/eggTaskThread.h>

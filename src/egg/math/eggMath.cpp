@@ -22,12 +22,14 @@ template <typename T> T Math<T>::cos(T t) {
     return std::cos(t);
 }
 
-template <typename T> T Math<T>::atan2(T t1, T t2) {
-    return std::atan2(t1, t2);
+template <typename T> T Math<T>::atan2(T ty, T tx) {
+    return std::atan2(ty, tx);
 }
 
 template class Math<f32>;
 
-DECOMP_FORCEACTIVE(eggMath_cpp, "-1 <= t && t <= 1", "gcd(%d,%d)\n");
+DECOMP_FORCEACTIVE(eggMath_cpp,
+                  "-1 <= t && t <= 1",
+                  "gcd(%d,%d)\n");
 
 } // namespace EGG

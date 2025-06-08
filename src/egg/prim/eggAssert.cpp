@@ -1,59 +1,69 @@
-#include "eggAssert.h"
+// TODO: REMOVE AFTER REFACTOR
+#pragma ipa file
+
+#include <egg/prim.h>
+
 #include <revolution/OS.h>
-#include <string.h>
-#include <stdio.h>
 
-void system_print(bool bVisible, char *file, char *msg, ...)
-{
-    if (!bVisible) return;
+#include <cstdio>
+#include <cstring>
 
-    char filename_buf[0x100];
-    for (int i = 0; i < strlen(file); i++)
-    {
-        if (i >= 0x100) return;
+void system_print(bool visible, char* pFile, char* pMsg, ...) {
+    if (!visible) {
+        return;
+    }
 
-        filename_buf[i] = file[i];
+    char fileName[256];
 
-        if (file[i] == '.')
-        {
-            filename_buf[i] = '\0';
+    for (int i = 0; i < std::strlen(pFile); i++) {
+        if (i >= 256) {
+            return;
+        }
+
+        fileName[i] = pFile[i];
+
+        if (pFile[i] == '.') {
+            fileName[i] = '\0';
             break;
         }
     }
-    OSReport("%s:", filename_buf);
 
-    char msg_buf[0x800];
-    va_list list;
-    va_start(list, msg);
-    vsnprintf(msg_buf, sizeof(msg_buf), msg, list);
+    OSReport("%s:", fileName);
+
+    char msgBuf[2048];
+
+    std::va_list list;
+    va_start(list, pMsg);
+    std::vsnprintf(msgBuf, sizeof(msgBuf), pMsg, list);
     va_end(list);
-    OSReport("%s", msg_buf);
+
+    OSReport("%s", msgBuf);
 }
 
-void system_halt(char *file, int line, char *msg, ...)
-{
+void system_halt(char* pFile, int line, char* pMsg, ...) {
     OSReport("---------- HALT -------------\n");
 
-    char filename_buf[0x100];
-    for (int i = 0; i < strlen(file); i++)
-    {
-        filename_buf[i] = file[i];
+    char fileName[256];
+    for (int i = 0; i < std::strlen(pFile); i++) {
+        fileName[i] = pFile[i];
 
-        if (file[i] == '.')
-        {
-            filename_buf[i] = '\0';
+        if (pFile[i] == '.') {
+            fileName[i] = '\0';
             break;
         }
     }
-    OSReport("%s(%d):", filename_buf, line);
 
-    char msg_buf[0x800];
-    va_list list;
-    va_start(list, msg);
-    vsnprintf(msg_buf, sizeof(msg_buf), msg, list);
+    OSReport("%s(%d):", fileName, line);
+
+    char msg_buf[2048];
+
+    std::va_list list;
+    va_start(list, pMsg);
+    std::vsnprintf(msg_buf, sizeof(msg_buf), pMsg, list);
     va_end(list);
+
     OSReport("%s\n", msg_buf);
 
-    #line 190
+#line 190
     OS_ERROR("Program Halt");
 }

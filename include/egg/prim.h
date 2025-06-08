@@ -2,5 +2,6 @@
 #define EGG_PUBLIC_PRIM_H
 
 #include <egg/prim/eggAssert.h>
+#include <egg/prim/eggBuffer.h>
 
 #endif

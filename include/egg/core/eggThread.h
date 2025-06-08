@@ -79,8 +79,11 @@ private:
     int mMesgNum;              // at 0x30
     void* mStackMemory;        // at 0x34
     u32 mStackSize;            // at 0x38
-    nw4r::ut::Link mLink;      // at 0x3C
 
+public:
+    NW4R_UT_LIST_LINK_DECL(); // at 0x3C
+
+private:
     static nw4r::ut::List sThreadList;
 };
 

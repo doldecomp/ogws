@@ -1,6 +1,9 @@
 #ifndef MACROS_H
 #define MACROS_H
 
+#define __CONCAT(x, y) x##y
+#define CONCAT(x, y) __CONCAT(x, y)
+
 #define MAX(x, y) ((x) > (y) ? (x) : (y))
 #define MIN(x, y) ((x) < (y) ? (x) : (y))
 

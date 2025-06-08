@@ -19,7 +19,7 @@ void DvdFile::initialize() {
         return;
     }
 
-    nw4r::ut::List_Init(&sDvdList, offsetof(DvdFile, mLink));
+    NW4R_UT_LIST_INIT(sDvdList, DvdFile);
     sIsInitialized = true;
 }
 

@@ -16,8 +16,8 @@
 extern "C" {
 #endif
 
-void system_halt(char* file, int line, char* msg, ...);
-void system_print(bool bVisible, char* file, char* msg, ...);
+void system_halt(char* pFile, int line, char* pMsg, ...);
+void system_print(bool visible, char* pFile, char* pMsg, ...);
 
 #ifdef __cplusplus
 }

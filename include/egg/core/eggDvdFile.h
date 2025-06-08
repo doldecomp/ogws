@@ -67,8 +67,10 @@ private:
     OSMessage mSyncBuffer[1];  // at 0xC0
     OSThread* mSyncThread;     // at 0xC4
 
-    nw4r::ut::Link mLink; // at 0xC8
+public:
+    NW4R_UT_LIST_LINK_DECL(); // at 0xC8
 
+private:
     static nw4r::ut::List sDvdList;
     static bool sIsInitialized;
 };

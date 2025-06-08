@@ -46,7 +46,7 @@ Archive* Archive::findArchive(void* pArcBinary) {
 
 void Archive::appendList(Archive* pArchive) {
     if (!sIsArchiveListInitialized) {
-        nw4r::ut::List_Init(&sArchiveList, offsetof(Archive, mLink));
+        NW4R_UT_LIST_INIT(sArchiveList, Archive);
         sIsArchiveListInitialized = true;
     }
 

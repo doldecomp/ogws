@@ -1,5 +1,5 @@
-#ifndef TYPES_EGG_H
-#define TYPES_EGG_H
+#ifndef EGG_TYPES_H
+#define EGG_TYPES_H
 #include <types.h>
 
 namespace EGG

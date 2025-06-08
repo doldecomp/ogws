@@ -75,7 +75,7 @@ Thread* Thread::findThread(OSThread* pOSThread) {
 }
 
 void Thread::initialize() {
-    nw4r::ut::List_Init(&sThreadList, offsetof(Thread, mLink));
+    NW4R_UT_LIST_INIT(sThreadList, Thread);
     OSSetSwitchThreadCallback(Thread::switchThreadCallback);
 }
 

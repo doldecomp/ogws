@@ -32,7 +32,7 @@ public:
     f32& operator()(int i) {
         return reinterpret_cast<f32*>(&x)[i];
     }
-    const f32& operator()(int i) const {
+    const f32 operator()(int i) const {
         return reinterpret_cast<const f32*>(&x)[i];
     }
 
@@ -45,6 +45,10 @@ public:
         x = rRhs.x;
         y = rRhs.y;
         return *this;
+    }
+
+    Vector2f operator-() const {
+        return Vector2f(-x, -y);
     }
 
     Vector2f operator+(const Vector2f& rRhs) const {
@@ -153,7 +157,7 @@ public:
     f32& operator()(int i) {
         return reinterpret_cast<f32*>(&x)[i];
     }
-    const f32& operator()(int i) const {
+    const f32 operator()(int i) const {
         return reinterpret_cast<const f32*>(&x)[i];
     }
 
@@ -168,6 +172,10 @@ public:
         y = rRhs.y;
         z = rRhs.z;
         return *this;
+    }
+
+    Vector3f operator-() const {
+        return Vector3f(-x, -y, -z);
     }
 
     Vector3f operator+(const Vector3f& rRhs) const {

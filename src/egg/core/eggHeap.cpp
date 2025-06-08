@@ -20,7 +20,7 @@ OSMutex Heap::sRootMutex;
 Heap* Heap::sAllocatableHeap = NULL;
 
 void Heap::initialize() {
-    nw4r::ut::List_Init(&sHeapList, offsetof(Heap, mLink));
+    NW4R_UT_LIST_INIT(sHeapList, Heap);
     OSInitMutex(&sRootMutex);
     sIsHeapListInitialized = TRUE;
 }
@@ -28,7 +28,7 @@ void Heap::initialize() {
 Heap::Heap(MEMiHeapHead* pHeapHandle)
     : mHeapHandle(pHeapHandle), mHeapBuffer(NULL), mParentHeap(NULL) {
 
-    nw4r::ut::List_Init(&mDisposerList, offsetof(Disposer, mLink));
+    NW4R_UT_LIST_INIT(mDisposerList, Disposer);
 
 #line 63
     EGG_ASSERT_MSG(sIsHeapListInitialized, "Please call Heap::initialize()");

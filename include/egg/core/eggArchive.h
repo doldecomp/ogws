@@ -54,8 +54,11 @@ private:
     MountType mMountType; // at 0x10
     u32 mRefCount;        // at 0x14
     ARCHandle mHandle;    // at 0x18
-    nw4r::ut::Link mLink; // at 0x34
 
+public:
+    NW4R_UT_LIST_LINK_DECL(); // at 0x34
+
+private:
     static nw4r::ut::List sArchiveList;
     static bool sIsArchiveListInitialized;
 };

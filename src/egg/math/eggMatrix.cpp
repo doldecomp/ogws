@@ -42,27 +42,27 @@ void Matrix34f::makeIdentity() {
 }
 
 void Matrix34f::makeQ(const Quatf& rQuat) {
-    f32 yy = 2 * rQuat.v.y * rQuat.v.y;
-    f32 zz = 2 * rQuat.v.z * rQuat.v.z;
-    f32 xx = 2 * rQuat.v.x * rQuat.v.x;
-    f32 xy = 2 * rQuat.v.x * rQuat.v.y;
-    f32 xz = 2 * rQuat.v.x * rQuat.v.z;
-    f32 yz = 2 * rQuat.v.y * rQuat.v.z;
-    f32 wz = 2 * rQuat.w * rQuat.v.z;
-    f32 wx = 2 * rQuat.w * rQuat.v.x;
-    f32 wy = 2 * rQuat.w * rQuat.v.y;
+    f32 yy = 2.0f * rQuat.v.y * rQuat.v.y;
+    f32 zz = 2.0f * rQuat.v.z * rQuat.v.z;
+    f32 xx = 2.0f * rQuat.v.x * rQuat.v.x;
+    f32 xy = 2.0f * rQuat.v.x * rQuat.v.y;
+    f32 xz = 2.0f * rQuat.v.x * rQuat.v.z;
+    f32 yz = 2.0f * rQuat.v.y * rQuat.v.z;
+    f32 wz = 2.0f * rQuat.w * rQuat.v.z;
+    f32 wx = 2.0f * rQuat.w * rQuat.v.x;
+    f32 wy = 2.0f * rQuat.w * rQuat.v.y;
 
-    _00 = 1 - yy - zz;
+    _00 = 1.0f - yy - zz;
     _01 = xy - wz;
     _02 = xz + wy;
 
     _10 = xy + wz;
-    _11 = 1 - xx - zz;
+    _11 = 1.0f - xx - zz;
     _12 = yz - wx;
 
     _20 = xz - wy;
     _21 = yz + wx;
-    _22 = 1 - xx - yy;
+    _22 = 1.0f - xx - yy;
 
     _03 = 0.0f;
     _13 = 0.0f;

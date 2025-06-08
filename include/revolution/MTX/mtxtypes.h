@@ -12,6 +12,10 @@ typedef struct Vec {
     f32 x, y, z;
 } Vec;
 
+typedef struct Vec2 {
+    f32 x, y;
+} Vec2;
+
 typedef struct Quaternion {
     f32 x, y, z, w;
 } Quaternion;
