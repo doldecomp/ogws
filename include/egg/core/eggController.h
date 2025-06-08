@@ -32,6 +32,22 @@ enum eCoreDevType {
 };
 
 enum eCoreButton {
+    cCORE_BUTTON_UP = 1 << 3,
+    cCORE_BUTTON_DOWN = 1 << 2,
+    cCORE_BUTTON_LEFT = 1 << 0,
+    cCORE_BUTTON_RIGHT = 1 << 1,
+
+    cCORE_BUTTON_PLUS = 1 << 4,
+    cCORE_BUTTON_MINUS = 1 << 12,
+
+    cCORE_BUTTON_1 = 1 << 9,
+    cCORE_BUTTON_2 = 1 << 8,
+
+    cCORE_BUTTON_A = 1 << 11,
+    cCORE_BUTTON_B = 1 << 10,
+
+    cCORE_BUTTON_HOME = 1 << 15,
+
     cCORE_FSSTICK_UP = 1 << 16,
     cCORE_FSSTICK_DOWN = 1 << 17,
     cCORE_FSSTICK_LEFT = 1 << 18,
