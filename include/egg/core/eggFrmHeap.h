@@ -16,7 +16,7 @@ public:
         DECOMP_DONT_INLINE;
     static FrmHeap* create(u32 size, Heap* pParentHeap, u16 opt = 0);
 
-    FrmHeap(MEMiHeapHead* pHeapHandle);
+    explicit FrmHeap(MEMiHeapHead* pHeapHandle);
     virtual ~FrmHeap(); // at 0x8
 
     virtual EHeapKind getHeapKind() const {

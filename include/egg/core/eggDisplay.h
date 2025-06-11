@@ -15,7 +15,7 @@ protected:
     TBitFlag<u8> mEfbFlags; // at 0x0
 
 public:
-    Display(u8 frameRate);
+    explicit Display(u8 frameRate);
 
     virtual void beginFrame();  // at 0x8
     virtual void beginRender(); // at 0xC

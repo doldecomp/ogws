@@ -11,7 +11,7 @@ namespace EGG {
 
 class Video {
 public:
-    Video(GXRenderModeObj* pRenderMode)
+    explicit Video(GXRenderModeObj* pRenderMode)
         : mRenderMode(NULL), mConfiguredTime(0) {
 
         initialize(pRenderMode);

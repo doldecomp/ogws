@@ -32,7 +32,7 @@ public:
     static void* alloc(u32 size, int align, Heap* pHeap);
     static void free(void* pBlock, Heap* pHeap);
 
-    Heap(MEMiHeapHead* pHeapHandle);
+    explicit Heap(MEMiHeapHead* pHeapHandle);
     virtual ~Heap(); // at 0x8
 
     virtual EHeapKind getHeapKind() const = 0; // at 0xC

@@ -6,6 +6,8 @@
 #include <nw4r/snd/snd_RemoteSpeakerManager.h>
 #include <nw4r/snd/snd_TaskThread.h>
 
+#include <revolution/OS.h>
+
 namespace nw4r {
 namespace snd {
 
@@ -14,6 +16,12 @@ class FxBase;
 
 class SoundSystem {
 public:
+    static const int DEFAULT_DVD_THREAD_PRIORITY = 3;
+    static const int DEFAULT_DVD_THREAD_STACK_SIZE = OS_MEM_KB_TO_B(16);
+
+    static const int DEFAULT_SOUND_THREAD_PRIORITY = 4;
+    static const int DEFAULT_SOUND_THREAD_STACK_SIZE = OS_MEM_KB_TO_B(16);
+
     struct SoundSystemParam {
         s32 soundThreadPriority;  // at 0x0
         u32 soundThreadStackSize; // at 0x4
@@ -63,13 +71,6 @@ public:
     static void ClearEffect(AuxBus bus, int frame) {
         detail::AxManager::GetInstance().ClearEffect(bus, frame);
     }
-
-private:
-    static const int DEFAULT_DVD_THREAD_PRIORITY = 3;
-    static const int DEFAULT_DVD_THREAD_STACK_SIZE = 0x4000;
-
-    static const int DEFAULT_SOUND_THREAD_PRIORITY = 4;
-    static const int DEFAULT_SOUND_THREAD_STACK_SIZE = 0x4000;
 
 private:
     static detail::TaskThread sTaskThread;

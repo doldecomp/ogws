@@ -32,7 +32,7 @@ public:
         return mShutDownStatus;
     }
 
-private:
+protected:
     AudioSystem();
     ~AudioSystem();
 

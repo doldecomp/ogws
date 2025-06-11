@@ -16,7 +16,7 @@ public:
         DECOMP_DONT_INLINE;
     static ExpHeap* create(u32 size, Heap* pParentHeap, u16 opt = 0);
 
-    ExpHeap(MEMiHeapHead* pHeapHandle);
+    explicit ExpHeap(MEMiHeapHead* pHeapHandle);
     virtual ~ExpHeap(); // at 0x8
 
     virtual EHeapKind getHeapKind() const {
