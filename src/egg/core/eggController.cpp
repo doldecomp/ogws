@@ -309,7 +309,7 @@ CoreControllerMgr::CoreControllerMgr() {
         ExpHeap::create(sWPADWorkSize, BaseSystem::getRootHeapMem2());
 
     sAllocator = new Allocator(pHeap, 32);
-    WUDRegisterAllocator(alloc, free);
+    WPADRegisterAllocator(alloc, free);
 
     KPADInit();
 
