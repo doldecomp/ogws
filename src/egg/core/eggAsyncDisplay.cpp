@@ -205,25 +205,17 @@ void AsyncDisplay::clearEFB(u16 fbWidth, u16 fbHeight, u16 x, u16 y, u16 width,
 
     GXBegin(GX_QUADS, GX_VTXFMT0, 4);
     {
-        GXCmd1u16(x);
-        GXCmd1u16(y);
-        GXCmd1u8(0);
-        GXCmd1u8(0);
+        GXPosition2u16(x, y);
+        GXTexCoord2u8(0, 0);
 
-        GXCmd1u16(x + width);
-        GXCmd1u16(y);
-        GXCmd1u8(1);
-        GXCmd1u8(0);
+        GXPosition2u16(x + width, y);
+        GXTexCoord2u8(1, 0);
 
-        GXCmd1u16(x + width);
-        GXCmd1u16(y + height);
-        GXCmd1u8(1);
-        GXCmd1u8(1);
+        GXPosition2u16(x + width, y + height);
+        GXTexCoord2u8(1, 1);
 
-        GXCmd1u16(x);
-        GXCmd1u16(y + height);
-        GXCmd1u8(0);
-        GXCmd1u8(1);
+        GXPosition2u16(x, y + height);
+        GXTexCoord2u8(0, 1);
     }
     GXEnd();
 

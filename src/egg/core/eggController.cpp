@@ -26,7 +26,7 @@ u32 CoreStatus::getFSStickButton() {
     EGG_ASSERT_MSG(isFreestyle(), "This Status is not for Free Style");
 
     f32 sx = getFSStickX();
-    if (!(-0.25f < sx) || !(sx < 0.25f)) {
+    if (!(-0.25f < sx && sx < 0.25f)) {
         if (sx <= -0.5f) {
             buttons = 0;
             buttons |= cCORE_FSSTICK_LEFT;
@@ -37,7 +37,7 @@ u32 CoreStatus::getFSStickButton() {
     }
 
     f32 sy = getFSStickY();
-    if (!(-0.25f < sy) || !(sy < 0.25f)) {
+    if (!(-0.25f < sy && sy < 0.25f)) {
         if (sy <= -0.5f) {
             buttons &= ~cCORE_FSSTICK_UP;
             buttons |= cCORE_FSSTICK_DOWN;

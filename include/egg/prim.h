@@ -3,5 +3,6 @@
 
 #include <egg/prim/eggAssert.h>
 #include <egg/prim/eggBuffer.h>
+#include <egg/prim/eggNw4rList.h>
 
 #endif

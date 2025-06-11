@@ -19,15 +19,18 @@
 #include <egg/core/eggGraphicsFifo.h>
 #include <egg/core/eggHeap.h>
 #include <egg/core/eggPerformanceView.h>
+#include <egg/core/eggProcessMeter.h>
 #include <egg/core/eggScene.h>
 #include <egg/core/eggSceneCreator.h>
 #include <egg/core/eggSceneManager.h>
 #include <egg/core/eggSingleton.h>
+#include <egg/core/eggStopWatch.h>
 #include <egg/core/eggStream.h>
 #include <egg/core/eggSystem.h>
 #include <egg/core/eggTaskThread.h>
 #include <egg/core/eggThread.h>
 #include <egg/core/eggVideo.h>
+#include <egg/core/eggWatch.h>
 #include <egg/core/eggXfb.h>
 #include <egg/core/eggXfbManager.h>
 

@@ -25,6 +25,9 @@ WhitespaceSensitiveMacros: [
   EGG_ASSERT,
   EGG_ASSERT_MSG,
 ]
+ForEachMacros: [
+  EGG_NW4R_LIST_FOREACH,
+]
 AttributeMacros: [DECOMP_INLINE, DECOMP_DONT_INLINE]
 InsertNewlineAtEOF: true
 

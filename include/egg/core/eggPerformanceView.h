@@ -13,11 +13,11 @@ public:
     virtual void measureEndRender() = 0;   // at 0x14
 
     virtual void callbackDrawSync(u16 token) = 0; // at 0x18
-    virtual UNKTYPE VF_0x1C(UNKTYPE) = 0;         // at 0x1C
+    virtual void VF_0x1C() {}                     // at 0x1C
     virtual void draw() = 0;                      // at 0x20
 
-    virtual void setVisible(bool enable) = 0; // at 0x24
-    virtual bool isVisible() = 0;             // at 0x28
+    virtual void setVisible(bool visible) = 0; // at 0x24
+    virtual bool isVisible() = 0;              // at 0x28
 };
 
 } // namespace EGG

@@ -16,7 +16,7 @@ public:
     static void initialize();
     static Thread* findThread(OSThread* pOSThread);
 
-    Thread(u32 stackSize, int capacity, int priority, Heap* pHeap);
+    Thread(u32 stackSize, int capacity, int priority, Heap* pHeap = NULL);
     Thread(OSThread* pOSThread, int capacity);
     virtual ~Thread(); // at 0x8
 
