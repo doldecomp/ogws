@@ -61,6 +61,10 @@ bool AudioFx::create(u32 fxType, const void* pParam) {
         return createFxDelay(
             static_cast<const nw4r::snd::FxDelay::DelayParam*>(pParam));
     }
+
+    default: {
+        return false;
+    }
     }
 }
 
@@ -138,7 +142,7 @@ bool AudioFx::createFxReverbHiDpl2(
     }
 
     // Allocate a buffer just for fun :^)
-    void* pReverbBuffer = new (mHeap) u8[sizeof(nw4r::snd::FxReverbHiDpl2)];
+    u8* pReverbBuffer = new (mHeap) u8[sizeof(nw4r::snd::FxReverbHiDpl2)];
     std::memset(pReverbBuffer, 0, sizeof(nw4r::snd::FxReverbHiDpl2));
     delete pReverbBuffer;
 

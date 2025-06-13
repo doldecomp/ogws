@@ -77,7 +77,7 @@ public:
     void createSoundHeap(Allocator* pAllocator, u32 size);
     void destroySoundHeap();
 
-private:
+protected:
     nw4r::snd::SoundHeap mHeap; // at 0x4
 
     OSMessageQueue mGetLevelMesgQueue; // at 0x30

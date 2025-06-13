@@ -16,7 +16,7 @@ class ExpHeap;
  ******************************************************************************/
 class AudioFx {
 public:
-    enum FxType {
+    enum Type {
         TYPE_AXFX_NONE,
         TYPE_AXFX_REVERBHI,
         TYPE_AXFX_REVERBHI_DPL2,
@@ -47,7 +47,7 @@ private:
     nw4r::snd::FxBase* mFxBase; // at 0x0
     nw4r::snd::AuxBus mAuxBus;  // at 0x4
     const void* mParam;         // at 0x8
-    FxType mType;               // at 0xC
+    Type mType;                 // at 0xC
     ExpHeap* mHeap;             // at 0x10
     u8* mWorkBuffer;            // at 0x14
 };
@@ -59,6 +59,9 @@ private:
  ******************************************************************************/
 class AudioFxMgr {
 public:
+    /**************************************************************************
+     * AudioFxMgrArg
+     **************************************************************************/
     struct AudioFxMgrArg {
         u32 heapSize[nw4r::snd::AUX_BUS_NUM]; // at 0x0
     };

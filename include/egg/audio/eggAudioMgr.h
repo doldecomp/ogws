@@ -65,7 +65,7 @@ public:
     /**************************************************************************
      * SimpleAudioMgrArg
      **************************************************************************/
-    struct SimpleAudioMgrArg : public IAudioMgr::Arg {
+    struct SimpleAudioMgrArg : IAudioMgr::Arg {
         // TODO: How is this calculated?
         static const u32 DEFAULT_SOUND_HEAP_SIZE = 0x8CA000;
 

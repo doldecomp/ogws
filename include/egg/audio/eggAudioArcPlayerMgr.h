@@ -131,7 +131,7 @@ public:
         return *mPlayer;
     }
 
-private:
+protected:
     bool mIsOpeningArchive; // at 0x4
     bool mIsLoadingGroup;   // at 0x5
 

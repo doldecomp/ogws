@@ -1386,7 +1386,6 @@ egg/audio/eggAudioExpMgr.cpp:
 	.rodata     start:0x8037AE50 end:0x8037AE68
 	.data       start:0x80398570 end:0x80398690
 	.sdata      start:0x804BD518 end:0x804BD528
-	.sbss       start:0x804BED40 end:0x804BED48
 	.sdata2     start:0x804C0AB8 end:0x804C0AC0
 
 egg/audio/eggAudioFxMgr.cpp:
@@ -1401,6 +1400,9 @@ egg/audio/eggAudioMgr.cpp:
 	.text       start:0x800B0B90 end:0x800B0F18
 	.rodata     start:0x8037B0E8 end:0x8037B100
 	.data       start:0x80398690 end:0x80398760
+
+egg/audio/eggAudio3DActor.cpp:
+	.sbss       start:0x804BED40 end:0x804BED48
 
 egg/audio/eggAudioSystem.cpp:
 	.text       start:0x800B0F18 end:0x800B106C

@@ -8,7 +8,6 @@ namespace detail {
 /**
  * Dummy class to instantiate necessary weak functions
  */
-
 #ifndef __DECOMP_NON_MATCHING
 class MidiSeqPlayer : public SeqPlayer {
 private:
