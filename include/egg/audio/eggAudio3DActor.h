@@ -2,8 +2,6 @@
 #define EGG_AUDIO_3D_ACTOR_H
 #include <egg/types_egg.h>
 
-#include <egg/prim.h>
-
 #include <nw4r/snd.h>
 
 namespace EGG {
