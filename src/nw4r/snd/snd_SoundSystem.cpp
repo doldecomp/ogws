@@ -63,21 +63,25 @@ void SoundSystem::InitSoundSystem(const SoundSystemParam& rParam, void* pWork,
     }
 
     switch (SCGetSoundMode()) {
-    case SC_SND_MONO:
+    case SC_SND_MONO: {
         detail::AxManager::GetInstance().SetOutputMode(OUTPUT_MODE_MONO);
         break;
+    }
 
-    case SC_SND_STEREO:
+    case SC_SND_STEREO: {
         detail::AxManager::GetInstance().SetOutputMode(OUTPUT_MODE_STEREO);
         break;
+    }
 
-    case SC_SND_SURROUND:
+    case SC_SND_SURROUND: {
         detail::AxManager::GetInstance().SetOutputMode(OUTPUT_MODE_DPL2);
         break;
+    }
 
-    default:
+    default: {
         detail::AxManager::GetInstance().SetOutputMode(OUTPUT_MODE_STEREO);
         break;
+    }
     }
 
     detail::RemoteSpeakerManager::GetInstance().Setup();

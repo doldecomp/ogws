@@ -11,7 +11,7 @@ class Heap;
 
 class Allocator : public MEMAllocator {
 public:
-    Allocator(Heap* pHeap, s32 align);
+    Allocator(Heap* pHeap, s32 align = 32);
     virtual ~Allocator();
 
     virtual void* alloc(u32 size);

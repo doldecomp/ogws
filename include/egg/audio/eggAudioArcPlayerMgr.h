@@ -1,120 +1,153 @@
-#ifndef EGG_AUDIO_ARCPLAYER_MGR_H
-#define EGG_AUDIO_ARCPLAYER_MGR_H
-#include "types_egg.h"
-#include "types_nw4r.h"
-#include "snd_SoundHeap.h"
-#include "snd_DvdSoundArchive.h"
-#include "snd_NandSoundArchive.h"
-#include "snd_MemorySoundArchive.h"
-#include "snd_SoundArchivePlayer.h"
+#ifndef EGG_AUDIO_ARC_PLAYER_MGR_H
+#define EGG_AUDIO_ARC_PLAYER_MGR_H
+#include <egg/types_egg.h>
+
+#include <nw4r/snd.h>
+
 #include <revolution/CNT.h>
+#include <revolution/OS.h>
 
-namespace EGG
-{
-    class ArcPlayer
-    {
-    public:
-        enum SARC_STORAGE
-        {
-            STORAGE_NONE,
-            STORAGE_DVD,
-            STORAGE_NAND,
-            STORAGE_CNT,
-            STORAGE_MEM
-        };
+namespace EGG {
 
-        ArcPlayer(nw4r::snd::SoundHeap *);
-        virtual ~ArcPlayer(); // at 0x8
-        bool setSteamBlocks(u32);
-        void stopAllSound();
-
-        u32 changeNameToId(const char *name) { return mOpenSndArchive->ConvertLabelStringToSoundId(name); }
-        nw4r::snd::SoundArchivePlayer * getPlayer() { return mActiveSndArchivePlayer; }
-
-        virtual UNKTYPE * openArchive(const char *, nw4r::snd::SoundHeap *, SARC_STORAGE, CNTHandle *); // at 0xC
-        virtual UNKTYPE * openDvdArchive(const char *, nw4r::snd::SoundHeap *); // at 0x10
-        virtual UNKTYPE * openNandArchive(const char *, nw4r::snd::SoundHeap *); // at 0x14
-        virtual UNKTYPE * openCntArchive(const char *, CNTHandle *, nw4r::snd::SoundHeap *); // at 0x18
-        virtual UNKTYPE * setupMemoryArchive(const void *, nw4r::snd::SoundHeap *); // at 0x1C
-
-        virtual UNKTYPE * setupMemoryArchive(const void *p, nw4r::snd::SoundHeap *heap, s32) // at 0x20
-        { 
-            return setupMemoryArchive(p, heap);
-        }
-
-        virtual UNKTYPE closeArchive(); // at 0x24
-        virtual bool loadGroup(unsigned int, nw4r::snd::SoundHeap *, u32); // at 0x28
-        virtual bool loadGroup(int, nw4r::snd::SoundHeap *, u32); // at 0x2C
-        virtual bool loadGroup(const char *, nw4r::snd::SoundHeap *, u32); // at 0x30   
-        virtual void calc(); // at 0x34
-
-        virtual bool startSound(nw4r::snd::SoundHandle *handle, u32 id) // at 0x38
-        {
-            return mActiveSndArchivePlayer->StartSound(handle, id);
-        }
-
-        virtual bool startSound(nw4r::snd::SoundHandle *handle, unsigned int id) // at 0x3C
-        {
-            return ArcPlayer::startSound(handle, (u32)id);
-        }
-
-        virtual bool startSound(nw4r::snd::SoundHandle *handle, const char *name)  // at 0x40
-        {
-            u32 id = -1;
-            if (mOpenSndArchive) id = changeNameToId(name);
-
-            return ArcPlayer::startSound(handle, id);
-        }
-
-        virtual bool prepareSound(nw4r::snd::SoundHandle *handle, u32 id) // at 0x44
-        {
-            return mActiveSndArchivePlayer->PrepareSound(handle, id);
-        }
-
-        virtual bool prepareSound(nw4r::snd::SoundHandle *handle, unsigned int id) // at 0x48
-        {
-            return ArcPlayer::prepareSound(handle, (u32)id);
-        }
-
-        virtual bool prepareSound(nw4r::snd::SoundHandle *handle, const char *name) // at 0x4C
-        {
-            u32 id = -1;
-            if (mOpenSndArchive) id = changeNameToId(name);
-
-            return ArcPlayer::prepareSound(handle, id);
-        }
-
-        virtual bool holdSound(nw4r::snd::SoundHandle *handle, u32 id) // at 0x50
-        {
-            return mActiveSndArchivePlayer->HoldSound(handle, id);
-        }
-
-        virtual bool holdSound(nw4r::snd::SoundHandle *handle, unsigned int id) // at 0x54
-        {
-            return ArcPlayer::holdSound(handle, (u32)id);
-        }
-
-        virtual bool holdSound(nw4r::snd::SoundHandle *handle, const char *name) // at 0x58
-        {
-            u32 id = -1;
-            if (mOpenSndArchive) id = changeNameToId(name);
-
-            return ArcPlayer::holdSound(handle, id);
-        }
-
-    private:
-        bool mIsOpeningArchive; // at 0x4
-        bool mIsLoadingGroup; // at 0x5
-        nw4r::snd::SoundArchive *mOpenSndArchive; // at 0x8
-        nw4r::snd::DvdSoundArchive mDvdSndArchive; // at 0xC
-        nw4r::snd::NandSoundArchive mNandSndArchive; // at 0x198
-        nw4r::snd::MemorySoundArchive mMemorySndArchive; // at 0x374
-        nw4r::snd::SoundArchivePlayer mSndArchivePlayer; // at 0x4C4
-        nw4r::snd::SoundArchivePlayer *mActiveSndArchivePlayer; // at 0x5A4
-        nw4r::snd::SoundHeap *mSoundHeap; // at 0x5A8
-        SARC_STORAGE mStorage; // at 0x5AC
-        u32 mSteamBlocks; // at 0x5B0
+class ArcPlayer {
+public:
+    enum SARC_STORAGE {
+        SARC_STORAGE_NONE,
+        SARC_STORAGE_DVD,
+        SARC_STORAGE_NAND,
+        SARC_STORAGE_CNT,
+        SARC_STORAGE_MEM
     };
+
+public:
+    explicit ArcPlayer(nw4r::snd::SoundHeap* pHeap);
+    virtual ~ArcPlayer(); // at 0x8
+
+    virtual nw4r::snd::SoundArchivePlayer*
+    openArchive(const char* pPath, nw4r::snd::SoundHeap* pHeap,
+                SARC_STORAGE storage,
+                CNTHandle* pHandle); // at 0xC
+
+    virtual nw4r::snd::SoundArchivePlayer*
+    openDvdArchive(const char* pPath,
+                   nw4r::snd::SoundHeap* pHeap); // at 0x10
+
+    virtual nw4r::snd::SoundArchivePlayer*
+    openNandArchive(const char* pPath,
+                    nw4r::snd::SoundHeap* pHeap); // at 0x14
+
+    virtual nw4r::snd::SoundArchivePlayer*
+    openCntArchive(const char* pPath, CNTHandle* pHandle,
+                   nw4r::snd::SoundHeap* pHeap); // at 0x18
+
+    virtual nw4r::snd::SoundArchivePlayer*
+    setupMemoryArchive(const void* pPath,
+                       nw4r::snd::SoundHeap* pHeap); // at 0x1C
+    virtual nw4r::snd::SoundArchivePlayer*
+    setupMemoryArchive(const void* pBinary, nw4r::snd::SoundHeap* pHeap,
+                       s32 /* arg2 */) {
+        return setupMemoryArchive(pBinary, pHeap);
+    } // at 0x20
+
+    virtual void closeArchive(); // at 0x24
+
+    virtual bool loadGroup(unsigned int id, nw4r::snd::SoundHeap* pHeap,
+                           u32 blockSize); // at 0x28
+    virtual bool loadGroup(int id, nw4r::snd::SoundHeap* pHeap,
+                           u32 blockSize); // at 0x2C
+    virtual bool loadGroup(const char* pName, nw4r::snd::SoundHeap* pHeap,
+                           u32 blockSize); // at 0x30
+
+    virtual void calc(); // at 0x34
+
+    virtual bool startSound(nw4r::snd::SoundHandle* pHandle, u32 id) {
+        return mPlayer->StartSound(pHandle, id);
+    } // at 0x38
+    virtual bool startSound(nw4r::snd::SoundHandle* pHandle, unsigned int id) {
+        return mPlayer->StartSound(pHandle, id);
+    } // at 0x3C
+    virtual bool startSound(nw4r::snd::SoundHandle* pHandle,
+                            const char* pName) {
+
+        u32 id = nw4r::snd::SoundArchive::INVALID_ID;
+        if (mArchive != NULL) {
+            id = changeNameToId(pName);
+        }
+
+        return mPlayer->StartSound(pHandle, id);
+    } // at 0x40
+
+    virtual bool prepareSound(nw4r::snd::SoundHandle* pHandle, u32 id) {
+        return mPlayer->PrepareSound(pHandle, id);
+    } // at 0x44
+    virtual bool prepareSound(nw4r::snd::SoundHandle* pHandle,
+                              unsigned int id) {
+        return mPlayer->PrepareSound(pHandle, id);
+    } // at 0x48
+    virtual bool prepareSound(nw4r::snd::SoundHandle* pHandle,
+                              const char* pName) {
+        u32 id = nw4r::snd::SoundArchive::INVALID_ID;
+        if (mArchive != NULL) {
+            id = changeNameToId(pName);
+        }
+
+        return mPlayer->PrepareSound(pHandle, id);
+    } // at 0x4C
+
+    virtual bool holdSound(nw4r::snd::SoundHandle* pHandle, u32 id) {
+        return mPlayer->HoldSound(pHandle, id);
+    } // at 0x50
+    virtual bool holdSound(nw4r::snd::SoundHandle* pHandle, unsigned int id) {
+        return mPlayer->HoldSound(pHandle, id);
+    } // at 0x54
+    virtual bool holdSound(nw4r::snd::SoundHandle* pHandle, const char* pName) {
+        u32 id = nw4r::snd::SoundArchive::INVALID_ID;
+        if (mArchive != NULL) {
+            id = changeNameToId(pName);
+        }
+
+        return mPlayer->HoldSound(pHandle, id);
+    } // at 0x58
+
+    bool setSteamBlocks(u32 numBlocks);
+    void stopAllSound();
+
+    u32 changeNameToId(const char* pName) {
+        return mArchive->ConvertLabelStringToSoundId(pName);
+    }
+    const char* changeIdToName(u32 id) {
+        return mArchive->GetSoundLabelString(id);
+    }
+
+    const char* getSoundWithOffsetDirect(const char* pName, u32 offset) {
+        u32 id = changeNameToId(pName);
+        return changeIdToName(id + offset);
+    }
+
+    nw4r::snd::SoundArchive& getSoundArchive() {
+        return *mArchive;
+    }
+    nw4r::snd::SoundArchivePlayer& getPlayer() {
+        return *mPlayer;
+    }
+
+protected:
+    bool mIsOpeningArchive; // at 0x4
+    bool mIsLoadingGroup;   // at 0x5
+
+    nw4r::snd::SoundArchive* mArchive;                 // at 0x8
+    nw4r::snd::DvdSoundArchive mDvdSoundArchive;       // at 0xC
+    nw4r::snd::NandSoundArchive mNandSoundArchive;     // at 0x198
+    nw4r::snd::MemorySoundArchive mMemorySoundArchive; // at 0x374
+
+    nw4r::snd::SoundArchivePlayer mSoundArchivePlayer; // at 0x4C4
+    nw4r::snd::SoundArchivePlayer* mPlayer;            // at 0x5A4
+
+    nw4r::snd::SoundHeap* mSoundHeap; // at 0x5A8
+    SARC_STORAGE mStorage;            // at 0x5AC
+    u32 mStreamBlocks;                // at 0x5B0
 };
+
+}; // namespace EGG
 
 #endif

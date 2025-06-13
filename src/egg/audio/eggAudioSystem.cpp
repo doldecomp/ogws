@@ -1,39 +1,39 @@
-#include "eggAudioSystem.h"
-#include "snd_AxManager.h"
-#include "snd_SoundSystem.h"
+// TODO: REMOVE AFTER REFACTOR
+#pragma ipa file
 
-namespace EGG
-{
-    using namespace nw4r;
+#include <egg/audio.h>
 
-    AudioSystem::AudioSystem() : WORD_0x8(0), FLOAT_0x0(1.0f)
-    {
-        WORD_0x4 = 0;
-        sInstance = this;
-    }
+#include <nw4r/snd.h>
 
-    AudioSystem::~AudioSystem()
-    {
+namespace EGG {
 
-    }
+AudioSystem* AudioSystem::sInstanse = NULL;
 
-    void AudioSystem::calc()
-    {
-        f32 currentVolume = snd::SoundSystem::GetMasterVolume();
+AudioSystem::AudioSystem()
+    : mShutDownStatus(SHUTDOWN_STATUS_NONE), FLOAT_0x0(1.0f) {
 
-        if ((WORD_0x8 == 1) && (currentVolume == 0.0f))
-        {
-            snd::SoundSystem::ShutdownSoundSystem();
-            snd::SoundSystem::PrepareReset();
-            snd::SoundSystem::WaitForResetReady();
-            WORD_0x8 = 2;
-        }
-
-        if ((WORD_0x8 != 2) && (WORD_0x4 == 1) && (currentVolume == 0.0f))
-        {
-            WORD_0x4 = 2;
-        }
-    }
-
-    AudioSystem *AudioSystem::sInstance;
+    mResetStatus = RESET_STATUS_NONE;
+    sInstanse = this;
 }
+
+AudioSystem::~AudioSystem() {}
+
+void AudioSystem::calc() {
+    f32 masterVol = nw4r::snd::SoundSystem::GetMasterVolume();
+
+    if (mShutDownStatus == SHUTDOWN_STATUS_QUEUED && masterVol == 0.0f) {
+        nw4r::snd::SoundSystem::ShutdownSoundSystem();
+        nw4r::snd::SoundSystem::PrepareReset();
+        nw4r::snd::SoundSystem::WaitForResetReady();
+
+        mShutDownStatus = SHUTDOWN_STATUS_FINISH;
+    }
+
+    if (mShutDownStatus != SHUTDOWN_STATUS_FINISH &&
+        mResetStatus == RESET_STATUS_QUEUED && masterVol == 0.0f) {
+
+        mResetStatus = RESET_STATUS_FINISH;
+    }
+}
+
+} // namespace EGG

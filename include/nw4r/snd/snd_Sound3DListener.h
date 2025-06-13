@@ -14,6 +14,9 @@ public:
     const math::MTX34& GetMatrix() const {
         return mMtx;
     }
+    void SetMatrix(const math::MTX34& rMtx) {
+        mMtx = rMtx;
+    }
 
     f32 GetInteriorSize() const {
         return mInteriorSize;

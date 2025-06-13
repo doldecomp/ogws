@@ -15,7 +15,8 @@ class XfbManager;
 
 class ConfigurationData {
 public:
-    ConfigurationData(u32 systemHeapSize) : mSystemHeapSize(systemHeapSize) {}
+    explicit ConfigurationData(u32 systemHeapSize)
+        : mSystemHeapSize(systemHeapSize) {}
 
     virtual Video* getVideo() = 0;              // at 0x8
     virtual Heap* getSystemHeap() = 0;          // at 0xC

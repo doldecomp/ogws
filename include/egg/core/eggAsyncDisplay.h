@@ -12,7 +12,7 @@ namespace EGG {
 
 class AsyncDisplay : public Display {
 public:
-    AsyncDisplay(u8 frameRate);
+    explicit AsyncDisplay(u8 frameRate);
 
     virtual void beginFrame();  // at 0x8
     virtual void beginRender(); // at 0xC

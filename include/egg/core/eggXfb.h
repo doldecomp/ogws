@@ -11,7 +11,7 @@ class Xfb {
     friend class XfbManager;
 
 public:
-    Xfb(Heap* pHeap = NULL);
+    explicit Xfb(Heap* pHeap = NULL);
 
     u16 getWidth() {
         return mWidth;

@@ -50,6 +50,9 @@ public:
     Sound3DListener* GetListener() const {
         return mListener;
     }
+    void AddListener(Sound3DListener* pListener) {
+        mListener = pListener;
+    }
 
     int GetMaxPriorityReduction() const {
         return mMaxPriorityReduction;

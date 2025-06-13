@@ -1,30 +1,33 @@
+// TODO: REMOVE AFTER REFACTOR
 #pragma ipa file
-#include "eggAudioHeapMgr.h"
-#include "eggAllocator.h"
-#include "eggAssert.h"
 
-namespace EGG
-{
-    void SoundHeapMgr::createSoundHeap(Heap *heap, u32 r5)
-    {
-        Allocator a = Allocator(heap, 32);
-        createSoundHeap(&a, r5);
-    }
+#include <egg/audio.h>
+#include <egg/core.h>
+#include <egg/prim.h>
 
-    void SoundHeapMgr::createSoundHeap(Allocator *a, u32 r5)
-    {
-        if (!mHeap.IsValid())
-        {
-            void *heapBuf = a->alloc(r5);
-            mHeap.Create(heapBuf, r5);
+#include <nw4r/snd.h>
 
-            #line 59
-            EGG_ASSERT(mHeap.IsValid());
-        }
-    }
+namespace EGG {
 
-    void SoundHeapMgr::destroySoundHeap()
-    {
-        mHeap.Destroy();
-    }
+void SoundHeapMgr::createSoundHeap(Heap* pHeap, u32 size) {
+    Allocator allocator(pHeap);
+    createSoundHeap(&allocator, size);
 }
+
+void SoundHeapMgr::createSoundHeap(Allocator* pAllocator, u32 size) {
+    if (mHeap.IsValid()) {
+        return;
+    }
+
+    void* pBuffer = pAllocator->alloc(size);
+    mHeap.Create(pBuffer, size);
+
+#line 59
+    EGG_ASSERT(mHeap.IsValid());
+}
+
+void SoundHeapMgr::destroySoundHeap() {
+    mHeap.Destroy();
+}
+
+} // namespace EGG
