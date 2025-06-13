@@ -1,5 +1,5 @@
-#ifndef EGG_AUDIO_AUDIO_FX_MGR_H
-#define EGG_AUDIO_AUDIO_FX_MGR_H
+#ifndef EGG_AUDIO_FX_MGR_H
+#define EGG_AUDIO_FX_MGR_H
 #include <egg/types_egg.h>
 
 #include <nw4r/snd.h>

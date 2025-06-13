@@ -1,5 +1,5 @@
-#ifndef EGG_AUDIO_AUDIO_SYSTEM_H
-#define EGG_AUDIO_AUDIO_SYSTEM_H
+#ifndef EGG_AUDIO_SYSTEM_H
+#define EGG_AUDIO_SYSTEM_H
 #include <egg/types_egg.h>
 
 namespace EGG {
