@@ -21,7 +21,9 @@ namespace EGG {
  *
  ******************************************************************************/
 #ifndef __DECOMP_NON_MATCHING
-class SimpleAudioMgrWithSound3D : public SimpleAudioMgr {
+class SimpleAudioMgrWithSound3D
+    : public SimpleAudioMgr,
+      public TAudioSound3DMgr<WPAD_MAX_CONTROLLERS> {
 private:
     // Dummy class to instantiate necessary weak functions
     virtual ~SimpleAudioMgrWithSound3D();
@@ -34,7 +36,7 @@ private:
  *
  ******************************************************************************/
 #ifndef __DECOMP_NON_MATCHING
-class SimpleAudioMgrWithFx : public SimpleAudioMgr {
+class SimpleAudioMgrWithFx : public SimpleAudioMgr, public AudioFxMgr {
 private:
     // Dummy class to instantiate necessary weak functions
     virtual ~SimpleAudioMgrWithFx();
