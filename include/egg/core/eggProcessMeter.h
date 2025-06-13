@@ -37,11 +37,8 @@ public:
     /***************************************************************************
      * ProcessBar
      ***************************************************************************/
-    struct ProcessBar {
-        enum {
-            BIT_HIDDEN,
-        };
-
+    class ProcessBar {
+    public:
         f32 mPosX;  // at 0x0
         f32 mWidth; // at 0x4
 
@@ -51,9 +48,7 @@ public:
         f32 mPosY;   // at 0x14
         f32 mHeight; // at 0x18
 
-        TBitFlag<u8> mFlags;  // at 0x1C
-        nw4r::ut::Link mLink; // at 0x20
-
+    public:
         static u16 getLinkOffset() {
             return offsetof(ProcessBar, mLink);
         }
@@ -76,6 +71,15 @@ public:
         bool isVisible() {
             return mFlags.offBit(BIT_HIDDEN);
         }
+
+    private:
+        enum {
+            BIT_HIDDEN,
+        };
+
+    private:
+        TBitFlag<u8> mFlags;  // at 0x1C
+        nw4r::ut::Link mLink; // at 0x20
     };
 
     /***************************************************************************
