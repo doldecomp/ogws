@@ -51,7 +51,6 @@ private:
 class ExpAudioMgr : public SimpleAudioMgr,
                     public TAudioSound3DMgr<WPAD_MAX_CONTROLLERS>,
                     public AudioFxMgr {
-
 public:
     struct ExpAudioMgrArg : SimpleAudioMgrArg,
                             TAudioSound3DMgrArg,
