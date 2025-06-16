@@ -18,6 +18,9 @@ namespace g3d {
  *
  ******************************************************************************/
 struct ResPrePrimDL {
+    static const int SIZE_GXVTXDESCLIST = (GX_VA_TEX7 + 1) + 1;
+    static const int SIZE_GXVTXATTRFMTLIST = (GX_VA_TEX7 - GX_VA_POS + 1) + 1;
+
     union {
         struct {
             u8 cullMode[10];                                          // at 0x0

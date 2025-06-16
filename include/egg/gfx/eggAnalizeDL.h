@@ -1,68 +1,85 @@
 #ifndef EGG_GFX_ANALIZE_DL_H
 #define EGG_GFX_ANALIZE_DL_H
-#include "types_egg.h"
-#include "eggAssert.h"
-#include "g3d_resshp.h"
+#include <egg/types_egg.h>
 
-namespace EGG
-{
-    class AnalizeDL
-    {
-    public:
-        enum EResultType
-        {
-            TYPE_0,
-            TYPE_1,
-            TYPE_2,
-            TYPE_3,
-            TYPE_VERTEX
-        };
+#include <egg/prim.h>
 
-        struct Result
-        {
-            int m_type; // at 0x0
-            u16 SHORT_0x4;
-            u16 SHORT_0x6;
-            u16 SHORT_0x8;
-            u16 SHORT_0xA;
-            u16 SHORT_0xC;
-            u16 SHORT_0xE;
-            u16 SHORT_0x10;
-            u16 SHORT_0x12;
-            u16 SHORT_0x14;
-            u16 SHORT_0x16;
-            u16 SHORT_0x18;
-            u16 SHORT_0x1A;
-            u16 SHORT_0x1C;
-            u16 SHORT_0x1E;
-            u16 SHORT_0x20;
-            u16 SHORT_0x22;
-            u16 SHORT_0x24;
-            u16 SHORT_0x26;
-            u16 SHORT_0x28;
-            u16 SHORT_0x2A;
-            u32 WORD_0x2C;
-            u32 WORD_0x30;
-            u32 WORD_0x34;
-            int WORD_0x38;
-            int WORD_0x3C;
-            nw4r::math::VEC3 VEC3_0x40;
-        };
+#include <nw4r/g3d.h>
+#include <nw4r/math.h>
 
-    public:
-        static void FUN_800854f8(const void *, nw4r::g3d::ResShp);
-        static int FUN_80085670(const void *);
+#include <revolution/GX.h>
 
-        static Result * getVtxResult()
-        {
-            #line 115
-            EGG_ASSERT(s_result.m_type == TYPE_VERTEX);
-            return &s_result;
-        }
+namespace EGG {
 
-    private:
-        static Result s_result;
+class AnalizeDL {
+public:
+    enum CmdType {
+        TYPE_NONE,
+        TYPE_POSMTXINDX,
+        TYPE_NRMMTXINDX,
+        TYPE_PRIMITIVE,
+        TYPE_VERTEX,
+        TYPE_NOOP
     };
-}
+
+    struct VtxResult {
+        static const int PNMTX_NUM = (GX_TEXMTX0 - GX_PNMTX0) / 3;
+
+        CmdType m_type;             // at 0x0
+        s16 m_posMtxIdx[PNMTX_NUM]; // at 0x4
+        s16 m_nrmMtxIdx[PNMTX_NUM]; // at 0x18
+        u32 WORD_0x2C;
+        u8 m_primitive;            // at 0x30
+        u16 m_vtxNum;              // at 0x32
+        u16 m_vtxRemain;           // at 0x34
+        s32 m_mtxIdx;              // at 0x38
+        s32 m_vtxIdx;              // at 0x3C
+        nw4r::math::VEC3 m_vtxPos; // at 0x40
+    };
+
+public:
+    AnalizeDL(const nw4r::g3d::ResShp shp);
+
+    CmdType advance();
+
+    const VtxResult& getVtxResult() const {
+#line 115
+        EGG_ASSERT(s_result.m_type == TYPE_VERTEX);
+        return s_result;
+    }
+
+private:
+    struct VtxPosArray {
+        u8 m_stride;        // at 0x0
+        const void* m_base; // at 0x4
+    };
+
+private:
+    void configure();
+
+private:
+    const u8* m_DL;    // at 0x0
+    const u8* m_DLPtr; // at 0x4
+
+    u8 BYTE_0x8;
+    u8 BYTE_0x9;
+
+    u8 m_vtxDescSize;  // at 0xA
+    u8 m_vtxAttrSize;  // at 0xB
+    u16 m_vtxAttrSend; // at 0xC
+
+    static const s8 s_attrTypeSize[];
+    static const u8 s_compTypeSize[];
+
+    static GXVtxDescList s_vtxDesc[nw4r::g3d::ResPrePrimDL::SIZE_GXVTXDESCLIST];
+
+    static GXVtxAttrFmtList
+        s_vtxAttr[nw4r::g3d::ResPrePrimDL::SIZE_GXVTXATTRFMTLIST];
+
+    static VtxPosArray s_vtxPos;
+    static VtxResult s_result;
+};
+
+} // namespace EGG
 
 #endif
