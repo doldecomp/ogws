@@ -2,9 +2,10 @@
 #define EGG_GFX_ANALIZE_DL_H
 #include <egg/types_egg.h>
 
-#include <nw4r/g3d.h>
-
 #include <egg/prim.h>
+
+#include <nw4r/g3d.h>
+#include <nw4r/math.h>
 
 #include <revolution/GX.h>
 

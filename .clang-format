@@ -40,7 +40,7 @@ IncludeCategories:
     Priority:        2
     CaseSensitive:   true
 
-  - Regex:           '<nw4r\/[[:lower:].]+h>' # NW4R public headers
+  - Regex:           '<nw4r\/[[:alnum:].]+h>' # NW4R public headers
     Priority:        3
     CaseSensitive:   true
 
