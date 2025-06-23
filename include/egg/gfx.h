@@ -2,5 +2,7 @@
 #define EGG_PUBLIC_GFX_H
 
 #include <egg/gfx/eggAnalizeDL.h>
+#include <egg/gfx/eggCpuTexture.h>
+#include <egg/gfx/eggResTIMG.h>
 
 #endif

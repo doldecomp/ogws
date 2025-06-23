@@ -53,15 +53,15 @@ namespace EGG
         #line 70
         EGG_ASSERT(pObj);
 
-        u32 imageOfs = (tex.mImageOfs != 0) ? tex.mImageOfs : sizeof(tex);
-        BOOL bMipmap = (tex.mMipmap) ? TRUE : FALSE;
+        u32 imageOfs = (tex.imageOffset != 0) ? tex.imageOffset : sizeof(tex);
+        BOOL bMipmap = (tex.mipMap) ? TRUE : FALSE;
 
-        GXInitTexObj(pObj, (char *)&tex + imageOfs, tex.mWidth, tex.mHeight,
-            (GXTexFmt)tex.mTexFormat, (GXTexWrapMode)tex.mWrapS, (GXTexWrapMode)tex.mWrapT, bMipmap);
+        GXInitTexObj(pObj, (char *)&tex + imageOfs, tex.width, tex.height,
+            (GXTexFmt)tex.format, (GXTexWrapMode)tex.wrapS, (GXTexWrapMode)tex.wrapT, bMipmap);
 
-        GXInitTexObjLOD(pObj, (GXTexFilter)tex.mMinFilt, (GXTexFilter)tex.mMagFilt,
-            tex.mMinLod / 8.0f, tex.mMaxLod / 8.0f, tex.mLodBias / 100.0f,
-            tex.mBiasClampEnable, tex.mEdgeLodEnable, (GXAnisotropy)tex.mAnisotropy);
+        GXInitTexObjLOD(pObj, (GXTexFilter)tex.minFilter, (GXTexFilter)tex.magFilter,
+            tex.minLOD / 8.0f, tex.maxLOD / 8.0f, tex.LODBias / 100.0f,
+            tex.biasClampEnable, tex.edgeLODEnable, (GXAnisotropy)tex.anisotropy);
     }
 
     void GXUtility::getTexObj(GXTexObj *pObj, nw4r::g3d::ResTex tex,

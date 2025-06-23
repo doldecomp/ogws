@@ -107,8 +107,8 @@ namespace EGG
 
                 if (BYTE_0x7D != 0)
                 {
-                    BUF_0x84->setMinFilt(0);
-                    BUF_0x84->setMagFilt(0);
+                    BUF_0x84->setMinFilter(0);
+                    BUF_0x84->setMagFilter(0);
                     BUF_0x84->load(GX_TEXMAP0);
                     
                     nw4r::math::MTX34 forDL;
@@ -123,8 +123,8 @@ namespace EGG
                     
                     if (BUF_0x88 != NULL)
                     {
-                        BUF_0x88->setMinFilt(0);
-                        BUF_0x88->setMagFilt(0);
+                        BUF_0x88->setMinFilter(0);
+                        BUF_0x88->setMagFilter(0);
                         BUF_0x88->load(GX_TEXMAP1);
 
                         DrawGX::SetMat_ColorChannel(DrawGX::COLOR_CHANNEL_1);
