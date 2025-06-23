@@ -30,8 +30,8 @@ namespace EGG
 
             buf->setWrapS(0);
             buf->setWrapT(0);
-            buf->setMinFilt(1);
-            buf->setMagFilt(1);
+            buf->setMinFilter(1);
+            buf->setMagFilter(1);
 
             buf->alloc(buf->getTexBufferSize());
             return buf;

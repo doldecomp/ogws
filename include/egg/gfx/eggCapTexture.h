@@ -14,7 +14,7 @@ namespace EGG
 
         virtual ~CapTexture() {} // at 0x8
         virtual void configure(); // at 0xC
-        virtual void load(GXTexMapID) const; // at 0x14
+        virtual void load(GXTexMapID); // at 0x14
 
         void capture(u16, u16, bool, int);
 

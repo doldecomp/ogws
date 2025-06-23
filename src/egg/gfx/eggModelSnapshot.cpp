@@ -26,7 +26,7 @@ namespace EGG
         EGG_ASSERT(mdlMax > 0);
 
         configure();
-        allocTexBufferAndHeader();
+        allocWithHeaderDebug();
         m_mdlList = new ModelBind[mdlMax];
 
         FLOAT_0x44 = 0.0f;
