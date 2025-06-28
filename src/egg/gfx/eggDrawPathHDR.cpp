@@ -33,7 +33,7 @@ namespace EGG
                 ScreenEffectBase::sFlag |= 0x2;
                 break;
             case 1:
-                StateGX::ScopedAlpha alpha(false);
+                StateGX::ScopedAlphaUpdate alpha(false);
                 
                 TextureBuffer *p_buff = getBuffer(cBufferType_2);
                 #line 74

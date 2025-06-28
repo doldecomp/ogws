@@ -37,15 +37,15 @@ namespace EGG
             bool dither; // at 0xE
         };
 
-        struct ScopedColor
+        struct ScopedColorUpdate
         {
-            ScopedColor(bool x)
+            ScopedColorUpdate(bool x)
             {
                 old = sCache.colorUpdate;
                 GXSetColorUpdate_(x);
             }
 
-            ~ScopedColor()
+            ~ScopedColorUpdate()
             {
                 GXSetColorUpdate_(old);
             }
@@ -53,15 +53,15 @@ namespace EGG
             bool old;
         };
 
-        struct ScopedAlpha
+        struct ScopedAlphaUpdate
         {
-            ScopedAlpha(bool x)
+            ScopedAlphaUpdate(bool x)
             {
                 old = sCache.alphaUpdate;
                 GXSetAlphaUpdate_(x);
             }
 
-            ~ScopedAlpha()
+            ~ScopedAlphaUpdate()
             {
                 GXSetAlphaUpdate_(old);
             }
@@ -69,15 +69,15 @@ namespace EGG
             bool old;
         };
 
-        struct ScopedDither
+        struct ScopedDitherUpdate
         {
-            ScopedDither(bool x)
+            ScopedDitherUpdate(bool x)
             {
                 old = sCache.dither;
                 GXSetDither_(x);
             }
 
-            ~ScopedDither()
+            ~ScopedDitherUpdate()
             {
                 GXSetDither_(old);
             }

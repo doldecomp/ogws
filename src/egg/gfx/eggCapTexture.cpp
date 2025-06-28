@@ -1,88 +1,88 @@
-#include "eggCapTexture.h"
-#include "eggStateGX.h"
+// TODO: REMOVE AFTER REFACTOR
+#pragma ipa file
+
+#include <egg/gfx.h>
 
 #include <revolution/GX.h>
 
-namespace EGG
-{
-    // https://decomp.me/scratch/SrABn
-    // - Copy filter argument copies incorrectly
-    void CapTexture::configure()
-    {
-        static const GXColor scDefaultClearColor = {0, 0, 0, 0};
+namespace EGG {
 
-        CpuTexture::configure();
+const u8 CapTexture::scSamplePattern[12][2] = {
+    // Raw copy
+    {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0},
+    {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0},
+};
 
-        mLoadMap = GX_TEXMAP0;
-        mClearZ = 0x00FFFFFF;
-        setClearColor(scDefaultClearColor);
-        // setCopyFilterArg1(sCopyFilterArg1_1);
-        setFlag(0x80);
+const u8 CapTexture::scVFilterSmooth[GX_VFILTER_SZ] = {
+    // Blends color with neighboring pixels
+    21, 0, 0, 22, 0, 21, 0,
+};
+
+const u8 CapTexture::scVFilterSharp[GX_VFILTER_SZ] = {
+    // Only use the current pixel's color
+    0, 0, 1, 63, 0, 0, 0,
+};
+
+void CapTexture::configure() {
+    CpuTexture::configure();
+    mLoadMap = GX_TEXMAP0;
+
+    static const GXColor BLACK = {0, 0, 0, 0};
+    setClearColor(BLACK);
+    setClearZ(GX_CLEAR_Z_MAX);
+
+    setSharpVFilter();
+    enablePixModeSync();
+}
+
+void CapTexture::load(GXTexMapID map) {
+#line 45
+    EGG_ASSERT(getBuffer());
+
+    mLoadMap = map;
+    CpuTexture::load(map);
+}
+
+void CapTexture::capture(u16 x, u16 y, bool mipmap, int format) {
+#line 60
+    EGG_ASSERT(getBuffer());
+    EGG_ASSERT_MSG(checkIsConfigure(), "Please call configure() after construct!");
+
+    if (format == -1) {
+        format = static_cast<int>(getFormat());
     }
 
-    void CapTexture::load(GXTexMapID map)
-    {
-        #line 45
-        EGG_ASSERT(getBuffer());
+    u16 w = mipmap ? getWidth() * 2 : getWidth();
+    u16 h = mipmap ? getHeight() * 2 : getHeight();
 
-        mLoadMap = map;
-        CpuTexture::load(map);
+#line 68
+    EGG_ASSERT(w > 0 && h > 0);
+
+    GXSetTexCopySrc(x, y, w + (w & 1), h + (h & 1));
+
+    GXSetTexCopyDst(getWidth(), getHeight(), static_cast<GXTexFmt>(format),
+                    mipmap);
+
+    GXSetCopyFilter(GX_FALSE, scSamplePattern, checkVFilterEnable(),
+                    checkVFilterEnable() ? mVerticalFilter : scVFilterSharp);
+
+    if (checkColorUpdate() || checkAlphaUpdate() || checkZBufferUpdate()) {
+        StateGX::ScopedColorUpdate color(checkColorUpdate());
+        StateGX::ScopedAlphaUpdate alpha(checkAlphaUpdate());
+
+        GXSetZMode(GX_TRUE, GX_ALWAYS, checkZBufferUpdate());
+        GXSetCopyClear(mClearColor, mClearZ);
+
+        GXCopyTex(getBuffer(), GX_TRUE);
+    } else {
+        GXCopyTex(getBuffer(), GX_FALSE);
     }
 
-    // https://decomp.me/scratch/awE6M
-    // - Issue with ternary for GXSetCopyFilter
-    void CapTexture::capture(u16 x, u16 y, bool upscale, int format)
-    {
-        // u16 w, h;
+    GXSetCopyFilter(GX_FALSE, scSamplePattern, GX_FALSE, scVFilterSharp);
 
-        // #line 60
-        // EGG_ASSERT(getBuffer());
-        // EGG_ASSERT_MSG(checkIsConfigure(), "Please call configure() after construct!");
-
-        // if (format == -1)
-        //     format = static_cast<int>(getFormat());
-
-        // u32 lw;
-        // if (upscale)
-        //     lw = getWidth() * 2;
-        // else
-        //     lw = getWidth();
-        // w = static_cast<u16>(lw);
-
-        // u32 lh;
-        // if (upscale)
-        //     lh = getHeight() * 2;
-        // else
-        //     lh = getHeight();
-        // h = static_cast<u16>(lh);
-
-        // #line 68
-        // EGG_ASSERT(w > 0 && h > 0);
-
-        // GXSetTexCopySrc(x, y, w + (w & 1), h + (h & 1));
-        // GXSetTexCopyDst(getWidth(), getHeight(), static_cast<GXTexFmt>(format), upscale);
-
-        // GXSetCopyFilter(0, const_cast<u8(*)[2]>(scCopyFilterArg0), mFlags & 0x40,
-        //     mFlags & 0x40 ? mCopyFilterArg1 : sCopyFilterArg1_1);
-
-        // if ((mFlags & 0x8) || (mFlags & 0x10) || (mFlags & 0x20))
-        // {
-        //     StateGX::ScopedColor color(mFlags & 0x8);
-        //     StateGX::ScopedAlpha alpha(mFlags & 0x10);
-
-        //     GXSetZMode(1, GX_ALWAYS, (mFlags & 0x20) != 0);
-        //     GXSetCopyClear(mClearColor, mClearZ);
-        //     GXCopyTex(getBuffer(), 1);
-        // }
-        // else
-        // {
-        //     GXCopyTex(getBuffer(), 0);
-        // }
-
-        // GXSetCopyFilter(0, const_cast<u8(*)[2]>(scCopyFilterArg0),
-        //     0, sCopyFilterArg1_1);
-
-        // if (mFlags & 0x80)
-        //     GXPixModeSync();
+    if (checkPixModeSync()) {
+        GXPixModeSync();
     }
 }
+
+} // namespace EGG

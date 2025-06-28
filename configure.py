@@ -624,7 +624,7 @@ config.libs = [
             Object(Matching, "egg/gfx/eggStateGX.cpp"),
             Object(Matching, "egg/gfx/eggTextureBuffer.cpp"),
             Object(Matching, "egg/gfx/eggAnalizeDL.cpp"),
-            Object(NonMatching, "egg/gfx/eggCapTexture.cpp"),
+            Object(Matching, "egg/gfx/eggCapTexture.cpp"),
             Object(NonMatching, "egg/gfx/eggCpuTexture.cpp"),
             Object(NonMatching, "egg/gfx/eggDrawGX.cpp"),
             Object(NonMatching, "egg/gfx/eggDrawPathBase.cpp"),
