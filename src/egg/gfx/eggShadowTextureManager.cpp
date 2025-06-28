@@ -69,7 +69,7 @@ namespace EGG
     {
         if (!IsActive() || mShadowIdx == 0) return;
 
-        StateGX::DitherUpdateLock dither(true);
+        StateGX::ScopedDitherUpdate dither(true);
 
         GXSetChanAmbColor(GX_COLOR0A0, DrawGX::scColorWhite);
 

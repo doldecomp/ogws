@@ -78,8 +78,8 @@ namespace EGG
                     DrawGX::BeginDrawScreen(true, true, false);
                     GXSetBlendMode(GX_BM_NONE, GX_BL_SRCALPHA, GX_BL_INVSRCALPHA, GX_LO_CLEAR);
 
-                    StateGX::ColorUpdateLock color(true);
-                    StateGX::AlphaUpdateLock alpha(true);
+                    StateGX::ScopedColorUpdate color(true);
+                    StateGX::ScopedAlphaUpdate alpha(true);
 
                     DrawGX::DrawDL(DrawGX::DL_16, forDL, DrawGX::scColorWhite);
                     BUF_0x8C->free();
@@ -117,9 +117,9 @@ namespace EGG
                     
                     GXColor tevColor = {255, 255, 255, BYTE_0x7D};
                     
-                    StateGX::ColorUpdateLock color(true);
-                    StateGX::AlphaUpdateLock alpha(false);
-                    StateGX::DitherUpdateLock dither(true);
+                    StateGX::ScopedColorUpdate color(true);
+                    StateGX::ScopedAlphaUpdate alpha(false);
+                    StateGX::ScopedDitherUpdate dither(true);
                     
                     if (BUF_0x88 != NULL)
                     {

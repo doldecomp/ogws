@@ -163,8 +163,8 @@ namespace EGG
 
         mDrawFlags |= view;
 
-        StateGX::ColorUpdateLock color(true);
-        StateGX::AlphaUpdateLock alpha(false);
+        StateGX::ScopedColorUpdate color(true);
+        StateGX::ScopedAlphaUpdate alpha(false);
 
         // TODO
         
@@ -204,8 +204,8 @@ namespace EGG
         
         if (!(mFlags & 0x40))
         {   
-            StateGX::ColorUpdateLock color(true);
-            StateGX::AlphaUpdateLock alpha(true);
+            StateGX::ScopedColorUpdate color(true);
+            StateGX::ScopedAlphaUpdate alpha(true);
 
             if ((mFlags & 0x8) || texBuf != NULL)
             {
