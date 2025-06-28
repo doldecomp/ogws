@@ -8,7 +8,7 @@ extern "C" {
 /**
  * DSP hardware registers
  */
-volatile u16 DSP_HW_REGS[] : 0xCC005000;
+volatile u16 DSP_HW_REGS ARRAY_AT_ADDRESS(0xCC005000);
 
 /**
  * Hardware register indexes

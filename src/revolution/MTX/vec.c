@@ -30,7 +30,7 @@ void PSVECScale(register const Vec* in, register Vec* out, register f32 scale) {
     register f32 sxy, sz;
 
     // clang-format off
-    asm {
+    PPC_ASM (
         // Load components
         psq_l xy, Vec.x(in), 0, 0
         psq_l z,  Vec.z(in), 1, 0
@@ -42,7 +42,7 @@ void PSVECScale(register const Vec* in, register Vec* out, register f32 scale) {
         // Store result
         psq_st sxy, Vec.x(out), 0, 0
         psq_st sz,  Vec.z(out), 1, 0
-    }
+    )
     // clang-format on
 }
 
@@ -57,7 +57,7 @@ void PSVECNormalize(register const Vec* in, register Vec* out) {
     c_three = 3.0f;
 
     // clang-format off
-    asm {
+    PPC_ASM (
         // Load vector components
         psq_l xy, Vec.x(in), 0, 0
         psq_l z,  Vec.z(in), 1, 0
@@ -84,7 +84,7 @@ void PSVECNormalize(register const Vec* in, register Vec* out) {
         // Store result
         psq_st xy, Vec.x(out), 0, 0
         psq_st z,  Vec.z(out), 1, 0
-    }
+    )
     // clang-format on
 }
 
@@ -98,7 +98,7 @@ f32 PSVECMag(register const Vec* v) {
 
     c_half = 0.5f;
     // clang-format off
-    asm {
+    PPC_ASM (
         // Load vector components
         psq_l xy, Vec.x(v), 0, 0
         lfs   z,  Vec.z(v)
@@ -110,7 +110,7 @@ f32 PSVECMag(register const Vec* v) {
 
         // Get zero
         fsubs c_zero, c_half, c_half
-    }
+    )
     // clang-format on
 
     // Avoid problematic square root where dot is zero
@@ -123,7 +123,7 @@ f32 PSVECMag(register const Vec* v) {
 
     c_three = 3.0f;
     // clang-format off
-    asm {
+    PPC_ASM (
         // Refine estimate using Newton-Raphson method
         // y = 1 / sqrt(x)
         fmuls   work0, rsqrt, rsqrt        // rsqrt^2
@@ -134,7 +134,7 @@ f32 PSVECMag(register const Vec* v) {
         // Convert rsqrt -> sqrt
         // x * rsqrt(x) == sqrt(x)
         fmuls dot, dot, work1
-    }
+    )
     // clang-format on
 
     return dot;
@@ -228,7 +228,7 @@ f32 PSVECSquareDistance(register const Vec* a, register const Vec* b) {
     register f32 dist;
 
     // clang-format off
-    asm {
+    PPC_ASM (
         // Load vector components
         psq_l axy, Vec.x(a), 0, 0
         psq_l ayz, Vec.y(a), 0, 0 
@@ -243,7 +243,7 @@ f32 PSVECSquareDistance(register const Vec* a, register const Vec* b) {
         ps_mul  dyz,  dyz,  dyz
         ps_madd dist, dxy,  dxy, dyz
         ps_sum0 dist, dist, dyz, dyz
-    }
+    )
     // clang-format on
 
     return dist;

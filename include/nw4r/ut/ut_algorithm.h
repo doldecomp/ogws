@@ -32,9 +32,9 @@ template <> f32 inline Abs(register f32 x) {
     register f32 ax;
 
     // clang-format off
-    asm {
+    PPC_ASM (
         fabs ax, x
-    }
+    )
     // clang-format on
 
     return ax;
