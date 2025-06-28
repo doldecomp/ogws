@@ -34,11 +34,6 @@ public:
         GRADATION_QUARTIC_EASEOUT,   // y=1-(1-x)^4
     };
 
-    enum {
-        FLAG_CONFIGURED = 1 << 0,
-        FLAG_HAS_HEADER = 1 << 1,
-    };
-
 public:
     // @bug Texture buffer is leaked
     virtual ~CpuTexture() {}                      // at 0x8
@@ -79,7 +74,7 @@ public:
         mFlags &= ~flag;
     }
     bool testFlag(u8 flag) const {
-        return mFlags & flag;
+        return (mFlags & flag) ? true : false;
     }
 
     u16 getWidth() const {
@@ -143,6 +138,12 @@ public:
         mpBuffer = pBuffer;
         clearFlag(FLAG_HAS_HEADER);
     }
+
+private:
+    enum {
+        FLAG_CONFIGURED = 1 << 0,
+        FLAG_HAS_HEADER = 1 << 1,
+    };
 
 private:
     void initResTIMG() const;

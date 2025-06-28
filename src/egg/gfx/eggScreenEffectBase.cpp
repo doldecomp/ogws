@@ -204,9 +204,9 @@ namespace EGG
             {
                 if (!cache)
                 {
-                    StateGX::ScopedColor color(true);
-                    StateGX::ScopedAlpha alpha(true);
-                    StateGX::ScopedDither dither(false);
+                    StateGX::ColorUpdateLock color(true);
+                    StateGX::AlphaUpdateLock alpha(true);
+                    StateGX::DitherUpdateLock dither(false);
 
                     PostEffectBase::setProjection(mScreen);
                     
