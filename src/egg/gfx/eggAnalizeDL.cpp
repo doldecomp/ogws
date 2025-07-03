@@ -1,9 +1,6 @@
-// TODO: REMOVE AFTER REFACTOR
-#pragma ipa file
+#include <egg/gfx.h>
 
 #include <nw4r/g3d.h>
-
-#include <egg/gfx.h>
 
 namespace EGG {
 

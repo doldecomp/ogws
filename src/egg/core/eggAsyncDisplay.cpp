@@ -195,7 +195,7 @@ void AsyncDisplay::clearEFB(u16 fbWidth, u16 fbHeight, u16 x, u16 y, u16 width,
                     GX_TRUE, GX_TEVPREV);
 
     GXSetAlphaCompare(GX_ALWAYS, 0, GX_AOP_OR, GX_ALWAYS, 0);
-    GXSetZTexture(GZ_ZT_REPLACE, GX_TF_Z24X8, 0);
+    GXSetZTexture(GX_ZT_REPLACE, GX_TF_Z24X8, 0);
     GXSetZCompLoc(GX_FALSE);
     GXSetBlendMode(GX_BM_NONE, GX_BL_ZERO, GX_BL_ZERO, GX_LO_NOOP);
     GXSetAlphaUpdate(GX_TRUE);

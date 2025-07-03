@@ -909,7 +909,7 @@ typedef enum _GXZFmt16 {
 typedef enum _GXZTexOp {
     GX_ZT_DISABLE,
     GX_ZT_ADD,
-    GZ_ZT_REPLACE,
+    GX_ZT_REPLACE,
 
     GX_MAX_ZTEXOP
 } GXZTexOp;

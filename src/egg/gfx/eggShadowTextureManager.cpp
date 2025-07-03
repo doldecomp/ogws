@@ -71,7 +71,7 @@ namespace EGG
 
         StateGX::ScopedDitherUpdate dither(true);
 
-        GXSetChanAmbColor(GX_COLOR0A0, DrawGX::scColorWhite);
+        GXSetChanAmbColor(GX_COLOR0A0, DrawGX::WHITE);
 
         GXColor fog = {0, 0, 0, 255};
         GXSetFog(GX_FOG_NONE, fog, 0.0f, 1.0f, 0.0f, 1.0f);
