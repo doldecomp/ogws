@@ -38,7 +38,7 @@ namespace EGG
         }
         else
         {
-            GXSetFog(GX_FOG_NONE, DrawGX::scColorWhite, 0.0f, 1.0f, 0.0f, 1.0f);
+            GXSetFog(GX_FOG_NONE, DrawGX::WHITE, 0.0f, 1.0f, 0.0f, 1.0f);
         }
 
         GXSetFogRangeAdj(0, 0, NULL);

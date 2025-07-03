@@ -43,7 +43,7 @@ namespace EGG
                 {
                     drawBlurPass(i, j);
                     drawDL(mOffsetX, mOffsetY, width * mScaleX, height * mScaleY);
-                    DrawGX::SetBlendMode(DrawGX::BLEND_2);
+                    DrawGX::SetBlendMode(DrawGX::BLEND_ADD);
                 }
             }
         }

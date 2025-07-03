@@ -12,7 +12,7 @@ namespace EGG
 
     void PostEffectSimple::reset()
     {
-        mColor = DrawGX::scColorWhite;
+        mColor = DrawGX::WHITE;
         FLOAT_0x24 = 1.0f;
         WORD_0x2C = 1;
     }

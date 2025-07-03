@@ -177,7 +177,7 @@ namespace EGG
         current.GetCameraMtx(&mCamMtx);
         mpScreen->CopyToG3D(current);
 
-        DrawGX::s_cameraMtx = mCamMtx;
+        DrawGX::SetCameraMtx(mCamMtx);
     }
 
     void ScnRootEx::draw_before_CalcView()

@@ -1,6 +1,3 @@
-// TODO: REMOVE AFTER REFACTOR
-#pragma ipa file
-
 #include <egg/gfx.h>
 
 #include <revolution/GX.h>
