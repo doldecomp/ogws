@@ -3,6 +3,7 @@
 #include "types_egg.h"
 #include "eggMatrix.h"
 #include "eggAssert.h"
+#include "eggIDrawGX.h"
 #include <nw4r/g3d.h>
 #include <nw4r/math.h>
 
@@ -13,7 +14,7 @@
 
 namespace EGG
 {
-    class ScnRootEx
+    class ScnRootEx : public IDrawGX
     {
     public:
         enum SceneSetting

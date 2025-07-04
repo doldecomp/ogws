@@ -221,8 +221,8 @@ namespace EGG
                     eff.setCapTexture(getBuffer(type));
                     eff.setBlendMode(0);
 
-                    const f32 sx = mScreen.GetSizeX();
-                    const f32 sy = mScreen.GetSizeY();
+                    const f32 sx = mScreen.GetSize().x;
+                    const f32 sy = mScreen.GetSize().y;
                     eff.draw(sx, sy);
                 }
 

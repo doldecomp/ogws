@@ -6,7 +6,7 @@
 #include "eggShadowTextureManager.h"
 #include "eggScreen.h"
 #include "eggStateGX.h"
-#include "eggGXUtility.h"
+#include "eggIDrawGX.h"
 #include "eggDrawGX.h"
 #include "g3d_scnroot.h"
 
@@ -183,7 +183,7 @@ namespace EGG
     void ScnRootEx::draw_before_CalcView()
     {
         StateGX::resetStateCache();
-        GXUtility::set(mBase->GetCurrentCameraID(), mCamMtx, getScreen());
+        beginDrawView(mBase->GetCurrentCameraID(), mCamMtx, getScreen());
 
         if (mpLightManager != NULL)
         {
@@ -250,28 +250,28 @@ namespace EGG
 
     void ScnRootEx::setDrawSettingGX(bool opa) const
     {
-        u32 setting = 0;
+        u32 flags = 0;
 
         if (opa)
         {
             if (mDrawSettings & DRAW_COLOR_UPDATE_OPA)
-                setting |= GXUtility::ENABLE_COLOR_UPDATE;
+                flags |= DRAWFLAG_COLORUPDATE;
             if (mDrawSettings & DRAW_ALPHA_UPDATE_OPA)
-                setting |= GXUtility::ENABLE_ALPHA_UPDATE;
+                flags |= DRAWFLAG_ALPHAUPDATE;
             if (mDrawSettings & DRAW_DITHER_OPA)
-                setting |= GXUtility::ENABLE_DITHER;
+                flags |= DRAWFLAG_DITHER;
         }
         else
         {
             if (mDrawSettings & DRAW_COLOR_UPDATE_XLU)
-                setting |= GXUtility::ENABLE_COLOR_UPDATE;
+                flags |= DRAWFLAG_COLORUPDATE;
             if (mDrawSettings & DRAW_ALPHA_UPDATE_XLU)
-                setting |= GXUtility::ENABLE_ALPHA_UPDATE;
+                flags |= DRAWFLAG_ALPHAUPDATE;
             if (mDrawSettings & DRAW_DITHER_XLU)
-                setting |= GXUtility::ENABLE_DITHER;
+                flags |= DRAWFLAG_DITHER;
         }
 
-        GXUtility::setDrawSetting(setting);
-        GXUtility::setScreenProjection(opa);
+        setDrawFlag(flags);
+        IDrawGX::setDrawSettingGX(opa);
     }
 }

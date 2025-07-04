@@ -17,7 +17,7 @@ namespace EGG
         virtual void calc_after_CalcWorld(); // at 0x20
         virtual void calc(); // at 0x24
         virtual void draw(u16) = 0; // at 0x28
-        virtual void doDraw(u16); // at 0x2C
+        virtual void scnProcDraw(u16); // at 0x2C
 
         void CopyGlobalScreen();
     };

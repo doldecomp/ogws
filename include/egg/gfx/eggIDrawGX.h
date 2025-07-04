@@ -13,6 +13,13 @@ class Screen;
 
 class IDrawGX {
 public:
+    enum DrawFlag {
+        DRAWFLAG_COLORUPDATE = 1 << 0,
+        DRAWFLAG_ALPHAUPDATE = 1 << 1,
+        DRAWFLAG_DITHER = 1 << 2,
+    };
+
+public:
     static const Screen& getScreen() {
 #line 59
         EGG_ASSERT(spScreen);
@@ -54,14 +61,12 @@ public:
         sDrawFlag &= ~DRAWFLAG_DITHER;
     }
 
+    static void setDrawFlag(u32 flag) {
+        sDrawFlag = flag;
+    }
+
 private:
     typedef void (*SetDrawSettingCallback)(void* pArg, bool opa);
-
-    enum DrawFlag {
-        DRAWFLAG_COLORUPDATE = 1 << 0,
-        DRAWFLAG_ALPHAUPDATE = 1 << 1,
-        DRAWFLAG_DITHER = 1 << 2,
-    };
 
 private:
     static const Screen* spScreen;

@@ -29,7 +29,7 @@ void DrawPathLightMap::calc() {
 
 // https://decomp.me/scratch/53SOd
 void DrawPathLightMap::draw(u16 idx) {
-    const Screen::DataEfb& efb = GXUtility::getScreen().GetDataEfb();
+    const Screen::DataEfb& efb = IDrawGX::getScreen().GetDataEfb();
 
     switch (idx) {
     case 0:
