@@ -153,8 +153,8 @@ void PostEffectBase::setProjection(const Screen& screen) {
     Screen clone(screen);
 
     clone.SetFlag(0x80);
-    clone.SetCanvasMode(Frustum::CANVASMODE_1);
-    clone.SetProjectionType(Frustum::PROJ_ORTHO);
+    clone.SetCanvasMode(Frustum::CANVASMODE_LU);
+    clone.SetProjectionType(Frustum::PROJTYPE_ORTHO);
 
     clone.SetNearZ(0.0f);
     clone.SetFarZ(1.0f);

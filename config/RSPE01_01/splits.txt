@@ -1171,12 +1171,15 @@ egg/gfx/eggFrustum.cpp:
 	.sdata2     start:0x804C0970 end:0x804C0998
 
 egg/gfx/eggGXUtility.cpp:
-	.text       start:0x800A17D8 end:0x800A1C30
-	.ctors      start:0x803550F4 end:0x803550F8
+	.text       start:0x800A17D8 end:0x800A1B6C
 	.rodata     start:0x8037A178 end:0x8037A1E0
+	.sdata2     start:0x804C0998 end:0x804C09B8
+
+egg/gfx/eggIDrawGX.cpp:
+	.text       start:0x800A1B6C end:0x800A1C30
+	.ctors      start:0x803550F4 end:0x803550F8
 	.bss        start:0x8040AA20 end:0x8040AA50
 	.sbss       start:0x804BEC70 end:0x804BEC88
-	.sdata2     start:0x804C0998 end:0x804C09B8
 
 egg/gfx/eggDrawHelper.cpp:
 	extab       start:0x800064E0 end:0x800064F8

@@ -660,6 +660,7 @@ config.libs = [
             Object(NonMatching, "egg/gfx/eggScreenEffectBase.cpp"),
             Object(NonMatching, "egg/gfx/eggFrustum.cpp"),
             Object(Matching, "egg/gfx/eggGXUtility.cpp"),
+            Object(Matching, "egg/gfx/eggIDrawGX.cpp"),
             Object(NonMatching, "egg/gfx/eggDrawHelper.cpp"),
             Object(Matching, "egg/prim/eggAssert.cpp", extra_cflags=["-Cpp_exceptions on"]),
             Object(Matching, "egg/math/eggMath.cpp", extra_cflags=["-Cpp_exceptions on"]),

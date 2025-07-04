@@ -62,7 +62,7 @@ namespace EGG
         const Screen* GetParent() const { return mParent; }
         void SetParent(const Screen* parent)
         {
-            SetDirty(true);
+            mFlags |= FLAG_DIRTY;
 
             if (spRoot == this)
                 mParent = NULL;

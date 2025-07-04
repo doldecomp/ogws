@@ -1,105 +1,89 @@
-#include "eggGXUtility.h"
-#include "eggAssert.h"
-#include "eggResTIMG.h"
-#include "eggMatrix.h"
-#include "eggStateGX.h"
-#include "eggScreen.h"
-#include "ut_algorithm.h"
-#include "g3d_restex.h"
+#include <egg/gfx.h>
+#include <egg/prim.h>
 
-namespace EGG
-{
-    using namespace nw4r;
+#include <nw4r/g3d.h>
 
-    const u8 GXUtility::sTexMtxIDs[] = {0x1E, 0x21, 0x24, 0x27, 0x2A, 0x2D, 0x30, 0x33};
-    Screen *IDrawGX::spScreen;
-    GXUtility::ProjectionCallback GXUtility::sProjectionCallback;
-    UNKWORD GXUtility::sProjectionCallbackArg;
-    u16 GXUtility::lbl_804BEC7C;
-    u32 GXUtility::sDrawSettings;
-    math::MTX34 GXUtility::sCameraMtx;
+namespace EGG {
 
-    u8 GXUtility::getTexMtxID(int no)
-    {
-        #line 22
-        EGG_ASSERT(0 <= no && no < 8);
+u8 GXUtility::getTexMtxID(int no) {
+#line 22
+    EGG_ASSERT(0 <= no && no < 8);
 
-        return sTexMtxIDs[no];
-    }
+    static const u8 ID[] = {GX_TEXMTX0, GX_TEXMTX1, GX_TEXMTX2, GX_TEXMTX3,
+                            GX_TEXMTX4, GX_TEXMTX5, GX_TEXMTX6, GX_TEXMTX7};
 
-    void GXUtility::setScaleOffsetPerspective(f32 *p, f32 sx, f32 sy, f32 ox, f32 oy)
-    {
-        #line 38
-        EGG_ASSERT(p != NULL);
-        EGG_ASSERT(sx != 0.f);
-        EGG_ASSERT(sy != 0.f);
+    return ID[no];
+}
 
-        p[1] *= (1.0f / sx);
-        p[3] *= (1.0f / sy);
-        p[2] += ox;
-        p[4] += oy;
-    }
+void GXUtility::setScaleOffsetPerspective(f32* p, f32 sx, f32 sy, f32 ox,
+                                          f32 oy) {
+#line 38
+    EGG_ASSERT(p != NULL);
+    EGG_ASSERT(sx != 0.f);
+    EGG_ASSERT(sy != 0.f);
 
-    namespace
-    {
-        void UNUSED_ASSERTS_GXUTILITY()
-        {
-            EGG_ASSERT_MSG(false, "Not implemented.");
-        }
-    }
+    p[1] *= 1.0f / sx;
+    p[3] *= 1.0f / sy;
+    p[2] += ox;
+    p[4] += oy;
+}
 
-    void GXUtility::getTexObj(GXTexObj *pObj, const ResTIMG& tex)
-    {
-        #line 70
-        EGG_ASSERT(pObj);
+DECOMP_FORCEACTIVE(eggGXUtility_cpp,
+                  "Not implemented.");
 
-        u32 imageOfs = (tex.imageOffset != 0) ? tex.imageOffset : sizeof(tex);
-        BOOL bMipmap = (tex.mipMap) ? TRUE : FALSE;
+void GXUtility::getTexObj(GXTexObj* pObj, const ResTIMG& rRes) {
+#line 70
+    EGG_ASSERT(pObj);
 
-        GXInitTexObj(pObj, (char *)&tex + imageOfs, tex.width, tex.height,
-            (GXTexFmt)tex.format, (GXTexWrapMode)tex.wrapS, (GXTexWrapMode)tex.wrapT, bMipmap);
+    s32 offset = rRes.imageOffset != 0 ? rRes.imageOffset : sizeof(ResTIMG);
+    const u8* pImage = reinterpret_cast<const u8*>(&rRes) + offset;
 
-        GXInitTexObjLOD(pObj, (GXTexFilter)tex.minFilter, (GXTexFilter)tex.magFilter,
-            tex.minLOD / 8.0f, tex.maxLOD / 8.0f, tex.LODBias / 100.0f,
-            tex.biasClampEnable, tex.edgeLODEnable, (GXAnisotropy)tex.anisotropy);
-    }
+    // clang-format off
+    GXInitTexObj(
+        pObj,
+        const_cast<u8*>(pImage),
+        rRes.width,
+        rRes.height,
+        static_cast<GXTexFmt>(rRes.format),
+        static_cast<GXTexWrapMode>(rRes.wrapS),
+        static_cast<GXTexWrapMode>(rRes.wrapT),
+        rRes.mipMap ? GX_TRUE : GX_FALSE);
+    // clang-format on
 
-    void GXUtility::getTexObj(GXTexObj *pObj, nw4r::g3d::ResTex tex,
-        GXTexWrapMode wrapS, GXTexWrapMode wrapT, GXTexFilter minFilt, GXTexFilter magFilt)
-    {
-        #line 113
-        EGG_ASSERT(pObj);
-        EGG_ASSERT(tex.IsValid());
+    // clang-format off
+    GXInitTexObjLOD(
+        pObj, 
+        static_cast<GXTexFilter>(rRes.minFilter),
+        static_cast<GXTexFilter>(rRes.magFilter),
+        rRes.minLOD / 8.0f,
+        rRes.maxLOD / 8.0f, 
+        rRes.LODBias / 100.0f, 
+        rRes.biasClampEnable,
+        rRes.edgeLODEnable, 
+        static_cast<GXAnisotropy>(rRes.anisotropy));
+    // clang-format on
+}
 
-        void *image;
-        u16 width, height;
-        GXTexFmt fmt;
-        f32 minLod, maxLod;
-        u8 mipmap;
+void GXUtility::getTexObj(GXTexObj* pObj, const nw4r::g3d::ResTex tex,
+                          GXTexWrapMode wrapS, GXTexWrapMode wrapT,
+                          GXTexFilter minFilt, GXTexFilter magFilt) {
+#line 113
+    EGG_ASSERT(pObj);
+    EGG_ASSERT(tex.IsValid());
 
-        if (tex.GetTexObjParam(&image, &width, &height, &fmt, &minLod, &maxLod, &mipmap))
-        {
-            GXInitTexObj(pObj, image, width, height, fmt, wrapS, wrapT, mipmap);
-            GXInitTexObjLOD(pObj, minFilt, magFilt, minLod, maxLod, 0.0f, 0, 0, GX_ANISO_1);
-        }
-    }
+    void* pImage;
+    u16 width, height;
+    GXTexFmt format;
+    f32 minLod, maxLod;
+    GXBool mipmap;
 
-    void GXUtility::set(u16 s, const nw4r::math::MTX34& mtx, Screen& screen)
-    {
-        lbl_804BEC7C = s;
-        setScreen(screen);
-        PSMTXCopy(mtx, sCameraMtx);
-    }
+    if (tex.GetTexObjParam(&pImage, &width, &height, &format, &minLod, &maxLod,
+                           &mipmap)) {
+        GXInitTexObj(pObj, pImage, width, height, format, wrapS, wrapT, mipmap);
 
-    void GXUtility::setScreenProjection(bool b)
-    {
-        StateGX::GXSetColorUpdate_(sDrawSettings & ENABLE_COLOR_UPDATE);
-        StateGX::GXSetAlphaUpdate_(sDrawSettings & ENABLE_ALPHA_UPDATE);
-        StateGX::GXSetDither_(sDrawSettings & ENABLE_DITHER);
-
-        if (sProjectionCallback != NULL)
-            sProjectionCallback(sProjectionCallbackArg, b);
-
-        GXUtility::getScreen().SetProjectionGX();
+        GXInitTexObjLOD(pObj, minFilt, magFilt, minLod, maxLod, 0.0f, GX_FALSE,
+                        GX_FALSE, GX_ANISO_1);
     }
 }
+
+} // namespace EGG

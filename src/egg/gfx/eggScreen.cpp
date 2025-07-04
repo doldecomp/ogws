@@ -40,8 +40,8 @@ namespace EGG
         sTVModeHeights[TV_MODE_16_9] = maxY[1];
 
         static Screen defaultRoot;
-        defaultRoot.SetProjectionType(PROJ_ORTHO);
-        defaultRoot.SetCanvasMode(CANVASMODE_1);
+        defaultRoot.SetProjectionType(PROJTYPE_ORTHO);
+        defaultRoot.SetCanvasMode(CANVASMODE_LU);
         defaultRoot.SetNearZ(0.0f);
         defaultRoot.SetFarZ(1.0f);
 
@@ -54,8 +54,8 @@ namespace EGG
     }
 
     Screen::Screen() :
-        Frustum(PROJ_PERSP, math::VEC2(sTVModeWidths[sTVMode], sTVModeHeights[sTVMode]),
-            10.0f, 10000.0f, CANVASMODE_1)
+        Frustum(PROJTYPE_PERSP, math::VEC2(sTVModeWidths[sTVMode], sTVModeHeights[sTVMode]),
+            10.0f, 10000.0f, CANVASMODE_LU)
     {
         mPosition.x = 0.0f;
         mPosition.y = 0.0f;
@@ -65,7 +65,7 @@ namespace EGG
 
     Screen::Screen(f32 x, f32 y, f32 w, f32 h,
                    const Screen* userRoot, CanvasMode canvasMode) :
-        Frustum(PROJ_PERSP, math::VEC2(w, h), 10.0f, 10000.0f, canvasMode)
+        Frustum(PROJTYPE_PERSP, math::VEC2(w, h), 10.0f, 10000.0f, canvasMode)
     {
         mPosition.x = x;
         mPosition.y = y;
@@ -244,7 +244,7 @@ namespace EGG
             GetPosSizeInEfb();
             mDataEfb.vp.z1 = 0.0f;
             mDataEfb.vp.z2 = 1.0f;
-            SetDirty(false);
+            mFlags &= ~FLAG_DIRTY;
         }
 
         return mDataEfb;
@@ -269,7 +269,7 @@ namespace EGG
         mtx->m[0][3] = x;
         mtx->m[2][3] = 0.0f;
 
-        if (mCanvasMode == CANVASMODE_0)
+        if (mCanvasMode == CANVASMODE_CC)
             mtx->m[1][3] = y - sy;
         else
             mtx->m[1][3] = y;
@@ -288,16 +288,21 @@ namespace EGG
             math::MTX34 drawMtx;
             Screen clone(*this);
 
-            clone.SetCanvasMode(CANVASMODE_1);
+            clone.SetCanvasMode(CANVASMODE_LU);
             clone.SetNearZ(0.0f);
             clone.SetFarZ(1.0f);
-            clone.SetProjectionType(PROJ_ORTHO);
+            clone.SetProjectionType(PROJTYPE_ORTHO);
 
             clone.SetProjectionGX();
             clone.CalcMatrixForDrawQuad(&drawMtx, 0.0f, 0.0f,
                 mSize.x * mScale.x, mSize.y * mScale.y);
 
-            DrawGX::ClearEfb(drawMtx, (flags & 1), (flags & 2), (flags & 4), color, true);
+            DrawGX::ClearEfb(drawMtx,
+                (flags & 1) ? true : false,
+                (flags & 2) ? true : false,
+                (flags & 4) ? true : false,
+                color,
+                true);
         }
     }
 

@@ -18,7 +18,7 @@ public:
 public:
     static ScnRfl* Construct(MEMAllocator* pAllocator, u32* pSize,
                              RFLResolution resolution, u32 exprFlags,
-                             u32 userDataSize);
+                             u32 userDataSize = 0);
 
     ScnRfl(MEMAllocator* pAllocator, void* pNglBuffer, void* pUserData,
            RFLResolution resolution, u32 exprFlag);

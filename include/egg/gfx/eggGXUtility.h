@@ -1,45 +1,27 @@
 #ifndef EGG_GFX_GX_UTILITY_H
 #define EGG_GFX_GX_UTILITY_H
-#include "types_egg.h"
-#include "eggIDrawGX.h"
-#include <revolution/GX.h>
-#include <revolution/MTX.h>
+#include <egg/types_egg.h>
+
 #include <nw4r/g3d.h>
-#include <nw4r/math.h>
 
-namespace EGG
-{
-    class GXUtility : public IDrawGX
-    {
-    public:
-        typedef UNKTYPE (* ProjectionCallback)(UNKWORD, bool);
+#include <revolution/GX.h>
 
-        enum DrawSetting
-        {
-            ENABLE_COLOR_UPDATE = 0x1,
-            ENABLE_ALPHA_UPDATE = 0x2,
-            ENABLE_DITHER = 0x4,
-        };
+namespace EGG {
 
-    public:
-        static u8 getTexMtxID(int);
-        static void setScaleOffsetPerspective(f32 *, f32, f32, f32, f32);
-        static void getTexObj(GXTexObj *, const ResTIMG&);
-        static void getTexObj(GXTexObj *, nw4r::g3d::ResTex,
-            GXTexWrapMode, GXTexWrapMode, GXTexFilter, GXTexFilter);
-        static void set(u16, const nw4r::math::MTX34&, Screen&);
-        static void setScreenProjection(bool);
+class GXUtility {
+public:
+    static u8 getTexMtxID(int no);
 
-        static void setDrawSetting(u32 setting) { sDrawSettings = setting; }
+    static void setScaleOffsetPerspective(f32* p, f32 sx, f32 sy, f32 ox,
+                                          f32 oy);
 
-    private:
-        static const u8 sTexMtxIDs[];
-        static ProjectionCallback sProjectionCallback;
-        static UNKWORD sProjectionCallbackArg;
-        static u16 lbl_804BEC7C;
-        static u32 sDrawSettings;
-        static nw4r::math::MTX34 sCameraMtx;
-    };
-}
+    static void getTexObj(GXTexObj* pObj, const ResTIMG& rRes);
+
+    static void getTexObj(GXTexObj* pObj, const nw4r::g3d::ResTex tex,
+                          GXTexWrapMode wrapS, GXTexWrapMode wrapT,
+                          GXTexFilter minFilter, GXTexFilter magFilter);
+};
+
+} // namespace EGG
 
 #endif
