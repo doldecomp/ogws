@@ -129,11 +129,11 @@ void Frustum::LoadScnCamera(const nw4r::g3d::ResAnmScn anmScn, u8 refNumber,
     case GX_PERSPECTIVE: {
         SetProjectionType(PROJTYPE_PERSP);
 
-        if (!(flags & LOAD_SCN_KEEP_FOVY)) {
-            SetFovY(result.perspFovy);
+        if (!(flags & LOADSCN_KEEP_FOVY)) {
+            SetFovy(result.perspFovy);
         }
 
-        if (!(flags & LOAD_SCN_KEEP_CANVAS)) {
+        if (!(flags & LOADSCN_KEEP_CANVAS)) {
             SetSizeX(mSize.y * result.aspect);
             SetScale(nw4r::math::VEC3(1.0f, 1.0f, 1.0f));
         }
@@ -143,7 +143,7 @@ void Frustum::LoadScnCamera(const nw4r::g3d::ResAnmScn anmScn, u8 refNumber,
     case GX_ORTHOGRAPHIC: {
         SetProjectionType(PROJTYPE_ORTHO);
 
-        if (!(flags & LOAD_SCN_KEEP_CANVAS)) {
+        if (!(flags & LOADSCN_KEEP_CANVAS)) {
             SetCanvasMode(CANVASMODE_CC);
 
             SetSizeY(result.perspFovy);
@@ -162,7 +162,7 @@ void Frustum::LoadScnCamera(const nw4r::g3d::ResAnmScn anmScn, u8 refNumber,
     }
     }
 
-    if (!(flags & LOAD_SCN_KEEP_Z)) {
+    if (!(flags & LOADSCN_KEEP_Z)) {
         SetNearZ(result.near);
         SetFarZ(result.far);
     }
@@ -212,6 +212,7 @@ void Frustum::GetOrthographicParam_(f32* pT, f32* pB, f32* pL, f32* pR) const {
         // TODO: Fakematch
         f32 new_var2 = mOffset.y + sGlobalOffset.y;
         *pB = new_var2 + -1.0f * mSize.y * mScale.y;
+
         *pL = mOffset.x + sGlobalOffset.x;
         *pR = mOffset.x + sGlobalOffset.x + mSize.x * mScale.x;
 

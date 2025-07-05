@@ -203,7 +203,7 @@ namespace EGG
             LightTextureManager *mgr = mpLightManager->GetLightTextureManager();
 
             mgr->draw(mpLightManager, efb,
-                efb.vp.x1, efb.vp.y1, efb.vp.x2, efb.vp.y2);
+                efb.vp.x, efb.vp.y, efb.vp.width, efb.vp.height);
         }
 
         if (mSceneSettings & SCENE_SETTING_0x2)

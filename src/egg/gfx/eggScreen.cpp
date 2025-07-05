@@ -1,373 +1,356 @@
-#include "eggScreen.h"
-#include "eggStateGX.h"
-#include "eggDrawGX.h"
+#include <egg/gfx.h>
+#include <egg/prim.h>
 
 #include <revolution/SC.h>
 
-using namespace nw4r;
+namespace EGG {
 
-namespace EGG
-{
-    Screen::TVMode Screen::sTVMode;
-    u16 Screen::sTVModeWidths[TV_MODE_MAX] = {
-        600, // TV_MODE_4_3
-        800  // TV_MODE_16_9
-    };
-    u16 Screen::sTVModeHeights[TV_MODE_MAX] = {
-        480, // TV_MODE_4_3
-        480  // TV_MODE_16_9
-    };
+u16 Screen::sTVModeWidths[TV_MODE_MAX] = {
+    600, // TV_MODE_STD
+    800  // TV_MODE_WIDE
+};
+u16 Screen::sTVModeHeights[TV_MODE_MAX] = {
+    480, // TV_MODE_STD
+    480  // TV_MODE_WIDE
+};
 
-    Screen* Screen::spRoot = NULL;
+Screen::TVMode Screen::sTVMode = TV_MODE_STD;
+Screen::TVModeRatio Screen::sTVModeRatios[Screen::TV_MODE_MAX];
 
-    Screen::ChangeTVModeFunc Screen::sChangeTVModeFunc = NULL;
-    void* Screen::spChangeTVModeFuncInfo = NULL;
-    Screen::TVModeRatio Screen::sTVModeRatios[Screen::TV_MODE_MAX];
+Screen* Screen::spRoot = NULL;
 
-    math::VEC2 Screen::sCanvasScale(1.0f, 1.0f);
-    math::VEC2 Screen::sCanvasOffset(0.0f, 0.0f);
+Screen::ChangeTVModeFunc Screen::sChangeTVModeFunc = NULL;
+void* Screen::spChangeTVModeFuncInfo = NULL;
 
-    void Screen::Initialize(const u16* maxX, const u16* maxY, Screen* userRoot)
-    {
-        #line 47
-        EGG_ASSERT(maxX != NULL);
-        EGG_ASSERT(maxY != NULL);
+nw4r::math::VEC2 Screen::sCanvasScale(1.0f, 1.0f);
+nw4r::math::VEC2 Screen::sCanvasOffset(0.0f, 0.0f);
 
-        sTVModeWidths[TV_MODE_4_3] = maxX[0];
-        sTVModeHeights[TV_MODE_4_3] = maxY[0];
+void Screen::Initialize(const u16* maxX, const u16* maxY, Screen* pUserRoot) {
+#line 47
+    EGG_ASSERT(maxX != NULL);
+    EGG_ASSERT(maxY != NULL);
 
-        sTVModeWidths[TV_MODE_16_9] = maxX[1];
-        sTVModeHeights[TV_MODE_16_9] = maxY[1];
+    sTVModeWidths[TV_MODE_STD] = maxX[TV_MODE_STD];
+    sTVModeHeights[TV_MODE_STD] = maxY[TV_MODE_STD];
 
-        static Screen defaultRoot;
-        defaultRoot.SetProjectionType(PROJTYPE_ORTHO);
-        defaultRoot.SetCanvasMode(CANVASMODE_LU);
-        defaultRoot.SetNearZ(0.0f);
-        defaultRoot.SetFarZ(1.0f);
+    sTVModeWidths[TV_MODE_WIDE] = maxX[TV_MODE_WIDE];
+    sTVModeHeights[TV_MODE_WIDE] = maxY[TV_MODE_WIDE];
 
-        userRoot = (userRoot == NULL) ? &defaultRoot : userRoot;
-        spRoot = userRoot;
-        userRoot->SetParent(NULL);
+    static Screen root;
+    root.SetProjectionType(PROJTYPE_ORTHO);
+    root.SetCanvasMode(CANVASMODE_LU);
+    root.SetNearZ(0.0f);
+    root.SetFarZ(1.0f);
 
-        CalcRatio();
-        SetTVMode(sTVMode); 
+    pUserRoot = pUserRoot == NULL ? &root : pUserRoot;
+
+    spRoot = pUserRoot;
+    pUserRoot->SetParent(NULL);
+
+    CalcRatio();
+    SetTVMode(sTVMode);
+}
+
+Screen::Screen()
+    // @bug Far Z typo of 100,000
+    : Frustum(PROJTYPE_PERSP,
+              nw4r::math::VEC2(sTVModeWidths[sTVMode], sTVModeHeights[sTVMode]),
+              10.0f, 10000.0f, CANVASMODE_LU) {
+
+    mPosition.x = 0.0f;
+    mPosition.y = 0.0f;
+
+    SetParent(NULL);
+    Configure();
+}
+
+Screen::Screen(f32 x, f32 y, f32 width, f32 height, const Screen* pParent,
+               CanvasMode canvasMode)
+    : Frustum(PROJTYPE_PERSP, nw4r::math::VEC2(width, height), 10.0f, 100000.0f,
+              canvasMode) {
+
+    mPosition.x = x;
+    mPosition.y = y;
+
+    SetParent(pParent);
+    Configure();
+}
+
+Screen::Screen(const Screen& rOther)
+    : Frustum(rOther), mPosition(rOther.mPosition), mDataEfb(rOther.mDataEfb) {
+
+    SetParent(rOther.mParent);
+    Configure();
+}
+
+void Screen::Configure() {}
+
+void Screen::SetProjectionGX() const {
+    if (!(mFlags & FLAG_PROJ_ABSOLUTE)) {
+        f32 sx, sy, ox, oy;
+        GetGlobalScaleOffset(&sx, &sy, &ox, &oy);
+
+        SetGlobalScaleOffset(sCanvasScale.x, sCanvasScale.y, sCanvasOffset.x,
+                             sCanvasOffset.y);
+
+        Frustum::SetProjectionGX();
+
+        SetGlobalScaleOffset(sx, sy, ox, oy);
+    } else {
+        Frustum::SetProjectionGX();
     }
 
-    Screen::Screen() :
-        Frustum(PROJTYPE_PERSP, math::VEC2(sTVModeWidths[sTVMode], sTVModeHeights[sTVMode]),
-            10.0f, 10000.0f, CANVASMODE_LU)
-    {
-        mPosition.x = 0.0f;
-        mPosition.y = 0.0f;
-        SetParent(NULL);
-        NullSub_0();
+    SetViewGX();
+}
+
+void Screen::CopyToG3D(nw4r::g3d::Camera camera) const {
+    if (!(mFlags & FLAG_PROJ_ABSOLUTE)) {
+        f32 sx, sy, ox, oy;
+        GetGlobalScaleOffset(&sx, &sy, &ox, &oy);
+
+        SetGlobalScaleOffset(sCanvasScale.x, sCanvasScale.y, sCanvasOffset.x,
+                             sCanvasOffset.y);
+
+        Frustum::CopyToG3D(camera);
+
+        SetGlobalScaleOffset(sx, sy, ox, oy);
+    } else {
+        Frustum::CopyToG3D(camera);
     }
 
-    Screen::Screen(f32 x, f32 y, f32 w, f32 h,
-                   const Screen* userRoot, CanvasMode canvasMode) :
-        Frustum(PROJTYPE_PERSP, math::VEC2(w, h), 10.0f, 10000.0f, canvasMode)
-    {
-        mPosition.x = x;
-        mPosition.y = y;
-        SetParent(userRoot);
-        NullSub_0();
+    SetViewG3D(camera);
+}
+
+void Screen::SetViewGX() const {
+    const DataEfb& rEfb = GetDataEfb();
+
+    StateGX::GXSetViewport_(rEfb.vp.x, rEfb.vp.y, rEfb.vp.width, rEfb.vp.height,
+                            rEfb.vp.near, rEfb.vp.far);
+
+    StateGX::GXSetScissor_(rEfb.vp.x, rEfb.vp.y, rEfb.vp.width, rEfb.vp.height);
+
+    StateGX::GXSetScissorBoxOffset_(rEfb.ox, rEfb.oy);
+}
+
+void Screen::SetViewG3D(nw4r::g3d::Camera camera) const {
+    const DataEfb& rEfb = GetDataEfb();
+
+    f32 width, height;
+    height = rEfb.vp.height;
+    width = rEfb.vp.width;
+
+    f32 x, y;
+    y = rEfb.vp.y;
+    x = rEfb.vp.x;
+
+    f32 near, far;
+    far = rEfb.vp.far;
+    near = rEfb.vp.near;
+
+    camera.SetViewport(x, y, width, height);
+    camera.SetViewportZRange(near, far);
+
+    camera.SetScissor(rEfb.vp.x, rEfb.vp.y, rEfb.vp.width, rEfb.vp.height);
+    camera.SetScissorBoxOffset(rEfb.ox, rEfb.oy);
+}
+
+void Screen::CopyFromAnother(const Screen& rOther) {
+    Frustum::CopyFromAnother(rOther);
+
+    SetParent(rOther.mParent);
+    mPosition = rOther.mPosition;
+    mDataEfb = rOther.mDataEfb;
+}
+
+void Screen::GetPosSizeInEfb() const {
+    TVMode tvMode = !(mFlags & FLAG_FORCE_STD_ASPECT) ? sTVMode : TV_MODE_STD;
+    const TVModeRatio& rRatio = sTVModeRatios[tvMode];
+
+    f32* pX = &mDataEfb.vp.x;
+    f32* pY = &mDataEfb.vp.y;
+
+    GetGlobalPos(pX, pY);
+
+    *pX = sCanvasScale.x * *pX;
+    *pY = sCanvasScale.y * *pY;
+
+    *pX *= rRatio.widthRatio;
+    *pY *= rRatio.heightRatio;
+
+    mDataEfb.oy = 0;
+    mDataEfb.ox = 0;
+
+    f32 x = *pX;
+    if (x < 0.0f) {
+        *pX = 0.0f;
+
+        s32 lx = static_cast<s32>(-x);
+        mDataEfb.ox = lx - (lx & 1);
     }
 
-    Screen::Screen(const Screen& other) :
-        Frustum(other),
-        mPosition(other.mPosition),
-        mDataEfb(other.mDataEfb)
-    {
-        SetParent(other.mParent);
-        NullSub_0();
+    f32 y = *pY;
+    if (y < 0.0f) {
+        *pY = 0.0f;
+
+        s32 ly = static_cast<s32>(-y);
+        mDataEfb.oy = ly - (ly & 1);
     }
 
-
-    // Debug stripped?
-    // NOTE: This needs to NOT inline in the Screen ctors (see FillBufferGX)
-    void Screen::NullSub_0() {}
-
-    void Screen::SetProjectionGX() const
-    {
-        if (!(mFlags & 0x80))
-        {
-            f32 sx, sy, ox, oy;
-            GetGlobalScaleOffset(&sx, &sy, &ox, &oy);
-
-            SetGlobalScaleOffset(sCanvasScale.x, sCanvasScale.y,
-                sCanvasOffset.x, sCanvasOffset.y);
-            Frustum::SetProjectionGX();
-
-            SetGlobalScaleOffset(sx, sy, ox, oy);
-        }
-        else
-        {
-            Frustum::SetProjectionGX();
-        }
-
-        SetViewGX();
+    if (mFlags & FLAG_ALIGN_EFB_POS) {
+        *pX -= static_cast<s32>(*pX) & 1;
+        *pY -= static_cast<s32>(*pY) & 1;
     }
 
-    void Screen::CopyToG3D(g3d::Camera cam) const
-    {
-        if (!(mFlags & 0x80))
-        {
-            f32 sx, sy, ox, oy;
-            GetGlobalScaleOffset(&sx, &sy, &ox, &oy);
+    *pX = static_cast<s32>(*pX);
+    *pY = static_cast<s32>(*pY);
 
-            SetGlobalScaleOffset(sCanvasScale.x, sCanvasScale.y,
-                sCanvasOffset.x, sCanvasOffset.y);
-            Frustum::CopyToG3D(cam);
+    mDataEfb.vp.width = mSize.x;
+    mDataEfb.vp.height = mSize.y;
 
-            SetGlobalScaleOffset(sx, sy, ox, oy);
-        }
-        else
-        {
-            Frustum::CopyToG3D(cam);
-        }
-
-        SetViewG3D(cam);
+    if (!(mFlags & FLAG_VPSIZE_ABSOLUTE)) {
+        mDataEfb.vp.width = mSize.x * rRatio.widthRatio;
+        mDataEfb.vp.height = mSize.y * rRatio.heightRatio;
     }
 
-    void Screen::SetViewGX() const
-    {
-        const DataEfb& efb = GetDataEfb();
-
-        StateGX::GXSetViewport_(efb.vp.x1, efb.vp.y1, efb.vp.x2, efb.vp.y2,
-            efb.vp.z1, efb.vp.z2);
-        StateGX::GXSetScissor_(efb.vp.x1, efb.vp.y1, efb.vp.x2, efb.vp.y2);
-        StateGX::GXSetScissorBoxOffset_(efb.sc_ox, efb.sc_oy);
+    if (mFlags & FLAG_ALIGN_EFB_SIZE) {
+        mDataEfb.vp.width -= static_cast<s32>(mDataEfb.vp.width) & 3;
+        mDataEfb.vp.height -= static_cast<s32>(mDataEfb.vp.height) & 3;
     }
 
-    void Screen::SetViewG3D(nw4r::g3d::Camera cam) const
-    {
-        const DataEfb& efb = GetDataEfb();
+    mDataEfb.vp.width = mDataEfb.vp.width >= 0.0f ? mDataEfb.vp.width : 0.0f;
+    mDataEfb.vp.height = mDataEfb.vp.height >= 0.0f ? mDataEfb.vp.height : 0.0f;
 
-        f32 x1, x2, y1, y2;
-        f32 z1, z2;
-        
-        y2 = efb.vp.y2;
-        x2 = efb.vp.x2;
-        
-        y1 = efb.vp.y1;
-        x1 = efb.vp.x1;
-        
-        z2 = efb.vp.z2;
-        z1 = efb.vp.z1;
+    mDataEfb.vp.width = static_cast<s32>(mDataEfb.vp.width);
+    mDataEfb.vp.height = static_cast<s32>(mDataEfb.vp.height);
+}
 
-        cam.SetViewport(x1, y1, x2, y2);
-        cam.SetViewportZRange(z1, z2);
-        cam.SetScissor(efb.vp.x1, efb.vp.y1, efb.vp.x2, efb.vp.y2);
-        cam.SetScissorBoxOffset(efb.sc_ox, efb.sc_oy);
+const Screen::DataEfb& Screen::GetDataEfb() const {
+    if (IsChangeEfb()) {
+        GetPosSizeInEfb();
+
+        mDataEfb.vp.near = 0.0f;
+        mDataEfb.vp.far = 1.0f;
+
+        mFlags &= ~FLAG_DIRTY;
     }
 
-    void Screen::CopyFromAnother(const Screen& other)
-    {
-        Frustum::CopyFromAnother(other);
+    return mDataEfb;
+}
 
-        SetParent(other.mParent);
-        mPosition = other.mPosition;
-        mDataEfb = other.mDataEfb;
+bool Screen::IsChangeEfb() const {
+    if (mFlags & FLAG_DIRTY) {
+        return true;
     }
 
-    void Screen::GetPosSizeInEfb() const
-    {
-        const TVMode tvMode = (!(mFlags & 0x20)) ? sTVMode : TV_MODE_4_3;
-        const TVModeRatio& tvRatio = sTVModeRatios[tvMode];
-        
-        f32* px = &mDataEfb.vp.x1;
-        f32* py = &mDataEfb.vp.y1;
-        GetGlobalPos(px, py);
-
-        *px = sCanvasScale.x * *px;
-        *py = sCanvasScale.y * *py;
-
-        *px *= tvRatio.w_ratio;
-        *py *= tvRatio.h_ratio;
-
-        mDataEfb.sc_oy = 0;
-        mDataEfb.sc_ox = 0;
-
-        const f32 x = *px;
-        if (x < 0.0f)
-        {
-            *px = 0.0f;
-
-            const s32 lx = static_cast<s32>(-x);
-            mDataEfb.sc_ox = lx - (lx & 0x1);
-        }
-
-        const f32 y = *py;
-        if (y < 0.0f)
-        {
-            *py = 0.0f;
-
-            const s32 ly = static_cast<s32>(-y);
-            mDataEfb.sc_oy = ly - (ly & 0x1);
-        }
-
-        if (mFlags & 0x2)
-        {
-            *px -= static_cast<s32>(*px) & 0x1;
-            *py -= static_cast<s32>(*py) & 0x1;
-        }
-
-        *px = static_cast<s32>(*px);
-        *py = static_cast<s32>(*py);
-        
-        mDataEfb.vp.x2 = mSize.x;
-        mDataEfb.vp.y2 = mSize.y;
-
-        if (!(mFlags & 0x8))
-        {
-            mDataEfb.vp.x2 = mSize.x * tvRatio.w_ratio;
-            mDataEfb.vp.y2 = mSize.y * tvRatio.h_ratio;
-        }
-
-        if (mFlags & 0x4)
-        {
-            mDataEfb.vp.x2 -= static_cast<s32>(mDataEfb.vp.x2) & 0x3;
-            mDataEfb.vp.y2 -= static_cast<s32>(mDataEfb.vp.y2) & 0x3;
-        }
-
-        mDataEfb.vp.x2 = (mDataEfb.vp.x2 >= 0.0f) ? mDataEfb.vp.x2 : 0.0f;
-        mDataEfb.vp.y2 = (mDataEfb.vp.y2 >= 0.0f) ? mDataEfb.vp.y2 : 0.0f;
-
-        mDataEfb.vp.x2 = static_cast<s32>(mDataEfb.vp.x2);
-        mDataEfb.vp.y2 = static_cast<s32>(mDataEfb.vp.y2);
+    if (mParent != NULL) {
+        return mParent->IsChangeEfb();
     }
 
-    const Screen::DataEfb& Screen::GetDataEfb() const
-    {
-        if (IsChangeEfb())
-        {
-            GetPosSizeInEfb();
-            mDataEfb.vp.z1 = 0.0f;
-            mDataEfb.vp.z2 = 1.0f;
-            mFlags &= ~FLAG_DIRTY;
-        }
+    return false;
+}
 
-        return mDataEfb;
-    }
+void Screen::CalcMatrixForDrawQuad(nw4r::math::MTX34* pMtx, f32 x, f32 y,
+                                   f32 width, f32 height) const {
 
-    bool Screen::IsChangeEfb() const
-    {
-        if (mFlags & FLAG_DIRTY)
-            return true;
+    PSMTXScale(*pMtx, width, height, 1.0f);
 
-        if (mParent != NULL)
-            return mParent->IsChangeEfb();
+    pMtx->_03 = x;
+    pMtx->_23 = 0.0f;
 
-        return false;
-    }
-
-    void Screen::CalcMatrixForDrawQuad(math::MTX34* mtx,
-                                       f32 x, f32 y, f32 sx, f32 sy) const
-    {
-        PSMTXScale(*mtx, sx, sy, 1.0f);
-
-        mtx->m[0][3] = x;
-        mtx->m[2][3] = 0.0f;
-
-        if (mCanvasMode == CANVASMODE_CC)
-            mtx->m[1][3] = y - sy;
-        else
-            mtx->m[1][3] = y;
-    }
-
-    // https://decomp.me/scratch/vufIs
-    // 1. Bools for ClearEfb are not evaluated in the correct order.
-    // 2. The NullSub_0 when constructing the clone must inline
-    //    (even though the actual ctor must NOT inline it) 
-    void Screen::FillBufferGX(u32 flags, GXColor color, u32 r6) const
-    {
-        #pragma unused(r6)
-
-        if (flags != 0)
-        {
-            math::MTX34 drawMtx;
-            Screen clone(*this);
-
-            clone.SetCanvasMode(CANVASMODE_LU);
-            clone.SetNearZ(0.0f);
-            clone.SetFarZ(1.0f);
-            clone.SetProjectionType(PROJTYPE_ORTHO);
-
-            clone.SetProjectionGX();
-            clone.CalcMatrixForDrawQuad(&drawMtx, 0.0f, 0.0f,
-                mSize.x * mScale.x, mSize.y * mScale.y);
-
-            DrawGX::ClearEfb(drawMtx,
-                (flags & 1) ? true : false,
-                (flags & 2) ? true : false,
-                (flags & 4) ? true : false,
-                color,
-                true);
-        }
-    }
-
-    // https://decomp.me/scratch/WmO2A
-    // 1. Recursion is incorrect (lots of extra stack storage)
-    // 2. Seems like -ipa file must be off, despite other functions
-    //    in this file requiring it (see SetTVModeDefault)
-    void Screen::GetGlobalPos(f32* ox, f32* oy) const
-    {
-        f32 px, py;
-        const Screen* parent = GetParent();
-        
-        if (parent != NULL)
-        {
-            parent->GetGlobalPos(&px, &py);
-            parent->ConvertToCanvasLU(mPosition.x,
-                mPosition.y, ox, oy);
-            
-            *ox += px;
-            *oy += py;
-        }
-        else
-        {
-            #line 485
-            EGG_ASSERT(spRoot == NULL || ( spRoot != NULL && spRoot == this ));
-
-            *ox = mPosition.x;
-            *oy = mPosition.y;
-        }
-    }
-
-    void Screen::SetTVMode(TVMode tvMode)
-    {
-        sTVMode = tvMode;
-
-        if (spRoot != NULL)
-        {
-            spRoot->SetSizeX(GetSizeXMax());
-            spRoot->SetSizeY(GetSizeYMax());
-        }
-
-        if (sChangeTVModeFunc != NULL)
-            sChangeTVModeFunc(spChangeTVModeFuncInfo);
-    }
-
-    void Screen::SetTVModeDefault()
-    {
-        SetTVMode(SCGetAspectRatio() == SC_ASPECT_STD
-            ? TV_MODE_4_3 : TV_MODE_16_9);
-    }
-
-    void Screen::CalcRatio()
-    {
-        #line 530
-        EGG_ASSERT(GetSizeXMax() > 0);
-        EGG_ASSERT(GetSizeYMax() > 0);
-
-        sTVModeRatios[TV_MODE_4_3].w_ratio =
-            static_cast<f32>(StateGX::getEfbWidth()) / static_cast<f32>(sTVModeWidths[TV_MODE_4_3]);
-        sTVModeRatios[TV_MODE_4_3].h_ratio =
-            static_cast<f32>(StateGX::getEfbHeight()) / static_cast<f32>(sTVModeHeights[TV_MODE_4_3]);
-
-        sTVModeRatios[TV_MODE_16_9].w_ratio =
-            static_cast<f32>(StateGX::getEfbWidth()) / static_cast<f32>(sTVModeWidths[TV_MODE_16_9]);
-        sTVModeRatios[TV_MODE_16_9].h_ratio =
-            static_cast<f32>(StateGX::getEfbHeight()) / static_cast<f32>(sTVModeHeights[TV_MODE_16_9]);
+    if (mCanvasMode == CANVASMODE_CC) {
+        pMtx->_13 = y - height;
+    } else {
+        pMtx->_13 = y;
     }
 }
+
+void Screen::FillBufferGX(u32 flags, GXColor color, u32 arg2) const {
+#pragma unused(arg2)
+
+    if (flags == 0) {
+        return;
+    }
+
+    Screen clone(*this);
+    clone.SetCanvasMode(CANVASMODE_LU);
+    clone.SetNearZ(0.0f);
+    clone.SetFarZ(1.0f);
+    clone.SetProjectionType(PROJTYPE_ORTHO);
+    clone.SetProjectionGX();
+
+    nw4r::math::MTX34 drawMtx;
+    clone.CalcMatrixForDrawQuad(&drawMtx, 0.0f, 0.0f, mSize.x * mScale.x,
+                                mSize.y * mScale.y);
+
+    // clang-format off
+    DrawGX::ClearEfb(
+        drawMtx,
+        (flags & FILLBUFFER_COLOR)   ? true : false,
+        (flags & FILLBUFFER_ALPHA)   ? true : false,
+        (flags & FILLBUFFER_TEXTURE) ? true : false,
+        color,
+        true);
+    // clang-format on
+}
+
+void Screen::GetGlobalPos(f32* pX, f32* pY) const {
+    const Screen* parent = GetParent();
+
+    if (parent != NULL) {
+        f32 gx, gy;
+        parent->GetGlobalPos(&gx, &gy);
+
+        f32 lx, ly;
+        parent->ConvertToCanvasLU(mPosition.x, mPosition.y, &lx, &ly);
+
+        *pX = lx + gx;
+        *pY = ly + gy;
+    } else {
+#line 485
+        EGG_ASSERT(spRoot == NULL || ( spRoot != NULL && spRoot == this ));
+
+        *pX = mPosition.x;
+        *pY = mPosition.y;
+    }
+}
+
+void Screen::SetTVMode(TVMode tvMode) {
+    sTVMode = tvMode;
+
+    if (spRoot != NULL) {
+        spRoot->SetSizeX(GetSizeXMax());
+        spRoot->SetSizeY(GetSizeYMax());
+    }
+
+    if (sChangeTVModeFunc != NULL) {
+        sChangeTVModeFunc(spChangeTVModeFuncInfo);
+    }
+}
+
+void Screen::SetTVModeDefault() {
+    SetTVMode(SCGetAspectRatio() == SC_ASPECT_STD ? TV_MODE_STD : TV_MODE_WIDE);
+}
+
+void Screen::CalcRatio() {
+#line 530
+    EGG_ASSERT(GetSizeXMax() > 0);
+    EGG_ASSERT(GetSizeYMax() > 0);
+
+    sTVModeRatios[TV_MODE_STD].widthRatio =
+        static_cast<f32>(StateGX::getEfbWidth()) /
+        static_cast<f32>(sTVModeWidths[TV_MODE_STD]);
+
+    sTVModeRatios[TV_MODE_STD].heightRatio =
+        static_cast<f32>(StateGX::getEfbHeight()) /
+        static_cast<f32>(sTVModeHeights[TV_MODE_STD]);
+
+    sTVModeRatios[TV_MODE_WIDE].widthRatio =
+        static_cast<f32>(StateGX::getEfbWidth()) /
+        static_cast<f32>(sTVModeWidths[TV_MODE_WIDE]);
+
+    sTVModeRatios[TV_MODE_WIDE].heightRatio =
+        static_cast<f32>(StateGX::getEfbHeight()) /
+        static_cast<f32>(sTVModeHeights[TV_MODE_WIDE]);
+}
+
+} // namespace EGG

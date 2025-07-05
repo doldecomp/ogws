@@ -67,8 +67,8 @@ namespace EGG
 
         if (getBuffer(type) == NULL)
         {
-            f32 cap_x = efb.vp.x1;
-            f32 cap_y = efb.vp.y1;
+            f32 cap_x = efb.vp.x;
+            f32 cap_y = efb.vp.y;
 
             // Doubles capture resolution
             bool upscale = false;
@@ -79,8 +79,8 @@ namespace EGG
                 case cBufferType_1:
                     const f32 scale =
                         (type == cBufferType_Hide_1_16) ? 0.25f : 0.5f;
-                    sWorkSpaceV.x2 = efb.vp.x2 * scale;
-                    sWorkSpaceV.y2 = efb.vp.y2 * scale;
+                    sWorkSpaceV.x2 = efb.vp.width * scale;
+                    sWorkSpaceV.y2 = efb.vp.height * scale;
 
                     if (sCaptureFlag & 0x1)
                     {
@@ -99,8 +99,8 @@ namespace EGG
                     }
                     else
                     {
-                        sWorkSpaceHideV.x1 = efb.vp.x1;
-                        sWorkSpaceHideV.y1 = efb.vp.y1;
+                        sWorkSpaceHideV.x1 = efb.vp.x;
+                        sWorkSpaceHideV.y1 = efb.vp.y;
                         sWorkSpaceHideV.x2 = sWorkSpaceV.x2;
                         sWorkSpaceHideV.y2 = sWorkSpaceV.y2;
                     }
@@ -113,14 +113,14 @@ namespace EGG
                         buffer->clearFlag(0x80);
                     break;
                 case cBufferType_2:
-                    buffer = TextureBuffer::alloc(efb.vp.x2, efb.vp.y2,
+                    buffer = TextureBuffer::alloc(efb.vp.width, efb.vp.height,
                         GX_TF_RGBA8);
                     setBuffer(type, buffer);
                     buffer->clearFlag(0x80);
                     break;
                 case cBufferType_3:
-                    buffer = TextureBuffer::alloc(efb.vp.x2 / 2.0f,
-                        efb.vp.y2 / 2.0f, GX_TF_RGBA8);
+                    buffer = TextureBuffer::alloc(efb.vp.width / 2.0f,
+                        efb.vp.height / 2.0f, GX_TF_RGBA8);
                     setBuffer(type, buffer);
                     upscale = true;
                     buffer->setFlag(0x40);
@@ -239,22 +239,22 @@ namespace EGG
         FullView vp;
         const Screen::DataEfb& efb = mScreen.GetDataEfb();
 
-        vp.x2 = efb.vp.x2 + sWorkSpaceV.x1;
+        vp.x2 = efb.vp.width + sWorkSpaceV.x1;
         vp.x1 = sWorkSpaceV.x1;
 
-        vp.y2 = efb.vp.y2 + sWorkSpaceV.y1;
+        vp.y2 = efb.vp.height + sWorkSpaceV.y1;
         vp.y1 = sWorkSpaceV.y1;
 
         // Clamp for X overscan
         const f32 cx = (vp.x2 <= 640.0f) ? 0.0f : vp.x2 - 640.0f;
-        vp.cx = efb.vp.x2 - cx;
+        vp.cx = efb.vp.width - cx;
 
         // Clamp for Y overscan
         const f32 cy = (vp.y2 <= 528.0f) ? 0.0f : vp.y2 - 528.0f;
-        vp.cy = efb.vp.y2 - cy;
+        vp.cy = efb.vp.height - cy;
 
-        vp.z1 = efb.vp.z1;
-        vp.z2 = efb.vp.z2;
+        vp.z1 = efb.vp.near;
+        vp.z2 = efb.vp.far;
         
         StateGX::GXSetViewport_(vp.x1, vp.y1, vp.cx, vp.cy, vp.z1, vp.z2); 
         StateGX::GXSetScissor_(vp.x1, vp.y1, vp.cx, vp.cy);

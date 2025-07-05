@@ -34,17 +34,17 @@ void DrawPathLightMap::draw(u16 idx) {
     switch (idx) {
     case 0:
         if (BYTE_0x7C & 1) {
-            BUF_0x8C = TextureBuffer::alloc(efb.vp.x2, efb.vp.y2, GX_TF_RGBA8);
+            BUF_0x8C = TextureBuffer::alloc(efb.vp.width, efb.vp.height, GX_TF_RGBA8);
             BUF_0x8C->setFlag(0x8);
             BUF_0x8C->setFlag(0x10);
-            BUF_0x8C->capture(efb.vp.x1, efb.vp.y1, false, -1);
+            BUF_0x8C->capture(efb.vp.x, efb.vp.y, false, -1);
         }
         break;
     case 1:
         if (WORD_0x80 == 2) {
-            BUF_0x84 = TextureBuffer::alloc(efb.vp.x2, efb.vp.y2, GX_TF_RGB565);
+            BUF_0x84 = TextureBuffer::alloc(efb.vp.width, efb.vp.height, GX_TF_RGB565);
         } else {
-            BUF_0x84 = TextureBuffer::alloc(efb.vp.x2, efb.vp.y2, GX_TF_RGBA8);
+            BUF_0x84 = TextureBuffer::alloc(efb.vp.width, efb.vp.height, GX_TF_RGBA8);
         }
 
         BUF_0x84->setFlag(0x8);
@@ -52,8 +52,8 @@ void DrawPathLightMap::draw(u16 idx) {
         if (!(BYTE_0x7C & 2))
             BUF_0x84->setFlag(0x20);
 
-        int capW = efb.vp.x1;
-        int capH = efb.vp.y1;
+        int capW = efb.vp.x;
+        int capH = efb.vp.y;
         BUF_0x84->capture(capW, capH, false, -1);
 
         if (BUF_0x8C) {
@@ -78,7 +78,7 @@ void DrawPathLightMap::draw(u16 idx) {
         }
 
         if (BYTE_0x7C & 2) {
-            BUF_0x88 = TextureBuffer::alloc(efb.vp.x2, efb.vp.y2, GX_TF_Z24X8);
+            BUF_0x88 = TextureBuffer::alloc(efb.vp.width, efb.vp.height, GX_TF_Z24X8);
             BUF_0x88->setFlag(0x20);
 
             if (isFlag0x2())

@@ -14,12 +14,6 @@ namespace EGG {
 
 class Frustum {
 public:
-    enum LoadScnFlag {
-        LOAD_SCN_KEEP_FOVY = 1 << 0,
-        LOAD_SCN_KEEP_CANVAS = 1 << 1,
-        LOAD_SCN_KEEP_Z = 1 << 2,
-    };
-
     enum ProjectionType { PROJTYPE_ORTHO, PROJTYPE_PERSP };
 
     enum CanvasMode {
@@ -27,8 +21,11 @@ public:
         CANVASMODE_LU, // Left-upper origin
     };
 
-protected:
-    enum { FLAG_DIRTY = (1 << 0) };
+    enum LoadScnFlag {
+        LOADSCN_KEEP_FOVY = 1 << 0,
+        LOADSCN_KEEP_CANVAS = 1 << 1,
+        LOADSCN_KEEP_Z = 1 << 2,
+    };
 
 protected:
     ProjectionType mProjType; // at 0x0
@@ -155,10 +152,10 @@ public:
         return GetSize().x / GetSize().y;
     }
 
-    f32 GetFovY() const {
+    f32 GetFovy() const {
         return mFovY;
     }
-    void SetFovY(f32 fovy) {
+    void SetFovy(f32 fovy) {
         if (mFovY == fovy)
             return;
 
@@ -199,15 +196,11 @@ public:
         mScale = rScale;
     }
 
-    void SetFlag(u32 flag) {
-        mFlags |= flag;
-    }
-
-    static void GetGlobalScaleOffset(f32* sx, f32* sy, f32* ox, f32* oy) {
-        *sx = sGlobalScale.x;
-        *sy = sGlobalScale.y;
-        *ox = sGlobalOffset.x;
-        *oy = sGlobalOffset.y;
+    static void GetGlobalScaleOffset(f32* pSX, f32* pSY, f32* pOX, f32* pOY) {
+        *pSX = sGlobalScale.x;
+        *pSY = sGlobalScale.y;
+        *pOX = sGlobalOffset.x;
+        *pOY = sGlobalOffset.y;
     }
     static void SetGlobalScaleOffset(f32 sx, f32 sy, f32 ox, f32 oy) {
         sGlobalScale.x = sx;
@@ -215,6 +208,11 @@ public:
         sGlobalOffset.x = ox;
         sGlobalOffset.y = oy;
     }
+
+protected:
+    enum {
+        FLAG_DIRTY = 1 << 0,
+    };
 
 private:
     void SetProjectionPerspectiveGX_() const;

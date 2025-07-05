@@ -152,7 +152,7 @@ void PostEffectBase::scaleColor(GXColor& out, const GXColor& in, f32 scale,
 void PostEffectBase::setProjection(const Screen& screen) {
     Screen clone(screen);
 
-    clone.SetFlag(0x80);
+    clone.SetProjectionAbsolute();
     clone.SetCanvasMode(Frustum::CANVASMODE_LU);
     clone.SetProjectionType(Frustum::PROJTYPE_ORTHO);
 
