@@ -750,7 +750,7 @@ config.libs = [
             Object(NonMatching, "MSL/wctype.c"),
             Object(NonMatching, "MSL/wmem.c"),
             Object(NonMatching, "MSL/wprintf.c"),
-            Object(NonMatching, "MSL/wstring.c"),
+            Object(Matching, "MSL/wstring.c"),
             Object(NonMatching, "MSL/wchar_io.c"),
             Object(NonMatching, "MSL/uart_console_io_gcn.c"),
             Object(NonMatching, "MSL/abort_exit_ppc_eabi.c"),
