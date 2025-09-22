@@ -742,7 +742,7 @@ config.libs = [
             Object(NonMatching, "MSL/math_api.c"),
             Object(NonMatching, "MSL/misc_io.c"),
             Object(NonMatching, "MSL/printf.c"),
-            Object(NonMatching, "MSL/rand.c"),
+            Object(Matching, "MSL/rand.c"),
             Object(NonMatching, "MSL/scanf.c"),
             Object(NonMatching, "MSL/string.c"),
             Object(NonMatching, "MSL/strtold.c"),
