@@ -6,8 +6,7 @@
 #pragma exceptions on
 
 int mbtowc(wchar_t* dest, const char* s, size_t num) {
-    // return _current_locale.ctype_cmpt_ptr->decode_mb(dest, s, num);
-    return 0; // TODO: _current_locale (locale.c)
+    return _current_locale.ctype_cmpt_ptr->decode_mb(dest, s, num);
 }
 
 int __mbtowc_noconv(wchar_t* dest, const char* src, size_t n) {
@@ -40,8 +39,7 @@ int __wctomb_noconv(char* src, wchar_t cr) {
 }
 
 static inline int wctomb(char* src, wchar_t wchar) {
-    // return _current_locale.ctype_cmpt_ptr->encode_wc(src, wchar);
-    return 0; // TODO: _current_locale (locale.c)
+    return _current_locale.ctype_cmpt_ptr->encode_wc(src, wchar);
 }
 
 size_t mbstowcs(wchar_t* pDest, const char* pSrc, size_t num) {
