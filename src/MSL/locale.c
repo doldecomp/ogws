@@ -2,6 +2,7 @@
 #include "mbstring.h"
 #include "ctype.h"
 #include "wctype.h"
+#include "ansi_fp.h"
 
 #pragma options align=native
 #pragma warn_padding off
@@ -34,6 +35,12 @@ struct lconv __lconv = {
 #pragma warn_padding reset
 #pragma options align=reset
 
+typedef struct __CMap {
+    char UNK_0x0[0x10];
+    const u8* to_lower_table; // at 0x10
+    const u8* to_upper_table; // at 0x14
+} __CMap;
+
 struct _loc_ctype_cmpt _loc_ctyp_C = {
     "C",
     &__ctype_mapC[0],
@@ -45,7 +52,6 @@ struct _loc_ctype_cmpt _loc_ctyp_C = {
     __mbtowc_noconv,
     __wctomb_noconv
 };
-
 
 unsigned short char_coll_tableC[0x60] = {
     0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f, 0x10,
@@ -108,7 +114,6 @@ struct _loc_time_cmpt _loc_tim_C = {
     "Jan|January|Feb|February|Mar|March|Apr|April|May|May|Jun|June|Jul|July|Aug|August|Sep|September|Oct|October|Nov|November|Dec|December",
     ""
 };
-
 
 struct __locale _current_locale = {
     0,

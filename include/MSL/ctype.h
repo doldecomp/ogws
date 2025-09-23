@@ -1,10 +1,24 @@
-#ifndef CTYPE_H
-#define CTYPE_H
+#ifndef MSL_CTYPE_H
+#define MSL_CTYPE_H
+#include <types.h>
+#include <locale.h>
+#ifdef __cplusplus
+extern "C" {
+#endif
 
-extern const unsigned char __lower_mapC[0x100];
-extern const unsigned char __upper_mapC[0x100];
-extern const unsigned short __ctype_mapC[0x100];
+inline int tolower(int x) {
+    return (x < 0 || x >= 256)
+               ? x
+               : (int)(&_current_locale)->ctype_cmpt_ptr->lower_map_ptr[x];
+}
 
-int tolower(int);
+inline int toupper(int x) {
+    return (x < 0 || x >= 256)
+               ? x
+               : (int)(&_current_locale)->ctype_cmpt_ptr->upper_map_ptr[x];
+}
 
-#endif // CTYPE_H
+#ifdef __cplusplus
+}
+#endif
+#endif
