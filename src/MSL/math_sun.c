@@ -1,5 +1,6 @@
-#include <runtime/Gecko_ExceptionPPC.h>
 #include "math.h"
+
+#pragma exceptions on
 
 double scalbn(double x, int n) {
     double value;

@@ -3,6 +3,8 @@
 #include "locale.h"
 #include "string.h"
 
+#pragma exceptions on
+
 int mbtowc(wchar_t* dest, const char* s, size_t num) {
     // return _current_locale.ctype_cmpt_ptr->decode_mb(dest, s, num);
     return 0; // TODO: _current_locale (locale.c)

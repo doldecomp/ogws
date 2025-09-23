@@ -1,6 +1,8 @@
 #include "mem_funcs.h"
 #include "string.h"
 
+#pragma exceptions on
+
 void* memmove(void* dst, const void* src, size_t len) {
     const char* csrc;
     char* cdst;
