@@ -9,13 +9,13 @@ int fclose(FILE* pFile) {
         return -1;
     }
 
-    if (pFile->mode.file == 0) {
+    if (pFile->mode.file == file_closed) {
         return 0;
     }
 
     flush_res = fflush(pFile);
     close_res = (*pFile->close_proc)(pFile->handle);
-    pFile->mode.file = 0;
+    pFile->mode.file = file_closed;
     pFile->handle = 0;
 
     if (pFile->state.free_buffer) {
@@ -32,28 +32,28 @@ int fflush(FILE* pFile) {
         return __flush_all();
     }
 
-    if (pFile->state.error || pFile->mode.file == 0) {
+    if (pFile->state.error || pFile->mode.file == file_closed) {
         return -1;
     }
 
-    if (pFile->mode.io == 1) {
+    if (pFile->mode.io == read) {
         return 0;
     }
 
-    if (pFile->state.io_state >= 3) {
-        pFile->state.io_state = 2;
+    if (pFile->state.io_state >= rereading) {
+        pFile->state.io_state = reading;
     }
 
-    if (pFile->state.io_state == 2) {
+    if (pFile->state.io_state == reading) {
         pFile->buffer_len = 0;
     }
 
-    if (pFile->state.io_state != 1) {
-        pFile->state.io_state = 0;
+    if (pFile->state.io_state != writing) {
+        pFile->state.io_state = neutral;
         return 0;
     }
 
-    if (pFile->mode.file != 1) {
+    if (pFile->mode.file != file_disk) {
         pos = 0;
     } else {
         pos = ftell(pFile);
@@ -65,7 +65,7 @@ int fflush(FILE* pFile) {
         return -1;
     }
 
-    pFile->state.io_state = 0;
+    pFile->state.io_state = neutral;
     pFile->pos = pos;
     pFile->buffer_len = 0;
     return 0;

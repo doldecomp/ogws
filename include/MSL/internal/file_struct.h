@@ -32,6 +32,13 @@ typedef struct {
     unsigned int binary : 1;
 } file_modes;
 
+enum io_modes {
+    read           = 1,
+    write          = 2,
+    read_write     = 3,
+    append         = 4
+};
+
 enum io_states {
     neutral,
     writing,
@@ -41,10 +48,10 @@ enum io_states {
 
 typedef struct
 {
-	unsigned int	io_state	: 3;
-	unsigned int	free_buffer	: 1;
-	unsigned char	eof;
-	unsigned char	error;
+    unsigned int    io_state    : 3;
+    unsigned int    free_buffer    : 1;
+    unsigned char    eof;
+    unsigned char    error;
 } file_state;
 
 typedef unsigned long file_handle;
@@ -80,6 +87,6 @@ struct _FILE {
 
 extern FILE __files[];
 
-#define stdout	(&__std(__files[1])) 
+#define stdout    (&__std(__files[1])) 
 
 #endif // FILE_STRUCT_H

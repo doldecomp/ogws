@@ -2,7 +2,6 @@
 #define LOCALE_H
 
 #include "ansi_params.h"
-//#include "size_t.h"
 #include "wchar_io.h"
 
 typedef int (* __decode_mbyte) (wchar_t *, const char *,  __std(size_t));
