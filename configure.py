@@ -740,7 +740,7 @@ config.libs = [
             Object(NonMatching, "MSL/mem.c"),
             Object(Matching, "MSL/mem_funcs.c"),
             Object(NonMatching, "MSL/math_api.c"),
-            Object(NonMatching, "MSL/misc_io.c"),
+            Object(Matching, "MSL/misc_io.c"),
             Object(NonMatching, "MSL/printf.c"),
             Object(Matching, "MSL/rand.c"),
             Object(NonMatching, "MSL/scanf.c"),
