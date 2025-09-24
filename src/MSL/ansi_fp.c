@@ -4,21 +4,29 @@
 
 #pragma exceptions on
 
-//const unsigned char lbl_8037B2F8[0xE0] = {
-//    0x35, 0x34, 0x32, 0x31, 0x30, 0x31, 0x30, 0x38, 0x36, 0x32, 0x34, 0x32, 0x37, 0x35, 0x32, 0x32, 
-//    0x31, 0x37, 0x30, 0x30, 0x33, 0x37, 0x32, 0x36, 0x34, 0x30, 0x30, 0x34, 0x33, 0x34, 0x39, 0x37, 
-//    0x30, 0x38, 0x35, 0x35, 0x37, 0x31, 0x32, 0x38, 0x39, 0x30, 0x36, 0x32, 0x35, 0x00, 0x31, 0x31, 
-//    0x31, 0x30, 0x32, 0x32, 0x33, 0x30, 0x32, 0x34, 0x36, 0x32, 0x35, 0x31, 0x35, 0x36, 0x35, 0x34, 
-//    0x30, 0x34, 0x32, 0x33, 0x36, 0x33, 0x31, 0x36, 0x36, 0x38, 0x30, 0x39, 0x30, 0x38, 0x32, 0x30, 
-//    0x33, 0x31, 0x32, 0x35, 0x00, 0x32, 0x33, 0x32, 0x38, 0x33, 0x30, 0x36, 0x34, 0x33, 0x36, 0x35, 
-//    0x33, 0x38, 0x36, 0x39, 0x36, 0x32, 0x38, 0x39, 0x30, 0x36, 0x32, 0x35, 0x00, 0x31, 0x35, 0x32, 
-//    0x35, 0x38, 0x37, 0x38, 0x39, 0x30, 0x36, 0x32, 0x35, 0x00, 0x33, 0x39, 0x30, 0x36, 0x32, 0x35, 
-//    0x00, 0x37, 0x38, 0x31, 0x32, 0x35, 0x00, 0x31, 0x35, 0x36, 0x32, 0x35, 0x00, 0x33, 0x31, 0x32, 
-//    0x35, 0x00, 0x36, 0x32, 0x35, 0x00, 0x31, 0x32, 0x35, 0x00, 0x32, 0x35, 0x00, 0x35, 0x00, 0x31, 
-//    0x00, 0x32, 0x00, 0x34, 0x00, 0x38, 0x00, 0x31, 0x36, 0x00, 0x33, 0x32, 0x00, 0x36, 0x34, 0x00, 
-//    0x31, 0x32, 0x38, 0x00, 0x32, 0x35, 0x36, 0x00, 0x31, 0x37, 0x39, 0x37, 0x36, 0x39, 0x33, 0x31, 
-//    0x33, 0x34, 0x38, 0x36, 0x32, 0x33, 0x31, 0x35, 0x38, 0x30, 0x37, 0x39, 0x33, 0x37, 0x32, 0x38, 
-//    0x37, 0x31, 0x34, 0x30, 0x35, 0x33, 0x30, 0x33, 0x34, 0x31, 0x35, 0x31, 0x00, 0x00, 0x00, 0x00};
+const signed char lbl_8037B2F8[] =
+    "542101086242752217003726400434970855712890625\000"
+    "11102230246251565404236316680908203125\000"
+    "23283064365386962890625\000"
+    "152587890625\000"
+    "390625\000"
+    "78125\000"
+    "15625\000"
+    "3125\000"
+    "625\000"
+    "125\000"
+    "25\000"
+    "5\000"
+    "1\000"
+    "2\000"
+    "4\000"
+    "8\000"
+    "16\000"
+    "32\000"
+    "64\000"
+    "128\000"
+    "256\000"
+    "179769313486231580793728714053034151\000\000\000";
 
 const unsigned short __ctype_mapC[0x100] = {
     4,     4,     4,     4,     4,     4,     4,     4,     
@@ -275,67 +283,67 @@ void __str2dec(decimal* pDecimal, const char* pStr, short exp) {
 static void __two_exp(decimal* pDecimal, long exp) {
     switch (exp) {
         case -64:
-            __str2dec(pDecimal, "542101086242752217003726400434970855712890625", -20);
+            __str2dec(pDecimal, (const char*)&lbl_8037B2F8[0], -20);
             return;
         case -53:
-            __str2dec(pDecimal, "11102230246251565404236316680908203125", -16);
+            __str2dec(pDecimal, (const char*)&lbl_8037B2F8[0x2E], -16);
             return;
         case -32:
-            __str2dec(pDecimal, "23283064365386962890625", -10);
+            __str2dec(pDecimal, (const char*)&lbl_8037B2F8[0x55], -10);
             return;
         case -16:
-            __str2dec(pDecimal, "152587890625", -5);
+            __str2dec(pDecimal, (const char*)&lbl_8037B2F8[0x6D], -5);
             return;
         case -8:
-            __str2dec(pDecimal, "390625", -3);
+            __str2dec(pDecimal, (const char*)&lbl_8037B2F8[0x7A], -3);
             return;
         case -7:
-            __str2dec(pDecimal, "78125", -3);
+            __str2dec(pDecimal, (const char*)&lbl_8037B2F8[0x81], -3);
             return;
         case -6:
-            __str2dec(pDecimal, "15625", -2);
+            __str2dec(pDecimal, (const char*)&lbl_8037B2F8[0x87], -2);
             return;
         case -5:
-            __str2dec(pDecimal, "3125", -2);
+            __str2dec(pDecimal, (const char*)&lbl_8037B2F8[0x8D], -2);
             return;
         case -4:
-            __str2dec(pDecimal, "625", -2);
+            __str2dec(pDecimal, (const char*)&lbl_8037B2F8[0x92], -2);
             return;
         case -3:
-            __str2dec(pDecimal, "125", -1);
+            __str2dec(pDecimal, (const char*)&lbl_8037B2F8[0x96], -1);
             return;
         case -2:
-            __str2dec(pDecimal, "25", -1);
+            __str2dec(pDecimal, (const char*)&lbl_8037B2F8[0x9A], -1);
             return;
         case -1:
-            __str2dec(pDecimal, "5", -1);
+            __str2dec(pDecimal, (const char*)&lbl_8037B2F8[0x9D], -1);
             return;
         case 0:
-            __str2dec(pDecimal, "1", 0);
+            __str2dec(pDecimal, (const char*)&lbl_8037B2F8[0x9F], 0);
             return;
         case 1:
-            __str2dec(pDecimal, "2", 0);
+            __str2dec(pDecimal, (const char*)&lbl_8037B2F8[0xA1], 0);
             return;
         case 2:
-            __str2dec(pDecimal, "4", 0);
+            __str2dec(pDecimal, (const char*)&lbl_8037B2F8[0xA3], 0);
             return;
         case 3:
-            __str2dec(pDecimal, "8", 0);
+            __str2dec(pDecimal, (const char*)&lbl_8037B2F8[0xA5], 0);
             return;
         case 4:
-            __str2dec(pDecimal, "16", 1);
+            __str2dec(pDecimal, (const char*)&lbl_8037B2F8[0xA7], 1);
             return;
         case 5:
-            __str2dec(pDecimal, "32", 1);
+            __str2dec(pDecimal, (const char*)&lbl_8037B2F8[0xAA], 1);
             return;
         case 6:
-            __str2dec(pDecimal, "64", 1);
+            __str2dec(pDecimal, (const char*)&lbl_8037B2F8[0xAD], 1);
             return;
         case 7:
-            __str2dec(pDecimal, "128", 2);
+            __str2dec(pDecimal, (const char*)&lbl_8037B2F8[0xB0], 2);
             return;
         case 8:
-            __str2dec(pDecimal, "256", 2);
+            __str2dec(pDecimal, (const char*)&lbl_8037B2F8[0xB4], 2);
             return;
     }
 
@@ -346,9 +354,9 @@ static void __two_exp(decimal* pDecimal, long exp) {
         if (exp & 1) {
             temp = *pDecimal;
             if (exp > 0)
-                __str2dec(&x2, "2", 0);
+                __str2dec(&x2, (const char*)&lbl_8037B2F8[0xA1], 0);
             else
-                __str2dec(&x2, "5", -1);
+                __str2dec(&x2, (const char*)&lbl_8037B2F8[0x9D], -1);
             __timesdec(pDecimal, &temp, &x2);
         }
     }
@@ -661,7 +669,7 @@ double __dec2num(const decimal* d) {
         exponent = dec.exponent;
         {
             decimal max;
-            __str2dec(&max, "179769313486231580793728714053034151", 308);
+            __str2dec(&max, (const char*)&lbl_8037B2F8[0xB8], 308);
             if (__less_dec(&max, &dec)) {
                 return copysign((double)INFINITY, d->sign == 0 ? 1.0 : -1.0);
             }
