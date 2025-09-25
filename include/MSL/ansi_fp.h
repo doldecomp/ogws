@@ -32,6 +32,8 @@ extern const char _Time_Format_C[];
 extern const char _Day_Names_C[];
 extern const char _Month_Names_C[];
 
+extern const int _const_int_0;
+
 extern const unsigned short __ctype_mapC[0x100];
 extern const unsigned char __lower_mapC[0x100];
 extern const unsigned char __upper_mapC[0x100];

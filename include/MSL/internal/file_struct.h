@@ -85,6 +85,12 @@ struct _FILE {
     struct _FILE* next_file;
 };
 
+#define _IONBF 0
+#define _IOLBF 1
+#define _IOFBF 2
+
+#define _STATIC_FILES 4
+
 extern FILE __files[];
 
 #define stdout    (&__std(__files[1])) 

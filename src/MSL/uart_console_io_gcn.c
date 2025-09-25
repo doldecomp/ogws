@@ -1,5 +1,4 @@
-#include "UART.h"
-#include "types.h"
+#include "UART_console_io_gcn.h"
 
 int __TRK_write_console(unsigned long, unsigned char *, size_t *, void *);
 
