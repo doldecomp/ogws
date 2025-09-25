@@ -13,6 +13,10 @@ extern "C" {
 
 typedef unsigned char console_buff[console_buff_size];
 
+extern console_buff stdin_buff;
+extern console_buff stdout_buff;
+extern console_buff stderr_buff;
+
 void __close_all();
 u32 __flush_all();
 

@@ -5,116 +5,91 @@
 #include "stdlib.h"
 #include "file_struct.h"
 
-static console_buff stdin_buff;
-static console_buff stdout_buff;
-static console_buff stderr_buff;
+FILE __stdout_FILE;
+FILE __stderr_FILE;
 
-FILE __files[_STATIC_FILES] = {
-    {
-        0, // _00
-        {
-            must_exist,        // _04, open_mode
-            read,              // _04, io_mode
-            console_buff_mode, // _04, buffer_mode
-            file_console,      // _04, file_kind
-            0                  // _04, binary_io
-        },
-        {
-            neutral,   // _08, io_state
-            0,         // _08, free_buffer
-            0,         // _08, eof
-            0          // _08, error
-        },
-        0,                 // _0C
-        0,                 // _0D
-        0,                 // _0E
-        {0, 0},            // _0F
-        {0, 0},            // _12
-        0,                 // _18
-        stdin_buff,        // _1C
-        console_buff_size, // _20
-        stdin_buff,        // _24
-        0,                 // _28
-        0,                 // _2C
-        0,                 // _30
-        0,                 // _34
-        0,                 // _38
-        __read_console,    // _3C
-        __write_console,   // _40
-        __close_console,   // _44
-        0,                 // _48
-        &__files[1]        // _4C
-    },
-    {
-        1, // _00
-        {
-            must_exist,        // _04, open_mode
-            write,           // _04, io_mode
-            console_buff_mode, // _04, buffer_mode
-            file_console,      // _04, file_kind
-            0                  // _04, binary_io
-        },
-        {
-            neutral,   // _08, io_state
-            0,         // _08, free_buffer
-            0,         // _08, eof
-            0          // _08, error
-        },
-        0,                 // _0C
-        0,                 // _0D
-        0,                 // _0E
-        {0, 0},            // _0F
-        {0, 0},            // _12
-        0,                 // _18
-        stdout_buff,       // _1C
-        console_buff_size, // _20
-        stdout_buff,       // _24
-        0,                 // _28
-        0,                 // _2C
-        0,                 // _30
-        0,                 // _34
-        0,                 // _38
-        __read_console,    // _3C
-        __write_console,   // _40
-        __close_console,   // _44
-        0,                 // _48
-        &__files[2]        // _4C
-    },
-    {
-        2, // _00
-        {
-            must_exist,     // _04, open_mode
-            write,        // _04, io_mode
-            _IONBF,         // _04, buffer_mode
-            file_console, // _04, file_kind
-            0,              // _04, binary_io
-        },
-        {
-            neutral,   // _08, io_state
-            0,         // _08, free_buffer
-            0,         // _08, eof
-            0,         // _08, error
-        },
-        0,                 // _0C
-        0,                 // _0D
-        0,                 // _0E
-        {0, 0},            // _0F
-        {0, 0},            // _12
-        0,                 // _18
-        stderr_buff,       // _1C
-        console_buff_size, // _20
-        stderr_buff,       // _24
-        0,                 // _28
-        0,                 // _2C
-        0,                 // _30
-        0,                 // _34
-        0,                 // _38
-        __read_console,    // _3C
-        __write_console,   // _40
-        __close_console,   // _44
-        0,                 // _48
-        &__files[3]        // _4C
-    },
+// Force __file_terminator to the .data section instead .bss
+#pragma push
+#pragma explicit_zero_data on
+#pragma section data_type ".data"
+FILE __file_terminator = {0}; // lbl_80398888
+#pragma pop
+
+#pragma exceptions on
+
+FILE __files[1] = {{
+    0,
+    { must_exist, read, _IOLBF, file_console, file_unoriented, 0 },
+    { neutral, 0, 0, 0 },
+    0,
+    0,
+    0,
+    {0},
+    {0},
+    0,
+    stdin_buff,
+    console_buff_size,
+    stdin_buff,
+    0,
+    0,
+    0,
+    0,
+    NULL,
+    __read_console,
+    __write_console,
+    __close_console,
+    NULL,
+    &__stdout_FILE
+    }};
+
+FILE __stdout_FILE = {
+    1,
+    { must_exist, write, _IOLBF, file_console, file_unoriented, 0 },
+    { neutral, 0, 0, 0 },
+    0,
+    0,
+    0,
+    {0},
+    {0},
+    0,
+    stdout_buff,
+    console_buff_size,
+    stdout_buff,
+    0,
+    0,
+    0,
+    0,
+    NULL,
+    __read_console,
+    __write_console,
+    __close_console,
+    NULL,
+    &__stderr_FILE
+};
+
+FILE __stderr_FILE = {
+    2,
+    { must_exist, write, _IONBF, file_console, file_unoriented, 0 },
+    { neutral, 0, 0, 0 },
+    0,
+    0,
+    0,
+    {0},
+    {0},
+    0,
+    stderr_buff,
+    console_buff_size,
+    stderr_buff,
+    0,
+    0,
+    0,
+    0,
+    NULL,
+    __read_console,
+    __write_console,
+    __close_console,
+    NULL,
+    &__file_terminator
 };
 
 void __close_all() {
