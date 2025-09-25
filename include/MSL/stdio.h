@@ -5,4 +5,5 @@
 #include <internal/printf.h>
 #include <internal/scanf.h>
 #include <internal/wchar_io.h>
+#include "stdio_api.h"
 #endif

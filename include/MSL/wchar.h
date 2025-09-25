@@ -12,6 +12,9 @@ extern "C" {
 #define WCHAR_MIN SHRT_MIN
 #define WCHAR_MAX USHRT_MAX
 
+typedef unsigned short wchar_t;
+typedef wchar_t wint_t;	
+
 #ifdef __cplusplus
 }
 #endif
