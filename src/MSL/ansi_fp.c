@@ -4,7 +4,7 @@
 
 #pragma exceptions on
 
-const signed char lbl_8037B2F8[] =
+const signed char __fp_string_pool[] =
     "542101086242752217003726400434970855712890625\000"
     "11102230246251565404236316680908203125\000"
     "23283064365386962890625\000"
@@ -44,9 +44,7 @@ const unsigned short __ctype_mapC[0x100] = {
     0xD0,  0x471, 0x471, 0x471, 0x471, 0x471, 0x471, 0x71,
     0x71,  0x71,  0x71,  0x71,  0x71,  0x71,  0x71,  0x71,
     0x71,  0x71,  0x71,  0x71,  0x71,  0x71,  0x71,  0x71,
-    0x71,  0x71,  0x71,  0xd0,  0xd0,  0xd0,  0xd0,  4
-
-};
+    0x71,  0x71,  0x71,  0xd0,  0xd0,  0xd0,  0xd0,  4};
 
 const unsigned char __lower_mapC[0x100] = {
     0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F,
@@ -84,14 +82,18 @@ const unsigned char __upper_mapC[0x100] = {
     0xE0, 0xE1, 0xE2, 0xE3, 0xE4, 0xE5, 0xE6, 0xE7, 0xE8, 0xE9, 0xEA, 0xEB, 0xEC, 0xED, 0xEE, 0xEF,
     0xF0, 0xF1, 0xF2, 0xF3, 0xF4, 0xF5, 0xF6, 0xF7, 0xF8, 0xF9, 0xFA, 0xFB, 0xFC, 0xFD, 0xFE, 0xFF};
 
+const char _DateTime_Format_C[] = "%a %b %e %T %Y\0";
+const char _Time_Format_12_C[] = "%I:%M:%S %p";
+const char _Date_Format_C[] = "%m/%d/%y\0\0\0";
+const char _Day_Names_C[] = "Sun|Sunday|Mon|Monday|Tue|Tuesday|Wed|Wednesday|Thu|Thursday|Fri|Friday|Sat|Saturday\0\0\0";
+const char _Month_Names_C[] = "Jan|January|Feb|February|Mar|March|Apr|April|May|May|Jun|June|Jul|July|Aug|August|Sep|September|Oct|October|Nov|November|Dec|December\0\0";
+
 #define INFINITY (*(float*)__float_huge)
 #define SIGDIGLEN 36
 extern double pow(double, double);
 
-
 inline int count_trailing(double x) {
-    return __builtin___count_trailing_zero64(*(unsigned long long*)&x |
-                                             0x0010000000000000);
+    return __builtin___count_trailing_zero64(*(unsigned long long*)&x | 0x0010000000000000);
 }
 
 static inline void __dorounddecup(decimal* d, int digits) {
@@ -278,72 +280,70 @@ void __str2dec(decimal* pDecimal, const char* pStr, short exp) {
     }
 }
 
-
-
 static void __two_exp(decimal* pDecimal, long exp) {
     switch (exp) {
         case -64:
-            __str2dec(pDecimal, (const char*)&lbl_8037B2F8[0], -20);
+            __str2dec(pDecimal, (const char*)&__fp_string_pool[0], -20);
             return;
         case -53:
-            __str2dec(pDecimal, (const char*)&lbl_8037B2F8[0x2E], -16);
+            __str2dec(pDecimal, (const char*)&__fp_string_pool[0x2E], -16);
             return;
         case -32:
-            __str2dec(pDecimal, (const char*)&lbl_8037B2F8[0x55], -10);
+            __str2dec(pDecimal, (const char*)&__fp_string_pool[0x55], -10);
             return;
         case -16:
-            __str2dec(pDecimal, (const char*)&lbl_8037B2F8[0x6D], -5);
+            __str2dec(pDecimal, (const char*)&__fp_string_pool[0x6D], -5);
             return;
         case -8:
-            __str2dec(pDecimal, (const char*)&lbl_8037B2F8[0x7A], -3);
+            __str2dec(pDecimal, (const char*)&__fp_string_pool[0x7A], -3);
             return;
         case -7:
-            __str2dec(pDecimal, (const char*)&lbl_8037B2F8[0x81], -3);
+            __str2dec(pDecimal, (const char*)&__fp_string_pool[0x81], -3);
             return;
         case -6:
-            __str2dec(pDecimal, (const char*)&lbl_8037B2F8[0x87], -2);
+            __str2dec(pDecimal, (const char*)&__fp_string_pool[0x87], -2);
             return;
         case -5:
-            __str2dec(pDecimal, (const char*)&lbl_8037B2F8[0x8D], -2);
+            __str2dec(pDecimal, (const char*)&__fp_string_pool[0x8D], -2);
             return;
         case -4:
-            __str2dec(pDecimal, (const char*)&lbl_8037B2F8[0x92], -2);
+            __str2dec(pDecimal, (const char*)&__fp_string_pool[0x92], -2);
             return;
         case -3:
-            __str2dec(pDecimal, (const char*)&lbl_8037B2F8[0x96], -1);
+            __str2dec(pDecimal, (const char*)&__fp_string_pool[0x96], -1);
             return;
         case -2:
-            __str2dec(pDecimal, (const char*)&lbl_8037B2F8[0x9A], -1);
+            __str2dec(pDecimal, (const char*)&__fp_string_pool[0x9A], -1);
             return;
         case -1:
-            __str2dec(pDecimal, (const char*)&lbl_8037B2F8[0x9D], -1);
+            __str2dec(pDecimal, (const char*)&__fp_string_pool[0x9D], -1);
             return;
         case 0:
-            __str2dec(pDecimal, (const char*)&lbl_8037B2F8[0x9F], 0);
+            __str2dec(pDecimal, (const char*)&__fp_string_pool[0x9F], 0);
             return;
         case 1:
-            __str2dec(pDecimal, (const char*)&lbl_8037B2F8[0xA1], 0);
+            __str2dec(pDecimal, (const char*)&__fp_string_pool[0xA1], 0);
             return;
         case 2:
-            __str2dec(pDecimal, (const char*)&lbl_8037B2F8[0xA3], 0);
+            __str2dec(pDecimal, (const char*)&__fp_string_pool[0xA3], 0);
             return;
         case 3:
-            __str2dec(pDecimal, (const char*)&lbl_8037B2F8[0xA5], 0);
+            __str2dec(pDecimal, (const char*)&__fp_string_pool[0xA5], 0);
             return;
         case 4:
-            __str2dec(pDecimal, (const char*)&lbl_8037B2F8[0xA7], 1);
+            __str2dec(pDecimal, (const char*)&__fp_string_pool[0xA7], 1);
             return;
         case 5:
-            __str2dec(pDecimal, (const char*)&lbl_8037B2F8[0xAA], 1);
+            __str2dec(pDecimal, (const char*)&__fp_string_pool[0xAA], 1);
             return;
         case 6:
-            __str2dec(pDecimal, (const char*)&lbl_8037B2F8[0xAD], 1);
+            __str2dec(pDecimal, (const char*)&__fp_string_pool[0xAD], 1);
             return;
         case 7:
-            __str2dec(pDecimal, (const char*)&lbl_8037B2F8[0xB0], 2);
+            __str2dec(pDecimal, (const char*)&__fp_string_pool[0xB0], 2);
             return;
         case 8:
-            __str2dec(pDecimal, (const char*)&lbl_8037B2F8[0xB4], 2);
+            __str2dec(pDecimal, (const char*)&__fp_string_pool[0xB4], 2);
             return;
     }
 
@@ -354,9 +354,9 @@ static void __two_exp(decimal* pDecimal, long exp) {
         if (exp & 1) {
             temp = *pDecimal;
             if (exp > 0)
-                __str2dec(&x2, (const char*)&lbl_8037B2F8[0xA1], 0);
+                __str2dec(&x2, (const char*)&__fp_string_pool[0xA1], 0);
             else
-                __str2dec(&x2, (const char*)&lbl_8037B2F8[0x9D], -1);
+                __str2dec(&x2, (const char*)&__fp_string_pool[0x9D], -1);
             __timesdec(pDecimal, &temp, &x2);
         }
     }
@@ -669,7 +669,7 @@ double __dec2num(const decimal* d) {
         exponent = dec.exponent;
         {
             decimal max;
-            __str2dec(&max, (const char*)&lbl_8037B2F8[0xB8], 308);
+            __str2dec(&max, (const char*)&__fp_string_pool[0xB8], 308);
             if (__less_dec(&max, &dec)) {
                 return copysign((double)INFINITY, d->sign == 0 ? 1.0 : -1.0);
             }
@@ -711,9 +711,8 @@ double __dec2num(const decimal* d) {
         first_guess = ldexp(first_guess, exponent);
 
         if (__fpclassifyd(first_guess) == 2) {
-            first_guess = (double)0x7FEFFFFFFFFFFFFF;
+            first_guess = 1.7976931348623157E+308L;
         }
-
         {
             decimal feedback1, feedback2, difflow, diffhigh;
             double next_guess;
@@ -777,3 +776,8 @@ double __dec2num(const decimal* d) {
         return first_guess;
     }
 }
+
+const char _Decimal_Point_C[] = ".\0\0";
+const int _const_int_0 = 0;
+const char _AmPm_Format_C[] = "AM|PM\0\0";
+const char _Time_Format_C[] = "%T\0\0\0\0\0";

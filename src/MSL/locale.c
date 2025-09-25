@@ -4,10 +4,8 @@
 #include "wctype.h"
 #include "ansi_fp.h"
 
-#pragma options align=native
-#pragma warn_padding off
 struct lconv __lconv = {
-    ".",
+    "",
     "",
     "",
     "",
@@ -32,8 +30,6 @@ struct lconv __lconv = {
     127,
     127
 };
-#pragma warn_padding reset
-#pragma options align=reset
 
 typedef struct __CMap {
     char UNK_0x0[0x10];
@@ -98,20 +94,20 @@ struct _loc_mon_cmpt _loc_mon_C = {
 
 struct _loc_num_cmpt _loc_num_C = {
     "C",
-    ".",
+    "",
     "",
     ""
 };
 
 struct _loc_time_cmpt _loc_tim_C = {
     "C",
-    "AM|PM",
-    "%a %b %e %T %Y",
-    "%I:%M:%S %p",
-    "%m/%d/%y",
-    "%T",
-    "Sun|Sunday|Mon|Monday|Tue|Tuesday|Wed|Wednesday|Thu|Thursday|Fri|Friday|Sat|Saturday",
-    "Jan|January|Feb|February|Mar|March|Apr|April|May|May|Jun|June|Jul|July|Aug|August|Sep|September|Oct|October|Nov|November|Dec|December",
+    _AmPm_Format_C,
+    _DateTime_Format_C,
+    _Time_Format_12_C,
+    _Date_Format_C,
+    _Time_Format_C,
+    _Day_Names_C,
+    _Month_Names_C,
     ""
 };
 

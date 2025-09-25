@@ -24,6 +24,14 @@ typedef struct decform {
 extern "C" {
 #endif
 
+extern const char _AmPm_Format_C[];
+extern const char _DateTime_Format_C[];
+extern const char _Time_Format_12_C[];
+extern const char _Date_Format_C[];
+extern const char _Time_Format_C[];
+extern const char _Day_Names_C[];
+extern const char _Month_Names_C[];
+
 extern const unsigned short __ctype_mapC[0x100];
 extern const unsigned char __lower_mapC[0x100];
 extern const unsigned char __upper_mapC[0x100];
