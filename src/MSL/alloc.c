@@ -177,21 +177,6 @@ void deallocate_from_fixed_pools(__mem_pool_obj* pool_obj, void* ptr,
     }
 }
 
-inline void __init_pool_obj(__mem_pool* pool_obj) {
-    memset(pool_obj, 0, sizeof(__mem_pool_obj));
-}
-
-inline static __mem_pool* get_malloc_pool(void) {
-    static __mem_pool protopool;
-    static unsigned char init = 0;
-    if (!init) {
-        __init_pool_obj(&protopool);
-        init = 1;
-    }
-
-    return &protopool;
-}
-
 inline void __pool_free(__mem_pool* pool, void* ptr) {
     __mem_pool_obj* pool_obj;
     unsigned long size;
@@ -211,5 +196,15 @@ inline void __pool_free(__mem_pool* pool, void* ptr) {
 }
 
 void free(void* ptr) {
-    __pool_free(get_malloc_pool(), ptr);
+    static unsigned char init = 0;
+    static __mem_pool protopool;
+    __mem_pool* pool;
+
+    if (!init) {
+        memset(&protopool, 0, sizeof(__mem_pool_obj));
+        init = 1;
+    }
+
+    pool = &protopool;
+    __pool_free(pool, ptr);
 }
