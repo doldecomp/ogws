@@ -1,6 +1,7 @@
 #include "ansi_fp.h"
 #include "math_api.h"
 #include "float.h"
+#include "limits.h"
 
 #pragma exceptions on
 
@@ -711,7 +712,7 @@ double __dec2num(const decimal* d) {
         first_guess = ldexp(first_guess, exponent);
 
         if (__fpclassifyd(first_guess) == 2) {
-            first_guess = 1.7976931348623157E+308L;
+            first_guess = DBL_MAX;
         }
         {
             decimal feedback1, feedback2, difflow, diffhigh;

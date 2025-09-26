@@ -1,3 +1,5 @@
+#pragma exceptions on
+
 void __sys_free(void* ptr);
 void* memset(void*, int, int);
 
@@ -80,9 +82,6 @@ typedef struct mem_pool_obj {
     void* userData;
 
 } mem_pool_obj;
-
-mem_pool_obj __malloc_pool;
-static int initialized = 0;
 
 static void SubBlock_merge_next(SubBlock*, SubBlock**);
 
@@ -223,7 +222,8 @@ inline static Block* __unlink(__mem_pool_obj* pool_obj, Block* bp) {
     return result;
 }
 
-inline static void deallocate_from_var_pools(__mem_pool_obj* pool_obj, void* ptr) {
+inline static void deallocate_from_var_pools(__mem_pool_obj* pool_obj,
+                                             void* ptr) {
     SubBlock* sb = SubBlock_from_pointer(ptr);
     SubBlock* _sb;
 
@@ -293,6 +293,21 @@ void deallocate_from_fixed_pools(__mem_pool_obj* pool_obj, void* ptr,
     }
 }
 
+inline void __init_pool_obj(__mem_pool* pool_obj) {
+    memset(pool_obj, 0, sizeof(__mem_pool_obj));
+}
+
+inline static __mem_pool* get_malloc_pool(void) {
+    static __mem_pool protopool;
+    static unsigned char init = 0;
+    if (!init) {
+        __init_pool_obj(&protopool);
+        init = 1;
+    }
+
+    return &protopool;
+}
+
 inline void __pool_free(__mem_pool* pool, void* ptr) {
     __mem_pool_obj* pool_obj;
     unsigned long size;
@@ -309,21 +324,6 @@ inline void __pool_free(__mem_pool* pool, void* ptr) {
     } else {
         deallocate_from_var_pools(pool_obj, ptr);
     }
-}
-
-inline void __init_pool_obj(__mem_pool* pool_obj) {
-    memset(pool_obj, 0, sizeof(__mem_pool_obj));
-}
-
-inline static __mem_pool* get_malloc_pool(void) {
-    static __mem_pool protopool;
-    static unsigned char init = 0;
-    if (!init) {
-        __init_pool_obj(&protopool);
-        init = 1;
-    }
-
-    return &protopool;
 }
 
 void free(void* ptr) {
