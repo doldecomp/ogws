@@ -1,50 +1,11 @@
 #include <cctype>
 #include "ansi_fp.h"
 #include "string.h"
+#include "internal/pformatter.h"
 
 #pragma exceptions on
 
-#define LDBL_MANT_DIG          24
-#define LDBL_MAX_EXP          128
-#define TARGET_FLOAT_BITS 32
-#define TARGET_FLOAT_BYTES	(TARGET_FLOAT_BITS/8)
-#define TARGET_FLOAT_MAX_EXP	LDBL_MAX_EXP
-#define TARGET_FLOAT_MANT_DIG	LDBL_MANT_DIG
-#define TARGET_FLOAT_IMPLICIT_J_BIT 1
-#define TARGET_FLOAT_MANT_BITS		(TARGET_FLOAT_MANT_DIG - TARGET_FLOAT_IMPLICIT_J_BIT)
-#define TARGET_FLOAT_EXP_BITS		(TARGET_FLOAT_BITS - TARGET_FLOAT_MANT_BITS - 1)
-
-typedef long long intmax_t;
-
-#define PTRDIFF __typeof__((char*)0-(char*)0)
-typedef PTRDIFF ptrdiff_t;
-
 size_t __fwrite(const void *pPtr, size_t memb_size, size_t num_memb, FILE *pFile);
-
-enum justification_options {
-	left_justification,
-	right_justification,
-	zero_fill
-};
-
-enum sign_options {
-	only_minus,
-	sign_always,
-	space_holder
-};
-
-enum argument_options {
-	normal_argument,
-	char_argument,
-	short_argument,
-	long_argument,
-	long_long_argument,
-	wchar_argument,
-	intmax_argument,
-	size_t_argument,
-	ptrdiff_argument,
-	long_double_argument
-};
 
 typedef struct {
 	unsigned char	justification_options;		// 0x0
@@ -57,13 +18,7 @@ typedef struct {
 	int				precision;					// 0xC
 } print_format;
 
-typedef struct {
-	char* CharStr;
-	size_t MaxCharCount;
-	size_t CharsWritten;
-} __OutStrCtrl;
-
-/*static*/ const char* parse_format(const char *format_string, va_list *arg, print_format *format) {
+const char* parse_format(const char *format_string, va_list *arg, print_format *format) {
 	print_format f;
 	const char* s = format_string;
 	int c;
@@ -231,7 +186,7 @@ typedef struct {
 			}
 
 			if (!f.precision_specified) {
-				f.precision = 1;
+				f.precision = 6;
 			}
 			break;
 
@@ -1316,7 +1271,7 @@ void* __StringWrite(void *pCtrl, const char *pBuffer, size_t char_num) {
 	return (void*)1;
 }
 
-int fprintf(FILE *pFile, const char *format, ...) {
+inline int fprintf(FILE *pFile, const char *format, ...) {
 	int res;
 
 	if (fwide(pFile, -1) >= 0) {

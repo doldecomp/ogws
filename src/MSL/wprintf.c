@@ -1,61 +1,18 @@
 #include "ansi_fp.h"
 #include "stdio_api.h"
-#include "wstring.h"
-#include "stdarg.h"
-#include "wchar.h"
-#include "locale.h"
+#include "pformatter.h"
+#include "wctype.h"
 
 #pragma exceptions on
-
-#define LDBL_MANT_DIG          24
-#define LDBL_MAX_EXP          128
-#define TARGET_FLOAT_BITS 32
-#define TARGET_FLOAT_BYTES	(TARGET_FLOAT_BITS/8)
-#define TARGET_FLOAT_MAX_EXP	LDBL_MAX_EXP
-#define TARGET_FLOAT_MANT_DIG	LDBL_MANT_DIG
-#define TARGET_FLOAT_IMPLICIT_J_BIT 1
-#define TARGET_FLOAT_MANT_BITS		(TARGET_FLOAT_MANT_DIG - TARGET_FLOAT_IMPLICIT_J_BIT)
-#define TARGET_FLOAT_EXP_BITS		(TARGET_FLOAT_BITS - TARGET_FLOAT_MANT_BITS - 1)
-
-typedef long long intmax_t;
-
-#define PTRDIFF __typeof__((char*)0-(char*)0)
-typedef PTRDIFF ptrdiff_t;
 
 inline long double fabsl(long double x) {
     return __fabs((double)x);
 }
 
-
 wchar_t* wcscpy(wchar_t *pDest, const wchar_t *pSrc);
 size_t strlen(const char *pStr);
 void* memchr(const void *, int, size_t);
 int mbtowc(wchar_t *pDest, const char *s, size_t num);
-
-enum justification_options {
-	left_justification,
-	right_justification,
-	zero_fill
-};
-
-enum sign_options {
-	only_minus,
-	sign_always,
-	space_holder
-};
-
-enum argument_options {
-	normal_argument,
-	char_argument,
-	short_argument,
-	long_argument,
-	long_long_argument,
-	wchar_argument,
-	intmax_argument,
-	size_t_argument,
-	ptrdiff_argument,
-	long_double_argument
-};
 
 typedef struct {
 	unsigned char	justification_options;		// 0x0
@@ -67,26 +24,6 @@ typedef struct {
 	int			  	field_width;				// 0x8
 	int				precision;					// 0xC
 } print_format;
-
-typedef struct {
-	char* CharStr;
-	size_t MaxCharCount;
-	size_t CharsWritten;
-} __OutStrCtrl;
-
-inline int iswdigit(wint_t c) {
-        return ((c < 0) || (c >= 0x100))
-                   ? 0
-                   : (int)(_current_locale.ctype_cmpt_ptr->wctype_map_ptr[c] &
-                           0x8);
-}
-
-inline int iswupper(wint_t c) {
-        return ((c < 0) || (c >= 0x100))
-                   ? 0
-                   : (int)(_current_locale.ctype_cmpt_ptr->wctype_map_ptr[c] &
-                           0x200);
-}
 
 const wchar_t* parse_format(const wchar_t *format_string, va_list *arg, print_format *format) {
 	print_format f;

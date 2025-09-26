@@ -5,31 +5,16 @@
 #include "limits.h"
 #include "locale.h"
 #include "mem.h"
-#include "stdio_api.h"
+#include "str_scan.h"
 
 #pragma exceptions on
 
 extern double nan(const char*);
 extern double __dec2num(const decimal*);
 
-#define LDBL_MAX 0x1.fffffffffffffP1023L
-#define LDBL_EPSILON 0x1.0000000000000P-52L
-#define LDBL_MIN 0x1.0000000000000P-1022L
-
-#define _MSL_SHRT_MAX 0x7FFF
-#define _MSL_USHRT_MAX 0x7FFF
-#define _MSL_SHRT_MIN (~_MSL_SHRT_MAX)
-
-#define INFINITY (*(float*)__float_huge)
-#define NAN (*(float*)__float_nan)
 #define HUGE_VAL (*(double*)__double_huge)
 
-#define final_state(scan_state) (scan_state & (2048 | 4096))
-#define success(scan_state) (scan_state & 3628)
 #define hex_success(count, scan_state) (count - 1 > 2 && scan_state & (398))
-
-#define fetch() (count++, (*ReadProc)(ReadProcArg, 0, __GetAChar))
-#define unfetch(c) (*ReadProc)(ReadProcArg, c, __UngetAChar)
 
 long double __strtold(int max_width, int (*ReadProc)(void*, int, int),
                       void* ReadProcArg, int* chars_scanned, int* overflow) {

@@ -1,5 +1,5 @@
-#ifndef _WSTRING_H
-#define _WSTRING_H
+#ifndef MSL_WSTRING_H
+#define MSL_WSTRING_H
 
 #include "types.h"
 

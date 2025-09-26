@@ -89,7 +89,6 @@ const char _Date_Format_C[] = "%m/%d/%y\0\0\0";
 const char _Day_Names_C[] = "Sun|Sunday|Mon|Monday|Tue|Tuesday|Wed|Wednesday|Thu|Thursday|Fri|Friday|Sat|Saturday\0\0\0";
 const char _Month_Names_C[] = "Jan|January|Feb|February|Mar|March|Apr|April|May|May|Jun|June|Jul|July|Aug|August|Sep|September|Oct|October|Nov|November|Dec|December\0\0";
 
-#define INFINITY (*(float*)__float_huge)
 #define SIGDIGLEN 36
 extern double pow(double, double);
 

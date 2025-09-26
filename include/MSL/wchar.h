@@ -1,8 +1,8 @@
 #ifndef MSL_WCHAR_H
 #define MSL_WCHAR_H
-#include <internal/mbstring.h>
+#include <mbstring.h>
 #include <internal/wprintf.h>
-#include <internal/wstring.h>
+#include <wstring.h>
 #include <limits.h>
 #include <types.h>
 #ifdef __cplusplus

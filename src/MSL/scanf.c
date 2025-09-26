@@ -1,25 +1,13 @@
+#include "ctype.h"
 #include "limits.h"
+#include "sformatter.h"
 #include "stdarg.h"
 #include "stdio_api.h"
-#include "ctype.h"
+#include "str_scan.h"
 
 #include <cmath>
 
 #pragma exceptions on
-
-enum argument_options {
-    normal_argument,
-    char_argument,
-    short_argument,
-    long_argument,
-    intmax_argument,
-    size_t_argument,
-    ptrdiff_argument,
-    long_long_argument,
-    double_argument,
-    long_double_argument,
-    wchar_argument
-};
 
 typedef long long intmax_t;
 #define PTRDIFF __typeof__((char*)0 - (char*)0)
@@ -32,33 +20,13 @@ typedef size_t rsize_t;
 
 #define EOF -1L
 
-typedef unsigned char char_map[32];
+extern long double __strtold(int max_width, int (*ReadProc)(void*, int, int), void* ReadProcArg, int* chars_scanned, int* overflow);
+extern unsigned long long __strtoull(int base, int max_width, int (*ReadProc)(void*, int, int), void* ReadProcArg, int* chars_scanned, int* negative, int* overflow);
+extern unsigned long __strtoul(int base, int max_width, int (*ReadProc)(void*, int, int), void* ReadProcArg, int* chars_scanned, int* negative, int* overflow);
 
-extern long double __strtold(int max_width, int (*ReadProc)(void*, int, int),
-                             void* ReadProcArg, int* chars_scanned,
-                             int* overflow);
-extern unsigned long long __strtoull(int base, int max_width,
-                                     int (*ReadProc)(void*, int, int),
-                                     void* ReadProcArg, int* chars_scanned,
-                                     int* negative, int* overflow);
-extern unsigned long __strtoul(int base, int max_width,
-                               int (*ReadProc)(void*, int, int),
-                               void* ReadProcArg, int* chars_scanned,
-                               int* negative, int* overflow);
+
 
 int mbtowc(wchar_t* pDest, const char* s, size_t num);
-
-typedef struct {
-    unsigned char suppress_assignment;
-    unsigned char field_width_specified;
-    unsigned char argument_options;
-    unsigned char conversion_char;
-    int field_width;
-    char_map char_set;
-} scan_format;
-
-#define set_char_map(map, ch) map[(unsigned char)ch >> 3] |= (1 << (ch & 7))
-#define tst_char_map(map, ch) (map[(unsigned char)ch >> 3] & (1 << (ch & 7)))
 
 static const char* parse_format(const char* format_string,
                                 scan_format* format) {

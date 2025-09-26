@@ -32,6 +32,17 @@ extern "C" {
 #define DBL_MIN 2.2250738585072014E-308L
 #define DBL_MAX 1.7976931348623157E+308L
 
+#define LDBL_MIN 0x1.0000000000000P-1022L
+#define LDBL_MAX 0x1.fffffffffffffP1023L
+#define LDBL_EPSILON 0x1.0000000000000P-52L
+
+#define INFINITY (*(float*)__float_huge)
+
+// NAN and HUGE_VAL are redefined in a bunch of locations
+//#define NAN (*(float*)__float_nan)
+//#define HUGE_VAL (*(double*)__double_huge)
+
+
 #ifdef __cplusplus
 }
 #endif
