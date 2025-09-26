@@ -140,12 +140,33 @@ static inline int __must_round(const decimal* d, int digits) {
 }
 
 static inline void __rounddec(decimal* d, int digits) {
+    u8* i;
+    u8* b;
+
     if (digits > 0 && digits < d->sig.length) {
         int unkBool = __must_round(d, digits);
         d->sig.length = digits;
 
         if (unkBool >= 0) {
-            __dorounddecup(d, digits);
+            // using __dorounddecup causes r4 and r5 registers to swap
+            // __dorounddecup(d, digits);
+            // manually inlined code from __dorounddecup:
+
+            b = d->sig.text;
+            i = b + digits - 1;
+
+            while (1) {
+                if (*i < 9) {
+                    *i += 1;
+                    break;
+                }
+                if (i == b) {
+                    *i = 1;
+                    d->exponent++;
+                    break;
+                }
+                *i-- = 0;
+            }
         }
     }
 }

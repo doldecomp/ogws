@@ -729,7 +729,7 @@ config.libs = [
             Object(NonMatching, "MSL/alloc.c"),
             Object(Matching, "MSL/errno.c"),
             Object(NonMatching, "MSL/ansi_files.c"),
-            Object(NonMatching, "MSL/ansi_fp.c"),
+            Object(Matching, "MSL/ansi_fp.c"),
             Object(NonMatching, "MSL/locale.c"),
             Object(Matching, "MSL/arith.c"),
             Object(Matching, "MSL/buffer_io.c"),
