@@ -3,7 +3,6 @@
 #include "sformatter.h"
 #include "stdarg.h"
 #include "stdio_api.h"
-#include "str_scan.h"
 
 #include <cmath>
 
@@ -23,8 +22,6 @@ typedef size_t rsize_t;
 extern long double __strtold(int max_width, int (*ReadProc)(void*, int, int), void* ReadProcArg, int* chars_scanned, int* overflow);
 extern unsigned long long __strtoull(int base, int max_width, int (*ReadProc)(void*, int, int), void* ReadProcArg, int* chars_scanned, int* negative, int* overflow);
 extern unsigned long __strtoul(int base, int max_width, int (*ReadProc)(void*, int, int), void* ReadProcArg, int* chars_scanned, int* negative, int* overflow);
-
-
 
 int mbtowc(wchar_t* pDest, const char* s, size_t num);
 

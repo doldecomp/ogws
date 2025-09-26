@@ -5,15 +5,15 @@
 #include "ansi_fp.h"
 
 struct lconv __lconv = {
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
     127,
     127,
     127,
@@ -21,7 +21,7 @@ struct lconv __lconv = {
     127,
     127,
     127,
-    "",
+    0,
     127,
     127,
     127,
@@ -69,12 +69,12 @@ struct _loc_coll_cmpt _loc_coll_C = {
 
 struct _loc_mon_cmpt _loc_mon_C = {
     "C",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
     127,
     127,
     127,
@@ -82,7 +82,7 @@ struct _loc_mon_cmpt _loc_mon_C = {
     127,
     127,
     127,
-    "",
+    0,
     127,
     127,
     127,
@@ -94,9 +94,9 @@ struct _loc_mon_cmpt _loc_mon_C = {
 
 struct _loc_num_cmpt _loc_num_C = {
     "C",
-    "",
-    "",
-    ""
+    0,
+    0,
+    0
 };
 
 struct _loc_time_cmpt _loc_tim_C = {
@@ -108,7 +108,7 @@ struct _loc_time_cmpt _loc_tim_C = {
     _Time_Format_C,
     _Day_Names_C,
     _Month_Names_C,
-    ""
+    0
 };
 
 struct __locale _current_locale = {

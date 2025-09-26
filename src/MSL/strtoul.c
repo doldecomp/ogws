@@ -3,9 +3,24 @@
 #include "errno.h"
 #include "limits.h"
 #include "stdio.h"
-#include "str_scan.h"
+#include "stdio_api.h"
 
 #pragma exceptions on
+
+enum scan_states {
+    start = 0x01,
+    check_for_zero = 0x02,
+    leading_zero = 0x04,
+    need_digit = 0x08,
+    digit_loop = 0x10,
+    finished = 0x20,
+    failure = 0x40
+};
+
+#define final_state(scan_state)	(scan_state & (0x20 | 0x40))
+#define success(scan_state) (scan_state & (0x4 | 0x10 | 0x20))
+#define fetch() (count++, (*ReadProc)(ReadProcArg, 0, __GetAChar))
+#define unfetch(c) ((*ReadProc)(ReadProcArg, c, __UngetAChar))
 
 // jumptable_80398FEC located in scanf
 
