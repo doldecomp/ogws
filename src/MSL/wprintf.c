@@ -22,6 +22,11 @@ typedef long long intmax_t;
 #define PTRDIFF __typeof__((char*)0-(char*)0)
 typedef PTRDIFF ptrdiff_t;
 
+inline long double fabsl(long double x) {
+    return __fabs((double)x);
+}
+
+
 wchar_t* wcscpy(wchar_t *pDest, const wchar_t *pSrc);
 size_t strlen(const char *pStr);
 void* memchr(const void *, int, size_t);
@@ -231,7 +236,7 @@ const wchar_t* parse_format(const wchar_t *format_string, va_list *arg, print_fo
 		case L'x':
 		case L'X':
 			if (f.argument_options == long_double_argument) {
-				f.conversion_char = long_long_argument;
+				f.argument_options = long_long_argument;
 			}
 
 			if (!f.precision_specified) {
@@ -319,7 +324,7 @@ const wchar_t* parse_format(const wchar_t *format_string, va_list *arg, print_fo
 
 		case L'n':
 			if (f.argument_options == long_double_argument) {
-				f.conversion_char = long_long_argument;
+                f.argument_options = long_long_argument;
 			}
 			
 			break;
