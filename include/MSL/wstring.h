@@ -17,5 +17,4 @@ wchar_t* wcschr(const wchar_t*, wchar_t);
 #ifdef __cplusplus
 }
 #endif
-
 #endif

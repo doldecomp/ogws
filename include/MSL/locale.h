@@ -1,5 +1,5 @@
-#ifndef LOCALE_H
-#define LOCALE_H
+#ifndef MSL_LOCALE_H
+#define MSL_LOCALE_H
 
 #include "ansi_params.h"
 #include "wchar_io.h"
