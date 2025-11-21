@@ -13,7 +13,8 @@ public:
 
 public:
     static ScnProc* Construct(MEMAllocator* pAllocator, u32* pSize,
-                              DrawProc pProc, bool opa, bool xlu, u32 userData);
+                              DrawProc pProc, bool opa, bool xlu,
+                              u32 userData = 0);
 
     ScnProc(MEMAllocator* pAllocator, DrawProc pProc, void* pUserData, bool opa,
             bool xlu)
