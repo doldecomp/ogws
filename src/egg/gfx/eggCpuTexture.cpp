@@ -14,8 +14,8 @@ DECOMP_FORCELITERAL(eggCpuTexture_cpp,
 
 namespace {
 
-void setColorGradation(GXColor* pColor, const GXColor& c1, const GXColor& c2,
-                       f32 scale) {
+void blendColor(GXColor* pColor, const GXColor& c1, const GXColor& c2,
+                f32 scale) {
 
 #line 53
     EGG_ASSERT(pColor);
@@ -97,7 +97,7 @@ void makeGradationTable(CpuTexture::EGradationKind kind, GXColor* pTable,
         }
         }
 
-        setColorGradation(&pTable[i], c1, c2, scale);
+        blendColor(&pTable[i], c1, c2, scale);
     }
 }
 

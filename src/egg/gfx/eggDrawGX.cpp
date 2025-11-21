@@ -22,13 +22,15 @@ const DrawGX::DL DrawGX::s_circleDLTbl[CIRCLE_MAX] = {DL_CIRCLE_16,
 nw4r::math::MTX34 DrawGX::s_cameraMtx;
 u32 DrawGX::s_flag = 0;
 
-GXLightID DrawGX::s_lightMaskDefault = GX_LIGHT0;
-GXTexMapID DrawGX::s_texMapDefault = GX_TEXMAP0;
+namespace {
 
-f32 DrawGX::s_quadScale = 1.0f;
+GXLightID LIGHTMASK_DEFAULT = GX_LIGHT0;
+GXTexMapID TEXMAP_DEFAULT = GX_TEXMAP0;
 
-GXTexObj DrawGX::s_clearTexObj;
-u32 DrawGX::s_clearTex[4 * 4] ALIGN(32) = {
+f32 QUAD_SCALE = 1.0f;
+
+GXTexObj CLEAR_Z_TEX_OBJ;
+u32 CLEAR_Z_TX[4 * 4] ALIGN(32) = {
     // clang-format off
     0x00FF00FF, 0x00FF00FF, 0x00FF00FF, 0x00FF00FF,
     0x00FF00FF, 0x00FF00FF, 0x00FF00FF, 0x00FF00FF,
@@ -36,6 +38,8 @@ u32 DrawGX::s_clearTex[4 * 4] ALIGN(32) = {
     0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF
     // clang-format on
 };
+
+} // namespace
 
 namespace {
 
@@ -119,19 +123,19 @@ void DrawGX::Initialize(Heap* pHeap) {
 }
 
 void DrawGX::InitClearTexObj() {
-    GXInitTexObj(&s_clearTexObj, &s_clearTex, 4, 4, GX_TF_Z24X8, GX_REPEAT,
+    GXInitTexObj(&CLEAR_Z_TEX_OBJ, &CLEAR_Z_TX, 4, 4, GX_TF_Z24X8, GX_REPEAT,
                  GX_REPEAT, GX_FALSE);
 
-    GXInitTexObjLOD(&s_clearTexObj, GX_NEAR, GX_NEAR, 0.0f, 0.0f, 0.0f,
+    GXInitTexObjLOD(&CLEAR_Z_TEX_OBJ, GX_NEAR, GX_NEAR, 0.0f, 0.0f, 0.0f,
                     GX_FALSE, GX_FALSE, GX_ANISO_1);
 }
 
 GXLightID DrawGX::GetLightMaskDefault() {
-    return s_lightMaskDefault;
+    return LIGHTMASK_DEFAULT;
 }
 
 GXTexMapID DrawGX::GetTexMapDefault() {
-    return s_texMapDefault;
+    return TEXMAP_DEFAULT;
 }
 
 void DrawGX::BeginDrawCube() {
@@ -457,7 +461,7 @@ void DrawGX::ClearEfb(const nw4r::math::MTX34& rMtx, bool colorUpdate,
 
     if (texture) {
         SetMat_TexGen(TEXGEN_ENABLE);
-        GXLoadTexObj(&s_clearTexObj, GetTexMapDefault());
+        GXLoadTexObj(&CLEAR_Z_TEX_OBJ, GetTexMapDefault());
     } else {
         SetMat_TexGen(TEXGEN_DISABLE);
     }
@@ -629,7 +633,7 @@ void DrawGX::SetVtxState(VtxType vtxType) {
 
     switch (vtxType) {
     case VTXTYPE_CUBE: {
-        static const s16 pos[][3] ALIGN(32) = {
+        static const s16 CUBE_VTX[][3] ALIGN(32) = {
             // clang-format off
             {FX2_14(-0.5), FX2_14( 0.5), FX2_14(-0.5)},
             {FX2_14(-0.5), FX2_14( 0.5), FX2_14( 0.5)},
@@ -641,7 +645,7 @@ void DrawGX::SetVtxState(VtxType vtxType) {
             {FX2_14( 0.5), FX2_14(-0.5), FX2_14(-0.5)}, // ?????
             // clang-format on
         };
-        static const s16 nrm[][3] ALIGN(32) = {
+        static const s16 CUBE_NRM[][3] ALIGN(32) = {
             // clang-format off
             {FX2_14(-1.0), FX2_14( 0.0), FX2_14( 0.0)},
             {FX2_14( 1.0), FX2_14( 0.0), FX2_14( 0.0)},
@@ -656,8 +660,8 @@ void DrawGX::SetVtxState(VtxType vtxType) {
         GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_POS, GX_POS_XYZ, GX_S16, 14);
         GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_NRM, GX_NRM_XYZ, GX_S16, 14);
 
-        GXSetArray(GX_VA_POS, pos, sizeof(s16) * 3);
-        GXSetArray(GX_VA_NRM, nrm, sizeof(s16) * 3);
+        GXSetArray(GX_VA_POS, CUBE_VTX, sizeof(s16) * 3);
+        GXSetArray(GX_VA_NRM, CUBE_NRM, sizeof(s16) * 3);
 
         GXSetVtxDesc(GX_VA_POS, GX_INDEX8);
         GXSetVtxDesc(GX_VA_NRM, GX_INDEX8);
@@ -695,7 +699,7 @@ void DrawGX::SetVtxState(VtxType vtxType) {
 
     case VTXTYPE_QUAD_TEXTURE:
     case VTXTYPE_QUAD: {
-        static const s16 pos[][3] ALIGN(32) = {
+        static const s16 QUAD_VTX[][3] ALIGN(32) = {
             // clang-format off
             {FX2_14(-0.5), FX2_14( 0.5), FX2_14(0.0)},
             {FX2_14( 0.5), FX2_14( 0.5), FX2_14(0.0)},
@@ -703,7 +707,7 @@ void DrawGX::SetVtxState(VtxType vtxType) {
             {FX2_14(-0.5), FX2_14(-0.5), FX2_14(0.0)},
             // clang-format on
         };
-        static const s16 nrm[][3] ALIGN(32) = {
+        static const s16 QUAD_NRM[][3] ALIGN(32) = {
             // clang-format off
             {FX2_14(0.0), FX2_14(0.0), FX2_14(1.0)},
             // clang-format on
@@ -722,13 +726,13 @@ void DrawGX::SetVtxState(VtxType vtxType) {
             GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_TEX0, GX_TEX_ST, GX_F32, 0);
         }
 
-        GXSetArray(GX_VA_POS, pos, sizeof(s16) * 3);
-        GXSetArray(GX_VA_NRM, nrm, sizeof(s16) * 3);
+        GXSetArray(GX_VA_POS, QUAD_VTX, sizeof(s16) * 3);
+        GXSetArray(GX_VA_NRM, QUAD_NRM, sizeof(s16) * 3);
         break;
     }
 
     case VTXTYPE_QUAD_SHADOW: {
-        static const s16 pos[][3] ALIGN(32) = {
+        static const s16 QUAD_VTX[][3] ALIGN(32) = {
             // clang-format off
             {FX2_14(-0.5), FX2_14(0.0), FX2_14(-0.5)},
             {FX2_14( 0.5), FX2_14(0.0), FX2_14(-0.5)},
@@ -736,7 +740,7 @@ void DrawGX::SetVtxState(VtxType vtxType) {
             {FX2_14(-0.5), FX2_14(0.0), FX2_14( 0.5)},
             // clang-format on
         };
-        static const s16 nrm[][3] ALIGN(32) = {
+        static const s16 QUAD_NRM[][3] ALIGN(32) = {
             // clang-format off
             {FX2_14(0.0), FX2_14(1.0), FX2_14(0.0)},
             // clang-format on
@@ -751,8 +755,8 @@ void DrawGX::SetVtxState(VtxType vtxType) {
         GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_NRM, GX_NRM_XYZ, GX_S16, 14);
         GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_TEX0, GX_TEX_ST, GX_F32, 0);
 
-        GXSetArray(GX_VA_POS, pos, sizeof(s16) * 3);
-        GXSetArray(GX_VA_NRM, nrm, sizeof(s16) * 3);
+        GXSetArray(GX_VA_POS, QUAD_VTX, sizeof(s16) * 3);
+        GXSetArray(GX_VA_NRM, QUAD_NRM, sizeof(s16) * 3);
         break;
     }
 
@@ -760,7 +764,7 @@ void DrawGX::SetVtxState(VtxType vtxType) {
     case VTX_TYPE_SCREEN_TEXTURE_FLIP:
     case VTX_TYPE_SCREEN:
     case VTX_TYPE_SCREEN_FLIP: {
-        static const s16 pos[][2] ALIGN(32) = {
+        static const s16 SCREEN_VTX[][2] ALIGN(32) = {
             // clang-format off
             {0, 1},
             {0, 1},
@@ -770,7 +774,7 @@ void DrawGX::SetVtxState(VtxType vtxType) {
             {0, 0}, // ?????
             // clang-format on
         };
-        static const s16 posFlip[][2] ALIGN(32) = {
+        static const s16 SCREEN_VTX_LU[][2] ALIGN(32) = {
             // clang-format off
             {0, 0},
             {0, 1},
@@ -780,7 +784,7 @@ void DrawGX::SetVtxState(VtxType vtxType) {
             {1, 0}, // ?????
             // clang-format on
         };
-        static const s16 txc[][2] ALIGN(32) = {
+        static const s16 SCREEN_UV[][2] ALIGN(32) = {
             {0, 0},
             {1, 0},
             {1, 1},
@@ -798,9 +802,10 @@ void DrawGX::SetVtxState(VtxType vtxType) {
             GXSetVtxDesc(GX_VA_TEX0, GX_INDEX8);
         }
 
-        GXSetArray(GX_VA_POS, flip ? posFlip : pos, sizeof(s16) * 3);
+        GXSetArray(GX_VA_POS, flip ? SCREEN_VTX_LU : SCREEN_VTX,
+                   sizeof(s16) * 3);
         if (texture) {
-            GXSetArray(GX_VA_TEX0, txc, sizeof(s16) * 2);
+            GXSetArray(GX_VA_TEX0, SCREEN_UV, sizeof(s16) * 2);
         }
 
         GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_POS, GX_POS_XYZ, GX_S16, 0);
@@ -970,17 +975,17 @@ void DrawGX::CreateDisplayList(Heap* pHeap) {
 
                 GXPosition2u8(1, 0);
                 if (i_dl == DL_QUAD_TEXTURE) {
-                    GXPosition2f32(s_quadScale, 0.0f);
+                    GXPosition2f32(QUAD_SCALE, 0.0f);
                 }
 
                 GXPosition2u8(2, 0);
                 if (i_dl == DL_QUAD_TEXTURE) {
-                    GXPosition2f32(s_quadScale, s_quadScale);
+                    GXPosition2f32(QUAD_SCALE, QUAD_SCALE);
                 }
 
                 GXPosition2u8(3, 0);
                 if (i_dl == DL_QUAD_TEXTURE) {
-                    GXPosition2f32(0.0f, s_quadScale);
+                    GXPosition2f32(0.0f, QUAD_SCALE);
                 }
             }
             GXEnd();
@@ -1077,22 +1082,22 @@ void DrawGX::SetZMode(ZMode zMode) {
 #line 1417
     EGG_ASSERT(zMode < ZMODE_MAX);
 
-    static const ZModeEntry s_zModeTbl[ZMODE_MAX] = {
+    static const ZModeEntry Z_ARG[ZMODE_MAX] = {
         {GX_FALSE, GX_ALWAYS, GX_FALSE}, // ZMODE_ALWAYS
         {GX_TRUE, GX_LEQUAL, GX_TRUE},   // ZMODE_OPA
         {GX_TRUE, GX_LEQUAL, GX_FALSE},  // ZMODE_XLU
         {GX_TRUE, GX_ALWAYS, GX_TRUE},   // ZMODE_CLEAR
     };
 
-    GXSetZMode(s_zModeTbl[zMode].m_enableTest, s_zModeTbl[zMode].m_func,
-               s_zModeTbl[zMode].m_enableUpdate);
+    GXSetZMode(Z_ARG[zMode].m_enableTest, Z_ARG[zMode].m_func,
+               Z_ARG[zMode].m_enableUpdate);
 }
 
 void DrawGX::SetBlendMode(Blend blendMode) {
 #line 1438
     EGG_ASSERT(blendMode < BLEND_MAX);
 
-    static const BlendEntry s_blendModeTbl[BLEND_MAX] = {
+    static const BlendEntry BLEND[BLEND_MAX] = {
         // clang-format off
         {GX_BM_BLEND,    GX_BL_SRCALPHA,    GX_BL_INVSRCALPHA, GX_LO_CLEAR}, // BLEND_NORMAL
         {GX_BM_BLEND,    GX_BL_INVSRCALPHA, GX_BL_SRCALPHA,    GX_LO_CLEAR}, // BLEND_INVERSE
@@ -1107,10 +1112,8 @@ void DrawGX::SetBlendMode(Blend blendMode) {
         // clang-format on
     };
 
-    GXSetBlendMode(s_blendModeTbl[blendMode].m_blendMode,
-                   s_blendModeTbl[blendMode].m_srcFactor,
-                   s_blendModeTbl[blendMode].m_dstFactor,
-                   s_blendModeTbl[blendMode].m_op);
+    GXSetBlendMode(BLEND[blendMode].m_blendMode, BLEND[blendMode].m_srcFactor,
+                   BLEND[blendMode].m_dstFactor, BLEND[blendMode].m_op);
 }
 
 } // namespace EGG

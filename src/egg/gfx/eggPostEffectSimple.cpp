@@ -24,7 +24,7 @@ namespace EGG
         GXColor color = mColor;
         if (FLOAT_0x24 < 1.0f)
         {
-            scaleColor(color, color, FLOAT_0x24, true);
+            scaleRGBA(&color, color, FLOAT_0x24, true);
         }
 
         setMatColorChannel();

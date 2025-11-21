@@ -77,6 +77,13 @@ public:
         mFlags |= FLAG_PROJ_ABSOLUTE;
     }
 
+    const nw4r::math::VEC2& GetPosition() const {
+        return mPosition;
+    }
+    void SetPosition(const nw4r::math::VEC2& rPos) {
+        mPosition = rPos;
+    }
+
     static void SetTVMode(TVMode tvMode);
     static void SetTVModeDefault();
 

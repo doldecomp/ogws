@@ -125,8 +125,8 @@ void PostEffectBase::setBlendModeInternal() {
     }
 }
 
-void PostEffectBase::scaleColor(GXColor& out, const GXColor& in, f32 scale,
-                                bool clamp) {
+void PostEffectBase::scaleRGBA(GXColor* out, const GXColor& in, f32 scale,
+                               bool clamp) {
 #line 205
     EGG_ASSERT(scale >= 0.f);
 
@@ -137,15 +137,15 @@ void PostEffectBase::scaleColor(GXColor& out, const GXColor& in, f32 scale,
     color_f[3] = in.a * scale;
 
     if (clamp) {
-        out.r = (color_f[0] < 255.0f) ? color_f[0] : 255.0f;
-        out.g = (color_f[1] < 255.0f) ? color_f[1] : 255.0f;
-        out.b = (color_f[2] < 255.0f) ? color_f[2] : 255.0f;
-        out.a = (color_f[3] < 255.0f) ? color_f[3] : 255.0f;
+        out->r = (color_f[0] < 255.0f) ? color_f[0] : 255.0f;
+        out->g = (color_f[1] < 255.0f) ? color_f[1] : 255.0f;
+        out->b = (color_f[2] < 255.0f) ? color_f[2] : 255.0f;
+        out->a = (color_f[3] < 255.0f) ? color_f[3] : 255.0f;
     } else {
-        out.r = color_f[0];
-        out.g = color_f[1];
-        out.b = color_f[2];
-        out.a = color_f[3];
+        out->r = color_f[0];
+        out->g = color_f[1];
+        out->b = color_f[2];
+        out->a = color_f[3];
     }
 }
 
@@ -163,4 +163,5 @@ void PostEffectBase::setProjection(const Screen& screen) {
 
     clone.Screen::SetProjectionGX();
 }
+
 } // namespace EGG

@@ -4,18 +4,18 @@
 
 namespace EGG {
 
-const u8 CapTexture::scSamplePattern[12][2] = {
+const u8 CapTexture::SAMPLE_PATTERN_OFF[12][2] = {
     // Raw copy
     {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0},
     {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0},
 };
 
-const u8 CapTexture::scVFilterSmooth[GX_VFILTER_SZ] = {
+const u8 CapTexture::VFILTER_BLUR[GX_VFILTER_SZ] = {
     // Blends color with neighboring pixels
     21, 0, 0, 22, 0, 21, 0,
 };
 
-const u8 CapTexture::scVFilterSharp[GX_VFILTER_SZ] = {
+const u8 CapTexture::VFILTER_OFF[GX_VFILTER_SZ] = {
     // Only use the current pixel's color
     0, 0, 1, 63, 0, 0, 0,
 };
@@ -24,11 +24,12 @@ void CapTexture::configure() {
     CpuTexture::configure();
     mLoadMap = GX_TEXMAP0;
 
-    static const GXColor BLACK = {0, 0, 0, 0};
-    setClearColor(BLACK);
+    // @typo
+    static const GXColor DEFUALT_CLEAR_COLOR = {0, 0, 0, 0};
+    setClearColor(DEFUALT_CLEAR_COLOR);
     setClearZ(GX_CLEAR_Z_MAX);
 
-    setSharpVFilter();
+    setVFilterOff();
     enablePixModeSync();
 }
 
@@ -60,8 +61,8 @@ void CapTexture::capture(u16 x, u16 y, bool mipmap, int format) {
     GXSetTexCopyDst(getWidth(), getHeight(), static_cast<GXTexFmt>(format),
                     mipmap);
 
-    GXSetCopyFilter(GX_FALSE, scSamplePattern, checkVFilterEnable(),
-                    checkVFilterEnable() ? mVerticalFilter : scVFilterSharp);
+    GXSetCopyFilter(GX_FALSE, SAMPLE_PATTERN_OFF, checkVFilterEnable(),
+                    checkVFilterEnable() ? mVerticalFilter : VFILTER_OFF);
 
     if (checkColorUpdate() || checkAlphaUpdate() || checkZBufferUpdate()) {
         StateGX::ScopedColorUpdate color(checkColorUpdate());
@@ -75,7 +76,7 @@ void CapTexture::capture(u16 x, u16 y, bool mipmap, int format) {
         GXCopyTex(getBuffer(), GX_FALSE);
     }
 
-    GXSetCopyFilter(GX_FALSE, scSamplePattern, GX_FALSE, scVFilterSharp);
+    GXSetCopyFilter(GX_FALSE, SAMPLE_PATTERN_OFF, GX_FALSE, VFILTER_OFF);
 
     if (checkPixModeSync()) {
         GXPixModeSync();

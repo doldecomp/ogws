@@ -52,7 +52,7 @@ namespace EGG
         void setMatPE();
         void setBlendModeInternal();
 
-        static void scaleColor(GXColor&, const GXColor&, f32, bool);
+        static void scaleRGBA(GXColor*, const GXColor&, f32, bool);
         static void setProjection(const Screen&);
     };
 }

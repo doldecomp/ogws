@@ -64,9 +64,9 @@ namespace EGG
         }
         
         GXColor sp0C;
-        scaleColor(sp0C, COLOR_0x20, FLOAT_0x28, true);
+        scaleRGBA(&sp0C, COLOR_0x20, FLOAT_0x28, true);
         GXColor sp08;
-        scaleColor(sp08, COLOR_0x24, scale, true);
+        scaleRGBA(&sp08, COLOR_0x24, scale, true);
 
         COLOR_0x30 = sp08;
         COLOR_0x34 = sp0C;

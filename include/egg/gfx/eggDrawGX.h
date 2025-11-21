@@ -212,14 +212,6 @@ private:
 
     static nw4r::math::MTX34 s_cameraMtx;
     static u32 s_flag;
-
-    static GXLightID s_lightMaskDefault;
-    static GXTexMapID s_texMapDefault;
-
-    static f32 s_quadScale;
-
-    static GXTexObj s_clearTexObj;
-    static u32 s_clearTex[4 * 4] ALIGN(32);
 };
 
 } // namespace EGG

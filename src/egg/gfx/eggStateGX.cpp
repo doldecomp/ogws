@@ -9,10 +9,12 @@ namespace EGG
 {
     using namespace nw4r::g3d;
 
+    // unnamed WHITE
     const GXColor StateGX::cDefaultGXColor = {255, 255, 255, 255};
 
     StateGX::CachedState StateGX::sCache;
 
+    // LOCAL offsetMtx
     const f32 StateGX::lbl_80378C68[2][3] = {
         {0.5f, 0.0f, 0.0f}, {0.0f, 0.5f, 0.0f},
     };

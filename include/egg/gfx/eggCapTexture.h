@@ -34,12 +34,12 @@ public:
         enableVFilter();
         setVFilterInternal(pFilter);
     }
-    void setSmoothVFilter() {
+    void setVFilterBlur() {
         enableVFilter();
-        setVFilterInternal(scVFilterSmooth);
+        setVFilterInternal(VFILTER_BLUR);
     }
-    void setSharpVFilter() {
-        setVFilterInternal(scVFilterSharp);
+    void setVFilterOff() {
+        setVFilterInternal(VFILTER_OFF);
     }
 
     bool checkColorUpdate() const {
@@ -114,10 +114,9 @@ private:
     u32 mClearZ;                       // at 0x20
     u8 mVerticalFilter[GX_VFILTER_SZ]; // at 0x24
 
-    static const u8 scSamplePattern[12][2];
-
-    static const u8 scVFilterSmooth[GX_VFILTER_SZ];
-    static const u8 scVFilterSharp[GX_VFILTER_SZ];
+    static const u8 SAMPLE_PATTERN_OFF[12][2];
+    static const u8 VFILTER_BLUR[GX_VFILTER_SZ];
+    static const u8 VFILTER_OFF[GX_VFILTER_SZ];
 };
 
 } // namespace EGG

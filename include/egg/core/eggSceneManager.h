@@ -11,7 +11,7 @@ class SceneCreator;
 
 class SceneManager {
 public:
-    explicit SceneManager(SceneCreator* pSceneCreator);
+    explicit SceneManager(SceneCreator* pSceneCreator = NULL);
     ~SceneManager();
 
     virtual void calc(); // at 0x8
