@@ -1065,6 +1065,7 @@ config.libs = [
             Object(NonMatching, "Pack/RPKernel/RPSysKokeshiGenInfo.cpp"),
             Object(NonMatching, "Pack/RPKernel/RPSysKokeshiLocation.cpp"),
             Object(NonMatching, "Pack/RPKernel/RPSysKokeshiOverloadInfo.cpp"),
+            Object(NonMatching, "Pack/RPKernel/RPSysMiddleDBGenInfo.cpp"),
         ],
     },
 ]
