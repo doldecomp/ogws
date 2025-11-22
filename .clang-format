@@ -12,45 +12,48 @@ ConstructorInitializerAllOnOneLineOrOnePerLine: true
 FixNamespaceComments: true
 AccessModifierOffset: -4
 AllowShortFunctionsOnASingleLine: Empty
-WhitespaceSensitiveMacros: [
-  DECOMP_FORCEACTIVE,
-  DECOMP_FORCELITERAL,
-  DECOMP_FORCEACTIVE_DTOR,
-  NW4R_UT_LINKLIST_FOREACH,
-  NW4R_UT_LINKLIST_FOREACH_SAFE,
-  NW4R_UT_LIST_FOREACH,
-  NW4R_UT_LIST_FOREACH_SAFE,
-  NW4R_EF_LIST_FOREACH,
-  NW4R_EF_LIST_FOREACH_SAFE,
-  EGG_ASSERT,
-  EGG_ASSERT_MSG,
-]
-ForEachMacros: [
-  EGG_NW4R_LIST_FOREACH,
-]
+WhitespaceSensitiveMacros:
+  [
+    DECOMP_FORCEACTIVE,
+    DECOMP_FORCELITERAL,
+    DECOMP_FORCEACTIVE_DTOR,
+    NW4R_UT_LINKLIST_FOREACH,
+    NW4R_UT_LINKLIST_FOREACH_SAFE,
+    NW4R_UT_LIST_FOREACH,
+    NW4R_UT_LIST_FOREACH_SAFE,
+    NW4R_EF_LIST_FOREACH,
+    NW4R_EF_LIST_FOREACH_SAFE,
+    EGG_ASSERT,
+    EGG_ASSERT_MSG,
+  ]
+ForEachMacros: [EGG_NW4R_LIST_FOREACH]
 AttributeMacros: [DECOMP_INLINE, DECOMP_DONT_INLINE]
 InsertNewlineAtEOF: true
 
 IncludeCategories:
-  - Regex:           '^<(nw4r|egg|Pack)?(\/)?types'     # "Types" headers
-    Priority:        0
-    CaseSensitive:   true
+  - Regex: '^<(nw4r|egg|Pack)?(\/)?types' # "Types" headers
+    Priority: 0
+    CaseSensitive: true
 
-  - Regex:           '<egg\/[[:lower:].]+h>' # EGG public headers
-    Priority:        2
-    CaseSensitive:   true
+  - Regex: '<Pack\/[[:lower:].]+h>' # RP public headers
+    Priority: 2
+    CaseSensitive: true
 
-  - Regex:           '<nw4r\/[[:alnum:].]+h>' # NW4R public headers
-    Priority:        3
-    CaseSensitive:   true
+  - Regex: '<egg\/[[:lower:].]+h>' # EGG public headers
+    Priority: 3
+    CaseSensitive: true
 
-  - Regex:           '^<revolution\/[[:upper:].]+h>' # RVL SDK public headers
-    Priority:        4
-    CaseSensitive:   true
+  - Regex: '<nw4r\/[[:alnum:].]+h>' # NW4R public headers
+    Priority: 4
+    CaseSensitive: true
 
-  - Regex:           '<[[:alnum:].]+>' # STL headers
-    Priority:        5                 # Priority 0 is header mapped to src file
-    CaseSensitive:   true
+  - Regex: '^<revolution\/[[:upper:].]+h>' # RVL SDK public headers
+    Priority: 5
+    CaseSensitive: true
 
-  - Regex:           '.*' # All other headers
-    Priority:        1
+  - Regex: "<[[:alnum:].]+>" # STL headers
+    Priority: 6 # Priority 0 is header mapped to src file
+    CaseSensitive: true
+
+  - Regex: ".*" # All other headers
+    Priority: 1
