@@ -2841,6 +2841,10 @@ Pack/RPKernel/RPSysKokeshiManager.cpp:
 	.sbss       start:0x804BF540 end:0x804BF548
 	.sdata2     start:0x804C15A0 end:0x804C15C8
 
+Pack/RPKernel/RP_DEBUG_STUB_1.cpp:
+	.text       start:0x801926B0 end:0x80192700
+	.data       start:0x803B9A10 end:0x803B9A20
+
 nw4r/g3d/g3d_scnrfl.cpp:
 	.text       start:0x801A7894 end:0x801A8440
 	.rodata     start:0x80383670 end:0x80383680
