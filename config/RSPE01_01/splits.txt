@@ -2989,6 +2989,12 @@ Pack/RPKernel/RPSysKokeshiCtrlLoader.cpp:
 	.text       start:0x801A0A60 end:0x801A0BE0
 	.data       start:0x803B9D80 end:0x803B9DC0
 
+Pack/RPKernel/RPSysPauseMenu.cpp:
+	.text       start:0x801A0BE0 end:0x801A1FE0
+	.rodata     start:0x80383060 end:0x803832A0
+	.data       start:0x803B9DC0 end:0x803B9E00
+	.sdata2     start:0x804C17B0 end:0x804C17C0
+
 nw4r/g3d/g3d_scnrfl.cpp:
 	.text       start:0x801A7894 end:0x801A8440
 	.rodata     start:0x80383670 end:0x80383680
