@@ -3030,6 +3030,10 @@ Pack/RPKernel/RPSysAppMiiManager.cpp:
 	.text       start:0x801A6360 end:0x801A6424
 	.data       start:0x803B9E90 end:0x803B9EA0
 
+Pack/RPKernel/RPSysControllerSync.cpp:
+	.text       start:0x801A6424 end:0x801A6554
+	.sbss       start:0x804BF5B0 end:0x804BF5B8
+
 nw4r/g3d/g3d_scnrfl.cpp:
 	.text       start:0x801A7894 end:0x801A8440
 	.rodata     start:0x80383670 end:0x80383680

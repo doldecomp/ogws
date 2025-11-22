@@ -1081,6 +1081,7 @@ config.libs = [
             Object(NonMatching, "Pack/RPKernel/RPSysKokeshiCtrlDataMgr.cpp"),
             Object(NonMatching, "Pack/RPKernel/RPSysKokeshiControllerMgr.cpp"),
             Object(NonMatching, "Pack/RPKernel/RPSysAppMiiManager.cpp"),
+            Object(NonMatching, "Pack/RPKernel/RPSysControllerSync.cpp"),
         ],
     },
 ]
