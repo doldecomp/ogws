@@ -2958,6 +2958,10 @@ Pack/RPKernel/RPSysMiddleDB.cpp:
 	.text       start:0x8019E0B8 end:0x8019E3DC
 	.data       start:0x803B9CD8 end:0x803B9D10
 
+Pack/RPKernel/RPSysLytAllocator.cpp:
+	.text       start:0x8019E3DC end:0x8019E494
+	.data       start:0x803B9D10 end:0x803B9D28
+
 nw4r/g3d/g3d_scnrfl.cpp:
 	.text       start:0x801A7894 end:0x801A8440
 	.rodata     start:0x80383670 end:0x80383680
