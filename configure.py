@@ -1050,6 +1050,7 @@ config.libs = [
             Object(NonMatching, "Pack/RPKernel/RPSysLayout.cpp"),
             Object(NonMatching, "Pack/RPKernel/RPSysFrameCtrl.cpp"),
             Object(NonMatching, "Pack/RPKernel/RPSysEffectCreator.cpp"),
+            Object(NonMatching, "Pack/RPKernel/RPSysWideTextWriter.cpp"),
         ],
     },
 ]

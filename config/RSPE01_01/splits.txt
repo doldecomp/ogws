@@ -2874,6 +2874,10 @@ Pack/RPKernel/RPSysEffectCreator.cpp:
 	.data       start:0x803B9BD0 end:0x803B9BE0
 	.sdata2     start:0x804C1628 end:0x804C1650
 
+Pack/RPKernel/RPSysWideTextWriter.cpp:
+	.text       start:0x80198968 end:0x80198990
+	.sbss       start:0x804BF558 end:0x804BF560
+
 nw4r/g3d/g3d_scnrfl.cpp:
 	.text       start:0x801A7894 end:0x801A8440
 	.rodata     start:0x80383670 end:0x80383680
