@@ -2904,6 +2904,13 @@ Pack/RPKernel/RPSysAvatar.cpp:
 	.data       start:0x803B9C08 end:0x803B9C20
 	.sdata2     start:0x804C1688 end:0x804C1698
 
+Pack/RPKernel/RPSysTutorialWinMgr.cpp:
+	.text       start:0x80199A4C end:0x8019A6B8
+	.rodata     start:0x80382D80 end:0x80382E98
+	.data       start:0x803B9C20 end:0x803B9C30
+	.sbss       start:0x804BF560 end:0x804BF568
+	.sdata2     start:0x804C1698 end:0x804C16B0
+
 nw4r/g3d/g3d_scnrfl.cpp:
 	.text       start:0x801A7894 end:0x801A8440
 	.rodata     start:0x80383670 end:0x80383680
