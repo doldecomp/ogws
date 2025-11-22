@@ -10,7 +10,7 @@
  */
 #define RP_SINGLETON_DECL(T)                                                   \
 public:                                                                        \
-    static void CreateInstance();                                              \
+    static T* CreateInstance();                                                \
     static void DestroyInstance();                                             \
     static T* instance() {                                                     \
         return spInstance;                                                     \
@@ -28,8 +28,11 @@ private:                                                                       \
  * @brief Implementation for a singleton class
  */
 #define RP_SINGLETON_IMPL(T)                                                   \
-    void T::CreateInstance() {                                                 \
+    T* T::spInstance = NULL;                                                   \
+                                                                               \
+    T* T::CreateInstance() {                                                   \
         spInstance = new T();                                                  \
+        return spInstance;                                                     \
     }                                                                          \
     void T::DestroyInstance() {                                                \
         delete spInstance;                                                     \

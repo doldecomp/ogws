@@ -2805,11 +2805,11 @@ Pack/RPSystem/RPSysPlayerMgr.c:
 Pack/RPSystem/RPSysPlayer.c:
 	.text       start:0x8018E6F0 end:0x80190794
 
-Pack/RPKernel/IRPSysHostIOSocket.c:
+Pack/RPKernel/IRPSysHostIOSocket.cpp:
 	.text       start:0x80190794 end:0x80190840
 	.data       start:0x803B9998 end:0x803B99B0
 
-Pack/RPKernel/RPSysHostIOSocketManager.c:
+Pack/RPKernel/RPSysHostIOSocketManager.cpp:
 	.text       start:0x80190840 end:0x801908C4
 	.data       start:0x803B99B0 end:0x803B99BC
 	.sbss       start:0x804BF528 end:0x804BF530
