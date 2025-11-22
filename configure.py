@@ -1068,6 +1068,7 @@ config.libs = [
             Object(NonMatching, "Pack/RPKernel/RPSysMiddleDBGenInfo.cpp"),
             Object(NonMatching, "Pack/RPKernel/RPSysMiddleDB.cpp"),
             Object(NonMatching, "Pack/RPKernel/RPSysLytAllocator.cpp"),
+            Object(NonMatching, "Pack/RPKernel/RPSysLytDynamicAnm.cpp"),
         ],
     },
 ]

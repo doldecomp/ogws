@@ -2962,6 +2962,11 @@ Pack/RPKernel/RPSysLytAllocator.cpp:
 	.text       start:0x8019E3DC end:0x8019E494
 	.data       start:0x803B9D10 end:0x803B9D28
 
+Pack/RPKernel/RPSysLytDynamicAnm.cpp:
+	.text       start:0x8019E494 end:0x8019EB44
+	.sbss       start:0x804BF588 end:0x804BF590
+	.sdata2     start:0x804C1750 end:0x804C1780
+
 nw4r/g3d/g3d_scnrfl.cpp:
 	.text       start:0x801A7894 end:0x801A8440
 	.rodata     start:0x80383670 end:0x80383680
