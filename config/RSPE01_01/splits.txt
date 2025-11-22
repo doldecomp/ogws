@@ -2865,6 +2865,10 @@ Pack/RPKernel/RPSysLayout.cpp:
 	.bss        start:0x804A3DE0 end:0x804A41E0
 	.sdata2     start:0x804C15F0 end:0x804C1618
 
+Pack/RPKernel/RPSysFrameCtrl.cpp:
+	.text       start:0x80197790 end:0x80197A28
+	.sdata2     start:0x804C1618 end:0x804C1628
+
 nw4r/g3d/g3d_scnrfl.cpp:
 	.text       start:0x801A7894 end:0x801A8440
 	.rodata     start:0x80383670 end:0x80383680
