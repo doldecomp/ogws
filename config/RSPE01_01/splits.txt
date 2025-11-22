@@ -2845,6 +2845,13 @@ Pack/RPKernel/RP_DEBUG_STUB_1.cpp:
 	.text       start:0x801926B0 end:0x80192700
 	.data       start:0x803B9A10 end:0x803B9A20
 
+Pack/RPKernel/RPSysEffectMgr.cpp:
+	.text       start:0x80192700 end:0x80194158
+	.rodata     start:0x80382C60 end:0x80382D60
+	.data       start:0x803B9A20 end:0x803B9B38
+	.sbss       start:0x804BF548 end:0x804BF550
+	.sdata2     start:0x804C15C8 end:0x804C15E0
+
 nw4r/g3d/g3d_scnrfl.cpp:
 	.text       start:0x801A7894 end:0x801A8440
 	.rodata     start:0x80383670 end:0x80383680
