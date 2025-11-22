@@ -2922,6 +2922,15 @@ Pack/RPKernel/RPSysTagProcessor.cpp:
 	.sbss       start:0x804BF568 end:0x804BF570
 	.sdata2     start:0x804C16B0 end:0x804C16D0
 
+Pack/RPKernel/RPSysController.cpp:
+	.text       start:0x8019B214 end:0x8019C74C
+	.ctors      start:0x80355120 end:0x80355124
+	.rodata     start:0x80382E98 end:0x80382ED8
+	.data       start:0x803B9C48 end:0x803B9C80
+	.sdata      start:0x804BDBC0 end:0x804BDBC8
+	.sbss       start:0x804BF570 end:0x804BF588
+	.sdata2     start:0x804C16D0 end:0x804C16F8
+
 nw4r/g3d/g3d_scnrfl.cpp:
 	.text       start:0x801A7894 end:0x801A8440
 	.rodata     start:0x80383670 end:0x80383680

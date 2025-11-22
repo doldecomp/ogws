@@ -1060,6 +1060,7 @@ config.libs = [
             Object(NonMatching, "Pack/RPKernel/RPSysTutorialWinMgr.cpp"),
             Object(NonMatching, "Pack/RPKernel/RPSysLytPicture.cpp"),
             Object(NonMatching, "Pack/RPKernel/RPSysTagProcessor.cpp"),
+            Object(NonMatching, "Pack/RPKernel/RPSysController.cpp"),
         ],
     },
 ]
