@@ -2673,7 +2673,7 @@ homebuttonMiniLib/hbm_unsplit.o:
 	.data       start:0x803B8740 end:0x803B9578
 	.bss        start:0x804A3B78 end:0x804A3D50
 
-Pack/RPKernel/RPSysSystem.c:
+Pack/RPKernel/RPSysSystem.cpp:
 	.text       start:0x80182BAC end:0x80183EE4
 	.ctors      start:0x8035510C end:0x80355110
 	.rodata     start:0x803820B8 end:0x803820F8
@@ -2685,24 +2685,24 @@ Pack/RPKernel/RPSysSystem.c:
 main.cpp:
 	.text       start:0x80183EE4 end:0x80183F68
 
-Pack/RPSystem/RPSysSceneCreator.c:
+Pack/RPSystem/RPSysSceneCreator.cpp:
 	.text       start:0x80183F68 end:0x80184E80
 	.rodata     start:0x803820F8 end:0x80382438
 	.data       start:0x803B95B8 end:0x803B9600
 	.sbss       start:0x804BF4C8 end:0x804BF4D0
 
-Pack/RPSystem/RPSysScene.c:
+Pack/RPSystem/RPSysScene.cpp:
 	.text       start:0x80184E80 end:0x801855BC
 	.ctors      start:0x80355110 end:0x80355114
 	.data       start:0x803B9600 end:0x803B9660
 	.sbss       start:0x804BF4D0 end:0x804BF4D8
 
-Pack/RPSystem/RPSysRenderMode.c:
+Pack/RPSystem/RPSysRenderMode.cpp:
 	.text       start:0x801855BC end:0x80185678
 	.rodata     start:0x80382438 end:0x80382450
 	.data       start:0x803B9660 end:0x803B9790
 
-Pack/RPSystem/RPSysSceneMgr.c:
+Pack/RPSystem/RPSysSceneMgr.cpp:
 	.text       start:0x80185678 end:0x80186234
 	.data       start:0x803B9790 end:0x803B97D8
 	.sbss       start:0x804BF4D8 end:0x804BF4E0
@@ -2724,7 +2724,7 @@ Pack/RPSystem/RPSysTagParms.cpp:
 	.text       start:0x80186740 end:0x80186878
 	.data       start:0x803B9828 end:0x803B9850
 
-Pack/RPSystem/RPSysLoadScene.c:
+Pack/RPSystem/RPSysLoadScene.cpp:
 	.text       start:0x80186878 end:0x80186E40
 	.rodata     start:0x80382568 end:0x803825C0
 	.sdata2     start:0x804C1538 end:0x804C1548
@@ -2734,24 +2734,24 @@ Pack/RPSystem/RP_80186e40.o:
 	.ctors      start:0x80355114 end:0x80355118
 	.bss        start:0x804A3DA0 end:0x804A3DE0
 
-Pack/RPSystem/RPSysResourceManager.c:
+Pack/RPSystem/RPSysResourceManager.cpp:
 	.text       start:0x80186EB4 end:0x80187B54
 	.rodata     start:0x803825C0 end:0x803826B8
 	.data       start:0x803B9850 end:0x803B9870
 	.sdata      start:0x804BDB78 end:0x804BDB80
 	.sbss       start:0x804BF4F0 end:0x804BF4F8
 
-Pack/RPSystem/RPSysQueuedScene.c:
+Pack/RPSystem/RPSysQueuedScene.cpp:
 	.text       start:0x80187B54 end:0x80187C10
 	.data       start:0x803B9870 end:0x803B9880
 	.sbss       start:0x804BF4F8 end:0x804BF500
 
-Pack/RPSystem/RPSysCommonObject.c:
+Pack/RPSystem/RPSysCommonObject.cpp:
 	.text       start:0x80187C10 end:0x80187F64
 	.data       start:0x803B9880 end:0x803B98A8
 	.sdata2     start:0x804C1548 end:0x804C1550
 
-Pack/RPSystem/RPSysDvdStatus.c:
+Pack/RPSystem/RPSysDvdStatus.cpp:
 	.text       start:0x80187F64 end:0x80188368
 	.rodata     start:0x803826B8 end:0x803829E0
 	.data       start:0x803B98A8 end:0x803B9938
@@ -2759,50 +2759,50 @@ Pack/RPSystem/RPSysDvdStatus.c:
 	.sbss       start:0x804BF500 end:0x804BF508
 	.sdata2     start:0x804C1550 end:0x804C1568
 
-Pack/RPSystem/RPSysSaveDataMgr.c:
+Pack/RPSystem/RPSysSaveDataMgr.cpp:
 	.text       start:0x80188368 end:0x8018A90C
 	.rodata     start:0x803829E0 end:0x80382A50
 	.data       start:0x803B9938 end:0x803B994C
 	.sdata      start:0x804BDB88 end:0x804BDB98
 	.sbss       start:0x804BF508 end:0x804BF510
 
-Pack/RPSystem/RPSportsSystemData.c:
+Pack/RPSystem/RPSportsSystemData.cpp:
 	.text       start:0x8018A90C end:0x8018AD70
 
-Pack/RPSystem/RPSportsPlayerData.c:
+Pack/RPSystem/RPSportsPlayerData.cpp:
 	.text       start:0x8018AD70 end:0x8018BCDC
 	.sdata2     start:0x804C1568 end:0x804C1570
 
-Pack/RPSystem/RPSysFontManager.c:
+Pack/RPSystem/RPSysFontManager.cpp:
 	.text       start:0x8018BCDC end:0x8018BF54
 	.rodata     start:0x80382A50 end:0x80382B10
 	.data       start:0x803B9950 end:0x803B9978
 	.sbss       start:0x804BF510 end:0x804BF518
 
-Pack/RPSystem/RPSysSaveData.c:
+Pack/RPSystem/RPSysSaveData.cpp:
 	.text       start:0x8018BF54 end:0x8018CC6C
 
-Pack/RPSystem/RPSysPauseMgr.c:
+Pack/RPSystem/RPSysPauseMgr.cpp:
 	.text       start:0x8018CC6C end:0x8018D6AC
 	.rodata     start:0x80382B10 end:0x80382B50
 	.data       start:0x803B9978 end:0x803B9984
 	.sbss       start:0x804BF518 end:0x804BF520
 	.sdata2     start:0x804C1570 end:0x804C1578
 
-Pack/RPSystem/RPPartySystemData.c:
+Pack/RPSystem/RPPartySystemData.cpp:
 	.text       start:0x8018D6AC end:0x8018D6D0
 
-Pack/RPSystem/RPPartyPlayerData.c:
+Pack/RPSystem/RPPartyPlayerData.cpp:
 	.text       start:0x8018D6D0 end:0x8018D84C
 
-Pack/RPSystem/RPSysPlayerMgr.c:
+Pack/RPSystem/RPSysPlayerMgr.cpp:
 	.text       start:0x8018D84C end:0x8018E6F0
 	.rodata     start:0x80382B50 end:0x80382BB0
 	.data       start:0x803B9988 end:0x803B9994
 	.sbss       start:0x804BF520 end:0x804BF528
 	.sdata2     start:0x804C1578 end:0x804C1580
 
-Pack/RPSystem/RPSysPlayer.c:
+Pack/RPSystem/RPSysPlayer.cpp:
 	.text       start:0x8018E6F0 end:0x80190794
 
 Pack/RPKernel/IRPSysHostIOSocket.cpp:
@@ -2814,24 +2814,32 @@ Pack/RPKernel/RPSysHostIOSocketManager.cpp:
 	.data       start:0x803B99B0 end:0x803B99BC
 	.sbss       start:0x804BF528 end:0x804BF530
 
-Pack/RPKernel/RP_801908C4.o:
+Pack/RPKernel/RP_DEBUG_STUB_0.o:
 	.text       start:0x801908C4 end:0x801908CC
 	.sbss       start:0x804BF530 end:0x804BF538
 
-Pack/RPKernel/RPSysTextWriter.c:
+Pack/RPKernel/RPSysTextWriter.cpp:
 	.text       start:0x801908CC end:0x80190D24
 	.data       start:0x803B99C0 end:0x803B99D0
 	.sbss       start:0x804BF538 end:0x804BF540
 	.sdata2     start:0x804C1580 end:0x804C1598
 
-Pack/RPKernel/RPSysMessage.c:
+Pack/RPKernel/RPSysMessage.cpp:
 	.text       start:0x80190D24 end:0x80190E28
 	.data       start:0x803B99D0 end:0x803B99E0
 
-Pack/RPKernel/RPSysKokeshi.c:
+Pack/RPKernel/RPSysKokeshi.cpp:
 	.text       start:0x80190E28 end:0x801914C0
 	.data       start:0x803B99E0 end:0x803B99F8
 	.sdata2     start:0x804C1598 end:0x804C15A0
+
+Pack/RPKernel/RPSysKokeshiManager.cpp:
+	.text       start:0x801914C0 end:0x801926B0
+	.rodata     start:0x80382BB0 end:0x80382C60
+	.data       start:0x803B99F8 end:0x803B9A10
+	.sdata      start:0x804BDB98 end:0x804BDBC0
+	.sbss       start:0x804BF540 end:0x804BF548
+	.sdata2     start:0x804C15A0 end:0x804C15C8
 
 nw4r/g3d/g3d_scnrfl.cpp:
 	.text       start:0x801A7894 end:0x801A8440
