@@ -1071,6 +1071,7 @@ config.libs = [
             Object(NonMatching, "Pack/RPKernel/RPSysLytDynamicAnm.cpp"),
             Object(NonMatching, "Pack/RPKernel/RPSysKokeshiIterater.cpp"),
             Object(NonMatching, "Pack/RPKernel/RPSysCursorDrawMgr.cpp"),
+            Object(NonMatching, "Pack/RPKernel/RPSysStringUtility.cpp"),
         ],
     },
 ]

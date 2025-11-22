@@ -2980,6 +2980,11 @@ Pack/RPKernel/RPSysCursorDrawMgr.cpp:
 	.sbss       start:0x804BF590 end:0x804BF5A0
 	.sdata2     start:0x804C1780 end:0x804C1798
 
+Pack/RPKernel/RPSysStringUtility.cpp:
+	.text       start:0x801A02BC end:0x801A0A60
+	.data       start:0x803B9D68 end:0x803B9D80
+	.sdata2     start:0x804C1798 end:0x804C17B0
+
 nw4r/g3d/g3d_scnrfl.cpp:
 	.text       start:0x801A7894 end:0x801A8440
 	.rodata     start:0x80383670 end:0x80383680
