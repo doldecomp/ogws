@@ -1055,6 +1055,7 @@ config.libs = [
             Object(NonMatching, "Pack/RPKernel/RPSysLytResAccessor.cpp"),
             Object(NonMatching, "Pack/RPKernel/RPSysLytTextBox.cpp"),
             Object(NonMatching, "Pack/RPKernel/RPSysLytBounding.cpp"),
+            Object(NonMatching, "Pack/RPKernel/RPSysFile.cpp"),
         ],
     },
 ]
