@@ -1053,6 +1053,7 @@ config.libs = [
             Object(NonMatching, "Pack/RPKernel/RPSysWideTextWriter.cpp"),
             Object(NonMatching, "Pack/RPKernel/RPSysLytAnmObj.cpp"),
             Object(NonMatching, "Pack/RPKernel/RPSysLytResAccessor.cpp"),
+            Object(NonMatching, "Pack/RPKernel/RPSysLytTextBox.cpp"),
         ],
     },
 ]
