@@ -1075,6 +1075,7 @@ config.libs = [
             Object(NonMatching, "Pack/RPKernel/RPSysKokeshiCtrlLoader.cpp"),
             Object(NonMatching, "Pack/RPKernel/RPSysPauseMenu.cpp"),
             Object(NonMatching, "Pack/RPKernel/RPSysSystemWinMgr.cpp"),
+            Object(NonMatching, "Pack/RPKernel/RPSysHomeMenuMgr.cpp"),
         ],
     },
 ]
