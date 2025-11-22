@@ -2971,6 +2971,15 @@ Pack/RPKernel/RPSysKokeshiIterater.cpp:
 	.text       start:0x8019EB44 end:0x8019ED74
 	.data       start:0x803B9D28 end:0x803B9D50
 
+Pack/RPKernel/RPSysCursorDrawMgr.cpp:
+	.text       start:0x8019ED74 end:0x801A02BC
+	.ctors      start:0x80355124 end:0x80355128
+	.rodata     start:0x80382EF0 end:0x80383060
+	.data       start:0x803B9D50 end:0x803B9D68
+	.bss        start:0x804A4220 end:0x804A4230
+	.sbss       start:0x804BF590 end:0x804BF5A0
+	.sdata2     start:0x804C1780 end:0x804C1798
+
 nw4r/g3d/g3d_scnrfl.cpp:
 	.text       start:0x801A7894 end:0x801A8440
 	.rodata     start:0x80383670 end:0x80383680
