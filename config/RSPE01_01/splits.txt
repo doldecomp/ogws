@@ -2882,6 +2882,11 @@ Pack/RPKernel/RPSysLytAnmObj.cpp:
 	.text       start:0x80198990 end:0x80198B6C
 	.sdata2     start:0x804C1650 end:0x804C1660
 
+Pack/RPKernel/RPSysLytResAccessor.cpp:
+	.text       start:0x80198B6C end:0x80198CE8
+	.rodata     start:0x80382D78 end:0x80382D80
+	.data       start:0x803B9BE0 end:0x803B9BF8
+
 nw4r/g3d/g3d_scnrfl.cpp:
 	.text       start:0x801A7894 end:0x801A8440
 	.rodata     start:0x80383670 end:0x80383680
