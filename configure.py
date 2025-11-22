@@ -1048,6 +1048,8 @@ config.libs = [
             Object(NonMatching, "Pack/RPKernel/RPSysEffectMgr.cpp"),
             Object(NonMatching, "Pack/RPKernel/RPSysEffectBase.cpp"),
             Object(NonMatching, "Pack/RPKernel/RPSysLayout.cpp"),
+            Object(NonMatching, "Pack/RPKernel/RPSysFrameCtrl.cpp"),
+            Object(NonMatching, "Pack/RPKernel/RPSysEffectCreator.cpp"),
         ],
     },
 ]

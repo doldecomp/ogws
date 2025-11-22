@@ -2869,6 +2869,11 @@ Pack/RPKernel/RPSysFrameCtrl.cpp:
 	.text       start:0x80197790 end:0x80197A28
 	.sdata2     start:0x804C1618 end:0x804C1628
 
+Pack/RPKernel/RPSysEffectCreator.cpp:
+	.text       start:0x80197A28 end:0x80198968
+	.data       start:0x803B9BD0 end:0x803B9BE0
+	.sdata2     start:0x804C1628 end:0x804C1650
+
 nw4r/g3d/g3d_scnrfl.cpp:
 	.text       start:0x801A7894 end:0x801A8440
 	.rodata     start:0x80383670 end:0x80383680
