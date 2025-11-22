@@ -2714,11 +2714,15 @@ Pack/RPSystem/RPSysProjectLocal.cpp:
 	.data       start:0x803B97D8 end:0x803B9808
 	.sbss       start:0x804BF4E0 end:0x804BF4E8
 
-Pack/RPSystem/RPSysGameConfig.c:
-	.text       start:0x80186430 end:0x80186878
+Pack/RPSystem/RPSysGameConfig.cpp:
+	.text       start:0x80186430 end:0x80186740
 	.rodata     start:0x80382470 end:0x80382568
-	.data       start:0x803B9808 end:0x803B9850
+	.data       start:0x803B9808 end:0x803B9828
 	.sbss       start:0x804BF4E8 end:0x804BF4F0
+
+Pack/RPSystem/RPSysTagParms.cpp:
+	.text       start:0x80186740 end:0x80186878
+	.data       start:0x803B9828 end:0x803B9850
 
 Pack/RPSystem/RPSysLoadScene.c:
 	.text       start:0x80186878 end:0x80186E40

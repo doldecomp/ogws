@@ -78,6 +78,7 @@ void RPSysProjectLocal::appendLocalDirectory(char* pPath, const char* pSuffix) {
 
     case EArea_USA: {
         std::strcat(pPath, "US/");
+        break;
     }
 
     default: {
