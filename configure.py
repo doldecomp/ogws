@@ -1072,6 +1072,7 @@ config.libs = [
             Object(NonMatching, "Pack/RPKernel/RPSysKokeshiIterater.cpp"),
             Object(NonMatching, "Pack/RPKernel/RPSysCursorDrawMgr.cpp"),
             Object(NonMatching, "Pack/RPKernel/RPSysStringUtility.cpp"),
+            Object(NonMatching, "Pack/RPKernel/RPSysKokeshiCtrlLoader.cpp"),
         ],
     },
 ]
