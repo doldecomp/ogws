@@ -2891,6 +2891,10 @@ Pack/RPKernel/RPSysLytTextBox.cpp:
 	.text       start:0x80198CE8 end:0x801993F4
 	.sdata2     start:0x804C1660 end:0x804C1680
 
+Pack/RPKernel/RPSysLytBounding.cpp:
+	.text       start:0x801993F4 end:0x80199604
+	.sdata2     start:0x804C1680 end:0x804C1688
+
 nw4r/g3d/g3d_scnrfl.cpp:
 	.text       start:0x801A7894 end:0x801A8440
 	.rodata     start:0x80383670 end:0x80383680
