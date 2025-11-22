@@ -2852,6 +2852,13 @@ Pack/RPKernel/RPSysEffectMgr.cpp:
 	.sbss       start:0x804BF548 end:0x804BF550
 	.sdata2     start:0x804C15C8 end:0x804C15E0
 
+Pack/RPKernel/RPSysEffect.cpp:
+	.text       start:0x80194158 end:0x801957C0
+	.ctors      start:0x80355118 end:0x8035511C
+	.data       start:0x803B9B38 end:0x803B9BD0
+	.sbss       start:0x804BF550 end:0x804BF558
+	.sdata2     start:0x804C15E0 end:0x804C15F0
+
 nw4r/g3d/g3d_scnrfl.cpp:
 	.text       start:0x801A7894 end:0x801A8440
 	.rodata     start:0x80383670 end:0x80383680

@@ -1046,6 +1046,7 @@ config.libs = [
             Object(NonMatching, "Pack/RPKernel/RPSysKokeshiManager.cpp"),
             Object(NonMatching, "Pack/RPKernel/RP_DEBUG_STUB_1.cpp"),
             Object(NonMatching, "Pack/RPKernel/RPSysEffectMgr.cpp"),
+            Object(NonMatching, "Pack/RPKernel/RPSysEffect.cpp"),
         ],
     },
 ]
