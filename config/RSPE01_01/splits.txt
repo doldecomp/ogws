@@ -2911,6 +2911,9 @@ Pack/RPKernel/RPSysTutorialWinMgr.cpp:
 	.sbss       start:0x804BF560 end:0x804BF568
 	.sdata2     start:0x804C1698 end:0x804C16B0
 
+Pack/RPKernel/RPSysLytPicture.cpp:
+	.text       start:0x8019A6B8 end:0x8019A780
+
 nw4r/g3d/g3d_scnrfl.cpp:
 	.text       start:0x801A7894 end:0x801A8440
 	.rodata     start:0x80383670 end:0x80383680
