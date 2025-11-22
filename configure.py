@@ -1077,6 +1077,7 @@ config.libs = [
             Object(NonMatching, "Pack/RPKernel/RPSysSystemWinMgr.cpp"),
             Object(NonMatching, "Pack/RPKernel/RPSysHomeMenuMgr.cpp"),
             Object(NonMatching, "Pack/RPKernel/RPSysOfficialDB.cpp"),
+            Object(NonMatching, "Pack/RPKernel/RPSysLytWindow.cpp"),
         ],
     },
 ]
