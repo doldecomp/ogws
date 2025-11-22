@@ -52,7 +52,7 @@ public:
 
 public:
     /**
-     * @brief Appends locale directory to the given path
+     * @brief Appends the locale directory to the given path
      *
      * @param pPath Path to append to
      * @param pSuffix Optional suffix to append after the locale

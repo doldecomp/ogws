@@ -34,7 +34,7 @@ RPSysProjectLocal::RPSysProjectLocal(EGG::Heap* pHeap)
 RPSysProjectLocal::~RPSysProjectLocal() {}
 
 /**
- * @brief Appends locale directory to the given path
+ * @brief Appends the locale directory to the specified path
  *
  * @param pPath Path to append to
  * @param pSuffix Optional suffix to append after the locale
@@ -86,6 +86,7 @@ void RPSysProjectLocal::appendLocalDirectory(char* pPath, const char* pSuffix) {
     }
     }
 
+    // @bug The default argument is an empty string, not NULL
     if (pSuffix != NULL) {
         std::strcat(pPath, pSuffix);
     }
