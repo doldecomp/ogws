@@ -3039,6 +3039,11 @@ Pack/RPKernel/RPSysControllerMgr.cpp:
 	.data       start:0x803B9EA0 end:0x803B9EB0
 	.sbss       start:0x804BF5B8 end:0x804BF5C8
 
+Pack/RPKernel/RPSysNWC24Mgr.cpp:
+	.text       start:0x801A6F00 end:0x801A7530
+	.data       start:0x803B9EB0 end:0x803B9F4C
+	.sdata      start:0x804BDC00 end:0x804BDC08
+
 nw4r/g3d/g3d_scnrfl.cpp:
 	.text       start:0x801A7894 end:0x801A8440
 	.rodata     start:0x80383670 end:0x80383680
