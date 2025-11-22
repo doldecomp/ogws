@@ -3,5 +3,6 @@
 
 #include <Pack/RPSystem/RPSysProjectLocal.h>
 #include <Pack/RPSystem/RPSysSceneCreator.h>
+#include <Pack/RPSystem/RPSysSystem.h>
 
 #endif

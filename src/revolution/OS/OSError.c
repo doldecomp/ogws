@@ -5,17 +5,16 @@
 #include <stdio.h>
 
 OSErrorHandler __OSErrorTable[OS_ERR_MAX];
-u32 __OSFpscrEnableBits =
-    (FPSCR_VE | FPSCR_OE | FPSCR_UE | FPSCR_ZE | FPSCR_XE);
+u32 __OSFpscrEnableBits = FPSCR_VE | FPSCR_OE | FPSCR_UE | FPSCR_ZE | FPSCR_XE;
 
-void OSReport(const char* msg, ...) {
+DECL_WEAK void OSReport(const char* msg, ...) {
     va_list list;
     va_start(list, msg);
     vprintf(msg, list);
     va_end(list);
 }
 
-void OSPanic(const char* file, int line, const char* msg, ...) {
+DECL_WEAK void OSPanic(const char* file, int line, const char* msg, ...) {
     u32 depth;
     u32* sp;
     va_list list;

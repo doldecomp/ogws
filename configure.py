@@ -1014,7 +1014,7 @@ config.libs = [
         # "progress_category": "game",
         "objects": [
             Object(NonMatching, "Pack/RPKernel/RPSysSystem.c"),
-            Object(NonMatching, "main.cpp"),
+            Object(Matching, "main.cpp"),
             Object(NonMatching, "Pack/RPSystem/RPSysSceneCreator.c"),
             Object(NonMatching, "Pack/RPSystem/RPSysScene.c"),
             Object(NonMatching, "Pack/RPSystem/RPSysRenderMode.c"),
