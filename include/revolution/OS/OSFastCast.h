@@ -12,7 +12,7 @@ extern "C" {
 
 static void OSInitFastCast(void) {
     // clang-format off
-    asm {
+    PPC_ASM (
         li r3, 4
         oris r3, r3, 4
         mtspr 0x392, r3
@@ -28,7 +28,7 @@ static void OSInitFastCast(void) {
         li r3, 7
         oris r3, r3, 7
         mtspr 0x395, r3
-    }
+    )
     // clang-format on
 }
 
@@ -36,9 +36,9 @@ static void OSSetGQR6(register u32 type, register u32 scale) {
     register u32 val = ((scale << 8 | type) << 16) | ((scale << 8) | type);
 
     // clang-format off
-    asm {
+    PPC_ASM (
         mtspr 0x396, val
-    }
+    )
     // clang-format on
 }
 
@@ -46,9 +46,9 @@ static void OSSetGQR7(register u32 type, register u32 scale) {
     register u32 val = ((scale << 8 | type) << 16) | ((scale << 8) | type);
 
     // clang-format off
-    asm {
+    PPC_ASM (
         mtspr 0x397, val
-    }
+    )
     // clang-format on
 }
 
@@ -61,9 +61,9 @@ static f32 __OSu8tof32(register u8* in) {
     register f32 ret;
 
     // clang-format off
-    asm {
+    PPC_ASM (
         psq_l ret, 0(in), 1, 2
-    }
+    )
     // clang-format on
 
     return ret;
@@ -82,9 +82,9 @@ static f32 __OSu16tof32(register u16* arg) {
     register f32 ret;
 
     // clang-format off
-    asm {
+    PPC_ASM (
         psq_l ret, 0(arg), 1, 3
-    }
+    )
     // clang-format on
 
     return ret;
@@ -103,9 +103,9 @@ static f32 __OSs16tof32(register s16* arg) {
     register f32 ret;
 
     // clang-format off
-    asm {
+    PPC_ASM (
         psq_l ret, 0(arg), 1, 5
-    }
+    )
     // clang-format on
 
     return ret;
@@ -126,9 +126,9 @@ static u8 __OSf32tou8(register f32 arg) {
     u8 r;
 
     // clang-format off
-    asm {
+    PPC_ASM (
         psq_st arg, 0(ptr), 1, 2
-    }
+    )
     // clang-format on
 
     r = *(u8*)ptr;
@@ -145,9 +145,9 @@ static u16 __OSf32tou16(register f32 arg) {
     u16 r;
 
     // clang-format off
-    asm {
+    PPC_ASM (
         psq_st arg, 0(ptr), 1, 3
-    }
+    )
     // clang-format on
 
     r = *(u16*)ptr;
@@ -164,9 +164,9 @@ static s16 __OSf32tos16(register f32 arg) {
     s16 r;
 
     // clang-format off
-    asm {
+    PPC_ASM (
         psq_st arg, 0(ptr), 1, 5
-    }
+    )
     // clang-format on
 
     r = *(s16*)ptr;

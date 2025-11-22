@@ -199,14 +199,14 @@ void CalcSkinning(math::MTX34* pModelMtxArray, u32* pModelMtxAttribArray,
             M00 = 0.0f;
 
             // clang-format off
-            asm {
+            PPC_ASM (
                 ps_merge00 M00, M00, M00
                 ps_merge00 M02, M00, M00
                 ps_merge00 M10, M00, M00
                 ps_merge00 M12, M00, M00
                 ps_merge00 M20, M00, M00
                 ps_merge00 M22, M00, M00
-            }
+            )
             // clang-format on
 
             for (u32 i = 0; i < numBlendMtx; i++) {
@@ -227,7 +227,7 @@ void CalcSkinning(math::MTX34* pModelMtxArray, u32* pModelMtxAttribArray,
                 register math::MTX34* pT = &pSkinMtxArray[mtxID];
 
                 // clang-format off
-                asm {
+                PPC_ASM (
                     psq_l T00, MTX34._00(pT), 0, 0
                     psq_l T02, MTX34._02(pT), 0, 0
                     psq_l T10, MTX34._10(pT), 0, 0
@@ -241,7 +241,7 @@ void CalcSkinning(math::MTX34* pModelMtxArray, u32* pModelMtxAttribArray,
                     ps_madds0 M12, T12, R, M12
                     ps_madds0 M20, T20, R, M20
                     ps_madds0 M22, T22, R, M22
-                }
+                )
                 // clang-format on
 
                 pModelMtxAttribArray[targetMtxID] &=
@@ -253,14 +253,14 @@ void CalcSkinning(math::MTX34* pModelMtxArray, u32* pModelMtxAttribArray,
             register math::MTX34* pTargetMtx = &pModelMtxArray[targetMtxID];
 
             // clang-format off
-            asm {
+            PPC_ASM (
                 psq_st M00, MTX34._00(pTargetMtx), 0, 0
                 psq_st M02, MTX34._02(pTargetMtx), 0, 0
                 psq_st M10, MTX34._10(pTargetMtx), 0, 0
                 psq_st M12, MTX34._12(pTargetMtx), 0, 0
                 psq_st M20, MTX34._20(pTargetMtx), 0, 0
                 psq_st M22, MTX34._22(pTargetMtx), 0, 0
-            }
+            )
             // clang-format on
 
         } else /* Assume EVPMTX */ {
