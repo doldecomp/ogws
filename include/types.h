@@ -10,9 +10,12 @@
 #include <stddef.h>
 #endif
 
-#include <decomp.h>
 #include <lang.h>
 #include <macros.h>
+
+// Include compatabilty macros AFTER above headers
+#include <compat.h>
+#include <decomp.h>
 
 typedef unsigned long long u64;
 typedef signed long long s64;

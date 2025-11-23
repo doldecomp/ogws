@@ -140,6 +140,12 @@ config = ProjectConfig()
 config.version = str(args.version)
 version_num = VERSIONS.index(config.version)
 
+# Extra flags for clangd parser
+config.extra_clang_flags = [
+    "-Iinclude/MSL/internal", # Allow clangd to see internal MSL headers
+    "-Wno-invalid-offsetof",  # Silence non-POD offsetof warning
+]
+
 # Apply arguments
 config.build_dir = args.build_dir
 config.dtk_path = args.dtk
@@ -211,6 +217,7 @@ cflags_base = [
     "-fp_contract on",
     "-str reuse",
     "-i include",
+    "-i include/MSL",
     "-ir include/MSL",
     f"-i build/{config.version}/include",
     f"-DBUILD_VERSION={version_num}",

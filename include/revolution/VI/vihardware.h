@@ -8,7 +8,7 @@ extern "C" {
 /**
  * VI hardware registers
  */
-volatile u16 VI_HW_REGS[] : 0xCC002000;
+volatile u16 VI_HW_REGS[1] DECL_ADDRESS(0xCC002000);
 
 /**
  * Hardware register indexes

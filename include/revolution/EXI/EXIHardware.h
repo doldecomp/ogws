@@ -1,7 +1,8 @@
 #ifndef RVL_SDK_EXI_HARDWARE_H
 #define RVL_SDK_EXI_HARDWARE_H
-#include <revolution/EXI/EXICommon.h>
 #include <types.h>
+
+#include <revolution/EXI/EXICommon.h>
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -14,7 +15,7 @@ typedef struct EXIChannelParam {
     u32 data;   // at 0x10
 } EXIChannelParam;
 
-volatile EXIChannelParam EXI_CHAN_PARAMS[EXI_MAX_CHAN] : 0xCD006800;
+volatile EXIChannelParam EXI_CHAN_PARAMS[EXI_MAX_CHAN] DECL_ADDRESS(0xCD006800);
 
 // CPR - Channel Parameter Register
 #define EXI_CPR_EXIINTMASK (1 << 0)

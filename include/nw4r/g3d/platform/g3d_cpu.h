@@ -44,11 +44,9 @@ inline f32 U16_0ToF32(const u16* pPtr) {
 inline f32 S7_8ToF32(register const s16* pPtr) {
     register f32 f;
 
-    // clang-format off
-    asm {
+    ASM (
         psq_l f, 0(pPtr), 1, 7
-    }
-    // clang-format on
+    )
 
     return f;
 }
@@ -56,11 +54,9 @@ inline f32 S7_8ToF32(register const s16* pPtr) {
 inline f32 S10_5ToF32(register const s16* pPtr) {
     register f32 f;
 
-    // clang-format off
-    asm {
+    ASM (
         psq_l f, 0(pPtr), 1, 6
-    }
-    // clang-format on
+    )
 
     return f;
 }
@@ -80,11 +76,9 @@ inline s16 F32ToS10_5(register f32 f) {
     s16 x;
     register s16* pPtr = &x;
 
-    // clang-format off
-    asm {
+    ASM (
         psq_st f, 0(pPtr), 1, 6
-    }
-    // clang-format on
+    )
 
     return x;
 }

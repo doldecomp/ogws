@@ -31,11 +31,9 @@ template <typename T> inline T Abs(T x) {
 template <> f32 inline Abs(register f32 x) {
     register f32 ax;
 
-    // clang-format off
-    asm {
+    ASM (
         fabs ax, x
-    }
-    // clang-format on
+    )
 
     return ax;
 }

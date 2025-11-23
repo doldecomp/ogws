@@ -1,7 +1,6 @@
 ﻿# IDE folders
 .idea/
 .vs/
-.vscode/
 
 # Caches
 __pycache__
