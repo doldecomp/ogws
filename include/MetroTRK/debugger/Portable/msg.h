@@ -1,8 +1,9 @@
 #ifndef METROTRK_DEBUGGER_PORTABLE_MSG_H
 #define METROTRK_DEBUGGER_PORTABLE_MSG_H
+#include <types.h>
+
 #include <MetroTRK/debugger/Portable/dserror.h>
 #include <MetroTRK/debugger/Portable/msgbuf.h>
-#include <types.h>
 #ifdef __cplusplus
 extern "C" {
 #endif

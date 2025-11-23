@@ -37,8 +37,7 @@ Fog Fog::CopyTo(register void* pDst) const {
         register const FogData* pSrc = ptr();
         register f64 work0, work1, work2, work3, work4, work5;
 
-        // clang-format off
-        asm {
+        ASM (
             lfd  work0, 0(pSrc)
             stfd work0, 0(pDst)
 
@@ -56,8 +55,7 @@ Fog Fog::CopyTo(register void* pDst) const {
 
             lfd  work5, 40(pSrc)
             stfd work5, 40(pDst)
-        }
-        // clang-format on
+        )
 
         return Fog(static_cast<FogData*>(pDst));
     }

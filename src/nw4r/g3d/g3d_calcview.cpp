@@ -141,8 +141,7 @@ inline void SetMdlViewMtxSR(register math::MTX34* pViewPos,
     register f32 work0, work1;
     register f32 c_zero = 0.0f;
 
-    // clang-format off
-    asm {
+    ASM (
         psq_l      work0,  VEC3.x(rRY), 0, 0
         ps_muls0   work0,  work0, s
         ps_merge10 work1,  work0, work0
@@ -154,8 +153,7 @@ inline void SetMdlViewMtxSR(register math::MTX34* pViewPos,
         stfs       c_zero, MTX34._12(pViewPos)
         psq_st     c_zero, MTX34._20(pViewPos), 0, 0
         stfs       s,      MTX34._22(pViewPos)
-    }
-    // clang-format on
+    )
 }
 
 inline void SetMdlViewMtxSR(register math::MTX34* pViewPos,
@@ -165,8 +163,7 @@ inline void SetMdlViewMtxSR(register math::MTX34* pViewPos,
     register f32 work0, work1, work2, work3;
     register f32 c_zero = 0.0f;
 
-    // clang-format off
-    asm {
+    ASM (
         ps_merge00 work0,  sx, sy
         psq_l      work1,  VEC3.x(rRY), 0, 0
         ps_merge10 work3,  work1, work1
@@ -180,8 +177,7 @@ inline void SetMdlViewMtxSR(register math::MTX34* pViewPos,
         stfs       c_zero, MTX34._12(pViewPos)
         psq_st     c_zero, MTX34._20(pViewPos), 0, 0
         stfs       sz,     MTX34._22(pViewPos)
-    }
-    // clang-format on
+    )
 }
 
 inline void SetMdlViewMtxSR(register math::MTX34* pViewPos,
@@ -192,8 +188,7 @@ inline void SetMdlViewMtxSR(register math::MTX34* pViewPos,
 
     register f32 work0, work1, work2, work3;
 
-    // clang-format off
-    asm {
+    ASM (
         psq_l      work0, VEC3.x(rRX), 0, 0
         psq_l      work1, VEC3.x(rRY), 0, 0
         ps_muls0   work0, work0, sx
@@ -216,8 +211,7 @@ inline void SetMdlViewMtxSR(register math::MTX34* pViewPos,
         lfs        work0, VEC3.z(rRZ)
         fmuls      work0, work0, sz
         stfs       work0, MTX34._22(pViewPos)
-    }
-    // clang-format on
+    )
 }
 
 } // namespace

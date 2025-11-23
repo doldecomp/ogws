@@ -1,11 +1,12 @@
 #ifndef RVL_SDK_NWC24_MANAGE_H
 #define RVL_SDK_NWC24_MANAGE_H
+#include <types.h>
+
 #include <revolution/NWC24/NWC24Config.h>
 #include <revolution/NWC24/NWC24Download.h>
 #include <revolution/NWC24/NWC24FriendList.h>
 #include <revolution/NWC24/NWC24SecretFList.h>
 #include <revolution/NWC24/NWC24Types.h>
-#include <types.h>
 #ifdef __cplusplus
 extern "C" {
 #endif

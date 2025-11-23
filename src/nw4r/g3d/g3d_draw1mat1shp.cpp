@@ -1,5 +1,4 @@
 #include <nw4r/g3d.h>
-
 #include <nw4r/ut.h>
 
 #include <revolution/BASE.h>

@@ -11,7 +11,7 @@
 extern "C" {
 #endif
 
-#ifdef __CWCC__
+#ifdef __MWERKS__
 #define fabs(x) __fabs(x)
 #endif
 

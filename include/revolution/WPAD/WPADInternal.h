@@ -162,7 +162,7 @@ typedef struct WPADExtConfig {
             u8 triggerLZero; // at 0x18
             u8 triggerRZero; // at 0x19
         } cl;
-    };
+    } u;
 } WPADExtConfig;
 
 typedef struct WPADCB {

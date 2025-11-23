@@ -1,7 +1,8 @@
 #ifndef RVL_SDK_AXFX_CHORUS_H
 #define RVL_SDK_AXFX_CHORUS_H
-#include <revolution/AXFX/AXFXChorusExp.h>
 #include <types.h>
+
+#include <revolution/AXFX/AXFXChorusExp.h>
 #ifdef __cplusplus
 extern "C" {
 #endif

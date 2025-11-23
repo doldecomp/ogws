@@ -1,7 +1,8 @@
 #ifndef MSL_FILE_POS_H
 #define MSL_FILE_POS_H
-#include <file_io.h>
 #include <types.h>
+
+#include <file_io.h>
 #ifdef __cplusplus
 extern "C" {
 #endif

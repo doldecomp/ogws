@@ -7,7 +7,7 @@ void OSReport(const char* /* msg */, ...) {
     ;
 }
 
-#if defined(__CWCC__)
+#if defined(__MWERKS__)
 void main(int /* argc */, char** /* argv */) {
 #else
 int main(int /* argc */, char** /* argv */) {

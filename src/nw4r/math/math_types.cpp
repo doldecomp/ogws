@@ -4,13 +4,13 @@
     fx = (_fx);                                                                \
     fy = (_fy);                                                                \
     dt = fx - fy;                                                              \
-    asm { fsel work, dt, fx, fy }
+    ASM ( fsel work, dt, fx, fy )
 
 #define FSEL_MIN(_fx, _fy)                                                     \
     fx = (_fx);                                                                \
     fy = (_fy);                                                                \
     dt = fy - fx;                                                              \
-    asm { fsel work, dt, fx, fy }
+    ASM ( fsel work, dt, fx, fy )
 
 namespace nw4r {
 namespace math {
@@ -51,8 +51,7 @@ MTX33* MTX33Identity(register MTX33* pMtx) {
     register f32 c_00 = 0.0f, c_10 = 1.0f;
     register f32 c_11;
 
-    // clang-format off
-    asm {
+    ASM (
         ps_merge00 c_11, c_10, c_00
 
         psq_st c_00, MTX33._02(pMtx), 0, 0 // _02=0, _10=0
@@ -61,8 +60,7 @@ MTX33* MTX33Identity(register MTX33* pMtx) {
         psq_st c_11, MTX33._11(pMtx), 0, 0 // _11=1, _12=0
 
         stfs c_10,   MTX33._22(pMtx)       // _22=1
-    }
-    // clang-format on
+    )
 
     return pMtx;
 }
@@ -70,8 +68,7 @@ MTX33* MTX33Identity(register MTX33* pMtx) {
 MTX33* MTX34ToMTX33(register MTX33* pOut, register const MTX34* pIn) {
     register f32 row0a, row0b, row1a, row1b, row2a, row2b;
 
-    // clang-format off
-    asm {
+    ASM (
         psq_l row0a, MTX34._00(pIn), 0, 0
         psq_l row0b, MTX34._02(pIn), 0, 0
         psq_l row1a, MTX34._10(pIn), 0, 0
@@ -85,11 +82,13 @@ MTX33* MTX34ToMTX33(register MTX33* pOut, register const MTX34* pIn) {
         psq_st row1b, MTX33._12(pOut), 1, 0
         psq_st row2a, MTX33._20(pOut), 0, 0
         psq_st row2b, MTX33._22(pOut), 1, 0
-    }
-    // clang-format on
+    )
 
     return pOut;
 }
+
+#define nofralloc
+#undef PURE_ASM
 
 asm u32 MTX34InvTranspose(register MTX33* pOut, register const MTX34* pIn){
     // clang-format off
@@ -169,16 +168,14 @@ inverse_exists:
 MTX34* MTX34Zero(register MTX34* pMtx) {
     register f32 c_zero = 0.0f;
 
-    // clang-format off
-    asm {
+    ASM (
         psq_st c_zero, MTX34._00(pMtx), 0, 0
         psq_st c_zero, MTX34._02(pMtx), 0, 0
         psq_st c_zero, MTX34._10(pMtx), 0, 0
         psq_st c_zero, MTX34._12(pMtx), 0, 0
         psq_st c_zero, MTX34._20(pMtx), 0, 0
         psq_st c_zero, MTX34._22(pMtx), 0, 0
-    }
-    // clang-format on
+    )
 
     return pMtx;
 }
@@ -190,8 +187,7 @@ MTX34* MTX34Scale(register MTX34* pOut, register const MTX34* pIn,
     register f32 row1a, row1b;
     register f32 row2a, row2b;
 
-    // clang-format off
-    asm {
+    ASM (
         psq_l xy, VEC3.x(pScale), 0, 0 // (XXXX, YYYY)
         psq_l z,  VEC3.z(pScale), 1, 0 // (ZZZZ, 1111)
 
@@ -215,8 +211,7 @@ MTX34* MTX34Scale(register MTX34* pOut, register const MTX34* pIn,
         psq_st row1b, MTX34._12(pOut), 0, 0
         psq_st row2a, MTX34._20(pOut), 0, 0
         psq_st row2b, MTX34._22(pOut), 0, 0
-    }
-    // clang-format on
+    )
 
     return pOut;
 }
@@ -229,8 +224,7 @@ MTX34* MTX34Trans(register MTX34* pOut, register const MTX34* pIn,
     register f32 row2a, row2b;
     register f32 work0, work1, work2;
 
-    // clang-format off
-    asm {
+    ASM (
         psq_l xy, VEC3.x(pTrans), 0, 0 // (XXXX, YYYY)
         psq_l z,  VEC3.z(pTrans), 1, 0 // (ZZZZ, 1111)
 
@@ -270,8 +264,7 @@ MTX34* MTX34Trans(register MTX34* pOut, register const MTX34* pIn,
         ps_madd work1, row2b, z, work0      // (_22*z + _20*x, _23 + _21*y)
         ps_sum0 work2, work1, work2, work1
         psq_st  work2, MTX34._23(pOut), 1, 0
-    }
-    // clang-format on
+    )
 
     return pOut;
 }
@@ -329,8 +322,7 @@ MTX44* MTX44Identity(register MTX44* pMtx) {
     register f32 c_zero = 0.0f, c_one = 1.0f;
     register f32 c_01, c_10;
 
-    // clang-format off
-    asm {
+    ASM (
         ps_merge01 c_01, c_zero, c_one
         ps_merge10 c_10, c_one, c_zero
 
@@ -342,8 +334,7 @@ MTX44* MTX44Identity(register MTX44* pMtx) {
         psq_st c_10,   MTX44._22(pMtx), 0, 0  // _22=1, _23=0
         psq_st c_zero, MTX44._30(pMtx), 0, 0  // _30=0, _31=0
         psq_st c_01,   MTX44._32(pMtx), 0, 0  // _32=0, _33=1
-    }
-    // clang-format on
+    )
 
     return pMtx;
 }
@@ -354,8 +345,7 @@ MTX44* MTX44Copy(register MTX44* pDst, register const MTX44* pSrc) {
     register f32 row2a, row2b;
     register f32 row3a, row3b;
 
-    // clang-format off
-    asm {
+    ASM (
         psq_l row0a, MTX44._00(pSrc), 0, 0
         psq_l row0b, MTX44._02(pSrc), 0, 0
         psq_l row1a, MTX44._10(pSrc), 0, 0
@@ -373,8 +363,7 @@ MTX44* MTX44Copy(register MTX44* pDst, register const MTX44* pSrc) {
         psq_st row2b, MTX44._22(pDst), 0, 0
         psq_st row3a, MTX44._30(pDst), 0, 0
         psq_st row3b, MTX44._32(pDst), 0, 0
-    }
-    // clang-format on
+    )
 
     return pDst;
 }

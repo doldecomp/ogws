@@ -127,32 +127,28 @@ asm void PPCMtpmc4(register u32 val){
 }
 
 u32 PPCMffpscr(void) {
-    // clang-format off
     register u64 fpscr;
-    asm {
+    ASM (
         mffs f31
         stfd f31, fpscr
-    }
+    )
 
     return fpscr;
-    // clang-format on
 }
 
 void PPCMtfpscr(register u32 val) {
-    // clang-format off
     register struct {
         f32 tmp;
         f32 data;
     } fpscr;
 
-    asm {
+    ASM (
         li r4, 0
         stw val, fpscr.data
         stw r4, fpscr.tmp
         lfd f31, fpscr.tmp
         mtfs f31
-    }
-    // clang-format on
+    )
 }
 
 asm u32 PPCMfhid2(void) {
@@ -202,18 +198,15 @@ asm void PPCSetFpNonIEEEMode(void) {
 
 void PPCMthid4(register u32 val) {
     if (val & HID4_H4A) {
-        // clang-format off
-        asm {
+        ASM (
             mtspr 0x3F3, val
-        }
-        // clang-format on
+        )
     } else {
         OSReport("H4A should not be cleared because of Broadway errata.\n");
         val |= HID4_H4A;
-        // clang-format off
-        asm {
+
+        ASM (
             mtspr 0x3F3, val
-        }
-        // clang-format on
+        )
     }
 }

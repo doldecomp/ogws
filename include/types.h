@@ -10,6 +10,7 @@
 #include <stddef.h>
 #endif
 
+#include <compat.h>
 #include <decomp.h>
 #include <lang.h>
 #include <macros.h>

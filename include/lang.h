@@ -5,7 +5,7 @@
 #ifndef LANG_H
 #define LANG_H
 
-#if __cplusplus >= 199711L
+#if __cplusplus < 201103L
 #define noexcept throw()
 #define override
 #endif

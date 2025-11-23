@@ -62,8 +62,7 @@ f32 FrSqrt(register f32 x) {
     register f32 c_half = 0.5f, c_three = 3.0f;
     register f32 work0, work1;
 
-    // clang-format off
-    asm {
+    ASM (
         // Estimate reciprocal square root
         frsqrte rsqrt, x
         
@@ -73,8 +72,7 @@ f32 FrSqrt(register f32 x) {
         fmuls work1, rsqrt, c_half        // rsqrt * 0.5
         fnmsubs work0, work0, x, c_three  // (3 - x * rsqrt^2)
         fmuls work1, work0, work1         // (3 - x * rsqrt^2) * (rsqrt * 0.5)
-    }
-    // clang-format on
+    )
 
     return work1;
 }

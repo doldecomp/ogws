@@ -43,7 +43,7 @@ extern volatile union {
     unsigned int ui;
     void* p;
     float f;
-} WGPIPE : 0xCC008000;
+} WGPIPE DECL_ADDRESS(0xCC008000);
 
 /**
  * FIFO commands

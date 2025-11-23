@@ -13,8 +13,7 @@ void PSQUATMultiply(register const Quaternion* a, register const Quaternion* b,
     register f32 naxay, naxy, nazw;
     register f32 work1, work2, work3, work4, work5;
 
-    // clang-format off
-    asm {
+    ASM (
         // Load qA components
         psq_l axy, Quaternion.x(a), 0, 0 // AX, AY
         psq_l azw, Quaternion.z(a), 0, 0 // AZ, AW
@@ -47,8 +46,7 @@ void PSQUATMultiply(register const Quaternion* a, register const Quaternion* b,
         // Store result
         psq_st work1, Quaternion.x(prod), 0, 0
         psq_st work3, Quaternion.z(prod), 0, 0
-    }
-    // clang-format on
+    )
 }
 
 void PSQUATNormalize(register const Quaternion* in, register Quaternion* out) {
@@ -61,8 +59,7 @@ void PSQUATNormalize(register const Quaternion* in, register Quaternion* out) {
     c_half = 0.5f;
     c_three = 3.0f;
 
-    // clang-format off
-    asm {
+    ASM (
         // Load quaternion components
         psq_l xy, Quaternion.x(in), 0, 0
         psq_l zw, Quaternion.z(in), 0, 0
@@ -95,8 +92,7 @@ void PSQUATNormalize(register const Quaternion* in, register Quaternion* out) {
         // Store result
         psq_st xy, Quaternion.x(out), 0, 0
         psq_st zw, Quaternion.z(out), 0, 0
-    }
-    // clang-format on
+    )
 }
 
 void C_QUATMtx(Quaternion* quat, const Mtx mtx) {

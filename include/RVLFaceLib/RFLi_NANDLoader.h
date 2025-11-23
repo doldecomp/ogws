@@ -1,8 +1,9 @@
 #ifndef RVL_FACE_LIBRARY_INTERNAL_NAND_LOADER_H
 #define RVL_FACE_LIBRARY_INTERNAL_NAND_LOADER_H
+#include <types.h>
+
 #include <RVLFaceLib/RFL_NANDLoader.h>
 #include <RVLFaceLib/RFLi_Types.h>
-#include <types.h>
 #ifdef __cplusplus
 extern "C" {
 #endif

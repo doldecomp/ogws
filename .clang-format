@@ -2,33 +2,36 @@
 BasedOnStyle: LLVM
 Language: Cpp
 Standard: Cpp03
+
+AccessModifierOffset: -4
+AllowShortFunctionsOnASingleLine: Empty
+AttributeMacros: [DECOMP_INLINE, DECOMP_DONT_INLINE]
+ConstructorInitializerAllOnOneLineOrOnePerLine: true
+FixNamespaceComments: true
+ForEachMacros: [EGG_NW4R_LIST_FOREACH]
+IncludeBlocks: Regroup
+IndentWidth: 4
+InsertNewlineAtEOF: true
+PointerAlignment: Left
+ShortNamespaceLines: 0
 SortIncludes: "true"
 SortUsingDeclarations: "true"
 UseTab: Never
-IndentWidth: 4
-IncludeBlocks: Regroup
-PointerAlignment: Left
-ConstructorInitializerAllOnOneLineOrOnePerLine: true
-FixNamespaceComments: true
-AccessModifierOffset: -4
-AllowShortFunctionsOnASingleLine: Empty
 WhitespaceSensitiveMacros:
   [
+    ASM,
+    DECOMP_FORCEACTIVE_DTOR,
     DECOMP_FORCEACTIVE,
     DECOMP_FORCELITERAL,
-    DECOMP_FORCEACTIVE_DTOR,
-    NW4R_UT_LINKLIST_FOREACH,
-    NW4R_UT_LINKLIST_FOREACH_SAFE,
-    NW4R_UT_LIST_FOREACH,
-    NW4R_UT_LIST_FOREACH_SAFE,
-    NW4R_EF_LIST_FOREACH,
-    NW4R_EF_LIST_FOREACH_SAFE,
-    EGG_ASSERT,
     EGG_ASSERT_MSG,
+    EGG_ASSERT,
+    NW4R_EF_LIST_FOREACH_SAFE,
+    NW4R_EF_LIST_FOREACH,
+    NW4R_UT_LINKLIST_FOREACH_SAFE,
+    NW4R_UT_LINKLIST_FOREACH,
+    NW4R_UT_LIST_FOREACH_SAFE,
+    NW4R_UT_LIST_FOREACH,
   ]
-ForEachMacros: [EGG_NW4R_LIST_FOREACH]
-AttributeMacros: [DECOMP_INLINE, DECOMP_DONT_INLINE]
-InsertNewlineAtEOF: true
 
 IncludeCategories:
   - Regex: '^<(nw4r|egg|Pack)?(\/)?types' # "Types" headers

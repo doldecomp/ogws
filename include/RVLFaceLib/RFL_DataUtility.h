@@ -1,8 +1,10 @@
 #ifndef RVL_FACE_LIBRARY_DATA_UTILITY_H
 #define RVL_FACE_LIBRARY_DATA_UTILITY_H
-#include <RVLFaceLib/RFL_Types.h>
-#include <revolution/GX.h>
 #include <types.h>
+
+#include <RVLFaceLib/RFL_Types.h>
+
+#include <revolution/GX.h>
 #ifdef __cplusplus
 extern "C" {
 #endif

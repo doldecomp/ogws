@@ -1,6 +1,7 @@
-#include <revolution/OS.h>
 #include <runtime/Gecko_ExceptionPPC.h>
 #include <runtime/global_destructor_chain.h>
+
+#include <revolution/OS.h>
 
 static int fragmentID = -2;
 
@@ -16,11 +17,9 @@ void __fini_cpp_exceptions(void);
 static void* GetTOC(void) {
     register void* toc;
 
-    // clang-format off
-    asm {
+    ASM (
         mr toc, r2
-    };
-    // clang-format on
+    )
 
     return toc;
 }

@@ -1,7 +1,6 @@
 ﻿# IDE folders
 .idea/
 .vs/
-.vscode/
 
 # Caches
 __pycache__
@@ -33,6 +32,4 @@ compile_commands.json
 
 # Miscellaneous
 /*.txt
-tools/codewarrior/
 *.exe
-*.dll
