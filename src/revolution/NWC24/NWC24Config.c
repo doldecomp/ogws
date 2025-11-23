@@ -3,7 +3,7 @@
 #include <revolution/DVD.h>
 #include <revolution/OS.h>
 
-#define CONFIG_MAGIC 'WcCf'
+#define CONFIG_MAGIC FOURCC('W', 'c', 'C', 'f')
 #define CONFIG_VERSION 8
 #define CONFIG_MAX_ID_COUNT 32
 

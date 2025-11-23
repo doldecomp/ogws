@@ -217,7 +217,7 @@ Please use the following prefixes for data members/function parameters:
 | `m`    | C++ class private member                |
 | `s`    | C/C++ static, private member            |
 | `p`    | C/C++ pointer-typed member or variable  |
-| `r`    | C++ reference-typed mmember or variable |
+| `r`    | C++ reference-typed member or variable |
 
 If no prefix is required, write the name in camelCase.
 

@@ -23,7 +23,7 @@ extern "C" {
 
 #define LONG_MIN INT_MIN
 #define LONG_MAX INT_MAX
-#define ULONG_MAX 4294967295
+#define ULONG_MAX 4294967295U
 
 #ifdef __cplusplus
 }

@@ -1,7 +1,5 @@
 #include <nw4r/snd.h>
 
-#include <climits>
-
 namespace nw4r {
 namespace snd {
 namespace detail {

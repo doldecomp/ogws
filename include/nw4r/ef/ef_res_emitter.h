@@ -359,7 +359,7 @@ private:
 
 public:
     explicit ResEmitter(EmitterResource* pData = NULL) : mData(pData) {}
-    explicit ResEmitter(const ResEmitter& rOther) : mData(rOther.mData) {}
+    ResEmitter(const ResEmitter& rOther) : mData(rOther.mData) {}
 
     bool IsValid() const {
         return mData != NULL;

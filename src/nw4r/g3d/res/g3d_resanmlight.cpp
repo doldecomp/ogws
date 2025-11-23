@@ -104,6 +104,10 @@ void ResAnmLight::GetAnmResult(LightAnmResult* pResult, f32 frame) const {
                 &r.refBrightness, frame, refBrightnessConstant);
             break;
         }
+
+        default: {
+            break;
+        }
         }
 
         if (hasSpecular) {

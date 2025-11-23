@@ -461,6 +461,7 @@ static void BATConfig(void) {
 
     if (OS_HOLLYWOOD_REV == 0) {
         // @bug Checks function address rather than result
+        // NOLINTNEXTLINE (-Wtautological-pointer-compare)
         if (OSGetPhysicalMem1Size == 0) {
             RealMode(ConfigMEM_ES1_0);
             return;
@@ -485,7 +486,7 @@ static void BATConfig(void) {
     if (OSGetConsoleSimulatedMem2Size() <= OS_MEM_MB_TO_B(64)) {
         if (mem2end <= (void*)0x93400000) {
             RealMode(ConfigMEM2_52MB);
-        } else if (mem2end <= (char*)0x93400000 + OS_MEM_MB_TO_B(4)) {
+        } else if ((char*)mem2end <= (char*)0x93400000 + OS_MEM_MB_TO_B(4)) {
             RealMode(ConfigMEM2_56MB);
         } else {
             RealMode(ConfigMEM2_64MB);

@@ -259,6 +259,10 @@ bool AxManager::AppendEffect(AuxBus bus, FxBase* pFx) {
         AXSetAuxCReturnVolume(AX_MAX_VOLUME);
         break;
     }
+
+    default: {
+        break;
+    }
     }
 
     if (!pFx->StartUp()) {
@@ -284,6 +288,10 @@ bool AxManager::AppendEffect(AuxBus bus, FxBase* pFx) {
         case AUX_C: {
             AXRegisterAuxCCallback(AuxCallbackFunc,
                                    reinterpret_cast<void*>(bus));
+            break;
+        }
+
+        default: {
             break;
         }
         }
@@ -331,6 +339,10 @@ void AxManager::ShutdownEffect(AuxBus bus) {
 
     case AUX_C: {
         AXRegisterAuxCCallback(NULL, NULL);
+        break;
+    }
+
+    default: {
         break;
     }
     }

@@ -1,10 +1,14 @@
 #ifndef RVL_SDK_GX_HARDWARE_BP_H
 #define RVL_SDK_GX_HARDWARE_BP_H
-#include <revolution/GX/GXTypes.h>
 #include <types.h>
+
+#include <revolution/GX/GXTypes.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+// clang-format off
 
 /******************************************************************************
  *
@@ -240,7 +244,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_GENMODE_NUMTEX_E 31
         /* bit size   */ #define GX_BP_GENMODE_NUMTEX_SZ 4
 
-        /* raw mask   */ #define GX_BP_GENMODE_NUMTEX_MASK (((1 << 4) - 1) << 31 - 31)
+        /* raw mask   */ #define GX_BP_GENMODE_NUMTEX_MASK (((1 << 4) - 1) << (31 - 31))
         /* local mask */ #define GX_BP_GENMODE_NUMTEX_LMASK ((1 << 4) - 1)
         /* bit shift  */ #define GX_BP_GENMODE_NUMTEX_SHIFT 0
 
@@ -252,7 +256,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_GENMODE_NUMCOLORS_E 27
         /* bit size   */ #define GX_BP_GENMODE_NUMCOLORS_SZ 3
 
-        /* raw mask   */ #define GX_BP_GENMODE_NUMCOLORS_MASK (((1 << 3) - 1) << 31 - 27)
+        /* raw mask   */ #define GX_BP_GENMODE_NUMCOLORS_MASK (((1 << 3) - 1) << (31 - 27))
         /* local mask */ #define GX_BP_GENMODE_NUMCOLORS_LMASK ((1 << 3) - 1)
         /* bit shift  */ #define GX_BP_GENMODE_NUMCOLORS_SHIFT 4
 
@@ -264,7 +268,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_GENMODE_MULTISAMPLE_E 22
         /* bit size   */ #define GX_BP_GENMODE_MULTISAMPLE_SZ 1
 
-        /* raw mask   */ #define GX_BP_GENMODE_MULTISAMPLE_MASK (((1 << 1) - 1) << 31 - 22)
+        /* raw mask   */ #define GX_BP_GENMODE_MULTISAMPLE_MASK (((1 << 1) - 1) << (31 - 22))
         /* local mask */ #define GX_BP_GENMODE_MULTISAMPLE_LMASK ((1 << 1) - 1)
         /* bit shift  */ #define GX_BP_GENMODE_MULTISAMPLE_SHIFT 9
 
@@ -276,7 +280,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_GENMODE_NUMTEVSTAGES_E 21
         /* bit size   */ #define GX_BP_GENMODE_NUMTEVSTAGES_SZ 4
 
-        /* raw mask   */ #define GX_BP_GENMODE_NUMTEVSTAGES_MASK (((1 << 4) - 1) << 31 - 21)
+        /* raw mask   */ #define GX_BP_GENMODE_NUMTEVSTAGES_MASK (((1 << 4) - 1) << (31 - 21))
         /* local mask */ #define GX_BP_GENMODE_NUMTEVSTAGES_LMASK ((1 << 4) - 1)
         /* bit shift  */ #define GX_BP_GENMODE_NUMTEVSTAGES_SHIFT 10
 
@@ -288,7 +292,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_GENMODE_CULLMODE_E 17
         /* bit size   */ #define GX_BP_GENMODE_CULLMODE_SZ 2
 
-        /* raw mask   */ #define GX_BP_GENMODE_CULLMODE_MASK (((1 << 2) - 1) << 31 - 17)
+        /* raw mask   */ #define GX_BP_GENMODE_CULLMODE_MASK (((1 << 2) - 1) << (31 - 17))
         /* local mask */ #define GX_BP_GENMODE_CULLMODE_LMASK ((1 << 2) - 1)
         /* bit shift  */ #define GX_BP_GENMODE_CULLMODE_SHIFT 14
 
@@ -300,7 +304,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_GENMODE_NUMINDSTAGES_E 15
         /* bit size   */ #define GX_BP_GENMODE_NUMINDSTAGES_SZ 3
 
-        /* raw mask   */ #define GX_BP_GENMODE_NUMINDSTAGES_MASK (((1 << 3) - 1) << 31 - 15)
+        /* raw mask   */ #define GX_BP_GENMODE_NUMINDSTAGES_MASK (((1 << 3) - 1) << (31 - 15))
         /* local mask */ #define GX_BP_GENMODE_NUMINDSTAGES_LMASK ((1 << 3) - 1)
         /* bit shift  */ #define GX_BP_GENMODE_NUMINDSTAGES_SHIFT 16
 
@@ -312,7 +316,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_GENMODE_COPLANAR_E 12
         /* bit size   */ #define GX_BP_GENMODE_COPLANAR_SZ 1
 
-        /* raw mask   */ #define GX_BP_GENMODE_COPLANAR_MASK (((1 << 1) - 1) << 31 - 12)
+        /* raw mask   */ #define GX_BP_GENMODE_COPLANAR_MASK (((1 << 1) - 1) << (31 - 12))
         /* local mask */ #define GX_BP_GENMODE_COPLANAR_LMASK ((1 << 1) - 1)
         /* bit shift  */ #define GX_BP_GENMODE_COPLANAR_SHIFT 19
 
@@ -328,7 +332,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_INDMTXA_M00_E 31
         /* bit size   */ #define GX_BP_INDMTXA_M00_SZ 11
 
-        /* raw mask   */ #define GX_BP_INDMTXA_M00_MASK (((1 << 11) - 1) << 31 - 31)
+        /* raw mask   */ #define GX_BP_INDMTXA_M00_MASK (((1 << 11) - 1) << (31 - 31))
         /* local mask */ #define GX_BP_INDMTXA_M00_LMASK ((1 << 11) - 1)
         /* bit shift  */ #define GX_BP_INDMTXA_M00_SHIFT 0
 
@@ -340,7 +344,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_INDMTXA_M10_E 20
         /* bit size   */ #define GX_BP_INDMTXA_M10_SZ 11
 
-        /* raw mask   */ #define GX_BP_INDMTXA_M10_MASK (((1 << 11) - 1) << 31 - 20)
+        /* raw mask   */ #define GX_BP_INDMTXA_M10_MASK (((1 << 11) - 1) << (31 - 20))
         /* local mask */ #define GX_BP_INDMTXA_M10_LMASK ((1 << 11) - 1)
         /* bit shift  */ #define GX_BP_INDMTXA_M10_SHIFT 11
 
@@ -352,7 +356,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_INDMTXA_EXP_E 9
         /* bit size   */ #define GX_BP_INDMTXA_EXP_SZ 2
 
-        /* raw mask   */ #define GX_BP_INDMTXA_EXP_MASK (((1 << 2) - 1) << 31 - 9)
+        /* raw mask   */ #define GX_BP_INDMTXA_EXP_MASK (((1 << 2) - 1) << (31 - 9))
         /* local mask */ #define GX_BP_INDMTXA_EXP_LMASK ((1 << 2) - 1)
         /* bit shift  */ #define GX_BP_INDMTXA_EXP_SHIFT 22
 
@@ -368,7 +372,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_INDMTXB_M01_E 31
         /* bit size   */ #define GX_BP_INDMTXB_M01_SZ 11
 
-        /* raw mask   */ #define GX_BP_INDMTXB_M01_MASK (((1 << 11) - 1) << 31 - 31)
+        /* raw mask   */ #define GX_BP_INDMTXB_M01_MASK (((1 << 11) - 1) << (31 - 31))
         /* local mask */ #define GX_BP_INDMTXB_M01_LMASK ((1 << 11) - 1)
         /* bit shift  */ #define GX_BP_INDMTXB_M01_SHIFT 0
 
@@ -380,7 +384,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_INDMTXB_M11_E 20
         /* bit size   */ #define GX_BP_INDMTXB_M11_SZ 11
 
-        /* raw mask   */ #define GX_BP_INDMTXB_M11_MASK (((1 << 11) - 1) << 31 - 20)
+        /* raw mask   */ #define GX_BP_INDMTXB_M11_MASK (((1 << 11) - 1) << (31 - 20))
         /* local mask */ #define GX_BP_INDMTXB_M11_LMASK ((1 << 11) - 1)
         /* bit shift  */ #define GX_BP_INDMTXB_M11_SHIFT 11
 
@@ -392,7 +396,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_INDMTXB_EXP_E 9
         /* bit size   */ #define GX_BP_INDMTXB_EXP_SZ 2
 
-        /* raw mask   */ #define GX_BP_INDMTXB_EXP_MASK (((1 << 2) - 1) << 31 - 9)
+        /* raw mask   */ #define GX_BP_INDMTXB_EXP_MASK (((1 << 2) - 1) << (31 - 9))
         /* local mask */ #define GX_BP_INDMTXB_EXP_LMASK ((1 << 2) - 1)
         /* bit shift  */ #define GX_BP_INDMTXB_EXP_SHIFT 22
 
@@ -408,7 +412,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_INDMTXC_M02_E 31
         /* bit size   */ #define GX_BP_INDMTXC_M02_SZ 11
 
-        /* raw mask   */ #define GX_BP_INDMTXC_M02_MASK (((1 << 11) - 1) << 31 - 31)
+        /* raw mask   */ #define GX_BP_INDMTXC_M02_MASK (((1 << 11) - 1) << (31 - 31))
         /* local mask */ #define GX_BP_INDMTXC_M02_LMASK ((1 << 11) - 1)
         /* bit shift  */ #define GX_BP_INDMTXC_M02_SHIFT 0
 
@@ -420,7 +424,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_INDMTXC_M12_E 20
         /* bit size   */ #define GX_BP_INDMTXC_M12_SZ 11
 
-        /* raw mask   */ #define GX_BP_INDMTXC_M12_MASK (((1 << 11) - 1) << 31 - 20)
+        /* raw mask   */ #define GX_BP_INDMTXC_M12_MASK (((1 << 11) - 1) << (31 - 20))
         /* local mask */ #define GX_BP_INDMTXC_M12_LMASK ((1 << 11) - 1)
         /* bit shift  */ #define GX_BP_INDMTXC_M12_SHIFT 11
 
@@ -432,7 +436,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_INDMTXC_EXP_E 9
         /* bit size   */ #define GX_BP_INDMTXC_EXP_SZ 2
 
-        /* raw mask   */ #define GX_BP_INDMTXC_EXP_MASK (((1 << 2) - 1) << 31 - 9)
+        /* raw mask   */ #define GX_BP_INDMTXC_EXP_MASK (((1 << 2) - 1) << (31 - 9))
         /* local mask */ #define GX_BP_INDMTXC_EXP_LMASK ((1 << 2) - 1)
         /* bit shift  */ #define GX_BP_INDMTXC_EXP_SHIFT 22
 
@@ -448,7 +452,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_INDIMASK_IMASK_E 31
         /* bit size   */ #define GX_BP_INDIMASK_IMASK_SZ 8
 
-        /* raw mask   */ #define GX_BP_INDIMASK_IMASK_MASK (((1 << 8) - 1) << 31 - 31)
+        /* raw mask   */ #define GX_BP_INDIMASK_IMASK_MASK (((1 << 8) - 1) << (31 - 31))
         /* local mask */ #define GX_BP_INDIMASK_IMASK_LMASK ((1 << 8) - 1)
         /* bit shift  */ #define GX_BP_INDIMASK_IMASK_SHIFT 0
 
@@ -464,7 +468,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_INDTEVSTAGE_STAGE_E 31
         /* bit size   */ #define GX_BP_INDTEVSTAGE_STAGE_SZ 2
 
-        /* raw mask   */ #define GX_BP_INDTEVSTAGE_STAGE_MASK (((1 << 2) - 1) << 31 - 31)
+        /* raw mask   */ #define GX_BP_INDTEVSTAGE_STAGE_MASK (((1 << 2) - 1) << (31 - 31))
         /* local mask */ #define GX_BP_INDTEVSTAGE_STAGE_LMASK ((1 << 2) - 1)
         /* bit shift  */ #define GX_BP_INDTEVSTAGE_STAGE_SHIFT 0
 
@@ -476,7 +480,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_INDTEVSTAGE_FORMAT_E 29
         /* bit size   */ #define GX_BP_INDTEVSTAGE_FORMAT_SZ 2
 
-        /* raw mask   */ #define GX_BP_INDTEVSTAGE_FORMAT_MASK (((1 << 2) - 1) << 31 - 29)
+        /* raw mask   */ #define GX_BP_INDTEVSTAGE_FORMAT_MASK (((1 << 2) - 1) << (31 - 29))
         /* local mask */ #define GX_BP_INDTEVSTAGE_FORMAT_LMASK ((1 << 2) - 1)
         /* bit shift  */ #define GX_BP_INDTEVSTAGE_FORMAT_SHIFT 2
 
@@ -488,7 +492,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_INDTEVSTAGE_BIAS_E 27
         /* bit size   */ #define GX_BP_INDTEVSTAGE_BIAS_SZ 3
 
-        /* raw mask   */ #define GX_BP_INDTEVSTAGE_BIAS_MASK (((1 << 3) - 1) << 31 - 27)
+        /* raw mask   */ #define GX_BP_INDTEVSTAGE_BIAS_MASK (((1 << 3) - 1) << (31 - 27))
         /* local mask */ #define GX_BP_INDTEVSTAGE_BIAS_LMASK ((1 << 3) - 1)
         /* bit shift  */ #define GX_BP_INDTEVSTAGE_BIAS_SHIFT 4
 
@@ -500,7 +504,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_INDTEVSTAGE_ALPHA_E 24
         /* bit size   */ #define GX_BP_INDTEVSTAGE_ALPHA_SZ 2
 
-        /* raw mask   */ #define GX_BP_INDTEVSTAGE_ALPHA_MASK (((1 << 2) - 1) << 31 - 24)
+        /* raw mask   */ #define GX_BP_INDTEVSTAGE_ALPHA_MASK (((1 << 2) - 1) << (31 - 24))
         /* local mask */ #define GX_BP_INDTEVSTAGE_ALPHA_LMASK ((1 << 2) - 1)
         /* bit shift  */ #define GX_BP_INDTEVSTAGE_ALPHA_SHIFT 7
 
@@ -512,7 +516,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_INDTEVSTAGE_MTX_E 22
         /* bit size   */ #define GX_BP_INDTEVSTAGE_MTX_SZ 4
 
-        /* raw mask   */ #define GX_BP_INDTEVSTAGE_MTX_MASK (((1 << 4) - 1) << 31 - 22)
+        /* raw mask   */ #define GX_BP_INDTEVSTAGE_MTX_MASK (((1 << 4) - 1) << (31 - 22))
         /* local mask */ #define GX_BP_INDTEVSTAGE_MTX_LMASK ((1 << 4) - 1)
         /* bit shift  */ #define GX_BP_INDTEVSTAGE_MTX_SHIFT 9
 
@@ -524,7 +528,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_INDTEVSTAGE_WRAPS_E 18
         /* bit size   */ #define GX_BP_INDTEVSTAGE_WRAPS_SZ 3
 
-        /* raw mask   */ #define GX_BP_INDTEVSTAGE_WRAPS_MASK (((1 << 3) - 1) << 31 - 18)
+        /* raw mask   */ #define GX_BP_INDTEVSTAGE_WRAPS_MASK (((1 << 3) - 1) << (31 - 18))
         /* local mask */ #define GX_BP_INDTEVSTAGE_WRAPS_LMASK ((1 << 3) - 1)
         /* bit shift  */ #define GX_BP_INDTEVSTAGE_WRAPS_SHIFT 13
 
@@ -536,7 +540,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_INDTEVSTAGE_WRAPT_E 15
         /* bit size   */ #define GX_BP_INDTEVSTAGE_WRAPT_SZ 3
 
-        /* raw mask   */ #define GX_BP_INDTEVSTAGE_WRAPT_MASK (((1 << 3) - 1) << 31 - 15)
+        /* raw mask   */ #define GX_BP_INDTEVSTAGE_WRAPT_MASK (((1 << 3) - 1) << (31 - 15))
         /* local mask */ #define GX_BP_INDTEVSTAGE_WRAPT_LMASK ((1 << 3) - 1)
         /* bit shift  */ #define GX_BP_INDTEVSTAGE_WRAPT_SHIFT 16
 
@@ -548,7 +552,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_INDTEVSTAGE_UTCLOD_E 12
         /* bit size   */ #define GX_BP_INDTEVSTAGE_UTCLOD_SZ 1
 
-        /* raw mask   */ #define GX_BP_INDTEVSTAGE_UTCLOD_MASK (((1 << 1) - 1) << 31 - 12)
+        /* raw mask   */ #define GX_BP_INDTEVSTAGE_UTCLOD_MASK (((1 << 1) - 1) << (31 - 12))
         /* local mask */ #define GX_BP_INDTEVSTAGE_UTCLOD_LMASK ((1 << 1) - 1)
         /* bit shift  */ #define GX_BP_INDTEVSTAGE_UTCLOD_SHIFT 19
 
@@ -560,7 +564,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_INDTEVSTAGE_ADDPREV_E 11
         /* bit size   */ #define GX_BP_INDTEVSTAGE_ADDPREV_SZ 1
 
-        /* raw mask   */ #define GX_BP_INDTEVSTAGE_ADDPREV_MASK (((1 << 1) - 1) << 31 - 11)
+        /* raw mask   */ #define GX_BP_INDTEVSTAGE_ADDPREV_MASK (((1 << 1) - 1) << (31 - 11))
         /* local mask */ #define GX_BP_INDTEVSTAGE_ADDPREV_LMASK ((1 << 1) - 1)
         /* bit shift  */ #define GX_BP_INDTEVSTAGE_ADDPREV_SHIFT 20
 
@@ -576,7 +580,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_SCISSORTL_TOP_E 31
         /* bit size   */ #define GX_BP_SCISSORTL_TOP_SZ 11
 
-        /* raw mask   */ #define GX_BP_SCISSORTL_TOP_MASK (((1 << 11) - 1) << 31 - 31)
+        /* raw mask   */ #define GX_BP_SCISSORTL_TOP_MASK (((1 << 11) - 1) << (31 - 31))
         /* local mask */ #define GX_BP_SCISSORTL_TOP_LMASK ((1 << 11) - 1)
         /* bit shift  */ #define GX_BP_SCISSORTL_TOP_SHIFT 0
 
@@ -588,7 +592,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_SCISSORTL_LEFT_E 19
         /* bit size   */ #define GX_BP_SCISSORTL_LEFT_SZ 11
 
-        /* raw mask   */ #define GX_BP_SCISSORTL_LEFT_MASK (((1 << 11) - 1) << 31 - 19)
+        /* raw mask   */ #define GX_BP_SCISSORTL_LEFT_MASK (((1 << 11) - 1) << (31 - 19))
         /* local mask */ #define GX_BP_SCISSORTL_LEFT_LMASK ((1 << 11) - 1)
         /* bit shift  */ #define GX_BP_SCISSORTL_LEFT_SHIFT 12
 
@@ -604,7 +608,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_SCISSORBR_BOT_E 31
         /* bit size   */ #define GX_BP_SCISSORBR_BOT_SZ 11
 
-        /* raw mask   */ #define GX_BP_SCISSORBR_BOT_MASK (((1 << 11) - 1) << 31 - 31)
+        /* raw mask   */ #define GX_BP_SCISSORBR_BOT_MASK (((1 << 11) - 1) << (31 - 31))
         /* local mask */ #define GX_BP_SCISSORBR_BOT_LMASK ((1 << 11) - 1)
         /* bit shift  */ #define GX_BP_SCISSORBR_BOT_SHIFT 0
 
@@ -616,7 +620,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_SCISSORBR_RIGHT_E 19
         /* bit size   */ #define GX_BP_SCISSORBR_RIGHT_SZ 11
 
-        /* raw mask   */ #define GX_BP_SCISSORBR_RIGHT_MASK (((1 << 11) - 1) << 31 - 19)
+        /* raw mask   */ #define GX_BP_SCISSORBR_RIGHT_MASK (((1 << 11) - 1) << (31 - 19))
         /* local mask */ #define GX_BP_SCISSORBR_RIGHT_LMASK ((1 << 11) - 1)
         /* bit shift  */ #define GX_BP_SCISSORBR_RIGHT_SHIFT 12
 
@@ -632,7 +636,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_LINEPTWIDTH_LINESZ_E 31
         /* bit size   */ #define GX_BP_LINEPTWIDTH_LINESZ_SZ 8
 
-        /* raw mask   */ #define GX_BP_LINEPTWIDTH_LINESZ_MASK (((1 << 8) - 1) << 31 - 31)
+        /* raw mask   */ #define GX_BP_LINEPTWIDTH_LINESZ_MASK (((1 << 8) - 1) << (31 - 31))
         /* local mask */ #define GX_BP_LINEPTWIDTH_LINESZ_LMASK ((1 << 8) - 1)
         /* bit shift  */ #define GX_BP_LINEPTWIDTH_LINESZ_SHIFT 0
 
@@ -644,7 +648,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_LINEPTWIDTH_POINTSZ_E 23
         /* bit size   */ #define GX_BP_LINEPTWIDTH_POINTSZ_SZ 8
 
-        /* raw mask   */ #define GX_BP_LINEPTWIDTH_POINTSZ_MASK (((1 << 8) - 1) << 31 - 23)
+        /* raw mask   */ #define GX_BP_LINEPTWIDTH_POINTSZ_MASK (((1 << 8) - 1) << (31 - 23))
         /* local mask */ #define GX_BP_LINEPTWIDTH_POINTSZ_LMASK ((1 << 8) - 1)
         /* bit shift  */ #define GX_BP_LINEPTWIDTH_POINTSZ_SHIFT 8
 
@@ -656,7 +660,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_LINEPTWIDTH_LINEOFS_E 15
         /* bit size   */ #define GX_BP_LINEPTWIDTH_LINEOFS_SZ 3
 
-        /* raw mask   */ #define GX_BP_LINEPTWIDTH_LINEOFS_MASK (((1 << 3) - 1) << 31 - 15)
+        /* raw mask   */ #define GX_BP_LINEPTWIDTH_LINEOFS_MASK (((1 << 3) - 1) << (31 - 15))
         /* local mask */ #define GX_BP_LINEPTWIDTH_LINEOFS_LMASK ((1 << 3) - 1)
         /* bit shift  */ #define GX_BP_LINEPTWIDTH_LINEOFS_SHIFT 16
 
@@ -668,7 +672,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_LINEPTWIDTH_POINTOFS_E 12
         /* bit size   */ #define GX_BP_LINEPTWIDTH_POINTOFS_SZ 3
 
-        /* raw mask   */ #define GX_BP_LINEPTWIDTH_POINTOFS_MASK (((1 << 3) - 1) << 31 - 12)
+        /* raw mask   */ #define GX_BP_LINEPTWIDTH_POINTOFS_MASK (((1 << 3) - 1) << (31 - 12))
         /* local mask */ #define GX_BP_LINEPTWIDTH_POINTOFS_LMASK ((1 << 3) - 1)
         /* bit shift  */ #define GX_BP_LINEPTWIDTH_POINTOFS_SHIFT 19
 
@@ -680,7 +684,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_LINEPTWIDTH_ADJUST_AR_E 9
         /* bit size   */ #define GX_BP_LINEPTWIDTH_ADJUST_AR_SZ 1
 
-        /* raw mask   */ #define GX_BP_LINEPTWIDTH_ADJUST_AR_MASK (((1 << 1) - 1) << 31 - 9)
+        /* raw mask   */ #define GX_BP_LINEPTWIDTH_ADJUST_AR_MASK (((1 << 1) - 1) << (31 - 9))
         /* local mask */ #define GX_BP_LINEPTWIDTH_ADJUST_AR_LMASK ((1 << 1) - 1)
         /* bit shift  */ #define GX_BP_LINEPTWIDTH_ADJUST_AR_SHIFT 22
 
@@ -696,7 +700,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_RAS1_SS0_S0_E 31
         /* bit size   */ #define GX_BP_RAS1_SS0_S0_SZ 4
 
-        /* raw mask   */ #define GX_BP_RAS1_SS0_S0_MASK (((1 << 4) - 1) << 31 - 31)
+        /* raw mask   */ #define GX_BP_RAS1_SS0_S0_MASK (((1 << 4) - 1) << (31 - 31))
         /* local mask */ #define GX_BP_RAS1_SS0_S0_LMASK ((1 << 4) - 1)
         /* bit shift  */ #define GX_BP_RAS1_SS0_S0_SHIFT 0
 
@@ -708,7 +712,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_RAS1_SS0_T0_E 27
         /* bit size   */ #define GX_BP_RAS1_SS0_T0_SZ 4
 
-        /* raw mask   */ #define GX_BP_RAS1_SS0_T0_MASK (((1 << 4) - 1) << 31 - 27)
+        /* raw mask   */ #define GX_BP_RAS1_SS0_T0_MASK (((1 << 4) - 1) << (31 - 27))
         /* local mask */ #define GX_BP_RAS1_SS0_T0_LMASK ((1 << 4) - 1)
         /* bit shift  */ #define GX_BP_RAS1_SS0_T0_SHIFT 4
 
@@ -720,7 +724,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_RAS1_SS0_S1_E 23
         /* bit size   */ #define GX_BP_RAS1_SS0_S1_SZ 4
 
-        /* raw mask   */ #define GX_BP_RAS1_SS0_S1_MASK (((1 << 4) - 1) << 31 - 23)
+        /* raw mask   */ #define GX_BP_RAS1_SS0_S1_MASK (((1 << 4) - 1) << (31 - 23))
         /* local mask */ #define GX_BP_RAS1_SS0_S1_LMASK ((1 << 4) - 1)
         /* bit shift  */ #define GX_BP_RAS1_SS0_S1_SHIFT 8
 
@@ -732,7 +736,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_RAS1_SS0_T1_E 19
         /* bit size   */ #define GX_BP_RAS1_SS0_T1_SZ 4
 
-        /* raw mask   */ #define GX_BP_RAS1_SS0_T1_MASK (((1 << 4) - 1) << 31 - 19)
+        /* raw mask   */ #define GX_BP_RAS1_SS0_T1_MASK (((1 << 4) - 1) << (31 - 19))
         /* local mask */ #define GX_BP_RAS1_SS0_T1_LMASK ((1 << 4) - 1)
         /* bit shift  */ #define GX_BP_RAS1_SS0_T1_SHIFT 12
 
@@ -748,7 +752,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_RAS1_SS1_S2_E 31
         /* bit size   */ #define GX_BP_RAS1_SS1_S2_SZ 4
 
-        /* raw mask   */ #define GX_BP_RAS1_SS1_S2_MASK (((1 << 4) - 1) << 31 - 31)
+        /* raw mask   */ #define GX_BP_RAS1_SS1_S2_MASK (((1 << 4) - 1) << (31 - 31))
         /* local mask */ #define GX_BP_RAS1_SS1_S2_LMASK ((1 << 4) - 1)
         /* bit shift  */ #define GX_BP_RAS1_SS1_S2_SHIFT 0
 
@@ -760,7 +764,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_RAS1_SS1_T2_E 27
         /* bit size   */ #define GX_BP_RAS1_SS1_T2_SZ 4
 
-        /* raw mask   */ #define GX_BP_RAS1_SS1_T2_MASK (((1 << 4) - 1) << 31 - 27)
+        /* raw mask   */ #define GX_BP_RAS1_SS1_T2_MASK (((1 << 4) - 1) << (31 - 27))
         /* local mask */ #define GX_BP_RAS1_SS1_T2_LMASK ((1 << 4) - 1)
         /* bit shift  */ #define GX_BP_RAS1_SS1_T2_SHIFT 4
 
@@ -772,7 +776,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_RAS1_SS1_S3_E 23
         /* bit size   */ #define GX_BP_RAS1_SS1_S3_SZ 4
 
-        /* raw mask   */ #define GX_BP_RAS1_SS1_S3_MASK (((1 << 4) - 1) << 31 - 23)
+        /* raw mask   */ #define GX_BP_RAS1_SS1_S3_MASK (((1 << 4) - 1) << (31 - 23))
         /* local mask */ #define GX_BP_RAS1_SS1_S3_LMASK ((1 << 4) - 1)
         /* bit shift  */ #define GX_BP_RAS1_SS1_S3_SHIFT 8
 
@@ -784,7 +788,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_RAS1_SS1_T3_E 19
         /* bit size   */ #define GX_BP_RAS1_SS1_T3_SZ 4
 
-        /* raw mask   */ #define GX_BP_RAS1_SS1_T3_MASK (((1 << 4) - 1) << 31 - 19)
+        /* raw mask   */ #define GX_BP_RAS1_SS1_T3_MASK (((1 << 4) - 1) << (31 - 19))
         /* local mask */ #define GX_BP_RAS1_SS1_T3_LMASK ((1 << 4) - 1)
         /* bit shift  */ #define GX_BP_RAS1_SS1_T3_SHIFT 12
 
@@ -800,7 +804,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_RAS1_IREF_MAP0_E 31
         /* bit size   */ #define GX_BP_RAS1_IREF_MAP0_SZ 3
 
-        /* raw mask   */ #define GX_BP_RAS1_IREF_MAP0_MASK (((1 << 3) - 1) << 31 - 31)
+        /* raw mask   */ #define GX_BP_RAS1_IREF_MAP0_MASK (((1 << 3) - 1) << (31 - 31))
         /* local mask */ #define GX_BP_RAS1_IREF_MAP0_LMASK ((1 << 3) - 1)
         /* bit shift  */ #define GX_BP_RAS1_IREF_MAP0_SHIFT 0
 
@@ -812,7 +816,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_RAS1_IREF_TXC0_E 28
         /* bit size   */ #define GX_BP_RAS1_IREF_TXC0_SZ 3
 
-        /* raw mask   */ #define GX_BP_RAS1_IREF_TXC0_MASK (((1 << 3) - 1) << 31 - 28)
+        /* raw mask   */ #define GX_BP_RAS1_IREF_TXC0_MASK (((1 << 3) - 1) << (31 - 28))
         /* local mask */ #define GX_BP_RAS1_IREF_TXC0_LMASK ((1 << 3) - 1)
         /* bit shift  */ #define GX_BP_RAS1_IREF_TXC0_SHIFT 3
 
@@ -824,7 +828,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_RAS1_IREF_MAP1_E 25
         /* bit size   */ #define GX_BP_RAS1_IREF_MAP1_SZ 3
 
-        /* raw mask   */ #define GX_BP_RAS1_IREF_MAP1_MASK (((1 << 3) - 1) << 31 - 25)
+        /* raw mask   */ #define GX_BP_RAS1_IREF_MAP1_MASK (((1 << 3) - 1) << (31 - 25))
         /* local mask */ #define GX_BP_RAS1_IREF_MAP1_LMASK ((1 << 3) - 1)
         /* bit shift  */ #define GX_BP_RAS1_IREF_MAP1_SHIFT 6
 
@@ -836,7 +840,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_RAS1_IREF_TXC1_E 22
         /* bit size   */ #define GX_BP_RAS1_IREF_TXC1_SZ 3
 
-        /* raw mask   */ #define GX_BP_RAS1_IREF_TXC1_MASK (((1 << 3) - 1) << 31 - 22)
+        /* raw mask   */ #define GX_BP_RAS1_IREF_TXC1_MASK (((1 << 3) - 1) << (31 - 22))
         /* local mask */ #define GX_BP_RAS1_IREF_TXC1_LMASK ((1 << 3) - 1)
         /* bit shift  */ #define GX_BP_RAS1_IREF_TXC1_SHIFT 9
 
@@ -848,7 +852,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_RAS1_IREF_MAP2_E 19
         /* bit size   */ #define GX_BP_RAS1_IREF_MAP2_SZ 3
 
-        /* raw mask   */ #define GX_BP_RAS1_IREF_MAP2_MASK (((1 << 3) - 1) << 31 - 19)
+        /* raw mask   */ #define GX_BP_RAS1_IREF_MAP2_MASK (((1 << 3) - 1) << (31 - 19))
         /* local mask */ #define GX_BP_RAS1_IREF_MAP2_LMASK ((1 << 3) - 1)
         /* bit shift  */ #define GX_BP_RAS1_IREF_MAP2_SHIFT 12
 
@@ -860,7 +864,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_RAS1_IREF_TXC2_E 16
         /* bit size   */ #define GX_BP_RAS1_IREF_TXC2_SZ 3
 
-        /* raw mask   */ #define GX_BP_RAS1_IREF_TXC2_MASK (((1 << 3) - 1) << 31 - 16)
+        /* raw mask   */ #define GX_BP_RAS1_IREF_TXC2_MASK (((1 << 3) - 1) << (31 - 16))
         /* local mask */ #define GX_BP_RAS1_IREF_TXC2_LMASK ((1 << 3) - 1)
         /* bit shift  */ #define GX_BP_RAS1_IREF_TXC2_SHIFT 15
 
@@ -872,7 +876,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_RAS1_IREF_MAP3_E 13
         /* bit size   */ #define GX_BP_RAS1_IREF_MAP3_SZ 3
 
-        /* raw mask   */ #define GX_BP_RAS1_IREF_MAP3_MASK (((1 << 3) - 1) << 31 - 13)
+        /* raw mask   */ #define GX_BP_RAS1_IREF_MAP3_MASK (((1 << 3) - 1) << (31 - 13))
         /* local mask */ #define GX_BP_RAS1_IREF_MAP3_LMASK ((1 << 3) - 1)
         /* bit shift  */ #define GX_BP_RAS1_IREF_MAP3_SHIFT 18
 
@@ -884,7 +888,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_RAS1_IREF_TXC3_E 10
         /* bit size   */ #define GX_BP_RAS1_IREF_TXC3_SZ 3
 
-        /* raw mask   */ #define GX_BP_RAS1_IREF_TXC3_MASK (((1 << 3) - 1) << 31 - 10)
+        /* raw mask   */ #define GX_BP_RAS1_IREF_TXC3_MASK (((1 << 3) - 1) << (31 - 10))
         /* local mask */ #define GX_BP_RAS1_IREF_TXC3_LMASK ((1 << 3) - 1)
         /* bit shift  */ #define GX_BP_RAS1_IREF_TXC3_SHIFT 21
 
@@ -900,7 +904,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_RAS1_TREF_TEXMAP_EVEN_E 31
         /* bit size   */ #define GX_BP_RAS1_TREF_TEXMAP_EVEN_SZ 3
 
-        /* raw mask   */ #define GX_BP_RAS1_TREF_TEXMAP_EVEN_MASK (((1 << 3) - 1) << 31 - 31)
+        /* raw mask   */ #define GX_BP_RAS1_TREF_TEXMAP_EVEN_MASK (((1 << 3) - 1) << (31 - 31))
         /* local mask */ #define GX_BP_RAS1_TREF_TEXMAP_EVEN_LMASK ((1 << 3) - 1)
         /* bit shift  */ #define GX_BP_RAS1_TREF_TEXMAP_EVEN_SHIFT 0
 
@@ -912,7 +916,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_RAS1_TREF_TEXCOORD_EVEN_E 28
         /* bit size   */ #define GX_BP_RAS1_TREF_TEXCOORD_EVEN_SZ 3
 
-        /* raw mask   */ #define GX_BP_RAS1_TREF_TEXCOORD_EVEN_MASK (((1 << 3) - 1) << 31 - 28)
+        /* raw mask   */ #define GX_BP_RAS1_TREF_TEXCOORD_EVEN_MASK (((1 << 3) - 1) << (31 - 28))
         /* local mask */ #define GX_BP_RAS1_TREF_TEXCOORD_EVEN_LMASK ((1 << 3) - 1)
         /* bit shift  */ #define GX_BP_RAS1_TREF_TEXCOORD_EVEN_SHIFT 3
 
@@ -924,7 +928,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_RAS1_TREF_ENABLE_TEX_EVEN_E 25
         /* bit size   */ #define GX_BP_RAS1_TREF_ENABLE_TEX_EVEN_SZ 1
 
-        /* raw mask   */ #define GX_BP_RAS1_TREF_ENABLE_TEX_EVEN_MASK (((1 << 1) - 1) << 31 - 25)
+        /* raw mask   */ #define GX_BP_RAS1_TREF_ENABLE_TEX_EVEN_MASK (((1 << 1) - 1) << (31 - 25))
         /* local mask */ #define GX_BP_RAS1_TREF_ENABLE_TEX_EVEN_LMASK ((1 << 1) - 1)
         /* bit shift  */ #define GX_BP_RAS1_TREF_ENABLE_TEX_EVEN_SHIFT 6
 
@@ -936,7 +940,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_RAS1_TREF_COLORCHAN_EVEN_E 24
         /* bit size   */ #define GX_BP_RAS1_TREF_COLORCHAN_EVEN_SZ 3
 
-        /* raw mask   */ #define GX_BP_RAS1_TREF_COLORCHAN_EVEN_MASK (((1 << 3) - 1) << 31 - 24)
+        /* raw mask   */ #define GX_BP_RAS1_TREF_COLORCHAN_EVEN_MASK (((1 << 3) - 1) << (31 - 24))
         /* local mask */ #define GX_BP_RAS1_TREF_COLORCHAN_EVEN_LMASK ((1 << 3) - 1)
         /* bit shift  */ #define GX_BP_RAS1_TREF_COLORCHAN_EVEN_SHIFT 7
 
@@ -948,7 +952,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_RAS1_TREF_TEXMAP_ODD_E 19
         /* bit size   */ #define GX_BP_RAS1_TREF_TEXMAP_ODD_SZ 3
 
-        /* raw mask   */ #define GX_BP_RAS1_TREF_TEXMAP_ODD_MASK (((1 << 3) - 1) << 31 - 19)
+        /* raw mask   */ #define GX_BP_RAS1_TREF_TEXMAP_ODD_MASK (((1 << 3) - 1) << (31 - 19))
         /* local mask */ #define GX_BP_RAS1_TREF_TEXMAP_ODD_LMASK ((1 << 3) - 1)
         /* bit shift  */ #define GX_BP_RAS1_TREF_TEXMAP_ODD_SHIFT 12
 
@@ -960,7 +964,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_RAS1_TREF_TEXCOORD_ODD_E 16
         /* bit size   */ #define GX_BP_RAS1_TREF_TEXCOORD_ODD_SZ 3
 
-        /* raw mask   */ #define GX_BP_RAS1_TREF_TEXCOORD_ODD_MASK (((1 << 3) - 1) << 31 - 16)
+        /* raw mask   */ #define GX_BP_RAS1_TREF_TEXCOORD_ODD_MASK (((1 << 3) - 1) << (31 - 16))
         /* local mask */ #define GX_BP_RAS1_TREF_TEXCOORD_ODD_LMASK ((1 << 3) - 1)
         /* bit shift  */ #define GX_BP_RAS1_TREF_TEXCOORD_ODD_SHIFT 15
 
@@ -972,7 +976,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_RAS1_TREF_ENABLE_TEX_ODD_E 13
         /* bit size   */ #define GX_BP_RAS1_TREF_ENABLE_TEX_ODD_SZ 1
 
-        /* raw mask   */ #define GX_BP_RAS1_TREF_ENABLE_TEX_ODD_MASK (((1 << 1) - 1) << 31 - 13)
+        /* raw mask   */ #define GX_BP_RAS1_TREF_ENABLE_TEX_ODD_MASK (((1 << 1) - 1) << (31 - 13))
         /* local mask */ #define GX_BP_RAS1_TREF_ENABLE_TEX_ODD_LMASK ((1 << 1) - 1)
         /* bit shift  */ #define GX_BP_RAS1_TREF_ENABLE_TEX_ODD_SHIFT 18
 
@@ -984,7 +988,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_RAS1_TREF_COLORCHAN_ODD_E 12
         /* bit size   */ #define GX_BP_RAS1_TREF_COLORCHAN_ODD_SZ 3
 
-        /* raw mask   */ #define GX_BP_RAS1_TREF_COLORCHAN_ODD_MASK (((1 << 3) - 1) << 31 - 12)
+        /* raw mask   */ #define GX_BP_RAS1_TREF_COLORCHAN_ODD_MASK (((1 << 3) - 1) << (31 - 12))
         /* local mask */ #define GX_BP_RAS1_TREF_COLORCHAN_ODD_LMASK ((1 << 3) - 1)
         /* bit shift  */ #define GX_BP_RAS1_TREF_COLORCHAN_ODD_SHIFT 19
 
@@ -1000,7 +1004,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_SU_SIZE_SCALE_E 31
         /* bit size   */ #define GX_BP_SU_SIZE_SCALE_SZ 16
 
-        /* raw mask   */ #define GX_BP_SU_SIZE_SCALE_MASK (((1 << 16) - 1) << 31 - 31)
+        /* raw mask   */ #define GX_BP_SU_SIZE_SCALE_MASK (((1 << 16) - 1) << (31 - 31))
         /* local mask */ #define GX_BP_SU_SIZE_SCALE_LMASK ((1 << 16) - 1)
         /* bit shift  */ #define GX_BP_SU_SIZE_SCALE_SHIFT 0
 
@@ -1012,7 +1016,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_SU_SIZE_RANGEBIAS_E 15
         /* bit size   */ #define GX_BP_SU_SIZE_RANGEBIAS_SZ 1
 
-        /* raw mask   */ #define GX_BP_SU_SIZE_RANGEBIAS_MASK (((1 << 1) - 1) << 31 - 15)
+        /* raw mask   */ #define GX_BP_SU_SIZE_RANGEBIAS_MASK (((1 << 1) - 1) << (31 - 15))
         /* local mask */ #define GX_BP_SU_SIZE_RANGEBIAS_LMASK ((1 << 1) - 1)
         /* bit shift  */ #define GX_BP_SU_SIZE_RANGEBIAS_SHIFT 16
 
@@ -1024,7 +1028,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_SU_SIZE_CYLINDRICWRAP_E 14
         /* bit size   */ #define GX_BP_SU_SIZE_CYLINDRICWRAP_SZ 1
 
-        /* raw mask   */ #define GX_BP_SU_SIZE_CYLINDRICWRAP_MASK (((1 << 1) - 1) << 31 - 14)
+        /* raw mask   */ #define GX_BP_SU_SIZE_CYLINDRICWRAP_MASK (((1 << 1) - 1) << (31 - 14))
         /* local mask */ #define GX_BP_SU_SIZE_CYLINDRICWRAP_LMASK ((1 << 1) - 1)
         /* bit shift  */ #define GX_BP_SU_SIZE_CYLINDRICWRAP_SHIFT 17
 
@@ -1036,7 +1040,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_SU_SIZE_USELINEOFS_E 13
         /* bit size   */ #define GX_BP_SU_SIZE_USELINEOFS_SZ 1
 
-        /* raw mask   */ #define GX_BP_SU_SIZE_USELINEOFS_MASK (((1 << 1) - 1) << 31 - 13)
+        /* raw mask   */ #define GX_BP_SU_SIZE_USELINEOFS_MASK (((1 << 1) - 1) << (31 - 13))
         /* local mask */ #define GX_BP_SU_SIZE_USELINEOFS_LMASK ((1 << 1) - 1)
         /* bit shift  */ #define GX_BP_SU_SIZE_USELINEOFS_SHIFT 18
 
@@ -1048,7 +1052,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_SU_SIZE_USEPOINTOFS_E 12
         /* bit size   */ #define GX_BP_SU_SIZE_USEPOINTOFS_SZ 1
 
-        /* raw mask   */ #define GX_BP_SU_SIZE_USEPOINTOFS_MASK (((1 << 1) - 1) << 31 - 12)
+        /* raw mask   */ #define GX_BP_SU_SIZE_USEPOINTOFS_MASK (((1 << 1) - 1) << (31 - 12))
         /* local mask */ #define GX_BP_SU_SIZE_USEPOINTOFS_LMASK ((1 << 1) - 1)
         /* bit shift  */ #define GX_BP_SU_SIZE_USEPOINTOFS_SHIFT 19
 
@@ -1064,7 +1068,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_ZMODE_TEST_ENABLE_E 31
         /* bit size   */ #define GX_BP_ZMODE_TEST_ENABLE_SZ 1
 
-        /* raw mask   */ #define GX_BP_ZMODE_TEST_ENABLE_MASK (((1 << 1) - 1) << 31 - 31)
+        /* raw mask   */ #define GX_BP_ZMODE_TEST_ENABLE_MASK (((1 << 1) - 1) << (31 - 31))
         /* local mask */ #define GX_BP_ZMODE_TEST_ENABLE_LMASK ((1 << 1) - 1)
         /* bit shift  */ #define GX_BP_ZMODE_TEST_ENABLE_SHIFT 0
 
@@ -1076,7 +1080,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_ZMODE_COMPARE_E 30
         /* bit size   */ #define GX_BP_ZMODE_COMPARE_SZ 3
 
-        /* raw mask   */ #define GX_BP_ZMODE_COMPARE_MASK (((1 << 3) - 1) << 31 - 30)
+        /* raw mask   */ #define GX_BP_ZMODE_COMPARE_MASK (((1 << 3) - 1) << (31 - 30))
         /* local mask */ #define GX_BP_ZMODE_COMPARE_LMASK ((1 << 3) - 1)
         /* bit shift  */ #define GX_BP_ZMODE_COMPARE_SHIFT 1
 
@@ -1088,7 +1092,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_ZMODE_UPDATE_ENABLE_E 27
         /* bit size   */ #define GX_BP_ZMODE_UPDATE_ENABLE_SZ 1
 
-        /* raw mask   */ #define GX_BP_ZMODE_UPDATE_ENABLE_MASK (((1 << 1) - 1) << 31 - 27)
+        /* raw mask   */ #define GX_BP_ZMODE_UPDATE_ENABLE_MASK (((1 << 1) - 1) << (31 - 27))
         /* local mask */ #define GX_BP_ZMODE_UPDATE_ENABLE_LMASK ((1 << 1) - 1)
         /* bit shift  */ #define GX_BP_ZMODE_UPDATE_ENABLE_SHIFT 4
 
@@ -1104,7 +1108,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_BLENDMODE_BLEND_ENABLE_E 31
         /* bit size   */ #define GX_BP_BLENDMODE_BLEND_ENABLE_SZ 1
 
-        /* raw mask   */ #define GX_BP_BLENDMODE_BLEND_ENABLE_MASK (((1 << 1) - 1) << 31 - 31)
+        /* raw mask   */ #define GX_BP_BLENDMODE_BLEND_ENABLE_MASK (((1 << 1) - 1) << (31 - 31))
         /* local mask */ #define GX_BP_BLENDMODE_BLEND_ENABLE_LMASK ((1 << 1) - 1)
         /* bit shift  */ #define GX_BP_BLENDMODE_BLEND_ENABLE_SHIFT 0
 
@@ -1116,7 +1120,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_BLENDMODE_LOGIC_OP_ENABLE_E 30
         /* bit size   */ #define GX_BP_BLENDMODE_LOGIC_OP_ENABLE_SZ 1
 
-        /* raw mask   */ #define GX_BP_BLENDMODE_LOGIC_OP_ENABLE_MASK (((1 << 1) - 1) << 31 - 30)
+        /* raw mask   */ #define GX_BP_BLENDMODE_LOGIC_OP_ENABLE_MASK (((1 << 1) - 1) << (31 - 30))
         /* local mask */ #define GX_BP_BLENDMODE_LOGIC_OP_ENABLE_LMASK ((1 << 1) - 1)
         /* bit shift  */ #define GX_BP_BLENDMODE_LOGIC_OP_ENABLE_SHIFT 1
 
@@ -1128,7 +1132,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_BLENDMODE_DITHER_E 29
         /* bit size   */ #define GX_BP_BLENDMODE_DITHER_SZ 1
 
-        /* raw mask   */ #define GX_BP_BLENDMODE_DITHER_MASK (((1 << 1) - 1) << 31 - 29)
+        /* raw mask   */ #define GX_BP_BLENDMODE_DITHER_MASK (((1 << 1) - 1) << (31 - 29))
         /* local mask */ #define GX_BP_BLENDMODE_DITHER_LMASK ((1 << 1) - 1)
         /* bit shift  */ #define GX_BP_BLENDMODE_DITHER_SHIFT 2
 
@@ -1140,7 +1144,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_BLENDMODE_COLOR_UPDATE_E 28
         /* bit size   */ #define GX_BP_BLENDMODE_COLOR_UPDATE_SZ 1
 
-        /* raw mask   */ #define GX_BP_BLENDMODE_COLOR_UPDATE_MASK (((1 << 1) - 1) << 31 - 28)
+        /* raw mask   */ #define GX_BP_BLENDMODE_COLOR_UPDATE_MASK (((1 << 1) - 1) << (31 - 28))
         /* local mask */ #define GX_BP_BLENDMODE_COLOR_UPDATE_LMASK ((1 << 1) - 1)
         /* bit shift  */ #define GX_BP_BLENDMODE_COLOR_UPDATE_SHIFT 3
 
@@ -1152,7 +1156,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_BLENDMODE_ALPHA_UPDATE_E 27
         /* bit size   */ #define GX_BP_BLENDMODE_ALPHA_UPDATE_SZ 1
 
-        /* raw mask   */ #define GX_BP_BLENDMODE_ALPHA_UPDATE_MASK (((1 << 1) - 1) << 31 - 27)
+        /* raw mask   */ #define GX_BP_BLENDMODE_ALPHA_UPDATE_MASK (((1 << 1) - 1) << (31 - 27))
         /* local mask */ #define GX_BP_BLENDMODE_ALPHA_UPDATE_LMASK ((1 << 1) - 1)
         /* bit shift  */ #define GX_BP_BLENDMODE_ALPHA_UPDATE_SHIFT 4
 
@@ -1164,7 +1168,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_BLENDMODE_DST_FACTOR_E 26
         /* bit size   */ #define GX_BP_BLENDMODE_DST_FACTOR_SZ 3
 
-        /* raw mask   */ #define GX_BP_BLENDMODE_DST_FACTOR_MASK (((1 << 3) - 1) << 31 - 26)
+        /* raw mask   */ #define GX_BP_BLENDMODE_DST_FACTOR_MASK (((1 << 3) - 1) << (31 - 26))
         /* local mask */ #define GX_BP_BLENDMODE_DST_FACTOR_LMASK ((1 << 3) - 1)
         /* bit shift  */ #define GX_BP_BLENDMODE_DST_FACTOR_SHIFT 5
 
@@ -1176,7 +1180,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_BLENDMODE_SRC_FACTOR_E 23
         /* bit size   */ #define GX_BP_BLENDMODE_SRC_FACTOR_SZ 3
 
-        /* raw mask   */ #define GX_BP_BLENDMODE_SRC_FACTOR_MASK (((1 << 3) - 1) << 31 - 23)
+        /* raw mask   */ #define GX_BP_BLENDMODE_SRC_FACTOR_MASK (((1 << 3) - 1) << (31 - 23))
         /* local mask */ #define GX_BP_BLENDMODE_SRC_FACTOR_LMASK ((1 << 3) - 1)
         /* bit shift  */ #define GX_BP_BLENDMODE_SRC_FACTOR_SHIFT 8
 
@@ -1188,7 +1192,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_BLENDMODE_SUBTRACT_E 20
         /* bit size   */ #define GX_BP_BLENDMODE_SUBTRACT_SZ 1
 
-        /* raw mask   */ #define GX_BP_BLENDMODE_SUBTRACT_MASK (((1 << 1) - 1) << 31 - 20)
+        /* raw mask   */ #define GX_BP_BLENDMODE_SUBTRACT_MASK (((1 << 1) - 1) << (31 - 20))
         /* local mask */ #define GX_BP_BLENDMODE_SUBTRACT_LMASK ((1 << 1) - 1)
         /* bit shift  */ #define GX_BP_BLENDMODE_SUBTRACT_SHIFT 11
 
@@ -1200,7 +1204,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_BLENDMODE_LOGIC_MODE_E 19
         /* bit size   */ #define GX_BP_BLENDMODE_LOGIC_MODE_SZ 4
 
-        /* raw mask   */ #define GX_BP_BLENDMODE_LOGIC_MODE_MASK (((1 << 4) - 1) << 31 - 19)
+        /* raw mask   */ #define GX_BP_BLENDMODE_LOGIC_MODE_MASK (((1 << 4) - 1) << (31 - 19))
         /* local mask */ #define GX_BP_BLENDMODE_LOGIC_MODE_LMASK ((1 << 4) - 1)
         /* bit shift  */ #define GX_BP_BLENDMODE_LOGIC_MODE_SHIFT 12
 
@@ -1216,7 +1220,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_DSTALPHA_ALPHA_E 31
         /* bit size   */ #define GX_BP_DSTALPHA_ALPHA_SZ 8
 
-        /* raw mask   */ #define GX_BP_DSTALPHA_ALPHA_MASK (((1 << 8) - 1) << 31 - 31)
+        /* raw mask   */ #define GX_BP_DSTALPHA_ALPHA_MASK (((1 << 8) - 1) << (31 - 31))
         /* local mask */ #define GX_BP_DSTALPHA_ALPHA_LMASK ((1 << 8) - 1)
         /* bit shift  */ #define GX_BP_DSTALPHA_ALPHA_SHIFT 0
 
@@ -1228,7 +1232,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_DSTALPHA_ENABLE_E 23
         /* bit size   */ #define GX_BP_DSTALPHA_ENABLE_SZ 1
 
-        /* raw mask   */ #define GX_BP_DSTALPHA_ENABLE_MASK (((1 << 1) - 1) << 31 - 23)
+        /* raw mask   */ #define GX_BP_DSTALPHA_ENABLE_MASK (((1 << 1) - 1) << (31 - 23))
         /* local mask */ #define GX_BP_DSTALPHA_ENABLE_LMASK ((1 << 1) - 1)
         /* bit shift  */ #define GX_BP_DSTALPHA_ENABLE_SHIFT 8
 
@@ -1240,7 +1244,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_DSTALPHA_YUV_FMT_E 22
         /* bit size   */ #define GX_BP_DSTALPHA_YUV_FMT_SZ 2
 
-        /* raw mask   */ #define GX_BP_DSTALPHA_YUV_FMT_MASK (((1 << 2) - 1) << 31 - 22)
+        /* raw mask   */ #define GX_BP_DSTALPHA_YUV_FMT_MASK (((1 << 2) - 1) << (31 - 22))
         /* local mask */ #define GX_BP_DSTALPHA_YUV_FMT_LMASK ((1 << 2) - 1)
         /* bit shift  */ #define GX_BP_DSTALPHA_YUV_FMT_SHIFT 9
 
@@ -1256,7 +1260,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_ZCONTROL_PIXEL_FMT_E 31
         /* bit size   */ #define GX_BP_ZCONTROL_PIXEL_FMT_SZ 3
 
-        /* raw mask   */ #define GX_BP_ZCONTROL_PIXEL_FMT_MASK (((1 << 3) - 1) << 31 - 31)
+        /* raw mask   */ #define GX_BP_ZCONTROL_PIXEL_FMT_MASK (((1 << 3) - 1) << (31 - 31))
         /* local mask */ #define GX_BP_ZCONTROL_PIXEL_FMT_LMASK ((1 << 3) - 1)
         /* bit shift  */ #define GX_BP_ZCONTROL_PIXEL_FMT_SHIFT 0
 
@@ -1268,7 +1272,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_ZCONTROL_Z_FMT_E 28
         /* bit size   */ #define GX_BP_ZCONTROL_Z_FMT_SZ 3
 
-        /* raw mask   */ #define GX_BP_ZCONTROL_Z_FMT_MASK (((1 << 3) - 1) << 31 - 28)
+        /* raw mask   */ #define GX_BP_ZCONTROL_Z_FMT_MASK (((1 << 3) - 1) << (31 - 28))
         /* local mask */ #define GX_BP_ZCONTROL_Z_FMT_LMASK ((1 << 3) - 1)
         /* bit shift  */ #define GX_BP_ZCONTROL_Z_FMT_SHIFT 3
 
@@ -1280,7 +1284,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_ZCONTROL_BEFORE_TEX_E 25
         /* bit size   */ #define GX_BP_ZCONTROL_BEFORE_TEX_SZ 1
 
-        /* raw mask   */ #define GX_BP_ZCONTROL_BEFORE_TEX_MASK (((1 << 1) - 1) << 31 - 25)
+        /* raw mask   */ #define GX_BP_ZCONTROL_BEFORE_TEX_MASK (((1 << 1) - 1) << (31 - 25))
         /* local mask */ #define GX_BP_ZCONTROL_BEFORE_TEX_LMASK ((1 << 1) - 1)
         /* bit shift  */ #define GX_BP_ZCONTROL_BEFORE_TEX_SHIFT 6
 
@@ -1296,7 +1300,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_FIELDMASK_ODD_E 31
         /* bit size   */ #define GX_BP_FIELDMASK_ODD_SZ 1
 
-        /* raw mask   */ #define GX_BP_FIELDMASK_ODD_MASK (((1 << 1) - 1) << 31 - 31)
+        /* raw mask   */ #define GX_BP_FIELDMASK_ODD_MASK (((1 << 1) - 1) << (31 - 31))
         /* local mask */ #define GX_BP_FIELDMASK_ODD_LMASK ((1 << 1) - 1)
         /* bit shift  */ #define GX_BP_FIELDMASK_ODD_SHIFT 0
 
@@ -1308,7 +1312,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_FIELDMASK_EVEN_E 30
         /* bit size   */ #define GX_BP_FIELDMASK_EVEN_SZ 1
 
-        /* raw mask   */ #define GX_BP_FIELDMASK_EVEN_MASK (((1 << 1) - 1) << 31 - 30)
+        /* raw mask   */ #define GX_BP_FIELDMASK_EVEN_MASK (((1 << 1) - 1) << (31 - 30))
         /* local mask */ #define GX_BP_FIELDMASK_EVEN_LMASK ((1 << 1) - 1)
         /* bit shift  */ #define GX_BP_FIELDMASK_EVEN_SHIFT 1
 
@@ -1324,7 +1328,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_SCISSOROFFSET_OX_E 31
         /* bit size   */ #define GX_BP_SCISSOROFFSET_OX_SZ 10
 
-        /* raw mask   */ #define GX_BP_SCISSOROFFSET_OX_MASK (((1 << 10) - 1) << 31 - 31)
+        /* raw mask   */ #define GX_BP_SCISSOROFFSET_OX_MASK (((1 << 10) - 1) << (31 - 31))
         /* local mask */ #define GX_BP_SCISSOROFFSET_OX_LMASK ((1 << 10) - 1)
         /* bit shift  */ #define GX_BP_SCISSOROFFSET_OX_SHIFT 0
 
@@ -1336,7 +1340,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_SCISSOROFFSET_OY_E 21
         /* bit size   */ #define GX_BP_SCISSOROFFSET_OY_SZ 10
 
-        /* raw mask   */ #define GX_BP_SCISSOROFFSET_OY_MASK (((1 << 10) - 1) << 31 - 21)
+        /* raw mask   */ #define GX_BP_SCISSOROFFSET_OY_MASK (((1 << 10) - 1) << (31 - 21))
         /* local mask */ #define GX_BP_SCISSOROFFSET_OY_LMASK ((1 << 10) - 1)
         /* bit shift  */ #define GX_BP_SCISSOROFFSET_OY_SHIFT 10
 
@@ -1352,7 +1356,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_FIELDMODE_TEX_LOD_E 31
         /* bit size   */ #define GX_BP_FIELDMODE_TEX_LOD_SZ 1
 
-        /* raw mask   */ #define GX_BP_FIELDMODE_TEX_LOD_MASK (((1 << 1) - 1) << 31 - 31)
+        /* raw mask   */ #define GX_BP_FIELDMODE_TEX_LOD_MASK (((1 << 1) - 1) << (31 - 31))
         /* local mask */ #define GX_BP_FIELDMODE_TEX_LOD_LMASK ((1 << 1) - 1)
         /* bit shift  */ #define GX_BP_FIELDMODE_TEX_LOD_SHIFT 0
 
@@ -1368,7 +1372,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_TEVCOLORCOMBINER_D_E 31
         /* bit size   */ #define GX_BP_TEVCOLORCOMBINER_D_SZ 4
 
-        /* raw mask   */ #define GX_BP_TEVCOLORCOMBINER_D_MASK (((1 << 4) - 1) << 31 - 31)
+        /* raw mask   */ #define GX_BP_TEVCOLORCOMBINER_D_MASK (((1 << 4) - 1) << (31 - 31))
         /* local mask */ #define GX_BP_TEVCOLORCOMBINER_D_LMASK ((1 << 4) - 1)
         /* bit shift  */ #define GX_BP_TEVCOLORCOMBINER_D_SHIFT 0
 
@@ -1380,7 +1384,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_TEVCOLORCOMBINER_C_E 27
         /* bit size   */ #define GX_BP_TEVCOLORCOMBINER_C_SZ 4
 
-        /* raw mask   */ #define GX_BP_TEVCOLORCOMBINER_C_MASK (((1 << 4) - 1) << 31 - 27)
+        /* raw mask   */ #define GX_BP_TEVCOLORCOMBINER_C_MASK (((1 << 4) - 1) << (31 - 27))
         /* local mask */ #define GX_BP_TEVCOLORCOMBINER_C_LMASK ((1 << 4) - 1)
         /* bit shift  */ #define GX_BP_TEVCOLORCOMBINER_C_SHIFT 4
 
@@ -1392,7 +1396,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_TEVCOLORCOMBINER_B_E 23
         /* bit size   */ #define GX_BP_TEVCOLORCOMBINER_B_SZ 4
 
-        /* raw mask   */ #define GX_BP_TEVCOLORCOMBINER_B_MASK (((1 << 4) - 1) << 31 - 23)
+        /* raw mask   */ #define GX_BP_TEVCOLORCOMBINER_B_MASK (((1 << 4) - 1) << (31 - 23))
         /* local mask */ #define GX_BP_TEVCOLORCOMBINER_B_LMASK ((1 << 4) - 1)
         /* bit shift  */ #define GX_BP_TEVCOLORCOMBINER_B_SHIFT 8
 
@@ -1404,7 +1408,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_TEVCOLORCOMBINER_A_E 19
         /* bit size   */ #define GX_BP_TEVCOLORCOMBINER_A_SZ 4
 
-        /* raw mask   */ #define GX_BP_TEVCOLORCOMBINER_A_MASK (((1 << 4) - 1) << 31 - 19)
+        /* raw mask   */ #define GX_BP_TEVCOLORCOMBINER_A_MASK (((1 << 4) - 1) << (31 - 19))
         /* local mask */ #define GX_BP_TEVCOLORCOMBINER_A_LMASK ((1 << 4) - 1)
         /* bit shift  */ #define GX_BP_TEVCOLORCOMBINER_A_SHIFT 12
 
@@ -1416,7 +1420,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_TEVCOLORCOMBINER_BIAS_E 15
         /* bit size   */ #define GX_BP_TEVCOLORCOMBINER_BIAS_SZ 2
 
-        /* raw mask   */ #define GX_BP_TEVCOLORCOMBINER_BIAS_MASK (((1 << 2) - 1) << 31 - 15)
+        /* raw mask   */ #define GX_BP_TEVCOLORCOMBINER_BIAS_MASK (((1 << 2) - 1) << (31 - 15))
         /* local mask */ #define GX_BP_TEVCOLORCOMBINER_BIAS_LMASK ((1 << 2) - 1)
         /* bit shift  */ #define GX_BP_TEVCOLORCOMBINER_BIAS_SHIFT 16
 
@@ -1428,7 +1432,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_TEVCOLORCOMBINER_OP_OR_COMPARISON_E 13
         /* bit size   */ #define GX_BP_TEVCOLORCOMBINER_OP_OR_COMPARISON_SZ 1
 
-        /* raw mask   */ #define GX_BP_TEVCOLORCOMBINER_OP_OR_COMPARISON_MASK (((1 << 1) - 1) << 31 - 13)
+        /* raw mask   */ #define GX_BP_TEVCOLORCOMBINER_OP_OR_COMPARISON_MASK (((1 << 1) - 1) << (31 - 13))
         /* local mask */ #define GX_BP_TEVCOLORCOMBINER_OP_OR_COMPARISON_LMASK ((1 << 1) - 1)
         /* bit shift  */ #define GX_BP_TEVCOLORCOMBINER_OP_OR_COMPARISON_SHIFT 18
 
@@ -1440,7 +1444,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_TEVCOLORCOMBINER_CLAMP_E 12
         /* bit size   */ #define GX_BP_TEVCOLORCOMBINER_CLAMP_SZ 1
 
-        /* raw mask   */ #define GX_BP_TEVCOLORCOMBINER_CLAMP_MASK (((1 << 1) - 1) << 31 - 12)
+        /* raw mask   */ #define GX_BP_TEVCOLORCOMBINER_CLAMP_MASK (((1 << 1) - 1) << (31 - 12))
         /* local mask */ #define GX_BP_TEVCOLORCOMBINER_CLAMP_LMASK ((1 << 1) - 1)
         /* bit shift  */ #define GX_BP_TEVCOLORCOMBINER_CLAMP_SHIFT 19
 
@@ -1452,7 +1456,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_TEVCOLORCOMBINER_SCALE_OR_COMPARE_MODE_E 11
         /* bit size   */ #define GX_BP_TEVCOLORCOMBINER_SCALE_OR_COMPARE_MODE_SZ 2
 
-        /* raw mask   */ #define GX_BP_TEVCOLORCOMBINER_SCALE_OR_COMPARE_MODE_MASK (((1 << 2) - 1) << 31 - 11)
+        /* raw mask   */ #define GX_BP_TEVCOLORCOMBINER_SCALE_OR_COMPARE_MODE_MASK (((1 << 2) - 1) << (31 - 11))
         /* local mask */ #define GX_BP_TEVCOLORCOMBINER_SCALE_OR_COMPARE_MODE_LMASK ((1 << 2) - 1)
         /* bit shift  */ #define GX_BP_TEVCOLORCOMBINER_SCALE_OR_COMPARE_MODE_SHIFT 20
 
@@ -1464,7 +1468,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_TEVCOLORCOMBINER_DEST_E 9
         /* bit size   */ #define GX_BP_TEVCOLORCOMBINER_DEST_SZ 2
 
-        /* raw mask   */ #define GX_BP_TEVCOLORCOMBINER_DEST_MASK (((1 << 2) - 1) << 31 - 9)
+        /* raw mask   */ #define GX_BP_TEVCOLORCOMBINER_DEST_MASK (((1 << 2) - 1) << (31 - 9))
         /* local mask */ #define GX_BP_TEVCOLORCOMBINER_DEST_LMASK ((1 << 2) - 1)
         /* bit shift  */ #define GX_BP_TEVCOLORCOMBINER_DEST_SHIFT 22
 
@@ -1480,7 +1484,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_TEVREGLO_RED_E 31
         /* bit size   */ #define GX_BP_TEVREGLO_RED_SZ 11
 
-        /* raw mask   */ #define GX_BP_TEVREGLO_RED_MASK (((1 << 11) - 1) << 31 - 31)
+        /* raw mask   */ #define GX_BP_TEVREGLO_RED_MASK (((1 << 11) - 1) << (31 - 31))
         /* local mask */ #define GX_BP_TEVREGLO_RED_LMASK ((1 << 11) - 1)
         /* bit shift  */ #define GX_BP_TEVREGLO_RED_SHIFT 0
 
@@ -1492,7 +1496,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_TEVREGLO_ALPHA_E 19
         /* bit size   */ #define GX_BP_TEVREGLO_ALPHA_SZ 11
 
-        /* raw mask   */ #define GX_BP_TEVREGLO_ALPHA_MASK (((1 << 11) - 1) << 31 - 19)
+        /* raw mask   */ #define GX_BP_TEVREGLO_ALPHA_MASK (((1 << 11) - 1) << (31 - 19))
         /* local mask */ #define GX_BP_TEVREGLO_ALPHA_LMASK ((1 << 11) - 1)
         /* bit shift  */ #define GX_BP_TEVREGLO_ALPHA_SHIFT 12
 
@@ -1504,7 +1508,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_TEVREGLO_TYPE_E 8
         /* bit size   */ #define GX_BP_TEVREGLO_TYPE_SZ 1
 
-        /* raw mask   */ #define GX_BP_TEVREGLO_TYPE_MASK (((1 << 1) - 1) << 31 - 8)
+        /* raw mask   */ #define GX_BP_TEVREGLO_TYPE_MASK (((1 << 1) - 1) << (31 - 8))
         /* local mask */ #define GX_BP_TEVREGLO_TYPE_LMASK ((1 << 1) - 1)
         /* bit shift  */ #define GX_BP_TEVREGLO_TYPE_SHIFT 23
 
@@ -1520,7 +1524,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_TEVREGHI_BLUE_E 31
         /* bit size   */ #define GX_BP_TEVREGHI_BLUE_SZ 11
 
-        /* raw mask   */ #define GX_BP_TEVREGHI_BLUE_MASK (((1 << 11) - 1) << 31 - 31)
+        /* raw mask   */ #define GX_BP_TEVREGHI_BLUE_MASK (((1 << 11) - 1) << (31 - 31))
         /* local mask */ #define GX_BP_TEVREGHI_BLUE_LMASK ((1 << 11) - 1)
         /* bit shift  */ #define GX_BP_TEVREGHI_BLUE_SHIFT 0
 
@@ -1532,7 +1536,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_TEVREGHI_GREEN_E 19
         /* bit size   */ #define GX_BP_TEVREGHI_GREEN_SZ 11
 
-        /* raw mask   */ #define GX_BP_TEVREGHI_GREEN_MASK (((1 << 11) - 1) << 31 - 19)
+        /* raw mask   */ #define GX_BP_TEVREGHI_GREEN_MASK (((1 << 11) - 1) << (31 - 19))
         /* local mask */ #define GX_BP_TEVREGHI_GREEN_LMASK ((1 << 11) - 1)
         /* bit shift  */ #define GX_BP_TEVREGHI_GREEN_SHIFT 12
 
@@ -1544,7 +1548,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_TEVREGHI_TYPE_E 8
         /* bit size   */ #define GX_BP_TEVREGHI_TYPE_SZ 1
 
-        /* raw mask   */ #define GX_BP_TEVREGHI_TYPE_MASK (((1 << 1) - 1) << 31 - 8)
+        /* raw mask   */ #define GX_BP_TEVREGHI_TYPE_MASK (((1 << 1) - 1) << (31 - 8))
         /* local mask */ #define GX_BP_TEVREGHI_TYPE_LMASK ((1 << 1) - 1)
         /* bit shift  */ #define GX_BP_TEVREGHI_TYPE_SHIFT 23
 
@@ -1560,7 +1564,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_FOGRANGE_CENTER_E 31
         /* bit size   */ #define GX_BP_FOGRANGE_CENTER_SZ 10
 
-        /* raw mask   */ #define GX_BP_FOGRANGE_CENTER_MASK (((1 << 10) - 1) << 31 - 31)
+        /* raw mask   */ #define GX_BP_FOGRANGE_CENTER_MASK (((1 << 10) - 1) << (31 - 31))
         /* local mask */ #define GX_BP_FOGRANGE_CENTER_LMASK ((1 << 10) - 1)
         /* bit shift  */ #define GX_BP_FOGRANGE_CENTER_SHIFT 0
 
@@ -1572,7 +1576,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_FOGRANGE_ENABLED_E 21
         /* bit size   */ #define GX_BP_FOGRANGE_ENABLED_SZ 1
 
-        /* raw mask   */ #define GX_BP_FOGRANGE_ENABLED_MASK (((1 << 1) - 1) << 31 - 21)
+        /* raw mask   */ #define GX_BP_FOGRANGE_ENABLED_MASK (((1 << 1) - 1) << (31 - 21))
         /* local mask */ #define GX_BP_FOGRANGE_ENABLED_LMASK ((1 << 1) - 1)
         /* bit shift  */ #define GX_BP_FOGRANGE_ENABLED_SHIFT 10
 
@@ -1588,7 +1592,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_FOGRANGEK_HI_E 31
         /* bit size   */ #define GX_BP_FOGRANGEK_HI_SZ 12
 
-        /* raw mask   */ #define GX_BP_FOGRANGEK_HI_MASK (((1 << 12) - 1) << 31 - 31)
+        /* raw mask   */ #define GX_BP_FOGRANGEK_HI_MASK (((1 << 12) - 1) << (31 - 31))
         /* local mask */ #define GX_BP_FOGRANGEK_HI_LMASK ((1 << 12) - 1)
         /* bit shift  */ #define GX_BP_FOGRANGEK_HI_SHIFT 0
 
@@ -1600,7 +1604,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_FOGRANGEK_LO_E 19
         /* bit size   */ #define GX_BP_FOGRANGEK_LO_SZ 12
 
-        /* raw mask   */ #define GX_BP_FOGRANGEK_LO_MASK (((1 << 12) - 1) << 31 - 19)
+        /* raw mask   */ #define GX_BP_FOGRANGEK_LO_MASK (((1 << 12) - 1) << (31 - 19))
         /* local mask */ #define GX_BP_FOGRANGEK_LO_LMASK ((1 << 12) - 1)
         /* bit shift  */ #define GX_BP_FOGRANGEK_LO_SHIFT 12
 
@@ -1616,7 +1620,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_FOGPARAM0_A_MANT_E 31
         /* bit size   */ #define GX_BP_FOGPARAM0_A_MANT_SZ 11
 
-        /* raw mask   */ #define GX_BP_FOGPARAM0_A_MANT_MASK (((1 << 11) - 1) << 31 - 31)
+        /* raw mask   */ #define GX_BP_FOGPARAM0_A_MANT_MASK (((1 << 11) - 1) << (31 - 31))
         /* local mask */ #define GX_BP_FOGPARAM0_A_MANT_LMASK ((1 << 11) - 1)
         /* bit shift  */ #define GX_BP_FOGPARAM0_A_MANT_SHIFT 0
 
@@ -1628,7 +1632,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_FOGPARAM0_A_EXP_E 20
         /* bit size   */ #define GX_BP_FOGPARAM0_A_EXP_SZ 8
 
-        /* raw mask   */ #define GX_BP_FOGPARAM0_A_EXP_MASK (((1 << 8) - 1) << 31 - 20)
+        /* raw mask   */ #define GX_BP_FOGPARAM0_A_EXP_MASK (((1 << 8) - 1) << (31 - 20))
         /* local mask */ #define GX_BP_FOGPARAM0_A_EXP_LMASK ((1 << 8) - 1)
         /* bit shift  */ #define GX_BP_FOGPARAM0_A_EXP_SHIFT 11
 
@@ -1640,7 +1644,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_FOGPARAM0_A_SIGN_E 12
         /* bit size   */ #define GX_BP_FOGPARAM0_A_SIGN_SZ 1
 
-        /* raw mask   */ #define GX_BP_FOGPARAM0_A_SIGN_MASK (((1 << 1) - 1) << 31 - 12)
+        /* raw mask   */ #define GX_BP_FOGPARAM0_A_SIGN_MASK (((1 << 1) - 1) << (31 - 12))
         /* local mask */ #define GX_BP_FOGPARAM0_A_SIGN_LMASK ((1 << 1) - 1)
         /* bit shift  */ #define GX_BP_FOGPARAM0_A_SIGN_SHIFT 19
 
@@ -1656,7 +1660,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_FOGPARAM1_B_MAG_E 31
         /* bit size   */ #define GX_BP_FOGPARAM1_B_MAG_SZ 24
 
-        /* raw mask   */ #define GX_BP_FOGPARAM1_B_MAG_MASK (((1 << 24) - 1) << 31 - 31)
+        /* raw mask   */ #define GX_BP_FOGPARAM1_B_MAG_MASK (((1 << 24) - 1) << (31 - 31))
         /* local mask */ #define GX_BP_FOGPARAM1_B_MAG_LMASK ((1 << 24) - 1)
         /* bit shift  */ #define GX_BP_FOGPARAM1_B_MAG_SHIFT 0
 
@@ -1672,7 +1676,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_FOGPARAM2_B_SHIFT_E 31
         /* bit size   */ #define GX_BP_FOGPARAM2_B_SHIFT_SZ 5
 
-        /* raw mask   */ #define GX_BP_FOGPARAM2_B_SHIFT_MASK (((1 << 5) - 1) << 31 - 31)
+        /* raw mask   */ #define GX_BP_FOGPARAM2_B_SHIFT_MASK (((1 << 5) - 1) << (31 - 31))
         /* local mask */ #define GX_BP_FOGPARAM2_B_SHIFT_LMASK ((1 << 5) - 1)
         /* bit shift  */ #define GX_BP_FOGPARAM2_B_SHIFT_SHIFT 0
 
@@ -1688,7 +1692,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_FOGPARAM3_C_MANT_E 31
         /* bit size   */ #define GX_BP_FOGPARAM3_C_MANT_SZ 11
 
-        /* raw mask   */ #define GX_BP_FOGPARAM3_C_MANT_MASK (((1 << 11) - 1) << 31 - 31)
+        /* raw mask   */ #define GX_BP_FOGPARAM3_C_MANT_MASK (((1 << 11) - 1) << (31 - 31))
         /* local mask */ #define GX_BP_FOGPARAM3_C_MANT_LMASK ((1 << 11) - 1)
         /* bit shift  */ #define GX_BP_FOGPARAM3_C_MANT_SHIFT 0
 
@@ -1700,7 +1704,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_FOGPARAM3_C_EXP_E 20
         /* bit size   */ #define GX_BP_FOGPARAM3_C_EXP_SZ 8
 
-        /* raw mask   */ #define GX_BP_FOGPARAM3_C_EXP_MASK (((1 << 8) - 1) << 31 - 20)
+        /* raw mask   */ #define GX_BP_FOGPARAM3_C_EXP_MASK (((1 << 8) - 1) << (31 - 20))
         /* local mask */ #define GX_BP_FOGPARAM3_C_EXP_LMASK ((1 << 8) - 1)
         /* bit shift  */ #define GX_BP_FOGPARAM3_C_EXP_SHIFT 11
 
@@ -1712,7 +1716,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_FOGPARAM3_C_SIGN_E 12
         /* bit size   */ #define GX_BP_FOGPARAM3_C_SIGN_SZ 1
 
-        /* raw mask   */ #define GX_BP_FOGPARAM3_C_SIGN_MASK (((1 << 1) - 1) << 31 - 12)
+        /* raw mask   */ #define GX_BP_FOGPARAM3_C_SIGN_MASK (((1 << 1) - 1) << (31 - 12))
         /* local mask */ #define GX_BP_FOGPARAM3_C_SIGN_LMASK ((1 << 1) - 1)
         /* bit shift  */ #define GX_BP_FOGPARAM3_C_SIGN_SHIFT 19
 
@@ -1724,7 +1728,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_FOGPARAM3_PROJ_E 11
         /* bit size   */ #define GX_BP_FOGPARAM3_PROJ_SZ 1
 
-        /* raw mask   */ #define GX_BP_FOGPARAM3_PROJ_MASK (((1 << 1) - 1) << 31 - 11)
+        /* raw mask   */ #define GX_BP_FOGPARAM3_PROJ_MASK (((1 << 1) - 1) << (31 - 11))
         /* local mask */ #define GX_BP_FOGPARAM3_PROJ_LMASK ((1 << 1) - 1)
         /* bit shift  */ #define GX_BP_FOGPARAM3_PROJ_SHIFT 20
 
@@ -1736,7 +1740,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_FOGPARAM3_FSEL_E 10
         /* bit size   */ #define GX_BP_FOGPARAM3_FSEL_SZ 3
 
-        /* raw mask   */ #define GX_BP_FOGPARAM3_FSEL_MASK (((1 << 3) - 1) << 31 - 10)
+        /* raw mask   */ #define GX_BP_FOGPARAM3_FSEL_MASK (((1 << 3) - 1) << (31 - 10))
         /* local mask */ #define GX_BP_FOGPARAM3_FSEL_LMASK ((1 << 3) - 1)
         /* bit shift  */ #define GX_BP_FOGPARAM3_FSEL_SHIFT 21
 
@@ -1752,7 +1756,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_FOGCOLOR_RGB_E 31
         /* bit size   */ #define GX_BP_FOGCOLOR_RGB_SZ 24
 
-        /* raw mask   */ #define GX_BP_FOGCOLOR_RGB_MASK (((1 << 24) - 1) << 31 - 31)
+        /* raw mask   */ #define GX_BP_FOGCOLOR_RGB_MASK (((1 << 24) - 1) << (31 - 31))
         /* local mask */ #define GX_BP_FOGCOLOR_RGB_LMASK ((1 << 24) - 1)
         /* bit shift  */ #define GX_BP_FOGCOLOR_RGB_SHIFT 0
 
@@ -1768,7 +1772,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_ALPHACOMPARE_REF0_E 31
         /* bit size   */ #define GX_BP_ALPHACOMPARE_REF0_SZ 8
 
-        /* raw mask   */ #define GX_BP_ALPHACOMPARE_REF0_MASK (((1 << 8) - 1) << 31 - 31)
+        /* raw mask   */ #define GX_BP_ALPHACOMPARE_REF0_MASK (((1 << 8) - 1) << (31 - 31))
         /* local mask */ #define GX_BP_ALPHACOMPARE_REF0_LMASK ((1 << 8) - 1)
         /* bit shift  */ #define GX_BP_ALPHACOMPARE_REF0_SHIFT 0
 
@@ -1780,7 +1784,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_ALPHACOMPARE_REF1_E 23
         /* bit size   */ #define GX_BP_ALPHACOMPARE_REF1_SZ 8
 
-        /* raw mask   */ #define GX_BP_ALPHACOMPARE_REF1_MASK (((1 << 8) - 1) << 31 - 23)
+        /* raw mask   */ #define GX_BP_ALPHACOMPARE_REF1_MASK (((1 << 8) - 1) << (31 - 23))
         /* local mask */ #define GX_BP_ALPHACOMPARE_REF1_LMASK ((1 << 8) - 1)
         /* bit shift  */ #define GX_BP_ALPHACOMPARE_REF1_SHIFT 8
 
@@ -1792,7 +1796,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_ALPHACOMPARE_COMP0_E 15
         /* bit size   */ #define GX_BP_ALPHACOMPARE_COMP0_SZ 3
 
-        /* raw mask   */ #define GX_BP_ALPHACOMPARE_COMP0_MASK (((1 << 3) - 1) << 31 - 15)
+        /* raw mask   */ #define GX_BP_ALPHACOMPARE_COMP0_MASK (((1 << 3) - 1) << (31 - 15))
         /* local mask */ #define GX_BP_ALPHACOMPARE_COMP0_LMASK ((1 << 3) - 1)
         /* bit shift  */ #define GX_BP_ALPHACOMPARE_COMP0_SHIFT 16
 
@@ -1804,7 +1808,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_ALPHACOMPARE_COMP1_E 12
         /* bit size   */ #define GX_BP_ALPHACOMPARE_COMP1_SZ 3
 
-        /* raw mask   */ #define GX_BP_ALPHACOMPARE_COMP1_MASK (((1 << 3) - 1) << 31 - 12)
+        /* raw mask   */ #define GX_BP_ALPHACOMPARE_COMP1_MASK (((1 << 3) - 1) << (31 - 12))
         /* local mask */ #define GX_BP_ALPHACOMPARE_COMP1_LMASK ((1 << 3) - 1)
         /* bit shift  */ #define GX_BP_ALPHACOMPARE_COMP1_SHIFT 19
 
@@ -1816,7 +1820,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_ALPHACOMPARE_LOGIC_E 9
         /* bit size   */ #define GX_BP_ALPHACOMPARE_LOGIC_SZ 2
 
-        /* raw mask   */ #define GX_BP_ALPHACOMPARE_LOGIC_MASK (((1 << 2) - 1) << 31 - 9)
+        /* raw mask   */ #define GX_BP_ALPHACOMPARE_LOGIC_MASK (((1 << 2) - 1) << (31 - 9))
         /* local mask */ #define GX_BP_ALPHACOMPARE_LOGIC_LMASK ((1 << 2) - 1)
         /* bit shift  */ #define GX_BP_ALPHACOMPARE_LOGIC_SHIFT 22
 
@@ -1832,7 +1836,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_TEVKSEL_SWAP_RB_E 31
         /* bit size   */ #define GX_BP_TEVKSEL_SWAP_RB_SZ 2
 
-        /* raw mask   */ #define GX_BP_TEVKSEL_SWAP_RB_MASK (((1 << 2) - 1) << 31 - 31)
+        /* raw mask   */ #define GX_BP_TEVKSEL_SWAP_RB_MASK (((1 << 2) - 1) << (31 - 31))
         /* local mask */ #define GX_BP_TEVKSEL_SWAP_RB_LMASK ((1 << 2) - 1)
         /* bit shift  */ #define GX_BP_TEVKSEL_SWAP_RB_SHIFT 0
 
@@ -1844,7 +1848,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_TEVKSEL_SWAP_GA_E 29
         /* bit size   */ #define GX_BP_TEVKSEL_SWAP_GA_SZ 2
 
-        /* raw mask   */ #define GX_BP_TEVKSEL_SWAP_GA_MASK (((1 << 2) - 1) << 31 - 29)
+        /* raw mask   */ #define GX_BP_TEVKSEL_SWAP_GA_MASK (((1 << 2) - 1) << (31 - 29))
         /* local mask */ #define GX_BP_TEVKSEL_SWAP_GA_LMASK ((1 << 2) - 1)
         /* bit shift  */ #define GX_BP_TEVKSEL_SWAP_GA_SHIFT 2
 
@@ -1856,7 +1860,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_TEVKSEL_KCSEL_EVEN_E 27
         /* bit size   */ #define GX_BP_TEVKSEL_KCSEL_EVEN_SZ 5
 
-        /* raw mask   */ #define GX_BP_TEVKSEL_KCSEL_EVEN_MASK (((1 << 5) - 1) << 31 - 27)
+        /* raw mask   */ #define GX_BP_TEVKSEL_KCSEL_EVEN_MASK (((1 << 5) - 1) << (31 - 27))
         /* local mask */ #define GX_BP_TEVKSEL_KCSEL_EVEN_LMASK ((1 << 5) - 1)
         /* bit shift  */ #define GX_BP_TEVKSEL_KCSEL_EVEN_SHIFT 4
 
@@ -1868,7 +1872,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_TEVKSEL_KASEL_EVEN_E 22
         /* bit size   */ #define GX_BP_TEVKSEL_KASEL_EVEN_SZ 5
 
-        /* raw mask   */ #define GX_BP_TEVKSEL_KASEL_EVEN_MASK (((1 << 5) - 1) << 31 - 22)
+        /* raw mask   */ #define GX_BP_TEVKSEL_KASEL_EVEN_MASK (((1 << 5) - 1) << (31 - 22))
         /* local mask */ #define GX_BP_TEVKSEL_KASEL_EVEN_LMASK ((1 << 5) - 1)
         /* bit shift  */ #define GX_BP_TEVKSEL_KASEL_EVEN_SHIFT 9
 
@@ -1880,7 +1884,7 @@ typedef enum {
         /* end bit    */ #define GX_BP_TEVKSEL_KCSEL_ODD_E 17
         /* bit size   */ #define GX_BP_TEVKSEL_KCSEL_ODD_SZ 5
 
-        /* raw mask   */ #define GX_BP_TEVKSEL_KCSEL_ODD_MASK (((1 << 5) - 1) << 31 - 17)
+        /* raw mask   */ #define GX_BP_TEVKSEL_KCSEL_ODD_MASK (((1 << 5) - 1) << (31 - 17))
         /* local mask */ #define GX_BP_TEVKSEL_KCSEL_ODD_LMASK ((1 << 5) - 1)
         /* bit shift  */ #define GX_BP_TEVKSEL_KCSEL_ODD_SHIFT 14
 
@@ -1892,14 +1896,14 @@ typedef enum {
         /* end bit    */ #define GX_BP_TEVKSEL_KASEL_ODD_E 12
         /* bit size   */ #define GX_BP_TEVKSEL_KASEL_ODD_SZ 5
 
-        /* raw mask   */ #define GX_BP_TEVKSEL_KASEL_ODD_MASK (((1 << 5) - 1) << 31 - 12)
+        /* raw mask   */ #define GX_BP_TEVKSEL_KASEL_ODD_MASK (((1 << 5) - 1) << (31 - 12))
         /* local mask */ #define GX_BP_TEVKSEL_KASEL_ODD_LMASK ((1 << 5) - 1)
         /* bit shift  */ #define GX_BP_TEVKSEL_KASEL_ODD_SHIFT 19
 
         /* get value  */ #define GX_BP_GET_TEVKSEL_KASEL_ODD(reg) GX_BITGET((reg), 8, 5)
         /* set value  */ #define GX_BP_SET_TEVKSEL_KASEL_ODD(reg, x) ((reg) = GX_BITSET((reg), 8, 5, x))
 
-
+// clang-format on
 
 #ifdef __cplusplus
 }

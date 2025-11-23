@@ -52,7 +52,7 @@ void RFLInitMiddleDB(RFLMiddleDB* db, RFLMiddleDBType type, void* buffer,
     idb->userData2 = 0;
 
     switch (type) {
-    case RFLMiddleDBType_Random:
+    case RFLMiddleDBType_Random: {
         rparam = (RandomParam*)&idb->userData1;
 
         if (size > RFL_DB_CHAR_MAX) {
@@ -63,8 +63,10 @@ void RFLInitMiddleDB(RFLMiddleDB* db, RFLMiddleDBType type, void* buffer,
         rparam->age = RFLAge_All;
         rparam->race = RFLRace_All;
         break;
+    }
+
     case RFLMiddleDBType_HiddenNewer:
-    case RFLMiddleDBType_HiddenOlder:
+    case RFLMiddleDBType_HiddenOlder: {
         nparam = (HiddenNewOldParam*)&idb->userData1;
 
         if (size > RFLi_HDB_DATA_MAX) {
@@ -74,11 +76,18 @@ void RFLInitMiddleDB(RFLMiddleDB* db, RFLMiddleDBType type, void* buffer,
         nparam->srcIdx = -1;
         nparam->dstIdx = 0;
         break;
-    case RFLMiddleDBType_HiddenRandom:
+    }
+
+    case RFLMiddleDBType_HiddenRandom: {
         hparam = (HiddenRandomParam*)&idb->userData1;
         hparam->sex = RFLSex_All;
         hparam->dstIdx = 0;
         break;
+    }
+
+    default: {
+        break;
+    }
     }
 
     memset(idb->data, 0, RFLGetMiddleDBBufferSize(idb->size));
@@ -460,20 +469,27 @@ static void startUpdateDB_(RFLiMiddleDB* db) {
 
     switch (db->type) {
     case RFLMiddleDBType_HiddenNewer:
-    case RFLMiddleDBType_HiddenOlder:
+    case RFLMiddleDBType_HiddenOlder: {
         nparam = (HiddenNewOldParam*)&db->userData1;
         param2 = (Param2*)&db->userData2;
 
         nparam->dstIdx = 0;
         param2->lastSrcIdx = nparam->srcIdx;
         break;
-    case RFLMiddleDBType_HiddenRandom:
+    }
+
+    case RFLMiddleDBType_HiddenRandom: {
         hparam = (HiddenRandomParam*)&db->userData1;
         param2 = (Param2*)&db->userData2;
 
         hparam->dstIdx = 0;
         param2->lastSrcIdx = 0;
         break;
+    }
+
+    default: {
+        break;
+    }
     }
 }
 
@@ -501,18 +517,29 @@ RFLErrcode RFLiUpdateMiddleDBAsync(RFLMiddleDB* db, RFLiCallback cb,
     startUpdateDB_(idb);
 
     switch (idb->type) {
-    case RFLMiddleDBType_HiddenRandom:
+    case RFLMiddleDBType_HiddenRandom: {
         updateHiddenRandom_(idb, cache);
         break;
-    case RFLMiddleDBType_HiddenNewer:
+    }
+
+    case RFLMiddleDBType_HiddenNewer: {
         updateHiddenOld_(idb, FALSE, cache);
         break;
-    case RFLMiddleDBType_HiddenOlder:
+    }
+
+    case RFLMiddleDBType_HiddenOlder: {
         updateHiddenOld_(idb, TRUE, cache);
         break;
-    case RFLMiddleDBType_Random:
+    }
+
+    case RFLMiddleDBType_Random: {
         updateRandom_(idb);
         break;
+    }
+
+    default: {
+        break;
+    }
     }
 
     if (!RFLiIsWorking() && idb->callback != NULL) {
@@ -577,15 +604,22 @@ void RFLSetMiddleDBHiddenMask(RFLMiddleDB* db, RFLSex sex) {
     RFLiMiddleDB* idb = (RFLiMiddleDB*)db;
 
     switch (RFLGetMiddleDBType(db)) {
-    case RFLMiddleDBType_HiddenRandom:
+    case RFLMiddleDBType_HiddenRandom: {
         hparam = (HiddenRandomParam*)&idb->userData1;
         hparam->sex = sex;
         break;
+    }
+
     case RFLMiddleDBType_HiddenNewer:
-    case RFLMiddleDBType_HiddenOlder:
+    case RFLMiddleDBType_HiddenOlder: {
         nparam = (HiddenNewOldParam*)&idb->userData1;
         nparam->sex = sex;
         break;
+    }
+
+    default: {
+        break;
+    }
     }
 }
 

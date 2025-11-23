@@ -1,6 +1,7 @@
 #include <revolution/FS.h>
 #include <revolution/OS.h>
 #include <revolution/USB.h>
+
 #include <stdio.h>
 
 #define USB_HEAP_SIZE 0x1000
@@ -108,7 +109,7 @@ IPCResult IUSB_OpenLib(void) {
         USB_LOG("iusb size: %d lo: %x hi: %x\n", sizeof(USBCommandBlock), lo,
                 hi);
 
-        if ((u8*)lo + USB_HEAP_SIZE > hi) {
+        if ((u8*)lo + USB_HEAP_SIZE > (u8*)hi) {
             USB_ERR("Not enough IPC arena\n");
             result = IPC_RESULT_ALLOC_FAILED;
             goto end;

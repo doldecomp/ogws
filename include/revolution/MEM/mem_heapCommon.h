@@ -43,6 +43,10 @@ static uintptr_t GetUIntPtr(const void* p) {
     return (uintptr_t)p;
 }
 
+static int ComparePtr(const void* p0, const void* p1) {
+    return (const u8*)p0 - (const u8*)p1;
+}
+
 static void* AddU32ToPtr(const void* p, u32 ofs) {
     return (void*)(GetUIntPtr(p) + ofs);
 }

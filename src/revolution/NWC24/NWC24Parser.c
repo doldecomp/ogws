@@ -45,7 +45,7 @@ const char* NWC24GetMIMETypeStr(NWC24MIMEType type) {
     for (i = 0; i < ARRAY_SIZE(MIMETypeConv); i++) {
         // TODO: Fakematch
         conv = MIMETypeConv;
-        conv && !conv;
+        (void)(conv && !conv);
 
         if (type == conv[i]) {
             return MIMETypeStr[i];

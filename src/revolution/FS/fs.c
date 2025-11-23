@@ -1,6 +1,7 @@
 #include <revolution/FS.h>
 #include <revolution/IPC.h>
 #include <revolution/OS.h>
+
 #include <string.h>
 
 #define FS_HEAP_SIZE 0x1500
@@ -161,7 +162,7 @@ s32 ISFS_OpenLib(void) {
 
     __devfs = (char*)ROUND_UP_PTR(lo, 32);
 
-    if (firstFl && __devfs + FS_MAX_PATH > hi) {
+    if (firstFl && __devfs + FS_MAX_PATH > (char*)hi) {
         OSReport("APP ERROR: Not enough IPC arena\n");
         ret = IPC_RESULT_ALLOC_FAILED;
         goto end;
@@ -177,7 +178,7 @@ s32 ISFS_OpenLib(void) {
 
     base = (u8*)__devfs;
 
-    if (firstFl && base + FS_MAX_PATH + FS_HEAP_SIZE > hi) {
+    if (firstFl && base + FS_MAX_PATH + FS_HEAP_SIZE > (u8*)hi) {
         OSReport("APP ERROR: Not enough IPC arena\n");
         ret = IPC_RESULT_ALLOC_FAILED;
         goto end;
@@ -202,18 +203,29 @@ static s32 _isfsFuncCb(s32 result, void* arg) {
 
     if (result >= IPC_RESULT_OK) {
         switch (block->callbackState) {
-        case CB_STATE_GET_STATS:
+        case CB_STATE_GET_STATS: {
             _FSGetStatsCb(result, block);
             break;
-        case CB_STATE_READ_DIR:
+        }
+
+        case CB_STATE_READ_DIR: {
             _FSReadDirCb(result, block);
             break;
-        case CB_STATE_GET_ATTR:
+        }
+
+        case CB_STATE_GET_ATTR: {
             _FSGetAttrCb(result, block);
             break;
-        case CB_STATE_GET_USAGE:
+        }
+
+        case CB_STATE_GET_USAGE: {
             _FSGetUsageCb(result, block);
             break;
+        }
+
+        default: {
+            break;
+        }
         }
     }
 

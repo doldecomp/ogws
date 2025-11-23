@@ -3,8 +3,6 @@
 
 #include <revolution/GX.h>
 
-#include <cmath>
-
 namespace nw4r {
 namespace g3d {
 

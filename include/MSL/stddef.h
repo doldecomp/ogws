@@ -16,7 +16,7 @@ typedef intptr_t ptrdiff_t;
 
 typedef unsigned long size_t;
 
-#ifndef __cplusplus
+#if !defined(__cplusplus)
 typedef unsigned short wchar_t;
 #endif
 

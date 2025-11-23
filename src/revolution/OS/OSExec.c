@@ -1,6 +1,7 @@
 #include <revolution/ESP.h>
 #include <revolution/IPC.h>
 #include <revolution/OS.h>
+
 #include <string.h>
 
 #define MENU_TITLE_ID 0x0000000100000002
@@ -18,7 +19,7 @@ static s32 _ES_GetTicketViews(s32* fd, u64 tid, void* pViews, u32* count);
 static s32 _ES_LaunchTitle(s32* fd, u64 tid, void* pViews) DECOMP_DONT_INLINE;
 
 void __OSGetExecParams(OSExecParams* out) {
-    if (OS_DOL_EXEC_PARAMS >= (void*)0x80000000) {
+    if ((void*)OS_DOL_EXEC_PARAMS >= (void*)0x80000000) {
         memcpy(out, OS_DOL_EXEC_PARAMS, sizeof(OSExecParams));
     } else {
         out->WORD_0x0 = 0;

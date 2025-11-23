@@ -156,9 +156,14 @@ static NWC24Err NWC24OpenLibInternal(NWC24Work* work, NWC24LibState state) {
     case NWC24_ERR_FILE_CLOSE:
     case NWC24_ERR_FILE_OPEN:
     case NWC24_ERR_BROKEN:
-    case NWC24_ERR_FATAL:
+    case NWC24_ERR_FATAL: {
         NWC24iSetErrorCode(result - MANAGE_ERROR_CODE_BASE);
         break;
+    }
+
+    default: {
+        break;
+    }
     }
 
     return result;

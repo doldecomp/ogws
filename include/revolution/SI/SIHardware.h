@@ -8,7 +8,7 @@ extern "C" {
 /**
  * SI hardware registers
  */
-volatile u32 SI_HW_REGS[1] DECL_ADDRESS(0xCD006400);
+volatile u32 DECL_HW_REGS(SI) DECL_ADDRESS(0xCD006400);
 
 /**
  * Hardware register indexes
@@ -33,7 +33,7 @@ typedef enum {
 
     // SI communication RAM
     SI_RAM_BASE = (0xCD006480 - 0xCD006400) / sizeof(u32) //!< 0xCD006480
-};
+} SIHwReg;
 
 // SIPOLL - SI Poll Register
 #define SI_SIPOLL_X (0b1111111111 << 16)

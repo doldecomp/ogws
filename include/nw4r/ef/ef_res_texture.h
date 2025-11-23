@@ -32,7 +32,7 @@ private:
 
 public:
     explicit ResTexture(TextureData* pData = NULL) : mData(pData) {}
-    explicit ResTexture(const ResTexture& rOther) : mData(rOther.mData) {}
+    ResTexture(const ResTexture& rOther) : mData(rOther.mData) {}
 
     bool IsValid() const {
         return mData != NULL;

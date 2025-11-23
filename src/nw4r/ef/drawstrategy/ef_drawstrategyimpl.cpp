@@ -333,6 +333,10 @@ void DrawStrategyImpl::SetupGP(Particle* pParticle,
                             GXPosition3f32(0.0f, 0.0f, 0.0f);
                             break;
                         }
+
+                        default: {
+                            break;
+                        }
                         }
 
                         break;
@@ -365,8 +369,16 @@ void DrawStrategyImpl::SetupGP(Particle* pParticle,
                             GXPosition2f32(0.0f, 0.0f);
                             break;
                         }
+
+                        default: {
+                            break;
+                        }
                         }
 
+                        break;
+                    }
+
+                    default: {
                         break;
                     }
                     }
@@ -383,6 +395,10 @@ void DrawStrategyImpl::SetupGP(Particle* pParticle,
                     GXPosition1x16(0);
                     break;
                 }
+
+                default: {
+                    break;
+                }
                 }
             }
 
@@ -393,7 +409,6 @@ void DrawStrategyImpl::SetupGP(Particle* pParticle,
                     switch (vtxDescNrm.compCnt) {
                     case GX_NRM_XYZ: {
 
-                        // @bug Missing GX_U8/GX_U16
                         switch (vtxDescNrm.compType) {
                         case GX_S8: {
                             GXNormal3u8(0, 0, 0);
@@ -409,8 +424,17 @@ void DrawStrategyImpl::SetupGP(Particle* pParticle,
                             GXNormal3f32(0.0f, 0.0f, 0.0f);
                             break;
                         }
+
+                        // @bug Missing GX_U8/GX_U16
+                        default: {
+                            break;
+                        }
                         }
 
+                        break;
+                    }
+
+                    default: {
                         break;
                     }
                     }
@@ -425,6 +449,10 @@ void DrawStrategyImpl::SetupGP(Particle* pParticle,
 
                 case GX_INDEX16: {
                     GXNormal1x16(0);
+                    break;
+                }
+
+                default: {
                     break;
                 }
                 }
@@ -462,6 +490,10 @@ void DrawStrategyImpl::SetupGP(Particle* pParticle,
                             GXTexCoord2f32(0.0f, 0.0f);
                             break;
                         }
+
+                        default: {
+                            break;
+                        }
                         }
 
                         break;
@@ -494,8 +526,16 @@ void DrawStrategyImpl::SetupGP(Particle* pParticle,
                             GXTexCoord1f32(0.0f);
                             break;
                         }
+
+                        default: {
+                            break;
+                        }
                         }
 
+                        break;
+                    }
+
+                    default: {
                         break;
                     }
                     }
@@ -510,6 +550,10 @@ void DrawStrategyImpl::SetupGP(Particle* pParticle,
 
                 case GX_INDEX16: {
                     GXTexCoord1x16(0);
+                    break;
+                }
+
+                default: {
                     break;
                 }
                 }
@@ -824,7 +868,7 @@ bool DrawStrategyImpl::_SetupTexture(Particle* pParticle,
 
             math::MTX34Mult(&mtx, &work, &mtx);
 
-            if (!((rSetting.mFlags >> i + 7 /* FLAG_TEX1_PROJ */) & 1)) {
+            if (!((rSetting.mFlags >> (i + 7 /* FLAG_TEX1_PROJ */)) & 1)) {
                 GXLoadTexMtxImm(mtx, GX_TEXMTX0 + mTexmapMap[i] * 3,
                                 GX_MTX_2x4);
 

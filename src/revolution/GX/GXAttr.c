@@ -54,37 +54,57 @@ void GXSetVtxDesc(GXAttr name, GXAttrType type) {
 
 static DECOMP_INLINE void SETVCDATTR(GXAttr name, GXAttrType type) {
     switch (name) {
-    case GX_VA_PNMTXIDX:
+    case GX_VA_PNMTXIDX: {
         GX_CP_SET_VCD_LO_POSMATIDX(gxdt->vcdLoReg, type);
         break;
-    case GX_VA_TEX0MTXIDX:
+    }
+
+    case GX_VA_TEX0MTXIDX: {
         GX_CP_SET_VCD_LO_TEX0MATIDX(gxdt->vcdLoReg, type);
         break;
-    case GX_VA_TEX1MTXIDX:
+    }
+
+    case GX_VA_TEX1MTXIDX: {
         GX_CP_SET_VCD_LO_TEX1MATIDX(gxdt->vcdLoReg, type);
         break;
-    case GX_VA_TEX2MTXIDX:
+    }
+
+    case GX_VA_TEX2MTXIDX: {
         GX_CP_SET_VCD_LO_TEX2MATIDX(gxdt->vcdLoReg, type);
         break;
-    case GX_VA_TEX3MTXIDX:
+    }
+
+    case GX_VA_TEX3MTXIDX: {
         GX_CP_SET_VCD_LO_TEX3MATIDX(gxdt->vcdLoReg, type);
         break;
-    case GX_VA_TEX4MTXIDX:
+    }
+
+    case GX_VA_TEX4MTXIDX: {
         GX_CP_SET_VCD_LO_TEX4MATIDX(gxdt->vcdLoReg, type);
         break;
-    case GX_VA_TEX5MTXIDX:
+    }
+
+    case GX_VA_TEX5MTXIDX: {
         GX_CP_SET_VCD_LO_TEX5MATIDX(gxdt->vcdLoReg, type);
         break;
-    case GX_VA_TEX6MTXIDX:
+    }
+
+    case GX_VA_TEX6MTXIDX: {
         GX_CP_SET_VCD_LO_TEX6MATIDX(gxdt->vcdLoReg, type);
         break;
-    case GX_VA_TEX7MTXIDX:
+    }
+
+    case GX_VA_TEX7MTXIDX: {
         GX_CP_SET_VCD_LO_TEX7MATIDX(gxdt->vcdLoReg, type);
         break;
-    case GX_VA_POS:
+    }
+
+    case GX_VA_POS: {
         GX_CP_SET_VCD_LO_POSITION(gxdt->vcdLoReg, type);
         break;
-    case GX_VA_NRM:
+    }
+
+    case GX_VA_NRM: {
         if (type != GX_NONE) {
             gxdt->normal = TRUE;
             // GX_VA_NRM and GX_VA_NBT should not be enabled at the same time
@@ -94,7 +114,9 @@ static DECOMP_INLINE void SETVCDATTR(GXAttr name, GXAttrType type) {
             gxdt->normal = FALSE;
         }
         break;
-    case GX_VA_NBT:
+    }
+
+    case GX_VA_NBT: {
         if (type != GX_NONE) {
             gxdt->binormal = TRUE;
             // GX_VA_NRM and GX_VA_NBT should not be enabled at the same time
@@ -104,38 +126,61 @@ static DECOMP_INLINE void SETVCDATTR(GXAttr name, GXAttrType type) {
             gxdt->binormal = FALSE;
         }
         break;
-    case GX_VA_CLR0:
+    }
+
+    case GX_VA_CLR0: {
         GX_CP_SET_VCD_LO_COLORDIFFUSED(gxdt->vcdLoReg, type);
         break;
-    case GX_VA_CLR1:
+    }
+
+    case GX_VA_CLR1: {
         GX_CP_SET_VCD_LO_COLORSPECULAR(gxdt->vcdLoReg, type);
         break;
-    case GX_VA_TEX0:
+    }
+
+    case GX_VA_TEX0: {
         GX_CP_SET_VCD_HI_TEX0COORD(gxdt->vcdHiReg, type);
         break;
-    case GX_VA_TEX1:
+    }
+
+    case GX_VA_TEX1: {
         GX_CP_SET_VCD_HI_TEX1COORD(gxdt->vcdHiReg, type);
         break;
-    case GX_VA_TEX2:
+    }
+
+    case GX_VA_TEX2: {
         GX_CP_SET_VCD_HI_TEX2COORD(gxdt->vcdHiReg, type);
         break;
-    case GX_VA_TEX3:
+    }
+
+    case GX_VA_TEX3: {
         GX_CP_SET_VCD_HI_TEX3COORD(gxdt->vcdHiReg, type);
         break;
-    case GX_VA_TEX4:
+    }
+
+    case GX_VA_TEX4: {
         GX_CP_SET_VCD_HI_TEX4COORD(gxdt->vcdHiReg, type);
         break;
-    case GX_VA_TEX5:
+    }
+
+    case GX_VA_TEX5: {
         GX_CP_SET_VCD_HI_TEX5COORD(gxdt->vcdHiReg, type);
         break;
-    case GX_VA_TEX6:
+    }
+
+    case GX_VA_TEX6: {
         GX_CP_SET_VCD_HI_TEX6COORD(gxdt->vcdHiReg, type);
         break;
-    case GX_VA_TEX7:
+    }
+
+    case GX_VA_TEX7: {
         GX_CP_SET_VCD_HI_TEX7COORD(gxdt->vcdHiReg, type);
         break;
-    default:
+    }
+
+    default: {
         break;
+    }
     }
 }
 
@@ -212,76 +257,122 @@ void GXGetVtxDesc(GXAttr name, GXAttrType* type) {
     GXAttrType result;
 
     switch (name) {
-    case GX_VA_PNMTXIDX:
+    case GX_VA_PNMTXIDX: {
         result = GX_CP_GET_VCD_LO_POSMATIDX(gxdt->vcdLoReg);
         break;
-    case GX_VA_TEX0MTXIDX:
+    }
+
+    case GX_VA_TEX0MTXIDX: {
         result = GX_CP_GET_VCD_LO_TEX0MATIDX(gxdt->vcdLoReg);
         break;
-    case GX_VA_TEX1MTXIDX:
+    }
+
+    case GX_VA_TEX1MTXIDX: {
         result = GX_CP_GET_VCD_LO_TEX1MATIDX(gxdt->vcdLoReg);
         break;
-    case GX_VA_TEX2MTXIDX:
+    }
+
+    case GX_VA_TEX2MTXIDX: {
         result = GX_CP_GET_VCD_LO_TEX2MATIDX(gxdt->vcdLoReg);
         break;
-    case GX_VA_TEX3MTXIDX:
+    }
+
+    case GX_VA_TEX3MTXIDX: {
         result = GX_CP_GET_VCD_LO_TEX3MATIDX(gxdt->vcdLoReg);
         break;
-    case GX_VA_TEX4MTXIDX:
+    }
+
+    case GX_VA_TEX4MTXIDX: {
         result = GX_CP_GET_VCD_LO_TEX4MATIDX(gxdt->vcdLoReg);
         break;
-    case GX_VA_TEX5MTXIDX:
+    }
+
+    case GX_VA_TEX5MTXIDX: {
         result = GX_CP_GET_VCD_LO_TEX5MATIDX(gxdt->vcdLoReg);
         break;
-    case GX_VA_TEX6MTXIDX:
+    }
+
+    case GX_VA_TEX6MTXIDX: {
         result = GX_CP_GET_VCD_LO_TEX6MATIDX(gxdt->vcdLoReg);
         break;
-    case GX_VA_TEX7MTXIDX:
+    }
+
+    case GX_VA_TEX7MTXIDX: {
         result = GX_CP_GET_VCD_LO_TEX7MATIDX(gxdt->vcdLoReg);
         break;
-    case GX_VA_POS:
+    }
+
+    case GX_VA_POS: {
         result = GX_CP_GET_VCD_LO_POSITION(gxdt->vcdLoReg);
         break;
-    case GX_VA_NRM:
+    }
+
+    case GX_VA_NRM: {
         result =
             gxdt->normal ? GX_CP_GET_VCD_LO_NORMAL(gxdt->vcdLoReg) : GX_NONE;
         break;
-    case GX_VA_NBT:
+    }
+
+    case GX_VA_NBT: {
         result =
             gxdt->binormal ? GX_CP_GET_VCD_LO_NORMAL(gxdt->vcdLoReg) : GX_NONE;
         break;
-    case GX_VA_CLR0:
+    }
+
+    case GX_VA_CLR0: {
         result = GX_CP_GET_VCD_LO_COLORDIFFUSED(gxdt->vcdLoReg);
         break;
-    case GX_VA_CLR1:
+    }
+
+    case GX_VA_CLR1: {
         result = GX_CP_GET_VCD_LO_COLORSPECULAR(gxdt->vcdLoReg);
         break;
-    case GX_VA_TEX0:
+    }
+
+    case GX_VA_TEX0: {
         result = GX_CP_GET_VCD_HI_TEX0COORD(gxdt->vcdHiReg);
         break;
-    case GX_VA_TEX1:
+    }
+
+    case GX_VA_TEX1: {
         result = GX_CP_GET_VCD_HI_TEX1COORD(gxdt->vcdHiReg);
         break;
-    case GX_VA_TEX2:
+    }
+
+    case GX_VA_TEX2: {
         result = GX_CP_GET_VCD_HI_TEX2COORD(gxdt->vcdHiReg);
         break;
-    case GX_VA_TEX3:
+    }
+
+    case GX_VA_TEX3: {
         result = GX_CP_GET_VCD_HI_TEX3COORD(gxdt->vcdHiReg);
         break;
-    case GX_VA_TEX4:
+    }
+
+    case GX_VA_TEX4: {
         result = GX_CP_GET_VCD_HI_TEX4COORD(gxdt->vcdHiReg);
         break;
-    case GX_VA_TEX5:
+    }
+
+    case GX_VA_TEX5: {
         result = GX_CP_GET_VCD_HI_TEX5COORD(gxdt->vcdHiReg);
         break;
-    case GX_VA_TEX6:
+    }
+
+    case GX_VA_TEX6: {
         result = GX_CP_GET_VCD_HI_TEX6COORD(gxdt->vcdHiReg);
         break;
-    case GX_VA_TEX7:
+    }
+
+    case GX_VA_TEX7: {
         result = GX_CP_GET_VCD_HI_TEX7COORD(gxdt->vcdHiReg);
         break;
-    default:
+    }
+
+    default: {
         result = GX_NONE;
+        break;
+    }
     }
 
     *type = result;
@@ -336,13 +427,15 @@ static DECOMP_INLINE void SETVAT(u32* vatA, u32* vatB, u32* vatC, GXAttr attr,
                                  GXCompCnt compCnt, GXCompType compType,
                                  u8 shift) {
     switch (attr) {
-    case GX_VA_POS:
+    case GX_VA_POS: {
         GX_CP_SET_VAT_GROUP0_POS_CNT(*vatA, compCnt);
         GX_CP_SET_VAT_GROUP0_POS_TYPE(*vatA, compType);
         GX_CP_SET_VAT_GROUP0_POS_SHIFT(*vatA, shift);
         break;
+    }
+
     case GX_VA_NRM:
-    case GX_VA_NBT:
+    case GX_VA_NBT: {
         GX_CP_SET_VAT_GROUP0_NRM_TYPE(*vatA, compType);
         if (compCnt == GX_NRM_NBT3) {
             // Probably because the compCnt can only be one bit?
@@ -353,54 +446,79 @@ static DECOMP_INLINE void SETVAT(u32* vatA, u32* vatB, u32* vatC, GXAttr attr,
             GX_CP_SET_VAT_GROUP0_NORMALINDEX3(*vatA, FALSE);
         }
         break;
-    case GX_VA_CLR0:
+    }
+
+    case GX_VA_CLR0: {
         GX_CP_SET_VAT_GROUP0_COLORDIFF_CNT(*vatA, compCnt);
         GX_CP_SET_VAT_GROUP0_COLORDIFF_TYPE(*vatA, compType);
         break;
-    case GX_VA_CLR1:
+    }
+
+    case GX_VA_CLR1: {
         GX_CP_SET_VAT_GROUP0_COLORSPEC_CNT(*vatA, compCnt);
         GX_CP_SET_VAT_GROUP0_COLORSPEC_TYPE(*vatA, compType);
         break;
-    case GX_VA_TEX0:
+    }
+
+    case GX_VA_TEX0: {
         GX_CP_SET_VAT_GROUP0_TXC0_CNT(*vatA, compCnt);
         GX_CP_SET_VAT_GROUP0_TXC0_TYPE(*vatA, compType);
         GX_CP_SET_VAT_GROUP0_TXC0_SHIFT(*vatA, shift);
         break;
-    case GX_VA_TEX1:
+    }
+
+    case GX_VA_TEX1: {
         GX_CP_SET_VAT_GROUP1_TXC1_CNT(*vatB, compCnt);
         GX_CP_SET_VAT_GROUP1_TXC1_TYPE(*vatB, compType);
         GX_CP_SET_VAT_GROUP1_TXC1_SHIFT(*vatB, shift);
         break;
-    case GX_VA_TEX2:
+    }
+
+    case GX_VA_TEX2: {
         GX_CP_SET_VAT_GROUP1_TXC2_CNT(*vatB, compCnt);
         GX_CP_SET_VAT_GROUP1_TXC2_TYPE(*vatB, compType);
         GX_CP_SET_VAT_GROUP1_TXC2_SHIFT(*vatB, shift);
         break;
-    case GX_VA_TEX3:
+    }
+
+    case GX_VA_TEX3: {
         GX_CP_SET_VAT_GROUP1_TXC3_CNT(*vatB, compCnt);
         GX_CP_SET_VAT_GROUP1_TXC3_TYPE(*vatB, compType);
         GX_CP_SET_VAT_GROUP1_TXC3_SHIFT(*vatB, shift);
         break;
-    case GX_VA_TEX4:
+    }
+
+    case GX_VA_TEX4: {
         GX_CP_SET_VAT_GROUP1_TXC4_CNT(*vatB, compCnt);
         GX_CP_SET_VAT_GROUP1_TXC4_TYPE(*vatB, compType);
         GX_CP_SET_VAT_GROUP2_TXC4_SHIFT(*vatC, shift);
         break;
-    case GX_VA_TEX5:
+    }
+
+    case GX_VA_TEX5: {
         GX_CP_SET_VAT_GROUP2_TXC5_CNT(*vatC, compCnt);
         GX_CP_SET_VAT_GROUP2_TXC5_TYPE(*vatC, compType);
         GX_CP_SET_VAT_GROUP2_TXC5_SHIFT(*vatC, shift);
         break;
-    case GX_VA_TEX6:
+    }
+
+    case GX_VA_TEX6: {
         GX_CP_SET_VAT_GROUP2_TXC6_CNT(*vatC, compCnt);
         GX_CP_SET_VAT_GROUP2_TXC6_TYPE(*vatC, compType);
         GX_CP_SET_VAT_GROUP2_TXC6_SHIFT(*vatC, shift);
         break;
-    case GX_VA_TEX7:
+    }
+
+    case GX_VA_TEX7: {
         GX_CP_SET_VAT_GROUP2_TXC7_CNT(*vatC, compCnt);
         GX_CP_SET_VAT_GROUP2_TXC7_TYPE(*vatC, compType);
         GX_CP_SET_VAT_GROUP2_TXC7_SHIFT(*vatC, shift);
         break;
+    }
+
+    default: {
+        break;
+    }
     }
 }
 
@@ -452,13 +570,15 @@ void GXGetVtxAttrFmt(GXVtxFmt fmt, GXAttr attr, GXCompCnt* compCnt,
     vatC = &gxdt->vatC[fmt];
 
     switch (attr) {
-    case GX_VA_POS:
+    case GX_VA_POS: {
         *compCnt = GX_CP_GET_VAT_GROUP0_POS_CNT(*vatA);
         *compType = GX_CP_GET_VAT_GROUP0_POS_TYPE(*vatA);
         *shift = GX_CP_GET_VAT_GROUP0_POS_SHIFT(*vatA);
         break;
+    }
+
     case GX_VA_NRM:
-    case GX_VA_NBT:
+    case GX_VA_NBT: {
         *compCnt = GX_CP_GET_VAT_GROUP0_NRM_CNT(*vatA);
 
         // Undoing what SETVAT did
@@ -470,72 +590,101 @@ void GXGetVtxAttrFmt(GXVtxFmt fmt, GXAttr attr, GXCompCnt* compCnt,
         *compType = GX_CP_GET_VAT_GROUP0_NRM_TYPE(*vatA);
         *shift = GetFracForNrm(*compType);
         break;
-    case GX_VA_CLR0:
+    }
+
+    case GX_VA_CLR0: {
         *compCnt = GX_CP_GET_VAT_GROUP0_COLORDIFF_CNT(*vatA);
         *compType = GX_CP_GET_VAT_GROUP0_COLORDIFF_TYPE(*vatA);
         *shift = 0;
         break;
-    case GX_VA_CLR1:
+    }
+
+    case GX_VA_CLR1: {
         *compCnt = GX_CP_GET_VAT_GROUP0_COLORSPEC_CNT(*vatA);
         *compType = GX_CP_GET_VAT_GROUP0_COLORSPEC_TYPE(*vatA);
         *shift = 0;
         break;
-    case GX_VA_TEX0:
+    }
+
+    case GX_VA_TEX0: {
         *compCnt = GX_CP_GET_VAT_GROUP0_TXC0_CNT(*vatA);
         *compType = GX_CP_GET_VAT_GROUP0_TXC0_TYPE(*vatA);
         *shift = GX_CP_GET_VAT_GROUP0_TXC0_SHIFT(*vatA);
         break;
-    case GX_VA_TEX1:
+    }
+
+    case GX_VA_TEX1: {
         *compCnt = GX_CP_GET_VAT_GROUP1_TXC1_CNT(*vatB);
         *compType = GX_CP_GET_VAT_GROUP1_TXC1_TYPE(*vatB);
         *shift = GX_CP_GET_VAT_GROUP1_TXC1_SHIFT(*vatB);
         break;
-    case GX_VA_TEX2:
+    }
+
+    case GX_VA_TEX2: {
         *compCnt = GX_CP_GET_VAT_GROUP1_TXC2_CNT(*vatB);
         *compType = GX_CP_GET_VAT_GROUP1_TXC2_TYPE(*vatB);
         *shift = GX_CP_GET_VAT_GROUP1_TXC2_SHIFT(*vatB);
         break;
-    case GX_VA_TEX3:
+    }
+
+    case GX_VA_TEX3: {
         *compCnt = GX_CP_GET_VAT_GROUP1_TXC3_CNT(*vatB);
         *compType = GX_CP_GET_VAT_GROUP1_TXC3_TYPE(*vatB);
         *shift = GX_CP_GET_VAT_GROUP1_TXC3_SHIFT(*vatB);
         break;
-    case GX_VA_TEX4:
+    }
+
+    case GX_VA_TEX4: {
         *compCnt = GX_CP_GET_VAT_GROUP1_TXC4_CNT(*vatB);
         *compType = GX_CP_GET_VAT_GROUP1_TXC4_TYPE(*vatB);
         *shift = GX_CP_GET_VAT_GROUP2_TXC4_SHIFT(*vatC);
         break;
-    case GX_VA_TEX5:
+    }
+
+    case GX_VA_TEX5: {
         *compCnt = GX_CP_GET_VAT_GROUP2_TXC5_CNT(*vatC);
         *compType = GX_CP_GET_VAT_GROUP2_TXC5_TYPE(*vatC);
         *shift = GX_CP_GET_VAT_GROUP2_TXC5_SHIFT(*vatC);
         break;
-    case GX_VA_TEX6:
+    }
+
+    case GX_VA_TEX6: {
         *compCnt = GX_CP_GET_VAT_GROUP2_TXC6_CNT(*vatC);
         *compType = GX_CP_GET_VAT_GROUP2_TXC6_TYPE(*vatC);
         *shift = GX_CP_GET_VAT_GROUP2_TXC6_SHIFT(*vatC);
         break;
-    case GX_VA_TEX7:
+    }
+
+    case GX_VA_TEX7: {
         *compCnt = GX_CP_GET_VAT_GROUP2_TXC7_CNT(*vatC);
         *compType = GX_CP_GET_VAT_GROUP2_TXC7_TYPE(*vatC);
         *shift = GX_CP_GET_VAT_GROUP2_TXC7_SHIFT(*vatC);
         break;
-    default:
+    }
+
+    default: {
         *compCnt = GX_POS_XYZ;
         *compType = GX_U8;
         *shift = 0;
+        break;
+    }
     }
 }
 
 static u8 GetFracForNrm(GXCompType compType) {
     switch (compType) {
-    case GX_S8:
+    case GX_S8: {
         return 6;
-    case GX_S16:
+    }
+
+    case GX_S16: {
         return 14;
+    }
+
     case GX_U16:
-    default:
+    default: {
         return 0;
+    }
     }
 }
 
@@ -584,69 +733,102 @@ void GXSetTexCoordGen2(GXTexCoordID id, GXTexGenType type, GXTexGenSrc src,
     inputRow = 5;
 
     switch (src) {
-    case GX_TG_POS:
+    case GX_TG_POS: {
         inputRow = 0;
         inputForm = GX_XF_TEX_FORM_ABC1;
         break;
-    case GX_TG_NRM:
+    }
+
+    case GX_TG_NRM: {
         inputRow = 1;
         inputForm = GX_XF_TEX_FORM_ABC1;
         break;
-    case GX_TG_BINRM:
+    }
+
+    case GX_TG_BINRM: {
         inputRow = 3;
         inputForm = GX_XF_TEX_FORM_ABC1;
         break;
-    case GX_TG_TANGENT:
+    }
+
+    case GX_TG_TANGENT: {
         inputRow = 4;
         inputForm = GX_XF_TEX_FORM_ABC1;
         break;
-    case GX_TG_COLOR0:
+    }
+
+    case GX_TG_COLOR0: {
         inputRow = 2;
-        break;
-    case GX_TG_COLOR1:
-        inputRow = 2;
-        break;
-    case GX_TG_TEX0:
-        inputRow = 5;
-        break;
-    case GX_TG_TEX1:
-        inputRow = 6;
-        break;
-    case GX_TG_TEX2:
-        inputRow = 7;
-        break;
-    case GX_TG_TEX3:
-        inputRow = 8;
-        break;
-    case GX_TG_TEX4:
-        inputRow = 9;
-        break;
-    case GX_TG_TEX5:
-        inputRow = 10;
-        break;
-    case GX_TG_TEX6:
-        inputRow = 11;
-        break;
-    case GX_TG_TEX7:
-        inputRow = 12;
-        break;
-    default:
         break;
     }
 
+    case GX_TG_COLOR1: {
+        inputRow = 2;
+        break;
+    }
+
+    case GX_TG_TEX0: {
+        inputRow = 5;
+        break;
+    }
+
+    case GX_TG_TEX1: {
+        inputRow = 6;
+        break;
+    }
+
+    case GX_TG_TEX2: {
+        inputRow = 7;
+        break;
+    }
+
+    case GX_TG_TEX3: {
+        inputRow = 8;
+        break;
+    }
+
+    case GX_TG_TEX4: {
+        inputRow = 9;
+        break;
+    }
+
+    case GX_TG_TEX5: {
+        inputRow = 10;
+        break;
+    }
+
+    case GX_TG_TEX6: {
+        inputRow = 11;
+        break;
+    }
+
+    case GX_TG_TEX7: {
+        inputRow = 12;
+        break;
+    }
+
+    default: {
+        break;
+    }
+    }
+
     switch (type) {
-    case GX_TG_MTX2x4:
+    case GX_TG_MTX2x4: {
         reg = 0;
         GX_XF_SET_TEX_PROJTYPE(reg, GX_XF_TEX_PROJ_ST); // 2x4 projection
         GX_XF_SET_TEX_INPUTFORM(reg, inputForm);
         GX_XF_SET_TEX_SRCROW(reg, inputRow);
         break;
-    case GX_TG_MTX3x4:
+    }
+
+    case GX_TG_MTX3x4: {
         reg = 0;
         GX_XF_SET_TEX_PROJTYPE(reg, GX_XF_TEX_PROJ_STQ); // 3x4 projection
         GX_XF_SET_TEX_INPUTFORM(reg, inputForm);
         GX_XF_SET_TEX_SRCROW(reg, inputRow);
         break;
+    }
+
     case GX_TG_BUMP0:
     case GX_TG_BUMP1:
     case GX_TG_BUMP2:
@@ -654,7 +836,7 @@ void GXSetTexCoordGen2(GXTexCoordID id, GXTexGenType type, GXTexGenSrc src,
     case GX_TG_BUMP4:
     case GX_TG_BUMP5:
     case GX_TG_BUMP6:
-    case GX_TG_BUMP7:
+    case GX_TG_BUMP7: {
         reg = 0;
         GX_XF_SET_TEX_INPUTFORM(reg, inputForm);
         GX_XF_SET_TEX_TEXGENTYPE(reg, GX_XF_TG_BUMP);
@@ -662,7 +844,9 @@ void GXSetTexCoordGen2(GXTexCoordID id, GXTexGenType type, GXTexGenSrc src,
         GX_XF_SET_TEX_BUMPSRCTEX(reg, src - GX_TG_TEXCOORD0);
         GX_XF_SET_TEX_BUMPSRCLIGHT(reg, type - GX_TG_BUMP0);
         break;
-    case GX_TG_SRTG:
+    }
+
+    case GX_TG_SRTG: {
         reg = 0;
         GX_XF_SET_TEX_INPUTFORM(reg, inputForm);
 
@@ -674,8 +858,11 @@ void GXSetTexCoordGen2(GXTexCoordID id, GXTexGenType type, GXTexGenSrc src,
 
         GX_XF_SET_TEX_SRCROW(reg, 2);
         break;
-    default:
+    }
+
+    default: {
         break;
+    }
     }
 
     gxdt->texRegs[id] = reg;
@@ -687,30 +874,45 @@ void GXSetTexCoordGen2(GXTexCoordID id, GXTexGenType type, GXTexGenSrc src,
     gxdt->dualTexRegs[id] = reg;
 
     switch (id) {
-    case GX_TEXCOORD0:
+    case GX_TEXCOORD0: {
         GX_XF_SET_MATRIXINDEX0_TEX0(gxdt->matrixIndex0, texMtxIdx);
         break;
-    case GX_TEXCOORD1:
+    }
+
+    case GX_TEXCOORD1: {
         GX_XF_SET_MATRIXINDEX0_TEX1(gxdt->matrixIndex0, texMtxIdx);
         break;
-    case GX_TEXCOORD2:
+    }
+
+    case GX_TEXCOORD2: {
         GX_XF_SET_MATRIXINDEX0_TEX2(gxdt->matrixIndex0, texMtxIdx);
         break;
-    case GX_TEXCOORD3:
+    }
+
+    case GX_TEXCOORD3: {
         GX_XF_SET_MATRIXINDEX0_TEX3(gxdt->matrixIndex0, texMtxIdx);
         break;
-    case GX_TEXCOORD4:
+    }
+
+    case GX_TEXCOORD4: {
         GX_XF_SET_MATRIXINDEX1_TEX4(gxdt->matrixIndex1, texMtxIdx);
         break;
-    case GX_TEXCOORD5:
+    }
+
+    case GX_TEXCOORD5: {
         GX_XF_SET_MATRIXINDEX1_TEX5(gxdt->matrixIndex1, texMtxIdx);
         break;
-    case GX_TEXCOORD6:
+    }
+
+    case GX_TEXCOORD6: {
         GX_XF_SET_MATRIXINDEX1_TEX6(gxdt->matrixIndex1, texMtxIdx);
         break;
-    default:
+    }
+
+    default: {
         GX_XF_SET_MATRIXINDEX1_TEX7(gxdt->matrixIndex1, texMtxIdx);
         break;
+    }
     }
 
     gxdt->gxDirtyFlags |= GX_DIRTY_MTX_IDX;

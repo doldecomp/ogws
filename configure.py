@@ -146,6 +146,7 @@ version_num = VERSIONS.index(config.version)
 config.extra_clang_flags = [
     "-Iinclude/MSL/internal", # Allow clangd to see internal MSL headers
     "-Wno-invalid-offsetof",  # Silence non-POD offsetof 
+    "-fshort-wchar",          # Force wide characters as 16-bit 
 ]
 
 def find_directories(root_path: str, recursive: bool) -> list[str]:

@@ -25,7 +25,7 @@ class PlayerHeap;
 namespace detail {
 
 class BasicSound {
-    friend class SoundHandle;
+    friend class nw4r::snd::SoundHandle;
 
 public:
     NW4R_UT_RTTI_DECL(BasicSound);

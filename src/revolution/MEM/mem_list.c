@@ -1,8 +1,6 @@
 #include <revolution/MEM.h>
 
-/**
- * Get list node from a list object
- */
+// Gets the list node from a list object
 #define OBJECT_GET_NODE(list, object) ((MEMLink*)((char*)object + list->offset))
 
 void MEMInitList(MEMList* list, u16 offset) {

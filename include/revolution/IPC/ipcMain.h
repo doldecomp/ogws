@@ -8,11 +8,11 @@ extern "C" {
 #endif
 
 inline u32 ACRReadReg(u32 reg) {
-    return IPC_HW_REGS_PPC[reg / 4];
+    return IPC_PPC_HW_REGS[reg / 4];
 }
 
 inline void ACRWriteReg(u32 reg, u32 val) {
-    IPC_HW_REGS_PPC[reg / 4] = val;
+    IPC_PPC_HW_REGS[reg / 4] = val;
 }
 
 void IPCInit(void);

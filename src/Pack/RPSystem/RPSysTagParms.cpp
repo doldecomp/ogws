@@ -12,7 +12,11 @@
  * @param pParent Parent container
  * @param pTag Parameter tag
  */
+#if defined(NONMATCHING) || defined(COMPAT_ANY)
+RPSysTagParm::RPSysTagParm(RPSysTagParameters* pParent, const char* pTag)
+#else
 RPSysTagParm::RPSysTagParm(RPSysTagParameters* pParent, char* pTag)
+#endif
     : mpTag(pTag), mpNext(NULL) {
 
     pParent->add(this);
@@ -81,8 +85,14 @@ template <> void RPSysPrimTagParm<int>::dump() {}
  * @param pParent Parent container
  * @param pTag Parameter tag
  */
+#if defined(NONMATCHING) || defined(COMPAT_ANY)
+RPSysStringTagParm::RPSysStringTagParm(RPSysTagParameters* pParent,
+                                       const char* pTag)
+    : RPSysTagParm(pParent, pTag), mpValue(NULL) {}
+#else
 RPSysStringTagParm::RPSysStringTagParm(RPSysTagParameters* pParent, char* pTag)
     : RPSysTagParm(pParent, pTag), mpValue(NULL) {}
+#endif
 
 /**
  * @brief Reads the parameter's value
@@ -118,8 +128,13 @@ void RPSysStringTagParm::dump() {}
  *
  * @param pName Parameter group name
  */
+#if defined(NONMATCHING) || defined(COMPAT_ANY)
+RPSysTagParameters::RPSysTagParameters(const char* pName)
+    : mpName(pName), mpParameters(NULL) {}
+#else
 RPSysTagParameters::RPSysTagParameters(char* pName)
     : mpName(pName), mpParameters(NULL) {}
+#endif
 
 /**
  * @brief Appends a new child parameter to this group

@@ -13,7 +13,7 @@ namespace EGG {
  * SimpleAudioMgrWithSound3D
  *
  ******************************************************************************/
-#ifndef __DECOMP_NON_MATCHING
+#ifndef NONMATCHING
 SimpleAudioMgrWithSound3D::~SimpleAudioMgrWithSound3D() {}
 #endif
 
@@ -22,7 +22,7 @@ SimpleAudioMgrWithSound3D::~SimpleAudioMgrWithSound3D() {}
  * SimpleAudioMgrWithFx
  *
  ******************************************************************************/
-#ifndef __DECOMP_NON_MATCHING
+#ifndef NONMATCHING
 SimpleAudioMgrWithFx::~SimpleAudioMgrWithFx() {}
 #endif
 

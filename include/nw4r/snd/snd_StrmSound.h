@@ -21,7 +21,7 @@ class StrmBufferPool;
 namespace detail {
 
 class StrmSound : public BasicSound {
-    friend class StrmSoundHandle;
+    friend class nw4r::snd::StrmSoundHandle;
 
 public:
     NW4R_UT_RTTI_DECL(StrmSound);

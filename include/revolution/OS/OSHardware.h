@@ -114,7 +114,7 @@ OS_DEF_GLOBAL_VAR(u32, CPU_CLOCK_SPEED,                    0x800000FC);
 // clang-format off
 OS_DEF_GLOBAL_ARR(void*, EXCEPTION_TABLE, [15],          0x80003000);
 OS_DEF_GLOBAL_VAR(void*, INTR_HANDLER_TABLE,             0x80003040);
-OS_DEF_GLOBAL_ARR(volatile s32, EXI_LAST_INSERT, [1],    0x800030C0);
+OS_DEF_GLOBAL_ARR(volatile s32, EXI_LAST_INSERT, [2],    0x800030C0);
 OS_DEF_GLOBAL_VAR(void*, FIRST_REL,                      0x800030C8);
 OS_DEF_GLOBAL_VAR(void*, LAST_REL,                       0x800030CC);
 OS_DEF_GLOBAL_VAR(void*, REL_NAME_TABLE,                 0x800030D0);
@@ -162,7 +162,7 @@ OS_DEF_GLOBAL_ARR(u8, SC_PRDINFO, [0x100],               0x80003800);
 /**
  * PI hardware globals
  */
-volatile u32 PI_HW_REGS[1] DECL_ADDRESS(0xCC003000);
+volatile u32 DECL_HW_REGS(PI) DECL_ADDRESS(0xCC003000);
 typedef enum {
     PI_INTSR,    //!< 0xCC003000
     PI_INTMR,    //!< 0xCC003004
@@ -215,7 +215,7 @@ typedef enum {
 /**
  * MI hardware registers
  */
-volatile u16 MI_HW_REGS[1] DECL_ADDRESS(0xCC004000);
+volatile u16 DECL_HW_REGS(MI) DECL_ADDRESS(0xCC004000);
 typedef enum {
     MI_PAGE_MEM0_H, //!< 0xCC004000
     MI_PAGE_MEM0_L, //!< 0xCC004002
@@ -258,7 +258,7 @@ typedef enum {
 /**
  * DI hardware registers
  */
-volatile u32 DI_HW_REGS[1] DECL_ADDRESS(0xCD006000);
+volatile u32 DECL_HW_REGS(DI) DECL_ADDRESS(0xCD006000);
 typedef enum {
     DI_DMA_ADDR = 5, // !< 0xCD006014
     DI_CONFIG = 9,   // !< 0xCD006024

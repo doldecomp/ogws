@@ -21,7 +21,11 @@ public:
      * @param pParent Parent container
      * @param pTag Parameter tag
      */
+#if defined(NONMATCHING) || defined(COMPAT_ANY)
+    RPSysTagParm(RPSysTagParameters* pParent, const char* pTag);
+#else
     RPSysTagParm(RPSysTagParameters* pParent, char* pTag);
+#endif
 
     /**
      * @brief Reads the parameter's value
@@ -58,7 +62,7 @@ public:
 
 private:
     //! Parameter tag
-    char* mpTag; // at 0x4
+    const char* mpTag; // at 0x4
     //! Next parameter in group
     RPSysTagParm* mpNext; // at 0x8
 };
@@ -76,8 +80,13 @@ public:
      * @param pParent Parent container
      * @param pTag Parameter tag
      */
+#if defined(NONMATCHING) || defined(COMPAT_ANY)
+    RPSysPrimTagParm(RPSysTagParameters* pParent, const char* pTag)
+        : RPSysTagParm(pParent, pTag) {}
+#else
     RPSysPrimTagParm(RPSysTagParameters* pParent, char* pTag)
         : RPSysTagParm(pParent, pTag) {}
+#endif
 
     /**
      * @brief Reads the parameter's value
@@ -128,7 +137,11 @@ public:
      * @param pParent Parent container
      * @param pTag Parameter tag
      */
+#if defined(NONMATCHING) || defined(COMPAT_ANY)
+    RPSysStringTagParm(RPSysTagParameters* pParent, const char* pTag);
+#else
     RPSysStringTagParm(RPSysTagParameters* pParent, char* pTag);
+#endif
 
     /**
      * @brief Reads the parameter's value
@@ -178,7 +191,11 @@ public:
      *
      * @param pName Parameter group name
      */
+#if defined(NONMATCHING) || defined(COMPAT_ANY)
+    RPSysTagParameters(const char* pName);
+#else
     RPSysTagParameters(char* pName);
+#endif
 
     /**
      * @brief Appends a new child parameter to this group

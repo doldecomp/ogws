@@ -229,18 +229,27 @@ void RFLiInitCharModel(RFLCharModel* model, RFLiCharInfo* info, void* work,
     maxLod = 0.0f;
 
     switch (res) {
-    case RFLResolution_64M:
+    case RFLResolution_64M: {
         maxLod = 1.0f;
         mipmap = TRUE;
         break;
-    case RFLResolution_128M:
+    }
+
+    case RFLResolution_128M: {
         maxLod = 2.0f;
         mipmap = TRUE;
         break;
-    case RFLResolution_256M:
+    }
+
+    case RFLResolution_256M: {
         maxLod = 3.0f;
         mipmap = TRUE;
         break;
+    }
+
+    default: {
+        break;
+    }
     }
 
     for (i = 0; i < RFLExp_Max; i++) {
@@ -1028,16 +1037,25 @@ void RFLiInitTexRes(GXTexObj* texObj, RFLiPartsShpTex part, u16 file,
     RFLiLoadShpTexture(part, file, tex);
 
     switch (part) {
-    case RFLiPartsShpTex_Face:
+    case RFLiPartsShpTex_Face: {
         texSize = tex->height * tex->width * 2;
         break;
+    }
+
     case RFLiPartsShpTex_Cap:
-    case RFLiPartsShpTex_Noseline:
+    case RFLiPartsShpTex_Noseline: {
         texSize = tex->height * tex->width / 2;
         break;
-    case RFLiPartsShpTex_Glass:
+    }
+
+    case RFLiPartsShpTex_Glass: {
         texSize = tex->height * tex->width;
         break;
+    }
+
+    default: {
+        break;
+    }
     }
 
     memcpy(buffer, RFLiGetTexImage(tex), texSize);
@@ -1086,12 +1104,19 @@ void RFLDrawShape(const RFLCharModel* model) {
     if (res->flipHair) {
         GXGetCullMode(&cullMode);
         switch (cullMode) {
-        case GX_CULL_BACK:
+        case GX_CULL_BACK: {
             GXSetCullMode(GX_CULL_FRONT);
             break;
-        case GX_CULL_FRONT:
+        }
+
+        case GX_CULL_FRONT: {
             GXSetCullMode(GX_CULL_BACK);
             break;
+        }
+
+        default: {
+            break;
+        }
         }
     }
 
@@ -1117,12 +1142,19 @@ void RFLDrawShape(const RFLCharModel* model) {
 
     if (res->flipHair) {
         switch (cullMode) {
-        case GX_CULL_BACK:
+        case GX_CULL_BACK: {
             GXSetCullMode(GX_CULL_BACK);
             break;
-        case GX_CULL_FRONT:
+        }
+
+        case GX_CULL_FRONT: {
             GXSetCullMode(GX_CULL_FRONT);
             break;
+        }
+
+        default: {
+            break;
+        }
         }
     }
 

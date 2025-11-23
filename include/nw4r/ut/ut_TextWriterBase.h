@@ -15,6 +15,9 @@ namespace ut {
 
 template <typename T> class TextWriterBase : public CharWriter {
 public:
+    typedef TagProcessorBase<T> TagProcessorType;
+
+public:
     enum DrawFlag {
         // Align text lines
         DRAWFLAG_ALIGN_TEXT_BASELINE = 0,

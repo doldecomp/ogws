@@ -3,9 +3,11 @@
  *  NOTICE OF CHANGES
  *  2025/03/11:
  *      - Restore old function signatures
- * 
+ *  2025/11/23:
+ *      - Add BTA_HhGetAclQueueInfo prototype
+ *
  *  Compile with REVOLUTION defined to include these changes.
- * 
+ *
  ******************************************************************************/
 
 
@@ -481,6 +483,20 @@ BTA_API extern void BTA_HhAddDev(BD_ADDR bda, tBTA_HH_ATTR_MASK attr_mask,
 **
 *******************************************************************************/
 BTA_API extern void BTA_HhRemoveDev(UINT8 dev_handle );
+
+#ifdef REVOLUTION
+/*******************************************************************************
+**
+** Function         BTA_HhGetAclQueueInfo
+**
+** Description      
+**
+** Returns          void
+**
+*******************************************************************************/
+BTA_API extern void BTA_HhGetAclQueueInfo(void);
+#endif
+
 /*******************************************************************************
 **
 **              Parsing Utility Functions

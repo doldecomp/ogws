@@ -7,7 +7,7 @@ extern "C" {
 
 #define DSP_SEND_MAIL_SYNC(x)                                                  \
     do {                                                                       \
-        DSPSendMailToDSP((DSPMail)(x));                                        \
+        DSPSendMailToDSP((DSPMail)(u32)(x));                                   \
         while (DSPCheckMailToDSP()) {                                          \
             ;                                                                  \
         }                                                                      \

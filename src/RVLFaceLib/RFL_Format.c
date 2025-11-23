@@ -2,8 +2,8 @@
 
 #include <string.h>
 
-#define MAGIC_OFFICIAL_DB 'RNOD'
-#define MAGIC_HIDDEN_DB 'RNHD'
+#define MAGIC_OFFICIAL_DB FOURCC('R', 'N', 'O', 'D')
+#define MAGIC_HIDDEN_DB FOURCC('R', 'N', 'H', 'D')
 
 #define TABLE_DATA_STEP 1250
 // TODO: How is this size calculated?
@@ -77,8 +77,14 @@ static void formatWriteCallback_(void) {
                                    TEMP_BUFFER_SIZE, formatWriteCallback_,
                                    offset + sizeof(RFLiDatabase))) {
             case RFLErrcode_Success:
-            case RFLErrcode_Busy:
+            case RFLErrcode_Busy: {
                 success = TRUE;
+                break;
+            }
+
+            default: {
+                break;
+            }
             }
         } else if (RFLiIsCachedHDB()) {
             RFLiClearCacheHDB(mgr->cachedDB);

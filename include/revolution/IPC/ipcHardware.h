@@ -8,8 +8,8 @@ extern "C" {
 /**
  * IPC hardware registers
  */
-volatile u32 IPC_HW_REGS_PPC[1] DECL_ADDRESS(0xCD000000);
-volatile u32 IPC_HW_REGS[1] DECL_ADDRESS(0xCD800000);
+volatile u32 DECL_HW_REGS(IPC_PPC) DECL_ADDRESS(0xCD000000);
+volatile u32 DECL_HW_REGS(IPC) DECL_ADDRESS(0xCD800000);
 
 /**
  * Hardware register indexes

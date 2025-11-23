@@ -3,7 +3,7 @@
 
 #define IPC_HEAP_MAX 8
 
-typedef enum {
+enum {
     IPC_HEAP_CHUNK_FREE = 0xBABE0000,
     IPC_HEAP_CHUNK_USED = 0xBABE0001,
     IPC_HEAP_CHUNK_FORALIGN = 0xBABE0002

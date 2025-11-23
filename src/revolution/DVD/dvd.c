@@ -17,14 +17,14 @@ typedef void (*DVDOptionalCommandChecker)(DVDCommandBlock* block,
 
 typedef void (*DVDCommandState)(DVDCommandBlock* block);
 
-typedef enum {
+enum {
     NAND_ERROR_GENERIC = 0x01234567,
     NAND_ERROR_TIMEOUT = 0x01234568,
     NAND_ERROR_SECURITY = 0x01234569
 };
 
 // High 8 bits of command result DIIMMVAL
-typedef enum {
+enum {
     REQUEST_STATE_OK = (0 << 24),
     REQUEST_STATE_COVER_OPENED = (1 << 24),
     REQUEST_STATE_DISK_CHANGED = (2 << 24),
@@ -34,7 +34,7 @@ typedef enum {
 };
 
 // Lower 24 bits of command result DIIMMVAL
-typedef enum {
+enum {
     REQUEST_ERROR_OK = 0x000000,
     REQUEST_ERROR_MOTOR_STOPPED = 0x020400,
     REQUEST_ERROR_ID_NOT_READ = 0x020401,
@@ -54,14 +54,9 @@ typedef enum {
     REQUEST_ERROR_MEDIUM_REMOVAL = 0x0B5A01
 };
 
-typedef enum {
-    ERROR_TYPE_OK,
-    ERROR_TYPE_ERROR,
-    ERROR_TYPE_FATAL,
-    ERROR_TYPE_UNKNOWN
-};
+enum { ERROR_TYPE_OK, ERROR_TYPE_ERROR, ERROR_TYPE_FATAL, ERROR_TYPE_UNKNOWN };
 
-typedef enum {
+enum {
     COMMAND_NONE,
     COMMAND_READ,
     COMMAND_SEEK,
@@ -93,7 +88,7 @@ typedef enum {
     COMMAND_OPEN_PARTITION_WITH_TMD
 };
 
-typedef enum {
+enum {
     RESUME_POINT_NONE,
     RESUME_POINT_WRONG_DISK_ID,
     RESUME_POINT_DISK_ERROR,
@@ -104,13 +99,9 @@ typedef enum {
     RESUME_POINT_7 // Waiting for motor to stop with no pending DVD tasks?
 };
 
-typedef enum {
-    MOTOR_STATE_WORKING,
-    MOTOR_STATE_PENDING_STOP,
-    MOTOR_STATE_STOPPED
-};
+enum { MOTOR_STATE_WORKING, MOTOR_STATE_PENDING_STOP, MOTOR_STATE_STOPPED };
 
-typedef enum { PART_TYPE_DATA, PART_TYPE_UPDATE, PART_TYPE_CHANNEL };
+enum { PART_TYPE_DATA, PART_TYPE_UPDATE, PART_TYPE_CHANNEL };
 
 typedef struct DVDBB2 {
     u32 dolOffset; // at 0x0

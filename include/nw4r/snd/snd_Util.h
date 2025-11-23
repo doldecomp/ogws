@@ -157,6 +157,7 @@ private:
     // dB(idx) = VOLUME_MIN_DB + (idx / 10)
     // tbl[idx] = 10 ** (dB(idx) / 20)
     static const int VOLUME_TABLE_SIZE = VOLUME_RANGE_MB + 1;
+    // NOLINTNEXTLINE (vla-cxx-extension)
     static const f32 Decibel2RatioTable[VOLUME_TABLE_SIZE];
 
     // 1/256 step
