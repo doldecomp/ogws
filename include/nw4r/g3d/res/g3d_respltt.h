@@ -24,7 +24,7 @@ struct ResPlttData {
 
 class ResPltt : public ResCommon<ResPlttData> {
 public:
-    static const u32 SIGNATURE = 'PLT0';
+    static const u32 SIGNATURE = FOURCC('P', 'L', 'T', '0');
     static const int REVISION = 1;
 
 public:

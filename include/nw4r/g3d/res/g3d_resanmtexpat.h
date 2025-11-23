@@ -94,7 +94,7 @@ struct ResAnmTexPatData {
 
 class ResAnmTexPat : public ResCommon<ResAnmTexPatData> {
 public:
-    static const u32 SIGNATURE = 'PAT0';
+    static const u32 SIGNATURE = FOURCC('P', 'A', 'T', '0');
     static const int REVISION = 3;
 
 public:

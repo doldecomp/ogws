@@ -8,6 +8,9 @@ namespace nw4r {
 namespace snd {
 namespace detail {
 
+// Forward declarations
+struct WaveData;
+
 /******************************************************************************
  *
  * RWSD binary layout
@@ -117,7 +120,7 @@ struct WaveSoundNoteInfo {
 
 class WsdFileReader {
 public:
-    static const u32 SIGNATURE = 'RWSD';
+    static const u32 SIGNATURE = FOURCC('R', 'W', 'S', 'D');
     static const int VERSION = NW4R_VERSION(1, 2);
 
 public:

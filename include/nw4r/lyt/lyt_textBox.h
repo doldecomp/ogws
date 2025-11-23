@@ -34,7 +34,7 @@ namespace res {
  *
  ******************************************************************************/
 struct TextBox : Pane {
-    static const u32 SIGNATURE = 'txt1';
+    static const u32 SIGNATURE = FOURCC('t', 'x', 't', '1');
 
     u16 textBufBytes;             // at 0x4C
     u16 textStrBytes;             // at 0x4E

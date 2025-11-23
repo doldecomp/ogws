@@ -80,7 +80,7 @@ struct ResAnmClrData {
 
 class ResAnmClr : public ResCommon<ResAnmClrData> {
 public:
-    static const u32 SIGNATURE = 'CLR0';
+    static const u32 SIGNATURE = FOURCC('C', 'L', 'R', '0');
     static const int REVISION = 3;
 
 public:

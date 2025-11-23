@@ -36,7 +36,7 @@ namespace res {
  *
  ******************************************************************************/
 struct Group {
-    static const u32 SIGNATURE = 'grp1';
+    static const u32 SIGNATURE = FOURCC('g', 'r', 'p', '1');
 
     DataBlockHeader blockHeader;      // at 0x0
     char name[NW4R_LYT_RES_NAME_LEN]; // at 0x8

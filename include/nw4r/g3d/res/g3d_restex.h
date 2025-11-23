@@ -35,7 +35,7 @@ struct ResTexData {
 
 class ResTex : public ResCommon<ResTexData> {
 public:
-    static const u32 SIGNATURE = 'TEX0';
+    static const u32 SIGNATURE = FOURCC('T', 'E', 'X', '0');
     static const int REVISION = 1;
 
 public:

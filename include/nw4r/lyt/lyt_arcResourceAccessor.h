@@ -46,10 +46,10 @@ NW4R_UT_LINKLIST_TYPEDEF_DECL(FontRefLink);
  ******************************************************************************/
 class ArcResourceAccessor : public ResourceAccessor {
 public:
-    static const u32 RES_TYPE_ANIMATION = 'anim';
-    static const u32 RES_TYPE_LAYOUT = 'blyt';
-    static const u32 RES_TYPE_FONT = 'font';
-    static const u32 RES_TYPE_TEXTURE = 'timg';
+    static const u32 RES_TYPE_ANIMATION = FOURCC('a', 'n', 'i', 'm');
+    static const u32 RES_TYPE_LAYOUT = FOURCC('b', 'l', 'y', 't');
+    static const u32 RES_TYPE_FONT = FOURCC('f', 'o', 'n', 't');
+    static const u32 RES_TYPE_TEXTURE = FOURCC('t', 'i', 'm', 'g');
 
 public:
     ArcResourceAccessor();

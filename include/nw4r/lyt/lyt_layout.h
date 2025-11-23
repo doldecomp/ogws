@@ -38,7 +38,7 @@ namespace res {
  *
  ******************************************************************************/
 struct Layout {
-    static const u32 SIGNATURE = 'lyt1';
+    static const u32 SIGNATURE = FOURCC('l', 'y', 't', '1');
 
     DataBlockHeader blockHeader; // at 0x0
     u8 originType;               // at 0x8
@@ -55,8 +55,8 @@ struct Layout {
  ******************************************************************************/
 class Layout {
 public:
-    static const u32 SIGNATURE = 'RLYT';
-    static const u32 SIGNATURE_ANIMATION = 'RLAN';
+    static const u32 SIGNATURE = FOURCC('R', 'L', 'Y', 'T');
+    static const u32 SIGNATURE_ANIMATION = FOURCC('R', 'L', 'A', 'N');
 
 public:
     Layout();
@@ -106,17 +106,17 @@ public:
     }
 
 protected:
-    static const u32 SIGNATURE_TEXTURELIST = 'txl1';
-    static const u32 SIGNATURE_FONTLIST = 'fnl1';
-    static const u32 SIGNATURE_MATERIALLIST = 'mat1';
+    static const u32 SIGNATURE_TEXTURELIST = FOURCC('t', 'x', 'l', '1');
+    static const u32 SIGNATURE_FONTLIST = FOURCC('f', 'n', 'l', '1');
+    static const u32 SIGNATURE_MATERIALLIST = FOURCC('m', 'a', 't', '1');
 
-    static const u32 SIGNATURE_ANIMATIONINFO = 'pai1';
+    static const u32 SIGNATURE_ANIMATIONINFO = FOURCC('p', 'a', 'i', '1');
 
-    static const u32 SIGNATURE_PANESTART = 'pas1';
-    static const u32 SIGNATURE_PANEEND = 'pae1';
+    static const u32 SIGNATURE_PANESTART = FOURCC('p', 'a', 's', '1');
+    static const u32 SIGNATURE_PANEEND = FOURCC('p', 'a', 'e', '1');
 
-    static const u32 SIGNATURE_GROUPSTART = 'grs1';
-    static const u32 SIGNATURE_GROUPEND = 'gre1';
+    static const u32 SIGNATURE_GROUPSTART = FOURCC('g', 'r', 's', '1');
+    static const u32 SIGNATURE_GROUPEND = FOURCC('g', 'r', 'e', '1');
 
 protected:
     static Pane* BuildPaneObj(s32 kind, const void* pBinary,

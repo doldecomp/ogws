@@ -52,7 +52,7 @@ namespace res {
  *
  ******************************************************************************/
 struct Pane {
-    static const u32 SIGNATURE = 'pan1';
+    static const u32 SIGNATURE = FOURCC('p', 'a', 'n', '1');
 
     DataBlockHeader blockHeader;               // at 0x0
     u8 flag;                                   // at 0x8

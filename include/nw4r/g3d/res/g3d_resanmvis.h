@@ -35,7 +35,7 @@ struct ResAnmVisData {
 
 class ResAnmVis : public ResCommon<ResAnmVisData> {
 public:
-    static const u32 SIGNATURE = 'VIS0';
+    static const u32 SIGNATURE = FOURCC('V', 'I', 'S', '0');
     static const int REVISION = 3;
 
 public:

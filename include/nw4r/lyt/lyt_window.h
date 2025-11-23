@@ -57,7 +57,7 @@ struct WindowFrame {
  *
  ******************************************************************************/
 struct Window : public Pane {
-    static const u32 SIGNATURE = 'wnd1';
+    static const u32 SIGNATURE = FOURCC('w', 'n', 'd', '1');
 
     InflationLRTB inflation;    // at 0x4C
     u8 frameNum;                // at 0x5C

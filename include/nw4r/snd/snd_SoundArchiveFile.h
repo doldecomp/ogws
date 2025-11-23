@@ -197,7 +197,7 @@ static const int HEADER_AREA_SIZE = ROUND_UP(sizeof(Header), 32) + 40;
  ******************************************************************************/
 class SoundArchiveFileReader {
 public:
-    static const u32 SIGNATURE = 'RSAR';
+    static const u32 SIGNATURE = FOURCC('R', 'S', 'A', 'R');
     static const int VERSION = NW4R_VERSION(1, 3);
 
 public:

@@ -42,7 +42,7 @@ struct ResAnmScnData {
 
 class ResAnmScn : public ResCommon<ResAnmScnData> {
 public:
-    static const u32 SIGNATURE = 'SCN0';
+    static const u32 SIGNATURE = FOURCC('S', 'C', 'N', '0');
     static const int REVISION = 4;
 
 public:

@@ -43,14 +43,14 @@ struct AnimationInfo {
     u8 num;                    // at 0x4
     u8 PADDING_0x5[0x8 - 0x5]; // at 0x5
 
-    static const u32 SIGNATURE_ANMPANESRT = 'RLPA';
-    static const u32 SIGNATURE_ANMPANEVIS = 'RLVI';
-    static const u32 SIGNATURE_ANMVTXCLR = 'RLVC';
+    static const u32 SIGNATURE_ANMPANESRT = FOURCC('R', 'L', 'P', 'A');
+    static const u32 SIGNATURE_ANMPANEVIS = FOURCC('R', 'L', 'V', 'I');
+    static const u32 SIGNATURE_ANMVTXCLR = FOURCC('R', 'L', 'V', 'C');
 
-    static const u32 SIGNATURE_ANMMATCLR = 'RLMC';
-    static const u32 SIGNATURE_ANMTEXSRT = 'RLTS';
-    static const u32 SIGNATURE_ANMTEXPAT = 'RLTP';
-    static const u32 SIGNATURE_ANMINDTEXSRT = 'RLIM';
+    static const u32 SIGNATURE_ANMMATCLR = FOURCC('R', 'L', 'M', 'C');
+    static const u32 SIGNATURE_ANMTEXSRT = FOURCC('R', 'L', 'T', 'S');
+    static const u32 SIGNATURE_ANMTEXPAT = FOURCC('R', 'L', 'T', 'P');
+    static const u32 SIGNATURE_ANMINDTEXSRT = FOURCC('R', 'L', 'I', 'M');
 };
 
 } // namespace res
