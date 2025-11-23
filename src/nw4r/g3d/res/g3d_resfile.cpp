@@ -601,10 +601,8 @@ bool ResFile::CheckRevision() const {
     return true;
 }
 
+DECOMP_FORCEACTIVE(g3d_resfile_cpp,
+                   ResNameData_Ext);
+
 } // namespace g3d
 } // namespace nw4r
-
-// clang-format off
-DECOMP_FORCEACTIVE(g3d_resfile_cpp,
-                   nw4r::g3d::ResNameData_Ext);
-// clang-format on

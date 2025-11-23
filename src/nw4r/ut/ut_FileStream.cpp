@@ -56,10 +56,8 @@ void FileStream::FilePosition::Seek(s32 offset, u32 origin) {
     Skip(offset);
 }
 
-// clang-format off
 DECOMP_FORCEACTIVE(ut_FileStream_cpp,
                    FileStream::GetRuntimeTypeInfo);
-// clang-format on
 
 } // namespace ut
 } // namespace nw4r

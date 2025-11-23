@@ -1507,10 +1507,8 @@ static BOOL StopSync(void) {
     return success;
 }
 
-// clang-format off
 DECOMP_FORCEACTIVE(WUD_c,
-    "WUDCancelSyncDevice()\n");
-// clang-format on
+                   "WUDCancelSyncDevice()\n");
 
 BOOL WUDStopSyncSimple(void) {
     return StopSync();
@@ -1927,10 +1925,8 @@ void WUDiAutoSync(void) {
     }
 }
 
-// clang-format off
 DECOMP_FORCEACTIVE(WUD_c_1,
                    "WUDiCancelSync()\n");
-// clang-format on
 
 void WUDiDeleteAllLinkKeys(void) {
     WUDCB* p = &_wcb;
@@ -2987,10 +2983,8 @@ u8 _WUDGetLinkNumber(void) {
     return num;
 }
 
-// clang-format off
 DECOMP_FORCEACTIVE(WUD_c_2,
                    "_WUDEnableTestMode\n",
                    "_WUDStartSyncDevice()\n",
                    "_WUDDeleteStoreDevice()\n",
                    "dev number = %d\n");
-// clang-format on
