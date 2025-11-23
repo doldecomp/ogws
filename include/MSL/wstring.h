@@ -1,6 +1,8 @@
 #ifndef MSL_WSTRING_H
 #define MSL_WSTRING_H
-#include <types.h>
+
+#include "types.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif

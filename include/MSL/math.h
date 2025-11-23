@@ -3,7 +3,7 @@
 #include <types.h>
 
 #include <internal/float.h>
-#include <internal/math_api.h>
+#include <math_api.h>
 #include <internal/math_double.h>
 #include <internal/math_ppc.h>
 #include <internal/math_sun.h>
