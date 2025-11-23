@@ -48,10 +48,6 @@
 // Fix decltype
 #define DECLTYPE(x) __decltype(x)
 
-// Fix new overloads
-// TODO(kiwi) why cant we just include <new>
-#define new(...)
-
 // Hide memory-mapped symbols
 #define DECL_ADDRESS(...)
 
@@ -78,6 +74,7 @@
 
 // Redirect compiler intrinsics
 #define __alloca(...)
+#define __memclr(...)
 
 #endif
 
@@ -91,13 +88,13 @@
 
 // Redirect compiler intrinsics
 #define __alloca __builtin_alloca
+#define __memclr(var, size) __builtin_memset((var), 0, size)
 #define offsetof __builtin_offsetof
 
 // Fix variadic argument macros
+// TODO(kiwi) gotta be a less intrusive way
 #undef va_start
 #define va_start(...)
-
-// TODO(kiwi) gotta be a less intrusive way
 #undef va_arg
 #define va_arg(v, t) t()
 

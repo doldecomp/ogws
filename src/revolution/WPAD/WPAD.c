@@ -1202,9 +1202,9 @@ void WPADGetAccGravityUnit(s32 chan, u32 type, WPADAccGravityUnit* pAcc) {
         }
 
         case WPAD_ACC_GRAVITY_UNIT_FS: {
-            pAcc->x = p->extConfig.fs.accX1g - p->extConfig.fs.accX0g;
-            pAcc->y = p->extConfig.fs.accY1g - p->extConfig.fs.accY0g;
-            pAcc->z = p->extConfig.fs.accZ1g - p->extConfig.fs.accZ0g;
+            pAcc->x = p->extConfig.u.fs.accX1g - p->extConfig.u.fs.accX0g;
+            pAcc->y = p->extConfig.u.fs.accY1g - p->extConfig.u.fs.accY0g;
+            pAcc->z = p->extConfig.u.fs.accZ1g - p->extConfig.u.fs.accZ0g;
             break;
         }
         }

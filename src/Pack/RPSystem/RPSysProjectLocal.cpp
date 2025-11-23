@@ -12,7 +12,7 @@ RP_SINGLETON_IMPL_EX(RPSysProjectLocal);
 RPSysProjectLocal::RPSysProjectLocal(EGG::Heap* pHeap)
     : mpParentHeap(pHeap),
 
-#if BUILD_VERSION == RSPE01_01
+#if defined(VERSION_RSPE01_01)
       mRegion(ERegion_NTSC_U),
       mDialect(EArea_USA),
       mLanguage(EArea_USA),
