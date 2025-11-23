@@ -220,14 +220,14 @@ void CpuTexture::fillNormalMapSphere() {
             Vector3f vec;
 
             // Coordinates relative to the center
-            f32 cx = x - (width / 2);
-            f32 cy = (height / 2) - y;
+            int cx = x - (width / 2);
+            int cy = (height / 2) - y;
 
             vec.x = cx;
             vec.y = cy;
 
             // Distance from the center (clamped to edges)
-            f32 squaredLength = cx * cx + cy * cy;
+            f32 squaredLength = vec.x * vec.x + vec.y * vec.y;
             if (squaredLength > radius * radius) {
                 squaredLength = radius * radius;
             }

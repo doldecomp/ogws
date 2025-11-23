@@ -171,6 +171,10 @@ AnalizeDL::CmdType AnalizeDL::advance() {
 
                 break;
             }
+
+            default: {
+                break;
+            }
             }
         } else {
             p_result->m_vtxIdx = -1;

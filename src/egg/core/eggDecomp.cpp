@@ -218,7 +218,7 @@ int Decomp::getBitsCode(u8* pData, int size, int tree) {
     }
     // Read to end of bitstream
     else if (bitIdx + size == 32) {
-        code = bits >> 32 - size;
+        code = bits >> (32 - size);
 
         // Need to refresh bitstream
         sStreamData[tree] = pData[byteIdx + 0] << 24 |
@@ -230,7 +230,7 @@ int Decomp::getBitsCode(u8* pData, int size, int tree) {
     }
     // Read some bits
     else {
-        code = bits >> 32 - size;
+        code = bits >> (32 - size);
         sStreamData[tree] = bits << size;
         sStreamBit[tree] = bitIdx + size;
     }

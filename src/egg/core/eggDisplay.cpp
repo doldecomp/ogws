@@ -82,7 +82,9 @@ void Display::calcFrequency() {
     s32 nowFrameTick = OSGetTick();
     mFrameCostTick = nowFrameTick - mPrevFrameTick;
 
-    mFrequency = 1000000.0f / OS_TICKS_TO_USEC(mFrameCostTick);
+    mFrequency =
+        1000000.0f / static_cast<u32>(OS_TICKS_TO_USEC(mFrameCostTick));
+
     mPrevFrameTick = nowFrameTick;
 }
 

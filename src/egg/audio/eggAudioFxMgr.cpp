@@ -144,6 +144,8 @@ bool AudioFx::createFxReverbHiDpl2(
     // Allocate a buffer just for fun :^)
     u8* pReverbBuffer = new (mHeap) u8[sizeof(nw4r::snd::FxReverbHiDpl2)];
     std::memset(pReverbBuffer, 0, sizeof(nw4r::snd::FxReverbHiDpl2));
+    // @bug Non-array delete
+    // NOLINTNEXTLINE (-Wmismatched-new-delete)
     delete pReverbBuffer;
 
     nw4r::snd::FxReverbHiDpl2* pReverbHiDpl2 =

@@ -312,6 +312,10 @@ void ArcPlayer::closeArchive() {
         mMemorySoundArchive.Shutdown();
         break;
     }
+
+    default: {
+        break;
+    }
     }
 
     mPlayer->Shutdown();

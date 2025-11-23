@@ -56,7 +56,8 @@ ProcessMeter::ProcessBar::ProcessBar(nw4r::ut::Color color, f32 posY,
     : mColor(color), mPosX(0.0f), mWidth(0.0f), mPosY(posY), mHeight(height) {}
 
 bool ProcessMeter::ProcessBar::update(s32 measureTick) {
-    return update(static_cast<f32>(measureTick) / OS_MSEC_TO_TICKS(1));
+    return update(static_cast<f32>(measureTick) /
+                  static_cast<u32>(OS_MSEC_TO_TICKS(1)));
 }
 
 bool ProcessMeter::ProcessBar::update(f32 measureTime) {
@@ -65,8 +66,8 @@ bool ProcessMeter::ProcessBar::update(f32 measureTime) {
         mPosX = 0.0f;
     }
 
-    mWidth =
-        static_cast<f32>(mStopWatch.getMeasureTick()) / OS_MSEC_TO_TICKS(1);
+    mWidth = static_cast<f32>(mStopWatch.getMeasureTick()) /
+             static_cast<u32>(OS_MSEC_TO_TICKS(1));
 
     return mWidth > 0.0f;
 }
@@ -333,7 +334,7 @@ void ProcessMeter::draw(f32 fbWidth, f32 efbHeight, u32 tickPerFrame) {
     f32 step, pos, width;
     pos = 0.0f;
     width = mBgProcessBar.mWidth;
-    step = OS_TICKS_TO_USEC(tickPerFrame) / 1000.0f;
+    step = static_cast<u32>(OS_TICKS_TO_USEC(tickPerFrame)) / 1000.0f;
 
     GXSetLineWidth(12, 0);
 
