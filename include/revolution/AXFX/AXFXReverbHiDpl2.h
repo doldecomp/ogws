@@ -1,7 +1,8 @@
 #ifndef RVL_SDK_AXFX_REVERB_HI_DPL2_H
 #define RVL_SDK_AXFX_REVERB_HI_DPL2_H
-#include <revolution/AXFX/AXFXReverbHiExpDpl2.h>
 #include <types.h>
+
+#include <revolution/AXFX/AXFXReverbHiExpDpl2.h>
 #ifdef __cplusplus
 extern "C" {
 #endif

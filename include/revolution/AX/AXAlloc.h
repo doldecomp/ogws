@@ -1,7 +1,8 @@
 #ifndef RVL_SDK_AX_ALLOC_H
 #define RVL_SDK_AX_ALLOC_H
-#include <revolution/AX/AXVPB.h>
 #include <types.h>
+
+#include <revolution/AX/AXVPB.h>
 #ifdef __cplusplus
 extern "C" {
 #endif

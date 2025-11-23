@@ -1,8 +1,9 @@
 #ifndef RVL_FACE_LIBRARY_INTERNAL_HIDDEN_DATABASE_H
 #define RVL_FACE_LIBRARY_INTERNAL_HIDDEN_DATABASE_H
+#include <types.h>
+
 #include <RVLFaceLib/RFLi_Format.h>
 #include <RVLFaceLib/RFLi_Types.h>
-#include <types.h>
 #ifdef __cplusplus
 extern "C" {
 #endif

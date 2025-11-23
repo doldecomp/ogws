@@ -1,7 +1,8 @@
 #ifndef METROTRK_DEBUGGER_PORTABLE_NUBEVENT_H
 #define METROTRK_DEBUGGER_PORTABLE_NUBEVENT_H
-#include <MetroTRK/debugger/portable/dserror.h>
 #include <types.h>
+
+#include <MetroTRK/debugger/portable/dserror.h>
 #ifdef __cplusplus
 extern "C" {
 #endif

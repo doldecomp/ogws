@@ -1,8 +1,10 @@
 #ifndef MSL_STRING_H
 #define MSL_STRING_H
-#include <extras.h>
-#include <internal/mem.h>
 #include <types.h>
+
+#include <internal/mem.h>
+
+#include <extras.h>
 #ifdef __cplusplus
 extern "C" {
 #endif

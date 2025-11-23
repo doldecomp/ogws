@@ -1,7 +1,8 @@
 #ifndef RVL_SDK_EXI_BIOS_H
 #define RVL_SDK_EXI_BIOS_H
-#include <revolution/EXI/EXICommon.h>
 #include <types.h>
+
+#include <revolution/EXI/EXICommon.h>
 #ifdef __cplusplus
 extern "C" {
 #endif

@@ -1,8 +1,10 @@
 #ifndef RVL_FACE_LIBRARY_INTERNAL_MAKE_TEX_H
 #define RVL_FACE_LIBRARY_INTERNAL_MAKE_TEX_H
-#include <RVLFaceLib/RFLi_Types.h>
-#include <revolution/GX.h>
 #include <types.h>
+
+#include <RVLFaceLib/RFLi_Types.h>
+
+#include <revolution/GX.h>
 #ifdef __cplusplus
 extern "C" {
 #endif

@@ -1,5 +1,7 @@
 #ifndef RVL_FACE_LIBRARY_INTERNAL_SYSTEM_H
 #define RVL_FACE_LIBRARY_INTERNAL_SYSTEM_H
+#include <types.h>
+
 #include <RVLFaceLib/RFL_System.h>
 #include <RVLFaceLib/RFLi_Controller.h>
 #include <RVLFaceLib/RFLi_Database.h>
@@ -7,8 +9,8 @@
 #include <RVLFaceLib/RFLi_NANDAccess.h>
 #include <RVLFaceLib/RFLi_NANDLoader.h>
 #include <RVLFaceLib/RFLi_Types.h>
+
 #include <revolution/MEM.h>
-#include <types.h>
 #ifdef __cplusplus
 extern "C" {
 #endif

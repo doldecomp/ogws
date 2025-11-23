@@ -1,9 +1,11 @@
 #ifndef RVL_FACE_LIBRARY_MODEL_H
 #define RVL_FACE_LIBRARY_MODEL_H
+#include <types.h>
+
 #include <RVLFaceLib/RFL_Types.h>
+
 #include <revolution/GX.h>
 #include <revolution/MTX.h>
-#include <types.h>
 #ifdef __cplusplus
 extern "C" {
 #endif

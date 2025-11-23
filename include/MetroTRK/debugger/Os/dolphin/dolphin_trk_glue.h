@@ -1,7 +1,8 @@
 #ifndef METROTRK_DEBUGGER_OS_DOLPHIN_DOLPHIN_TRK_GLUE_H
 #define METROTRK_DEBUGGER_OS_DOLPHIN_DOLPHIN_TRK_GLUE_H
-#include <MetroTRK/debugger/Portable/UART.h>
 #include <types.h>
+
+#include <MetroTRK/debugger/Portable/UART.h>
 #ifdef __cplusplus
 extern "C" {
 #endif

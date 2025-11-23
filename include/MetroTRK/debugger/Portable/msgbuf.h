@@ -1,7 +1,8 @@
 #ifndef METROTRK_DEBUGGER_PORTABLE_MSGBUF_H
 #define METROTRK_DEBUGGER_PORTABLE_MSGBUF_H
-#include <MetroTRK/debugger/portable/mutex_TRK.h>
 #include <types.h>
+
+#include <MetroTRK/debugger/portable/mutex_TRK.h>
 #ifdef __cplusplus
 extern "C" {
 #endif
