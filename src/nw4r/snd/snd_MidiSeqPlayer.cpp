@@ -8,7 +8,7 @@ namespace detail {
 /**
  * Dummy class to instantiate necessary weak functions
  */
-#ifndef NONMATCHING
+#if !defined(NONMATCHING)
 class MidiSeqPlayer : public SeqPlayer {
 private:
     MidiSeqPlayer();

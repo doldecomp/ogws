@@ -445,7 +445,7 @@ public:
  * Explicitly instantiate a linked list specialization.
  * (RESERVED FOR MATCHING DECOMP HACKS)
  */
-#ifndef NONMATCHING
+#if !defined(NONMATCHING)
 #define NW4R_UT_LINKLIST_TYPEDEF_FORCE(T)                                      \
     template struct nw4r::ut::LinkList<T, offsetof(T, node)>
 #else

@@ -110,7 +110,7 @@ public:
      * Read big endian value
      *
      ******************************************************************************/
-#ifdef NW4R_LITLE_ENDIAN
+#if defined(NW4R_LITLE_ENDIAN)
     static inline u16 ReadBigEndian(u16 x) {
         return x >> 8 | x << 8;
     }
