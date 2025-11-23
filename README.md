@@ -1,6 +1,6 @@
-Wii Sports  
+# Wii Sports  
+
 [![Build Status]][actions] [![Code Progress]][progress] [![Data Progress]][progress] [![Discord Badge]][discord]
-=============
 
 [Build Status]: https://github.com/doldecomp/ogws/actions/workflows/build.yml/badge.svg
 [actions]: https://github.com/doldecomp/ogws/actions/workflows/build.yml
@@ -10,88 +10,70 @@ Wii Sports
 [Discord Badge]: https://img.shields.io/discord/727908905392275526?color=%237289DA&logo=discord&logoColor=%23FFFFFF
 [discord]: https://discord.gg/hKx3FJJgrV
 
+<!-- markdownlint-disable MD033 -->
+[<img src="https://decomp.dev/doldecomp/ogws.svg?w=512&h=256" width="512" height="256" alt="A visual">][Progress]
+<!-- markdownlint-enable MD033 -->
+
 A work-in-progress decompilation of Wii Sports.
 
-This repository does **not** contain any game assets or assembly whatsoever. An existing copy of the game is required.
+> [!IMPORTANT]
+> This repository does **not** contain any game assets or assembly whatsoever.
+An existing copy of the game is required.
 
 Supported versions:
 
-- `RSPE01_01`: USA Rev 1
+| Version         | SHA-1 hash                                 |
+| --------------- | ------------------------------------------ |
+| US (Revision 1) | `8bb422971b88b5551a37de98db69557df7b46637` |
 
-Dependencies
-============
+## Getting Started
 
-Windows
---------
+Once you have confirmed that your copy of the game is a supported version,
+please dump your copy and follow the build instructions in [this document](docs/getting_started.md).
 
-On Windows, it's **highly recommended** to use native tooling. WSL or msys2 are **not** required.  
-When running under WSL, [objdiff](#diffing) is unable to get filesystem notifications for automatic rebuilds.
+> [!TIP]
+> Not sure which version you have?
+>
+> Enter the following button combination on the title screen using any remote:
+>
+> ```text
+> A, D-Up, 2, D-Down, B, 1, 1, B, D-Left, A, D-Right
+> ```
 
-- Install [Python](https://www.python.org/downloads/) and add it to `%PATH%`.
-  - Also available from the [Windows Store](https://apps.microsoft.com/store/detail/python-311/9NRWMJP3717K).
-- Download [ninja](https://github.com/ninja-build/ninja/releases) and add it to `%PATH%`.
-  - Quick install via pip: `pip install ninja`
+You should see information on the game's build date in either the bottom-left
+or bottom-right corner of the screen.
 
-macOS
-------
+Reference the following table to determine exactly which version you have:
 
-- Install [ninja](https://github.com/ninja-build/ninja/wiki/Pre-built-Ninja-packages):
+| Build date  | Version         |
+| ----------- | --------------- |
+| 2006/10/07  | US (Revision 0) |
+| 2007/07/05  | US (Revision 1) |
 
-  ```sh
-  brew install ninja
-  ```
+## Contributing
 
-- Install [wine-crossover](https://github.com/Gcenx/homebrew-wine):
+Thank you for your interest in the project! We ask that you please follow our
+contribution guidelines outlined in [this document](docs/contributing.md) to
+ensure consistency across the codebase and its documentation.
 
-  ```sh
-  brew install --cask --no-quarantine gcenx/wine/wine-crossover
-  ```
+<!-- markdownlint-disable MD028 -->
+> [!CAUTION]
+> Please avoid utilizing leaked material! We want to stay as clean-room as
+> possible, and have this repository be freely usable by other projects without
+> the worry of being associated with leaks.
+>
+> "Leaked material" includes, but is not limited to:
+>
+> - Source code leaked online, pertaining to any software libraries linked
+> within this game
+> - Source code acquired through means only intended for licensed developers, such as a software development kit (SDK) distribution
+>
 
-After OS upgrades, if macOS complains about `Wine Crossover.app` being unverified, you can unquarantine it using:
-
-```sh
-sudo xattr -rd com.apple.quarantine '/Applications/Wine Crossover.app'
-```
-
-Linux
-------
-
-- Install [ninja](https://github.com/ninja-build/ninja/wiki/Pre-built-Ninja-packages).
-- For non-x86(_64) platforms: Install wine from your package manager.
-  - For x86(_64), [wibo](https://github.com/decompals/wibo), a minimal 32-bit Windows binary wrapper, will be automatically downloaded and used.
-
-Building
-========
-
-- Clone the repository:
-
-  ```sh
-  git clone https://github.com/doldecomp/ogws.git
-  ```
-
-- Copy your game's disc image to `orig/RSPE01_01`.
-  - Supported formats: ISO (GCM), RVZ, WIA, WBFS, CISO, NFS, GCZ, TGC
-  - After the initial build, the disc image can be deleted to save space.
-
-- Configure:
-
-  ```sh
-  python configure.py
-  ```
-
-- Build:
-
-  ```sh
-  ninja
-  ```
-
-Diffing
-=======
-
-Once the initial build succeeds, an `objdiff.json` should exist in the project root.
-
-Download the latest release from [encounter/objdiff](https://github.com/encounter/objdiff). Under project settings, set `Project directory`. The configuration should be loaded automatically.
-
-Select an object from the left sidebar to begin diffing. Changes to the project will rebuild automatically: changes to source files, headers, `configure.py`, `splits.txt` or `symbols.txt`.
-
-![](assets/objdiff.png)
+> [!IMPORTANT]
+> "Leaked material" does **NOT** include debugging information **left behind in
+> retail games**, such as:
+>
+> - A linker or symbol map file
+> - Debug builds of the executable
+> - Binary object files (`*.o`), and static libraries (`*.a`) that may contain them
+<!-- markdownlint-enable MD028 -->

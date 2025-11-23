@@ -12,9 +12,12 @@
 # Append --help to see available options.
 ###
 
+# fmt: off
+
 import argparse
 import sys
 from pathlib import Path
+from typing import Any, Dict, List
 
 from tools.project import (
     Object,
@@ -102,6 +105,12 @@ parser.add_argument(
     help="path to sjiswrap.exe (optional)",
 )
 parser.add_argument(
+    "--ninja",
+    metavar="BINARY",
+    type=Path,
+    help="path to ninja binary (optional)",
+)
+parser.add_argument(
     "--verbose",
     action="store_true",
     help="print verbose output",
@@ -111,6 +120,13 @@ parser.add_argument(
     dest="non_matching",
     action="store_true",
     help="builds equivalent (but non-matching) or modded objects",
+)
+parser.add_argument(
+    "--warn",
+    dest="warn",
+    type=str,
+    choices=["all", "off", "error"],
+    help="how to handle warnings",
 )
 parser.add_argument(
     "--no-progress",
@@ -132,6 +148,7 @@ config.binutils_path = args.binutils
 config.compilers_path = args.compilers
 config.generate_map = args.map
 config.non_matching = args.non_matching
+config.ninja_path = args.ninja
 config.sjiswrap_path = args.sjiswrap
 config.progress = args.progress
 if not is_windows():
@@ -142,11 +159,11 @@ if not config.non_matching:
 
 # Tool versions
 config.binutils_tag = "2.42-1"
-config.compilers_tag = "20240706"
-config.dtk_tag = "v1.3.0"
-config.objdiff_tag = "v2.6.0"
-config.sjiswrap_tag = "v1.2.0"
-config.wibo_tag = "0.6.11"
+config.compilers_tag = "20250812"
+config.dtk_tag = "v1.7.1"
+config.objdiff_tag = "v3.4.1"
+config.sjiswrap_tag = "v1.2.2"
+config.wibo_tag = "1.0.0-beta.5"
 
 # Project
 config.config_path = Path("config") / config.version / "config.yml"
@@ -163,10 +180,10 @@ config.ldflags = [
     "-nodefaults",
 ]
 if args.debug:
-    config.ldflags.append("-gdwarf-2")
+    config.ldflags.append("-g")  # Or -gdwarf-2 for Wii linkers
 if args.map:
     config.ldflags.append("-mapunused")
-    config.ldflags.append("-listclosure")
+    # config.ldflags.append("-listclosure") # For Wii linkers
 
 # Use for any additional files that should cause a re-configure when modified
 config.reconfig_deps = []
@@ -197,6 +214,7 @@ cflags_base = [
     "-ir include/MSL",
     f"-i build/{config.version}/include",
     f"-DBUILD_VERSION={version_num}",
+    f"-DVERSION_{config.version}",
     "-ir include/revolution/BTE",  # thanks broadcom...
     "-DREVOLUTION",  # BTE changes
 ]
@@ -206,6 +224,14 @@ if args.debug:
     cflags_base.extend(["-sym dwarf-2", "-DDEBUG=1"])
 else:
     cflags_base.append("-DNDEBUG=1")
+
+# Warning flags
+if args.warn == "all":
+    cflags_base.append("-W all")
+elif args.warn == "off":
+    cflags_base.append("-W off")
+elif args.warn == "error":
+    cflags_base.append("-W error")
 
 cflags_pedantic = [
     "-w unused",
@@ -354,10 +380,10 @@ cflags_rp = [
 
 config.linker_version = "GC/3.0a5.2"
 
+
 Matching = True                   # Object matches and should be linked
 NonMatching = False               # Object does not match and should not be linked
-# Object should be linked when configured with --non-matching
-Equivalent = config.non_matching
+Equivalent = config.non_matching  # Object should be linked when configured with --non-matching
 
 
 # Object is only matching for specific versions
@@ -365,16 +391,14 @@ def MatchingFor(*versions):
     return config.version in versions
 
 
-# fmt: off
-
-config.warn_missing_config = False  # TODO enable
+config.warn_missing_config = True
 config.warn_missing_source = False
 config.libs = [
     {
         "lib": "libnw4r_ut",
         "mw_version": config.linker_version,
         "cflags": cflags_libnw4r_ut,
-        "progress_category": "nw4r",
+        "progress_category": "nw4r", # str | List[str]
         "objects": [
             Object(Matching, "nw4r/ut/ut_list.cpp"),
             Object(Matching, "nw4r/ut/ut_LinkList.cpp"),
@@ -399,7 +423,7 @@ config.libs = [
         "lib": "libnw4r_ef",
         "mw_version": config.linker_version,
         "cflags": cflags_libnw4r_ef,
-        "progress_category": "nw4r",
+        "progress_category": "nw4r", # str | List[str]
         "objects": [
             Object(Matching, "nw4r/ef/ef_draworder.cpp"),
             Object(Matching, "nw4r/ef/ef_effect.cpp"),
@@ -436,7 +460,7 @@ config.libs = [
         "lib": "libnw4r_math",
         "mw_version": config.linker_version,
         "cflags": cflags_libnw4r_math,
-        "progress_category": "nw4r",
+        "progress_category": "nw4r", # str | List[str]
         "objects": [
             Object(Matching, "nw4r/math/math_arithmetic.cpp"),
             Object(Matching, "nw4r/math/math_triangular.cpp"),
@@ -449,7 +473,7 @@ config.libs = [
         "lib": "libnw4r_snd",
         "mw_version": config.linker_version,
         "cflags": cflags_libnw4r_snd,
-        "progress_category": "nw4r",
+        "progress_category": "nw4r", # str | List[str]
         "objects": [
             Object(Matching, "nw4r/snd/snd_AnimSound.cpp"),
             Object(Matching, "nw4r/snd/snd_AxManager.cpp"),
@@ -522,7 +546,7 @@ config.libs = [
         "lib": "libnw4r_g3d",
         "mw_version": config.linker_version,
         "cflags": cflags_libnw4r_g3d,
-        "progress_category": "nw4r",
+        "progress_category": "nw4r", # str | List[str]
         "objects": [
             Object(Matching, "nw4r/g3d/res/g3d_rescommon.cpp"),
             Object(Matching, "nw4r/g3d/res/g3d_resdict.cpp"),
@@ -588,7 +612,7 @@ config.libs = [
         "lib": "libnw4r_lyt",
         "mw_version": config.linker_version,
         "cflags": cflags_libnw4r_lyt,
-        "progress_category": "nw4r",
+        "progress_category": "nw4r", # str | List[str]
         "objects": [
             Object(Matching, "nw4r/lyt/lyt_init.cpp"),
             Object(Matching, "nw4r/lyt/lyt_pane.cpp"),
@@ -611,7 +635,7 @@ config.libs = [
         "lib": "libnw4r_g3d_scnrfl",
         "mw_version": config.linker_version,
         "cflags": cflags_libnw4r_g3d_scnrfl,
-        "progress_category": "nw4r",
+        "progress_category": "nw4r", # str | List[str]
         "objects": [
             Object(Matching, "nw4r/g3d/g3d_scnrfl.cpp"),
         ],
@@ -620,7 +644,7 @@ config.libs = [
         "lib": "egg",
         "mw_version": config.linker_version,
         "cflags": cflags_egg,
-        "progress_category": "egg",
+        "progress_category": "egg", # str | List[str]
         "objects": [
             Object(Matching, "egg/gfxe/eggShadowTextureManager.cpp"),
             Object(Matching, "egg/gfxe/eggStateGX.cpp"),
@@ -710,7 +734,7 @@ config.libs = [
         "lib": "Runtime.PPCEABI.H",
         "mw_version": config.linker_version,
         "cflags": cflags_runtime,
-        "progress_category": "sdk",
+        "progress_category": "sdk", # str | List[str]
         "objects": [
             Object(Matching, "runtime/__mem.c"),
             Object(Matching, "runtime/__va_arg.c"),
@@ -727,7 +751,7 @@ config.libs = [
         "lib": "MSL_C",
         "mw_version": "GC/3.0a3",
         "cflags": cflags_runtime,
-        "progress_category": "sdk",
+        "progress_category": "sdk", # str | List[str]
         "objects": [
             Object(NonMatching, "MSL/alloc.c"),
             Object(NonMatching, "MSL/ansi_files.c"),
@@ -795,7 +819,7 @@ config.libs = [
         "lib": "MetroTRK",
         "mw_version": "GC/2.7",
         "cflags": cflags_trk,
-        "progress_category": "sdk",
+        "progress_category": "sdk", # str | List[str]
         "objects": [
             Object(NonMatching, "MetroTRK/debugger/Portable/mainloop.c"),
             Object(Matching, "MetroTRK/debugger/Portable/nubevent.c"),
@@ -832,7 +856,7 @@ config.libs = [
         "lib": "RVL_SDK",
         "mw_version": config.linker_version,
         "cflags": cflags_rvl,
-        "progress_category": "sdk",
+        "progress_category": "sdk", # str | List[str]
         "objects": [
             Object(NonMatching, "revolution/NdevExi2AD/DebuggerDriver.c"),
             Object(Matching, "revolution/NdevExi2AD/exi2.c"),
@@ -988,7 +1012,7 @@ config.libs = [
         "lib": "RVLFaceLib",
         "mw_version": config.linker_version,
         "cflags": cflags_rfl,
-        "progress_category": "rfl",
+        "progress_category": "rfl", # str | List[str]
         "objects": [
             Object(Matching, "RVLFaceLib/RFL_System.c"),
             Object(Matching, "RVLFaceLib/RFL_NANDLoader.c"),
@@ -1011,7 +1035,7 @@ config.libs = [
         "lib": "RP",
         "mw_version": config.linker_version,
         "cflags": cflags_rp,
-        "progress_category": "kernel",
+        "progress_category": "kernel", # str | List[str]
         "objects": [
             Object(Matching, "main.cpp"),
             Object(NonMatching, "Pack/RPKernel/RPSysSystem.cpp"),
@@ -1069,7 +1093,7 @@ config.libs = [
         "lib": "RP",
         "mw_version": config.linker_version,
         "cflags": cflags_rp,
-        # "progress_category": "system",
+        # "progress_category": "system", # str | List[str]
         "objects": [
             Object(NonMatching, "Pack/RPSystem/RPSysSceneCreator.cpp"),
             Object(NonMatching, "Pack/RPSystem/RPSysScene.cpp"),
@@ -1079,6 +1103,7 @@ config.libs = [
             Object(Matching, "Pack/RPSystem/RPSysGameConfig.cpp"),
             Object(NonMatching, "Pack/RPSystem/RPSysTagParms.cpp"),
             Object(NonMatching, "Pack/RPSystem/RPSysLoadScene.cpp"),
+            Object(NonMatching, "Pack/RPSystem/RP_80186E40.cpp"),
             Object(NonMatching, "Pack/RPSystem/RPSysResourceManager.cpp"),
             Object(NonMatching, "Pack/RPSystem/RPSysQueuedScene.cpp"),
             Object(NonMatching, "Pack/RPSystem/RPSysCommonObject.cpp"),
@@ -1097,7 +1122,23 @@ config.libs = [
     },
 ]
 
-# fmt: on
+
+# Optional callback to adjust link order. This can be used to add, remove, or reorder objects.
+# This is called once per module, with the module ID and the current link order.
+#
+# For example, this adds "dummy.c" to the end of the DOL link order if configured with --non-matching.
+# "dummy.c" *must* be configured as a Matching (or Equivalent) object in order to be linked.
+def link_order_callback(module_id: int, objects: List[str]) -> List[str]:
+    # Don't modify the link order for matching builds
+    if not config.non_matching:
+        return objects
+    if module_id == 0:  # DOL
+        return objects + ["dummy.c"]
+    return objects
+
+
+# Uncomment to enable the link order callback.
+# config.link_order_callback = link_order_callback
 
 
 # Optional extra categories for progress tracking
@@ -1123,11 +1164,20 @@ config.progress_code_fancy_item = "skill points"
 config.progress_data_fancy_frac = 100
 config.progress_data_fancy_item = "stamps"
 
+# Optional extra arguments to `objdiff-cli report generate`
+config.progress_report_args = [
+    # Marks relocations as mismatching if the target value is different
+    # Default is "functionRelocDiffs=none", which is most lenient
+    # "--config functionRelocDiffs=data_value",
+]
+
 if args.mode == "configure":
     # Write build.ninja and objdiff.json
     generate_build(config)
 elif args.mode == "progress":
-    # Print progress and write progress.json
+    # Print progress information
     calculate_progress(config)
 else:
     sys.exit("Unknown mode: " + args.mode)
+
+# fmt: on

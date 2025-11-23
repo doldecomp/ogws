@@ -33,6 +33,4 @@ compile_commands.json
 
 # Miscellaneous
 /*.txt
-tools/codewarrior/
 *.exe
-*.dll
