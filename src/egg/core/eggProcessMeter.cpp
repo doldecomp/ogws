@@ -1,4 +1,4 @@
-// TODO: REMOVE AFTER REFACTOR
+// TODO(kiwi) REMOVE AFTER REFACTOR
 #pragma ipa file
 
 #include <egg/core.h>
@@ -203,7 +203,7 @@ void ProcessMeter::measureBeginFrame() {
 
     bool barVisible = mBgProcessBar.update(0.0f);
 
-    // TODO: Fakematch
+    // TODO(kiwi) Fakematch
     f32 dummy = barVisible ? 0.0f : 0.0f;
     dummy = barVisible ? 0.0f : 0.0f;
 

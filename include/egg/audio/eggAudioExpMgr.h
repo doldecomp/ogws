@@ -56,7 +56,7 @@ public:
                             TAudioSound3DMgrArg,
                             AudioFxMgrArg {
 
-        // TODO: How is this calculated?
+        // TODO(kiwi) How is this calculated?
         static const u32 DEFAULT_FX_HEAP_SIZE = 0x25800;
 
         ExpAudioMgrArg();

@@ -1,5 +1,6 @@
-#include <RVLFaceLib.h>
 #include <revolution/NWC24.h>
+
+#include <RVLFaceLib.h>
 
 #define YEAR_MIN 2000
 #define YEAR_MAX 2035 // !!!
@@ -18,7 +19,7 @@ typedef enum {
 
 NWC24Err NWC24InitMsgObj(NWC24MsgObj* msg, NWC24MsgType type) {
     u32 i;
-    // TODO: Is there an internal structure?
+    // TODO(kiwi) Is there an internal structure?
     NWC24MsgObj* _msg = (NWC24MsgObj*)msg;
 
     Mail_memset(_msg, 0, sizeof(NWC24MsgObj));

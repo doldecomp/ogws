@@ -6,13 +6,13 @@
 // Output uses a ring buffer
 #define OUT_RING_MAX 3
 // Each remote output buffer contains 10 frames
-// TODO: Not sure if these instances are actually "frames"
+// TODO(kiwi) Not sure if these instances are actually "frames"
 #define RMT_FRAME_MAX 10
 
 // Form DSP mail for command list size
 #define DSP_MAIL_CLSIZE(size) (0xBABE << 16 | (size))
 // DRAM image in DSP memory
-// TODO: What does this represent?
+// TODO(kiwi) What does this represent?
 #define DRAM_IMAGE_DSP_ADDR 0x0CD2
 
 // Back again by popular demand!
@@ -49,7 +49,7 @@ static AXExceedCallback __AXExceedCallback;
 
 static s16 __AXRmtOutBuffer[AX_RMT_MAX]
                            [AX_SAMPLES_PER_FRAME_RMT * RMT_FRAME_MAX] ALIGN(32);
-// TODO: What is this number?
+// TODO(kiwi) What is this number?
 static u8 __AXOutSBuffer[768] ALIGN(32);
 static u32 __AXOutBuffer[OUT_RING_MAX][AX_SAMPLES_PER_FRAME] ALIGN(32);
 

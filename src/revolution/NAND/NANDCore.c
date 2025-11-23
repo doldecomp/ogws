@@ -474,7 +474,7 @@ static s32 _ES_InitLib(s32* fd) {
 }
 
 static s32 _ES_GetDataDir(s32* fd, u64 tid, char* dirOut) {
-    // TODO: Hacky solution
+    // TODO(kiwi) Hacky solution
     u8 tidWork[256] ALIGN(32);
     u8 vectorWork[32] ALIGN(32);
     IPCIOVector* pVectors = (IPCIOVector*)vectorWork;
@@ -502,7 +502,7 @@ static s32 _ES_GetDataDir(s32* fd, u64 tid, char* dirOut) {
 static s32 _ES_GetTitleId(s32* fd, u64* tidOut) {
     s32 result;
     u64* pTid;
-    // TODO: Hacky solution
+    // TODO(kiwi) Hacky solution
     u8 tidWork[256] ALIGN(32);
     u8 vectorWork[32] ALIGN(32);
     IPCIOVector* pVectors = (IPCIOVector*)vectorWork;

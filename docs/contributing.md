@@ -576,3 +576,105 @@ Optional(const Optional& rOther);
  */
 Optional(const T& rValue);
 ```
+
+#### Statement comments
+
+When writing statement-level comments, please try to make sure you are actually solving one of the following problems:
+
+- The purpose (the "*why*") of the code statement is unclear:
+
+```cpp
+void IScene::Configure() {
+    // . . . . .
+
+    // 2D view is required for drawing layouts (✅ Explains purpose!)
+    RPGrpRenderer::GetCurrent()->CreateView2D(1, pScreen);
+    RPGrpRenderer::GetCurrent()->CorrectView();
+
+    // Derived class behavior (✅ Explains purpose!)
+    OnConfigure();
+}
+```
+
+- The functionality (the "*what*") of the code statement is unclear:
+
+```cpp
+int Decomp::decodeSZS(u8* pSrc, u8* pDst) {
+    // . . . . .
+
+    // Literal (chunk bit is set) (✅ Provides context!)
+    if (chunk & bit) {
+        pDst[dstIdx++] = pSrc[srcIdx++];
+    }
+    // Back-reference (chunk bit is not set) (✅ Provides context!)
+    else {
+        // Next bytes contain run offset, length (✅ Provides context!)
+        int packed = pSrc[srcIdx] << 8 | pSrc[srcIdx + 1];
+        srcIdx += 2;
+```
+
+While the latter may traditionally be seen as a sign to refactor, we often do not have this freedom with matching decomp. In these cases, statement-level comments explaining *what* is happening is appreciated.
+
+For simple code statements, or statements where the functionality is obvious, please do not restate the logic in comment form:
+
+```cpp
+void DvdFile::initiate() {
+    // Initializes the mutexes (❌ This is a redundant explanation!!!)
+    OSInitMutex(&mSyncMutex);
+    OSInitMutex(&mAsyncMutex);
+
+    // Initializes the message queues (❌ This is a redundant explanation!!!)
+    OSInitMessageQueue(&mSyncQueue, mSyncBuffer, ARRAY_SIZE(mSyncBuffer));
+    OSInitMessageQueue(&mAsyncQueue, mAsyncBuffer, ARRAY_SIZE(mAsyncBuffer));
+}
+```
+
+#### TO-DO comments
+
+In situations where you want to make a note of something for later, a "TODO" comment can be very useful.
+
+> [!TIP]
+> We often use these types of comments for:
+>
+> - Highlighting a "fakematch", or code that is matching but is either likely not accurate or is written in a non-portable manner
+> - Making a note of an unknown concept
+> - Making a note of changes to make during a future refactor
+
+Please make sure you include your Git username as part of any TODO comments, so others who may seek further clarification will know who to contact:
+
+```cpp
+// ✅ Provides context, and includes an author name!
+// TODO(kiwi) Permuter fake(?)match
+font_u8 = (u8*)font;
+*widthOut = (font_u8 + font->widthTableOfs)[code];
+
+// ❌ Provides no context or author name!
+// TODO
+void __OSGetDiscState(u8* out) {
+    u32 flags;
+```
+
+#### Bug comments
+
+To highlight a bug or oversight in the code, use the `@bug` Doxygen command:
+
+```cpp
+template <u32 N> struct ResNameDataT {
+    u32 len; // at 0x0
+    // @bug 'N' already includes the null terminator
+    char str[ROUND_UP(N + 1, 4)]; // at 0x4
+};
+```
+
+```cpp
+// @bug Typo of 'i'
+if (rSetting.mColorInput.mTevColor[1] ==
+    ColorInput::TEVCOLOR1_2) {
+```
+
+```cpp
+if (chan < WPAD_CHAN0 || chan >= WPAD_MAX_CONTROLLERS) {
+    // @bug Will be interpreted as TRUE
+    return RFLErrcode_WrongParam;
+}
+```

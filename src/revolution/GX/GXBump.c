@@ -64,7 +64,7 @@ void GXSetIndTexMtx(GXIndTexMtxID id, const f32 offset[2][3], s8 scaleExp) {
     GX_BP_SET_OPCODE(cmd, index * 3 + GX_BP_REG_INDMTX0A);
     GX_BP_LOAD_REG(cmd);
 
-    // TODO: Match using GX_BP_SET_INDMTXB_EXP
+    // TODO(kiwi) Match using GX_BP_SET_INDMTXB_EXP
     cmd = 0;
     GX_BP_SET_INDMTXB_M01(cmd, 1024.0f * offset[0][1]);
     GX_BP_SET_INDMTXB_M11(cmd, 1024.0f * offset[1][1]);
@@ -72,7 +72,7 @@ void GXSetIndTexMtx(GXIndTexMtxID id, const f32 offset[2][3], s8 scaleExp) {
     GX_BP_SET_OPCODE(cmd, index * 3 + GX_BP_REG_INDMTX0B);
     GX_BP_LOAD_REG(cmd);
 
-    // TODO: Match using GX_BP_SET_INDMTXC_EXP
+    // TODO(kiwi) Match using GX_BP_SET_INDMTXC_EXP
     cmd = 0;
     GX_BP_SET_INDMTXC_M02(cmd, 1024.0f * offset[0][2]);
     GX_BP_SET_INDMTXC_M12(cmd, 1024.0f * offset[1][2]);

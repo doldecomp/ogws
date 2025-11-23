@@ -4,7 +4,7 @@
 
 #define DEBUGPrint WUD_DEBUGPrint
 
-// TODO: Is this from BTA?
+// TODO(kiwi) Is this from BTA?
 #define WUD_HH_CUSTOM_EVT 15
 
 typedef struct WUD_HH_EVT15 {

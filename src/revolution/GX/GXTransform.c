@@ -1,6 +1,6 @@
 #include <revolution/GX.h>
 
-// TODO: Fake inline
+// TODO(kiwi) Fake inline
 inline void LoadProjPS(register f32* dst) {
     register f32 ps_0, ps_1, ps_2;
     register GXData* src;

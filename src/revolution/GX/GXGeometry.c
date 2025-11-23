@@ -184,7 +184,7 @@ void GXSetCullMode(GXCullMode mode) {
 }
 
 void GXGetCullMode(GXCullMode* out) {
-    // TODO: Fakematch? Should use GX_BP_GET_GENMODE_CULLMODE if possible
+    // TODO(kiwi) Fakematch? Should use GX_BP_GET_GENMODE_CULLMODE if possible
     s32 bits = 0;
     bits |= (s32)(gxdt->genMode >> (13 + 1) & 2) >> 1;
     bits |= (s32)(gxdt->genMode >> 13 & 2);
@@ -196,7 +196,7 @@ void GXSetCoPlanar(GXBool coplanar) {
 
     GX_BP_SET_GENMODE_COPLANAR(gxdt->genMode, coplanar);
 
-    // TODO: GX_BP_SET_OPCODE doesn't work.
+    // TODO(kiwi) GX_BP_SET_OPCODE doesn't work.
     // Did they really write this out?
     reg = 0;
     reg |= GX_BP_REG_SSMASK << 24;

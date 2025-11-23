@@ -58,7 +58,7 @@ private:
     MemInfo* mAllChain;    // at 0x38
 
 public:
-    // TODO: Crazy big implementation...
+    // TODO(kiwi) Crazy big implementation...
 
     MemoryManager() {}
     virtual ~MemoryManager() {} // at 0x8

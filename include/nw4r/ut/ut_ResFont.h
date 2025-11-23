@@ -29,7 +29,7 @@ private:
     static const u32 SIGNATURE_CHARWIDTH = 'CWDH';
     static const u32 SIGNATURE_CHARMAP = 'CMAP';
 
-    // TODO: Which block is this?
+    // TODO(kiwi) Which block is this?
     static const u32 SIGNATURE_GLGR = 'GLGR';
 };
 

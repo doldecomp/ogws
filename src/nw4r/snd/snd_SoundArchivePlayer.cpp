@@ -118,7 +118,7 @@ u32 SoundArchivePlayer::GetRequiredStrmBufferSize(
         strmChannels = info.strmChannelCount;
     }
 
-    // TODO: How is this calculated?
+    // TODO(kiwi) How is this calculated?
     return strmChannels * 0xA000;
 }
 

@@ -119,7 +119,7 @@ asm u32 MTX34InvTranspose(register MTX33* pOut, register const MTX34* pIn){
     ps_msub f13, f3, f8, f13 // (e*i - h*f, f*g - i*d)
     ps_msub f12, f5, f6, f12 // (h*c - b*i, i*a - c*g)
     
-    // TODO: Stop being lazy and finish documentation
+    // TODO(kiwi) Stop being lazy and finish documentation
     ps_mul  f10, f3, f4
     ps_mul  f9, f0, f5
     ps_mul  f8, f1, f2

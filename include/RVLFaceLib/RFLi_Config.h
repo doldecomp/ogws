@@ -74,7 +74,7 @@ extern "C" {
  * Face texture
  */
 
-// TODO: A few values need to be converted to fractions/expressions
+// TODO(kiwi) A few values need to be converted to fractions/expressions
 // Once RFLi_TEX_SCALE_Y becomes a fraction, replace the 1.1600001 with 1.16
 
 #define RFLi_TEX_SCALE_X (0.88961464f)

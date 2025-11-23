@@ -84,7 +84,7 @@ static s32 _ES_InitLib(s32* fd) {
 
 static s32 _ES_GetTicketViews(s32* fd, u64 tid, void* pViews, u32* count) {
     s32 result;
-    // TODO: Hacky solution
+    // TODO(kiwi) Hacky solution
     u8 work[0x120] ALIGN(32);
     IPCIOVector* pVectors = (IPCIOVector*)(work + 0x0);
     u64* pTid = (u64*)(work + 0x20);
@@ -133,7 +133,7 @@ static s32 _ES_GetTicketViews(s32* fd, u64 tid, void* pViews, u32* count) {
 }
 
 static s32 _ES_LaunchTitle(s32* fd, u64 tid, void* pViews) {
-    // TODO: Hacky solution
+    // TODO(kiwi) Hacky solution
     u8 tidWork[256] ALIGN(32);
     u8 vectorWork[32] ALIGN(32);
     IPCIOVector* pVectors = (IPCIOVector*)vectorWork;

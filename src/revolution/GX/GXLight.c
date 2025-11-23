@@ -192,7 +192,7 @@ void GXInitLightColor(GXLightObj* light, GXColor color) {
     *(u32*)&impl->color = *(u32*)&color;
 }
 
-// TODO: This inline is fake, and also is a fake match (r6 hardcoded)
+// TODO(kiwi) This inline is fake, and also is a fake match (r6 hardcoded)
 inline void WriteLightObj(register volatile void* dst,
                           register const GXLightObjImpl* src) {
     register u32 color;

@@ -1,6 +1,6 @@
 #include <nw4r/g3d.h>
 
-// TODO: Naming
+// TODO(kiwi) Naming
 enum TMemCachePlan {
     TMEM_CACHE_NONE,
 
@@ -203,7 +203,8 @@ void SetTMemLayout(TMemLayout layout) {
         break;
     }
 
-    // TODO: Seems to imply no TMEM_LAYOUT_3 exists. Then why the [plan - 1]?
+    // TODO(kiwi) Seems to imply no TMEM_LAYOUT_3 exists. Then why the [plan -
+    // 1]?
     default: {
         break;
     }

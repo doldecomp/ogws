@@ -8,7 +8,7 @@ namespace detail {
 NW4R_UT_RTTI_DEF_DERIVED(SeqSound, BasicSound);
 
 SeqSound::SeqSound(SoundInstanceManager<SeqSound>* pManager)
-    // TODO: Fakematch
+    // TODO(kiwi) Fakematch
     : mTempSpecialHandle(reinterpret_cast<SeqSoundHandle*>(
           mPreparedFlag = mLoadingFlag = false)),
       mManager(pManager),

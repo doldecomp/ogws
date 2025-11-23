@@ -30,7 +30,7 @@ static void __GXXfVtxSpecs(void) {
 
     // clang-format on
 
-    // TODO: Fakematch? Bitset macros don't work here
+    // TODO(kiwi) Fakematch? Bitset macros don't work here
     GX_XF_LOAD_REG_HDR(GX_XF_REG_INVERTEXSPEC);
     cmd = 0;
     cmd = cmd | clr >> 1;
@@ -392,7 +392,7 @@ void GXGetVtxDescv(GXVtxDescList* list) {
     list[i].attr = GX_VA_NBT;
     GXGetVtxDesc(GX_VA_NBT, &list[i].type);
 
-    // TODO: Fakematch
+    // TODO(kiwi) Fakematch
     attr = 1;
     i = (*(new_var2 = &i)) + attr;
     list[i].attr = GX_VA_NULL;

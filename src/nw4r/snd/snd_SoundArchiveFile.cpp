@@ -574,7 +574,7 @@ SoundArchiveFileReader::impl_GetSoundInfoOffset(u32 id) const {
 
     SoundArchiveFile::SoundInfoOffset ref;
 
-    // TODO: Why is the offset changed?
+    // TODO(kiwi) Why is the offset changed?
     ref.refType = pTable->items[id].refType;
     ref.dataType = pTable->items[id].dataType;
     ref.value = pTable->items[id].value + 0x1C;

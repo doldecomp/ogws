@@ -58,7 +58,7 @@ bool RomFont::Load(void* pBuffer) {
 }
 
 u32 RomFont::GetRequireBufferSize() {
-    // TODO: How are these calculated?
+    // TODO(kiwi) How are these calculated?
     switch (OSGetFontEncode()) {
     case OS_FONT_ENCODE_ANSI: {
         return 0x00020120;

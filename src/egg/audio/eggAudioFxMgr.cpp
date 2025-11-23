@@ -1,4 +1,4 @@
-// TODO: REMOVE AFTER REFACTOR
+// TODO(kiwi) REMOVE AFTER REFACTOR
 #pragma ipa file
 
 #include <egg/audio.h>
@@ -123,7 +123,7 @@ bool AudioFx::createFxReverbHi(
         delete mFxBase;
         mFxBase = NULL;
 
-        // TODO: Where does the 0xA4 come from?
+        // TODO(kiwi) Where does the 0xA4 come from?
         EGG_PRINT("createFxReverbHi FAILED!!! need %d (alloc %d)\n",
                   workBufferSize + sizeof(nw4r::snd::FxReverbHi) + 0xA4,
                   mHeap->getTotalSize());
@@ -175,7 +175,7 @@ bool AudioFx::createFxReverbHiDpl2(
         delete mFxBase;
         mFxBase = NULL;
 
-        // TODO: Where does the 0xA4 come from?
+        // TODO(kiwi) Where does the 0xA4 come from?
         EGG_PRINT("createFxReverbHiDpl2 FAILED!!! need %d (alloc %d)\n",
                   workBufferSize + sizeof(nw4r::snd::FxReverbHiDpl2) + 0xA4,
                   mHeap->getTotalSize());
@@ -223,7 +223,7 @@ bool AudioFx::createFxChorus(const nw4r::snd::FxChorus::ChorusParam* pParam) {
         delete mFxBase;
         mFxBase = NULL;
 
-        // TODO: Where does the 0xA4 come from?
+        // TODO(kiwi) Where does the 0xA4 come from?
         EGG_PRINT("createFxChorus FAILED!!! need %d (alloc %d)\n",
                   workBufferSize + sizeof(nw4r::snd::FxChorus) + 0xA4,
                   mHeap->getTotalSize());
@@ -267,7 +267,7 @@ bool AudioFx::createFxDelay(const nw4r::snd::FxDelay::DelayParam* pParam) {
         delete mFxBase;
         mFxBase = NULL;
 
-        // TODO: Where does the 0xA4 come from?
+        // TODO(kiwi) Where does the 0xA4 come from?
         EGG_PRINT("createFxDelay FAILED!!! need %d (alloc %d)\n",
                   workBufferSize + sizeof(nw4r::snd::FxDelay) + 0xA4,
                   mHeap->getTotalSize());

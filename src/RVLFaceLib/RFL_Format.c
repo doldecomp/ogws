@@ -6,7 +6,7 @@
 #define MAGIC_HIDDEN_DB FOURCC('R', 'N', 'H', 'D')
 
 #define TABLE_DATA_STEP 1250
-// TODO: How is this size calculated?
+// TODO(kiwi) How is this size calculated?
 #define TEMP_BUFFER_SIZE (TABLE_DATA_STEP * sizeof(RFLiHiddenCharData) + 0x30E0)
 
 void RFLiClearTableData(RFLiTableData* data) {
