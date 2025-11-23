@@ -125,7 +125,7 @@ struct ResAnmTexSrtData {
 
 class ResAnmTexSrt : public ResCommon<ResAnmTexSrtData> {
 public:
-    static const u32 SIGNATURE = 'SRT0';
+    static const u32 SIGNATURE = FOURCC('S', 'R', 'T', '0');
     static const int REVISION = 4;
 
 public:

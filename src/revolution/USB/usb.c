@@ -1,6 +1,7 @@
 #include <revolution/FS.h>
 #include <revolution/OS.h>
 #include <revolution/USB.h>
+
 #include <stdio.h>
 
 #define USB_HEAP_SIZE 0x1000
@@ -108,7 +109,7 @@ IPCResult IUSB_OpenLib(void) {
         USB_LOG("iusb size: %d lo: %x hi: %x\n", sizeof(USBCommandBlock), lo,
                 hi);
 
-        if ((u8*)lo + USB_HEAP_SIZE > hi) {
+        if ((u8*)lo + USB_HEAP_SIZE > (u8*)hi) {
             USB_ERR("Not enough IPC arena\n");
             result = IPC_RESULT_ALLOC_FAILED;
             goto end;
@@ -193,13 +194,11 @@ end:
     return result;
 }
 
-// clang-format off
 DECOMP_FORCEACTIVE(usb_c,
                    "OpenDevice\n",
                    "OpenDeviceIdsAsync: Not enough memory\n",
                    "CloseDevice\n",
                    "CloseDevice returned: %d\n");
-// clang-format on
 
 IPCResult IUSB_CloseDeviceAsync(s32 fd, USBCallback callback,
                                 void* callbackArg) {
@@ -230,11 +229,9 @@ end:
     return result;
 }
 
-// clang-format off
 DECOMP_FORCEACTIVE(usb_c,
                    "openDevice: Not enough memory\n",
                    "getDeviceList: Not enough memory\n");
-// clang-format on
 
 static IPCResult __IntrBlkMsgInt(s32 fd, u32 endpoint, u32 length, void* buffer,
                                  u8 ioctl, USBCallback callback,
@@ -483,7 +480,6 @@ IPCResult IUSB_WriteCtrlMsgAsync(s32 fd, u8 requestType, u8 request, u16 value,
                         callback, callbackArg, TRUE);
 }
 
-// clang-format off
 DECOMP_FORCEACTIVE(usb_c,
                    "GetStrCb returned: %d\n",
                    "GetStrCb: buf = 0x%x buflen = %u\n",
@@ -504,4 +500,3 @@ DECOMP_FORCEACTIVE(usb_c,
                    "Invalid parameters for ISO transfer request\n",
                    "IUSB_IsoMsgAsync: Not enough memory\n",
                    "Open(%s) failed\n");
-// clang-format on

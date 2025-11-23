@@ -7,7 +7,7 @@
 namespace nw4r {
 namespace ef {
 
-// TODO: Unsure which field is missing
+// TODO(kiwi) Unsure which field is missing
 struct TextureData {
     char* name;      // at 0x0
     u16 width;       // at 0x4
@@ -32,7 +32,7 @@ private:
 
 public:
     explicit ResTexture(TextureData* pData = NULL) : mData(pData) {}
-    explicit ResTexture(const ResTexture& rOther) : mData(rOther.mData) {}
+    ResTexture(const ResTexture& rOther) : mData(rOther.mData) {}
 
     bool IsValid() const {
         return mData != NULL;

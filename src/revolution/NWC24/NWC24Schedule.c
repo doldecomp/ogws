@@ -1,5 +1,7 @@
 #include <revolution/NWC24.h>
+
 #include <revolution/OS.h>
+
 #include <string.h>
 
 #define CHECK_CALLING_STATUS(block) CheckCallingStatus(__FUNCTION__, block)
@@ -41,7 +43,6 @@ static u8 nwc24ScdCommonResult[32] ALIGN(32);
 
 static u8 nwc24ScdStatBuf[256] ALIGN(32);
 
-// clang-format off
 // nwc24ScdStatBuf unused
 DECOMP_FORCEACTIVE(NWC24Schedule_c,
                    nwc24ScdCounterMutex,
@@ -49,7 +50,6 @@ DECOMP_FORCEACTIVE(NWC24Schedule_c,
                    nwc24ScdCommonBuffer,
                    nwc24ScdCommonResult,
                    nwc24ScdStatBuf);
-// clang-format on
 
 // Pool order
 DECOMP_FORCEACTIVE(NWC24Schedule_c, "/dev/net/kd/request");

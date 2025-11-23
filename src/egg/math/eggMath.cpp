@@ -1,4 +1,4 @@
-// TODO: REMOVE AFTER REFACTOR
+// TODO(kiwi) REMOVE AFTER REFACTOR
 #pragma ipa file
 
 #include <egg/math.h>
@@ -29,7 +29,7 @@ template <typename T> T Math<T>::atan2(T ty, T tx) {
 template class Math<f32>;
 
 DECOMP_FORCEACTIVE(eggMath_cpp,
-                  "-1 <= t && t <= 1",
-                  "gcd(%d,%d)\n");
+                   "-1 <= t && t <= 1",
+                   "gcd(%d,%d)\n");
 
 } // namespace EGG

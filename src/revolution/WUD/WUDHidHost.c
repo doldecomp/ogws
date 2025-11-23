@@ -4,7 +4,7 @@
 
 #define DEBUGPrint WUD_DEBUGPrint
 
-// TODO: Is this from BTA?
+// TODO(kiwi) Is this from BTA?
 #define WUD_HH_CUSTOM_EVT 15
 
 typedef struct WUD_HH_EVT15 {
@@ -98,7 +98,7 @@ void WUDHidHostCallback(tBTA_HH_EVT event, tBTA_HH* pData) {
             pInfo = &_work;
 
             if (WUD_BDCMP(pConn->bda, pInfo->devAddr) == 0 &&
-                p->syncState != WUD_STATE_START && pInfo->status == 2) {
+                p->syncState != WUD_STATE_SYNC_START && pInfo->status == 2) {
 
                 if (WUDiGetDevInfo(pConn->bda) &&
                     pConn->status == BTA_HH_ERR_AUTH_FAILED) {
@@ -107,7 +107,7 @@ void WUDHidHostCallback(tBTA_HH_EVT event, tBTA_HH* pData) {
                     p->linkedNum--;
                 }
 
-                p->syncState = WUD_STATE_ERROR;
+                p->syncState = WUD_STATE_SYNC_ERROR;
             }
         }
 

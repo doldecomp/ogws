@@ -2,10 +2,10 @@
 
 #include <algorithm>
 
-DECOMP_FORCELITERAL(math_geometry_cpp, 0.5f, 0.0f);
-
 namespace nw4r {
 namespace math {
+
+DECOMP_FORCELITERAL(math_geometry_cpp, 0.5f, 0.0f);
 
 void PLANE::Set(const VEC3* p0, const VEC3* p1, const VEC3* p2) {
     VEC3 v0, v1, v2;

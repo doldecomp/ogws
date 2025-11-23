@@ -20,7 +20,7 @@ void __register_global_object(void* object, DtorFunction dtor, DtorLink* link) {
 void __destroy_global_chain(void) {
     DtorLink* link;
 
-    while (link = __global_destructor_chain) {
+    while ((link = __global_destructor_chain)) {
         // Pop destructor
         __global_destructor_chain = link->next;
         // Destroy object (-1 to destroy all bases)

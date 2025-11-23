@@ -7,7 +7,7 @@
 extern "C" {
 #endif
 
-// TODO: Create macros for PS/C_ functions
+// TODO(kiwi) Create macros for PS/C_ functions
 void PSMTXIdentity(Mtx);
 void PSMTXCopy(const Mtx, Mtx);
 void PSMTXConcat(const Mtx, const Mtx, Mtx);

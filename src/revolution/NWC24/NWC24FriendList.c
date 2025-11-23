@@ -1,6 +1,6 @@
 #include <revolution/NWC24.h>
 
-#define FRIEND_LIST_MAGIC 'WcFl'
+#define FRIEND_LIST_MAGIC FOURCC('W', 'c', 'F', 'l')
 #define FRIEND_LIST_VERSION 2
 
 static const char* FLFilePath = "/shared2/wc24/nwc24fl.bin";

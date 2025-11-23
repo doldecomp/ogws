@@ -209,7 +209,7 @@ void Frustum::GetOrthographicParam_(f32* pT, f32* pB, f32* pL, f32* pR) const {
     } else if (mCanvasMode == CANVASMODE_LU) {
         *pT = mOffset.y + sGlobalOffset.y;
 
-        // TODO: Fakematch
+        // TODO(kiwi) Fakematch
         f32 new_var2 = mOffset.y + sGlobalOffset.y;
         *pB = new_var2 + -1.0f * mSize.y * mScale.y;
 

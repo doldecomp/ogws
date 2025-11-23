@@ -8,7 +8,7 @@ extern "C" {
 /**
  * AI hardware registers
  */
-volatile u32 AI_HW_REGS[1] DECL_ADDRESS(0xCD006C00);
+volatile u32 DECL_HW_REGS(AI) DECL_ADDRESS(0xCD006C00);
 
 /**
  * Hardware register indexes

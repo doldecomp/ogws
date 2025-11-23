@@ -37,7 +37,7 @@ void* __va_arg(va_list argp, int type) {
 
         // These do not start at even registers (aside from GPR 3).
         // An uneven reg ID means this is the first *of two* registers
-        if (regNo & 1 != 0) {
+        if ((regNo & 1) != 0) {
             regAddend = 1;
         }
 

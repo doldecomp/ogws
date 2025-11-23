@@ -21,7 +21,7 @@ void ResNode::PatchChrAnmResult(ChrAnmResult* pResult) const {
                 flags |= ChrAnmResult::FLAG_SCALE_UNIFORM;
             }
 
-            pResult->s = static_cast<math::VEC3&>(r.scale);
+            pResult->s = static_cast<const math::VEC3&>(r.scale);
         }
     }
 
@@ -82,7 +82,7 @@ void ResNode::CalcChrAnmResult(ChrAnmResult* pResult) const {
             flags |= ChrAnmResult::FLAG_SCALE_UNIFORM;
         }
 
-        pResult->s = static_cast<math::VEC3&>(r.scale);
+        pResult->s = static_cast<const math::VEC3&>(r.scale);
     }
 
     if (r.flags & ResNodeData::FLAG_ROT_ZERO) {

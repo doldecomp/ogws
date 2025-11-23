@@ -898,7 +898,7 @@ bool Material::SetupGX(bool modulate, u8 alpha) {
 
             if (detail::IsCITexelFormat(rTexMap.GetTexelFormat())) {
                 u32 tlutName;
-                if (rTexMap.GetTexelFormat() == GX_TF_C14X2) {
+                if (static_cast<int>(rTexMap.GetTexelFormat()) == GX_TF_C14X2) {
                     tlutName = bigTlutID++;
                 } else {
                     tlutName = tlutID++;

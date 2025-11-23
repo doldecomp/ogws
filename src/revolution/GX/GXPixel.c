@@ -48,7 +48,7 @@ void GXSetFog(GXFogType type, GXColor color, f32 start, f32 end, f32 near,
             expB--;
         }
 
-        a = f28 / (1 << expB + 1);
+        a = f28 / (1 << (expB + 1));
         magB = 8388638.0f * f25;
         shiftB = expB + 1;
         c = f24;

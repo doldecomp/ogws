@@ -1,4 +1,4 @@
-// TODO: REMOVE AFTER REFACTOR
+// TODO(kiwi) REMOVE AFTER REFACTOR
 #pragma ipa file
 
 #include <egg/audio.h>
@@ -310,6 +310,10 @@ void ArcPlayer::closeArchive() {
     case SARC_STORAGE_CNT:
     case SARC_STORAGE_MEM: {
         mMemorySoundArchive.Shutdown();
+        break;
+    }
+
+    default: {
         break;
     }
     }

@@ -13,6 +13,7 @@ extern "C" {
 #include <revolution/BTE/include/bt_trace.h>
 #include <revolution/BTE/include/bte.h>
 #include <revolution/BTE/include/bte_appl.h>
+#include <revolution/BTE/include/bte_common.h>
 #include <revolution/BTE/include/gki_target.h>
 
 /******************************************************************************
@@ -22,6 +23,13 @@ extern "C" {
  ******************************************************************************/
 #include <revolution/BTE/bta/include/bta_api.h>
 #include <revolution/BTE/bta/include/bta_hh_api.h>
+
+/******************************************************************************
+ *
+ * API
+ *
+ ******************************************************************************/
+#include <revolution/BTE/stack/include/l2c_api.h>
 
 /******************************************************************************
  *

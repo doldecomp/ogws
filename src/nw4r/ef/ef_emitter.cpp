@@ -1122,7 +1122,7 @@ u32 Emitter::ForeachParticleManager(ForEachFunc pFunc, ForEachParam param,
         calls++;
     });
 
-    // TODO: I think this is doing the same for all sibling emitters?
+    // TODO(kiwi) I think this is doing the same for all sibling emitters?
     if (propogate) {
         ForEachContext data;
         data.calls = 0;

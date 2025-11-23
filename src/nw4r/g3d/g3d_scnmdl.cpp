@@ -302,7 +302,7 @@ ScnMdl* ScnMdl::Construct(MEMAllocator* pAllocator, u32* pSize, ResMdl mdl,
 
     u32 viewTexMtxArrayUnitSize = viewPosMtxArrayUnitSize;
 
-    // TODO: Fakematch
+    // TODO(kiwi) Fakematch
     u32 viewTexMtxArraySize = mdl.ref().info.need_tex_mtx_array
                                   ? numView * align32(viewTexMtxArrayUnitSize)
                                   : 0;

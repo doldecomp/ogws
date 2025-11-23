@@ -1,131 +1,5 @@
 #include <revolution/OS.h>
 
-extern wchar_t UcsAnsiTable[32];
-extern wchar_t* UcsSjisTable[256];
-
-const u8* OSUTF8to32(const u8* utf8, u32* utf32) {
-    u32 code;
-    u32 full;
-    u32 size;
-    int i;
-
-    code = *utf8;
-    full = 0;
-    if (code != 0) {
-        utf8++;
-    }
-
-    if (!(code & 0x80)) {
-        full = code;
-        size = 0;
-    } else if ((code & 0xE0) == 0xC0) {
-        full = code & 0x1F;
-        size = 1;
-    } else if ((code & 0xF0) == 0xE0) {
-        full = code & 0xF;
-        size = 2;
-    } else if ((code & 0xF8) == 0xF0) {
-        full = code & 0x7;
-        size = 3;
-    } else {
-        return NULL;
-    }
-
-    for (i = 0; i < size; i++) {
-        code = *utf8++;
-        full <<= 6;
-
-        if ((code & 0xC0) != 0x80) {
-            return NULL;
-        }
-
-        full |= code & 0x3F;
-    }
-
-    if (full <= 0x7F) {
-        if (size != 0) {
-            return NULL;
-        }
-    } else if (full <= 0x7FF) {
-        if (size != 1) {
-            return NULL;
-        }
-    } else if (full <= 0xFFFF) {
-        if (size != 2) {
-            return NULL;
-        }
-    }
-
-    if (full >= 0xD800 && full <= 0xDFFF) {
-        return NULL;
-    }
-
-    *utf32 = full;
-    return utf8;
-}
-
-const wchar_t* OSUTF16to32(const wchar_t* utf16, u32* utf32) {
-    wchar_t hi, lo;
-    u32 full;
-
-    hi = *utf16;
-    if (hi != 0) {
-        utf16++;
-    }
-
-    if (hi < 0xD800 || hi > 0xDFFF) {
-        full = hi;
-    } else if (hi <= 0xDBFF) {
-        lo = *utf16++;
-
-        if (lo >= 0xDC00 && lo <= 0xDFFF) {
-            full = (hi & 0x3FF) << 10 | lo & 0x3FF;
-            full += 0x10000;
-        } else {
-            return NULL;
-        }
-    } else {
-        return NULL;
-    }
-
-    *utf32 = full;
-    return utf16;
-}
-
-u8 OSUTF32toANSI(u32 utf32) {
-    int i;
-
-    if (utf32 > 0xFF) {
-        return 0;
-    }
-
-    if (utf32 < 0x80 || utf32 > 0x9F) {
-        return utf32 & 0xFF;
-    }
-
-    if (utf32 >= 0x152 && utf32 <= 0x2122) {
-        for (i = 0; i < ARRAY_SIZE(UcsAnsiTable); i++) {
-            if (UcsAnsiTable[i] == utf32) {
-                return i + 0x80 & 0xFF;
-            }
-        }
-    }
-
-    return 0;
-}
-
-wchar_t OSUTF32toSJIS(u32 utf32) {
-    if (utf32 >= 0x10000) {
-        return 0;
-    }
-
-    if (UcsSjisTable[utf32 >> 8 & 0xFF] != NULL) {
-        return UcsSjisTable[utf32 >> 8 & 0xFF][utf32 & 0xFF];
-    }
-
-    return 0;
-}
-
 static wchar_t UcsAnsiTable[32] = {
     0x20AC, 0x0000, 0x201A, 0x0192, 0x201E, 0x2026, 0x2020, 0x2021,
     0x02C6, 0x2030, 0x0160, 0x2039, 0x0152, 0x0000, 0x017D, 0x0000,
@@ -3040,3 +2914,126 @@ static wchar_t* UcsSjisTable[256] = {
     NULL,  NULL,  NULL,  NULL,  NULL,  NULL,  NULL,  NULL,  NULL,  NULL,  NULL,
     NULL,  NULL,  NULL,  NULL,  NULL,  NULL,  NULL,  NULL,  NULL,  NULL,  NULL,
     NULL,  NULL,  UcsFF};
+
+const u8* OSUTF8to32(const u8* utf8, u32* utf32) {
+    u32 code;
+    u32 full;
+    u32 size;
+    int i;
+
+    code = *utf8;
+    full = 0;
+    if (code != 0) {
+        utf8++;
+    }
+
+    if (!(code & 0x80)) {
+        full = code;
+        size = 0;
+    } else if ((code & 0xE0) == 0xC0) {
+        full = code & 0x1F;
+        size = 1;
+    } else if ((code & 0xF0) == 0xE0) {
+        full = code & 0xF;
+        size = 2;
+    } else if ((code & 0xF8) == 0xF0) {
+        full = code & 0x7;
+        size = 3;
+    } else {
+        return NULL;
+    }
+
+    for (i = 0; i < size; i++) {
+        code = *utf8++;
+        full <<= 6;
+
+        if ((code & 0xC0) != 0x80) {
+            return NULL;
+        }
+
+        full |= code & 0x3F;
+    }
+
+    if (full <= 0x7F) {
+        if (size != 0) {
+            return NULL;
+        }
+    } else if (full <= 0x7FF) {
+        if (size != 1) {
+            return NULL;
+        }
+    } else if (full <= 0xFFFF) {
+        if (size != 2) {
+            return NULL;
+        }
+    }
+
+    if (full >= 0xD800 && full <= 0xDFFF) {
+        return NULL;
+    }
+
+    *utf32 = full;
+    return utf8;
+}
+
+const wchar_t* OSUTF16to32(const wchar_t* utf16, u32* utf32) {
+    wchar_t hi, lo;
+    u32 full;
+
+    hi = *utf16;
+    if (hi != 0) {
+        utf16++;
+    }
+
+    if (hi < 0xD800 || hi > 0xDFFF) {
+        full = hi;
+    } else if (hi <= 0xDBFF) {
+        lo = *utf16++;
+
+        if (lo >= 0xDC00 && lo <= 0xDFFF) {
+            full = (hi & 0x3FF) << 10 | lo & 0x3FF;
+            full += 0x10000;
+        } else {
+            return NULL;
+        }
+    } else {
+        return NULL;
+    }
+
+    *utf32 = full;
+    return utf16;
+}
+
+u8 OSUTF32toANSI(u32 utf32) {
+    int i;
+
+    if (utf32 > 0xFF) {
+        return 0;
+    }
+
+    if (utf32 < 0x80 || utf32 > 0x9F) {
+        return utf32 & 0xFF;
+    }
+
+    if (utf32 >= 0x152 && utf32 <= 0x2122) {
+        for (i = 0; i < ARRAY_SIZE(UcsAnsiTable); i++) {
+            if (UcsAnsiTable[i] == utf32) {
+                return i + 0x80 & 0xFF;
+            }
+        }
+    }
+
+    return 0;
+}
+
+wchar_t OSUTF32toSJIS(u32 utf32) {
+    if (utf32 >= 0x10000) {
+        return 0;
+    }
+
+    if (UcsSjisTable[utf32 >> 8 & 0xFF] != NULL) {
+        return UcsSjisTable[utf32 >> 8 & 0xFF][utf32 & 0xFF];
+    }
+
+    return 0;
+}

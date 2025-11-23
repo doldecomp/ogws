@@ -18,11 +18,11 @@ void IPCInit(void) {
 }
 
 u32 IPCReadReg(s32 index) {
-    return IPC_HW_REGS_PPC[index];
+    return IPC_PPC_HW_REGS[index];
 }
 
 void IPCWriteReg(s32 index, u32 value) {
-    IPC_HW_REGS_PPC[index] = value;
+    IPC_PPC_HW_REGS[index] = value;
 }
 
 void* IPCGetBufferHi(void) {

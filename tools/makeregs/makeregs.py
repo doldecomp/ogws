@@ -91,19 +91,23 @@ def write_regs_header(args, res, regs):
             f.write(
                 f"#define RVL_SDK_{module.upper()}_HARDWARE_{name.upper()}_H\n")
 
+            # Main RVL types header
+            f.write("#include <types.h>\n")
+            f.write("\n")
+
             # Include dependencies
             for dep in res.get("deps", []):
                 if dep != "types.h":
                     f.write(f"#include <{dep}>\n")
-
-            # Main RVL types header
-            f.write("#include <types.h>\n")
+            f.write("\n")
 
             # C++ guard
             f.write("#ifdef __cplusplus\n")
             f.write("extern \"C\" {\n")
             f.write("#endif\n")
 
+            f.write("\n")
+            f.write("// clang-format off\n")
             f.write("\n")
 
             # Begin comment
@@ -183,7 +187,7 @@ def write_regs_header(args, res, regs):
 
                     # Mask macros for manual use
                     f.write(
-                        f"        /* raw mask   */ #define {macro_prefix}_{cased_reg}_{cased_field}_MASK (((1 << {field.size}) - 1) << 31 - {field.end})\n")
+                        f"        /* raw mask   */ #define {macro_prefix}_{cased_reg}_{cased_field}_MASK (((1 << {field.size}) - 1) << (31 - {field.end}))\n")
                     f.write(
                         f"        /* local mask */ #define {macro_prefix}_{cased_reg}_{cased_field}_LMASK ((1 << {field.size}) - 1)\n")
 
@@ -208,6 +212,9 @@ def write_regs_header(args, res, regs):
                     f.write("\n")
 
                 f.write("\n")
+            f.write("\n")
+
+            f.write("// clang-format on\n")
             f.write("\n")
 
             # Close C++ guard

@@ -1,7 +1,5 @@
 #include <nw4r/snd.h>
 
-#include <climits>
-
 namespace nw4r {
 namespace snd {
 namespace detail {
@@ -11,7 +9,7 @@ BasicPlayer::BasicPlayer() : mId(BasicSound::INVALID_ID) {
 }
 
 void BasicPlayer::InitParam() {
-    // TODO: Fakematch
+    // TODO(kiwi) Fakematch
     mPan = 1.0f;
 
     mPan = 0.0f;

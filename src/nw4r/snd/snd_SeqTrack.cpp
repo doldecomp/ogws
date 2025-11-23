@@ -339,9 +339,14 @@ void SeqTrack::ChannelCallbackFunc(Channel* pDropChannel,
 
     switch (status) {
     case Channel::CALLBACK_STATUS_STOPPED:
-    case Channel::CALLBACK_STATUS_FINISH:
+    case Channel::CALLBACK_STATUS_FINISH: {
         Channel::FreeChannel(pDropChannel);
         break;
+    }
+
+    default: {
+        break;
+    }
     }
 
     if (p->mPlayer != NULL) {

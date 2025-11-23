@@ -116,7 +116,7 @@ void __OSShutdownDevices(u32 event) {
     KillThreads();
 }
 
-// TODO: There must be a better way....
+// TODO(kiwi) There must be a better way....
 void __OSGetDiscState(u8* out) {
     u32 flags;
 

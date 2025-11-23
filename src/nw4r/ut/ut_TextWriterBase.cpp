@@ -119,7 +119,7 @@ bool TextWriterBase<T>::CalcLineRectImpl(Rect* pRect, const T** ppStr,
                 }
             }
 
-            TagProcessorBase<T>::Operation oper =
+            typename TagProcessorType::Operation oper =
                 mTagProcessor->CalcRect(&r, ch, &context);
 
             reader.Set(context.str);
@@ -131,16 +131,16 @@ bool TextWriterBase<T>::CalcLineRectImpl(Rect* pRect, const T** ppStr,
 
             x = GetCursorX();
 
-            if (oper == TagProcessor::OPERATION_END_DRAW) {
+            if (oper == TagProcessorType::OPERATION_END_DRAW) {
                 *ppStr += len;
                 return false;
             }
 
-            if (oper == TagProcessor::OPERATION_NO_CHAR_SPACE) {
+            if (oper == TagProcessorType::OPERATION_NO_CHAR_SPACE) {
                 charSpace = false;
-            } else if (oper == TagProcessor::OPERATION_CHAR_SPACE) {
+            } else if (oper == TagProcessorType::OPERATION_CHAR_SPACE) {
                 charSpace = true;
-            } else if (oper == TagProcessor::OPERATION_NEXT_LINE) {
+            } else if (oper == TagProcessorType::OPERATION_NEXT_LINE) {
                 break;
             }
         } else {
@@ -238,7 +238,7 @@ template <typename T> f32 TextWriterBase<T>::PrintImpl(const T* pStr, int len) {
     CharStrmReader reader = GetFont()->GetCharStrmReader();
     reader.Set(pStr);
 
-    TagProcessorBase<T>::Operation oper;
+    typename TagProcessorType::Operation oper;
     u16 ch = reader.Next();
 
     while (static_cast<const T*>(reader.GetCurrentPos()) - pStr <= len) {
@@ -263,7 +263,7 @@ template <typename T> f32 TextWriterBase<T>::PrintImpl(const T* pStr, int len) {
             }
 
             oper = mTagProcessor->Process(ch, &context);
-            if (oper == TagProcessor::OPERATION_NEXT_LINE) {
+            if (oper == TagProcessorType::OPERATION_NEXT_LINE) {
                 if (IsDrawFlagSet(DRAWFLAG_MASK_ALIGN_TEXT,
                                   DRAWFLAG_ALIGN_TEXT_CENTER)) {
 
@@ -292,11 +292,11 @@ template <typename T> f32 TextWriterBase<T>::PrintImpl(const T* pStr, int len) {
                 }
 
                 charSpace = false;
-            } else if (oper == TagProcessor::OPERATION_NO_CHAR_SPACE) {
+            } else if (oper == TagProcessorType::OPERATION_NO_CHAR_SPACE) {
                 charSpace = false;
-            } else if (oper == TagProcessor::OPERATION_CHAR_SPACE) {
+            } else if (oper == TagProcessorType::OPERATION_CHAR_SPACE) {
                 charSpace = true;
-            } else if (oper == TagProcessor::OPERATION_END_DRAW) {
+            } else if (oper == TagProcessorType::OPERATION_END_DRAW) {
                 break;
             }
 

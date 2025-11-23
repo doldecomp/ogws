@@ -19,10 +19,8 @@ void G3dObj::Destroy() {
     delete this;
 }
 
-// clang-format off
 DECOMP_FORCEACTIVE(g3d_obj_cpp,
                    G3dObj::IsDerivedFrom);
-// clang-format on
 
 } // namespace g3d
 } // namespace nw4r

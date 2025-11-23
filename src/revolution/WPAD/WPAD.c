@@ -806,7 +806,7 @@ static void __ClearControlBlock(s32 chan) {
     _rumbleCnt[chan] = 0;
 }
 
-// TODO: _wpd should be 32-byte aligned, but doing so breaks this function
+// TODO(kiwi) _wpd should be 32-byte aligned, but doing so breaks this function
 static u8 FAKE_ALIGNMENT[0x10];
 DECOMP_FORCEACTIVE(WPAD_c, _dev_handle_index, FAKE_ALIGNMENT);
 

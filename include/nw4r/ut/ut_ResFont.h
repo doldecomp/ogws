@@ -21,16 +21,16 @@ private:
     static FontInformation* Rebuild(BinaryFileHeader* pHeader);
 
 private:
-    static const u32 SIGNATURE = 'RFNT';
-    static const u32 SIGNATURE_UNPACKED = 'RFNU';
+    static const u32 SIGNATURE = FOURCC('R', 'F', 'N', 'T');
+    static const u32 SIGNATURE_UNPACKED = FOURCC('R', 'F', 'N', 'U');
 
-    static const u32 SIGNATURE_FONTINFO = 'FINF';
-    static const u32 SIGNATURE_TEXGLYPH = 'TGLP';
-    static const u32 SIGNATURE_CHARWIDTH = 'CWDH';
-    static const u32 SIGNATURE_CHARMAP = 'CMAP';
+    static const u32 SIGNATURE_FONTINFO = FOURCC('F', 'I', 'N', 'F');
+    static const u32 SIGNATURE_TEXGLYPH = FOURCC('T', 'G', 'L', 'P');
+    static const u32 SIGNATURE_CHARWIDTH = FOURCC('C', 'W', 'D', 'H');
+    static const u32 SIGNATURE_CHARMAP = FOURCC('C', 'M', 'A', 'P');
 
-    // TODO: Which block is this?
-    static const u32 SIGNATURE_GLGR = 'GLGR';
+    // TODO(kiwi) Which block is this?
+    static const u32 SIGNATURE_GLGR = FOURCC('G', 'L', 'G', 'R');
 };
 
 } // namespace ut

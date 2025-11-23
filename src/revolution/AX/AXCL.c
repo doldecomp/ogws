@@ -39,7 +39,7 @@ typedef enum {
     COMMAND_OUTPUT_DPL2,
     COMMAND_WM_OUTPUT,
     COMMAND_END
-};
+} AXCommand;
 
 static u32 __AXCommandListPosition;
 

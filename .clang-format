@@ -20,6 +20,7 @@ UseTab: Never
 WhitespaceSensitiveMacros:
   [
     ASM,
+    ASM_VOLATILE,
     DECOMP_FORCEACTIVE_DTOR,
     DECOMP_FORCEACTIVE,
     DECOMP_FORCELITERAL,

@@ -142,7 +142,7 @@ u8 SCGetWpadMotorMode(void) {
 }
 
 BOOL SCSetWpadMotorMode(u8 mode) {
-    SCReplaceU8Item(mode, SC_ITEM_BT_MOT);
+    return SCReplaceU8Item(mode, SC_ITEM_BT_MOT);
 }
 
 u8 SCGetWpadSensorBarPosition(void) {
@@ -170,5 +170,5 @@ u8 SCGetWpadSpeakerVolume(void) {
 }
 
 BOOL SCSetWpadSpeakerVolume(u8 vol) {
-    SCReplaceU8Item(vol, SC_ITEM_BT_SPKV);
+    return SCReplaceU8Item(vol, SC_ITEM_BT_SPKV);
 }

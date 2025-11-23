@@ -5,7 +5,7 @@
 static s32 __CNTConvertErrorCode(s32 error) {
     int i;
 
-    // TODO: Placed in the wrong ELF section
+    // TODO(kiwi) Placed in the wrong ELF section
     const s32 errorMap[] = {
         0x0000,  0x0000,  -0x03E9, -0x13C7, -0x03EA, -0x13C7, -0x03EB, -0x13C7,
         -0x03EC, -0x138A, -0x03ED, -0x13C7, -0x03EE, -0x13C7, -0x03EF, -0x13C7,

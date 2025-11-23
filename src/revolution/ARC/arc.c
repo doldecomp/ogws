@@ -1,12 +1,12 @@
+/**
+ * Modified from decompilation by riidefi in WiiCore
+ */
+
 #include <revolution/OS/OSError.h>
 
 #include <revolution/ARC.h>
 
 #include <ctype.h>
-
-/**
- * Modified from decompilation by riidefi in WiiCore
- */
 
 #define ARC_FILE_MAGIC 0x55AA382D
 

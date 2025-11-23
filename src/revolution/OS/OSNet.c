@@ -37,7 +37,6 @@ void __OSInitNet(void) {
     }
 }
 
-// clang-format off
 DECOMP_FORCEACTIVE(OSNet_c,
                    "NWC24iPrepareShutdown",
                    "/dev/net/kd/request",
@@ -47,4 +46,3 @@ DECOMP_FORCEACTIVE(OSNet_c,
                    "NWC24Shutdown_: Give up!\n",
                    "NWC24iSetRtcCounter_",
                    "/dev/net/kd/time");
-// clang-format on

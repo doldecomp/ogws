@@ -207,8 +207,9 @@ public:
  ******************************************************************************/
 template <typename TTraits>
 f32 CalcAnimationFVS(const ResAnmChrFVSData* pFVSData, f32 frame) {
-    CResAnmChrFrm<TTraits::TFrmData> first = TTraits::GetKeyFrame(pFVSData, 0);
-    CResAnmChrFrm<TTraits::TFrmData> last =
+    CResAnmChrFrm<typename TTraits::TFrmData> first =
+        TTraits::GetKeyFrame(pFVSData, 0);
+    CResAnmChrFrm<typename TTraits::TFrmData> last =
         TTraits::GetKeyFrame(pFVSData, pFVSData->numFrameValues - 1);
 
     if (frame <= first.GetFrameF32()) {
@@ -225,10 +226,10 @@ f32 CalcAnimationFVS(const ResAnmChrFVSData* pFVSData, f32 frame) {
     f32 f_estimatePos = frameOffset * numKeyFrame * pFVSData->invKeyFrameRange;
     u16 i_estimatePos = math::F32ToU16(f_estimatePos);
 
-    CResAnmChrFrm<TTraits::TFrmData> left =
+    CResAnmChrFrm<typename TTraits::TFrmData> left =
         TTraits::GetKeyFrame(pFVSData, i_estimatePos);
 
-    const TTraits::TFrame quantized = TTraits::QuantizeFrame(frame);
+    const typename TTraits::TFrame quantized = TTraits::QuantizeFrame(frame);
 
     if (quantized < left.GetFrame()) {
         do {
@@ -246,7 +247,7 @@ f32 CalcAnimationFVS(const ResAnmChrFVSData* pFVSData, f32 frame) {
         return left.GetValue(pFVSData);
     }
 
-    CResAnmChrFrm<TTraits::TFrmData> right = left + 1;
+    CResAnmChrFrm<typename TTraits::TFrmData> right = left + 1;
 
     f32 v0 = left.GetValue(pFVSData);
     f32 t0 = left.GetSlope();

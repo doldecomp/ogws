@@ -230,7 +230,7 @@ s32 IPCCltInit(void) {
         IPCInit();
 
         lo = IPCGetBufferLo();
-        if ((char*)lo + IPC_HEAP_SIZE > IPCGetBufferHi()) {
+        if ((char*)lo + IPC_HEAP_SIZE > (char*)IPCGetBufferHi()) {
             err = IPC_RESULT_ALLOC_FAILED;
         } else {
             hid = iosCreateHeap(lo, IPC_HEAP_SIZE);

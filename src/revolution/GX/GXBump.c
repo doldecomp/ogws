@@ -30,23 +30,29 @@ void GXSetIndTexMtx(GXIndTexMtxID id, const f32 offset[2][3], s8 scaleExp) {
     switch (id) {
     case GX_ITM_0:
     case GX_ITM_1:
-    case GX_ITM_2:
+    case GX_ITM_2: {
         index = id - GX_ITM_0;
         break;
+    }
+
     case GX_ITM_S0:
     case GX_ITM_S1:
-    case GX_ITM_S2:
+    case GX_ITM_S2: {
         index = id - GX_ITM_S0;
         break;
+    }
+
     case GX_ITM_T0:
     case GX_ITM_T1:
-    case GX_ITM_T2:
+    case GX_ITM_T2: {
         index = id - GX_ITM_T0;
         break;
-    case 4:
-    case 8:
-    default:
+    }
+
+    default: {
         index = 0;
+        break;
+    }
     }
 
     scaleExp += 17;
@@ -58,7 +64,7 @@ void GXSetIndTexMtx(GXIndTexMtxID id, const f32 offset[2][3], s8 scaleExp) {
     GX_BP_SET_OPCODE(cmd, index * 3 + GX_BP_REG_INDMTX0A);
     GX_BP_LOAD_REG(cmd);
 
-    // TODO: Match using GX_BP_SET_INDMTXB_EXP
+    // TODO(kiwi) Match using GX_BP_SET_INDMTXB_EXP
     cmd = 0;
     GX_BP_SET_INDMTXB_M01(cmd, 1024.0f * offset[0][1]);
     GX_BP_SET_INDMTXB_M11(cmd, 1024.0f * offset[1][1]);
@@ -66,7 +72,7 @@ void GXSetIndTexMtx(GXIndTexMtxID id, const f32 offset[2][3], s8 scaleExp) {
     GX_BP_SET_OPCODE(cmd, index * 3 + GX_BP_REG_INDMTX0B);
     GX_BP_LOAD_REG(cmd);
 
-    // TODO: Match using GX_BP_SET_INDMTXC_EXP
+    // TODO(kiwi) Match using GX_BP_SET_INDMTXC_EXP
     cmd = 0;
     GX_BP_SET_INDMTXC_M02(cmd, 1024.0f * offset[0][2]);
     GX_BP_SET_INDMTXC_M12(cmd, 1024.0f * offset[1][2]);
@@ -80,30 +86,41 @@ void GXSetIndTexMtx(GXIndTexMtxID id, const f32 offset[2][3], s8 scaleExp) {
 void GXSetIndTexCoordScale(GXIndTexStageID stage, GXIndTexScale scaleS,
                            GXIndTexScale scaleT) {
     switch (stage) {
-    case GX_INDTEXSTAGE0:
+    case GX_INDTEXSTAGE0: {
         GX_BP_SET_RAS1_SS0_S0(gxdt->ras1_ss0, scaleS);
         GX_BP_SET_RAS1_SS0_T0(gxdt->ras1_ss0, scaleT);
         GX_BP_SET_OPCODE(gxdt->ras1_ss0, GX_BP_REG_RAS1_SS0);
         GX_BP_LOAD_REG(gxdt->ras1_ss0);
         break;
-    case GX_INDTEXSTAGE1:
+    }
+
+    case GX_INDTEXSTAGE1: {
         GX_BP_SET_RAS1_SS0_S1(gxdt->ras1_ss0, scaleS);
         GX_BP_SET_RAS1_SS0_T1(gxdt->ras1_ss0, scaleT);
         GX_BP_SET_OPCODE(gxdt->ras1_ss0, GX_BP_REG_RAS1_SS0);
         GX_BP_LOAD_REG(gxdt->ras1_ss0);
         break;
-    case GX_INDTEXSTAGE2:
+    }
+
+    case GX_INDTEXSTAGE2: {
         GX_BP_SET_RAS1_SS1_S2(gxdt->ras1_ss1, scaleS);
         GX_BP_SET_RAS1_SS1_T2(gxdt->ras1_ss1, scaleT);
         GX_BP_SET_OPCODE(gxdt->ras1_ss1, GX_BP_REG_RAS1_SS1);
         GX_BP_LOAD_REG(gxdt->ras1_ss1);
         break;
-    case GX_INDTEXSTAGE3:
+    }
+
+    case GX_INDTEXSTAGE3: {
         GX_BP_SET_RAS1_SS1_S3(gxdt->ras1_ss1, scaleS);
         GX_BP_SET_RAS1_SS1_T3(gxdt->ras1_ss1, scaleT);
         GX_BP_SET_OPCODE(gxdt->ras1_ss1, GX_BP_REG_RAS1_SS1);
         GX_BP_LOAD_REG(gxdt->ras1_ss1);
         break;
+    }
+
+    default: {
+        break;
+    }
     }
 
     gxdt->lastWriteWasXF = FALSE;
@@ -120,22 +137,33 @@ void GXSetIndTexOrder(GXIndTexStageID stage, GXTexCoordID coord,
     }
 
     switch (stage) {
-    case GX_INDTEXSTAGE0:
+    case GX_INDTEXSTAGE0: {
         GX_BP_SET_RAS1_IREF_MAP0(gxdt->ras1_iref, map);
         GX_BP_SET_RAS1_IREF_TXC0(gxdt->ras1_iref, coord);
         break;
-    case GX_INDTEXSTAGE1:
+    }
+
+    case GX_INDTEXSTAGE1: {
         GX_BP_SET_RAS1_IREF_MAP1(gxdt->ras1_iref, map);
         GX_BP_SET_RAS1_IREF_TXC1(gxdt->ras1_iref, coord);
         break;
-    case GX_INDTEXSTAGE2:
+    }
+
+    case GX_INDTEXSTAGE2: {
         GX_BP_SET_RAS1_IREF_MAP2(gxdt->ras1_iref, map);
         GX_BP_SET_RAS1_IREF_TXC2(gxdt->ras1_iref, coord);
         break;
-    case GX_INDTEXSTAGE3:
+    }
+
+    case GX_INDTEXSTAGE3: {
         GX_BP_SET_RAS1_IREF_MAP3(gxdt->ras1_iref, map);
         GX_BP_SET_RAS1_IREF_TXC3(gxdt->ras1_iref, coord);
         break;
+    }
+
+    default: {
+        break;
+    }
     }
 
     GX_BP_LOAD_REG(gxdt->ras1_iref);

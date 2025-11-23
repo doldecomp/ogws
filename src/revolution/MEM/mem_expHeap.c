@@ -1,8 +1,8 @@
 #include <revolution/MEM.h>
 
-#define MEM_EXP_HEAP_MAGIC 'EXPH'
-#define MEM_EXP_HEAP_MBLOCK_FREE 'FR'
-#define MEM_EXP_HEAP_MBLOCK_USED 'UD'
+#define MEM_EXP_HEAP_MAGIC FOURCC('E', 'X', 'P', 'H')
+#define MEM_EXP_HEAP_MBLOCK_FREE TWOCC('F', 'R')
+#define MEM_EXP_HEAP_MBLOCK_USED TWOCC('U', 'D')
 
 // Size of base and expandable heap head
 #define MEM_EXP_HEAP_HEAD_SIZE (sizeof(MEMiHeapHead) + sizeof(MEMiExpHeapHead))
@@ -121,8 +121,7 @@ static MEMiHeapHead* InitExpHeap_(MEMiHeapHead* heap, void* end, u16 opt) {
 static void* AllocUsedBlockFromFreeBlock_(MEMiExpHeapHead* exp,
                                           MEMiExpHeapMBlock* mblock,
                                           void* memPtr, u32 size,
-                                          u16 allocDir) {
-}
+                                          u16 allocDir) {}
 
 static void* AllocFromHead_(MEMiHeapHead* heap, u32 size, s32 align) {
     MEMiExpHeapMBlock* it;
@@ -196,8 +195,7 @@ static void* AllocFromTail_(MEMiHeapHead* heap, u32 size, s32 align) {
 }
 
 // Non-matching
-static void RecycleRegion_(MEMiExpHeapHead* exp, void** region) {
-}
+static void RecycleRegion_(MEMiExpHeapHead* exp, void** region) {}
 
 MEMiHeapHead* MEMCreateExpHeapEx(void* start, u32 size, u16 opt) {
     void* end = AddU32ToPtr(start, size);
@@ -243,8 +241,7 @@ void* MEMAllocFromExpHeapEx(MEMiHeapHead* heap, u32 size, s32 align) {
 }
 
 // Non-matching
-u32 MEMResizeForMBlockExpHeap(MEMiHeapHead* heap, void* memBlock, u32 size) {
-}
+u32 MEMResizeForMBlockExpHeap(MEMiHeapHead* heap, void* memBlock, u32 size) {}
 
 void MEMFreeToExpHeap(MEMiHeapHead* heap, void* memBlock) {
     MEMiExpHeapMBlock* mblock;

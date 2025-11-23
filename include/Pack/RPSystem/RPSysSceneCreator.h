@@ -223,7 +223,7 @@ public:
      */
     const char* getResDirName(s32 id = -1);
 
-#ifdef PACK_SPORTS
+#if defined(PACK_SPORTS)
     /**
      * @brief Gets the sport corresponding to the scene ID
      * @note If the specified scene has no entry, this function returns -1.

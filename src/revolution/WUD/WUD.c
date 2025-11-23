@@ -1,3 +1,5 @@
+#include "revolution/WUD/WUDInternal.h"
+
 #include <revolution/BTE.h>
 #include <revolution/OS.h>
 #include <revolution/SC.h>
@@ -211,14 +213,14 @@ static void SyncFlushCallback(SCStatus status) {
 
     DEBUGPrint("SyncFlushCallback() : %d, Sync: %d\n", status, _wcb.syncState);
 
-    if (p->syncState == WUD_STATE_START) {
+    if (p->syncState == WUD_STATE_SYNC_START) {
         return;
     }
 
     if (status == SC_STATUS_OK) {
         p->syncState = WUD_STATE_SYNC_COMPLETE;
     } else {
-        p->syncState = WUD_STATE_ERROR;
+        p->syncState = WUD_STATE_SYNC_ERROR;
     }
 }
 
@@ -228,7 +230,7 @@ static void DeleteFlushCallback(SCStatus status) {
     DEBUGPrint("DeleteFlushCallback() : %d, Delete: %d\n", status,
                _wcb.deleteState);
 
-    if (p->deleteState == WUD_STATE_START) {
+    if (p->deleteState == WUD_STATE_DELETE_START) {
         return;
     }
 
@@ -427,7 +429,7 @@ static u8 WUDiUnknownDevice(void) {
 }
 
 static u8 WUDiTryConnecting(void) {
-    WUDSyncState nextState = WUD_STATE_ERROR;
+    WUDSyncState nextState = WUD_STATE_SYNC_ERROR;
 
     if (WUD_DEV_NAME_IS_CNT(_discResp.devName)) {
         _work.status = 2;
@@ -458,7 +460,7 @@ static int WUDiSetPinCode(BD_ADDR addr) {
 }
 
 static BOOL WUDiIsFinishLinkKeyCmd(void) {
-    return _wcb.linkKeyState == WUD_STATE_START ? TRUE : FALSE;
+    return _wcb.linkKeyState == WUD_STATE_LINK_KEY_START ? TRUE : FALSE;
 }
 
 static BOOL WUDiIsFinishScCmd(void) {
@@ -691,7 +693,7 @@ static u8 WUDiSyncDone(void) {
     }
 
     DEBUGPrint("Pairing Done\n");
-    return WUD_STATE_START;
+    return WUD_STATE_SYNC_START;
 }
 
 static void SyncHandler(void) {
@@ -783,7 +785,7 @@ static void SyncHandler(void) {
         break;
     }
 
-    case WUD_STATE_ERROR: {
+    case WUD_STATE_SYNC_ERROR: {
         p->syncState = WUDiSyncError();
         break;
     }
@@ -899,19 +901,19 @@ static WUDDeleteState WUDiDeleteAllComplete(void) {
     WUDSetVisibility(FALSE, WUDGetConnectable());
 
     OSCancelAlarm(&p->alarm);
-    p->deleteState = WUD_STATE_START;
+    p->deleteState = WUD_STATE_DELETE_START;
 
     if (p->clearDevCB != NULL) {
         p->clearDevCB(WUD_RESULT_DELETE_COMPLETE);
     }
 
-    return WUD_STATE_START;
+    return WUD_STATE_DELETE_START;
 }
 
 static void DeleteAllHandler(void) {
     WUDCB* p = &_wcb;
 
-    p->syncState = WUD_STATE_START;
+    p->syncState = WUD_STATE_SYNC_START;
 
     switch (p->deleteState) {
     case WUD_STATE_DELETE_DISALLOW_INCOMING: {
@@ -967,7 +969,7 @@ static WUDStackState WUDiClearUnregisteredDevice(void) {
     WUDDevInfo* pInfo;
     int i;
 
-    if (p->linkKeyState == WUD_STATE_START) {
+    if (p->linkKeyState == WUD_STATE_LINK_KEY_START) {
         for (i = 0; i < WUD_MAX_DEV_ENTRY; i++) {
             pInfo = WUDiGetDevInfoIndex(i);
             if (pInfo->status == 0) {
@@ -997,7 +999,7 @@ static WUDStackState WUDiClearUnregisteredDevice(void) {
 static WUDStackState WUDiStackSetupComplete(void) {
     WUDCB* p = &_wcb;
 
-    if (p->linkKeyState == WUD_STATE_START) {
+    if (p->linkKeyState == WUD_STATE_LINK_KEY_START) {
         OSCancelAlarm(&p->alarm);
         WUDiGetFirmwareVersion();
         return WUD_STATE_STACK_INITIALIZED;
@@ -1189,12 +1191,12 @@ static void InitCore(void) {
             i == WUD_MAX_DEV_ENTRY_FOR_STD - 1 ? NULL : &p->stdList[i + 1];
     }
 
-    p->syncState = WUD_STATE_START;
-    p->linkKeyState = WUD_STATE_START;
-    p->deleteState = WUD_STATE_START;
-    p->stackState = WUD_STATE_START;
-    p->initState = WUD_STATE_START;
-    p->shutdownState = WUD_STATE_START;
+    p->syncState = WUD_STATE_SYNC_START;
+    p->linkKeyState = WUD_STATE_LINK_KEY_START;
+    p->deleteState = WUD_STATE_DELETE_START;
+    p->stackState = WUD_STATE_STACK_START;
+    p->initState = WUD_STATE_INIT_START;
+    p->shutdownState = WUD_STATE_SHUTDOWN_START;
 
     p->syncSkipChecks = FALSE;
     p->syncType = WUD_SYNC_TYPE_STANDARD;
@@ -1505,10 +1507,8 @@ static BOOL StopSync(void) {
     return success;
 }
 
-// clang-format off
 DECOMP_FORCEACTIVE(WUD_c,
-    "WUDCancelSyncDevice()\n");
-// clang-format on
+                   "WUDCancelSyncDevice()\n");
 
 BOOL WUDStopSyncSimple(void) {
     return StopSync();
@@ -1769,7 +1769,7 @@ static void WUDiWritePatch(void) {
     length = MIN(size - offset, WUD_PATCH_BUFFER_SIZE - sizeof(u32));
 
     for (i = 0; i < (s32)sizeof(u32); i++) {
-        buf[i] = addr + offset >> i * 8;
+        buf[i] = (addr + offset) >> i * 8;
     }
 
     for (i = 0; i < (s32)length; i++) {
@@ -1925,10 +1925,8 @@ void WUDiAutoSync(void) {
     }
 }
 
-// clang-format off
 DECOMP_FORCEACTIVE(WUD_c_1,
                    "WUDiCancelSync()\n");
-// clang-format on
 
 void WUDiDeleteAllLinkKeys(void) {
     WUDCB* p = &_wcb;
@@ -2446,7 +2444,8 @@ BOOL WUDIsBusy(void) {
 
     enabled = OSDisableInterrupts();
 
-    if (p->syncState == WUD_STATE_START && p->deleteState == WUD_STATE_START &&
+    if (p->syncState == WUD_STATE_SYNC_START &&
+        p->deleteState == WUD_STATE_DELETE_START &&
         p->stackState == WUD_STATE_STACK_INITIALIZED &&
         p->initState == WUD_STATE_INIT_INITIALIZED) {
 
@@ -2606,7 +2605,7 @@ void WUDSecurityCallback(tBTA_DM_SEC_EVT event, tBTA_DM_SEC* pData) {
             p->linkedNum--;
 
             if (WUD_BDCMP(_work.devAddr, pLinkDown->bd_addr) == 0) {
-                p->syncState = WUD_STATE_ERROR;
+                p->syncState = WUD_STATE_SYNC_ERROR;
             }
 
             if (pLinkDown->status == HCI_ERR_PEER_POWER_OFF) {
@@ -2624,7 +2623,7 @@ void WUDSecurityCallback(tBTA_DM_SEC_EVT event, tBTA_DM_SEC* pData) {
                 }
             }
         } else if (WUD_BDCMP(_work.devAddr, pLinkDown->bd_addr) == 0) {
-            p->syncState = WUD_STATE_ERROR;
+            p->syncState = WUD_STATE_SYNC_ERROR;
             p->linkedNum--;
         } else {
             DEBUGPrint("this device in not paired\n");
@@ -2857,7 +2856,7 @@ void WUDStoredLinkKeyCallback(void* p1) {
         DEBUGPrint("  status: %d  max_keys: %d  num_keys: %d\n", pRead->status,
                    pRead->max_keys, pRead->read_keys);
 
-        p->linkKeyState = WUD_STATE_START;
+        p->linkKeyState = WUD_STATE_LINK_KEY_START;
         break;
     }
 
@@ -2868,7 +2867,7 @@ void WUDStoredLinkKeyCallback(void* p1) {
         DEBUGPrint("  status: %d  num_keys: %d\n", pWrite->status,
                    pWrite->num_keys);
 
-        p->linkKeyState = WUD_STATE_START;
+        p->linkKeyState = WUD_STATE_LINK_KEY_START;
         break;
     }
 
@@ -2883,7 +2882,7 @@ void WUDStoredLinkKeyCallback(void* p1) {
             DEBUGPrint("WARNING: no entry is deleted\n");
         }
 
-        p->linkKeyState = WUD_STATE_START;
+        p->linkKeyState = WUD_STATE_LINK_KEY_START;
         break;
     }
 
@@ -2984,10 +2983,8 @@ u8 _WUDGetLinkNumber(void) {
     return num;
 }
 
-// clang-format off
 DECOMP_FORCEACTIVE(WUD_c_2,
                    "_WUDEnableTestMode\n",
                    "_WUDStartSyncDevice()\n",
                    "_WUDDeleteStoreDevice()\n",
                    "dev number = %d\n");
-// clang-format on

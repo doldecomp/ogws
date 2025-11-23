@@ -27,8 +27,8 @@ void GXClearVtxDesc(void);
 void GXSetVtxAttrFmt(GXVtxFmt fmt, GXAttr attr, GXCompCnt compCnt,
                      GXCompType compType, u8 shift);
 
-// TODO: Please find a way to get rid of this
-#ifdef GXATTR_MATCH_HACK
+// TODO(kiwi) Please find a way to get rid of this
+#if defined(GXATTR_MATCH_HACK)
 void GXSetVtxAttrFmtv(s16 fmt, const GXVtxAttrFmtList* list);
 #else
 void GXSetVtxAttrFmtv(GXVtxFmt fmt, const GXVtxAttrFmtList* list);

@@ -20,7 +20,7 @@ namespace EGG {
  * SimpleAudioMgrWithSound3D
  *
  ******************************************************************************/
-#ifndef __DECOMP_NON_MATCHING
+#if !defined(NONMATCHING)
 class SimpleAudioMgrWithSound3D
     : public SimpleAudioMgr,
       public TAudioSound3DMgr<WPAD_MAX_CONTROLLERS> {
@@ -35,7 +35,7 @@ private:
  * SimpleAudioMgrWithFx
  *
  ******************************************************************************/
-#ifndef __DECOMP_NON_MATCHING
+#if !defined(NONMATCHING)
 class SimpleAudioMgrWithFx : public SimpleAudioMgr, public AudioFxMgr {
 private:
     // Dummy class to instantiate necessary weak functions
@@ -56,7 +56,7 @@ public:
                             TAudioSound3DMgrArg,
                             AudioFxMgrArg {
 
-        // TODO: How is this calculated?
+        // TODO(kiwi) How is this calculated?
         static const u32 DEFAULT_FX_HEAP_SIZE = 0x25800;
 
         ExpAudioMgrArg();

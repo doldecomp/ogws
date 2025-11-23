@@ -20,7 +20,7 @@ namespace res {
  *
  ******************************************************************************/
 struct Picture : Pane {
-    static const u32 SIGNATURE = 'pic1';
+    static const u32 SIGNATURE = FOURCC('p', 'i', 'c', '1');
 
     u32 vtxCols[VERTEXCOLOR_MAX]; // at 0x4C
     u16 materialIdx;              // at 0x5C

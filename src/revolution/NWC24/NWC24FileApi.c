@@ -1,3 +1,4 @@
+#include "revolution/NAND/nand.h"
 #include <revolution/NWC24.h>
 
 #include <revolution/NAND.h>
@@ -214,7 +215,7 @@ NWC24Err NWC24FSeek(NWC24File* file, s32 offset, NWC24SeekMode whence) {
     }
 
     for (i = 0; i < NAND_RETRY_COUNT; i++) {
-        result = NANDSeek(&file->nandf, offset, whence);
+        result = NANDSeek(&file->nandf, offset, (NANDSeekMode)whence);
         if (result != NAND_RESULT_BUSY) {
             break;
         }
@@ -606,7 +607,7 @@ static NWC24Err AlignedSeek(NWC24File* file, s32 offset, NWC24SeekMode whence) {
         return NWC24_OK;
     }
 
-    result = NANDSeek(&file->nandf, alignofs, whence);
+    result = NANDSeek(&file->nandf, alignofs, (NANDSeekMode)whence);
     if (result < 0) {
         return NWC24_ERR_FILE_OTHER;
     }

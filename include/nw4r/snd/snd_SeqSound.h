@@ -25,7 +25,7 @@ template <typename T> class SoundInstanceManager;
 namespace detail {
 
 class SeqSound : public BasicSound {
-    friend class SeqSoundHandle;
+    friend class nw4r::snd::SeqSoundHandle;
 
 public:
     NW4R_UT_RTTI_DECL(SeqSound);

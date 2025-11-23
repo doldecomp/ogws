@@ -3,9 +3,6 @@
 
 #include <revolution/GX.h>
 
-#include <algorithm>
-#include <limits>
-
 namespace nw4r {
 namespace ef {
 

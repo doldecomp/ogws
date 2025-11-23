@@ -192,14 +192,13 @@ void GXInitLightColor(GXLightObj* light, GXColor color) {
     *(u32*)&impl->color = *(u32*)&color;
 }
 
-// TODO: This inline is fake, and also is a fake match (r6 hardcoded)
+// TODO(kiwi) This inline is fake, and also is a fake match (r6 hardcoded)
 inline void WriteLightObj(register volatile void* dst,
                           register const GXLightObjImpl* src) {
     register u32 color;
     register f32 ps_0, ps_1, ps_2, ps_3, ps_4, ps_5;
 
-    // clang-format off
-    asm volatile {
+    ASM_VOLATILE(
         lwz color, src->color
         xor r6, r6, r6 // make zero
         psq_l ps_0, GXLightObjImpl.aa(src),   0, 0
@@ -220,8 +219,7 @@ inline void WriteLightObj(register volatile void* dst,
         psq_st ps_3, 0(dst), 0, 0
         psq_st ps_4, 0(dst), 0, 0
         psq_st ps_5, 0(dst), 0, 0
-    }
-    // clang-format on
+    )
 }
 
 void GXLoadLightObjImm(const GXLightObj* light, GXLightID id) {

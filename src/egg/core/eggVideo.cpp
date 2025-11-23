@@ -1,4 +1,4 @@
-// TODO: REMOVE AFTER REFACTOR
+// TODO(kiwi) REMOVE AFTER REFACTOR
 #pragma ipa file
 
 #include <egg/core.h>
@@ -363,7 +363,7 @@ u32 Video::getTickPerVRetrace(u32 tvFormat) {
     }
     }
 
-    return OS_SEC_TO_TICKS(1) / retraceRate;
+    return static_cast<u32>(OS_SEC_TO_TICKS(1)) / retraceRate;
 }
 
 u32 Video::getTickPerVRetrace() {

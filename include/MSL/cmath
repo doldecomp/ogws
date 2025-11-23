@@ -43,7 +43,7 @@ inline float sqrt(float x) {
     return ::sqrtf(x);
 }
 
-// TODO: Very fake!
+// TODO(kiwi) Very fake!
 inline double fabs_wrapper(double x) {
     return __fabs(x);
 }

@@ -19,6 +19,16 @@
 #define __CONCAT(x, y) x##y
 #define CONCAT(x, y) __CONCAT(x, y)
 
+// Multi-character character constants
+// clang-format off
+#define TWOCC(c0, c1)                                                          \
+    (u32)((c0 & 0xFF) << 8  | (c1 & 0xFF))
+#define THREECC(c0, c1, c2)                                                    \
+    (u32)((c0 & 0xFF) << 16 | (c1 & 0xFF) << 8  | (c2 & 0xFF))
+#define FOURCC(c0, c1, c2, c3)                                                 \
+    (u32)((c0 & 0xFF) << 24 | (c1 & 0xFF) << 16 | (c2 & 0xFF) << 8 | (c3 & 0xFF))
+// clang-format on
+
 /******************************************************************************
  *
  * Arithmetic
@@ -54,6 +64,9 @@
 // Size of compile-time arrays
 #define ARRAY_SIZE(x) (sizeof((x)) / sizeof((x)[0]))
 #define LENGTHOF(x) ARRAY_SIZE(x)
+
+// Declare an array of hardware registers
+#define DECL_HW_REGS(NAME) FLEXIBLE_ARRAY(NAME##_HW_REGS)
 
 /******************************************************************************
  *

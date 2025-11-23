@@ -121,7 +121,7 @@ struct ResMdlData {
 
 class ResMdl : public ResCommon<ResMdlData> {
 public:
-    static const u32 SIGNATURE = 'MDL0';
+    static const u32 SIGNATURE = FOURCC('M', 'D', 'L', '0');
     static const int REVISION = 9;
 
 public:

@@ -228,7 +228,7 @@ void ResShp::Init() {
 
     GetResShpPrePrim().DCStore(false);
 
-    // TODO: Fakematch
+    // TODO(kiwi) Fakematch
     ResShpData& r = ref();
     DC::StoreRangeNoSync(GetPrimDLTag().GetDL(), r.tagPrimDL.bufSize);
 }
@@ -251,7 +251,7 @@ void ResShp::Terminate() {
 }
 
 void ResShp::CallPrePrimitiveDisplayList(bool sync, bool cacheIsSame) const {
-    // TODO: Should be non-const, and initialized by value
+    // TODO(kiwi) Should be non-const, and initialized by value
     const ResTagDL& rTag = GetPrePrimDLTag();
 
     if (cacheIsSame) {
@@ -274,7 +274,7 @@ void ResShp::CallPrePrimitiveDisplayList(bool sync, bool cacheIsSame) const {
 }
 
 void ResShp::CallPrimitiveDisplayList(bool sync) const {
-    // TODO: Should be non-const, and initialized by value
+    // TODO(kiwi) Should be non-const, and initialized by value
     const ResTagDL& rTag = GetPrimDLTag();
 
     if (sync) {

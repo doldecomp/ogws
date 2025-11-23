@@ -194,7 +194,7 @@ AnimTransform* Layout::CreateAnimTransform(const void* pAnmBinary,
         static_cast<const res::BinaryFileHeader*>(pAnmBinary);
 
     if (!detail::TestFileHeader(*pHeader)) {
-        return false;
+        return NULL;
     }
 
     const res::AnimationBlock* pAnimBlock = NULL;

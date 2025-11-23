@@ -239,7 +239,7 @@ struct ResAnmChrData {
 
 class ResAnmChr : public ResCommon<ResAnmChrData> {
 public:
-    static const u32 SIGNATURE = 'CHR0';
+    static const u32 SIGNATURE = FOURCC('C', 'H', 'R', '0');
     static const int REVISION = 4;
 
 public:

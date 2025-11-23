@@ -1,10 +1,14 @@
 #ifndef RVL_SDK_GX_HARDWARE_CP_H
 #define RVL_SDK_GX_HARDWARE_CP_H
-#include <revolution/GX/GXTypes.h>
 #include <types.h>
+
+#include <revolution/GX/GXTypes.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+// clang-format off
 
 /******************************************************************************
  *
@@ -37,7 +41,7 @@ typedef enum {
         /* end bit    */ #define GX_CP_MATRIXINDEXA_TEX3_E 7
         /* bit size   */ #define GX_CP_MATRIXINDEXA_TEX3_SZ 6
 
-        /* raw mask   */ #define GX_CP_MATRIXINDEXA_TEX3_MASK (((1 << 6) - 1) << 31 - 7)
+        /* raw mask   */ #define GX_CP_MATRIXINDEXA_TEX3_MASK (((1 << 6) - 1) << (31 - 7))
         /* local mask */ #define GX_CP_MATRIXINDEXA_TEX3_LMASK ((1 << 6) - 1)
         /* bit shift  */ #define GX_CP_MATRIXINDEXA_TEX3_SHIFT 24
 
@@ -49,7 +53,7 @@ typedef enum {
         /* end bit    */ #define GX_CP_MATRIXINDEXA_TEX2_E 13
         /* bit size   */ #define GX_CP_MATRIXINDEXA_TEX2_SZ 6
 
-        /* raw mask   */ #define GX_CP_MATRIXINDEXA_TEX2_MASK (((1 << 6) - 1) << 31 - 13)
+        /* raw mask   */ #define GX_CP_MATRIXINDEXA_TEX2_MASK (((1 << 6) - 1) << (31 - 13))
         /* local mask */ #define GX_CP_MATRIXINDEXA_TEX2_LMASK ((1 << 6) - 1)
         /* bit shift  */ #define GX_CP_MATRIXINDEXA_TEX2_SHIFT 18
 
@@ -61,7 +65,7 @@ typedef enum {
         /* end bit    */ #define GX_CP_MATRIXINDEXA_TEX1_E 19
         /* bit size   */ #define GX_CP_MATRIXINDEXA_TEX1_SZ 6
 
-        /* raw mask   */ #define GX_CP_MATRIXINDEXA_TEX1_MASK (((1 << 6) - 1) << 31 - 19)
+        /* raw mask   */ #define GX_CP_MATRIXINDEXA_TEX1_MASK (((1 << 6) - 1) << (31 - 19))
         /* local mask */ #define GX_CP_MATRIXINDEXA_TEX1_LMASK ((1 << 6) - 1)
         /* bit shift  */ #define GX_CP_MATRIXINDEXA_TEX1_SHIFT 12
 
@@ -73,7 +77,7 @@ typedef enum {
         /* end bit    */ #define GX_CP_MATRIXINDEXA_TEX0_E 25
         /* bit size   */ #define GX_CP_MATRIXINDEXA_TEX0_SZ 6
 
-        /* raw mask   */ #define GX_CP_MATRIXINDEXA_TEX0_MASK (((1 << 6) - 1) << 31 - 25)
+        /* raw mask   */ #define GX_CP_MATRIXINDEXA_TEX0_MASK (((1 << 6) - 1) << (31 - 25))
         /* local mask */ #define GX_CP_MATRIXINDEXA_TEX0_LMASK ((1 << 6) - 1)
         /* bit shift  */ #define GX_CP_MATRIXINDEXA_TEX0_SHIFT 6
 
@@ -85,7 +89,7 @@ typedef enum {
         /* end bit    */ #define GX_CP_MATRIXINDEXA_POSNRM_E 31
         /* bit size   */ #define GX_CP_MATRIXINDEXA_POSNRM_SZ 6
 
-        /* raw mask   */ #define GX_CP_MATRIXINDEXA_POSNRM_MASK (((1 << 6) - 1) << 31 - 31)
+        /* raw mask   */ #define GX_CP_MATRIXINDEXA_POSNRM_MASK (((1 << 6) - 1) << (31 - 31))
         /* local mask */ #define GX_CP_MATRIXINDEXA_POSNRM_LMASK ((1 << 6) - 1)
         /* bit shift  */ #define GX_CP_MATRIXINDEXA_POSNRM_SHIFT 0
 
@@ -101,7 +105,7 @@ typedef enum {
         /* end bit    */ #define GX_CP_MATRIXINDEXB_TEX7_E 13
         /* bit size   */ #define GX_CP_MATRIXINDEXB_TEX7_SZ 6
 
-        /* raw mask   */ #define GX_CP_MATRIXINDEXB_TEX7_MASK (((1 << 6) - 1) << 31 - 13)
+        /* raw mask   */ #define GX_CP_MATRIXINDEXB_TEX7_MASK (((1 << 6) - 1) << (31 - 13))
         /* local mask */ #define GX_CP_MATRIXINDEXB_TEX7_LMASK ((1 << 6) - 1)
         /* bit shift  */ #define GX_CP_MATRIXINDEXB_TEX7_SHIFT 18
 
@@ -113,7 +117,7 @@ typedef enum {
         /* end bit    */ #define GX_CP_MATRIXINDEXB_TEX6_E 19
         /* bit size   */ #define GX_CP_MATRIXINDEXB_TEX6_SZ 6
 
-        /* raw mask   */ #define GX_CP_MATRIXINDEXB_TEX6_MASK (((1 << 6) - 1) << 31 - 19)
+        /* raw mask   */ #define GX_CP_MATRIXINDEXB_TEX6_MASK (((1 << 6) - 1) << (31 - 19))
         /* local mask */ #define GX_CP_MATRIXINDEXB_TEX6_LMASK ((1 << 6) - 1)
         /* bit shift  */ #define GX_CP_MATRIXINDEXB_TEX6_SHIFT 12
 
@@ -125,7 +129,7 @@ typedef enum {
         /* end bit    */ #define GX_CP_MATRIXINDEXB_TEX5_E 25
         /* bit size   */ #define GX_CP_MATRIXINDEXB_TEX5_SZ 6
 
-        /* raw mask   */ #define GX_CP_MATRIXINDEXB_TEX5_MASK (((1 << 6) - 1) << 31 - 25)
+        /* raw mask   */ #define GX_CP_MATRIXINDEXB_TEX5_MASK (((1 << 6) - 1) << (31 - 25))
         /* local mask */ #define GX_CP_MATRIXINDEXB_TEX5_LMASK ((1 << 6) - 1)
         /* bit shift  */ #define GX_CP_MATRIXINDEXB_TEX5_SHIFT 6
 
@@ -137,7 +141,7 @@ typedef enum {
         /* end bit    */ #define GX_CP_MATRIXINDEXB_TEX4_E 31
         /* bit size   */ #define GX_CP_MATRIXINDEXB_TEX4_SZ 6
 
-        /* raw mask   */ #define GX_CP_MATRIXINDEXB_TEX4_MASK (((1 << 6) - 1) << 31 - 31)
+        /* raw mask   */ #define GX_CP_MATRIXINDEXB_TEX4_MASK (((1 << 6) - 1) << (31 - 31))
         /* local mask */ #define GX_CP_MATRIXINDEXB_TEX4_LMASK ((1 << 6) - 1)
         /* bit shift  */ #define GX_CP_MATRIXINDEXB_TEX4_SHIFT 0
 
@@ -153,7 +157,7 @@ typedef enum {
         /* end bit    */ #define GX_CP_VCD_LO_POSMATIDX_E 31
         /* bit size   */ #define GX_CP_VCD_LO_POSMATIDX_SZ 1
 
-        /* raw mask   */ #define GX_CP_VCD_LO_POSMATIDX_MASK (((1 << 1) - 1) << 31 - 31)
+        /* raw mask   */ #define GX_CP_VCD_LO_POSMATIDX_MASK (((1 << 1) - 1) << (31 - 31))
         /* local mask */ #define GX_CP_VCD_LO_POSMATIDX_LMASK ((1 << 1) - 1)
         /* bit shift  */ #define GX_CP_VCD_LO_POSMATIDX_SHIFT 0
 
@@ -165,7 +169,7 @@ typedef enum {
         /* end bit    */ #define GX_CP_VCD_LO_TEX0MATIDX_E 30
         /* bit size   */ #define GX_CP_VCD_LO_TEX0MATIDX_SZ 1
 
-        /* raw mask   */ #define GX_CP_VCD_LO_TEX0MATIDX_MASK (((1 << 1) - 1) << 31 - 30)
+        /* raw mask   */ #define GX_CP_VCD_LO_TEX0MATIDX_MASK (((1 << 1) - 1) << (31 - 30))
         /* local mask */ #define GX_CP_VCD_LO_TEX0MATIDX_LMASK ((1 << 1) - 1)
         /* bit shift  */ #define GX_CP_VCD_LO_TEX0MATIDX_SHIFT 1
 
@@ -177,7 +181,7 @@ typedef enum {
         /* end bit    */ #define GX_CP_VCD_LO_TEX1MATIDX_E 29
         /* bit size   */ #define GX_CP_VCD_LO_TEX1MATIDX_SZ 1
 
-        /* raw mask   */ #define GX_CP_VCD_LO_TEX1MATIDX_MASK (((1 << 1) - 1) << 31 - 29)
+        /* raw mask   */ #define GX_CP_VCD_LO_TEX1MATIDX_MASK (((1 << 1) - 1) << (31 - 29))
         /* local mask */ #define GX_CP_VCD_LO_TEX1MATIDX_LMASK ((1 << 1) - 1)
         /* bit shift  */ #define GX_CP_VCD_LO_TEX1MATIDX_SHIFT 2
 
@@ -189,7 +193,7 @@ typedef enum {
         /* end bit    */ #define GX_CP_VCD_LO_TEX2MATIDX_E 28
         /* bit size   */ #define GX_CP_VCD_LO_TEX2MATIDX_SZ 1
 
-        /* raw mask   */ #define GX_CP_VCD_LO_TEX2MATIDX_MASK (((1 << 1) - 1) << 31 - 28)
+        /* raw mask   */ #define GX_CP_VCD_LO_TEX2MATIDX_MASK (((1 << 1) - 1) << (31 - 28))
         /* local mask */ #define GX_CP_VCD_LO_TEX2MATIDX_LMASK ((1 << 1) - 1)
         /* bit shift  */ #define GX_CP_VCD_LO_TEX2MATIDX_SHIFT 3
 
@@ -201,7 +205,7 @@ typedef enum {
         /* end bit    */ #define GX_CP_VCD_LO_TEX3MATIDX_E 27
         /* bit size   */ #define GX_CP_VCD_LO_TEX3MATIDX_SZ 1
 
-        /* raw mask   */ #define GX_CP_VCD_LO_TEX3MATIDX_MASK (((1 << 1) - 1) << 31 - 27)
+        /* raw mask   */ #define GX_CP_VCD_LO_TEX3MATIDX_MASK (((1 << 1) - 1) << (31 - 27))
         /* local mask */ #define GX_CP_VCD_LO_TEX3MATIDX_LMASK ((1 << 1) - 1)
         /* bit shift  */ #define GX_CP_VCD_LO_TEX3MATIDX_SHIFT 4
 
@@ -213,7 +217,7 @@ typedef enum {
         /* end bit    */ #define GX_CP_VCD_LO_TEX4MATIDX_E 26
         /* bit size   */ #define GX_CP_VCD_LO_TEX4MATIDX_SZ 1
 
-        /* raw mask   */ #define GX_CP_VCD_LO_TEX4MATIDX_MASK (((1 << 1) - 1) << 31 - 26)
+        /* raw mask   */ #define GX_CP_VCD_LO_TEX4MATIDX_MASK (((1 << 1) - 1) << (31 - 26))
         /* local mask */ #define GX_CP_VCD_LO_TEX4MATIDX_LMASK ((1 << 1) - 1)
         /* bit shift  */ #define GX_CP_VCD_LO_TEX4MATIDX_SHIFT 5
 
@@ -225,7 +229,7 @@ typedef enum {
         /* end bit    */ #define GX_CP_VCD_LO_TEX5MATIDX_E 25
         /* bit size   */ #define GX_CP_VCD_LO_TEX5MATIDX_SZ 1
 
-        /* raw mask   */ #define GX_CP_VCD_LO_TEX5MATIDX_MASK (((1 << 1) - 1) << 31 - 25)
+        /* raw mask   */ #define GX_CP_VCD_LO_TEX5MATIDX_MASK (((1 << 1) - 1) << (31 - 25))
         /* local mask */ #define GX_CP_VCD_LO_TEX5MATIDX_LMASK ((1 << 1) - 1)
         /* bit shift  */ #define GX_CP_VCD_LO_TEX5MATIDX_SHIFT 6
 
@@ -237,7 +241,7 @@ typedef enum {
         /* end bit    */ #define GX_CP_VCD_LO_TEX6MATIDX_E 24
         /* bit size   */ #define GX_CP_VCD_LO_TEX6MATIDX_SZ 1
 
-        /* raw mask   */ #define GX_CP_VCD_LO_TEX6MATIDX_MASK (((1 << 1) - 1) << 31 - 24)
+        /* raw mask   */ #define GX_CP_VCD_LO_TEX6MATIDX_MASK (((1 << 1) - 1) << (31 - 24))
         /* local mask */ #define GX_CP_VCD_LO_TEX6MATIDX_LMASK ((1 << 1) - 1)
         /* bit shift  */ #define GX_CP_VCD_LO_TEX6MATIDX_SHIFT 7
 
@@ -249,7 +253,7 @@ typedef enum {
         /* end bit    */ #define GX_CP_VCD_LO_TEX7MATIDX_E 23
         /* bit size   */ #define GX_CP_VCD_LO_TEX7MATIDX_SZ 1
 
-        /* raw mask   */ #define GX_CP_VCD_LO_TEX7MATIDX_MASK (((1 << 1) - 1) << 31 - 23)
+        /* raw mask   */ #define GX_CP_VCD_LO_TEX7MATIDX_MASK (((1 << 1) - 1) << (31 - 23))
         /* local mask */ #define GX_CP_VCD_LO_TEX7MATIDX_LMASK ((1 << 1) - 1)
         /* bit shift  */ #define GX_CP_VCD_LO_TEX7MATIDX_SHIFT 8
 
@@ -261,7 +265,7 @@ typedef enum {
         /* end bit    */ #define GX_CP_VCD_LO_POSITION_E 22
         /* bit size   */ #define GX_CP_VCD_LO_POSITION_SZ 2
 
-        /* raw mask   */ #define GX_CP_VCD_LO_POSITION_MASK (((1 << 2) - 1) << 31 - 22)
+        /* raw mask   */ #define GX_CP_VCD_LO_POSITION_MASK (((1 << 2) - 1) << (31 - 22))
         /* local mask */ #define GX_CP_VCD_LO_POSITION_LMASK ((1 << 2) - 1)
         /* bit shift  */ #define GX_CP_VCD_LO_POSITION_SHIFT 9
 
@@ -273,7 +277,7 @@ typedef enum {
         /* end bit    */ #define GX_CP_VCD_LO_NORMAL_E 20
         /* bit size   */ #define GX_CP_VCD_LO_NORMAL_SZ 2
 
-        /* raw mask   */ #define GX_CP_VCD_LO_NORMAL_MASK (((1 << 2) - 1) << 31 - 20)
+        /* raw mask   */ #define GX_CP_VCD_LO_NORMAL_MASK (((1 << 2) - 1) << (31 - 20))
         /* local mask */ #define GX_CP_VCD_LO_NORMAL_LMASK ((1 << 2) - 1)
         /* bit shift  */ #define GX_CP_VCD_LO_NORMAL_SHIFT 11
 
@@ -285,7 +289,7 @@ typedef enum {
         /* end bit    */ #define GX_CP_VCD_LO_COLORDIFFUSED_E 18
         /* bit size   */ #define GX_CP_VCD_LO_COLORDIFFUSED_SZ 2
 
-        /* raw mask   */ #define GX_CP_VCD_LO_COLORDIFFUSED_MASK (((1 << 2) - 1) << 31 - 18)
+        /* raw mask   */ #define GX_CP_VCD_LO_COLORDIFFUSED_MASK (((1 << 2) - 1) << (31 - 18))
         /* local mask */ #define GX_CP_VCD_LO_COLORDIFFUSED_LMASK ((1 << 2) - 1)
         /* bit shift  */ #define GX_CP_VCD_LO_COLORDIFFUSED_SHIFT 13
 
@@ -297,7 +301,7 @@ typedef enum {
         /* end bit    */ #define GX_CP_VCD_LO_COLORSPECULAR_E 16
         /* bit size   */ #define GX_CP_VCD_LO_COLORSPECULAR_SZ 2
 
-        /* raw mask   */ #define GX_CP_VCD_LO_COLORSPECULAR_MASK (((1 << 2) - 1) << 31 - 16)
+        /* raw mask   */ #define GX_CP_VCD_LO_COLORSPECULAR_MASK (((1 << 2) - 1) << (31 - 16))
         /* local mask */ #define GX_CP_VCD_LO_COLORSPECULAR_LMASK ((1 << 2) - 1)
         /* bit shift  */ #define GX_CP_VCD_LO_COLORSPECULAR_SHIFT 15
 
@@ -313,7 +317,7 @@ typedef enum {
         /* end bit    */ #define GX_CP_VCD_HI_TEX0COORD_E 31
         /* bit size   */ #define GX_CP_VCD_HI_TEX0COORD_SZ 2
 
-        /* raw mask   */ #define GX_CP_VCD_HI_TEX0COORD_MASK (((1 << 2) - 1) << 31 - 31)
+        /* raw mask   */ #define GX_CP_VCD_HI_TEX0COORD_MASK (((1 << 2) - 1) << (31 - 31))
         /* local mask */ #define GX_CP_VCD_HI_TEX0COORD_LMASK ((1 << 2) - 1)
         /* bit shift  */ #define GX_CP_VCD_HI_TEX0COORD_SHIFT 0
 
@@ -325,7 +329,7 @@ typedef enum {
         /* end bit    */ #define GX_CP_VCD_HI_TEX1COORD_E 29
         /* bit size   */ #define GX_CP_VCD_HI_TEX1COORD_SZ 2
 
-        /* raw mask   */ #define GX_CP_VCD_HI_TEX1COORD_MASK (((1 << 2) - 1) << 31 - 29)
+        /* raw mask   */ #define GX_CP_VCD_HI_TEX1COORD_MASK (((1 << 2) - 1) << (31 - 29))
         /* local mask */ #define GX_CP_VCD_HI_TEX1COORD_LMASK ((1 << 2) - 1)
         /* bit shift  */ #define GX_CP_VCD_HI_TEX1COORD_SHIFT 2
 
@@ -337,7 +341,7 @@ typedef enum {
         /* end bit    */ #define GX_CP_VCD_HI_TEX2COORD_E 27
         /* bit size   */ #define GX_CP_VCD_HI_TEX2COORD_SZ 2
 
-        /* raw mask   */ #define GX_CP_VCD_HI_TEX2COORD_MASK (((1 << 2) - 1) << 31 - 27)
+        /* raw mask   */ #define GX_CP_VCD_HI_TEX2COORD_MASK (((1 << 2) - 1) << (31 - 27))
         /* local mask */ #define GX_CP_VCD_HI_TEX2COORD_LMASK ((1 << 2) - 1)
         /* bit shift  */ #define GX_CP_VCD_HI_TEX2COORD_SHIFT 4
 
@@ -349,7 +353,7 @@ typedef enum {
         /* end bit    */ #define GX_CP_VCD_HI_TEX3COORD_E 25
         /* bit size   */ #define GX_CP_VCD_HI_TEX3COORD_SZ 2
 
-        /* raw mask   */ #define GX_CP_VCD_HI_TEX3COORD_MASK (((1 << 2) - 1) << 31 - 25)
+        /* raw mask   */ #define GX_CP_VCD_HI_TEX3COORD_MASK (((1 << 2) - 1) << (31 - 25))
         /* local mask */ #define GX_CP_VCD_HI_TEX3COORD_LMASK ((1 << 2) - 1)
         /* bit shift  */ #define GX_CP_VCD_HI_TEX3COORD_SHIFT 6
 
@@ -361,7 +365,7 @@ typedef enum {
         /* end bit    */ #define GX_CP_VCD_HI_TEX4COORD_E 23
         /* bit size   */ #define GX_CP_VCD_HI_TEX4COORD_SZ 2
 
-        /* raw mask   */ #define GX_CP_VCD_HI_TEX4COORD_MASK (((1 << 2) - 1) << 31 - 23)
+        /* raw mask   */ #define GX_CP_VCD_HI_TEX4COORD_MASK (((1 << 2) - 1) << (31 - 23))
         /* local mask */ #define GX_CP_VCD_HI_TEX4COORD_LMASK ((1 << 2) - 1)
         /* bit shift  */ #define GX_CP_VCD_HI_TEX4COORD_SHIFT 8
 
@@ -373,7 +377,7 @@ typedef enum {
         /* end bit    */ #define GX_CP_VCD_HI_TEX5COORD_E 21
         /* bit size   */ #define GX_CP_VCD_HI_TEX5COORD_SZ 2
 
-        /* raw mask   */ #define GX_CP_VCD_HI_TEX5COORD_MASK (((1 << 2) - 1) << 31 - 21)
+        /* raw mask   */ #define GX_CP_VCD_HI_TEX5COORD_MASK (((1 << 2) - 1) << (31 - 21))
         /* local mask */ #define GX_CP_VCD_HI_TEX5COORD_LMASK ((1 << 2) - 1)
         /* bit shift  */ #define GX_CP_VCD_HI_TEX5COORD_SHIFT 10
 
@@ -385,7 +389,7 @@ typedef enum {
         /* end bit    */ #define GX_CP_VCD_HI_TEX6COORD_E 19
         /* bit size   */ #define GX_CP_VCD_HI_TEX6COORD_SZ 2
 
-        /* raw mask   */ #define GX_CP_VCD_HI_TEX6COORD_MASK (((1 << 2) - 1) << 31 - 19)
+        /* raw mask   */ #define GX_CP_VCD_HI_TEX6COORD_MASK (((1 << 2) - 1) << (31 - 19))
         /* local mask */ #define GX_CP_VCD_HI_TEX6COORD_LMASK ((1 << 2) - 1)
         /* bit shift  */ #define GX_CP_VCD_HI_TEX6COORD_SHIFT 12
 
@@ -397,7 +401,7 @@ typedef enum {
         /* end bit    */ #define GX_CP_VCD_HI_TEX7COORD_E 17
         /* bit size   */ #define GX_CP_VCD_HI_TEX7COORD_SZ 2
 
-        /* raw mask   */ #define GX_CP_VCD_HI_TEX7COORD_MASK (((1 << 2) - 1) << 31 - 17)
+        /* raw mask   */ #define GX_CP_VCD_HI_TEX7COORD_MASK (((1 << 2) - 1) << (31 - 17))
         /* local mask */ #define GX_CP_VCD_HI_TEX7COORD_LMASK ((1 << 2) - 1)
         /* bit shift  */ #define GX_CP_VCD_HI_TEX7COORD_SHIFT 14
 
@@ -413,7 +417,7 @@ typedef enum {
         /* end bit    */ #define GX_CP_VAT_GROUP0_POS_CNT_E 31
         /* bit size   */ #define GX_CP_VAT_GROUP0_POS_CNT_SZ 1
 
-        /* raw mask   */ #define GX_CP_VAT_GROUP0_POS_CNT_MASK (((1 << 1) - 1) << 31 - 31)
+        /* raw mask   */ #define GX_CP_VAT_GROUP0_POS_CNT_MASK (((1 << 1) - 1) << (31 - 31))
         /* local mask */ #define GX_CP_VAT_GROUP0_POS_CNT_LMASK ((1 << 1) - 1)
         /* bit shift  */ #define GX_CP_VAT_GROUP0_POS_CNT_SHIFT 0
 
@@ -425,7 +429,7 @@ typedef enum {
         /* end bit    */ #define GX_CP_VAT_GROUP0_POS_TYPE_E 30
         /* bit size   */ #define GX_CP_VAT_GROUP0_POS_TYPE_SZ 3
 
-        /* raw mask   */ #define GX_CP_VAT_GROUP0_POS_TYPE_MASK (((1 << 3) - 1) << 31 - 30)
+        /* raw mask   */ #define GX_CP_VAT_GROUP0_POS_TYPE_MASK (((1 << 3) - 1) << (31 - 30))
         /* local mask */ #define GX_CP_VAT_GROUP0_POS_TYPE_LMASK ((1 << 3) - 1)
         /* bit shift  */ #define GX_CP_VAT_GROUP0_POS_TYPE_SHIFT 1
 
@@ -437,7 +441,7 @@ typedef enum {
         /* end bit    */ #define GX_CP_VAT_GROUP0_POS_SHIFT_E 27
         /* bit size   */ #define GX_CP_VAT_GROUP0_POS_SHIFT_SZ 5
 
-        /* raw mask   */ #define GX_CP_VAT_GROUP0_POS_SHIFT_MASK (((1 << 5) - 1) << 31 - 27)
+        /* raw mask   */ #define GX_CP_VAT_GROUP0_POS_SHIFT_MASK (((1 << 5) - 1) << (31 - 27))
         /* local mask */ #define GX_CP_VAT_GROUP0_POS_SHIFT_LMASK ((1 << 5) - 1)
         /* bit shift  */ #define GX_CP_VAT_GROUP0_POS_SHIFT_SHIFT 4
 
@@ -449,7 +453,7 @@ typedef enum {
         /* end bit    */ #define GX_CP_VAT_GROUP0_NRM_CNT_E 22
         /* bit size   */ #define GX_CP_VAT_GROUP0_NRM_CNT_SZ 1
 
-        /* raw mask   */ #define GX_CP_VAT_GROUP0_NRM_CNT_MASK (((1 << 1) - 1) << 31 - 22)
+        /* raw mask   */ #define GX_CP_VAT_GROUP0_NRM_CNT_MASK (((1 << 1) - 1) << (31 - 22))
         /* local mask */ #define GX_CP_VAT_GROUP0_NRM_CNT_LMASK ((1 << 1) - 1)
         /* bit shift  */ #define GX_CP_VAT_GROUP0_NRM_CNT_SHIFT 9
 
@@ -461,7 +465,7 @@ typedef enum {
         /* end bit    */ #define GX_CP_VAT_GROUP0_NRM_TYPE_E 21
         /* bit size   */ #define GX_CP_VAT_GROUP0_NRM_TYPE_SZ 3
 
-        /* raw mask   */ #define GX_CP_VAT_GROUP0_NRM_TYPE_MASK (((1 << 3) - 1) << 31 - 21)
+        /* raw mask   */ #define GX_CP_VAT_GROUP0_NRM_TYPE_MASK (((1 << 3) - 1) << (31 - 21))
         /* local mask */ #define GX_CP_VAT_GROUP0_NRM_TYPE_LMASK ((1 << 3) - 1)
         /* bit shift  */ #define GX_CP_VAT_GROUP0_NRM_TYPE_SHIFT 10
 
@@ -473,7 +477,7 @@ typedef enum {
         /* end bit    */ #define GX_CP_VAT_GROUP0_COLORDIFF_CNT_E 18
         /* bit size   */ #define GX_CP_VAT_GROUP0_COLORDIFF_CNT_SZ 1
 
-        /* raw mask   */ #define GX_CP_VAT_GROUP0_COLORDIFF_CNT_MASK (((1 << 1) - 1) << 31 - 18)
+        /* raw mask   */ #define GX_CP_VAT_GROUP0_COLORDIFF_CNT_MASK (((1 << 1) - 1) << (31 - 18))
         /* local mask */ #define GX_CP_VAT_GROUP0_COLORDIFF_CNT_LMASK ((1 << 1) - 1)
         /* bit shift  */ #define GX_CP_VAT_GROUP0_COLORDIFF_CNT_SHIFT 13
 
@@ -485,7 +489,7 @@ typedef enum {
         /* end bit    */ #define GX_CP_VAT_GROUP0_COLORDIFF_TYPE_E 17
         /* bit size   */ #define GX_CP_VAT_GROUP0_COLORDIFF_TYPE_SZ 3
 
-        /* raw mask   */ #define GX_CP_VAT_GROUP0_COLORDIFF_TYPE_MASK (((1 << 3) - 1) << 31 - 17)
+        /* raw mask   */ #define GX_CP_VAT_GROUP0_COLORDIFF_TYPE_MASK (((1 << 3) - 1) << (31 - 17))
         /* local mask */ #define GX_CP_VAT_GROUP0_COLORDIFF_TYPE_LMASK ((1 << 3) - 1)
         /* bit shift  */ #define GX_CP_VAT_GROUP0_COLORDIFF_TYPE_SHIFT 14
 
@@ -497,7 +501,7 @@ typedef enum {
         /* end bit    */ #define GX_CP_VAT_GROUP0_COLORSPEC_CNT_E 14
         /* bit size   */ #define GX_CP_VAT_GROUP0_COLORSPEC_CNT_SZ 1
 
-        /* raw mask   */ #define GX_CP_VAT_GROUP0_COLORSPEC_CNT_MASK (((1 << 1) - 1) << 31 - 14)
+        /* raw mask   */ #define GX_CP_VAT_GROUP0_COLORSPEC_CNT_MASK (((1 << 1) - 1) << (31 - 14))
         /* local mask */ #define GX_CP_VAT_GROUP0_COLORSPEC_CNT_LMASK ((1 << 1) - 1)
         /* bit shift  */ #define GX_CP_VAT_GROUP0_COLORSPEC_CNT_SHIFT 17
 
@@ -509,7 +513,7 @@ typedef enum {
         /* end bit    */ #define GX_CP_VAT_GROUP0_COLORSPEC_TYPE_E 13
         /* bit size   */ #define GX_CP_VAT_GROUP0_COLORSPEC_TYPE_SZ 3
 
-        /* raw mask   */ #define GX_CP_VAT_GROUP0_COLORSPEC_TYPE_MASK (((1 << 3) - 1) << 31 - 13)
+        /* raw mask   */ #define GX_CP_VAT_GROUP0_COLORSPEC_TYPE_MASK (((1 << 3) - 1) << (31 - 13))
         /* local mask */ #define GX_CP_VAT_GROUP0_COLORSPEC_TYPE_LMASK ((1 << 3) - 1)
         /* bit shift  */ #define GX_CP_VAT_GROUP0_COLORSPEC_TYPE_SHIFT 18
 
@@ -521,7 +525,7 @@ typedef enum {
         /* end bit    */ #define GX_CP_VAT_GROUP0_TXC0_CNT_E 10
         /* bit size   */ #define GX_CP_VAT_GROUP0_TXC0_CNT_SZ 1
 
-        /* raw mask   */ #define GX_CP_VAT_GROUP0_TXC0_CNT_MASK (((1 << 1) - 1) << 31 - 10)
+        /* raw mask   */ #define GX_CP_VAT_GROUP0_TXC0_CNT_MASK (((1 << 1) - 1) << (31 - 10))
         /* local mask */ #define GX_CP_VAT_GROUP0_TXC0_CNT_LMASK ((1 << 1) - 1)
         /* bit shift  */ #define GX_CP_VAT_GROUP0_TXC0_CNT_SHIFT 21
 
@@ -533,7 +537,7 @@ typedef enum {
         /* end bit    */ #define GX_CP_VAT_GROUP0_TXC0_TYPE_E 9
         /* bit size   */ #define GX_CP_VAT_GROUP0_TXC0_TYPE_SZ 3
 
-        /* raw mask   */ #define GX_CP_VAT_GROUP0_TXC0_TYPE_MASK (((1 << 3) - 1) << 31 - 9)
+        /* raw mask   */ #define GX_CP_VAT_GROUP0_TXC0_TYPE_MASK (((1 << 3) - 1) << (31 - 9))
         /* local mask */ #define GX_CP_VAT_GROUP0_TXC0_TYPE_LMASK ((1 << 3) - 1)
         /* bit shift  */ #define GX_CP_VAT_GROUP0_TXC0_TYPE_SHIFT 22
 
@@ -545,7 +549,7 @@ typedef enum {
         /* end bit    */ #define GX_CP_VAT_GROUP0_TXC0_SHIFT_E 6
         /* bit size   */ #define GX_CP_VAT_GROUP0_TXC0_SHIFT_SZ 5
 
-        /* raw mask   */ #define GX_CP_VAT_GROUP0_TXC0_SHIFT_MASK (((1 << 5) - 1) << 31 - 6)
+        /* raw mask   */ #define GX_CP_VAT_GROUP0_TXC0_SHIFT_MASK (((1 << 5) - 1) << (31 - 6))
         /* local mask */ #define GX_CP_VAT_GROUP0_TXC0_SHIFT_LMASK ((1 << 5) - 1)
         /* bit shift  */ #define GX_CP_VAT_GROUP0_TXC0_SHIFT_SHIFT 25
 
@@ -557,7 +561,7 @@ typedef enum {
         /* end bit    */ #define GX_CP_VAT_GROUP0_BYTEDEQUANT_E 1
         /* bit size   */ #define GX_CP_VAT_GROUP0_BYTEDEQUANT_SZ 1
 
-        /* raw mask   */ #define GX_CP_VAT_GROUP0_BYTEDEQUANT_MASK (((1 << 1) - 1) << 31 - 1)
+        /* raw mask   */ #define GX_CP_VAT_GROUP0_BYTEDEQUANT_MASK (((1 << 1) - 1) << (31 - 1))
         /* local mask */ #define GX_CP_VAT_GROUP0_BYTEDEQUANT_LMASK ((1 << 1) - 1)
         /* bit shift  */ #define GX_CP_VAT_GROUP0_BYTEDEQUANT_SHIFT 30
 
@@ -569,7 +573,7 @@ typedef enum {
         /* end bit    */ #define GX_CP_VAT_GROUP0_NORMALINDEX3_E 0
         /* bit size   */ #define GX_CP_VAT_GROUP0_NORMALINDEX3_SZ 1
 
-        /* raw mask   */ #define GX_CP_VAT_GROUP0_NORMALINDEX3_MASK (((1 << 1) - 1) << 31 - 0)
+        /* raw mask   */ #define GX_CP_VAT_GROUP0_NORMALINDEX3_MASK (((1 << 1) - 1) << (31 - 0))
         /* local mask */ #define GX_CP_VAT_GROUP0_NORMALINDEX3_LMASK ((1 << 1) - 1)
         /* bit shift  */ #define GX_CP_VAT_GROUP0_NORMALINDEX3_SHIFT 31
 
@@ -585,7 +589,7 @@ typedef enum {
         /* end bit    */ #define GX_CP_VAT_GROUP1_TXC1_CNT_E 31
         /* bit size   */ #define GX_CP_VAT_GROUP1_TXC1_CNT_SZ 1
 
-        /* raw mask   */ #define GX_CP_VAT_GROUP1_TXC1_CNT_MASK (((1 << 1) - 1) << 31 - 31)
+        /* raw mask   */ #define GX_CP_VAT_GROUP1_TXC1_CNT_MASK (((1 << 1) - 1) << (31 - 31))
         /* local mask */ #define GX_CP_VAT_GROUP1_TXC1_CNT_LMASK ((1 << 1) - 1)
         /* bit shift  */ #define GX_CP_VAT_GROUP1_TXC1_CNT_SHIFT 0
 
@@ -597,7 +601,7 @@ typedef enum {
         /* end bit    */ #define GX_CP_VAT_GROUP1_TXC1_TYPE_E 30
         /* bit size   */ #define GX_CP_VAT_GROUP1_TXC1_TYPE_SZ 3
 
-        /* raw mask   */ #define GX_CP_VAT_GROUP1_TXC1_TYPE_MASK (((1 << 3) - 1) << 31 - 30)
+        /* raw mask   */ #define GX_CP_VAT_GROUP1_TXC1_TYPE_MASK (((1 << 3) - 1) << (31 - 30))
         /* local mask */ #define GX_CP_VAT_GROUP1_TXC1_TYPE_LMASK ((1 << 3) - 1)
         /* bit shift  */ #define GX_CP_VAT_GROUP1_TXC1_TYPE_SHIFT 1
 
@@ -609,7 +613,7 @@ typedef enum {
         /* end bit    */ #define GX_CP_VAT_GROUP1_TXC1_SHIFT_E 27
         /* bit size   */ #define GX_CP_VAT_GROUP1_TXC1_SHIFT_SZ 5
 
-        /* raw mask   */ #define GX_CP_VAT_GROUP1_TXC1_SHIFT_MASK (((1 << 5) - 1) << 31 - 27)
+        /* raw mask   */ #define GX_CP_VAT_GROUP1_TXC1_SHIFT_MASK (((1 << 5) - 1) << (31 - 27))
         /* local mask */ #define GX_CP_VAT_GROUP1_TXC1_SHIFT_LMASK ((1 << 5) - 1)
         /* bit shift  */ #define GX_CP_VAT_GROUP1_TXC1_SHIFT_SHIFT 4
 
@@ -621,7 +625,7 @@ typedef enum {
         /* end bit    */ #define GX_CP_VAT_GROUP1_TXC2_CNT_E 22
         /* bit size   */ #define GX_CP_VAT_GROUP1_TXC2_CNT_SZ 1
 
-        /* raw mask   */ #define GX_CP_VAT_GROUP1_TXC2_CNT_MASK (((1 << 1) - 1) << 31 - 22)
+        /* raw mask   */ #define GX_CP_VAT_GROUP1_TXC2_CNT_MASK (((1 << 1) - 1) << (31 - 22))
         /* local mask */ #define GX_CP_VAT_GROUP1_TXC2_CNT_LMASK ((1 << 1) - 1)
         /* bit shift  */ #define GX_CP_VAT_GROUP1_TXC2_CNT_SHIFT 9
 
@@ -633,7 +637,7 @@ typedef enum {
         /* end bit    */ #define GX_CP_VAT_GROUP1_TXC2_TYPE_E 21
         /* bit size   */ #define GX_CP_VAT_GROUP1_TXC2_TYPE_SZ 3
 
-        /* raw mask   */ #define GX_CP_VAT_GROUP1_TXC2_TYPE_MASK (((1 << 3) - 1) << 31 - 21)
+        /* raw mask   */ #define GX_CP_VAT_GROUP1_TXC2_TYPE_MASK (((1 << 3) - 1) << (31 - 21))
         /* local mask */ #define GX_CP_VAT_GROUP1_TXC2_TYPE_LMASK ((1 << 3) - 1)
         /* bit shift  */ #define GX_CP_VAT_GROUP1_TXC2_TYPE_SHIFT 10
 
@@ -645,7 +649,7 @@ typedef enum {
         /* end bit    */ #define GX_CP_VAT_GROUP1_TXC2_SHIFT_E 18
         /* bit size   */ #define GX_CP_VAT_GROUP1_TXC2_SHIFT_SZ 5
 
-        /* raw mask   */ #define GX_CP_VAT_GROUP1_TXC2_SHIFT_MASK (((1 << 5) - 1) << 31 - 18)
+        /* raw mask   */ #define GX_CP_VAT_GROUP1_TXC2_SHIFT_MASK (((1 << 5) - 1) << (31 - 18))
         /* local mask */ #define GX_CP_VAT_GROUP1_TXC2_SHIFT_LMASK ((1 << 5) - 1)
         /* bit shift  */ #define GX_CP_VAT_GROUP1_TXC2_SHIFT_SHIFT 13
 
@@ -657,7 +661,7 @@ typedef enum {
         /* end bit    */ #define GX_CP_VAT_GROUP1_TXC3_CNT_E 13
         /* bit size   */ #define GX_CP_VAT_GROUP1_TXC3_CNT_SZ 1
 
-        /* raw mask   */ #define GX_CP_VAT_GROUP1_TXC3_CNT_MASK (((1 << 1) - 1) << 31 - 13)
+        /* raw mask   */ #define GX_CP_VAT_GROUP1_TXC3_CNT_MASK (((1 << 1) - 1) << (31 - 13))
         /* local mask */ #define GX_CP_VAT_GROUP1_TXC3_CNT_LMASK ((1 << 1) - 1)
         /* bit shift  */ #define GX_CP_VAT_GROUP1_TXC3_CNT_SHIFT 18
 
@@ -669,7 +673,7 @@ typedef enum {
         /* end bit    */ #define GX_CP_VAT_GROUP1_TXC3_TYPE_E 12
         /* bit size   */ #define GX_CP_VAT_GROUP1_TXC3_TYPE_SZ 3
 
-        /* raw mask   */ #define GX_CP_VAT_GROUP1_TXC3_TYPE_MASK (((1 << 3) - 1) << 31 - 12)
+        /* raw mask   */ #define GX_CP_VAT_GROUP1_TXC3_TYPE_MASK (((1 << 3) - 1) << (31 - 12))
         /* local mask */ #define GX_CP_VAT_GROUP1_TXC3_TYPE_LMASK ((1 << 3) - 1)
         /* bit shift  */ #define GX_CP_VAT_GROUP1_TXC3_TYPE_SHIFT 19
 
@@ -681,7 +685,7 @@ typedef enum {
         /* end bit    */ #define GX_CP_VAT_GROUP1_TXC3_SHIFT_E 9
         /* bit size   */ #define GX_CP_VAT_GROUP1_TXC3_SHIFT_SZ 5
 
-        /* raw mask   */ #define GX_CP_VAT_GROUP1_TXC3_SHIFT_MASK (((1 << 5) - 1) << 31 - 9)
+        /* raw mask   */ #define GX_CP_VAT_GROUP1_TXC3_SHIFT_MASK (((1 << 5) - 1) << (31 - 9))
         /* local mask */ #define GX_CP_VAT_GROUP1_TXC3_SHIFT_LMASK ((1 << 5) - 1)
         /* bit shift  */ #define GX_CP_VAT_GROUP1_TXC3_SHIFT_SHIFT 22
 
@@ -693,7 +697,7 @@ typedef enum {
         /* end bit    */ #define GX_CP_VAT_GROUP1_TXC4_CNT_E 4
         /* bit size   */ #define GX_CP_VAT_GROUP1_TXC4_CNT_SZ 1
 
-        /* raw mask   */ #define GX_CP_VAT_GROUP1_TXC4_CNT_MASK (((1 << 1) - 1) << 31 - 4)
+        /* raw mask   */ #define GX_CP_VAT_GROUP1_TXC4_CNT_MASK (((1 << 1) - 1) << (31 - 4))
         /* local mask */ #define GX_CP_VAT_GROUP1_TXC4_CNT_LMASK ((1 << 1) - 1)
         /* bit shift  */ #define GX_CP_VAT_GROUP1_TXC4_CNT_SHIFT 27
 
@@ -705,7 +709,7 @@ typedef enum {
         /* end bit    */ #define GX_CP_VAT_GROUP1_TXC4_TYPE_E 3
         /* bit size   */ #define GX_CP_VAT_GROUP1_TXC4_TYPE_SZ 3
 
-        /* raw mask   */ #define GX_CP_VAT_GROUP1_TXC4_TYPE_MASK (((1 << 3) - 1) << 31 - 3)
+        /* raw mask   */ #define GX_CP_VAT_GROUP1_TXC4_TYPE_MASK (((1 << 3) - 1) << (31 - 3))
         /* local mask */ #define GX_CP_VAT_GROUP1_TXC4_TYPE_LMASK ((1 << 3) - 1)
         /* bit shift  */ #define GX_CP_VAT_GROUP1_TXC4_TYPE_SHIFT 28
 
@@ -721,7 +725,7 @@ typedef enum {
         /* end bit    */ #define GX_CP_VAT_GROUP2_TXC4_SHIFT_E 31
         /* bit size   */ #define GX_CP_VAT_GROUP2_TXC4_SHIFT_SZ 5
 
-        /* raw mask   */ #define GX_CP_VAT_GROUP2_TXC4_SHIFT_MASK (((1 << 5) - 1) << 31 - 31)
+        /* raw mask   */ #define GX_CP_VAT_GROUP2_TXC4_SHIFT_MASK (((1 << 5) - 1) << (31 - 31))
         /* local mask */ #define GX_CP_VAT_GROUP2_TXC4_SHIFT_LMASK ((1 << 5) - 1)
         /* bit shift  */ #define GX_CP_VAT_GROUP2_TXC4_SHIFT_SHIFT 0
 
@@ -733,7 +737,7 @@ typedef enum {
         /* end bit    */ #define GX_CP_VAT_GROUP2_TXC5_CNT_E 26
         /* bit size   */ #define GX_CP_VAT_GROUP2_TXC5_CNT_SZ 1
 
-        /* raw mask   */ #define GX_CP_VAT_GROUP2_TXC5_CNT_MASK (((1 << 1) - 1) << 31 - 26)
+        /* raw mask   */ #define GX_CP_VAT_GROUP2_TXC5_CNT_MASK (((1 << 1) - 1) << (31 - 26))
         /* local mask */ #define GX_CP_VAT_GROUP2_TXC5_CNT_LMASK ((1 << 1) - 1)
         /* bit shift  */ #define GX_CP_VAT_GROUP2_TXC5_CNT_SHIFT 5
 
@@ -745,7 +749,7 @@ typedef enum {
         /* end bit    */ #define GX_CP_VAT_GROUP2_TXC5_TYPE_E 25
         /* bit size   */ #define GX_CP_VAT_GROUP2_TXC5_TYPE_SZ 3
 
-        /* raw mask   */ #define GX_CP_VAT_GROUP2_TXC5_TYPE_MASK (((1 << 3) - 1) << 31 - 25)
+        /* raw mask   */ #define GX_CP_VAT_GROUP2_TXC5_TYPE_MASK (((1 << 3) - 1) << (31 - 25))
         /* local mask */ #define GX_CP_VAT_GROUP2_TXC5_TYPE_LMASK ((1 << 3) - 1)
         /* bit shift  */ #define GX_CP_VAT_GROUP2_TXC5_TYPE_SHIFT 6
 
@@ -757,7 +761,7 @@ typedef enum {
         /* end bit    */ #define GX_CP_VAT_GROUP2_TXC5_SHIFT_E 22
         /* bit size   */ #define GX_CP_VAT_GROUP2_TXC5_SHIFT_SZ 5
 
-        /* raw mask   */ #define GX_CP_VAT_GROUP2_TXC5_SHIFT_MASK (((1 << 5) - 1) << 31 - 22)
+        /* raw mask   */ #define GX_CP_VAT_GROUP2_TXC5_SHIFT_MASK (((1 << 5) - 1) << (31 - 22))
         /* local mask */ #define GX_CP_VAT_GROUP2_TXC5_SHIFT_LMASK ((1 << 5) - 1)
         /* bit shift  */ #define GX_CP_VAT_GROUP2_TXC5_SHIFT_SHIFT 9
 
@@ -769,7 +773,7 @@ typedef enum {
         /* end bit    */ #define GX_CP_VAT_GROUP2_TXC6_CNT_E 17
         /* bit size   */ #define GX_CP_VAT_GROUP2_TXC6_CNT_SZ 1
 
-        /* raw mask   */ #define GX_CP_VAT_GROUP2_TXC6_CNT_MASK (((1 << 1) - 1) << 31 - 17)
+        /* raw mask   */ #define GX_CP_VAT_GROUP2_TXC6_CNT_MASK (((1 << 1) - 1) << (31 - 17))
         /* local mask */ #define GX_CP_VAT_GROUP2_TXC6_CNT_LMASK ((1 << 1) - 1)
         /* bit shift  */ #define GX_CP_VAT_GROUP2_TXC6_CNT_SHIFT 14
 
@@ -781,7 +785,7 @@ typedef enum {
         /* end bit    */ #define GX_CP_VAT_GROUP2_TXC6_TYPE_E 16
         /* bit size   */ #define GX_CP_VAT_GROUP2_TXC6_TYPE_SZ 3
 
-        /* raw mask   */ #define GX_CP_VAT_GROUP2_TXC6_TYPE_MASK (((1 << 3) - 1) << 31 - 16)
+        /* raw mask   */ #define GX_CP_VAT_GROUP2_TXC6_TYPE_MASK (((1 << 3) - 1) << (31 - 16))
         /* local mask */ #define GX_CP_VAT_GROUP2_TXC6_TYPE_LMASK ((1 << 3) - 1)
         /* bit shift  */ #define GX_CP_VAT_GROUP2_TXC6_TYPE_SHIFT 15
 
@@ -793,7 +797,7 @@ typedef enum {
         /* end bit    */ #define GX_CP_VAT_GROUP2_TXC6_SHIFT_E 13
         /* bit size   */ #define GX_CP_VAT_GROUP2_TXC6_SHIFT_SZ 5
 
-        /* raw mask   */ #define GX_CP_VAT_GROUP2_TXC6_SHIFT_MASK (((1 << 5) - 1) << 31 - 13)
+        /* raw mask   */ #define GX_CP_VAT_GROUP2_TXC6_SHIFT_MASK (((1 << 5) - 1) << (31 - 13))
         /* local mask */ #define GX_CP_VAT_GROUP2_TXC6_SHIFT_LMASK ((1 << 5) - 1)
         /* bit shift  */ #define GX_CP_VAT_GROUP2_TXC6_SHIFT_SHIFT 18
 
@@ -805,7 +809,7 @@ typedef enum {
         /* end bit    */ #define GX_CP_VAT_GROUP2_TXC7_CNT_E 8
         /* bit size   */ #define GX_CP_VAT_GROUP2_TXC7_CNT_SZ 1
 
-        /* raw mask   */ #define GX_CP_VAT_GROUP2_TXC7_CNT_MASK (((1 << 1) - 1) << 31 - 8)
+        /* raw mask   */ #define GX_CP_VAT_GROUP2_TXC7_CNT_MASK (((1 << 1) - 1) << (31 - 8))
         /* local mask */ #define GX_CP_VAT_GROUP2_TXC7_CNT_LMASK ((1 << 1) - 1)
         /* bit shift  */ #define GX_CP_VAT_GROUP2_TXC7_CNT_SHIFT 23
 
@@ -817,7 +821,7 @@ typedef enum {
         /* end bit    */ #define GX_CP_VAT_GROUP2_TXC7_TYPE_E 7
         /* bit size   */ #define GX_CP_VAT_GROUP2_TXC7_TYPE_SZ 3
 
-        /* raw mask   */ #define GX_CP_VAT_GROUP2_TXC7_TYPE_MASK (((1 << 3) - 1) << 31 - 7)
+        /* raw mask   */ #define GX_CP_VAT_GROUP2_TXC7_TYPE_MASK (((1 << 3) - 1) << (31 - 7))
         /* local mask */ #define GX_CP_VAT_GROUP2_TXC7_TYPE_LMASK ((1 << 3) - 1)
         /* bit shift  */ #define GX_CP_VAT_GROUP2_TXC7_TYPE_SHIFT 24
 
@@ -829,7 +833,7 @@ typedef enum {
         /* end bit    */ #define GX_CP_VAT_GROUP2_TXC7_SHIFT_E 4
         /* bit size   */ #define GX_CP_VAT_GROUP2_TXC7_SHIFT_SZ 5
 
-        /* raw mask   */ #define GX_CP_VAT_GROUP2_TXC7_SHIFT_MASK (((1 << 5) - 1) << 31 - 4)
+        /* raw mask   */ #define GX_CP_VAT_GROUP2_TXC7_SHIFT_MASK (((1 << 5) - 1) << (31 - 4))
         /* local mask */ #define GX_CP_VAT_GROUP2_TXC7_SHIFT_LMASK ((1 << 5) - 1)
         /* bit shift  */ #define GX_CP_VAT_GROUP2_TXC7_SHIFT_SHIFT 27
 
@@ -845,7 +849,7 @@ typedef enum {
         /* end bit    */ #define GX_CP_ARRAYBASE_BASE_E 31
         /* bit size   */ #define GX_CP_ARRAYBASE_BASE_SZ 26
 
-        /* raw mask   */ #define GX_CP_ARRAYBASE_BASE_MASK (((1 << 26) - 1) << 31 - 31)
+        /* raw mask   */ #define GX_CP_ARRAYBASE_BASE_MASK (((1 << 26) - 1) << (31 - 31))
         /* local mask */ #define GX_CP_ARRAYBASE_BASE_LMASK ((1 << 26) - 1)
         /* bit shift  */ #define GX_CP_ARRAYBASE_BASE_SHIFT 0
 
@@ -861,14 +865,14 @@ typedef enum {
         /* end bit    */ #define GX_CP_ARRAYSTRIDE_STRIDE_E 31
         /* bit size   */ #define GX_CP_ARRAYSTRIDE_STRIDE_SZ 8
 
-        /* raw mask   */ #define GX_CP_ARRAYSTRIDE_STRIDE_MASK (((1 << 8) - 1) << 31 - 31)
+        /* raw mask   */ #define GX_CP_ARRAYSTRIDE_STRIDE_MASK (((1 << 8) - 1) << (31 - 31))
         /* local mask */ #define GX_CP_ARRAYSTRIDE_STRIDE_LMASK ((1 << 8) - 1)
         /* bit shift  */ #define GX_CP_ARRAYSTRIDE_STRIDE_SHIFT 0
 
         /* get value  */ #define GX_CP_GET_ARRAYSTRIDE_STRIDE(reg) GX_BITGET((reg), 24, 8)
         /* set value  */ #define GX_CP_SET_ARRAYSTRIDE_STRIDE(reg, x) ((reg) = GX_BITSET((reg), 24, 8, x))
 
-
+// clang-format on
 
 #ifdef __cplusplus
 }

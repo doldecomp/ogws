@@ -1,4 +1,4 @@
-// TODO: REMOVE AFTER REFACTOR
+// TODO(kiwi) REMOVE AFTER REFACTOR
 #pragma ipa file
 
 #include <egg/prim.h>
@@ -7,12 +7,12 @@
 namespace EGG {
 
 const u32 MsgRes::cDataBlkKindCodeSet[DATABLK_MAX] = {
-    'INF1', // DATABLK_MSGINFO
-    'DAT1', // DATABLK_MSGDATA
-    'STR1', // DATABLK_STRATTR
-    'MID1', // DATABLK_MSGID
-    'FLW1', // DATABLK_FLOWCHART
-    'FLI1'  // DATABLK_FLOWLABEL
+    FOURCC('I', 'N', 'F', '1'), // DATABLK_MSGINFO
+    FOURCC('D', 'A', 'T', '1'), // DATABLK_MSGDATA
+    FOURCC('S', 'T', 'R', '1'), // DATABLK_STRATTR
+    FOURCC('M', 'I', 'D', '1'), // DATABLK_MSGID
+    FOURCC('F', 'L', 'W', '1'), // DATABLK_FLOWCHART
+    FOURCC('F', 'L', 'I', '1')  // DATABLK_FLOWLABEL
 };
 
 const u32 MsgRes::cMainMsgIdBitNumSet[cFormSupplementMax] = {

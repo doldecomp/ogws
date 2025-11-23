@@ -1,4 +1,5 @@
 #include <RVLFaceLib/RVLFaceLibInternal.h>
+
 #include <string.h>
 
 // For masking out padding when comparing fields
@@ -233,13 +234,15 @@ RFLErrcode RFLiPickupCharInfo(RFLiCharInfo* info, RFLDataSource source,
     }
 
     switch (source) {
-    case RFLDataSource_Official:
+    case RFLDataSource_Official: {
         err = RFLiGetCharInfo(info, index);
         break;
+    }
+
     case RFLDataSource_Controller1:
     case RFLDataSource_Controller2:
     case RFLDataSource_Controller3:
-    case RFLDataSource_Controller4:
+    case RFLDataSource_Controller4: {
         if (RFLiGetControllerData(info, source - RFLDataSource_Controller1,
                                   (u8)index, FALSE)) {
             err = RFLErrcode_Success;
@@ -247,17 +250,26 @@ RFLErrcode RFLiPickupCharInfo(RFLiCharInfo* info, RFLDataSource source,
             err = RFLErrcode_Broken;
         }
         break;
-    case RFLDataSource_Middle:
+    }
+
+    case RFLDataSource_Middle: {
         if (RFLiGetCharInfoMiddleDB(info, db, index)) {
             err = RFLErrcode_Success;
         } else {
             err = RFLErrcode_Broken;
         }
         break;
-    case RFLDataSource_Default:
+    }
+
+    case RFLDataSource_Default: {
         RFLiGetDefaultData(info, index);
         err = RFLErrcode_Success;
         break;
+    }
+
+    default: {
+        break;
+    }
     }
 
     if (err == RFLErrcode_Success) {

@@ -21,7 +21,7 @@ void GDSetGenMode2(u8 numTexGens, u8 numChans, u8 numTevs, u8 numInds,
     LoadBPCmd(
         numTexGens        << GX_BP_GENMODE_NUMTEX_SHIFT       |
         numChans          << GX_BP_GENMODE_NUMCOLORS_SHIFT    |
-        numTevs - 1       << GX_BP_GENMODE_NUMTEVSTAGES_SHIFT |
+        (numTevs - 1)     << GX_BP_GENMODE_NUMTEVSTAGES_SHIFT |
         cm2hw[cullMode]   << GX_BP_GENMODE_CULLMODE_SHIFT     |
         numInds           << GX_BP_GENMODE_NUMINDSTAGES_SHIFT |
         GX_BP_REG_GENMODE << GX_BP_OPCODE_SHIFT);
@@ -51,18 +51,18 @@ void GDSetTexCoordScale2(GXTexCoordID coord, u16 scaleS, GXBool biasS,
 
     // clang-format off
     LoadBPCmd(
-        scaleS - 1 << GX_BP_SU_SIZE_SCALE_SHIFT         |
-        biasS      << GX_BP_SU_SIZE_RANGEBIAS_SHIFT     |
-        wrapS      << GX_BP_SU_SIZE_CYLINDRICWRAP_SHIFT |
-        GX_BP_REG_SU_SSIZE0 + coord * 2 << GX_BP_OPCODE_SHIFT);
+        (scaleS - 1) << GX_BP_SU_SIZE_SCALE_SHIFT         |
+        biasS        << GX_BP_SU_SIZE_RANGEBIAS_SHIFT     |
+        wrapS        << GX_BP_SU_SIZE_CYLINDRICWRAP_SHIFT |
+        (GX_BP_REG_SU_SSIZE0 + coord * 2) << GX_BP_OPCODE_SHIFT);
     // clang-format on
 
     // clang-format off
     LoadBPCmd(
-        scaleT - 1 << GX_BP_SU_SIZE_SCALE_SHIFT         |
-        biasT      << GX_BP_SU_SIZE_RANGEBIAS_SHIFT     |
-        wrapT      << GX_BP_SU_SIZE_CYLINDRICWRAP_SHIFT |
-        GX_BP_REG_SU_TSIZE0 + coord * 2 << GX_BP_OPCODE_SHIFT);
+        (scaleT - 1) << GX_BP_SU_SIZE_SCALE_SHIFT         |
+        biasT        << GX_BP_SU_SIZE_RANGEBIAS_SHIFT     |
+        wrapT        << GX_BP_SU_SIZE_CYLINDRICWRAP_SHIFT |
+        (GX_BP_REG_SU_TSIZE0 + coord * 2) << GX_BP_OPCODE_SHIFT);
     // clang-format on
 }
 
@@ -143,19 +143,19 @@ void GDSetIndTexMtx(u32 id, const math::MTX34& rMtx) {
         static_cast<u32>((static_cast<int>(1024.0f * m00) & GX_BP_INDMTXA_M00_LMASK) << GX_BP_INDMTXA_M00_SHIFT) |
         static_cast<u32>((static_cast<int>(1024.0f * m10) & GX_BP_INDMTXA_M10_LMASK) << GX_BP_INDMTXA_M10_SHIFT) |
         static_cast<u32>((scaleExp >> 0 & GX_BP_INDMTXA_EXP_LMASK) << GX_BP_INDMTXA_EXP_SHIFT)                   |
-        static_cast<u32>(id + GX_BP_REG_INDMTX0A << GX_BP_OPCODE_SHIFT));
+        static_cast<u32>((id + GX_BP_REG_INDMTX0A) << GX_BP_OPCODE_SHIFT));
 
     LoadBPCmd(
         static_cast<u32>((static_cast<int>(1024.0f * m01) & GX_BP_INDMTXB_M01_LMASK) << GX_BP_INDMTXB_M01_SHIFT) |
         static_cast<u32>((static_cast<int>(1024.0f * m11) & GX_BP_INDMTXB_M11_LMASK) << GX_BP_INDMTXB_M11_SHIFT) |
         static_cast<u32>((scaleExp >> 2 & GX_BP_INDMTXB_EXP_LMASK) << GX_BP_INDMTXB_EXP_SHIFT)                   |
-        static_cast<u32>((id + GX_BP_REG_INDMTX0B << GX_BP_OPCODE_SHIFT)));
+        static_cast<u32>((id + GX_BP_REG_INDMTX0B) << GX_BP_OPCODE_SHIFT));
 
     LoadBPCmd(
         static_cast<u32>((static_cast<int>(1024.0f * m02) & GX_BP_INDMTXC_M02_LMASK) << GX_BP_INDMTXC_M02_SHIFT) |
         static_cast<u32>((static_cast<int>(1024.0f * m12) & GX_BP_INDMTXC_M12_LMASK) << GX_BP_INDMTXC_M12_SHIFT) |
         static_cast<u32>((scaleExp >> 4 & GX_BP_INDMTXC_EXP_LMASK) << GX_BP_INDMTXC_EXP_SHIFT)                   |
-        static_cast<u32>(id + GX_BP_REG_INDMTX0C << GX_BP_OPCODE_SHIFT));
+        static_cast<u32>((id + GX_BP_REG_INDMTX0C) << GX_BP_OPCODE_SHIFT));
     // clang-format on
 }
 

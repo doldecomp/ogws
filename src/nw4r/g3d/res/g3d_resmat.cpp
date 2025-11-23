@@ -943,19 +943,19 @@ void ResMatIndMtxAndScale::GXSetIndTexMtx(GXIndTexMtxID id,
         static_cast<u32>((static_cast<int>(1024.0f * rMtx._00) & GX_BP_INDMTXA_M00_LMASK) << GX_BP_INDMTXA_M00_SHIFT) |
         static_cast<u32>((static_cast<int>(1024.0f * rMtx._10) & GX_BP_INDMTXA_M10_LMASK) << GX_BP_INDMTXA_M10_SHIFT) |
         static_cast<u32>((scaleExp >> 0 & GX_BP_INDMTXA_EXP_LMASK) << GX_BP_INDMTXA_EXP_SHIFT) |
-        static_cast<u32>(offset + GX_BP_REG_INDMTX0A << GX_BP_OPCODE_SHIFT));
+        static_cast<u32>((offset + GX_BP_REG_INDMTX0A) << GX_BP_OPCODE_SHIFT));
 
     detail::ResWriteBPCmd(&pCmd[GX_BP_CMD_SZ * 1],
         static_cast<u32>((static_cast<int>(1024.0f * rMtx._01) & GX_BP_INDMTXB_M01_LMASK) << GX_BP_INDMTXB_M01_SHIFT) |
         static_cast<u32>((static_cast<int>(1024.0f * rMtx._11) & GX_BP_INDMTXB_M11_LMASK) << GX_BP_INDMTXB_M11_SHIFT) |
         static_cast<u32>((scaleExp >> 2 & GX_BP_INDMTXB_EXP_LMASK) << GX_BP_INDMTXB_EXP_SHIFT) |
-        static_cast<u32>((offset + GX_BP_REG_INDMTX0B << GX_BP_OPCODE_SHIFT)));
+        static_cast<u32>((offset + GX_BP_REG_INDMTX0B) << GX_BP_OPCODE_SHIFT));
 
     detail::ResWriteBPCmd(&pCmd[GX_BP_CMD_SZ * 2],
         static_cast<u32>((static_cast<int>(1024.0f * rMtx._02) & GX_BP_INDMTXC_M02_LMASK) << GX_BP_INDMTXC_M02_SHIFT) |
         static_cast<u32>((static_cast<int>(1024.0f * rMtx._12) & GX_BP_INDMTXC_M12_LMASK) << GX_BP_INDMTXC_M12_SHIFT) |
         static_cast<u32>((scaleExp >> 4 & GX_BP_INDMTXC_EXP_LMASK) << GX_BP_INDMTXC_EXP_SHIFT) |
-        static_cast<u32>(offset + GX_BP_REG_INDMTX0C << GX_BP_OPCODE_SHIFT));
+        static_cast<u32>((offset + GX_BP_REG_INDMTX0C) << GX_BP_OPCODE_SHIFT));
     // clang-format on
 }
 
@@ -1451,8 +1451,8 @@ void ResMatTexCoordGen::GXSetTexCoordGen2(GXTexCoordID id, GXTexGenType func,
         embossLit << GX_XF_TEX_BUMPSRCLIGHT_SHIFT);
 
     detail::ResWriteXFCmd(&pCmd[GX_XF_CMD_SZ * 1], id + GX_XF_REG_DUALTEX0,
-        postMtx - GX_PTTEXMTX0 << GX_XF_DUALTEX_BASEROW_SHIFT |
-        normalize             << GX_XF_DUALTEX_NORMALIZE_SHIFT);
+        (postMtx - GX_PTTEXMTX0) << GX_XF_DUALTEX_BASEROW_SHIFT |
+        normalize                << GX_XF_DUALTEX_NORMALIZE_SHIFT);
     // clang-format on
 }
 

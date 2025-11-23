@@ -1,4 +1,4 @@
-// TODO: REMOVE AFTER REFACTOR
+// TODO(kiwi) REMOVE AFTER REFACTOR
 #pragma ipa file
 
 #include <egg/audio.h>
@@ -13,7 +13,7 @@ namespace EGG {
  * SimpleAudioMgrWithSound3D
  *
  ******************************************************************************/
-#ifndef __DECOMP_NON_MATCHING
+#if !defined(NONMATCHING)
 SimpleAudioMgrWithSound3D::~SimpleAudioMgrWithSound3D() {}
 #endif
 
@@ -22,7 +22,7 @@ SimpleAudioMgrWithSound3D::~SimpleAudioMgrWithSound3D() {}
  * SimpleAudioMgrWithFx
  *
  ******************************************************************************/
-#ifndef __DECOMP_NON_MATCHING
+#if !defined(NONMATCHING)
 SimpleAudioMgrWithFx::~SimpleAudioMgrWithFx() {}
 #endif
 

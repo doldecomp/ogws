@@ -22,7 +22,9 @@ void DrawOrder::Add(Effect* pEffect, ParticleManager* pManager) {
     ut::List* pList = GetPMList(pEffect);
     ParticleManager* pIt = NULL;
 
-    while (pIt = static_cast<ParticleManager*>(ut::List_GetPrev(pList, pIt))) {
+    while (
+        (pIt = static_cast<ParticleManager*>(ut::List_GetPrev(pList, pIt)))) {
+
         if (pIt->mWeight <= pManager->mWeight) {
             break;
         }

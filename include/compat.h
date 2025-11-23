@@ -40,6 +40,7 @@
 
 // Hide inline assembly
 #define ASM(...)
+#define ASM_VOLATILE(...)
 
 // Hide attributes
 #define __attribute__(...)
@@ -51,16 +52,23 @@
 // Hide memory-mapped symbols
 #define DECL_ADDRESS(...)
 
+// Hide flexible arrays
+#define FLEXIBLE_ARRAY(NAME) NAME[0]
+
 #else
 
 // Keep inline assembly
 #define ASM asm
+#define ASM_VOLATILE asm volatile
 
 // decltype
 #define DECLTYPE(x) __decltype__(x)
 
 // Place a symbol at a specific address
 #define DECL_ADDRESS(addr) : addr
+
+// Allow flexible arrays
+#define FLEXIBLE_ARRAY(NAME) NAME[]
 
 #endif
 

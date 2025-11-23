@@ -260,28 +260,28 @@ inline bool IsEqualTlutObj(const GXTlutObj& rLhs, const GXTlutObj& rRhs) {
  ******************************************************************************/
 IndTexMtxInfo::IndTexMtxInfo(const ResMatIndMtxAndScale ind) : flag(0) {
     if (ind.GXGetIndTexMtx(GX_ITM_0, &offset_mtx[GX_ITM_0 - 1])) {
-        flag |= 1 << GX_ITM_0 - 1;
+        flag |= 1 << (GX_ITM_0 - 1);
     }
 
     if (ind.GXGetIndTexMtx(GX_ITM_1, &offset_mtx[GX_ITM_1 - 1])) {
-        flag |= 1 << GX_ITM_1 - 1;
+        flag |= 1 << (GX_ITM_1 - 1);
     }
 
     if (ind.GXGetIndTexMtx(GX_ITM_2, &offset_mtx[GX_ITM_2 - 1])) {
-        flag |= 1 << GX_ITM_2 - 1;
+        flag |= 1 << (GX_ITM_2 - 1);
     }
 }
 
 void IndTexMtxInfo::FifoSend() const {
-    if (flag & (1 << GX_ITM_0 - 1)) {
+    if (flag & (1 << (GX_ITM_0 - 1))) {
         fifo::GDSetIndTexMtx(GX_PNMTX0, offset_mtx[GX_ITM_0 - 1]);
     }
 
-    if (flag & (1 << GX_ITM_1 - 1)) {
+    if (flag & (1 << (GX_ITM_1 - 1))) {
         fifo::GDSetIndTexMtx(GX_PNMTX1, offset_mtx[GX_ITM_1 - 1]);
     }
 
-    if (flag & (1 << GX_ITM_2 - 1)) {
+    if (flag & (1 << (GX_ITM_2 - 1))) {
         fifo::GDSetIndTexMtx(GX_PNMTX2, offset_mtx[GX_ITM_2 - 1]);
     }
 }
@@ -289,15 +289,15 @@ void IndTexMtxInfo::FifoSend() const {
 void IndTexMtxInfo::SetMtx(GXIndTexMtxID id, const math::MTX34& rMtx) {
     if (id == GX_ITM_0) {
         offset_mtx[GX_ITM_0 - 1] = rMtx;
-        flag |= 1 << GX_ITM_0 - 1;
+        flag |= 1 << (GX_ITM_0 - 1);
 
     } else if (id == GX_ITM_1) {
         offset_mtx[GX_ITM_1 - 1] = rMtx;
-        flag |= 1 << GX_ITM_1 - 1;
+        flag |= 1 << (GX_ITM_1 - 1);
 
     } else if (id == GX_ITM_2) {
         offset_mtx[GX_ITM_2 - 1] = rMtx;
-        flag |= 1 << GX_ITM_2 - 1;
+        flag |= 1 << (GX_ITM_2 - 1);
     }
 }
 

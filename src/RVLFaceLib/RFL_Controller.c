@@ -2,7 +2,7 @@
 
 #include <revolution/WPAD.h>
 
-#define MAGIC_CONTROLLER_DATA 'RNCD'
+#define MAGIC_CONTROLLER_DATA FOURCC('R', 'N', 'C', 'D')
 #define DB_REMOTE_MEM_ADDR 0
 #define READ_RETRY_MAX 3
 

@@ -37,7 +37,7 @@ struct DataBlock {
  ******************************************************************************/
 class SeqFileReader {
 public:
-    static const u32 SIGNATURE = 'RSEQ';
+    static const u32 SIGNATURE = FOURCC('R', 'S', 'E', 'Q');
     static const int VERSION = NW4R_VERSION(1, 0);
 
 public:

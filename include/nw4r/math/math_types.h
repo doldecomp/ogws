@@ -285,7 +285,8 @@ struct QUAT : _QUAT {
         w = fw;
     }
 
-    // TODO: These are not real AFAIK. Do they really manually cast the QUAT?
+    // TODO(kiwi) These are not real AFAIK. Do they really manually cast the
+    // QUAT?
     operator Quaternion*() {
         return reinterpret_cast<Quaternion*>(this);
     }

@@ -110,7 +110,7 @@ public:
      * Read big endian value
      *
      ******************************************************************************/
-#ifdef NW4R_LITLE_ENDIAN
+#if defined(NW4R_LITLE_ENDIAN)
     static inline u16 ReadBigEndian(u16 x) {
         return x >> 8 | x << 8;
     }
@@ -157,6 +157,7 @@ private:
     // dB(idx) = VOLUME_MIN_DB + (idx / 10)
     // tbl[idx] = 10 ** (dB(idx) / 20)
     static const int VOLUME_TABLE_SIZE = VOLUME_RANGE_MB + 1;
+    // NOLINTNEXTLINE (vla-cxx-extension)
     static const f32 Decibel2RatioTable[VOLUME_TABLE_SIZE];
 
     // 1/256 step

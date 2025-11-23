@@ -9,7 +9,7 @@
 #include <macros.h>
 
 // Compile without matching hacks.
-#if defined(__DECOMP_NON_MATCHING) || defined(COMPAT_ANY)
+#if defined(NONMATCHING) || defined(COMPAT_ANY)
 #define DECOMP_FORCEACTIVE(module, ...)
 #define DECOMP_FORCELITERAL(module, ...)
 #define DECOMP_FORCEACTIVE_DTOR(module, cls)

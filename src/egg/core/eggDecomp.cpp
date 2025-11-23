@@ -1,4 +1,4 @@
-// TODO: REMOVE AFTER REFACTOR
+// TODO(kiwi) REMOVE AFTER REFACTOR
 #pragma ipa file
 
 #include <egg/core.h>
@@ -97,7 +97,7 @@ int Decomp::decodeASH(u8* pSrc, u8* pDst) {
     u32 expandSize = pSrc[5] << 16 | pSrc[6] << 8 | pSrc[7];
     u32 backRefOfs = pSrc[8] << 24 | pSrc[9] << 16 | pSrc[10] << 8 | pSrc[11];
 
-    // TODO: what are these sizes
+    // TODO(kiwi) what are these sizes
     pLeft9 = reinterpret_cast<u16*>(sWorkArea);
     pRight9 = pLeft9 + 0xFFC / sizeof(u16);
     pLeft12 = pRight9 + 0xFFC / sizeof(u16);
@@ -218,7 +218,7 @@ int Decomp::getBitsCode(u8* pData, int size, int tree) {
     }
     // Read to end of bitstream
     else if (bitIdx + size == 32) {
-        code = bits >> 32 - size;
+        code = bits >> (32 - size);
 
         // Need to refresh bitstream
         sStreamData[tree] = pData[byteIdx + 0] << 24 |
@@ -230,7 +230,7 @@ int Decomp::getBitsCode(u8* pData, int size, int tree) {
     }
     // Read some bits
     else {
-        code = bits >> 32 - size;
+        code = bits >> (32 - size);
         sStreamData[tree] = bits << size;
         sStreamBit[tree] = bitIdx + size;
     }

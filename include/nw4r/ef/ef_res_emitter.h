@@ -65,7 +65,7 @@ struct ColorInput {
     u8 mTevKColor[GX_MAX_KCOLOR];    // at 0x4
 };
 
-// TODO: Why?
+// TODO(kiwi) Why?
 #pragma pack(push, 1)
 struct Lighting {
     enum Mode {
@@ -359,7 +359,7 @@ private:
 
 public:
     explicit ResEmitter(EmitterResource* pData = NULL) : mData(pData) {}
-    explicit ResEmitter(const ResEmitter& rOther) : mData(rOther.mData) {}
+    ResEmitter(const ResEmitter& rOther) : mData(rOther.mData) {}
 
     bool IsValid() const {
         return mData != NULL;

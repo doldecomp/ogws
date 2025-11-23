@@ -2,6 +2,7 @@
 #include <revolution/ESP.h>
 #include <revolution/IPC.h>
 #include <revolution/OS.h>
+
 #include <string.h>
 
 #define DVD_LOW_CTX_MAX 4
@@ -165,10 +166,8 @@ static s32 doTransactionCallback(s32 intType, void* arg) {
     return IPC_RESULT_OK;
 }
 
-// clang-format off
 DECOMP_FORCEACTIVE(dvd_broadway_c,
                    "(doCoverCallback) Error - context mangled!\n");
-// clang-format on
 
 static s32 doPrepareCoverRegisterCallback(s32 intType, void* arg) {
     DVDLowContext* ctx = (DVDLowContext*)arg;
@@ -475,10 +474,8 @@ BOOL DVDLowStopMotor(BOOL eject, BOOL kill, DVDLowCallback callback) {
     return TRUE;
 }
 
-// clang-format off
 DECOMP_FORCEACTIVE(dvd_broadway_c,
                    "@@@ (DVDLowWaitForCoverClose) IOS_IoctlAsync returned error: %d\n");
-// clang-format on
 
 BOOL DVDLowInquiry(DVDDriveInfo* out, DVDLowCallback callback) {
     DVDLowContext* ctx;
@@ -531,11 +528,9 @@ BOOL DVDLowRequestError(DVDLowCallback callback) {
     return TRUE;
 }
 
-// clang-format off
 DECOMP_FORCEACTIVE(dvd_broadway_c,
                    "(DVDLowSetSpinupFlag): Synch functions can't be called in callbacks\n",
                    "@@@ (DVDLowNotifyReset) IOS_IoctlAsync returned error: %d\n");
-// clang-format on
 
 BOOL DVDLowSetSpinupFlag(BOOL enable) {
     spinUpValue = enable;
@@ -597,7 +592,6 @@ BOOL DVDLowAudioBufferConfig(BOOL enable, u32 size, DVDLowCallback callback) {
     return TRUE;
 }
 
-// clang-format off
 DECOMP_FORCEACTIVE(dvd_broadway_c,
                    "(DVDLowGetCoverStatus): Synch functions can't be called in callbacks\n",
                    "@@@ (DVDLowGetCoverStatus) IOS_Ioctl returned error: %d\n",
@@ -613,7 +607,6 @@ DECOMP_FORCEACTIVE(dvd_broadway_c,
                    "@@@ (DVDLowSerMeasControl) IOS_IoctlAsync returned error: %d\n",
                    "@@@ (DVDLowRequestDiscStatus) IOS_IoctlAsync returned error: %d\n",
                    "@@@ (DVDLowRequestRetryNumber) IOS_IoctlAsync returned error: %d\n");
-// clang-format on
 
 BOOL DVDLowSetMaximumRotation(u32 speed, DVDLowCallback callback) {
     DVDLowContext* ctx;
@@ -703,11 +696,9 @@ BOOL DVDLowSeek(u32 offset, DVDLowCallback callback) {
     return TRUE;
 }
 
-// clang-format off
 DECOMP_FORCEACTIVE(dvd_broadway_c,
                    "(DVDLowGetCoverReg): Synch functions can't be called in callbacks\n",
                    "@@@ (DVDLowGetCoverReg) IOS_Ioctl returned error: %d\n");
-// clang-format on
 
 u32 DVDLowGetCoverRegister(void) {
     return diRegValCache.dicvr;
@@ -784,7 +775,5 @@ BOOL __DVDLowTestAlarm(const OSAlarm* alarm) {
     return FALSE;
 }
 
-// clang-format off
 DECOMP_FORCEACTIVE(dvd_broadway_c,
                    "@@@ (DVDLowEnableDvdVideo) IOS_IoctlAsync returned error: %d\n");
-// clang-format on

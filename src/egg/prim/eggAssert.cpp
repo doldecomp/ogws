@@ -1,4 +1,4 @@
-// TODO: REMOVE AFTER REFACTOR
+// TODO(kiwi) REMOVE AFTER REFACTOR
 #pragma ipa file
 
 #include <egg/prim.h>
@@ -8,7 +8,11 @@
 #include <cstdio>
 #include <cstring>
 
+#if defined(NONMATCHING) || defined(COMPAT_ANY)
+void system_print(bool visible, const char* pFile, const char* pMsg, ...) {
+#else
 void system_print(bool visible, char* pFile, char* pMsg, ...) {
+#endif
     if (!visible) {
         return;
     }
@@ -40,7 +44,11 @@ void system_print(bool visible, char* pFile, char* pMsg, ...) {
     OSReport("%s", msgBuf);
 }
 
+#if defined(NONMATCHING) || defined(COMPAT_ANY)
+void system_halt(const char* pFile, int line, const char* pMsg, ...) {
+#else
 void system_halt(char* pFile, int line, char* pMsg, ...) {
+#endif
     OSReport("---------- HALT -------------\n");
 
     char fileName[256];

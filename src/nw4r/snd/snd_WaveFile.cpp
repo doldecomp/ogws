@@ -29,8 +29,8 @@ bool WaveFileReader::ReadWaveParam(WaveData* pWaveData,
     for (int i = 0; i < mWaveInfo->numChannels; i++) {
         ChannelParam& rParam = pWaveData->channelParam[i];
 
-        WaveFile::WaveChannelInfo* pChannelInfo =
-            const_cast<WaveFile::WaveChannelInfo*>(
+        const WaveFile::WaveChannelInfo* pChannelInfo =
+            reinterpret_cast<const WaveFile::WaveChannelInfo*>(
                 ut::AddOffsetToPtr(mWaveInfo, pInfoOffsetTable[i]));
 
         rParam.volumeFrontLeft = pChannelInfo->volumeFrontLeft;

@@ -9,7 +9,7 @@
 namespace nw4r {
 namespace g3d {
 
-// TODO: Why?
+// TODO(kiwi) Why?
 static const int TEV_STAGES_PER_DL = 2;
 
 struct ResTevCommonDL {

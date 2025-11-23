@@ -168,7 +168,7 @@ void ScnRoot::SetGlbSettings() {
         Fog fog(&mFog[i]);
         fog.SetNearFar(near, far);
 
-        if (fog.ref().type != GX_PERSPECTIVE) {
+        if (fog.ref().type != GX_FOG_NONE) {
             fog.ref().type = static_cast<GXFogType>(
                 (fog.ref().type & ~(GX_ORTHOGRAPHIC << 3)) | projOrthoBit);
         }
