@@ -40,6 +40,12 @@ typedef enum {
     WUD_SYNC_TYPE_SIMPLE,
 } WUDSyncType;
 
+typedef enum {
+    WUD_RESULT_SYNC_BUSY = -1,
+    WUD_RESULT_SYNC_WAITING,
+    WUD_RESULT_SYNC_DONE,
+} WUDSyncResult;
+
 typedef void* (*WUDAllocFunc)(u32 size);
 typedef BOOL (*WUDFreeFunc)(void* pBlock);
 
