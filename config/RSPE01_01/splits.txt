@@ -3030,7 +3030,7 @@ Pack/RPKernel/RPSysAppMiiManager.cpp:
 	.text       start:0x801A6360 end:0x801A6424
 	.data       start:0x803B9E90 end:0x803B9EA0
 
-Pack/RPKernel/RPSysControllerSync.cpp:
+Pack/RPKernel/RPSysControllerSyncMgr.cpp:
 	.text       start:0x801A6424 end:0x801A6554
 	.sbss       start:0x804BF5B0 end:0x804BF5B8
 

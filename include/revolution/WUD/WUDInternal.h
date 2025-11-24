@@ -58,12 +58,6 @@ typedef enum {
 } WUDSyncState;
 
 typedef enum {
-    WUD_RESULT_SYNC_BUSY = -1,
-    WUD_RESULT_SYNC_WAITING,
-    WUD_RESULT_SYNC_DONE,
-} WUDSyncResult;
-
-typedef enum {
     WUD_STATE_DELETE_START = 0,
     WUD_STATE_DELETE_DISALLOW_INCOMING = 1,
     WUD_STATE_DELETE_DISCONNECT_ALL = 2,

@@ -52,6 +52,12 @@ typedef enum {
 } WPADResult;
 
 typedef enum {
+    WPAD_SYNC_BUSY = WUD_RESULT_SYNC_BUSY,
+    WPAD_SYNC_WAITING = WUD_RESULT_SYNC_WAITING,
+    WPAD_SYNC_DONE = WUD_RESULT_SYNC_DONE,
+} WPADSyncResult;
+
+typedef enum {
     WPAD_CHAN0,
     WPAD_CHAN1,
     WPAD_CHAN2,
