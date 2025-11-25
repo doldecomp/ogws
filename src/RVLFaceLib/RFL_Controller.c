@@ -307,7 +307,7 @@ BOOL RFLiGetControllerData(RFLiCharInfo* info, s32 chan, u16 index,
     return TRUE;
 }
 
-BOOL RFLIsAvailableControllerData(s32 chan, u16 index) {
+BOOL RFLIsAvailableControllerData(s32 chan, u8 index) {
     RFLiCtrlBufManager* mgr;
     RFLiCtrlBuf* buf;
     u16 mask;

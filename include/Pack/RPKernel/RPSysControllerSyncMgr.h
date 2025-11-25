@@ -46,7 +46,7 @@ private:
      * @param result WPAD sync result
      * @param num Number of synced controllers
      */
-    static void simpleSyncCallback(s32 result, s32 num);
+    static void simpleSyncCallBack(s32 result, s32 num);
 
 private:
     //! Whether the simple sync is currently ongoing

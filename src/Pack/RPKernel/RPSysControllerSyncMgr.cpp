@@ -13,7 +13,7 @@ bool RPSysControllerSyncMgr::sIsSyncing = false;
  * @param result WPAD sync result
  * @param num Number of synced controllers
  */
-void RPSysControllerSyncMgr::simpleSyncCallback(s32 result, s32 /* num*/) {
+void RPSysControllerSyncMgr::simpleSyncCallBack(s32 result, s32 /* num*/) {
     switch (result) {
     case WPAD_SYNC_WAITING: {
         break;
@@ -41,7 +41,7 @@ void RPSysControllerSyncMgr::simpleSyncCallback(s32 result, s32 /* num*/) {
 RPSysControllerSyncMgr::RPSysControllerSyncMgr()
     : mSyncState(ESyncState_Start), mIsEnabled(false) {
 
-    WPADSetSimpleSyncCallback(simpleSyncCallback);
+    WPADSetSimpleSyncCallback(simpleSyncCallBack);
 }
 
 /**

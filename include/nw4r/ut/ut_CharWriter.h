@@ -101,6 +101,14 @@ public:
         mCursorPos.y += dy;
     }
 
+    void SetAlpha(u8 alpha) {
+        mAlpha = alpha;
+        UpdateVertexColor();
+    }
+    u8 GetAlpha() const {
+        return mAlpha;
+    }
+
     void EnableFixedWidth(bool enable) {
         mIsWidthFixed = enable;
     }
