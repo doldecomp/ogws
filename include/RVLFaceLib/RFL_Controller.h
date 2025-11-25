@@ -8,7 +8,7 @@ extern "C" {
 #endif
 
 RFLErrcode RFLLoadControllerAsync(s32 chan);
-BOOL RFLIsAvailableControllerData(s32 chan, u16 index);
+BOOL RFLIsAvailableControllerData(s32 chan, u8 index);
 
 #ifdef __cplusplus
 }

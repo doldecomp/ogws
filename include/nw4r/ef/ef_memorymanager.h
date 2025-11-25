@@ -5,6 +5,12 @@
 namespace nw4r {
 namespace ef {
 
+// Forward declarations
+class Effect;
+class Emitter;
+class Particle;
+class ParticleManager;
+
 class MemoryManagerBase {
 public:
     MemoryManagerBase() {}

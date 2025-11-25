@@ -74,6 +74,9 @@ public:
     static const u32 BLACK = 0x000000FF;
     static const u32 GRAY  = 0x808080FF;
     static const u32 WHITE = 0xFFFFFFFF;
+
+    static const u32 ELEMENT_MIN = 0x00000000;
+    static const u32 ELEMENT_MAX = 0xFFFFFFFF;
     // clang-format on
 };
 

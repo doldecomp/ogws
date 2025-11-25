@@ -10,7 +10,7 @@
  */
 #define RP_SINGLETON_DECL(T)                                                   \
 public:                                                                        \
-    static T* CreateInstance();                                                \
+    static void CreateInstance();                                              \
     static void DestroyInstance();                                             \
     static T* instance() {                                                     \
         return spInstance;                                                     \
@@ -30,9 +30,8 @@ private:                                                                       \
 #define RP_SINGLETON_IMPL(T)                                                   \
     T* T::spInstance = NULL;                                                   \
                                                                                \
-    T* T::CreateInstance() {                                                   \
+    void T::CreateInstance() {                                                 \
         spInstance = new T();                                                  \
-        return spInstance;                                                     \
     }                                                                          \
     void T::DestroyInstance() {                                                \
         delete spInstance;                                                     \
