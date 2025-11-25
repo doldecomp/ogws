@@ -31,6 +31,87 @@ public:
      */
     void update();
 
+    /**
+     * @brief Resets the animation state
+     */
+    void reset() {
+        mFrame = mStartFrame;
+        mFlags = 0;
+    }
+
+    /**
+     * @brief Starts playing the animation from the specified frame
+     *
+     * @param frame Starting frame
+     */
+    void play(s16 frame) {
+        mFrame = static_cast<f32>(frame);
+        mIsEnabled = true;
+    }
+
+    /**
+     * @brief Stops playing the animation
+     */
+    void stop() {
+        mIsEnabled = false;
+    }
+
+    /**
+     * @brief Tests whether this animation has finished
+     */
+    bool isFinished() const {
+        return mFlags & EFlag_Finished;
+    }
+
+    /**
+     * @brief Tests whether this animation has looped at least once
+     */
+    bool isLooped() const {
+        return mFlags & EFlag_Looped;
+    }
+
+    /**
+     * @brief Sets the animation play policy
+     *
+     * @param playMode New play policy
+     */
+    void setPlayMode(EPlayMode playMode) {
+        mPlayMode = playMode;
+    }
+
+    /**
+     * @brief Sets the starting frame of this animation
+     *
+     * @param frame New starting frame
+     */
+    void setStartFrame(s16 frame) {
+        mStartFrame = frame;
+    }
+
+    /**
+     * @brief Sets the animation update rate
+     *
+     * @param rate New update rate
+     */
+    void setRate(f32 rate) {
+        mUpdateRate = rate;
+    }
+
+    /**
+     * @brief Gets the current animation position
+     */
+    f32 getFrame() const {
+        return mFrame;
+    }
+    /**
+     * @brief Sets the current animation position
+     *
+     * @param frame New frame
+     */
+    void setFrame(f32 frame) {
+        mFrame = frame;
+    }
+
 private:
     /**
      * @brief Animation result flags

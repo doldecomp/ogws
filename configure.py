@@ -1081,7 +1081,7 @@ config.libs = [
             Object(Matching, "Pack/RPKernel/RPSysFrameCtrl.cpp"),
             Object(NonMatching, "Pack/RPKernel/RPSysEffectCreator.cpp"),
             Object(Matching, "Pack/RPKernel/RPSysWideTextWriter.cpp"),
-            Object(NonMatching, "Pack/RPKernel/RPSysLytAnmObj.cpp"),
+            Object(Matching, "Pack/RPKernel/RPSysLytAnmObj.cpp"),
             Object(NonMatching, "Pack/RPKernel/RPSysLytResAccessor.cpp"),
             Object(NonMatching, "Pack/RPKernel/RPSysLytTextBox.cpp"),
             Object(NonMatching, "Pack/RPKernel/RPSysLytBounding.cpp"),
