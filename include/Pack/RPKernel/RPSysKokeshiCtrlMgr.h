@@ -29,7 +29,7 @@ private:
         /**
          * @brief Destructor
          */
-        virtual ~Disposer() { // at 0x8
+        virtual ~Disposer() override { // at 0x8
             RP_GET_INSTANCE(RPSysKokeshiManager)->ClearCtrlMgr();
         }
     };

@@ -12,11 +12,7 @@
  * @param pParent Parent container
  * @param pTag Parameter tag
  */
-#if defined(NONMATCHING) || defined(COMPAT_ANY)
-RPSysTagParm::RPSysTagParm(RPSysTagParameters* pParent, const char* pTag)
-#else
-RPSysTagParm::RPSysTagParm(RPSysTagParameters* pParent, char* pTag)
-#endif
+RPSysTagParm::RPSysTagParm(RPSysTagParameters* pParent, TagType pTag)
     : mpTag(pTag), mpNext(NULL) {
 
     pParent->add(this);
@@ -25,7 +21,7 @@ RPSysTagParm::RPSysTagParm(RPSysTagParameters* pParent, char* pTag)
 /**
  * @brief Gets the parameter's tag name
  */
-const char* RPSysTagParm::getTag() {
+TagType RPSysTagParm::getTag() {
     return mpTag;
 }
 
@@ -85,14 +81,9 @@ template <> void RPSysPrimTagParm<int>::dump() {}
  * @param pParent Parent container
  * @param pTag Parameter tag
  */
-#if defined(NONMATCHING) || defined(COMPAT_ANY)
 RPSysStringTagParm::RPSysStringTagParm(RPSysTagParameters* pParent,
-                                       const char* pTag)
+                                       TagType pTag)
     : RPSysTagParm(pParent, pTag), mpValue(NULL) {}
-#else
-RPSysStringTagParm::RPSysStringTagParm(RPSysTagParameters* pParent, char* pTag)
-    : RPSysTagParm(pParent, pTag), mpValue(NULL) {}
-#endif
 
 /**
  * @brief Reads the parameter's value
@@ -100,7 +91,7 @@ RPSysStringTagParm::RPSysStringTagParm(RPSysTagParameters* pParent, char* pTag)
  * @param rStream Input stream
  */
 void RPSysStringTagParm::read(EGG::Stream& rStream) {
-    mpValue = rStream.readString(NULL, 0);
+    mpValue = const_cast<TagType>(rStream.readString(NULL, 0));
 }
 
 /**
@@ -128,13 +119,8 @@ void RPSysStringTagParm::dump() {}
  *
  * @param pName Parameter group name
  */
-#if defined(NONMATCHING) || defined(COMPAT_ANY)
-RPSysTagParameters::RPSysTagParameters(const char* pName)
+RPSysTagParameters::RPSysTagParameters(TagType pName)
     : mpName(pName), mpParameters(NULL) {}
-#else
-RPSysTagParameters::RPSysTagParameters(char* pName)
-    : mpName(pName), mpParameters(NULL) {}
-#endif
 
 /**
  * @brief Appends a new child parameter to this group

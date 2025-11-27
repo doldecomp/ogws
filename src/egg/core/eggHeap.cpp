@@ -91,12 +91,12 @@ Heap* Heap::findHeap(MEMiHeapHead* pHeapHandle) {
     OSLockMutex(&sRootMutex);
 
     if (sIsHeapListInitialized) {
-        NW4R_UT_LIST_FOREACH(Heap, it, sHeapList, {
+        NW4R_UT_LIST_FOREACH (Heap, it, sHeapList, {
             if (it->mHeapHandle == pHeapHandle) {
                 pContainHeap = it;
                 break;
             }
-        });
+        })
     }
 
     OSUnlockMutex(&sRootMutex);

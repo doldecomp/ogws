@@ -12,7 +12,7 @@
 /**
  * @brief Screen text writer
  */
-class RPSysTextWriter : public nw4r::ut::TextWriterBase<char> {
+class RPSysTextWriter : public nw4r::ut::TextWriter {
     RP_SINGLETON_DECL(RPSysTextWriter);
 
 public:

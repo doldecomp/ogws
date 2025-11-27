@@ -312,15 +312,16 @@ public:
     // 5. Destructor
     virtual ~FruitBasket();
 
-    // 6. Static functions
-    static String GetName() {
+    // 6. Virtual functions
+    virtual String GetName() {
         return "FruitBasket";
     }
 
-    // 7. Non-static functions
+    // 7. All other functions
     void AddFruit(const Fruit& rFruit) {
         mFruits.PushBack(rFruit);
     }
+    static void Initialize();
 
 // 2. PROTECTED ACCESS
 protected:

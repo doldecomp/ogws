@@ -73,6 +73,9 @@ public:
     bool IsDebugDrawMode() const {
         return mFlag.debugDrawMode;
     }
+    void SetDebugDrawMode(bool debug) {
+        mFlag.debugDrawMode = debug;
+    }
 
 protected:
     math::MTX34 mViewMtx;            // at 0x4

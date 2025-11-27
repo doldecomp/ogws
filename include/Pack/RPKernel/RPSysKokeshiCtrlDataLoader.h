@@ -31,7 +31,7 @@ public:
      *
      * @param chan WPAD channel to use
      */
-    RPSysKokeshiCtrlDataLoader(s32 chan);
+    explicit RPSysKokeshiCtrlDataLoader(s32 chan);
 
     /**
      * @brief Destructor

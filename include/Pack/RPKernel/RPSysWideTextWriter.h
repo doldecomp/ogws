@@ -12,7 +12,7 @@
 /**
  * @brief Wide-char screen text writer
  */
-class RPSysWideTextWriter : public nw4r::ut::TextWriterBase<wchar_t> {
+class RPSysWideTextWriter : public nw4r::ut::WideTextWriter {
     RP_SINGLETON_DECL(RPSysWideTextWriter);
 
 public:

@@ -25,7 +25,7 @@ public:
      *
      * @param src Mii data source to view
      */
-    RPSysKokeshiIterater(RFLDataSource src);
+    explicit RPSysKokeshiIterater(RFLDataSource src);
 
     /**
      * @brief Destructor

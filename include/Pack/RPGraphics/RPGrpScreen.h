@@ -35,7 +35,10 @@ public:
     /**
      * @brief Destructor
      */
-    virtual ~RPGrpScreen(); // at 0x8
+    virtual ~RPGrpScreen() override; // at 0x8
+
+    void BeginDrawQuadTexture(bool alpha) const;
+    void DrawQuadTexture(f32, f32, f32, f32, const void*, GXColor);
 };
 
 #endif

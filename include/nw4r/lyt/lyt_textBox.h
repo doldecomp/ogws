@@ -77,7 +77,7 @@ public:
     virtual void FreeStringBuffer();         // at 0x68
     u16 GetStringBufferLength() const;
 
-    virtual u16 SetString(const wchar_t* pStr, u16 pos);          // at 0x6C
+    virtual u16 SetString(const wchar_t* pStr, u16 pos = 0);      // at 0x6C
     virtual u16 SetString(const wchar_t* pStr, u16 pos, u16 len); // at 0x70
 
     ut::Rect GetTextDrawRect(const DrawInfo& rInfo) const;

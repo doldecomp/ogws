@@ -62,7 +62,7 @@ void RPSysLytAnmObj::play(s16 frame) {
  * @param frameNum Number of frames to animate
  * @param playMode Animation policy
  */
-void RPSysLytAnmObj::init(s16 frame, u16 frameNum,
+void RPSysLytAnmObj::init(s16 frame, s16 frameNum,
                           RPSysFrameCtrl::EPlayMode playMode) {
     mFrameCtrl.init(frameNum);
     mFrameCtrl.setStartFrame(frame);

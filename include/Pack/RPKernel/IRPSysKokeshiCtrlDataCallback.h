@@ -16,7 +16,7 @@ public:
      * @param chan WPAD channel of the owner remote
      * @param index Controller database index
      */
-    virtual void onCreateResource(s32 chan, u8 index) = 0;
+    virtual void onCreateResource(s32 chan, u8 index) = 0; // at 0x8
 
     /**
      * @brief Called when controller Mii resources are being released
@@ -24,7 +24,7 @@ public:
      * @param chan WPAD channel of the owner remote
      * @param index Controller database index
      */
-    virtual void onReleaseResource(s32 chan, u8 index) = 0;
+    virtual void onReleaseResource(s32 chan, u8 index) = 0; // at 0xC
 };
 
 //! @}

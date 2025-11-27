@@ -4,11 +4,17 @@
 
 #include <egg/core.h>
 
+//! @addtogroup rp_system
+//! @{
+
 // Forward declarations
 class RPSysTagParameters;
 
-//! @addtogroup rp_system
-//! @{
+#if defined(NONMATCHING) || defined(COMPAT_ANY)
+typedef const char* TagType;
+#else
+typedef char* TagType;
+#endif
 
 /**
  * @brief Base class for tag parameters
@@ -21,33 +27,29 @@ public:
      * @param pParent Parent container
      * @param pTag Parameter tag
      */
-#if defined(NONMATCHING) || defined(COMPAT_ANY)
-    RPSysTagParm(RPSysTagParameters* pParent, const char* pTag);
-#else
-    RPSysTagParm(RPSysTagParameters* pParent, char* pTag);
-#endif
+    RPSysTagParm(RPSysTagParameters* pParent, TagType pTag);
 
     /**
      * @brief Reads the parameter's value
      *
      * @param rStream Input stream
      */
-    virtual void read(EGG::Stream& /* rStream */) {}
+    virtual void read(EGG::Stream& /* rStream */) {} // at 0x8
     /**
      * @brief Writes the parameter's value
      *
      * @param rStream Output stream
      */
-    virtual void write(EGG::Stream& /* rStream */) {}
+    virtual void write(EGG::Stream& /* rStream */) {} // at 0xC
     /**
      * @brief Prints the parameter's value
      */
-    virtual void dump() {}
+    virtual void dump() {} // at 0x10
 
     /**
      * @brief Gets the parameter's tag name
      */
-    const char* getTag();
+    TagType getTag();
 
     /**
      * @brief Accesses the next parameter
@@ -62,7 +64,7 @@ public:
 
 private:
     //! Parameter tag
-    const char* mpTag; // at 0x4
+    TagType mpTag; // at 0x4
     //! Next parameter in group
     RPSysTagParm* mpNext; // at 0x8
 };
@@ -80,30 +82,25 @@ public:
      * @param pParent Parent container
      * @param pTag Parameter tag
      */
-#if defined(NONMATCHING) || defined(COMPAT_ANY)
-    RPSysPrimTagParm(RPSysTagParameters* pParent, const char* pTag)
+    RPSysPrimTagParm(RPSysTagParameters* pParent, TagType pTag)
         : RPSysTagParm(pParent, pTag) {}
-#else
-    RPSysPrimTagParm(RPSysTagParameters* pParent, char* pTag)
-        : RPSysTagParm(pParent, pTag) {}
-#endif
 
     /**
      * @brief Reads the parameter's value
      *
      * @param rStream Input stream
      */
-    virtual void read(EGG::Stream& rStream);
+    virtual void read(EGG::Stream& rStream) override; // at 0x8
     /**
      * @brief Writes the parameter's value
      *
      * @param rStream Output stream
      */
-    virtual void write(EGG::Stream& rStream);
+    virtual void write(EGG::Stream& rStream) override; // at 0xC
     /**
      * @brief Prints the parameter's value
      */
-    virtual void dump();
+    virtual void dump() override; // at 0x10
 
     /**
      * @brief Sets the parameter's value
@@ -137,48 +134,44 @@ public:
      * @param pParent Parent container
      * @param pTag Parameter tag
      */
-#if defined(NONMATCHING) || defined(COMPAT_ANY)
-    RPSysStringTagParm(RPSysTagParameters* pParent, const char* pTag);
-#else
-    RPSysStringTagParm(RPSysTagParameters* pParent, char* pTag);
-#endif
+    RPSysStringTagParm(RPSysTagParameters* pParent, TagType pTag);
 
     /**
      * @brief Reads the parameter's value
      *
      * @param rStream Input stream
      */
-    virtual void read(EGG::Stream& rStream);
+    virtual void read(EGG::Stream& rStream) override; // at 0x8
     /**
      * @brief Writes the parameter's value
      *
      * @param rStream Output stream
      */
-    virtual void write(EGG::Stream& rStream);
+    virtual void write(EGG::Stream& rStream) override; // at 0xC
     /**
      * @brief Prints the parameter's value
      */
-    virtual void dump();
+    virtual void dump() override; // at 0x10
 
     /**
      * @brief Sets the parameter's value
      *
      * @param value New value
      */
-    void set(const char* pValue) {
+    void set(TagType pValue) {
         mpValue = pValue;
     }
 
     /**
      * @brief Accesses the parameter's value
      */
-    const char*& operator()() {
+    TagType& operator()() {
         return mpValue;
     }
 
 private:
     //! Parameter value
-    const char* mpValue; // at 0xC
+    TagType mpValue; // at 0xC
 };
 
 /**
@@ -191,11 +184,7 @@ public:
      *
      * @param pName Parameter group name
      */
-#if defined(NONMATCHING) || defined(COMPAT_ANY)
-    RPSysTagParameters(const char* pName);
-#else
-    RPSysTagParameters(char* pName);
-#endif
+    explicit RPSysTagParameters(TagType pName);
 
     /**
      * @brief Appends a new child parameter to this group
@@ -206,7 +195,7 @@ public:
 
 private:
     //! Name of parameter group
-    const char* mpName; // at 0x0
+    TagType mpName; // at 0x0
     //! Child parameters
     RPSysTagParm* mpParameters; // at 0x4
 };

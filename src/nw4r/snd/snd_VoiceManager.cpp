@@ -100,18 +100,18 @@ void VoiceManager::FreeVoice(Voice* pVoice) {
 }
 
 void VoiceManager::UpdateAllVoices() {
-    NW4R_UT_LINKLIST_FOREACH_SAFE(it, mPrioVoiceList, { it->StopFinished(); });
-    NW4R_UT_LINKLIST_FOREACH_SAFE(it, mPrioVoiceList, { it->Calc(); });
+    NW4R_UT_LINKLIST_FOREACH_SAFE (it, mPrioVoiceList, { it->StopFinished(); })
+    NW4R_UT_LINKLIST_FOREACH_SAFE (it, mPrioVoiceList, { it->Calc(); })
 
     ut::AutoInterruptLock lock;
 
-    NW4R_UT_LINKLIST_FOREACH_SAFE(it, mPrioVoiceList, { it->Update(); });
+    NW4R_UT_LINKLIST_FOREACH_SAFE (it, mPrioVoiceList, { it->Update(); })
 }
 
 void VoiceManager::NotifyVoiceUpdate() {
     ut::AutoInterruptLock lock;
 
-    NW4R_UT_LINKLIST_FOREACH_SAFE(it, mPrioVoiceList, { it->ResetDelta(); });
+    NW4R_UT_LINKLIST_FOREACH_SAFE (it, mPrioVoiceList, { it->ResetDelta(); })
 }
 
 void VoiceManager::AppendVoiceList(Voice* pVoice) {
@@ -163,11 +163,11 @@ void VoiceManager::UpdateEachVoicePriority(const VoiceList::Iterator& rBegin,
 void VoiceManager::UpdateAllVoicesSync(u32 syncFlag) {
     ut::AutoInterruptLock lock;
 
-    NW4R_UT_LINKLIST_FOREACH_SAFE(it, mPrioVoiceList, {
+    NW4R_UT_LINKLIST_FOREACH_SAFE (it, mPrioVoiceList, {
         if (it->mIsActive) {
             it->mSyncFlag |= syncFlag;
         }
-    });
+    })
 }
 
 int VoiceManager::DropLowestPriorityVoice(int priority) {

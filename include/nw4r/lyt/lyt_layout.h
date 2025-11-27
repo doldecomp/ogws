@@ -77,7 +77,7 @@ public:
 
     virtual void CalculateMtx(const DrawInfo& rInfo); // at 0x24
     virtual void Draw(const DrawInfo& rInfo);         // at 0x28
-    virtual void Animate(u32 option);                 // at 0x2C
+    virtual void Animate(u32 option = 0);             // at 0x2C
 
     virtual void SetTagProcessor(ut::WideTagProcessor* pProcessor); // at 0x30
 

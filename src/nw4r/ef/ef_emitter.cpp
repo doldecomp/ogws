@@ -1120,7 +1120,7 @@ u32 Emitter::ForeachParticleManager(ForEachFunc pFunc, ForEachParam param,
 
         pFunc(it, param);
         calls++;
-    });
+    })
 
     // TODO(kiwi) I think this is doing the same for all sibling emitters?
     if (propogate) {

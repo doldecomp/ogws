@@ -16,7 +16,7 @@ u16 UtlistToArray(const ut::List* pList, void** ppArray, int maxlen) {
         if (num >= maxlen) {
             break;
         }
-    });
+    })
 
     return num;
 }
