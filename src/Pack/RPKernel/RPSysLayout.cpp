@@ -1,16 +1,14 @@
-#include "Pack/RPKernel/RPSysLayout.h"
-
-#include "nw4r/lyt/lyt_pane.h"
-#include "nw4r/math/math_types.h"
 #include <Pack/RPKernel.h>
 
 #include <nw4r/lyt.h>
+#include <nw4r/math.h>
 #include <nw4r/ut.h>
 
 #include <revolution/GX.h>
 
 #include <cstdio>
 #include <cstring>
+
 
 namespace {
 

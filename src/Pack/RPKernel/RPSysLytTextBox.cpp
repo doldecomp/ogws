@@ -1,6 +1,3 @@
-#include "Pack/RPKernel/RPSysLytTextBox.h"
-
-#include "Pack/RPKernel/RPSysMessage.h"
 #include <Pack/RPKernel.h>
 
 #include <revolution/GX.h>
