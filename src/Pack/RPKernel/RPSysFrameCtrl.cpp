@@ -5,7 +5,7 @@
  *
  * @param frameNum Number of frames to animate
  */
-void RPSysFrameCtrl::init(u16 frameNum) {
+void RPSysFrameCtrl::init(s16 frameNum) {
     mPlayMode = EPlayMode_OneTime;
     mFlags = 0;
     mIsEnabled = false;

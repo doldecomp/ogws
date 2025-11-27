@@ -37,7 +37,7 @@ void ChannelManager::Shutdown() {
         return;
     }
 
-    NW4R_UT_LINKLIST_FOREACH_SAFE(it, mChannelList, { it->Stop(); });
+    NW4R_UT_LINKLIST_FOREACH_SAFE (it, mChannelList, { it->Stop(); })
 
     mPool.Destroy(mMem, mMemSize);
     mInitialized = false;
@@ -55,7 +55,7 @@ void ChannelManager::Free(Channel* pChannel) {
 }
 
 void ChannelManager::UpdateAllChannel() {
-    NW4R_UT_LINKLIST_FOREACH_SAFE(it, mChannelList, { it->Update(true); });
+    NW4R_UT_LINKLIST_FOREACH_SAFE (it, mChannelList, { it->Update(true); }); //
 }
 
 Channel::Channel()

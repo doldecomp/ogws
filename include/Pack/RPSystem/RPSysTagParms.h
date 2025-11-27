@@ -34,17 +34,17 @@ public:
      *
      * @param rStream Input stream
      */
-    virtual void read(EGG::Stream& /* rStream */) {}
+    virtual void read(EGG::Stream& /* rStream */) {} // at 0x8
     /**
      * @brief Writes the parameter's value
      *
      * @param rStream Output stream
      */
-    virtual void write(EGG::Stream& /* rStream */) {}
+    virtual void write(EGG::Stream& /* rStream */) {} // at 0xC
     /**
      * @brief Prints the parameter's value
      */
-    virtual void dump() {}
+    virtual void dump() {} // at 0x10
 
     /**
      * @brief Gets the parameter's tag name
@@ -90,17 +90,17 @@ public:
      *
      * @param rStream Input stream
      */
-    virtual void read(EGG::Stream& rStream);
+    virtual void read(EGG::Stream& rStream) override; // at 0x8
     /**
      * @brief Writes the parameter's value
      *
      * @param rStream Output stream
      */
-    virtual void write(EGG::Stream& rStream);
+    virtual void write(EGG::Stream& rStream) override; // at 0xC
     /**
      * @brief Prints the parameter's value
      */
-    virtual void dump();
+    virtual void dump() override; // at 0x10
 
     /**
      * @brief Sets the parameter's value
@@ -141,17 +141,17 @@ public:
      *
      * @param rStream Input stream
      */
-    virtual void read(EGG::Stream& rStream);
+    virtual void read(EGG::Stream& rStream) override; // at 0x8
     /**
      * @brief Writes the parameter's value
      *
      * @param rStream Output stream
      */
-    virtual void write(EGG::Stream& rStream);
+    virtual void write(EGG::Stream& rStream) override; // at 0xC
     /**
      * @brief Prints the parameter's value
      */
-    virtual void dump();
+    virtual void dump() override; // at 0x10
 
     /**
      * @brief Sets the parameter's value
@@ -184,7 +184,7 @@ public:
      *
      * @param pName Parameter group name
      */
-    RPSysTagParameters(TagType pName);
+    explicit RPSysTagParameters(TagType pName);
 
     /**
      * @brief Appends a new child parameter to this group

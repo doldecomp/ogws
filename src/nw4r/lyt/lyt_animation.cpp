@@ -13,20 +13,6 @@ namespace lyt {
 namespace res {
 
 /******************************************************************************
- * AnimationContent
- ******************************************************************************/
-struct AnimationContent {
-    static const int NAME_LEN =
-        MAX(NW4R_LYT_RES_NAME_LEN, NW4R_LYT_MATERIAL_NAME_LEN);
-
-    enum AnimType { ANIMTYPE_PANE, ANIMTYPE_MATERIAL, ANIMTYPE_MAX };
-
-    char name[NAME_LEN];          // at 0x0
-    u8 num;                       // at 0x14
-    u8 type;                      // at 0x15
-    u8 PADDING_0x16[0x18 - 0x16]; // at 0x16
-};
-/******************************************************************************
  * AnimationTarget
  ******************************************************************************/
 struct AnimationTarget {
@@ -531,11 +517,11 @@ namespace detail {
 AnimationLink* FindAnimationLink(AnimationLinkList* pAnimList,
                                  AnimTransform* pAnimTrans) {
 
-    NW4R_UT_LINKLIST_FOREACH(it, *pAnimList, {
+    NW4R_UT_LINKLIST_FOREACH (it, *pAnimList, {
         if (pAnimTrans == it->GetAnimTransform()) {
             return &*it;
         }
-    });
+    })
 
     return NULL;
 }

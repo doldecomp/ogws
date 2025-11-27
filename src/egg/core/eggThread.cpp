@@ -65,7 +65,7 @@ Thread::~Thread() {
 }
 
 Thread* Thread::findThread(OSThread* pOSThread) {
-    NW4R_UT_LIST_FOREACH(Thread, it, sThreadList, {
+    NW4R_UT_LIST_FOREACH (Thread, it, sThreadList, {
         if (it->mOSThread == pOSThread) {
             return it;
         }

@@ -183,12 +183,12 @@ void RPSysKokeshiCtrlDataMgr::calc() {
 void RPSysKokeshiCtrlDataMgr::resetData() {
     RPGrpModelResManager* pResManager = RPGrpModelResManager::GetCurrent();
 
-    NW4R_UT_LIST_FOREACH_SAFE(FileResource, it, mResourceList, {
+    NW4R_UT_LIST_FOREACH_SAFE (FileResource, it, mResourceList, {
         pResManager->Terminate(it->rd);
         nw4r::ut::List_Remove(&mResourceList, it);
     })
 
-    NW4R_UT_LIST_FOREACH_SAFE(ModelResource, it, mModelList, {
+    NW4R_UT_LIST_FOREACH_SAFE (ModelResource, it, mModelList, {
         it->pModel->RemoveGenList();
         nw4r::ut::List_Remove(&mModelList, it);
     })

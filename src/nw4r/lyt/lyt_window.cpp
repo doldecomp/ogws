@@ -338,13 +338,13 @@ Material* Window::FindMaterialByName(const char* pName, bool recursive) {
     }
 
     if (recursive) {
-        NW4R_UT_LINKLIST_FOREACH(it, mChildList, {
+        NW4R_UT_LINKLIST_FOREACH (it, mChildList, {
             Material* pMaterial = it->FindMaterialByName(pName, true);
             
             if (pMaterial != NULL) {
                 return pMaterial;
             }
-        });
+        })
     }
 
     return NULL;

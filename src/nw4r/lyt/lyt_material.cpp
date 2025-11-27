@@ -1209,14 +1209,14 @@ void Material::BindAnimation(AnimTransform* pAnimTrans) {
 }
 
 void Material::UnbindAnimation(AnimTransform* pAnimTrans) {
-    NW4R_UT_LINKLIST_FOREACH_SAFE(it, mAnimList, {
+    NW4R_UT_LINKLIST_FOREACH_SAFE (it, mAnimList, {
         if (pAnimTrans != NULL && it->GetAnimTransform() != pAnimTrans) {
             continue;
         }
 
         mAnimList.Erase(it);
         it->Reset();
-    });
+    })
 }
 
 void Material::UnbindAllAnimation() {
@@ -1224,14 +1224,14 @@ void Material::UnbindAllAnimation() {
 }
 
 void Material::Animate() {
-    NW4R_UT_LINKLIST_FOREACH(it, mAnimList, {
+    NW4R_UT_LINKLIST_FOREACH (it, mAnimList, {
         if (!it->IsEnable()) {
             continue;
         }
 
         AnimTransform* pAnimTrans = it->GetAnimTransform();
         pAnimTrans->Animate(it->GetIndex(), this); 
-    });
+    })
 }
 
 void Material::AddAnimationLink(AnimationLink* pAnimLink) {

@@ -5,17 +5,17 @@
 #include <Pack/RPKernel/RPSysFrameCtrl.h>
 
 #include <nw4r/lyt.h>
+#include <nw4r/ut.h>
 
 //! @addtogroup rp_kernel
 //! @{
-
-// TODO(kiwi) Fill out this structure
-struct RPSysLytAnmContent {};
 
 /**
  * @brief Layout animation object
  */
 class RPSysLytAnmObj {
+    friend class RPSysLayout;
+
 public:
     /**
      * @brief Constructor
@@ -46,7 +46,7 @@ public:
      * @param frameNum Number of frames to animate
      * @param playMode Animation policy
      */
-    void init(s16 frame, u16 frameNum, RPSysFrameCtrl::EPlayMode playMode);
+    void init(s16 frame, s16 frameNum, RPSysFrameCtrl::EPlayMode playMode);
 
     /**
      * @brief Stops playing the animation
@@ -119,9 +119,11 @@ private:
     //! Number of animation contents
     u16 mNumAnimContent; // at 0x18
     //! Animation contents
-    RPSysLytAnmContent* mpAnimContent; // at 0x1C
+    nw4r::lyt::AnimationLink* mpAnimContent; // at 0x1C
 
-    char unk20[0x28 - 0x20];
+public:
+    //! Linked-list node
+    NW4R_UT_LIST_LINK_DECL(); // at 0x20
 };
 
 //! @}

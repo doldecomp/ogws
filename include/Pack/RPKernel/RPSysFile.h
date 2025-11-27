@@ -27,7 +27,7 @@ public:
      * @brief Destructor
      * @details The file is automatically removed from the resource cache.
      */
-    virtual ~RPSysFile(); // at 0x8
+    virtual ~RPSysFile() override; // at 0x8
 
     /**
      * @brief Gets the path to this file

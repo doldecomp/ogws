@@ -115,7 +115,7 @@ public:
     virtual ~Window(); // at 0x8
 
     virtual void DrawSelf(const DrawInfo& rInfo); // at 0x18
-    virtual void AnimateSelf(u32 option);         // at 0x20
+    virtual void AnimateSelf(u32 option = 0);     // at 0x20
 
     virtual ut::Color GetVtxColor(u32 idx) const;       // at 0x24
     virtual void SetVtxColor(u32 idx, ut::Color color); // at 0x28

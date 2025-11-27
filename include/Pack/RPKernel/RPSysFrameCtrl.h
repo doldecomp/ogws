@@ -24,7 +24,7 @@ public:
      *
      * @param frameNum Number of frames to animate
      */
-    void init(u16 frameNum);
+    void init(s16 frameNum);
 
     /**
      * @brief Updates the animation state

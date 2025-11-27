@@ -108,8 +108,8 @@ u32 FrmHeap::adjust() {
     return 0;
 }
 
-void FrmHeap::initAllocator(Allocator* pAllocator, s32 r5) {
-    MEMInitAllocatorForFrmHeap((MEMAllocator*)pAllocator, mHeapHandle, r5);
+void FrmHeap::initAllocator(Allocator* pAllocator, s32 align) {
+    MEMInitAllocatorForFrmHeap(pAllocator, mHeapHandle, align);
 }
 
 } // namespace EGG

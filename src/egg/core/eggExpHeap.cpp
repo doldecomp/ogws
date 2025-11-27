@@ -108,8 +108,8 @@ u32 ExpHeap::adjust() {
     return 0;
 }
 
-void ExpHeap::initAllocator(Allocator* pAllocator, s32 r5) {
-    MEMInitAllocatorForExpHeap((MEMAllocator*)pAllocator, mHeapHandle, r5);
+void ExpHeap::initAllocator(Allocator* pAllocator, s32 align) {
+    MEMInitAllocatorForExpHeap(pAllocator, mHeapHandle, align);
 }
 
 } // namespace EGG

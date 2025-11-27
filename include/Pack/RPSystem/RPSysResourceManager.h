@@ -86,7 +86,7 @@ public:
      * @param[out] pSize Where the file's size will be written
      */
     static void* GetFileFromArchive(EGG::Archive* pArc, const char* pName,
-                                    u32* pSize);
+                                    u32* pSize = NULL);
 
     /**
      * @brief Gets a message file by name from the message archive
@@ -163,6 +163,10 @@ public:
      * @param id Scene ID
      */
     void GetGameSoundLocalPath(char* pBuffer, u32 bufSize, s32 id);
+
+    EGG::Archive* GetKokeshiArchive() const {
+        return mpKokeshiArchive;
+    }
 
 private:
     //! Resource cache for compressed files

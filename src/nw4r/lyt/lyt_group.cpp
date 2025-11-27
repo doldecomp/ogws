@@ -35,10 +35,10 @@ void Group::Init() {
 }
 
 Group::~Group() {
-    NW4R_UT_LINKLIST_FOREACH_SAFE(it, mPaneLinkList, {
+    NW4R_UT_LINKLIST_FOREACH_SAFE (it, mPaneLinkList, {
         mPaneLinkList.Erase(it);
         Layout::FreeMemory(&*it);
-    });
+    })
 }
 
 void Group::AppendPane(Pane* pPane) {
@@ -59,14 +59,14 @@ void Group::AppendPane(Pane* pPane) {
  *
  ******************************************************************************/
 GroupContainer::~GroupContainer() {
-    NW4R_UT_LINKLIST_FOREACH_SAFE(it, mGroupList, {
+    NW4R_UT_LINKLIST_FOREACH_SAFE (it, mGroupList, {
         mGroupList.Erase(it);
         
         if (!it->IsUserAllocated()) {
             it->~Group();
             Layout::FreeMemory(&*it);
         }
-    });
+    })
 }
 
 void GroupContainer::AppendGroup(Group* pGroup) {
@@ -74,11 +74,11 @@ void GroupContainer::AppendGroup(Group* pGroup) {
 }
 
 Group* GroupContainer::FindGroupByName(const char* pName) {
-    NW4R_UT_LINKLIST_FOREACH(it, mGroupList, {
+    NW4R_UT_LINKLIST_FOREACH (it, mGroupList, {
         if (detail::EqualsResName(it->GetName(), pName)) {
             return &*it;
         }
-    });
+    })
 
     return NULL;
 }

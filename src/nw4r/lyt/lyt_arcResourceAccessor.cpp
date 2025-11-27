@@ -98,11 +98,11 @@ namespace lyt {
 namespace detail {
 
 ut::Font* FindFont(FontRefLinkList* pFontList, const char* pName) {
-    NW4R_UT_LINKLIST_FOREACH(it, *pFontList, {
+    NW4R_UT_LINKLIST_FOREACH (it, *pFontList, {
         if (std::strcmp(pName, it->GetFontName()) == 0) {
             return it->GetFont();
         }
-    });
+    })
 
     return NULL;
 }

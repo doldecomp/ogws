@@ -17,8 +17,8 @@ void SetTagProcessorImpl(Pane* pPane, ut::WideTagProcessor* pProcessor) {
         pTextBox->SetTagProcessor(pProcessor);
     }
 
-    NW4R_UT_LINKLIST_FOREACH(it, pPane->GetChildList(),
-                             { SetTagProcessorImpl(&*it, pProcessor); });
+    NW4R_UT_LINKLIST_FOREACH (it, pPane->GetChildList(),
+                              { SetTagProcessorImpl(&*it, pProcessor); })
 }
 
 } // namespace
@@ -51,11 +51,11 @@ Layout::~Layout() {
         FreeMemory(mpRootPane);
     }
 
-    NW4R_UT_LINKLIST_FOREACH_SAFE(it, mAnimTransList, {
+    NW4R_UT_LINKLIST_FOREACH_SAFE (it, mAnimTransList, {
         mAnimTransList.Erase(it);
         it->~AnimTransform();
         Layout::FreeMemory(&*it);
-    });
+    })
 }
 
 bool Layout::Build(const void* pLytBinary, ResourceAccessor* pAccessor) {

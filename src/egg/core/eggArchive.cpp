@@ -33,12 +33,12 @@ Archive* Archive::findArchive(void* pArcBinary) {
     Archive* pArchive = NULL;
 
     if (sIsArchiveListInitialized) {
-        NW4R_UT_LIST_FOREACH(Archive, it, sArchiveList, {
+        NW4R_UT_LIST_FOREACH (Archive, it, sArchiveList, {
             if (it->mHandle.archiveStartAddr == pArcBinary) {
                 pArchive = it;
                 break;
             }
-        });
+        })
     }
 
     return pArchive;

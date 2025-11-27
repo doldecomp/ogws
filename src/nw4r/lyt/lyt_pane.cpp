@@ -73,14 +73,14 @@ void Pane::Init() {
 }
 
 Pane::~Pane() {
-    NW4R_UT_LINKLIST_FOREACH_SAFE(it, mChildList, {
+    NW4R_UT_LINKLIST_FOREACH_SAFE (it, mChildList, {
         mChildList.Erase(it);
 
         if (!it->IsUserAllocated()) {
             it->~Pane();
             Layout::FreeMemory(&*it);
         }
-    });
+    })
 
     UnbindAnimationSelf(NULL);
 
@@ -185,13 +185,13 @@ Pane* Pane::FindPaneByName(const char* pName, bool recursive) {
     }
 
     if (recursive) {
-        NW4R_UT_LINKLIST_FOREACH(it, mChildList, {
+        NW4R_UT_LINKLIST_FOREACH (it, mChildList, {
             Pane* pResult = it->FindPaneByName(pName, true);
 
             if (pResult != NULL) {
                 return pResult;
             }
-        });
+        })
     }
 
     return NULL;
@@ -205,13 +205,13 @@ Material* Pane::FindMaterialByName(const char* pName, bool recursive) {
     }
 
     if (recursive) {
-        NW4R_UT_LINKLIST_FOREACH(it, mChildList, {
+        NW4R_UT_LINKLIST_FOREACH (it, mChildList, {
             Material* pResult = it->FindMaterialByName(pName, true);
 
             if (pResult != NULL) {
                 return pResult;
             }
-        });
+        })
     }
 
     return NULL;
@@ -278,7 +278,7 @@ void Pane::CalculateMtx(const DrawInfo& rInfo) {
 }
 
 void Pane::CalculateMtxChild(const DrawInfo& rInfo) {
-    NW4R_UT_LINKLIST_FOREACH(it, mChildList, { it->CalculateMtx(rInfo); });
+    NW4R_UT_LINKLIST_FOREACH (it, mChildList, { it->CalculateMtx(rInfo); })
 }
 
 void Pane::Draw(const DrawInfo& rInfo) {
@@ -287,7 +287,7 @@ void Pane::Draw(const DrawInfo& rInfo) {
     }
 
     DrawSelf(rInfo);
-    NW4R_UT_LINKLIST_FOREACH(it, mChildList, { it->Draw(rInfo); });
+    NW4R_UT_LINKLIST_FOREACH (it, mChildList, { it->Draw(rInfo); })
 }
 
 void Pane::DrawSelf(const DrawInfo& rInfo) {
@@ -299,19 +299,19 @@ void Pane::Animate(u32 option) {
     AnimateSelf(option);
 
     if (IsVisible() || !(option & ANIMOPTION_SKIP_INVISIBLE)) {
-        NW4R_UT_LINKLIST_FOREACH(it, mChildList, { it->Animate(option); });
+        NW4R_UT_LINKLIST_FOREACH (it, mChildList, { it->Animate(option); })
     }
 }
 
 void Pane::AnimateSelf(u32 option) {
-    NW4R_UT_LINKLIST_FOREACH(it, mAnimList, {
+    NW4R_UT_LINKLIST_FOREACH (it, mAnimList, {
         if (!it->IsEnable()) {
             continue;
         }
 
         AnimTransform* pAnimTrans = it->GetAnimTransform();
         pAnimTrans->Animate(it->GetIndex(), this);
-    });
+    })
 
     if (IsVisible() || !(option & ANIMOPTION_SKIP_INVISIBLE)) {
         if (mpMaterial != NULL) {
@@ -328,8 +328,8 @@ void Pane::UnbindAnimation(AnimTransform* pAnimTrans, bool recursive) {
     UnbindAnimationSelf(pAnimTrans);
 
     if (recursive) {
-        NW4R_UT_LINKLIST_FOREACH(it, mChildList, 
-            { it->UnbindAnimation(pAnimTrans, recursive); });
+        NW4R_UT_LINKLIST_FOREACH (it, mChildList, 
+            { it->UnbindAnimation(pAnimTrans, recursive); })
     }
 }
 
@@ -342,12 +342,12 @@ void Pane::UnbindAnimationSelf(AnimTransform* pAnimTrans) {
         mpMaterial->UnbindAnimation(pAnimTrans);
     }
 
-    NW4R_UT_LINKLIST_FOREACH_SAFE(it, mAnimList, {
+    NW4R_UT_LINKLIST_FOREACH_SAFE (it, mAnimList, {
         if (pAnimTrans == NULL || it->GetAnimTransform() == pAnimTrans) {
             mAnimList.Erase(it);
             it->Reset();
         }
-    });
+    })
 }
 
 void Pane::AddAnimationLink(AnimationLink* pAnimLink) {
@@ -388,8 +388,8 @@ void Pane::SetAnimationEnable(AnimTransform* pAnimTrans, bool enable,
     }
 
     if (recursive) {
-        NW4R_UT_LINKLIST_FOREACH(it, mChildList, 
-            { it->SetAnimationEnable(pAnimTrans, enable, recursive); });
+        NW4R_UT_LINKLIST_FOREACH (it, mChildList, 
+            { it->SetAnimationEnable(pAnimTrans, enable, recursive); })
     }
 }
 

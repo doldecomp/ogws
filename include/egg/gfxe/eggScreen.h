@@ -94,6 +94,13 @@ public:
         return sTVModeHeights[sTVMode];
     }
 
+    static u16 GetSizeXMax(TVMode tvMode) {
+        return sTVModeWidths[tvMode];
+    }
+    static u16 GetSizeYMax(TVMode tvMode) {
+        return sTVModeHeights[tvMode];
+    }
+
 private:
     enum {
         FLAG_ALIGN_EFB_POS = 1 << 1,

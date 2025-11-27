@@ -257,7 +257,7 @@ private:
     /**
      * @brief Destructor
      */
-    virtual ~RPSysSystem();
+    virtual ~RPSysSystem(); // at 0x8
 
     /**
      * @brief OS reset callback

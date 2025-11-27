@@ -35,7 +35,7 @@ private:
     //! User print setting
     RPSysPrimTagParm<int> mRPUserPrint; // at 0x90
 
-    //! Mr. Sumaki(?) print setting
+    //! Mr. Sumaki print setting
     RPSysPrimTagParm<int> mRPSmkPrint; // at 0xA0
     //! Mr. Okamura(?) print setting
     RPSysPrimTagParm<int> mRPOkaPrint; // at 0xB0
