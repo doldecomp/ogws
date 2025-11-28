@@ -39,7 +39,7 @@ void GfxEngine::beginDraw() {
     StateGX::doResetStateCache();
     StateGX::setDefaultTexColor(BaseSystem::getDisplay()->getClearColor());
 
-    G3DUtility::clearTempMem();
+    G3DUtility::reset();
 }
 
 GfxEngine::GfxEngine() : unk4(NULL) {

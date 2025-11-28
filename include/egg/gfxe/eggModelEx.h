@@ -39,8 +39,6 @@ public:
 
 private:
     static u32 sDrawFlag;
-    static const char* BYTE_CODE_CALC;
-    static const char* BYTE_CODE_MIX;
 
     EType mType;                // at 0x0
     u16 mFlag;                  // at 0x4
@@ -59,7 +57,7 @@ public:
     u16 getNumViewMtx() const;
 
     void getShapeMinMax(u16 shapeIndex, nw4r::math::VEC3* pMin,
-                        nw4r::math::VEC3* pMax, bool calcWorld);
+                        nw4r::math::VEC3* pMax, bool doCalcWorld);
     void setVisible(bool enable);
     void calcWorld(nw4r::math::MTX34* pWorldMtxArray) const;
     void calcView(const nw4r::math::MTX34& rViewMtx,

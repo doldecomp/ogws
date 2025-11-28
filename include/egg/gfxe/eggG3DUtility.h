@@ -7,6 +7,7 @@
 #include "types_nw4r.h"
 
 namespace EGG {
+
 class G3DUtility {
 public:
     static MEMAllocator* getAllocator() {
@@ -26,10 +27,11 @@ public:
                               nw4r::g3d::ScnMdl::CopiedMatAccess*, const char*,
                               const int&, bool, u16);
 
-    static void clearTempMem() {
+    static void reset() {
         sTempMemIndex = 0;
     }
-    static void* allocTempMem(size_t size) {
+
+    static void* alloc(u32 size) {
         int blockEnd = sTempMemIndex + size;
         void* block = &sTempMem[sTempMemIndex];
         sTempMemIndex = blockEnd;
@@ -46,6 +48,7 @@ private:
     static u32 sTempMemIndex;
     static u32 sTempMemSize;
 };
+
 } // namespace EGG
 
 #endif

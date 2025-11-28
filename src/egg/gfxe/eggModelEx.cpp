@@ -128,9 +128,94 @@ u16 ModelEx::getNumViewMtx() const {
     }
 }
 
-// https://decomp.me/scratch/zesmA
-// void ModelEx::getShapeMinMax(u16 shapeIndex, nw4r::math::VEC3* pMin,
-//                              nw4r::math::VEC3* pMax, bool calcWorld) {}
+void ModelEx::getShapeMinMax(u16 shapeIndex, nw4r::math::VEC3* pMin,
+                             nw4r::math::VEC3* pMax, bool doCalcWorld) {
+#line 282
+    EGG_ASSERT(pMin);
+    EGG_ASSERT(pMax);
+    EGG_ASSERT(shapeIndex < getNumShape());
+
+    switch (mType) {
+    case cType_ScnMdlSimple:
+    case cType_ScnMdl:
+    case cType_ScnMdl1Mat1Shp: {
+        nw4r::g3d::ResShp shp = getResShp(shapeIndex);
+#line 294
+        EGG_ASSERT(shp.IsValid());
+
+        G3DUtility::reset();
+        u32 worldMtxSize = getNumNode() * sizeof(nw4r::math::MTX34);
+
+        nw4r::math::MTX34* pWorldMtxArray =
+            static_cast<nw4r::math::MTX34*>(G3DUtility::alloc(worldMtxSize));
+
+        if (doCalcWorld) {
+            calcWorld(pWorldMtxArray);
+        }
+
+        (void)shp.GetResVtxPos();
+
+        s32 shpMtxIdx = shp.ref().curMtxIdx;
+        AnalizeDL dl(shp);
+        bool first = true;
+
+        while (dl.advance() != AnalizeDL::TYPE_NOOP) {
+            while (dl.advance() != AnalizeDL::TYPE_VERTEX) {
+                ;
+            }
+
+            while (dl.advance() == AnalizeDL::TYPE_VERTEX) {
+                s32 mtxIdx = dl.getVtxResult().m_mtxIdx;
+                if (mtxIdx == -1) {
+                    mtxIdx = shpMtxIdx;
+                }
+
+                nw4r::math::VEC3 v;
+                nw4r::math::VEC3Transform(&v, &pWorldMtxArray[mtxIdx],
+                                          &dl.getVtxResult().m_vtxPos);
+
+                if (first) {
+                    first = false;
+
+                    *pMax = v;
+                    *pMin = *pMax;
+                } else {
+                    nw4r::math::VEC3Minimize(pMin, pMin, &v);
+                    nw4r::math::VEC3Maximize(pMax, pMax, &v);
+                }
+            }
+        }
+        break;
+    }
+
+    case cType_ScnProcModel: {
+        getScnProcModel()->getMinMaxScnProcModel(pMin, pMax);
+        break;
+    }
+
+    case cType_ScnRfl: {
+        static const f32 SCNRFL_MIN[] = {-22.61115f, -55.770135f, -45.93067f};
+        static const f32 SCNRFL_MAX[] = {81.17467f, 49.677597f, 45.93065f};
+
+        *pMin = SCNRFL_MIN;
+        *pMax = SCNRFL_MAX;
+        break;
+    }
+
+    case cType_Unknown: {
+        static const f32 UNKNOWN_MIN[] = {0.0f, 0.0f, 0.0f};
+        static const f32 UNKNOWN_MAX[] = {0.0f, 0.0f, 0.0f};
+
+        *pMin = UNKNOWN_MIN;
+        *pMax = UNKNOWN_MAX;
+        break;
+    }
+
+    default: {
+        break;
+    }
+    }
+}
 
 void ModelEx::setVisible(bool enable) {
     if (mScnObj != NULL)
@@ -138,12 +223,12 @@ void ModelEx::setVisible(bool enable) {
                                  !enable);
 }
 
-const char* ModelEx::BYTE_CODE_CALC = "NodeTree";
-const char* ModelEx::BYTE_CODE_MIX = "NodeMix";
-
 void ModelEx::calcWorld(nw4r::math::MTX34* pWorldMtxArray) const {
 #line 440
     EGG_ASSERT(pWorldMtxArray != NULL);
+
+    static const char* BYTE_CODE_CALC = "NodeTree";
+    static const char* BYTE_CODE_MIX = "NodeMix";
 
     switch (mType) {
     case cType_ScnMdlSimple:

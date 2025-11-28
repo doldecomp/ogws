@@ -38,7 +38,7 @@ public:
     };
 
 public:
-    AnalizeDL(const nw4r::g3d::ResShp shp);
+    explicit AnalizeDL(const nw4r::g3d::ResShp shp);
 
     CmdType advance();
 
