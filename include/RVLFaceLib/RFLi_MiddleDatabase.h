@@ -22,7 +22,7 @@ RFLErrcode RFLiUpdateMiddleDBAsync(RFLMiddleDB* db, RFLiCallback cb,
                                    BOOL cache);
 BOOL RFLiGetCharInfoMiddleDB(RFLiCharInfo* info, const RFLMiddleDB* db,
                              u16 index);
-RFLErrcode RFLiAddMiddleDBUserData(RFLMiddleDB* db, RFLiCharData* raw);
+RFLErrcode RFLiAddMiddleDBUserData(RFLMiddleDB* db, const RFLCharData* raw);
 
 #ifdef __cplusplus
 }

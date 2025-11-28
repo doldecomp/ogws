@@ -1,17 +1,21 @@
 #ifndef EGG_GFXE_LIGHT_TEXTURE_MANAGER_H
 #define EGG_GFXE_LIGHT_TEXTURE_MANAGER_H
-#include "eggIBinary.h"
-#include "eggScreen.h"
-#include "types_egg.h"
+#include <egg/types_egg.h>
+
+#include <egg/core/eggIBinary.h>
+#include <egg/gfxe/eggScreen.h>
 
 namespace EGG {
+
+// Forward declarations
+class LightTexture;
+class LightObj;
+
 class LightTextureManager : IBinary<LightTextureManager> {
 public:
     struct Bin : IBinary::Bin {
-        char UNK_0x10[0x20 - 0x10];
+        char unk10[0x20 - 0x10];
     };
-
-    enum LightTexMgrFlag { CLEAR_WORKSPACE = (1 << 3) };
 
 public:
     LightTextureManager(LightManager*);
@@ -28,12 +32,15 @@ public:
     void draw(LightManager*, const Screen::DataEfb&, f32, f32, f32, f32);
 
     bool isEnableClearWorkSpace() const {
-        return mFlags & CLEAR_WORKSPACE;
+        return mFlags & EFlag_ClearWorkSpace;
     }
 
     u32 getMax() const {
         return LIGHT_TEX_MAX;
     }
+
+private:
+    enum { EFlag_ClearWorkSpace = 1 << 3 };
 
 private:
     u8 mFlags;                       // at 0x4
@@ -47,6 +54,7 @@ private:
     static const int LIGHT_TEX_MAX = 32;
     static const int LIGHT_OBJ_MAX = 32;
 };
+
 } // namespace EGG
 
 #endif

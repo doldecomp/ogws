@@ -17,7 +17,7 @@ public:
     struct ProcData {
         IScnProc* mpThis;              // at 0x0
         nw4r::g3d::ScnProc* mpScnProc; // at 0x4
-        u16 mIndex;                    // at 0x8
+        u16 mStep;                     // at 0x8
         bool mOpa;                     // at 0xA
     };
 

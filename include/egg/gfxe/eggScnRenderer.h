@@ -10,7 +10,7 @@ namespace EGG {
 class ScnRenderer : ScnRootEx {
 public:
     enum DrawPathType {
-        DRAW_PATH_LMAP,
+        DRAW_PATH_XLU_SNAP,
         DRAW_PATH_SV,
         DRAW_PATH_HDR,
         DRAW_PATH_BLOOM,

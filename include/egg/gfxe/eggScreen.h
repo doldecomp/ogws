@@ -37,7 +37,8 @@ public:
     };
 
 public:
-    static void Initialize(const u16* maxX, const u16* maxY,
+    static void Initialize(const u16 maxX[TV_MODE_MAX],
+                           const u16 maxY[TV_MODE_MAX],
                            Screen* pUserRoot = NULL);
 
     Screen();

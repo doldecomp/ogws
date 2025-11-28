@@ -79,7 +79,7 @@ public:
     static GXColor& getDefaultTexColor() {
         return sDefaultTexColor;
     }
-    static void setDefaultTexColor(GXColor c) {
+    static void setDefaultTexColor(const GXColor& c) {
         sDefaultTexColor = c;
     }
     static u16 getEfbWidth() {

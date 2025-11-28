@@ -22,7 +22,7 @@ namespace EGG
     }
 
     // https://decomp.me/scratch/7ue6S
-    void PostEffectBlurGather::preDraw()
+    void PostEffectBlurGather::setMaterialInternal()
     {
     }
 }

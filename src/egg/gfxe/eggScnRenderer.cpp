@@ -1,6 +1,7 @@
 #include "eggScnRenderer.h"
+#include "egg/gfxe/eggDrawPathXluSnap.h"
 #include "eggDrawPathBase.h"
-#include "eggDrawPathLightMap.h"
+#include "eggDrawPathXluSnap.h"
 #include "eggDrawPathShadowVolume.h"
 #include "eggDrawPathHDR.h"
 #include "eggDrawPathBloom.h"
@@ -121,8 +122,8 @@ namespace EGG
 
             switch(i)
             {
-                case DRAW_PATH_LMAP:
-                    mppPathSet[i] = new DrawPathLightMap();
+                case DRAW_PATH_XLU_SNAP:
+                    mppPathSet[i] = new DrawPathXluSnap();
                     break;
                 case DRAW_PATH_SV:
                     mppPathSet[i] = new DrawPathShadowVolume();
@@ -142,12 +143,12 @@ namespace EGG
             EGG_ASSERT(getDrawPathBase( i ));
 
             DrawPathBase *path = getDrawPathBase(i);
-            const int numScnProc = path->getNumScnProc();
+            const int numScnProc = path->getNumStep();
             path->createScnProc(numScnProc, allocator);
 
             switch(i)
             {
-                case DRAW_PATH_LMAP:
+                case DRAW_PATH_XLU_SNAP:
                     path->setPriorityScnProc(0, 0, true);
                     path->setPriorityScnProc(1, 25, true);
                     path->setPriorityScnProc(2, 24, false);
@@ -253,7 +254,7 @@ namespace EGG
         for (u16 i = 0; i < getNumDrawPath(); i++)
         {
             if (mppPathSet[i] != NULL && mppPathSet[i]->isVisible())
-                mppPathSet[i]->calc_after_CalcWorld();
+                mppPathSet[i]->internalResetForDraw();
         }
     }
 
@@ -285,7 +286,7 @@ namespace EGG
         for (u16 i = 0; i < getNumDrawPath(); i++)
         {
             if (mppPathSet[i] != NULL)
-                mppPathSet[i]->CopyGlobalScreen();
+                mppPathSet[i]->calc();
         }
     }
 }

@@ -623,7 +623,7 @@ void RFLSetMiddleDBHiddenMask(RFLMiddleDB* db, RFLSex sex) {
     }
 }
 
-RFLErrcode RFLiAddMiddleDBUserData(RFLMiddleDB* db, RFLiCharData* raw) {
+RFLErrcode RFLiAddMiddleDBUserData(RFLMiddleDB* db, const RFLCharData* raw) {
     RFLiHiddenCharData hraw;
     RFLiCharInfo info;
     RFLiMiddleDB* idb = (RFLiMiddleDB*)db;
@@ -640,7 +640,7 @@ RFLErrcode RFLiAddMiddleDBUserData(RFLMiddleDB* db, RFLiCharData* raw) {
         return RFLErrcode_NotAvailable;
     }
 
-    RFLiConvertRaw2HRaw(raw, &hraw);
+    RFLiConvertRaw2HRaw((RFLiCharData*)raw, &hraw);
 
     if (idb->type != RFLMiddleDBType_UserSet) {
         return RFLErrcode_NotAvailable;
@@ -650,7 +650,7 @@ RFLErrcode RFLiAddMiddleDBUserData(RFLMiddleDB* db, RFLiCharData* raw) {
         return RFLErrcode_Broken;
     }
 
-    RFLiConvertRaw2Info(raw, &info);
+    RFLiConvertRaw2Info((RFLiCharData*)raw, &info);
     if (!RFLiCheckValidInfo(&info)) {
         return RFLErrcode_Broken;
     }
@@ -684,5 +684,5 @@ RFLErrcode RFLAddMiddleDBStoreData(RFLMiddleDB* db, const RFLStoreData* data) {
         return RFLErrcode_Broken;
     }
 
-    return RFLiAddMiddleDBUserData(db, &idata->data);
+    return RFLiAddMiddleDBUserData(db, (RFLCharData*)&idata->data);
 }

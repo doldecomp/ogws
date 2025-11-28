@@ -1,27 +1,20 @@
-#pragma ipa file
-#include "eggDrawPathBase.h"
-#include "eggGXUtility.h"
+#include <egg/gfxe.h>
 
-namespace EGG
-{
-    DrawPathBase::DrawPathBase()
-    {
-    }
+namespace EGG {
 
-    void DrawPathBase::CopyGlobalScreen()
-    {
-        if (isVisible())
-        {
-            copyFromAnother(IDrawGX::getScreen());
-            calc();
-        }
-    }
+DrawPathBase::DrawPathBase() {}
 
-    void DrawPathBase::calc()
-    {
-    }
-
-    void DrawPathBase::calc_after_CalcWorld()
-    {
+void DrawPathBase::calc() {
+    if (isVisible()) {
+        copyFromAnother(IDrawGX::getScreen());
+        internalCalc();
     }
 }
+
+void DrawPathBase::scnProcDraw(u16 step) {
+    if (isVisible()) {
+        internalDraw(step);
+    }
+}
+
+} // namespace EGG

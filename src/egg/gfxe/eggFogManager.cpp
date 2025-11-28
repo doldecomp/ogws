@@ -1,81 +1,65 @@
-#include "eggFogManager.h"
-#include "eggFog.h"
-#include "eggScreen.h"
-#include "g3d_fog.h"
-#include "g3d_scnroot.h"
-#include "g3d_resanmscn.h"
+#include <egg/gfxe.h>
 
-namespace EGG
-{
-    FogManager::FogManager() : mFlags(0)
-    {
-        for (int i = 0; i < cNumFog; i++)
-        {
-            mFog[i] = new Fog();
-        }
-    }
+namespace EGG {
 
-    void FogManager::Reset()
-    {
-        for (int i = 0; i < cNumFog; i++)
-        {
-            mFog[i]->Reset();
-        }
-    }
-
-    void FogManager::Calc()
-    {
-        if ((mFlags & DRAW_READY) == 0)
-        {
-            for (int i = 0; i < cNumFog; i++)
-            {
-                mFog[i]->Calc();
-            }
-
-            mFlags |= DRAW_READY;
-        }
-    }
-
-    void FogManager::UseScreenZ(Screen& screen)
-    {
-        for (int i = 0; i < cNumFog; i++)
-        {
-            mFog[i]->mNearZ = screen.GetNearZ();
-            mFog[i]->mFarZ = screen.GetFarZ();
-        }
-    }
-
-    void FogManager::CopyToG3D(nw4r::g3d::ScnRoot *root) const
-    {
-        for (int i = 0; i < cNumFog; i++)
-        {
-            nw4r::g3d::Fog f = root->GetFog(i);
-            mFog[i]->CopyToG3D(f);
-        }
-    }
-
-    void FogManager::LoadScnFog(nw4r::g3d::ResAnmScn *scene, f32 f1)
-    {
-        if (scene->IsValid() && scene->GetResAnmFogMaxRefNumber() > 0)
-        {
-            u32 numFog = (scene->GetResAnmFogMaxRefNumber() >= cNumFog)
-                ? cNumFog : scene->GetResAnmFogMaxRefNumber();
-            
-            for (int i = 0; i < numFog; i++)
-            {
-                mFog[i]->Unbind();
-                mFog[i]->Bind(scene->GetResAnmFogByRefNumber(i), f1);
-            }
-        }
-    }
-
-    void FogManager::DoneDraw()
-    {
-        mFlags &= ~DRAW_READY;
-    }
-
-    FogManager::~FogManager()
-    {
-        
+FogManager::FogManager() : mFlags(0) {
+    for (int i = 0; i < FOG_MAX; i++) {
+        mFog[i] = new Fog();
     }
 }
+
+void FogManager::Reset() {
+    for (int i = 0; i < FOG_MAX; i++) {
+        mFog[i]->Reset();
+    }
+}
+
+void FogManager::Calc() {
+    if (mFlags & EFlag_AwaitDraw) {
+        return;
+    }
+
+    for (int i = 0; i < FOG_MAX; i++) {
+        mFog[i]->Calc();
+    }
+
+    mFlags |= EFlag_AwaitDraw;
+}
+
+void FogManager::LoadScreenClip(const Screen& rScreen) {
+    for (int i = 0; i < FOG_MAX; i++) {
+        mFog[i]->mNearZ = rScreen.GetNearZ();
+        mFog[i]->mFarZ = rScreen.GetFarZ();
+    }
+}
+
+void FogManager::CopyToG3D(nw4r::g3d::ScnRoot* pScnRoot) const {
+    for (int i = 0; i < FOG_MAX; i++) {
+        mFog[i]->CopyToG3D(pScnRoot->GetFog(i));
+    }
+}
+
+void FogManager::LoadScnFog(const nw4r::g3d::ResAnmScn scn, f32 frame) {
+    if (!scn.IsValid()) {
+        return;
+    }
+
+    if (scn.GetResAnmFogMaxRefNumber() <= 0) {
+        return;
+    }
+
+    u32 fogNum = scn.GetResAnmFogMaxRefNumber() >= FOG_MAX
+                     ? FOG_MAX
+                     : scn.GetResAnmFogMaxRefNumber();
+
+    for (int i = 0; i < fogNum; i++) {
+        mFog[i]->Unbind();
+        mFog[i]->Bind(scn.GetResAnmFogByRefNumber(i), frame);
+    }
+}
+
+void FogManager::DoneDraw() {
+    mFlags &= ~EFlag_AwaitDraw;
+}
+
+} // namespace EGG

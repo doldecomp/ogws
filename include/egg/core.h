@@ -18,6 +18,7 @@
 #include <egg/core/eggFrmHeap.h>
 #include <egg/core/eggGraphicsFifo.h>
 #include <egg/core/eggHeap.h>
+#include <egg/core/eggIBinary.h>
 #include <egg/core/eggPerformanceView.h>
 #include <egg/core/eggProcessMeter.h>
 #include <egg/core/eggScene.h>
@@ -33,5 +34,6 @@
 #include <egg/core/eggWatch.h>
 #include <egg/core/eggXfb.h>
 #include <egg/core/eggXfbManager.h>
+
 
 #endif

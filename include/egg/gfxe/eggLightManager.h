@@ -1,23 +1,27 @@
 #ifndef EGG_GFXE_LIGHT_MANAGER_H
 #define EGG_GFXE_LIGHT_MANAGER_H
-#include "eggIBinary.h"
-#include "types_egg.h"
+#include <egg/types_egg.h>
+
+#include <egg/core/eggIBinary.h>
+
+#include <egg/prim.h>
 
 #include <nw4r/g3d.h>
 
 namespace EGG {
+
 class LightManager : IBinary<LightManager> {
 public:
     struct Bin : IBinary::Bin {};
 
 public:
     LightManager(u32, u32, u8);
-    virtual void SetBinaryInner(const Bin&);   // at 0x8
-    virtual void GetBinaryInner(Bin*) const;   // at 0xC
-    virtual const char* GetBinaryType() const; // at 0x10
-    virtual u32 GetBinarySize() const;         // at 0x14
-    virtual u8 GetVersion() const = 0;         // at 0x18
-    virtual ~LightManager();                   // at 0x1C
+    virtual void SetBinaryInner(const IBinary::Bin&); // at 0x8
+    virtual void GetBinaryInner(IBinary::Bin*) const; // at 0xC
+    virtual const char* GetBinaryType() const;        // at 0x10
+    virtual u32 GetBinarySize() const;                // at 0x14
+    virtual u8 GetVersion() const = 0;                // at 0x18
+    virtual ~LightManager();                          // at 0x1C
 
     void Reset();
     void Calc(nw4r::g3d::ScnRoot*);
@@ -51,6 +55,7 @@ private:
     char UNK_0x1A[0x20 - 0x1A];
     LightTextureManager* m_pLightTextureManager; // at 0x20
 };
+
 } // namespace EGG
 
 #endif

@@ -109,21 +109,21 @@ void Frustum::GetOrthographicParam_(nw4r::math::MTX44* pMtx) const {
     C_MTXOrtho(*pMtx, t, b, l, r, mNearZ, mFarZ);
 }
 
-void Frustum::LoadScnCamera(const nw4r::g3d::ResAnmScn anmScn, u8 refNumber,
+void Frustum::LoadScnCamera(const nw4r::g3d::ResAnmScn scn, u8 refNumber,
                             f32 frame, u32 flags) {
 
-    if (!anmScn.IsValid()) {
+    if (!scn.IsValid()) {
         return;
     }
 
-    const nw4r::g3d::ResAnmCamera anmCamera =
-        anmScn.GetResAnmCameraByRefNumber(refNumber);
+    const nw4r::g3d::ResAnmCamera cam =
+        scn.GetResAnmCameraByRefNumber(refNumber);
 
 #line 296
-    EGG_ASSERT_MSG(anmCamera.IsValid(), "Illegal camera number.");
+    EGG_ASSERT_MSG(cam.IsValid(), "Illegal camera number.");
 
     nw4r::g3d::CameraAnmResult result;
-    anmCamera.GetAnmResult(&result, frame);
+    cam.GetAnmResult(&result, frame);
 
     switch (result.projType) {
     case GX_PERSPECTIVE: {
@@ -243,39 +243,8 @@ void Frustum::CopyFromAnother(const Frustum& rOther) {
     mFlags = rOther.mFlags;
 }
 
-// void Frustum::GetViewToScreen(nw4r::math::VEC3* pScreenPos,
-//                               const nw4r::math::VEC3& rViewPos) const {
-// #line 458
-//     EGG_ASSERT(pScreenPos);
-
-//     f32 z = rViewPos.z;
-//     bool r3 = true;
-
-//     if (-z < mNearZ) {
-//         z = -mNearZ;
-//         r3 = false;
-//     }
-
-//     !!r3 ? 1 : 0;
-
-//     f32 range = mFarZ - mNearZ;
-
-//     switch (mProjType) {
-//     case PROJTYPE_PERSP: {
-//         f32 cot = 1.0f / mTanFovY;
-//         ;
-
-//         break;
-//     }
-
-//     case PROJTYPE_ORTHO: {
-//         pScreenPos->x = rViewPos.x * mScale.x;
-//         pScreenPos->y = rViewPos.y * mScale.y;
-//         pScreenPos->z = (-rViewPos.z - mNearZ) / mNearZ;
-//         break;
-//     }
-//     }
-// }
+void Frustum::GetViewToScreen(nw4r::math::VEC3* pScreenPos,
+                              const nw4r::math::VEC3& rViewPos) const {}
 
 void Frustum::GetScreenToView(nw4r::math::VEC3* pViewPos,
                               const nw4r::math::VEC3& rScreenPos) const {

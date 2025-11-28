@@ -87,9 +87,9 @@ public:
         VTXTYPE_QUAD,
         VTXTYPE_QUAD_SHADOW,
         VTX_TYPE_SCREEN_TEXTURE,
-        VTX_TYPE_SCREEN_TEXTURE_FLIP,
+        VTX_TYPE_SCREEN_TEXTURE_LU,
         VTX_TYPE_SCREEN,
-        VTX_TYPE_SCREEN_FLIP
+        VTX_TYPE_SCREEN_LU
     };
 
     enum ZMode {
@@ -114,7 +114,7 @@ public:
     static void BeginDrawPolygon(ColorChannel chan);
     static void BeginDrawQuad(ColorChannel chan, ZMode zMode, Blend blendMode,
                               bool texture, bool alpha);
-    static void BeginDrawScreen(bool flip, bool texture, bool alpha);
+    static void BeginDrawScreen(bool lu, bool texture, bool alpha);
     static void BeginDrawShadowVolume(u8 alpha);
 
     static void DrawLine(const nw4r::math::VEC3* pPoints, u16 num,
@@ -139,12 +139,12 @@ public:
         DrawDL(DL_SCREEN_TEXTURE, rMtx, color);
     }
 
-    static void BeginDrawShadowVolumeTexture(bool flip, GXColor color,
+    static void BeginDrawShadowVolumeTexture(bool lu, GXColor color,
                                              Blend blendMode);
 
     static void ClearEfb(const nw4r::math::MTX34& rMtx, bool colorUpdate,
                          bool alphaUpdate, bool texture, GXColor color,
-                         bool flip);
+                         bool lu);
 
     static void ResetMaterial(ColorChannel chan);
 

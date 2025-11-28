@@ -1,11 +1,16 @@
 #ifndef EGG_GFXE_LIGHT_OBJECT_H
 #define EGG_GFXE_LIGHT_OBJECT_H
-#include "eggIBinary.h"
-#include "eggVector.h"
+#include <egg/types_egg.h>
+
+#include <egg/core/eggIBinary.h>
+
+#include <egg/math.h>
 
 #include <revolution/GX.h>
 
+
 namespace EGG {
+
 class LightObj : IBinary<LightObj> {
 public:
     struct Bin : IBinary::Bin {
@@ -28,11 +33,11 @@ public:
 
 public:
     LightObj();
-    virtual void SetBinaryInner(const Bin&);   // at 0x8
-    virtual void GetBinaryInner(Bin*) const;   // at 0xC
-    virtual const char* GetBinaryType() const; // 0x10
-    virtual u32 GetBinarySize() const;         // 0x14
-    virtual u8 GetVersion() const;             // 0x18
+    virtual void SetBinaryInner(const IBinary::Bin&); // at 0x8
+    virtual void GetBinaryInner(IBinary::Bin*) const; // at 0xC
+    virtual const char* GetBinaryType() const;        // 0x10
+    virtual u32 GetBinarySize() const;                // 0x14
+    virtual u8 GetVersion() const;                    // 0x18
 
     // TO-DO: Document flags and remove accessor
     u16 getFlags() {
@@ -65,6 +70,7 @@ private:
     u16 SHORT_0x74;
     u16 mFlags; // at 0x76
 };
+
 } // namespace EGG
 
 #endif

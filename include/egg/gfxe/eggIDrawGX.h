@@ -13,10 +13,10 @@ class Screen;
 
 class IDrawGX {
 public:
-    enum DrawFlag {
-        DRAWFLAG_COLORUPDATE = 1 << 0,
-        DRAWFLAG_ALPHAUPDATE = 1 << 1,
-        DRAWFLAG_DITHER = 1 << 2,
+    enum {
+        EFlag_ColorUpdate = 1 << 0,
+        EFlag_AlphaUpdate = 1 << 1,
+        EFlag_Dither = 1 << 2,
     };
 
 public:
@@ -32,33 +32,33 @@ public:
     static void setDrawSettingGX(bool opa);
 
     static bool isEnableColorUpdate() {
-        return sDrawFlag & DRAWFLAG_COLORUPDATE;
+        return sDrawFlag & EFlag_ColorUpdate;
     }
     static void enableColorUpdate() {
-        sDrawFlag |= DRAWFLAG_COLORUPDATE;
+        sDrawFlag |= EFlag_ColorUpdate;
     }
     static void disableColorUpdate() {
-        sDrawFlag &= ~DRAWFLAG_COLORUPDATE;
+        sDrawFlag &= ~EFlag_ColorUpdate;
     }
 
     static bool isEnableAlphaUpdate() {
-        return sDrawFlag & DRAWFLAG_ALPHAUPDATE;
+        return sDrawFlag & EFlag_AlphaUpdate;
     }
     static void enableAlphaUpdate() {
-        sDrawFlag |= DRAWFLAG_ALPHAUPDATE;
+        sDrawFlag |= EFlag_AlphaUpdate;
     }
     static void disableAlphaUpdate() {
-        sDrawFlag &= ~DRAWFLAG_ALPHAUPDATE;
+        sDrawFlag &= ~EFlag_AlphaUpdate;
     }
 
     static bool isEnableDither() {
-        return sDrawFlag & DRAWFLAG_DITHER;
+        return sDrawFlag & EFlag_Dither;
     }
     static void enableDither() {
-        sDrawFlag |= DRAWFLAG_DITHER;
+        sDrawFlag |= EFlag_Dither;
     }
     static void disableDither() {
-        sDrawFlag &= ~DRAWFLAG_DITHER;
+        sDrawFlag &= ~EFlag_Dither;
     }
 
     static void setDrawFlag(u32 flag) {

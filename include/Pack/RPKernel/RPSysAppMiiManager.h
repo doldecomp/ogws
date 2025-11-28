@@ -15,7 +15,7 @@
 class RPSysAppMiiManager {
 protected:
     //! Mii buffer capacity
-    u16 mNumMii; // at 0x0
+    u16 mNumData; // at 0x0
     //! Store data (.RSD) buffer
     RFLStoreData** mppStoreData; // at 0x4
 
@@ -32,6 +32,31 @@ public:
      * @brief Destructor
      */
     virtual ~RPSysAppMiiManager() {} // at 0x8
+
+    /**
+     * @brief Gets the capacity of the Mii buffer
+     */
+    u16 GetNumData() const {
+        return mNumData;
+    }
+
+    /**
+     * @brief Accesses the specified Mii character data (.RCD)
+     *
+     * @param index Database index
+     */
+    const RFLCharData* GetCharData(u16 index) const {
+        return mppCharData[index];
+    }
+
+    /**
+     * @brief Accesses the specified Mii store data (.RSD)
+     *
+     * @param index Database index
+     */
+    const RFLStoreData* GetStoreData(u16 index) const {
+        return mppStoreData[index];
+    }
 
 protected:
     //! Character data (.RCD) buffer

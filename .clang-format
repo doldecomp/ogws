@@ -43,20 +43,24 @@ IncludeCategories:
     Priority: 2
     CaseSensitive: true
 
-  - Regex: '<egg\/[[:lower:].]+h>' # EGG public headers
+  - Regex: "RVLFaceLib" # RFL public headers
     Priority: 3
     CaseSensitive: true
 
-  - Regex: '<nw4r\/[[:alnum:].]+h>' # NW4R public headers
+  - Regex: '<egg\/[[:lower:].]+h>' # EGG public headers
     Priority: 4
     CaseSensitive: true
 
-  - Regex: '^<revolution\/[[:upper:].]+h>' # RVL SDK public headers
+  - Regex: '<nw4r\/[[:alnum:].]+h>' # NW4R public headers
     Priority: 5
     CaseSensitive: true
 
+  - Regex: '^<revolution\/[[:upper:].]+h>' # RVL SDK public headers
+    Priority: 6
+    CaseSensitive: true
+
   - Regex: "<[[:alnum:].]+>" # STL headers
-    Priority: 6 # Priority 0 is header mapped to src file
+    Priority: 7 # Priority 0 is header mapped to src file
     CaseSensitive: true
 
   - Regex: ".*" # All other headers

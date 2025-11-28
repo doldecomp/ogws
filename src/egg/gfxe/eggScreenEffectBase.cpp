@@ -217,9 +217,9 @@ namespace EGG
                     StateGX::GXSetScissorBoxOffset_(0, 0);
 
                     PostEffectSimple eff;
-                    eff.onReset();
+                    eff.configure();
                     eff.setCapTexture(getBuffer(type));
-                    eff.setBlendMode(0);
+                    eff.setBlendMode(PostEffectBase::EBlendMode_None);
 
                     const f32 sx = mScreen.GetSize().x;
                     const f32 sy = mScreen.GetSize().y;

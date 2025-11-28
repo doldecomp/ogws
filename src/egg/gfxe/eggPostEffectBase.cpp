@@ -1,46 +1,41 @@
-#include "eggPostEffectBase.h"
+#include <egg/gfxe.h>
+#include <egg/prim.h>
 
-#include "eggAssert.h"
-#include "eggCapTexture.h"
-#include "eggDrawGX.h"
-#include "eggScreen.h"
+#include <nw4r/math.h>
 
 #include <revolution/GX.h>
 #include <revolution/MTX.h>
 
 namespace EGG {
-using namespace nw4r;
 
-namespace {
-void UNUSED_FUNC_ORDER_POSTEFFECTBASE(PostEffectBase* eff) {
-    eff->~PostEffectBase();
-}
-} // namespace
+DECOMP_FORCEACTIVE_DTOR(eggPostEffectBase_cpp, PostEffectBase);
 
 PostEffectBase::PostEffectBase()
     : mFlags(0),
-      mBlendMode(0),
+      mBlendMode(EBlendMode_None),
       mpCapTexture(NULL),
       mOffsetX(0.0f),
       mOffsetY(0.0f),
       mScaleX(1.0f),
       mScaleY(1.0f) {}
 
-void PostEffectBase::onReset() {
+void PostEffectBase::configure() {
     reset();
 }
 
 void PostEffectBase::reset() {}
 
-void PostEffectBase::draw(f32 width, f32 height) {
-    if (isVisible()) {
-        preDraw();
-        setVtxState();
-        drawDL(mOffsetX, mOffsetY, mScaleX * width, mScaleY * height);
+void PostEffectBase::draw(f32 w, f32 h) {
+    if (!isVisible()) {
+        return;
     }
+
+    setMaterialInternal();
+    setVtxState();
+    drawScreenInternal(mOffsetX, mOffsetY, mScaleX * w, mScaleY * h);
 }
 
-void PostEffectBase::preDraw() {}
+void PostEffectBase::setMaterialInternal() {}
 
 void PostEffectBase::drawTexture() {
 #line 61
@@ -49,18 +44,18 @@ void PostEffectBase::drawTexture() {
 }
 
 void PostEffectBase::setVtxState() {
-    DrawGX::SetVtxState(DrawGX::VTX_TYPE_SCREEN_TEXTURE_FLIP);
+    DrawGX::SetVtxState(DrawGX::VTX_TYPE_SCREEN_TEXTURE_LU);
 }
 
-void PostEffectBase::drawDL(f32 ofsX, f32 ofsY, f32 width, f32 height) {
-    nw4r::math::MTX34 pos;
-    PSMTXScale(pos, width, height, 1.0f);
-    PSMTXTransApply(pos, pos, ofsX, ofsY, 0.0f);
+void PostEffectBase::drawScreenInternal(f32 x, f32 y, f32 w, f32 h) {
+    nw4r::math::MTX34 mtx;
+    PSMTXScale(mtx, w, h, 1.0f);
+    PSMTXTransApply(mtx, mtx, x, y, 0.0f);
 
-    DrawGX::DrawScreenTexture(pos);
+    DrawGX::DrawScreenTexture(mtx);
 }
 
-void PostEffectBase::loadTexObj() {
+void PostEffectBase::loadTextureInternal() {
 #line 98
     EGG_ASSERT(mpCapTexture);
     mpCapTexture->load(mpCapTexture->getLoadMap());
@@ -68,9 +63,9 @@ void PostEffectBase::loadTexObj() {
 
 void PostEffectBase::setMatColorChannel() {
     GXSetNumChans(0);
-    GXSetChanCtrl(GX_COLOR0A0, 0, GX_SRC_REG, GX_SRC_REG, GX_LIGHT_NULL,
+    GXSetChanCtrl(GX_COLOR0A0, GX_FALSE, GX_SRC_REG, GX_SRC_REG, GX_LIGHT_NULL,
                   GX_DF_SIGN, GX_AF_NONE);
-    GXSetChanCtrl(GX_COLOR1A1, 0, GX_SRC_REG, GX_SRC_REG, GX_LIGHT_NULL,
+    GXSetChanCtrl(GX_COLOR1A1, GX_FALSE, GX_SRC_REG, GX_SRC_REG, GX_LIGHT_NULL,
                   GX_DF_SIGN, GX_AF_NONE);
     GXSetCullMode(GX_CULL_BACK);
 }
@@ -81,7 +76,7 @@ void PostEffectBase::setMatInd() {
 
 void PostEffectBase::setMatPE() {
     GXSetAlphaCompare(GX_ALWAYS, 0, GX_AOP_OR, GX_ALWAYS, 0);
-    GXSetZMode(0, GX_ALWAYS, 0);
+    GXSetZMode(GX_FALSE, GX_ALWAYS, GX_FALSE);
 
     GXColor black = {0, 0, 0, 255};
     GXSetFog(GX_FOG_NONE, black, 0.0f, 1.0f, 0.0f, 1.0f);
@@ -90,67 +85,86 @@ void PostEffectBase::setMatPE() {
 
 void PostEffectBase::setBlendModeInternal() {
     switch (mBlendMode) {
-    case 0:
+    case EBlendMode_None: {
         DrawGX::SetBlendMode(DrawGX::BLEND_NONE);
         break;
-    case 1:
+    }
+
+    case EBlendMode_Normal: {
         DrawGX::SetBlendMode(DrawGX::BLEND_NORMAL);
         break;
-    case 2:
+    }
+
+    case EBlendMode_Add: {
         DrawGX::SetBlendMode(DrawGX::BLEND_ADD);
         break;
-    case 3:
+    }
+
+    case EBlendMode_MulAdd: {
         DrawGX::SetBlendMode(DrawGX::BLEND_MUL_ADD);
         break;
-    case 4:
+    }
+
+    case EBlendMode_4: {
         GXSetBlendMode(GX_BM_BLEND, GX_BL_INVSRCCLR, GX_BL_ONE, GX_LO_CLEAR);
         break;
-    case 5:
+    }
+
+    case EBlendMode_5: {
         GXSetBlendMode(GX_BM_BLEND, GX_BL_INVSRCCLR, GX_BL_INVSRCCLR,
                        GX_LO_CLEAR);
         break;
-    case 6:
+    }
+
+    case EBlendMode_AddAlpha: {
         DrawGX::SetBlendMode(DrawGX::BLEND_ADD_ALPHA);
         break;
-    case 7:
+    }
+
+    case EBlendMode_7: {
         GXSetBlendMode(GX_BM_BLEND, GX_BL_INVSRCALPHA, GX_BL_ONE, GX_LO_CLEAR);
         break;
-    case 8:
+    }
+
+    case EBlendMode_8: {
         GXSetBlendMode(GX_BM_SUBTRACT, GX_BL_SRCALPHA, GX_BL_INVSRCALPHA,
                        GX_LO_CLEAR);
         break;
-    case 9:
+    }
+
+    case EBlendMode_Mul: {
         DrawGX::SetBlendMode(DrawGX::BLEND_MUL);
         break;
     }
+    }
 }
 
-void PostEffectBase::scaleRGBA(GXColor* out, const GXColor& in, f32 scale,
+void PostEffectBase::scaleRGBA(GXColor* pOut, const GXColor& rIn, f32 scale,
                                bool clamp) {
 #line 205
     EGG_ASSERT(scale >= 0.f);
 
-    f32 color_f[4];
-    color_f[0] = in.r * scale;
-    color_f[1] = in.g * scale;
-    color_f[2] = in.b * scale;
-    color_f[3] = in.a * scale;
+    f32 color[4];
+    color[0] = rIn.r * scale;
+    color[1] = rIn.g * scale;
+    color[2] = rIn.b * scale;
+    color[3] = rIn.a * scale;
 
     if (clamp) {
-        out->r = (color_f[0] < 255.0f) ? color_f[0] : 255.0f;
-        out->g = (color_f[1] < 255.0f) ? color_f[1] : 255.0f;
-        out->b = (color_f[2] < 255.0f) ? color_f[2] : 255.0f;
-        out->a = (color_f[3] < 255.0f) ? color_f[3] : 255.0f;
+        pOut->r = color[0] < 255.0f ? color[0] : 255.0f;
+        pOut->g = color[1] < 255.0f ? color[1] : 255.0f;
+        pOut->b = color[2] < 255.0f ? color[2] : 255.0f;
+        pOut->a = color[3] < 255.0f ? color[3] : 255.0f;
     } else {
-        out->r = color_f[0];
-        out->g = color_f[1];
-        out->b = color_f[2];
-        out->a = color_f[3];
+        pOut->r = color[0];
+        pOut->g = color[1];
+        pOut->b = color[2];
+        pOut->a = color[3];
     }
 }
 
-void PostEffectBase::setProjection(const Screen& screen) {
-    Screen clone(screen);
+void PostEffectBase::setProjection(const Screen& rScreen) {
+    Screen clone(rScreen);
 
     clone.SetProjectionAbsolute();
     clone.SetCanvasMode(Frustum::CANVASMODE_LU);
@@ -158,10 +172,10 @@ void PostEffectBase::setProjection(const Screen& screen) {
 
     clone.SetNearZ(0.0f);
     clone.SetFarZ(1.0f);
-    clone.SetScale(math::VEC3(1.0f, 1.0f, 1.0f));
-    clone.SetOffset(math::VEC2(0.0f, 0.0f));
+    clone.SetScale(nw4r::math::VEC3(1.0f, 1.0f, 1.0f));
+    clone.SetOffset(nw4r::math::VEC2(0.0f, 0.0f));
 
-    clone.Screen::SetProjectionGX();
+    clone.SetProjectionGX();
 }
 
 } // namespace EGG
