@@ -30,7 +30,7 @@ void GXUtility::setScaleOffsetPerspective(f32* p, f32 sx, f32 sy, f32 ox,
 }
 
 DECOMP_FORCEACTIVE(eggGXUtility_cpp,
-                  "Not implemented.");
+                   "Not implemented.");
 
 void GXUtility::getTexObj(GXTexObj* pObj, const ResTIMG& rRes) {
 #line 70

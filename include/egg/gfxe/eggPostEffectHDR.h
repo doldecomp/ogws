@@ -7,9 +7,9 @@ namespace EGG {
 class PostEffectHDR : public PostEffectBase {
 public:
     PostEffectHDR();
-    virtual ~PostEffectHDR() {} // at 0x8
-    virtual void reset();       // at 0x14
-    virtual void preDraw();     // at 0x18
+    virtual ~PostEffectHDR() {}         // at 0x8
+    virtual void reset();               // at 0x14
+    virtual void setMaterialInternal(); // at 0x18
 
     void setupRange();
 

@@ -17,9 +17,9 @@ namespace EGG
         WORD_0x2C = 1;
     }
 
-    void PostEffectSimple::preDraw()
+    void PostEffectSimple::setMaterialInternal()
     {
-        loadTexObj();
+        loadTextureInternal();
 
         GXColor color = mColor;
         if (FLOAT_0x24 < 1.0f)

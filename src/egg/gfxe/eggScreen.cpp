@@ -25,7 +25,8 @@ void* Screen::spChangeTVModeFuncInfo = NULL;
 nw4r::math::VEC2 Screen::sCanvasScale(1.0f, 1.0f);
 nw4r::math::VEC2 Screen::sCanvasOffset(0.0f, 0.0f);
 
-void Screen::Initialize(const u16* maxX, const u16* maxY, Screen* pUserRoot) {
+void Screen::Initialize(const u16 maxX[TV_MODE_MAX],
+                        const u16 maxY[TV_MODE_MAX], Screen* pUserRoot) {
 #line 47
     EGG_ASSERT(maxX != NULL);
     EGG_ASSERT(maxY != NULL);

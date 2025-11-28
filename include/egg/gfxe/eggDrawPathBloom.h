@@ -1,17 +1,20 @@
 #ifndef EGG_GFXE_DRAW_PATH_BLOOM_H
 #define EGG_GFXE_DRAW_PATH_BLOOM_H
-#include "eggDrawPathBase.h"
-#include "eggIBinary.h"
-#include "types_egg.h"
+#include <egg/types_egg.h>
+
+#include <egg/gfxe/eggDrawPathBase.h>
+
+#include <egg/core.h>
 
 namespace EGG {
+
 class DrawPathBloom : public DrawPathBase, public IBinary<DrawPathBloom> {
 public:
     DrawPathBloom();
-    virtual int getNumScnProc() const; // at 0x1C
-    virtual void calc();               // at 0x24
-    virtual void draw(u16);            // at 0x28
-    virtual ~DrawPathBloom();          // at 0x8
+    virtual ~DrawPathBloom();       // at 0x8
+    virtual int getNumStep() const; // at 0x1C
+    virtual void internalCalc();    // at 0x24
+    virtual void internalDraw(u16); // at 0x28
 
     virtual void SetBinaryInner(const Bin&);   // at 0x8
     virtual void GetBinaryInner(Bin*) const;   // at 0xC
@@ -29,6 +32,7 @@ private:
     u8 mFlags; // at 0x80
     char UNK_0x81[0x134 - 0x81];
 };
+
 } // namespace EGG
 
 #endif

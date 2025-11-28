@@ -1,26 +1,27 @@
 #ifndef EGG_GFXE_MODEL_SNAPSHOT_H
 #define EGG_GFXE_MODEL_SNAPSHOT_H
-#include "eggCapTexture.h"
-#include "types_egg.h"
+#include <egg/types_egg.h>
+
+#include <egg/gfxe/eggCapTexture.h>
 
 namespace EGG {
+
 class ModelSnapshot : public CapTexture {
 public:
-    enum SnapshotFlag { SNAPSHOT_0x2 = (1 << 1) };
-
     struct ModelBind {
-        ModelEx* model; // at 0x0
-        f32 FLOAT_0x4;
-        u8 BYTE_0x8;
+        ModelEx* pModel; // at 0x0
+        f32 density;     // at 0x4
+        bool useMat;     // at 0x8
     };
 
 public:
-    ModelSnapshot(u16, u16, GXTexFmt, u16);
-    virtual ~ModelSnapshot();   // at 0x8
+    ModelSnapshot(u16 w, u16 h, GXTexFmt fmt, u16 mdlMax);
+    virtual ~ModelSnapshot() {} // at 0x8
+
     virtual void DoResetList(); // at 0x18
     virtual void ResetList();   // at 0x1C
 
-    void AddModelEx(ModelEx*, f32);
+    void AddModelEx(ModelEx* pModel, f32 density);
     void GatherModel(f32);
 
 private:
@@ -43,7 +44,13 @@ private:
     f32 FLOAT_0x64;
     f32 FLOAT_0x68;
     f32 FLOAT_0x6C;
+
+private:
+    enum {
+        EFlag_1 = 1 << 1,
+    };
 };
+
 } // namespace EGG
 
 #endif

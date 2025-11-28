@@ -1002,7 +1002,7 @@ egg/gfxe/eggDrawPathShadowVolume.cpp:
 	.data       start:0x803978B8 end:0x803978E8
 	.sdata2     start:0x804C06F8 end:0x804C0710
 
-egg/gfxe/eggDrawPathLightMap.cpp:
+egg/gfxe/eggDrawPathXluSnap.cpp:
 	.text       start:0x8008E294 end:0x8008ED1C
 	.data       start:0x803978E8 end:0x80397918
 	.sdata2     start:0x804C0710 end:0x804C0720
@@ -1418,9 +1418,6 @@ egg/util/eggMsgRes.cpp:
 	.data       start:0x80398760 end:0x80398794
 	.sdata      start:0x804BD528 end:0x804BD530
 
-egg/egg_8037B248.o:
-	.rodata     start:0x8037B248 end:0x8037B258
-
 egg/util/eggEffect.cpp:
 	.text       start:0x800B16E0 end:0x800B1744
 	.ctors      start:0x80355108 end:0x8035510C
@@ -1447,6 +1444,7 @@ runtime/NMWException.c:
 
 runtime/ptmf.c:
 	.text       start:0x800B1BC4 end:0x800B1C1C
+	.rodata     start:0x8037B248 end:0x8037B258
 
 runtime/runtime.c:
 	.text       start:0x800B1C1C end:0x800B2288
@@ -3054,3 +3052,151 @@ nw4r/g3d/g3d_scnrfl.cpp:
 	.rodata     start:0x80383670 end:0x80383680
 	.data       start:0x803B9F90 end:0x803B9FC8
 	.sdata2     start:0x804C1810 end:0x804C1828
+
+Pack/RPGraphics/RPGrpCamera.cpp:
+	.text       start:0x801A8440 end:0x801A8E64
+	.ctors      start:0x80355128 end:0x8035512C
+	.data       start:0x803B9FC8 end:0x803B9FD8
+	.bss        start:0x804A4230 end:0x804A44C8
+	.sbss       start:0x804BF5C8 end:0x804BF5D0
+	.sdata2     start:0x804C1828 end:0x804C1858
+
+Pack/RPGraphics/RPGrpDrawPathManager.cpp:
+	.text       start:0x801A8E64 end:0x801A97E0
+	.rodata     start:0x80383680 end:0x80383698
+	.data       start:0x803B9FD8 end:0x803BA060
+
+Pack/RPGraphics/RPGrpLightManager.cpp:
+	.text       start:0x801A97E0 end:0x801A9860
+
+Pack/RPGraphics/RPGrpModel.cpp:
+	.text       start:0x801A9860 end:0x801AA128
+	.rodata     start:0x80383698 end:0x803836B0
+	.data       start:0x803BA060 end:0x803BA100
+	.sbss       start:0x804BF5D0 end:0x804BF5F0
+	.sdata2     start:0x804C1858 end:0x804C1860
+
+Pack/RPGraphics/RPGrpModelAnm.cpp:
+	.text       start:0x801AA128 end:0x801AA99C
+	.data       start:0x803BA100 end:0x803BA188
+	.sdata2     start:0x804C1860 end:0x804C1868
+
+Pack/RPGraphics/RPGrpModelAnmImplement.cpp:
+	.text       start:0x801AA99C end:0x801ACB40
+	.rodata     start:0x803836B0 end:0x803836E0
+	.data       start:0x803BA188 end:0x803BA2F0
+	.sbss       start:0x804BF5F0 end:0x804BF5F8
+	.sdata2     start:0x804C1868 end:0x804C1878
+
+Pack/RPGraphics/RPGrpModelImplement.cpp:
+	.text       start:0x801ACB40 end:0x801ADE70
+	.data       start:0x803BA2F0 end:0x803BA3E8
+	.bss        start:0x804A44C8 end:0x804A44F8
+
+Pack/RPGraphics/RPGrpModelMisc.cpp:
+	.text       start:0x801ADE70 end:0x801ADE80
+	.rodata     start:0x803836E0 end:0x803836F0
+
+Pack/RPGraphics/RPGrpModelManager.cpp:
+	.text       start:0x801ADE80 end:0x801AE394
+	.data       start:0x803BA3E8 end:0x803BA418
+	.sbss       start:0x804BF5F8 end:0x804BF600
+
+Pack/RPGraphics/RPGrpModelResManager.cpp:
+	.text       start:0x801AE394 end:0x801AF1D4
+	.data       start:0x803BA418 end:0x803BA4D0
+	.sbss       start:0x804BF600 end:0x804BF608
+
+Pack/RPGraphics/RPGrpRenderer.cpp:
+	.text       start:0x801AF1D4 end:0x801B0268
+	.ctors      start:0x8035512C end:0x80355130
+	.rodata     start:0x803836F0 end:0x80383728
+	.data       start:0x803BA4D0 end:0x803BA5C0
+	.bss        start:0x804A44F8 end:0x804A4538
+	.sdata      start:0x804BDC08 end:0x804BDC10
+	.sbss       start:0x804BF608 end:0x804BF630
+	.sdata2     start:0x804C1878 end:0x804C1898
+
+Pack/RPGraphics/RPGrpScreen.cpp:
+	.text       start:0x801B0268 end:0x801B046C
+	.ctors      start:0x80355130 end:0x80355134
+	.bss        start:0x804A4538 end:0x804A45B0
+
+Pack/RPGraphics/RPGrpView.cpp:
+	.text       start:0x801B046C end:0x801B1624
+	.ctors      start:0x80355134 end:0x80355138
+	.data       start:0x803BA5C0 end:0x803BA608
+	.bss        start:0x804A45B0 end:0x804A4608
+	.sdata2     start:0x804C1898 end:0x804C18D0
+
+Pack/RPGraphics/RPGrpViewRender2D.cpp:
+	.text       start:0x801B1624 end:0x801B1700
+	.data       start:0x803BA608 end:0x803BA638
+
+Pack/RPGraphics/RPGrpViewRender3D.cpp:
+	.text       start:0x801B1700 end:0x801B1958
+	.data       start:0x803BA638 end:0x803BA668
+
+Pack/RPGraphics/RPGrpModelScene.cpp:
+	.text       start:0x801B1958 end:0x801B2464
+	.rodata     start:0x80383728 end:0x80383768
+	.data       start:0x803BA668 end:0x803BA6C0
+	.sbss       start:0x804BF630 end:0x804BF638
+
+Pack/RPGraphics/RPGrpDrawPathLightMap.cpp:
+	.text       start:0x801B2464 end:0x801B25F8
+	.data       start:0x803BA6C0 end:0x803BA708
+
+Pack/RPGraphics/RPGrpModelBoundingInfo.cpp:
+	.text       start:0x801B25F8 end:0x801B2690
+	.data       start:0x803BA708 end:0x803BA718
+
+Pack/RPGraphics/RPGrpDrawPathShadowTexture.cpp:
+	.text       start:0x801B2690 end:0x801B284C
+	.data       start:0x803BA718 end:0x803BA730
+
+Pack/RPGraphics/RPGrpModelMaterial.cpp:
+	.text       start:0x801B284C end:0x801B3DF0
+	.rodata     start:0x80383768 end:0x80383778
+	.data       start:0x803BA730 end:0x803BA740
+	.sdata2     start:0x804C18D0 end:0x804C18D8
+
+Pack/RPGraphics/RPGrpModelRecord.cpp:
+	.text       start:0x801B3DF0 end:0x801B4B64
+	.data       start:0x803BA740 end:0x803BA780
+	.sdata2     start:0x804C18D8 end:0x804C18F0
+
+Pack/RPGraphics/RPGrpTexture.cpp:
+	.text       start:0x801B4B64 end:0x801B4CC0
+	.data       start:0x803BA780 end:0x803BA790
+
+Pack/RPGraphics/RPGrpCaptureTexture.cpp:
+	.text       start:0x801B4CC0 end:0x801B4F28
+	.data       start:0x803BA790 end:0x803BA7A0
+	.sdata2     start:0x804C18F0 end:0x804C18F8
+
+Pack/RPGraphics/RPGrpFogManager.cpp:
+	.text       start:0x801B4F28 end:0x801B4F98
+
+Pack/RPGraphics/RPGrpProjectionObject.cpp:
+	.text       start:0x801B4F98 end:0x801B5160
+	.data       start:0x803BA7A0 end:0x803BA7B0
+	.sdata2     start:0x804C18F8 end:0x804C1900
+
+Pack/RPGraphics/RPGrpModelRfl.cpp:
+	.text       start:0x801B5160 end:0x801B62AC
+	.ctors      start:0x80355138 end:0x8035513C
+	.rodata     start:0x80383778 end:0x80383788
+	.data       start:0x803BA7B0 end:0x803BA880
+	.bss        start:0x804A4608 end:0x804A4660
+	.sdata      start:0x804BDC10 end:0x804BDC18
+	.sbss       start:0x804BF638 end:0x804BF640
+	.sdata2     start:0x804C1900 end:0x804C1940
+
+Pack/RPAudio/RPSndAudioMgr.cpp:
+	.text       start:0x801B62AC end:0x801B8384
+	.rodata     start:0x80383788 end:0x803837E8
+	.data       start:0x803BA880 end:0x803BAA60
+	.bss        start:0x804A4660 end:0x804A4670
+	.sbss       start:0x804BF640 end:0x804BF650
+	.sdata2     start:0x804C1940 end:0x804C1968

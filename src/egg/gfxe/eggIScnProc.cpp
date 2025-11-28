@@ -42,7 +42,7 @@ void IScnProc::createScnProc(u16 procNum, MEMAllocator* pAllocator) {
         // clang-format on
 
         mpDataSet[i].mpScnProc->SetUserData(&mpDataSet[i]);
-        mpDataSet[i].mIndex = i;
+        mpDataSet[i].mStep = i;
         mpDataSet[i].mpThis = this;
         mpDataSet[i].mOpa = true;
 
@@ -106,7 +106,7 @@ void IScnProc::drawProcFunc(nw4r::g3d::ScnProc* pScnProc, bool opa) {
 
     setDrawSettingGX(opa);
 
-    p_data->mpThis->scnProcDraw(p_data->mIndex);
+    p_data->mpThis->scnProcDraw(p_data->mStep);
     StateGX::resetStateCache();
 
     setDrawSettingGX(opa);

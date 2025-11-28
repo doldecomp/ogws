@@ -30,7 +30,7 @@ namespace EGG
     {
         if (isVisible())
         {
-            loadTexObj();
+            loadTextureInternal();
             setMatColorChannel();
             setMatInd();
             setMatPE();
@@ -42,7 +42,7 @@ namespace EGG
                 for (u8 j = 0; j <= end; j++)
                 {
                     drawBlurPass(i, j);
-                    drawDL(mOffsetX, mOffsetY, width * mScaleX, height * mScaleY);
+                    drawScreenInternal(mOffsetX, mOffsetY, width * mScaleX, height * mScaleY);
                     DrawGX::SetBlendMode(DrawGX::BLEND_ADD);
                 }
             }

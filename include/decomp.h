@@ -40,6 +40,7 @@
         cls dummy;                                                             \
         dummy.~cls();                                                          \
     }
+
 #define DECOMP_INLINE inline
 #define DECOMP_DONT_INLINE __attribute__((never_inline))
 #endif

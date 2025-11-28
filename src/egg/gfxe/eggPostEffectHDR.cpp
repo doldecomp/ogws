@@ -72,10 +72,10 @@ namespace EGG
         COLOR_0x34 = sp0C;
     }
 
-    void PostEffectHDR::preDraw()
+    void PostEffectHDR::setMaterialInternal()
     {
         setupRange();
-        loadTexObj();
+        loadTextureInternal();
 
         const int stages0 = (BYTE_0x45 & 1);
         const int stages1 = stages0 + 2;

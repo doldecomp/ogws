@@ -48,8 +48,8 @@ public:
     virtual void SetProjectionGX() const;                   // at 0xC
     virtual void CopyToG3D(nw4r::g3d::Camera camera) const; // at 0x10
 
-    void LoadScnCamera(const nw4r::g3d::ResAnmScn anmScn, u8 refNumber,
-                       f32 frame, u32 flags);
+    void LoadScnCamera(const nw4r::g3d::ResAnmScn scn, u8 refNumber, f32 frame,
+                       u32 flags);
 
     void CopyFromAnother(const Frustum& rOther);
 

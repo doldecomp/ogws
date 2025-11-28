@@ -232,7 +232,7 @@ void DrawGX::BeginDrawQuad(ColorChannel chan, ZMode zMode, Blend blend,
     SetVtxState(texture ? VTXTYPE_QUAD_TEXTURE : VTXTYPE_QUAD);
 }
 
-void DrawGX::BeginDrawScreen(bool flip, bool texture, bool alpha) {
+void DrawGX::BeginDrawScreen(bool lu, bool texture, bool alpha) {
     SetMat_ColorChannel(COLORCHAN_COLOR);
     SetMat_TexGen(texture ? TEXGEN_ENABLE : TEXGEN_DISABLE);
     SetMat_Ind();
@@ -248,11 +248,11 @@ void DrawGX::BeginDrawScreen(bool flip, bool texture, bool alpha) {
     SetMat_PE(ZMODE_ALWAYS, BLEND_NORMAL);
 
     static const VtxType tbl[true + 1][true + 1] = {
-        {VTX_TYPE_SCREEN_TEXTURE, VTX_TYPE_SCREEN},           // flip disabled
-        {VTX_TYPE_SCREEN_TEXTURE_FLIP, VTX_TYPE_SCREEN_FLIP}, // flip enabled
+        {VTX_TYPE_SCREEN_TEXTURE, VTX_TYPE_SCREEN},       // CC
+        {VTX_TYPE_SCREEN_TEXTURE_LU, VTX_TYPE_SCREEN_LU}, // LU
     };
 
-    SetVtxState(tbl[flip ? 1 : 0][texture ? 0 : 1]);
+    SetVtxState(tbl[lu ? 1 : 0][texture ? 0 : 1]);
 }
 
 void DrawGX::BeginDrawShadowVolume(u8 alpha) {
@@ -409,7 +409,7 @@ void DrawGX::DrawPolygon(const nw4r::math::VEC3& rP0,
     GXEnd();
 }
 
-void DrawGX::BeginDrawShadowVolumeTexture(bool flip, GXColor color,
+void DrawGX::BeginDrawShadowVolumeTexture(bool lu, GXColor color,
                                           Blend blendMode) {
 
     SetMat_ColorChannel(COLORCHAN_COLOR);
@@ -446,12 +446,11 @@ void DrawGX::BeginDrawShadowVolumeTexture(bool flip, GXColor color,
 
     SetZMode(ZMODE_ALWAYS);
     SetBlendMode(blendMode);
-    SetVtxState(flip ? VTX_TYPE_SCREEN_TEXTURE_FLIP : VTX_TYPE_SCREEN_TEXTURE);
+    SetVtxState(lu ? VTX_TYPE_SCREEN_TEXTURE_LU : VTX_TYPE_SCREEN_TEXTURE);
 }
 
 void DrawGX::ClearEfb(const nw4r::math::MTX34& rMtx, bool colorUpdate,
-                      bool alphaUpdate, bool texture, GXColor color,
-                      bool flip) {
+                      bool alphaUpdate, bool texture, GXColor color, bool lu) {
 
     StateGX::ScopedColorUpdate colorLock(colorUpdate);
     StateGX::ScopedAlphaUpdate alphaLock(alphaUpdate);
@@ -503,7 +502,7 @@ void DrawGX::ClearEfb(const nw4r::math::MTX34& rMtx, bool colorUpdate,
     }
 
     SetBlendMode(BLEND_NONE);
-    SetVtxState(flip ? VTX_TYPE_SCREEN_TEXTURE_FLIP : VTX_TYPE_SCREEN_TEXTURE);
+    SetVtxState(lu ? VTX_TYPE_SCREEN_TEXTURE_LU : VTX_TYPE_SCREEN_TEXTURE);
     DrawScreenTexture(rMtx);
 
     if (texture) {
@@ -761,9 +760,9 @@ void DrawGX::SetVtxState(VtxType vtxType) {
     }
 
     case VTX_TYPE_SCREEN_TEXTURE:
-    case VTX_TYPE_SCREEN_TEXTURE_FLIP:
+    case VTX_TYPE_SCREEN_TEXTURE_LU:
     case VTX_TYPE_SCREEN:
-    case VTX_TYPE_SCREEN_FLIP: {
+    case VTX_TYPE_SCREEN_LU: {
         static const s16 SCREEN_VTX[][2] ALIGN(32) = {
             // clang-format off
             {0, 1},
@@ -791,19 +790,18 @@ void DrawGX::SetVtxState(VtxType vtxType) {
             {0, 1},
         };
 
-        bool flip = vtxType == VTX_TYPE_SCREEN_TEXTURE_FLIP ||
-                    vtxType == VTX_TYPE_SCREEN_FLIP;
+        bool lu = vtxType == VTX_TYPE_SCREEN_TEXTURE_LU ||
+                  vtxType == VTX_TYPE_SCREEN_LU;
 
         bool texture = vtxType == VTX_TYPE_SCREEN_TEXTURE ||
-                       vtxType == VTX_TYPE_SCREEN_TEXTURE_FLIP;
+                       vtxType == VTX_TYPE_SCREEN_TEXTURE_LU;
 
         GXSetVtxDesc(GX_VA_POS, GX_INDEX8);
         if (texture) {
             GXSetVtxDesc(GX_VA_TEX0, GX_INDEX8);
         }
 
-        GXSetArray(GX_VA_POS, flip ? SCREEN_VTX_LU : SCREEN_VTX,
-                   sizeof(s16) * 3);
+        GXSetArray(GX_VA_POS, lu ? SCREEN_VTX_LU : SCREEN_VTX, sizeof(s16) * 3);
         if (texture) {
             GXSetArray(GX_VA_TEX0, SCREEN_UV, sizeof(s16) * 2);
         }

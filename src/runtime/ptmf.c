@@ -9,6 +9,8 @@ typedef struct PTMF {
     }; // at 0x8
 } PTMF;
 
+const PTMF __ptmf_null = {0, 0, NULL};
+
 asm BOOL __ptmf_test(register const PTMF* ptmf) {
     // clang-format off
     nofralloc

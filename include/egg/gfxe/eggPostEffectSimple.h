@@ -7,9 +7,9 @@ namespace EGG {
 class PostEffectSimple : public PostEffectBase {
 public:
     PostEffectSimple();
-    virtual ~PostEffectSimple() {} // at 0x8
-    virtual void reset();          // at 0x14
-    virtual void preDraw();        // at 0x18
+    virtual ~PostEffectSimple() {}      // at 0x8
+    virtual void reset();               // at 0x14
+    virtual void setMaterialInternal(); // at 0x18
 
 private:
     GXColor mColor; // at 0x20

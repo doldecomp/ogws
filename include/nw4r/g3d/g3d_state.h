@@ -54,6 +54,7 @@ static const int NUM_FOG = 32;
 static const int NUM_SCNDEPENDENT_TEXMTX_FUNCTYPE = 256;
 
 enum InvalidateFlag {
+    INVALIDATE_SYNCGX = 0,
     INVALIDATE_TEX = (1 << 0),
     INVALIDATE_TLUT = (1 << 1),
     INVALIDATE_TEV = (1 << 2),

@@ -26,9 +26,9 @@ public:
 
 public:
     PostEffectBlurGather();
-    virtual ~PostEffectBlurGather() {} // at 0x8
-    virtual void reset();              // at 0x14
-    virtual void preDraw();            // at 0x18
+    virtual ~PostEffectBlurGather() {}  // at 0x8
+    virtual void reset();               // at 0x14
+    virtual void setMaterialInternal(); // at 0x18
 
     void setNumBlurGather(u8 num) {
 #line 58

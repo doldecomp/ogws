@@ -5,9 +5,9 @@
 #include <Pack/RPGraphics.h>
 #include <Pack/RPSingleton.h>
 
-#include <revolution/WPAD.h>
-
 #include <RVLFaceLib.h>
+
+#include <revolution/WPAD.h>
 
 //! @addtogroup rp_kernel
 //! @{
@@ -38,6 +38,9 @@ public:
         ClothesType_Favorite,        //!< Use the Mii's favorite color
     };
 
+    /**
+     * @brief Generation parameter type
+     */
     enum GenType {
         GenType_Player,  //!< Use the Mii associated with the info's player
         GenType_Friend,  //!< Pick a random friend Mii
@@ -45,13 +48,23 @@ public:
         GenType_None,    //!< Use the default location values
     };
 
+    /**
+     * @brief Mii icon camera view
+     */
     enum IconView {
         IconView_Front,   //!< Camera sees the front of the Mii
         IconView_Back,    //!< Camera sees the back of the Mii
         IconView_CloseUp, //!< Camera sees a close-up of the front of the Mii
     };
 
-    enum OfficialDBState {};
+    /**
+     * @brief Official DB Mii state
+     */
+    enum OfficialDBState {
+        OfficialDBState_Unused,   //!< Database index is unused
+        OfficialDBState_Valid,    //!< Database index holds a valid Mii
+        OfficialDBState_Favorite, //!< Database index holds a favorite Mii
+    };
 
 public:
     /**

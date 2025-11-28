@@ -31,6 +31,8 @@
 #include <Pack/RPKernel/RPSysLytWindow.h>
 #include <Pack/RPKernel/RPSysMessage.h>
 #include <Pack/RPKernel/RPSysMiddleDB.h>
+#include <Pack/RPKernel/RPSysMiddleDBGenInfo.h>
+#include <Pack/RPKernel/RPSysOfficialDB.h>
 #include <Pack/RPKernel/RPSysTagProcessor.h>
 #include <Pack/RPKernel/RPSysTextWriter.h>
 #include <Pack/RPKernel/RPSysWideTextWriter.h>
