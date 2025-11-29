@@ -7,6 +7,11 @@ mw_comment_version: 14 # GC 3.0a5 linker
 quick_analysis: true
 
 block_relocations:
-# OSInit
-- source: 0x800EC914
-- source: 0x800EC98C
+  # OSInit
+  - source: 0x800EC914
+  - source: 0x800EC98C
+
+extract:
+  - symbol: sStaticSoundArchive__14RPSndStaticMgr
+    binary: rp_Static_sound.brsar
+    header: Pack/RPAudio/rp_Static_sound.brsar.inc
