@@ -1069,15 +1069,20 @@ config.libs = [
             Object(Matching, "RVLFaceLib/RFL_Format.c"),
         ],
     },
-    # {
-    #     "lib": "homebuttonMiniLib",
-    #     "mw_version": config.linker_version,
-    #     "cflags": cflags_hbm,
-    #     "progress_category": "hbm", # str | List[str]
-    #     "objects": [
-    #         Object(Matching, "homebuttonMiniLib/HBMBase.cpp"),
-    #     ],
-    # },
+    {
+        "lib": "homebuttonMiniLib",
+        "mw_version": config.linker_version,
+        "cflags": cflags_hbm,
+        "progress_category": "hbm", # str | List[str]
+        "objects": [
+            Object(NonMatching, "homebuttonMiniLib/HBMBase.cpp"),
+            Object(NonMatching, "homebuttonMiniLib/HBMAnmController.cpp"),
+            Object(NonMatching, "homebuttonMiniLib/HBMFrameController.cpp"),
+            Object(NonMatching, "homebuttonMiniLib/HBMGUIManager.cpp"),
+            Object(NonMatching, "homebuttonMiniLib/HBMController.cpp"),
+            Object(NonMatching, "homebuttonMiniLib/HBMRemoteSpk.cpp"),
+        ],
+    },
     {
         "lib": "RP",
         "mw_version": config.linker_version,
@@ -1241,8 +1246,9 @@ def link_order_callback(module_id: int, objects: List[str]) -> List[str]:
 config.progress_categories = [
     ProgressCategory("nw4r", "NW4R"),
     ProgressCategory("egg", "EGG"),
-    ProgressCategory("sdk", "SDK"),
+    ProgressCategory("sdk", "RVL SDK"),
     ProgressCategory("rfl", "RVLFaceLib"),
+    ProgressCategory("hbm", "homeButtonMiniLib"),
     
     ProgressCategory("kernel", "RPKernel"),
     ProgressCategory("system", "RPSystem"),
