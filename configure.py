@@ -239,7 +239,7 @@ cflags_base = [
     "-str reuse",
     "-i include",
     "-i include/MSL",
-    "-ir include/MSL",
+    "-i include/MSL/internal",
     f"-i build/{config.version}/include",
     f"-DBUILD_VERSION={version_num}",
     f"-DVERSION_{config.version}",
@@ -298,7 +298,7 @@ cflags_libnw4r_ut = [
     "-enc SJIS",
     "-fp_contract off",
     "-ipa file",
-    "-ir include/nw4r",
+    "-i include/nw4r",
 ]
 
 # NW4R effect library flags
@@ -308,7 +308,7 @@ cflags_libnw4r_ef = [
     "-enc SJIS",
     "-fp_contract off",
     "-ipa file",
-    "-ir include/nw4r",
+    "-i include/nw4r",
 ]
 
 # NW4R math library flags
@@ -318,7 +318,7 @@ cflags_libnw4r_math = [
     "-enc SJIS",
     "-fp_contract off",
     "-ipa file",
-    "-ir include/nw4r",
+    "-i include/nw4r",
 ]
 
 # NW4R sound library flags
@@ -328,7 +328,7 @@ cflags_libnw4r_snd = [
     "-enc SJIS",
     "-fp_contract off",
     "-ipa file",
-    "-ir include/nw4r",
+    "-i include/nw4r",
 ]
 
 # NW4R 3D graphics library flags
@@ -338,7 +338,7 @@ cflags_libnw4r_g3d = [
     "-enc SJIS",
     "-fp_contract off",
     "-ipa file",
-    "-ir include/nw4r",
+    "-i include/nw4r",
 ]
 
 # NW4R layout library flags
@@ -348,7 +348,7 @@ cflags_libnw4r_lyt = [
     "-enc SJIS",
     "-fp_contract off",
     "-ipa file",
-    "-ir include/nw4r",
+    "-i include/nw4r",
 ]
 
 # NW4R RFL extension flags
@@ -359,7 +359,7 @@ cflags_libnw4r_g3d_scnrfl = [
     "-fp_contract on",
     "-use_lmw_stmw on",
     "-inline deferred",
-    "-ir include/nw4r",
+    "-i include/nw4r",
 ]
 
 # EGG flags
@@ -369,8 +369,8 @@ cflags_egg = [
     "-enc SJIS",
     "-use_lmw_stmw on",
     "-str reuse,pool,readonly",
-    "-ir include/nw4r",
-    "-ir include/egg",
+    "-i include/nw4r",
+    "-ir include/egg", # TODO(kiwi) remove after refactor
 ]
 
 # RVL SDK flags
@@ -390,6 +390,16 @@ cflags_rfl = [
     "-ipa file",
 ]
 
+# homeButtonMini flags
+cflags_hbm = [
+    *cflags_base,
+    *cflags_pedantic,
+    "-enc SJIS",
+    "-fp_contract off",
+    "-ipa file",
+    "-i include/nw4r",
+    "-i include/homeButtonMini",
+]
 
 # RP flags
 cflags_rp = [
@@ -401,9 +411,9 @@ cflags_rp = [
     "-fp_contract on",
     "-use_lmw_stmw on",
     "-str reuse,pool,readonly",
-    "-ir include/nw4r",
-    "-ir include/egg",
-    "-ir include/Pack",
+    "-i include/nw4r",
+    "-ir include/egg", # TODO(kiwi) remove after refactor
+    "-i include/Pack",
 ]
 
 config.linker_version = "GC/3.0a5.2"
@@ -1059,6 +1069,15 @@ config.libs = [
             Object(Matching, "RVLFaceLib/RFL_Format.c"),
         ],
     },
+    # {
+    #     "lib": "homebuttonMiniLib",
+    #     "mw_version": config.linker_version,
+    #     "cflags": cflags_hbm,
+    #     "progress_category": "hbm", # str | List[str]
+    #     "objects": [
+    #         Object(Matching, "homebuttonMiniLib/HBMBase.cpp"),
+    #     ],
+    # },
     {
         "lib": "RP",
         "mw_version": config.linker_version,

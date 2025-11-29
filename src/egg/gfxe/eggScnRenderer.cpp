@@ -6,7 +6,7 @@
 #include "eggDrawPathHDR.h"
 #include "eggDrawPathBloom.h"
 #include "eggDrawPathDOF.h"
-#include "g3d_scnroot.h"
+#include <nw4r/g3d.h>
 
 namespace EGG
 {

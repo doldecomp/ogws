@@ -9,7 +9,7 @@
 #include "eggScreen.h"
 #include "eggShadowTextureManager.h"
 #include "eggStateGX.h"
-#include "g3d_scnroot.h"
+#include <nw4r/g3d.h>
 
 namespace EGG {
 using namespace nw4r;

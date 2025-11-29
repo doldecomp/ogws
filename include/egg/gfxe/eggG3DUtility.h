@@ -1,12 +1,13 @@
 #ifndef EGG_GFXE_G3D_UTILITY_H
 #define EGG_GFXE_G3D_UTILITY_H
-#include "eggAssert.h"
-#include "g3d_resmat.h"
-#include "g3d_scnmdl.h"
-#include "types_egg.h"
-#include "types_nw4r.h"
+#include <egg/prim.h>
+#include <nw4r/g3d.h>
+#include <nw4r/math.h>
+
 
 namespace EGG {
+
+class Heap;
 
 class G3DUtility {
 public:

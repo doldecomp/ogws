@@ -3,6 +3,8 @@
 #include <nw4r/types_nw4r.h>
 
 #include <nw4r/ef/ef_drawstrategy.h>
+#include <nw4r/ef/ef_particle.h>
+#include <nw4r/ef/ef_particlemanager.h>
 #include <nw4r/ef/ef_types.h>
 
 #include <nw4r/math.h>
@@ -11,12 +13,14 @@
 
 #include <limits>
 
+
 namespace nw4r {
 namespace ef {
 
 // Forward declarations
 class Particle;
 class ParticleManager;
+struct EmitterDrawSetting;
 struct TextureData;
 
 class DrawStrategyImpl : public DrawStrategy {

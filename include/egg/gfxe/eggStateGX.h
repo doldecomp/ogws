@@ -1,7 +1,6 @@
 #ifndef EGG_GFXE_STATE_GX_H
 #define EGG_GFXE_STATE_GX_H
-#include "g3d_tmem.h"
-#include "types_egg.h"
+#include <nw4r/g3d.h>
 
 #include <revolution/GX.h>
 #include <revolution/MTX.h>
