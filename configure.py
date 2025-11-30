@@ -394,7 +394,10 @@ cflags_rfl = [
 cflags_hbm = [
     *cflags_base,
     *cflags_pedantic,
+    "-sdata 0",
+    "-sdata2 0",
     "-enc SJIS",
+    "-lang c++",
     "-fp_contract off",
     "-ipa file",
     "-i include/nw4r",
@@ -1075,12 +1078,12 @@ config.libs = [
         "cflags": cflags_hbm,
         "progress_category": "hbm", # str | List[str]
         "objects": [
-            Object(NonMatching, "homebuttonMiniLib/HBMBase.cpp"),
-            Object(NonMatching, "homebuttonMiniLib/HBMAnmController.cpp"),
-            Object(NonMatching, "homebuttonMiniLib/HBMFrameController.cpp"),
-            Object(NonMatching, "homebuttonMiniLib/HBMGUIManager.cpp"),
-            Object(NonMatching, "homebuttonMiniLib/HBMController.cpp"),
-            Object(NonMatching, "homebuttonMiniLib/HBMRemoteSpk.cpp"),
+            Object(Matching, "homebuttonMiniLib/HBMBase.cpp"),
+            Object(Matching, "homebuttonMiniLib/HBMAnmController.cpp"),
+            Object(Matching, "homebuttonMiniLib/HBMFrameController.cpp"),
+            Object(Matching, "homebuttonMiniLib/HBMGUIManager.cpp"),
+            Object(Matching, "homebuttonMiniLib/HBMController.cpp"),
+            Object(Matching, "homebuttonMiniLib/HBMRemoteSpk.cpp"),
         ],
     },
     {
