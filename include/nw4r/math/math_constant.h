@@ -2,8 +2,6 @@
 #define NW4R_MATH_CONSTANT_H
 #include <nw4r/types_nw4r.h>
 
-#include <cmath>
-
 /******************************************************************************
  *
  * Mathematical constants

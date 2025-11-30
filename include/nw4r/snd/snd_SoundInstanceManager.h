@@ -3,10 +3,10 @@
 #include <nw4r/types_nw4r.h>
 
 #include <nw4r/snd/snd_InstancePool.h>
-
 #include <nw4r/ut.h>
 
 #include <revolution/OS.h>
+
 
 namespace nw4r {
 namespace snd {
@@ -87,7 +87,7 @@ public:
     }
 
     void InsertPriorityList(T* pSound, int priority) {
-        TPrioList::Iterator it = mPriorityList.GetBeginIter();
+        typename TPrioList::Iterator it = mPriorityList.GetBeginIter();
 
         for (; it != mPriorityList.GetEndIter(); ++it) {
             if (priority < it->CalcCurrentPlayerPriority()) {

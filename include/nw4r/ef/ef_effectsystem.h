@@ -4,18 +4,18 @@
 
 #include <nw4r/ef/ef_creationqueue.h>
 #include <nw4r/ef/ef_random.h>
-
 #include <nw4r/math.h>
 
 namespace nw4r {
 namespace ef {
 
 // Forward declarations
-class MemoryManagerBase;
+class ActivityList;
+class DrawInfo;
 class DrawOrderBase;
 class DrawStrategyBuilder;
 class EmitFormBuilder;
-class ActivityList;
+class MemoryManagerBase;
 
 class EffectSystem {
 private:
