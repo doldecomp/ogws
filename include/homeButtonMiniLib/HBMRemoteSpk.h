@@ -36,14 +36,14 @@ public:
     static void SetInstance(RemoteSpk* pThis);
     static RemoteSpk* GetInstance();
 
-    RemoteSpk(void* spkSeBuf);
+    RemoteSpk(void* pSpkSeBuf);
     virtual ~RemoteSpk(); // at 0x8
 
     bool isPlayReady(s32 chan) const;
     bool isPlaying(s32 chan) const;
     bool isPlayingId(s32 chan, int seId) const;
 
-    void GetPCMFromSeID(int in_ID, s16*& out_wave, int& out_length);
+    void GetPCMFromSeID(int id, s16*& rpPcm, int& rLength);
     void ClearPcm();
     void Start();
     void Stop();
@@ -51,13 +51,13 @@ public:
     void Play(s32 chan, int seID, s8 vol);
 
 private:
-    static void UpdateSpeaker(OSAlarm* alarm, OSContext* context);
+    static void UpdateSpeaker(OSAlarm* pAlarm, OSContext* pContext);
 
     static void SpeakerOnCallback(s32 chan, s32 result);
-    static void DelaySpeakerOnCallback(OSAlarm* alarm, OSContext* context);
+    static void DelaySpeakerOnCallback(OSAlarm* pAlarm, OSContext* pContext);
 
     static void SpeakerPlayCallback(s32 chan, s32 result);
-    static void DelaySpeakerPlayCallback(OSAlarm* alarm, OSContext* context);
+    static void DelaySpeakerPlayCallback(OSAlarm* pAlarm, OSContext* pContext);
 };
 
 } // namespace homebutton

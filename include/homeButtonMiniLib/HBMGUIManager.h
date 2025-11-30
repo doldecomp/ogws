@@ -25,12 +25,12 @@ class PaneComponent;
 class Interface {
 public:
     Interface() {}
-    virtual void create() {}             // at 0x8
-    virtual void init() {}               // at 0xC
-    virtual void calc() {}               // at 0x10
-    virtual void draw(Mtx& /* mtx */) {} // at 0x14
-    virtual void draw() {}               // at 0x18
-    virtual ~Interface() {}              // at 0x1C
+    virtual void create() {}              // at 0x8
+    virtual void init() {}                // at 0xC
+    virtual void calc() {}                // at 0x10
+    virtual void draw(Mtx& /* rMtx */) {} // at 0x14
+    virtual void draw() {}                // at 0x18
+    virtual ~Interface() {}               // at 0x1C
 };
 
 /******************************************************************************
@@ -51,7 +51,7 @@ class EventHandler {
 public:
     EventHandler() {}
 
-    virtual void onEvent(u32 /* uID */, u32 /* uEvent */, void* /* pData */) //
+    virtual void onEvent(u32 /* id */, u32 /* event */, void* /* pData */) //
     {} // at 0x8
 
     virtual void setManager(Manager* pManager) { // at 0xC
@@ -69,13 +69,14 @@ protected:
  ******************************************************************************/
 class Component : public Interface {
 public:
-    Component(u32 uID)
+    Component(u32 id)
         : mDragStartPos(),
           mbDragging(),
           muDraggingButton(),
-          muID(uID),
+          muID(id),
           mbTriggerTarger(),
           mpManager() {
+
         init();
     }
 
@@ -102,25 +103,25 @@ public:
     virtual void offPoint() {}                 // at 0x30
     virtual void onDrag(f32, f32) {}           // at 0x34
     virtual void onMove(f32, f32) {}           // at 0x38
-    virtual void onTrig(u32 uFlag, Vec& vec) { // at 0x3C
-        if (uFlag & muDraggingButton) {
-            mDragStartPos = vec;
+    virtual void onTrig(u32 flag, Vec& rPos) { // at 0x3C
+        if (flag & muDraggingButton) {
+            mDragStartPos = rPos;
             mbDragging = true;
         }
     }
-    virtual void setDraggingButton(u32 uDraggingButton) { // at 0x40
-        muDraggingButton = uDraggingButton;
+    virtual void setDraggingButton(u32 draggingButton) { // at 0x40
+        muDraggingButton = draggingButton;
     }
     virtual bool update(int, const KPADStatus*, f32, f32, void*) { // at 0x44
         return false;
     }
-    virtual bool update(int i, f32 x, f32 y, u32 uTrigFlag, u32 uHoldFlag,
-                        u32 uReleaseFlag, void* pData); // at 0x48
-    virtual bool isTriggerTarger() {                    // at 0x4C
+    virtual bool update(int i, f32 x, f32 y, u32 trig, u32 hold, u32 release,
+                        void* pData); // at 0x48
+    virtual bool isTriggerTarger() {  // at 0x4C
         return mbTriggerTarger;
     }
-    virtual void setTriggerTarget(bool bTriggerTarget) { // at 0x50
-        mbTriggerTarger = bTriggerTarget;
+    virtual void setTriggerTarget(bool target) { // at 0x50
+        mbTriggerTarger = target;
     }
     virtual void setManager(Manager* pManager) { // at 0x54
         mpManager = pManager;
@@ -128,7 +129,7 @@ public:
     virtual bool isVisible() { // at 0x58
         return true;
     }
-    virtual bool contain(f32 x_, f32 y_) = 0; // at 0x5C
+    virtual bool contain(f32 x, f32 y) = 0; // at 0x5C
 
 protected:
     bool mabPointed[8];   // at 0x4
@@ -149,8 +150,8 @@ class Manager : public Interface {
 private:
     struct IDToComponent {
     public:
-        IDToComponent(u32 uID, Component* pComponent)
-            : muID(uID), mpComponent(pComponent) {}
+        IDToComponent(u32 id, Component* pComponent)
+            : muID(id), mpComponent(pComponent) {}
 
     public:
         u32 muID;                 // at 0x0
@@ -161,6 +162,7 @@ private:
 public:
     Manager(EventHandler* pEventHandler, MEMAllocator* pAllocator)
         : mpEventHandler(pEventHandler), mpAllocator(pAllocator) {
+
         if (mpEventHandler != NULL) {
             mpEventHandler->setManager(this);
         }
@@ -174,19 +176,19 @@ public:
     virtual ~Manager();  // at 0x1C
 
     virtual void addComponent(Component* pComponent);              // at 0x20
-    virtual Component* getComponent(u32 uID);                      // at 0x24
+    virtual Component* getComponent(u32 id);                       // at 0x24
     virtual bool update(int, const KPADStatus*, f32, f32, void*) { // at 0x28
         return false;
     }
-    virtual bool update(int i, f32 x, f32 y, u32 uTrigFlag, u32 uHoldFlag,
-                        u32 uReleaseFlag, void* pData);      // at 0x2C
-    virtual void onEvent(u32 uID, u32 uEvent, void* pData) { // at 0x30
+    virtual bool update(int i, f32 x, f32 y, u32 trig, u32 hold, u32 release,
+                        void* pData);                      // at 0x2C
+    virtual void onEvent(u32 id, u32 event, void* pData) { // at 0x30
         if (mpEventHandler != NULL) {
-            mpEventHandler->onEvent(uID, uEvent, pData);
+            mpEventHandler->onEvent(id, event, pData);
         }
     }
 
-    virtual void setAllComponentTriggerTarget(bool b);          // at 0x34
+    virtual void setAllComponentTriggerTarget(bool target);     // at 0x34
     virtual void setEventHandler(EventHandler* pEventHandler) { // at 0x38
         mpEventHandler = pEventHandler;
 
@@ -238,8 +240,9 @@ public:
     virtual void setDrawInfo(const nw4r::lyt::DrawInfo* pDrawInfo) { // at 0x48
         mpDrawInfo = pDrawInfo;
     }
-    virtual void setAllBoundingBoxComponentTriggerTarget(bool b); // at 0x4C
-    virtual void walkInChildren(nw4r::lyt::PaneList& rPaneList);  // at 0x50
+    virtual void
+    setAllBoundingBoxComponentTriggerTarget(bool target);        // at 0x4C
+    virtual void walkInChildren(nw4r::lyt::PaneList& rPaneList); // at 0x50
 
 private:
     static u32 suIDCounter;
@@ -257,12 +260,12 @@ private:
  ******************************************************************************/
 class PaneComponent : public Component {
 public:
-    PaneComponent(u32 uID) : Component(uID), mpPane() {}
+    PaneComponent(u32 id) : Component(id), mpPane() {}
     virtual void draw();        // at 0x18
     virtual ~PaneComponent() {} // at 0x1C
 
-    virtual bool isVisible();             // at 0x58
-    virtual bool contain(f32 x_, f32 y_); // at 0x5C
+    virtual bool isVisible();           // at 0x58
+    virtual bool contain(f32 x, f32 y); // at 0x5C
 
     virtual void setPane(nw4r::lyt::Pane* pPane) { // at 0x60
         mpPane = pPane;

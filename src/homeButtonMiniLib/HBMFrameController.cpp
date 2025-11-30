@@ -2,11 +2,10 @@
 
 namespace homebutton {
 
-void FrameController::init(int anm_type, f32 max_frame, f32 min_frame,
-                           f32 delta) {
-    mAnmType = anm_type;
-    mMaxFrame = max_frame;
-    mMinFrame = min_frame;
+void FrameController::init(int anmType, f32 maxFrame, f32 minFrame, f32 delta) {
+    mAnmType = anmType;
+    mMaxFrame = maxFrame;
+    mMinFrame = minFrame;
 
     mFrameDelta = delta;
     mState = eState_Stopped;
@@ -44,8 +43,9 @@ void FrameController::calc() {
     }
 
     case eAnmType_Wrap: {
-        if ((mCurFrame += mFrameDelta) >= mMaxFrame)
+        if ((mCurFrame += mFrameDelta) >= mMaxFrame) {
             mCurFrame -= mMaxFrame - mMinFrame;
+        }
 
         break;
     }

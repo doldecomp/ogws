@@ -1,10 +1,5 @@
-/**
- * Modified from decompilation by riidefi in WiiCore
- */
-
-#include <revolution/OS/OSError.h>
-
 #include <revolution/ARC.h>
+#include <revolution/OS/OSError.h>
 
 #include <ctype.h>
 

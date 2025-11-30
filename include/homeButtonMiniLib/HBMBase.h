@@ -11,6 +11,8 @@
 #include <revolution/AXFX.h>
 #include <revolution/WPAD.h>
 
+#define HBM_MAX_VOLUME 10
+
 namespace homebutton {
 
 // Forward declarations
@@ -29,7 +31,7 @@ public:
     HomeButtonEventHandler(homebutton::HomeButton* pHomeButton)
         : mpHomeButton(pHomeButton) {}
 
-    virtual void onEvent(u32 uID, u32 uEvent, void* pData); // at 0x8
+    virtual void onEvent(u32 ud, u32 event, void* pData); // at 0x8
 
     homebutton::HomeButton* getHomeButton() {
         return mpHomeButton;
@@ -45,6 +47,12 @@ private:
  *
  ******************************************************************************/
 class HomeButton {
+public:
+    enum eSyncType {
+        eSyncType_Start,
+        eSyncType_Stop,
+    };
+
 private:
     enum eSeq {
         eSeq_Normal,
@@ -93,11 +101,11 @@ private:
     };
 
 public:
-    static void createInstance(const HBMDataInfo* dataInfo);
+    static void createInstance(const HBMDataInfo* pDataInfo);
     static HomeButton* getInstance();
     static void deleteInstance();
 
-    HomeButton(const HBMDataInfo* dataInfo);
+    HomeButton(const HBMDataInfo* pDataInfo);
     ~HomeButton();
 
     const HBMDataInfo* getHBMDataInfo() {
@@ -159,7 +167,7 @@ public:
     void startTrigEvent(const char* pName);
 
     int findAnimator(int pane, int anm);
-    int findGroupAnimator(int pane, int anm);
+    int findGroupAnimator(int grPane, int grAnm);
 
     void callSimpleSyncCallback(s32 result, s32 num);
 
@@ -202,62 +210,62 @@ private:
     static HomeButton* spHomeButtonObj;
     static OSMutex sMutex;
 
-    eSeq mSequence;                                          // at 0x0
-    const HBMDataInfo* mpHBInfo;                             // at 0x4
-    int mButtonNum;                                          // at 0x8
-    int mAnmNum;                                             // at 0xC
-    int mState;                                              // at 0x10
-    int mSelectAnmNum;                                       // at 0x14
-    int mMsgCount;                                           // at 0x18
-    int mPaneCounter[14];                                    // at 0x1C
-    int mPadDrawTime[WPAD_MAX_CONTROLLERS];                  // at 0x54
-    int mForcusSEWaitTime;                                   // at 0x64
-    int mBar0AnmRev;                                         // at 0x68
-    int mBar1AnmRev;                                         // at 0x6C
-    int mBar0AnmRevHold;                                     // at 0x70
-    int mBar1AnmRevHold;                                     // at 0x74
-    int mGetPadInfoTime;                                     // at 0x78
-    bool mControllerFlag[WPAD_MAX_CONTROLLERS];              // at 0x7C
-    int mVolumeNum;                                          // at 0x80
-    bool mVibFlag;                                           // at 0x84
-    bool mControlFlag;                                       // at 0x85
-    bool mLetterFlag;                                        // at 0x86
-    bool mAdjustFlag;                                        // at 0x87
-    bool mReassignedFlag;                                    // at 0x88
-    bool mSimpleSyncFlag;                                    // at 0x89
-    bool mEndSimpleSyncFlag;                                 // at 0x8A
-    bool mInitFlag;                                          // at 0x8B
-    bool mForceSttInitProcFlag;                              // at 0x8C
-    bool mForceSttFadeInProcFlag;                            // at 0x8D
-    bool mEndInitSoundFlag;                                  // at 0x8E
-    bool mForceStopSyncFlag;                                 // at 0x8F
-    bool mForceEndMsgAnmFlag;                                // at 0x90
-    bool mStartBlackOutFlag;                                 // at 0x91
-    int mSoundRetryCnt;                                      // at 0x94
-    int mDialogFlag[4];                                      // at 0x98
-    char* mpLayoutName;                                      // at 0xA8
-    char* mpAnmName;                                         // at 0xAC
-    HBMSelectBtnNum mSelectBtnNum;                           // at 0xB0
-    wchar_t* mpText[7][6];                                   // at 0xBC
-    WPADInfo mWpadInfo[WPAD_MAX_CONTROLLERS];                // at 0x15C
-    WPADSyncDeviceCallback mSimpleSyncCallback;              // at 0x1BC
-    f32 mOnPaneVibFrame[WPAD_MAX_CONTROLLERS];               // at 0x1C0
-    f32 mOnPaneVibWaitFrame[WPAD_MAX_CONTROLLERS];           // at 0x1D0
-    int mWaitStopMotorCount;                                 // at 0x1E0
-    int mDisConnectCount;                                    // at 0x1E4
-    nw4r::lyt::Layout* mpLayout;                             // at 0x1E8
-    nw4r::lyt::Layout* mpCursorLayout[WPAD_MAX_CONTROLLERS]; // at 0x1EC
-    nw4r::lyt::ArcResourceAccessor* mpResAccessor;           // at 0x1FC
-    gui::PaneManager* mpPaneManager;                         // at 0x200
-    HomeButtonEventHandler* mpHomeButtonEventHandler;        // at 0x204
-    nw4r::lyt::DrawInfo mDrawInfo;                           // at 0x208
-    Controller* mpController[WPAD_MAX_CONTROLLERS];          // at 0x25C
-    RemoteSpk* mpRemoteSpk;                                  // at 0x26C
+    // TODO(kiwi) Document states
+    eSeq mSequence;                                            // at 0x0
+    const HBMDataInfo* mpHBInfo;                               // at 0x4
+    int mButtonNum;                                            // at 0x8
+    int mAnmNum;                                               // at 0xC
+    int mState;                                                // at 0x10
+    int mSelectAnmNum;                                         // at 0x14
+    int mMsgCount;                                             // at 0x18
+    int mPaneCounter[res::eBtn_Max + res::eFuncTouchPane_Max]; // at 0x1C
+    int mPadDrawTime[WPAD_MAX_CONTROLLERS];                    // at 0x54
+    int mForcusSEWaitTime;                                     // at 0x64
+    int mBar0AnmRev;                                           // at 0x68
+    int mBar1AnmRev;                                           // at 0x6C
+    int mBar0AnmRevHold;                                       // at 0x70
+    int mBar1AnmRevHold;                                       // at 0x74
+    int mGetPadInfoTime;                                       // at 0x78
+    bool mControllerFlag[WPAD_MAX_CONTROLLERS];                // at 0x7C
+    int mVolumeNum;                                            // at 0x80
+    bool mVibFlag;                                             // at 0x84
+    bool mControlFlag;                                         // at 0x85
+    bool mLetterFlag;                                          // at 0x86
+    bool mAdjustFlag;                                          // at 0x87
+    bool mReassignedFlag;                                      // at 0x88
+    bool mSimpleSyncFlag;                                      // at 0x89
+    bool mEndSimpleSyncFlag;                                   // at 0x8A
+    bool mInitFlag;                                            // at 0x8B
+    bool mForceSttInitProcFlag;                                // at 0x8C
+    bool mForceSttFadeInProcFlag;                              // at 0x8D
+    bool mEndInitSoundFlag;                                    // at 0x8E
+    bool mForceStopSyncFlag;                                   // at 0x8F
+    bool mForceEndMsgAnmFlag;                                  // at 0x90
+    bool mStartBlackOutFlag;                                   // at 0x91
+    int mSoundRetryCnt;                                        // at 0x94
+    int mDialogFlag[4];                                        // at 0x98
+    char* mpLayoutName;                                        // at 0xA8
+    char* mpAnmName;                                           // at 0xAC
+    HBMSelectBtnNum mSelectBtnNum;                             // at 0xB0
+    wchar_t* mpText[7][6];                                     // at 0xBC
+    WPADInfo mWpadInfo[WPAD_MAX_CONTROLLERS];                  // at 0x15C
+    WPADSyncDeviceCallback mSimpleSyncCallback;                // at 0x1BC
+    f32 mOnPaneVibFrame[WPAD_MAX_CONTROLLERS];                 // at 0x1C0
+    f32 mOnPaneVibWaitFrame[WPAD_MAX_CONTROLLERS];             // at 0x1D0
+    int mWaitStopMotorCount;                                   // at 0x1E0
+    int mDisConnectCount;                                      // at 0x1E4
+    nw4r::lyt::Layout* mpLayout;                               // at 0x1E8
+    nw4r::lyt::Layout* mpCursorLayout[res::eCursorLyt_Max];    // at 0x1EC
+    nw4r::lyt::ArcResourceAccessor* mpResAccessor;             // at 0x1FC
+    gui::PaneManager* mpPaneManager;                           // at 0x200
+    HomeButtonEventHandler* mpHomeButtonEventHandler;          // at 0x204
+    nw4r::lyt::DrawInfo mDrawInfo;                             // at 0x208
+    Controller* mpController[WPAD_MAX_CONTROLLERS];            // at 0x25C
+    RemoteSpk* mpRemoteSpk;                                    // at 0x26C
 
-    GroupAnmController* mpAnmController[res::eAnimator_Max];        // at 0x270
-    GroupAnmController* mpGroupAnmController[res::eGrAnimator_Max]; // at 0x2A0
-    GroupAnmController*
-        mpPairGroupAnmController[res::ePairGroup_Max]; // at 0x3C8
+    GroupAnmController* mpAnmController[res::eAnimator_Max];         // at 0x270
+    GroupAnmController* mpGroupAnmController[res::eGrAnimator_Max];  // at 0x2A0
+    GroupAnmController* mpPairGroupAnmController[res::ePairAnm_Max]; // at 0x3C8
 
     BlackFader mFader;                                   // at 0x404
     OSAlarm mAlarm[WPAD_MAX_CONTROLLERS];                // at 0x418
@@ -302,14 +310,14 @@ private:
 
     static const char* scBtnName[res::eBtn_Max];
     static const char* scTxtName[res::eTxt_Max];
-    static const char* scGrName[res::eGr_Max];
+    static const char* scGrName[res::eGroup_Max];
     static const char* scAnimName[res::eAnim_Max];
 
-    static const char* scPairGroupAnimName[res::ePairGroup_Max];
-    static const char* scPairGroupName[res::ePairGroup_Max];
+    static const char* scPairGroupAnimName[res::ePairAnm_Max];
+    static const char* scPairGroupName[res::ePairAnm_Max];
 
-    static const char* scGroupAnimName[res::eGroupAnim_Max];
-    static const char* scGroupName[res::eGroup_Max];
+    static const char* scGroupAnimName[res::eGrAnim_Max];
+    static const char* scGroupName[res::eGrPane_Max];
 
     static const char* scFuncPaneName[res::eFuncPane_Max];
     static const char* scFuncTouchPaneName[res::eFuncTouchPane_Max];

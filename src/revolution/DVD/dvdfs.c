@@ -1,7 +1,3 @@
-/**
- * Based on ARC decompilation by riidefi
- */
-
 #include <revolution/DVD.h>
 #include <revolution/OS.h>
 

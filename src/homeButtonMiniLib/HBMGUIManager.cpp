@@ -14,9 +14,7 @@ namespace gui {
 
 u32 PaneManager::suIDCounter = 0;
 
-static bool is_visible(nw4r::lyt::Pane* pPane);
-
-void drawLine_(f32 x0, f32 y0, f32 x1, f32 y1, f32 z, u8 uWidth,
+void drawLine_(f32 x0, f32 y0, f32 x1, f32 y1, f32 z, u8 width,
                GXColor& rColor) {
     static const f32 cubeScale = 1.0f;
 
@@ -29,7 +27,7 @@ void drawLine_(f32 x0, f32 y0, f32 x1, f32 y1, f32 z, u8 uWidth,
     GXSetCullMode(GX_CULL_NONE);
 
     GXSetNumChans(1);
-    GXSetChanCtrl(GX_COLOR0A0, false, GX_SRC_VTX, GX_SRC_VTX, GX_LIGHT_NULL,
+    GXSetChanCtrl(GX_COLOR0A0, GX_FALSE, GX_SRC_VTX, GX_SRC_VTX, GX_LIGHT_NULL,
                   GX_DF_NONE, GX_AF_NONE);
 
     GXSetNumTexGens(0);
@@ -42,7 +40,7 @@ void drawLine_(f32 x0, f32 y0, f32 x1, f32 y1, f32 z, u8 uWidth,
     PSMTXTrans(modelMtx, 0.0f, 0.0f, 0.0f);
     GXLoadPosMtxImm(modelMtx, GX_PNMTX0);
 
-    GXSetLineWidth(uWidth, 0);
+    GXSetLineWidth(width, 0);
 
     GXBegin(GX_LINES, GX_VTXFMT0, 2);
     {
@@ -55,10 +53,9 @@ void drawLine_(f32 x0, f32 y0, f32 x1, f32 y1, f32 z, u8 uWidth,
     GXEnd();
 }
 
-bool Component::update(int i, f32 x, f32 y, u32 /* uTrigFlag */,
-                       u32 /* uHoldFlag */, u32 /* uReleaseFlag */,
-                       void* pData) {
-    bool bTouched = false;
+bool Component::update(int i, f32 x, f32 y, u32 /* trig */, u32 /* hold */,
+                       u32 /* release */, void* pData) {
+    bool touch = false;
 
     if (isVisible()) {
         if (contain(x, y)) {
@@ -71,7 +68,7 @@ bool Component::update(int i, f32 x, f32 y, u32 /* uTrigFlag */,
                 mpManager->onEvent(getID(), HBM_EVENT_ON_POINT, pData);
             }
 
-            bTouched = true;
+            touch = true;
         } else {
             if (isPointed(i)) {
                 setPointed(i, false);
@@ -81,184 +78,182 @@ bool Component::update(int i, f32 x, f32 y, u32 /* uTrigFlag */,
         }
     }
 
-    return bTouched;
+    return touch;
 }
 
 Manager::~Manager() {
-    void* p = nw4r::ut::List_GetFirst(&mIDToComponent);
+    void* pIt = nw4r::ut::List_GetFirst(&mIDToComponent);
 
-    for (; p; p = nw4r::ut::List_GetFirst(&mIDToComponent)) {
-        nw4r::ut::List_Remove(&mIDToComponent, p);
+    for (; pIt != NULL; pIt = nw4r::ut::List_GetFirst(&mIDToComponent)) {
+        nw4r::ut::List_Remove(&mIDToComponent, pIt);
 
         if (mpAllocator != NULL) {
-            MEMFreeToAllocator(mpAllocator, p);
+            MEMFreeToAllocator(mpAllocator, pIt);
         } else {
-            delete static_cast<IDToComponent*>(p);
+            delete static_cast<IDToComponent*>(pIt);
         }
     }
 }
 
 void Manager::init() {
     for (u32 i = 0; i < nw4r::ut::List_GetSize(&mIDToComponent); i++) {
-        const IDToComponent* p = static_cast<const IDToComponent*>(
+        const IDToComponent* pIt = static_cast<const IDToComponent*>(
             nw4r::ut::List_GetNthConst(&mIDToComponent, i));
 
-        p->mpComponent->init();
+        pIt->mpComponent->init();
     }
 }
 
 void Manager::addComponent(Component* pComponent) {
-    u32 uID = pComponent->getID();
+    u32 id = pComponent->getID();
     pComponent->setManager(this);
 
     if (mpAllocator != NULL) {
         void* p = MEMAllocFromAllocator(mpAllocator, sizeof(IDToComponent));
         nw4r::ut::List_Append(&mIDToComponent,
-                              new (p) IDToComponent(uID, pComponent));
+                              new (p) IDToComponent(id, pComponent));
     } else {
         nw4r::ut::List_Append(&mIDToComponent,
-                              new IDToComponent(uID, pComponent));
+                              new IDToComponent(id, pComponent));
     }
 }
 
-Component* Manager::getComponent(u32 uID) {
+Component* Manager::getComponent(u32 id) {
     const IDToComponent* p = static_cast<const IDToComponent*>(
-        nw4r::ut::List_GetNthConst(&mIDToComponent, uID));
+        nw4r::ut::List_GetNthConst(&mIDToComponent, id));
 
     return p->mpComponent;
 }
 
-bool Manager::update(int i, f32 x, f32 y, u32 uTrigFlag, u32 uHoldFlag,
-                     u32 uReleaseFlag, void* pData) {
-    bool bTouched = false;
-    Component* pLastContainedComponent = NULL;
+bool Manager::update(int i, f32 x, f32 y, u32 trig, u32 hold, u32 release,
+                     void* pData) {
+    bool touch = false;
+    Component* pLastContained = NULL;
 
     for (u32 n = 0; n < nw4r::ut::List_GetSize(&mIDToComponent); n++) {
-        const IDToComponent* p = static_cast<const IDToComponent*>(
+        const IDToComponent* pIt = static_cast<const IDToComponent*>(
             nw4r::ut::List_GetNthConst(&mIDToComponent, n));
 
-        if (p->mpComponent->update(i, x, y, uTrigFlag, uHoldFlag, uReleaseFlag,
-                                   pData)) {
-            if (p->mpComponent->isTriggerTarger())
-                pLastContainedComponent = p->mpComponent;
+        if (pIt->mpComponent->update(i, x, y, trig, hold, release, pData)) {
+            if (pIt->mpComponent->isTriggerTarger()) {
+                pLastContained = pIt->mpComponent;
+            }
 
-            bTouched = true;
+            touch = true;
         }
     }
 
-    if (pLastContainedComponent) {
-        if (uTrigFlag) {
+    if (pLastContained != NULL) {
+        if (trig) {
             Vec pos;
-            pLastContainedComponent->onTrig(uTrigFlag, pos);
+            pLastContained->onTrig(trig, pos);
 
-            onEvent(pLastContainedComponent->getID(), HBM_EVENT_TRIG, pData);
+            onEvent(pLastContained->getID(), HBM_EVENT_TRIG, pData);
         }
 
-        if (uReleaseFlag) {
+        if (release) {
             Vec pos;
-            pLastContainedComponent->onTrig(uReleaseFlag, pos);
+            pLastContained->onTrig(release, pos);
 
-            onEvent(pLastContainedComponent->getID(), HBM_EVENT_RELEASE, pData);
+            onEvent(pLastContained->getID(), HBM_EVENT_RELEASE, pData);
         }
     }
 
-    return bTouched;
+    return touch;
 }
 
 void Manager::calc() {
     for (u32 i = 0; i < nw4r::ut::List_GetSize(&mIDToComponent); i++) {
-        const IDToComponent* p = static_cast<const IDToComponent*>(
+        const IDToComponent* pIt = static_cast<const IDToComponent*>(
             nw4r::ut::List_GetNthConst(&mIDToComponent, i));
 
-        p->mpComponent->calc();
+        pIt->mpComponent->calc();
     }
 }
 
 void Manager::draw() {
     for (u32 i = 0; i < nw4r::ut::List_GetSize(&mIDToComponent); i++) {
-        const IDToComponent* p = static_cast<const IDToComponent*>(
+        const IDToComponent* pIt = static_cast<const IDToComponent*>(
             nw4r::ut::List_GetNthConst(&mIDToComponent, i));
 
-        p->mpComponent->draw();
+        pIt->mpComponent->draw();
     }
 }
 
-void Manager::setAllComponentTriggerTarget(bool b) {
+void Manager::setAllComponentTriggerTarget(bool target) {
     for (u32 i = 0; i < nw4r::ut::List_GetSize(&mIDToComponent); i++) {
-        const IDToComponent* p = static_cast<const IDToComponent*>(
+        const IDToComponent* pIt = static_cast<const IDToComponent*>(
             nw4r::ut::List_GetNthConst(&mIDToComponent, i));
 
-        p->mpComponent->setTriggerTarget(b);
+        pIt->mpComponent->setTriggerTarget(target);
     }
 }
 
 PaneManager::~PaneManager() {
-    PaneToComponent* pPaneToComponent = static_cast<PaneToComponent*>(
+    PaneToComponent* pIt = static_cast<PaneToComponent*>(
         nw4r::ut::List_GetFirst(&mPaneToComponent));
 
-    for (; pPaneToComponent; pPaneToComponent = static_cast<PaneToComponent*>(
-                                 nw4r::ut::List_GetFirst(&mPaneToComponent))) {
-        nw4r::ut::List_Remove(&mPaneToComponent, pPaneToComponent);
+    for (; pIt != NULL; pIt = static_cast<PaneToComponent*>(
+                            nw4r::ut::List_GetFirst(&mPaneToComponent))) {
+
+        nw4r::ut::List_Remove(&mPaneToComponent, pIt);
 
         if (mpAllocator != NULL) {
-            MEMFreeToAllocator(mpAllocator, pPaneToComponent->mpComponent);
-            MEMFreeToAllocator(mpAllocator, pPaneToComponent);
+            MEMFreeToAllocator(mpAllocator, pIt->mpComponent);
+            MEMFreeToAllocator(mpAllocator, pIt);
         } else {
-            delete pPaneToComponent->mpComponent;
-            delete pPaneToComponent;
+            delete pIt->mpComponent;
+            delete pIt;
         }
     }
 }
 
 void PaneManager::createLayoutScene(const nw4r::lyt::Layout& rLayout) {
     suIDCounter = 0;
-
-    nw4r::lyt::Pane* pRootPane = rLayout.GetRootPane();
-
-    walkInChildren(pRootPane->GetChildList());
+    walkInChildren(rLayout.GetRootPane()->GetChildList());
 }
 
 void PaneManager::walkInChildren(nw4r::lyt::PaneList& rPaneList) {
     NW4R_UT_LINKLIST_FOREACH(it, rPaneList, {
-        PaneComponent* pPaneComponent = NULL;
-        PaneToComponent* pPaneToComponent = NULL;
+        PaneComponent* pComponent = NULL;
+        PaneToComponent* pLink = NULL;
 
         if (mpAllocator != NULL) {
-            void* p1 = MEMAllocFromAllocator(mpAllocator, sizeof(PaneComponent));
-            void* p2 = MEMAllocFromAllocator(mpAllocator, sizeof(PaneToComponent));
+            void* pBufComponent = MEMAllocFromAllocator(mpAllocator, sizeof(PaneComponent));
+            void* pBufLink = MEMAllocFromAllocator(mpAllocator, sizeof(PaneToComponent));
 
-            pPaneComponent = new (p1) PaneComponent(suIDCounter);
-            pPaneToComponent = new (p2) PaneToComponent(&(*it), pPaneComponent);
+            pComponent = new (pBufComponent) PaneComponent(suIDCounter);
+            pLink = new (pBufLink) PaneToComponent(&*it, pComponent);
         } else {
-            pPaneComponent = new PaneComponent(suIDCounter);
-            pPaneToComponent = new PaneToComponent(&(*it), pPaneComponent);
+            pComponent = new PaneComponent(suIDCounter);
+            pLink = new PaneToComponent(&*it, pComponent);
         }
 
-        nw4r::ut::List_Append(&mPaneToComponent, pPaneToComponent);
+        nw4r::ut::List_Append(&mPaneToComponent, pLink);
         suIDCounter++;
 
-        pPaneComponent->setPane(&(*it));
+        pComponent->setPane(&*it);
 
-        if (nw4r::ut::DynamicCast<nw4r::lyt::Picture*>(&(*it)) != NULL) {
-            pPaneComponent->setTriggerTarget(true);
+        if (nw4r::ut::DynamicCast<nw4r::lyt::Picture*>(&*it) != NULL) {
+            pComponent->setTriggerTarget(true);
         }
 
-        if (nw4r::ut::DynamicCast<nw4r::lyt::Window*>(&(*it)) != NULL) {
-            pPaneComponent->setTriggerTarget(true);
+        if (nw4r::ut::DynamicCast<nw4r::lyt::Window*>(&*it) != NULL) {
+            pComponent->setTriggerTarget(true);
         }
 
-        addComponent(pPaneComponent);
+        addComponent(pComponent);
         walkInChildren(it->GetChildList());
     });
 }
 
 PaneComponent* PaneManager::getPaneComponentByPane(nw4r::lyt::Pane* pPane) {
     for (u32 i = 0; i < nw4r::ut::List_GetSize(&mIDToComponent); i++) {
-        PaneToComponent* p = static_cast<PaneToComponent*>(
+        PaneToComponent* pIt = static_cast<PaneToComponent*>(
             nw4r::ut::List_GetNth(&mPaneToComponent, i));
 
-        if (p->mpPane == pPane) {
-            return p->mpComponent;
+        if (pIt->mpPane == pPane) {
+            return pIt->mpComponent;
         }
     }
 
@@ -268,20 +263,20 @@ PaneComponent* PaneManager::getPaneComponentByPane(nw4r::lyt::Pane* pPane) {
 #pragma push
 #pragma opt_propagation off // ???
 
-void PaneManager::setAllBoundingBoxComponentTriggerTarget(bool b) {
+void PaneManager::setAllBoundingBoxComponentTriggerTarget(bool target) {
     for (u32 i = 0; i < nw4r::ut::List_GetSize(&mIDToComponent); i++) {
-        PaneToComponent* p = static_cast<PaneToComponent*>(
+        PaneToComponent* pIt = static_cast<PaneToComponent*>(
             nw4r::ut::List_GetNth(&mPaneToComponent, i));
 
-        if (nw4r::ut::DynamicCast<nw4r::lyt::Bounding*>(p->mpPane) != NULL) {
-            p->mpComponent->setTriggerTarget(b);
+        if (nw4r::ut::DynamicCast<nw4r::lyt::Bounding*>(pIt->mpPane) != NULL) {
+            pIt->mpComponent->setTriggerTarget(target);
         }
     }
 }
 
 #pragma pop
 
-bool PaneComponent::contain(f32 x_, f32 y_) {
+bool PaneComponent::contain(f32 x, f32 y) {
     if (mpManager == NULL) {
         return false;
     }
@@ -297,16 +292,16 @@ bool PaneComponent::contain(f32 x_, f32 y_) {
     PSMTXInverse(mpPane->GetGlobalMtx(), invGlbMtx);
 
     nw4r::math::VEC3 lclPos;
-    PSMTXMultVec(invGlbMtx, nw4r::math::VEC3(x_, y_, 0.0f), lclPos);
+    PSMTXMultVec(invGlbMtx, nw4r::math::VEC3(x, y, 0.0f), lclPos);
 
     nw4r::ut::Rect rect = mpPane->GetPaneRect(*pDrawInfo);
 
     if (rect.left <= lclPos.x && lclPos.x <= rect.right &&
         rect.bottom <= lclPos.y && lclPos.y <= rect.top) {
         return true;
-    } else {
-        return false;
     }
+
+    return false;
 }
 
 void PaneComponent::draw() {
@@ -321,8 +316,8 @@ void PaneComponent::draw() {
     nw4r::lyt::Size size = mpPane->GetSize();
     const nw4r::math::MTX34& gmtx = mpPane->GetGlobalMtx();
 
-    f32 x = gmtx.mtx[0][3];
-    f32 y = gmtx.mtx[1][3];
+    f32 x = gmtx._03;
+    f32 y = gmtx._13;
 
     GXColor color = {255, 0, 0, 255}; // red
 

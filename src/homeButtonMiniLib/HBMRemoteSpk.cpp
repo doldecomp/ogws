@@ -9,7 +9,6 @@
 
 #include <cstring>
 
-
 namespace homebutton {
 
 RemoteSpk* RemoteSpk::spInstance = NULL;
@@ -22,23 +21,23 @@ RemoteSpk* RemoteSpk::GetInstance() {
     return spInstance;
 }
 
-void RemoteSpk::GetPCMFromSeID(int in_ID, s16*& out_wave, int& out_length) {
+void RemoteSpk::GetPCMFromSeID(int id, s16*& rpPcm, int& rLength) {
     ARCFileInfo af;
-    ARCFastOpen(&handle, in_ID, &af);
+    ARCFastOpen(&handle, id, &af);
 
-    out_wave = static_cast<s16*>(ARCGetStartAddrInMem(&af));
-    out_length = ARCGetLength(&af);
+    rpPcm = static_cast<s16*>(ARCGetStartAddrInMem(&af));
+    rLength = ARCGetLength(&af);
 
     ARCClose(&af);
 }
 
-static bool MakeVolumeData(const s16* src, s16* dst, int vol, u32 size) {
+static bool MakeVolumeData(const s16* pSrc, s16* pDst, int vol, u32 size) {
     u32 enc_size = size <= nw4r::snd::RemoteSpeaker::SAMPLES_PER_AUDIO_PACKET
                        ? size
                        : nw4r::snd::RemoteSpeaker::SAMPLES_PER_AUDIO_PACKET;
 
     for (int i = 0; i < enc_size; i++) {
-        *dst++ = static_cast<s16>(*src++ * vol / 10);
+        *pDst++ = static_cast<s16>(*pSrc++ * vol / 10);
     }
 
     if (size > nw4r::snd::RemoteSpeaker::SAMPLES_PER_AUDIO_PACKET) {
@@ -48,13 +47,14 @@ static bool MakeVolumeData(const s16* src, s16* dst, int vol, u32 size) {
     u32 zero_size = nw4r::snd::RemoteSpeaker::SAMPLES_PER_AUDIO_PACKET - size;
 
     for (int i = 0; i < zero_size; i++) {
-        *dst++ = 0;
+        *pDst++ = 0;
     }
 
     return true;
 }
 
-void RemoteSpk::UpdateSpeaker(OSAlarm* /* alarm */, OSContext* /* context */) {
+void RemoteSpk::UpdateSpeaker(OSAlarm* /* pAlarm */,
+                              OSContext* /* pContext */) {
     s16 pcmBuffer[nw4r::snd::RemoteSpeaker::SAMPLES_PER_AUDIO_PACKET];
     u8 adpcmBuffer[nw4r::snd::RemoteSpeaker::SAMPLES_PER_ENCODED_PACKET];
 
@@ -62,37 +62,37 @@ void RemoteSpk::UpdateSpeaker(OSAlarm* /* alarm */, OSContext* /* context */) {
         return;
     }
 
-    ChanInfo* pinfo = GetInstance()->info;
+    ChanInfo* pInfo = GetInstance()->info;
 
-    for (int i = 0; i < WPAD_MAX_CONTROLLERS; i++, pinfo++) {
-        if (pinfo->in_pcm && WPADIsSpeakerEnabled(i)) {
+    for (int i = 0; i < WPAD_MAX_CONTROLLERS; i++, pInfo++) {
+        if (pInfo->in_pcm != NULL && WPADIsSpeakerEnabled(i)) {
             BOOL intrStatus = OSDisableInterrupts();
 
             if (WPADCanSendStreamData(i)) {
-                MakeVolumeData(pinfo->in_pcm, pcmBuffer, pinfo->vol,
-                               pinfo->length / sizeof(s16));
+                MakeVolumeData(pInfo->in_pcm, pcmBuffer, pInfo->vol,
+                               pInfo->length / sizeof(s16));
 
                 WENCGetEncodeData(
-                    &pinfo->wencinfo, pinfo->first ? 0 : WENC_FLAG_USER_INFO,
+                    &pInfo->wencinfo, pInfo->first ? 0 : WENC_FLAG_USER_INFO,
                     pcmBuffer, ARRAY_SIZE(pcmBuffer), adpcmBuffer);
 
                 WPADSendStreamData(i, adpcmBuffer, ARRAY_SIZE(adpcmBuffer));
 
-                pinfo->first = false;
-                pinfo->cannotSendCnt = 0;
-                pinfo->in_pcm += ARRAY_SIZE(pcmBuffer);
-                pinfo->length -= ARRAY_SIZE(pcmBuffer) * sizeof(s16);
+                pInfo->first = false;
+                pInfo->cannotSendCnt = 0;
+                pInfo->in_pcm += ARRAY_SIZE(pcmBuffer);
+                pInfo->length -= ARRAY_SIZE(pcmBuffer) * sizeof(s16);
 
-                if (pinfo->length <= 0) {
-                    pinfo->seId = -1;
-                    pinfo->in_pcm = NULL;
+                if (pInfo->length <= 0) {
+                    pInfo->seId = -1;
+                    pInfo->in_pcm = NULL;
                 }
             } else {
-                pinfo->cannotSendCnt++;
+                pInfo->cannotSendCnt++;
 
                 // @bug 300 is out of range of a signed, 8-bit integer
-                if (pinfo->cannotSendCnt > 300) {
-                    pinfo->in_pcm = NULL;
+                if (pInfo->cannotSendCnt > 300) {
+                    pInfo->in_pcm = NULL;
                 }
             }
 
@@ -110,11 +110,11 @@ void RemoteSpk::ClearPcm() {
     }
 }
 
-RemoteSpk::RemoteSpk(void* spkSeBuf) {
+RemoteSpk::RemoteSpk(void* pSpkSeBuf) {
     SetInstance(this);
 
-    if (spkSeBuf != NULL) {
-        available = ARCInitHandle(spkSeBuf, &handle);
+    if (pSpkSeBuf != NULL) {
+        available = ARCInitHandle(pSpkSeBuf, &handle);
     } else {
         available = false;
     }
@@ -161,9 +161,9 @@ void RemoteSpk::Stop() {
     OSCancelAlarm(&speakerAlarm);
 }
 
-void RemoteSpk::DelaySpeakerOnCallback(OSAlarm* alarm,
-                                       OSContext* /* context */) {
-    s32 chan = reinterpret_cast<s32>(OSGetAlarmUserData(alarm));
+void RemoteSpk::DelaySpeakerOnCallback(OSAlarm* pAlarm,
+                                       OSContext* /* pContext */) {
+    s32 chan = reinterpret_cast<s32>(OSGetAlarmUserData(pAlarm));
     s32 result = WPADControlSpeaker(chan, WPAD_SPEAKER_ON, &SpeakerOnCallback);
 }
 
@@ -193,8 +193,9 @@ void RemoteSpk::SpeakerOnCallback(s32 chan, s32 result) {
     }
 }
 
-void RemoteSpk::DelaySpeakerPlayCallback(OSAlarm* alarm, OSContext*) {
-    s32 chan = reinterpret_cast<s32>(OSGetAlarmUserData(alarm));
+void RemoteSpk::DelaySpeakerPlayCallback(OSAlarm* pAlarm,
+                                         OSContext* /* pContext */) {
+    s32 chan = reinterpret_cast<s32>(OSGetAlarmUserData(pAlarm));
     s32 result =
         WPADControlSpeaker(chan, WPAD_SPEAKER_PLAY, &SpeakerPlayCallback);
 }
@@ -219,6 +220,7 @@ void RemoteSpk::SpeakerPlayCallback(s32 chan, s32 result) {
     case WPAD_ERR_COMMUNICATION_ERROR: {
         OSSetAlarmUserData(&pRmtSpk->info[chan].alarm,
                            reinterpret_cast<void*>(chan));
+
         OSCancelAlarm(&pRmtSpk->info[chan].alarm);
         OSSetAlarm(&pRmtSpk->info[chan].alarm, OS_MSEC_TO_TICKS(50),
                    &DelaySpeakerPlayCallback);
@@ -244,15 +246,15 @@ void RemoteSpk::Play(s32 chan, int seID, s8 vol) {
         return;
     }
 
-    s16* pcm;
+    s16* pPcm;
     int length;
-    GetPCMFromSeID(seID, pcm, length);
+    GetPCMFromSeID(seID, pPcm, length);
 
     info[chan].cannotSendCnt = 0;
     info[chan].seId = seID;
     info[chan].length = length;
     info[chan].vol = vol;
-    info[chan].in_pcm = pcm;
+    info[chan].in_pcm = pPcm;
 }
 
 bool RemoteSpk::isPlaying(s32 chan) const {

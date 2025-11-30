@@ -5,7 +5,6 @@
 #include <revolution/PAD.h>
 #include <revolution/WPAD.h>
 
-
 namespace homebutton {
 
 bool Controller::sBatteryFlag[WPAD_MAX_CONTROLLERS];
@@ -56,18 +55,17 @@ void Controller::wpadExtensionCallback(s32 chan, s32 result) {
     }
 }
 
-void Controller::soundOnCallback(OSAlarm* alm, OSContext* /* ctx */) {
-    int chan = reinterpret_cast<int>(OSGetAlarmUserData(alm));
+void Controller::soundOnCallback(OSAlarm* pAlarm, OSContext* /* pContext */) {
+    int chan = reinterpret_cast<int>(OSGetAlarmUserData(pAlarm));
     sThis[chan]->soundOn();
 }
 
-Controller::Controller(int chan, RemoteSpk* spk) {
-    mHBController.unk20 = 0;
+Controller::Controller(int chan, RemoteSpk* pSpk) {
     mHBController.chan = chan;
     mHBController.rumble = false;
     mHBController.spVol = 1.0f;
 
-    remotespk = spk;
+    remotespk = pSpk;
     mOldConnectCallback = NULL;
     mOldExtensionCallback = NULL;
     mCallbackFlag = false;
@@ -121,31 +119,31 @@ void Controller::clearCallback() {
     mOldExtensionCallback = NULL;
 }
 
-void Controller::setKpad(const HBMKPadData* con, bool updatePos) {
-    if (!con->kpad) {
+void Controller::setKpad(const HBMKPadData* pPadData, bool updatePos) {
+    if (pPadData->kpad == NULL) {
         return;
     }
 
     if (updatePos) {
-        if (con->kpad->dev_type == WPAD_DEV_CLASSIC &&
-            con->use_devtype == WPAD_DEV_CLASSIC) {
-            mHBController.x = con->pos.x;
-            mHBController.y = con->pos.y;
+        if (pPadData->kpad->dev_type == WPAD_DEV_CLASSIC &&
+            pPadData->use_devtype == WPAD_DEV_CLASSIC) {
+            mHBController.x = pPadData->pos.x;
+            mHBController.y = pPadData->pos.y;
         } else {
-            mHBController.x = con->kpad->pos.x;
-            mHBController.y = con->kpad->pos.y;
+            mHBController.x = pPadData->kpad->pos.x;
+            mHBController.y = pPadData->kpad->pos.y;
         }
     }
 
-    mHBController.trig = con->kpad->trig;
-    mHBController.hold = con->kpad->hold;
-    mHBController.release = con->kpad->release;
+    mHBController.trig = pPadData->kpad->trig;
+    mHBController.hold = pPadData->kpad->hold;
+    mHBController.release = pPadData->kpad->release;
 
-    if (con->kpad->dev_type == WPAD_DEV_CLASSIC &&
-        con->use_devtype == WPAD_DEV_CLASSIC) {
-        u32 h = con->kpad->ex_status.cl.hold;
-        u32 t = con->kpad->ex_status.cl.trig;
-        u32 r = con->kpad->ex_status.cl.release;
+    if (pPadData->kpad->dev_type == WPAD_DEV_CLASSIC &&
+        pPadData->use_devtype == WPAD_DEV_CLASSIC) {
+        u32 h = pPadData->kpad->ex_status.cl.hold;
+        u32 t = pPadData->kpad->ex_status.cl.trig;
+        u32 r = pPadData->kpad->ex_status.cl.release;
 
         // clang-format off
 		if (h & WPAD_BUTTON_CL_A)     mHBController.hold    |= WPAD_BUTTON_A;
@@ -196,13 +194,13 @@ f32 Controller::getSpeakerVol() const {
     return mHBController.spVol;
 }
 
-void Controller::playSound(nw4r::snd::SoundArchivePlayer* /* player */,
+void Controller::playSound(nw4r::snd::SoundArchivePlayer* /* pPlayer */,
                            int id) {
     if (mSoundOffFlag) {
         return;
     }
 
-    getRemoteSpk()->Play(getChan(), id, getSpeakerVol() * 10.0f);
+    getRemoteSpk()->Play(getChan(), id, getSpeakerVol() * HBM_MAX_VOLUME);
 
     if (WPADIsSpeakerEnabled(getChan())) {
         if (!mCheckSoundTimeFlag) {
@@ -283,7 +281,7 @@ void Controller::stopMotor() {
     }
 }
 
-s32 Controller::getInfoAsync(WPADInfo* info) {
+s32 Controller::getInfoAsync(WPADInfo* pInfo) {
     if (getChan() >= WPAD_MAX_CONTROLLERS) {
         return WPAD_ERR_COMMUNICATION_ERROR;
     }
@@ -292,7 +290,7 @@ s32 Controller::getInfoAsync(WPADInfo* info) {
         return WPAD_ERR_COMMUNICATION_ERROR;
     }
 
-    return WPADGetInfoAsync(getChan(), info, &ControllerCallback);
+    return WPADGetInfoAsync(getChan(), pInfo, &ControllerCallback);
 }
 
 void Controller::ControllerCallback(s32 chan, s32 result) {

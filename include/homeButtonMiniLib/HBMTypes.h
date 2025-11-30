@@ -22,7 +22,16 @@ typedef enum HBMSelectBtnNum {
     HBM_SELECT_MAX
 } HBMSelectBtnNum;
 
-// Maps to the BRSAR sound ID
+typedef enum HBMSoundEvent {
+    HBM_SOUND_INIT,
+    HBM_SOUND_POST_INIT,
+    HBM_SOUND_GOTO_MENU,
+    HBM_SOUND_RETURN_APP,
+    HBM_SOUND_STOP,
+    HBM_SOUND_PLAY,
+} HBMSoundEvent;
+
+// Maps to the HomeButtonSe.brsar sound ID
 typedef enum HBMSound {
     /* 0x00 */ HBM_SE_HOME_BUTTON,
     /* 0x01 */ HBM_SE_RETURN_APP,
@@ -48,7 +57,16 @@ typedef enum HBMSound {
     /* 0x15 */ HBM_SE_END_CONNECT_WINDOW
 } HBMSound;
 
-typedef int (*HBMSoundCallback)(int id, int time);
+// Maps to the SpeakerSe.arc sound ID
+typedef enum HBMSpeakerSound {
+    /* 0x00 */ HBM_SPK_SE_VOLUME,
+    /* 0x01 */ HBM_SPK_SE_CONNECT1,
+    /* 0x02 */ HBM_SPK_SE_CONNECT2,
+    /* 0x03 */ HBM_SPK_SE_CONNECT3,
+    /* 0x04 */ HBM_SPK_SE_CONNECT4,
+} HBMSpeakerSound;
+
+typedef int (*HBMSoundCallback)(int event, int arg);
 
 typedef struct HBMDataInfo {
     void* layoutBuf;                 // at 0x0
@@ -57,10 +75,10 @@ typedef struct HBMDataInfo {
     void* configBuf;                 // at 0xC
     void* mem;                       // at 0x10
     HBMSoundCallback sound_callback; // at 0x14
-    int backFlag;                    // at 0x18
+    BOOL backFlag;                   // at 0x18
     int region;                      // at 0x1C
     BOOL cursor;                     // at 0x20
-    int messageFlag;                 // at 0x24
+    BOOL messageFlag;                // at 0x24
     u32 configBufSize;               // at 0x28
     u32 memSize;                     // at 0x2C
     f32 frameDelta;                  // at 0x30

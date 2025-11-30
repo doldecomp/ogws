@@ -27,22 +27,22 @@ enum eCursorLyt { HBM_CURSOR_LYT_NAME_LIST eCursorLyt_Max };
 
 /******************************************************************************
  *
- * Buttons
+ * Panes
  *
  ******************************************************************************/
-#define HBM_BTN_NAME_LIST                                                      \
+#define HBM_BTN_PANE_LIST                                                      \
     X(B_btnL_00)                                                               \
     X(B_btnL_01)                                                               \
     X(B_btnL_10)                                                               \
     X(B_btnL_11)
 
-#define HBM_TXT_NAME_LIST                                                      \
+#define HBM_TXT_PANE_LIST                                                      \
     X(T_btnL_00)                                                               \
     X(T_btnL_01)                                                               \
     X(T_btnL_10)                                                               \
     X(T_btnL_11)
 
-#define HBM_GR_NAME_LIST                                                       \
+#define HBM_GROUP_LIST                                                         \
     X(btnL_00_inOut)                                                           \
     X(btnL_01_inOut)                                                           \
     X(btnL_10_inOut)                                                           \
@@ -58,15 +58,15 @@ enum eCursorLyt { HBM_CURSOR_LYT_NAME_LIST eCursorLyt_Max };
     X(cntBtn_out)
 
 #define X(Y) eBtn_##Y,
-enum eBtn { HBM_BTN_NAME_LIST eBtn_Max };
+enum eBtn { HBM_BTN_PANE_LIST eBtn_Max };
 #undef X
 
 #define X(Y) eTxt_##Y,
-enum eTxt { HBM_TXT_NAME_LIST eTxt_Max };
+enum eTxt { HBM_TXT_PANE_LIST eTxt_Max };
 #undef X
 
-#define X(Y) eGr_##Y,
-enum eGr { HBM_GR_NAME_LIST eGr_Max };
+#define X(Y) eGroup_##Y,
+enum eGroup { HBM_GROUP_LIST eGroup_Max };
 #undef X
 
 #define X(Y) eAnim_##Y,
@@ -78,7 +78,7 @@ enum eAnim { HBM_ANIM_NAME_LIST eAnim_Max };
  * Pairing
  *
  ******************************************************************************/
-#define HBM_PAIR_GROUP_NAME_LIST                                               \
+#define HBM_PAIR_ANM_NAME_LIST                                                 \
     X(ltrIcn_on)                                                               \
     X(optn_bar_psh)                                                            \
     X(close_bar_psh)                                                           \
@@ -95,16 +95,16 @@ enum eAnim { HBM_ANIM_NAME_LIST eAnim_Max };
     X(cmn_msg_rtrn)                                                            \
     X(12btn_on)
 
-#define X(Y) ePairGroup_##Y,
-enum ePairGroup { HBM_PAIR_GROUP_NAME_LIST ePairGroup_Max };
+#define X(Y) ePairAnm_##Y,
+enum ePairAnm { HBM_PAIR_ANM_NAME_LIST ePairAnm_Max };
 #undef X
 
 /******************************************************************************
  *
- * Group
+ * Group panes
  *
  ******************************************************************************/
-#define HBM_GROUP_NAME_LIST                                                    \
+#define HBM_GROUP_PANE_NAME_LIST                                               \
     X(hmMenu_strt)                                                             \
     X(hmMenu_fnsh)                                                             \
     X(hmMenuBck_strt)                                                          \
@@ -165,17 +165,17 @@ enum ePairGroup { HBM_PAIR_GROUP_NAME_LIST ePairGroup_Max };
     X(close_bar_out)                                                           \
     X(btry_red)
 
-#define X(Y) eGroup_##Y,
-enum eGroup { HBM_GROUP_NAME_LIST eGroup_Max };
+#define X(Y) eGrPane_##Y,
+enum eGrPane { HBM_GROUP_PANE_NAME_LIST eGrPane_Max };
 #undef X
 
-#define X(Y) eGroupAnim_##Y,
-enum eGroupAnim { HBM_GROUP_ANIM_NAME_LIST eGroupAnim_Max };
+#define X(Y) eGrAnim_##Y,
+enum eGrAnim { HBM_GROUP_ANIM_NAME_LIST eGrAnim_Max };
 #undef X
 
 /******************************************************************************
  *
- * Function
+ * Function/touch panes
  *
  ******************************************************************************/
 #define HBM_FUNC_PANE_NAME_LIST                                                \
@@ -324,13 +324,13 @@ enum eBatteryPane { HBM_BATTERY_PANE_NAME_LIST() eBatteryPane_Max };
     X(plyr_03, btry_wink_gry)                                                  \
     X(plyr_03, btry_red)
 
-#define X(Y, Z) eAnimator_##Y##Z,
+#define X(Y, Z) eAnimator_##Y##__##Z,
 enum eAnimator {
     HBM_ANIM_TABLE eAnimator_Max //
 };
 #undef X
 
-#define X(Y, Z) eGrAnimator_##Y##Z,
+#define X(Y, Z) eGrAnimator_##Y##__##Z,
 enum eGrAnimator {
     HBM_GROUP_ANIM_TABLE eGrAnimator_Max //
 };

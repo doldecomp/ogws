@@ -17,7 +17,6 @@ struct HBController {
     u32 hold;    // at 0x14
     u32 release; // at 0x18
     bool rumble; // at 0x1C
-    u32 unk20;
 };
 
 namespace homebutton {
@@ -27,7 +26,7 @@ class RemoteSpk;
 
 class Controller {
 public:
-    Controller(int chan, RemoteSpk* spk);
+    Controller(int chan, RemoteSpk* pSpk);
     ~Controller();
 
     HBController* getController();
@@ -56,12 +55,12 @@ public:
         mRumbleFlag = flag;
     }
 
-    s32 getInfoAsync(WPADInfo* info);
+    s32 getInfoAsync(WPADInfo* pInfo);
     bool isPlayReady() const;
     bool isPlayingSound() const;
     bool isPlayingSoundId(int id) const;
 
-    void setKpad(const HBMKPadData* con, bool updatePos);
+    void setKpad(const HBMKPadData* pPadData, bool updatePos);
     void setInValidPos();
     void clrBatteryFlag();
     void clrKpadButton();
@@ -71,7 +70,7 @@ public:
 
     void initSound();
     void updateSound();
-    void playSound(nw4r::snd::SoundArchivePlayer* player, int id);
+    void playSound(nw4r::snd::SoundArchivePlayer* pPlayer, int id);
 
     void soundOn();
     void soundOff(int msec);
@@ -85,7 +84,7 @@ public:
 private:
     static void wpadConnectCallback(s32 chan, s32 result);
     static void wpadExtensionCallback(s32 chan, s32 result);
-    static void soundOnCallback(OSAlarm* alm, OSContext* context);
+    static void soundOnCallback(OSAlarm* pAlarm, OSContext* pContext);
     static void ControllerCallback(s32 chan, s32 result);
 
 private:
@@ -94,10 +93,11 @@ private:
     static OSAlarm sAlarmSoundOff[WPAD_MAX_CONTROLLERS];
     static Controller* sThis[WPAD_MAX_CONTROLLERS];
 
-    HBController mHBController;                  // at 0x00
-    RemoteSpk* remotespk;                        // at 0x20
-    WPADConnectCallback mOldConnectCallback;     // at 0x24
-    WPADExtensionCallback mOldExtensionCallback; // at 0x28
+    HBController mHBController;                  // at 0x0
+    nw4r::snd::SoundHandle mSoundHandle;         // at 0x4
+    RemoteSpk* remotespk;                        // at 0x24
+    WPADConnectCallback mOldConnectCallback;     // at 0x28
+    WPADExtensionCallback mOldExtensionCallback; // at 0x2C
     s64 mPlaySoundTime;                          // at 0x30
     s64 mStopSoundTime;                          // at 0x38
     bool mCallbackFlag;                          // at 0x40

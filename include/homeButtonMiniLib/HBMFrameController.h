@@ -26,7 +26,7 @@ public:
 
     virtual void calc(); // at 0xC
 
-    void init(int anmType, f32 max_frame, f32 min_frame, f32 delta);
+    void init(int anmType, f32 maxFrame, f32 minFrame, f32 delta);
     void initFrame();
 
     void start() {

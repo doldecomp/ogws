@@ -1,7 +1,3 @@
-/**
- * Modified from decompilation by riidefi in WiiCore
- */
-
 #ifndef RVL_SDK_ARC_H
 #define RVL_SDK_ARC_H
 #include <types.h>
