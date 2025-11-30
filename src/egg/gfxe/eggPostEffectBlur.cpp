@@ -2,7 +2,6 @@
 #include "eggDrawGX.h"
 #include "eggGXUtility.h"
 #include "eggCapTexture.h"
-#include "math_triangular.h"
 #include <revolution/GX.h>
 
 namespace EGG

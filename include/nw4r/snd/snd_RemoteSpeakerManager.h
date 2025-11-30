@@ -13,18 +13,18 @@ namespace detail {
 
 class RemoteSpeakerManager {
 public:
+    static const int SPEAKER_ALARM_HZ = 150;
+
+    static const int SPEAKER_ALARM_PERIOD_NSEC =
+        static_cast<int>(1.0f / SPEAKER_ALARM_HZ * 1000 * 1000 * 1000);
+
+public:
     static RemoteSpeakerManager& GetInstance();
 
     RemoteSpeaker& GetRemoteSpeaker(int idx);
 
     void Setup();
     void Shutdown();
-
-private:
-    static const int SPEAKER_ALARM_HZ = 150;
-
-    static const int SPEAKER_ALARM_PERIOD_NSEC =
-        static_cast<int>(1.0f / SPEAKER_ALARM_HZ * 1000 * 1000 * 1000);
 
 private:
     RemoteSpeakerManager();

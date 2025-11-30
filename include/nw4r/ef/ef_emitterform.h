@@ -2,8 +2,14 @@
 #define NW4R_EF_EMITTER_FORM_H
 #include <nw4r/types_nw4r.h>
 
+#include <nw4r/math.h>
+
 namespace nw4r {
 namespace ef {
+
+// Forward declarations
+class Emitter;
+class ParticleManager;
 
 class EmitterForm {
 public:

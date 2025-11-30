@@ -5,6 +5,9 @@
 namespace nw4r {
 namespace ef {
 
+// Forward declarations
+class DrawStrategy;
+
 enum DrawStrategyType {
     DRAWSTRATEGY_POINT,
     DRAWSTRATEGY_LINE,

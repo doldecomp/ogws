@@ -1,7 +1,6 @@
 #include "eggStateGX.h"
 #include "eggAssert.h"
-#include "g3d_init.h"
-#include "g3d_tmem.h"
+#include <nw4r/g3d.h>
 #include <revolution/GX.h>
 #include <revolution/MTX.h>
 

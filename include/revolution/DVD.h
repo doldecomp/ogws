@@ -1,5 +1,5 @@
 /**
- * References: WiiBrew, YAGCD
+ * References: WiiBrew, YAGCD, WiiCore
  */
 
 #ifndef RVL_SDK_PUBLIC_DVD_H

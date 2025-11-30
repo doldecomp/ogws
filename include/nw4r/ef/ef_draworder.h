@@ -2,6 +2,8 @@
 #define NW4R_EF_DRAW_ORDER_H
 #include <nw4r/types_nw4r.h>
 
+#include <nw4r/ut.h>
+
 namespace nw4r {
 namespace ef {
 

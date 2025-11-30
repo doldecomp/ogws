@@ -36,6 +36,8 @@ void GXSetTexCopyDst(u16 w, u16 h, GXTexFmt fmt, GXBool mipmap);
 
 void GXSetCopyClamp(GXCopyClamp clamp);
 
+void GXSetDispCopyGamma(u32);
+
 u32 GXGetNumXfbLines(u16 efbHeight, f32 scaleY);
 f32 GXGetYScaleFactor(u16 efbHeight, u16 xfbHeight);
 void GXSetDispCopyYScale(f32 scaleY);
