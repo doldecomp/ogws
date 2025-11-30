@@ -1,6 +1,6 @@
 #ifndef HOME_BUTTON_MINI_LIB_GUI_MANAGER_H
 #define HOME_BUTTON_MINI_LIB_GUI_MANAGER_H
-#include <homeButtonMiniLib/HBMTypes.h>
+#include <homebuttonMiniLib/HBMTypes.h>
 
 #include <nw4r/lyt.h>
 #include <nw4r/snd.h>

@@ -1,4 +1,4 @@
-#include <homeButtonMiniLib.h>
+#include <homebuttonMiniLib.h>
 
 namespace homebutton {
 

@@ -1,6 +1,6 @@
 #ifndef HOME_BUTTON_MINI_LIB_CONTROLLER_H
 #define HOME_BUTTON_MINI_LIB_CONTROLLER_H
-#include <homeButtonMiniLib/HBMTypes.h>
+#include <homebuttonMiniLib/HBMTypes.h>
 
 #include <nw4r/snd.h>
 

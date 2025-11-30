@@ -1,7 +1,7 @@
 #ifndef HOME_BUTTON_MINI_LIB_RES_H
 #define HOME_BUTTON_MINI_LIB_RES_H
 
-#include <homeButtonMiniLib/HBMTypes.h>
+#include <homebuttonMiniLib/HBMTypes.h>
 
 namespace homebutton {
 namespace res {

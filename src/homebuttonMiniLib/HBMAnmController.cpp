@@ -1,8 +1,7 @@
-#include <homeButtonMiniLib.h>
+#include <homebuttonMiniLib.h>
 
 #include <nw4r/lyt.h>
 #include <nw4r/ut.h>
-
 
 namespace homebutton {
 
