@@ -390,7 +390,7 @@ cflags_rfl = [
     "-ipa file",
 ]
 
-# homeButtonMini flags
+# homeButtonMiniLib flags
 cflags_hbm = [
     *cflags_base,
     *cflags_pedantic,
@@ -401,7 +401,7 @@ cflags_hbm = [
     "-fp_contract off",
     "-ipa file",
     "-i include/nw4r",
-    "-i include/homeButtonMini",
+    "-i include/homeButtonMiniLib",
 ]
 
 # RP flags
