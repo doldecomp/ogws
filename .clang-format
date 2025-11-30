@@ -47,7 +47,7 @@ IncludeCategories:
     Priority: 3
     CaseSensitive: true
 
-  - Regex: '(<|")homeButtonMiniLib(\/)?' # HBM headers
+  - Regex: '(<|")homebuttonMiniLib(\/)?' # HBM headers
     Priority: 4
     CaseSensitive: true
 

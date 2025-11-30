@@ -4,7 +4,7 @@
 extern "C" {
 #endif
 
-#include <homeButtonMiniLib/HBMTypes.h>
+#include <homebuttonMiniLib/HBMTypes.h>
 
 void HBMCreate(const HBMDataInfo* pHBInfo);
 void HBMInit();

@@ -1,5 +1,5 @@
-#include <homeButtonMiniLib.h>
-#include <homeButtonMiniLib/HBMRes.h>
+#include <homebuttonMiniLib.h>
+#include <homebuttonMiniLib/HBMRes.h>
 
 #include <nw4r/lyt.h>
 #include <nw4r/ut.h>
