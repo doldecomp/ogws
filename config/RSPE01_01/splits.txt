@@ -3254,3 +3254,19 @@ Pack/RPAudio/RPSndStaticMgr.cpp:
 	.text       start:0x801B9548 end:0x801B9910
 	.data       start:0x803BAB20 end:0x803C1720
 	.sdata2     start:0x804C1990 end:0x804C19A0
+
+Pack/RPUtility/RPUtlDohMath.cpp:
+	.text       start:0x801B9910 end:0x801B9EC0
+	.ctors      start:0x8035513C end:0x80355140
+	.bss        start:0x804A4690 end:0x804A4750
+	.sbss       start:0x804BF660 end:0x804BF668
+	.sdata2     start:0x804C19A0 end:0x804C19B0
+
+Pack/RPUtility_unsplit.o:
+	.text       start:0x801B9EC0 end:0x801CCB4C
+	.ctors      start:0x80355140 end:0x80355160
+	.rodata     start:0x803837E8 end:0x80383990
+	.data       start:0x803C1720 end:0x803C1BF0
+	.bss        start:0x804A4750 end:0x804A48A0
+	.sdata      start:0x804BDC18 end:0x804BDC38
+	.sdata2     start:0x804C19B0 end:0x804C1A20

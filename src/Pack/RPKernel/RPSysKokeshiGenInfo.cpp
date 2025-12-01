@@ -17,12 +17,12 @@ RPSysKokeshiGenInfo::RPSysKokeshiGenInfo() {
     mTexHeight = 128;
     mResolution = RFLResolution_128;
     mExpression = RFLExp_Smile;
-    unk38 = false;
+    mMipMap = false;
     mUseFavoriteColor = false;
     mClearColor.r = mClearColor.g = mClearColor.b = mClearColor.a = 0;
     mIconView = RPSysKokeshiManager::IconView_Front;
     mIconExpression = RFLExp_Normal;
-    mMakeEdge = FALSE;
+    mMakeEdge = false;
     unk50.r = unk50.g = unk50.b = unk50.a = 0;
     unk54 = 0;
 }

@@ -1224,6 +1224,16 @@ config.libs = [
             Object(NonMatching, "Pack/RPAudio/RPSndStaticMgr.cpp"),
         ],
     },
+    {
+        "lib": "RP",
+        "mw_version": config.linker_version,
+        "cflags": cflags_rp,
+        "progress_category": "utility", # str | List[str]
+        "objects": [
+            Object(NonMatching, "Pack/RPUtility/RPUtlDohMath.cpp"),
+            Object(NonMatching, "Pack/RPUtility_unsplit.o"),
+        ],
+    },
 ]
 
 
@@ -1257,7 +1267,7 @@ config.progress_categories = [
     ProgressCategory("system", "RPSystem"),
     ProgressCategory("graphics", "RPGraphics"),
     ProgressCategory("audio", "RPAudio"),
-    # ProgressCategory("utility", "RPUtility"),
+    ProgressCategory("utility", "RPUtility"),
 
     # ProgressCategory("sports", "RPSports"),
 ]
