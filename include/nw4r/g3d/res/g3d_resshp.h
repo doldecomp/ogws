@@ -107,6 +107,20 @@ public:
 
     ResMdl GetParent() const;
 
+    const char* GetName() const {
+        const ResShpData& r = ref();
+
+        if (r.name != 0) {
+            return reinterpret_cast<const char*>(&r) + r.name;
+        }
+
+        return NULL;
+    }
+
+    u32 GetID() const {
+        return ref().id;
+    }
+
     bool GXGetVtxDescv(GXVtxDescList* pList) const;
     bool GXGetVtxAttrFmtv(GXVtxAttrFmtList* pList) const;
     void GXSetArray(GXAttr attr, const void* pBase, u8 stride);
@@ -147,6 +161,14 @@ public:
 
     bool IsVisible() const {
         return !(ref().flag & ResShpData::FLAG_INVISIBLE);
+    }
+
+    void SetVisible(bool visible) {
+        if (visible) {
+            ref().flag &= ~ResShpData::FLAG_INVISIBLE;
+        } else {
+            ref().flag |= ResShpData::FLAG_INVISIBLE;
+        }
     }
 };
 

@@ -404,13 +404,21 @@ ALL_NAME_LIST;
  *
  ******************************************************************************/
 
+template <>
+inline RPGrpModelResManager::ResType<RPGrpModelResManager::Type_ResFile>::TRes
+RPGrpModelResManager::GetData<RPGrpModelResManager::Type_ResFile>(
+    RPGrpHandle handle) const {
+
+    return mpResList[handle].pResFile->Get();
+}
+
 #define X(Y)                                                                   \
     template <>                                                                \
     inline RPGrpModelResManager::ResType<RPGrpModelResManager::Type_##Y>::TRes \
     RPGrpModelResManager::GetData<RPGrpModelResManager::Type_##Y>(             \
         RPGrpHandle handle) const {                                            \
                                                                                \
-        return mpResList[handle].pResFile->Get().Get##Y(0);                    \
+        return mpResList[handle].p##Y->Get();                                  \
     }
 
 SUBFILE_NAME_LIST;

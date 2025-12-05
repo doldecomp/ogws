@@ -4,6 +4,7 @@
 #include <Pack/RPGraphics/IRPGrpModelCallback.h>
 #include <Pack/RPGraphics/RPGrpModel.h>
 #include <Pack/RPGraphics/RPGrpModelAnm.h>
+#include <Pack/RPGraphics/RPGrpModelAnmImplement.h>
 #include <Pack/RPGraphics/RPGrpModelBoundingInfo.h>
 #include <Pack/RPGraphics/RPGrpModelG3D.h>
 #include <Pack/RPGraphics/RPGrpModelMaterial.h>

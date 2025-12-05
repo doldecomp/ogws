@@ -84,6 +84,10 @@ public:
         return mScnObj;
     }
 
+    nw4r::g3d::ScnLeaf* getScnLeaf() const {
+        return static_cast<nw4r::g3d::ScnLeaf*>(mScnObj);
+    }
+
     nw4r::g3d::ScnMdl* getScnMdl() const {
         return mType == cType_ScnMdl ? static_cast<nw4r::g3d::ScnMdl*>(mScnObj)
                                      : NULL;

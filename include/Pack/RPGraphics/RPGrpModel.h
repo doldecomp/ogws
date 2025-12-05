@@ -7,6 +7,9 @@
 #include <egg/core.h>
 #include <egg/gfxe.h>
 
+#include <nw4r/g3d.h>
+#include <nw4r/math.h>
+
 //! @addtogroup rp_graphics
 //! @{
 
@@ -60,12 +63,10 @@ protected:
     u16 unkA;
     u32 unkC;
     u32 unk10;
-    RPGrpModel* mpEntryNext;         // at 0x14
-    RPGrpModel* mpGenNext;           // at 0x18
-    IRPGrpModelCallback* mpCallback; // at 0x1C
-    f32 unk20;
-    f32 unk24;
-    f32 unk28;
+    RPGrpModel* mpEntryNext;                // at 0x14
+    RPGrpModel* mpGenNext;                  // at 0x18
+    IRPGrpModelCallback* mpCallback;        // at 0x1C
+    nw4r::math::VEC3 mScale;                // at 0x20
     RPGrpModelAnm* mpModelAnm;              // at 0x2C
     RPGrpModelMaterial** mppMaterials;      // at 0x30
     RPGrpModelBoundingInfo* mpBoundingInfo; // at 0x34
@@ -100,7 +101,7 @@ public:
     virtual void SetCallbackJointIndex(u16 idx) = 0; // at 0x24
     virtual u16 GetCallbackJointIndex() const = 0;   // at 0x28
 
-    virtual void SetJointVisible(u32 /* id */, bool enable) { // at 0x2C
+    virtual void SetJointVisible(u32 /* idx */, bool enable) { // at 0x2C
         if (enable) {
             mFlags |= EFlag_Visible;
         } else {
@@ -108,11 +109,11 @@ public:
         }
     }
 
-    virtual bool IsJointVisible() const { // at 0x30
+    virtual bool IsJointVisible(u32 /* idx */) const { // at 0x30
         return mFlags & EFlag_Visible;
     }
 
-    virtual void SetShapeVisible(u32 /* id */, bool enable) { // at 0x34
+    virtual void SetShapeVisible(u32 /* idx */, bool enable) { // at 0x34
         if (enable) {
             mFlags |= EFlag_Visible;
         } else {
@@ -120,18 +121,19 @@ public:
         }
     }
 
-    virtual bool IsShapeVisible() const { // at 0x38
+    virtual bool IsShapeVisible(u32 /* idx */) const { // at 0x38
         return mFlags & EFlag_Visible;
     }
 
     virtual void GetWorldMtx(u16 idx,
-                             EGG::Matrix34f* pMtx) const = 0; // at 0x3C
-    virtual EGG::Matrix34f* GetWorldMtx(u16 idx) const = 0;   // at 0x40
-    virtual EGG::Matrix34f* ReferWorldMtx(u16 idx) const = 0; // at 0x44
+                             nw4r::math::MTX34* pMtx) const = 0; // at 0x3C
+    virtual const nw4r::math::MTX34*
+    GetWorldMtx(u16 nodeIdx) const = 0;                              // at 0x40
+    virtual nw4r::math::MTX34* ReferWorldMtx(u16 nodeIdx) const = 0; // at 0x44
 
     virtual void GetViewMtx(u16 idx,
-                            EGG::Matrix34f* pMtx) const = 0; // at 0x48
-    virtual EGG::Matrix34f* GetViewMtx(u16 idx) const = 0;   // at 0x4C
+                            nw4r::math::MTX34* pMtx) const = 0; // at 0x48
+    virtual void GetViewMtx(nw4r::math::MTX34* pMtx) const = 0; // at 0x4C
 
     virtual u16 GetJointNum() const { // at 0x50
         return mpModelEx->getNumNode();
@@ -155,7 +157,8 @@ public:
         return mpModelEx->getNumViewMtx();
     }
 
-    virtual void DrawDirect(u32 drawFlag, EGG::Matrix34f* pViewMtx) { // at 0x78
+    virtual void DrawDirect(u32 drawFlag,
+                            nw4r::math::MTX34* pViewMtx) { // at 0x78
         mpModelEx->drawShapeDirectly(drawFlag, true, true, pViewMtx);
     }
 
@@ -165,28 +168,48 @@ public:
         mpModelEx->setVisible(mFlags & EFlag_Visible);
     }
 
-    virtual void CalcView(const EGG::Matrix34f& rViewMtx,
-                          EGG::Matrix34f* pViewMtxArray) { // at 0x84
+    virtual void CalcView(const nw4r::math::MTX34& rViewMtx,
+                          nw4r::math::MTX34* pViewMtxArray) { // at 0x84
 
         if (pViewMtxArray != NULL) {
             mpModelEx->calcView(rViewMtx, pViewMtxArray);
             return;
         }
 
-        nw4r::g3d::ScnObj* pScnObj = mpModelEx->getScnObj();
+        nw4r::g3d::ScnObj* pScnObj = GetScnObj();
         if (pScnObj != NULL) {
             pScnObj->G3dProc(nw4r::g3d::G3dObj::G3DPROC_CALC_VIEW, 0,
-                             const_cast<EGG::Matrix34f*>(&rViewMtx));
+                             const_cast<nw4r::math::MTX34*>(&rViewMtx));
         }
     }
 
+    void RemoveGenList();
     void CreateMaterial(u16 idx);
     void CreateBoundingInfo(u32 flags);
     void CreateRecord(u16 frames);
     void UpdateFrame();
     void Calc();
     void Entry();
-    void RemoveGenList();
+
+    nw4r::g3d::ScnObj* GetScnObj() const {
+        return mpModelEx->getScnObj();
+    }
+
+    nw4r::g3d::ScnLeaf* GetScnLeaf() const {
+        return mpModelEx->getScnLeaf();
+    }
+
+    nw4r::g3d::ScnMdlSimple* GetScnMdlSimple() const {
+        return mpModelEx->getScnMdlSimple();
+    }
+
+    nw4r::g3d::ScnMdl* GetScnMdl() const {
+        return mpModelEx->getScnMdl();
+    }
+
+    nw4r::g3d::ScnRfl* GetScnRfl() const {
+        return mpModelEx->getScnRfl();
+    }
 
     /**
      * @brief Gets the allocator used for model-related allocations
@@ -211,8 +234,8 @@ protected:
     virtual void CreateAnm() = 0;    // at 0x90
     virtual void InternalCalc() = 0; // at 0x94
 
-    virtual void GetShapeMinMax(u16 shapeIdx, EGG::Vector3f* pMin,
-                                EGG::Vector3f* pMax) const { // at 0x98
+    virtual void GetShapeMinMax(u16 shapeIdx, nw4r::math::VEC3* pMin,
+                                nw4r::math::VEC3* pMax) const { // at 0x98
         mpModelEx->getShapeMinMax(shapeIdx, pMin, pMax, false);
     }
 
@@ -238,8 +261,8 @@ protected:
     //! Model currently running Calc
     static RPGrpModel* spCalcModel;
 
-    static EGG::Matrix34f* spCalcModelMtxArray;
-    static EGG::Matrix34f* spCalcViewPosMtxArray;
+    static nw4r::math::MTX34* spCalcWorldMtxArray;
+    static nw4r::math::MTX34* spCalcViewMtxArray;
 };
 
 //! @}

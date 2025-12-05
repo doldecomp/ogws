@@ -11,8 +11,8 @@ RPGrpModel* RPGrpModel::spEntryTail = NULL;
 RPGrpModel* RPGrpModel::spGenList = NULL;
 
 RPGrpModel* RPGrpModel::spCalcModel = NULL;
-EGG::Matrix34f* RPGrpModel::spCalcModelMtxArray = NULL;
-EGG::Matrix34f* RPGrpModel::spCalcViewPosMtxArray = NULL;
+nw4r::math::MTX34* RPGrpModel::spCalcWorldMtxArray = NULL;
+nw4r::math::MTX34* RPGrpModel::spCalcViewMtxArray = NULL;
 
 RPGrpModel* RPGrpModel::Construct(RPGrpHandle handle, u8 viewNo, u32 typeOption,
                                   u32 bufferOption) {
@@ -68,9 +68,7 @@ RPGrpModel::RPGrpModel(u8 viewNo)
       mpEntryNext(NULL),
       mpGenNext(NULL),
       mpCallback(NULL),
-      unk20(1.0f),
-      unk24(1.0f),
-      unk28(1.0f),
+      mScale(1.0f, 1.0f, 1.0f),
       mpModelAnm(NULL),
       mppMaterials(NULL),
       mpBoundingInfo(NULL),
@@ -144,7 +142,7 @@ void RPGrpModel::UpdateFrame() {
         mpModelAnm->UpdateFrame();
     }
 
-    nw4r::g3d::ScnObj* pScnObj = mpModelEx->getScnObj();
+    nw4r::g3d::ScnObj* pScnObj = GetScnObj();
     if (pScnObj != NULL) {
         pScnObj->G3dProc(nw4r::g3d::G3dObj::G3DPROC_UPDATEFRAME, 0, NULL);
     }

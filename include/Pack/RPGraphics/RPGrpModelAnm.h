@@ -11,7 +11,7 @@
 class RPGrpModel;
 
 /**
- * @brief Model animation
+ * @brief Base class for model animation implementations
  */
 class RPGrpModelAnm {
 public:
@@ -77,14 +77,17 @@ public:
     virtual void VF_0x74(UNKTYPE) = 0; // at 0x74
 
     virtual nw4r::g3d::AnmObj* GetAnmObj(Anm anm, u16 idx) const = 0; // at 0x78
-    virtual ~RPGrpModelAnm();                                         // at 0x7C
-
-    virtual void SetAnmObj(Anm anm, nw4r::g3d::AnmObj* pAnmObj) = 0; // at 0x80
-    virtual void InternalCalc() = 0;                                 // at 0x84
 
     void CreateBuffer(Anm anm, u16 num);
 
     void Calc();
+
+protected:
+    RPGrpModelAnm(RPGrpModel* pModel);
+    virtual ~RPGrpModelAnm(); // at 0x7C
+
+    virtual void SetAnmObj(Anm anm, nw4r::g3d::AnmObj* pAnmObj) = 0; // at 0x80
+    virtual void InternalCalc() = 0;                                 // at 0x84
 };
 
 //! @}

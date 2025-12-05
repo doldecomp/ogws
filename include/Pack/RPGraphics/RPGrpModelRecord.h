@@ -33,8 +33,10 @@ public:
 
     /**
      * @brief Records the current frame
+     *
+     * @param pModel Model to record
      */
-    void Calc();
+    void Calc(RPGrpModel* pModel);
 
 private:
     char unk4[0x48 - 0x4];
