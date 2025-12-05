@@ -6,9 +6,11 @@
 namespace EGG {
 class ModelBoundingInfo {
 public:
-    enum ModelBoundType {
-        MODEL_HAS_AABB_0xC = (1 << 0),
-        MODEL_HAS_SPHERE = (1 << 2),
+    enum BoundFlag {
+        BoundFlag_AABB = 1 << 0,
+        BoundFlag_AABBSet = 1 << 1,
+        BoundFlag_Sphere = 1 << 2,
+        BoundFlag_SphereSet = 1 << 3,
     };
 
     struct AABBData {
@@ -47,6 +49,8 @@ protected:
 public:
     ModelBoundingInfo(u32, ModelEx*);
     virtual ~ModelBoundingInfo();
+
+    void Calc();
 
     SphereData* getSphere() const {
 #line 99

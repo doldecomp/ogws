@@ -64,8 +64,8 @@ public:
                   nw4r::math::MTX34* pViewMtxArray) const;
     void drawShapeDirectly(u32 drawFlag, bool opa, bool xlu,
                            nw4r::math::MTX34* pViewMtx);
-    u16 replaceTexture(const char*, const int&, bool, TextureReplaceResult*,
-                       u16, bool);
+    u16 replaceTexture(const char*, const GXTexObj&, bool,
+                       TextureReplaceResult*, u16, bool);
     void attachBoundingInfo(ModelBoundingInfo* pBV);
 
     nw4r::g3d::ResShp getResShp(u16 shapeIndex) const;
@@ -78,6 +78,10 @@ public:
 
     ModelBoundingInfo* getBoundingInfo() const {
         return mpBV;
+    }
+
+    nw4r::g3d::ScnObj* getScnObj() const {
+        return mScnObj;
     }
 
     nw4r::g3d::ScnMdl* getScnMdl() const {

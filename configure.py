@@ -1234,6 +1234,60 @@ config.libs = [
             Object(NonMatching, "Pack/RPUtility_unsplit.o"),
         ],
     },
+    {
+        "lib": "RP",
+        "mw_version": config.linker_version,
+        "cflags": cflags_rp,
+        "progress_category": "sports", # str | List[str]
+        "objects": [
+            Object(NonMatching, "Pack/RPSports/RPSportsCommon/RPSportsCommon_unsplit.o"),
+        ],
+    },
+    {
+        "lib": "RP",
+        "mw_version": config.linker_version,
+        "cflags": cflags_rp,
+        "progress_category": "tennis", # str | List[str]
+        "objects": [
+            Object(NonMatching, "Pack/RPSports/RPTnsScene/RPTnsScene_unsplit.o"),
+        ],
+    },
+    {
+        "lib": "RP",
+        "mw_version": config.linker_version,
+        "cflags": cflags_rp,
+        "progress_category": "baseball", # str | List[str]
+        "objects": [
+            Object(NonMatching, "Pack/RPSports/RPBsbScene/RPBsbScene_unsplit.o"),
+        ],
+    },
+    {
+        "lib": "RP",
+        "mw_version": config.linker_version,
+        "cflags": cflags_rp,
+        "progress_category": "golf", # str | List[str]
+        "objects": [
+            Object(NonMatching, "Pack/RPSports/RPGolScene/RPGolScene_unsplit.o"),
+        ],
+    },
+    {
+        "lib": "RP",
+        "mw_version": config.linker_version,
+        "cflags": cflags_rp,
+        "progress_category": "boxing", # str | List[str]
+        "objects": [
+            Object(NonMatching, "Pack/RPSports/RPBoxScene/RPBoxScene_unsplit.o"),
+        ],
+    },
+    {
+        "lib": "RP",
+        "mw_version": config.linker_version,
+        "cflags": cflags_rp,
+        "progress_category": "bowling", # str | List[str]
+        "objects": [
+            Object(NonMatching, "Pack/RPSports/RPBowScene/RPBowScene_unsplit.o"),
+        ],
+    },
 ]
 
 
@@ -1269,7 +1323,12 @@ config.progress_categories = [
     ProgressCategory("audio", "RPAudio"),
     ProgressCategory("utility", "RPUtility"),
 
-    # ProgressCategory("sports", "RPSports"),
+    ProgressCategory("sports", "RPSportsCommon"),
+    ProgressCategory("tennis", "RPTnsScene"),
+    ProgressCategory("baseball", "RPBsbScene"),
+    ProgressCategory("golf", "RPGolScene"),
+    ProgressCategory("boxing", "RPBoxScene"),
+    ProgressCategory("bowling", "RPBowScene"),
 ]
 config.progress_all = False
 config.progress_each_module = args.verbose
