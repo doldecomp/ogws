@@ -42,8 +42,8 @@ private:
     //! Facial expression to use
     RFLExpression mExpression; // at 0x34
 
-    // TODO(kiwi) Doubles resolution of tex copy src
-    BOOL unk38;
+    // Use mipmapping to downscale the icon texture
+    BOOL mMipMap;
     //! Whether to use the favorite color as the icon clear color
     BOOL mUseFavoriteColor; // at 0x3C
     //! Display clear color for icons

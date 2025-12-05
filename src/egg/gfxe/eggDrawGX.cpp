@@ -247,12 +247,12 @@ void DrawGX::BeginDrawScreen(bool lu, bool texture, bool alpha) {
 
     SetMat_PE(ZMODE_ALWAYS, BLEND_NORMAL);
 
-    static const VtxType tbl[true + 1][true + 1] = {
+    static const VtxType SCREEN_VTX[true + 1][true + 1] = {
         {VTX_TYPE_SCREEN_TEXTURE, VTX_TYPE_SCREEN},       // CC
         {VTX_TYPE_SCREEN_TEXTURE_LU, VTX_TYPE_SCREEN_LU}, // LU
     };
 
-    SetVtxState(tbl[lu ? 1 : 0][texture ? 0 : 1]);
+    SetVtxState(SCREEN_VTX[lu ? 1 : 0][texture ? 0 : 1]);
 }
 
 void DrawGX::BeginDrawShadowVolume(u8 alpha) {

@@ -3,7 +3,6 @@
 #include <nw4r/types_nw4r.h>
 
 #include <nw4r/g3d/res/g3d_rescommon.h>
-
 #include <nw4r/math.h>
 
 namespace nw4r {
@@ -84,6 +83,16 @@ public:
 
     void PatchChrAnmResult(ChrAnmResult* pResult) const;
     void CalcChrAnmResult(ChrAnmResult* pResult) const;
+
+    const char* GetName() const {
+        const ResNodeData& r = ref();
+
+        if (r.name != 0) {
+            return reinterpret_cast<const char*>(&r) + r.name;
+        }
+
+        return NULL;
+    }
 
     ResName GetResName() const {
         const ResNodeData& r = ref();

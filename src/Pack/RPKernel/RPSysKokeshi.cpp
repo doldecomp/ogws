@@ -3,9 +3,9 @@
 #include <Pack/RPSystem.h>
 #include <Pack/RPUtility.h>
 
-#include <egg/core.h>
-
 #include <RVLFaceLib.h>
+
+#include <egg/core.h>
 
 /**
  * @brief Constructor
@@ -113,7 +113,7 @@ void RPSysKokeshi::LoadResource(const RPSysKokeshiOverloadInfo* pOverloadInfo) {
     pKokeshiManager->SetMatColor(mpLeftHandModel, favColor, favColor);
     pKokeshiManager->SetMatColor(mpRightHandModel, favColor, favColor);
 
-    if (mpNigaoeModel->GetKind() == RPGrpModel::Kind_Rfl) {
+    if (mpNigaoeModel->GetKind() == RPGrpModel::Kind_RFL) {
         // static_cast<RPGrpModelRfl*>(mpNigaoeModel)->unkA2 = ...
     }
 }

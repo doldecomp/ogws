@@ -63,11 +63,10 @@ int LightTextureManager::replaceModelTexture(int index, ModelEx* pMdl) const {
     GXTexObj texObj;
 
     mppLightTextures[index]->getTexObj(&texObj);
-    int TODO;
-    int ret = pMdl->replaceTexture(mppLightTextures[index]->getName(), TODO,
+    int ret = pMdl->replaceTexture(mppLightTextures[index]->getName(), texObj,
                                    false, &result, 0xFF, false);
-    pMdl->replaceTexture(mppLightTextures[index]->getName(), TODO, false, NULL,
-                         0, true);
+    pMdl->replaceTexture(mppLightTextures[index]->getName(), texObj, false,
+                         NULL, 0, true);
 
     for (int i = 0; i < (u16)ret; i++) {
         u16 matIndex = result.data[i].s;

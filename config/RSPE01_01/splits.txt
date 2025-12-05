@@ -3254,3 +3254,80 @@ Pack/RPAudio/RPSndStaticMgr.cpp:
 	.text       start:0x801B9548 end:0x801B9910
 	.data       start:0x803BAB20 end:0x803C1720
 	.sdata2     start:0x804C1990 end:0x804C19A0
+
+Pack/RPUtility/RPUtlDohMath.cpp:
+	.text       start:0x801B9910 end:0x801B9EC0
+	.ctors      start:0x8035513C end:0x80355140
+	.bss        start:0x804A4690 end:0x804A4750
+	.sbss       start:0x804BF660 end:0x804BF668
+	.sdata2     start:0x804C19A0 end:0x804C19B0
+
+Pack/RPUtility_unsplit.o:
+	.text       start:0x801B9EC0 end:0x801CCB70
+	.ctors      start:0x80355140 end:0x80355160
+	.rodata     start:0x803837E8 end:0x80383990
+	.data       start:0x803C1720 end:0x803C1BF0
+	.bss        start:0x804A4750 end:0x804A48A0
+	.sdata      start:0x804BDC18 end:0x804BDC38
+	.sbss       start:0x804BF668 end:0x804BF6F0
+	.sdata2     start:0x804C19B0 end:0x804C1A20
+
+Pack/RPSports/RPSportsCommon/RPSportsCommon_unsplit.o:
+	.text       start:0x801CCB70 end:0x80214480
+	.ctors      start:0x80355160 end:0x8035516C
+	.rodata     start:0x80383990 end:0x8038B1A8
+	.data       start:0x803C1BF0 end:0x803C3730
+	.bss        start:0x804A48A0 end:0x804A6000
+	.sdata      start:0x804BDC38 end:0x804BDDD0
+	.sbss       start:0x804BF6F0 end:0x804BF768
+	.sdata2     start:0x804C1A20 end:0x804C2338
+
+Pack/RPSports/RPTnsScene/RPTnsScene_unsplit.o:
+	.text       start:0x80214480 end:0x8024E334
+	.ctors      start:0x8035516C end:0x803551A8
+	.rodata     start:0x8038B1A8 end:0x8038C8A0
+	.data       start:0x803C3730 end:0x803C4FC8
+	.bss        start:0x804A6000 end:0x804A6448
+	.sdata      start:0x804BDDD0 end:0x804BDE10
+	.sbss       start:0x804BF768 end:0x804BF778
+	.sdata2     start:0x804C2338 end:0x804C32A8
+
+Pack/RPSports/RPBsbScene/RPBsbScene_unsplit.o:
+	.text       start:0x8024E334 end:0x8028DF74
+	.ctors      start:0x803551A8 end:0x803551F4
+	.rodata     start:0x8038C8A0 end:0x8038E250
+	.data       start:0x803C4FC8 end:0x803C7718
+	.bss        start:0x804A6448 end:0x804A8900
+	.sdata      start:0x804BDE10 end:0x804BE818
+	.sbss       start:0x804BF778 end:0x804BF850
+	.sdata2     start:0x804C32A8 end:0x804C3E80
+
+Pack/RPSports/RPGolScene/RPGolScene_unsplit.o:
+	.text       start:0x8028DF74 end:0x802C7924
+	.ctors      start:0x803551F4 end:0x8035522C
+	.rodata     start:0x8038E250 end:0x8038FB10
+	.data       start:0x803C7718 end:0x803C8958
+	.bss        start:0x804A8900 end:0x804A92D0
+	.sdata      start:0x804BE818 end:0x804BE8D0
+	.sbss       start:0x804BF850 end:0x804BF958
+	.sdata2     start:0x804C3E80 end:0x804C4CB8
+
+Pack/RPSports/RPBoxScene/RPBoxScene_unsplit.o:
+	.text       start:0x802C7924 end:0x80313028
+	.ctors      start:0x8035522C end:0x8035524C
+	.rodata     start:0x8038FB10 end:0x80392190
+	.data       start:0x803C8958 end:0x803CA1B8
+	.bss        start:0x804A92D0 end:0x804A9DE8
+	.sdata      start:0x804BE8D0 end:0x804BE968
+	.sbss       start:0x804BF958 end:0x804BF998
+	.sdata2     start:0x804C4CB8 end:0x804C5AC0
+
+Pack/RPSports/RPBowScene/RPBowScene_unsplit.o:
+	.text       start:0x80313028 end:0x8035507C
+	.ctors      start:0x8035524C end:0x8035525C
+	.rodata     start:0x80392190 end:0x80393A70
+	.data       start:0x803CA1B8 end:0x803CAF00
+	.bss        start:0x804A9DE8 end:0x804BD36C
+	.sdata      start:0x804BE968 end:0x804BE9D0
+	.sbss       start:0x804BF998 end:0x804BFA10
+	.sdata2     start:0x804C5AC0 end:0x804C69D0

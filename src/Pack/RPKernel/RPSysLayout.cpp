@@ -9,7 +9,6 @@
 #include <cstdio>
 #include <cstring>
 
-
 namespace {
 
 //! Length of the "ID" suffix in panes (N_Pane_XX)

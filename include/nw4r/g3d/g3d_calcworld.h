@@ -4,7 +4,6 @@
 
 #include <nw4r/g3d/g3d_scnobj.h>
 #include <nw4r/g3d/res/g3d_resmdl.h>
-
 #include <nw4r/math.h>
 
 namespace nw4r {
@@ -39,7 +38,7 @@ void CalcSkinning(math::MTX34* pModelMtxArray, u32* pModelMtxAttribArray,
  ******************************************************************************/
 class ICalcWorldCallback {
 public:
-    virtual ~ICalcWorldCallback() = 0; // at 0x8
+    virtual ~ICalcWorldCallback() {} // at 0x8
 
     virtual void ExecCallbackA(ChrAnmResult* pResult, ResMdl mdl,
                                FuncObjCalcWorld* pFuncObj) = 0; // at 0xC
@@ -60,6 +59,20 @@ class WorldMtxManip {
 public:
     WorldMtxManip(math::MTX34* pM, math::VEC3* pS, u32* pWMAttr)
         : mpM(pM), mpS(pS), mpWMAttr(pWMAttr) {}
+
+    void GetMtx(math::MTX34* pMtx) const {
+        if (pMtx != NULL) {
+            math::MTX34Copy(pMtx, mpM);
+        }
+    }
+
+    void SetMtx(const math::MTX34* pMtx) {
+        if (pMtx != NULL) {
+            math::MTX34Copy(mpM, pMtx);
+        } else {
+            math::MTX34Identity(mpM);
+        }
+    }
 
 private:
     math::MTX34* mpM; // at 0x0
@@ -98,6 +111,13 @@ public:
         if (mTiming & ScnObj::CALLBACK_TIMING_C) {
             mpCallback->ExecCallbackC(pMtxArray, mdl, this);
         }
+    }
+
+    u16 GetCallbackNodeID() const {
+        return mNodeID;
+    }
+    void SetCallbackNodeID(u16 id) {
+        mNodeID = id;
     }
 
 private:

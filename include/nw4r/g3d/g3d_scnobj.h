@@ -3,7 +3,6 @@
 #include <nw4r/types_nw4r.h>
 
 #include <nw4r/g3d/g3d_obj.h>
-
 #include <nw4r/math.h>
 
 namespace nw4r {
@@ -73,7 +72,10 @@ public:
     enum Timing {
         CALLBACK_TIMING_A = (1 << 0),
         CALLBACK_TIMING_B = (1 << 1),
-        CALLBACK_TIMING_C = (1 << 2)
+        CALLBACK_TIMING_C = (1 << 2),
+
+        CALLBACK_TIMING_ALL =
+            CALLBACK_TIMING_A | CALLBACK_TIMING_B | CALLBACK_TIMING_C
     };
 
     enum ExecOp {
@@ -118,6 +120,13 @@ public:
     void SetPriorityDrawXlu(int prio);
     int GetPriorityDrawXlu() const {
         return mPriorityDrawXlu;
+    }
+
+    void SetScnObjCallback(IScnObjCallback* pCallback) {
+        mpFuncObjExec = pCallback;
+    }
+    IScnObjCallback* GetScnObjCallback() {
+        return mpFuncObjExec;
     }
 
     void EnableScnObjCallbackTiming(Timing timing);
@@ -166,7 +175,9 @@ protected:
     }
 
     bool IsG3dProcDisabled(u32 task) const {
-        if (task < __G3DPROC_OPTIONAL_END && ((1 << task - 1) & mScnObjFlags)) {
+        if (task < __G3DPROC_OPTIONAL_END &&
+            ((1 << (task - 1)) & mScnObjFlags)) {
+
             return true;
         }
 
@@ -343,6 +354,16 @@ public:
                               u32* pParam); // at 0x30
 
     ScaleProperty GetScaleProperty() const;
+
+    void SetScale(f32 sx, f32 sy, f32 sz) {
+        mScale.x = sx;
+        mScale.y = sy;
+        mScale.z = sz;
+    }
+
+    void SetScale(const math::VEC3& rScale) {
+        mScale = rScale;
+    }
 
 protected:
     void DefG3dProcScnLeaf(u32 task, u32 param, void* pInfo);

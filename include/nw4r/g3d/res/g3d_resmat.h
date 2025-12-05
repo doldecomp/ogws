@@ -7,7 +7,6 @@
 #include <nw4r/g3d/res/g3d_respltt.h>
 #include <nw4r/g3d/res/g3d_restev.h>
 #include <nw4r/g3d/res/g3d_restex.h>
-
 #include <nw4r/math.h>
 
 #include <revolution/GX.h>
@@ -547,6 +546,16 @@ public:
     void Release();
 
     ResMdl GetParent();
+
+    const char* GetName() const {
+        const ResMatData& r = ref();
+
+        if (r.name != 0) {
+            return reinterpret_cast<const char*>(&r) + r.name;
+        }
+
+        return NULL;
+    }
 
     u32 GetID() const {
         return ref().id;
