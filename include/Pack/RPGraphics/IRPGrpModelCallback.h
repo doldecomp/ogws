@@ -20,8 +20,8 @@ public:
     virtual void EditJointLocalMtx(RPGrpModel*, u16, nw4r::math::MTX34*,
                                    nw4r::math::VEC3*) {} // at 0xC
 
-    virtual void EditJointWorldMtx(RPGrpModel*, u16, nw4r::math::MTX34*) {
-    } // at 0x10
+    virtual void EditJointWorldMtx(RPGrpModel*, u16, nw4r::math::MTX34*) //
+    {} // at 0x10
 
     virtual void EditWorldMtx(RPGrpModel*) {} // at 0x14
     virtual void ReferViewMtx(RPGrpModel*) {} // at 0x18
