@@ -10,7 +10,6 @@ namespace nw4r {
 namespace ef {
 
 static void DrawPoint(const math::VEC3& rPos, bool texCoord);
-static void GXPosition(const math::VEC3& rPos);
 
 DrawPointStrategy::DrawPointStrategy() {}
 
@@ -73,10 +72,6 @@ static void DrawPoint(const math::VEC3& rPos, bool texCoord) {
         }
     }
     GXEnd();
-}
-
-static void GXPosition(const math::VEC3& rPos) {
-    GXPosition3f32(rPos.x, rPos.y, rPos.z);
 }
 
 void DrawPointStrategy::InitGraphics(const DrawInfo& rInfo,

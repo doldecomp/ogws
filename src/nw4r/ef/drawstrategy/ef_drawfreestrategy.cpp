@@ -6,8 +6,6 @@
 namespace nw4r {
 namespace ef {
 
-static void GXPosition(const math::VEC3& rPos);
-
 static math::MTX34 CalcLocalTransform(f32 px, f32 py, f32 sx, f32 sy,
                                       const nw4r::math::MTX34& rRot);
 
@@ -52,10 +50,6 @@ static void DrawQuad(const math::MTX34& rMtx, const math::_VEC3* pPosArray,
         }
     }
     GXEnd();
-}
-
-static void GXPosition(const math::VEC3& rPos) {
-    GXPosition3f32(rPos.x, rPos.y, rPos.z);
 }
 
 DrawFreeStrategy::DrawFreeStrategy() {}
