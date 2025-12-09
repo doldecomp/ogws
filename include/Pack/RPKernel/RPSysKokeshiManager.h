@@ -66,6 +66,16 @@ public:
         OfficialDBState_Favorite, //!< Database index holds a favorite Mii
     };
 
+    /**
+     * @brief Light map texture index
+     */
+    enum LightMap {
+        LightMap_lm_0,
+        LightMap_lm_1,
+
+        LightMap_Max
+    };
+
 public:
     /**
      * @brief Sets the active controller manager
@@ -99,9 +109,11 @@ public:
     RPGrpModel* CreateModel(void* pFile, u16 index, u8 viewNo, u32 flags,
                             u32 bufferOption);
 
+    RPGrpTexture* CreateTexture(void* pFile, const char* pName);
+
     const char* GetHandFileName(u32 handType) const;
 
-    void ChangeTexture(RPGrpModel*, const char*, const char*);
+    void ChangeTexture(RPGrpModel*, RPGrpTexture*, RPGrpTexture*);
 
     void SetMatColor(RPGrpModel* pModel, GXColor, GXColor);
 
@@ -112,6 +124,10 @@ public:
      */
     const wchar_t* GetGuestName(u16 index) {
         return mpGuestNames[index];
+    }
+
+    u8 GetOutputAlpha() const {
+        return mOutputAlpha;
     }
 
     /**
@@ -138,14 +154,23 @@ public:
         mpBodyManager = pBodyManager;
     }
 
+    static const char* GetLightTextureName(int i) {
+        return LIGHT_TEXTURE_NAMES[i];
+    }
+
 private:
+    static const char* LIGHT_TEXTURE_NAMES[LightMap_Max];
+
     //! Face library work buffer
     void* mpNglBuffer; // at 0x4
 
     //! Names for default database ("Guest") Miis
     const wchar_t* mpGuestNames[RFL_DEFAULT_CHAR_MAX]; // at 0x8
 
-    char unk20[0x44 - 0x20];
+    char unk20[0x34 - 0x20];
+    u8 mOutputAlpha; // at 0x34
+
+    char unk35[0x44 - 0x35];
 
     //! Data loaders for every controller
     RPSysKokeshiCtrlDataLoader*

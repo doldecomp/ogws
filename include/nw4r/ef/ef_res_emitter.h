@@ -4,7 +4,6 @@
 
 #include <nw4r/ef/ef_types.h>
 #include <nw4r/ef/emform/ef_emform.h>
-
 #include <nw4r/math.h>
 
 #include <revolution/GX.h>
@@ -115,6 +114,36 @@ struct EmitterDrawSetting {
         ALPHAFLICK_SAWTOOTH2,
         ALPHAFLICK_SQUARE,
         ALPHAFLICK_SINE
+    };
+
+    enum Assist {
+        // Common
+        ASSIST_CMN_NORMAL = 0,
+        ASSIST_CMN_CROSS,
+
+        // Billboard
+        ASSIST_BB_NORMAL = 0,
+        ASSIST_BB_Y,
+        ASSIST_BB_DIRECTIONAL,
+        ASSIST_BB_NOROLL,
+
+        // Stripe
+        ASSIST_ST_NORMAL = 0,
+        ASSIST_ST_CROSS,
+        ASSIST_ST_BILLBOARD,
+        ASSIST_ST_TUBE,
+    };
+
+    enum Ahead {
+        // Common
+        AHEAD_CMN_NODESIGN = 5,
+
+        // Billboard
+        AHEAD_BB_SPEED = 0,
+        AHEAD_BB_EMITTER_CENTER,
+        AHEAD_BB_EMITTER_DESIGN,
+        AHEAD_BB_PARTICLE,
+        AHEAD_BB_PARTICLE_BOTH,
     };
 
     enum OptionTypeCommon { TYPE_CMN_NORMAL, TYPE_CMN_CROSS };

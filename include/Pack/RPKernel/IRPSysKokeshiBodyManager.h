@@ -2,9 +2,10 @@
 #define RP_KERNEL_I_KOKESHI_BODY_MANAGER_H
 #include <Pack/types_pack.h>
 
+#include <RVLFaceLib.h>
+
 #include <egg/math.h>
 
-#include <RVLFaceLib.h>
 
 //! @addtogroup rp_kernel
 //! @{
@@ -28,7 +29,8 @@ public:
 
     virtual const char* GetClothesFileName() = 0; // at 0x18
 
-    virtual void GetClothesName(u16 bodyType, RFLSex sex, const char** ppNameA,
+    virtual void GetClothesName(u16 clothesType, RFLSex sex,
+                                const char** ppNameA,
                                 const char** ppNameB) = 0; // at 0x1C
 
     virtual void GetHeadJointMtx(u16 bodyType, RPGrpModel* pBodyModel,

@@ -7,7 +7,7 @@
 namespace EGG {
 class ScreenEffectBase {
 public:
-    enum ScreenEffectFlags { EFFECT_VISIBLE = (1 << 0), EFFECT_0x2 = (1 << 1) };
+    enum ScreenEffectFlags { EFFECT_ENABLE = (1 << 0), EFFECT_0x2 = (1 << 1) };
 
     enum BufferType {
         cBufferType_Hide_1_16,
@@ -80,9 +80,17 @@ public:
         return mScreen;
     }
 
-    bool isVisible() const {
-        return mFlags & EFFECT_VISIBLE;
+    bool isEnable() const {
+        return mFlags & EFFECT_ENABLE;
     }
+    void setEnable(bool enable) {
+        if (enable) {
+            mFlags |= EFFECT_ENABLE;
+        } else {
+            mFlags &= ~EFFECT_ENABLE;
+        }
+    }
+
     bool isFlag0x2() const {
         return mFlags & EFFECT_0x2;
     }

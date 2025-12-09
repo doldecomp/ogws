@@ -14,13 +14,17 @@ RPGrpModel* RPGrpModel::spCalcModel = NULL;
 nw4r::math::MTX34* RPGrpModel::spCalcWorldMtxArray = NULL;
 nw4r::math::MTX34* RPGrpModel::spCalcViewMtxArray = NULL;
 
+const nw4r::math::_VEC3 RPGrpModel::GEOMETRY_MAGNIFY[1 /* ??? */] = {
+    {-1.0f, 1.0f, 1.0f},
+};
+
 RPGrpModel* RPGrpModel::Construct(RPGrpHandle handle, u8 viewNo, u32 typeOption,
                                   u32 bufferOption) {
-    RPGrpModel* pModel = NULL;
+    RPGrpModel* p = NULL;
 
     switch (RPGrpModelResManager::GetCurrent()->GetType(handle)) {
     case RPGrpModelResManager::Type_ResMdl: {
-        pModel = new RPGrpModelG3D(handle, viewNo, typeOption, bufferOption);
+        p = new RPGrpModelG3D(handle, viewNo, typeOption, bufferOption);
         break;
     }
 
@@ -30,29 +34,29 @@ RPGrpModel* RPGrpModel::Construct(RPGrpHandle handle, u8 viewNo, u32 typeOption,
     }
     }
 
-    pModel->Configure();
-    pModel->CreateAnm();
-    return pModel;
+    p->Configure();
+    p->CreateAnm();
+    return p;
 }
 
 RPGrpModel* RPGrpModel::Construct(RPGrpHandle handle, int idx, u8 viewNo,
                                   u32 typeOption, u32 bufferOption) {
-    RPGrpModel* pModel =
+    RPGrpModel* p =
         new RPGrpModelG3D(handle, idx, viewNo, typeOption, bufferOption);
 
-    pModel->Configure();
-    pModel->CreateAnm();
-    return pModel;
+    p->Configure();
+    p->CreateAnm();
+    return p;
 }
 
 RPGrpModel* RPGrpModel::Construct(RPGrpHandle handle, const char* pName,
                                   u8 viewNo, u32 typeOption, u32 bufferOption) {
-    RPGrpModel* pModel =
+    RPGrpModel* p =
         new RPGrpModelG3D(handle, pName, viewNo, typeOption, bufferOption);
 
-    pModel->Configure();
-    pModel->CreateAnm();
-    return pModel;
+    p->Configure();
+    p->CreateAnm();
+    return p;
 }
 
 RPGrpModel::RPGrpModel(u8 viewNo)

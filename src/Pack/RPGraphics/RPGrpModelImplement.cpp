@@ -108,16 +108,12 @@ RPGrpModelG3D::SetCallback(IRPGrpModelCallback* pCallback) {
 }
 
 void RPGrpModelG3D::InternalCalc() {
-    static const Vec GEOMETRY_MAGNIFY[1] = {
-        {-1.0f, 1.0f, 1.0f},
-    };
-
     if (!mReverseCulling) {
         if (GetScnLeaf() != NULL) {
             GetScnLeaf()->SetScale(mScale);
         }
     } else {
-        const Vec& rMag = GEOMETRY_MAGNIFY[mReverseCulling - 1];
+        const nw4r::math::_VEC3& rMag = GEOMETRY_MAGNIFY[mReverseCulling - 1];
 
         nw4r::math::VEC3 scale(mScale.x * rMag.x, mScale.y * rMag.y,
                                mScale.z * rMag.z);

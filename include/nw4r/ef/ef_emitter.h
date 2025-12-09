@@ -15,12 +15,12 @@ namespace nw4r {
 namespace ef {
 
 // Forward declarations
+class Effect;
+class Emitter;
+class EmitterForm;
+class Particle;
 class ParticleManager;
 struct EmitterResource;
-class Effect;
-class EmitterForm;
-class Emitter;
-class Particle;
 
 struct EmitterInheritSetting {
     enum Flag {

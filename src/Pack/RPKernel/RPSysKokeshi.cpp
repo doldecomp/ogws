@@ -83,9 +83,10 @@ void RPSysKokeshi::LoadResource(const RPSysKokeshiOverloadInfo* pOverloadInfo) {
 
         case RPSysKokeshiManager::GenType_Friend:
         case RPSysKokeshiManager::GenType_Kokeshi: {
-            clothesType = RPUtlRandom::getU32(
-                              pBodyManager->GetFriendClothesIndexRange()) +
-                          pBodyManager->GetFriendClothesStartIndex();
+            clothesType = static_cast<u8>(
+                pBodyManager->GetFriendClothesStartIndex() +
+                RPUtlRandom::getU32(
+                    pBodyManager->GetFriendClothesIndexRange()));
             break;
         }
 
@@ -93,28 +94,44 @@ void RPSysKokeshi::LoadResource(const RPSysKokeshiOverloadInfo* pOverloadInfo) {
             break;
         }
         }
+
+        mOverloadInfo.SetClothesType(clothesType);
     }
 
-    mOverloadInfo.SetClothesType(clothesType);
+    // Open the clothes archive
+    const char* pClothFileName = pBodyManager->GetClothesFileName();
 
-    // Change clothes textures
+    void* pClothFile = RPSysResourceManager::GetFileFromArchive(pKokeshiArchive,
+                                                                pClothFileName);
+
+    // Determine the correct type of clothes
     const char* pClothNameA = NULL;
     const char* pClothNameB = NULL;
-    pBodyManager->GetClothesName(mGenInfo.GetBodyType(),
+    pBodyManager->GetClothesName(clothesType,
                                  static_cast<RFLSex>(mAdditionalInfo.sex),
                                  &pClothNameA, &pClothNameB);
 
-    pKokeshiManager->ChangeTexture(mpBodyModel, pClothNameA, pClothNameB);
-    pKokeshiManager->ChangeTexture(mpLeftHandModel, pClothNameA, pClothNameB);
-    pKokeshiManager->ChangeTexture(mpRightHandModel, pClothNameA, pClothNameB);
+    // Change the clothes textures
+    RPGrpTexture* pClothTexA =
+        pKokeshiManager->CreateTexture(pClothFile, pClothNameA);
+    RPGrpTexture* pClothTexB =
+        pKokeshiManager->CreateTexture(pClothFile, pClothNameB);
 
+    pKokeshiManager->ChangeTexture(mpBodyModel, pClothTexA, pClothTexB);
+    pKokeshiManager->ChangeTexture(mpLeftHandModel, pClothTexA, pClothTexB);
+    pKokeshiManager->ChangeTexture(mpRightHandModel, pClothTexA, pClothTexB);
+
+    // Apply favorite/skin color to the models
     GXColor favColor = GetFavoriteColor();
-    pKokeshiManager->SetMatColor(mpBodyModel, favColor, favColor);
-    pKokeshiManager->SetMatColor(mpLeftHandModel, favColor, favColor);
-    pKokeshiManager->SetMatColor(mpRightHandModel, favColor, favColor);
+    GXColor skinColor = mAdditionalInfo.skinColor;
+
+    pKokeshiManager->SetMatColor(mpBodyModel, favColor, skinColor);
+    pKokeshiManager->SetMatColor(mpLeftHandModel, favColor, skinColor);
+    pKokeshiManager->SetMatColor(mpRightHandModel, favColor, skinColor);
 
     if (mpNigaoeModel->GetKind() == RPGrpModel::Kind_RFL) {
-        // static_cast<RPGrpModelRfl*>(mpNigaoeModel)->unkA2 = ...
+        static_cast<RPGrpModelRfl*>(mpNigaoeModel)
+            ->SetOutputAlpha(pKokeshiManager->GetOutputAlpha());
     }
 }
 
@@ -123,9 +140,32 @@ void RPSysKokeshi::LoadResource(const RPSysKokeshiOverloadInfo* pOverloadInfo) {
  *
  * @param idx Lightmap texture index
  */
-void RPSysKokeshi::ApplyLightTexture(u8 idx) {
-    // TODO
-    (void)idx;
+void RPSysKokeshi::ApplyLightTexture(u8 /* idx */) {
+    RPGrpDrawPathLightMap* pLightMap = RPGrpModelManager::GetCurrent()
+                                           ->GetDrawPathManager()
+                                           ->GetDrawPathLightMap();
+
+    for (u32 i = 0; i < RPSysKokeshiManager::LightMap_Max; i++) {
+        pLightMap->ReplaceModelTexture(
+            pLightMap->GetLightTextureManager()->getTextureIndex(
+                RPSysKokeshiManager::GetLightTextureName(i)),
+            mpNigaoeModel);
+
+        pLightMap->ReplaceModelTexture(
+            pLightMap->GetLightTextureManager()->getTextureIndex(
+                RPSysKokeshiManager::GetLightTextureName(i)),
+            mpBodyModel);
+
+        pLightMap->ReplaceModelTexture(
+            pLightMap->GetLightTextureManager()->getTextureIndex(
+                RPSysKokeshiManager::GetLightTextureName(i)),
+            mpLeftHandModel);
+
+        pLightMap->ReplaceModelTexture(
+            pLightMap->GetLightTextureManager()->getTextureIndex(
+                RPSysKokeshiManager::GetLightTextureName(i)),
+            mpRightHandModel);
+    }
 }
 
 /**

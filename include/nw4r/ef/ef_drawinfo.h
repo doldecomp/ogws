@@ -15,17 +15,17 @@ private:
     math::MTX34 mProjMtx;    // at 0x30
     bool mLightEnable;       // at 0x60
     GXLightID mLightMask;    // at 0x64
-    bool mIsSpotLight;       // at 0x6C
-    GXFogType mFogType;      // at 0x70
-    f32 mFogStartz;          // at 0x74
-    f32 mFogEndz;            // at 0x78
-    f32 mFogNearz;           // at 0x7C
-    f32 mFogFarz;            // at 0x80
-    GXColor mFogColor;       // at 0x84
-    f32 mZOffset;            // at 0x88
-    math::VEC3 mZOffsetOrig; // at 0x8C
-    GXColor mChanMatColor;   // at 0x98
-    GXColor mChanAmbColor;   // at 0x9C
+    bool mIsSpotLight;       // at 0x68
+    GXFogType mFogType;      // at 0x6C
+    f32 mFogStartz;          // at 0x70
+    f32 mFogEndz;            // at 0x74
+    f32 mFogNearz;           // at 0x78
+    f32 mFogFarz;            // at 0x7C
+    GXColor mFogColor;       // at 0x80
+    f32 mZOffset;            // at 0x84
+    math::VEC3 mZOffsetOrig; // at 0x88
+    GXColor mChanMatColor;   // at 0x94
+    GXColor mChanAmbColor;   // at 0x98
 
 public:
     DrawInfo()

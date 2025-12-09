@@ -12,8 +12,6 @@ namespace ef {
 static void DrawPolygon(const nw4r::math::VEC3& rP0,
                         const nw4r::math::VEC3& rP1, bool texCoord);
 
-static void GXPosition(const math::VEC3& rPos);
-
 DrawLineStrategy::DrawLineStrategy() {}
 
 void DrawLineStrategy::Draw(const DrawInfo& rInfo, ParticleManager* pManager) {
@@ -123,10 +121,6 @@ static void DrawPolygon(const nw4r::math::VEC3& rP0,
         }
     }
     GXEnd();
-}
-
-static void GXPosition(const math::VEC3& rPos) {
-    GXPosition3f32(rPos.x, rPos.y, rPos.z);
 }
 
 } // namespace ef

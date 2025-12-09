@@ -32,12 +32,12 @@
 #include <Pack/RPKernel/RPSysMessage.h>
 #include <Pack/RPKernel/RPSysMiddleDB.h>
 #include <Pack/RPKernel/RPSysMiddleDBGenInfo.h>
+#include <Pack/RPKernel/RPSysNWC24Manager.h>
 #include <Pack/RPKernel/RPSysOfficialDB.h>
 #include <Pack/RPKernel/RPSysTagProcessor.h>
 #include <Pack/RPKernel/RPSysTextWriter.h>
 #include <Pack/RPKernel/RPSysWideTextWriter.h>
 #include <Pack/RPKernel/RP_DEBUG_STUB_0.h>
 #include <Pack/RPKernel/RP_DEBUG_STUB_1.h>
-
 
 #endif
