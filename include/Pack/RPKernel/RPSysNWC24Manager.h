@@ -17,7 +17,9 @@ class RPSysAvatar;
  */
 class RPSysNWC24Manager {
 protected:
-    u8* mpNwc24Work;    // at 0x0
+    //! Work buffer for NWC24
+    u8* mpNwc24Work; // at 0x0
+    //! Work buffer for message formatting
     wchar_t* mpMsgWork; // at 0x4
 
 public:
@@ -54,6 +56,10 @@ public:
                     const RPSysAvatar* pAvatar, int argc, va_list argv);
 
 private:
+    //! Size of the message work buffer
+    static const int MSG_BUFFER_SIZE = 1024;
+
+private:
     /**
      * @brief Attempts to open the WiiConnect24 library for use
      *
@@ -67,9 +73,6 @@ private:
     void closeLib();
 
 private:
-    //! Size of the message work buffer
-    static const int MSG_BUFFER_SIZE = 1024;
-
     //! Whether the last NWC24 operation was successful
     static BOOL sSuccess;
 };
