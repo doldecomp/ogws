@@ -2,8 +2,6 @@
 #define RP_KERNEL_NWC24_MANAGER_H
 #include <Pack/types_pack.h>
 
-#include <Pack/RPSingleton.h>
-
 #include <egg/core.h>
 
 //! @addtogroup rp_kernel
