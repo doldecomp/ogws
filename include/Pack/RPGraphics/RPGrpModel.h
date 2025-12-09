@@ -176,10 +176,9 @@ public:
             return;
         }
 
-        nw4r::g3d::ScnObj* pScnObj = GetScnObj();
-        if (pScnObj != NULL) {
-            pScnObj->G3dProc(nw4r::g3d::G3dObj::G3DPROC_CALC_VIEW, 0,
-                             const_cast<nw4r::math::MTX34*>(&rViewMtx));
+        if (GetScnObj() != NULL) {
+            GetScnObj()->G3dProc(nw4r::g3d::G3dObj::G3DPROC_CALC_VIEW, 0,
+                                 const_cast<nw4r::math::MTX34*>(&rViewMtx));
         }
     }
 
@@ -211,6 +210,10 @@ public:
         return mpModelEx->getScnRfl();
     }
 
+    bool IsVisible() const {
+        return (mFlags & EFlag_Visible) ? true : false;
+    }
+
     /**
      * @brief Gets the allocator used for model-related allocations
      */
@@ -227,7 +230,7 @@ public:
     }
 
 protected:
-    RPGrpModel(u8 viewNo);
+    explicit RPGrpModel(u8 viewNo);
     virtual ~RPGrpModel(); // at 0x88
 
     virtual void Configure();        // at 0x8C
@@ -247,6 +250,8 @@ protected:
     };
 
 protected:
+    static const nw4r::math::_VEC3 GEOMETRY_MAGNIFY[1 /* ??? */];
+
     //! Allocator used for model-related allocations
     static EGG::Allocator* spAllocator;
 

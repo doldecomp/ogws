@@ -70,9 +70,13 @@ private:
     void Construct();
 
 private:
-    RPGrpModel* mpNigaoeModel;    // at 0xA4
-    RPGrpModel* mpBodyModel;      // at 0xA8
-    RPGrpModel* mpLeftHandModel;  // at 0xAC
+    //! Face model
+    RPGrpModel* mpNigaoeModel; // at 0xA4
+    //! Avatar body model
+    RPGrpModel* mpBodyModel; // at 0xA8
+    //! Left-hand model
+    RPGrpModel* mpLeftHandModel; // at 0xAC
+    //! Right-hand model
     RPGrpModel* mpRightHandModel; // at 0xB0
 };
 

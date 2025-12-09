@@ -25,9 +25,9 @@
 #include <egg/gfxe/eggModelEx.h>
 #include <egg/gfxe/eggModelSnapshot.h>
 #include <egg/gfxe/eggPostEffectHDR.h>
+#include <egg/gfxe/eggScnRenderer.h>
 #include <egg/gfxe/eggScreen.h>
 #include <egg/gfxe/eggStateGX.h>
 #include <egg/gfxe/eggTextureBuffer.h>
-
 
 #endif

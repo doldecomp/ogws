@@ -17,15 +17,6 @@
 class RPSysAvatar : public RP_DEBUG_STUB_1 {
 public:
     /**
-     * @brief Light map texture index
-     */
-    enum ELightMap {
-        ELightMap_lm_0,
-        ELightMap_lm_1,
-    };
-
-public:
-    /**
      * @brief Constructor
      *
      * @param pGenInfo Mii generation parameters
@@ -56,6 +47,10 @@ public:
      * @brief Gets the RFL favorite color of this avatar
      */
     GXColor GetFavoriteColor() const;
+
+    const RPSysKokeshiGenInfo& GetGenInfo() const {
+        return mGenInfo;
+    }
 
 protected:
     /**

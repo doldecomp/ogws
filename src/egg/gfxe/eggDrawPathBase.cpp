@@ -5,14 +5,14 @@ namespace EGG {
 DrawPathBase::DrawPathBase() {}
 
 void DrawPathBase::calc() {
-    if (isVisible()) {
+    if (isEnable()) {
         copyFromAnother(IDrawGX::getScreen());
         internalCalc();
     }
 }
 
 void DrawPathBase::scnProcDraw(u16 step) {
-    if (isVisible()) {
+    if (isEnable()) {
         internalDraw(step);
     }
 }

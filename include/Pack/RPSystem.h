@@ -6,7 +6,9 @@
 #include <Pack/RPSystem/RPSysProjectLocal.h>
 #include <Pack/RPSystem/RPSysResourceManager.h>
 #include <Pack/RPSystem/RPSysSceneCreator.h>
+#include <Pack/RPSystem/RPSysSceneMgr.h>
 #include <Pack/RPSystem/RPSysSystem.h>
 #include <Pack/RPSystem/RPSysTagParms.h>
+
 
 #endif

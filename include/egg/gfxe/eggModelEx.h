@@ -132,6 +132,10 @@ public:
         }
     }
 
+    static u32 getDrawFlag() {
+        return sDrawFlag;
+    }
+
 private:
     enum { cFlag_HasOriginalBV = 1 << 0 };
 };
