@@ -6,7 +6,6 @@
 #include <nw4r/ef/ef_referencedobject.h>
 #include <nw4r/ef/ef_res_emitter.h>
 #include <nw4r/ef/ef_types.h>
-
 #include <nw4r/math.h>
 
 #include <revolution/GX.h>
@@ -86,6 +85,10 @@ public:
                             const math::MTX34* pSpace, float momentum,
                             const EmitterInheritSetting* pSetting,
                             Particle* pReferencePtcl); // at 0x10
+
+    ParticleParameter* GetParticleParameter() {
+        return &mParameter;
+    }
 
     void Draw_GetColor(int layer, GXColor* pColorPri, GXColor* pColorSec);
 
