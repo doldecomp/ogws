@@ -1128,7 +1128,7 @@ config.libs = [
             Object(NonMatching, "Pack/RPKernel/RPSysLytDynamicAnm.cpp"),
             Object(Matching, "Pack/RPKernel/RPSysKokeshiIterater.cpp"),
             Object(NonMatching, "Pack/RPKernel/RPSysCursorDrawMgr.cpp"),
-            Object(NonMatching, "Pack/RPKernel/RPSysStringUtility.cpp"),
+            Object(Matching, "Pack/RPKernel/RPSysStringUtility.cpp"),
             Object(Matching, "Pack/RPKernel/RPSysKokeshiCtrlDataLoader.cpp"),
             Object(NonMatching, "Pack/RPKernel/RPSysPauseMenu.cpp"),
             Object(NonMatching, "Pack/RPKernel/RPSysSystemWinMgr.cpp"),
