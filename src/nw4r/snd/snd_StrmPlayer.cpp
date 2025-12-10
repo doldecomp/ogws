@@ -301,7 +301,7 @@ bool StrmPlayer::LoadStreamData(ut::FileStream* pFileStream, int offset,
     ut::detail::AutoLock<OSMutex> lock(sLoadBufferMutex);
     DCInvalidateRange(sLoadBuffer, size);
 
-    pFileStream->Seek(offset, ut::FileStream::SEEK_BEG);
+    pFileStream->Seek(offset, ut::FileStream::SEEK_ORIGIN_BEG);
     s32 bytesRead = pFileStream->Read(sLoadBuffer, size);
 
     if (bytesRead != size) {

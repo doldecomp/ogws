@@ -14,7 +14,7 @@ RPSysProjectLocal::RPSysProjectLocal(EGG::Heap* pHeap)
 
 #if defined(VERSION_RSPE01_01)
       mRegion(ERegion_NTSC_U),
-      mDialect(EArea_USA),
+      mLocale(EArea_USA),
       mLanguage(EArea_USA),
       mIsPal50(false),
       mSoundStorage(EStorage_Memory),
@@ -40,7 +40,7 @@ RPSysProjectLocal::~RPSysProjectLocal() {}
  * @param pSuffix Optional suffix to append after the locale
  */
 void RPSysProjectLocal::appendLocalDirectory(char* pPath, const char* pSuffix) {
-    switch (mDialect) {
+    switch (mLocale) {
     case EArea_England: {
         std::strcat(pPath, "EN/");
         break;
@@ -93,12 +93,12 @@ void RPSysProjectLocal::appendLocalDirectory(char* pPath, const char* pSuffix) {
 }
 
 /**
- * @brief Sets the current dialect
+ * @brief Sets the current locale
  *
- * @param dialect Dialect area
+ * @param locale Locale area
  */
-void RPSysProjectLocal::setDialect(EArea dialect) {
-    mDialect = dialect;
+void RPSysProjectLocal::setLocale(EArea locale) {
+    mLocale = locale;
 }
 
 /**

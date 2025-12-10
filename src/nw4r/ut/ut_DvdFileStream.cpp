@@ -68,7 +68,7 @@ bool DvdFileStream::Open(s32 entrynum) {
 
     if (DVDFastOpen(entrynum, &mFileInfo.dvdInfo)) {
         mFilePosition.SetFileSize(mFileInfo.dvdInfo.size);
-        mFilePosition.Seek(0, SEEK_BEG);
+        mFilePosition.Seek(0, SEEK_ORIGIN_BEG);
 
         mCloseOnDestroyFlg = true;
         mCloseEnableFlg = true;
@@ -87,7 +87,7 @@ bool DvdFileStream::Open(const DVDFileInfo* pInfo, bool close) {
 
     mFileInfo.dvdInfo = *pInfo;
     mFilePosition.SetFileSize(mFileInfo.dvdInfo.size);
-    mFilePosition.Seek(0, SEEK_BEG);
+    mFilePosition.Seek(0, SEEK_ORIGIN_BEG);
 
     mCloseOnDestroyFlg = false;
     mCloseEnableFlg = close;

@@ -200,7 +200,7 @@ NandSoundArchive::NandFileStream::NandFileStream(const NANDFileInfo* pFileInfo,
             mSize = ut::NandFileStream::GetSize();
         }
 
-        ut::NandFileStream::Seek(mOffset, SEEK_BEG);
+        ut::NandFileStream::Seek(mOffset, SEEK_ORIGIN_BEG);
     }
 }
 
@@ -215,7 +215,7 @@ NandSoundArchive::NandFileStream::NandFileStream(const char* pPath, u32 offset,
             mSize = ut::NandFileStream::GetSize();
         }
 
-        ut::NandFileStream::Seek(mOffset, SEEK_BEG);
+        ut::NandFileStream::Seek(mOffset, SEEK_ORIGIN_BEG);
     }
 }
 
@@ -235,17 +235,17 @@ s32 NandSoundArchive::NandFileStream::Read(void* pDst, u32 size) {
 
 void NandSoundArchive::NandFileStream::Seek(s32 offset, u32 origin) {
     switch (origin) {
-    case SEEK_BEG: {
+    case SEEK_ORIGIN_BEG: {
         offset += mOffset;
         break;
     }
 
-    case SEEK_CUR: {
+    case SEEK_ORIGIN_CUR: {
         offset += ut::NandFileStream::Tell();
         break;
     }
 
-    case SEEK_END: {
+    case SEEK_ORIGIN_END: {
         offset = mOffset + mSize - offset;
         break;
     }
@@ -261,7 +261,7 @@ void NandSoundArchive::NandFileStream::Seek(s32 offset, u32 origin) {
         offset = mOffset + mSize;
     }
 
-    ut::NandFileStream::Seek(offset, SEEK_BEG);
+    ut::NandFileStream::Seek(offset, SEEK_ORIGIN_BEG);
 }
 
 } // namespace snd

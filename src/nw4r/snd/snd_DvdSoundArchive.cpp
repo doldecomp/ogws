@@ -177,7 +177,7 @@ DvdSoundArchive::DvdFileStream::DvdFileStream(const DVDFileInfo* pFileInfo,
         mSize = ut::DvdFileStream::GetSize();
     }
 
-    ut::DvdFileStream::Seek(mOffset, SEEK_BEG);
+    ut::DvdFileStream::Seek(mOffset, SEEK_ORIGIN_BEG);
 }
 
 DvdSoundArchive::DvdFileStream::DvdFileStream(s32 entrynum, u32 offset,
@@ -187,7 +187,7 @@ DvdSoundArchive::DvdFileStream::DvdFileStream(s32 entrynum, u32 offset,
         mSize = ut::DvdFileStream::GetSize();
     }
 
-    ut::DvdFileStream::Seek(mOffset, SEEK_BEG);
+    ut::DvdFileStream::Seek(mOffset, SEEK_ORIGIN_BEG);
 }
 
 s32 DvdSoundArchive::DvdFileStream::Read(void* pDst, u32 size) {
@@ -203,17 +203,17 @@ s32 DvdSoundArchive::DvdFileStream::Read(void* pDst, u32 size) {
 
 void DvdSoundArchive::DvdFileStream::Seek(s32 offset, u32 origin) {
     switch (origin) {
-    case SEEK_BEG: {
+    case SEEK_ORIGIN_BEG: {
         offset += mOffset;
         break;
     }
 
-    case SEEK_CUR: {
+    case SEEK_ORIGIN_CUR: {
         offset += ut::DvdFileStream::Tell();
         break;
     }
 
-    case SEEK_END: {
+    case SEEK_ORIGIN_END: {
         offset = mOffset + mSize - offset;
         break;
     }
@@ -229,7 +229,7 @@ void DvdSoundArchive::DvdFileStream::Seek(s32 offset, u32 origin) {
         offset = mOffset + mSize;
     }
 
-    ut::DvdFileStream::Seek(offset, SEEK_BEG);
+    ut::DvdFileStream::Seek(offset, SEEK_ORIGIN_BEG);
 }
 
 } // namespace snd

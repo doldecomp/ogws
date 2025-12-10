@@ -60,11 +60,11 @@ public:
     void appendLocalDirectory(char* pPath, const char* pSuffix = "");
 
     /**
-     * @brief Sets the current dialect
+     * @brief Sets the current locale
      *
-     * @param dialect Dialect area
+     * @param locale Locale area
      */
-    void setDialect(EArea dialect);
+    void setLocale(EArea locale);
 
     /**
      * @brief Sets the current language
@@ -88,10 +88,10 @@ public:
     }
 
     /**
-     * @brief Gets the current language dialect
+     * @brief Gets the current game locale
      */
-    EArea getDialect() const {
-        return mDialect;
+    EArea getLocale() const {
+        return mLocale;
     }
 
     /**
@@ -120,8 +120,8 @@ private:
     ERegion mRegion; // at 0x8
     //! Pack Project title
     RPSysSceneCreator::EPackID mPack; // at 0xC
-    //! Language dialect
-    EArea mDialect; // at 0x10
+    //! Game locale
+    EArea mLocale; // at 0x10
     //! Game language
     EArea mLanguage; // at 0x14
     //! Whether the display is 50Hz

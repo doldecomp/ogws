@@ -11,7 +11,7 @@ class FileStream : public IOStream {
 public:
     NW4R_UT_RTTI_DECL(FileStream);
 
-    enum SeekOrigin { SEEK_BEG, SEEK_CUR, SEEK_END };
+    enum SeekOrigin { SEEK_ORIGIN_BEG, SEEK_ORIGIN_CUR, SEEK_ORIGIN_END };
 
 public:
     FileStream() {}
