@@ -19,7 +19,7 @@ BOOL RPSysNWC24Manager::sSuccess = true;
  */
 void RPSysNWC24Manager::initialize() {
     s32 err = NWC24SuspendScheduler();
-    if (err >= NWC24_OK) {
+    if (err >= 0) {
         return;
     }
 
