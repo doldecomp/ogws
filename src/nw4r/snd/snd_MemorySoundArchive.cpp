@@ -173,17 +173,17 @@ s32 MemorySoundArchive::MemoryFileStream::Read(void* pDst, u32 size) {
 
 void MemorySoundArchive::MemoryFileStream::Seek(s32 offset, u32 origin) {
     switch (origin) {
-    case SEEK_BEG: {
+    case SEEK_ORIGIN_BEG: {
         mOffset = offset;
         break;
     }
 
-    case SEEK_CUR: {
+    case SEEK_ORIGIN_CUR: {
         mOffset += offset;
         break;
     }
 
-    case SEEK_END: {
+    case SEEK_ORIGIN_END: {
         mOffset = mSize - offset;
         break;
     }

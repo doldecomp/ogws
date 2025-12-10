@@ -95,7 +95,7 @@ bool StrmFileLoader::LoadFileHeader(void* pStrmBin, u32 size) {
     u8 headerArea[HEADER_ALIGNED_SIZE + 32];
     u32 bytesRead;
 
-    mStream.Seek(0, ut::FileStream::SEEK_BEG);
+    mStream.Seek(0, ut::FileStream::SEEK_ORIGIN_BEG);
     bytesRead = mStream.Read(ut::RoundUp(headerArea, 32), HEADER_ALIGNED_SIZE);
     if (bytesRead != HEADER_ALIGNED_SIZE) {
         return false;
@@ -115,7 +115,7 @@ bool StrmFileLoader::LoadFileHeader(void* pStrmBin, u32 size) {
 
     u32 loadSize = pHeader->headBlockOffset + pHeader->headBlockSize;
 
-    mStream.Seek(0, ut::FileStream::SEEK_BEG);
+    mStream.Seek(0, ut::FileStream::SEEK_ORIGIN_BEG);
     bytesRead = mStream.Read(pStrmBin, loadSize);
     if (bytesRead != loadSize) {
         return false;
@@ -135,7 +135,7 @@ bool StrmFileLoader::ReadAdpcBlockData(u16* pYN1, u16* pYN2, int block,
                  block * channels * (2 * sizeof(u16)) +
                  sizeof(ut::BinaryBlockHeader);
 
-    mStream.Seek(offset, ut::FileStream::SEEK_BEG);
+    mStream.Seek(offset, ut::FileStream::SEEK_ORIGIN_BEG);
 
     u16 buffer[StrmPlayer::StrmHeader::STRM_CHANNEL_MAX * 2] ALIGN(32);
     // @bug Read size not validated

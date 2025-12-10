@@ -161,7 +161,7 @@ SeqSound::SeqLoadTask::SeqLoadTask()
     : fileStream(NULL), buffer(NULL), callback(NULL), callbackData(NULL) {}
 
 void SeqSound::SeqLoadTask::Execute() {
-    fileStream->Seek(0, ut::FileStream::SEEK_BEG);
+    fileStream->Seek(0, ut::FileStream::SEEK_ORIGIN_BEG);
 
     s32 bytesRead = fileStream->Read(buffer, bufferSize);
     fileStream = NULL;

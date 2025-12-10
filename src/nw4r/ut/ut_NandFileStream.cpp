@@ -73,7 +73,7 @@ bool NandFileStream::Open(const char* pPath, u32 mode) {
         mFilePosition.SetFileSize(fileSize);
     }
 
-    mFilePosition.Seek(0, SEEK_BEG);
+    mFilePosition.Seek(0, SEEK_ORIGIN_BEG);
 
     mCloseOnDestroyFlg = true;
     mCloseEnableFlg = true;
@@ -103,7 +103,7 @@ bool NandFileStream::Open(const NANDFileInfo* pInfo, u32 mode,
     }
 
     mFilePosition.SetFileSize(fileSize);
-    mFilePosition.Seek(0, SEEK_BEG);
+    mFilePosition.Seek(0, SEEK_ORIGIN_BEG);
 
     mCloseOnDestroyFlg = false;
     mCloseEnableFlg = enableClose;
