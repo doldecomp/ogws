@@ -30,7 +30,7 @@ public:
     static RPGrpModelRfl* Construct(RFLDataSource src, u16 index,
                                     RFLMiddleDB* pMiddleDB,
                                     RFLResolution resolution, u32 exprFlags,
-                                    u8 viewNo);
+                                    u8 viewNo, u32 arg6 = 0);
 
     RPGrpModelRfl(RFLResolution resolution, u32 exprFlags, u8 viewNo);
 
@@ -137,8 +137,24 @@ public:
     virtual UNKTYPE VF_0x10(UNKTYPE) override {} // at 0x10
     virtual UNKTYPE VF_0xC(UNKTYPE) override {}  // at 0xC
 
+    void SetBrightnessColor(const GXColor& rColor) {
+        mBrightnessColor = rColor;
+    }
+
     void SetOutputAlpha(u8 alpha) {
         mOutputAlpha = alpha;
+    }
+
+    void SetMaterialType(MaterialType type) {
+        mMaterialType = type;
+    }
+
+    static void SetBaseScale(f32 scale) {
+        sBaseScale = scale;
+    }
+
+    static void SetMtx(const nw4r::math::MTX34& rMtx) {
+        nw4r::math::MTX34Copy(&lbl_804A4608, &rMtx);
     }
 
 private:
@@ -171,6 +187,7 @@ private:
     static f32 sBaseScale;
     static nw4r::math::MTX34 lbl_804A4608;
 
+private:
     GXTexObj mLightTexObj0;          // at 0x4C
     GXTexObj mLightTexObj1;          // at 0x6C
     GXColor mBrightnessColor;        // at 0x8C

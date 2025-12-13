@@ -14,7 +14,11 @@ RPSysFile::RPSysFile(const char* pPath, s32 size, const void* pData)
     : mSize(size) {
 
     // @bug Can easily overflow the fixed-size buffer
+#if defined(BUG_FIX)
+    std::strncpy(mPath, pPath, ARRAY_SIZE(mPath));
+#else
     std::strcpy(mPath, pPath);
+#endif
 
     mpData = static_cast<const u8*>(pData);
 }

@@ -35,6 +35,10 @@ public:
     bool SetExpression(RFLExpression expression);
     bool GetExpression(RFLExpression* pExpression);
 
+    u32 GetExpressionFlag() const {
+        return mExpressionFlag;
+    }
+
     void SetLightSetIdx(int idx);
     s8 GetLightSetIdx() const {
         return mIdxLightSet;

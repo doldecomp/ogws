@@ -18,6 +18,8 @@ extern "C" {
 
 #define WPAD_MAX_SPEAKER_VOLUME 127
 
+#define WPAD_ADDR_LEN WUD_ADDR_LEN
+
 extern u8 _scFlush;
 
 typedef WUDAllocFunc WPADAllocFunc;

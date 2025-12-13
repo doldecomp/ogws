@@ -20,7 +20,7 @@ public:
         return spCurrent;
     }
 
-    RPGrpDrawPathManager* GetDrawPathManager();
+    RPGrpDrawPathManager* GetDrawPathManager(u8 drawScene) const;
 
 private:
     //! Allocator used for model-related allocations

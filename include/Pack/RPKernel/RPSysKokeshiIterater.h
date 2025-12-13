@@ -9,8 +9,9 @@
 
 /**
  * @brief Mii data source iterator
+ * @typo
  */
-class RPSysKokeshiIterater { // @typo
+class RPSysKokeshiIterater {
 private:
     //! Whether this iterator has been initialized
     BOOL mIsInitialized; // at 0x0

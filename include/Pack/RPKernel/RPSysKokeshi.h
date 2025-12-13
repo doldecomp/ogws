@@ -36,11 +36,11 @@ public:
                                   NULL) override; // at 0xC
 
     /**
-     * @brief Applies a generated light texture to this avatar
+     * @brief Applies all lightmap textures to this avatar
      *
-     * @param idx Lightmap texture index
+     * @param drawScene Draw scene index
      */
-    virtual void ApplyLightTexture(u8 idx) override; // at 0x10
+    virtual void ApplyLightTexture(u8 drawScene) override; // at 0x10
 
     /**
      * @brief Gets the transformation matrix of the head joint/node

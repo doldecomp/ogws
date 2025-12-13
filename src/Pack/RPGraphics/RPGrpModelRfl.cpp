@@ -24,7 +24,7 @@ nw4r::math::MTX34 RPGrpModelRfl::lbl_804A4608(
 RPGrpModelRfl* RPGrpModelRfl::Construct(RFLDataSource src, u16 index,
                                         RFLMiddleDB* pMiddleDB,
                                         RFLResolution resolution, u32 exprFlags,
-                                        u8 viewNo) {
+                                        u8 viewNo, u32 /* arg6 */) {
 
     RPGrpModelRfl* p = new RPGrpModelRfl(resolution, exprFlags, viewNo);
 

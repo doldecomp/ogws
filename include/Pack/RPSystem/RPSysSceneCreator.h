@@ -58,7 +58,7 @@ public:
         ESceneID_RPPartyMiiLoadScene, //!< Mii/GameMgr Setup
         ESceneID_RPPartyMenuScene,    //!< Main Menu
 
-#if defined(PACK_PLAY)
+#if defined(PACK_PARTY)
         ESceneID_Max,
 #endif
 
@@ -193,7 +193,7 @@ public:
      * @param id Scene ID
      */
     EGG::Scene* createSportsScene(s32 id);
-#elif defined(PACK_PLAY)
+#elif defined(PACK_PARTY)
     /**
      * @brief Creates a Party Pack scene by ID
      *
