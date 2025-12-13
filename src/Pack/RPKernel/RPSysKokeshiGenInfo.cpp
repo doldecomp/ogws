@@ -9,14 +9,14 @@ RPSysKokeshiGenInfo::RPSysKokeshiGenInfo() {
     mGenType = RPSysKokeshiManager::GenType_None;
     mPlayerNo = 0;
     mBodyType = 0;
-    mHandType = 1;
+    mHandType = RPSysKokeshiManager::HandType_Sphere;
     mViewNo = 1;
     mModelFlags = 0;
     mBufferOption = 0;
     mTexWidth = 128;
     mTexHeight = 128;
     mResolution = RFLResolution_128;
-    mExpression = RFLExp_Smile;
+    mExprFlag = RFLExpFlag_Normal;
     mMipMap = false;
     mUseFavoriteColor = false;
     mClearColor.r = mClearColor.g = mClearColor.b = mClearColor.a = 0;

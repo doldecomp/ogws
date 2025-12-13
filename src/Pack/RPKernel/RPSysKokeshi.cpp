@@ -136,13 +136,13 @@ void RPSysKokeshi::LoadResource(const RPSysKokeshiOverloadInfo* pOverloadInfo) {
 }
 
 /**
- * @brief Applies a generated light texture to this avatar
+ * @brief Applies all lightmap textures to this avatar
  *
- * @param idx Lightmap texture index
+ * @param drawScene Draw scene index
  */
-void RPSysKokeshi::ApplyLightTexture(u8 /* idx */) {
+void RPSysKokeshi::ApplyLightTexture(u8 drawScene) {
     RPGrpDrawPathLightMap* pLightMap = RPGrpModelManager::GetCurrent()
-                                           ->GetDrawPathManager()
+                                           ->GetDrawPathManager(drawScene)
                                            ->GetDrawPathLightMap();
 
     for (u32 i = 0; i < RPSysKokeshiManager::LightMap_Max; i++) {
@@ -238,7 +238,7 @@ void RPSysKokeshi::Construct() {
     }
 
     mpNigaoeModel = pKokeshiManager->CreateNigaoeModel(
-        location, mGenInfo.GetResolution(), mGenInfo.GetExpression(),
+        location, mGenInfo.GetResolution(), mGenInfo.GetExpressionFlag(),
         mGenInfo.GetViewNo());
 
     RPSysAvatar::Setup();

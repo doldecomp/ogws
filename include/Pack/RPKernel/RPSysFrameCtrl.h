@@ -116,7 +116,7 @@ private:
     /**
      * @brief Animation result flags
      */
-    enum EFlag {
+    enum {
         EFlag_Finished = 1 << 0, //!< Non-looping animation has finished
         EFlag_Looped = 1 << 1,   //!< Animation has looped at least once
     };

@@ -392,7 +392,11 @@ void RPSysStringUtility::ChangePointHalfFull(wchar_t* pStr) {
 
         case L',': {
             // @bug Should be a full-width character
+#if defined(BUG_FIX)
+            pStr[i] = L'，'; /* full-width comma */
+#else
             pStr[i] = L',';
+#endif
             break;
         }
 

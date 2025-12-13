@@ -37,17 +37,20 @@ public:
         const RPSysKokeshiOverloadInfo* pOverloadInfo = NULL); // at 0xC
 
     /**
-     * @brief Applies a generated light texture to this avatar
+     * @brief Applies all lightmap textures to this avatar
      *
-     * @param idx Lightmap texture index
+     * @param drawScene Draw scene index
      */
-    virtual void ApplyLightTexture(u8 idx) = 0; // at 0x10
+    virtual void ApplyLightTexture(u8 drawScene) = 0; // at 0x10
 
     /**
      * @brief Gets the RFL favorite color of this avatar
      */
     GXColor GetFavoriteColor() const;
 
+    /**
+     * @brief Accesses the Mii generation parameters
+     */
     const RPSysKokeshiGenInfo& GetGenInfo() const {
         return mGenInfo;
     }

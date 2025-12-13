@@ -210,6 +210,17 @@ public:
         return mpModelEx->getScnRfl();
     }
 
+    const nw4r::math::VEC3& GetScale() const {
+        return mScale;
+    }
+
+    RPGrpModelMaterial* GetMaterial(const char* pName) const {
+        return mppMaterials[GetMaterialIndex(pName)];
+    }
+    RPGrpModelMaterial* GetMaterial(u16 idx) const {
+        return mppMaterials[idx];
+    }
+
     bool IsVisible() const {
         return (mFlags & EFlag_Visible) ? true : false;
     }

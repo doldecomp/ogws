@@ -22,7 +22,7 @@ RPSysProjectLocal::RPSysProjectLocal(EGG::Heap* pHeap)
 
 #if defined(PACK_SPORTS)
       mPack(RPSysSceneCreator::EPackID_SportsPack)
-#elif defined(PACK_PLAY)
+#elif defined(PACK_PARTY)
       mPack(RPSysSceneCreator::EPackID_PartyPack)
 #endif
 {

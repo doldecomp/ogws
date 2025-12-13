@@ -194,7 +194,7 @@ private:
 #if defined(PACK_SPORTS)
     //! Sports Pack Mii manager
     RPSportsAppMiiManager* mpAppMiiManager; // at 0x38
-#elif defined(PACK_PLAY)
+#elif defined(PACK_PARTY)
     //! Party Pack Mii manager
     RPPartyAppMiiManager* mpAppMiiManager; // at 0x38
 #endif

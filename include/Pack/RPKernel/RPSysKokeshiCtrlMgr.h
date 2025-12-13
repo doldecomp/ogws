@@ -24,18 +24,18 @@ private:
     /**
      * @brief Lifetime manager
      */
-    class Disposer : public EGG::Disposer {
+    class T__Disposer : public EGG::Disposer {
     public:
         /**
          * @brief Destructor
          */
-        virtual ~Disposer() override { // at 0x8
+        virtual ~T__Disposer() override { // at 0x8
             RP_GET_INSTANCE(RPSysKokeshiManager)->ClearCtrlMgr();
         }
     };
 
     //! Disposer for this manager
-    Disposer mDisposer; // at 0x0
+    T__Disposer mDisposer; // at 0x0
 
 private:
     void* unk10; // at 0x10

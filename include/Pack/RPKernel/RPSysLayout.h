@@ -350,7 +350,7 @@ private:
     /**
      * @brief State flags
      */
-    enum EFlag {
+    enum {
         EFlag_Visible = 1 << 0,
     };
 

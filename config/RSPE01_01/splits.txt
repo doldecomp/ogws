@@ -2783,13 +2783,14 @@ Pack/RPSystem/RPSysDvdStatus.cpp:
 
 Pack/RPSystem/RPSysSaveDataMgr.cpp:
 	.text       start:0x80188368 end:0x8018A90C
-	.rodata     start:0x803829E0 end:0x80382A50
+	.rodata     start:0x803829E0 end:0x80382A30
 	.data       start:0x803B9938 end:0x803B994C
 	.sdata      start:0x804BDB88 end:0x804BDB98
 	.sbss       start:0x804BF508 end:0x804BF510
 
 Pack/RPSystem/RPSportsSystemData.cpp:
 	.text       start:0x8018A90C end:0x8018AD70
+	.rodata     start:0x80382A30 end:0x80382A50
 
 Pack/RPSystem/RPSportsPlayerData.cpp:
 	.text       start:0x8018AD70 end:0x8018BCDC

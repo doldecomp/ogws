@@ -6,7 +6,7 @@
 
 #include <egg/core.h>
 
-//! @addtogroup rp_kernel
+//! @addtogroup rp_system
 //! @{
 
 /**

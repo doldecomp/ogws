@@ -39,8 +39,8 @@ private:
 
     //! Resolution of models and textures
     RFLResolution mResolution; // at 0x30
-    //! Facial expression to use
-    RFLExpression mExpression; // at 0x34
+    //! Facial expressions to support
+    u32 mExprFlag; // at 0x34
 
     // Use mipmapping to downscale the icon texture
     BOOL mMipMap;
@@ -125,11 +125,11 @@ public:
         mResolution = resolution;
     }
 
-    RFLExpression GetExpression() const {
-        return mExpression;
+    u32 GetExpressionFlag() const {
+        return mExprFlag;
     }
-    void SetExpression(RFLExpression expression) {
-        mExpression = expression;
+    void SetExpressionFlag(u32 exprFlag) {
+        mExprFlag = exprFlag;
     }
 
     const RPSysKokeshiLocation& GetLocation() const {
