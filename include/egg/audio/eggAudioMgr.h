@@ -45,8 +45,8 @@ public:
     };
 
 public:
-    virtual void initialize(Arg* pArg) {} // at 0x8
-    virtual void calc() = 0;              // at 0xC
+    virtual void initialize(Arg* /* pArg */) {} // at 0x8
+    virtual void calc() = 0;                    // at 0xC
 
 protected:
     bool mIsInitialized; // at 0x4

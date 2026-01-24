@@ -1216,9 +1216,9 @@ config.libs = [
         "progress_category": "audio", # str | List[str]
         "objects": [
             Object(NonMatching, "Pack/RPAudio/RPSndAudioMgr.cpp"),
-            Object(NonMatching, "Pack/RPAudio/RPSndSpeakerMgr.cpp"),
-            Object(NonMatching, "Pack/RPAudio/RPSndObject.cpp"),
-            Object(NonMatching, "Pack/RPAudio/RPSndUtility.cpp"),
+            Object(Matching, "Pack/RPAudio/RPSndSpeakerMgr.cpp"),
+            Object(Matching, "Pack/RPAudio/RPSndObject.cpp"),
+            Object(Matching, "Pack/RPAudio/RPSndUtility.cpp"),
             Object(NonMatching, "Pack/RPAudio/RPSndMoveParam.cpp"),
             Object(NonMatching, "Pack/RPAudio/RPSndHomeMenuArcMgr.cpp"),
             Object(NonMatching, "Pack/RPAudio/RPSndStaticMgr.cpp"),

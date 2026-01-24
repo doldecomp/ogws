@@ -15,7 +15,7 @@ public:
         smCommon3DManager = pManager;
     }
 
-private:
+protected:
     static nw4r::snd::SoundArchivePlayer* smCommonPlayer;
     static nw4r::snd::Sound3DManager* smCommon3DManager;
 };

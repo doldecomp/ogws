@@ -3,7 +3,6 @@
 #include <nw4r/types_nw4r.h>
 
 #include <nw4r/snd/snd_BasicSound.h>
-
 #include <nw4r/ut.h>
 
 namespace nw4r {
@@ -67,14 +66,24 @@ public:
             mSound->SetVolume(volume, frames);
         }
     }
+    void SetPitch(f32 pitch) {
+        if (IsAttachedSound()) {
+            mSound->SetPitch(pitch);
+        }
+    }
     void SetPan(f32 pan) {
         if (IsAttachedSound()) {
             mSound->SetPan(pan);
         }
     }
-    void SetPitch(f32 pitch) {
+    void SetSurroundPan(f32 pan) {
         if (IsAttachedSound()) {
-            mSound->SetPitch(pitch);
+            mSound->SetSurroundPan(pan);
+        }
+    }
+    void SetLpfFreq(f32 freq) {
+        if (IsAttachedSound()) {
+            mSound->SetLpfFreq(freq);
         }
     }
 
