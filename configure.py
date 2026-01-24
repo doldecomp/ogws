@@ -1220,7 +1220,7 @@ config.libs = [
             Object(Matching, "Pack/RPAudio/RPSndObject.cpp"),
             Object(Matching, "Pack/RPAudio/RPSndUtility.cpp"),
             Object(NonMatching, "Pack/RPAudio/RPSndMoveParam.cpp"),
-            Object(NonMatching, "Pack/RPAudio/RPSndHomeMenuArcMgr.cpp"),
+            Object(Matching, "Pack/RPAudio/RPSndHomeMenuArcMgr.cpp"),
             Object(NonMatching, "Pack/RPAudio/RPSndStaticMgr.cpp"),
         ],
     },

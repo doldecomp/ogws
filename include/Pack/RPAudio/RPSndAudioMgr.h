@@ -5,7 +5,6 @@
 #include <Pack/RPSingleton.h>
 
 #include <egg/audio.h>
-#include <egg/core.h>
 
 #include <nw4r/snd.h>
 
