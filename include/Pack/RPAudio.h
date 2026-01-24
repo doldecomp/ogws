@@ -6,6 +6,7 @@
 #include <Pack/RPAudio/RPSndMoveParam.h>
 #include <Pack/RPAudio/RPSndObject.h>
 #include <Pack/RPAudio/RPSndSpeakerMgr.h>
+#include <Pack/RPAudio/RPSndStaticMgr.h>
 #include <Pack/RPAudio/RPSndUtility.h>
 
 #endif

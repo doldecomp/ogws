@@ -52,12 +52,12 @@ public:
      * sound handle
      *
      * @param pHandle Sound handle
-     * @param channelFlag Remote channel output line flags
+     * @param playerFlag Player output line flags
      * @param mainOut Main output volume
      * @param remoteOut Remote output volume
      * @param muteOut Main output volume when the remote speaker is muted
      */
-    void setRemoteSend(nw4r::snd::SoundHandle* pHandle, u32 channelFlag,
+    void setRemoteSend(nw4r::snd::SoundHandle* pHandle, u32 playerFlag,
                        f32 mainOut, f32 remoteOut, f32 muteOut);
 
     /**
