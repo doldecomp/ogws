@@ -4,7 +4,7 @@
  * @brief Constructor
  */
 RPSndHomeMenuArcMgr::RPSndHomeMenuArcMgr()
-    : EGG::ArcPlayer(&getSoundHeap()), mSoundHandle(), mIsInitialized(false) {}
+    : EGG::ArcPlayer(&getSoundHeap()), mIsInitialized(false) {}
 
 /**
  * @brief Destructor
