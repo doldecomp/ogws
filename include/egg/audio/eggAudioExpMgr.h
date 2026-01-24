@@ -5,7 +5,6 @@
 #include <egg/audio/eggAudio3DMgr.h>
 #include <egg/audio/eggAudioFxMgr.h>
 #include <egg/audio/eggAudioMgr.h>
-
 #include <egg/prim.h>
 
 #include <nw4r/snd.h>
@@ -92,9 +91,6 @@ public:
 
         return SoundHeapMgr::loadState(id);
     } // at 0x8
-
-private:
-    ;
 };
 
 } // namespace EGG

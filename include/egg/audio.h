@@ -3,6 +3,7 @@
 
 #include <egg/audio/eggAudio3DActor.h>
 #include <egg/audio/eggAudio3DMgr.h>
+#include <egg/audio/eggAudioActor.h>
 #include <egg/audio/eggAudioArcPlayerMgr.h>
 #include <egg/audio/eggAudioExpMgr.h>
 #include <egg/audio/eggAudioFxMgr.h>

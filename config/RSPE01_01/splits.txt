@@ -3235,10 +3235,10 @@ Pack/RPAudio/RPSndSpeakerMgr.cpp:
 Pack/RPAudio/RPSndObject.cpp:
 	.text       start:0x801B8EF8 end:0x801B8F78
 	.bss        start:0x804A4670 end:0x804A4680
-	.sbss       start:0x804BF658 end:0x804BF660
 
 Pack/RPAudio/RPSndUtility.cpp:
 	.text       start:0x801B8F78 end:0x801B9070
+	.sbss       start:0x804BF658 end:0x804BF660
 	.sdata2     start:0x804C1970 end:0x804C1980
 
 Pack/RPAudio/RPSndMoveParam.cpp:

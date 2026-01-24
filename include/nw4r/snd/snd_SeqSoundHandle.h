@@ -3,7 +3,6 @@
 #include <nw4r/types_nw4r.h>
 
 #include <nw4r/snd/snd_SeqSound.h>
-
 #include <nw4r/ut.h>
 
 namespace nw4r {
@@ -34,6 +33,12 @@ public:
     void SetTrackVolume(u32 trackFlags, f32 volume) {
         if (IsAttachedSound()) {
             mSound->SetTrackVolume(trackFlags, volume);
+        }
+    }
+
+    void SetTrackPitch(u32 trackFlags, f32 pitch) {
+        if (IsAttachedSound()) {
+            mSound->SetTrackPitch(trackFlags, pitch);
         }
     }
 
