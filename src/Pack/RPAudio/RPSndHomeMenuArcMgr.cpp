@@ -4,7 +4,7 @@
  * @brief Constructor
  */
 RPSndHomeMenuArcMgr::RPSndHomeMenuArcMgr()
-    : EGG::ArcPlayer(&getSoundHeap()), mIsInitialized(false) {}
+    : ArcPlayer(&getSoundHeap()), mIsInitialized(false) {}
 
 /**
  * @brief Destructor
@@ -32,5 +32,5 @@ void RPSndHomeMenuArcMgr::calc() {
         return;
     }
 
-    EGG::ArcPlayer::calc();
+    ArcPlayer::calc();
 }

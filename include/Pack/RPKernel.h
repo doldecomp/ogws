@@ -6,6 +6,7 @@
 #include <Pack/RPKernel/IRPSysKokeshiCtrlDataCallback.h>
 #include <Pack/RPKernel/RPSysAppMiiManager.h>
 #include <Pack/RPKernel/RPSysAvatar.h>
+#include <Pack/RPKernel/RPSysController.h>
 #include <Pack/RPKernel/RPSysControllerSyncMgr.h>
 #include <Pack/RPKernel/RPSysFile.h>
 #include <Pack/RPKernel/RPSysFrameCtrl.h>

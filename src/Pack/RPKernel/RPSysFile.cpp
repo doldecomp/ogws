@@ -13,7 +13,7 @@
 RPSysFile::RPSysFile(const char* pPath, s32 size, const void* pData)
     : mSize(size) {
 
-    // @bug Can easily overflow the fixed-size buffer
+    // @bug Unsafe string operations
 #if defined(BUG_FIX)
     std::strncpy(mPath, pPath, ARRAY_SIZE(mPath));
 #else

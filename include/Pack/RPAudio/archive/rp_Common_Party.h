@@ -1,0 +1,84 @@
+#ifndef RP_AUDIO_RP_COMMON_PARTY_SOUND_H
+#define RP_AUDIO_RP_COMMON_PARTY_SOUND_H
+
+//! @addtogroup rp_audio
+//! @{
+
+//! @file
+//! @brief Sound IDs for the RPPartyCommon sound archive
+
+//! @}
+
+enum {
+    /* 0x00 */ RP_COMMON_SE_LOGO_01,
+    /* 0x01 */ RP_COMMON_SE_WIN_OPEN_01,
+    /* 0x02 */ RP_COMMON_SE_WIN_CLOSE_01,
+    /* 0x03 */ RP_COMMON_SE_MESS_OK_01_CTSP,
+    /* 0x04 */ RP_COMMON_SE_MESS_OK_01_TVSP,
+    /* 0x05 */ RP_COMMON_SE_MESS_OK_02_CTSP,
+    /* 0x06 */ RP_COMMON_SE_MESS_OK_02_TVSP,
+    /* 0x07 */ RP_COMMON_SE_SEARCH_01,
+    /* 0x08 */ RP_COMMON_SE_CON_ADD_01,
+    /* 0x09 */ RP_COMMON_SE_MESS_FLASH_01,
+    /* 0x0A */ RP_COMMON_SE_MESS_10,
+    /* 0x0B */ RP_COMMON_SE_MESS_20,
+    /* 0x0C */ RP_COMMON_BGM_RANK_COMPLETE,
+    /* 0x0D */ RP_COMMON_BGM_PARTY_01,
+    /* 0x0E */ RP_COMMON_BGM_PARTY_MENU,
+    /* 0x0F */ RP_COMMON_BGM_PARTY_MENU_SLEEP,
+    /* 0x10 */ RP_COMMON_SE_KEY_AB_pri_A_01_CTSP,
+    /* 0x11 */ RP_COMMON_SE_KEY_AB_pri_A_01_TVSP,
+    /* 0x12 */ RP_COMMON_SE_KEY_AB_pri_A_01,
+    /* 0x13 */ RP_COMMON_SE_KEY_AB_pri_B_01_CTSP,
+    /* 0x14 */ RP_COMMON_SE_KEY_AB_pri_B_01_TVSP,
+    /* 0x15 */ RP_COMMON_SE_KEY_AB_pri_B_01,
+    /* 0x16 */ RP_COMMON_SE_KEY_AB_01_CTSP,
+    /* 0x17 */ RP_COMMON_SE_KEY_AB_01_TVSP,
+    /* 0x18 */ RP_COMMON_SE_KEY_AB_01,
+    /* 0x19 */ RP_COMMON_SE_KEY_A_01_CTSP,
+    /* 0x1A */ RP_COMMON_SE_KEY_A_01_TVSP,
+    /* 0x1B */ RP_COMMON_SE_KEY_A_01,
+    /* 0x1C */ RP_COMMON_SE_KEY_A_02_CTSP,
+    /* 0x1D */ RP_COMMON_SE_KEY_A_02_TVSP,
+    /* 0x1E */ RP_COMMON_SE_KEY_A_02,
+    /* 0x1F */ RP_COMMON_SE_KEY_A_03_CTSP,
+    /* 0x20 */ RP_COMMON_SE_KEY_A_03_TVSP,
+    /* 0x21 */ RP_COMMON_SE_KEY_A_03,
+    /* 0x22 */ RP_COMMON_SE_KEY_NG_01_CTSP,
+    /* 0x23 */ RP_COMMON_SE_KEY_NG_01_TVSP,
+    /* 0x24 */ RP_COMMON_SE_KEY_NG_01,
+    /* 0x25 */ RP_COMMON_SE_KEY_CURSOR_02,
+    /* 0x26 */ RP_COMMON_SE_KEY_CURSOR_03,
+    /* 0x27 */ RP_COMMON_SE_KEY_CURSOR_04,
+    /* 0x28 */ RP_COMMON_SE_KEY_CURSOR_05,
+    /* 0x29 */ RP_COMMON_SE_CON_Change_01_CTSP,
+    /* 0x2A */ RP_COMMON_SE_CON_Change_01_TVSP,
+    /* 0x2B */ RP_COMMON_SE_CON_Change_01,
+    /* 0x2C */ RP_COMMON_SE_CON_Change_02,
+    /* 0x2D */ RP_COMMON_SE_Balloon_OPEN_01,
+    /* 0x2E */ RP_COMMON_SE_Balloon_CLOSE_01,
+    /* 0x2F */ RP_COMMON_SE_Party_DOLL_CLICK_01_CTSP,
+    /* 0x30 */ RP_COMMON_SE_Party_DOLL_CLICK_01_TVSP,
+    /* 0x31 */ RP_COMMON_SE_Party_DOLL_CLICK_02_CTSP,
+    /* 0x32 */ RP_COMMON_SE_Party_DOLL_CLICK_02_TVSP,
+    /* 0x33 */ RP_COMMON_SE_Party_DOLL_CLICK_HL_CTSP,
+    /* 0x34 */ RP_COMMON_SE_Party_DOLL_CLICK_HL_TVSP,
+    /* 0x35 */ RP_COMMON_SE_Party_DOLL_CLICK_HR_CTSP,
+    /* 0x36 */ RP_COMMON_SE_Party_DOLL_CLICK_HR_TVSP,
+    /* 0x37 */ RP_COMMON_SE_Party_DOLL_CLICK_FL_CTSP,
+    /* 0x38 */ RP_COMMON_SE_Party_DOLL_CLICK_FL_TVSP,
+    /* 0x39 */ RP_COMMON_SE_Party_DOLL_CLICK_FR_CTSP,
+    /* 0x3A */ RP_COMMON_SE_Party_DOLL_CLICK_FR_TVSP,
+    /* 0x3B */ RP_COMMON_SE_Party_DOLL_WakUp_01,
+    /* 0x3C */ RP_COMMON_SE_Party_DOLL_TALK_01,
+    /* 0x3D */ RP_COMMON_SE_Party_DOLL_SLEEP_01,
+    /* 0x3E */ RP_COMMON_SE_KEY_A_04_CTSP,
+    /* 0x3F */ RP_COMMON_SE_KEY_A_04_TVSP,
+    /* 0x40 */ RP_COMMON_SE_KEY_A_04,
+    /* 0x41 */ RP_COMMON_SE_KEY_BACK_01_CTSP,
+    /* 0x42 */ RP_COMMON_SE_KEY_BACK_01_TVSP,
+    /* 0x43 */ RP_COMMON_SE_KEY_BACK_01,
+    /* 0x44 */ RP_COMMON_SE_KEY_CURSOR_01
+};
+
+#endif

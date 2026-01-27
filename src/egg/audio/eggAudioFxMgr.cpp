@@ -49,7 +49,7 @@ bool AudioFx::create(u32 fxType, const void* pParam) {
 
     // Dead-stripped
     case TYPE_AXFX_REVERBSTD: {
-        return NULL;
+        return false;
     }
 
     case TYPE_AXFX_CHORUS: {

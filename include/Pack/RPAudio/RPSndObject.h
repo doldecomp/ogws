@@ -11,6 +11,8 @@
 #include <nw4r/snd.h>
 #include <nw4r/ut.h>
 
+#include <revolution/WPAD.h>
+
 //! @addtogroup rp_audio
 //! @{
 
@@ -43,15 +45,23 @@ public:
     virtual void setActorVolume(f32 volume, int frames) = 0; // at 0x1C
     virtual void update() = 0;                               // at 0x20
 
+    static void initList() {
+        NW4R_UT_LIST_INIT(sActorList, RPSndAudioActorBase);
+    }
+
     static nw4r::ut::List& getActorList() {
         return sActorList;
     }
 
 protected:
-    RPSndMoveValueF32 mVolume; // at 0x8
-    bool mIsSilenced;          // at 0x10
-    UNKWORD WORD_0x14;         // at 0x14
-    char unk18[0x20 - 0x18];
+    bool mIsSilenced;  // at 0x10
+    UNKWORD WORD_0x14; // at 0x14
+
+public:
+    NW4R_UT_LIST_LINK_DECL(); // at 0x18
+
+private:
+    RPSndMoveValueF32 mVolume; // at 0x20
 
 private:
     static nw4r::ut::List sActorList;
@@ -62,6 +72,7 @@ private:
  * TRPSndAudioHandles
  *
  ******************************************************************************/
+
 template <int N> class TRPSndAudioHandles {
 public:
     TRPSndAudioHandles() {
@@ -93,6 +104,7 @@ protected:
  * TRPSndAudioActorBaseWithHandles
  *
  ******************************************************************************/
+
 template <int N1, int N2>
 class TRPSndAudioActorBaseWithHandles : public RPSndAudioActorBase,
                                         public TRPSndAudioHandles<N1 + N2> {
@@ -109,6 +121,7 @@ public:
  * TRPSndAudio3DActor
  *
  ******************************************************************************/
+
 template <int N>
 class TRPSndAudio3DActor : public EGG::AudioSoundActorBaseWithCamera<N> {
 public:
@@ -131,6 +144,7 @@ protected:
  * TRPSndObject
  *
  ******************************************************************************/
+
 template <int N>
 class TRPSndObject : public TRPSndAudio3DActor<N>,
                      public TRPSndAudioActorBaseWithHandles<N, N> {
@@ -186,6 +200,9 @@ private:
     u32 mRemoteFlag;
 };
 
+//! Shorthand for default specialization
+typedef TRPSndObject<WPAD_MAX_CONTROLLERS> RPSndObject;
+
 /******************************************************************************
  *
  * RPSndObjMgr
@@ -203,6 +220,23 @@ public:
      * @param frames Fade out time
      */
     static void stopAllActorSound(int frames);
+
+    /**
+     * @brief Updates the state of all active sounds
+     */
+    static void update() {
+        RPSndAudioActorBase* pIt = static_cast<RPSndAudioActorBase*>(
+            nw4r::ut::List_GetFirst(&RPSndAudioActorBase::sActorList));
+
+        for (; pIt != NULL;
+             pIt = static_cast<RPSndAudioActorBase*>(nw4r::ut::List_GetNext(
+                 &RPSndAudioActorBase::sActorList, pIt))) {
+
+            if (pIt->mVolume.getFrame() > 0) {
+                pIt->update();
+            }
+        }
+    }
 };
 
 //! @}
