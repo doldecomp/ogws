@@ -561,12 +561,8 @@ private:
             return 2192;
         }
 
-        // @bug Max value will be used as a timer
-#if defined(BUG_FIX)
-        return 0;
-#else
-        return -1;
-#endif
+        // Assume it runs until the sound is detached
+        return 0xFFFFFFFF;
     }
 
 private:
