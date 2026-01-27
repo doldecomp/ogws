@@ -37,6 +37,16 @@ public:
         }
     }
 
+    void setParam3D(TAudioSound3DMgrArg* arg) {
+        for (int i = 0; i < N; i++) {
+            mSound3DManagers[i].SetMaxPriorityReduction(arg->maxPrioReduction);
+
+            mSound3DListeners[i].SetInteriorSize(arg->interiorSize);
+            mSound3DListeners[i].SetMaxVolumeDistance(arg->maxVolumeDistance);
+            mSound3DListeners[i].SetUnitDistance(arg->unitDistance);
+        }
+    }
+
     void setUseArchive3D(nw4r::snd::SoundArchive* archive,
                          nw4r::snd::SoundHeap* heap) {
 
@@ -62,6 +72,10 @@ public:
 
     nw4r::snd::Sound3DManager& getSound3DManager(s32 cam_num) {
         return mSound3DManagers[cam_num];
+    }
+
+    nw4r::snd::Sound3DListener& getSound3DListener(s32 cam_num) {
+        return mSound3DListeners[cam_num];
     }
 
     void setListenerMatrix(s32 cam_num, const nw4r::math::MTX34& rMtx) {

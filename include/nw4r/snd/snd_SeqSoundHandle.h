@@ -48,6 +48,10 @@ public:
         }
     }
 
+    static void WriteGlobalVariable(int idx, s16 value) {
+        detail::SeqSound::WriteGlobalVariable(idx, value);
+    }
+
 private:
     detail::SeqSound* mSound; // at 0x0
 };

@@ -55,8 +55,12 @@ public:
     NW4R_UT_LIST_LINK_DECL(); // at 0x10
 
 private:
+    //! Maximum file path length
+    static const u32 PATH_MAX = 128;
+
+private:
     //! File path
-    char mPath[128]; // at 0x18
+    char mPath[PATH_MAX]; // at 0x18
     //! File data size
     s32 mSize; // at 0x98
     //! File data contents

@@ -45,9 +45,12 @@ public:
      * @brief Storage device
      */
     enum EStorage {
-        EStorage_Memory, //!< Sound archives are loaded from RAM
-        EStorage_NAND,   //!< Sound archives are loaded from the NAND (WiiWare)
-        EStorage_DVD     //!< Sound archives are loaded from the DVD
+        //! Sound archives are read from the DVD as needed
+        EStorage_DVDStream,
+        //! Sound archives are read from the NAND ahead of time
+        EStorage_NANDBuffer,
+        //! Sound archives are read from the DVD ahead of time
+        EStorage_DVDBuffer
     };
 
 public:

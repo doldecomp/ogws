@@ -152,7 +152,7 @@ public:
      * @param bufSize Size of the buffer pointed to by @p pBuffer
      * @param id Scene ID
      */
-    void GetGameSoundCommonPath(char* pBuffer, u32 bufSize, s32 id);
+    void GetGameSoundCommonPath(char* pBuffer, u32 bufSize, s32 id = -1);
     /**
      * @brief Gets the local sound path of the specified scene
      * @bug This function ignores the @p bufSize parameter and instead uses
@@ -162,10 +162,14 @@ public:
      * @param bufSize Size of the buffer pointed to by @p pBuffer
      * @param id Scene ID
      */
-    void GetGameSoundLocalPath(char* pBuffer, u32 bufSize, s32 id);
+    void GetGameSoundLocalPath(char* pBuffer, u32 bufSize, s32 id = -1);
 
     EGG::Archive* GetKokeshiArchive() const {
         return mpKokeshiArchive;
+    }
+
+    void* GetMultiHandle() {
+        return &mpMultiHandle;
     }
 
 private:

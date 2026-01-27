@@ -13,7 +13,7 @@
 /**
  * @brief Constructor
  */
-RPSndStaticMgr::RPSndStaticMgr() : EGG::ArcPlayer(NULL) {
+RPSndStaticMgr::RPSndStaticMgr() : ArcPlayer(NULL) {
     for (int i = 0; i < WPAD_MAX_CONTROLLERS; i++) {
         mStartTasks[i].valid = false;
     }
@@ -63,7 +63,7 @@ void RPSndStaticMgr::calc() {
         rTask.valid = false;
     }
 
-    EGG::ArcPlayer::calc();
+    ArcPlayer::calc();
 }
 
 /**

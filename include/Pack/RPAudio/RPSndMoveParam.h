@@ -48,6 +48,20 @@ public:
      */
     virtual bool update(); // at 0x8
 
+    /**
+     * @brief Gets the number of remaining interpolation frames
+     */
+    u32 getFrame() const {
+        return mFrame;
+    }
+
+    /**
+     * @brief Accesses the current value
+     */
+    f32 getValue() const {
+        return mValue;
+    }
+
 protected:
     //! Interpolation callback
     Callback mpCallback; // at 0x4
@@ -139,7 +153,7 @@ public:
     /**
      * @brief Updates the state of all move parameters
      */
-    void update();
+    static void update();
 
 private:
     //! List of all active move parameters

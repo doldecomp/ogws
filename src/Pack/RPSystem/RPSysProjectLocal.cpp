@@ -17,7 +17,7 @@ RPSysProjectLocal::RPSysProjectLocal(EGG::Heap* pHeap)
       mLocale(EArea_USA),
       mLanguage(EArea_USA),
       mIsPal50(false),
-      mSoundStorage(EStorage_Memory),
+      mSoundStorage(EStorage_DVDStream),
 #endif
 
 #if defined(PACK_SPORTS)
