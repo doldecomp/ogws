@@ -270,9 +270,9 @@ void RPSysKokeshiManager::LoadStaticResource() {
     mpCommonMessage = new (pResHeap) RPSysMessage(pCommonRes, pResHeap);
 
     static const bmg_message GUEST_NAME_MSGS[RFL_DEFAULT_CHAR_MAX] = {
-        MSG_UNPACK(MSG_660_000), MSG_UNPACK(MSG_661_000),
-        MSG_UNPACK(MSG_662_000), MSG_UNPACK(MSG_663_000),
-        MSG_UNPACK(MSG_664_000), MSG_UNPACK(MSG_665_000),
+        MSG_TUPLE(CMN_MSG_660_000), MSG_TUPLE(CMN_MSG_661_000),
+        MSG_TUPLE(CMN_MSG_662_000), MSG_TUPLE(CMN_MSG_663_000),
+        MSG_TUPLE(CMN_MSG_664_000), MSG_TUPLE(CMN_MSG_665_000),
     };
 
     for (u16 i = 0; i < RFL_DEFAULT_CHAR_MAX; i++) {

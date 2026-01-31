@@ -14,4 +14,13 @@ typedef u16 RPTime16;
  */
 typedef u32 RPTime32;
 
+struct bmg_message {
+    u32 group;
+    u32 index;
+};
+
+#define MSG_GROUP(X) (((X) & 0xFFFFFFF0) >> 4)
+#define MSG_INDEX(X) ((X) & 0x0000000F)
+#define MSG_TUPLE(X) MSG_GROUP(X), MSG_INDEX(X)
+
 #endif
