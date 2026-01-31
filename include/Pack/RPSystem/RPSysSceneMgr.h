@@ -3,6 +3,7 @@
 #include <Pack/types_pack.h>
 
 #include <Pack/RPSingleton.h>
+#include <Pack/RPSystem/RPSysScene.h>
 
 #include <egg/core.h>
 
@@ -17,6 +18,10 @@ class RPSysSceneMgr : public EGG::SceneManager {
 
 public:
     bool isShutDownReserved() const;
+
+    RPSysScene* getCurrentSceneRP() const;
+
+    void returnToMenu(bool);
 };
 
 //! @}

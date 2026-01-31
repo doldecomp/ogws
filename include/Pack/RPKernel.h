@@ -37,6 +37,7 @@
 #include <Pack/RPKernel/RPSysOfficialDB.h>
 #include <Pack/RPKernel/RPSysParticleManager.h>
 #include <Pack/RPKernel/RPSysStringUtility.h>
+#include <Pack/RPKernel/RPSysSystemWinMgr.h>
 #include <Pack/RPKernel/RPSysTagProcessor.h>
 #include <Pack/RPKernel/RPSysTextWriter.h>
 #include <Pack/RPKernel/RPSysWideTextWriter.h>

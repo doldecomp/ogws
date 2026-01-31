@@ -18,6 +18,7 @@ typedef enum {
 typedef enum { VF_SYNC_MODE_0, VF_SYNC_MODE_1 } VFSyncMode;
 
 s32 VFIsAvailable(void);
+void VFInitEx(void*, u32);
 s32 VFMountDriveNANDFlashEx(const char* i_drive, const char* i_sys_file_name_p);
 s32 VFUnmountDrive(const char* i_drive);
 VFFile VFOpenFile(const char* i_path_p, const char* i_mode, u32 i_attr);

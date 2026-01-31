@@ -156,7 +156,7 @@ void RPSysSaveData::read(EGG::RamStream& rStrm, const void* pRawSave) {
 
 #if defined(PACK_SPORTS)
     mpSportsSystemData->read(rStrm);
-#elif defined(PACK_PLAY)
+#elif defined(PACK_PARTY)
     mpPartySystemData->read(rStrm);
 #endif
 
