@@ -1172,7 +1172,7 @@ config.libs = [
             Object(Matching, "Pack/RPSystem/RPPartySystemData.cpp"),
             Object(Matching, "Pack/RPSystem/RPPartyPlayerData.cpp"),
             Object(NonMatching, "Pack/RPSystem/RPSysPlayerMgr.cpp"),
-            Object(NonMatching, "Pack/RPSystem/RPSysPlayer.cpp"),
+            Object(Matching, "Pack/RPSystem/RPSysPlayer.cpp"),
         ],
     },
     {
