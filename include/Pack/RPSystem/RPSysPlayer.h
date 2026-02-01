@@ -14,15 +14,15 @@
  * @brief Player function parameter set
  */
 struct RPSysPlayerArg {
-    //! Sports Pack player data for official database Miis
+    //! Sports Pack player data for official/default Miis
     RPSportsPlayerData* pSportsPlayerData; // at 0x0
-    //! Sports Pack player data for temporary storage (guest/controller miis)
-    RPSportsPlayerData** ppTempSportsPlayerData; // at 0x4
+    //! Sports Pack player data for controller Miis
+    RPSportsPlayerData** ppCtrlSportsPlayerData; // at 0x4
 
-    //! Party Pack player data for official database Miis
+    //! Party Pack player data for official/default Miis
     RPPartyPlayerData* pPartyPlayerData; // at 0x8
-    //! Party Pack player data for temporary storage (guest/controller miis)
-    RPPartyPlayerData** ppTempPartyPlayerData; // at 0xC
+    //! Party Pack player data for controller Miis
+    RPPartyPlayerData** ppCtrlPartyPlayerData; // at 0xC
 };
 
 /**

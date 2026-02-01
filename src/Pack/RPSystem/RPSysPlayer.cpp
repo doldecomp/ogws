@@ -104,14 +104,14 @@ void RPSysPlayer::loadData(const RPSysPlayerArg& rArg) {
 
         u32 ctrlIndex = mDataSource - RFLDataSource_Controller1;
 
-        if (mpSportsPlayerData != NULL && rArg.ppTempSportsPlayerData != NULL) {
+        if (mpSportsPlayerData != NULL && rArg.ppCtrlSportsPlayerData != NULL) {
             *mpSportsPlayerData =
-                rArg.ppTempSportsPlayerData[ctrlIndex][mPlayerDataIndex];
+                rArg.ppCtrlSportsPlayerData[ctrlIndex][mPlayerDataIndex];
         }
 
-        if (mpPartyPlayerData != NULL && rArg.ppTempPartyPlayerData != NULL) {
+        if (mpPartyPlayerData != NULL && rArg.ppCtrlPartyPlayerData != NULL) {
             *mpPartyPlayerData =
-                rArg.ppTempPartyPlayerData[ctrlIndex][mPlayerDataIndex];
+                rArg.ppCtrlPartyPlayerData[ctrlIndex][mPlayerDataIndex];
         }
     }
 
@@ -166,13 +166,13 @@ void RPSysPlayer::saveData(const RPSysPlayerArg& rArg) {
 
         u32 ctrlIndex = mDataSource - RFLDataSource_Controller1;
 
-        if (mpSportsPlayerData != NULL && rArg.ppTempSportsPlayerData != NULL) {
-            rArg.ppTempSportsPlayerData[ctrlIndex][mPlayerDataIndex] =
+        if (mpSportsPlayerData != NULL && rArg.ppCtrlSportsPlayerData != NULL) {
+            rArg.ppCtrlSportsPlayerData[ctrlIndex][mPlayerDataIndex] =
                 *mpSportsPlayerData;
         }
 
-        if (mpPartyPlayerData != NULL && rArg.ppTempPartyPlayerData != NULL) {
-            rArg.ppTempPartyPlayerData[ctrlIndex][mPlayerDataIndex] =
+        if (mpPartyPlayerData != NULL && rArg.ppCtrlPartyPlayerData != NULL) {
+            rArg.ppCtrlPartyPlayerData[ctrlIndex][mPlayerDataIndex] =
                 *mpPartyPlayerData;
         }
     }
