@@ -52,7 +52,7 @@ NWC24Err NWC24InitMsgObj(NWC24MsgObj* msg, NWC24MsgType type) {
         return NWC24_ERR_INVALID_VALUE;
     }
 
-    _msg->WORD_0x28 = 0;
+    _msg->createTime = 0;
     _msg->WORD_0x2C = 0;
     NWC24GetMyUserId(&_msg->fromId);
     _msg->numTo = 0;
@@ -79,8 +79,8 @@ NWC24Err NWC24InitMsgObj(NWC24MsgObj* msg, NWC24MsgType type) {
 
     NWC24Data_Init(&_msg->DATA_0x30);
     NWC24Data_Init(&_msg->DATA_0x38);
-    NWC24Data_Init(&_msg->DATA_0x50);
-    NWC24Data_Init(&_msg->DATA_0x58);
+    NWC24Data_Init(&_msg->contentType);
+    NWC24Data_Init(&_msg->transferEncoding);
     NWC24Data_Init(&_msg->DATA_0xD0);
     NWC24Data_Init(&_msg->face);
     NWC24Data_Init(&_msg->alt);

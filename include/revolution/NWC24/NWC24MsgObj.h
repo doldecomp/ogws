@@ -33,18 +33,18 @@ typedef struct NWC24MsgObj {
     u32 flags;  // at 0x4
     u32 length; // at 0x8
     u32 appId;  // at 0xC
-    char UNK_0x10[0x4];
+    s32 UNK_0x10;
     u32 tag;        // at 0x14
     u32 ledPattern; // at 0x18
     u64 fromId;     // at 0x20
-    u32 WORD_0x28;
+    u32 createTime;   // at 0x28
     u32 WORD_0x2C;
     NWC24Data DATA_0x30;
     NWC24Data DATA_0x38;
     NWC24Data subject; // at 0x40
     NWC24Data text;    // at 0x48
-    NWC24Data DATA_0x50;
-    NWC24Data DATA_0x58;
+    NWC24Data contentType;        // at 0x50
+    NWC24Data transferEncoding;   // at 0x58
     NWC24Charset charset;                                 // at 0x60
     NWC24Encoding encoding;                               // at 0x64
     NWC24Data attached[NWC24_MSG_ATTACHMENT_MAX];         // at 0x68
@@ -70,7 +70,8 @@ typedef struct NWC24MsgObj {
     NWC24Data DATA_0xD0;
     NWC24Data face; // at 0xD8
     NWC24Data alt;  // at 0xE0
-    char UNK_0xE8[0x100 - 0xE8];
+	NWC24Data altMeta;
+    char UNK_0xF0[0x100 - 0xF0];
 } NWC24MsgObj;
 
 NWC24Err NWC24InitMsgObj(NWC24MsgObj* msg, NWC24MsgType type);

@@ -20,6 +20,18 @@ typedef struct NWC24Date {
     u8 BYTE_0x7;
 } NWC24Date;
 
+typedef struct NWC24Calendar {
+    /* 0x00 */ u32 sec;
+    /* 0x04 */ u32 min;
+    /* 0x08 */ u32 hour;
+    /* 0x0C */ u32 day;
+    /* 0x10 */ u32 month;
+    /* 0x14 */ u32 year;
+    /* 0x18 */ u32 UNK_0x18;
+    /* 0x1C */ u32 UNK_0x1C;
+    /* 0x20 */ u32 UNK_0x20;
+} NWC24Calendar;
+
 void NWC24Data_Init(NWC24Data* data);
 void NWC24Data_SetDataP(NWC24Data* data, const void* ptr, u32 size);
 void NWC24Date_Init(NWC24Date* date);
