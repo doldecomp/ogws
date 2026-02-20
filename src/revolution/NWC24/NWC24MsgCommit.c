@@ -13,160 +13,61 @@ extern const char* ContentDispA;
 extern const char* ContentTypeTP;
 extern const char* ContentTxEncT;
 
+// STD API
+u32 STD_strnlen(const char* str, u32 maxLen);
 int Mail_sprintf(char *buffer, const char *format, ...);
 
-NWC24Err NWC24CommitMsgInternal(NWC24MsgObj* msg, s32 flagLocal);
-NWC24Err WriteBase64Data(const void* data, u32 size, u32* bytesWritten);
-NWC24Err WriteQPData(const void* data, u32 size, u32* bytesWritten);
-NWC24Err CheckMsgBoxSpace(NWC24MsgObj* msg, u32 requiredSize);
-NWC24Err WriteSMTP_MAILFROM(NWC24MsgObj* msg);
-NWC24Err WriteSMTP_RCPTTO(NWC24MsgObj* msg);
-NWC24Err WriteFromField(NWC24MsgObj* msg);
-NWC24Err WriteToField(NWC24MsgObj* msg);
-NWC24Err WriteDateField(NWC24MsgObj* msg);
-NWC24Err WriteXWiiAppIdField(NWC24MsgObj* msg);
-NWC24Err WriteXWiiFaceField(NWC24MsgObj* msg);
-NWC24Err WriteXWiiAltNameField(NWC24MsgObj* msg);
-NWC24Err WriteMIMEAttachHeader(NWC24MsgObj* msg, u32 attachIndex);
-NWC24Err WriteContentTypeField(NWC24MsgObj* msg);
-NWC24Err WritePlainText(NWC24MsgObj* msg);
-NWC24Err CheckMsgObject(const NWC24MsgObj* msg);
-
+// Other NWC24 functions from other files
+void NWC24Data_Init(NWC24Data* data);
 NWC24Err NWC24FClose(NWC24File* file);
 NWC24Err NWC24FWrite(const void* src, s32 size, NWC24File* file);
 NWC24Err NWC24GetMyUserId(u64* idOut);
+NWC24Err NWC24iMBoxCloseMsg(NWC24File* file);
 NWC24Err NWC24iMBoxAddMsgObj(s32 mboxType, NWC24MsgObj* msg);
 NWC24Err NWC24iMBoxCancelMsg(NWC24File* file, s32 mboxType, u32 msgId);
-NWC24Err NWC24iMBoxCloseMsg(NWC24File* file);
-NWC24Err NWC24iMBoxFlushHeader(s32 mboxType);
 NWC24Err NWC24iMBoxOpenNewMsg(s32 mboxType, NWC24File* file, u32* msgId);
+NWC24Err NWC24iMBoxFlushHeader(s32 mboxType);
 NWC24Err NWC24iSetNewMsgArrived(u32 flags);
 const char* NWC24GetAccountDomain(void);
-u32 STD_strnlen(const char* str, u32 maxLen);
-void NWC24Data_Init(NWC24Data* data);
 
-NWC24Err NWC24CommitMsg(NWC24MsgObj *msg) {
-    s32 flagLocal;
-    u32 flags;
-    u64 myUserId;
-    u64 targetUserId;
+// Functions not present in RevoYawarakaD.MAP
+static NWC24Err WriteXWiiAltField(NWC24MsgObj* msg);
+static NWC24Err WriteTextBody(NWC24MsgObj* msg);
+static NWC24Err WriteMIMEPartBoundaryEnd(NWC24MsgObj* msg);
 
-    flagLocal = 0;
+NWC24Err NWC24CommitMsg(NWC24MsgObj *msg);
+NWC24Err NWC24CommitMsgInternal(NWC24MsgObj* msg, s32 flagLocal);
+NWC24Err CheckMsgObject(const NWC24MsgObj* msg);
+NWC24Err CheckMsgBoxSpace(NWC24MsgObj* msg, u32 requiredSize);
+NWC24Err SynthesizeAddrStr(NWC24AddrId* addrId, u32 flags, char* outBuffer, int bufferSize, u32* outLength);
+NWC24Err WriteSMTP_MAILFROM(NWC24MsgObj* msg);
+NWC24Err WriteSMTP_RCPTTO(NWC24MsgObj* msg);
+static NWC24Err WriteSMTP_DATA(NWC24MsgObj* msg);
+NWC24Err WriteFromField(NWC24MsgObj* msg);
+NWC24Err WriteToField(NWC24MsgObj* msg);
+static NWC24Err WriteSubjectField(NWC24MsgObj* msg);
+NWC24Err WriteDateField(NWC24MsgObj* msg);
+static NWC24Err WriteMessageIdField(NWC24MsgObj* msg);
+NWC24Err WriteXWiiAppIdField(NWC24MsgObj* msg);
+static NWC24Err WriteXWiiTagField(NWC24MsgObj* msg);
+static NWC24Err WriteXWiiCmdField(NWC24MsgObj* msg);
+NWC24Err WriteXWiiFaceField(NWC24MsgObj* msg);
+NWC24Err WriteXWiiAltNameField(NWC24MsgObj* msg);
+static NWC24Err WriteXWiiMBNoReplyField(NWC24MsgObj* msg);
+static NWC24Err WriteXWiiMBRegDateField(NWC24MsgObj* msg);
+static NWC24Err WriteXWiiMBDelayField(NWC24MsgObj* msg);
+static NWC24Err WriteMIMETopHeader(NWC24MsgObj* msg);
+static NWC24Err WriteMIMEPartBoundary(NWC24MsgObj* msg);
+NWC24Err WriteMIMEAttachHeader(NWC24MsgObj* msg, u32 attachIndex);
+NWC24Err WriteContentTypeField(NWC24MsgObj* msg);
+static NWC24Err WriteUserField(NWC24MsgObj* msg);
+NWC24Err WritePlainText(NWC24MsgObj* msg);
+static NWC24Err WriteAttachData(NWC24MsgObj* msg, s32 i);
+NWC24Err WriteBase64Data(const void* data, u32 size, u32* bytesWritten);
+NWC24Err WriteQPData(const void* data, u32 size, u32* bytesWritten);
 
-    if (NWC24IsMsgLibOpened() == 0 && NWC24IsMsgLibOpenedByTool() == 0) {
-        return -9;
-    }
-
-    flags = msg->flags;
-
-    if ((flags & 0x100) == 0 || (flags & 0x200) != 0) {
-        return -7;
-    }
-
-    if (LoopBackEnable != 0 && (flags & 0x1) != 0) {
-        NWC24GetMyUserId(&myUserId);
-        if (msg->numTo == 1) {
-            targetUserId = msg->toIds[0];
-            if ((targetUserId ^ myUserId) == 0) {
-                flagLocal = 1;
-            }
-        }
-    }
-
-    return NWC24CommitMsgInternal(msg, flagLocal);
-}
-
-static inline NWC24Err WriteDataCommand(NWC24MsgObj* msg) {
-    NWC24Err result;
-    char* stringWork = NWC24WorkP->stringWork;
-    Mail_strcpy(stringWork, "DATA\r\n");
-    result = NWC24FWrite(stringWork, Mail_strlen(stringWork), m_pFile);
-    if (result == NWC24_OK) {
-        msg->length += 6;
-    }
-    return result;
-}
-
-static inline NWC24Err WriteMessageIdField(NWC24MsgObj* msg) {
-    u64 myUserId;
-    char stackBuffer[32];
-    NWC24Err result;
-    u32 writeSize;
-    char* stringWork = NWC24WorkP->stringWork;
-    const char* domain = NWC24GetAccountDomain();
-    NWC24GetMyUserId(&myUserId);
-    Mail_memset(stringWork, 0, NWC24_WORK_BUFFER_SIZE);
-    Mail_strcpy(stringWork, "Message-ID: <");
-    Mail_memset(stackBuffer, 0, 32);
-    Mail_sprintf(stackBuffer, "%08x%08x%08x%08x", msg->id, (u32)(myUserId >> 32), (u32)myUserId, msg->createTime);
-    Mail_strcat(stringWork, stackBuffer);
-    Mail_strcat(stringWork, domain);
-    Mail_strcat(stringWork, ">\r\n");
-    writeSize = Mail_strlen(stringWork);
-    result = NWC24FWrite(stringWork, writeSize, m_pFile);
-    if (result == NWC24_OK) {
-        msg->length += writeSize;
-    }
-    return result;
-}
-
-static inline NWC24Err WriteSubjectField(NWC24MsgObj* msg) {
-    char* stringWork = NWC24WorkP->stringWork;
-    NWC24Err result;
-    u32 writeSize;
-    if (msg->subject.size == 0) {
-        result = NWC24_ERR_NULL;
-    } else {
-        Mail_memset(stringWork, 0, NWC24_WORK_BUFFER_SIZE);
-        Mail_strcpy(stringWork, "Subject: ");
-        Mail_strncat(stringWork, (const char*)msg->subject.ptr, 1021);
-        Mail_strncat(stringWork, "\r\n", NWC24_WORK_BUFFER_SIZE);
-        writeSize = STD_strnlen(stringWork, NWC24_WORK_BUFFER_SIZE);
-        result = NWC24FWrite(stringWork, writeSize, m_pFile);
-        if (result == NWC24_OK) {
-            msg->length += writeSize;
-        }
-    }
-    return result;
-}
-
-static inline NWC24Err WriteXWiiLedField(NWC24MsgObj* msg) {
-    NWC24Err result;
-    u32 writeSize;
-    if (msg->ledPattern == 0) {
-        return NWC24_OK;
-    } else {
-        char* stringWork = NWC24WorkP->stringWork;
-        Mail_memset(stringWork, 0, NWC24_WORK_BUFFER_SIZE);
-        Mail_sprintf(stringWork, "X-Wii-Led: %08x\r\n", msg->ledPattern);
-        writeSize = Mail_strlen(stringWork);
-        result = NWC24FWrite(stringWork, writeSize, m_pFile);
-        if (result == NWC24_OK) {
-            msg->length += writeSize;
-        }
-    }
-    return result;
-}
-
-static inline NWC24Err WriteXWiiTagField(NWC24MsgObj* msg) {
-    NWC24Err result;
-    u32 writeSize;
-    if (msg->tag == 0) {
-        return NWC24_OK;
-    } else {
-        char* stringWork = NWC24WorkP->stringWork;
-        Mail_memset(stringWork, 0, NWC24_WORK_BUFFER_SIZE);
-        Mail_sprintf(stringWork, "X-Wii-Tag: %08x\r\n", msg->tag);
-        writeSize = Mail_strlen(stringWork);
-        result = NWC24FWrite(stringWork, writeSize, m_pFile);
-        if (result == NWC24_OK) {
-            msg->length += writeSize;
-        }
-    }
-    return result;
-}
-
-static inline NWC24Err WriteXWiiAltField(NWC24MsgObj* msg) {
+static NWC24Err WriteXWiiAltField(NWC24MsgObj* msg) {
+    // TODO(Alex9303) Function missing from RevoYawarakaD.MAP. Keeping so NWC24CommitMsgInternal can be somewhat readable.
     NWC24Err result;
     u32 writeSize;
     if (!(msg->flags & 0x2000)) {
@@ -184,108 +85,8 @@ static inline NWC24Err WriteXWiiAltField(NWC24MsgObj* msg) {
     return result;
 }
 
-static inline NWC24Err WriteXWiiMBParameterField(NWC24MsgObj* msg) {
-    NWC24Err result;
-    if (!(msg->mb.raw & 0x80000000)) {
-        return NWC24_OK;
-    } else {
-        char* stringWork = NWC24WorkP->stringWork;
-        Mail_memset(stringWork, 0, NWC24_WORK_BUFFER_SIZE);
-        Mail_strcpy(stringWork, "X-Wii-MB-Parameter:\r\n");
-        result = NWC24FWrite(stringWork, 21, m_pFile);
-        if (result == NWC24_OK) {
-            msg->length += 21;
-        }
-    }
-    return result;
-}
-
-static inline NWC24Err WriteXWiiMBRegDateField(NWC24MsgObj* msg) {
-    u32 writeSize;
-    NWC24Err result;
-    u32 regdate = msg->mb.regdate;
-    if (regdate == 0) {
-        return NWC24_OK;
-    } else {
-        char* stringWork = NWC24WorkP->stringWork;
-        Mail_memset(stringWork, 0, NWC24_WORK_BUFFER_SIZE);
-        Mail_sprintf(stringWork, "X-Wii-MB-RegDate: %04x\r\n", regdate);
-        writeSize = STD_strnlen(stringWork, NWC24_WORK_BUFFER_SIZE);
-        result = NWC24FWrite(stringWork, writeSize, m_pFile);
-        if (result == NWC24_OK) {
-            msg->length += writeSize;
-        }
-    }
-    return result;
-}
-
-static inline NWC24Err WriteXWiiMBDelayField(NWC24MsgObj* msg) {
-    NWC24Err result;
-    u32 writeSize;
-    u32 delay = msg->mb.raw & 0x00FF0000;
-    if (delay == 0) {
-        return NWC24_OK;
-    } else {
-        char* stringWork = NWC24WorkP->stringWork;
-        Mail_memset(stringWork, 0, NWC24_WORK_BUFFER_SIZE);
-        Mail_sprintf(stringWork, "X-Wii-MB-Delay: %02x\r\n", delay >> 16);
-        writeSize = STD_strnlen(stringWork, NWC24_WORK_BUFFER_SIZE);
-        result = NWC24FWrite(stringWork, writeSize, m_pFile);
-        if (result == NWC24_OK) {
-            msg->length += writeSize;
-        }
-    }
-    return result;
-}
-
-static inline NWC24Err WriteCustomHeader(NWC24MsgObj* msg) {
-    NWC24Err result;
-    if (msg->DATA_0xD0.size == 0) {
-        return NWC24_OK;
-    } else {
-        result = NWC24FWrite(msg->DATA_0xD0.ptr, msg->DATA_0xD0.size, m_pFile);
-        if (result == NWC24_OK) {
-            msg->length += msg->DATA_0xD0.size;
-        }
-    }
-    return result;
-}
-
-static inline NWC24Err WriteMimeHeader(NWC24MsgObj* msg) {
-    char* stringWork = NWC24WorkP->stringWork;
-    NWC24Err result;
-    u32 writeSize;
-    Mail_memset(stringWork, 0, NWC24_WORK_BUFFER_SIZE);
-    Mail_strcpy(stringWork, "MIME-Version: 1.0\r\n");
-    if (msg->flags & 0x10000) {
-        Mail_strcat(stringWork, "Content-Type: multipart/mixed; boundary=\"");
-        Mail_strcat(stringWork, MultiPartDivider);
-        Mail_strcat(stringWork, "\"\r\n");
-    }
-    writeSize = Mail_strlen(stringWork);
-    result = NWC24FWrite(stringWork, writeSize, m_pFile);
-    if (result == NWC24_OK) {
-        msg->length += writeSize;
-    }
-    return result;
-}
-
-static inline NWC24Err WriteMimeBoundary(NWC24MsgObj* msg) {
-    char* stringWork = NWC24WorkP->stringWork;
-    NWC24Err result;
-    u32 writeSize;
-    Mail_memset(stringWork, 0, NWC24_WORK_BUFFER_SIZE);
-    Mail_sprintf(stringWork, "\r\n--%s", MultiPartDivider);
-    Mail_strcat(stringWork, "\r\n");
-    writeSize = Mail_strlen(stringWork);
-    result = NWC24FWrite(stringWork, writeSize, m_pFile);
-    if (result == NWC24_OK) {
-        msg->length += writeSize;
-    }
-    return result;
-}
-
-static inline NWC24Err WritePlainTextWrapper(NWC24MsgObj* msg) {
+static NWC24Err WriteTextBody(NWC24MsgObj* msg) {
+    // TODO(Alex9303) Function missing from RevoYawarakaD.MAP. Keeping so NWC24CommitMsgInternal can be somewhat readable.
     NWC24Err result;
     result = WritePlainText(msg);
     if (result == NWC24_ERR_NULL) {
@@ -294,17 +95,8 @@ static inline NWC24Err WritePlainTextWrapper(NWC24MsgObj* msg) {
     return result;
 }
 
-static inline NWC24Err WriteAttachedBase64(NWC24MsgObj* msg, s32 i) {
-    NWC24Err result;
-    u32 writeSize;
-    result = WriteBase64Data(msg->attached[i].ptr, msg->attached[i].size, &writeSize);
-    if (result == NWC24_OK) {
-        msg->length += writeSize;
-    }
-    return result;
-}
-
-static inline NWC24Err WriteMimeBoundaryEnd(NWC24MsgObj* msg) {
+static NWC24Err WriteMIMEPartBoundaryEnd(NWC24MsgObj* msg) {
+    // TODO(Alex9303) Function missing from RevoYawarakaD.MAP. Keeping so NWC24CommitMsgInternal can be somewhat readable.
     char* stringWork = NWC24WorkP->stringWork;
     NWC24Err result;
     u32 writeSize;
@@ -317,6 +109,37 @@ static inline NWC24Err WriteMimeBoundaryEnd(NWC24MsgObj* msg) {
         msg->length += writeSize;
     }
     return result;
+}
+
+NWC24Err NWC24CommitMsg(NWC24MsgObj *msg) {
+    s32 flagLocal;
+    u32 flags;
+    u64 myUserId;
+    u64 targetUserId;
+
+    flagLocal = 0;
+
+    if (NWC24IsMsgLibOpened() == 0 && NWC24IsMsgLibOpenedByTool() == 0) {
+        return NWC24_ERR_LIB_NOT_OPENED;
+    }
+
+    flags = msg->flags;
+
+    if ((flags & 0x100) == 0 || (flags & 0x200) != 0) {
+        return NWC24_ERR_PROTECTED;
+    }
+
+    if (LoopBackEnable != 0 && (flags & 0x1) != 0) {
+        NWC24GetMyUserId(&myUserId);
+        if (msg->numTo == 1) {
+            targetUserId = msg->toIds[0];
+            if ((targetUserId ^ myUserId) == 0) {
+                flagLocal = 1;
+            }
+        }
+    }
+
+    return NWC24CommitMsgInternal(msg, flagLocal);
 }
 
 NWC24Err NWC24CommitMsgInternal(NWC24MsgObj* msg, s32 mboxType) {
@@ -355,6 +178,7 @@ NWC24Err NWC24CommitMsgInternal(NWC24MsgObj* msg, s32 mboxType) {
     m_pFile = &file;
 
     if (mboxType == 0) {
+        // Regswap happens inside of this code block.
         result = WriteSMTP_MAILFROM(msg);
         if (result != NWC24_OK) {
             NWC24FClose(&file);
@@ -367,7 +191,7 @@ NWC24Err NWC24CommitMsgInternal(NWC24MsgObj* msg, s32 mboxType) {
             err = result;
             goto error_break;
         }
-        result = WriteDataCommand(msg);
+        result = WriteSMTP_DATA(msg);
         if (result != NWC24_OK) {
             NWC24FClose(&file);
             err = result;
@@ -423,7 +247,7 @@ NWC24Err NWC24CommitMsgInternal(NWC24MsgObj* msg, s32 mboxType) {
             goto error_break;
         }
 
-        result = WriteXWiiLedField(msg);
+        result = WriteXWiiCmdField(msg);
         if (result != NWC24_OK) {
             NWC24FClose(&file);
             err = result;
@@ -459,7 +283,7 @@ NWC24Err NWC24CommitMsgInternal(NWC24MsgObj* msg, s32 mboxType) {
         }
 
         if (msg->mb.raw != 0) {
-            result = WriteXWiiMBParameterField(msg);
+            result = WriteXWiiMBNoReplyField(msg);
             if (result != NWC24_OK) {
                 NWC24FClose(&file);
                 err = result;
@@ -482,7 +306,7 @@ NWC24Err NWC24CommitMsgInternal(NWC24MsgObj* msg, s32 mboxType) {
         }
     }
 
-    result = WriteCustomHeader(msg);
+    result = WriteUserField(msg);
     if (result != NWC24_OK) {
         NWC24FClose(&file);
         err = result;
@@ -490,10 +314,9 @@ NWC24Err NWC24CommitMsgInternal(NWC24MsgObj* msg, s32 mboxType) {
     }
 
     Mail_memset(MultiPartDivider, 0, 40);
-    // TODO(Alex9303) Replace string with correct string
     Mail_sprintf(MultiPartDivider, "----_%08x%08x__________", msg->createTime, msg->id);
 
-    result = WriteMimeHeader(msg);
+    result = WriteMIMETopHeader(msg);
     if (result != NWC24_OK) {
         NWC24FClose(&file);
         err = result;
@@ -502,7 +325,7 @@ NWC24Err NWC24CommitMsgInternal(NWC24MsgObj* msg, s32 mboxType) {
 
     if (msg->flags & 0x10000ULL) {
         msg->UNK_0x10 = msg->length;
-        result = WriteMimeBoundary(msg);
+        result = WriteMIMEPartBoundary(msg);
         if (result != NWC24_OK) {
             NWC24FClose(&file);
             err = result;
@@ -520,7 +343,7 @@ NWC24Err NWC24CommitMsgInternal(NWC24MsgObj* msg, s32 mboxType) {
         msg->UNK_0x10 = msg->length;
     }
     data2.ptr = (void*)msg->length;
-    result = WritePlainTextWrapper(msg);
+    result = WriteTextBody(msg);
     if (result != NWC24_OK) {
         NWC24FClose(&file);
         err = result;
@@ -529,7 +352,7 @@ NWC24Err NWC24CommitMsgInternal(NWC24MsgObj* msg, s32 mboxType) {
     data2.size = msg->length - ((u32)data2.ptr);
 
     for (i = 0; i < ((u32)msg->numAttached); i++) {
-        result = WriteMimeBoundary(msg);
+        result = WriteMIMEPartBoundary(msg);
         if (result != NWC24_OK) {
             NWC24FClose(&file);
             err = result;
@@ -544,7 +367,7 @@ NWC24Err NWC24CommitMsgInternal(NWC24MsgObj* msg, s32 mboxType) {
         }
 
         attachedData[i].ptr = (void*)msg->length;
-        result = WriteAttachedBase64(msg, i);
+        result = WriteAttachData(msg, i);
         if (result != NWC24_OK) {
             NWC24FClose(&file);
             err = result;
@@ -554,7 +377,7 @@ NWC24Err NWC24CommitMsgInternal(NWC24MsgObj* msg, s32 mboxType) {
         attachedData[i].size = msg->length - ((u32)attachedData[i].ptr);
 
         if (i == (msg->numAttached - 1)) {
-            result = WriteMimeBoundaryEnd(msg);
+            result = WriteMIMEPartBoundaryEnd(msg);
             if (result != NWC24_OK) {
                 NWC24FClose(&file);
                 err = result;
@@ -674,7 +497,7 @@ NWC24Err CheckMsgBoxSpace(NWC24MsgObj* msg, u32 requiredSize) {
     totalSize += textSize;
 
     if (totalSize >= 0x31c00) {
-        return -8;
+        return NWC24_ERR_OVERFLOW;
     }
 
     err = NWC24iMBoxCheck(requiredSize, totalSize + NWC24_WORK_BUFFER_SIZE);
@@ -687,57 +510,57 @@ NWC24Err CheckMsgBoxSpace(NWC24MsgObj* msg, u32 requiredSize) {
     return result;
 }
 
-NWC24Err SynthesizeAddrStr(NWC24AddrId* id_pair, u32 flags, char* out_buffer, int buffer_size, u32* out_length) {
-    s32 domain_len;
-    char id_str[20];
-    NWC24Err result = 0;
-    const char* domain;
+NWC24Err SynthesizeAddrStr(NWC24AddrId* addrId, u32 flags, char* outBuffer, int bufferSize, u32* outLength) {
+    s32 domainLength;
+    char addrIdString[20];
+    NWC24Err err = NWC24_OK;
+    const char* accountDomain;
 
     if ((flags & 1) != 0) {
-        domain = NWC24GetAccountDomain();
-        domain_len = Mail_strlen(domain);
+        accountDomain = NWC24GetAccountDomain();
+        domainLength = Mail_strlen(accountDomain);
 
-        if (domain_len <= 0) {
-            result = NWC24_ERR_CONFIG;
+        if (domainLength <= 0) {
+            err = NWC24_ERR_CONFIG;
             goto cleanup;
         }
 
-        if ((domain_len + 0x12) >= buffer_size) {
-            result = NWC24_ERR_NOMEM;
+        if ((domainLength + 0x12) >= bufferSize) {
+            err = NWC24_ERR_NOMEM;
             goto cleanup;
         }
 
-        NWC24iConvIdToStr(id_pair->id, id_str);
-        domain_len = Mail_sprintf(out_buffer, "%c%s%s", 0x77, id_str, domain);
+        NWC24iConvIdToStr(addrId->id, addrIdString);
+        domainLength = Mail_sprintf(outBuffer, "%c%s%s", 0x77, addrIdString, accountDomain);
 
-        if (domain_len == 0) {
-            result = NWC24_ERR_FATAL;
+        if (domainLength == 0) {
+            err = NWC24_ERR_FATAL;
             goto cleanup;
         }
 
-        *out_length = domain_len;
+        *outLength = domainLength;
 
     } else if ((flags & 2) != 0) {
-        if ((id_pair->data.size + 3) >= buffer_size) {
-            result = NWC24_ERR_NOMEM;
+        if ((addrId->data.size + 3) >= bufferSize) {
+            err = NWC24_ERR_NOMEM;
             goto cleanup;
         }
 
-        domain_len = Mail_sprintf(out_buffer, "%s", id_pair->data.ptr);
+        domainLength = Mail_sprintf(outBuffer, "%s", addrId->data.ptr);
 
-        if (domain_len == 0) {
-            result = NWC24_ERR_FATAL;
+        if (domainLength == 0) {
+            err = NWC24_ERR_FATAL;
             goto cleanup;
         }
 
-        *out_length = domain_len;
+        *outLength = domainLength;
 
     } else {
-        result = NWC24_ERR_INVALID_VALUE;
+        err = NWC24_ERR_INVALID_VALUE;
     }
 
 cleanup:
-    return result;
+    return err;
 }
 
 NWC24Err WriteSMTP_MAILFROM(NWC24MsgObj* msg) {
@@ -830,6 +653,17 @@ NWC24Err WriteSMTP_RCPTTO(NWC24MsgObj* msg) {
     }
 
     return err;
+}
+
+static NWC24Err WriteSMTP_DATA(NWC24MsgObj* msg) {
+    NWC24Err result;
+    char* stringWork = NWC24WorkP->stringWork;
+    Mail_strcpy(stringWork, "DATA\r\n");
+    result = NWC24FWrite(stringWork, Mail_strlen(stringWork), m_pFile);
+    if (result == NWC24_OK) {
+        msg->length += 6;
+    }
+    return result;
 }
 
 NWC24Err WriteFromField(NWC24MsgObj* msg) {
@@ -944,6 +778,26 @@ NWC24Err WriteToField(NWC24MsgObj* msg) {
     return err;
 }
 
+static NWC24Err WriteSubjectField(NWC24MsgObj* msg) {
+    char* stringWork = NWC24WorkP->stringWork;
+    NWC24Err result;
+    u32 writeSize;
+    if (msg->subject.size == 0) {
+        result = NWC24_ERR_NULL;
+    } else {
+        Mail_memset(stringWork, 0, NWC24_WORK_BUFFER_SIZE);
+        Mail_strcpy(stringWork, "Subject: ");
+        Mail_strncat(stringWork, (const char*)msg->subject.ptr, 1021);
+        Mail_strncat(stringWork, "\r\n", NWC24_WORK_BUFFER_SIZE);
+        writeSize = STD_strnlen(stringWork, NWC24_WORK_BUFFER_SIZE);
+        result = NWC24FWrite(stringWork, writeSize, m_pFile);
+        if (result == NWC24_OK) {
+            msg->length += writeSize;
+        }
+    }
+    return result;
+}
+
 NWC24Err WriteDateField(NWC24MsgObj* msg) {
     char* workp;
     NWC24Date date;
@@ -981,6 +835,29 @@ NWC24Err WriteDateField(NWC24MsgObj* msg) {
     return err;
 }
 
+static NWC24Err WriteMessageIdField(NWC24MsgObj* msg) {
+    u64 myUserId;
+    char stackBuffer[32];
+    NWC24Err result;
+    u32 writeSize;
+    char* stringWork = NWC24WorkP->stringWork;
+    const char* domain = NWC24GetAccountDomain();
+    NWC24GetMyUserId(&myUserId);
+    Mail_memset(stringWork, 0, NWC24_WORK_BUFFER_SIZE);
+    Mail_strcpy(stringWork, "Message-ID: <");
+    Mail_memset(stackBuffer, 0, 32);
+    Mail_sprintf(stackBuffer, "%08x%08x%08x%08x", msg->id, (u32)(myUserId >> 32), (u32)myUserId, msg->createTime);
+    Mail_strcat(stringWork, stackBuffer);
+    Mail_strcat(stringWork, domain);
+    Mail_strcat(stringWork, ">\r\n");
+    writeSize = Mail_strlen(stringWork);
+    result = NWC24FWrite(stringWork, writeSize, m_pFile);
+    if (result == NWC24_OK) {
+        msg->length += writeSize;
+    }
+    return result;
+}
+
 NWC24Err WriteXWiiAppIdField(NWC24MsgObj* msg) {
     char* workp = NWC24WorkP->stringWork;
     char tempbuf[16];
@@ -1011,6 +888,42 @@ NWC24Err WriteXWiiAppIdField(NWC24MsgObj* msg) {
     if (NWC24FWrite(workp, len, m_pFile) == NWC24_OK) {
         msg->length += len;
     }
+}
+
+static NWC24Err WriteXWiiTagField(NWC24MsgObj* msg) {
+    NWC24Err result;
+    u32 writeSize;
+    if (msg->tag == 0) {
+        return NWC24_OK;
+    } else {
+        char* stringWork = NWC24WorkP->stringWork;
+        Mail_memset(stringWork, 0, NWC24_WORK_BUFFER_SIZE);
+        Mail_sprintf(stringWork, "X-Wii-Tag: %08x\r\n", msg->tag);
+        writeSize = Mail_strlen(stringWork);
+        result = NWC24FWrite(stringWork, writeSize, m_pFile);
+        if (result == NWC24_OK) {
+            msg->length += writeSize;
+        }
+    }
+    return result;
+}
+
+static NWC24Err WriteXWiiCmdField(NWC24MsgObj* msg) {
+    NWC24Err result;
+    u32 writeSize;
+    if (msg->ledPattern == 0) {
+        return NWC24_OK;
+    } else {
+        char* stringWork = NWC24WorkP->stringWork;
+        Mail_memset(stringWork, 0, NWC24_WORK_BUFFER_SIZE);
+        Mail_sprintf(stringWork, "X-Wii-Led: %08x\r\n", msg->ledPattern);
+        writeSize = Mail_strlen(stringWork);
+        result = NWC24FWrite(stringWork, writeSize, m_pFile);
+        if (result == NWC24_OK) {
+            msg->length += writeSize;
+        }
+    }
+    return result;
 }
 
 NWC24Err WriteXWiiFaceField(NWC24MsgObj* msg) {
@@ -1103,6 +1016,94 @@ NWC24Err WriteXWiiAltNameField(NWC24MsgObj* msg) {
     }
 
     return err;
+}
+
+static NWC24Err WriteXWiiMBNoReplyField(NWC24MsgObj* msg) {
+    NWC24Err result;
+    if (!(msg->mb.raw & 0x80000000)) {
+        return NWC24_OK;
+    } else {
+        char* stringWork = NWC24WorkP->stringWork;
+        Mail_memset(stringWork, 0, NWC24_WORK_BUFFER_SIZE);
+        Mail_strcpy(stringWork, "X-Wii-MB-Parameter:\r\n");
+        result = NWC24FWrite(stringWork, 21, m_pFile);
+        if (result == NWC24_OK) {
+            msg->length += 21;
+        }
+    }
+    return result;
+}
+
+static NWC24Err WriteXWiiMBRegDateField(NWC24MsgObj* msg) {
+    u32 writeSize;
+    NWC24Err result;
+    u32 regdate = msg->mb.regdate;
+    if (regdate == 0) {
+        return NWC24_OK;
+    } else {
+        char* stringWork = NWC24WorkP->stringWork;
+        Mail_memset(stringWork, 0, NWC24_WORK_BUFFER_SIZE);
+        Mail_sprintf(stringWork, "X-Wii-MB-RegDate: %04x\r\n", regdate);
+        writeSize = STD_strnlen(stringWork, NWC24_WORK_BUFFER_SIZE);
+        result = NWC24FWrite(stringWork, writeSize, m_pFile);
+        if (result == NWC24_OK) {
+            msg->length += writeSize;
+        }
+    }
+    return result;
+}
+
+static NWC24Err WriteXWiiMBDelayField(NWC24MsgObj* msg) {
+    NWC24Err result;
+    u32 writeSize;
+    u32 delay = msg->mb.raw & 0x00FF0000;
+    if (delay == 0) {
+        return NWC24_OK;
+    } else {
+        char* stringWork = NWC24WorkP->stringWork;
+        Mail_memset(stringWork, 0, NWC24_WORK_BUFFER_SIZE);
+        Mail_sprintf(stringWork, "X-Wii-MB-Delay: %02x\r\n", delay >> 16);
+        writeSize = STD_strnlen(stringWork, NWC24_WORK_BUFFER_SIZE);
+        result = NWC24FWrite(stringWork, writeSize, m_pFile);
+        if (result == NWC24_OK) {
+            msg->length += writeSize;
+        }
+    }
+    return result;
+}
+
+static NWC24Err WriteMIMETopHeader(NWC24MsgObj* msg) {
+    char* stringWork = NWC24WorkP->stringWork;
+    NWC24Err result;
+    u32 writeSize;
+    Mail_memset(stringWork, 0, NWC24_WORK_BUFFER_SIZE);
+    Mail_strcpy(stringWork, "MIME-Version: 1.0\r\n");
+    if (msg->flags & 0x10000) {
+        Mail_strcat(stringWork, "Content-Type: multipart/mixed; boundary=\"");
+        Mail_strcat(stringWork, MultiPartDivider);
+        Mail_strcat(stringWork, "\"\r\n");
+    }
+    writeSize = Mail_strlen(stringWork);
+    result = NWC24FWrite(stringWork, writeSize, m_pFile);
+    if (result == NWC24_OK) {
+        msg->length += writeSize;
+    }
+    return result;
+}
+
+static NWC24Err WriteMIMEPartBoundary(NWC24MsgObj* msg) {
+    char* stringWork = NWC24WorkP->stringWork;
+    NWC24Err result;
+    u32 writeSize;
+    Mail_memset(stringWork, 0, NWC24_WORK_BUFFER_SIZE);
+    Mail_sprintf(stringWork, "\r\n--%s", MultiPartDivider);
+    Mail_strcat(stringWork, "\r\n");
+    writeSize = Mail_strlen(stringWork);
+    result = NWC24FWrite(stringWork, writeSize, m_pFile);
+    if (result == NWC24_OK) {
+        msg->length += writeSize;
+    }
+    return result;
 }
 
 NWC24Err WriteMIMEAttachHeader(NWC24MsgObj* msg, u32 attachIndex) {
@@ -1206,6 +1207,19 @@ NWC24Err WriteContentTypeField(NWC24MsgObj* msg) {
     return err;
 }
 
+static NWC24Err WriteUserField(NWC24MsgObj* msg) {
+    NWC24Err result;
+    if (msg->DATA_0xD0.size == 0) {
+        return NWC24_OK;
+    } else {
+        result = NWC24FWrite(msg->DATA_0xD0.ptr, msg->DATA_0xD0.size, m_pFile);
+        if (result == NWC24_OK) {
+            msg->length += msg->DATA_0xD0.size;
+        }
+    }
+    return result;
+}
+
 NWC24Err WritePlainText(NWC24MsgObj* msg) {
     NWC24Err err = NWC24_OK;
     u32 bytesWritten;
@@ -1237,6 +1251,16 @@ NWC24Err WritePlainText(NWC24MsgObj* msg) {
     }
 
     return err;
+}
+
+static NWC24Err WriteAttachData(NWC24MsgObj* msg, s32 i) {
+    NWC24Err result;
+    u32 writeSize;
+    result = WriteBase64Data(msg->attached[i].ptr, msg->attached[i].size, &writeSize);
+    if (result == NWC24_OK) {
+        msg->length += writeSize;
+    }
+    return result;
 }
 
 NWC24Err WriteBase64Data(const void* data, u32 size, u32* bytesWritten) {
@@ -1311,13 +1335,13 @@ NWC24Err WriteQPData(const void* data, u32 size, u32* bytesWritten) {
 
         Mail_memset(workp, 0, NWC24_WORK_BUFFER_SIZE);
         err = NWC24EncodeQuotedPrintable((u8*)workp, NWC24_WORK_BUFFER_SIZE, &written, (u8*)dataPtr, remainSize, &consumed);
-        
+
         if (err != NWC24_OK) {
             if (err != NWC24_ERR_OVERFLOW) {
                 break;
             }
         }
-        
+
         err = NWC24FWrite(workp, written, m_pFile);
         if (err != NWC24_OK) {
             break;

@@ -123,7 +123,7 @@ int convNum(char *dst, int number, int numberBase, char charBase, int signedFlag
     char digitCharBase;
     char finalPadChar;
     BOOL isNegative;
-    
+
     if ((signedFlag != 0) && (number & 0x80000000)) {
         isNegative = 1;
         workingValue = -number;
@@ -131,7 +131,7 @@ int convNum(char *dst, int number, int numberBase, char charBase, int signedFlag
         isNegative = 0;
         workingValue = number;
     }
-    
+
     digitcharsWritten = 0;
     charsWritten = 0;
 

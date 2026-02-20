@@ -15,30 +15,30 @@ NWC24Err Base64Encode(char *inputBuffer, s32 inputLength, u32 *inBytesConsumed, 
             result = NWC24_ERR_OVERFLOW;
             break;
         }
-    
+
         hasThird = FALSE;
         hasSecond = FALSE;
-        
+
         combined = ((unsigned char)inputBuffer[inputIndex]);
         combined <<= 8;
-        
+
         if ((inputIndex + 1) < inputLength) {
             hasSecond = TRUE;
             combined |= ((unsigned char)inputBuffer[inputIndex + 1]);
         }
-        
+
         combined <<= 8;
-        
+
         if ((inputIndex + 2) < inputLength) {
             hasThird = TRUE;
             combined |= ((unsigned char)inputBuffer[inputIndex + 2]);
         }
-        
+
         outBuffer[outputIndex + 0] = MIMEEncStr[(combined >> 18) & 0x3F];
         outBuffer[outputIndex + 1] = MIMEEncStr[(combined >> 12) & 0x3F];
         outBuffer[outputIndex + 2] = MIMEEncStr[(hasSecond) ? ((combined >> 6) & 0x3F) : (0x40)];
         outBuffer[outputIndex + 3] = MIMEEncStr[(hasThird) ? (combined & 0x3F) : (0x40)];
-        
+
         outputIndex += 4;
     }
 

@@ -140,7 +140,7 @@ NWC24Err NWC24iMBoxOpenNewMsg(s32 mboxType, NWC24File *file, u32 *msgId) {
     }
 
     path = NWC24WorkP->pathWork;
-    
+
     err = GetMBoxFilePath(path, mboxType, *msgId);
     if (err != NWC24_OK) {
         return err;
@@ -498,7 +498,7 @@ NWC24Err DeleteMsg(s32 mboxType, u32 msgId, u32 flags) {
 
         if (oldestMsgId != 0) {
             if (CompareMsgId(oldestMsgId, entry->id) <= 0) {
-                continue; 
+                continue;
             }
         }
         oldestMsgId = entry->id;
@@ -650,7 +650,7 @@ NWC24Err DuplicationCheck(MBoxControlHeader* header, const NWC24MsgObj* msg, NWC
 
         if (oldestMsgId != 0) {
             if (CompareMsgId(oldestMsgId, entry->id) <= 0) {
-                continue; 
+                continue;
             }
         }
         oldestMsgId = entry->id;
@@ -851,7 +851,7 @@ NWC24Err GetNewMsgId(MBoxControlHeader* header, u32* msgIdOut) {
 
     *msgIdOut = header->nextMsgId;
     header->nextMsgId++;
-    
+
     return NWC24_OK;
 }
 
