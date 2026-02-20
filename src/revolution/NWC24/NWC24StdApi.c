@@ -1,5 +1,19 @@
 #include <revolution/NWC24.h>
 
+char* Mail_strcpy(char* dst, const char* src);
+size_t Mail_strlen(const char* str);
+size_t STD_strnlen(const char* str, size_t n);
+void* Mail_memcpy(void* dst, const void* src, size_t n);
+void* Mail_memset(void* dst, int ch, size_t n);
+char* Mail_strcat(char* dst, const char* src);
+char* Mail_strncat(char* dst, const char* src, size_t n);
+static int Mail_toupper(int c);
+static void set_to_head(char *str, char c);
+static void set_to_tail(char *str, char c);
+int convNum(char *dst, int number, int numberBase, char charBase, int signedFlag, int width, char specifierChar, char justifyChar);
+int Mail_sprintf(char *buffer, char *format, ...);
+int Mail_vsprintf(char *str, char *format, va_list arg);
+
 char* Mail_strcpy(char* dst, const char* src) {
     char* backup = dst;
 
@@ -29,7 +43,6 @@ size_t STD_strnlen(const char* str, size_t n) {
         if (str[len] == '\0') {
             break;
         }
-
         len++;
     }
 
@@ -48,7 +61,6 @@ void* Mail_memcpy(void* dst, const void* src, size_t n) {
 
 void* Mail_memset(void* dst, int ch, size_t n) {
     size_t i;
-
     for (i = 0; i < n; i++) {
         ((u8*)dst)[i] = ch;
     }
@@ -73,6 +85,10 @@ char* Mail_strncat(char* dst, const char* src, size_t n) {
     return dst;
 }
 
+static int Mail_toupper(int c) {
+    return c & 0xDF;
+}
+
 // Not really sure how get non-inlined Mail_strlen() to inline naturally.
 inline static int Mail_strlen_inline(const char *str) {
     int len = 0;
@@ -82,7 +98,7 @@ inline static int Mail_strlen_inline(const char *str) {
     return len;
 }
 
-inline static void set_to_head(char *str, char c) {
+static void set_to_head(char *str, char c) {
     // TODO(Alex9303) Figure out how to get Mail_strlen to inline naturally here.
     int len = Mail_strlen_inline(str);
     int i;
@@ -92,7 +108,7 @@ inline static void set_to_head(char *str, char c) {
     *str = c;
 }
 
-inline static void set_to_tail(char *str, char c) {
+static void set_to_tail(char *str, char c) {
     int len;
     len = Mail_strlen(str);
     str[len++] = c;
@@ -160,8 +176,7 @@ int convNum(char *dst, int number, int numberBase, char charBase, int signedFlag
     return charsWritten;
 }
 
-int Mail_sprintf(char *buffer, const char *format, ...)
-{
+int Mail_sprintf(char *buffer, char *format, ...) {
     va_list args;
     int ret;
 
@@ -223,7 +238,7 @@ int Mail_vsprintf(char *str, char *format, va_list arg) {
                     }
                 }
 
-                longFlag = formatChar & 0xDF;
+                longFlag = Mail_toupper(formatChar);
                 if (longFlag == 'L') {
                     formatChar = *format++;
                 }
