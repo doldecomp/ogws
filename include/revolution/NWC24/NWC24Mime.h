@@ -5,7 +5,7 @@
 extern "C" {
 #endif
 
-void NWC24InitBase64Table(u8* table);
+void NWC24InitBase64Table(s8* table);
 
 #ifdef __cplusplus
 }
