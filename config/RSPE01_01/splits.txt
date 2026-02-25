@@ -2647,7 +2647,7 @@ revolution/VF/pf_volume.c:
 
 revolution/VF/pf_cp932.c:
 	.text       start:0x80161B74 end:0x80162084
-	.rodata     start:0x8037CBF8 end:0x80380E90
+	.rodata     start:0x8037CBF8 end:0x80380E70
 
 revolution/VF/pf_api_util.c:
 	.text       start:0x80162084 end:0x801621F0
@@ -2718,6 +2718,7 @@ revolution/VF/d_common.c:
 
 revolution/VF/nand_drv.c:
 	.text       start:0x80165D74 end:0x80167B28
+	.rodata     start:0x80380E70 end:0x80380E90
 	.sbss       start:0x804BF4A0 end:0x804BF4A8
 
 revolution/VF/sd_drv.c:
