@@ -2574,6 +2574,7 @@ revolution/VF/pf_service.c:
 
 revolution/VF/pf_str.c:
 	.text       start:0x8014B288 end:0x8014B810
+	.bss        start:0x8047A920 end:0x804A3440
 
 revolution/VF/pf_w_clib.c:
 	.text       start:0x8014B810 end:0x8014B8A4
@@ -2595,7 +2596,6 @@ revolution/VF/pdm_mbr.c:
 
 revolution/VF/pdm_dskmng.c:
 	.text       start:0x8014FB08 end:0x8014FD2C
-	.bss        start:0x8047A920 end:0x804A35A0
 
 revolution/VF/pf_cache.c:
 	.text       start:0x8014FD2C end:0x80151C60
@@ -2693,22 +2693,24 @@ revolution/VF/pf_unmount.c:
 
 revolution/VF/pf_filelock.c:
 	.text       start:0x801624F8 end:0x8016250C
+	.sbss       start:0x804BF478 end:0x804BF480
 
 revolution/VF/pf_system.c:
 	.text       start:0x8016250C end:0x80162584
-	.sbss       start:0x804BF478 end:0x804BF480
 
 revolution/VF/d_vf.c:
 	.text       start:0x80162584 end:0x80163040
+	.bss        start:0x804A3440 end:0x804A3458
 	.sbss       start:0x804BF480 end:0x804BF488
 
 revolution/VF/d_vf_sys.c:
 	.text       start:0x80163040 end:0x80164B1C
+	.bss        start:0x804A3458 end:0x804A3590
 	.sbss       start:0x804BF488 end:0x804BF4A0
 
 revolution/VF/d_hash.c:
 	.text       start:0x80164B1C end:0x8016519C
-	.bss        start:0x804A35A0 end:0x804A3B78
+	.bss        start:0x804A3590 end:0x804A3B78
 
 revolution/VF/d_time.c:
 	.text       start:0x8016519C end:0x8016522C
