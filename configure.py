@@ -1027,7 +1027,7 @@ config.libs = [
             Object(Matching, "revolution/WENC/wenc.c"),
             Object(NonMatching, "revolution/CNT/cnt.c"),
             Object(Matching, "revolution/ESP/esp.c"),
-            Object(NonMatching, "revolution/NET/nettime.c"),
+            Object(Matching, "revolution/NET/nettime.c"),
             Object(NonMatching, "revolution/NET/NETVersion.c"),
             Object(NonMatching, "revolution/NWC24/NWC24StdApi.c"),
             Object(Matching, "revolution/NWC24/NWC24FileApi.c"),
