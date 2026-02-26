@@ -1040,7 +1040,7 @@ config.libs = [
             Object(Matching, "revolution/NWC24/NWC24Parser.c"),
             Object(NonMatching, "revolution/NWC24/NWC24MsgCommit.c"),
             Object(Matching, "revolution/NWC24/NWC24Schedule.c"),
-            Object(NonMatching, "revolution/NWC24/NWC24DateParser.c"),
+            Object(Matching, "revolution/NWC24/NWC24DateParser.c"),
             Object(Matching, "revolution/NWC24/NWC24FriendList.c"),
             Object(Matching, "revolution/NWC24/NWC24SecretFList.c"),
             Object(Matching, "revolution/NWC24/NWC24Time.c"),
