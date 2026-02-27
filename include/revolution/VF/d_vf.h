@@ -12,6 +12,10 @@ typedef enum {
     VF_ERROR_0002 = 0x0002,
     VF_ERROR_0005 = 0x0005,
     VF_ERROR_B001 = 0xB001,
+    VF_ERR_GENERIC = 0xB002,
+    VF_ERR_DRIVE_NOT_FOUND = 0xB003,
+    VF_ERR_0xB004 = 0xB004,
+    VF_ERR_0xB005 = 0xB005,
 } VFError;
 
 // Sync and async?

@@ -2693,10 +2693,10 @@ revolution/VF/pf_unmount.c:
 
 revolution/VF/pf_filelock.c:
 	.text       start:0x801624F8 end:0x8016250C
+	.sbss       start:0x804BF478 end:0x804BF480
 
 revolution/VF/pf_system.c:
 	.text       start:0x8016250C end:0x80162584
-	.sbss       start:0x804BF478 end:0x804BF480
 
 revolution/VF/d_vf.c:
 	.text       start:0x80162584 end:0x80163040
