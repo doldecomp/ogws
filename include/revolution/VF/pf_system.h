@@ -5,7 +5,18 @@
 extern "C" {
 #endif
 
+typedef struct PFDATE {
+    u16 year;
+    u16 month;
+    u16 day;
+} PFDATE;
 
+typedef struct PFTIME {
+    u16 hour;
+    u16 minute;
+    u16 second;
+    u16 millisecond;
+} PFTIME;
 
 #ifdef __cplusplus
 }
