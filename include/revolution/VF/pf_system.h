@@ -6,16 +6,16 @@ extern "C" {
 #endif
 
 typedef struct PFDATE {
-    u16 year;
-    u16 month;
-    u16 day;
+    /* 0x00 */ u16 year;
+    /* 0x02 */ u16 month;
+    /* 0x04 */ u16 day;
 } PFDATE;
 
 typedef struct PFTIME {
-    u16 hour;
-    u16 minute;
-    u16 second;
-    u16 millisecond;
+    /* 0x00 */ u16 hour;
+    /* 0x02 */ u16 minute;
+    /* 0x04 */ u16 second;
+    /* 0x06 */ u16 millisecond;
 } PFTIME;
 
 #ifdef __cplusplus
