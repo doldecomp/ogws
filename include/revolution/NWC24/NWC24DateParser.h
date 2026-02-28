@@ -4,7 +4,7 @@
 
 #include <revolution/NWC24/NWC24Types.h>
 #include <revolution/NWC24/NWC24Utils.h>
-#include <revolution/OS/OSTime.h>
+#include <revolution/OS.h>
 #ifdef __cplusplus
 extern "C" {
 #endif
