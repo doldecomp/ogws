@@ -2595,7 +2595,7 @@ revolution/VF/pdm_mbr.c:
 
 revolution/VF/pdm_dskmng.c:
 	.text       start:0x8014FB08 end:0x8014FD2C
-	.bss        start:0x8047A920 end:0x804A3440
+	.bss        start:0x8047A920 end:0x8047B488
 
 revolution/VF/pf_cache.c:
 	.text       start:0x8014FD2C end:0x80151C60
@@ -2608,7 +2608,7 @@ revolution/VF/pf_dir.c:
 
 revolution/VF/pf_entry.c:
 	.text       start:0x801521A8 end:0x80153C40
-	.data       start:0x803B7F48 end:0x803B8008
+	.data       start:0x803B7F48 end:0x803B7F58
 	.sdata2     start:0x804C13E8 end:0x804C13F0
 
 revolution/VF/pf_entry_iterator.c:
@@ -2644,6 +2644,7 @@ revolution/VF/pf_sector.c:
 
 revolution/VF/pf_volume.c:
 	.text       start:0x8016046C end:0x80161B74
+	.bss        start:0x8047B488 end:0x804A3440
 
 revolution/VF/pf_cp932.c:
 	.text       start:0x80161B74 end:0x80162084
@@ -2651,6 +2652,7 @@ revolution/VF/pf_cp932.c:
 
 revolution/VF/pf_api_util.c:
 	.text       start:0x80162084 end:0x801621F0
+	.data       start:0x803B7F58 end:0x803B7FF8
 
 revolution/VF/pf_attach.c:
 	.text       start:0x801621F0 end:0x80162274
@@ -2705,6 +2707,7 @@ revolution/VF/d_vf.c:
 
 revolution/VF/d_vf_sys.c:
 	.text       start:0x80163040 end:0x80164B1C
+	.data       start:0x803B7FF8 end:0x803B8008
 	.bss        start:0x804A3458 end:0x804A3590
 	.sbss       start:0x804BF488 end:0x804BF4A0
 

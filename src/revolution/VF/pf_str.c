@@ -1,5 +1,7 @@
 #include <revolution/VF.h>
 
+extern PF_VOLUME_SET VFipf_vol_set;
+
 void VFiPFSTR_SetCodeMode(PFSTR* str, u32 mode) {
     str->mode = (PFSTR_CodeMode)mode;
 }
@@ -37,7 +39,7 @@ void VFiPFSTR_MoveStrPos(PFSTR* str, s16 n) {
         const char* data = (const char*)str->begin;
 
         for (; n != 0; dist++, n--) {
-            if (VFipf_vol_set.oemIsMBChar(*data, PFSTR_CODEMODE_OEM)) {
+            if (VFipf_vol_set.codeset.is_oem_mb_char(*data, PFSTR_CODEMODE_OEM)) {
                 dist++;
             }
         }
@@ -45,7 +47,7 @@ void VFiPFSTR_MoveStrPos(PFSTR* str, s16 n) {
         const char* data = (const char*)str->begin;
 
         for (i = 0; i < n; i++) {
-            const size_t width = VFipf_vol_set.unicodeCharWidth(data);
+            const size_t width = VFipf_vol_set.codeset.unicode_char_width((u16*)data);
             data += width * sizeof(wchar_t);
             dist += (s16)width;
         }
@@ -91,14 +93,14 @@ u16 VFiPFSTR_StrNumChar(const PFSTR* str, u32 mode) {
     if (str->mode == (u32)PFSTR_CODEMODE_OEM) {
         length = 0;
         for (; *data != '\0'; data++, length++) {
-            if (VFipf_vol_set.oemIsMBChar(*data, PFSTR_CODEMODE_OEM)) {
+            if (VFipf_vol_set.codeset.is_oem_mb_char(*data, PFSTR_CODEMODE_OEM)) {
                 data++;
             }
         }
     } else {
         length = 0;
         for (; data[0] != '\0' || data[1] != '\0'; data += width, length++) {
-            width = VFipf_vol_set.unicodeCharWidth(data);
+            width = VFipf_vol_set.codeset.unicode_char_width((u16*)data);
         }
     }
 
@@ -115,7 +117,7 @@ int VFiPFSTR_StrCmp(const PFSTR* str, const char* cmp) {
 
     data = (const wchar_t*)str->begin;
     do {
-        VFipf_vol_set.convOemToUnicode(cmp, &out);
+        VFipf_vol_set.codeset.oem2unicode((s8*)cmp, &out);
         cmp++;
     } while (*data++ == out && data[-1] != L'\0' && out != L'\0');
 
@@ -146,7 +148,7 @@ int VFiPFSTR_StrNCmp(PFSTR* str, const char* cmp, u32 mode, s16 pos, u16 n) {
     }
 
     do {
-        VFipf_vol_set.convOemToUnicode(cmp, &out);
+        VFipf_vol_set.codeset.oem2unicode((s8*)cmp, &out);
         cmp++;
         n--;
     } while (*wdata++ == out && n > 0 && wdata[-1] != L'\0' && out != L'\0');

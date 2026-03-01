@@ -1,56 +1,56 @@
 #include <revolution/VF.h>
 
-void VFipdm_bpb_calculate_common_bpb_fields(VF_BPB *bpb) {
+void VFipdm_bpb_calculate_common_bpb_fields(PDM_BPB *bpb) {
     u32 temp;
     u32 root_secs;
     u32 data_secs;
 
-    bpb->bps_shift = 0;
-    temp = bpb->bytes_per_sec;
+    bpb->log2_bytes_per_sector = 0;
+    temp = bpb->bytes_per_sector;
     while ((temp = (temp >> 1) & 0x7FFF) != 0) {
-        bpb->bps_shift++;
+        bpb->log2_bytes_per_sector++;
     }
 
-    bpb->spc_shift = 0;
-    temp = bpb->sec_per_clus;
+    bpb->log2_sectors_per_cluster = 0;
+    temp = bpb->sectors_per_cluster;
     while ((temp = (temp >> 1) & 0x7FFF) != 0) {
-        bpb->spc_shift++;
+        bpb->log2_sectors_per_cluster++;
     }
 
-    root_secs = ((bpb->bytes_per_sec + (bpb->root_ent_cnt * 32)) - 1) >> bpb->bps_shift;
-    bpb->root_dir_secs = root_secs;
+    root_secs = ((bpb->bytes_per_sector + (bpb->num_root_dir_entries * 32)) - 1) >> bpb->log2_bytes_per_sector;
+    bpb->num_root_dir_sectors = root_secs;
 
-    root_secs = ((u16)root_secs + bpb->rsvd_sec_cnt) + (bpb->num_fats * bpb->fat_sz);
-    bpb->data_start_sec = root_secs;
+    root_secs = ((u16)root_secs + bpb->num_reserved_sectors) + (bpb->num_FATs * bpb->sectors_per_FAT);
+    bpb->first_data_sector = root_secs;
 
     data_secs = bpb->total_sectors - root_secs; 
-    bpb->count_of_clusters = data_secs >> bpb->spc_shift;
+    bpb->num_clusters = data_secs >> bpb->log2_sectors_per_cluster;
 
-    if ((data_secs >> bpb->spc_shift) < 0xFF5) {
-        bpb->fat_type = VF_FAT_TYPE_FAT12;
-    } else if ((data_secs >> bpb->spc_shift) < 0xFFF5) {
-        bpb->fat_type = VF_FAT_TYPE_FAT16;
+    if ((data_secs >> bpb->log2_sectors_per_cluster) < 0xFF5) {
+        bpb->fat_type = PDM_FAT_12;
+    } else if ((data_secs >> bpb->log2_sectors_per_cluster) < 0xFFF5) {
+        bpb->fat_type = PDM_FAT_16;
     } else {
-        bpb->fat_type = VF_FAT_TYPE_FAT32;
+        bpb->fat_type = PDM_FAT_32;
     }
 }
 
-static void VFipdm_bpb_calculate_specific_bpb_fields(VF_BPB *dst) {
+static void VFipdm_bpb_calculate_specific_bpb_fields(PDM_BPB *dst) {
     switch ((s32)dst->fat_type) {
-        case VF_FAT_TYPE_FAT12:
-        case VF_FAT_TYPE_FAT16: {
-            dst->fat1_start_sec = dst->rsvd_sec_cnt;
-            dst->active_fats = dst->num_fats;
-            dst->root_start_sec = dst->rsvd_sec_cnt + (dst->num_fats * dst->fat_sz);
+        case PDM_FAT_12:
+        case PDM_FAT_16: {
+            dst->active_FAT_sector = dst->num_reserved_sectors;
+            dst->num_active_FATs = dst->num_FATs;
+            dst->first_root_dir_sector = dst->num_reserved_sectors + (dst->num_FATs * dst->sectors_per_FAT);
         } break;
-        case VF_FAT_TYPE_FAT32: {
-            dst->root_start_sec = dst->data_start_sec + ((dst->root_cluster - 2) << dst->spc_shift);
+        case PDM_FAT_32: {
+            dst->first_root_dir_sector = dst->first_data_sector + ((dst->root_dir_cluster - 2) << dst->log2_sectors_per_cluster);
             if (dst->ext_flags & 0x80) {
-                dst->active_fats = 1;
-                dst->fat1_start_sec = dst->rsvd_sec_cnt + ((dst->ext_flags & 0x7) * dst->fat_sz);
+                dst->num_active_FATs = 1;
+                dst->active_FAT_sector = dst->num_reserved_sectors + ((dst->ext_flags & 0x7) * dst->sectors_per_FAT);
             } else {
-                dst->active_fats = dst->num_fats;
-                dst->fat1_start_sec = dst->rsvd_sec_cnt;
+                dst->num_active_FATs = dst->num_FATs;
+                dst->active_FAT_sector = dst->num_reserved_sectors;
             }
         }
     }
@@ -67,7 +67,7 @@ static s32 VFipdm_bpb_load_string(const u8 *src, u32 length, u8 *dst) {
     return 0;
 }
 
-s32 VFipdm_bpb_get_bpb_information(const u8 *src, VF_BPB *dst) {
+s32 VFipdm_bpb_get_bpb_information(const u8 *src, PDM_BPB *dst) {
     s32 result;
     int i;
 
@@ -80,71 +80,70 @@ s32 VFipdm_bpb_get_bpb_information(const u8 *src, VF_BPB *dst) {
     VFipdm_bpb_load_string(src, 3, dst->jump_boot);
     VFipdm_bpb_load_string(src + 3, 8, dst->oem_name);
 
-    dst->bytes_per_sec = src[0xB] | (src[0xC] << 8);
-    dst->sec_per_clus = src[0xD];
-    dst->rsvd_sec_cnt = src[0xE] | (src[0xF] << 8);
-    dst->num_fats = src[0x10];
-    dst->root_ent_cnt = src[0x11] | (src[0x12] << 8);
+    dst->bytes_per_sector = src[0xB] | (src[0xC] << 8);
+    dst->sectors_per_cluster = src[0xD];
+    dst->num_reserved_sectors = src[0xE] | (src[0xF] << 8);
+    dst->num_FATs = src[0x10];
+    dst->num_root_dir_entries = src[0x11] | (src[0x12] << 8);
 
-    dst->tot_sec16 = src[0x13] | (src[0x14] << 8);
+    dst->total_sectors16 = src[0x13] | (src[0x14] << 8);
     dst->media = src[0x15];
-    dst->fat_sz16 = src[0x16] | (src[0x17] << 8);
-    dst->sec_per_trk = src[0x18] | (src[0x19] << 8);
+    dst->sectors_per_FAT16 = src[0x16] | (src[0x17] << 8);
+    dst->sector_per_track = src[0x18] | (src[0x19] << 8);
     dst->num_heads = src[0x1A] | (src[0x1B] << 8);
-    dst->hidden_sec = src[0x1C] | (src[0x1D] << 8) | (src[0x1E] << 16) | (src[0x1F] << 24);
-    dst->tot_sec32 = src[0x20] | (src[0x21] << 8) | (src[0x22] << 16) | (src[0x23] << 24);
+    dst->num_hidden_sectors = src[0x1C] | (src[0x1D] << 8) | (src[0x1E] << 16) | (src[0x1F] << 24);
+    dst->total_sectors32 = src[0x20] | (src[0x21] << 8) | (src[0x22] << 16) | (src[0x23] << 24);
 
-    dst->total_sectors = (dst->tot_sec16 == 0) ? dst->tot_sec32 : (u32)dst->tot_sec16;
+    dst->total_sectors = (dst->total_sectors16 == 0) ? dst->total_sectors32 : (u32)dst->total_sectors16;
 
-    if (dst->fat_sz16 == 0) {
-        int fat_sz32 = src[0x24] | (src[0x25] << 8) | (src[0x26] << 16) | (src[0x27] << 24);
-        dst->fat_sz = (dst->root_cluster_copy = fat_sz32);
+    if (dst->sectors_per_FAT16 == 0) {
+        dst->sectors_per_FAT = (dst->sectors_per_FAT32 = src[0x24] | (src[0x25] << 8) | (src[0x26] << 16) | (src[0x27] << 24));
     } else {
-        dst->fat_sz = dst->fat_sz16;
-        dst->root_cluster_copy = 0;
+        dst->sectors_per_FAT = dst->sectors_per_FAT16;
+        dst->sectors_per_FAT32 = 0;
     }
 
     VFipdm_bpb_calculate_common_bpb_fields(dst);
 
     switch ((s32)dst->fat_type) {
-        case VF_FAT_TYPE_FAT12:
-        case VF_FAT_TYPE_FAT16: {
-            if (dst->fat_sz16 == 0) {
+        case PDM_FAT_12:
+        case PDM_FAT_16: {
+            if (dst->sectors_per_FAT16 == 0) {
                 result = 4;
             }
 
             dst->ext_flags = 0;
-            dst->fs_ver = 0;
-            dst->root_cluster = 0;
-            dst->fs_info = 0;
-            dst->bk_boot_sec = 0;
+            dst->fs_version = 0;
+            dst->root_dir_cluster = 0;
+            dst->fs_info_sector = 0;
+            dst->backup_boot_sector = 0;
 
-            dst->drv_num = src[0x24];
+            dst->drive = src[0x24];
             dst->boot_sig = src[0x26];
             dst->vol_id = src[0x27] | (src[0x28] << 8) | (src[0x29] << 16) | (src[0x2A] << 24);
 
-            VFipdm_bpb_load_string(src + 0x2b, 11, dst->vol_lab);
-            VFipdm_bpb_load_string(src + 0x36, 8, dst->fil_sys_type);
+            VFipdm_bpb_load_string(src + 0x2b, 11, dst->vol_label);
+            VFipdm_bpb_load_string(src + 0x36, 8, dst->fs_type);
         } break;
-        case VF_FAT_TYPE_FAT32: {
-            if (dst->tot_sec16 != 0 || dst->fat_sz16 != 0) {
+        case PDM_FAT_32: {
+            if (dst->total_sectors16 != 0 || dst->sectors_per_FAT16 != 0) {
                 result = 4;
             }
 
             dst->ext_flags = src[0x28] | (src[0x29] << 8);
-            dst->fs_ver = src[0x2A] | (src[0x2B] << 8);
-            dst->root_cluster = src[0x2C] | (src[0x2D] << 8) | (src[0x2E] << 16) | (src[0x2F] << 24);
-            dst->fs_info = (src[0x31] << 8) | src[0x30];
-            dst->bk_boot_sec = (src[0x33] << 8) | src[0x32];
+            dst->fs_version = src[0x2A] | (src[0x2B] << 8);
+            dst->root_dir_cluster = src[0x2C] | (src[0x2D] << 8) | (src[0x2E] << 16) | (src[0x2F] << 24);
+            dst->fs_info_sector = (src[0x31] << 8) | src[0x30];
+            dst->backup_boot_sector = (src[0x33] << 8) | src[0x32];
 
-            dst->drv_num = src[0x40];
+            dst->drive = src[0x40];
             dst->boot_sig = src[0x42];
             dst->vol_id = src[0x43] | (src[0x44] << 8) | (src[0x45] << 16) | (src[0x46] << 24);
 
-            VFipdm_bpb_load_string(src + 0x47, 11, dst->vol_lab);
-            VFipdm_bpb_load_string(src + 0x52, 8, dst->fil_sys_type);
+            VFipdm_bpb_load_string(src + 0x47, 11, dst->vol_label);
+            VFipdm_bpb_load_string(src + 0x52, 8, dst->fs_type);
 
-            if (dst->fs_ver != 0) {
+            if (dst->fs_version != 0) {
                 result = 4;
             }
         } break;
@@ -240,19 +239,19 @@ s32 VFipdm_bpb_check_boot_sector(const u8 *buf, u32 *is_boot) {
 }
 
 s32 VFipdm_bpb_check_fsinfo_sector(const u8 *buf, u32 *is_fsinfo) {
-    u32 sig1;
-    u32 sig2;
-    u32 sig3;
+    u32 lead_sig;
+    u32 struct_sig;
+    u32 trail_sig;
 
     if (buf == NULL || is_fsinfo == NULL) {
         return 1;
     }
 
-    sig1 = buf[0] | (buf[1] << 8) | (buf[2] << 16) | (buf[3] << 24);
-    sig2 = buf[0x1E4] | (buf[0x1E5] << 8) | (buf[0x1E6] << 16) | (buf[0x1E7] << 24);
-    sig3 = buf[0x1FC] | (buf[0x1FD] << 8) | (buf[0x1FE] << 16) | (buf[0x1FF] << 24);
+    lead_sig = buf[0] | (buf[1] << 8) | (buf[2] << 16) | (buf[3] << 24);
+    struct_sig = buf[0x1E4] | (buf[0x1E5] << 8) | (buf[0x1E6] << 16) | (buf[0x1E7] << 24);
+    trail_sig = buf[0x1FC] | (buf[0x1FD] << 8) | (buf[0x1FE] << 16) | (buf[0x1FF] << 24);
 
-    if (sig1 == 0x41615252 && sig2 == 0x61417272 && sig3 == 0xAA550000) {
+    if (lead_sig == 0x41615252 && struct_sig == 0x61417272 && trail_sig == 0xAA550000) {
         *is_fsinfo = 1;
     } else {
         *is_fsinfo = 0;
