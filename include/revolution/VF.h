@@ -4,6 +4,8 @@
 extern "C" {
 #endif
 
+#include <revolution/VF/vf_struct.h>
+
 #include <revolution/VF/pf_clib.h>
 #include <revolution/VF/pf_code.h>
 #include <revolution/VF/pf_service.h>

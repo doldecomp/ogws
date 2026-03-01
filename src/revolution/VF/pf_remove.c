@@ -1,5 +1,7 @@
 #include <revolution/VF.h>
 
+extern PF_VOLUME_SET VFipf_vol_set;
+
 int VFipf2_remove(const char *path) {
     long err;
     PFSTR path_str;
@@ -8,8 +10,7 @@ int VFipf2_remove(const char *path) {
     if (err == 0) {
         err = VFiPFFILE_remove(&path_str);
     } else {
-        // VFipf_vol_set.UNK_0x0[0x1c] = err;
-        *(int*)(VFipf_vol_set.UNK_0x0 + 0x1c) = err;
+        VFipf_vol_set.last_error = err; 
     }
 
     return VFiPFAPI_convertReturnValue(err);

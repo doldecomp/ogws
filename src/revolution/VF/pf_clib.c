@@ -1,6 +1,6 @@
 #include <revolution/VF.h>
 
-s32 VFipf_toupper(s32 ch);
+s32 VFipf_toupper(s32 c);
 void *VFipf_memcpy(void *dst, const void *src, u32 length);
 void *VFipf_memset(void *dst, s32 c, u32 length);
 u32 VFipf_strlen(const s8 *s);
@@ -8,11 +8,12 @@ VFipf_strcpy(char *dest, const char *src);
 s32 VFipf_strcmp(const s8 *s1, const s8 *s2);
 s32 VFipf_strncmp(const s8 *s1, const s8 *s2, u32 length);
 
-s32 VFipf_toupper(s32 ch) {
-    if (ch >= 'a' && ch <= 'z') {
-        return ch - ('a' - 'A');
+s32 VFipf_toupper(s32 c) {
+    if (c >= 'a' && c <= 'z') {
+        return c - ('a' - 'A');
     }
-    return ch;
+
+    return c;
 }
 
 void *VFipf_memcpy(void *dst, const void *src, u32 length) {
