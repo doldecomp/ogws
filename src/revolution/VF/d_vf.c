@@ -5,11 +5,32 @@ static OSMutex l_Mutex;
 static s32 l_vf_init;
 static s32 l_InitedMutex;
 
+#define VF_ERROR_B001 0xB001
+#define VF_ERR_GENERIC 0xB002
+#define VF_ERR_DRIVE_NOT_FOUND 0xB003
+#define VF_ERR_0xB004 0xB004
+#define VF_ERR_0xB005 0xB005
+
+struct DriveP {
+    void* file_p;
+    struct PDM_DISK* pf_disk_p;
+    struct PF_DRV_TBL pf_drv;
+    struct PDM_PARTITION* pf_part_p;
+    struct {
+        struct MEMiHeapHead* heap_handle;
+        unsigned long cache_pages;
+        struct PF_CACHE_PAGE* pf_cache_page_p;
+        unsigned char (*pf_cache_buf_p)[512];
+    } cache;
+    struct PF_CACHE_SETTING pf_cache_set;
+    unsigned char pf_filename[255];
+} DriveP;
+
 s32 VFIsAvailable(void) {
     return l_vf_init != 0;
 }
 
-void VFInitEx(void* param_1, u32 param_2) {
+void VFInitEx(void* i_heap_start_address_p, u32 i_size) {
     if (l_InitedMutex == 0) {
         OSInitMutex(&l_Mutex);
         l_InitedMutex = 1;
@@ -21,7 +42,7 @@ void VFInitEx(void* param_1, u32 param_2) {
 
     if (l_vf_init == 0) {
         l_vf_init = 1;
-        VFSysInit(param_1, param_2);
+        VFSysInit(i_heap_start_address_p, i_size);
         VFipdm_init_diskmanager(0, 0);
         VFipf2_init_prfile2(0, 0);
         dHash_InitHashTable();
@@ -32,36 +53,39 @@ void VFInitEx(void* param_1, u32 param_2) {
     }
 }
 
-VFError VF_activate_drive_common(unsigned int drivePtr, char *path, int param_3) {
-    VFError err;
-    int driveP;
-    int stack_buf[2];
+long VF_activate_drive_common(long i_handle_idx, const char * i_sys_file_name_p, void * i_memory_p) {
+    long err;
+    struct DriveP* drive_p;
+    struct PF_DRV_TBL * drv_tbl[2];
 
-    err = VFSysCheckExistPrfFile((char*)drivePtr);
+    err = VFSysCheckExistPrfFile((char *)i_handle_idx);
     if (err != 0) {
         VFSysSetLastError(err);
         return err;
     }
 
-    err = VFSysMountDrv(drivePtr, path, param_3);
+    err = VFSysMountDrv(i_handle_idx, i_sys_file_name_p, i_memory_p);
     if (err != 0) {
         VFSysSetLastError(err);
         return err;
     }
 
-    driveP = VFSysGetDriveP(drivePtr);
-    if (driveP == 0) {
-        VFSysSetLastError(VF_ERR_GENERIC);
-        return VF_ERR_GENERIC;
+    drive_p = (void *)VFSysGetDriveP(i_handle_idx);
+    
+    if (drive_p == 0) {
+        VFSysSetLastError(0xb002);
+        return 0xb002;
     }
 
-    stack_buf[0] = driveP + 8;
-    stack_buf[1] = 0;
-    err = VFipf2_attach(stack_buf);
+    drv_tbl[0] = &drive_p->pf_drv;
+    drv_tbl[1] = 0;
+
+    err = VFipf2_attach(drv_tbl);
+    
     if (err != 0) {
         err = VFipf2_errnum();
         VFSysSetLastError(err);
-        VFipdm_close_partition(*(int*)(driveP + 0x14));
+        VFipdm_close_partition(drive_p->pf_part_p);
         return err;
     }
 
@@ -160,50 +184,47 @@ s32 VFUnmountDrive(const char* i_drive) {
     return result;
 }
 
-char *VF_path2handleidx(int *handleIdxPtr, char *path) {
-    char driveName[8];
-    char *drive_ptr;
-    char *path_ptr;
-    char c;
-    int handle;
-    int i;
-    char *ret;
-    char new_var;
-    i = 0;
-    *handleIdxPtr = -1;
-    path_ptr = path;
-    ret = path;
-    VFipf_memset(driveName, 0, 8);
-    drive_ptr = driveName;
-    // TODO(Alex9303) Permuter fake(?)match
-    while ((new_var = *path_ptr) != '\0') {
-        c = new_var;
-        if ((c == '\\') || (c == '/')) {
+char *VF_path2handleidx(s32* o_handle_idx_p, const char* i_path_p) {
+    char drive[8];
+    const char* str_p;
+    s32 idx;
+    const char* ret_p;
+
+    *o_handle_idx_p = -1;
+    str_p = i_path_p;
+    idx = 0;
+    ret_p = i_path_p;
+
+    VFipf_memset(drive, 0, 8);
+
+    while (*str_p != '\0') {
+        if (*str_p == '\\' || *str_p == '/') {
             break;
         }
-        if (c == ':') {
-            handle = dHash_GetArg(driveName);
-            *handleIdxPtr = handle;
-            if ((handle == (-1)) || (i > 7)) {
-                ret = 0;
+
+        if (*str_p == ':') {
+            *o_handle_idx_p = dHash_GetArg(drive);
+            if (*o_handle_idx_p == -1 || idx > 7) {
+                ret_p = 0;
             } else {
-                ret = path_ptr + 1;
+                ret_p = str_p + 1;
             }
             break;
         }
-        if (i < 7) {
-            *drive_ptr = c;
+
+        if (idx < 7) {
+            drive[idx] = *str_p;
         }
-        path_ptr++;
-        drive_ptr++;
-        i++;
+
+        str_p++;
+        idx++;
     }
 
-    return ret;
+    return (char*)ret_p;
 }
 
 VFFile VFOpenFile(const char* i_path_p, const char* i_mode, u32 i_attr) {
-    int handleIdx = -1;
+    s32 handleIdx = -1;
     VFFile result;
     char *relativePath;
 
@@ -303,7 +324,7 @@ s32 VFWriteFile(VFFile i_file_p, const void* i_buf_p, u32 i_size) {
 }
 
 s32 VFDeleteFile(const char* i_path_p) {
-    int handleIdx = -1;
+    s32 handleIdx = -1;
     s32 result;
     char *relativePath;
 

@@ -4,6 +4,9 @@
 extern "C" {
 #endif
 
+#define SWAP16(x) (((x) >> 8) & 0xFF) | (((x) << 8) & 0xFF00)
+#define SWAP32(x) ((x) >> 24) | (((x) >> 8) & 0xFF00) | (((x) << 8) & 0xFF0000) | ((x) << 24)
+
 #include <revolution/VF/vf_struct.h>
 
 #include <revolution/VF/pf_clib.h>

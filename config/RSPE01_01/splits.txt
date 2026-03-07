@@ -2713,17 +2713,19 @@ revolution/VF/d_vf_sys.c:
 
 revolution/VF/d_hash.c:
 	.text       start:0x80164B1C end:0x8016519C
-	.bss        start:0x804A3590 end:0x804A3B78
+	.bss        start:0x804A3590 end:0x804A37D0
 
 revolution/VF/d_time.c:
 	.text       start:0x8016519C end:0x8016522C
 
 revolution/VF/d_common.c:
 	.text       start:0x8016522C end:0x80165D74
+	.bss        start:0x804A37D0 end:0x804A39D8
 
 revolution/VF/nand_drv.c:
 	.text       start:0x80165D74 end:0x80167B28
 	.rodata     start:0x80380E70 end:0x80380E90
+	.bss        start:0x804A39D8 end:0x804A3B78
 	.sbss       start:0x804BF4A0 end:0x804BF4A8
 
 revolution/VF/sd_drv.c:
