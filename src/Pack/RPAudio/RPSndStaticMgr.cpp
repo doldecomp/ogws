@@ -14,7 +14,7 @@
  * @brief Constructor
  */
 RPSndStaticMgr::RPSndStaticMgr() : ArcPlayer(NULL) {
-    for (int i = 0; i < WPAD_MAX_CONTROLLERS; i++) {
+    for (int i = 0; i < RP_MAX_CONTROLLERS; i++) {
         mStartTasks[i].valid = false;
     }
 }
@@ -43,7 +43,7 @@ bool RPSndStaticMgr::setupArchive() {
  * @brief Updates the state of the sound player
  */
 void RPSndStaticMgr::calc() {
-    for (int i = 0; i < WPAD_MAX_CONTROLLERS; i++) {
+    for (int i = 0; i < RP_MAX_CONTROLLERS; i++) {
         StartTask& rTask = mStartTasks[i];
         if (!rTask.valid) {
             continue;

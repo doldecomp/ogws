@@ -75,7 +75,7 @@ RPSysKokeshiManager::RPSysKokeshiManager()
 
     mpOfficialDB = new RPSysOfficialDB();
 
-    for (int i = 0; i < WPAD_MAX_CONTROLLERS; i++) {
+    for (int i = 0; i < RP_MAX_CONTROLLERS; i++) {
         mppCtrlDataLoaders[i] = new RPSysKokeshiCtrlDataLoader(i);
     }
 
@@ -634,7 +634,7 @@ void RPSysKokeshiManager::GetLocationFriend(RFLDataSource src,
                 GetAdditionalInfo(*pLocation, &middleInfo);
 
                 // Make sure this Mii was not chosen by any player
-                for (u32 i = 0; i < WPAD_MAX_CONTROLLERS; i++) {
+                for (u32 i = 0; i < RP_MAX_CONTROLLERS; i++) {
                     GetLocationPlayer(i, &player);
 
                     RFLAdditionalInfo playerInfo;
@@ -660,7 +660,7 @@ void RPSysKokeshiManager::GetLocationFriend(RFLDataSource src,
 
             pMiddleDB->IncrementCurrentIndex();
 
-            if (valid || ++index >= WPAD_MAX_CONTROLLERS) {
+            if (valid || ++index >= RP_MAX_CONTROLLERS) {
                 break;
             }
         }
@@ -724,7 +724,7 @@ void RPSysKokeshiManager::UpdateCtrlMgr() {
 s32 RPSysKokeshiManager::GetCurrentCtrlHeap() const {
     EGG::Heap* pCurrentHeap = EGG::Heap::getCurrentHeap();
 
-    for (int i = 0; i < WPAD_MAX_CONTROLLERS; i++) {
+    for (int i = 0; i < RP_MAX_CONTROLLERS; i++) {
         if (mpCtrlMgr->getResourceHeap(i) == pCurrentHeap) {
             return i;
         }

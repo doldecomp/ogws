@@ -49,6 +49,9 @@ public:
         EMsg_Max
     };
 
+    //! Old data exists for each player count
+    static const int OLD_DATA_LEN = 1 + 2;
+
 public:
     /**
      * @brief Constructor
@@ -61,10 +64,6 @@ public:
      * @param idx Minigame index
      */
     bool isGameOpen(s32 idx) const;
-
-private:
-    //! Old data exists for each player count
-    static const int OLD_DATA_LEN = 1 + 2;
 
 private:
     /**

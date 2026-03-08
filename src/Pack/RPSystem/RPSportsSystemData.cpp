@@ -39,7 +39,7 @@ void RPSportsSystemData::reset() {
  */
 void RPSportsSystemData::getOldData(s8* pIndex, u8* pAddr, s32 playerNum,
                                     s32 playerNo) const {
-    u32 rel2Abs[WPAD_MAX_CONTROLLERS] = {
+    u32 rel2Abs[RP_MAX_CONTROLLERS] = {
         0,             // 1 player
         0 + 1,         // 2 players
         0 + 1 + 2,     // 3 players
@@ -65,7 +65,7 @@ void RPSportsSystemData::getOldData(s8* pIndex, u8* pAddr, s32 playerNum,
  */
 void RPSportsSystemData::setOldData(s8 index, const u8* pAddr, s32 playerNum,
                                     s32 playerNo) {
-    u32 rel2Abs[WPAD_MAX_CONTROLLERS] = {
+    u32 rel2Abs[RP_MAX_CONTROLLERS] = {
         0,             // 1 player
         0 + 1,         // 2 players
         0 + 1 + 2,     // 3 players

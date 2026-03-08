@@ -78,7 +78,22 @@ public:
     void saveData(const RPSysPlayerArg& rArg);
 
     /**
-     * @brief Gets the RFL data source where this player avatar can be found
+     * @brief Gets the controller channel used by this player
+     */
+    u8 getChannel() const {
+        return mChannel;
+    }
+    /**
+     * @brief Sets the controller channel used by this player
+     *
+     * @param chan Controller channel
+     */
+    void setChannel(u8 chan) {
+        mChannel = chan;
+    }
+
+    /**
+     * @brief Gets the RFL data source where this player's avatar can be found
      * @details If the data source was never configured, this value will be -1.
      */
     s8 getDataSource() const {
@@ -86,10 +101,17 @@ public:
     }
 
     /**
-     * @brief Gets the database index where this player avatar can be found
+     * @brief Gets the database index where this player's avatar can be found
      */
     u16 getIndex() const {
         return mIndex;
+    }
+
+    /**
+     * @brief Accesses the Mii create ID of this player's avatar
+     */
+    const RFLCreateID& getCreateID() const {
+        return mCreateID;
     }
 
 private:

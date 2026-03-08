@@ -40,11 +40,6 @@ typedef struct OSExecParams OSExecParams;
     type OS_##name arr DECL_ADDRESS(addr);                                     \
     __DEF_ADDR_OFFSETS(name, addr)
 
-// Define an global variable in the hardware-register range.
-#define OS_DEF_HW_REG(type, name, addr)                                        \
-    /* Memory-mapped value for direct access */                                \
-    type OS_##name : (addr);
-
 typedef enum {
     OS_BOOT_MAGIC_BOOTROM = 0xD15EA5E,
     OS_BOOT_MAGIC_JTAG = 0xE5207C22,

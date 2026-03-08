@@ -172,19 +172,19 @@ private:
     //! Master speaker volume
     u8 mMasterVolume; // at 0x1B
 
-    u32 unk1C[WPAD_MAX_CONTROLLERS];
-    u32 unk2C[WPAD_MAX_CONTROLLERS];
-    u32 unk3C[WPAD_MAX_CONTROLLERS];
-    u32 unk4C[WPAD_MAX_CONTROLLERS];
+    u32 unk1C[RP_MAX_CONTROLLERS];
+    u32 unk2C[RP_MAX_CONTROLLERS];
+    u32 unk3C[RP_MAX_CONTROLLERS];
+    u32 unk4C[RP_MAX_CONTROLLERS];
 
     //! Whether each speaker has been initialized
-    bool mIsSpeakerSetUp[WPAD_MAX_CONTROLLERS]; // at 0x5C
+    bool mIsSpeakerSetUp[RP_MAX_CONTROLLERS]; // at 0x5C
     //! Whether each speaker is currently turned on
-    bool mIsSpeakerOn[WPAD_MAX_CONTROLLERS]; // at 0x60
+    bool mIsSpeakerOn[RP_MAX_CONTROLLERS]; // at 0x60
     //! Whether each speaker has audio output enabled
-    bool mIsEnabledOutput[WPAD_MAX_CONTROLLERS]; // at 0x64
+    bool mIsEnabledOutput[RP_MAX_CONTROLLERS]; // at 0x64
 
-    u8 unk68[WPAD_MAX_CONTROLLERS];
+    u8 unk68[RP_MAX_CONTROLLERS];
 
     //! Speaker connection task queue
     ConnectTask mTaskQueue[QUEUE_SIZE]; // at 0x6C

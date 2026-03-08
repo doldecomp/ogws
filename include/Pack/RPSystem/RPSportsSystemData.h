@@ -41,6 +41,9 @@ public:
         EGame_Max,
     };
 
+    //! Old data exists for each player count
+    static const int OLD_DATA_LEN = 1 + 2 + 3 + 4;
+
 public:
     /**
      * @brief Constructor
@@ -135,10 +138,6 @@ public:
      * @param rStrm Memory stream
      */
     void write(EGG::RamStream& rStrm);
-
-private:
-    //! Old data exists for each player count
-    static const int OLD_DATA_LEN = 1 + 2 + 3 + 4;
 
 private:
     /**

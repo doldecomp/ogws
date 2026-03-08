@@ -411,7 +411,7 @@ private:
 
     //! Mii data loaders per controller
     RPSysKokeshiCtrlDataLoader*
-        mppCtrlDataLoaders[WPAD_MAX_CONTROLLERS]; // at 0x44
+        mppCtrlDataLoaders[RP_MAX_CONTROLLERS]; // at 0x44
     //! Controller Mii manager
     RPSysKokeshiCtrlMgr* mpCtrlMgr; // at 0x48
 

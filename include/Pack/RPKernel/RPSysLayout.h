@@ -420,7 +420,7 @@ private:
 
 private:
     //! Player slot TEV colors
-    static const GXColor PLAYER_COLORS[WPAD_MAX_CONTROLLERS];
+    static const GXColor PLAYER_COLORS[RP_MAX_CONTROLLERS];
     //! CPU TEV color
     static const GXColor CPU_COLOR;
 
