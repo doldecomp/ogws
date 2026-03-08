@@ -104,7 +104,7 @@
 #undef va_start
 #define va_start(...)
 #undef va_arg
-#define va_arg(v, t) t()
+#define va_arg(v, t) 0L
 
 #endif
 
