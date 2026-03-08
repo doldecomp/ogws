@@ -1,5 +1,8 @@
-static char* NETRexPPCVersionPrintableString = "<< REX-PPC 1.0.0.2 (RevoEX-1.0plus2) REL 070510173628 >>";
+#include <revolution/NET.h>
+#include <revolution/version.h>
 
-char* NETGetRexPPCVersionPrintable() {
+REX_PPC_LIB_VERSION(NET, "1.0.0.2", "RevoEX-1.0plus2", "070510173628");
+
+const char* NETGetRexPPCVersionPrintable(void) {
     return NETRexPPCVersionPrintableString;
 }

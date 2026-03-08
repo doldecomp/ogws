@@ -7,4 +7,9 @@
         "<< RVL_SDK - " #NAME " \trelease build: " ORIGINAL_DATE               \
         " " ORIGINAL_TIME " (" ORIGINAL_CWCC ") >>"
 
+#define REX_PPC_LIB_VERSION(NAME, VERSION, PRETTY_VERSION, ORIGINAL_TIME)      \
+    static const char* NAME##RexPPCVersionPrintableString =                    \
+        "<< REX-PPC " VERSION " (" PRETTY_VERSION ") REL " ORIGINAL_TIME       \
+        " >>";
+
 #endif
