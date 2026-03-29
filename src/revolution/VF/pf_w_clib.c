@@ -1,39 +1,40 @@
 #include <revolution/VF.h>
 
-size_t VFipf_w_strlen(const wchar_t* str) {
-    const wchar_t* it = str;
-    ptrdiff_t diff;
+u32 VFipf_w_strlen(const u16* s) {
+    const u16* t;
 
-    // Find end of string
-    while (*it != L'\0') {
-        it++;
+    t = s;
+    while (*t != L'\0') {
+        t++;
     }
 
-    // Calculate size
-    diff = (uintptr_t)it - (uintptr_t)str;
-    return diff >> 1;
+    return ((s32)t - (s32)s) >> 1;
 }
 
-int VFipf_w_strcpy(wchar_t* dest, const wchar_t* src) {
-    // Unconditional jump to the middle of the loop
+u16* VFipf_w_strcpy(u16* dst, const u16* src) {
+    u16* d;  // Present in DWARF but unused here.
+
     goto jump;
     while (*src != L'\0') {
         src++;
-        dest++;
+        dst++;
     jump:
-        *dest = *src;
+        *dst = *src;
     }
 }
 
-int VFipf_w_strncmp(const wchar_t* s1, const wchar_t* s2, size_t n) {
-    while (n != 0) {
+s32 VFipf_w_strncmp(const u16* s1, const u16* s2, u32 length) {
+    const u16* p1;  // Present in DWARF but unused here.
+    const u16* p2;  // Present in DWARF but unused here.
+
+    while (length != 0) {
         if (*s1 == L'\0' || *s2 == L'\0' || *s1 != *s2) {
             return (int)(*s1 - *s2);
         }
 
         s1++;
         s2++;
-        n--;
+        length--;
     }
     return 0;
 }

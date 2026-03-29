@@ -9,7 +9,7 @@ static void VFiPFDIR_FinalizeSDD(PF_SDD* p_sdd) {
     VFiPFFAT_FinalizeFFD(&p_sdd->ffd);
 }
 
-void VFiPFDIR_FinalizeAllDirs(PF_VOLUME *p_vol) {
+void VFiPFDIR_FinalizeAllDirs(PF_VOLUME* p_vol) {
     u16 i;
     for (i = 0; i < 3u; ++i) {
         VFiPFDIR_FinalizeSDD(&p_vol->sdds[i]);

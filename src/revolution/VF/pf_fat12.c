@@ -40,7 +40,7 @@ s32 VFiPFFAT12_ReadFATEntry(PF_VOLUME* p_vol, u16 cluster, u32* p_value) {
         }
 
         if (err == 0x1000 && p_vol->p_callback != 0) {
-            result = ((s32(*)(s32))p_vol->p_callback)(p_vol->last_driver_error);
+            result = ((s32 (*)(s32))p_vol->p_callback)(p_vol->last_driver_error);
 
             if (result == 0) {
                 goto loop_check;
@@ -98,7 +98,7 @@ s32 VFiPFFAT12_ReadFATEntryPage(PF_VOLUME* p_vol, u16 cluster, u32* p_value, PF_
     err = 0;
     do {
         if (err == 0x1000 && p_vol->p_callback != 0) {
-            result = ((s32(*)(s32))p_vol->p_callback)(p_vol->last_driver_error);
+            result = ((s32 (*)(s32))p_vol->p_callback)(p_vol->last_driver_error);
             if (result == 0) {
                 err = 0;
                 continue;

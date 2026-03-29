@@ -5,7 +5,7 @@
 extern "C" {
 #endif
 
-
+int VFipf2_unmount(s8 drive, u32 mode);
 
 #ifdef __cplusplus
 }

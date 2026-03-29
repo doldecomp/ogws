@@ -5,7 +5,7 @@
 extern "C" {
 #endif
 
-
+int VFipf2_attach(struct PF_DRV_TBL** drv_tbl);
 
 #ifdef __cplusplus
 }

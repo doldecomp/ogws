@@ -1,5 +1,7 @@
 #include <revolution/VF.h>
 
-s32 VFipf2_finfo(PF_FILE* p_file, PF_INFO* p_info) {
-    return VFiPFAPI_convertReturnValue(VFiPFFILE_finfo(p_file, p_info));
+int VFipf2_finfo(struct PF_FILE* p_file, struct PF_INFO* p_info) {
+    s32 err;
+    err = VFiPFAPI_convertReturnValue(VFiPFFILE_finfo(p_file, p_info));
+    return err;
 }

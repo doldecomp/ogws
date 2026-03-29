@@ -5,7 +5,7 @@
 extern "C" {
 #endif
 
-
+int VFipf2_remove(const s8* path);
 
 #ifdef __cplusplus
 }

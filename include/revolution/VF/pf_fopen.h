@@ -5,7 +5,7 @@
 extern "C" {
 #endif
 
-
+struct PF_FILE* VFipf2_fopen(const s8* path, const s8* mode);
 
 #ifdef __cplusplus
 }

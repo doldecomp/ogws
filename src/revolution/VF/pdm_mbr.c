@@ -24,29 +24,29 @@ s32 VFipdm_mbr_get_table(u8* buf, u32 sector, PDM_MBR* p_mbr_tbl) {
         }
         p_mbr_tbl->current_sector = sector;
     }
-    
+
     p_buf = buf + 446;
     for (i = 0; i < 4; ++i) {
         p_mbr_tbl->partition_table[i].boot_flag = p_buf[0];
         p_mbr_tbl->partition_table[i].partition_type = p_buf[4];
         p_mbr_tbl->partition_table[i].s_head = p_buf[1];
-        
+
         cs_val = p_buf[2] | (p_buf[3] << 8);
         p_mbr_tbl->partition_table[i].s_cylinder = ((cs_val << 2) & 0x300) + (cs_val >> 8);
         p_mbr_tbl->partition_table[i].s_sector = cs_val & 0x3F;
-        
+
         p_mbr_tbl->partition_table[i].e_head = ((p_buf[6] << 8) & 0xFF00) | (p_buf[5] & 0xFFFF00FF);
-        
+
         cs_val = p_buf[6] | (p_buf[7] << 8);
         p_mbr_tbl->partition_table[i].e_cylinder = ((cs_val << 2) & 0x300) + (cs_val >> 8);
         p_mbr_tbl->partition_table[i].e_sector = cs_val & 0x3F;
-        
+
         p_mbr_tbl->partition_table[i].lba_start_sector = p_buf[8] | (p_buf[9] << 8) | (p_buf[10] << 16) | (p_buf[11] << 24);
         p_mbr_tbl->partition_table[i].lba_num_sectors = p_buf[12] | (p_buf[13] << 8) | (p_buf[14] << 16) | (p_buf[15] << 24);
-        
+
         p_buf += 16;
     }
-    
+
     return 0;
 }
 
@@ -127,11 +127,11 @@ s32 VFipdm_mbr_get_epbr_part_table(PDM_DISK* p_disk, PDM_MBR* p_mbr_tbl) {
 
 extern s32 VFipdm_bpb_check_boot_sector(u8* buf, u32* is_boot);
 
-s32 VFipdm_mbr_check_master_boot_record(PDM_DISK *p_disk, u8 *buf, u32 *is_master_boot) {
+s32 VFipdm_mbr_check_master_boot_record(PDM_DISK* p_disk, u8* buf, u32* is_master_boot) {
     s16 part_cnt;
-    struct PDM_MBR_SEC *p_mbr_sec;
+    struct PDM_MBR_SEC* p_mbr_sec;
     struct PDM_MBR mbr_tbl;
-    struct PDM_DISK *lp_disk;
+    struct PDM_DISK* lp_disk;
     u32 is_boot;
     s32 err;
 
@@ -143,7 +143,7 @@ s32 VFipdm_mbr_check_master_boot_record(PDM_DISK *p_disk, u8 *buf, u32 *is_maste
         return err;
     }
     *is_master_boot = 0;
-    p_mbr_sec = (struct PDM_MBR_SEC *)buf;
+    p_mbr_sec = (struct PDM_MBR_SEC*)buf;
     if (p_mbr_sec->signature1 != 0x55 || p_mbr_sec->signature2 != 0xaa) {
         return 0;
     }
@@ -160,10 +160,11 @@ s32 VFipdm_mbr_check_master_boot_record(PDM_DISK *p_disk, u8 *buf, u32 *is_maste
     }
     if (!*is_master_boot && !mbr_tbl.partition_table[0].lba_start_sector && !mbr_tbl.partition_table[1].lba_start_sector && !mbr_tbl.partition_table[2].lba_start_sector && !mbr_tbl.partition_table[3].lba_start_sector) {
         VFipdm_bpb_check_boot_sector(buf, &is_boot);
-        if (!is_boot)
+        if (!is_boot) {
             *is_master_boot = 1;
-        else
+        } else {
             *is_master_boot = 0;
+        }
     }
     return 0;
 }

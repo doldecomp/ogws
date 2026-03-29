@@ -5,7 +5,8 @@
 extern "C" {
 #endif
 
-
+void VFiPF_InitLockFile();
+s32 VFiPF_UnLockFile(struct PF_FILE* p_file);
 
 #ifdef __cplusplus
 }

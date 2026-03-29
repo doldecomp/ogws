@@ -1,9 +1,9 @@
-#include <revolution/VF.h>
 #include <revolution/OS.h>
+#include <revolution/VF.h>
 
 static OSMutex l_Mutex;
-static s32 l_vf_init;
 static s32 l_InitedMutex;
+static s32 l_vf_init;
 
 #define VF_ERROR_B001 0xB001
 #define VF_ERR_GENERIC 0xB002
@@ -24,7 +24,7 @@ struct DriveP {
     } cache;
     struct PF_CACHE_SETTING pf_cache_set;
     unsigned char pf_filename[255];
-} DriveP;
+};
 
 s32 VFIsAvailable(void) {
     return l_vf_init != 0;
@@ -53,12 +53,12 @@ void VFInitEx(void* i_heap_start_address_p, u32 i_size) {
     }
 }
 
-long VF_activate_drive_common(long i_handle_idx, const char * i_sys_file_name_p, void * i_memory_p) {
+s32 VF_activate_drive_common(long i_handle_idx, const char* i_sys_file_name_p, void* i_memory_p) {
     long err;
     struct DriveP* drive_p;
-    struct PF_DRV_TBL * drv_tbl[2];
+    struct PF_DRV_TBL* drv_tbl[2];
 
-    err = VFSysCheckExistPrfFile((char *)i_handle_idx);
+    err = VFSysCheckExistPrfFile((char*)i_handle_idx);
     if (err != 0) {
         VFSysSetLastError(err);
         return err;
@@ -70,8 +70,8 @@ long VF_activate_drive_common(long i_handle_idx, const char * i_sys_file_name_p,
         return err;
     }
 
-    drive_p = (void *)VFSysGetDriveP(i_handle_idx);
-    
+    drive_p = (void*)VFSysGetDriveP(i_handle_idx);
+
     if (drive_p == 0) {
         VFSysSetLastError(0xb002);
         return 0xb002;
@@ -81,7 +81,7 @@ long VF_activate_drive_common(long i_handle_idx, const char * i_sys_file_name_p,
     drv_tbl[1] = 0;
 
     err = VFipf2_attach(drv_tbl);
-    
+
     if (err != 0) {
         err = VFipf2_errnum();
         VFSysSetLastError(err);
@@ -184,7 +184,7 @@ s32 VFUnmountDrive(const char* i_drive) {
     return result;
 }
 
-char *VF_path2handleidx(s32* o_handle_idx_p, const char* i_path_p) {
+char* VF_path2handleidx(s32* o_handle_idx_p, const char* i_path_p) {
     char drive[8];
     const char* str_p;
     s32 idx;
@@ -226,7 +226,7 @@ char *VF_path2handleidx(s32* o_handle_idx_p, const char* i_path_p) {
 VFFile VFOpenFile(const char* i_path_p, const char* i_mode, u32 i_attr) {
     s32 handleIdx = -1;
     VFFile result;
-    char *relativePath;
+    char* relativePath;
 
     if (l_InitedMutex != 0) {
         OSLockMutex(&l_Mutex);
@@ -326,7 +326,7 @@ s32 VFWriteFile(VFFile i_file_p, const void* i_buf_p, u32 i_size) {
 s32 VFDeleteFile(const char* i_path_p) {
     s32 handleIdx = -1;
     s32 result;
-    char *relativePath;
+    char* relativePath;
 
     if (l_InitedMutex != 0) {
         OSLockMutex(&l_Mutex);
@@ -359,14 +359,14 @@ s32 VFDeleteFile(const char* i_path_p) {
 }
 
 s32 VFGetFileSizeByFd(VFFile i_file_p) {
-    int size = -1; 
+    int size = -1;
     int result = VFSysGetFileSizeByFd(&size, (int)i_file_p);
 
     if (result != 0) {
         VFSysSetLastError(result);
     }
 
-    return size; 
+    return size;
 }
 
 s32 VFGetLastError(void) {

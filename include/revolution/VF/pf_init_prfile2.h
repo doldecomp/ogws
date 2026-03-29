@@ -5,7 +5,7 @@
 extern "C" {
 #endif
 
-
+int VFipf2_init_prfile2(s32 config, void* param);
 
 #ifdef __cplusplus
 }

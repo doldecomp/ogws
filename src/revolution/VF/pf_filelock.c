@@ -1,11 +1,11 @@
 #include <revolution/VF.h>
 
-static int lbl_804BF478 = 0;
+static int VFipf_sys_set = 0;
 
 void VFiPF_InitLockFile() {
-    lbl_804BF478 = 0;
+    VFipf_sys_set = 0;
 }
 
-long VFiPF_UnLockFile(void) {
+s32 VFiPF_UnLockFile(struct PF_FILE* p_file) {
     return -1;
 }

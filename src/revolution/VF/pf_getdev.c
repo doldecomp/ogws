@@ -1,6 +1,7 @@
 #include <revolution/VF.h>
 
-s32 VFipf2_devinf(u8 drv_char, PF_DEV_INF* dev_inf) {
-    int result = VFiPFVOL_getdev((s8)drv_char, dev_inf);
-    return VFiPFAPI_convertReturnValue(result);
+int VFipf2_devinf(s8 drv_char, struct PF_DEV_INF* dev_inf) {
+    s32 err;
+    err = VFiPFAPI_convertReturnValue(VFiPFVOL_getdev((s8)drv_char, dev_inf));
+    return err;
 }
