@@ -5,18 +5,9 @@
 extern "C" {
 #endif
 
-typedef struct PFDATE {
-    /* 0x00 */ u16 year;
-    /* 0x02 */ u16 month;
-    /* 0x04 */ u16 day;
-} PFDATE;
-
-typedef struct PFTIME {
-    /* 0x00 */ u16 hour;
-    /* 0x02 */ u16 minute;
-    /* 0x04 */ u16 second;
-    /* 0x06 */ u16 millisecond;
-} PFTIME;
+void VFiPFSYS_initializeSYS();
+s32 VFiPFSYS_GetCurrentContextID(s32* context_id);
+void VFiPFSYS_TimeStamp(struct PF_SYS_DATE* sdate, struct PF_SYS_TIME* stime);
 
 #ifdef __cplusplus
 }

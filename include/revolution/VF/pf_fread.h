@@ -5,7 +5,7 @@
 extern "C" {
 #endif
 
-
+u32 VFipf2_fread(void* p_buf, u32 size, u32 count, struct PF_FILE* p_file);
 
 #ifdef __cplusplus
 }

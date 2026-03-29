@@ -1,20 +1,20 @@
 #include <revolution/VF.h>
 
-long VFiPFSEC_ReadFAT(struct PF_VOLUME* p_vol, unsigned char* p_buf, unsigned long sector, unsigned short offset, unsigned short size);
-long VFiPFCACHE_ReadFATPage(struct PF_VOLUME* p_vol, unsigned long sector, struct PF_CACHE_PAGE** pp_page);
-long VFiPFFAT_UpdateFATEntry(struct PF_VOLUME* p_vol, struct PF_CACHE_PAGE* p_page);
-long VFiPFSEC_WriteFAT(struct PF_VOLUME* p_vol, const unsigned char* p_buf, unsigned long sector, unsigned short offset, unsigned short size);
-long VFiPFCACHE_UpdateModifiedSector(struct PF_CACHE_PAGE* p_page);
+s32 VFiPFSEC_ReadFAT(struct PF_VOLUME* p_vol, u8* p_buf, u32 sector, u16 offset, u16 size);
+s32 VFiPFCACHE_ReadFATPage(struct PF_VOLUME* p_vol, u32 sector, struct PF_CACHE_PAGE** pp_page);
+s32 VFiPFFAT_UpdateFATEntry(struct PF_VOLUME* p_vol, struct PF_CACHE_PAGE* p_page);
+s32 VFiPFSEC_WriteFAT(struct PF_VOLUME* p_vol, const u8* p_buf, u32 sector, u16 offset, u16 size);
+s32 VFiPFCACHE_UpdateModifiedSector(struct PF_CACHE_PAGE* p_page);
 
-long VFiPFFAT32_ReadFATEntry(struct PF_VOLUME* p_vol, unsigned long cluster, unsigned long* p_value) {
-    unsigned long fat_offset;
-    unsigned long fat_sector;
-    unsigned short offset_in_sector;
-    unsigned char buf[4];
-    long err;
-    unsigned long current_fat;
-    long result;
-    unsigned long tmp;
+s32 VFiPFFAT32_ReadFATEntry(struct PF_VOLUME* p_vol, u32 cluster, u32* p_value) {
+    u32 fat_offset;
+    u32 fat_sector;
+    u16 offset_in_sector;
+    u8 buf[4];
+    s32 err;
+    u32 current_fat;
+    s32 result;
+    u32 tmp;
 
     if (!p_vol) {
         *p_value = -1;
@@ -45,7 +45,7 @@ long VFiPFFAT32_ReadFATEntry(struct PF_VOLUME* p_vol, unsigned long cluster, uns
             goto check;
         }
 
-        result = ((long (*)(long))p_vol->p_callback)(p_vol->last_driver_error);
+        result = ((s32 (*)(s32))p_vol->p_callback)(p_vol->last_driver_error);
         if (result != 0) {
             if (result == 1 && p_vol->bpb.num_active_FATs >= 2 && current_fat < p_vol->bpb.num_active_FATs) {
                 current_fat++;
@@ -60,7 +60,7 @@ long VFiPFFAT32_ReadFATEntry(struct PF_VOLUME* p_vol, unsigned long cluster, uns
         }
     } while (err != 0);
 
-    tmp = *(unsigned long*)buf;
+    tmp = *(u32*)buf;
     err = 0;
     tmp = SWAP32(tmp);
     *p_value = tmp & 0x0FFFFFFF;
@@ -68,13 +68,13 @@ long VFiPFFAT32_ReadFATEntry(struct PF_VOLUME* p_vol, unsigned long cluster, uns
     return err;
 }
 
-long VFiPFFAT32_ReadFATEntryPage(struct PF_VOLUME* p_vol, unsigned long cluster, unsigned long* p_value, struct PF_CACHE_PAGE** pp_page) {
-    long err;
-    unsigned long offset;
-    unsigned long sector;
-    unsigned long current_fat;
-    long result;
-    unsigned long tmp;
+s32 VFiPFFAT32_ReadFATEntryPage(struct PF_VOLUME* p_vol, u32 cluster, u32* p_value, struct PF_CACHE_PAGE** pp_page) {
+    s32 err;
+    u32 offset;
+    u32 sector;
+    u32 current_fat;
+    s32 result;
+    u32 tmp;
 
     err = 0;
     if (!p_vol) {
@@ -108,7 +108,7 @@ long VFiPFFAT32_ReadFATEntryPage(struct PF_VOLUME* p_vol, unsigned long cluster,
                 goto check;
             }
 
-            result = ((long (*)(long))p_vol->p_callback)(p_vol->last_driver_error);
+            result = ((s32 (*)(s32))p_vol->p_callback)(p_vol->last_driver_error);
             if (result != 0) {
                 if (result == 1 && p_vol->bpb.num_active_FATs >= 2 && current_fat < p_vol->bpb.num_active_FATs) {
                     current_fat++;
@@ -129,21 +129,21 @@ long VFiPFFAT32_ReadFATEntryPage(struct PF_VOLUME* p_vol, unsigned long cluster,
     }
 
     offset &= (p_vol->bpb.bytes_per_sector - 1);
-    tmp = *((unsigned long*)((*pp_page)->p_buf + offset));
+    tmp = *((u32*)((*pp_page)->p_buf + offset));
     tmp = SWAP32(tmp);
     *p_value = tmp & 0x0FFFFFFF;
 
     return err;
 }
 
-long VFiPFFAT32_WriteFATEntry(struct PF_VOLUME* p_vol, unsigned long cluster, unsigned long value) {
-    long err;
-    unsigned long fat_offset;
-    unsigned long fat_sector;
-    unsigned short offset_in_sector;
-    unsigned char buf[4];
-    unsigned long dword;
-    unsigned long tmp;
+s32 VFiPFFAT32_WriteFATEntry(struct PF_VOLUME* p_vol, u32 cluster, u32 value) {
+    s32 err;
+    u32 fat_offset;
+    u32 fat_sector;
+    u16 offset_in_sector;
+    u8 buf[4];
+    u32 dword;
+    u32 tmp;
 
     if (!p_vol) {
         return 10;
@@ -160,11 +160,11 @@ long VFiPFFAT32_WriteFATEntry(struct PF_VOLUME* p_vol, unsigned long cluster, un
     err = VFiPFSEC_ReadFAT(p_vol, buf, fat_sector, offset_in_sector, 4);
     switch (err) {
         case 0: {
-            tmp = *(unsigned long*)buf;
+            tmp = *(u32*)buf;
             tmp = SWAP32(tmp);
             tmp = (value & 0xFFFFFFF) | (tmp & 0xF0000000);
             tmp = SWAP32(tmp);
-            *(unsigned long*)buf = tmp;
+            *(u32*)buf = tmp;
             err = VFiPFSEC_WriteFAT(p_vol, buf, fat_sector, offset_in_sector, 4);
             break;
         }
@@ -175,13 +175,13 @@ long VFiPFFAT32_WriteFATEntry(struct PF_VOLUME* p_vol, unsigned long cluster, un
     return err;
 }
 
-long VFiPFFAT32_WriteFATEntryPage(struct PF_VOLUME* p_vol, unsigned long cluster, unsigned long value, struct PF_CACHE_PAGE** pp_page) {
-    long err;
-    unsigned long sector;
-    unsigned long offset;
-    unsigned long current_fat;
-    long result;
-    unsigned long tmp;
+s32 VFiPFFAT32_WriteFATEntryPage(struct PF_VOLUME* p_vol, u32 cluster, u32 value, struct PF_CACHE_PAGE** pp_page) {
+    s32 err;
+    u32 sector;
+    u32 offset;
+    u32 current_fat;
+    s32 result;
+    u32 tmp;
 
     err = 0;
     if (!p_vol) {
@@ -194,7 +194,7 @@ long VFiPFFAT32_WriteFATEntryPage(struct PF_VOLUME* p_vol, unsigned long cluster
 
     offset = cluster << 2;
     sector = (u16)(p_vol->bpb.active_FAT_sector + (offset >> p_vol->bpb.log2_bytes_per_sector));
-    offset = (unsigned short)(offset & (p_vol->bpb.bytes_per_sector - 1));
+    offset = (u16)(offset & (p_vol->bpb.bytes_per_sector - 1));
 
     if ((*pp_page)->sector > sector || (*pp_page)->sector + p_vol->cache.fat_buff_size <= sector) {
         err = VFiPFFAT_UpdateFATEntry(p_vol, *pp_page);
@@ -214,7 +214,7 @@ long VFiPFFAT32_WriteFATEntryPage(struct PF_VOLUME* p_vol, unsigned long cluster
                 goto check;
             }
 
-            result = ((long (*)(long))p_vol->p_callback)(p_vol->last_driver_error);
+            result = ((s32 (*)(s32))p_vol->p_callback)(p_vol->last_driver_error);
             if (result != 0) {
                 if (result == 1 && p_vol->bpb.num_active_FATs >= 2 && current_fat < p_vol->bpb.num_active_FATs) {
                     current_fat++;
@@ -234,11 +234,11 @@ long VFiPFFAT32_WriteFATEntryPage(struct PF_VOLUME* p_vol, unsigned long cluster
         }
     }
 
-    tmp = *(unsigned long*)((*pp_page)->p_buf + offset);
+    tmp = *(u32*)((*pp_page)->p_buf + offset);
     tmp = SWAP32(tmp);
     tmp = (value & 0xFFFFFFF) | (tmp & 0xF0000000);
     tmp = SWAP32(tmp);
-    *(unsigned long*)((*pp_page)->p_buf + offset) = tmp;
+    *(u32*)((*pp_page)->p_buf + offset) = tmp;
 
     VFiPFCACHE_UpdateModifiedSector((*pp_page));
 

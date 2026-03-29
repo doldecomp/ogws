@@ -1,188 +1,187 @@
 #include <revolution/VF.h>
 
-int VFiPFCODE_CP932_OEM2Unicode(const char *src, wchar_t *dst) {
-    u8 hi;
-    u8 lo;
-    int row;
-    int col;
+s32 VFiPFCODE_CP932_OEM2Unicode(const s8* cp932_src, u16* uc_dst) {
+    u8 cp932_lead;
+    u8 cp932_trail;
+    s32 lead_index;
+    s32 trail_index;
 
-    lo = (u8)src[0];
-    hi = (u8)src[1];
+    cp932_lead = (u8)cp932_src[0];
+    cp932_trail = (u8)cp932_src[1];
 
-    if (lo < 0x80) {
-        *dst = lo;
+    if (cp932_lead < 0x80) {
+        *uc_dst = cp932_lead;
         return VFiPFCODE_Combine_Width(1, 2);
     }
 
-    if (lo >= 0xA1 && lo <= 0xDF) {
-        *dst = lo + 0xFEC0;
+    if (cp932_lead >= 0xA1 && cp932_lead <= 0xDF) {
+        *uc_dst = cp932_lead + 0xFEC0;
         return VFiPFCODE_Combine_Width(1, 2);
     }
 
-    if (lo == 0x80 || lo == 0x85 || lo == 0x86 || lo == 0xA0 || lo == 0xEB || lo == 0xEC || (lo >= 0xEF && lo <= 0xF9) || (lo >= 0xFD && lo == 0xFF)) {
-        *dst = 0x5F;
+    if (cp932_lead == 0x80 || cp932_lead == 0x85 || cp932_lead == 0x86 || cp932_lead == 0xA0 || cp932_lead == 0xEB || cp932_lead == 0xEC || (cp932_lead >= 0xEF && cp932_lead <= 0xF9) || (cp932_lead >= 0xFD && cp932_lead == 0xFF)) {
+        *uc_dst = 0x5F;
         return VFiPFCODE_Combine_Width(1, 2);
     }
 
-    if (hi >= 0xFD) {
-        *dst = 0x5F;
+    if (cp932_trail >= 0xFD) {
+        *uc_dst = 0x5F;
         return VFiPFCODE_Combine_Width(1, 2);
     }
 
-    if ((lo >= 0x81) && (lo <= 0x84)) {
-        row = lo - 0x81;
-    } else if ((lo >= 0x87) && (lo <= 0x9F)) {
-        row = lo - 0x83;
-    } else if ((lo >= 0xE0) && (lo <= 0xEA)) {
-        row = lo - 0xC3;
-    } else if ((lo >= 0xED) && (lo <= 0xEE)) {
-        row = lo - 0xC5;
-    } else if ((lo >= 0xFA) && (lo <= 0xFC)) {
-        row = lo - 0xD0;
+    if ((cp932_lead >= 0x81) && (cp932_lead <= 0x84)) {
+        lead_index = cp932_lead - 0x81;
+    } else if ((cp932_lead >= 0x87) && (cp932_lead <= 0x9F)) {
+        lead_index = cp932_lead - 0x83;
+    } else if ((cp932_lead >= 0xE0) && (cp932_lead <= 0xEA)) {
+        lead_index = cp932_lead - 0xC3;
+    } else if ((cp932_lead >= 0xED) && (cp932_lead <= 0xEE)) {
+        lead_index = cp932_lead - 0xC5;
+    } else if ((cp932_lead >= 0xFA) && (cp932_lead <= 0xFC)) {
+        lead_index = cp932_lead - 0xD0;
     } else {
-        *dst = 0x5F;
+        *uc_dst = 0x5F;
         return VFiPFCODE_Combine_Width(1, 2);
     }
 
-    col = hi - 0x40;
-    if (col < 0 || col >= 189) {
-        *dst = 0x5F;
+    trail_index = cp932_trail - 0x40;
+    if (trail_index < 0 || trail_index >= 189) {
+        *uc_dst = 0x5F;
         return VFiPFCODE_Combine_Width(1, 2);
     }
 
-    *dst = cp932_to_unicode[row][col];
-    if (*dst == 0) {
-        *dst = 0x5F;
+    *uc_dst = cp932_to_unicode[lead_index][trail_index];
+    if (*uc_dst == 0) {
+        *uc_dst = 0x5F;
         return VFiPFCODE_Combine_Width(1, 2);
     }
 
     return VFiPFCODE_Combine_Width(2, 2);
 }
 
-int VFiPFCODE_CP932_Unicode2OEM(const wchar_t *src, u8 *dst) {
-    u8 lo;
-    u8 hi;
-    int row;
-    int col;
-    u16 oem;
-    const u16 *row_ptr;
-    u16 uni;
-    u16 temp;
+s32 VFiPFCODE_CP932_Unicode2OEM(const u16* uc_src, s8* cp932_dst) {
+    s32 i;
+    s32 j;
+    u16* p_table;
+    u8 uc_lead;
+    u8 uc_trail;
+    u16 uc;
+    u16 cp932;
 
-    lo = *src & 0xFF;
-    hi = *src >> 8;
+    u16 temp;  // Extra variable. Not in DWARF.
 
-    if ((lo < 0x80) && (hi == 0)) {
-        dst[0] = (u8)lo;
-        dst[1] = 0;
+    uc_lead = *uc_src & 0xFF;
+    uc_trail = *uc_src >> 8;
+
+    if ((uc_lead < 0x80) && (uc_trail == 0)) {
+        cp932_dst[0] = (u8)uc_lead;
+        cp932_dst[1] = 0;
         return VFiPFCODE_Combine_Width(1, 2);
     }
 
-    uni = (u16)((hi << 8) + lo);
-    if ((0xFF61 <= uni) && (uni <= 0xFF9F)) {
-        temp = (u16)(uni - 0xFEC0);
-        dst[0] = (u8)(temp);
-        dst[1] = 0;
+    uc = (u16)((uc_trail << 8) + uc_lead);
+    if ((0xFF61 <= uc) && (uc <= 0xFF9F)) {
+        temp = (u16)(uc - 0xFEC0);
+        cp932_dst[0] = (u8)(temp);
+        cp932_dst[1] = 0;
         return VFiPFCODE_Combine_Width(1, 2);
     }
 
-    if (uni == 0x5F) {
-        dst[0] = 0x5F;
+    if (uc == 0x5F) {
+        cp932_dst[0] = 0x5F;
         return VFiPFCODE_Combine_Width(1, 2);
     }
 
-    row = 0;
-    while (row < 45) {
-        row_ptr = cp932_to_unicode[row];
-        col = 0;
-        while (col < 189) {
-            if (*row_ptr == uni) {
+    i = 0;
+    while (i < 45) {
+        p_table = (u16*)cp932_to_unicode[i];
+        j = 0;
+        while (j < 189) {
+            if (*p_table == uc) {
                 break;
             }
-            col++;
-            row_ptr++;
+            j++;
+            p_table++;
         }
-        if (col < 189) {
+        if (j < 189) {
             break;
         }
-        row++;
+        i++;
     }
 
-    if (col == 189) {
-        dst[0] = 0x5F;
+    if (j == 189) {
+        cp932_dst[0] = 0x5F;
         return VFiPFCODE_Combine_Width(1, 2);
     }
 
-    if ((row >= 0) && (row <= 3)) {
-        oem = ((row + 0x81) << 8) | (col + 0x40);
-    } else if ((row >= 4) && (row <= 0x1C)) {
-        oem = ((row + 0x83) << 8) | (col + 0x40);
-    } else if ((row >= 0x1D) && (row <= 0x27)) {
-        oem = ((row + 0xC3) << 8) | (col + 0x40);
-    } else if ((row >= 0x28) && (row <= 0x29)) {
-        oem = ((row + 0xC5) << 8) | (col + 0x40);
-    } else if ((row >= 0x2A) && (row <= 0x2C)) {
-        oem = ((row + 0xD0) << 8) | (col + 0x40);
+    if ((i >= 0) && (i <= 3)) {
+        cp932 = ((i + 0x81) << 8) | (j + 0x40);
+    } else if ((i >= 4) && (i <= 0x1C)) {
+        cp932 = ((i + 0x83) << 8) | (j + 0x40);
+    } else if ((i >= 0x1D) && (i <= 0x27)) {
+        cp932 = ((i + 0xC3) << 8) | (j + 0x40);
+    } else if ((i >= 0x28) && (i <= 0x29)) {
+        cp932 = ((i + 0xC5) << 8) | (j + 0x40);
+    } else if ((i >= 0x2A) && (i <= 0x2C)) {
+        cp932 = ((i + 0xD0) << 8) | (j + 0x40);
     } else {
-        dst[0] = 0x5F;
+        cp932_dst[0] = 0x5F;
         return VFiPFCODE_Combine_Width(1, 2);
     }
 
-    dst[1] = (u8)(oem & 0xFF);
-    dst[0] = (oem >> 8) & 0xFF;
+    cp932_dst[1] = (u8)(cp932 & 0xFF);
+    cp932_dst[0] = (cp932 >> 8) & 0xFF;
     return VFiPFCODE_Combine_Width(2, 2);
 }
 
-int VFiPFCODE_CP932_OEMCharWidth(const char* buf) {
-    wchar_t temp_uni;
-    int packed_width;
+s32 VFiPFCODE_CP932_OEMCharWidth(const s8* buf) {
+    u16 tmp;
+    s32 width;
     s16 oem_width;
     s16 uni_width;
 
-    packed_width = VFiPFCODE_CP932_OEM2Unicode(buf, &temp_uni);
-    VFiPFCODE_Divide_Width(packed_width, &oem_width, &uni_width);
+    width = VFiPFCODE_CP932_OEM2Unicode(buf, &tmp);
+    VFiPFCODE_Divide_Width(width, &oem_width, &uni_width);
     return oem_width;
 }
 
-BOOL VFiPFCODE_CP932_isOEMMBchar(char code, u32 type) {
-    u8 c = (u8)code;
-    BOOL is_mb = FALSE;
+u32 VFiPFCODE_CP932_isOEMMBchar(s8 cp932, u32 num) {
+    u8 code;
+    u32 is_mb;
 
-    switch (type) {
+    code = (u8)cp932;
+    is_mb = 0;
+
+    switch (num) {
         case 1:
-            is_mb = FALSE;
-            if ((c >= 0x81 && c <= 0x9F) || (c >= 0xE0 && c <= 0xFC)) {
-                is_mb = TRUE;
+            is_mb = 0;
+            if ((code >= 0x81 && code <= 0x9F) || (code >= 0xE0 && code <= 0xFC)) {
+                is_mb = 1;
             }
             return is_mb;
 
         case 2:
-            is_mb = FALSE;
-            if ((c >= 0x40 && c <= 0x7E) || (c >= 0x80 && c <= 0xFC)) {
-                is_mb = TRUE;
+            is_mb = 0;
+            if ((code >= 0x40 && code <= 0x7E) || (code >= 0x80 && code <= 0xFC)) {
+                is_mb = 1;
             }
             return is_mb;
     }
     return is_mb;
 }
 
-s32 VFiPFCODE_CP932_UnicodeCharWidth(const wchar_t* src) {
-    // Structure preserves stack layout used in the original assembly
-    struct {
-        s16 uni_width;    // Offset 0
-        s16 oem_width;    // Offset 2
-        u8 temp_buf[2];   // Offset 4 (Buffer for Unicode2OEM output)
-    } vars;
+s32 VFiPFCODE_CP932_UnicodeCharWidth(const u16* buf) {
+    s8 tmp[2];
+    s32 width;
+    s16 oem_width;
+    s16 uni_width;
 
-    VFiPFCODE_Divide_Width(
-        VFiPFCODE_CP932_Unicode2OEM(src, vars.temp_buf),
-        &vars.oem_width,
-        &vars.uni_width
-    );
+    width = VFiPFCODE_CP932_Unicode2OEM(buf, tmp);
+    VFiPFCODE_Divide_Width(width, &oem_width, &uni_width);
 
-    return vars.uni_width;
+    return uni_width;
 }
 
-u32 VFiPFCODE_CP932_isUnicodeMBchar(void) {
+u32 VFiPFCODE_CP932_isUnicodeMBchar(u16 uc_src, u32 num) {
     return 0;
 }

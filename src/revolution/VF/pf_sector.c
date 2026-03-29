@@ -1,10 +1,10 @@
 #include <revolution/VF.h>
 
-struct PF_CACHE_PAGE* VFiPFCACHE_SearchDataCache(PF_VOLUME* p_vol, u32 sector);
+struct PF_CACHE_PAGE* VFiPFCACHE_SearchDataCache(struct PF_VOLUME* p_vol, u32 sector);
 
-s32 VFiPFSEC_ReadFAT(PF_VOLUME* p_vol, u8* p_buf, u32 sector, u16 offset, u16 size) {
-    int err;
-    PF_CACHE_PAGE* p_page;
+s32 VFiPFSEC_ReadFAT(struct PF_VOLUME* p_vol, u8* p_buf, u32 sector, u16 offset, u16 size) {
+    struct PF_CACHE_PAGE* p_page;
+    s32 err;
 
     if (!p_vol) {
         return 10;
@@ -24,14 +24,15 @@ s32 VFiPFSEC_ReadFAT(PF_VOLUME* p_vol, u8* p_buf, u32 sector, u16 offset, u16 si
     return 0;
 }
 
-s32 VFiPFSEC_ReadData(PF_VOLUME* p_vol, u8* p_buf, u32 sector, u16 offset, u32 size, u32* p_success_size, u32 set_sig) {
-    PF_CACHE_PAGE* p_page;
+s32 VFiPFSEC_ReadData(struct PF_VOLUME* p_vol, u8* p_buf, u32 sector, u16 offset, u32 size, u32* p_success_size, u32 set_sig) {
+    struct PF_CACHE_PAGE* p_page;
     u32 num_success;
     u32 num_sector;
     u32 adjust_sector;
     u32 rest_sector;
-    u32 cache_remaining_sectors;
     s32 err;
+
+    u32 cache_remaining_sectors;  // Extra variable. Not in DWARF.
 
     *p_success_size = 0;
     if (!p_vol) {
@@ -111,9 +112,9 @@ end:
     return 0;
 }
 
-s32 VFiPFSEC_WriteFAT(PF_VOLUME* p_vol, const u8* p_buf, u32 sector, u16 offset, u16 size) {
-    int err;
-    PF_CACHE_PAGE* p_page;
+s32 VFiPFSEC_WriteFAT(struct PF_VOLUME* p_vol, const u8* p_buf, u32 sector, u16 offset, u16 size) {
+    struct PF_CACHE_PAGE* p_page;
+    s32 err;
 
     if (!p_vol) {
         return 10;
@@ -138,10 +139,13 @@ s32 VFiPFSEC_WriteFAT(PF_VOLUME* p_vol, const u8* p_buf, u32 sector, u16 offset,
     return 0;
 }
 
-s32 VFiPFSEC_WriteData(PF_VOLUME* p_vol, const u8* p_buf, u32 sector, u16 offset, u32 size, u32* p_success_size, u32 set_sig, u32 is_direct) {
+s32 VFiPFSEC_WriteData(struct PF_VOLUME* p_vol, const u8* p_buf, u32 sector, u16 offset, u32 size, u32* p_success_size, u32 set_sig) {
     s32 err;
-    PF_CACHE_PAGE* p_page;
+    struct PF_CACHE_PAGE* p_page;
     u32 num_success;
+    u32 num_sector;     // Present in DWARF but unused here.
+    u32 adjust_sector;  // Present in DWARF but unused here.
+    u32 rest_sector;    // Present in DWARF but unused here.
 
     *p_success_size = 0;
 
@@ -160,7 +164,7 @@ s32 VFiPFSEC_WriteData(PF_VOLUME* p_vol, const u8* p_buf, u32 sector, u16 offset
             return err;
         }
 
-        VFipf_memcpy(&p_page->p_buf[offset], p_buf, size);
+        VFipf_memcpy(&p_page->p_buf[offset], (void*)p_buf, size);
 
         err = VFiPFCACHE_WriteDataPage(p_vol, p_page, set_sig);
         if (err) {
@@ -206,7 +210,7 @@ s32 VFiPFSEC_WriteData(PF_VOLUME* p_vol, const u8* p_buf, u32 sector, u16 offset
                         return err;
                     }
 
-                    VFipf_memcpy(p_page->p_buf, p_buf + *p_success_size, num_sector << p_vol->bpb.log2_bytes_per_sector);
+                    VFipf_memcpy(p_page->p_buf, (void*)(p_buf + *p_success_size), num_sector << p_vol->bpb.log2_bytes_per_sector);
 
                     err = VFiPFCACHE_WriteDataPage(p_vol, p_page, set_sig);
                     if (err) {

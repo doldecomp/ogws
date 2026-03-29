@@ -5,7 +5,7 @@
 extern "C" {
 #endif
 
-
+int VFipf2_fclose(struct PF_FILE* p_file);
 
 #ifdef __cplusplus
 }

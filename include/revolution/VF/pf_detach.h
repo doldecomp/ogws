@@ -5,7 +5,7 @@
 extern "C" {
 #endif
 
-
+int VFipf2_detach(s8 drive);
 
 #ifdef __cplusplus
 }

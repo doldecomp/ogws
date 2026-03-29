@@ -2568,6 +2568,7 @@ revolution/VF/pf_clib.c:
 
 revolution/VF/pf_code.c:
 	.text       start:0x8014B144 end:0x8014B160
+	.rodata     start:0x8037CB58 end:0x8037CBB8
 
 revolution/VF/pf_service.c:
 	.text       start:0x8014B160 end:0x8014B288
@@ -2617,7 +2618,7 @@ revolution/VF/pf_entry_iterator.c:
 
 revolution/VF/pf_fat.c:
 	.text       start:0x8015557C end:0x801583F4
-	.rodata     start:0x8037CB58 end:0x8037CBF8
+	.rodata     start:0x8037CBB8 end:0x8037CBF8
 
 revolution/VF/pf_fat12.c:
 	.text       start:0x801583F4 end:0x80158EDC
@@ -2636,7 +2637,7 @@ revolution/VF/pf_file.c:
 
 revolution/VF/pf_path.c:
 	.text       start:0x8015D03C end:0x8015FD7C
-	.sdata      start:0x804BDB20 end:0x804BDB58
+	.sdata      start:0x804BDB20 end:0x804BDB50
 	.sdata2     start:0x804C13F0 end:0x804C1400
 
 revolution/VF/pf_sector.c:
@@ -2709,6 +2710,7 @@ revolution/VF/d_vf_sys.c:
 	.text       start:0x80163040 end:0x80164B1C
 	.data       start:0x803B7FF8 end:0x803B8008
 	.bss        start:0x804A3458 end:0x804A3590
+	.sdata      start:0x804BDB50 end:0x804BDB58
 	.sbss       start:0x804BF488 end:0x804BF4A0
 
 revolution/VF/d_hash.c:

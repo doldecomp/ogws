@@ -13,7 +13,7 @@ int VFipf_error_to_api_error[40] = {
     0x00000008, 0x0000001B, 0x00000009, 0x0000002E
 };
 
-u32 VFiPFAPI_ParseOpenModeString(const char *mode_str) {
+u32 VFiPFAPI_ParseOpenModeString(const char* mode_str) {
     u32 open_mode;
     u32 i;
 

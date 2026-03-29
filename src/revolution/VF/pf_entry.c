@@ -48,7 +48,7 @@ s32 VFiPFENT_compareEntryName(struct PF_DIR_ENT* p_ent, struct PF_STR* p_pattern
     u8 buf[11];
     u8 sum;
     u16 i;
-    
+
     if (p_ent->num_entry_LFNs != 0 && p_ent->ordinal == 1) {
         VFiPFPATH_putShortName(buf, (s8*)p_ent->short_name, 0);
         sum = 0;
@@ -204,8 +204,7 @@ s32 VFiPFENT_searchEmptyTailSFN(struct PF_FFD* p_ffd, u32 tail_index, const s8* 
                     }
                     VFipf_strcpy(patbuf, pattern);
                     VFiPFPATH_parseShortNameNumeric(patbuf, bit_pos);
-                    if (!VFiPFPATH_cmpTailSFN(sfnbuf, patbuf) && bit_pos >= tail_index &&
-                        bit_pos < 32 * p_vol->tail_entry.tracker_size + tail_index) {
+                    if (!VFiPFPATH_cmpTailSFN(sfnbuf, patbuf) && bit_pos >= tail_index && bit_pos < 32 * p_vol->tail_entry.tracker_size + tail_index) {
                         bit_pos -= tail_index;
                         p_tail_bit[bit_pos >> 5] |= 1u << bit_pos;
                     }
@@ -229,8 +228,9 @@ s32 VFiPFENT_findEmptyTailSFN(struct PF_DIR_ENT* p_ent_containig_dir, const s8* 
     VFiPFFAT_InitFFD(&ffd, &hint, p_ent_containig_dir->p_vol, &p_ent_containig_dir->start_cluster);
     for (num = 1; num <= 0xF423F; num += 32 * p_vol->tail_entry.tracker_size) {
         err = VFiPFENT_searchEmptyTailSFN(&ffd, num, name, p_vol->tail_entry.tracker_bits);
-        if (err)
+        if (err) {
             return err;
+        }
         for (track_num = 0; track_num < p_vol->tail_entry.tracker_size; ++track_num) {
             if (p_vol->tail_entry.tracker_bits[track_num] != -1) {
                 while ((p_vol->tail_entry.tracker_bits[track_num] & 1) != 0) {
@@ -726,22 +726,22 @@ s32 VFiPFENT_MakeRootDir(struct PF_VOLUME* p_vol) {
             if (err != 0) {
                 return err;
             }
-            
+
             VFipf_memset(p_page->p_buf, 0, p_vol->bpb.bytes_per_sector);
-            
+
             for (sector = p_vol->bpb.first_root_dir_sector; sector < p_vol->bpb.first_data_sector; sector++) {
                 err = VFiPFSEC_WriteData(p_vol, p_page->p_buf, sector, 0, p_vol->bpb.bytes_per_sector, &success_size, 0);
                 if (err != 0) {
                     VFiPFCACHE_FreeDataPage(p_vol, p_page);
                     return err;
                 }
-                
+
                 if (success_size != p_vol->bpb.bytes_per_sector) {
                     VFiPFCACHE_FreeDataPage(p_vol, p_page);
                     return 17;
                 }
             }
-            
+
             VFiPFCACHE_FreeDataPage(p_vol, p_page);
             break;
         default:
@@ -802,7 +802,7 @@ s32 VFiPFENT_updateEntry(struct PF_DIR_ENT* p_ent, u32 flag) {
     *(u16*)&buf[20] = SWAP16((u16)(p_ent->start_cluster >> 16));
     *(u16*)&buf[26] = SWAP16(p_ent->start_cluster);
     *(u32*)&buf[28] = SWAP32(p_ent->file_size);
-    
+
     err = VFiPFSEC_WriteData(p_vol, buf, p_ent->entry_sector, p_ent->entry_offset, 32, &success_size, 0);
 
     if (err != 0) {

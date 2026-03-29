@@ -37,7 +37,7 @@ s32 VFiPFFAT16_ReadFATEntry(PF_VOLUME* p_vol, u32 cluster, u32* p_value) {
             goto check;
         }
 
-        result = ((s32(*)(s32))p_vol->p_callback)(p_vol->last_driver_error);
+        result = ((s32 (*)(s32))p_vol->p_callback)(p_vol->last_driver_error);
         if (result != 0) {
             if (result == 1 && p_vol->bpb.num_active_FATs >= 2 && current_fat < (u32)p_vol->bpb.num_active_FATs) {
                 current_fat++;
@@ -97,7 +97,7 @@ s32 VFiPFFAT16_ReadFATEntryPage(PF_VOLUME* p_vol, u32 cluster, u32* p_value, PF_
                 goto check;
             }
 
-            result = ((s32(*)(s32))p_vol->p_callback)(p_vol->last_driver_error);
+            result = ((s32 (*)(s32))p_vol->p_callback)(p_vol->last_driver_error);
             if (result != 0) {
                 if (result == 1 && p_vol->bpb.num_active_FATs >= 2 && current_fat < p_vol->bpb.num_active_FATs) {
                     current_fat++;
@@ -188,7 +188,7 @@ s32 VFiPFFAT16_WriteFATEntryPage(PF_VOLUME* p_vol, u32 cluster, u32 value, PF_CA
                 goto check;
             }
 
-            result = ((s32(*)(s32))p_vol->p_callback)(p_vol->last_driver_error);
+            result = ((s32 (*)(s32))p_vol->p_callback)(p_vol->last_driver_error);
             if (result != 0) {
                 if (result == 1 && p_vol->bpb.num_active_FATs >= 2 && current_fat < p_vol->bpb.num_active_FATs) {
                     current_fat++;

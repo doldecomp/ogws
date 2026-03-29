@@ -5,6 +5,18 @@
 extern "C" {
 #endif
 
+struct PR_BINHEADER {
+    // total size: 0x20
+    s8 signature[4];     // offset 0x0, size 0x4
+    u16 byteOrder;       // offset 0x4, size 0x2
+    u8 version[2];       // offset 0x6, size 0x2
+    u8 fileSize[4];      // offset 0x8, size 0x4
+    u16 headerSize;      // offset 0xC, size 0x2
+    u16 dataBlocks;      // offset 0xE, size 0x2
+    u8 volatile_memory;  // offset 0x10, size 0x1
+    u8 pad[15];          // offset 0x11, size 0xF
+};
+
 typedef struct PF_CURSOR {
     // total size: 0x10
     unsigned long position;           // offset 0x0, size 0x4
@@ -12,6 +24,13 @@ typedef struct PF_CURSOR {
     unsigned long file_sector_index;  // offset 0x8, size 0x4
     unsigned short offset_in_sector;  // offset 0xC, size 0x2
 } PF_CURSOR;
+
+enum /* @enum$142pf_volume_c */ FatType {
+	FAT_12 = 0,
+	FAT_16 = 1,
+	FAT_32 = 2,
+	FAT_ERR = -1,
+};  // offset 0x0, size 0x4
 
 typedef struct PF_BPB {
     // total size: 0x38
@@ -27,12 +46,7 @@ typedef struct PF_BPB {
     unsigned short backup_boot_sector;       // offset 0x16, size 0x2
     unsigned short ext_flags;                // offset 0x18, size 0x2
     unsigned char media;                     // offset 0x1A, size 0x1
-    enum /* @enum$142pf_volume_c */ {
-        FAT_12 = 0,
-        FAT_16 = 1,
-        FAT_32 = 2,
-        FAT_ERR = -1,
-    } fat_type;                              // offset 0x1C, size 0x4
+    enum FatType fat_type;                   // offset 0x1C, size 0x4
     unsigned char log2_bytes_per_sector;     // offset 0x20, size 0x1
     unsigned char log2_sectors_per_cluster;  // offset 0x21, size 0x1
     unsigned char num_active_FATs;           // offset 0x22, size 0x1
@@ -42,6 +56,13 @@ typedef struct PF_BPB {
     unsigned long first_data_sector;         // offset 0x30, size 0x4
     unsigned long num_clusters;              // offset 0x34, size 0x4
 } PF_BPB;
+
+enum /* @enum$52pdm_bpb_c */ PDMFatType {
+	PDM_FAT_12 = 0,
+	PDM_FAT_16 = 1,
+	PDM_FAT_32 = 2,
+	PDM_FAT_ERR = -1,
+};  // offset 0x0, size 0x4
 
 typedef struct PDM_BPB {
     // total size: 0x70
@@ -71,12 +92,7 @@ typedef struct PDM_BPB {
     unsigned short backup_boot_sector;       // offset 0x4A, size 0x2
     unsigned char jump_boot[3];              // offset 0x4C, size 0x3
     unsigned char num_active_FATs;           // offset 0x4F, size 0x1
-    enum /* @enum$52pdm_bpb_c */ {
-        PDM_FAT_12 = 0,
-        PDM_FAT_16 = 1,
-        PDM_FAT_32 = 2,
-        PDM_FAT_ERR = -1,
-    } fat_type;                              // offset 0x50, size 0x4
+    enum PDMFatType fat_type;                // offset 0x50, size 0x4
     unsigned char log2_bytes_per_sector;     // offset 0x54, size 0x1
     unsigned char log2_sectors_per_cluster;  // offset 0x55, size 0x1
     unsigned short num_root_dir_sectors;     // offset 0x56, size 0x2
