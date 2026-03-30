@@ -1,78 +1,9 @@
 #include <revolution/VF.h>
 
-static void VFiPFFILE_Cursor_MoveToEnd(struct PF_FILE* p_file);
-
-u32 VFiPFFILE_Cursor_AdvanceToRead(struct PF_FILE* p_file, u32 n, u32 sector);
-s32 VFiPFFILE_Cursor_ReadHeadSector(struct PF_VOLUME* p_vol, struct PF_FILE* p_file, u8* p_buf, u32 size, u32* p_size_read);
-s32 VFiPFFILE_Cursor_ReadBodySectors(struct PF_VOLUME* p_vol, struct PF_FILE* p_file, u8* p_buf, u32 size, u32* p_size_read);
-s32 VFiPFFILE_Cursor_ReadTailSector(struct PF_VOLUME* p_vol, struct PF_FILE* p_file, u8* p_buf, u32 size, u32* p_size_read);
-s32 VFiPFFILE_Cursor_Read(struct PF_FILE* p_file, u8* p_buf, u32 size, u32* p_size_read);
-s32 VFiPFFILE_Cursor_WriteHeadSector(struct PF_VOLUME* p_vol, struct PF_FILE* p_file, u8* p_buf, u32 size, u32* p_size_write);
-s32 VFiPFFILE_Cursor_WriteTailSector(struct PF_VOLUME* p_vol, struct PF_FILE* p_file, u8* p_buf, u32 size, u32 append_size, u32* p_size_write);
-s32 VFiPFFILE_Cursor_Write_Overwrite(struct PF_VOLUME* p_vol, struct PF_FILE* p_file, u8* p_buf, u32 size, u32* p_size_write);
-s32 VFiPFFILE_Cursor_Write(struct PF_FILE* p_file, u8* p_buf, u32 size, u32* p_size_write);
-void VFiPFFILE_Cursor_MoveToClusterEnd(struct PF_FILE* p_file, u32 size);
-struct PF_SFD* VFiPFFILE_GetSFD(struct PF_VOLUME* p_vol, struct PF_DIR_ENT* p_ent);
-s32 VFiPFFILE_createEmptyFile(struct PF_VOLUME* p_vol, struct PF_DIR_ENT* p_file_ent, struct PF_STR* p_filename, u32 namelength);
-s32 VFiPFFILE_p_fopen(struct PF_VOLUME* p_vol, struct PF_STR* p_path_str, s32 mode, struct PF_FILE** pp_file);
-s32 VFiPFFILE_p_fread(struct PF_VOLUME* p_vol, u8* p_buf, u32 size, u32 count, struct PF_FILE* p_file, u32* p_count_read);
-s32 VFiPFFILE_p_fwrite(struct PF_VOLUME* p_vol, u8* p_buf, u32 size, u32 count, struct PF_FILE* p_file, u32* p_count_written);
-s32 VFiPFFILE_p_finfo(struct PF_FILE* p_file, struct PF_INFO* p_info);
-s32 VFiPFFILE_GetOpenedFile(struct PF_DIR_ENT* p_ent, struct PF_DIR_ENT** pp_open_ent);
-void VFiPFFILE_FinalizeAllFiles(struct PF_VOLUME* p_vol);
-s32 VFiPFFILE_remove(struct PF_STR* p_path_str);
-s32 VFiPFFILE_fopen(struct PF_STR* p_path_str, s32 mode, struct PF_FILE** pp_file);
-s32 VFiPFFILE_fclose(struct PF_FILE* p_file);
-s32 VFiPFFILE_fread(u8* p_buf, u32 size, u32 count, struct PF_FILE* p_file, u32* p_count_read);
-s32 VFiPFFILE_fwrite(u8* p_buf, u32 size, u32 count, struct PF_FILE* p_file, u32* p_count_written);
-s32 VFiPFFILE_fseek(struct PF_FILE* p_file, s32 lOffset, s32 nOrigin);
-s32 VFiPFFILE_finfo(struct PF_FILE* p_file, struct PF_INFO* p_info);
-
-// Other functions called by main functions. These should NOT need to be implemented. They are here for reference only.
-void VFiPFCLUSTER_UpdateLastAccessCluster(struct PF_FILE* p_file, u32 sector);
-s32 VFiPFFAT_GetSectorSpecified(struct PF_FFD* p_ffd, u32 file_sector_index, u32 may_allocate, u32* p_sector);
-s32 VFiPFSEC_ReadData(struct PF_VOLUME* p_vol, u8* p_buf, u32 sector, u16 offset, u32 size, u32* p_success_size, u32 set_sig);
-s32 VFiPFFAT_GetContinuousSector(struct PF_FFD* p_ffd, u32 file_sector_index, u32 size, u32* p_sector, u32* p_num_sector);
-s32 VFiPFSEC_WriteData(struct PF_VOLUME* p_vol, const u8* p_buf, u32 sector, u16 offset, u32 size, u32* p_success_size, u32 set_sig);
-s32 VFiPFCLUSTER_AppendCluster(struct PF_FILE* p_file, u32 byte, u32* p_success, u32* sector);
-s32 VFiPFFAT_CountAllocatedClusters(struct PF_FFD* p_ffd, u32 size, u32* p_num_alloc_clusters);
-s32 VFiPFFAT_InitFFD(struct PF_FFD* p_ffd, struct PF_FAT_HINT* p_hint, struct PF_VOLUME* p_vol, u32* p_start_cluster);
-void* VFipf_memset(void* dst, s32 c, u32 length);
-u32 VFiPFPATH_parseShortName(s8* pDest, struct PF_STR* p_pattern);
-s32 VFiPFENT_AdjustSFN(struct PF_DIR_ENT* p_ent, s8* p_s16_name);
-u32 VFiPFSTR_GetCodeMode(struct PF_STR* p_str);
-s8* VFiPFSTR_GetStrPos(struct PF_STR* p_str, u32 target);
-s32 VFiPFPATH_transformInUnicode(u16* sDestStr, const s8* sSrcStr);
-u16* VFipf_w_strcpy(u16* dst, const u16* src);
-u8 VFiPFENT_getcurrentDateTimeForEnt(u16* p_date, u16* p_time);
-s32 VFiPFENT_allocateEntryPos(struct PF_DIR_ENT* p_ent, u8 num_entries, struct PF_FFD* p_ffd, u32* p_next_chain, struct PF_STR* p_filename, u32* p_pos);
-s32 VFiPFPATH_AdjustExtShortName(s8* pName, u32 position);
-u8 VFiPFENT_CalcCheckSum(struct PF_DIR_ENT* p_ent);
-void VFiPFENT_storeLFNEntryFieldsToBuf(u8* buf, struct PF_DIR_ENT* p_ent, u8 ord, u8 sum, u32 is_last);
-s32 VFiPFENT_allocateEntry(struct PF_DIR_ENT* p_ent, u8 num_entries, struct PF_FFD* p_ffd, u32* p_next_chain, struct PF_STR* p_filename);
-s32 VFiPFENT_updateEntry(struct PF_DIR_ENT* p_ent, u32 flag);
-s32 VFiPFENT_ITER_GetEntryOfPath(struct PF_ENT_ITER* p_iter, struct PF_DIR_ENT* p_ent, struct PF_VOLUME* p_vol, struct PF_STR* p_path, u32 no_look_last_token);
-s32 VFiPFPATH_SplitPath(struct PF_STR* p_path, struct PF_STR* p_dir_path, struct PF_STR* p_filename);
-u16 VFiPFSTR_StrNumChar(struct PF_STR* p_str, u32 target);
-s32 VFiPFPATH_transformFromUnicodeToNormal(s8* sDest, const u16* sSrc);
-void VFiPFSTR_SetLocalStr(struct PF_STR* p_str, s8* p_local);
-s32 VFiPFENT_findEntry(struct PF_FFD* p_ffd, struct PF_DIR_ENT* p_ent, u32 index_search_from, struct PF_STR* p_pattern, u8 attr_required, u8 attr_unwanted);
-s32 VFiPFFAT_FreeChain(struct PF_FFD* p_ffd, u32 start_cluster, u32 chain_index, u32 size);
-void VFiPFFAT_InitHint(struct PF_FAT_HINT* p_hint);
-s32 VFiPFCACHE_AllocateDataPage(struct PF_VOLUME* p_vol, u32 sector, struct PF_CACHE_PAGE** pp_page);
-void VFiPFCACHE_FreeDataPage(struct PF_VOLUME* p_vol, struct PF_CACHE_PAGE* p_page);
-s32 VFiPFCLUSTER_GetAppendSize(struct PF_FILE* p_file, u32* p_size);
-s32 VFiPFFAT_FinalizeFFD(struct PF_FFD* p_ffd);
-struct PF_VOLUME* VFiPFPATH_GetVolumeFromPath(struct PF_STR* p_path);
-s32 VFiPFVOL_CheckForWrite(struct PF_VOLUME* p_vol);
-s32 VFiPFENT_RemoveEntry(struct PF_DIR_ENT* p_ent, struct PF_ENT_ITER* p_iter);
-s32 VFiPFCACHE_FlushFATCache(struct PF_VOLUME* p_vol);
-s32 VFiPFVOL_CheckForRead(struct PF_VOLUME* p_vol);
-u32 VFiPFDRV_IsWProtected(struct PF_VOLUME* p_vol);
-s32 VFiPF_UnLockFile(struct PF_FILE* p_file);
-s32 VFiPFCACHE_FlushDataCacheSpecific(struct PF_VOLUME* p_vol, void* signature);
-
 extern PF_VOLUME_SET VFipf_vol_set;
+
+static void VFiPFFILE_Cursor_MoveToEnd(struct PF_FILE* p_file);
+static s32 VFiPFFILE_RemoveFile(struct PF_VOLUME* p_vol, struct PF_DIR_ENT* p_ent, struct PF_ENT_ITER* p_iter);
 
 static void VFiPFFILE_Cursor_Recalc(struct PF_FILE* p_file) {
     PF_VOLUME* p_vol;
@@ -91,6 +22,7 @@ static void VFiPFFILE_Cursor_SetPosition(struct PF_FILE* p_file, u32 pos) {
     struct PF_VOLUME* p_vol;
     u32 pre_sec_off;
     u32 post_sec_off;
+
     if (p_file == 0) {
         p_vol = 0;
     } else {
@@ -144,23 +76,22 @@ u32 VFiPFFILE_Cursor_AdvanceToRead(struct PF_FILE* p_file, u32 n, u32 sector) {
 
 s32 VFiPFFILE_Cursor_ReadHeadSector(struct PF_VOLUME* p_vol, struct PF_FILE* p_file, u8* p_buf, u32 size, u32* p_size_read) {
     s32 err;
+    u32 max_readable_size;
     u32 success_size;
-
-    u32 remaining_in_sector;
 
     *p_size_read = 0;
     if (p_file->cursor.offset_in_sector == 0) {
         return 0;
     }
 
-    remaining_in_sector = p_vol->bpb.bytes_per_sector - p_file->cursor.offset_in_sector;
-    if (size > remaining_in_sector) {
-        size = remaining_in_sector;
+    max_readable_size = p_vol->bpb.bytes_per_sector - p_file->cursor.offset_in_sector;
+    if (size > max_readable_size) {
+        size = max_readable_size;
     }
 
     if (p_file->cursor.position + size > p_file->p_sfd->dir_entry.file_size) {
         size = p_file->p_sfd->dir_entry.file_size - p_file->cursor.position;
-        if (size < remaining_in_sector) {
+        if (size < max_readable_size) {
             return 0;
         }
     }
@@ -193,6 +124,7 @@ s32 VFiPFFILE_Cursor_ReadHeadSector(struct PF_VOLUME* p_vol, struct PF_FILE* p_f
 s32 VFiPFFILE_Cursor_ReadBodySectors(struct PF_VOLUME* p_vol, struct PF_FILE* p_file, u8* p_buf, u32 size, u32* p_size_read) {
     s32 err;
     u32 num_sector;
+    u32 max_readable_size;  // Present in DWARF but unused here.
     u32 success_size;
 
     *p_size_read = 0;
@@ -311,8 +243,9 @@ s32 VFiPFFILE_Cursor_Read(struct PF_FILE* p_file, u8* p_buf, u32 size, u32* p_si
     return 0;
 }
 
-static u32 VFiPFFILE_Cursor_AdvanceToWrite(PF_FILE* p_file, u32 n, u32 sector) {
-    PF_VOLUME* p_vol;
+static u32 VFiPFFILE_Cursor_AdvanceToWrite(struct PF_FILE* p_file, u32 n, u32 sector) {
+    u32 res;  // Present in DWARF but unused here.
+    struct PF_VOLUME* p_vol;
     u32 wk_sector;
 
     if (p_file == 0) {
@@ -341,7 +274,7 @@ static void VFiPFFILE_Cursor_Initialize(struct PF_FILE* p_file) {
     VFiPFFILE_Cursor_SetPosition(p_file, 0);
 }
 
-s32 VFiPFFILE_Cursor_WriteHeadSector(PF_VOLUME* p_vol, PF_FILE* p_file, u8* p_buf, u32 size, u32* p_size_write) {
+s32 VFiPFFILE_Cursor_WriteHeadSector(struct PF_VOLUME* p_vol, struct PF_FILE* p_file, u8* p_buf, u32 size, u32* p_size_write) {
     s32 err;
     u32 max_writable_size;
     u32 success_size;
@@ -492,7 +425,7 @@ static s32 VFiPFFILE_Cursor_Write_Append(struct PF_VOLUME* p_vol, struct PF_FILE
     return 0;
 }
 
-s32 VFiPFFILE_Cursor_Write(PF_FILE* p_file, u8* p_buf, u32 size, u32* p_size_write) {
+s32 VFiPFFILE_Cursor_Write(struct PF_FILE* p_file, u8* p_buf, u32 size, u32* p_size_write) {
     s32 err;
     struct PF_VOLUME* p_vol;
     u32 size_write;
@@ -568,9 +501,9 @@ static void VFiPFFILE_Cursor_MoveToEnd(struct PF_FILE* p_file) {
     VFiPFFILE_Cursor_SetPosition(p_file, p_file->p_sfd->dir_entry.file_size);
 }
 
-void VFiPFFILE_Cursor_MoveToClusterEnd(PF_FILE* p_file, u32 size) {
-    PF_VOLUME* p_vol;
+void VFiPFFILE_Cursor_MoveToClusterEnd(struct PF_FILE* p_file, u32 size) {
     u32 cluster;
+    struct PF_VOLUME* p_vol;
 
     if (p_file == 0) {
         p_vol = 0;
@@ -597,6 +530,15 @@ static void VFiPFFILE_InitSFD(struct PF_SFD* p_sfd, struct PF_DIR_ENT* p_dir_ent
     p_sfd->lock.owner = NULL;
     p_sfd->lock.resource = 0;
     VFiPFFAT_InitFFD(&p_sfd->ffd, NULL, p_dir_entry->p_vol, &p_sfd->dir_entry.start_cluster);
+}
+
+static void VFiPFFILE_FinalizeSFD(struct PF_SFD* p_sfd) {
+    p_sfd->stat = 0;
+    VFiPFFAT_FinalizeFFD(&p_sfd->ffd);
+}
+
+static void VFiPFFILE_FinalizeUFD(struct PF_FILE* p_file) {
+    p_file->stat &= ~1;
 }
 
 struct PF_SFD* VFiPFFILE_GetSFD(struct PF_VOLUME* p_vol, struct PF_DIR_ENT* p_ent) {
@@ -644,7 +586,7 @@ struct PF_SFD* VFiPFFILE_GetSFD(struct PF_VOLUME* p_vol, struct PF_DIR_ENT* p_en
     return p_first_free_SFD;
 }
 
-static s32 VFiPFFILE_ReleaseSFD(PF_SFD* p_sfd) {
+static s32 VFiPFFILE_ReleaseSFD(struct PF_SFD* p_sfd) {
     if (!--p_sfd->num_handlers) {
         p_sfd->stat &= ~1u;
         p_sfd->ffd.cluster_link.buffer = 0;
@@ -663,7 +605,7 @@ static struct PF_FILE* VFiPFFILE_GetFreeUFD(struct PF_VOLUME* p_vol) {
     return 0;
 }
 
-static s32 VFiPFFILE_ReleaseUFD(PF_FILE* p_file) {
+static s32 VFiPFFILE_ReleaseUFD(struct PF_FILE* p_file) {
     p_file->stat &= ~1u;
     return 0;
 }
@@ -772,6 +714,20 @@ s32 VFiPFFILE_createEmptyFile(struct PF_VOLUME* p_vol, struct PF_DIR_ENT* p_file
     }
 
     return VFiPFENT_updateEntry(p_file_ent, 1);
+}
+
+static s32 VFiPFFILE_p_remove(struct PF_VOLUME* p_vol, struct PF_STR* p_path_str) {
+    struct PF_ENT_ITER iter;
+    struct PF_DIR_ENT ent;
+    s32 err;
+
+    err = VFiPFENT_ITER_GetEntryOfPath(&iter, &ent, p_vol, p_path_str, 0);
+    if (err) {
+        return err;
+    }
+
+    err = VFiPFFILE_RemoveFile(p_vol, &ent, &iter);
+    return err;
 }
 
 s32 VFiPFFILE_p_fopen(struct PF_VOLUME* p_vol, struct PF_STR* p_path_str, s32 mode, struct PF_FILE** pp_file) {
@@ -1026,7 +982,8 @@ s32 VFiPFFILE_p_finfo(struct PF_FILE* p_file, struct PF_INFO* p_info) {
             return err;
         }
 
-        // possible inlined function?
+        // Possible inlined function?
+        // No function calls present in Ketteiban Ghidra.
         {
             u32 allocated_size;
             u32 remainder;
@@ -1065,13 +1022,17 @@ s32 VFiPFFILE_GetOpenedFile(struct PF_DIR_ENT* p_ent, struct PF_DIR_ENT** pp_ope
     return 0;
 }
 
-static void VFiPFFILE_FinalizeSFD(struct PF_SFD* p_sfd) {
-    p_sfd->stat = 0;
-    VFiPFFAT_FinalizeFFD(&p_sfd->ffd);
-}
+static u32 VFiPFFILE_IsOpened(struct PF_DIR_ENT* p_ent) {
+    struct PF_DIR_ENT* p_open_ent = NULL;
+    u32 is_open;
 
-static void VFiPFFILE_FinalizeUFD(struct PF_FILE* p_file) {
-    p_file->stat &= ~1;
+    if (p_ent == NULL) {
+        is_open = 0;
+    } else {
+        VFiPFFILE_GetOpenedFile(p_ent, &p_open_ent);
+        is_open = (p_open_ent != NULL);
+    }
+    return is_open;
 }
 
 void VFiPFFILE_FinalizeAllFiles(struct PF_VOLUME* p_vol) {
@@ -1086,18 +1047,45 @@ void VFiPFFILE_FinalizeAllFiles(struct PF_VOLUME* p_vol) {
     p_vol->num_opened_files = 0;
 }
 
+static s32 VFiPFFILE_DoRemoveFile(struct PF_DIR_ENT* p_ent, struct PF_ENT_ITER* p_iter) {
+    u32 start_cluster;
+    s32 err;
+
+    start_cluster = p_ent->start_cluster;
+    err = VFiPFENT_RemoveEntry(p_ent, p_iter);
+
+    if (err) {
+        return err;
+    }
+    err = VFiPFFAT_FreeChain(&p_iter->ffd, start_cluster, 0xFFFFFFFF, p_ent->file_size);
+    return err;
+}
+
+static s32 VFiPFFILE_RemoveFile(struct PF_VOLUME* p_vol, struct PF_DIR_ENT* p_ent, struct PF_ENT_ITER* p_iter) {
+    s32 err;
+
+    if ((p_ent->attr & 0x19) != 0) {
+        err = 0xB;
+    } else {
+        if (VFiPFFILE_IsOpened(p_ent) != 0) {
+            err = 0x13;
+        } else {
+            err = VFiPFFILE_DoRemoveFile(p_ent, p_iter);
+        }
+    }
+    return err;
+}
+
 s32 VFiPFFILE_remove(struct PF_STR* p_path_str) {
     struct PF_VOLUME* p_vol;
     s32 err;
-    struct PF_ENT_ITER iter;
-    struct PF_DIR_ENT ent;
-    u32 start_cluster;
 
     if (p_path_str == NULL) {
         err = 10;
         VFipf_vol_set.last_error = 10;
         return err;
     }
+
     p_vol = VFiPFPATH_GetVolumeFromPath(p_path_str);
     if (p_vol == NULL) {
         err = 10;
@@ -1106,55 +1094,23 @@ s32 VFiPFFILE_remove(struct PF_STR* p_path_str) {
     }
 
     err = VFiPFVOL_CheckForWrite(p_vol);
-    if (err) {
+    if (err != 0) {
         VFipf_vol_set.last_error = err;
         p_vol->last_error = err;
         return err;
     }
 
     p_vol->cache.signature = NULL;
-    err = VFiPFENT_ITER_GetEntryOfPath(&iter, &ent, p_vol, p_path_str, 0);
+    err = VFiPFFILE_p_remove(p_vol, p_path_str);
 
-    // idk
-    switch (err) {
-        default:
-            break;
-        case 0:
-            if ((ent.attr & 0x19) != 0) {
-                err = 11;
-            } else {
-                struct PF_DIR_ENT* p_open_ent = NULL;
-                s32 is_open;
-                if (&ent == NULL) {
-                    is_open = 0;
-                } else {
-                    VFiPFFILE_GetOpenedFile(&ent, &p_open_ent);
-                    is_open = (p_open_ent != NULL);
-                }
-                if (is_open) {
-                    err = 19;
-                } else {
-                    start_cluster = ent.start_cluster;
-                    err = VFiPFENT_RemoveEntry(&ent, &iter);
-                    // idk
-                    switch (err) {
-                        default:
-                            break;
-                        case 0:
-                            err = VFiPFFAT_FreeChain(&iter.ffd, start_cluster, -1, ent.file_size);
-                    }
-                }
-            }
-    }
-
-    if (err) {
+    if (err != 0) {
         VFipf_vol_set.last_error = err;
         p_vol->last_error = err;
         return err;
     }
 
     err = VFiPFCACHE_FlushFATCache(p_vol);
-    if (err) {
+    if (err != 0) {
         VFipf_vol_set.last_error = err;
         p_vol->last_error = err;
     }
@@ -1250,15 +1206,14 @@ s32 VFiPFFILE_fclose(struct PF_FILE* p_file) {
     }
 
     if (p_file->lock_count > 0) {
-        if (p_file->p_sfd->lock.mode & 1) {  // Share lock
+        if (p_file->p_sfd->lock.mode & 1) {
             p_file->p_sfd->lock.count -= p_file->lock_count;
             p_file->lock_count = 0;
             if (p_file->p_sfd->lock.count == 0) {
                 VFiPF_UnLockFile(p_file);
             }
             p_file->p_sfd->lock.mode &= ~3;
-        } else if (p_file->p_sfd->lock.owner != p_file) {  // Exclusive lock
-
+        } else if (p_file->p_sfd->lock.owner != p_file) {
             err = 25;
         } else {
             p_file->p_sfd->lock.count = 0;
@@ -1439,8 +1394,7 @@ s32 VFiPFFILE_fseek(struct PF_FILE* p_file, s32 lOffset, s32 nOrigin) {
     s32 err;
     u32 file_io;
     u32 wk_offset;
-    u32 base_pos;
-    u32* base_pos_pointer;
+
     if ((u32)&VFipf_vol_set > (u32)p_file || (u32)&VFipf_vol_set + 0x27FB8 < (u32)p_file) {
         VFipf_vol_set.last_error = 10;
         return 10;
@@ -1468,13 +1422,13 @@ s32 VFiPFFILE_fseek(struct PF_FILE* p_file, s32 lOffset, s32 nOrigin) {
     }
     switch (nOrigin) {
         case 1:
-            base_pos = p_file->cursor.position;
+            file_io = p_file->cursor.position;
             break;
         case 0:
-            base_pos = 0;
+            file_io = 0;
             break;
         case 2:
-            base_pos = p_file->p_sfd->dir_entry.file_size;
+            file_io = p_file->p_sfd->dir_entry.file_size;
             break;
         default:
             VFipf_vol_set.last_error = 10;
@@ -1482,24 +1436,24 @@ s32 VFiPFFILE_fseek(struct PF_FILE* p_file, s32 lOffset, s32 nOrigin) {
             p_file->last_error = 10;
             return 10;
     }
-    base_pos_pointer = &base_pos;
+
     if (lOffset & 0x80000000) {
         wk_offset = ((~lOffset) & 0x7FFFFFFF) + 1;
-        if ((*base_pos_pointer) < wk_offset) {
+        if (file_io < wk_offset) {
             VFipf_vol_set.last_error = 10;
             p_file->p_sfd->ffd.p_vol->last_error = 10;
             p_file->last_error = 10;
             return 10;
         }
-        file_io = base_pos - wk_offset;
+        file_io -= wk_offset;
     } else {
-        if (((u32)lOffset) > (0xFFFFFFFF - base_pos)) {
+        if (((u32)lOffset) > (0xFFFFFFFF - file_io)) {
             VFipf_vol_set.last_error = 37;
             p_file->p_sfd->ffd.p_vol->last_error = 37;
             p_file->last_error = 37;
             return 37;
         }
-        file_io = base_pos + lOffset;
+        file_io += lOffset;
     }
     VFiPFFILE_Cursor_Initialize(p_file);
     VFiPFFILE_Cursor_SetPosition(p_file, file_io);

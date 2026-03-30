@@ -5,7 +5,7 @@
 extern "C" {
 #endif
 
-
+void dTM_GetNowTime(struct PF_SYS_DATE* sdate, struct PF_SYS_TIME* stime);
 
 #ifdef __cplusplus
 }

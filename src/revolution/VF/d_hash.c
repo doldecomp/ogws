@@ -5,38 +5,42 @@ typedef struct {
     u8 arg;
 } pHashCell;
 
-extern PF_VOLUME_SET VFipf_vol_set;
+extern struct PF_VOLUME_SET VFipf_vol_set;
 
 static u16 l_tmpWName[8];
 static pHashCell hashTable[31];
 
-static inline u32 _StrLen(const s8* i_Name) {
-    u32 len = 0;
-    while (*i_Name != 0) {
-        i_Name++;
-        len++;
-    }
-    return len;
-}
-
-static inline u32 _StrLenW(const u16* i_Name) {
-    u32 len = 0;
-    while (*i_Name != 0) {
-        i_Name++;
-        len++;
-    }
-    return len;
-}
-
-int _MakeWStr(const s8* i_Name) {
-    const s8* p;
+static u32 _StrLen(const s8* i_Name) {
     u32 len;
+    len = 0;
+    while (*i_Name != '\0') {
+        i_Name++;
+        len++;
+    }
+    return len;
+}
+
+static u32 _StrLenW(const u16* i_Name) {
+    u32 len;
+    len = 0;
+    while (*i_Name != 0) {
+        i_Name++;
+        len++;
+    }
+    return len;
+}
+
+static int _MakeWStr(const s8* i_Name) {
+    u32 len;
+    const s8* Id;  // TODO: type should be int
     int next2nd;
-    const s8* Id = i_Name;
-    u16* dst;
-    const s8* pChar;
-    int skip;
-    u32 i;
+    const s8* p;      // Extra variable. Not in DWARF.
+    u16* dst;         // Extra variable. Not in DWARF.
+    const s8* pChar;  // Extra variable. Not in DWARF.
+    int skip;         // Extra variable. Not in DWARF.
+    u32 i;            // Extra variable. Not in DWARF.
+
+    Id = i_Name;
 
     len = _StrLen(Id);
     if (len < 8) {
@@ -73,11 +77,11 @@ int _MakeWStr(const s8* i_Name) {
     return 0;
 }
 
-static inline u16* _GetWStr(void) {
+static u16* _GetWStr(void) {
     return l_tmpWName;
 }
 
-static inline void _DeleteDataByIdx(int i_Idx) {
+static void _DeleteDataByIdx(int i_Idx) {
     pHashCell* pHashCell;
     if (i_Idx >= 0 && i_Idx < 31) {
         pHashCell = &hashTable[i_Idx];
@@ -86,43 +90,41 @@ static inline void _DeleteDataByIdx(int i_Idx) {
     }
 }
 
-void dHash_InitHashTable(void) {
+void dHash_InitHashTable() {
+    pHashCell* pHashCell = hashTable;
     int i;
-
-    for (i = 0; i < 30; i++) {
-        hashTable[i].Name[0] = 0;
-        hashTable[i].arg = 0;
+    for (i = 0; i < 31; i++) {
+        pHashCell->Name[0] = 0;
+        pHashCell->arg = 0;
+        pHashCell++;
     }
-
-    hashTable[30].Name[0] = 0;
-    hashTable[30].arg = 0;
 }
 
-static inline long dHash_CalcFirstHashW(const u16* i_Name) {
+static s32 dHash_CalcFirstHashW(const u16* i_Name) {
     int len;
     u32 n;
     u32 hash;
     u32 weight;
-    long firstHash;
+    s32 firstHash;
 
     len = _StrLenW(i_Name);
     if (len < 8) {
         hash = 0;
         weight = 0;
-        for (n = 0; n < (u32)len; ++n) {
-            if ((u32)weight > 7) {
+        for (n = 0; n < len; n++) {
+            if (weight > 7) {
                 weight = 0;
             }
-            hash += i_Name[n] << (weight++ * 4);
+            hash += (i_Name[n] << (weight++ * 4));
         }
-        firstHash = (u32)hash % 31;
+        firstHash = hash % 31;
     } else {
         firstHash = -1;
     }
     return firstHash;
 }
 
-static inline long dHash_CalcRehash(u32 i_FirstHash) {
+static s32 dHash_CalcRehash(u32 i_FirstHash) {
     u32 hashval;
     u32 k;
 
@@ -135,25 +137,23 @@ static inline long dHash_CalcRehash(u32 i_FirstHash) {
     return -1;
 }
 
-static inline long dHash_GetNewHashW(const u16* i_Name) {
-    long firstHash;
-    long newHash;
+static s32 dHash_GetNewHashW(const u16* i_Name) {
+    s32 firstHash;
+    s32 newHash;
 
     firstHash = dHash_CalcFirstHashW(i_Name);
     if (firstHash != -1) {
         if (hashTable[firstHash].Name[0] != 0) {
-            newHash = dHash_CalcRehash(firstHash);
+            return dHash_CalcRehash(firstHash);
         } else {
-            newHash = firstHash;
+            return firstHash;
         }
-    } else {
-        newHash = -1;
     }
-    return newHash;
+    return -1;
 }
 
-s32 dHash_SearchHashW(const u16* i_Name) {
-    long firstHash;
+static s32 dHash_SearchHashW(const u16* i_Name) {
+    s32 firstHash;
     int len;
     int i;
     int hashval;
@@ -194,8 +194,8 @@ s32 dHash_SearchHashW(const u16* i_Name) {
     return -1;
 }
 
-static inline int dHash_GetArgW(const u16* i_Name) {
-    long searchHash;
+static int dHash_GetArgW(const u16* i_Name) {
+    s32 searchHash;
 
     searchHash = dHash_SearchHashW(i_Name);
     if (searchHash == -1) {
@@ -206,29 +206,33 @@ static inline int dHash_GetArgW(const u16* i_Name) {
 }
 
 int dHash_GetArg(const s8* i_Name) {
-    if (_MakeWStr(i_Name)) {
+    if (_MakeWStr(i_Name) != 0) {
         return dHash_GetArgW(_GetWStr());
     }
     return -1;
 }
 
-int dHash_SetArgW(const u16* i_Name, u8 i_Arg) {
-    long newHash;
+static int dHash_SetArgW(const u16* i_Name, u8 i_Arg) {
+    s32 newHash;
 
-    if (_MakeWStr((const s8*)i_Name)) {
-        newHash = dHash_GetNewHashW(_GetWStr());
-        if (newHash != -1) {
-            VFipf_memcpy(&hashTable[newHash], _GetWStr(), 16);
-            hashTable[newHash].arg = i_Arg;
-            return 1;
-        }
-        return 0;
+    newHash = dHash_GetNewHashW(i_Name);
+    if (newHash != -1) {
+        VFipf_memcpy(hashTable[newHash].Name, _GetWStr(), 16);
+        hashTable[newHash].arg = i_Arg;
+        return 1;
     }
     return 0;
 }
 
-static inline int dHash_DeleteDataW(const u16* i_Name) {
-    long Hash;
+int dHash_SetArg(const s8* i_Name, u8 i_Arg) {
+    if (_MakeWStr(i_Name) != 0) {
+        return dHash_SetArgW(_GetWStr(), i_Arg);
+    }
+    return 0;
+}
+
+static int dHash_DeleteDataW(const u16* i_Name) {
+    s32 Hash;
 
     Hash = dHash_SearchHashW(i_Name);
     if (Hash != -1) {
@@ -238,7 +242,7 @@ static inline int dHash_DeleteDataW(const u16* i_Name) {
     return 0;
 }
 
-int dHash_SetArg(const s8* i_Name, u8 i_Arg) {
+int dHash_DeleteData(const s8* i_Name) {
     if (_MakeWStr(i_Name)) {
         return dHash_DeleteDataW(_GetWStr());
     }

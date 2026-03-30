@@ -1,58 +1,5 @@
 #include <revolution/VF.h>
 
-s32 VFiPFVOL_DoUnmountVolume(struct PF_VOLUME* p_vol, u32 mode);
-
-s32 VFiPFVOL_DoMountVolume(struct PF_VOLUME* p_vol);
-s32 VFiPFVOL_p_unmount(struct PF_VOLUME* p_vol, u32 mode);
-s32 VFiPFVOL_InitModule(u32 config, void* param);
-s32 VFiPFVOL_CheckForRead(struct PF_VOLUME* p_vol);
-s32 VFiPFVOL_CheckForWrite(struct PF_VOLUME* p_vol);
-s32 VFiPFVOL_GetCurrentDir(struct PF_VOLUME* p_vol, struct PF_DIR_ENT* p_current_dir);
-void VFiPFVOL_SetCurrentVolume(struct PF_VOLUME* p_vol);
-struct PF_VOLUME* VFiPFVOL_GetCurrentVolume();
-struct PF_VOLUME* VFiPFVOL_GetVolumeFromDrvChar(s8 drv_char);
-void VFiPFVOL_LoadVolumeLabelFromBuf(const u8* buf, struct PF_VOLUME* p_vol);
-s32 VFiPFVOL_errnum(void);
-s32 VFiPFVOL_getdev(s8 drv_char, struct PF_DEV_INF* dev_inf);
-s32 VFiPFVOL_attach(struct PF_DRV_TBL* p_drv);
-s32 VFiPFVOL_detach(s8 drv_char);
-s32 VFiPFVOL_unmount(s8 drv_char, u32 mode);
-
-// Other functions called by main functions. These should NOT need to be implemented. They are here for reference only.
-s32 VFiPFDRV_mount(struct PF_VOLUME* p_vol);
-s32 VFiPFCACHE_InitCaches(struct PF_VOLUME* p_vol);
-s32 VFiPFSYS_GetCurrentContextID(s32* context_id);
-s32 VFiPFENT_GetRootDir(struct PF_VOLUME* p_vol, struct PF_DIR_ENT* p_ent);
-s32 VFiPFDRV_format(struct PF_VOLUME* p_vol, const u8* param);
-s32 VFiPFFAT_InitFATRegion(struct PF_VOLUME* p_vol);
-s32 VFiPFENT_MakeRootDir(struct PF_VOLUME* p_vol);
-void VFiPFFILE_FinalizeAllFiles(struct PF_VOLUME* p_vol);
-void VFiPFDIR_FinalizeAllDirs(struct PF_VOLUME* p_vol);
-s32 VFiPFCACHE_FlushAllCaches(struct PF_VOLUME* p_vol);
-void VFiPFCACHE_FreeAllCaches(struct PF_VOLUME* p_vol);
-s32 VFiPFDRV_unmount(struct PF_VOLUME* p_vol, u32 mode);
-void* VFipf_memset(void* dst, s32 c, u32 length);
-void VFiPF_InitLockFile();
-u32 VFiPFDRV_IsInserted(struct PF_VOLUME* p_vol);
-u32 VFiPFDRV_IsDetected(struct PF_VOLUME* p_vol);
-u32 VFiPFDRV_IsWProtected(struct PF_VOLUME* p_vol);
-s32 VFipf_toupper(s32 c);
-void* VFipf_memcpy(void* dst, void* src, u32 length);
-s32 VFiPFFAT_CountFreeClusters(struct PF_VOLUME* p_vol, u32* p_num_free_clusters);
-s32 VFiPFDRV_init(struct PF_VOLUME* p_vol);
-void VFiPFCACHE_SetCache(struct PF_VOLUME* p_vol, struct PF_CACHE_PAGE* p_cache_page, u8 (*p_cache_buf)[512], u16 num_fat_pages, u16 num_data_pages);
-void VFiPFCACHE_SetFATBufferSize(struct PF_VOLUME* p_vol, u32 size);
-void VFiPFCACHE_SetDataBufferSize(struct PF_VOLUME* p_vol, u32 size);
-s32 VFiPFDRV_finalize(struct PF_VOLUME* p_vol);
-
-// Prototypes for VFiPFVOL_InitModule's static functions.
-s32 VFiPFCODE_CP932_OEM2Unicode(const s8* cp932_src, u16* uc_dst);
-s32 VFiPFCODE_CP932_Unicode2OEM(const u16* uc_src, s8* cp932_dst);
-s32 VFiPFCODE_CP932_OEMCharWidth(const s8* buf);
-u32 VFiPFCODE_CP932_isOEMMBchar(s8 cp932, u32 num);
-s32 VFiPFCODE_CP932_UnicodeCharWidth(const u16* buf);
-u32 VFiPFCODE_CP932_isUnicodeMBchar(u16 uc_src, u32 num);
-
 struct PF_VOLUME_SET VFipf_vol_set;
 
 static u32 VFiPFVOL_CheckContextRegistered(s32 context_id) {
@@ -268,7 +215,7 @@ static s32 VFiPFVOL_CheckMediaInsert(struct PF_VOLUME* p_vol) {
 
 s32 VFiPFVOL_InitModule(u32 config, void* param) {
     s32 vol_idx;
-    struct PF_CHARCODE codeset; // Present in DWARF but unused here.
+    struct PF_CHARCODE codeset;  // Present in DWARF but unused here.
     u32 i;
 
     if ((config & 0xFFFCFFFF) != 0) {
@@ -361,14 +308,17 @@ s32 VFiPFVOL_CheckForWrite(struct PF_VOLUME* p_vol) {
 }
 
 s32 VFiPFVOL_GetCurrentDir(struct PF_VOLUME* p_vol, struct PF_DIR_ENT* p_current_dir) {
+    s32 err;
     s32 context_id;
     u32 i;
 
     if (p_vol == NULL) {
-        return 10;
+        err = 10;
+        return err;
     }
     if ((p_vol->flags & 2) == 0) {
-        return 9;
+        err = 9;
+        return err;
     }
 
     VFiPFSYS_GetCurrentContextID(&context_id);
@@ -425,7 +375,7 @@ void VFiPFVOL_SetCurrentVolume(struct PF_VOLUME* p_vol) {
     VFipf_vol_set.current_vol[0].p_vol = p_vol;
 }
 
-struct PF_VOLUME* VFiPFVOL_GetCurrentVolume(void) {
+struct PF_VOLUME* VFiPFVOL_GetCurrentVolume() {
     struct PF_VOLUME* p_vol;
     s32 context_id;
     u32 i;
@@ -458,7 +408,7 @@ struct PF_VOLUME* VFiPFVOL_GetCurrentVolume(void) {
 }
 
 struct PF_VOLUME* VFiPFVOL_GetVolumeFromDrvChar(s8 drv_char) {
-    struct PF_VOLUME* p_vol; // Present in DWARF but unused here.
+    struct PF_VOLUME* p_vol;  // Present in DWARF but unused here.
     s16 vol_idx;
 
     vol_idx = VFipf_toupper(drv_char) - 'A';
@@ -474,7 +424,7 @@ void VFiPFVOL_LoadVolumeLabelFromBuf(const u8* buf, struct PF_VOLUME* p_vol) {
     p_vol->label[11] = '\0';
 }
 
-s32 VFiPFVOL_errnum(void) {
+s32 VFiPFVOL_errnum() {
     return VFipf_vol_set.last_error;
 }
 

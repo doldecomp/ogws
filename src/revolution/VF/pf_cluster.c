@@ -2,7 +2,7 @@
 
 extern PF_VOLUME_SET VFipf_vol_set;
 
-void VFiPFCLUSTER_UpdateLastAccessCluster(PF_FILE* p_file, u32 sector) {
+void VFiPFCLUSTER_UpdateLastAccessCluster(struct PF_FILE* p_file, u32 sector) {
     struct PF_VOLUME* p_vol;
     if (!p_file->cursor.position) {
         p_file->p_sfd->ffd.last_access_cluster.cluster = 0;
@@ -26,13 +26,13 @@ void VFiPFCLUSTER_UpdateLastAccessCluster(PF_FILE* p_file, u32 sector) {
     }
 }
 
-s32 VFiPFCLUSTER_AppendCluster(PF_FILE* p_file, u32 byte, u32* p_success, u32* sector) {
+s32 VFiPFCLUSTER_AppendCluster(struct PF_FILE* p_file, u32 byte, u32* p_success, u32* sector) {
     s32 err;
-    PF_VOLUME* p_vol;
+    struct PF_VOLUME* p_vol;
     u32 num_sector;
     u32 max_appendable_size;
-    PF_CURSOR save_cursor;
-    PF_FAT_HINT save_hint;
+    struct PF_CURSOR save_cursor;
+    struct PF_FAT_HINT save_hint;
 
     *p_success = 0;
 
@@ -89,8 +89,8 @@ s32 VFiPFCLUSTER_AppendCluster(PF_FILE* p_file, u32 byte, u32* p_success, u32* s
     }
 }
 
-s32 VFiPFCLUSTER_GetAppendSize(PF_FILE* p_file, u32* p_size) {
-    PF_VOLUME* p_vol;
+s32 VFiPFCLUSTER_GetAppendSize(struct PF_FILE* p_file, u32* p_size) {
+    struct PF_VOLUME* p_vol;
     u32 cluster_size;
     u32 file_cluster_size;
     u32 total_allocated_size;
@@ -99,9 +99,6 @@ s32 VFiPFCLUSTER_GetAppendSize(PF_FILE* p_file, u32* p_size) {
     u32 next_cluster;
     u32 num_append_cluster;
     u32 sig_eoc;
-    u32 file_size;
-    u32 start_cluster;
-    u32 v6;
     s32 err;
 
     *p_size = 0;
@@ -130,28 +127,24 @@ s32 VFiPFCLUSTER_GetAppendSize(PF_FILE* p_file, u32* p_size) {
 
     cluster_size = p_vol->bpb.bytes_per_sector << p_vol->bpb.log2_sectors_per_cluster;
 
-    start_cluster = p_file->p_sfd->dir_entry.start_cluster;
-    if (start_cluster != 0) {
-        file_size = p_file->p_sfd->dir_entry.file_size;
-        if (file_size % cluster_size) {
-            v6 = cluster_size - file_size % cluster_size;
+    if (p_file->p_sfd->dir_entry.start_cluster != 0) {
+        if (p_file->p_sfd->dir_entry.file_size % cluster_size) {
+            err = cluster_size - p_file->p_sfd->dir_entry.file_size % cluster_size;
         } else {
-            v6 = 0;
+            err = 0;
         }
 
-        file_cluster_size = file_size + v6;
-        file_size = p_file->p_sfd->dir_entry.file_size;
-
+        file_cluster_size = p_file->p_sfd->dir_entry.file_size + err;
         if (p_file->p_sfd->ffd.last_cluster.max_chain_index) {
             total_allocated_size = ((p_file->p_sfd->ffd.last_cluster.max_chain_index + 1) * cluster_size);
         } else {
-            if (file_size != 0) {
-                err = VFiPFFAT_TraceClustersChain(&p_file->p_sfd->ffd, start_cluster, file_size, &file_end_cluster, &unused_cluster);
+            if (p_file->p_sfd->dir_entry.file_size != 0) {
+                err = VFiPFFAT_TraceClustersChain(&p_file->p_sfd->ffd, p_file->p_sfd->dir_entry.start_cluster, p_file->p_sfd->dir_entry.file_size, &file_end_cluster, &unused_cluster);
                 if (err) {
                     return err;
                 }
             } else {
-                unused_cluster = start_cluster;
+                unused_cluster = p_file->p_sfd->dir_entry.start_cluster;
             }
 
             sig_eoc = VFiPFFAT_GetValueOfEOC2(p_vol);

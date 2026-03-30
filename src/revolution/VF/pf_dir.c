@@ -1,16 +1,17 @@
 #include <revolution/VF.h>
 
-static void VFiPFDIR_FinalizeUDD(PF_DIR* p_dir) {
-    p_dir->stat &= ~1u;
-}
-
-static void VFiPFDIR_FinalizeSDD(PF_SDD* p_sdd) {
+static void VFiPFDIR_FinalizeSDD(struct PF_SDD* p_sdd) {
     p_sdd->stat = 0;
     VFiPFFAT_FinalizeFFD(&p_sdd->ffd);
 }
 
-void VFiPFDIR_FinalizeAllDirs(PF_VOLUME* p_vol) {
+static void VFiPFDIR_FinalizeUDD(struct PF_DIR* p_dir) {
+    p_dir->stat &= ~1u;
+}
+
+void VFiPFDIR_FinalizeAllDirs(struct PF_VOLUME* p_vol) {
     u16 i;
+
     for (i = 0; i < 3u; ++i) {
         VFiPFDIR_FinalizeSDD(&p_vol->sdds[i]);
     }

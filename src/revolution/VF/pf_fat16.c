@@ -1,6 +1,6 @@
 #include <revolution/VF.h>
 
-s32 VFiPFFAT16_ReadFATEntry(PF_VOLUME* p_vol, u32 cluster, u32* p_value) {
+s32 VFiPFFAT16_ReadFATEntry(struct PF_VOLUME* p_vol, u32 cluster, u32* p_value) {
     u32 fat_offset;
     u32 fat_sector;
     u16 offset_in_sector;
@@ -8,7 +8,6 @@ s32 VFiPFFAT16_ReadFATEntry(PF_VOLUME* p_vol, u32 cluster, u32* p_value) {
     s32 err;
     u32 current_fat;
     s32 result;
-    u16 tmp;
 
     if (!p_vol) {
         *p_value = -1;
@@ -52,18 +51,16 @@ s32 VFiPFFAT16_ReadFATEntry(PF_VOLUME* p_vol, u32 cluster, u32* p_value) {
         }
     } while (err != 0);
 
-    tmp = *(u16*)buf;
-    *p_value = SWAP16(tmp);
+    *p_value = SWAP16(*(u16*)buf);
     return 0;
 }
 
-s32 VFiPFFAT16_ReadFATEntryPage(PF_VOLUME* p_vol, u32 cluster, u32* p_value, PF_CACHE_PAGE** pp_page) {
+s32 VFiPFFAT16_ReadFATEntryPage(struct PF_VOLUME* p_vol, u32 cluster, u32* p_value, struct PF_CACHE_PAGE** pp_page) {
     s32 err;
     u32 offset;
     u32 sector;
     u32 current_fat;
     s32 result;
-    u16 tmp;
 
     err = 0;
     if (!p_vol) {
@@ -118,13 +115,11 @@ s32 VFiPFFAT16_ReadFATEntryPage(PF_VOLUME* p_vol, u32 cluster, u32* p_value, PF_
     }
 
     offset &= (p_vol->bpb.bytes_per_sector - 1);
-    tmp = *((u16*)((*pp_page)->p_buf + offset));
-    *p_value = SWAP16(tmp);
-
+    *p_value = SWAP16(*((u16*)((*pp_page)->p_buf + offset)));
     return err;
 }
 
-s32 VFiPFFAT16_WriteFATEntry(PF_VOLUME* p_vol, u32 cluster, u32 value) {
+s32 VFiPFFAT16_WriteFATEntry(struct PF_VOLUME* p_vol, u32 cluster, u32 value) {
     s32 err;
     u32 fat_offset;
     u16 fat_sector;
@@ -150,7 +145,7 @@ s32 VFiPFFAT16_WriteFATEntry(PF_VOLUME* p_vol, u32 cluster, u32 value) {
     return err;
 }
 
-s32 VFiPFFAT16_WriteFATEntryPage(PF_VOLUME* p_vol, u32 cluster, u32 value, PF_CACHE_PAGE** pp_page) {
+s32 VFiPFFAT16_WriteFATEntryPage(struct PF_VOLUME* p_vol, u32 cluster, u32 value, struct PF_CACHE_PAGE** pp_page) {
     s32 err;
     u32 fat_offset;
     u32 fat_sector;

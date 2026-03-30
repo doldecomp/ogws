@@ -5,7 +5,7 @@
 extern "C" {
 #endif
 
-
+void VFi_InitSDWrok();
 
 #ifdef __cplusplus
 }

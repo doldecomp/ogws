@@ -1,51 +1,8 @@
 #include <revolution/VF.h>
 
-s32 VFiPFENT_RecalcEntryIterator(struct PF_ENT_ITER* p_iter, u32 may_allocate);
-s32 VFiPFENT_ITER_FindCluster(struct PF_ENT_ITER* p_iter, struct PF_DIR_ENT* p_ent, u32 cluster, u32* p_is_found);
-s32 VFiPFENT_ITER_DoFindEntry(struct PF_ENT_ITER* p_iter, struct PF_DIR_ENT* p_ent, struct PF_STR* p_pattern, u8 attr_required, u8 attr_unwanted, u32* p_is_found, u32 is_skip);
-s32 VFiPFENT_ITER_DoGetEntry(struct PF_ENT_ITER* p_iter, struct PF_DIR_ENT* p_ent, struct PF_VOLUME* p_vol, struct PF_STR* p_path, u32 wildcard, u32 no_look_last_token);
-s32 VFiPFENT_ITER_IteratorInitialize(struct PF_ENT_ITER* p_iter, u32 index_start_from);
-u32 VFiPFENT_ITER_IsAtLogicalEnd(struct PF_ENT_ITER* p_iter);
-s32 VFiPFENT_ITER_Advance(struct PF_ENT_ITER* p_iter, u32 may_allocate);
-s32 VFiPFENT_ITER_Retreat(struct PF_ENT_ITER* p_iter, u32 may_allocate);
-s32 VFiPFENT_ITER_GetEntryOfPath(struct PF_ENT_ITER* p_iter, struct PF_DIR_ENT* p_ent, struct PF_VOLUME* p_vol, struct PF_STR* p_path, u32 no_look_last_token);
-
-// Other functions called by main functions. These should NOT need to be implemented. They are here for reference only.
-s32 VFiPFFAT_GetSectorSpecified(struct PF_FFD* p_ffd, u32 file_sector_index, u32 may_allocate, u32* p_sector);
-s32 VFiPFCACHE_AllocateDataPage(struct PF_VOLUME* p_vol, u32 sector, struct PF_CACHE_PAGE** pp_page);
-void* VFipf_memset(void* dst, s32 c, u32 length);
-s32 VFiPFSEC_WriteData(struct PF_VOLUME* p_vol, const u8* p_buf, u32 sector, u16 offset, u32 size, u32* p_success_size, u32 set_sig);
-void VFiPFCACHE_FreeDataPage(struct PF_VOLUME* p_vol, struct PF_CACHE_PAGE* p_page);
-s32 VFiPFENT_LoadLFNEntryFieldsFromBuf(struct PF_DIR_ENT* p_ent, const u8* buf);
-void VFiPFENT_LoadShortNameFromBuf(struct PF_DIR_ENT* p_ent, const u8* buf);
-u8 VFiPFENT_CalcCheckSum(struct PF_DIR_ENT* p_ent);
-void VFiPFENT_loadEntryNumericFieldsFromBuf(struct PF_DIR_ENT* p_ent, const u8* buf);
-void VFiPFPATH_getLongNameformShortName(s8* s16_name, s8* s32_name, u8 flag);
-s32 VFiPFPATH_transformInUnicode(u16* sDestStr, const s8* sSrcStr);
-s32 VFiPFSEC_ReadData(struct PF_VOLUME* p_vol, u8* p_buf, u32 sector, u16 offset, u32 size, u32* p_success_size, u32 set_sig);
-s32 VFiPFSTR_StrNCmp(struct PF_STR* p_str, const s8* s, u32 target, s16 offset, u16 num);
-s32 VFiPFSTR_StrCmp(const struct PF_STR* p_str, const s8* s);
-s32 VFiPFENT_GetRootDir(struct PF_VOLUME* p_vol, struct PF_DIR_ENT* p_ent);
-u32 VFiPFPATH_GetExtShortNameIndex(struct PF_STR* p_str, u32* p_index);
-u32 VFiPFPATH_MatchFileNameWithPattern(const s8* file_name, struct PF_STR* p_pattern, u32 is_s32_name);
-void VFiPFSTR_MoveStrPos(struct PF_STR* p_str, s16 num_s8);
-u16 VFiPFSTR_StrNumChar(struct PF_STR* p_str, u32 target);
-s32 VFiPFVOL_GetCurrentDir(struct PF_VOLUME* p_vol, struct PF_DIR_ENT* p_current_dir);
-s8* VFiPFSTR_GetStrPos(struct PF_STR* p_str, u32 target);
-s32 VFiPFFAT_InitFFD(struct PF_FFD* p_ffd, struct PF_FAT_HINT* p_hint, struct PF_VOLUME* p_vol, u32* p_start_cluster);
-u32 VFiPFSTR_GetCodeMode(struct PF_STR* p_str);
-void VFiPFPATH_InitTokenOfPath(struct PF_STR* p_str, s8* path, u32 code_mode);
-s32 VFiPFPATH_GetNextTokenOfPath(struct PF_STR* p_str, u32 wildcard);
-u16 VFiPFSTR_StrLen(struct PF_STR* p_str);
-s32 VFiPFFAT_ResetFFD(struct PF_FFD* p_ffd, u32* p_start_cluster);
-s32 VFipf_strcmp(const s8* s1, const s8* s2);
-u32 VFiPFPATH_GetLengthFromUnicode(const u16* sSrc);
-u32 VFiPFPATH_GetLengthFromShortname(const s8* sSrc);
-s32 VFiPFFAT_GetBeforeChain(struct PF_VOLUME* p_vol, u32 start_cluster, u32 lActive, u32* p_cluster);
-
 extern struct PF_VOLUME_SET VFipf_vol_set;
 
-s32 VFiPFENT_RecalcEntryIterator(struct PF_ENT_ITER* p_iter, u32 may_allocate) {
+static s32 VFiPFENT_RecalcEntryIterator(struct PF_ENT_ITER* p_iter, u32 may_allocate) {
     s32 err;
     u32 is_initialize;
     u32 file_sector_index;
@@ -128,7 +85,6 @@ static u32 VFiPFENT_ITER_IsAtPhysicalEnd(struct PF_ENT_ITER* p_iter) {
 }
 
 s32 VFiPFENT_ITER_FindCluster(struct PF_ENT_ITER* p_iter, struct PF_DIR_ENT* p_ent, u32 cluster, u32* p_is_found) {
-    // Local variables
     u8 attr;
     s32 err;
     s32 lengthName;

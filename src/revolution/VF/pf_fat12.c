@@ -1,14 +1,14 @@
 #include <revolution/VF.h>
 
-s32 VFiPFFAT12_ReadFATEntry(PF_VOLUME* p_vol, u16 cluster, u32* p_value) {
-    long err;
-    unsigned short fat_offset;
-    unsigned short fat_sector;
-    unsigned short offset_in_sector;
-    unsigned short word;
-    unsigned char buf[2];
-    unsigned long current_fat;
-    long result;
+s32 VFiPFFAT12_ReadFATEntry(struct PF_VOLUME* p_vol, u16 cluster, u32* p_value) {
+    s32 err;
+    u16 fat_offset;
+    u16 fat_sector;
+    u16 offset_in_sector;
+    u16 word;
+    u8 buf[2];
+    u32 current_fat;
+    s32 result;
 
     if (!p_vol) {
         *p_value = -1;
@@ -43,13 +43,13 @@ s32 VFiPFFAT12_ReadFATEntry(PF_VOLUME* p_vol, u16 cluster, u32* p_value) {
             result = ((s32 (*)(s32))p_vol->p_callback)(p_vol->last_driver_error);
 
             if (result == 0) {
-                goto loop_check;
+                continue;
             }
 
             if (result == 1 && p_vol->bpb.num_active_FATs >= 2 && current_fat < (u32)p_vol->bpb.num_active_FATs) {
                 current_fat++;
                 fat_sector += (u16)p_vol->bpb.sectors_per_FAT;
-                goto loop_check;
+                continue;
             }
         }
 
@@ -57,8 +57,6 @@ s32 VFiPFFAT12_ReadFATEntry(PF_VOLUME* p_vol, u16 cluster, u32* p_value) {
             *p_value = -1;
             return err;
         }
-
-    loop_check:;
     } while (err != 0);
 
     word = *(u16*)buf;
@@ -72,12 +70,12 @@ s32 VFiPFFAT12_ReadFATEntry(PF_VOLUME* p_vol, u16 cluster, u32* p_value) {
     return 0;
 }
 
-s32 VFiPFFAT12_ReadFATEntryPage(PF_VOLUME* p_vol, u16 cluster, u32* p_value, PF_CACHE_PAGE** pp_page) {
-    long err;
-    unsigned long offset;
-    unsigned long sector;
-    unsigned long current_fat;
-    long result;
+s32 VFiPFFAT12_ReadFATEntryPage(struct PF_VOLUME* p_vol, u16 cluster, u32* p_value, struct PF_CACHE_PAGE** pp_page) {
+    s32 err;
+    u32 offset;
+    u32 sector;
+    u32 current_fat;
+    s32 result;
 
     if (!p_vol) {
         return 10;
@@ -174,8 +172,8 @@ s32 VFiPFFAT12_ReadFATEntryPage(PF_VOLUME* p_vol, u16 cluster, u32* p_value, PF_
     return 0;
 }
 
-s32 VFiPFFAT12_WriteFATEntry(PF_VOLUME* p_vol, u16 cluster, u16 value) {
-    long err;
+s32 VFiPFFAT12_WriteFATEntry(struct PF_VOLUME* p_vol, u16 cluster, u16 value) {
+    s32 err;
     u16 fat_offset;
     u16 fat_sector;
     u16 offset_in_sector;
@@ -226,13 +224,13 @@ s32 VFiPFFAT12_WriteFATEntry(PF_VOLUME* p_vol, u16 cluster, u16 value) {
     return err;
 }
 
-s32 VFiPFFAT12_WriteFATEntryPage(PF_VOLUME* p_vol, u16 cluster, u16 value, PF_CACHE_PAGE** pp_page) {
-    long err;
+s32 VFiPFFAT12_WriteFATEntryPage(struct PF_VOLUME* p_vol, u16 cluster, u16 value, struct PF_CACHE_PAGE** pp_page) {
+    s32 err;
     u32 fat_offset;
     u32 fat_sector;
     u16 offset_in_sector;
     u32 current_fat;
-    long result;
+    s32 result;
 
     err = 0;
     if (!p_vol) {

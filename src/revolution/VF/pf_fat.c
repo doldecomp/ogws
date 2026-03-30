@@ -13,69 +13,11 @@ const struct {
 };
 
 static s32 VFiPFFAT_RefreshFSINFO(PF_VOLUME* p_vol);
-s32 VFiPFFAT_ReadFATSector(struct PF_VOLUME* p_vol, struct PF_CACHE_PAGE** p_page, u32 cluster);
-s32 VFiPFFAT_SearchForNumFreeClusters(struct PF_VOLUME* p_vol, u32 start_cluster, u32 end_cluster, u32 num_cluster, u32* p_start_free_cluster, u32* p_last_free_cluster);
-s32 VFiPFFAT_FindClusterLink(struct PF_FFD* p_ffd, u32 chain_index, u32* p_cluster, u32* is_found);
-s32 VFiPFFAT_FindClusterLinkPage(struct PF_FFD* p_ffd, u32 chain_index, u32* p_cluster, u32* is_found, struct PF_CACHE_PAGE* p_page);
-s32 VFiPFFAT_ReadClusterPage(struct PF_FFD* p_ffd, u32 cluster, u32 chain_index, u32* next_cluster, u32* chk_clstlnk, struct PF_CACHE_PAGE** p_page);
-s32 VFiPFFAT_WriteCluster(struct PF_FFD* p_ffd, u32 cluster, u32 chain_index, u32 next_cluster, u32 use_clstlnk);
-s32 VFiPFFAT_WriteClusterPage(struct PF_FFD* p_ffd, u32 cluster, u32 chain_index, u32 next_cluster, u32 use_clstlnk, struct PF_CACHE_PAGE** p_page);
-s32 VFiPFFAT_GetClusterInChain(struct PF_FFD* p_ffd, u32 chain_index, u32 mode, u32 num_cluster, u32* locate_start, u32* locate_end);
-s32 VFiPFFAT_GetClusterContinuousSectorInChain(struct PF_FFD* p_ffd, u32 initial_cluster, u32 chain_index, u32 size, u32* p_num_sector);
-s32 VFiPFFAT_GetClusterAllocatedInChain(struct PF_FFD* p_ffd, u32 initial_cluster, u32 chain_index, u32 size, u32* p_num_clusters);
-s32 VFiPFFAT_GetClusterSpecified(struct PF_FFD* p_ffd, u32 chain_index, u32 may_allocate, u32* p_cluster);
-s32 VFiPFFAT_GetClusterAllocated(struct PF_FFD* p_ffd, u32 chain_index, u32 num_cluster, u32* p_cluster, u32* p_num_cluster);
-s32 VFiPFFAT_GetSector(struct PF_FFD* p_ffd, u32 file_sector_index, u32 mode, u32 size, u32* p_sector, u32* p_num_sector);
-s32 VFiPFFAT_UpdateFATEntry(struct PF_VOLUME* p_vol, struct PF_CACHE_PAGE* p_page);
-s32 VFiPFFAT_UpdateAlternateFATEntry(struct PF_VOLUME* p_vol, u8* p_buf, u32 sector, u32 size);
-s32 VFiPFFAT_GetSectorSpecified(struct PF_FFD* p_ffd, u32 file_sector_index, u32 may_allocate, u32* p_sector);
-s32 VFiPFFAT_GetSectorAllocated(struct PF_FFD* p_ffd, u32 file_sector_index, u32 size, u32* p_sector, u32* p_num_sector);
-s32 VFiPFFAT_GetContinuousSector(struct PF_FFD* p_ffd, u32 file_sector_index, u32 size, u32* p_sector, u32* p_num_sector);
-s32 VFiPFFAT_CountAllocatedClusters(struct PF_FFD* p_ffd, u32 size, u32* p_num_alloc_clusters);
-s32 VFiPFFAT_CountFreeClusters(struct PF_VOLUME* p_vol, u32* p_num_free_clusters);
-s32 VFiPFFAT_FreeChain(struct PF_FFD* p_ffd, u32 start_cluster, u32 chain_index, u32 size);
-s32 VFiPFFAT_GetBeforeChain(struct PF_VOLUME* p_vol, u32 start_cluster, u32 lActive, u32* p_cluster);
-s32 VFiPFFAT_InitFATRegion(struct PF_VOLUME* p_vol);
-s32 VFiPFFAT_MakeRootDir(struct PF_VOLUME* p_vol);
-void VFiPFFAT_InitHint(struct PF_FAT_HINT* p_hint);
-s32 VFiPFFAT_TraceClustersChain(struct PF_FFD* p_ffd, u32 start_clst, u32 size, u32* p_target_clst, u32* p_next_clst);
-s32 VFiPFFAT_ReadValueToSpecifiedCluster(struct PF_VOLUME* p_vol, u32 cluster, u32* value);
-s32 VFiPFFAT_ResetFFD(struct PF_FFD* p_ffd, u32* p_start_cluster);
-s32 VFiPFFAT_InitFFD(struct PF_FFD* p_ffd, struct PF_FAT_HINT* p_hint, struct PF_VOLUME* p_vol, u32* p_start_cluster);
-s32 VFiPFFAT_FinalizeFFD(struct PF_FFD* p_ffd);
-u32 VFiPFFAT_GetValueOfEOC2(struct PF_VOLUME* p_vol);
-
-// Other functions called by main functions. These should NOT need to be implemented. They are here for reference only.
-s32 VFiPFCACHE_ReadFATPage(struct PF_VOLUME* p_vol, u32 sector, struct PF_CACHE_PAGE** pp_page);
-s32 VFiPFFAT12_ReadFATEntryPage(struct PF_VOLUME* p_vol, u16 cluster, u32* p_value, struct PF_CACHE_PAGE** pp_page);
-s32 VFiPFFAT16_ReadFATEntryPage(struct PF_VOLUME* p_vol, u32 cluster, u32* p_value, struct PF_CACHE_PAGE** pp_page);
-s32 VFiPFFAT32_ReadFATEntryPage(struct PF_VOLUME* p_vol, u32 cluster, u32* p_value, struct PF_CACHE_PAGE** pp_page);
-s32 VFiPFFAT12_WriteFATEntry(struct PF_VOLUME* p_vol, u16 cluster, u16 value);
-s32 VFiPFFAT16_WriteFATEntry(struct PF_VOLUME* p_vol, u32 cluster, u32 value);
-s32 VFiPFFAT32_WriteFATEntry(struct PF_VOLUME* p_vol, u32 cluster, u32 value);
-s32 VFiPFFAT12_WriteFATEntryPage(struct PF_VOLUME* p_vol, u16 cluster, u16 value, struct PF_CACHE_PAGE** pp_page);
-s32 VFiPFFAT16_WriteFATEntryPage(struct PF_VOLUME* p_vol, u32 cluster, u32 value, struct PF_CACHE_PAGE** pp_page);
-s32 VFiPFFAT32_WriteFATEntryPage(struct PF_VOLUME* p_vol, u32 cluster, u32 value, struct PF_CACHE_PAGE** pp_page);
-s32 VFiPFCACHE_WriteFATPage(struct PF_VOLUME* p_vol, struct PF_CACHE_PAGE* p_page);
-s32 VFiPFDRV_StoreFreeCountToFSINFO(struct PF_VOLUME* p_vol);
-s32 VFiPFDRV_lwrite(struct PF_VOLUME* p_vol, const u8* buf, u32 sector, u32 num_sectors, u32* p_num_success);
-s32 VFiPFDRV_GetFSINFOInformation(struct PF_VOLUME* p_vol);
-s32 VFiPFCACHE_AllocateFATPage(struct PF_VOLUME* p_vol, u32 sector, struct PF_CACHE_PAGE** pp_page);
-void* VFipf_memset(void* dst, s32 c, u32 length);
-s32 VFiPFCACHE_WriteFATSectorAndFreeIfNeeded(struct PF_VOLUME* p_vol, const u8* p_buf, u32 sector);
-void VFiPFCACHE_FreeFATPage(struct PF_VOLUME* p_vol, struct PF_CACHE_PAGE* p_page);
-s32 VFiPFCACHE_FlushFATCache(struct PF_VOLUME* p_vol);
-s32 VFiPFCACHE_AllocateDataPage(struct PF_VOLUME* p_vol, u32 sector, struct PF_CACHE_PAGE** pp_page);
-s32 VFiPFSEC_WriteData(struct PF_VOLUME* p_vol, const u8* p_buf, u32 sector, u16 offset, u32 size, u32* p_success_size, u32 set_sig);
-void VFiPFCACHE_FreeDataPage(struct PF_VOLUME* p_vol, struct PF_CACHE_PAGE* p_page);
-s32 VFiPFFAT12_ReadFATEntry(struct PF_VOLUME* p_vol, u16 cluster, u32* p_value);
-s32 VFiPFFAT16_ReadFATEntry(struct PF_VOLUME* p_vol, u32 cluster, u32* p_value);
-s32 VFiPFFAT32_ReadFATEntry(struct PF_VOLUME* p_vol, u32 cluster, u32* p_value);
 
 static s32 VFiPFFAT_ReadFATEntry(struct PF_VOLUME* p_vol, u32 cluster, u32* p_value) {
     switch (p_vol->bpb.fat_type) {
         case FAT_12:
-            return VFiPFFAT12_ReadFATEntry(p_vol, cluster, p_value);
+            return VFiPFFAT12_ReadFATEntry(p_vol, (u16)cluster, p_value);
         case FAT_16:
             return VFiPFFAT16_ReadFATEntry(p_vol, cluster, p_value);
         case FAT_32:
@@ -90,6 +32,7 @@ static s32 VFiPFFAT_ReadFATEntry(struct PF_VOLUME* p_vol, u32 cluster, u32* p_va
 
 static s32 VFiPFFAT_ReadFATEntryPage(struct PF_VOLUME* p_vol, u32 cluster, u32* p_value, struct PF_CACHE_PAGE** p_page) {
     s32 err;
+
     err = 0xf;
     switch (p_vol->bpb.fat_type) {
         case FAT_12:
@@ -302,7 +245,7 @@ static s32 VFiPFFAT_UpdateClusterLink(struct PF_FFD* p_ffd, u32 cluster, u32 cha
 }
 
 static s32 VFiPFFAT_ClearClusterLink(struct PF_FFD* p_ffd, u32 chain_index) {
-    u32 position; // Present in DWARF but unused here.
+    u32 position;  // Present in DWARF but unused here.
     u32 offset;
 
     offset = chain_index / (p_ffd->cluster_link.interval + 1);
@@ -462,7 +405,7 @@ s32 VFiPFFAT_WriteCluster(struct PF_FFD* p_ffd, u32 cluster, u32 chain_index, u3
     s32 err;
     u32 access_cluster;
 
-    // TODO(Alex9303): dumb hack to prevent inlining
+    // TODO: dumb hack to prevent inlining
     s32 i;
     for (i = 0; i < 0; i++) {
     }
@@ -493,7 +436,7 @@ s32 VFiPFFAT_WriteClusterPage(struct PF_FFD* p_ffd, u32 cluster, u32 chain_index
     s32 err;
     u32 access_cluster;
 
-    // TODO(Alex9303): dumb hack to prevent inlining
+    // TODO: dumb hack to prevent inlining
     s32 i;
     for (i = 0; i < 0; i++) {
     }
@@ -606,7 +549,7 @@ s32 VFiPFFAT_DoAllocateChain(struct PF_FFD* p_ffd, u32 chain_len, u32 chain_inde
 }
 
 static s32 VFiPFFAT_AllocateChain(PF_FFD* p_ffd, u32 chain_len, u32 chain_index, u32* p_chain_start, u32* p_last_allocated) {
-    int err = 0;
+    s32 err;
 
     err = VFiPFFAT_DoAllocateChain(p_ffd, chain_len, chain_index, p_chain_start, p_last_allocated);
     if (err) {
@@ -732,7 +675,7 @@ s32 VFiPFFAT_GetClusterInChain(struct PF_FFD* p_ffd, u32 chain_index, u32 mode, 
     return 0;
 }
 
-inline s32 VFiPFFAT_GetNumberOfCluster(struct PF_FFD* p_ffd, u32 chain_index, u32 may_allocate, u32* p_cluster) {
+static s32 VFiPFFAT_GetNumberOfCluster(struct PF_FFD* p_ffd, u32 chain_index, u32 may_allocate, u32* p_cluster) {
     s32 err;
     u32 locate_start;
     u32 locate_end;
@@ -855,7 +798,7 @@ s32 VFiPFFAT_GetClusterAllocatedInChain(struct PF_FFD* p_ffd, u32 initial_cluste
 s32 VFiPFFAT_GetClusterSpecified(struct PF_FFD* p_ffd, u32 chain_index, u32 may_allocate, u32* p_cluster) {
     struct PF_VOLUME* p_vol;
     struct PF_FAT_HINT* p_hint;
-    u32 fat_type;
+    enum FatType fat_type;
     u32 is_found;
     s32 err;
 
@@ -869,7 +812,7 @@ s32 VFiPFFAT_GetClusterSpecified(struct PF_FFD* p_ffd, u32 chain_index, u32 may_
     }
 
     if (*p_ffd->p_start_cluster == 1) {
-        if (fat_type <= FAT_16) {
+        if ((u32)fat_type <= FAT_16) {
             *p_cluster = -1;
             return 0;
         }
@@ -906,19 +849,18 @@ s32 VFiPFFAT_GetClusterSpecified(struct PF_FFD* p_ffd, u32 chain_index, u32 may_
     return 0;
 }
 
-s32 VFiPFFAT_GetClusterAllocated(PF_FFD* p_ffd, u32 chain_index, u32 num_cluster, u32* p_cluster, u32* p_num_cluster) {
-    PF_VOLUME* p_vol;
-    PF_FAT_HINT* p_hint;
-    int err;
-
-    u32 fat_type;
+s32 VFiPFFAT_GetClusterAllocated(struct PF_FFD* p_ffd, u32 chain_index, u32 num_cluster, u32* p_cluster, u32* p_num_cluster) {
+    struct PF_VOLUME* p_vol;
+    struct PF_FAT_HINT* p_hint;
+    enum FatType fat_type;
+    s32 err;
 
     p_vol = p_ffd->p_vol;
     fat_type = p_vol->bpb.fat_type;
     p_hint = p_ffd->p_hint;
 
     if (*p_ffd->p_start_cluster == 1) {
-        if (fat_type <= FAT_16) {
+        if ((u32)fat_type <= FAT_16) {
             *p_cluster = -1;
             return 0;
         }
@@ -954,7 +896,7 @@ static s32 VFiPFFAT_GetSectorInRootDirRegion(PF_VOLUME* p_vol, u32 sector_offset
 s32 VFiPFFAT_GetSector(struct PF_FFD* p_ffd, u32 file_sector_index, u32 mode, u32 size, u32* p_sector, u32* p_num_sector) {
     s32 err;
     struct PF_VOLUME* p_vol;
-    u32 fat_type;
+    enum FatType fat_type;
     u32 chain_index;
     u32 cluster;
     u32 num_divide;
@@ -966,7 +908,7 @@ s32 VFiPFFAT_GetSector(struct PF_FFD* p_ffd, u32 file_sector_index, u32 mode, u3
     p_vol = p_ffd->p_vol;
     fat_type = p_vol->bpb.fat_type;
 
-    if (*p_ffd->p_start_cluster == 1 && fat_type <= FAT_16) {
+    if (*p_ffd->p_start_cluster == 1 && (u32)fat_type <= FAT_16) {
         err = VFiPFFAT_GetSectorInRootDirRegion(p_vol, file_sector_index, p_sector);
         return err ? err : 0;
     } else {
@@ -1000,7 +942,9 @@ s32 VFiPFFAT_GetSector(struct PF_FFD* p_ffd, u32 file_sector_index, u32 mode, u3
 }
 
 s32 VFiPFFAT_UpdateFATEntry(struct PF_VOLUME* p_vol, struct PF_CACHE_PAGE* p_page) {
-    s32 err = 0;
+    s32 err;
+
+    err = 0;
     if ((p_page->stat & 2) == 2) {
         err = VFiPFCACHE_WriteFATPage(p_vol, p_page);
     }
@@ -1021,6 +965,7 @@ s32 VFiPFFAT_UpdateAlternateFATEntry(struct PF_VOLUME* p_vol, u8* p_buf, u32 sec
     fat_num = offset / p_vol->bpb.sectors_per_FAT;
 
     // Copy needed in order to match the assembly. Possible missing inline function?
+    // No function calls present in Ketteiban Ghidra. Skill issue?
     size_copy = size;
     if ((offset / p_vol->bpb.sectors_per_FAT) != 0) {
         fat_num = offset - (fat_num * p_vol->bpb.sectors_per_FAT);
@@ -1049,6 +994,7 @@ s32 VFiPFFAT_GetSectorSpecified(struct PF_FFD* p_ffd, u32 file_sector_index, u32
     s32 err;
     u32 mode;
     u32 num_sector;
+
     if (!p_ffd) {
         return 10;
     }
