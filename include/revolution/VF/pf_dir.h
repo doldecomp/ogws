@@ -5,7 +5,7 @@
 extern "C" {
 #endif
 
-
+void VFiPFDIR_FinalizeAllDirs(struct PF_VOLUME* p_vol);
 
 #ifdef __cplusplus
 }

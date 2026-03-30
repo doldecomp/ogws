@@ -5,7 +5,9 @@
 extern "C" {
 #endif
 
-
+void VFiPFCLUSTER_UpdateLastAccessCluster(struct PF_FILE* p_file, u32 sector);
+s32 VFiPFCLUSTER_AppendCluster(struct PF_FILE* p_file, u32 byte, u32* p_success, u32* sector);
+s32 VFiPFCLUSTER_GetAppendSize(struct PF_FILE* p_file, u32* p_size);
 
 #ifdef __cplusplus
 }

@@ -1,13 +1,8 @@
 #include <revolution/VF.h>
 
-s32 VFipdm_mbr_get_table(u8* buf, u32 sector, PDM_MBR* p_mbr_tbl);
-s32 VFipdm_mbr_get_mbr_part_table(PDM_DISK* p_disk, PDM_MBR* p_mbr_tbl);
-s32 VFipdm_mbr_get_epbr_part_table(PDM_DISK* p_disk, PDM_MBR* p_mbr_tbl);
-s32 VFipdm_mbr_check_master_boot_record(PDM_DISK* p_disk, u8* buf, u32* is_master_boot);
-
 extern PDM_DISK_SET VFipdm_disk_set;
 
-s32 VFipdm_mbr_get_table(u8* buf, u32 sector, PDM_MBR* p_mbr_tbl) {
+s32 VFipdm_mbr_get_table(u8* buf, u32 sector, struct PDM_MBR* p_mbr_tbl) {
     u8* p_buf;
     u16 cs_val;
     u32 i;
@@ -50,7 +45,7 @@ s32 VFipdm_mbr_get_table(u8* buf, u32 sector, PDM_MBR* p_mbr_tbl) {
     return 0;
 }
 
-s32 VFipdm_mbr_get_mbr_part_table(PDM_DISK* p_disk, PDM_MBR* p_mbr_tbl) {
+s32 VFipdm_mbr_get_mbr_part_table(struct PDM_DISK* p_disk, struct PDM_MBR* p_mbr_tbl) {
     s32 err;
     u8 buf[512];
     u32 num_success;
@@ -79,7 +74,7 @@ s32 VFipdm_mbr_get_mbr_part_table(PDM_DISK* p_disk, PDM_MBR* p_mbr_tbl) {
     return 0;
 }
 
-s32 VFipdm_mbr_get_epbr_part_table(PDM_DISK* p_disk, PDM_MBR* p_mbr_tbl) {
+s32 VFipdm_mbr_get_epbr_part_table(struct PDM_DISK* p_disk, struct PDM_MBR* p_mbr_tbl) {
     s32 err;
     u8 buf[512];
     u32 extend_start_sector;
@@ -125,9 +120,7 @@ s32 VFipdm_mbr_get_epbr_part_table(PDM_DISK* p_disk, PDM_MBR* p_mbr_tbl) {
     }
 }
 
-extern s32 VFipdm_bpb_check_boot_sector(u8* buf, u32* is_boot);
-
-s32 VFipdm_mbr_check_master_boot_record(PDM_DISK* p_disk, u8* buf, u32* is_master_boot) {
+s32 VFipdm_mbr_check_master_boot_record(struct PDM_DISK* p_disk, u8* buf, u32* is_master_boot) {
     s16 part_cnt;
     struct PDM_MBR_SEC* p_mbr_sec;
     struct PDM_MBR mbr_tbl;

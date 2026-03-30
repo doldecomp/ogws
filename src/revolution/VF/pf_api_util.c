@@ -1,6 +1,6 @@
 #include <revolution/VF.h>
 
-int VFipf_error_to_api_error[40] = {
+s32 VFipf_error_to_api_error[40] = {
     0x00000000, 0x00000016, 0x00000016, 0x00000002,
     0x00000010, 0x0000005A, 0x0000001C, 0x00000008,
     0x00000011, 0x00000008, 0x00000016, 0x0000000D,
@@ -13,8 +13,8 @@ int VFipf_error_to_api_error[40] = {
     0x00000008, 0x0000001B, 0x00000009, 0x0000002E
 };
 
-u32 VFiPFAPI_ParseOpenModeString(const char* mode_str) {
-    u32 open_mode;
+s32 VFiPFAPI_ParseOpenModeString(const s8* mode_str) {
+    s32 open_mode;
     u32 i;
 
     if (mode_str == 0) {
@@ -64,7 +64,7 @@ u32 VFiPFAPI_ParseOpenModeString(const char* mode_str) {
     return 0;
 }
 
-int VFiPFAPI_convertError(int err) {
+s32 VFiPFAPI_convertError(s32 err) {
     if (err == 0) {
         return 0;
     }
@@ -80,19 +80,18 @@ int VFiPFAPI_convertError(int err) {
     return err;
 }
 
-int VFiPFAPI_convertReturnValue(int err) {
+s32 VFiPFAPI_convertReturnValue(s32 err) {
     return (-err | err) >> 31;
 }
 
-void* VFiPFAPI_convertReturnValue2NULL(int err, void* p_stream) {
+void* VFiPFAPI_convertReturnValue2NULL(s32 err, void* p_stream) {
     if (err) {
         return NULL;
     } else {
         return p_stream;
     }
 }
-
-int VFiPFAPI_convertReturnValue4unmount(int err) {
+s32 VFiPFAPI_convertReturnValue4unmount(s32 err) {
     if (err == 0) {
         return 0;
     }

@@ -5,7 +5,7 @@
 extern "C" {
 #endif
 
-
+s32 VFiPFFATFS_initializeFATFS(u32 config, void* param);
 
 #ifdef __cplusplus
 }

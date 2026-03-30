@@ -3,37 +3,8 @@
 #include <revolution/NAND.h>
 #include <revolution/VF.h>
 
-struct VFSysDevice {
-    u32 status;     // offset 0x0, size 0x4
-    u32 err;        // offset 0x4, size 0x4
-    u32 type;       // offset 0x8, size 0x4
-    u32 sync_mode;  // offset 0xC, size 0x4
-};
-
 struct VFSysDeviceBase {
-    struct VFSysDevice base;  // offset 0x0, size 0x10
-};
-
-struct VFSysCache {
-    struct MEMiHeapHead* heap_handle;       // offset 0x0, size 0x4
-    u32 cache_pages;                        // offset 0x4, size 0x4
-    struct PF_CACHE_PAGE* pf_cache_page_p;  // offset 0x8, size 0x4
-    u8 (*pf_cache_buf_p)[512];              // offset 0xC, size 0x4
-};
-
-struct VFSysDrive {
-    void* file_p;                          // offset 0x0, size 0x4
-    struct PDM_DISK* pf_disk_p;            // offset 0x4, size 0x4
-    struct PF_DRV_TBL pf_drv;              // offset 0x8, size 0xC
-    struct PDM_PARTITION* pf_part_p;       // offset 0x14, size 0x4
-    struct VFSysCache cache;               // offset 0x18, size 0x10
-    struct PF_CACHE_SETTING pf_cache_set;  // offset 0x28, size 0x14
-    s8 pf_filename[255];                   // offset 0x3C, size 0xFF
-};
-
-struct VFSysHandle {
-    struct VFSysDevice* device_p;  // offset 0x0, size 0x4
-    struct VFSysDrive drive;       // offset 0x4, size 0x13C
+    struct VF_HANDLE_DEVICE base;  // offset 0x0, size 0x10
 };
 
 union VFSysDeviceTableEntry {
@@ -47,7 +18,8 @@ union VFSysDeviceTableEntry {
         // char file_info[0x8C];  // offset 0x10, size 0x8C
     } nand;  // offset 0x0, size 0x9C
     struct {
-        struct VFSysDevice base;  // offset 0x0, size 0x10
+        struct VF_HANDLE_DEVICE base;   // offset 0x0, size 0x10
+        // _SDDev is never used in this file, so we can just pad the field.
         // struct _SDDev drive;         // offset 0x20, size 0x28
         char drive[0x28];               // offset 0x20, size 0x28
         void (*eventCallback)(u32);     // offset 0x48, size 0x4
@@ -58,51 +30,12 @@ union VFSysDeviceTableEntry {
 
 s32 VFSysSetSyncMode(s32 i_handle_idx, u32 i_mode);
 
-void* MEMAllocFromExpHeapEx(MEMiHeapHead* heap, u32 size, s32 align);
-void* VFipf_memset(void* dst, s32 c, u32 length);
-void MEMFreeToExpHeap(MEMiHeapHead* heap, void* memBlock);
-s32 dCommon_getHandleIdxFromDisk(struct PDM_DISK* p_disk);
-MEMiHeapHead* MEMCreateExpHeapEx(void* start, u32 size, u16 opt);
-void dCommon_initDriveInfo();
-void VFi_InitSDWrok();
-void* VFipf_memcpy(void* dst, void* src, u32 length);
-s32 VFipdm_open_disk(struct PDM_INIT_DISK* p_init_disk_tbl, struct PDM_DISK** pp_disk);
-void dCommon_setLastDeviceErrorToDisk(struct PDM_DISK* p_disk, s32 i_lastDevErr);
-int VFipf2_errnum();
-s32 VFipdm_close_disk(struct PDM_DISK* p_disk);
-MEMiHeapHead* MEMDestroyExpHeap(MEMiHeapHead* heap);
-s32 VFi_NandOpenSp(const s8* path, void* info, u8 accType, u32 i_handleIdx);
-s32 VFi_NandGetLength(struct NANDFileInfo* info, u32* length);
-s32 VFi_NandRead(struct NANDFileInfo* info, void* buf, u32 length);
-int dCommon_IsPrfFile(void* i_buff_p);
-s32 VFi_NandClose(struct NANDFileInfo* info);
-BOOL DVDOpen(const char* path, DVDFileInfo* info);
-s32 DVDReadPrio(DVDFileInfo* info, void* dst, s32 size, s32 offset, s32 prio);
-BOOL DVDClose(DVDFileInfo* info);
-s32 VFipdm_open_partition(struct PDM_DISK* p_disk, s32 part_id, struct PDM_PARTITION** pp_part);
-void dCommon_setFileSizeToDisk(struct PDM_DISK* p_disk, u32 i_fileSize);
-int VFipf2_unmount(s8 drive, u32 mode);
-int VFipf2_detach(s8 drive);
-s32 VFipdm_close_partition(struct PDM_PARTITION* p_part);
-struct PF_VOLUME* VFiPFVOL_GetCurrentVolume();
-struct PF_FILE* VFipf2_fopen(const s8* path, const s8* mode);
-struct PF_VOLUME* VFiPFVOL_GetVolumeFromDrvChar(s8 drv_char);
-void VFiPFVOL_SetCurrentVolume(struct PF_VOLUME* p_vol);
-int VFipf2_fclose(struct PF_FILE* p_file);
-int VFipf2_fseek(struct PF_FILE* pFile, s32 lOffset, int nOrigin);
-int VFipf2_finfo(struct PF_FILE* p_file, struct PF_INFO* p_info);
-u32 VFipf2_fread(void* p_buf, u32 size, u32 count, struct PF_FILE* p_file);
-u32 VFipf2_fwrite(void* p_buf, u32 size, u32 count, struct PF_FILE* p_file);
-int VFipf2_remove(const s8* path);
-int VFipf2_devinf(s8 drv_char, struct PF_DEV_INF* dev_inf);
-s32 dCommon_getLastDeviceErrorFromDisk(struct PDM_DISK* p_disk);
-
 static union VFSysDeviceTableEntry* l_vfsys_dev_table[26];
 static struct PDM_INIT_DISK l_dev_init_info_table[26];
 
 static struct PDM_INIT_DISK l_dev_nandflash_init_info;
 
-static struct VFSysHandle* l_sys_handle_table_p;
+static struct VF_HANDLE_TYPE* l_sys_handle_table_p;
 static s32 l_vfsys_dev_table_init;
 static struct MEMiHeapHead* l_vfsys_exp_heap_handle;
 static s32 l_vfsys_last_err;
@@ -111,11 +44,12 @@ static u32 l_vfsys_vol_max;
 extern s32 VF_nand_retry_max;
 extern s32 VF_nand_sleep_msec;
 
-static s32 VFSysCheckExistPrfFile_nandflash(struct VFSysDevice* i_device_p, const s8* i_prf_file_name_p, void* i_memory_p, u32 i_handle_idx);
-static s32 VFSysCheckExistPrfFile_ram(struct VFSysDevice* i_device_p, const s8* i_prf_file_name_p, void* i_memory_p, u32 i_handle_idx);
-static s32 VFSysCheckExistPrfFile_dvd(struct VFSysDevice* i_device_p, const s8* i_prf_file_name_p, void* i_memory_p, u32 i_handle_idx);
-
-static s32 (*l_check_exist_file[4])(struct VFSysDevice*, const s8*, void*, u32) = {VFSysCheckExistPrfFile_nandflash, VFSysCheckExistPrfFile_ram, VFSysCheckExistPrfFile_dvd, NULL};
+static s32 (*l_check_exist_file[4])(struct VF_HANDLE_DEVICE*, const s8*, void*, u32) = {
+    VFSysCheckExistPrfFile_nandflash,
+    VFSysCheckExistPrfFile_ram,
+    VFSysCheckExistPrfFile_dvd,
+    NULL
+};
 
 static void VFSys_change_separater(s8* o_dst_str_p, const s8* i_src_str_p, s8 i_dst_spr, s8 i_src_spr, s32 i_str_len_max) {
     s32 i;
@@ -163,7 +97,7 @@ static void VFSys_free(void* i_ptr) {
     VFSys_free_common(i_ptr, l_vfsys_exp_heap_handle);
 }
 
-static void VFSys_clear_cache(struct VFSysCache* i_cache_p) {
+static void VFSys_clear_cache(struct VF_HANDLE_CACHE* i_cache_p) {
     if (i_cache_p != NULL) {
         i_cache_p->heap_handle = NULL;
         i_cache_p->cache_pages = 0;
@@ -172,7 +106,7 @@ static void VFSys_clear_cache(struct VFSysCache* i_cache_p) {
     }
 }
 
-static void VFSys_free_cache(struct VFSysCache* i_cache_p) {
+static void VFSys_free_cache(struct VF_HANDLE_CACHE* i_cache_p) {
     if (i_cache_p != NULL) {
         if (i_cache_p->pf_cache_page_p != NULL) {
             VFSys_free_common(i_cache_p->pf_cache_page_p, i_cache_p->heap_handle);
@@ -184,8 +118,8 @@ static void VFSys_free_cache(struct VFSysCache* i_cache_p) {
     }
 }
 
-static void VFSys_create_cache(struct VFSysHandle* i_handle_p, u32 i_pages, struct MEMiHeapHead* i_heap_handle) {
-    struct VFSysCache* cache_p;
+static void VFSys_create_cache(struct VF_HANDLE_TYPE* i_handle_p, u32 i_pages, struct MEMiHeapHead* i_heap_handle) {
+    struct VF_HANDLE_CACHE* cache_p;
     u32 pages_2;
     u32 cache_page_size;
     u32 cache_buf_size;
@@ -224,7 +158,7 @@ static void VFSys_create_cache(struct VFSysHandle* i_handle_p, u32 i_pages, stru
     }
 }
 
-static void VFSys_alloc_cache(struct VFSysHandle* i_handle_p, void* i_cache_heap_p, u32 i_cache_size) {
+static void VFSys_alloc_cache(struct VF_HANDLE_TYPE* i_handle_p, void* i_cache_heap_p, u32 i_cache_size) {
     u32 pages;
     struct MEMiHeapHead* heap_handle;
     struct MEMiHeapHead* cache_heap_handle;
@@ -243,8 +177,8 @@ static void VFSys_alloc_cache(struct VFSysHandle* i_handle_p, void* i_cache_heap
     }
 }
 
-static void VFSys_destroy_cache(struct VFSysHandle* i_handle_p) {
-    struct VFSysCache* cache_p;
+static void VFSys_destroy_cache(struct VF_HANDLE_TYPE* i_handle_p) {
+    struct VF_HANDLE_CACHE* cache_p;
     struct MEMiHeapHead* heap_handle;
 
     if (i_handle_p != NULL) {
@@ -258,8 +192,8 @@ static void VFSys_destroy_cache(struct VFSysHandle* i_handle_p) {
 }
 
 static void VFSys_destroy_cache_all(void) {
-    struct VFSysHandle* handle_p;
-    struct VFSysHandle* handle_end_p;
+    struct VF_HANDLE_TYPE* handle_p;
+    struct VF_HANDLE_TYPE* handle_end_p;
 
     if (l_vfsys_vol_max != 0 && l_sys_handle_table_p != NULL) {
         handle_p = l_sys_handle_table_p;
@@ -274,14 +208,14 @@ static void VFSys_destroy_cache_all(void) {
     }
 }
 
-static void VFSys_clear_handle(struct VFSysHandle* o_handle_p) {
-    VFipf_memset(o_handle_p, 0, sizeof(struct VFSysHandle));
+static void VFSys_clear_handle(struct VF_HANDLE_TYPE* o_handle_p) {
+    VFipf_memset(o_handle_p, 0, sizeof(struct VF_HANDLE_TYPE));
     VFSys_clear_cache(&o_handle_p->drive.cache);
 }
 
 static void VFSys_clear_all_handle(void) {
-    struct VFSysHandle* handle_p;
-    struct VFSysHandle* handle_end_p;
+    struct VF_HANDLE_TYPE* handle_p;
+    struct VF_HANDLE_TYPE* handle_end_p;
 
     if (l_vfsys_vol_max != 0 && l_sys_handle_table_p != NULL) {
         handle_p = l_sys_handle_table_p;
@@ -295,8 +229,8 @@ static void VFSys_clear_all_handle(void) {
 }
 
 static s32 VFSys_get_free_handle_idx(void) {
-    struct VFSysHandle* handle_p;
-    struct VFSysHandle* handle_end_p;
+    struct VF_HANDLE_TYPE* handle_p;
+    struct VF_HANDLE_TYPE* handle_end_p;
     s32 idx;
 
     if (l_vfsys_vol_max != 0 && l_sys_handle_table_p != NULL) {
@@ -316,7 +250,7 @@ static s32 VFSys_get_free_handle_idx(void) {
 
 static void VFSys_create_handle_table(u32 i_max) {
     if (l_sys_handle_table_p == NULL) {
-        l_sys_handle_table_p = VFSys_alloc(i_max * sizeof(struct VFSysHandle), 32);
+        l_sys_handle_table_p = VFSys_alloc(i_max * sizeof(struct VF_HANDLE_TYPE), 32);
     }
 }
 
@@ -328,16 +262,16 @@ static void VFSys_destroy_handle_table(void) {
     }
 }
 
-struct VFSysHandle* VFSysGetHandleP(s32 i_idx) {
+struct VF_HANDLE_TYPE* VFSysGetHandleP(s32 i_idx) {
     if ((u32)i_idx < l_vfsys_vol_max && l_sys_handle_table_p != NULL) {
         return &l_sys_handle_table_p[i_idx];
     }
     return NULL;
 }
 
-s32 VFSysHandleP2Idx(struct VFSysHandle* i_handle_p) {
-    struct VFSysHandle* handle_p;
-    struct VFSysHandle* handle_end_p;
+s32 VFSysHandleP2Idx(struct VF_HANDLE_TYPE* i_handle_p) {
+    struct VF_HANDLE_TYPE* handle_p;
+    struct VF_HANDLE_TYPE* handle_end_p;
     s32 idx;
 
     if (i_handle_p != NULL) {
@@ -357,9 +291,9 @@ s32 VFSysHandleP2Idx(struct VFSysHandle* i_handle_p) {
     return -1;
 }
 
-struct VFSysHandle* VFSysVol2HandleP(struct PF_VOLUME* i_vol_p) {
-    struct VFSysHandle* handle_p;
-    struct VFSysHandle* handle_end_p;
+struct VF_HANDLE_TYPE* VFSysVol2HandleP(struct PF_VOLUME* i_vol_p) {
+    struct VF_HANDLE_TYPE* handle_p;
+    struct VF_HANDLE_TYPE* handle_end_p;
 
     if (i_vol_p != NULL) {
         if (l_vfsys_vol_max != 0 && l_sys_handle_table_p != NULL) {
@@ -378,8 +312,8 @@ struct VFSysHandle* VFSysVol2HandleP(struct PF_VOLUME* i_vol_p) {
     return NULL;
 }
 
-static struct VFSysHandle* VFSys_file_p_2_handle_p(struct PF_FILE* i_file_p) {
-    struct VFSysHandle* ret_p;
+static struct VF_HANDLE_TYPE* VFSys_file_p_2_handle_p(struct PF_FILE* i_file_p) {
+    struct VF_HANDLE_TYPE* ret_p;
 
     ret_p = NULL;
     if (i_file_p != NULL && i_file_p->p_sfd != NULL) {
@@ -388,7 +322,7 @@ static struct VFSysHandle* VFSys_file_p_2_handle_p(struct PF_FILE* i_file_p) {
     return ret_p;
 }
 
-static struct VFSysHandle* VFSys_get_current_handle_p(void) {
+static struct VF_HANDLE_TYPE* VFSys_get_current_handle_p(void) {
     struct PF_VOLUME* vol_p;
 
     vol_p = VFiPFVOL_GetCurrentVolume();
@@ -397,7 +331,7 @@ static struct VFSysHandle* VFSys_get_current_handle_p(void) {
 
 int VFSysPDMDisk2HandleIdx(const struct PDM_DISK* i_disk_p) {
     int ret_handle_idx;
-    struct VFSysHandle* handle_p;
+    struct VF_HANDLE_TYPE* handle_p;
     int idx;
 
     ret_handle_idx = -1;
@@ -418,8 +352,8 @@ int VFSysPDMDisk2HandleIdx(const struct PDM_DISK* i_disk_p) {
     return ret_handle_idx;
 }
 
-static void VFSys_clear_device_info(struct VFSysDevice* o_dev_p) {
-    VFipf_memset(o_dev_p, 0, sizeof(struct VFSysDevice));
+static void VFSys_clear_device_info(struct VF_HANDLE_DEVICE* o_dev_p) {
+    VFipf_memset(o_dev_p, 0, sizeof(struct VF_HANDLE_DEVICE));
     o_dev_p->status = 0;
     o_dev_p->sync_mode = 0;
 }
@@ -428,8 +362,8 @@ static void VFSys_clear_device_nandflash(struct VFSysDeviceBase* o_nandflash_p) 
     VFSys_clear_device_info(&o_nandflash_p->base);
 }
 
-struct VFSysDrive* VFSysGetDriveP(s32 i_idx) {
-    struct VFSysHandle* handle_p;
+struct VF_HANDLE_DRIVE* VFSysGetDriveP(s32 i_idx) {
+    struct VF_HANDLE_TYPE* handle_p;
 
     handle_p = VFSysGetHandleP(i_idx);
     if (handle_p != NULL) {
@@ -438,14 +372,14 @@ struct VFSysDrive* VFSysGetDriveP(s32 i_idx) {
     return NULL;
 }
 
-struct VFSysDrive* VFSysPDMDisk2DriveP(struct PDM_DISK* disk_p) {
+struct VF_HANDLE_DRIVE* VFSysPDMDisk2DriveP(struct PDM_DISK* disk_p) {
     if (disk_p != NULL) {
         return VFSysGetDriveP(dCommon_getHandleIdxFromDisk(disk_p));
     }
     return NULL;
 }
 
-inline void VFSys_set_cache(struct VFSysDrive* i_drive_p) {
+inline void VFSys_set_cache(struct VF_HANDLE_DRIVE* i_drive_p) {
     struct PF_CACHE_SETTING* cache_p;
 
     cache_p = &i_drive_p->pf_cache_set;
@@ -507,14 +441,14 @@ void VFSysInit(void* i_heap_start_address_p, u32 i_size) {
     VFi_InitSDWrok();
 }
 
-static void VFSys_set_device_err_info(struct VFSysHandle* o_handle_p, s32 i_err) {
+static void VFSys_set_device_err_info(struct VF_HANDLE_TYPE* o_handle_p, s32 i_err) {
     if (o_handle_p != NULL && o_handle_p->drive.pf_disk_p != NULL) {
         dCommon_setLastDeviceErrorToDisk(o_handle_p->drive.pf_disk_p, i_err);
     }
 }
 
 static void VFSysSetDevErrInfo(s32 i_handle_idx, s32 i_err) {
-    struct VFSysHandle* handle_p;
+    struct VF_HANDLE_TYPE* handle_p;
 
     handle_p = VFSysGetHandleP(i_handle_idx);
     if (handle_p != NULL) {
@@ -523,14 +457,14 @@ static void VFSysSetDevErrInfo(s32 i_handle_idx, s32 i_err) {
 }
 
 static void VFSys_set_current_device_err_info(s32 i_err) {
-    struct VFSysHandle* handle_p;
+    struct VF_HANDLE_TYPE* handle_p;
 
     handle_p = VFSys_get_current_handle_p();
     VFSys_set_device_err_info(handle_p, i_err);
 }
 
 static void VFSys_file_p_2_set_device_err_info(struct PF_FILE* i_file_p, s32 i_err) {
-    struct VFSysHandle* handle_p;
+    struct VF_HANDLE_TYPE* handle_p;
 
     handle_p = VFSys_file_p_2_handle_p(i_file_p);
     VFSys_set_device_err_info(handle_p, i_err);
@@ -538,7 +472,7 @@ static void VFSys_file_p_2_set_device_err_info(struct PF_FILE* i_file_p, s32 i_e
 
 s32 VFSysSetDeviceNANDFlash(s32* o_idx_p, void* i_cache_heap_p, u32 i_cache_size) {
     s32 idx;
-    struct VFSysHandle* handle_p;
+    struct VF_HANDLE_TYPE* handle_p;
     s32 err;
     struct PDM_INIT_DISK* init_info_p;
     union VFSysDeviceTableEntry* uni_p;
@@ -575,7 +509,7 @@ s32 VFSysSetDeviceNANDFlash(s32* o_idx_p, void* i_cache_heap_p, u32 i_cache_size
 }
 
 s32 VFSysUnsetDevice(s32 i_handle_idx) {
-    struct VFSysHandle* handle_p;
+    struct VF_HANDLE_TYPE* handle_p;
     s32 err;
 
     handle_p = VFSysGetHandleP(i_handle_idx);
@@ -606,7 +540,7 @@ s32 VFSysCheckExistPrfFile_nandflash_sub(const s8* i_prf_file_name_p, u32 i_hand
 
     ret = 0xB001;
     VFSys_change_separater(file_name, i_prf_file_name_p, '/', '\\', 255);
-    NANDError = VFi_NandOpenSp(file_name, &FileInfo, 1, i_handle_idx);
+    NANDError = VFi_NandOpenSp((const char*)file_name, &FileInfo, 1, i_handle_idx);
     if (NANDError == 0) {
         length = 0;
         NANDErrorLen = VFi_NandGetLength(&FileInfo, &length);
@@ -621,7 +555,7 @@ s32 VFSysCheckExistPrfFile_nandflash_sub(const s8* i_prf_file_name_p, u32 i_hand
     return ret;
 }
 
-static s32 VFSysCheckExistPrfFile_nandflash(struct VFSysDevice* i_device_p, const s8* i_prf_file_name_p, void* i_memory_p, u32 i_handle_idx) {
+static s32 VFSysCheckExistPrfFile_nandflash(struct VF_HANDLE_DEVICE* i_device_p, const s8* i_prf_file_name_p, void* i_memory_p, u32 i_handle_idx) {
     return VFSysCheckExistPrfFile_nandflash_sub(i_prf_file_name_p, i_handle_idx);
 }
 
@@ -633,7 +567,7 @@ static s32 VFSysCheckExistPrfFile_ram_sub(void* i_memory_p) {
     return 0xB006;
 }
 
-static s32 VFSysCheckExistPrfFile_ram(struct VFSysDevice* i_device_p, const s8* i_prf_file_name_p, void* i_memory_p, u32 i_handle_idx) {
+static s32 VFSysCheckExistPrfFile_ram(struct VF_HANDLE_DEVICE* i_device_p, const s8* i_prf_file_name_p, void* i_memory_p, u32 i_handle_idx) {
     return VFSysCheckExistPrfFile_ram_sub(i_memory_p);
 }
 
@@ -662,14 +596,14 @@ static s32 VFSysCheckExistPrfFile_dvd_sub(const s8* i_prf_file_name_p) {
     return ret;
 }
 
-static s32 VFSysCheckExistPrfFile_dvd(struct VFSysDevice* i_device_p, const s8* i_prf_file_name_p, void* i_memory_p, u32 i_handle_idx) {
+static s32 VFSysCheckExistPrfFile_dvd(struct VF_HANDLE_DEVICE* i_device_p, const s8* i_prf_file_name_p, void* i_memory_p, u32 i_handle_idx) {
     return VFSysCheckExistPrfFile_dvd_sub(i_prf_file_name_p);
 }
 
 s32 VFSysCheckExistPrfFile(s32 i_handle_idx, const s8* i_prf_file_name_p, void* i_memory_p) {
-    struct VFSysHandle* handle_p;
+    struct VF_HANDLE_TYPE* handle_p;
     u32 type;
-    s32 (*check_proc)(struct VFSysDevice*, const s8*, void*, u32);
+    s32 (*check_proc)(struct VF_HANDLE_DEVICE*, const s8*, void*, u32);
 
     handle_p = VFSysGetHandleP(i_handle_idx);
     if (handle_p == NULL || handle_p->device_p == NULL) {
@@ -688,8 +622,8 @@ s32 VFSysCheckExistPrfFile(s32 i_handle_idx, const s8* i_prf_file_name_p, void* 
 }
 
 s32 VFSysMountDrv(s32 i_handle_idx, const s8* i_prf_file_name_p, void* i_memory_p) {
-    struct VFSysHandle* handle_p;
-    struct VFSysDrive* drive_p;
+    struct VF_HANDLE_TYPE* handle_p;
+    struct VF_HANDLE_DRIVE* drive_p;
     s32 err;
     union VFSysDeviceTableEntry* uni_p;
 
@@ -720,18 +654,18 @@ s32 VFSysMountDrv(s32 i_handle_idx, const s8* i_prf_file_name_p, void* i_memory_
             case 0:
                 uni_p = l_vfsys_dev_table[i_handle_idx];
                 drive_p->file_p = &uni_p->dvd.file_info;
-                VFSys_change_separater(drive_p->pf_filename, i_prf_file_name_p, '/', '\\', 255);
+                VFSys_change_separater((s8*)drive_p->pf_filename, i_prf_file_name_p, '/', '\\', 255);
                 break;
             case 2:
                 uni_p = l_vfsys_dev_table[i_handle_idx];
                 drive_p->file_p = &uni_p->nand.file_info;
-                VFSys_change_separater(drive_p->pf_filename, i_prf_file_name_p, '\\', '/', 255);
+                VFSys_change_separater((s8*)drive_p->pf_filename, i_prf_file_name_p, '\\', '/', 255);
                 break;
 
             case 3:
                 break;
             default:
-                VFSys_change_separater(drive_p->pf_filename, i_prf_file_name_p, '\\', '/', 255);
+                VFSys_change_separater((s8*)drive_p->pf_filename, i_prf_file_name_p, '\\', '/', 255);
                 break;
         }
 
@@ -744,8 +678,8 @@ s32 VFSysMountDrv(s32 i_handle_idx, const s8* i_prf_file_name_p, void* i_memory_
 }
 
 s32 VFSysUnmountDrv(s32 i_handle_idx, u32 i_mode) {
-    struct VFSysHandle* handle_p;
-    struct VFSysDrive* drive_p;
+    struct VF_HANDLE_TYPE* handle_p;
+    struct VF_HANDLE_DRIVE* drive_p;
     s32 err;
 
     handle_p = VFSysGetHandleP(i_handle_idx);
@@ -784,7 +718,7 @@ s32 VFSysUnmountDrv(s32 i_handle_idx, u32 i_mode) {
 }
 
 static s32 VFSys_set_current_vol(s32 i_handle_idx) {
-    struct VFSysHandle* handle_p;
+    struct VF_HANDLE_TYPE* handle_p;
     struct PF_VOLUME* vol_p;
     s32 err;
 
@@ -952,7 +886,7 @@ s32 VFSysGetFileSizeByFd(s32* o_size_p, struct PF_FILE* i_file_p) {
 }
 
 s32 VFSysGetDriveFreeSize(s32 i_handle_idx) {
-    struct VFSysHandle* handle_p;
+    struct VF_HANDLE_TYPE* handle_p;
     struct PF_DEV_INF device_info;
     s32 err;
 
@@ -981,7 +915,7 @@ s32 VFSysGetLastError(void) {
     return VFSysGetLastErr();
 }
 
-static s32 VFSysGetLastDeviceError_common(struct VFSysHandle* i_handle_p) {
+static s32 VFSysGetLastDeviceError_common(struct VF_HANDLE_TYPE* i_handle_p) {
     if (i_handle_p != NULL && i_handle_p->drive.pf_disk_p != NULL) {
         return dCommon_getLastDeviceErrorFromDisk(i_handle_p->drive.pf_disk_p);
     }
@@ -989,25 +923,25 @@ static s32 VFSysGetLastDeviceError_common(struct VFSysHandle* i_handle_p) {
 }
 
 s32 VFSysGetLastDeviceError_current(void) {
-    struct VFSysHandle* handle_p;
+    struct VF_HANDLE_TYPE* handle_p;
 
     handle_p = VFSys_get_current_handle_p();
     return VFSysGetLastDeviceError_common(handle_p);
 }
 
 s32 VFSysGetLastDeviceError(s32 i_handle_idx) {
-    struct VFSysHandle* handle_p;
+    struct VF_HANDLE_TYPE* handle_p;
 
     handle_p = VFSysGetHandleP(i_handle_idx);
     return VFSysGetLastDeviceError_common(handle_p);
 }
 
-void VFSysSetNandFuncNormal(u32 i_handle_idx) {
+void VFSysSetNandFuncEx(u32 i_handle_idx) {
     VFi_NandSetNANDFuncNormal(i_handle_idx);
 }
 
 s32 VFSysSetSyncMode(s32 i_handle_idx, u32 i_mode) {
-    struct VFSysHandle* handle_p;
+    struct VF_HANDLE_TYPE* handle_p;
 
     handle_p = VFSysGetHandleP(i_handle_idx);
     if (handle_p == NULL || handle_p->drive.pf_disk_p == NULL || handle_p->device_p == NULL) {

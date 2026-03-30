@@ -1,50 +1,5 @@
 #include <revolution/VF.h>
 
-s32 VFiPFPATH_DoSplitPath(struct PF_STR* p_path, struct PF_STR* p_dir_path, struct PF_STR* p_filename, u32 wildcard);
-u16 VFiPFPATH_GetNextCharOfPattern(struct PF_STR* p_pattern, u32 is_long_name);
-u32 VFiPFPATH_DoMatchFileNameWithPattern(u16 c_name, struct PF_FILE_NAME_ITER* p_name, u16 c_pat, struct PF_STR* p_pattern, u32 is_long_name);
-s32 VFiPFPATH_cmpNameImpl(const s8* sName, const s8* sPattern, u32* p_is_end);
-s32 VFiPFPATH_cmpNameUni(const u16* p_name, struct PF_STR* sPattern);
-s32 VFiPFPATH_cmpName(const s8* sShort, struct PF_STR* p_pattern, u32 is_short_search);
-s32 VFiPFPATH_cmpTailSFN(const s8* sfn_name, const s8* pattern);
-void VFiPFPATH_InitTokenOfPath(struct PF_STR* p_str, s8* path, u32 code_mode);
-s32 VFiPFPATH_GetNextTokenOfPath(struct PF_STR* p_str, u32 wildcard);
-s32 VFiPFPATH_SplitPath(struct PF_STR* p_path, struct PF_STR* p_dir_path, struct PF_STR* p_filename);
-struct PF_VOLUME* VFiPFPATH_GetVolumeFromPath(struct PF_STR* p_path);
-u32 VFiPFPATH_MatchFileNameWithPattern(const s8* file_name, struct PF_STR* p_pattern, u32 is_long_name);
-s32 VFiPFPATH_putShortName(u8* pDirEntry, const s8* short_name, u8 attr);
-s32 VFiPFPATH_getShortName(s8* short_name, const u8* pDirEntry, u8 attr);
-void VFiPFPATH_getLongNameformShortName(s8* short_name, s8* long_name, u8 flag);
-u32 VFiPFPATH_GetLengthFromShortname(const s8* sSrc);
-u32 VFiPFPATH_GetLengthFromUnicode(const u16* sSrc);
-s32 VFiPFPATH_transformFromUnicodeToNormal(s8* sDest, const u16* sSrc);
-s32 VFiPFPATH_transformInUnicode(u16* sDestStr, const s8* sSrcStr);
-u32 VFiPFPATH_parseShortName(s8* pDest, struct PF_STR* p_pattern);
-s32 VFiPFPATH_parseShortNameNumeric(s8* p_char, u32 count);
-u32 VFiPFPATH_CheckExtShortNameSignature(struct PF_STR* p_str);
-u32 VFiPFPATH_CheckExtShortName(struct PF_STR* p_str, u32 target, u32 wildcard);
-u32 VFiPFPATH_GetExtShortNameIndex(struct PF_STR* p_str, u32* p_index);
-s32 VFiPFPATH_AdjustExtShortName(s8* pName, u32 position);
-
-// Other functions called by main functions. These should NOT need to be implemented. They are here for reference only.
-u32 VFiPFSTR_GetCodeMode(struct PF_STR* p_str);
-void VFiPFSTR_SetCodeMode(struct PF_STR* p_str, u32 code_mode);
-s32 VFiPFSTR_StrNCmp(struct PF_STR* p_str, const s8* s, u32 target, s16 offset, u16 num);
-void VFiPFSTR_MoveStrPos(struct PF_STR* p_str, s16 num_s8);
-u16 VFiPFSTR_StrLen(struct PF_STR* p_str);
-s32 VFipf_toupper(s32 c);
-u16 VFiPF_GET_LE_U16(const u8* buf);
-s8* VFiPFSTR_GetStrPos(struct PF_STR* p_str, u32 target);
-s8* VFipf_strcpy(s8* dst, const s8* src);
-s32 VFipf_strcmp(const s8* s1, const s8* s2);
-u16 VFiPFSTR_StrNumChar(struct PF_STR* p_str, u32 target);
-void VFiPFSTR_ToUpperNStr(struct PF_STR* p_str, u16 num, s8* dest);
-struct PF_VOLUME* VFiPFVOL_GetVolumeFromDrvChar(s8 drv_char);
-struct PF_VOLUME* VFiPFVOL_GetCurrentVolume();
-s32 VFipf_strncmp(const s8* s1, const s8* s2, u32 length);
-void VFiPFCODE_Divide_Width(s32 width, s16* oem_width, s16* uni_width);
-s32 VFipf_w_strncmp(const u16* s1, const u16* s2, u32 length);
-
 extern PF_VOLUME_SET VFipf_vol_set;
 extern const u8 VFipf_valid_fn_char[];
 
@@ -1014,7 +969,7 @@ s32 VFiPFPATH_parseShortNameNumeric(s8* p_char, u32 count) {
     u32 pos_ext;
     u32 pos_slide;
     u32 pos_end;
-    s8 numeric[8];
+    s8 numeric[6];
 
     if (count == 0) {
         return 0;
@@ -1222,14 +1177,13 @@ s32 VFiPFPATH_AdjustExtShortName(s8* pName, u32 position) {
 
     while ((i > 1) && (position != 0)) {
         num = position / div1;
-        num = num * div1;
-        num = position - num;
+        num = position - (num * div1);
         pName_copy = &pName;
 
         if (num != 0) {
             position = position - num;
             num = num / div2;
-            // TODO(Alex9303): Fakematch
+            // TODO: Fakematch
             *(*pName_copy) = (s8)((*pName) + ((s8)num));
         }
 

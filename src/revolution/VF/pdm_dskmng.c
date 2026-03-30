@@ -17,7 +17,7 @@ s32 VFipdm_init_diskmanager(u32 config, void* param) {
     return 0;
 }
 
-s32 VFipdm_open_disk(PDM_INIT_DISK* p_init_disk_tbl, PDM_DISK** pp_disk) {
+s32 VFipdm_open_disk(struct PDM_INIT_DISK* p_init_disk_tbl, struct PDM_DISK** pp_disk) {
     s32 err;
 
     if (!pp_disk) {
@@ -34,19 +34,19 @@ s32 VFipdm_open_disk(PDM_INIT_DISK* p_init_disk_tbl, PDM_DISK** pp_disk) {
     return err;
 }
 
-s32 VFipdm_close_disk(PDM_DISK* p_disk) {
-    s32 result;
+s32 VFipdm_close_disk(struct PDM_DISK* p_disk) {
+    s32 err;
 
     if (!p_disk) {
         return 1;
     }
 
-    result = VFipdm_disk_close_disk(p_disk);
-    return result;
+    err = VFipdm_disk_close_disk(p_disk);
+    return err;
 }
 
-s32 VFipdm_open_partition(PDM_DISK* p_disk, s32 part_id, PDM_PARTITION** pp_part) {
-    int result;
+s32 VFipdm_open_partition(struct PDM_DISK* p_disk, s32 part_id, struct PDM_PARTITION** pp_part) {
+    s32 err;
 
     if (!p_disk) {
         return 1;
@@ -58,25 +58,25 @@ s32 VFipdm_open_partition(PDM_DISK* p_disk, s32 part_id, PDM_PARTITION** pp_part
 
     *pp_part = 0;
     part_id &= 0xFFFF;
-    result = VFipdm_part_open_partition(p_disk, part_id, pp_part);
-    if (!result) {
+    err = VFipdm_part_open_partition(p_disk, part_id, pp_part);
+    if (!err) {
         return 0;
     }
 
-    return result;
+    return err;
 }
 
 s32 VFipdm_close_partition(struct PDM_PARTITION* p_part) {
-    int result;
+    s32 err;
 
     if (!p_part) {
         return 1;
     }
 
-    result = VFipdm_part_close_partition(p_part);
-    if (!result) {
+    err = VFipdm_part_close_partition(p_part);
+    if (!err) {
         return 0;
     }
 
-    return result;
+    return err;
 }

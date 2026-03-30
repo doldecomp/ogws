@@ -1,36 +1,5 @@
 #include <revolution/VF.h>
 
-s32 VFipdm_part_get_start_sector(struct PDM_PARTITION* p_part);
-u32 VFipdm_part_chg_ltop(struct PDM_PARTITION* p_part, u32 lsector, u16 lbps);
-s32 VFipdm_part_get_handle(struct PDM_DISK* p_disk, u16 part_id, struct PDM_PARTITION** pp_part, u16* p_part_no, u16* p_handle_no);
-s32 VFipdm_part_open_partition(struct PDM_DISK* p_disk, u16 part_id, struct PDM_PARTITION** pp_part);
-s32 VFipdm_part_close_partition(struct PDM_PARTITION* p_part);
-s32 VFipdm_part_get_permission(struct PDM_PARTITION* p_part);
-s32 VFipdm_part_release_permission(struct PDM_PARTITION* p_part, u32 mode);
-s32 VFipdm_part_format(struct PDM_PARTITION* p_part, const u8* param);
-s32 VFipdm_part_logical_read(struct PDM_PARTITION* p_part, u8* buf, u32 lsector, u32 num_sector, u16 bps, u32* p_num_success);
-s32 VFipdm_part_logical_write(struct PDM_PARTITION* p_part, const u8* buf, u32 lsector, u32 num_sector, u16 bps, u32* p_num_success);
-s32 VFipdm_part_get_media_information(struct PDM_PARTITION* p_part, struct PDM_DISK_INFO* p_disk_info);
-s32 VFipdm_part_check_media_write_protect(struct PDM_PARTITION* p_part, u32* is_wprotect);
-s32 VFipdm_part_check_media_insert(struct PDM_PARTITION* p_part, u32* is_insert);
-s32 VFipdm_part_check_media_detect(struct PDM_PARTITION* p_part, u32* is_detect);
-void VFipdm_part_set_change_media_state(struct PDM_DISK* p_disk, u32 event);
-void VFipdm_part_set_driver_error_code(struct PDM_PARTITION* p_part, s32 error_code);
-s32 VFipdm_part_get_driver_error_code(struct PDM_PARTITION* p_part);
-
-// Other functions called by main functions. These should NOT need to be implemented. They are here for reference only.
-s32 VFipdm_mbr_get_mbr_part_table(struct PDM_DISK* p_disk, struct PDM_MBR* p_mbr_tbl);
-s32 VFipdm_mbr_get_epbr_part_table(struct PDM_DISK* p_disk, struct PDM_MBR* p_mbr_tbl);
-s32 VFipdm_disk_get_media_information(struct PDM_DISK* p_disk, struct PDM_DISK_INFO* p_disk_info);
-s32 VFipdm_disk_get_lba_size(struct PDM_DISK* p_disk, u16* p_lba_size);
-s32 VFipdm_disk_check_media_insert(struct PDM_DISK* p_disk, u32* is_insert);
-s32 VFipdm_disk_set_disk(struct PDM_DISK* p_disk, struct PDM_PARTITION* p_part);
-s32 VFipdm_disk_get_part_permission(struct PDM_DISK* p_disk);
-s32 VFipdm_disk_release_part_permission(struct PDM_DISK* p_disk, u32 mode);
-s32 VFipdm_disk_format(struct PDM_DISK* p_disk, const u8* param);
-s32 VFipdm_disk_physical_read(struct PDM_DISK* p_disk, u8* buf, u32 psector, u32 num_sector, u16 bps, u32* p_num_success);
-s32 VFipdm_disk_physical_write(struct PDM_DISK* p_disk, const u8* buf, u32 psector, u32 num_sector, u16 bps, u32* p_num_success);
-
 extern PDM_DISK_SET VFipdm_disk_set;
 
 static s32 VFipdm_part_search_handle(struct PDM_PARTITION* p_part, struct PDM_PARTITION* lp_part, u16* p_handle_no) {
@@ -92,28 +61,27 @@ s32 VFipdm_part_get_start_sector(struct PDM_PARTITION* p_part) {
             p_part->total_sector = mbr_tbl.partition_table[part_id].lba_num_sectors;
             p_part->partition_type = mbr_tbl.partition_table[part_id].partition_type;
             p_part->mbr_sector = mbr_tbl.current_sector;
-            goto end;
-        }
-
-        part_index = 4;
-        while (1) {
-            err = VFipdm_mbr_get_epbr_part_table(p_part->p_disk, &mbr_tbl);
-            if (err != 0 && err != 6) {
-                return err;
-            }
-
-            if (err != 6) {
-                if (part_id == part_index) {
-                    p_part->start_sector = mbr_tbl.partition_table[0].lba_start_sector;
-                    p_part->total_sector = mbr_tbl.partition_table[0].lba_num_sectors;
-                    p_part->partition_type = mbr_tbl.partition_table[0].partition_type;
-                    p_part->mbr_sector = mbr_tbl.current_sector;
-                    goto end;
+        } else {
+            part_index = 4;
+            while (1) {
+                err = VFipdm_mbr_get_epbr_part_table(p_part->p_disk, &mbr_tbl);
+                if (err != 0 && err != 6) {
+                    return err;
                 }
-            } else {
-                return 7;
+
+                if (err != 6) {
+                    if (part_id == part_index) {
+                        p_part->start_sector = mbr_tbl.partition_table[0].lba_start_sector;
+                        p_part->total_sector = mbr_tbl.partition_table[0].lba_num_sectors;
+                        p_part->partition_type = mbr_tbl.partition_table[0].partition_type;
+                        p_part->mbr_sector = mbr_tbl.current_sector;
+                        break;
+                    }
+                } else {
+                    return 7;
+                }
+                part_index++;
             }
-            part_index++;
         }
     } else {
         if (part_id >= 1) {
@@ -128,7 +96,6 @@ s32 VFipdm_part_get_start_sector(struct PDM_PARTITION* p_part) {
         p_part->partition_type = 0;
         p_part->mbr_sector = 0;
     }
-end:
     return 0;
 }
 
@@ -350,8 +317,10 @@ s32 VFipdm_part_get_permission(struct PDM_PARTITION* p_part) {
 
 s32 VFipdm_part_release_permission(struct PDM_PARTITION* p_part, u32 mode) {
     s32 err;
-    s32 ret = 0;
+    s32 ret;
     struct PDM_PARTITION* lp_part;
+
+    ret = 0;
 
     if (p_part == NULL) {
         return 1;

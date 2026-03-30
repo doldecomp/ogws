@@ -1,31 +1,12 @@
 #include <revolution/VF.h>
 
-u32 VFiPFENT_compareAttr(u8 attr, u8 attr_required, u8 attr_unwanted);
-s32 VFiPFENT_compareEntryName(struct PF_DIR_ENT* p_ent, struct PF_STR* p_pattern, u8 attr);
-s32 VFiPFENT_getEntry(struct PF_DIR_ENT* p_ent, struct PF_ENT_ITER* p_iter, struct PF_STR* p_pattern, u8 attr_required, u8 attr_unwanted, u32* logical_index);
-s32 VFiPFENT_searchEmptyTailSFN(struct PF_FFD* p_ffd, u32 tail_index, const s8* pattern, u32* p_tail_bit);
-s32 VFiPFENT_findEmptyTailSFN(struct PF_DIR_ENT* p_ent_containig_dir, const s8* name, u32* p_tails);
-u8 VFiPFENT_CalcCheckSum(struct PF_DIR_ENT* p_ent);
-void VFiPFENT_LoadShortNameFromBuf(struct PF_DIR_ENT* p_ent, const u8* buf);
-void VFiPFENT_loadEntryNumericFieldsFromBuf(struct PF_DIR_ENT* p_ent, const u8* buf);
-s32 VFiPFENT_LoadLFNEntryFieldsFromBuf(struct PF_DIR_ENT* p_ent, const u8* buf);
-void VFiPFENT_storeLFNEntryFieldsToBuf(u8* buf, struct PF_DIR_ENT* p_ent, u8 ord, u8 sum, u32 is_last);
-s32 VFiPFENT_findEntryPos(struct PF_FFD* p_ffd, struct PF_DIR_ENT* p_ent, u32 index_search_from, struct PF_STR* p_pattern, u8 attr_required, u8 attr_unwanted, u32* p_lpos, u32* p_ppos);
-s32 VFiPFENT_findEntry(struct PF_FFD* p_ffd, struct PF_DIR_ENT* p_ent, u32 index_search_from, struct PF_STR* p_pattern, u8 attr_required, u8 attr_unwanted);
-s32 VFiPFENT_allocateEntryPos(struct PF_DIR_ENT* p_ent, u8 num_entries, struct PF_FFD* p_ffd, u32* p_next_chain, struct PF_STR* p_filename, u32* p_pos);
-s32 VFiPFENT_allocateEntry(struct PF_DIR_ENT* p_ent, u8 num_entries, struct PF_FFD* p_ffd, u32* p_next_chain, struct PF_STR* p_filename);
-s32 VFiPFENT_GetRootDir(struct PF_VOLUME* p_vol, struct PF_DIR_ENT* p_ent);
-s32 VFiPFENT_MakeRootDir(struct PF_VOLUME* p_vol);
-s32 VFiPFENT_updateEntry(struct PF_DIR_ENT* p_ent, u32 flag);
-s32 VFiPFENT_AdjustSFN(struct PF_DIR_ENT* p_ent, s8* p_s16_name);
-s32 VFiPFENT_RemoveEntry(struct PF_DIR_ENT* p_ent, struct PF_ENT_ITER* p_iter);
-u8 VFiPFENT_getcurrentDateTimeForEnt(u16* p_date, u16* p_time);
-
 extern PF_VOLUME_SET VFipf_vol_set;
 static u8 FAT_DELETED = 0xE5;
 
-u32 VFiPFENT_compareAttr(u8 attr, u8 attr_required, u8 attr_unwanted) {
-    u32 is_valid = 1;
+static u32 VFiPFENT_compareAttr(u8 attr, u8 attr_required, u8 attr_unwanted) {
+    u32 is_valid;
+
+    is_valid = 1;
     if (attr == 0) {
         attr = 0x40;
     }
@@ -43,24 +24,18 @@ u32 VFiPFENT_compareAttr(u8 attr, u8 attr_required, u8 attr_unwanted) {
     return is_valid;
 }
 
-s32 VFiPFENT_compareEntryName(struct PF_DIR_ENT* p_ent, struct PF_STR* p_pattern, u8 attr) {
-    s32 is_match = 1;
-    u8 buf[11];
-    u8 sum;
-    u16 i;
+static s32 VFiPFENT_compareEntryName(struct PF_DIR_ENT* p_ent, struct PF_STR* p_pattern, u8 attr) {
+    s32 is_match;
 
+    // TODO: dumb hack to prevent inlining
+    s32 i;
+    for (i = 0; i < 0; i++) {
+    }
+
+    is_match = 1;
     if (p_ent->num_entry_LFNs != 0 && p_ent->ordinal == 1) {
-        VFiPFPATH_putShortName(buf, (s8*)p_ent->short_name, 0);
-        sum = 0;
-        for (i = 0; i < 0xB; i++) {
-            sum = (sum >> 1) + (((sum & 1) != 0) ? 0x80 : 0) + buf[i];
-        }
-        if (p_ent->check_sum == sum) {
-            if (VFiPFPATH_cmpNameUni((u16*)p_ent, p_pattern) == 0) {
-                is_match = 0;
-            } else {
-                is_match = 1;
-            }
+        if (p_ent->check_sum == VFiPFENT_CalcCheckSum(p_ent)) {
+            is_match = !(VFiPFPATH_cmpNameUni((u16*)p_ent, p_pattern) == 0);
         }
     }
 
@@ -79,7 +54,7 @@ s32 VFiPFENT_compareEntryName(struct PF_DIR_ENT* p_ent, struct PF_STR* p_pattern
     return is_match;
 }
 
-s32 VFiPFENT_getEntry(struct PF_DIR_ENT* p_ent, struct PF_ENT_ITER* p_iter, struct PF_STR* p_pattern, u8 attr_required, u8 attr_unwanted, u32* logical_index) {
+static s32 VFiPFENT_getEntry(struct PF_DIR_ENT* p_ent, struct PF_ENT_ITER* p_iter, struct PF_STR* p_pattern, u8 attr_required, u8 attr_unwanted, u32* logical_index) {
     s32 err;
     s32 is_match;
     u32 is_valid;
@@ -167,7 +142,7 @@ s32 VFiPFENT_getEntry(struct PF_DIR_ENT* p_ent, struct PF_ENT_ITER* p_iter, stru
     return 0;
 }
 
-s32 VFiPFENT_searchEmptyTailSFN(struct PF_FFD* p_ffd, u32 tail_index, const s8* pattern, u32* p_tail_bit) {
+static s32 VFiPFENT_searchEmptyTailSFN(struct PF_FFD* p_ffd, u32 tail_index, const s8* pattern, u32* p_tail_bit) {
     struct PF_ENT_ITER iter;
     u8 attr;
     s32 err;
@@ -215,7 +190,7 @@ s32 VFiPFENT_searchEmptyTailSFN(struct PF_FFD* p_ffd, u32 tail_index, const s8* 
     return 0;
 }
 
-s32 VFiPFENT_findEmptyTailSFN(struct PF_DIR_ENT* p_ent_containig_dir, const s8* name, u32* p_tails) {
+static s32 VFiPFENT_findEmptyTailSFN(struct PF_DIR_ENT* p_ent_containig_dir, const s8* name, u32* p_tails) {
     struct PF_FFD ffd;
     struct PF_FAT_HINT hint;
     s32 err;
@@ -405,9 +380,7 @@ s32 VFiPFENT_findEntryPos(struct PF_FFD* p_ffd, struct PF_DIR_ENT* p_ent, u32 in
     struct PF_ENT_ITER iter;
     u32 logical_index;
     u32 is_extsfn;
-    u32 start_idx;
 
-    start_idx = index_search_from;
     is_extsfn = 0;
 
     if (!p_ffd) {
@@ -451,13 +424,13 @@ s32 VFiPFENT_findEntryPos(struct PF_FFD* p_ffd, struct PF_DIR_ENT* p_ent, u32 in
     logical_index = 0;
 
     if ((VFipf_vol_set.setting & 2) == 2) {
-        is_extsfn = VFiPFPATH_GetExtShortNameIndex(p_pattern, &start_idx);
+        is_extsfn = VFiPFPATH_GetExtShortNameIndex(p_pattern, &index_search_from);
     }
 
     iter.ffd = *p_ffd;
 
     if (is_extsfn == 1) {
-        err = VFiPFENT_ITER_IteratorInitialize(&iter, start_idx - 1);
+        err = VFiPFENT_ITER_IteratorInitialize(&iter, index_search_from - 1);
         if (err != 0) {
             *p_lpos = 999999;
             *p_ppos = 999999;
@@ -473,7 +446,7 @@ s32 VFiPFENT_findEntryPos(struct PF_FFD* p_ffd, struct PF_DIR_ENT* p_ent, u32 in
         }
 
         if ((iter.buf[0] & 0x40) != 0) {
-            err = VFiPFENT_ITER_IteratorInitialize(&iter, start_idx);
+            err = VFiPFENT_ITER_IteratorInitialize(&iter, index_search_from);
             if (err != 0) {
                 *p_lpos = 999999;
                 *p_ppos = 999999;
@@ -491,7 +464,7 @@ s32 VFiPFENT_findEntryPos(struct PF_FFD* p_ffd, struct PF_DIR_ENT* p_ent, u32 in
         }
 
     } else {
-        err = VFiPFENT_ITER_IteratorInitialize(&iter, start_idx);
+        err = VFiPFENT_ITER_IteratorInitialize(&iter, index_search_from);
         while (VFiPFENT_ITER_IsAtLogicalEnd(&iter) == 0) {
             if (err != 0) {
                 *p_lpos = 999999;
@@ -812,26 +785,26 @@ s32 VFiPFENT_updateEntry(struct PF_DIR_ENT* p_ent, u32 flag) {
     return (success_size != 32) ? 17 : 0;
 }
 
-s32 VFiPFENT_AdjustSFN(struct PF_DIR_ENT* p_ent, s8* p_s16_name) {
+s32 VFiPFENT_AdjustSFN(struct PF_DIR_ENT* p_ent, s8* p_short_name) {
     u32 i;
     u32 tail_num;
     s32 err;
 
-    for (i = 1; p_s16_name[i] != 126 && p_s16_name[i] != 0 && i < 7; ++i) {
+    for (i = 1; p_short_name[i] != 126 && p_short_name[i] != 0 && i < 7; ++i) {
     }
 
-    if (i < 7 && p_s16_name[i] == 126) {
-        for (i = i + 1; p_s16_name[i] >= 48 && p_s16_name[i] <= 57; ++i) {
+    if (i < 7 && p_short_name[i] == 126) {
+        for (i = i + 1; p_short_name[i] >= 48 && p_short_name[i] <= 57; ++i) {
         }
 
-        if (p_s16_name[i] == 46 || p_s16_name[i] == 0) {
-            err = VFiPFENT_findEmptyTailSFN(p_ent, p_s16_name, &tail_num);
+        if (p_short_name[i] == 46 || p_short_name[i] == 0) {
+            err = VFiPFENT_findEmptyTailSFN(p_ent, p_short_name, &tail_num);
             if (err != 0) {
                 return err;
             }
 
             if (tail_num != 1) {
-                VFiPFPATH_parseShortNameNumeric(p_s16_name, tail_num);
+                VFiPFPATH_parseShortNameNumeric(p_short_name, tail_num);
             }
         }
     }

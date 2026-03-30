@@ -143,9 +143,9 @@ s32 VFiPFSEC_WriteData(struct PF_VOLUME* p_vol, const u8* p_buf, u32 sector, u16
     s32 err;
     struct PF_CACHE_PAGE* p_page;
     u32 num_success;
-    u32 num_sector;     // Present in DWARF but unused here.
-    u32 adjust_sector;  // Present in DWARF but unused here.
-    u32 rest_sector;    // Present in DWARF but unused here.
+    u32 num_sector;
+    u32 adjust_sector;
+    u32 rest_sector;
 
     *p_success_size = 0;
 
