@@ -5,25 +5,28 @@
 #include <revolution/NWC24/NWC24Config.h>
 #include <revolution/NWC24/NWC24Download.h>
 #include <revolution/NWC24/NWC24FriendList.h>
+#include <revolution/NWC24/NWC24MBoxCtrl.h>
 #include <revolution/NWC24/NWC24SecretFList.h>
 #include <revolution/NWC24/NWC24Types.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
 
 #define NWC24_IO_BUFFER_SIZE 512
+#define NWC24_STRING_WORK_SIZE 1024
+#define NWC24_PATH_WORK_SIZE 256
 
 #define WORK_SIZE(x) (ROUND_UP(sizeof(x), 0x100))
 typedef struct NWC24Work {
-    char stringWork[1024]; // at 0x0
+    char stringWork[NWC24_STRING_WORK_SIZE]; // at 0x0
     char WORK_0x400[0x800 - 0x400];
-    char pathWork[128]; // at 0x800
-    char WORK_0x880[0x900 - 0x880];
+    char pathWork[NWC24_PATH_WORK_SIZE];  // at 0x800
     u8 readBuffer[NWC24_IO_BUFFER_SIZE];  // at 0x900
     u8 writeBuffer[NWC24_IO_BUFFER_SIZE]; // at 0xB00
     u8 config[WORK_SIZE(NWC24Config)];    // at 0xD00
-    char WORK_0x1100[128];
-    char WORK_0x1180[128];
+    NWC24MBCHeader sendCtrl;              // at 0x1100
+    NWC24MBCHeader recvCtrl;              // at 0x1180
     char WORK_0x1200[128];
     char WORK_0x1280[128];
     s8 base64Work[256]; // at 0x1300

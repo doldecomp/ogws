@@ -1,7 +1,7 @@
 #include <revolution/NWC24.h>
-
 #include <revolution/OS.h>
 #include <revolution/VF.h>
+#include <revolution/version.h>
 
 #define MANAGE_ERROR_CODE_BASE 109000
 
@@ -18,8 +18,7 @@ typedef enum {
     NWC24_FAIL_FATAL = (1 << 2)
 } NWC24FailFlag;
 
-const char* __NWC24Version = "<< RVL_SDK - NWC24 \trelease build: May 10 2007 "
-                             "17:58:59 (0x4199_60831) >>";
+RVL_LIB_VERSION(NWC24, "May 10 2007", "17:58:59", "0x4199_60831");
 
 NWC24Work* NWC24WorkP = NULL;
 
