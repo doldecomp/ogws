@@ -32,8 +32,8 @@ typedef struct NWC24Config {
     u32 checksum;        // at 0x3FC
 } NWC24Config;
 
-NWC24Err NWC24GetMyUserId(u64* idOut);
-NWC24Err NWC24GenerateNewUserId(u64* idOut);
+NWC24Err NWC24GetMyUserId(u64* pId);
+NWC24Err NWC24GenerateNewUserId(u64* pId);
 NWC24Err NWC24iConfigOpen(void);
 NWC24Err NWC24iConfigReload(void);
 NWC24Err NWC24iConfigFlush(void);
