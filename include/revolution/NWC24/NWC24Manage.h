@@ -6,6 +6,7 @@
 #include <revolution/NWC24/NWC24Download.h>
 #include <revolution/NWC24/NWC24FriendList.h>
 #include <revolution/NWC24/NWC24MBoxCtrl.h>
+#include <revolution/NWC24/NWC24Mime.h>
 #include <revolution/NWC24/NWC24SecretFList.h>
 #include <revolution/NWC24/NWC24Types.h>
 
@@ -29,7 +30,7 @@ typedef struct NWC24Work {
     NWC24MBCHeader recvCtrl;              // at 0x1180
     char WORK_0x1200[128];
     char WORK_0x1280[128];
-    s8 base64Work[256]; // at 0x1300
+    char base64Work[NWC24_BASE64_TABLE_SIZE]; // at 0x1300
     char WORK_0x1400[0x2400 - 0x1400];
     u8 flHeader[WORK_SIZE(NWC24FLHeader)];             // at 0x2800
     u8 secretFlHeader[WORK_SIZE(NWC24SecretFLHeader)]; // at 0x2800
