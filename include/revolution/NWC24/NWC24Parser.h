@@ -9,8 +9,8 @@ extern "C" {
 
 const char* NWC24GetMIMETypeStr(NWC24MIMEType type);
 const char* NWC24iGetMIMETypeSuffix(NWC24MIMEType type);
-const char* NWC24GetCharsetStr(NWC24Charset set);
-const char* NWC24GetEncodingStr(NWC24Encoding enc);
+const char* NWC24GetCharsetStr(NWC24Charset charset);
+const char* NWC24GetEncodingStr(NWC24Encoding encoding);
 
 #ifdef __cplusplus
 }
