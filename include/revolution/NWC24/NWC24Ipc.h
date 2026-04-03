@@ -2,23 +2,23 @@
 #define RVL_SDK_NWC24_IPC_H
 #include <types.h>
 
+#include <revolution/IPC.h>
 #include <revolution/NWC24/NWC24Types.h>
 
-#include <revolution/IPC.h>
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-NWC24Err NWC24iOpenResourceManager(const char* user, const char* name,
-                                   s32* fdOut, IPCOpenMode mode);
-NWC24Err NWC24iCloseResourceManager(const char* user, s32 fd);
+NWC24Err NWC24iOpenResourceManager(const char* pUser, const char* pName,
+                                   s32* pFd, IPCOpenMode mode);
+NWC24Err NWC24iCloseResourceManager(const char* pUser, s32 fd);
 
-NWC24Err NWC24iIoctlResourceManager(const char* user, s32 fd, s32 type,
-                                    void* in, s32 inSize, void* out,
+NWC24Err NWC24iIoctlResourceManager(const char* pUser, s32 fd, s32 type,
+                                    void* pIn, s32 inSize, void* pOut,
                                     s32 outSize);
-NWC24Err NWC24iIoctlResourceManagerAsync(const char* user, s32 fd, s32 type,
-                                         void* in, s32 inSize, void* out,
-                                         s32 outSize, void* callbackArg);
+NWC24Err NWC24iIoctlResourceManagerAsync(const char* pUser, s32 fd, s32 type,
+                                         void* pIn, s32 inSize, void* pOut,
+                                         s32 outSize, void* pCallbackArg);
 
 BOOL NWC24iIsAsyncRequestPending(void);
 
