@@ -9,10 +9,12 @@
 extern "C" {
 #endif
 
+NWC24Err NWC24iDateToMinutes(s32* pMinutes, const NWC24Date* pDate);
+s32 NWC24iGetDayOfWeek(u16 year, u8 month, u8 day);
+NWC24Err NWC24iEpochSecondsToDate(NWC24Date* pDate, s64 timestamp);
+NWC24Err NWC24iDateToOSCalendarTime(OSCalendarTime* pOSTime,
+                                    const NWC24Date* pDate);
 NWC24Err NWC24iIsValidDate(u16 year, u8 month, u8 day);
-NWC24Err NWC24iEpochSecondsToDate(NWC24Date* date, s64 timestamp);
-NWC24Err NWC24iDateToOSCalendarTime(OSCalendarTime* time,
-                                    const NWC24Date* date);
 
 #ifdef __cplusplus
 }
