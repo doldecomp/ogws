@@ -13,9 +13,9 @@ typedef enum {
 } NWC24LibState;
 
 typedef enum {
-    NWC24_FAIL_SFL = (1 << 0),
-    NWC24_FAIL_DL_TASK = (1 << 1),
-    NWC24_FAIL_FATAL = (1 << 2)
+    NWC24_FAIL_SFL = 1 << 0,
+    NWC24_FAIL_DL_TASK = 1 << 1,
+    NWC24_FAIL_FATAL = 1 << 2
 } NWC24FailFlag;
 
 RVL_LIB_VERSION(NWC24, "May 10 2007", "17:58:59", "0x4199_60831");
@@ -27,7 +27,8 @@ static u32 YouGotMail = 0;
 static u32 GlobalErrorCode = 0;
 static BOOL Registered = FALSE;
 
-static NWC24Err NWC24OpenLibInternal(NWC24Work* work, NWC24LibState state);
+// Forward declarations
+static NWC24Err NWC24OpenLibInternal(NWC24Work* pWork, NWC24LibState state);
 
 void NWC24iRegister(void) {
     if (Registered) {
@@ -38,15 +39,15 @@ void NWC24iRegister(void) {
     Registered = TRUE;
 }
 
-NWC24Err NWC24OpenLib(NWC24Work* work) {
+NWC24Err NWC24OpenLib(NWC24Work* pWork) {
     if (Opened == NWC24_LIB_OPENED_BY_TOOL) {
         return NWC24_ERR_BUSY;
     }
 
-    return NWC24OpenLibInternal(work, NWC24_LIB_OPENED);
+    return NWC24OpenLibInternal(pWork, NWC24_LIB_OPENED);
 }
 
-static NWC24Err NWC24OpenLibInternal(NWC24Work* work, NWC24LibState state) {
+static NWC24Err NWC24OpenLibInternal(NWC24Work* pWork, NWC24LibState state) {
     NWC24Err result;
     NWC24Err failErr;
     u32 failFlag;
@@ -65,11 +66,11 @@ static NWC24Err NWC24OpenLibInternal(NWC24Work* work, NWC24LibState state) {
         return NWC24_ERR_BUSY;
     }
 
-    if (work == NULL) {
+    if (pWork == NULL) {
         return NWC24_ERR_NULL;
     }
 
-    if ((uintptr_t)work % 32 != 0) {
+    if ((uintptr_t)pWork % 32 != 0) {
         return NWC24_ERR_ALIGNMENT;
     }
 
@@ -78,7 +79,7 @@ static NWC24Err NWC24OpenLibInternal(NWC24Work* work, NWC24LibState state) {
         NWC24iRegister();
 
         YouGotMail &= ~(1 << NWC24_MSGTYPE_RVL_MENU_SHARED);
-        NWC24WorkP = work;
+        NWC24WorkP = pWork;
 
         NWC24InitBase64Table(NWC24WorkP->base64Work);
 

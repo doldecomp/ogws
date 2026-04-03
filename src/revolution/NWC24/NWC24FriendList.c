@@ -5,6 +5,7 @@
 
 static const char* FLFilePath = "/shared2/wc24/nwc24fl.bin";
 
+// Forward declarations
 static NWC24Err GetCachedFLHeader(NWC24FLHeader** ppHeader);
 
 NWC24Err NWC24iOpenFriendList(void) {

@@ -2,6 +2,7 @@
 
 static BOOL NWC24iIsRequestPending = FALSE;
 
+// Forward declarations
 static s32 CallbackAsyncIpc(s32 result, void* pArg);
 
 NWC24Err NWC24iOpenResourceManager(const char* /* pUser */, const char* pName,

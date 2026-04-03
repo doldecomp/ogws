@@ -42,7 +42,7 @@ typedef struct NWC24Work {
 extern NWC24Work* NWC24WorkP;
 
 void NWC24iRegister(void);
-NWC24Err NWC24OpenLib(NWC24Work* work);
+NWC24Err NWC24OpenLib(NWC24Work* pWork);
 NWC24Err NWC24CloseLib(void);
 BOOL NWC24IsMsgLibOpened(void);
 BOOL NWC24IsMsgLibOpenedByTool(void);

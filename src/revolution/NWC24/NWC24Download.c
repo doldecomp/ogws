@@ -4,6 +4,7 @@
 
 static const char* DLFilePath = "/shared2/wc24/nwc24dl.bin";
 
+// Forward declarations
 static BOOL IsPrivateId(u16 id);
 static NWC24DlEntry* GetDlTaskEntryHeader(u16 id);
 static NWC24Err WriteDlHeader(NWC24File* pFile);

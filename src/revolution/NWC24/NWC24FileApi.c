@@ -18,6 +18,7 @@ static u32 RdBufferMutex = 0;
 static u32 WrBufferMutex = 0;
 static u32 InstanceIdGen = 0;
 
+// Forward declarations
 static NWC24Err BufferedWrite(const void* pSrc, s32 size, NWC24File* pFile);
 static NWC24Err BufferedWriteFlush(NWC24File* pFile);
 static NWC24Err BufferedRead(void* pDst, s32 size, NWC24File* pFile);
