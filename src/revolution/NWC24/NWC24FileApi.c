@@ -7,7 +7,10 @@
 
 // Set MSB after buffered read to "invalidate" align.
 // Requires new seek operation before every buffered read.
-#define INVALIDATE_ALIGN 0x80000000
+#define INVALIDATE_ALIGN (1 << 31)
+
+// Set MSB to signify that the unique ID has been initialized
+#define INSTANCE_IDGEN_INIT (1 << 31)
 
 #define SLEEP_MSEC(x) OSSleepTicks(OS_MSEC_TO_TICKS((s64)(x)))
 
@@ -15,20 +18,20 @@ static u32 RdBufferMutex = 0;
 static u32 WrBufferMutex = 0;
 static u32 InstanceIdGen = 0;
 
-static NWC24Err BufferedWrite(const void* src, s32 size, NWC24File* file);
-static NWC24Err BufferedWriteFlush(NWC24File* file);
-static NWC24Err BufferedRead(void* dst, s32 size, NWC24File* file);
-static NWC24Err AlignedSeek(NWC24File* file, s32 offset, NWC24SeekMode whence);
+static NWC24Err BufferedWrite(const void* pSrc, s32 size, NWC24File* pFile);
+static NWC24Err BufferedWriteFlush(NWC24File* pFile);
+static NWC24Err BufferedRead(void* pDst, s32 size, NWC24File* pFile);
+static NWC24Err AlignedSeek(NWC24File* pFile, s32 offset, NWC24SeekMode whence);
 static NWC24Err ConvertError(s32 nanderr, NWC24Err wc24err);
 static NWC24Err ConvertVfError(s32 vferr, NWC24Err wc24err);
 
-NWC24Err NWC24FOpen(NWC24File* file, const char* path, u32 mode) {
+NWC24Err NWC24FOpen(NWC24File* pFile, const char* pPath, u32 mode) {
     InstanceIdGen++;
-    InstanceIdGen |= 0x80000000;
+    InstanceIdGen |= INSTANCE_IDGEN_INIT;
 
-    file->id = InstanceIdGen;
-    file->align = 0;
-    file->mode = mode;
+    pFile->id = InstanceIdGen;
+    pFile->align = 0;
+    pFile->mode = mode;
 
     if (mode == NWC24_OPEN_NAND_WBUFF || mode == NWC24_OPEN_NAND_RBUFF ||
         mode == NWC24_OPEN_VF_WBUFF || mode == NWC24_OPEN_VF_RBUFF) {
@@ -43,43 +46,50 @@ NWC24Err NWC24FOpen(NWC24File* file, const char* path, u32 mode) {
             return NWC24_ERR_MUTEX;
         }
 
-        WrBufferMutex = file->id;
+        WrBufferMutex = pFile->id;
     }
 
     if (mode & NWC24_OPEN_VF) {
-        return NWC24iFOpenVF(file, path, mode);
+        return NWC24iFOpenVF(pFile, pPath, mode);
     }
 
-    return NWC24iFOpenNand(file, path, mode);
+    return NWC24iFOpenNand(pFile, pPath, mode);
 }
 
-NWC24Err NWC24iFOpenNand(NWC24File* file, const char* path, u32 mode) {
+NWC24Err NWC24iFOpenNand(NWC24File* pFile, const char* pPath, u32 mode) {
     s32 result;
     NANDAccessType access;
     u32 i;
 
     switch (mode) {
     case NWC24_OPEN_NAND_W:
-    case NWC24_OPEN_NAND_WBUFF:
-        result = NANDPrivateCreate(path, NAND_PERM_RWALL, 0);
+    case NWC24_OPEN_NAND_WBUFF: {
+        result = NANDPrivateCreate(pPath, NAND_PERM_RWALL, 0);
         if (result != NAND_RESULT_OK && result != NAND_RESULT_EXISTS) {
             return NWC24_ERR_FILE_OTHER;
         }
         access = NAND_ACCESS_WRITE;
         break;
+    }
+
     case NWC24_OPEN_NAND_R:
-    case NWC24_OPEN_NAND_RBUFF:
+    case NWC24_OPEN_NAND_RBUFF: {
         access = NAND_ACCESS_READ;
         break;
-    case NWC24_OPEN_NAND_RW:
+    }
+
+    case NWC24_OPEN_NAND_RW: {
         access = NAND_ACCESS_RW;
         break;
-    default:
+    }
+
+    default: {
         return NWC24_ERR_INVALID_VALUE;
+    }
     }
 
     for (i = 0; i < NAND_RETRY_COUNT; i++) {
-        result = NANDPrivateOpen(path, &file->nandf, access);
+        result = NANDPrivateOpen(pPath, &pFile->nandf, access);
         if (result != NAND_RESULT_BUSY) {
             break;
         }
@@ -102,26 +112,31 @@ NWC24Err NWC24iFOpenNand(NWC24File* file, const char* path, u32 mode) {
     return NWC24_OK;
 }
 
-NWC24Err NWC24iFOpenVF(NWC24File* file, const char* path, u32 mode) {
+NWC24Err NWC24iFOpenVF(NWC24File* pFile, const char* pPath, u32 mode) {
     s32 result;
     const char* access;
 
     switch (mode) {
     case NWC24_OPEN_VF_W:
-    case NWC24_OPEN_VF_WBUFF:
+    case NWC24_OPEN_VF_WBUFF: {
         access = "w";
         break;
-    case NWC24_OPEN_VF_R:
-    case NWC24_OPEN_VF_RBUFF:
-        access = "r";
-        break;
-    default:
-        return NWC24_ERR_INVALID_VALUE;
     }
 
-    file->vff = VFOpenFile(path, access, 0);
+    case NWC24_OPEN_VF_R:
+    case NWC24_OPEN_VF_RBUFF: {
+        access = "r";
+        break;
+    }
 
-    if (file->vff == NULL) {
+    default: {
+        return NWC24_ERR_INVALID_VALUE;
+    }
+    }
+
+    pFile->vff = VFOpenFile(pPath, access, 0);
+
+    if (pFile->vff == NULL) {
         result = VFGetLastError();
 
         if (mode == NWC24_OPEN_VF_WBUFF) {
@@ -138,26 +153,27 @@ NWC24Err NWC24iFOpenVF(NWC24File* file, const char* path, u32 mode) {
     return NWC24_OK;
 }
 
-NWC24Err NWC24FClose(NWC24File* file) {
+NWC24Err NWC24FClose(NWC24File* pFile) {
     NWC24Err close = NWC24_OK;
     NWC24Err read = NWC24_OK;
 
-    if (file->mode == NWC24_OPEN_NAND_WBUFF ||
-        file->mode == NWC24_OPEN_VF_WBUFF) {
-        read = BufferedWriteFlush(file);
+    if (pFile->mode == NWC24_OPEN_NAND_WBUFF ||
+        pFile->mode == NWC24_OPEN_VF_WBUFF) {
+
+        read = BufferedWriteFlush(pFile);
         WrBufferMutex = 0;
     }
 
-    if (file->mode & NWC24_OPEN_VF) {
-        close = NWC24iFCloseVF(file);
+    if (pFile->mode & NWC24_OPEN_VF) {
+        close = NWC24iFCloseVF(pFile);
     } else {
-        close = NWC24iFCloseNand(file);
+        close = NWC24iFCloseNand(pFile);
     }
 
     return read != NWC24_OK ? read : close;
 }
 
-NWC24Err NWC24iFCloseNand(NWC24File* file) {
+NWC24Err NWC24iFCloseNand(NWC24File* pFile) {
     s32 result;
     NWC24Err err;
     u32 i;
@@ -165,7 +181,7 @@ NWC24Err NWC24iFCloseNand(NWC24File* file) {
     err = NWC24_OK;
 
     for (i = 0; i < NAND_RETRY_COUNT; i++) {
-        result = NANDClose(&file->nandf);
+        result = NANDClose(&pFile->nandf);
         if (result != NAND_RESULT_BUSY) {
             break;
         }
@@ -182,10 +198,10 @@ NWC24Err NWC24iFCloseNand(NWC24File* file) {
     return err;
 }
 
-NWC24Err NWC24iFCloseVF(NWC24File* file) {
+NWC24Err NWC24iFCloseVF(NWC24File* pFile) {
     s32 result;
 
-    result = VFCloseFile(file->vff);
+    result = VFCloseFile(pFile->vff);
     if (result != VF_OK) {
         return ConvertVfError(result, NWC24_ERR_FILE_CLOSE);
     }
@@ -193,17 +209,18 @@ NWC24Err NWC24iFCloseVF(NWC24File* file) {
     return NWC24_OK;
 }
 
-NWC24Err NWC24FSeek(NWC24File* file, s32 offset, NWC24SeekMode whence) {
+NWC24Err NWC24FSeek(NWC24File* pFile, s32 offset, NWC24SeekMode whence) {
     s32 result;
     u32 i;
 
-    if (file->mode == NWC24_OPEN_NAND_RBUFF ||
-        file->mode == NWC24_OPEN_VF_RBUFF) {
-        return AlignedSeek(file, offset, whence);
+    if (pFile->mode == NWC24_OPEN_NAND_RBUFF ||
+        pFile->mode == NWC24_OPEN_VF_RBUFF) {
+
+        return AlignedSeek(pFile, offset, whence);
     }
 
-    if (file->mode & NWC24_OPEN_VF) {
-        result = VFSeekFile(file->vff, offset, whence);
+    if (pFile->mode & NWC24_OPEN_VF) {
+        result = VFSeekFile(pFile->vff, offset, whence);
         if (result != VF_OK) {
             return ConvertVfError(result, NWC24_ERR_FILE_OTHER);
         }
@@ -212,7 +229,7 @@ NWC24Err NWC24FSeek(NWC24File* file, s32 offset, NWC24SeekMode whence) {
     }
 
     for (i = 0; i < NAND_RETRY_COUNT; i++) {
-        result = NANDSeek(&file->nandf, offset, (NANDSeekMode)whence);
+        result = NANDSeek(&pFile->nandf, offset, (NANDSeekMode)whence);
         if (result != NAND_RESULT_BUSY) {
             break;
         }
@@ -227,22 +244,25 @@ NWC24Err NWC24FSeek(NWC24File* file, s32 offset, NWC24SeekMode whence) {
     return NWC24_OK;
 }
 
-NWC24Err NWC24FRead(void* dst, s32 size, NWC24File* file) {
+NWC24Err NWC24FRead(void* pDst, s32 size, NWC24File* pFile) {
     s32 result;
     u32 i;
 
-    switch (file->mode) {
+    switch (pFile->mode) {
     case NWC24_OPEN_NAND_W:
     case NWC24_OPEN_NAND_WBUFF:
-    case NWC24_OPEN_VF_W:
+    case NWC24_OPEN_VF_W: {
         return NWC24_ERR_PROTECTED;
-    case NWC24_OPEN_NAND_RBUFF:
-    case NWC24_OPEN_VF_RBUFF:
-        return BufferedRead(dst, size, file);
     }
 
-    if (file->mode & NWC24_OPEN_VF) {
-        result = VFReadFile(file->vff, dst, size, NULL);
+    case NWC24_OPEN_NAND_RBUFF:
+    case NWC24_OPEN_VF_RBUFF: {
+        return BufferedRead(pDst, size, pFile);
+    }
+    }
+
+    if (pFile->mode & NWC24_OPEN_VF) {
+        result = VFReadFile(pFile->vff, pDst, size, NULL);
         if (result != VF_OK) {
             return ConvertVfError(result, NWC24_ERR_FILE_READ);
         }
@@ -251,7 +271,7 @@ NWC24Err NWC24FRead(void* dst, s32 size, NWC24File* file) {
     }
 
     for (i = 0; i < NAND_RETRY_COUNT; i++) {
-        result = NANDRead(&file->nandf, dst, size);
+        result = NANDRead(&pFile->nandf, pDst, size);
         if (result != NAND_RESULT_BUSY) {
             break;
         }
@@ -270,23 +290,26 @@ NWC24Err NWC24FRead(void* dst, s32 size, NWC24File* file) {
     return NWC24_OK;
 }
 
-NWC24Err NWC24FWrite(const void* src, s32 size, NWC24File* file) {
+NWC24Err NWC24FWrite(const void* pSrc, s32 size, NWC24File* pFile) {
     s32 result;
     u32 i;
 
-    switch (file->mode) {
+    switch (pFile->mode) {
     case NWC24_OPEN_NAND_WBUFF:
-    case NWC24_OPEN_VF_WBUFF:
-        return BufferedWrite(src, size, file);
+    case NWC24_OPEN_VF_WBUFF: {
+        return BufferedWrite(pSrc, size, pFile);
+    }
+
     // @bug Missing NWC24_OPEN_VF_RBUFF
     case NWC24_OPEN_NAND_R:
     case NWC24_OPEN_NAND_RBUFF:
-    case NWC24_OPEN_VF_R:
+    case NWC24_OPEN_VF_R: {
         return NWC24_ERR_PROTECTED;
     }
+    }
 
-    if (file->mode & NWC24_OPEN_VF) {
-        result = VFWriteFile(file->vff, src, size);
+    if (pFile->mode & NWC24_OPEN_VF) {
+        result = VFWriteFile(pFile->vff, pSrc, size);
         if (result != VF_OK) {
             return ConvertVfError(result, NWC24_ERR_FILE_WRITE);
         }
@@ -295,7 +318,7 @@ NWC24Err NWC24FWrite(const void* src, s32 size, NWC24File* file) {
     }
 
     for (i = 0; i < NAND_RETRY_COUNT; i++) {
-        result = NANDWrite(&file->nandf, src, size);
+        result = NANDWrite(&pFile->nandf, pSrc, size);
         if (result != NAND_RESULT_BUSY) {
             break;
         }
@@ -318,20 +341,20 @@ NWC24Err NWC24FWrite(const void* src, s32 size, NWC24File* file) {
     return NWC24_OK;
 }
 
-NWC24Err NWC24FGetLength(NWC24File* file, u32* lengthOut) {
+NWC24Err NWC24FGetLength(NWC24File* pFile, u32* pLength) {
     s32 error;
 
-    if (file->mode & NWC24_OPEN_VF) {
-        error = VFGetFileSizeByFd(file->vff);
+    if (pFile->mode & NWC24_OPEN_VF) {
+        error = VFGetFileSizeByFd(pFile->vff);
         if (error < 0) {
             return ConvertVfError(error, NWC24_ERR_FILE_OTHER);
         }
 
-        *lengthOut = error;
+        *pLength = error;
         return NWC24_OK;
     }
 
-    error = NANDGetLength(&file->nandf, lengthOut);
+    error = NANDGetLength(&pFile->nandf, pLength);
     if (error != NAND_RESULT_OK) {
         return NWC24_ERR_FILE_OTHER;
     }
@@ -339,10 +362,10 @@ NWC24Err NWC24FGetLength(NWC24File* file, u32* lengthOut) {
     return NWC24_OK;
 }
 
-NWC24Err NWC24FDeleteVF(const char* path) {
+NWC24Err NWC24FDeleteVF(const char* pPath) {
     s32 result;
 
-    result = VFDeleteFile(path);
+    result = VFDeleteFile(pPath);
     if (result != VF_OK) {
         return ConvertVfError(result, NWC24_ERR_FILE_OTHER);
     }
@@ -350,10 +373,10 @@ NWC24Err NWC24FDeleteVF(const char* path) {
     return NWC24_OK;
 }
 
-NWC24Err NWC24MountVF(const char* drive, const char* filename) {
+NWC24Err NWC24MountVF(const char* pDrive, const char* pFileName) {
     s32 result;
 
-    result = VFMountDriveNANDFlashEx(drive, filename);
+    result = VFMountDriveNANDFlashEx(pDrive, pFileName);
     if (result == VF_ERROR_B001) {
         return NWC24_ERR_FILE_NOEXISTS;
     }
@@ -362,7 +385,7 @@ NWC24Err NWC24MountVF(const char* drive, const char* filename) {
         return ConvertVfError(result, NWC24_ERR_INTERNAL_VF);
     }
 
-    result = VFSetSyncMode(drive, VF_SYNC_MODE_1);
+    result = VFSetSyncMode(pDrive, VF_SYNC_MODE_1);
     if (result != VF_OK) {
         return ConvertVfError(result, NWC24_ERR_INTERNAL_VF);
     }
@@ -370,10 +393,10 @@ NWC24Err NWC24MountVF(const char* drive, const char* filename) {
     return NWC24_OK;
 }
 
-NWC24Err NWC24UnmountVF(const char* drive) {
+NWC24Err NWC24UnmountVF(const char* pDrive) {
     s32 result;
 
-    result = VFUnmountDrive(drive);
+    result = VFUnmountDrive(pDrive);
     if (result != VF_OK) {
         return ConvertVfError(result, NWC24_ERR_INTERNAL_VF);
     }
@@ -381,11 +404,11 @@ NWC24Err NWC24UnmountVF(const char* drive) {
     return NWC24_OK;
 }
 
-NWC24Err NWC24CheckSizeVF(const char* drive, u32* sizeOut) {
+NWC24Err NWC24CheckSizeVF(const char* pDrive, u32* pSize) {
     s32 size;
 
-    size = VFGetDriveFreeSize(drive);
-    *sizeOut = size;
+    size = VFGetDriveFreeSize(pDrive);
+    *pSize = size;
 
     if (size < 0) {
         return ConvertVfError(VFGetLastError(), NWC24_ERR_INTERNAL_VF);
@@ -394,20 +417,20 @@ NWC24Err NWC24CheckSizeVF(const char* drive, u32* sizeOut) {
     return NWC24_OK;
 }
 
-static NWC24Err BufferedWrite(const void* src, s32 size, NWC24File* file) {
+static NWC24Err BufferedWrite(const void* pSrc, s32 size, NWC24File* pFile) {
     u32 now;
     u32 left;
     u32 pos;
-    u8* buf;
-    const u8* bsrc;
+    u8* pBuf;
+    const u8* pByteSrc;
     s32 result;
     NWC24Err err;
     u32 i;
 
     left = size;
-    pos = file->align;
-    buf = NWC24WorkP->writeBuffer;
-    bsrc = (u8*)src;
+    pos = pFile->align;
+    pBuf = NWC24WorkP->writeBuffer;
+    pByteSrc = (u8*)pSrc;
     err = NWC24_OK;
 
     while (left != 0) {
@@ -417,11 +440,11 @@ static NWC24Err BufferedWrite(const void* src, s32 size, NWC24File* file) {
             now = left;
         }
 
-        memcpy(buf + pos, bsrc, now);
+        memcpy(pBuf + pos, pByteSrc, now);
 
         pos += now;
         left -= now;
-        bsrc += now;
+        pByteSrc += now;
 
         if (pos < NWC24_IO_BUFFER_SIZE) {
             continue;
@@ -429,8 +452,8 @@ static NWC24Err BufferedWrite(const void* src, s32 size, NWC24File* file) {
 
         pos = 0;
 
-        if (file->mode & NWC24_OPEN_VF) {
-            result = VFWriteFile(file->vff, buf, NWC24_IO_BUFFER_SIZE);
+        if (pFile->mode & NWC24_OPEN_VF) {
+            result = VFWriteFile(pFile->vff, pBuf, NWC24_IO_BUFFER_SIZE);
             if (result == VF_OK) {
                 continue;
             }
@@ -440,7 +463,7 @@ static NWC24Err BufferedWrite(const void* src, s32 size, NWC24File* file) {
         }
 
         for (i = 0; i < NAND_RETRY_COUNT; i++) {
-            result = NANDWrite(&file->nandf, buf, NWC24_IO_BUFFER_SIZE);
+            result = NANDWrite(&pFile->nandf, pBuf, NWC24_IO_BUFFER_SIZE);
             if (result != NAND_RESULT_BUSY) {
                 break;
             }
@@ -458,19 +481,19 @@ static NWC24Err BufferedWrite(const void* src, s32 size, NWC24File* file) {
         }
     }
 
-    file->align = pos;
+    pFile->align = pos;
     return err;
 }
 
-static NWC24Err BufferedWriteFlush(NWC24File* file) {
+static NWC24Err BufferedWriteFlush(NWC24File* pFile) {
     s32 result;
     u32 pos;
-    u8* buf;
+    u8* pBuf;
     NWC24Err err;
     u32 i;
 
-    pos = file->align;
-    buf = NWC24WorkP->writeBuffer;
+    pos = pFile->align;
+    pBuf = NWC24WorkP->writeBuffer;
     err = NWC24_OK;
 
     if (pos == 0) {
@@ -478,11 +501,11 @@ static NWC24Err BufferedWriteFlush(NWC24File* file) {
     }
 
     while (pos % 32 != 0) {
-        buf[pos++] = 0x00;
+        pBuf[pos++] = 0x00;
     }
 
-    if (file->mode & NWC24_OPEN_VF) {
-        result = VFWriteFile(file->vff, buf, pos);
+    if (pFile->mode & NWC24_OPEN_VF) {
+        result = VFWriteFile(pFile->vff, pBuf, pos);
         if (result != VF_OK) {
             err = ConvertVfError(result, NWC24_ERR_FILE_WRITE);
         }
@@ -491,7 +514,7 @@ static NWC24Err BufferedWriteFlush(NWC24File* file) {
     }
 
     for (i = 0; i < NAND_RETRY_COUNT; i++) {
-        result = NANDWrite(&file->nandf, buf, pos);
+        result = NANDWrite(&pFile->nandf, pBuf, pos);
         if (result != NAND_RESULT_BUSY) {
             break;
         }
@@ -510,34 +533,34 @@ static NWC24Err BufferedWriteFlush(NWC24File* file) {
     return err;
 }
 
-static NWC24Err BufferedRead(void* dst, s32 size, NWC24File* file) {
+static NWC24Err BufferedRead(void* pDst, s32 size, NWC24File* pFile) {
     u32 total;
     u32 now;
     u32 left;
     s32 result;
     u32 pos;
-    u8* buf;
-    u8* bdst;
+    u8* pBuf;
+    u8* pByteDst;
     NWC24Err err;
     u32 i;
     u32 bytesread;
 
-    bdst = (u8*)dst;
+    pByteDst = (u8*)pDst;
     total = size;
-    buf = NWC24WorkP->readBuffer;
+    pBuf = NWC24WorkP->readBuffer;
     err = NWC24_OK;
 
     if (RdBufferMutex != 0) {
         return NWC24_ERR_MUTEX;
     }
 
-    RdBufferMutex = file->id;
+    RdBufferMutex = pFile->id;
 
-    if (file->align & INVALIDATE_ALIGN) {
+    if (pFile->align & INVALIDATE_ALIGN) {
         return NWC24_ERR_INVALID_OPERATION;
     }
 
-    pos = file->align;
+    pos = pFile->align;
 
     while (total > 0) {
         now = NWC24_IO_BUFFER_SIZE;
@@ -548,8 +571,8 @@ static NWC24Err BufferedRead(void* dst, s32 size, NWC24File* file) {
             now = ROUND_UP(total + pos, 32);
         }
 
-        if (file->mode & NWC24_OPEN_VF) {
-            result = VFReadFile(file->vff, buf, now, &bytesread);
+        if (pFile->mode & NWC24_OPEN_VF) {
+            result = VFReadFile(pFile->vff, pBuf, now, &bytesread);
             if (result != VF_OK) {
                 err = ConvertVfError(result, NWC24_ERR_FILE_READ);
                 break;
@@ -558,7 +581,7 @@ static NWC24Err BufferedRead(void* dst, s32 size, NWC24File* file) {
             result = bytesread;
         } else {
             for (i = 0; i < NAND_RETRY_COUNT; i++) {
-                result = NANDRead(&file->nandf, buf, now);
+                result = NANDRead(&pFile->nandf, pBuf, now);
                 if (result != NAND_RESULT_BUSY) {
                     break;
                 }
@@ -575,28 +598,29 @@ static NWC24Err BufferedRead(void* dst, s32 size, NWC24File* file) {
             err = NWC24_ERR_FILE_READ;
             break;
         } else {
-            memcpy(bdst, buf + pos, left);
-            bdst += left;
+            memcpy(pByteDst, pBuf + pos, left);
+            pByteDst += left;
             total -= left;
             pos = 0;
         }
     }
 
-    file->align = (file->align + size) % 32;
-    file->align |= INVALIDATE_ALIGN;
+    pFile->align = (pFile->align + size) % 32;
+    pFile->align |= INVALIDATE_ALIGN;
     RdBufferMutex = 0;
     return err;
 }
 
-static NWC24Err AlignedSeek(NWC24File* file, s32 offset, NWC24SeekMode whence) {
+static NWC24Err AlignedSeek(NWC24File* pFile, s32 offset,
+                            NWC24SeekMode whence) {
     s32 result;
     s32 alignofs;
 
-    file->align = offset % 32;
-    alignofs = offset - file->align;
+    pFile->align = offset % 32;
+    alignofs = offset - pFile->align;
 
-    if (file->mode & NWC24_OPEN_VF) {
-        result = VFSeekFile(file->vff, alignofs, whence);
+    if (pFile->mode & NWC24_OPEN_VF) {
+        result = VFSeekFile(pFile->vff, alignofs, whence);
         if (result != VF_OK) {
             return ConvertVfError(result, NWC24_ERR_FILE_OTHER);
         }
@@ -604,7 +628,7 @@ static NWC24Err AlignedSeek(NWC24File* file, s32 offset, NWC24SeekMode whence) {
         return NWC24_OK;
     }
 
-    result = NANDSeek(&file->nandf, alignofs, (NANDSeekMode)whence);
+    result = NANDSeek(&pFile->nandf, alignofs, (NANDSeekMode)whence);
     if (result < 0) {
         return NWC24_ERR_FILE_OTHER;
     }
@@ -615,12 +639,17 @@ static NWC24Err AlignedSeek(NWC24File* file, s32 offset, NWC24SeekMode whence) {
 static NWC24Err ConvertError(s32 nanderr, NWC24Err wc24err) {
     switch (nanderr) {
     case NAND_RESULT_ECC_CRIT:
-    case NAND_RESULT_AUTHENTICATION:
+    case NAND_RESULT_AUTHENTICATION: {
         return NWC24_ERR_FILE_BROKEN;
-    case NAND_RESULT_CORRUPT:
+    }
+
+    case NAND_RESULT_CORRUPT: {
         return NWC24_ERR_NAND_CORRUPT;
-    default:
+    }
+
+    default: {
         return wc24err;
+    }
     }
 }
 

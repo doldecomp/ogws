@@ -57,22 +57,22 @@ typedef struct NWC24File {
     VFFile vff;         // at 0x98
 } NWC24File;
 
-NWC24Err NWC24FOpen(NWC24File* file, const char* path, u32 mode);
-NWC24Err NWC24iFOpenNand(NWC24File* file, const char* path, u32 mode);
-NWC24Err NWC24iFOpenVF(NWC24File* file, const char* path, u32 mode);
+NWC24Err NWC24FOpen(NWC24File* pFile, const char* pPath, u32 mode);
+NWC24Err NWC24iFOpenNand(NWC24File* pFile, const char* pPath, u32 mode);
+NWC24Err NWC24iFOpenVF(NWC24File* pFile, const char* pPath, u32 mode);
 
-NWC24Err NWC24FClose(NWC24File* file);
-NWC24Err NWC24iFCloseNand(NWC24File* file) DECOMP_DONT_INLINE;
-NWC24Err NWC24iFCloseVF(NWC24File* file);
+NWC24Err NWC24FClose(NWC24File* pFile);
+NWC24Err NWC24iFCloseNand(NWC24File* pFile) DECOMP_DONT_INLINE;
+NWC24Err NWC24iFCloseVF(NWC24File* pFile);
 
-NWC24Err NWC24FSeek(NWC24File* file, s32 offset, NWC24SeekMode whence);
-NWC24Err NWC24FRead(void* dst, s32 size, NWC24File* file);
-NWC24Err NWC24FWrite(const void* src, s32 size, NWC24File* file);
-NWC24Err NWC24FGetLength(NWC24File* file, u32* lengthOut);
-NWC24Err NWC24FDeleteVF(const char* path);
-NWC24Err NWC24MountVF(const char* drive, const char* filename);
-NWC24Err NWC24UnmountVF(const char* drive);
-NWC24Err NWC24CheckSizeVF(const char* drive, u32* sizeOut);
+NWC24Err NWC24FSeek(NWC24File* pFile, s32 offset, NWC24SeekMode whence);
+NWC24Err NWC24FRead(void* pDst, s32 size, NWC24File* pFile);
+NWC24Err NWC24FWrite(const void* pSrc, s32 size, NWC24File* pFile);
+NWC24Err NWC24FGetLength(NWC24File* pFile, u32* pLength);
+NWC24Err NWC24FDeleteVF(const char* pPath);
+NWC24Err NWC24MountVF(const char* pDrive, const char* pFileName);
+NWC24Err NWC24UnmountVF(const char* pDrive);
+NWC24Err NWC24CheckSizeVF(const char* pDrive, u32* pSize);
 
 #ifdef __cplusplus
 }
