@@ -2,13 +2,15 @@
 #define RVL_SDK_NWC24_FILE_API_H
 #include <types.h>
 
-#include <revolution/NWC24/NWC24Types.h>
-
 #include <revolution/NAND.h>
+#include <revolution/NWC24/NWC24Types.h>
 #include <revolution/VF.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+#define NWC24_VF_DRIVE "@24"
 
 typedef enum {
     // Access

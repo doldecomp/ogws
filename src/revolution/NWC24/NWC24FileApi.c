@@ -1,11 +1,8 @@
-#include "revolution/NAND/nand.h"
-#include <revolution/NWC24.h>
-
 #include <revolution/NAND.h>
+#include <revolution/NWC24.h>
 
 #include <string.h>
 
-#define WC24_DRIVE "@24"
 #define NAND_RETRY_COUNT 3
 
 // Set MSB after buffered read to "invalidate" align.
@@ -629,7 +626,7 @@ static NWC24Err ConvertError(s32 nanderr, NWC24Err wc24err) {
 
 static NWC24Err ConvertVfError(s32 vferr, NWC24Err wc24err) {
     if (vferr == VF_ERROR_0005) {
-        return ConvertError(VFGetLastDeviceError(WC24_DRIVE), wc24err);
+        return ConvertError(VFGetLastDeviceError(NWC24_VF_DRIVE), wc24err);
     }
 
     return wc24err;
