@@ -1,15 +1,13 @@
-#ifndef RVL_SDK_NWC24_SCHEDULE_H
-#define RVL_SDK_NWC24_SCHEDULE_H
+#ifndef RVL_SDK_NWC24_INTERNAL_PARSER_H
+#define RVL_SDK_NWC24_INTERNAL_PARSER_H
 #include <types.h>
 
 #include <revolution/NWC24/NWC24Types.h>
-
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-s32 NWC24SuspendScheduler(void);
-s32 NWC24ResumeScheduler(void);
+const char* NWC24iGetMIMETypeSuffix(NWC24MIMEType type);
 
 #ifdef __cplusplus
 }

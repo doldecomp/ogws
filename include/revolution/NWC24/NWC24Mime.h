@@ -12,11 +12,12 @@ extern "C" {
 
 void NWC24InitBase64Table(char* pTable);
 
-NWC24Err NWC24Base64Encode(char* pData, s32 dataSize, char* pText, s32 textSize,
-                           u32* pTextWritten);
+NWC24Err NWC24Base64Encode(const u8* pData, s32 dataSize, char* pText,
+                           s32 textSize, u32* pTextWritten);
 
-NWC24Err NWC24EncodeQuotedPrintable(u8* pText, u32 textSize, u32* pTextWritten,
-                                    u8* pData, u32 dataSize, u32* pDataRead);
+NWC24Err NWC24EncodeQuotedPrintable(char* pText, u32 textSize,
+                                    u32* pTextWritten, const u8* pData,
+                                    u32 dataSize, u32* pDataRead);
 
 #ifdef __cplusplus
 }

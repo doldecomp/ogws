@@ -160,10 +160,9 @@ def main():
     )
     args = parser.parse_args()
 
-    if args.include is None:
-        exit("No include directories specified")
-    global include_dirs
-    include_dirs.extend(args.include)
+    if args.include is not None:
+        global include_dirs
+        include_dirs.extend(args.include)
     global exclude_globs
     exclude_globs = args.exclude or []
     prelude_defines = args.define or []

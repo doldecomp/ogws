@@ -2,30 +2,27 @@
 #define RVL_SDK_NWC24_FILE_API_H
 #include <types.h>
 
-#include <revolution/NAND.h>
 #include <revolution/NWC24/NWC24Types.h>
-#include <revolution/VF.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#define NWC24_VF_DRIVE "@24"
-
 typedef enum {
     // Access
-    NWC24_OPEN_WRITE = (1 << 0),
-    NWC24_OPEN_READ = (1 << 1),
-    NWC24_OPEN_RW = (1 << 2),
+    NWC24_OPEN_WRITE = 1 << 0,
+    NWC24_OPEN_READ = 1 << 1,
+    NWC24_OPEN_RW = 1 << 2,
+    NWC24_OPEN_BUFF = 1 << 3,
 
     // Domain
-    NWC24_OPEN_BUFF = (1 << 3),
-    NWC24_OPEN_VF = (1 << 8),
+    NWC24_OPEN_NAND = 0,
+    NWC24_OPEN_VF = 1 << 8,
 
     // NAND presets
-    NWC24_OPEN_NAND_W = NWC24_OPEN_WRITE,
-    NWC24_OPEN_NAND_R = NWC24_OPEN_READ,
-    NWC24_OPEN_NAND_RW = NWC24_OPEN_RW,
+    NWC24_OPEN_NAND_W = NWC24_OPEN_NAND | NWC24_OPEN_WRITE,
+    NWC24_OPEN_NAND_R = NWC24_OPEN_NAND | NWC24_OPEN_READ,
+    NWC24_OPEN_NAND_RW = NWC24_OPEN_NAND | NWC24_OPEN_RW,
 
     // VF presets
     NWC24_OPEN_VF_W = NWC24_OPEN_WRITE | NWC24_OPEN_VF,
@@ -49,26 +46,14 @@ typedef enum {
     NWC24_SEEK_END,
 } NWC24SeekMode;
 
-typedef struct NWC24File {
-    u32 id;             // at 0x0
-    u32 mode;           // at 0x4
-    u32 align;          // at 0x8
-    NANDFileInfo nandf; // at 0xC
-    VFFile vff;         // at 0x98
-} NWC24File;
-
 NWC24Err NWC24FOpen(NWC24File* pFile, const char* pPath, u32 mode);
-NWC24Err NWC24iFOpenNand(NWC24File* pFile, const char* pPath, u32 mode);
-NWC24Err NWC24iFOpenVF(NWC24File* pFile, const char* pPath, u32 mode);
-
 NWC24Err NWC24FClose(NWC24File* pFile);
-NWC24Err NWC24iFCloseNand(NWC24File* pFile) DECOMP_DONT_INLINE;
-NWC24Err NWC24iFCloseVF(NWC24File* pFile);
 
 NWC24Err NWC24FSeek(NWC24File* pFile, s32 offset, NWC24SeekMode whence);
 NWC24Err NWC24FRead(void* pDst, s32 size, NWC24File* pFile);
 NWC24Err NWC24FWrite(const void* pSrc, s32 size, NWC24File* pFile);
 NWC24Err NWC24FGetLength(NWC24File* pFile, u32* pLength);
+
 NWC24Err NWC24FDeleteVF(const char* pPath);
 NWC24Err NWC24MountVF(const char* pDrive, const char* pFileName);
 NWC24Err NWC24UnmountVF(const char* pDrive);

@@ -1,4 +1,5 @@
 #include <revolution/NWC24.h>
+#include <revolution/NWC24/NWC24Internal.h>
 
 static BOOL NWC24iIsRequestPending = FALSE;
 

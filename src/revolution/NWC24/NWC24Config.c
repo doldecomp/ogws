@@ -1,5 +1,6 @@
 #include <revolution/DVD.h>
 #include <revolution/NWC24.h>
+#include <revolution/NWC24/NWC24Internal.h>
 #include <revolution/OS.h>
 
 #define CONFIG_MAGIC FOURCC('W', 'c', 'C', 'f')
@@ -8,7 +9,7 @@
 
 #define COMPANY_CODE_NINTENDO 01
 
-static NWC24Config* config = NULL;
+static NWC24iConfig* config = NULL;
 static BOOL ConfigModified = FALSE;
 
 static const char* MBoxDir = "/shared2/wc24/mbox";
@@ -64,7 +65,7 @@ NWC24Err NWC24GenerateNewUserId(u64* pId) {
 }
 
 NWC24Err NWC24iConfigOpen(void) {
-    config = (NWC24Config*)NWC24WorkP->config;
+    config = (NWC24iConfig*)NWC24WorkP->config;
     ConfigModified = FALSE;
     return NWC24iConfigReload();
 }
@@ -81,7 +82,7 @@ NWC24Err NWC24iConfigReload(void) {
     result = NWC24FOpen(&file, ConfigFile, NWC24_OPEN_NAND_R);
 
     if (result == NWC24_OK) {
-        result = NWC24FRead(config, sizeof(NWC24Config), &file);
+        result = NWC24FRead(config, sizeof(NWC24iConfig), &file);
         close = NWC24FClose(&file);
         result = result != NWC24_OK ? result : close;
     }
@@ -98,7 +99,7 @@ NWC24Err NWC24iConfigReload(void) {
     result = NWC24FOpen(&file, CfgBakFile, NWC24_OPEN_NAND_R);
 
     if (result == NWC24_OK) {
-        result = NWC24FRead(config, sizeof(NWC24Config), &file);
+        result = NWC24FRead(config, sizeof(NWC24iConfig), &file);
         close = NWC24FClose(&file);
         result = result != NWC24_OK ? result : close;
     }
@@ -132,7 +133,7 @@ NWC24Err NWC24iConfigFlush(void) {
     result = NWC24FOpen(&file, ConfigFile, NWC24_OPEN_NAND_W);
 
     if (result == NWC24_OK) {
-        result = NWC24FWrite(config, sizeof(NWC24Config), &file);
+        result = NWC24FWrite(config, sizeof(NWC24iConfig), &file);
         close = NWC24FClose(&file);
         result = result != NWC24_OK ? result : close;
 
@@ -146,7 +147,7 @@ NWC24Err NWC24iConfigFlush(void) {
     result = NWC24FOpen(&file, CfgBakFile, NWC24_OPEN_NAND_W);
 
     if (result == NWC24_OK) {
-        result = NWC24FWrite(config, sizeof(NWC24Config), &file);
+        result = NWC24FWrite(config, sizeof(NWC24iConfig), &file);
         close = NWC24FClose(&file);
         result = result != NWC24_OK ? result : close;
 
@@ -227,7 +228,7 @@ static u32 GetConfigCheckSum(void) {
 
     csum = 0;
     pData = (u32*)config;
-    dataWords = (sizeof(NWC24Config) - sizeof(config->checksum)) / sizeof(u32);
+    dataWords = (sizeof(NWC24iConfig) - sizeof(config->checksum)) / sizeof(u32);
 
     for (i = 0; i < dataWords; i++) {
         csum += *pData++;

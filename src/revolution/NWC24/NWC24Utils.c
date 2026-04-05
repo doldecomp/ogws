@@ -1,36 +1,34 @@
 #include <revolution/NWC24.h>
+#include <revolution/NWC24/NWC24Internal.h>
 
-void NWC24Data_Init(NWC24Data* data) {
-    data->ptr = NULL;
-    data->size = 0;
+void NWC24Data_Init(NWC24Data* pData) {
+    pData->pData = NULL;
+    pData->size = 0;
 }
 
-void NWC24Data_SetDataP(NWC24Data* data, const void* ptr, u32 size) {
-    data->ptr = ptr;
-    data->size = size;
+void NWC24Data_SetDataP(NWC24Data* pData, const void* pPtr, u32 size) {
+    pData->pData = pPtr;
+    pData->size = size;
 }
 
-void NWC24Date_Init(NWC24Date* date) {
-    date->year = 2000;
-    date->month = 1;
-    date->day = 1;
-    date->hour = 12;
-    date->min = 0;
-    date->sec = 0;
-    date->BYTE_0x7 = 0;
+void NWC24Date_Init(NWC24Date* pDate) {
+    pDate->year = 2000;
+    pDate->month = 1;
+    pDate->day = 1;
+    pDate->hour = 12;
+    pDate->min = 0;
+    pDate->sec = 0;
+    pDate->BYTE_0x7 = 0;
 }
 
-void NWC24iConvIdToStr(u64 addr, char* out) {
-    u64 a = addr;
+void NWC24iConvIdToStr(u64 addr, char* pBuffer) {
+    u64 temp = addr;
     int i;
 
-    // Count nibbles in u64
-    const int n = sizeof(u64) * 2;
-
-    for (i = n - 1; i >= 0; i--) {
-        out[i] = '0' + a % 10;
-        a /= 10;
+    for (i = NWC24i_WII_ID_LEN - 1; i >= 0; i--) {
+        pBuffer[i] = '0' + temp % 10;
+        temp /= 10;
     }
 
-    out[n] = '\0';
+    pBuffer[NWC24i_WII_ID_LEN] = '\0';
 }

@@ -1,21 +1,22 @@
-#ifndef RVL_SDK_NWC24_IPC_H
-#define RVL_SDK_NWC24_IPC_H
+#ifndef RVL_SDK_NWC24_INTERNAL_IPC_H
+#define RVL_SDK_NWC24_INTERNAL_IPC_H
 #include <types.h>
 
 #include <revolution/IPC.h>
 #include <revolution/NWC24/NWC24Types.h>
-
 #ifdef __cplusplus
 extern "C" {
 #endif
 
 NWC24Err NWC24iOpenResourceManager(const char* pUser, const char* pName,
                                    s32* pFd, IPCOpenMode mode);
+
 NWC24Err NWC24iCloseResourceManager(const char* pUser, s32 fd);
 
 NWC24Err NWC24iIoctlResourceManager(const char* pUser, s32 fd, s32 type,
                                     void* pIn, s32 inSize, void* pOut,
                                     s32 outSize);
+
 NWC24Err NWC24iIoctlResourceManagerAsync(const char* pUser, s32 fd, s32 type,
                                          void* pIn, s32 inSize, void* pOut,
                                          s32 outSize, void* pCallbackArg);

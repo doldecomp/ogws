@@ -1,5 +1,6 @@
 #include <revolution/NAND.h>
 #include <revolution/NWC24.h>
+#include <revolution/NWC24/NWC24Internal.h>
 
 #include <string.h>
 
@@ -435,7 +436,7 @@ static NWC24Err BufferedWrite(const void* pSrc, s32 size, NWC24File* pFile) {
     err = NWC24_OK;
 
     while (left != 0) {
-        now = NWC24_IO_BUFFER_SIZE - pos;
+        now = NWC24i_IO_BUFFER_SIZE - pos;
 
         if (left < now) {
             now = left;
@@ -447,14 +448,14 @@ static NWC24Err BufferedWrite(const void* pSrc, s32 size, NWC24File* pFile) {
         left -= now;
         pByteSrc += now;
 
-        if (pos < NWC24_IO_BUFFER_SIZE) {
+        if (pos < NWC24i_IO_BUFFER_SIZE) {
             continue;
         }
 
         pos = 0;
 
         if (pFile->mode & NWC24_OPEN_VF) {
-            result = VFWriteFile(pFile->vff, pBuf, NWC24_IO_BUFFER_SIZE);
+            result = VFWriteFile(pFile->vff, pBuf, NWC24i_IO_BUFFER_SIZE);
             if (result == VF_OK) {
                 continue;
             }
@@ -464,7 +465,7 @@ static NWC24Err BufferedWrite(const void* pSrc, s32 size, NWC24File* pFile) {
         }
 
         for (i = 0; i < NAND_RETRY_COUNT; i++) {
-            result = NANDWrite(&pFile->nandf, pBuf, NWC24_IO_BUFFER_SIZE);
+            result = NANDWrite(&pFile->nandf, pBuf, NWC24i_IO_BUFFER_SIZE);
             if (result != NAND_RESULT_BUSY) {
                 break;
             }
@@ -476,7 +477,7 @@ static NWC24Err BufferedWrite(const void* pSrc, s32 size, NWC24File* pFile) {
             return NWC24_ERR_NAND_CORRUPT;
         }
 
-        if (result != NWC24_IO_BUFFER_SIZE) {
+        if (result != NWC24i_IO_BUFFER_SIZE) {
             err = NWC24_ERR_FILE_WRITE;
             break;
         }
@@ -564,7 +565,7 @@ static NWC24Err BufferedRead(void* pDst, s32 size, NWC24File* pFile) {
     pos = pFile->align;
 
     while (total > 0) {
-        now = NWC24_IO_BUFFER_SIZE;
+        now = NWC24i_IO_BUFFER_SIZE;
         left = now - pos;
 
         if (total < left) {
@@ -656,7 +657,7 @@ static NWC24Err ConvertError(s32 nanderr, NWC24Err wc24err) {
 
 static NWC24Err ConvertVfError(s32 vferr, NWC24Err wc24err) {
     if (vferr == VF_ERROR_0005) {
-        return ConvertError(VFGetLastDeviceError(NWC24_VF_DRIVE), wc24err);
+        return ConvertError(VFGetLastDeviceError(NWC24i_VF_DRIVE), wc24err);
     }
 
     return wc24err;

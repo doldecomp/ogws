@@ -1,9 +1,8 @@
 #include <revolution/NWC24.h>
+#include <revolution/NWC24/NWC24Internal.h>
 #include <revolution/OS.h>
 #include <revolution/VF.h>
 #include <revolution/version.h>
-
-#define MANAGE_ERROR_CODE_BASE 109000
 
 typedef enum {
     NWC24_LIB_CLOSED,
@@ -20,7 +19,7 @@ typedef enum {
 
 RVL_LIB_VERSION(NWC24, "May 10 2007", "17:58:59", "0x4199_60831");
 
-NWC24Work* NWC24WorkP = NULL;
+NWC24iWork* NWC24WorkP = NULL;
 
 static NWC24LibState Opened = NWC24_LIB_CLOSED;
 static u32 YouGotMail = 0;
@@ -28,7 +27,7 @@ static u32 GlobalErrorCode = 0;
 static BOOL Registered = FALSE;
 
 // Forward declarations
-static NWC24Err NWC24OpenLibInternal(NWC24Work* pWork, NWC24LibState state);
+static NWC24Err NWC24OpenLibInternal(NWC24iWork* pWork, NWC24LibState state);
 
 void NWC24iRegister(void) {
     if (Registered) {
@@ -40,14 +39,16 @@ void NWC24iRegister(void) {
 }
 
 NWC24Err NWC24OpenLib(NWC24Work* pWork) {
+    NWC24iWork* pWorkImpl = (NWC24iWork*)pWork;
+
     if (Opened == NWC24_LIB_OPENED_BY_TOOL) {
         return NWC24_ERR_BUSY;
     }
 
-    return NWC24OpenLibInternal(pWork, NWC24_LIB_OPENED);
+    return NWC24OpenLibInternal(pWorkImpl, NWC24_LIB_OPENED);
 }
 
-static NWC24Err NWC24OpenLibInternal(NWC24Work* pWork, NWC24LibState state) {
+static NWC24Err NWC24OpenLibInternal(NWC24iWork* pWork, NWC24LibState state) {
     NWC24Err result;
     NWC24Err failErr;
     u32 failFlag;
@@ -78,7 +79,7 @@ static NWC24Err NWC24OpenLibInternal(NWC24Work* pWork, NWC24LibState state) {
     if (result == NWC24_OK) {
         NWC24iRegister();
 
-        YouGotMail &= ~(1 << NWC24_MSGTYPE_RVL_MENU_SHARED);
+        YouGotMail &= ~NWC24_MSG_ARRIVED;
         NWC24WorkP = pWork;
 
         NWC24InitBase64Table(NWC24WorkP->base64Work);
@@ -157,7 +158,7 @@ static NWC24Err NWC24OpenLibInternal(NWC24Work* pWork, NWC24LibState state) {
     case NWC24_ERR_FILE_OPEN:
     case NWC24_ERR_BROKEN:
     case NWC24_ERR_FATAL: {
-        NWC24iSetErrorCode(result - MANAGE_ERROR_CODE_BASE);
+        NWC24iSetErrorCode(result - NWC24i_MANAGE_ERROR_CODE_BASE);
         break;
     }
 

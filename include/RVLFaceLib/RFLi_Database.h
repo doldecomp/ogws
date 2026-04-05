@@ -21,7 +21,7 @@ typedef struct RFLiDatabase {
 
     u8 specialInvite[13]; // at 0x1CF0
     u8 nwc24Month;        // at 0x1CFD
-    u8 mwc24Day;          // at 0x1CFE
+    u8 nwc24Day;          // at 0x1CFE
     u8 padding2;          // at 0x1CFF
 
     RFLiHiddenDB hidden; // at 0x1D00
