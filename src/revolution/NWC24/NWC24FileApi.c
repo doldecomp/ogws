@@ -311,7 +311,7 @@ NWC24Err NWC24FWrite(const void* pSrc, s32 size, NWC24File* pFile) {
     }
 
     if (pFile->mode & NWC24_OPEN_VF) {
-        result = VFWriteFile(pFile->vff, pSrc, size);
+        result = VFWriteFile(pFile->vff, (void*)pSrc, size);
         if (result != VF_OK) {
             return ConvertVfError(result, NWC24_ERR_FILE_WRITE);
         }

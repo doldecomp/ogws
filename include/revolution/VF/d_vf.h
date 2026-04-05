@@ -17,20 +17,22 @@ typedef enum {
 // Sync and async?
 typedef enum { VF_SYNC_MODE_0, VF_SYNC_MODE_1 } VFSyncMode;
 
-s32 VFIsAvailable(void);
-void VFInitEx(void*, u32);
+s32 VFIsAvailable();
+void VFInitEx(void* i_heap_start_address_p, u32 i_size);
+static s32 VF_activate_drive_common(s32 i_handle_idx, const char* i_sys_file_name_p, void* i_memory_p);
 s32 VFMountDriveNANDFlashEx(const char* i_drive, const char* i_sys_file_name_p);
 s32 VFUnmountDrive(const char* i_drive);
-VFFile VFOpenFile(const char* i_path_p, const char* i_mode, u32 i_attr);
-s32 VFCloseFile(VFFile i_file_p);
-s32 VFSeekFile(VFFile i_file_p, s32 i_offset, s32 i_origin);
-s32 VFReadFile(VFFile i_file_p, void* o_buf_p, u32 i_size, u32* o_read_size_p);
-s32 VFWriteFile(VFFile i_file_p, const void* i_buf_p, u32 i_size);
+static s8* VF_path2handleidx(long* o_handle_idx_p, const char* i_path_p);
+void* VFOpenFile(const char* i_path_p, const char* i_mode, u32 i_attr);
+s32 VFCloseFile(void* i_file_p);
+s32 VFSeekFile(void* i_file_p, s32 i_offset, s32 i_origin);
+s32 VFReadFile(void* i_file_p, void* o_buf_p, u32 i_size, u32* o_read_size_p);
+s32 VFWriteFile(void* i_file_p, void* i_buf_p, u32 i_size);
 s32 VFDeleteFile(const char* i_path_p);
-s32 VFGetFileSizeByFd(VFFile i_file_p);
-s32 VFGetLastError(void);
-s32 VFGetDriveFreeSize(const char* i_drive);
+s32 VFGetFileSizeByFd(void* i_file_p);
+s32 VFGetLastError();
 s32 VFGetLastDeviceError(const char* i_drive);
+s32 VFGetDriveFreeSize(const char* i_drive);
 s32 VFSetSyncMode(const char* i_drive, u32 i_mode);
 
 #ifdef __cplusplus
