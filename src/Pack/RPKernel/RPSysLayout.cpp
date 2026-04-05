@@ -58,7 +58,7 @@ u16 ReadID(const char* pIdStr) {
 /**
  * @brief Player slot TEV colors
  */
-const GXColor RPSysLayout::PLAYER_COLORS[WPAD_MAX_CONTROLLERS] = {
+const GXColor RPSysLayout::PLAYER_COLORS[RP_MAX_CONTROLLERS] = {
     {0, 140, 255, 255},
     {255, 56, 56, 255},
     {16, 189, 13, 255},

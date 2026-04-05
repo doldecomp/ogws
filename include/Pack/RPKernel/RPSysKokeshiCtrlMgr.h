@@ -38,9 +38,10 @@ private:
     T__Disposer mDisposer; // at 0x0
 
 private:
-    void* unk10; // at 0x10
+    void* unk10;
+
     //! Data manager for each controller
-    RPSysKokeshiCtrlDataMgr* mpDataMgrs[WPAD_MAX_CONTROLLERS]; // at 0x14
+    RPSysKokeshiCtrlDataMgr* mpDataMgrs[RP_MAX_CONTROLLERS]; // at 0x14
 
 public:
     /**

@@ -28,7 +28,7 @@ RPSndAudioMgr::RPSndAudioMgr(EGG::Heap* pHeap) : mpParentHeap(pHeap) {
     mState = EState_Exited;
     mShutDownStatusRP = SHUTDOWN_STATUS_NONE;
     mResetTimer = 0;
-    mPlayerNum = WPAD_MAX_CONTROLLERS;
+    mPlayerNum = RP_MAX_CONTROLLERS;
     mFlags = 0;
     mIsPauseSe = false;
     mFanfareLength = 0;
@@ -113,7 +113,7 @@ void RPSndAudioMgr::initialize(Arg* pArg) {
     mStaticMgr.setupArchive();
     saveState();
 
-    for (int i = 0; i < WPAD_MAX_CONTROLLERS; i++) {
+    for (int i = 0; i < RP_MAX_CONTROLLERS; i++) {
         RPSndObject::setCommonManager(&getSound3DManager(i), i);
     }
     RPSndObject::initList();
@@ -412,7 +412,7 @@ void RPSndAudioMgr::configureTitle() {
         mState = EState_Title;
     }
 
-    mPlayerNum = WPAD_MAX_CONTROLLERS;
+    mPlayerNum = RP_MAX_CONTROLLERS;
     RP_GET_INSTANCE(RPSndSpeakerMgr)->reset();
 }
 
@@ -426,7 +426,7 @@ void RPSndAudioMgr::configureNoBgm() {
 
     mState = EState_NoBgm;
 
-    mPlayerNum = WPAD_MAX_CONTROLLERS;
+    mPlayerNum = RP_MAX_CONTROLLERS;
     RP_GET_INSTANCE(RPSndSpeakerMgr)->reset();
 
     setArcVolume(1.0f, 1);
@@ -445,7 +445,7 @@ void RPSndAudioMgr::configureMiniGame(s32 cameraNum) {
     mState = EState_MiniGame;
     setCameraCount(cameraNum);
 
-    mPlayerNum = WPAD_MAX_CONTROLLERS;
+    mPlayerNum = RP_MAX_CONTROLLERS;
     RP_GET_INSTANCE(RPSndSpeakerMgr)->reset();
 }
 
@@ -672,10 +672,10 @@ void RPSndAudioMgr::startPauseSe(const char* pNameRemote, const char* pNameTV,
     mPauseSePlayerFlag = 1 << player;
     mPauseSeChan = chan;
 
-    RPSysCoreController* pControllerRP = static_cast<RPSysCoreController*>(
-        EGG_GET_INSTANCE(EGG::CoreControllerMgr)->getNthController(player));
+    RPSysCoreController* pController =
+        RPSysCoreControllerMgr::getNthController(player);
 
-    mPauseSePrevDpdEnable = pControllerRP->isPrevDpdCtrlEnable();
+    mPauseSePrevDpdEnable = pController->isPrevDpdCtrlEnable();
     DAT_804bf648 = 0;
 }
 

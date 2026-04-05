@@ -41,6 +41,9 @@ public:
         EGame_Max,
     };
 
+    //! Old data exists for each player count
+    static const int OLD_DATA_LEN = 1 + 2 + 3 + 4;
+
 public:
     /**
      * @brief Constructor
@@ -60,7 +63,8 @@ public:
      * @param playerNum Player count
      * @param playerNo Player index
      */
-    void getOldData(s8* pIndex, u8* pAddr, s32 playerNum, s32 playerNo) const;
+    void getOldData(s8* pIndex, u8 pAddr[WPAD_ADDR_LEN], s32 playerNum,
+                    s32 playerNo) const;
     /**
      * @brief Sets the old data for the specified player count and player index
      *
@@ -69,7 +73,8 @@ public:
      * @param playerNum Player count
      * @param playerNo Player index
      */
-    void setOldData(s8 index, const u8* pAddr, s32 playerNum, s32 playerNo);
+    void setOldData(s8 index, const u8 pAddr[WPAD_ADDR_LEN], s32 playerNum,
+                    s32 playerNo);
 
     /**
      * @brief Sets the total number of fitness tests completed
@@ -135,10 +140,6 @@ public:
      * @param rStrm Memory stream
      */
     void write(EGG::RamStream& rStrm);
-
-private:
-    //! Old data exists for each player count
-    static const int OLD_DATA_LEN = 1 + 2 + 3 + 4;
 
 private:
     /**

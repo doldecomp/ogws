@@ -20,7 +20,7 @@ void RPSndSpeakerMgr::reset() {
 void RPSndSpeakerMgr::calc() {
     s32 chan;
 
-    for (chan = 0; chan < WPAD_MAX_CONTROLLERS; chan++) {
+    for (chan = 0; chan < RP_MAX_CONTROLLERS; chan++) {
         bool enableNow =
             nw4r::snd::SoundSystem::GetRemoteSpeaker(chan).IsEnabledOutput();
 
@@ -89,7 +89,7 @@ bool RPSndSpeakerMgr::setEnableSw(s32 chan, bool enable) {
         return false;
     }
 
-    if (chan < WPAD_MAX_CONTROLLERS && enablePrev != enable) {
+    if (chan < RP_MAX_CONTROLLERS && enablePrev != enable) {
         nw4r::snd::SoundSystem::GetRemoteSpeaker(chan).EnableOutput(enable);
 
         if (!enable) {
@@ -137,7 +137,7 @@ void RPSndSpeakerMgr::setRemoteSend(nw4r::snd::SoundHandle* pHandle,
     u32 mainOutFlag = 0;
 
     if (remoteOut > 0.0f) {
-        for (int i = 0; i < WPAD_MAX_CONTROLLERS; i++) {
+        for (int i = 0; i < RP_MAX_CONTROLLERS; i++) {
             if (!(remoteOutFlag & (1 << i)) || !mIsSpeakerSetUp[i]) {
                 continue;
             }
@@ -162,7 +162,7 @@ void RPSndSpeakerMgr::setRemoteSend(nw4r::snd::SoundHandle* pHandle,
  * @param pHeap Parent heap
  */
 RPSndSpeakerMgr::RPSndSpeakerMgr(EGG::Heap* pHeap) : mpParentHeap(pHeap) {
-    for (int i = 0; i < WPAD_MAX_CONTROLLERS; i++) {
+    for (int i = 0; i < RP_MAX_CONTROLLERS; i++) {
         unk1C[i] = 0;
         unk3C[i] = 0;
         unk2C[i] = 0;
@@ -247,7 +247,7 @@ void RPSndSpeakerMgr::setSpeakerShutdownCallback(s32 chan, s32 result) {
  * @brief Attempts to connect to all remote speakers
  */
 void RPSndSpeakerMgr::connectAll() {
-    for (int i = 0; i < WPAD_MAX_CONTROLLERS; i++) {
+    for (int i = 0; i < RP_MAX_CONTROLLERS; i++) {
         s32 dev;
         if (WPADProbe(i, &dev) == WPAD_ERR_NO_CONTROLLER) {
             continue;
@@ -267,7 +267,7 @@ void RPSndSpeakerMgr::connectAll() {
  * @brief Attempts to disconnect from all remote speakers
  */
 void RPSndSpeakerMgr::disconnectAll() {
-    for (int i = 0; i < WPAD_MAX_CONTROLLERS; i++) {
+    for (int i = 0; i < RP_MAX_CONTROLLERS; i++) {
         nw4r::snd::SoundSystem::GetRemoteSpeaker(i).Shutdown(NULL);
 
         mIsSpeakerSetUp[i] = false;
@@ -298,7 +298,7 @@ bool RPSndSpeakerMgr::isDisconnectAllFinished() {
 u32 RPSndSpeakerMgr::changeBitPlayerToChannel(u32 playerFlag) {
     u32 channelFlag = 0;
 
-    for (int i = 0; i < WPAD_MAX_CONTROLLERS; i++) {
+    for (int i = 0; i < RP_MAX_CONTROLLERS; i++) {
         if (!(playerFlag & (1 << i))) {
             continue;
         }
