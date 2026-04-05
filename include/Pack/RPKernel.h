@@ -10,6 +10,7 @@
 #include <Pack/RPKernel/RPSysControllerSyncMgr.h>
 #include <Pack/RPKernel/RPSysFile.h>
 #include <Pack/RPKernel/RPSysFrameCtrl.h>
+#include <Pack/RPKernel/RPSysHomeMenuMgr.h>
 #include <Pack/RPKernel/RPSysHostIOSocketManager.h>
 #include <Pack/RPKernel/RPSysKokeshi.h>
 #include <Pack/RPKernel/RPSysKokeshiCtrlDataLoader.h>

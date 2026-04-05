@@ -5,6 +5,7 @@
 #include <Pack/RPSystem/RPPartySystemData.h>
 #include <Pack/RPSystem/RPSportsPlayerData.h>
 #include <Pack/RPSystem/RPSportsSystemData.h>
+#include <Pack/RPSystem/RPSysDvdStatus.h>
 #include <Pack/RPSystem/RPSysFontManager.h>
 #include <Pack/RPSystem/RPSysGameConfig.h>
 #include <Pack/RPSystem/RPSysPlayer.h>

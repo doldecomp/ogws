@@ -232,14 +232,8 @@ RPSndAudioMgr::attachArchive(const char* pPath, bool staticPath,
         pResMgr->GetGameSoundLocalPath(localPath, ARRAY_SIZE(localPath));
     }
 
-    // @bug Unsafe string operations
-#if defined(BUG_FIX)
-    std::strncat(commonPath, pPath, ARRAY_SIZE(commonPath));
-    std::strncat(localPath, pPath, ARRAY_SIZE(localPath));
-#else
     std::strcat(commonPath, pPath);
     std::strcat(localPath, pPath);
-#endif
 
     void* pMultiHandle = pResMgr->GetMultiHandle();
 
@@ -253,13 +247,7 @@ RPSndAudioMgr::attachArchive(const char* pPath, bool staticPath,
 
     // Fallback to the music experiment scene?
     std::strcpy(expPath, "Sound/RPMpeScene/");
-
-    // @bug Unsafe string operations
-#if defined(BUG_FIX)
-    std::strcat(expPath, pPath, ARRAY_SIZE(expPath));
-#else
     std::strcat(expPath, pPath);
-#endif
 
     if (pResMgr->IsExist(expPath)) {
         return openArchiveRP(expPath, pHeap, pMultiHandle);

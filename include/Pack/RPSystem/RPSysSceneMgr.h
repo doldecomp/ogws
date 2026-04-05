@@ -18,6 +18,7 @@ class RPSysSceneMgr : public EGG::SceneManager {
 
 public:
     bool isShutDownReserved() const;
+    bool isDvdErrorApplicationEnd() const;
 
     RPSysScene* getCurrentSceneRP() const;
 

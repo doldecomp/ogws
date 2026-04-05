@@ -1213,7 +1213,7 @@ config.libs = [
             Object(NonMatching, "Pack/RPSystem/RPSysResourceManager.cpp"),
             Object(NonMatching, "Pack/RPSystem/RPSysQueuedScene.cpp"),
             Object(NonMatching, "Pack/RPSystem/RPSysCommonObject.cpp"),
-            Object(NonMatching, "Pack/RPSystem/RPSysDvdStatus.cpp"),
+            Object(Matching, "Pack/RPSystem/RPSysDvdStatus.cpp"),
             Object(NonMatching, "Pack/RPSystem/RPSysSaveDataMgr.cpp"),
             Object(Matching, "Pack/RPSystem/RPSportsSystemData.cpp"),
             Object(Matching, "Pack/RPSystem/RPSportsPlayerData.cpp"),

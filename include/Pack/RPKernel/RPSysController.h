@@ -41,6 +41,8 @@ class RPSysCoreController : public EGG::CoreController {
 public:
     bool isPrevDpdCtrlEnable();
 
+    static void stopMotorAll();
+
     const RPSysCoreAddress& getAddress() const {
         return mAddress;
     }
