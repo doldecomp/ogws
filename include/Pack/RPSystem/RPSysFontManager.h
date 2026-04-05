@@ -41,21 +41,31 @@ public:
 
 public:
     /**
-     * @brief Sets up the ROM font
+     * @brief Loads the ROM font provided by the system
      */
     void LoadRomFont();
+
     /**
-     * @brief Sets up all resource fonts required by this pack
+     * @brief Loads all resource fonts required by this pack
      */
     void LoadResFonts();
 
     /**
-     * @brief Gets resource font data by name
+     * @brief Gets the index of the specified resource font
+     *
+     * @param pName Font name
      */
-    void* GetResFontData(const char* name) const;
+    u8 GetResFontIndex(const char* pName) const;
 
     /**
-     * @brief Accesses the ROM font
+     * @brief Gets the data of the specified resource font
+     *
+     * @param pName Font name
+     */
+    void* GetResFontData(const char* pName) const;
+
+    /**
+     * @brief Accesses the ROM font provided by the system
      */
     nw4r::ut::RomFont* GetRomFont() const {
         return mpRomFont;
@@ -66,22 +76,31 @@ public:
      *
      * @param idx Font index
      */
-    nw4r::ut::ResFont* GetResFont(int idx) const {
+    nw4r::ut::ResFont* GetResFont(u8 idx) const {
         return mpResFonts[idx];
     }
 
 private:
-    //! Resource font filenames
-    static const char* sResFontNames[ResFontType_Max];
-    //! Table which marks the resource fonts needed by this pack
-    static BOOL sIsNeedResFont[ResFontType_Max];
+    /**
+     * @brief Loads the specified resource font from the provided archive
+     *
+     * @param idx Font index
+     * @param pArchive Font archive
+     */
+    void LoadResFont(u8 idx, EGG::Archive* pArchive);
+
+private:
+    //! Font resource filenames
+    static const char* RES_FONT_NAMES[ResFontType_Max];
+    //! Whether each font resource is required by this pack
+    static const BOOL sIsNeedResFont[ResFontType_Max];
 
     //! ROM font provided by the system
     nw4r::ut::RomFont* mpRomFont; // at 0x4
-    //! Resource fonts provided by the disc
+    //! Resource fonts
     nw4r::ut::ResFont* mpResFonts[ResFontType_Max]; // at 0x8
 
-    //! Serialized versions of resource fonts (for layout access)
+    //! Serialized versions of resource fonts
     void* mpResFontData[ResFontType_Max]; // at 0x24
 };
 
