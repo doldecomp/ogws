@@ -40,8 +40,8 @@ public:
     virtual void GetGlyph(Glyph* pGlyph, u16 ch) const; // at 0x50
     virtual FontEncoding GetEncoding() const;           // at 0x54
 
-    u32 GetRequireBufferSize();
     bool Load(void* pBuffer);
+    static u32 GetRequireBufferSize();
 
 private:
     static const int CHAR_PTR_BUFFER_SIZE = 4;

@@ -99,11 +99,11 @@ public:
     virtual void GetGlyph(Glyph* pGlyph, u16 ch) const; // at 0x50
     virtual FontEncoding GetEncoding() const;           // at 0x54
 
-protected:
     bool IsManaging(const void* pBuffer) const {
         return mResource == pBuffer;
     }
 
+protected:
     void SetResourceBuffer(void* pBuffer, FontInformation* pInfo);
 
 private:

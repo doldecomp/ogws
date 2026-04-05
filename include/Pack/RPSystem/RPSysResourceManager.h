@@ -168,6 +168,10 @@ public:
         return mpKokeshiArchive;
     }
 
+    EGG::Archive* GetFontArchive() const {
+        return mpFontArchive;
+    }
+
     void* GetMultiHandle() {
         return &mpMultiHandle;
     }
