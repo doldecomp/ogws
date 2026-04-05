@@ -9,6 +9,11 @@
 //! @addtogroup rp_kernel
 //! @{
 
+/******************************************************************************
+ *
+ * RPSysCoreAddress
+ *
+ ******************************************************************************/
 class RPSysCoreAddress {
 public:
     RPSysCoreAddress();
@@ -27,6 +32,11 @@ private:
     u8 mData[WPAD_ADDR_LEN]; // at 0x0
 };
 
+/******************************************************************************
+ *
+ * RPSysCoreController
+ *
+ ******************************************************************************/
 class RPSysCoreController : public EGG::CoreController {
 public:
     bool isPrevDpdCtrlEnable();
@@ -40,6 +50,11 @@ private:
     RPSysCoreAddress mAddress; // at 0x2BA8
 };
 
+/******************************************************************************
+ *
+ * RPSysCoreControllerMgr
+ *
+ ******************************************************************************/
 class RPSysCoreControllerMgr {
 public:
     static u32 isDpdCtrlEnable(s32 chan) {

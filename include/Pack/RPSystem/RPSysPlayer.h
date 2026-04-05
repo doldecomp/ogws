@@ -14,13 +14,13 @@
  * @brief Player function parameter set
  */
 struct RPSysPlayerArg {
-    //! Sports Pack player data for official/default Miis
-    RPSportsPlayerData* pSportsPlayerData; // at 0x0
+    //! Sports Pack player data for default Miis
+    RPSportsPlayerData* pDefaultSportsPlayerData; // at 0x0
     //! Sports Pack player data for controller Miis
     RPSportsPlayerData** ppCtrlSportsPlayerData; // at 0x4
 
-    //! Party Pack player data for official/default Miis
-    RPPartyPlayerData* pPartyPlayerData; // at 0x8
+    //! Party Pack player data for default Miis
+    RPPartyPlayerData* pDefaultPartyPlayerData; // at 0x8
     //! Party Pack player data for controller Miis
     RPPartyPlayerData** ppCtrlPartyPlayerData; // at 0xC
 };
@@ -59,9 +59,9 @@ public:
      *
      * @param dataSrc Mii data source
      * @param index Mii database index
-     * @param createID Mii create ID
+     * @param rCreateID Mii create ID
      */
-    void setAvatar(s8 dataSrc, u16 index, RFLCreateID createID);
+    void setAvatar(s8 dataSrc, u16 index, const RFLCreateID& rCreateID);
 
     /**
      * @brief Loads this player's data

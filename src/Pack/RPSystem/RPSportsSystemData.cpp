@@ -1,5 +1,7 @@
 #include <Pack/RPSystem.h>
 
+#include <revolution/WPAD.h>
+
 /**
  * @brief Constructor
  */
@@ -37,8 +39,8 @@ void RPSportsSystemData::reset() {
  * @param playerNum Player count
  * @param playerNo Player index
  */
-void RPSportsSystemData::getOldData(s8* pIndex, u8* pAddr, s32 playerNum,
-                                    s32 playerNo) const {
+void RPSportsSystemData::getOldData(s8* pIndex, u8 pAddr[WPAD_ADDR_LEN],
+                                    s32 playerNum, s32 playerNo) const {
     u32 rel2Abs[RP_MAX_CONTROLLERS] = {
         0,             // 1 player
         0 + 1,         // 2 players
@@ -63,8 +65,8 @@ void RPSportsSystemData::getOldData(s8* pIndex, u8* pAddr, s32 playerNum,
  * @param playerNum Player count
  * @param playerNo Player index
  */
-void RPSportsSystemData::setOldData(s8 index, const u8* pAddr, s32 playerNum,
-                                    s32 playerNo) {
+void RPSportsSystemData::setOldData(s8 index, const u8 pAddr[WPAD_ADDR_LEN],
+                                    s32 playerNum, s32 playerNo) {
     u32 rel2Abs[RP_MAX_CONTROLLERS] = {
         0,             // 1 player
         0 + 1,         // 2 players

@@ -58,12 +58,13 @@ void RPSysPlayer::reset() {
  *
  * @param dataSrc Mii data source
  * @param index Mii database index
- * @param createID Mii create ID
+ * @param rCreateID Mii create ID
  */
-void RPSysPlayer::setAvatar(s8 dataSrc, u16 index, RFLCreateID createID) {
+void RPSysPlayer::setAvatar(s8 dataSrc, u16 index,
+                            const RFLCreateID& rCreateID) {
     mDataSource = dataSrc;
     mIndex = index;
-    mCreateID = createID;
+    mCreateID = rCreateID;
 }
 
 /**
@@ -90,12 +91,14 @@ void RPSysPlayer::loadData(const RPSysPlayerArg& rArg) {
     } else if (mDataSource == RFLDataSource_Default &&
                mIndex < RFL_DEFAULT_CHAR_MAX) {
 
-        if (mpSportsPlayerData != NULL && rArg.pSportsPlayerData != NULL) {
-            *mpSportsPlayerData = rArg.pSportsPlayerData[mPlayerDataIndex];
+        if (mpSportsPlayerData != NULL &&
+            rArg.pDefaultSportsPlayerData != NULL) {
+            *mpSportsPlayerData =
+                rArg.pDefaultSportsPlayerData[mPlayerDataIndex];
         }
 
-        if (mpPartyPlayerData != NULL && rArg.pPartyPlayerData != NULL) {
-            *mpPartyPlayerData = rArg.pPartyPlayerData[mPlayerDataIndex];
+        if (mpPartyPlayerData != NULL && rArg.pDefaultPartyPlayerData != NULL) {
+            *mpPartyPlayerData = rArg.pDefaultPartyPlayerData[mPlayerDataIndex];
         }
 
     } else if (mDataSource >= RFLDataSource_Controller1 &&
@@ -152,12 +155,14 @@ void RPSysPlayer::saveData(const RPSysPlayerArg& rArg) {
     } else if (mDataSource == RFLDataSource_Default &&
                mPlayerDataIndex < RFL_DEFAULT_CHAR_MAX) {
 
-        if (mpSportsPlayerData != NULL && rArg.pSportsPlayerData != NULL) {
-            rArg.pSportsPlayerData[mPlayerDataIndex] = *mpSportsPlayerData;
+        if (mpSportsPlayerData != NULL &&
+            rArg.pDefaultSportsPlayerData != NULL) {
+            rArg.pDefaultSportsPlayerData[mPlayerDataIndex] =
+                *mpSportsPlayerData;
         }
 
-        if (mpPartyPlayerData != NULL && rArg.pPartyPlayerData != NULL) {
-            rArg.pPartyPlayerData[mPlayerDataIndex] = *mpPartyPlayerData;
+        if (mpPartyPlayerData != NULL && rArg.pDefaultPartyPlayerData != NULL) {
+            rArg.pDefaultPartyPlayerData[mPlayerDataIndex] = *mpPartyPlayerData;
         }
 
     } else if (mDataSource >= RFLDataSource_Controller1 &&
