@@ -1,73 +1,85 @@
 #include <revolution/NWC24.h>
+#include <revolution/NWC24/NWC24Internal.h>
+
 #include <string.h>
 
 static const char* DLFilePath = "/shared2/wc24/nwc24dl.bin";
 
-static NWC24DlEntry* GetDlTaskEntryHeader(u16 i);
-static NWC24Err WriteDlHeader(NWC24File* file);
-static NWC24Err SeekDlTaskEntry(u16 i, NWC24File* file);
-static NWC24Err CheckDlEntryAvailable(u16 i);
-static NWC24Err WriteDlTaskEntry(NWC24DlTask* task, NWC24File* file);
-static NWC24Err ReadDlTaskEntry(NWC24DlTask* task, u16 i, NWC24File* file);
-static NWC24Err ClearDlTaskEntry(u16 i, NWC24File* file);
-static NWC24Err ReadDlHeader(NWC24File* file);
-static void InitTaskEntryHeader(u16 i);
-static NWC24Err LoadDlTask(NWC24DlTask* task, u16 i);
-static NWC24Err DeleteDlTask(NWC24DlTask* task) DECOMP_DONT_INLINE;
-static NWC24Err CheckHeader(NWC24DlHeader* header);
+// Forward declarations
+static BOOL IsPrivateId(u16 id);
+static NWC24iDlEntry* GetDlTaskEntryHeader(u16 id);
+static NWC24Err WriteDlHeader(NWC24File* pFile);
+static NWC24Err SeekDlTaskEntry(u16 id, NWC24File* pFile);
+static NWC24Err CheckDlEntryAvailable(u16 id);
+static NWC24Err WriteDlTaskEntry(NWC24iDlTask* pTask, NWC24File* pFile);
+static NWC24Err ReadDlTaskEntry(NWC24iDlTask* pTask, u16 id, NWC24File* pFile);
+static NWC24Err ClearDlTaskEntry(u16 id, NWC24File* pFile);
+static NWC24Err ReadDlHeader(NWC24File* pFile);
+static void InitTaskEntryHeader(u16 id);
+static NWC24Err LoadDlTask(NWC24iDlTask* pTask, u16 id);
+static NWC24Err DeleteDlTask(NWC24iDlTask* pTask) DECOMP_DONT_INLINE;
+static NWC24Err CheckHeader(NWC24iDlHeader* pHeader);
 
-static BOOL IsPrivateId(u16 i) {
-    return i < NWC24iGetCachedDlHeader()->privateTasks;
-}
+NWC24Err NWC24CheckDlTask(NWC24DlTask* pTask) {
+    NWC24iDlTask* pTaskImpl;
+    NWC24iDlHeader* pHeader;
 
-NWC24Err NWC24CheckDlTask(NWC24DlTask* task) {
-    NWC24DlHeader* header;
+    pTaskImpl = (NWC24iDlTask*)pTask;
+    pHeader = NWC24iGetCachedDlHeader();
 
-    header = NWC24iGetCachedDlHeader();
-
-    if (task == NULL) {
+    if (pTask == NULL) {
         return NWC24_ERR_INVALID_VALUE;
     }
 
-    if (header == NULL) {
+    if (pHeader == NULL) {
         return NWC24_ERR_LIB_NOT_OPENED;
     }
 
     // @bug Should be maxTasks
-    if (task->id != 0xFFFF &&
-        task->id >= NWC24iGetCachedDlHeader()->maxSubTasks) {
+    if (pTaskImpl->id != 0xFFFF &&
+        pTaskImpl->id >= NWC24iGetCachedDlHeader()->maxSubTasks) {
         return NWC24_ERR_INVALID_VALUE;
     }
 
     return NWC24_OK;
 }
 
-NWC24Err NWC24DeleteDlTaskForced(NWC24DlTask* task) {
+static BOOL IsPrivateId(u16 id) {
+    return id < NWC24iGetCachedDlHeader()->privateTasks;
+}
+
+NWC24Err NWC24DeleteDlTaskForced(NWC24DlTask* pTask) {
+    NWC24iDlTask* pTaskImpl;
     NWC24Err result;
 
-    result = NWC24CheckDlTask(task);
+    pTaskImpl = (NWC24iDlTask*)pTask;
+
+    result = NWC24CheckDlTask(pTask);
     if (result != NWC24_OK) {
         return result;
     }
 
-    result = DeleteDlTask(task);
+    result = DeleteDlTask(pTaskImpl);
     if (result < 0) {
         return result;
     }
 
-    task->id = 0xFFFF;
+    pTaskImpl->id = 0xFFFF;
     return result;
 }
 
-NWC24Err NWC24GetDlTask(NWC24DlTask* task, u16 i) {
+NWC24Err NWC24GetDlTask(NWC24DlTask* pTask, u16 id) {
+    NWC24iDlTask* pTaskImpl;
     NWC24Err result;
 
-    result = CheckDlEntryAvailable(i);
+    pTaskImpl = (NWC24iDlTask*)pTask;
+
+    result = CheckDlEntryAvailable(id);
     if (result < 0) {
         return result;
     }
 
-    result = LoadDlTask(task, i);
+    result = LoadDlTask(pTaskImpl, id);
     if (result < 0) {
         return result;
     }
@@ -96,27 +108,24 @@ NWC24Err NWC24iCloseDlTaskList(void) {
     return NWC24_OK;
 }
 
-NWC24DlHeader* NWC24iGetCachedDlHeader(void) {
-    return (NWC24DlHeader*)NWC24WorkP->dlHeader;
+NWC24iDlHeader* NWC24iGetCachedDlHeader(void) {
+    return (NWC24iDlHeader*)NWC24WorkP->dlHeader;
 }
 
-NWC24Err NWC24iCheckHeaderConsistency(NWC24DlHeader* header, BOOL clear) {
-    NWC24DlTask* ptask;
-    NWC24DlTask* pptask;
+NWC24Err NWC24iCheckHeaderConsistency(NWC24iDlHeader* pHeader, BOOL clear) {
+    NWC24iDlTask* pTaskImpl;
     NWC24DlTask task;
     u16 i;
 
-    // Man...
-    ptask = &task;
-    pptask = ptask;
+    pTaskImpl = (NWC24iDlTask*)&task;
 
     // @bug Should be maxTasks
-    for (i = 0; i < header->maxSubTasks; i++) {
+    for (i = 0; i < pHeader->maxSubTasks; i++) {
         if (CheckDlEntryAvailable(i) == NWC24_OK && clear) {
-            if (NWC24GetDlTask(pptask, i) < 0) {
-                NWC24DeleteDlTaskForced(ptask);
-            } else if (!IsPrivateId(i) && task.count == 0) {
-                NWC24DeleteDlTaskForced(ptask);
+            if (NWC24GetDlTask(&task, i) < 0) {
+                NWC24DeleteDlTaskForced(&task);
+            } else if (!IsPrivateId(i) && pTaskImpl->count == 0) {
+                NWC24DeleteDlTaskForced(&task);
             }
         }
     }
@@ -159,20 +168,20 @@ NWC24Err NWC24iLoadDlHeader(void) {
     return ret;
 }
 
-static NWC24DlEntry* GetDlTaskEntryHeader(u16 i) {
-    return &NWC24iGetCachedDlHeader()->entries[i];
+static NWC24iDlEntry* GetDlTaskEntryHeader(u16 id) {
+    return &NWC24iGetCachedDlHeader()->entries[id];
 }
 
-static NWC24Err WriteDlHeader(NWC24File* file) {
+static NWC24Err WriteDlHeader(NWC24File* pFile) {
     NWC24Err result;
 
-    result = NWC24FSeek(file, 0, NWC24_SEEK_BEG);
+    result = NWC24FSeek(pFile, 0, NWC24_SEEK_BEG);
     if (result < 0) {
         return result;
     }
 
     result =
-        NWC24FWrite(NWC24iGetCachedDlHeader(), sizeof(NWC24DlHeader), file);
+        NWC24FWrite(NWC24iGetCachedDlHeader(), sizeof(NWC24iDlHeader), pFile);
     if (result < 0) {
         return result;
     }
@@ -180,34 +189,34 @@ static NWC24Err WriteDlHeader(NWC24File* file) {
     return NWC24_OK;
 }
 
-static NWC24Err SeekDlTaskEntry(u16 i, NWC24File* file) {
-    return NWC24FSeek(file, sizeof(NWC24DlHeader) + i * sizeof(NWC24DlTask),
+static NWC24Err SeekDlTaskEntry(u16 id, NWC24File* pFile) {
+    return NWC24FSeek(pFile, sizeof(NWC24iDlHeader) + id * sizeof(NWC24iDlTask),
                       NWC24_SEEK_BEG);
 }
 
-static NWC24Err CheckDlEntryAvailable(u16 i) {
+static NWC24Err CheckDlEntryAvailable(u16 id) {
     // @bug Should be maxTasks
-    if (i >= NWC24iGetCachedDlHeader()->maxSubTasks || i == 0xFFFF) {
+    if (id >= NWC24iGetCachedDlHeader()->maxSubTasks || id == 0xFFFF) {
         return NWC24_ERR_INVALID_VALUE;
     }
 
-    if (GetDlTaskEntryHeader(i)->app == 0) {
+    if (GetDlTaskEntryHeader(id)->app == 0) {
         return NWC24_ERR_NOT_FOUND;
     }
 
     return NWC24_OK;
 }
 
-static NWC24Err WriteDlTaskEntry(NWC24DlTask* task, NWC24File* file) {
+static NWC24Err WriteDlTaskEntry(NWC24iDlTask* pTask, NWC24File* pFile) {
     NWC24Err result;
 
-    result = SeekDlTaskEntry(task->id, file);
+    result = SeekDlTaskEntry(pTask->id, pFile);
     if (result < 0) {
         return result;
     }
 
-    memcpy(NWC24WorkP->dlTask, task, sizeof(NWC24DlTask));
-    result = NWC24FWrite(NWC24WorkP->dlTask, sizeof(NWC24DlTask), file);
+    memcpy(NWC24WorkP->dlTask, pTask, sizeof(NWC24iDlTask));
+    result = NWC24FWrite(NWC24WorkP->dlTask, sizeof(NWC24iDlTask), pFile);
     if (result < 0) {
         return result;
     }
@@ -215,15 +224,15 @@ static NWC24Err WriteDlTaskEntry(NWC24DlTask* task, NWC24File* file) {
     return NWC24_OK;
 }
 
-static NWC24Err ReadDlTaskEntry(NWC24DlTask* task, u16 i, NWC24File* file) {
+static NWC24Err ReadDlTaskEntry(NWC24iDlTask* pTask, u16 id, NWC24File* pFile) {
     NWC24Err result;
 
-    result = SeekDlTaskEntry(i, file);
+    result = SeekDlTaskEntry(id, pFile);
     if (result < 0) {
         return result;
     }
 
-    result = NWC24FRead(task, sizeof(NWC24DlTask), file);
+    result = NWC24FRead(pTask, sizeof(NWC24iDlTask), pFile);
     if (result < 0) {
         return result;
     }
@@ -231,26 +240,26 @@ static NWC24Err ReadDlTaskEntry(NWC24DlTask* task, u16 i, NWC24File* file) {
     return NWC24_OK;
 }
 
-static NWC24Err ClearDlTaskEntry(u16 i, NWC24File* file) {
-    NWC24DlTask* task = (NWC24DlTask*)NWC24WorkP->dlTask;
+static NWC24Err ClearDlTaskEntry(u16 id, NWC24File* pFile) {
+    NWC24iDlTask* pTask = (NWC24iDlTask*)NWC24WorkP->dlTask;
 
-    memset(task, 0, sizeof(NWC24DlTask));
-    task->type = 0xFF;
-    task->id = i;
+    memset(pTask, 0, sizeof(NWC24iDlTask));
+    pTask->type = 0xFF;
+    pTask->id = id;
 
-    InitTaskEntryHeader(i);
-    return WriteDlTaskEntry(task, file);
+    InitTaskEntryHeader(id);
+    return WriteDlTaskEntry(pTask, pFile);
 }
 
-static NWC24Err ReadDlHeader(NWC24File* file) {
+static NWC24Err ReadDlHeader(NWC24File* pFile) {
     NWC24Err result;
 
-    result = NWC24FSeek(file, 0, NWC24_SEEK_BEG);
+    result = NWC24FSeek(pFile, 0, NWC24_SEEK_BEG);
     if (result < 0) {
         return result;
     }
 
-    result = NWC24FRead(&NWC24WorkP->dlHeader, sizeof(NWC24DlHeader), file);
+    result = NWC24FRead(&NWC24WorkP->dlHeader, sizeof(NWC24iDlHeader), pFile);
     if (result < 0) {
         return result;
     }
@@ -258,11 +267,11 @@ static NWC24Err ReadDlHeader(NWC24File* file) {
     return NWC24_OK;
 }
 
-static void InitTaskEntryHeader(u16 i) {
-    memset(GetDlTaskEntryHeader(i), 0, sizeof(NWC24DlEntry));
+static void InitTaskEntryHeader(u16 id) {
+    memset(GetDlTaskEntryHeader(id), 0, sizeof(NWC24iDlEntry));
 }
 
-static NWC24Err LoadDlTask(NWC24DlTask* task, u16 i) {
+static NWC24Err LoadDlTask(NWC24iDlTask* pTask, u16 id) {
     NWC24File file;
     NWC24Err result;
     NWC24Err close;
@@ -273,7 +282,7 @@ static NWC24Err LoadDlTask(NWC24DlTask* task, u16 i) {
         return result;
     }
 
-    result = ReadDlTaskEntry(task, i, &file);
+    result = ReadDlTaskEntry(pTask, id, &file);
     close = NWC24FClose(&file);
 
     if (result != NWC24_OK) {
@@ -285,7 +294,7 @@ static NWC24Err LoadDlTask(NWC24DlTask* task, u16 i) {
     return ret;
 }
 
-static NWC24Err DeleteDlTask(NWC24DlTask* task) {
+static NWC24Err DeleteDlTask(NWC24iDlTask* pTask) {
     NWC24File file;
     NWC24Err result;
     NWC24Err close;
@@ -296,9 +305,9 @@ static NWC24Err DeleteDlTask(NWC24DlTask* task) {
         return result;
     }
 
-    result = ClearDlTaskEntry(task->id, &file);
+    result = ClearDlTaskEntry(pTask->id, &file);
     if (result >= 0) {
-        InitTaskEntryHeader(task->id);
+        InitTaskEntryHeader(pTask->id);
         result = WriteDlHeader(&file);
     }
 
@@ -313,10 +322,10 @@ static NWC24Err DeleteDlTask(NWC24DlTask* task) {
     return ret;
 }
 
-static NWC24Err CheckHeader(NWC24DlHeader* header) {
+static NWC24Err CheckHeader(NWC24iDlHeader* pHeader) {
     // @bug Should be maxTasks
-    if (header->maxSubTasks < 1 || header->privateTasks < 1 ||
-        header->maxSubTasks < header->privateTasks) {
+    if (pHeader->maxSubTasks < 1 || pHeader->privateTasks < 1 ||
+        pHeader->maxSubTasks < pHeader->privateTasks) {
         return NWC24_ERR_BROKEN;
     }
 

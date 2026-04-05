@@ -1,12 +1,13 @@
 #include <revolution/NWC24.h>
+#include <revolution/NWC24/NWC24Internal.h>
 #include <revolution/OS.h>
 #include <revolution/SC.h>
 
 #define SHUTDOWN_RETRY_MAX 5
 
-typedef enum {
+enum {
     NWC24_IOCTL_SHUTDOWN = 40,
-} NWC24Ioctl;
+};
 
 static s32 nwc24ShtFd = -1;
 static s32 nwc24ShtRetryRest = 0;
@@ -45,7 +46,7 @@ NWC24Err NWC24iPrepareShutdown(void) {
     OSRegisterShutdownFunction(&ShutdownFuncInfo);
 
     if (nwc24ShtFd < 0) {
-        result = NWC24_OPEN_DEVICE("/dev/net/kd/request", &nwc24ShtFd,
+        result = NWC24_OPEN_DEVICE(NWC24i_SCHEDULER_DEVICE, &nwc24ShtFd,
                                    IPC_OPEN_READ);
     }
 
@@ -55,14 +56,15 @@ NWC24Err NWC24iPrepareShutdown(void) {
     return result;
 }
 
-NWC24Err NWC24iRequestShutdown(u32 event, NWC24Err* resultOut) {
+NWC24Err NWC24iRequestShutdown(u32 event, NWC24Err* pResult) {
     static u8 shtBuffer[32] ALIGN(32);
     static u8 shtResult[32] ALIGN(32);
 
     *(u32*)shtBuffer = event;
-    return NWC24_IOCTL_DEVICE_ASYNC(nwc24ShtFd, NWC24_IOCTL_SHUTDOWN, shtBuffer,
-                                    sizeof(shtBuffer), shtResult,
-                                    sizeof(shtResult), resultOut);
+    return NWC24_IOCTL_DEVICE_ASYNC(nwc24ShtFd, NWC24_IOCTL_SHUTDOWN, //
+                                    shtBuffer, sizeof(shtBuffer),     //
+                                    shtResult, sizeof(shtResult),     //
+                                    pResult);
 }
 
 BOOL NWC24Shutdown(BOOL final, u32 event) {

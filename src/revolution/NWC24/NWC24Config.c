@@ -1,6 +1,6 @@
-#include <revolution/NWC24.h>
-
 #include <revolution/DVD.h>
+#include <revolution/NWC24.h>
+#include <revolution/NWC24/NWC24Internal.h>
 #include <revolution/OS.h>
 
 #define CONFIG_MAGIC FOURCC('W', 'c', 'C', 'f')
@@ -9,7 +9,7 @@
 
 #define COMPANY_CODE_NINTENDO 01
 
-static NWC24Config* config = NULL;
+static NWC24iConfig* config = NULL;
 static BOOL ConfigModified = FALSE;
 
 static const char* MBoxDir = "/shared2/wc24/mbox";
@@ -18,23 +18,23 @@ static const char* CfgBakFile = "/shared2/wc24/nwc24msg.cbk";
 
 static u32 GetConfigCheckSum(void);
 static NWC24Err CheckConfig(void) DECOMP_DONT_INLINE;
-static NWC24Err GenerateUserId(u64* idOut);
+static NWC24Err GenerateUserId(u64* pId);
 
-NWC24Err NWC24GetMyUserId(u64* idOut) {
+NWC24Err NWC24GetMyUserId(u64* pId) {
     NWC24Err scdErr;
     NWC24Err result;
 
     result = NWC24_OK;
 
     if (NWC24IsMsgLibOpened() || NWC24IsMsgLibOpenedByTool()) {
-        *idOut = config->userId;
+        *pId = config->userId;
     } else {
         scdErr = NWC24SuspendScheduler();
         if (scdErr < 0) {
             return scdErr;
         }
 
-        result = NWC24GenerateNewUserId(idOut);
+        result = NWC24GenerateNewUserId(pId);
         if (result == NWC24_ERR_ID_GENERATED ||
             result == NWC24_ERR_ID_REGISTERED) {
             result = NWC24_OK;
@@ -49,7 +49,7 @@ NWC24Err NWC24GetMyUserId(u64* idOut) {
     return result;
 }
 
-NWC24Err NWC24GenerateNewUserId(u64* idOut) {
+NWC24Err NWC24GenerateNewUserId(u64* pId) {
     NWC24Err open;
     NWC24Err close;
 
@@ -58,14 +58,14 @@ NWC24Err NWC24GenerateNewUserId(u64* idOut) {
         return open;
     }
 
-    open = GenerateUserId(idOut);
+    open = GenerateUserId(pId);
     close = NWC24BlockOpenMsgLib(FALSE);
 
     return open >= 0 ? close : open;
 }
 
 NWC24Err NWC24iConfigOpen(void) {
-    config = (NWC24Config*)NWC24WorkP->config;
+    config = (NWC24iConfig*)NWC24WorkP->config;
     ConfigModified = FALSE;
     return NWC24iConfigReload();
 }
@@ -82,7 +82,7 @@ NWC24Err NWC24iConfigReload(void) {
     result = NWC24FOpen(&file, ConfigFile, NWC24_OPEN_NAND_R);
 
     if (result == NWC24_OK) {
-        result = NWC24FRead(config, sizeof(NWC24Config), &file);
+        result = NWC24FRead(config, sizeof(NWC24iConfig), &file);
         close = NWC24FClose(&file);
         result = result != NWC24_OK ? result : close;
     }
@@ -99,7 +99,7 @@ NWC24Err NWC24iConfigReload(void) {
     result = NWC24FOpen(&file, CfgBakFile, NWC24_OPEN_NAND_R);
 
     if (result == NWC24_OK) {
-        result = NWC24FRead(config, sizeof(NWC24Config), &file);
+        result = NWC24FRead(config, sizeof(NWC24iConfig), &file);
         close = NWC24FClose(&file);
         result = result != NWC24_OK ? result : close;
     }
@@ -133,7 +133,7 @@ NWC24Err NWC24iConfigFlush(void) {
     result = NWC24FOpen(&file, ConfigFile, NWC24_OPEN_NAND_W);
 
     if (result == NWC24_OK) {
-        result = NWC24FWrite(config, sizeof(NWC24Config), &file);
+        result = NWC24FWrite(config, sizeof(NWC24iConfig), &file);
         close = NWC24FClose(&file);
         result = result != NWC24_OK ? result : close;
 
@@ -147,7 +147,7 @@ NWC24Err NWC24iConfigFlush(void) {
     result = NWC24FOpen(&file, CfgBakFile, NWC24_OPEN_NAND_W);
 
     if (result == NWC24_OK) {
-        result = NWC24FWrite(config, sizeof(NWC24Config), &file);
+        result = NWC24FWrite(config, sizeof(NWC24iConfig), &file);
         close = NWC24FClose(&file);
         result = result != NWC24_OK ? result : close;
 
@@ -190,25 +190,31 @@ u32 NWC24GetAppId(void) {
 u16 NWC24GetGroupId(void) {
     NANDStatus stat;
     u16 groupId;
-    char* dir;
+    char* pHomeDir;
 
     groupId = COMPANY_CODE_NINTENDO;
 
     switch (OSGetAppType()) {
-    case OS_APP_TYPE_IPL:
+    case OS_APP_TYPE_IPL: {
         groupId = COMPANY_CODE_NINTENDO;
         break;
-    case OS_APP_TYPE_DVD:
+    }
+
+    case OS_APP_TYPE_DVD: {
         groupId = *(u16*)DVDGetCurrentDiskID()->company;
         break;
-    case OS_APP_TYPE_CHANNEL:
-        dir = NWC24WorkP->pathWork;
-        if (NANDGetHomeDir(dir) == NAND_RESULT_OK) {
-            if (NANDGetStatus(dir, &stat) == NAND_RESULT_OK) {
+    }
+
+    case OS_APP_TYPE_CHANNEL: {
+        pHomeDir = NWC24WorkP->pathWork;
+
+        if (NANDGetHomeDir(pHomeDir) == NAND_RESULT_OK) {
+            if (NANDGetStatus(pHomeDir, &stat) == NAND_RESULT_OK) {
                 groupId = stat.groupId;
             }
         }
         break;
+    }
     }
 
     return groupId;
@@ -217,14 +223,15 @@ u16 NWC24GetGroupId(void) {
 static u32 GetConfigCheckSum(void) {
     u32 i;
     u32 csum;
-    u32* ptr;
+    u32* pData;
+    u32 dataWords;
 
     csum = 0;
-    ptr = (u32*)config;
+    pData = (u32*)config;
+    dataWords = (sizeof(NWC24iConfig) - sizeof(config->checksum)) / sizeof(u32);
 
-    // -1 to avoid checksum member
-    for (i = 0; i < sizeof(NWC24Config) / sizeof(u32) - 1; i++) {
-        csum += *ptr++;
+    for (i = 0; i < dataWords; i++) {
+        csum += *pData++;
     }
 
     return csum;
@@ -250,13 +257,13 @@ static NWC24Err CheckConfig(void) {
     return NWC24_OK;
 }
 
-static NWC24Err GenerateUserId(u64* idOut) {
-    u32 sp08 = 0;
+static NWC24Err GenerateUserId(u64* pId) {
+    u32 dummy = 0;
 
-    if (idOut == NULL) {
+    if (pId == NULL) {
         return NWC24_ERR_INVALID_VALUE;
     }
 
-    *idOut = 9999999999999999;
-    return NWC24iRequestGenerateUserId(idOut, &sp08);
+    *pId = 9999999999999999;
+    return NWC24iRequestGenerateUserId(pId, &dummy);
 }

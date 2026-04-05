@@ -1,9 +1,15 @@
 #ifndef RVL_SDK_NWC24_TYPES_H
 #define RVL_SDK_NWC24_TYPES_H
 #include <types.h>
+
+#include <revolution/NAND.h>
+#include <revolution/VF.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+#define NWC24_FRIEND_LIST_CAPACITY 100
 
 typedef enum {
     NWC24_ERR_OTHER_REGION = -52,
@@ -101,6 +107,51 @@ typedef enum {
     NWC24_ENC_QUOTED_PRINTABLE,
     NWC24_MAX_ENCODINGS
 } NWC24Encoding;
+
+typedef enum NWC24MsgBoxId {
+    NWC24_MSGBOX_SEND,
+    NWC24_MSGBOX_RECV,
+    NWC24_MSGBOX_MAX
+} NWC24MsgBoxId;
+
+typedef struct NWC24File {
+    u32 id;             // at 0x0
+    u32 mode;           // at 0x4
+    u32 align;          // at 0x8
+    NANDFileInfo nandf; // at 0xC
+    VFFile vff;         // at 0x98
+} NWC24File;
+
+typedef struct NWC24Data {
+    union {
+        const void* pData;
+        u32 offset;
+    }; // at 0x0
+
+    u32 size; // at 0x4
+} NWC24Data;
+
+typedef struct NWC24Date {
+    u16 year; // at 0x0
+    u8 month; // at 0x2
+    u8 day;   // at 0x3
+    u8 hour;  // at 0x4
+    u8 sec;   // at 0x5
+    u8 min;   // at 0x6
+    u8 BYTE_0x7;
+} NWC24Date;
+
+typedef struct NWC24Calendar {
+    u32 sec;      // at 0x0
+    u32 min;      // at 0x4
+    u32 hour;     // at 0x8
+    u32 day;      // at 0xC
+    u32 month;    // at 0x10
+    u32 year;     // at 0x14
+    u32 UNK_0x18; // at 0x18
+    u32 UNK_0x1C; // at 0x1C
+    u32 UNK_0x20; // at 0x20
+} NWC24Calendar;
 
 #ifdef __cplusplus
 }

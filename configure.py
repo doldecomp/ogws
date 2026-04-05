@@ -16,10 +16,10 @@
 
 import argparse
 import sys
-from pathlib import Path
-from typing import Any, Dict, List
-from os.path import join as joinpath
 from os import walk
+from os.path import join as joinpath
+from pathlib import Path
+from typing import List
 
 from tools.project import (
     Object,
@@ -144,10 +144,11 @@ version_num = VERSIONS.index(config.version)
 
 # Extra flags for clangd parser
 config.extra_clang_flags = [
-    "-Iinclude/MSL/internal", # Allow clangd to see internal MSL headers
-    "-Wno-invalid-offsetof",  # Silence non-POD offsetof 
-    "-fshort-wchar",          # Force wide characters as 16-bit 
+    "-Iinclude/MSL/internal",  # Allow clangd to see internal MSL headers
+    "-Wno-invalid-offsetof",  # Silence non-POD offsetof
+    "-fshort-wchar",          # Force wide characters as 16-bit
 ]
+
 
 def find_directories(root_path: str, recursive: bool) -> list[str]:
     found = [root_path]
@@ -160,10 +161,11 @@ def find_directories(root_path: str, recursive: bool) -> list[str]:
 
     return found
 
+
 # Add BTE directories
 config.extra_clang_flags.extend([
     f"-isystem{x}" for x in
-        find_directories("include/revolution/BTE", recursive=True)
+    find_directories("include/revolution/BTE", recursive=True)
 ])
 
 
@@ -370,7 +372,7 @@ cflags_egg = [
     "-use_lmw_stmw on",
     "-str reuse,pool,readonly",
     "-i include/nw4r",
-    "-ir include/egg", # TODO(kiwi) remove after refactor
+    "-ir include/egg",  # TODO(kiwi) remove after refactor
 ]
 
 # RVL SDK flags
@@ -415,7 +417,7 @@ cflags_rp = [
     "-use_lmw_stmw on",
     "-str reuse,pool,readonly",
     "-i include/nw4r",
-    "-ir include/egg", # TODO(kiwi) remove after refactor
+    "-ir include/egg",  # TODO(kiwi) remove after refactor
     "-i include/Pack",
 ]
 
@@ -439,7 +441,7 @@ config.libs = [
         "lib": "libnw4r_ut",
         "mw_version": config.linker_version,
         "cflags": cflags_libnw4r_ut,
-        "progress_category": "nw4r", # str | List[str]
+        "progress_category": "nw4r",  # str | List[str]
         "objects": [
             Object(Matching, "nw4r/ut/ut_list.cpp"),
             Object(Matching, "nw4r/ut/ut_LinkList.cpp"),
@@ -464,7 +466,7 @@ config.libs = [
         "lib": "libnw4r_ef",
         "mw_version": config.linker_version,
         "cflags": cflags_libnw4r_ef,
-        "progress_category": "nw4r", # str | List[str]
+        "progress_category": "nw4r",  # str | List[str]
         "objects": [
             Object(Matching, "nw4r/ef/ef_draworder.cpp"),
             Object(Matching, "nw4r/ef/ef_effect.cpp"),
@@ -501,7 +503,7 @@ config.libs = [
         "lib": "libnw4r_math",
         "mw_version": config.linker_version,
         "cflags": cflags_libnw4r_math,
-        "progress_category": "nw4r", # str | List[str]
+        "progress_category": "nw4r",  # str | List[str]
         "objects": [
             Object(Matching, "nw4r/math/math_arithmetic.cpp"),
             Object(Matching, "nw4r/math/math_triangular.cpp"),
@@ -514,7 +516,7 @@ config.libs = [
         "lib": "libnw4r_snd",
         "mw_version": config.linker_version,
         "cflags": cflags_libnw4r_snd,
-        "progress_category": "nw4r", # str | List[str]
+        "progress_category": "nw4r",  # str | List[str]
         "objects": [
             Object(Matching, "nw4r/snd/snd_AnimSound.cpp"),
             Object(Matching, "nw4r/snd/snd_AxManager.cpp"),
@@ -587,7 +589,7 @@ config.libs = [
         "lib": "libnw4r_g3d",
         "mw_version": config.linker_version,
         "cflags": cflags_libnw4r_g3d,
-        "progress_category": "nw4r", # str | List[str]
+        "progress_category": "nw4r",  # str | List[str]
         "objects": [
             Object(Matching, "nw4r/g3d/res/g3d_rescommon.cpp"),
             Object(Matching, "nw4r/g3d/res/g3d_resdict.cpp"),
@@ -653,7 +655,7 @@ config.libs = [
         "lib": "libnw4r_lyt",
         "mw_version": config.linker_version,
         "cflags": cflags_libnw4r_lyt,
-        "progress_category": "nw4r", # str | List[str]
+        "progress_category": "nw4r",  # str | List[str]
         "objects": [
             Object(Matching, "nw4r/lyt/lyt_init.cpp"),
             Object(Matching, "nw4r/lyt/lyt_pane.cpp"),
@@ -676,7 +678,7 @@ config.libs = [
         "lib": "libnw4r_g3d_scnrfl",
         "mw_version": config.linker_version,
         "cflags": cflags_libnw4r_g3d_scnrfl,
-        "progress_category": "nw4r", # str | List[str]
+        "progress_category": "nw4r",  # str | List[str]
         "objects": [
             Object(Matching, "nw4r/g3d/g3d_scnrfl.cpp"),
         ],
@@ -685,7 +687,7 @@ config.libs = [
         "lib": "egg",
         "mw_version": config.linker_version,
         "cflags": cflags_egg,
-        "progress_category": "egg", # str | List[str]
+        "progress_category": "egg",  # str | List[str]
         "objects": [
             Object(Matching, "egg/gfxe/eggShadowTextureManager.cpp"),
             Object(Matching, "egg/gfxe/eggStateGX.cpp"),
@@ -775,7 +777,7 @@ config.libs = [
         "lib": "Runtime.PPCEABI.H",
         "mw_version": config.linker_version,
         "cflags": cflags_runtime,
-        "progress_category": "sdk", # str | List[str]
+        "progress_category": "sdk",  # str | List[str]
         "objects": [
             Object(Matching, "runtime/__mem.c"),
             Object(Matching, "runtime/__va_arg.c"),
@@ -792,7 +794,7 @@ config.libs = [
         "lib": "MSL_C",
         "mw_version": "GC/3.0a3",
         "cflags": cflags_runtime,
-        "progress_category": "sdk", # str | List[str]
+        "progress_category": "sdk",  # str | List[str]
         "objects": [
             Object(NonMatching, "MSL/alloc.c"),
             Object(NonMatching, "MSL/ansi_files.c"),
@@ -860,7 +862,7 @@ config.libs = [
         "lib": "MetroTRK",
         "mw_version": "GC/2.7",
         "cflags": cflags_trk,
-        "progress_category": "sdk", # str | List[str]
+        "progress_category": "sdk",  # str | List[str]
         "objects": [
             Object(NonMatching, "MetroTRK/debugger/Portable/mainloop.c"),
             Object(Matching, "MetroTRK/debugger/Portable/nubevent.c"),
@@ -897,7 +899,7 @@ config.libs = [
         "lib": "RVL_SDK",
         "mw_version": config.linker_version,
         "cflags": cflags_rvl,
-        "progress_category": "sdk", # str | List[str]
+        "progress_category": "sdk",  # str | List[str]
         "objects": [
             Object(NonMatching, "revolution/NdevExi2AD/DebuggerDriver.c"),
             Object(Matching, "revolution/NdevExi2AD/exi2.c"),
@@ -1029,18 +1031,18 @@ config.libs = [
             Object(Matching, "revolution/ESP/esp.c"),
             Object(Matching, "revolution/NET/nettime.c"),
             Object(NonMatching, "revolution/NET/NETVersion.c"),
-            Object(NonMatching, "revolution/NWC24/NWC24StdApi.c"),
+            Object(Matching, "revolution/NWC24/NWC24StdApi.c"),
             Object(Matching, "revolution/NWC24/NWC24FileApi.c"),
             Object(Matching, "revolution/NWC24/NWC24Config.c"),
             Object(Matching, "revolution/NWC24/NWC24Utils.c"),
             Object(Matching, "revolution/NWC24/NWC24Manage.c"),
             Object(Matching, "revolution/NWC24/NWC24MsgObj.c"),
             Object(NonMatching, "revolution/NWC24/NWC24MBoxCtrl.c"),
-            Object(NonMatching, "revolution/NWC24/NWC24Mime.c"),
+            Object(Matching, "revolution/NWC24/NWC24Mime.c"),
             Object(Matching, "revolution/NWC24/NWC24Parser.c"),
             Object(NonMatching, "revolution/NWC24/NWC24MsgCommit.c"),
             Object(Matching, "revolution/NWC24/NWC24Schedule.c"),
-            Object(Matching, "revolution/NWC24/NWC24DateParser.c"),
+            Object(NonMatching, "revolution/NWC24/NWC24DateParser.c"),
             Object(Matching, "revolution/NWC24/NWC24FriendList.c"),
             Object(Matching, "revolution/NWC24/NWC24SecretFList.c"),
             Object(Matching, "revolution/NWC24/NWC24Time.c"),
@@ -1053,7 +1055,7 @@ config.libs = [
         "lib": "RVLFaceLib",
         "mw_version": config.linker_version,
         "cflags": cflags_rfl,
-        "progress_category": "rfl", # str | List[str]
+        "progress_category": "rfl",  # str | List[str]
         "objects": [
             Object(Matching, "RVLFaceLib/RFL_System.c"),
             Object(Matching, "RVLFaceLib/RFL_NANDLoader.c"),
@@ -1076,7 +1078,7 @@ config.libs = [
         "lib": "homebuttonMiniLib",
         "mw_version": config.linker_version,
         "cflags": cflags_hbm,
-        "progress_category": "hbm", # str | List[str]
+        "progress_category": "hbm",  # str | List[str]
         "objects": [
             Object(Matching, "homebuttonMiniLib/HBMBase.cpp"),
             Object(Matching, "homebuttonMiniLib/HBMAnmController.cpp"),
@@ -1090,7 +1092,7 @@ config.libs = [
         "lib": "RP",
         "mw_version": config.linker_version,
         "cflags": cflags_rp,
-        "progress_category": "kernel", # str | List[str]
+        "progress_category": "kernel",  # str | List[str]
         "objects": [
             Object(Matching, "main.cpp"),
             Object(NonMatching, "Pack/RPKernel/RPSysSystem.cpp"),
@@ -1148,7 +1150,7 @@ config.libs = [
         "lib": "RP",
         "mw_version": config.linker_version,
         "cflags": cflags_rp,
-        "progress_category": "system", # str | List[str]
+        "progress_category": "system",  # str | List[str]
         "objects": [
             Object(NonMatching, "Pack/RPSystem/RPSysSceneCreator.cpp"),
             Object(NonMatching, "Pack/RPSystem/RPSysScene.cpp"),
@@ -1179,7 +1181,7 @@ config.libs = [
         "lib": "RP",
         "mw_version": config.linker_version,
         "cflags": cflags_rp,
-        "progress_category": "graphics", # str | List[str]
+        "progress_category": "graphics",  # str | List[str]
         "objects": [
             Object(NonMatching, "Pack/RPGraphics/RPGrpCamera.cpp"),
             Object(NonMatching, "Pack/RPGraphics/RPGrpDrawPathManager.cpp"),
@@ -1213,7 +1215,7 @@ config.libs = [
         "lib": "RP",
         "mw_version": config.linker_version,
         "cflags": cflags_rp,
-        "progress_category": "audio", # str | List[str]
+        "progress_category": "audio",  # str | List[str]
         "objects": [
             Object(NonMatching, "Pack/RPAudio/RPSndAudioMgr.cpp"),
             Object(Matching, "Pack/RPAudio/RPSndSpeakerMgr.cpp"),
@@ -1228,7 +1230,7 @@ config.libs = [
         "lib": "RP",
         "mw_version": config.linker_version,
         "cflags": cflags_rp,
-        "progress_category": "utility", # str | List[str]
+        "progress_category": "utility",  # str | List[str]
         "objects": [
             Object(NonMatching, "Pack/RPUtility/RPUtlDohMath.cpp"),
             Object(NonMatching, "Pack/RPUtility_unsplit.o"),
@@ -1238,7 +1240,7 @@ config.libs = [
         "lib": "RP",
         "mw_version": config.linker_version,
         "cflags": cflags_rp,
-        "progress_category": "sports", # str | List[str]
+        "progress_category": "sports",  # str | List[str]
         "objects": [
             Object(NonMatching, "Pack/RPSports/RPSportsCommon/RPSportsCommon_unsplit.o"),
         ],
@@ -1247,7 +1249,7 @@ config.libs = [
         "lib": "RP",
         "mw_version": config.linker_version,
         "cflags": cflags_rp,
-        "progress_category": "tennis", # str | List[str]
+        "progress_category": "tennis",  # str | List[str]
         "objects": [
             Object(NonMatching, "Pack/RPSports/RPTnsScene/RPTnsScene_unsplit.o"),
         ],
@@ -1256,7 +1258,7 @@ config.libs = [
         "lib": "RP",
         "mw_version": config.linker_version,
         "cflags": cflags_rp,
-        "progress_category": "baseball", # str | List[str]
+        "progress_category": "baseball",  # str | List[str]
         "objects": [
             Object(NonMatching, "Pack/RPSports/RPBsbScene/RPBsbScene_unsplit.o"),
         ],
@@ -1265,7 +1267,7 @@ config.libs = [
         "lib": "RP",
         "mw_version": config.linker_version,
         "cflags": cflags_rp,
-        "progress_category": "golf", # str | List[str]
+        "progress_category": "golf",  # str | List[str]
         "objects": [
             Object(NonMatching, "Pack/RPSports/RPGolScene/RPGolScene_unsplit.o"),
         ],
@@ -1274,7 +1276,7 @@ config.libs = [
         "lib": "RP",
         "mw_version": config.linker_version,
         "cflags": cflags_rp,
-        "progress_category": "boxing", # str | List[str]
+        "progress_category": "boxing",  # str | List[str]
         "objects": [
             Object(NonMatching, "Pack/RPSports/RPBoxScene/RPBoxScene_unsplit.o"),
         ],
@@ -1283,7 +1285,7 @@ config.libs = [
         "lib": "RP",
         "mw_version": config.linker_version,
         "cflags": cflags_rp,
-        "progress_category": "bowling", # str | List[str]
+        "progress_category": "bowling",  # str | List[str]
         "objects": [
             Object(NonMatching, "Pack/RPSports/RPBowScene/RPBowScene_unsplit.o"),
         ],
@@ -1316,7 +1318,7 @@ config.progress_categories = [
     ProgressCategory("sdk", "RVL SDK"),
     ProgressCategory("rfl", "RVLFaceLib"),
     ProgressCategory("hbm", "homeButtonMiniLib"),
-    
+
     ProgressCategory("kernel", "RPKernel"),
     ProgressCategory("system", "RPSystem"),
     ProgressCategory("graphics", "RPGraphics"),

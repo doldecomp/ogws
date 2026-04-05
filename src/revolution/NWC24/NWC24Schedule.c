@@ -1,33 +1,36 @@
 #include <revolution/NWC24.h>
-
+#include <revolution/NWC24/NWC24Internal.h>
 #include <revolution/OS.h>
 
 #include <string.h>
 
 #define CHECK_CALLING_STATUS(block) CheckCallingStatus(__FUNCTION__, block)
 
-#define IOCTL_IN ((CommonBuffer*)nwc24ScdCommonBuffer)
-#define IOCTL_OUT ((CommonResult*)nwc24ScdCommonResult)
-
-typedef enum {
+enum {
     NWC24_IOCTL_SUSPEND_SCHEDULER = 1,
     NWC24_IOCTL_TRY_SUSPEND_SCHEDULER = 2,
     NWC24_IOCTL_RESUME_SCHEDULER = 3,
     NWC24_IOCTL_GENERATE_USER_ID = 15,
-} NWC24Ioctl;
+};
 
+#pragma pack(push, 1)
 typedef struct CommonBuffer {
     u32 WORD_0x0;
+    u8 padding[32 - 0x4];
 } CommonBuffer;
+#pragma pack(pop)
 
 #pragma pack(push, 1)
 typedef struct CommonResult {
     s32 result; // at 0x0
+
     union {
         u64 userid;
         s32 exResult;
     }; // at 0x4
-    u32 WORD_0x8;
+
+    u32 WORD_0xC;
+    u8 padding[32 - 0x10];
 } CommonResult;
 #pragma pack(pop)
 
@@ -38,27 +41,26 @@ static s32 nwc24ScdOpenCnt = 0;
 static OSMutex nwc24ScdCommandMutex;
 static OSMutex nwc24ScdCounterMutex;
 
-static u8 nwc24ScdCommonBuffer[32] ALIGN(32);
-static u8 nwc24ScdCommonResult[32] ALIGN(32);
+static CommonBuffer nwc24ScdCommonBuffer ALIGN(32);
+static CommonResult nwc24ScdCommonResult ALIGN(32);
 
 static u8 nwc24ScdStatBuf[256] ALIGN(32);
 
-// nwc24ScdStatBuf unused
 DECOMP_FORCEACTIVE(NWC24Schedule_c,
+                   nwc24ScdCommonResult,
+                   nwc24ScdCommonBuffer,
                    nwc24ScdCounterMutex,
                    nwc24ScdCommandMutex,
-                   nwc24ScdCommonBuffer,
-                   nwc24ScdCommonResult,
                    nwc24ScdStatBuf);
 
-// Pool order
-DECOMP_FORCEACTIVE(NWC24Schedule_c, "/dev/net/kd/request");
+DECOMP_FORCEACTIVE(NWC24Schedule_c, NWC24i_SCHEDULER_DEVICE);
 
+// Forward declarations
 static NWC24Err ExecSuspendScheduler(void) DECOMP_DONT_INLINE;
 static NWC24Err ExecTrySuspendScheduler(u32 arg0);
 static NWC24Err ExecResumeScheduler(void) DECOMP_DONT_INLINE;
-static NWC24Err ExecNoParamCommand(const char* user, s32 type,
-                                   NWC24Err* exResultOut);
+static NWC24Err ExecNoParamCommand(const char* pUser, s32 type,
+                                   NWC24Err* pExResult);
 
 static void InitScdMutex(void);
 
@@ -70,7 +72,7 @@ static void LockCounters(void);
 static BOOL TryLockCounters(void);
 static void UnlockCounters(void);
 
-static NWC24Err CheckCallingStatus(const char* user, BOOL block);
+static NWC24Err CheckCallingStatus(const char* pUser, BOOL block);
 
 s32 NWC24SuspendScheduler(void) {
     s32 count;
@@ -78,6 +80,7 @@ s32 NWC24SuspendScheduler(void) {
     LockCounters();
     {
         count = ExecSuspendScheduler();
+
         if (count >= 0) {
             nwc24ScdSuspendCnt++;
             count -= nwc24ScdOpenCnt;
@@ -109,7 +112,7 @@ s32 NWC24ResumeScheduler(void) {
     return count;
 }
 
-NWC24Err NWC24iRequestGenerateUserId(u64* idOut, u32* arg1) {
+NWC24Err NWC24iRequestGenerateUserId(u64* pId, u32* arg1) {
     s32 fd;
     NWC24Err result;
     NWC24Err close;
@@ -121,25 +124,26 @@ NWC24Err NWC24iRequestGenerateUserId(u64* idOut, u32* arg1) {
 
     LockRight();
     {
-        result = NWC24_OPEN_DEVICE("/dev/net/kd/request", &fd, IPC_OPEN_NONE);
+        result = NWC24_OPEN_DEVICE(NWC24i_SCHEDULER_DEVICE, &fd, IPC_OPEN_NONE);
 
         if (result >= 0) {
-            result = NWC24_IOCTL_DEVICE(fd, NWC24_IOCTL_GENERATE_USER_ID, NULL,
-                                        0, nwc24ScdCommonResult,
-                                        sizeof(nwc24ScdCommonResult));
+            result = NWC24_IOCTL_DEVICE(          //
+                fd, NWC24_IOCTL_GENERATE_USER_ID, //
+                NULL, 0,                          //
+                &nwc24ScdCommonResult, sizeof(CommonResult));
 
             if (result >= 0) {
-                result = IOCTL_OUT->result;
+                result = nwc24ScdCommonResult.result;
 
                 if (result == NWC24_OK || result == NWC24_ERR_ID_GENERATED ||
                     result == NWC24_ERR_ID_REGISTERED) {
 
-                    if (idOut != (void*)NULL) {
-                        *idOut = IOCTL_OUT->userid;
+                    if (pId != (void*)NULL) {
+                        *pId = nwc24ScdCommonResult.userid;
                     }
 
                     if (arg1 != (void*)NULL) {
-                        *arg1 = IOCTL_OUT->WORD_0x8;
+                        *arg1 = nwc24ScdCommonResult.WORD_0xC;
                     }
                 }
             }
@@ -206,18 +210,18 @@ static NWC24Err ExecTrySuspendScheduler(u32 arg0) {
         return NWC24_ERR_MUTEX;
     }
 
-    result = NWC24_OPEN_DEVICE("/dev/net/kd/request", &fd, IPC_OPEN_NONE);
+    result = NWC24_OPEN_DEVICE(NWC24i_SCHEDULER_DEVICE, &fd, IPC_OPEN_NONE);
 
     if (result >= 0) {
-        IOCTL_IN->WORD_0x0 = arg0;
+        nwc24ScdCommonBuffer.WORD_0x0 = arg0;
 
-        result = NWC24_IOCTL_DEVICE(
-            fd, NWC24_IOCTL_TRY_SUSPEND_SCHEDULER, nwc24ScdCommonBuffer,
-            sizeof(nwc24ScdCommonBuffer), nwc24ScdCommonResult,
-            sizeof(nwc24ScdCommonResult));
+        result = NWC24_IOCTL_DEVICE(                     //
+            fd, NWC24_IOCTL_TRY_SUSPEND_SCHEDULER,       //
+            &nwc24ScdCommonBuffer, sizeof(CommonBuffer), //
+            &nwc24ScdCommonResult, sizeof(CommonResult));
 
         if (result >= 0) {
-            result = IOCTL_OUT->result;
+            result = nwc24ScdCommonResult.result;
         }
 
         close = NWC24_CLOSE_DEVICE(fd);
@@ -234,8 +238,8 @@ static NWC24Err ExecResumeScheduler(void) {
     return ExecNoParamCommand(NULL, NWC24_IOCTL_RESUME_SCHEDULER, NULL);
 }
 
-static NWC24Err ExecNoParamCommand(const char* user, s32 type,
-                                   NWC24Err* exResultOut) {
+static NWC24Err ExecNoParamCommand(const char* pUser, s32 type,
+                                   NWC24Err* pExResult) {
     s32 fd;
     NWC24Err result;
     NWC24Err close;
@@ -246,27 +250,27 @@ static NWC24Err ExecNoParamCommand(const char* user, s32 type,
 
     LockRight();
     {
-        result = NWC24iOpenResourceManager(user, "/dev/net/kd/request", &fd,
+        result = NWC24iOpenResourceManager(pUser, NWC24i_SCHEDULER_DEVICE, &fd,
                                            IPC_OPEN_NONE);
 
         if (result >= 0) {
-            result = NWC24iIoctlResourceManager(user, fd, type, NULL, 0,
-                                                nwc24ScdCommonResult,
-                                                sizeof(nwc24ScdCommonResult));
+            result = NWC24iIoctlResourceManager(pUser, fd, type, NULL, 0,
+                                                &nwc24ScdCommonResult,
+                                                sizeof(CommonResult));
 
             if (result >= 0) {
-                result = IOCTL_OUT->result;
+                result = nwc24ScdCommonResult.result;
 
                 if (result == NWC24_ERR_FAILED ||
                     result == NWC24_ERR_CONFIG_NETWORK) {
 
-                    if (exResultOut != (void*)NULL) {
-                        *exResultOut = IOCTL_OUT->exResult;
+                    if (pExResult != (void*)NULL) {
+                        *pExResult = nwc24ScdCommonResult.exResult;
                     }
                 }
             }
 
-            close = NWC24iCloseResourceManager(user, fd);
+            close = NWC24iCloseResourceManager(pUser, fd);
             if (close < 0) {
                 result = close;
             }
@@ -284,8 +288,8 @@ static void InitScdMutex(void) {
         OSInitMutex(&nwc24ScdCommandMutex);
         OSInitMutex(&nwc24ScdCounterMutex);
 
-        memset(nwc24ScdCommonBuffer, 0, sizeof(nwc24ScdCommonBuffer));
-        memset(nwc24ScdCommonResult, 0, sizeof(nwc24ScdCommonResult));
+        memset(&nwc24ScdCommonBuffer, 0, sizeof(CommonBuffer));
+        memset(&nwc24ScdCommonResult, 0, sizeof(CommonResult));
 
         nwc24ScdInitialized |= 1;
     }
@@ -333,10 +337,7 @@ static void UnlockCounters(void) {
     OSUnlockMutex(&nwc24ScdCounterMutex);
 }
 
-static NWC24Err CheckCallingStatus(const char* user, BOOL block) {
-#pragma unused(user)
-#pragma unused(block)
-
+static NWC24Err CheckCallingStatus(const char* /* pUser */, BOOL /* block */) {
     if (OSGetCurrentThread() == NULL) {
         return NWC24_ERR_FATAL;
     }

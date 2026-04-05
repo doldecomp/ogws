@@ -1,17 +1,27 @@
 #include <revolution/NWC24.h>
+#include <revolution/NWC24/NWC24Internal.h>
 
-static char *MIMEEncStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
+static const char* MIMEEncStr =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
 
-NWC24Err Base64Encode(char *inputBuffer, s32 inputLength, u32 *inBytesConsumed, char *outBuffer, s32 outBufferSize, u32 *outBytesWritten) {
-    s32 result = NWC24_OK;
-    s32 outputIndex;
-    s32 inputIndex = 0;
+// Length of the alphabet portion of the encoding string.
+// This does not include the padding character (=).
+#define ALPHABET_LEN 64
+
+#define MAX_OCTETS 4
+#define DEFAULT_LINE_LEN 75
+
+static NWC24Err Base64Encode(char* pData, s32 dataSize, u32* pDataRead,
+                             char* pText, s32 textSize, u32* pTextWritten) {
+    NWC24Err result = NWC24_OK;
+    s32 textIdx;
+    s32 dataIdx = 0;
     BOOL hasThird;
     BOOL hasSecond;
     u32 combined;
 
-    for (outputIndex = 0; inputIndex < inputLength; inputIndex += 3) {
-        if ((outputIndex + 3) >= outBufferSize) {
+    for (textIdx = 0; dataIdx < dataSize; dataIdx += 3) {
+        if (textIdx + 3 >= textSize) {
             result = NWC24_ERR_OVERFLOW;
             break;
         }
@@ -19,173 +29,204 @@ NWC24Err Base64Encode(char *inputBuffer, s32 inputLength, u32 *inBytesConsumed, 
         hasThird = FALSE;
         hasSecond = FALSE;
 
-        combined = ((unsigned char)inputBuffer[inputIndex]);
+        combined = (u8)pData[dataIdx];
         combined <<= 8;
 
-        if ((inputIndex + 1) < inputLength) {
+        if (dataIdx + 1 < dataSize) {
             hasSecond = TRUE;
-            combined |= ((unsigned char)inputBuffer[inputIndex + 1]);
+            combined |= (u8)pData[dataIdx + 1];
         }
 
         combined <<= 8;
 
-        if ((inputIndex + 2) < inputLength) {
+        if (dataIdx + 2 < dataSize) {
             hasThird = TRUE;
-            combined |= ((unsigned char)inputBuffer[inputIndex + 2]);
+            combined |= (u8)pData[dataIdx + 2];
         }
 
-        outBuffer[outputIndex + 0] = MIMEEncStr[(combined >> 18) & 0x3F];
-        outBuffer[outputIndex + 1] = MIMEEncStr[(combined >> 12) & 0x3F];
-        outBuffer[outputIndex + 2] = MIMEEncStr[(hasSecond) ? ((combined >> 6) & 0x3F) : (0x40)];
-        outBuffer[outputIndex + 3] = MIMEEncStr[(hasThird) ? (combined & 0x3F) : (0x40)];
+        // clang-format off
+        pText[textIdx + 0] = MIMEEncStr[combined >> 18 & (ALPHABET_LEN - 1)];
+        pText[textIdx + 1] = MIMEEncStr[combined >> 12 & (ALPHABET_LEN - 1)];
+        pText[textIdx + 2] = MIMEEncStr[hasSecond ? (combined >> 6 & (ALPHABET_LEN - 1)) : ALPHABET_LEN];
+        pText[textIdx + 3] = MIMEEncStr[hasThird  ? (combined & (ALPHABET_LEN - 1)) : ALPHABET_LEN];
+        // clang-format on
 
-        outputIndex += 4;
+        textIdx += 4;
     }
 
-    *outBytesWritten = outputIndex;
+    *pTextWritten = textIdx;
 
-    if (inBytesConsumed != 0) {
-        outputIndex = inputLength;
-        if (inputLength < inputIndex) {
-            inputIndex = inputLength;
+    if (pDataRead != NULL) {
+        textIdx = dataSize;
+
+        if (dataSize < dataIdx) {
+            dataIdx = dataSize;
         }
-        *inBytesConsumed = inputIndex;
+
+        *pDataRead = dataIdx;
     }
+
     return result;
 }
 
-void NWC24Base64Encode(char *inputBuffer, s32 inputLength, char *outBuffer, s32 outBufferSize, u32 *outBytesWritten) {
-    Base64Encode(inputBuffer, inputLength, 0, outBuffer, outBufferSize, outBytesWritten);
+NWC24Err NWC24Base64Encode(const u8* pData, s32 dataSize, char* pText,
+                           s32 textSize, u32* pTextWritten) {
+
+    // TODO(kiwi) Implementation needs weird types so we hide it using the API
+    return Base64Encode((char*)pData, dataSize, NULL, pText, textSize,
+                        pTextWritten);
 }
 
-void NWC24InitBase64Table(signed char *codes) {
+void NWC24InitBase64Table(char* pTable) {
     int i;
-    for (i = 0; i < 256; i++) {
-        codes[i] = (char)0xFF;
+    for (i = 0; i < NWC24_BASE64_TABLE_SIZE; i++) {
+        pTable[i] = 0xFF;
     }
 
     for (i = 'A'; i <= 'Z'; i++) {
-        codes[i] = (char)(i - 'A');
+        pTable[i] = 0 + i - 'A';
     }
 
     for (i = 'a'; i <= 'z'; i++) {
-        codes[i] = (char)(26 + i - 'a');
+        pTable[i] = 26 + i - 'a';
     }
 
     for (i = '0'; i <= '9'; i++) {
-        codes[i] = (char)(52 + i - '0');
+        pTable[i] = 26 + 26 + i - '0';
     }
 
-    codes['+'] = 62;
-    codes['/'] = 63;
-
-    return;
+    pTable['+'] = 26 + 26 + 10;
+    pTable['/'] = 26 + 26 + 10 + 1;
 }
 
-NWC24Err QEncode(u8 *outBuffer, u32 outBufferSize, u32 *outBytesWritten, u8 *inputBuffer, u32 inputLength, u32 *inBytesConsumed, s32 maxLineLength) {
-    u8 *outputPtr;
-    u32 outBytesUsed;
-    u32 inputIndex;
-    s32 result;
+static NWC24Err QEncode(u8* pText, u32 textSize, u32* pTextWritten, u8* pData,
+                        u32 dataSize, u32* pDataRead, s32 maxLineLength) {
+    u8* pWritePtr;
+    u32 textWritten;
+    u32 dataIdx;
+    NWC24Err result;
     s32 lineLength;
-    u8 encodeBuffer[8];
-    s32 bufferIndex;
-    BOOL needsSoftBreak;
+    u8 octets[MAX_OCTETS];
+    BOOL lineBreak;
     s32 emitCount;
     s32 bytesRead;
     s16 currentByte;
+    s32 i;
 
     result = NWC24_OK;
 
-    if (outBuffer == 0) {
+    if (pText == NULL) {
         return NWC24_ERR_INVALID_VALUE;
     }
-    if (inputBuffer == 0) {
+
+    if (pData == NULL) {
         return NWC24_ERR_INVALID_VALUE;
     }
-    if (inputLength == 0) {
+
+    if (dataSize <= 0) {
         return NWC24_ERR_OVERFLOW;
     }
-    if (inBytesConsumed) {
-        *inBytesConsumed = 0;
-    }
-    if (outBytesWritten) {
-        *outBytesWritten = 0;
-    }
-    outputPtr = outBuffer;
-    lineLength = 0;
-    outBytesUsed = 0;
-    inputIndex = 0;
-    while (inputIndex < inputLength) {
-        currentByte = *inputBuffer;
-        needsSoftBreak = FALSE;
 
-        if (((((char)currentByte) >= '!') && (((char)currentByte) <= '~')) && (((char)currentByte) != '=')) {
+    if (pDataRead != NULL) {
+        *pDataRead = 0;
+    }
+
+    if (pTextWritten != NULL) {
+        *pTextWritten = 0;
+    }
+
+    pWritePtr = pText;
+    lineLength = 0;
+    textWritten = 0;
+    dataIdx = 0;
+
+    while (dataIdx < dataSize) {
+        currentByte = *pData;
+        lineBreak = FALSE;
+
+        if ((char)currentByte >= '!' && (char)currentByte <= '~' &&
+            (char)currentByte != '=') {
+
             bytesRead = 1;
             emitCount = 1;
-            encodeBuffer[0] = *inputBuffer;
-        } else {
-            if ((((inputIndex + 1) < inputLength) && (((char)currentByte) == '\r')) && (((long)inputBuffer[1]) == '\n')) {
-                bytesRead = 2;
-                encodeBuffer[0] = *inputBuffer;
-                emitCount = 1;
-                encodeBuffer[1] = inputBuffer[1];
-            } else {
-                encodeBuffer[0] = '=';
-                if (((*inputBuffer) >> 4) >= 10) {
-                    encodeBuffer[1] = (((*inputBuffer) >> 4) % 10) + 'A';
-                } else {
-                    encodeBuffer[1] = (((*inputBuffer) >> 4) % 10) + '0';
-                }
-                if (((*inputBuffer) & 0xf) >= 10) {
-                    encodeBuffer[2] = (((*inputBuffer) & 0xf) % 10) + 'A';
-                } else {
-                    encodeBuffer[2] = (((*inputBuffer) & 0xf) % 10) + '0';
-                }
+            octets[0] = *pData;
 
-                bytesRead = 1;
-                emitCount = 3;
+        } else if (dataIdx + 1 < dataSize && (char)currentByte == '\r' &&
+                   (char)pData[1] == '\n') {
+
+            bytesRead = 2;
+            emitCount = 1;
+            octets[0] = *pData;
+            octets[1] = pData[1];
+
+        } else {
+            octets[0] = '=';
+
+            if ((*pData >> 4) >= 10) {
+                octets[1] = (*pData >> 4) % 10 + 'A';
+            } else {
+                octets[1] = (*pData >> 4) % 10 + '0';
             }
+
+            if ((*pData & 0x0F) >= 10) {
+                octets[2] = (*pData & 0x0F) % 10 + 'A';
+            } else {
+                octets[2] = (*pData & 0x0F) % 10 + '0';
+            }
+
+            bytesRead = 1;
+            emitCount = 3;
         }
-        if ((maxLineLength == 0) && ((lineLength + emitCount) >= 75)) {
-            needsSoftBreak = TRUE;
-            emitCount = emitCount + 3;
+
+        if (maxLineLength == 0 && lineLength + emitCount >= DEFAULT_LINE_LEN) {
+            lineBreak = TRUE;
+            emitCount += 3;
         }
-        if (((u32)(outBytesUsed + emitCount)) >= outBufferSize) {
+
+        if (textWritten + emitCount >= textSize) {
             result = NWC24_ERR_OVERFLOW;
             break;
         }
-        outBytesUsed = emitCount + outBytesUsed;
-        if (needsSoftBreak) {
-            *outputPtr = '=';
-            outputPtr[1] = '\r';
-            outputPtr[2] = '\n';
-            outputPtr = outputPtr + 3;
+
+        textWritten += emitCount;
+
+        if (lineBreak) {
+            pWritePtr[0] = '=';
+            pWritePtr[1] = '\r';
+            pWritePtr[2] = '\n';
+
+            pWritePtr += 3;
+            emitCount -= 3;
+
             lineLength = 0;
-            emitCount = emitCount - 3;
-        }
-        lineLength = emitCount + lineLength;
-        bufferIndex = 0;
-        while (bufferIndex < emitCount) {
-            *(outputPtr++) = encodeBuffer[bufferIndex];
-            bufferIndex++;
         }
 
-        inputIndex = inputIndex + bytesRead;
-        inputBuffer = inputBuffer + bytesRead;
+        lineLength += emitCount;
+
+        for (i = 0; i < emitCount; i++) {
+            *(pWritePtr++) = octets[i];
+        }
+
+        dataIdx += bytesRead;
+        pData += bytesRead;
     }
 
-    if (inBytesConsumed) {
-        *inBytesConsumed = inputIndex;
+    if (pDataRead != NULL) {
+        *pDataRead = dataIdx;
     }
 
-    if (outBytesWritten) {
-        *outBytesWritten = outBytesUsed;
+    if (pTextWritten != NULL) {
+        *pTextWritten = textWritten;
     }
 
     return result;
 }
 
-s32 NWC24EncodeQuotedPrintable(u8 *outBuffer, u32 outBufferSize, u32 *outBytesWritten, u8 *inputBuffer, u32 inputLength, u32 *inBytesConsumed) {
-    return QEncode(outBuffer, outBufferSize, outBytesWritten, inputBuffer, inputLength, inBytesConsumed, 0);
+NWC24Err NWC24EncodeQuotedPrintable(char* pText, u32 textSize,
+                                    u32* pTextWritten, const u8* pData,
+                                    u32 dataSize, u32* pDataRead) {
+
+    // TODO(kiwi) Implementation needs weird types so we hide it using the API
+    return QEncode((u8*)pText, textSize, pTextWritten, (u8*)pData, dataSize,
+                   pDataRead, 0);
 }
