@@ -2,9 +2,9 @@
 #define RP_KERNEL_APP_MII_MANAGER_H
 #include <Pack/types_pack.h>
 
-#include <egg/core.h>
-
 #include <RVLFaceLib.h>
+
+#include <egg/core.h>
 
 //! @addtogroup rp_kernel
 //! @{
@@ -32,6 +32,11 @@ public:
      * @brief Destructor
      */
     virtual ~RPSysAppMiiManager() {} // at 0x8
+
+    /**
+     * @brief Loads the Mii data resources
+     */
+    virtual void LoadResource() = 0; // at 0xC
 
     /**
      * @brief Gets the capacity of the Mii buffer
