@@ -36,7 +36,7 @@ public:
     };
 
 public:
-    static Archive* mount(void* pArcBinary, Heap* pHeap, int align);
+    static Archive* mount(void* pArcBinary, Heap* pHeap, int align = 4);
     static Archive* findArchive(void* pArcBinary);
 
     Archive();

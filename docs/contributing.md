@@ -325,14 +325,14 @@ public:
 
 // 2. PROTECTED ACCESS
 protected:
-    // 7. Non-static functions
+    // 7. All other functions
     const Fruit& GetFruit(int i) const {
         return mFruits[i];
     }
 
 // 3. PRIVATE ACCESS
 private:
-    // 7. Non-static functions
+    // 7. All other functions
     void Clear();
 
     // 8. Constant, static members

@@ -123,9 +123,9 @@ public:
         EPackID_PartyPack,  //!< Wii Play
         EPackID_HealthPack, //!< Wii Fit
         EPackID_MusicPack,  //!< Wii Music
-        EPackID_AllPack,    //!< Pack Project
 
-        EPackID_Max
+        EPackID_Max,
+        EPackID_AllPack = EPackID_Max, //!< Pack Project
     };
 
     /**

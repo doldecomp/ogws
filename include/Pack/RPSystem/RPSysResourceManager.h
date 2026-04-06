@@ -3,6 +3,8 @@
 #include <Pack/types_pack.h>
 
 #include <Pack/RPSingleton.h>
+#include <Pack/RPSports.h>
+#include <Pack/RPSystem/RPSysSceneCreator.h>
 
 #include <egg/core.h>
 
@@ -13,8 +15,6 @@
 
 // Forward declarations
 class RPSysFile;
-class RPSportsAppMiiManager;
-class RPPartyAppMiiManager;
 
 /**
  * @brief Resource cache manager
@@ -24,191 +24,303 @@ class RPSysResourceManager {
 
 public:
     /**
-     * @brief Loads a file from the DVD
-     * @remark If no heap is specified, the current heap is used instead.
-     * @see EGG::DvdRipper::EAllocDirection
-     *
-     * @param pPath Path to the file
-     * @param pHeap Heap from which to allocate the buffer
-     * @param allocDir Direction of heap allocation
-     * @param[out] pSize Where the file's size will be written
+     * @brief Resource list type
      */
-    void* LoadFromDVD(const char* pPath, EGG::Heap* pHeap, s32 allocDir,
-                      s32* pSize);
+    enum EList {
+        EList_FileCache, //!< Cached, compressed files
+        EList_FileList,  //!< Decompressed files ready for access
+
+        EList_Max
+    };
+
+public:
+    /**
+     * @brief Gets the path to the common asset folder for the specified scene
+     *
+     * @param[out] pBuffer Path output buffer
+     * @param maxlen Output buffer size
+     * @param id Scene ID (defaults to the current scene)
+     */
+    void GetGameCommonPath(char* pBuffer, u32 maxlen, s32 id = -1);
 
     /**
-     * @brief Loads and decompresses a file from the DVD
-     * @remark If the file already exists in the cache, this function returns
-     * the cached instance.
-     * @remark If no heap is specified, the current heap is used instead.
+     * @brief Loads the common asset archive for the specified scene
      *
-     * @param pPath Path to the file
-     * @param pHeap Heap from which to allocate the buffer
+     * @param id Scene ID (defaults to the current scene)
+     * @param pHeap Heap to use for allocations (defaults to the current heap)
      */
-    void* LoadCompressed(const char* pPath, EGG::Heap* pHeap);
+    static EGG::Archive* LoadGameCommonArchive(s32 id = -1,
+                                               EGG::Heap* pHeap = NULL);
 
     /**
-     * @brief Loads the local archive in the specified directory
-     * @note The "local" archive is always named `local.carc`.
+     * @brief Gets the path to the local asset folder for the specified scene
      *
-     * @param pPath Path to the directory
+     * @param[out] pBuffer Path output buffer
+     * @param maxlen Output buffer size
+     * @param id Scene ID (defaults to the current scene)
      */
-    EGG::Archive* LoadLocalArchive(const char* pPath);
+    void GetGameLocalPath(char* pBuffer, u32 maxlen, s32 id = -1);
 
     /**
-     * @brief Loads the common archive for the specified scene
-     * @note The "common" archive is always named `common.carc`.
+     * @brief Loads the local asset archive for the specified scene
      *
-     * @param id Scene ID
-     * @param pHeap Heap from which to allocate the buffer
+     * @param id Scene ID (defaults to the current scene)
+     * @param pHeap Heap to use for allocations (defaults to the current heap)
      */
-    static EGG::Archive* LoadGameCommonArchive(s32 id, EGG::Heap* pHeap);
+    static EGG::Archive* LoadGameLocalArchive(s32 id = -1,
+                                              EGG::Heap* pHeap = NULL);
+
     /**
-     * @brief Loads the local archive for the specified scene
-     * @note The "local" archive is always named `local.carc`.
+     * @brief Gets the path to the stage asset folder for the specified scene
      *
-     * @param id Scene ID
-     * @param pHeap Heap from which to allocate the buffer
+     * @param[out] pBuffer Path output buffer
+     * @param maxlen Output buffer size
+     * @param id Scene ID (defaults to the current scene)
      */
-    static EGG::Archive* LoadGameLocalArchive(s32 id, EGG::Heap* pHeap);
+    void GetGameStagePath(char* pBuffer, u32 maxlen, s32 id = -1);
+
     /**
-     * @brief Loads the specified stage archive from the current scene's assets
+     * @brief Loads the specified archive from the current scene's stage assets
      *
-     * @param pName Name of the file in the scene's "Stage" directory
+     * @param pName Archive name
      */
     static EGG::Archive* LoadGameStageArchive(const char* pName);
 
     /**
-     * @brief Gets the specified file from the specified archive
+     * @brief Gets the specified file from the provided archive
      *
-     * @param pArc Archive which contains the file
-     * @param pName Name of the file
-     * @param[out] pSize Where the file's size will be written
+     * @param pArchive Archive containing the file
+     * @param pName File name
+     * @param[out] pSize Size of the specified file
      */
-    static void* GetFileFromArchive(EGG::Archive* pArc, const char* pName,
+    static void* GetFileFromArchive(EGG::Archive* pArchive, const char* pName,
                                     u32* pSize = NULL);
 
     /**
-     * @brief Gets a message file by name from the message archive
+     * @brief Gets the specified file from the message archive
      *
-     * @param pName Name of the message file
+     * @param pName Message file name
      */
     static void* GetMessageResource(const char* pName);
 
     /**
-     * @brief Tests whether the specified file exists in the game filesystem
+     * @brief Tests whether a file exists at the specified path
      *
-     * @param pPath Path to the file
+     * @param pPath Path to examine
      */
     bool IsExist(const char* pPath);
 
     /**
-     * @brief Removes a file from the user cache
-     * @note This is automatically called through the RPSysFile destructor.
+     * @brief Removes a file from the list of decompressed files
+     * @note RPSysFile automatically removes itself when it is destroyed.
      *
      * @param pFile File to remove
      */
     void RemoveFromFileList(RPSysFile* pFile);
 
     /**
-     * @brief Loads the Kokeshi asset archive
-     */
-    void LoadKokeshiArchive();
-    /**
-     * @brief Loads the archives from the current pack's static directory
-     * @remarks This also includes the message and font archives.
+     * @brief Loads all archives and other assets with static lifetime
      */
     void LoadStaticArchives();
+
     /**
-     * @brief Loads and caches the common archive of every scene
+     * @brief Loads the specified file and adds it to the resource cache
+     * @details If the file has already been cached, this function does nothing.
+     *
+     * @param pPath File path
+     * @param list List that the file should be moved to
+     * @param pHeap Heap to use for allocations
+     */
+    void LoadCachedFile(const char* pPath, EList list, EGG::Heap* pHeap);
+
+    /**
+     * @brief Loads all archives designated for cached access
      */
     void LoadCacheArchives();
 
     /**
-     * @brief Gets the common sound path of the current pack
-     * @bug This function ignores the @p bufSize parameter and instead uses
-     * unsafe versions of string functions.
-     *
-     * @param[out] pBuffer Buffer containing resulting path
-     * @param bufSize Size of the buffer pointed to by @p pBuffer
+     * @brief Loads the archive containing all kokeshi assets
      */
-    void GetStaticSoundCommonPath(char* pBuffer, u32 bufSize);
-    /**
-     * @brief Gets the local sound path of the current pack
-     * @bug This function ignores the @p bufSize parameter and instead uses
-     * unsafe versions of string functions.
-     *
-     * @param[out] pBuffer Buffer containing resulting path
-     * @param bufSize Size of the buffer pointed to by @p pBuffer
-     */
-    void GetStaticSoundLocalPath(char* pBuffer, u32 bufSize);
+    void LoadKokeshiArchive();
 
     /**
-     * @brief Gets the common sound path of the specified scene
-     * @bug This function ignores the @p bufSize parameter and instead uses
-     * unsafe versions of string functions.
+     * @brief Gets the path to the common sound folder
      *
-     * @param[out] pBuffer Buffer containing resulting path
-     * @param bufSize Size of the buffer pointed to by @p pBuffer
-     * @param id Scene ID
+     * @param[out] pBuffer Path output buffer
+     * @param maxlen Output buffer size
      */
-    void GetGameSoundCommonPath(char* pBuffer, u32 bufSize, s32 id = -1);
-    /**
-     * @brief Gets the local sound path of the specified scene
-     * @bug This function ignores the @p bufSize parameter and instead uses
-     * unsafe versions of string functions.
-     *
-     * @param[out] pBuffer Buffer containing resulting path
-     * @param bufSize Size of the buffer pointed to by @p pBuffer
-     * @param id Scene ID
-     */
-    void GetGameSoundLocalPath(char* pBuffer, u32 bufSize, s32 id = -1);
+    void GetStaticSoundCommonPath(char* pBuffer, u32 maxlen);
 
+    /**
+     * @brief Gets the path to the local sound folder
+     *
+     * @param[out] pBuffer Path output buffer
+     * @param maxlen Output buffer size
+     */
+    void GetStaticSoundLocalPath(char* pBuffer, u32 maxlen);
+
+    /**
+     * @brief Gets the path to the common sound folder for the specified scene
+     *
+     * @param[out] pBuffer Path output buffer
+     * @param maxlen Output buffer size
+     * @param id Scene ID (defaults to the current scene)
+     */
+    void GetGameSoundCommonPath(char* pBuffer, u32 maxlen, s32 id = -1);
+
+    /**
+     * @brief Gets the path to the local sound folder for the specified scene
+     *
+     * @param[out] pBuffer Path output buffer
+     * @param maxlen Output buffer size
+     * @param id Scene ID (defaults to the current scene)
+     */
+    void GetGameSoundLocalPath(char* pBuffer, u32 maxlen, s32 id = -1);
+
+    /**
+     * @brief Loads the local archive in the specified static asset directory
+     *
+     * @param pStaticDir Static asset directory
+     */
+    EGG::Archive* LoadStaticLocalArchive(const char* pStaticDir)
+        DECOMP_DONT_INLINE;
+
+    /**
+     * @brief Loads the common archive in the specified static asset directory
+     *
+     * @param pStaticDir Static asset directory
+     */
+    EGG::Archive* LoadStaticCommonArchive(const char* pPath);
+
+    /**
+     * @brief Loads the archive containing all message data
+     */
+    void LoadMessageArchive();
+
+    /**
+     * @brief Loads the archive containing all font data
+     */
+    void LoadFontArchive();
+
+    /**
+     * @brief Gets the archive containing all kokeshi assets
+     */
     EGG::Archive* GetKokeshiArchive() const {
         return mpKokeshiArchive;
     }
 
+    /**
+     * @brief Gets the archive containing all message data
+     */
+    EGG::Archive* GetMessageArchive() const {
+        return mpMessageArchive;
+    }
+
+    /**
+     * @brief Gets the archive containing all font data
+     */
     EGG::Archive* GetFontArchive() const {
         return mpFontArchive;
     }
 
+    /**
+     * @brief Gets the extra handle for opening files outside the DVD
+     */
     void* GetMultiHandle() {
         return &mpMultiHandle;
     }
 
 private:
-    //! Resource cache for compressed files
-    nw4r::ut::List mFileCache; // at 0x4
-    //! Resource cache for decompressed files
-    nw4r::ut::List mDecompFileCache; // at 0x10
+    /**
+     * @brief Loads the specified file from the DVD, decompressing its contents
+     * if applicable
+     *
+     * @param pPath File path
+     * @param pHeap Heap to use for allocations
+     * @return Raw file contents
+     */
+    u8* LoadCompressed(const char* pPath, EGG::Heap* pHeap);
+
+    /**
+     * @brief Loads the specified file from the DVD
+     *
+     * @param pPath Path to the file
+     * @param pHeap Heap to use for allocations
+     * @param allocDir Direction of heap allocations
+     * @param[out] pSize Size of the specified file
+     */
+    u8* LoadFromDVD(const char* pPath, EGG::Heap* pHeap,
+                    EGG::DvdRipper::EAllocDirection allocDir,
+                    s32* pSize = NULL);
+
+    /**
+     * @brief Searches the specified resource list for the provided filepath
+     *
+     * @param pPath File path
+     * @param list Resource list
+     */
+    RPSysFile* FindFile(const char* pPath, EList list) const;
+
+    /**
+     * @brief Creates a new entry in the specified resource list
+     *
+     * @param pPath File path
+     * @param list Resource list
+     * @param size File size
+     * @param pData File data
+     * @param pHeap Heap to use for allocations
+     */
+    void MakeFile(const char* pPath, EList list, s32 size, const void* pData,
+                  EGG::Heap* pHeap);
+
+    /**
+     * @brief Decompresses the contents of the specified data
+     * @details If the data is not compressed, this function returns the
+     * original file contents
+     *
+     * @param pData File data
+     * @param size Data size
+     * @param[out] pExpandSize The data size after decompression
+     * @param pHeap Heap to use for allocations
+     * @return Decompressed data
+     */
+    u8* ExpandCompressed(u8* pData, s32 size, s32* pExpandSize,
+                         EGG::Heap* pHeap) const;
+
+private:
+    //! List of scenes whose resources should be cached
+    static const RPSysSceneCreator::ESceneID CACHED_SCENES[];
+    //! Static directory names for each pack
+    static const char* STATIC_DIR_NAMES[RPSysSceneCreator::EPackID_Max];
+    //! Absolute path to the kokeshi asset archive
+    static const char* KOKESHI_ARCHIVE_PATH;
+
+    //! Resource lists
+    nw4r::ut::List mResourceLists[EList_Max]; // at 0x4
 
     //! Work buffer for building filepaths
     char* mpPathWork; // at 0x1C
 
-    //! Archive containing Kokeshi assets
+    //! Archive containing all kokeshi assets
     EGG::Archive* mpKokeshiArchive; // at 0x20
-    //! Archive containing all message files
+    //! Archive containing all message data
     EGG::Archive* mpMessageArchive; // at 0x24
-    //! Archive containing all fonts
+    //! Archive containing all font data
     EGG::Archive* mpFontArchive; // at 0x28
 
-    //! Static common assets for this pack
+    //! Archive containing static common assets for this pack
     EGG::Archive* mpStaticCommonArchive; // at 0x2C
-    //! Static locale assets for this pack
+    //! Archive containing static locale assets for this pack
     EGG::Archive* mpStaticLocalArchive; // at 0x30
-    //! Static layout assets for this pack
+    //! Archive containing static layout assets for this pack
     EGG::Archive* mpStaticLayoutArchive; // at 0x34
 
 #if defined(PACK_SPORTS)
     //! Sports Pack Mii manager
     RPSportsAppMiiManager* mpAppMiiManager; // at 0x38
-#elif defined(PACK_PARTY)
-    //! Party Pack Mii manager
-    RPPartyAppMiiManager* mpAppMiiManager; // at 0x38
 #endif
 
-    //! @brief Handle for opening NAND sound archives
-    //! @remark This seems to be for NAND titles using the Pack Project engine.
+    //! Extra handle for opening files outside the DVD
     void* mpMultiHandle; // at 0x3C
 };
 

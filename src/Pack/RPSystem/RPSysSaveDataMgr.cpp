@@ -583,9 +583,9 @@ void RPSysSaveDataMgr::initBanner() {
     u8* pTplBuffer =
         static_cast<u8*>(EGG::Heap::alloc(mBannerFileSize, 32, pHeap));
 
-    void* pTplFile = EGG::DvdRipper::loadToMainRAM(
-        BANNER_ICON_FILE_NAME, pTplBuffer, pHeap,
-        EGG::DvdRipper::ALLOC_DIR_HEAD, 0, NULL, NULL);
+    void* pTplFile =
+        EGG::DvdRipper::loadToMainRAM(BANNER_ICON_FILE_NAME, pTplBuffer, pHeap,
+                                      EGG::DvdRipper::ALLOC_DIR_HEAD);
 
     TPLPalette* pPalette = static_cast<TPLPalette*>(pTplFile);
     TPLBind(pPalette);

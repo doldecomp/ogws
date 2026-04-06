@@ -6,7 +6,6 @@
 
 #include <egg/math.h>
 
-
 //! @addtogroup rp_kernel
 //! @{
 

@@ -10,12 +10,12 @@ public:
 
 public:
     static u8* loadToMainRAM(const char* pPath, u8* pBuffer, Heap* pHeap,
-                             EAllocDirection allocDir, u32 offset, u32* pRead,
-                             u32* pSize);
+                             EAllocDirection allocDir, u32 offset = 0,
+                             u32* pRead = NULL, u32* pSize = NULL);
 
     static u8* loadToMainRAM(DvdFile* pFile, u8* pBuffer, Heap* pHeap,
-                             EAllocDirection allocDir, u32 offset, u32* pRead,
-                             u32* pSize);
+                             EAllocDirection allocDir, u32 offset = 0,
+                             u32* pRead = NULL, u32* pSize = NULL);
 
 private:
     static bool sErrorRetry;
