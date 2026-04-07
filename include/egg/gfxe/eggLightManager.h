@@ -3,7 +3,6 @@
 #include <egg/types_egg.h>
 
 #include <egg/core/eggIBinary.h>
-
 #include <egg/prim.h>
 
 #include <nw4r/g3d.h>
@@ -15,7 +14,7 @@ public:
     struct Bin : IBinary::Bin {};
 
 public:
-    LightManager(u32, u32, u8);
+    LightManager(u32 lightNum, u32 ambientNum, u8 viewNum);
     virtual void SetBinaryInner(const IBinary::Bin&); // at 0x8
     virtual void GetBinaryInner(IBinary::Bin*) const; // at 0xC
     virtual const char* GetBinaryType() const;        // at 0x10
@@ -28,6 +27,8 @@ public:
     void CalcView(const nw4r::math::MTX34&, u8, nw4r::g3d::ScnRoot*);
 
     void DoneDraw();
+
+    void LoadScnLightInner(nw4r::g3d::ResAnmScn, f32, u32);
 
     LightObj* GetLightObj(u16 index) const {
 #line 157
