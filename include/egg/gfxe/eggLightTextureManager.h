@@ -13,7 +13,7 @@ class LightObj;
 
 class LightTextureManager : IBinary<LightTextureManager> {
 public:
-    struct Bin : IBinary::Bin {
+    struct BinData {
         char unk10[0x20 - 0x10];
     };
 

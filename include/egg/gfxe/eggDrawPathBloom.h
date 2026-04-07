@@ -2,13 +2,15 @@
 #define EGG_GFXE_DRAW_PATH_BLOOM_H
 #include <egg/types_egg.h>
 
-#include <egg/gfxe/eggDrawPathBase.h>
-
 #include <egg/core.h>
+#include <egg/gfxe/eggDrawPathBase.h>
 
 namespace EGG {
 
 class DrawPathBloom : public DrawPathBase, public IBinary<DrawPathBloom> {
+public:
+    struct BinData {};
+
 public:
     DrawPathBloom();
     virtual ~DrawPathBloom();       // at 0x8

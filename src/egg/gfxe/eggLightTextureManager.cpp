@@ -10,7 +10,7 @@
 
 namespace EGG {
 
-template <> const char* IBinary<LightTextureManager>::sExtension = "blmap";
+template <> const char* IBinary<LightTextureManager>::spExtension = "blmap";
 using namespace nw4r;
 
 LightTextureManager::LightTextureManager(LightManager* pManager)

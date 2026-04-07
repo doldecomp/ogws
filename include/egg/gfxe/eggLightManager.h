@@ -11,7 +11,7 @@ namespace EGG {
 
 class LightManager : IBinary<LightManager> {
 public:
-    struct Bin : IBinary::Bin {};
+    struct BinData {};
 
 public:
     LightManager(u32 lightNum, u32 ambientNum, u8 viewNum);

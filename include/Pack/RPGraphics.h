@@ -13,6 +13,7 @@
 #include <Pack/RPGraphics/RPGrpModelG3D.h>
 #include <Pack/RPGraphics/RPGrpModelManager.h>
 #include <Pack/RPGraphics/RPGrpModelMaterial.h>
+#include <Pack/RPGraphics/RPGrpModelMisc.h>
 #include <Pack/RPGraphics/RPGrpModelRecord.h>
 #include <Pack/RPGraphics/RPGrpModelResManager.h>
 #include <Pack/RPGraphics/RPGrpModelRfl.h>

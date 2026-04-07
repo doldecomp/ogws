@@ -8,7 +8,7 @@
 namespace EGG {
 class LightTexture : public CapTexture, public IBinary<LightTexture> {
 public:
-    struct Bin : IBinary::Bin {};
+    struct BinData {};
 
 public:
     static void initialize(u16, Heap*);
@@ -16,10 +16,10 @@ public:
     static void getDrawSetting(u16*, u16*, u16*, u16*, u16);
 
     LightTexture(u16, const char*, LightTextureManager*);
-    virtual void SetBinaryInner(const IBinary::Bin&); // at 0x8
-    virtual void GetBinaryInner(IBinary::Bin*) const; // at 0xC
-    virtual const char* GetBinaryType() const;        // at 0x10
-    virtual u8 GetVersion() const;                    // at 0x18
+    virtual void SetBinaryInner(const Bin&);   // at 0x8
+    virtual void GetBinaryInner(Bin*) const;   // at 0xC
+    virtual const char* GetBinaryType() const; // at 0x10
+    virtual u8 GetVersion() const;             // at 0x18
 
     void draw();
     void capture(const GXColor&, bool);

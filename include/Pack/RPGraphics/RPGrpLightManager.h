@@ -19,7 +19,7 @@ public:
      *
      * @param viewNum Maximum number of renderer views
      */
-    RPGrpLightManager(u8 viewNum)
+    explicit RPGrpLightManager(u8 viewNum)
         : EGG::LightManager(LIGHT_NUM, AMBIENT_NUM, viewNum) {}
 
     /**
