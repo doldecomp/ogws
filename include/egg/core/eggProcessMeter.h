@@ -2,12 +2,10 @@
 #define EGG_CORE_PROCESS_METER_H
 #include <egg/types_egg.h>
 
-#include <egg/core/eggBitFlag.h>
 #include <egg/core/eggPerformanceView.h>
 #include <egg/core/eggStopWatch.h>
 #include <egg/core/eggSystem.h>
 #include <egg/core/eggThread.h>
-
 #include <egg/prim.h>
 
 #include <nw4r/ut.h>

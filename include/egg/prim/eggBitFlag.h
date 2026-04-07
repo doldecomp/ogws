@@ -1,5 +1,5 @@
-#ifndef EGG_CORE_BIT_FLAG_H
-#define EGG_CORE_BIT_FLAG_H
+#ifndef EGG_PRIM_BIT_FLAG_H
+#define EGG_PRIM_BIT_FLAG_H
 #include <egg/types_egg.h>
 
 namespace EGG {

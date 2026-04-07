@@ -2,8 +2,8 @@
 #define EGG_CORE_HEAP_H
 #include <egg/types_egg.h>
 
-#include <egg/core/eggBitFlag.h>
 #include <egg/core/eggDisposer.h>
+#include <egg/prim.h>
 
 #include <nw4r/ut.h>
 
