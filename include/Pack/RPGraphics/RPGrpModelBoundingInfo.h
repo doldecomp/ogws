@@ -22,11 +22,6 @@ public:
      * @param pModel Owner model
      */
     RPGrpModelBoundingInfo(u32 flags, RPGrpModel* pModel);
-
-    /**
-     * @brief Destructor
-     */
-    virtual ~RPGrpModelBoundingInfo() {} // at 0x8
 };
 
 //! @}

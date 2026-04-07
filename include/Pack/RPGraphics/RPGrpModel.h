@@ -190,6 +190,10 @@ public:
     void Calc();
     void Entry();
 
+    EGG::ModelEx* GetModelEx() const {
+        return mpModelEx;
+    }
+
     nw4r::g3d::ScnObj* GetScnObj() const {
         return mpModelEx->getScnObj();
     }
