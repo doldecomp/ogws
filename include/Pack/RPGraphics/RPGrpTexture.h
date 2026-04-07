@@ -28,21 +28,21 @@ public:
      *
      * @param pCpuTexture CPU texture
      */
-    RPGrpTexture(const EGG::CpuTexture* pCpuTexture);
+    explicit RPGrpTexture(const EGG::CpuTexture* pCpuTexture);
 
     /**
      * @brief Constructor
      *
      * @param pResTIMG Texture image resource
      */
-    RPGrpTexture(const EGG::ResTIMG* pResTIMG);
+    explicit RPGrpTexture(const EGG::ResTIMG* pResTIMG);
 
     /**
      * @brief Constructor
      *
      * @param pCapTexture Capture texture
      */
-    RPGrpTexture(const RPGrpCaptureTexture* pCapTexture);
+    explicit RPGrpTexture(const RPGrpCaptureTexture* pCapTexture);
 
     /**
      * @brief Constructor
