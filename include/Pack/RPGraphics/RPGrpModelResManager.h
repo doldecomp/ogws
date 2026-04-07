@@ -349,9 +349,11 @@ struct RPGrpModelResManager::ResType {
     TResData* pResData; // at 0x0
 
     ResType() : pResData(NULL) {}
-    ResType(void* pResData_) : pResData(static_cast<TResData*>(pResData_)) {}
 
-    TRes Get() const {
+    explicit ResType(void* pResData_)
+        : pResData(static_cast<TResData*>(pResData_)) {}
+
+    const TRes Get() const {
         return TRes(pResData);
     }
 };
@@ -430,7 +432,7 @@ SUBFILE_NAME_LIST;
     RPGrpModelResManager::GetData<RPGrpModelResManager::Type_##Y>(             \
         RPGrpHandle handle, int index) const {                                 \
                                                                                \
-        return mpResList[handle].pResFile->Get().Get##Y(index);                \
+        return GetData<Type_ResFile>(handle).Get##Y(index);                    \
     }
 
 SUBFILE_NAME_LIST;
@@ -442,7 +444,7 @@ SUBFILE_NAME_LIST;
     RPGrpModelResManager::GetData<RPGrpModelResManager::Type_##Y>(             \
         RPGrpHandle handle, const char* pName) const {                         \
                                                                                \
-        return mpResList[handle].pResFile->Get().Get##Y(pName);                \
+        return GetData<Type_ResFile>(handle).Get##Y(pName);                    \
     }
 
 SUBFILE_NAME_LIST;

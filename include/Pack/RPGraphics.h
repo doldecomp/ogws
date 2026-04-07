@@ -2,6 +2,7 @@
 #define RP_PUBLIC_GRAPHICS_H
 
 #include <Pack/RPGraphics/IRPGrpModelCallback.h>
+#include <Pack/RPGraphics/RPGrpCaptureTexture.h>
 #include <Pack/RPGraphics/RPGrpDrawPath.h>
 #include <Pack/RPGraphics/RPGrpDrawPathLightMap.h>
 #include <Pack/RPGraphics/RPGrpDrawPathManager.h>

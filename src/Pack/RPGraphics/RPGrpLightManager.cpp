@@ -1,5 +1,7 @@
 #include <Pack/RPGraphics.h>
 
+#include <nw4r/g3d.h>
+
 /**
  * @brief Applies light settings from the specified scene resource
  *

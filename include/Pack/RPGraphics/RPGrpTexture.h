@@ -1,42 +1,67 @@
-#ifndef RP_GRAPHICS_MODEL_TEXTURE_H
-#define RP_GRAPHICS_MODEL_TEXTURE_H
+#ifndef RP_GRAPHICS_TEXTURE_H
+#define RP_GRAPHICS_TEXTURE_H
 #include <Pack/types_pack.h>
 
 #include <Pack/RPGraphics/RPGrpModelResManager.h>
+
+#include <egg/gfxe.h>
 
 #include <revolution/GX.h>
 
 //! @addtogroup rp_graphics
 //! @{
 
+// Forward declarations
+class RPGrpCaptureTexture;
+
 /**
- * @brief Texture utility
+ * @brief GPU texture wrapper
  */
 class RPGrpTexture {
 private:
-    GXTexObj mGXTexObj; // at 0x0
+    //! GX texture object
+    GXTexObj mTexObj; // at 0x0
 
 public:
     /**
-     * @brief Constructor that uses a texture image resource.
+     * @brief Constructor
      *
-     * @param pRes Texture image resource
+     * @param pCpuTexture CPU texture
      */
-    RPGrpTexture(const EGG::ResTIMG* pRes);
+    RPGrpTexture(const EGG::CpuTexture* pCpuTexture);
 
     /**
-     * @brief Constructor that uses a texture resource from a resource file
-     * handle.
+     * @brief Constructor
+     *
+     * @param pResTIMG Texture image resource
+     */
+    RPGrpTexture(const EGG::ResTIMG* pResTIMG);
+
+    /**
+     * @brief Constructor
+     *
+     * @param pCapTexture Capture texture
+     */
+    RPGrpTexture(const RPGrpCaptureTexture* pCapTexture);
+
+    /**
+     * @brief Constructor
      *
      * @param handle Resource file handle
-     * @param pName File name.
+     * @param pName Texture name
      */
     RPGrpTexture(RPGrpHandle handle, const char* pName);
 
+    /**
+     * @brief Destructor
+     */
     virtual ~RPGrpTexture() {}
 
+    /**
+     * @brief Accesses the underlying GX texture object
+     */
     const GXTexObj& GetTexObj() const {
-        return mGXTexObj;
+        return mTexObj;
     }
 };
 
