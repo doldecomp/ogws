@@ -14,8 +14,9 @@ RPGrpModel* RPGrpModel::spCalcModel = NULL;
 nw4r::math::MTX34* RPGrpModel::spCalcWorldMtxArray = NULL;
 nw4r::math::MTX34* RPGrpModel::spCalcViewMtxArray = NULL;
 
-const nw4r::math::_VEC3 RPGrpModel::GEOMETRY_MAGNIFY[1 /* ??? */] = {
+const nw4r::math::_VEC3 RPGrpModel::GEOMETRY_MAGNIFY[/* ??? */] = {
     {-1.0f, 1.0f, 1.0f},
+    {0.0f, 0.0f, 0.0f},
 };
 
 RPGrpModel* RPGrpModel::Construct(RPGrpHandle handle, u8 viewNo, u32 typeOption,
@@ -162,7 +163,7 @@ void RPGrpModel::Calc() {
     InternalCalc();
 
     if (mpBoundingInfo != NULL) {
-        mpBoundingInfo->Calc();
+        mpBoundingInfo->calc();
     }
 
     spCalcModel = NULL;

@@ -244,27 +244,15 @@ void RPSysDvdStatus::draw() {
         }
         }
 
-#if defined(BUG_FIX)
-        std::strncpy(mpErrorMessage, pLanguage[0], MESSAGE_BUFFER_SIZE);
-
-        if (mErrorStatus == EErrorStatus_NoOrWrongDisk ||
-            mErrorStatus == EErrorStatus_DiskError) {
-
-            std::strcat(mpErrorMessage, GAME_DISK_NAME);
-            std::strcat(mpErrorMessage, pLanguage[1]);
-        }
-#else
-        // @bug Unsafe string operations
         std::strcpy(mpErrorMessage, pLanguage[0]);
 
-        // @bug Same comparison twice (one should be EErrorStatus_DiskError)
+        // @bug Same comparison twice
         if (mErrorStatus == EErrorStatus_NoOrWrongDisk ||
             mErrorStatus == EErrorStatus_NoOrWrongDisk) {
 
             std::strcat(mpErrorMessage, GAME_DISK_NAME);
             std::strcat(mpErrorMessage, pLanguage[1]);
         }
-#endif
 
         RP_GET_INSTANCE(RPSysTextWriter)
             ->Print(mpErrorMessage, std::strlen(mpErrorMessage));

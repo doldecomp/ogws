@@ -50,7 +50,7 @@ public:
     ModelBoundingInfo(u32, ModelEx*);
     virtual ~ModelBoundingInfo();
 
-    void Calc();
+    void calc();
 
     SphereData* getSphere() const {
 #line 99

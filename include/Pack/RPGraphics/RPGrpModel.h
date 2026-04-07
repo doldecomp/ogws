@@ -261,7 +261,7 @@ protected:
     };
 
 protected:
-    static const nw4r::math::_VEC3 GEOMETRY_MAGNIFY[1 /* ??? */];
+    static const nw4r::math::_VEC3 GEOMETRY_MAGNIFY[/* ??? */];
 
     //! Allocator used for model-related allocations
     static EGG::Allocator* spAllocator;
