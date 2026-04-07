@@ -6,6 +6,7 @@
 #include <Pack/RPGraphics/RPGrpDrawPath.h>
 #include <Pack/RPGraphics/RPGrpDrawPathLightMap.h>
 #include <Pack/RPGraphics/RPGrpDrawPathManager.h>
+#include <Pack/RPGraphics/RPGrpFogManager.h>
 #include <Pack/RPGraphics/RPGrpLightManager.h>
 #include <Pack/RPGraphics/RPGrpModel.h>
 #include <Pack/RPGraphics/RPGrpModelAnm.h>
