@@ -1232,7 +1232,7 @@ config.libs = [
         "cflags": cflags_rp,
         "progress_category": "graphics",  # str | List[str]
         "objects": [
-            Object(NonMatching, "Pack/RPGraphics/RPGrpCamera.cpp"),
+            Object(Matching, "Pack/RPGraphics/RPGrpCamera.cpp"),
             Object(NonMatching, "Pack/RPGraphics/RPGrpDrawPathManager.cpp"),
             Object(Matching, "Pack/RPGraphics/RPGrpLightManager.cpp"),
             Object(Matching, "Pack/RPGraphics/RPGrpModel.cpp"),

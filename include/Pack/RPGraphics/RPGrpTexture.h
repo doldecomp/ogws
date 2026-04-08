@@ -55,7 +55,7 @@ public:
     /**
      * @brief Destructor
      */
-    virtual ~RPGrpTexture() {}
+    virtual ~RPGrpTexture() {} // at 0x8
 
     /**
      * @brief Accesses the underlying GX texture object

@@ -47,7 +47,7 @@ public:
     /**
      * @brief Destructor
      */
-    virtual ~RPGrpCaptureTexture() {}
+    virtual ~RPGrpCaptureTexture() {} // at 0x8
 
     /**
      * @brief Captures the EFB contents as a texture
