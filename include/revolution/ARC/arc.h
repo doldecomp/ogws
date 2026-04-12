@@ -12,7 +12,7 @@ typedef struct ARCHandle {
     u32 entryNum;           // at 0xC
     char* FSTStringStart;   // at 0x10
     u32 FSTLength;          // at 0x14
-    s32 currDir;            // at 0x18
+    u32 currDir;            // at 0x18
 } ARCHandle;
 
 typedef struct ARCFileInfo {
@@ -35,18 +35,19 @@ typedef struct ARCDirEntry {
     char* name;        // at 0xC
 } ARCDirEntry;
 
-BOOL ARCGetCurrentDir(ARCHandle* handle, char* string, u32 maxlen);
-BOOL ARCInitHandle(void* bin, ARCHandle* handle);
-BOOL ARCOpen(ARCHandle* handle, const char* path, ARCFileInfo* info);
-BOOL ARCFastOpen(ARCHandle* handle, s32 entrynum, ARCFileInfo* info);
-s32 ARCConvertPathToEntrynum(ARCHandle* handle, const char* path);
-void* ARCGetStartAddrInMem(ARCFileInfo* info);
-u32 ARCGetStartOffset(ARCFileInfo* info);
-u32 ARCGetLength(ARCFileInfo* info);
-BOOL ARCClose(ARCFileInfo* info);
-BOOL ARCChangeDir(ARCHandle* handle, const char* path);
-BOOL ARCOpenDir(ARCHandle* handle, const char* path, ARCDir* dir);
-BOOL ARCReadDir(ARCDir* dir, ARCDirEntry* entry);
+BOOL ARCInitHandle(void* arcStart, ARCHandle* handle);
+BOOL ARCOpen(ARCHandle* handle, const char* fileName, ARCFileInfo* af);
+BOOL ARCFastOpen(ARCHandle* handle, s32 entrynum, ARCFileInfo* af);
+s32 ARCConvertPathToEntrynum(ARCHandle* handle, const char* pathPtr);
+BOOL ARCEntrynumIsDir(const ARCHandle* handle, s32 entrynum);
+BOOL ARCGetCurrentDir(ARCHandle* handle, char* path, u32 maxlen);
+void* ARCGetStartAddrInMem(ARCFileInfo* af);
+u32 ARCGetStartOffset(ARCFileInfo* af);
+u32 ARCGetLength(ARCFileInfo* af);
+BOOL ARCClose(ARCFileInfo* af);
+BOOL ARCChangeDir(ARCHandle* handle, const char* dirName);
+BOOL ARCOpenDir(ARCHandle* handle, const char* dirName, ARCDir* dir);
+BOOL ARCReadDir(ARCDir* dir, ARCDirEntry* dirent);
 BOOL ARCCloseDir(ARCDir* dir);
 
 #ifdef __cplusplus
