@@ -17,10 +17,12 @@ public:
     /**
      * @brief Constructor
      *
+     * @param lightNum Maximum number of light objects
+     * @param ambientNum Maximum number of ambient light objects
      * @param viewNum Maximum number of renderer views
      */
-    explicit RPGrpLightManager(u8 viewNum)
-        : EGG::LightManager(LIGHT_NUM, AMBIENT_NUM, viewNum) {}
+    RPGrpLightManager(u32 lightNum, u32 ambientNum, u8 viewNum)
+        : EGG::LightManager(lightNum, ambientNum, viewNum) {}
 
     /**
      * @brief Applies light settings from the specified scene resource
@@ -32,13 +34,6 @@ public:
      */
     void LoadScnLight(RPGrpHandle handle, const char* pName, f32 frame = 0.0f,
                       u32 lightSetRef = -1);
-
-private:
-    //! Maximum number of light objects
-    static const int LIGHT_NUM = 16;
-
-    //! Maximum number of ambient light objects
-    static const int AMBIENT_NUM = 8;
 };
 
 //! @}

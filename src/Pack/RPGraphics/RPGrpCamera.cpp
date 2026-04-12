@@ -6,9 +6,9 @@
 #include <cmath>
 
 /**
- * @brief Camera with identity transform
+ * @brief Default camera
  */
-RPGrpCamera RPGrpCamera::IDENT;
+RPGrpCamera RPGrpCamera::sDefaultCamera;
 
 /**
  * @brief Initializes the camera system
@@ -156,7 +156,7 @@ void RPGrpCamera::CalcMatrix() {
 /**
  * @brief Saves the current state of the view matrix
  */
-void RPGrpCamera::SaveViewMatrix() {
+void RPGrpCamera::SaveCameraMatrix() {
     nw4r::math::MTX34Copy(&mSavedViewMtx, &mViewMtx);
 }
 

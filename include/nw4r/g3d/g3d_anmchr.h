@@ -122,6 +122,7 @@ protected:
  *
  ******************************************************************************/
 class AnmObjChrBlend : public AnmObjChrNode {
+public:
     static AnmObjChrBlend* Construct(MEMAllocator* pAllocator, u32* pSize,
                                      ResMdl mdl, int numChildren);
 
@@ -166,7 +167,7 @@ public:
     virtual f32 GetUpdateRate() const;    // at 0x2C
 
     virtual bool Bind(const ResMdl mdl); // at 0x30
-    using AnmObjChr::Release;            // at 0x40
+    using AnmObjChr::Release;            // at 0x34
 
     virtual const ChrAnmResult* GetResult(ChrAnmResult* pResult,
                                           u32 idx); // at 0x38

@@ -7,7 +7,9 @@
 #include <egg/gfxe/eggDrawGX.h>
 #include <egg/gfxe/eggDrawPathBase.h>
 #include <egg/gfxe/eggDrawPathBloom.h>
+#include <egg/gfxe/eggDrawPathDOF.h>
 #include <egg/gfxe/eggDrawPathHDR.h>
+#include <egg/gfxe/eggDrawPathShadowVolume.h>
 #include <egg/gfxe/eggDrawPathXluSnap.h>
 #include <egg/gfxe/eggFog.h>
 #include <egg/gfxe/eggFogManager.h>
@@ -27,6 +29,8 @@
 #include <egg/gfxe/eggPostEffectHDR.h>
 #include <egg/gfxe/eggScnRenderer.h>
 #include <egg/gfxe/eggScreen.h>
+#include <egg/gfxe/eggShadowTexture.h>
+#include <egg/gfxe/eggShadowTextureManager.h>
 #include <egg/gfxe/eggStateGX.h>
 #include <egg/gfxe/eggTextureBuffer.h>
 

@@ -5,8 +5,14 @@
 #include <Pack/RPGraphics/RPGrpCamera.h>
 #include <Pack/RPGraphics/RPGrpCaptureTexture.h>
 #include <Pack/RPGraphics/RPGrpDrawPath.h>
+#include <Pack/RPGraphics/RPGrpDrawPathBloom.h>
+#include <Pack/RPGraphics/RPGrpDrawPathDOF.h>
+#include <Pack/RPGraphics/RPGrpDrawPathHDR.h>
 #include <Pack/RPGraphics/RPGrpDrawPathLightMap.h>
 #include <Pack/RPGraphics/RPGrpDrawPathManager.h>
+#include <Pack/RPGraphics/RPGrpDrawPathSV.h>
+#include <Pack/RPGraphics/RPGrpDrawPathShadowTexture.h>
+#include <Pack/RPGraphics/RPGrpDrawPathXluSnap.h>
 #include <Pack/RPGraphics/RPGrpFogManager.h>
 #include <Pack/RPGraphics/RPGrpLightManager.h>
 #include <Pack/RPGraphics/RPGrpModel.h>
@@ -20,8 +26,10 @@
 #include <Pack/RPGraphics/RPGrpModelRecord.h>
 #include <Pack/RPGraphics/RPGrpModelResManager.h>
 #include <Pack/RPGraphics/RPGrpModelRfl.h>
+#include <Pack/RPGraphics/RPGrpProjectionObject.h>
 #include <Pack/RPGraphics/RPGrpRenderer.h>
 #include <Pack/RPGraphics/RPGrpScreen.h>
+#include <Pack/RPGraphics/RPGrpShadowTexture.h>
 #include <Pack/RPGraphics/RPGrpTexture.h>
 
 #endif

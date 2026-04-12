@@ -102,6 +102,7 @@ protected:
  *
  ******************************************************************************/
 class AnmObjMatClrOverride : public AnmObjMatClrNode {
+public:
     static AnmObjMatClrOverride* Construct(MEMAllocator* pAllocator, u32* pSize,
                                            ResMdl mdl, int numChildren);
 

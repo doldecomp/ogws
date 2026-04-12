@@ -52,7 +52,8 @@ void PostEffectBase::drawScreenInternal(f32 x, f32 y, f32 w, f32 h) {
     PSMTXScale(mtx, w, h, 1.0f);
     PSMTXTransApply(mtx, mtx, x, y, 0.0f);
 
-    DrawGX::DrawScreenTexture(mtx);
+    GXLoadPosMtxImm(mtx, GX_PNMTX0);
+    DrawGX::DrawScreenTexture();
 }
 
 void PostEffectBase::loadTextureInternal() {

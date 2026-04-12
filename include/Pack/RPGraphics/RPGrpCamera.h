@@ -32,11 +32,10 @@ public:
         ECameraType_Free,
     };
 
-public:
-    //! Camera with identity transform
-    static RPGrpCamera IDENT;
-
 private:
+    //! Default camera
+    static RPGrpCamera sDefaultCamera;
+
     //! Camera view matrix (world -> cam)
     nw4r::math::MTX34 mViewMtx; // at 0x0
     //! Inverse of the view matrix (cam -> world)
@@ -110,7 +109,7 @@ public:
     /**
      * @brief Saves the current state of the view matrix
      */
-    void SaveViewMatrix();
+    void SaveCameraMatrix();
 
     /**
      * @brief Converts a position from world-space to screen-space
@@ -154,6 +153,29 @@ public:
      */
     void LoadScnCameraMatrix(const nw4r::g3d::ResAnmScn scn, u8 refNumber,
                              f32 frame = 0.0f);
+
+    /**
+     * @brief Sets the type of this camera
+     *
+     * @param type New camera type
+     */
+    void SetCameraType(ECameraType type) {
+        mCameraType = type;
+    }
+
+    /**
+     * @brief Accesses the saved state of the view matrix
+     */
+    const nw4r::math::MTX34& GetSavedCameraMatrix() const {
+        return mSavedViewMtx;
+    }
+
+    /**
+     * @brief Accesses the default camera object
+     */
+    static RPGrpCamera& GetDefaultCamera() {
+        return sDefaultCamera;
+    }
 
 private:
     /**

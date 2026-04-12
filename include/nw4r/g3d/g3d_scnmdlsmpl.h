@@ -5,7 +5,6 @@
 #include <nw4r/g3d/g3d_calcview.h>
 #include <nw4r/g3d/g3d_scnobj.h>
 #include <nw4r/g3d/res/g3d_resmdl.h>
-
 #include <nw4r/math.h>
 
 namespace nw4r {
@@ -63,9 +62,13 @@ public:
     virtual bool SetScnObjOption(u32 option, u32 value);         // at 0x20
     virtual bool GetScnObjOption(u32 option, u32* pValue) const; // at 0x24
 
-    virtual bool SetAnmObj(AnmObj* pObj, AnmObjType type);  // at 0x34
-    virtual bool RemoveAnmObj(AnmObj* pObj);                // at 0x38
-    virtual AnmObj* RemoveAnmObj(AnmObjType type);          // at 0x3C
+    virtual bool
+    SetAnmObj(AnmObj* pObj,
+              AnmObjType type = ANMOBJTYPE_NOT_SPECIFIED); // at 0x34
+
+    virtual bool RemoveAnmObj(AnmObj* pObj);       // at 0x38
+    virtual AnmObj* RemoveAnmObj(AnmObjType type); // at 0x3C
+
     virtual AnmObj* GetAnmObj(AnmObjType type);             // at 0x40
     virtual const AnmObj* GetAnmObj(AnmObjType type) const; // at 0x44
 

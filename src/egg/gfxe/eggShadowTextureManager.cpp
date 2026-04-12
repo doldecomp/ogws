@@ -10,7 +10,7 @@
 namespace EGG
 {
     ShadowTextureManager::ShadowTextureManager() :
-        mFlags(SHADOW_MGR_ACTIVE),
+        mFlags(SHADOW_MGR_ENABLE),
         mFreeGroup(GROUP_MAX),
         mShadowIdx(0)
     {
@@ -52,7 +52,7 @@ namespace EGG
 
     void ShadowTextureManager::Calc()
     {
-        if (!IsActive()) return;
+        if (!IsEnable()) return;
 
         mShadowIdx = 0;
         for (int i = 0; i < GROUP_MAX; i++)
@@ -67,7 +67,7 @@ namespace EGG
 
     void ShadowTextureManager::Draw(Screen *screen)
     {
-        if (!IsActive() || mShadowIdx == 0) return;
+        if (!IsEnable() || mShadowIdx == 0) return;
 
         StateGX::ScopedDitherUpdate dither(true);
 

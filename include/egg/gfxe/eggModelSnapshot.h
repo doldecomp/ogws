@@ -24,6 +24,14 @@ public:
     void AddModelEx(ModelEx* pModel, f32 density);
     void GatherModel(f32);
 
+    u16 GetModelNum() const {
+        return m_mdlNum;
+    }
+
+    ModelBind* GetModelBind(u32 idx) const {
+        return &m_mdlList[idx];
+    }
+
 private:
     u16 m_mdlMax; // at 0x2C
     u16 m_width;  // at 0x2E

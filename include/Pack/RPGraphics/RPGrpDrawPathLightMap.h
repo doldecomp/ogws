@@ -17,6 +17,8 @@ class RPGrpModel;
  */
 class RPGrpDrawPathLightMap : public RPGrpDrawPath {
 public:
+    RPGrpDrawPathLightMap(EGG::ScnRenderer* pRenderer);
+
     void ReplaceModelTexture(u16 index, RPGrpModel* pModel);
 
     EGG::LightTextureManager* GetLightTextureManager() const {

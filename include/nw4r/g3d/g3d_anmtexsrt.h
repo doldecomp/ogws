@@ -103,6 +103,7 @@ protected:
  *
  ******************************************************************************/
 class AnmObjTexSrtOverride : public AnmObjTexSrtNode {
+public:
     static AnmObjTexSrtOverride* Construct(MEMAllocator* pAllocator, u32* pSize,
                                            ResMdl mdl, int numChildren);
 

@@ -503,7 +503,9 @@ void DrawGX::ClearEfb(const nw4r::math::MTX34& rMtx, bool colorUpdate,
 
     SetBlendMode(BLEND_NONE);
     SetVtxState(lu ? VTX_TYPE_SCREEN_TEXTURE_LU : VTX_TYPE_SCREEN_TEXTURE);
-    DrawScreenTexture(rMtx);
+
+    GXLoadPosMtxImm(rMtx, GX_PNMTX0);
+    DrawScreenTexture();
 
     if (texture) {
         GXSetZTexture(GX_ZT_DISABLE, GX_TF_Z24X8, 0);

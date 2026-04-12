@@ -7,7 +7,7 @@
 #include <revolution/MEM.h>
 
 namespace EGG {
-class ScnRenderer : ScnRootEx {
+class ScnRenderer : public ScnRootEx {
 public:
     enum DrawPathType {
         DRAW_PATH_XLU_SNAP,

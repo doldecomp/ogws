@@ -101,6 +101,7 @@ protected:
  *
  ******************************************************************************/
 class AnmObjTexPatOverride : public AnmObjTexPatNode {
+public:
     static AnmObjTexPatOverride* Construct(MEMAllocator* pAllocator, u32* pSize,
                                            ResMdl mdl, int numChildren);
 

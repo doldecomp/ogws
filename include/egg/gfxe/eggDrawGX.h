@@ -129,10 +129,22 @@ public:
                             const nw4r::math::VEC3& rP1,
                             const nw4r::math::VEC3& rP2, GXColor color);
 
-    static void DrawScreenTexture(const nw4r::math::MTX34& rMtx) {
-        GXLoadPosMtxImm(rMtx, GX_PNMTX0);
+    static void DrawScreen() {
+        GXCallDisplayList(s_DL[DL_SCREEN].m_list, s_DL[DL_SCREEN].m_size);
+    }
+    static void DrawScreen(const nw4r::math::MTX34& rMtx) {
+        DrawDL(DL_SCREEN, rMtx);
+    }
+    static void DrawScreen(const nw4r::math::MTX34& rMtx, GXColor color) {
+        DrawDL(DL_SCREEN, rMtx, color);
+    }
+
+    static void DrawScreenTexture() {
         GXCallDisplayList(s_DL[DL_SCREEN_TEXTURE].m_list,
                           s_DL[DL_SCREEN_TEXTURE].m_size);
+    }
+    static void DrawScreenTexture(const nw4r::math::MTX34& rMtx) {
+        DrawDL(DL_SCREEN_TEXTURE, rMtx);
     }
     static void DrawScreenTexture(const nw4r::math::MTX34& rMtx,
                                   GXColor color) {
