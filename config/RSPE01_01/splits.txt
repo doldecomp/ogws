@@ -3307,13 +3307,14 @@ Pack/RPGraphics/RPGrpScreen.cpp:
 	.text       start:0x801B0268 end:0x801B046C
 	.ctors      start:0x80355130 end:0x80355134
 	.bss        start:0x804A4538 end:0x804A45B0
+	.sdata2     start:0x804C1898 end:0x804C18A0
 
 Pack/RPGraphics/RPGrpView.cpp:
 	.text       start:0x801B046C end:0x801B1624
 	.ctors      start:0x80355134 end:0x80355138
 	.data       start:0x803BA5C0 end:0x803BA608
 	.bss        start:0x804A45B0 end:0x804A4608
-	.sdata2     start:0x804C1898 end:0x804C18D0
+	.sdata2     start:0x804C18A0 end:0x804C18D0
 
 Pack/RPGraphics/RPGrpViewRender2D.cpp:
 	.text       start:0x801B1624 end:0x801B1700
