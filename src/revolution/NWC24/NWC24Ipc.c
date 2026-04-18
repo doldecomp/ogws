@@ -6,8 +6,10 @@ static BOOL NWC24iIsRequestPending = FALSE;
 // Forward declarations
 static s32 CallbackAsyncIpc(s32 result, void* pArg);
 
-NWC24Err NWC24iOpenResourceManager(const char* /* pUser */, const char* pName,
+NWC24Err NWC24iOpenResourceManager(const char* pUser, const char* pName,
                                    s32* pFd, IPCOpenMode mode) {
+#pragma unused(pUser)
+
     s32 result;
 
     if (pFd == NULL) {
@@ -32,23 +34,26 @@ NWC24Err NWC24iOpenResourceManager(const char* /* pUser */, const char* pName,
     return NWC24_OK;
 }
 
-NWC24Err NWC24iCloseResourceManager(const char* /* pUser */, s32 fd) {
+NWC24Err NWC24iCloseResourceManager(const char* pUser, s32 fd) {
+#pragma unused(pUser)
+
     return IOS_Close(fd) < 0 ? NWC24_ERR_INTERNAL_IPC : NWC24_OK;
 }
 
-NWC24Err NWC24iIoctlResourceManager(const char* /* pUser */, s32 fd, s32 type,
+NWC24Err NWC24iIoctlResourceManager(const char* pUser, s32 fd, s32 type,
                                     void* pIn, s32 inSize, void* pOut,
                                     s32 outSize) {
+#pragma unused(pUser)
 
     return IOS_Ioctl(fd, type, pIn, inSize, pOut, outSize) < 0
                ? NWC24_ERR_INTERNAL_IPC
                : NWC24_OK;
 }
 
-NWC24Err NWC24iIoctlResourceManagerAsync(const char* /* pUser */, s32 fd,
-                                         s32 type, void* pIn, s32 inSize,
-                                         void* pOut, s32 outSize,
-                                         void* pCallbackArg) {
+NWC24Err NWC24iIoctlResourceManagerAsync(const char* pUser, s32 fd, s32 type,
+                                         void* pIn, s32 inSize, void* pOut,
+                                         s32 outSize, void* pCallbackArg) {
+#pragma unused(pUser)
 
     if (IOS_IoctlAsync(fd, type, pIn, inSize, pOut, outSize, CallbackAsyncIpc,
                        pCallbackArg) < 0) {

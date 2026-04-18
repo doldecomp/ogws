@@ -337,7 +337,10 @@ static void UnlockCounters(void) {
     OSUnlockMutex(&nwc24ScdCounterMutex);
 }
 
-static NWC24Err CheckCallingStatus(const char* /* pUser */, BOOL /* block */) {
+static NWC24Err CheckCallingStatus(const char* pUser, BOOL block) {
+#pragma unused(pUser)
+#pragma unused(block)
+
     if (OSGetCurrentThread() == NULL) {
         return NWC24_ERR_FATAL;
     }
