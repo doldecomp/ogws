@@ -155,10 +155,10 @@ public:
     }
 
     f32& operator()(int i) {
-        return reinterpret_cast<f32*>(&x)[i];
+        return (&x)[i];
     }
     const f32 operator()(int i) const {
-        return reinterpret_cast<const f32*>(&x)[i];
+        return (&x)[i];
     }
 
     void set(f32 fx, f32 fy, f32 fz) {
