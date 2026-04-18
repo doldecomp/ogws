@@ -927,8 +927,8 @@ CalcAhead_Particle_Stripe__Q34nw4r2ef24DrawSmoothStripeStrategyFPQ34nw4r4math4VE
 CalcAhead_ParticleBoth_Stripe__Q34nw4r2ef24DrawSmoothStripeStrategyFPQ34nw4r4math4VEC3PQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripePQ34nw4r2ef8Particle = .text:0x8002EE64; // type:function size:0x2DC scope:global
 CalcAhead_ParticleBoth_Ring__Q34nw4r2ef24DrawSmoothStripeStrategyFPQ34nw4r4math4VEC3PQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripePQ34nw4r2ef8Particle = .text:0x8002F140; // type:function size:0x32C scope:global
 CalcAhead_ParticleBoth_Origin__Q34nw4r2ef24DrawSmoothStripeStrategyFPQ34nw4r4math4VEC3PQ44nw4r2ef24DrawSmoothStripeStrategy18AheadContextStripePQ34nw4r2ef8Particle = .text:0x8002F46C; // type:function size:0x294 scope:global
-fn_8002F700 = .text:0x8002F700; // type:function size:0x30
-fn_8002F730 = .text:0x8002F730; // type:function size:0x2C
+GetPtclTrack__Q34nw4r2ef10ResEmitterFUs = .text:0x8002F700; // type:function size:0x30
+SetStop__Q34nw4r2ef12ResAnimCurveFb = .text:0x8002F730; // type:function size:0x2C
 FExp__Q34nw4r4math6detailFf = .text:0x8002F75C; // type:function size:0x8C scope:global
 FLog__Q34nw4r4math6detailFf = .text:0x8002F7E8; // type:function size:0x8C scope:global
 FrSqrt__Q24nw4r4mathFf = .text:0x8002F874; // type:function size:0x24 scope:global

@@ -497,6 +497,8 @@ config.libs = [
             Object(Matching, "nw4r/ef/drawstrategy/ef_drawpointstrategy.cpp"),
             Object(NonMatching, "nw4r/ef/drawstrategy/ef_drawstripestrategy.cpp"),
             Object(NonMatching, "nw4r/ef/drawstrategy/ef_drawsmoothstripestrategy.cpp"),
+            Object(Matching, "nw4r/ef/ef_res_emitter_ac.cpp"),
+            Object(Matching, "nw4r/ef/ef_res_animcurve_ac.cpp"),
         ]
     },
     {
@@ -731,7 +733,9 @@ config.libs = [
             Object(Matching, "egg/gfxe/eggGXUtility.cpp"),
             Object(Matching, "egg/gfxe/eggIDrawGX.cpp"),
             Object(NonMatching, "egg/gfx/eggDrawHelper.cpp"),
+            Object(NonMatching, "egg/gfx/eggProjection.cpp"),
             Object(Matching, "egg/prim/eggAssert.cpp", extra_cflags=["-Cpp_exceptions on"]),
+            Object(NonMatching, "egg/geom/eggPlane.cpp", extra_cflags=["-Cpp_exceptions on"]),
             Object(Matching, "egg/math/eggMath.cpp", extra_cflags=["-Cpp_exceptions on"]),
             Object(Matching, "egg/math/eggMatrix.cpp", extra_cflags=["-Cpp_exceptions on"]),
             Object(Matching, "egg/math/eggQuat.cpp", extra_cflags=["-Cpp_exceptions on"]),

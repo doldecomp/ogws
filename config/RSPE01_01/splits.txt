@@ -251,8 +251,11 @@ nw4r/ef/drawstrategy/ef_drawsmoothstripestrategy.cpp:
 	.sbss       start:0x804BEA58 end:0x804BEA60
 	.sdata2     start:0x804BFE68 end:0x804BFEA8
 
-nw4r/nw4r_8002F700.o:
-	.text       start:0x8002F700 end:0x8002F75C
+nw4r/ef/ef_res_emitter_ac.cpp:
+	.text       start:0x8002F700 end:0x8002F730
+
+nw4r/ef/ef_res_animcurve_ac.cpp:
+	.text       start:0x8002F730 end:0x8002F75C
 
 nw4r/math/math_arithmetic.cpp:
 	.text       start:0x8002F75C end:0x8002F898
@@ -1189,7 +1192,7 @@ egg/gfx/eggDrawHelper.cpp:
 	.bss        start:0x8040AA50 end:0x8040AA60
 	.sbss       start:0x804BEC88 end:0x804BEC90
 
-egg/gfx/egg_800A1DB0.o:
+egg/gfx/eggProjection.cpp:
 	.text       start:0x800A1DB0 end:0x800A1DE4
 
 egg/prim/eggAssert.cpp:
@@ -1198,7 +1201,7 @@ egg/prim/eggAssert.cpp:
 	.text       start:0x800A1DE4 end:0x800A204C
 	.rodata     start:0x8037A1E0 end:0x8037A230
 
-egg/egg_800A204C.o:
+egg/geom/eggPlane.cpp:
 	extab       start:0x80006508 end:0x80006510
 	extabindex  start:0x80006C5C end:0x80006C68
 	.text       start:0x800A204C end:0x800A2118
