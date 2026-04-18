@@ -1025,13 +1025,13 @@ RPGrpModelAnmG3D::GetAnmPlayPolicy(Anm anm, AnmIdx idx) const {
         break;
     }
 
-    // @bug Policy variable is possibly uninitialized
-#if defined(BUG_FIX)
     default: {
+        // @bug Policy variable is possibly uninitialized
+#if defined(BUG_FIX)
         policy = nw4r::g3d::ANM_POLICY_ONETIME;
+#endif
         break;
     }
-#endif
     }
 
     return FROM_G3D_POLICY[policy];
