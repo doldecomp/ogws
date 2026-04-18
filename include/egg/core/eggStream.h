@@ -2,7 +2,7 @@
 #define EGG_CORE_STREAM_H
 #include <egg/types_egg.h>
 
-#include <egg/core/eggBitFlag.h>
+#include <egg/prim.h>
 
 namespace EGG {
 

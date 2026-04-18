@@ -49,7 +49,7 @@ public:
     virtual void CopyToG3D(nw4r::g3d::Camera camera) const; // at 0x10
 
     void LoadScnCamera(const nw4r::g3d::ResAnmScn scn, u8 refNumber, f32 frame,
-                       u32 flags);
+                       u32 flags = 0);
 
     void CopyFromAnother(const Frustum& rOther);
 

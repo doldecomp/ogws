@@ -2,9 +2,9 @@
 #define EGG_CORE_DISPLAY_H
 #include <egg/types_egg.h>
 
-#include <egg/core/eggBitFlag.h>
 #include <egg/core/eggSystem.h>
 #include <egg/core/eggVideo.h>
+#include <egg/prim.h>
 
 #include <nw4r/ut.h>
 

@@ -13,6 +13,10 @@ class RPGrpScreen;
  */
 class RPGrpRenderer {
 public:
+    //! Maximum number of renderer views
+    static const int MAX_VIEW = 32;
+
+public:
     /**
      * @brief Gets the currently active manager instance
      */

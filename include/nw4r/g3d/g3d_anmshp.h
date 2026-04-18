@@ -101,6 +101,7 @@ protected:
  *
  ******************************************************************************/
 class AnmObjShpBlend : public AnmObjShpNode {
+public:
     static AnmObjShpBlend* Construct(MEMAllocator* pAllocator, u32* pSize,
                                      ResMdl mdl, int numChildren);
 

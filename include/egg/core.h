@@ -4,7 +4,6 @@
 #include <egg/core/eggAllocator.h>
 #include <egg/core/eggArchive.h>
 #include <egg/core/eggAsyncDisplay.h>
-#include <egg/core/eggBitFlag.h>
 #include <egg/core/eggCntFile.h>
 #include <egg/core/eggColorFader.h>
 #include <egg/core/eggController.h>
@@ -34,6 +33,5 @@
 #include <egg/core/eggWatch.h>
 #include <egg/core/eggXfb.h>
 #include <egg/core/eggXfbManager.h>
-
 
 #endif

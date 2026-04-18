@@ -86,6 +86,16 @@ public:
 
     void setDrawSettingGX(bool) const;
 
+    LightManager* getLightManager() const {
+        return mpLightManager;
+    }
+    FogManager* getFogManager() const {
+        return mpFogManager;
+    }
+    ShadowTextureManager* getShadowTextureManager() const {
+        return mpShadowTextureManager;
+    }
+
     Screen& getScreen() const {
 #line 171
         EGG_ASSERT(mpScreen);

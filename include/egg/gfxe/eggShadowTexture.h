@@ -7,10 +7,12 @@
 namespace EGG {
 class ShadowTexture : public ModelSnapshot {
 public:
-    ShadowTexture(u16, u16, u16);
+    ShadowTexture(u16, int, u16);
 
     void Calc();
     void Draw(Screen*, bool, bool, bool);
+
+    void Replace(EGG::ModelEx* pModelEx, const char* pName);
 
     // Temporary names, needed for regalloc
     void SetCapTexture0(CapTexture* pCapTexture) {

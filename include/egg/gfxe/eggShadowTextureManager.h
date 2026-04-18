@@ -3,9 +3,10 @@
 #include "types_egg.h"
 
 namespace EGG {
+
 class ShadowTextureManager {
 public:
-    enum EShadowMgrFlag { SHADOW_MGR_ACTIVE = (1 << 0) };
+    enum EShadowMgrFlag { SHADOW_MGR_ENABLE = (1 << 0) };
 
 private:
     static const int GROUP_MAX = 16;
@@ -25,10 +26,19 @@ public:
     void Calc();
     void Draw(Screen*);
 
-    bool IsActive() const {
-        return mFlags & SHADOW_MGR_ACTIVE;
+    bool IsEnable() const {
+        return mFlags & SHADOW_MGR_ENABLE;
+    }
+
+    void SetEnable(bool enable) {
+        if (enable) {
+            mFlags |= SHADOW_MGR_ENABLE;
+        } else {
+            mFlags &= ~SHADOW_MGR_ENABLE;
+        }
     }
 };
+
 } // namespace EGG
 
 #endif

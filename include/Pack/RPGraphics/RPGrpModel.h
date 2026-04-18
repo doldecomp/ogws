@@ -190,6 +190,10 @@ public:
     void Calc();
     void Entry();
 
+    EGG::ModelEx* GetModelEx() const {
+        return mpModelEx;
+    }
+
     nw4r::g3d::ScnObj* GetScnObj() const {
         return mpModelEx->getScnObj();
     }
@@ -261,7 +265,7 @@ protected:
     };
 
 protected:
-    static const nw4r::math::_VEC3 GEOMETRY_MAGNIFY[1 /* ??? */];
+    static const nw4r::math::_VEC3 GEOMETRY_MAGNIFY[/* ??? */];
 
     //! Allocator used for model-related allocations
     static EGG::Allocator* spAllocator;

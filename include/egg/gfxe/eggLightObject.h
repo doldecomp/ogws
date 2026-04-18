@@ -3,17 +3,15 @@
 #include <egg/types_egg.h>
 
 #include <egg/core/eggIBinary.h>
-
 #include <egg/math.h>
 
 #include <revolution/GX.h>
-
 
 namespace EGG {
 
 class LightObj : IBinary<LightObj> {
 public:
-    struct Bin : IBinary::Bin {
+    struct BinData {
         u8 spotFn;     // at 0x10
         u8 distAttnFn; // at 0x11
         u8 BYTE_0x12;
