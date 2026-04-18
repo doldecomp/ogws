@@ -51,6 +51,7 @@ private:
     RPGrpDrawPathManager(u32 pathFlags, RPGrpModelScene* pModelScene);
 
 private:
+    u16 unkA;
     u16 unkC;
     RPGrpModelScene* mpModelScene; // at 0x10
     u32 unk14;
