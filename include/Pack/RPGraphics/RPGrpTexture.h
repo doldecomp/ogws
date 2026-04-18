@@ -17,9 +17,23 @@ private:
     GXTexObj mGXTexObj; // at 0x0
 
 public:
-    RPGrpTexture();
+    /**
+     * @brief Constructor that uses a texture image resource.
+     *
+     * @param pRes Texture image resource
+     */
+    RPGrpTexture(const EGG::ResTIMG* pRes);
+
+    /**
+     * @brief Constructor that uses a texture resource from a resource file
+     * handle.
+     *
+     * @param handle Resource file handle
+     * @param pName File name.
+     */
     RPGrpTexture(RPGrpHandle handle, const char* pName);
-    virtual ~RPGrpTexture();
+
+    virtual ~RPGrpTexture() {}
 
     const GXTexObj& GetTexObj() const {
         return mGXTexObj;
