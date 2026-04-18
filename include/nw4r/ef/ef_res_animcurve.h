@@ -147,6 +147,21 @@ struct AnimCurveNameTable {
 class ResAnimCurve {
 private:
     u8* mAnimCurveData; // at 0x0
+
+public:
+    explicit ResAnimCurve(u8* pData = NULL) : mAnimCurveData(pData) {}
+    ResAnimCurve(const ResAnimCurve& rOther)
+        : mAnimCurveData(rOther.mAnimCurveData) {}
+
+    bool IsValid() const {
+        return mAnimCurveData != NULL;
+    }
+
+    AnimCurveHeader* ptr() {
+        return reinterpret_cast<AnimCurveHeader*>(mAnimCurveData);
+    }
+
+    void SetStop(bool stop);
 };
 
 } // namespace ef

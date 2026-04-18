@@ -2,6 +2,7 @@
 #define NW4R_EF_RES_EMITTER_H
 #include <nw4r/types_nw4r.h>
 
+#include <nw4r/ef/ef_res_animcurve.h>
 #include <nw4r/ef/ef_types.h>
 #include <nw4r/ef/emform/ef_emform.h>
 #include <nw4r/math.h>
@@ -397,6 +398,8 @@ public:
     EmitterResource* ptr() {
         return mData;
     }
+
+    ResAnimCurve GetPtclTrack(u16 idx);
 };
 
 } // namespace ef

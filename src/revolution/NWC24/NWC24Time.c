@@ -183,7 +183,9 @@ static NWC24Err GetRTC(u32* pRTC) {
     return NWC24_OK;
 }
 
-static NWC24Err CheckCallingStatus(const char* /* pUser */) {
+static NWC24Err CheckCallingStatus(const char* pUser) {
+#pragma unused(pUser)
+
     if (OSGetCurrentThread() == NULL) {
         return NWC24_ERR_FATAL;
     }
