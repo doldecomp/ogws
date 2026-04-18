@@ -3548,15 +3548,169 @@ Pack/RPSports/RPBsbScene/RPBsbScene_unsplit.o:
 	.sbss       start:0x804BF778 end:0x804BF850
 	.sdata2     start:0x804C32A8 end:0x804C3E80
 
+Pack/RPSports/RPGolScene/RPGolScene.cpp:
+	.text       start:0x8028DF74 end:0x8028E098
+	.data       start:0x803C7718 end:0x803C7798
+
+Pack/RPSports/RPGolScene/RPGolMain.cpp:
+	.text       start:0x8028E098 end:0x8028E900
+	.rodata     start:0x8038E250 end:0x8038E2B0
+	.data       start:0x803C7798 end:0x803C77C0
+	.sbss       start:0x804BF850 end:0x804BF858
+	.sdata2     start:0x804C3E80 end:0x804C3EA8
+
+Pack/RPSports/RPGolScene/RPGolResourceManager.cpp:
+	.text       start:0x8028E900 end:0x8028EAE0
+	.data       start:0x803C77C0 end:0x803C77D0
+	.sbss       start:0x804BF858 end:0x804BF860
+
+Pack/RPSports/RPGolScene/RPGolCameraManager.cpp:
+	.text       start:0x8028EAE0 end:0x8028F9FC
+	.data       start:0x803C77D0 end:0x803C77E8
+	.sbss       start:0x804BF860 end:0x804BF868
+	.sdata2     start:0x804C3EA8 end:0x804C3ED0
+
+Pack/RPSports/RPGolScene/RPGolMapObjBase.cpp:
+	.text       start:0x8028F9FC end:0x80290B44
+	.ctors      start:0x803551F4 end:0x803551F8
+	.data       start:0x803C77E8 end:0x803C77F8
+	.sdata2     start:0x804C3ED0 end:0x804C3ED8
+
+Pack/RPSports/RPGolScene/RPGolFieldManager.cpp:
+	.text       start:0x80290B44 end:0x80294184
+	.ctors      start:0x803551F8 end:0x803551FC
+	.rodata     start:0x8038E2B0 end:0x8038E4A0
+	.data       start:0x803C77F8 end:0x803C78E8
+	.sdata      start:0x804BE818 end:0x804BE830
+	.sbss       start:0x804BF868 end:0x804BF870
+	.sdata2     start:0x804C3ED8 end:0x804C3F70
+
+Pack/RPSports/RPGolScene/RPGolDrawManager.cpp:
+	.text       start:0x80294184 end:0x8029528C
+	.data       start:0x803C78E8 end:0x803C78F8
+	.sbss       start:0x804BF870 end:0x804BF878
+	.sdata2     start:0x804C3F70 end:0x804C3FA8
+
+Pack/RPSports/RPGolScene/RPGolUtlMtx.cpp:
+	.text       start:0x8029528C end:0x80295CB0
+	.ctors      start:0x803551FC end:0x80355200
+	.bss        start:0x804A8900 end:0x804A8960
+	.sdata2     start:0x804C3FA8 end:0x804C3FC0
+
+Pack/RPSports/RPGolScene/RPGolUtlVec.cpp:
+	.text       start:0x80295CB0 end:0x80296238
+	.ctors      start:0x80355200 end:0x80355204
+	.bss        start:0x804A8960 end:0x804A8AC0
+	.sdata2     start:0x804C3FC0 end:0x804C3FE0
+
+Pack/RPSports/RPGolScene/RPGolMapObjTree.cpp:
+	.text       start:0x80296238 end:0x80296EA8
+	.rodata     start:0x8038E4A0 end:0x8038E4E8
+	.data       start:0x803C78F8 end:0x803C7908
+	.sdata2     start:0x804C3FE0 end:0x804C4030
+
+Pack/RPSports/RPGolScene/RPGolMapObjTreeWater.cpp:
+	.text       start:0x80296EA8 end:0x80296F50
+	.rodata     start:0x8038E4E8 end:0x8038E510
+
+Pack/RPSports/RPGolScene/RPGolMapObjTee.cpp:
+	.text       start:0x80296F50 end:0x80296FD8
+	.data       start:0x803C7908 end:0x803C7918
+
+Pack/RPSports/RPGolScene/RPGolMapObjBall.cpp:
+	.text       start:0x80296FD8 end:0x8029B240
+	.rodata     start:0x8038E510 end:0x8038E610
+	.data       start:0x803C7918 end:0x803C7A50
+	.bss        start:0x804A8AC0 end:0x804A8B48
+	.sdata      start:0x804BE830 end:0x804BE848
+	.sbss       start:0x804BF878 end:0x804BF890
+	.sdata2     start:0x804C4030 end:0x804C4108
+
+Pack/RPSports/RPGolScene/RPGolSimulateManager.cpp:
+	.text       start:0x8029B240 end:0x8029BBB4
+	.data       start:0x803C7A50 end:0x803C7A60
+	.sbss       start:0x804BF890 end:0x804BF898
+	.sdata2     start:0x804C4108 end:0x804C4110
+
+Pack/RPSports/RPGolScene/RPGolCamera.cpp:
+	.text       start:0x8029BBB4 end:0x8029C2F8
+	.data       start:0x803C7A60 end:0x803C7A80
+	.sbss       start:0x804BF898 end:0x804BF8B8
+	.sdata2     start:0x804C4110 end:0x804C4140
+
+Pack/RPSports/RPGolScene/RPGolCameraStatic.cpp:
+	.text       start:0x8029C2F8 end:0x8029CA4C
+	.ctors      start:0x80355204 end:0x80355208
+	.data       start:0x803C7A80 end:0x803C7AA0
+	.sbss       start:0x804BF8B8 end:0x804BF8C0
+	.sdata2     start:0x804C4140 end:0x804C41A0
+
+Pack/RPSports/RPGolScene/RPGolConfig.cpp:
+	.text       start:0x8029CA4C end:0x8029E62C
+	.ctors      start:0x80355208 end:0x8035520C
+	.rodata     start:0x8038E610 end:0x8038E658
+	.data       start:0x803C7AA0 end:0x803C7CC8
+	.bss        start:0x804A8B48 end:0x804A8BA0
+	.sdata      start:0x804BE848 end:0x804BE858
+	.sbss       start:0x804BF8C0 end:0x804BF8C8
+	.sdata2     start:0x804C41A0 end:0x804C4228
+
+Pack/RPSports/RPGolScene/RPGolPlayer.cpp:
+	.text       start:0x8029E62C end:0x802A2210
+	.ctors      start:0x8035520C end:0x80355210
+	.data       start:0x803C7CC8 end:0x803C7DD0
+	.sbss       start:0x804BF8C8 end:0x804BF8D0
+	.sdata2     start:0x804C4228 end:0x804C42B8
+
+Pack/RPSports/RPGolScene/RPGolPlayerManager.cpp:
+	.text       start:0x802A2210 end:0x802A3560
+	.rodata     start:0x8038E658 end:0x8038E698
+	.data       start:0x803C7DD0 end:0x803C7DE0
+	.sbss       start:0x804BF8D0 end:0x804BF8D8
+	.sdata2     start:0x804C42B8 end:0x804C42E0
+
+Pack/RPSports/RPGolScene/RPGolMath.cpp:
+	.text       start:0x802A3560 end:0x802A3A6C
+	.ctors      start:0x80355210 end:0x80355214
+	.bss        start:0x804A8BA0 end:0x804A8BB8
+	.sbss       start:0x804BF8D8 end:0x804BF8E8
+	.sdata2     start:0x804C42E0 end:0x804C42F8
+
+Pack/RPSports/RPGolScene/RPGol_802a3a6c.cpp:
+	.text       start:0x802A3A6C end:0x802A3B84
+	.ctors      start:0x80355214 end:0x80355218
+	.bss        start:0x804A8BB8 end:0x804A8CD0
+	.sbss       start:0x804BF8E8 end:0x804BF8F0
+	.sdata2     start:0x804C42F8 end:0x804C4300
+
+Pack/RPSports/RPGolScene/RPGolMathTrig.cpp:
+	.text       start:0x802A3B84 end:0x802A3DE4
+	.sdata2     start:0x804C4300 end:0x804C4318
+
+Pack/RPSports/RPGolScene/RPGolKCol.cpp:
+	.text       start:0x802A3DE4 end:0x802A7444
+	.ctors      start:0x80355218 end:0x8035521C
+	.data       start:0x803C7DE0 end:0x803C7DF0
+	.bss        start:0x804A8CD0 end:0x804A8D68
+	.sbss       start:0x804BF8F0 end:0x804BF8F8
+	.sdata2     start:0x804C4318 end:0x804C4338
+
+Pack/RPSports/RPGolScene/RPGolCameraTilt.cpp:
+	.text       start:0x802A7444 end:0x802A79F8
+	.ctors      start:0x8035521C end:0x80355220
+	.data       start:0x803C7DF0 end:0x803C7E10
+	.sbss       start:0x804BF8F8 end:0x804BF900
+	.sdata2     start:0x804C4338 end:0x804C4388
+
 Pack/RPSports/RPGolScene/RPGolScene_unsplit.o:
-	.text       start:0x8028DF74 end:0x802C7924
-	.ctors      start:0x803551F4 end:0x8035522C
-	.rodata     start:0x8038E250 end:0x8038FB10
-	.data       start:0x803C7718 end:0x803C8958
-	.bss        start:0x804A8900 end:0x804A92D0
-	.sdata      start:0x804BE818 end:0x804BE8D0
-	.sbss       start:0x804BF850 end:0x804BF958
-	.sdata2     start:0x804C3E80 end:0x804C4CB8
+	.text       start:0x802A79F8 end:0x802C7924
+	.ctors      start:0x80355220 end:0x8035522C
+	.rodata     start:0x8038E698 end:0x8038FB10
+	.data       start:0x803C7E10 end:0x803C8958
+	.bss        start:0x804A8D68 end:0x804A92D0
+	.sdata      start:0x804BE858 end:0x804BE8D0
+	.sbss       start:0x804BF900 end:0x804BF958
+	.sdata2     start:0x804C4388 end:0x804C4CB8
 
 Pack/RPSports/RPBoxScene/RPBoxScene_unsplit.o:
 	.text       start:0x802C7924 end:0x80313028
