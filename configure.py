@@ -944,7 +944,7 @@ config.libs = [
             Object(Matching, "revolution/MEM/mem_frameHeap.c"),
             Object(Matching, "revolution/MEM/mem_allocator.c"),
             Object(Matching, "revolution/MEM/mem_list.c"),
-            Object(NonMatching, "revolution/MTX/mtx.c"),
+            Object(Matching, "revolution/MTX/mtx.c"),
             Object(Matching, "revolution/MTX/mtxvec.c"),
             Object(Matching, "revolution/MTX/mtx44.c"),
             Object(Matching, "revolution/MTX/vec.c"),

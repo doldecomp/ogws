@@ -1,175 +1,168 @@
 #include <revolution/MTX.h>
+#include <revolution/MTX/internal/mtxAssert.h>
 
 #include <math.h>
 
-#define MY_EPSILON 1e-5f
+void PSQUATMultiply(register CQuaternionPtr p, register CQuaternionPtr q,
+                    register QuaternionPtr pq) {
+    register f32 tmp0;
+    register f32 tmp1;
+    register f32 tmp2;
+    register f32 tmp3;
+    register f32 tmp4;
+    register f32 tmp5;
+    register f32 tmp6;
+    register f32 tmp7;
+    register f32 tmp8;
+    register f32 tmp9;
+    register f32 tmp10;
 
-DECOMP_FORCELITERAL(quat_c, MY_EPSILON, 1.0f, 0.0f);
-
-void PSQUATMultiply(register const Quaternion* a, register const Quaternion* b,
-                    register Quaternion* prod) {
-    register f32 axy, azw;
-    register f32 bxy, bzw;
-    register f32 naxay, naxy, nazw;
-    register f32 work1, work2, work3, work4, work5;
-
-    ASM (
-        // Load qA components
-        psq_l axy, Quaternion.x(a), 0, 0 // AX, AY
-        psq_l azw, Quaternion.z(a), 0, 0 // AZ, AW
-        // Load qB components
-        psq_l bxy, Quaternion.x(b), 0, 0 // BX, BY
-        psq_l bzw, Quaternion.z(b), 0, 0 // BZ, BW
-
-        // Negate copy of qA components
-        ps_neg naxy, axy // -AX, -AY
-        ps_neg nazw, azw // -AZ, -AW
-
-        // Compute parts of product
-        ps_muls0   work1, azw,   bxy        //  AZ*BX,        AW*BX
-        ps_merge01 naxay, naxy,  axy        // -AX,           AY
-        ps_merge01 work2, nazw,  azw        // -AZ,           AW
-        ps_muls0   work3, naxy,  bxy        // -AX*BX,       -AY*BX
-        ps_muls1   work4, naxay, bxy        // -AX*BY,        AY*BY
-        ps_madds0  work1, naxay, bzw, work1 // -AX*BZ+AZ*BX,  AY*BZ+AW*BX
-        ps_muls1   work5, work2, bxy        // -AZ*BY,        AW*BY
-        ps_madds0  work3, work2, bzw, work3 // -AZ*BZ-AX*BX,  AW*BZ-AY*BX
-        ps_merge10 work1, work1, work1      //  AY*BZ+AW*BX, -AX*BZ+AZ*BX
-        ps_madds1  work5, axy,   bzw, work5 // -AX*BW-AZ*BY, -AY*BW+AW*BY
-        ps_merge10 work3, work3, work3      //  AW*BZ-AY*BX, -AZ*BZ-AX*BX
-        ps_madds1  work4, nazw,  bzw, work4 // -AZ*BW-AX*BY, -AW*BW+AY*BY
-
-        // Put everything together
-        ps_add work1, work1, work5 // AY*BZ+AW*BX-AX*BW-AZ*BY, -AX*BZ+AZ*BX-AY*BW+AW*BY
-        ps_sub work3, work3, work4 // AW*BZ-AY*BX+AZ*BW-AX*BY, -AZ*BZ-AX*BX+AW*BW+AY*BY
-
-        // Store result
-        psq_st work1, Quaternion.x(prod), 0, 0
-        psq_st work3, Quaternion.z(prod), 0, 0
-    )
+    // clang-format off
+    asm {
+        psq_l tmp0, Quaternion.x(p), 0, qr0
+        psq_l tmp1, Quaternion.z(p), 0, qr0
+        psq_l tmp2, Quaternion.x(q), 0, qr0
+        ps_neg tmp5, tmp0
+        psq_l tmp3, Quaternion.z(q), 0, qr0
+        ps_neg tmp6, tmp1
+        ps_merge01 tmp4, tmp5, tmp0
+        ps_muls0 tmp7, tmp1, tmp2
+        ps_muls0 tmp5, tmp5, tmp2
+        ps_merge01 tmp8, tmp6, tmp1
+        ps_muls1 tmp9, tmp4, tmp2
+        ps_madds0 tmp7, tmp4, tmp3, tmp7
+        ps_muls1 tmp10, tmp8, tmp2
+        ps_madds0 tmp5, tmp8, tmp3, tmp5
+        ps_madds1 tmp9, tmp6, tmp3, tmp9
+        ps_merge10 tmp7, tmp7, tmp7
+        ps_madds1 tmp10, tmp0, tmp3, tmp10
+        ps_merge10 tmp5, tmp5, tmp5
+        ps_add tmp7, tmp7, tmp10
+        psq_st tmp7, Quaternion.x(pq), 0, qr0
+        ps_sub tmp5, tmp5, tmp9
+        psq_st tmp5, Quaternion.z(pq), 0, qr0
+    } // clang-format on
 }
 
-void PSQUATNormalize(register const Quaternion* in, register Quaternion* out) {
-    register f32 xy, zw;
-    register f32 xy2, dot;
-    register f32 work0, work1, work2, work3;
-    register f32 c_epsilon, c_half, c_three;
-
-    c_epsilon = MY_EPSILON;
-    c_half = 0.5f;
-    c_three = 3.0f;
-
-    ASM (
-        // Load quaternion components
-        psq_l xy, Quaternion.x(in), 0, 0
-        psq_l zw, Quaternion.z(in), 0, 0
-
-        // Compute dot product with self
-        ps_mul  xy2, xy,  xy       // X^2,             Y^2
-        ps_madd dot, zw,  zw,  xy2 // Z^2+X^2,         W^2+Y^2
-        ps_sum0 dot, dot, dot, dot // Z^2+X^2+W^2+Y^2, junk
-
-        // Reciprocal square root
-        frsqrte work0, dot
-
-        // Refine estimate using Newton-Raphson method
-        // y = 1 / sqrt(x)
-        fmul   work3, work0, work0        // rsqrt^2
-        fmul   work0, work0, c_half       // rsqrt * 0.5
-        fnmsub work3, work3, dot, c_three // (3 - x * rsqrt^2)
-        fmul   work0, work3, work0        // (3 - x * rsqrt^2) * (rsqrt * 0.5)
-
-        // Set magnitude to zero if too small
-        // (dot - epsilon > zero) ? rsqrt : zero
-        ps_sub work1, dot,       c_epsilon
-        ps_sub work2, c_epsilon, c_epsilon
-        ps_sel work0, work1,     work0, work2
-
-        // Scale components to normalize
-        ps_muls0 xy, xy, work0
-        ps_muls0 zw, zw, work0
-
-        // Store result
-        psq_st xy, Quaternion.x(out), 0, 0
-        psq_st zw, Quaternion.z(out), 0, 0
-    )
-}
-
-void C_QUATMtx(Quaternion* quat, const Mtx mtx) {
-    f32 root, trace;
-    u32 dmax, dnext, dlast;
-    u32 next[3] = {1, 2, 0};
-    f32 temp[3];
-
-    trace = mtx[0][0] + mtx[1][1] + mtx[2][2];
-
-    if (trace > 0.0f) {
-        root = sqrtf(1.0f + trace);
-        quat->w = root * 0.5f;
-
-        root = 0.5f / root;
-        quat->x = root * (mtx[2][1] - mtx[1][2]);
-        quat->y = root * (mtx[0][2] - mtx[2][0]);
-        quat->z = root * (mtx[1][0] - mtx[0][1]);
+// Keep for float ordering
+void C_QUATNormalize(CQuaternionPtr src, QuaternionPtr unit) {
+    f32 norm =
+        src->x * src->x + src->y * src->y + src->z * src->z + src->w * src->w;
+    if (norm >= 0.00001f) {
+        norm = 1.0f / sqrtf(norm);
+        unit->x = src->x * norm;
+        unit->y = src->y * norm;
+        unit->z = src->z * norm;
+        unit->w = src->w * norm;
     } else {
-        dmax = 0;
-
-        if (mtx[1][1] > mtx[dmax][dmax]) {
-            dmax = 1;
-        }
-
-        if (mtx[2][2] > mtx[dmax][dmax]) {
-            dmax = 2;
-        }
-
-        dnext = next[dmax];
-        dlast = next[dnext];
-
-        root = sqrtf(mtx[dmax][dmax] - (mtx[dnext][dnext] + mtx[dlast][dlast]) +
-                     1.0f);
-        temp[dmax] = 0.5f * root;
-
-        if (0.0f != root) {
-            root = 0.5f / root;
-        }
-
-        quat->w = root * (mtx[dlast][dnext] - mtx[dnext][dlast]);
-        temp[dnext] = root * (mtx[dmax][dnext] + mtx[dnext][dmax]);
-        temp[dlast] = root * (mtx[dmax][dlast] + mtx[dlast][dmax]);
-
-        quat->x = temp[0];
-        quat->y = temp[1];
-        quat->z = temp[2];
+        unit->x = unit->y = unit->z = unit->w = 0.0f;
     }
 }
 
-void C_QUATSlerp(const Quaternion* a, const Quaternion* b, Quaternion* out,
-                 f32 t) {
+void PSQUATNormalize(register CQuaternionPtr src, register QuaternionPtr unit) {
+    register f32 tmp0;
+    register f32 tmp1;
+    register f32 tmp2;
+    register f32 tmp3;
+    register f32 tmp4 = 0.00001f;
+    register f32 tmp5;
+    register f32 tmp6;
+    register f32 tmp7;
+    register f32 tmp8;
+    register f32 c_half = 0.5f;
+    register f32 c_three = 3.0f;
+
+    // clang-format off
+    asm {
+        psq_l tmp0, Quaternion.x(src), 0, qr0
+        ps_mul tmp2, tmp0, tmp0
+        psq_l tmp1, Quaternion.z(src), 0, qr0
+        ps_sub tmp5, tmp4, tmp4
+        ps_madd tmp2, tmp1, tmp1, tmp2
+        ps_sum0 tmp2, tmp2, tmp2, tmp2
+        frsqrte tmp3, tmp2
+        ps_sub tmp4, tmp2, tmp4
+        fmul tmp6, tmp3, tmp3
+        fmul tmp3, tmp3, c_half
+        fnmsub tmp6, tmp6, tmp2, c_three
+        fmul tmp3, tmp6, tmp3
+        ps_sel tmp3, tmp4, tmp3, tmp5
+        ps_muls0 tmp7, tmp0, tmp3
+        ps_muls0 tmp8, tmp1, tmp3
+        psq_st tmp7, Quaternion.x(unit), 0, qr0
+        psq_st tmp8, Quaternion.z(unit), 0, qr0
+    } // clang-format on
+}
+
+void C_QUATMtx(QuaternionPtr r, CMtxPtr m) {
+    s32 tmp0[3] = {1, 2, 0};
+    f32 tmp1;
+    f32 tmp2;
+    s32 tmp3;
+    s32 tmp4;
+    s32 tmp5;
+    f32 tmp6[3];
+
+    tmp1 = m[0][0] + m[1][1] + m[2][2];
+    if (tmp1 > 0.0f) {
+        tmp2 = sqrtf(tmp1 + 1.0f);
+        r->w = tmp2 * 0.5f;
+        tmp2 = 0.5f / tmp2;
+        r->x = (m[2][1] - m[1][2]) * tmp2;
+        r->y = (m[0][2] - m[2][0]) * tmp2;
+        r->z = (m[1][0] - m[0][1]) * tmp2;
+    } else {
+        tmp3 = 0;
+        if (m[1][1] > m[0][0]) {
+            tmp3 = 1;
+        }
+        if (m[2][2] > m[tmp3][tmp3]) {
+            tmp3 = 2;
+        }
+        tmp4 = tmp0[tmp3];
+        tmp5 = tmp0[tmp4];
+        tmp2 = sqrtf(m[tmp3][tmp3] - (m[tmp4][tmp4] + m[tmp5][tmp5]) + 1.0f);
+        tmp6[tmp3] = tmp2 * 0.5f;
+
+        if (tmp2 != 0.0f) {
+            tmp2 = 0.5f / tmp2;
+        }
+
+        r->w = (m[tmp5][tmp4] - m[tmp4][tmp5]) * tmp2;
+        tmp6[tmp4] = (m[tmp3][tmp4] + m[tmp4][tmp3]) * tmp2;
+        tmp6[tmp5] = (m[tmp3][tmp5] + m[tmp5][tmp3]) * tmp2;
+        r->x = tmp6[0];
+        r->y = tmp6[1];
+        r->z = tmp6[2];
+    }
+}
+
+void C_QUATSlerp(CQuaternionPtr p, CQuaternionPtr q, QuaternionPtr r, f32 t) {
     f32 dot;
-    f32 coeffa, coeffb;
-    f32 theta, sintheta;
+    f32 pt;
+    f32 qt;
+    f32 tmp0;
+    f32 tmp1;
 
-    dot = a->x * b->x + a->y * b->y + a->z * b->z + a->w * b->w;
-    coeffb = 1.0f;
-
-    if (dot < 0) {
+    dot = p->x * q->x + p->y * q->y + p->z * q->z + p->w * q->w;
+    qt = 1.0f;
+    if (dot < 0.0f) {
         dot = -dot;
-        coeffb = -coeffb;
+        qt = -qt;
     }
 
-    if (dot <= 1.0f - MY_EPSILON) {
-        theta = acosf(dot);
-        sintheta = sinf(theta);
-
-        coeffa = sinf((1.0f - t) * theta) / sintheta;
-        coeffb *= sinf(t * theta) / sintheta;
+    if (dot <= 0.99999f) {
+        tmp0 = acosf(dot);
+        tmp1 = sinf(tmp0);
+        pt = sinf((1.0f - t) * tmp0) / tmp1;
+        qt *= sinf(t * tmp0) / tmp1;
     } else {
-        coeffa = 1.0f - t;
-        coeffb *= t;
+        pt = 1.0f - t;
+        qt *= t;
     }
 
-    out->x = coeffa * a->x + coeffb * b->x;
-    out->y = coeffa * a->y + coeffb * b->y;
-    out->z = coeffa * a->z + coeffb * b->z;
-    out->w = coeffa * a->w + coeffb * b->w;
+    r->x = pt * p->x + qt * q->x;
+    r->y = pt * p->y + qt * q->y;
+    r->z = pt * p->z + qt * q->z;
+    r->w = pt * p->w + qt * q->w;
 }
