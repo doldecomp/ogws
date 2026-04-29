@@ -1,240 +1,177 @@
 #include <revolution/MTX.h>
+#include <revolution/MTX/internal/mtxAssert.h>
 
-asm void PSVECAdd(register const Vec* a, register const Vec* b,
-                  register Vec* sum) {
-    // clang-format off
-    nofralloc
-
-    // Sum X,Y components
-    psq_l  f2, Vec.x(a), 0, 0
-    psq_l  f4, Vec.x(b), 0, 0
+// clang-format off
+asm void PSVECAdd(register CVecPtr vec1, register CVecPtr vec2,
+                  register VecPtr dst) {
+    psq_l f2, Vec.x(vec1), 0, qr0
+    psq_l f4, Vec.x(vec2), 0, qr0
     ps_add f6, f2, f4
-
-    // Store result
-    psq_st f6, Vec.x(sum), 0, 0
-
-    // Sum Z component
-    psq_l  f3, Vec.z(a), 1, 0
-    psq_l  f5, Vec.z(b), 1, 0
+    psq_st f6, Vec.x(dst), 0, qr0
+    psq_l f3, Vec.z(vec1), 1, qr0
+    psq_l f5, Vec.z(vec2), 1, qr0
     ps_add f7, f3, f5
+    psq_st f7, Vec.z(dst), 1, qr0
+} // clang-format on
 
-    // Store result
-    psq_st f7, Vec.z(sum), 1, 0
+void PSVECScale(register CVecPtr src, register VecPtr dst, register f32 mult) {
+    register f32 vxy;
+    register f32 vz;
+    register f32 rxy;
+    register f32 rz;
 
-    blr
-    // clang-format on
+    // clang-format off
+    asm {
+        psq_l vxy, Vec.x(src), 0, qr0
+        psq_l vz, Vec.z(src), 1, qr0
+        ps_muls0 rxy, vxy, mult
+        psq_st rxy, Vec.x(dst), 0, qr0
+        ps_muls0 rz, vz, mult
+        psq_st rz, Vec.z(dst), 1, qr0
+    } // clang-format on
 }
 
-void PSVECScale(register const Vec* in, register Vec* out, register f32 scale) {
-    register f32 xy, z;
-    register f32 sxy, sz;
+void PSVECNormalize(register CVecPtr src, register VecPtr unit) {
+    register f32 c_half = 0.5f;
+    register f32 c_three = 3.0f;
+    register f32 v1_xy;
+    register f32 v1_z;
+    register f32 xx_zz;
+    register f32 xx_yy;
+    register f32 sqsum;
+    register f32 rsqrt;
+    register f32 nwork0;
+    register f32 nwork1;
 
-    ASM (
-        // Load components
-        psq_l xy, Vec.x(in), 0, 0
-        psq_l z,  Vec.z(in), 1, 0
-
-        // Scale components
-        ps_muls0 sxy, xy, scale
-        ps_muls0 sz,  z,  scale
-
-        // Store result
-        psq_st sxy, Vec.x(out), 0, 0
-        psq_st sz,  Vec.z(out), 1, 0
-    )
+    // clang-format off
+    asm {
+        psq_l v1_xy, Vec.x(src), 0, qr0
+        ps_mul xx_yy, v1_xy, v1_xy
+        psq_l v1_z, Vec.z(src), 1, qr0
+        ps_madd xx_zz, v1_z, v1_z, xx_yy
+        ps_sum0 sqsum, xx_zz, v1_z, xx_yy
+        frsqrte rsqrt, sqsum
+        fmuls nwork0, rsqrt, rsqrt
+        fmuls nwork1, rsqrt, c_half
+        fnmsubs nwork0, nwork0, sqsum, c_three
+        fmuls rsqrt, nwork0, nwork1
+        ps_muls0 v1_xy, v1_xy, rsqrt
+        psq_st v1_xy, Vec.x(unit), 0, qr0
+        ps_muls0 v1_z, v1_z, rsqrt
+        psq_st v1_z, Vec.z(unit), 1, qr0
+    } // clang-format on
 }
 
-void PSVECNormalize(register const Vec* in, register Vec* out) {
-    register f32 c_half, c_three;
-    register f32 xy, z;
-    register f32 z2;
-    register f32 dot;
-    register f32 work0, work1, work2;
+f32 PSVECMag(register CVecPtr v) {
+    register f32 vxy;
+    register f32 vzz;
+    register f32 sqmag;
+    register f32 rmag;
+    register f32 nwork0;
+    register f32 nwork1;
+    register f32 c_three;
+    register f32 c_half = 0.5f;
+    register f32 c_zero;
 
-    c_half = 0.5f;
-    c_three = 3.0f;
-
-    ASM (
-        // Load vector components
-        psq_l xy, Vec.x(in), 0, 0
-        psq_l z,  Vec.z(in), 1, 0
-
-        // Compute dot product with self
-        ps_mul  work0, xy, xy       // X^2,         Y^2
-        ps_madd z2,    z,  z, work0 // Z^2+X^2,     junk
-        ps_sum0 dot,   z2, z, work0 // Z^2+X^2+Y^2, junk
-
-        // Reciprocal square root
-        frsqrte work0, dot
-        
-        // Refine estimate using Newton-Raphson method
-        // y = 1 / sqrt(x)
-        fmuls   work1, work0, work0        // rsqrt^2
-        fmuls   work2, work0, c_half       // rsqrt * 0.5
-        fnmsubs work1, work1, dot, c_three // (3 - x * rsqrt^2)
-        fmuls   work0, work1, work2        // (3 - x * rsqrt^2) * (rsqrt * 0.5)
-
-        // Scale components to normalize
-        ps_muls0 xy, xy, work0
-        ps_muls0 z,  z,  work0
-
-        // Store result
-        psq_st xy, Vec.x(out), 0, 0
-        psq_st z,  Vec.z(out), 1, 0
-    )
-}
-
-f32 PSVECMag(register const Vec* v) {
-    register f32 xy, xy2;
-    register f32 z, z2;
-    register f32 dot;
-    register f64 rsqrt;
-    register f32 work0, work1;
-    register f32 c_three, c_half, c_zero;
-
-    c_half = 0.5f;
-    ASM (
-        // Load vector components
-        psq_l xy, Vec.x(v), 0, 0
-        lfs   z,  Vec.z(v)
-
-        // Compute dot product with self
-        ps_mul  xy2, xy, xy       // X^2,         Y^2
-        ps_madd z2,  z,  z,   xy2 // Z^2+X^2,     junk
-        ps_sum0 dot, z2, xy2, xy2 // Z^2+X^2+Y^2, junk
-
-        // Get zero
+    // clang-format off
+    asm {
+        psq_l vxy, Vec.x(v), 0, qr0
+        ps_mul vxy, vxy, vxy
+        lfs vzz, Vec.z(v)
         fsubs c_zero, c_half, c_half
-    )
-
-    // Avoid problematic square root where dot is zero
-    if (dot == c_zero) {
-        return dot;
-    }
-
-    // Estimate reciprocal square root
-    rsqrt = __frsqrte(dot);
-
+        ps_madd sqmag, vzz, vzz, vxy
+        ps_sum0 sqmag, sqmag, vxy, vxy
+        fcmpu cr0, sqmag, c_zero
+        beq ret
+        frsqrte rmag, sqmag
+    } // clang-format on
     c_three = 3.0f;
-    ASM (
-        // Refine estimate using Newton-Raphson method
-        // y = 1 / sqrt(x)
-        fmuls   work0, rsqrt, rsqrt        // rsqrt^2
-        fmuls   work1, rsqrt, c_half       // rsqrt * 0.5
-        fnmsubs work0, work0, dot, c_three // (3 - x * rsqrt^2)
-        fmuls   work1, work0, work1        // (3 - x * rsqrt^2) * (rsqrt * 0.5)
+    // clang-format off
+    asm {
+        fmuls nwork0, rmag, rmag
+        fmuls nwork1, rmag, c_half
+        fnmsubs nwork0, nwork0, sqmag, c_three
+        fmuls rmag, nwork0, nwork1
+        fmuls sqmag, sqmag, rmag
+    ret:
+    } // clang-format on
 
-        // Convert rsqrt -> sqrt
-        // x * rsqrt(x) == sqrt(x)
-        fmuls dot, dot, work1
-    )
-
-    return dot;
+    return sqmag;
 }
 
-asm f32 PSVECDotProduct(register const Vec* a, register const Vec* b) {
-    // clang-format off
-    nofralloc
+// clang-format off
+asm f32 PSVECDotProduct(register CVecPtr vec1, register CVecPtr vec2) {
+    psq_l f2, Vec.y(vec1), 0, qr0
+    psq_l f3, Vec.y(vec2), 0, qr0
+    ps_mul f2, f2, f3
+    psq_l f5, Vec.x(vec1), 0, qr0
+    psq_l f4, Vec.x(vec2), 0, qr0
+    ps_madd f3, f5, f4, f2
+    ps_sum0 f1, f3, f2, f2
+} // clang-format on
 
-    // Compute Y,Z products
-    psq_l  f2, Vec.y(a), 0, 0
-    psq_l  f3, Vec.y(b), 0, 0
-    ps_mul f2, f2, f3 // ABY, ABZ
-
-    // Compute X product
-    psq_l   f5, Vec.x(a), 0, 0
-    psq_l   f4, Vec.x(b), 0, 0
-    ps_madd f3, f5, f4, f2 // ABX+ABY, junk
-
-    // Compute dot product
-    ps_sum0 f1, f3, f2, f2 // ABX+ABY+ABZ, junk
-
-    blr
-    // clang-format on
-}
-
-asm void PSVECCrossProduct(register const Vec* a, register const Vec* b,
-                           register Vec* prod) {
-    // clang-format off
-    nofralloc
-
-    // Load vector components
-    psq_l      f1, Vec.x(b), 0, 0 // BX, BY
-    lfs        f2, Vec.z(a)       // AZ, AZ
-    psq_l      f0, Vec.x(a), 0, 0 // AX, AY
-    ps_merge10 f6, f1, f1         // BY, BX
-    lfs        f3, Vec.z(b)       // BZ, BZ
-
-    // Compute cross product components
-    ps_mul   f4, f1, f2     // BX*AZ,       BY*AZ
-    ps_muls0 f7, f1, f0     // BX*AX,       BY*AX
-    ps_msub  f5, f0, f3, f4 // AX*BZ-BX*AZ, AY*BZ-BY*AZ
-    ps_msub  f8, f0, f6, f7 // AX*BY-BX*AX, AY*BX-BY*AX
-
-    // Manipulate storage
-    ps_merge11 f9,  f5, f5 // AY*BZ-BY*AZ, AY*BZ-BY*AZ
-    ps_merge01 f10, f5, f8 // AX*BZ-BX*AZ, AY*BX-BY*AX
-
-    // Store cross product X
-    // cx = AY*BZ-BY*AZ
-    psq_st f9, Vec.x(prod), 1, 0
-
-    // Store cross product Y/Z
-    // Negate to fix formula
-    // cy = -(AX*BZ-BX*AZ) -> BX*AZ-AX*BZ
-    // cz = -(AY*BX-BY*AX) -> BY*AX-AY*BX
+// clang-format off
+asm void PSVECCrossProduct(register CVecPtr vec1, register CVecPtr vec2,
+                           register VecPtr dst) {
+    psq_l f1, Vec.x(vec2), 0, qr0
+    lfs f2, Vec.z(vec1)
+    psq_l f0, Vec.x(vec1), 0, qr0
+    ps_merge10 f6, f1, f1
+    lfs f3, Vec.z(vec2)
+    ps_mul f4, f1, f2
+    ps_muls0 f7, f1, f0
+    ps_msub f5, f0, f3, f4
+    ps_msub f8, f0, f6, f7
+    ps_merge11 f9, f5, f5
+    ps_merge01 f10, f5, f8
+    psq_st f9, Vec.x(dst), 1, qr0
     ps_neg f10, f10
-    psq_st f10, Vec.y(prod), 0, 0
+    psq_st f10, Vec.y(dst), 0, qr0
+} // clang-format on
 
-    blr
-    // clang-format on
-}
+void C_VECHalfAngle(CVecPtr a, CVecPtr b, VecPtr half) {
+    Vec aTmp;
+    Vec bTmp;
+    Vec hTmp;
 
-void C_VECHalfAngle(register const Vec* a, register const Vec* b,
-                    register Vec* half) {
-    Vec na, nb, ns;
+    aTmp.x = -a->x;
+    aTmp.y = -a->y;
+    aTmp.z = -a->z;
+    bTmp.x = -b->x;
+    bTmp.y = -b->y;
+    bTmp.z = -b->z;
 
-    na.x = -a->x;
-    na.y = -a->y;
-    na.z = -a->z;
-
-    nb.x = -b->x;
-    nb.y = -b->y;
-    nb.z = -b->z;
-
-    PSVECNormalize(&na, &na);
-    PSVECNormalize(&nb, &nb);
-    PSVECAdd(&na, &nb, &ns);
-
-    if (PSVECDotProduct(&ns, &ns) > 0.0f) {
-        PSVECNormalize(&ns, half);
+    VECNormalize(&aTmp, &aTmp);
+    VECNormalize(&bTmp, &bTmp);
+    VECAdd(&aTmp, &bTmp, &hTmp);
+    if (VECDotProduct(&hTmp, &hTmp) > 0.0f) {
+        VECNormalize(&hTmp, half);
     } else {
-        *half = ns;
+        *half = hTmp;
     }
 }
 
-f32 PSVECSquareDistance(register const Vec* a, register const Vec* b) {
-    register f32 ayz, byz;
-    register f32 axy, bxy;
-    register f32 dxy, dyz;
-    register f32 dist;
+f32 PSVECSquareDistance(register CVecPtr a, register CVecPtr b) {
+    register f32 v0yz;
+    register f32 v1yz;
+    register f32 v0xy;
+    register f32 v1xy;
+    register f32 dyz;
+    register f32 dxy;
+    register f32 sqdist;
 
-    ASM (
-        // Load vector components
-        psq_l axy, Vec.x(a), 0, 0
-        psq_l ayz, Vec.y(a), 0, 0 
-        psq_l bxy, Vec.x(b), 0, 0
-        psq_l byz, Vec.y(b), 0, 0
+    // clang-format off
+    asm {
+        psq_l v0yz, Vec.y(a), 0, qr0
+        psq_l v1yz, Vec.y(b), 0, qr0
+        ps_sub dyz, v0yz, v1yz
+        psq_l v0xy, Vec.x(a), 0, qr0
+        psq_l v1xy, Vec.x(b), 0, qr0
+        ps_mul dyz, dyz, dyz
+        ps_sub dxy, v0xy, v1xy
+        ps_madd sqdist, dxy, dxy, dyz
+        ps_sum0 sqdist, sqdist, dyz, dyz
+    } // clang-format on
 
-        // Compute differences
-        ps_sub dxy, axy, bxy
-        ps_sub dyz, ayz, byz
-
-        // Compute distance
-        ps_mul  dyz,  dyz,  dyz
-        ps_madd dist, dxy,  dxy, dyz
-        ps_sum0 dist, dist, dyz, dyz
-    )
-
-    return dist;
+    return sqdist;
 }
