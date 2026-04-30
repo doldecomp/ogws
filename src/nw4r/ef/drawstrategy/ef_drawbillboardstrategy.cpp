@@ -174,7 +174,82 @@ inline void DrawBillboardStrategy::DispParticle_Normal(
 }
 
 void DrawBillboardStrategy::DrawYBillboard(const DrawInfo& rInfo,
-                                           ParticleManager* pManager);
+                                           ParticleManager* pManager)  {
+    InitGraphics(rInfo, pManager);
+
+    const EmitterDrawSetting& rSetting =
+        *pManager->mResource->GetEmitterDrawSetting();
+
+    int flags = mNumTexmap > 0 ? 1 : 0;
+    const math::MTX34& rInfoMtx = *rInfo.GetViewMtx();
+
+    math::VEC2 pivot;
+    pivot.x = rSetting.pivotX / 100.0f;
+    pivot.y = rSetting.pivotY / 100.0f;
+
+    math::MTX34 viewMtx;
+    pManager->CalcGlobalMtx(&viewMtx);
+    math::MTX34Mult(&viewMtx, &rInfoMtx, &viewMtx);
+
+    if (rSetting.zOffset != 0.0f) {
+        CalcZOffset(&viewMtx, pManager, rInfo, rSetting.zOffset);
+    }
+
+    f32 rc, rs;
+    f32 mag;
+
+    mag = math::FSqrt(rInfoMtx._02 * rInfoMtx._02 +
+                          rInfoMtx._22 * rInfoMtx._22);
+
+    if (mag < std::numeric_limits<f32>::epsilon()) {
+        rs = 0.0f;
+        rc = 1.0f;
+    } else {
+        f32 invMag = 1.0f / mag;
+
+        // Project camera forward onto XZ plane and normalize.
+        // This yields yaw; rs/rc match sin/cos of that yaw.
+        rs = -rInfoMtx._02 * invMag;  // sin(yaw)
+        rc =  rInfoMtx._22 * invMag;  // cos(yaw)
+    }
+
+    f32 vx = math::FSqrt(viewMtx._00 * viewMtx._00 +
+                         viewMtx._10 * viewMtx._10 +
+                         viewMtx._20 * viewMtx._20);
+
+    f32 vy = math::FSqrt(viewMtx._01 * viewMtx._01 +
+                         viewMtx._11 * viewMtx._11 +
+                         viewMtx._21 * viewMtx._21);
+    f32 vz = 0.0f;
+
+    GetFirstDrawParticleFunc pGetFirstFunc = GetGetFirstDrawParticleFunc(
+        rSetting.mFlags & EmitterDrawSetting::FLAG_DRAW_ORDER);
+
+    GetNextDrawParticleFunc pGetNextFunc = GetGetNextDrawParticleFunc(
+        rSetting.mFlags & EmitterDrawSetting::FLAG_DRAW_ORDER);
+
+    bool first = true;
+
+    for (Particle* pIt = pGetFirstFunc(pManager); pIt != NULL;
+         pIt = pGetNextFunc(pManager, pIt)) {
+
+        f32 sx = pIt->Draw_GetSizeX();
+        if (sx < std::numeric_limits<f32>::epsilon()) {
+            continue;
+        }
+
+        f32 sy = pIt->Draw_GetSizeY();
+        if (sy < std::numeric_limits<f32>::epsilon()) {
+            continue;
+        }
+
+        SetupGP(pIt, rSetting, rInfo, first, false);
+        first = false;
+
+        // Pass rc/rs instead of explicit right/up vectors
+        DispParticle_YBillboard(pIt, viewMtx, vx, vy, vz, rc, rs, sx, sy, pivot, flags);
+    }
+}
 
 inline void DrawBillboardStrategy::DispParticle_YBillboard(
     Particle* pParticle, const math::MTX34& rViewMtx, f32 vx, f32 vy, f32 vz,
