@@ -25,6 +25,7 @@ WhitespaceSensitiveMacros:
     DECOMP_FORCEACTIVE,
     DECOMP_FORCELITERAL,
     OS_ASSERT,
+    OS_DEBUG_ASSERT,
     OS_ERROR,
     EGG_ASSERT,
     EGG_ASSERT_MSG,
