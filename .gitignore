@@ -16,6 +16,9 @@ orig/*/*
 *.o
 *.map
 *.MAP
+*.rep
+*.gpr
+*.lock*
 
 # Build files
 build/
