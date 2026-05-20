@@ -1,7 +1,6 @@
 #include <revolution/AXFX.h>
+#include <revolution/MEM.h>
 #include <revolution/OS.h>
-
-#include <string.h>
 
 void dummy(u32 zero, ...);
 

@@ -1,6 +1,4 @@
-#include "revolution/AXFX/AXFXReverbHiExpDpl2.h"
-
-#include "revolution/AX/AXCL.h"
+#include <revolution/AX.h>
 #include <revolution/AXFX.h>
 #include <revolution/MEM.h>
 

@@ -1,8 +1,6 @@
-#include "decomp.h"
-
 #include <revolution/AXFX.h>
+#include <revolution/MEM.h>
 #include <revolution/OS.h>
-#include <revolution/mem.h>
 
 #include <math.h>
 
