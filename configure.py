@@ -1152,7 +1152,7 @@ config.libs = [
             Object(Matching, "Pack/RPKernel/IRPSysHostIOSocket.cpp"),
             Object(Matching, "Pack/RPKernel/RPSysHostIOSocketManager.cpp"),
             Object(Matching, "Pack/RPKernel/RP_DEBUG_STUB_0.cpp"),
-            Object(NonMatching, "Pack/RPKernel/RPSysTextWriter.cpp"),
+            Object(Matching, "Pack/RPKernel/RPSysTextWriter.cpp"),
             Object(Matching, "Pack/RPKernel/RPSysMessage.cpp"),
             Object(NonMatching, "Pack/RPKernel/RPSysKokeshi.cpp"),
             Object(NonMatching, "Pack/RPKernel/RPSysKokeshiManager.cpp"),
