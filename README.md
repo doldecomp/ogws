@@ -68,10 +68,13 @@ ensure consistency across the codebase and its documentation.
 > within this game
 > - Source code acquired through means only intended for licensed developers, such as a software development kit (SDK) distribution
 >
+> Due to concerns of leaked material in training sets, decompilation created by or with the assistance of large language models (LLMs) will not be accepted.
+>
+> As such, reviewers reserve the right to make the final call on whether to accept contributions.
+>
 
 > [!IMPORTANT]
-> "Leaked material" does **NOT** include debugging information **left behind in
-> retail games**, such as:
+> "Leaked material" does **NOT** include debugging information **left behind in retail games**, such as:
 >
 > - A linker or symbol map file
 > - Debug builds of the executable
