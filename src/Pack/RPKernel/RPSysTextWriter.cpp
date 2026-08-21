@@ -36,7 +36,7 @@ void RPSysTextWriter::Reset() {
     EnableFixedWidth(false);
     SetFixedWidth(0.0f);
 
-    SetColorMapping(nw4r::ut::Color::ELEMENT_MIN, nw4r::ut::Color::ELEMENT_MAX);
+    ResetColorMapping();
     SetGradationMode(GRADMODE_NONE);
     SetTextColor(nw4r::ut::Color::ELEMENT_MAX);
 
@@ -85,14 +85,18 @@ void RPSysTextWriter::PrintfZeroCenter(f32 x, f32 y, const char* pMsg, ...) {
 
     switch (pScreen->GetCanvasMode()) {
     case RPGrpScreen::CANVAS_CC: {
-        x = x * pScreen->GetWidth() / 2.0f;
-        y = y * pScreen->GetHeight() / 2.0f;
+        x = x * pScreen->GetWidth() / 2;
+        y = y * pScreen->GetHeight() / 2;
         break;
     }
 
     case RPGrpScreen::CANVAS_LU: {
-        x = (x + 1.0f) * (pScreen->GetWidth() / 2.0f);
-        y = (-y + 1.0f) * (pScreen->GetHeight() / 2.0f);
+        x = (x + 1.0f) * pScreen->GetWidth() / 2;
+        y = (-y + 1.0f) * pScreen->GetHeight() / 2;
+        break;
+    }
+
+    default: {
         break;
     }
     }
