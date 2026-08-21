@@ -180,8 +180,9 @@ void ScnRootEx::draw_before_CalcView() {
         LightTextureManager* pLightTextureManager =
             mpLightManager->GetLightTextureManager();
 
-        pLightTextureManager->draw(mpLightManager, rEfb, rEfb.vp.x, rEfb.vp.y,
-                                   rEfb.vp.width, rEfb.vp.height);
+        pLightTextureManager->drawAndCaptureTexture(
+            mpLightManager, rEfb, rEfb.vp.x, rEfb.vp.y, rEfb.vp.width,
+            rEfb.vp.height);
     }
 
     if (mSceneSettings & cSceneSetting_ShadowTexture) {

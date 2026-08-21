@@ -17,11 +17,15 @@ public:
     enum ProjectionType {
         PROJ_ORTHO,
         PROJ_PERSP,
+
+        PROJ_MAX
     };
 
     enum CanvasMode {
         CANVAS_CC, // Center-canvas origin
         CANVAS_LU, // Left-upper origin
+
+        CANVAS_MAX
     };
 
     enum LoadScnFlag {
@@ -63,6 +67,15 @@ public:
     void GetScreenToView(nw4r::math::VEC3* pPosView,
                          const nw4r::math::VEC2& rPosScreen) const;
 
+    void ConvertFromCanvasLU(f32 x, f32 y, f32* pX, f32* pY) const {
+        *pX = -(GetSize().x / 2.0f - x);
+        *pY = -(-(GetSize().y / 2.0f - y));
+    }
+    void ConvertFromCanvasCC(f32 x, f32 y, f32* pX, f32* pY) const {
+        *pX = x + GetSize().x / 2.0f;
+        *pY = -(y - GetSize().y / 2.0f);
+    }
+
     void ConvertToCanvasLU(f32 x, f32 y, f32* pX, f32* pY) const {
         if (mCanvasMode == CANVAS_LU) {
             *pX = x;
@@ -77,6 +90,17 @@ public:
         } else if (mCanvasMode == CANVAS_CC) {
             *pX = x;
             *pY = y;
+        }
+    }
+
+    void ConvertFromNormalCC(f32 x, f32 y, f32* pX, f32* pY) const {
+        if (mCanvasMode == CANVAS_LU) {
+            x *= GetSize().x / 2.0f;
+            y *= GetSize().y / 2.0f;
+            ConvertFromCanvasLU(*pX, *pY, pX, pY);
+        } else if (mCanvasMode == CANVAS_CC) {
+            *pX = x * (GetSize().x / 2.0f);
+            *pY = y * (GetSize().y / 2.0f);
         }
     }
 
@@ -101,20 +125,13 @@ public:
         }
     }
 
-    void ConvertFromCanvasLU(f32 x, f32 y, f32* pX, f32* pY) const {
-        *pX = -(GetSize().x / 2.0f - x);
-        *pY = -(-(GetSize().y / 2.0f - y));
-    }
-    void ConvertFromCanvasCC(f32 x, f32 y, f32* pX, f32* pY) const {
-        *pX = x + GetSize().x / 2.0f;
-        *pY = -(y - GetSize().y / 2.0f);
-    }
-
     ProjectionType GetProjectionType() const {
         return mProjType;
     }
-    void SetProjectionType(ProjectionType projType) {
-        mProjType = projType;
+    void SetProjectionType(ProjectionType type) {
+#line 264
+        EGG_ASSERT(type < PROJ_MAX);
+        mProjType = type;
     }
 
     CanvasMode GetCanvasMode() const {

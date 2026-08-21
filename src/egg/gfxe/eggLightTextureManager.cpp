@@ -11,18 +11,17 @@
 namespace EGG {
 
 template <> const char* IBinary<LightTextureManager>::spExtension = "blmap";
-using namespace nw4r;
 
-LightTextureManager::LightTextureManager(LightManager* pManager)
-    : mFlags(0x78),
+LightTextureManager::LightTextureManager(const LightManager* pManager)
+    : mFlags(cFlag_ClearWorkSpace | cFlag_4 | cFlag_5 | cFlag_6),
       mTexNum(0),
       mppLightTextures(NULL),
       mpLightManager(pManager),
       mDrawFlags(0),
       mLightObjNum(LIGHT_OBJ_MAX),
       mppLightObjs(NULL) {
-#line 36
-    EGG_ASSERT(pManager);
+
+    EGG_ASSERT_LINE(36, pManager);
 
     mppLightTextures = new LightTexture*[LIGHT_TEX_MAX];
     for (int i = 0; i < LIGHT_TEX_MAX; i++) {
@@ -35,201 +34,191 @@ LightTextureManager::LightTextureManager(LightManager* pManager)
     }
 }
 
-u16 LightTextureManager::createTexture(const char* name) {
-#line 78
-    EGG_ASSERT(mTexNum < getMax());
+u16 LightTextureManager::createTexture(const char* pName) {
+    EGG_ASSERT_LINE(78, mTexNum < getMax());
 
-    const int texNum = mTexNum;
-    for (int i = 0; i < texNum; i++) {
-        if (std::strcmp(name, mppLightTextures[i]->getName()) == 0)
+    for (int i = 0; i < mTexNum; i++) {
+        if (std::strcmp(pName, mppLightTextures[i]->getName()) == 0) {
             return i;
+        }
     }
 
-    mppLightTextures[mTexNum] = new LightTexture(mTexNum, name, this);
+    mppLightTextures[mTexNum] = new LightTexture(mTexNum, pName, this);
     mppLightTextures[mTexNum]->configure();
 
-    const u16 index = mTexNum;
-    mTexNum++;
-    return index;
+    return mTexNum++;
 }
 
-// https://decomp.me/scratch/JMHpy
-int LightTextureManager::replaceModelTexture(int index, ModelEx* pMdl) const {
-#line 121
-    EGG_ASSERT(pMdl);
-    EGG_ASSERT(0 <= index && index < mTexNum);
+u16 LightTextureManager::replaceModelTexture(int index, ModelEx* pMdl) const {
+    EGG_ASSERT_LINE(121, pMdl);
+    EGG_ASSERT_LINE(122, 0 <= index && index < mTexNum);
 
-    TextureReplaceResult result[256];
-    GXTexObj texObj;
+    GXTexObj tobj;
+    mppLightTextures[index]->getTexObj(&tobj);
 
-    mppLightTextures[index]->getTexObj(&texObj);
-    int ret = pMdl->replaceTexture(mppLightTextures[index]->getName(), texObj,
-                                   false, result, ARRAY_SIZE(result), false);
-    pMdl->replaceTexture(mppLightTextures[index]->getName(), texObj, false,
-                         NULL, 0, true);
+    TextureReplaceResult resultSet[255];
+    u16 resultNum =
+        pMdl->replaceTexture(mppLightTextures[index]->getName(), tobj, false,
+                             resultSet, ARRAY_SIZE(resultSet), false);
 
-    for (int i = 0; i < (u16)ret; i++) {
-        u16 matIndex = result[i].materialID;
-        u8 texCoordId = result[i].texCoordID;
+    pMdl->replaceTexture(mppLightTextures[index]->getName(), tobj, false, NULL,
+                         0, true);
 
-        g3d::ResTexSrt srt = pMdl->getResMat(matIndex).GetResTexSrt();
-#line 138
-        EGG_ASSERT(srt.IsValid());
-        srt.SetMapMode(texCoordId, 1, -1, -1);
+    for (int i = 0; i < resultNum; i++) {
+        u16 matIdx = resultSet[i].materialID;
+        GXTexCoordID coord = static_cast<GXTexCoordID>(resultSet[i].texCoordID);
 
-        g3d::ResMatTexCoordGen gen =
-            pMdl->getResMat(matIndex).GetResMatTexCoordGen();
-#line 138
-        EGG_ASSERT(gen.IsValid());
+        nw4r::g3d::ResTexSrt srt = pMdl->getResMat(matIdx).GetResTexSrt();
+        EGG_ASSERT_LINE(138, srt.IsValid());
 
-        GXTexGenType type;
-        GXTexGenSrc src;
-        u8 b;
-        u32 l;
+        srt.SetMapMode(
+            coord,                                                     //
+            nw4r::g3d::G3DState::SCNDEPENDENT_TEXMTX_FUNCTYPE_SRC_NRM, //
+            -1, -1);
 
-        gen.GXGetTexCoordGen2((GXTexCoordID)texCoordId, &type, &src, &b, &l);
-        gen.GXSetTexCoordGen2((GXTexCoordID)texCoordId, GX_TG_MTX3x4, GX_TG_NRM,
-                              1, l);
-        gen.DCStore(false);
+        nw4r::g3d::ResMatTexCoordGen gen =
+            pMdl->getResMat(matIdx).GetResMatTexCoordGen();
+        EGG_ASSERT_LINE(144, gen.IsValid());
+
+        GXTexGenType func;
+        GXTexGenSrc param;
+        GXBool normalize;
+        u32 postMtx;
+        gen.GXGetTexCoordGen2(coord, &func, &param, &normalize, &postMtx);
+
+        gen.GXSetTexCoordGen2(coord, GX_TG_MTX3x4, GX_TG_NRM, GX_TRUE, postMtx);
+        gen.EndEdit();
     }
 
-    return ret;
+    return resultNum;
 }
 
-int LightTextureManager::getTextureIndex(const char* name) const {
-    const int texNum = mTexNum;
-    for (int i = 0; i < texNum; i++) {
-        if (std::strcmp(name, mppLightTextures[i]->getName()) == 0)
+int LightTextureManager::getTextureIndex(const char* pName) const {
+    for (int i = 0; i < mTexNum; i++) {
+        if (std::strcmp(pName, mppLightTextures[i]->getName()) == 0) {
             return i;
+        }
     }
 
     return -1;
 }
 
-void LightTextureManager::correctLightObject() {
-    int numLight = 0;
-    for (int i = 0; i < mpLightManager->GetNum(); i++) {
-        LightObj* p_obj = mpLightManager->GetLightObj(i);
-#line 234
-        EGG_ASSERT(p_obj);
+// void LightTextureManager::correctLightObject() {
+//     int numLight = 0;
+//     for (int i = 0; i < mpLightManager->GetNum(); i++) {
+//         LightObj* p_obj = mpLightManager->GetLightObj(i);
+// #line 234
+//         EGG_ASSERT(p_obj);
 
-        if (p_obj->getFlags() & 0x1 && p_obj->getFlags() & 0x20) {
-            mppLightObjs[numLight] = p_obj;
-            if (++numLight >= mLightObjNum)
-                break;
-        }
-    }
+//         if (p_obj->getFlags() & 0x1 && p_obj->getFlags() & 0x20) {
+//             mppLightObjs[numLight] = p_obj;
+//             if (++numLight >= mLightObjNum)
+//                 break;
+//         }
+//     }
 
-    for (int i = numLight; i < mLightObjNum; i++) {
-        mppLightObjs[i] = NULL;
-    }
-}
+//     for (int i = numLight; i < mLightObjNum; i++) {
+//         mppLightObjs[i] = NULL;
+//     }
+// }
 
-void LightTextureManager::frameReset() {
-    correctLightObject();
-    mDrawFlags = 0;
-    mFlags &= ~0x2;
-}
+// void LightTextureManager::frameReset() {
+//     correctLightObject();
+//     mDrawFlags = 0;
+//     mFlags &= ~0x2;
+// }
 
-// https://decomp.me/scratch/rqOkd
-void LightTextureManager::draw(LightManager* pManager,
-                               const Screen::DataEfb& efb, f32 x1, f32 y1,
-                               f32 x2, f32 y2) {
-    u8 view = 1 << pManager->GetCurrentView();
-    bool setPixelFmt = mFlags >> 5 & 1;
-    if (!(mFlags & 0x10) || (mDrawFlags & view) || mTexNum == 0)
-        return;
+// // https://decomp.me/scratch/rqOkd
+// void LightTextureManager::draw(LightManager* pManager,
+//                                const Screen::DataEfb& efb, f32 x1, f32 y1,
+//                                f32 x2, f32 y2) {
+//     u8 view = 1 << pManager->GetCurrentView();
+//     bool setPixelFmt = mFlags >> 5 & 1;
+//     if (!(mFlags & 0x10) || (mDrawFlags & view) || mTexNum == 0)
+//         return;
 
-    if (mFlags & 0x40) {
-        x1 = 0.0f;
-        y1 = StateGX::getEfbHeight();
-        x2 = StateGX::getEfbWidth();
-        y2 = 528 - StateGX::getEfbHeight();
-    }
+//     if (mFlags & 0x40) {
+//         x1 = 0.0f;
+//         y1 = StateGX::getEfbHeight();
+//         x2 = StateGX::getEfbWidth();
+//         y2 = 528 - StateGX::getEfbHeight();
+//     }
 
-    mDrawFlags |= view;
+//     mDrawFlags |= view;
 
-    StateGX::AutoColorUpdate color(true);
-    StateGX::AutoAlphaUpdate alpha(false);
+//     StateGX::AutoColorUpdate color(true);
+//     StateGX::AutoAlphaUpdate alpha(false);
 
-    // TODO
+//     // TODO
 
-    LightTexture::initDrawSetting(x1, y1, x2, y2);
+//     LightTexture::initDrawSetting(x1, y1, x2, y2);
 
-    TextureBuffer* texBuf = NULL;
+//     TextureBuffer* texBuf = NULL;
 
-    u16 x, y, w, h;
-    LightTexture::getDrawSetting(&x, &y, &w, &h, mTexNum);
-    w += (w & 3);
-    h += (h & 3);
+//     u16 x, y, w, h;
+//     LightTexture::getDrawSetting(&x, &y, &w, &h, mTexNum);
+//     w += (w & 3);
+//     h += (h & 3);
 
-    if (!(mFlags & 0x40) && (mFlags & 0x4)) {
-        texBuf = TextureBuffer::alloc(w, h, GX_TF_RGBA8);
-        texBuf->capture(x, y, false, -1);
-    }
+//     if (!(mFlags & 0x40) && (mFlags & 0x4)) {
+//         texBuf = TextureBuffer::alloc(w, h, GX_TF_RGBA8);
+//         texBuf->capture(x, y, false, -1);
+//     }
 
-    if (setPixelFmt)
-        StateGX::setPixelFormatGX(GX_PF_RGB8_Z24, GX_ZC_LINEAR);
+//     if (setPixelFmt)
+//         StateGX::setPixelFormatGX(GX_PF_RGB8_Z24, GX_ZC_LINEAR);
 
-    for (int i = 0; i < mTexNum; i++) {
-        mppLightTextures[i]->draw();
-    }
+//     for (int i = 0; i < mTexNum; i++) {
+//         mppLightTextures[i]->draw();
+//     }
 
-    for (int i = 0; i < mTexNum; i++) {
-        bool b = setPixelFmt && (mFlags & 0x8);
-        // mppLightTextures[i]->capture(b);
-    }
+//     for (int i = 0; i < mTexNum; i++) {
+//         bool b = setPixelFmt && (mFlags & 0x8);
+//         // mppLightTextures[i]->capture(b);
+//     }
 
-    if (setPixelFmt) {
-        StateGX::setPixelFormatGX(StateGX::getDefaultPixelFormat(),
-                                  StateGX::getDefaultZFmt16());
-    }
+//     if (setPixelFmt) {
+//         StateGX::setPixelFormatGX(StateGX::getDefaultPixelFormat(),
+//                                   StateGX::getDefaultZFmt16());
+//     }
 
-    if (!(mFlags & 0x40)) {
-        StateGX::AutoColorUpdate color(true);
-        StateGX::AutoAlphaUpdate alpha(true);
+//     if (!(mFlags & 0x40)) {
+//         StateGX::AutoColorUpdate color(true);
+//         StateGX::AutoAlphaUpdate alpha(true);
 
-        if ((mFlags & 0x8) || texBuf != NULL) {
-            math::MTX34 proj;
-            C_MTXOrtho(proj, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 1.0f);
-            StateGX::GXSetProjection_(proj, GX_ORTHOGRAPHIC);
-            StateGX::GXSetViewport_(x, y, w, h, 0.0f, 1.0f);
-            StateGX::GXSetScissor_(x, y, w, h);
-            StateGX::GXSetScissorBoxOffset_(0, 0);
+//         if ((mFlags & 0x8) || texBuf != NULL) {
+//             math::MTX34 proj;
+//             C_MTXOrtho(proj, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 1.0f);
+//             StateGX::GXSetProjection_(proj, GX_ORTHOGRAPHIC);
+//             StateGX::GXSetViewport_(x, y, w, h, 0.0f, 1.0f);
+//             StateGX::GXSetScissor_(x, y, w, h);
+//             StateGX::GXSetScissorBoxOffset_(0, 0);
 
-            math::MTX34 forDL;
-            math::MTX34Identity(&forDL);
+//             math::MTX34 forDL;
+//             math::MTX34Identity(&forDL);
 
-            if (texBuf != NULL) {
-                DrawGX::BeginDrawScreen(true, true, false);
-                DrawGX::SetBlendMode(DrawGX::BLEND_REPLACE);
-                GXSetBlendMode(GX_BM_NONE, GX_BL_SRCALPHA, GX_BL_INVSRCALPHA,
-                               GX_LO_CLEAR);
-                texBuf->load(GX_TEXMAP0);
-                DrawGX::DrawDL(DrawGX::DL_SCREEN_TEXTURE, forDL, DrawGX::WHITE);
-                texBuf->free();
-            } else {
-#line 382
-                EGG_ASSERT(isEnableClearWorkSpace());
+//             if (texBuf != NULL) {
+//                 DrawGX::BeginDrawScreen(true, true, false);
+//                 DrawGX::SetBlendMode(DrawGX::BLEND_REPLACE);
+//                 GXSetBlendMode(GX_BM_NONE, GX_BL_SRCALPHA, GX_BL_INVSRCALPHA,
+//                                GX_LO_CLEAR);
+//                 texBuf->load(GX_TEXMAP0);
+//                 DrawGX::DrawDL(DrawGX::DL_SCREEN_TEXTURE, forDL,
+//                 DrawGX::WHITE); texBuf->free();
+//             } else {
+// #line 382
+//                 EGG_ASSERT(isEnableClearWorkSpace());
 
-                if (setPixelFmt) {
-                    DrawGX::BeginDrawScreen(true, false, true);
-                    DrawGX::SetBlendMode(DrawGX::BLEND_REPLACE);
-                    DrawGX::DrawDL(DrawGX::DL_SCREEN, forDL,
-                                   StateGX::getEfbClearColor());
-                }
-            }
-        }
-    }
-    GXInvalidateTexAll();
-}
-
-const char* LightTextureManager::GetBinaryType() const {
-    return "LMAP";
-}
-
-u8 LightTextureManager::GetVersion() const {
-    return 0;
-}
+//                 if (setPixelFmt) {
+//                     DrawGX::BeginDrawScreen(true, false, true);
+//                     DrawGX::SetBlendMode(DrawGX::BLEND_REPLACE);
+//                     DrawGX::DrawDL(DrawGX::DL_SCREEN, forDL,
+//                                    StateGX::getEfbClearColor());
+//                 }
+//             }
+//         }
+//     }
+//     GXInvalidateTexAll();
+// }
 
 } // namespace EGG

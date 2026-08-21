@@ -251,8 +251,55 @@ void Frustum::GetViewToScreen(nw4r::math::VEC3* pScreenPos,
 #line 458
     EGG_ASSERT(pScreenPos);
 
-    // TODO(kiwi) Implement
-    ;
+    f32 f30_z = rViewPos.z;
+    f32 f1_nz = -f30_z;
+
+    if (f1_nz < mNearZ) {
+        f30_z = -mNearZ;
+    }
+
+    f32 f0_range = mFarZ - mNearZ;
+
+    switch (mProjType) {
+    case PROJ_PERSP: {
+        f32 ox = mOffset.x + sGlobalOffset.x;
+        f32 oy = mOffset.y + sGlobalOffset.y;
+
+        ox = ox / (mSize.x / 2);
+        oy = oy / (mSize.y / 2);
+
+        f32 cot = 1.0f / mTanFovY;
+
+        f32 tmp0 = mNearZ / f0_range;
+        f32 tmp1 = f1_nz / f30_z;
+
+        nw4r::math::VEC3 p;
+        p.x = -((f30_z * ox) - (rViewPos.x * cot / GetAspect()));
+        p.y = rViewPos.y * cot - f30_z * oy;
+        p.z = (tmp1 + 1.0f) * tmp0 + 1.0f;
+
+        p.x /= -rViewPos.z;
+        p.y /= -rViewPos.z;
+
+        pScreenPos->x = p.x;
+        pScreenPos->y = p.y;
+        pScreenPos->z = p.z;
+
+        ConvertFromNormalCC(p.x, p.y, &pScreenPos->x, &pScreenPos->y);
+        break;
+    }
+
+    case PROJ_ORTHO: {
+        pScreenPos->x = rViewPos.x * mScale.x;
+        pScreenPos->y = rViewPos.y * mScale.y;
+        pScreenPos->z = (-f30_z - mNearZ) / f0_range;
+        break;
+    }
+
+    default: {
+        break;
+    }
+    }
 }
 
 void Frustum::GetScreenToView(nw4r::math::VEC3* pViewPos,
@@ -294,6 +341,10 @@ void Frustum::GetScreenToView(nw4r::math::VEC3* pViewPos,
         pViewPos->z = -(rScreenPos.z * (mFarZ - mNearZ) + mNearZ);
         break;
     }
+
+    default: {
+        break;
+    }
     }
 }
 
@@ -317,6 +368,10 @@ void Frustum::GetScreenToView(nw4r::math::VEC3* pPosView,
         pPosView->x = rPosScreen.x / mScale.x;
         pPosView->y = rPosScreen.y / mScale.y;
         pPosView->z = mNearZ;
+        break;
+    }
+
+    default: {
         break;
     }
     }

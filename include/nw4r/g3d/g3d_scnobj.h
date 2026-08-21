@@ -355,6 +355,10 @@ public:
 
     ScaleProperty GetScaleProperty() const;
 
+    const nw4r::math::VEC3& GetScale() const {
+        return mScale;
+    }
+
     void SetScale(f32 sx, f32 sy, f32 sz) {
         mScale.x = sx;
         mScale.y = sy;

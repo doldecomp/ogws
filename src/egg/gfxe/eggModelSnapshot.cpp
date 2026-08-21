@@ -1,25 +1,22 @@
 #include <egg/gfxe.h>
 
-#include <revolution/MTX.h>
+#include <nw4r/math.h>
 
 namespace EGG {
 
-ModelSnapshot::ModelSnapshot(u16 w, u16 h, GXTexFmt fmt, u16 mdlMax)
-    : CapTexture(w, h, fmt),
+ModelSnapshot::ModelSnapshot(u16 width, u16 height, GXTexFmt format, u16 mdlMax)
+    : CapTexture(width, height, format),
       m_mdlMax(mdlMax),
-      m_width(w),
-      m_height(h),
+      m_width(width),
+      m_height(height),
       m_flags(0),
-      WORD_0x38(0),
+      unk38(0),
       m_mdlList(NULL),
-      FLOAT_0x50(0.0f),
-      FLOAT_0x54(0.0f),
-      FLOAT_0x58(0.0f),
-      FLOAT_0x5C(0.0f),
-      FLOAT_0x60(0.0f),
-      FLOAT_0x64(0.0f),
-      FLOAT_0x68(0.0f),
-      FLOAT_0x6C(0.0f) {
+      m_center(0.0f, 0.0f, 0.0f),
+      unk5C(0.0f, 0.0f, 0.0f),
+      m_radius(0.0f),
+      unk6C(0.0f) {
+
 #line 37
     EGG_ASSERT(mdlMax > 0);
 
@@ -27,13 +24,11 @@ ModelSnapshot::ModelSnapshot(u16 w, u16 h, GXTexFmt fmt, u16 mdlMax)
     allocWithHeaderDebug();
     m_mdlList = new ModelBind[mdlMax];
 
-    FLOAT_0x44 = 0.0f;
-    FLOAT_0x40 = 0.0f;
-    FLOAT_0x4C = 0.0f;
-    FLOAT_0x48 = 0.0f;
+    unk40 = unk44 = 0.0f;
+    unk48 = unk4C = 0.0f;
 }
 
-void ModelSnapshot::DoResetList() {
+void ModelSnapshot::InitList() {
     ResetList();
 }
 
@@ -42,77 +37,78 @@ void ModelSnapshot::ResetList() {
 
     for (int i = 0; i < m_mdlMax; i++) {
         m_mdlList[i].pModel = NULL;
-        m_mdlList[i].density = 1.0f;
+        m_mdlList[i].adjust = 1.0f;
         m_mdlList[i].useMat = false;
     }
 }
 
-void ModelSnapshot::AddModelEx(ModelEx* pModel, f32 density) {
+void ModelSnapshot::AddModelEx(ModelEx* pModel, f32 adjust) {
 #line 83
     EGG_ASSERT(m_mdlNum < m_mdlMax);
     EGG_ASSERT(pModel);
     EGG_ASSERT_MSG(pModel->getBoundingInfo() != NULL, "ModelEx has no bounding info. Please create.");
 
     m_mdlList[m_mdlNum].pModel = pModel;
-    m_mdlList[m_mdlNum].density = density;
+    m_mdlList[m_mdlNum].adjust = adjust;
     m_mdlList[m_mdlNum].useMat = false;
     m_mdlNum++;
 }
 
-void ModelSnapshot::GatherModel(f32 f1) {
+void ModelSnapshot::GatherModel(f32 adjust) {
     if (m_mdlNum != 0) {
         if (m_flags & cFlag_1) {
-            FLOAT_0x50 = FLOAT_0x5C;
-            FLOAT_0x54 = FLOAT_0x60;
-            FLOAT_0x58 = FLOAT_0x64;
-            FLOAT_0x68 = FLOAT_0x6C;
+            m_center = unk5C;
+            m_radius = unk6C;
         }
 
         for (int i = 0; i < m_mdlNum; i++) {
+#line 116
             ModelEx* pModel = m_mdlList[i].pModel;
-#line 117
             EGG_ASSERT(pModel);
 
-            ModelBoundingInfo::SphereData* pSphere =
-                pModel->getBoundingInfo()->getSphere();
+            ModelBoundingInfo::SphereShape& rSphere =
+                pModel->getBoundingInfo()->getShapeSphere();
 
             if (i > 0) {
-                nw4r::math::VEC3 v(pSphere->m_shape.FLOAT_0x4 - FLOAT_0x50,
-                                   pSphere->m_shape.FLOAT_0x8 - FLOAT_0x54,
-                                   pSphere->m_shape.FLOAT_0xC - FLOAT_0x58);
+                nw4r::math::VEC3 delta(rSphere.center.x - m_center.x,
+                                       rSphere.center.y - m_center.y,
+                                       rSphere.center.z - m_center.z);
 
-                f32 mag = nw4r::math::VEC3Len(&v);
+                // Distance from the gather sphere to the bounding sphere
+                f32 dist = nw4r::math::VEC3Len(&delta);
 
-                f32 f2 = mag + pSphere->m_shape.FLOAT_0x0;
-                f32 f4 = f2 - FLOAT_0x68;
-                if (f4 > 0.0f) {
-                    f4 *= 0.5f;
+                // Farthest point of the bounding
+                f32 farEdge = dist + rSphere.r;
+                // Amount of the bounding outside of the gather sphere
+                f32 outside = farEdge - m_radius;
 
-                    if (mag > 0.0f) {
-                        f32 scale = f4 / mag;
-                        FLOAT_0x50 += v.x * scale;
-                        FLOAT_0x54 += v.y * scale;
-                        FLOAT_0x58 += v.z * scale;
+                if (outside > 0.0f) {
+                    outside /= 2;
+
+                    // Shift the gather sphere towards the new model
+                    if (dist > 0.0f) {
+                        f32 scale = outside / dist;
+                        m_center.x += delta.x * scale;
+                        m_center.y += delta.y * scale;
+                        m_center.z += delta.z * scale;
                     }
 
-                    FLOAT_0x68 += f4;
+                    m_radius += outside;
                 }
+
             } else if (!(m_flags & cFlag_1)) {
-                FLOAT_0x50 = pSphere->m_shape.FLOAT_0x4;
-                FLOAT_0x54 = pSphere->m_shape.FLOAT_0x8;
-                FLOAT_0x58 = pSphere->m_shape.FLOAT_0xC;
-                FLOAT_0x68 = pSphere->m_shape.FLOAT_0x0;
+                m_center.x = rSphere.center.x;
+                m_center.y = rSphere.center.y;
+                m_center.z = rSphere.center.z;
+                m_radius = rSphere.r;
             }
         }
 
-        FLOAT_0x68 *= f1;
-        return;
-    }
+        m_radius *= adjust;
 
-    FLOAT_0x68 = 0.0f;
-    FLOAT_0x58 = 0.0f;
-    FLOAT_0x54 = 0.0f;
-    FLOAT_0x50 = 0.0f;
+    } else {
+        m_center.x = m_center.y = m_center.z = m_radius = 0.0f;
+    }
 }
 
 DECOMP_FORCEACTIVE(eggModelSnapshot_cpp,
