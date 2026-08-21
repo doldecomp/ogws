@@ -65,8 +65,8 @@ void CapTexture::capture(u16 x, u16 y, bool mipmap, int format) {
                     checkVFilterEnable() ? mVerticalFilter : VFILTER_OFF);
 
     if (checkColorUpdate() || checkAlphaUpdate() || checkZBufferUpdate()) {
-        StateGX::ScopedColorUpdate color(checkColorUpdate());
-        StateGX::ScopedAlphaUpdate alpha(checkAlphaUpdate());
+        StateGX::AutoColorUpdate color(checkColorUpdate());
+        StateGX::AutoAlphaUpdate alpha(checkAlphaUpdate());
 
         GXSetZMode(GX_TRUE, GX_ALWAYS, checkZBufferUpdate());
         GXSetCopyClear(mClearColor, mClearZ);

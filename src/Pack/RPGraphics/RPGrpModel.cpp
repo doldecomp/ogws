@@ -114,21 +114,21 @@ void RPGrpModel::CreateBoundingInfo(u32 flags) {
     u32 boundFlags = 0;
 
     if (flags & BoundOption_Sphere) {
-        boundFlags |= RPGrpModelBoundingInfo::BoundFlag_Sphere;
+        boundFlags |= RPGrpModelBoundingInfo::cBoundFlag_Sphere;
     }
 
     if (flags & BoundOption_SphereSet) {
-        boundFlags |= RPGrpModelBoundingInfo::BoundFlag_Sphere |
-                      RPGrpModelBoundingInfo::BoundFlag_SphereSet;
+        boundFlags |= RPGrpModelBoundingInfo::cBoundFlag_Sphere |
+                      RPGrpModelBoundingInfo::cBoundFlag_SphereSet;
     }
 
     if (flags & BoundOption_AABB) {
-        boundFlags |= RPGrpModelBoundingInfo::BoundFlag_AABB;
+        boundFlags |= RPGrpModelBoundingInfo::cBoundFlag_AABB;
     }
 
     if (flags & BoundOption_AABBSet) {
-        boundFlags |= RPGrpModelBoundingInfo::BoundFlag_AABB |
-                      RPGrpModelBoundingInfo::BoundFlag_AABBSet;
+        boundFlags |= RPGrpModelBoundingInfo::cBoundFlag_AABB |
+                      RPGrpModelBoundingInfo::cBoundFlag_AABBSet;
     }
 
     IRPGrpModelCallback* pCallback = SetCallback(NULL);

@@ -13,10 +13,10 @@ class RPGrpDrawPathXluSnap : public RPGrpDrawPath {
 public:
     RPGrpDrawPathXluSnap(EGG::ScnRenderer* pRenderer)
         : RPGrpDrawPath(pRenderer, pRenderer->getDrawPathBase(
-                                       EGG::ScnRenderer::DRAW_PATH_XLU_SNAP)) {
+                                       EGG::ScnRenderer::cDrawPath_XluSnap)) {
 
         mpXluSnap = static_cast<EGG::DrawPathXluSnap*>(
-            pRenderer->getDrawPathBase(EGG::ScnRenderer::DRAW_PATH_XLU_SNAP));
+            pRenderer->getDrawPathBase(EGG::ScnRenderer::cDrawPath_XluSnap));
     }
 
 private:

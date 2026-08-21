@@ -12,9 +12,9 @@ DECOMP_FORCEACTIVE(eggModelEx_cpp,
                   "eggModelEx.cpp",
                   "pModel");
 
-ModelEx::ModelEx(nw4r::g3d::ScnObj* pObj)
+ModelEx::ModelEx(nw4r::g3d::ScnObj* pScnObj)
     : mType(cType_Unknown),
-      mScnObj(nw4r::g3d::G3dObj::DynamicCast<nw4r::g3d::ScnLeaf>(pObj)) {
+      mScnObj(nw4r::g3d::G3dObj::DynamicCast<nw4r::g3d::ScnLeaf>(pScnObj)) {
 
     // clang-format off
     if (nw4r::g3d::G3dObj::DynamicCast<nw4r::g3d::ScnMdl>(mScnObj) != NULL) {
@@ -139,21 +139,20 @@ void ModelEx::getShapeMinMax(u16 shapeIndex, nw4r::math::VEC3* pMin,
     case cType_ScnMdlSimple:
     case cType_ScnMdl:
     case cType_ScnMdl1Mat1Shp: {
-        nw4r::g3d::ResShp shp = getResShp(shapeIndex);
+        const nw4r::g3d::ResShp shp = getResShp(shapeIndex);
 #line 294
         EGG_ASSERT(shp.IsValid());
 
         G3DUtility::reset();
-        u32 worldMtxSize = getNumNode() * sizeof(nw4r::math::MTX34);
 
         nw4r::math::MTX34* pWorldMtxArray =
-            static_cast<nw4r::math::MTX34*>(G3DUtility::alloc(worldMtxSize));
+            G3DUtility::allocArray<nw4r::math::MTX34>(getNumNode());
 
         if (doCalcWorld) {
             calcWorld(pWorldMtxArray);
         }
 
-        (void)shp.GetResVtxPos();
+        (void)shp.GetResVtxPos(); // unused
 
         s32 shpMtxIdx = shp.ref().curMtxIdx;
         AnalizeDL dl(shp);
@@ -218,9 +217,10 @@ void ModelEx::getShapeMinMax(u16 shapeIndex, nw4r::math::VEC3* pMin,
 }
 
 void ModelEx::setVisible(bool enable) {
-    if (mScnObj != NULL)
+    if (mScnObj != NULL) {
         mScnObj->SetScnObjOption(nw4r::g3d::ScnObj::OPTID_DISABLE_GATHER_SCNOBJ,
                                  !enable);
+    }
 }
 
 void ModelEx::calcWorld(nw4r::math::MTX34* pWorldMtxArray) const {
@@ -234,7 +234,7 @@ void ModelEx::calcWorld(nw4r::math::MTX34* pWorldMtxArray) const {
     case cType_ScnMdlSimple:
     case cType_ScnMdl: {
         u32* const pMtxAttribArray = getScnMdlSimple()->GetWldMtxAttribArray();
-        nw4r::g3d::ResMdl mdl = getScnMdlSimple()->GetResMdl();
+        const nw4r::g3d::ResMdl mdl = getScnMdlSimple()->GetResMdl();
 
         const nw4r::math::MTX34* pWorldMtx =
             getScnMdlSimple()->GetMtxPtr(nw4r::g3d::ScnObj::MTX_WORLD);
@@ -247,7 +247,6 @@ void ModelEx::calcWorld(nw4r::math::MTX34* pWorldMtxArray) const {
             nw4r::g3d::CalcSkinning(pWorldMtxArray, pMtxAttribArray, mdl,
                                     mdl.GetResByteCode(BYTE_CODE_MIX));
         }
-
         break;
     }
 
@@ -346,7 +345,6 @@ void ModelEx::drawShapeDirectly(u32 drawFlag, bool opa, bool xlu,
                                           pViewMtx, NULL, NULL, pByteCodeOpa,
                                           pByteCodeXlu, pReplacement, drawMode);
         }
-
         break;
     }
 
@@ -395,7 +393,6 @@ void ModelEx::drawShapeDirectly(u32 drawFlag, bool opa, bool xlu,
         if (xlu) {
             getScnProcModel()->scnProcDraw(false, procFlags);
         }
-
         break;
     }
 
@@ -406,7 +403,6 @@ void ModelEx::drawShapeDirectly(u32 drawFlag, bool opa, bool xlu,
         if (xlu) {
             getScnRfl()->G3dProc(nw4r::g3d::G3dObj::G3DPROC_DRAW_XLU, 0, NULL);
         }
-
         break;
     }
 
@@ -421,10 +417,70 @@ void ModelEx::drawShapeDirectly(u32 drawFlag, bool opa, bool xlu,
 DECOMP_FORCEACTIVE(eggModelEx_cpp_3,
                   "type < cSearchType_Max");
 
-// https://decomp.me/scratch/0xxAL
-// u16 ModelEx::replaceTexture(const char* name, const int& r5, bool r6,
-//                             TextureReplaceResult* result, u16 r8,
-//                             bool matAccess) {}
+u16 ModelEx::replaceTexture(const char* pName, const GXTexObj& rTexObj,
+                            bool saveFilterWrap,
+                            TextureReplaceResult* pResultSet, u16 resultNum,
+                            bool copyMatAccess) {
+    u16 totalFound = 0;
+
+    switch (mType) {
+    case cType_ScnMdlSimple:
+    case cType_ScnMdl:
+    case cType_ScnMdl1Mat1Shp: {
+        for (u16 id = 0; id < getNumMaterial(); id++) {
+            TextureReplaceResult* pResult =
+                pResultSet != NULL ? &pResultSet[totalFound] : NULL;
+
+            u16 nowFound = 0;
+
+            if (mType == cType_ScnMdl && copyMatAccess) {
+                nw4r::g3d::ScnMdl::CopiedMatAccess matAccess(getScnMdl(), id);
+
+                // clang-format off
+                nowFound = G3DUtility::replaceTexture(
+                    getResMat(id),
+                    &matAccess,
+                    pName,
+                    rTexObj,
+                    saveFilterWrap,
+                    pResult,
+                    resultNum - totalFound);
+                // clang-format on
+            } else {
+                // clang-format off
+                nowFound = G3DUtility::replaceTexture(
+                    getResMat(id),
+                    NULL,
+                    pName,
+                    rTexObj,
+                    saveFilterWrap,
+                    pResult,
+                    resultNum - totalFound);
+                // clang-format on
+            }
+
+            if (pResult != NULL) {
+                for (u16 i = 0; i < nowFound; i++) {
+                    pResult[i].materialID = id;
+                }
+            }
+
+            totalFound += nowFound;
+
+            if (totalFound >= resultNum) {
+                totalFound = resultNum - 1;
+            }
+        }
+        break;
+    }
+
+    default: {
+        break;
+    }
+    }
+
+    return totalFound;
+}
 
 void ModelEx::attachBoundingInfo(ModelBoundingInfo* pBV) {
 #line 797
@@ -469,6 +525,7 @@ u32 ModelEx::getDrawMode(u32 drawFlag) {
     if (drawFlag & cDrawFlag_ShapeOnly) {
         drawMode |= nw4r::g3d::RESMDL_DRAWMODE_IGNORE_MATERIAL |
                     nw4r::g3d::RESMDL_DRAWMODE_FORCE_LIGHTOFF;
+
     } else {
         if (drawFlag & cDrawFlag_IgnoreMaterial) {
             drawMode |= nw4r::g3d::RESMDL_DRAWMODE_IGNORE_MATERIAL;
@@ -489,6 +546,7 @@ u32 ModelEx::getDrawCtrl(u32 drawFlag, bool* pUseMat) {
     if (drawFlag & cDrawFlag_ShapeOnly) {
         useMat = false;
         ctrl |= nw4r::g3d::DRAW1MAT1SHP_CTRL_FORCE_LIGHTOFF;
+
     } else {
         if (drawFlag & cDrawFlag_IgnoreMaterial) {
             useMat = false;

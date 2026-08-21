@@ -1,148 +1,157 @@
-#pragma ipa file
+#include <egg/gfxe.h>
 
-#include "eggScreenEffectBase.h"
-
-#include "eggPostEffectBase.h"
-#include "eggPostEffectSimple.h"
-#include "eggStateGX.h"
-#include "eggTextureBuffer.h"
-
+#include <revolution/GX.h>
 
 namespace EGG {
+
 ScreenEffectBase::EffectBuffer ScreenEffectBase::spBufferSet[cBufferType_Max];
 
-ScreenEffectBase::WorkView ScreenEffectBase::sWorkSpaceV;
-ScreenEffectBase::WorkView ScreenEffectBase::sWorkSpaceHideV;
+f32 ScreenEffectBase::sWorkSpaceV[GX_VIEWPORT_SZ];
+f32 ScreenEffectBase::sWorkSpaceHideV[GX_VIEWPORT_SZ];
 
-u32 ScreenEffectBase::sCaptureFlag;
-u32 ScreenEffectBase::sFlag;
-u32 ScreenEffectBase::D_804BEC58;
-u32 ScreenEffectBase::sPushCount;
-s32 ScreenEffectBase::sWorkBuffer = -1;
+u16 ScreenEffectBase::sCaptureFlag = 0;
+u32 ScreenEffectBase::sFlag = 0;
 
-ScreenEffectBase::ScreenEffectBase() : mFlags(EFFECT_ENABLE) {}
+u32 ScreenEffectBase::D_804BEC58 = 0;
+u32 ScreenEffectBase::sPushCount = 0;
 
-void ScreenEffectBase::copyFromAnother(const Screen& screen) {
-    mScreen.CopyFromAnother(screen);
+ScreenEffectBase::WorkBuffer ScreenEffectBase::sWorkBuffer = cWorkBuffer_None;
+
+ScreenEffectBase::ScreenEffectBase() : mFlags(cFlag_Enable) {}
+
+void ScreenEffectBase::setScreen(const Screen& rScreen) {
+    mScreen.CopyFromAnother(rScreen);
 }
 
-// https://decomp.me/scratch/w13Yi
-// - There seems to be some BSS pooling(?) regarding
-//   the workspace views
-// - The loop only increments one pointer somehow,
-//   despite getBuffer not returning the effect buffer
-void ScreenEffectBase::clean() {
-    sFlag &= ~0x3;
-    sWorkBuffer = -1;
+void ScreenEffectBase::Clean() {
+    sFlag &= ~(cGlobalFlag_0 | cGlobalFlag_1);
+    sWorkBuffer = cWorkBuffer_None;
     D_804BEC58 = 0;
     sPushCount = 0;
 
-    for (s32 i = 0; i < cBufferType_Max; i++) {
+    for (int i = 0; i < cBufferType_Max; i++) {
 #line 72
         EGG_ASSERT(getBuffer( ( BufferType )i ) == NULL);
-        spBufferSet[i].WORD_0x8 = 0;
+        spBufferSet[i].unk8 = 0;
     }
 
-    sWorkSpaceV.x1 = sWorkSpaceHideV.x1 = 0.0f;
-    sWorkSpaceV.y1 = sWorkSpaceHideV.y1 = 0.0f;
-    sWorkSpaceV.x2 = sWorkSpaceHideV.x2 = 0.0f;
-    sWorkSpaceV.y2 = sWorkSpaceHideV.y2 = 0.0f;
-    sWorkSpaceV.FLOAT_0x10 = sWorkSpaceHideV.FLOAT_0x10 = 0.0f;
-    sWorkSpaceV.FLOAT_0x14 = sWorkSpaceHideV.FLOAT_0x14 = 0.0f;
+    for (int i = 0; i < GX_VIEWPORT_SZ; i++) {
+        sWorkSpaceV[i] = 0.0f;
+        sWorkSpaceHideV[i] = 0.0f;
+    }
 }
 
-// https://decomp.me/scratch/RYUOH
-// - Despite the setBuffer inline being used, it seems like
-//   there is a temp variable for &spBufferSet[type]
-// - The cap texture copy filter application is not yet
-//   understood
-TextureBuffer* ScreenEffectBase::capture(BufferType type, bool clear) const {
-    TextureBuffer* buffer;
-    const Screen::DataEfb& efb = mScreen.GetDataEfb();
+TextureBuffer* ScreenEffectBase::captureEfb(BufferType type, bool alpha) const {
+    const Screen::DataEfb& rEfb = mScreen.GetDataEfb();
+    TextureBuffer* pTexture = NULL;
 
     if (getBuffer(type) == NULL) {
-        f32 cap_x = efb.vp.x;
-        f32 cap_y = efb.vp.y;
+        f32 cap_x = rEfb.vp.x;
+        f32 cap_y = rEfb.vp.y;
 
-        // Doubles capture resolution
-        bool upscale = false;
+        bool mipmap = false;
 
         switch (type) {
         case cBufferType_Hide_1_16:
-        case cBufferType_1:
-            const f32 scale = (type == cBufferType_Hide_1_16) ? 0.25f : 0.5f;
-            sWorkSpaceV.x2 = efb.vp.width * scale;
-            sWorkSpaceV.y2 = efb.vp.height * scale;
+        case cBufferType_1: {
+            f32 scale = type == cBufferType_Hide_1_16 ? 0.25f : 0.5f;
+
+            sWorkSpaceV[GX_VIEWPORT_W] = rEfb.vp.width * scale;
+            sWorkSpaceV[GX_VIEWPORT_H] = rEfb.vp.height * scale;
 
             if (sCaptureFlag & 0x1) {
-                sWorkSpaceHideV.x1 = 640.0f - sWorkSpaceV.x2;
-                sWorkSpaceHideV.y1 = 528.0f - sWorkSpaceV.y2;
+                // clang-format off
+                sWorkSpaceV[GX_VIEWPORT_L]     = EFFECT_WIDTH - sWorkSpaceV[GX_VIEWPORT_W];
+                sWorkSpaceHideV[GX_VIEWPORT_L] = sWorkSpaceV[GX_VIEWPORT_L];
+                sWorkSpaceV[GX_VIEWPORT_T]     = EFFECT_HEIGHT - sWorkSpaceV[GX_VIEWPORT_H];
+                sWorkSpaceHideV[GX_VIEWPORT_T] = sWorkSpaceV[GX_VIEWPORT_T];
+                // clang-format on
 
-                const f32 overX = 640 - StateGX::getEfbWidth();
-                const f32 overY = 528 - StateGX::getEfbHeight();
-                sWorkSpaceHideV.x2 = sWorkSpaceV.x2 - overX;
-                sWorkSpaceHideV.y2 = sWorkSpaceV.y2 - overY;
+                sWorkSpaceHideV[GX_VIEWPORT_W] =
+                    sWorkSpaceV[GX_VIEWPORT_W] -
+                    (EFFECT_WIDTH - StateGX::getEfbWidth());
 
-                if (sWorkSpaceHideV.x2 < 0.0f)
-                    sWorkSpaceHideV.x2 = 0.0f;
-                if (sWorkSpaceHideV.y2 < 0.0f)
-                    sWorkSpaceHideV.y2 = 0.0f;
+                sWorkSpaceHideV[GX_VIEWPORT_H] =
+                    sWorkSpaceV[GX_VIEWPORT_H] -
+                    (EFFECT_HEIGHT - StateGX::getEfbHeight());
+
+                if (sWorkSpaceHideV[GX_VIEWPORT_W] < 0.0f) {
+                    sWorkSpaceHideV[GX_VIEWPORT_W] = 0.0f;
+                }
+
+                if (sWorkSpaceHideV[GX_VIEWPORT_H] < 0.0f) {
+                    sWorkSpaceHideV[GX_VIEWPORT_H] = 0.0f;
+                }
+
             } else {
-                sWorkSpaceHideV.x1 = efb.vp.x;
-                sWorkSpaceHideV.y1 = efb.vp.y;
-                sWorkSpaceHideV.x2 = sWorkSpaceV.x2;
-                sWorkSpaceHideV.y2 = sWorkSpaceV.y2;
+                sWorkSpaceHideV[GX_VIEWPORT_L] = rEfb.vp.x;
+                sWorkSpaceHideV[GX_VIEWPORT_T] = rEfb.vp.y;
+                sWorkSpaceHideV[GX_VIEWPORT_W] = sWorkSpaceV[GX_VIEWPORT_W];
+                sWorkSpaceHideV[GX_VIEWPORT_H] = sWorkSpaceV[GX_VIEWPORT_H];
             }
 
-            buffer = TextureBuffer::alloc(sWorkSpaceHideV.x2,
-                                          sWorkSpaceHideV.y2, GX_TF_RGBA8);
-            setBuffer(type, buffer);
+            cap_x = sWorkSpaceV[GX_VIEWPORT_L];
+            cap_y = sWorkSpaceV[GX_VIEWPORT_T];
 
-            if (buffer != NULL)
-                buffer->clearFlag(0x80);
+            pTexture = TextureBuffer::alloc(sWorkSpaceHideV[GX_VIEWPORT_W],
+                                            sWorkSpaceHideV[GX_VIEWPORT_H],
+                                            GX_TF_RGBA8);
+
+            setBuffer(type, pTexture);
+
+            if (pTexture != NULL) {
+                pTexture->disablePixModeSync();
+            }
             break;
-        case cBufferType_2:
-            buffer =
-                TextureBuffer::alloc(efb.vp.width, efb.vp.height, GX_TF_RGBA8);
-            setBuffer(type, buffer);
-            buffer->clearFlag(0x80);
+        }
+
+        case cBufferType_2: {
+            pTexture = TextureBuffer::alloc(rEfb.vp.width, rEfb.vp.height,
+                                            GX_TF_RGBA8);
+
+            setBuffer(type, pTexture);
+            pTexture->disablePixModeSync();
             break;
-        case cBufferType_3:
-            buffer = TextureBuffer::alloc(efb.vp.width / 2.0f,
-                                          efb.vp.height / 2.0f, GX_TF_RGBA8);
-            setBuffer(type, buffer);
-            upscale = true;
-            buffer->setFlag(0x40);
-            // TO-DO: Copy filter args are set here, not colors
-            // buffer->setColor_24((GXColor){21, 0, 0, 22});
-            // buffer->setColor_28((GXColor){21, 0, 0, 22});
+        }
+
+        case cBufferType_3: {
+            pTexture = TextureBuffer::alloc(rEfb.vp.width / 2,
+                                            rEfb.vp.height / 2, GX_TF_RGBA8);
+
+            setBuffer(type, pTexture);
+            pTexture->setVFilterBlur();
+            mipmap = true;
             break;
-        default:
+        }
+
+        default: {
 #line 158
             EGG_ASSERT(0);
             break;
+        }
         }
 
         if (getBuffer(type) != NULL) {
             spBufferSet[type].mpAllocBase = this;
 
-            if (clear) {
-                getBuffer(type)->setFlag(0x10);
+            if (alpha) {
+                getBuffer(type)->enableAlphaUpdate();
                 getBuffer(type)->setClearColor((GXColor){0, 0, 0, 0});
             }
-        }
 
 #line 171
-        EGG_ASSERT(cap_x >= 0.f && cap_y >= 0.f);
-        getBuffer(type)->capture(cap_x, cap_y, upscale, -1);
+            EGG_ASSERT(cap_x >= 0.f && cap_y >= 0.f);
+            getBuffer(type)->capture(cap_x, cap_y, mipmap);
+        }
     }
 
     return getBuffer(type);
 }
 
-bool ScreenEffectBase::release(BufferType type) const {
+bool ScreenEffectBase::releaseEfb(BufferType type) const {
     if (spBufferSet[type].mpTexBuffer != NULL &&
         spBufferSet[type].mpAllocBase == this) {
+
         spBufferSet[type].mpTexBuffer->free();
         clearBuffer(type);
         return true;
@@ -151,92 +160,110 @@ bool ScreenEffectBase::release(BufferType type) const {
     return false;
 }
 
-void ScreenEffectBase::doCapture(int buffer) const {
-    if (buffer == 0) {
-        if (sWorkBuffer == 1) {
+void ScreenEffectBase::pushWorkBuffer(WorkBuffer buffer) const {
+    if (buffer == cWorkBuffer_0) {
+        if (sWorkBuffer == cWorkBuffer_1) {
 #line 207
             EGG_ASSERT(spBufferSet[cBufferType_Hide_1_16].mpAllocBase != NULL);
-            spBufferSet[cBufferType_Hide_1_16].mpAllocBase->release(
-                cBufferType_Hide_1_16);
+
+            spBufferSet[cBufferType_Hide_1_16].mpAllocBase-> //
+                releaseEfb(cBufferType_Hide_1_16);
         }
 
-        capture(cBufferType_1, false);
-        sWorkBuffer = 0;
-    } else if (buffer == 1 && sWorkBuffer != 0) {
-        capture(cBufferType_Hide_1_16, false);
-        sWorkBuffer = 1;
+        captureEfb(cBufferType_1, false);
+        sWorkBuffer = cWorkBuffer_0;
+
+    } else if (buffer == cWorkBuffer_1 && sWorkBuffer != cWorkBuffer_0) {
+        captureEfb(cBufferType_Hide_1_16, false);
+        sWorkBuffer = cWorkBuffer_1;
     }
 }
 
-void ScreenEffectBase::setupGX(bool cache) const {
+void ScreenEffectBase::popWorkBuffer(bool hide) const {
     BufferType type;
 
-    if (sWorkBuffer != -1) {
-        type = static_cast<BufferType>(-1);
+    if (sWorkBuffer != cWorkBuffer_None) {
+        type = cBufferType_None;
 
-        if (sWorkBuffer == 0)
+        if (sWorkBuffer == cWorkBuffer_0) {
             type = cBufferType_1;
-        else if (sWorkBuffer == 1)
+        } else if (sWorkBuffer == cWorkBuffer_1) {
             type = cBufferType_Hide_1_16;
+        }
 
         if (this == spBufferSet[type].mpAllocBase) {
-            if (!cache) {
-                StateGX::ScopedColorUpdate color(true);
-                StateGX::ScopedAlphaUpdate alpha(true);
-                StateGX::ScopedDitherUpdate dither(false);
+            if (!hide) {
+                StateGX::AutoColorUpdate colorLock(true);
+                StateGX::AutoAlphaUpdate alphaLock(true);
+                StateGX::AutoDither ditherLock(false);
 
                 PostEffectBase::setProjection(mScreen);
 
-                StateGX::GXSetViewport_(sWorkSpaceHideV.x1, sWorkSpaceHideV.y1,
-                                        sWorkSpaceHideV.x2, sWorkSpaceHideV.y2,
+                StateGX::GXSetViewport_(sWorkSpaceHideV[GX_VIEWPORT_L],
+                                        sWorkSpaceHideV[GX_VIEWPORT_T],
+                                        sWorkSpaceHideV[GX_VIEWPORT_W],
+                                        sWorkSpaceHideV[GX_VIEWPORT_H], //
                                         0.0f, 1.0f);
-                StateGX::GXSetScissor_(sWorkSpaceHideV.x1, sWorkSpaceHideV.y1,
-                                       sWorkSpaceHideV.x2, sWorkSpaceHideV.y2);
+
+                StateGX::GXSetScissor_(sWorkSpaceHideV[GX_VIEWPORT_L],
+                                       sWorkSpaceHideV[GX_VIEWPORT_T],
+                                       sWorkSpaceHideV[GX_VIEWPORT_W],
+                                       sWorkSpaceHideV[GX_VIEWPORT_H]);
+
                 StateGX::GXSetScissorBoxOffset_(0, 0);
 
                 PostEffectSimple eff;
                 eff.configure();
                 eff.setCapTexture(getBuffer(type));
-                eff.setBlendMode(PostEffectBase::EBlendMode_None);
-
-                const f32 sx = mScreen.GetSize().x;
-                const f32 sy = mScreen.GetSize().y;
-                eff.draw(sx, sy);
+                eff.setBlendMode(PostEffectBase::cBlendMode_None);
+                eff.draw(mScreen.GetSize().x, mScreen.GetSize().y);
             }
 
-            release(type);
+            releaseEfb(type);
 
-            sWorkBuffer = -1;
+            sWorkBuffer = cWorkBuffer_None;
             sPushCount++;
         }
     }
 }
 
-const ScreenEffectBase::WorkView& ScreenEffectBase::setupView() const {
-    FullView vp;
-    const Screen::DataEfb& efb = mScreen.GetDataEfb();
+const f32* ScreenEffectBase::shiftWorkSpaceViewportGX() const {
+    const Screen::DataEfb& rEfb = mScreen.GetDataEfb();
 
-    vp.x2 = efb.vp.width + sWorkSpaceV.x1;
-    vp.x1 = sWorkSpaceV.x1;
+    struct {
+        f32 real_w, real_h;
+        f32 vp[GX_VIEWPORT_SZ];
+    } param;
 
-    vp.y2 = efb.vp.height + sWorkSpaceV.y1;
-    vp.y1 = sWorkSpaceV.y1;
+    param.real_w = rEfb.vp.width + sWorkSpaceV[GX_VIEWPORT_L];
+    param.real_h = rEfb.vp.height + sWorkSpaceV[GX_VIEWPORT_T];
 
-    // Clamp for X overscan
-    const f32 cx = (vp.x2 <= 640.0f) ? 0.0f : vp.x2 - 640.0f;
-    vp.cx = efb.vp.width - cx;
+    param.vp[GX_VIEWPORT_L] = sWorkSpaceV[GX_VIEWPORT_L];
+    param.vp[GX_VIEWPORT_T] = sWorkSpaceV[GX_VIEWPORT_T];
 
-    // Clamp for Y overscan
-    const f32 cy = (vp.y2 <= 528.0f) ? 0.0f : vp.y2 - 528.0f;
-    vp.cy = efb.vp.height - cy;
+    f32 over_x =
+        param.real_w <= EFFECT_WIDTH ? 0.0f : param.real_w - EFFECT_WIDTH;
 
-    vp.z1 = efb.vp.near;
-    vp.z2 = efb.vp.far;
+    param.vp[GX_VIEWPORT_W] = rEfb.vp.width - over_x;
 
-    StateGX::GXSetViewport_(vp.x1, vp.y1, vp.cx, vp.cy, vp.z1, vp.z2);
-    StateGX::GXSetScissor_(vp.x1, vp.y1, vp.cx, vp.cy);
+    f32 over_y =
+        param.real_h <= EFFECT_HEIGHT ? 0.0f : param.real_h - EFFECT_HEIGHT;
+
+    param.vp[GX_VIEWPORT_H] = rEfb.vp.height - over_y;
+
+    param.vp[GX_VIEWPORT_N] = rEfb.vp.near;
+    param.vp[GX_VIEWPORT_F] = rEfb.vp.far;
+
+    StateGX::GXSetViewport_(param.vp[GX_VIEWPORT_L], param.vp[GX_VIEWPORT_T],
+                            param.vp[GX_VIEWPORT_W], param.vp[GX_VIEWPORT_H],
+                            param.vp[GX_VIEWPORT_N], param.vp[GX_VIEWPORT_F]);
+
+    StateGX::GXSetScissor_(param.vp[GX_VIEWPORT_L], param.vp[GX_VIEWPORT_T],
+                           param.vp[GX_VIEWPORT_W], param.vp[GX_VIEWPORT_H]);
+
     StateGX::GXSetScissorBoxOffset_(0, 0);
 
     return sWorkSpaceV;
 }
+
 } // namespace EGG

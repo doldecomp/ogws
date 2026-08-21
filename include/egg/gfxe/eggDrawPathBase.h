@@ -5,7 +5,6 @@
 #include <egg/gfxe/eggIDrawGX.h>
 #include <egg/gfxe/eggIScnProc.h>
 #include <egg/gfxe/eggScreenEffectBase.h>
-
 #include <egg/prim.h>
 
 namespace EGG {
@@ -13,8 +12,8 @@ namespace EGG {
 class DrawPathBase : public ScreenEffectBase, public IScnProc {
 public:
     DrawPathBase();
-    virtual ~DrawPathBase() {}               // at 0x8
-    virtual int getNumStep() const = 0;      // at 0x1C
+
+    virtual u16 getNumStep() const = 0;      // at 0x1C
     virtual void internalResetForDraw() {}   // at 0x20
     virtual void internalCalc() {}           // at 0x24
     virtual void internalDraw(u16 step) = 0; // at 0x28

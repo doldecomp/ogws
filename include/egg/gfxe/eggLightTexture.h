@@ -31,7 +31,7 @@ public:
 private:
     static const int MAX_NAME_LEN = 32;
 
-    char UNK_0x2C[0x54 - 0x2C];
+    char UNK_0x30[0x54 - 0x30];
     char mName[MAX_NAME_LEN]; // at 0x54
     char UNK_0x74[0x84 - 0x74];
 };

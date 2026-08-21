@@ -13,10 +13,10 @@ class RPGrpDrawPathBloom : public RPGrpDrawPath {
 public:
     RPGrpDrawPathBloom(EGG::ScnRenderer* pRenderer)
         : RPGrpDrawPath(pRenderer, pRenderer->getDrawPathBase(
-                                       EGG::ScnRenderer::DRAW_PATH_BLOOM)) {
+                                       EGG::ScnRenderer::cDrawPath_Bloom)) {
 
         mpBloom = static_cast<EGG::DrawPathBloom*>(
-            pRenderer->getDrawPathBase(EGG::ScnRenderer::DRAW_PATH_BLOOM));
+            pRenderer->getDrawPathBase(EGG::ScnRenderer::cDrawPath_Bloom));
     }
 
 private:

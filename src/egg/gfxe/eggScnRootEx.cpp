@@ -1,32 +1,26 @@
-#include "eggScnRootEx.h"
+#include <egg/gfxe.h>
+#include <egg/prim.h>
 
-#include "eggAssert.h"
-#include "eggDrawGX.h"
-#include "eggFogManager.h"
-#include "eggIDrawGX.h"
-#include "eggLightManager.h"
-#include "eggLightTextureManager.h"
-#include "eggScreen.h"
-#include "eggShadowTextureManager.h"
-#include "eggStateGX.h"
 #include <nw4r/g3d.h>
+#include <nw4r/math.h>
 
 namespace EGG {
-using namespace nw4r;
 
-ScnRootEx::ScnRootEx(g3d::ScnRoot* pScnRoot)
-    : mBase(pScnRoot),
+ScnRootEx::ScnRootEx(nw4r::g3d::ScnRoot* pScnRoot)
+    : mpScnRoot(pScnRoot),
       mpLightManager(NULL),
       mpFogManager(NULL),
       mpShadowTextureManager(NULL),
-      mSceneSettings(SCENE_SETTING_ALL),
-      SHORT_0x12(0),
-      mDrawSettings(DRAW_SETTING_ALL),
+      mSceneSettings(cSceneSetting_Default),
+      mFlags(0),
+      mDrawSettings(cDrawSetting_Default),
       mpScreen(NULL) {
+
 #line 64
     EGG_ASSERT(pScnRoot);
-    u8 id = mBase->GetCurrentCameraID();
-    pScnRoot->GetCamera(id).GetCameraMtx(&mCamMtx);
+
+    u8 id = mpScnRoot->GetCurrentCameraID();
+    pScnRoot->GetCamera(id).GetCameraMtx(&mCameraMtx);
 
     mpShadowTextureManager = new ShadowTextureManager();
 #line 68
@@ -36,17 +30,17 @@ ScnRootEx::ScnRootEx(g3d::ScnRoot* pScnRoot)
 #line 71
     EGG_ASSERT(mpScreen);
 
-    WORD_0x4C = 0;
+    unk4C = 0;
 }
 
 void ScnRootEx::configure() {}
 
-void ScnRootEx::setLightManager(LightManager* lightMgr) {
-    mpLightManager = lightMgr;
+void ScnRootEx::setLightManager(LightManager* pLightManager) {
+    mpLightManager = pLightManager;
 }
 
-void ScnRootEx::setFogManager(FogManager* fogMgr) {
-    mpFogManager = fogMgr;
+void ScnRootEx::setFogManager(FogManager* pFogManager) {
+    mpFogManager = pFogManager;
 }
 
 ScnRootEx::~ScnRootEx() {
@@ -58,71 +52,78 @@ ScnRootEx::~ScnRootEx() {
 }
 
 void ScnRootEx::UpdateFrame() {
-    if (mSceneSettings & SCENE_UPDATE_FRAME)
-        mBase->UpdateFrame();
+    if (mSceneSettings & cSceneSetting_UpdateFrame) {
+        mpScnRoot->UpdateFrame();
+    }
 }
 
 void ScnRootEx::CalcMaterial() {
-    if (mSceneSettings & SCENE_CALC_MATERIAL)
-        mBase->CalcMaterial();
+    if (mSceneSettings & cSceneSetting_CalcMaterial) {
+        mpScnRoot->CalcMaterial();
+    }
 }
 
 void ScnRootEx::CalcVtx() {
-    if (mSceneSettings & SCENE_CALC_VTX)
-        mBase->CalcVtx();
+    if (mSceneSettings & cSceneSetting_CalcVtx) {
+        mpScnRoot->CalcVtx();
+    }
 }
 
 void ScnRootEx::CalcWorld() {
     calc_before_CalcWorld();
 
-    if (mSceneSettings & SCENE_CALC_WORLD) {
-        mBase->CalcWorld();
-        SHORT_0x12 |= 0x2;
+    if (mSceneSettings & cSceneSetting_CalcWorld) {
+        mpScnRoot->CalcWorld();
+        mFlags |= cFlag_DoneCalcWorld;
     }
 
     calc_after_CalcWorld();
 }
 
-void ScnRootEx::SetCurrentCamera(int id, const math::MTX34& mtx,
-                                 const Screen& screen) {
-    SHORT_0x12 &= ~0x1;
+void ScnRootEx::SetCurrentCamera(int idx, const nw4r::math::MTX34& rCameraMtx,
+                                 const Screen& rScreen) {
+    mFlags &= ~cFlag_DoneDraw;
 
-    mBase->GetCamera(id).SetCameraMtxDirectly(mtx);
-    SetCurrentCamera(id, screen);
+    mpScnRoot->GetCamera(idx).SetCameraMtxDirectly(rCameraMtx);
+    SetCurrentCamera(idx, rScreen);
 }
 
 void ScnRootEx::CalcView() {
     draw_before_CalcView();
 
-    bool b = (mSceneSettings & 0x40) && (SHORT_0x12 & 0x2);
+    bool calcViewReady = (mSceneSettings & cSceneSetting_CalcView) &&
+                         (mFlags & cFlag_DoneCalcWorld);
 
-    if (b && (mSceneSettings & 0x1000) == 0)
-        mBase->CalcView();
+    if (calcViewReady && !(mSceneSettings & cSceneSetting_12)) {
+        mpScnRoot->CalcView();
+    }
 }
 
 void ScnRootEx::GatherDrawScnObj() {
-    if (mSceneSettings & SCENE_GATHER_DRAW_SCN_OBJ)
-        mBase->GatherDrawScnObj();
+    if (mSceneSettings & cSceneSetting_GatherDrawScnObj) {
+        mpScnRoot->GatherDrawScnObj();
+    }
 }
 
 void ScnRootEx::ZSort() {
-    if (mSceneSettings & SCENE_Z_SORT)
-        mBase->ZSort();
+    if (mSceneSettings & cSceneSetting_ZSort) {
+        mpScnRoot->ZSort();
+    }
 }
 
 void ScnRootEx::DrawOpa() {
-    if (mSceneSettings & SCENE_DRAW_OPA) {
+    if (mSceneSettings & cSceneSetting_DrawOpa) {
         setDrawSettingGX(true);
-        mBase->DrawOpa();
+        mpScnRoot->DrawOpa();
     }
 
     draw_after_DrawOpa();
 }
 
 void ScnRootEx::DrawXlu() {
-    if (mSceneSettings & SCENE_DRAW_XLU) {
+    if (mSceneSettings & cSceneSetting_DrawXlu) {
         setDrawSettingGX(false);
-        mBase->DrawXlu();
+        mpScnRoot->DrawXlu();
     }
 
     draw_after_DrawOpaXlu();
@@ -130,54 +131,61 @@ void ScnRootEx::DrawXlu() {
 
 void ScnRootEx::calc_before_CalcWorld() {
     if (mpLightManager != NULL) {
-        mpLightManager->Calc(mBase);
+        mpLightManager->Calc(mpScnRoot);
     }
 
     if (mpFogManager != NULL) {
         mpFogManager->Calc();
-        mpFogManager->CopyToG3D(mBase);
+        mpFogManager->CopyToG3D(mpScnRoot);
     }
 
-    math::MTX34Identity(&mCamMtx);
+    nw4r::math::MTX34Identity(&mCameraMtx);
 }
 
 void ScnRootEx::calc_after_CalcWorld() {
-    if (mSceneSettings & 0x2)
+    if (mSceneSettings & cSceneSetting_ShadowTexture) {
         mpShadowTextureManager->Calc();
+    }
 }
 
-void ScnRootEx::SetCurrentCamera(u8 id, const Screen& screen) {
-    mpScreen->CopyFromAnother(screen);
-    mBase->SetCurrentCamera(id);
+void ScnRootEx::SetCurrentCamera(u8 idx, const Screen& rScreen) {
+    mpScreen->CopyFromAnother(rScreen);
+    mpScnRoot->SetCurrentCamera(idx);
 
-    g3d::Camera current = mBase->GetCurrentCamera();
-    current.GetCameraMtx(&mCamMtx);
+    nw4r::g3d::Camera current = mpScnRoot->GetCurrentCamera();
+    current.GetCameraMtx(&mCameraMtx);
+
     mpScreen->CopyToG3D(current);
-
-    DrawGX::SetCameraMtx(mCamMtx);
+    DrawGX::SetCameraMtx(mCameraMtx);
 }
 
 void ScnRootEx::draw_before_CalcView() {
-    StateGX::resetStateCache();
-    beginDrawView(mBase->GetCurrentCameraID(), mCamMtx, getScreen());
+    StateGX::resetGXCache();
+    beginDrawView(mpScnRoot->GetCurrentCameraID(), mCameraMtx, getScreen());
 
     if (mpLightManager != NULL) {
-        mpLightManager->CalcView(mCamMtx, mBase->GetCurrentCameraID(), mBase);
+        mpLightManager->CalcView(mCameraMtx, mpScnRoot->GetCurrentCameraID(),
+                                 mpScnRoot);
     }
 
     if (mpFogManager != NULL) {
         mpFogManager->LoadScreenClip(getScreen());
     }
 
-    if (mpLightManager != NULL && mSceneSettings & SCENE_SETTING_0x1) {
-        const Screen::DataEfb& efb = mpScreen->GetDataEfb();
-        LightTextureManager* mgr = mpLightManager->GetLightTextureManager();
+    if (mpLightManager != NULL &&
+        (mSceneSettings & cSceneSetting_LightTexture)) {
 
-        mgr->draw(mpLightManager, efb, efb.vp.x, efb.vp.y, efb.vp.width,
-                  efb.vp.height);
+        const Screen::DataEfb& rEfb = mpScreen->GetDataEfb();
+
+        LightTextureManager* pLightTextureManager =
+            mpLightManager->GetLightTextureManager();
+
+        pLightTextureManager->drawAndCaptureTexture(
+            mpLightManager, rEfb, rEfb.vp.x, rEfb.vp.y, rEfb.vp.width,
+            rEfb.vp.height);
     }
 
-    if (mSceneSettings & SCENE_SETTING_0x2) {
+    if (mSceneSettings & cSceneSetting_ShadowTexture) {
         mpShadowTextureManager->Draw(mpScreen);
     }
 }
@@ -187,49 +195,55 @@ void ScnRootEx::draw_after_DrawOpa() {}
 void ScnRootEx::draw_after_DrawOpaXlu() {}
 
 void ScnRootEx::finishDraw() {
-    if (mpLightManager != NULL)
+    if (mpLightManager != NULL) {
         mpLightManager->DoneDraw();
+    }
 
-    if (mpFogManager != NULL)
+    if (mpFogManager != NULL) {
         mpFogManager->DoneDraw();
+    }
 
-    SHORT_0x12 |= 0x1;
-    SHORT_0x12 &= ~0x2;
+    mFlags |= cFlag_DoneDraw;
+    mFlags &= ~cFlag_DoneCalcWorld;
 }
 
-namespace {
-void UNUSED_ASSERTS_SCNROOTEX() {
-    EGG_ASSERT_MSG(false,
-                "Can't call this func if not isEnableDoubleBuffer().");
-}
-} // namespace
+DECOMP_FORCEACTIVE(eggScnRootEx_cpp,
+                  "Can't call this func if not isEnableDoubleBuffer().");
 
-void ScnRootEx::changeScnRoot(g3d::ScnRoot* pScnRoot) {
+void ScnRootEx::changeScnRoot(nw4r::g3d::ScnRoot* pScnRoot) {
 #line 613
     EGG_ASSERT(pScnRoot != NULL);
-    mBase = pScnRoot;
+    mpScnRoot = pScnRoot;
 }
 
 void ScnRootEx::setDrawSettingGX(bool opa) const {
-    u32 flags = 0;
+    u32 drawFlags = 0;
 
     if (opa) {
-        if (mDrawSettings & DRAW_COLOR_UPDATE_OPA)
-            flags |= EFlag_ColorUpdate;
-        if (mDrawSettings & DRAW_ALPHA_UPDATE_OPA)
-            flags |= EFlag_AlphaUpdate;
-        if (mDrawSettings & DRAW_DITHER_OPA)
-            flags |= EFlag_Dither;
+        if (mDrawSettings & cDrawSetting_ColorUpdateOpa) {
+            drawFlags |= cFlag_ColorUpdate;
+        }
+        if (mDrawSettings & cDrawSetting_AlphaUpdateOpa) {
+            drawFlags |= cFlag_AlphaUpdate;
+        }
+        if (mDrawSettings & cDrawSetting_DitherOpa) {
+            drawFlags |= cFlag_Dither;
+        }
+
     } else {
-        if (mDrawSettings & DRAW_COLOR_UPDATE_XLU)
-            flags |= EFlag_ColorUpdate;
-        if (mDrawSettings & DRAW_ALPHA_UPDATE_XLU)
-            flags |= EFlag_AlphaUpdate;
-        if (mDrawSettings & DRAW_DITHER_XLU)
-            flags |= EFlag_Dither;
+        if (mDrawSettings & cDrawSetting_ColorUpdateXlu) {
+            drawFlags |= cFlag_ColorUpdate;
+        }
+        if (mDrawSettings & cDrawSetting_AlphaUpdateXlu) {
+            drawFlags |= cFlag_AlphaUpdate;
+        }
+        if (mDrawSettings & cDrawSetting_DitherXlu) {
+            drawFlags |= cFlag_Dither;
+        }
     }
 
-    setDrawFlag(flags);
+    setDrawFlag(drawFlags);
     IDrawGX::setDrawSettingGX(opa);
 }
+
 } // namespace EGG

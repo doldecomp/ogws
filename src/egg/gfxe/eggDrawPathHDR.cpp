@@ -2,14 +2,14 @@
 
 namespace EGG {
 
-DrawPathHDR::DrawPathHDR() : mPostEffect(NULL) {
-    mPostEffect = new PostEffectHDR();
-    mPostEffect->configure();
+DrawPathHDR::DrawPathHDR() : mpPostEffect(NULL) {
+    mpPostEffect = new PostEffectHDR();
+    mpPostEffect->configure();
 }
 
 DrawPathHDR::~DrawPathHDR() {
-    delete mPostEffect;
-    mPostEffect = NULL;
+    delete mpPostEffect;
+    mpPostEffect = NULL;
 }
 
 void DrawPathHDR::internalCalc() {}
@@ -18,31 +18,32 @@ void DrawPathHDR::internalDraw(u16 step) {
     const Screen::DataEfb& rEfb = GetScreen().GetDataEfb();
 
     switch (step) {
-    case EStep_0: {
-        capture(cBufferType_2, false);
-        ScreenEffectBase::sFlag |= 0x2;
+    case cStep_Capture: {
+        captureEfb(cBufferType_2, false);
+        setGlbFlag1(true);
         break;
     }
 
-    case EStep_1: {
-        StateGX::ScopedAlphaUpdate alpha(false);
+    case cStep_Draw: {
+        StateGX::AutoAlphaUpdate alphaLock(false);
 
         TextureBuffer* p_buff = getBuffer(cBufferType_2);
 #line 74
         EGG_ASSERT(p_buff);
-        mPostEffect->setCapTexture(p_buff);
-        mPostEffect->setProjection(GetScreen());
-        mPostEffect->draw(GetScreen().GetWidth(), GetScreen().GetHeight());
+        mpPostEffect->setCapTexture(p_buff);
+        mpPostEffect->setProjection(GetScreen());
+        mpPostEffect->draw(GetScreen().GetWidth(), GetScreen().GetHeight());
 
-        release(cBufferType_2);
-        ScreenEffectBase::sFlag &= ~0x3;
+        releaseEfb(cBufferType_2);
+        setGlbFlag1(false);
+        setGlbFlag0(false);
         break;
     }
     }
 }
 
-int DrawPathHDR::getNumStep() const {
-    return EStep_Max;
+u16 DrawPathHDR::getNumStep() const {
+    return cStep_Max;
 }
 
 } // namespace EGG

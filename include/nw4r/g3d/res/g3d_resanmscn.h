@@ -83,8 +83,24 @@ public:
     ResAnmFog GetResAnmFogByRefNumber(u32 refNumber) const;
     ResAnmCamera GetResAnmCameraByRefNumber(u32 refNumber) const;
 
+    u16 GetResLightSetMaxRefNumber() const {
+        return ref().info.numResLightSetData;
+    }
+
+    u16 GetResAnmAmbLightMaxRefNumber() const {
+        return ref().info.numResAnmAmbLightData;
+    }
+
+    u16 GetResAnmLightMaxRefNumber() const {
+        return ref().info.numResAnmLightData;
+    }
+
     u16 GetResAnmFogMaxRefNumber() const {
         return ref().info.numResAnmFogData;
+    }
+
+    u16 GetResAnmCameraMaxRefNumber() const {
+        return ref().info.numResAnmCameraData;
     }
 };
 

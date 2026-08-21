@@ -9,18 +9,12 @@
 
 namespace EGG {
 
-struct TextureReplaceResult {
-    union Data {
-        void* p;
-        u32 l;
-        u16 s;
-        u8 b;
-    } data[256];
-};
+// Forward declarations
+struct TextureReplaceResult;
 
 class ModelEx {
 public:
-    enum EType {
+    enum Type {
         cType_ScnMdlSimple,
         cType_ScnMdl,
         cType_ScnMdl1Mat1Shp,
@@ -29,9 +23,11 @@ public:
         cType_Unknown
     };
 
-    enum EDrawShape { cDrawShape_None = 1 << 0 };
+    enum DrawShape {
+        cDrawShape_None = 1 << 0,
+    };
 
-    enum EDrawFlag {
+    enum DrawFlag {
         cDrawFlag_IgnoreMaterial = 1 << 1,
         cDrawFlag_ForceLightOff = 1 << 2,
         cDrawFlag_ShapeOnly = 1 << 3,
@@ -40,7 +36,7 @@ public:
 private:
     static u32 sDrawFlag;
 
-    EType mType;                // at 0x0
+    Type mType;                 // at 0x0
     u16 mFlag;                  // at 0x4
     nw4r::g3d::ScnObj* mScnObj; // at 0x8
     ModelBoundingInfo* mpBV;    // at 0xC
@@ -58,14 +54,21 @@ public:
 
     void getShapeMinMax(u16 shapeIndex, nw4r::math::VEC3* pMin,
                         nw4r::math::VEC3* pMax, bool doCalcWorld);
+
     void setVisible(bool enable);
+
     void calcWorld(nw4r::math::MTX34* pWorldMtxArray) const;
+
     void calcView(const nw4r::math::MTX34& rViewMtx,
                   nw4r::math::MTX34* pViewMtxArray) const;
+
     void drawShapeDirectly(u32 drawFlag, bool opa, bool xlu,
                            nw4r::math::MTX34* pViewMtx);
-    u16 replaceTexture(const char*, const GXTexObj&, bool,
-                       TextureReplaceResult*, u16, bool);
+
+    u16 replaceTexture(const char* pName, const GXTexObj& rTexObj,
+                       bool saveFilterWrap, TextureReplaceResult* pResultSet,
+                       u16 resultNum, bool copyMatAccess);
+
     void attachBoundingInfo(ModelBoundingInfo* pBV);
 
     nw4r::g3d::ResShp getResShp(u16 shapeIndex) const;
@@ -137,7 +140,9 @@ public:
     }
 
 private:
-    enum { cFlag_HasOriginalBV = 1 << 0 };
+    enum {
+        cFlag_HasOriginalBV = 1 << 0,
+    };
 };
 
 } // namespace EGG

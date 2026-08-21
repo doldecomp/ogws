@@ -12,7 +12,7 @@ DECOMP_FORCEACTIVE_DTOR(eggPostEffectBase_cpp, PostEffectBase);
 
 PostEffectBase::PostEffectBase()
     : mFlags(0),
-      mBlendMode(EBlendMode_None),
+      mBlendMode(cBlendMode_None),
       mpCapTexture(NULL),
       mOffsetX(0.0f),
       mOffsetY(0.0f),
@@ -86,54 +86,54 @@ void PostEffectBase::setMatPE() {
 
 void PostEffectBase::setBlendModeInternal() {
     switch (mBlendMode) {
-    case EBlendMode_None: {
+    case cBlendMode_None: {
         DrawGX::SetBlendMode(DrawGX::BLEND_NONE);
         break;
     }
 
-    case EBlendMode_Normal: {
+    case cBlendMode_Normal: {
         DrawGX::SetBlendMode(DrawGX::BLEND_NORMAL);
         break;
     }
 
-    case EBlendMode_Add: {
+    case cBlendMode_Add: {
         DrawGX::SetBlendMode(DrawGX::BLEND_ADD);
         break;
     }
 
-    case EBlendMode_MulAdd: {
+    case cBlendMode_MulAdd: {
         DrawGX::SetBlendMode(DrawGX::BLEND_MUL_ADD);
         break;
     }
 
-    case EBlendMode_4: {
+    case cBlendMode_4: {
         GXSetBlendMode(GX_BM_BLEND, GX_BL_INVSRCCLR, GX_BL_ONE, GX_LO_CLEAR);
         break;
     }
 
-    case EBlendMode_5: {
+    case cBlendMode_5: {
         GXSetBlendMode(GX_BM_BLEND, GX_BL_INVSRCCLR, GX_BL_INVSRCCLR,
                        GX_LO_CLEAR);
         break;
     }
 
-    case EBlendMode_AddAlpha: {
+    case cBlendMode_AddAlpha: {
         DrawGX::SetBlendMode(DrawGX::BLEND_ADD_ALPHA);
         break;
     }
 
-    case EBlendMode_7: {
+    case cBlendMode_7: {
         GXSetBlendMode(GX_BM_BLEND, GX_BL_INVSRCALPHA, GX_BL_ONE, GX_LO_CLEAR);
         break;
     }
 
-    case EBlendMode_8: {
+    case cBlendMode_8: {
         GXSetBlendMode(GX_BM_SUBTRACT, GX_BL_SRCALPHA, GX_BL_INVSRCALPHA,
                        GX_LO_CLEAR);
         break;
     }
 
-    case EBlendMode_Mul: {
+    case cBlendMode_Mul: {
         DrawGX::SetBlendMode(DrawGX::BLEND_MUL);
         break;
     }
@@ -168,8 +168,8 @@ void PostEffectBase::setProjection(const Screen& rScreen) {
     Screen clone(rScreen);
 
     clone.SetProjectionAbsolute();
-    clone.SetCanvasMode(Frustum::CANVASMODE_LU);
-    clone.SetProjectionType(Frustum::PROJTYPE_ORTHO);
+    clone.SetCanvasMode(Frustum::CANVAS_LU);
+    clone.SetProjectionType(Frustum::PROJ_ORTHO);
 
     clone.SetNearZ(0.0f);
     clone.SetFarZ(1.0f);

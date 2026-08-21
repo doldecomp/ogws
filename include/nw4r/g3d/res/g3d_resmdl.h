@@ -8,7 +8,6 @@
 #include <nw4r/g3d/res/g3d_resnode.h>
 #include <nw4r/g3d/res/g3d_resshp.h>
 #include <nw4r/g3d/res/g3d_resvtx.h>
-
 #include <nw4r/math.h>
 
 namespace nw4r {
@@ -178,7 +177,7 @@ public:
     ResShp GetResShp(u32 idx) const;
     u32 GetResShpNumEntries() const;
 
-    ResTexPlttInfo GetResTexPlttInfoOffsetFromTexName(int idx) const;
+    ResTexPlttInfoOffset GetResTexPlttInfoOffsetFromTexName(int idx) const;
     u32 GetResTexPlttInfoOffsetFromTexNameNumEntries() const;
 
     ResMdlInfo GetResMdlInfo() {

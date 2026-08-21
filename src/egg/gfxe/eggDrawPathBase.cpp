@@ -6,7 +6,7 @@ DrawPathBase::DrawPathBase() {}
 
 void DrawPathBase::calc() {
     if (isEnable()) {
-        copyFromAnother(IDrawGX::getScreen());
+        setScreen(IDrawGX::getScreen());
         internalCalc();
     }
 }

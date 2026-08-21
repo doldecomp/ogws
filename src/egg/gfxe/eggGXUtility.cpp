@@ -16,17 +16,17 @@ u8 GXUtility::getTexMtxID(int no) {
     return ID[no];
 }
 
-void GXUtility::setScaleOffsetPerspective(f32* p, f32 sx, f32 sy, f32 ox,
-                                          f32 oy) {
+void GXUtility::setScaleOffsetPerspective(f32 p[GX_PROJECTION_SZ], f32 sx,
+                                          f32 sy, f32 ox, f32 oy) {
 #line 38
     EGG_ASSERT(p != NULL);
     EGG_ASSERT(sx != 0.f);
     EGG_ASSERT(sy != 0.f);
 
-    p[1] *= 1.0f / sx;
-    p[3] *= 1.0f / sy;
-    p[2] += ox;
-    p[4] += oy;
+    p[GX_PROJECTION_A] *= 1.0f / sx;
+    p[GX_PROJECTION_C] *= 1.0f / sy;
+    p[GX_PROJECTION_B] += ox;
+    p[GX_PROJECTION_D] += oy;
 }
 
 DECOMP_FORCEACTIVE(eggGXUtility_cpp,
@@ -48,7 +48,7 @@ void GXUtility::getTexObj(GXTexObj* pObj, const ResTIMG& rRes) {
         static_cast<GXTexFmt>(rRes.format),
         static_cast<GXTexWrapMode>(rRes.wrapS),
         static_cast<GXTexWrapMode>(rRes.wrapT),
-        rRes.mipMap ? GX_TRUE : GX_FALSE);
+        rRes.mipMap > 0 ? GX_TRUE : GX_FALSE);
     // clang-format on
 
     // clang-format off

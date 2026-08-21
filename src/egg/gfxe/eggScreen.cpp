@@ -38,8 +38,8 @@ void Screen::Initialize(const u16 maxX[TV_MODE_MAX],
     sTVModeHeights[TV_MODE_WIDE] = maxY[TV_MODE_WIDE];
 
     static Screen root;
-    root.SetProjectionType(PROJTYPE_ORTHO);
-    root.SetCanvasMode(CANVASMODE_LU);
+    root.SetProjectionType(PROJ_ORTHO);
+    root.SetCanvasMode(CANVAS_LU);
     root.SetNearZ(0.0f);
     root.SetFarZ(1.0f);
 
@@ -54,9 +54,9 @@ void Screen::Initialize(const u16 maxX[TV_MODE_MAX],
 
 Screen::Screen()
     // @bug Far Z typo of 100,000
-    : Frustum(PROJTYPE_PERSP,
+    : Frustum(PROJ_PERSP,
               nw4r::math::VEC2(sTVModeWidths[sTVMode], sTVModeHeights[sTVMode]),
-              10.0f, 10000.0f, CANVASMODE_LU) {
+              10.0f, 10000.0f, CANVAS_LU) {
 
     mPosition.x = 0.0f;
     mPosition.y = 0.0f;
@@ -67,7 +67,7 @@ Screen::Screen()
 
 Screen::Screen(f32 x, f32 y, f32 width, f32 height, const Screen* pParent,
                CanvasMode canvasMode)
-    : Frustum(PROJTYPE_PERSP, nw4r::math::VEC2(width, height), 10.0f, 100000.0f,
+    : Frustum(PROJ_PERSP, nw4r::math::VEC2(width, height), 10.0f, 100000.0f,
               canvasMode) {
 
     mPosition.x = x;
@@ -258,7 +258,7 @@ void Screen::CalcMatrixForDrawQuad(nw4r::math::MTX34* pMtx, f32 x, f32 y,
     pMtx->_03 = x;
     pMtx->_23 = 0.0f;
 
-    if (mCanvasMode == CANVASMODE_CC) {
+    if (mCanvasMode == CANVAS_CC) {
         pMtx->_13 = y - height;
     } else {
         pMtx->_13 = y;
@@ -273,10 +273,10 @@ void Screen::FillBufferGX(u32 flags, GXColor color, u32 arg2) const {
     }
 
     Screen clone(*this);
-    clone.SetCanvasMode(CANVASMODE_LU);
+    clone.SetCanvasMode(CANVAS_LU);
     clone.SetNearZ(0.0f);
     clone.SetFarZ(1.0f);
-    clone.SetProjectionType(PROJTYPE_ORTHO);
+    clone.SetProjectionType(PROJ_ORTHO);
     clone.SetProjectionGX();
 
     nw4r::math::MTX34 drawMtx;

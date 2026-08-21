@@ -29,6 +29,16 @@ void GXInitTexObjLOD(GXTexObj* obj, GXTexFilter min_filt, GXTexFilter mag_filt,
                      f32 min_lod, f32 max_lod, f32 lod_bias, GXBool bias_clamp,
                      GXBool do_edge_lod, GXAnisotropy max_aniso);
 
+void GXInitTexObjWrapMode(GXTexObj* obj, GXTexWrapMode wrap_s,
+                          GXTexWrapMode wrap_t);
+
+void GXInitTexObjFilter(GXTexObj* obj, GXTexFilter min_filt,
+                        GXTexFilter mag_filt);
+
+void GXGetTexObjAll(GXTexObj* obj, void* image_ptr, u16* width, u16* height,
+                    GXTexFmt* format, GXTexWrapMode* wrap_s,
+                    GXTexWrapMode* wrap_t, GXBool* mipmap);
+
 void GXGetTexObjLODAll(GXTexObj* obj, GXTexFilter* min_filt,
                        GXTexFilter* mag_filt, f32* minLod, f32* maxLod,
                        f32* lodBias, GXBool* biasClampEnable,
@@ -53,10 +63,12 @@ void GXLoadTlut(GXTlutObj*, u32);
 
 void GXInvalidateTexAll(void);
 
-void GXInitTexCacheRegion(GXTexRegion* pRegion, GXBool r4, u32 addrTMemEven,
-                          u32 sizeTMemEven, u32 addrTMemOdd, u32 sizeTMemOdd);
+void GXInitTexCacheRegion(GXTexRegion* pRegion, GXBool is_32b_mipmap,
+                          u32 tmem_even, GXTexCacheSize size_even, u32 tmem_odd,
+                          GXTexCacheSize size_odd);
 
-void GXInitTlutRegion(GXTlutRegion* pRegion, u32 addrTMem, u32 sizeTMem);
+void GXInitTlutRegion(GXTlutRegion* pRegion, u32 tmem_addr,
+                      GXTlutSize tlut_size);
 
 GXTexRegionCallback GXSetTexRegionCallback(GXTexRegionCallback callback);
 GXTlutRegionCallback GXSetTlutRegionCallback(GXTlutRegionCallback callback);
@@ -64,9 +76,10 @@ GXTlutRegionCallback GXSetTlutRegionCallback(GXTlutRegionCallback callback);
 u32 GXGetTexBufferSize(u16 width, u16 height, u32 format, GXBool mipmap,
                        u8 max_lod);
 
-// TODO
-UNKTYPE GXSetTexCoordScaleManually(UNKWORD, UNKWORD, UNKWORD, UNKWORD);
-UNKTYPE GXSetTexCoordCylWrap(UNKWORD, UNKWORD, UNKWORD);
+void GXSetTexCoordScaleManually(GXTexCoordID coord, GXBool enable, u16 ss,
+                                u16 ts);
+
+void GXSetTexCoordCylWrap(GXTexCoordID coord, GXBool s_enable, GXBool t_enable);
 
 #ifdef __cplusplus
 }

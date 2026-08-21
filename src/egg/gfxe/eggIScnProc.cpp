@@ -107,7 +107,7 @@ void IScnProc::drawProcFunc(nw4r::g3d::ScnProc* pScnProc, bool opa) {
     setDrawSettingGX(opa);
 
     p_data->mpThis->scnProcDraw(p_data->mStep);
-    StateGX::resetStateCache();
+    StateGX::resetGXCache();
 
     setDrawSettingGX(opa);
 }

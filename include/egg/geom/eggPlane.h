@@ -18,7 +18,7 @@ public:
 
 private:
     Vector3f normal; // at 0x0
-    f32 depth;       // at 0x10
+    f32 depth;       // at 0xC
 };
 
 } // namespace EGG

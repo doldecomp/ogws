@@ -8,13 +8,15 @@
 namespace EGG {
 
 class DrawPathBloom : public DrawPathBase, public IBinary<DrawPathBloom> {
+    friend class ScnRenderer;
+
 public:
     struct BinData {};
 
 public:
     DrawPathBloom();
     virtual ~DrawPathBloom();       // at 0x8
-    virtual int getNumStep() const; // at 0x1C
+    virtual u16 getNumStep() const; // at 0x1C
     virtual void internalCalc();    // at 0x24
     virtual void internalDraw(u16); // at 0x28
 
@@ -23,12 +25,21 @@ public:
     virtual const char* GetBinaryType() const; // at 0x10
     virtual u8 GetVersion() const;             // at 0x18
 
-    void setFlag(u8 f) {
-        mFlags |= f;
+    void setFlag8() {
+        mFlags |= 0x8;
     }
-    void clearFlag(u8 f) {
-        mFlags &= ~f;
+    void clearFlag8() {
+        mFlags &= ~0x8;
     }
+
+private:
+    enum Step {
+        cStep_0,
+        cStep_1,
+        cStep_2,
+
+        cStep_Max
+    };
 
 private:
     u8 mFlags; // at 0x80

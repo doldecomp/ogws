@@ -48,7 +48,7 @@ void Fog::Bind(const nw4r::g3d::ResAnmFog& rRes, f32 frame) {
         mEndZ = result.endz;
         mColor = result.color;
 
-        mFlags |= EFlag_Bound;
+        mFlags |= cFlag_Bound;
     } else {
         mFogType = GX_FOG_NONE;
         Unbind();

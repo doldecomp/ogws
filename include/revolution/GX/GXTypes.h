@@ -363,6 +363,8 @@ typedef enum _GXIndTexMtxID {
     GX_ITM_T2,
 } GXIndTexMtxID;
 
+#define GX_ITM_NUM ((GX_ITM_2 - GX_ITM_0) + 1)
+
 typedef enum _GXIndTexScale {
     GX_ITS_1,
     GX_ITS_2,
@@ -694,6 +696,13 @@ typedef enum _GXTevMode {
     GX_PASSCLR
 } GXTevMode;
 
+typedef enum _GXTexCacheSize {
+    GX_TEXCACHE_32K,
+    GX_TEXCACHE_128K,
+    GX_TEXCACHE_512K,
+    GX_TEXCACHE_NONE
+} GXTexCacheSize;
+
 typedef enum _GXTexCoordID {
     GX_TEXCOORD0,
     GX_TEXCOORD1,
@@ -819,6 +828,8 @@ typedef enum _GXTexMtx {
     GX_IDENTITY = 60,
 } GXTexMtx;
 
+#define GX_TEXMTX_NUM ((GX_TEXMTX9 - GX_TEXMTX0) / 3 + 1)
+
 typedef enum _GXPTTexMtx {
     // 3x4 matrices (in dual-tex / "post-matrix" XF matrix memory)
     // Enum represents base row of matrix
@@ -884,6 +895,20 @@ typedef enum _GXTlutFmt {
 
     GX_MAX_TLUTFMT
 } GXTlutFmt;
+
+typedef enum _GXTlutSize {
+    GX_TLUT_16 = 1,
+    GX_TLUT_32 = 2,
+    GX_TLUT_64 = 4,
+    GX_TLUT_128 = 8,
+    GX_TLUT_256 = 16,
+    GX_TLUT_512 = 32,
+    GX_TLUT_1K = 64,
+    GX_TLUT_2K = 128,
+    GX_TLUT_4K = 256,
+    GX_TLUT_8K = 512,
+    GX_TLUT_16K = 1024,
+} GXTlutSize;
 
 typedef enum _GXVtxFmt {
     GX_VTXFMT0,

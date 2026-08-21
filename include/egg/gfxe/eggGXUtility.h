@@ -14,8 +14,8 @@ class GXUtility {
 public:
     static u8 getTexMtxID(int no);
 
-    static void setScaleOffsetPerspective(f32* p, f32 sx, f32 sy, f32 ox,
-                                          f32 oy);
+    static void setScaleOffsetPerspective(f32 p[GX_PROJECTION_SZ], f32 sx,
+                                          f32 sy, f32 ox, f32 oy);
 
     static void getTexObj(GXTexObj* pObj, const ResTIMG& rRes);
 
