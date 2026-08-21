@@ -2028,9 +2028,15 @@ revolution/MTX/mtx.c:
 revolution/MTX/mtxvec.c:
 	.text       start:0x800E8260 end:0x800E82B4
 
+revolution/MTX/mtxstack.c:
+	.text       start:0x800E82B4 end:0x800E82B4
+
 revolution/MTX/mtx44.c:
 	.text       start:0x800E82B4 end:0x800E84D4
 	.sdata2     start:0x804C11E0 end:0x804C11F8
+
+revolution/MTX/mtx44vec.c:
+	.text       start:0x800E84D4 end:0x800E84D4
 
 revolution/MTX/vec.c:
 	.text       start:0x800E84D4 end:0x800E86F8
@@ -2040,6 +2046,9 @@ revolution/MTX/quat.c:
 	.text       start:0x800E86F8 end:0x800E8B10
 	.rodata     start:0x8037C4B0 end:0x8037C4C0
 	.sdata2     start:0x804C1208 end:0x804C1220
+
+revolution/MTX/psmtx.c:
+	.text       start:0x800E8B10 end:0x800E8B10
 
 revolution/NAND/nand.c:
 	.text       start:0x800E8B10 end:0x800E9C00
