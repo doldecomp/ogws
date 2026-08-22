@@ -509,7 +509,7 @@ void RPSysKokeshiManager::GetAdditionalInfo(
 void RPSysKokeshiManager::GetModelBaseScaleInvalidatedMtx(
     nw4r::math::MTX34* pOut, RPGrpModel* pModel, const nw4r::math::MTX34* pIn) {
 
-    nw4r::math::VEC3 scale = pModel->GetScale();
+    nw4r::math::VEC3 scale = pModel->GetBaseScale();
     nw4r::math::VEC3 scaleInv(1.0f / scale.x, 1.0f / scale.y, 1.0f / scale.z);
 
     nw4r::math::MTX34Copy(pOut, pIn);

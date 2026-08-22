@@ -73,7 +73,7 @@ RPGrpModel::RPGrpModel(u8 viewNo)
       mpEntryNext(NULL),
       mpGenNext(NULL),
       mpCallback(NULL),
-      mScale(1.0f, 1.0f, 1.0f),
+      mBaseScale(1.0f, 1.0f, 1.0f),
       mpModelAnm(NULL),
       mppMaterials(NULL),
       mpBoundingInfo(NULL),

@@ -82,7 +82,7 @@ void RPSysKokeshi::LoadResource(const RPSysKokeshiOverloadInfo* pOverloadInfo) {
         }
 
         case RPSysKokeshiManager::GenType_Friend:
-        case RPSysKokeshiManager::GenType_Kokeshi: {
+        case RPSysKokeshiManager::GenType_Direct: {
             clothesType = static_cast<u8>(
                 pBodyManager->GetFriendClothesStartIndex() +
                 RPUtlRandom::getU32(
@@ -227,7 +227,7 @@ void RPSysKokeshi::Construct() {
         break;
     }
 
-    case RPSysKokeshiManager::GenType_Kokeshi: {
+    case RPSysKokeshiManager::GenType_Direct: {
         location = mGenInfo.GetLocation();
         break;
     }

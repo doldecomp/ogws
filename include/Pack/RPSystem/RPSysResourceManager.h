@@ -224,6 +224,20 @@ public:
     }
 
     /**
+     * @brief Gets the archive containing static common assets for this pack
+     */
+    EGG::Archive* GetStaticCommonArchive() const {
+        return mpStaticCommonArchive;
+    }
+
+    /**
+     * @brief Gets the archive containing static locale assets for this pack
+     */
+    EGG::Archive* GetStaticLocalArchive() const {
+        return mpStaticLocalArchive;
+    }
+
+    /**
      * @brief Gets the extra handle for opening files outside the DVD
      */
     void* GetMultiHandle() {

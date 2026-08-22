@@ -1,11 +1,11 @@
 #include <Pack/RPGraphics.h>
 #include <Pack/RPKernel.h>
 
+#include <RVLFaceLib.h>
+
 #include <egg/core.h>
 
 #include <nw4r/ut.h>
-
-#include <RVLFaceLib.h>
 
 /**
  * @brief Constructor
@@ -101,14 +101,15 @@ void RPSysKokeshiCtrlDataMgr::createResource() {
     // Take ownership of any graphics allocations in the callback
     mpHeap->becomeCurrentHeap();
     RPGrpModel::SetAllocator(mpAllocator);
-    {
-        if (mpIterator->Update()) {
-            mpCallback->onCreateResource(mpLoader->getChannel(),
-                                         mpIterator->GetIndex());
-        } else {
-            mState = EState_Idle;
-        }
+
+    if (mpIterator->Update()) {
+        mpCallback->onCreateResource(mpLoader->getChannel(),
+                                     mpIterator->GetIndex());
+    } else {
+        mState = EState_Idle;
     }
+
+    // Restore original management
     RPGrpModel::SetAllocator(pOldAllocator);
     pOldHeap->becomeCurrentHeap();
 }

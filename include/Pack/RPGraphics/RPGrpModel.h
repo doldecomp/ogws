@@ -66,7 +66,7 @@ protected:
     RPGrpModel* mpEntryNext;                // at 0x14
     RPGrpModel* mpGenNext;                  // at 0x18
     IRPGrpModelCallback* mpCallback;        // at 0x1C
-    nw4r::math::VEC3 mScale;                // at 0x20
+    nw4r::math::VEC3 mBaseScale;            // at 0x20
     RPGrpModelAnm* mpModelAnm;              // at 0x2C
     RPGrpModelMaterial** mppMaterials;      // at 0x30
     RPGrpModelBoundingInfo* mpBoundingInfo; // at 0x34
@@ -214,8 +214,22 @@ public:
         return mpModelEx->getScnRfl();
     }
 
-    const nw4r::math::VEC3& GetScale() const {
-        return mScale;
+    const nw4r::math::VEC3& GetBaseScale() const {
+        return mBaseScale;
+    }
+
+    void SetBaseScale(const nw4r::math::VEC3& rBaseScale) {
+        mBaseScale = rBaseScale;
+    }
+
+    void SetBaseScale(f32 x, f32 y, f32 z) {
+        mBaseScale.x = x;
+        mBaseScale.y = y;
+        mBaseScale.z = z;
+    }
+
+    void SetBaseScale(f32 scale) {
+        mBaseScale.x = mBaseScale.y = mBaseScale.z = scale;
     }
 
     RPGrpModelMaterial* GetMaterial(const char* pName) const {

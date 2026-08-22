@@ -5,6 +5,8 @@
 
 #include <RVLFaceLib.h>
 
+#include <revolution/GX.h>
+
 //! @addtogroup rp_kernel
 //! @{
 
@@ -17,7 +19,7 @@ private:
     RPSysKokeshiManager::GenType mGenType; // at 0x0
     //! Player slot ID
     u8 mPlayerNo; // at 0x4
-    //! Mii location (only for GenType_Info)
+    //! Mii storage location
     RPSysKokeshiLocation mLocation; // at 0x8
 
     //! Body model to use
@@ -33,9 +35,9 @@ private:
     u32 mBufferOption; // at 0x28
 
     //! Texture width for icons
-    u16 mTexWidth; // at 0x2C
+    u16 mIconWidth; // at 0x2C
     //! Texture height for icons
-    u16 mTexHeight; // at 0x2E
+    u16 mIconHeight; // at 0x2E
 
     //! Resolution of models and textures
     RFLResolution mResolution; // at 0x30
@@ -43,17 +45,17 @@ private:
     u32 mExprFlag; // at 0x34
 
     // Use mipmapping to downscale the icon texture
-    BOOL mMipMap;
-    //! Whether to use the favorite color as the icon clear color
-    BOOL mUseFavoriteColor; // at 0x3C
-    //! Display clear color for icons
-    GXColor mClearColor; // at 0x40
-    //! Camera setup for icons
+    BOOL mMipMap; // at 0x38
+    //! Background type to use for icons
+    RFLIconBGType mIconBGType; // at 0x3C
+    //! Background color to use for icons
+    GXColor mIconBGColor; // at 0x40
+    //! Camera viewpoint to use for icons
     RPSysKokeshiManager::IconView mIconView; // at 0x44
     //! Facial expression to use for icons
     RFLExpression mIconExpression; // at 0x48
-    //! Whether to outline icons
-    BOOL mMakeEdge; // at 0x4C
+    //! Whether to draw an outline around icons
+    BOOL mIconEdge; // at 0x4C
 
     GXColor unk50;
     u16 unk54;
@@ -118,6 +120,20 @@ public:
         mBufferOption = bufferOption;
     }
 
+    u16 GetIconWidth() const {
+        return mIconWidth;
+    }
+    void SetIconWidth(u16 width) {
+        mIconWidth = width;
+    }
+
+    u16 GetIconHeight() const {
+        return mIconHeight;
+    }
+    void SetIconHeight(u16 height) {
+        mIconHeight = height;
+    }
+
     RFLResolution GetResolution() const {
         return mResolution;
     }
@@ -130,6 +146,48 @@ public:
     }
     void SetExpressionFlag(u32 exprFlag) {
         mExprFlag = exprFlag;
+    }
+
+    bool GetMipMap() const {
+        return mMipMap;
+    }
+    void SetMipMap(bool mipMap) {
+        mMipMap = mipMap;
+    }
+
+    RFLIconBGType GetIconBGType() const {
+        return mIconBGType;
+    }
+    void SetIconBGType(RFLIconBGType bgType) {
+        mIconBGType = bgType;
+    }
+
+    const GXColor& GetIconBGColor() const {
+        return mIconBGColor;
+    }
+    void SetIconBGColor(const GXColor& rColor) {
+        mIconBGColor = rColor;
+    }
+
+    RPSysKokeshiManager::IconView GetIconView() const {
+        return mIconView;
+    }
+    void SetIconView(RPSysKokeshiManager::IconView view) {
+        mIconView = view;
+    }
+
+    RFLExpression GetIconExpression() const {
+        return mIconExpression;
+    }
+    void SetIconExpression(RFLExpression expr) {
+        mIconExpression = expr;
+    }
+
+    bool GetIconEdge() const {
+        return mIconEdge;
+    }
+    void SetIconEdge(bool edge) {
+        mIconEdge = edge;
     }
 
     const RPSysKokeshiLocation& GetLocation() const {
