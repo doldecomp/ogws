@@ -109,8 +109,8 @@ typedef enum {
 } RFLFavoriteColor;
 
 typedef enum {
-    RFLIconBG_Favorite = 0,
-    RFLIconBG_Direct = 1,
+    RFLIconBG_Favorite,
+    RFLIconBG_Direct,
 } RFLIconBGType;
 
 typedef enum {
