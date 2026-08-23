@@ -28,7 +28,7 @@ private:
         //! Linked-list node
         NW4R_UT_LIST_LINK_DECL(); // at 0x0
         //! Resource file descriptor
-        u16 rd; // at 0x8
+        RPGrpHandle handle; // at 0x8
     };
 
     /**
@@ -122,9 +122,9 @@ public:
     /**
      * @brief Appends a new file to the file resource list
      *
-     * @param rd File resource descriptor
+     * @param handle Resource handle
      */
-    void appendFile(u16 rd);
+    void appendFile(RPGrpHandle handle);
 
     /**
      * @brief Appends a new model to the model resource list
