@@ -7,7 +7,7 @@
 #include <Pack/RPKernel/RPSysAppMiiManager.h>
 #include <Pack/RPKernel/RPSysAvatar.h>
 #include <Pack/RPKernel/RPSysController.h>
-#include <Pack/RPKernel/RPSysControllerSyncMgr.h>
+#include <Pack/RPKernel/RPSysControllerMgr.h>
 #include <Pack/RPKernel/RPSysFile.h>
 #include <Pack/RPKernel/RPSysFrameCtrl.h>
 #include <Pack/RPKernel/RPSysHomeMenuMgr.h>
@@ -36,6 +36,7 @@
 #include <Pack/RPKernel/RPSysMiddleDBGenInfo.h>
 #include <Pack/RPKernel/RPSysNWC24Manager.h>
 #include <Pack/RPKernel/RPSysOfficialDB.h>
+#include <Pack/RPKernel/RPSysPairingMgr.h>
 #include <Pack/RPKernel/RPSysParticleManager.h>
 #include <Pack/RPKernel/RPSysStringUtility.h>
 #include <Pack/RPKernel/RPSysSystemWinMgr.h>
@@ -44,5 +45,6 @@
 #include <Pack/RPKernel/RPSysWideTextWriter.h>
 #include <Pack/RPKernel/RP_DEBUG_STUB_0.h>
 #include <Pack/RPKernel/RP_DEBUG_STUB_1.h>
+
 
 #endif

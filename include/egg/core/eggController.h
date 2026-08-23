@@ -3,7 +3,6 @@
 #include <egg/types_egg.h>
 
 #include <egg/core/eggSingleton.h>
-
 #include <egg/math.h>
 #include <egg/prim.h>
 
@@ -309,12 +308,17 @@ public:
 
     CoreController* getNthController(int index);
 
-private:
+    static void setConnectCallback(CoreControllerConnectCallback pCallback) {
+        sConnectCallback = pCallback;
+    }
+
+protected:
     CoreControllerMgr();
 
+protected:
     static void connectCallback(s32 chan, s32 result);
 
-private:
+protected:
     TBuffer<CoreController*> mControllers;               // at 0x14
     CoreControllerExtensionCallback* mExtensionCallback; // at 0x20
     TBuffer<eCoreDevType> mDevTypes;                     // at 0x24

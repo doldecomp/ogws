@@ -52,28 +52,6 @@ private:
     RPSysCoreAddress mAddress; // at 0x2BA8
 };
 
-/******************************************************************************
- *
- * RPSysCoreControllerMgr
- *
- ******************************************************************************/
-class RPSysCoreControllerMgr {
-public:
-    static u32 isDpdCtrlEnable(s32 chan) {
-        return sDpdCtrlEnableFlag & (1 << chan);
-    }
-
-    static RPSysCoreController* getNthController(int index) {
-        EGG::CoreController* pController =
-            EGG_GET_INSTANCE(EGG::CoreControllerMgr)->getNthController(index);
-
-        return static_cast<RPSysCoreController*>(pController);
-    }
-
-private:
-    static u32 sDpdCtrlEnableFlag;
-};
-
 //! @}
 
 #endif
