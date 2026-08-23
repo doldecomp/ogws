@@ -7,14 +7,7 @@
 #include <nw4r/g3d.h>
 
 #include <revolution/GX.h>
-
-/**
- * @brief Lightmap texture names
- */
-const char* RPSysKokeshiIcon::LIGHT_TEXTURE_NAMES[ELightMap_Max] = {
-    "lm_0",
-    "lm_1",
-};
+#include <revolution/MTX.h>
 
 /**
  * @brief Lightmap texture file names
@@ -63,11 +56,13 @@ void RPSysKokeshiIcon::SetupModel(RPGrpModel* pModel) {
     EGG::Archive* pCommonArchive = pResourceManager->GetStaticCommonArchive();
 
     for (u8 i = 0; i < ELightMap_Max; i++) {
-        void* pTextureFile = RPSysResourceManager::GetFileFromArchive(
+        void* pTexFile = RPSysResourceManager::GetFileFromArchive(
             pCommonArchive, LIGHT_TEXTURE_FILE_NAMES[i]);
 
-        RPGrpTexture tex(static_cast<EGG::ResTIMG*>(pTextureFile));
-        pModel->ReplaceTexture(LIGHT_TEXTURE_NAMES[i], tex, true);
+        RPGrpTexture tex(static_cast<EGG::ResTIMG*>(pTexFile));
+
+        pModel->ReplaceTexture(RPSysKokeshiManager::GetLightTextureName(i), tex,
+                               true);
     }
 
     if (pModel->GetKind() == RPGrpModel::Kind_RFL) {
@@ -82,6 +77,24 @@ void RPSysKokeshiIcon::SetupModel(RPGrpModel* pModel) {
     if (pModel->GetKind() == RPGrpModel::Kind_RFL) {
         static_cast<RPGrpModelRfl*>(pModel)->SetOutputAlpha(255);
     }
+}
+
+/**
+ * @brief Creates a cap texture for icon rendering
+ *
+ * @param width Texture width
+ * @param height Texture height
+ * @param format Texture format
+ */
+void RPSysKokeshiIcon::InitCapTexture(u16 width, u16 height, GXTexFmt format) {
+    mpCapTexture = new EGG::CapTexture(width, height, format);
+    mpCapTexture->configure();
+
+    mpCapTexture->allocWithHeaderDebug();
+    mpCapTexture->invalidate();
+
+    mpCapTexture->setMinFilter(GX_CLAMP);
+    mpCapTexture->setMagFilter(GX_CLAMP);
 }
 
 /**
@@ -152,19 +165,39 @@ void RPSysKokeshiIcon::SetupCamera(nw4r::g3d::Camera cam, u16 width, u16 height,
 
     cam.SetPerspective(fovy, aspect, 1.0f, 1000.0f);
 
-    if (mGenInfo.GetMipMap()) {
+    if (mGenInfo.GetIconMipMap()) {
         cam.SetScissor(0, 0, width * 2, height * 2);
     } else {
         cam.SetScissor(0, 0, width, height);
     }
 
-    if (mGenInfo.GetMipMap()) {
+    if (mGenInfo.GetIconMipMap()) {
         cam.SetViewport(0.0f, 0.0f, width * 2.0f, height * 2.0f);
         cam.SetViewportZRange(0.0f, 1.0f);
     } else {
         cam.SetViewport(0.0f, 0.0f, width, height);
         cam.SetViewportZRange(0.0f, 1.0f);
     }
+}
+
+/**
+ * @brief Prepares the GP rendering state
+ */
+void RPSysKokeshiIcon::BeginMakeTexture() const {
+    GXSetAlphaCompare(GX_GREATER, 0, GX_AOP_OR, GX_NEVER, 0);
+    GXSetBlendMode(GX_BM_BLEND, GX_BL_SRCALPHA, GX_BL_INVSRCALPHA, GX_LO_COPY);
+
+    GXSetZMode(GX_TRUE, GX_LEQUAL, GX_TRUE);
+    GXSetZCompLoc(GX_FALSE);
+
+    GXSetColorUpdate(GX_TRUE);
+    GXSetAlphaUpdate(GX_TRUE);
+    GXSetDither(GX_FALSE);
+
+    GXSetDstAlpha(GX_FALSE, 0);
+    GXSetNumChans(0);
+
+    nw4r::g3d::G3dReset();
 }
 
 /**
@@ -190,7 +223,337 @@ void RPSysKokeshiIcon::MakeTexture(RPGrpModel* pModel,
     SetupModel(pModel);
     ModifyBgColor(rLocation, width, height, format, bgType, bgColor);
 
-    nw4r::g3d::ScnRoot* pScnRoot = nw4r::g3d::ScnRoot::Construct(pAllocator);
+    nw4r::g3d::ScnRoot* pScnRoot =
+        nw4r::g3d::ScnRoot::Construct(pAllocator, NULL, 32, 256);
+
+    pScnRoot->SetCurrentCamera(0);
+
+    nw4r::g3d::Camera cam = pScnRoot->GetCurrentCamera();
+    SetupCamera(cam, width, height, view);
+
+    BeginMakeTexture();
+    {
+        pScnRoot->Clear();
+        nw4r::g3d::ScnObj* pScnObj = NULL;
+
+        if (pModel->GetKind() == RPGrpModel::Kind_RFL) {
+            pScnObj = pModel->GetScnRfl();
+        } else {
+            pScnObj = pModel->GetScnMdlSimple();
+        }
+
+        pScnRoot->PushBack(pScnObj);
+
+        pScnRoot->CalcWorld();
+        pScnRoot->CalcMaterial();
+        pScnRoot->CalcView();
+
+        pScnRoot->GatherDrawScnObj();
+        pScnRoot->ZSort();
+        pScnRoot->DrawOpa();
+        pScnRoot->DrawXlu();
+    }
+    EndMakeTexture();
+
+    mpCapTexture->enableColorUpdate();
+    mpCapTexture->enableAlphaUpdate();
+
+    GXColor black = {0, 0, 0, 0};
+    mpCapTexture->setClearColor(black);
+
+    mpCapTexture->enableZBufferUpdate();
+    mpCapTexture->setClearZ(GX_CLEAR_Z_MAX);
+
+    mpCapTexture->disableVFilter();
+    mpCapTexture->enablePixModeSync();
+
+    if (mGenInfo.GetIconMipMap()) {
+        mpCapTexture->capture(0, 0, true);
+    } else {
+        mpCapTexture->capture(0, 0, false);
+    }
+
+    mpCapTexture->flush();
+}
+
+/**
+ * @brief Finalizes the GP rendering state
+ */
+void RPSysKokeshiIcon::EndMakeTexture() const {
+    GXDrawDone();
+}
+
+/**
+ * @brief Renders an outline in the icon around the Mii's face
+ */
+void RPSysKokeshiIcon::MakeEdge() {
+    nw4r::math::MTX34 proj;
+    C_MTXOrtho(proj, 0.0f, mGenInfo.GetIconWidth(), 0.0f,
+               mGenInfo.GetIconHeight(), -10000.0f, 10000.0f);
+
+    GXSetProjection(proj, GX_ORTHOGRAPHIC);
+
+    GXSetCullMode(GX_CULL_BACK);
+
+    GXSetNumChans(1);
+    GXSetChanCtrl(GX_COLOR0A0, GX_FALSE, GX_SRC_REG, GX_SRC_REG, GX_LIGHT_NULL,
+                  GX_DF_CLAMP, GX_AF_SPOT);
+    GXSetChanCtrl(GX_COLOR1A1, GX_FALSE, GX_SRC_VTX, GX_SRC_VTX, GX_LIGHT_NULL,
+                  GX_DF_NONE, GX_AF_NONE);
+
+    GXSetNumTexGens(1);
+    GXSetTexCoordGen(GX_TEXCOORD0, GX_TG_MTX2x4, GX_TG_TEX0, GX_IDENTITY);
+
+    GXSetNumIndStages(0);
+    GXSetIndTexOrder(GX_INDTEXSTAGE0, GX_TEXCOORD1, GX_TEXMAP1);
+    GXSetIndTexCoordScale(GX_INDTEXSTAGE0, GX_ITS_1, GX_ITS_1);
+
+    GXSetNumTevStages(1);
+    GXSetTevDirect(GX_TEVSTAGE0);
+    GXSetTevOrder(GX_TEVSTAGE0, GX_TEXCOORD0, GX_TEXMAP0, GX_COLOR0A0);
+    GXSetTevSwapMode(GX_TEVSTAGE0, GX_TEV_SWAP0, GX_TEV_SWAP0);
+
+    GXSetAlphaCompare(GX_ALWAYS, 0, GX_AOP_OR, GX_ALWAYS, 0);
+    GXSetZMode(GX_FALSE, GX_ALWAYS, GX_FALSE);
+    GXSetBlendMode(GX_BM_BLEND, GX_BL_SRCALPHA, GX_BL_INVSRCALPHA, GX_LO_CLEAR);
+
+    GXSetAlphaUpdate(GX_TRUE);
+    GXSetColorUpdate(GX_TRUE);
+
+    GXClearVtxDesc();
+    GXSetVtxDesc(GX_VA_POS, GX_DIRECT);
+    GXSetVtxDesc(GX_VA_TEX0, GX_DIRECT);
+
+    GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_POS, GX_POS_XYZ, GX_F32, 0);
+    GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_TEX0, GX_TEX_ST, GX_F32, 0);
+
+    RPGrpTexture tex(GetResTIMG());
+    GXLoadTexObj(&tex.GetTexObj(), GX_TEXMAP0);
+
+    nw4r::math::MTX34 ident;
+    nw4r::math::MTX34Identity(&ident);
+    GXLoadPosMtxImm(ident, GX_PNMTX0);
+    GXLoadNrmMtxImm(ident, GX_PNMTX0);
+
+    GXSetChanMatColor(GX_COLOR0A0, mGenInfo.GetIconEdgeColor());
+
+    GXSetTevColorIn(GX_TEVSTAGE0, GX_CC_ZERO, GX_CC_ZERO, GX_CC_ZERO,
+                    GX_CC_RASC);
+    GXSetTevColorOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1,
+                    GX_TRUE, GX_TEVPREV);
+
+    GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_TEXA, GX_CA_ZERO, GX_CA_KONST,
+                    GX_CA_ZERO);
+    GXSetTevAlphaOp(GX_TEVSTAGE0, GX_TEV_COMP_A8_GT, GX_TB_ZERO, GX_CS_SCALE_1,
+                    GX_TRUE, GX_TEVPREV);
+
+    //
+    // Draw edge outline
+    //
+
+    f32 angle = 0.0f;
+    f32 step = 90.0f / static_cast<f32>(mGenInfo.GetIconEdgeWidth());
+
+    while (angle < 360.0f) {
+        // clang-format off
+        f32 x2 = mGenInfo.GetIconWidth() + nw4r::math::CosDeg(angle) * mGenInfo.GetIconEdgeWidth();
+        f32 x1 = nw4r::math::CosDeg(angle) * mGenInfo.GetIconEdgeWidth();
+        f32 y2 = mGenInfo.GetIconHeight() + nw4r::math::SinDeg(angle) * mGenInfo.GetIconEdgeWidth();
+        f32 y1 = nw4r::math::SinDeg(angle) * mGenInfo.GetIconEdgeWidth();
+        // clang-format on
+
+        GXBegin(GX_QUADS, GX_VTXFMT0, 4);
+        {
+            GXPosition3f32(x1, y1, 0.0f);
+            GXTexCoord2f32(0.0f, 0.0f);
+
+            GXPosition3f32(x2, y1, 0.0f);
+            GXTexCoord2f32(1.0f, 0.0f);
+
+            GXPosition3f32(x2, y2, 0.0f);
+            GXTexCoord2f32(1.0f, 1.0f);
+
+            GXPosition3f32(x1, y2, 0.0f);
+            GXTexCoord2f32(0.0f, 1.0f);
+        }
+        GXEnd();
+
+        angle += step;
+    }
+
+    //
+    // Draw icon background
+    //
+
+    GXColor bgColor = mGenInfo.GetIconBGColor();
+
+    if (mGenInfo.GetIconBGType() == RFLIconBG_Favorite) {
+        RPSysKokeshiLocation location = mGenInfo.GetLocation();
+        RFLAdditionalInfo info;
+
+        RP_GET_INSTANCE(RPSysKokeshiManager)
+            ->GetAdditionalInfo(location, &info);
+
+        bgColor =
+            RFLGetFavoriteColor(static_cast<RFLFavoriteColor>(info.color));
+    }
+
+    bgColor.a = 0;
+    GXSetChanMatColor(GX_COLOR0A0, bgColor);
+
+    {
+        f32 w = mGenInfo.GetIconWidth();
+        f32 h = mGenInfo.GetIconHeight();
+
+        GXBegin(GX_QUADS, GX_VTXFMT0, 4);
+        {
+            GXPosition3f32(0.0f, 0.0f, 0.0f);
+            GXTexCoord2f32(0.0f, 0.0f);
+
+            GXPosition3f32(w, 0.0f, 0.0f);
+            GXTexCoord2f32(1.0f, 0.0f);
+
+            GXPosition3f32(w, h, 0.0f);
+            GXTexCoord2f32(1.0f, 1.0f);
+
+            GXPosition3f32(0.0f, h, 0.0f);
+            GXTexCoord2f32(0.0f, 1.0f);
+        }
+        GXEnd();
+    }
+
+    //
+    // Draw icon face texture
+    //
+
+    GXColor white = {255, 255, 255, 255};
+    GXSetChanMatColor(GX_COLOR0A0, white);
+
+    GXSetTevColorIn(GX_TEVSTAGE0, GX_CC_ZERO, GX_CC_TEXC, GX_CC_RASC,
+                    GX_CC_ZERO);
+    GXSetTevColorOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1,
+                    GX_TRUE, GX_TEVPREV);
+
+    GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_ZERO, GX_CA_TEXA, GX_CA_RASA,
+                    GX_CA_ZERO);
+    GXSetTevAlphaOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1,
+                    GX_TRUE, GX_TEVPREV);
+
+    {
+        f32 w = mGenInfo.GetIconWidth();
+        f32 h = mGenInfo.GetIconHeight();
+
+        GXBegin(GX_QUADS, GX_VTXFMT0, 4);
+        {
+            GXPosition3f32(0.0f, 0.0f, 0.0f);
+            GXTexCoord2f32(0.0f, 0.0f);
+
+            GXPosition3f32(w, 0.0f, 0.0f);
+            GXTexCoord2f32(1.0f, 0.0f);
+
+            GXPosition3f32(w, h, 0.0f);
+            GXTexCoord2f32(1.0f, 1.0f);
+
+            GXPosition3f32(0.0f, h, 0.0f);
+            GXTexCoord2f32(0.0f, 1.0f);
+        }
+        GXEnd();
+    }
+
+    //
+    // ???
+    //
+
+    GXSetColorUpdate(GX_FALSE);
+    GXSetAlphaUpdate(GX_TRUE);
+    GXSetBlendMode(GX_BM_BLEND, GX_BL_ONE, GX_BL_ZERO, GX_LO_CLEAR);
+
+    GXClearVtxDesc();
+    GXSetVtxDesc(GX_VA_POS, GX_DIRECT);
+    GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_POS, GX_POS_XYZ, GX_F32, 0);
+
+    GXSetChanMatColor(GX_COLOR0A0, mGenInfo.GetIconEdgeColor());
+
+    GXSetTevColorIn(GX_TEVSTAGE0, GX_CC_ZERO, GX_CC_ZERO, GX_CC_ZERO,
+                    GX_CC_RASC);
+    GXSetTevColorOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1,
+                    GX_TRUE, GX_TEVPREV);
+
+    GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_ZERO, GX_CA_ZERO, GX_CA_ZERO,
+                    GX_CA_RASA);
+    GXSetTevAlphaOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, TRUE,
+                    GX_TEVPREV);
+
+    {
+        f32 w = mGenInfo.GetIconWidth();
+        f32 t = mGenInfo.GetIconEdgeWidth();
+
+        GXBegin(GX_QUADS, GX_VTXFMT0, 4);
+        {
+            GXPosition3f32(0.0f, 0.0f, 0.0f);
+            GXPosition3f32(w, 0.0f, 0.0f);
+            GXPosition3f32(w, t, 0.0f);
+            GXPosition3f32(0.0f, t, 0.0f);
+        }
+        GXEnd();
+    }
+
+    {
+        f32 w = mGenInfo.GetIconWidth();
+        f32 h = mGenInfo.GetIconHeight();
+        f32 b = mGenInfo.GetIconWidth() - mGenInfo.GetIconEdgeWidth();
+
+        GXBegin(GX_QUADS, GX_VTXFMT0, 4);
+        {
+            GXPosition3f32(h, 0.0f, 0.0f);
+            GXPosition3f32(w, 0.0f, 0.0f);
+            GXPosition3f32(w, b, 0.0f);
+            GXPosition3f32(h, b, 0.0f);
+        }
+        GXEnd();
+    }
+
+    {
+        f32 w = mGenInfo.GetIconWidth();
+        f32 h = mGenInfo.GetIconHeight();
+        f32 l = mGenInfo.GetIconHeight() - mGenInfo.GetIconEdgeWidth();
+
+        GXBegin(GX_QUADS, GX_VTXFMT0, 4);
+        {
+            GXPosition3f32(0.0f, l, 0.0f);
+            GXPosition3f32(w, l, 0.0f);
+            GXPosition3f32(w, h, 0.0f);
+            GXPosition3f32(0.0f, h, 0.0f);
+        }
+        GXEnd();
+    }
+
+    {
+        f32 w = mGenInfo.GetIconEdgeWidth();
+        f32 r = mGenInfo.GetIconHeight();
+
+        GXBegin(GX_QUADS, GX_VTXFMT0, 4);
+        {
+            GXPosition3f32(0.0f, 0.0f, 0.0f);
+            GXPosition3f32(w, 0.0f, 0.0f);
+            GXPosition3f32(w, r, 0.0f);
+            GXPosition3f32(0.0f, r, 0.0f);
+        }
+        GXEnd();
+    }
+
+    GXDrawDone();
+
+    mpCapTexture->disableVFilter();
+    mpCapTexture->enablePixModeSync();
+
+    if (mGenInfo.GetIconMipMap()) {
+        mpCapTexture->capture(0, 0, true);
+    } else {
+        mpCapTexture->capture(0, 0, false);
+    }
+
+    mpCapTexture->flush();
 }
 
 /**
@@ -207,7 +570,7 @@ void RPSysKokeshiIcon::ModifyBgColor(const RPSysKokeshiLocation& rLocation,
                                      u16 width, u16 height, GXTexFmt format,
                                      RFLIconBGType bgType, GXColor bgColor) {
 
-    EGG::ResTIMG* pResTIMG = mpCapTexture->getResTIMG();
+    EGG::ResTIMG* pResTIMG = GetResTIMG();
 
     if (bgType == RFLIconBG_Favorite) {
         RFLAdditionalInfo info;
@@ -231,7 +594,7 @@ void RPSysKokeshiIcon::ModifyBgColor(const RPSysKokeshiLocation& rLocation,
     GXSetCopyFilter(GX_FALSE, NULL, GX_FALSE, NULL);
     GXSetCopyClamp(GX_CLAMP_ALL);
 
-    if (mGenInfo.GetMipMap()) {
+    if (mGenInfo.GetIconMipMap()) {
         GXSetTexCopySrc(0, 0, width * 2, height * 2);
         GXSetTexCopyDst(width, height, format, GX_TRUE);
     } else {
@@ -256,17 +619,8 @@ void RPSysKokeshiIcon::Construct() {
     (void)pSystem->getFBWidth();
     (void)pSystem->getFBHeight();
 
-    u16 height = mGenInfo.GetIconHeight();
-    u16 width = mGenInfo.GetIconWidth();
-
-    mpCapTexture = new EGG::CapTexture(width, height, GX_TF_RGB5A3);
-    mpCapTexture->configure();
-
-    mpCapTexture->allocWithHeaderDebug();
-    mpCapTexture->invalidate();
-
-    mpCapTexture->setMinFilter(GX_CLAMP);
-    mpCapTexture->setMagFilter(GX_CLAMP);
+    InitCapTexture(mGenInfo.GetIconWidth(), mGenInfo.GetIconHeight(),
+                   GX_TF_RGB5A3);
 
     EGG::Heap* pOldHeap = EGG::Heap::getCurrentHeap();
     EGG::Allocator* pOldAllocator = RPGrpModel::GetAllocator();
@@ -323,7 +677,7 @@ void RPSysKokeshiIcon::Construct() {
     RPGrpModel* pNigaoeModel = pKokeshiManager->CreateNigaoeModel(
         location,
         resolution,
-        ((1 << mGenInfo.GetIconExpression()) & ALLOWED_EXPFLAG) | RFLExpFlag_Normal,
+        (1 << mGenInfo.GetIconExpression()) | RFLExpFlag_Normal,
         1);
     // clang-format on
 
@@ -347,7 +701,7 @@ void RPSysKokeshiIcon::Construct() {
         MakeEdge();
     }
 
-    pKokeshiManager->CreateTexture(mpCapTexture->getResTIMG());
+    pKokeshiManager->CreateTexture(GetResTIMG());
     pNigaoeModel->RemoveGenList();
 
     // Restore original management

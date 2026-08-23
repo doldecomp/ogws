@@ -52,7 +52,7 @@ void RPSysKokeshi::LoadResource(const RPSysKokeshiOverloadInfo* pOverloadInfo) {
         mAdditionalInfo.height, mAdditionalInfo.build);
 
     mpBodyModel = pKokeshiManager->CreateModel(
-        pBodyFile, bodyIdx, mGenInfo.GetViewNo(), mGenInfo.GetModelFlags(),
+        pBodyFile, bodyIdx, mGenInfo.GetViewNo(), mGenInfo.GetTypeOption(),
         mGenInfo.GetBufferOption());
 
     // Open the hand archive
@@ -64,11 +64,11 @@ void RPSysKokeshi::LoadResource(const RPSysKokeshiOverloadInfo* pOverloadInfo) {
 
     // Create the hand models
     mpLeftHandModel = pKokeshiManager->CreateModel(
-        pHandFile, 0, mGenInfo.GetViewNo(), mGenInfo.GetModelFlags(),
+        pHandFile, 0, mGenInfo.GetViewNo(), mGenInfo.GetTypeOption(),
         mGenInfo.GetBufferOption());
 
     mpRightHandModel = pKokeshiManager->CreateModel(
-        pHandFile, 0, mGenInfo.GetViewNo(), mGenInfo.GetModelFlags(),
+        pHandFile, 0, mGenInfo.GetViewNo(), mGenInfo.GetTypeOption(),
         mGenInfo.GetBufferOption());
 
     // Assign random clothes if requested via the overload info

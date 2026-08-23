@@ -29,9 +29,9 @@ private:
 
     //! Renderer view ID
     u8 mViewNo; // at 0x20
-
-    u32 mModelFlags; // at 0x24
-
+    //! RP model type option flags
+    u32 mTypeOption; // at 0x24
+    //! NW4R model buffer option flags
     u32 mBufferOption; // at 0x28
 
     //! Texture width for icons
@@ -45,7 +45,7 @@ private:
     u32 mExprFlag; // at 0x34
 
     // Use mipmapping to downscale the icon texture
-    BOOL mMipMap; // at 0x38
+    BOOL mIconMipMap; // at 0x38
     //! Background type to use for icons
     RFLIconBGType mIconBGType; // at 0x3C
     //! Background color to use for icons
@@ -56,9 +56,10 @@ private:
     RFLExpression mIconExpression; // at 0x48
     //! Whether to draw an outline around icons
     BOOL mIconEdge; // at 0x4C
-
-    GXColor unk50;
-    u16 unk54;
+    //! Edge color to use for icons
+    GXColor mIconEdgeColor; // at 0x50
+    //! Width of the edge outline for icons
+    u16 mIconEdgeWidth; // at 0x54
 
 public:
     /**
@@ -106,11 +107,11 @@ public:
         mViewNo = viewNo;
     }
 
-    u32 GetModelFlags() const {
-        return mModelFlags;
+    u32 GetTypeOption() const {
+        return mTypeOption;
     }
-    void SetModelFlags(u32 modelFlags) {
-        modelFlags = modelFlags;
+    void SetTypeOption(u32 typeOption) {
+        mTypeOption = typeOption;
     }
 
     u32 GetBufferOption() const {
@@ -148,11 +149,11 @@ public:
         mExprFlag = exprFlag;
     }
 
-    bool GetMipMap() const {
-        return mMipMap;
+    bool GetIconMipMap() const {
+        return mIconMipMap;
     }
-    void SetMipMap(bool mipMap) {
-        mMipMap = mipMap;
+    void SetIconMipMap(bool mipMap) {
+        mIconMipMap = mipMap;
     }
 
     RFLIconBGType GetIconBGType() const {
@@ -188,6 +189,20 @@ public:
     }
     void SetIconEdge(bool edge) {
         mIconEdge = edge;
+    }
+
+    const GXColor& GetIconEdgeColor() const {
+        return mIconEdgeColor;
+    }
+    void SetIconEdgeColor(const GXColor& rColor) {
+        mIconEdgeColor = rColor;
+    }
+
+    u16 GetIconEdgeWidth() const {
+        return mIconEdgeWidth;
+    }
+    void SetIconEdgeWidth(u16 width) {
+        mIconEdgeWidth = width;
     }
 
     const RPSysKokeshiLocation& GetLocation() const {

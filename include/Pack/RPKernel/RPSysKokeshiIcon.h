@@ -19,7 +19,7 @@
 //! @{
 
 /**
- * @brief Mii icon texture
+ * @brief Mii face icon
  */
 class RPSysKokeshiIcon : public RPSysAvatar {
 public:
@@ -51,28 +51,44 @@ public:
      *
      * @param pOverloadInfo Overload parameters
      */
-    virtual void LoadResource(
-        const RPSysKokeshiOverloadInfo* pOverloadInfo = NULL); // at 0xC
+    virtual void LoadResource(const RPSysKokeshiOverloadInfo* pOverloadInfo =
+                                  NULL) override; // at 0xC
 
     /**
      * @brief Applies all lightmap textures to this avatar
      *
      * @param drawScene Draw scene index
      */
-    virtual void ApplyLightTexture(u8 drawScene); // at 0x10
+    virtual void ApplyLightTexture(u8 drawScene) override; // at 0x10
 
     /**
      * @brief Gets the texture created for this icon
      */
     EGG::ResTIMG* GetResTIMG();
 
-protected:
+    /**
+     * @brief Gets the Mii capture texture
+     */
+    EGG::CapTexture* GetCapTexture() const {
+        return mpCapTexture;
+    }
+
+private:
     /**
      * @brief Configures a model for use with icon rendering
      *
      * @param pModel Mii model
      */
     static void SetupModel(RPGrpModel* pModel);
+
+    /**
+     * @brief Creates a cap texture for icon rendering
+     *
+     * @param width Texture width
+     * @param height Texture height
+     * @param format Texture format
+     */
+    void InitCapTexture(u16 width, u16 height, GXTexFmt format);
 
     /**
      * @brief Configures a NW4R camera to capture view this icon's model
@@ -84,6 +100,11 @@ protected:
      */
     void SetupCamera(nw4r::g3d::Camera cam, u16 width, u16 height,
                      RPSysKokeshiManager::IconView view);
+
+    /**
+     * @brief Prepares the GP rendering state
+     */
+    void BeginMakeTexture() const;
 
     /**
      * @brief Renders this icon and captures it to a texture
@@ -103,6 +124,14 @@ protected:
                      GXTexFmt format, RFLIconBGType bgType, GXColor bgColor,
                      RPSysKokeshiManager::IconView view);
 
+    /**
+     * @brief Finalizes the GP rendering state
+     */
+    void EndMakeTexture() const;
+
+    /**
+     * @brief Renders an outline in the icon around the Mii's face
+     */
     void MakeEdge();
 
     /**
@@ -125,14 +154,6 @@ protected:
     void Construct();
 
 private:
-    //! Expression flags allowed for icons (OpenMouth disabled)
-    static const u32 ALLOWED_EXPFLAG = RFLExpFlag_Normal | RFLExpFlag_Smile |
-                                       RFLExpFlag_Anger | RFLExpFlag_Sorrow |
-                                       RFLExpFlag_Surprise | RFLExpFlag_Blink;
-
-private:
-    //! Lightmap texture names
-    static const char* LIGHT_TEXTURE_NAMES[ELightMap_Max];
     //! Lightmap texture file names
     static const char* LIGHT_TEXTURE_FILE_NAMES[ELightMap_Max];
 
