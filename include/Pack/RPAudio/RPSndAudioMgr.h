@@ -459,6 +459,13 @@ public:
         return mPlayerNum;
     }
 
+    /**
+     * @brief Accesses the static sound archive manager
+     */
+    RPSndStaticMgr& getStaticMgr() {
+        return mStaticMgr;
+    }
+
 private:
     /**
      * @brief Audio manager flags

@@ -63,7 +63,7 @@ void RPSndStaticMgr::calc() {
         rTask.valid = false;
     }
 
-    ArcPlayer::calc();
+    EGG::ArcPlayer::calc();
 }
 
 /**

@@ -2,7 +2,6 @@
 #define RP_KERNEL_CONTROLLER_MGR_H
 #include <Pack/types_pack.h>
 
-#include <Pack/RPKernel/RPSysController.h>
 #include <Pack/RPSingleton.h>
 
 #include <egg/core.h>
@@ -17,14 +16,14 @@ class RPSysCoreController;
 class RPSysPairingMgr;
 
 /**
- * @brief Pack Project controller manager
+ * @brief Wii Remote controller manager
  */
 class RPSysCoreControllerMgr : public EGG::CoreControllerMgr {
     RP_SINGLETON_DECL(RPSysCoreControllerMgr);
 
 public:
     /**
-     * @brief Instantiates the controller manager singleton
+     * @brief Initializes the controller manager singleton
      */
     static void create();
 
@@ -43,48 +42,86 @@ public:
      *
      * @param chan Remote channel
      */
-    RPSysCoreController* getNthController(s32 chan) const;
+    RPSysCoreController* findController(s32 chan) const;
 
+    /**
+     * @brief Prepares the controller system for a scene reset
+     */
     void sceneReset();
 
     /**
-     * @brief Enables automatic controller pairing
+     * @brief Enables pairing of controllers
      */
-    void startPairing() const;
+    void enableConnection() const;
 
     /**
-     * @brief Disables automatic controller pairing
+     * @brief Disables pairing of controllers
      */
-    void stopPairing() const;
+    void disableConnection() const;
 
-    static u32 isDpdCtrlEnable(s32 chan) {
+    /**
+     * @brief Tests whether DPD control is enabled for the specified remote
+     * channel
+     *
+     * @param chan Remote channel
+     */
+    static bool isDpdCtrlEnable(s32 chan) {
         return sDpdCtrlEnableFlag & (1 << chan);
     }
 
-    static RPSysCoreController* getNthController(int index) {
-        EGG::CoreController* pController =
-            EGG_GET_INSTANCE(EGG::CoreControllerMgr)->getNthController(index);
-
-        return static_cast<RPSysCoreController*>(pController);
-    }
-
 private:
+    /**
+     * @brief Controller search type
+     */
+    enum ESearchType {
+        ESearchType_Address, //!< Find controllers by their address
+        ESearchType_Channel, //!< Find controllers by their remote channel
+    };
+
     //! Required work memory size
     static const u32 MIN_WORK_SIZE = 0x100000;
 
 private:
+    /**
+     * @brief Controller connect callback
+     *
+     * @param rArg Callback argument
+     */
     static void connectCallback(const EGG::CoreControllerConnectArg& rArg);
+
+    /**
+     * @brief WPAD clear device callback
+     *
+     * @param result WPAD sync result
+     */
     static void clearDeviceCallback(s32 result);
+
+    /**
+     * @brief WPAD DPD control callback
+     *
+     * @param chan Remote channel
+     * @param result WPAD DPD command
+     */
     static void controlDpdCallback(s32 chan, s32 result);
 
 private:
-    static u16 sCtrlConnectedFlag;
-    static u16 sPrevCtrlConnectedFlag;
+    //! Bitfield of controllers currently connected
+    static u16 sConnectionFlag;
+    //! Bitfield of controllers connected during the previous frame
+    static u16 sPrevConnectionFlag;
+
+    //! Bitfield of controllers with DPD control enabled
     static u16 sDpdCtrlEnableFlag;
+
+    //! Whether WPADClearDevice has completed
     static bool sClearDeviceFlag;
 
-    // at 0x34
+    char unk30[0x60 - 0x30];
 
+    //! Controller search type
+    ESearchType mSearchType; // at 0x60
+
+    //! Controller pairing manager
     RPSysPairingMgr* mpPairingMgr; // at 0x64
 };
 

@@ -305,7 +305,7 @@ void RPSndAudioMgr::calc() {
             }
         }
 
-        SimpleAudioMgr::calc();
+        EGG::SimpleAudioMgr::calc();
     }
 
     RP_GET_INSTANCE(RPSndSpeakerMgr)->calc();
@@ -659,11 +659,8 @@ void RPSndAudioMgr::startPauseSe(const char* pNameRemote, const char* pNameTV,
 
     mPauseSePlayerFlag = 1 << player;
     mPauseSeChan = chan;
+    mPauseSePrevDpdEnable = RP_GET_CORE_CTRL(player)->isPrevDpdCtrlEnable();
 
-    RPSysCoreController* pController =
-        RPSysCoreControllerMgr::getNthController(player);
-
-    mPauseSePrevDpdEnable = pController->isPrevDpdCtrlEnable();
     DAT_804bf648 = 0;
 }
 

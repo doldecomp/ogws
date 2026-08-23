@@ -186,10 +186,9 @@ bool RPSysPlayerMgr::isValidOldData() {
                     continue;
                 }
 
-                RPSysCoreController* pController =
-                    RPSysCoreControllerMgr::getNthController(player);
+                if (RP_GET_CORE_CTRL(player)->getAddress().isEqual(
+                        mpOldData[j].address)) {
 
-                if (pController->getAddress() == mpOldData[j].address) {
                     found++;
                     mpOldData[i] = RPSysPlayerOldData(mpOldData[j]);
                     break;
@@ -278,11 +277,7 @@ void RPSysPlayerMgr::calcOldData() {
             mpOldData[i + absIdx].dataSource = mpPlayers[i].getDataSource();
             mpOldData[i + absIdx].index = mpPlayers[i].getIndex();
             mpOldData[i + absIdx].createID = mpPlayers[i].getCreateID();
-
-            RPSysCoreController* pController =
-                RPSysCoreControllerMgr::getNthController(i);
-
-            mpOldData[i + absIdx].address = pController->getAddress();
+            mpOldData[i + absIdx].address = RP_GET_CORE_CTRL(i)->getAddress();
         }
     }
 }
@@ -385,7 +380,7 @@ void RPSysPlayerMgr::saveOldData() {
 
             u8 addr[WPAD_ADDR_LEN];
             for (int k = 0; k < WPAD_ADDR_LEN; k++) {
-                addr[k] = mpOldData[currIdx].address[k];
+                addr[k] = mpOldData[currIdx].address.get(k);
             }
 
 #if defined(PACK_SPORTS)

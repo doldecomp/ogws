@@ -121,10 +121,10 @@ public:
     }
 
     bool isCore() const {
-        return getDevType() == WPAD_DEV_CORE || isFreestyle();
+        return getDevType() == cDEV_CORE || isFreestyle();
     }
     bool isFreestyle() const {
-        return getDevType() == WPAD_DEV_FREESTYLE;
+        return getDevType() == cDEV_FREESTYLE;
     }
 
     s8 getDPDValidFlag() const {
@@ -221,17 +221,18 @@ public:
     void startMotor();
     void stopMotor();
 
-    void createRumbleMgr(u8 overlap_num);
-    void startPatternRumble(const char* pPattern, int frame, bool force);
-    void startPowerFrameRumble(f32 power, int frame, bool force);
+    void createRumbleMgr(u8 overlap_num = 1);
+    void startPatternRumble(const char* pPattern, int frame,
+                            bool force = false);
+    void startPowerFrameRumble(f32 power, int frame, bool force = false);
     void stopRumbleMgr();
 
     CoreStatus* getCoreStatus(int index);
     CoreStatus* getCoreStatus() {
-        return getCoreStatus(0);
+        return &mCoreStatus[0];
     }
 
-private:
+protected:
     enum StableAxis {
         STABLE_AXIS_X,
         STABLE_AXIS_Y,
@@ -248,10 +249,10 @@ private:
         STABLE_FLAG_XYZ = STABLE_FLAG_X | STABLE_FLAG_Y | STABLE_FLAG_Z
     };
 
-private:
+protected:
     void calc_posture_matrix(Matrix34f& rPostureMtx, bool checkStable);
 
-private:
+protected:
     s32 mChannelID; // at 0x4
 
     u32 mFSStickHold;    // at 0x8
@@ -307,6 +308,10 @@ public:
     virtual void endFrame();   // at 0xC
 
     CoreController* getNthController(int index);
+
+    static void setCoreControllerFactory(CoreControllerFactory pFactory) {
+        sCoreControllerFactory = pFactory;
+    }
 
     static void setConnectCallback(CoreControllerConnectCallback pCallback) {
         sConnectCallback = pCallback;

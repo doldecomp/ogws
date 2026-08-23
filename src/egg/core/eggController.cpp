@@ -74,7 +74,8 @@ void CoreController::sceneReset() {
 
     mStableAccel.set(0.0, 0.0, 0.0);
     mStableFlags = 0;
-    mStableTimer[0] = mStableTimer[1] = mStableTimer[2] = 0;
+    mStableTimer[STABLE_AXIS_X] = mStableTimer[STABLE_AXIS_Y] =
+        mStableTimer[STABLE_AXIS_Z] = 0;
 
     mSimpleRumblePattern = 0;
     mSimpleRumbleFrame = 0;
@@ -230,7 +231,7 @@ void CoreController::beginFrame(PADStatus* pStatus) {
     calc_posture_matrix(mPostureMtx, true);
 
     if (mEnableSimpleRumble) {
-        if (mSimpleRumblePattern & (1 << mSimpleRumbleIndex)) {
+        if (mSimpleRumblePattern & 1 << mSimpleRumbleIndex) {
             startMotor();
         } else {
             stopMotor();

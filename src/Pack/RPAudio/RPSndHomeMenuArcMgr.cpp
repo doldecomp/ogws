@@ -32,5 +32,5 @@ void RPSndHomeMenuArcMgr::calc() {
         return;
     }
 
-    ArcPlayer::calc();
+    EGG::ArcPlayer::calc();
 }

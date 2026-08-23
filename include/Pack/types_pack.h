@@ -14,18 +14,27 @@ typedef u16 RPTime16;
  */
 typedef u32 RPTime32;
 
-/**
- * @brief Maximum number of connected remotes
- */
+//! Maximum number of connected remotes
 #define RP_MAX_CONTROLLERS 4
 
-/**
- * @brief Maximum number of players
- */
+//! Maximum number of players in Wii Sports
+#define RP_SPORTS_MAX_PLAYERS 4
+//! Maximum number of players in Wii Play
+#define RP_PARTY_MAX_PLAYERS 2
+//! Maximum number of players in Wii Fit
+#define RP_HEALTH_MAX_PLAYERS 2
+//! Maximum number of players in Wii Music
+#define RP_MUSIC_MAX_PLAYERS 2
+
+//! Maximum number of players in the current pack
 #if defined(PACK_SPORTS)
-#define RP_MAX_PLAYERS 4
+#define RP_MAX_PLAYERS RP_SPORTS_MAX_PLAYERS
 #elif defined(PACK_PARTY)
-#define RP_MAX_PLAYERS 2
+#define RP_MAX_PLAYERS RP_PARTY_MAX_PLAYERS
+#elif defined(PACK_HEALTH)
+#define RP_MAX_PLAYERS RP_HEALTH_MAX_PLAYERS
+#elif defined(MUSIC_HEALTH)
+#define RP_MAX_PLAYERS RP_MUSIC_MAX_PLAYERS
 #endif
 
 /**
