@@ -1,5 +1,7 @@
 #include <Pack/RPKernel.h>
 
+#include <egg/core.h>
+
 #include <revolution/KPAD.h>
 #include <revolution/WPAD.h>
 
