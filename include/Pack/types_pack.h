@@ -33,7 +33,7 @@ typedef u32 RPTime32;
 #define RP_MAX_PLAYERS RP_PARTY_MAX_PLAYERS
 #elif defined(PACK_HEALTH)
 #define RP_MAX_PLAYERS RP_HEALTH_MAX_PLAYERS
-#elif defined(MUSIC_HEALTH)
+#elif defined(PACK_MUSIC)
 #define RP_MAX_PLAYERS RP_MUSIC_MAX_PLAYERS
 #endif
 
