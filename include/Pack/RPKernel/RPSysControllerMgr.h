@@ -6,8 +6,6 @@
 
 #include <egg/core.h>
 
-#include <revolution/WPAD.h>
-
 //! @addtogroup rp_kernel
 //! @{
 
