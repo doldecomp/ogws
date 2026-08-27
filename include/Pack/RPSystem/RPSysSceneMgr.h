@@ -20,32 +20,6 @@ class RPSysSceneMgr : public EGG::SceneManager {
 
 public:
     /**
-<<<<<<< HEAD
-     * @brief 
-     * Gives system status. Indicates if an error has occurred
-     */
-    enum ApplicationStatus {
-        NORMAL_STATUS,
-        RESET_STATUS,
-        UNK2_STATUS,
-        MENU_RETURN_STATUS,
-        SHUTTING_DOWN_STATUS
-    };
-    bool isShutDownReserved() const;
-    bool isDvdErrorApplicationEnd() const;
-    bool isNormalState();
-
-    RPSysScene* getCurrentSceneRP() const;
-
-    void shutdownSystem(BOOL pBlack);
-    BOOL returnToMenu(BOOL pBlack);
-    void softReset(BOOL pFade);
-
-private:
-    char mPlaceholder[4];
-    ApplicationStatus mApplicationStatus;
-    EGG::ColorFader* mColorFader;
-=======
      * @brief Performs a soft reset
      *
      * @param skipFade Whether to skip the fade to black (for HBM)
@@ -233,7 +207,6 @@ private:
     void updateState();
 
     RPSysScene* getCurrentSceneRP() const;
->>>>>>> 15d86d66 (type shit..)
 };
 
 //! @}
