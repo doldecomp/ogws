@@ -60,7 +60,7 @@ const RPSysSceneCreator::SceneAttr RPSysSceneCreator::SCENE_ATTR_TABLE[] = {
     {ESceneID_RPPnpScene,                   EPackID_PartyPack,  ECreateType_Sibling,  ELoadType_Blank, EExitType_Standard, EAudioType_Scene,  "RPPnpScene/",           /* Table Tennis                 */ "卓球"},
     {ESceneID_RPBilScene,                   EPackID_PartyPack,  ECreateType_Sibling,  ELoadType_Blank, EExitType_Standard, EAudioType_Scene,  "RPBilScene/",           /* Billiards                    */ "ビリヤード"},
     {ESceneID_RPCowScene,                   EPackID_PartyPack,  ECreateType_Sibling,  ELoadType_Blank, EExitType_Standard, EAudioType_Scene,  "RPCowScene/",           /* Cow Race                     */ "牛レース"},
-    {ESceneID_RPWlyScene,                   EPackID_PartyPack,  ECreateType_Sibling,  ELoadType_Blank, EExitType_Standard, EAudioType_Scene,  "RPWlyScene/",           /* Wally                        */ "ウォーリー  "},
+    {ESceneID_RPWlyScene,                   EPackID_PartyPack,  ECreateType_Sibling,  ELoadType_Blank, EExitType_Standard, EAudioType_Scene,  "RPWlyScene/",           /* Wally                        */ "ウォーリー"},
     {ESceneID_RPTnkScene,                   EPackID_PartyPack,  ECreateType_Sibling,  ELoadType_Blank, EExitType_Standard, EAudioType_Scene,  "RPTnkScene/",           /* Tank                         */ "タンク"},
     {ESceneID_RPBomScene,                   EPackID_PartyPack,  ECreateType_Sibling,  ELoadType_Blank, EExitType_Standard, EAudioType_Scene,  "RPBomScene/",           /* Bomb                         */ "爆弾"},
     {ESceneID_RPPartyPackTitleScene,        EPackID_PartyPack,  ECreateType_Standard, ELoadType_Blank, EExitType_Sibling,  EAudioType_Common, "RPPartyTitle/",         /* Party Pack                   */ "パーティパック"},
