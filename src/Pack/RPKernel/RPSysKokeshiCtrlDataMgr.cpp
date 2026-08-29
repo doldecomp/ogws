@@ -13,7 +13,7 @@
  * @param pCallback Controller data callback
  * @param pParentHeap Heap to use as the parent of the controller data heap
  * @param heapSize Size of the controller data heap
- * @param chan WPAD channel to use
+ * @param chan Remote channel
  */
 RPSysKokeshiCtrlDataMgr::RPSysKokeshiCtrlDataMgr(
     IRPSysKokeshiCtrlDataCallback* pCallback, EGG::Heap* pParentHeap,

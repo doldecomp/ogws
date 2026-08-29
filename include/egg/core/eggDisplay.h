@@ -58,7 +58,7 @@ protected:
     u32 mRetraceCount;           // at 0xC
     u32 mFrameCount;             // at 0x10
     nw4r::ut::Color mClearColor; // at 0x14
-    u32 mClearZ;                 // at 0x20
+    u32 mClearZ;                 // at 0x18
     s32 mPrevFrameTick;          // at 0x1C
     s32 mFrameCostTick;          // at 0x20
     f32 mFrequency;              // at 0x24

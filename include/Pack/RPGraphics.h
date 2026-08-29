@@ -1,6 +1,7 @@
 #ifndef RP_PUBLIC_GRAPHICS_H
 #define RP_PUBLIC_GRAPHICS_H
 
+#include <Pack/RPGraphics/IRPGrpDrawObject.h>
 #include <Pack/RPGraphics/IRPGrpModelCallback.h>
 #include <Pack/RPGraphics/RPGrpCamera.h>
 #include <Pack/RPGraphics/RPGrpCaptureTexture.h>

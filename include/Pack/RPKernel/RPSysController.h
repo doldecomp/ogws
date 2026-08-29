@@ -126,7 +126,7 @@ private:
 
 private:
     //! Information flags
-    u16 mFlags; // at 0x0
+    u16 mFlags; // at 0x18
 };
 
 /******************************************************************************
@@ -307,9 +307,9 @@ public:
     /**
      * @brief Constructor
      *
-     * @param id Unique ID
+     * @param playerNo Player ID
      */
-    RPSysCoreController(u32 id);
+    RPSysCoreController(u32 playerNo);
 
     /**
      * @brief Destructor

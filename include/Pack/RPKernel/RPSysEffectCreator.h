@@ -1,0 +1,23 @@
+#ifndef RP_KERNEL_EFFECT_CREATOR_H
+#define RP_KERNEL_EFFECT_CREATOR_H
+#include <Pack/types_pack.h>
+
+//! @addtogroup rp_kernel
+//! @{
+
+/**
+ * @brief Effect creator
+ */
+class RPSysEffectCreator {
+public:
+    /**
+     * @brief Constructor
+     *
+     * @param effectScene Effect scene index
+     */
+    RPSysEffectCreator(u32 effectScene);
+};
+
+//! @}
+
+#endif

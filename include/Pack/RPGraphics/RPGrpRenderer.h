@@ -31,6 +31,14 @@ public:
         return spCurrentScreen;
     }
 
+    static void Begin();
+    static void End();
+
+    static void StartDebugDraw();
+
+    void Rendering();
+    void Destruct();
+
 private:
     //! Allocator used for model-related allocations
     static RPGrpRenderer* spCurrent;

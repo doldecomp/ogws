@@ -8,6 +8,7 @@
 #include <Pack/RPSystem/RPSysDvdStatus.h>
 #include <Pack/RPSystem/RPSysFontManager.h>
 #include <Pack/RPSystem/RPSysGameConfig.h>
+#include <Pack/RPSystem/RPSysPauseMgr.h>
 #include <Pack/RPSystem/RPSysPlayer.h>
 #include <Pack/RPSystem/RPSysPlayerMgr.h>
 #include <Pack/RPSystem/RPSysProjectLocal.h>

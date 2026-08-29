@@ -28,6 +28,12 @@ public:
      */
     void draw();
 
+    /**
+     * @brief Tests whether a disc drive error has occurred
+     * @typo
+     */
+    bool isErrorOccured() const;
+
 private:
     /**
      * @brief Disc drive error type
@@ -49,13 +55,6 @@ private:
 
     //! Size of the error message buffer
     static const int MESSAGE_BUFFER_SIZE = 256;
-
-private:
-    /**
-     * @brief Tests whether a disc drive error has occurred
-     * @typo
-     */
-    bool isErrorOccured() const;
 
 private:
     //! Game disc name
