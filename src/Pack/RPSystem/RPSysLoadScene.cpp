@@ -11,6 +11,10 @@
 #define RP_COMMON_SOUND_PATH "Sound/RPPartyCommon/rp_Common_Party.brsar"
 #endif
 
+// TODO(ThePlayerRolo) Check if this is used in other Revolution Pack Games since Wii Sports doesn't use it.
+// Note this needs to be here since if inside of a seperate tu its gets optimized out
+EGG::Vector3f lbl_804A3DB0[4];
+
 /**
  * @brief Displays the game's build date timestamp
  *
