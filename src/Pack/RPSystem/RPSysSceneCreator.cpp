@@ -106,7 +106,7 @@ bool RPSysSceneCreator::changeSceneAfterFade(s32 id, bool reconfigure) {
     bool success = false;
 
     if (RP_GET_INSTANCE(RPSysSceneMgr)->isTaskFinished()) {
-        s32 current = RP_GET_INSTANCE(RPSysSceneMgr)->getCurrentSceneID();
+        int current = RP_GET_INSTANCE(RPSysSceneMgr)->getCurrentSceneID();
 
         if (reconfigure) {
             id = current;
