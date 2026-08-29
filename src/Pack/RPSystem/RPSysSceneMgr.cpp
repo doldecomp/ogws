@@ -164,7 +164,7 @@ bool RPSysSceneMgr::changeNextSceneAfterFade(s32 id, bool reconfigure) {
     EMethod method = Default;
 
     if (getCurrentSceneRP() != NULL) {
-        s32 current = getCurrentSceneRP()->getSceneID();
+        int current = getCurrentSceneRP()->getSceneID();
 
         // Parent scene's exit type takes priority over the new create type
         RPSysSceneCreator::EExitType exitType =
@@ -486,7 +486,7 @@ void RPSysSceneMgr::updateState() {
             } else if (mState == EState_ReturnToMenu ||
                        mState == EState_Shutdown) {
 
-                setSceneFadeColor(DEFAULT_FADE_COLOR);
+                setFadeColor(DEFAULT_FADE_COLOR);
 
                 RP_GET_INSTANCE(RPSndAudioMgr)
                     ->shutdownSystem(DEFAULT_FADE_FRAME);
