@@ -1,5 +1,5 @@
-#ifndef RP_SPORTS_APP_MII_MANAGER_H
-#define RP_SPORTS_APP_MII_MANAGER_H
+#ifndef RP_SPORTS_COMMON_APP_MII_MANAGER_H
+#define RP_SPORTS_COMMON_APP_MII_MANAGER_H
 #include <Pack/types_pack.h>
 
 #include <Pack/RPKernel.h>

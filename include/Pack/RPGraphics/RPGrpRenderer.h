@@ -2,10 +2,13 @@
 #define RP_GRAPHICS_RENDERER_H
 #include <Pack/types_pack.h>
 
+#include <egg/core.h>
+
 //! @addtogroup rp_graphics
 //! @{
 
 // Forward declarations
+class IRPGrpDrawObject;
 class RPGrpScreen;
 
 /**
@@ -36,8 +39,17 @@ public:
 
     static void StartDebugDraw();
 
+    static RPGrpRenderer* Construct(EGG::Allocator* pAllocator, u16 id);
+
     void Rendering();
     void Destruct();
+    void BecomeCurrent();
+
+    void AppendDrawObject(IRPGrpDrawObject* pObject);
+
+    void PreCalculate();
+    void PostCalculate();
+    void CalculateInPause();
 
 private:
     //! Allocator used for model-related allocations

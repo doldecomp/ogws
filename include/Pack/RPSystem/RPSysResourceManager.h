@@ -3,7 +3,7 @@
 #include <Pack/types_pack.h>
 
 #include <Pack/RPSingleton.h>
-#include <Pack/RPSports.h>
+#include <Pack/RPSports/RPSportsCommon.h>
 #include <Pack/RPSystem/RPSysSceneCreator.h>
 
 #include <egg/core.h>

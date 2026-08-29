@@ -1,6 +1,6 @@
 #include <Pack/RPKernel.h>
-#include <Pack/RPParty.h>
-#include <Pack/RPSports.h>
+#include <Pack/RPParty/RPPartyCommon.h>
+#include <Pack/RPSports/RPSportsCommon.h>
 #include <Pack/RPSystem.h>
 
 #include <nw4r/ut.h>
@@ -14,7 +14,7 @@ RP_SINGLETON_IMPL(RPSysResourceManager);
  */
 const RPSysSceneCreator::ESceneID RPSysResourceManager::CACHED_SCENES[] = {
     RPSysSceneCreator::ESceneID_RPSysPlayerSelectScene,
-    RPSysSceneCreator::ESceneID_RPSysNunchukScene,
+    RPSysSceneCreator::ESceneID_RPSysNunchukCheckScene,
 
 #if defined(PACK_SPORTS)
     RPSysSceneCreator::ESceneID_RPBsbScene,
@@ -22,13 +22,13 @@ const RPSysSceneCreator::ESceneID RPSysResourceManager::CACHED_SCENES[] = {
     RPSysSceneCreator::ESceneID_RPGolScene,
     RPSysSceneCreator::ESceneID_RPTnsScene,
     RPSysSceneCreator::ESceneID_RPBoxScene,
-    RPSysSceneCreator::ESceneID_RPSportsTitleScene,
-    RPSysSceneCreator::ESceneID_RPSportsMenuScene,
+    RPSysSceneCreator::ESceneID_RPSportsPackTitleScene,
+    RPSysSceneCreator::ESceneID_RPSportsMainScene,
     RPSysSceneCreator::ESceneID_RPSportsTrainingMenuScene,
     RPSysSceneCreator::ESceneID_RPSportsPhysicalMenuScene,
     RPSysSceneCreator::ESceneID_RPSportsPhysicalPreviewScene,
     RPSysSceneCreator::ESceneID_RPSportsPhysicalResultScene,
-    RPSysSceneCreator::ESceneID_RPGolSelectScene,
+    RPSysSceneCreator::ESceneID_RPGolCourseSelectScene,
 #elif defined(PACK_PARTY)
     RPSysSceneCreator::ESceneID_RPFshScene,
     RPSysSceneCreator::ESceneID_RPHkyScene,
@@ -39,9 +39,9 @@ const RPSysSceneCreator::ESceneID RPSysResourceManager::CACHED_SCENES[] = {
     RPSysSceneCreator::ESceneID_RPWlyScene,
     RPSysSceneCreator::ESceneID_RPTnkScene,
     RPSysSceneCreator::ESceneID_RPBomScene,
-    RPSysSceneCreator::ESceneID_RPPartyTitleScene,
-    RPSysSceneCreator::ESceneID_RPPartyMiiLoadScene,
-    RPSysSceneCreator::ESceneID_RPPartyMenuScene,
+    RPSysSceneCreator::ESceneID_RPPartyPackTitleScene,
+    RPSysSceneCreator::ESceneID_RPPartyRootScene,
+    RPSysSceneCreator::ESceneID_RPPartyMainScene,
 #endif
 };
 

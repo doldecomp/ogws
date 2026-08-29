@@ -13,42 +13,60 @@
 //! @{
 
 /**
- * @brief Scene manager
+ * @brief Pack Project scene manager
  */
 class RPSysSceneMgr : public EGG::SceneManager {
     RP_SINGLETON_DECL_EX(RPSysSceneMgr);
 
 public:
     /**
-     * @brief Performs a soft reset
-     *
-     * @param skipFade Whether to skip the fade to black (for HBM)
-     * @return Success
+     * @brief Updates the state of the current scene
      */
-    bool softReset(bool skipFade);
-    /**
-     * @brief Returns to the system menu
-     *
-     * @param setBlack Whether to call VISetBlack before exiting
-     * @return Success
-     */
-    bool returnToMenu(bool setBlack);
-    /**
-     * @brief Shuts down the console
-     *
-     * @param setBlack Whether to call VISetBlack before exiting
-     * @return Success
-     */
-    bool shutdownSystem(bool setBlack);
+    virtual void calcCurrentScene() override; // at 0x10
 
     /**
-     * @brief Tests whether the manager is operating normally
+     * @brief Gets the currently active scene as the Pack Project type
+     */
+    RPSysScene* getCurrentSceneRP() const;
+
+    /**
+     * @brief Performs a soft reset
+     *
+     * @param fromHBM Whether the request came from HBM
+     * @return Success
+     */
+    bool softReset(bool fromHBM);
+
+    /**
+     * @brief Returns to the IPL
+     *
+     * @param fromHBM Whether the request came from HBM
+     * @return Success
+     */
+    bool returnToMenu(bool fromHBM);
+
+    /**
+     * @brief Powers off the console
+     *
+     * @param fromHBM Whether the request came from HBM
+     * @return Success
+     */
+    bool shutdownSystem(bool fromHBM);
+
+    /**
+     * @brief Tests whether this manager is operating normally
      */
     bool isNormalState() const;
+
     /**
-     * @brief Tests whether the manager is currently shutting down the system
+     * @brief Tests whether this manager is currently shutting down the system
      */
     bool isShutDownReserved() const;
+
+    /**
+     * @brief Tests whether this manager is currently returning to the IPL
+     */
+    bool getReturnToMenu() const;
 
     /**
      * @brief Disables the guard state and returns to normal operation
@@ -56,157 +74,170 @@ public:
     void resetGuard();
 
     /**
-     * @brief Tests whether the manager is currently returning to the menu or
-     * shutting down the system
+     * @brief Tests whether this manager is currently exiting the program
      */
     bool isApplicationEndReserved();
+
     /**
-     * @brief Tests whether the application should end in its current state due
-     * to a DVD error
-     * @details Any state other than normal operation will result in the
-     * application ending.
+     * @brief Tests whether a DVD error should exit the program
      */
     bool isDvdErrorApplicationEnd();
 
     /**
-     * @brief Fades out the display and changes to the specified scene
-     * @remark Supply -1 as the scene ID to use the current scene ID.
-     * @note If you are changing to the current scene ID again, set @p
-     * forceChange so the scene is completely teared down.
+     * @brief Requests a scene change after fading out
+     * @details A scene id of -1 will select the current scene.
      *
-     * @param id Scene ID
-     * @param forceChange Force a full scene change when a re-init would
-     * otherwise happen
+     * @param id New scene ID
+     * @param reconfigure Whether to fully reconfigure the scene
      * @return Success
      */
-    bool changeNextSceneAfterFade(s32 id, bool forceChange);
+    bool changeNextSceneAfterFade(s32 id, bool reconfigure = false);
 
     /**
-     * @name Faders
-     * @note The scene manager owns two faders: the "manager" fader (inherited
-     * from @ref EGG::SceneManager) and the "scene" fader (@ref mpSceneFader).
-     * The manager fader is used for fading between scene transitions, while the
-     * scene fader can be controlled at any time by the current scene.
-     */
-    /**@{*/
-    /**
-     * @brief Resets the fade duration of both the scene and manager faders
-     * @remark The default duration is 20 frames.
+     * @brief Resets the duration of all faders
      */
     void resetFadeFrame();
+
     /**
-     * @brief Gets the fade duration of the scene fader
+     * @brief Gets the duration of the scene fader
      */
-    u16 getSceneFadeFrame();
+    u16 getFadeFrame();
+
     /**
-     * @brief Sets the duration of both the scene and manager faders
-     * @note The fade duration cannot be zero.
+     * @brief Sets the duration of all faders
      *
      * @param frame Fade duration, in frames
      */
     void setFadeFrame(u16 frame);
 
     /**
-     * @brief Resets the fade color of both the scene and manager faders
-     * @remark The default color is white with full opacity.
+     * @brief Resets the color of all faders
+     * @details The default fader color is black.
      */
     void resetFadeColor();
 
     /**
-     * @brief Gets the fade color of the manager fader
+     * @brief Gets the color of the manager fader
      */
-    nw4r::ut::Color getMgrFadeColor();
+    nw4r::ut::Color getFadeColor();
 
     /**
-     * @brief Sets the fade color of both faders
+     * @brief Sets the color of all faders
      *
      * @param color Fade color
      */
     void setFadeColor(nw4r::ut::Color color);
 
     /**
-     * @brief Sets the fade color of the scene fader
+     * @brief Sets the color of the scene fader
      *
      * @param color Fade color
      */
     void setSceneFadeColor(nw4r::ut::Color color);
 
     /**
-     * @brief Gets the fade status of the scene fader
+     * @brief Gets the status of the scene fader
      */
     EGG::Fader::EStatus getSceneStatus();
+
     /**
-     * @brief Sets the fade status of the scene fader
+     * @brief Sets the status of the scene fader
      *
      * @param status Fade status
      */
     void setSceneStatus(EGG::Fader::EStatus status);
 
     /**
-     * @brief Begins to fade in the manager fader
+     * @brief Begins fading in the manager fader
+     *
+     * @return Success
      */
-    void startMgrFadeIn();
+    bool startMgrFadeIn();
 
     /**
-     * @brief Begins to fade in the scene fader
+     * @brief Begins fading in the scene fader
+     *
+     * @return Success
      */
-    void startSceneFadeIn();
-    /**
-     * @brief Begins to fade out the scene fader
-     */
-    void startSceneFadeOut();
+    bool startSceneFadeIn();
 
     /**
-     * @brief Tests whether the scene is currently fully visible
+     * @brief Begins fading out the scene fader
+     *
+     * @return Success
+     */
+    bool startSceneFadeOut();
+
+    /**
+     * @brief Tests whether the scene is fully visible
      */
     bool isDisplay();
-    /**
-     * @brief Tests whether the scene is currently not visible
-     */
-    bool isBlank();
-    /**
-     * @brief Tests whether the scene is currently fading out
-     */
-    bool isFadeOut();
-    /**@}*/
 
     /**
-     * @brief Tests whether all asynchronous tasks have been completed
-     * @details The system threads (DVD, NAND, WiiConnect24) must all be idle,
-     * and the system must not currently be writing save data to the NAND.
+     * @brief Tests whether the scene is visibly obscured
+     */
+    bool isBlank();
+
+    /**
+     * @brief Tests whether the scene is fading out
+     */
+    bool isFadeOut();
+
+    /**
+     * @brief Tests whether all asynchronous tasks have finished
      */
     bool isTaskFinished();
+
     /**
-     * @brief Tests whether the scene is currently permitted to change
-     * @details The scene can only change once all tasks have finished and the
-     * manager fader is prepared to fade out.
+     * @brief Tests whether a scene change would be allowed
      */
     bool isSceneChangeEnable();
 
     /**
-     * @name Faders
+     * @brief Updates the state of the scene fader
+     *
+     * @return Whether the fade has finished
      */
-    /**@{*/
-    /**
-     * @brief Updates the scene fader's state
-     */
-    void calcSceneFader();
-    /**
-     * @brief Renders the scene fader's state
-     */
-    void drawSceneFader();
-    /**
-     * @brief Renders the manager fader's state
-     */
-    void drawMgrFader();
-    /**@}*/
+    bool calcSceneFader();
 
     /**
-     * @brief Updates the scene manager's state
+     * @brief Displays the state of the scene fader
+     */
+    void drawSceneFader();
+
+    /**
+     * @brief Displays the state of the manager fader
+     */
+    void drawMgrFader();
+
+    /**
+     * @brief Updates the state of this manager
      */
     void updateState();
 
-    RPSysScene* getCurrentSceneRP() const;
+private:
+    /**
+     * @brief Scene manager state
+     */
+    enum EState {
+        EState_Normal,       //!< Normal operation
+        EState_Guard,        //!< Prevents operations during soft reset
+        EState_SoftReset,    //!< Perform soft reset
+        EState_ReturnToMenu, //!< Return to system menu
+        EState_Shutdown      //!< Shutdown the system
+    };
+
+    //! The default fade duration, in frames
+    static const int DEFAULT_FADE_FRAME = 20;
+
+    //! The default fade color
+    static const u32 DEFAULT_FADE_COLOR = nw4r::ut::Color::BLACK;
+
+private:
+    //! Manager state
+    EState mState; // at 0x30
+    //! Fader usable by the current scene
+    EGG::ColorFader* mpSceneFader; // at 0x34
 };
 
 //! @}

@@ -1206,7 +1206,7 @@ config.libs = [
         "progress_category": "system",  # str | List[str]
         "objects": [
             Object(NonMatching, "Pack/RPSystem/RPSysSceneCreator.cpp"),
-            Object(NonMatching, "Pack/RPSystem/RPSysScene.cpp"),
+            Object(Matching, "Pack/RPSystem/RPSysScene.cpp"),
             Object(NonMatching, "Pack/RPSystem/RPSysRenderMode.cpp"),
             Object(NonMatching, "Pack/RPSystem/RPSysSceneMgr.cpp"),
             Object(Matching, "Pack/RPSystem/RPSysProjectLocal.cpp"),

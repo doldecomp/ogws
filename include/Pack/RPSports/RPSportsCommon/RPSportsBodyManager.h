@@ -1,26 +1,26 @@
-#ifndef RP_PARTY_BODY_MANAGER_H
-#define RP_PARTY_BODY_MANAGER_H
+#ifndef RP_SPORTS_COMMON_BODY_MANAGER_H
+#define RP_SPORTS_COMMON_BODY_MANAGER_H
 #include <Pack/types_pack.h>
 
 #include <Pack/RPKernel.h>
 
-//! @addtogroup rp_party
+//! @addtogroup rp_sports
 //! @{
 
 /**
- * @brief Party Pack Mii body manager
+ * @brief Sports Pack Mii body manager
  */
-class RPPartyBodyManager : public IRPSysKokeshiBodyManager {
+class RPSportsBodyManager : public IRPSysKokeshiBodyManager {
 public:
     /**
      * @brief Constructor
      */
-    RPPartyBodyManager();
+    RPSportsBodyManager();
 
     /**
      * @brief Destructor
      */
-    virtual ~RPPartyBodyManager(); // at 0x2C
+    virtual ~RPSportsBodyManager(); // at 0x2C
 
     virtual u16 GetFriendClothesStartIndex(); // at 0x8
     virtual u16 GetFriendClothesIndexRange(); // at 0xC

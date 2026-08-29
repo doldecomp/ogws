@@ -17,6 +17,8 @@ class RPSysCommonObject;
  * @brief Pack Project scene
  */
 class RPSysScene : public EGG::Scene, public IRPGrpDrawObject {
+    friend class RPSysSceneCreator;
+
 public:
     struct UnkStruct {
         u32 unk0;
@@ -30,13 +32,8 @@ public:
     RPSysScene();
 
     /**
-     * @brief Destructor
-     */
-    virtual ~RPSysScene() override {} // at 0x8
-
-    /**
      * @name Internal events
-     * @brief These event functions are internal and should not be overriden.
+     * @brief These functions are internal, and should not be overriden.
      */
     /**@{*/
     /**
@@ -76,9 +73,9 @@ public:
     /**@}*/
 
     /**
-     * @name User events
-     * @brief These event functions are mostly empty stubs and should be
-     * overriden to provide scene functionality.
+     * @name Lifecycle hooks
+     * @brief These functions are mostly empty stubs, and should be overridden
+     * to provide scene functionality.
      */
     /**@{*/
     virtual UnkStruct& VF_0x3C() {
@@ -90,7 +87,7 @@ public:
      *
      * @param enter Whether the pause menu is being entered
      */
-    virtual void pauseCallBack(bool enter); // at 0x40
+    virtual void pauseCallBack(bool /* enter */) {} // at 0x40
 
     /**
      * @brief Initializes the scene's state for the first time
@@ -144,9 +141,9 @@ public:
     bool isNandAccessEnable() const;
 
     /**
-     * @brief Sets the current frame of both faders
+     * @brief Sets the duration of all faders
      *
-     * @param frame Frame count
+     * @param frame Fade duration, in frames
      */
     void setFadeFrame(u16 frame);
 
@@ -156,7 +153,7 @@ public:
     nw4r::ut::Color getFadeColor() const;
 
     /**
-     * @brief Sets the color of both faders
+     * @brief Sets the color of all faders
      *
      * @param color Fade color
      */
@@ -171,13 +168,17 @@ public:
 
     /**
      * @brief Begins fading in the scene fader
+     *
+     * @return Success
      */
-    void startFadeIn();
+    bool startFadeIn();
 
     /**
      * @brief Begins fading out the scene fader
+     *
+     * @return Success
      */
-    void startFadeOut();
+    bool startFadeOut();
 
     /**
      * @brief Toggles screen dimming
@@ -187,16 +188,88 @@ public:
      */
     void setDimming(bool enable);
 
-protected:
-    void outgoingScene();
-
-    void exitScenePost();
-
-    void init();
-
+    /**
+     * @brief Sets this scene's parent/creator ID
+     *
+     * @param id ID of this scene's parent/creator
+     */
     void setCreatorSceneID(s32 id);
 
+    /**
+     * @brief Gets this scene's parent/creator ID
+     */
     s32 getCreatorSceneID() const;
+
+    /**
+     * @brief Marks this scene as a child of the previous scene
+     */
+    void setChildScene();
+
+protected:
+    /**
+     * @brief Prepares this scene to be entered
+     */
+    DECOMP_INLINE void incomingScene();
+
+    /**
+     * @brief Prepares this scene to be exited
+     */
+    void outgoingScene();
+
+    /**
+     * @brief Finalizes this scene after being exited
+     */
+    void exitScenePost();
+
+    /**
+     * @brief Initializes this scene's members
+     */
+    void init();
+
+    /**
+     * @brief Displays the game's build date timestamp
+     *
+     * @param color Text color
+     */
+    void drawTimeStamp(nw4r::ut::Color color);
+
+    void loadUpdate();
+
+    void initTaskAsync();
+    void setTaskAsync();
+    bool isTaskAsyncFinish() const;
+
+    /**
+     * @brief Enables the "Now Loading" message display
+     */
+    void enableLoadMessage();
+
+    /**
+     * @brief Loads this scene's resources asynchronously
+     */
+    void load();
+
+    /**
+     * @brief Loads this scene's resources asynchronously, displaying a "Now
+     * Loading" message if the feature is enabled
+     */
+    void loadMessage();
+
+    void updateDvdEndMessage();
+    void updateNandEndMessage();
+
+    static void loadResourceFunc(void* pArg);
+
+private:
+    /**
+     * @brief Scene flags
+     */
+    enum {
+        EFlag_LoadMessage, //!< Display "Now Loading" message
+        EFlag_1 = 1,
+        EFlag_2,
+        EFlag_IsChild, //!< This scene was created as a child
+    };
 
 private:
     static UnkStruct sUnkStruct;

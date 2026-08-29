@@ -1,5 +1,5 @@
-#ifndef RP_KERNEL_EFFECT_MANAGER_H
-#define RP_KERNEL_EFFECT_MANAGER_H
+#ifndef RP_KERNEL_EFFECT_MGR_H
+#define RP_KERNEL_EFFECT_MGR_H
 #include <Pack/types_pack.h>
 
 #include <Pack/RPSingleton.h>
@@ -30,6 +30,8 @@ public:
 
 public:
     void stopAllEffect();
+
+    void setCreator(RPSysEffectCreator* pCreator, u32 effectScene);
     void resetCreator(RPSysEffectCreator* pCreator);
 };
 

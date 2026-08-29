@@ -16,6 +16,14 @@ public:
      * @param effectScene Effect scene index
      */
     RPSysEffectCreator(u32 effectScene);
+
+    /**
+     * @brief Destructor
+     */
+    virtual ~RPSysEffectCreator(); // at 0x8
+
+private:
+    char unk4[0x44 - 0x4];
 };
 
 //! @}

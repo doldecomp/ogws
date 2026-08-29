@@ -28,7 +28,14 @@ public:
     virtual bool calc(); // at 0x18
     virtual void draw(); // at 0x1C
 
+    u16 getFrame() const {
+        return mFadeFrame;
+    }
     void setFrame(u16 frame);
+
+    nw4r::ut::Color getColor() const {
+        return mColor;
+    }
     void setColor(nw4r::ut::Color color);
 
 private:

@@ -1,5 +1,6 @@
 #ifndef RP_SYSTEM_PAUSE_MGR_H
 #define RP_SYSTEM_PAUSE_MGR_H
+#include <Pack/types_pack.h>
 
 #include <Pack/RPSingleton.h>
 
@@ -7,25 +8,18 @@
 //! @{
 
 /**
- * @brief 
- * Pause manager
+ * @brief Pause menu manager
  */
-
 class RPSysPauseMgr {
     RP_SINGLETON_DECL_EX(RPSysPauseMgr);
 
 public:
-    /**
-     * @brief 
-     * Draws pause screen. Passes to RPSysPauseMenu
-     */
-    void draw(void);
+    bool isPause() const {
+        return unk8 & 1;
+    }
 
 private:
-    u32 mUNK_0x08;
-    u32 mUNK_0x0C;
-    f32 mFloats_0x10[0x78]; // TODO(Texline666) What are all these floats for?
-    void* mLytPause; // placeholder for RPSysLytPause
+    u32 unk8;
 };
 
 //! @}
