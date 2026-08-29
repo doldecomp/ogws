@@ -1207,7 +1207,7 @@ config.libs = [
         "objects": [
             Object(NonMatching, "Pack/RPSystem/RPSysSceneCreator.cpp"),
             Object(Matching, "Pack/RPSystem/RPSysScene.cpp"),
-            Object(NonMatching, "Pack/RPSystem/RPSysRenderMode.cpp"),
+            Object(Matching, "Pack/RPSystem/RPSysRenderMode.cpp"),
             Object(NonMatching, "Pack/RPSystem/RPSysSceneMgr.cpp"),
             Object(Matching, "Pack/RPSystem/RPSysProjectLocal.cpp"),
             Object(Matching, "Pack/RPSystem/RPSysGameConfig.cpp"),

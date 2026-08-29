@@ -16,6 +16,7 @@
 #include <Pack/RPSystem/RPSysPlayerMgr.h>
 #include <Pack/RPSystem/RPSysPlayerSelectScene.h>
 #include <Pack/RPSystem/RPSysProjectLocal.h>
+#include <Pack/RPSystem/RPSysRenderMode.h>
 #include <Pack/RPSystem/RPSysResourceManager.h>
 #include <Pack/RPSystem/RPSysSaveData.h>
 #include <Pack/RPSystem/RPSysSaveDataMgr.h>
