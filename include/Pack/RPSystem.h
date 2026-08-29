@@ -22,7 +22,6 @@
 #include <Pack/RPSystem/RPSysScene.h>
 #include <Pack/RPSystem/RPSysSceneCreator.h>
 #include <Pack/RPSystem/RPSysSceneMgr.h>
-#include <Pack/RPSystem/RPSysSystem.h>
 #include <Pack/RPSystem/RPSysTagParms.h>
 
 #endif

@@ -1,9 +1,9 @@
-#ifndef RP_SYSTEM_SYSTEM_H
-#define RP_SYSTEM_SYSTEM_H
+#ifndef RP_KERNEL_SYSTEM_H
+#define RP_KERNEL_SYSTEM_H
 #include <Pack/types_pack.h>
 
-#include <Pack/RPSystem/RPSysSceneCreator.h>
 #include <Pack/RPSystem/RPSysRenderMode.h>
+#include <Pack/RPSystem/RPSysSceneCreator.h>
 
 #include <egg/core.h>
 
@@ -26,7 +26,7 @@ public:
 
     virtual EGG::Video* GetVideo() {
         return mVideo;
-    } 
+    }
     virtual EGG::Heap* GetSystemHeap() {
         return mSystemHeap;
     }
@@ -47,27 +47,29 @@ public:
     }
     virtual void StubA() {}
     virtual void StubB() {}
+
 private:
     void* mMem1Start;
     void* mMem1End;
     void* mMem2Start;
     void* mMem2End;
     u32 mMemSize;
-    EGG::Heap *mRootHeapMem1;
-    EGG::Heap *mRootHeapMem2;
-    EGG::Heap *mRootHeapDebug;
+    EGG::Heap* mRootHeapMem1;
+    EGG::Heap* mRootHeapMem2;
+    EGG::Heap* mRootHeapDebug;
+
 protected:
     EGG::Heap* mSystemHeap;
     EGG::Thread* mCreatorThread;
     void* mCodeStart;
     void* mCodeEnd;
     u32 mSystemHeapSize;
-    EGG::Video *mVideo;
-    EGG::XfbManager *mXfbMgr;
-    EGG::Display *mDisplay;
-    EGG::PerformanceView *mPerfView;
-    EGG::SceneManager *mSceneMgr;
-    EGG::IAudioMgr *mAudioMgr;
+    EGG::Video* mVideo;
+    EGG::XfbManager* mXfbMgr;
+    EGG::Display* mDisplay;
+    EGG::PerformanceView* mPerfView;
+    EGG::SceneManager* mSceneMgr;
+    EGG::IAudioMgr* mAudioMgr;
 };
 
 /**
