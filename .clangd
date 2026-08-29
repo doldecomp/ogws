@@ -6,3 +6,4 @@ Diagnostics:
     - bad_cxx_cast_unrelated_class
     - init_conversion_failed
     - member_function_call_bad_type
+    - ovl_no_viable_member_function_in_call

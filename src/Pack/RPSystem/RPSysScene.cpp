@@ -267,10 +267,7 @@ void RPSysScene::init() {
     mpRenderer = RPGrpRenderer::Construct(pAllocator, getSceneID());
 
     mpRenderer->BecomeCurrent();
-
-    // TODO(kiwi) Is there a version of this function that uses a reference?
-    IRPGrpDrawObject& rDrawObject = static_cast<IRPGrpDrawObject&>(*this);
-    RPGrpRenderer::GetCurrent()->AppendDrawObject(&rDrawObject);
+    RPGrpRenderer::GetCurrent()->AppendDrawObject(*this);
 
     mpCommonObject = new RPSysCommonObject();
 

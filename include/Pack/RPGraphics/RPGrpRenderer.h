@@ -46,6 +46,9 @@ public:
     void BecomeCurrent();
 
     void AppendDrawObject(IRPGrpDrawObject* pObject);
+    void AppendDrawObject(IRPGrpDrawObject& rObject) {
+        AppendDrawObject(&rObject);
+    }
 
     void PreCalculate();
     void PostCalculate();

@@ -205,7 +205,24 @@ public:
      */
     void setChildScene();
 
-protected:
+    /**
+     * @brief Displays the game's build date timestamp
+     *
+     * @param color Text color
+     */
+    void drawTimeStamp(nw4r::ut::Color color);
+
+    /**
+     * @brief Marks that this scene requires an asynchronous task
+     */
+    void setTaskAsync();
+
+    /**
+     * @brief Tests whether this scene's asynchronous task has finished
+     */
+    bool isTaskAsyncFinish() const;
+
+private:
     /**
      * @brief Prepares this scene to be entered
      */
@@ -226,18 +243,12 @@ protected:
      */
     void init();
 
-    /**
-     * @brief Displays the game's build date timestamp
-     *
-     * @param color Text color
-     */
-    void drawTimeStamp(nw4r::ut::Color color);
-
     void loadUpdate();
 
+    /**
+     * @brief Creates the asynchronous task thread if requested by the scene
+     */
     void initTaskAsync();
-    void setTaskAsync();
-    bool isTaskAsyncFinish() const;
 
     /**
      * @brief Enables the "Now Loading" message display
@@ -255,20 +266,39 @@ protected:
      */
     void loadMessage();
 
+    /**
+     * @brief Polls the status of the DVD task thread
+     */
     void updateDvdEndMessage();
+
+    /**
+     * @brief Polls the status of the NAND task thread
+     */
     void updateNandEndMessage();
 
+    /**
+     * @brief Thread function for the LoadResource phase
+     *
+     * @param pArg Thread function argument
+     */
     static void loadResourceFunc(void* pArg);
+
+    /**
+     * @brief Thread function for the scene's task
+     *
+     * @param pArg Thread function argument
+     */
+    static void taskAsyncFunc(void* pArg);
 
 private:
     /**
      * @brief Scene flags
      */
     enum {
-        EFlag_LoadMessage, //!< Display "Now Loading" message
-        EFlag_1 = 1,
-        EFlag_2,
-        EFlag_IsChild, //!< This scene was created as a child
+        EFlag_LoadMessage,      //!< Display "Now Loading" message
+        EFlag_TaskAsyncSet,     //!< The scene requested an asynchronous task
+        EFlag_TaskAsyncRunning, //!< The asynchronous task is running
+        EFlag_IsChild,          //!< This scene was created as a child
     };
 
 private:
