@@ -67,11 +67,6 @@ ensure consistency across the codebase and its documentation.
 > - Source code leaked online, pertaining to any software libraries linked
 > within this game
 > - Source code acquired through means only intended for licensed developers, such as a software development kit (SDK) distribution
->
-> Due to concerns of leaked material in training sets, decompilation created by or with the assistance of large language models (LLMs) will not be accepted.
->
-> As such, reviewers reserve the right to make the final call on whether to accept contributions.
->
 
 > [!IMPORTANT]
 > "Leaked material" does **NOT** include debugging information **left behind in retail games**, such as:
@@ -80,3 +75,11 @@ ensure consistency across the codebase and its documentation.
 > - Debug builds of the executable
 > - Binary object files (`*.o`), and static libraries (`*.a`) that may contain them
 <!-- markdownlint-enable MD028 -->
+
+## AI/LLM Policy
+
+Due to concerns of leaked material in training sets, decompilation of SDK code created by or with the assistance of large language models (LLMs) **will not be accepted**. The use of such tools is permitted for game code (Pack Project engine) only, with some restrictions.
+
+The main goal of this repo is to produce sensible, maintainable source code. Pull requests containing heavy use of raw pointer arithmetic and other non-portable expressions may still be rejected when the future effort required for refactoring is deemed to be too much.
+
+**As such, project leads reserve the right to make the final call on whether to accept these types of contributions.**
