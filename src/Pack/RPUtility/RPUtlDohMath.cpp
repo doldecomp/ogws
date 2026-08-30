@@ -199,6 +199,7 @@ const nw4r::math::VEC2 RPUtlDohMath::VEC2_ZERO(0.0f, 0.0f);
  * @brief Positive X-axis unit vector
  */
 const nw4r::math::VEC3 RPUtlDohMath::AXIS_XP(1.0f, 0.0f, 0.0f);
+
 /**
  * @brief Negative X-axis unit vector
  */
@@ -208,6 +209,7 @@ const nw4r::math::VEC3 RPUtlDohMath::AXIS_XN(-1.0f, 0.0f, 0.0f);
  * @brief Positive Y-axis unit vector
  */
 const nw4r::math::VEC3 RPUtlDohMath::AXIS_YP(0.0f, 1.0f, 0.0f);
+
 /**
  * @brief Negative Y-axis unit vector
  */
@@ -217,6 +219,7 @@ const nw4r::math::VEC3 RPUtlDohMath::AXIS_YN(0.0f, -1.0f, 0.0f);
  * @brief Positive Z-axis unit vector
  */
 const nw4r::math::VEC3 RPUtlDohMath::AXIS_ZP(0.0f, 0.0f, 1.0f);
+
 /**
  * @brief Negative Z-axis unit vector
  */
