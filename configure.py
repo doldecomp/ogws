@@ -1308,6 +1308,7 @@ config.libs = [
             Object(NonMatching, "Pack/RPUtility/RPUtlSimpleShadow.cpp"),
             Object(NonMatching, "Pack/RPUtility/RPUtlGameResourceMgr.cpp"),
             Object(NonMatching, "Pack/RPUtility/RPUtlDirMath.cpp"),
+            Object(NonMatching, "Pack/RPUtility/RPUtlRand.cpp"),
             Object(NonMatching, "Pack/RPUtility_unsplit.o"),
         ],
     },
