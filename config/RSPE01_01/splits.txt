@@ -3456,15 +3456,19 @@ Pack/RPUtility/RPUtlCollisionChecker.cpp:
 	.text       start:0x801BC418 end:0x801BD51C
 	.sdata2     start:0x804C19F8 end:0x804C1A08
 
+Pack/RPUtility/RPUtlSimpleShadow.cpp:
+	.text       start:0x801BD51C end:0x801BD648
+	.sdata2     start:0x804C1A08 end:0x804C1A20
+
 Pack/RPUtility_unsplit.o:
-	.text       start:0x801BD51C end:0x801CCB70
+	.text       start:0x801BD648 end:0x801CCB70
 	.ctors      start:0x80355144 end:0x80355160
 	.rodata     start:0x803837E8 end:0x80383990
 	.data       start:0x803C17D8 end:0x803C1BF0
 	.bss        start:0x804A4770 end:0x804A48A0
 	.sdata      start:0x804BDC20 end:0x804BDC38
 	.sbss       start:0x804BF668 end:0x804BF6F0
-	.sdata2     start:0x804C1A08 end:0x804C1A20
+	.sdata2     start:0x804C1A20 end:0x804C1A20
 
 Pack/RPSports/RPSportsCommon/RPSportsCommon_unsplit.o:
 	.text       start:0x801CCB70 end:0x80214480
