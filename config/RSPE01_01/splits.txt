@@ -3475,14 +3475,19 @@ Pack/RPUtility/RPUtlDirMath.cpp:
 Pack/RPUtility/RPUtlRand.cpp:
 	.sbss       start:0x804BF678 end:0x804BF680
 
+Pack/RPUtility/RPUtlModel.cpp:
+	.text       start:0x801BE340 end:0x801BE574
+	.data       start:0x803C17E8 end:0x803C17F8
+	.sbss       start:0x804BF680 end:0x804BF688
+
 Pack/RPUtility_unsplit.o:
-	.text       start:0x801BE340 end:0x801CCB70
+	.text       start:0x801BE574 end:0x801CCB70
 	.ctors      start:0x80355148 end:0x80355160
 	.rodata     start:0x803837E8 end:0x80383990
-	.data       start:0x803C17E8 end:0x803C1BF0
+	.data       start:0x803C17F8 end:0x803C1BF0
 	.bss        start:0x804A4800 end:0x804A48A0
 	.sdata      start:0x804BDC20 end:0x804BDC38
-	.sbss       start:0x804BF680 end:0x804BF6F0
+	.sbss       start:0x804BF688 end:0x804BF6F0
 	.sdata2     start:0x804C1A38 end:0x804C1A60
 
 Pack/RPSports/RPSportsCommon/RPSportsCommon_unsplit.o:
