@@ -135,7 +135,6 @@ void RPUtlDohMath::GetMidPoint(nw4r::math::VEC3* pMidPoint, f32* pDistance,
                                const nw4r::math::VEC3& rPointA,
                                const nw4r::math::VEC3& rPointB, f32 lengthA,
                                f32 lengthB) {
-
     nw4r::math::VEC3 bend;
 
     nw4r::math::VEC3 delta(    //
