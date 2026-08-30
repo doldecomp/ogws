@@ -73,7 +73,7 @@ const RPSysSceneCreator::SceneAttr RPSysSceneCreator::SCENE_ATTR_TABLE[] = {
 /**
  * @brief Constructor
  *
- * @param pHeap Heap to use for allocations
+ * @param pHeap Parent heap
  */
 RPSysSceneCreator::RPSysSceneCreator(EGG::Heap* pHeap)
     : mpParentHeap(pHeap), mPrevSceneID(-1) {}

@@ -10,7 +10,7 @@ RP_SINGLETON_IMPL_EX(RPSysSceneMgr);
 /**
  * @brief Constructor
  *
- * @param pHeap Heap to use for allocations
+ * @param pHeap Parent heap
  */
 RPSysSceneMgr::RPSysSceneMgr(EGG::Heap* pHeap)
     : mpParentHeap(pHeap), mState(EState_Normal) {
