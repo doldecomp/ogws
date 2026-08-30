@@ -1306,6 +1306,7 @@ config.libs = [
             Object(NonMatching, "Pack/RPUtility/RP_DEBUG_STUB_2.cpp"),
             Object(NonMatching, "Pack/RPUtility/RPUtlCollisionChecker.cpp"),
             Object(NonMatching, "Pack/RPUtility/RPUtlSimpleShadow.cpp"),
+            Object(NonMatching, "Pack/RPUtility/RPUtlGameResourceMgr.cpp"),
             Object(NonMatching, "Pack/RPUtility_unsplit.o"),
         ],
     },
