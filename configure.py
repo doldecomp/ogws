@@ -1310,6 +1310,7 @@ config.libs = [
             Object(NonMatching, "Pack/RPUtility/RPUtlDirMath.cpp"),
             Object(NonMatching, "Pack/RPUtility/RPUtlRand.cpp"),
             Object(NonMatching, "Pack/RPUtility/RPUtlModel.cpp"),
+            Object(NonMatching, "Pack/RPUtility/RPUtlViewClipper.cpp"),
             Object(NonMatching, "Pack/RPUtility_unsplit.o"),
         ],
     },
