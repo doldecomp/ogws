@@ -1301,6 +1301,7 @@ config.libs = [
         "objects": [
             Object(NonMatching, "Pack/RPUtility/RPUtlDohMath.cpp"),
             Object(NonMatching, "Pack/RPUtility/RPUtlRigid.cpp"),
+            Object(NonMatching, "Pack/RPUtility/RPUtlAccAnalyzer.cpp"),
             Object(NonMatching, "Pack/RPUtility_unsplit.o"),
         ],
     },
