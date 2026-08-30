@@ -3448,11 +3448,15 @@ Pack/RPUtility/RPUtlCollisionModel.cpp:
 	.text       start:0x801BB9B8 end:0x801BC384
 	.sdata2     start:0x804C19F0 end:0x804C19F8
 
+Pack/RPUtility/RP_DEBUG_STUB_2.cpp:
+	.text       start:0x801BC384 end:0x801BC418
+	.data       start:0x803C17C8 end:0x803C17D8
+
 Pack/RPUtility_unsplit.o:
-	.text       start:0x801BC384 end:0x801CCB70
+	.text       start:0x801BC418 end:0x801CCB70
 	.ctors      start:0x80355144 end:0x80355160
 	.rodata     start:0x803837E8 end:0x80383990
-	.data       start:0x803C17C8 end:0x803C1BF0
+	.data       start:0x803C17D8 end:0x803C1BF0
 	.bss        start:0x804A4770 end:0x804A48A0
 	.sdata      start:0x804BDC20 end:0x804BDC38
 	.sbss       start:0x804BF668 end:0x804BF6F0
