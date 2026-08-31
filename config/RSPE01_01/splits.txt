@@ -3501,14 +3501,21 @@ Pack/RPUtility/RPUtlShadowDrawer.cpp:
 	.ctors      start:0x80355148 end:0x8035514C
 	.bss        start:0x804A4800 end:0x804A4830
 
+Pack/RPUtility/RPUtlObject.cpp:
+	.text       start:0x801BFAE4 end:0x801BFEA8
+	.ctors      start:0x8035514C end:0x80355150
+	.data       start:0x803C17F8 end:0x803C1820
+	.bss        start:0x804A4830 end:0x804A4848
+	.sbss       start:0x804BF690 end:0x804BF698
+
 Pack/RPUtility_unsplit.o:
-	.text       start:0x801BFAE4 end:0x801CCB70
-	.ctors      start:0x8035514C end:0x80355160
+	.text       start:0x801BFEA8 end:0x801CCB70
+	.ctors      start:0x80355150 end:0x80355160
 	.rodata     start:0x803837E8 end:0x80383990
-	.data       start:0x803C17F8 end:0x803C1BF0
-	.bss        start:0x804A4830 end:0x804A48A0
+	.data       start:0x803C1820 end:0x803C1BF0
+	.bss        start:0x804A4848 end:0x804A48A0
 	.sdata      start:0x804BDC20 end:0x804BDC38
-	.sbss       start:0x804BF690 end:0x804BF6F0
+	.sbss       start:0x804BF698 end:0x804BF6F0
 	.sdata2     start:0x804C1A90 end:0x804C1C98
 
 Pack/RPSports/RPSportsCommon/RPSportsCommon_unsplit.o:
