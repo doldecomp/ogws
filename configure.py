@@ -1314,6 +1314,7 @@ config.libs = [
             Object(NonMatching, "Pack/RPUtility/RPUtlRandom.cpp"),
             Object(NonMatching, "Pack/RPUtility/RPUtlMath.cpp"),
             Object(NonMatching, "Pack/RPUtility/RPUtlMapData.cpp"),
+            Object(NonMatching, "Pack/RPUtility/RPUtlShadowDrawer.cpp"),
             Object(NonMatching, "Pack/RPUtility_unsplit.o"),
         ],
     },
