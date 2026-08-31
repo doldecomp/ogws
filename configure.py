@@ -1213,6 +1213,7 @@ config.libs = [
             Object(Matching, "Pack/RPSystem/RPSysGameConfig.cpp"),
             Object(NonMatching, "Pack/RPSystem/RPSysTagParms.cpp"),
             Object(NonMatching, "Pack/RPSystem/RPSysLoadScene.cpp"),
+            Object(NonMatching, "Pack/RPSystem/RP_80186E40.cpp"),
             Object(NonMatching, "Pack/RPSystem/RPSysResourceManager.cpp"),
             Object(Matching, "Pack/RPSystem/RPSysQueuedScene.cpp"),
             Object(NonMatching, "Pack/RPSystem/RPSysCommonObject.cpp"),

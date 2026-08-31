@@ -1,6 +1,6 @@
-#include <RPSystem.h>
+#include <Pack/RPSystem.h>
 
-RP_SINGLETON_IMPL_EX(RPSysQueuedScene)
+RP_SINGLETON_IMPL_EX(RPSysQueuedScene);
 
 /**
  * @brief Constructor
@@ -11,6 +11,9 @@ RPSysQueuedScene::RPSysQueuedScene(EGG::Heap* pHeap) : mpParentHeap(pHeap) {
     reset();
 }
 
+/**
+ * @brief Reset's the queued scene ID.
+ */
 void RPSysQueuedScene::reset() {
     mSceneID = -1;
 }

@@ -42,6 +42,15 @@ public:
     enum ESound {};
 
 public:
+    /**
+     * @brief Initiates the manager.
+     */
+    void init();
+
+    void update();
+
+    void draw();
+
     void setSystemWindow(E_WINDOW_TYPE type, u32 group, RPSysMessage* pMessage,
                          int argc, ...);
 
@@ -60,8 +69,12 @@ public:
         return mResult;
     }
 
+    s32 getUnk8C() const {
+        return unk8C;
+    }
 private:
-    char unk8[0x90 - 0x8];
+    char unk8[0x8C - 0x8];
+    s32 unk8C; // at 0x8C
     E_RESULT mResult; // at 0x90
     char unk94[0xAB - 0x94];
     u8 unkAB;

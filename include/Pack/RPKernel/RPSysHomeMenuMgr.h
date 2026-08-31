@@ -17,7 +17,14 @@ class RPSysHomeMenuMgr {
     RP_SINGLETON_DECL_EX(RPSysHomeMenuMgr);
 
 public:
+    /**
+     * @brief Initiates the manager.
+     */
+    void init();
+
     void update();
+
+    void draw();
 
     bool isOpen() const {
         return mIsOpen;

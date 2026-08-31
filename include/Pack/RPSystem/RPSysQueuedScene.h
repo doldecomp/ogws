@@ -11,6 +11,7 @@
  * @brief Pack Project Queued Scene
  */
 class RPSysQueuedScene {
+public:
     RP_SINGLETON_DECL_EX(RPSysQueuedScene);
 
     /**
@@ -18,7 +19,7 @@ class RPSysQueuedScene {
      */
     void reset();
 
-    inline s32 getSceneID() {
+    s32 getSceneID() const {
         return mSceneID;
     }
 private:
