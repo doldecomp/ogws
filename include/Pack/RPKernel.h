@@ -8,6 +8,7 @@
 #include <Pack/RPKernel/RPSysAvatar.h>
 #include <Pack/RPKernel/RPSysController.h>
 #include <Pack/RPKernel/RPSysControllerMgr.h>
+#include <Pack/RPKernel/RPSysCursorDrawMgr.h>
 #include <Pack/RPKernel/RPSysEffectCreator.h>
 #include <Pack/RPKernel/RPSysEffectMgr.h>
 #include <Pack/RPKernel/RPSysFile.h>
@@ -45,8 +46,8 @@
 #include <Pack/RPKernel/RPSysSystemWinMgr.h>
 #include <Pack/RPKernel/RPSysTagProcessor.h>
 #include <Pack/RPKernel/RPSysTextWriter.h>
+#include <Pack/RPKernel/RPSysTutorialWinMgr.h>
 #include <Pack/RPKernel/RPSysWideTextWriter.h>
 #include <Pack/RPKernel/RP_DEBUG_STUB_0.h>
 #include <Pack/RPKernel/RP_DEBUG_STUB_1.h>
-
 #endif

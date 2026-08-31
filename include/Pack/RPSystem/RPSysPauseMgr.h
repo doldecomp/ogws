@@ -14,6 +14,15 @@ class RPSysPauseMgr {
     RP_SINGLETON_DECL_EX(RPSysPauseMgr);
 
 public:
+    /**
+     * @brief Initiates the manager.
+     */
+    void init();
+
+    void update();
+
+    void draw();
+
     bool isPause() const {
         return unk8 & 1;
     }

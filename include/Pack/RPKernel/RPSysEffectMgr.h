@@ -33,6 +33,8 @@ public:
 
     void setCreator(RPSysEffectCreator* pCreator, u32 effectScene);
     void resetCreator(RPSysEffectCreator* pCreator);
+
+    void update(s32);
 };
 
 //! @}

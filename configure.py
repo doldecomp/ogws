@@ -1215,7 +1215,7 @@ config.libs = [
             Object(NonMatching, "Pack/RPSystem/RPSysLoadScene.cpp"),
             Object(NonMatching, "Pack/RPSystem/RP_80186E40.cpp"),
             Object(NonMatching, "Pack/RPSystem/RPSysResourceManager.cpp"),
-            Object(NonMatching, "Pack/RPSystem/RPSysQueuedScene.cpp"),
+            Object(Matching, "Pack/RPSystem/RPSysQueuedScene.cpp"),
             Object(NonMatching, "Pack/RPSystem/RPSysCommonObject.cpp"),
             Object(Matching, "Pack/RPSystem/RPSysDvdStatus.cpp"),
             Object(NonMatching, "Pack/RPSystem/RPSysSaveDataMgr.cpp"),
