@@ -1312,6 +1312,7 @@ config.libs = [
             Object(NonMatching, "Pack/RPUtility/RPUtlModel.cpp"),
             Object(NonMatching, "Pack/RPUtility/RPUtlViewClipper.cpp"),
             Object(NonMatching, "Pack/RPUtility/RPUtlRandom.cpp"),
+            Object(NonMatching, "Pack/RPUtility/RPUtlMath.cpp"),
             Object(NonMatching, "Pack/RPUtility_unsplit.o"),
         ],
     },
