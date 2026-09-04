@@ -238,6 +238,13 @@ public:
     }
 
     /**
+     * @brief Gets the archive containing static layout assets for this pack
+     */
+    EGG::Archive* GetStaticLayoutArchive() const {
+        return mpStaticLayoutArchive;
+    }
+
+    /**
      * @brief Gets the extra handle for opening files outside the DVD
      */
     void* GetMultiHandle() {

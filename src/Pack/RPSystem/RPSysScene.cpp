@@ -134,7 +134,7 @@ void RPSysScene::incomingScene() {
     setDimming(true);
 
     RP_GET_INSTANCE(RPSysEffectMgr)
-        ->setCreator(mpEffectCreator, RPSysEffectMgr::EEffectScene_Scene);
+        ->setCreator(mpEffectCreator, RPSysEffectMgr::EDrawScene_Scene);
 
     Reset();
 
@@ -271,8 +271,7 @@ void RPSysScene::init() {
 
     mpCommonObject = new RPSysCommonObject();
 
-    mpEffectCreator =
-        new RPSysEffectCreator(RPSysEffectMgr::EEffectScene_Scene);
+    mpEffectCreator = new RPSysEffectCreator(RPSysEffectMgr::EDrawScene_Scene);
 
     RP_GET_INSTANCE(RPSysKokeshiManager)->Reset();
 

@@ -576,16 +576,10 @@ DECOMP_FORCEACTIVE(RPSysResourceManager_cpp_1,
  * @param list Resource list
  */
 RPSysFile* RPSysResourceManager::FindFile(const char* pPath, EList list) const {
-    RPSysFile* pFile =
-        static_cast<RPSysFile*>(nw4r::ut::List_GetFirst(&mResourceLists[list]));
-
-    while (pFile != NULL) {
-        if (std::strcmp(pPath, pFile->GetPath()) == 0) {
-            return pFile;
+    RP_NW4R_LIST_FOREACH(RPSysFile, it, mResourceLists[list]) {
+        if (std::strcmp(pPath, it->GetPath()) == 0) {
+            return it;
         }
-
-        pFile = static_cast<RPSysFile*>(
-            nw4r::ut::List_GetNext(&mResourceLists[list], pFile));
     }
 
     return NULL;

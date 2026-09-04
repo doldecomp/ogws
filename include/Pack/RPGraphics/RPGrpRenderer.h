@@ -10,6 +10,7 @@
 // Forward declarations
 class IRPGrpDrawObject;
 class RPGrpScreen;
+class RPGrpView;
 
 /**
  * @brief Rendering engine
@@ -25,6 +26,13 @@ public:
      */
     static RPGrpRenderer* GetCurrent() {
         return spCurrent;
+    }
+
+    /**
+     * @brief Gets the view currently being rendered to
+     */
+    static RPGrpView* GetCurrentView() {
+        return spCurrentView;
     }
 
     /**
@@ -58,6 +66,8 @@ private:
     //! Allocator used for model-related allocations
     static RPGrpRenderer* spCurrent;
 
+    //! View currently being rendered to
+    static RPGrpView* spCurrentView;
     //! Screen currently being rendered to
     static RPGrpScreen* spCurrentScreen;
 };

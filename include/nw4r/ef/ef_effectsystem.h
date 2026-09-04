@@ -41,6 +41,9 @@ public:
 public:
     static EffectSystem* GetInstance();
 
+    EffectSystem();
+    ~EffectSystem();
+
     bool Initialize(u32 maxGroupID);
     bool Closing(Effect* pEffect);
 
@@ -62,19 +65,12 @@ public:
 
         if (mMemoryManager != NULL) {
             Initialize(maxGroupID);
-        } else {
-            maxGroupID = 0;
-            mActivityList = NULL;
         }
     }
 
     void SetXFFlushSafe(bool safe) {
         mXFFlushSafe = safe;
     }
-
-private:
-    EffectSystem();
-    ~EffectSystem();
 };
 
 } // namespace ef

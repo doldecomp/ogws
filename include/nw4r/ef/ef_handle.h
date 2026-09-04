@@ -31,7 +31,8 @@ public:
     Handle(T* pObject) : HandleBase(static_cast<LinkedObject*>(pObject)) {}
 
     Handle& operator=(T* pObject) {
-        *this = static_cast<LinkedObject*>(pObject);
+        static_cast<HandleBase&>(*this) = static_cast<LinkedObject*>(pObject);
+        return *this;
     }
 
     bool IsAlive() const {

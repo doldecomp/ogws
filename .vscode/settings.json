@@ -10,7 +10,12 @@
   "[python]": {
     "editor.defaultFormatter": "ms-python.black-formatter"
   },
-  "C_Cpp.default.defines": ["IEEE_LIBM", "REVOLUTION", "PACK_SPORTS"],
+  "C_Cpp.default.defines": [
+    "IEEE_LIBM",
+    "REVOLUTION",
+    "PACK_SPORTS",
+    "NW4R_EF_MEMORY_MANAGER_CONFIGURED"
+  ],
   // "editor.tabSize": 4,
   // "files.autoSave": "onFocusChange",
   "files.insertFinalNewline": true,

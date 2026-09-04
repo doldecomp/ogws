@@ -8,7 +8,6 @@
 #include <nw4r/ef/ef_referencedobject.h>
 #include <nw4r/ef/ef_res_emitter.h>
 #include <nw4r/ef/ef_types.h>
-
 #include <nw4r/math.h>
 #include <nw4r/ut.h>
 
@@ -102,27 +101,28 @@ public:
         mDrawOrderFunc->Remove(this, pManager);
     }
 
-    void Modifier_SetSimpleLightType(u8 type, bool ignoreLifeStatus) {
+    void Modifier_SetSimpleLightType(u8 type, bool ignoreLifeStatus = false) {
         ForeachParticleManager(
             ParticleManager::ModifierTravFunc_SetSimpleLightType,
             static_cast<u32>(type), ignoreLifeStatus);
     }
 
     void Modifier_SetSimpleLightAmbient(const GXColor& rColor,
-                                        bool ignoreLifeStatus) {
+                                        bool ignoreLifeStatus = false) {
         ForeachParticleManager(
             ParticleManager::ModifierTravFunc_SetSimpleLightAmbient,
             reinterpret_cast<u32>(&rColor), ignoreLifeStatus);
     }
 
     // @bug Surely meant to be a const reference...
-    void Modifier_SetScale(math::VEC2& rScale, bool ignoreLifeStatus) {
+    void Modifier_SetScale(math::VEC2& rScale, bool ignoreLifeStatus = false) {
         ForeachParticleManager(ParticleManager::ModifierTravFunc_SetScale,
                                reinterpret_cast<u32>(&rScale),
                                ignoreLifeStatus);
     }
 
-    void Modifier_SetRotate(const math::VEC3& rRot, bool ignoreLifeStatus) {
+    void Modifier_SetRotate(const math::VEC3& rRot,
+                            bool ignoreLifeStatus = false) {
         ForeachParticleManager(ParticleManager::ModifierTravFunc_SetRotate,
                                reinterpret_cast<u32>(&rRot), ignoreLifeStatus);
     }
@@ -168,6 +168,10 @@ public:
 
     const math::VEC3* GetVelocity() const {
         return &mVelocity;
+    }
+
+    void SetVelocity(const nw4r::math::VEC3& rVelocity) {
+        mVelocity = rVelocity;
     }
 };
 

@@ -223,15 +223,9 @@ public:
      * @brief Updates the state of all active sounds
      */
     static void update() {
-        RPSndAudioActorBase* pIt = static_cast<RPSndAudioActorBase*>(
-            nw4r::ut::List_GetFirst(&RPSndAudioActorBase::sActorList));
-
-        for (; pIt != NULL;
-             pIt = static_cast<RPSndAudioActorBase*>(nw4r::ut::List_GetNext(
-                 &RPSndAudioActorBase::sActorList, pIt))) {
-
-            if (pIt->mVolume.getFrame() > 0) {
-                pIt->update();
+        RP_NW4R_LIST_FOREACH(RPSndAudioActorBase, it, RPSndAudioActorBase::sActorList) {
+            if (it->mVolume.getFrame() > 0) {
+                it->update();
             }
         }
     }

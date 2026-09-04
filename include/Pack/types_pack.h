@@ -38,6 +38,18 @@ typedef u32 RPTime32;
 #endif
 
 /**
+ * List for-each macro.
+ *
+ * @param TYPE Element type
+ * @param NAME Element name
+ * @param LIST Reference to list
+ */
+#define RP_NW4R_LIST_FOREACH(TYPE, NAME, LIST)                                 \
+    for (TYPE* NAME = static_cast<TYPE*>(nw4r::ut::List_GetFirst(&LIST));      \
+         NAME != NULL;                                                         \
+         NAME = static_cast<TYPE*>(nw4r::ut::List_GetNext(&LIST, NAME)))
+
+/**
  * @brief Generic BMG message holder
  */
 struct bmg_message {

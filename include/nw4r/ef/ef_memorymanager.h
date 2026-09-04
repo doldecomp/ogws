@@ -43,6 +43,7 @@ public:
     virtual u32 GetNumFreeParticle() const = 0;   // at 0x5C
 
     virtual void* AllocHeap(u32 size) = 0; // at 0x60
+    virtual void FreeHeap(void* pPtr) = 0; // at 0x64
 };
 
 } // namespace ef

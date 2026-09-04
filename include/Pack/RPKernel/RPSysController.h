@@ -309,7 +309,7 @@ public:
      *
      * @param playerNo Player ID
      */
-    RPSysCoreController(u32 playerNo);
+    explicit RPSysCoreController(u32 playerNo);
 
     /**
      * @brief Destructor

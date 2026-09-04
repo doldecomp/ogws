@@ -32,5 +32,6 @@
 #include <Pack/RPGraphics/RPGrpScreen.h>
 #include <Pack/RPGraphics/RPGrpShadowTexture.h>
 #include <Pack/RPGraphics/RPGrpTexture.h>
+#include <Pack/RPGraphics/RPGrpView.h>
 
 #endif

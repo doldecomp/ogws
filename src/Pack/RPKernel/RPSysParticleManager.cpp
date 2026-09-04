@@ -39,30 +39,25 @@ void RPSysParticleManager::Calc() {
 
     nw4r::ef::Particle* pPrev = NULL;
 
-    nw4r::ef::Particle* pIt = static_cast<nw4r::ef::Particle*>(
-        nw4r::ut::List_GetFirst(&GetParticleList()->mActiveList));
-
-    for (; pIt != NULL;
-         pIt = static_cast<nw4r::ef::Particle*>(
-             nw4r::ut::List_GetNext(&GetParticleList()->mActiveList, pIt))) {
-
-        if (pIt->mTick != 1) {
+    RP_NW4R_LIST_FOREACH (nw4r::ef::Particle, it,
+                          GetParticleList()->mActiveList) {
+        if (it->mTick != 1) {
             continue;
         }
 
-        if (pIt->GetLifeStatus() ==
+        if (it->GetLifeStatus() ==
                 nw4r::ef::ReferencedObject::NW4R_EF_LS_WAIT ||
-            pIt->GetLifeStatus() ==
+            it->GetLifeStatus() ==
                 nw4r::ef::ReferencedObject::NW4R_EF_LS_CLOSING) {
 
             continue;
         }
 
         if (mModifyFlags & EFlag_ModifyLife) {
-            pIt->mLife = mModifyLife;
+            it->mLife = mModifyLife;
         }
 
-        nw4r::ef::ParticleParameter* pParameter = pIt->GetParticleParameter();
+        nw4r::ef::ParticleParameter* pParameter = it->GetParticleParameter();
         if (pParameter == NULL) {
             continue;
         }
@@ -75,7 +70,7 @@ void RPSysParticleManager::Calc() {
             pParameter->mRotate = mModifyRotate;
         }
 
-        pPrev = pIt;
+        pPrev = it;
     }
 }
 

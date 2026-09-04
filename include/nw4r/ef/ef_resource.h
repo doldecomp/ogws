@@ -4,8 +4,8 @@
 
 #include <nw4r/ef/ef_res_emitter.h>
 #include <nw4r/ef/ef_res_texture.h>
-
 #include <nw4r/ut.h>
+
 
 namespace nw4r {
 namespace ef {
@@ -46,6 +46,8 @@ public:
 
     static Resource* GetInstance();
 
+    void Initialize();
+
     EffectProject* Add(u8* pData);
     TextureProject* AddTexture(u8* pData);
 
@@ -69,8 +71,6 @@ public:
 
 private:
     Resource();
-
-    void Initialize();
 
     u32 relocateCurveTexture(u8* pCmdList);
     u32 relocateCurveChild(u8* pCmdList);

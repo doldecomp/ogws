@@ -3,96 +3,166 @@
 #include <nw4r/types_nw4r.h>
 
 #include <nw4r/ef/ef_effect.h>
+#include <nw4r/ef/ef_effectsystem.h>
 #include <nw4r/ef/ef_emitter.h>
 #include <nw4r/ef/ef_memorymanager.h>
+#include <nw4r/ef/ef_memorymanagerconfig.h>
 #include <nw4r/ef/ef_particle.h>
 #include <nw4r/ef/ef_particlemanager.h>
-
 #include <nw4r/ut.h>
 
-namespace nw4r {
-namespace ef {
+NW4R_EF_MEMORY_MANAGER_NAMESPACE_OPEN;
 
-template <typename T> class MemoryManagerTmp {
-private:
-    T* mHead;             // at 0x0
-    ut::List mFreeList;   // at 0x4
-    ut::List mLeasedList; // at 0x10
-    int mStructSize;      // at 0x1C
+template <typename T> class NW4R_EF_MEMORY_MANAGER_TMP_CLASS {
+    friend class NW4R_EF_MEMORY_MANAGER_CLASS;
 
-public:
-    virtual void AssignObjectID(void* pObject);
-};
-
-class MemoryManager : public MemoryManagerBase {
-private:
-    struct MemInfo {
-        MemInfo* prev;      // at 0x0
-        MemInfo* next;      // at 0x4
-        MemInfo* chainPrev; // at 0x8
-        MemInfo* chainNext; // at 0xC
-        u32 size;           // at 0x10
-        bool active;        // at 0x14
-        u8 PADDING_0x15[3]; // at 0x15
-    };
-
-private:
-    int mMaxEffect;                      // at 0x4
-    MemoryManagerTmp<Effect>* mEffectOM; // at 0x8
-
-    int mMaxEmitter;                       // at 0xC
-    MemoryManagerTmp<Emitter>* mEmitterOM; // at 0x10
-
-    int mMaxParticleManager;                               // at 0x14
-    MemoryManagerTmp<ParticleManager>* mParticleManagerOM; // at 0x18
-
-    int mMaxParticle;                        // at 0x1C
-    MemoryManagerTmp<Particle>* mParticleOM; // at 0x20
-
-    void* mHeapStartAddr; // at 0x24
-    void* mHeapEndAddr;   // at 0x28
-
-    MemInfo* mActiveMem;   // at 0x2C
-    MemInfo* mFreeMem;     // at 0x30
-    MemInfo* mFreeMemTail; // at 0x34
-    MemInfo* mAllChain;    // at 0x38
+    NW4R_EF_MEMORY_MANAGER_MEMBER_ACCESS;
+    T* mHead;                     // at 0x0
+    ::nw4r::ut::List mFreeList;   // at 0x4
+    ::nw4r::ut::List mLeasedList; // at 0x10
+    int mStructSize;              // at 0x1C
 
 public:
-    // TODO(kiwi) Crazy big implementation...
+    static const u32 OBJECT_ID_BASE = 0x10000;
 
-    MemoryManager() {}
-    virtual ~MemoryManager() {} // at 0x8
+public:
+    NW4R_EF_MEMORY_MANAGER_TMP_CLASS(int aCount, T* aHeap) {
+        u16 offset = offsetof(T, mMemoryLink);
+        int structSize = sizeof(T);
 
-    virtual void GarbageCollection() = 0; // at 0xC
+        ::nw4r::ut::List_Init(&mFreeList, offset);
+        ::nw4r::ut::List_Init(&mLeasedList, offset);
 
-    virtual Effect* AllocEffect() = 0;          // at 0x10
-    virtual void FreeEffect(void* pObject) = 0; // at 0x14
-    virtual u32 GetNumAllocEffect() const = 0;  // at 0x18
-    virtual u32 GetNumActiveEffect() const = 0; // at 0x1C
-    virtual u32 GetNumFreeEffect() const = 0;   // at 0x20
+        mStructSize = structSize;
+        mHead = aHeap;
 
-    virtual Emitter* AllocEmitter() = 0;         // at 0x24
-    virtual void FreeEmitter(void* pObject) = 0; // at 0x28
-    virtual u32 GetNumAllocEmitter() const = 0;  // at 0x2C
-    virtual u32 GetNumActiveEmitter() const = 0; // at 0x30
-    virtual u32 GetNumFreeEmitter() const = 0;   // at 0x34
+        for (u32 i = 0; i < aCount; i++) {
+            aHeap[i].mObjectID = i;
+            ::nw4r::ut::List_Append(&mFreeList, &aHeap[i]);
+        }
+    }
 
-    virtual ParticleManager* AllocParticleManager() = 0; // at 0x38
-    virtual void FreeParticleManager(void* pObject) = 0; // at 0x3C
-    virtual u32 GetNumAllocParticleManager() const = 0;  // at 0x40
-    virtual u32 GetNumActiveParticleManager() const = 0; // at 0x44
-    virtual u32 GetNumFreeParticleManager() const = 0;   // at 0x48
+    virtual void AssignObjectID(void* pObj) {
+        static_cast< ::nw4r::ef::LinkedObject*>(pObj)->mObjectID +=
+            OBJECT_ID_BASE;
+    } // at 0x8
 
-    virtual Particle* AllocParticle() = 0;        // at 0x4C
-    virtual void FreeParticle(void* pObject) = 0; // at 0x50
-    virtual u32 GetNumAllocParticle() const = 0;  // at 0x54
-    virtual u32 GetNumActiveParticle() const = 0; // at 0x58
-    virtual u32 GetNumFreeParticle() const = 0;   // at 0x5C
+    // Not implemented for Particle
+    void GarbageCollection();
 
-    virtual void* AllocHeap(u32 size) = 0; // at 0x60
+    T* Alloc() {
+        void* pPtr = ::nw4r::ut::List_GetFirst(&mFreeList);
+        if (pPtr == NULL) {
+            return NULL;
+        }
+
+        AssignObjectID(pPtr);
+        ::nw4r::ut::List_Remove(&mFreeList, pPtr);
+        ::nw4r::ut::List_Append(&mLeasedList, pPtr);
+
+        return static_cast<T*>(pPtr);
+    }
+
+    void Free(T* pObj) {
+        ::nw4r::ut::List_Remove(&mLeasedList, pObj);
+        ::nw4r::ut::List_Append(&mFreeList, pObj);
+    }
+
+    u32 GetNumAllocObject() const {
+        return GetNumActiveObject() + GetNumFreeObject();
+    }
+
+    u32 GetNumActiveObject() const {
+        return ::nw4r::ut::List_GetSize(&mLeasedList);
+    }
+
+    u32 GetNumFreeObject() const {
+        return ::nw4r::ut::List_GetSize(&mFreeList);
+    }
 };
 
-} // namespace ef
-} // namespace nw4r
+// Shorthand for MemoryManagerTmp specializations (also used by MemoryManager)
+typedef NW4R_EF_MEMORY_MANAGER_TMP_CLASS<TEffect> TEffectOM;
+typedef NW4R_EF_MEMORY_MANAGER_TMP_CLASS<TEmitter> TEmitterOM;
+typedef NW4R_EF_MEMORY_MANAGER_TMP_CLASS<TParticleManager> TParticleManagerOM;
+typedef NW4R_EF_MEMORY_MANAGER_TMP_CLASS<TParticle> TParticleOM;
+
+template <> inline void TEffectOM::GarbageCollection() {
+    void* pPtr = ::nw4r::ut::List_GetFirst(&mLeasedList);
+
+    if (pPtr != NULL) {
+        void* pNext = ::nw4r::ut::List_GetNext(&mLeasedList, pPtr);
+
+        while (pPtr != NULL) {
+            TEffect* pObj = static_cast<TEffect*>(pPtr);
+
+            if (pObj->GetLifeStatus() ==
+                    ::nw4r::ef::ReferencedObject::NW4R_EF_LS_CLOSING &&
+                pObj->GetRefCount() == 0) {
+
+                pObj->mManagerES->mActivityList[pObj->mGroupID].ToFree(pObj);
+                ::nw4r::ut::List_Remove(&mLeasedList, pObj);
+                ::nw4r::ut::List_Append(&mFreeList, pObj);
+            }
+
+            pPtr = pNext;
+            pNext = ::nw4r::ut::List_GetNext(&mLeasedList, pPtr);
+        }
+    }
+}
+
+template <> inline void TEmitterOM::GarbageCollection() {
+    void* pPtr = ::nw4r::ut::List_GetFirst(&mLeasedList);
+
+    if (pPtr != NULL) {
+        void* pNext = ::nw4r::ut::List_GetNext(&mLeasedList, pPtr);
+
+        while (pPtr != NULL) {
+            TEmitter* pObj = static_cast<TEmitter*>(pPtr);
+
+            if (pObj->GetLifeStatus() ==
+                    ::nw4r::ef::ReferencedObject::NW4R_EF_LS_CLOSING &&
+                pObj->GetRefCount() == 0) {
+
+                pObj->mManagerEF->mActivityList.ToFree(pObj);
+                ::nw4r::ut::List_Remove(&mLeasedList, pObj);
+                ::nw4r::ut::List_Append(&mFreeList, pObj);
+            }
+
+            pPtr = pNext;
+            pNext = ::nw4r::ut::List_GetNext(&mLeasedList, pPtr);
+        }
+    }
+}
+
+template <> inline void TParticleManagerOM::GarbageCollection() {
+    void* pPtr = ::nw4r::ut::List_GetFirst(&mLeasedList);
+
+    if (pPtr != NULL) {
+        void* pNext = ::nw4r::ut::List_GetNext(&mLeasedList, pPtr);
+
+        while (pPtr != NULL) {
+            TParticleManager* pObj = static_cast<TParticleManager*>(pPtr);
+
+            if (pObj->GetLifeStatus() ==
+                    ::nw4r::ef::ReferencedObject::NW4R_EF_LS_CLOSING &&
+                pObj->GetRefCount() == 0) {
+
+                pObj->mManagerEM->mActivityList.ToFree(pObj);
+                ::nw4r::ut::List_Remove(&mLeasedList, pObj);
+                ::nw4r::ut::List_Append(&mFreeList, pObj);
+            }
+
+            pPtr = pNext;
+            pNext = ::nw4r::ut::List_GetNext(&mLeasedList, pPtr);
+        }
+    }
+}
+
+#if !defined(NONMATCHING)
+template <> inline void TParticleOM::GarbageCollection() {}
+#endif
+
+NW4R_EF_MEMORY_MANAGER_NAMESPACE_CLOSE;
 
 #endif

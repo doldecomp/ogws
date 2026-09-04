@@ -85,7 +85,7 @@ RPSysSceneCreator::RPSysSceneCreator(EGG::Heap* pHeap)
  * @return Entry index, or -1 if not found
  */
 s32 RPSysSceneCreator::getEntryIndex(ESceneID id) {
-    for (s32 i = 0; i < LENGTHOF(SCENE_ATTR_TABLE); i++) {
+    for (s32 i = 0; i < ARRAY_SIZE(SCENE_ATTR_TABLE); i++) {
         if (SCENE_ATTR_TABLE[i].scene == id) {
             return i;
         }

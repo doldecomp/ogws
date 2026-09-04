@@ -104,6 +104,7 @@ inline u16 List_GetSize(const List* pList) {
             __VA_ARGS__;                                                       \
         }                                                                      \
     }
+
 /**
  * List for-each macro (reverse order).
  *
