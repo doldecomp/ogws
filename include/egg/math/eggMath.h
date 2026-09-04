@@ -16,6 +16,9 @@ public:
     static T zero() {
         return static_cast<T>(0);
     }
+    static T epsilon() {
+        return static_cast<T>(FLT_EPSILON);
+    }
 
     static T pi() {
         return static_cast<T>(M_PI);
@@ -48,6 +51,9 @@ public:
         return t1 > t2 ? t1 : t2;
     }
 };
+
+typedef Math<int> Mathi;
+typedef Math<f32> Mathf;
 
 } // namespace EGG
 

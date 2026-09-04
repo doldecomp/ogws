@@ -23,7 +23,7 @@ bool RPSysLytBounding::isInsideBounding(const nw4r::lyt::DrawInfo& rInfo,
     f32 lx = bx.length();
     f32 ly = by.length();
 
-    if (lx < NW4R_MATH_FLT_EPSILON || ly < NW4R_MATH_FLT_EPSILON) {
+    if (lx < EGG::Mathf::epsilon() || ly < EGG::Mathf::epsilon()) {
         inside = false;
     } else {
         nw4r::ut::Rect rect;

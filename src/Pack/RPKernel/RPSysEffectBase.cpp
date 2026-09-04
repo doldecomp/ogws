@@ -218,9 +218,9 @@ void RPSysEffect::setEmitEmitDiv(u16 emitDiv) {
 }
 
 /**
- * @brief Sets the radiation power of all emitters
+ * @brief Sets the emission power in the radiation direction
  *
- * @param power Radiation power
+ * @param power Emission power
  */
 void RPSysEffect::setPowerRadiationDir(f32 power) {
     if (isValid()) {
@@ -237,6 +237,11 @@ void RPSysEffect::setPowerRadiationDir(f32 power) {
     }
 }
 
+/**
+ * @brief Sets the emission power in the specified direction
+ *
+ * @param power Emission power
+ */
 void RPSysEffect::setPowerSpecDir(f32 power) {
     if (isValid()) {
         int numEmitter = mHandle.GetPtr()->GetNumEmitter();
@@ -252,6 +257,11 @@ void RPSysEffect::setPowerSpecDir(f32 power) {
     }
 }
 
+/**
+ * @brief Adds emission power in the specified direction
+ *
+ * @param add Emission power addend
+ */
 void RPSysEffect::setPowerSpecDirAdd(f32 add) {
     if (isValid()) {
         int numEmitter = mHandle.GetPtr()->GetNumEmitter();
@@ -278,6 +288,11 @@ void RPSysEffect::setPowerSpecDirAdd(f32 add) {
     }
 }
 
+/**
+ * @brief Sets the specified direction of emission
+ *
+ * @param rDir Specified direction
+ */
 void RPSysEffect::setSpecDir(const nw4r::math::VEC3& rDir) {
     if (isValid()) {
         int numEmitter = mHandle.GetPtr()->GetNumEmitter();
@@ -314,6 +329,11 @@ void RPSysEffect::setSpecDir(const nw4r::math::VEC3& rDir) {
     }
 }
 
+/**
+ * @brief Adds to the specified direction of emission
+ *
+ * @param rDir Specified direction addend
+ */
 void RPSysEffect::setSpecDirAdd(const nw4r::math::VEC3& rAdd) {
     if (isValid()) {
         int numEmitter = mHandle.GetPtr()->GetNumEmitter();
@@ -516,6 +536,11 @@ void RPSysEffect::setParticleRotate(const nw4r::math::VEC3& rRotate) {
     }
 }
 
+/**
+ * @brief Sets the scale of all emitters
+ *
+ * @param rScale Emitter scale
+ */
 void RPSysEffect::setLocalScale(const nw4r::math::VEC3& rScale) {
     if (isValid()) {
         int numEmitter = mHandle.GetPtr()->GetNumEmitter();
@@ -532,6 +557,12 @@ void RPSysEffect::setLocalScale(const nw4r::math::VEC3& rScale) {
     }
 }
 
+/**
+ * @brief Sets this effect's scale without also indirectly scaling particles
+ *
+ * @param rScale New effect scale
+ * @param pParticleScale Current particle scale (optional)
+ */
 void RPSysEffect::setDynamicsScale(const nw4r::math::VEC3& rScale,
                                    const nw4r::math::VEC2* pParticleScale) {
     nw4r::math::VEC2 particleScale(1.0f, 1.0f);
@@ -540,14 +571,14 @@ void RPSysEffect::setDynamicsScale(const nw4r::math::VEC3& rScale,
         particleScale = *pParticleScale;
     } else {
         f32 sx = rScale.x > 0.0f ? rScale.x : -rScale.x;
-        if (sx < NW4R_MATH_FLT_EPSILON) {
+        if (sx < EGG::Mathf::epsilon()) {
             particleScale.x = 0.0f;
         } else {
             particleScale.x /= rScale.x;
         }
 
         f32 sy = rScale.y > 0.0f ? rScale.y : -rScale.y;
-        if (sy < NW4R_MATH_FLT_EPSILON) {
+        if (sy < EGG::Mathf::epsilon()) {
             particleScale.y = 0.0f;
         } else {
             particleScale.y /= rScale.y;
@@ -600,6 +631,12 @@ void RPSysEffect::setMtx(const nw4r::math::MTX34& rTransform) {
     mTransform = rTransform;
 }
 
+/**
+ * @brief Toggles whether a particle animation is enabled
+ *
+ * @param idx Particle animation index
+ * @param enable Whether to enable the animation
+ */
 void RPSysEffect::setPtclAnim(int idx, bool enable) {
     bool stop = !enable;
 
@@ -637,6 +674,9 @@ void RPSysEffect::setPtclAnim(int idx, bool enable) {
     }
 }
 
+/**
+ * @brief Flushes this effect's configuration
+ */
 void RPSysEffect::update() {
     if (isValid()) {
         nw4r::math::MTX34 mtx;
@@ -675,6 +715,11 @@ void RPSysEffect::update() {
     }
 }
 
+/**
+ * @brief Tests whether the specified flag in emitter userdata is set
+ *
+ * @param idx Userdata bitflag index
+ */
 bool RPSysEffect::getUserFlag(int idx) const {
     if (isValid()) {
         if (mHandle.GetPtr()->GetNumEmitter() > 0) {
@@ -718,7 +763,7 @@ u8 RPSysEffect::fn_801941BC(int idx) const {
 }
 
 /**
- * @brief Clears this effect's state
+ * @brief Clears this effect's configuration
  */
 void RPSysEffect::reset() {
     mFlags.makeAllZero();

@@ -101,18 +101,38 @@ public:
     virtual void setEmitEmitDiv(u16 emitDiv); // at 0x34
 
     /**
-     * @brief Sets the radiation power of all emitters
+     * @brief Sets the emission power in the radiation direction
      *
-     * @param power Radiation power
+     * @param power Emission power
      */
     virtual void setPowerRadiationDir(f32 power); // at 0x38
 
+    /**
+     * @brief Sets the emission power in the specified direction
+     *
+     * @param power Emission power
+     */
     virtual void setPowerSpecDir(f32 power); // at 0x3C
 
+    /**
+     * @brief Adds emission power in the specified direction
+     *
+     * @param add Emission power addend
+     */
     virtual void setPowerSpecDirAdd(f32 add); // at 0x40
 
+    /**
+     * @brief Sets the specified direction of emission
+     *
+     * @param rDir Specified direction
+     */
     virtual void setSpecDir(const nw4r::math::VEC3& rDir); // at 0x44
 
+    /**
+     * @brief Adds to the specified direction of emission
+     *
+     * @param rDir Specified direction addend
+     */
     virtual void setSpecDirAdd(const nw4r::math::VEC3& rAdd); // at 0x48
 
     /**
@@ -180,8 +200,19 @@ public:
      */
     virtual void setParticleRotate(const nw4r::math::VEC3& rRotate); // at 0x68
 
+    /**
+     * @brief Sets the scale of all emitters
+     *
+     * @param rScale Emitter scale
+     */
     virtual void setLocalScale(const nw4r::math::VEC3& rScale); // at 0x6C
 
+    /**
+     * @brief Sets this effect's scale without also indirectly scaling particles
+     *
+     * @param rScale New effect scale
+     * @param pParticleScale Current particle scale (optional)
+     */
     virtual void
     setDynamicsScale(const nw4r::math::VEC3& rScale,
                      const nw4r::math::VEC2* pParticleScale); // at 0x70
@@ -214,16 +245,30 @@ public:
      */
     virtual void setMtx(const nw4r::math::MTX34& rTransform); // at 0x80
 
+    /**
+     * @brief Toggles whether a particle animation is enabled
+     *
+     * @param idx Particle animation index
+     * @param enable Whether to enable the animation
+     */
     virtual void setPtclAnim(int idx, bool enable); // at 0x84
 
+    /**
+     * @brief Flushes this effect's configuration
+     */
     virtual void update(); // at 0x88
 
+    /**
+     * @brief Tests whether the specified flag in emitter userdata is set
+     *
+     * @param idx Userdata bitflag index
+     */
     virtual bool getUserFlag(int idx) const; // at 0x8C
 
     virtual u8 fn_801941BC(int idx) const; // at 0x90
 
     /**
-     * @brief Clears this effect's state
+     * @brief Clears this effect's configuration
      */
     virtual void reset(); // at 0x94
 
