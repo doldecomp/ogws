@@ -308,10 +308,7 @@ void RPSysEffectMgr::LoadResource() {
         void* pStaticEffect;
         void* pStaticTexture;
 
-        struct {
-            const char* pEffect;  // at 0x0
-            const char* pTexture; // at 0x4
-        } pFiles[] = {
+        const char* pFileNames[][2] = {
             // EPackID_SportsPack
             "sports_common.breff",
             "sports_common.breft",
@@ -329,12 +326,12 @@ void RPSysEffectMgr::LoadResource() {
             "effect_music.breft",
         };
 
-        if (pFiles[pack].pEffect && pFiles[pack].pTexture != NULL) {
+        if (pFileNames[pack][0] && pFileNames[pack][1] != NULL) {
             pStaticEffect = RPSysResourceManager::GetFileFromArchive(
-                pStaticArchive, pFiles[pack].pEffect);
+                pStaticArchive, pFileNames[pack][0]);
 
             pStaticTexture = RPSysResourceManager::GetFileFromArchive(
-                pStaticArchive, pFiles[pack].pTexture);
+                pStaticArchive, pFileNames[pack][1]);
 
             mpEffectCreators[EDrawScene_Static]->setEffectResource(
                 pStaticEffect, pStaticTexture);
