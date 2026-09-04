@@ -1,0 +1,6 @@
+#ifndef RP_PARTY_PACK_PRECOMPILED_HEADER
+#define RP_PARTY_PACK_PRECOMPILED_HEADER
+
+#include <nw4r/ut/ut_algorithm.h>
+
+#endif

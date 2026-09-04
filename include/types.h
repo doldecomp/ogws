@@ -10,9 +10,10 @@
 #include <stddef.h>
 #endif
 
-#include <compat.h>
-#include <decomp.h>
-#include <lang.h>
+#include <decomp/compat.h>
+#include <decomp/decomp.h>
+#include <decomp/lang.h>
+
 #include <macros.h>
 
 typedef unsigned long long u64;
