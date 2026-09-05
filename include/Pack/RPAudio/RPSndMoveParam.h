@@ -49,6 +49,15 @@ public:
     virtual bool update(); // at 0x8
 
     /**
+     * @brief Updates the interpolation state
+     * @note This is used to call update with an instance of the base class
+     * @return Whether interpolation is ongoing
+     */
+    bool doUpdate() {
+        return update();
+    }
+
+    /**
      * @brief Gets the number of remaining interpolation frames
      */
     u32 getFrame() const {
