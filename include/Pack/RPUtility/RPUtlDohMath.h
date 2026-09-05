@@ -98,6 +98,9 @@ public:
     static const nw4r::math::MTX33 MTX33_IDENT;
     //! Identity quaternion
     static const nw4r::math::QUAT QUAT_IDENT;
+
+    //! Float close to zero for tolerance checks
+    static const f32 FLOAT_EPSILON;
 };
 
 #endif

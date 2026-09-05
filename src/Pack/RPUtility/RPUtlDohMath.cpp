@@ -171,13 +171,9 @@ void RPUtlDohMath::GetMidPoint(nw4r::math::VEC3* pMidPoint, f32* pDistance,
         f32 along = distance * ratio;
         f32 height = nw4r::math::FSqrt(lengthA * lengthA - along * along);
 
-        f32 jx = joint.x + bend.x * height;
-        f32 jy = joint.y + bend.y * height;
-        f32 jz = joint.z + bend.z * height;
-
-        pMidPoint->x = jx;
-        pMidPoint->y = jy;
-        pMidPoint->z = jz;
+        pMidPoint->x = joint.x + bend.x * height;
+        pMidPoint->y = joint.y + bend.y * height;
+        pMidPoint->z = joint.z + bend.z * height;
     }
 
     if (pDistance != NULL) {
@@ -247,3 +243,9 @@ const nw4r::math::MTX33 RPUtlDohMath::MTX33_IDENT( //
  * @brief Identity quaternion
  */
 const nw4r::math::QUAT RPUtlDohMath::QUAT_IDENT(0.0f, 0.0f, 0.0f, 1.0f);
+
+/**
+ * @brief Float close to zero for tolerance checks
+ * @note Same as JGeometry's epsilon
+ */
+const f32 RPUtlDohMath::FLOAT_EPSILON = 32.0f * FLT_EPSILON;

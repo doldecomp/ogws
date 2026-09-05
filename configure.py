@@ -1299,7 +1299,7 @@ config.libs = [
         "cflags": cflags_rp_pch,
         "progress_category": "utility",  # str | List[str]
         "objects": [
-            Object(NonMatching, "Pack/RPUtility/RPUtlDohMath.cpp"),
+            Object(Matching, "Pack/RPUtility/RPUtlDohMath.cpp"),
             Object(NonMatching, "Pack/RPUtility/RPUtlRigid.cpp"),
             Object(NonMatching, "Pack/RPUtility/RPUtlAccAnalyzer.cpp"),
             Object(NonMatching, "Pack/RPUtility/RPUtlCollisionModel.cpp"),
