@@ -22,8 +22,13 @@ RPSysLytDynamicAnm::RPSysLytDynamicAnm(nw4r::lyt::Pane* pParent,
     mAlpha = mpParent->GetAlpha();
 
     const nw4r::math::VEC3& rParentPos = mpParent->GetTranslate();
-    mStartPos.set(rParentPos.x, rParentPos.y, rParentPos.z);
-    mNowPos.set(mStartPos.x, mStartPos.y, mStartPos.z);
+    mStartPos.x = rParentPos.x;
+    mStartPos.y = rParentPos.y;
+    mStartPos.z = rParentPos.z;
+
+    mNowPos.x = mStartPos.x;
+    mNowPos.y = mStartPos.y;
+    mNowPos.z = mStartPos.z;
 
     mEndFrame = frameNum;
     mStartFrame = 0;
@@ -220,8 +225,9 @@ void RPSysLytDynamicAnm::calc() {
                 target = nw4r::math::SinRad(rad) * 0.5f + 0.5f;
             }
 
-            mpParent->SetTranslate(mNowPos * (1.0f - target) +
-                                   mStartPos * target);
+            EGG::Vector3f translate =
+                mNowPos * (1.0f - target) + mStartPos * target;
+            mpParent->SetTranslate(translate);
             mpParent->SetAlpha(mAlpha * amount);
 
         } else {
@@ -248,8 +254,9 @@ void RPSysLytDynamicAnm::calc() {
                 target = nw4r::math::SinRad(rad) * 0.5f + 0.5f;
             }
 
-            mpParent->SetTranslate(mNowPos * target +
-                                   mStartPos * (1.0f - target));
+            EGG::Vector3f translate =
+                mNowPos * target + mStartPos * (1.0f - target);
+            mpParent->SetTranslate(translate);
             mpParent->SetAlpha(mAlpha * (1.0f - amount));
 
         } else {

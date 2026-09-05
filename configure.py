@@ -1193,7 +1193,7 @@ config.libs = [
             Object(Matching, "Pack/RPKernel/RPSysMiddleDBGenInfo.cpp"),
             Object(Matching, "Pack/RPKernel/RPSysMiddleDB.cpp"),
             Object(Matching, "Pack/RPKernel/RPSysLytAllocator.cpp"),
-            Object(NonMatching, "Pack/RPKernel/RPSysLytDynamicAnm.cpp"),
+            Object(Matching, "Pack/RPKernel/RPSysLytDynamicAnm.cpp"),
             Object(Matching, "Pack/RPKernel/RPSysKokeshiIterater.cpp"),
             Object(NonMatching, "Pack/RPKernel/RPSysCursorDrawMgr.cpp"),
             Object(Matching, "Pack/RPKernel/RPSysStringUtility.cpp"),
