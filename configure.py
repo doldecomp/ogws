@@ -1208,7 +1208,7 @@ config.libs = [
             Object(NonMatching, "Pack/RPKernel/RPSysAppMiiManager.cpp"),
             Object(Matching, "Pack/RPKernel/RPSysPairingMgr.cpp"),
             Object(NonMatching, "Pack/RPKernel/RPSysControllerMgr.cpp"),
-            Object(NonMatching, "Pack/RPKernel/RPSysNWC24Manager.cpp"),
+            Object(Matching, "Pack/RPKernel/RPSysNWC24Manager.cpp"),
             Object(NonMatching, "Pack/RPKernel/RPSysParticleManager.cpp"),
         ],
     },

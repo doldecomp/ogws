@@ -31,7 +31,7 @@ public:
      *
      * @param pHeap Heap to use for allocations
      */
-    RPSysNWC24Manager(EGG::Heap* pHeap);
+    explicit RPSysNWC24Manager(EGG::Heap* pHeap);
 
     /**
      * @brief Destructor
