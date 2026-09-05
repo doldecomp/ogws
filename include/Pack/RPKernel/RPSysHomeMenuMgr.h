@@ -187,26 +187,43 @@ private:
     void checkMenuEnd();
 
 private:
+    //! HOME Menu sound archive manager
+    static RPSndHomeMenuArcMgr* spHomeMenuArcMgr;
     //! Sound archive heap size
     static u32 sSoundHeapSize;
 
-private:
-    //! HOME Menu sound archive manager
-    static RPSndHomeMenuArcMgr* spHomeMenuArcMgr;
-
+    //! Whether the HBM resources have been initialized
     bool mIsInitialized; // at 0x8
-    bool mIsDisabled;    // at 0x9
-    bool mIsStarting;    // at 0xA
-    bool mIsActive;      // at 0xB
-    bool mIsVisible;     // at 0xC
-    bool mIsSoftReset;   // at 0xD
 
-    EMenuState mMenuState;                        // at 0x10
-    s16 mStateTimer;                              // at 0x14
-    RPSysProjectLocal* mpProjectLocal;            // at 0x18
-    BanIcon* mpBanIcon;                           // at 0x1C
-    HBMDataInfo mHBMDataInfo;                     // at 0x20
-    HBMControllerData mHBMControllerData;         // at 0x60
+    //! Whether the menu is disabled
+    bool mIsDisabled; // at 0x9
+    //! Whether the menu is opening due to a button press
+    bool mIsStarting; // at 0xA
+    //! Whether the menu is interactable
+    bool mIsActive; // at 0xB
+    //! Whether the menu should be drawn
+    bool mIsVisible; // at 0xC
+
+    //! Whether a soft reset is in progress
+    bool mIsSoftReset; // at 0xD
+
+    //! Current state machine state
+    EMenuState mMenuState; // at 0x10
+    //! Current state duration
+    s16 mStateTimer; // at 0x14
+
+    //! Runtime project localization
+    RPSysProjectLocal* mpProjectLocal; // at 0x18
+
+    //! Menu ban icon
+    BanIcon* mpBanIcon; // at 0x1C
+
+    //! HBM library configuration
+    HBMDataInfo mHBMDataInfo; // at 0x20
+
+    //! HBM controller input state
+    HBMControllerData mHBMControllerData; // at 0x60
+    //! Local controller input state
     KPADStatus mKPADStatus[KPAD_MAX_CONTROLLERS]; // at 0xA0
 };
 

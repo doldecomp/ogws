@@ -20,8 +20,12 @@ RP_SINGLETON_IMPL_EX(RPSysHomeMenuMgr);
  *
  ******************************************************************************/
 
+//! X-origin of the ban icon
 #define BANICON_X 552.0f
+//! Y-origin of the ban icon
 #define BANICON_Y 388.0f
+
+//! Width of the ban icon
 #define BANICON_SIZE 28.0f
 
 /**
