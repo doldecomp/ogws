@@ -195,7 +195,7 @@ void RPSysScene::calc() {
         loadUpdate();
 
         if (RP_GET_INSTANCE(RPSysSceneMgr)->isNormalState() &&
-            !RP_GET_INSTANCE(RPSysHomeMenuMgr)->isOpen() &&
+            !RP_GET_INSTANCE(RPSysHomeMenuMgr)->isActive() &&
             !RP_GET_INSTANCE(RPSysPauseMgr)->isPause()) {
 
             mpRenderer->PreCalculate();

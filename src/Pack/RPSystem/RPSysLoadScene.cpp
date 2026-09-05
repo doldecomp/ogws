@@ -239,7 +239,7 @@ void RPSysScene::updateNandEndMessage() {
         }
     }
 
-    if (!RP_GET_INSTANCE(RPSysHomeMenuMgr)->isOpen() &&
+    if (!RP_GET_INSTANCE(RPSysHomeMenuMgr)->isActive() &&
         !RP_GET_INSTANCE(RPSysPauseMgr)->isPause()) {
 
         RP_GET_INSTANCE(RPSysSaveDataMgr)->update(isSceneDisplay());

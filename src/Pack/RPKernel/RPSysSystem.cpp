@@ -73,10 +73,13 @@ void RPSysSystem::setupLocalSettings() {
 void RPSysSystem::softResetCallBack() {
     if (RP_GET_INSTANCE(RPSysDvdStatus)->isErrorOccured()) {
         RP_GET_INSTANCE(RPSysSceneMgr)->returnToMenu(FALSE);
+
     } else {
         VIEnableDimming(FALSE);
+
         if (RP_GET_INSTANCE(RPSysSceneMgr)->isNormalState() &&
-            !RP_GET_INSTANCE(RPSysHomeMenuMgr)->startBlackOut()) {
+            !RP_GET_INSTANCE(RPSysHomeMenuMgr)->softReset()) {
+
             RP_GET_INSTANCE(RPSysSceneMgr)->softReset(FALSE);
         }
     }
