@@ -152,9 +152,187 @@ int Decomp::decodeASH(u8* pSrc, u8* pDst) {
     return dstIdx;
 }
 
-// int Decomp::decodeASR(u8* pSrc, u8* pDst) {
-//     ;
-// }
+int Decomp::decodeASR(u8* in, u8* out) {
+#line 277
+    EGG_ASSERT(sWorkArea);
+
+    int model_index;
+    int symbol;
+    u32 literal_code;
+    u32 dist_code;
+    u32 step;
+    int target_size;
+    int dist_in_pos;
+    int copy_src;
+    int literal_in_pos;
+    int out_pos;
+    u32 literal_range;
+    u32 range_adjust;
+    int low_bound;
+    int high_bound;
+    u32* count9;
+    u32* countsum9;
+    u32* count11;
+    u32* countsum11;
+    u32 dist_range;
+    u32 literal_low;
+    u32 dist_low;
+    int i;
+    int j;
+    int dist_model_size;
+    u32 scaled_value;
+
+    target_size = (in[5] << 16) | (in[6] << 8) | in[7];
+    dist_in_pos = (in[8] << 24) | (in[9] << 16) | (in[10] << 8) | in[11];
+    dist_model_size = (in[4] & 0x80) ? 0x1000 : 0x200;
+    literal_range = 0xFFFFFFFF;
+    dist_range = 0xFFFFFFFF;
+    literal_low = 0;
+    dist_low = 0;
+
+    count9 = reinterpret_cast<u32*>(sWorkArea);
+    countsum9 = count9 + 0x200;
+    count11 = countsum9 + 0x201;
+    countsum11 = count11 + 0x1000;
+
+    countsum9[0] = countsum11[0] = 0;
+
+    for (i = 0; i < 0x200; i++) {
+        count9[i] = 1;
+        countsum9[i + 1] = countsum9[i] + 1;
+    }
+
+    for (i = 0; i < dist_model_size; i++) {
+        count11[i] = 1;
+        countsum11[i + 1] = countsum11[i] + 1;
+    }
+
+    out_pos = 0;
+    literal_in_pos = 0x10;
+    literal_code = (in[12] << 24) | (in[13] << 16) | (in[14] << 8) | in[15];
+    dist_code = (in[dist_in_pos] << 24) | (in[dist_in_pos + 1] << 16) |
+                (in[dist_in_pos + 2] << 8) | in[dist_in_pos + 3];
+    dist_in_pos += 4;
+
+    while (out_pos < target_size) {
+        step = literal_range / countsum9[0x200];
+        scaled_value = (literal_code - literal_low) / step;
+        low_bound = 0;
+        high_bound = 0x200;
+
+        while (low_bound < high_bound) {
+            model_index = (low_bound + high_bound) >> 1;
+            if (scaled_value < countsum9[model_index]) {
+                high_bound = model_index;
+            } else {
+                low_bound = model_index + 1;
+            }
+        }
+
+        while (model_index >= 0) {
+            if ((countsum9[model_index] <= scaled_value) &&
+                (scaled_value < countsum9[model_index + 1]))
+                break;
+            model_index--;
+        }
+        symbol = model_index;
+
+        literal_low += step * countsum9[symbol];
+        literal_range = step * count9[symbol];
+        count9[symbol]++;
+
+        while (++model_index <= 0x200) {
+            countsum9[model_index]++;
+        }
+
+        if (countsum9[0x200] >= 0x10000) {
+            countsum9[0] = 0;
+            for (j = 0; j < 0x200; j++) {
+                count9[j] = (count9[j] >> 1) | 1;
+                countsum9[j + 1] = countsum9[j] + count9[j];
+            }
+        }
+
+        while ((literal_low & 0xFF000000) ==
+               ((literal_low + literal_range) & 0xFF000000)) {
+            literal_low <<= 8;
+            literal_range <<= 8;
+            literal_code = in[literal_in_pos++] + (literal_code << 8);
+        }
+        while (literal_range < 0x10000) {
+            range_adjust = 0x10000 - (literal_low & 0xFFFF);
+            literal_range = range_adjust << 8;
+            literal_low <<= 8;
+            literal_code = in[literal_in_pos++] + (literal_code << 8);
+        }
+
+        if (symbol < 0x100) {
+            out[out_pos++] = (u8)symbol;
+            continue;
+        }
+
+        step = dist_range / countsum11[dist_model_size];
+        scaled_value = (dist_code - dist_low) / step;
+        low_bound = 0;
+        high_bound = dist_model_size;
+
+        while (low_bound < high_bound) {
+            model_index = (low_bound + high_bound) >> 1;
+            if (scaled_value < countsum11[model_index]) {
+                high_bound = model_index;
+            } else {
+                low_bound = model_index + 1;
+            }
+        }
+
+        while (model_index >= 0) {
+            if ((countsum11[model_index] <= scaled_value) &&
+                (scaled_value < countsum11[model_index + 1]))
+                break;
+            model_index--;
+        }
+
+        copy_src = out_pos - model_index - 1;
+        symbol -= 0xFD;
+        while (symbol > 0) {
+            out[out_pos] = out[copy_src++];
+            symbol--;
+            out_pos++;
+        }
+
+        dist_low += step * countsum11[model_index];
+        dist_range = step * count11[model_index];
+        count11[model_index]++;
+
+        while (++model_index <= dist_model_size) {
+            countsum11[model_index]++;
+        }
+
+        if (countsum11[dist_model_size] >= 0x10000) {
+            countsum11[0] = 0;
+            for (j = 0; j < dist_model_size; j++) {
+                count11[j] = (count11[j] >> 1) | 1;
+                countsum11[j + 1] = countsum11[j] + count11[j];
+            }
+        }
+
+        while ((dist_low & 0xFF000000) ==
+               ((dist_low + dist_range) & 0xFF000000)) {
+            dist_low <<= 8;
+            dist_range <<= 8;
+            dist_code = in[dist_in_pos++] + (dist_code << 8);
+        }
+
+        while (dist_range < 0x10000) {
+            range_adjust = 0x10000 - (dist_low & 0xFFFF);
+            dist_range = range_adjust << 8;
+            dist_low <<= 8;
+            dist_code = in[dist_in_pos++] + (dist_code << 8);
+        }
+    }
+
+    return out_pos;
+}
 
 Decomp::ECompressKind Decomp::checkCompressed(u8* pData) {
     if (pData[0] == 'Y' && pData[1] == 'a' && pData[2] == 'z') {
