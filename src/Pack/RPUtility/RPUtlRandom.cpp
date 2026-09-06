@@ -1,8 +1,10 @@
 #include <Pack/RPUtility.h>
 
-u32 RPUtlRandom::sSeed;
+#include <revolution/OS.h>
+
+u32 RPUtlRandom::sSeed = 0;
 const u32 RPUtlRandom::RANDF_MAX = 0xFFFF;
-const u32 RPUtlRandom::RANDF_SHIFT = 0x10;
+const u32 RPUtlRandom::RANDF_SHIFT = 16;
 const u32 RPUtlRandom::MULT = 0x10DCD;
 
 /**

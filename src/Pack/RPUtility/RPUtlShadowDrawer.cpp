@@ -1,15 +1,20 @@
 #include <Pack/RPUtility.h>
 
+#include <nw4r/math.h>
+
 #include <revolution/GX.h>
 
-nw4r::math::MTX34 RPUtlShadowDrawer::mMtx;
+nw4r::math::MTX34 RPUtlShadowDrawer::sGlobalMtx;
 
-void RPUtlShadowDrawer::drawShadow(RPUtlSimpleShadow* simpShad) {
+/**
+ * @brief Draws basic shadows.
+ */
+void RPUtlShadowDrawer::drawShadow() {
     nw4r::math::MTX34 ab;
 
-    PSMTXConcat(mMtx, simpShad->mMtx, ab);
-    GXLoadPosMtxImm(ab, 0);
-    GXLoadNrmMtxImm(ab, 0);
-    GXSetChanMatColor(GX_COLOR0A0, simpShad->mColor);
-    GXDrawCylinder(0x10u);
+    nw4r::math::MTX34Mult(&ab, &sGlobalMtx, &mLocalMtx);
+    GXLoadPosMtxImm(ab, GX_PNMTX0);
+    GXLoadNrmMtxImm(ab, GX_PNMTX0);
+    GXSetChanMatColor(GX_COLOR0A0, mColor);
+    GXDrawCylinder(16);
 }
