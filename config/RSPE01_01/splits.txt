@@ -3508,15 +3508,120 @@ Pack/RPUtility/RPUtlObject.cpp:
 	.bss        start:0x804A4830 end:0x804A4848
 	.sbss       start:0x804BF690 end:0x804BF698
 
-Pack/RPUtility_unsplit.o:
-	.text       start:0x801BFEA8 end:0x801CCB70
-	.ctors      start:0x80355150 end:0x80355160
-	.rodata     start:0x803837E8 end:0x80383990
-	.data       start:0x803C1820 end:0x803C1BF0
-	.bss        start:0x804A4848 end:0x804A48A0
-	.sdata      start:0x804BDC20 end:0x804BDC38
-	.sbss       start:0x804BF698 end:0x804BF6F0
-	.sdata2     start:0x804C1A90 end:0x804C1C98
+Pack/RPUtility/RPUtl_801BFEA8.cpp:
+	.text       start:0x801BFEA8 end:0x801C0D90
+	.ctors      start:0x80355150 end:0x80355154
+	.bss        start:0x804A4848 end:0x804A4880
+	.sdata2     start:0x804C1A90 end:0x804C1AA0
+
+Pack/RPUtility/RPUtl_801C0D90.cpp:
+	.text       start:0x801C0D90 end:0x801C141C
+	.data       start:0x803C1820 end:0x803C1848
+	.sdata2     start:0x804C1AA0 end:0x804C1AA8
+
+Pack/RPUtility/RPUtlKokeshi.cpp:
+	.text       start:0x801C141C end:0x801C15C4
+	.data       start:0x803C1848 end:0x803C1860
+	.sdata      start:0x804BDC20 end:0x804BDC28
+
+Pack/RPUtility/RPUtlResourceManager.cpp:
+	.text       start:0x801C15C4 end:0x801C177C
+	.data       start:0x803C1860 end:0x803C1870
+	.sbss       start:0x804BF698 end:0x804BF6A0
+
+Pack/RPUtility/RPUtlModelDebug.cpp:
+	.text       start:0x801C177C end:0x801C194C
+	.data       start:0x803C1870 end:0x803C1880
+	.sdata2     start:0x804C1AA8 end:0x804C1AB0
+
+Pack/RPUtility/RPUtlDohGraphSun.cpp:
+	.text       start:0x801C194C end:0x801C29B4
+	.rodata     start:0x803837E8 end:0x80383830
+	.data       start:0x803C1880 end:0x803C18A0
+	.sdata2     start:0x804C1AB0 end:0x804C1B18
+
+Pack/RPUtility/RPUtlDebugStub1.cpp:
+	.text       start:0x801C29B4 end:0x801C2B00
+	.data       start:0x803C18A0 end:0x803C18C8
+	.sbss       start:0x804BF6A0 end:0x804BF6B0
+
+Pack/RPUtility/RPUtlDebugStub2.cpp:
+	.text       start:0x801C2B00 end:0x801C2EB4
+	.data       start:0x803C18C8 end:0x803C1900
+	.sdata      start:0x804BDC28 end:0x804BDC38
+	.sbss       start:0x804BF6B0 end:0x804BF6C0
+	.sdata2     start:0x804C1B18 end:0x804C1B20
+
+Pack/RPUtility/RPUtlDebugStub3.cpp:
+	.text       start:0x801C2EB4 end:0x801C2EF4
+	.data       start:0x803C1900 end:0x803C1910
+
+Pack/RPUtility/RPSportsUtlModel_unsplit.cpp:
+	.text       start:0x801C2EF4 end:0x801C3250
+	.data       start:0x803C1910 end:0x803C1988
+	.sdata2     start:0x804C1B20 end:0x804C1B30
+
+Pack/RPUtility/RPUtlLytBase.cpp:
+	.text       start:0x801C3250 end:0x801C40C4
+	.ctors      start:0x80355154 end:0x80355158
+	.data       start:0x803C1988 end:0x803C19A8
+	.sdata2     start:0x804C1B30 end:0x804C1B68
+
+Pack/RPUtility/RPUtlLyt.cpp:
+	.text       start:0x801C40C4 end:0x801C4704
+	.data       start:0x803C19A8 end:0x803C19E0
+	.sdata2     start:0x804C1B68 end:0x804C1B80
+
+Pack/RPUtility/RPUtl_801C4704.cpp:
+	.text       start:0x801C4704 end:0x801C4828
+	.data       start:0x803C19E0 end:0x803C19F8
+	.sdata2     start:0x804C1B80 end:0x804C1B88
+
+Pack/RPUtility/RPUtl_801C4828.cpp:
+	.text       start:0x801C4828 end:0x801C4900
+	.data       start:0x803C19F8 end:0x803C1A08
+	.sbss       start:0x804BF6C0 end:0x804BF6C8
+
+Pack/RPUtility/RPUtlBaseSequence.cpp:
+	.text       start:0x801C4900 end:0x801C4B7C
+	.data       start:0x803C1A08 end:0x803C1A60
+
+Pack/RPUtility/RPUtl_801C4B7C.cpp:
+	.text       start:0x801C4B7C end:0x801C6464
+	.sdata2     start:0x804C1B88 end:0x804C1B98
+
+Pack/RPUtility/RPSportsUtlModelRigid.cpp:
+	.text       start:0x801C6464 end:0x801C67B8
+	.data       start:0x803C1A60 end:0x803C1AD8
+	.sdata2     start:0x804C1B98 end:0x804C1BA0
+
+Pack/RPUtility/RPUtl_801C67B8.cpp:
+	.text       start:0x801C67B8 end:0x801C8330
+	.data       start:0x803C1AD8 end:0x803C1B18
+	.sdata2     start:0x804C1BA0 end:0x804C1C10
+
+Pack/RPUtility/RPUtlLytFrameCursor.cpp:
+	.text       start:0x801C8330 end:0x801C9E7C
+	.ctors      start:0x80355158 end:0x8035515C
+	.rodata     start:0x80383830 end:0x80383948
+	.data       start:0x803C1B18 end:0x803C1B68
+	.bss        start:0x804A4880 end:0x804A4890
+	.sbss       start:0x804BF6C8 end:0x804BF6D8
+	.sdata2     start:0x804C1C10 end:0x804C1C40
+
+Pack/RPUtility/RPUtl_801C9E7C.cpp:
+	.text       start:0x801C9E7C end:0x801CB500
+	.ctors      start:0x8035515C end:0x80355160
+	.rodata     start:0x80383948 end:0x80383990
+	.data       start:0x803C1B68 end:0x803C1B88
+	.bss        start:0x804A4890 end:0x804A48A0
+	.sbss       start:0x804BF6D8 end:0x804BF6E8
+	.sdata2     start:0x804C1C40 end:0x804C1C70
+
+Pack/RPUtility/RPUtlLoadSaveDataScene.cpp:
+	.text       start:0x801CB500 end:0x801CCB70
+	.data       start:0x803C1B88 end:0x803C1BF0
+	.sdata2     start:0x804C1C70 end:0x804C1C98
 
 Pack/RPSports/RPSportsCommon/RPSportsCommon_unsplit.o:
 	.text       start:0x801CCB70 end:0x80214480
@@ -3525,7 +3630,7 @@ Pack/RPSports/RPSportsCommon/RPSportsCommon_unsplit.o:
 	.data       start:0x803C1BF0 end:0x803C3730
 	.bss        start:0x804A48A0 end:0x804A6000
 	.sdata      start:0x804BDC38 end:0x804BDDD0
-	.sbss       start:0x804BF6F0 end:0x804BF768
+	.sbss       start:0x804BF6E8 end:0x804BF768
 	.sdata2     start:0x804C1C98 end:0x804C2338
 
 Pack/RPSports/RPTnsScene/RPTnsScene_unsplit.o:
