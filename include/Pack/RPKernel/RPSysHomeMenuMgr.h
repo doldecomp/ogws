@@ -12,79 +12,219 @@
 //! @{
 
 /**
- * @brief Home menu manager
+ * @brief HOME Menu manager
  */
 class RPSysHomeMenuMgr {
     RP_SINGLETON_DECL_EX(RPSysHomeMenuMgr);
 
 public:
-    //! This uses its own scheme instead of HBMSelectBtnNum for some reason
-    enum homeButtonState {
-        BUTTON_NONE, // used when inactive or returning to Wii Menu
-        BUTTON_OPEN,
-        BUTTON_CLOSE, // exiting Home Menu, but game still running
-        BUTTON_RESET,
-        BUTTON_MAX
+    /**
+     * @brief Icon when HOME Menu is disabled
+     */
+    class BanIcon {
+    public:
+        /**
+         * @brief Constructor
+         */
+        BanIcon();
+
+        /**
+         * @brief Updates this icon's state
+         */
+        void calc();
+
+        /**
+         * @brief Renders this icon's state
+         */
+        void draw();
+
+        /**
+         * @brief Resets this icon's state
+         */
+        void clear() {
+            mState = EState_Hide;
+            mTimer = 0;
+            mAlpha = 0;
+        }
+
+        /**
+         * @brief Enables this icon
+         */
+        void switchOn() {
+            mState = EState_FadeIn;
+            mTimer = 0;
+            mAlpha = 0;
+        }
+
+        /**
+         * @brief Tests whether this icon is visible
+         */
+        bool isDisp() const {
+            return mState != EState_Hide;
+        }
+
+        /**
+         * @brief Attaches a texture to this icon
+         *
+         * @param pTexture Icon texture
+         */
+        void setTexture(const EGG::ResTIMG* pTexture) {
+            mpTexture = pTexture;
+        }
+
+    private:
+        /**
+         * @brief State machine state
+         */
+        enum EState {
+            EState_Hide,    //!< Icon is not displaying
+            EState_FadeIn,  //!< Icon is appearing
+            EState_Disp,    //!< Icon is fully visible
+            EState_FadeOut, //!< Icon is disappearing
+        };
+
+        //! Time to fade in/out the icon, in frames
+        static const int FADE_LENGTH = 15;
+        //! Time to fully display the icon, in frames
+        static const int DISP_LENGTH = 60;
+
+    private:
+        //! Ban icon texture
+        const EGG::ResTIMG* mpTexture; // at 0x0
+
+        //! State machine state
+        EState mState; // at 0x4
+        //! Duration of the current state
+        s16 mTimer; // at 0x8
+
+        //! Calculated icon transparency
+        u16 mAlpha; // at 0xA
     };
 
-    struct fileAccessor {
-        void* file;
-        BOOL UNK_0x04; // set to 1 if DVD error occurs in function 801A4E8C
-        u16 UNK_0x08;
-        u16 UNK_0x0A;
-        void drawScreen();
+    /**
+     * @brief HOME Menu state
+     */
+    enum EMenuState {
+        EMenuState_End,   //!< Menu is closing
+        EMenuState_Start, //!< Menu is opening
+        EMenuState_Open,  //!< Menu is interactable
+        EMenuState_Reset, //!< Menu is performing a soft reset
     };
 
-    bool soundCallBack(int unk, u32 id);
+public:
+    /**
+     * @brief Initializes this manager's state
+     */
     void init();
-    void LoadResource();
-    void updateOutside();
-    void clearMenu();
-    BOOL startBlackOut();
-    void update();
-    void draw();
-    void beginDrawScreen();
 
-    bool isOpen() const {
-        return mIsOpen;
+    /**
+     * @brief Initializes the HBM library
+     */
+    void initHomeButtonInfo();
+
+    /**
+     * @brief Performs a soft reset
+     *
+     * @return Whether HBM will perform the reset
+     */
+    bool softReset();
+
+    /**
+     * @brief Updates this manager's state
+     */
+    void update();
+
+    /**
+     * @brief Renders the HOME Menu if it is visible
+     */
+    void draw();
+
+    /**
+     * @brief Renders the ban icon if it is visible
+     */
+    void drawBanIcon();
+
+    /**
+     * @brief Toggles whether the HOME Menu is disabled
+     *
+     * @param disable Whether to disable the menu
+     */
+    void disable(bool disable) {
+        mIsDisabled = disable;
+    }
+
+    /**
+     * @brief Tests whether the HOME Menu is currently active
+     */
+    bool isActive() const {
+        return mIsActive;
     }
 
 private:
+    //! HBM work memory size
+    static const u32 HBM_WORK_SIZE = OS_MEM_KB_TO_B(512);
+    //! Size of the HBM config.txt file
+    static const u32 HBM_CONFIG_SIZE = 0x23;
 
-    bool mResLoaded; // at 0x08
-    bool mUNK_0x09;
-    bool mUNK_0x0A;
-    bool mIsOpen; // at 0x0B
-    u8 mUNK_0x0C;
-    bool mBlackOutCalled; // at 0x0D
-    homeButtonState mButtonState; // at 0x10
-    u16 mUNK_0x14;
-    RPSysProjectLocal* mProjectLocal; // at 0x18
-    fileAccessor* mFileAccessor; // at 0x1C
-    HBMDataInfo* mMenuDataInfo; // at 0x20
-    u32 mUNK_0x24;
-    u32 mUNK_0x28;
-    u32 mUNK_0x2C;
-    void* mUNK_0x30;
-    void* mSoundCallback; // at 0x34
-    u32 mUNK_0x38;
-    u32 mUNK_0x3C;
-    u32 mUNK_0x40;
-    u32 mUNK_0x44; // Seemingly skipped in constructor?
-    u32 mUNK_0x48;
-    u32 mUNK_0x4C;
-    f32 mUNK_0x50; // Set to 1.2 if the console is in PAL 50 Hz mode,
-                   // otherwise 1.0
-    f32 mScaleX;
-    f32 mAdjScaleX;
-    u32 mUNK_0x5C;
-    const HBMControllerData* mHbmControllerData;
-    Vec2 mVec2;
-    u8 mUNK_0x6C[50];
-    KPADStatus mKpadStatus; //todo(texline) why is this duped?
-    u8 mPadding[396];
+private:
+    /**
+     * @brief HBM library sound callback
+     *
+     * @param event HBM event
+     * @param arg Event argument
+     * @return Whether this callback handled the playback for HBM
+     */
+    static BOOL soundCallback(int event, int arg);
 
+    /**
+     * @brief Checks whether the HOME Menu should be opened
+     */
+    void checkMenuStart();
+
+    /**
+     * @brief Checks whether the HOME Menu should be closed
+     */
+    void checkMenuEnd();
+
+private:
+    //! HOME Menu sound archive manager
     static RPSndHomeMenuArcMgr* spHomeMenuArcMgr;
+    //! Sound archive heap size
+    static u32 sSoundHeapSize;
+
+    //! Whether the HBM resources have been initialized
+    bool mIsInitialized; // at 0x8
+
+    //! Whether the menu is disabled
+    bool mIsDisabled; // at 0x9
+    //! Whether the menu is opening due to a button press
+    bool mIsStarting; // at 0xA
+    //! Whether the menu is interactable
+    bool mIsActive; // at 0xB
+    //! Whether the menu should be drawn
+    bool mIsVisible; // at 0xC
+
+    //! Whether a soft reset is in progress
+    bool mIsSoftReset; // at 0xD
+
+    //! Current state machine state
+    EMenuState mMenuState; // at 0x10
+    //! Current state duration
+    s16 mStateTimer; // at 0x14
+
+    //! Runtime project localization
+    RPSysProjectLocal* mpProjectLocal; // at 0x18
+
+    //! Menu ban icon
+    BanIcon* mpBanIcon; // at 0x1C
+
+    //! HBM library configuration
+    HBMDataInfo mHBMDataInfo; // at 0x20
+
+    //! HBM controller input state
+    HBMControllerData mHBMControllerData; // at 0x60
+    //! Local controller input state
+    KPADStatus mKPADStatus[KPAD_MAX_CONTROLLERS]; // at 0xA0
 };
 
 //! @}

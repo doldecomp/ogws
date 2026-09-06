@@ -42,6 +42,14 @@ public:
     };
 
     /**
+     * @brief Target framerate
+     */
+    enum EFrameRate {
+        EFrameRate_60Hz, //!< NTSC/PAL60 (60Hz)
+        EFrameRate_50Hz, //!< PAL50 (50Hz)
+    };
+
+    /**
      * @brief Storage device
      */
     enum EStorage {
@@ -105,10 +113,10 @@ public:
     }
 
     /**
-     * @brief Tests whether the game is expected to run at 50Hz
+     * @brief Gets the target framerate
      */
-    bool isPal50() const {
-        return mIsPal50;
+    EFrameRate getFrameRate() const {
+        return mFrameRate;
     }
 
     /**
@@ -127,8 +135,8 @@ private:
     EArea mLocale; // at 0x10
     //! Game language
     EArea mLanguage; // at 0x14
-    //! Whether the display is 50Hz
-    BOOL mIsPal50; // at 0x18
+    //! Target framerate
+    EFrameRate mFrameRate; // at 0x18
     //! Sound archive storage device
     EStorage mSoundStorage; // at 0x1C
 };

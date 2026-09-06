@@ -16,7 +16,7 @@ RPSysProjectLocal::RPSysProjectLocal(EGG::Heap* pHeap)
       mRegion(ERegion_NTSC_U),
       mLocale(EArea_USA),
       mLanguage(EArea_USA),
-      mIsPal50(false),
+      mFrameRate(EFrameRate_60Hz),
       mSoundStorage(EStorage_DVDStream),
 #endif
 

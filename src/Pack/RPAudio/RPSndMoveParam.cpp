@@ -137,7 +137,7 @@ void RPSndMoveParamMgr::update() {
     RPSndMoveParamLink* pNext = NULL;
 
     for (; pIt != NULL; pIt = pNext) {
-        bool ongoing = static_cast<RPSndMoveParam*>(pIt)->update();
+        bool ongoing = static_cast<RPSndMoveParam*>(pIt)->doUpdate();
 
         pNext = static_cast<RPSndMoveParamLink*>(
             nw4r::ut::List_GetNext(&sMoveParamList, pIt));
@@ -147,3 +147,6 @@ void RPSndMoveParamMgr::update() {
         }
     }
 }
+
+DECOMP_FORCELITERAL(RPSndMoveParam_cpp,
+                    4503599627370496.0);

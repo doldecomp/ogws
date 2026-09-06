@@ -35,6 +35,16 @@ public:
      */
     bool setupArchive(const void* pBinary);
 
+    /**
+     * @brief Attempts to start the specified sound
+     *
+     * @param id Sound ID
+     * @return Success
+     */
+    bool startSe(u32 id) {
+        return startSound(&mSoundHandle, id);
+    }
+
 private:
     //! Active sound handle
     nw4r::snd::SoundHandle mSoundHandle; // at 0x6A4
