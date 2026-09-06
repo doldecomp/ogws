@@ -775,7 +775,7 @@ config.libs = [
             Object(Matching, "egg/core/eggProcessMeter.cpp"),
             Object(Matching, "egg/core/eggDisposer.cpp"),
             Object(Matching, "egg/core/eggArchive.cpp"),
-            Object(NonMatching, "egg/core/eggDecomp.cpp"),
+            Object(Matching, "egg/core/eggDecomp.cpp"),
             Object(Matching, "egg/core/eggAsyncDisplay.cpp"),
             Object(Matching, "egg/core/eggCntFile.cpp"),
             Object(Matching, "egg/audio/eggAudioArcPlayerMgr.cpp"),
