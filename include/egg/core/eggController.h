@@ -116,6 +116,13 @@ public:
         return Vector3f(acc.x, acc.y, acc.z);
     }
 
+    Vector2f getDpdPos() const {
+        return Vector2f(pos.x, pos.y);
+    }
+    Vector2f getHorizon() const {
+        return Vector2f(horizon.x, horizon.y);
+    }
+
     eCoreDevType getDevType() const {
         return static_cast<eCoreDevType>(dev_type);
     }

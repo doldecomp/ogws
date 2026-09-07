@@ -53,7 +53,8 @@ RPGrpModelRfl* RPGrpModelRfl::Construct(RFLDataSource src, u16 index,
 
 RPGrpModelRfl::RPGrpModelRfl(RFLResolution resolution, u32 exprFlags, u8 viewNo)
     : RPGrpModel(viewNo),
-      mFlagsRfl(EFlag_5 | EFlag_6 | EFlag_7),
+      mFlagsRfl(EFlag_Player2CursorValid | EFlag_Player3CursorValid |
+                EFlag_Player4CursorValid),
       mOutputAlpha(128),
       mMaterialType(MaterialType_0),
       mpRflParent(NULL),
@@ -221,7 +222,7 @@ void RPGrpModelRfl::DrawGX(const RFLCharModel* pModel, u32 diffMask,
 
             diffMaskSub = diffMask;
 
-            if (!(mFlagsRfl & EFlag_5)) {
+            if (!(mFlagsRfl & EFlag_Player2CursorValid)) {
                 diffMaskSub = 0;
                 ambColor.a = 255;
             }
@@ -232,10 +233,11 @@ void RPGrpModelRfl::DrawGX(const RFLCharModel* pModel, u32 diffMask,
 
             GXSetChanCtrl(GX_COLOR0, GX_TRUE, GX_SRC_REG, GX_SRC_REG,
                           GX_LIGHT_NULL, GX_DF_CLAMP, GX_AF_SPOT);
-            GXSetChanCtrl(GX_ALPHA0, (mFlagsRfl & EFlag_5) ? GX_TRUE : GX_FALSE,
-                          GX_SRC_REG, GX_SRC_REG,
-                          static_cast<GXLightID>(diffMaskSub), GX_DF_CLAMP,
-                          GX_AF_SPOT);
+            GXSetChanCtrl(
+                GX_ALPHA0,
+                (mFlagsRfl & EFlag_Player2CursorValid) ? GX_TRUE : GX_FALSE,
+                GX_SRC_REG, GX_SRC_REG, static_cast<GXLightID>(diffMaskSub),
+                GX_DF_CLAMP, GX_AF_SPOT);
             GXSetChanCtrl(GX_COLOR1A1, GX_FALSE, GX_SRC_REG, GX_SRC_REG,
                           GX_LIGHT_NULL, GX_DF_NONE, GX_AF_NONE);
 

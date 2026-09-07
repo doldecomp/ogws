@@ -50,6 +50,18 @@ public:
     static T max(T t1, T t2) {
         return t1 > t2 ? t1 : t2;
     }
+    static T clamp2(T t, T min, T max) {
+        if (t < min) {
+            return min;
+        }
+
+        if (t > max) {
+            return max;
+        }
+
+        return t;
+        // return t < min ? min : (t > max ? max : t);
+    }
 };
 
 typedef Math<int> Mathi;

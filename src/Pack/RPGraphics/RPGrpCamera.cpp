@@ -74,7 +74,7 @@ void RPGrpCamera::Identity() {
     mUp.y = 1.0f;
 
     CalcMatrix();
-    mFlags &= ~EFlag_5;
+    mFlags &= ~EFlag_Player2CursorValid;
 }
 
 /**
@@ -150,7 +150,7 @@ void RPGrpCamera::CalcMatrix() {
     mForward.y = mWorldMtx._12;
     mForward.z = mWorldMtx._22;
 
-    mFlags &= ~EFlag_7;
+    mFlags &= ~EFlag_Player4CursorValid;
 }
 
 /**

@@ -160,9 +160,9 @@ public:
 private:
     enum {
         EFlag_ReverseCulling = 1 << 4,
-        EFlag_5 = 1 << 5,
-        EFlag_6 = 1 << 6,
-        EFlag_7 = 1 << 7,
+        EFlag_Player2CursorValid = 1 << 5,
+        EFlag_Player3CursorValid = 1 << 6,
+        EFlag_Player4CursorValid = 1 << 7,
         EFlag_8 = 1 << 8,
     };
 

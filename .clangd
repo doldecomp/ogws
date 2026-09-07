@@ -1,2 +1,5 @@
+Completion:
+  HeaderInsertion: Never
+
 CompileFlags:
   Add: -ferror-limit=100
