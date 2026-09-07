@@ -406,12 +406,13 @@ cflags_hbm = [
     "-i include/homeButtonMiniLib",
 ]
 
-# Common RP flags
-cflags_rp_base = [
+# RP flags
+cflags_rp = [
     *cflags_base,
     *cflags_pedantic,
     "-DPACK_SPORTS",
     "-enc SJIS",
+    "-inline deferred",
     "-fp_contract on",
     "-use_lmw_stmw on",
     "-str reuse,pool,readonly",
@@ -420,17 +421,9 @@ cflags_rp_base = [
     "-i include/Pack",
 ]
 
-# RP flags
-cflags_rp = [
-    *cflags_rp_base,
-    "-inline deferred",
-    "-prefix SportsPack.mch",
-]
-
-# RP flags (no inline deferred)
-cflags_rp_no_deferred = [
-    *cflags_rp_base,
-    "-inline auto",
+# RP flags (include precompiled header)
+cflags_rp_pch = [
+    *cflags_rp,
     "-prefix SportsPack.mch",
 ]
 
@@ -453,7 +446,7 @@ config.precompiled_headers = [
     {
         "source": "SportsPack.pch",
         "mw_version": config.linker_version,
-        "cflags": ["-lang=c++", *cflags_rp_base],
+        "cflags": ["-lang=c++", *cflags_rp],
     },
 ]
 config.libs = [
@@ -1164,7 +1157,7 @@ config.libs = [
     {
         "lib": "RP",
         "mw_version": config.linker_version,
-        "cflags": cflags_rp,
+        "cflags": cflags_rp_pch,
         "progress_category": "kernel",  # str | List[str]
         "objects": [
             Object(Matching, "main.cpp"),
@@ -1222,7 +1215,7 @@ config.libs = [
     {
         "lib": "RP",
         "mw_version": config.linker_version,
-        "cflags": cflags_rp,
+        "cflags": cflags_rp_pch,
         "progress_category": "system",  # str | List[str]
         "objects": [
             Object(NonMatching, "Pack/RPSystem/RPSysSceneCreator.cpp"),
@@ -1253,7 +1246,7 @@ config.libs = [
     {
         "lib": "RP",
         "mw_version": config.linker_version,
-        "cflags": cflags_rp,
+        "cflags": cflags_rp_pch,
         "progress_category": "graphics",  # str | List[str]
         "objects": [
             Object(Matching, "Pack/RPGraphics/RPGrpCamera.cpp"),
@@ -1288,7 +1281,7 @@ config.libs = [
     {
         "lib": "RP",
         "mw_version": config.linker_version,
-        "cflags": cflags_rp,
+        "cflags": cflags_rp_pch,
         "progress_category": "audio",  # str | List[str]
         "objects": [
             Object(NonMatching, "Pack/RPAudio/RPSndAudioMgr.cpp"),
@@ -1303,7 +1296,7 @@ config.libs = [
     {
         "lib": "RP",
         "mw_version": config.linker_version,
-        "cflags": cflags_rp,
+        "cflags": cflags_rp_pch,
         "progress_category": "utility",  # str | List[str]
         "objects": [
             Object(Matching, "Pack/RPUtility/RPUtlDohMath.cpp"),
@@ -1329,7 +1322,7 @@ config.libs = [
     {
         "lib": "RP",
         "mw_version": config.linker_version,
-        "cflags": cflags_rp,
+        "cflags": cflags_rp_pch,
         "progress_category": "sports",  # str | List[str]
         "objects": [
             Object(NonMatching, "Pack/RPSports/RPSportsCommon/RPSportsCommon_unsplit.o"),
@@ -1338,7 +1331,7 @@ config.libs = [
     {
         "lib": "RP",
         "mw_version": config.linker_version,
-        "cflags": cflags_rp,
+        "cflags": cflags_rp_pch,
         "progress_category": "tennis",  # str | List[str]
         "objects": [
             Object(NonMatching, "Pack/RPSports/RPTnsScene/RPTnsScene_unsplit.o"),
@@ -1347,7 +1340,7 @@ config.libs = [
     {
         "lib": "RP",
         "mw_version": config.linker_version,
-        "cflags": cflags_rp,
+        "cflags": cflags_rp_pch,
         "progress_category": "baseball",  # str | List[str]
         "objects": [
             Object(NonMatching, "Pack/RPSports/RPBsbScene/RPBsbScene_unsplit.o"),
@@ -1356,7 +1349,7 @@ config.libs = [
     {
         "lib": "RP",
         "mw_version": config.linker_version,
-        "cflags": cflags_rp,
+        "cflags": cflags_rp_pch,
         "progress_category": "golf",  # str | List[str]
         "objects": [
             Object(NonMatching, "Pack/RPSports/RPGolScene/RPGolScene.cpp"),
@@ -1389,7 +1382,7 @@ config.libs = [
     {
         "lib": "RP",
         "mw_version": config.linker_version,
-        "cflags": cflags_rp,
+        "cflags": cflags_rp_pch,
         "progress_category": "boxing",  # str | List[str]
         "objects": [
             Object(NonMatching, "Pack/RPSports/RPBoxScene/RPBoxScene_unsplit.o"),
@@ -1398,7 +1391,7 @@ config.libs = [
     {
         "lib": "RP",
         "mw_version": config.linker_version,
-        "cflags": cflags_rp,
+        "cflags": cflags_rp_pch,
         "progress_category": "bowling",  # str | List[str]
         "objects": [
             Object(NonMatching, "Pack/RPSports/RPBowScene/RPBow_80313028.cpp"),

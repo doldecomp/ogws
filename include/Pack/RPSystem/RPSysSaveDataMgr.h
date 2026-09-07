@@ -263,9 +263,9 @@ private:
         EFlag_SaveFileExist,   //!< The save file exists on the NAND
         EFlag_3,
         EFlag_DisableSave, //!< Saving is disabled
-        EFlag_Player2CursorValid,
-        EFlag_Player3CursorValid,
-        EFlag_Player4CursorValid,
+        EFlag_5,
+        EFlag_6,
+        EFlag_7,
         EFlag_NandAccess,  //!< NAND operation is happening on another thread
         EFlag_AsyncSave,   //!< Save file is being written on another thread
         EFlag_ErrorWindow, //!< System window error was displayed

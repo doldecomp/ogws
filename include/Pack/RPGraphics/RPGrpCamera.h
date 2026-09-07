@@ -230,8 +230,8 @@ private:
      * @brief Camera state flags
      */
     enum {
-        EFlag_Player2CursorValid = 1 << 5,
-        EFlag_Player4CursorValid = 1 << 7,
+        EFlag_5 = 1 << 5,
+        EFlag_7 = 1 << 7,
     };
 
 private:
