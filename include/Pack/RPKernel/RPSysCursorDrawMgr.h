@@ -18,7 +18,7 @@ class RPSysEffect;
 /**
  * @brief Cursor draw manager
  */
-class RPSysCursorDrawMgr : IRPSysHostIOSocket {
+class RPSysCursorDrawMgr : public IRPSysHostIOSocket {
     RP_SINGLETON_DECL_EX(RPSysCursorDrawMgr);
 
 public:
