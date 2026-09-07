@@ -592,9 +592,9 @@ private:
     //! Next player index
     static s16 sNextPlayerNo;
 
-    //! Player 1's controller
+    //! Active (main player) controller
     static RPSysCoreController* spActiveController;
-    //! Player 1's controller address
+    //! Active (main player) controller address
     static RPSysCoreAddress sActiveAddress;
 
     //! Whether a controller has disconnected in this scene

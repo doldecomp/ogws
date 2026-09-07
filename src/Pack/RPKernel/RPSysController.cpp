@@ -44,12 +44,12 @@ const f32 RPSysCoreController::DEFAULT_EX_RATE[EExStatus_Max] = {
 s16 RPSysCoreController::sNextPlayerNo = 0;
 
 /**
- * @brief Player 1's controller
+ * @brief Active (main player) controller
  */
 RPSysCoreController* RPSysCoreController::spActiveController = NULL;
 
 /**
- * @brief Player 1's controller address
+ * @brief Active (main player) controller address
  */
 RPSysCoreAddress RPSysCoreController::sActiveAddress;
 
