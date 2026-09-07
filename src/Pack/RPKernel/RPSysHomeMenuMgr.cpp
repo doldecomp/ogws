@@ -343,8 +343,8 @@ void RPSysHomeMenuMgr::checkMenuStart() {
     bool pressedBtn = false;
 
     for (int index = 0; index < RP_MAX_CONTROLLERS; index++) {
-        if (RP_GET_CORE_CTRL(index)->getCoreStatus()->getTrigger() &
-            EGG::cCORE_BUTTON_HOME) {
+        if (RP_GET_CORE_CTRL(index)->getCoreStatus()->downTrigger(
+                EGG::cCORE_BUTTON_HOME)) {
 
             pressedBtn = true;
             break;

@@ -44,14 +44,14 @@ const f32 RPSysCoreController::DEFAULT_EX_RATE[EExStatus_Max] = {
 s16 RPSysCoreController::sNextPlayerNo = 0;
 
 /**
- * @brief Player 1's controller
+ * @brief Active (main player) controller
  */
-RPSysCoreController* RPSysCoreController::spMainController = NULL;
+RPSysCoreController* RPSysCoreController::spActiveController = NULL;
 
 /**
- * @brief Player 1's controller address
+ * @brief Active (main player) controller address
  */
-RPSysCoreAddress RPSysCoreController::sMainAddress;
+RPSysCoreAddress RPSysCoreController::sActiveAddress;
 
 /**
  * @brief Whether a controller has disconnected in this scene
@@ -394,8 +394,8 @@ bool RPSysCoreInfo::isLowBattery() const {
 EGG::CoreController* RPSysCoreController::createCoreController() {
     RPSysCoreController* pController = new RPSysCoreController(sNextPlayerNo++);
 
-    if (spMainController == NULL) {
-        pController->becomeMainController();
+    if (spActiveController == NULL) {
+        pController->becomeActiveController();
     }
 
     return pController;
@@ -480,7 +480,7 @@ void RPSysCoreController::initScene() {
  *
  * @param playerNo Player ID
  */
-RPSysCoreController::RPSysCoreController(u32 playerNo) {
+RPSysCoreController::RPSysCoreController(s32 playerNo) {
     mWPADProbeResult = WPAD_ERR_NO_CONTROLLER;
     mEvent = EEvent_None;
     mPlayerNo = playerNo;
@@ -608,11 +608,11 @@ void RPSysCoreController::beginFrame(PADStatus* pStatus) {
 }
 
 /**
- * @brief Becomes the main (Player 1) controller
+ * @brief Becomes the active (main player) controller
  */
-void RPSysCoreController::becomeMainController() {
-    spMainController = this;
-    sMainAddress = mAddress;
+void RPSysCoreController::becomeActiveController() {
+    spActiveController = this;
+    sActiveAddress = mAddress;
 }
 
 /**

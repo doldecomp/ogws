@@ -7,6 +7,7 @@
 
 // Forward declarations
 class RPGrpCamera;
+class RPGrpScreen;
 
 class RPGrpView {
 public:
@@ -19,9 +20,11 @@ public:
 protected:
     u8 mViewNo;    // at 0x0
     u8 mDrawScene; // at 0x1
-    char _02[0x8 - 0x2];
+    char unk2[0x8 - 0x2];
     EProjType mProjType; // at 0x8
-    char _0C[0x1C - 0xC];
+    char unkC[0x10 - 0xC];
+    RPGrpScreen* mpScreen; // at 0x10
+    char unk14[0x1C - 0x14];
 
 public:
     virtual ~RPGrpView();                                // at 0x8
@@ -34,6 +37,10 @@ public:
 
     EProjType GetProjType() const {
         return mProjType;
+    }
+
+    RPGrpScreen* GetScreen() const {
+        return mpScreen;
     }
 
 private:

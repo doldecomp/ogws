@@ -35,6 +35,10 @@ public:
         return spCurrentView;
     }
 
+    RPGrpView* GetView(int idx) const {
+        return mDrawViews[idx];
+    }
+
     /**
      * @brief Gets the screen currently being rendered to
      */
@@ -70,6 +74,11 @@ private:
     static RPGrpView* spCurrentView;
     //! Screen currently being rendered to
     static RPGrpScreen* spCurrentScreen;
+
+    char unk0[0xC];
+    IRPGrpDrawObject* mpDrawList; // at 0xC
+    char unk10[0x14 - 0x10];
+    RPGrpView* mDrawViews[MAX_VIEW]; // at 0x14
 };
 
 //! @}

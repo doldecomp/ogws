@@ -306,7 +306,7 @@ void RPSysCoreControllerMgr::beginFrame() {
                     pConnected->set(chan, addr);
 
                     if (pConnected->mPlayerNo == 0) {
-                        pConnected->becomeMainController();
+                        pConnected->becomeActiveController();
                     }
 
                     pConnected->rumble(

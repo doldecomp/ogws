@@ -8,6 +8,7 @@
 #include <Pack/RPKernel/RPSysAvatar.h>
 #include <Pack/RPKernel/RPSysController.h>
 #include <Pack/RPKernel/RPSysControllerMgr.h>
+#include <Pack/RPKernel/RPSysCursorDrawMgr.h>
 #include <Pack/RPKernel/RPSysEffectBase.h>
 #include <Pack/RPKernel/RPSysEffectCreator.h>
 #include <Pack/RPKernel/RPSysEffectDefine.h>
@@ -42,8 +43,8 @@
 #include <Pack/RPKernel/RPSysNWC24Manager.h>
 #include <Pack/RPKernel/RPSysOfficialDB.h>
 #include <Pack/RPKernel/RPSysPairingMgr.h>
-#include <Pack/RPKernel/RPSysPauseMenu.h>
 #include <Pack/RPKernel/RPSysParticleManager.h>
+#include <Pack/RPKernel/RPSysPauseMenu.h>
 #include <Pack/RPKernel/RPSysStringUtility.h>
 #include <Pack/RPKernel/RPSysSystem.h>
 #include <Pack/RPKernel/RPSysSystemWinMgr.h>

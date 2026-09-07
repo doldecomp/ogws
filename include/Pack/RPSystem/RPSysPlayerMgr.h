@@ -107,6 +107,13 @@ public:
     void setPlayerNum(s32 num);
 
     /**
+     * @brief Gets the number of controllers
+     */
+    s32 getRemoteNum() const {
+        return mRemoteNum;
+    }
+
+    /**
      * @brief Sets the number of controllers
      *
      * @param num Controller count

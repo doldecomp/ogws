@@ -424,7 +424,7 @@ cflags_rp = [
 # RP flags (include precompiled header)
 cflags_rp_pch = [
     *cflags_rp,
-    "-prefix SportsPack.mch"
+    "-prefix SportsPack.mch",
 ]
 
 config.linker_version = "GC/3.0a5.2"

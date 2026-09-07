@@ -273,6 +273,13 @@ public:
         EGG::CoreStatus status[KPAD_MAX_SAMPLES]; // at 0x8
     };
 
+    //! Buttons considered for cursor auto-repeat
+    static const u32 CURSOR_BUTTONS =
+        EGG::cCORE_BUTTON_UP | EGG::cCORE_BUTTON_DOWN |    //
+        EGG::cCORE_BUTTON_LEFT | EGG::cCORE_BUTTON_RIGHT | //
+        EGG::cCORE_FSSTICK_UP | EGG::cCORE_FSSTICK_DOWN |  //
+        EGG::cCORE_FSSTICK_LEFT | EGG::cCORE_FSSTICK_RIGHT;
+
 public:
     /**
      * @brief Initializes the controller system
@@ -309,7 +316,7 @@ public:
      *
      * @param playerNo Player ID
      */
-    explicit RPSysCoreController(u32 playerNo);
+    explicit RPSysCoreController(s32 playerNo);
 
     /**
      * @brief Destructor
@@ -476,6 +483,20 @@ public:
     bool requestCoreInfoAsync();
 
     /**
+     * @brief Accesses the active (main player) controller
+     */
+    static RPSysCoreController* getActiveController() {
+        return spActiveController;
+    }
+
+    /**
+     * @brief Gets this controller's player index
+     */
+    s32 getPlayerNo() const {
+        return mPlayerNo;
+    }
+
+    /**
      * @brief Accesses this controller's MAC address
      */
     RPSysCoreAddress& getAddress() {
@@ -525,13 +546,6 @@ private:
     //! Number of samples to use for the vertical Y acceleration average
     static const u32 ACC_VY_AVG_SAMPLES = 100;
 
-    //! Buttons considered for cursor auto-repeat
-    static const u32 CURSOR_BUTTONS =
-        EGG::cCORE_BUTTON_UP | EGG::cCORE_BUTTON_DOWN |    //
-        EGG::cCORE_BUTTON_LEFT | EGG::cCORE_BUTTON_RIGHT | //
-        EGG::cCORE_FSSTICK_UP | EGG::cCORE_FSSTICK_DOWN |  //
-        EGG::cCORE_FSSTICK_LEFT | EGG::cCORE_FSSTICK_RIGHT;
-
     //! Cursor auto-repeat delay, in frames
     static const u32 CURSOR_REPEAT_DELAY = 40;
     //! Cursor auto-repeat rate, in frames
@@ -544,9 +558,9 @@ private:
     static EGG::CoreController* createCoreController();
 
     /**
-     * @brief Becomes the main (Player 1) controller
+     * @brief Becomes the active (main player) controller
      */
-    void becomeMainController();
+    void becomeActiveController();
 
     /**
      * @brief Assigns a new WPAD channel and address to this controller
@@ -578,10 +592,10 @@ private:
     //! Next player index
     static s16 sNextPlayerNo;
 
-    //! Player 1's controller
-    static RPSysCoreController* spMainController;
-    //! Player 1's controller address
-    static RPSysCoreAddress sMainAddress;
+    //! Active (main player) controller
+    static RPSysCoreController* spActiveController;
+    //! Active (main player) controller address
+    static RPSysCoreAddress sActiveAddress;
 
     //! Whether a controller has disconnected in this scene
     static bool sDisconnectOccurred;
@@ -594,7 +608,7 @@ private:
     //! Controller event
     EEvent mEvent; // at 0x904
     //! Assigned player ID
-    u32 mPlayerNo; // at 0x908
+    s32 mPlayerNo; // at 0x908
 
     //! Held cursor buttons
     u32 mCursorHold; // at 0x90C

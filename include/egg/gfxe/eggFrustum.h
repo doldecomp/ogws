@@ -68,7 +68,7 @@ public:
                          const nw4r::math::VEC2& rPosScreen) const;
 
     void ConvertFromCanvasLU(f32 x, f32 y, f32* pX, f32* pY) const {
-        *pX = -(GetSize().x / 2.0f - x);
+        *pX = GetSize().x / 2.0f + x;
         *pY = -(-(GetSize().y / 2.0f - y));
     }
     void ConvertFromCanvasCC(f32 x, f32 y, f32* pX, f32* pY) const {
@@ -95,12 +95,12 @@ public:
 
     void ConvertFromNormalCC(f32 x, f32 y, f32* pX, f32* pY) const {
         if (mCanvasMode == CANVAS_LU) {
-            x *= GetSize().x / 2.0f;
-            y *= GetSize().y / 2.0f;
+            *pX = GetSize().x / 2.0f * x;
+            *pY = GetSize().y / 2.0f * y;
             ConvertFromCanvasLU(*pX, *pY, pX, pY);
         } else if (mCanvasMode == CANVAS_CC) {
-            *pX = x * (GetSize().x / 2.0f);
-            *pY = y * (GetSize().y / 2.0f);
+            *pX = (GetSize().x / 2.0f) * x;
+            *pY = (GetSize().y / 2.0f) * y;
         }
     }
 

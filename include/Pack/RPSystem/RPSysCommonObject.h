@@ -12,6 +12,12 @@
  */
 class RPSysCommonObject : public IRPGrpDrawObject {
 public:
+    enum EView {
+        EView_2D_Cursor = 29,
+        EView_2D_31 = 31,
+    };
+
+public:
     /**
      * @brief Constructor
      */
