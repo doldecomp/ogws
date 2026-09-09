@@ -9,7 +9,7 @@
 class RPUtlShadowDrawer {
 
 public:
-    void initMtx();
+    void initMtx() const;
     void drawShadow();
 
 private:
