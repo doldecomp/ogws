@@ -6,6 +6,10 @@
 
 nw4r::math::MTX34 RPUtlShadowDrawer::sGlobalMtx;
 
+void RPUtlShadowDrawer::initMtx() const {
+    sGlobalMtx = mLocalMtx;
+}
+
 /**
  * @brief Draws basic shadows.
  */
