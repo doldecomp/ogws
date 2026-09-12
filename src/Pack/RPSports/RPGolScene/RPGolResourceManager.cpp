@@ -25,7 +25,7 @@ bool RPGolResourceManager::checkFile(const char* pName, EArchive archive) {
 
 RPGrpHandle RPGolResourceManager::createModel(const char* pName,
                                               EArchive archive) {
-    RPGrpModelResManager* pResMgr = pResMgr->GetCurrent();
+    RPGrpModelResManager* pResMgr = RPGrpModelResManager::GetCurrent();
 
     void* pFileData = RPSysResourceManager::GetFileFromArchive(
         (instance()->mppArchives[archive]), pName);
