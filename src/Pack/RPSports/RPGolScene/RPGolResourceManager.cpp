@@ -8,6 +8,12 @@ RPGolResourceManager::RPGolResourceManager()
 
 RPGolResourceManager::~RPGolResourceManager() {}
 
+void RPGolResourceManager::getGameArchive(const char* pName) {
+    instance()->mppArchives[EArchive_GameCommon] =
+        RPSysResourceManager::LoadGameCommonArchive();
+    RPSysResourceManager::LoadGameStageArchive(pName);
+}
+
 void* RPGolResourceManager::hasFile(const char* pName, EArchive archive) {
     return RPSysResourceManager::GetFileFromArchive(
         instance()->mppArchives[archive], pName);

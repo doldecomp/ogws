@@ -9,10 +9,9 @@
 #include <nw4r/math.h>
 
 class RPGolCamera {
-public:
-    RP_SINGLETON_DECL(RPGolCamera);
 
 private:
+    void* placeholder;
     u32 unk4;
     nw4r::math::MTX34 mMtx; // at 0x8
     nw4r::math::VEC3 mVec;  // at 0x38; tentative
