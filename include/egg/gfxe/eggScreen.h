@@ -58,7 +58,7 @@ public:
 
     void CalcMatrixForDrawQuad(nw4r::math::MTX34* pMtx, f32 x, f32 y, f32 width,
                                f32 height) const;
-    void FillBufferGX(u32 flags, GXColor color, u32 arg2) const;
+    void FillBufferGX(u32 flags, GXColor color, u32 arg2 = 0) const;
     void GetGlobalPos(f32* pX, f32* pY) const;
 
     const Screen* GetParent() const {

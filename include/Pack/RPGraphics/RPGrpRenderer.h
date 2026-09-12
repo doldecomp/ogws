@@ -36,7 +36,7 @@ public:
     }
 
     RPGrpView* GetView(int idx) const {
-        return mDrawViews[idx];
+        return mpDrawViews[idx];
     }
 
     /**
@@ -78,7 +78,7 @@ private:
     char unk0[0xC];
     IRPGrpDrawObject* mpDrawList; // at 0xC
     char unk10[0x14 - 0x10];
-    RPGrpView* mDrawViews[MAX_VIEW]; // at 0x14
+    RPGrpView* mpDrawViews[MAX_VIEW]; // at 0x14
 };
 
 //! @}

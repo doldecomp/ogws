@@ -128,15 +128,15 @@ void RPSysEffectMgr::setCaptureEfb(void* pTexture, const EfbTexData& rData) {
 /**
  * @brief Draws the specified set of effects
  *
- * @param rDrawInfo Graphics configuration
+ * @param rViewMtx Graphics configuration
  * @param drawGroup Effect draw group
  * @param drawScene Effect draw scene
  */
-void RPSysEffectMgr::draw(const nw4r::ef::DrawInfo& rDrawInfo, u32 drawGroup,
+void RPSysEffectMgr::draw(const nw4r::math::MTX34& rViewMtx, u32 drawGroup,
                           u32 drawScene) {
 
-    nw4r::ef::DrawInfo sceneDrawInfo;
-    sceneDrawInfo.SetViewMtx(*rDrawInfo.GetViewMtx());
+    nw4r::ef::DrawInfo drawInfo;
+    drawInfo.SetViewMtx(rViewMtx);
 
     RPGrpScreen* pScreen = RPGrpRenderer::GetCurrentScreen();
     RPGrpView* pView = RPGrpRenderer::GetCurrentView();
@@ -151,7 +151,7 @@ void RPSysEffectMgr::draw(const nw4r::ef::DrawInfo& rDrawInfo, u32 drawGroup,
         C_MTXLightOrtho(proj, cy, -cy, -cx, cx, 0.5f, -0.5f, 0.5f, 0.5f);
     }
 
-    sceneDrawInfo.SetProjMtx(proj);
+    drawInfo.SetProjMtx(proj);
 
     if (drawGroup < EDrawGroup_16) {
         for (int i = 0; i < EDrawScene_Max; i++) {
@@ -159,7 +159,7 @@ void RPSysEffectMgr::draw(const nw4r::ef::DrawInfo& rDrawInfo, u32 drawGroup,
                 continue;
             }
 
-            mpEffectCreators[i]->draw(sceneDrawInfo, drawGroup, drawScene);
+            mpEffectCreators[i]->draw(drawInfo, drawGroup, drawScene);
         }
     }
 }

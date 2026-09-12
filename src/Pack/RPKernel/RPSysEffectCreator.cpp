@@ -31,8 +31,8 @@ RPSysEffectCreator::RPSysEffectCreator(u32 drawScene) {
     mpMemoryManager = NULL;
 
     for (int i = 0; i < ESaveBuffer_Max; i++) {
-        mEmitterParamSave[i] = NULL;
-        mParticleParamSave[i] = NULL;
+        mpEmitterParamSave[i] = NULL;
+        mpParticleParamSave[i] = NULL;
     }
 }
 
@@ -116,9 +116,9 @@ void RPSysEffectCreator::createSlowSystem() {
                                    RPSysEffectDefine::MAX_GROUP_ID);
 
     for (int i = 0; i < ESaveBuffer_Max; i++) {
-        mEmitterParamSave[i] = //
+        mpEmitterParamSave[i] = //
             new nw4r::ef::EmitterParameter[SLOW_MAX_EMITTER];
-        mParticleParamSave[i] = //
+        mpParticleParamSave[i] = //
             new nw4r::ef::ParticleParameter[SLOW_MAX_PARTICLE];
     }
 }
@@ -226,20 +226,20 @@ void RPSysEffectCreator::update() {
         const nw4r::ut::List *pListEmitter, *pListParticle;
 
         const nw4r::ef::EmitterParameter* pLoadEmitter =
-            mEmitterParamSave[mBackSaveBuffer == ESaveBuffer_1st
-                                  ? ESaveBuffer_2nd
-                                  : ESaveBuffer_1st];
-
-        const nw4r::ef::ParticleParameter* pLoadParticle =
-            mParticleParamSave[mBackSaveBuffer == ESaveBuffer_1st
+            mpEmitterParamSave[mBackSaveBuffer == ESaveBuffer_1st
                                    ? ESaveBuffer_2nd
                                    : ESaveBuffer_1st];
 
+        const nw4r::ef::ParticleParameter* pLoadParticle =
+            mpParticleParamSave[mBackSaveBuffer == ESaveBuffer_1st
+                                    ? ESaveBuffer_2nd
+                                    : ESaveBuffer_1st];
+
         nw4r::ef::EmitterParameter* pSaveEmitter =
-            mEmitterParamSave[mBackSaveBuffer];
+            mpEmitterParamSave[mBackSaveBuffer];
 
         nw4r::ef::ParticleParameter* pSaveParticle =
-            mParticleParamSave[mBackSaveBuffer];
+            mpParticleParamSave[mBackSaveBuffer];
 
         pListEmitter = &mpMemoryManager->mEmitterOM->mLeasedList;
         pListParticle = &mpMemoryManager->mParticleOM->mLeasedList;

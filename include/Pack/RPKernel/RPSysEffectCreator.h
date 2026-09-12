@@ -150,9 +150,10 @@ private:
     RPSysEffectMemoryManager* mpMemoryManager; // at 0x30
 
     //! Emitter parameter save buffers
-    nw4r::ef::EmitterParameter* mEmitterParamSave[ESaveBuffer_Max]; // at 0x34
+    nw4r::ef::EmitterParameter* mpEmitterParamSave[ESaveBuffer_Max]; // at 0x34
     //! Particle parameter save buffers
-    nw4r::ef::ParticleParameter* mParticleParamSave[ESaveBuffer_Max]; // at 0x3C
+    nw4r::ef::ParticleParameter*
+        mpParticleParamSave[ESaveBuffer_Max]; // at 0x3C
 };
 
 //! @}

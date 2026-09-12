@@ -188,6 +188,10 @@ public:
         mTanFovY = sin / cos;
     }
 
+    f32 GetTanFovy() const {
+        return mTanFovY;
+    }
+
     f32 GetNearZ() const {
         return mNearZ;
     }

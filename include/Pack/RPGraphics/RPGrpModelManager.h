@@ -7,11 +7,16 @@
 
 // Forward declarations
 class RPGrpDrawPathManager;
+class RPGrpModelScene;
 
 /**
  * @brief Model manager
  */
 class RPGrpModelManager {
+public:
+    //! Maximum number of model scenes
+    static const int MAX_SCENE = 8;
+
 public:
     /**
      * @brief Gets the currently active manager instance
@@ -22,9 +27,16 @@ public:
 
     RPGrpDrawPathManager* GetDrawPathManager(u8 drawScene) const;
 
+    RPGrpModelScene* GetModelScene(int i) {
+        return mpModelScenes[i];
+    }
+
 private:
     //! Allocator used for model-related allocations
     static RPGrpModelManager* spCurrent;
+
+    //! Model scenes
+    RPGrpModelScene* mpModelScenes[MAX_SCENE]; // at 0x4
 };
 
 //! @}

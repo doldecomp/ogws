@@ -19,6 +19,9 @@ public:
 
     void capture(u16 x, u16 y, bool mipmap = false, int format = -1);
 
+    void setLoadMap(GXTexMapID loadMap) {
+        mLoadMap = loadMap;
+    }
     GXTexMapID getLoadMap() const {
         return mLoadMap;
     }
