@@ -14,6 +14,14 @@ typedef struct OSContext OSContext;
     if (!(exp))                                                                \
     OSPanic(__FILE__, __LINE__, __VA_ARGS__)
 
+#ifndef NDEBUG
+#define OS_DEBUG_ASSERT(exp, ...)                                              \
+    if (!(exp))                                                                \
+    OSPanic(__FILE__, __LINE__, __VA_ARGS__)
+#else
+#define OS_DEBUG_ASSERT(...)
+#endif
+
 typedef enum {
     OS_ERR_SYSTEM_RESET,
     OS_ERR_MACHINE_CHECK,
