@@ -22,6 +22,9 @@ public:
     GXTexMapID getLoadMap() const {
         return mLoadMap;
     }
+    void setLoadMap(GXTexMapID loadMap) {
+        mLoadMap = loadMap;
+    }
 
     void setClearColor(const GXColor& rColor) {
         mClearColor = rColor;

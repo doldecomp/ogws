@@ -123,12 +123,11 @@ public:
     /**
      * @brief Draws the specified set of effects
      *
-     * @param rDrawInfo Graphics configuration
+     * @param rViewMtx View matrix
      * @param drawGroup Effect draw group
      * @param drawScene Effect draw scene
      */
-    void draw(const nw4r::ef::DrawInfo& rDrawInfo, u32 drawGroup,
-              u32 drawScene);
+    void draw(const nw4r::math::MTX34& rViewMtx, u32 drawGroup, u32 drawScene);
 
     /**
      * @brief Creates an instance of the specified effect

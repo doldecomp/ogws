@@ -127,10 +127,18 @@ private:
         cCacheFlag_AlphaUpdate = 1 << 6,
     };
 
+    // TODO(kiwi) Add flag inlines
+public:
     enum {
+        cFlag_0 = 1 << 0,
+        cFlag_1 = 1 << 1,
         cFlag_EnableTMem = 1 << 4,
         cFlag_EnableCache = 1 << 5,
     };
+
+    // TODO(kiwi) Add flag inlines
+public:
+    static u16 s_flag;
 
 private:
     static GXCache s_cacheGX;
@@ -145,8 +153,6 @@ private:
     static GXZFmt16 s_zFmt16Current;
 
     static GXColor s_clearEfb;
-
-    static u16 s_flag;
 
     static f32 s_modifyRatio;
 
