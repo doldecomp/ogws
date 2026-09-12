@@ -15,9 +15,10 @@
  * @brief Resource manager for Golf
  */
 class RPGolResourceManager {
-public:
+
     RP_SINGLETON_DECL(RPGolResourceManager);
 
+public:
     enum EArchive {
         EArchive_GameCommon,
         EArchive_GameLocal,
