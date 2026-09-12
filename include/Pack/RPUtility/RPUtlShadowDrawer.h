@@ -9,7 +9,7 @@
 class RPUtlShadowDrawer {
 
 public:
-    void initMtx();
+    void initMtx() const;
     void drawShadow();
 
 private:
@@ -18,7 +18,7 @@ private:
     nw4r::ut::Color mColor; // at 0x34
 
 private:
-    static nw4r::math::MTX34 sGlobalMtx;
+    static nw4r::math::MTX34 sCameraMtx;
 };
 
 #endif

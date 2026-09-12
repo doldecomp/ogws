@@ -3623,15 +3623,167 @@ Pack/RPUtility/RPUtlLoadSaveDataScene.cpp:
 	.data       start:0x803C1B88 end:0x803C1BF0
 	.sdata2     start:0x804C1C70 end:0x804C1C98
 
+Pack/RPSports/RPSportsCommon/RPSports_801CCB70.cpp:
+	.text       start:0x801CCB70 end:0x801CD384
+	.rodata     start:0x80383990 end:0x80383AC0
+	.data       start:0x803C1BF0 end:0x803C1C20
+	.sbss       start:0x804BF6E8 end:0x804BF6F0
+	.sdata2     start:0x804C1C98 end:0x804C1CA8
+
+Pack/RPSports/RPSportsCommon/RPSports_801CD384.cpp:
+	.text       start:0x801CD384 end:0x801CDD90
+	.rodata     start:0x80383AC0 end:0x80383BD8
+	.data       start:0x803C1C20 end:0x803C1C50
+	.sdata      start:0x804BDC38 end:0x804BDC40
+	.sdata2     start:0x804C1CA8 end:0x804C1CB0
+
+Pack/RPSports/RPSportsCommon/RPSports_801CDD90.cpp:
+	.text       start:0x801CDD90 end:0x801CE630
+	.data       start:0x803C1C50 end:0x803C1C60
+	.sdata2     start:0x804C1CB0 end:0x804C1CC8
+
+Pack/RPSports/RPSportsCommon/RPSportsAppMiiManager.cpp:
+	.text       start:0x801CE630 end:0x801CE7F8
+	.rodata     start:0x80383BD8 end:0x80383BF0
+	.data       start:0x803C1C60 end:0x803C1C70
+
+Pack/RPSports/RPSportsCommon/RPSports_801CE7F8.cpp:
+	.text       start:0x801CE7F8 end:0x801CED10
+	.rodata     start:0x80383BF0 end:0x80383C58
+	.data       start:0x803C1C70 end:0x803C1CB0
+	.sdata2     start:0x804C1CC8 end:0x804C1CD8
+
+Pack/RPSports/RPSportsCommon/RPSportsKokeshiLyt.cpp:
+	.text       start:0x801CED10 end:0x801CFC60
+	.rodata     start:0x80383C58 end:0x80383E60
+	.data       start:0x803C1CB0 end:0x803C1D00
+	.sdata2     start:0x804C1CD8 end:0x804C1CE8
+
+Pack/RPSports/RPSportsCommon/RPSportsKokeshiLytDebug.cpp:
+	.text       start:0x801CFC60 end:0x801CFE90
+	.data       start:0x803C1D00 end:0x803C1D18
+	.sdata2     start:0x804C1CE8 end:0x804C1CF8
+
+Pack/RPSports/RPSportsCommon/RPSportsButtonA.cpp:
+	.text       start:0x801CFE90 end:0x801D1408
+	.rodata     start:0x80383E60 end:0x80384070
+	.data       start:0x803C1D18 end:0x803C1D68
+	.sdata      start:0x804BDC40 end:0x804BDC58
+	.sdata2     start:0x804C1CF8 end:0x804C1D38
+
+Pack/RPSports/RPSportsCommon/RPSports_801D1408.cpp:
+	.text       start:0x801D1408 end:0x801D26E0
+	.rodata     start:0x80384070 end:0x803841D0
+	.data       start:0x803C1D68 end:0x803C1D78
+	.sdata2     start:0x804C1D38 end:0x804C1D60
+
+Pack/RPSports/RPSportsCommon/RPSportsBodyManager.cpp:
+	.text       start:0x801D26E0 end:0x801D29D8
+	.rodata     start:0x803841D0 end:0x80384560
+	.data       start:0x803C1D78 end:0x803C1F78
+	.sdata      start:0x804BDC58 end:0x804BDC60
+	.sdata2     start:0x804C1D60 end:0x804C1D68
+
+Pack/RPSports/RPSportsCommon/RPSysBootScene.cpp:
+	.text       start:0x801D29D8 end:0x801D3140
+	.rodata     start:0x80384560 end:0x803846D0
+	.data       start:0x803C1F78 end:0x803C1FD8
+	.sdata      start:0x804BDC60 end:0x804BDC68
+	.sdata2     start:0x804C1D68 end:0x804C1D88
+
+Pack/RPSports/RPSportsCommon/RPSysPlayerSelectScene.cpp:
+	.text       start:0x801D3140 end:0x801D57E4
+	.rodata     start:0x803846D0 end:0x803847A0
+	.data       start:0x803C1FD8 end:0x803C2038
+	.sbss       start:0x804BF6F0 end:0x804BF708
+	.sdata2     start:0x804C1D88 end:0x804C1D90
+
+Pack/RPSports/RPSportsCommon/RPSportsMenuBgModel.cpp:
+	.text       start:0x801D57E4 end:0x801D5DD4
+	.rodata     start:0x803847A0 end:0x803847C8
+	.data       start:0x803C2038 end:0x803C2080
+	.sdata2     start:0x804C1D90 end:0x804C1DB8
+
+Pack/RPSports/RPSportsCommon/RPSysLytMenuFrame.cpp:
+	.text       start:0x801D5DD4 end:0x801D8DF0
+	.rodata     start:0x803847C8 end:0x80384F20
+	.data       start:0x803C2080 end:0x803C20A0
+	.sdata      start:0x804BDC68 end:0x804BDC90
+	.sdata2     start:0x804C1DB8 end:0x804C1DE8
+
+Pack/RPSports/RPSportsCommon/RPSysKokeshiHead.cpp:
+	.text       start:0x801D8DF0 end:0x801D9078
+	.rodata     start:0x80384F20 end:0x80384F30
+	.data       start:0x803C20A0 end:0x803C20C8
+	.sdata2     start:0x804C1DE8 end:0x804C1DF0
+
+Pack/RPSports/RPSportsCommon/RPSysMenuKokeshiMgr.cpp:
+	.text       start:0x801D9078 end:0x801DAD24
+	.rodata     start:0x80384F30 end:0x80384FE0
+	.data       start:0x803C20C8 end:0x803C2110
+	.sdata2     start:0x804C1DF0 end:0x804C1E38
+
+Pack/RPSports/RPSportsCommon/RPSysLytRimoconEntry.cpp:
+	.text       start:0x801DAD24 end:0x801DC37C
+	.rodata     start:0x80384FE0 end:0x80385718
+	.data       start:0x803C2110 end:0x803C2130
+	.sdata2     start:0x804C1E38 end:0x804C1E50
+
+Pack/RPSports/RPSportsCommon/RPSysLytPlayerSelect.cpp:
+	.text       start:0x801DC37C end:0x801DF984
+	.rodata     start:0x80385718 end:0x80386100
+	.data       start:0x803C2130 end:0x803C2150
+	.sdata2     start:0x804C1E50 end:0x804C1E88
+
+Pack/RPSports/RPSportsCommon/RPSports_801DF984.cpp:
+	.text       start:0x801DF984 end:0x801E2C0C
+	.rodata     start:0x80386100 end:0x80386558
+	.sdata      start:0x804BDC90 end:0x804BDC98
+	.sdata2     start:0x804C1E88 end:0x804C1EA0
+
+Pack/RPSports/RPSportsCommon/RPSysNunchukCheckScene.cpp:
+	.text       start:0x801E2C0C end:0x801E4828
+	.rodata     start:0x80386558 end:0x80386928
+	.data       start:0x803C2150 end:0x803C2418
+	.sdata      start:0x804BDC98 end:0x804BDCB0
+	.sdata2     start:0x804C1EA0 end:0x804C1EB8
+
+Pack/RPSports/RPSportsCommon/RPPartyMenuBgModel.cpp:
+	.text       start:0x801E4828 end:0x801E51B4
+	.rodata     start:0x80386928 end:0x803869A0
+	.data       start:0x803C2418 end:0x803C2490
+	.sdata      start:0x804BDCB0 end:0x804BDCB8
+	.sdata2     start:0x804C1EB8 end:0x804C1EE8
+
+Pack/RPSports/RPSportsCommon/RPSports_801E51B4.cpp:
+	.text       start:0x801E51B4 end:0x801E7290
+	.rodata     start:0x803869A0 end:0x80386F08
+	.data       start:0x803C2490 end:0x803C25E8
+	.sdata      start:0x804BDCB8 end:0x804BDCC0
+	.sdata2     start:0x804C1EE8 end:0x804C1F08
+
+Pack/RPSports/RPSportsCommon/RPSportsStaticMem.cpp:
+	.text       start:0x801E7290 end:0x801E7EB4
+	.rodata     start:0x80386F08 end:0x80387004
+	.data       start:0x803C25E8 end:0x803C2650
+	.sbss       start:0x804BF708 end:0x804BF710
+	.sdata2     start:0x804C1F08 end:0x804C1F18
+
+Pack/RPSports/RPSportsCommon/RPSports_801E7EB4.cpp:
+	.text       start:0x801E7EB4 end:0x801EA458
+	.rodata     start:0x80387004 end:0x80387438
+	.sbss       start:0x804BF710 end:0x804BF718
+	.sdata2     start:0x804C1F18 end:0x804C1F70
+
 Pack/RPSports/RPSportsCommon/RPSportsCommon_unsplit.o:
-	.text       start:0x801CCB70 end:0x80214480
+	.text       start:0x801EA458 end:0x80214480
 	.ctors      start:0x80355160 end:0x8035516C
-	.rodata     start:0x80383990 end:0x8038B1A8
-	.data       start:0x803C1BF0 end:0x803C3730
+	.rodata     start:0x80387438 end:0x8038B1A8
+	.data       start:0x803C2650 end:0x803C3730
 	.bss        start:0x804A48A0 end:0x804A6000
-	.sdata      start:0x804BDC38 end:0x804BDDD0
-	.sbss       start:0x804BF6E8 end:0x804BF768
-	.sdata2     start:0x804C1C98 end:0x804C2338
+	.sdata      start:0x804BDCC0 end:0x804BDDD0
+	.sbss       start:0x804BF718 end:0x804BF768
+	.sdata2     start:0x804C1F70 end:0x804C2338
 
 Pack/RPSports/RPTnsScene/RPTnsScene_unsplit.o:
 	.text       start:0x80214480 end:0x8024E334
