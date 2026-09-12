@@ -1,11 +1,12 @@
 #ifndef RP_SPORTS_GOL_CAMERA_H
 #define RP_SPORTS_GOL_CAMERA_H
 
+#include <Pack/types_pack.h>
+
 #include <Pack/RPGraphics.h>
 #include <Pack/RPSingleton.h>
 
 #include <nw4r/math.h>
-
 
 class RPGolCamera {
 public:
