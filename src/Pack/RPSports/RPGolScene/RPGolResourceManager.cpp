@@ -1,7 +1,5 @@
-#include <Pack/RPGraphics.h>
 #include <Pack/RPSports/RPGolScene.h>
-
-#include <RPSystem.h>
+#include <Pack/RPSystem.h>
 
 RP_SINGLETON_IMPL(RPGolResourceManager);
 
@@ -10,20 +8,20 @@ RPGolResourceManager::RPGolResourceManager()
 
 RPGolResourceManager::~RPGolResourceManager() {}
 
-void* RPGolResourceManager::getFile(const char* pName, int offset) {
-    return RP_GET_INSTANCE(RPSysResourceManager)
-        ->GetFileFromArchive(spInstance->mppArchives[offset], pName);
+void* RPGolResourceManager::hasFile(const char* pName, EArchive archive) {
+    return RPSysResourceManager::GetFileFromArchive(
+        instance()->mppArchives[archive], pName);
 }
 
-bool RPGolResourceManager::checkFile(const char* pName, int offset) {
-    return (spInstance->mppArchives[offset])->getFile(pName, NULL) != NULL;
+bool RPGolResourceManager::checkFile(const char* pName, EArchive archive) {
+    return (instance()->mppArchives[archive])->getFile(pName, NULL) != NULL;
 }
 
-void RPGolResourceManager::createModel(const char* pName, int offset) {
-    RPGrpModelResManager* resMgr = resMgr->GetCurrent();
+RPGrpHandle RPGolResourceManager::createModel(const char* pName,
+                                              EArchive archive) {
+    RPGrpModelResManager* pResMgr = pResMgr->GetCurrent();
 
-    void* file =
-        RP_GET_INSTANCE(RPSysResourceManager)
-            ->GetFileFromArchive((spInstance->mppArchives[offset]), pName);
-    resMgr->CreateData(RPGrpModelResManager::Type_ResFile, file, NULL);
+    void* pFileData = RPSysResourceManager::GetFileFromArchive(
+        (instance()->mppArchives[archive]), pName);
+    return pResMgr->CreateData(RPGrpModelResManager::Type_ResFile, pFileData);
 }

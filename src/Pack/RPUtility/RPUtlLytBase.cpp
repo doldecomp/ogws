@@ -6,28 +6,26 @@
 
 #include <revolution/GX.h>
 
-void RPUtlLytBase::drawLine(GXColor pColor, u16 pVerts, u8 pWidth) {
-    nw4r::math::MTX34 mtx;
-    static f32 one = 1.0;
-    static f32 zero = 0.0;
+void RPUtlLytBase::beginDrawLine(GXColor color, u16 verts, u8 width) {
+    nw4r::math::MTX34 ident;
 
-    mtx._00 = one;
-    mtx._01 = zero;
-    mtx._02 = zero;
-    mtx._03 = zero;
-    mtx._10 = zero;
-    mtx._11 = one;
-    mtx._12 = zero;
-    mtx._13 = zero;
-    mtx._20 = zero;
-    mtx._21 = zero;
-    mtx._22 = one;
-    mtx._23 = zero;
+    ident._00 = 1.0f;
+    ident._01 = 0.0f;
+    ident._02 = 0.0f;
+    ident._03 = 0.0f;
+    ident._10 = 0.0f;
+    ident._11 = 1.0f;
+    ident._12 = 0.0f;
+    ident._13 = 0.0f;
+    ident._20 = 0.0f;
+    ident._21 = 0.0f;
+    ident._22 = 1.0f;
+    ident._23 = 0.0f;
 
-    GXLoadPosMtxImm(mtx, 0);
+    GXLoadPosMtxImm(ident, GX_PNMTX0);
     EGG::DrawGX::BeginDrawLine(EGG::DrawGX::COLORCHAN_COLOR,
                                EGG::DrawGX::ZMODE_ALWAYS);
-    GXSetChanMatColor(GX_COLOR0A0, pColor);
-    GXSetLineWidth(pWidth, GX_TB_ZERO);
-    GXBegin(GX_LINESTRIP, GX_VTXFMT0, pVerts);
+    GXSetChanMatColor(GX_COLOR0A0, color);
+    GXSetLineWidth(width, 0);
+    GXBegin(GX_LINESTRIP, GX_VTXFMT0, verts);
 }
