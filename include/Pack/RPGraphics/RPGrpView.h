@@ -162,17 +162,17 @@ protected:
      * @brief Renderer view flags
      */
     enum {
-        //! View will be updated and rendered
+        //! Update this view
         EFlag_SysCalc = 1 << 0,
-
         //! Update color when clearing the framebuffer
         EFlag_FillBufferColor = 1 << 1,
         //! Update alpha when clearing the framebuffer
         EFlag_FillBufferAlpha = 1 << 2,
         //! Update depth when clearing the framebuffer
         EFlag_FillBufferTexture = 1 << 3,
-
+        //! Render this view
         EFlag_SysDraw = 1 << 4,
+
         EFlag_9 = 1 << 9,
     };
 
