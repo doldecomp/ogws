@@ -314,12 +314,13 @@ static void stateReadingFST(void) {
     LastState = (DVDCommandState)stateReadingFST;
 
     // clang-format off
-#if defined (VERSION_RSPE01_00)
-#line 1011
-#else
-#line 1034
-#endif
+#if defined(VERSION_RSPE01_00)
+#line 1014
     OS_ASSERT(bootInfo->fstSize >= BB2.fstSize, "DVDChangeDisk(): FST in the new disc is too big.   ");
+#else
+#line 1035
+    OS_ASSERT(bootInfo->fstSize >= BB2.fstSize, "DVDChangeDisk(): FST in the new disc is too big.   ");
+#endif
     // clang-format on
 
     DVDLowClearCoverInterrupt(NULL);

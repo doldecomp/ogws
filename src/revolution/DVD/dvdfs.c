@@ -157,12 +157,13 @@ s32 DVDConvertPathToEntrynum(const char* path) {
             }
 
             // clang-format off
-#if defined (VERSION_RSPE01_00)
-#line 438
-#else
-#line 442
-#endif
+#if defined(VERSION_RSPE01_00)
+#line 441
             OS_ASSERT(!illegal_format, "DVDConvertEntrynumToPath(possibly DVDOpen or DVDChangeDir or DVDOpenDir): specified directory or file (%s) doesn't match standard 8.3 format. This is a temporary restriction and will be removed soon\n", backup_path);
+#elif defined(VERSION_RSPE01_01)
+#line 443
+            OS_ASSERT(!illegal_format, "DVDConvertEntrynumToPath(possibly DVDOpen or DVDChangeDir or DVDOpenDir): specified directory or file (%s) doesn't match standard 8.3 format. This is a temporary restriction and will be removed soon\n", backup_path);
+#endif
             // clang-format on
         } else {
             // We've ensured the directory is not special.
