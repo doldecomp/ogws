@@ -6,7 +6,7 @@ namespace g3d {
 
 NW4R_G3D_RTTI_DEF(AnmObj);
 
-#ifdef VERSION_RSPE01_01
+#if defined(VERSION_RSPE01_01)
 f32 FrameCtrl::smBaseUpdateRate = 1.0f;
 #endif
 

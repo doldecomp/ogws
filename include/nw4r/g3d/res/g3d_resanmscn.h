@@ -78,7 +78,7 @@ public:
     ResAnmLight GetResAnmLight(u32 idx) const;
 
     ResLightSet GetResLightSetByRefNumber(u32 refNumber) const;
-#ifdef VERSION_RSPE01_00
+#if defined(VERSION_RSPE01_00)
     ResLightSet GetResLightSetByRefNumber(int refNumber) const;
 #endif
     ResAnmAmbLight GetResAnmAmbLightByRefNumber(u32 refNumber) const;

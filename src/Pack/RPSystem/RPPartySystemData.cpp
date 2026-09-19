@@ -1,6 +1,6 @@
 #include <Pack/RPSystem.h>
 
-#ifdef VERSION_RSPE01_00
+#if defined(VERSION_RSPE01_00)
 /**
  * @brief Resets the data to a default save state
  */
@@ -29,7 +29,6 @@ bool RPPartySystemData::isGameOpen(s32 idx) const {
     return mGameFlags.onBit(idx);
 }
 
-#ifdef VERSION_RSPE01_00
 /**
  * @brief Deserializes this object from the specified stream
  *
@@ -69,4 +68,3 @@ void RPPartySystemData::write(EGG::RamStream& rStrm) {
     rStrm.write_u32(mGameFlags);
     rStrm.write_u32(mMsgFlags);
 }
-#endif

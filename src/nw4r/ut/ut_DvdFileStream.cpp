@@ -109,11 +109,10 @@ s32 DvdFileStream::Read(void* pDst, u32 size) {
     s32 result = DVDReadPrio(&mFileInfo.dvdInfo, pDst, size,
                              mFilePosition.Tell(), mPriority);
 
-#ifdef VERSION_RSPE01_00
-    //@bug only in rev 0. If a DVD error is returned, the program still
-    // interprets it as bytes read from the disc and tries to skip them.
+#if defined(VERSION_RSPE01_00)
+    //! @bug Only in rev 0: error code will be interpreted as a negative size
     mFilePosition.Skip(result);
-#else
+#elif defined(VERSION_RSPE01_01)
     if (result > 0) {
         mFilePosition.Skip(result);
     }

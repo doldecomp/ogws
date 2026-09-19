@@ -240,9 +240,9 @@ struct ResAnmChrData {
 class ResAnmChr : public ResCommon<ResAnmChrData> {
 public:
     static const u32 SIGNATURE = FOURCC('C', 'H', 'R', '0');
-#ifdef VERSION_RSPE01_00
+#if defined(VERSION_RSPE01_00)
     static const int REVISION = 3;
-#else
+#elif defined(VERSION_RSPE01_01)
     static const int REVISION = 4;
 #endif
 

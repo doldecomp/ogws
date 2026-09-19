@@ -1182,14 +1182,14 @@ void LightState::LoadLightSet(int id, u32* pDiffColorMask, u32* pDiffAlphaMask,
 
     if (mCurrentLightSetIdx == id) {
 
-#ifdef VERSION_RSPE01_00
+#if defined(VERSION_RSPE01_00)
         //! @bug only in rev 0: attempts nullptr write if parameters are empty
         //! this never happens in wii sports from what I (texline) can tell
         *pDiffColorMask = mCurrentMaskDiffColor;
         *pDiffAlphaMask = mCurrentMaskDiffAlpha;
         *pSpecColorMask = mCurrentMaskSpecColor;
         *pSpecAlphaMask = mCurrentMaskSpecAlpha;
-#else
+#elif defined(VERSION_RSPE01_01)
         if (pDiffColorMask != NULL) {
             *pDiffColorMask = mCurrentMaskDiffColor;
         }
@@ -1692,7 +1692,7 @@ void LoadResTexSrt(const ResTexSrt srt) {
             bool ident = true;
             const TexMtxEffect& rEffect = srt.ref().effect[i];
 
-#ifdef VERSION_RSPE01_01
+#if defined(VERSION_RSPE01_01)
             math::MTX34Identity(&mtx);
 #endif
 

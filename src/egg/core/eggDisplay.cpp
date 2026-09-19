@@ -68,7 +68,7 @@ void Display::copyEFBtoXFB() {
         GXSetCopyClear(mClearColor, mClearZ);
     }
 
-#ifdef VERSION_RSPE01_01
+#if defined(VERSION_RSPE01_01)
     const GXRenderModeObj* pObj = BaseSystem::getVideo()->getRenderModeObj();
 
 #line 150

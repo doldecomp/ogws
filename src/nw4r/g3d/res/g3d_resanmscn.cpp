@@ -115,7 +115,7 @@ ResLightSet ResAnmScn::GetResLightSetByRefNumber(u32 refNumber) const {
                                                                   : NULL);
 }
 
-#ifdef VERSION_RSPE01_00
+#if defined(VERSION_RSPE01_00)
 ResLightSet ResAnmScn::GetResLightSetByRefNumber(int refNumber) const {
     return GetResLightSetByRefNumber(static_cast<u32>(refNumber));
 }

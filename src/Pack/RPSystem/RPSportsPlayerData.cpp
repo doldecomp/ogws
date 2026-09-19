@@ -498,11 +498,12 @@ void RPSportsPlayerData::setBowTrainingBest(u16 score, EGame game) {
  *
  * @param course Golf course ID
  */
-#ifdef VERSION_RSPE01_00
+#if defined(VERSION_RSPE01_00)
+//! TODO(texline) Figure out how u8 is used in Rev 0
 u8 RPSportsPlayerData::getGolStandardBest(ECourse course) const {
     return mGolStandardBests[course];
 }
-#else
+#elif defined(VERSION_RSPE01_01)
 s8 RPSportsPlayerData::getGolStandardBest(ECourse course) const {
     return mGolStandardBests[course];
 }

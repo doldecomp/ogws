@@ -21,7 +21,7 @@ RFLErrcode RFLCommitNWC24Msg(NWC24MsgObj* msg, u16 index) {
 
         data.favorite = FALSE;
 
-#ifdef VERSION_RSPE01_01
+#if defined(VERSION_RSPE01_01)
         wc24err = NWC24SetMsgFaceData(msg, (RFLCharData*)&data);
         if (wc24err != NWC24_OK) {
             RFLiGetManager()->lastErrCode = RFLErrcode_NWC24Fail;

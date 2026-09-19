@@ -270,7 +270,7 @@ void RPSysSceneMgr::resetFadeFrame() {
 
 //! Hacky way of properly ordering the functions for Rev 0.
 //! Maybe there's a better method?
-#ifdef VERSION_RSPE01_00
+#if defined(VERSION_RSPE01_00)
 /**
  * @brief Sets the duration of all faders
  *
@@ -287,7 +287,7 @@ void RPSysSceneMgr::setFadeFrame(u16 frame) {
 u16 RPSysSceneMgr::getFadeFrame() {
     return mpSceneFader->getFrame();
 }
-#else
+#elif defined(VERSION_RSPE01_01)
 /**
  * @brief Gets the duration of the scene fader
  */

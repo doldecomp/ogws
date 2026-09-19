@@ -20,7 +20,7 @@ bool EffectSystem::mDisplayVersion = true;
 EffectSystem EffectSystem::instance;
 
 EffectSystem::EffectSystem() {
-#ifdef VERSION_RSPE01_01
+#if defined(VERSION_RSPE01_01)
     if (mDisplayVersion) {
         mDisplayVersion = false;
         OSRegisterVersion(NW4R_EF_Version_);

@@ -93,11 +93,11 @@ public:
         mFrame = mpPlayPolicy(mStartFrame, mEndFrame, frame);
     }
 
-#ifdef VERSION_RSPE01_00
+#if defined(VERSION_RSPE01_00)
     void UpdateFrm() {
         SetFrm(mFrame + mUpdateRate);
     }
-#else
+#elif defined(VERSION_RSPE01_01)
     void UpdateFrm() {
         SetFrm(mUpdateRate * smBaseUpdateRate + mFrame);
     }
@@ -121,7 +121,7 @@ private:
     f32 mEndFrame;               // at 0xC
     PlayPolicyFunc mpPlayPolicy; // at 0x10
 
-#ifdef VERSION_RSPE01_01
+#if defined(VERSION_RSPE01_01)
     static f32 smBaseUpdateRate;
 #endif
 };

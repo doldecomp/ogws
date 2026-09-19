@@ -15,10 +15,10 @@ RPSysLytAnmObj::RPSysLytAnmObj() {
  * @brief Updates the animation playback
  */
 void RPSysLytAnmObj::calc() {
-#ifdef VERSION_RSPE01_00
+#if defined(VERSION_RSPE01_00)
     mpAnimTrans->SetFrame(mFrameCtrl.getFrame());
     mFrameCtrl.update();
-#else
+#elif defined(VERSION_RSPE01_01)
     switch (RP_GET_INSTANCE(RPSysProjectLocal)->getPack()) {
     case RPSysSceneCreator::EPackID_SportsPack:
     case RPSysSceneCreator::EPackID_PartyPack: {

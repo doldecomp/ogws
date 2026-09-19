@@ -142,7 +142,7 @@ BOOL RFLiCheckValidInfo(const RFLiCharInfo* info) {
         return FALSE;
     }
 
-#ifdef VERSION_RSPE01_01
+#if defined(VERSION_RSPE01_01)
     if (!RFLiIsValidName2(info)) {
         return FALSE;
     }
@@ -175,7 +175,7 @@ BOOL RFLiCheckValidInfo(const RFLiCharInfo* info) {
     return TRUE;
 }
 
-#ifdef VERSION_RSPE01_01
+#if defined(VERSION_RSPE01_01)
 BOOL RFLiIsValidOnNAND(const RFLiCharInfo* info) {
     return !RFLiIsTemporaryID(&info->createID);
 }
@@ -305,7 +305,7 @@ static void copyChar2Additional_(RFLAdditionalInfo* dst,
 
     dst->sex = src->personal.sex;
 
-#ifdef VERSION_RSPE01_01
+#if defined(VERSION_RSPE01_01)
     if (RFLiCheckBirthday(src->personal.bmonth, src->personal.bday)) {
         dst->bmonth = src->personal.bmonth;
         dst->bday = src->personal.bday;
@@ -350,7 +350,7 @@ RFLErrcode RFLGetAdditionalInfo(RFLAdditionalInfo* addi, RFLDataSource source,
     return err;
 }
 
-#ifdef VERSION_RSPE01_01
+#if defined(VERSION_RSPE01_01)
 BOOL RFLiCheckBirthday(u8 month, u8 day) {
     // (One-indexed)
     static const u8 scDayMax[12 + 1] = {0,  31, 29, 31, 30, 31, 30,

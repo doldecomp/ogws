@@ -45,10 +45,10 @@ void DvdFile::initiate() {
 }
 
 bool DvdFile::open(s32 entryNum) {
-#ifdef VERSION_RSPE01_00
+#if defined(VERSION_RSPE01_00)
     if (!mIsOpen) {
         mIsOpen = DVDOpen((const char*)entryNum, &mAsyncContext.fileInfo);
-#else
+#elif defined(VERSION_RSPE01_01)
     if (!mIsOpen && entryNum != -1) {
         mIsOpen = DVDFastOpen(entryNum, &mAsyncContext.fileInfo);
 #endif

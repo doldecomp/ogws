@@ -67,7 +67,7 @@ public:
     virtual void SendClosing(); // at 0x8
     virtual void DestroyFunc(); // at 0xC
 
-#ifdef VERSION_RSPE01_00
+#if defined(VERSION_RSPE01_00)
     bool Initialize(EffectSystem* pSystem, EmitterResource* pResource,
                     u16 calcRemain);
     Emitter* CreateEmitter(ResEmitter res, u8 drawWeight, u16 calcRemain) {
@@ -76,7 +76,7 @@ public:
 
     void Calc(bool onlyBillboard);
     void Draw(const DrawInfo& rInfo);
-#else
+#elif defined(VERSION_RSPE01_01)
     virtual bool Initialize(EffectSystem* pSystem, EmitterResource* pResource,
                             u16 calcRemain); // at 0x10
     virtual Emitter* CreateEmitter(ResEmitter res, u8 drawWeight,

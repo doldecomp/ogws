@@ -17,10 +17,10 @@ u8* DvdRipper::loadToMainRAM(const char* pPath, u8* pBuffer, Heap* pHeap,
 
     DvdFile dvdFile;
 
-#ifdef VERSION_RSPE01_00
+#if defined(VERSION_RSPE01_00)
     if (!dvdFile.open((s32)pPath)) {
         EGG_PRINT("dvdFile.open(%s) == NULL\n", pPath);
-#else
+#elif defined(VERSION_RSPE01_01)
     if (!dvdFile.open(pPath)) {
 #endif
         return NULL;
@@ -112,7 +112,7 @@ u8* DvdRipper::loadToMainRAM(DvdFile* pFile, u8* pBuffer, Heap* pHeap,
     return pBuffer;
 }
 
-#ifdef VERSION_RSPE01_01
+#if defined(VERSION_RSPE01_01)
 DECOMP_FORCEACTIVE(eggDvdRipper_cpp,
                   "read Header Failed\n");
 #endif

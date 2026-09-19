@@ -13,7 +13,7 @@ Scene::Scene() {
 
     mHeap_Mem1 = SceneManager::getHeapForCreateScene_Mem1();
     mHeap_Mem2 = SceneManager::getHeapForCreateScene_Mem2();
-#ifdef VERSION_RSPE01_01
+#if defined(VERSION_RSPE01_01)
     mHeap_Debug = SceneManager::getHeapForCreateScene_Debug();
 #endif
 

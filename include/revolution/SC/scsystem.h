@@ -12,7 +12,7 @@ typedef enum {
     SC_STATUS_PARSE
 } SCStatus;
 
-#ifdef VERSION_RSPE01_00
+#if defined(VERSION_RSPE01_00)
 typedef enum {
     // IPL settings
     SC_ITEM_IPL_CB,   // Counter bias
@@ -54,7 +54,7 @@ typedef enum {
 
     SC_ITEM_MAX
 } SCItemID;
-#else
+#elif defined(VERSION_RSPE01_01)
 typedef enum {
     // IPL settings
     SC_ITEM_IPL_CB,   // Counter bias

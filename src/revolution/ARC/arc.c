@@ -37,8 +37,13 @@ BOOL ARCInitHandle(void* arcStart, ARCHandle* handle) {
     ARCHeader* arcHeader = (ARCHeader*)arcStart;
 
     if (arcHeader->magic != ARC_FILE_MAGIC) {
+#if defined(VERSION_RSPE01_00)
+#line 71
+        OS_ERROR("ARCInitHandle: bad archive format");
+#elif defined(VERSION_RSPE01_01)
 #line 74
         OS_ERROR("ARCInitHandle: bad archive format");
+#endif
     }
 
     handle->archiveStartAddr = arcStart;

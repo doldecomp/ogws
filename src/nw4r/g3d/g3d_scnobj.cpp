@@ -123,10 +123,12 @@ bool ScnObj::SetScnObjOption(u32 option, u32 value) {
         break;
     }
 
+#if defined(VERSION_RSPE01_01)
     case OPTID_ENABLE_CULLING: {
         SetScnObjFlag(SCNOBJFLAG_ENABLE_CULLING, value);
         break;
     }
+#endif
 
     default: {
         return false;
@@ -182,10 +184,12 @@ bool ScnObj::GetScnObjOption(u32 option, u32* pValue) const {
         break;
     }
 
+#if defined(VERSION_RSPE01_01)
     case OPTID_ENABLE_CULLING: {
         *pValue = TestScnObjFlag(SCNOBJFLAG_ENABLE_CULLING);
         break;
     }
+#endif
 
     default: {
         return false;
@@ -546,6 +550,7 @@ void ScnGroup::G3dProc(u32 task, u32 param, void* pInfo) {
 
 void ScnGroup::DefG3dProcScnGroup(u32 task, u32 param, void* pInfo) {
     switch (task) {
+    //! TODO(texline) This case is inlined in Rev 0
     case G3DPROC_GATHER_SCNOBJ: {
         ScnGroup_G3DPROC_GATHER_SCNOBJ(param,
                                        static_cast<IScnObjGather*>(pInfo));

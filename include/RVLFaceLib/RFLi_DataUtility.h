@@ -11,13 +11,13 @@ extern "C" {
 typedef struct RFLMiddleDB;
 
 BOOL RFLiCheckValidInfo(const RFLiCharInfo* info);
-#ifdef VERSION_RSPE01_01
+#if defined(VERSION_RSPE01_01)
 BOOL RFLiIsValidOnNAND(const RFLiCharInfo* info);
 #endif
 BOOL RFLiIsSameFaceCore(const RFLiCharInfo* lhs, const RFLiCharInfo* rhs);
 RFLErrcode RFLiPickupCharInfo(RFLiCharInfo* info, RFLDataSource source,
                               struct RFLMiddleDB* db, u16 index);
-#ifdef VERSION_RSPE01_01
+#if defined(VERSION_RSPE01_01)
 BOOL RFLiCheckBirthday(u8 month, u8 day);
 #endif
 

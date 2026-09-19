@@ -132,13 +132,13 @@ void SceneManager::createScene(s32 id, Scene* pParent) {
     if (pParent != NULL) {
         pParentHeap_Mem1 = pParent->getHeap_Mem1();
         pParentHeap_Mem2 = pParent->getHeap_Mem2();
-#ifdef VERSION_RSPE01_01
+#if defined(VERSION_RSPE01_01)
         pParentHeap_Debug = pParent->getHeap_Debug();
 #endif
     } else {
         pParentHeap_Mem1 = BaseSystem::getRootHeapMem1();
         pParentHeap_Mem2 = BaseSystem::getRootHeapMem2();
-#ifdef VERSION_RSPE01_01
+#if defined(VERSION_RSPE01_01)
         pParentHeap_Debug = BaseSystem::getRootHeapDebug();
 #endif
     }
@@ -309,7 +309,7 @@ void SceneManager::destroyScene(Scene* pScene) {
         mCurrentScene = pParent;
     }
 
-#ifdef VERSION_RSPE01_01
+#if defined(VERSION_RSPE01_01)
     if (pScene->getHeap_Debug() != NULL) {
 #line 523
         EGG_ASSERT(pScene->getHeap() != pScene->getHeap_Debug());

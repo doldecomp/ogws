@@ -53,9 +53,9 @@ inline f32 FFloor(f32 x) {
 }
 
 inline f32 FInv(register f32 x) {
-#ifdef VERSION_RSPE01_00
+#if defined(VERSION_RSPE01_00)
     register f32 work0, work1;
-#else
+#elif defined(VERSION_RSPE01_01)
     register f32 work0, work1, work2, work3;
 #endif
 
@@ -63,7 +63,7 @@ inline f32 FInv(register f32 x) {
         fmr  work1, x     // x
         fres work0, work1 // 1/x
 
-#ifdef VERSION_RSPE01_01
+#if defined(VERSION_RSPE01_01)
         // Refine estimate
         ps_add   work2, work0, work0        // 2/x
         ps_mul   work3, work0, work0        // 1/x^2

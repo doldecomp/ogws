@@ -354,11 +354,31 @@ nw4r/g3d/g3d_maya.cpp:
 	.rodata     start:0x80343010 end:0x80343048
 	.sdata2     start:0x804E0958 end:0x804E096C
 
+nw4r/g3d/g3d_scnobj.cpp:
+	.text       start:0x800696C4 end:0x8006AC4C
+	.rodata     start:0x803430B8 end:0x803430E8
+	.data       start:0x80361178 end:0x80361238
+	.sbss       start:0x804DF220 end:0x804DF224
+
 nw4r/g3d/g3d_scnroot.cpp:
 	.text       start:0x8006AC4C end:0x8006C424
 	.rodata     start:0x803430E8 end:0x803430F8
 	.data       start:0x80361238 end:0x803612A0
 	.sdata      start:0x804DDBD0 end:0x804DDBE0
+
+nw4r/lyt/lyt_animation.cpp:
+	.text       start:0x8007BAD4 end:0x8007C65C
+	.data       start:0x803616C0 end:0x803616E0
+	.sdata2     start:0x804E0A80 end:0x804E0AA0
+
+nw4r/lyt/lyt_resourceAccessor.cpp:
+	.text       start:0x8007C65C end:0x8007C6B4
+	.data       start:0x803616E0 end:0x803616F4
+
+nw4r/lyt/lyt_arcResourceAccessor.cpp:
+	.text       start:0x8007C6B4 end:0x8007CA94
+	.data       start:0x803616F8 end:0x8036170C
+	.sdata      start:0x804DDC00 end:0x804DDC07
 
 egg/core/eggHeap.cpp:
 	.text       start:0x8007E71C end:0x8007EF0C
@@ -581,6 +601,16 @@ revolution/VI/i2c.c:
 
 revolution/VI/vi3in1.c:
 	.text       start:0x800D6B3C end:0x800D81F0
+
+revolution/ARC/arc.c:
+	.text       start:0x800DCAD4 end:0x800DD454
+	.data       start:0x80373E80 end:0x80373EF0
+	.sdata      start:0x804DDF50 end:0x804DDF58
+
+revolution/AX/AX.c:
+	.text       start:0x800DD454 end:0x800DD494
+	.data       start:0x80373EF0 end:0x80373F38
+	.sdata      start:0x804DDF58 end:0x804DDF5C
 
 revolution/AXFX/AXFXChorus.c:
 	.text       start:0x800E33A0 end:0x800E3504

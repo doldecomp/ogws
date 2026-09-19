@@ -96,10 +96,10 @@ typedef struct SCItem {
     u32 itemLen;      // at 0x1C
 } SCItem;
 
-#ifdef VERSION_RSPE01_00
+#if defined(VERSION_RSPE01_00)
 const char* __SCVersion =
     "<< RVL_SDK - SC \trelease build: Sep  7 2006 07:22:06 (0x4200_60422) >>";
-#else
+#elif defined(VERSION_RSPE01_01)
 const char* __SCVersion =
     "<< RVL_SDK - SC \trelease build: Nov 30 2006 03:33:00 (0x4199_60831) >>";
 #endif
@@ -124,7 +124,7 @@ static u8 IsDevKit = FALSE;
 static u8 DirtyFlag = FALSE;
 static u8 Initialized = FALSE;
 
-#ifdef VERSION_RSPE01_00
+#if defined(VERSION_RSPE01_00)
 static SCNameAndID NameAndIDTbl[SC_ITEM_MAX] = {
     {"IPL.CB", SC_ITEM_IPL_CB},     {"IPL.AR", SC_ITEM_IPL_AR},
     {"IPL.ARN", SC_ITEM_IPL_ARN},   {"IPL.DH", SC_ITEM_IPL_DH},
@@ -140,7 +140,7 @@ static SCNameAndID NameAndIDTbl[SC_ITEM_MAX] = {
     {"BT.SENS", SC_ITEM_BT_SENS},   {"BT.SPKV", SC_ITEM_BT_SPKV},
     {"BT.MOT", SC_ITEM_BT_MOT},     {"BT.BAR", SC_ITEM_BT_BAR},
     {"DVD.CNF", SC_ITEM_DVD_CNF},   {"WWW.RST", SC_ITEM_WWW_RST}};
-#else
+#elif defined(VERSION_RSPE01_01)
 static SCNameAndID NameAndIDTbl[SC_ITEM_MAX] = {
     {"IPL.CB", SC_ITEM_IPL_CB},     {"IPL.AR", SC_ITEM_IPL_AR},
     {"IPL.ARN", SC_ITEM_IPL_ARN},   {"IPL.CD", SC_ITEM_IPL_CD},

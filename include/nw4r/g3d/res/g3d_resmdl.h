@@ -121,9 +121,9 @@ struct ResMdlData {
 class ResMdl : public ResCommon<ResMdlData> {
 public:
     static const u32 SIGNATURE = FOURCC('M', 'D', 'L', '0');
-#ifdef VERSION_RSPE01_00
+#if defined(VERSION_RSPE01_00)
     static const int REVISION = 8;
-#else
+#elif defined(VERSION_RSPE01_01)
     static const int REVISION = 9;
 #endif
 

@@ -119,9 +119,9 @@ u32 SCGetBtDpdSensibility(void) {
     u32 item;
 
     if (!SCFindU32Item(&item, SC_ITEM_BT_SENS)) {
-#ifdef VERSION_RSPE01_00
+#if defined(VERSION_RSPE01_00)
         item = 5;
-#else
+#elif defined(VERSION_RSPE01_01)
         item = 2;
 #endif
     } else if (item < 1) {
@@ -165,10 +165,10 @@ u8 SCGetWpadSpeakerVolume(void) {
     u8 item;
 
     if (!SCFindU8Item(&item, SC_ITEM_BT_SPKV)) {
-#ifdef VERSION_RSPE01_00
+#if defined(VERSION_RSPE01_00)
         //! 127 is max volume.
         item = 127;
-#else
+#elif defined(VERSION_RSPE01_01)
         item = 89;
 #endif
     } else if (item > 127) {

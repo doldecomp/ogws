@@ -43,11 +43,11 @@ static void cbForNandCreate(s32 result, NANDCommandBlock* block) {
 #pragma unused(block)
 
     if (result == NAND_RESULT_OK || result == NAND_RESULT_EXISTS) {
-#ifdef VERSION_RSPE01_00
+#if defined(VERSION_RSPE01_00)
         if (NANDPrivateOpenAsync("/shared2/test/dvderror.dat", &NandInfo,
                                  NAND_ACCESS_WRITE, cbForNandOpen,
                                  &NandCb) != NAND_RESULT_OK) {
-#else
+#elif defined(VERSION_RSPE01_01)
         if (NANDPrivateOpenAsync("/shared2/test2/dvderror.dat", &NandInfo,
                                  NAND_ACCESS_WRITE, cbForNandOpen,
                                  &NandCb) != NAND_RESULT_OK) {
@@ -64,11 +64,11 @@ static void cbForNandCreateDir(s32 result, NANDCommandBlock* block) {
 #pragma unused(block)
 
     if (result == NAND_RESULT_OK || result == NAND_RESULT_EXISTS) {
-#ifdef VERSION_RSPE01_00
+#if defined(VERSION_RSPE01_00)
         if (NANDPrivateCreateAsync("/shared2/test/dvderror.dat",
                                    NAND_PERM_RWALL, 0, cbForNandCreate,
                                    &NandCb) != NAND_RESULT_OK) {
-#else
+#elif defined(VERSION_RSPE01_01)
         if (NANDPrivateCreateAsync("/shared2/test2/dvderror.dat",
                                    NAND_PERM_RWALL, 0, cbForNandCreate,
                                    &NandCb) != NAND_RESULT_OK) {
@@ -86,10 +86,10 @@ void __DVDStoreErrorCode(u32 error, DVDErrorCallback callback) {
     __ErrorInfo.sec = OS_TICKS_TO_SEC(OSGetTime());
     Callback = callback;
 
-#ifdef VERSION_RSPE01_00
+#if defined(VERSION_RSPE01_00)
     if (NANDPrivateCreateDirAsync("/shared2/test", NAND_PERM_RWALL, 0,
                                   cbForNandCreateDir, &NandCb) != 0) {
-#else
+#elif defined(VERSION_RSPE01_01)
     if (NANDPrivateCreateDirAsync("/shared2/test2", NAND_PERM_RWALL, 0,
                                   cbForNandCreateDir, &NandCb) != 0) {
 #endif

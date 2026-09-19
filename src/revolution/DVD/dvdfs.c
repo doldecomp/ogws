@@ -319,20 +319,20 @@ BOOL DVDGetCurrentDir(char* buffer, u32 maxlen) {
 BOOL DVDReadAsyncPrio(DVDFileInfo* info, void* dst, s32 size, s32 offset,
                       DVDAsyncCallback callback, s32 prio) {
     // clang-format off
-#ifdef VERSION_RSPE01_00
+#if defined(VERSION_RSPE01_00)
 #line 805
     OS_ASSERT(offset >= 0 && offset <= info->size, "DVDReadAsync(): specified area is out of the file  ");
-#else
+#elif defined(VERSION_RSPE01_01)
 #line 823
     OS_ASSERT(offset >= 0 && offset <= info->size, "DVDReadAsync(): specified area is out of the file  ");
 #endif
     // clang-format on
 
     // clang-format off
-#ifdef VERSION_RSPE01_00
+#if defined(VERSION_RSPE01_00)
 #line 811
     OS_ASSERT(offset + size >= 0 && offset + size < info->size + 32, "DVDReadAsync(): specified area is out of the file  ");
-#else
+#elif defined(VERSION_RSPE01_01)
 #line 829
     OS_ASSERT(offset + size >= 0 && offset + size < info->size + 32, "DVDReadAsync(): specified area is out of the file  ");
 #endif

@@ -91,8 +91,11 @@ void RPSysSystem::setupTVMode() {
 }
 
 RPSysSceneCreator::ESceneID RPSysSystem::getBootScene() {
-    // this function is hardcoded
+#if defined(PACK_SPORTS)
     return RPSysSceneCreator::ESceneID_RPSportsPackTitleScene;
+#elif defined(PACK_PARTY)
+    return RPSysSceneCreator::ESceneID_RPPartyPackTitleScene;
+#endif
 }
 
 void RPSysSystem::startLoadCount() {

@@ -93,7 +93,7 @@ typedef struct NANDFileInfo {
     char openPath[FS_MAX_PATH]; // at 0x8
     char tempPath[FS_MAX_PATH]; // at 0x48
     u8 access;                  // at 0x88
-#ifdef VERSION_RSPE01_01
+#if defined(VERSION_RSPE01_01)
     u8 stage; // at 0x89
     u8 mark;  // at 0x8A
 #endif

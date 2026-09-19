@@ -397,9 +397,9 @@ public:
      *
      * @param course Golf course ID
      */
-#ifdef VERSION_RSPE01_00
+#if defined(VERSION_RSPE01_00)
     u8 getGolStandardBest(ECourse course) const;
-#else
+#elif defined(VERSION_RSPE01_01)
     s8 getGolStandardBest(ECourse course) const;
 #endif
     /**
@@ -734,9 +734,9 @@ private:
      */
     /**@{*/
     //! Best scores on each difficulty
-#ifdef VERSION_RSPE01_00
+#if defined(VERSION_RSPE01_00)
     u8 mGolStandardBests[ECourse_Max]; // at 0x290
-#else
+#elif defined(VERSION_RSPE01_01)
     s8 mGolStandardBests[ECourse_Max]; // at 0x290
 #endif
     //! Number of aces hit

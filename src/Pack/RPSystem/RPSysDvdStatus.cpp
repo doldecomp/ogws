@@ -159,7 +159,7 @@ bool RPSysDvdStatus::update() {
 
     if (isErrorOccured()) {
         RPSysCoreController::stopMotorAll();
-#ifdef VERSION_RSPE01_01
+#if defined(VERSION_RSPE01_01)
         RP_GET_INSTANCE(RPSysHomeMenuMgr)->update();
 #endif
 

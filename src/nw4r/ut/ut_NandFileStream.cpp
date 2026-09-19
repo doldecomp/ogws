@@ -123,9 +123,9 @@ s32 NandFileStream::Read(void* pDst, u32 size) {
     NANDSeek(&mFileInfo.nandInfo, mFilePosition.Tell(), NAND_SEEK_BEG);
 
     s32 result = NANDRead(&mFileInfo.nandInfo, pDst, size);
-#ifdef VERSION_RSPE01_00
+#if defined(VERSION_RSPE01_00)
     mFilePosition.Skip(result);
-#else
+#elif defined(VERSION_RSPE01_01)
     if (result > 0) {
         mFilePosition.Skip(result);
     }

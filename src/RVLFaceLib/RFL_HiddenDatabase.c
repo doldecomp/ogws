@@ -39,9 +39,9 @@ static void loadcallback_(void) {
                 &RFLiGetHiddenHeader()->data[mgr->loadIndex].createID)) {
             RFLiConvertHRaw2Info(data, &info);
 
-#ifdef VERSION_RSPE01_00
+#if defined(VERSION_RSPE01_00)
             if (RFLiCheckValidInfo(&info)) {
-#else
+#elif defined(VERSION_RSPE01_01)
             if (RFLiCheckValidInfo(&info) && RFLiIsValidOnNAND(&info)) {
 #endif
                 memcpy(mgr->loadDst, data, sizeof(RFLiHiddenCharData));

@@ -30,7 +30,7 @@ public:
     Heap* getHeap_Mem2() const {
         return mHeap_Mem2;
     }
-#ifdef VERSION_RSPE01_01
+#if defined(VERSION_RSPE01_01)
     Heap* getHeap_Debug() const {
         return mHeap_Debug;
     }
@@ -68,7 +68,7 @@ private:
     Heap* mHeap;      // at 0x4
     Heap* mHeap_Mem1; // at 0x8
     Heap* mHeap_Mem2; // at 0xC
-#ifdef VERSION_RSPE01_01
+#if defined(VERSION_RSPE01_01)
     Heap* mHeap_Debug; // at 0x10
 #endif
     Scene* mParentScene;     // at 0x14

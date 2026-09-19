@@ -116,7 +116,7 @@ void CalcWorld(math::MTX34* pModelMtxArray, u32* pModelMtxAttribArray,
             u32 fromMtxID =
                 (pMtxDupCmd->fromMtxIdHi << 8) + pMtxDupCmd->fromMtxIdLo;
 
-#ifdef VERSION_RSPE01_01
+#if defined(VERSION_RSPE01_01)
             pMtxIDArray[numMtxID++] = toMtxID;
 #endif
 
@@ -125,7 +125,7 @@ void CalcWorld(math::MTX34* pModelMtxArray, u32* pModelMtxAttribArray,
             math::MTX34Copy(&pModelMtxArray[toMtxID],
                             &pModelMtxArray[fromMtxID]);
 
-#ifdef VERSION_RSPE01_01
+#if defined(VERSION_RSPE01_01)
             pScaleArray[toMtxID] = pScaleArray[fromMtxID];
 #endif
 
@@ -153,7 +153,7 @@ void CalcWorld(math::MTX34* pModelMtxArray, u32* pModelMtxAttribArray,
 #undef pMtxDupCmd
 }
 
-#ifdef VERSION_RSPE01_01
+#if defined(VERSION_RSPE01_01)
 void CalcWorld(math::MTX34* pModelMtxArray, u32* pModelMtxAttribArray,
                const u8* pByteCode, const math::MTX34* pBaseMtx, ResMdl mdl,
                AnmObjChr* pAnmChr, FuncObjCalcWorld* pFuncObj) {
