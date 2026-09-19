@@ -121,10 +121,10 @@ RPSysSystem::RPSysSystem() : mEffectWorkSize(0) {
     mpDvdThread = NULL;
     mpWc24Thread = NULL;
     mNandEndMessage = FOURCC('n', 'a', 'n', 'd');
-    mDvdEndMessage = 0x6469736B;  // "disk"
-    mWc24EndMessage = 0x77633234; // "wc24"
+    mDvdEndMessage = FOURCC('d', 'i', 's', 'k');  // "disk"
+    mWc24EndMessage = FOURCC('w', 'c', '2', '4'); // "wc24"
     mFrameRate = 1;
-    sConfigData.GetDisplay()->setFrameRate(1);
+    sConfigData.GetDisplay()->setFrameRate(mFrameRate);
     mLoadCount = 0;
     mpTimeStampString = NULL;
     mFrameTime = (f32)mFrameRate / 60.0f;

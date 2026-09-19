@@ -439,7 +439,10 @@ cflags_rp_pch = [
     "-prefix SportsPack.mch",
 ]
 
-config.linker_version = "GC/3.0a5.2" if version_num == 1 else "GC/3.0a5"
+config.linker_version = {
+    "RSPE01_00": "GC/3.0a5",
+    "RSPE01_01": "GC/3.0a5.2",
+}[config.version]
 
 
 Matching = True                   # Object matches and should be linked
@@ -791,7 +794,7 @@ config.libs = [
             Object(Matching, "egg/core/eggXfb.cpp"),
             Object(Matching, "egg/core/eggXfbManager.cpp"),
             Object(Matching, "egg/core/eggDvdRipper.cpp"),
-            Object(not MatchingFor("RSPE01_00"), "egg/core/eggDvdFile.cpp"),
+            Object(Matching, "egg/core/eggDvdFile.cpp"),
             Object(Matching, "egg/core/eggScene.cpp"),
             Object(not MatchingFor("RSPE01_00"), "egg/core/eggProcessMeter.cpp"),
             Object(Matching, "egg/core/eggDisposer.cpp"),

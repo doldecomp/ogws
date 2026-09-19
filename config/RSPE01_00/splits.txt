@@ -914,3 +914,7 @@ Pack/RPGraphics/RPGrpModelAnm.cpp:
 
 Pack/RPGraphics/RPGrpModelResManager.cpp:
 	.text       start:0x80185AE4 end:0x80186924
+
+Pack/RPAudio/RPSndAudioMgr.cpp:
+	.text       start:0x8019C7E0 end:0x8019E630
+	.sbss       start:0x804DFC5C end:0x804DFC68

@@ -224,9 +224,14 @@ void* RPSysResourceManager::GetMessageResource(const char* pName) {
  *
  * @param pPath Path to examine
  */
+
 bool RPSysResourceManager::IsExist(const char* pPath) {
     EGG::DvdFile f;
+#if defined(VERSION_RSPE01_00)
+    return f.open(pPath);
+#elif defined(VERSION_RSPE01_01)
     return f.open(pPath, GetMultiHandle());
+#endif
 }
 
 /**
@@ -537,9 +542,15 @@ u8* RPSysResourceManager::LoadFromDVD(const char* pPath, EGG::Heap* pHeap,
                                       s32* pSize) {
     EGG::DvdFile f;
 
+#if defined(VERSION_RSPE01_00)
+    if (!f.open(pPath)) {
+        return NULL;
+    }
+#elif defined(VERSION_RSPE01_01)
     if (!f.open(pPath, GetMultiHandle())) {
         return NULL;
     }
+#endif
 
     s32 fileSize = ROUND_UP(f.getFileSize(), 32);
 
@@ -576,7 +587,7 @@ DECOMP_FORCEACTIVE(RPSysResourceManager_cpp_1,
  * @param list Resource list
  */
 RPSysFile* RPSysResourceManager::FindFile(const char* pPath, EList list) const {
-    RP_NW4R_LIST_FOREACH(RPSysFile, it, mResourceLists[list]) {
+    RP_NW4R_LIST_FOREACH (RPSysFile, it, mResourceLists[list]) {
         if (std::strcmp(pPath, it->GetPath()) == 0) {
             return it;
         }

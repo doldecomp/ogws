@@ -17,11 +17,9 @@ u8* DvdRipper::loadToMainRAM(const char* pPath, u8* pBuffer, Heap* pHeap,
 
     DvdFile dvdFile;
 
-#if defined(VERSION_RSPE01_00)
-    if (!dvdFile.open((s32)pPath)) {
-        EGG_PRINT("dvdFile.open(%s) == NULL\n", pPath);
-#elif defined(VERSION_RSPE01_01)
     if (!dvdFile.open(pPath)) {
+#if defined(VERSION_RSPE01_00)
+        EGG_PRINT("dvdFile.open(%s) == NULL\n", pPath);
 #endif
         return NULL;
     }
