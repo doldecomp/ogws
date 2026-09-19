@@ -120,7 +120,7 @@ RPSysSystem::RPSysSystem() : mEffectWorkSize(0) {
     mpNandThread = NULL;
     mpDvdThread = NULL;
     mpWc24Thread = NULL;
-    mNandEndMessage = 0x6E616E64; // "nand"
+    mNandEndMessage = FOURCC('n', 'a', 'n', 'd');
     mDvdEndMessage = 0x6469736B;  // "disk"
     mWc24EndMessage = 0x77633234; // "wc24"
     mFrameRate = 1;
