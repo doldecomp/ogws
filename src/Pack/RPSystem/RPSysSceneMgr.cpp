@@ -281,13 +281,7 @@ void RPSysSceneMgr::setFadeFrame(u16 frame) {
     mCurrentFader->setFrame(frame);
 }
 
-/**
- * @brief Gets the duration of the scene fader
- */
-u16 RPSysSceneMgr::getFadeFrame() {
-    return mpSceneFader->getFrame();
-}
-#elif defined(VERSION_RSPE01_01)
+#endif
 /**
  * @brief Gets the duration of the scene fader
  */
@@ -295,6 +289,7 @@ u16 RPSysSceneMgr::getFadeFrame() {
     return mpSceneFader->getFrame();
 }
 
+#if defined(VERSION_RSPE01_01)
 /**
  * @brief Sets the duration of all faders
  *
