@@ -6,7 +6,27 @@ u32 fn_801C389C(RPGrpModel* pModel, int unk1, int unk2);
 // Applies the given color to the model
 void fn_801C37EC(RPGrpModel* pModel, int unk1, int unk2, GXColor* pColor);
 
-namespace Bowling {
+/**
+ * @brief Destructor
+ */
+RPBowActiveBall::~RPBowActiveBall() {}
+
+/**
+ * @brief Unknown stub
+ */
+void RPBowActiveBall::fn_8032ADF4(void) {
+    ;
+}
+
+/**
+ * @brief Sets the real and reflection models for a model set
+ */
+void RPBowActiveBall::SetModelSet(u32 index, RPGrpModel* realModel, RPGrpModel* reflectionModel) {
+    models[index].pRealModel = realModel;
+    models[index].pReflectionModel = reflectionModel;
+
+    realModel->CreateBoundingInfo(1);
+}
 
 /**
  * @brief Initializes the render object to its default state
@@ -106,5 +126,3 @@ void RPBowActiveBall::RenderModelSet() {
         pShadowTexture->AddModel(models[index].pRealModel, 1.0f);
     }
 }
-
-} // namespace Bowling

@@ -1,8 +1,6 @@
 #include <Pack/RPSports/RPBowScene/bowling.h>
 #include <Pack/RPUtility/RPUtlRandom.h>
 
-namespace Bowling {
-
 // Extern Functions
 int fn_801C3490(int arg0, float arg1, void* pArg2);
 u32 fn_801C389C(RPGrpModel* pModel, int arg1, int arg2);
@@ -272,5 +270,3 @@ void RPBowBallReturnRack::UpdateBallReturnRack(s32 index) {
         }
     }
 }
-
-} // namespace Bowling

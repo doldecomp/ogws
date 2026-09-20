@@ -1,10 +1,6 @@
 #include <Pack/RPSports/RPBowScene/bowling.h>
 #include <Pack/RPUtility/RPUtlRandom.h>
 
-#define nullptr 0
-
-namespace Bowling {
-
 // Forward declarations
 extern u8 lbl_804BF9F8;
 extern u32 lbl_804BF9F4;
@@ -28,9 +24,9 @@ public:
 /**
  * @brief Unknown stub
  */
-void RPBowBackgroundNpcManager::fn_8034E96C() {
-    ;
-}
+// void RPBowBackgroundNpcManager::fn_8034E96C() {
+//     ;
+// }
 
 /**
  * @brief Destructor
@@ -72,12 +68,12 @@ void RPBowBackgroundNpcManager::InitializeConfig(int index) {
  * @brief Sets the model groups for the manager
  *
  * @param managerIndex Manager index
- * @param pModelGroup0 First model group
- * @param pModelGroup1 Second model group
+ * @param realKokeshi First model group
+ * @param reflectionKokeshi Second model group
  */
-void RPBowBackgroundNpcManager::SetModelGroups(int managerIndex, NpcModelGroup* pModelGroup0, NpcModelGroup* pModelGroup1) {
-    mModelGroups[managerIndex][0] = pModelGroup0;
-    mModelGroups[managerIndex][1] = pModelGroup1;
+void RPBowBackgroundNpcManager::SetModelGroups(int managerIndex, RPSysKokeshi* realKokeshi, RPSysKokeshi* reflectionKokeshi) {
+    mModelGroups[managerIndex][0] = realKokeshi;
+    mModelGroups[managerIndex][1] = reflectionKokeshi;
 }
 
 /**
@@ -96,8 +92,8 @@ void RPBowBackgroundNpcManager::Reset() {
     *(volatile int*)&mMovement.animationState = 0;
 
     for (int i = 0; i < 2; i++) {
-        NpcModelGroup* pGroup = mModelGroups[mModelGroupSet][i];
-        RPGrpModelAnm* pAnimation = RPGrpModelAccessor::GetModelAnm(pGroup->mModelA8);
+        RPSysKokeshi* pGroup = mModelGroups[mModelGroupSet][i];
+        RPGrpModelAnm* pAnimation = RPGrpModelAccessor::GetModelAnm(pGroup->GetBodyModel());
         pAnimation->StartBlend(RPGrpModelAnm::Anm_Chr, 0, 60.0f, 0.0f);
     }
 
@@ -107,10 +103,10 @@ void RPBowBackgroundNpcManager::Reset() {
     mMovement.stateTimer = -1;
 
     fn_8034CFC4(&mIdleState, 999, 0);
-    unk_0x94 = 0;
+    isVisible = 0;
 
     for (int j = 0; j < 600; j++) {
-        UpdateMovement(nullptr, nullptr);
+        UpdateMovement(NULL, NULL);
     }
 
     lbl_804BF9F8 = 0;
@@ -173,8 +169,8 @@ void RPBowBackgroundNpcManager::UpdateMovement(nw4r::math::VEC3* pOutPosition, b
             if (mMovement.animationState != 1) {
                 mMovement.animationState = 1;
                 for (int i = 0; i < 2; i++) {
-                    NpcModelGroup* pGroup = mModelGroups[mModelGroupSet][i];
-                    RPGrpModelAnm* pAnimation = RPGrpModelAccessor::GetModelAnm(pGroup->mModelA8);
+                    RPSysKokeshi* pGroup = mModelGroups[mModelGroupSet][i];
+                    RPGrpModelAnm* pAnimation = RPGrpModelAccessor::GetModelAnm(pGroup->GetBodyModel());
 
                     pAnimation->StartBlend(RPGrpModelAnm::Anm_Chr, 1, 60.0f, 0.0f);
                 }
@@ -214,8 +210,8 @@ void RPBowBackgroundNpcManager::UpdateMovement(nw4r::math::VEC3* pOutPosition, b
             if (mMovement.animationState != 0) {
                 mMovement.animationState = 0;
                 for (int i = 0; i < 2; i++) {
-                    NpcModelGroup* pGroup = mModelGroups[mModelGroupSet][i];
-                    RPGrpModelAnm* pAnimation = RPGrpModelAccessor::GetModelAnm(pGroup->mModelA8);
+                    RPSysKokeshi* pGroup = mModelGroups[mModelGroupSet][i];
+                    RPGrpModelAnm* pAnimation = RPGrpModelAccessor::GetModelAnm(pGroup->GetBodyModel());
 
                     pAnimation->StartBlend(RPGrpModelAnm::Anm_Chr, 0, 60.0f, 0.0f);
                 }
@@ -243,22 +239,13 @@ void RPBowBackgroundNpcManager::UpdateMovement(nw4r::math::VEC3* pOutPosition, b
 
     mMovement.stateTimer++;
 
-    if (pOutPosition != nullptr) {
+    if (pOutPosition != NULL) {
         *pOutPosition = localVec;
     }
-    if (pOutStateFlag != nullptr) {
+    if (pOutStateFlag != NULL) {
         *pOutStateFlag = stateFlag;
     }
 }
-
-//! Gets the face model
-#define GET_FACE(pKokeshi) ((pKokeshi)->mModelA4)
-//! Gets the body model
-#define GET_BODY(pKokeshi) ((pKokeshi)->mModelA8)
-//! Gets the left hand model
-#define GET_LHAND(pKokeshi) ((pKokeshi)->mModelAC)
-//! Gets the right hand model
-#define GET_RHAND(pKokeshi) ((pKokeshi)->mModelB0)
 
 /**
  * @brief Renders the background NPC
@@ -270,7 +257,7 @@ void RPBowBackgroundNpcManager::Render() {
 
     UpdateMovement(&position, &stateFlag);
 
-    if (!stateFlag || !unk_0x94) {
+    if (!stateFlag || !isVisible) {
         return;
     }
 
@@ -299,18 +286,18 @@ void RPBowBackgroundNpcManager::Render() {
     mtx3._13 += pConfig->mirroredModelZOffset;
 
     for (int i = 0; i < 2; i++) {
-        NpcModelGroup* pGroup = mModelGroups[mModelGroupSet][i];
+        RPSysKokeshi* pGroup = mModelGroups[mModelGroupSet][i];
 
         nw4r::math::MTX34 leftHandMtx;
         nw4r::math::MTX34 rightHandMtx;
         nw4r::math::MTX34 headMtx;
 
-        if (GET_BODY(pGroup)->GetScnObj() != nullptr) {
-            GET_BODY(pGroup)->GetScnObj()->SetMtx(nw4r::g3d::ScnObj::MTX_LOCAL, i == 0 ? &mtx : &mtx3);
+        if (pGroup->GetBodyModel()->GetScnObj() != NULL) {
+            pGroup->GetBodyModel()->GetScnObj()->SetMtx(nw4r::g3d::ScnObj::MTX_LOCAL, i == 0 ? &mtx : &mtx3);
         }
-        RPGrpModelAccessor::SetScale(GET_BODY(pGroup), scale);
-        GET_BODY(pGroup)->UpdateFrame();
-        GET_BODY(pGroup)->Calc();
+        RPGrpModelAccessor::SetScale(pGroup->GetBodyModel(), scale);
+        pGroup->GetBodyModel()->UpdateFrame();
+        pGroup->GetBodyModel()->Calc();
 
         RPSysKokeshi* pKokeshi = reinterpret_cast<RPSysKokeshi*>(pGroup);
         pKokeshi->GetHeadJointMtx(reinterpret_cast<EGG::Matrix34f*>(&headMtx));
@@ -326,35 +313,35 @@ void RPBowBackgroundNpcManager::Render() {
             nw4r::math::MTX34Mult(&headMtx, &headMtx, &flipMtx);
         }
 
-        if (GET_FACE(pGroup)->GetScnObj() != nullptr) {
-            GET_FACE(pGroup)->GetScnObj()->SetMtx(nw4r::g3d::ScnObj::MTX_LOCAL, &headMtx);
+        if (pGroup->GetNigaoeModel()->GetScnObj() != NULL) {
+            pGroup->GetNigaoeModel()->GetScnObj()->SetMtx(nw4r::g3d::ScnObj::MTX_LOCAL, &headMtx);
         }
-        RPGrpModelAccessor::SetScale(GET_FACE(pGroup), scale);
-        GET_FACE(pGroup)->UpdateFrame();
-        GET_FACE(pGroup)->Calc();
+        RPGrpModelAccessor::SetScale(pGroup->GetNigaoeModel(), scale);
+        pGroup->GetNigaoeModel()->UpdateFrame();
+        pGroup->GetNigaoeModel()->Calc();
 
-        if (GET_LHAND(pGroup)->GetScnObj() != nullptr) {
-            GET_LHAND(pGroup)->GetScnObj()->SetMtx(nw4r::g3d::ScnObj::MTX_LOCAL, &leftHandMtx);
+        if (pGroup->GetLeftHandModel()->GetScnObj() != NULL) {
+            pGroup->GetLeftHandModel()->GetScnObj()->SetMtx(nw4r::g3d::ScnObj::MTX_LOCAL, &leftHandMtx);
         }
-        RPGrpModelAccessor::SetScale(GET_LHAND(pGroup), scale);
-        GET_LHAND(pGroup)->UpdateFrame();
-        GET_LHAND(pGroup)->Calc();
+        RPGrpModelAccessor::SetScale(pGroup->GetLeftHandModel(), scale);
+        pGroup->GetLeftHandModel()->UpdateFrame();
+        pGroup->GetLeftHandModel()->Calc();
 
-        if (GET_RHAND(pGroup)->GetScnObj() != nullptr) {
-            GET_RHAND(pGroup)->GetScnObj()->SetMtx(nw4r::g3d::ScnObj::MTX_LOCAL, &rightHandMtx);
+        if (pGroup->GetRightHandModel()->GetScnObj() != NULL) {
+            pGroup->GetRightHandModel()->GetScnObj()->SetMtx(nw4r::g3d::ScnObj::MTX_LOCAL, &rightHandMtx);
         }
-        RPGrpModelAccessor::SetScale(GET_RHAND(pGroup), scale);
-        GET_RHAND(pGroup)->UpdateFrame();
-        GET_RHAND(pGroup)->Calc();
+        RPGrpModelAccessor::SetScale(pGroup->GetRightHandModel(), scale);
+        pGroup->GetRightHandModel()->UpdateFrame();
+        pGroup->GetRightHandModel()->Calc();
 
         if (i == 1 && !lbl_804BF9F8) {
             break;
         }
 
-        GET_BODY(pGroup)->Entry();
-        GET_FACE(pGroup)->Entry();
-        GET_LHAND(pGroup)->Entry();
-        GET_RHAND(pGroup)->Entry();
+        pGroup->GetBodyModel()->Entry();
+        pGroup->GetNigaoeModel()->Entry();
+        pGroup->GetLeftHandModel()->Entry();
+        pGroup->GetRightHandModel()->Entry();
     }
 }
 
@@ -378,5 +365,3 @@ void RPBowBackgroundNpcManager::fn_8034DD0C() {
 void RPBowBackgroundNpcManager::fn_8034DD08() {
     ;
 }
-
-} // namespace Bowling

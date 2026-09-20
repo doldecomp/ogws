@@ -232,6 +232,10 @@ public:
         mBaseScale.x = mBaseScale.y = mBaseScale.z = scale;
     }
 
+    RPGrpModelAnm* GetModelAnm() const {
+        return mpModelAnm;
+    }
+
     RPGrpModelMaterial* GetMaterial(const char* pName) const {
         return mppMaterials[GetMaterialIndex(pName)];
     }

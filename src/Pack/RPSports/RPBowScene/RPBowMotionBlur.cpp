@@ -1,9 +1,14 @@
 #include <Pack/RPSports/RPBowScene/bowling.h>
 
-namespace Bowling {
-
 // Appears to check frustum culling
 extern bool fn_801C3490(void* pCullingCtx, const nw4r::math::VEC3* pos, f32 radius);
+
+/**
+ * @brief Unknown stub
+ */
+void RPBowMotionBlur::fn_8034D4F0() {
+    ;
+}
 
 /**
  * @brief Destructor
@@ -106,5 +111,3 @@ void RPBowMotionBlur::DrawBlur(void* pCullingCtx) {
         models[i].pReflectionModel->Entry();
     }
 }
-
-} // namespace Bowling

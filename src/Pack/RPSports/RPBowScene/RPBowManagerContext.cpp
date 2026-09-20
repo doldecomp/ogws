@@ -1,8 +1,6 @@
 #include <Pack/RPSports/RPBowScene/bowling.h>
 #include <Pack/RPUtility/RPUtlRandom.h>
 
-namespace Bowling {
-
 struct WeightedLanes {
     u8 data[15];
 };
@@ -30,7 +28,7 @@ void RPBowManagerContext::Initialize() {
  * @param pLaneManager Global lane manager instance
  * @param pSceneObjectManager Scene object manager instance
  */
-void RPBowManagerContext::LinkNpcLanes(RPBowGlobalLaneManager* pLaneManager, SceneObjectManager* pSceneObjectManager) {
+void RPBowManagerContext::LinkNpcLanes(RPBowGlobalLaneManager* pLaneManager, RPBowSceneObjectManager* pSceneObjectManager) {
     for (int i = 0; i < 6; i++) {
         const int sBallReturnMapping[] = { 0, 1, 0, 3, 2, 3 };
 
@@ -103,5 +101,3 @@ void RPBowManagerContext::DebugPrintStates() {
         }
     }
 }
-
-}  // namespace Bowling

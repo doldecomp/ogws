@@ -63,6 +63,42 @@ public:
      */
     void GetRightHandJointMtx(EGG::Matrix34f* pMtx);
 
+    /**
+     * @brief Gets the face model
+     *
+     * @return Face model
+     */
+    RPGrpModel* GetNigaoeModel() {
+        return mpNigaoeModel;
+    }
+
+    /**
+     * @brief Gets the avatar body model
+     *
+     * @return Avatar body model
+     */
+    RPGrpModel* GetBodyModel() {
+        return mpBodyModel;
+    }
+
+    /**
+     * @brief Gets the left-hand model
+     *
+     * @return Left-hand model
+     */
+    RPGrpModel* GetLeftHandModel() {
+        return mpLeftHandModel;
+    }
+
+    /**
+     * @brief Gets the right-hand model
+     *
+     * @return Right-hand model
+     */
+    RPGrpModel* GetRightHandModel() {
+        return mpRightHandModel;
+    }
+
 private:
     /**
      * @brief Handles post-constructor initialization

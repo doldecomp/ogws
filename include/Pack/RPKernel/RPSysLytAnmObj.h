@@ -84,6 +84,31 @@ public:
     }
 
     /**
+     * @brief Sets the animation result flags
+     *
+     * @param flags New flags
+     */
+    void setFlags(u8 flags) {
+        mFrameCtrl.setFlags(flags);
+    }
+
+    /**
+     * @brief Sets whether the animation is enabled
+     *
+     * @param enabled New enabled state
+     */
+    void setEnabled(s16 enabled) {
+        mFrameCtrl.setEnabled(enabled);
+    }
+
+    /**
+     * @brief Gets the starting frame of this animation
+     */
+    s16 getStartFrame() {
+        return mFrameCtrl.getStartFrame();
+    }
+
+    /**
      * @brief Sets the current animation position
      *
      * @param frame New frame

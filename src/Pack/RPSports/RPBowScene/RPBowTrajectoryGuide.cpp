@@ -1,7 +1,5 @@
 #include <Pack/RPSports/RPBowScene/bowling.h>
 
-namespace Bowling {
-
 /**
  * @brief Updates the controller state bitmask
  *
@@ -130,5 +128,3 @@ void RPBowTrajectoryGuide::Draw() {
         mpDotModels[i]->Entry();
     }
 }
-
-} // namespace Bowling

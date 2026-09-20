@@ -80,12 +80,37 @@ public:
     }
 
     /**
+     * @brief Sets the animation result flags
+     *
+     * @param flags New flags
+     */
+    void setFlags(u8 flags) {
+        mFlags = flags;
+    }
+
+    /**
+     * @brief Sets whether the animation is enabled
+     *
+     * @param enabled New enabled state
+     */
+    void setEnabled(s16 enabled) {
+        mIsEnabled = enabled;
+    }
+
+    /**
      * @brief Sets the starting frame of this animation
      *
      * @param frame New starting frame
      */
     void setStartFrame(s16 frame) {
         mStartFrame = frame;
+    }
+
+    /**
+     * @brief Gets the starting frame of this animation
+     */
+    s16 getStartFrame() {
+        return mStartFrame;
     }
 
     /**
