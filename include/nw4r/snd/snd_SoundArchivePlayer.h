@@ -141,7 +141,7 @@ private:
                const detail::NoteOnInfo& rInfo); // at 0xC
 
     private:
-        const SoundArchivePlayer& mSoundArchivePlayer; // at 0x0
+        const SoundArchivePlayer& mSoundArchivePlayer; // at 0x4
     };
 
     /******************************************************************************
@@ -160,7 +160,7 @@ private:
                                       u32 callbackArg) const; // at 0xC
 
     private:
-        const SoundArchivePlayer& mSoundArchivePlayer; // at 0x0
+        const SoundArchivePlayer& mSoundArchivePlayer; // at 0x4
     };
 
 private:

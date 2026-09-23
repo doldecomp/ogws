@@ -26,7 +26,12 @@
 #include <egg/gfxe/eggModelBoundingInfo.h>
 #include <egg/gfxe/eggModelEx.h>
 #include <egg/gfxe/eggModelSnapshot.h>
+#include <egg/gfxe/eggPostEffectBlur.h>
+#include <egg/gfxe/eggPostEffectBlurGather.h>
+#include <egg/gfxe/eggPostEffectBlurSimple.h>
 #include <egg/gfxe/eggPostEffectHDR.h>
+#include <egg/gfxe/eggPostEffectMask.h>
+#include <egg/gfxe/eggPostEffectSimple.h>
 #include <egg/gfxe/eggScnRenderer.h>
 #include <egg/gfxe/eggScreen.h>
 #include <egg/gfxe/eggShadowTexture.h>

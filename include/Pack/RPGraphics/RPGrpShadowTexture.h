@@ -24,7 +24,7 @@ public:
     /**
      * @brief Destructor
      */
-    virtual ~RPGrpShadowTexture() {} // at 0x8
+    virtual ~RPGrpShadowTexture() override {} // at 0x8
 
     /**
      * @brief Replaces a texture on the specified model

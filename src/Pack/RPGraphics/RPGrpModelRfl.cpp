@@ -110,8 +110,9 @@ u16 RPGrpModelRfl::ReplaceTexture(const char* pName,
 
 void RPGrpModelRfl::InternalCalc() {
     if (!mReverseCulling) {
-        nw4r::math::VEC3 scale(mScale.x * sBaseScale, mScale.y * sBaseScale,
-                               mScale.z * sBaseScale);
+        nw4r::math::VEC3 scale(mBaseScale.x * sBaseScale,
+                               mBaseScale.y * sBaseScale,
+                               mBaseScale.z * sBaseScale);
 
         if (GetScnLeaf() != NULL) {
             GetScnLeaf()->SetScale(scale);
@@ -121,9 +122,9 @@ void RPGrpModelRfl::InternalCalc() {
     } else {
         const nw4r::math::_VEC3& rMag = GEOMETRY_MAGNIFY[mReverseCulling - 1];
 
-        nw4r::math::VEC3 scale(mScale.x * rMag.x * sBaseScale,
-                               mScale.y * rMag.y * sBaseScale,
-                               mScale.z * rMag.z * sBaseScale);
+        nw4r::math::VEC3 scale(mBaseScale.x * rMag.x * sBaseScale,
+                               mBaseScale.y * rMag.y * sBaseScale,
+                               mBaseScale.z * rMag.z * sBaseScale);
 
         if (GetScnLeaf() != NULL) {
             GetScnLeaf()->SetScale(scale);

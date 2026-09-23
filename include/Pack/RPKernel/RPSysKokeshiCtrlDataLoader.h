@@ -29,7 +29,7 @@ public:
     /**
      * @brief Constructor
      *
-     * @param chan WPAD channel to use
+     * @param chan Remote channel
      */
     explicit RPSysKokeshiCtrlDataLoader(s32 chan);
 

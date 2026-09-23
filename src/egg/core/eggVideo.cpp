@@ -321,8 +321,9 @@ GXRenderModeObj* Video::configure(GXRenderModeObj* pRenderMode) {
         VISetBlack(TRUE);
         VIConfigure(pRenderMode);
         VIFlush();
-
+#if defined(VERSION_RSPE01_01)
         mConfiguredTime = OSGetTick();
+#endif
         mFlags.setBit(BIT_VIDEO_SHOW);
 
         u16 fbWidth = pRenderMode->fbWidth;

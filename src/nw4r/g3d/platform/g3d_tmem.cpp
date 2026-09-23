@@ -40,18 +40,18 @@ struct TexRegionAddr {
 };
 
 struct TexRegionSize {
-    u32 sizeDefaultEven[GX_MAX_TEXMAP];       // at 0x0
-    u32 sizeDefaultMipMapEven[GX_MAX_TEXMAP]; // at 0x20
-    u32 sizeDefaultMipMapOdd[GX_MAX_TEXMAP];  // at 0x40
+    GXTexCacheSize sizeDefaultEven[GX_MAX_TEXMAP];       // at 0x0
+    GXTexCacheSize sizeDefaultMipMapEven[GX_MAX_TEXMAP]; // at 0x20
+    GXTexCacheSize sizeDefaultMipMapOdd[GX_MAX_TEXMAP];  // at 0x40
 
-    u32 sizeCiEven[GX_MAX_TEXMAP];       // at 0x60
-    u32 sizeCiMipMapEven[GX_MAX_TEXMAP]; // at 0x80
-    u32 sizeCiMipMapOdd[GX_MAX_TEXMAP];  // at 0xA0
+    GXTexCacheSize sizeCiEven[GX_MAX_TEXMAP];       // at 0x60
+    GXTexCacheSize sizeCiMipMapEven[GX_MAX_TEXMAP]; // at 0x80
+    GXTexCacheSize sizeCiMipMapOdd[GX_MAX_TEXMAP];  // at 0xA0
 
-    u32 sizeRgba8Even[GX_MAX_TEXMAP];       // at 0xC0
-    u32 sizeRgba8Odd[GX_MAX_TEXMAP];        // at 0xE0
-    u32 sizeRgba8MipMapEven[GX_MAX_TEXMAP]; // at 0x100
-    u32 sizeRgba8MipMapOdd[GX_MAX_TEXMAP];  // at 0x120
+    GXTexCacheSize sizeRgba8Even[GX_MAX_TEXMAP];       // at 0xC0
+    GXTexCacheSize sizeRgba8Odd[GX_MAX_TEXMAP];        // at 0xE0
+    GXTexCacheSize sizeRgba8MipMapEven[GX_MAX_TEXMAP]; // at 0x100
+    GXTexCacheSize sizeRgba8MipMapOdd[GX_MAX_TEXMAP];  // at 0x120
 };
 
 static GXTexRegion saaTexRegion[TEX_REGION_MAX][GX_MAX_TEXMAP];
@@ -107,49 +107,55 @@ static const TexRegionAddr scaaaTexRegionAddr[TMEM_CACHE_MAX - 1] = {
 };
 // clang-format on
 
+#define _32K GX_TEXCACHE_32K
+#define _128K GX_TEXCACHE_128K
+#define _512K GX_TEXCACHE_512K
 // clang-format off
 static const TexRegionSize scaaaTexRegionSize[TMEM_CACHE_MAX - 1] = {
     // TMEM_CACHE_PLAN_0
     {
-        {1, 0, 0, 0, 0, 0, 0, 0}, // sizeDefaultEven
-        {1, 0, 0, 0, 0, 0, 0, 0}, // sizeDefaultMipMapEven
-        {1, 0, 0, 0, 0, 0, 0, 0}, // sizeDefaultMipMapOdd
-        {1, 0, 0, 0, 0, 0, 0, 0}, // sizeCiEven
-        {1, 0, 0, 0, 0, 0, 0, 0}, // sizeCiMipMapEven
-        {1, 0, 0, 0, 0, 0, 0, 0}, // sizeCiMipMapOdd
-        {1, 0, 0, 0, 0, 0, 0, 0}, // sizeRgba8Even
-        {1, 0, 0, 0, 0, 0, 0, 0}, // sizeRgba8Odd
-        {1, 0, 0, 0, 0, 0, 0, 0}, // sizeRgba8MipMapEven
-        {1, 0, 0, 0, 0, 0, 0, 0}, // sizeRgba8MipMapOdd
+        {_128K, _32K, _32K, _32K, _32K, _32K, _32K, _32K}, // sizeDefaultEven
+        {_128K, _32K, _32K, _32K, _32K, _32K, _32K, _32K}, // sizeDefaultMipMapEven
+        {_128K, _32K, _32K, _32K, _32K, _32K, _32K, _32K}, // sizeDefaultMipMapOdd
+        {_128K, _32K, _32K, _32K, _32K, _32K, _32K, _32K}, // sizeCiEven
+        {_128K, _32K, _32K, _32K, _32K, _32K, _32K, _32K}, // sizeCiMipMapEven
+        {_128K, _32K, _32K, _32K, _32K, _32K, _32K, _32K}, // sizeCiMipMapOdd
+        {_128K, _32K, _32K, _32K, _32K, _32K, _32K, _32K}, // sizeRgba8Even
+        {_128K, _32K, _32K, _32K, _32K, _32K, _32K, _32K}, // sizeRgba8Odd
+        {_128K, _32K, _32K, _32K, _32K, _32K, _32K, _32K}, // sizeRgba8MipMapEven
+        {_128K, _32K, _32K, _32K, _32K, _32K, _32K, _32K}, // sizeRgba8MipMapOdd
     },
     // TMEM_CACHE_PLAN_1
     {
-        {1, 0, 0, 0, 0, 0, 0, 0}, // sizeDefaultEven
-        {1, 0, 0, 0, 0, 0, 0, 0}, // sizeDefaultMipMapEven
-        {1, 0, 0, 0, 0, 0, 0, 0}, // sizeDefaultMipMapOdd
-        {1, 0, 0, 0, 0, 0, 0, 0}, // sizeCiEven
-        {1, 0, 0, 0, 0, 0, 0, 0}, // sizeCiMipMapEven
-        {1, 0, 0, 0, 0, 0, 0, 0}, // sizeCiMipMapOdd
-        {1, 0, 0, 0, 0, 0, 0, 0}, // sizeRgba8Even
-        {1, 0, 0, 0, 0, 0, 0, 0}, // sizeRgba8Odd
-        {1, 0, 0, 0, 0, 0, 0, 0}, // sizeRgba8MipMapEven
-        {1, 0, 0, 0, 0, 0, 0, 0}, // sizeRgba8MipMapOdd
+        {_128K, _32K, _32K, _32K, _32K, _32K, _32K, _32K}, // sizeDefaultEven
+        {_128K, _32K, _32K, _32K, _32K, _32K, _32K, _32K}, // sizeDefaultMipMapEven
+        {_128K, _32K, _32K, _32K, _32K, _32K, _32K, _32K}, // sizeDefaultMipMapOdd
+        {_128K, _32K, _32K, _32K, _32K, _32K, _32K, _32K}, // sizeCiEven
+        {_128K, _32K, _32K, _32K, _32K, _32K, _32K, _32K}, // sizeCiMipMapEven
+        {_128K, _32K, _32K, _32K, _32K, _32K, _32K, _32K}, // sizeCiMipMapOdd
+        {_128K, _32K, _32K, _32K, _32K, _32K, _32K, _32K}, // sizeRgba8Even
+        {_128K, _32K, _32K, _32K, _32K, _32K, _32K, _32K}, // sizeRgba8Odd
+        {_128K, _32K, _32K, _32K, _32K, _32K, _32K, _32K}, // sizeRgba8MipMapEven
+        {_128K, _32K, _32K, _32K, _32K, _32K, _32K, _32K}, // sizeRgba8MipMapOdd
     },
     // TMEM_CACHE_PLAN_2
     {
-        {2, 2, 2, 2, 2, 2, 2, 2}, // sizeDefaultEven
-        {2, 2, 2, 2, 2, 2, 2, 2}, // sizeDefaultMipMapEven
-        {1, 1, 1, 1, 1, 1, 0, 0}, // sizeDefaultMipMapOdd
-        {2, 2, 2, 2, 2, 2, 2, 2}, // sizeCiEven
-        {2, 2, 2, 2, 2, 2, 2, 2}, // sizeCiMipMapEven
-        {1, 1, 1, 1, 1, 1, 0, 0}, // sizeCiMipMapOdd
-        {2, 2, 2, 2, 2, 2, 2, 2}, // sizeRgba8Even
-        {1, 1, 1, 1, 1, 1, 0, 0}, // sizeRgba8Odd
-        {1, 1, 1, 1, 1, 1, 1, 1}, // sizeRgba8MipMapEven
-        {1, 0, 0, 0, 0, 0, 0, 0}, // sizeRgba8MipMapOdd
+        {_512K, _512K, _512K, _512K, _512K, _512K, _512K, _512K}, // sizeDefaultEven
+        {_512K, _512K, _512K, _512K, _512K, _512K, _512K, _512K}, // sizeDefaultMipMapEven
+        {_128K, _128K, _128K, _128K, _128K, _128K,  _32K,  _32K}, // sizeDefaultMipMapOdd
+        {_512K, _512K, _512K, _512K, _512K, _512K, _512K, _512K}, // sizeCiEven
+        {_512K, _512K, _512K, _512K, _512K, _512K, _512K, _512K}, // sizeCiMipMapEven
+        {_128K, _128K, _128K, _128K, _128K, _128K,  _32K,  _32K}, // sizeCiMipMapOdd
+        {_512K, _512K, _512K, _512K, _512K, _512K, _512K, _512K}, // sizeRgba8Even
+        {_128K, _128K, _128K, _128K, _128K, _128K,  _32K,  _32K}, // sizeRgba8Odd
+        {_128K, _128K, _128K, _128K, _128K, _128K, _128K, _128K}, // sizeRgba8MipMapEven
+        {_128K,  _32K,  _32K,  _32K,  _32K,  _32K,  _32K,  _32K}, // sizeRgba8MipMapOdd
     },
 };
 // clang-format on
+#undef _32K
+#undef _128K
+#undef _512K
 
 // Forward declarations
 static GXTexRegion* TexRegionCallback(const GXTexObj* pObj, GXTexMapID map);
@@ -195,7 +201,7 @@ void SetTMemLayout(TMemLayout layout) {
         for (i = 0, addr = 0xF0000; i < GX_MAX_TEXMAP;
              i++, pRegion++, num++, addr += 0x2000) {
 
-            GXInitTlutRegion(pRegion, addr, 16);
+            GXInitTlutRegion(pRegion, addr, GX_TLUT_256);
         }
 
         sTlutRegionNum = num;
@@ -203,8 +209,6 @@ void SetTMemLayout(TMemLayout layout) {
         break;
     }
 
-    // TODO(kiwi) Seems to imply no TMEM_LAYOUT_3 exists. Then why the [plan -
-    // 1]?
     default: {
         break;
     }
@@ -263,7 +267,7 @@ static void setTexRegion_(TMemCachePlan plan) {
             scaaaTexRegionAddr[plan - 1].addrDefaultEven[i],
             scaaaTexRegionSize[plan - 1].sizeDefaultEven[i],
             NULL,
-            3);
+            GX_TEXCACHE_NONE);
 
         GXInitTexCacheRegion(
             &saaTexRegion[TEX_REGION_DEFAULT_MIPMAP][i],
@@ -279,7 +283,7 @@ static void setTexRegion_(TMemCachePlan plan) {
             scaaaTexRegionAddr[plan - 1].addrCiEven[i],
             scaaaTexRegionSize[plan - 1].sizeCiEven[i],
             NULL,
-            3);
+            GX_TEXCACHE_NONE);
 
         GXInitTexCacheRegion(
             &saaTexRegion[TEX_REGION_CI_MIPMAP][i],

@@ -5,7 +5,7 @@
 /**
  * @brief Constructor
  *
- * @param chan WPAD channel to use
+ * @param chan Remote channel
  */
 RPSysKokeshiCtrlDataLoader::RPSysKokeshiCtrlDataLoader(s32 chan)
     : mChannel(chan), mLoadState(ELoadState_Start) {}

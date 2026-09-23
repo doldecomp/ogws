@@ -88,10 +88,10 @@ EGG::Heap* RPSysKokeshiCtrlMgr::getResourceHeap(s32 chan) {
  * @brief Appends a new file to the file resource list
  *
  * @param chan WPAD channel of the data manager
- * @param rd File resource descriptor
+ * @param handle Resource handle
  */
-void RPSysKokeshiCtrlMgr::appendFile(s32 chan, u16 rd) {
-    mpDataMgrs[chan]->appendFile(rd);
+void RPSysKokeshiCtrlMgr::appendFile(s32 chan, RPGrpHandle handle) {
+    mpDataMgrs[chan]->appendFile(handle);
 }
 
 /**

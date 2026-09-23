@@ -3,7 +3,7 @@
 #include <Pack/types_pack.h>
 
 #include <Pack/RPSingleton.h>
-#include <Pack/RPSports.h>
+#include <Pack/RPSports/RPSportsCommon.h>
 #include <Pack/RPSystem/RPSysSceneCreator.h>
 
 #include <egg/core.h>
@@ -221,6 +221,27 @@ public:
      */
     EGG::Archive* GetFontArchive() const {
         return mpFontArchive;
+    }
+
+    /**
+     * @brief Gets the archive containing static common assets for this pack
+     */
+    EGG::Archive* GetStaticCommonArchive() const {
+        return mpStaticCommonArchive;
+    }
+
+    /**
+     * @brief Gets the archive containing static locale assets for this pack
+     */
+    EGG::Archive* GetStaticLocalArchive() const {
+        return mpStaticLocalArchive;
+    }
+
+    /**
+     * @brief Gets the archive containing static layout assets for this pack
+     */
+    EGG::Archive* GetStaticLayoutArchive() const {
+        return mpStaticLayoutArchive;
     }
 
     /**

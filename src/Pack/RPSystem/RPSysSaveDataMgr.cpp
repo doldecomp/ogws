@@ -810,10 +810,8 @@ void RPSysSaveDataMgr::loadSync() {
             // No early return?
         }
 
-        {
-            EGG::RamStream strm(mpSaveFile, mSaveFileSize);
-            mpSaveData->read(strm, mpSaveFile);
-        }
+        EGG::RamStream strm(mpSaveFile, mSaveFileSize);
+        mpSaveData->read(strm, mpSaveFile);
     }
 }
 

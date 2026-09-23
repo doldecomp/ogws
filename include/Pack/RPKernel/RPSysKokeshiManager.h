@@ -42,13 +42,23 @@ public:
     };
 
     /**
+     * @brief Clothing texture index
+     */
+    enum ClothingTexture {
+        ClothingTexture_A, //!< "dummy_tex_a" texture
+        ClothingTexture_B, //!< "dummy_tex_b" texture
+
+        ClothingTexture_Max
+    };
+
+    /**
      * @brief Generation parameter type
      */
     enum GenType {
-        GenType_Player,  //!< Use the Mii associated with the info's player
-        GenType_Friend,  //!< Pick a random friend Mii
-        GenType_Kokeshi, //!< Use the Mii already set in the Kokeshi object
-        GenType_None,    //!< Use the default location values
+        GenType_Player, //!< Use the Mii associated with the info's player
+        GenType_Friend, //!< Pick a random friend Mii
+        GenType_Direct, //!< Use the Mii already set in the gen info
+        GenType_None,   //!< Use the default location values
     };
 
     /**
@@ -58,15 +68,6 @@ public:
         IconView_Front,   //!< Camera sees the front of the Mii
         IconView_Back,    //!< Camera sees the back of the Mii
         IconView_CloseUp, //!< Camera sees a close-up of the front of the Mii
-    };
-
-    /**
-     * @brief Official DB Mii state
-     */
-    enum OfficialDBState {
-        OfficialDBState_Unused,     //!< Database index is unused
-        OfficialDBState_Valid,      //!< Database index holds a valid Mii
-        OfficialDBState_Registered, //!< A location has been registered here
     };
 
     /**
@@ -80,13 +81,12 @@ public:
     };
 
     /**
-     * @brief Clothing texture index
+     * @brief Official DB Mii state
      */
-    enum ClothingTexture {
-        ClothingTexture_A, //!< "dummy_tex_a" texture
-        ClothingTexture_B, //!< "dummy_tex_b" texture
-
-        ClothingTexture_Max
+    enum OfficialDBState {
+        OfficialDBState_Unused,     //!< Database index is unused
+        OfficialDBState_Valid,      //!< Database index holds a valid Mii
+        OfficialDBState_Registered, //!< A location has been registered here
     };
 
     /**
@@ -313,6 +313,16 @@ public:
         return mpGuestNames[index];
     }
 
+    /**
+     * @brief Gets the base scale of Mii models
+     */
+    f32 GetBaseScale() const {
+        return mBaseScale;
+    }
+
+    /**
+     * @brief Gets the output alpha of Mii models
+     */
     u8 GetOutputAlpha() const {
         return mOutputAlpha;
     }
@@ -391,9 +401,9 @@ private:
     //! Names for default database ("Guest") Miis
     const wchar_t* mpGuestNames[RFL_DEFAULT_CHAR_MAX]; // at 0x8
     //! Number of attempts before giving up on picking a random friend Mii
-    u16 mFriendRandomNum; // at 0x30
+    u16 mFriendRandomNum; // at 0x20
     //! Mii model base scale
-    f32 mBaseScale; // at 0x34
+    f32 mBaseScale; // at 0x24
 
     f32 unk28;
     f32 unk2C;

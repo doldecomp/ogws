@@ -560,7 +560,9 @@ public:
     }
 
     void LoadResTexObj(const ResTexObj texObj) {
-        for (u32 i = 0; i < GX_MAX_TEXMAP; i++) {
+        //! TODO(texline) The code itself is different? Instruction swap
+        //! appears regardless of compiler setting
+        for (u32 i = 0; i < GX_MAX_TEXMAP; ++i) {
             if (!texObj.IsValidTexObj(static_cast<GXTexMapID>(i))) {
                 continue;
             }
@@ -606,6 +608,8 @@ public:
     }
 
     void LoadResTlutObj(const ResTlutObj tlutObj) {
+        //! TODO(texline) The code itself is different? Instruction swap
+        //! appears regardless of compiler setting
         for (u32 i = 0; i < GX_TLUT8; i++) {
             if (!tlutObj.IsValidTlut(static_cast<GXTlut>(i))) {
                 continue;
@@ -1177,6 +1181,15 @@ void LightState::LoadLightSet(int id, u32* pDiffColorMask, u32* pDiffAlphaMask,
     }
 
     if (mCurrentLightSetIdx == id) {
+
+#if defined(VERSION_RSPE01_00)
+        //! @bug only in rev 0: attempts nullptr write if parameters are empty
+        //! this never happens in wii sports from what I (texline) can tell
+        *pDiffColorMask = mCurrentMaskDiffColor;
+        *pDiffAlphaMask = mCurrentMaskDiffAlpha;
+        *pSpecColorMask = mCurrentMaskSpecColor;
+        *pSpecAlphaMask = mCurrentMaskSpecAlpha;
+#elif defined(VERSION_RSPE01_01)
         if (pDiffColorMask != NULL) {
             *pDiffColorMask = mCurrentMaskDiffColor;
         }
@@ -1192,6 +1205,7 @@ void LightState::LoadLightSet(int id, u32* pDiffColorMask, u32* pDiffAlphaMask,
         if (pSpecAlphaMask != NULL) {
             *pSpecAlphaMask = mCurrentMaskSpecAlpha;
         }
+#endif
 
         return;
     }
@@ -1678,7 +1692,9 @@ void LoadResTexSrt(const ResTexSrt srt) {
             bool ident = true;
             const TexMtxEffect& rEffect = srt.ref().effect[i];
 
+#if defined(VERSION_RSPE01_01)
             math::MTX34Identity(&mtx);
+#endif
 
             if (rEffect.map_mode != 0) {
                 sScnDependentTexMtxFuncTable.Calc(rEffect.map_mode, &mtx,

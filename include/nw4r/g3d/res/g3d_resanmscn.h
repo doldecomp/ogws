@@ -78,13 +78,32 @@ public:
     ResAnmLight GetResAnmLight(u32 idx) const;
 
     ResLightSet GetResLightSetByRefNumber(u32 refNumber) const;
+#if defined(VERSION_RSPE01_00)
+    ResLightSet GetResLightSetByRefNumber(int refNumber) const;
+#endif
     ResAnmAmbLight GetResAnmAmbLightByRefNumber(u32 refNumber) const;
     ResAnmLight GetResAnmLightByRefNumber(u32 refNumber) const;
     ResAnmFog GetResAnmFogByRefNumber(u32 refNumber) const;
     ResAnmCamera GetResAnmCameraByRefNumber(u32 refNumber) const;
 
+    u16 GetResLightSetMaxRefNumber() const {
+        return ref().info.numResLightSetData;
+    }
+
+    u16 GetResAnmAmbLightMaxRefNumber() const {
+        return ref().info.numResAnmAmbLightData;
+    }
+
+    u16 GetResAnmLightMaxRefNumber() const {
+        return ref().info.numResAnmLightData;
+    }
+
     u16 GetResAnmFogMaxRefNumber() const {
         return ref().info.numResAnmFogData;
+    }
+
+    u16 GetResAnmCameraMaxRefNumber() const {
+        return ref().info.numResAnmCameraData;
     }
 };
 

@@ -19,22 +19,27 @@ private:
     RPSysStringTagParm mRootScene; // at 0x10
     //! TV mode (aspect ratio)
     RPSysStringTagParm mTVMode; // at 0x20
+#if defined(VERSION_RSPE01_01)
     //! Game language
     RPSysStringTagParm mLanguage; // at 0x30
+#endif
 
     //! Common print setting
     RPSysPrimTagParm<int> mRPPrint; // at 0x40
     //! System print setting
     RPSysPrimTagParm<int> mRPSysPrint; // at 0x50
+#if defined(VERSION_RSPE01_01)
     //! Utility print setting
     RPSysPrimTagParm<int> mRPUtlPrint; // at 0x60
     //! Audio print setting
     RPSysPrimTagParm<int> mRPAudPrint; // at 0x70
+#endif
     //! Sound print setting
     RPSysPrimTagParm<int> mRPSndPrint; // at 0x80
     //! User print setting
     RPSysPrimTagParm<int> mRPUserPrint; // at 0x90
 
+#if defined(VERSION_RSPE01_01)
     //! Mr. Sumaki print setting
     RPSysPrimTagParm<int> mRPSmkPrint; // at 0xA0
     //! Mr. Okamura(?) print setting
@@ -59,6 +64,7 @@ private:
     RPSysPrimTagParm<int> mRPSumPrint; // at 0x140
     //! Mr. Umemiya print setting
     RPSysPrimTagParm<int> mRPUmePrint; // at 0x150
+#endif
 
     //! Game open setting
     RPSysPrimTagParm<int> mGameOpen; // at 0x160

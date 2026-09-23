@@ -12,13 +12,23 @@ RPSysGameConfig::RPSysGameConfig(EGG::Heap* pHeap)
       mpParentHeap(pHeap),
       mRootScene(this, "RootScene"),
       mTVMode(this, "TVMode"),
+
+#if defined(VERSION_RSPE01_01)
       mLanguage(this, "Language"),
+#endif
+
       mRPPrint(this, "RPPrint"),
       mRPSysPrint(this, "RPSysPrint"),
+
+#if defined(VERSION_RSPE01_01)
       mRPUtlPrint(this, "RPUtlPrint"),
       mRPAudPrint(this, "RPAudPrint"),
+#endif
+
       mRPSndPrint(this, "RPSndPrint"),
       mRPUserPrint(this, "RPUserPrint"),
+
+#if defined(VERSION_RSPE01_01)
       mRPSmkPrint(this, "RPSmkPrint"),
       mRPOkaPrint(this, "RPOkaPrint"),
       mRPOknPrint(this, "RPOknPrint"),
@@ -31,19 +41,26 @@ RPSysGameConfig::RPSysGameConfig(EGG::Heap* pHeap)
       mRPSaiPrint(this, "RPSaiPrint"),
       mRPSumPrint(this, "RPSumPrint"),
       mRPUmePrint(this, "RPUmePrint"),
+#endif
+
       mGameOpen(this, "GameOpen") {
 
     mRootScene.set(NULL);
     mTVMode.set(NULL);
+#if defined(VERSION_RSPE01_01)
     mLanguage.set(NULL);
+#endif
 
     mRPPrint.set(false);
     mRPSysPrint.set(false);
+#if defined(VERSION_RSPE01_01)
     mRPUtlPrint.set(false);
     mRPAudPrint.set(false);
+#endif
     mRPSndPrint.set(false);
     mRPUserPrint.set(false);
 
+#if defined(VERSION_RSPE01_01)
     mRPSmkPrint.set(false);
     mRPOkaPrint.set(false);
     mRPOknPrint.set(false);
@@ -56,6 +73,7 @@ RPSysGameConfig::RPSysGameConfig(EGG::Heap* pHeap)
     mRPSaiPrint.set(false);
     mRPSumPrint.set(false);
     mRPUmePrint.set(false);
+#endif
 
     mGameOpen.set(false);
 }

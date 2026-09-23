@@ -15,8 +15,12 @@ inline bool IsSJISHalfWidthChar(u16 ch) {
     if (ch > 0xFF) {
         return false;
     }
-
+#if defined(VERSION_RSPE01_00)
+    //! @bug Only in rev 0: half-width katakana ends at 0xDF, not 0xCF
+    return (ch >= 0x20 && ch <= 0x7E) || (ch >= 0xA1 && ch <= 0xCF);
+#elif defined(VERSION_RSPE01_01)
     return (ch >= 0x20 && ch <= 0x7E) || (ch >= 0xA1 && ch <= 0xDF);
+#endif
 }
 
 inline bool IsSJISFullWidthChar(u16 ch) {

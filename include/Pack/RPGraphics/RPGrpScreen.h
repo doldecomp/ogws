@@ -43,7 +43,7 @@ public:
      */
     RPGrpScreen(f32 x, f32 y, f32 width, f32 height,
                 const EGG::Screen* pParent = NULL,
-                CanvasMode canvasMode = CANVASMODE_LU)
+                CanvasMode canvasMode = CANVAS_LU)
         : EGG::Screen(x, y, width, height, pParent, canvasMode) {}
 
     /**

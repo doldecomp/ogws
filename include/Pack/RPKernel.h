@@ -7,7 +7,13 @@
 #include <Pack/RPKernel/RPSysAppMiiManager.h>
 #include <Pack/RPKernel/RPSysAvatar.h>
 #include <Pack/RPKernel/RPSysController.h>
-#include <Pack/RPKernel/RPSysControllerSyncMgr.h>
+#include <Pack/RPKernel/RPSysControllerMgr.h>
+#include <Pack/RPKernel/RPSysCursorDrawMgr.h>
+#include <Pack/RPKernel/RPSysEffectBase.h>
+#include <Pack/RPKernel/RPSysEffectCreator.h>
+#include <Pack/RPKernel/RPSysEffectDefine.h>
+#include <Pack/RPKernel/RPSysEffectMemoryManager.h>
+#include <Pack/RPKernel/RPSysEffectMgr.h>
 #include <Pack/RPKernel/RPSysFile.h>
 #include <Pack/RPKernel/RPSysFrameCtrl.h>
 #include <Pack/RPKernel/RPSysHomeMenuMgr.h>
@@ -36,8 +42,11 @@
 #include <Pack/RPKernel/RPSysMiddleDBGenInfo.h>
 #include <Pack/RPKernel/RPSysNWC24Manager.h>
 #include <Pack/RPKernel/RPSysOfficialDB.h>
+#include <Pack/RPKernel/RPSysPairingMgr.h>
 #include <Pack/RPKernel/RPSysParticleManager.h>
+#include <Pack/RPKernel/RPSysPauseMenu.h>
 #include <Pack/RPKernel/RPSysStringUtility.h>
+#include <Pack/RPKernel/RPSysSystem.h>
 #include <Pack/RPKernel/RPSysSystemWinMgr.h>
 #include <Pack/RPKernel/RPSysTagProcessor.h>
 #include <Pack/RPKernel/RPSysTextWriter.h>

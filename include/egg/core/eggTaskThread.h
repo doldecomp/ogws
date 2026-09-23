@@ -54,9 +54,13 @@ public:
         return mCurrentJob != NULL;
     }
 
+    OSMessageQueue* getEndMessageQueue() const {
+        return mEndMesgQueue;
+    }
     void setEndMessageQueue(OSMessageQueue* pQueue) {
         mEndMesgQueue = pQueue;
     }
+
     OSMessage waitTaskEndMessage(BOOL* pSuccess) {
         OSMessage msg;
         *pSuccess = OSReceiveMessage(mEndMesgQueue, &msg, 0);

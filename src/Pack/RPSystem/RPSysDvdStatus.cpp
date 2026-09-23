@@ -159,7 +159,9 @@ bool RPSysDvdStatus::update() {
 
     if (isErrorOccured()) {
         RPSysCoreController::stopMotorAll();
+#if defined(VERSION_RSPE01_01)
         RP_GET_INSTANCE(RPSysHomeMenuMgr)->update();
+#endif
 
         if (RP_GET_INSTANCE(RPSysSceneMgr)->isDvdErrorApplicationEnd()) {
             RP_GET_INSTANCE(RPSysSystem)->systemShutDown();

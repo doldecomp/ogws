@@ -39,6 +39,7 @@ void OSClearContext(OSContext* ctx);
 void OSInitContext(OSContext* ctx, void* _srr0, void* stack);
 void OSDumpContext(const OSContext* ctx);
 void __OSContextInit(void);
+void OSFillFPUContext(OSContext* ctx);
 
 #ifdef __cplusplus
 }

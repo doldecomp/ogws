@@ -1,0 +1,6 @@
+object_base: orig/RSPE01_00
+object: sys/main.dol
+hash: affe3e260e4ebf99f13ef291c9504de1bd0bb7ec
+symbols: config/RSPE01_00/symbols.txt
+splits: config/RSPE01_00/splits.txt
+quick_analysis: true

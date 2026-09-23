@@ -30,9 +30,11 @@ public:
     Heap* getHeap_Mem2() const {
         return mHeap_Mem2;
     }
+#if defined(VERSION_RSPE01_01)
     Heap* getHeap_Debug() const {
         return mHeap_Debug;
     }
+#endif
 
     Scene* getParentScene() const {
         return mParentScene;
@@ -63,10 +65,12 @@ public:
     }
 
 private:
-    Heap* mHeap;             // at 0x4
-    Heap* mHeap_Mem1;        // at 0x8
-    Heap* mHeap_Mem2;        // at 0xC
-    Heap* mHeap_Debug;       // at 0x10
+    Heap* mHeap;      // at 0x4
+    Heap* mHeap_Mem1; // at 0x8
+    Heap* mHeap_Mem2; // at 0xC
+#if defined(VERSION_RSPE01_01)
+    Heap* mHeap_Debug; // at 0x10
+#endif
     Scene* mParentScene;     // at 0x14
     Scene* mChildScene;      // at 0x18
     s32 mSceneID;            // at 0x1C

@@ -31,7 +31,7 @@ public:
     /**
      * @brief Destructor
      */
-    virtual ~RPSysAppMiiManager() {} // at 0x8
+    virtual ~RPSysAppMiiManager(); // at 0x8
 
     /**
      * @brief Loads the Mii data resources

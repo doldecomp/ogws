@@ -25,13 +25,8 @@ nw4r::ut::List RPSndAudioActorBase::sActorList;
  * @param frames Fade out time
  */
 void RPSndObjMgr::stopAllActorSound(int frames) {
-    RPSndAudioActorBase* pIt = static_cast<RPSndAudioActorBase*>(
-        nw4r::ut::List_GetFirst(&RPSndAudioActorBase::sActorList));
-
-    for (; pIt != NULL;
-         pIt = static_cast<RPSndAudioActorBase*>(
-             nw4r::ut::List_GetNext(&RPSndAudioActorBase::sActorList, pIt))) {
-
-        pIt->stopAllSound(frames);
+    RP_NW4R_LIST_FOREACH (RPSndAudioActorBase, it,
+                          RPSndAudioActorBase::sActorList) {
+        it->stopAllSound(frames);
     }
 }

@@ -5,6 +5,8 @@
 
 #include <RVLFaceLib.h>
 
+#include <revolution/GX.h>
+
 //! @addtogroup rp_kernel
 //! @{
 
@@ -17,7 +19,7 @@ private:
     RPSysKokeshiManager::GenType mGenType; // at 0x0
     //! Player slot ID
     u8 mPlayerNo; // at 0x4
-    //! Mii location (only for GenType_Info)
+    //! Mii storage location
     RPSysKokeshiLocation mLocation; // at 0x8
 
     //! Body model to use
@@ -27,15 +29,15 @@ private:
 
     //! Renderer view ID
     u8 mViewNo; // at 0x20
-
-    u32 mModelFlags; // at 0x24
-
+    //! RP model type option flags
+    u32 mTypeOption; // at 0x24
+    //! NW4R model buffer option flags
     u32 mBufferOption; // at 0x28
 
     //! Texture width for icons
-    u16 mTexWidth; // at 0x2C
+    u16 mIconWidth; // at 0x2C
     //! Texture height for icons
-    u16 mTexHeight; // at 0x2E
+    u16 mIconHeight; // at 0x2E
 
     //! Resolution of models and textures
     RFLResolution mResolution; // at 0x30
@@ -43,20 +45,21 @@ private:
     u32 mExprFlag; // at 0x34
 
     // Use mipmapping to downscale the icon texture
-    BOOL mMipMap;
-    //! Whether to use the favorite color as the icon clear color
-    BOOL mUseFavoriteColor; // at 0x3C
-    //! Display clear color for icons
-    GXColor mClearColor; // at 0x40
-    //! Camera setup for icons
+    BOOL mIconMipMap; // at 0x38
+    //! Background type to use for icons
+    RFLIconBGType mIconBGType; // at 0x3C
+    //! Background color to use for icons
+    GXColor mIconBGColor; // at 0x40
+    //! Camera viewpoint to use for icons
     RPSysKokeshiManager::IconView mIconView; // at 0x44
     //! Facial expression to use for icons
     RFLExpression mIconExpression; // at 0x48
-    //! Whether to outline icons
-    BOOL mMakeEdge; // at 0x4C
-
-    GXColor unk50;
-    u16 unk54;
+    //! Whether to draw an outline around icons
+    BOOL mIconEdge; // at 0x4C
+    //! Edge color to use for icons
+    GXColor mIconEdgeColor; // at 0x50
+    //! Width of the edge outline for icons
+    u16 mIconEdgeWidth; // at 0x54
 
 public:
     /**
@@ -104,11 +107,11 @@ public:
         mViewNo = viewNo;
     }
 
-    u32 GetModelFlags() const {
-        return mModelFlags;
+    u32 GetTypeOption() const {
+        return mTypeOption;
     }
-    void SetModelFlags(u32 modelFlags) {
-        modelFlags = modelFlags;
+    void SetTypeOption(u32 typeOption) {
+        mTypeOption = typeOption;
     }
 
     u32 GetBufferOption() const {
@@ -116,6 +119,20 @@ public:
     }
     void SetBufferOption(u32 bufferOption) {
         mBufferOption = bufferOption;
+    }
+
+    u16 GetIconWidth() const {
+        return mIconWidth;
+    }
+    void SetIconWidth(u16 width) {
+        mIconWidth = width;
+    }
+
+    u16 GetIconHeight() const {
+        return mIconHeight;
+    }
+    void SetIconHeight(u16 height) {
+        mIconHeight = height;
     }
 
     RFLResolution GetResolution() const {
@@ -130,6 +147,62 @@ public:
     }
     void SetExpressionFlag(u32 exprFlag) {
         mExprFlag = exprFlag;
+    }
+
+    bool GetIconMipMap() const {
+        return mIconMipMap;
+    }
+    void SetIconMipMap(bool mipMap) {
+        mIconMipMap = mipMap;
+    }
+
+    RFLIconBGType GetIconBGType() const {
+        return mIconBGType;
+    }
+    void SetIconBGType(RFLIconBGType bgType) {
+        mIconBGType = bgType;
+    }
+
+    const GXColor& GetIconBGColor() const {
+        return mIconBGColor;
+    }
+    void SetIconBGColor(const GXColor& rColor) {
+        mIconBGColor = rColor;
+    }
+
+    RPSysKokeshiManager::IconView GetIconView() const {
+        return mIconView;
+    }
+    void SetIconView(RPSysKokeshiManager::IconView view) {
+        mIconView = view;
+    }
+
+    RFLExpression GetIconExpression() const {
+        return mIconExpression;
+    }
+    void SetIconExpression(RFLExpression expr) {
+        mIconExpression = expr;
+    }
+
+    bool GetIconEdge() const {
+        return mIconEdge;
+    }
+    void SetIconEdge(bool edge) {
+        mIconEdge = edge;
+    }
+
+    const GXColor& GetIconEdgeColor() const {
+        return mIconEdgeColor;
+    }
+    void SetIconEdgeColor(const GXColor& rColor) {
+        mIconEdgeColor = rColor;
+    }
+
+    u16 GetIconEdgeWidth() const {
+        return mIconEdgeWidth;
+    }
+    void SetIconEdgeWidth(u16 width) {
+        mIconEdgeWidth = width;
     }
 
     const RPSysKokeshiLocation& GetLocation() const {

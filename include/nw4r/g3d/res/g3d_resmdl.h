@@ -8,7 +8,6 @@
 #include <nw4r/g3d/res/g3d_resnode.h>
 #include <nw4r/g3d/res/g3d_resshp.h>
 #include <nw4r/g3d/res/g3d_resvtx.h>
-
 #include <nw4r/math.h>
 
 namespace nw4r {
@@ -122,7 +121,11 @@ struct ResMdlData {
 class ResMdl : public ResCommon<ResMdlData> {
 public:
     static const u32 SIGNATURE = FOURCC('M', 'D', 'L', '0');
+#if defined(VERSION_RSPE01_00)
+    static const int REVISION = 8;
+#elif defined(VERSION_RSPE01_01)
     static const int REVISION = 9;
+#endif
 
 public:
     NW4R_G3D_RESOURCE_FUNC_DEF(ResMdl);
@@ -178,7 +181,7 @@ public:
     ResShp GetResShp(u32 idx) const;
     u32 GetResShpNumEntries() const;
 
-    ResTexPlttInfo GetResTexPlttInfoOffsetFromTexName(int idx) const;
+    ResTexPlttInfoOffset GetResTexPlttInfoOffsetFromTexName(int idx) const;
     u32 GetResTexPlttInfoOffsetFromTexNameNumEntries() const;
 
     ResMdlInfo GetResMdlInfo() {

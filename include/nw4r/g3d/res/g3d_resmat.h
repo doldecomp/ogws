@@ -476,6 +476,26 @@ public:
     bool Bind(const ResFile file, ResTexObj texObj, ResTlutObj tlutObj);
     void Release(ResTexObj texObj, ResTlutObj tlutObj);
 
+    const char* GetTexName() const {
+        const ResTexPlttInfoData& r = ref();
+
+        if (r.nameTex != 0) {
+            return reinterpret_cast<const char*>(&r) + r.nameTex;
+        }
+
+        return NULL;
+    }
+
+    const char* GetPlttName() const {
+        const ResTexPlttInfoData& r = ref();
+
+        if (r.namePltt != 0) {
+            return reinterpret_cast<const char*>(&r) + r.namePltt;
+        }
+
+        return NULL;
+    }
+
     ResName GetTexResName() const {
         const ResTexPlttInfoData& r = ref();
 
@@ -500,9 +520,45 @@ public:
         return ref().namePltt != 0;
     }
 
+    GXTexMapID GetTexMapID() const {
+        return ref().mapID;
+    }
+
+    GXTlut GetTlutID() const {
+        return ref().tlutID;
+    }
+
 private:
     void BindTex_(const ResTex tex, ResTexObj texObj);
     void BindPltt_(const ResPltt pltt, ResTlutObj tlutObj);
+};
+
+/******************************************************************************
+ *
+ * ResTexPlttInfoOffset
+ *
+ ******************************************************************************/
+struct OffsetPair {
+    s32 toMat;         // at 0x0
+    s32 toTexPlttInfo; // at 0x4
+};
+
+struct ResTexPlttInfoOffsetData {
+    u32 numOffset;     // at 0x0
+    OffsetPair vec[1]; // at 0x4
+};
+
+class ResTexPlttInfoOffset : public ResCommon<ResTexPlttInfoOffsetData> {
+public:
+    NW4R_G3D_RESOURCE_FUNC_DEF(ResTexPlttInfoOffset);
+
+    u32 GetNumOffset() const {
+        return ref().numOffset;
+    }
+
+    ResTexPlttInfo GetResTexPlttInfo(u32 idx) {
+        return ofs_to_obj<ResTexPlttInfo>(ref().vec[idx].toTexPlttInfo);
+    }
 };
 
 /******************************************************************************
@@ -576,11 +632,11 @@ public:
         return ref().numResTexPlttInfo;
     }
 
-    ResTexPlttInfo GetResTexPlttInfo(u32 id) {
+    ResTexPlttInfo GetResTexPlttInfo(u32 idx) {
         ResTexPlttInfoData* pData =
             ofs_to_ptr<ResTexPlttInfoData>(ref().toResTexPlttInfo);
 
-        return ResTexPlttInfo(&pData[id]);
+        return ResTexPlttInfo(&pData[idx]);
     }
 
     ResMatDLData* GetResMatDLData() {

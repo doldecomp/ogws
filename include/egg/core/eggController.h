@@ -3,7 +3,6 @@
 #include <egg/types_egg.h>
 
 #include <egg/core/eggSingleton.h>
-
 #include <egg/math.h>
 #include <egg/prim.h>
 
@@ -117,15 +116,22 @@ public:
         return Vector3f(acc.x, acc.y, acc.z);
     }
 
+    Vector2f getDpdPos() const {
+        return Vector2f(pos.x, pos.y);
+    }
+    Vector2f getHorizon() const {
+        return Vector2f(horizon.x, horizon.y);
+    }
+
     eCoreDevType getDevType() const {
         return static_cast<eCoreDevType>(dev_type);
     }
 
     bool isCore() const {
-        return getDevType() == WPAD_DEV_CORE || isFreestyle();
+        return getDevType() == cDEV_CORE || isFreestyle();
     }
     bool isFreestyle() const {
-        return getDevType() == WPAD_DEV_FREESTYLE;
+        return getDevType() == cDEV_FREESTYLE;
     }
 
     s8 getDPDValidFlag() const {
@@ -222,17 +228,18 @@ public:
     void startMotor();
     void stopMotor();
 
-    void createRumbleMgr(u8 overlap_num);
-    void startPatternRumble(const char* pPattern, int frame, bool force);
-    void startPowerFrameRumble(f32 power, int frame, bool force);
+    void createRumbleMgr(u8 overlap_num = 1);
+    void startPatternRumble(const char* pPattern, int frame,
+                            bool force = false);
+    void startPowerFrameRumble(f32 power, int frame, bool force = false);
     void stopRumbleMgr();
 
     CoreStatus* getCoreStatus(int index);
     CoreStatus* getCoreStatus() {
-        return getCoreStatus(0);
+        return &mCoreStatus[0];
     }
 
-private:
+protected:
     enum StableAxis {
         STABLE_AXIS_X,
         STABLE_AXIS_Y,
@@ -249,10 +256,10 @@ private:
         STABLE_FLAG_XYZ = STABLE_FLAG_X | STABLE_FLAG_Y | STABLE_FLAG_Z
     };
 
-private:
+protected:
     void calc_posture_matrix(Matrix34f& rPostureMtx, bool checkStable);
 
-private:
+protected:
     s32 mChannelID; // at 0x4
 
     u32 mFSStickHold;    // at 0x8
@@ -309,12 +316,21 @@ public:
 
     CoreController* getNthController(int index);
 
-private:
+    static void setCoreControllerFactory(CoreControllerFactory pFactory) {
+        sCoreControllerFactory = pFactory;
+    }
+
+    static void setConnectCallback(CoreControllerConnectCallback pCallback) {
+        sConnectCallback = pCallback;
+    }
+
+protected:
     CoreControllerMgr();
 
+protected:
     static void connectCallback(s32 chan, s32 result);
 
-private:
+protected:
     TBuffer<CoreController*> mControllers;               // at 0x14
     CoreControllerExtensionCallback* mExtensionCallback; // at 0x20
     TBuffer<eCoreDevType> mDevTypes;                     // at 0x24

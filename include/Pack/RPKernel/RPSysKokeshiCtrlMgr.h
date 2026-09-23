@@ -104,9 +104,9 @@ public:
      * @brief Appends a new file to the file resource list
      *
      * @param chan WPAD channel of the data manager
-     * @param rd File resource descriptor
+     * @param handle Resource handle
      */
-    void appendFile(s32 chan, u16 rd);
+    void appendFile(s32 chan, RPGrpHandle handle);
 
     /**
      * @brief Appends a new model to the model resource list

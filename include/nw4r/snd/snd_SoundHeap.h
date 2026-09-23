@@ -49,7 +49,7 @@ private:
                                     void* pCallbackArg);
 
 private:
-    mutable OSMutex mMutex;       // at 0x0
+    mutable OSMutex mMutex;       // at 0x4
     detail::FrameHeap mFrameHeap; // at 0x1C
 };
 

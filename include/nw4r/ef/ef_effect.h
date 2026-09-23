@@ -8,7 +8,6 @@
 #include <nw4r/ef/ef_referencedobject.h>
 #include <nw4r/ef/ef_res_emitter.h>
 #include <nw4r/ef/ef_types.h>
-
 #include <nw4r/math.h>
 #include <nw4r/ut.h>
 
@@ -68,6 +67,16 @@ public:
     virtual void SendClosing(); // at 0x8
     virtual void DestroyFunc(); // at 0xC
 
+#if defined(VERSION_RSPE01_00)
+    bool Initialize(EffectSystem* pSystem, EmitterResource* pResource,
+                    u16 calcRemain);
+    Emitter* CreateEmitter(ResEmitter res, u8 drawWeight, u16 calcRemain) {
+        return CreateEmitter(res.ptr(), drawWeight, calcRemain);
+    }
+
+    void Calc(bool onlyBillboard);
+    void Draw(const DrawInfo& rInfo);
+#elif defined(VERSION_RSPE01_01)
     virtual bool Initialize(EffectSystem* pSystem, EmitterResource* pResource,
                             u16 calcRemain); // at 0x10
     virtual Emitter* CreateEmitter(ResEmitter res, u8 drawWeight,
@@ -77,6 +86,7 @@ public:
 
     virtual void Calc(bool onlyBillboard);    // at 0x18
     virtual void Draw(const DrawInfo& rInfo); // at 0x1C
+#endif
 
     bool Closing(Emitter* pEmitter);
 
@@ -102,27 +112,28 @@ public:
         mDrawOrderFunc->Remove(this, pManager);
     }
 
-    void Modifier_SetSimpleLightType(u8 type, bool ignoreLifeStatus) {
+    void Modifier_SetSimpleLightType(u8 type, bool ignoreLifeStatus = false) {
         ForeachParticleManager(
             ParticleManager::ModifierTravFunc_SetSimpleLightType,
             static_cast<u32>(type), ignoreLifeStatus);
     }
 
     void Modifier_SetSimpleLightAmbient(const GXColor& rColor,
-                                        bool ignoreLifeStatus) {
+                                        bool ignoreLifeStatus = false) {
         ForeachParticleManager(
             ParticleManager::ModifierTravFunc_SetSimpleLightAmbient,
             reinterpret_cast<u32>(&rColor), ignoreLifeStatus);
     }
 
     // @bug Surely meant to be a const reference...
-    void Modifier_SetScale(math::VEC2& rScale, bool ignoreLifeStatus) {
+    void Modifier_SetScale(math::VEC2& rScale, bool ignoreLifeStatus = false) {
         ForeachParticleManager(ParticleManager::ModifierTravFunc_SetScale,
                                reinterpret_cast<u32>(&rScale),
                                ignoreLifeStatus);
     }
 
-    void Modifier_SetRotate(const math::VEC3& rRot, bool ignoreLifeStatus) {
+    void Modifier_SetRotate(const math::VEC3& rRot,
+                            bool ignoreLifeStatus = false) {
         ForeachParticleManager(ParticleManager::ModifierTravFunc_SetRotate,
                                reinterpret_cast<u32>(&rRot), ignoreLifeStatus);
     }
@@ -168,6 +179,10 @@ public:
 
     const math::VEC3* GetVelocity() const {
         return &mVelocity;
+    }
+
+    void SetVelocity(const nw4r::math::VEC3& rVelocity) {
+        mVelocity = rVelocity;
     }
 };
 

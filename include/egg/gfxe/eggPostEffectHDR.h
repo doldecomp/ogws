@@ -1,31 +1,51 @@
 #ifndef EGG_GFXE_POST_EFFECT_HDR_H
 #define EGG_GFXE_POST_EFFECT_HDR_H
-#include "eggPostEffectBase.h"
-#include "types_egg.h"
+#include <egg/types_egg.h>
+
+#include <egg/gfxe/eggPostEffectBase.h>
+
+#include <revolution/GX.h>
 
 namespace EGG {
+
 class PostEffectHDR : public PostEffectBase {
 public:
     PostEffectHDR();
-    virtual ~PostEffectHDR() {}         // at 0x8
+
     virtual void reset();               // at 0x14
     virtual void setMaterialInternal(); // at 0x18
 
-    void setupRange();
+    void calcScale();
 
 private:
-    GXColor COLOR_0x20;
-    GXColor COLOR_0x24;
-    f32 FLOAT_0x28;
-    f32 FLOAT_0x2C;
-    GXColor COLOR_0x30;
-    GXColor COLOR_0x34;
-    GXColor COLOR_0x38;
-    u32 WORD_0x3C;
-    u32 WORD_0x40;
-    u8 BYTE_0x44;
-    u8 BYTE_0x45;
+    enum TevStage {
+        cTevStage_Threshold,
+        cTevStage_Amplify,
+        cTevStage_Stabilize,
+
+        cTevStage_Max
+    };
+
+    enum {
+        cFlag_0 = 1 << 0,
+    };
+
+private:
+    GXColor mThresholdColor; // at 0x20
+    GXColor mExposureColor;  // at 0x24
+    f32 mThresholdScale;     // at 0x28
+    f32 mExposureInv;        // at 0x2C
+
+    GXColor mFracExposureColor;   // at 0x30
+    GXColor mCutoffColor;         // at 0x34
+    GXColor mBrightnessColor;     // at 0x38
+    GXTevScale mCutoffTevScale;   // at 0x3C
+    GXTevScale mExposureTevScale; // at 0x40
+
+    bool mIsSubtractive; // at 0x44
+    u8 mFlags;           // at 0x45
 };
+
 } // namespace EGG
 
 #endif

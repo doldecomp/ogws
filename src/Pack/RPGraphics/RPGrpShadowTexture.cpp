@@ -45,5 +45,5 @@ void RPGrpShadowTexture::AddModel(RPGrpModel* pModel, f32 density) {
  */
 void RPGrpShadowTexture::AddModelUseMaterial(RPGrpModel* pModel, f32 density) {
     AddModelEx(pModel->GetModelEx(), density);
-    GetModelBind(GetModelNum() - 1)->useMat = true;
+    m_mdlList[m_mdlNum - 1].useMat = true;
 }

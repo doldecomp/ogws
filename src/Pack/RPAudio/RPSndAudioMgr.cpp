@@ -14,6 +14,8 @@
 
 #include <cstring>
 
+static void* MemDeallocCallbackArg = NULL;
+
 RP_SINGLETON_IMPL_EX(RPSndAudioMgr);
 
 /**
@@ -59,7 +61,6 @@ static void MemDeallocCallback(void* /* pBuffer */, u32 /* size */,
 /**
  * @brief MemDeallocCallback user argument
  */
-static void* MemDeallocCallbackArg = NULL;
 
 static u32 DAT_804bf648 = 0;
 
@@ -305,7 +306,7 @@ void RPSndAudioMgr::calc() {
             }
         }
 
-        SimpleAudioMgr::calc();
+        EGG::SimpleAudioMgr::calc();
     }
 
     RP_GET_INSTANCE(RPSndSpeakerMgr)->calc();
@@ -659,11 +660,8 @@ void RPSndAudioMgr::startPauseSe(const char* pNameRemote, const char* pNameTV,
 
     mPauseSePlayerFlag = 1 << player;
     mPauseSeChan = chan;
+    mPauseSePrevDpdEnable = RP_GET_CORE_CTRL(player)->isPrevDpdCtrlEnable();
 
-    RPSysCoreController* pController =
-        RPSysCoreControllerMgr::getNthController(player);
-
-    mPauseSePrevDpdEnable = pController->isPrevDpdCtrlEnable();
     DAT_804bf648 = 0;
 }
 

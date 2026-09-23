@@ -13,22 +13,22 @@ class CapTexture;
 
 class PostEffectBase {
 public:
-    enum EBlendMode {
-        EBlendMode_None,
-        EBlendMode_Normal,
-        EBlendMode_Add,
-        EBlendMode_MulAdd,
-        EBlendMode_4,
-        EBlendMode_5,
-        EBlendMode_AddAlpha,
-        EBlendMode_7,
-        EBlendMode_8,
-        EBlendMode_Mul,
+    enum BlendMode {
+        cBlendMode_None,
+        cBlendMode_Normal,
+        cBlendMode_Add,
+        cBlendMode_MulAdd,
+        cBlendMode_4,
+        cBlendMode_5,
+        cBlendMode_AddAlpha,
+        cBlendMode_7,
+        cBlendMode_8,
+        cBlendMode_Mul,
     };
 
 protected:
     u16 mFlags;               // at 0x0
-    EBlendMode mBlendMode;    // at 0x4
+    BlendMode mBlendMode;     // at 0x4
     CapTexture* mpCapTexture; // at 0x8
     f32 mOffsetX;             // at 0xC
     f32 mOffsetY;             // at 0x10
@@ -37,7 +37,8 @@ protected:
 
 public:
     PostEffectBase();
-    virtual ~PostEffectBase() {}                                 // at 0x8
+    virtual ~PostEffectBase() {} // at 0x8
+
     virtual void configure();                                    // at 0xC
     virtual void draw(f32 w, f32 h);                             // at 0x10
     virtual void reset();                                        // at 0x14
@@ -49,10 +50,10 @@ public:
     void drawTexture();
 
     bool isVisible() const {
-        return !(mFlags & EFlag_Hide);
+        return !(mFlags & cFlag_Hide);
     }
 
-    void setBlendMode(EBlendMode mode) {
+    void setBlendMode(BlendMode mode) {
         mBlendMode = mode;
     }
 
@@ -77,7 +78,7 @@ protected:
 
 private:
     enum {
-        EFlag_Hide = 1 << 0,
+        cFlag_Hide = 1 << 0,
     };
 };
 

@@ -52,7 +52,7 @@ void RPSysKokeshi::LoadResource(const RPSysKokeshiOverloadInfo* pOverloadInfo) {
         mAdditionalInfo.height, mAdditionalInfo.build);
 
     mpBodyModel = pKokeshiManager->CreateModel(
-        pBodyFile, bodyIdx, mGenInfo.GetViewNo(), mGenInfo.GetModelFlags(),
+        pBodyFile, bodyIdx, mGenInfo.GetViewNo(), mGenInfo.GetTypeOption(),
         mGenInfo.GetBufferOption());
 
     // Open the hand archive
@@ -64,11 +64,11 @@ void RPSysKokeshi::LoadResource(const RPSysKokeshiOverloadInfo* pOverloadInfo) {
 
     // Create the hand models
     mpLeftHandModel = pKokeshiManager->CreateModel(
-        pHandFile, 0, mGenInfo.GetViewNo(), mGenInfo.GetModelFlags(),
+        pHandFile, 0, mGenInfo.GetViewNo(), mGenInfo.GetTypeOption(),
         mGenInfo.GetBufferOption());
 
     mpRightHandModel = pKokeshiManager->CreateModel(
-        pHandFile, 0, mGenInfo.GetViewNo(), mGenInfo.GetModelFlags(),
+        pHandFile, 0, mGenInfo.GetViewNo(), mGenInfo.GetTypeOption(),
         mGenInfo.GetBufferOption());
 
     // Assign random clothes if requested via the overload info
@@ -82,7 +82,7 @@ void RPSysKokeshi::LoadResource(const RPSysKokeshiOverloadInfo* pOverloadInfo) {
         }
 
         case RPSysKokeshiManager::GenType_Friend:
-        case RPSysKokeshiManager::GenType_Kokeshi: {
+        case RPSysKokeshiManager::GenType_Direct: {
             clothesType = static_cast<u8>(
                 pBodyManager->GetFriendClothesStartIndex() +
                 RPUtlRandom::getU32(
@@ -227,7 +227,7 @@ void RPSysKokeshi::Construct() {
         break;
     }
 
-    case RPSysKokeshiManager::GenType_Kokeshi: {
+    case RPSysKokeshiManager::GenType_Direct: {
         location = mGenInfo.GetLocation();
         break;
     }

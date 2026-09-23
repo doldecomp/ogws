@@ -25,6 +25,7 @@ public:
 private:
     static const u32 G3D_HEAP_SIZE = 0x6000;
     static const u32 LIGHT_TEXTURE_MAX = 32;
+    static const u32 SCREEN_TEXTURE_MAX = 3;
 
 private:
     static GfxEngine* spInstance;

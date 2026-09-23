@@ -59,7 +59,6 @@ RPSysNWC24Manager::~RPSysNWC24Manager() {}
 /**
  * @brief Attempts to commit a message to the Wii Message Board
  *
- * @param pWork Library work buffer
  * @param pAltName Mail letter alt name
  * @param pMsg Mail letter message (can be a format string)
  * @param date Mail letter send date
@@ -219,21 +218,24 @@ bool RPSysNWC24Manager::commitMail(const wchar_t* pAltName, const wchar_t* pMsg,
 /**
  * @brief Attempts to open the WiiConnect24 library for use
  *
- * @return Success
+ * @return True if the library is opened, false if not
  */
 bool RPSysNWC24Manager::openLib() {
     NWC24Work* pNwc24Work = reinterpret_cast<NWC24Work*>(mpNwc24Work);
+    bool finished;
 
     switch (NWC24OpenLib(pNwc24Work)) {
     case NWC24_ERR_LIB_OPENED:
     case NWC24_OK: {
-        return true;
+        finished = true;
+        break;
     }
 
     case NWC24_ERR_INPROGRESS:
     case NWC24_ERR_BUSY:
     case NWC24_ERR_MUTEX: {
-        return false;
+        finished = false;
+        break;
     }
 
     case NWC24_ERR_NAND_CORRUPT:
@@ -245,14 +247,18 @@ bool RPSysNWC24Manager::openLib() {
     case NWC24_ERR_FILE_OPEN:
     case NWC24_ERR_BROKEN:
     case NWC24_ERR_FATAL: {
+        finished = false;
         sSuccess = false;
-        return false;
+        break;
     }
 
     default: {
-        return false;
+        finished = false;
+        break;
     }
     }
+
+    return finished;
 }
 
 /**

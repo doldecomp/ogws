@@ -38,6 +38,7 @@ void List_Append(List* pList, void* pObject) {
     pList->numObjects++;
 }
 
+//! Unused in US Rev 0.
 void List_Prepend(List* pList, void* pObject) {
     if (pList->headObject == NULL) {
         SetFirstObject(pList, pObject);

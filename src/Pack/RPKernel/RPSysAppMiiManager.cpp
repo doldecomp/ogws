@@ -11,11 +11,15 @@
  * @param num Mii buffer capacity
  * @param pHeap Heap to use for allocations
  */
-RPSysAppMiiManager::RPSysAppMiiManager(u16 num, EGG::Heap* pHeap)
-    : mNumData(num), mppStoreData(NULL), mppCharData(NULL) {
+RPSysAppMiiManager::RPSysAppMiiManager(u16 num, EGG::Heap* pHeap) : mNumData(num) {
+    //! Private variables require out-of-declaration setting
+    //! because ProjectLocal is accessed here as well.
+    RPSysProjectLocal *local = RP_GET_INSTANCE(RPSysProjectLocal);
+    mppStoreData = NULL;
+    mppCharData = NULL;
 
     // Only Wii Sports uses character data (no checksum)
-    if (RP_GET_INSTANCE(RPSysProjectLocal)->getPack() ==
+    if (local->getPack() ==
         RPSysSceneCreator::EPackID_SportsPack) {
 
         mppCharData = new (pHeap) RFLCharData*[num];
@@ -23,3 +27,9 @@ RPSysAppMiiManager::RPSysAppMiiManager(u16 num, EGG::Heap* pHeap)
         mppStoreData = new (pHeap) RFLStoreData*[num];
     }
 }
+
+/**
+ * @brief Destructor
+ */
+ //! Should be defined here: wrong order otherwise
+RPSysAppMiiManager::~RPSysAppMiiManager() {}

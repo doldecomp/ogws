@@ -795,6 +795,9 @@ void RFLiCapture(u8* buffer, const RFLiCharInfo* info, RFLiFaceParts* face,
     RFLiDrawFaceParts(&face->mole);
 
     GXSetColorUpdate(TRUE);
+#if defined(VERSION_RSPE01_00)
+    GXDrawDone();
+#endif
     DCInvalidateRange(buffer, RFLiGetMaskSize(resolution));
     GXCopyTex(buffer, 1);
     GXPixModeSync();

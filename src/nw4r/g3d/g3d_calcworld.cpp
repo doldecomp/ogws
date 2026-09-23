@@ -116,13 +116,18 @@ void CalcWorld(math::MTX34* pModelMtxArray, u32* pModelMtxAttribArray,
             u32 fromMtxID =
                 (pMtxDupCmd->fromMtxIdHi << 8) + pMtxDupCmd->fromMtxIdLo;
 
+#if defined(VERSION_RSPE01_01)
             pMtxIDArray[numMtxID++] = toMtxID;
+#endif
+
             pModelMtxAttribArray[toMtxID] = pModelMtxAttribArray[fromMtxID];
 
             math::MTX34Copy(&pModelMtxArray[toMtxID],
                             &pModelMtxArray[fromMtxID]);
 
+#if defined(VERSION_RSPE01_01)
             pScaleArray[toMtxID] = pScaleArray[fromMtxID];
+#endif
 
             pByteCode += sizeof(ResByteCodeData::MtxDupParams);
         }
@@ -148,6 +153,7 @@ void CalcWorld(math::MTX34* pModelMtxArray, u32* pModelMtxAttribArray,
 #undef pMtxDupCmd
 }
 
+#if defined(VERSION_RSPE01_01)
 void CalcWorld(math::MTX34* pModelMtxArray, u32* pModelMtxAttribArray,
                const u8* pByteCode, const math::MTX34* pBaseMtx, ResMdl mdl,
                AnmObjChr* pAnmChr, FuncObjCalcWorld* pFuncObj) {
@@ -155,6 +161,7 @@ void CalcWorld(math::MTX34* pModelMtxArray, u32* pModelMtxAttribArray,
     CalcWorld(pModelMtxArray, pModelMtxAttribArray, pByteCode, pBaseMtx, mdl,
               pAnmChr, pFuncObj, detail::WorldMtxAttr::GetRootMtxAttr());
 }
+#endif
 
 void CalcSkinning(math::MTX34* pModelMtxArray, u32* pModelMtxAttribArray,
                   const ResMdl mdl, const u8* pByteCode) {

@@ -22,12 +22,12 @@ const DrawGX::DL DrawGX::s_circleDLTbl[CIRCLE_MAX] = {DL_CIRCLE_16,
 nw4r::math::MTX34 DrawGX::s_cameraMtx;
 u32 DrawGX::s_flag = 0;
 
+} // namespace EGG
+
 namespace {
 
 GXLightID LIGHTMASK_DEFAULT = GX_LIGHT0;
 GXTexMapID TEXMAP_DEFAULT = GX_TEXMAP0;
-
-f32 QUAD_SCALE = 1.0f;
 
 GXTexObj CLEAR_Z_TEX_OBJ;
 u32 CLEAR_Z_TX[4 * 4] ALIGN(32) = {
@@ -39,25 +39,37 @@ u32 CLEAR_Z_TX[4 * 4] ALIGN(32) = {
     // clang-format on
 };
 
-} // namespace
+void DrawQuadNormal(u8 p1, u8 p2, u8 p3, u8 p4, u8 n) {
+    GXPosition1x8(p1);
+    GXNormal1x8(n);
 
-namespace {
+    GXPosition1x8(p2);
+    GXNormal1x8(n);
 
-void DrawQuadNormal(u8 x1, u8 x2, u8 x3, u8 x4, u8 y) {
-    GXPosition2u8(x1, y);
-    GXPosition2u8(x2, y);
-    GXPosition2u8(x3, y);
-    GXPosition2u8(x4, y);
+    GXPosition1x8(p3);
+    GXNormal1x8(n);
+
+    GXPosition1x8(p4);
+    GXNormal1x8(n);
 }
 
-void DrawQuadLineStripNormal(u8 x1, u8 x2, u8 x3, u8 x4, u8 y) {
+void DrawQuadLineStripNormal(u8 p1, u8 p2, u8 p3, u8 p4, u8 n) {
     GXBegin(GX_LINESTRIP, GX_VTXFMT0, 5);
     {
-        GXPosition2u8(x1, y);
-        GXPosition2u8(x2, y);
-        GXPosition2u8(x3, y);
-        GXPosition2u8(x4, y);
-        GXPosition2u8(x1, y);
+        GXPosition1x8(p1);
+        GXNormal1x8(n);
+
+        GXPosition1x8(p2);
+        GXNormal1x8(n);
+
+        GXPosition1x8(p3);
+        GXNormal1x8(n);
+
+        GXPosition1x8(p4);
+        GXNormal1x8(n);
+
+        GXPosition1x8(p1);
+        GXNormal1x8(n);
     }
     GXEnd();
 }
@@ -69,18 +81,18 @@ void DrawCircleYPolygonFan(const nw4r::math::MTX34& rMtx, f32 radius,
 
     f32 step = 2 * NW4R_MATH_PI / divide;
 
-    nw4r::math::VEC3 v1(0.0f, 1.0f, 0.0f);
-    nw4r::math::VEC3 v2(0.0f, radius, 0.0f);
+    nw4r::math::VEC3 nrm(0.0f, 1.0f, 0.0f);
+    nw4r::math::VEC3 v(0.0f, radius, 0.0f);
 
     s32 segmentNum = divide + 1;
 
-    nw4r::math::VEC3Transform(&v1, &rMtx, &v1);
-    nw4r::math::VEC3Transform(&v2, &rMtx, &v2);
+    nw4r::math::VEC3Transform(&nrm, &rMtx, &nrm);
+    nw4r::math::VEC3Transform(&v, &rMtx, &v);
 
     GXBegin(GX_TRIANGLEFAN, GX_VTXFMT0, segmentNum + 1);
     {
-        GXPosition3f32(v2.x, v2.y, v2.z);
-        GXPosition3f32(v1.x, v1.y, v1.z);
+        GXPosition3f32(v.x, v.y, v.z);
+        GXNormal3f32(nrm.x, nrm.y, nrm.z);
 
         for (int i = 0; i < segmentNum; i++) {
             nw4r::math::VEC3 vtx(0.5f * nw4r::math::SinRad(-step * i), 0.0f,
@@ -100,19 +112,21 @@ void DrawCircleYPolygonFan(const nw4r::math::MTX34& rMtx, f32 radius,
             nw4r::math::VEC3Transform(&prev, &rMtx, &prev);
             nw4r::math::VEC3Transform(&next, &rMtx, &next);
 
-            nw4r::math::VEC3Sub(&prev, &prev, &v2);
-            nw4r::math::VEC3Sub(&next, &next, &v2);
+            nw4r::math::VEC3Sub(&prev, &prev, &v);
+            nw4r::math::VEC3Sub(&next, &next, &v);
 
             nw4r::math::VEC3 nrm;
             nw4r::math::VEC3Cross(&nrm, &next, &prev);
             nw4r::math::VEC3Normalize(&nrm, &nrm);
-            GXPosition3f32(nrm.x, nrm.y, nrm.z);
+            GXNormal3f32(nrm.x, nrm.y, nrm.z);
         }
     }
     GXEnd();
 }
 
 } // namespace
+
+namespace EGG {
 
 void DrawGX::Initialize(Heap* pHeap) {
     pHeap = pHeap == NULL ? Heap::getCurrentHeap() : pHeap;
@@ -388,22 +402,22 @@ void DrawGX::DrawPolygon(const nw4r::math::VEC3& rP0,
     nw4r::math::VEC3 v1 = rP1 - rP0;
     nw4r::math::VEC3 v0 = rP2 - rP0;
 
-    nw4r::math::VEC3 v2;
-    nw4r::math::VEC3Cross(&v2, &v0, &v1);
-    nw4r::math::VEC3Normalize(&v2, &v2);
+    nw4r::math::VEC3 nrm;
+    nw4r::math::VEC3Cross(&nrm, &v0, &v1);
+    nw4r::math::VEC3Normalize(&nrm, &nrm);
 
     GXBegin(GX_TRIANGLES, GX_VTXFMT0, 3);
     {
         GXPosition3f32(rP0.x, rP0.y, rP0.z);
-        GXPosition3f32(v2.x, v2.y, v2.z);
+        GXNormal3f32(nrm.x, nrm.y, nrm.z);
         GXColor4u8(color.r, color.g, color.b, color.a);
 
         GXPosition3f32(rP1.x, rP1.y, rP1.z);
-        GXPosition3f32(v2.x, v2.y, v2.z);
+        GXNormal3f32(nrm.x, nrm.y, nrm.z);
         GXColor4u8(color.r, color.g, color.b, color.a);
 
         GXPosition3f32(rP2.x, rP2.y, rP2.z);
-        GXPosition3f32(v2.x, v2.y, v2.z);
+        GXNormal3f32(nrm.x, nrm.y, nrm.z);
         GXColor4u8(color.r, color.g, color.b, color.a);
     }
     GXEnd();
@@ -452,8 +466,8 @@ void DrawGX::BeginDrawShadowVolumeTexture(bool lu, GXColor color,
 void DrawGX::ClearEfb(const nw4r::math::MTX34& rMtx, bool colorUpdate,
                       bool alphaUpdate, bool texture, GXColor color, bool lu) {
 
-    StateGX::ScopedColorUpdate colorLock(colorUpdate);
-    StateGX::ScopedAlphaUpdate alphaLock(alphaUpdate);
+    StateGX::AutoColorUpdate colorLock(colorUpdate);
+    StateGX::AutoAlphaUpdate alphaLock(alphaUpdate);
 
     SetMat_ColorChannel(COLORCHAN_COLOR);
     GXSetCullMode(GX_CULL_NONE);
@@ -642,8 +656,8 @@ void DrawGX::SetVtxState(VtxType vtxType) {
             {FX2_14( 0.5), FX2_14( 0.5), FX2_14(-0.5)},
             {FX2_14(-0.5), FX2_14(-0.5), FX2_14(-0.5)},
             {FX2_14(-0.5), FX2_14(-0.5), FX2_14( 0.5)},
-            {FX2_14( 0.5), FX2_14(-0.5), FX2_14( 0.5)}, // ?????
-            {FX2_14( 0.5), FX2_14(-0.5), FX2_14(-0.5)}, // ?????
+            {FX2_14( 0.5), FX2_14(-0.5), FX2_14( 0.5)},
+            {FX2_14( 0.5), FX2_14(-0.5), FX2_14(-0.5)},
             // clang-format on
         };
         static const s16 CUBE_NRM[][3] ALIGN(32) = {
@@ -771,8 +785,8 @@ void DrawGX::SetVtxState(VtxType vtxType) {
             {0, 1},
             {1, 0},
             {1, 0},
-            {0, 0}, // ?????
-            {0, 0}, // ?????
+            {0, 0},
+            {0, 0},
             // clang-format on
         };
         static const s16 SCREEN_VTX_LU[][2] ALIGN(32) = {
@@ -781,8 +795,8 @@ void DrawGX::SetVtxState(VtxType vtxType) {
             {0, 1},
             {0, 0},
             {1, 1},
-            {0, 0}, // ?????
-            {1, 0}, // ?????
+            {0, 0},
+            {1, 0},
             // clang-format on
         };
         static const s16 SCREEN_UV[][2] ALIGN(32) = {
@@ -818,7 +832,7 @@ void DrawGX::SetVtxState(VtxType vtxType) {
 }
 
 void DrawGX::CreateDisplayList(Heap* pHeap) {
-    static const u8 detailLevels[] = {16, 32};
+    static const u8 POS_NUM[] = {16, 32};
 
     static const u32 tmpSize = 0x4000;
     u8 tmpDisplayList[tmpSize] ALIGN(32);
@@ -895,7 +909,7 @@ void DrawGX::CreateDisplayList(Heap* pHeap) {
 
         case DL_LINE_CIRCLE_16:
         case DL_LINE_CIRCLE_32: {
-            u16 numSegments = detailLevels[i_dl - DL_LINE_CIRCLE_16] + 1;
+            u16 numSegments = POS_NUM[i_dl - DL_LINE_CIRCLE_16] + 1;
             f32 radPerSegment = 2 * NW4R_MATH_PI / (numSegments - 1);
 
             GXBegin(GX_LINESTRIP, GX_VTXFMT0, numSegments);
@@ -912,7 +926,7 @@ void DrawGX::CreateDisplayList(Heap* pHeap) {
 
         case DL_CYLINDER_16:
         case DL_CYLINDER_32: {
-            u16 numSegments = detailLevels[i_dl - DL_CYLINDER_16] + 1;
+            u16 numSegments = POS_NUM[i_dl - DL_CYLINDER_16] + 1;
             f32 radPerSegment = 2 * NW4R_MATH_PI / (numSegments - 1);
 
             GXBegin(GX_TRIANGLESTRIP, GX_VTXFMT0, numSegments * 2);
@@ -922,23 +936,22 @@ void DrawGX::CreateDisplayList(Heap* pHeap) {
                     f32 z = 0.5f * nw4r::math::CosRad(radPerSegment * i);
 
                     GXPosition3f32(x, -0.5f, z);
-                    GXPosition3f32(2.0f * x, 0.0f, 2.0f * z);
+                    GXNormal3f32(2.0f * x, 0.0f, 2.0f * z);
+
                     GXPosition3f32(x, 0.5f, z);
-                    GXPosition3f32(2.0f * x, 0.0f, 2.0f * z);
+                    GXNormal3f32(2.0f * x, 0.0f, 2.0f * z);
                 }
             }
             GXEnd();
 
             nw4r::math::MTX34 mtx;
             PSMTXTrans(mtx, 0.0f, 0.5f, 0.0f);
-            DrawCircleYPolygonFan(mtx, 0.0f,
-                                  detailLevels[i_dl - DL_CYLINDER_16]);
+            DrawCircleYPolygonFan(mtx, 0.0f, POS_NUM[i_dl - DL_CYLINDER_16]);
 
             nw4r::math::MTX34Identity(&mtx);
             PSMTXRotRad(mtx, 'z', NW4R_MATH_PI);
             PSMTXTransApply(mtx, mtx, 0.0f, -0.5f, 0.0f);
-            DrawCircleYPolygonFan(mtx, 0.0f,
-                                  detailLevels[i_dl - DL_CYLINDER_16]);
+            DrawCircleYPolygonFan(mtx, 0.0f, POS_NUM[i_dl - DL_CYLINDER_16]);
             break;
         }
 
@@ -947,10 +960,10 @@ void DrawGX::CreateDisplayList(Heap* pHeap) {
             nw4r::math::MTX34 rot;
             nw4r::math::MTX34Identity(&rot);
 
-            DrawCircleYPolygonFan(rot, 1.0f, detailLevels[i_dl - DL_CONE_16]);
+            DrawCircleYPolygonFan(rot, 1.0f, POS_NUM[i_dl - DL_CONE_16]);
 
             PSMTXRotRad(rot, 'z', NW4R_MATH_PI);
-            DrawCircleYPolygonFan(rot, 0.0f, detailLevels[i_dl - DL_CONE_16]);
+            DrawCircleYPolygonFan(rot, 0.0f, POS_NUM[i_dl - DL_CONE_16]);
             break;
         }
 
@@ -960,32 +973,38 @@ void DrawGX::CreateDisplayList(Heap* pHeap) {
             nw4r::math::MTX34Identity(&rot);
 
             PSMTXRotRad(rot, 'x', NW4R_MATH_PI / 2);
-            DrawCircleYPolygonFan(rot, 0.0f, detailLevels[i_dl - DL_CIRCLE_16]);
+            DrawCircleYPolygonFan(rot, 0.0f, POS_NUM[i_dl - DL_CIRCLE_16]);
             break;
         }
 
         case DL_QUAD_TEXTURE:
         case DL_QUAD: {
+            static f32 SCALE = 1.0f;
+
             GXBegin(GX_QUADS, GX_VTXFMT0, 4);
             {
-                GXPosition2u8(0, 0);
+                GXPosition1x8(0);
+                GXNormal1x8(0);
                 if (i_dl == DL_QUAD_TEXTURE) {
-                    GXPosition2f32(0.0f, 0.0f);
+                    GXTexCoord2f32(0.0f, 0.0f);
                 }
 
-                GXPosition2u8(1, 0);
+                GXPosition1x8(1);
+                GXNormal1x8(0);
                 if (i_dl == DL_QUAD_TEXTURE) {
-                    GXPosition2f32(QUAD_SCALE, 0.0f);
+                    GXTexCoord2f32(SCALE, 0.0f);
                 }
 
-                GXPosition2u8(2, 0);
+                GXPosition1x8(2);
+                GXNormal1x8(0);
                 if (i_dl == DL_QUAD_TEXTURE) {
-                    GXPosition2f32(QUAD_SCALE, QUAD_SCALE);
+                    GXTexCoord2f32(SCALE, SCALE);
                 }
 
-                GXPosition2u8(3, 0);
+                GXPosition1x8(3);
+                GXNormal1x8(0);
                 if (i_dl == DL_QUAD_TEXTURE) {
-                    GXPosition2f32(0.0f, QUAD_SCALE);
+                    GXTexCoord2f32(0.0f, SCALE);
                 }
             }
             GXEnd();
@@ -1011,22 +1030,22 @@ void DrawGX::CreateDisplayList(Heap* pHeap) {
             {
                 GXPosition1x8(0);
                 if (i_dl == DL_SCREEN_TEXTURE) {
-                    GXPosition1x8(0);
+                    GXTexCoord1x8(0);
                 }
 
                 GXPosition1x8(1);
                 if (i_dl == DL_SCREEN_TEXTURE) {
-                    GXPosition1x8(1);
+                    GXTexCoord1x8(1);
                 }
 
                 GXPosition1x8(2);
                 if (i_dl == DL_SCREEN_TEXTURE) {
-                    GXPosition1x8(2);
+                    GXTexCoord1x8(2);
                 }
 
                 GXPosition1x8(3);
                 if (i_dl == DL_SCREEN_TEXTURE) {
-                    GXPosition1x8(3);
+                    GXTexCoord1x8(3);
                 }
             }
             GXEnd();

@@ -1,11 +1,11 @@
 #include <Pack/RPGraphics.h>
 #include <Pack/RPKernel.h>
 
+#include <RVLFaceLib.h>
+
 #include <egg/core.h>
 
 #include <nw4r/ut.h>
-
-#include <RVLFaceLib.h>
 
 /**
  * @brief Constructor
@@ -13,7 +13,7 @@
  * @param pCallback Controller data callback
  * @param pParentHeap Heap to use as the parent of the controller data heap
  * @param heapSize Size of the controller data heap
- * @param chan WPAD channel to use
+ * @param chan Remote channel
  */
 RPSysKokeshiCtrlDataMgr::RPSysKokeshiCtrlDataMgr(
     IRPSysKokeshiCtrlDataCallback* pCallback, EGG::Heap* pParentHeap,
@@ -101,14 +101,15 @@ void RPSysKokeshiCtrlDataMgr::createResource() {
     // Take ownership of any graphics allocations in the callback
     mpHeap->becomeCurrentHeap();
     RPGrpModel::SetAllocator(mpAllocator);
-    {
-        if (mpIterator->Update()) {
-            mpCallback->onCreateResource(mpLoader->getChannel(),
-                                         mpIterator->GetIndex());
-        } else {
-            mState = EState_Idle;
-        }
+
+    if (mpIterator->Update()) {
+        mpCallback->onCreateResource(mpLoader->getChannel(),
+                                     mpIterator->GetIndex());
+    } else {
+        mState = EState_Idle;
     }
+
+    // Restore original management
     RPGrpModel::SetAllocator(pOldAllocator);
     pOldHeap->becomeCurrentHeap();
 }
@@ -116,11 +117,11 @@ void RPSysKokeshiCtrlDataMgr::createResource() {
 /**
  * @brief Appends a new file to the file resource list
  *
- * @param rd File resource descriptor
+ * @param handle Resource handle
  */
-void RPSysKokeshiCtrlDataMgr::appendFile(u16 rd) {
+void RPSysKokeshiCtrlDataMgr::appendFile(RPGrpHandle handle) {
     FileResource* pResFile = new (mpHeap) FileResource();
-    pResFile->rd = rd;
+    pResFile->handle = handle;
     nw4r::ut::List_Append(&mResourceList, pResFile);
 }
 
@@ -184,7 +185,7 @@ void RPSysKokeshiCtrlDataMgr::resetData() {
     RPGrpModelResManager* pResManager = RPGrpModelResManager::GetCurrent();
 
     NW4R_UT_LIST_FOREACH_SAFE (FileResource, it, mResourceList, {
-        pResManager->Terminate(it->rd);
+        pResManager->Terminate(it->handle);
         nw4r::ut::List_Remove(&mResourceList, it);
     })
 

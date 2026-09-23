@@ -31,13 +31,16 @@ void GfxEngine::initialize(u16 width, u16 height, Heap* pHeap) {
     G3DUtility::initialize(G3D_HEAP_SIZE, pHeap);
     DrawGX::Initialize(pHeap);
     LightTexture::initialize(LIGHT_TEXTURE_MAX, pHeap);
-    TextureBuffer::initialize(width * height * 0xC, pHeap);
+
+    // Enough memory to hold 3 full-screen RGBA8 textures?
+    TextureBuffer::initialize(width * height * sizeof(u32) * SCREEN_TEXTURE_MAX,
+                              pHeap);
 }
 
 void GfxEngine::beginDraw() {
     StateGX::frameInit();
-    StateGX::doResetStateCache();
-    StateGX::setDefaultTexColor(BaseSystem::getDisplay()->getClearColor());
+    StateGX::initGXCache();
+    StateGX::setEfbClearColor(BaseSystem::getDisplay()->getClearColor());
 
     G3DUtility::reset();
 }

@@ -134,8 +134,13 @@ typedef struct DVDGameToc {
 static void defaultOptionalCommandChecker(DVDCommandBlock* block,
                                           DVDLowCallback callback);
 
+#if defined(VERSION_RSPE01_00)
+const char* __DVDVersion =
+    "<< RVL_SDK - DVD \trelease build: Sep 28 2006 18:57:56 (0x4200_60422) >>";
+#elif defined(VERSION_RSPE01_01)
 const char* __DVDVersion =
     "<< RVL_SDK - DVD \trelease build: Apr 24 2007 11:44:29 (0x4199_60831) >>";
+#endif
 
 static volatile u32 CommandInfoCounter = 0;
 static volatile BOOL PauseFlag = FALSE;
@@ -309,8 +314,13 @@ static void stateReadingFST(void) {
     LastState = (DVDCommandState)stateReadingFST;
 
     // clang-format off
+#if defined(VERSION_RSPE01_00)
+#line 1014
+    OS_ASSERT(bootInfo->fstSize >= BB2.fstSize, "DVDChangeDisk(): FST in the new disc is too big.   ");
+#else
 #line 1035
     OS_ASSERT(bootInfo->fstSize >= BB2.fstSize, "DVDChangeDisk(): FST in the new disc is too big.   ");
+#endif
     // clang-format on
 
     DVDLowClearCoverInterrupt(NULL);
@@ -1794,11 +1804,15 @@ BOOL DVDCancelAsync(DVDCommandBlock* block, DVDCommandCallback callback) {
             OSRestoreInterrupts(enabled);
             return FALSE;
         }
-
+#if defined(VERSION_RSPE01_00)
+        OSCancelAlarm(&CoverAlarm);
+        WaitingForCoverOpen = FALSE;
+#elif defined(VERSION_RSPE01_01)
         if (WaitingForCoverOpen) {
             OSCancelAlarm(&CoverAlarm);
             WaitingForCoverOpen = FALSE;
         }
+#endif
 
         if (block->state == DVD_STATE_NO_DISK) {
             ResumeFromHere = RESUME_POINT_NO_DISK;

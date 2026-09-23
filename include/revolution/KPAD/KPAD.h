@@ -3,11 +3,25 @@
 #include <types.h>
 
 #include <revolution/MTX.h>
+#include <revolution/WPAD.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
 
 #define KPAD_MAX_SAMPLES 16
+
+typedef WPADCallback KPADCallback;
+
+typedef enum {
+    KPAD_CHAN0 = WPAD_CHAN0,
+    KPAD_CHAN1 = WPAD_CHAN1,
+    KPAD_CHAN2 = WPAD_CHAN2,
+    KPAD_CHAN3 = WPAD_CHAN3,
+
+    KPAD_MAX_CONTROLLERS = WPAD_MAX_CONTROLLERS,
+    KPAD_CHAN_INVALID = WPAD_CHAN_INVALID
+} KPADChannel;
 
 typedef union KPADEXStatus {
     struct {
@@ -52,16 +66,23 @@ typedef struct KPADStatus {
     KPADEXStatus ex_status; // at 0x60
 } KPADStatus;
 
-void KPADSetBtnRepeat(s32 chan, f32, f32);
+void KPADSetBtnRepeat(s32 chan, f32 delay_sec, f32 pulse_sec);
 
 void KPADSetPosParam(s32 chan, f32 playRadius, f32 sensitivity);
 void KPADSetHoriParam(s32 chan, f32 playRadius, f32 sensitivity);
 void KPADSetDistParam(s32 chan, f32 playRadius, f32 sensitivity);
 void KPADSetAccParam(s32 chan, f32 playRadius, f32 sensitivity);
 
+void KPADSetSensorHeight(s32 chan, f32 level);
+
 s32 KPADRead(s32 chan, KPADStatus* pSamples, s32 numSamples);
 
 void KPADInit(void);
+
+void KPADSetControlDpdCallback(s32 chan, KPADCallback cb);
+
+void KPADDisableDPD(s32 chan);
+void KPADEnableDPD(s32 chan);
 
 #ifdef __cplusplus
 }

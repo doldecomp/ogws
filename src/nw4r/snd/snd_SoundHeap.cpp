@@ -55,8 +55,10 @@ void SoundHeap::DisposeCallbackFunc(void* pBuffer, u32 size,
     detail::DisposeCallbackManager::GetInstance().Dispose(pBuffer, size,
                                                           pCallbackArg);
 
+#if defined(VERSION_RSPE01_01)
     detail::DisposeCallbackManager::GetInstance().DisposeWave(pBuffer, size,
                                                               pCallbackArg);
+#endif
 }
 
 } // namespace snd

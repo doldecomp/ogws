@@ -68,11 +68,14 @@ void Display::copyEFBtoXFB() {
         GXSetCopyClear(mClearColor, mClearZ);
     }
 
+#if defined(VERSION_RSPE01_01)
     const GXRenderModeObj* pObj = BaseSystem::getVideo()->getRenderModeObj();
+
 #line 150
     EGG_ASSERT(pObj != NULL);
 
     GXSetCopyFilter(pObj->aa, pObj->sample_pattern, !pObj->aa, pObj->vfilter);
+#endif
 
     bool clearEfb = mEfbFlags.onBit(BIT_EFB_COPY_CLEAR);
     BaseSystem::getXfbManager()->copyEFB(clearEfb);

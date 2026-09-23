@@ -90,6 +90,7 @@ u16 Stream::read_u16() {
         EGG_ASSERT_MSG(pToken != NULL, "Token Error\n");
 
         std::sscanf(pToken, "%d", &number);
+        //! TODO(texline): This doesn't match in US Rev 0.
         return static_cast<u16>(number);
     }
 
@@ -210,8 +211,10 @@ void Stream::write_float(f32 value) {
     }
 }
 
+#if defined(VERSION_RSPE01_01)
 DECOMP_FORCEACTIVE(eggStream_cpp_1,
                   "%s");
+#endif
 
 void Stream::writeString(char* pStr) {
     int len = std::strlen(pStr);
@@ -237,8 +240,13 @@ void Stream::writeString(char* pStr) {
                 if (isUpperSJIS(pStr[i])) {
                     _writeByte(pStr[i]);
 
+#if defined(VERSION_RSPE01_00)
+#line 347
+                    EGG_ASSERT_MSG(i + 1 >= len, "SJIS-Assertion : unterminated sjis");
+#else
 #line 367
                     EGG_ASSERT_MSG(i + 1 >= len, "SJIS-Assertion : unterminated sjis");
+#endif
                     _writeByte(pStr[i + 1]);
                     i++;
                 } else if (pStr[i] == '\"') {
@@ -255,8 +263,13 @@ void Stream::writeString(char* pStr) {
                 if (isUpperSJIS(pStr[i])) {
                     _writeByte(pStr[i]);
 
+#if defined(VERSION_RSPE01_00)
+#line 363
+                    EGG_ASSERT_MSG(i + 1 >= len, "SJIS-Assertion : unterminated sjis");
+#else
 #line 383
                     EGG_ASSERT_MSG(i + 1 >= len, "SJIS-Assertion : unterminated sjis");
+#endif
                     _writeByte(pStr[i + 1]);
                     i++;
                 } else {
@@ -305,8 +318,13 @@ const char* Stream::readString(char* pDst, int maxLen) {
                 }
 
                 if (byte == '\\') {
+#if defined(VERSION_RSPE01_00)
+#line 433
+                    EGG_ASSERT_MSG(_readByte() == '\"', "Yen error\n");
+#else
 #line 453
                     EGG_ASSERT_MSG(_readByte() == '\"', "Yen error\n");
+#endif
                     buffer[size++] = '\"';
                 } else if (isUpperSJIS(byte)) {
                     buffer[size++] = byte;
@@ -320,8 +338,13 @@ const char* Stream::readString(char* pDst, int maxLen) {
 
             int textLen = std::strlen(buffer);
             if (pDst != NULL) {
+#if defined(VERSION_RSPE01_00)
+#line 452
+                EGG_ASSERT_MSG(textLen + 1 < maxLen, "readString(%x,%d) overflow\n", pDst, maxLen);
+#else
 #line 472
                 EGG_ASSERT_MSG(textLen + 1 < maxLen, "readString(%x,%d) overflow\n", pDst, maxLen);
+#endif
             } else {
                 pDst = new char[textLen + 1];
             }
@@ -360,8 +383,13 @@ const char* Stream::readString(char* pDst, int maxLen) {
 
         int textLen = std::strlen(buffer);
         if (pDst != NULL) {
+#if defined(VERSION_RSPE01_00)
+#line 495
+            EGG_ASSERT_MSG(textLen + 1 < maxLen, "readString(%x,%d) overflow\n", pDst, maxLen);
+#else
 #line 515
             EGG_ASSERT_MSG(textLen + 1 < maxLen, "readString(%x,%d) overflow\n", pDst, maxLen);
+#endif
         } else {
             pDst = new char[textLen + 1];
         }
@@ -387,8 +415,13 @@ const char* Stream::readString(char* pDst, int maxLen) {
 
     int textLen = std::strlen(buffer);
     if (pDst != NULL) {
+#if defined(VERSION_RSPE01_00)
+#line 522
+        EGG_ASSERT_MSG(textLen + 1 < maxLen, "readString(%x,%d) overflow\n", pDst, maxLen);
+#else
 #line 542
         EGG_ASSERT_MSG(textLen + 1 < maxLen, "readString(%x,%d) overflow\n", pDst, maxLen);
+#endif
     } else {
         pDst = new char[textLen + 1];
     }
@@ -407,8 +440,13 @@ DECOMP_FORCEACTIVE(eggStream_cpp_2,
                   "}\r\n");
 
 void Stream::_read(void* pDst, u32 size) {
+#if defined(VERSION_RSPE01_00)
+#line 723
+    EGG_ASSERT_MSG(!eof(), "eof::_read (%x,%d) : mPosition %d\n", pDst, size, mPosition);
+#else
 #line 743
     EGG_ASSERT_MSG(!eof(), "eof::_read (%x,%d) : mPosition %d\n", pDst, size, mPosition);
+#endif
 
     read(static_cast<u8*>(pDst), size);
     mPosition += size;
@@ -418,8 +456,13 @@ void Stream::_write(void* pSrc, u32 size) {
     write(static_cast<u8*>(pSrc), size);
     mPosition += size;
 
+#if defined(VERSION_RSPE01_00)
+#line 752
+    EGG_ASSERT_MSG(!eof(), "eof::_write (%x,%d) : mPosition %d\n", pSrc, size, mPosition);
+#else
 #line 772
     EGG_ASSERT_MSG(!eof(), "eof::_write (%x,%d) : mPosition %d\n", pSrc, size, mPosition);
+#endif
 }
 
 u8 Stream::_readByte() {
@@ -468,8 +511,13 @@ void Stream::copyToTextBuffer() {
         }
     }
 
+#if defined(VERSION_RSPE01_00)
+#line 804
+    EGG_ASSERT_MSG(false, "copyToTextBuffer : eof or %d>=%d\n", i, mTextBufferSize);
+#else
 #line 824
     EGG_ASSERT_MSG(false, "copyToTextBuffer : eof or %d>=%d\n", i, mTextBufferSize);
+#endif
 }
 
 DECOMP_FORCEACTIVE(eggStream_cpp_2,
@@ -538,8 +586,13 @@ void Stream::printf(char* pFmt, ...) {
 
     int len = std::strlen(buffer);
 
+#if defined(VERSION_RSPE01_00)
+#line 987
+    EGG_ASSERT_MSG(len < TEXT_BUFFER_SIZE, "buffer overflow\n[%s]\n", buffer);
+#else
 #line 1007
     EGG_ASSERT_MSG(len < TEXT_BUFFER_SIZE, "buffer overflow\n[%s]\n", buffer);
+#endif
 
     if (len > 0) {
         for (int i = 0; i < len; i++) {

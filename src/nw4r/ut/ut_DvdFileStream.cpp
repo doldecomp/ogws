@@ -109,9 +109,14 @@ s32 DvdFileStream::Read(void* pDst, u32 size) {
     s32 result = DVDReadPrio(&mFileInfo.dvdInfo, pDst, size,
                              mFilePosition.Tell(), mPriority);
 
+#if defined(VERSION_RSPE01_00)
+    //! @bug Only in rev 0: error code will be interpreted as a negative size
+    mFilePosition.Skip(result);
+#elif defined(VERSION_RSPE01_01)
     if (result > 0) {
         mFilePosition.Skip(result);
     }
+#endif
 
     return result;
 }

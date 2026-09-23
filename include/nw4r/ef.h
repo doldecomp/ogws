@@ -49,3 +49,21 @@
 #include <nw4r/ef/drawstrategy/ef_drawstripestrategy.h>
 
 #endif
+
+/******************************************************************************
+ *
+ * Customizable memory manager
+ *
+ ******************************************************************************/
+#if defined(NW4R_EF_MEMORY_MANAGER_CONFIGURED)
+
+#ifndef NW4R_PUBLIC_EF_MEMORY_MANAGER_H
+#define NW4R_PUBLIC_EF_MEMORY_MANAGER_H
+
+#include <nw4r/ef/ef_memorymanagerconfig.h>
+#include <nw4r/ef/ef_memorymanagerimpl.h>
+#include <nw4r/ef/ef_memorymanagertmp.h>
+
+#endif
+
+#endif

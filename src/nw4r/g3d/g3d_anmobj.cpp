@@ -6,7 +6,9 @@ namespace g3d {
 
 NW4R_G3D_RTTI_DEF(AnmObj);
 
+#if defined(VERSION_RSPE01_01)
 f32 FrameCtrl::smBaseUpdateRate = 1.0f;
+#endif
 
 f32 PlayPolicy_Onetime(f32 start, f32 end, f32 frame) {
 #pragma unused(start)

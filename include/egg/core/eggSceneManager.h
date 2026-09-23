@@ -5,7 +5,7 @@
 namespace EGG {
 
 // Forward declarations
-class Fader;
+class ColorFader;
 class Heap;
 class SceneCreator;
 
@@ -106,7 +106,7 @@ protected:
         mAfterFadeType = AFTER_FADE_TYPE_NONE;
     }
 
-private:
+protected:
     SceneCreator* mSceneCreator;   // at 0x4
     char UNK_0x8[0xC - 0x8];       // at 0x8
     Scene* mCurrentScene;          // at 0xC
@@ -115,7 +115,7 @@ private:
     s32 mCurrentSceneID;           // at 0x18
     s32 mPreviousSceneID;          // at 0x1C
     eAfterFadeType mAfterFadeType; // at 0x20
-    Fader* mCurrentFader;          // at 0x24
+    ColorFader* mCurrentFader;     // at 0x24
     eRootHeapType mRootHeapType;   // at 0x28
 
     static u16 sHeapOptionFlg;

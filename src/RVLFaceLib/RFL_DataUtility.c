@@ -142,6 +142,7 @@ BOOL RFLiCheckValidInfo(const RFLiCharInfo* info) {
         return FALSE;
     }
 
+#if defined(VERSION_RSPE01_01)
     if (!RFLiIsValidName2(info)) {
         return FALSE;
     }
@@ -156,9 +157,11 @@ BOOL RFLiCheckValidInfo(const RFLiCharInfo* info) {
     if (info->personal.sex > RFLSex_Female) {
         return FALSE;
     }
+
     if (!RFLiCheckBirthday(info->personal.bmonth, info->personal.bday)) {
         return FALSE;
     }
+
     if (info->personal.color >= RFLFavoriteColor_Max) {
         return FALSE;
     }
@@ -167,12 +170,16 @@ BOOL RFLiCheckValidInfo(const RFLiCharInfo* info) {
         return FALSE;
     }
 
+#endif
+
     return TRUE;
 }
 
+#if defined(VERSION_RSPE01_01)
 BOOL RFLiIsValidOnNAND(const RFLiCharInfo* info) {
     return !RFLiIsTemporaryID(&info->createID);
 }
+#endif
 
 BOOL RFLiIsSameFaceCore(const RFLiCharInfo* lhs, const RFLiCharInfo* rhs) {
     if ((lhs->eye.rawdata & EYE_PAD_MASK) !=
@@ -298,6 +305,7 @@ static void copyChar2Additional_(RFLAdditionalInfo* dst,
 
     dst->sex = src->personal.sex;
 
+#if defined(VERSION_RSPE01_01)
     if (RFLiCheckBirthday(src->personal.bmonth, src->personal.bday)) {
         dst->bmonth = src->personal.bmonth;
         dst->bday = src->personal.bday;
@@ -305,6 +313,7 @@ static void copyChar2Additional_(RFLAdditionalInfo* dst,
         dst->bmonth = 0;
         dst->bday = 0;
     }
+#endif
 
     dst->color = src->personal.color;
     dst->favorite = src->personal.favorite;
@@ -341,6 +350,7 @@ RFLErrcode RFLGetAdditionalInfo(RFLAdditionalInfo* addi, RFLDataSource source,
     return err;
 }
 
+#if defined(VERSION_RSPE01_01)
 BOOL RFLiCheckBirthday(u8 month, u8 day) {
     // (One-indexed)
     static const u8 scDayMax[12 + 1] = {0,  31, 29, 31, 30, 31, 30,
@@ -360,3 +370,4 @@ BOOL RFLiCheckBirthday(u8 month, u8 day) {
 
     return day <= scDayMax[month];
 }
+#endif

@@ -23,7 +23,7 @@ void RPGrpScreen::Initialize(const u16 maxX[TV_MODE_MAX],
  * @brief Configures the GX rendering state to draw a quad
  */
 void RPGrpScreen::BeginDrawQuad() const {
-    EGG::DrawGX::BeginDrawScreen(mCanvasMode == CANVASMODE_LU, false, false);
+    EGG::DrawGX::BeginDrawScreen(mCanvasMode == CANVAS_LU, false, false);
 }
 
 /**
@@ -50,7 +50,7 @@ void RPGrpScreen::DrawQuad(f32 x1, f32 y1, f32 x2, f32 y2,
  * @param alpha Whether to enable the raster alpha channel
  */
 void RPGrpScreen::BeginDrawQuadTexture(bool alpha) const {
-    EGG::DrawGX::BeginDrawScreen(mCanvasMode == CANVASMODE_LU, true, alpha);
+    EGG::DrawGX::BeginDrawScreen(mCanvasMode == CANVAS_LU, true, alpha);
 }
 
 /**

@@ -13,10 +13,10 @@ class RPGrpDrawPathSV : public RPGrpDrawPath {
 public:
     RPGrpDrawPathSV(EGG::ScnRenderer* pRenderer)
         : RPGrpDrawPath(pRenderer, pRenderer->getDrawPathBase(
-                                       EGG::ScnRenderer::DRAW_PATH_SV)) {
+                                       EGG::ScnRenderer::cDrawPath_SV)) {
 
         mpSV = static_cast<EGG::DrawPathShadowVolume*>(
-            pRenderer->getDrawPathBase(EGG::ScnRenderer::DRAW_PATH_SV));
+            pRenderer->getDrawPathBase(EGG::ScnRenderer::cDrawPath_SV));
     }
 
 private:

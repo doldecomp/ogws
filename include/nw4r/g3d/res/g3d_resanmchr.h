@@ -5,8 +5,8 @@
 #include <nw4r/g3d/res/g3d_resanm.h>
 #include <nw4r/g3d/res/g3d_rescommon.h>
 #include <nw4r/g3d/res/g3d_resmdl.h>
-
 #include <nw4r/math.h>
+
 
 namespace nw4r {
 namespace g3d {
@@ -240,7 +240,11 @@ struct ResAnmChrData {
 class ResAnmChr : public ResCommon<ResAnmChrData> {
 public:
     static const u32 SIGNATURE = FOURCC('C', 'H', 'R', '0');
+#if defined(VERSION_RSPE01_00)
+    static const int REVISION = 3;
+#elif defined(VERSION_RSPE01_01)
     static const int REVISION = 4;
+#endif
 
 public:
     NW4R_G3D_RESOURCE_FUNC_DEF(ResAnmChr);

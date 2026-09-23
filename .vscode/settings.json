@@ -14,16 +14,17 @@
     "IEEE_LIBM",
     "REVOLUTION",
     "PACK_SPORTS",
+    "NW4R_EF_MEMORY_MANAGER_CONFIGURED"
   ],
   // "editor.tabSize": 4,
-  "files.autoSave": "onFocusChange",
+  // "files.autoSave": "onFocusChange",
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
   "files.associations": {
     "*.inc": "c",
     "*.pch": "c",
     "*.pch++": "cpp",
-    ".clangd": "yaml",
+    ".clangd": "yaml"
   },
   // Disable C/C++ IntelliSense, use clangd instead
   "C_Cpp.intelliSenseEngine": "disabled",

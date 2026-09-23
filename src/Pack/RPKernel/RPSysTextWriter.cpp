@@ -36,7 +36,7 @@ void RPSysTextWriter::Reset() {
     EnableFixedWidth(false);
     SetFixedWidth(0.0f);
 
-    SetColorMapping(nw4r::ut::Color::ELEMENT_MIN, nw4r::ut::Color::ELEMENT_MAX);
+    ResetColorMapping();
     SetGradationMode(GRADMODE_NONE);
     SetTextColor(nw4r::ut::Color::ELEMENT_MAX);
 
@@ -59,7 +59,7 @@ void RPSysTextWriter::Printf(f32 x, f32 y, const char* pMsg, ...) {
     va_start(list, pMsg);
 
     RPGrpScreen* pScreen = RPGrpRenderer::GetCurrentScreen();
-    if (pScreen->GetCanvasMode() == RPGrpScreen::CANVASMODE_CC) {
+    if (pScreen->GetCanvasMode() == RPGrpScreen::CANVAS_CC) {
         y = -y;
     }
 
@@ -79,20 +79,24 @@ void RPSysTextWriter::PrintfZeroCenter(f32 x, f32 y, const char* pMsg, ...) {
 
     RPGrpScreen* pScreen = RPGrpRenderer::GetCurrentScreen();
 
-    if (pScreen->GetCanvasMode() == RPGrpScreen::CANVASMODE_CC) {
+    if (pScreen->GetCanvasMode() == RPGrpScreen::CANVAS_CC) {
         y = -y;
     }
 
     switch (pScreen->GetCanvasMode()) {
-    case RPGrpScreen::CANVASMODE_CC: {
-        x = x * pScreen->GetWidth() / 2.0f;
-        y = y * pScreen->GetHeight() / 2.0f;
+    case RPGrpScreen::CANVAS_CC: {
+        x = x * pScreen->GetWidth() / 2;
+        y = y * pScreen->GetHeight() / 2;
         break;
     }
 
-    case RPGrpScreen::CANVASMODE_LU: {
-        x = (x + 1.0f) * (pScreen->GetWidth() / 2.0f);
-        y = (-y + 1.0f) * (pScreen->GetHeight() / 2.0f);
+    case RPGrpScreen::CANVAS_LU: {
+        x = (x + 1.0f) * pScreen->GetWidth() / 2;
+        y = (-y + 1.0f) * pScreen->GetHeight() / 2;
+        break;
+    }
+
+    default: {
         break;
     }
     }
@@ -119,7 +123,7 @@ void RPSysTextWriter::Begin() {
     // Correct for centered canvas mode
     // TODO(kiwi) How exactly does this work?
     if (RPGrpRenderer::GetCurrentScreen()->GetCanvasMode() ==
-        RPGrpScreen::CANVASMODE_CC) {
+        RPGrpScreen::CANVAS_CC) {
 
         posMtx._01 = -posMtx._01;
         posMtx._11 = -posMtx._11;

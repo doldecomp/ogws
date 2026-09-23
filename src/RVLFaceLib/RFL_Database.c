@@ -252,9 +252,11 @@ RFLiCharData* RFLiGetCharData(u16 index) {
         return NULL;
     }
 
+#if defined(VERSION_RSPE01_01)
     if (!RFLiIsValidOnNAND(&info)) {
         return NULL;
     }
+#endif
 
     return data;
 }

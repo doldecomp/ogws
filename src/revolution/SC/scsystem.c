@@ -96,8 +96,13 @@ typedef struct SCItem {
     u32 itemLen;      // at 0x1C
 } SCItem;
 
+#if defined(VERSION_RSPE01_00)
+const char* __SCVersion =
+    "<< RVL_SDK - SC \trelease build: Sep  7 2006 07:22:06 (0x4200_60422) >>";
+#elif defined(VERSION_RSPE01_01)
 const char* __SCVersion =
     "<< RVL_SDK - SC \trelease build: Nov 30 2006 03:33:00 (0x4199_60831) >>";
+#endif
 
 static SCControl Control;
 static u8 ConfBuf[SC_CONF_MAX_SIZE] ALIGN(32);
@@ -119,6 +124,23 @@ static u8 IsDevKit = FALSE;
 static u8 DirtyFlag = FALSE;
 static u8 Initialized = FALSE;
 
+#if defined(VERSION_RSPE01_00)
+static SCNameAndID NameAndIDTbl[SC_ITEM_MAX] = {
+    {"IPL.CB", SC_ITEM_IPL_CB},     {"IPL.AR", SC_ITEM_IPL_AR},
+    {"IPL.ARN", SC_ITEM_IPL_ARN},   {"IPL.DH", SC_ITEM_IPL_DH},
+    {"IPL.E60", SC_ITEM_IPL_E60},   {"IPL.IDL", SC_ITEM_IPL_IDL},
+    {"IPL.LNG", SC_ITEM_IPL_LNG},   {"IPL.NIK", SC_ITEM_IPL_NIK},
+    {"IPL.PC", SC_ITEM_IPL_PC},     {"IPL.PGS", SC_ITEM_IPL_PGS},
+    {"IPL.SSV", SC_ITEM_IPL_SSV},   {"IPL.SADR", SC_ITEM_IPL_SADR},
+    {"IPL.SND", SC_ITEM_IPL_SND},   {"NET.CNF", SC_ITEM_NET_CNF},
+    {"NET.CTPC", SC_ITEM_NET_CTPC}, {"NET.PROF", SC_ITEM_NET_PROF},
+    {"NET.WCPC", SC_ITEM_NET_WCPC}, {"DEV.BTM", SC_ITEM_DEV_BTM},
+    {"DEV.VIM", SC_ITEM_DEV_VIM},   {"DEV.CTC", SC_ITEM_DEV_CTC},
+    {"DEV.DSM", SC_ITEM_DEV_DSM},   {"BT.DINF", SC_ITEM_BT_DINF},
+    {"BT.SENS", SC_ITEM_BT_SENS},   {"BT.SPKV", SC_ITEM_BT_SPKV},
+    {"BT.MOT", SC_ITEM_BT_MOT},     {"BT.BAR", SC_ITEM_BT_BAR},
+    {"DVD.CNF", SC_ITEM_DVD_CNF},   {"WWW.RST", SC_ITEM_WWW_RST}};
+#elif defined(VERSION_RSPE01_01)
 static SCNameAndID NameAndIDTbl[SC_ITEM_MAX] = {
     {"IPL.CB", SC_ITEM_IPL_CB},     {"IPL.AR", SC_ITEM_IPL_AR},
     {"IPL.ARN", SC_ITEM_IPL_ARN},   {"IPL.CD", SC_ITEM_IPL_CD},
@@ -138,6 +160,7 @@ static SCNameAndID NameAndIDTbl[SC_ITEM_MAX] = {
     {"BT.SPKV", SC_ITEM_BT_SPKV},   {"BT.MOT", SC_ITEM_BT_MOT},
     {"BT.BAR", SC_ITEM_BT_BAR},     {"DVD.CNF", SC_ITEM_DVD_CNF},
     {"WWW.RST", SC_ITEM_WWW_RST}};
+#endif
 
 static void SetBgJobStatus(SCStatus status);
 static s32 SCReloadConfFileAsync(u8* buf, u32 size, SCAsyncCallback callback);

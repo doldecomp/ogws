@@ -53,16 +53,22 @@ inline f32 FFloor(f32 x) {
 }
 
 inline f32 FInv(register f32 x) {
+#if defined(VERSION_RSPE01_00)
+    register f32 work0, work1;
+#elif defined(VERSION_RSPE01_01)
     register f32 work0, work1, work2, work3;
+#endif
 
     ASM (
         fmr  work1, x     // x
         fres work0, work1 // 1/x
 
+#if defined(VERSION_RSPE01_01)
         // Refine estimate
         ps_add   work2, work0, work0        // 2/x
         ps_mul   work3, work0, work0        // 1/x^2
         ps_nmsub work0, work1, work3, work2 // -(x * 1/x^2 - 2/x)
+#endif
     )
 
     return work0;

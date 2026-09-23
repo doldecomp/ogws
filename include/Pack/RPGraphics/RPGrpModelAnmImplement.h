@@ -42,50 +42,60 @@ public:
         return pAnm;
     }
 
-    virtual void Configure();                                     // at 0x8
-    virtual void Regist(Anm anm, AnmIdx idx, RPGrpHandle handle); // at 0xC
-    virtual void RegistFromResFile(Anm anm, AnmIdx idx, RPGrpHandle handle,
-                                   const char* pName); // at 0x10
-    virtual void RegistFromResFile(Anm anm, AnmIdx idx, RPGrpHandle handle,
-                                   u32 id);           // at 0x14
-    virtual s16 SetBlendAnm(Anm anm, u8, AnmIdx idx); // at 0x18
-    virtual s16 RemoveBlendAnm(Anm anm, u8, u8);      // at 0x1C
+    virtual void Configure() override; // at 0x8
 
-    virtual void SetBlendWeight(Anm anm, u8, f32, u8);      // at 0x20
-    virtual s16 GetBlendAnm(Anm, u8, u8);                   // at 0x24
-    virtual f32 GetBlendWeight(Anm, u8, u8);                // at 0x28
-    virtual void ReBindChrAnmNode(u16, u16, BindType type); // at 0x2C
+    virtual void Regist(Anm anm, AnmIdx idx,
+                        RPGrpHandle handle) override; // at 0xC
+    virtual void RegistFromResFile(Anm anm, AnmIdx idx, RPGrpHandle handle,
+                                   const char* pName) override; // at 0x10
+    virtual void RegistFromResFile(Anm anm, AnmIdx idx, RPGrpHandle handle,
+                                   u32 id) override; // at 0x14
 
-    virtual void ReleaseChrAnmNode(u16, u16, BindType type);       // at 0x30
-    virtual bool StartNoBlend(Anm anm, u16 idx, f32 frame = 0.0f); // at 0x34
+    virtual s16 SetBlendAnm(Anm anm, u8, AnmIdx idx) override; // at 0x18
+    virtual s16 RemoveBlendAnm(Anm anm, u8, u8) override;      // at 0x1C
+
+    virtual void SetBlendWeight(Anm anm, u8, f32, u8) override; // at 0x20
+    virtual s16 GetBlendAnm(Anm, u8, u8) override;              // at 0x24
+    virtual f32 GetBlendWeight(Anm, u8, u8) override;           // at 0x28
+
+    virtual void ReBindChrAnmNode(u16, u16, BindType type);           // at 0x2C
+    virtual void ReleaseChrAnmNode(u16, u16, BindType type) override; // at 0x30
+
+    virtual bool StartNoBlend(Anm anm, u16 idx,
+                              f32 frame = 0.0f) override; // at 0x34
     virtual bool StartBlend(Anm anm, u16 idx, f32 weight = 0.0f,
-                            f32 frame = 0.0f); // at 0x38
+                            f32 frame = 0.0f) override; // at 0x38
 
-    virtual bool Cancel(Anm anm, AnmIdx idx);                  // at 0x3C
-    virtual bool Start(Anm anm, AnmIdx idx, f32 frame = 0.0f); // at 0x40
+    virtual bool Cancel(Anm anm, AnmIdx idx) override; // at 0x3C
+    virtual bool Start(Anm anm, AnmIdx idx,
+                       f32 frame = 0.0f) override; // at 0x40
 
-    virtual f32 VF_0x44(UNKTYPE);
-    virtual f32 VF_0x48(UNKTYPE);
+    virtual f32 VF_0x44(UNKTYPE) override;
+    virtual f32 VF_0x48(UNKTYPE) override;
 
-    virtual int GetNumFrame(Anm anm, AnmIdx idx) const; // at 0x4C
-    virtual AnmPlayPolicy GetAnmPlayPolicy(Anm anm,
-                                           AnmIdx idx) const; // at 0x50
+    virtual int GetNumFrame(Anm anm, AnmIdx idx) const override; // at 0x4C
 
-    virtual void SetFrame(Anm anm, AnmIdx idx, f32 frame); // at 0x54
-    virtual f32 GetFrame(Anm anm, AnmIdx idx) const;       // at 0x58
+    virtual AnmPlayPolicy
+    GetAnmPlayPolicy(Anm anm,
+                     AnmIdx idx) const override; // at 0x50
 
-    virtual void SetUpdateRate(Anm anm, AnmIdx idx, f32 rate); // at 0x5C
-    virtual f32 GetUpdateRate(Anm anm, AnmIdx idx) const;      // at 0x60
+    virtual void SetFrame(Anm anm, AnmIdx idx, f32 frame) override; // at 0x54
+    virtual f32 GetFrame(Anm anm, AnmIdx idx) const override;       // at 0x58
 
-    virtual void SetEnableQuaternionBlend(bool enable); // at 0x64
+    virtual void SetUpdateRate(Anm anm, AnmIdx idx,
+                               f32 rate) override;                 // at 0x5C
+    virtual f32 GetUpdateRate(Anm anm, AnmIdx idx) const override; // at 0x60
 
-    virtual void SetEnableChrAnm(bool enable); // at 0x68
-    virtual void UpdateFrame();                // at 0x6C
+    virtual void SetEnableQuaternionBlend(bool enable) override; // at 0x64
 
-    virtual void VF_0x70(UNKTYPE); // at 0x70
-    virtual void VF_0x74(UNKTYPE); // at 0x74
+    virtual void SetEnableChrAnm(bool enable) override; // at 0x68
+    virtual void UpdateFrame() override;                // at 0x6C
 
-    virtual nw4r::g3d::AnmObj* GetAnmObj(Anm anm, AnmIdx idx) const; // at 0x78
+    virtual void VF_0x70(UNKTYPE) override; // at 0x70
+    virtual void VF_0x74(UNKTYPE) override; // at 0x74
+
+    virtual nw4r::g3d::AnmObj* GetAnmObj(Anm anm,
+                                         AnmIdx idx) const override; // at 0x78
 
     void Init();
 
@@ -109,10 +119,11 @@ private:
 
 private:
     explicit RPGrpModelAnmImplement(RPGrpModel* pModel);
-    virtual ~RPGrpModelAnmImplement() {} // at 0x7C
+    virtual ~RPGrpModelAnmImplement() override {} // at 0x7C
 
-    virtual void SetAnmObj(Anm anm, nw4r::g3d::AnmObj** ppAnmObjs); // at 0x80
-    virtual void InternalCalc();                                    // at 0x84
+    virtual void SetAnmObj(Anm anm,
+                           nw4r::g3d::AnmObj** ppAnmObjs) override; // at 0x80
+    virtual void InternalCalc() override;                           // at 0x84
 
     void RegistAnmChr(AnmIdx idx, const nw4r::g3d::ResAnmChr chr);
 
