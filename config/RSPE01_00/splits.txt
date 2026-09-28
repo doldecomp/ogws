@@ -908,13 +908,45 @@ Pack/RPKernel/RPSysKokeshiIcon.cpp:
 	.text       start:0x8016D500 end:0x8016EBF4
 	.data       start:0x80381DA0 end:0x80381DB4
 
+Pack/RPGraphics/RPGrpModel.cpp:
+	.text       start:0x801809E8 end:0x80181190
+
 Pack/RPGraphics/RPGrpModelAnm.cpp:
 	.text       start:0x80181190 end:0x80181984
 	.data       start:0x803823B0 end:0x80382438
+	.sdata2     start:0x804E1A88 end:0x804E1A90
 
 Pack/RPGraphics/RPGrpModelResManager.cpp:
 	.text       start:0x80185AE4 end:0x80186924
+	.data       start:0x803826F0 end:0x803827A4
+
+Pack/RPGraphics/RPGrpCpuTexture.cpp:
+	.text       start:0x8018F1A0 end:0x801900F0
+
+Pack/RPGraphics/RPGrpFog.cpp:
+	.text       start:0x801900F0 end:0x80190344
 
 Pack/RPAudio/RPSndAudioMgr.cpp:
 	.text       start:0x8019C7E0 end:0x8019E630
 	.sbss       start:0x804DFC5C end:0x804DFC68
+
+Pack/RPUtility/RPUtlDohMath.cpp:
+	.text       start:0x8019F8D4 end:0x8019FE84
+	.ctors      start:0x80330160 end:0x80330164
+	.bss        start:0x804D6F08 end:0x804D6FC8
+	.sbss       start:0x804DFC78 end:0x804DFC80
+	.sdata2     start:0x804E1EE0 end:0x804E1EF0
+
+Pack/RPUtility/RPUtlMapData.cpp:
+	.text       start:0x801A5000 end:0x801A546C
+
+Pack/RPUtility/RPUtlShadowDrawer.cpp:
+	.text       start:0x801A546C end:0x801A5580
+	.ctors      start:0x8033016C end:0x80330170
+	.bss        start:0x804D7078 end:0x804D70A8
+
+Pack/RPSports/RPSportsCommon/RPSysPlayerSelectScene.cpp:
+	.text       start:0x801B8778 end:0x801BB064
+
+Pack/RPSports/RPSportsCommon/RPSportsMenuBgModel.cpp:
+	.text       start:0x801BB064 end:0x801BB644

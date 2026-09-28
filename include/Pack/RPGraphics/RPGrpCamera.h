@@ -155,6 +155,19 @@ public:
                              f32 frame = 0.0f);
 
     /**
+     * @brief Getter for position
+     *
+     * @return nw4r::math::VEC3 Camera position
+     */
+    nw4r::math::VEC3 GetPosition() {
+        return mPosition;
+    }
+
+    void SetPosition(nw4r::math::VEC3 newPos) {
+        mPosition = newPos;
+    }
+
+    /**
      * @brief Sets the type of this camera
      *
      * @param type New camera type

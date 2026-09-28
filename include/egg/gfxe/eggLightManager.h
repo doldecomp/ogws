@@ -26,6 +26,19 @@ public:
     void Calc(nw4r::g3d::ScnRoot*);
     void CalcView(const nw4r::math::MTX34&, u8, nw4r::g3d::ScnRoot*);
 
+    /**
+     * @brief Sets ambient color registers
+     *
+     * @details Channel 0 is set to current value of m_pAmbColor0,
+     * while channel 1 is set to black
+     */
+    void SetChanAmbColor() const;
+
+    /**
+     * @brief Loads light registers with contents of array index
+     */
+    void LoadObjIndxGX() const;
+
     void DoneDraw();
 
     void LoadScnLightInner(nw4r::g3d::ResAnmScn, f32, u32);
@@ -50,7 +63,8 @@ private:
     u16 m_numLight; // at 0x4
     char UNK_0x8[0xC - 0x8];
     LightObj** m_ppLightSet; // at 0xC
-    char UNK_0X10[0x18 - 0x10];
+    GXColor* m_pAmbColor0;   // at 0x10
+    char UNK_0X14[0x18 - 0x14];
     u8 m_viewNum;     // at 0x18
     u8 m_currentView; // at 0x19
     char UNK_0x1A[0x20 - 0x1A];

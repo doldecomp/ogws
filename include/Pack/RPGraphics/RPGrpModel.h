@@ -53,15 +53,38 @@ public:
     };
 
 protected:
+#if defined(VERSION_RSPE01_00)
+    u8 unk0;
+    u8 unk1;
+    u16 mFlags;
+    u16 unk4;
+    u32 unkFlag;
+    RPGrpModel* mpEntryNext; // at 0xC
+    RPGrpModel* mpGenNext;   // at 0x10
+    nw4r::math::MTX34 mtx14;
+    nw4r::math::VEC3 mBaseScale;            // at 0x44
+    RPGrpModelAnm* mpModelAnm;              // at 0x50
+    RPGrpModelMaterial** mppMaterials;      // at 0x54
+    RPGrpModelBoundingInfo* mpBoundingInfo; // at 0x58
+    RPGrpModelRecord* mpRecord;             // at 0x5C
+    BOOL mReverseCulling;                   // at 0x60
+    IRPGrpModelCallback* mpCallback;        // at 0x64
+    u8 mDrawScene;                          // at 0x68
+    u8 mDrawGroup;                          // at 0x69
+    u8 mViewNo;                             // at 0x6A
+    u8 padding;
+    u32 unk6C;
+
+#elif defined(VERSION_RSPE01_01)
     u8 mViewNo;    // at 0x0
     u8 mDrawScene; // at 0x1
     u8 mDrawGroup; // at 0x2
-    char unk3;
+    u8 unk3;
     char unk4;
     char unk5[0x8 - 0x5];
     u16 mFlags; // at 0x8
     u16 unkA;
-    u32 unkC;
+    u32 unkFlag;
     u32 unk10;
     RPGrpModel* mpEntryNext;                // at 0x14
     RPGrpModel* mpGenNext;                  // at 0x18
@@ -73,6 +96,7 @@ protected:
     RPGrpModelRecord* mpRecord;             // at 0x38
     BOOL mReverseCulling;                   // at 0x3C
     EGG::ModelEx* mpModelEx;                // at 0x40
+#endif
 
 public:
     static RPGrpModel* Construct(RPGrpHandle handle, u8 viewNo, u32 typeOption,
@@ -135,9 +159,15 @@ public:
                             nw4r::math::MTX34* pMtx) const = 0; // at 0x48
     virtual void GetViewMtx(nw4r::math::MTX34* pMtx) const = 0; // at 0x4C
 
+#if defined(VERSION_RSPE01_00)
     virtual u16 GetJointNum() const { // at 0x50
+        return 0;                     // stubbed in rev 0
+    }
+#elif defined(VERSION_RSPE01_01)
+    virtual u16 GetJointNum() const {
         return mpModelEx->getNumNode();
     }
+#endif
 
     virtual const char* GetJointName(u16 idx) const = 0;    // at 0x54
     virtual u16 GetJointIndex(const char* pName) const = 0; // at 0x58
@@ -146,24 +176,39 @@ public:
     virtual const char* GetMaterialName(u16 idx) const = 0;    // at 0x60
     virtual u16 GetMaterialIndex(const char* pName) const = 0; // at 0x64
 
+#if defined(VERSION_RSPE01_00)
+    virtual u16 GetShapeNum() const { // at 0x68
+        return 0;
+    }
+#elif defined(VERSION_RSPE01_01)
     virtual u16 GetShapeNum() const { // at 0x68
         return mpModelEx->getNumShape();
     }
+#endif
 
     virtual const char* GetShapeName(u16 idx) const = 0;    // at 0x6C
     virtual u16 GetShapeIndex(const char* pName) const = 0; // at 0x70
 
+#if defined(VERSION_RSPE01_00)
+    virtual u16 GetViewMtxNum() const { // at 0x74
+        return 0;
+    }
+#elif defined(VERSION_RSPE01_01)
     virtual u16 GetViewMtxNum() const { // at 0x74
         return mpModelEx->getNumViewMtx();
     }
+#endif
 
+#if defined(VERSION_RSPE01_01)
     virtual void DrawDirect(u32 drawFlag,
                             nw4r::math::MTX34* pViewMtx) { // at 0x78
         mpModelEx->drawShapeDirectly(drawFlag, true, true, pViewMtx);
     }
+#endif
 
     virtual void CalcMaterial(); // at 0x7C
 
+#if defined(VERSION_RSPE01_01)
     virtual void CalcBeforeDraw() { // at 0x80
         mpModelEx->setVisible(mFlags & EFlag_Visible);
     }
@@ -181,6 +226,7 @@ public:
                                  const_cast<nw4r::math::MTX34*>(&rViewMtx));
         }
     }
+#endif
 
     void RemoveGenList();
     void CreateMaterial(u16 idx);
@@ -190,6 +236,15 @@ public:
     void Calc();
     void Entry();
 
+//! This is a bit hacky, but it's meant for nw4r functions
+//! that require a pointer, not the matrix itself (texline)
+#if defined(VERSION_RSPE01_00)
+    nw4r::math::MTX34* GetMtxPtr() {
+        return &mtx14;
+    }
+#endif
+
+#if defined(VERSION_RSPE01_01)
     EGG::ModelEx* GetModelEx() const {
         return mpModelEx;
     }
@@ -212,6 +267,11 @@ public:
 
     nw4r::g3d::ScnRfl* GetScnRfl() const {
         return mpModelEx->getScnRfl();
+    }
+#endif
+
+    RPGrpModelAnm* GetModelAnm() const {
+        return mpModelAnm;
     }
 
     const nw4r::math::VEC3& GetBaseScale() const {
@@ -243,6 +303,22 @@ public:
         return (mFlags & EFlag_Visible) ? true : false;
     }
 
+    u8 GetDrawScene() const {
+        return mDrawScene;
+    }
+
+    void SetDrawScene(u8 drawScene) {
+        mDrawScene = drawScene;
+    }
+
+    u8 GetUnk4() const {
+        return unk4;
+    }
+
+    u8 GetDrawGroup() const {
+        return mDrawGroup;
+    }
+
     /**
      * @brief Gets the allocator used for model-related allocations
      */
@@ -266,10 +342,12 @@ protected:
     virtual void CreateAnm() = 0;    // at 0x90
     virtual void InternalCalc() = 0; // at 0x94
 
+#if defined(VERSION_RSPE01_01)
     virtual void GetShapeMinMax(u16 shapeIdx, nw4r::math::VEC3* pMin,
                                 nw4r::math::VEC3* pMax) const { // at 0x98
         mpModelEx->getShapeMinMax(shapeIdx, pMin, pMax, false);
     }
+#endif
 
 protected:
     enum {

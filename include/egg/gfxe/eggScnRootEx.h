@@ -58,6 +58,9 @@ public:
     void SetCurrentCamera(int idx, const nw4r::math::MTX34& rCameraMtx,
                           const Screen& rScreen);
 
+    /**
+     * @brief Calculates view matrices for each 3D object in scene
+     */
     void CalcView();
 
     void GatherDrawScnObj();

@@ -76,7 +76,10 @@ public:
         f32 z = _20 * rVec.x + _21 * rVec.y + _22 * rVec.z;
         return Vector3f(x, y, z);
     }
-
+    /**
+     * @brief Creates a 3x4 identity matrix. As identity matrices are
+     * square, the fourth column is zeroed out.
+     */
     void makeIdentity();
 
     void makeQ(const Quatf& rQuat);

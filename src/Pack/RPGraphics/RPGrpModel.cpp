@@ -19,11 +19,13 @@ const nw4r::math::_VEC3 RPGrpModel::GEOMETRY_MAGNIFY[/* ??? */] = {
     {0.0f, 0.0f, 0.0f},
 };
 
+#ifdef VERSION_RSPE01_01
 RPGrpModel* RPGrpModel::Construct(RPGrpHandle handle, u8 viewNo, u32 typeOption,
                                   u32 bufferOption) {
     RPGrpModel* p = NULL;
 
     switch (RPGrpModelResManager::GetCurrent()->GetType(handle)) {
+
     case RPGrpModelResManager::Type_ResMdl: {
         p = new RPGrpModelG3D(handle, viewNo, typeOption, bufferOption);
         break;
@@ -59,8 +61,39 @@ RPGrpModel* RPGrpModel::Construct(RPGrpHandle handle, const char* pName,
     p->CreateAnm();
     return p;
 }
+#endif
 
 RPGrpModel::RPGrpModel(u8 viewNo)
+#if defined(VERSION_RSPE01_00)
+    : unk0(0),
+      unk1(0),
+      mFlags(1),
+      unk4(0),
+      unkFlag(0),
+      mpEntryNext(NULL),
+      mpGenNext(NULL),
+      mBaseScale(1.0f, 1.0f, 1.0f),
+      mpModelAnm(NULL),
+      mppMaterials(NULL),
+      mpBoundingInfo(NULL),
+      mpRecord(NULL),
+      mReverseCulling(FALSE),
+      mpCallback(NULL),
+      mDrawGroup(8),
+      mDrawScene(8),
+      mViewNo(viewNo),
+      unk6C(NULL) {
+
+    mpGenNext = spGenList;
+    spGenList = this;
+    nw4r::math::MTX34Identity(&mtx14);
+    //! @bug only in rev 0: mBaseScale was already initialized
+    mBaseScale.z = 1.0f;
+    mBaseScale.y = 1.0f;
+    mBaseScale.x = 1.0f;
+}
+
+#elif defined(VERSION_RSPE01_01)
     : mViewNo(viewNo),
       mDrawScene(0),
       mDrawGroup(0),
@@ -68,7 +101,7 @@ RPGrpModel::RPGrpModel(u8 viewNo)
       unk4(8),
       mFlags(EFlag_Visible),
       unkA(0),
-      unkC(0),
+      unkFlag(0),
       unk10(0),
       mpEntryNext(NULL),
       mpGenNext(NULL),
@@ -84,6 +117,7 @@ RPGrpModel::RPGrpModel(u8 viewNo)
     mpGenNext = spGenList;
     spGenList = this;
 }
+#endif
 
 RPGrpModel::~RPGrpModel() {}
 
@@ -147,10 +181,12 @@ void RPGrpModel::UpdateFrame() {
         mpModelAnm->UpdateFrame();
     }
 
+#if defined(VERSION_RSPE01_01)
     nw4r::g3d::ScnObj* pScnObj = GetScnObj();
     if (pScnObj != NULL) {
         pScnObj->G3dProc(nw4r::g3d::G3dObj::G3DPROC_UPDATEFRAME, 0, NULL);
     }
+#endif
 }
 
 void RPGrpModel::Calc() {
@@ -180,15 +216,19 @@ void RPGrpModel::Entry() {
     mFlags |= EFlag_Entered;
 }
 
+//! TODO(texline) vtable is different in rev 0
+//! (offset should be 0x4c there, but is 0x5c)
 void RPGrpModel::CalcMaterial() {
     for (int i = 0; i < GetMaterialNum(); i++) {
         mppMaterials[i]->Calc();
     }
 }
 
+#if defined(VERSION_RSPE01_01)
 u16 RPGrpModel::GetMaterialNum() const {
     return mpModelEx->getNumMaterial();
 }
+#endif
 
 void RPGrpModel::SetReverseCulling(bool reverse) {
     if (reverse == mReverseCulling) {
@@ -211,6 +251,7 @@ void RPGrpModel::SetReverseCulling(bool reverse) {
     mReverseCulling = reverse;
 }
 
+#if defined(VERSION_RSPE01_01)
 u16 RPGrpModel::ReplaceTexture(const char* pName, const RPGrpTexture& rTexture,
                                bool keepFilterWrap) {
 
@@ -218,6 +259,7 @@ u16 RPGrpModel::ReplaceTexture(const char* pName, const RPGrpTexture& rTexture,
     return mpModelEx->replaceTexture(pName, texObj, keepFilterWrap, NULL, 0,
                                      true);
 }
+#endif
 
 void RPGrpModel::RemoveGenList() {
     RPGrpModel* pIt = spGenList;
