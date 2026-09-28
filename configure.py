@@ -580,7 +580,7 @@ config.libs = [
             Object(Matching, "nw4r/snd/snd_SeqFile.cpp"),
             Object(Matching, "nw4r/snd/snd_SeqPlayer.cpp"),
             Object(Matching, "nw4r/snd/snd_SeqSound.cpp"),
-            Object(Matching, "nw4r/snd/snd_SeqSoundHandle.cpp"),
+            Object(not MatchingFor("RSPE01_00"), "nw4r/snd/snd_SeqSoundHandle.cpp"),
             Object(Matching, "nw4r/snd/snd_SeqTrack.cpp"),
             Object(Matching, "nw4r/snd/snd_Sound3DActor.cpp"),
             Object(Matching, "nw4r/snd/snd_Sound3DListener.cpp"),
@@ -804,7 +804,7 @@ config.libs = [
             Object(Matching, "egg/core/eggCntFile.cpp"),
             Object(Matching, "egg/audio/eggAudioArcPlayerMgr.cpp"),
             Object(Matching, "egg/audio/eggAudioExpMgr.cpp"),
-            Object(Matching, "egg/audio/eggAudioFxMgr.cpp"),
+            Object(not MatchingFor("RSPE01_00"), "egg/audio/eggAudioFxMgr.cpp"),
             Object(Matching, "egg/audio/eggAudioHeapMgr.cpp"),
             Object(Matching, "egg/audio/eggAudioMgr.cpp"),
             Object(Matching, "egg/audio/eggAudio3DActor.cpp"),
@@ -1309,7 +1309,7 @@ config.libs = [
         "progress_category": "audio",  # str | List[str]
         "objects": [
             Object(NonMatching, "Pack/RPAudio/RPSndAudioMgr.cpp"),
-            Object(Matching, "Pack/RPAudio/RPSndSpeakerMgr.cpp"),
+            Object(not MatchingFor("RSPE01_00"), "Pack/RPAudio/RPSndSpeakerMgr.cpp"),
             Object(Matching, "Pack/RPAudio/RPSndObject.cpp"),
             Object(Matching, "Pack/RPAudio/RPSndUtility.cpp"),
             Object(Matching, "Pack/RPAudio/RPSndMoveParam.cpp"),
