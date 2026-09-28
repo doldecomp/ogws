@@ -5,6 +5,8 @@
 #include <egg/core.h>
 #include <egg/math.h>
 
+#include <nw4r/g3d.h>
+
 #include <revolution/GX.h>
 
 namespace EGG {
@@ -44,12 +46,28 @@ public:
 
     void Reset();
     void Calc();
+    /**
+     * @brief Calculates direction vectors using camera viewpoint
+     *
+     * @param rCameraMtx Matrix used for creating position vector
+     */
     void CalcView(const nw4r::math::MTX34& rCameraMtx);
 
     void CalcFinalDirColor(const EGG::LightTexture& rTexture,
                            nw4r::math::VEC3* pDir, GXColor* pColor);
 
+    void InitGX(GXLightObj* pObj) const;
+
+    void CopyToG3D_World(nw4r::g3d::ScnRoot& pScnRoot) const;
+
+    void CopyFromG3D(nw4r::g3d::LightAnmResult* pResult, f32 frame);
+
     void CalcDirDist();
+
+    /**
+     * @brief Calculates attenuation for light object
+     */
+    void CalcAt();
 
     void SetPosAt(const nw4r::math::VEC3& rPos, const nw4r::math::VEC3& rAt);
 
@@ -74,9 +92,9 @@ private:
 
 private:
     u16 mAmbIndex;            // at 0x4
-    Vector3f mAt;             // at 0x8
-    Vector3f mPos;            // at 0x14
-    Vector3f mDir;            // at 0x20
+    nw4r::math::VEC3 mAt;     // at 0x8
+    nw4r::math::VEC3 mPos;    // at 0x14
+    nw4r::math::VEC3 mDir;    // at 0x20
     GXColor mBrightnessColor; // at 0x2C
     f32 mIntensity;           // at 0x30
     LightType mLightType;     // at 0x34

@@ -1,8 +1,9 @@
 #ifndef EGG_GFXE_POST_EFFECT_BLUR_H
 #define EGG_GFXE_POST_EFFECT_BLUR_H
-#include "eggAssert.h"
-#include "eggPostEffectBase.h"
-#include "types_egg.h"
+#include <egg/types_egg.h>
+
+#include <egg/gfxe/eggPostEffectBase.h>
+#include <egg/prim.h>
 
 namespace EGG {
 class PostEffectBlur : public PostEffectBase {

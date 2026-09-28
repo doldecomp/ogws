@@ -29,6 +29,10 @@ public:
     void LoadScnFog(const nw4r::g3d::ResAnmScn scn, f32 frame);
     void DoneDraw();
 
+    Fog* GetFog(int id) {
+        return mFog[id];
+    }
+
 private:
     enum {
         cFlag_CalcDone = 1 << 2,

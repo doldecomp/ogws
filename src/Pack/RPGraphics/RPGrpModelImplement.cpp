@@ -21,7 +21,9 @@ RPGrpModelG3D::RPGrpModelG3D(RPGrpHandle handle, u8 viewNo, u32 typeOption,
                                                bufferOption, viewNo);
     }
 
+#if defined(VERSION_RSPE01_01)
     mpModelEx = new EGG::ModelEx(pScnObj);
+#endif
 }
 
 RPGrpModelG3D::RPGrpModelG3D(RPGrpHandle handle, int idx, u8 viewNo,
@@ -45,7 +47,9 @@ RPGrpModelG3D::RPGrpModelG3D(RPGrpHandle handle, int idx, u8 viewNo,
                                                bufferOption, viewNo);
     }
 
+#if defined(VERSION_RSPE01_01)
     mpModelEx = new EGG::ModelEx(pScnObj);
+#endif
 }
 
 RPGrpModelG3D::RPGrpModelG3D(RPGrpHandle handle, const char* pName, u8 viewNo,
@@ -69,9 +73,12 @@ RPGrpModelG3D::RPGrpModelG3D(RPGrpHandle handle, const char* pName, u8 viewNo,
                                                bufferOption, viewNo);
     }
 
+#if defined(VERSION_RSPE01_01)
     mpModelEx = new EGG::ModelEx(pScnObj);
+#endif
 }
 
+#ifdef VERSION_RSPE01_01
 void RPGrpModelG3D::Configure() {
     RPGrpModel::Configure();
 
@@ -90,12 +97,13 @@ void RPGrpModelG3D::Configure() {
 void RPGrpModelG3D::CreateAnm() {
     mpModelAnm = RPGrpModelAnmG3D::Construct(this);
 }
+#endif
 
 IRPGrpModelCallback*
 RPGrpModelG3D::SetCallback(IRPGrpModelCallback* pCallback) {
     IRPGrpModelCallback* pOldCallback = mpCallback;
     mpCallback = pCallback;
-
+#if defined(VERSION_RSPE01_01)
     if (pCallback == NULL) {
         GetScnMdlSimple()->DisableScnMdlCallbackTiming(
             nw4r::g3d::ScnObj::CALLBACK_TIMING_ALL);
@@ -103,10 +111,12 @@ RPGrpModelG3D::SetCallback(IRPGrpModelCallback* pCallback) {
         GetScnMdlSimple()->EnableScnMdlCallbackTiming(
             nw4r::g3d::ScnObj::CALLBACK_TIMING_ALL);
     }
+#endif
 
     return pOldCallback;
 }
 
+#if defined(VERSION_RSPE01_01)
 void RPGrpModelG3D::InternalCalc() {
     if (!mReverseCulling) {
         if (GetScnLeaf() != NULL) {
@@ -164,6 +174,7 @@ bool RPGrpModelG3D::IsJointVisible(u32 idx) const {
         return GetScnMdlSimple()->GetResMdl().GetResNode(idx).IsVisible();
     }
 }
+#endif
 
 void RPGrpModelG3D::ExecCallback_CALC_WORLD(
     nw4r::g3d::ScnObj::Timing /* timing */, nw4r::g3d::ScnObj* /* pObj */,
@@ -173,7 +184,7 @@ void RPGrpModelG3D::ExecCallback_CALC_MAT(nw4r::g3d::ScnObj::Timing timing,
                                           nw4r::g3d::ScnObj* /* pObj */,
                                           u32 /* param */, void* /* pInfo */) {
 
-    if (!(unkC & 0x40)) {
+    if (!(unkFlag & 0x40)) {
         if (timing & nw4r::g3d::ScnObj::CALLBACK_TIMING_A) {
             CalcMaterial();
         }

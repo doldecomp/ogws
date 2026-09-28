@@ -46,7 +46,10 @@ public:
            CanvasMode canvasMode);
     Screen(const Screen& rOther);
 
-    virtual ~Screen() {}                                    // at 0x8
+    virtual ~Screen() {} // at 0x8
+    /**
+     * @brief Sets projection matrix
+     */
     virtual void SetProjectionGX() const;                   // at 0xC
     virtual void CopyToG3D(nw4r::g3d::Camera camera) const; // at 0x10
 

@@ -133,6 +133,12 @@ public:
         }
     }
 
+#if defined(VERSION_RSPE01_00)
+    virtual void Calc();
+#elif defined(VERSION_RSPE01_01)
+    void Calc();
+#endif
+
     virtual void SetEnableChrAnm(bool enable) { // at 0x68
         if (!enable) {
             mFlags |= Flag_DisableChrAnm;
@@ -150,8 +156,6 @@ public:
     virtual nw4r::g3d::AnmObj* GetAnmObj(Anm anm, u16 idx) const = 0; // at 0x78
 
     void CreateBuffer(Anm anm, u16 num);
-
-    void Calc();
 
     s8 GetBlendIndex(Anm anm, AnmIdx idx, u8);
 

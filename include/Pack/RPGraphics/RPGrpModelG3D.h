@@ -39,6 +39,7 @@ public:
     virtual IRPGrpModelCallback*
     SetCallback(IRPGrpModelCallback* pCallback) override; // at 0x18
 
+#if defined(VERSION_RSPE01_01)
     virtual void SetCallbackJointIndex(u16 idx) override { // at 0x24
         GetScnMdlSimple()->SetScnMdlCallbackNodeID(idx);
     }
@@ -114,6 +115,7 @@ public:
     virtual void Configure() override;    // at 0x8C
     virtual void CreateAnm() override;    // at 0x90
     virtual void InternalCalc() override; // at 0x94
+#endif
 
     virtual void ExecCallback_CALC_WORLD(nw4r::g3d::ScnObj::Timing timing,
                                          nw4r::g3d::ScnObj* pObj, u32 param,

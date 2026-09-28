@@ -167,7 +167,7 @@ void* RPGrpModelResManager::GetPtr(Type type, RPGrpHandle handle,
     }
 
     case Type_ResAnmScn: {
-        return mpResList[handle].pResFile->Get().GetResAnmShp(pName).ptr();
+        return mpResList[handle].pResFile->Get().GetResAnmScn(pName).ptr();
     }
 
     default: {
@@ -223,7 +223,7 @@ void* RPGrpModelResManager::GetPtr(Type type, RPGrpHandle handle,
     }
 
     case Type_ResAnmScn: {
-        return mpResList[handle].pResFile->Get().GetResAnmShp(index).ptr();
+        return mpResList[handle].pResFile->Get().GetResAnmScn(index).ptr();
     }
 
     default: {
@@ -404,7 +404,7 @@ bool RPGrpModelResManager::HasFile(Type type, RPGrpHandle handle,
     }
 
     case Type_ResAnmScn: {
-        return mpResList[handle].pResFile->Get().GetResAnmShp(pName).IsValid();
+        return mpResList[handle].pResFile->Get().GetResAnmScn(pName).IsValid();
     }
 
     default: {
