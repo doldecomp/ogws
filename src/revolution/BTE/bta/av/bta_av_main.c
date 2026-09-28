@@ -1,5 +1,15 @@
 /******************************************************************************
  *
+ *  NOTICE OF CHANGES
+ *  2026/09/24:
+ *      - Removed AR functionality for RVL
+ * 
+ *  Compile with REVOLUTION defined to include these changes.
+ * 
+ ******************************************************************************/
+
+/******************************************************************************
+ *
  *  Copyright (C) 2004-2012 Broadcom Corporation
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
@@ -506,9 +516,6 @@ static void bta_av_api_register(tBTA_AV_DATA *p_data)
             reg.sig_tout = BTA_AV_SIG_TOUT;
             reg.idle_tout = BTA_AV_IDLE_TOUT;
             reg.sec_mask = bta_av_cb.sec_mask;
-#if( defined BTA_AR_INCLUDED ) && (BTA_AR_INCLUDED == TRUE)
-            bta_ar_reg_avdt(&reg, bta_av_conn_cback, BTA_ID_AV);
-#endif
             bta_sys_role_chg_register(&bta_av_sys_rs_cback);
 
             /* create remote control TG service if required */

@@ -5,6 +5,9 @@
  *      - Remove #include of log.h (external Android dependency)
  *      - Modified gki_init_free_queue to match RVL version
  *      - Modified GKI_enqueue to match RVL version
+ *
+ *  2026/09/24:
+ *      - Defined out functions unused for RVL
  * 
  *  Compile with REVOLUTION defined to include these changes.
  * 
@@ -989,10 +992,12 @@ void *GKI_getfirst (BUFFER_Q *p_q)
 ** Returns          NULL if queue is empty, else buffer address
 **
 *******************************************************************************/
+#ifndef REVOLUTION
 void *GKI_getlast (BUFFER_Q *p_q)
 {
     return (p_q->p_last);
 }
+#endif
 
 /*******************************************************************************
 **
@@ -1231,6 +1236,7 @@ void *GKI_igetpoolbuf (UINT8 pool_id)
 ** Returns          the total number of buffers in the pool
 **
 *******************************************************************************/
+#ifndef REVOLUTION
 UINT16 GKI_poolcount (UINT8 pool_id)
 {
     if (pool_id >= GKI_NUM_TOTAL_BUF_POOLS)
@@ -1238,7 +1244,7 @@ UINT16 GKI_poolcount (UINT8 pool_id)
 
     return (gki_cb.com.freeq[pool_id].total);
 }
-
+#endif
 /*******************************************************************************
 **
 ** Function         GKI_poolfreecount
@@ -1504,4 +1510,3 @@ UINT16 GKI_poolutilization (UINT8 pool_id)
 
     return ((Q->cur_cnt * 100) / Q->total);
 }
-

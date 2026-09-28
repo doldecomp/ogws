@@ -1,5 +1,15 @@
 /******************************************************************************
  *
+ *  NOTICE OF CHANGES
+ *  2026/09/24:
+ *      - Defined out unused functions for RVL
+ * 
+ *  Compile with REVOLUTION defined to include these changes.
+ * 
+ ******************************************************************************/
+
+/******************************************************************************
+ *
  *  Copyright (C) 1999-2012 Broadcom Corporation
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
@@ -432,6 +442,7 @@ BOOLEAN L2CA_ErtmConnectRsp (BD_ADDR p_bd_addr, UINT8 id, UINT16 lcid, UINT16 re
 ** Returns          TRUE if configuration sent, else FALSE
 **
 *******************************************************************************/
+#ifndef REVOLUTION
 BOOLEAN L2CA_ConfigReq (UINT16 cid, tL2CAP_CFG_INFO *p_cfg)
 {
     tL2C_CCB        *p_ccb;
@@ -471,7 +482,7 @@ BOOLEAN L2CA_ConfigReq (UINT16 cid, tL2CAP_CFG_INFO *p_cfg)
 
     return (TRUE);
 }
-
+#endif
 
 /*******************************************************************************
 **
@@ -1042,6 +1053,7 @@ BOOLEAN L2CA_SetTxPriority (UINT16 cid, tL2CAP_CHNL_PRIORITY priority)
 ** Returns          TRUE if a valid channel, else FALSE
 **
 *******************************************************************************/
+#ifndef REVOLUTION
 BOOLEAN L2CA_SetChnlDataRate (UINT16 cid, tL2CAP_CHNL_DATA_RATE tx, tL2CAP_CHNL_DATA_RATE rx)
 {
     tL2C_CCB        *p_ccb;
@@ -1063,6 +1075,7 @@ BOOLEAN L2CA_SetChnlDataRate (UINT16 cid, tL2CAP_CHNL_DATA_RATE tx, tL2CAP_CHNL_
 
     return(TRUE);
 }
+#endif
 
 /*******************************************************************************
 **
@@ -1809,4 +1822,3 @@ UINT16 L2CA_FlushChannel (UINT16 lcid, UINT16 num_to_flush)
 
     return (num_left);
 }
-

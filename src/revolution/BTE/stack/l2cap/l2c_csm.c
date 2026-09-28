@@ -1,5 +1,15 @@
 /******************************************************************************
  *
+ *  NOTICE OF CHANGES
+ *  2026/09/24:
+ *      - Defined out unused functions for RVL
+ * 
+ *  Compile with REVOLUTION defined to include these changes.
+ * 
+ ******************************************************************************/
+
+/******************************************************************************
+ *
  *  Copyright (C) 1999-2012 Broadcom Corporation
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
@@ -44,7 +54,9 @@ static void l2c_csm_orig_w4_sec_comp (tL2C_CCB *p_ccb, UINT16 event, void *p_dat
 static void l2c_csm_term_w4_sec_comp (tL2C_CCB *p_ccb, UINT16 event, void *p_data);
 static void l2c_csm_w4_l2cap_connect_rsp (tL2C_CCB *p_ccb, UINT16 event, void *p_data);
 static void l2c_csm_w4_l2ca_connect_rsp (tL2C_CCB *p_ccb, UINT16 event, void *p_data);
+#ifndef REVOLUTION
 static void l2c_csm_config (tL2C_CCB *p_ccb, UINT16 event, void *p_data);
+#endif
 static void l2c_csm_open (tL2C_CCB *p_ccb, UINT16 event, void *p_data);
 static void l2c_csm_w4_l2cap_disconnect_rsp (tL2C_CCB *p_ccb, UINT16 event, void *p_data);
 static void l2c_csm_w4_l2ca_disconnect_rsp (tL2C_CCB *p_ccb, UINT16 event, void *p_data);
@@ -86,9 +98,11 @@ void l2c_csm_execute (tL2C_CCB *p_ccb, UINT16 event, void *p_data)
         l2c_csm_w4_l2ca_connect_rsp (p_ccb, event, p_data);
         break;
 
+#ifndef REVOLUTION
     case CST_CONFIG:
         l2c_csm_config (p_ccb, event, p_data);
         break;
+#endif
 
     case CST_OPEN:
         l2c_csm_open (p_ccb, event, p_data);
@@ -700,6 +714,7 @@ static void l2c_csm_w4_l2ca_connect_rsp (tL2C_CCB *p_ccb, UINT16 event, void *p_
 ** Returns          void
 **
 *******************************************************************************/
+#ifndef REVOLUTION
 static void l2c_csm_config (tL2C_CCB *p_ccb, UINT16 event, void *p_data)
 {
     tL2CAP_CFG_INFO         *p_cfg = (tL2CAP_CFG_INFO *)p_data;
@@ -920,7 +935,7 @@ static void l2c_csm_config (tL2C_CCB *p_ccb, UINT16 event, void *p_data)
         break;
     }
 }
-
+#endif
 
 /*******************************************************************************
 **
@@ -1329,5 +1344,3 @@ void l2c_enqueue_peer_data (tL2C_CCB *p_ccb, BT_HDR *p_buf)
     if (p_ccb->p_lcb->link_xmit_quota == 0)
         l2cb.check_round_robin = TRUE;
 }
-
-

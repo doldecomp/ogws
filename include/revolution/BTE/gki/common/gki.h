@@ -1,5 +1,15 @@
 /******************************************************************************
  *
+ *  NOTICE OF CHANGES
+ *  2026/09/24:
+ *      - Defined out functions unused in RVL
+ * 
+ *  Compile with REVOLUTION defined to include these changes.
+ * 
+ ******************************************************************************/
+
+/******************************************************************************
+ *
  *  Copyright (C) 1999-2012 Broadcom Corporation
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
@@ -409,7 +419,9 @@ GKI_API extern void    GKI_freebuf (void *);
 GKI_API extern void   *GKI_getbuf (UINT16);
 GKI_API extern UINT16  GKI_get_buf_size (void *);
 GKI_API extern void   *GKI_getpoolbuf (UINT8);
+#ifndef REVOLUTION
 GKI_API extern UINT16  GKI_poolcount (UINT8);
+#endif
 GKI_API extern UINT16  GKI_poolfreecount (UINT8);
 GKI_API extern UINT16  GKI_poolutilization (UINT8);
 GKI_API extern void    GKI_register_mempool (void *p_mem);
@@ -422,7 +434,9 @@ GKI_API extern void   *GKI_dequeue  (BUFFER_Q *);
 GKI_API extern void    GKI_enqueue (BUFFER_Q *, void *);
 GKI_API extern void    GKI_enqueue_head (BUFFER_Q *, void *);
 GKI_API extern void   *GKI_getfirst (BUFFER_Q *);
+#ifndef REVOLUTION
 GKI_API extern void   *GKI_getlast (BUFFER_Q *);
+#endif
 GKI_API extern void   *GKI_getnext (void *);
 GKI_API extern void    GKI_init_q (BUFFER_Q *);
 GKI_API extern BOOLEAN GKI_queue_is_empty(BUFFER_Q *);
@@ -443,7 +457,9 @@ GKI_API extern void    GKI_start_timer(UINT8, INT32, BOOLEAN);
 GKI_API extern void    GKI_stop_timer (UINT8);
 GKI_API extern void    GKI_timer_update(INT32);
 GKI_API extern UINT16  GKI_update_timer_list (TIMER_LIST_Q *, INT32);
+#ifndef REVOLUTION
 GKI_API extern UINT32  GKI_get_remaining_ticks (TIMER_LIST_Q *, TIMER_LIST_ENT  *);
+#endif
 GKI_API extern UINT16  GKI_wait(UINT16, UINT32);
 
 /* Start and Stop system time tick callback
@@ -454,7 +470,9 @@ typedef void (SYSTEM_TICK_CBACK)(BOOLEAN);
 
 /* Time queue management for system ticks
 */
+#ifndef REVOLUTION
 GKI_API extern BOOLEAN GKI_timer_queue_empty (void);
+#endif
 GKI_API extern void    GKI_timer_queue_register_callback(SYSTEM_TICK_CBACK *);
 
 /* Disable Interrupts, Enable Interrupts

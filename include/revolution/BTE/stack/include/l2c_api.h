@@ -1,5 +1,15 @@
 /******************************************************************************
  *
+ *  NOTICE OF CHANGES
+ *  2026/09/24:
+ *      - Defined out unused functions for RVL
+ * 
+ *  Compile with REVOLUTION defined to include these changes.
+ * 
+ ******************************************************************************/
+
+/******************************************************************************
+ *
  *  Copyright (C) 1999-2012 Broadcom Corporation
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
@@ -61,6 +71,7 @@
 
 typedef UINT8 tL2CAP_CHNL_PRIORITY;
 
+#ifndef REVOLUTION
 /* Values for Tx/Rx data rate parameter to L2CA_SetChnlDataRate */
 #define L2CAP_CHNL_DATA_RATE_HIGH       3
 #define L2CAP_CHNL_DATA_RATE_MEDIUM     2
@@ -68,6 +79,7 @@ typedef UINT8 tL2CAP_CHNL_PRIORITY;
 #define L2CAP_CHNL_DATA_RATE_NO_TRAFFIC 0
 
 typedef UINT8 tL2CAP_CHNL_DATA_RATE;
+#endif
 
 /* Data Packet Flags  (bits 2-15 are reserved) */
 /* layer specific 14-15 bits are used for FCR SAR */
@@ -694,9 +706,12 @@ L2C_API extern BOOLEAN L2CA_RegForNoCPEvt(tL2CA_NOCP_CB *p_cb, BD_ADDR p_bda);
 ** Returns          TRUE if a valid channel, else FALSE
 **
 *******************************************************************************/
+#ifndef REVOLUTION
 L2C_API extern BOOLEAN L2CA_SetChnlDataRate (UINT16 cid, tL2CAP_CHNL_DATA_RATE tx, tL2CAP_CHNL_DATA_RATE rx);
 
+
 typedef void (tL2CA_RESERVE_CMPL_CBACK) (void);
+#endif
 
 /*******************************************************************************
 **
