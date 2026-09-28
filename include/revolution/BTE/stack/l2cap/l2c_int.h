@@ -1,5 +1,15 @@
 /******************************************************************************
  *
+ *  NOTICE OF CHANGES
+ *  2026/09/24:
+ *      - Removed l2c_fcr functionality for RVL
+ * 
+ *  Compile with REVOLUTION defined to include these changes.
+ * 
+ ******************************************************************************/
+
+/******************************************************************************
+ *
  *  Copyright (C) 1999-2012 Broadcom Corporation
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
@@ -151,6 +161,7 @@ typedef enum
 
 #define L2CAP_MAX_FCR_CFG_TRIES         2       /* Config attempts before disconnecting */
 
+#ifndef REVOLUTION
 /* Only compiled in when in test mode. Production devices must not include
 */
 #if L2CAP_CORRUPT_ERTM_PKTS == TRUE
@@ -239,7 +250,7 @@ typedef struct
 #endif
 
 } tL2C_FCRB;
-
+#endif // REVOLUTION
 
 /* Define a registration control block. Every application (e.g. RFCOMM, SDP,
 ** TCS etc) that registers with L2CAP is assigned one of these.
@@ -315,9 +326,11 @@ typedef struct t_l2c_ccb
     BOOLEAN             cong_sent;              /* Set when congested status sent   */
     UINT16              buff_quota;             /* Buffer quota before sending congestion   */
 
+#ifndef REVOLUTION
     tL2CAP_CHNL_PRIORITY ccb_priority;          /* Channel priority                 */
     tL2CAP_CHNL_DATA_RATE tx_data_rate;         /* Channel Tx data rate             */
     tL2CAP_CHNL_DATA_RATE rx_data_rate;         /* Channel Rx data rate             */
+#endif
 
     /* Fields used for eL2CAP */
     tL2CAP_ERTM_INFO    ertm_info;
@@ -702,7 +715,9 @@ extern void     l2c_link_role_changed (BD_ADDR bd_addr, UINT8 new_role, UINT8 hc
 extern void     l2c_link_sec_comp (BD_ADDR p_bda, void *p_ref_data, UINT8 status);
 extern void     l2c_link_segments_xmitted (BT_HDR *p_msg);
 extern void     l2c_pin_code_request (BD_ADDR bd_addr);
+#ifndef REVOLUTION
 extern void     l2c_link_adjust_chnl_allocation (void);
+#endif
 
 #if (BLE_INCLUDED == TRUE)
 extern void     l2c_link_processs_ble_num_bufs (UINT16 num_lm_acl_bufs);
@@ -730,7 +745,7 @@ L2C_API extern BOOLEAN   l2cap_link_chk_pkt_end (void);         /* Called at end
 
 L2C_API extern void     l2c_enqueue_peer_data (tL2C_CCB *p_ccb, BT_HDR *p_buf);
 
-
+#ifndef REVOLUTION
 /* Functions provided by l2c_fcr.c
 ************************************
 */
@@ -752,6 +767,7 @@ extern BOOLEAN  l2c_fcr_renegotiate_chan(tL2C_CCB *p_ccb, tL2CAP_CFG_INFO *p_cfg
 extern UINT8    l2c_fcr_process_peer_cfg_req(tL2C_CCB *p_ccb, tL2CAP_CFG_INFO *p_cfg);
 extern void     l2c_fcr_adj_monitor_retran_timeout (tL2C_CCB *p_ccb);
 extern void     l2c_fcr_stop_timer (tL2C_CCB *p_ccb);
+#endif
 
 /* Functions provided by l2c_ble.c
 ************************************

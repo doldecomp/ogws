@@ -13,7 +13,7 @@ jobs:
       fail-fast: false
       matrix:
         # Add game versions here
-        version: [RSPE01_01]
+        version: [RSPE01_00, RSPE01_01]
 
     steps:
       # Checkout the repository
