@@ -47,8 +47,7 @@ u8 RPSysPlayerMgr::getChannel(s32 idx) const {
  * @param player Player index
  */
 u32 RPSysPlayerMgr::getSpeakerFlag(s32 player) const {
-    // TODO(kiwi) Uses something from RPSysCoreController
-    s32 chan = getChannel(player);
+    s32 chan = (player < 0) ? RPSysCoreController::getActiveController()->getPlayerNo() : getChannel(player);
 
     if (chan == WPAD_CHAN0) {
         return 1 << WPAD_CHAN0;
