@@ -35,11 +35,8 @@ public:
         // Limited to u16 bounds
         u16 iRnd = static_cast<u16>(RANDF_MAX & (getU32() >> RANDF_SHIFT));
 
-        // Convert to float
-        f32 fRnd = static_cast<f32>(iRnd);
-
         // Convert to percentage (+1 makes the upper bound exclusive!)
-        return fRnd / static_cast<f32>(RANDF_MAX + 1);
+        return static_cast<f32>(iRnd) / static_cast<f32>(RANDF_MAX + 1);
     }
 
 private:

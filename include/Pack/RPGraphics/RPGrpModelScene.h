@@ -9,12 +9,20 @@
 class RPGrpCamera;
 class RPGrpScreen;
 
+namespace EGG {
+class ScnRenderer;
+}
+
 /**
  * @brief Model rendering scene
  */
 class RPGrpModelScene {
 private:
-    char unk00[0xA4];
+    char unk00[0x2];
+    u8 mCameraIndex; // at 0x2
+    char unk03[0x9C - 0x3];
+    EGG::ScnRenderer* mpScnRenderer; // at 0x9C
+    char unkA0[0xA4 - 0xA0];
 
 public:
     virtual ~RPGrpModelScene();                      // at 0x8
