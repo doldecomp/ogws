@@ -4,8 +4,8 @@
 
 #include <nw4r/snd/snd_Types.h>
 #include <nw4r/snd/snd_Util.h>
-
 #include <nw4r/ut.h>
+
 
 namespace nw4r {
 namespace snd {
@@ -104,7 +104,7 @@ struct StrmInfo {
 class StrmFileReader {
 public:
     static const u32 SIGNATURE = FOURCC('R', 'S', 'T', 'M');
-    static const int VERSION = NW4R_VERSION(1, 0);
+    static const int VERSION = NW4R_FILE_VERSION(1, 0);
 
 public:
     StrmFileReader();

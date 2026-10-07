@@ -274,6 +274,7 @@ else:
     else:
         cflags_base.extend([
             "-DNDEBUG",
+            "-DNW4R_DISABLE_MAPFILE",
             "-DEGG_DEBUG",
             "-DRP_PRODUCT",
         ])
@@ -282,6 +283,11 @@ else:
         cflags_base.append({
             RSPE01_00: "-DNW4R_RELEASE",
             RSPE01_01: "-DNW4R_PRODUCT",
+        }[config.version])
+
+        cflags_base.append({
+            RSPE01_00: "-DNW4R_VERSION=0",
+            RSPE01_01: "-DNW4R_VERSION=20070608",
         }[config.version])
 
 # Warning flags
@@ -738,9 +744,9 @@ config.libs = [
         "cflags": cflags_libnw4r_db,
         "progress_category": "nw4r",
         "objects": [
-            Object(NonMatching, "nw4r/db/db_directPrint.cpp"),
+            Object(Matching, "nw4r/db/db_directPrint.cpp"),
             Object(Matching, "nw4r/db/db_console.cpp"),
-            Object(NonMatching, "nw4r/db/db_exception.cpp"),
+            Object(Matching, "nw4r/db/db_exception.cpp"),
         ]
     },
     {

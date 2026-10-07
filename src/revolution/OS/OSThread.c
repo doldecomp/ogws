@@ -472,7 +472,7 @@ BOOL OSCreateThread(OSThread* thread, OSThreadFunc func, void* funcArg,
     }
 
     enabled = OSDisableInterrupts();
-    if (__OSErrorTable[OS_ERR_FP_EXCEPTION] != NULL) {
+    if (__OSErrorTable[OS_ERROR_FPE] != NULL) {
         thread->context.srr1 |= 0x900;
         thread->context.state |= 0x1;
         thread->context.fpscr = __OSFpscrEnableBits & 0xF8;

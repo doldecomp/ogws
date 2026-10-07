@@ -1,6 +1,9 @@
 #ifndef RVL_SDK_OS_ALARM_H
 #define RVL_SDK_OS_ALARM_H
 #include <types.h>
+
+#include <revolution/OS/OSTime.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -14,11 +17,11 @@ typedef void (*OSAlarmHandler)(OSAlarm* alarm, OSContext* ctx);
 typedef struct OSAlarm {
     OSAlarmHandler handler; // at 0x0
     u32 tag;                // at 0x4
-    s64 end;                // at 0x8
+    OSTime fire;            // at 0x8
     OSAlarm* prev;          // at 0x10
     OSAlarm* next;          // at 0x14
     s64 period;             // at 0x18
-    s64 start;              // at 0x20
+    OSTime start;           // at 0x20
     void* userData;         // at 0x28
 } OSAlarm;
 
@@ -30,7 +33,7 @@ typedef struct OSAlarmQueue {
 void __OSInitAlarm(void);
 void OSCreateAlarm(OSAlarm* alarm);
 void OSSetAlarm(OSAlarm* alarm, s64 tick, OSAlarmHandler handler);
-void OSSetPeriodicAlarm(OSAlarm* alarm, s64 tick, s64 period,
+void OSSetPeriodicAlarm(OSAlarm* alarm, OSTime start, s64 period,
                         OSAlarmHandler handler);
 void OSCancelAlarm(OSAlarm* alarm);
 void OSSetAlarmTag(OSAlarm* alarm, u32 tag);

@@ -89,7 +89,7 @@ private:
     WPADCallback mWpadCallback;      // at 0x3C
     OSAlarm mContinueAlarm;          // at 0x40
     OSAlarm mIntervalAlarm;          // at 0x70
-    s64 mContinueBeginTime;          // at 0xA0
+    OSTime mContinueBeginTime;       // at 0xA0
 };
 
 } // namespace snd

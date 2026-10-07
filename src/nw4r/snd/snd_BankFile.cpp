@@ -21,7 +21,7 @@ bool BankFileReader::IsValidFileHeader(const void* pBankBin) {
         return false;
     }
 
-    if (pFileHeader->version < NW4R_VERSION(1, 0)) {
+    if (pFileHeader->version < NW4R_FILE_VERSION(1, 0)) {
         return false;
     }
 

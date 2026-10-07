@@ -58,7 +58,7 @@ static const u8* SearchEndOfLine_(const u8* pStr) {
 
 static u32 GetTabSize_(ConsoleHandle console) {
     s32 tab =
-        (console->attr & (CONSOLE_ATTR_INDENT4 | CONSOLE_ATTR_INDENT8)) >> 2;
+        (console->attr & (CONSOLE_ATTR_INDENT_4 | CONSOLE_ATTR_INDENT_8)) >> 2;
 
     return 2 << tab;
 }
@@ -147,7 +147,7 @@ static ConsoleHandle SearchConsoleFromListByPriority_(u16 priority) {
     return console;
 }
 
-static void AppendConsoleToList(ConsoleHandle console) {
+static void AppendConsoleToList_(ConsoleHandle console) {
     NW4R_NULL_ASSERT(console);
 
     OSLockMutex(&sMutex);
@@ -165,7 +165,7 @@ static void AppendConsoleToList(ConsoleHandle console) {
     OSUnlockMutex(&sMutex);
 }
 
-static void RemoveConsoleFromList(ConsoleHandle console) DECOMP_DONT_INLINE {
+static void RemoveConsoleFromList_(ConsoleHandle console) DECOMP_DONT_INLINE {
     NW4R_NULL_ASSERT(console);
 
     OSLockMutex(&sMutex);
@@ -221,7 +221,7 @@ ConsoleHandle Console_Create(void* pConsoleWork, u16 width, u16 height,
     console->writer = NULL;
 
     Console_Clear(console);
-    AppendConsoleToList(console);
+    AppendConsoleToList_(console);
 
     return console;
 }
@@ -229,7 +229,7 @@ ConsoleHandle Console_Create(void* pConsoleWork, u16 width, u16 height,
 ConsoleHandle Console_Destroy(ConsoleHandle console) {
     NW4R_NULL_ASSERT(console);
 
-    RemoveConsoleFromList(console);
+    RemoveConsoleFromList_(console);
     return console;
 }
 

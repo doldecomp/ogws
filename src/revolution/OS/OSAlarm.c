@@ -9,7 +9,7 @@ static OSAlarmQueue AlarmQueue;
 static OSShutdownFunctionInfo ShutdownFunctionInfo = {OnReset, 0xFFFFFFFF};
 
 static void SetTimer(const OSAlarm* alarm) {
-    s64 timeLeft = alarm->end - __OSGetSystemTime();
+    s64 timeLeft = alarm->fire - __OSGetSystemTime();
 
     if (timeLeft < 0) {
         PPCMtdec(0);
@@ -21,10 +21,10 @@ static void SetTimer(const OSAlarm* alarm) {
 }
 
 void __OSInitAlarm(void) {
-    if (__OSGetExceptionHandler(OS_ERR_DECREMENTER) !=
+    if (__OSGetExceptionHandler(OS_ERROR_DECREMENTER) !=
         DecrementerExceptionHandler) {
         AlarmQueue.head = AlarmQueue.tail = NULL;
-        __OSSetExceptionHandler(OS_ERR_DECREMENTER,
+        __OSSetExceptionHandler(OS_ERROR_DECREMENTER,
                                 DecrementerExceptionHandler);
         OSRegisterShutdownFunction(&ShutdownFunctionInfo);
     }
@@ -51,11 +51,11 @@ static void InsertAlarm(OSAlarm* alarm, s64 end, OSAlarmHandler handler) {
     }
 
     alarm->handler = handler;
-    alarm->end = end;
+    alarm->fire = end;
 
     // Find position to insert alarm (sorted ascending by end time)
     for (iter = AlarmQueue.head; iter != NULL; iter = iter->next) {
-        if (iter->end <= end) {
+        if (iter->fire <= end) {
             continue;
         }
 
@@ -97,12 +97,12 @@ void OSSetAlarm(OSAlarm* alarm, s64 tick, OSAlarmHandler handler) {
     OSRestoreInterrupts(enabled);
 }
 
-void OSSetPeriodicAlarm(OSAlarm* alarm, s64 tick, s64 period,
+void OSSetPeriodicAlarm(OSAlarm* alarm, OSTime start, s64 period,
                         OSAlarmHandler handler) {
     BOOL enabled = OSDisableInterrupts();
 
     alarm->period = period;
-    alarm->start = __OSTimeToSystemTime(tick);
+    alarm->start = __OSTimeToSystemTime(start);
     InsertAlarm(alarm, 0, handler);
 
     OSRestoreInterrupts(enabled);
@@ -154,7 +154,7 @@ static void DecrementerExceptionCallback(u8 type, OSContext* ctx) {
         OSLoadContext(ctx);
     }
 
-    if (time < alarm->end) {
+    if (time < alarm->fire) {
         SetTimer(alarm);
         OSLoadContext(ctx);
     }

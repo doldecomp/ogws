@@ -19,8 +19,8 @@ enum ConsoleOutputType {
 enum ConsoleAttr {
     CONSOLE_ATTR_NO_WRAP = 1 << 0,
     CONSOLE_ATTR_NO_OVERFLOW = 1 << 1,
-    CONSOLE_ATTR_INDENT4 = 1 << 2,
-    CONSOLE_ATTR_INDENT8 = 1 << 3,
+    CONSOLE_ATTR_INDENT_4 = 1 << 2,
+    CONSOLE_ATTR_INDENT_8 = 1 << 3,
 };
 
 namespace detail {
@@ -40,7 +40,7 @@ struct ConsoleHead {
     s16 viewPosX;                 // at 0x1C
     s16 viewPosY;                 // at 0x1E
     u16 viewLines;                // at 0x20
-    u8 isVisible;                 // at 0x22
+    bool isVisible;               // at 0x22
     u8 PADDING[0x24 - 0x23];      // at 0x23
     nw4r::ut::TextWriter* writer; // at 0x24
     ConsoleHead* next;            // at 0x28
@@ -73,10 +73,53 @@ static inline void Console_VPrintf(ConsoleHandle console, const char* pFmt,
     Console_VFPrintf(CONSOLE_OUTPUT_ALL, console, pFmt, argv);
 }
 
+static inline void Console_VPrintfD(ConsoleHandle console, const char* pFmt,
+                                    std::va_list argv) {
+
+    Console_VFPrintf(CONSOLE_OUTPUT_DISPLAY, console, pFmt, argv);
+}
+
+static inline void Console_VPrintfT(ConsoleHandle console, const char* pFmt,
+                                    std::va_list argv) {
+
+    Console_VFPrintf(CONSOLE_OUTPUT_TERMINAL, console, pFmt, argv);
+}
+
+static inline s32 Console_GetBufferHeadLine(ConsoleHandle console) {
+    NW4R_NULL_ASSERT(console);
+
+    return console->ringTopLineCnt;
+}
+
+static inline s16 Console_GetPositionX(ConsoleHandle console) {
+    NW4R_NULL_ASSERT(console);
+
+    return console->viewPosX;
+}
+
+static inline s16 Console_GetPositionY(ConsoleHandle console) {
+    NW4R_NULL_ASSERT(console);
+
+    return console->viewPosY;
+}
+
+static inline void Console_SetPosition(ConsoleHandle console, s32 x, s32 y) {
+    NW4R_NULL_ASSERT(console);
+
+    console->viewPosX = x;
+    console->viewPosY = y;
+}
+
 static inline u16 Console_GetViewHeight(ConsoleHandle console) {
     NW4R_NULL_ASSERT(LINE(433), console);
 
     return console->viewLines;
+}
+
+static inline bool Console_IsVisible(ConsoleHandle console) {
+    NW4R_NULL_ASSERT(console);
+
+    return console->isVisible;
 }
 
 static inline bool Console_SetVisible(ConsoleHandle console, bool visible) {

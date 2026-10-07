@@ -15,6 +15,13 @@
 namespace nw4r {
 namespace db {
 
+// Forward declarations
+static void DrawStringToXfb_(int x, int y, const char* pStr, bool turnOver,
+                             bool backErase);
+static const char* DrawStringLineToXfb_(int x, int y, const char* str,
+                                        int width);
+static void DrawCharToXfb_(int x, int y, int code);
+
 struct FrameBufferInfo {
     u8* frameMemory; // at 0x0
     u32 frameSize;   // at 0x4
@@ -86,12 +93,33 @@ static const u32 sFontData2[] = {
     0xF8000000, 0x10000000, 0x20000000, 0x40000000, 0xF8000000,
 };
 
-static int GetDotHeight_() {
+static inline int GetDotWidth_() {
+    return sFrameBufferInfo.frameWidth < 400 ? 1 : 2;
+}
+
+static inline int GetDotHeight_() {
     return sFrameBufferInfo.frameHeight < 300 ? 1 : 2;
 }
 
-static int GetDotWidth_() {
-    return sFrameBufferInfo.frameWidth < 400 ? 1 : 2;
+static inline int StrLineWidth_(const char* pStr) {
+    int len = 0;
+    char c;
+
+    NW4R_NULL_ASSERT(LINE(304), pStr);
+
+    while (true) {
+        c = *pStr++;
+
+        if (c == '\0' || c == '\n') {
+            return len;
+        }
+
+        if (c == '\t') {
+            len = ROUND_DOWN(len + 4, 4);
+        } else {
+            len++;
+        }
+    }
 }
 
 void DirectPrint_Init() {
@@ -254,25 +282,113 @@ GXColor DirectPrint_GetColor() {
     return sFrameBufferColor.colorRGBA;
 }
 
-static int StrLineWidth_(const char* pStr) {
-    int len = 0;
-    char c;
+namespace detail {
 
-    NW4R_NULL_ASSERT(LINE(304), pStr);
+void DirectPrint_DrawStringToXfb(int x, int y, const char* pFmt,
+                                 std::va_list list, bool turnOver,
+                                 bool backErase) {
+    NW4R_NULL_ASSERT(LINE(645), sFrameBufferInfo.frameMemory);
 
-    while (true) {
-        c = *pStr++;
+    char buffer[256];
+    int length = std::vsnprintf(buffer, sizeof(buffer), pFmt, list);
 
-        if (c == '\0' || c == '\n') {
-            return len;
+    int start = x; // unused
+    if (length > 0) {
+        DrawStringToXfb_(x, y, buffer, turnOver, backErase);
+    }
+}
+
+} // namespace detail
+
+static void DrawStringToXfb_(int x, int y, const char* pStr, bool turnOver,
+                             bool backErase) {
+    int x1;
+    int width, fbWidth;
+
+    x1 = x;
+    fbWidth = sFrameBufferInfo.frameWidth / GetDotWidth_();
+
+    while (*pStr != '\0') {
+        if (backErase) {
+            int len = StrLineWidth_(pStr);
+            DirectPrint_EraseXfb(x - 6, y - 3,
+                                 (len + 2) * NW4R_DB_FONT_CHAR_WIDTH, 13);
         }
 
-        if (c == '\t') {
-            len = ROUND_DOWN(len + 4, 4);
-        } else {
-            len++;
+        width = (fbWidth - x) / NW4R_DB_FONT_CHAR_WIDTH;
+        pStr = DrawStringLineToXfb_(x, y, pStr, width);
+        y += NW4R_DB_FONT_LEADING;
+
+        if (*pStr == '\n') {
+            pStr++;
+            x = x1;
+        } else if (*pStr != '\0') {
+            pStr++;
+
+            if (!turnOver) {
+                pStr = std::strchr(pStr, '\n');
+                if (pStr == NULL) {
+                    break;
+                }
+
+                pStr++;
+                x = x1;
+            } else {
+                x = 0;
+            }
         }
     }
+}
+
+static const char* DrawStringLineToXfb_(int x, int y, const char* str,
+                                        int width) {
+    char ch;
+    int code;
+    int count = 0;
+
+    NW4R_NULL_ASSERT(LINE(743), str);
+    NW4R_ASSERT(LINE(744), width > 0);
+
+    while ((ch = *str) != '\0') {
+        // Line or string has ended, stop drawing
+        if (ch == '\n' || ch == '\0') {
+            return str;
+        }
+
+        // Convert to font code
+        code = sAsciiTable[ch & 0x7F];
+
+        // Tab character
+        if (code == 0xFD) {
+            int tabSize = TAB_SIZE - (count & (TAB_SIZE - 1));
+            x += tabSize * NW4R_DB_FONT_CHAR_WIDTH;
+            count += tabSize;
+        } else {
+            // Non-tab character
+            if (code != 0xFF) {
+                DrawCharToXfb_(x, y, code);
+            }
+
+            // 0xFF is treated as whitespace
+            x += NW4R_DB_FONT_CHAR_WIDTH;
+            count++;
+        }
+
+        // Stop at max line width
+        if (count >= width) {
+            // Skip over newline if it comes next.
+            // It wouldn't take up view space anyways.
+            if (str[1] == '\n') {
+                str++;
+            }
+
+            return str;
+        }
+
+        str++;
+    }
+
+    return str;
 }
 
 static void DrawCharToXfb_(int x, int y, int code) {
@@ -352,112 +468,7 @@ static void DrawCharToXfb_(int x, int y, int code) {
     }
 }
 
-static const char* DrawStringLineToXfb_(int x, int y, const char* str,
-                                        int width) {
-    char ch;
-    int code;
-    int count = 0;
-
-    NW4R_NULL_ASSERT(LINE(743), str);
-    NW4R_ASSERT(LINE(744), width > 0);
-
-    while ((ch = *str) != '\0') {
-        // Line or string has ended, stop drawing
-        if (ch == '\n' || ch == '\0') {
-            return str;
-        }
-
-        // Convert to font code
-        code = sAsciiTable[ch & 0x7F];
-
-        // Tab character
-        if (code == 0xFD) {
-            int tabSize = TAB_SIZE - (count & (TAB_SIZE - 1));
-            x += tabSize * NW4R_DB_FONT_CHAR_WIDTH;
-            count += tabSize;
-        } else {
-            // Non-tab character
-            if (code != 0xFF) {
-                DrawCharToXfb_(x, y, code);
-            }
-
-            // 0xFF is treated as whitespace
-            x += NW4R_DB_FONT_CHAR_WIDTH;
-            count++;
-        }
-
-        // Stop at max line width
-        if (count >= width) {
-            // Skip over newline if it comes next.
-            // It wouldn't take up view space anyways.
-            if (str[1] == '\n') {
-                str++;
-            }
-
-            return str;
-        }
-
-        str++;
-    }
-
-    return str;
-}
-
-static void DrawStringToXfb_(int x, int y, const char* pStr, bool turnOver,
-                             bool backErase) {
-    int x1;
-    int width, fbWidth;
-
-    x1 = x;
-    fbWidth = sFrameBufferInfo.frameWidth / GetDotWidth_();
-
-    while (*pStr != '\0') {
-        if (backErase) {
-            int len = StrLineWidth_(pStr);
-            DirectPrint_EraseXfb(x - 6, y - 3,
-                                 (len + 2) * NW4R_DB_FONT_CHAR_WIDTH, 13);
-        }
-
-        width = (fbWidth - x) / NW4R_DB_FONT_CHAR_WIDTH;
-        pStr = DrawStringLineToXfb_(x, y, pStr, width);
-        y += NW4R_DB_FONT_LEADING;
-
-        if (*pStr == '\n') {
-            pStr++;
-            x = x1;
-        } else if (*pStr != '\0') {
-            pStr++;
-
-            if (!turnOver) {
-                pStr = std::strchr(pStr, '\n');
-                if (pStr == NULL) {
-                    break;
-                }
-
-                pStr++;
-                x = x1;
-            } else {
-                x = 0;
-            }
-        }
-    }
-}
-
 namespace detail {
-
-void DirectPrint_DrawStringToXfb(int x, int y, const char* pFmt,
-                                 std::va_list list, bool turnOver,
-                                 bool backErase) {
-    NW4R_NULL_ASSERT(LINE(645), sFrameBufferInfo.frameMemory);
-
-    char buffer[256];
-    int length = std::vsnprintf(buffer, sizeof(buffer), pFmt, list);
-
-    int start = x; // unused
-    if (length > 0) {
-        DrawStringToXfb_(x, y, buffer, turnOver, backErase);
-    }
-}
 
 static void WaitVIRetrace_() {
     BOOL enabled = OSEnableInterrupts();

@@ -37,12 +37,13 @@ bool ResFont::SetResource(void* pBuffer) {
                 reinterpret_cast<char*>(pBlock) + pBlock->size);
         }
     } else {
-        if (pHeader->version == NW4R_VERSION(1, 4)) {
-            if (!IsValidBinaryFile(pHeader, SIGNATURE, NW4R_VERSION(1, 4), 2)) {
+        if (pHeader->version == NW4R_FILE_VERSION(1, 4)) {
+            if (!IsValidBinaryFile(pHeader, SIGNATURE, NW4R_FILE_VERSION(1, 4),
+                                   2)) {
                 return false;
             }
-        } else if (!IsValidBinaryFile(pHeader, SIGNATURE, NW4R_VERSION(1, 2),
-                                      2)) {
+        } else if (!IsValidBinaryFile(pHeader, SIGNATURE,
+                                      NW4R_FILE_VERSION(1, 2), 2)) {
             return false;
         }
 

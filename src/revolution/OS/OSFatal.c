@@ -231,7 +231,7 @@ void OSFatal(GXColor textColor, GXColor bgColor, const char* msg) {
         ;
     }
 
-    __OSSetExceptionHandler(OS_ERR_DECREMENTER, OSDefaultExceptionHandler);
+    __OSSetExceptionHandler(OS_ERROR_DECREMENTER, OSDefaultExceptionHandler);
 
     GXAbortFrame();
 

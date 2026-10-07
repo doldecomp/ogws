@@ -34,8 +34,6 @@ void L2Enable(void);
 void L2Disable(void);
 void L2GlobalInvalidate(void);
 
-void DMAErrorHandler(u8 error, OSContext* ctx, u32 dsisr, u32 dar, ...);
-
 void __OSCacheInit(void);
 
 #ifdef __cplusplus

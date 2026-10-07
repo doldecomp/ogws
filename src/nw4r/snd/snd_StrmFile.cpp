@@ -13,7 +13,7 @@ bool StrmFileReader::IsValidFileHeader(const void* pStrmBin) {
         return false;
     }
 
-    if (pFileHeader->version < NW4R_VERSION(1, 0)) {
+    if (pFileHeader->version < NW4R_FILE_VERSION(1, 0)) {
         return false;
     }
 

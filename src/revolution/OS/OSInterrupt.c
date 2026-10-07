@@ -116,7 +116,8 @@ void __OSInterruptInit(void) {
         OS_INTR_MASK(OS_INTR_PI_VI) | OS_INTR_MASK(OS_INTR_PI_DEBUG) |
         OS_INTR_MASK(OS_INTR_PI_HSP) | OS_INTR_MASK(OS_INTR_PI_ACR));
 
-    __OSSetExceptionHandler(OS_ERR_EXT_INTERRUPT, ExternalInterruptHandler);
+    __OSSetExceptionHandler(OS_ERROR_EXTERNAL_INTERRUPT,
+                            ExternalInterruptHandler);
 }
 
 static u32 SetInterruptMask(u32 type, u32 mask) {

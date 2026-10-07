@@ -5,13 +5,33 @@
 
 #include <decomp/assertion.h>
 
+#include <revolution/OS.h>
+
 namespace nw4r {
 namespace db {
 
-void Panic(const char* pFile, int line, const char* pFmt, ...);
-void VWarning(const char* pFile, int line, const char* pFmt, std::va_list argv);
-void Warning(const char* pFile, int line, const char* pFmt, ...);
-void Log(const char* pFmt, ...);
+// Forward declarations
+namespace detail {
+struct ConsoleHead;
+} // namespace detail
+typedef nw4r::db::detail::ConsoleHead* ConsoleHandle;
+
+/* DECL_WEAK */ void VPanic(const char* pFile, int line, const char* pFmt,
+                            std::va_list argv, bool halt);
+/* DECL_WEAK */ void Panic(const char* pFile, int line, const char* pFmt, ...);
+
+/* DECL_WEAK */ void VWarning(const char* pFile, int line, const char* pFmt,
+                              std::va_list argv);
+/* DECL_WEAK */ void Warning(const char* pFile, int line, const char* pFmt,
+                             ...);
+
+/* DECL_WEAK */ void Log(const char* pFmt, ...);
+
+ConsoleHandle Assertion_SetConsole(ConsoleHandle console);
+ConsoleHandle Assertion_GetConsole();
+
+void Assertion_ShowConsole(OSTick time);
+void Assertion_SetWarningTime(OSTick time);
 
 } // namespace db
 } // namespace nw4r
@@ -22,6 +42,9 @@ void Log(const char* pFmt, ...);
 #define NW4R_LINES(...) __LINE__
 
 // clang-format off
+
+//! Logs a message
+#define NW4R_LOG(...) nw4r::db::Log(__VA_ARGS__)
 
 //! Emits a warning
 #define NW4R_WARN(...) DECOMP_ASSERT(NW4R_WARN_IMPL, NW4R_LINES, __VA_ARGS__)
@@ -36,14 +59,6 @@ void Log(const char* pFmt, ...);
 //! Halts the program if the specified condition does not hold
 #define NW4R_ASSERT(...) DECOMP_ASSERT(NW4R_ASSERT_IMPL, NW4R_LINES, __VA_ARGS__)
 #define NW4R_ASSERT_IMPL(file, line, exp)                                      \
-    ((exp) && 1 ||                                                             \
-        (nw4r::db::Panic(file, line,                                           \
-            "NW4R:Failed assertion " #exp),                                    \
-                0))
-
-//! Halts the program if the specified value falls outside the range
-#define NW4R_RANGE_ASSERT(...) DECOMP_ASSERT(NW4R_RANGE_ASSERT_IMPL, NW4R_LINES, __VA_ARGS__)
-#define NW4R_RANGE_ASSERT_IMPL(file, line, exp)                                \
     ((exp) && 1 ||                                                             \
         (nw4r::db::Panic(file, line,                                           \
             "NW4R:Failed assertion " #exp),                                    \
@@ -97,7 +112,6 @@ void Log(const char* pFmt, ...);
 #define NW4R_PANIC(...)
 #define NW4R_ASSERT(...)
 #define NW4R_ASSERT_MSG(...)
-#define NW4R_RANGE_ASSERT(...)
 #define NW4R_ALIGN_ASSERT(...)
 #define NW4R_NULL_ASSERT(...)
 #define NW4R_POINTER_ASSERT(...)

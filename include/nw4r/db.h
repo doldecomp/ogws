@@ -5,5 +5,6 @@
 #include <nw4r/db/db_console.h>
 #include <nw4r/db/db_directPrint.h>
 #include <nw4r/db/db_exception.h>
+#include <nw4r/db/db_mapFile.h>
 
 #endif
