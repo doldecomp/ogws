@@ -1080,11 +1080,8 @@ void RPSndAudioMgr::setOutputMode(u8 confMode) {
     }
 
     case SC_SND_SURROUND: {
-        RPSysSceneCreator::EPackID pack =
-            RP_GET_INSTANCE(RPSysProjectLocal)->getPack();
-
-        if (pack == RPSysSceneCreator::EPackID_PartyPack ||
-            pack == RPSysSceneCreator::EPackID_HealthPack) {
+        if (RP_GET_INSTANCE(RPSysProjectLocal)->getPack() == RPSysSceneCreator::EPackID_PartyPack ||
+            RP_GET_INSTANCE(RPSysProjectLocal)->getPack() == RPSysSceneCreator::EPackID_HealthPack) {
 
             outputMode = nw4r::snd::OUTPUT_MODE_STEREO;
         } else {
