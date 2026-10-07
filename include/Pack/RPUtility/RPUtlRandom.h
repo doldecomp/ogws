@@ -11,12 +11,16 @@ public:
      * @brief Seeds the generator using the system clock
      */
     static void initialize();
+    void initRand();
 
     /**
      * @brief Generates a random unsigned 32-bit integer
      */
     static u32 getU32() {
-        return calc();
+        return sRandom.getRandU32();
+    }
+    u32 getRandU32() {
+        return calcRand();
     }
 
     /**
@@ -25,15 +29,21 @@ public:
      * @param max Upper bound (exclusive)
      */
     static u32 getU32(u32 max) {
-        return max * getF32();
+        return sRandom.getRandU32(max);
+    }
+    u32 getRandU32(u32 max) {
+        return max * getRandF32();
     }
 
     /**
      * @brief Generates a random floating point value in the range [0, 1)
      */
     static f32 getF32() {
+        return sRandom.getRandF32();
+    }
+    f32 getRandF32() {
         // Limited to u16 bounds
-        u16 iRnd = static_cast<u16>(RANDF_MAX & (getU32() >> RANDF_SHIFT));
+        u16 iRnd = static_cast<u16>(RANDF_MAX & (getRandU32() >> RANDF_SHIFT));
 
         // Convert to float
         f32 fRnd = static_cast<f32>(iRnd);
@@ -47,7 +57,10 @@ private:
      * @brief Advances the generator seed
      */
     static u32 calc() {
-        return (sSeed = sSeed * MULT + 1);
+        return sRandom.calcRand();
+    }
+    u32 calcRand() {
+        return (mSeed = mSeed * MULT + 1);
     }
 
 private:
@@ -59,8 +72,11 @@ private:
     //! Bit shift amount for random floating point generation
     static const u32 RANDF_SHIFT;
 
-    //! Global generator seed
-    static u32 sSeed;
+    //! Global RNG
+    static RPUtlRandom sRandom;
+    
+    //! Generator seed
+    u32 mSeed;
 };
 
 #endif
