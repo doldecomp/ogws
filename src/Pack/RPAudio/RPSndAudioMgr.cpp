@@ -178,7 +178,7 @@ RPSndAudioMgr::openArchiveRP(const char* pPath, nw4r::snd::SoundHeap* pHeap,
         file.readData(pBuffer, fileSize, 0);
         file.close();
 
-        pPlayer = ExpAudioMgr::setupMemoryArchive(pPath, pHeap);
+        pPlayer = ExpAudioMgr::setupMemoryArchive(pBuffer, pHeap);
         break;
     }
 
@@ -195,7 +195,7 @@ RPSndAudioMgr::openArchiveRP(const char* pPath, nw4r::snd::SoundHeap* pHeap,
         file.readData(pBuffer, fileSize, 0);
         file.close();
 
-        pPlayer = ExpAudioMgr::setupMemoryArchive(pPath, pHeap);
+        pPlayer = ExpAudioMgr::setupMemoryArchive(pBuffer, pHeap);
         break;
     }
     }
