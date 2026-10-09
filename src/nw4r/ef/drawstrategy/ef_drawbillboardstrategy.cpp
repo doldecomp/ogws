@@ -329,11 +329,136 @@ inline void DrawBillboardStrategy::DispParticle_YBillboard(
 }
 
 void DrawBillboardStrategy::DrawDirectionalBillboard(const DrawInfo& rInfo,
-                                                     ParticleManager* pManager);
+                                                     ParticleManager* pManager) {
+    const EmitterDrawSetting& rSetting =
+        *pManager->mResource->GetEmitterDrawSetting();
+
+    InitGraphics(rInfo, pManager);
+
+    int flags = mNumTexmap > 0;
+    const math::MTX34& rInfoMtx = *rInfo.GetViewMtx();
+
+    math::VEC2 pivot;
+    pivot.x = rSetting.pivotX / 100.0f;
+    pivot.y = rSetting.pivotY / 100.0f;
+
+    math::MTX34 viewMtx;
+    pManager->CalcGlobalMtx(&viewMtx);
+    math::MTX34Mult(&viewMtx, &rInfoMtx, &viewMtx);
+
+    if (rSetting.zOffset != 0.0f) {
+        CalcZOffset(&viewMtx, pManager, rInfo, rSetting.zOffset);
+    }
+
+    f32 vx = math::FSqrt(viewMtx._00 * viewMtx._00 + viewMtx._10 * viewMtx._10 +
+                         viewMtx._20 * viewMtx._20);
+
+    f32 vy = math::FSqrt(viewMtx._01 * viewMtx._01 + viewMtx._11 * viewMtx._11 +
+                         viewMtx._21 * viewMtx._21);
+
+    f32 vz = 0.0f;
+    AheadContext aheadContext(rInfoMtx, pManager);
+    CalcAheadFunc pCalcAheadFunc = GetCalcAheadFunc(pManager);
+
+    GetFirstDrawParticleFunc pGetFirstFunc = GetGetFirstDrawParticleFunc(
+        rSetting.mFlags & EmitterDrawSetting::FLAG_DRAW_ORDER);
+
+    GetNextDrawParticleFunc pGetNextFunc = GetGetNextDrawParticleFunc(
+        rSetting.mFlags & EmitterDrawSetting::FLAG_DRAW_ORDER);
+
+    bool first = true;
+
+    for (Particle* pIt = pGetFirstFunc(pManager); pIt != NULL;
+         pIt = pGetNextFunc(pManager, pIt)) {
+
+        if (pIt->GetLifeStatus() != ReferencedObject::NW4R_EF_LS_ACTIVE) {
+            continue;
+        }
+        
+        f32 sx = pIt->Draw_GetSizeX();
+        if (sx < std::numeric_limits<f32>::epsilon()) {
+            continue;
+        }
+
+        f32 sy = pIt->Draw_GetSizeY();
+        if (sy < std::numeric_limits<f32>::epsilon()) {
+            continue;
+        }
+
+        SetupGP(pIt, rSetting, rInfo, first, false);
+        first = false;
+
+        math::VEC3 yAxis;
+
+        pCalcAheadFunc(&yAxis, &aheadContext, pIt);
+        math::VEC3TransformNormal(&yAxis, &viewMtx, &yAxis);
+
+        f32 rc, rs;
+        f32 mag;
+
+        mag =
+            math::FSqrt(yAxis.x * yAxis.x + yAxis.y * yAxis.y);
+        if (mag == 0.0f) {
+            rs = 0.0f;
+            rc = 1.0f;
+        } else {
+            f32 denom = 1.0f / mag;
+            rs = -yAxis.x * denom;
+            rc = yAxis.y * denom;
+        }
+
+        f32 vs = 1.0f;
+        if (rSetting.typeOption0) {
+            math::VEC3 v;
+            pIt->GetMoveDir(&v);
+
+            vs += 0.5f * math::FSqrt(math::VEC3Dot(&v, &v)) / sy;
+        }
+
+        DispParticle_Directional(pIt, viewMtx, vx, vy, vz, rc, rs, sx, sy, vs, pivot,
+                            flags);
+    }
+}
 
 inline void DrawBillboardStrategy::DispParticle_Directional(
     Particle* pParticle, const math::MTX34& rViewMtx, f32 vx, f32 vy, f32 vz,
-    f32 rc, f32 rs, f32 sx, f32 sy, const math::VEC2& rPivot, int flags);
+    f32 rc, f32 rs, f32 sx, f32 sy, f32 vs, const math::VEC2& rPivot, int flags) {
+
+#pragma unused(vz)
+
+    math::VEC3 pos;
+    math::VEC3Transform(&pos, &rViewMtx, &pParticle->mParameter.mPosition);
+
+    f32 px = rPivot.x;
+    f32 py = rPivot.y;
+
+    f32 vx_rc = vx * rc;
+    f32 vx_rs = vx * rs;
+    f32 vy_rc = vy * rc;
+    f32 vy_rs = vy * rs;
+
+    f32 exp0 = px - sx * px;
+    f32 exp1 = sy * (vs + py - 1.0f) - py;
+
+    math::VEC3 p0(vx_rc * exp0 + vy_rs * exp1 + pos.x,
+                  vx_rs * exp0 - vy_rc * exp1 + pos.y,
+                  pos.z);
+
+    f32 vx_rc_sx = vx_rc * sx;
+    f32 vx_rs_sx = vx_rs * sx;
+    f32 vy_rc_sy_vs = vy_rc * sy * vs;
+    f32 vy_rs_sy_vs = vy_rs * sy * vs;
+
+    math::VEC3 d0(vx_rc_sx - vy_rs_sy_vs,
+                  vx_rs_sx + vy_rc_sy_vs,
+                  0.0f);
+
+    math::VEC3 d1(vx_rc_sx + vy_rs_sy_vs,
+                  vx_rs_sx - vy_rc_sy_vs,
+                  0.0f);
+
+    DispPolygon(p0, d0, d1, flags);
+}
 
 void DrawBillboardStrategy::DispPolygon(const math::VEC3& rP,
                                         const math::VEC3& rD1,

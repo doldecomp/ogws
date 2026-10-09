@@ -41,7 +41,7 @@ private:
     inline void DispParticle_Directional(Particle* pParticle,
                                          const math::MTX34& rViewMtx, f32 vx,
                                          f32 vy, f32 vz, f32 rc, f32 rs, f32 sx,
-                                         f32 sy, const math::VEC2& rPivot,
+                                         f32 sy, f32 vs, const math::VEC2& rPivot,
                                          int flags);
 
     void DispPolygon(const math::VEC3& rP, const math::VEC3& rD1,
