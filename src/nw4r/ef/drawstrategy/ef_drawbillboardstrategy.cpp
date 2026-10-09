@@ -3,8 +3,8 @@
 namespace nw4r {
 namespace ef {
 
-static u8 billboard_tex0_u8[] = {0x00, 0x01, 0x00, 0x00,
-                                 0x01, 0x00, 0x01, 0x01};
+static u8 billboard_tex0_u8[] ALIGN(32) = {0x00, 0x01, 0x00, 0x00,
+                                           0x01, 0x00, 0x01, 0x01};
 
 DrawBillboardStrategy::DrawBillboardStrategy() {}
 

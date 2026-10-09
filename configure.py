@@ -518,7 +518,7 @@ config.libs = [
             Object(Matching, "nw4r/ef/emform/ef_cube.cpp"),
             Object(Matching, "nw4r/ef/drawstrategy/ef_drawstrategybuilder.cpp"),
             Object(not MatchingFor("RSPE01_00"), "nw4r/ef/drawstrategy/ef_drawstrategyimpl.cpp"),
-            Object(NonMatching, "nw4r/ef/drawstrategy/ef_drawbillboardstrategy.cpp"),
+            Object(Matching, "nw4r/ef/drawstrategy/ef_drawbillboardstrategy.cpp"),
             Object(NonMatching, "nw4r/ef/drawstrategy/ef_drawdirectionalstrategy.cpp"),
             Object(NonMatching, "nw4r/ef/drawstrategy/ef_drawfreestrategy.cpp"),
             Object(Matching, "nw4r/ef/drawstrategy/ef_drawlinestrategy.cpp"),
