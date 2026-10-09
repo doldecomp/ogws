@@ -143,10 +143,10 @@ void ParticleManager::Calc() {
     math::MTX34 mtxEmToGlb;
     mManagerEM->CalcGlobalMtx(&mtxEmToGlb);
 
-    math::MTX34 mtxEmToLoc;
+    math::MTX34 mtxEmToLoc;//0x2f0?
     math::MTX34Mult(&mtxEmToLoc, &mtxGlbToLoc, &mtxEmToGlb);
 
-    math::MTX34 mtxLocToEm;
+    math::MTX34 mtxLocToEm;//0x2c0?
     math::MTX34Inv(&mtxLocToEm, &mtxEmToLoc);
 
     math::MTX34 mtxGlbToLocNoTrans = mtxGlbToLoc;
@@ -187,8 +187,8 @@ void ParticleManager::Calc() {
             mManagerEM->mManagerEF->SetFlagExistCalcRemain(true);
         }
 
-        math::VEC3 prevPos = pIt->mParameter.mPosition;
-        math::VEC3 prevVel = pIt->mParameter.mVelocity;
+        math::VEC3 prevPos = pIt->mParameter.mPosition;//0x138
+        math::VEC3 prevVel = pIt->mParameter.mVelocity;//0x12c
 
         math::VEC3 prevDir;
         pIt->GetMoveDir(&prevDir);
@@ -402,32 +402,332 @@ void ParticleManager::Calc() {
                 }
 
                 case AC_TARGET_UNK32: {
-                    // 80019ec0
-                    break;
-                }
-
-                case AC_TARGET_UNK34: {
-                    // 8001a51c
-                    break;
-                }
-
-                case AC_TARGET_UNK35: {
-                    // 8001a6f0
-                    break;
-                }
-
-                case AC_TARGET_UNK36: {
-                    // 8001a904
-                    break;
-                }
-
-                case AC_TARGET_UNK38: {
-                    // 8001a364
+                    /*f32 f1;rangeTable;  // at 0x10
+    u32 randomTable; // at 0x14
+    u32 nameTable;
+					pTrackAsHeader->keyTable
+					+pTrackAsHeader->rangeTable+randomTable+nameTable
+					*/
+                    u8 *r16 = (pPtclTrack + pTrackAsHeader->keyTable+pTrackAsHeader->rangeTable+pTrackAsHeader->randomTable+pTrackAsHeader->nameTable);
+                    f32 stack_0x10 = *reinterpret_cast<f32*>(r16 + 0x20 + 0x0);
+                    AnimCurveExecuteF32(pPtclTrack, &stack_0x10, tick, seed, life);
+                    math::VEC3 stack_0xf0;// = *reinterpret_cast<math::VEC3*>(r16 + 0x20 + 0x4) * f1;
+                    stack_0xf0.x = *reinterpret_cast<f32*>(r16 + 0x20 + 0x4) * stack_0x10;
+                    stack_0xf0.y = *reinterpret_cast<f32*>(r16 + 0x20 + 0x8) * stack_0x10;
+                    stack_0xf0.z = *reinterpret_cast<f32*>(r16 + 0x20 + 0xC) * stack_0x10;
+                    if (*reinterpret_cast<bool*>(r16 + 0x20 + 0x10)) math::VEC3Transform(&stack_0xf0,&mtxLocToGlb,&stack_0xf0);
+                    else math::VEC3Transform(&stack_0xf0,&mtxGlbToLoc,&stack_0xf0);
+					switch((r16 + 0x20)[0x11]) {
+					case 0: {
+						addVel += stack_0xf0;
+						break;
+					}
+					case 1: {
+						addPos += stack_0xf0;
+						break;
+					}
+					}
                     break;
                 }
 
                 case AC_TARGET_UNK39: {
                     // 80019fac
+					// r5:tick, r11:pTrackAsHeader->processFlag&AnimCurveHeader::PROC_FLAG_TIMING
+					u8 *r28 = (pPtclTrack + pTrackAsHeader->keyTable+pTrackAsHeader->rangeTable+pTrackAsHeader->randomTable+pTrackAsHeader->nameTable);
+                    Random stack_0x8;
+                    *((u32 *)&stack_0x8) = pIt->mRandSeed * 0x3F81F635 +
+						pTrackAsHeader->randomSeed * 0x30A74193 +
+						tick * 0x371097E7 + /*0x50000 - 0x40AD*/0x4BF53;
+					((u8*)&stack_0x8)[2] ^= ((u8*)&stack_0x8)[3];
+					((u8*)&stack_0x8)[1] ^= ((u8*)&stack_0x8)[2];
+					((u8*)&stack_0x8)[0] ^= ((u8*)&stack_0x8)[1];
+					if (pTrackAsHeader->processFlag&AnimCurveHeader::PROC_FLAG_TIMING) {
+						if (tick == 0 || tick % (*reinterpret_cast<u16*>(r28 + 0x20 + 0x8) + 1) != 0) {
+							break;
+						}
+					} else {
+						if (tick != 0 && tick % (*reinterpret_cast<u16*>(r28 + 0x20 + 0x8) + 1) != 0) {
+							break;
+						}
+					}
+					f32 stack_0xc = *reinterpret_cast<f32*>(r28 + 0x20 + 0x0);
+					AnimCurveExecuteF32(pPtclTrack, &stack_0xc, tick, seed, life);
+					math::VEC3 stack_0xd8;
+					math::VEC3 stack_0xe4;
+					math::MTX34 stack_0x200;
+					if (*reinterpret_cast<u16*>(r28 + 0x20 + 0xA) & 2 /* magic number */) {
+						f32 f2 = static_cast<f32>((s16)(*(u32*)&stack_0x8 >> 16)) / 0x10000;
+						stack_0xe4.x = f2 * stack_0xc;
+						f32 f1 = stack_0x8.RandFloat(); f1 = static_cast<f32>((s16)(*(u32*)&stack_0x8 >> 16)) / 0x10000;
+						stack_0xe4.y = f1 * stack_0xc;
+						f32 f0 = stack_0x8.RandFloat(); f0 = static_cast<f32>((s16)(*(u32*)&stack_0x8 >> 16)) / 0x10000;
+						stack_0xe4.z = f0 * stack_0xc;
+					} else {
+						if (pIt->mTick == 0) {
+							stack_0xd8 = affect/*?*/;
+						} else {
+							stack_0xd8 = addVel/*?*/;
+						}
+						math::VEC3Transform(&stack_0xd8,&mtxLocToGlb,&stack_0xd8);
+						if (math::VEC3LenSq(&stack_0xd8) < 0x8000) {
+							stack_0xd8.y = 1.0f;
+						} else {
+							math::VEC3Normalize(&stack_0xd8, &stack_0xd8);
+						}
+						GetDirMtxY(&stack_0x200, stack_0xd8);
+						if (0.0f != *reinterpret_cast<f32*>(r28 + 0x20 + 0x4)) {
+							f32 f1 = static_cast<f32>((u16)(*(u32*)&stack_0x8 >> 16)) / 0x10000;
+							f32 f0 = stack_0x8.RandFloat();
+							//f27:PI,f28:2.0f
+							f32 yrot = f1 * *reinterpret_cast<f32*>(r28 + 0x20 + 0x4);
+							f32 xrot = 2.0f * (M_PI * f0);
+							stack_0xe4.x = std::sinf(yrot) * std::sinf(xrot);
+							stack_0xe4.y = std::cosf(yrot);
+							stack_0xe4.z = std::sinf(yrot) * std::cosf(xrot);
+							math::VEC3Scale(&stack_0xe4, &stack_0xe4, stack_0x8.RandFloat() * stack_0xc);
+							math::VEC3Transform(&stack_0xe4,&stack_0x200,&stack_0xe4);
+						} else {
+							stack_0xe4.x = 0.0f;
+							stack_0xe4.y = static_cast<f32>((s16)(*(u32*)&stack_0x8 >> 16)) * stack_0xc;
+							stack_0xe4.z = 0.0f;
+							math::VEC3Transform(&stack_0xe4,&stack_0x200,&stack_0xe4);
+						}
+					}
+					math::VEC3Transform(&stack_0xe4,&mtxLocToGlb,&stack_0xe4);
+					switch((r28 + 0x20)[0xB]) {
+					case 0: {
+						addVel += stack_0xe4;
+						break;
+					}
+					case 1: {
+						addPos += stack_0xe4;
+						break;
+					}
+					}
+                    break;
+                }
+
+                case AC_TARGET_UNK38: {
+                    // 8001a364
+					struct UNKSTRUCT_UNK38 {
+						f32 FLOAT_0x0;
+						math::VEC3 VECTOR_0x4;
+						u8 BYTE_0x10;
+						u8 BYTE_0x11;
+						u8 BYTE_0x12;
+						u8 BYTE_0x13;
+					} stack_0x18c;
+					u8 *r8 = (pPtclTrack + pTrackAsHeader->keyTable+pTrackAsHeader->rangeTable+pTrackAsHeader->randomTable+pTrackAsHeader->nameTable);
+					stack_0x18c = *(UNKSTRUCT_UNK38*)(r8 + 0x20);
+					AnimCurveExecuteF32(pPtclTrack, &stack_0x18c.FLOAT_0x0, tick, seed, life);
+					math::VEC3 stack_0xcc;
+					math::VEC3 stack_0xc0;
+					math::VEC3 stack_0xb4;
+					math::VEC3 stack_0xa8;
+					Rotation2VecY(stack_0x18c.VECTOR_0x4, &stack_0xcc);
+					math::MTX34 stack_0x1d0;
+                    math::MTX34RotAxisRad(&stack_0x1d0, &stack_0xcc, stack_0x18c.FLOAT_0x0);
+					if (stack_0x18c.BYTE_0x10) {
+						math::VEC3Transform(&stack_0xc0,&mtxGlbToLoc,&prevPos);
+					} else {
+						math::VEC3Transform(&stack_0xc0,&mtxLocToGlb,&prevPos);
+						stack_0xb4.x = 0.0f;
+						stack_0xb4.y = 0.0f;
+						stack_0xb4.z = 0.0f;
+						math::VEC3Transform(&stack_0xb4,&mtxLocToGlb,&stack_0xb4);
+						math::VEC3Sub(&stack_0xc0,&stack_0xc0,&stack_0xb4);
+					}
+					math::VEC3Transform(&stack_0xa8,&stack_0x1d0,&stack_0xc0);
+					math::VEC3Sub(&stack_0xa8,&stack_0xa8,&stack_0xc0);
+					if (stack_0x18c.BYTE_0x10) {
+						math::VEC3Transform(&stack_0xa8,&mtxGlbToLoc,&stack_0xa8);
+					} else {
+						math::VEC3Transform(&stack_0xa8,&mtxLocToGlb,&stack_0xa8);
+					}
+					switch (stack_0x18c.BYTE_0x11) {
+					case 0: {
+						addVel += stack_0xa8;
+						break;
+					}
+					case 1: {
+						addPos += stack_0xa8;
+						break;
+					}
+					}
+					break;
+                }
+
+                case AC_TARGET_UNK34: {
+                    // 8001a51c
+					struct UNKSTRUCT_UNK34 {
+						f32 FLOAT_0x0;
+						math::VEC3 VECTOR_0x4;
+						u8 BYTE_0x10;
+						u8 BYTE_0x11;
+						u8 BYTE_0x12;
+						u8 BYTE_0x13;
+					} stack_0x178;
+					u8 *r8 = (pPtclTrack + pTrackAsHeader->keyTable+pTrackAsHeader->rangeTable+pTrackAsHeader->randomTable+pTrackAsHeader->nameTable);
+					stack_0x178 = *(UNKSTRUCT_UNK34*)(r8 + 0x20);
+					AnimCurveExecuteF32(pPtclTrack, &stack_0x178.FLOAT_0x0, tick, seed, life);
+					math::VEC3 stack_0x9c;
+					math::VEC3 stack_0x90;
+					math::VEC3 stack_0x84;
+					if (stack_0x178.BYTE_0x10) {
+						math::VEC3Transform(&stack_0x9c,&mtxGlbToLoc,&prevPos);
+					} else {
+						math::VEC3Transform(&stack_0x9c,&mtxLocToGlb,&prevPos);
+						stack_0x90.x = 0.0f;
+						stack_0x90.y = 0.0f;
+						stack_0x90.z = 0.0f;
+						math::VEC3Transform(&stack_0x90,&mtxLocToGlb,&stack_0x90);
+						math::VEC3Sub(&stack_0x9c,&stack_0x9c,&stack_0x90);
+					}
+					math::VEC3Sub(&stack_0x84,&stack_0x178.VECTOR_0x4,&stack_0x9c);
+					if (0.0f != stack_0x84.x || 0.0f != stack_0x84.y || 0.0f != stack_0x84.z) {
+						math::VEC3Normalize(&stack_0x84,&stack_0x84);
+					}
+					stack_0x84 *= stack_0x178.FLOAT_0x0;
+					if (stack_0x178.BYTE_0x10) {
+						math::VEC3Transform(&stack_0x84,&mtxGlbToLoc,&stack_0x84);
+					} else {
+						math::VEC3Transform(&stack_0x84,&mtxLocToGlb,&stack_0x84);
+					}
+					switch (stack_0x178.BYTE_0x11) {
+					case 0: {
+						addVel += stack_0x84;
+						break;
+					}
+					case 1: {
+						addPos += stack_0x84;
+						break;
+					}
+					}
+                    break;
+                }
+
+                case AC_TARGET_UNK35: {//Newton?
+                    // 8001a6f0
+					struct UNKSTRUCT_UNK35 {
+						f32 FLOAT_0x0;
+						f32 FLOAT_0x4;
+						math::VEC3 VECTOR_0x8;
+						u8 BYTE_0x14;
+						u8 BYTE_0x15;
+						u8 BYTE_0x16;
+						u8 BYTE_0x17;
+					} infoCopy;
+					u8 *r8 = (pPtclTrack + pTrackAsHeader->keyTable+pTrackAsHeader->rangeTable+pTrackAsHeader->randomTable+pTrackAsHeader->nameTable);
+					infoCopy = *(UNKSTRUCT_UNK35*)(r8 + 0x20);
+					AnimCurveExecuteF32(pPtclTrack, &infoCopy.FLOAT_0x0, tick, seed, life);
+					/**/
+					math::VEC3 stack_0x9c;
+					math::VEC3 stack_0x90;
+					math::VEC3 stack_0x84;
+					if (infoCopy.BYTE_0x14) {
+						math::VEC3Transform(&stack_0x9c,&mtxGlbToLoc,&prevPos);
+					} else {
+						math::VEC3Transform(&stack_0x9c,&mtxLocToGlb,&prevPos);
+						stack_0x90.x = 0.0f;
+						stack_0x90.y = 0.0f;
+						stack_0x90.z = 0.0f;
+						math::VEC3Transform(&stack_0x90,&mtxLocToGlb,&stack_0x90);
+						math::VEC3Sub(&stack_0x9c,&stack_0x9c,&stack_0x90);
+					}
+					math::VEC3Sub(&stack_0x84,&infoCopy.VECTOR_0x8,&stack_0x9c);
+					f32 f21 = math::VEC3LenSq(&stack_0x84);
+					if (0.0f != stack_0x84.x || 0.0f != stack_0x84.y || 0.0f != stack_0x84.z) {
+						math::VEC3Normalize(&stack_0x84,&stack_0x84);
+					}
+					stack_0x84 *= infoCopy.FLOAT_0x0;
+					f32 f0 = infoCopy.FLOAT_0x4*infoCopy.FLOAT_0x4; 
+					if (f21 > f0) {
+						f0 /= f21;
+						stack_0x84 *= f0;
+					}
+					if (infoCopy.BYTE_0x14) {
+						math::VEC3Transform(&stack_0x84,&mtxGlbToLoc,&stack_0x84);
+					} else {
+						math::VEC3Transform(&stack_0x84,&mtxLocToGlb,&stack_0x84);
+					}
+					switch (infoCopy.BYTE_0x15) {
+					case 0: {
+						addVel += stack_0x84;
+						break;
+					}
+					case 1: {
+						addPos += stack_0x84;
+						break;
+					}
+					}
+					/**/
+                    break;
+                }
+
+                case AC_TARGET_UNK36: {//Vortex?
+                    // 8001a904
+					struct UNKSTRUCT_UNK36 {
+						f32 FLOAT_0x0;
+						f32 FLOAT_0x4;
+						f32 FLOAT_0x8;
+						math::VEC3 VECTOR_0x8;
+						u8 BYTE_0x14;
+						u8 BYTE_0x15;
+						u8 BYTE_0x16;
+						u8 BYTE_0x17;
+					} infoCopy;
+					u8 *r8 = (pPtclTrack + pTrackAsHeader->keyTable+pTrackAsHeader->rangeTable+pTrackAsHeader->randomTable+pTrackAsHeader->nameTable);
+					infoCopy = *(UNKSTRUCT_UNK36*)(r8 + 0x20);
+					AnimCurveExecuteF32(pPtclTrack, &infoCopy.FLOAT_0x0, tick, seed, life);
+					/**/
+					math::VEC3 stack_0x54;
+					math::VEC3 stack_0x9c;
+					math::VEC3 stack_0x90;
+					math::VEC3 stack_0x84;
+					Rotation2VecY(infoCopy.VECTOR_0x8, &stack_0x54);
+					if (infoCopy.BYTE_0x14) {
+						math::VEC3Transform(&stack_0x9c,&mtxGlbToLoc,&prevPos);
+					} else {
+						math::VEC3Transform(&stack_0x9c,&mtxLocToGlb,&prevPos);
+						stack_0x90.x = 0.0f;
+						stack_0x90.y = 0.0f;
+						stack_0x90.z = 0.0f;
+						math::VEC3Transform(&stack_0x90,&mtxLocToGlb,&stack_0x90);
+						math::VEC3Sub(&stack_0x9c,&stack_0x9c,&stack_0x90);
+					}
+					stack_0x9c *= math::VEC3Dot(&stack_0x9c,&stack_0x90);
+					infoCopy.FLOAT_0x8 *= infoCopy.FLOAT_0x8;
+					math::VEC3Sub(&stack_0x84,&infoCopy.VECTOR_0x8,&stack_0x9c);
+					f32 f20;
+					f32 f1 = math::VEC3Dot(&stack_0x84,&stack_0x84);
+					if (0.0f == f1) {
+						break;
+					}
+					if (f1 >= infoCopy.FLOAT_0x8) {
+						f20 = infoCopy.FLOAT_0x4;
+					} else {
+						f32 f3 = f1 / infoCopy.FLOAT_0x8;
+						f20 = (1.0f/*?*/ - f3) * infoCopy.FLOAT_0x4 + f3 * infoCopy.FLOAT_0x0;
+					}
+					math::VEC3Normalize(&stack_0x84,&stack_0x84);
+					math::VEC3Cross(&stack_0x84,&stack_0x84,&stack_0x54);
+					stack_0x84 *= f20;
+					if (infoCopy.BYTE_0x14) {
+						math::VEC3Transform(&stack_0x84,&mtxGlbToLoc,&stack_0x84);
+					} else {
+						math::VEC3Transform(&stack_0x84,&mtxLocToGlb,&stack_0x84);
+					}
+					switch (infoCopy.BYTE_0x15) {
+					case 0: {
+						addVel += stack_0x84;
+						break;
+					}
+					case 1: {
+						addPos += stack_0x84;
+						break;
+					}
+					}
+					/**/
                     break;
                 }
                 }
@@ -463,6 +763,9 @@ void ParticleManager::Calc() {
         }
 
         pIt->mTick++;
+        pIt->mParameter.mVelocity += addVel;
+        pIt->AddPosition(&addPos);
+        pIt->AddPosition(&pIt->mParameter.mVelocity);
     }
 
     mLastCalced =
