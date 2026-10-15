@@ -5,6 +5,7 @@
 #include <Pack/RPGraphics/IRPGrpModelCallback.h>
 #include <Pack/RPGraphics/RPGrpCamera.h>
 #include <Pack/RPGraphics/RPGrpCaptureTexture.h>
+#include <Pack/RPGraphics/RPGrpCpuTexture.h>
 #include <Pack/RPGraphics/RPGrpDrawPath.h>
 #include <Pack/RPGraphics/RPGrpDrawPathBloom.h>
 #include <Pack/RPGraphics/RPGrpDrawPathDOF.h>
@@ -30,6 +31,7 @@
 #include <Pack/RPGraphics/RPGrpModelScene.h>
 #include <Pack/RPGraphics/RPGrpProjectionObject.h>
 #include <Pack/RPGraphics/RPGrpRenderer.h>
+#include <Pack/RPGraphics/RPGrpResTIMG.h>
 #include <Pack/RPGraphics/RPGrpScreen.h>
 #include <Pack/RPGraphics/RPGrpShadowTexture.h>
 #include <Pack/RPGraphics/RPGrpTexture.h>

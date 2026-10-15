@@ -49,6 +49,7 @@ public:
         return 0;
     }
 
+#if defined(VERSION_RSPE01_01)
     virtual void
     GetWorldMtx(u16 /* idx */,
                 nw4r::math::MTX34* pMtx) const override { // at 0x3C
@@ -61,12 +62,14 @@ public:
     GetWorldMtx(u16 /* nodeIdx */) const override { // at 0x40
         return GetScnObj()->GetMtxPtr(nw4r::g3d::ScnObj::MTX_LOCAL);
     }
+#endif
 
     virtual nw4r::math::MTX34*
     ReferWorldMtx(u16 /* nodeIdx */) const override { // at 0x44
         return &spCalcWorldMtxArray[0];
     }
 
+#if defined(VERSION_RSPE01_01)
     virtual void GetViewMtx(nw4r::math::MTX34* pMtx) const override { // at 0x4C
         GetScnObj()->GetMtx(nw4r::g3d::ScnObj::MTX_VIEW, pMtx);
     }
@@ -75,6 +78,7 @@ public:
                             nw4r::math::MTX34* pMtx) const override { // at 0x48
         GetViewMtx(pMtx);
     }
+#endif
 
     virtual const char* GetJointName(u16 idx) const override; // at 0x54
 

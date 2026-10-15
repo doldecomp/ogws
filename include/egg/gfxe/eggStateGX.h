@@ -1,9 +1,14 @@
 #ifndef EGG_GFXE_STATE_GX_H
 #define EGG_GFXE_STATE_GX_H
+#include <egg/types_egg.h>
+
+#include <egg/prim.h>
+
 #include <nw4r/g3d.h>
 
 #include <revolution/GX.h>
 #include <revolution/MTX.h>
+
 
 namespace EGG {
 
@@ -105,6 +110,15 @@ public:
     }
     static void setEfbHeight(u16 height) {
         s_heightEfb = height;
+    }
+
+    static f32 getModifyRatio() {
+        return s_modifyRatio;
+    }
+    static void setModifyRatio(f32 modify) {
+#line 261
+        EGG_ASSERT(0.f <= modify && modify <= 1.f);
+        s_modifyRatio = modify;
     }
 
 private:

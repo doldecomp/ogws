@@ -1,7 +1,8 @@
 #ifndef EGG_GFXE_POST_EFFECT_BLUR_SIMPLE_H
 #define EGG_GFXE_POST_EFFECT_BLUR_SIMPLE_H
-#include "eggPostEffectBase.h"
-#include "types_egg.h"
+#include <egg/types_egg.h>
+
+#include <egg/gfxe/eggPostEffectBase.h>
 
 namespace EGG {
 

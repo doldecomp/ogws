@@ -2,6 +2,9 @@
 #define RP_GRAPHICS_RENDERER_H
 #include <Pack/types_pack.h>
 
+#include <Pack/RPGraphics/RPGrpCamera.h>
+#include <Pack/RPGraphics/RPGrpViewRender3D.h>
+
 #include <egg/core.h>
 
 //! @addtogroup rp_graphics
@@ -17,8 +20,27 @@ class RPGrpView;
  */
 class RPGrpRenderer {
 public:
+    enum RenderPassState {
+        RENDERPASS_SYSCALC,
+        RENDERPASS_SYSDRAW,
+        RENDERPASS_DRAWBEFORE,
+        RENDERPASS_DRAW,
+        RENDERPASS_DRAWDONE,
+        RENDERPASS_DRAW2D,
+        RENDERPASS_3DOPA,
+        RENDERPASS_3DXLU,
+        RENDERPASS_SVBEFORE,
+        RENDERPASS_SV,
+        RENDERPASS_EFFECT_2,
+        RENDERPASS_BEGIN,
+        RENDERPASS_END,
+        RENDERPASS_NULL,
+    };
+
     //! Maximum number of renderer views
     static const int MAX_VIEW = 32;
+    static bool sRendering;
+    static RenderPassState sRenderPass;
 
 public:
     /**
@@ -46,6 +68,9 @@ public:
         return spCurrentScreen;
     }
 
+    /**
+     * @brief Sets up a GX context for rendering
+     */
     static void Begin();
     static void End();
 
@@ -62,6 +87,9 @@ public:
         AppendDrawObject(&rObject);
     }
 
+    RPGrpViewRender3D* CreateView3D(u8 viewNo, RPGrpCamera* camera,
+                                    RPGrpScreen* screen);
+
     void PreCalculate();
     void PostCalculate();
     void CalculateInPause();
@@ -76,8 +104,8 @@ private:
     static RPGrpScreen* spCurrentScreen;
 
     char unk0[0xC];
-    IRPGrpDrawObject* mpDrawList; // at 0xC
-    char unk10[0x14 - 0x10];
+    IRPGrpDrawObject* mpDrawList;     // at 0xC
+    IRPGrpDrawObject* mpDrawObj;      // at 0x10
     RPGrpView* mpDrawViews[MAX_VIEW]; // at 0x14
 };
 
