@@ -57,7 +57,7 @@ typedef struct AXFX_REVERBHI_EXP {
     f32 sendGain;        // at 0x144
 } AXFX_REVERBHI_EXP;
 
-u32 AXFXReverbHiExpGetMemSize(const AXFX_REVERBHI_EXP* fx);
+u32 AXFXReverbHiExpGetMemSize(AXFX_REVERBHI_EXP* fx);
 BOOL AXFXReverbHiExpInit(AXFX_REVERBHI_EXP* fx);
 void AXFXReverbHiExpShutdown(AXFX_REVERBHI_EXP* fx);
 BOOL AXFXReverbHiExpSettings(AXFX_REVERBHI_EXP* fx);
