@@ -13,7 +13,7 @@ bool SeqFileReader::IsValidFileHeader(const void* pSeqBin) {
         return false;
     }
 
-    if (Util::ReadBigEndian(pFileHeader->version) < NW4R_VERSION(1, 0)) {
+    if (Util::ReadBigEndian(pFileHeader->version) < NW4R_FILE_VERSION(1, 0)) {
         return false;
     }
 

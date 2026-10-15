@@ -12,12 +12,12 @@
  ******************************************************************************/
 
 // Stringify expression
-#define __STR(x) #x
 #define STR(x) __STR(x)
+#define __STR(x) #x
 
 // Concatenate strings
-#define __CONCAT(x, y) x##y
 #define CONCAT(x, y) __CONCAT(x, y)
+#define __CONCAT(x, y) x##y
 
 // Multi-character character constants
 // clang-format off
@@ -66,7 +66,7 @@
 #define LENGTHOF(x) ARRAY_SIZE(x)
 
 // Declare an array of hardware registers
-#define DECL_HW_REGS(NAME) FLEXIBLE_ARRAY(NAME##_HW_REGS)
+#define DECL_HW_REGS(name) FLEXIBLE_ARRAY(name##_HW_REGS)
 
 /******************************************************************************
  *
@@ -91,5 +91,17 @@
 
 // Give a symbol weak linkage
 #define DECL_WEAK __declspec(weak)
+
+/******************************************************************************
+ *
+ * Source location
+ *
+ ******************************************************************************/
+
+#if defined(VERSION_RSPE01_00)
+#define NW4R_LINE_TUPLE(...) __LINE__
+#elif defined(VERSION_RSPE01_01)
+#define NW4R_LINE_TUPLE(...) __LINE__
+#endif
 
 #endif

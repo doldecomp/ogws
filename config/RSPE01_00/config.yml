@@ -4,3 +4,11 @@ hash: affe3e260e4ebf99f13ef291c9504de1bd0bb7ec
 symbols: config/RSPE01_00/symbols.txt
 splits: config/RSPE01_00/splits.txt
 quick_analysis: true
+
+block_relocations:
+  # db_directPrint:sFontData
+  - source: .rodata:0x80342AC0
+    end: .rodata:0x80342BC0
+  # db_directPrint:sFontData2
+  - source: .rodata:0x80342BC0
+    end: .rodata:0x80342CF4

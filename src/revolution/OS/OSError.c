@@ -4,26 +4,30 @@
 
 #include <stdio.h>
 
-OSErrorHandler __OSErrorTable[OS_ERR_MAX];
+OSErrorHandler __OSErrorTable[OS_ERROR_MAX];
 u32 __OSFpscrEnableBits = FPSCR_VE | FPSCR_OE | FPSCR_UE | FPSCR_ZE | FPSCR_XE;
 
 DECL_WEAK void OSReport(const char* msg, ...) {
-    va_list list;
-    va_start(list, msg);
-    vprintf(msg, list);
-    va_end(list);
+    va_list argv;
+    va_start(argv, msg);
+    vprintf(msg, argv);
+    va_end(argv);
+}
+
+DECL_WEAK void OSVReport(const char* msg, va_list argv) {
+    vprintf(msg, argv);
 }
 
 DECL_WEAK void OSPanic(const char* file, int line, const char* msg, ...) {
     u32 depth;
     u32* sp;
-    va_list list;
+    va_list argv;
 
     OSDisableInterrupts();
 
-    va_start(list, msg);
-    vprintf(msg, list);
-    va_end(list);
+    va_start(argv, msg);
+    vprintf(msg, argv);
+    va_end(argv);
     OSReport(" in \"%s\" on line %d.\n", file, line);
 
     OSReport("\nAddress:      Back Chain    LR Save\n");
@@ -42,7 +46,7 @@ OSErrorHandler OSSetErrorHandler(u16 error, OSErrorHandler handler) {
     oldHandler = __OSErrorTable[error];
     __OSErrorTable[error] = handler;
 
-    if (error == OS_ERR_FP_EXCEPTION) {
+    if (error == OS_ERROR_FPE) {
         OSThread* thread;
         u32 msr;
         u32 fpscr;
@@ -111,12 +115,12 @@ void __OSUnhandledException(u8 error, OSContext* ctx, u32 dsisr, u32 dar) {
     if (!(ctx->srr1 & 0x2)) {
         OSReport("Non-recoverable Exception %d", error);
     } else {
-        if (error == OS_ERR_PROGRAM && ctx->srr1 & 0x100000 &&
-            __OSErrorTable[OS_ERR_FP_EXCEPTION] != NULL) {
+        if (error == OS_ERROR_PROGRAM && ctx->srr1 & 0x100000 &&
+            __OSErrorTable[OS_ERROR_FPE] != NULL) {
             u32 msr;
             u32 fpscr;
 
-            error = OS_ERR_FP_EXCEPTION;
+            error = OS_ERROR_FPE;
 
             msr = PPCMfmsr();
             PPCMtmsr(msr | MSR_FP);
@@ -157,7 +161,7 @@ void __OSUnhandledException(u8 error, OSContext* ctx, u32 dsisr, u32 dar) {
             OSLoadContext(ctx);
         }
 
-        if (error == OS_ERR_DECREMENTER) {
+        if (error == OS_ERROR_DECREMENTER) {
             OSLoadContext(ctx);
         }
 
@@ -169,27 +173,27 @@ void __OSUnhandledException(u8 error, OSContext* ctx, u32 dsisr, u32 dar) {
     OSReport("\nDSISR = 0x%08x                   DAR  = 0x%08x\n", dsisr, dar);
     OSReport("TB = 0x%016llx\n", tb);
     switch (error) {
-    case OS_ERR_DSI:
+    case OS_ERROR_DSI:
         OSReport("\nInstruction at 0x%x (read from SRR0) attempted to access "
                  "invalid address 0x%x (read from DAR)\n",
                  ctx->srr0, dar);
         break;
-    case OS_ERR_ISI:
+    case OS_ERROR_ISI:
         OSReport("\nAttempted to fetch instruction from invalid address 0x%x "
                  "(read from SRR0)\n",
                  ctx->srr0);
         break;
-    case OS_ERR_ALIGNMENT:
+    case OS_ERROR_ALIGNMENT:
         OSReport("\nInstruction at 0x%x (read from SRR0) attempted to access "
                  "unaligned address 0x%x (read from DAR)\n",
                  ctx->srr0, dar);
         break;
-    case OS_ERR_PROGRAM:
+    case OS_ERROR_PROGRAM:
         OSReport("\nProgram exception : Possible illegal instruction/operation "
                  "at or around 0x%x (read from SRR0)\n",
                  ctx->srr0, dar);
         break;
-    case OS_ERR_PROTECTION:
+    case OS_ERROR_PROTECTION:
         OSReport("\n");
         OSReport("AI DMA Address =   0x%04x%04x\n",
                  DSP_HW_REGS[DSP_AI_DMA_START_H],

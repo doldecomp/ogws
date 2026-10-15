@@ -191,11 +191,27 @@ nw4r/snd/snd_SoundArchive.cpp:
 nw4r/snd/snd_SoundHeap.cpp:
 	.text       start:0x80041F48 end:0x8004223C
 
+nw4r/db/db_directPrint.cpp:
+	.text       start:0x800492F0 end:0x80049D5C
+	.rodata     start:0x80342A40 end:0x80342CF8
+	.data       start:0x80360250 end:0x80360260
+	.bss        start:0x803ADB10 end:0x803ADB38
+	.sbss       start:0x804DF1E8 end:0x804DF1F0
+
+nw4r/db/db_console.cpp:
+	.text       start:0x80049D5C end:0x8004A630
+	.data       start:0x80360260 end:0x80360288
+	.bss        start:0x803ADB38 end:0x803ADF50
+	.sdata      start:0x804DDB70 end:0x804DDB78
+	.sbss       start:0x804DF1F0 end:0x804DF1F8
+
 nw4r/db/db_exception.cpp:
 	.text       start:0x8004A630 end:0x8004B4AC
 	.data       start:0x80360288 end:0x80360860
 	.bss        start:0x803ADF50 end:0x803B22C0
+	.sdata      start:0x804DDB78 end:0x804DDBB0
 	.sbss       start:0x804DF1F8 end:0x804DF200
+	.sdata2     start:0x804E0750 end:0x804E0758
 
 nw4r/g3d/res/g3d_rescommon.cpp:
 	.text       start:0x8004B4AC end:0x8004B5FC

@@ -2,10 +2,9 @@
 #define NW4R_UT_TEXT_WRITER_BASE_H
 #include <nw4r/types_nw4r.h>
 
+#include <nw4r/math.h>
 #include <nw4r/ut/ut_CharWriter.h>
 #include <nw4r/ut/ut_TagProcessorBase.h>
-
-#include <nw4r/math.h>
 
 #include <cstdio>
 #include <cwchar>
@@ -107,6 +106,7 @@ public:
 
     int VSNPrintf(T* buffer, u32 count, const T* pStr, std::va_list args);
     f32 VPrintf(const T* pStr, std::va_list args);
+    f32 Printf(const T* pStr, ...);
     f32 Print(const T* pStr, int len);
 
     static T* GetBuffer() {

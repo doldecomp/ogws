@@ -3,10 +3,10 @@
 #include <nw4r/types_nw4r.h>
 
 #include <nw4r/snd/snd_AxManager.h>
-
 #include <nw4r/ut.h>
 
 #include <revolution/OS.h>
+
 
 namespace nw4r {
 namespace snd {
@@ -105,8 +105,8 @@ private:
     SoundFrameCallbackList mSoundFrameCallbackList; // at 0x378
     PlayerCallbackList mPlayerCallbackList;         // at 0x384
 
-    u32 mProcessTick; // at 0x390
-    bool mCreateFlag; // at 0x394
+    OSTick mProcessTick; // at 0x390
+    bool mCreateFlag;    // at 0x394
 };
 
 } // namespace detail

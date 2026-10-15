@@ -31,11 +31,14 @@ from tools.project import (
 )
 
 # Game versions
-DEFAULT_VERSION = 1
+RSPE01_00 = "RSPE01_00" # USA, Revision 0
+RSPE01_01 = "RSPE01_01" # USA, Revision 1
+
 VERSIONS = [
-    "RSPE01_00",
-    "RSPE01_01",  # USA Rev 1
+    RSPE01_00,
+    RSPE01_01,
 ]
+DEFAULT_VERSION = VERSIONS.index(RSPE01_01)
 
 parser = argparse.ArgumentParser()
 parser.add_argument(
@@ -246,15 +249,46 @@ cflags_base = [
     f"-i build/{config.version}/include",
     f"-DBUILD_VERSION={version_num}",
     f"-DVERSION_{config.version}",
+    "-DNW4R_BIG_ENDIAN",
     "-ir include/revolution/BTE",  # thanks broadcom...
     "-DREVOLUTION",  # BTE changes
 ]
 
 # Debug flags
 if args.debug:
-    cflags_base.extend(["-sym dwarf-2", "-DDEBUG=1"])
+    cflags_base.extend([
+        "-sym dwarf-2",
+        "-DDEBUG",
+        "-DNW4R_DEBUG",
+        "-DEGG_DEBUG",
+        "-DRP_DEBUG",
+    ])
 else:
-    cflags_base.append("-DNDEBUG=1")
+    if config.non_matching:
+        cflags_base.extend([
+            "-DNDEBUG",
+            "-DNW4R_PRODUCT",
+            "-DEGG_PRODUCT",
+            "-DRP_PRODUCT",
+        ])
+    else:
+        cflags_base.extend([
+            "-DNDEBUG",
+            "-DNW4R_DISABLE_MAPFILE",
+            "-DEGG_DEBUG",
+            "-DRP_PRODUCT",
+        ])
+
+        # USA, Rev 0 enables the exception handler
+        cflags_base.append({
+            RSPE01_00: "-DNW4R_RELEASE",
+            RSPE01_01: "-DNW4R_PRODUCT",
+        }[config.version])
+
+        cflags_base.append({
+            RSPE01_00: "-DNW4R_VERSION=0",
+            RSPE01_01: "-DNW4R_VERSION=20070608",
+        }[config.version])
 
 # Warning flags
 if args.warn == "all":
@@ -710,7 +744,9 @@ config.libs = [
         "cflags": cflags_libnw4r_db,
         "progress_category": "nw4r",
         "objects": [
-            Object(NonMatching, "nw4r/db/db_exception.cpp"),
+            Object(Matching, "nw4r/db/db_directPrint.cpp"),
+            Object(Matching, "nw4r/db/db_console.cpp"),
+            Object(Matching, "nw4r/db/db_exception.cpp"),
         ]
     },
     {

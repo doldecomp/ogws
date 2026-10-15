@@ -97,7 +97,7 @@ void SoundThread::SoundThreadProc() {
             NW4R_UT_LINKLIST_FOREACH_SAFE (it, mSoundFrameCallbackList,
                                            { it->OnBeginSoundFrame(); })
 
-            u32 start = OSGetTick();
+            OSTick start = OSGetTick();
             {
                 AxVoiceManager::GetInstance().FreeAllReservedAxVoice();
                 AxManager::GetInstance().Update();

@@ -32,7 +32,7 @@ bool SoundArchiveFileReader::IsValidFileHeader(const void* pSoundArchiveBin) {
         return false;
     }
 
-    if (pFileHeader->version < NW4R_VERSION(1, 0)) {
+    if (pFileHeader->version < NW4R_FILE_VERSION(1, 0)) {
         return false;
     }
 
@@ -93,7 +93,7 @@ SoundType SoundArchiveFileReader::GetSoundType(u32 id) const {
         return SOUND_TYPE_INVALID;
     }
 
-    if (GetVersion() >= NW4R_VERSION(1, 1)) {
+    if (GetVersion() >= NW4R_FILE_VERSION(1, 1)) {
         const SoundArchiveFile::SoundCommonInfo* pCmnInfo =
             Util::GetDataRefAddress0(pTable->items[id], mInfo);
 
@@ -140,7 +140,7 @@ bool SoundArchiveFileReader::ReadSoundInfo(
     pSoundInfo->volume = pCmnInfo->volume;
     pSoundInfo->remoteFilter = pCmnInfo->remoteFilter;
 
-    if (GetVersion() >= NW4R_VERSION(1, 2)) {
+    if (GetVersion() >= NW4R_FILE_VERSION(1, 2)) {
         pSoundInfo->panMode = static_cast<detail::PanMode>(pCmnInfo->panMode);
         pSoundInfo->panCurve =
             static_cast<detail::PanCurve>(pCmnInfo->panCurve);
@@ -189,7 +189,7 @@ bool SoundArchiveFileReader::ReadSeqSoundInfo(
     pInfo->channelPriority = pSrc->channelPriority;
     pInfo->allocTrack = pSrc->allocTrack;
 
-    if (GetVersion() >= NW4R_VERSION(1, 3)) {
+    if (GetVersion() >= NW4R_FILE_VERSION(1, 3)) {
         pInfo->releasePriorityFixFlag = pSrc->releasePriorityFix;
     } else {
         pInfo->releasePriorityFixFlag = false;
@@ -224,7 +224,7 @@ bool SoundArchiveFileReader::ReadWaveSoundInfo(
     pInfo->subNo = pSrc->subNo;
     pInfo->channelPriority = pSrc->channelPriority;
 
-    if (GetVersion() >= NW4R_VERSION(1, 3)) {
+    if (GetVersion() >= NW4R_FILE_VERSION(1, 3)) {
         pInfo->releasePriorityFixFlag = pSrc->releasePriorityFix;
     } else {
         pInfo->releasePriorityFixFlag = false;
@@ -538,7 +538,7 @@ SoundArchiveFileReader::impl_GetSoundInfo(u32 id) const {
         return NULL;
     }
 
-    if (GetVersion() >= NW4R_VERSION(1, 1)) {
+    if (GetVersion() >= NW4R_FILE_VERSION(1, 1)) {
         return Util::GetDataRefAddress0(pTable->items[id], mInfo);
     } else {
         return static_cast<const SoundArchiveFile::SoundCommonInfo*>(
@@ -561,7 +561,7 @@ SoundArchiveFileReader::impl_GetSoundInfoOffset(u32 id) const {
         return INVALID_DATA_REF;
     }
 
-    if (GetVersion() >= NW4R_VERSION(1, 1)) {
+    if (GetVersion() >= NW4R_FILE_VERSION(1, 1)) {
         const SoundArchiveFile::SoundCommonInfo* pInfo =
             Util::GetDataRefAddress0(pTable->items[id], mInfo);
 

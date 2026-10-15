@@ -1,8 +1,8 @@
 #ifndef NW4R_SND_WSD_FILE_H
 #define NW4R_SND_WSD_FILE_H
 #include <nw4r/snd/snd_Util.h>
-
 #include <nw4r/ut.h>
+
 
 namespace nw4r {
 namespace snd {
@@ -82,7 +82,7 @@ struct WaveBlock {
     u32 offsetTable[];                 // at 0xC
 };
 
-// <= NW4R_VERSION(1, 0)
+// <= NW4R_FILE_VERSION(1, 0)
 struct WaveBlockOld {
     ut::BinaryBlockHeader blockHeader; // at 0x0
     u32 offsetTable[];                 // at 0x8
@@ -121,7 +121,7 @@ struct WaveSoundNoteInfo {
 class WsdFileReader {
 public:
     static const u32 SIGNATURE = FOURCC('R', 'W', 'S', 'D');
-    static const int VERSION = NW4R_VERSION(1, 2);
+    static const int VERSION = NW4R_FILE_VERSION(1, 2);
 
 public:
     explicit WsdFileReader(const void* pWsdBin);

@@ -2,8 +2,8 @@
  * Compatability macros for language parsers such as Clangd and Intellisense
  */
 
-#ifndef COMPAT_H
-#define COMPAT_H
+#ifndef DECOMP_COMPAT_H
+#define DECOMP_COMPAT_H
 
 /******************************************************************************
  *
@@ -53,7 +53,7 @@
 #define DECL_ADDRESS(...)
 
 // Hide flexible arrays
-#define FLEXIBLE_ARRAY(NAME) NAME[0]
+#define FLEXIBLE_ARRAY(name) name[0]
 
 #else
 
@@ -68,7 +68,7 @@
 #define DECL_ADDRESS(addr) : addr
 
 // Allow flexible arrays
-#define FLEXIBLE_ARRAY(NAME) NAME[]
+#define FLEXIBLE_ARRAY(name) name[]
 
 #endif
 
