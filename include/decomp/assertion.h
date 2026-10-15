@@ -25,18 +25,19 @@
 // In nonmatching builds, the LINE family of macros is ignored for accuracy.
 // DECOMP_ASSERT will instead provide the true source location.
 //
+// Due to this macro's implementation, unwanted macro expansion may occur.
+// To preserve an expression
+//
 // >> Parameters <<
 //
 // The 'assert_impl' parameter is the name of the assertion implementation.
-// It must be a function-like macro that accepts at least the following parameters: (file, line, str_expr).
+// It must be a function-like macro that accepts at least the following parameters: (file, line).
 //   - file:     The name of the source file where the macro was expanded.
 //
 //   - line:     The location in the source file where the macro was expanded.
 //               The LINE/LINES macros are provided to override this value.
 //
-//   - str_expr: The first non-LINE argument in stringitized form.
-//               This is required to avoid macro expansion which may break matching code,
-//               such as NULL expanding to "0".
+//   - ...:      Any variadic arguments provided at the DECOMP_ASSERT invocation.
 //
 // The 'lines_impl' parameter is the name of the line tuple evaluator.
 // It must be a function-like macro that accepts multiple line numbers.
@@ -50,17 +51,14 @@
 //     // keep DECOMP_ASSERT on the same line to stay accurate in non-matching builds!
 //     #define MY_ASSERT(...) DECOMP_ASSERT(MY_ASSERT_IMPL, MY_LINES, __VA_ARGS__)
 //
-//     #define MY_ASSERT_IMPL(file, line, str_expr, expr) \
-//         if (!expr) { Panic("Assertion failed: %s", str_expr); }
+//     #define MY_ASSERT_IMPL(file, line, expr)
+//         if (!expr) { Panic("Assertion failed: %s", #expr); }
 //
 //     // choose Rev 1 line number for this build
 //     #define MY_LINES(rev0, rev1) rev1
 //
-//     MY_ASSERT(LINE(123), p != NULL) expands to:
-//         MY_ASSERT_IMPL("code.cpp", 123, "p != NULL", p != 0)
-//
-//     MY_ASSERT(LINES(200, 300), p != NULL, "Pointer is NULL") expands to:
-//         MY_ASSERT_IMPL("code.cpp", 300, "p != NULL", p != 0, "Pointer is NULL")
+//     MY_ASSERT(LINE(123), num > 0) expands to:
+//         MY_ASSERT_IMPL("code.cpp", 123, "num > 0", num > 0)
 //
 // clang-format on
 
