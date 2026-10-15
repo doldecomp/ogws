@@ -481,12 +481,14 @@ static u8 WUDiSaveDeviceToNand(void) {
 
     _scArray.numRegist = WUDiGetDevNumber();
 
+#if defined(VERSION_RSPE01_01)
     for (pIt = _wcb.stdListHead, i = 0; pIt != NULL; i++, pIt = pIt->next) {
         WUD_BDCPY(_scArray.regist[i].addr, pIt->devInfo->devAddr);
 
         memcpy(&_scArray.regist[i].info, &pIt->devInfo->conf,
                sizeof(SCDevInfo));
     }
+#endif
 
     DEBUGPrint("%d devices is stored into SC.\n", i);
 
@@ -683,7 +685,9 @@ static u8 WUDiSyncDone(void) {
 
     OSCancelAlarm(&p->alarm);
 
+#if defined(VERSION_RSPE01_01)
     WUDSetVisibility(FALSE, TRUE);
+#endif
 
     pSyncCallback =
         p->syncType == WUD_SYNC_TYPE_STANDARD ? p->syncStdCB : p->syncSmpCB;
@@ -882,7 +886,11 @@ static void WUDiCleanUp(void) {
     WUDCB* p = &_wcb;
     BOOL success = FALSE;
 
+#if defined(VERSION_RSPE01_00)
+    if (SCCheckStatus() != SC_STATUS_OK) {
+#elif defined(VERSION_RSPE01_01)
     if (SCCheckStatus() == SC_STATUS_BUSY) {
+#endif
         return;
     }
 
@@ -1035,6 +1043,15 @@ static void EnableStackHandler0(OSAlarm* pAlarm, OSContext* pContext) {
 }
 
 static WUDInitState WUDiWaitSCSetup(void) {
+#if defined(VERSION_RSPE01_00)
+    WUDInitState nextState = WUD_STATE_INIT_WAIT_FOR_INITIALIZATION;
+
+    if (SCCheckStatus() != SC_STATUS_BUSY) {
+        nextState = WUD_STATE_INIT_GET_DEV_INFO;
+    }
+
+    return nextState;
+#elif defined(VERSION_RSPE01_01)
     s32 diff = 0;
     WUDInitState nextState = WUD_STATE_INIT_WAIT_FOR_INITIALIZATION;
     s64 time = __OSGetSystemTime();
@@ -1047,6 +1064,7 @@ static WUDInitState WUDiWaitSCSetup(void) {
     }
 
     return nextState;
+#endif
 }
 
 static WUDInitState WUDiGetRegisteredDevice(void) {
@@ -1101,6 +1119,7 @@ static void InitHandler(void) {
     WUDCB* p = &_wcb;
 
     switch (p->initState) {
+
     case WUD_STATE_INIT_WAIT_FOR_INITIALIZATION: {
         p->initState = WUDiWaitSCSetup();
         break;
@@ -1127,8 +1146,13 @@ static void WUDiContMapTableFlush(void) {
     WUDCB* p = &_wcb;
     u8 nextState;
 
+#if defined(VERSION_RSPE01_00)
+    if (SCCheckStatus() == SC_STATUS_OK &&
+        SCSetBtDeviceInfoArray(&_scArray)) {
+#elif defined(VERSION_RSPE01_01)
     if (SCCheckStatus() != SC_STATUS_BUSY &&
         SCSetBtDeviceInfoArray(&_scArray)) {
+#endif
 
         SCFlushAsync(ShutFlushCallback);
         nextState = WUD_STATE_SHUTDOWN_FLUSH_SETTINGS;
@@ -1181,6 +1205,7 @@ static void InitCore(void) {
             i == WUD_MAX_DEV_ENTRY_FOR_SMP - 1 ? NULL : &p->smpList[i + 1];
     }
 
+#if defined(VERSION_RSPE01_01)
     p->stdListTail = &p->stdList[WUD_MAX_DEV_ENTRY_FOR_STD - 1];
     p->stdListHead = &p->stdList[0];
 
@@ -1190,6 +1215,7 @@ static void InitCore(void) {
         p->stdList[i].next =
             i == WUD_MAX_DEV_ENTRY_FOR_STD - 1 ? NULL : &p->stdList[i + 1];
     }
+#endif
 
     p->syncState = WUD_STATE_SYNC_START;
     p->linkKeyState = WUD_STATE_LINK_KEY_START;
@@ -1288,12 +1314,14 @@ void WUDShutdown(void) {
     memset(_scArray.devices, 0,
            sizeof(SCBtDeviceInfo) * WUD_MAX_DEV_ENTRY_FOR_STD);
 
+#if defined(VERSION_RSPE01_01)
     for (i = 0, pIt = _wcb.stdListHead; pIt != NULL; pIt = pIt->next, i++) {
         WUD_BDCPY(_scArray.devices[i].addr, pIt->devInfo->devAddr);
 
         memcpy(&_scArray.devices[i].info, &pIt->devInfo->conf,
                sizeof(SCDevInfo));
     }
+#endif
 
     p->shutdownState = WUD_STATE_SHUTDOWN_STORE_SETTINGS;
 
@@ -1401,8 +1429,14 @@ static BOOL StartSyncDevice(u8 syncType, s8 syncLoopNum, BOOL syncSkipChecks) {
         p->syncedNum = 0;
 
         OSCreateAlarm(&p->alarm);
+
+#if defined(VERSION_RSPE01_00)
+        OSSetPeriodicAlarm(&p->alarm, __OSGetSystemTime(), OS_MSEC_TO_TICKS(20),
+                           SyncHandler0);
+#elif defined(VERSION_RSPE01_01)
         OSSetPeriodicAlarm(&p->alarm, OSGetTime(), OS_MSEC_TO_TICKS(20),
                            SyncHandler0);
+#endif
 
         OSRestoreInterrupts(enabled);
 
@@ -1447,7 +1481,12 @@ BOOL WUDStartFastSyncSimple(void) {
     WUDSyncDeviceCallback pSyncCallback;
 
     DEBUGPrint("WUDStartSyncSimple()\n");
+    
+#if defined(VERSION_RSPE01_00)
+    success = StartSyncSimple(FALSE);
+#elif defined(VERSION_RSPE01_01)
     success = StartSyncSimple(TRUE);
+#endif
 
     enabled = OSDisableInterrupts();
     pSyncCallback = p->syncSmpCB;
@@ -1534,8 +1573,13 @@ BOOL WUDStartClearDevice(void) {
         p->deleteState = WUD_STATE_DELETE_DISALLOW_INCOMING;
 
         OSCreateAlarm(&p->alarm);
+#if defined(VERSION_RSPE01_00)
+        OSSetPeriodicAlarm(&p->alarm, __OSGetSystemTime(), OS_MSEC_TO_TICKS(20),
+                           DeleteAllHandler0);
+#elif defined(VERSION_RSPE01_01)
         OSSetPeriodicAlarm(&p->alarm, OSGetTime(), OS_MSEC_TO_TICKS(20),
                            DeleteAllHandler0);
+#endif
 
         OSRestoreInterrupts(enabled);
 
@@ -1657,7 +1701,11 @@ void reset_again(void) {
 // clang-format off
 static u8 patch_binary[] = {
     0x70, 0x99, 0x08, 0x00, // address (little-endian)
+#if defined(VERSION_RSPE01_00)
+    0x38, 0x00, 0x00, 0x00, // size (little-endian)
+#elif defined(VERSION_RSPE01_01)
     0xB4, 0x00, 0x00, 0x00, // size (little-endian)
+#endif
 
     // patch data
     0x88, 0x43, 0xD1, 0x07,
@@ -1674,6 +1722,7 @@ static u8 patch_binary[] = {
     0x01, 0x49, 0x0B, 0x60,
     0x90, 0xF7, 0x96, 0xFB,
     0xD8, 0x1D, 0x08, 0x00,
+#if defined(VERSION_RSPE01_01)
     0x00, 0xF0, 0x04, 0xF8,
     0x00, 0x23, 0x79, 0xF7,
     0xE3, 0xFA, 0x00, 0x00,
@@ -1705,20 +1754,27 @@ static u8 patch_binary[] = {
     0xFF, 0x9F, 0x00, 0x00,
     0x30, 0xFC, 0x0E, 0x00,
     0x7F, 0xFF, 0x00, 0x00
+#endif
 };
 // clang-format on
 
 // clang-format off
 static WUDPatchList patch_install = {
+#if defined(VERSION_RSPE01_00)
+    5,
+#elif defined(VERSION_RSPE01_01)
     7,
+#endif
     {
         {0x20, 0xBC, 0x65, 0x01, 0x00, 0x84, 0x42, 0x09, 0xD2, 0x84, 0x42, 0x09, 0xD1},
         {0x21, 0x84, 0x5A, 0x00, 0x00, 0x83, 0xF0, 0x74, 0xFF, 0x09, 0x0C, 0x08, 0x43},
         {0x22, 0x00, 0x61, 0x00, 0x00, 0x83, 0xF0, 0x40, 0xFC, 0x00, 0x00, 0x00, 0x00},
         {0x23, 0xCC, 0x9F, 0x01, 0x00, 0x6F, 0xF0, 0xE4, 0xFC, 0x03, 0x28, 0x7D, 0xD1},
         {0x24, 0x3C, 0x62, 0x01, 0x00, 0x28, 0x20, 0x00, 0xE0, 0x60, 0x8D, 0x23, 0x68},
+#if defined(VERSION_RSPE01_01)
         {0x25, 0x04, 0x12, 0x01, 0x00, 0x20, 0x1C, 0x20, 0x1C, 0x24, 0xE0, 0xB0, 0x21},
         {0x26, 0x74, 0x2F, 0x00, 0x00, 0x86, 0xF0, 0x18, 0xFD, 0x21, 0x4F, 0x3B, 0x60}
+#endif
     }
 };
 // clang-format on
@@ -1757,7 +1813,11 @@ static void write_patch_cb(tBTM_VSC_CMPL* p1) {
             WUDiWritePatch();
         }
     } else {
+#if defined(VERSION_RSPE01_00)
+        WUDiInitSub();
+#elif defined(VERSION_RSPE01_01)
         reset_again();
+#endif
     }
 }
 
@@ -1785,12 +1845,20 @@ static void WUDiWritePatch(void) {
 static void install_patch_cb(tBTM_VSC_CMPL* p1) {
     if (p1 != NULL) {
         if (patch_num == install_num) {
+#if defined(VERSION_RSPE01_00)
+            WUDiInitSub();
+#elif defined(VERSION_RSPE01_01)
             reset_again();
+#endif
         } else {
             WUDiInstallPatch();
         }
     } else {
+#if defined(VERSION_RSPE01_00)
+        WUDiInitSub();
+#elif defined(VERSION_RSPE01_01)
         reset_again();
+#endif
     }
 }
 
@@ -2303,6 +2371,7 @@ void WUDiMoveTopOfDisconnectedSmpDevice(WUDDevInfo* pInfo) {
     OSRestoreInterrupts(enabled);
 }
 
+#if defined(VERSION_RSPE01_01)
 void WUDiMoveTopStdDevInfoPtr(WUDDevInfo* pInfo) {
     WUDCB* p = &_wcb;
     BOOL enabled;
@@ -2437,6 +2506,7 @@ void WUDiMoveTopOfDisconnectedStdDevice(WUDDevInfo* pInfo) {
 
     OSRestoreInterrupts(enabled);
 }
+#endif
 
 BOOL WUDIsBusy(void) {
     WUDCB* p = &_wcb;

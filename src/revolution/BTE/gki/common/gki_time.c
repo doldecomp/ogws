@@ -7,6 +7,9 @@
  *      - Modified GKI_stop_timer to match RVL version
  *      - Modified GKI_add_to_timer_list to match RVL version
  *      - Modified GKI_remove_from_timer_list to match RVL version
+ *
+ *  2026/09/24:
+ *      - Defined out functions unused for RVL
  * 
  *  Compile with REVOLUTION defined to include these changes.
  * 
@@ -117,6 +120,7 @@ void gki_timers_init(void)
 ** Returns          TRUE if at least one time is running in the system, FALSE else.
 **
 *******************************************************************************/
+#ifndef REVOLUTION
 BOOLEAN gki_timers_is_timer_running(void)
 {
     UINT8   tt;
@@ -155,6 +159,7 @@ BOOLEAN gki_timers_is_timer_running(void)
     return FALSE;
 
 }
+#endif
 
 /*******************************************************************************
 **
@@ -620,6 +625,7 @@ void GKI_timer_update (INT32 ticks_since_last_update)
 ** Returns          BOOLEAN
 **
 *******************************************************************************/
+#ifndef REVOLUTION
 BOOLEAN GKI_timer_queue_empty (void)
 {
     UINT8 tt;
@@ -632,6 +638,7 @@ BOOLEAN GKI_timer_queue_empty (void)
 
     return TRUE;
 }
+#endif
 
 /*******************************************************************************
 **
@@ -784,6 +791,7 @@ UINT16 GKI_update_timer_list (TIMER_LIST_Q *p_timer_listq, INT32 num_units_since
 **                  remaining ticks if success
 **
 *******************************************************************************/
+#ifndef REVOLUTION
 UINT32 GKI_get_remaining_ticks (TIMER_LIST_Q *p_timer_listq, TIMER_LIST_ENT  *p_target_tle)
 {
     TIMER_LIST_ENT  *p_tle;
@@ -818,6 +826,7 @@ UINT32 GKI_get_remaining_ticks (TIMER_LIST_Q *p_timer_listq, TIMER_LIST_ENT  *p_
 
     return (rem_ticks);
 }
+#endif
 
 /*******************************************************************************
 **

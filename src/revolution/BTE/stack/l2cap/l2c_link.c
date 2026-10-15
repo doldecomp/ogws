@@ -1,5 +1,15 @@
 /******************************************************************************
  *
+ *  NOTICE OF CHANGES
+ *  2026/09/24:
+ *      - Defined out unused functions for RVL
+ * 
+ *  Compile with REVOLUTION defined to include these changes.
+ * 
+ ******************************************************************************/
+
+/******************************************************************************
+ *
  *  Copyright (C) 1999-2012 Broadcom Corporation
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
@@ -794,6 +804,7 @@ void l2c_link_adjust_allocation (void)
 ** Returns          void
 **
 *******************************************************************************/
+#ifndef REVOLUTION
 void l2c_link_adjust_chnl_allocation (void)
 {
     tL2C_CCB    *p_ccb;
@@ -895,6 +906,7 @@ void l2c_link_adjust_chnl_allocation (void)
         l2cu_check_channel_congestion (p_ccb);
     }
 }
+#endif
 
 /*******************************************************************************
 **

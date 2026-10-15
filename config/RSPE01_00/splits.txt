@@ -602,6 +602,21 @@ revolution/VI/i2c.c:
 revolution/VI/vi3in1.c:
 	.text       start:0x800D6B3C end:0x800D81F0
 
+revolution/WUD/WUD.c:
+	.text       start:0x800D81F0 end:0x800DC060
+	.data       start:0x80372DF0 end:0x80373BB8
+	.bss        start:0x803ED5E0 end:0x803EF340
+	.sdata      start:0x804DDF40 end:0x804DDF48
+	.sbss       start:0x804DF6C8 end:0x804DF6E8
+	.sdata2     start:0x804E1328 end:0x804E1330
+
+revolution/WUD/WUDHidHost.c:
+	.text       start:0x800DC060 end:0x800DC560
+	.data       start:0x80373BB8 end:0x80373E38
+
+revolution/WUD/debug_msg.c:
+	.text       start:0x800DC560 end:0x800DC5B0
+
 revolution/ARC/arc.c:
 	.text       start:0x800DCAD4 end:0x800DD454
 	.data       start:0x80373E80 end:0x80373EF0
@@ -619,6 +634,17 @@ revolution/AXFX/AXFXChorus.c:
 revolution/AXFX/AXFXChorusExp.c:
 	.text       start:0x800E3504 end:0x800E3F80
 	.sdata2     start:0x804E1408 end:0x804E1438
+
+revolution/BTE/gki/common/gki_buffer.c:
+	.text       start:0x800E4150 end:0x800E5594
+	.data       start:0x80377D18 end:0x80377E60
+
+revolution/BTE/gki/common/gki_time.c:
+	.text       start:0x800E5594 end:0x800E5AEC
+
+revolution/BTE/rvl/gki_ppc.c:
+	.text       start:0x800E5AEC end:0x800E5D7C
+	.bss        start:0x80409F00 end:0x804329E0
 
 revolution/DVD/dvdfs.c:
 	.text       start:0x80112C00 end:0x80113648

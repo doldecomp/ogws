@@ -4,6 +4,10 @@
  *  2024/03/25:
  *      - Add #defines for RVL target
  * 
+ *  2026/09/24:
+ *      - Changed preprocessing directives to remove extraneous APIs
+ *        (with respect to RVL)
+ *
  *  Compile with REVOLUTION defined to include these changes.
  * 
  ******************************************************************************/
@@ -233,7 +237,7 @@
 #endif
 
 #ifndef BTA_AR_INCLUDED
-#define BTA_AR_INCLUDED TRUE
+#define BTA_AR_INCLUDED FALSE
 #endif
 
 #ifndef BTA_AV_INCLUDED
@@ -317,11 +321,11 @@
 #endif
 
 #ifndef ANDROID_APP_INCLUDED
-#define ANDROID_APP_INCLUDED  TRUE
+#define ANDROID_APP_INCLUDED  FALSE
 #endif
 
 #ifndef ANDROID_USE_LOGCAT
-#define ANDROID_USE_LOGCAT  TRUE
+#define ANDROID_USE_LOGCAT  FALSE
 #endif
 
 #ifndef LINUX_GKI_INCLUDED
@@ -337,7 +341,7 @@
 #endif
 
 #ifndef GKI_PTHREAD_JOINABLE
-#define GKI_PTHREAD_JOINABLE  TRUE
+#define GKI_PTHREAD_JOINABLE  FALSE
 #endif
 
 #ifndef LINUX_DRV_INCLUDED
@@ -3447,7 +3451,7 @@ Range: Minimum 12000 (12 secs) on BR/EDR when supporting PBF.
 ******************************************************************************/
 
 #ifndef AVCT_INCLUDED
-#define AVCT_INCLUDED               TRUE
+#define AVCT_INCLUDED               FALSE
 #endif
 
 /* Number of simultaneous ACL links to different peer devices. */
