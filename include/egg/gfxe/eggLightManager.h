@@ -26,17 +26,8 @@ public:
     void Calc(nw4r::g3d::ScnRoot*);
     void CalcView(const nw4r::math::MTX34&, u8, nw4r::g3d::ScnRoot*);
 
-    /**
-     * @brief Sets ambient color registers
-     *
-     * @details Channel 0 is set to current value of m_pAmbColor0,
-     * while channel 1 is set to black
-     */
     void SetChanAmbColor() const;
 
-    /**
-     * @brief Loads light registers with contents of array index
-     */
     void LoadObjIndxGX() const;
 
     void DoneDraw();

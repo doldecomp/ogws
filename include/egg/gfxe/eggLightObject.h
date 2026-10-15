@@ -58,7 +58,7 @@ public:
 
     void InitGX(GXLightObj* pObj) const;
 
-    void CopyToG3D_World(nw4r::g3d::ScnRoot& pScnRoot) const;
+    void CopyToG3D_World(nw4r::g3d::ScnRoot* pScnRoot) const;
 
     void CopyFromG3D(nw4r::g3d::LightAnmResult* pResult, f32 frame);
 

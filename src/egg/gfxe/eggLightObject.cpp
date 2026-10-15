@@ -53,8 +53,6 @@ void LightObject::CalcDirDist() {
 }
 
 void LightObject::CalcAt() {
-    //! Calculating all variables at once leads to (non-matching) paired singles
-    //! operations
     mAt.x = (mDir.x * mDistance) + mPos.x;
     mAt.y = (mDir.y * mDistance) + mPos.y;
     mAt.z = (mDir.z * mDistance) + mPos.z;

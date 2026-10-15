@@ -88,9 +88,7 @@ RPGrpModel::RPGrpModel(u8 viewNo)
     spGenList = this;
     nw4r::math::MTX34Identity(&mtx14);
     //! @bug only in rev 0: mBaseScale was already initialized
-    mBaseScale.z = 1.0f;
-    mBaseScale.y = 1.0f;
-    mBaseScale.x = 1.0f;
+    mBaseScale.x = mBaseScale.y = mBaseScale.z = 1.0f;
 }
 
 #elif defined(VERSION_RSPE01_01)

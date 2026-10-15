@@ -29,7 +29,7 @@ public:
     void LoadScnFog(const nw4r::g3d::ResAnmScn scn, f32 frame);
     void DoneDraw();
 
-    Fog* GetFog(int id) {
+    Fog* GetFog(int id) const {
         return mFog[id];
     }
 
