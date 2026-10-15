@@ -25,9 +25,6 @@
 // In nonmatching builds, the LINE family of macros is ignored for accuracy.
 // DECOMP_ASSERT will instead provide the true source location.
 //
-// Due to this macro's implementation, unwanted macro expansion may occur.
-// To preserve an expression
-//
 // >> Parameters <<
 //
 // The 'assert_impl' parameter is the name of the assertion implementation.
