@@ -686,7 +686,7 @@ void ParticleManager::Calc() {
                 }
 
                 case AC_TARGET_FIELD_VORTEX: {
-                    struct UNKSTRUCT_UNK36 {
+                    struct InfoFieldVortex {
                         f32 innerSpeed; // at 0x0
                         f32 outerSpeed; // at 0x4
                         f32 distance; // at 0x8
@@ -694,7 +694,7 @@ void ParticleManager::Calc() {
                         bool emitterSpace; // at 0x14
                         u8 addTarget; // at 0x15
                         char UNK_0x16[2];
-                    } infoCopy = *reinterpret_cast<UNKSTRUCT_UNK36*>(pPtclTrack + sizeof(AnimCurveHeader) + pTrackAsHeader->keyTable + pTrackAsHeader->rangeTable + pTrackAsHeader->randomTable + pTrackAsHeader->nameTable);
+                    } infoCopy = *reinterpret_cast<InfoFieldVortex*>(pPtclTrack + sizeof(AnimCurveHeader) + pTrackAsHeader->keyTable + pTrackAsHeader->rangeTable + pTrackAsHeader->randomTable + pTrackAsHeader->nameTable);
                     
                     AnimCurveExecuteF32(pPtclTrack, &infoCopy.innerSpeed, tick, seed, life);
                     
