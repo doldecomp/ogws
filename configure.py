@@ -502,7 +502,7 @@ config.libs = [
             Object(not MatchingFor("RSPE01_00"), "nw4r/ef/ef_emitter.cpp"),
             Object(NonMatching, "nw4r/ef/ef_animcurve.cpp"),
             Object(not MatchingFor("RSPE01_00"), "nw4r/ef/ef_particle.cpp"),
-            Object(NonMatching, "nw4r/ef/ef_particlemanager.cpp"),
+            Object(Matching, "nw4r/ef/ef_particlemanager.cpp"),
             Object(not MatchingFor("RSPE01_00"), "nw4r/ef/ef_resource.cpp"),
             Object(Matching, "nw4r/ef/ef_util.cpp"),
             Object(Matching, "nw4r/ef/ef_handle.cpp"),
