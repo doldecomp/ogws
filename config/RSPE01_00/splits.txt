@@ -181,6 +181,13 @@ nw4r/snd/snd_FxChorus.cpp:
 	.text       start:0x80035F90 end:0x8003635C
 	.rodata     start:0x80341240 end:0x80341250
 
+nw4r/snd/snd_SeqSoundHandle.cpp:
+	.text       start:0x8003B5B0 end:0x8003B6F0
+
+nw4r/snd/snd_SoundArchive.cpp:
+	.text       start:0x8003D47C end:0x8003DA9C
+	.data       start:0x8035FF20 end:0x8035FF40
+
 nw4r/snd/snd_SoundHeap.cpp:
 	.text       start:0x80041F48 end:0x8004223C
 
@@ -450,6 +457,10 @@ egg/core/eggProcessMeter.cpp:
 egg/core/eggDisposer.cpp:
 	.text       start:0x80087C38 end:0x80087D00
 	.data       start:0x80361A68 end:0x80361A78
+
+egg/audio/eggAudioFxMgr.cpp:
+	.text       start:0x80088958 end:0x8008977C
+	.rodata     start:0x80343A28 end:0x80343C60
 
 runtime/__mem.c:
 	.init       start:0x80004000 end:0x80004134
@@ -918,3 +929,9 @@ Pack/RPGraphics/RPGrpModelResManager.cpp:
 Pack/RPAudio/RPSndAudioMgr.cpp:
 	.text       start:0x8019C7E0 end:0x8019E630
 	.sbss       start:0x804DFC5C end:0x804DFC68
+
+Pack/RPAudio/RPSndSpeakerMgr.cpp:
+	.text       start:0x8019E630 end:0x8019F068
+	.data       start:0x80383060 end:0x8038306C
+	.sbss       start:0x804DFC68 end:0x804DFC6C
+	.sdata2     start:0x804E1EA8 end:0x804E1EAC
