@@ -102,6 +102,10 @@ public:
         return sTVModeHeights[tvMode];
     }
 
+    static TVMode GetTVMode() {
+        return sTVMode;
+    }
+
 private:
     enum {
         FLAG_ALIGN_EFB_POS = 1 << 1,

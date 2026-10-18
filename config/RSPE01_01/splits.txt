@@ -3990,13 +3990,13 @@ Pack/RPSports/RPBowScene/RPBow_80315998.cpp:
 	.text       start:0x80315998 end:0x8031641C
 	.sdata2     start:0x804C5B00 end:0x804C5B48
 
-Pack/RPSports/RPBowScene/RPBow_8031641C.cpp:
+Pack/RPSports/RPBowScene/RPBowSceneObjectManager.cpp:
 	.text       start:0x8031641C end:0x80319C98
 	.rodata     start:0x803924A0 end:0x803929C8
 	.data       start:0x803CA940 end:0x803CAF00
 	.sdata2     start:0x804C5B48 end:0x804C5B80
 
-Pack/RPSports/RPBowScene/RPBow_80319C98.cpp:
+Pack/RPSports/RPBowScene/RPBowCameraTransform.cpp:
 	.text       start:0x80319C98 end:0x8031C388
 	.sdata2     start:0x804C5B80 end:0x804C5CB8
 
@@ -4004,12 +4004,12 @@ Pack/RPSports/RPBowScene/RPBowSwing.cpp:
 	.text       start:0x8031C388 end:0x8031ECB4
 	.sdata2     start:0x804C5CB8 end:0x804C5D28
 
-Pack/RPSports/RPBowScene/RPBow_8031C388.cpp:
+Pack/RPSports/RPBowScene/RPBowAlleyModelManager.cpp:
 	.text       start:0x8031ECB4 end:0x8031EFE4
 	.rodata     start:0x803929C8 end:0x803929E0
 	.sdata2     start:0x804C5D28 end:0x804C5D30
 
-Pack/RPSports/RPBowScene/RPBow_8031EFE4.cpp:
+Pack/RPSports/RPBowScene/RPBowLaneDataHolder.cpp:
 	.text       start:0x8031EFE4 end:0x80320EFC
 	.sdata2     start:0x804C5D30 end:0x804C5DC8
 
@@ -4038,27 +4038,27 @@ Pack/RPSports/RPBowScene/RPBow_80329658.cpp:
 	.sdata2     start:0x804C6098 end:0x804C60E0
 
 Pack/RPSports/RPBowScene/RPBowActiveBall.cpp:
-	.text       start:0x8032A9E8 end:0x8032ADD8
+	.text       start:0x8032A9E8 end:0x8032AE54
 	.sdata2     start:0x804C60E0 end:0x804C6100
 
-Pack/RPSports/RPBowScene/RPBow_8032ADD8.cpp:
-	.text       start:0x8032ADD8 end:0x8032EA58
+Pack/RPSports/RPBowScene/RPBowScoreManager.cpp:
+	.text       start:0x8032AE54 end:0x8032B3D8
 	.rodata     start:0x80392B30 end:0x80392B58
-	.sdata2     start:0x804C6100 end:0x804C6158
+	.sdata2     start:0x804C6100 end:0x804C6128
 
-Pack/RPSports/RPBowScene/RPBow_8032EA58.cpp:
-	.text       start:0x8032EA58 end:0x80330830
+Pack/RPSports/RPBowScene/RPBowGameManager.cpp:
+	.text       start:0x8032B3D8 end:0x8032F514
+	.sdata2     start:0x804C6128 end:0x804C6158
+
+Pack/RPSports/RPBowScene/RPBowGameModeState.cpp:
+	.text       start:0x8032F514 end:0x80330830
 	.rodata     start:0x80392B58 end:0x80392C08
 	.bss        start:0x804BC218 end:0x804BD2E8
 	.sdata2     start:0x804C6158 end:0x804C6178
 
 Pack/RPSports/RPBowScene/RPBowGlobalLaneManager.cpp:
-	.text       start:0x80330830 end:0x80330EBC
-	.sdata2     start:0x804C6178 end:0x804C6180
-
-Pack/RPSports/RPBowScene/RPBow_80330EBC.cpp:
-	.text       start:0x80330EBC end:0x80330FE8
-	.sdata2     start:0x804C6180 end:0x804C6188
+	.text       start:0x80330830 end:0x80330FE8
+	.sdata2     start:0x804C6178 end:0x804C6188
 
 Pack/RPSports/RPBowScene/RPBow_80330FE8.cpp:
 	.text       start:0x80330FE8 end:0x80331654
@@ -4074,14 +4074,11 @@ Pack/RPSports/RPBowScene/RPBowManagerContext.cpp:
 	.bss        start:0x804BD2E8 end:0x804BD328
 	.sdata2     start:0x804C61C8 end:0x804C61D8
 
-Pack/RPSports/RPBowScene/RPBow_80332C24.cpp:
-	.text       start:0x80332C24 end:0x80332D14
-
-Pack/RPSports/RPBowScene/RPBow_80332D14.cpp:
-	.text       start:0x80332D14 end:0x803345F0
+Pack/RPSports/RPBowScene/RPBowNpcContext.cpp:
+	.text       start:0x80332C24 end:0x803345F0
 	.sdata2     start:0x804C61D8 end:0x804C6260
 
-Pack/RPSports/RPBowScene/RPBowPinSetter.cpp:
+Pack/RPSports/RPBowScene/RPBowPinSetterManager.cpp:
 	.text       start:0x803345F0 end:0x803349E0
 	.sdata2     start:0x804C6260 end:0x804C6288
 
@@ -4108,7 +4105,7 @@ Pack/RPSports/RPBowScene/RPBow_8033B690.cpp:
 	.rodata     start:0x80392EE8 end:0x80392EF8
 	.sdata2     start:0x804C6390 end:0x804C6440
 
-Pack/RPSports/RPBowScene/RPBow_8033FD0C.cpp:
+Pack/RPSports/RPBowScene/RPBowPowerThrowsPinManager.cpp:
 	.text       start:0x8033FD0C end:0x80340308
 	.sdata2     start:0x804C6440 end:0x804C6450
 
@@ -4134,21 +4131,20 @@ Pack/RPSports/RPBowScene/RPBow_8034656C.cpp:
 	.sdata2     start:0x804C6518 end:0x804C65C0
 
 Pack/RPSports/RPBowScene/RPBowPlayerLaneNpc.cpp:
-	.text       start:0x80346E60 end:0x80347574
-	.sdata2     start:0x804C65C0 end:0x804C65EC
+	.text       start:0x80346E60 end:0x803475E4
+	.ctors      start:0x80355254 end:0x80355258
+	.sdata2     start:0x804C65C0 end:0x804C6610
 
 Pack/RPSports/RPBowScene/RPBow_80347574.cpp:
-	.text       start:0x80347574 end:0x80347D0C
-	.ctors      start:0x80355254 end:0x80355258
+	.text       start:0x803475E4 end:0x80347D0C
 	.rodata     start:0x80393180 end:0x803931A0
-	.sdata2     start:0x804C65EC end:0x804C6610
 
-Pack/RPSports/RPBowScene/RPBow_80347D0C.cpp:
+Pack/RPSports/RPBowScene/RPBowPinSetterModel.cpp:
 	.text       start:0x80347D0C end:0x80348158
 	.rodata     start:0x803931A0 end:0x803931C0
 	.sdata2     start:0x804C6610 end:0x804C6628
 
-Pack/RPSports/RPBowScene/RPBow_80348158.cpp:
+Pack/RPSports/RPBowScene/RPBowCameraController.cpp:
 	.text       start:0x80348158 end:0x80348858
 	.rodata     start:0x803931C0 end:0x80393350
 	.sdata2     start:0x804C6628 end:0x804C6660
@@ -4157,7 +4153,7 @@ Pack/RPSports/RPBowScene/RPBow_80348858.cpp:
 	.text       start:0x80348858 end:0x8034C1AC
 	.sdata2     start:0x804C6660 end:0x804C67C8
 
-Pack/RPSports/RPBowScene/RPBow_8034C1AC.cpp:
+Pack/RPSports/RPBowScene/RPBowSceneDirector.cpp:
 	.text       start:0x8034C1AC end:0x8034C95C
 	.sdata2     start:0x804C67C8 end:0x804C67E0
 
@@ -4179,46 +4175,53 @@ Pack/RPSports/RPBowScene/RPBowBackgroundNpcManager.cpp:
 	.bss        start:0x804BD328 end:0x804BD36C
 	.sdata2     start:0x804C6898 end:0x804C68F8
 
-Pack/RPSports/RPBowScene/RPBow_8034E974.cpp:
-	.text       start:0x8034E974 end:0x8034F710
+Pack/RPSports/RPBowScene/RPBowRegularPinManager.cpp:
+	.text       start:0x8034E974 end:0x8034F53C
 	.rodata     start:0x80393350 end:0x80393360
 	.sdata2     start:0x804C68F8 end:0x804C6930
 
 Pack/RPSports/RPBowScene/RPBow_8034F710.cpp:
-	.text       start:0x8034F710 end:0x803501D8
+	.text       start:0x8034F53C end:0x80350120
 	.rodata     start:0x80393360 end:0x80393398
 	.sdata2     start:0x804C6930 end:0x804C6948
 
 Pack/RPSports/RPBowScene/RPBow_803501D8.cpp:
-	.text       start:0x803501D8 end:0x80350F78
+	.text       start:0x80350120 end:0x80350F78
+	.rodata     start:0x80393398 end:0x80393410
+	.sdata      start:0x804BE968 end:0x804BE9D0
 	.sdata2     start:0x804C6948 end:0x804C6950
 
-Pack/RPSports/RPBowScene/RPBow_80350F78.cpp:
-	.text       start:0x80350F78 end:0x80351D58
-	.rodata     start:0x80393398 end:0x80393578
-	.sdata      start:0x804BE968 end:0x804BE9D0
-	.sdata2     start:0x804C6950 end:0x804C6968
+Pack/RPSports/RPBowScene/RPBowScoreLayout.cpp:
+	.text       start:0x80350F78 end:0x8035142C
+	.rodata     start:0x80393410 end:0x803934F8
+	.sdata2     start:0x804C6950 end:0x804C6958
 
-Pack/RPSports/RPBowScene/RPBow_80351D58.cpp:
-	.text       start:0x80351D58 end:0x803520F0
-	.sdata2     start:0x804C6968 end:0x804C6970
+Pack/RPSports/RPBowScene/RPBowNormalPinLayout.cpp:
+	.text       start:0x8035142C end:0x80351818
+	.rodata     start:0x803934F8 end:0x80393520
+	.sdata2     start:0x804C6958 end:0x804C6960
 
-Pack/RPSports/RPBowScene/RPBow_803520F0.cpp:
-	.text       start:0x803520F0 end:0x80353214
+Pack/RPSports/RPBowScene/RPBowPowerThrowsPinLayout.cpp:
+	.text       start:0x80351818 end:0x80351D10
+	.rodata     start:0x80393520 end:0x80393578
+	.sdata2     start:0x804C6960 end:0x804C6968
+
+Pack/RPSports/RPBowScene/RPBowLayoutManager.cpp:
+	.text       start:0x80351D10 end:0x803531FC
 	.rodata     start:0x80393578 end:0x803937C0
-	.sdata2     start:0x804C6970 end:0x804C6978
+	.sdata2     start:0x804C6968 end:0x804C6978
 
-Pack/RPSports/RPBowScene/RPBow_80353214.cpp:
-	.text       start:0x80353214 end:0x803536C4
+Pack/RPSports/RPBowScene/RPBowTrainingLivesLayout.cpp:
+	.text       start:0x803531FC end:0x803536CC
 	.rodata     start:0x803937C0 end:0x80393848
 	.sdata2     start:0x804C6978 end:0x804C6980
 
-Pack/RPSports/RPBowScene/RPBow_803536C4.cpp:
-	.text       start:0x803536C4 end:0x80353C8C
+Pack/RPSports/RPBowScene/RPBowPowerThrowsRoundsLayout.cpp:
+	.text       start:0x803536CC end:0x80353C8C
 	.rodata     start:0x80393848 end:0x803938C8
 	.sdata2     start:0x804C6980 end:0x804C6988
 
-Pack/RPSports/RPBowScene/RPBow_80353C8C.cpp:
+Pack/RPSports/RPBowScene/RPBowAimGuideLayout.cpp:
 	.text       start:0x80353C8C end:0x803543A8
 	.rodata     start:0x803938C8 end:0x803939F0
 	.sdata2     start:0x804C6988 end:0x804C6998
@@ -4227,14 +4230,11 @@ Pack/RPSports/RPBowScene/RPBowTrajectoryGuide.cpp:
 	.text       start:0x803543A8 end:0x803547A4
 	.sdata2     start:0x804C6998 end:0x804C69C0
 
-Pack/RPSports/RPBowScene/RPBow_803547A4.cpp:
-	.text       start:0x803547A4 end:0x80354C78
-
-Pack/RPSports/RPBowScene/RPBow_80354C78.cpp:
-	.text       start:0x80354C78 end:0x80354CAC
+Pack/RPSports/RPBowScene/RPBowBallHistoryEntry.cpp:
+	.text       start:0x803547A4 end:0x80354CA4
 	.sdata2     start:0x804C69C0 end:0x804C69C8
 
-Pack/RPSports/RPBowScene/RPBow_80354CAC.cpp:
-	.text       start:0x80354CAC end:0x8035507C
+Pack/RPSports/RPBowScene/RPBowPerfectGameUI.cpp:
+	.text       start:0x80354CA4 end:0x8035507C
 	.rodata     start:0x803939F0 end:0x80393A70
 	.sdata2     start:0x804C69C8 end:0x804C69D0
