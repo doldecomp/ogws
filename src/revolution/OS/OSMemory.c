@@ -40,10 +40,11 @@ static void MEMIntrruptHandler(s16 intr, OSContext* ctx) {
     u32 dar = (MI_HW_REGS[MI_ADDRHI] & 0x3ff) << 0x10 | MI_HW_REGS[MI_ADDRLO];
     MI_HW_REGS[MI_REG_0x20] = 0;
 
-    if (__OSErrorTable[OS_ERR_PROTECTION] != NULL) {
-        __OSErrorTable[OS_ERR_PROTECTION](OS_ERR_PROTECTION, ctx, dsisr, dar);
+    if (__OSErrorTable[OS_ERROR_PROTECTION] != NULL) {
+        __OSErrorTable[OS_ERROR_PROTECTION](OS_ERROR_PROTECTION, ctx, dsisr,
+                                            dar);
     } else {
-        __OSUnhandledException(OS_ERR_PROTECTION, ctx, dsisr, dar);
+        __OSUnhandledException(OS_ERROR_PROTECTION, ctx, dsisr, dar);
     }
 }
 

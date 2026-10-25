@@ -145,7 +145,7 @@ void SoundSystem::WaitForResetReady() {
         return;
     }
 
-    u32 start = OSGetTick();
+    OSTick start = OSGetTick();
 
     while (!detail::AxManager::GetInstance().IsResetReady()) {
         if (OS_TICKS_TO_SEC(OSGetTick() - start) > 0) {

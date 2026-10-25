@@ -585,7 +585,7 @@ _ctx_is_curr_fpu_ctx:
 }
 
 void __OSContextInit(void) {
-    __OSSetExceptionHandler(OS_ERR_FP_UNAVAIL, OSSwitchFPUContext);
+    __OSSetExceptionHandler(OS_ERROR_FLOATING_POINT, OSSwitchFPUContext);
     OS_CURRENT_FPU_CONTEXT = NULL;
     DBPrintf("FPU-unavailable handler installed\n");
 }

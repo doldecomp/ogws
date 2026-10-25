@@ -47,16 +47,19 @@ RPSysGameConfig::RPSysGameConfig(EGG::Heap* pHeap)
 
     mRootScene.set(NULL);
     mTVMode.set(NULL);
+
 #if defined(VERSION_RSPE01_01)
     mLanguage.set(NULL);
 #endif
 
     mRPPrint.set(false);
     mRPSysPrint.set(false);
+
 #if defined(VERSION_RSPE01_01)
     mRPUtlPrint.set(false);
     mRPAudPrint.set(false);
 #endif
+
     mRPSndPrint.set(false);
     mRPUserPrint.set(false);
 

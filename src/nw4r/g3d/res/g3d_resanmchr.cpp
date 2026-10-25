@@ -1,4 +1,6 @@
+#if NW4R_VERSION >= 20070608
 #pragma fp_contract on
+#endif
 
 #include <nw4r/g3d.h>
 
@@ -844,7 +846,7 @@ bool ChrAnmResult::GetRotateDeg(math::VEC3* pRotate) const {
     }
 
     // FSqrt returns 0 when -sin(y) <= -1 or -sin(y) >= 1
-    f32 y = math::FSqrt(-(rt._20 * rt._20 - 1.0f));
+    f32 y = math::FSqrt(1.0f - rt._20 * rt._20);
 
     if (y == 0.0f) {
         pRotate->x = math::Atan2Deg(rt._02 + rt._11, rt._12 + rt._01);

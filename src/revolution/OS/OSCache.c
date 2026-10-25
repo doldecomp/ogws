@@ -418,7 +418,7 @@ void L2GlobalInvalidate(void) {
     }
 }
 
-void DMAErrorHandler(u8 error, OSContext* ctx, u32 dsisr, u32 dar, ...) {
+void DMAErrorHandler(u16 error, OSContext* ctx, u32 dsisr, u32 dar, ...) {
     u32 hid2 = PPCMfhid2();
 
     OSReport("Machine check received\n");
@@ -468,6 +468,6 @@ void __OSCacheInit(void) {
         DBPrintf("L2 cache initialized\n");
     }
 
-    OSSetErrorHandler(OS_ERR_MACHINE_CHECK, DMAErrorHandler);
+    OSSetErrorHandler(OS_ERROR_MACHINE_CHECK, DMAErrorHandler);
     DBPrintf("Locked cache machine check handler installed\n");
 }

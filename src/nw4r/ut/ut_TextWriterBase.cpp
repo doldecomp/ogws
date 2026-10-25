@@ -28,6 +28,23 @@ template <typename T> f32 TextWriterBase<T>::GetLineHeight() const {
     return mLineSpace + GetScaleV() * lf;
 }
 
+template <typename T> f32 TextWriterBase<T>::Printf(const T* pStr, ...) {
+    T* pBuffer;
+
+    if (mFormatBuffer != NULL) {
+        pBuffer = mFormatBuffer;
+    } else {
+        pBuffer = static_cast<T*>(__alloca(mFormatBufferSize));
+    }
+
+    std::va_list args;
+    va_start(args, pStr);
+    f32 width = VPrintf(pBuffer, args);
+    va_end(args);
+
+    return width;
+}
+
 template <typename T>
 f32 TextWriterBase<T>::VPrintf(const T* pStr, std::va_list args) {
     T* pBuffer;

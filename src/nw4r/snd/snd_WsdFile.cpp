@@ -12,7 +12,7 @@ bool WsdFileReader::IsValidFileHeader(const void* pWsdBin) {
         return false;
     }
 
-    if (pFileHeader->version < NW4R_VERSION(1, 0)) {
+    if (pFileHeader->version < NW4R_FILE_VERSION(1, 0)) {
         return false;
     }
 
@@ -45,7 +45,7 @@ bool WsdFileReader::ReadWaveSoundInfo(WaveSoundInfo* pSoundInfo, int id) const {
     const WsdFile::WsdInfo* pWsdInfo =
         Util::GetDataRefAddress0(pWsd->refWsdInfo, &mDataBlock->wsdCount);
 
-    if (mHeader->fileHeader.version == NW4R_VERSION(1, 2)) {
+    if (mHeader->fileHeader.version == NW4R_FILE_VERSION(1, 2)) {
         pSoundInfo->pitch = pWsdInfo->pitch;
         pSoundInfo->pan = pWsdInfo->pan;
         pSoundInfo->surroundPan = pWsdInfo->surroundPan;
@@ -53,7 +53,7 @@ bool WsdFileReader::ReadWaveSoundInfo(WaveSoundInfo* pSoundInfo, int id) const {
         pSoundInfo->fxSendB = pWsdInfo->fxSendB;
         pSoundInfo->fxSendC = pWsdInfo->fxSendC;
         pSoundInfo->mainSend = pWsdInfo->mainSend;
-    } else if (mHeader->fileHeader.version == NW4R_VERSION(1, 1)) {
+    } else if (mHeader->fileHeader.version == NW4R_FILE_VERSION(1, 1)) {
         pSoundInfo->pitch = pWsdInfo->pitch;
         pSoundInfo->pan = pWsdInfo->pan;
         pSoundInfo->surroundPan = pWsdInfo->surroundPan;
@@ -93,7 +93,7 @@ bool WsdFileReader::ReadWaveSoundNoteInfo(WaveSoundNoteInfo* pSoundNoteInfo,
     pSoundNoteInfo->originalKey = pNoteInfo->originalKey;
     pSoundNoteInfo->volume = pNoteInfo->volume;
 
-    if (mHeader->fileHeader.version >= NW4R_VERSION(1, 1)) {
+    if (mHeader->fileHeader.version >= NW4R_FILE_VERSION(1, 1)) {
         pSoundNoteInfo->pan = pNoteInfo->pan;
         pSoundNoteInfo->surroundPan = pNoteInfo->surroundPan;
         pSoundNoteInfo->pitch = pNoteInfo->pitch;
@@ -110,7 +110,7 @@ bool WsdFileReader::ReadWaveParam(int id, WaveData* pWaveData,
                                   const void* pWaveAddr) const {
     const WaveFile::WaveInfo* pWaveInfo;
 
-    if (mHeader->fileHeader.version == NW4R_VERSION(1, 0)) {
+    if (mHeader->fileHeader.version == NW4R_FILE_VERSION(1, 0)) {
         const WsdFile::WaveBlockOld* pWaveBlockOld =
             reinterpret_cast<const WsdFile::WaveBlockOld*>(mWaveBlock);
 

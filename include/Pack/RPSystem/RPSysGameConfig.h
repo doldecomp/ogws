@@ -50,9 +50,9 @@ private:
     RPSysPrimTagParm<int> mRPKasPrint; // at 0xD0
     //! Mr. Matsutani print setting
     RPSysPrimTagParm<int> mRPMatPrint; // at 0xE0
-    //! Mr. Sawaya print setting
+    //! Mr. Sawatani print setting
     RPSysPrimTagParm<int> mRPSawPrint; // at 0xF0
-    //! Mr. Sakakibara print setting
+    //! Mr. Sakakihara print setting
     RPSysPrimTagParm<int> mRPSakPrint; // at 0x100
     //! Mr. Koda print setting
     RPSysPrimTagParm<int> mRPKodPrint; // at 0x110
