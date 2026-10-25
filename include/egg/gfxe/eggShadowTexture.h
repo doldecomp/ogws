@@ -1,8 +1,9 @@
 #ifndef EGG_GFXE_SHADOW_TEXTURE_H
 #define EGG_GFXE_SHADOW_TEXTURE_H
-#include "eggModelSnapshot.h"
-#include "eggPostEffectBase.h"
-#include "types_egg.h"
+#include <egg/types_egg.h>
+
+#include <egg/gfxe/eggModelSnapshot.h>
+#include <egg/gfxe/eggPostEffectBase.h>
 
 namespace EGG {
 class ShadowTexture : public ModelSnapshot {

@@ -1,6 +1,6 @@
 #ifndef EGG_GFXE_SHADOW_TEXTURE_MANAGER_H
 #define EGG_GFXE_SHADOW_TEXTURE_MANAGER_H
-#include "types_egg.h"
+#include <egg/types_egg.h>
 
 namespace EGG {
 

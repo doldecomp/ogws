@@ -21,6 +21,7 @@ nw4r::math::MTX34 RPGrpModelRfl::lbl_804A4608(
 );
 // clang-format on
 
+#if defined(VERSION_RSPE01_01)
 RPGrpModelRfl* RPGrpModelRfl::Construct(RFLDataSource src, u16 index,
                                         RFLMiddleDB* pMiddleDB,
                                         RFLResolution resolution, u32 exprFlags,
@@ -50,6 +51,7 @@ RPGrpModelRfl* RPGrpModelRfl::Construct(RFLDataSource src, u16 index,
 
     return p;
 }
+#endif
 
 RPGrpModelRfl::RPGrpModelRfl(RFLResolution resolution, u32 exprFlags, u8 viewNo)
     : RPGrpModel(viewNo),
@@ -66,7 +68,9 @@ RPGrpModelRfl::RPGrpModelRfl(RFLResolution resolution, u32 exprFlags, u8 viewNo)
 
     *static_cast<RPGrpModelRfl**>(pScnRfl->GetUserData()) = this;
 
+#if defined(VERSION_RSPE01_01)
     mpModelEx = new EGG::ModelEx(pScnRfl);
+#endif
 }
 
 void RPGrpModelRfl::Configure() {
@@ -82,9 +86,11 @@ void RPGrpModelRfl::Configure() {
     sDrawCoreSetting.posNrmMtxID = GX_PNMTX0;
     sDrawCoreSetting.reverseCulling = false;
 
+#if defined(VERSION_RSPE01_01)
     GetScnRfl()->SetLightSetIdx(LIGHT_SET_IDX);
     GetScnRfl()->SetFogIdx(FOG_IDX);
     GetScnRfl()->SetAmbientColor((GXColor){255, 255, 255, 255});
+#endif
     mBrightnessColor = (GXColor){255, 255, 255, 255};
 
     InternalCalc();
@@ -108,6 +114,7 @@ u16 RPGrpModelRfl::ReplaceTexture(const char* pName,
     return 1;
 }
 
+#if defined(VERSION_RSPE01_01)
 void RPGrpModelRfl::InternalCalc() {
     if (!mReverseCulling) {
         nw4r::math::VEC3 scale(mBaseScale.x * sBaseScale,
@@ -148,7 +155,9 @@ void RPGrpModelRfl::InternalCalc() {
         spCalcWorldMtxArray = NULL;
     }
 }
+#endif
 
+#if defined(VERSION_RSPE01_01)
 void RPGrpModelRfl::CalcBeforeDraw() {
     RPGrpModel::CalcBeforeDraw();
 
@@ -159,6 +168,7 @@ void RPGrpModelRfl::CalcBeforeDraw() {
         mFlagsRfl &= ~0x200;
     }
 }
+#endif
 
 void RPGrpModelRfl::DrawProc(nw4r::g3d::ScnRfl* pScnRfl,
                              const RFLCharModel* pModel, u32 diffMask,
@@ -188,7 +198,7 @@ void RPGrpModelRfl::DrawGX(const RFLCharModel* pModel, u32 diffMask,
     bool useMat =
         !(EGG::ModelEx::getDrawFlag() & EGG::ModelEx::cDrawFlag_IgnoreMaterial);
 
-    bool bVar3 = ((unkC & 0x20) || (mFlagsRfl & 0x8)) && mDrawGroup == 1;
+    bool bVar3 = ((unkFlag & 0x20) || (mFlagsRfl & 0x8)) && mDrawGroup == 1;
     bool bVar2 = !(mFlagsRfl & 0x400) || mDrawGroup == 1;
 
     bool bVar3_2 = opa && (mFlagsRfl & 0x40);
@@ -252,7 +262,9 @@ void RPGrpModelRfl::DrawGX(const RFLCharModel* pModel, u32 diffMask,
         }
 
         nw4r::math::MTX34 viewMtx;
+#if defined(VERSION_RSPE01_01)
         GetScnRfl()->GetMtx(nw4r::g3d::ScnObj::MTX_VIEW, &viewMtx);
+#endif
         viewMtx._03 = viewMtx._13 = viewMtx._23 = 0.0f;
 
         GXLoadTexMtxImm(viewMtx, GX_TEXMTX0, GX_MTX_3x4);
@@ -407,6 +419,7 @@ void RPGrpModelRfl::DrawGX(const RFLCharModel* pModel, u32 diffMask,
     }
 }
 
+#if defined(VERSION_RSPE01_01)
 const char* RPGrpModelRfl::GetJointName(u16 /* idx */) const {
     static const char JOINT_NAME[] = "dummy";
     return JOINT_NAME;
@@ -421,3 +434,4 @@ const char* RPGrpModelRfl::GetShapeName(u16 /* idx */) const {
     static const char SHAPE_NAME[] = "dummy";
     return SHAPE_NAME;
 }
+#endif

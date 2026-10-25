@@ -234,6 +234,7 @@ void RPSysKokeshiIcon::MakeTexture(RPGrpModel* pModel,
     BeginMakeTexture();
     {
         pScnRoot->Clear();
+#if defined(VERSION_RSPE01_01)
         nw4r::g3d::ScnObj* pScnObj = NULL;
 
         if (pModel->GetKind() == RPGrpModel::Kind_RFL) {
@@ -243,6 +244,7 @@ void RPSysKokeshiIcon::MakeTexture(RPGrpModel* pModel,
         }
 
         pScnRoot->PushBack(pScnObj);
+#endif
 
         pScnRoot->CalcWorld();
         pScnRoot->CalcMaterial();
