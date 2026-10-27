@@ -16,6 +16,20 @@ public:
 
     virtual CalcAheadFunc
     GetCalcAheadFunc(ParticleManager* pManager); // at 0x18
+private:
+    void DrawDirectional(const DrawInfo& rInfo, ParticleManager* pManager);
+    void DrawDirectionalBillboard(const DrawInfo& rInfo, ParticleManager* pManager);
+    void InitGraphics(const DrawInfo& rInfo, ParticleManager* pManager);
+
+    enum DirectionalPivot {
+        DIRECTIONAL_PIVOT_NOP,
+        DIRECTIONAL_PIVOT_BILLBOARD,
+        DIRECTIONAL_PIVOT__MASK = 0x3
+    };
+
+    DirectionalPivot GetDirectionalPivot(const EmitterDrawSetting& rSetting) {
+        return static_cast<DirectionalPivot>(rSetting.typeOption2 & DIRECTIONAL_PIVOT__MASK);
+    }
 };
 
 } // namespace ef
