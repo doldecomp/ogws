@@ -1,7 +1,5 @@
 #include <Pack/RPSports/RPBowScene/bowling.h>
 
-namespace Bowling {
-
 /**
  * @brief Pin target offsets
  * @details Controls where the triangle of pins is set up.
@@ -17,16 +15,23 @@ float gLaneXOffsets[8] = {
     0
 };
 
+extern void* lbl_803CA5F0[];
+
 // Extern Functions
-void ResetPinSetterState(LaneContext* pLane, u8 arg);
-void fn_80327330(LaneContext* pLane, PinStatus* pStatus);
-nw4r::math::MTX34* fn_80316A48(SomeUnkManager0* pSomeMgr, void* pObj, int val);
-void fn_8034EADC(void* pArrEntry, int validCount, nw4r::math::MTX34* pResultMtx, nw4r::math::MTX34* pMtx, bool flag);
-void fn_8034E974(void* pArrEntry, int validCount);
-void fn_80327218(LaneContext* pLane);
-void fn_803277B4(LaneContext* pLane);
 void fn_803295D0(LaneBvhData* pBvhData, void* pArg1, void* pArg2);
-void fn_80325154(LaneContext* pLane);
+
+/**
+ * @brief Creates and initializes the seven lane contexts
+ *
+ * @param objectManager Scene object manager
+ */
+void RPBowGlobalLaneManager::InitializeLaneContexts(RPBowSceneObjectManager* objectManager) {
+    for (int i = 0; i < 7; i++) {
+        LaneContext* ctx = new LaneContext();
+        pLanes[i] = ctx;
+        ctx->fn_80327858(0, 10, gLaneXOffsets[i], objectManager->entities.setters[i]);
+    }
+}
 
 /**
  * @brief Tests whether the ball's X position falls inside the hit-box radius of any lane boundary
@@ -49,7 +54,7 @@ bool CheckBallLaneIntersection(float* pBallXPos, float radius) {
  */
 void RPBowGlobalLaneManager::InitializeBallManagerLanes() {
     for (int i = 0; i < 7; i++) {
-        fn_803277B4(pLanes[i]);
+        pLanes[i]->fn_803277B4();
     }
 }
 
@@ -79,8 +84,8 @@ void RPBowGlobalLaneManager::ResetLanePinsAndAnimations() {
         status.pinBits[0] = -1;
         status.pinCount = 10;
 
-        fn_80327330(pLane, &status);
-        ResetPinSetterState(pLanes[i], 0);
+        pLane->fn_80327330(&status);
+        pLanes[i]->ResetPinSetterState(0);
     }
     field_0x21 = 0;
 }
@@ -104,7 +109,7 @@ void RPBowGlobalLaneManager::UpdateBallsPhysics() {
     for (int i = 0; i < 7; i++) {
         pLanes[i]->laneXOffset = gLaneXOffsets[i];
         if (i != 0 || field_0x21 == 0) {
-            fn_80327218(pLanes[i]);
+            pLanes[i]->fn_80327218();
         }
     }
 }
@@ -114,7 +119,7 @@ void RPBowGlobalLaneManager::UpdateBallsPhysics() {
  */
 void RPBowGlobalLaneManager::TickNpcLanes() {
     for (int i = 0; i < 7; i++) {
-        fn_80325154(pLanes[i]);
+        pLanes[i]->fn_80325154();
     }
 }
 
@@ -123,16 +128,16 @@ void RPBowGlobalLaneManager::TickNpcLanes() {
  *
  * @param val Unknown integer value
  * @param pObj Pointer to an object
- * @param pSomeMgr Manager object
+ * @param pObjectManager Manager object
  * @param isPlayerTurn Indicates if it is currently the player's turn
  */
-void RPBowGlobalLaneManager::UpdateLaneItems(int val, void* pObj, SomeUnkManager0* pSomeMgr, bool isPlayerTurn) {
+void RPBowGlobalLaneManager::UpdateLaneItems(RPBowCameraTransform* transform, CameraProjection* pObj, RPBowSceneObjectManager* pObjectManager, bool isPlayerTurn) {
     if (isInitialized == 0) return;
 
-    nw4r::math::MTX34* pResultMtx = fn_80316A48(pSomeMgr, pObj, val);
+    nw4r::math::MTX34* pResultMtx = pObjectManager->ProcessCamera(pObj, transform);
 
     for (int i = 0; i < 7; i++) {
-        void* pArrEntry = pSomeMgr->arr[i];
+        RPBowRegularPinManager* pinManager = pObjectManager->entities.pinManagers[i];
         int validCount = 0;
 
         for (int j = 0; j < 10; j++) {
@@ -160,20 +165,21 @@ void RPBowGlobalLaneManager::UpdateLaneItems(int val, void* pObj, SomeUnkManager
                     PinPhysicsBody* pBody = pLane->pPinManager->pPinBodies[j];
                     pMtx = &mtx;
 
-                    f32 t23 = pBody->position.z;
-                    f32 t22 = pBody->basisZ.z;
-                    f32 t21 = pBody->basisZ.y;
-                    f32 t20 = pBody->basisZ.x;
-                    f32 t13 = pBody->position.y;
-                    f32 t12 = pBody->basisY.z;
-                    f32 t11 = pBody->basisY.y;
-                    f32 t10 = pBody->basisY.x;
-                    f32 t03 = pBody->position.x;
-                    f32 t02 = pBody->basisX.z;
-                    f32 t01 = pBody->basisX.y;
-                    // f32 t00 = pBody->basisX.x;
+                    // Same issue occurs in fn_8034C230
+                    f32 t23 = pBody->state.position.z;
+                    f32 t22 = pBody->state.basisZ.z;
+                    f32 t21 = pBody->state.basisZ.y;
+                    f32 t20 = pBody->state.basisZ.x;
+                    f32 t13 = pBody->state.position.y;
+                    f32 t12 = pBody->state.basisY.z;
+                    f32 t11 = pBody->state.basisY.y;
+                    f32 t10 = pBody->state.basisY.x;
+                    f32 t03 = pBody->state.position.x;
+                    f32 t02 = pBody->state.basisX.z;
+                    f32 t01 = pBody->state.basisX.y;
+                    // f32 t00 = pBody->state.basisX.x;
 
-                    mtx._00 = pBody->basisX.x;
+                    mtx._00 = pBody->state.basisX.x;
                     mtx._01 = t01;
                     mtx._02 = t02;
                     mtx._03 = t03;
@@ -187,18 +193,16 @@ void RPBowGlobalLaneManager::UpdateLaneItems(int val, void* pObj, SomeUnkManager
                     mtx._23 = t23;
                 }
 
-                bool flag = false;
+                u32 flag = 0;
                 if (i == 0 && isPlayerTurn != 0) {
-                    flag = true;
+                    flag = 1;
                 }
 
-                pLanes[i]->VF_0x14();
-
-                fn_8034EADC(pArrEntry, validCount, pResultMtx, pMtx, flag);
+                pinManager->CalculatePinTransforms(validCount, pLanes[i]->VF_0x14(), pResultMtx, pMtx, (nw4r::math::MTX34*)flag);
                 validCount++;
             }
         }
-        fn_8034E974(pArrEntry, validCount);
+        pinManager->HideExcessPins(validCount);
     }
 }
 
@@ -206,12 +210,12 @@ void RPBowGlobalLaneManager::UpdateLaneItems(int val, void* pObj, SomeUnkManager
  * @brief Applies physics matrix translations onto the game's ball models
  * @details Also artificially moves the ball out of view bounds (y = 9999.0f) if it falls completely below the floor bounds.
  *
- * @param pBallMgr Scene object manager for balls
+ * @param pObjectManager Scene object manager for balls
  */
-void RPBowGlobalLaneManager::UpdateBallsMdl(SceneObjectManager* pBallMgr) {
+void RPBowGlobalLaneManager::UpdateBallsMdl(RPBowSceneObjectManager* pObjectManager) {
     for (int i = 0; i < 7; i++) {
         LaneContext* pLane = pLanes[i];
-        RPBowActiveBall* pBall = pBallMgr->entities.balls[i];
+        RPBowActiveBall* pBall = pObjectManager->entities.balls[i];
 
         nw4r::math::MTX34 mtx = pLane->throwContext.ballMtx;
         if (mtx._23 < -210.0f) {
@@ -223,5 +227,3 @@ void RPBowGlobalLaneManager::UpdateBallsMdl(SceneObjectManager* pBallMgr) {
         pBall->field_0x74 = field_110;
     }
 }
-
-} // namespace Bowling
