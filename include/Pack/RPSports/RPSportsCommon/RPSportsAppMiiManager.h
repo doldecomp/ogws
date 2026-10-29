@@ -22,6 +22,11 @@ public:
     RPSportsAppMiiManager(EGG::Heap* pHeap);
 
     /**
+     * @brief Destructor
+     */
+    virtual ~RPSportsAppMiiManager(); // at 0x8
+
+    /**
      * @brief Loads the Mii data resources
      */
     virtual void LoadResource(); // at 0xC
